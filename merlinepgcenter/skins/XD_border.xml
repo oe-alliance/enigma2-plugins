@@ -1,0 +1,56 @@
+<skin>
+	<screen name="MerlinEPGCenter" title="MerlinEPGCenter" position="0,0" size="1024,576" flags="wfNoBorder">
+		
+		<widget name="tabBackground" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_background.png" position="35,35" size="954,31" zPosition="0" alphatest="on" />
+
+		<widget name="tabbar" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_1.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_2.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_3.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_4.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_5.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_6.png" position="35,35" size="954,31" transparent="1" zPosition="1" alphatest="on" />
+		
+		<widget name="tab_text_0" position="65,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_1" position="225,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_2" position="385,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_3" position="545,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_4" position="705,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_5" position="865,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
+		
+		<widget name="timerlist" position="35,71" size="655,451" scrollbarMode="showNever" />
+		<widget name="list" position="35,71" size="655,431" scrollbarMode="showNever" />
+		<widget name="upcomingSeparator" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/separator_h.png" position="35,495" size="655,6" zPosition="1" alphatest="on" />
+		<widget name="upcoming" position="40,409" size="655,0" scrollbarMode="showNever" />
+		<widget name="history" position="40,71" size="650,451" scrollbarMode="showNever" />
+		<widget name="settings" position="40,71" size="650,451" scrollbarMode="showNever" />
+		<widget name="infoText" position="40,71" size="650,431" font="Regular;20" />
+		<widget name="searchLabel" position="40,71" size="150,25" zPosition="1" font="Regular;18" transparent="1" halign="left" />
+		<widget name="search" position="40,101" size="150,25" scrollbarMode="showNever" />
+		
+		<widget name="eventInfoSeparator" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/separator_v.png" position="695,66" size="6,444" zPosition="1" alphatest="on" />
+		<widget name="picon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/PiconMissing.png" position="705,80" size="100,60" zPosition="1" transparent="1" alphatest="on" />
+		<widget source="global.CurrentTime" render="Label" position="885,80" size="100,24" font="Regular;22" halign="right" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="785,105" size="200,26" font="Regular;22" halign="right" transparent="1">
+			<convert type="ClockToText">Format: %a %d. %b</convert>
+		</widget>
+		<widget name="serviceName" position="705,145" size="284,26" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="center" />
+		<widget name="eventTitle" position="705,168" size="284,48" zPosition="1" font="Regular;18" transparent="1" halign="left" valign="top" foregroundColor="#00ef7f1a"/>
+		<widget name="beginTime" position="705,220" size="60,20" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
+		<widget name="eventProgress" position="745,223" size="80,15" zPosition="1" borderWidth="1" />
+		<widget name="eventProgressImage" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_0.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_1.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_2.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_3.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_4.png" position="745,223" size="80,15" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="endTime" position="828,220" size="60,20" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
+		<widget name="duration" position="875,220" size="45,20" zPosition="1" font="Regular;16" transparent="1" halign="right" valign="center" />
+		<widget name="remaining" position="920,220" size="65,20" foregroundColors="#ef7f1a,#e31e24,#009846,#ffed00,#ffffff" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
+		<widget name="isRecording" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/recording.png" position="696,511" size="293,29" zPosition="2" transparent="1" alphatest="on" />
+		<widget name="description" position="705,245" size="280,260" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="top" />
+		<widget name="videoPicture" position="712,390" size="270,115" zPosition="1" backgroundColor="transparent" />
+		<widget name="bouquet" position="695,515" size="294,21" zPosition="1" font="Regular;16" transparent="1" halign="center" valign="center" />
+		
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/button_background.png" position="35,510" size="954,31" transparent="1" alphatest="on" />
+		<widget font="Regular;16" halign="left" valign="center" name="key_red" position="75,513" size="140,25" transparent="1" zPosition="2"/>
+		<widget font="Regular;16" halign="left" valign="center" name="key_green" position="225,513" size="140,25" transparent="1" zPosition="2"/>
+		<widget font="Regular;16" halign="left" valign="center" name="key_yellow" position="375,513" size="140,25" transparent="1" zPosition="2"/>
+		<widget font="Regular;16" halign="left" valign="center" name="key_blue" position="525,513" size="140,25" transparent="1" zPosition="2"/>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/red.png" position="40,513" size="25,25" transparent="1" alphatest="on" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/green.png" position="190,513" size="25,25" transparent="1" alphatest="on" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/yellow.png" position="340,513" size="25,25" transparent="1" alphatest="on" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/blue.png" position="490,513" size="25,25" transparent="1" alphatest="on" />
+	</screen>
+</skin>

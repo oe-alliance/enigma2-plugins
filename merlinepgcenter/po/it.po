@@ -1,0 +1,366 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - merlinepgcenter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-18 21:45+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .../enigma2-plugins/merlinepgcenter\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/merlinepgcenter\n"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:72
+msgid "single line style"
+msgstr "Stile linea singola"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:73
+msgid "with short description"
+msgstr "Con descrizione breve"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:82
+msgid "simple"
+msgstr "Semplice"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:83
+msgid "gradient"
+msgstr "Gradiente"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:84
+msgid "four parts"
+msgstr "Quattro parti"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:129
+msgid "Prime time:"
+msgstr "Primetime:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:130
+msgid "Remember last tab:"
+msgstr "Ricordare l'ultimo tab:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:131
+msgid "Select running service on start:"
+msgstr "Selezionare il canale attivo all'avvio:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:132
+msgid "Replace InfoBar single and multi EPG:"
+msgstr "Sostituire la InfoBar singola e MultiEPG:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:133
+msgid "Show text input help for epg search:"
+msgstr "Mostrare help input per la ricerca epg:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:134
+msgid "Use skin:"
+msgstr "Usare la skin:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:135
+msgid "Limit search results to bouquet services:"
+msgstr "Limitare i risultati ai canali nei bouquet:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:136
+msgid "Exit on TV <-> Radio switch:"
+msgstr "Uscire al passaggio TV <<>> Radio"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:137
+msgid "Show timer messages:"
+msgstr "Mostrare i messaggi timer:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:150
+msgid "Show list numbers:"
+msgstr "Mostrare numeri elenco:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:151
+msgid "Show picons:"
+msgstr "Mostrare picon"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:153
+msgid "Use picons (50x30) from:"
+msgstr "Usare picon (50x30) da:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:154
+msgid "Show service name:"
+msgstr "Mostrare nome canale:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:155
+msgid "Show duration:"
+msgstr "Mostrare la durata:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:156
+msgid "Show multi colored begin/remain times:"
+msgstr "Mostrare tempo trascorso/mancante a colori:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:157
+msgid "Increase list item height:"
+msgstr "Aumentare altezza voci elenco:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:158
+msgid "List style:"
+msgstr "Stile elenco:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:159
+msgid "Progress bar style:"
+msgstr "Stile barra avanzamento:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:160
+msgid "Number of upcoming events to show:"
+msgstr "Numero di eventi in arrivo da mostrare:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:184
+msgid "Show event information:"
+msgstr "Mostrare informazioni evento:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:186
+msgid "Show video picture:"
+msgstr "Mostrare immagine video:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:187
+msgid "Show blinking picon for running timers:"
+msgstr "Picon intermittente su timer attivi:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:188
+msgid "Show short description:"
+msgstr "Mostrare descrizione breve:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:891
+msgid "waiting"
+msgstr "In attesa"
+
+#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:894
+msgid "about to start"
+msgstr "Avvio in corso"
+
+#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:898
+msgid "zapped"
+msgstr "Zap eseguito"
+
+#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:900
+msgid "recording..."
+msgstr "Registrazione..."
+
+#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:903
+#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:909
+msgid "done!"
+msgstr "Fatto!"
+
+#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:906
+msgid "<unknown>"
+msgstr "<sconosciuto>"
+
+#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:913
+msgid "disabled"
+msgstr "Disabilitato"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:123
+msgid "Today"
+msgstr "Oggi"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:126
+msgid "Tomorrow"
+msgstr "Domani"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:129
+msgid "Monday"
+msgstr "Lunedì"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:129
+msgid "Tuesday"
+msgstr "Martedì"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:129
+msgid "Wednesday"
+msgstr "Mercoledì"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:129
+msgid "Thursday"
+msgstr "Giovedì"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:129
+msgid "Friday"
+msgstr "Venerdì"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:129
+msgid "Saturday"
+msgstr "Sabato"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:129
+msgid "Sunday"
+msgstr "Domenica"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:134
+msgid "Unknown date"
+msgstr "Data sconosciuta"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:262
+msgid ""
+"A timer failed to record!\n"
+"Disable TV and try again?\n"
+msgstr ""
+"Avvio registrazione programmata fallito!\n"
+"Disabilitare la TV e riprovare?\n"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:266
+msgid "In order to record a timer, the TV was switched to the recording service!\n"
+msgstr "In seguito a registr. programmata: la TV è stata sintonizzata sul canale da registrare!\n"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:313
+msgid ""
+"A finished record timer wants to set your\n"
+"Dreambox to standby. Do that now?"
+msgstr ""
+"Il termine di una registrazione programmata prevede\n"
+"di porre il DreamBox in standby. Farlo ora?"
+
+#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:319
+msgid ""
+"A finished record timer wants to shut down\n"
+"your Dreambox. Shutdown now?"
+msgstr ""
+"Il termine di una registrazione programmata prevede\n"
+"di spegnere il DreamBox. Farlo ora?"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:163
+msgid "Search for:"
+msgstr "Ricerca per:"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:174
+msgid "Now"
+msgstr "Ora"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:174
+msgid "Upcoming"
+msgstr "In arrivo"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:174
+msgid "Single"
+msgstr "Singolo"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:174
+msgid "Prime Time"
+msgstr "Primetime"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:174
+msgid "Timer"
+msgstr "Timer"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:174
+msgid "Search"
+msgstr "Ricercare"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:232
+msgid "General"
+msgstr "Generale"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:232
+msgid "Lists"
+msgstr "Elenchi"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:232
+msgid "Event Info"
+msgstr "Info evento"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:360
+msgid "Similar"
+msgstr "Simile"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:821
+msgid "Outdated on"
+msgstr "Terminati on"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:823
+msgid "Outdated off"
+msgstr "Terminati off"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:831
+msgid "Add"
+msgstr "Agg."
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:833
+msgid "Remove"
+msgstr "Rim."
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:834
+msgid "OK"
+msgstr "Ok"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:835
+msgid "New Search"
+msgstr "Nuova ricerca"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:845
+msgid "Remove timer"
+msgstr "Rim. timer"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:848
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:856
+msgid "Add timer"
+msgstr "Agg. timer"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1040
+msgid "Edit Off"
+msgstr "Edit Off"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1044
+msgid "Edit On"
+msgstr "Edit On"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1062
+msgid "return"
+msgstr "Uscire"
+
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1278
+msgid "Set search term"
+msgstr "Termini di ricerca"
+
+#: .../enigma2-plugins/merlinepgcenter/src/plugin.py:93
+msgid "More than just an EPG..."
+msgstr "Più di un semplice EPG..."
+
+#~ msgid "Start allways on channel 1:"
+#~ msgstr "Avviarsi sempre sul canale 1:"
+
+#~ msgid "Primetime from (m):"
+#~ msgstr "Primetime da (m):"
+
+#~ msgid "Primetime to (m):"
+#~ msgstr "Primetime a (m):"
+
+#~ msgid "Auto-Primetime:"
+#~ msgstr "Primetime automatico:"
+
+#~ msgid "Zap with OK button (false=EventInfo):"
+#~ msgstr "Zap con tasto Ok (falso = Info evento)"
+
+#~ msgid "Page-up/down with bouquet+/- :"
+#~ msgstr "Pag. sù/giù con tasti bouquet +/-"
+
+#~ msgid "Select Info type..."
+#~ msgstr "Selezionare sorgente informazioni"
+
+#~ msgid "Standard EPG info"
+#~ msgstr "EPG standard"
+
+#~ msgid "IMDb info"
+#~ msgstr "Info IMDb"
+
+#~ msgid "Select timer type..."
+#~ msgstr "Selezionare il tipo di timer"
+
+#~ msgid "View AutoTimers"
+#~ msgstr "Mostrare timer automatici"
+
+#~ msgid "Do you really want to delete %s?"
+#~ msgstr "Rimuovere %s?"
+
+#~ msgid "EPGsearch is not installed!"
+#~ msgstr "EPGsearch non è installato!"
+
+#~ msgid "Channel"
+#~ msgstr "Canale"
