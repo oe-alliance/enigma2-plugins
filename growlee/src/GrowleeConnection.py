@@ -71,6 +71,9 @@ class GrowleeConnection:
 			elif proto == "growl":
 				from GrowlTalk import GrowlTalkAbstraction
 				connection = GrowlTalkAbstraction(host)
+			elif proto == "gntp":
+				from GNTP import GNTPAbstraction
+				connection = GNTPAbstraction(host)
 			elif proto == "snarl":
 				from SNP import SnarlNetworkProtocolAbstraction
 				connection = SnarlNetworkProtocolAbstraction(host)
