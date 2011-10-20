@@ -58,7 +58,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
 from Tools.LoadPixmap import LoadPixmap
 
 # OWN IMPORTS
-from ConfigTabs import KEEP_OUTDATED_TIME, ConfigBaseTab, ConfigGeneral, ConfigListSettings, ConfigEventInfo, SKINDIR, SKINLIST, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP
+from ConfigTabs import KEEP_OUTDATED_TIME, ConfigBaseTab, ConfigGeneral, ConfigListSettings, ConfigEventInfo, SKINDIR, SKINLIST, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP, STYLE_PERCENT_TEXT
 from EpgActions import MerlinEPGActions
 from EpgCenterList import EpgCenterList, EpgCenterTimerlist, MODE_HD, MODE_XD, MODE_SD, MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_PRIMETIME, TIMERLIST, EPGSEARCH_HISTORY, EPGSEARCH_RESULT, EPGSEARCH_MANUAL, UPCOMING
 from EpgTabs import EpgBaseTab, EpgNowTab, EpgNextTab, EpgSingleTab, EpgPrimeTimeTab, EpgTimerListTab, EpgSearchHistoryTab, EpgSearchManualTab, EpgSearchResultTab
@@ -149,6 +149,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self["eventProgress"] = ProgressBar()
 		self.progressPixmap = None
 		self["eventProgressImage"] = MultiPixmap()
+		self["eventProgressText"] = Label("")
 		self["endTime"] = Label("")
 		self["duration"] = Label("")
 		self["remaining"] = MultiColorLabel()
@@ -321,9 +322,11 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_SIMPLE_BAR:
 			self["eventProgressImage"].hide()
 			self["eventProgress"].instance.setPixmap(None)
+			self["eventProgressText"].hide()
 			self["eventProgress"].show()
 		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PIXMAP_BAR:
 			self["eventProgressImage"].hide()
+			self["eventProgressText"].hide()
 			if self.progressPixmap == None:
 				pixmapPath = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/EventProgress.png")
 				self.progressPixmap = LoadPixmap(cached = False, path = pixmapPath)
@@ -331,7 +334,13 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self["eventProgress"].show()
 		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP:
 			self["eventProgress"].hide()
+			self["eventProgressText"].hide()
 			self["eventProgressImage"].show()
+		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT:
+			self["eventProgressImage"].hide()
+			self["eventProgress"].instance.setPixmap(None)
+			self["eventProgress"].hide()
+			self["eventProgressText"].show()
 			
 		# we need to reset the bar to draw correctly
 		value = self["eventProgress"].getValue()
@@ -417,6 +426,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self["eventInfoSeparator"].hide()
 		self["eventProgress"].hide()
 		self["eventProgressImage"].hide()
+		self["eventProgressText"].hide()
 		self["isRecording"].hide()
 		
 	# get some widget sizes
@@ -706,6 +716,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 					
 				if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP:
 					self["eventProgressImage"].setPixmapNum(4)
+				elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT:
+					self["eventProgressText"].setText("100%")
 				else:
 					self["eventProgress"].setValue(100)
 			else:
@@ -724,6 +736,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 					else:
 						part = 0
 					self["eventProgressImage"].setPixmapNum(part)
+				elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT:
+					self["eventProgressText"].setText(str(percent) + "%")
 				else:
 					self["eventProgress"].setValue(percent)
 					

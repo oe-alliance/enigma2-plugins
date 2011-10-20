@@ -38,7 +38,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
 from Tools.LoadPixmap import LoadPixmap
 
 # OWN IMPORTS
-from ConfigTabs import KEEP_OUTDATED_TIME, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP
+from ConfigTabs import KEEP_OUTDATED_TIME, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP, STYLE_PERCENT_TEXT
 from HelperFunctions import getFuzzyDay, LIST_TYPE_EPG, LIST_TYPE_UPCOMING
 from MerlinEPGCenter import STYLE_SINGLE_LINE, STYLE_SHORT_DESCRIPTION
 
@@ -186,6 +186,8 @@ class EpgCenterList(GUIComponent):
 				self.itemHeight = self.overallFontHeight + int(config.plugins.merlinEpgCenter.listItemHeight.value)
 			else:
 				self.itemHeight = self.baseHeight + int(config.plugins.merlinEpgCenter.listItemHeight.value)
+		elif self.videoMode == MODE_HD and config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT: # HD skin adjustment for text size
+			self.itemHeight = self.baseHeight + int(config.plugins.merlinEpgCenter.listItemHeight.value) + 4
 		else:
 			self.itemHeight = self.baseHeight + int(config.plugins.merlinEpgCenter.listItemHeight.value)
 		self.halfItemHeight = self.itemHeight / 2
@@ -355,11 +357,17 @@ class EpgCenterList(GUIComponent):
 			
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, width, self.halfItemHeight - border + (self.singleLineBorder * 2), 1, RT_HALIGN_CENTER|RT_VALIGN_TOP, timeString))
 			if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP and progressPixmap is not None:
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetLeft, self.halfItemHeight + (self.halfItemHeight- progressHeight) / 2 + self.singleLineBorder, width, progressHeight, progressPixmap))
+				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetLeft, self.halfItemHeight + (self.halfItemHeight - progressHeight) / 2 + self.singleLineBorder, width, progressHeight, progressPixmap))
 			elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_SIMPLE_BAR:
-				res.append((eListboxPythonMultiContent.TYPE_PROGRESS, offsetLeft, self.halfItemHeight + (self.halfItemHeight- progressHeight) / 2 + self.singleLineBorder, width, progressHeight, percent, 1, secondLineColor))
+				res.append((eListboxPythonMultiContent.TYPE_PROGRESS, offsetLeft, self.halfItemHeight + (self.halfItemHeight - progressHeight) / 2 + self.singleLineBorder, width, progressHeight, percent, 1, secondLineColor))
 			elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PIXMAP_BAR and progressPixmap is not None:
-				res.append((eListboxPythonMultiContent.TYPE_PROGRESS_PIXMAP, offsetLeft, self.halfItemHeight + (self.halfItemHeight- progressHeight) / 2 + self.singleLineBorder, width, progressHeight, percent, progressPixmap, 0))
+				res.append((eListboxPythonMultiContent.TYPE_PROGRESS_PIXMAP, offsetLeft, self.halfItemHeight + (self.halfItemHeight - progressHeight) / 2 + self.singleLineBorder, width, progressHeight, percent, progressPixmap, 0))
+			elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT:
+				if self.videoMode == MODE_SD: # we need a bigger font for SD skins
+					font = 2
+				else:
+					font = 3
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, width, self.halfItemHeight - border, font, RT_HALIGN_CENTER|RT_VALIGN_TOP, str(percent) + "%", secondLineColor))
 			offsetLeft = offsetLeft + width + 5 # abstand
 		else:
 			if self.videoMode == MODE_SD:

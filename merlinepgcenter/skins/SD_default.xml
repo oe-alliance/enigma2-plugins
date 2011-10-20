@@ -35,9 +35,10 @@
 		<widget name="beginTime" position="495,175" size="60,20" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
 		<widget name="eventProgress" position="540,180" size="40,11" zPosition="1" borderWidth="1" />
 		<widget name="eventProgressImage" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_0.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_1.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_2.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_3.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_4.png" position="540,180" size="40,11" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="eventProgressText" position="540,175" size="45,20" zPosition="1" font="Regular;16" transparent="1" halign="center" valign="center" />
 		<widget name="endTime" position="585,175" size="60,20" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
-		<widget name="duration" position="605,175" size="45,17" zPosition="1" font="Regular;16" transparent="1" halign="right" valign="center" />
-		<widget name="remaining" position="655,175" size="65,17" foregroundColors="#ef7f1a,#e31e24,#009846,#ffed00,#ffffff" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
+		<widget name="duration" position="615,175" size="45,17" zPosition="1" font="Regular;16" transparent="1" halign="right" valign="center" />
+		<widget name="remaining" position="665,175" size="55,17" foregroundColors="#ef7f1a,#e31e24,#009846,#ffed00,#ffffff" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
 		<widget name="isRecording" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/SD/recording.png" position="488,555" size="232,20" zPosition="2" transparent="1" alphatest="on" />
 		<widget name="description" position="495,200" size="220,350" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="top" />
 		<widget name="videoPicture" position="500,430" size="215,120" zPosition="1" backgroundColor="transparent" />

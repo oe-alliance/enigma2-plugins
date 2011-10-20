@@ -35,6 +35,7 @@
 		<widget name="beginTime" position="705,185" size="60,20" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
 		<widget name="eventProgress" position="770,188" size="80,13" zPosition="1" borderWidth="1" />
 		<widget name="eventProgressImage" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_0.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_1.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_2.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_3.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_4.png" position="770,188" size="80,13" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="eventProgressText" position="770,188" size="90,13" zPosition="1" font="Regular;16" transparent="1" halign="center" valign="center" />
 		<widget name="endTime" position="870,185" size="60,20" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
 		<widget name="duration" position="905,186" size="45,17" zPosition="1" font="Regular;16" transparent="1" halign="right" valign="center" />
 		<widget name="remaining" position="955,186" size="65,17" foregroundColors="#ef7f1a,#e31e24,#009846,#ffed00,#ffffff" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />

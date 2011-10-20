@@ -36,6 +36,7 @@ from . import _
 STYLE_SIMPLE_BAR = "0"
 STYLE_PIXMAP_BAR = "1"
 STYLE_MULTI_PIXMAP = "2"
+STYLE_PERCENT_TEXT = "3"
 
 SKINDIR = "Extensions/MerlinEPGCenter/skins/"
 
@@ -82,6 +83,7 @@ config.plugins.merlinEpgCenter.listProgressStyle = ConfigSelection(default = STY
 				(STYLE_SIMPLE_BAR, _("simple")),
 				(STYLE_PIXMAP_BAR, _("gradient")),
 				(STYLE_MULTI_PIXMAP, _("four parts")),
+				(STYLE_PERCENT_TEXT, _("percent (text)")),
 				])
 config.plugins.merlinEpgCenter.showTimerMessages = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.blinkingPicon = ConfigYesNo(False)
