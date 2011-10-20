@@ -4,10 +4,13 @@ from __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Components.config import ConfigSubsection, configfile, config, getConfigListEntry, ConfigYesNo, ConfigSelection
+from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap
 from Components.Network import iNetwork
+from Components.Sources.Boolean import Boolean
 from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
@@ -74,6 +77,7 @@ class AutoMountManager(Screen):
 		self.list.append((_("Mountpoints management"),"view", _("View, edit or delete mountpoints on your Dreambox."), okpng ))
 		self.list.append((_("User management"),"user", _("View, edit or delete usernames and passwords for your network."), okpng))
 		self.list.append((_("Change hostname"),"hostname", _("Change the hostname of your Dreambox."), okpng))
+		self.list.append((_("Setup Mount Again"),"mountagain", _("Schedule a auto remount of your network shares."), okpng))
 		self["config"].setList(self.list)
 
 	def exit(self):
@@ -90,6 +94,8 @@ class AutoMountManager(Screen):
 				self.userEdit()
 			elif returnValue is "hostname":
 				self.hostEdit()
+			elif returnValue is "mountagain":
+				self.createSetup()
 
 	def addMount(self):
 		self.session.open(AutoMountEdit, self.skin_path)
@@ -131,3 +137,87 @@ class AutoMountManager(Screen):
 		if data is True:
 			self.session.open(MessageBox, _("Finished restarting your network"), type = MessageBox.TYPE_INFO, timeout = 10, default = False)
 
+	def createSetup(self):
+		self.session.open(MountManagerMenu)
+
+config.networkbrowser = ConfigSubsection()
+config.networkbrowser.automountpoll = ConfigYesNo(default = False)
+config.networkbrowser.automountpolltimer = ConfigSelection(default = 1, choices = [
+	("1", "1"),("2", "2"),("3", "3"),("4", "4"),("5", "5"),("6", "6"),("7", "7"),("8", "8"),("9", "9"),("10", "10"),
+	("11", "11"),("12", "12"),("13", "13"),("14", "14"),("15", "15"),("16", "16"),("17", "17"),("18", "18"),("19", "19"),("20", "20"),
+	("21", "21"),("22", "22"),("23", "23"),("24", "24")])
+
+class MountManagerMenu(Screen,ConfigListScreen):
+	def __init__(self, session):
+		from Components.Sources.StaticText import StaticText
+		Screen.__init__(self, session)
+		self.skinName = "Setup"
+		self.setup_title = _("Setup Mount Again")
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
+		self["VKeyIcon"] = Boolean(False)
+
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Save"))
+
+		self.onChangedEntry = [ ]
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		self.createSetup()
+
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+		{
+		    "green": self.keySave,
+		    "red": self.keyCancel,
+		    "cancel": self.keyCancel,
+		    "ok": self.keySave,
+		}, -2)
+
+	def createSetup(self):
+		self.list = []
+		self.list.append(getConfigListEntry(_("Schedule MountAgain"), config.networkbrowser.automountpoll))
+		if config.networkbrowser.automountpoll.value:
+			self.list.append(getConfigListEntry(_("Re-mount network shares every (in hours)"), config.networkbrowser.automountpolltimer))
+		self["config"].list = self.list
+		self["config"].setList(self.list)
+
+	# for summary:
+	def changedEntry(self):
+		if self["config"].getCurrent()[0] == _("Schedule MountAgain"):
+			self.createSetup()
+		for x in self.onChangedEntry:
+			x()
+
+	def getCurrentEntry(self):
+		return self["config"].getCurrent()[0]
+
+	def getCurrentValue(self):
+		return self["config"].getCurrent()[0]
+
+	def saveAll(self):
+		for x in self["config"].list:
+			x[1].save()
+		configfile.save()
+
+	# keySave and keyCancel are just provided in case you need them.
+	# you have to call them by yourself.
+	def keySave(self):
+		self.saveAll()
+		self.close()
+	
+	def cancelConfirm(self, result):
+		if not result:
+			return
+		for x in self["config"].list:
+			x[1].cancel()
+		self.close()
+
+	def keyCancel(self):
+		if self["config"].isChanged():
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
+		else:
+			self.close()
+
+	def createSummary(self):
+		from Screens.Setup import SetupSummary
+		return SetupSummary
