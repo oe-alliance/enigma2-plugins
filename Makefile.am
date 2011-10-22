@@ -9,7 +9,6 @@ SUBDIRS = \
 	autoresolution \
 	autotimer \
 	babelzapper \
-	bitrateviewer \
 	bonjour \
 	cdinfo \
 	dreamirc \
@@ -41,7 +40,6 @@ SUBDIRS = \
 	mosaic \
 	moviecut \
 	movieepg \
-	movielistpreview \
 	movieretitle \
 	moviesearch \
 	movietagger \
@@ -71,7 +69,6 @@ SUBDIRS = \
 	shoutcast \
 	showclock \
 	simplerss \
-	startupservice \
 	svdrp \
 	tageditor \
 	trafficinfo \
