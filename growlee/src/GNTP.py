@@ -6,6 +6,8 @@ from twisted.internet import reactor
 import hashlib
 import uuid
 import re
+import threading
+import collections
 
 our_print = lambda *args, **kwargs: print("[growlee.GNTP]", *args, **kwargs)
 
@@ -141,9 +143,13 @@ class GNTP(Protocol):
 		self.registered = registered
 		self.__buffer = ''
 		self.defer = None
+		self.messageLock = threading.Lock()
+		self.messageQueue = collections.deque()
 
 	def connectionMade(self):
 		if self.client and not self.registered:
+			self.messageLock.acquire()
+
 			register = GNTPRegister('growlee')
 			register.set_password(self.host.password.value, 'MD5', None)
 			register.add_notification("Notifications from your Dreambox", enabled=True)
@@ -154,19 +160,36 @@ class GNTP(Protocol):
 	def sendNotification(self, title='No title.', description='No description.', sticky=False, priority=0):
 		if not self.client or not self.transport:
 			return
-		if not self.registered:
-			our_print("tried to send notification without having registered first... race condition?")
-			self.connectionMade()
 
 		note = GNTPNotice('growlee', "Notifications from your Dreambox", title, text=description, sticky=sticky, priority=priority)
 		note.set_password(self.host.password.value, 'MD5', None)
-		msg = note.encode()
-		our_print("about to send packet:", msg.replace('\r\n', '<CRLF>\n'))
-		self.transport.write(msg)
-		def writeAgain():
-			our_print("resending packet:", msg.replace('\r\n', '<CRLF>\n'))
+		self.messageQueue.append(note)
+		self.sendQueuedMessage()
+
+	def sendQueuedMessage(self):
+		if not self.registered:
+			our_print("not registered though there are queued messages... something is weird!")
+			return
+		if not self.messageLock.acquire(False):
+			return
+		try:
+			note = self.messageQueue.popleft()
+		except IndexError:
+			self.messageLock.release()
+		else:
+			msg = note.encode()
+			our_print("about to send packet:", msg.replace('\r\n', '<CRLF>\n'))
 			self.transport.write(msg)
-		self.pendingVerification = reactor.callLater(30, writeAgain)
+			def writeAgain():
+				note.set_password(self.host.password.value, 'MD5', None)
+				msg = note.encode()
+				our_print("about to re-send packet:", msg.replace('\r\n', '<CRLF>\n'))
+				self.transport.write(msg)
+				# return to "normal" operation in 5 seconds regardless of state
+				self.pendingVerification = None
+				self.messageLock.release()
+				reactor.callLater(5, self.sendQueuedMessage)
+			self.pendingVerification = reactor.callLater(30, writeAgain)
 
 	def dataReceived(self, data):
 		# only parse complete packages
@@ -180,9 +203,17 @@ class GNTP(Protocol):
 		match = re.match('GNTP/(?P<version>\d+\.\d+) (?P<messagetype>REGISTER|NOTIFY|SUBSCRIBE|\-OK|\-ERROR)', data, re.IGNORECASE)
 		if not match:
 			our_print('invalid/partial return')
+			try:
+				self.messageLock.release()
+			except Exception as e:
+				our_print("error releasing lock, something is wierd!", e)
 			return
 		type = match.group('messagetype')
 		if type == '-OK' or type == '-ERROR':
+			try:
+				self.messageLock.release()
+			except Exception as e:
+				our_print("error releasing lock, something is wierd!", e)
 			match = re.search('Response-Action: (?P<messagetype>.*?)\r', data, re.IGNORECASE)
 			if not match:
 				our_print('no action found in data')
@@ -191,9 +222,10 @@ class GNTP(Protocol):
 			if rtype == 'REGISTER':
 				self.registered = type == '-OK'
 			elif rtype == 'NOTIFY':
-				if self.pendingVerification:
+				if self.pendingVerification and type == '-OK':
 					self.pendingVerification.cancel()
 					self.pendingVerification = None
+			reactor.callLater(10, self.sendQueuedMessage)
 
 
 class GNTPClientFactory(ReconnectingClientFactory):
