@@ -82,8 +82,8 @@ class EpgCenterList(GUIComponent):
 	currentBouquetIndex = 0
 	bouquetIndexRanges = []
 	allServicesNameDict = {}
-	initialised = False
 	recordTimer = None
+	lenChannelDigits = 0
 	
 	def __init__(self, blinkTimer, listType, videoMode, piconLoader, bouquetList, currentIndex, piconSize, listStyle, epgList):
 		self.blinkTimer = blinkTimer
@@ -117,12 +117,11 @@ class EpgCenterList(GUIComponent):
 		
 		config.plugins.merlinEpgCenter.listItemHeight.addNotifier(self.changeHeight, initial_call = True)
 		
-		if not EpgCenterList.initialised:
+		if listType == LIST_TYPE_EPG:
 			EpgCenterList.bouquetList = bouquetList
 			EpgCenterList.currentBouquetIndex = currentIndex
 			EpgCenterList.updateBouquetServices()
 			EpgCenterList.recordTimer = NavigationInstance.instance.RecordTimer
-			EpgCenterList.initialised = True
 			
 		# zap timer pixmaps
 		self.zap_pixmap = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/zap.png"))
@@ -315,8 +314,10 @@ class EpgCenterList(GUIComponent):
 					else:
 						chNumber = ""
 						
-			width = self.maxWidth * 3 / 100
-			# 30 breite
+			if EpgCenterList.lenChannelDigits < 3:
+				width = self.maxWidth * 3 / 100
+			else:
+				width = self.maxWidth * 4 / 100
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, chNumber))
 			offsetLeft = offsetLeft + width + 5 # abstand
 			
@@ -699,6 +700,8 @@ class EpgCenterList(GUIComponent):
 	def getAllServices():
 		allServices = {}
 		index = 1
+		EpgCenterList.lenChannelDigits = 0
+		totalServices = 0 # the number of services in all bouquets
 		for bouquetEntry in EpgCenterList.bouquetList:
 			servicelist = eServiceCenter.getInstance().list(bouquetEntry[1])
 			if not servicelist is None:
@@ -715,7 +718,9 @@ class EpgCenterList(GUIComponent):
 					numServices += 1
 				indexEntry = index
 				index += numServices
+				totalServices += numServices
 				EpgCenterList.bouquetIndexRanges.append(indexEntry)
+		EpgCenterList.lenChannelDigits = len(str(totalServices))
 		return allServices
 				
 	@staticmethod

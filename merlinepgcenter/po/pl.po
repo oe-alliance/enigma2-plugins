@@ -43,7 +43,7 @@ msgid "Add timer"
 msgstr "Dodaj Timer"
 
 msgid "More than just an EPG..."
-msgstr "Więcej niż zwykłe EPG..."
+msgstr "Więcej niż tylko EPG..."
 
 msgid "Edit Off"
 msgstr "Edycja Wył."
@@ -98,6 +98,9 @@ msgstr "Stare Wył."
 
 msgid "Outdated on"
 msgstr "Stare Wł."
+
+msgid "percent (text)"
+msgstr "procenty (tekst)"
 
 msgid "Prime Time"
 msgstr "Prime Time"
@@ -199,7 +202,7 @@ msgid "Upcoming"
 msgstr "Nadchodzące"
 
 msgid "Use picons (50x30) from:"
-msgstr "Użyj Pikon (50x30) z:"
+msgstr "Użyj Pikon (50x30) ze ścieżki:"
 
 msgid "Use skin:"
 msgstr "Użyj skórki:"

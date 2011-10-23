@@ -21,7 +21,6 @@
 #
 
 # ENIGMA IMPORTS
-#from Components.config import config
 from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import InfoBar
 
@@ -89,8 +88,10 @@ def openMerlinEPGCenterTab(session, startWithTab, **kwargs):
 	session.open(MerlinEPGCenter, servicelist, currentBouquet, bouquetList, currentIndex, startWithTab)
 	
 def Plugins(**kwargs):
-	p = PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart)
-	list = [PluginDescriptor(name = "Merlin EPG Center", description = _("More than just an EPG..."), where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EVENTINFO], fnc = openMerlinEPGCenter)]
-	list.append(p)
+	list = [
+		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart, weight=100),
+		PluginDescriptor(name = "Merlin EPG Center", description = _("More than just an EPG..."), where = [PluginDescriptor.WHERE_EXTENSIONSMENU,
+		PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EVENTINFO], fnc = openMerlinEPGCenter)
+		]
 	return list
 	

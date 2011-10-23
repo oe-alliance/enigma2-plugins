@@ -897,7 +897,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self["picon"].instance.setPixmap(None)
 		elif cur is not None:
 			sRef = cur[2]
-			picon = self.piconLoader.getPicon(sRef)
+#			picon = self.piconLoader.getPicon(sRef)
 			if self["picon"].instance is not None:
 				fileName = findDefaultPicon(sRef)
 				if fileName is not "":
