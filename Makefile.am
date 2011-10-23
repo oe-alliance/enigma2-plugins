@@ -39,10 +39,8 @@ SUBDIRS = \
 	meteoitalia \
 	mosaic \
 	moviecut \
-	movieepg \
 	movieretitle \
 	moviesearch \
-	movietagger \
 	mphelp \
 	multirc \
 	mytube \
@@ -56,7 +54,6 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
-	pipzap \
 	pluginhider \
 	pluginsort \
 	podcast \
