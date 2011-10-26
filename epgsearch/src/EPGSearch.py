@@ -5,6 +5,7 @@ from enigma import eEPGCache, eServiceReference, RT_HALIGN_LEFT, \
 		RT_HALIGN_RIGHT, eListboxPythonMultiContent
 
 from Tools.LoadPixmap import LoadPixmap
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from ServiceReference import ServiceReference
 
 from EPGSearchSetup import EPGSearchSetup
@@ -231,6 +232,8 @@ class EPGSearch(EPGSelection):
 				(_("Save search as AutoTimer"), self.addAutoTimer),
 				(_("Export selected as AutoTimer"), self.exportAutoTimer),
 			))
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/IMDb/plugin.py")):
+			options.append((_("Open selected in IMDb"), self.openImdb))
 		options.append(
 				(_("Setup"), self.setup)
 		)
@@ -300,6 +303,16 @@ class EPGSearch(EPGSelection):
 		if cur is None:
 			return
 		addAutotimerFromEvent(self.session, cur[0], cur[1])
+
+	def openImdb(self):
+		cur = self['list'].getCurrent()
+		if cur is None:
+			return
+		try:
+			from Plugins.Extensions.IMDb.plugin import IMDB
+			self.session.open(IMDB, cur[0].getEventName())
+		except ImportError as ie:
+			pass
 
 	def setup(self):
 		self.session.open(EPGSearchSetup)
