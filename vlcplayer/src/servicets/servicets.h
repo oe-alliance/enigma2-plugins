@@ -117,6 +117,7 @@ private:
 	ePtr<iTSMPEGDecoder> m_decoder;
 	ePtr<eStreamThread> m_streamthread;
 	ePtr<TSAudioInfo> m_audioInfo;
+	eUsePtr<iDVBPVRChannel> m_channel;
 
 	eServiceTS(const eServiceReference &url);
 	int openHttpConnection(std::string url);
