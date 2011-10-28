@@ -21,6 +21,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
+from Screens.InputBox import PinInput
 from Components.config import config
 from Components.ScrollLabel import ScrollLabel
 from Components.ActionMap import ActionMap, NumberActionMap
@@ -1670,6 +1671,8 @@ def partnerboxChannelContextMenuInit():
 	ChannelContextMenu.callbackPartnerboxServiceList = callbackPartnerboxServiceList
 	ChannelContextMenu.startAddParnerboxService = startAddParnerboxService
 	ChannelContextMenu.setPartnerboxService = setPartnerboxService
+	ChannelContextMenu.setParentalControlPin = setParentalControlPin
+	ChannelContextMenu.parentalControlPinEntered = parentalControlPinEntered
 
 def partnerboxChannelContextMenu__init__(self, session, csel):
 	baseChannelContextMenu__init__(self, session, csel)
@@ -1680,10 +1683,18 @@ def partnerboxChannelContextMenu__init__(self, session, csel):
 		if csel.bouquet_mark_edit == OFF and not csel.movemode:
 			if not inBouquetRootList:
 				if inBouquet:
-					self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("add Partnerbox service"), boundFunction(self.addPartnerboxService,0))))
+					if config.ParentalControl.configured.value:
+						callFunction = self.setParentalControlPin
+					else:
+						callFunction = self.addPartnerboxService
+					self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("add Partnerbox service"), boundFunction(callFunction,0))))
 			if (not inBouquetRootList and not inBouquet) or (inBouquetRootList):
 				if config.usage.multibouquet.value:
-					self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("add Partnerbox bouquet"), boundFunction(self.addPartnerboxService,1))))
+					if config.ParentalControl.configured.value:
+						callFunction = self.setParentalControlPin
+					else:
+						callFunction = self.addPartnerboxService
+					self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("add Partnerbox bouquet"), boundFunction(callFunction,1))))
 
 def addPartnerboxService(self, insertType):
 	count = config.plugins.Partnerbox.entriescount.value
@@ -1700,7 +1711,15 @@ def startAddParnerboxService(self, insertType, session, what, partnerboxentry = 
 			self.session.openWithCallback(self.callbackPartnerboxServiceList, PartnerBouquetList, [], partnerboxentry, 1, insertType)
 		else:
 			self.session.open(MessageBox,_("You can not add services or bouquets from Enigma1-receivers into the channellist..."), MessageBox.TYPE_INFO)
-			
+
+def setParentalControlPin(self, insertType):
+		self.session.openWithCallback(boundFunction(self.parentalControlPinEntered, insertType), PinInput, pinList = [config.ParentalControl.servicepin[0].value], triesEntry = config.ParentalControl.retries.servicepin, title = _("Enter the service pin"), windowTitle = _("Change pin code"))
+
+def parentalControlPinEntered(self, insertType, result):
+		if result:
+			self.addPartnerboxService(insertType)
+		else:
+			self.session.openWithCallback(self.close, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR)
 
 def callbackPartnerboxServiceList(self, result): 
 	if result and result[1]:
