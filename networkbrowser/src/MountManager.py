@@ -192,7 +192,7 @@ class MountManagerMenu(Screen,ConfigListScreen):
 		return self["config"].getCurrent()[0]
 
 	def getCurrentValue(self):
-		return self["config"].getCurrent()[0]
+		return str(self["config"].getCurrent()[1].getText())
 
 	def saveAll(self):
 		for x in self["config"].list:
