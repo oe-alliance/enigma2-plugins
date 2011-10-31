@@ -319,3 +319,29 @@ class RecTimerEntry(RecordTimerEntry):
 						self.session.openWithCallback(self.sendTryQuitMainloopNotification, MessageBox, _("A finished record timer wants to shut down\nyour Dreambox. Shutdown now?"), timeout = 20)
 			return True
 			
+# interface between AutoTimer and our timer list
+class TimerListObject(object):
+	def __init__(self, begin, end, service_ref, name, justplay, disabled, autoTimerId, match, searchType, counter, counterLeft, destination, services, bouquets, includedDays, excludedDays):
+		self.begin		= begin
+		self.end		= end
+		self.service_ref 	= service_ref
+		self.name		= name
+		self.justplay		= justplay
+		self.disabled		= disabled
+		self.autoTimerId	= autoTimerId
+		self.state		= 0 # TimerEntry.StateWaiting
+		
+		# additional information
+		self.match		= match
+		self.searchType		= searchType
+		self.counter		= counter
+		self.counterLeft	= counterLeft
+		self.destination	= destination
+		self.services		= services
+		self.bouquets		= bouquets
+		self.includedDays	= includedDays
+		self.excludedDays	= excludedDays
+		
+	def isRunning(self):
+		return False
+		

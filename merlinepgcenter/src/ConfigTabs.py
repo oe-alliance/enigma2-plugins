@@ -89,6 +89,10 @@ config.plugins.merlinEpgCenter.showTimerMessages = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.blinkingPicon = ConfigYesNo(False)
 config.plugins.merlinEpgCenter.showShortDescInEventInfo = ConfigYesNo(True)
 
+# INVISIBLE OPTION
+config.plugins.merlinEpgCenter.setDescriptionSize = ConfigYesNo(True)
+
+
 # check Merlin2 feature "keep outdated events in epgcache"
 try:
 	KEEP_OUTDATED_TIME = config.merlin2.keep_outdated_epg.value * 60

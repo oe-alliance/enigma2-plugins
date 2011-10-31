@@ -29,6 +29,12 @@ STYLE_SHORT_DESCRIPTION = "1"
 MODE_TV = 0
 MODE_RADIO = 1
 
+TIMER_TYPE_RECORD = 0
+TIMER_TYPE_AUTOTIMER = 1
+
+LIST_MODE_TIMER = 0
+LIST_MODE_AUTOTIMER = 1
+	
 # PYTHON IMPORTS
 from time import localtime, strftime, mktime, time
 from datetime import datetime
@@ -42,19 +48,21 @@ from Components.Label import Label, MultiColorLabel
 from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap, MultiPixmap
 from Components.ProgressBar import ProgressBar
+from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath
 from Components.VideoWindow import VideoWindow
 from enigma import eServiceReference, eServiceCenter, eEPGCache, getDesktop, eSize, eTimer, fontRenderClass, ePoint
 from math import fabs
 import NavigationInstance
-from RecordTimer import AFTEREVENT
+from RecordTimer import AFTEREVENT, RecordTimerEntry
 from Screens.EpgSelection import EPGSelection
 from Screens.Screen import Screen
 from Screens.TimerEdit import TimerEditList, TimerSanityConflict
-from Screens.TimerEntry import TimerEntry
+from Screens.TimerEntry import TimerEntry, TimerLog
 from ServiceReference import ServiceReference
 from skin import parseColor, loadSkin
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
+from Tools.BoundFunction import boundFunction
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_HDD
 from Tools.LoadPixmap import LoadPixmap
 
 # OWN IMPORTS
@@ -62,8 +70,24 @@ from ConfigTabs import KEEP_OUTDATED_TIME, ConfigBaseTab, ConfigGeneral, ConfigL
 from EpgActions import MerlinEPGActions
 from EpgCenterList import EpgCenterList, EpgCenterTimerlist, MODE_HD, MODE_XD, MODE_SD, MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_PRIMETIME, TIMERLIST, EPGSEARCH_HISTORY, EPGSEARCH_RESULT, EPGSEARCH_MANUAL, UPCOMING
 from EpgTabs import EpgBaseTab, EpgNowTab, EpgNextTab, EpgSingleTab, EpgPrimeTimeTab, EpgTimerListTab, EpgSearchHistoryTab, EpgSearchManualTab, EpgSearchResultTab
-from HelperFunctions import PiconLoader, findDefaultPicon, ResizeScrollLabel, BlinkTimer, LIST_TYPE_EPG, LIST_TYPE_UPCOMING, RecTimerEntry
+from HelperFunctions import PiconLoader, findDefaultPicon, ResizeScrollLabel, BlinkTimer, LIST_TYPE_EPG, LIST_TYPE_UPCOMING, RecTimerEntry, TimerListObject
 from SkinFinder import SkinFinder
+
+# check for Autotimer support
+try:
+	from Plugins.Extensions.AutoTimer.plugin import autotimer
+	from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer, XML_CONFIG
+	from Plugins.Extensions.AutoTimer.AutoTimerConfiguration import buildConfig
+	from Plugins.Extensions.AutoTimer.AutoTimerComponent import preferredAutoTimerComponent
+	from Plugins.Extensions.AutoTimer.AutoTimerEditor import AutoTimerEditor, weekdays
+	from Plugins.Extensions.AutoTimer.AutoTimerSettings import AutoTimerSettings
+	from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
+	AUTOTIMER = True
+	# now we need a ChoiceBox to select between timer and autotimer on green button
+	from Screens.ChoiceBox import ChoiceBox
+except ImportError:
+	AUTOTIMER = False
+
 
 # for localized messages
 from . import _
@@ -122,6 +146,9 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self.epgList = None
 			
 		# needed stuff for timerlist
+		self.autoTimerPixmapLarge = None
+		self.removeAutoTimerInstance = False
+		self.timerListMode = LIST_MODE_TIMER
 		list = [ ]
 		self.list = list # TimerEditList property, needed
 		
@@ -224,8 +251,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		
 		self["list"].onSelectionChanged.append(self.onListSelectionChanged)
 		self["timerlist"].onSelectionChanged.append(self.onListSelectionChanged)
-		
-		self.fillTimerList() # TimerEditList method --> tuple (RecordTimer.RecordTimerEntry, processed state)
 		
 		# set tab captions
 		self.configTabsShown = False
@@ -569,8 +594,51 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		EpgBaseTab.primeTime = self.primeTime
 		
 	def addTimer(self, timer):
-		self.session.openWithCallback(self.finishedAdd, TimerEntry, timer)
+		if self.currentMode == TIMERLIST:
+			if self.timerListMode == LIST_MODE_TIMER:
+				self.session.openWithCallback(self.finishedAdd, TimerEntry, timer)
+			elif self.timerListMode == LIST_MODE_AUTOTIMER:
+				self.addAutotimerFromString("", addNewTimer = True)
+		else:
+			self.session.openWithCallback(self.finishedAdd, TimerEntry, timer)
+			
+	def addTimerEntry(self):
+		cur = self["list"].getCurrent()
+		if cur == None or cur[1] == None or cur[2] == "":
+			return
+			
+		# cur = ignoreMe, eventid, sRef, begin, duration, title, short, desc
+		eit = cur[1]
+		serviceref = ServiceReference(cur[2])
+		begin = cur[3]
+		end = cur[3] + cur[4]
+		name = cur[5]
+		description = cur[6]
+		begin -= config.recording.margin_before.value * 60
+		end += config.recording.margin_after.value * 60
+		data = (begin, end, name, description, eit)
+		# TimerEditList method
+		self.addTimer(RecTimerEntry(self.session, serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data))
 		
+	def timerChoice(self):
+		choices = []
+		choices.append((_("Record or zap timer"), TIMER_TYPE_RECORD))
+		choices.append((_("AutoTimer timer"), TIMER_TYPE_AUTOTIMER))
+		self.session.openWithCallback(self.cbTimerChoice, ChoiceBox, title = _("Please select a timer type to add:"), list = choices)
+		
+	def cbTimerChoice(self, result):
+		if not result:
+			return
+		elif result[1] == TIMER_TYPE_RECORD:
+			self.addTimerEntry()
+		elif result[1] == TIMER_TYPE_AUTOTIMER:
+			# cur = ignoreMe, eventid, sRef, begin, duration, title, short, desc
+			cur = self["list"].getCurrent()
+			if cur == None or cur[1] == None or cur[2] == "":
+				return
+				
+			self.addAutotimerFromString(cur[5], addNewTimer = True)
+			
 	# TimerEditList function (overwritten to update the timer button state)
 	def finishedAdd(self, answer):
 		if answer[0]:
@@ -583,7 +651,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 				simulTimerList = self.session.nav.RecordTimer.record(entry)
 				if simulTimerList is not None:
 					self.session.openWithCallback(self.finishSanityCorrection, TimerSanityConflict, simulTimerList)
-			self.fillTimerList()
 			self.updateState()
 			
 			cur = self["list"].getCurrent()
@@ -592,8 +659,164 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 				self.setTimerButtonState(cur)
 				self.setButtonText(timerAdded = True)
 				self.getSimilarEvents()
+				
+	# TimerEditList function (overwritten to either edit a timer or AutoTimer timer)
+	def openEdit(self):
+		cur = self["timerlist"].getCurrent()
+		if cur:
+			if isinstance(cur, RecordTimerEntry):
+				self.session.openWithCallback(self.finishedEdit, TimerEntry, cur)
+			else: # AutoTimer entry
+				autotimerEntry = None
+				self.getAutoTimerInstance()
+				
+				# find the corresponding AutoTimer entry by id
+				timerList = autotimer.getTimerList()
+				for autotimerEntry in timerList:
+					if autotimerEntry.getId() == cur.autoTimerId:
+						break
+						
+				if autotimerEntry:
+					self.session.openWithCallback(self.cbOpenEdit, AutoTimerEditor, autotimerEntry)
+					
+				self.deleteAutoTimerInstance()
+				
+	# TimerEditList function (overwritten to either edit a timer or AutoTimer timer)
+	def showLog(self):
+		cur = self["timerlist"].getCurrent()
+		if cur:
+			if isinstance(cur, RecordTimerEntry):
+				self.session.openWithCallback(self.finishedEdit, TimerLog, cur)
+			else:
+				self.session.open(AutoTimerSettings)
+				
+	def cbOpenEdit(self, ret):
+		if ret:
+			self.updateAutoTimerEntry(ret.getId(), ret)
+			self.updateState()
+			
+	def fillAutoTimerList(self):
+		self.list = []
+		self.getAutoTimerInstance()
+		timerList = autotimer.getTimerList()
+		
+		for autoTimer in timerList:
+			obj = self.getTimerListObjectFromAutoTimer(autoTimer)
+			self.list.extend([(obj, False)]) # extend the TimerEditList list
+		self.deleteAutoTimerInstance()
+		self["timerlist"].l.setList(self.list)
+		
+	def getTimerListObjectFromAutoTimer(self, autoTimer):
+		now = localtime(time())
+		if autoTimer.timespan is not None and autoTimer.timespan[0] is not None:
+			timeSpan = autoTimer.getTimespanBegin()
+			if timeSpan is not None:
+				parts = timeSpan.split(":")
+				dt = datetime(now.tm_year, now.tm_mon, now.tm_mday, int(parts[0]), int(parts[1]))
+				begin = int(mktime(dt.timetuple()))
+			else:
+				begin = 0
+				
+			timeSpan = autoTimer.getTimespanEnd()
+			if timeSpan is not None:
+				parts = timeSpan.split(":")
+				dt = datetime(now.tm_year, now.tm_mon, now.tm_mday, int(parts[0]), int(parts[1]))
+				end = int(mktime(dt.timetuple()))
+			else:
+				end = 0
 		else:
-			print "Timeredit aborted"
+			dt = datetime(now.tm_year, now.tm_mon, now.tm_mday, 0, 0)
+			end = begin = int(mktime(dt.timetuple()))
+			
+		if autoTimer.getEnabled() == "no":
+			enabled = True
+		else:
+			enabled = False
+			
+		return TimerListObject(begin, end, "", autoTimer.getName(), int(autoTimer.getJustplay()), enabled, autoTimer.getId(), autoTimer.getMatch(), autoTimer.searchType, autoTimer.getCounter(), autoTimer.getCounterLeft(), autoTimer.destination, autoTimer.getServices(), autoTimer.getBouquets(), autoTimer.getIncludedDays(), autoTimer.getExcludedDays())
+		
+	# TimerEditList method. Overwritten to support AutoTimer timers
+	def toggleDisabledState(self):
+		cur = self["timerlist"].getCurrent()
+		if cur and isinstance(cur, RecordTimerEntry):
+			t = cur
+			if t.disabled:
+				print "try to ENABLE timer"
+				t.enable()
+				timersanitycheck = TimerSanityCheck(self.session.nav.RecordTimer.timer_list, cur)
+				if not timersanitycheck.check():
+					t.disable()
+					print "Sanity check failed"
+					simulTimerList = timersanitycheck.getSimulTimerList()
+					if simulTimerList is not None:
+						self.session.openWithCallback(self.finishedEdit, TimerSanityConflict, simulTimerList)
+				else:
+					print "Sanity check passed"
+					if timersanitycheck.doubleCheck():
+						t.disable()
+			else:
+				if t.isRunning():
+					if t.repeated:
+						list = (
+							(_("Stop current event but not coming events"), "stoponlycurrent"),
+							(_("Stop current event and disable coming events"), "stopall"),
+							(_("Don't stop current event but disable coming events"), "stoponlycoming")
+						)
+						self.session.openWithCallback(boundFunction(self.runningEventCallback, t), ChoiceBox, title=_("Repeating event currently recording... What do you want to do?"), list = list)
+				else:
+					t.disable()
+			self.session.nav.RecordTimer.timeChanged(t)
+		else: # AutoTimer timer
+			global autotimer
+			self.getAutoTimerInstance()
+			
+			# find the corresponding AutoTimer entry by id
+			timerList = autotimer.getTimerList()
+			for autotimerEntry in timerList:
+				if autotimerEntry.getId() == cur.autoTimerId:
+					autotimerEntry.enabled = not autotimerEntry.enabled
+					cur.disabled = not cur.disabled
+					autotimer.writeXml()
+					break
+					
+			self.deleteAutoTimerInstance()
+			
+		# refresh the list
+		idx = self["timerlist"].getCurrentIndex()
+		self["timerlist"].l.invalidateEntry(idx)
+		self.updateState()
+			
+	# TimerEditList method. Overwritten to support AutoTimer timers
+	def removeTimer(self, result):
+		if not result:
+			return
+		list = self["timerlist"]
+		cur = list.getCurrent()
+		if cur and isinstance(cur, RecordTimerEntry):
+			timer = cur
+			timer.afterEvent = AFTEREVENT.NONE
+			self.session.nav.RecordTimer.removeEntry(timer)
+			self.refill()
+			self.updateState()
+		else: # AutoTimer timer
+			global autotimer
+			self.getAutoTimerInstance()
+			
+			# find the corresponding AutoTimer entry by id
+			timerList = autotimer.getTimerList()
+			for autotimerEntry in timerList:
+				if autotimerEntry.getId() == cur.autoTimerId:
+					autotimer.remove(cur.autoTimerId)
+					autotimer.writeXml()
+					break
+					
+			self.deleteAutoTimerInstance()
+			
+			# remove the timerlist entry
+			idx = self["timerlist"].getCurrentIndex()
+			self.list.pop(idx)
+			self["timerlist"].l.setList(self.list)
+			self["timerlist"].invalidate()
 			
 	def getBouquetName(self):
 		name = self.bouquetList[self.currentBouquetIndex][0]
@@ -603,6 +826,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			return 'Bouquet: ' + name.rstrip(' (Radio)')
 			
 	def onListSelectionChanged(self):
+		isAutoTimer = False
+		
 		if self.currentMode == TIMERLIST:
 			sel = self["timerlist"].getCurrent()
 			if sel is None:
@@ -611,7 +836,12 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			else:
 				# build a tuple similar to the one returned by epg lists. the leading 0 is needed to make the list equal
 				# to the epg list's (make list entries without event id selectable)
-				cur = (0, sel.eit, str(sel.service_ref), sel.begin, sel.end - sel.begin, sel.name, sel.description, None)
+				if isinstance(sel, RecordTimerEntry):
+					cur = (0, sel.eit, str(sel.service_ref), sel.begin, sel.end - sel.begin, sel.name, sel.description, None, sel.service_ref.getServiceName())
+				else: # AutoTimer
+					isAutoTimer = True
+					cur = (0, 0, str(sel.service_ref), sel.begin, sel.end - sel.begin, sel.name, "", None, "")
+					
 				remainBeginString = ""
 				percent = 0
 				duraString = "%d" % ((sel.end - sel.begin) / 60)
@@ -627,14 +857,52 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 				return
 				
 		# use variable names to make the code more readable
-		(ignoreMe, eventid, sRef, begin, duration, title, shortDesc, description) = cur
+		if self.currentMode == TIMERLIST:
+			(ignoreMe, eventid, sRef, begin, duration, title, shortDesc, description, serviceName) = cur
+			if isAutoTimer:
+				dest = sel.destination or resolveFilename(SCOPE_HDD)
+				
+				description = ''.join([_("Match title:"), " ", sel.match, "\n"])
+				if len(sel.services):
+					serv = " "
+					for service in sel.services:
+						serv = ''.join([serv, ServiceReference(service).getServiceName(), ", "])
+					serv = serv.rstrip(", ")
+					description = ''.join([description, _("Services:"), " ", serv, "\n"])
+				if len(sel.bouquets):
+					bouq = " "
+					for bouquet in sel.bouquets:
+						bouq = ''.join([bouq, ServiceReference(bouquet).getServiceName(), ", "])
+					bouq = bouq.rstrip(", ")
+					description = ''.join([description, _("Bouquets:"), " ", bouq, "\n"])
+				if len(sel.includedDays):
+					days = ""
+					for day in sel.includedDays:
+						days = ''.join([days, [y[1] for x,y in enumerate(weekdays) if y[0] == day][0], ", "])
+					days = days.rstrip(", ")
+					description = ''.join([description, _("Included days:"), " ", days, "\n"])
+				if len(sel.excludedDays):
+					days = ""
+					for day in sel.excludedDays:
+						days = ''.join([days, [y[1] for x,y in enumerate(weekdays) if y[0] == day][0], ", "])
+					days = days.rstrip(", ")
+					description = ''.join([description, _("Excluded days:"), " ", days, "\n"])
+				description = ''.join([description, _("Record a maximum of x times:"), " ", str(sel.counter), "\n",
+					_("Amount of recordings left:"), " ", str(sel.counterLeft), "\n",
+					_("Search type:"), " ", sel.searchType, "\n",
+					_("Location:"), " ", dest.rstrip('/')
+					])
+		else:
+			(ignoreMe, eventid, sRef, begin, duration, title, shortDesc, description) = cur
 		
 		# set timer button state
 		self.setTimerButtonState(cur)
 		
-		self.setEventViewPicon(cur)
+		self.setEventViewPicon(cur, isAutoTimer)
 		
-		if sRef in EpgCenterList.allServicesNameDict:
+		if isAutoTimer:
+			serviceName = "AutoTimer"
+		elif sRef in EpgCenterList.allServicesNameDict:
 			serviceName = EpgCenterList.allServicesNameDict[sRef]
 		else:
 			serviceName = ServiceReference(sRef).getServiceName()
@@ -874,9 +1142,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		size = int(config.plugins.merlinEpgCenter.numNextEvents.value)
 		if not (size == 0 or self.configTabsShown or (self.currentMode != MULTI_EPG_NOW and self.currentMode != MULTI_EPG_NEXT and self.currentMode != MULTI_EPG_PRIMETIME and self.currentMode != EPGSEARCH_RESULT)):
 			self["upcoming"].l.invalidate()
-		# rebuild the timer list
-		self.fillTimerList() # TimerEditList method
-		
+			
 	def setBouquetName(self):
 		self["bouquet"].setText(self.getBouquetName())
 		
@@ -891,19 +1157,25 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			cur = self["list"].getCurrent()
 			self.setEventViewPicon(cur)
 			
-	def setEventViewPicon(self, cur):
-		idx = self["list"].instance.getCurrentIndex()
-		if config.plugins.merlinEpgCenter.blinkingPicon.value and self.blinkTimer.getIsInList(idx) and not self.blinkTimer.getBlinkState():
-			self["picon"].instance.setPixmap(None)
-		elif cur is not None:
-			sRef = cur[2]
-#			picon = self.piconLoader.getPicon(sRef)
-			if self["picon"].instance is not None:
-				fileName = findDefaultPicon(sRef)
-				if fileName is not "":
-					picon = LoadPixmap(fileName)
-					self["picon"].instance.setPixmap(picon)
-				
+	def setEventViewPicon(self, cur, isAutoTimer = False):
+		if isAutoTimer:
+			if not self.autoTimerPixmapLarge:
+				pixmapPath = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/AutoTimerLarge.png")
+				self.autoTimerPixmapLarge = LoadPixmap(cached = False, path = pixmapPath)
+			if self.autoTimerPixmapLarge:
+				self["picon"].instance.setPixmap(self.autoTimerPixmapLarge)
+		else:
+			idx = self["list"].instance.getCurrentIndex()
+			if config.plugins.merlinEpgCenter.blinkingPicon.value and self.blinkTimer.getIsInList(idx) and not self.blinkTimer.getBlinkState():
+				self["picon"].instance.setPixmap(None)
+			elif cur is not None:
+				sRef = cur[2]
+				if self["picon"].instance is not None:
+					fileName = findDefaultPicon(sRef)
+					if fileName is not "":
+						picon = LoadPixmap(fileName)
+						self["picon"].instance.setPixmap(picon)
+						
 	def removeFromEpgSearchHistory(self):
 		if len(self["history"].list):
 			cur = self["history"].getCurrent()
@@ -916,6 +1188,99 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		else:
 			self.searchField.help_window.hide()
 			
+	############################################################################################
+	# AUTOTIMER
+
+	def getAutoTimerInstance(self):
+		global autotimer
+		
+		# create autotimer instance if needed
+		if autotimer is None:
+			self.removeAutoTimerInstance = True
+			autotimer = AutoTimer()
+			autotimer.readXml()
+		else:
+			self.removeAutoTimerInstance = False
+			
+	def deleteAutoTimerInstance(self):
+		global autotimer
+		if self.removeAutoTimerInstance:
+			autotimer = None
+			
+	# Taken from AutoTimerEditor
+	def addAutotimerFromString(self, match, addNewTimer = False):
+		global autotimer
+		self.getAutoTimerInstance()
+		
+		newTimer = autotimer.defaultTimer.clone()
+		newTimer.id = autotimer.getUniqueId()
+		newTimer.name = match
+		newTimer.match = ''
+		newTimer.enabled = True
+		
+		self.session.openWithCallback(
+			boundFunction(self.importerCallback, addNewTimer),
+			AutoTimerImporter,
+			newTimer,
+			match,		# Proposed Match
+			None,		# Proposed Begin
+			None,		# Proposed End
+			None,		# Proposed Disabled
+			None,		# Proposed ServiceReference
+			None,		# Proposed afterEvent
+			None,		# Proposed justplay
+			None,		# Proposed dirname, can we get anything useful here?
+			[]		# Proposed tags
+		)
+	
+	def importerCallback(self, addNewTimer, ret):
+		if ret:
+			ret, session = ret
+
+			self.session.openWithCallback(
+				boundFunction(self.editorCallback, addNewTimer),
+				AutoTimerEditor,
+				ret
+			)
+		else:
+			self.deleteAutoTimerInstance()
+
+	def editorCallback(self, addNewTimer, ret):
+		if ret:
+			global autotimer
+			self.getAutoTimerInstance()
+			autotimer.add(ret)
+			autotimer.writeXml()
+			idx = self["timerlist"].getCurrentIndex()
+			obj = self.getTimerListObjectFromAutoTimer(ret)
+			if addNewTimer:
+				self.list.append((obj, False))
+			else:
+				self.list[idx] = (obj, False)
+			self.updateState()
+			
+		self.deleteAutoTimerInstance()
+		
+	def updateAutoTimerEntry(self, id, changedTimer):
+		global autotimer
+		self.getAutoTimerInstance()
+		
+		idx = 0
+		for timer in autotimer.timers:
+			if timer.getId() == id:
+				autotimer.timers[idx] = changedTimer
+				break
+			idx += 1
+		autotimer.writeXml()
+		self.deleteAutoTimerInstance()
+		
+		# update the list entry
+		idx = self["timerlist"].getCurrentIndex()
+		obj = self.getTimerListObjectFromAutoTimer(changedTimer)
+		self.list[idx] = (obj, False)
+		self["timerlist"].l.invalidateEntry(idx)
+		self.onListSelectionChanged()
+		
 	############################################################################################
 	# TAB HANDLING
 
@@ -1031,9 +1396,14 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			if switchTvRadio:
 				self.oldMode = None
 				
-			self.epgTabObjectList[self.currentMode].show(self.oldMode, self.bouquetList[0], self.currentBouquet, self.currentBouquetIndex, self.currentMode, self.showOutdated, sRef)
+			self.epgTabObjectList[self.currentMode].show(self.oldMode, self.bouquetList[0], self.currentBouquet, self.currentBouquetIndex, self.currentMode, self.showOutdated, sRef, self.timerListMode)
 		elif self.currentMode == TIMERLIST:
+			if self.timerListMode == LIST_MODE_TIMER:
+				self.fillTimerList()
+			else:
+				self.fillAutoTimerList()
 			self.onListSelectionChanged()
+			self["timerlist"].moveToIndex(0)
 			self.epgTabObjectList[self.currentMode].show()
 			
 		if self.listStyle == STYLE_SINGLE_LINE:
@@ -1077,14 +1447,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 				self["epgRedActions"].setEnabled(True)
 				
 	def keyGreen(self):
-		if self.currentMode == TIMERLIST:
-			sel = self["timerlist"].getCurrent()
-			if sel is None:
-				return
-			
-			data = (sel.begin, sel.end, sel.name, sel.description, sel.eit)
-			self.addTimer(RecTimerEntry(self.session, sel.service_ref, checkOldTimers = True, dirname = preferredTimerPath(), *data))
-		elif self.currentMode == EPGSEARCH_HISTORY:
+		if self.currentMode == EPGSEARCH_HISTORY:
 			self.setMode(historySearch = True)
 		else:
 			cur = self["list"].getCurrent()
@@ -1102,19 +1465,11 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 					break
 					
 			if addTimer:
-				# cur = ignoreMe, eventid, sRef, begin, duration, title, short, desc
-				eit = cur[1]
-				serviceref = ServiceReference(cur[2])
-				begin = cur[3]
-				end = cur[3] + cur[4]
-				name = cur[5]
-				description = cur[6]
-				begin -= config.recording.margin_before.value * 60
-				end += config.recording.margin_after.value * 60
-				data = (begin, end, name, description, eit)
-				# TimerEditList method
-				self.addTimer(RecTimerEntry(self.session, serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data))
-				
+				if AUTOTIMER:
+					self.timerChoice()
+				else:
+					self.addTimerEntry()
+					
 	def keyYellow(self):
 		if self.currentMode == EPGSEARCH_HISTORY:
 			self.setMode(manualSearch = True)
@@ -1234,6 +1589,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 				numTabs = NUM_EPG_TABS
 				
 			self.oldMode = self.currentMode
+			
 			if direction == 1: # right
 				self.currentMode += 1
 				if self.currentMode > numTabs:
@@ -1276,7 +1632,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		if self.currentMode == EPGSEARCH_MANUAL:
 			self["search"].handleKey(KEY_0 + number)
 		else:
-			if self.oldMode == number -1: # same mode, there's nothing to do
+			if self.oldMode == number -1 and not self.oldMode == TIMERLIST: # same mode, there's nothing to do for other modes than TIMERLIST
 				return
 			elif number <= (NUM_EPG_TABS +1): # make sure one of our tabs was selected
 				self.currentMode = number -1 # 0 based
@@ -1291,9 +1647,25 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 					# add possibility to add the service name to the list of epg search terms
 					self["key_blue"].setText(_("Set search term"))
 					self["epgBlueActions"].setEnabled(True)
+				elif number == 5 and AUTOTIMER and self.oldMode == TIMERLIST: # toggle timer / autotimer
+					if self.timerListMode == LIST_MODE_TIMER:
+						self.timerListMode = LIST_MODE_AUTOTIMER
+						self["tab_text_%d" % TIMERLIST].setText("AutoTimer")
+						self.getAutoTimerInstance()
+						self.fillAutoTimerList()
+						self.deleteAutoTimerInstance()
+					elif self.timerListMode == LIST_MODE_AUTOTIMER:
+						self.timerListMode = LIST_MODE_TIMER
+						self["tab_text_%d" % TIMERLIST].setText(_("Timer"))
+						self.fillTimerList()
+						
+					self["timerlist"].moveToIndex(0)
+					self["timerlist"].invalidate()
+					self.updateState()
+					self.onListSelectionChanged()
 				else:
 					self.setMode()
-			
+					
 	def keyOk(self):
 		if self.currentMode == EPGSEARCH_MANUAL:
 			self.epgTabObjectList[self.currentMode].updateEpgSearchHistory() # save the searchString in the search history
@@ -1466,6 +1838,10 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self.setDescriptionSize()
 			
 	def setDescriptionSize(self):
+		# Invisible option to allow moving the videoPicture above the event description in skins
+		if not config.plugins.merlinEpgCenter.setDescriptionSize.value:
+			return
+			
 		lineHeight = int(fontRenderClass.getInstance().getLineHeight(self["description"].instance.getFont()))
 		if config.plugins.merlinEpgCenter.showVideoPicture.value:
 			maxVisibleLines = int((self.videoPicturePosY - self.descriptionPosY - 5) / lineHeight)

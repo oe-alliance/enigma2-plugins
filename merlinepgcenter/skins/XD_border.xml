@@ -1,16 +1,16 @@
 <skin>
-	<screen name="MerlinEPGCenter" title="MerlinEPGCenter" position="0,0" size="1024,576" flags="wfNoBorder">
+	<screen name="MerlinEPGCenter" title="Merlin EPG Center" position="0,0" size="1024,576" flags="wfNoBorder">
 		
 		<widget name="tabBackground" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_background.png" position="35,35" size="954,31" zPosition="0" alphatest="on" />
 
 		<widget name="tabbar" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_1.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_2.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_3.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_4.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_5.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_6.png" position="35,35" size="954,31" transparent="1" zPosition="1" alphatest="on" />
 		
-		<widget name="tab_text_0" position="65,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
-		<widget name="tab_text_1" position="225,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
-		<widget name="tab_text_2" position="385,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
-		<widget name="tab_text_3" position="545,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
-		<widget name="tab_text_4" position="705,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
-		<widget name="tab_text_5" position="865,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_0" position="65,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_1" position="225,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_2" position="385,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_3" position="545,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_4" position="705,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_5" position="865,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
 		
 		<widget name="timerlist" position="35,71" size="655,451" scrollbarMode="showNever" />
 		<widget name="list" position="35,71" size="655,431" scrollbarMode="showNever" />

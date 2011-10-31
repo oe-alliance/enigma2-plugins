@@ -31,6 +31,7 @@ from Components.TimerList import TimerList
 from enigma import eEPGCache, eServiceReference, eServiceCenter, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_VALIGN_BOTTOM, getDesktop
 from math import fabs
 import NavigationInstance
+from RecordTimer import RecordTimerEntry
 from ServiceReference import ServiceReference
 from skin import parseColor
 from timer import TimerEntry
@@ -39,7 +40,7 @@ from Tools.LoadPixmap import LoadPixmap
 
 # OWN IMPORTS
 from ConfigTabs import KEEP_OUTDATED_TIME, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP, STYLE_PERCENT_TEXT
-from HelperFunctions import getFuzzyDay, LIST_TYPE_EPG, LIST_TYPE_UPCOMING
+from HelperFunctions import getFuzzyDay, LIST_TYPE_EPG, LIST_TYPE_UPCOMING, TimerListObject
 from MerlinEPGCenter import STYLE_SINGLE_LINE, STYLE_SHORT_DESCRIPTION
 
 # for localized messages
@@ -848,6 +849,8 @@ class EpgCenterTimerlist(TimerList):
 		self.l.setList(list)
 		config.plugins.merlinEpgCenter.listItemHeight.addNotifier(self.changeHeight, initial_call = True)
 		
+		self.autoTimerPixmap = LoadPixmap(cached=False, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/AutoTimerSmall.png"))
+		
 	def onShow(self):
 		self.maxWidth = self.l.getItemSize().width()
 		
@@ -941,7 +944,11 @@ class EpgCenterTimerlist(TimerList):
 		if config.plugins.merlinEpgCenter.showPicons.value:
 			width = self.piconSize.width()
 			height = self.piconSize.height()
-			picon = self.piconLoader.getPicon(str(timer.service_ref))
+			
+			if isinstance(timer, TimerListObject) and self.autoTimerPixmap:
+				picon = self.autoTimerPixmap
+			else:
+				picon = self.piconLoader.getPicon(str(timer.service_ref))
 			if picon:
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetLeft, (self.itemHeight - self.baseHeight) / 2, width, height, picon))
 			offsetLeft = offsetLeft + width + 5 # abstand
@@ -954,17 +961,24 @@ class EpgCenterTimerlist(TimerList):
 			elif self.videoMode == MODE_HD:
 				width = self.maxWidth * 16 / 100
 				
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.service_ref.getServiceName()))
+			if isinstance(timer, RecordTimerEntry):
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.service_ref.getServiceName()))
+			else: # AutoTimer entry
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "AutoTimer"))
 			offsetLeft = offsetLeft + width + 5 # abstand
 			
 		if self.videoMode == MODE_SD:
 			width = self.maxWidth * 18 / 100
 		else:
 			width = self.maxWidth * 14 / 100
-		fd = getFuzzyDay(timer.begin)
+			
+		if isinstance(timer, RecordTimerEntry):
+			fd = getFuzzyDay(timer.begin)
 		
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, width, self.halfItemHeight - border, 1, RT_HALIGN_LEFT|RT_VALIGN_TOP, timeString))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, width, self.halfItemHeight - border, 2, RT_HALIGN_CENTER|RT_VALIGN_TOP, fd, secondLineColor))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, width, self.halfItemHeight - border, 1, RT_HALIGN_LEFT|RT_VALIGN_TOP, timeString))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, width, self.halfItemHeight - border, 2, RT_HALIGN_CENTER|RT_VALIGN_TOP, fd, secondLineColor))
+		else: # AutoTimer entry
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_CENTER|RT_VALIGN_CENTER, timeString))
 			
 		offsetLeft = offsetLeft + width + 5 # abstand
 		
