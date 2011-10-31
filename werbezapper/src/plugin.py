@@ -12,13 +12,14 @@ def main(session, servicelist, **kwargs):
 	global zapperInstance
 	if zapperInstance is None:
 		from WerbeZapper import WerbeZapper
-		zapperInstance = WerbeZapper(session, servicelist, cleanup)
+		zapperInstance = session.instantiateDialog( WerbeZapper, servicelist, cleanup )
 	zapperInstance.showSelection()
 
 def cleanup():
 	global zapperInstance
 	if zapperInstance is not None:
 		zapperInstance.shutdown()
+		zapperInstance.doClose()
 		zapperInstance = None
 
 def Plugins(**kwargs):
