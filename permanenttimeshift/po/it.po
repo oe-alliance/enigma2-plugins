@@ -1,0 +1,282 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - permanenttimeshift\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-28 13:56+0100\n"
+"PO-Revision-Date: 2010-04-30 10:31+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/PermanentTimeshift\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/PermanentTimeshift\n"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:52
+msgid "Ask user"
+msgstr "Chiedere"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:52
+msgid "Save and stop"
+msgstr "Salvare e fermare"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:52
+msgid "Save and record"
+msgstr "Salvare e registrare"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:52
+msgid "Don't save"
+msgstr "Non salvare"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:164
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1147
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1148
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1157
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1158
+msgid "Timeshift"
+msgstr "Timeshift"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:211
+msgid ""
+"OH NO!\n"
+"The timeshift that was marked to save at end of event, was lost because you zapped away!"
+msgstr ""
+"OH NO!\n"
+"Il salvataggio del timeshift previsto al termine evento ora non sarà più possibile a causa dello zap!"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:319
+msgid ""
+"Timeshift Buffer Full!\n"
+" Cleaning Buffer and restarting timeshift ..."
+msgstr ""
+"Buffer timeshift pieno!\n"
+" Il buffer sarà ripulito e timeshift riavviato..."
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:396
+msgid "No Timeshift found to save as recording!"
+msgstr "Nessun timeshift trovato da salvare come registrazione!"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:437
+msgid "Timeshift saved to your harddisk!"
+msgstr "Timeshift salvato su harddisk!"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:448
+msgid "We try to copy the file now. This might take a while!"
+msgstr "Copia del file incorso. Potrebbe richiedere un po' di tempo..."
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:475
+msgid "Timeshift save failed!"
+msgstr "Salvataggio timeshift fallito!"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:479
+msgid ""
+"The Timeshift record was not saved yet!\n"
+"What do you want to do now with the timeshift file?"
+msgstr ""
+"Il file timeshift non è ancora stato salvato!\n"
+"Cosa si desidera fare con il file timeshift?"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:480
+msgid "Save Timeshift as Movie and stop recording"
+msgstr "Salvare il timeshift come registrazione e arrestarla"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:481
+msgid "Save Timeshift as Movie and continue recording"
+msgstr "Salvare il timeshift come registrazione e continuare a registrare"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:482
+msgid "Don't save Timeshift as Movie"
+msgstr "Non salvare il timeshift come registrazione"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:499
+msgid "Current Event:"
+msgstr "Evento corrente:"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:518
+#, python-format
+msgid "Record #%s: %s"
+msgstr "Registrare #%s: %s"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:520
+msgid "Which event do you want to save permanently?"
+msgstr "Quale evento salvare permanentemente?"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:574
+msgid "Getting Event Info failed!"
+msgstr "Recupero informazioni evento fallito!"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:618
+msgid "Creating Hardlink to Timeshift file failed!"
+msgstr "Creazione hardlink al file timeshift fallita!"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:658
+msgid ""
+"Merging Timeshift records now!\n"
+"This might take a while ..."
+msgstr ""
+"Unione file timeshift in corso.\n"
+"Potrebbe richiedere un po' di tempo..."
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:675
+#, python-format
+msgid ""
+"PTS-Plugin: Merging records failed!\n"
+"Eventnames did not match ...\n"
+"\n"
+"SRC: %s\n"
+"DEST:%s"
+msgstr ""
+"PST-Plugin: unione file fallita!\n"
+"I nomi evento non corrispondono...\n"
+"\n"
+"SORG: %s\n"
+"DEST: %s"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:895
+msgid ""
+"Could not activate Permanent-Timeshift!\n"
+"\n"
+"Timeshift-Path does not exist"
+msgstr ""
+"Impossibile attivare Permanent-Timeshift!\n"
+"\n"
+"Non esiste un percorso timeshift."
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:910
+msgid ""
+"Maximum Timeshift length per Event reached!\n"
+"Restarting Timeshift now ..."
+msgstr ""
+"Raggiunta la massima durata timeshift consentita per evento!\n"
+"Riavvio timeshift in corso..."
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1073
+msgid "Timeshift will get saved at end of event!"
+msgstr "Il timeshift sarà salvato al ternine dell'evento!"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1134
+msgid "No HDD found or HDD not initialized!"
+msgstr "HDD non trovato o non formattato!"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1139
+msgid ""
+"A recording is currently running.\n"
+"What do you want to do?"
+msgstr ""
+"Registrazione in corso!\n"
+"Cosa si desidera fare?"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1140
+msgid "stop recording"
+msgstr "\"Fermare registrazione"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1141
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1153
+msgid "add recording (stop after current event)"
+msgstr "Avviare registrazione (evento corrente)"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1142
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1154
+msgid "add recording (indefinitely)"
+msgstr "Avviare registrazione (illimitata)"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1143
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1155
+msgid "add recording (enter recording duration)"
+msgstr "Avviare registrazione (inserire durata)"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1144
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1156
+msgid "add recording (enter recording endtime)"
+msgstr "Avviare registrazione (inserire ora termine)"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1145
+msgid "change recording (duration)"
+msgstr "Cambiare durata registrazione"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1146
+msgid "change recording (endtime)"
+msgstr "\"Cambiare ora fine registrazione"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1147
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1157
+msgid "save recording (stop after current event)"
+msgstr "Salvare registrazione (evento corrente)"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1148
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1158
+msgid "save recording (Select event)"
+msgstr "Salvare registrazione (selezionare evento)"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1149
+msgid "do nothing"
+msgstr "Non fare nulla"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1152
+msgid "Start recording?"
+msgstr "Avviare la registrazione?"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1159
+msgid "don't record"
+msgstr "\"Uscire senza registrare"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1170
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1252
+msgid "Permanent Timeshift Settings"
+msgstr "Configurazione Permanent Timeshift"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1184
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1185
+msgid "Cancel"
+msgstr "Annull."
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1194
+msgid "Permanent Timeshift Enable"
+msgstr "Abilitare Permanent Timeshift"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1197
+msgid "Permanent Timeshift Max Events"
+msgstr "Numero massimo eventi Permanent Timeshift"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1198
+msgid "Permanent Timeshift Max Length"
+msgstr "Massima durata Permanent Timeshift"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1199
+msgid "Permanent Timeshift Start Delay"
+msgstr "Ritardo avvio Permanent Timeshift"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1200
+msgid "Timeshift-Save Action on zap"
+msgstr "Azione salvataggio timeshift su zap"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1201
+msgid "Beta: Copy Movie when hardlinking failed?"
+msgstr "Beta: copiare il file su fallimento hardlink?"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1202
+msgid "Beta: Show PTS Infobar while timeshifting?"
+msgstr "Beta: mostrare le informazioni PTS durante il timeshift?"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1203
+msgid "Beta: Merge PTS and Instant Record later?"
+msgstr "Beta: unire PTS e registrazione istantanea più tardi?"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1204
+msgid "Beta: Margin after recording current event?"
+msgstr "Beta: margine al termine dell'evento corrente?"
+
+#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1246
+msgid "Timeshift Settings"
+msgstr "Configurazione timeshift"
+
+#~ msgid "Disable Instant Record Button"
+#~ msgstr "Disabilitare pulsante registrazione immediata"
+

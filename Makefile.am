@@ -66,6 +66,7 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
+	permanenttimeshift \
 	pipzap \
 	pluginhider \
 	pluginsort \

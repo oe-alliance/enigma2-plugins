@@ -1,0 +1,116 @@
+# German translations for PTS Plugin package.
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Automatically generated, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pts-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-28 23:54+0000\n"
+"PO-Revision-Date: 2010-06-29 19:17+0100\n"
+"Last-Translator: Miroslav Bilka <miroslav.bilka@zoznam.sk>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Country: GERMANY\n"
+
+msgid "Save and stop"
+msgstr "Uložiť a zastaviť"
+
+msgid "Save and record"
+msgstr "Uložiť a nahrávať"
+
+msgid "Don't save"
+msgstr "Neukladať"
+
+msgid "Timeshift"
+msgstr "Časový posun"
+
+msgid ""
+"OH NO!\n"
+"The timeshift that was marked to save at end of event, was lost because you zapped away!"
+msgstr ""
+"OCH NIE!\n"
+"Časový posun sa mal uložit na konci relácie, ale nepodarilo sa to, pretože ste prepli preč!"
+
+msgid "Timeshift saved to your harddisk!"
+msgstr "Časový posun sa uložil na Váš disk!"
+
+msgid "Timeshift copied to your harddisk!"
+msgstr "Časový posun sa skopíroval na Váš disk!"
+
+msgid "Timeshift save failed!"
+msgstr "Časový posun sa nepodarilo uložiť!"
+
+msgid "No Timeshift found to save as recording!"
+msgstr "Žiadny časový posun na uloženie sa nenašiel!"
+
+msgid "Permanent Timeshift Settings"
+msgstr "Nastavenia trvalého časového posunu"
+
+msgid ""
+"The Timeshift record was not saved yet!\n"
+"What do you want to do now with the timeshift file?"
+msgstr ""
+"Časový posun sa ešte neuložil!\n"
+"Čo chceš teraz urobiť so súborom časového posunu?"
+
+msgid "Which event do you want to save permanently?"
+msgstr "Ktorú reláciu chcete uložiť natrvalo?"
+
+msgid "Save Timeshift as Movie and stop recording"
+msgstr "Ulož časový posun ako Film a zastav nahrávanie"
+
+msgid "Save Timeshift as Movie and continue recording"
+msgstr "Ulož časový posun ako Film a pokračuj v nahrávaní"
+
+msgid "Don't save Timeshift as Movie"
+msgstr "Neukladaj časový posun ako Film"
+
+msgid "Current Event:"
+msgstr "Aktuálna relácia:"
+
+msgid "Getting Event Info failed!"
+msgstr "Zlyhalo načítanie informácií o programe!"
+
+msgid ""
+"Maximum Timeshift length per Event reached!\n"
+"Restarting Timeshift now ..."
+msgstr ""
+"Dosiahli ste maximálnu dĺžku časového posunu!\n"
+"Reštartni teraz časový posun ..."
+
+msgid "Timeshift will get saved at end of event!"
+msgstr "Časový posun sa uloží po skončení programu!"
+
+msgid "save recording (stop after current event)"
+msgstr "uloží nahrávku (zastaviť po programe)"
+
+msgid "save recording (Select event)"
+msgstr "uloží nahrávku (Vyber program)"
+
+msgid "Permanent Timeshift Enable"
+msgstr "Zapni časový posun"
+
+msgid "Permanent Timeshift Max Events"
+msgstr "Maximum programov časového posunu"
+
+msgid "Permanent Timeshift Max Length"
+msgstr "Maximálna dĺžka časového posunu"
+
+msgid "Permanent Timeshift Start Delay"
+msgstr "Časový posun začne s oneskorením"
+
+msgid "Timeshift-Save Action on zap"
+msgstr "Časový posun - uložiť akciu pri zapnutí"
+
+msgid "Clean Timeshift Buffer on zap?"
+msgstr "Vyčistiť buffer časového posunu pri zapnutí?"
+
+msgid "Creating Hardlink to Timeshift file failed!"
+msgstr "Zlyhalo vytvorenie linky na súbor časového posunu!"
+
