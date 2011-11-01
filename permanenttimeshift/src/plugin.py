@@ -2,7 +2,7 @@
 # Permanent Timeshift Plugin for Enigma2 Dreamboxes
 # Coded by Homey (c) 2011
 #
-# Version: 1.0
+# Version: 1.1
 # Support: www.dreambox-plugins.de
 #####################################################
 from Components.ActionMap import ActionMap
@@ -33,7 +33,7 @@ from RecordTimer import RecordTimer, RecordTimerEntry, parseEvent
 
 from random import randint
 from enigma import eTimer, eServiceCenter, eBackgroundFileEraser, iPlayableService, iRecordableService, iServiceInformation
-from os import environ, stat as os_stat, listdir as os_listdir, link as os_link, path as os_path, system as os_system, statvfs
+from os import environ, stat as os_stat, listdir as os_listdir, link as os_link, path as os_path, remove as os_remove, system as os_system, statvfs
 from time import localtime, time, gmtime, strftime
 from timer import TimerEntry
 
@@ -258,7 +258,7 @@ class InfoBar(InfoBarOrg):
 
 		# Init PTS Delay-Timer
 		self.pts_delay_timer = eTimer()
-		self.pts_delay_timer.callback.append(self.ActivatePermanentTimeshift)
+		self.pts_delay_timer.callback.append(self.activatePermanentTimeshift)
 
 		# Init PTS LengthCheck-Timer
 		self.pts_LengthCheck_timer = eTimer()
@@ -410,7 +410,21 @@ class InfoBar(InfoBarOrg):
 			self.pts_currplaying = self.pts_eventcount
 			self.ptsSetNextPlaybackFile("pts_livebuffer.%s" % (self.pts_eventcount))
 
-	def ActivatePermanentTimeshift(self):
+	def eraseFile(self, filePath):
+		# We only want to use E2 Background Eraser if file has no other links on it.
+		# Early Enigma2 3.20 Releases had a bug that also affected the hardlinked files.
+		if fileExists(filePath):
+			if os_stat(filePath).st_nlink != 1:
+				os_remove(filePath)
+			else:
+				self.BgFileEraser.erase(filePath)
+
+	def eraseTimeshiftFile(self):
+		for filename in os_listdir(config.usage.timeshift_path.value):
+			if filename.startswith("timeshift.") and not filename.endswith(".del") and not filename.endswith(".copy"):
+				self.eraseFile("%s/%s" % (config.usage.timeshift_path.value,filename))
+
+	def activatePermanentTimeshift(self):
 		if self.ptsCheckTimeshiftPath() is False or self.session.screen["Standby"].boolean is True or self.ptsLiveTVStatus() is False or (config.plugins.pts.stopwhilerecording.value and self.pts_record_running):
 			return
 
@@ -462,7 +476,7 @@ class InfoBar(InfoBarOrg):
 	def startTimeshift(self):
 		if config.plugins.pts.enabled.value:
 			self.pts_delay_timer.stop()
-			self.ActivatePermanentTimeshift()
+			self.activatePermanentTimeshift()
 			self.activateTimeshiftEndAndPause()
 		else:
 			InfoBarOrg.startTimeshift(self)
@@ -494,6 +508,10 @@ class InfoBar(InfoBarOrg):
 		if ts is None:
 			return
 
+		# Get rid of old timeshift file before E2 truncates its filesize
+		self.eraseTimeshiftFile()
+
+		# Stop Timeshift now
 		try:
 			ts.stopTimeshift(switchToLive)
 		except:
@@ -507,7 +525,7 @@ class InfoBar(InfoBarOrg):
 			self.pts_LengthCheck_timer.stop()
 
 	def restartTimeshift(self):
-		self.ActivatePermanentTimeshift()
+		self.activatePermanentTimeshift()
 		Notifications.AddNotification(MessageBox, _("PTS-Plugin: Restarting Timeshift!"), MessageBox.TYPE_INFO, timeout=5)
 
 	def saveTimeshiftPopup(self):
@@ -586,6 +604,10 @@ class InfoBar(InfoBarOrg):
 		elif action == "noSave":
 			config.plugins.pts.isRecording.value = False
 			self.save_current_timeshift = False
+
+		# Get rid of old timeshift file before E2 truncates its filesize
+		if self.save_timeshift_postaction is not None:
+			self.eraseTimeshiftFile()
 
 		# Post PTS Actions like ZAP or whatever the user requested
 		if self.save_timeshift_postaction == "zapUp":
@@ -786,7 +808,7 @@ class InfoBar(InfoBarOrg):
 					# if no write for 5 sec = stranded timeshift
 					if statinfo.st_mtime < (time()-5.0):
 						print "PTS-Plugin: Erasing stranded timeshift %s" % filename
-						self.BgFileEraser.erase("%s/%s" % (config.usage.timeshift_path.value,filename))
+						self.eraseFile("%s/%s" % (config.usage.timeshift_path.value,filename))
 
 						# Delete Meta and EIT File too
 						if filename.startswith("pts_livebuffer.") is True:
@@ -848,7 +870,7 @@ class InfoBar(InfoBarOrg):
 					statinfo = os_stat("%s/%s" % (config.usage.timeshift_path.value,filename))
 					if statinfo.st_mtime > (time()-5.0):
 						try:
-							self.BgFileEraser.erase("%s/pts_livebuffer.%s" % (config.usage.timeshift_path.value,self.pts_eventcount))
+							self.eraseFile("%s/pts_livebuffer.%s" % (config.usage.timeshift_path.value,self.pts_eventcount))
 							self.BgFileEraser.erase("%s/pts_livebuffer.%s.meta" % (config.usage.timeshift_path.value,self.pts_eventcount))
 						except Exception, errormsg:
 							print "PTS Plugin: %s" % (errormsg)
@@ -984,7 +1006,7 @@ class InfoBar(InfoBarOrg):
 	def ptsCopyFilefinished(self, srcfile, destfile):
 		# Erase Source File
 		if fileExists(srcfile):
-				self.BgFileEraser.erase(srcfile)
+			self.eraseFile(srcfile)
 
 		# Restart Merge Timer
 		if self.pts_mergeRecords_timer.isActive():
@@ -1001,7 +1023,7 @@ class InfoBar(InfoBarOrg):
 			os_system("echo \"\" > \"%s.pts.del\"" % (srcfile[0:-3]))
 		else:
 			# Delete Instant Record permanently now ... R.I.P.
-			self.BgFileEraser.erase("%s" % (srcfile))
+			self.eraseFile("%s" % (srcfile))
 			self.BgFileEraser.erase("%s.ap" % (srcfile))
 			self.BgFileEraser.erase("%s.sc" % (srcfile))
 			self.BgFileEraser.erase("%s.meta" % (srcfile))
@@ -1037,7 +1059,7 @@ class InfoBar(InfoBarOrg):
 		for filename in filelist:
 			if filename.endswith(".pts.del"):
 				srcfile = config.usage.default_path.value + "/" + filename[0:-8] + ".ts"
-				self.BgFileEraser.erase("%s" % (srcfile))
+				self.eraseFile("%s" % (srcfile))
 				self.BgFileEraser.erase("%s.ap" % (srcfile))
 				self.BgFileEraser.erase("%s.sc" % (srcfile))
 				self.BgFileEraser.erase("%s.meta" % (srcfile))
@@ -1285,7 +1307,7 @@ class InfoBar(InfoBarOrg):
 
 		# Restart Timeshift when all records stopped
 		if timer.state == TimerEntry.StateEnded and not self.timeshift_enabled and not self.pts_record_running:
-			self.ActivatePermanentTimeshift()
+			self.activatePermanentTimeshift()
 
 		# Restart Merge-Timer when all records stopped
 		if timer.state == TimerEntry.StateEnded and self.pts_mergeRecords_timer.isActive():
@@ -1322,10 +1344,10 @@ class InfoBar(InfoBarOrg):
 		if config.plugins.pts.enabled.value and self.session.screen["Standby"].boolean is not True and self.timeshift_enabled and (time() - self.pts_starttime) >= (config.plugins.pts.maxlength.value * 60):
 			if self.save_current_timeshift:
 				self.saveTimeshiftActions("savetimeshift")
-				self.ActivatePermanentTimeshift()
+				self.activatePermanentTimeshift()
 				self.save_current_timeshift = True
 			else:
-				self.ActivatePermanentTimeshift()
+				self.activatePermanentTimeshift()
 			Notifications.AddNotification(MessageBox,_("Maximum Timeshift length per Event reached!\nRestarting Timeshift now ..."), MessageBox.TYPE_INFO, timeout=5)
 
 #Replace the InfoBar with our version ;)
