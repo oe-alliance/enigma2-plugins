@@ -27,7 +27,7 @@
 		<widget source="global.CurrentTime" render="Label" position="885,80" size="100,24" font="Regular;22" halign="right" transparent="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="785,105" size="200,26" font="Regular;22" halign="right" transparent="1">
+		<widget source="global.CurrentTime" render="Label" position="785,104" size="200,24" font="Regular;22" halign="right" transparent="1">
 			<convert type="ClockToText">Format: %a %d. %b</convert>
 		</widget>
 		<widget name="serviceName" position="705,145" size="284,26" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="center" />

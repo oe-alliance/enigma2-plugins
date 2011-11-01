@@ -24,10 +24,10 @@
 		
 		<widget name="eventInfoSeparator" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/separator_v.png" position="485,22" size="6,532" zPosition="1" alphatest="on" />
 		<widget name="picon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/PiconMissing.png" position="495,45" size="100,60" zPosition="1" transparent="1" alphatest="on" />
-		<widget source="global.CurrentTime" render="Label" position="615,45" size="100,24" font="Regular;16" halign="right" transparent="1">
+		<widget source="global.CurrentTime" render="Label" position="615,45" size="100,24" font="Regular;22" halign="right" transparent="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="515,70" size="200,26" font="Regular;22" halign="right" transparent="1">
+		<widget source="global.CurrentTime" render="Label" position="515,69" size="200,24" font="Regular;22" halign="right" transparent="1">
 			<convert type="ClockToText">Format: %a %d. %b</convert>
 		</widget>
 		<widget name="serviceName" position="495,110" size="220,22" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="center" />

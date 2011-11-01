@@ -51,7 +51,7 @@ from Components.ProgressBar import ProgressBar
 from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath
 from Components.VideoWindow import VideoWindow
-from enigma import eServiceReference, eServiceCenter, eEPGCache, getDesktop, eSize, eTimer, fontRenderClass, ePoint
+from enigma import eServiceReference, eServiceCenter, eEPGCache, getDesktop, eSize, eTimer, fontRenderClass, ePoint, gFont
 from math import fabs
 import NavigationInstance
 from RecordTimer import AFTEREVENT, RecordTimerEntry
@@ -198,6 +198,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		
 		self["infoText"] = ResizeScrollLabel("")
 		self.infoTextShown = False
+		
+		self.widgetFontSizes = []
 		
 		self.tabTextEpgList = [_("Now"), _("Upcoming"), _("Single"), _("Prime Time"), _("Timer"), _("Search")]
 		self.initTabLabels(self.tabTextEpgList)
@@ -470,16 +472,40 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 				self.upcomingSepPosX, self.upcomingSepPosY = [int(x) for x in value.split(",")]
 			elif attrib == "size":
 				self.separatorWidth, self.separatorHeight = [int(x) for x in value.split(",")]
+		# self["beginTime"]
+		for (attrib, value) in self["beginTime"].skinAttributes:
+			if attrib == "font":
+				font = [x for x in value.split(";")]
+				self.widgetFontSizes.append(("beginTime", font[0], int(font[1])))
+		# self["endTime"]
+		for (attrib, value) in self["endTime"].skinAttributes:
+			if attrib == "font":
+				font = [x for x in value.split(";")]
+				self.widgetFontSizes.append(("endTime", font[0], int(font[1])))
+		# self["duration"]
+		for (attrib, value) in self["duration"].skinAttributes:
+			if attrib == "font":
+				font = [x for x in value.split(";")]
+				self.widgetFontSizes.append(("duration", font[0], int(font[1])))
+		# self["remaining"]
+		for (attrib, value) in self["remaining"].skinAttributes:
+			if attrib == "font":
+				font = [x for x in value.split(";")]
+				self.widgetFontSizes.append(("remaining", font[0], int(font[1])))
 		# self["description"]
 		for (attrib, value) in self["description"].skinAttributes:
 			if attrib == "position":
 				self.descriptionPosX, self.descriptionPosY = [int(x) for x in value.split(",")]
 			if attrib == "size":
 				self.descriptionWidthMax, self.descriptionHeightMax = [int(x) for x in value.split(",")]
+			if attrib == "font":
+				font = [x for x in value.split(";")]
+				self.widgetFontSizes.append(("description", font[0], int(font[1])))
 		# self["videoPicture"]
 		for (attrib, value) in self["videoPicture"].skinAttributes:
 			if attrib == "position":
 				self.videoPicturePosX, self.videoPicturePosY = [int(x) for x in value.split(",")]
+				
 	def setSkinFile(self, configElement = None):
 		config.plugins.merlinEpgCenter.skin.value = configElement.getValue()
 		
@@ -552,6 +578,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		config.plugins.merlinEpgCenter.numNextEvents.addNotifier(self.setUpcomingWidgets, initial_call = True)
 		config.plugins.merlinEpgCenter.listItemHeight.addNotifier(self.setUpcomingWidgets, initial_call = False)
 		config.plugins.merlinEpgCenter.listProgressStyle.addNotifier(self.setProgressbarStyle, initial_call = True)
+		config.plugins.merlinEpgCenter.adjustFontSize.addNotifier(self.setFontSizes, initial_call = True)
+		
 		
 	def removeNotifier(self):
 		self["list"].onSelectionChanged.remove(self.onListSelectionChanged)
@@ -573,6 +601,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		config.plugins.merlinEpgCenter.numNextEvents.notifiers.remove(self.setUpcomingWidgets)
 		config.plugins.merlinEpgCenter.listItemHeight.notifiers.remove(self.setUpcomingWidgets)
 		config.plugins.merlinEpgCenter.listProgressStyle.notifiers.remove(self.setProgressbarStyle)
+		config.plugins.merlinEpgCenter.adjustFontSize.notifiers.remove(self.setFontSizes)
 		
 	def setListStyle(self, configElement = None):
 		itemHeight = self.piconSize.height() + int(config.plugins.merlinEpgCenter.listItemHeight.value)
@@ -587,6 +616,14 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self.setUpcomingWidgets()
 		self["timerlist"].changeHeight()
 		
+	def setFontSizes(self, configElement = None):
+		diff = configElement.getValue()
+		
+		for widget, font, fontSize in self.widgetFontSizes:
+			self[widget].instance.setFont(gFont(font, fontSize + diff))
+			
+		self.setDescriptionSize()
+			
 	def getPrimeTime(self, configElement = None):
 		now = localtime(time())
 		dt = datetime(now.tm_year, now.tm_mon, now.tm_mday, config.plugins.merlinEpgCenter.primeTime.value[0], config.plugins.merlinEpgCenter.primeTime.value[1])

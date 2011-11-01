@@ -117,6 +117,7 @@ class EpgCenterList(GUIComponent):
 		self.similarShown = False
 		
 		config.plugins.merlinEpgCenter.listItemHeight.addNotifier(self.changeHeight, initial_call = True)
+		config.plugins.merlinEpgCenter.adjustFontSize.addNotifier(self.setFontSizes, initial_call = True)
 		
 		if listType == LIST_TYPE_EPG:
 			EpgCenterList.bouquetList = bouquetList
@@ -155,21 +156,24 @@ class EpgCenterList(GUIComponent):
 	def onShow(self):
 		self.maxWidth = self.l.getItemSize().width()
 		
+	def setFontSizes(self, configElement = None):
+		diff = configElement.getValue()
+		
 		if self.videoMode == MODE_SD:
-			self.l.setFont(0, gFont("Regular", 18))
-			self.l.setFont(1, gFont("Regular", 16))
-			self.l.setFont(2, gFont("Regular", 14))
-			self.l.setFont(3, gFont("Regular", 12))
+			self.l.setFont(0, gFont("Regular", 18 + diff))
+			self.l.setFont(1, gFont("Regular", 16 + diff))
+			self.l.setFont(2, gFont("Regular", 14 + diff))
+			self.l.setFont(3, gFont("Regular", 12 + diff))
 		elif self.videoMode == MODE_XD:
-			self.l.setFont(0, gFont("Regular", 18))
-			self.l.setFont(1, gFont("Regular", 16))
-			self.l.setFont(2, gFont("Regular", 14))
-			self.l.setFont(3, gFont("Regular", 12))
+			self.l.setFont(0, gFont("Regular", 18 + diff))
+			self.l.setFont(1, gFont("Regular", 16 + diff))
+			self.l.setFont(2, gFont("Regular", 14 + diff))
+			self.l.setFont(3, gFont("Regular", 12 + diff))
 		elif self.videoMode == MODE_HD:
-			self.l.setFont(0, gFont("Regular", 22))
-			self.l.setFont(1, gFont("Regular", 20))
-			self.l.setFont(2, gFont("Regular", 18))
-			self.l.setFont(3, gFont("Regular", 16))
+			self.l.setFont(0, gFont("Regular", 22 + diff))
+			self.l.setFont(1, gFont("Regular", 20 + diff))
+			self.l.setFont(2, gFont("Regular", 18 + diff))
+			self.l.setFont(3, gFont("Regular", 16 + diff))
 			
 	def setMaxWidth(self, newSize):
 		self.maxWidth = newSize.width()
@@ -538,6 +542,7 @@ class EpgCenterList(GUIComponent):
 		instance.setContent(None)
 		instance.selectionChanged.get().remove(self.selectionChanged)
 		config.plugins.merlinEpgCenter.listItemHeight.notifiers.remove(self.changeHeight)
+		config.plugins.merlinEpgCenter.adjustFontSize.notifiers.remove(self.setFontSizes)
 		self.blinkTimer.callbacks.remove(self.invalidateList)
 		
 	def moveToIndex(self, index):
@@ -848,27 +853,31 @@ class EpgCenterTimerlist(TimerList):
 			
 		self.l.setList(list)
 		config.plugins.merlinEpgCenter.listItemHeight.addNotifier(self.changeHeight, initial_call = True)
+		config.plugins.merlinEpgCenter.adjustFontSize.addNotifier(self.setFontSizes, initial_call = True)
 		
 		self.autoTimerPixmap = LoadPixmap(cached=False, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/AutoTimerSmall.png"))
 		
 	def onShow(self):
 		self.maxWidth = self.l.getItemSize().width()
 		
+	def setFontSizes(self, configElement = None):
+		diff = configElement.getValue()
+		
 		if self.videoMode == MODE_SD:
-			self.l.setFont(0, gFont("Regular", 18))
-			self.l.setFont(1, gFont("Regular", 16))
-			self.l.setFont(2, gFont("Regular", 14))
-			self.l.setFont(3, gFont("Regular", 12))
+			self.l.setFont(0, gFont("Regular", 18 + diff))
+			self.l.setFont(1, gFont("Regular", 16 + diff))
+			self.l.setFont(2, gFont("Regular", 14 + diff))
+			self.l.setFont(3, gFont("Regular", 12 + diff))
 		elif self.videoMode == MODE_XD:
-			self.l.setFont(0, gFont("Regular", 18))
-			self.l.setFont(1, gFont("Regular", 16))
-			self.l.setFont(2, gFont("Regular", 14))
-			self.l.setFont(3, gFont("Regular", 12))
+			self.l.setFont(0, gFont("Regular", 18 + diff))
+			self.l.setFont(1, gFont("Regular", 16 + diff))
+			self.l.setFont(2, gFont("Regular", 14 + diff))
+			self.l.setFont(3, gFont("Regular", 12 + diff))
 		elif self.videoMode == MODE_HD:
-			self.l.setFont(0, gFont("Regular", 22))
-			self.l.setFont(1, gFont("Regular", 20))
-			self.l.setFont(2, gFont("Regular", 18))
-			self.l.setFont(3, gFont("Regular", 16))
+			self.l.setFont(0, gFont("Regular", 22 + diff))
+			self.l.setFont(1, gFont("Regular", 20 + diff))
+			self.l.setFont(2, gFont("Regular", 18 + diff))
+			self.l.setFont(3, gFont("Regular", 16 + diff))
 			
 	def setMaxWidth(self, newSize):
 		self.maxWidth = newSize.width()
@@ -893,6 +902,7 @@ class EpgCenterTimerlist(TimerList):
 		instance.setContent(None)
 		instance.selectionChanged.get().remove(self.selectionChanged)
 		config.plugins.merlinEpgCenter.listItemHeight.notifiers.remove(self.changeHeight)
+		config.plugins.merlinEpgCenter.adjustFontSize.notifiers.remove(self.setFontSizes)
 		
 	def buildTimerEntry(self, timer, processed):
 		width = self.l.getItemSize().width()
