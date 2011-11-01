@@ -373,13 +373,6 @@ permanentclock/meta/Makefile
 permanentclock/po/Makefile
 permanentclock/src/Makefile
 
-permanenttimeshift/Makefile
-permanenttimeshift/meta/Makefile
-permanenttimeshift/po/Makefile
-permanenttimeshift/images/Makefile
-permanenttimeshift/src/Makefile
-permanenttimeshift/src/eitsave/Makefile
-
 pipzap/Makefile
 pipzap/meta/Makefile
 pipzap/src/Makefile
