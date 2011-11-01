@@ -273,6 +273,18 @@ merlinepg/Makefile
 merlinepg/meta/Makefile
 merlinepg/src/Makefile
 
+merlinepgcenter/Makefile
+merlinepgcenter/meta/Makefile
+merlinepgcenter/src/Makefile
+merlinepgcenter/po/Makefile
+merlinepgcenter/skins/Makefile
+merlinepgcenter/images/Makefile
+merlinepgcenter/images/HD/Makefile
+merlinepgcenter/images/HD_BORDER/Makefile
+merlinepgcenter/images/SD/Makefile
+merlinepgcenter/images/XD/Makefile
+merlinepgcenter/images/XD_BORDER/Makefile
+
 merlinmusicplayer/Makefile
 merlinmusicplayer/meta/Makefile
 merlinmusicplayer/src/Makefile
