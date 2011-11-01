@@ -1753,8 +1753,7 @@ def setPartnerboxService(self, item, partnerboxentry):
 		http = "http://root:%s@%s:%d/%s" % (password,ip,port, item.servicereference)
 	else:
 		http = "http://%s:%d/%s" % (ip,port, item.servicereference)
-	pids = item.servicereference.split(":")
-	service = eServiceReference("1:0:1:%s:%s:%s:%s:%s:%s:%s" % (pids[3], pids[4], pids[5], pids[6], pids[7], pids[8], pids[9]))
+	service = eServiceReference(item.servicereference)
 	service.setPath(http)
 	service.setName("%s (%s)" % (item.servicename, partnerboxentry.name.value))
 	return service	
