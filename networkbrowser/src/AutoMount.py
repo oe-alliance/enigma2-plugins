@@ -174,7 +174,7 @@ class AutoMount():
 			print "self.automounts without active mounts",self.automounts
 			if data['active'] == 'False' or data['active'] is False:
 				umountcmd = 'umount -fl '+ path
-				print "[AutoMount.py] UMOUNT-CMD--->",umountcmd
+# 				print "[AutoMount.py] UMOUNT-CMD--->",umountcmd
 				self.MountConsole.ePopen(umountcmd, self.CheckMountPointFinished, [data, callback])
 		else:
 			if data['active'] == 'False' or data['active'] is False:
@@ -183,9 +183,9 @@ class AutoMount():
 			elif data['active'] == 'True' or data['active'] is True:
 				try:
 					if not os.path.exists(path):
-						os.makedirs(path)
-	
-					self.unmountcommand = 'umount -fl '+ path
+						os.mkdir(path, 0755)
+					else:
+						self.unmountcommand = 'umount -fl '+ path
 					if data['mountusing'] == 'fstab':
 						if data['mounttype'] == 'nfs':
 							tmpcmd = 'mount ' + data['ip'] + ':/' + data['sharedir']
@@ -199,7 +199,6 @@ class AutoMount():
 						if tmpsharedir[-1:] == "$":
 							tmpdir = tmpsharedir.replace("$", "\\$")
 							tmpsharedir = tmpdir
-	
 						if data['mounttype'] == 'nfs':
 							if not os.path.ismount(path):
 								if data['options']:
@@ -208,7 +207,6 @@ class AutoMount():
 									options = "tcp,noatime"
 								tmpcmd = 'mount -t nfs -o ' + self.sanitizeOptions(data['options']) + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
 								self.mountcommand = tmpcmd.encode("UTF-8")
-	
 						elif data['mounttype'] == 'cifs':
 							if not os.path.ismount(path):
 								tmpusername = data['username'].replace(" ", "\\ ")
@@ -224,7 +222,6 @@ class AutoMount():
 					self.command.append(self.unmountcommand)
 				if self.mountcommand is not None:
 					self.command.append(self.mountcommand)
-# 				print "[AutoMount.py] U/MOUNTCMD--->",self.command
 				self.MountConsole.eBatch(self.command, self.CheckMountPointFinished, [data, callback])
 			else:
 				self.CheckMountPointFinished([data, callback])
@@ -232,7 +229,7 @@ class AutoMount():
 	def CheckMountPointFinished(self, extra_args):
 # 		print "[AutoMount.py] CheckMountPointFinished"
 		(data, callback ) = extra_args
-		path = '/media/net/'+ data['sharename']
+		path = os.path.join('/media/net', data['sharename'])
 # 		print "PATH in CheckMountPointFinished",path
 		if os.path.exists(path):
 			if os.path.ismount(path):
