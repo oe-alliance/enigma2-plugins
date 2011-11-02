@@ -19,19 +19,15 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
+	
+
+# for localized messages
+from . import _
 
 # ENIGMA IMPORTS
 from Components.config import config, ConfigSubsection, getConfigListEntry, ConfigSet, ConfigClock, ConfigYesNo, ConfigInteger, ConfigSelection, ConfigText, NoSave, ConfigSelectionNumber
 from enigma import eEnv
 from Tools.Directories import SCOPE_CURRENT_PLUGIN, resolveFilename
-
-# OWN IMPORTS
-from MerlinEPGCenter import STYLE_SINGLE_LINE, STYLE_SHORT_DESCRIPTION
-from SkinFinder import SkinFinder
-
-# for localized messages
-from . import _
-
 
 STYLE_SIMPLE_BAR = "0"
 STYLE_PIXMAP_BAR = "1"
@@ -47,6 +43,19 @@ SKINLIST =	[ # order is important (HD_BORDER, XD_BORDER, SD, HD, XD)!
 		(resolveFilename(SCOPE_CURRENT_PLUGIN, ''.join([SKINDIR, "HD_default.xml"])), "HD_default.xml"),
 		(resolveFilename(SCOPE_CURRENT_PLUGIN, ''.join([SKINDIR, "XD_default.xml"])), "XD_default.xml")
 		]
+		
+# check Merlin2 feature "keep outdated events in epgcache"
+try:
+	KEEP_OUTDATED_TIME = config.merlin2.keep_outdated_epg.value * 60
+except KeyError:
+	KEEP_OUTDATED_TIME = None
+	
+
+# OWN IMPORTS
+from EpgCenterList import MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_PRIMETIME, TIMERLIST, EPGSEARCH_HISTORY
+from MerlinEPGCenter import STYLE_SINGLE_LINE, STYLE_SHORT_DESCRIPTION, TAB_TEXT_EPGLIST
+from SkinFinder import SkinFinder
+
 
 config.plugins.merlinEpgCenter = ConfigSubsection()
 config.plugins.merlinEpgCenter.primeTime = ConfigClock(default = 69300)
@@ -89,16 +98,19 @@ config.plugins.merlinEpgCenter.showTimerMessages = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.blinkingPicon = ConfigYesNo(False)
 config.plugins.merlinEpgCenter.showShortDescInEventInfo = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.adjustFontSize = ConfigSelectionNumber(min = -5, max = 5, stepwidth = 1, default = 0)
+config.plugins.merlinEpgCenter.mainTab = ConfigSelection(default = "disabled", choices = [
+				("-1", _("disabled")),
+				(str(MULTI_EPG_NOW), TAB_TEXT_EPGLIST[MULTI_EPG_NOW]),
+				(str(MULTI_EPG_NEXT), TAB_TEXT_EPGLIST[MULTI_EPG_NEXT]),
+				(str(SINGLE_EPG), TAB_TEXT_EPGLIST[SINGLE_EPG]),
+				(str(MULTI_EPG_PRIMETIME), TAB_TEXT_EPGLIST[MULTI_EPG_PRIMETIME]),
+				(str(TIMERLIST), TAB_TEXT_EPGLIST[TIMERLIST]),
+				(str(EPGSEARCH_HISTORY), TAB_TEXT_EPGLIST[EPGSEARCH_HISTORY]),
+				])
 
 # INVISIBLE OPTION
 config.plugins.merlinEpgCenter.setDescriptionSize = ConfigYesNo(True)
 
-
-# check Merlin2 feature "keep outdated events in epgcache"
-try:
-	KEEP_OUTDATED_TIME = config.merlin2.keep_outdated_epg.value * 60
-except KeyError:
-	KEEP_OUTDATED_TIME = None
 
 ############################################################################################
 # CONFIG CLASSES
@@ -143,6 +155,7 @@ class ConfigGeneral(ConfigBaseTab):
 		cfgList.append(getConfigListEntry(_("Exit on TV <-> Radio switch:"), config.plugins.merlinEpgCenter.exitOnTvRadioSwitch))
 		cfgList.append(getConfigListEntry(_("Show timer messages:"), config.plugins.merlinEpgCenter.showTimerMessages))
 		cfgList.append(getConfigListEntry(_("Adjust font size:"), config.plugins.merlinEpgCenter.adjustFontSize))
+		cfgList.append(getConfigListEntry(_("Return to main tab with exit:"), config.plugins.merlinEpgCenter.mainTab))
 		self.configList = cfgList
 		
 # config list settings

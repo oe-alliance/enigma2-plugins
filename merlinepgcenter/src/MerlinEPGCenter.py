@@ -20,6 +20,11 @@
 #  distributed other than under the conditions noted above.
 #
 
+
+# for localized messages
+from . import _
+
+
 NUM_EPG_TABS = 5 # 0 based
 NUM_CONFIG_TABS = 2 # 0 based
 
@@ -34,6 +39,9 @@ TIMER_TYPE_AUTOTIMER = 1
 
 LIST_MODE_TIMER = 0
 LIST_MODE_AUTOTIMER = 1
+
+TAB_TEXT_EPGLIST = (_("Now"), _("Upcoming"), _("Single"), _("Prime Time"), _("Timer"), _("Search"))
+TAB_TEXT_CONFIGLIST = [_("General"), _("Lists"), _("Event Info"), "", "", ""]
 	
 # PYTHON IMPORTS
 from time import localtime, strftime, mktime, time
@@ -87,10 +95,6 @@ try:
 	from Screens.ChoiceBox import ChoiceBox
 except ImportError:
 	AUTOTIMER = False
-
-
-# for localized messages
-from . import _
 
 
 class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
@@ -201,8 +205,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		
 		self.widgetFontSizes = []
 		
-		self.tabTextEpgList = [_("Now"), _("Upcoming"), _("Single"), _("Prime Time"), _("Timer"), _("Search")]
-		self.initTabLabels(self.tabTextEpgList)
+		self.initTabLabels(TAB_TEXT_EPGLIST)
 		
 		self.onLayoutFinish.append(self.startRun)
 		
@@ -257,7 +260,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		# set tab captions
 		self.configTabsShown = False
 		self.configEditMode = False
-		self.tabTextConfigList = [_("General"), _("Lists"), _("Event Info"), "", "", ""]
 		
 		self.configTabObjectList = []
 		self.configTabObjectList.append(ConfigGeneral())
@@ -1577,7 +1579,14 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self["infoText"].pageDown()
 			
 	def keyExit(self):
-		if self.infoTextShown:
+		mainTabValue = int(config.plugins.merlinEpgCenter.mainTab.getValue())
+		if self.configTabsShown:
+			self.keyMenu()
+			return
+		elif mainTabValue != -1 and self.currentMode != mainTabValue:
+			self.keyNumber(mainTabValue +1)
+			return
+		elif self.infoTextShown:
 			self.keyInfo()
 			return
 		
@@ -1818,7 +1827,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			if self.numNextEvents > 0 and (self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == MULTI_EPG_PRIMETIME):
 				self["upcomingSeparator"].show()
 			self.oldMode = self.savedOldMode
-			self.setTabText(self.tabTextEpgList)
+			self.setTabText(TAB_TEXT_EPGLIST)
 			if self.currentMode <= NUM_EPG_TABS:
 				self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor("#ef7f1a")) # active
 				self["tabbar"].setPixmapNum(self.currentMode)
@@ -1851,7 +1860,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self.savedCurrentMode = self.currentMode
 			self.savedOldMode = self.oldMode
 			self.currentMode = 0 # first config tab
-			self.setTabText(self.tabTextConfigList)
+			self.setTabText(TAB_TEXT_CONFIGLIST)
 			self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor("#ef7f1a")) # active
 			self["tabbar"].setPixmapNum(self.currentMode)
 			self.configTabsShown = True

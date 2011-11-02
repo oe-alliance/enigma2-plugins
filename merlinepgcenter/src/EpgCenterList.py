@@ -20,6 +20,10 @@
 #  distributed other than under the conditions noted above.
 #
 
+
+# for localized messages
+from . import _
+
 # PYTHON IMPORTS
 from datetime import datetime
 from time import localtime, strftime, time
@@ -42,9 +46,6 @@ from Tools.LoadPixmap import LoadPixmap
 from ConfigTabs import KEEP_OUTDATED_TIME, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP, STYLE_PERCENT_TEXT
 from HelperFunctions import getFuzzyDay, LIST_TYPE_EPG, LIST_TYPE_UPCOMING, TimerListObject
 from MerlinEPGCenter import STYLE_SINGLE_LINE, STYLE_SHORT_DESCRIPTION
-
-# for localized messages
-from . import _
 
 
 MODE_HD = 0

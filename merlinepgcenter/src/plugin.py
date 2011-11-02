@@ -20,6 +20,10 @@
 #  distributed other than under the conditions noted above.
 #
 
+
+# for localized messages
+from . import _
+
 # ENIGMA IMPORTS
 from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import InfoBar
@@ -27,9 +31,6 @@ from Screens.InfoBar import InfoBar
 # OWN IMPORTS
 from MerlinEPGCenter import MerlinEPGCenter
 from EpgCenterList import MULTI_EPG_NOW, SINGLE_EPG
-
-# for localized messages
-from . import _
 
 
 class InfoBarFunctionSaver:

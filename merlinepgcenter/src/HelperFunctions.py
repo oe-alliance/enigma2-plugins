@@ -20,6 +20,10 @@
 #  distributed other than under the conditions noted above.
 #
 
+
+# for localized messages
+from . import _
+
 #PYTHON IMPORTS
 from datetime import timedelta as dt_timedelta, date as dt_date
 from time import localtime, time
@@ -34,9 +38,6 @@ from Screens.MessageBox import MessageBox
 import Screens.Standby
 from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, SCOPE_CURRENT_PLUGIN
 from Tools.LoadPixmap import LoadPixmap
-
-# for localized messages
-from . import _
 
 
 LIST_TYPE_EPG = 0
@@ -128,10 +129,10 @@ def getFuzzyDay(t):
 		date = _("Tomorrow")
 	elif nt < t and (t - nt) < WEEKSECONDS:
 		# same week
-		date = WEEKDAYS[d[6]]
+		date = WEEKDAYS[d.tm_wday]
 	elif d[0] == n[0]:
 		# same year
-		date = "%d.%d.%d" % (d[2], d[1], d[0])
+		date = "%d.%d.%d" % (d.tm_mday, d.tm_mon, d.tm_year)
 	else:
 		date = _("Unknown date")
 		
