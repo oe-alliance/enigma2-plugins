@@ -42,6 +42,8 @@ from . import _
 LIST_TYPE_EPG = 0
 LIST_TYPE_UPCOMING = 1
 
+WEEKSECONDS = 7*86400
+WEEKDAYS = (_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday"))
 
 class ResizeScrollLabel(ScrollLabel):
 	def __init__(self, text = ""):
@@ -124,9 +126,9 @@ def getFuzzyDay(t):
 	elif dt_date.fromtimestamp(t) == dt_date.today() + dt_timedelta(days = 1):
 		# next day
 		date = _("Tomorrow")
-	elif ((t - nt) < 7*86400) and (nt < t):
+	elif nt < t and (t - nt) < WEEKSECONDS:
 		# same week
-		date = (_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday"))[d[6]]
+		date = WEEKDAYS[d[6]]
 	elif d[0] == n[0]:
 		# same year
 		date = "%d.%d.%d" % (d[2], d[1], d[0])
