@@ -663,7 +663,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		choices = []
 		choices.append((_("Record or zap timer"), TIMER_TYPE_RECORD))
 		choices.append((_("AutoTimer timer"), TIMER_TYPE_AUTOTIMER))
-		self.session.openWithCallback(self.cbTimerChoice, ChoiceBox, title = _("Please select a timer type to add:"), list = choices)
+		self.session.openWithCallback(self.cbTimerChoice, ChoiceBox, title = _("Please select a timer type to add:"), list = choices, keys=["green", "yellow"])
 		
 	def cbTimerChoice(self, result):
 		if not result:

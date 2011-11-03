@@ -98,7 +98,7 @@ config.plugins.merlinEpgCenter.showTimerMessages = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.blinkingPicon = ConfigYesNo(False)
 config.plugins.merlinEpgCenter.showShortDescInEventInfo = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.adjustFontSize = ConfigSelectionNumber(min = -5, max = 5, stepwidth = 1, default = 0)
-config.plugins.merlinEpgCenter.mainTab = ConfigSelection(default = "disabled", choices = [
+config.plugins.merlinEpgCenter.mainTab = ConfigSelection(default = "-1", choices = [
 				("-1", _("disabled")),
 				(str(MULTI_EPG_NOW), TAB_TEXT_EPGLIST[MULTI_EPG_NOW]),
 				(str(MULTI_EPG_NEXT), TAB_TEXT_EPGLIST[MULTI_EPG_NEXT]),
