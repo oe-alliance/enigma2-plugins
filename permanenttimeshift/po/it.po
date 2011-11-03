@@ -2,77 +2,62 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - permanenttimeshift\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-28 13:56+0100\n"
-"PO-Revision-Date: 2010-04-30 10:31+0100\n"
+"POT-Creation-Date: 2011-11-03 21:50+0100\n"
+"PO-Revision-Date: 2011-11-03 21:50+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Poedit-Basepath: /home/dario/Plugins/PermanentTimeshift\n"
+"X-Poedit-Basepath: .../enigma2-plugins/permanenttimeshift\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPath-0: /home/dario/Plugins/PermanentTimeshift\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/permanenttimeshift\n"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:52
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:75
 msgid "Ask user"
 msgstr "Chiedere"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:52
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:75
 msgid "Save and stop"
 msgstr "Salvare e fermare"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:52
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:75
 msgid "Save and record"
 msgstr "Salvare e registrare"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:52
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:75
 msgid "Don't save"
 msgstr "Non salvare"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:164
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1147
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1148
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1157
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1158
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:113
+msgid "Saving Timeshift files"
+msgstr "Salvataggio file timeshift in corso"
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:154
+msgid "Merging Timeshift files"
+msgstr "Unione file Timeshift in corso"
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:197
+msgid "Creating AP and SC Files"
+msgstr "Creazione file AP e SC in corso"
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:298
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1629
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1630
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1639
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1640
 msgid "Timeshift"
 msgstr "Timeshift"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:211
-msgid ""
-"OH NO!\n"
-"The timeshift that was marked to save at end of event, was lost because you zapped away!"
-msgstr ""
-"OH NO!\n"
-"Il salvataggio del timeshift previsto al termine evento ora non sarà più possibile a causa dello zap!"
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:529
+msgid "PTS-Plugin: Restarting Timeshift!"
+msgstr "Plugin PST: timeshift in riavvio!"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:319
-msgid ""
-"Timeshift Buffer Full!\n"
-" Cleaning Buffer and restarting timeshift ..."
-msgstr ""
-"Buffer timeshift pieno!\n"
-" Il buffer sarà ripulito e timeshift riavviato..."
-
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:396
-msgid "No Timeshift found to save as recording!"
-msgstr "Nessun timeshift trovato da salvare come registrazione!"
-
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:437
-msgid "Timeshift saved to your harddisk!"
-msgstr "Timeshift salvato su harddisk!"
-
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:448
-msgid "We try to copy the file now. This might take a while!"
-msgstr "Copia del file incorso. Potrebbe richiedere un po' di tempo..."
-
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:475
-msgid "Timeshift save failed!"
-msgstr "Salvataggio timeshift fallito!"
-
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:479
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:533
 msgid ""
 "The Timeshift record was not saved yet!\n"
 "What do you want to do now with the timeshift file?"
@@ -80,73 +65,108 @@ msgstr ""
 "Il file timeshift non è ancora stato salvato!\n"
 "Cosa si desidera fare con il file timeshift?"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:480
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:534
 msgid "Save Timeshift as Movie and stop recording"
 msgstr "Salvare il timeshift come registrazione e arrestarla"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:481
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:535
 msgid "Save Timeshift as Movie and continue recording"
 msgstr "Salvare il timeshift come registrazione e continuare a registrare"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:482
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:536
 msgid "Don't save Timeshift as Movie"
 msgstr "Non salvare il timeshift come registrazione"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:499
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:553
 msgid "Current Event:"
 msgstr "Evento corrente:"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:518
-#, python-format
-msgid "Record #%s: %s"
-msgstr "Registrare #%s: %s"
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:574
+msgid "Record"
+msgstr "Registrazione"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:520
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:576
 msgid "Which event do you want to save permanently?"
 msgstr "Quale evento salvare permanentemente?"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:574
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:647
+#, python-format
+msgid "PTS Plugin Error: %s"
+msgstr "Errore plugin PTS: %s"
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:650
+msgid "No Timeshift found to save as recording!"
+msgstr "Nessun timeshift trovato da salvare come registrazione!"
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:783
+msgid "Saving timeshift as movie now. This might take a while!"
+msgstr "Salvataggio timeshift come registrazione.Potrebbe richiedere tempo!"
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:787
+#, python-format
+msgid ""
+"Not enough free Diskspace!\n"
+"\n"
+"Filesize: %sMB\n"
+"Free Space: %sMB\n"
+"Path: %s"
+msgstr ""
+"Spazio su disco insufficiente!\n"
+"\n"
+"Dimensione file: %sMB\n"
+"Spazio disponibile: %sMB\n"
+"Percorso: %s"
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:797
+msgid "Timeshift save failed!"
+msgstr "Salvataggio timeshift fallito!"
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:834
 msgid "Getting Event Info failed!"
 msgstr "Recupero informazioni evento fallito!"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:618
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:887
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:907
 msgid "Creating Hardlink to Timeshift file failed!"
 msgstr "Creazione hardlink al file timeshift fallita!"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:658
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:887
 msgid ""
-"Merging Timeshift records now!\n"
-"This might take a while ..."
+"The Filesystem on your Timeshift-Device does not support hardlinks.\n"
+"Make sure it is formated in EXT2 or EXT3!"
 msgstr ""
-"Unione file timeshift in corso.\n"
-"Potrebbe richiedere un po' di tempo..."
+"Il filesystem usato sul supporto per il Timeshift non supporta hardlink.\n"
+"Verificare che sia formattato come EXT2 o EXT3!"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:675
-#, python-format
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:906
 msgid ""
-"PTS-Plugin: Merging records failed!\n"
-"Eventnames did not match ...\n"
 "\n"
-"SRC: %s\n"
-"DEST:%s"
+"An Input/output error usually indicates a corrupted filesystem! Please check the filesystem of your timeshift-device!"
 msgstr ""
-"PST-Plugin: unione file fallita!\n"
-"I nomi evento non corrispondono...\n"
 "\n"
-"SORG: %s\n"
-"DEST: %s"
+"Un errore di input/output generalmente indica un filesystem corrotto. Verificare il filesystem in uso per il Timeshift."
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:895
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:982
+msgid "PTS-Plugin: Merging records failed!"
+msgstr "Plugin PST: unione registrazioni fallita!"
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1047
+msgid "Timeshift saved to your harddisk!"
+msgstr "Timeshift salvato su harddisk!"
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1276
 msgid ""
 "Could not activate Permanent-Timeshift!\n"
-"\n"
 "Timeshift-Path does not exist"
 msgstr ""
 "Impossibile attivare Permanent-Timeshift!\n"
-"\n"
-"Non esiste un percorso timeshift."
+"Percorso timeshift insistente."
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:910
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1304
+msgid "Record started! Stopping timeshift now ..."
+msgstr "Registrazione avviata! Arresto timeshift in corso..."
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1351
 msgid ""
 "Maximum Timeshift length per Event reached!\n"
 "Restarting Timeshift now ..."
@@ -154,15 +174,11 @@ msgstr ""
 "Raggiunta la massima durata timeshift consentita per evento!\n"
 "Riavvio timeshift in corso..."
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1073
-msgid "Timeshift will get saved at end of event!"
-msgstr "Il timeshift sarà salvato al ternine dell'evento!"
-
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1134
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1616
 msgid "No HDD found or HDD not initialized!"
 msgstr "HDD non trovato o non formattato!"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1139
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1621
 msgid ""
 "A recording is currently running.\n"
 "What do you want to do?"
@@ -170,113 +186,110 @@ msgstr ""
 "Registrazione in corso!\n"
 "Cosa si desidera fare?"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1140
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1622
 msgid "stop recording"
 msgstr "\"Fermare registrazione"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1141
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1153
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1623
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1635
 msgid "add recording (stop after current event)"
 msgstr "Avviare registrazione (evento corrente)"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1142
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1154
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1624
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1636
 msgid "add recording (indefinitely)"
 msgstr "Avviare registrazione (illimitata)"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1143
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1155
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1625
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1637
 msgid "add recording (enter recording duration)"
 msgstr "Avviare registrazione (inserire durata)"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1144
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1156
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1626
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1638
 msgid "add recording (enter recording endtime)"
 msgstr "Avviare registrazione (inserire ora termine)"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1145
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1627
 msgid "change recording (duration)"
 msgstr "Cambiare durata registrazione"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1146
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1628
 msgid "change recording (endtime)"
 msgstr "\"Cambiare ora fine registrazione"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1147
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1157
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1629
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1639
 msgid "save recording (stop after current event)"
 msgstr "Salvare registrazione (evento corrente)"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1148
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1158
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1630
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1640
 msgid "save recording (Select event)"
 msgstr "Salvare registrazione (selezionare evento)"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1149
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1631
 msgid "do nothing"
 msgstr "Non fare nulla"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1152
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1634
 msgid "Start recording?"
 msgstr "Avviare la registrazione?"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1159
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1641
 msgid "don't record"
 msgstr "\"Uscire senza registrare"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1170
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1252
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1658
+msgid "Timeshift will get saved at end of event!"
+msgstr "Il timeshift sarà salvato al ternine dell'evento!"
+
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1676
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1760
 msgid "Permanent Timeshift Settings"
 msgstr "Configurazione Permanent Timeshift"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1184
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1690
 msgid "OK"
 msgstr "Ok"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1185
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1691
 msgid "Cancel"
 msgstr "Annull."
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1194
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1700
 msgid "Permanent Timeshift Enable"
 msgstr "Abilitare Permanent Timeshift"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1197
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1703
 msgid "Permanent Timeshift Max Events"
 msgstr "Numero massimo eventi Permanent Timeshift"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1198
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1704
 msgid "Permanent Timeshift Max Length"
 msgstr "Massima durata Permanent Timeshift"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1199
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1705
 msgid "Permanent Timeshift Start Delay"
 msgstr "Ritardo avvio Permanent Timeshift"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1200
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1706
 msgid "Timeshift-Save Action on zap"
 msgstr "Azione salvataggio timeshift su zap"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1201
-msgid "Beta: Copy Movie when hardlinking failed?"
-msgstr "Beta: copiare il file su fallimento hardlink?"
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1707
+msgid "Stop timeshift while recording?"
+msgstr "Arrestare timeshift durante una registrazione?"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1202
-msgid "Beta: Show PTS Infobar while timeshifting?"
-msgstr "Beta: mostrare le informazioni PTS durante il timeshift?"
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1708
+msgid "Show PTS Infobar while timeshifting?"
+msgstr "Mostrare le informazioni PTS durante il timeshift?"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1203
-msgid "Beta: Merge PTS and Instant Record later?"
-msgstr "Beta: unire PTS e registrazione istantanea più tardi?"
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1713
+msgid "Beta: Enable Permanent Recording?"
+msgstr "Beta: abilitare la registrazione permanente?"
 
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1204
-msgid "Beta: Margin after recording current event?"
-msgstr "Beta: margine al termine dell'evento corrente?"
-
-#: /home/dario/Plugins/PermanentTimeshift/plugin.py:1246
+#: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1754
 msgid "Timeshift Settings"
 msgstr "Configurazione timeshift"
-
-#~ msgid "Disable Instant Record Button"
-#~ msgstr "Disabilitare pulsante registrazione immediata"
 
