@@ -40,6 +40,7 @@ config.plugins.autoresolution.deinterlacer = ConfigSelection(default = "auto", c
 config.plugins.autoresolution.deinterlacer_progressive = ConfigSelection(default = "auto", choices =
 		[("off", _("off")), ("auto", _("auto")), ("on", _("on")), ("bob", _("bob"))])
 config.plugins.autoresolution.delay_switch_mode = ConfigSelection(default = "1000", choices = [
+		("0", "0 " + _("seconds")),
 		("1000", "1 " + _("second")), ("2000", "2 " + _("seconds")), ("3000", "3 " + _("seconds")),
 		("4000", "4 " + _("seconds")), ("5000", "5 " + _("seconds")), ("6000", "6 " + _("seconds")), ("7000", "7 " + _("seconds")),
 		("8000", "8 " + _("seconds")), ("9000", "9 " + _("seconds")), ("10000", "10 " + _("seconds"))])
@@ -103,7 +104,10 @@ class AutoRes(Screen):
 		if self.newService:
 			print "[AutoRes] service changed"
 			self.after_switch_delay = False
-			self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
+			if int(config.plugins.autoresolution.delay_switch_mode.value) > 0:
+				self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
+			else:
+				self.determineContent()
 			self.newService = False
 
 	def defaultModeChanged(self, configEntry):
