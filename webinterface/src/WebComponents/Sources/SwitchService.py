@@ -1,6 +1,7 @@
 from Components.Sources.Source import Source
 from Components.Converter import ServiceName
 from Components.config import config
+from Screens.InfoBar import InfoBar, MoviePlayer
 from enigma import eServiceReference, iPlayableServicePtr
 
 class SwitchService(Source):
@@ -27,8 +28,24 @@ class SwitchService(Source):
 					
 					if cmd["title"] is not None:
 						eref.setName(cmd["title"])
-					self.session.nav.playService(eref)
-						
+
+					isRec = False
+					if cmd["sRef"].startswith("1:0:0:0:0:0:0:0:0:0:"): # lame check for recordings
+						isRec = True
+					if not isRec:
+						# if this is not a recording and the movie player is open, close it
+						if isinstance(self.session.current_dialog, MoviePlayer):
+							self.session.current_dialog.lastservice = eref
+							self.session.current_dialog.close()
+						self.session.nav.playService(eref)
+					elif isRec:
+						# if this is a recording and the infobar is shown, open the movie player
+						if isinstance(self.session.current_dialog, InfoBar):
+							self.session.open(MoviePlayer, eref)
+						# otherwise just play it with no regard for the context
+						else:
+							self.session.nav.playService(eref)
+
 					if pc:
 						config.ParentalControl.configured.value = pc
 					
@@ -57,4 +74,3 @@ class SwitchService(Source):
 			return ( False, "Zapping is disabled in WebInterface Configuration" )
 	
 	result = property(lambda self: self.res)
-	
