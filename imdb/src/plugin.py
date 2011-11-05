@@ -246,7 +246,7 @@ class IMDB(Screen):
 			self.IMDBlanguage = "german." # it's a subdomain, so add a '.' at the end
 
 			self.generalinfomask = re.compile(
-			'<h1>(?P<title>.*?) <.*?</h1>.*?'
+			'<h1>\s*(?P<title>.*?) <.*?</h1>.*?'
 			'(?:.*?<h5>(?P<g_director>Regisseur|Directors?):</h5>.*?<a href=\".*?\">(?P<director>.*?)</a>)*'
 			'(?:.*?<h5>(?P<g_creator>Sch\S*?pfer|Creators?):</h5>.*?<a href=\".*?\">(?P<creator>.*?)</a>)*'
 			'(?:.*?<h5>(?P<g_seasons>Seasons):</h5>(?:.*?)<a href=\".*?\">(?P<seasons>\d+?)</a>\s+?(?:<a class|\|\s+?<a href="episodes#season-unknown))*'
