@@ -181,46 +181,45 @@ class AutoMount():
 				self.unmountcommand = 'umount -fl '+ path
 
 			elif data['active'] == 'True' or data['active'] is True:
-				try:
-					if not os.path.exists(path):
-						os.mkdir(path, 0755)
-					else:
-						self.unmountcommand = 'umount -fl '+ path
-					if data['mountusing'] == 'fstab':
-						if data['mounttype'] == 'nfs':
-							tmpcmd = 'mount ' + data['ip'] + ':/' + data['sharedir']
+				self.unmountcommand = 'umount -fl '+ path
+# 				try:
+				if data['mountusing'] == 'fstab':
+					if data['mounttype'] == 'nfs':
+						tmpcmd = 'mount ' + data['ip'] + ':/' + data['sharedir']
+						self.mountcommand = tmpcmd.encode("UTF-8")
+					elif data['mounttype'] == 'cifs':
+						tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
+						self.mountcommand = tmpcmd.encode("UTF-8")
+
+				elif data['mountusing'] == 'enigma2':
+					tmpsharedir = data['sharedir'].replace(" ", "\\ ")
+					if tmpsharedir[-1:] == "$":
+						tmpdir = tmpsharedir.replace("$", "\\$")
+						tmpsharedir = tmpdir
+					if data['mounttype'] == 'nfs':
+						if not os.path.ismount(path):
+							if data['options']:
+								options = "tcp,noatime," + data['options']
+							else:
+								options = "tcp,noatime"
+							tmpcmd = 'mount -t nfs -o ' + self.sanitizeOptions(data['options']) + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
 							self.mountcommand = tmpcmd.encode("UTF-8")
-						elif data['mounttype'] == 'cifs':
-							tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
+					elif data['mounttype'] == 'cifs':
+						if not os.path.ismount(path):
+							tmpusername = data['username'].replace(" ", "\\ ")
+							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
 							self.mountcommand = tmpcmd.encode("UTF-8")
-	
-					elif data['mountusing'] == 'enigma2':
-						tmpsharedir = data['sharedir'].replace(" ", "\\ ")
-						if tmpsharedir[-1:] == "$":
-							tmpdir = tmpsharedir.replace("$", "\\$")
-							tmpsharedir = tmpdir
-						if data['mounttype'] == 'nfs':
-							if not os.path.ismount(path):
-								if data['options']:
-									options = "tcp,noatime," + data['options']
-								else:
-									options = "tcp,noatime"
-								tmpcmd = 'mount -t nfs -o ' + self.sanitizeOptions(data['options']) + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
-								self.mountcommand = tmpcmd.encode("UTF-8")
-						elif data['mounttype'] == 'cifs':
-							if not os.path.ismount(path):
-								tmpusername = data['username'].replace(" ", "\\ ")
-								tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
-								self.mountcommand = tmpcmd.encode("UTF-8")
-				except Exception, ex:
-					print "[AutoMount.py] Failed to create", path, "Error:", ex
-					self.command = None
+# 				except Exception, ex:
+# 					print "[AutoMount.py] Failed to create", path, "Error:", ex
+# 					self.command = None
 
 			if self.unmountcommand is not None or self.mountcommand is not None:
 				self.command = []
 				if self.unmountcommand is not None:
 					self.command.append(self.unmountcommand)
 				if self.mountcommand is not None:
+					if not os.path.exists(path):
+						self.command.append('mkdir -p ' + path)
 					self.command.append(self.mountcommand)
 				self.MountConsole.eBatch(self.command, self.CheckMountPointFinished, [data, callback])
 			else:
