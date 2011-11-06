@@ -373,6 +373,10 @@ permanentclock/meta/Makefile
 permanentclock/po/Makefile
 permanentclock/src/Makefile
 
+pipservicerelation/Makefile
+pipservicerelation/src/Makefile
+pipservicerelation/meta/Makefile
+
 pipzap/Makefile
 pipzap/meta/Makefile
 pipzap/src/Makefile

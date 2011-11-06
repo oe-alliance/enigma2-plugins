@@ -20,7 +20,6 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
-
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
@@ -50,6 +49,13 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 
 # for localized messages
 from . import _
+
+# PiPServiceRelation installed?
+try:
+	from Plugins.SystemPlugins.PiPServiceRelation.plugin import getRelationDict, CONFIG_FILE
+	plugin_PiPServiceRelation_installed = True
+except:
+	plugin_PiPServiceRelation_installed = False
 
 config.plugins.virtualzap = ConfigSubsection()
 config.plugins.virtualzap.mode = ConfigSelection(default="0", choices = [("0", _("as plugin in extended bar")),("1", _("with long OK press")), ("2", _("with exit button"))])
@@ -185,7 +191,6 @@ class VirtualZap(Screen):
 					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="550,80" size="120,25" transparent="1" zPosition="2"/>
 				</screen>"""
 	else:
-
 		if SystemInfo.get("NumVideoDecoders", 1) > 1 and config.plugins.virtualzap.usepip.value and not config.plugins.virtualzap.showpipininfobar.value:
 			# use standard PiP
 			config.av.pip = ConfigPosition(default=[0, 0, 0, 0], args = (719, 567, 720, 568))
@@ -193,6 +198,7 @@ class VirtualZap(Screen):
 			y = config.av.pip.value[1]
 			w = config.av.pip.value[2]
 			h = config.av.pip.value[3]
+
 		else:
 			# no PiP
 			x = 0
@@ -324,6 +330,11 @@ class VirtualZap(Screen):
 		self.exitTimer.timeout.get().append(self.standardPiP)
 		# reverse changes of ChannelSelection when closing plugin
 		self.onClose.append(self.__onClose)
+		# if PiPServiceRelation is installed, get relation dict
+		if plugin_PiPServiceRelation_installed:
+			self.pipServiceRelation = getRelationDict()
+		else:
+			self.pipServiceRelation = {}
 
 	def onLayoutReady(self):
 		self.updateInfos()
@@ -545,6 +556,10 @@ class VirtualZap(Screen):
 
 	# if available play service in PiP 
 	def playService(self, service):
+		current_service = service
+		n_service = self.pipServiceRelation.get(service.toString(),None) # PiPServiceRelation
+		if n_service is not None:
+			service = eServiceReference(n_service)
 		if service and (service.flags & eServiceReference.isGroup):
 			ref = getBestPlayableServiceReference(service, eServiceReference())
 		else:
@@ -553,7 +568,7 @@ class VirtualZap(Screen):
 			self.pipservice = eServiceCenter.getInstance().play(ref)
 			if self.pipservice and not self.pipservice.setTarget(1):
 				self.pipservice.start()
-				self.currentPiP = ref.toString()
+				self.currentPiP = current_service.toString()
 			else:
 				self.pipservice = None
 				self.currentPiP = ""

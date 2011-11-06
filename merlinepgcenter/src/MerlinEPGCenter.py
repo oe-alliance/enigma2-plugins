@@ -676,7 +676,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			if cur == None or cur[1] == None or cur[2] == "":
 				return
 				
-			self.addAutotimerFromString(cur[5], addNewTimer = True)
+			self.addAutotimerFromString(cur[5], addNewTimer = True, begin = cur[3], end = cur[3] + cur[4], sRef = ServiceReference(cur[2]))
 			
 	# TimerEditList function (overwritten to update the timer button state)
 	def finishedAdd(self, answer):
@@ -1247,7 +1247,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			autotimer = None
 			
 	# Taken from AutoTimerEditor
-	def addAutotimerFromString(self, match, addNewTimer = False):
+	def addAutotimerFromString(self, match, addNewTimer = False, begin = None, end = None, sRef = None):
 		global autotimer
 		self.getAutoTimerInstance()
 		
@@ -1262,10 +1262,10 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			AutoTimerImporter,
 			newTimer,
 			match,		# Proposed Match
-			None,		# Proposed Begin
-			None,		# Proposed End
+			begin,		# Proposed Begin
+			end,		# Proposed End
 			None,		# Proposed Disabled
-			None,		# Proposed ServiceReference
+			sRef,		# Proposed ServiceReference
 			None,		# Proposed afterEvent
 			None,		# Proposed justplay
 			None,		# Proposed dirname, can we get anything useful here?
