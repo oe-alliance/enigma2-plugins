@@ -127,6 +127,7 @@ class PipServiceRelationSetup(Screen):
 			return
 		sel = self["entrylist"].l.getCurrentSelection()[0]
 		del self["entrylist"].configPSR[sel[0]]
+		saveRelationDict(self["entrylist"].configPSR)
 		self.updateList()
 
 class PipServiceRelationEntryList(MenuList):
