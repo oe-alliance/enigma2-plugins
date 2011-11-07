@@ -536,6 +536,7 @@ class EpgCenterList(GUIComponent):
 			x()
 			
 	def postWidgetCreate(self, instance):
+		instance.setWrapAround(True)
 		instance.setContent(self.l)
 		instance.selectionChanged.get().append(self.selectionChanged)
 
@@ -896,6 +897,7 @@ class EpgCenterTimerlist(TimerList):
 			x()
 			
 	def postWidgetCreate(self, instance):
+		instance.setWrapAround(True)
 		instance.setContent(self.l)
 		instance.selectionChanged.get().append(self.selectionChanged)
 
