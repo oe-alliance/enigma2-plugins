@@ -160,6 +160,7 @@ class WerbeZapper(Screen):
 				maxSize=False,
 				type=Input.NUMBER
 			)
+			return
 			
 		elif result == "startmonitoring":
 			self.startMonitoring()

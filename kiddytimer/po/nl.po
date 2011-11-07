@@ -1,0 +1,264 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: KiddyTimer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-17 23:23+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: EddyUnk <eddy.unknown@tiscali.nl>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: D:\\Dreambox\\Eclipse\\kiddytimer\\po\n"
+"X-Poedit-SearchPath-0: ..\\src\n"
+
+#: ..\src/KTglob.py:8
+msgid "Sunday"
+msgstr "Zondag"
+
+#: ..\src/KTglob.py:9
+msgid "Monday"
+msgstr "Maandag"
+
+#: ..\src/KTglob.py:10
+msgid "Tuesday"
+msgstr "Dinsdag"
+
+#: ..\src/KTglob.py:11
+msgid "Wednesday"
+msgstr "Woensdag"
+
+#: ..\src/KTglob.py:12
+msgid "Thursday"
+msgstr "Donderdag"
+
+#: ..\src/KTglob.py:13
+msgid "Friday"
+msgstr "Vrijdag"
+
+#: ..\src/KTglob.py:14
+msgid "Saturday"
+msgstr "Zaterdag"
+
+#: ..\src/KTmain.py:40
+#: ..\src/KTmain.py:42
+msgid "??:??"
+msgstr "??:??"
+
+#: ..\src/KTmain.py:172
+msgid ""
+"Cheat attempt detected. \n"
+"Box has not been shudown correctly. \n"
+"Remaining time was set to 0."
+msgstr ""
+"Fraude poging gedetecteerd. \n"
+"De Box is niet op de juiste manier uitgezet. \n"
+"Verblijvende tijd is naa 0 gezet."
+
+#: ..\src/KTmain.py:185
+msgid "Do you want to start the kiddytimer- plugin now."
+msgstr "Wil je de KiddyTimer- plugin nu starten."
+
+#: ..\src/KTmain.py:195
+msgid "Please enter the correct pin code"
+msgstr "Voer aub de juiste pin code in"
+
+#: ..\src/KTmain.py:195
+msgid "Enter pin code"
+msgstr "Voer pin code in"
+
+#: ..\src/KTmain.py:325
+msgid "Stop KiddyTimer (this session only)"
+msgstr "Stop de KiddyTimer (alleen deze sessie)"
+
+#: ..\src/KTmain.py:326
+msgid "Increase remaining time"
+msgstr "Verhoog resterende tijd"
+
+#: ..\src/KTmain.py:327
+msgid "Decrease remaining time"
+msgstr "Verminder resterende tijd"
+
+#: ..\src/KTmain.py:328
+msgid "Set remaining time"
+msgstr "Stel resterende tijd in"
+
+#: ..\src/KTmain.py:329
+msgid "Reset todays remaining time"
+msgstr "Reset de resterende tijd van vandaag"
+
+#: ..\src/KTmain.py:331
+msgid "Start KiddyTimer"
+msgstr "Start KiddyTimer"
+
+#: ..\src/KTmain.py:332
+#: ..\src/KTmain.py:336
+msgid "Enable KiddyTimer for x minutes"
+msgstr "Schakel de KiddyTimer in voor x minuten"
+
+#: ..\src/KTmain.py:333
+msgid "Disable KiddyTimer"
+msgstr "Schakel KiddyTimer uit"
+
+#: ..\src/KTmain.py:335
+msgid "Enable KiddyTimer"
+msgstr "Schakel KiddyTimer in"
+
+#: ..\src/KTmain.py:337
+msgid "Please select your KiddyTimer- option"
+msgstr "Selecteer aub je uw KiddyTimer-optie"
+
+#: ..\src/KTmain.py:353
+msgid "Invalid selection"
+msgstr "Ongeldige selectie"
+
+#: ..\src/KTpositioner.py:19
+#: ..\src/KTpositioner.py:21
+#: ..\src/KTsetup.py:147
+#: ..\src/KTsetup.py:149
+msgid "01:00"
+msgstr "01:00"
+
+#: ..\src/KTsetup.py:51
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#: ..\src/KTsetup.py:52
+msgid "PIN"
+msgstr "PIN"
+
+#: ..\src/KTsetup.py:53
+msgid "Don't monitor TV started before"
+msgstr "Monitor de TV niet voor"
+
+#: ..\src/KTsetup.py:54
+msgid "Don't monitor TV started after"
+msgstr "Monitor de TV niet na"
+
+#: ..\src/KTsetup.py:55
+msgid "Style of timer"
+msgstr "Timer stijl"
+
+#: ..\src/KTsetup.py:56
+msgid "Timeout for activation dialog"
+msgstr "Timeout voor activatie dialoog"
+
+#: ..\src/KTsetup.py:77
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr "Plugin: %(plugin)s , Versie: %(versie)s"
+
+#: ..\src/KTsetup.py:78
+#: ..\src/KTsetup.py:116
+#, python-format
+msgid "Remaining time: %s"
+msgstr "Resterende tijd: &s"
+
+#: ..\src/KTsetup.py:79
+#, python-format
+msgid "Last day started: %s"
+msgstr "Laatste dag gestart: %s"
+
+#: ..\src/KTsetup.py:82
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: ..\src/KTsetup.py:83
+msgid "Save"
+msgstr "Opslaan"
+
+#: ..\src/KTsetup.py:84
+msgid "Reset clock"
+msgstr "Reset klok"
+
+#: ..\src/KTsetup.py:85
+msgid "Move clock"
+msgstr "Verplaats klok"
+
+#: ..\src/KTsetup.py:102
+msgid "The pin code you entered is wrong."
+msgstr "De ingevoerde pin code was onjuist."
+
+#: ..\src/MovableScreen.py:17
+#: ..\src/MovableScreen.py:24
+msgid "Save values and close screen"
+msgstr "Waarden opslaan en scherm sluiten"
+
+#: ..\src/MovableScreen.py:18
+#: ..\src/MovableScreen.py:23
+msgid "Discard changes and close screen"
+msgstr "Veranderingen ongedaan maken en scherm sluiten"
+
+#: ..\src/MovableScreen.py:19
+msgid "Move screen to the left"
+msgstr "Verplaats scherm naar links"
+
+#: ..\src/MovableScreen.py:20
+msgid "Move screen to the right"
+msgstr "Verplaats scherm naar rechts"
+
+#: ..\src/MovableScreen.py:21
+msgid "Move screen up"
+msgstr "Verplaats scherm omhoog"
+
+#: ..\src/MovableScreen.py:22
+msgid "Move screen down"
+msgstr "Verplaats scherm omlaag"
+
+#: ..\src/MovableScreen.py:25
+msgid "Move screen to the upper left corner"
+msgstr "Verplaats scherm naar linker bovenhoek"
+
+#: ..\src/MovableScreen.py:26
+msgid "Center screen at the upper border"
+msgstr "Centreer scherm in de bovenste rand"
+
+#: ..\src/MovableScreen.py:27
+msgid "Move screen to the upper right corner"
+msgstr "Verplaats scherm naar rechter bovenhoek"
+
+#: ..\src/MovableScreen.py:28
+msgid "Move screen to the middle of the left border"
+msgstr "Verplaats scherm naar het midden van de linker rand"
+
+#: ..\src/MovableScreen.py:29
+msgid "Move screen to the center of your TV"
+msgstr "Verplaats scherm naar het midden van uw TV"
+
+#: ..\src/MovableScreen.py:30
+msgid "Move screen to the middle of the right border"
+msgstr "Verplaats scherm naar het midden van de rechter rand"
+
+#: ..\src/MovableScreen.py:31
+msgid "Move screen to the lower left corner"
+msgstr "Verplaat scherm naar linker onderhoek"
+
+#: ..\src/MovableScreen.py:32
+msgid "Center screen at the lower border"
+msgstr "Centreer scherm in de onderste rand"
+
+#: ..\src/MovableScreen.py:33
+msgid "Move screen to the lower right corner"
+msgstr "Verplaats scherm naar de rechter onderhoek"
+
+#: ..\src/MovableScreen.py:34
+msgid "Reset saved position"
+msgstr "Reset opgeslagen positie"
+
+#: ..\src/plugin.py:16
+msgid "Clock"
+msgstr "Klok"
+
+#: ..\src/plugin.py:16
+msgid "Smiley"
+msgstr "Smiley"
+
+#: ..\src/plugin.py:54
+#: ..\src/plugin.py:55
+msgid "KiddyTimer"
+msgstr "KiddyTimer"
+
+#: ..\src/plugin.py:55
+msgid "Allows to controls your kids' daily TV usage"
+msgstr "Laat u het dagelijkse TV-gebruik van uw kinderen controleren"
+
