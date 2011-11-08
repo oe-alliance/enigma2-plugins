@@ -12,15 +12,15 @@
 	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">
 	<link rel="shortcut icon" type="/web-data/image/x-icon" href="/web-data/img/favicon.ico">
 	
-	<!-- External libs
-	<script type="text/javascript" src="/web-data/lib/prototype-1.6.1.js"></script>
+
+	<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
 	<script type="text/javascript" src="/web-data/lib/scriptaculous.js?load=effects"></script>
 	<script type="text/javascript" src="/web-data/lib/curvycorners.js"></script>
 	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
-	 -->
- 
+
+ 	<!-- 
 	<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>
-	
+	 -->
 	<!-- userprefs Object -->
 	<script type="text/javascript" src="/web-data/userprefs.js"></script>
 		
@@ -30,6 +30,7 @@
 	<script type="text/javascript" src="/web-data/provider.js" ></script>
 	<script type="text/javascript" src="/web-data/handler.js" ></script>
 	<script type="text/javascript" src="/web-data/tools.js" ></script>
+	<script type="text/javascript" src="/web-data/core.js" ></script>
 	<script type="text/javascript" src="/web-data/timer.js" ></script>
 
 	<!-- Gears-->
@@ -89,14 +90,14 @@
 					<img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web">
 				</div>
 				<ul id="mainMenu">
-					<li><a href="#" onClick="switchMode('TV')">TeleVision</a></li>
-					<li><a href="#" onClick="switchMode('Radio')">Radio</a></li>
-					<li><a href="#" onClick="switchMode('Movies')">Movies</a></li>
-					<li><a href="#" onClick="switchMode('Timer')">Timer</a></li>
-					<li><a href="#" onClick="switchMode('BoxControl')">BoxControl</a></li>
-					<li><a href="#" onClick="switchMode('Extras')">Extras</a></li>
+					<li><a href="#" class="switchMode" data-mode="TV">TeleVision</a></li>
+					<li><a href="#" class="switchMode" data-mode="Radio">Radio</a></li>
+					<li><a href="#" class="switchMode" data-mode="Movies"">Movies</a></li>
+					<li><a href="#" class="switchMode" data-mode="Timer">Timer</a></li>
+					<li><a href="#" class="switchMode" data-mode="BoxControl">BoxControl</a></li>
+					<li><a href="#" class="switchMode" data-mode="Extras">Extras</a></li>
 					<li>
-						<a href="#" onClick="openWebTV();">
+						<a href="#" onClick="core.openWebTV();">
 							WebTV
 						</a></li>
 				</ul>
@@ -214,7 +215,7 @@
 		
 		setMaxHeight('contentMain');		
 		
-		init();
+		core.run();
 	</script>
 
 </body>

@@ -3,6 +3,9 @@ var AbstractContentHandler = Class.create({
 		this.tpl = tpl;
 		this.target = target;
 		this.onFinished = onFinished;
+		if(this.onFinished === undefined || this.onFinished == null){
+			this.onFinished = [];
+		}
 		this.eventsRegistered = false;
 		this.provider = null;
 		this.ajaxload = false;
@@ -32,7 +35,7 @@ var AbstractContentHandler = Class.create({
 //		TODO requestFinished actions
 	},
 	
-	//TODO insert renderTpl, processTpl & Co. here or somewhere else... (maybe a separate class?)
+	//TODO insert renderTpl, templateEngine.process & Co. here or somewhere else... (maybe a separate class?)
 	
 	/**
 	 * show
@@ -41,7 +44,7 @@ var AbstractContentHandler = Class.create({
 	 * Afterwards call this.finished()
 	 */
 	show : function(data){
-		processTpl(this.tpl, data, this.target, this.finished.bind(this));		
+		templateEngine.process(this.tpl, data, this.target, this.finished.bind(this));		
 	},
 	
 	/**
@@ -114,6 +117,41 @@ var AbstractContentHandler = Class.create({
 	}
 });
 
+var BouquetListHandler = Class.create(AbstractContentHandler, {
+	initialize: function($super, target){
+		$super('tplBouquetList', target);
+		this.provider = new BouquetListProvider(this.show.bind(this));	
+		this.ajaxload = false;
+		this.serviceController = null;
+		this.initServiceList = false;
+	},
+	
+	init: function(params, controller){
+		this.serviceController = controller;
+		this.initServiceList = true;
+		this.load(params);
+	},
+	
+	show : function(data){
+		if($(this.target) != null && $(this.target != undefined)){
+			templateEngine.process(this.tpl, data, this.target,  this.finished.bind(this));
+			if(this.initServiceList){
+				this.serviceController.load(decodeURIComponent(data.bouquets[0].servicereference));
+				this.initServiceList = false;
+			}
+		} else {
+			templateEngine.process(					
+					'tplBouquetsAndServices', 
+					null, 
+					'contentMain',
+					function(){
+						this.show(data);
+					}.bind(this)
+			);
+		}
+	},
+});
+
 var ServiceListHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplServiceList', target, [this.getNowNext.bind(this),this.getSubservices.bind(this)]);
@@ -154,42 +192,6 @@ var ServiceListHandler = Class.create(AbstractContentHandler, {
 		setTimeout(updateItemsLazy, 7000); //reload epg and subservices
 		setTimeout(updateItems, 3000);
 	},
-	
-	registerEvents : function(){
-		var parent = $(this.target);
-		
-		parent.on(
-				'click', 
-				'a.sListSLink', 
-				function(event, element){
-					this.zap(unescape(element.id));
-				}.bind(this)
-		);
-		
-		parent.on(
-				'click', 
-				'a.sListServiceEpg', 
-				function(event, element){
-					var ref = unescape( element.readAttribute('data-servicereference') );
-					
-					//TODO replace with EPG-Handler call
-					loadEPGByServiceReference( ref );
-				}.bind(this)
-		);
-		
-		parent.on('click', 'a.sListEPG',
-			function(event, element){
-				var target = $(element.readAttribute('data-target_id'));
-				
-				if(target.visible()){
-					target.hide();
-				} else {
-					target.show();
-				}
-			}
-		);
-		
-	}	
 });
 
 var EpgListHandler = Class.create(AbstractContentHandler,{
@@ -247,14 +249,8 @@ var ServiceListEpgHandler  = Class.create(AbstractContentHandler, {
 			var data = { epg : item, nownext: type };
 			var id = type + item.servicereference;
 	
-			if(templates.tplServiceListEPGItem !== undefined){
-				//TODO move templates.* maybe?!?
-				//TODO replace renderTpl
-				renderTpl(templates.tplServiceListEPGItem, data, id, true);
-			} else {
-				debug("[ServiceListEpgProvider.showItem] tplServiceListEPGItem N/A");
-			}
-			
+			templateEngine.process('tplServiceListEPGItem', data, id, true);
+
 			var element = $('tr' + id);
 			if(element !== null){
 				element.show();
@@ -285,7 +281,7 @@ var ServiceListSubserviceHandler  = Class.create(AbstractContentHandler, {
 			list.shift();
 			
 			var data = { subservices : list };
-			processTpl(this.tpl, data, id);			
+			templateEngine.process(this.tpl, data, id);			
 			parent.show();
 		}
 	}
@@ -332,7 +328,6 @@ var TimerListHandler  = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplTimerList', target);
 		this.provider = new TimerListProvider(this.show.bind(this));
-		
 		this.ajaxload = true;
 	}	
 });

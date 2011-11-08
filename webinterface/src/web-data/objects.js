@@ -1,6 +1,131 @@
 // $Header$
 // store all objects here
 
+var AjaxThing = Class.create({
+	/**
+	 * getUrl
+	 * creates a new Ajax.Request
+	 * Parameters:
+	 * @url - the url to fetch
+	 * @parms - an json object containing  {parameter : value} pairs for the request
+	 * @callback - function to call @ onSuccess;
+	 * @errorback - function to call @ onError;
+	 */
+	getUrl: function(url, parms, callback, errorback){
+		if (!window.google || !google.gears){ //no gears
+			try{
+				new Ajax.Request(url,
+						{
+							parameters: parms,
+							asynchronous: true,
+							method: 'POST',
+							requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
+							onException: function(o,e){ 
+									console.log(o); 
+									console.log(e);
+									throw(e);
+								}.bind(this),				
+							onSuccess: function (transport, json) {						
+								if(callback !== undefined){
+									callback(transport);
+								}
+							}.bind(this),
+							onFailure: function(transport){
+								if(errorback !== undefined){
+									errorback(transport);
+								}
+							}.bind(this)
+//							onComplete: this.requestFinished.bind(this)
+						});
+			} catch(e) {
+				debug('[AbstractContentProvider.getUrl] Exception: '+ e);
+			}
+		} else { //we're on gears!
+			try{
+				url = url + "?" + $H(parms).toQueryString();
+				
+				var request = google.gears.factory.create('beta.httprequest');
+				request.open('GET', url);
+	
+	
+				request.onreadystatechange = function(){				
+					if(request.readyState == 4){
+						if(request.status == 200){
+							if( callback !== undefined ){
+								callback(request);
+							}
+						} else {
+							this.errorback(request);
+						}
+					}
+				}.bind(this);
+				request.send();
+			} catch(e) {
+				debug('[AbstractContentProvider.getUrl] Exception: '+ e);
+			}
+		}
+	},
+});
+
+
+var TemplateEngine = Class.create(AjaxThing, {
+	initialize: function(){
+		this.templates = {};
+	},
+
+	cache: function(request, tplName){
+		debug("[TemplateEngine].cache caching template: " + tplName);
+		this.templates[tplName] = request.responseText;
+	},
+	
+	fetch: function(tplName, callback){
+		if(this.templates[tplName] === undefined) {
+			var url = URL.tpl+tplName+".htm";
+			
+			this.getUrl(
+					url, 
+					{},
+					function(transport){
+						this.cache(transport, tplName);
+						if(typeof(callback) == 'function'){
+							callback(this.templates[tplName]);
+						}
+					}.bind(this)
+			);
+		} else {
+			if(typeof(callback) == 'function'){
+				callback(this.templates[tplName]);
+			}
+		}
+	},
+	
+	render: function(tpl, data, domElement) {	
+		var result = tpl.process(data);
+	
+		try{
+			$(domElement).update( result );
+		}catch(ex){
+			//		debug("[renderTpl] exception: " + ex);
+		}
+	},
+	
+	onTemplateReady: function(tpl, data, domElement, callback){
+		this.render(tpl, data, domElement);
+		if(typeof(callback) == 'function') {
+			callback();
+		}
+	},
+	
+	process: function(tplName, data, domElement, callback){
+		this.fetch( tplName, 
+				function(tpl){
+					this.onTemplateReady(tpl, data, domElement, callback); 
+				}.bind(this) );
+	},
+});
+templateEngine = new TemplateEngine();
+
+
 //START class EPGList 
 
 function getNodeContent(xml, nodename, defaultString){

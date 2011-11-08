@@ -7,7 +7,7 @@
  * doing the handling of all events for that content (e.g. deleting a recording)
  */
 
-var AbstractContentProvider = Class.create({
+var AbstractContentProvider = Class.create(AjaxThing, {
 	/**
 	 * initialize
 	 * Default constructor
@@ -97,66 +97,6 @@ var AbstractContentProvider = Class.create({
 		}
 		
 		this.getUrl(this.url, parms, this.callback.bind(this), this.errorback.bind(this));
-	},
-	
-	/**
-	 * getUrl
-	 * creates a new Ajax.Request
-	 * Parameters:
-	 * @url - the url to fetch
-	 * @parms - an json object containing  {parameter : value} pairs for the request
-	 * @callback - function to call @ onSuccess;
-	 * @errorback - function to call @ onError;
-	 */
-	getUrl: function(url, parms, callback, errorback){
-		if (!window.google || !google.gears){ //no gears
-			try{
-				new Ajax.Request(url,
-						{
-							parameters: parms,
-							asynchronous: true,
-							method: 'POST',
-							requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
-							onException: function(o,e){ throw(e); },				
-							onSuccess: function (transport, json) {						
-								if(callback !== undefined){
-									callback(transport);
-								}
-							}.bind(this),
-							onFailure: function(transport){
-								if(errorback !== undefined){
-									errorback(transport);
-								}
-							}.bind(this)
-//							onComplete: this.requestFinished.bind(this)
-						});
-			} catch(e) {
-				debug('[AbstractContentProvider.getUrl] Exception: '+ e);
-			}
-		} else { //we're on gears!
-			try{
-				url = url + "?" + $H(parms).toQueryString();
-				
-				var request = google.gears.factory.create('beta.httprequest');
-				request.open('GET', url);
-	
-	
-				request.onreadystatechange = function(){				
-					if(request.readyState == 4){
-						if(request.status == 200){
-							if( callback !== undefined ){
-								callback(request);
-							}
-						} else {
-							this.errorback(request);
-						}
-					}
-				}.bind(this);
-				request.send();
-			} catch(e) {
-				debug('[AbstractContentProvider.getUrl] Exception: '+ e);
-			}
-		}
 	},
 	
 	registerEvents : function(){
@@ -249,10 +189,8 @@ var ServiceListProvider = Class.create(AbstractContentProvider, {
 	 * initialize
 	 * Parameters:
 	 * @target: the html target id
-	 * @epgp: Instance of ServiceListEpgProvider to show epgnow/next information
-	 * @subsp: Instance of ServiceListSubserviceProvider to show subservices 
 	 */
-	initialize: function($super, showFnc, epgp, subsp){
+	initialize: function($super, showFnc){
 		$super(URL.getservices, showFnc );
 	},
 	
@@ -263,6 +201,21 @@ var ServiceListProvider = Class.create(AbstractContentProvider, {
 	renderXML: function(xml){
 		var list = new ServiceList(xml).getArray();
 		return {services : list};	
+	}
+});
+
+/**
+ * BouquetListProvider
+ * ContentHandler for bouquet lists.
+ */
+var BouquetListProvider = Class.create(ServiceListProvider, {
+	/**
+	 * renderXML
+	 * See the description in AbstractContentProvider
+	 */
+	renderXML: function(xml){
+		var list = new ServiceList(xml).getArray();
+		return {bouquets : list};	
 	}
 });
 
