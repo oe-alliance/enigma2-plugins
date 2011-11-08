@@ -116,10 +116,8 @@ class AutoMount():
 
 	def CheckMountPoint(self, item, callback):
 		data = self.automounts[item]
-		print "[AutoMount.py] activeMounts:--->",self.activeMountsCounter
 		if not self.MountConsole:
 			self.MountConsole = Console()
-
 		self.command = None
 		path = os.path.join('/media/net', data['sharename'])
 		if self.activeMountsCounter == 0:
@@ -165,13 +163,9 @@ class AutoMount():
 				self.CheckMountPointFinished(None,None, [data, callback])
 
 	def CheckMountPointFinished(self, result, retval, extra_args):
-		print "[AutoMount.py] CheckMountPointFinished"
-		print "[AutoMount.py] result",result
-		print "[AutoMount.py] retval",retval
+		print "[AutoMount.py] CheckMountPointFinished",result,retval
 		(data, callback ) = extra_args
-		print "LEN",len(self.MountConsole.appContainers)
-		path = '/media/net/'+ data['sharename']
-		print "PATH im CheckMountPointFinished",path
+		path = os.path.join('/media/net', data['sharename'])
 		if os.path.exists(path):
 			if os.path.ismount(path):
 				if self.automounts.has_key(data['sharename']):
@@ -238,14 +232,12 @@ class AutoMount():
 		return None
 
 	def setMountsAttribute(self, mountpoint, attribute, value):
-		print "setting for mountpoint", mountpoint, "attribute", attribute, " to value", value
 		if self.automounts.has_key(mountpoint):
 			self.automounts[mountpoint][attribute] = value
 
 	def writeMountsConfig(self):
 		# Generate List in RAM
 		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
-
 		for sharename, sharedata in self.automounts.items():
 			if sharedata['mounttype'] == 'nfs':
 				list.append('<nfs>\n')
@@ -277,15 +269,10 @@ class AutoMount():
 		list.append('</mountmanager>\n')
 
 		# Try Saving to Flash
-		file = None
 		try:
-			file = open(XML_FSTAB, "w")
-			file.writelines(list)
+			open(XML_FSTAB, "w").writelines(list)
 		except Exception, e:
 			print "[AutoMount.py] Error Saving Mounts List:", e
-		finally:
-			if file is not None:
-				file.close()
 
 	def stopMountConsole(self):
 		if self.MountConsole is not None:
