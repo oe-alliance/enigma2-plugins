@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>3c5x9</author>
+                    <name>HTTPProxy</name>
+                    <packagename>enigma2-plugin-extensions-httpproxy</packagename>
+                    <shortdescription>use your Dreambox as Web proxy</shortdescription>
+                    <description>use your Dreambox as Web proxy.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_httpproxy.jpg" />
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-httpproxy" />
+	  </files>
+</default>

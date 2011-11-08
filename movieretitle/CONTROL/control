@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-movieretitle
+Version: 1.2.1-20081116
+Description: Change the filename, title, description and location of a movie
+Maintainer: Anders Holst <aho@sics.se>
+Depends: enigma2 (>= 2.6git20091014)

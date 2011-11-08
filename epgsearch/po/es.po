@@ -1,0 +1,74 @@
+# Spanish translations for enigma2-plugins package.
+# Copyright (C) 2009 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-10 13:04+0100\n"
+"PO-Revision-Date: 2009-02-10 13:35+0100\n"
+"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/EPGSearch.py:137
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../src/EPGSearch.py:175
+msgid "Channel Selection"
+msgstr "Selección canal"
+
+#: ../src/EPGSearch.py:52
+msgid "Enter text to search for"
+msgstr "Introduzca texto a buscar"
+
+#: ../src/EPGSearch.py:29
+msgid "History"
+msgstr "Historia"
+
+#: ../src/EPGSearch.py:58
+msgid "Import from EPG"
+msgstr "Importar desde el EPG"
+
+#: ../src/EPGSearch.py:57
+msgid "Import from Timer"
+msgstr "Importar desde la Programación"
+
+#: ../src/EPGSearch.py:28
+msgid "New Search"
+msgstr "Nueva búsqueda"
+
+#: ../src/EPGSearch.py:138
+msgid "OK"
+msgstr "OK"
+
+#: ../src/EPGSearch.py:202
+msgid "Search"
+msgstr "Buscar"
+
+#: ../src/plugin.py:45
+#: ../src/plugin.py:50
+#: ../src/plugin.py:56
+msgid "Search EPG"
+msgstr "Buscar EPG"
+
+msgid "search EPG..."
+msgstr "Buscar EPG..."
+
+msgid "search EPG"
+msgstr "Buscar EPG"
+
+#: ../src/EPGSearch.py:152
+msgid "Select a timer to search"
+msgstr "Seleccionar una programación a buscar"
+
+#: ../src/EPGSearch.py:87
+msgid "Select text to search for"
+msgstr "Seleccionar texto a buscar"
+

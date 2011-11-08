@@ -1,0 +1,175 @@
+﻿===========================================================
+FanControl2 by joergm6                           Help V.2.4
+Support forum: IHAD
+Acknowledgments: diddsen, _marv_, DreamKK
+                 Spaeleus(it), mimi74(fr), Bschaar(nl)
+===========================================================
+Sorry voor eventuele vertalingsfouten.
+
+   Functies
+   --------
+Controle van een 3pin of 4pin fan (PWM) afhankelijk van het
+gemiddelde van de 2 hoogst gemeten temperaturen.
+Geleidelijke regeling, want temperaturen schommelen niet te 
+snel en de CPU mag niet te veel belast worden.
+
+   Beveiligingsfuncties
+   --------------------
+Indien er gedurende 30min geen fansnelheid gemeten wordt, wordt 
+een defect verondersteld. Er verschijnt dan regelmatig een 
+geeigende melding op het scherm.
+Als de fan uitgeschakeld is in standby wordt de fan ingeschakeld 
+bij het overschrijden van de maximale temperatuur.
+Als de temperatuur dan meer dan 3C daalt, wordt de fan terug 
+uitgeschakeld. De fan draait de eerste 10 minuten met minimale
+snelheid. De standaard oververhittingsbeveiliging kan met 9C 
+verhoogd worden.
+Het kan worden ingesteld bij het afsluiten van de box, bij welke
+temperatuur en ventilator uitvalt.
+
+   Instellingen
+   ------------
+   Fan uit in Standby
+ja = fan wordt uitgeschakeld als de box in standby is.
+ja, behalve bij Opname of HDD = fan wordt uitgeschakeld in standby 
+als er geen opname loopt en de HDD in Idle-Mode is.
+
+   Min snelheid
+Bij een temperatuur "statische temperatuur" of lager wordt de 
+snelheid op deze waarde ingesteld.
+
+   Max snelheid
+Bij een temperatuur "eindtemperatuur" wordt deze snelheid ingesteld.
+
+   Statische temperatuur
+Tot deze temperatuur wordt de min snelheid ingesteld.
+
+   Eindtemperatuur
+Dit is de maximum temperatuur die mag optreden, is deze bereikt,
+wordt de max snelheid ingesteld.
+
+   Initiele, spanning en PWM
+Als deze waarden aangepast worden, wordt de regeling onmiddellijk 
+zo ingesteld. Nu kan kort de overeenkomende snelheid afgelezen worden.
+De regeling wordt weer actief,dus de waarde blijft slecht korte 
+tijd zo ingesteld.
+Deze waarden worden gebruikt als de box opgestart wordt of als de 
+fan uitgeschakeld was.
+  
+   Voor 3pin fantype
+Voor de regeling van de spanning van een 3-pin fan met tachometersignaal.
+Enkel de spanning wordt geregeld. PWM-instellingen hebben geen invloed.
+Stelt de initiele spanning in bij het opstarten van de box.
+Vanaf deze startsnelheid neemt de regeling over.
+
+   Voor 4pin fantype
+Voor de regeling van de PWM, 4-pin fan. In eerste instantie
+wordt via PWM geregeld. Indien het bereik overschreden wordt,
+en de fan het toelaat wordt eveneens de spanning geregeld.
+De waarde voor spanning is vereist. Geef de maximale waarde 
+voor de spanning in (voor DM500HD: 5).
+Maar ook een lagere spanning kan interessant zijn. Een lagere 
+spanning heeft een lagere max en min snelheid tot gevolg. 
+Zet de spanning zo laag mogelijk zodat het bereik voldoende
+is voor PWM. Er zijn fans die zelfs met PWM = 0 te snel draaien.
+Verlaag de spanning tot de gewenste minimale snelheidbereikt wordt.
+Hou de maximale snelheid eveneens in het oog.
+Stelt de initiele PWM in bij het opstarten van de box.
+Vanaf deze startsnelheid neemt de regeling over.
+
+   Voor fantype Controle uitgeschakeld
+De regeling is uitgeschakeld. De fan draait met de laatste 
+parameters verder. De fan wordt niet uitgeschakeld!
+
+   Controleren
+   -----------
+Deze functie probeert de minimale snelheid van de fan te 
+bepalen voor het opstarten van de fan, en de minimale snelheid 
+voor de fan stopt.
+Gelijkaardig worden de maximale snelheden bepaald.
+(OK) d.w.z. de waarden komen overeen met de instellingen
+(!!) d.w.z. de waarden komen NIET overeen. 
+Deze waarden zijn informatief en worden niet gebruikt voor de 
+regeling. Voor een 4Pin worden ook de waarden voor de regeling 
+buiten het bereik weergegeven.
+D.w.z. dat er buiten het bereik ook een spanningsregeling gebeurd.
+
+   Temperatuur Monitor
+   -------------------
+Met de "info knop" worden de individuele waarden van de sensoren 
+weergegeven.
+
+   Extra instellingen
+   ------------------
+Met de "Menu knop" kunnen extra instellingen ingegeven worden.
+Actie bij uitval Fan      [Melding weergeven]
+  Melding voor defecte fan, box uitschakelen of geen actie.
+Box uischakelen bij Temperatuur (C)	[65]
+  Bij het bereiken van de ingegeven temperatuur wordt de box 
+  uitgeschakeld (DeepStandby).  
+Oververhittingswaarde verhogen met (C) [0]
+  Als de fan uitgeschakeld is in standby wordt die ingeschakeld
+  bij een max temperatuur. Deze maximum temperatuur kan tot 
+  9C verhoogd worden.
+HDD-temp tijdens HDD-Standby-Mode uitlezen	[auto]
+  ja = HDD temperatuur uitlezen als HDD in standby is
+  nee = HDD temperatuur enkel uitlezen als HDD actief is
+  auto = bij opstarten van FC2 wordt 1 keer getest of de HDD
+         opstart, indien dit gebeurd wordt "nee" ingesteld
+  Nooit = geen uitlezing van de temperatuur
+DMM-fancontrol uitschakelen            [Nee]
+  Indien in de skins de temparatuur wordt weergegeven is 
+  de DMM-FanControl actief, deze regeld ook de fan. 
+  Er treden ongewenste regelingen op.
+  Aanbeveling: DMM-FanControl uitschakelen
+Monitor weergeven in extentie-menu
+  Monitor in extentie-menu (lang drukken blauwe toets) 
+Aantal WebIF log entries        [40]
+  Aantal gebeurtenissen worden in de WebIF weergegeven.
+  Instelmogelijkheid 40-999
+Loggingpad
+  Kies met "OK" het pad voor de logbestanden.
+  Data wordt enkel geschreven indien minimum 10MByte 
+  vrije ruimte beschikbaar is.
+Datalogging inschakelen
+  Elke minuut worden de gegevens geschreven in FC2data.csv.
+  Dit bestand kan rechtstreeks in Excel geopend worden. 
+  Indien het bestand niet bestaat wordt dit geschreven,
+  en de titelrij wordt toegevoegd. Ongeveer 4kBytes per uur
+Automatisch data verwijderen ouder dan (dagen)
+  Gegevens in de datalogging ouder dan deze instellinge 
+  worden automatisch verwijderd.
+  Uitvoering actie: dagelijks om 00:00 en bij het starten
+  van de box.
+Eventlogging inschakelen
+  Alle events worden geschreven in FC2events.txt.
+  Ongeveer 30kByte per uur
+
+   Web Interface
+   -------------
+URL: http://dreamboxip/fancontrol
+Weergave dan de actuele fan-instellingen en de laatste eventlogs.
+Elk uur worden de temperatuur en snelheid weergegeven.
+Met "FC2 Log" kunnen de logbestanden gedownload worden, en de 
+instellingen aangepast worden.
+"FC2 Chart" geeft een online-grafiek van de laatste 48 uur.  
+Hiervoor moet de datalogging ingeschakeld zijn.
+Opmerking: bij gebruik van Firefox kan het voorkomen dat
+de grafiek niet correct weergegeven wordt.  In dit geval is 
+een herladen (F5) van de pagina noodzakelijk.
+
+   Overige
+   -------
+Alle voor de fan belangrijke waarden worden als getal en
+staafdiagram weergegeven. Het staafdiagram is gebaseerd
+op de ingestelde parameters.
+
+FanControl2 is voorbereid voor verschillende talen.
+POT-bestand is in ipkg voor andere vertalingen.
+
+De instellingen worden met de E2-instellingen bewaard,
+en maken dus deel uit van de backup / restore functie.
+
+
+===========================================================
+

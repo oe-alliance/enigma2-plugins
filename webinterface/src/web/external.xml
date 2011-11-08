@@ -1,0 +1,9 @@
+<e2:screen name="ExternalWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2webifexternals><e2:element source="External" ><e2:convert type="web:ListFiller" >
+	&lt;e2webifexternal>
+		&lt;e2path><e2:item name="Path" />&lt;/e2path>
+		&lt;e2name><e2:item name="Name" filter="xml"/>&lt;/e2name>
+		&lt;e2externalversion><e2:item name="Version" filter="xml"/>&lt;/e2externalversion>
+	&lt;/e2webifexternal></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+</e2webifexternals>
+</e2:screen>

@@ -1,0 +1,6 @@
+Package: enigma2-plugin-systemplugins-networkbrowser
+Version: 1.0-20080529-r0
+Description: Networkbrowser and Network-Mountmanager
+Maintainer: Mladen Horvat <acid-burn@opendreambox.org>
+Homepage: http://www.dream-multimedia-tv.de/
+Depends: enigma2 (>= 2.6git20090926)

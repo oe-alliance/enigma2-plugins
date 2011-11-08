@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-tageditor
+Version: 1.1-20090216
+Description: Edit tags of movies, and in timers
+Maintainer: Anders Holst <aho@sics.se> and Moritz Venn <moritz.venn@freaque.net>
+Depends: enigma2 (>> 2.5git20081117)

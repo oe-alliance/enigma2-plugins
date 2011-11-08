@@ -1,0 +1,57 @@
+
+
+
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  +++++++++++++++++++++++++++++++++++++++++++++ CHANNEL SELECTOR +++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<screen flags="wfNoBorder" name="ChannelSelection" position="0,0" size="1024,576" title="Channel Selection">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,40" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,40" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,40" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,40" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,40" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,40" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,40" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,40" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,40" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget colorServiceDescription = "#FA9F43" colorEventProgressbar="#888888" colorEventProgressbarSelected="#fcc000" colorEventProgressbarBorder="#555555" colorEventProgressbarBorderSelected="grey" foregroundColorServiceNotAvail="#5a5a5a" itemHeight="28" name="list" position="50,100" scrollbarMode="showNever" serviceInfoFont="Regular;18" serviceNameFont="Replacement;20" serviceNumberFont="Replacement;20" size="600,450"/>
+		<widget font="Replacement;16" foregroundColor="secondFG" halign="center" position="620,50" render="Label" size="346,26" source="global.CurrentTime" transparent="1" zPosition="2">
+			<convert type="vConvClockToText">LocaleLang:%w %d %m</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;18" halign="left" position="660,125" render="Label" size="51,22" source="ServiceEvent" transparent="1" zPosition="2">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText"/>
+		</widget>
+		<widget borderColor="darkgrey" borderWidth="1" pixmap="Vali-XD/window/chan_p_bar2.png" position="715,130" render="Progress" size="100,11" source="ServiceEvent" zPosition="1">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;18" position="830,125" render="Label" size="120,22" source="ServiceEvent" transparent="1" zPosition="2">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText">InMinutes</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;16" position="660,165" render="Label" size="311,382" source="ServiceEvent" transparent="1" zPosition="2">
+			<convert type="EventName">ExtendedDescription</convert>
+		</widget>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="EPGSelection" position="0,0" size="1024,576" title="EPG Selection">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget font="Replacement;21" foregroundColor="#FCC000" halign="center" position="50,95" render="Label" size="925,22" source="Service" transparent="1" zPosition="3">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget itemHeight="28" name="list" position="50,120" scrollbarMode="showOnDemand" size="924,420"/>
+		<widget font="Replacement;19" foregroundColor="secondFG" halign="center" position="620,61" render="Label" size="346,26" source="global.CurrentTime" transparent="1" zPosition="2">
+			<convert type="vConvClockToText">LocaleLang:%w %d %m</convert>
+		</widget>
+	</screen>
+	
+	
+	

@@ -1,0 +1,21 @@
+<default>
+	  <prerequisites>
+                    <tag type="Communication" />
+                    <tag type="Network" />
+	  </prerequisites>
+          <info>
+                    <author>Reichi</author>
+                    <name>NCID Client</name>
+                    <packagename>enigma2-plugin-extensions-ncidclient</packagename>
+                    <shortdescription>Callmonitor for NCID-based call notification</shortdescription>
+                    <description>NCID Client shows incoming voice calls promoted by any NCID server (e.g. Vodafone Easybox) on your Dreambox.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_ncidclient.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-ncidclient" />
+		<file type="package" name="python-html" />
+		<file type="package" name="python-textutils" />
+		<file type="package" name="twisted-web" />
+	  </files>
+</default>

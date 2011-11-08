@@ -1,0 +1,19 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Morty</author>
+                    <name>Elektro Power Save</name>
+                    <packagename>enigma2-plugin-extensions-elektro</packagename>
+                    <shortdescription>Shuts down your Dreambox into Deep Standby (Power Save Mode)</shortdescription>
+                    <description>The Elektro Power Save Plugin puts the box from Standby to sleep mode (Deep Standby) at specified times.\n
+This only happens if the box is in standby and no recording is running or scheduled during the next 20 minutes.\n
+The box automatically wakes up for recordings or at the end of the specified sleep time. Hence you needn't wait for it to boot-up.
+		    </description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_elektro.jpg" />
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-elektro" />
+	  </files>
+</default>

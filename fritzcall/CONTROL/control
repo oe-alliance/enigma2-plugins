@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-fritzcall
+Version: 20090222
+Description: Show Incoming and Outgoing Calls on your TV Screen with a Fritz!Box
+Maintainer: Reichi <stephan@reichholf.net>
+Homepage: http://wiki.blue-panel.com/index.php/FritzCall
+Depends: enigma2 (>> 2.5git20081203), python-twisted-web, python-html, python-textutils

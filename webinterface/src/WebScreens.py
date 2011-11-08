@@ -1,6 +1,8 @@
 from enigma import eServiceReference
 from Screens.Screen import Screen
+from Tools.BoundFunction import boundFunction
 from WebComponents.Sources.RequestData import RequestData
+
 
 class WebScreen(Screen):
 	def __init__(self, session, request):
@@ -262,14 +264,24 @@ class WapWebScreen(WebScreen):
 		self["WAPdeleteOldOnSave"] = WAPfunctions(session, func=WAPfunctions.DELETEOLD)
 
 streamingScreens = []
+streamingEvents = []
 
 class StreamingWebScreen(WebScreen):
+	EVENT_START = 0
+	EVENT_END = 1
+	
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from Components.Sources.StreamService import StreamService
 		self["StreamService"] = StreamService(self.session.nav)
 		streamingScreens.append(self)
 		self.screenIndex = len(streamingScreens) - 1
+		self.stateChanged(StreamingWebScreen.EVENT_START)
+		self.onClose.append(boundFunction(self.stateChanged, self.EVENT_END))
+
+	def stateChanged(self, event):
+		for f in streamingEvents:
+			f(event, self)
 
 	def getRecordService(self):
 		if self.has_key("StreamService"):
@@ -381,3 +393,10 @@ class TPMWebScreen(WebScreen):
 		
 		from WebComponents.Sources.TPMChallenge import TPMChallenge
 		self["TPM"] = TPMChallenge()
+
+class ExternalWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+
+		from WebComponents.Sources.External import External
+		self["External"] = External()

@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-rsdownloader
+Version: 1.0-r0
+Description: Allows user to download files from rapidshare in the background
+Maintainer: Nabil Hanna <nabil1978@web.de>
+Homepage: http://www.lt-forums.org/ali
+Depends: enigma2 (>= 2.6git20090615), python-compression, python-twisted-web

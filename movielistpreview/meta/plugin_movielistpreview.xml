@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>AliAbdul</author>
+                    <name>Movielist Preview</name>
+                    <packagename>enigma2-plugin-extensions-movielistpreview</packagename>
+                    <shortdescription>Create preview pictures of your Movies</shortdescription>
+                    <description>Movielist Preview creates screenshots of recordings and shows them inside the movielist.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_movielistpreview_en.jpg" />	
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-movielistpreview" />
+	  </files>
+</default>

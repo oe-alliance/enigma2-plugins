@@ -1,0 +1,69 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - automatictimerlistcleanup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 03:11+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/automatictimerlistcleanup\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/automatictimerlistcleanup\n"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
+msgid "disabled"
+msgstr "disabilitato"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
+msgid "immediately after recording"
+msgstr "Immediatamente dopo la registrazione"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
+msgid "older than 1 day"
+msgstr "Più vecchi di 1 giorno"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
+msgid "older than 3 days"
+msgstr "Più vecchi di 3 giorni"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
+msgid "older than 1 week"
+msgstr "Più vecchi di 1 settimana"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
+msgid "older than 2 weeks"
+msgstr "Più vecchi di 2 settimane"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
+msgid "older than 4 weeks"
+msgstr "Più vecchi di 4 settimane"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:36
+msgid "older than 6 weeks"
+msgstr "Più vecchi di 6 settimane"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:49
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:122
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:125
+msgid "Automatic Timerlist Cleanup Setup"
+msgstr "Configurazione Automatic Timerlist Cleanup"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:53
+msgid "Cancel"
+msgstr "Annull."
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:54
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:56
+msgid "Cleanup timerlist-entries"
+msgstr "Ripulitura elenco timer"
+

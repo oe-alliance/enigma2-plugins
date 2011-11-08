@@ -1,0 +1,294 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 FTP Browser plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-22 23:36+0200\n"
+"PO-Revision-Date: 2009-09-23 20:11+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/FTPBrowser.py:682
+#, python-format
+msgid "%d kb/s"
+msgstr "%d kb/s"
+
+#: ../src/plugin.py:112
+msgid "A basic FTP client"
+msgstr "FTP istemci"
+
+#: ../src/FTPBrowser.py:488
+#, python-format
+msgid ""
+"A file with this name (%s) already exists locally.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Yerelde, %s isminde bir dosya zaten mevcut.\n"
+"Üzerine yazılmasını ister misiniz?"
+
+#: ../src/FTPBrowser.py:518
+#, python-format
+msgid ""
+"A file with this name (%s) already exists on the remote host.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Uzak sunucuda, %s isminde bir dosya zaten mevcut.\n"
+"Üzerine yazılmasını ister misiniz?"
+
+#: ../src/FTPBrowser.py:716
+msgid ""
+"A transfer is currently in progress.\n"
+"What do you want to do?"
+msgstr ""
+"Devam eden bir aktarım işlemi mevcut.\n"
+"Ne yapmak istiyorsunuz?"
+
+#: ../src/FTPBrowser.py:719
+msgid "Abort transfer"
+msgstr "Aktarımı iptal et"
+
+#: ../src/FTPServerManager.py:214
+msgid "Add"
+msgstr "Ekle"
+
+#: ../src/FTPServerManager.py:150
+msgid "Address:"
+msgstr "Adres:"
+
+#: ../src/FTPBrowser.py:407
+#, python-format
+msgid "Are you sure you want to delete %s?"
+msgstr "%s dosyasını silmek istediğinizden emin misiniz?"
+
+#: ../src/FTPBrowser.py:720
+msgid "Cancel"
+msgstr "Vazgeç"
+
+#: ../src/FTPServerManager.py:313
+msgid "Configuration saved."
+msgstr "Yapılandırma kaydedildi."
+
+#: ../src/plugin.py:101
+msgid "Connect to FTP..."
+msgstr "FTP sunucuya bağlanılıyor..."
+
+#: ../src/FTPBrowser.py:792
+msgid "Could not connect to ftp server!"
+msgstr "Ftp sunucuya bağlanılamıyor!"
+
+#: ../src/FTPBrowser.py:358
+#: ../src/FTPBrowser.py:370
+#, python-format
+msgid "Could not delete %s."
+msgstr "%s silinemiyor."
+
+#: ../src/FTPBrowser.py:439
+msgid "Could not obtain list of files."
+msgstr "Dosya listesi alınamıyor."
+
+#: ../src/FTPBrowser.py:306
+#: ../src/FTPBrowser.py:321
+#, python-format
+msgid "Could not rename %s."
+msgstr "%s dosyasının adı değiştirilemiyor."
+
+#: ../src/FTPBrowser.py:171
+#: ../src/FTPServerManager.py:213
+msgid "Delete"
+msgstr "Sil"
+
+#: ../src/FTPBrowser.py:251
+msgid "Download"
+msgstr "İndir"
+
+#: ../src/FTPBrowser.py:646
+msgid "Download finished."
+msgstr "İndirme tamamlandı."
+
+#: ../src/FTPBrowser.py:681
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr "TBS %d:%02d dk."
+
+#: ../src/FTPServerManager.py:215
+msgid "Edit"
+msgstr "Düzenle"
+
+#: ../src/FTPServerManager.py:146
+msgid "Enter URI"
+msgstr "URI Girin"
+
+#: ../src/FTPServerManager.py:186
+msgid "Enter URI of FTP Server:"
+msgstr "FTP sunucu için URI bilgisini girin:"
+
+#: ../src/FTPBrowser.py:342
+msgid "Enter new filename:"
+msgstr "Yeni dosya adını girin:"
+
+#: ../src/FTPBrowser.py:116
+#: ../src/FTPBrowser.py:120
+msgid "Error"
+msgstr "Hata"
+
+#: ../src/FTPBrowser.py:631
+#: ../src/FTPBrowser.py:655
+msgid "Error during download."
+msgstr "İndirilirken hata oluştu."
+
+#: ../src/FTPBrowser.py:169
+#: ../src/FTPServerManager.py:143
+msgid "Exit"
+msgstr "Çıkış"
+
+#: ../src/FTPQueueManager.py:67
+msgid "FTP Queue Manager"
+msgstr "FTP kuyruk yöneticisi"
+
+#: ../src/FTPServerManager.py:166
+msgid "FTP Server Editor"
+msgstr "FTP sunucu düzenleyici"
+
+#: ../src/FTPServerManager.py:235
+msgid "FTP Server Manager"
+msgstr "FTP sunucu yöneticisi"
+
+#: ../src/FTPBrowser.py:162
+msgid "Local"
+msgstr "Yerel"
+
+#: ../src/FTPServerManager.py:149
+msgid "Name:"
+msgstr "Adı:"
+
+#: ../src/FTPServerManager.py:144
+msgid "OK"
+msgstr "Tamam"
+
+#: ../src/FTPBrowser.py:93
+#: ../src/FTPBrowser.py:115
+msgid "Parent Directory"
+msgstr "Kök Klasör"
+
+#: ../src/FTPServerManager.py:152
+msgid "Password:"
+msgstr "Parola:"
+
+#: ../src/FTPServerManager.py:153
+msgid "Port:"
+msgstr "Port:"
+
+#: ../src/FTPBrowser.py:241
+msgid "Queue Manager"
+msgstr "Kuyruk yöneticisi"
+
+#: ../src/FTPBrowser.py:432
+msgid "Queue processed."
+msgstr "Kuyruk işleme alındı."
+
+#: ../src/FTPServerManager.py:259
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Bu kaydı silmek istiyor musunuz?\n"
+"Geri kurtarılamayabilir!"
+
+#: ../src/FTPBrowser.py:781
+msgid "Remote"
+msgstr "Uzak"
+
+#: ../src/FTPBrowser.py:164
+#: ../src/FTPBrowser.py:746
+#: ../src/FTPBrowser.py:789
+msgid "Remote (not connected)"
+msgstr "Uzak (bağlı değil)"
+
+#: ../src/FTPBrowser.py:356
+#: ../src/FTPBrowser.py:372
+#, python-format
+msgid "Removed %s."
+msgstr "%s kaldırıldı."
+
+#: ../src/FTPBrowser.py:382
+#: ../src/FTPBrowser.py:395
+msgid "Removing directories is not supported."
+msgstr "Klasör kaldırma özelliği desteklenmiyor."
+
+#: ../src/FTPBrowser.py:170
+msgid "Rename"
+msgstr "Ad değiştir "
+
+#: ../src/FTPBrowser.py:304
+#: ../src/FTPBrowser.py:323
+#, python-format
+msgid "Renamed %s to %s."
+msgstr "%s dosyasının adı %s olarak değiştirildi."
+
+#: ../src/FTPBrowser.py:718
+msgid "Run in Background"
+msgstr "Arkaplanda çalış"
+
+#: ../src/FTPServerManager.py:216
+msgid "Save"
+msgstr "Kaydet"
+
+#: ../src/FTPBrowser.py:185
+msgid "Select local file list"
+msgstr "Yerel için dosya listesini seç"
+
+#: ../src/FTPBrowser.py:186
+msgid "Select remote file list"
+msgstr "Uzak için dosya listesini seç"
+
+#: ../src/FTPBrowser.py:240
+msgid "Server Manager"
+msgstr "Sunucu yöneticisi"
+
+#: ../src/plugin.py:66
+msgid ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+msgstr ""
+"Etkin bir bağlantınız var.\n"
+"Kesmek istiyor musunuz?"
+
+#: ../src/FTPBrowser.py:556
+#: ../src/FTPBrowser.py:580
+msgid "There already is an active transfer."
+msgstr "Aktarım işlemi devam ediyor."
+
+#: ../src/FTPBrowser.py:172
+#: ../src/FTPBrowser.py:247
+msgid "Upload"
+msgstr "Yükle"
+
+#: ../src/FTPBrowser.py:622
+msgid "Upload finished."
+msgstr "Yükleme tamamlandı."
+
+#: ../src/FTPServerManager.py:151
+msgid "Username:"
+msgstr "Kullanıcı adı:"
+
+#: ../src/plugin.py:79
+msgid "Which server do you want to connect to?"
+msgstr "Hangi sunucuya bağlanmak istiyor sunuz?"
+
+#: ../src/FTPBrowser.py:179
+msgid "close"
+msgstr "Kapat"
+
+#: ../src/FTPBrowser.py:178
+msgid "enter directory/get file/put file"
+msgstr "Klasör içine gir/dosyayı getir/dosyayı gönder"
+
+#: ../src/FTPBrowser.py:180
+msgid "open menu"
+msgstr "Menü'yü aç"
+

@@ -1,10 +1,5 @@
 Package: enigma2-plugin-extensions-dyndnsclient
 Version: 1.0-20070123-r0
 Description: a client for www.dyndns.org
-Architecture: mipsel
-Section: extra
-Priority: optional
 Maintainer: 3c5x9 <3c5x9@gmx.net>
-Homepage: n/a
-Depends: enigma2(>1.0cvs20061201)
-Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
+Depends: enigma2 (>> 1.0git20061201)

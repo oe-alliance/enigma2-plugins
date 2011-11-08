@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+<Document>
+	<name>Sightseeing.kmz</name>
+	<Folder>
+		<name>Sightseeing</name>
+		<Placemark>
+			<name>Siegessäule</name>
+			<LookAt>
+				<longitude>13.3501</longitude>
+				<latitude>52.514553</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Speyer Cathedral</name>
+			<LookAt>
+				<longitude>8.441454</longitude>
+				<latitude>49.317504</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Lorelei Rock</name>
+			<LookAt>
+				<longitude>7.731134</longitude>
+				<latitude>50.14002</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Grand Canyon, USA</name>
+			<LookAt>
+				<longitude>-112.335374</longitude>
+				<latitude>36.227202</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Eiffelturm, Paris, Frankreich</name>
+			<LookAt>
+				<longitude>2.29426</longitude>
+				<latitude>48.858052</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>CN Tower, Kanada</name>
+			<LookAt>
+				<longitude>-79.387575</longitude>
+				<latitude>43.642574</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Hamburg, Deutschland</name>
+			<LookAt>
+				<longitude>9.994603</longitude>
+				<latitude>53.545719</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Kaiserpalast, Tokio, Japan</name>
+			<LookAt>
+				<longitude>139.752459</longitude>
+				<latitude>35.684753</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Christus der Erlöser, Rio, Brasilien</name>
+			<LookAt>
+				<longitude>-43.21044</longitude>
+				<latitude>-22.951736</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Las Vegas, USA</name>
+			<LookAt>
+				<longitude>-115.172887</longitude>
+				<latitude>36.100841</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Lissabon, Portugal</name>
+			<LookAt>
+				<longitude>-9.129564</longitude>
+				<latitude>38.763061</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Petersdom, Vatikanstadt</name>
+			<LookAt>
+				<longitude>12.454076</longitude>
+				<latitude>41.901828</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Basilika El Pilar, Spanien</name>
+			<LookAt>
+				<longitude>-0.878196</longitude>
+				<latitude>41.656896</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>London Eye, GB</name>
+			<LookAt>
+				<longitude>-0.119933</longitude>
+				<latitude>51.503277</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Olympiagelände Sydney, Australien</name>
+			<LookAt>
+				<longitude>151.066035</longitude>
+				<latitude>-33.847733</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Roter Platz, Moskau, Russland</name>
+			<LookAt>
+				<longitude>37.62018</longitude>
+				<latitude>55.753881</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Mount Saint Helens, USA</name>
+			<LookAt>
+				<longitude>-122.176504</longitude>
+				<latitude>46.209497</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Ehemaliger Republikpalast, Bagdad, Irak</name>
+			<LookAt>
+				<longitude>44.408542</longitude>
+				<latitude>33.304173</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Manhattan Island, USA</name>
+			<LookAt>
+				<longitude>-74.010987</longitude>
+				<latitude>40.707764</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Verbotene Stadt, Peking, China</name>
+			<LookAt>
+				<longitude>116.390506</longitude>
+				<latitude>39.916649</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Reichstag, Berlin, Deutschland</name>
+			<LookAt>
+				<longitude>13.37554</longitude>
+				<latitude>52.518299</latitude>
+			</LookAt>
+		</Placemark>
+		<Placemark>
+			<name>Google Campus, USA</name>
+			<LookAt>
+				<longitude>-122.083893</longitude>
+				<latitude>37.422066</latitude>
+			</LookAt>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

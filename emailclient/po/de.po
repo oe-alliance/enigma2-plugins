@@ -1,0 +1,237 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 EmailClient Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-18 08:15+0100\n"
+"PO-Revision-Date: 2009-11-28 18:34+0100\n"
+"Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
+"Language-Team: de <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, python-format
+msgid "%(name)s (%(user)s@%(server)s)"
+msgstr "%(name)s (%(user)s@%(server)s)"
+
+msgid "Accounts list"
+msgstr "Kontenliste"
+
+msgid "Attachments"
+msgstr "Anhänge"
+
+msgid "Bodys"
+msgstr "Textkörper"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Email Client"
+msgstr "Email Client"
+
+msgid "Email setup"
+msgstr "Email Einstellungen"
+
+#, python-format
+msgid ""
+"EmailClient for %(account)s:\n"
+"\n"
+"%(error)s"
+msgstr ""
+"EmailClient für %(account)s:\n"
+"\n"
+"%(error)s"
+
+msgid "From"
+msgstr "Von"
+
+msgid "IMAP Port"
+msgstr "IMAP Port"
+
+msgid "IMAP Server"
+msgstr "IMAP Server"
+
+#, python-format
+msgid ""
+"New mail arrived for account %s:\n"
+"\n"
+msgstr ""
+"Neue Nachricht für %s ist angekommen:\n"
+"\n"
+
+#, python-format
+msgid "Really delete account %s?"
+msgstr "Konto '%s' wirklich löschen?"
+
+msgid "Subject"
+msgstr "Betreff"
+
+#, python-format
+msgid ""
+"[EmailAccount] %(name)s: _cbCapabilities:\n"
+"####################################################################################################\n"
+"# If you have problems to log into your imap-server, please send me the "
+"output of the following line\n"
+"# cbCapabilities: %(capa)s\n"
+"####################################################################################################\n"
+msgstr ""
+"[EmailAccount] %(name)s: _cbCapabilities:\n"
+"####################################################################################################\n"
+"# Bei Problemen sich am Server anzumelden, bitte die folgende Zeile "
+"schicken\n"
+"# cbCapabilities: %(capa)s\n"
+"####################################################################################################\n"
+
+#, python-format
+msgid "account %s is not connected"
+msgstr "Konto %s ist nicht verbunden"
+
+msgid "account name"
+msgstr "Kontoname"
+
+msgid "account not connected"
+msgstr "Konto nicht verbunden"
+
+msgid "add"
+msgstr "Hinzufügen"
+
+msgid "cancel"
+msgstr "Abbruch"
+
+msgid "cannot access inbox"
+msgstr "Kein Zugriff auf INBOX"
+
+msgid "cannot get headers of new messages"
+msgstr "Kann Header der neuen Nachrichten nicht lesen"
+
+msgid "cannot get list of new messages"
+msgstr "Kann Liste neuer Nachrichten nicht bekommen"
+
+msgid "connection failed - retrying"
+msgstr "Verbindung fehlgeschlage - neuer Versuch"
+
+msgid "debug"
+msgstr "Debug"
+
+msgid "delete"
+msgstr "Löschen"
+
+msgid "display connection errors"
+msgstr "Verbindungsfehler anzeigen"
+
+msgid "display timeout (seconds)"
+msgstr "Anzeige-Timeout (in Sekunden)"
+
+msgid "edit"
+msgstr "Bearbeiten"
+
+msgid "empty values - retry"
+msgstr "Leere Felder, neuer Versuch"
+
+#, python-format
+msgid ""
+"error logging %(who)s in:\n"
+"%(failure)s"
+msgstr ""
+"Fehler bei Anmeldung von %(who)s:\n"
+"%(failure)s"
+
+msgid "failed to load message"
+msgstr "Konnte Nachricht nicht laden"
+
+msgid "getting message ..."
+msgstr "Hole Nachricht ..."
+
+#, python-format
+msgid "have %d messages"
+msgstr "%d Nachrichten"
+
+msgid "have no messages"
+msgstr "Keine Nachrichten"
+
+msgid "headers loaded, now parsing ..."
+msgstr "Header geladen, analysiere diese nun ..."
+
+#, python-format
+msgid "importing configurations from %s"
+msgstr "Importiere Konfigurationen von %s"
+
+msgid "leave unread"
+msgstr "Ungelesen lassen"
+
+msgid "list all mailboxes"
+msgstr "Anzeige aller Mailboxen"
+
+msgid "loading headers ..."
+msgstr "Lade Header ..."
+
+msgid "mail check interval (minutes)"
+msgstr "Mailcheck-Intervall"
+
+msgid "maximum mail size to fetch"
+msgstr "Hole nur Nachrichten bis zur Größe"
+
+msgid "message too large"
+msgstr "Nachricht zu groß"
+
+msgid "no account selected"
+msgstr "Kein Konto ausgewählt"
+
+msgid "no date"
+msgstr "kein Datum"
+
+msgid "no filename"
+msgstr "kein Dateiname"
+
+msgid "no from"
+msgstr "kein Absender"
+
+msgid "no mailbox?!?!"
+msgstr "keine Mailbox?!?!"
+
+msgid "no sender"
+msgstr "kein Sender"
+
+msgid "no subject"
+msgstr "kein Betreff"
+
+msgid "ok"
+msgstr "OK"
+
+msgid "parsing message ..."
+msgstr "Analysiere Nachricht ..."
+
+msgid "password"
+msgstr "Passwort"
+
+msgid "really delete mail?"
+msgstr "Nachricht wirklich löschen?"
+
+msgid "really undelete mail?"
+msgstr "Nachricht wiederherstellen?"
+
+msgid "remove"
+msgstr "Löschen"
+
+msgid "select Attachment"
+msgstr "Wähle Anhang"
+
+msgid "select Body"
+msgstr "Wähle Textteil"
+
+msgid "show deleted entries"
+msgstr "Anzeige gelöschter Mails"
+
+msgid "undelete"
+msgstr "Löschen rückgängig"
+
+msgid "user name"
+msgstr "Benutzername"
+
+msgid "view Emails via IMAP4"
+msgstr "Lesen von Emails via IMAP4"

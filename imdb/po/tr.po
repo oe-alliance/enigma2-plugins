@@ -1,0 +1,137 @@
+# Copyright (C) 2009 THE enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 IMDb Plugin Turkish locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-28 23:41+0200\n"
+"PO-Revision-Date: 2009-09-22 13:17+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/plugin.py:464
+msgid " as "
+msgstr " : "
+
+#: ../src/plugin.py:257
+msgid "Ambiguous results"
+msgstr "Muhtemel eşleşen başlıklar"
+
+#: ../src/plugin.py:466
+msgid "Cast: "
+msgstr "Oyuncular: "
+
+#: ../src/plugin.py:41
+msgid "Channel Selection"
+msgstr "Kanal Seçimi"
+
+#: ../src/plugin.py:339
+msgid "Could't get Eventname"
+msgstr "Program adı alınamıyor"
+
+#: ../src/plugin.py:262
+#: ../src/plugin.py:419
+msgid "Details"
+msgstr "Detaylar"
+
+#: ../src/plugin.py:474
+#, python-format
+msgid "Downloading Movie Poster: %s..."
+msgstr "%s posteri indiriliyor."
+
+#: ../src/plugin.py:148
+msgid "Exit"
+msgstr "Çıkış"
+
+#: ../src/plugin.py:493
+msgid "Extra Info"
+msgstr "Detay bilgi"
+
+#: ../src/plugin.py:420
+#: ../src/plugin.py:499
+msgid "IMDb Details parsed"
+msgstr "IMDb detayları ayrıştırıldı"
+
+#: ../src/plugin.py:375
+msgid "IMDb Download completed"
+msgstr "IMDb indirmesi tamamlandı"
+
+#: ../src/plugin.py:343
+msgid "IMDb Download failed"
+msgstr "IMDb indirmesi tamamlanamadı!"
+
+#: ../src/plugin.py:528
+msgid "IMDb Plugin"
+msgstr "IMDb Eklentisi"
+
+#: ../src/plugin.py:409
+msgid "IMDb Re-Download completed"
+msgstr "IMDb yeniden indirme tamamlandı"
+
+#: ../src/plugin.py:406
+msgid "IMDb query failed!"
+msgstr "IMDb sorgusunda hata oluştu."
+
+#: ../src/plugin.py:70
+msgid "Lookup"
+msgstr "Sorgula"
+
+#: ../src/plugin.py:393
+#: ../src/plugin.py:394
+msgid "No IMDb match."
+msgstr "IMDb eşleşmesi bulunamadı."
+
+#: ../src/plugin.py:468
+msgid "No cast list found in the database."
+msgstr "Oyuncu listesi veritabanında bulunamadı."
+
+#: ../src/plugin.py:417
+msgid "No details found."
+msgstr "Detay bilgisi bulunamadı."
+
+#: ../src/plugin.py:258
+msgid "Please select the matching entry"
+msgstr "Lütfen aradığınız başlığı seçin"
+
+#: ../src/plugin.py:332
+#, python-format
+msgid "Query IMDb: %s..."
+msgstr "%s IMDb'de sorgulanıyor..."
+
+#: ../src/plugin.py:540
+#: ../src/plugin.py:545
+#: ../src/plugin.py:552
+msgid "Query details from the Internet Movie Database"
+msgstr "Film detaylarını imdb.com'dan sorgulayın"
+
+#: ../src/plugin.py:273
+#: ../src/plugin.py:399
+#, python-format
+msgid "Re-Query IMDb: %s..."
+msgstr "%s IMDb'de yeniden sorgulanıyor..."
+
+#: ../src/plugin.py:138
+msgid "The Internet Movie Database"
+msgstr "Internet Film Veritabanı (imdb.com)"
+
+#: ../src/plugin.py:261
+msgid "Title Menu"
+msgstr "Filmler"
+
+#: ../src/plugin.py:449
+msgid "no user rating yet"
+msgstr "puan verilmemiş"
+
+#~ msgid "IMDb Details"
+#~ msgstr "IMDb Ayrıntıları"
+#~ msgid "User Rating"
+#~ msgstr "Puan"
+

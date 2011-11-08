@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>AliAbdul</author>
+                    <name>Mosaic</name>
+                    <packagename>enigma2-plugin-extensions-mosaic</packagename>
+                    <shortdescription>Preview screenshots of running tv shows</shortdescription>
+                    <description>Preview screenshots of running tv shows.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_mosaic.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-mosaic" />
+	  </files>
+</default>

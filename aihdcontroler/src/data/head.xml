@@ -1,0 +1,28 @@
+<skin>
+	<!--  Skin:  Ai.HD   by Vali (c)2009-2010  -->
+	<!--  This skin is a Freeware. Everyone can modify and use it in other images.    -->
+	<!--  BUT DO NOT REMOVE OR CHANGE THE SECOND LINE !!!    -->
+  
+  
+  
+  <!--  ##### Head ##### -->
+	<output id="0">
+		<resolution bpp="32" xres="1280" yres="720"/>
+	</output>
+	
+	<fonts>
+		<font filename="/usr/share/enigma2/Ai.HD/hd.ttf" name="Regular" replacement="1" scale="100"/>
+		<font filename="/usr/share/enigma2/Ai.HD/goodtime.ttf" name="Crs" scale="100"/>
+		<font filename="lcd.ttf" name="LCD" scale="100"/>
+		<font filename="tuxtxt.ttf" name="Console" scale="100"/>
+	</fonts>
+	
+	<subtitles>
+		<sub font="Regular;32" name="Subtitle_TTX" shadowColor="#30101010" shadowOffset="2,2"/>
+		<sub font="Regular;30" foregroundColor="#DCDCDC" name="Subtitle_Regular" shadowColor="#30101010" shadowOffset="2,2"/>
+		<sub font="Regular;32" foregroundColor="#FCC000" name="Subtitle_Bold" shadowColor="#30101010" shadowOffset="2,2"/>
+		<sub font="Regular;30" foregroundColor="#FCAAAA" name="Subtitle_Italic" shadowColor="#30101010" shadowOffset="2,2"/>
+	</subtitles>
+	
+	
+	

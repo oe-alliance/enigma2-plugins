@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - porncenter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-12-29 13:38+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/PornCenter\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/PornCenter\n"
+
+#: /home/dario/Plugins/PornCenter/plugin.py:48
+#: /home/dario/Plugins/PornCenter/plugin.py:57
+#: /home/dario/Plugins/PornCenter/ChangedMoviePlayer.py:28
+msgid "Porn Center"
+msgstr "Porn Center"
+
+#: /home/dario/Plugins/PornCenter/plugin.py:49
+msgid "Adult streaming plugins for dm800/dm8000"
+msgstr "Plugin di streaming per adulti (dm800/dm8000)"
+
+#: /home/dario/Plugins/PornCenter/plugin.py:64
+msgid "Name:"
+msgstr "Nome:"
+
+#: /home/dario/Plugins/PornCenter/plugin.py:65
+msgid "Description:"
+msgstr "Descrizione:"
+
+#: /home/dario/Plugins/PornCenter/plugin.py:162
+msgid "Error while getting video url!"
+msgstr "Errore nell'ottenimento url video!"
+
+#: /home/dario/Plugins/PornCenter/ChangedMoviePlayer.py:16
+msgid "Stop playing this movie?"
+msgstr "Arrestare la riproduzione?"
+

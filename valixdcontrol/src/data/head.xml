@@ -1,0 +1,40 @@
+<skin>
+  <!--  Skin:  Vali-XD   by Vali (c)2009-2010     -->
+  <!--  This skin is a Freeware. Everyone can modify and use it in other images.    -->
+  <!--  BUT DO NOT REMOVE OR CHANGE THE SECOND LINE !!!    -->
+
+
+	
+	<!--  ##### Head ##### -->
+	<output id="0">
+		<resolution bpp="32" xres="1024" yres="576"/>
+	</output>
+	
+	<fonts>
+		<font filename="/usr/share/enigma2/Vali-XD/fonts/valis_E2.ttf" name="Regular" scale="98"/>
+		<font filename="/usr/share/enigma2/Vali-XD/fonts/gtks.ttf" name="OLED" scale="98"/>
+		<font filename="/usr/share/enigma2/Vali-XD/fonts/ks.ttf" name="Replacement" scale="100" replacement="1"/>
+		<font filename="lcd.ttf" name="LCD" scale="100"/>
+		<font filename="tuxtxt.ttf" name="Console" scale="100"/>
+	</fonts>
+	
+	
+	
+	<!--  ##### Volume ##### -->
+	<screen flags="wfNoBorder" name="Volume" position="40,30" size="200,35" title="Volume">
+		<ePixmap pixmap="Vali-XD/infobar/volumeslider.png" position="0,0" size="200,35" zPosition="2"/>
+		<widget name="Volume" pixmap="Vali-XD/infobar/volumeslider_bar.png" position="37,10" size="158,15" transparent="1" zPosition="3"/>
+		<widget backgroundColor="#444444" font="Regular;18" foregroundColor="#f0f0f0" render="vRendVolumeText" source="global.CurrentTime" position="7,7" size="30,20" transparent="1" zPosition="4"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="Mute" position="40,30" size="45,45" title="Mute" zPosition="10">
+		<ePixmap pixmap="Vali-XD/infobar/mute.png" position="0,0" size="45,45"/>
+	</screen>
+	
+
+
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  +++++++++++++++++++++++++++++++++++++++++++++ SKIN +++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	
+

@@ -1,0 +1,82 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PornCenter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-07 13:12+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: AliAbdul <aliabdul1978@hotmail.de>\n"
+"Language-Team: AliAbdul <aliabdul1978@hotmail.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src\n"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:54
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:108
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:171
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:189
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:237
+msgid "Porn Center"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:55
+msgid "Adult streaming plugins for dm800/dm8000"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:58
+msgid "delete"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:58
+msgid "keep on device"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:58
+msgid "ask me"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:120
+#, python-format
+msgid "Downloading movie: %s"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:159
+msgid "Stop playing this movie?"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:194
+msgid "Select"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:252
+msgid "Name:"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:253
+msgid "Description:"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:254
+msgid "Buffer:"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:255
+msgid "Buffer device:"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:256
+msgid "Buffer file handling:"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:381
+msgid "Error while getting video url!"
+msgstr ""
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:394
+msgid "Delete this movie?"
+msgstr ""
+

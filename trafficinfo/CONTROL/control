@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-trafficinfo
+Version: 1.1
+Description: Show German traffic jams
+Maintainer: 3c5x9 <3c5x9@gmx.net>
+Depends: enigma2 (>> 1.0git20070908), python-twisted-web

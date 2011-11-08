@@ -1,0 +1,18 @@
+<default>
+	  <prerequisites>
+                    <tag type="Communication" />
+                    <tag type="Software" />
+	  </prerequisites>
+          <info>
+                    <author>Luke_s</author>
+                    <name>dreamIRC</name>
+                    <packagename>enigma2-plugin-extensions-dreamirc</packagename>
+                    <shortdescription>IRC Client for Enigma2</shortdescription>
+                    <description>Simple IRC GroupChat client for e2 #dm8000-vip channel</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_dreamirc.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-dreamirc" />
+	  </files>
+</default>

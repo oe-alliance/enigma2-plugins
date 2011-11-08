@@ -1,0 +1,261 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: KiddyTimer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-17 23:23+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Tode <sagichnet@gmx.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: D:\\Dreambox\\Eclipse\\kiddytimer\\po\n"
+"X-Poedit-SearchPath-0: ..\\src\n"
+
+#: ..\src/KTglob.py:8
+msgid "Sunday"
+msgstr ""
+
+#: ..\src/KTglob.py:9
+msgid "Monday"
+msgstr ""
+
+#: ..\src/KTglob.py:10
+msgid "Tuesday"
+msgstr ""
+
+#: ..\src/KTglob.py:11
+msgid "Wednesday"
+msgstr ""
+
+#: ..\src/KTglob.py:12
+msgid "Thursday"
+msgstr ""
+
+#: ..\src/KTglob.py:13
+msgid "Friday"
+msgstr ""
+
+#: ..\src/KTglob.py:14
+msgid "Saturday"
+msgstr ""
+
+#: ..\src/KTmain.py:40
+#: ..\src/KTmain.py:42
+msgid "??:??"
+msgstr ""
+
+#: ..\src/KTmain.py:172
+msgid ""
+"Cheat attempt detected. \n"
+"Box has not been shudown correctly. \n"
+"Remaining time was set to 0."
+msgstr ""
+
+#: ..\src/KTmain.py:185
+msgid "Do you want to start the kiddytimer- plugin now."
+msgstr ""
+
+#: ..\src/KTmain.py:195
+msgid "Please enter the correct pin code"
+msgstr ""
+
+#: ..\src/KTmain.py:195
+msgid "Enter pin code"
+msgstr ""
+
+#: ..\src/KTmain.py:325
+msgid "Stop KiddyTimer (this session only)"
+msgstr ""
+
+#: ..\src/KTmain.py:326
+msgid "Increase remaining time"
+msgstr ""
+
+#: ..\src/KTmain.py:327
+msgid "Decrease remaining time"
+msgstr ""
+
+#: ..\src/KTmain.py:328
+msgid "Set remaining time"
+msgstr ""
+
+#: ..\src/KTmain.py:329
+msgid "Reset todays remaining time"
+msgstr ""
+
+#: ..\src/KTmain.py:331
+msgid "Start KiddyTimer"
+msgstr ""
+
+#: ..\src/KTmain.py:332
+#: ..\src/KTmain.py:336
+msgid "Enable KiddyTimer for x minutes"
+msgstr ""
+
+#: ..\src/KTmain.py:333
+msgid "Disable KiddyTimer"
+msgstr ""
+
+#: ..\src/KTmain.py:335
+msgid "Enable KiddyTimer"
+msgstr ""
+
+#: ..\src/KTmain.py:337
+msgid "Please select your KiddyTimer- option"
+msgstr ""
+
+#: ..\src/KTmain.py:353
+msgid "Invalid selection"
+msgstr ""
+
+#: ..\src/KTpositioner.py:19
+#: ..\src/KTpositioner.py:21
+#: ..\src/KTsetup.py:147
+#: ..\src/KTsetup.py:149
+msgid "01:00"
+msgstr ""
+
+#: ..\src/KTsetup.py:51
+msgid "Enabled"
+msgstr ""
+
+#: ..\src/KTsetup.py:52
+msgid "PIN"
+msgstr ""
+
+#: ..\src/KTsetup.py:53
+msgid "Don't monitor TV started before"
+msgstr ""
+
+#: ..\src/KTsetup.py:54
+msgid "Don't monitor TV started after"
+msgstr ""
+
+#: ..\src/KTsetup.py:55
+msgid "Style of timer"
+msgstr ""
+
+#: ..\src/KTsetup.py:56
+msgid "Timeout for activation dialog"
+msgstr ""
+
+#: ..\src/KTsetup.py:77
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr ""
+
+#: ..\src/KTsetup.py:78
+#: ..\src/KTsetup.py:116
+#, python-format
+msgid "Remaining time: %s"
+msgstr ""
+
+#: ..\src/KTsetup.py:79
+#, python-format
+msgid "Last day started: %s"
+msgstr ""
+
+#: ..\src/KTsetup.py:82
+msgid "Cancel"
+msgstr ""
+
+#: ..\src/KTsetup.py:83
+msgid "Save"
+msgstr ""
+
+#: ..\src/KTsetup.py:84
+msgid "Reset clock"
+msgstr ""
+
+#: ..\src/KTsetup.py:85
+msgid "Move clock"
+msgstr ""
+
+#: ..\src/KTsetup.py:102
+msgid "The pin code you entered is wrong."
+msgstr ""
+
+#: ..\src/MovableScreen.py:17
+#: ..\src/MovableScreen.py:24
+msgid "Save values and close screen"
+msgstr ""
+
+#: ..\src/MovableScreen.py:18
+#: ..\src/MovableScreen.py:23
+msgid "Discard changes and close screen"
+msgstr ""
+
+#: ..\src/MovableScreen.py:19
+msgid "Move screen to the left"
+msgstr ""
+
+#: ..\src/MovableScreen.py:20
+msgid "Move screen to the right"
+msgstr ""
+
+#: ..\src/MovableScreen.py:21
+msgid "Move screen up"
+msgstr ""
+
+#: ..\src/MovableScreen.py:22
+msgid "Move screen down"
+msgstr ""
+
+#: ..\src/MovableScreen.py:25
+msgid "Move screen to the upper left corner"
+msgstr ""
+
+#: ..\src/MovableScreen.py:26
+msgid "Center screen at the upper border"
+msgstr ""
+
+#: ..\src/MovableScreen.py:27
+msgid "Move screen to the upper right corner"
+msgstr ""
+
+#: ..\src/MovableScreen.py:28
+msgid "Move screen to the middle of the left border"
+msgstr ""
+
+#: ..\src/MovableScreen.py:29
+msgid "Move screen to the center of your TV"
+msgstr ""
+
+#: ..\src/MovableScreen.py:30
+msgid "Move screen to the middle of the right border"
+msgstr ""
+
+#: ..\src/MovableScreen.py:31
+msgid "Move screen to the lower left corner"
+msgstr ""
+
+#: ..\src/MovableScreen.py:32
+msgid "Center screen at the lower border"
+msgstr ""
+
+#: ..\src/MovableScreen.py:33
+msgid "Move screen to the lower right corner"
+msgstr ""
+
+#: ..\src/MovableScreen.py:34
+msgid "Reset saved position"
+msgstr ""
+
+#: ..\src/plugin.py:16
+msgid "Clock"
+msgstr ""
+
+#: ..\src/plugin.py:16
+msgid "Smiley"
+msgstr ""
+
+#: ..\src/plugin.py:54
+#: ..\src/plugin.py:55
+msgid "KiddyTimer"
+msgstr ""
+
+#: ..\src/plugin.py:55
+msgid "Allows to controls your kids' daily TV usage"
+msgstr ""
+

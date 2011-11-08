@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>3c5x9</author>
+                    <name>Filebrowser</name>
+                    <packagename>enigma2-plugin-extensions-filebrowser</packagename>
+                    <shortdescription>Manage local files</shortdescription>
+                    <description>Copy, rename, delete, move local files on your Dreambox.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_filebrowser.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-filebrowser" />
+	  </files>
+</default>

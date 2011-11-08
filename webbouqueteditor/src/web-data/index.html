@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+	
+	<title>Dreambox BouquetEditor</title>
+	
+	<link href="/bouqueteditor/style.css" type="text/css" rel="stylesheet">
+	<link rel="shortcut icon" type="/web-data/image/x-icon" href="/web-data/img/favicon.ico">
+
+	<!-- External Libraries - use the minified lib-collection of the standard webif -->
+	<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>	
+
+<!--
+	<script type="text/javascript" src="/web-data/lib/prototype-1.6.1.js"></script>
+	<script type="text/javascript" src="/bouqueteditor/scriptaculous-js-1.8.3/src/scriptaculous.js"></script>
+	<script type="text/javascript" src="/web-data/lib/curvycorners.js"></script>
+	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
+-->
+
+	<!-- userprefs Object -->
+	<script type="text/javascript" src="/web-data/userprefs.js"></script>
+		
+	<!-- webif stuff //-->
+	<script type="text/javascript" src="/web-data/objects.js" ></script>
+	<script type="text/javascript" src="/web-data/statics.js" ></script>
+	<script type="text/javascript" src="/web-data/tools.js" ></script> 
+	
+	<!-- bouqueteditor stuff -->
+	<script type="text/javascript" src="/bouqueteditor/bouqueteditor.js" ></script>
+	
+</head>
+<body>
+	<div id="container">
+
+		<div id="banner" class="roundBorder" style="height: 40px; margin-bottom: 10px;">
+			<span id="notification"><div></div></span>
+			<div style="display: block; height: 100%; text-align: center; padding-top: 10px;">
+				<img src="/bouqueteditor/dreambox_bouqueteditor.png" alt="Dreambox Web">				
+			</div>
+			
+		</div>
+
+		<table class="contentTabMain roundBorder" style="height: auto; margin-bottom: 3px;" border="0" cellpadding="0" cellspacing="0">	
+
+			<tr class="black">
+				<th>
+					<ul class="BEmenu">
+						<li id="navTv"><a href="#" onClick="setMode(MODE.tv);">TV</a></li>
+						<li id="navRadio"><a href="#" onClick="setMode(MODE.radio);">Radio</a></li>
+					</ul>
+				</th>
+				<td>
+					<table style="width:100%;text-align:right">
+						<tr>
+							<td></td>
+						
+							<td>
+								<button style="font-weight: normal;" onClick="createBackup();">Backup Settings</button>
+								<form style="display:inline">									
+									<input type="button" value="Restore Settings"
+											onClick="fileUpload(this.form,'uploadfile'); return false;" >
+									<input type="file" name="file" id="file"/>
+								</form>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td class="half">
+					<table class="contentTabInner roundBorder" border="0" cellpadding="0" cellspacing="0">
+						<tr class="black">
+							<th class="tabheader">
+								<ul class="BEmenu">
+									<li id="navSat"><a href="#" onClick="setServiceNav(1);">Satellites</a></li>
+									<li id="navProv"><a href="#" onClick="setServiceNav(0);">Provider</a></li>
+									<li id="navAll"><a href="#" onClick="setServiceNav(2);">All Services</a></li>
+								</ul>
+							</th>	
+						</tr>
+						<tr>
+							<td style="vertical-align: top;">
+								<div id="contentSelectionList"></div>
+							</td>
+						</tr>
+						<tr class="grey">						
+							<th id="providerServiceHeader">Services for Provider</th>
+						</tr>
+						<tr>
+							<td class="white normalFont">Search: <input id="serviceSearch" value="Service to search for..."/></td>
+						</tr>
+						<tr>
+							<td style="vertical-align: top;">
+								<div id="contentSelectionSubList"></div>
+							</td>		
+						</tr>
+					</table>
+				</td>
+				<td class="middle">&nbsp;</td>
+				<td class="half">
+					<table class="contentTabInner roundBorder" border="0" cellpadding="0" cellspacing="0">
+						<tr class="black">							
+							<th class="tabheader">Bouquets</th>				
+						</tr>
+						<tr>
+							<td style="vertical-align: top;">
+								<div id="contentBouquetList"></div>
+							</td>
+						</tr>
+						<tr class="grey">						
+							<th id="bouquetServiceHeader">Please select a Bouquet...</th>
+						</tr>
+						<tr>
+							<td style="vertical-align: top;">
+								<div id="contentServicelist"></div>
+							</td>
+						</tr>
+						<tr id="alternativesHead" style="display:none">						
+							<th class="grey">Alternatives</th>
+						</tr>
+						<tr id="alternatives" style="display:none">
+							<td id="contentAlternatives" class="white"><td>
+						</tr>
+					</table>					
+				</td>
+			</tr>
+		</table>		
+	</div>
+	
+	<script language="JavaScript">
+		setMode(MODE.tv);
+		$('serviceSearch').observe('keyup', serviceSearch);
+		$('serviceSearch').observe('focus', onServiceSearchFocus);
+		$('serviceSearch').observe('blur', onServiceSearchBlur);
+	</script>
+</body>
+</html>

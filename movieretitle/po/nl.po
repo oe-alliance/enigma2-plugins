@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MovieRetitle\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-14 18:35+0200\n"
+"PO-Revision-Date: 2009-02-18 22:20+0100\n"
+"Last-Translator: \n"
+"Language-Team:  <Benny.DeTandt@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Choose target folder"
+msgstr "Kies doel map"
+
+msgid "Description"
+msgstr "Beschrijving"
+
+#, python-format
+msgid "Failed to move the movie %s to %s in the background"
+msgstr "Verplaatsen van opname %s naar %s in de achtergrond is mislukt"
+
+msgid "Filename"
+msgstr "Bestandsnaam"
+
+msgid "Location"
+msgstr "Locatie"
+
+msgid "Name and Description Input"
+msgstr ""
+
+msgid "OK"
+msgstr "OK"
+
+#, python-format
+msgid "Successfully moved the movie %s"
+msgstr "Opname %s succesvol verplaatst"
+
+#, python-format
+msgid ""
+"Target file %s.ts already exist.\n"
+"Do you want to replace it?"
+msgstr ""
+"Doel bestand %s.ts bestaat reeds.\n"
+"Wilt u het vervangen?"
+
+#, python-format
+msgid "The movie is moved in the background from %s to %s."
+msgstr "De opname is in de achtergrond verplaatst van %s naar %s."
+
+msgid "The target directory is not found. The file is not renamed."
+msgstr "Doel map niet gevonden. Het bestand is niet hernoemd."
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "change name..."
+msgstr "Wijzig naam..."

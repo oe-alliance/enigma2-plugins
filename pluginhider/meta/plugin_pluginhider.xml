@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+		    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>PluginHider</name>
+                    <packagename>enigma2-plugin-extensions-pluginhider</packagename>
+                    <shortdescription>Hide Plugin from Plugin or Extensionsmenu.</shortdescription>
+		    <description>You can use this plugin to dynamically hide Plugins from either the Extensions- or Pluginmenu without having to modify the source code of the respective plugin.
+		    After installation you find the settings as \"Hide Plugins\" under Setup / System.</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-pluginhider" />
+	  </files>
+</default>

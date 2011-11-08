@@ -1,0 +1,19 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>3c5x9</author>
+                    <name>Dyndns Client</name>
+                    <packagename>enigma2-plugin-extensions-dyndns</packagename>
+                    <shortdescription>A client for www.dyndns.org</shortdescription>
+                    <description>A client for www.dyndns.org</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_dyndns.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-dyndns" />
+	  </files>
+</default>
+
+

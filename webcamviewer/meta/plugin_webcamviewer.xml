@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>3c5x9</author>
+                    <name>WebcamViewer</name>
+                    <packagename>enigma2-plugin-extensions-webcamviewer</packagename>
+                    <shortdescription>Show webcam pictures on your TV Screen</shortdescription>
+                    <description>With WebcamViewer you can watch webcams on your TV Screen.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_webcamviewer_en.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-webcamviewer" />
+	  </files>
+</default>

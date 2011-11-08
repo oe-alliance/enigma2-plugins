@@ -1,0 +1,8 @@
+Package: enigma2-plugin-systemplugins-automaticcleanup
+Version: 0.1.5
+Description: Automatic System Cleanup (setting backups, orphaned movie files, timer entries)
+Maintainer: JuSt611 <Software@Strasdas.de>
+Homepage: http://i-have-a-dreambox.com/
+Depends: enigma2 (>= 2.6git20090615)
+Conflicts: enigma2-plugin-systemplugins-automatictimerlistcleanup
+Source: http://www.i-have-a-dreambox.com/wbb2/thread.php?threadid=159095

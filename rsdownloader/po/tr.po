@@ -1,0 +1,319 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 RSDownloader plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-03 15:11-0000\n"
+"PO-Revision-Date: 2009-09-22 13:19+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:195
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:224
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:244
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:293
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:328
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:457
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:464
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:621
+msgid "Waiting"
+msgstr "Bekleniyor"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:208
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:235
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:257
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:307
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:341
+msgid "Checking"
+msgstr "Kontrol ediliyor"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:251
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:260
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:279
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:285
+msgid "Downloading"
+msgstr "İndiriliyor"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:314
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:326
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:442
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:606
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:616
+msgid "Failed"
+msgstr "Hatalı"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:320
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:442
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:532
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:598
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:956
+msgid "Finished"
+msgstr "Tamamlandı"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:637
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:1046
+msgid "RS Downloader"
+msgstr "RS İndirici"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:655
+msgid "Save"
+msgstr "Kaydet"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:658
+msgid "Download in the background:"
+msgstr "Dosya indirmelerini arkaplanda yap"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:659
+msgid "Username:"
+msgstr "Kullanıcı adı:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:660
+msgid "Password:"
+msgstr "Parola:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:661
+msgid "Lists directory:"
+msgstr "Liste klasörü:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:662
+msgid "Downloads directory:"
+msgstr "İndirilenler klasörü:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:663
+msgid "Ignore download times:"
+msgstr "İndirme zamanlayıcılarını yoksay:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:664
+msgid "Allow downloading on monday:"
+msgstr "Pazartesi günü indirmeye izin ver:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:665
+msgid "Allow downloading on tuesday:"
+msgstr "Salı günü indirmeye izin ver:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:666
+msgid "Allow downloading on wednesday:"
+msgstr "Çarşamba günü indirmeye izin ver:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:667
+msgid "Allow downloading on thursday:"
+msgstr "Perşembe günü indirmeye izin ver:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:668
+msgid "Allow downloading on friday:"
+msgstr "Cuma günü indirmeye izin ver:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:669
+msgid "Allow downloading on saturday:"
+msgstr "Cumartesi günü indirmeye izin ver:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:670
+msgid "Allow downloading on sunday:"
+msgstr "Pazar günü indirmeye izin ver:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:671
+msgid "Don't download before:"
+msgstr "Önce indirme yapma:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:672
+msgid "Don't download after:"
+msgstr "Sonra indirme yapma:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:673
+msgid "Maximal downloads:"
+msgstr "Azami indirme:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:674
+msgid "Take x downloads to list:"
+msgstr "Listede tutulacak indirme sayısı:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:675
+msgid "Write log:"
+msgstr "Günlüğe yaz:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:676
+msgid "Reconnect fritz.Box before downloading:"
+msgstr "İndirmeden önce Fritz!Box'a yeniden bağlan:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:677
+msgid "Restart failed after 10 minutes:"
+msgstr "Hatalıları 10 dk. sonra yeniden başlat:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:728
+#, python-format
+msgid "Added %s to the download-list."
+msgstr "%s indirme listedine eklendi."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:730
+#, python-format
+msgid "Error while adding %s to the download-list!"
+msgstr "%s, indirme listesine eklenirken hata oluştu!"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:740
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: Nothing found, sorry."
+msgstr ""
+"http://rapidshare-search-engine.com 'da arama yapılırken hata oluştu!\n"
+"\n"
+"Hata: Sonuç bulunamadı, üzgünüm."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:741
+msgid "Nothing found, sorry."
+msgstr "Sonuç bulunamadı, üzgünüm."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:757
+#, python-format
+msgid "Page %d / %d. Push < > to switch the page..."
+msgstr "Sayfa %d / %d. Sayfa geçişi için < > tuşları..."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:784
+#, python-format
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: %s"
+msgstr ""
+"http://rapidshare-search-engine.com 'da arama yapılırken hata oluştu!\n"
+"\n"
+"Hata: %s"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:789
+msgid "Loading previous page... please wait!"
+msgstr "Önceki sayfa yükleniyor... lütfen bekleyin!"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:795
+msgid "Loading next page... please wait!"
+msgstr "Sonraki sayfa yükleniyor... lütfen bekleyin!"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:886
+msgid "Delete"
+msgstr "Sil"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:887
+msgid "Search"
+msgstr "Ara"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:888
+msgid "Add"
+msgstr "Ekle"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:889
+msgid "Config"
+msgstr "Yapılandır"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:890
+msgid "Menu"
+msgstr "Menü"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:911
+msgid "Delete download"
+msgstr "İndirmeyi sil"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:912
+msgid "Use search engine"
+msgstr "Arama moturunu kullan"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:913
+msgid "Add downloads from txt files"
+msgstr "İndirme listesini txt dosyasından yükle"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:914
+msgid "Add files from container"
+msgstr "Dosyaları konteynerden yükle"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:915
+msgid "Delete failed downloads"
+msgstr "Zaten indiriliyor!"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:916
+msgid "Restart failed downloads"
+msgstr "İndirme başlatıldı..."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:917
+msgid "Clear finished downloads"
+msgstr "Tamamlanan indirmeleri temizle"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:918
+msgid "Show log"
+msgstr "Günlüğü göster"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:919
+msgid "Delete log"
+msgstr "Günlüğü sil"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:920
+msgid "Close plugin"
+msgstr "Eklentiyi kapat"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:921
+msgid "Please choose a function..."
+msgstr "Lütfen bir fonksiyon seçin..."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:959
+#, python-format
+msgid "Delete %s?"
+msgstr "%s silinsin mi?"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:968
+msgid "Search http://rapidshare-search-engine.com for:"
+msgstr "http://rapidshare-search-engine.com 'da ara:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:1046
+msgid "Download files from rapidshare"
+msgstr "Rapidshare 'den dosya indirin"
+
+#~ msgid "Clear"
+#~ msgstr "Temizle"
+#~ msgid "Reload"
+#~ msgstr "Yenile"
+#~ msgid "%s saved."
+#~ msgstr "%s kaydedildi."
+#~ msgid "Error while writing %s!"
+#~ msgstr "%s kaydedilirken hata oluştu!"
+#~ msgid "Edit:"
+#~ msgstr "Düzenle:"
+#~ msgid "Start downloading..."
+#~ msgstr "İndirmeya başla..."
+#~ msgid "Show lists..."
+#~ msgstr "Listeleri göster..."
+#~ msgid "Show downloads..."
+#~ msgstr "İndirilenleri göster..."
+#~ msgid "Show progress..."
+#~ msgstr "İşlemleri göster..."
+#~ msgid "Edit configs..."
+#~ msgstr "Ayarlar..."
+#~ msgid "Show status..."
+#~ msgstr "Durumu göster..."
+#~ msgid "Show info..."
+#~ msgstr "Hakkında..."
+#~ msgid "Could not start downloading!"
+#~ msgstr "İndirme başlatılamıyor!"
+#~ msgid "Couldn't find the directory %s!"
+#~ msgstr "%s klasörü bulunamıyor!"
+#~ msgid "Downloading %s."
+#~ msgstr "%s indiriliyor."
+#~ msgid "Stopped!"
+#~ msgstr "Durduruldu!"
+#~ msgid ""
+#~ "RS Downloader\n"
+#~ "by AliAbdul\n"
+#~ "\n"
+#~ "This plugin allows you to download files from rapidshare in the "
+#~ "background."
+#~ msgstr ""
+#~ "RS İndirici\n"
+#~ "AliAbdul\n"
+#~ "\n"
+#~ "Bu eklentiyle rapidshare dosya indirmelerini arkaplanda yapabilirsiniz."
+#~ msgid "Files"
+#~ msgstr "Dosyalar"
+#~ msgid "Downloaded"
+#~ msgstr "İndirilmiş"
+

@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Dr.Best</author>
+                    <name>StartUpService</name>
+                    <packagename>enigma2-plugin-systemplugins-startupservice</packagename>
+                    <shortdescription>Define a startup service</shortdescription>
+                    <description>Define a startup service for your Dreambox.</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-startupservice" />
+	  </files>
+</default>

@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-24 16:16+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/EPGSearch.py:150
+msgid "Add timer"
+msgstr ""
+
+#: ../src/EPGSearch.py:349
+msgid "Cancel"
+msgstr ""
+
+#: ../src/EPGSearch.py:387
+msgid "Channel Selection"
+msgstr ""
+
+#: ../src/EPGSearch.py:257
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr ""
+
+#: ../src/EPGSearch.py:69 ../src/EPGSearch.py:179
+msgid "EPG Search"
+msgstr ""
+
+#: ../src/EPGSearch.py:203
+msgid "Enter text to search for"
+msgstr ""
+
+#: ../src/EPGSearch.py:216
+msgid "Export selected as AutoTimer"
+msgstr ""
+
+#: ../src/EPGSearch.py:135
+msgid "History"
+msgstr ""
+
+#: ../src/EPGSearch.py:214
+msgid "Import from AutoTimer"
+msgstr ""
+
+#: ../src/EPGSearch.py:209
+msgid "Import from EPG"
+msgstr ""
+
+#: ../src/EPGSearch.py:208
+msgid "Import from Timer"
+msgstr ""
+
+#: ../src/EPGSearch.py:134
+msgid "New Search"
+msgstr ""
+
+#: ../src/EPGSearch.py:298
+msgid "No history"
+msgstr ""
+
+#: ../src/EPGSearch.py:350
+msgid "OK"
+msgstr ""
+
+#: ../src/EPGSearch.py:215
+msgid "Save search as AutoTimer"
+msgstr ""
+
+#: ../src/EPGSearch.py:415
+msgid "Search"
+msgstr ""
+
+#: ../src/plugin.py:58
+msgid "Search EPG"
+msgstr ""
+
+#: ../src/EPGSearch.py:364
+msgid "Select a timer to search"
+msgstr ""
+
+#: ../src/EPGSearch.py:268 ../src/EPGSearch.py:292
+msgid "Select text to search for"
+msgstr ""
+
+#: ../src/plugin.py:63 ../src/plugin.py:69
+msgid "search EPG..."
+msgstr ""

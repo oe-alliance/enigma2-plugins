@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-letterbox
+Version: 1.0-20080811
+Description: Zoom into letterboxed/anamorph movies
+Maintainer: Georg Lukas <georg@op-co.de>
+Depends: enigma2 (>> 2.5git20080628)

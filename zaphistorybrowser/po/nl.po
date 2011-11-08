@@ -1,0 +1,53 @@
+# translation of ZapHistoryBrowser-fy.po to gerrit
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# gerrit <gerrit@nedlinux.nl>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - ZapHistoryBrowser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-13 10:50+0200\n"
+"PO-Revision-Date: 2009-09-16 13:03+0100\n"
+"Last-Translator: \n"
+"Language-Team:  <Benny.DeTandt@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid "Clear"
+msgstr "Wissen"
+
+msgid "Config"
+msgstr "Configuratie"
+
+msgid "Delete"
+msgstr "Verwijderen"
+
+msgid "Enable zap history:"
+msgstr "Activeer zap historiek:"
+
+msgid "Maximum zap history entries:"
+msgstr "Maximale zap historiek vermeldingen:"
+
+msgid "Zap & Close"
+msgstr "Zap & Sluit"
+
+msgid "Zap-History Browser"
+msgstr "Zap-Historiek Browser"
+
+msgid "Zap-History Configurator"
+msgstr "Zap-Historiek Configuratie"
+
+msgid "disabled"
+msgstr "deactiveer"
+
+msgid "disabled at parental lock"
+msgstr "deactiveer kinderslot"
+
+msgid "enabled"
+msgstr "activeer"
+

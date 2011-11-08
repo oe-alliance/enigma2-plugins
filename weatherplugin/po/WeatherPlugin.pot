@@ -1,0 +1,80 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-15 23:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/setup.py:66
+msgid "Add"
+msgstr ""
+
+#: ../src/setup.py:171
+msgid "Cancel"
+msgstr ""
+
+#: ../src/setup.py:64
+msgid "City"
+msgstr ""
+
+#: ../src/setup.py:183
+msgid "City or Postal Code"
+msgstr ""
+
+#: ../src/plugin.py:203
+#, python-format
+msgid "Current: %s"
+msgstr ""
+
+#: ../src/setup.py:68 ../src/setup.py:173
+msgid "Delete"
+msgstr ""
+
+#: ../src/setup.py:67
+msgid "Edit"
+msgstr ""
+
+#: ../src/plugin.py:130
+msgid "Getting weather information..."
+msgstr ""
+
+#: ../src/setup.py:65 ../src/setup.py:184
+msgid "Language"
+msgstr ""
+
+#: ../src/plugin.py:134
+msgid ""
+"No locations defined...\n"
+"Press 'Menu' to do that."
+msgstr ""
+
+#: ../src/setup.py:172
+msgid "OK"
+msgstr ""
+
+#: ../src/setup.py:106 ../src/setup.py:207
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr ""
+
+#: ../src/plugin.py:61
+msgid "Weather Plugin"
+msgstr ""
+
+#: ../src/setup.py:161
+msgid "WeatherPlugin: Edit Entry"
+msgstr ""
+
+#: ../src/setup.py:59
+msgid "WeatherPlugin: List of Entries"
+msgstr ""

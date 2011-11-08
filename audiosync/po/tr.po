@@ -1,0 +1,184 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 AC3 Lip Sync Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-29 01:13+0100\n"
+"PO-Revision-Date: 2009-09-22 13:11+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://www.hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: src/plugin.py:28
+#: src/plugin.py:32
+#: src/plugin.py:34
+msgid "AC3 Lip Sync"
+msgstr "AC3 Dudak senkronu"
+
+#: src/plugin.py:32
+#: src/plugin.py:34
+msgid "sets the AC3 audio Delay (LipSync)"
+msgstr "AC3 ses gecikmesini ayarlayın"
+
+#: src/plugin.py:33
+msgid "AC3 Lip Sync Setup"
+msgstr "AC3 Dudak senkron ayarları"
+
+#: src/plugin.py:33
+msgid "Setup for the AC3 Lip Sync Plugin"
+msgstr "AC3 dudak senkron eklentisi"
+
+#: src/AC3main.py:82
+#: src/AC3main.py:85
+#: src/AC3main.py:88
+#: src/AC3main.py:146
+#: src/AC3main.py:152
+#: src/AC3main.py:172
+#: src/AC3main.py:296
+#: src/AC3main.py:298
+#: src/AC3main.py:302
+#: src/AC3main.py:303
+#, python-format
+msgid "%i ms"
+msgstr "%i ms"
+
+#: src/AC3main.py:83
+#: src/AC3main.py:89
+#: src/AC3main.py:173
+#, python-format
+msgid "%s delay:"
+msgstr "%s gecikmesi:"
+
+#: src/AC3main.py:84
+#, python-format
+msgid "%s:"
+msgstr "%s:"
+
+#: src/AC3main.py:92
+msgid "Channel audio:"
+msgstr "Ses izi:"
+
+#: src/AC3main.py:97
+#: src/AC3setup.py:58
+msgid "Cancel"
+msgstr "Vazgeç"
+
+#: src/AC3main.py:98
+msgid "OK"
+msgstr "Tamam"
+
+#: src/AC3main.py:99
+msgid "Switch audio"
+msgstr "Ses izini seç"
+
+#: src/AC3main.py:103
+#: src/AC3setup.py:59
+msgid "Save"
+msgstr "Kaydet"
+
+#: src/AC3main.py:221
+#, python-format
+msgid "Save current %(audio)s delay of %(delay)i ms to key"
+msgstr "Geçerli %(audio)s izi için %(delay)i ms gecikmeyi, tuşa kaydet"
+
+#: src/AC3main.py:224
+msgid "Menu"
+msgstr "Menü"
+
+#: src/AC3main.py:231
+#: src/AC3main.py:285
+#: src/AC3main.py:346
+msgid "Invalid selection"
+msgstr "Geçersiz seçim"
+
+#: src/AC3main.py:244
+#: src/AC3main.py:245
+#, python-format
+msgid "Save %s delay"
+msgstr "%s gecikmesini kaydet"
+
+#: src/AC3main.py:246
+msgid "Save both delays"
+msgstr "İki gecikmeyide kaydet"
+
+#: src/AC3main.py:249
+msgid "Which delays do you want to set"
+msgstr "Hangi gecikmeyi kaydetmek istiyorsunuz?"
+
+#: src/AC3main.py:281
+#, python-format
+msgid "Saved %(audio)s value: %(delay)i ms"
+msgstr "%(audio)s izi için %(delay)i ms gecikme kaydedildi"
+
+#: src/AC3main.py:321
+#, python-format
+msgid "Select the key you want to set to %i ms"
+msgstr "%i ms gecikmeyi atamak istediğiniz tuşu seçin"
+
+#: src/AC3main.py:327
+#, python-format
+msgid "Key %(key)s (current value: %(value)i ms)"
+msgstr "%(key)s tuşu (mevcut değer: %(value)i ms)"
+
+#: src/AC3main.py:332
+msgid "Setting key canceled"
+msgstr "Tuş tanımlama iptal edildi"
+
+#: src/AC3main.py:344
+#, python-format
+msgid "Key %(Key)s successfully set to %(delay)i ms"
+msgstr "%(Key)s tuşuna %(delay)i ms gecikme süresi atandı"
+
+#: src/AC3setup.py:42
+msgid "Outer Bound (+/-)"
+msgstr "Azami Gecikme (+/-)"
+
+#: src/AC3setup.py:43
+msgid "Step in ms for arrow keys"
+msgstr "<> tuşlarına basıldığında atlanacak süre (ms)"
+
+#: src/AC3setup.py:44
+msgid "Wait time in ms before activation:"
+msgstr "Aktivasyondan önce bekleme süresi (ms):"
+
+#: src/AC3setup.py:45
+#: src/AC3setup.py:46
+#: src/AC3setup.py:47
+#, python-format
+msgid "Step in ms for keys '%s'"
+msgstr "'%s' tuşuna basıldığında atlanacak süre (ms)"
+
+#: src/AC3setup.py:48
+#: src/AC3setup.py:49
+#: src/AC3setup.py:50
+#, python-format
+msgid "Step in ms for key %i"
+msgstr "%i tuşuna basıldığında atlanacak süre (ms)"
+
+#: src/AC3setup.py:60
+msgid " "
+msgstr " "
+
+#~ msgid "Switch to user key- delays"
+#~ msgstr "Kullanıcı tuş gecikmelerine geç"
+#~ msgid "Switch to calculated key- delays"
+#~ msgstr "Hesaplanan tuş gecikmelerine geç"
+#~ msgid "Minimum delay"
+#~ msgstr "Minimum gecikme"
+#~ msgid "Maximum delay"
+#~ msgstr "Maksimum gecikme"
+#~ msgid "Recalculate..."
+#~ msgstr "Tekr. hesapla"
+#~ msgid "Use user delays"
+#~ msgstr "Kullanıcı gecikmesini kullan"
+#~ msgid "Use calc. delays"
+#~ msgstr "Hesaplanmış gecikmeyi kullan"
+#~ msgid "ms"
+#~ msgstr "ms"
+#~ msgid "Key"
+#~ msgstr "Tuş"
+

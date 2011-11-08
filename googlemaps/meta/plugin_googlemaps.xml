@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>3c5x9</author>
+                    <name>GoogleMaps</name>
+                    <packagename>enigma2-plugin-extensions-googlemaps</packagename>
+                    <shortdescription>View Google maps</shortdescription>
+                    <description>View Google maps with your Dreambox.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_googlemaps.jpg" />
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-googlemaps" />
+	  </files>
+</default>

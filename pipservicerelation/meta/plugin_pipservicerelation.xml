@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Dr.Best</author>
+                    <name>PipServiceRelation</name>
+                    <packagename>enigma2-plugin-systemplugins-pipservicerelation</packagename>
+                    <shortdescription>Define a related pip service </shortdescription>
+                    <description>Define a related pip service </description>
+                    <screenshot/>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-pipservicerelation" />
+	  </files>
+</default>

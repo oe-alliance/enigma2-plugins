@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-epgsearch
+Version: 0.1.0-20090127-r0
+Description: search the epg and list results
+Maintainer: Moritz Venn <moritz.venn@freaque.net>
+Homepage: http://www.ritzmo.de
+Depends: enigma2 (>= 2.6git20090120)

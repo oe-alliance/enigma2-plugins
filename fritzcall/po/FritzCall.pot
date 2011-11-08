@@ -1,0 +1,612 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-15 16:20+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+msgid "About FritzCall"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
+msgid "Add entry to phonebook"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "All"
+msgstr ""
+
+msgid "All calls"
+msgstr ""
+
+msgid "Append shortcut number"
+msgstr ""
+
+msgid "Append type of number"
+msgstr ""
+
+msgid "Append vanity name"
+msgstr ""
+
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr ""
+
+msgid "Austria"
+msgstr ""
+
+msgid "Automatically add new Caller to PhoneBook"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Call"
+msgstr ""
+
+msgid "Call monitoring"
+msgstr ""
+
+msgid "Call redirection"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Cancel"
+msgstr ""
+
+msgid "Cannot get calls from FRITZ!Box"
+msgstr ""
+
+msgid "Cannot get infos from FRITZ!Box"
+msgstr ""
+
+msgid "Compact Flash"
+msgstr ""
+
+msgid "Connected since"
+msgstr ""
+
+msgid "Connected to FRITZ!Box!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Connecting to FRITZ!Box failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+
+msgid "Connecting to FRITZ!Box..."
+msgstr ""
+
+#, python-format
+msgid ""
+"Connection to FRITZ!Box! lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+
+msgid "Could not parse FRITZ!Box Phonebook entry"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "DECT phones registered"
+msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Delete"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Delete entry"
+msgstr ""
+
+msgid "Display FRITZ!box-Fon calls on screen"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display all calls"
+msgstr ""
+
+msgid "Display connection infos"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display incoming calls"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display missed calls"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display outgoing calls"
+msgstr ""
+
+#. TRANSLATORS: this is a window title.
+msgid "Do what?"
+msgstr ""
+
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Edit"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Edit selected entry"
+msgstr ""
+
+msgid "Enter Search Terms"
+msgstr ""
+
+msgid "Entry incomplete."
+msgstr ""
+
+msgid "Extension number to initiate call on"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Could not load calls: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Could not load phonebook: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Dialling failed: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error getting status: %s"
+msgstr ""
+
+msgid ""
+"FRITZ!Box - Error logging in\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error logging in: %s"
+msgstr ""
+
+#, python-format
+msgid ""
+"FRITZ!Box - Error logging in: %s\n"
+"Disabling plugin."
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error logging out: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error resetting: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Failed changing Mailbox: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Failed changing WLAN: %s"
+msgstr ""
+
+msgid "FRITZ!Box FON address (Name or IP)"
+msgstr ""
+
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+msgid "FRITZ!Box Fon Status"
+msgstr ""
+
+msgid "Filter also list of calls"
+msgstr ""
+
+msgid "Flash"
+msgstr ""
+
+#, python-format
+msgid ""
+"Found picture\n"
+"\n"
+"%s\n"
+"\n"
+"But did not load. Probably not PNG, 8-bit"
+msgstr ""
+
+msgid "France"
+msgstr ""
+
+#. TRANSLATORS: this is a window title.
+msgid "FritzCall Setup"
+msgstr ""
+
+msgid "Germany"
+msgstr ""
+
+msgid "Getting calls from FRITZ!Box..."
+msgstr ""
+
+msgid "Getting status from FRITZ!Box Fon..."
+msgstr ""
+
+msgid "IP Address:"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Incoming"
+msgstr ""
+
+#, python-format
+msgid ""
+"Incoming Call on %(date)s at %(time)s from\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"to: %(phone)s"
+msgstr ""
+
+msgid "Incoming calls"
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "Last 10 calls:\n"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Lookup"
+msgstr ""
+
+msgid "MSN to show (separated by ,)"
+msgstr ""
+
+msgid "Mailbox"
+msgstr ""
+
+msgid "Media directory"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Missed"
+msgstr ""
+
+msgid "Missed calls"
+msgstr ""
+
+msgid "Mute on call"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Network mount"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "New"
+msgstr ""
+
+msgid "No DECT phone registered"
+msgstr ""
+
+msgid "No call redirection active"
+msgstr ""
+
+msgid "No entry selected"
+msgstr ""
+
+msgid "No mailbox active"
+msgstr ""
+
+msgid "No phonebook"
+msgstr ""
+
+msgid "No result from LDIF"
+msgstr ""
+
+msgid "No result from Outlook export"
+msgstr ""
+
+msgid "No result from reverse lookup"
+msgstr ""
+
+msgid "Number"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "OK"
+msgstr ""
+
+msgid "One DECT phone registered"
+msgstr ""
+
+msgid "One call redirection active"
+msgstr ""
+
+msgid "One mailbox active"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Outgoing"
+msgstr ""
+
+#, python-format
+msgid ""
+"Outgoing Call on %(date)s at %(time)s to\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"from: %(phone)s"
+msgstr ""
+
+msgid "Outgoing calls"
+msgstr ""
+
+msgid "Password Accessing FRITZ!Box"
+msgstr ""
+
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+msgid "Phone calls"
+msgstr ""
+
+msgid "PhoneBook Location"
+msgstr ""
+
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+msgid "Phonebook"
+msgstr ""
+
+msgid "Plugin not active"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Quit"
+msgstr ""
+
+msgid "Read PhoneBook from FRITZ!Box"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Refresh status"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Reset"
+msgstr ""
+
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr ""
+
+msgid "Reverse searching..."
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Save"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Search"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Search (case insensitive)"
+msgstr ""
+
+msgid "Search phonebook"
+msgstr ""
+
+msgid "Searching in LDIF..."
+msgstr ""
+
+msgid "Searching in Outlook export..."
+msgstr ""
+
+msgid "Shortcut"
+msgstr ""
+
+msgid "Show Outgoing Calls"
+msgstr ""
+
+msgid "Show after Standby"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Show details of entry"
+msgstr ""
+
+msgid "Show only calls for specific MSN"
+msgstr ""
+
+msgid "Software fax active"
+msgstr ""
+
+msgid "Status not available"
+msgstr ""
+
+msgid "Strip Leading 0"
+msgstr ""
+
+msgid "Switzerland"
+msgstr ""
+
+msgid "The Netherlands"
+msgstr ""
+
+msgid "Timeout for Call Notifications (seconds)"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 1. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 2. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 3. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 4. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 5. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle Mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle WLAN"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle all mailboxes"
+msgstr ""
+
+msgid "UNKNOWN"
+msgstr ""
+
+msgid "USB Device"
+msgstr ""
+
+msgid "Use internal PhoneBook"
+msgstr ""
+
+msgid "Vanity"
+msgstr ""
+
+msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
+msgstr ""
+
+msgid ""
+"You need to set the password of the FRITZ!Box\n"
+"in the configuration dialog to display calls\n"
+"\n"
+"It could be a communication issue, just try again."
+msgstr ""
+
+msgid "call redirections active"
+msgstr ""
+
+msgid "devices active"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "display calls"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "display phonebook"
+msgstr ""
+
+msgid "done"
+msgstr ""
+
+msgid "done, using last list"
+msgstr ""
+
+msgid "encrypted"
+msgstr ""
+
+msgid "finishing"
+msgstr ""
+
+msgid "home"
+msgstr ""
+
+msgid "login"
+msgstr ""
+
+msgid "login ok"
+msgstr ""
+
+msgid "login verification"
+msgstr ""
+
+msgid "mailboxes active"
+msgstr ""
+
+msgid "mobile"
+msgstr ""
+
+msgid "no calls"
+msgstr ""
+
+msgid "no device active"
+msgstr ""
+
+msgid "not encrypted"
+msgstr ""
+
+msgid "number suppressed"
+msgstr ""
+
+msgid "one device active"
+msgstr ""
+
+msgid "preparing"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "quit"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "save and quit"
+msgstr ""
+
+msgid "show as list"
+msgstr ""
+
+msgid "show each call"
+msgstr ""
+
+msgid "show nothing"
+msgstr ""
+
+msgid "work"
+msgstr ""

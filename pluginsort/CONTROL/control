@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-pluginsort
+Version: 0.0.1-20110616-r0
+Description: sort entries in the plugin browser
+Maintainer: Moritz Venn <moritz.venn@freaque.net>
+Homepage: http://www.ritzmo.de
+Depends: enigma2 (>= 3.1git20110309), python-shell, python-xml, python-codecs, python-lang, enigma2-plugin-systemplugins-mphelp

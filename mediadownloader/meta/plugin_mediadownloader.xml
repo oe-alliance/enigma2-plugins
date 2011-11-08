@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>MediaDownloader</name>
+                    <packagename>enigma2-plugin-extensions-mediadownloader</packagename>
+                    <shortdescription>A simple downloading application for other plugins</shortdescription>
+                    <description>To be used as simple downloading application by other Plugins.</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-mediadownloader" />
+	  </files>
+</default>

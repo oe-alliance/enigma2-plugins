@@ -1,0 +1,62 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 MediaDownloader plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-07 00:43+0100\n"
+"PO-Revision-Date: 2009-02-08 13:52+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
+"Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/MediaDownloader.py:215
+#, python-format
+msgid "%d kb/s"
+msgstr "%d kb/s"
+
+#: ../src/MediaDownloader.py:148
+msgid "?? kb/s"
+msgstr "?? kb/s"
+
+#: ../src/MediaDownloader.py:245
+msgid "Do you want to try to open the downloaded file?"
+msgstr "İndirilmiş dosyayı açmak istiyor musunuz?"
+
+#: ../src/plugin.py:83
+msgid "Download..."
+msgstr "İndir..."
+
+#: ../src/MediaDownloader.py:145
+msgid "Downloading..."
+msgstr "İndiriliyor..."
+
+#: ../src/MediaDownloader.py:214
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr "TKS %d:%02d dk."
+
+#: ../src/MediaDownloader.py:147
+msgid "ETA ??:?? h"
+msgstr "TKS ??:?? sa."
+
+#: ../src/MediaDownloader.py:262
+#, python-format
+msgid "Error while downloading file %s"
+msgstr "%s dosyası indirilirken hata oluştu"
+
+#: ../src/MediaDownloader.py:228
+msgid "No suitable Viewer found!"
+msgstr "Uygun gösterici bulunamadı!"
+
+#: ../src/MediaDownloader.py:172
+msgid "Where to save?"
+msgstr "Nereye kaydedilsin?"
+
+#: ../src/plugin.py:58
+msgid "Which file do you want to download?"
+msgstr "Hangi dosyayı indirmek istiyorsunuz?"
+

@@ -1,0 +1,58 @@
+# German translations for enigma2-plugins package.
+# Copyright (C) 2009 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-05-22 11:23+0200\n"
+"PO-Revision-Date: 2009-05-22 11:23+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+#: ../src/plugin.py:51
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: ../src/plugin.py:25
+msgid "Change Root Password"
+msgstr "Root Passwort aendern"
+
+#: ../src/plugin.py:131
+msgid "Change or reset the root password of your dreambox"
+msgstr "Aendern oder resetten sie das RootPasswort ihrer Dreambox"
+
+#: ../src/plugin.py:73
+msgid "Enter new Password"
+msgstr "Neues Passwort eingeben"
+
+#: ../src/plugin.py:114
+msgid "Enter your password here:"
+msgstr "Neues Passwort hier eingeben:"
+
+#: ../src/plugin.py:52
+msgid "Set Password"
+msgstr "Passwd setzten"
+
+#: ../src/plugin.py:88
+msgid "Sucessfully changed password for root user to: "
+msgstr "Passwort fuer root wurde erfolgreich geaendert auf: "
+
+#: ../src/plugin.py:90
+msgid "Unable to change/reset password for root user"
+msgstr "Konnte das Passwort nicht aendern"
+
+#: ../src/plugin.py:53
+msgid "new Random"
+msgstr "Zufallspasswd"
+
+#: ../src/plugin.py:54
+msgid "virt. Keyboard"
+msgstr ""

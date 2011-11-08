@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-autotimer
+Version: 0.9.0-20110813-r0
+Description: Automatically add Timers based on simple rules 
+Maintainer: Moritz Venn <moritz.venn@freaque.net>
+Homepage: http://www.ritzmo.de
+Depends: enigma2 (>= 2.6git20091014), python-codecs, python-difflib, python-re, python-xml, enigma2-plugin-systemplugins-mphelp

@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-imdb
+Version: 0.1-20080118-r0
+Description: query movie details from the Internet Movie Database
+Maintainer: fraxinas <andreas.frisch@multimedia-labs.de>
+Depends: enigma2 (>= 2.5git20080416), python-html, python-twisted-web

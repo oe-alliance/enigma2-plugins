@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-orfat
+Version: 1.0-r0
+Description: Streaming modules for the orf.at web page
+Maintainer: Nabil Hanna <nabil1978@web.de>
+Homepage: http://www.lt-forums.org/ali
+Depends: enigma2 (>= 2.6git20090615), enigma2-plugin-extensions-vlcplayer, python-twisted-web

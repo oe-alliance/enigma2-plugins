@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-ncidclient
+Version: 20090222
+Description: Show Incoming Calls on your TV Screen using any NCID server (e.g. VF EasyBox)
+Maintainer: Reichi <stephan@reichholf.net>
+Homepage: http://enigma2-plugins.schwerkraft.elitedvb.net/
+Depends: enigma2 (>> 2.5git20101021), python-twisted-web, python-html, python-textutils

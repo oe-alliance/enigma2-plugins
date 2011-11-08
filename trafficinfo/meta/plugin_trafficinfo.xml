@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>3c5x9</author>
+                    <name>TrafficInfo</name>
+                    <packagename>enigma2-plugin-extensions-trafficinfo</packagename>
+                    <shortdescription>German traffic information</shortdescription>
+                    <description>TrafficInfo shows German traffic jams.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_trafficinfo.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-trafficinfo" />
+	  </files>
+</default>

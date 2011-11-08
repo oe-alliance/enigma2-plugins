@@ -1,0 +1,91 @@
+
+
+  <!-- ########## Channel, EPG, EventInfo ########## -->
+  <screen backgroundColor="background" flags="wfNoBorder" name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection">
+    <eLabel backgroundColor="darkgrey" position="0,90" size="1280,2" zPosition="-1"/>
+    <eLabel backgroundColor="darkgrey" position="0,630" size="1280,2" zPosition="-1"/>
+    <widget backgroundColor="secondBG" font="Regular;24" position="190,35" render="Label" size="730,50" source="Title" transparent="1" valign="center" zPosition="1"/>
+    <widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+      <convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+    </widget>
+    <ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+    <ePixmap alphatest="on" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+    <ePixmap alphatest="on" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+    <ePixmap alphatest="on" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_red" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_green" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_blue" position="1015,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget backgroundColor="background" colorEventProgressbarBorder="#555555" colorEventProgressbarBorderSelected="grey" colorServiceDescription="#DBB96E" foregroundColorServiceNotAvail="#00656565" itemHeight="30" name="list" picServiceEventProgressbar="Ai.HD/minibar.png" position="100,105" scrollbarMode="showNever" serviceInfoFont="Regular;21" serviceItemHeight="30" serviceNameFont="Regular;23" serviceNumberFont="Regular;23" size="980,450"/>
+	<widget font="Regular;20" halign="left" position="1110,230" render="Label" size="70,22" source="ServiceEvent" transparent="1" zPosition="2">
+		<convert type="EventTime">EndTime</convert>
+		<convert type="ClockToText"/>
+	</widget>
+	<widget borderColor="darkgrey" backgroundColor="darkgrey" borderWidth="4" orientation="orBottomToTop" position="1110,260" render="Progress" size="10,200" source="ServiceEvent" zPosition="2">
+		<convert type="EventTime">Progress</convert>
+	</widget>	
+	<widget font="Regular;20" halign="left" position="1110,465" render="Label" size="70,22" source="ServiceEvent" transparent="1" zPosition="2">
+		<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText"/>
+	</widget>	
+	<widget font="Regular;20" foregroundColor="secondFG" position="1130,350" render="Label" size="80,22" source="ServiceEvent" transparent="1" zPosition="2">
+		<convert type="EventTime">Remaining</convert>
+		<convert type="RemainingToText">NoSeconds</convert>
+	</widget>
+	<eLabel backgroundColor="secondBG" position="0,560" size="1280,2"/>
+	<widget font="Regular;20" position="100,570" render="Label" size="1080,48" source="ServiceEvent" zPosition="1">
+      <convert type="EventName">ExtendedDescription</convert>
+    </widget>
+	<widget alphatest="blend" position="70,30" render="Picon" size="100,60" source="ServiceEvent" transparent="1" zPosition="5">
+      <convert type="valiRefString">ServicelistRef</convert>
+    </widget>
+  </screen>
+  <screen backgroundColor="background" flags="wfNoBorder" name="EPGSelection" position="0,0" size="1280,720" title="EPG Selection">
+    <eLabel backgroundColor="darkgrey" position="0,90" size="1280,2" zPosition="-1"/>
+    <eLabel backgroundColor="darkgrey" position="0,630" size="1280,2" zPosition="-1"/>
+    <widget font="Regular;24" foregroundColor="secondFG" position="190,35" render="Label" size="730,50" source="Service" transparent="1" valign="center" zPosition="1">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+	<widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+      <convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+    </widget>
+    <ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+    <ePixmap alphatest="on" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+    <ePixmap alphatest="on" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+    <ePixmap alphatest="on" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_red" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_green" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_blue" position="1015,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget itemHeight="30" name="list" position="100,105" scrollbarMode="showOnDemand" size="1080,450" transparent="1"/>
+	<eLabel backgroundColor="darkgrey" position="0,560" size="1280,2"/>
+	<widget font="Regular;20" foregroundColor="secondFG" position="100,570" render="Label" size="1080,48" source="Event" zPosition="1">
+      <convert type="EventName">ExtendedDescription</convert>
+    </widget>
+	<widget alphatest="blend" position="70,30" render="Picon" size="100,60" source="Event" transparent="1" zPosition="5">
+      <convert type="valiRefString">CurrentRef</convert>
+    </widget>
+  </screen>
+  
+  <screen backgroundColor="background" flags="wfNoBorder" name="EventView" position="0,0" size="1280,720" title="Eventview">
+    <eLabel backgroundColor="darkgrey" position="0,90" size="1280,2" zPosition="-1"/>
+    <eLabel backgroundColor="darkgrey" position="0,630" size="1280,2" zPosition="-1"/>
+    <widget font="Regular;24" foregroundColor="secondFG" name="channel" position="190,35" size="730,50" transparent="1" valign="center" zPosition="1"/>
+	<widget font="Regular;22" foregroundColor="secondFG" name="datetime" position="190,95" size="250,26" transparent="1"/>
+    <widget font="Regular;22" foregroundColor="secondFG" name="duration" position="440,95" size="250,26" transparent="1"/>
+	<widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+      <convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+    </widget>
+    <ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+    <ePixmap alphatest="on" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+    <ePixmap alphatest="on" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+    <ePixmap alphatest="on" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_red" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_green" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_blue" position="1015,645" size="220,26" transparent="1" zPosition="1"/>
+    <widget font="Regular;24" name="epg_description" position="100,145" size="1080,470" transparent="1"/>
+	<widget alphatest="blend" position="70,30" render="Picon" size="100,60" source="Title" transparent="1" zPosition="5">
+      <convert type="valiRefString">CurrentRef</convert>
+    </widget>
+  </screen>

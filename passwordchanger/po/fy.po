@@ -1,0 +1,52 @@
+# translation of PasswordChanger_fy.po to gerrit
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# gerrit <gerrit@nedlinux.nl>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: PasswordChanger_fy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-09 16:47+0100\n"
+"PO-Revision-Date: 2009-01-09 17:40+0100\n"
+"Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
+"Language-Team: gerrit <fy@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: ../src/plugin.py:174
+msgid "Change your ftp and telnet password"
+msgstr "Feroarje jo ftp en telnet wachtwurd"
+
+#: ../src/plugin.py:148
+msgid "Could not log in!"
+msgstr "Koe net ynlogge!"
+
+#: ../src/plugin.py:161
+msgid "Error while setting new password!"
+msgstr "Flater by in ynstellen fan it wachtwurd"
+
+#: ../src/plugin.py:73
+msgid ""
+"Incorrect new password!\n"
+"Minimum length: 5\n"
+"Maximum length: 8"
+msgstr ""
+"Fout nij wachtwurd!\n"
+"Min. lingte: 5\n"
+"Max. lingte: 8"
+
+#: ../src/plugin.py:62
+msgid "New password:"
+msgstr "Nij wachtwurd:"
+
+#: ../src/plugin.py:61
+msgid "Old password:"
+msgstr "Ald wachtwurd"
+
+#: ../src/plugin.py:46 ../src/plugin.py:174
+msgid "Password Changer"
+msgstr "Wachtwurd bewurker"
+

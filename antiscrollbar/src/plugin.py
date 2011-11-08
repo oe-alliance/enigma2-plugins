@@ -1,233 +1,294 @@
-# (c) 2006 3c5x9, dream@3c5x9.de
-# This Software is Free, use it where you want, when you want for whatever you want and modify it if you want. but don't remove my copyright!
-
-from enigma import *
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
 from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.ScrollLabel import ScrollLabel
+from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Components.GUIComponent import *
+from Components.Button import Button
 from Components.MenuList import MenuList
 from Components.Input import Input
-from Screens.Console import Console
 from Plugins.Plugin import PluginDescriptor
-from Screens.ImageWizard import ImageWizard
-import os,sys
-from Plugins.Plugin import PluginDescriptor
+from enigma import iPlayableService
+from Components.ServiceEventTracker import ServiceEventTracker
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSubList, ConfigInteger, ConfigYesNo, ConfigText, ConfigSelection
+from Components.ConfigList import ConfigListScreen
 #############
-from enigma import ePoint, eSize, eServiceCenter
-#############
-import ConfigParser
+from enigma import ePoint, eSize
 
-###############################################################################        
-myname = "AntiScrollbar"     
-myversion = "0.1"
-###############################################################################        
-class AntiScrollMain(Screen):
-    step = 5    
-    def __init__(self, session, args = 0):
-        config = AntiScrollConfig()
-        try:
-          profil = config.getLastProfile()
-          self.size = [profil["sizex"],profil["sizey"]]
-          self.position = [profil["posx"],profil["posy"]]             
-        except Exception:
-          config.setProfile("standard",[200,200],[200,200])
-          config = AntiScrollConfig()          
-          profil = config.getProfile("standard")
-          
-        self.size = [profil["sizex"],profil["sizey"]]
-        self.position = [profil["posx"],profil["posy"]]           
-        ss  ="<screen position=\"%i,%i\" size=\"%i,%i\" title=\"%s\"  flags=\"wfNoBorder\" >" %(profil["posx"],profil["posy"],profil["sizex"],profil["sizey"],myname)
-        ss +="<widget name=\"label\" position=\"0,0\" size=\"%i,%i\"  backgroundColor=\"black\"  />" %(profil["sizex"],profil["sizey"])
+
+###############################################################################
+myname = "AntiScrollbar"
+
+config.plugins.antiscrollbar = ConfigSubsection()
+config.plugins.antiscrollbar.autostart = ConfigYesNo(default=True)
+config.plugins.antiscrollbar.modescount = ConfigInteger(0)
+config.plugins.antiscrollbar.mode = ConfigSubList()
+
+def initConfig():
+    modescount = config.plugins.antiscrollbar.modescount.value
+    if modescount == 0:
+        pass
+    else:
+        i = 0
+        while i < modescount:
+            print "["+myname+".initConfig] i is %s" % i
+            config.plugins.antiscrollbar.mode.append(ConfigSubsection())
+            config.plugins.antiscrollbar.mode[i].sref = ConfigText("")
+            config.plugins.antiscrollbar.mode[i].sizex = ConfigInteger(0)
+            config.plugins.antiscrollbar.mode[i].sizey = ConfigInteger(0)
+            config.plugins.antiscrollbar.mode[i].posx = ConfigInteger(0)
+            config.plugins.antiscrollbar.mode[i].posy = ConfigInteger(0)
+            config.plugins.antiscrollbar.mode[i].enabled = ConfigYesNo(default=True)
+
+            config.plugins.antiscrollbar.modescount.value = i + 1
+
+            i += 1
+
+initConfig()
+
+def readConfig():
+    srefs= {}
+    for mode in config.plugins.antiscrollbar.mode:
+        sref = mode.sref.value
+        sizex = mode.sizex.value
+        sizey = mode.sizey.value
+        posx = mode.posx.value
+        posy = mode.posy.value
+        enabled = mode.enabled.value
+        srefs[sref]=[sizex,sizey,posx,posy,enabled]
+    return srefs
+
+###############################################################################
+class AntiScrollOverlay(Screen):
+    def __init__(self, session):
+        self.size = [0,0]
+        self.position = [0,0]
+        ss  ="<screen position=\"0,0\" size=\"0,0\" title=\"AntiScrollOverlay\"  flags=\"wfNoBorder\" zPosition=\"-1\" backgroundColor=\"#FF000000\">"
+        ss +="<widget name=\"label\" position=\"1,1\" size=\"0,0\"  backgroundColor=\"#00000000\" />"
         ss +="</screen>"
         self.skin = ss
         self.session = session
         Screen.__init__(self, session)
-        self.menu = args
         self["label"] = Label()
-        self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions","NumberActions"], 
+        self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
             {
-             "ok": 	self.go,
-             "back": 	self.close,
-             "menu": 	self.openmenu,
-             "down": 	self.down,
-             "up": 	self.up,
-             "left":	self.left,
-             "right":	self.right,
-             "2":	self.key2,
-             "8":	self.key8,
-             "4":	self.key4,
-             "6":	self.key6,
-             }, -1)
+                iPlayableService.evUpdatedInfo: self.evStart,
+                iPlayableService.evEOF: self.hide,
+            })
+        self.hide()
 
+    def evStart(self):
+        service = self.session.nav.getCurrentlyPlayingServiceReference()
+        if service is None:
+            return
+        srefs = readConfig()
+        if service.toString() in srefs:
+            data = srefs[service.toString()]
+            if data[4]:
+                self.resize(data[0],data[1])
+                self.move(data[2],data[3])
+                self.show()
+            else:
+                self.hide()
+        else:
+            self.hide()
+
+    def move(self, x, y):
+      self.instance.move(ePoint(x, y))
+
+    def resize(self, w, h):
+      self.instance.resize(eSize(*(w, h)))
+      self["label"].instance.resize(eSize(*(w-2, h-2)))
+
+
+#############################
+class AntiScrollConfig(ConfigListScreen, Screen):
+    skin = """
+        <screen position="100,100" size="550,400" title="%s">
+            <widget name="config" position="5,5" size="540,360" scrollbarMode="showOnDemand" zPosition="1"/>
+
+            <widget name="key_red" position="0,360" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
+            <widget name="key_green" position="140,360" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
+            <widget name="key_yellow" position="280,360" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
+
+            <ePixmap name="red" pixmap="skin_default/buttons/red.png" position="0,360" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
+            <ePixmap name="green" pixmap="skin_default/buttons/green.png" position="140,360" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
+            <ePixmap name="yellow" pixmap="skin_default/buttons/yellow.png" position="280,360" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
+        </screen>""" % _(myname+": Main Setup")
+
+    def __init__(self, session, args=0):
+        Screen.__init__(self, session)
+        l = [
+            getConfigListEntry(_("Start on Sessionstart"), config.plugins.antiscrollbar.autostart),
+        ]
+
+        ConfigListScreen.__init__(self, l)
+        self["key_red"] = Button(_("Cancel"))
+        self["key_green"] = Button(_("OK"))
+        self["key_yellow"] = Button(_("current Service"))
+        self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+        {
+            "red": self.cancel,
+            "green": self.save,
+            "yellow": self.openCurrentSeviceConfig,
+            "save": self.save,
+            "cancel": self.cancel,
+            "ok": self.save,
+        }, -2)
+
+    def openCurrentSeviceConfig(self):
+        print "yellow"
+        smode = False
+        for mode in config.plugins.antiscrollbar.mode:
+            if mode.sref.value == self.session.nav.getCurrentlyPlayingServiceReference().toString():
+                smode = mode
+        if smode is False:
+            print "new config "*40
+            i = config.plugins.antiscrollbar.modescount.value
+            config.plugins.antiscrollbar.mode.append(ConfigSubsection())
+            config.plugins.antiscrollbar.mode[i].sref = ConfigText("")
+            config.plugins.antiscrollbar.mode[i].sizex = ConfigInteger(200)
+            config.plugins.antiscrollbar.mode[i].sizey = ConfigInteger(200)
+            config.plugins.antiscrollbar.mode[i].posx = ConfigInteger(100)
+            config.plugins.antiscrollbar.mode[i].posy = ConfigInteger(50)
+            config.plugins.antiscrollbar.mode[i].enabled = ConfigYesNo(default=True)
+
+            config.plugins.antiscrollbar.mode[i].save()
+            config.plugins.antiscrollbar.mode[i].sref.value = self.session.nav.getCurrentlyPlayingServiceReference().toString()
+            config.plugins.antiscrollbar.mode[i].save()
+
+            config.plugins.antiscrollbar.modescount.value +=1
+            config.plugins.antiscrollbar.modescount.save()
+            smode = config.plugins.antiscrollbar.mode[i]
+        self.session.open(CurrentSeviceConfig,smode)
+
+    def save(self):
+        print "saving"
+        for x in self["config"].list:
+            x[1].save()
+        self.close(True, self.session)
+
+    def cancel(self):
+        print "cancel"
+        for x in self["config"].list:
+            x[1].cancel()
+        self.close(False, self.session)
+
+class CurrentSeviceConfig(Screen):
+    step = 5
+    def __init__(self, session, mode):
+        print "editing "+mode.sref.value
+        self.mode = mode
+        self.size = [mode.sizex.value,mode.sizey.value]
+        self.enabled = mode.enabled.value
+        self.position = [mode.posx.value,mode.posy.value]
+        ss  ="<screen position=\"%i,%i\" size=\"%i,%i\" title=\"%s\"  flags=\"wfNoBorder\" >" %(mode.posx.value,mode.posy.value,mode.sizex.value,mode.sizey.value,myname)
+        ss +="<widget name=\"label\" position=\"0,0\" size=\"%i,%i\"  backgroundColor=\"black\"  />" %(mode.sizex.value,mode.sizey.value)
+        ss +="</screen>"
+        self.skin = ss
+        self.session = session
+        Screen.__init__(self, session)
+
+        self["label"] = Label()
+        if self.enabled is not True:
+            self["label"].setText("disabled")
+        else:
+            self["label"].setText("")
+
+        self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions","NumberActions"],
+            {
+             "ok":     self.go,
+             "back":     self.cancel,
+             "down":     self.down,
+             "up":     self.up,
+             "left":    self.left,
+             "right":    self.right,
+             "2":    self.key2,
+             "8":    self.key8,
+             "4":    self.key4,
+             "6":    self.key6,
+             "0":    self.key0,
+                 }, -1)
 
     def go(self):
-      pass
-    def openmenu(self):
-      self.session.open(AntiScrollMenu,callback=self.menuCallback,size=self.size,position=self.position)
-    def menuCallback(self,size,position):
-      self.size = size
-      self.position = position
-      self.move(self.position[0],self.position[1])
-      self.resize(self.size[0],self.size[1])
-       
+      self.mode.posx.value = self.position[0]
+      self.mode.posy.value = self.position[1]
+      self.mode.sizex.value = self.size[0]
+      self.mode.sizey.value = self.size[1]
+      self.mode.enabled.value = self.enabled
+      self.mode.save()
+      self.close()
+
+    def cancel(self):
+       self.close()
+
+    def key0(self):
+        if self.enabled:
+            self.enabled = False
+            self["label"].setText("disabled")
+        else:
+            self.enabled = True
+            self["label"].setText("")
+
     def key2(self):
       self.size= [self.size[0],self.size[1]-self.step]
       self.resize(self.size[0],self.size[1])
+
     def key8(self):
       self.size= [self.size[0],self.size[1]+self.step]
       self.resize(self.size[0],self.size[1])
+
     def key4(self):
       self.size= [self.size[0]-self.step,self.size[1]]
       self.resize(self.size[0],self.size[1])
+
     def key6(self):
       self.size= [self.size[0]+self.step,self.size[1]]
       self.resize(self.size[0],self.size[1])
-    
+
     def down(self):
       self.position = [self.position[0],self.position[1]+self.step]
       self.move(self.position[0],self.position[1])
+
     def up(self):
       self.position = [self.position[0],self.position[1]-self.step]
       self.move(self.position[0],self.position[1])
+
     def left(self):
       self.position = [self.position[0]-self.step,self.position[1]]
       self.move(self.position[0],self.position[1])
+
     def right(self):
       self.position = [self.position[0]+self.step,self.position[1]]
       self.move(self.position[0],self.position[1])
-    
+
     def move(self, x, y):
-      print "["+myname+"] moving to", str(x) + ":" + str(y)
       self.instance.move(ePoint(x, y))
-          
+
+
     def resize(self, w, h):
-      print "["+myname+"] resizing to", str(w) + "x" + str(h)
       self.instance.resize(eSize(*(w, h)))
       self["label"].instance.resize(eSize(*(w, h)))
-#############################
-class  AntiScrollMenu(Screen):
-  def __init__(self,session,callback=None,size=None,position=None,arg=0):
-    self.session = session
-    self.callBack = callback
-    self.size= size
-    self.position = position
-    ss  ="<screen position=\"200,200\" size=\"300,200\" title=\"%s Menu\" >" % myname
-    ss +="<widget name=\"menu\" position=\"0,0\" size=\"300,150\" scrollbarMode=\"showOnDemand\" />" 
-    ss +="<widget name=\"label\" position=\"0,150\" size=\"300,50\"  font=\"Regular;18\" valign=\"center\" halign=\"center\" />"
-    ss +="</screen>"
-    self.skin = ss
-    Screen.__init__(self,session)
-    list = []
-    list.append(("load Profile",self.load))
-    list.append(("save Profile",self.save))
-    list.append(("save new Profile",self.savenew))
-    self["menu"] = MenuList(list)
-    self["label"] = Label("written by 3c5x9, V"+myversion)
-    self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions","NumberActions"],
-            {
-             "ok": self.go,
-             "back": self.close,
-             }, -1)
-  def go(self):
-    selection = self["menu"].getCurrent()
-    selection[1]()
-  
-  def load(self):
-    config = AntiScrollConfig()
-    liste = []
-    for i in config.getProfiles():
-      liste.append((i,i))
-    self.session.openWithCallback(self.loadProfile,ChoiceBox,_("select Profile to load"),liste)
-    
-  def loadProfile(self,value):
-    if value is not None:
-      config = AntiScrollConfig()
-      profil = config.getProfile(value[1])
-      if profil is not False:
-        self.callBack([profil["sizex"],profil["sizey"]],[profil["posx"],profil["posy"]])
-  def savenew(self):
-    self.session.openWithCallback(self.profilnameEntered,InputBox, title=_("Please enter a name for the Profile"), text="Profil", maxSize=False, type=Input.TEXT)
-    
-  def profilnameEntered(self,value):
-    if value is not None:
-      config = AntiScrollConfig()
-      config.setProfile(value,self.size,self.position)   
-  def save(self):
-    config = AntiScrollConfig()
-    liste = []
-    for i in config.getProfiles():
-      liste.append((i,i))
-    self.session.openWithCallback(self.saveProfile,ChoiceBox,_("select Profile to save"),liste)
-  def saveProfile(self,value):
-    if value is not None:
-      config = AntiScrollConfig()
-      config.setProfile(value[1],self.size,self.position)
-                       
-                          
-##############################
-class AntiScrollConfig:
-    configfile = "/etc/AntiScrollbar.conf"
-    
-    def __init__(self):
-        self.configparser = ConfigParser.ConfigParser()
-        self.configparser.read(self.configfile)
-    def setLastProfile(self,name):
-        self.configparser.set(ConfigParser.DEFAULTSECT,"lastprofile",name)
-        self.writeConfig()
-    def getLastProfile(self):
-        last = self.configparser.get(ConfigParser.DEFAULTSECT,"lastprofile")    
-        return self.getProfile(last)
-    def getProfiles(self):
-        profiles=[]
-        sections = self.configparser.sections()
-        for section in sections:
-          profiles.append(section)
-        return profiles
 
-    def getProfile(self,name):
-      if self.configparser.has_section(name) is True:
-        print "loading profile ",name
-        l={}
-        l["sizex"] = int(self.configparser.get(name, "size_x"))
-        l["sizey"] = int(self.configparser.get(name, "size_y"))
-        l["posx"] = int(self.configparser.get(name, "position_x"))
-        l["posy"] = int(self.configparser.get(name, "position_y"))
-        self.setLastProfile(name)
-        return l
-      else:
-        print "couldnt find profil", name
-        return False
-    def setProfile(self,name,size,position):
-        try:
-          self.configparser.add_section(name)
-          self.configparser.set(name, "size_x",size[0])
-          self.configparser.set(name, "size_y",size[1])
-          self.configparser.set(name, "position_x",position[0])
-          self.configparser.set(name, "position_y",position[1])
-          self.writeConfig()
-          return True
-        except ConfigParser.DuplicateSectionError:
-          self.deleteProfile(name)
-          self.setProfile(name,size,position)
-                                                                                                    
-    def deleteProfile(self,name):
-        self.configparser.remove_section(name)
-        self.writeConfig()
-
-    def writeConfig(self):
-        fp = open(self.configfile,"w")
-        self.configparser.write(fp)
-        fp.close()
-                            
-    
-     
 #############################
+
+activebar = None
+
+
 def main(session, **kwargs):
-  session.open(AntiScrollMain)
+    global activebar
+    if activebar.show:
+        activebar.hide()
+    session.openWithCallback(mainCB,AntiScrollConfig)
+
+def mainCB(saved,session):
+    global activebar,doshow
+    activebar.evStart()
+
+def autostart(session, **kwargs):
+    global activebar
+    if config.plugins.antiscrollbar.autostart.value:
+        activebar = session.instantiateDialog(AntiScrollOverlay)
+
 def Plugins(**kwargs):
-  return PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main)
+  return [PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main, icon="plugin.png"),
+          PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART,fnc = autostart)]

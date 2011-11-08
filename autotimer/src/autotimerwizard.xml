@@ -1,0 +1,151 @@
+<wizard>
+		<step id="welcome">
+			<text value="Welcome.\n\nThis Wizard will help you to create a new AutoTimer by providing descriptions for common settings." />
+			<list>
+				<listentry caption="Create a new AutoTimer." step="conf1" />
+				<listentry caption="Abort this Wizard." step="abort" />
+			</list>
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+			</code>
+		</step>
+
+		<!-- Name / Match / Enabled / Justplay -->
+		<step id="conf1" nextstep="conf2">
+			<text value="You can set the basic properties of an AutoTimer here.\nWhile 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG." />
+			<config type="dynamic" source="getConfigList" evaluation="selectionMade" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+			</code>
+			<!-- A sanity check is done in selectionMade combined with some helper versions of conf2 -->
+		</step>
+
+		<!-- Sanity check basic properties
+			They ruin the wizards history for now but better than nothing :D -->
+		<step id="conf2" nextstep="conf1">
+			<condition>
+self.condition = self.emptyMatch
+			</condition>
+			<text value="You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\nAs this is a mandatory Attribute you cannot continue without doing so." />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+			</code>
+		</step>
+
+		<step id="conf2">
+			<condition>
+self.condition = self.trailingWhitespacesMatch
+			</condition>
+			<text value="Your 'Match in title' Attribute ends with a Whitespace.\nPlease confirm if this was intentional, if not they will be removed." />
+			<list>
+				<listentry caption="Yes, keep them." step="conf2" />
+				<listentry caption="No, remove them." step="removeTrailingWhitespaces" />
+			</list>
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+			</code>
+			<code pos="after">
+self.maybeRemoveWhitespaces()
+			</code>
+		</step>
+
+		<!-- Timespan -->
+		<step id="conf2" nextstep="conf4">
+			<condition>
+self.condition = not self.emptyMatch and not self.trailingWhitespacesMatch
+			</condition>
+			<text value="The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan." />
+			<config type="dynamic" source="getConfigList" evaluation="selectionMade" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
+			</code>
+		</step>
+
+		<!-- Offset / AfterEvent / Match --> <!-- CURRENTLY INACTIVE -->
+		<step id="conf3" nextstep="conf4">
+			<text value="" />
+			<config type="dynamic" source="getConfigList" evaluation="selectionMade" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+			</code>
+		</step>
+
+		<!-- Services/Bouquets -->
+		<step id="conf4" nextstep="conf5">
+			<text value="It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\nAn Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\nPress BLUE to add a new restriction and YELLOW to remove the selected one." />
+			<config type="dynamic" source="getConfigList" evaluation="selectionMade" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
+self.selectKey("BLUE")
+self.selectKey("YELLOW")
+			</code>
+		</step>
+
+		<!-- Include / Exclude -->
+		<step id="conf5" nextstep="justbeforeend">
+			<text value="Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\nPress BLUE to add a new restriction and YELLOW to remove the selected one." />
+			<config type="dynamic" source="getConfigList" evaluation="selectionMade" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
+self.selectKey("BLUE")
+self.selectKey("YELLOW")
+			</code>
+		</step>
+
+		<!-- Maxduration / avoidDuplicate / Destination ?! -->
+		<!--
+		<step id="conf6" nextstep="end">
+			<text value="" />
+			<config type="dynamic" source="getConfigList" evaluation="selectionMade" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+			</code>
+		</step>
+		-->
+
+		<step id="justbeforeend">
+			<text value="You successfully configured a new AutoTimer. Do you want to add it to the list?\n\nYou can go back a step by pressing EXIT on your remote." />
+			<list>
+				<listentry caption="Yes" step="end" />
+				<listentry caption="No" step="abort" />
+			</list>
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+self.selectKey("EXIT")
+			</code>
+		</step>
+
+		<step id="abort">
+			<text value="The Timer will not be added to the List.\nPlease press OK to close this Wizard." />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+			</code>
+			<code pos="after">
+self.cancel()
+			</code>
+		</step>
+
+		<step id="end">
+			<text value="Thank you for using the wizard. Your new AutoTimer has been added to the List.\nPlease press OK to continue." />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+			</code>
+		</step>
+</wizard>
+

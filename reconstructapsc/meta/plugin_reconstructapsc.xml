@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Recording" />
+	  </prerequisites>
+          <info>
+                    <author>Anders Holst</author>
+                    <name>ReconstructApSc</name>
+                    <packagename>enigma2-plugin-extensions-reconstructapsc</packagename>
+                    <shortdescription>Reconstruct .ap and .sc files</shortdescription>
+                    <description>Reconstruct missing or corrupt .ap and .sc files of recorded movies.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_reconstructapsc.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-reconstructapsc" />
+	  </files>
+</default>

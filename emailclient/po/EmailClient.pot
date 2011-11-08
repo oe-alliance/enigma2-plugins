@@ -1,0 +1,225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-28 18:29+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, python-format
+msgid "%(name)s (%(user)s@%(server)s)"
+msgstr ""
+
+msgid "Accounts list"
+msgstr ""
+
+msgid "Attachments"
+msgstr ""
+
+msgid "Bodys"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Email Client"
+msgstr ""
+
+msgid "Email setup"
+msgstr ""
+
+#, python-format
+msgid ""
+"EmailClient for %(account)s:\n"
+"\n"
+"%(error)s"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "IMAP Port"
+msgstr ""
+
+msgid "IMAP Server"
+msgstr ""
+
+#, python-format
+msgid ""
+"New mail arrived for account %s:\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "Really delete account %s?"
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+#, python-format
+msgid ""
+"[EmailAccount] %(name)s: _cbCapabilities:\n"
+"####################################################################################################\n"
+"# If you have problems to log into your imap-server, please send me the "
+"output of the following line\n"
+"# cbCapabilities: %(capa)s\n"
+"####################################################################################################\n"
+msgstr ""
+
+#, python-format
+msgid "account %s is not connected"
+msgstr ""
+
+msgid "account name"
+msgstr ""
+
+msgid "account not connected"
+msgstr ""
+
+msgid "add"
+msgstr ""
+
+msgid "cancel"
+msgstr ""
+
+msgid "cannot access inbox"
+msgstr ""
+
+msgid "cannot get headers of new messages"
+msgstr ""
+
+msgid "cannot get list of new messages"
+msgstr ""
+
+msgid "connection failed - retrying"
+msgstr ""
+
+msgid "debug"
+msgstr ""
+
+msgid "delete"
+msgstr ""
+
+msgid "display connection errors"
+msgstr ""
+
+msgid "display timeout (seconds)"
+msgstr ""
+
+msgid "edit"
+msgstr ""
+
+msgid "empty values - retry"
+msgstr ""
+
+#, python-format
+msgid ""
+"error logging %(who)s in:\n"
+"%(failure)s"
+msgstr ""
+
+msgid "failed to load message"
+msgstr ""
+
+msgid "getting message ..."
+msgstr ""
+
+#, python-format
+msgid "have %d messages"
+msgstr ""
+
+msgid "have no messages"
+msgstr ""
+
+msgid "headers loaded, now parsing ..."
+msgstr ""
+
+#, python-format
+msgid "importing configurations from %s"
+msgstr ""
+
+msgid "leave unread"
+msgstr ""
+
+msgid "list all mailboxes"
+msgstr ""
+
+msgid "loading headers ..."
+msgstr ""
+
+msgid "mail check interval (minutes)"
+msgstr ""
+
+msgid "maximum mail size to fetch"
+msgstr ""
+
+msgid "message too large"
+msgstr ""
+
+msgid "no account selected"
+msgstr ""
+
+msgid "no date"
+msgstr ""
+
+msgid "no filename"
+msgstr ""
+
+msgid "no from"
+msgstr ""
+
+msgid "no mailbox?!?!"
+msgstr ""
+
+msgid "no sender"
+msgstr ""
+
+msgid "no subject"
+msgstr ""
+
+msgid "ok"
+msgstr ""
+
+msgid "parsing message ..."
+msgstr ""
+
+msgid "password"
+msgstr ""
+
+msgid "really delete mail?"
+msgstr ""
+
+msgid "really undelete mail?"
+msgstr ""
+
+msgid "remove"
+msgstr ""
+
+msgid "select Attachment"
+msgstr ""
+
+msgid "select Body"
+msgstr ""
+
+msgid "show deleted entries"
+msgstr ""
+
+msgid "undelete"
+msgstr ""
+
+msgid "user name"
+msgstr ""
+
+msgid "view Emails via IMAP4"
+msgstr ""

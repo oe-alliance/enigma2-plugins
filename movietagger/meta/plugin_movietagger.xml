@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Recording" />
+	  </prerequisites>
+          <info>
+                    <author>3c5x9</author>
+                    <name>MovieTagger</name>
+                    <packagename>enigma2-plugin-extensions-movietagger</packagename>
+                    <shortdescription>Add tags to recorded movies</shortdescription>
+                    <description>MovieTagger adds tags to recorded movies to sort a large list of movies.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_movietagger.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-movietagger" />
+	  </files>
+</default>

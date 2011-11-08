@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-seekbar
+Version: 1.0
+Description: Replaces the minute input screen for seek functions
+Maintainer: Nabil Hanna <nabil1978@web.de>
+Homepage: http://www.lt-forums.org/ali
+Depends: enigma2 (>= 2.6git20090615)

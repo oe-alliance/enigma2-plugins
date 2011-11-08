@@ -1,0 +1,168 @@
+# Rusian translations for PTS Plugin package.
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Converted from German version.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pts-enigma 1.0.0.RC13\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-16 13:00+0200\n"
+"PO-Revision-Date: 2010-06-25 13:18+0300\n"
+"Last-Translator: Pavel Chernov <p070707@rambler.ru>\n"
+"Language-Team: http://gisclub.tv/\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Save and stop"
+msgstr "Сохранить и остановить"
+
+msgid "Save and record"
+msgstr "Сохранить и записать"
+
+msgid "Don't save"
+msgstr "Не сохранять"
+
+msgid "Timeshift"
+msgstr "Временной сдвиг"
+
+msgid ""
+"OH NO!\n"
+"The timeshift that was marked to save at end of event, was lost because you zapped away!"
+msgstr ""
+"О НЕТ!!\n"
+"Временной сдвиг, который должен был быть сохранен, утерян из-за того что вы переключили канал!"
+
+msgid "Timeshift saved to your harddisk!"
+msgstr "Временной сдвиг сохранен на Вас жесткий диск!"
+
+msgid "Timeshift copied to your harddisk!"
+msgstr "Временной сдвиг скопирован на Ваш жесткий диск!"
+
+msgid "Timeshift save failed!"
+msgstr "Ошибка сохранения временного сдвига!"
+
+msgid "No Timeshift found to save as recording!"
+msgstr "Не найден временной сдвиг для сохранения в виде записи!"
+
+msgid "Permanent Timeshift Settings"
+msgstr "Настройки временного сдвига"
+
+msgid ""
+"The Timeshift record was not saved yet!\n"
+"What do you want to do now with the timeshift file?"
+msgstr ""
+"Запись временного сдвига не была еще сохранена!\n"
+"Что вы хотите сделать с сохраненным файлом временного сдвига ?"
+
+msgid "Which event do you want to save permanently?"
+msgstr "Какое событие вы хотите сохранить из временного сдвига ?"
+
+msgid "Save Timeshift as Movie and stop recording"
+msgstr "Сохранить временной сдвиг и остановить запись"
+
+msgid "Save Timeshift as Movie and continue recording"
+msgstr "Сохранить временной сдвиг и продолжить запись"
+
+msgid "Don't save Timeshift as Movie"
+msgstr "Не сохранять временной сдвиг в виде записи"
+
+msgid "Current Event:"
+msgstr "Текущие событие:"
+
+msgid "Getting Event Info failed!"
+msgstr "Ошибка получение информации о текущем событии!"
+
+msgid ""
+"Maximum Timeshift length per Event reached!\n"
+"Restarting Timeshift now ..."
+msgstr ""
+"Максимальное время временного сдвига исчерпано!\n"
+"Делаю перезагрузку временного сдвига ..."
+
+msgid "Timeshift will get saved at end of event!"
+msgstr "Временной сдвиг будет сохранен до конца события!"
+
+msgid "save recording (stop after current event)"
+msgstr "Сохр. запись (стоп после тек. события)"
+
+msgid "save recording (Select event)"
+msgstr "Сохранить запись (выбрать событие)"
+
+msgid "Permanent Timeshift Enable"
+msgstr "Временной сдвиг включен"
+
+msgid "Permanent Timeshift Max Events"
+msgstr "Максимальное количество событий"
+
+msgid "Permanent Timeshift Max Length"
+msgstr "Максимальная длина записи"
+
+msgid "Permanent Timeshift Start Delay"
+msgstr "Задержка на включение временного сдвига"
+
+msgid "Timeshift-Save Action on zap"
+msgstr "Действие при переключении канала"
+
+msgid "Clean Timeshift Buffer on zap?"
+msgstr "Очистить буффер при переключении канала ?"
+
+msgid "Creating Hardlink to Timeshift file failed!"
+msgstr "Creating Hardlink to Timeshift file failed!"
+
+msgid ""
+"Timeshift Buffer Full!\n"
+" Cleaning Buffer and restarting timeshift ..."
+msgstr ""
+"Буфер временного сдвига переполнено!!\n"
+"Очищаю буфер и делаю перезагрузку плагина..."
+
+msgid "We try to copy the file now. This might take a while!"
+msgstr "Мы пытаемся скопировать файл. Это займет некоторе время..."
+
+msgid "Filesystems like FAT32 do not support hardlinks!"
+msgstr "Файловая система FAT32 не совсем совсместима с данным плагином."
+
+msgid ""
+"Merging Timeshift records now!\n"
+"This might take a while ..."
+msgstr ""
+"Обьединяю записи временного сдвига!\n"
+"Это займет некоторое время ..."
+
+msgid ""
+"Could not activate Permanent-Timeshift!\n"
+"\n"
+"Timeshift-Path does not exist"
+msgstr ""
+"Не могу запустить временной сдвиг!\n"
+"\n"
+"Проверьте пути установки"
+
+msgid "Timeshift Settings"
+msgstr "Настройки временного сдвига"
+
+msgid "Beta: Copy Movie when hardlinking failed?"
+msgstr "Beta: Copy Movie when hardlinking failed?"
+
+msgid "Beta: Show PTS Infobar while timeshifting?"
+msgstr "Beta: Show PTS Infobar while timeshifting?"
+
+msgid "Beta: Merge PTS and Instant Record later?"
+msgstr "Beta: Merge PTS and Instant Record later?"
+
+msgid "Beta: Margin after recording current event?"
+msgstr "Beta: Margin after recording current event?"
+
+msgid "Copy Movie when hardlinking failed?"
+msgstr "Copy Movie when hardlinking failed?"
+
+msgid "Show PTS Infobar while timeshifting?"
+msgstr "Показывать PTS инфо-бар во время временного сдвига?"
+
+msgid "Stop timeshift while recording?"
+msgstr "Остановить сдвиг времени на время записи ?"
+

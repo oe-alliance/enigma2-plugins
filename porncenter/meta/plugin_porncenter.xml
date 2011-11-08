@@ -1,0 +1,20 @@
+<default>
+	  <prerequisites>
+                    <hardware type="dm8000" />
+                    <hardware type="dm800" />		    
+                    <hardware type="dm500hd" />	
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>AliAbdul</author>
+                    <name>Porn Center</name>
+                    <packagename>enigma2-plugin-extensions-porncenter</packagename>
+                    <shortdescription>Adult streaming plugin</shortdescription>
+                    <description>Adult streaming plugin.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_porncenter.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-porncenter" />
+	  </files>
+</default>

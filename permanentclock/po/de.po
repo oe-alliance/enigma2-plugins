@@ -1,0 +1,40 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PermanentClock\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-26 18:22-0000\n"
+"PO-Revision-Date: 2008-11-26 18:24-0000\n"
+"Last-Translator: AliAbdul <aliabdul1978@hotmail.de>\n"
+"Language-Team: Nabil Hanna <nabil1978@web.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/permanentclock/src\n"
+
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:54
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:210
+msgid "Permanent Clock"
+msgstr "Permanente Uhr"
+
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:178
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:186
+msgid "Deactivate permanent clock"
+msgstr "Deaktiviere permanente Uhr"
+
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:180
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:186
+msgid "Activate permanent clock"
+msgstr "Aktiviere permanente Uhr"
+
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:181
+msgid "Change permanent clock position"
+msgstr "Position der permanenten Uhr ändern"
+
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:210
+msgid "Shows the clock permanent on the screen"
+msgstr "Zeigt eine Uhr permanent auf dem Bildschirm"
+

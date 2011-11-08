@@ -1,0 +1,283 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - ncidclient\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-05 22:56+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-SearchPath-0: \n"
+
+#: .../src/plugin.py:44
+msgid "Germany"
+msgstr "Germania"
+
+#: .../src/plugin.py:45
+msgid "The Netherlands"
+msgstr "Olanda"
+
+#: .../src/plugin.py:46
+msgid "France"
+msgstr "Francia"
+
+#: .../src/plugin.py:47
+msgid "Italy"
+msgstr "Italia"
+
+#: .../src/plugin.py:48
+msgid "Switzerland"
+msgstr "Svizzera"
+
+#: .../src/plugin.py:49
+msgid "Austria"
+msgstr "Austria"
+
+#: .../src/plugin.py:87
+msgid "Flash"
+msgstr "Flash"
+
+#: .../src/plugin.py:88
+msgid "Compact Flash"
+msgstr "Compact Flash"
+
+#: .../src/plugin.py:89
+msgid "USB Device"
+msgstr "Dispositivo USB"
+
+#: .../src/plugin.py:94
+msgid "Media directory"
+msgstr "Directory media"
+
+#: .../src/plugin.py:100
+msgid "Network mount"
+msgstr "Mount di rete"
+
+#: .../src/plugin.py:109
+msgid "show nothing"
+msgstr "Nulla"
+
+#: .../src/plugin.py:109
+msgid "show as list"
+msgstr "Come elenco"
+
+#: .../src/plugin.py:109
+msgid "show each call"
+msgstr "Tutte"
+
+#: .../src/plugin.py:440
+msgid "Delete"
+msgstr "Cancell."
+
+#: .../src/plugin.py:442
+msgid "New"
+msgstr "Nuovo"
+
+#: .../src/plugin.py:444
+msgid "Edit"
+msgstr "Mod."
+
+#: .../src/plugin.py:446
+msgid "Search"
+msgstr "Ricerca"
+
+#: .../src/plugin.py:466
+msgid "Phonebook"
+msgstr "Rubrica"
+
+#: .../src/plugin.py:520
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+"Cancellare la voce\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+
+#: .../src/plugin.py:524
+#: .../src/plugin.py:541
+#: .../src/plugin.py:633
+msgid "No entry selected"
+msgstr "Nessuna voce selezionata"
+
+#: .../src/plugin.py:575
+#: .../src/plugin.py:697
+msgid "Cancel"
+msgstr "Annull."
+
+#: .../src/plugin.py:577
+#: .../src/plugin.py:699
+msgid "OK"
+msgstr "Ok"
+
+#: .../src/plugin.py:592
+msgid "Name"
+msgstr "Nome"
+
+#: .../src/plugin.py:593
+msgid "Number"
+msgstr "Numero"
+
+#: .../src/plugin.py:600
+msgid "Add entry to phonebook"
+msgstr "Aggiungere voce in rubrica"
+
+#: .../src/plugin.py:608
+msgid "Entry incomplete."
+msgstr "Voce incompleta."
+
+#: .../src/plugin.py:642
+msgid "Enter Search Terms"
+msgstr "Inserire criteri di ricerca"
+
+#: .../src/plugin.py:642
+msgid "Search phonebook"
+msgstr "Ricerca su rubrica"
+
+#: .../src/plugin.py:718
+msgid "NCID Client - Setup"
+msgstr "NCID Client - Configurazione"
+
+#: .../src/plugin.py:730
+msgid "Call monitoring"
+msgstr "Monitoraggio chiamate"
+
+#: .../src/plugin.py:732
+msgid "NCID server (Name or IP)"
+msgstr "Server NCID (Nome o IP)"
+
+#: .../src/plugin.py:733
+msgid "NCID server listening port (1-65535)"
+msgstr "Porta server NCID (1-65535)"
+
+#: .../src/plugin.py:735
+msgid "Show after Standby"
+msgstr "Mostrare chiamate dopo lo standby"
+
+#: .../src/plugin.py:738
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr "Pref. locale per le chiamate che ne sono prive (se necessario)"
+
+#: .../src/plugin.py:739
+msgid "Timeout for Call Notifications (seconds)"
+msgstr "Ritardo notifica chiamate (secondi)"
+
+#: .../src/plugin.py:740
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr "Identificativo chiamante (selezionare La Nazione!)"
+
+#: .../src/plugin.py:742
+msgid "Country"
+msgstr "Nazione"
+
+#: .../src/plugin.py:744
+msgid "Use internal PhoneBook"
+msgstr "Usare rubrica interna"
+
+#: .../src/plugin.py:760
+msgid "PhoneBook Location"
+msgstr "Collocazione rubrica"
+
+#: .../src/plugin.py:762
+msgid "Automatically add new Caller to PhoneBook"
+msgstr "Aggiungere automaticamente i nuovi chiamanti alla rubrica"
+
+#: .../src/plugin.py:764
+msgid "Strip Leading 0"
+msgstr "Sopprimere \"0\" iniziali"
+
+#: .../src/plugin.py:765
+msgid "Show connection information popups"
+msgstr "Mostrare popup con info connessione"
+
+#: .../src/plugin.py:795
+msgid "Plugin not active"
+msgstr "Plugin non attivo"
+
+#: .../src/plugin.py:797
+msgid "No phonebook"
+msgstr "Nessuna rubrica"
+
+#: .../src/plugin.py:824
+msgid "no calls"
+msgstr "Nessuna"
+
+#: .../src/plugin.py:827
+msgid "Last 10 calls:\n"
+msgstr "Ultime 10 chiamate:\n"
+
+#: .../src/plugin.py:835
+#: .../src/plugin.py:838
+#: .../src/plugin.py:940
+#: .../src/plugin.py:997
+#: .../src/plugin.py:1017
+msgid "UNKNOWN"
+msgstr "Sconosciuto"
+
+#: .../src/plugin.py:874
+#, python-format
+msgid ""
+"Incoming Call on %s from\n"
+"---------------------------------------------\n"
+"%s\n"
+"%s\n"
+"---------------------------------------------"
+msgstr ""
+"Chiamata in arrivo su %s da\n"
+"---------------------------------------------\n"
+"%s\n"
+"%s\n"
+"---------------------------------------------"
+
+#: .../src/plugin.py:996
+msgid "number suppressed"
+msgstr "Numero mascherato"
+
+#: .../src/plugin.py:1029
+msgid "Connecting to NCID Server..."
+msgstr "Connessione al server NCID in corso..."
+
+#: .../src/plugin.py:1034
+msgid "Connected to NCID Server"
+msgstr "Connesso al server NCID"
+
+#: .../src/plugin.py:1044
+#, python-format
+msgid ""
+"Connection to NCID Server lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Connessione al server NCID persa!\n"
+"(%s)\n"
+"Nuovo tentativo in corso..."
+
+#: .../src/plugin.py:1052
+#, python-format
+msgid ""
+"Connecting to NCID Server failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Connessione al server NCID fallita!\n"
+"(%s)\n"
+"Nuovo tentativo in corso..."
+
+#: .../src/plugin.py:1102
+msgid "Display Fon calls on screen"
+msgstr "Mostrare le chiamate telef. sulla TV"
+

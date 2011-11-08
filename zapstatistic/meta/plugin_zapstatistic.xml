@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+                    <tag type="EPG" />
+	  </prerequisites>
+          <info>
+                    <author>AliAbdul</author>
+                    <name>ZapStatistic</name>
+                    <packagename>enigma2-plugin-extensions-zapstatistic</packagename>
+                    <shortdescription>Shows statistics of watched services</shortdescription>
+                    <description>ZapStatistic shows the watched services with some statistics.</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-zapstatistic" />
+	  </files>
+</default>

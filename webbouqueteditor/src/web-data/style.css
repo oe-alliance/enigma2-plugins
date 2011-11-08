@@ -1,0 +1,171 @@
+html, body{
+	font-family: Tahoma, Sans-Serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+	text-align: center;
+	background: #555
+}
+
+* html #banner{
+	width: 1005px;
+	height: 40px;
+}
+
+a, a:visited, a:active{
+	color: #485052;
+	text-decoration: none;
+}
+
+button{
+	/*font-weight: bold;*/
+	margin: 1px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+
+img{
+	border: 0px;
+}
+
+#banner{
+	width: 1000px;
+	height: 67px;
+	background: #000;
+	padding-left: 5px;
+	margin-bottom: 8px; 	
+}
+
+#serviceSearch{
+	width: 70%;
+	color: #AAA;
+}
+
+#container {
+	margin: 0 auto;   /* align for good browsers */
+	text-align: left; /* counter the body center */
+	width: 1005px;
+}
+#notification{		
+	color: #000;
+	width: 50%;
+	height: 32px;
+	position: absolute;
+	top: 0px;
+	left: 25%;		
+	text-align: center;
+	vertical-align: bottom;
+	z-index: 2;		
+}	
+
+.normalFont{
+	font-weight: normal;
+}
+
+
+.contentTabMain{
+	background-color: #FFF;
+	text-align: left; 
+	width: 1004px;
+	margin:0px;
+	padding:0px;
+}
+
+.contentTabInner{	
+	background-color: #FFF;
+	text-align: left; 
+	width: 490px;
+	margin:0px;
+	padding:0px;
+}
+
+th.contentTabMain{
+	background: #000;
+}
+
+.selectTab{
+	width: 100%;
+}
+
+.roundBorder{
+	border: 2px solid #000;		
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+.half{
+	width: 48%;
+	vertical-align: top;
+}
+
+.quarter{
+	width: 25%;
+}
+
+
+.middle{
+	padding: 0px;
+}
+
+.select{
+	width: 100%;
+	display: block;
+}
+
+.BEmenu{
+	text-align: center;
+	overflow:hidden;
+	background: #000;
+	margin: 0;
+	padding: 0;
+}
+
+.BEmenu li{
+	list-style: none;
+	float: left;
+	width: 130px;
+	height: 21px;
+	margin-left: 2px;
+	background:#485052; 
+	margin-top: 6px;
+	margin-bottom: 6px;
+	padding: 0px;
+	
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;		
+}
+
+.BEmenu a:hover, .BEmenu a:hover{ background: #AAA; }
+.BEmenu li.hover, .BEmenu li.hover{ background: #AAA; }
+
+.BEmenu a{
+	color: #fff;
+	display:block;
+	padding-top: 1px;
+	padding-bottom: 3px;
+			
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+.black{
+	background: #000;
+}
+
+.grey{
+	background: #DDD;
+	color: #000;
+}
+
+.white{
+	background: #FFF;
+	color: #000;
+}
+
+.tabheader{
+	height: 35px;
+}

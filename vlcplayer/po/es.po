@@ -1,0 +1,169 @@
+# Spanish translations for enigma2-plugins package.
+# Copyright (C) 2008 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2008.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-06-22 14:37+0200\n"
+"PO-Revision-Date: 2008-06-15 23:34+0100\n"
+"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Audio Bitrate"
+msgstr "VelocidadBit Sonido"
+
+msgid "Audio Channels"
+msgstr "Canales de sonido"
+
+msgid "Audio Codec"
+msgstr "Codec Sonido"
+
+msgid "Audio Samplerate"
+msgstr "Velocidad muestra sonido"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Correct aspect ratio to"
+msgstr "Corregir proporción de aspecto a"
+
+msgid "DVD Device (leave empty for default)"
+msgstr "Dispositivo DVD (deje vacío para defecto)"
+
+msgid "Enter VLC-Server as FQDN or IP-Address"
+msgstr "Introduzca servidor VLC como IP o nombre"
+
+#, python-format
+msgid ""
+"Error loading filelist into server %s:\n"
+"%s"
+msgstr ""
+"Error cargando la lista en el servidor %s:\n"
+"%s"
+
+#, python-format
+msgid ""
+"Error loading playlist %s into server %s:\n"
+"%s"
+msgstr ""
+"Error cargando la lista %s en el servidor %s:\n"
+"%s"
+
+#, python-format
+msgid ""
+"Error loading playlist into server %s:\n"
+"%s"
+msgstr ""
+"Error cargando la lista en el servidor %s:\n"
+"%s"
+
+#, python-format
+msgid ""
+"Error updating filelist from server %s:\n"
+"%s"
+msgstr ""
+"Error actualizando la lista desde el servidor %s:\n"
+"%s"
+
+#, python-format
+msgid ""
+"Error with VLC server:\n"
+"%s"
+msgstr ""
+"Error con el servidor VLC:\n"
+"%s"
+
+msgid "Filelist"
+msgstr ""
+
+msgid "HTTP Port"
+msgstr "Puerto HTTP"
+
+msgid "List of known VLC-Servers"
+msgstr ""
+
+msgid "Movie Directory"
+msgstr "Directorio de Películas"
+
+msgid "No more files in this directory"
+msgstr "No hay más ficheros en este directorio"
+
+msgid "No previous file in this directory"
+msgstr "No hay fichero anterior en este directorio"
+
+msgid ""
+"No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+msgstr ""
+"No hay canal válido-Enigma a reproducir un Stream-VLC\n"
+"Chequee su instalacion y reintentelo"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Playlist"
+msgstr ""
+
+msgid "Really delete this Server?"
+msgstr "Seguro que quiere borrar este Servidor?"
+
+msgid "Server Address"
+msgstr "Dirección del Servidor"
+
+msgid "Subtitle overlay"
+msgstr "Subtítulos"
+
+msgid "Symbolic Servername"
+msgstr "Nombre del servidor simbólico"
+
+msgid "Transcode MPEG/DVD Audio"
+msgstr "Transcode Sonido MPEG/DVD"
+
+msgid "Transcode MPEG/DVD Video"
+msgstr "Transcode Video MPEG/DVD"
+
+msgid "Video Bitrate"
+msgstr "Velocidad Video"
+
+msgid "Video Codec"
+msgstr "Codec Video"
+
+msgid "Video Height"
+msgstr "Altura Video"
+
+msgid "Video Width"
+msgstr "Anchura Video"
+
+msgid "add server"
+msgstr "añadir servidor"
+
+msgid "delete server"
+msgstr "borrar servidor"
+
+msgid "edit server"
+msgstr "editar servidor"
+
+msgid "filter off"
+msgstr "apagar filtro"
+
+msgid "filter on"
+msgstr "encender filtro"
+
+msgid "play DVD"
+msgstr "reproducir DVD"
+
+msgid "refresh"
+msgstr "refrescar"
+
+msgid "show filelist"
+msgstr "mostrar lista de ficheros"
+
+msgid "show playlist"
+msgstr "mostrar listas de ficheros"

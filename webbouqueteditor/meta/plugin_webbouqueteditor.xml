@@ -1,0 +1,19 @@
+<default>
+	  <prerequisites>
+                    <tag type="Network" />
+                    <tag type="System" />
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>Awd</author>
+                    <name>WebBouquetEditor</name>
+                    <packagename>enigma2-plugin-extensions-webbouqueteditor</packagename>
+                    <shortdescription>Web-Bouquet-Editor for PC</shortdescription>
+                    <description>Web-Bouquet-Editor for PC</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_webbouqueteditor.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-webbouqueteditor" />
+	  </files>
+</default>

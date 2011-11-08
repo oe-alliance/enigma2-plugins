@@ -1,0 +1,271 @@
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - AC3lipsync\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-12-26 21:06+0100\n"
+"PO-Revision-Date: 2009-12-26 21:07+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net - Italy <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: /home/dario/Plugins/ac3lipsync\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/ac3lipsync\n"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:57
+msgid "Service delay"
+msgstr "Ritardo canale"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:58
+msgid "Global delay"
+msgstr "Ritardo globale"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:62
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:146
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:236
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:240
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:241
+#, python-format
+msgid "%i ms"
+msgstr "%i ms"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:65
+msgid "Channel audio:"
+msgstr "Canale audio: "
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:70
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:63
+msgid "Cancel"
+msgstr "Annullare"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:71
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:72
+msgid "Switch audio"
+msgstr "Cambiare audio"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:73
+msgid "Save to key"
+msgstr "Salvare su tasto"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:78
+msgid "Open plugin menu"
+msgstr "Aprire il menu del plugin"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:79
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:86
+msgid "Save values and close plugin"
+msgstr "Salvare la configurazione e uscire"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:80
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:85
+msgid "Discard changes and close plugin"
+msgstr "Annullare le modifiche e uscire"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:81
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:82
+msgid "Change active delay"
+msgstr "Cambiare il ritardo corrente"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:83
+msgid "Increase delay"
+msgstr "Aumentare il ritardo"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:84
+msgid "Decrease delay"
+msgstr "Diminuire il ritardo"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:87
+msgid "Select channel audio"
+msgstr "Selezionare il canale audio"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:88
+msgid "Save current delay to key"
+msgstr "Assegnare ritardo corrente a un tasto"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:89
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:91
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:93
+#, python-format
+msgid "Decrease delay by %i ms (can be set)"
+msgstr "Diminuire il ritardo di %i ms (configurabili)"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:90
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:92
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:94
+#, python-format
+msgid "Increase delay by %i ms (can be set)"
+msgstr "Aumentare il ritardo di %i ms (configurabili)"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:95
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:96
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:97
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:98
+#, python-format
+msgid "Set delay to %i ms (can be set)"
+msgstr "Regolare il ritardo a %i ms (configurabili)"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:211
+msgid "Move plugin screen"
+msgstr "Spostare la finestra del plugin"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:214
+msgid "Menu"
+msgstr "Menu"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:221
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:282
+msgid "Invalid selection"
+msgstr "Selezione non valida!"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:257
+#, python-format
+msgid "Select the key you want to set to %i ms"
+msgstr "Sel. il tasto a cui assegnare %i ms"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:263
+#, python-format
+msgid "Key %(key)s (current value: %(value)i ms)"
+msgstr "Tasto %(key)s (valore corrente: %(value)i ms)"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:268
+msgid "Setting key canceled"
+msgstr "Configurazione tasto cancellata!"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:280
+#, python-format
+msgid "Key %(Key)s successfully set to %(delay)i ms"
+msgstr "Tasto %(Key)s configurato con successo a %(delay)i ms"
+
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:30
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:36
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:38
+msgid "Audio Sync"
+msgstr "Audio Sync"
+
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:36
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:38
+msgid "sets the Audio Delay (LipSync)"
+msgstr "Configurare il ritardo audio (LipSync)"
+
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:37
+msgid "Audio Sync Setup"
+msgstr "Configurazione sincronismo audio"
+
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:37
+msgid "Setup for the Audio Sync Plugin"
+msgstr "Configurazione plugin Audio Sync"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:42
+msgid "Outer Bound (+/-)"
+msgstr "Ritardo massimo (+/-)"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:43
+msgid "Step in ms for arrow keys"
+msgstr "Passo tasti cursore (ms):"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:44
+msgid "Wait time in ms before activation:"
+msgstr "Attesa prima di attivare (ms):"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:45
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:46
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:47
+#, python-format
+msgid "Step in ms for keys '%s'"
+msgstr "Passo in ms per il tasto \"%s\""
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:48
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:49
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:50
+#, python-format
+msgid "Step in ms for key %i"
+msgstr "Passo tasto %i (ms):"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:60
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr "Plugin: %(plugin)s , Versione: %(version)s"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:64
+msgid "Save"
+msgstr "Salvare"
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:65
+msgid " "
+msgstr " "
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:17
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:24
+msgid "Save values and close screen"
+msgstr "Salvare la configurazione e chiudere la finestra"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:18
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:23
+msgid "Discard changes and close screen"
+msgstr "Annullare le modifiche e chiudere la finestra"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:19
+msgid "Move screen to the left"
+msgstr "Spostare la finestra a sx"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:20
+msgid "Move screen to the right"
+msgstr "Spostare la finestra a dx"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:21
+msgid "Move screen up"
+msgstr "Spostare la finestra in sù"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:22
+msgid "Move screen down"
+msgstr "Spostare la finestra giù"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:25
+msgid "Move screen to the upper left corner"
+msgstr "Spostare la finestra nell'angolo in alto a sx"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:26
+msgid "Center screen at the upper border"
+msgstr "Centrare la finestra al bordo inferiore"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:27
+msgid "Move screen to the upper right corner"
+msgstr "Spostare la finestra nell'angolo in alto a dx"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:28
+msgid "Move screen to the middle of the left border"
+msgstr "Spostare la finestra al centro del bordo sx"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:29
+msgid "Move screen to the center of your TV"
+msgstr "Posizionare la finestra al centro"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:30
+msgid "Move screen to the middle of the right border"
+msgstr "Spostare la finestra al centro del bordo dx"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:31
+msgid "Move screen to the lower left corner"
+msgstr "Spostare la finestra nell'angolo in basso a sx"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:32
+msgid "Center screen at the lower border"
+msgstr "Centrare "
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:33
+msgid "Move screen to the lower right corner"
+msgstr "Spostare la finestra nell'angolo in basso a dx"
+
+#: /home/dario/Plugins/ac3lipsync/src/MovableScreen.py:34
+msgid "Reset saved position"
+msgstr "Reset della posizione salvata"
+

@@ -1,0 +1,58 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - setpasswd\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-29 20:44+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@118como.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/setpasswd\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/setpasswd\n"
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:25
+msgid "Change Root Password"
+msgstr "Cambiare la password di root"
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:51
+msgid "Cancel"
+msgstr "Annull."
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:52
+msgid "Set Password"
+msgstr "Confermare"
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:53
+msgid "new Random"
+msgstr "Nuova casuale"
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:54
+msgid "virt. Keyboard"
+msgstr "Tastiera virt."
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:73
+msgid "Enter new Password"
+msgstr "Inserire la nuova password"
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:88
+msgid "Sucessfully changed password for root user to: "
+msgstr "Password utente root modificata correttamente in: "
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:90
+msgid "Unable to change/reset password for root user"
+msgstr "Impossibile cambiare/annullare la password per l'utente root!"
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:113
+msgid "Enter your password here:"
+msgstr "Inserire qui la nuova password:"
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:130
+msgid "Change or reset the root password of your dreambox"
+msgstr "Cambiare o annullare la password del Dreambox"
+

@@ -1,0 +1,28 @@
+<table class="selectTab"> 
+	<tr>
+		<td>
+			<select id="alternativelist" size="6" class="select">
+			{for service in services}
+			  <option value="${service.servicereference}">${service.prefix}${service.servicename}${service.suffix}</option>
+			{/for}		
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<!--
+			<button style="width: 23%" name="MoveAlternativeUp" type="button"
+				  onclick="moveServiceOptionsUp('alternativelist');">
+				<b>Up</b>
+			</button>
+			<button style="width: 23%" name="MoveAlternativeDown" type="button"
+				  onclick="moveServiceOptionsDown('alternativelist');">
+				<b>Down</b>
+			</button>
+		-->
+			<button style="width: 23%" type="button" onclick="removeAlternative('alternativelist');">
+				Remove
+			</button>
+		</td>
+	</tr>
+</table>

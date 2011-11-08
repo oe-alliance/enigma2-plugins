@@ -1,0 +1,181 @@
+# translation of SimpleRSS.po to gerrit
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# gerrit <gerrit@nedlinux.nl>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: SimpleRSS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-09 16:47+0100\n"
+"PO-Revision-Date: 2009-01-11 20:02+0100\n"
+"Last-Translator: Roodkapke\n"
+"Language-Team: gerrit <fy@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: ../src/plugin.py:89
+#, python-format
+msgid "%d Feed(s) were added to configuration."
+msgstr "%d Feed(s) zijn toegevoegd aan de configuratie."
+
+#: ../src/plugin.py:118
+msgid "A simple to use RSS reader"
+msgstr "Een simpel te gebruiken RSS reader"
+
+#: ../src/RSSSetup.py:26
+msgid "Autoupdate"
+msgstr "Autoupdate"
+
+#: ../src/RSSSetup.py:32
+#: ../src/RSSSetup.py:92
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: ../src/RSSScreens.py:395
+#: ../src/RSSScreens.py:400
+msgid "Close"
+msgstr "Sluiten"
+
+#: ../src/RSSSetup.py:95
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: ../src/RSSScreens.py:96
+#: ../src/RSSScreens.py:170
+msgid "Enclosures"
+msgstr "Bijlages"
+
+#: ../src/RSSScreens.py:359
+#: ../src/RSSScreens.py:384
+msgid "Entries"
+msgstr "Ingaves"
+
+#: ../src/RSSScreens.py:91
+#: ../src/RSSScreens.py:166
+#: ../src/RSSScreens.py:264
+#, python-format
+msgid "Entry %s/%s"
+msgstr "Ingave %s%s"
+
+#: ../src/RSSScreens.py:27
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
+msgstr "Fout tijdens verwerken feed, dit betekent meestal dat er iets fout is."
+
+#: ../src/RSSSetup.py:72
+#: ../src/RSSSetup.py:156
+msgid "Feed"
+msgstr "Feed"
+
+#: ../src/RSSScreens.py:360
+#: ../src/RSSScreens.py:385
+#, python-format
+msgid "Feed %s/%s"
+msgstr "Feed %s/%s"
+
+#: ../src/RSSSetup.py:27
+msgid "Feed URI"
+msgstr "Feed url"
+
+#: ../src/RSSScreens.py:266
+msgid "Feed is empty."
+msgstr "Feed is leeg."
+
+#: ../src/RSSScreens.py:68
+msgid "Found no Enclosure we can display."
+msgstr "Geen bijlage gevonden die we kunnen laten zien."
+
+#: ../src/RSSSetup.py:81
+msgid "Keep running in background"
+msgstr "Op de achtergrond uitvoeren"
+
+#: ../src/RSSSetup.py:94
+msgid "New"
+msgstr "Nieuw"
+
+#: ../src/RSSPoller.py:33
+msgid "New Items"
+msgstr "Nieuwe items"
+
+#: ../src/RSSPoller.py:34
+msgid "New Items since last Auto-Update"
+msgstr "Nieuwe items sinds laatste auto-update"
+
+#: ../src/RSSScreens.py:172
+msgid "No such Item."
+msgstr "Geen beschikbaar item/"
+
+#: ../src/plugin.py:11
+msgid "Notification"
+msgstr "Bericht"
+
+#: ../src/RSSSetup.py:33
+#: ../src/RSSSetup.py:93
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:12
+msgid "Preview"
+msgstr "Vooruitblik"
+
+#: ../src/RSSSetup.py:123
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Deze entry echt verwijderen?\n"
+"Dit kan niet worden hersteld!"
+
+#: ../src/RSSPoller.py:151
+#, python-format
+msgid "Received %d new news item(s)."
+msgstr "%d nieuwe nieuws item(s) ontvangen."
+
+#: ../src/RSSScreens.py:394
+#: ../src/RSSScreens.py:399
+msgid "Setup"
+msgstr "Instellingen"
+
+#: ../src/RSSSetup.py:86
+msgid "Show new Messages as"
+msgstr "Laat nieuwe berichten zien als"
+
+#: ../src/RSSPoller.py:83
+#, python-format
+msgid ""
+"Sorry, this type of feed is unsupported:\n"
+"%s"
+msgstr ""
+"Sorry, dit type feed wordt niet ondersteund:\n"
+"%s"
+
+#: ../src/RSSSetup.py:78
+msgid "Start automatically with Enigma2"
+msgstr "Start automatisch met Enigma2"
+
+#: ../src/RSSScreens.py:393
+msgid "Update Feed"
+msgstr "Feed "
+
+#: ../src/RSSSetup.py:87
+msgid "Update Interval (min)"
+msgstr "Update interval (min)"
+
+#: ../src/RSSScreens.py:53
+msgid ""
+"Update is being done in Background.\n"
+"Contents will automatically be updated when it's done."
+msgstr ""
+"Update wordt op de achtergrond uitgevoerd.\n"
+"De inhoud wordt automatisch ververst als het gereed is."
+
+#: ../src/RSSScreens.py:406
+msgid "What to do?"
+msgstr "Wat te doen?"
+
+#: ../src/plugin.py:13
+msgid "none"
+msgstr "geen"
+

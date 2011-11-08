@@ -1,0 +1,6 @@
+zapp; LOAD zapp
+epg; $KEY_RED; LOAD epg
+menu; $KEY_MENU; LOAD menu
+pvr; $KEY_VIDEO; LOAD pvr
+macros; LOAD macros
+STANDBY; $KEY_POWER

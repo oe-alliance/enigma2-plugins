@@ -1,0 +1,244 @@
+# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Automatically generated, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-04-24 13:22+0200\n"
+"PO-Revision-Date: 2009-03-25 10:06+0300\n"
+"Last-Translator:  <peter@dreambox.org.ua>\n"
+"Language-Team: Russian / enigma(c) Ukraine, Kiev>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Русский\n"
+"X-Poedit-Country: RUSSIA\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+
+msgid " Results"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "All Time"
+msgstr ""
+
+msgid "Ascanding"
+msgstr ""
+
+msgid "Australia"
+msgstr ""
+
+msgid "Autos & Vehicles"
+msgstr ""
+
+msgid "Brazil"
+msgstr ""
+
+msgid "Canada"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Comedy"
+msgstr ""
+
+msgid "Czech Republic"
+msgstr ""
+
+msgid "Descending"
+msgstr ""
+
+msgid "Do you want to see more entries?"
+msgstr ""
+
+msgid "Education"
+msgstr ""
+
+msgid "Entertainment"
+msgstr ""
+
+msgid "Fetching feed entries"
+msgstr ""
+
+msgid "Fetching search entries"
+msgstr ""
+
+msgid "Film & Animation"
+msgstr ""
+
+msgid "France"
+msgstr ""
+
+msgid "From Region"
+msgstr ""
+
+msgid "Gaming"
+msgstr ""
+
+msgid "Germany"
+msgstr ""
+
+msgid "Great Britain"
+msgstr ""
+
+msgid "Holland"
+msgstr ""
+
+msgid "Hong Kong"
+msgstr ""
+
+msgid "Howto & Style"
+msgstr ""
+
+msgid "India"
+msgstr ""
+
+msgid "Ireland"
+msgstr ""
+
+msgid "Israel"
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "Japan"
+msgstr ""
+
+msgid "Mexico"
+msgstr ""
+
+msgid "More video entries."
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
+msgid "My TubePlayer"
+msgstr ""
+
+msgid "MyTubePlayer"
+msgstr ""
+
+msgid "MyTubeVideoInfoScreen"
+msgstr ""
+
+msgid "New Zealand"
+msgstr ""
+
+msgid "News & Politics"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "No playable video found! Stop playing this movie?"
+msgstr ""
+
+msgid "No, but play next video"
+msgstr ""
+
+msgid "No, but play previous video"
+msgstr ""
+
+msgid "Nonprofits & Activism"
+msgstr ""
+
+msgid "Order by"
+msgstr ""
+
+msgid "People & Blogs"
+msgstr ""
+
+msgid "Pets & Animals"
+msgstr ""
+
+msgid "Play YouTube movies"
+msgstr ""
+
+msgid "Poland"
+msgstr ""
+
+msgid "Published"
+msgstr ""
+
+msgid "Rating"
+msgstr ""
+
+msgid "Relevance"
+msgstr ""
+
+msgid "Restricted Content"
+msgstr ""
+
+msgid "Russia"
+msgstr ""
+
+msgid "Science & Technology"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search Term(s)"
+msgstr ""
+
+msgid "Short Movies"
+msgstr ""
+
+msgid "Sorry, video is not available!"
+msgstr ""
+
+msgid "South Korea"
+msgstr ""
+
+msgid "Spain"
+msgstr ""
+
+msgid "Sports"
+msgstr ""
+
+msgid "Stop playing this movie?"
+msgstr ""
+
+msgid "Sweden"
+msgstr ""
+
+msgid "Taiwan"
+msgstr ""
+
+msgid "This Month"
+msgstr ""
+
+msgid "This Week"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Travel & Events"
+msgstr ""
+
+msgid "Trying to download the Youtube feed entries. Please wait..."
+msgstr ""
+
+msgid "Trying to download the Youtube search results. Please wait..."
+msgstr ""
+
+msgid "United States"
+msgstr ""
+
+msgid "View Count"
+msgstr ""
+
+msgid "Yes"
+msgstr ""

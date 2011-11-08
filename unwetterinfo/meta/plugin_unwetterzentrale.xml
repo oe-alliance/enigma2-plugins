@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>3c5x9</author>
+                    <name>UnwetterInfo</name>
+                    <packagename>enigma2-plugin-extensions-unwetterinfo</packagename>
+                    <shortdescription>German storm information</shortdescription>
+                    <description>UnwetterInfo shows German storm information.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_unwetterinfo.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-unwetterinfo" />
+	  </files>
+</default>

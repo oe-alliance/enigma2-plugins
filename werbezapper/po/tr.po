@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 WerbeZapper plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-07 12:44+0100\n"
+"PO-Revision-Date: 2009-02-08 12:03+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
+"Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/plugin.py:28
+msgid "Automatically zaps back to current service after given Time"
+msgstr "Girdiğiniz süre dolduğunda izlediğiniz kanala geri dönün"
+
+#: ../src/WerbeZapper.py:55
+msgid "Custom"
+msgstr "Özelleştir"
+
+#: ../src/WerbeZapper.py:81
+msgid "How many minutes to wait until zapping back?"
+msgstr "Kanal değiştirmek için kaç dakika beklensin?"
+
+#: ../src/WerbeZapper.py:38
+msgid ""
+"Timer already running.\n"
+"Stop it?"
+msgstr ""
+"Zamanlayıcı şu an çalışıyor.\n"
+"Durdurulsun mu?"
+
+#: ../src/WerbeZapper.py:47
+msgid "When to Zap back?"
+msgstr "Kanal ne zaman değiştirilsin?"
+
+#: ../src/WerbeZapper.py:104
+#, python-format
+msgid "Zapping back in %d Minutes"
+msgstr "%d dakika içinde kanal değiştirilecek"
+
+#: ../src/WerbeZapper.py:50
+msgid "minutes"
+msgstr "dakika"
+

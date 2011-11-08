@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Vali</author>
+                    <name>Vali-XD skins control</name>
+                    <packagename>enigma2-plugin-extensions-valixdcontrol</packagename>
+                    <shortdescription>Customize Vali-XD skins</shortdescription>
+                    <description>Customize Vali-XD skins by yourself.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_vxdcontrol.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-valixdcontrol" />
+	  </files>
+</default>

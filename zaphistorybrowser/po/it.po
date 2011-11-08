@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - zaphistorybrowser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-08 20:24+0100\n"
+"PO-Revision-Date: 2011-04-08 20:25+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser\n"
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:43
+msgid "disabled"
+msgstr "Disabilitato"
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:43
+msgid "enabled"
+msgstr "Abilitato"
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:43
+msgid "disabled at parental lock"
+msgstr "Disabilitato su blocco parentale"
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:105
+msgid "Zap-History Configurator"
+msgstr "Configuratore di Zap-History"
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:112
+msgid "Enable zap history:"
+msgstr "Abilitare "
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:113
+msgid "Maximum zap history entries:"
+msgstr "Numero massimo di voci nella history: "
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:114
+msgid "Enigma1-like history:"
+msgstr "History in veste enigma1"
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:170
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:281
+msgid "Zap-History Browser"
+msgstr "Zap-History Browser"
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:182
+msgid "Clear"
+msgstr "Pulire"
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:183
+msgid "Delete"
+msgstr "Cancellare"
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:184
+msgid "Zap & Close"
+msgstr "Zap & chiudere"
+
+#: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser/src/plugin.py:185
+msgid "Config"
+msgstr "Configurare"
+

@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+	                <tag type="Recording" />
+                    <tag type="Software" />
+	  </prerequisites>
+          <info>
+                    <author>Dr.Best</author>
+                    <name>MovieSelectionQuickButton</name>
+                    <packagename>enigma2-plugin-extensions-movieselectionquickbutton</packagename>
+                    <shortdescription>assign color buttons to plugins from MOVIELIST</shortdescription>
+                    <description>assign color buttons (red/green/yellow/blue) to plugins from MOVIELIST.</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-movieselectionquickbutton" />
+	  </files>
+</default>

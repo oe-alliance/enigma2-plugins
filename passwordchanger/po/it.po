@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - passwordchanger\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-05-31 01:39+0100\n"
+"PO-Revision-Date: 2009-05-31 02:27+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/passwordchanger\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/passwordchanger\n"
+
+#: /home/dario/Plugins/passwordchanger/src/plugin.py:48
+#: /home/dario/Plugins/passwordchanger/src/plugin.py:81
+#: /home/dario/Plugins/passwordchanger/src/plugin.py:168
+#: /home/dario/Plugins/passwordchanger/src/plugin.py:173
+msgid "Password Changer"
+msgstr "Password Changer"
+
+#: /home/dario/Plugins/passwordchanger/src/plugin.py:55
+msgid "Old password:"
+msgstr "Vecchia password: "
+
+#: /home/dario/Plugins/passwordchanger/src/plugin.py:56
+msgid "New password:"
+msgstr "Nuova password: "
+
+#: /home/dario/Plugins/passwordchanger/src/plugin.py:67
+msgid ""
+"Incorrect new password!\n"
+"Minimum length: 5\n"
+"Maximum length: 8"
+msgstr ""
+"Nuova password errata!\n"
+"Lunghezza minima: 5\n"
+"Lunghezza massima: 8"
+
+#: /home/dario/Plugins/passwordchanger/src/plugin.py:142
+msgid "Could not log in!"
+msgstr "Login impossibile!"
+
+#: /home/dario/Plugins/passwordchanger/src/plugin.py:155
+msgid "Error while setting new password!"
+msgstr "Errore in configurazione della nuova password!"
+
+#: /home/dario/Plugins/passwordchanger/src/plugin.py:173
+msgid "Change your ftp and telnet password"
+msgstr "Gestire la password ftp e telnet"
+

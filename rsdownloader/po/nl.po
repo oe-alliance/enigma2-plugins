@@ -1,0 +1,284 @@
+# translation of RSDownloader_fy.po to gerrit
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# gerrit <gerrit@nedlinux.nl>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: RSDownloader_fy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-09 18:22+0100\n"
+"PO-Revision-Date: 2009-01-11 20:24+0100\n"
+"Last-Translator: Roodkapke\n"
+"Language-Team: gerrit <fy@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: ../src/RSListBrowser.py:95
+#, python-format
+msgid "%s saved."
+msgstr "%s opgeslagen."
+
+#: ../src/RSSearch.py:61
+#, python-format
+msgid "Added %s to the download-list."
+msgstr "%s toegevoegd aan de download-lijst."
+
+#: ../src/RSConfig.py:62
+msgid "Allow downloading on friday:"
+msgstr "Downloaden toestaan op vrijdag:"
+
+#: ../src/RSConfig.py:58
+msgid "Allow downloading on monday:"
+msgstr "Downloaden toestaan op maandag:"
+
+#: ../src/RSConfig.py:63
+msgid "Allow downloading on saturday:"
+msgstr "Downloaden toestaan op zaterdag:"
+
+#: ../src/RSConfig.py:64
+msgid "Allow downloading on sunday:"
+msgstr "Downloaden toestaan op zondag:"
+
+#: ../src/RSConfig.py:61
+msgid "Allow downloading on thursday:"
+msgstr "Downloaden toestaan op donderdag:"
+
+#: ../src/RSConfig.py:59
+msgid "Allow downloading on tuesday:"
+msgstr "Downloaden toestaan op dinsdag:"
+
+#: ../src/RSConfig.py:60
+msgid "Allow downloading on wednesday:"
+msgstr "Downloaden toestaan op woensdag:"
+
+#: ../src/RSMain.py:64
+msgid "Already downloading!"
+msgstr "Wordt al gedownload!"
+
+#: ../src/RSListBrowser.py:61
+msgid "Clear"
+msgstr "Legen"
+
+#: ../src/RSMain.py:62
+msgid "Could not start downloading!"
+msgstr "Download starten mislukt!"
+
+#: ../src/RSMain.py:71
+#: ../src/RSMain.py:78
+#, python-format
+msgid "Couldn't find the directory %s!"
+msgstr "Kan directory %s niet vinden!"
+
+#: ../src/RSListBrowser.py:64
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: ../src/RSMain.py:47
+#: ../src/RSMain.py:95
+msgid "Delete log..."
+msgstr "Verwijder log..."
+
+#: ../src/RSConfig.py:66
+msgid "Don't download after:"
+msgstr "Niet downloaden na:"
+
+#: ../src/RSConfig.py:65
+msgid "Don't download before:"
+msgstr "Niet downloaden voor:"
+
+#: ../src/plugin.py:25
+msgid "Download files from rapidshare in the background"
+msgstr "Download bestanden van rapidshare op de achtergrond"
+
+#: ../src/RSConfig.py:52
+msgid "Download in the background:"
+msgstr "Download in de achtergrond"
+
+#: ../src/RSProgress.py:32
+msgid "Downloaded"
+msgstr "Gedownload"
+
+#: ../src/RSProgress.py:30
+msgid "Downloading"
+msgstr "Downloaden"
+
+#: ../src/RSMain.py:88
+#, python-format
+msgid "Downloading %s."
+msgstr "Download %s."
+
+#: ../src/RSConfig.py:56
+msgid "Downloads directory:"
+msgstr "Download directrory:"
+
+#: ../src/RSMain.py:44
+#: ../src/RSMain.py:83
+msgid "Edit configs..."
+msgstr "Configuratie instellen..."
+
+#: ../src/RSListBrowser.py:121
+#: ../src/RSListBrowser.py:123
+msgid "Edit:"
+msgstr "Berwerken: "
+
+#: ../src/RSSearch.py:63
+#, python-format
+msgid "Error while adding %s to the download-list!"
+msgstr "Fout bij het toevoegen van %s aan de lijst!"
+
+#: ../src/RSSearch.py:117
+#, python-format
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Fout bij zoeken op http://rapidshare-search-engine.com!\n"
+"\n"
+"Fout: %s"
+
+#: ../src/RSSearch.py:73
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: Nothing found, sorry."
+msgstr ""
+"Fout bij zoeken op http://rapidshare-search-engine.com!\n"
+"\n"
+"Fout: Niets gevonden, sorry."
+
+#: ../src/RSListBrowser.py:97
+#, python-format
+msgid "Error while writing %s!"
+msgstr "Fout tijdens schrijven %s!"
+
+#: ../src/RSProgress.py:33
+msgid "Failed"
+msgstr "Mislukt"
+
+#: ../src/RSProgress.py:31
+msgid "Files"
+msgstr "Bestanden"
+
+#: ../src/RSConfig.py:57
+msgid "Ignore download times:"
+msgstr "Downloadtijden negeren:"
+
+#: ../src/RSConfig.py:55
+msgid "Lists directory:"
+msgstr "Lijst directory:"
+
+#: ../src/RSSearch.py:128
+msgid "Loading next page... please wait!"
+msgstr "Volgende pagina laden... een moment!"
+
+#: ../src/RSSearch.py:122
+msgid "Loading previous page... please wait!"
+msgstr "Vorige pagina laden...een moment!"
+
+#: ../src/RSSearch.py:74
+msgid "Nothing found, sorry."
+msgstr "Niets gevonden, sorry."
+
+#: ../src/RSSearch.py:90
+#, python-format
+msgid "Page %d / %d. Push < > to switch the page..."
+msgstr "Pagina %d / %d. Druk < > om van pagina te wisselen..."
+
+#: ../src/RSConfig.py:54
+msgid "Password:"
+msgstr "Wachtwoord:"
+
+#: ../src/RSTranslation.py:33
+#: ../src/plugin.py:25
+msgid "RS Downloader"
+msgstr "RS downloader"
+
+#: ../src/RSMain.py:106
+msgid ""
+"RS Downloader\n"
+"by AliAbdul\n"
+"\n"
+"This plugin allows you to download files from rapidshare in the background."
+msgstr ""
+"RS Downloader\n"
+"door AliAbdul\n"
+"\n"
+"Deze plugin laat uw files op de achtergrond downloaden van rapidshare."
+
+#: ../src/RSConfig.py:68
+msgid "Reconnect fritz.Box before downloading:"
+msgstr "Fritz.box opnieuw verbinden voor downloaden:"
+
+#: ../src/RSListBrowser.py:63
+msgid "Reload"
+msgstr "Opnieuw laden"
+
+#: ../src/RSConfig.py:49
+#: ../src/RSListBrowser.py:62
+msgid "Save"
+msgstr "Opslaan"
+
+#: ../src/RSMain.py:99
+msgid "Search http://rapidshare-search-engine.com for:"
+msgstr "Zoek op http://rapidshare-search-engine.com naar:"
+
+#: ../src/RSMain.py:42
+#: ../src/RSMain.py:73
+msgid "Show downloads..."
+msgstr "Laat downloads zien..."
+
+#: ../src/RSMain.py:49
+#: ../src/RSMain.py:105
+msgid "Show info..."
+msgstr "Laat info zien..."
+
+#: ../src/RSMain.py:41
+#: ../src/RSMain.py:66
+msgid "Show lists..."
+msgstr "Laat lijst zien..."
+
+#: ../src/RSMain.py:46
+#: ../src/RSMain.py:92
+msgid "Show log..."
+msgstr "Laat log zien..."
+
+#: ../src/RSMain.py:43
+#: ../src/RSMain.py:80
+msgid "Show progress..."
+msgstr "Laat voortgang zien..."
+
+#: ../src/RSMain.py:45
+#: ../src/RSMain.py:86
+msgid "Show status..."
+msgstr "Laat status zien..."
+
+#: ../src/RSMain.py:40
+#: ../src/RSMain.py:56
+msgid "Start downloading..."
+msgstr "Start downloaden..."
+
+#: ../src/RSMain.py:60
+msgid "Started downloading..."
+msgstr "Download gestart..."
+
+#: ../src/RSMain.py:90
+msgid "Stopped!"
+msgstr "Gestopt!"
+
+#: ../src/RSMain.py:48
+#: ../src/RSMain.py:98
+msgid "Use search-engine..."
+msgstr "Gebruik zoek-machine..."
+
+#: ../src/RSConfig.py:53
+msgid "Username:"
+msgstr "Gebruikersnaam:"
+
+#: ../src/RSConfig.py:67
+msgid "Write log:"
+msgstr "Schrijf log:"
+

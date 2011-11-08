@@ -1,0 +1,5 @@
+<skin>
+		<desktopwidget name="testwidget">
+			<widget name="counter_title"  position="0,0" size="200,150" font="Regular;40" halign="center" valign="center"/>
+		</desktopwidget>
+</skin>

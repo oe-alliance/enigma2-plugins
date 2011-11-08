@@ -1,0 +1,57 @@
+
+
+	<!-- ########## Channel, EPG, EventInfo ########## -->
+	<screen backgroundColor="background" flags="wfNoBorder" name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection">
+		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="on" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="on" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+		<ePixmap alphatest="on" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="grey" halign="right" position="685,40" render="Label" size="490,28" source="global.CurrentTime" transparent="1">
+			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
+		</widget>
+		<widget backgroundColor="grey" font="Regular;20" position="100,40" render="Label" size="580,28" source="Title" transparent="1" zPosition="1" />
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_red" position="145,645" size="220,26" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_green" position="435,644" size="220,27" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_blue" position="1015,645" size="220,26" transparent="1"/>
+		<widget picServiceEventProgressbar="Ai.HD/minibar.png" colorEventProgressbarBorder="#555555" colorEventProgressbarBorderSelected="grey" colorServiceDescription="#DBB96E" foregroundColorServiceNotAvail="#00656565" itemHeight="30" name="list" position="100,80" scrollbarMode="showOnDemand" serviceInfoFont="Regular;22" serviceItemHeight="30" serviceNameFont="Regular;23" serviceNumberFont="Regular;23" size="1080,540"/>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="EPGSelection" position="0,0" size="1280,720" title="EPG Selection">
+		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="on" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="on" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+		<ePixmap alphatest="on" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="grey" halign="right" position="685,40" render="Label" size="490,28" source="global.CurrentTime" transparent="1">
+			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_red" position="145,645" size="220,26" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_green" position="435,644" size="220,27" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_blue" position="1015,645" size="220,26" transparent="1"/>
+		<widget itemHeight="30" name="list" position="100,80" scrollbarMode="showOnDemand" size="1080,540" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="secondFG" position="100,40" render="Label" size="370,28" source="Service">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="EventView" position="0,0" size="1280,720" title="Eventview">
+		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="on" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="on" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+		<ePixmap alphatest="on" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget backgroundColor="background" font="Regular;26" foregroundColor="grey" halign="right" position="1140,40" render="Label" size="80,26" source="global.CurrentTime" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;20" foregroundColor="grey" halign="right" position="910,72" render="Label" size="310,22" source="global.CurrentTime" transparent="1">
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_red" position="145,645" size="220,26" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_green" position="435,644" size="220,27" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_blue" position="1015,645" size="220,26" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="secondFG" halign="left" name="channel" position="70,60" size="837,25" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="secondFG" halign="left" name="datetime" position="70,95" size="356,25" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="secondFG" halign="left" name="duration" position="430,95" size="340,25" transparent="1"/>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" name="epg_description" position="70,140" size="1142,458" transparent="1"/>
+	</screen>

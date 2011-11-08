@@ -1,0 +1,99 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quickbutton\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-14 14:29+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dr.Best <dr.best@dreambox-tools.info>\n"
+"Language-Team: Dr.Best <dr.best@dreambox-tools.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "Assign plugin to long blue key pressed"
+msgstr "Langer Tastendruck auf Blau"
+
+msgid "Assign plugin to long green key pressed"
+msgstr "Langer Tastendruck auf Grün"
+
+msgid "Assign plugin to long red key pressed"
+msgstr "Langer Tastendruck auf Rot"
+
+msgid "Assign plugin to long yellow key pressed"
+msgstr "Langer Tastendruck auf Gelb"
+
+msgid "Assign plugin to red key pressed"
+msgstr "Tastendruck auf Rot"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Display 4:3 content as"
+msgstr "4:3 Bild Darstellung als"
+
+msgid "EPG List"
+msgstr "EPG Liste"
+
+#, python-format
+msgid ""
+"Error!\n"
+"Error Text: %s"
+msgstr ""
+
+msgid "Just Scale"
+msgstr ""
+
+msgid "MediaPlayer"
+msgstr "Medienwiedergabe"
+
+msgid "No plugin assigned!"
+msgstr "Keine Funktion zugeordnet"
+
+msgid "Nothing"
+msgstr "Keine Zuordnung"
+
+msgid "OK"
+msgstr ""
+
+msgid "Pan&Scan"
+msgstr ""
+
+msgid "Pillarbox"
+msgstr ""
+
+msgid "Plugin browser"
+msgstr "Plugin Browser"
+
+msgid "Plugin not found!"
+msgstr "Plugin wurde nicht gefunden!"
+
+msgid "Timer"
+msgstr "Timerliste"
+
+msgid "Unknown Error"
+msgstr "Unbekannter Fehler"
+
+msgid "assigned to long blue"
+msgstr "Langer Tastendruck auf Blau"
+
+msgid "assigned to long green"
+msgstr "Langer Tastendruck auf Grün"
+
+msgid "assigned to long red"
+msgstr "Langer Tastendruck auf Rot"
+
+msgid "assigned to long yellow"
+msgstr "Langer Tastendruck auf Gelb"
+
+msgid "assigned to red"
+msgstr "Tastendruck auf Rot"
+
+msgid "setup for Quickbutton"
+msgstr "Quickbutton Setup"
+
+msgid "switch 4:3 content display"
+msgstr "4:3 Bildumschaltung"
+

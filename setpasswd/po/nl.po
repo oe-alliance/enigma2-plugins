@@ -1,0 +1,54 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2009 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-06 13:13+0200\n"
+"PO-Revision-Date: 2009-06-06 18:16+0100\n"
+"Last-Translator: \n"
+"Language-Team: none <Benny.DeTandt@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Change Root Password"
+msgstr "Wijzig root wachtwoord..."
+
+msgid "Change or reset the root password of your dreambox"
+msgstr "Wijzig of reset het root wachtwoord van uw Dreambox"
+
+msgid "Enter new Password"
+msgstr "Geef nieuw wachtwoord"
+
+msgid "Enter your password here:"
+msgstr "Geef hier uw wachtwoord in:"
+
+msgid "Set Password"
+msgstr "Wachtwoord instellen"
+
+msgid "Sucessfully changed password for root user to: "
+msgstr "Wachwoord succesvol gewijzigd voor root gebruiker in:"
+
+msgid "Unable to change/reset password for root user"
+msgstr "Kan het wachtwoord van de root gebruiker niet wijzigen/resetten"
+
+msgid "new Random"
+msgstr "Nieuw random"
+
+msgid "virt. Keyboard"
+msgstr "Virtueel toetsenbord"
+
+#~ msgid "Sucessfully changed password for root user to: %s "
+#~ msgstr "Wachwoord succesvol gewijzig voor root gebruiker in : %s"
+

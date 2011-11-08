@@ -1,0 +1,62 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZapHistoryBrowser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-20 05:56-0000\n"
+"PO-Revision-Date: 2009-07-07 09:56+0100\n"
+"Last-Translator: WeeGull <weegull@hotmail.com>\n"
+"Language-Team: Nabil Hanna <nabil1978@web.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/zaphistorybrowser/src\n"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:39
+msgid "disabled"
+msgstr "avaktiverad"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:39
+msgid "enabled"
+msgstr "aktiverad"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:39
+msgid "disabled at parental lock"
+msgstr "avaktivera via föräldrarlås"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:72
+msgid "Zap-History Configurator"
+msgstr "Zap-History Konfiguration"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:79
+msgid "Enable zap history:"
+msgstr "Aktivera zap historik:"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:80
+msgid "Maximum zap history entries:"
+msgstr "Maximum antal zap historik:"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:123
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:217
+msgid "Zap-History Browser"
+msgstr "Zap-History Browser"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:133
+msgid "Clear"
+msgstr "Rensa"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:134
+msgid "Delete"
+msgstr "Ta bort"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:135
+msgid "Zap & Close"
+msgstr "Zap & Stäng"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:136
+msgid "Config"
+msgstr "Konfig"
+

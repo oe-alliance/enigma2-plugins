@@ -1,0 +1,44 @@
+# German translations for enigma2-plugins package.
+# Copyright (C) 2010 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-05 22:00+0200\n"
+"PO-Revision-Date: 2010-10-05 18:11+0200\n"
+"Last-Translator: Fraxinas\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "(actual)"
+msgstr "(ist)"
+
+msgid "(offline!)"
+msgstr "(offline!)"
+
+msgid "(online)"
+msgstr "(online)"
+
+msgid "(set point)"
+msgstr "(soll)"
+
+msgid "Visualization for European Installation Bus"
+msgstr "Visualisierung für den Europäischen Installations-Bus"
+
+msgid "down"
+msgstr "runter"
+
+msgid "not found"
+msgstr "nicht gefunden"
+
+msgid "parser error"
+msgstr "Parser-Fehler"
+
+msgid "up"
+msgstr "hoch"

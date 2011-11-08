@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-babelzapper
+Version: 1.0
+Description: Control your dreambox with only the MUTE button
+Maintainer: gutemine
+Homepage: http://www.i-have-a-dreambox.com
+Depends: enigma2 (>= 2.6git20090615)

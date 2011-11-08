@@ -1,0 +1,56 @@
+# Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 SetPasswd Plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-04 01:11+0200\n"
+"PO-Revision-Date: 2009-06-05 00:42+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/plugin.py:51
+msgid "Cancel"
+msgstr "Vazgeç"
+
+#: ../src/plugin.py:25
+msgid "Change Root Password"
+msgstr "Root parolasını değiştir"
+
+#: ../src/plugin.py:131
+msgid "Change or reset the root password of your dreambox"
+msgstr "Dreambox'ınızın root parolasını değiştirin/sıfırlayın"
+
+#: ../src/plugin.py:73
+msgid "Enter new Password"
+msgstr "Yeni parolayı girin"
+
+#: ../src/plugin.py:114
+msgid "Enter your password here:"
+msgstr "Parolanızı buraya girin:"
+
+#: ../src/plugin.py:52
+msgid "Set Password"
+msgstr "Parolayı ata"
+
+#: ../src/plugin.py:88
+msgid "Sucessfully changed password for root user to: "
+msgstr "Root kullanıcısının parolası başarıyla değişti : "
+
+#: ../src/plugin.py:90
+msgid "Unable to change/reset password for root user"
+msgstr "Root parola değişikliği/sıfırlama mümkün değil"
+
+#: ../src/plugin.py:53
+msgid "new Random"
+msgstr "Rastgele"
+
+#: ../src/plugin.py:54
+msgid "virt. Keyboard"
+msgstr "Sanal klavye"
+

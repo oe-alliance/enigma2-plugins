@@ -1,0 +1,18 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+					<tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>nighti</author>
+                    <name>AutoResolution</name>
+                    <packagename>enigma2-plugin-systemplugins-autoresolution</packagename>
+                    <shortdescription>Automatically change video resolution</shortdescription>
+                    <description>Automatically changes the output resolution depending on the video resolution you are watching.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_autoresolution.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-autoresolution" />
+	  </files>
+</default>

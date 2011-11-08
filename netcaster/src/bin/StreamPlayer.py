@@ -1,53 +1,59 @@
-from enigma import eServiceReference
-import os
-class StreamPlayer:
-    is_playing = False
-    
-    def __init__(self,session, args = 0):
-        print " init StreamPlayer"
-        self.session = session
-        self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
-        self.session.nav.event.append(self.__event)
-    
-    def __event(self, ev):
-        print "EVENT ==>",ev
+from enigma import eServiceReference, iServiceInformation
 
-    def play(self,stream):
-        print " start streaming %s" %stream.getURL()
-        if self.is_playing is True:
-            self.stop()
-            self.play(stream)
-        else:
-            if stream.getURL().startswith("/") is not True:
-                print "playing remote stream",stream.getURL()
-                self.session.nav.stopService()
-#                sref = eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%stream.getURL().replace(":","&colon;"))
-#                self.session.nav.playService(sref)
-                self.targetfile = "/tmp/streamtarget."+stream.getType().lower() 
-                os.system("mknod %s p" %self.targetfile)
-                os.system("wget %s -O- > %s&" %(stream.getURL(),self.targetfile))
-                self.session.nav.playService(eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%self.targetfile))
-            else:
-                print "playing local stream",stream.getURL()
-                esref = eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%stream.getURL())
-                self.session.nav.playService(esref)
-            self.is_playing = True
-            
-    def stop(self,text=""):
-        if self.is_playing is True:
-            print " stop streaming",text
-            try:
-                
-                self.session.nav.stopService()
-                os.system("killall -9 wget")
-                os.system("rm %s" %self.targetfile)
-                self.session.nav.playService(self.oldService)
-                self.is_playing = False
-            except TypeError,e:
-                print " ERROR ",e
-                self.exit()
-        else:
-            pass
-    def exit(self):
-        self.stop()
- 
+class StreamPlayer:
+	is_playing = False
+
+	def __init__(self, session, args=0):
+	    print "[NETcaster.StreamPlayer] init StreamPlayer"
+	    self.is_playing = False
+	    self.session = session
+	    self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
+	    self.session.nav.event.append(self.__event)
+	    self.metadatachangelisteners = []
+
+	def __event(self, ev):
+	    print "[NETcaster.StreamPlayer] EVENT ==>", ev
+	    if ev == 5: # can we use a constant here instead of just 5?
+   			currentServiceRef = self.session.nav.getCurrentService()
+   			if currentServiceRef is not None:
+   				#it seems, that only Title is avaible for now
+   				sTagTitle = currentServiceRef.info().getInfoString(iServiceInformation.sTagTitle)
+				self._onMetadataChanged(sTagTitle)
+
+	def _onMetadataChanged(self,title):
+		for i in self.metadatachangelisteners:
+			i(title)
+
+	def play(self, stream):
+	    if self.is_playing:
+	        self.stop()
+	    stream.getURL(self._playURL)
+
+	def _playURL(self, url=None):
+		if not url:
+			print "no URL provided for play"
+			return
+		print "[NETcaster.StreamPlayer] playing stream", url
+
+		esref = eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s" % url.replace(':', '%3a'))
+
+		try:
+			self.session.nav.playService(esref)
+			self.is_playing = True
+		except:
+			print "[NETcaster.StreamPlayer] Could not play %s" % esref
+
+	def stop(self, text=""):
+	    if self.is_playing:
+	        print "[NETcaster.StreamPlayer] stop streaming", text
+	        try:
+	            self.is_playing = False
+	            self.session.nav.stopService()
+	            self.session.nav.playService(self.oldService)
+	        except TypeError, e:
+	            print " ERROR Z", e
+	            self.exit()
+
+	def exit(self):
+	    self.stop()
+

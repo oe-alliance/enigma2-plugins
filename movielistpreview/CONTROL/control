@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-movielistpreview
+Version: 1.0
+Description: Create previews for movies and show them in the movielist
+Maintainer: Nabil Hanna <nabil1978@web.de>
+Homepage: http://www.lt-forums.org/ali
+Depends: aio-grab (>= 0.8cvs20081209), enigma2 (>= 2.6git20090725)

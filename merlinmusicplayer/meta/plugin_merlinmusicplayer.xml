@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>Dr.Best</author>
+                    <name>Merlin Music Player</name>
+                    <packagename>enigma2-plugin-extensions-merlinmusicplayer</packagename>
+                    <shortdescription>Merlin Music Player and iDream</shortdescription>
+                    <description>Manage your music files in a database, play it with Merlin Music Player.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_merlinmusicplayer.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-merlinmusicplayer" />
+	  </files>
+</default>

@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-02-05 19:05+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dr. Best <dr.best@dreambox-tools.info>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/plugin.py:48
+msgid "as plugin in extended bar"
+msgstr ""
+
+#: ../src/plugin.py:48
+msgid "with long OK press"
+msgstr ""
+
+#: ../src/plugin.py:48
+msgid "with exit button"
+msgstr ""
+
+#: ../src/plugin.py:106
+msgid "Virtual Zap Setup"
+msgstr ""
+
+#: ../src/plugin.py:108
+#: ../src/plugin.py:112
+msgid "Virtual (PiP) Zap"
+msgstr ""
+
+#: ../src/plugin.py:413
+msgid "Cancel"
+msgstr ""
+
+#: ../src/plugin.py:414
+msgid "OK"
+msgstr ""
+
+#: ../src/plugin.py:416
+msgid "Usage"
+msgstr ""
+
+#: ../src/plugin.py:598
+msgid "Use PiP"
+msgstr ""
+
+#: ../src/plugin.py:599
+msgid "Show PiP in Infobar"
+msgstr ""
+
+#: ../src/plugin.py:622
+msgid "Start standard PiP after x secs (0 = disabled)"
+msgstr ""
+
+#: ../src/plugin.py:623
+msgid "Remember last service"
+msgstr ""
+
+#: ../src/plugin.py:430
+msgid ""
+"GUI needs a restart to apply the new settings.\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+
+#: ../src/plugin.py:431
+msgid "Restart GUI now?"
+msgstr ""
+

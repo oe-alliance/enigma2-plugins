@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-movieepg
+Version: 0.0.1-20110608-r0
+Description: allows to access the epg from the standard movie player
+Maintainer: Moritz Venn <moritz.venn@freaque.net>
+Homepage: http://www.ritzmo.de
+Depends: enigma2 (>= 3.1git20110309), python-lang

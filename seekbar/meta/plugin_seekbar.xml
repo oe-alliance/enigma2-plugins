@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>AliAbdul</author>
+                    <name>Seekbar</name>
+                    <packagename>enigma2-plugin-extensions-seekbar</packagename>
+                    <shortdescription>Replace the rewind  input with a seekbar</shortdescription>
+                    <description>Replace the minute input for the seek functions with a seekbar.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_seekbar_en.jpg" />	
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-seekbar" />
+	  </files>
+</default>

@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-cdinfo
+Version: 0.1-20080727-r0
+Description: read audio CD-Text or query CDDB for album and track info
+Maintainer: fraxinas <andreas.frisch@multimedia-labs.de>
+Depends: enigma2 (>= 2.5git20080727), libcddb (>= 1.3.0), libcdio (>= 0.80)

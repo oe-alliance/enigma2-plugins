@@ -1,0 +1,132 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-09 14:20+0100\n"
+"PO-Revision-Date: 2011-09-09 19:05+0100\n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+#: ../src/EPGSearch.py:71
+#: ../src/EPGSearch.py:195
+msgid "EPG Search"
+msgstr "EPG Suche"
+
+#: ../src/EPGSearch.py:136
+msgid "New Search"
+msgstr "Neue Suche"
+
+#: ../src/EPGSearch.py:137
+msgid "History"
+msgstr "Verlauf"
+
+#: ../src/EPGSearch.py:152
+msgid "Add timer"
+msgstr "Timer hinzufügen"
+
+#: ../src/EPGSearch.py:219
+msgid "Enter text to search for"
+msgstr "Zu suchenden Text eingeben"
+
+#: ../src/EPGSearch.py:224
+msgid "Import from Timer"
+msgstr "Importiere aus Timer"
+
+#: ../src/EPGSearch.py:225
+msgid "Import from EPG"
+msgstr "Importiere aus EPG"
+
+#: ../src/EPGSearch.py:230
+msgid "Import from AutoTimer"
+msgstr "Importiere aus AutoTimer"
+
+#: ../src/EPGSearch.py:231
+msgid "Save search as AutoTimer"
+msgstr "Suchbegriff als AutoTimer speichern"
+
+#: ../src/EPGSearch.py:232
+msgid "Export selected as AutoTimer"
+msgstr "Auswahl als AutoTimer exportieren"
+
+#: ../src/EPGSearch.py:235
+msgid "Setup"
+msgstr "Suche einrichten"
+
+#: ../src/EPGSearch.py:276
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Liste der AutoTimer konnte nicht abgerufen werden: %s"
+
+#: ../src/EPGSearch.py:287
+#: ../src/EPGSearch.py:314
+msgid "Select text to search for"
+msgstr "Zu suchenden Text auswählen"
+
+#: ../src/EPGSearch.py:320
+msgid "No history"
+msgstr "Verlauf ist leer"
+
+#: ../src/EPGSearch.py:372
+#: ../src/EPGSearchSetup.py:58
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: ../src/EPGSearch.py:373
+#: ../src/EPGSearchSetup.py:57
+msgid "OK"
+msgstr "OK"
+
+#: ../src/EPGSearch.py:387
+msgid "Select a timer to search"
+msgstr "Einen Timer auswählen"
+
+#: ../src/EPGSearch.py:410
+msgid "Channel Selection"
+msgstr "Kanalliste"
+
+#: ../src/EPGSearch.py:438
+msgid "Search"
+msgstr "Suche"
+
+#: ../src/EPGSearchSetup.py:33
+#: ../src/EPGSearchSetup.py:75
+msgid "EPGSearch Setup"
+msgstr "EPGSearch Einrichtung"
+
+#: ../src/EPGSearchSetup.py:39
+msgid "Length of History"
+msgstr "Limit des Suchverlaufs"
+
+#: ../src/EPGSearchSetup.py:39
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr "Maximale Anzahl von Einträgen im Suchverlauf. Diesen Wert auf \"0\" setzen, um den Verlauf zu deaktivieren."
+
+#: ../src/EPGSearchSetup.py:40
+msgid "Add \"Search\" Button to EPG"
+msgstr "\"Suchen\" im Standard EPG hinzufügen"
+
+#: ../src/EPGSearchSetup.py:40
+msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
+msgstr "Wenn diese Option aktiviert ist, wird der Standard EPG um die Funktion \"Suchen\" erweitert"
+
+#: ../src/plugin.py:55
+msgid "Search EPG"
+msgstr "Durchsuche EPG"
+
+#: ../src/plugin.py:62
+msgid "search EPG..."
+msgstr "Durchsuche EPG..."
+
+#: ../src/plugin.py:69
+msgid "search EPG"
+msgstr "Suche in EPG"
+

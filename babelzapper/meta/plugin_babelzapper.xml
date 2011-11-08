@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>gutemine</author>
+                    <name>BabelZapper</name>
+                    <packagename>enigma2-plugin-extensions-babelzapper</packagename>
+                    <shortdescription>Control your dreambox with only the MUTE button</shortdescription>
+                    <description>Control your dreambox with only the MUTE button.</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-babelzapper" />
+	  </files>
+</default>

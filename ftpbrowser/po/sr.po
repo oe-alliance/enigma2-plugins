@@ -1,0 +1,294 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 - Plugin FTPBROWSER\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-22 23:36+0200\n"
+"PO-Revision-Date: 2009-09-27 18:03+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <JOVANOVIC@GMX.CH>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/FTPBrowser.py:682
+#, python-format
+msgid "%d kb/s"
+msgstr "%d kb/s"
+
+#: ../src/plugin.py:112
+msgid "A basic FTP client"
+msgstr "Osnovni FTP-klijent"
+
+#: ../src/FTPBrowser.py:488
+#, python-format
+msgid ""
+"A file with this name (%s) already exists locally.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Datoteka ovog imena %s već postoji lokalno.\n"
+"Želite li da preko nje prepišete?"
+
+#: ../src/FTPBrowser.py:518
+#, python-format
+msgid ""
+"A file with this name (%s) already exists on the remote host.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Datoteka ovog imena %s već postoji na udaljenom hostu.\n"
+"Želite li da preko nje prepišete?"
+
+#: ../src/FTPBrowser.py:716
+msgid ""
+"A transfer is currently in progress.\n"
+"What do you want to do?"
+msgstr ""
+"Transfer je trenutno u toku.\n"
+"Šta želite da uradite?"
+
+#: ../src/FTPBrowser.py:719
+msgid "Abort transfer"
+msgstr "Prekini transfer"
+
+#: ../src/FTPServerManager.py:214
+msgid "Add"
+msgstr "Dodaj"
+
+#: ../src/FTPServerManager.py:150
+msgid "Address:"
+msgstr "Adresa:"
+
+#: ../src/FTPBrowser.py:407
+#, python-format
+msgid "Are you sure you want to delete %s?"
+msgstr "Da li želite da obrišete %s ?"
+
+#: ../src/FTPBrowser.py:720
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: ../src/FTPServerManager.py:313
+msgid "Configuration saved."
+msgstr "Konfiguracija sačuvana."
+
+#: ../src/plugin.py:101
+msgid "Connect to FTP..."
+msgstr "Poveži na FTP..."
+
+#: ../src/FTPBrowser.py:792
+msgid "Could not connect to ftp server!"
+msgstr "Ne mogu se spojiti na FTP server!"
+
+#: ../src/FTPBrowser.py:358
+#: ../src/FTPBrowser.py:370
+#, python-format
+msgid "Could not delete %s."
+msgstr "Ne mogu obrisati %s ."
+
+#: ../src/FTPBrowser.py:439
+msgid "Could not obtain list of files."
+msgstr "Ne mogu dobiti listu datoteka."
+
+#: ../src/FTPBrowser.py:306
+#: ../src/FTPBrowser.py:321
+#, python-format
+msgid "Could not rename %s."
+msgstr "Ne mogu preimenovati %s."
+
+#: ../src/FTPBrowser.py:171
+#: ../src/FTPServerManager.py:213
+msgid "Delete"
+msgstr "Obriši"
+
+#: ../src/FTPBrowser.py:251
+msgid "Download"
+msgstr "Preuzimanje"
+
+#: ../src/FTPBrowser.py:646
+msgid "Download finished."
+msgstr "Preuzimanje završeno."
+
+#: ../src/FTPBrowser.py:681
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr "ETA %d:%02d min"
+
+#: ../src/FTPServerManager.py:215
+msgid "Edit"
+msgstr "Uredi"
+
+#: ../src/FTPServerManager.py:146
+msgid "Enter URI"
+msgstr "Unesi URI "
+
+#: ../src/FTPServerManager.py:186
+msgid "Enter URI of FTP Server:"
+msgstr "Unesi URI ili FTP server:"
+
+#: ../src/FTPBrowser.py:342
+msgid "Enter new filename:"
+msgstr "Unesi novo ime datoteke:"
+
+#: ../src/FTPBrowser.py:116
+#: ../src/FTPBrowser.py:120
+msgid "Error"
+msgstr "Greška"
+
+#: ../src/FTPBrowser.py:631
+#: ../src/FTPBrowser.py:655
+msgid "Error during download."
+msgstr "Greška pri preuzimanju."
+
+#: ../src/FTPBrowser.py:169
+#: ../src/FTPServerManager.py:143
+msgid "Exit"
+msgstr "Izlaz"
+
+#: ../src/FTPQueueManager.py:67
+msgid "FTP Queue Manager"
+msgstr "FTP menadžer redosleda"
+
+#: ../src/FTPServerManager.py:166
+msgid "FTP Server Editor"
+msgstr "Urednik FTP servera "
+
+#: ../src/FTPServerManager.py:235
+msgid "FTP Server Manager"
+msgstr "Menadžer FTP servera"
+
+#: ../src/FTPBrowser.py:162
+msgid "Local"
+msgstr "Lokalno"
+
+#: ../src/FTPServerManager.py:149
+msgid "Name:"
+msgstr "Ime:"
+
+#: ../src/FTPServerManager.py:144
+msgid "OK"
+msgstr "OK"
+
+#: ../src/FTPBrowser.py:93
+#: ../src/FTPBrowser.py:115
+msgid "Parent Directory"
+msgstr "Polazni direktorijum"
+
+#: ../src/FTPServerManager.py:152
+msgid "Password:"
+msgstr "Lozinka:"
+
+#: ../src/FTPServerManager.py:153
+msgid "Port:"
+msgstr "Port:"
+
+#: ../src/FTPBrowser.py:241
+msgid "Queue Manager"
+msgstr "Menadžer redosleda"
+
+#: ../src/FTPBrowser.py:432
+msgid "Queue processed."
+msgstr "Obrađen redosled."
+
+#: ../src/FTPServerManager.py:259
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Stvarno obrisati ovaj unos?\n"
+"On ne može biti obnovljen!"
+
+#: ../src/FTPBrowser.py:781
+msgid "Remote"
+msgstr "Udaljen"
+
+#: ../src/FTPBrowser.py:164
+#: ../src/FTPBrowser.py:746
+#: ../src/FTPBrowser.py:789
+msgid "Remote (not connected)"
+msgstr "Udaljen (nije spojen)"
+
+#: ../src/FTPBrowser.py:356
+#: ../src/FTPBrowser.py:372
+#, python-format
+msgid "Removed %s."
+msgstr "Uklonjen %s ."
+
+#: ../src/FTPBrowser.py:382
+#: ../src/FTPBrowser.py:395
+msgid "Removing directories is not supported."
+msgstr "Uklanjanje direktorijuma nije podržano."
+
+#: ../src/FTPBrowser.py:170
+msgid "Rename"
+msgstr "Preimenuj"
+
+#: ../src/FTPBrowser.py:304
+#: ../src/FTPBrowser.py:323
+#, python-format
+msgid "Renamed %s to %s."
+msgstr "Preimenovano %s u %s ."
+
+#: ../src/FTPBrowser.py:718
+msgid "Run in Background"
+msgstr "Radi u pozadini"
+
+#: ../src/FTPServerManager.py:216
+msgid "Save"
+msgstr "Sačuvaj"
+
+#: ../src/FTPBrowser.py:185
+msgid "Select local file list"
+msgstr "Izaberi listu lokalnih dat."
+
+#: ../src/FTPBrowser.py:186
+msgid "Select remote file list"
+msgstr "Izaberi listu udaljenih dat."
+
+#: ../src/FTPBrowser.py:240
+msgid "Server Manager"
+msgstr "Server menadžer"
+
+#: ../src/plugin.py:66
+msgid ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+msgstr ""
+"Već postoji aktivna veza.\n"
+"Želite li da je prekinete?"
+
+#: ../src/FTPBrowser.py:556
+#: ../src/FTPBrowser.py:580
+msgid "There already is an active transfer."
+msgstr "Postoji aktivan transfer."
+
+#: ../src/FTPBrowser.py:172
+#: ../src/FTPBrowser.py:247
+msgid "Upload"
+msgstr "Podizanje"
+
+#: ../src/FTPBrowser.py:622
+msgid "Upload finished."
+msgstr "Podizanje završeno."
+
+#: ../src/FTPServerManager.py:151
+msgid "Username:"
+msgstr "Korisn. ime:"
+
+#: ../src/plugin.py:79
+msgid "Which server do you want to connect to?"
+msgstr "Na koji server želite da se povežete ?"
+
+#: ../src/FTPBrowser.py:179
+msgid "close"
+msgstr "Zatvori"
+
+#: ../src/FTPBrowser.py:178
+msgid "enter directory/get file/put file"
+msgstr "Unesi direktorijum/uzmi dat./stavi dat."
+
+#: ../src/FTPBrowser.py:180
+msgid "open menu"
+msgstr "Otvori meni"
+

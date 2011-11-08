@@ -1,0 +1,699 @@
+# translation of nl.po to
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# gerrit <gerrit@nedlinux.nl>, 2008, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: nl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-15 16:20+0100\n"
+"PO-Revision-Date: 2009-06-04 20:19+0200\n"
+"Last-Translator: \n"
+"Language-Team:  <en@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+msgid "About FritzCall"
+msgstr "Over FritzCall"
+
+#. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
+msgid "Add entry to phonebook"
+msgstr "Aan telefoonlijst toevoegen"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "All"
+msgstr "Alles"
+
+msgid "All calls"
+msgstr "Alle oproepen"
+
+msgid "Append shortcut number"
+msgstr "Snelkiesnummer toevoegen"
+
+msgid "Append type of number"
+msgstr "Nummersoort toevoegen"
+
+msgid "Append vanity name"
+msgstr "Alias toevoegen"
+
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr ""
+
+msgid "Austria"
+msgstr "Oostenrijk"
+
+msgid "Automatically add new Caller to PhoneBook"
+msgstr "Nieuw contact automatisch toevoegen aan het telefoonboek"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Call"
+msgstr "Gesprek"
+
+msgid "Call monitoring"
+msgstr "Gespreksmonitoring"
+
+msgid "Call redirection"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Cannot get calls from FRITZ!Box"
+msgstr ""
+
+msgid "Cannot get infos from FRITZ!Box"
+msgstr ""
+
+msgid "Compact Flash"
+msgstr ""
+
+msgid "Connected since"
+msgstr "Verbonden sinds"
+
+msgid "Connected to FRITZ!Box!"
+msgstr "Verbonden met Fritzbox"
+
+#, python-format
+msgid ""
+"Connecting to FRITZ!Box failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Verbinding naar de FRITZ!Box geweigerd\n"
+" (%s)\n"
+"probeert opnieuw..."
+
+msgid "Connecting to FRITZ!Box..."
+msgstr "Aan het verbinden met  FRITZ!Box"
+
+#, python-format
+msgid ""
+"Connection to FRITZ!Box! lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Verbinding met  FRITZ!Box verbroken\n"
+" (%s)\n"
+"probeert opnieuw"
+
+msgid "Could not parse FRITZ!Box Phonebook entry"
+msgstr "Fout bij het verwerken van een FRITZ!Box telefoonboek regel"
+
+msgid "Country"
+msgstr "Land"
+
+msgid "DECT phones registered"
+msgstr "geregistreerde DECT telefoons"
+
+msgid "Debug"
+msgstr "Debug"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Delete"
+msgstr "Wissen"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Delete entry"
+msgstr "Wis regel"
+
+msgid "Display FRITZ!box-Fon calls on screen"
+msgstr "Laat FRITZ!Box gesprekken op het scherm zien"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display all calls"
+msgstr "Laat alle gesprekken zien"
+
+msgid "Display connection infos"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display incoming calls"
+msgstr "Laat binnenkomende gesprekken zien"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display missed calls"
+msgstr "Laat gemiste gesprekken zien"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display outgoing calls"
+msgstr "Laat uitgaande gesprekken zien"
+
+#. TRANSLATORS: this is a window title.
+msgid "Do what?"
+msgstr "Wat te doen..."
+
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+"Wilt u echt onderstaande regel verwijderen ?\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Edit"
+msgstr "Bewerken"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Edit selected entry"
+msgstr "Gesel. regel bewerken"
+
+msgid "Enter Search Terms"
+msgstr "Geef de zoekterm in"
+
+msgid "Entry incomplete."
+msgstr "Regel incompleet"
+
+msgid "Extension number to initiate call on"
+msgstr "Voorkies nummer voor een telefoonoproep"
+
+#, python-format
+msgid "FRITZ!Box - Could not load calls: %s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "FRITZ!Box - Could not load phonebook: %s"
+msgstr "Fout bij het laden van het FRITZ!Box telefoonboek -fout: %s"
+
+#, python-format
+msgid "FRITZ!Box - Dialling failed: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error getting status: %s"
+msgstr ""
+
+msgid ""
+"FRITZ!Box - Error logging in\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error logging in: %s"
+msgstr "FRITZ!Box Login mislukt! - Error: %s"
+
+#, python-format
+msgid ""
+"FRITZ!Box - Error logging in: %s\n"
+"Disabling plugin."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "FRITZ!Box - Error logging out: %s"
+msgstr "FRITZ!Box Logout mislukt! - Error: %s"
+
+#, python-format
+msgid "FRITZ!Box - Error resetting: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Failed changing Mailbox: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Failed changing WLAN: %s"
+msgstr ""
+
+msgid "FRITZ!Box FON address (Name or IP)"
+msgstr "FRITZ!Box adres (Naam of IP)"
+
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+msgid "FRITZ!Box Fon Status"
+msgstr "FRITZ!Box Status"
+
+msgid "Filter also list of calls"
+msgstr ""
+
+msgid "Flash"
+msgstr "Flash"
+
+#, python-format
+msgid ""
+"Found picture\n"
+"\n"
+"%s\n"
+"\n"
+"But did not load. Probably not PNG, 8-bit"
+msgstr ""
+
+msgid "France"
+msgstr "Frankrijk"
+
+#. TRANSLATORS: this is a window title.
+msgid "FritzCall Setup"
+msgstr "Setup Fritzcall"
+
+msgid "Germany"
+msgstr "Duitsland"
+
+msgid "Getting calls from FRITZ!Box..."
+msgstr "Ontvangt gesprekken van de FRITZ!Box..."
+
+msgid "Getting status from FRITZ!Box Fon..."
+msgstr "Ophalen van status van de FRITZ!Box..."
+
+msgid "IP Address:"
+msgstr "IP Adres:"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Incoming"
+msgstr "Binnenkomend"
+
+#, python-format
+msgid ""
+"Incoming Call on %(date)s at %(time)s from\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"to: %(phone)s"
+msgstr ""
+
+msgid "Incoming calls"
+msgstr "Inkomende gesprekken"
+
+msgid "Italy"
+msgstr "Italië"
+
+msgid "Last 10 calls:\n"
+msgstr "Laatste 10 gesprekken: \n"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Lookup"
+msgstr "Zoek"
+
+msgid "MSN to show (separated by ,)"
+msgstr "Laat MSN zien (door een komma gescheiden)"
+
+msgid "Mailbox"
+msgstr "Mailbox"
+
+msgid "Media directory"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Missed"
+msgstr "Gemist"
+
+msgid "Missed calls"
+msgstr "Gemiste gesprekken"
+
+msgid "Mute on call"
+msgstr "Muten bij oproep"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Network mount"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "New"
+msgstr "Nieuw"
+
+msgid "No DECT phone registered"
+msgstr "Geen DECT telefoon geregistreerd"
+
+#, fuzzy
+msgid "No call redirection active"
+msgstr "Geen mailbox actief"
+
+msgid "No entry selected"
+msgstr "Geen regel geselecteerd"
+
+msgid "No mailbox active"
+msgstr "Geen mailbox actief"
+
+msgid "No phonebook"
+msgstr ""
+
+msgid "No result from LDIF"
+msgstr "Geen resultaat uit LDIF"
+
+msgid "No result from Outlook export"
+msgstr "Geen Resultaat van Outlook export"
+
+msgid "No result from reverse lookup"
+msgstr "Geen resultaat uit omgekeerd zoeken"
+
+msgid "Number"
+msgstr "Nummer"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "OK"
+msgstr "Ok"
+
+msgid "One DECT phone registered"
+msgstr "Eén DECT telefoon geregistreerd"
+
+#, fuzzy
+msgid "One call redirection active"
+msgstr "Eén mailbox actief"
+
+msgid "One mailbox active"
+msgstr "Eén mailbox actief"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Outgoing"
+msgstr "Uitgaand"
+
+#, python-format
+msgid ""
+"Outgoing Call on %(date)s at %(time)s to\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"from: %(phone)s"
+msgstr ""
+
+msgid "Outgoing calls"
+msgstr "Uitgaande gesprekken"
+
+msgid "Password Accessing FRITZ!Box"
+msgstr "Wachtwoord voor toegang FRITZ!Box"
+
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+msgid "Phone calls"
+msgstr "Telefoongesprekken"
+
+msgid "PhoneBook Location"
+msgstr "Telefoonboek locatie"
+
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+msgid "Phonebook"
+msgstr "Telefoonboek"
+
+msgid "Plugin not active"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Quit"
+msgstr "Afbreken"
+
+msgid "Read PhoneBook from FRITZ!Box"
+msgstr "Lees telefoonboek van FRITZ!Box"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Refresh status"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr "Omgekeerd zoeken van een beller ID (select land hieronder)"
+
+msgid "Reverse searching..."
+msgstr "Zoekt omgekeerd..."
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Save"
+msgstr "Opslaan"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Search"
+msgstr "Zoeken"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Search (case insensitive)"
+msgstr "Zoeken (hoofdletter ongevoelig)"
+
+msgid "Search phonebook"
+msgstr "Doorzoek het telefoonboek"
+
+msgid "Searching in LDIF..."
+msgstr "Zoekt in LDIF..."
+
+msgid "Searching in Outlook export..."
+msgstr "Zoekt in Outlook export..."
+
+msgid "Shortcut"
+msgstr "Snelkoppeling"
+
+msgid "Show Outgoing Calls"
+msgstr "Laat uitgaande gesprekken zien"
+
+msgid "Show after Standby"
+msgstr "Laat zien na standby"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Show details of entry"
+msgstr "Laat de details zien van een regel"
+
+msgid "Show only calls for specific MSN"
+msgstr ""
+
+#, fuzzy
+msgid "Software fax active"
+msgstr "Geen mailbox actief"
+
+msgid "Status not available"
+msgstr ""
+
+msgid "Strip Leading 0"
+msgstr "Verwijder beginnende 0"
+
+msgid "Switzerland"
+msgstr "Zwitzerland"
+
+msgid "The Netherlands"
+msgstr "Nederland"
+
+msgid "Timeout for Call Notifications (seconds)"
+msgstr "Timeout voor gespreksnotificatie (seconden)"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 1. mailbox"
+msgstr "1. Mailbox Aan/Uit"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 2. mailbox"
+msgstr "2. Mailbox Aan/Uit"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 3. mailbox"
+msgstr "3. Mailbox Aan/Uit"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 4. mailbox"
+msgstr "4. Mailbox Aan/Uit"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 5. mailbox"
+msgstr "5. Mailbox Aan/Uit"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle Mailbox"
+msgstr "Mailbox Aan/Uit"
+
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle WLAN"
+msgstr "WLAN Aan/Uit"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle all mailboxes"
+msgstr "Mailbox Aan/Uit"
+
+msgid "UNKNOWN"
+msgstr "ONBEKEND"
+
+#, fuzzy
+msgid "USB Device"
+msgstr "USB Stick"
+
+msgid "Use internal PhoneBook"
+msgstr "Gebruik het interne telefoonboek"
+
+msgid "Vanity"
+msgstr "Trots"
+
+msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
+msgstr ""
+"U moet de monitorfunctie van de FRITZ!Box inschakelen door het drukken van "
+"#96*5*!"
+
+msgid ""
+"You need to set the password of the FRITZ!Box\n"
+"in the configuration dialog to display calls\n"
+"\n"
+"It could be a communication issue, just try again."
+msgstr ""
+"U moet het wachtwoord van de FRITZ!Box nog aanmaken\n"
+"in het configuratiescherm om gesprekken te laten zien\n"
+"\n"
+"Dit kan een communicatieprobleem zijn, probeer opnieuw."
+
+msgid "call redirections active"
+msgstr ""
+
+#, fuzzy
+msgid "devices active"
+msgstr "mailboxen actief"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "display calls"
+msgstr "Toon gesprekken"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "display phonebook"
+msgstr "Toon telefoonboek"
+
+msgid "done"
+msgstr "klaar"
+
+msgid "done, using last list"
+msgstr "klaar, gebruikt nu de laatste lijst"
+
+msgid "encrypted"
+msgstr "gecodeerd"
+
+msgid "finishing"
+msgstr "wordt beëindigd"
+
+msgid "home"
+msgstr "home"
+
+msgid "login"
+msgstr "login"
+
+msgid "login ok"
+msgstr "login ok"
+
+msgid "login verification"
+msgstr "login verificatie"
+
+msgid "mailboxes active"
+msgstr "mailboxen actief"
+
+msgid "mobile"
+msgstr "mobiel"
+
+msgid "no calls"
+msgstr ""
+
+#, fuzzy
+msgid "no device active"
+msgstr "Eén mailbox actief"
+
+msgid "not encrypted"
+msgstr "ongecodeerd "
+
+msgid "number suppressed"
+msgstr ""
+
+#, fuzzy
+msgid "one device active"
+msgstr "Eén mailbox actief"
+
+msgid "preparing"
+msgstr "aan het voorbereiden"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "quit"
+msgstr "sluiten"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "save and quit"
+msgstr "opslaan en sluiten"
+
+msgid "show as list"
+msgstr "als lijst tonen"
+
+msgid "show each call"
+msgstr "alle gesprekken tonen"
+
+msgid "show nothing"
+msgstr "niets weergeven"
+
+msgid "work"
+msgstr "werk"
+
+#~ msgid "Areacode to add to Outgoing Calls (if necessary)"
+#~ msgstr "Netnummer bij uitgaande gesprekken  (indien nodig)"
+
+#~ msgid "CF Drive"
+#~ msgstr "CF kaart"
+
+#~ msgid "Could not load calls from FRITZ!Box - Error: %s"
+#~ msgstr "Kon de gesprekken niet laden van FRITZ!Box - Fout: %s"
+
+#~ msgid "Dialling failed - Error: %s"
+#~ msgstr "FRITZ!Box Login mislukt! - Error: %s"
+
+#~ msgid "FRITZ!Box Login failed! - Wrong Password!"
+#~ msgstr "FRITZ!Box Login mislukt! - Onjuist wachtwoord"
+
+#, fuzzy
+#~ msgid "FRITZ!Box Login failed: "
+#~ msgstr "FRITZ!Box Login mislukt! - Error: %s"
+
+#~ msgid "Full screen display"
+#~ msgstr "Volledig scherm"
+
+#~ msgid "Harddisk"
+#~ msgstr "Harde schijf"
+
+#~ msgid ""
+#~ "Incoming Call on %(date)s from\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "to: %(phone)s"
+#~ msgstr ""
+#~ "Binnenkomend gesprek op %(date)s van\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "to: %(phone)s"
+
+#~ msgid ""
+#~ "Outgoing Call on %(date)s to\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "from: %(phone)s"
+#~ msgstr ""
+#~ "Uitgaand gesprek op %(date)s to\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "van: %(phone)s"
+
+#~ msgid "Show Calls for specific MSN"
+#~ msgstr "Laat gesprekken van een specifieke MSN zien"
+
+#, fuzzy
+#~ msgid "Toggle "
+#~ msgstr "WLAN Aan/Uit"

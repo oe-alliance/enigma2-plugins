@@ -1,0 +1,1177 @@
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <spaeleus@croci.org>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - youtubeplayer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-27 04:00+0100\n"
+"PO-Revision-Date: 2009-08-27 04:00+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/youtubeplayer\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/youtubeplayer\n"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserConfig.py:48
+msgid "Low Quality (Mono)"
+msgstr "Qualità bassa (Mono)"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserConfig.py:49
+msgid "Medium Quality (Mono)"
+msgstr "Qualità media (Mono)"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserConfig.py:50
+msgid "High Quality (Stereo)"
+msgstr "Qualità alta (Stereo)"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserConfig.py:51
+msgid "HD Quality (Stereo)"
+msgstr "Qualità HD (stereo)"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserConfig.py:135
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeAddPlayList.py:53
+msgid "Cancel"
+msgstr "Annull."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserConfig.py:136
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeAddPlayList.py:54
+msgid "Save"
+msgstr "Salvare"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserConfig.py:141
+msgid "User Profile Name"
+msgstr "Profilo utente"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserConfig.py:142
+msgid "E-Mail Address"
+msgstr "Indirizzo e-mail"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserConfig.py:143
+msgid "Password"
+msgstr "Password"
+
+#: /home/dario/Plugins/youtubeplayer/src/plugin.py:94
+#: /home/dario/Plugins/youtubeplayer/src/plugin.py:114
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:477
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:503
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:529
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:559
+msgid "Login not successful"
+msgstr "Login fallito!"
+
+#: /home/dario/Plugins/youtubeplayer/src/plugin.py:134
+#, python-format
+msgid ""
+"Error contacting YouTube:\n"
+"%s"
+msgstr ""
+"Errore di connessione con YouTube:\n"
+"%s"
+
+#: /home/dario/Plugins/youtubeplayer/src/plugin.py:143
+msgid "Search and play YouTube movies"
+msgstr "Ricercare e riprodurre filmati YouTube"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserList.py:79
+msgid "To use the selected feature you have to login to YouTube. Select a user-profile to login!"
+msgstr "Per utilizzare l'opzione prescelta è necessario effettuare il login a YouTube. Selezionare un profilo Utente!"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserList.py:81
+msgid "delete user"
+msgstr "Canc. User"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserList.py:82
+msgid "add user"
+msgstr "Agg. User"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserList.py:83
+msgid "edit user"
+msgstr "Mod. User"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserList.py:84
+msgid "set default"
+msgstr "Predefiniti"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeUserList.py:122
+#, python-format
+msgid "Really delete %(user)s?"
+msgstr "Cancellare %(user)s?"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:83
+msgid "Duration"
+msgstr "Durata"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:86
+msgid "Rate"
+msgstr "Valutaz."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:90
+msgid "Ratings"
+msgstr "Voti"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:93
+msgid "Favorited"
+msgstr "Preferito"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:96
+msgid "Views"
+msgstr "Visite"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:99
+msgid "Author:"
+msgstr "Autore:"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:102
+msgid "Added"
+msgstr "Aggiunto"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:105
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:280
+msgid "Category"
+msgstr "Categoria"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:107
+msgid "Tags"
+msgstr "Etich."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:211
+msgid "Select a VLC-Server"
+msgstr "Selez. un server VLC"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:212
+msgid "New YouTube search"
+msgstr "Nuova ricerca YouTube"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:217
+msgid "Total results"
+msgstr "Trovati (tot.)"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:220
+msgid "Shown"
+msgstr "Elencati"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:253
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:264
+msgid "Load further entries of current Feed?"
+msgstr "Caricare altre voci dal Feed corrente?"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:319
+#, python-format
+msgid ""
+"Error querying feed for search term %s:\n"
+"%s"
+msgstr ""
+"Errore nella ricerca per gli elementi %s:\n"
+"%s"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:326
+msgid "Searching, be patient ..."
+msgstr "Ricerca in corso, attendere..."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:336
+#, python-format
+msgid ""
+"Error querying playlist-feed for playlist %s:\n"
+"%s"
+msgstr ""
+"Errore nella ricerca playlist per la playlist %s:\n"
+"%s"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:343
+msgid "Loading playlist, be patient ..."
+msgstr "Caricamento Playlist in corso, attendere..."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:352
+#, python-format
+msgid ""
+"Error querying favorites feed:\n"
+"%s"
+msgstr ""
+"Errore nella ricerca preferiti:\n"
+"%s"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:359
+msgid "Loading favorits, be patient ..."
+msgstr "Caricamento Preferiti in corso, pazientare..."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:365
+msgid "Loading standard feed, be patient ..."
+msgstr "Caricamento feed standard in corso, attendere..."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:373
+#, python-format
+msgid ""
+"Error querying feed %s:\n"
+"%s"
+msgstr ""
+"Errore nella query feed %s:\n"
+"%s"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:391
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:400
+msgid "Loading additional videos, be patient ..."
+msgstr "Caricamento video aggiuntivi in corso, attendere..."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:391
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:400
+msgid "additional videos"
+msgstr "Video aggiuntivi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:405
+msgid "Loading related videos, be patient ..."
+msgstr "Caricamento video correlati in corso, attendere..."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:405
+msgid "related videos"
+msgstr "Video affini"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:410
+msgid "Loading response videos, be patient ..."
+msgstr "Caricamento risposte video in corso, attendere..."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:410
+msgid "response videos"
+msgstr "Risposte video"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:417
+msgid "Back in history, be patient ..."
+msgstr "Indietro nella History, attendere..."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:417
+msgid "back in history"
+msgstr "Indietro nella history"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:423
+msgid "Forward in history, be patient ..."
+msgstr "Avanti nella History, attendere..."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:423
+msgid "forward in history"
+msgstr "Avanti nella history"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:469
+#, python-format
+msgid ""
+"Error adding video to favorites:\n"
+"%s"
+msgstr ""
+"Errore in aggiunta video a favoriti:\n"
+"%s"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:495
+#, python-format
+msgid ""
+"Error removing video from favorites:\n"
+"%s"
+msgstr ""
+"Errore in rimozione video da preferiti:\n"
+"%s"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:521
+#, python-format
+msgid ""
+"Error removing video from playlist:\n"
+"%s"
+msgstr ""
+"Errore in rimozione video da playlist:\n"
+"%s"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:546
+#, python-format
+msgid ""
+"Error adding video to playlist:\n"
+"%s"
+msgstr ""
+"Errore in aggiunta video alla playlist:\n"
+"%s"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:574
+#, python-format
+msgid ""
+"Could not retrive video url for:\n"
+"%s"
+msgstr ""
+"Impossibile recuperare url video per:\n"
+"%s"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:624
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:663
+msgid "Show video detail info"
+msgstr "Informazioni sul video"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:626
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:665
+msgid "Remove from favorites"
+msgstr "Cancellare da preferiti"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:628
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:667
+msgid "Add to favorites"
+msgstr "Aggiungere a preferiti"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:631
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:669
+msgid "Remove from playlist"
+msgstr "Cancellare dalla Playlist"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:633
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:671
+msgid "Add to playlist"
+msgstr "Aggiungere alla Playlist"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:634
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:672
+msgid "Get related videos"
+msgstr "Video correlati"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:635
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeList.py:673
+msgid "Get video responses"
+msgstr "Risposte disponibili"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:40
+msgid "Most Viewed"
+msgstr "Più visti"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:41
+msgid "Top Rated"
+msgstr "Più votati"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:42
+msgid "Recently Featured"
+msgstr "Aggiunti recentemente"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:43
+msgid "Watch On Mobile"
+msgstr "Visualizzare su dispositivo mobile"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:44
+msgid "Most Discussed"
+msgstr "Più discussi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:45
+msgid "Top Favorites"
+msgstr "Top Preferiti"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:46
+msgid "Most Linked"
+msgstr "Più \"Linkati\""
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:47
+msgid "Most Responded"
+msgstr "Più affidabili"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:48
+msgid "Most Recent"
+msgstr "Più recenti"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeAddPlayList.py:36
+msgid "Name"
+msgstr "Nome"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeAddPlayList.py:37
+msgid "Description"
+msgstr "Descrizione"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeAddPlayList.py:59
+msgid "Playlist Name"
+msgstr "Titolo Playlist"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeAddPlayList.py:60
+msgid "Playlist Description"
+msgstr "Descrizione Playlist"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeAddPlayList.py:61
+msgid "private"
+msgstr "Privato"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:40
+msgid "Relevance"
+msgstr "Rilevanza"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:41
+msgid "View Count"
+msgstr "Visual. conteggio"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:42
+msgid "Published"
+msgstr "Pubblicato"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:43
+msgid "Rating"
+msgstr "Valutazione"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:47
+msgid "All Time"
+msgstr "Sempre"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:48
+msgid "This Month"
+msgstr "Questo mese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:49
+msgid "This Week"
+msgstr "Questa settimana"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:50
+msgid "Today"
+msgstr "Oggi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:54
+msgid "Yes"
+msgstr "Sì"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:55
+msgid "No"
+msgstr "No"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:59
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:91
+msgid "All"
+msgstr "Tutte"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:60
+msgid "Autos & Vehicles"
+msgstr "Auto & Veicoli"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:61
+msgid "Music"
+msgstr "Musica"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:62
+msgid "Pets & Animals"
+msgstr "Cuccioli & Animali"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:63
+msgid "Sports"
+msgstr "Sport"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:64
+msgid "Travel & Events"
+msgstr "Viaggi & Eventi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:65
+msgid "Short Movies"
+msgstr "Cortometraggi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:66
+msgid "Gaming"
+msgstr "Giochi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:67
+msgid "Comedy"
+msgstr "Commedie"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:68
+msgid "People & Blogs"
+msgstr "Gente & Blogs"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:69
+msgid "News & Politics"
+msgstr "Notizie & Politica"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:70
+msgid "Entertainment"
+msgstr "Intrattenimento"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:71
+msgid "Education"
+msgstr "Educativi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:72
+msgid "Howto & Style"
+msgstr "\"Howto\" & Stile"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:73
+msgid "Nonprofits & Activism"
+msgstr "No Profit & Attivismo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:74
+msgid "Science & Technology"
+msgstr "Scienza & Tecnologia"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:75
+msgid "Movies - Anime/Animation"
+msgstr "Film - Anime/Animazione"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:76
+msgid "Movies"
+msgstr "Film"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:77
+msgid "Moview - Comedy"
+msgstr "Film - Commedie"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:78
+msgid "Movies - Documentary"
+msgstr "Film - Documentari"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:79
+msgid "Movies - Action/Adventure"
+msgstr "Film - Azione/Avventura"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:80
+msgid "Movies - Classics"
+msgstr "Film - Classici"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:81
+msgid "Movies - Foreign"
+msgstr "Film - Stranieri"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:82
+msgid "Movies - Horror"
+msgstr "Film - Horror"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:83
+msgid "Movies - Drama"
+msgstr "Film - Drammatici"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:84
+msgid "Movies - Family"
+msgstr "Film - Famiglie"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:85
+msgid "Movies - Shorts"
+msgstr "Film - Corti"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:86
+msgid "Movies - Sci-Fi/Fantasy"
+msgstr "Film - Fantascienza/Fantasy"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:87
+msgid "Movies - Thriller"
+msgstr "Film - Thriller"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:92
+msgid "Afan (Oromo)"
+msgstr "Afaan Oromo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:93
+msgid "Abkhazian"
+msgstr "Abkhaso"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:94
+msgid "Afar"
+msgstr "Afar"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:95
+msgid "Afrikaans"
+msgstr "Afrikaans"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:96
+msgid "Albanian"
+msgstr "Albanese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:97
+msgid "Amharic"
+msgstr "Amharic"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:98
+msgid "Arabic"
+msgstr "Arabo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:99
+msgid "Armenian"
+msgstr "Armeno"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:100
+msgid "Assamese"
+msgstr "Assamese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:101
+msgid "Aymara"
+msgstr "Aymara"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:102
+msgid "Azerbaijani"
+msgstr "Azerbaigiano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:103
+msgid "Bashkir"
+msgstr "Bashkir"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:104
+msgid "Basque"
+msgstr "Basco"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:105
+msgid "Bengali"
+msgstr "Bengalese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:106
+msgid "Bhutani"
+msgstr "Bhutani"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:107
+msgid "Bihari"
+msgstr "Bihari"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:108
+msgid "Bislama"
+msgstr "Bislama"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:109
+msgid "Breton"
+msgstr "Bretone"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:110
+msgid "Bulgarian"
+msgstr "Bulgaro"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:111
+msgid "Burmese"
+msgstr "Burmese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:112
+msgid "Byelorussian"
+msgstr "Bielorusso"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:113
+msgid "Cambodian"
+msgstr "Cambogiano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:114
+msgid "Catalan"
+msgstr "Catalano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:115
+msgid "Chinese"
+msgstr "Cinese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:116
+msgid "Corsican"
+msgstr "Corso"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:117
+msgid "Croatian"
+msgstr "Croato"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:118
+msgid "Czech"
+msgstr "Ceco"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:119
+msgid "Danish"
+msgstr "Danese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:120
+msgid "Dutch"
+msgstr "Olandese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:121
+msgid "English"
+msgstr "Inglese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:122
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:123
+msgid "Estonian"
+msgstr "Estone"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:124
+msgid "Faeroese"
+msgstr "Faeroese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:125
+msgid "Fiji"
+msgstr "Fiji"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:126
+msgid "Finnish"
+msgstr "Finlandese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:127
+msgid "French"
+msgstr "Francese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:128
+msgid "Frisian"
+msgstr "Frisone"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:129
+msgid "Galician"
+msgstr "Galiziano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:130
+msgid "Georgian"
+msgstr "Georgiano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:131
+msgid "German"
+msgstr "Tedesco"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:132
+msgid "Greek"
+msgstr "Greco"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:133
+msgid "Greenlandic"
+msgstr "Groenlandese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:134
+msgid "Guarani"
+msgstr "Guaranì"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:135
+msgid "Gujarati"
+msgstr "Gujarati"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:136
+msgid "Hausa"
+msgstr "Hausa"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:137
+msgid "Hebrew"
+msgstr "Ebreo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:138
+msgid "Hindi"
+msgstr "Hindi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:139
+msgid "Hungarian"
+msgstr "Ungherese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:140
+msgid "Icelandic"
+msgstr "Islandese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:141
+msgid "Indonesian"
+msgstr "Indonesiano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:142
+msgid "Interlingua"
+msgstr "Interlingua"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:143
+msgid "Interlingue"
+msgstr "Interlingue"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:144
+msgid "Inupiak"
+msgstr "Inupiak"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:145
+msgid "Inuktitut (Eskimo)"
+msgstr "Inuktitut (Eskimo)"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:146
+msgid "Irish"
+msgstr "Irlandese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:147
+msgid "Italian"
+msgstr "Italiano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:148
+msgid "Japanese"
+msgstr "Giapponese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:149
+msgid "Javanese"
+msgstr "Javanese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:150
+msgid "Kannada"
+msgstr "Kannada"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:151
+msgid "Kashmiri"
+msgstr "Kashmiri"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:152
+msgid "Kazakh"
+msgstr "Kazako"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:153
+msgid "Kinyarwanda"
+msgstr "Kinyarwanda"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:154
+msgid "Kirghiz"
+msgstr "Kirghizo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:155
+msgid "Kirundi"
+msgstr "Kirundi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:156
+msgid "Korean"
+msgstr "Coreano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:157
+msgid "Kurdish"
+msgstr "Kurdo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:158
+msgid "Laothian"
+msgstr "Laothian"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:159
+msgid "Latin"
+msgstr "Latino"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:160
+msgid "Latvian"
+msgstr "Lettone"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:161
+msgid "Lingala"
+msgstr "Lingala"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:162
+msgid "Lithuanian"
+msgstr "Lituano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:163
+msgid "Macedonian"
+msgstr "Macedone"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:164
+msgid "Malagasy"
+msgstr "Malgascio"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:165
+msgid "Malay"
+msgstr "Malay"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:166
+msgid "Malayalam"
+msgstr "Malayalam"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:167
+msgid "Maltese"
+msgstr "Maltese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:168
+msgid "Maori"
+msgstr "Maori"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:169
+msgid "Marathi"
+msgstr "Marathi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:170
+msgid "Moldavian"
+msgstr "Moldavo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:171
+msgid "Mongolian"
+msgstr "Mongolo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:172
+msgid "Nauru"
+msgstr "Nauru"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:173
+msgid "Nepali"
+msgstr "Nepali"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:174
+msgid "Norwegian"
+msgstr "Norvegese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:175
+msgid "Occitan"
+msgstr "Occitano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:176
+msgid "Oriya"
+msgstr "Oriya"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:177
+msgid "Pashto"
+msgstr "Pashtu"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:178
+msgid "Persian"
+msgstr "Persiano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:179
+msgid "Polish"
+msgstr "Polacco"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:180
+msgid "Portuguese"
+msgstr "Portoghese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:181
+msgid "Punjabi"
+msgstr "Punjabi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:182
+msgid "Quechua"
+msgstr "Quechua"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:183
+msgid "Rhaeto-Romance"
+msgstr "Rhaeto-Romance"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:184
+msgid "Romanian"
+msgstr "Rumeno"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:185
+msgid "Russian"
+msgstr "Russo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:186
+msgid "Samoan"
+msgstr "Samoano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:187
+msgid "Sangro"
+msgstr "Sangro"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:188
+msgid "Sanskrit"
+msgstr "Sanscrito"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:189
+msgid "Scots Gaelic"
+msgstr "Gaelico"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:190
+msgid "Serbian"
+msgstr "Serbo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:191
+msgid "Serbo-Croatian"
+msgstr "Serbo-Croato"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:192
+msgid "Sesotho"
+msgstr "Sesotho"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:193
+msgid "Setswana"
+msgstr "Setswana"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:194
+msgid "Shona"
+msgstr "Shona"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:195
+msgid "Sindhi"
+msgstr "Sindhi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:196
+msgid "Singhalese"
+msgstr "Singhalese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:197
+msgid "Siswati"
+msgstr "Siswati"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:198
+msgid "Slovak"
+msgstr "Slovacco"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:199
+msgid "Slovenian"
+msgstr "Sloveno"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:200
+msgid "Somali"
+msgstr "Somalo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:201
+msgid "Spanish"
+msgstr "Spagnolo"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:202
+msgid "Sudanese"
+msgstr "Sudanese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:203
+msgid "Swahili"
+msgstr "Swahili"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:204
+msgid "Swedish"
+msgstr "Svedese"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:205
+msgid "Tagalog"
+msgstr "Tagalog"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:206
+msgid "Tajik"
+msgstr "Tajik"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:207
+msgid "Tamil"
+msgstr "Tamil"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:208
+msgid "Tatar"
+msgstr "Tatar"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:209
+msgid "Tegulu"
+msgstr "Tegulu"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:210
+msgid "Thai"
+msgstr "Thai"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:211
+msgid "Tibetan"
+msgstr "Tibetano"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:212
+msgid "Tigrinya"
+msgstr "Tigrinya"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:213
+msgid "Tonga"
+msgstr "Tonga"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:214
+msgid "Tsonga"
+msgstr "Tsonga"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:215
+msgid "Turkish"
+msgstr "Turco"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:216
+msgid "Turkmen"
+msgstr "Turkmen"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:217
+msgid "Twi"
+msgstr "Twi"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:218
+msgid "Uigur"
+msgstr "Uigur"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:219
+msgid "Ukrainian"
+msgstr "Ucraino"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:220
+msgid "Urdu"
+msgstr "Urdu"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:221
+msgid "Uzbek"
+msgstr "Uzbeco"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:222
+msgid "Vietnamese"
+msgstr "Vietnamita"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:223
+msgid "Volapuk"
+msgstr "Volapuk"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:224
+msgid "Welch"
+msgstr "Welch"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:225
+msgid "Wolof"
+msgstr "Wolof"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:226
+msgid "Xhosa"
+msgstr "Xhosa"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:227
+msgid "Yiddish"
+msgstr "Yiddish"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:228
+msgid "Yoruba"
+msgstr "Yoruba"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:229
+msgid "Zhuang"
+msgstr "Zhuang"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:230
+msgid "Zulu"
+msgstr "Zulu"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:234
+msgid "Ascanding"
+msgstr "Ascendente"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:235
+msgid "Descending"
+msgstr "Discendente"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:268
+msgid "Std.Feeds"
+msgstr "Feed Std."
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:269
+msgid "Search"
+msgstr "Ricerca"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:270
+msgid "Playlists"
+msgstr "Playlist"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:271
+msgid "Favorites"
+msgstr "Preferiti"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:274
+msgid "Search Term(s)"
+msgstr "Criteri di ricerca"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:275
+msgid "Video Quality"
+msgstr "Qualità video"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:276
+msgid "Order by"
+msgstr "Ordinamento per"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:279
+msgid "Restricted Content"
+msgstr "Contenuti vietati"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubeSearchDialog.py:281
+msgid "From Region"
+msgstr "Dalla Regione"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubePlayList.py:57
+msgid "Delete Playlist"
+msgstr "Cancellare Playlist"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubePlayList.py:58
+msgid "Add new Playlist"
+msgstr "Aggiungere nuova Playlist"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubePlayList.py:79
+#, python-format
+msgid ""
+"Error loading playlists:\n"
+"%s"
+msgstr ""
+"Errore in caricamento playlist:\n"
+"%s"
+
+#: /home/dario/Plugins/youtubeplayer/src/YouTubePlayList.py:91
+#, python-format
+msgid "Really delete %(playlist)s?"
+msgstr "Cancellare %(playlist)s?"
+

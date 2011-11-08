@@ -1,0 +1,18 @@
+<keymap>
+	<map context="ftpbrowserBaseActions">
+		<key id="KEY_OK" mapto="ok" flags="m" />
+		<key id="KEY_EXIT" mapto="cancel" flags="m" />
+		<key id="KEY_RED" mapto="cancel" flags="m" />
+		<key id="KEY_MENU" mapto="menu" flags="m" />
+	</map>
+	<map context="ftpbrowserDirectionActions">
+		<key id="KEY_UP" mapto="up" flags="mr" />
+		<key id="KEY_DOWN" mapto="down" flags="mr" />
+		<key id="KEY_LEFT" mapto="left" flags="mr" />
+		<key id="KEY_RIGHT" mapto="right" flags="mr" />
+	</map>
+	<map context="ftpbrowserListActions">
+		<key id="KEY_CHANNELUP" mapto="channelUp" flags="mr" />
+		<key id="KEY_CHANNELDOWN" mapto="channelDown" flags="mr" />	
+	</map>
+</keymap>

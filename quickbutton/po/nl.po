@@ -1,0 +1,149 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 - Quickbutton\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-13 11:51+0200\n"
+"PO-Revision-Date: 2009-09-23 16:26+0100\n"
+"Last-Translator: \n"
+"Language-Team:  <Benny.DeTandt@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+#: ../src/plugin.py:84
+msgid "Assign plugin to long blue key pressed"
+msgstr "Wijs plugin toe aan lang ingedrukte blauwe toets"
+
+#: ../src/plugin.py:81
+msgid "Assign plugin to long green key pressed"
+msgstr "Wijs plugin toe aan lang ingedrukte groene toets"
+
+#: ../src/plugin.py:83
+msgid "Assign plugin to long red key pressed"
+msgstr "Wijs plugin toe aan lang ingedrukte rode toets"
+
+#: ../src/plugin.py:82
+msgid "Assign plugin to long yellow key pressed"
+msgstr "Wijs plugin toe aan lang ingedrukte gele toets"
+
+#: ../src/plugin.py:86
+msgid "Assign plugin to red key pressed"
+msgstr "Wijs plugin toe aan rode toets"
+
+#: ../src/plugin.py:181
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: ../src/plugin.py:144
+msgid "Display 4:3 content as"
+msgstr "Toon 4:3 materiaal als"
+
+#: ../src/plugin.py:121
+#: ../src/plugin.py:191
+#: ../src/plugin.py:235
+msgid "EPG List"
+msgstr "EPG Lijst"
+
+#: ../src/plugin.py:132
+#: ../src/plugin.py:160
+#, python-format
+msgid ""
+"Error!\n"
+"Error Text: %s"
+msgstr ""
+"Fout!\n"
+"Fout boodschap: %s"
+
+#: ../src/plugin.py:140
+msgid "Just Scale"
+msgstr "Alleen schalen"
+
+#: ../src/plugin.py:126
+#: ../src/plugin.py:192
+#: ../src/plugin.py:237
+msgid "MediaPlayer"
+msgstr "Mediaspeler"
+
+#: ../src/plugin.py:164
+msgid "No plugin assigned!"
+msgstr "Geen toegewezen plugin!"
+
+#: ../src/plugin.py:36
+#: ../src/plugin.py:37
+#: ../src/plugin.py:38
+#: ../src/plugin.py:39
+#: ../src/plugin.py:40
+#: ../src/plugin.py:120
+#: ../src/plugin.py:190
+msgid "Nothing"
+msgstr "Niets"
+
+#: ../src/plugin.py:182
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:139
+msgid "Pan&Scan"
+msgstr "Pan&Scan"
+
+#: ../src/plugin.py:138
+msgid "Pillarbox"
+msgstr "Pillarbox"
+
+#: ../src/plugin.py:133
+#: ../src/plugin.py:193
+#: ../src/plugin.py:239
+msgid "Plugin browser"
+msgstr "Plugin browser"
+
+#: ../src/plugin.py:162
+msgid "Plugin not found!"
+msgstr "Plugin niet gevonden!"
+
+#: ../src/plugin.py:146
+#: ../src/plugin.py:195
+#: ../src/plugin.py:243
+msgid "Timer"
+msgstr "Timer"
+
+#: ../src/plugin.py:118
+msgid "Unknown Error"
+msgstr "Onbekende fout"
+
+#: ../src/plugin.py:220
+msgid "assigned to long blue"
+msgstr "Toegewezen aan lange blauwe toetsdruk"
+
+#: ../src/plugin.py:218
+msgid "assigned to long green"
+msgstr "Toegewezen aan lange groene toetsdruk"
+
+#: ../src/plugin.py:217
+msgid "assigned to long red"
+msgstr "Toegewezen aan lange rode toetsdruk"
+
+#: ../src/plugin.py:219
+msgid "assigned to long yellow"
+msgstr "Toegewezen aan lange gele toetsdruk"
+
+#: ../src/plugin.py:225
+msgid "assigned to red"
+msgstr "Toegewezen aan rode toets"
+
+#: ../src/plugin.py:74
+msgid "setup for Quickbutton"
+msgstr "Sneltoets instellingen"
+
+#: ../src/plugin.py:137
+#: ../src/plugin.py:194
+#: ../src/plugin.py:241
+msgid "switch 4:3 content display"
+msgstr "Ga naar 4:3 layout"
+

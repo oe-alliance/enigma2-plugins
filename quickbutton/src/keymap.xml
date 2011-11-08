@@ -1,0 +1,9 @@
+<keymap>
+<map context="QuickbuttonActions">
+	<key id="KEY_GREEN" mapto="green_l" flags="l" />
+	<key id="KEY_YELLOW" mapto="yellow_l" flags="l" />
+	<key id="KEY_RED" mapto="red_b" flags="b" />
+	<key id="KEY_RED" mapto="red_l" flags="l" />
+	<key id="KEY_BLUE" mapto="blue_l" flags="l" />
+</map>
+</keymap>

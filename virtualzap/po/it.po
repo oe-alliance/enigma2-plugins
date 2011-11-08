@@ -1,0 +1,82 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - virtualzap\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-06 20:00+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/virtualzap\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/virtualzap\n"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:55
+msgid "as plugin in extended bar"
+msgstr "come plugin tra le estensioni"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:55
+msgid "with long OK press"
+msgstr "con pressione lunga tasto Ok"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:55
+msgid "with exit button"
+msgstr "con il tasto exit"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:121
+msgid "Could not open Picture in Picture"
+msgstr "Impossibile attivare PiP"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:132
+msgid "Virtual Zap Setup"
+msgstr "Configurazione Virtual Zap"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:134
+msgid "Virtual (PiP) Zap"
+msgstr "Virtual (PiP) Zap"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:615
+msgid "Cancel"
+msgstr "Annull."
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:616
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:618
+msgid "Usage"
+msgstr "Uso"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:620
+msgid "Use PiP"
+msgstr "Usare PiP"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:621
+msgid "Show PiP in Infobar"
+msgstr "Mostrare PiP su barra informazioni"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:622
+msgid "Start standard PiP after x secs (0 = disabled)"
+msgstr "Avviare PiP standard dopo x sec. (0 = disabilitato)"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:623
+msgid "Remember last service"
+msgstr "Memorizzare l'ultimo canale"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:635
+msgid ""
+"GUI needs a restart to apply the new settings.\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+"L'attivazione della nuova configurazione richiede\n"
+"il riavvio di enigma2. Riavviare ora?"
+
+#: /home/dario/Plugins/virtualzap/src/plugin.py:636
+msgid "Restart GUI now?"
+msgstr "Riavviare la GUI ora?"
+

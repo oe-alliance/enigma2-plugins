@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-epgrefresh
+Version: 1.0.0-20110529-r0
+Description: Plugin to refresh EPG Data when Receiver is inactive
+Maintainer: Moritz Venn <moritz.venn@freaque.net>
+Homepage: http://www.ritzmo.de
+Depends: enigma2 (>= 2.6git20090615), python-codecs, python-xml, enigma2-plugin-systemplugins-mphelp

@@ -1,0 +1,255 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: nigma2-plugin-extensions-ncidclient\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-01 10:33+0100\n"
+"PO-Revision-Date: 2010-11-01 10:34+0100\n"
+"Last-Translator: \n"
+"Language-Team: Stephan Reichholf\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: V:\\eclipse\\workspaces\\pydev\\enigma2-plugins\\enigma2-plugins\\ncidclient\\src\n"
+
+#: /home/dario/Plugins/ncidclient/plugin.py:44
+msgid "Germany"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:45
+msgid "The Netherlands"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:46
+msgid "France"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:47
+msgid "Italy"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:48
+msgid "Switzerland"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:49
+msgid "Austria"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:87
+msgid "Flash"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:88
+msgid "Compact Flash"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:89
+msgid "USB Device"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:94
+msgid "Media directory"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:100
+msgid "Network mount"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:109
+msgid "show nothing"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:109
+msgid "show as list"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:109
+msgid "show each call"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:440
+msgid "Delete"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:442
+msgid "New"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:444
+msgid "Edit"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:446
+msgid "Search"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:466
+msgid "Phonebook"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:520
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:524
+#: /home/dario/Plugins/ncidclient/plugin.py:541
+#: /home/dario/Plugins/ncidclient/plugin.py:633
+msgid "No entry selected"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:575
+#: /home/dario/Plugins/ncidclient/plugin.py:697
+msgid "Cancel"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:577
+#: /home/dario/Plugins/ncidclient/plugin.py:699
+msgid "OK"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:592
+msgid "Name"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:593
+msgid "Number"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:600
+msgid "Add entry to phonebook"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:608
+msgid "Entry incomplete."
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:642
+msgid "Enter Search Terms"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:642
+msgid "Search phonebook"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:718
+msgid "NCID Client - Setup"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:730
+msgid "Call monitoring"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:732
+msgid "NCID server (Name or IP)"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:733
+msgid "NCID server listening port (1-65535)"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:735
+msgid "Show after Standby"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:738
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:739
+msgid "Timeout for Call Notifications (seconds)"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:740
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:742
+msgid "Country"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:764
+msgid "Strip Leading 0"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:765
+msgid "Show connection information popups"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:795
+msgid "Plugin not active"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:797
+msgid "No phonebook"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:824
+msgid "no calls"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:827
+msgid "Last 10 calls:\n"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:835
+#: /home/dario/Plugins/ncidclient/plugin.py:838
+#: /home/dario/Plugins/ncidclient/plugin.py:940
+#: /home/dario/Plugins/ncidclient/plugin.py:997
+#: /home/dario/Plugins/ncidclient/plugin.py:1017
+msgid "UNKNOWN"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:874
+#, python-format
+msgid ""
+"Incoming Call on %s from\n"
+"---------------------------------------------\n"
+"%s\n"
+"%s\n"
+"---------------------------------------------"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:996
+msgid "number suppressed"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:1029
+msgid "Connecting to NCID Server..."
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:1034
+msgid "Connected to NCID Server"
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:1044
+#, python-format
+msgid ""
+"Connection to NCID Server lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:1052
+#, python-format
+msgid ""
+"Connecting to NCID Server failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+
+#: /home/dario/Plugins/ncidclient/plugin.py:1102
+msgid "Display Fon calls on screen"
+msgstr ""
+

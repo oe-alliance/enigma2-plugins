@@ -1,0 +1,295 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - easymedia\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-22 18:40+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITAY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /media/TREKSTOR/git/enigma2-plugins/easymedia\n"
+"X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/easymedia\n"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:58
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:59
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:60
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:61
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:62
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:63
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:64
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:65
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:66
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:67
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:68
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:69
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:70
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:71
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:72
+msgid "Disabled"
+msgstr "Disabilitato"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:58
+msgid "MediaPlayer"
+msgstr "MediaPlayer"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:58
+msgid "MerlinMusicPlayer"
+msgstr "MerlinMusicPlayer"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:59
+msgid "Filebrowser"
+msgstr "Browser file"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:59
+msgid "DreamExplorer"
+msgstr "DreamExplorer"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:59
+msgid "TuxCom"
+msgstr "TuxCom"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:60
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:61
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:62
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:63
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:64
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:65
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:66
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:67
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:68
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:69
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:70
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:71
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:72
+msgid "Enabled"
+msgstr "Abilitato"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:78
+msgid "Not easy way to start EasyMedia"
+msgstr "Via complessa per avviare EasyMedia"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:176
+msgid "EasyMedia settings..."
+msgstr "Configurazione EasyMedia..."
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:179
+msgid "Video database:"
+msgstr "Database video:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:180
+msgid "Music player:"
+msgstr "Player musicale:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:181
+msgid "Files browser:"
+msgstr "Browser file:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:182
+msgid "Show bookmarks:"
+msgstr "Mostrare segnalibri:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:183
+msgid "Timer:"
+msgstr "Timer:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:184
+msgid "PicturePlayer:"
+msgstr "PicturePlayer:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:185
+msgid "Show tv/radio switch:"
+msgstr "Mostrare commutatore tv/radio:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:186
+msgid "YouTube player:"
+msgstr "Player YouTube:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:187
+msgid "VLC player:"
+msgstr "Player VLC:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:188
+msgid "DVD player:"
+msgstr "Player DVD:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:189
+msgid "Weather plugin:"
+msgstr "Plugin meteo:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:190
+msgid "NetRadio player:"
+msgstr "Player NetRadio:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:191
+msgid "Show Merlin-iDream:"
+msgstr "Mostrare Melin-iDream:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:192
+msgid "ZDFmediathek player:"
+msgstr "Player ZDFmediathek:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:193
+msgid "MyVideo player:"
+msgstr "Player MyVideo:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:219
+msgid "Add/remove plugin"
+msgstr "Aggiungere/Rimuovere plugin"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:234
+msgid "Some plugins are not available:\n"
+msgstr "Alcuni plugin non sono disponibili:\n"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:236
+#, python-format
+msgid "%s (%s)\n"
+msgstr "%s (%s)\n"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:255
+msgid " added to EasyMedia"
+msgstr " aggiunto a EasyMedia"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:261
+msgid " removed from EasyMedia"
+msgstr "Rimosso da EasyMedia"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:285
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:320
+msgid "Movies"
+msgstr "Film"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:323
+msgid "Bookmarks"
+msgstr "Segnalibri"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:326
+msgid "Timer"
+msgstr "Timer"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:329
+msgid "VideoDB"
+msgstr "VideoDB"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:332
+msgid "Pictures"
+msgstr "Immagini"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:335
+msgid "Music"
+msgstr "Musica"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:339
+msgid "Tv/Radio"
+msgstr "Tv/Radio"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:341
+msgid "Radio"
+msgstr "Radio"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:344
+msgid "DVD Player"
+msgstr "Player DVD"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:347
+msgid "Weather"
+msgstr "Meteo"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:350
+msgid "Files"
+msgstr "File"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:353
+msgid "SHOUTcast"
+msgstr "SHOUTcast"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:356
+msgid "iDream"
+msgstr "iDream"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:359
+msgid "MyTube Player"
+msgstr "Player MyTube"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:362
+msgid "VLC Player"
+msgstr "Player VLC"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:365
+msgid "ZDFmediathek"
+msgstr "ZDFmediathek"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:368
+msgid "MyVideo"
+msgstr "MyVideo"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:439
+msgid "TV-mode"
+msgstr "Modalità TV"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:440
+msgid "Radio-mode"
+msgstr "Modalità Radio"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:441
+msgid "Nothing"
+msgstr "Nulla"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:453
+msgid "Select bookmark..."
+msgstr "Selezionare segnalibro..."
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:459
+msgid "Picture-player is not installed!"
+msgstr "PicturePlayer non installato!"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:469
+msgid "No Music-Player installed!"
+msgstr "Nessun player musicale installato!"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:481
+msgid "No File-Manager installed!"
+msgstr "Nessun file manager installato!"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:487
+msgid "Weather Plugin is not installed!"
+msgstr "Weather plugin non installato!"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:493
+msgid "DVDPlayer Plugin is not installed!"
+msgstr "Plugin DVDPlayer non installato!"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:499
+msgid "MyTube Plugin is not installed!"
+msgstr "Plugin MyTube non installato!"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:505
+msgid "SHOUTcast Plugin is not installed!"
+msgstr "Plugin SHOUTcast non installato!"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:511
+msgid "ZDFmediathek Plugin is not installed!"
+msgstr "Plugin ZDFmediathek non installato!"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:517
+msgid "VLC Player is not installed!"
+msgstr "VLCPlayer non installato!"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:524
+msgid "Merlin iDream is not installed!"
+msgstr "Merlin iDream non installato!"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:530
+msgid "MyVideo Player is not installed!"
+msgstr "Player MyVideo non installato!"
+
+#: /media/TREKSTOR/git/enigma2-plugins/easymedia/src/plugin.py:536
+msgid "VideoDB is not installed!"
+msgstr "VideoDB non installato!"
+

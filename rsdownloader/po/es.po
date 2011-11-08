@@ -1,0 +1,214 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: RS Downloader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-10 13:04+0100\n"
+"PO-Revision-Date: 2009-02-10 13:56+0100\n"
+"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/e2-plugins/enigma2-plugins/rsdownloader/src\n"
+
+#, python-format
+msgid "%s saved."
+msgstr "%s guardado."
+
+#, python-format
+msgid "Added %s to the download-list."
+msgstr "Añadí %s a la lista de descargas."
+
+msgid "Allow downloading on friday:"
+msgstr "Permitir descargar en viernes:"
+
+msgid "Allow downloading on monday:"
+msgstr "Permitir descargar en lunes:"
+
+msgid "Allow downloading on saturday:"
+msgstr "Permitir descargar en sábado:"
+
+msgid "Allow downloading on sunday:"
+msgstr "Permitir descargar en domingo:"
+
+msgid "Allow downloading on thursday:"
+msgstr "Permitir descargar en jueves:"
+
+msgid "Allow downloading on tuesday:"
+msgstr "Permitir descargar en martes:"
+
+msgid "Allow downloading on wednesday:"
+msgstr "Permitir descargar en miércoles:"
+
+msgid "Already downloading!"
+msgstr "¡Ya estoy descargando!"
+
+msgid "Clear"
+msgstr "Limpiar"
+
+msgid "Could not start downloading!"
+msgstr "¡No puedo comenzar la descarga!"
+
+#, python-format
+msgid "Couldn't find the directory %s!"
+msgstr "¡No puedo encontrar el directorio %s!"
+
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "Delete log..."
+msgstr "Borrar log..."
+
+msgid "Don't download after:"
+msgstr "No descargar después de:"
+
+msgid "Don't download before:"
+msgstr "No descargar antes de:"
+
+msgid "Download files from rapidshare in the background"
+msgstr "Descarga ficheros de rapidshare en segundo plano"
+
+msgid "Download in the background:"
+msgstr "Descargas en segundo plano:"
+
+msgid "Downloaded"
+msgstr "Descargados"
+
+msgid "Downloading"
+msgstr "Descargando"
+
+#, python-format
+msgid "Downloading %s."
+msgstr "Descargando %s."
+
+msgid "Downloads directory:"
+msgstr "Directorio de descargas:"
+
+msgid "Edit configs..."
+msgstr "Editar configuración..."
+
+msgid "Edit:"
+msgstr "Editar:"
+
+#, python-format
+msgid "Error while adding %s to the download-list!"
+msgstr "¡Error mientras añadía %s a la lista de descargas!"
+
+#, python-format
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Error mientras buscaba http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: %s"
+
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: Nothing found, sorry."
+msgstr ""
+"Error mientras buscaba http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: No encontré nada."
+
+#, python-format
+msgid "Error while writing %s!"
+msgstr "¡Error mientras escribía %s!"
+
+msgid "Failed"
+msgstr "Falló"
+
+msgid "Files"
+msgstr "Ficheros"
+
+msgid "Ignore download times:"
+msgstr "Ignorar tiempos de descarga:"
+
+msgid "Lists directory:"
+msgstr "Listas de directorio:"
+
+msgid "Loading next page... please wait!"
+msgstr "Cargando página siguiente... espere!"
+
+msgid "Loading previous page... please wait!"
+msgstr "Cargando página anterior... espere!"
+
+msgid "Nothing found, sorry."
+msgstr "No encontré nada, lo siento."
+
+#, python-format
+msgid "Page %d / %d. Push < > to switch the page..."
+msgstr "Página %d / %d. Pulse < > para cambiar de página..."
+
+msgid "Password:"
+msgstr "Contraseña:"
+
+msgid "RS Downloader"
+msgstr "RS Downloader"
+
+msgid ""
+"RS Downloader\n"
+"by AliAbdul\n"
+"\n"
+"This plugin allows you to download files from rapidshare in the background."
+msgstr ""
+"RS Downloader\n"
+"por AliAbdul\n"
+"\n"
+"Este plugin permite descargar ficheros desde rapidshare en segundo plano."
+
+msgid "Reconnect fritz.Box before downloading:"
+msgstr "Reconectar fritz.Box antes de descargar:"
+
+msgid "Reload"
+msgstr "Recargar"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Search http://rapidshare-search-engine.com for:"
+msgstr "Buscar http://rapidshare-search-engine.com para:"
+
+msgid "Show downloads..."
+msgstr "Mostrar descargas..."
+
+msgid "Show info..."
+msgstr "Mostrar info..."
+
+msgid "Show lists..."
+msgstr "Mostrar listas..."
+
+msgid "Show log..."
+msgstr "Mostrar log..."
+
+msgid "Show progress..."
+msgstr "Mostrar progreso..."
+
+msgid "Show status..."
+msgstr "Mostrar estado..."
+
+msgid "Start downloading..."
+msgstr "Comenzar descarga..."
+
+msgid "Started downloading..."
+msgstr "Comenzando descarga..."
+
+msgid "Stopped!"
+msgstr "¡Parado!"
+
+msgid "Use search-engine..."
+msgstr "Usar búsqueda..."
+
+msgid "Username:"
+msgstr "Nombre de Usuario:"
+
+msgid "Write log:"
+msgstr "Escribir log:"
+

@@ -1,0 +1,276 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 EmailClient Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-28 18:29+0100\n"
+"PO-Revision-Date: 2010-01-03 06:54+0100\n"
+"Last-Translator: WeeGull <weegull@hotmail.com>\n"
+"Language-Team: de <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, python-format
+msgid "%(name)s (%(user)s@%(server)s)"
+msgstr ""
+
+msgid "Accounts list"
+msgstr "Kontolista"
+
+msgid "Attachments"
+msgstr "Bifogade"
+
+msgid "Bodys"
+msgstr "Textkropp"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Email Client"
+msgstr "Epost Klient"
+
+msgid "Email setup"
+msgstr "Epost installation"
+
+#, python-format
+msgid ""
+"EmailClient for %(account)s:\n"
+"\n"
+"%(error)s"
+msgstr ""
+"Epostklient för %(account)s:\n"
+"\n"
+"%(error)s"
+
+msgid "From"
+msgstr "Från"
+
+msgid "IMAP Port"
+msgstr "IMAP Port"
+
+msgid "IMAP Server"
+msgstr "IMAP Server"
+
+#, python-format
+msgid ""
+"New mail arrived for account %s:\n"
+"\n"
+msgstr ""
+"Nytt epost inkommet för kontot %s:\n"
+"\n"
+
+#, python-format
+msgid "Really delete account %s?"
+msgstr "Verkligen ta bort kontot %s?"
+
+msgid "Subject"
+msgstr "Ämne"
+
+#, python-format
+msgid ""
+"[EmailAccount] %(name)s: _cbCapabilities:\n"
+"####################################################################################################\n"
+"# If you have problems to log into your imap-server, please send me the output of the following line\n"
+"# cbCapabilities: %(capa)s\n"
+"####################################################################################################\n"
+msgstr ""
+
+#, python-format
+msgid "account %s is not connected"
+msgstr "kontot %s är inte anslutet"
+
+msgid "account name"
+msgstr "kontonamn"
+
+msgid "account not connected"
+msgstr "kontot ej anslutet"
+
+msgid "add"
+msgstr "lägg till"
+
+msgid "cancel"
+msgstr "Avbryt"
+
+msgid "cannot access inbox"
+msgstr "ingen åtkomst till INBOX"
+
+msgid "cannot get headers of new messages"
+msgstr "kan inte erhålla brevhuvuden på nya meddelanden"
+
+msgid "cannot get list of new messages"
+msgstr "kan inte erhålla lista över nya meddelanden"
+
+msgid "connection failed - retrying"
+msgstr "anslutning misslyckades - försöker igen"
+
+msgid "debug"
+msgstr "debug"
+
+msgid "delete"
+msgstr "Ta bort"
+
+msgid "display connection errors"
+msgstr "visa anslutningsfel"
+
+msgid "display timeout (seconds)"
+msgstr "visa timeout (i Sekunder)"
+
+msgid "edit"
+msgstr "ändra"
+
+msgid "empty values - retry"
+msgstr "inget angivet - försök igen"
+
+#, python-format
+msgid ""
+"error logging %(who)s in:\n"
+"%(failure)s"
+msgstr ""
+"fel vid inloggning med %(who)s:\n"
+"%(failure)s"
+
+msgid "failed to load message"
+msgstr "misslyckades med att ladda meddelandet"
+
+msgid "getting message ..."
+msgstr "laddar ner meddelanden..."
+
+#, python-format
+msgid "have %d messages"
+msgstr "har %d meddelanden"
+
+msgid "have no messages"
+msgstr "inga meddelanden"
+
+msgid "headers loaded, now parsing ..."
+msgstr "Brevhuvuden laddade, bearbetar nu..."
+
+#, python-format
+msgid "importing configurations from %s"
+msgstr "importera inställningar från %s"
+
+msgid "leave unread"
+msgstr "lämna oläst"
+
+msgid "list all mailboxes"
+msgstr "lista alla epostlådor"
+
+msgid "loading headers ..."
+msgstr "laddar brevhuvuden..."
+
+msgid "mail check interval (minutes)"
+msgstr "kontroll intervall (i Minuter)"
+
+msgid "maximum mail size to fetch"
+msgstr "maximum epost storlek att hämta"
+
+msgid "message too large"
+msgstr "meddelande för stort"
+
+msgid "no account selected"
+msgstr "inget konto valt"
+
+msgid "no date"
+msgstr "inget datum"
+
+msgid "no filename"
+msgstr "inget filnamn"
+
+msgid "no from"
+msgstr "ingen avsändare"
+
+msgid "no mailbox?!?!"
+msgstr "ingen epostlåda?!?!"
+
+msgid "no sender"
+msgstr "ingen skickare"
+
+msgid "no subject"
+msgstr "inget ämne"
+
+msgid "ok"
+msgstr "OK"
+
+msgid "parsing message ..."
+msgstr "bearbetar epost..."
+
+msgid "password"
+msgstr "lösenord"
+
+msgid "really delete mail?"
+msgstr "verkligen ta bort epost?"
+
+msgid "really undelete mail?"
+msgstr "verkligen återskapa epost?"
+
+msgid "remove"
+msgstr "ta bort"
+
+msgid "select Attachment"
+msgstr "välj bifogad"
+
+msgid "select Body"
+msgstr "välj textkropp"
+
+msgid "show deleted entries"
+msgstr "visa borttagna epost"
+
+msgid "undelete"
+msgstr "återskapa"
+
+msgid "user name"
+msgstr "användarnamn"
+
+msgid "view Emails via IMAP4"
+msgstr "läs epost med hjälp av IMAP4"
+
+#~ msgid "Box '%s' is empty"
+#~ msgstr "Epostlåda %s är tom"
+#~ msgid ""
+#~ "In order of missing standart python library files\n"
+#~ "i have copied the nessary files now.\n"
+#~ "But you have to restart your Box\n"
+#~ " to apply this!"
+#~ msgstr ""
+#~ "Då det saknades vissa standard python librarys filer,\n"
+#~ "har dessa nu kopierats.\n"
+#~ "En omstart av din Dreambox är nödvändig\n"
+#~ "för att aktivera dessa."
+#~ msgid "Mailbox"
+#~ msgstr "Epostlåda"
+#~ msgid "cannot access mailbox '%(mboxname)s'"
+#~ msgstr "ingen åtkomst till epostlådan '%(mboxname)s'"
+#~ msgid "cannot get capabilities of mailserver"
+#~ msgstr "kan inte erhålla tjänster fråm epostserver"
+#~ msgid "connection to %(server)s:%(port)d failed"
+#~ msgstr "anslutning till %(server)s:%(port)d misslyckades"
+#~ msgid ""
+#~ "connection to %(server)s:%(port)d failed:\n"
+#~ "%(reason)s"
+#~ msgstr ""
+#~ "anslutning till %(server)s:%(port)d misslyckades:\n"
+#~ "%(reason)s"
+#~ msgid "encrypted login failed, trying without encryption"
+#~ msgstr "krypterad inloggning misslyckades, försöker utan kryptering"
+#~ msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
+#~ msgstr "laddar brevhuvuden %(from)d-%(to)d från epostlåda '%(name)s'"
+#~ msgid "logged in"
+#~ msgstr "inloggad"
+#~ msgid "login failed"
+#~ msgstr "Inloggning missluckades"
+#~ msgid "max of Headers to load"
+#~ msgstr "Max anntal brevhuvuden att ladda"
+#~ msgid "no"
+#~ msgstr "nej"
+#~ msgid "notify about new mails"
+#~ msgstr "Meddela om nya epost"
+#~ msgid "unread messages in mailbox"
+#~ msgstr "olästa meddelanden i epostlådan"
+#~ msgid "yes"
+#~ msgstr "ja"
+

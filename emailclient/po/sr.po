@@ -1,0 +1,293 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 - Plugin EmailClient\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-18 08:15+0100\n"
+"PO-Revision-Date: 2009-09-27 17:49+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#, python-format
+msgid "%(name)s (%(user)s@%(server)s)"
+msgstr ""
+
+msgid "Accounts list"
+msgstr ""
+
+msgid "Attachments"
+msgstr "Dodatci"
+
+msgid "Bodys"
+msgstr "Oblici"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Email Client"
+msgstr "Imejl klijent"
+
+#, fuzzy
+msgid "Email setup"
+msgstr "Imejl klijent"
+
+#, python-format
+msgid ""
+"EmailClient for %(account)s:\n"
+"\n"
+"%(error)s"
+msgstr ""
+
+msgid "From"
+msgstr "Od"
+
+msgid "IMAP Port"
+msgstr "IMAP Port"
+
+msgid "IMAP Server"
+msgstr "IMAP Server"
+
+#, fuzzy, python-format
+msgid ""
+"New mail arrived for account %s:\n"
+"\n"
+msgstr ""
+"Nova poruka stigla:\n"
+"\n"
+
+#, fuzzy, python-format
+msgid "Really delete account %s?"
+msgstr "stvarno obrisati poruku?"
+
+msgid "Subject"
+msgstr "Subjekt"
+
+#, python-format
+msgid ""
+"[EmailAccount] %(name)s: _cbCapabilities:\n"
+"####################################################################################################\n"
+"# If you have problems to log into your imap-server, please send me the "
+"output of the following line\n"
+"# cbCapabilities: %(capa)s\n"
+"####################################################################################################\n"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "account %s is not connected"
+msgstr "spojen"
+
+msgid "account name"
+msgstr ""
+
+#, fuzzy
+msgid "account not connected"
+msgstr "spojen"
+
+msgid "add"
+msgstr ""
+
+msgid "cancel"
+msgstr "otkaži"
+
+msgid "cannot access inbox"
+msgstr ""
+
+msgid "cannot get headers of new messages"
+msgstr ""
+
+msgid "cannot get list of new messages"
+msgstr ""
+
+msgid "connection failed - retrying"
+msgstr ""
+
+msgid "debug"
+msgstr ""
+
+msgid "delete"
+msgstr "obriši"
+
+#, fuzzy
+msgid "display connection errors"
+msgstr "vreme prikazivanja nove poruke (sekunde)"
+
+#, fuzzy
+msgid "display timeout (seconds)"
+msgstr "vreme prikazivanja nove poruke (sekunde)"
+
+msgid "edit"
+msgstr ""
+
+msgid "empty values - retry"
+msgstr ""
+
+#, python-format
+msgid ""
+"error logging %(who)s in:\n"
+"%(failure)s"
+msgstr ""
+
+#, fuzzy
+msgid "failed to load message"
+msgstr "učitavam poruku"
+
+#, fuzzy
+msgid "getting message ..."
+msgstr "analiziram poruku"
+
+#, python-format
+msgid "have %d messages"
+msgstr "ima %d poruka"
+
+#, fuzzy
+msgid "have no messages"
+msgstr "ima %d poruka"
+
+msgid "headers loaded, now parsing ..."
+msgstr "Zaglavlja učitana, sad raščlanjujem ..."
+
+#, python-format
+msgid "importing configurations from %s"
+msgstr ""
+
+msgid "leave unread"
+msgstr "ostavi nepročitano"
+
+msgid "list all mailboxes"
+msgstr ""
+
+#, fuzzy
+msgid "loading headers ..."
+msgstr "učitavam poruku"
+
+#, fuzzy
+msgid "mail check interval (minutes)"
+msgstr "Interval za proveru novih poruka (u minutima)"
+
+msgid "maximum mail size to fetch"
+msgstr ""
+
+msgid "message too large"
+msgstr ""
+
+#, fuzzy
+msgid "no account selected"
+msgstr "spojen"
+
+msgid "no date"
+msgstr "bez datuma"
+
+msgid "no filename"
+msgstr "bez imena datoteke"
+
+msgid "no from"
+msgstr "bez odakle"
+
+msgid "no mailbox?!?!"
+msgstr ""
+
+msgid "no sender"
+msgstr "bez pošiljaoca"
+
+msgid "no subject"
+msgstr "bez subjekta"
+
+msgid "ok"
+msgstr "ok"
+
+#, fuzzy
+msgid "parsing message ..."
+msgstr "analiziram poruku"
+
+#, fuzzy
+msgid "password"
+msgstr "Lozinka"
+
+#, fuzzy
+msgid "really delete mail?"
+msgstr "stvarno obrisati poruku?"
+
+#, fuzzy
+msgid "really undelete mail?"
+msgstr "stvarno restaurirati poruku?"
+
+msgid "remove"
+msgstr ""
+
+msgid "select Attachment"
+msgstr "izaberi dodatak"
+
+msgid "select Body"
+msgstr "Izaberi oblik"
+
+msgid "show deleted entries"
+msgstr "pokaži obrisane unose"
+
+msgid "undelete"
+msgstr "restauriraj"
+
+#, fuzzy
+msgid "user name"
+msgstr "Korisn. ime"
+
+msgid "view Emails via IMAP4"
+msgstr "vidi imejlove preko IMAP4"
+
+#~ msgid "Box '%s' is empty"
+#~ msgstr "Sanduče %s je prazno"
+
+#~ msgid "In"
+#~ msgstr "U"
+
+#~ msgid ""
+#~ "In order of missing standart python library files\n"
+#~ "i have copied the nessary files now.\n"
+#~ "But you have to restart your Box\n"
+#~ " to apply this!"
+#~ msgstr ""
+#~ "Zbog nedostatka stand. python lib. datoteka\n"
+#~ "sada sam kopirao potrebne datoteke.\n"
+#~ "Ali vi treba da restartujete vaš boks\n"
+#~ "da ovo primenite!"
+
+#~ msgid "Mailbox"
+#~ msgstr "Pošt. sand."
+
+#, fuzzy
+#~ msgid "Yes"
+#~ msgstr "da"
+
+#~ msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
+#~ msgstr "učitavam zaglavlja %(from)d-%(to)d iz sand.'%(name)s'"
+
+#~ msgid "logged in"
+#~ msgstr "regstrovan"
+
+#~ msgid "mail check process stopped"
+#~ msgstr "proces provere poruka zaustavljen"
+
+#~ msgid "max of Headers to load"
+#~ msgstr "maksimum zaglavlja za učitavanje"
+
+#~ msgid "no"
+#~ msgstr "ne"
+
+#~ msgid "notify about new mails"
+#~ msgstr "obavesti o novim porukama"
+
+#, fuzzy
+#~ msgid "unread messages in mailbox %s"
+#~ msgstr "nepročitane poruke u sandučetu"
+
+#~ msgid "yes"
+#~ msgstr "da"

@@ -1,0 +1,35 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - mosaic\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-05-31 01:37+0100\n"
+"PO-Revision-Date: 2009-05-31 02:26+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/mosaic\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/mosaic\n"
+
+#: /home/dario/Plugins/mosaic/src/plugin.py:170
+#: /home/dario/Plugins/mosaic/src/plugin.py:279
+msgid "Channel: "
+msgstr "Canale: "
+
+#: /home/dario/Plugins/mosaic/src/plugin.py:294
+msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
+msgstr "Errone nella creazione screenshot! E' richiesto \"grab\" v0.8 o superiore!"
+
+#: /home/dario/Plugins/mosaic/src/plugin.py:307
+msgid "Countdown:"
+msgstr "Conto alla rovescia: "
+
+#: /home/dario/Plugins/mosaic/src/plugin.py:364
+msgid "Mosaic"
+msgstr "Mosaic"
+

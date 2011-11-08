@@ -1,0 +1,106 @@
+# Spanish translations for enigma2-plugins package.
+# Copyright (C) 2009 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 - Plugin epgsearch\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-24 16:16+0200\n"
+"PO-Revision-Date: 2009-09-27 17:51+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/EPGSearch.py:150
+msgid "Add timer"
+msgstr "Dodaj tajmer"
+
+#: ../src/EPGSearch.py:349
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: ../src/EPGSearch.py:387
+msgid "Channel Selection"
+msgstr "Izbor kanala"
+
+#: ../src/EPGSearch.py:257
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Ne mogu pročitati listu autotajmera: %s"
+
+#: ../src/EPGSearch.py:69
+#: ../src/EPGSearch.py:179
+msgid "EPG Search"
+msgstr "EPG pretraga"
+
+#: ../src/EPGSearch.py:203
+msgid "Enter text to search for"
+msgstr "Unesi tekst za traženje"
+
+#: ../src/EPGSearch.py:216
+msgid "Export selected as AutoTimer"
+msgstr "Izvezi izabrano kao autotajmer"
+
+#: ../src/EPGSearch.py:135
+msgid "History"
+msgstr "Istorija"
+
+#: ../src/EPGSearch.py:214
+msgid "Import from AutoTimer"
+msgstr "Uvezi iz autotajmera"
+
+#: ../src/EPGSearch.py:209
+msgid "Import from EPG"
+msgstr "Uvezi iz EPG"
+
+#: ../src/EPGSearch.py:208
+msgid "Import from Timer"
+msgstr "Uvezi iz tajmera"
+
+#: ../src/EPGSearch.py:134
+msgid "New Search"
+msgstr "Nova pretraga"
+
+#: ../src/EPGSearch.py:298
+msgid "No history"
+msgstr "Bez istorije"
+
+#: ../src/EPGSearch.py:350
+msgid "OK"
+msgstr "OK"
+
+#: ../src/EPGSearch.py:215
+msgid "Save search as AutoTimer"
+msgstr "Sačuvaj pretragu kao autotajmer"
+
+#: ../src/EPGSearch.py:415
+msgid "Search"
+msgstr "Traženje"
+
+#: ../src/plugin.py:58
+msgid "Search EPG"
+msgstr "Pretraga EPG"
+
+#: ../src/EPGSearch.py:364
+msgid "Select a timer to search"
+msgstr "Izaberi tajmer za pretragu"
+
+#: ../src/EPGSearch.py:268
+#: ../src/EPGSearch.py:292
+msgid "Select text to search for"
+msgstr "Izaberi tekst za pretragu"
+
+#: ../src/plugin.py:63
+#: ../src/plugin.py:69
+msgid "search EPG..."
+msgstr "pretraga EPG..."
+
+msgid "search EPG"
+msgstr "pretraga EPG"

@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Luke_s</author>
+                    <name>SetPasswd</name>
+                    <packagename>enigma2-plugin-systemplugins-setpasswd</packagename>
+                    <shortdescription>GUI to change the ftp and telnet-password</shortdescription>
+                    <description>GUI that allows user to change the ftp- / telnet password.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_setpasswd_en.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-setpasswd" />
+	  </files>
+</default>

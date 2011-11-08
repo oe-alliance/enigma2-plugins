@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-elektro
+Version: 3.4.5
+Description: Automatically shuts down the Dreambox to deep standby (Power Save Mode)
+Maintainer: Morty <morty@gmx.net>
+Homepage: http://wiki.blue-panel.com/index.php/Elektro
+Depends: enigma2

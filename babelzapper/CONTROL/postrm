@@ -1,0 +1,6 @@
+#!/bin/sh
+sed -ie s!'id=\"KEY_MUTE\" mapto=\"babelzapperMute\" flags=\"b\"'!'id=\"KEY_MUTE\" mapto=\"delete\" flags=\"mr\"'!g /usr/share/enigma2/keymap.xml
+sed -ie s!'id=\"KEY_MUTE\" mapto=\"babelzapperMute\" flags=\"m\"'!'id=\"KEY_MUTE\" mapto=\"deleteForward\" flags=\"mr\"'!g /usr/share/enigma2/keymap.xml
+sed -ie s!"babelzapperMute"!"volumeMute"!g /usr/share/enigma2/keymap.xml
+rm -r /usr/lib/enigma2/python/Plugins/Extensions/BabelZapper > /dev/null 2>&1
+exit 0

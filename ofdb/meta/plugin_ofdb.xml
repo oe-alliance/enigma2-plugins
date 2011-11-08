@@ -1,0 +1,18 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+                    <tag type="Recording" />
+	  </prerequisites>
+          <info>
+                    <author>Dream Multimedia</author>
+                    <name>OFDb</name>
+                    <packagename>enigma2-plugin-extensions-ofdb</packagename>
+                    <shortdescription>Displays Movie Information from the Online Film Datenbank (German)</shortdescription>
+                    <description>With OFDb you can display downloaded movie information (rating, poster, cast, synopsis etc.) about the selected event.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_ofdb.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-ofdb" />
+	  </files>
+</default>

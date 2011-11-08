@@ -1,0 +1,173 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: EasyMedia\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-24 16:14+0200\n"
+"PO-Revision-Date: 2009-09-24 16:14+0200\n"
+"Last-Translator: Vali Jordan <vali@dreambox-tools.info>\n"
+"Language-Team: LANGUAGE <vali@dreambox-tools.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "MerlinMusicPlayer"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Not easy way to start EasyMedia"
+msgstr ""
+
+msgid "Music player:"
+msgstr ""
+
+msgid "Files browser:"
+msgstr ""
+
+msgid "Show bookmarks:"
+msgstr ""
+
+msgid "YouTube player:"
+msgstr ""
+
+msgid "VLC player:"
+msgstr ""
+
+msgid "DVD player:"
+msgstr ""
+
+msgid "Weather plugin:"
+msgstr ""
+
+msgid "NetRadio player:"
+msgstr ""
+
+msgid "Show Merlin-iDream:"
+msgstr ""
+
+msgid "ZDFmediathek player:"
+msgstr ""
+
+msgid "Movies"
+msgstr ""
+
+msgid "Bookmarks"
+msgstr ""
+
+msgid "Pictures"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
+msgid "DVD Player"
+msgstr ""
+
+msgid "Weather"
+msgstr ""
+
+msgid "Files"
+msgstr ""
+
+msgid "SHOUTcast"
+msgstr ""
+
+msgid "iDream"
+msgstr ""
+
+msgid "MyTube Player"
+msgstr ""
+
+msgid "VLC Player"
+msgstr ""
+
+msgid "ZDFmediathek"
+msgstr ""
+
+msgid "Filebrowser"
+msgstr ""
+
+msgid "DreamExplorer"
+msgstr ""
+
+msgid "Picture-player is not installed!"
+msgstr ""
+
+msgid "No Music-Player installed!"
+msgstr ""
+
+msgid "No File-Manager installed!"
+msgstr ""
+
+msgid "Weather Plugin is not installed!"
+msgstr ""
+
+msgid "DVDPlayer Plugin is not installed!"
+msgstr ""
+
+msgid "MyTube Plugin is not installed!"
+msgstr ""
+
+msgid "SHOUTcast Plugin is not installed!"
+msgstr ""
+
+msgid "ZDFmediathek Plugin is not installed!"
+msgstr ""
+
+msgid "VLC Player is not installed!"
+msgstr ""
+
+msgid "Merlin iDream is not installed!"
+msgstr ""
+
+msgid "EasyMedia settings..."
+msgstr ""
+
+msgid "Select bookmark..."
+msgstr ""
+
+msgid "Tv/Radio"
+msgstr ""
+
+msgid "Show tv/radio switch:"
+msgstr ""
+
+msgid "TV-mode"
+msgstr ""
+
+msgid "Radio-mode"
+msgstr ""
+
+msgid "Nothing"
+msgstr ""
+
+msgid "MyVideo Player is not installed!"
+msgstr ""
+
+msgid "MyVideo"
+msgstr ""
+
+msgid "MyVideo player:"
+msgstr ""
+
+msgid "Add/remove plugin"
+msgstr ""
+
+msgid " removed from EasyMedia"
+msgstr ""
+
+msgid " added to EasyMedia"
+msgstr ""
+
+msgid "VideoDB is not installed!"
+msgstr ""
+
+msgid "PicturePlayer:"
+msgstr ""
+
+msgid "Video database:"
+msgstr ""
+
+msgid "VideoDB"
+msgstr ""

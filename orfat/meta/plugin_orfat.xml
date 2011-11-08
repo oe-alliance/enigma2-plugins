@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>AliAbdul</author>
+                    <name>ORFat</name>
+                    <packagename>enigma2-plugin-extensions-orfat</packagename>
+                    <shortdescription>Video streaming from the orf.at web page</shortdescription>
+                    <description>Streaming modules for the orf.at iptv web page.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_orfat.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-orfat" />
+	  </files>
+</default>

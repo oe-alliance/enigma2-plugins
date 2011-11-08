@@ -1,0 +1,400 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: FanControl2\n"
+"POT-Creation-Date: 2011-07-13 18:27+Mitteleuropäische Sommerzeit\n"
+"PO-Revision-Date: 2011-07-13 18:32+0100\n"
+"Last-Translator: joergm6 <joergm6@online.de>\n"
+"Language-Team: Bschaar <Bschaar@IHAD>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: BELGIUM\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: FC2.txt:31
+msgid "below Tunerslot 4"
+msgstr "onder Tunerslot 4"
+
+#: FC2.txt:32
+msgid "near XILINX Spartan"
+msgstr "bij XILINX Spartan"
+
+#: FC2.txt:33
+msgid "under the WLAN"
+msgstr "onder de WLAN"
+
+#: FC2.txt:34
+msgid "left of the Battery"
+msgstr "links van de batterij"
+
+#: FC2.txt:35
+msgid "left near Front-CI"
+msgstr "links bij Front-CI"
+
+#: FC2.txt:36
+msgid "left near Card-Slot"
+msgstr "links bij Card-Slot"
+
+#: FC2.txt:37
+msgid "over Security Card"
+msgstr "boven de Security Card"
+
+#: FC2.txt:38
+msgid "under the Fan"
+msgstr "onder de Fanpositie"
+
+#: FC2.txt:128
+msgid "."
+msgstr ","
+
+#: FC2.txt:173
+msgid "3Pin"
+msgstr "3Pin"
+
+#: FC2.txt:173
+msgid "4Pin"
+msgstr "4Pin"
+
+#: FC2.txt:173
+msgid "Control disabled"
+msgstr "Controle uitgeschakeld"
+
+#: FC2.txt:173
+msgid "disabled"
+msgstr "uitgeschakeld"
+
+#: FC2.txt:174
+msgid "yes, Except for Recording or HDD"
+msgstr "ja, behalve voor Opname of HDD"
+
+#: FC2.txt:174
+#: FC2.txt:187
+#: FC2.txt:190
+msgid "no"
+msgstr "nee"
+
+#: FC2.txt:174
+#: FC2.txt:190
+msgid "yes"
+msgstr "ja"
+
+#: FC2.txt:181
+msgid "Box Shutdown"
+msgstr "Box uitschakelen"
+
+#: FC2.txt:181
+msgid "display Info"
+msgstr "Melding weergeven"
+
+#: FC2.txt:181
+msgid "do nothing"
+msgstr "geen actie"
+
+#: FC2.txt:190
+msgid "auto"
+msgstr "auto"
+
+#: FC2.txt:190
+msgid "never"
+msgstr "nooit"
+
+#: FC2.txt:275
+msgid "please wait (until 3min)..."
+msgstr "wachten aub (tot 3 min)..."
+
+#: FC2.txt:313
+msgid "Min Fan Start %d rpm at PWM=%d"
+msgstr "Min Fan Start %d rpm bij PWM=%d"
+
+#: FC2.txt:319
+msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
+msgstr "Min Fan Stop %d rpm bij PWM=%d (%s)"
+
+#: FC2.txt:325
+msgid "Max Fan %d rpm at PWM=255 (%s)"
+msgstr "Max Fan %d rpm bij PWM=255 (%s)"
+
+#: FC2.txt:327
+msgid "Extended Control Range"
+msgstr "Uitgebreid controlebereik"
+
+#: FC2.txt:337
+msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
+msgstr "Min Fan Start %d rpm bij VLT=%d en PWM=0"
+
+#: FC2.txt:340
+msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
+msgstr "Min Fan Stop %d rpm bij VLT=%d en PWM=0 (%s)"
+
+#: FC2.txt:347
+msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
+msgstr "Max Fan %d rpm bij PWM=255 en VLT=255 (%s)"
+
+#: FC2.txt:355
+msgid "Min Fan Start %d rpm at VLT=%d"
+msgstr "Min Fan Start %d rpm bij VLT=%d"
+
+#: FC2.txt:358
+msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
+msgstr "Min Fan Stop %d rpm bij VLT=%d (%s)"
+
+#: FC2.txt:363
+msgid "Max Fan %d rpm at VLT=255 (%s)"
+msgstr "Max Fan %d rpm bij VLT=255 (%s)"
+
+#: FC2.txt:435
+#: FC2.txt:437
+#: FC2.txt:441
+msgid "%s   %02d C"
+msgstr "%s   %02d C"
+
+#: FC2.txt:443
+msgid "press Info for HDD-Temp"
+msgstr "druk Info voor de HDD-Temp"
+
+#: FC2.txt:444
+#: FC2.txt:686
+msgid "Current rpm  %4d"
+msgstr "Actuele rpm  %4d"
+
+#: FC2.txt:474
+msgid "Action in case of Fan failure"
+msgstr "Actie bij uitval Fan "
+
+#: FC2.txt:475
+msgid "Box shutdown at Temperature (C)"
+msgstr "Box uitschakelen bij Temperatuur (C)"
+
+#: FC2.txt:476
+msgid "increases overheating protection to (C)"
+msgstr "Verhoog oververhittingsbescherming met (C)"
+
+#: FC2.txt:477
+msgid "read HDD-Temperature in HDD-Standby-Mode"
+msgstr "HDD-temp tijdens HDD-Standby-Mode uitlezen"
+
+#: FC2.txt:478
+msgid "disable DMM-FanControl"
+msgstr "DMM-FanControl uitschakelen"
+
+#: FC2.txt:479
+msgid "Show Plugin in Extension-Menu"
+msgstr "Plugin weergeven in extentie-menu"
+
+#: FC2.txt:480
+msgid "Show Monitor in Extension-Menu"
+msgstr "Monitor weergeven in extentie-menu"
+
+#: FC2.txt:481
+msgid "Number of WebIF-Log-Entries"
+msgstr "Aantal WebIF-Log-Entries"
+
+#: FC2.txt:482
+msgid "Logging path"
+msgstr "Loggingpad:"
+
+#: FC2.txt:483
+msgid "Enable Data Logging"
+msgstr "Datalogging inschakelen"
+
+#: FC2.txt:484
+msgid "Auto-Delete Data older than (Days)"
+msgstr "Automatisch data verwijderen ouder dan (dagen) "
+
+#: FC2.txt:485
+msgid "Enable Event Logging"
+msgstr "Eventlogging inschakelen"
+
+#: FC2.txt:500
+msgid "Choose path"
+msgstr "Kies het pad"
+
+#: FC2.txt:532
+msgid ""
+"GUI needs a restart to apply the changes.\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+"GUI moet herstart worden om de instellingen toe te passen\n"
+"De GUI herstarten?"
+
+#: FC2.txt:533
+msgid "Restart GUI now?"
+msgstr "GUI nu herstarten?"
+
+#: FC2.txt:599
+msgid "Fan type"
+msgstr "Fan type"
+
+#: FC2.txt:600
+msgid "Fan off in Standby"
+msgstr "Fan uit in Standby"
+
+#: FC2.txt:601
+msgid "min Speed rpm"
+msgstr "min snelheid rpm"
+
+#: FC2.txt:602
+msgid "max Speed rpm"
+msgstr "max snelheid rpm"
+
+#: FC2.txt:603
+msgid "Static temp C"
+msgstr "Statische temp C"
+
+#: FC2.txt:604
+msgid "End temperature C"
+msgstr "Eindtemperatuur C"
+
+#: FC2.txt:605
+msgid "Initial Voltage"
+msgstr "Initiële spanning"
+
+#: FC2.txt:606
+msgid "Initial PWM"
+msgstr "Initiële PWM"
+
+#: FC2.txt:611
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: FC2.txt:612
+msgid "Save"
+msgstr "Opslaan"
+
+#: FC2.txt:613
+msgid "Check"
+msgstr "Controle"
+
+#: FC2.txt:614
+msgid "Help"
+msgstr "Help"
+
+#: FC2.txt:651
+msgid "Current value: %s"
+msgstr "Huidige waarde: %s"
+
+#: FC2.txt:684
+msgid "Temperature C  %4.1f"
+msgstr "Temperatuur C  %4.1f"
+
+#: FC2.txt:685
+msgid "Target rpm  %4d"
+msgstr "Gewenste rpm  %4d"
+
+#: FC2.txt:687
+msgid "Voltage  %03d"
+msgstr "Spanning  %03d"
+
+#: FC2.txt:688
+msgid "PWM  %03d"
+msgstr "PWM  %03d"
+
+#: FC2.txt:713
+msgid "Information"
+msgstr "Informatie"
+
+#: FC2.txt:713
+msgid "readme.txt"
+msgstr "leesmij.txt"
+
+#: FC2.txt:863
+msgid "FanControl2 emergency, Box Shutdown now?"
+msgstr ""
+"FanControl2 melding: te hoge temperatuur\n"
+"Box nu uitschakelen?"
+
+#: FC2.txt:1032
+msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
+msgstr "actueelRPM:%d doelRPM:%d Temp:%4.1f"
+
+#: FC2.txt:1039
+msgid "Fan is not working!"
+msgstr "Fan werkt niet!"
+
+#: FC2.txt:1093
+msgid "Box has no fancontrol hardware -> FC2 deactivated"
+msgstr "Box has no fancontrol hardware -> FC2 deactivated"
+
+#: FC2.txt:1174
+msgid "Temperature"
+msgstr "Temperatuur"
+
+#: FC2.txt:1175
+msgid "Speed"
+msgstr "Snelheid"
+
+#: FC2.txt:1176
+msgid "Voltage"
+msgstr "Spanning"
+
+#: FC2.txt:1183
+msgid "Sensors"
+msgstr "Sensoren"
+
+#: FC2.txt:1278
+#: FC2.txt:1314
+msgid "active"
+msgstr "Actief"
+
+#: FC2.txt:1281
+#: FC2.txt:1317
+msgid "turn off"
+msgstr "Uitschakelen"
+
+#: FC2.txt:1284
+#: FC2.txt:1320
+msgid "not active"
+msgstr "Niet Actief"
+
+#: FC2.txt:1287
+#: FC2.txt:1323
+msgid "turn on"
+msgstr "Inschakelen"
+
+#: FC2.txt:1292
+#: FC2.txt:1294
+#: FC2.txt:1328
+#: FC2.txt:1330
+msgid "Filesize : %d %sByte"
+msgstr "Bestandsgrootte : %d %sByte"
+
+#: FC2.txt:1296
+#: FC2.txt:1332
+msgid "Disk free : %d MByte"
+msgstr "Beschikbare opslag : %d MByte"
+
+#: FC2.txt:1299
+#: FC2.txt:1335
+msgid "Download"
+msgstr "Download"
+
+#: FC2.txt:1303
+#: FC2.txt:1339
+msgid "Delete"
+msgstr "Verwijder"
+
+#: FC2.txt:1307
+msgid "Delete older 48h"
+msgstr "+48u verwijderen"
+
+#: FC2.txt:1310
+#: FC2.txt:1347
+msgid "File %s does not exists"
+msgstr "Bestand %s bestaat niet!"
+
+#: FC2.txt:1349
+msgid "Logging-Path: %s"
+msgstr "Loggingpad: %s"
+
+#: FC2.txt:1350
+msgid "Auto-Delete older %s Days"
+msgstr "Auto-Delete older %s Days"
+
+#~ msgid "OK"
+#~ msgstr "OK"

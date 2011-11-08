@@ -1,0 +1,19 @@
+<default>
+	  <prerequisites>
+                    <tag type="Communication" />
+	  </prerequisites>
+          <info>
+                    <author>drmichael</author>
+                    <name>Emailclient</name>
+                    <packagename>enigma2-plugin-extensions-emailclient</packagename>
+                    <shortdescription>IMAP4 e-mail viewer for the Dreambox</shortdescription>
+                    <description>Emailclient is an IMAP4 e-mail viewer for the Dreambox.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_emailclient_en.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-emailclient" />
+		<file type="package" name="python-shell" />
+		<file type="package" name="python-textutils" />
+	  </files>
+</default>

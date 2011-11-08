@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-googlemaps
+Version: 20081010
+Description: Google Maps Enigma2 Client
+Maintainer: 3c5x9 <3c5x9@gmx.net>
+Homepage: http://www.i-have-a-dreambox.com
+Depends: enigma2 (>> 2.5git20081120), python-twisted-web

@@ -1,0 +1,218 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma 2-plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-22 23:36+0200\n"
+"PO-Revision-Date: 2009-09-23 23:40+0200\n"
+"Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%d kb/s"
+msgstr ""
+
+msgid "A basic FTP client"
+msgstr "Ein FTP-Client"
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists locally.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Eine Datei namens %s existiert bereits lokal.\n"
+ "Soll diese Datei überschrieben werden?"
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists on the remote host.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Eine Datei namens %s existiert bereits auf dem Host.\n"
+"Soll diese Datei überschrieben werden?"
+
+msgid ""
+"A transfer is currently in progress.\n"
+"What do you want to do?"
+msgstr ""
+"Ein Transfer ist zur Zeit aktiv.\n"
+"Was möchten Sie tun?"
+
+msgid "Abort transfer"
+msgstr "Transfer abbrechen"
+
+msgid "Add"
+msgstr "Hinzufügen"
+
+msgid "Address:"
+msgstr "Adresse:"
+
+#, python-format
+msgid "Are you sure you want to delete %s?"
+msgstr "Möchten sie %s wirklich löschen?"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Configuration saved."
+msgstr "Konfiguration gesichert."
+
+msgid "Connect to FTP..."
+msgstr "Zu FTP verbinden..."
+
+msgid "Could not connect to ftp server!"
+msgstr "Konnte nicht mit FTP-Server verbinden!"
+
+#, python-format
+msgid "Could not delete %s."
+msgstr "%s konnte nicht entfernt werden."
+
+msgid "Could not obtain list of files."
+msgstr "Dateiliste konnte nicht abgerufen werden."
+
+#, python-format
+msgid "Could not rename %s."
+msgstr ""
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Download"
+msgstr "Herunterladen"
+
+msgid "Download finished."
+msgstr "Download abgeschloßen."
+
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr ""
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Enter URI"
+msgstr "URI eingeben"
+
+msgid "Enter URI of FTP Server:"
+msgstr "URI des FTP-Server angeben:"
+
+msgid "Enter new filename:"
+msgstr "Neuen Dateinamen eingeben:"
+
+msgid "Error"
+msgstr "Fehler"
+
+msgid "Error during download."
+msgstr "Fehlerhafter Download."
+
+msgid "Exit"
+msgstr "Beenden"
+
+msgid "FTP Queue Manager"
+msgstr "FTP Warteschlangenverwaltung"
+
+msgid "FTP Server Editor"
+msgstr "FTP-Server Editor"
+
+msgid "FTP Server Manager"
+msgstr "FTP-Server Verwaltung"
+
+msgid "Local"
+msgstr "Lokal"
+
+msgid "Name:"
+msgstr "Name:"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Parent Directory"
+msgstr "übergeordnetes Verzeichnis"
+
+msgid "Password:"
+msgstr "Passwort:"
+
+msgid "Port:"
+msgstr "Port:"
+
+msgid "Queue Manager"
+msgstr "Queue verwalten"
+
+msgid "Queue processed."
+msgstr "Queue abgearbeitet."
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Diesen Eintrag wirklich entfernen?\n"
+"Diese Aktion ist unwiderruflich!"
+
+msgid "Remote"
+msgstr "FTP"
+
+msgid "Remote (not connected)"
+msgstr "FTP (nicht verbunden)"
+
+#, python-format
+msgid "Removed %s."
+msgstr "%s wurde entfernt."
+
+msgid "Removing directories is not supported."
+msgstr "Ordner können nicht entfernt werden."
+
+msgid "Rename"
+msgstr "Umbenennen"
+
+#, python-format
+msgid "Renamed %s to %s."
+msgstr "%s in %s umbenannt."
+
+msgid "Run in Background"
+msgstr "Plugin in den Hintergrund"
+
+msgid "Save"
+msgstr "Sichern"
+
+msgid "Select local file list"
+msgstr "Lokale Dateiliste auswählen"
+
+msgid "Select remote file list"
+msgstr "Entfernte Dateiliste auswählen"
+
+msgid "Server Manager"
+msgstr "Serververwaltung"
+
+msgid ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+msgstr ""
+"Es ist bereits eine Verbindung aktiv.\n"
+"Soll diese unterbrochen werden?"
+
+msgid "There already is an active transfer."
+msgstr "Es ist bereits ein Transfer aktiv."
+
+msgid "Upload"
+msgstr "Hochladen"
+
+msgid "Upload finished."
+msgstr "Upload abgeschloßen."
+
+msgid "Username:"
+msgstr "Benutzername:"
+
+msgid "Which server do you want to connect to?"
+msgstr "Zu welchem Server möchten Sie sich verbinden?"
+
+msgid "close"
+msgstr "Schließen"
+
+msgid "enter directory/get file/put file"
+msgstr "Verzeichnis betreten/Datei herunterladen/Datei hochladen"
+
+msgid "open menu"
+msgstr "Menü öffnen"
