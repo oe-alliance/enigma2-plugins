@@ -413,7 +413,7 @@ function loadTimerFormChannels() {
 			addTimerEditFormArray.RadioListFilled === 0) {
 		addTimerListFormatTV();
 	} else {
-		doRequest(URL.getservices + encodeURIComponent(bouquetsTv),
+		doRequest(URL.getservices + "sRef=" + encodeURIComponent(bouquetsTv),
 				addTimerListFormatTV, false);
 	}
 }
