@@ -16,6 +16,9 @@ var AbstractContentHandler = Class.create({
 		this.provider.load(parms, fnc);
 	},	
 	
+	reload: function(){
+		this.load(this.parms);
+	},
 	
 	/**
 	 * requestStarted
@@ -75,7 +78,6 @@ var AbstractContentHandler = Class.create({
 	/**
 	 * simpleResultCallback
 	 * Callback for @ onSuccess of this.simpleResultQuery()
-	 * if this.refresh == true this.reload is being called
 	 * Parameters:
 	 * @transport - the xmlhttp transport object
 	 */
@@ -84,7 +86,7 @@ var AbstractContentHandler = Class.create({
 	},
 	
 	showSimpleResult: function(result){
-		this.notify(result.getStateText(), result.getState());		
+		this.notify(result.getStateText(), result.getState());
 	},
 	
 	registerEvents : function(){
@@ -211,6 +213,11 @@ var EpgListHandler = Class.create(AbstractContentHandler,{
 		this.data = '';
 	},
 	
+	search : function(parms, fnc){
+		this.requestStarted();
+		this.provider.search(parms, fnc);
+	},
+	
 	show : function(data){
 		this.data = data;
 		fetchTpl(this.tpl, this.showEpg.bind(this));		
@@ -300,8 +307,26 @@ var MovieListHandler  = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplMovieList', target);
 		this.provider = new MovieListProvider(this.show.bind(this));
-		
 		this.ajaxload = true;
+	},
+	
+	getData: function(element){
+		/*<table 
+			class="mListItem"
+			data-servicereference="${movie.servicereference}"
+			data-servicename="${movie.servicename}"
+			data-title="${movie.title}"
+			data-description="${movie.description}">
+		*/
+		var parent = element.up('.mListItem');
+		var m = {
+				servicereference : unescape(parent.readAttribute('data-servicereference')),
+				servicename : unescape(parent.readAttribute('data-servicename')),
+				title : unescape(parent.readAttribute('data-title')),
+				description : unescape(parent.readAttribute('data-description')),
+		};
+		
+		return m;
 	},
 	
 	/**
@@ -313,15 +338,17 @@ var MovieListHandler  = Class.create(AbstractContentHandler, {
 	 * @title - the title of the movie
 	 * @description - the description of the movie
 	 */
-	del: function(servicereference, servicename, title, description){		
+	del: function(element){
+		movie = this.getData(element);
+		
 		var result = confirm( "Are you sure want to delete the Movie?\n" +
-				"Servicename: " + servicename + "\n" +
-				"Title: " + unescape(title) + "\n" + 
-				"Description: " + description + "\n");
+				"Servicename: " + movie.servicename + "\n" +
+				"Title: " + movie.title + "\n" + 
+				"Description: " + movie.description + "\n");
 		
 		if(result){
 			debug("[MovieListProvider.del] ok confirm panel"); 
-			this.provider.simpleResultQuery(URL.moviedelete, {sRef : servicereference}, this.simpleResultCallback.bind(this));			
+			this.provider.simpleResultQuery(URL.moviedelete, {sRef : movie.servicereference}, this.onDeleted.bind(this));			
 		}
 		else{
 			debug("[MovieListProvider.del] cancel confirm panel");
@@ -330,7 +357,16 @@ var MovieListHandler  = Class.create(AbstractContentHandler, {
 		
 		this.refresh = result;
 		return result;
-	}	
+	},
+	
+	/**
+	 * del
+	 * Display the del result and reloads the movielist
+	 */
+	onDeleted: function(transport){
+		this.simpleResultCallback(transport);
+		this.reload();
+	}
 });
 
 var TimerListHandler  = Class.create(AbstractContentHandler, {

@@ -266,6 +266,14 @@ var ServiceEpgListProvider = Class.create(AbstractContentProvider, {
 	renderXML: function(xml){
 		var list = new EPGList(xml).getArray();
 		return {epg : list};	
+	},
+	
+	search: function(parms, fnc){
+		this.parms = parms;
+		if(fnc !== undefined){
+			this.callback = fnc;
+		}
+		this.getUrl(URL.epgsearch, parms, this.callback.bind(this), this.errorback.bind(this));
 	}
 });
 

@@ -4,11 +4,17 @@
 							{for movie in movies}
 							<tr>
 								<td class="${movie.cssclass}" >
-									<table class="mListItem">
+									<table 
+										class="mListItem"
+										data-servicereference="${movie.servicereference}"
+										data-servicename="${movie.servicename}"
+										data-title="${movie.title}"
+										data-description="${movie.description}">
+										
 										<tr>
 											<td style="width: 640px;">										
 												<div class="sListSName">
-													<a href="#" id="${movie.servicereference}" onclick="{ zap(this.id); }" class="sListSLink" title="Play ${movie.title}">
+													<a href="#" id="${movie.servicereference}" class="sListSLink" title="Play ${movie.title}">
 														${movie.title} - ${movie.description} (${movie.servicename})
 													</a>
 												</div>
@@ -27,7 +33,7 @@
 												</a>
 											</td>
 											<td>
-												<a href="#" onclick="delMovie('${movie.servicereference}','${movie.servicename}','${movie.escapedTitle}','${movie.description}');">
+												<a href="#" class="mListDelete">
 													<img src="/web-data/img/delete.png" title="Delete ${movie.title}" border="0">
 												</a>
 											</td>

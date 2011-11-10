@@ -53,18 +53,47 @@ var Current = Class.create(Controller, {
 	},
 	
 	load: function(){
-		try{
+		var ext = $('trExtCurrent'); 
+		if(ext != null){
 			this.display = $('trExtCurrent').style.display;
-		} catch(e){}
+		}
 		this.model.load({});
 	},
 	
 	restoreDisplayStyle: function(){
-		$('trExtCurrent').style.display = this.display;
+		var ext = $('trExtCurrent'); 
+		if(ext != null){
+			ext.style.display = this.display;
+		}
 	}
 });
 
+var EPG = Class.create(Controller, {
+	load: function(sRef){
+		this.model.load({'sRef' : sRef});
+	},
+
+	search: function(needle){
+		this.model.search({'search' : needle});
+	},
+});
+
+var Movies = Class.create(Controller, {
+	load: function(){
+		this.model.load({});
+	},
+	
+	del: function(element){
+		this.model.del(element);
+	},
+});
+
 var Services = Class.create(Controller, {
+	initialize: function($super, model, epg){
+		$super(model);
+		this.epg = epg;
+	},
+	
 	load: function(sRef){
 		this.model.load({'sRef' : sRef});
 	},
@@ -88,7 +117,7 @@ var Services = Class.create(Controller, {
 	registerEvents: function(){
 		if(!this.eventsRegistered){
 			this.eventsRegistered = true;
-			
+			/*
 			var parent = $(this.model.target);
 			parent.on(
 				'click', 
@@ -103,9 +132,7 @@ var Services = Class.create(Controller, {
 				'a.sListServiceEpg', 
 				function(event, element){
 					var ref = unescape( element.readAttribute('data-servicereference') );
-					
-					//TODO replace with EPG-Handler call
-					loadEPGByServiceReference( ref );
+					this.epg.load(ref);
 				}.bind(this)
 			);
 			
@@ -122,6 +149,7 @@ var Services = Class.create(Controller, {
 					}
 				}
 			);
+			*/
 		}
 	},
 });
@@ -172,14 +200,14 @@ var E2WebCore = Class.create({
 		this.boxtype = "dm8000";
 		
 		//create required Instances
-		this.services = new Services(new ServiceListHandler('contentServices'));
+		this.epg = new EPG(new EpgListHandler());
+		this.services = new Services(new ServiceListHandler('contentServices'), this.epg);
 		this.bouquets = new Bouquets(new BouquetListHandler('contentBouquets', 'contentMain'));
 		this.timers = new Timers(new TimerListHandler('contentMain'));
 		this.current = new Current(new CurrentHandler('currentContent'));
 		this.volume = new Volume(new VolumeHandler('navVolume'));
-		
-		this.epgListHandler = new EpgListHandler();
-		this.movieListHandler = new MovieListHandler('contentMain');
+		this.movies = new Movies(new MovieListHandler('contentMain'));
+//		this.movieListHandler = new MovieListHandler('contentMain');
 		this.timerHandler = new TimerHandler('contentMain');
 	},
 	
@@ -281,7 +309,16 @@ var E2WebCore = Class.create({
 		this.startUpdateCurrentPoller();
 	},
 	
-	registerEvents: function(){	
+	registerEvents: function(){
+		//EPG-Search
+		$('epgSearchForm').on(
+			'submit',
+			function(event, element){
+				this.epg.search($F('epgSearch'));
+				return false;
+			}.bind(this)
+		);
+		
 		$('epgSearch').on(
 			'focus',
 			function(event, element){
@@ -295,7 +332,8 @@ var E2WebCore = Class.create({
 					$('epgSearch').value = '';
 				}.bind(this)
 		);
-	
+
+		//Navigation
 		nav = $('navContent');
 		nav.on(
 			'click',
@@ -340,6 +378,7 @@ var E2WebCore = Class.create({
 			}.bind(this)
 		);
 		
+		//Main Menu
 		mainMenu = $('mainMenu');
 		mainMenu.on(
 			'click',
@@ -354,6 +393,47 @@ var E2WebCore = Class.create({
 			'a.volume',
 			function(event, element){
 				this.volume.set(element.readAttribute('data-volume'));
+			}.bind(this)
+		);
+		
+		//Content
+		var content = $('contentMain');
+		content.on(
+			'click', 
+			'a.sListSLink', 
+			function(event, element){
+				this.model.zap(unescape(element.id));
+			}.bind(this)
+		);
+		
+		content.on(
+			'click', 
+			'a.sListServiceEpg', 
+			function(event, element){
+				var ref = unescape( element.readAttribute('data-servicereference') );
+				this.epg.load(ref);
+			}.bind(this)
+		);
+		
+		content.on(
+			'click', 
+			'a.sListEPG',
+			function(event, element){
+				var target = $(element.readAttribute('data-target_id'));
+				
+				if(target.visible()){
+					target.hide();
+				} else {
+					target.show();
+				}
+			}
+		);
+		
+		content.on(
+			'click', 
+			'a.mListDelete', 
+			function(event, element){
+				this.movies.del(element);
 			}.bind(this)
 		);
 	},
@@ -375,10 +455,19 @@ var E2WebCore = Class.create({
 		fnc();
 	},
 	
+	loadMovieNav: function(){
+		console.log("Not implemented");
+	},
+	
+	loadMovieList: function(){
+		
+	},
+	
 	/*
 	 * Loads dynamic content to $(contentMain) by calling a execution function
 	 * @param fnc - The function used to load the content
 	 * @param title - The Title to set on the contentpanel
+	 * @param [domid] - The ID of the dom-object for the ajax-loading-animation
 	 */
 	loadContentDynamic: function(fnc, title, domid){
 		if(domid !== undefined && $(domid) != null){
@@ -386,17 +475,17 @@ var E2WebCore = Class.create({
 		} else {
 			this.setAjaxLoad('contentMain');
 		}
-		setContentHd(title);
-		this.stopUpdateBouquetItemsPoller();
-
-		fnc();
+		this.reloadContentDynamic(fnc, title);
 	},
 
 	/*
-	 * like loadContentDynamic but without the AjaxLoaderAnimation being shown
+	 * Loads dynamic content to $(contentMain) by calling a execution function
+	 * @param fnc - The function used to load the content
+	 * @param title - The Title to set on the contentpanel
 	 */
 	reloadContentDynamic: function(fnc, title){
 		setContentHd(title);
+		this.stopUpdateBouquetItemsPoller();
 		fnc();
 	},
 
@@ -432,15 +521,14 @@ var E2WebCore = Class.create({
 			//The Navigation
 			this.reloadNavDynamic(this.loadMovieNav, 'Movies');
 			// The Movie list
-			this.loadContentDynamic(this.loadMovieList, 'Movies');
+			this.loadContentDynamic(this.movies.load.bind(this.movies), 'Movies');
 			break;
 	
 		case "Timer":
 			//The Navigation
 			this.reloadNav('tplNavTimer', 'Timer');
 			// The Timerlist
-			fnc = this.timers.load.bind(this.timers);
-			this.loadContentDynamic(fnc, 'Timer');
+			this.loadContentDynamic(this.timers.load.bind(this.timers), 'Timer');
 			break;
 	
 		case "MediaPlayer":

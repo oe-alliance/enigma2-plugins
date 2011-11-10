@@ -7,7 +7,7 @@ function url() {
 	this.getcurrent = '/web/getcurrent';
 	this.volume = '/web/vol';
 	this.epgservice = "/web/epgservice"; // plus serviceRef
-	this.epgsearch = "/web/epgsearch?search="; // plus needle
+	this.epgsearch = "/web/epgsearch"; // plus needle
 	this.epgservicenow = "/web/epgservicenow?sRef="; // plus serviceRef
 	this.epgservicenext = "/web/epgservicenext?sRef="; // plus serviceRef
 	this.epgnow = "/web/epgnow"; // plus bouquetRev

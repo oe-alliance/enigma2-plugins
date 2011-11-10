@@ -6,15 +6,15 @@
 											<td class="${service.cssclass}">
 												<table class="sListItem">
 													<tr>
-														<td style="width: 640px;">										
+														<td style="width: 640px;">
 															<div class="sListSName">
-																<a href="#" id="${service.servicereference}" onclick="{ zap(this.id); }" class="sListSLink" title="Zap to ${service.servicename}">
+																<a href="#" id="${service.servicereference}" class="sListSLink" title="Zap to ${service.servicename}">
 																	${service.servicename}
 																</a>
 															</div>
 														</td>
 														<td>
-															<a href="#" onclick="if ( parentPin( '${service.servicereference}' ) ) { loadEPGByServiceReference( '${service.servicereference}' ); }">
+															<a href="#" class="sListServiceEpg" data-servicereference="${service.servicereference}">
 																<img src="/web-data/img/epg.png" border="0" title="Show EPG for ${service.servicename}"/>
 															</a>
 														</td>
@@ -22,7 +22,7 @@
 															<a target="_blank" onclick="return parentPin( '${service.servicereference}' );" href="/web/stream.m3u?ref=${service.servicereference}">
 																<img src="/web-data/img/screen.png" title="Stream ${service.servicename}" border="0">
 															</a>
-														</td>											
+														</td>
 													</tr>
 													<tr id="trNOW${service.servicereference}" class="sListEPGNow" style="display:none;">
 														<td id="NOW${service.servicereference}" class="sListEPGItem" colspan="3"></td>
@@ -42,6 +42,6 @@
 												<table><tr><td>No Services to Display</td></tr></table>
 											</td>
 										</tr>
-										{/for}		
-									</table>						
+										{/for}
+									</table>
 <!-- /tplServiceList -->
