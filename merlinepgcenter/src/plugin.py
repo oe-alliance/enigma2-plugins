@@ -25,6 +25,7 @@
 from . import _
 
 # ENIGMA IMPORTS
+from Components.config import config
 from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import InfoBar
 
@@ -33,6 +34,37 @@ from MerlinEPGCenter import MerlinEPGCenter
 from EpgCenterList import MULTI_EPG_NOW, SINGLE_EPG
 
 
+class MerlinEPGCenterStarter(object):
+	instance = None
+	merlinEPGCenter = None
+	
+	def __init__(self, session):
+		self.session = session
+		assert not MerlinEPGCenterStarter.instance, "only one MerlinEPGCenterStarter instance is allowed!"
+		MerlinEPGCenterStarter.instance = self # set instance
+		
+	def openMerlinEPGCenter(self, startTab = None):
+		servicelist, currentBouquet, bouquetList, currentIndex = getBouquetInformation()
+		if MerlinEPGCenterStarter.merlinEPGCenter is None:
+			MerlinEPGCenterStarter.merlinEPGCenter = self.session.instantiateDialog(MerlinEPGCenter, servicelist, currentBouquet, bouquetList, currentIndex, startTab)
+		else:
+			MerlinEPGCenterStarter.merlinEPGCenter.resume()
+			if startTab != None:
+				MerlinEPGCenterStarter.merlinEPGCenter.setStartTab(startTab)
+			elif config.plugins.merlinEpgCenter.rememberLastTab.value:
+				MerlinEPGCenterStarter.merlinEPGCenter.setStartTab(config.plugins.merlinEpgCenter.lastUsedTab.value)
+			else:
+				MerlinEPGCenterStarter.merlinEPGCenter.setStartTab(MULTI_EPG_NOW)
+		self.session.execDialog(MerlinEPGCenterStarter.merlinEPGCenter)
+		
+# open "single epg" tab
+def startMerlinEPGCenterSingle(self):
+	MerlinEPGCenterStarter.instance.openMerlinEPGCenter(SINGLE_EPG)
+	
+# open "multi epg now" tab
+def startMerlinEPGCenterMulti(self):
+	MerlinEPGCenterStarter.instance.openMerlinEPGCenter(MULTI_EPG_NOW)
+	
 class InfoBarFunctionSaver:
 	def __init__(self):
 		self.infoBarSingleEpg = InfoBar.openSingleServiceEPG
@@ -48,16 +80,15 @@ class InfoBarFunctionSaver:
 			InfoBar.openSingleServiceEPG = self.infoBarSingleEpg # Info -> yellow
 			InfoBar.openMultiServiceEPG = self.infoBarMultiEpg # Info -> blue
 
-def autostart(session, **kwargs):
+def autostart(reason, **kwargs):
+	if reason == 1 and MerlinEPGCenterStarter.merlinEPGCenter:
+		MerlinEPGCenterStarter.instance.merlinEPGCenter.shutdown()
+		MerlinEPGCenterStarter.instance.merlinEPGCenter = None
+		MerlinEPGCenterStarter.instance = None
+	
+def sessionstart(reason, session):
 	infoBarFunctionSaver = InfoBarFunctionSaver()
-	
-# open "single epg" tab
-def startMerlinEPGCenterSingle(self):
-	openMerlinEPGCenterTab(self.session, SINGLE_EPG)
-	
-# open "multi epg now" tab
-def startMerlinEPGCenterMulti(self):
-	openMerlinEPGCenterTab(self.session, MULTI_EPG_NOW)
+	MerlinEPGCenterStarter(session)
 	
 def getBouquetInformation():
 	# get current bouquet and bouquetlist from channelselection
@@ -81,16 +112,12 @@ def getBouquetInformation():
 	return servicelist, currentBouquet, bouquetList, currentIndex
 	
 def openMerlinEPGCenter(session, **kwargs):
-	servicelist, currentBouquet, bouquetList, currentIndex = getBouquetInformation()
-	session.open(MerlinEPGCenter, servicelist, currentBouquet, bouquetList, currentIndex)
-	
-def openMerlinEPGCenterTab(session, startWithTab, **kwargs):
-	servicelist, currentBouquet, bouquetList, currentIndex = getBouquetInformation()
-	session.open(MerlinEPGCenter, servicelist, currentBouquet, bouquetList, currentIndex, startWithTab)
+	MerlinEPGCenterStarter.instance.openMerlinEPGCenter()
 	
 def Plugins(**kwargs):
 	list = [
-		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart, weight=100),
+		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc=autostart, weight=100),
+		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart, weight=100),
 		PluginDescriptor(name = "Merlin EPG Center", description = _("More than just an EPG..."), where = [PluginDescriptor.WHERE_EXTENSIONSMENU,
 		PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EVENTINFO], fnc = openMerlinEPGCenter)
 		]

@@ -149,9 +149,8 @@ class BlinkTimer():
 		self.stopping = False
 		self.timerRunning = False
 		self.timer = eTimer()
-		self.timer.callback.append(self.changeBlinkState)
-		self.session.nav.record_event.append(self.gotRecordEvent)
 		self.callbacks = []
+		self.resume()
 		
 	def gotRecordEvent(self, service, event):
 		if event in (iRecordableService.evEnd, iRecordableService.evStart, None):
@@ -165,9 +164,23 @@ class BlinkTimer():
 			elif not numRecs and self.timerRunning and not self.stopping:
 				self.stopping = True
 				
-	def shutdown(self):
-		self.session.nav.record_event.remove(self.gotRecordEvent)
-		self.timer.callback.remove(self.changeBlinkState)
+	def suspend(self):
+		if self.gotRecordEvent in self.session.nav.record_event:
+			self.session.nav.record_event.remove(self.gotRecordEvent)
+		if self.changeBlinkState in self.timer.callback:
+			self.timer.callback.remove(self.changeBlinkState)
+		if self.getIsRunning():
+			self.timer.stop()
+			self.delay = 0
+			self.stopping = False
+			self.state = False
+			self.timerRunning = False
+			
+	def resume(self):
+		self.timer.callback.insert(0, self.changeBlinkState) # order is important, this callback must be called first!
+		self.session.nav.record_event.append(self.gotRecordEvent)
+		if self.session.nav.RecordTimer.isRecording():
+			self.gotRecordEvent(None, None)
 			
 	def appendList(self, l):
 		self.lists.append(l)
