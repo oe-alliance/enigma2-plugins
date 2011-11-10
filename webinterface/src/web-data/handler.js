@@ -118,11 +118,12 @@ var AbstractContentHandler = Class.create({
 });
 
 var BouquetListHandler = Class.create(AbstractContentHandler, {
-	initialize: function($super, target){
+	initialize: function($super, target, targetMain){
 		$super('tplBouquetList', target);
 		this.provider = new BouquetListProvider(this.show.bind(this));	
 		this.ajaxload = false;
 		this.serviceController = null;
+		this.targetMain = targetMain;
 		this.initServiceList = false;
 	},
 	
@@ -143,13 +144,21 @@ var BouquetListHandler = Class.create(AbstractContentHandler, {
 			templateEngine.process(					
 					'tplBouquetsAndServices', 
 					null, 
-					'contentMain',
+					this.targetMain,
 					function(){
 						this.show(data);
 					}.bind(this)
 			);
 		}
 	},
+});
+
+var CurrentHandler  = Class.create(AbstractContentHandler, {
+	initialize: function($super, target){
+		$super('tplCurrent', target);
+		this.provider = new CurrentProvider(this.show.bind(this));
+		this.ajaxload = false;
+	}	
 });
 
 var ServiceListHandler = Class.create(AbstractContentHandler, {
@@ -601,9 +610,16 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 });
 
 
+var VolumeHandler  = Class.create(AbstractContentHandler, {
+	initialize: function($super, target){
+		$super('tplVolume', target);
+		this.provider = new VolumeProvider(this.show.bind(this));
+		this.ajaxload = false;
+	}	
+});
 //create required Instances
-var serviceListHandler = new ServiceListHandler('contentServices');
-var epgListHandler = new EpgListHandler();
-var movieListHandler = new MovieListHandler('contentMain');
-var timerListHandler = new TimerListHandler('contentMain');
-var timerHandler = new TimerHandler('contentMain');
+//var serviceListHandler = new ServiceListHandler('contentServices');
+//var epgListHandler = new EpgListHandler();
+//var movieListHandler = new MovieListHandler('contentMain');
+//var timerListHandler = new TimerListHandler('contentMain');
+//var timerHandler = new TimerHandler('contentMain');

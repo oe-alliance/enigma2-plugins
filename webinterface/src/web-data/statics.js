@@ -4,17 +4,10 @@ function url() {
 	this.tpl = '/web-data/tpl/default/';
 	
 	this.zap = '/web/zap';
-	
 	this.getcurrent = '/web/getcurrent';
-	
-	this.getvolume = '/web/vol'; 
-	this.setvolume = '/web/vol?set=set'; // plus new value eg: set=set15
-	this.volumeup = '/web/vol?set=up';
-	this.volumedown = '/web/vol?set=down';
-	this.volumemute = '/web/vol?set=mute';
-	
+	this.volume = '/web/vol';
 	this.epgservice = "/web/epgservice"; // plus serviceRef
-	this.epgsearch = "/web/epgsearch?search="; // plus serviceRef
+	this.epgsearch = "/web/epgsearch?search="; // plus needle
 	this.epgservicenow = "/web/epgservicenow?sRef="; // plus serviceRef
 	this.epgservicenext = "/web/epgservicenext?sRef="; // plus serviceRef
 	this.epgnow = "/web/epgnow"; // plus bouquetRev

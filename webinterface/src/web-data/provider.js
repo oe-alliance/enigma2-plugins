@@ -182,7 +182,7 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 
 /**
  * ServiceListProvider
- * ContentHandler for service lists.
+ * Content provider for service lists.
  */
 var ServiceListProvider = Class.create(AbstractContentProvider, {
 	/**
@@ -206,7 +206,7 @@ var ServiceListProvider = Class.create(AbstractContentProvider, {
 
 /**
  * BouquetListProvider
- * ContentHandler for bouquet lists.
+ * Content provider for bouquet lists.
  */
 var BouquetListProvider = Class.create(ServiceListProvider, {
 	/**
@@ -216,6 +216,36 @@ var BouquetListProvider = Class.create(ServiceListProvider, {
 	renderXML: function(xml){
 		var list = new ServiceList(xml).getArray();
 		return {bouquets : list};	
+	}
+});
+
+/**
+ * Current
+ * Content provider for current state
+ */
+var CurrentProvider = Class.create(AbstractContentProvider, {
+	/**
+	 * initialize
+	 * Parameters:
+	 * @target: the html target id
+	 */
+	initialize: function($super, showFnc){
+		$super(URL.getcurrent, showFnc );
+	},
+	
+	/**
+	 * renderXML
+	 * See the description in AbstractContentProvider
+	 */
+	renderXML: function(xml){
+		var epg = new EPGList(xml).getArray()[0];
+		var service = new Service(xml).toJSON(); 
+		
+		var data = { 
+					'current' : epg,
+					'service' : service
+				};
+		return data;
 	}
 });
 
@@ -382,5 +412,30 @@ var TimerListProvider = Class.create(AbstractContentProvider, {
 	renderXML: function(xml){
 		var list = new TimerList(xml).getArray();
 		return {timer : list};
+	}
+});
+
+/**
+ * Volume
+ * Content provider for Volume setting/getting
+ */
+var VolumeProvider = Class.create(AbstractContentProvider, {
+	/**
+	 * initialize
+	 * Parameters:
+	 * @target: the html target id
+	 */
+	initialize: function($super, showFnc){
+		$super(URL.volume, showFnc);
+	},
+	
+	/**
+	 * renderXML
+	 * See the description in AbstractContentProvider
+	 */
+	renderXML: function(xml){
+		var vol = new Vol(xml).toJSON();
+		var data = { 'volume' : vol};
+		return data;
 	}
 });

@@ -1,6 +1,6 @@
 {
   "betaManifestVersion": 1,
-  "version": "v41",
+  "version": "v42",
   "entries": [
 		{ "url": "IEFixes.htc" },		
 		{ "url": "img/arrow_down.png" },
@@ -57,6 +57,7 @@
 		{ "url": "tpl/default/tplSubServices.htm" },
 		{ "url": "tpl/default/tplTimerEdit.htm" },
 		{ "url": "tpl/default/tplTimerList.htm" },
+		{ "url": "tpl/default/tplVolume.htm" },
 		{ "url": "tpl/default/tplWebRemote.htm" },
 		{ "url": "tpl/default/tplWebRemoteOld.htm" }
 	]

@@ -977,3 +977,36 @@ function File(xml){
 	};
 }	
 //END class File
+
+//class Volume
+var Vol = Class.create({
+	initialize: function(xml){
+		this.result = getNodeContent(xml, 'e2result', 'False');
+		this.resultText = getNodeContent(xml, 'e2resulttext', 'Parser Error!');
+		this.volume = getNodeContent(xml, 'e2current', '100');		
+		var mute = getNodeContent(xml, 'e2ismuted', 'False');
+		this.isMuted = mute == "True" ? true : false;
+		this.states = [];
+		
+		for(var i = 1; i <= 10; i++){
+			var enabled = false;
+			if(this.volume >= i * 10){
+				enabled = true;
+			}		
+			this.states[i-1] = {'enabled' : enabled, 'percent' : i*10};
+		}
+		
+		this.json = {
+				result : this.result,
+				resultText : this.resultText,
+				volume : this.volume,
+				isMuted : this.isMuted,
+				states : this.states
+		};
+	},
+
+	toJSON: function(){
+		return this.json;
+	},
+});
+//END class Volume

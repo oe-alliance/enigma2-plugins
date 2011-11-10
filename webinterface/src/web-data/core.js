@@ -11,13 +11,13 @@ var Controller = Class.create({
 	}
 });
 
-var Bouquets = Class.create(Controller, {	
+var Bouquets = Class.create(Controller, {
 	init: function(serviceController){
 		this.model.init({ 'sRef' : bouquetsTv }, serviceController);
 	},
 
-	load: function(sRef){	
-		this.model.load( {'sRef' : sRef} );	
+	load: function(sRef){
+		this.model.load( {'sRef' : sRef} );
 	},
 	
 	loadBouquetsTv: function(){
@@ -43,6 +43,25 @@ var Bouquets = Class.create(Controller, {
 	loadSatellitesRadio: function(){
 		this.load(satellitesRadio);
 	},
+});
+
+var Current = Class.create(Controller, {
+	initialize: function($super, model){
+		$super(model);
+		this.display = 'none';
+		this.model.onFinished[this.model.onFinished.length] = this.restoreDisplayStyle.bind(this);
+	},
+	
+	load: function(){
+		try{
+			this.display = $('trExtCurrent').style.display;
+		} catch(e){}
+		this.model.load({});
+	},
+	
+	restoreDisplayStyle: function(){
+		$('trExtCurrent').style.display = this.display;
+	}
 });
 
 var Services = Class.create(Controller, {
@@ -113,6 +132,16 @@ var Timers = Class.create(Controller, {
 	}
 });
 
+var Volume = Class.create(Controller, {
+	load: function(){
+		this.model.load({});
+	},
+	
+	set: function(value){
+		this.model.load({'set' : value});
+	}
+});
+
 var E2WebCore = Class.create({
 	initialize: function(){
 		this.mediaPlayerStarted = false; 
@@ -138,14 +167,16 @@ var E2WebCore = Class.create({
 
 		this.currentLocation = "/hdd/movie";
 		this.locationsList = [];
-		this.tagsList = [];
+		this.tagList = [];
 
 		this.boxtype = "dm8000";
 		
 		//create required Instances
 		this.services = new Services(new ServiceListHandler('contentServices'));
-		this.bouquets = new Bouquets(new BouquetListHandler('contentBouquets'));
+		this.bouquets = new Bouquets(new BouquetListHandler('contentBouquets', 'contentMain'));
 		this.timers = new Timers(new TimerListHandler('contentMain'));
+		this.current = new Current(new CurrentHandler('currentContent'));
+		this.volume = new Volume(new VolumeHandler('navVolume'));
 		
 		this.epgListHandler = new EpgListHandler();
 		this.movieListHandler = new MovieListHandler('contentMain');
@@ -186,8 +217,8 @@ var E2WebCore = Class.create({
 	},
 	
 	updateItems: function(){
-//		TODO getCurrent();
-//		TODO getPowerState();
+		this.volume.load();
+		this.current.load();
 	},
 
 	updateItemsLazy: function(){	
@@ -196,8 +227,9 @@ var E2WebCore = Class.create({
 	},
 	
 	startUpdateCurrentPoller: function(){
-		clearInterval(updateCurrentPoller);
-		this.updateCurrentPoller = setInterval(this.updateItems, userprefs.data.updateCurrentInterval);
+		clearInterval(this.updateCurrentPoller);
+		var me = this;
+		this.updateCurrentPoller = setInterval(me.updateItems.bind(this), userprefs.data.updateCurrentInterval);
 	},
 	
 	stopUpdateCurrentPoller: function(){
@@ -230,6 +262,7 @@ var E2WebCore = Class.create({
 			alert("Due to the tremendous amount of work needed to get everthing to " +
 			"work properly, there is (for now) no support for Internet Explorer Versions below 7");
 		}
+		this.registerEvents();
 		
 //		TODO getBoxtype();
 
@@ -239,20 +272,30 @@ var E2WebCore = Class.create({
 		templateEngine.fetch('tplServiceListEPGItem');
 		templateEngine.fetch('tplBouquetsAndServices');
 		templateEngine.fetch('tplCurrent');
-		
-		this.reloadNav('tplNavTv', 'TeleVision');
-		this.bouquets.init(this.services);
-		this.registerEvents();
 
-		
-//		TODO initVolumePanel();
-//		TODO initMovieList();
-		
+		this.reloadNav('tplNavTv', 'TeleVision');
 		this.updateItems();
+		this.bouquets.init(this.services);
+		
+//		TODO initMovieList();
 		this.startUpdateCurrentPoller();
 	},
 	
-	registerEvents: function(){
+	registerEvents: function(){	
+		$('epgSearch').on(
+			'focus',
+			function(event, element){
+				element.value = "";
+			}.bind(this)
+		);
+		
+		$('epgSearchClear').on(
+				'click',
+				function(event, element){
+					$('epgSearch').value = '';
+				}.bind(this)
+		);
+	
 		nav = $('navContent');
 		nav.on(
 			'click',
@@ -306,6 +349,13 @@ var E2WebCore = Class.create({
 			}.bind(this)
 		);
 		
+		$('navVolume').on(
+			'click',
+			'a.volume',
+			function(event, element){
+				this.volume.set(element.readAttribute('data-volume'));
+			}.bind(this)
+		);
 	},
 
 	/*

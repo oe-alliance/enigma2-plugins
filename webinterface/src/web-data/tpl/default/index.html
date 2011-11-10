@@ -130,57 +130,14 @@
 				</div>
 				<div id="navVolume">
 					<div id="volHd" class="header"><div>Volume</div></div>
-					<span class="boxContent center" style="width: 94%; display:block;">
-						<!-- Volume "Slider" -->
-						<a href="#" onClick="volumeSet(10)">
-							<img id='volume1' src='/web-data/img/led_off.png' title="Volume to 10%" alt="10%">
-						</a>
-						<a href="#" onClick="volumeSet(20)">
-							<img id='volume2' src='/web-data/img/led_off.png' title="Volume to 20%" alt="20%">
-						</a>
-						<a href="#" onClick="volumeSet(30)">
-							<img id='volume3' src='/web-data/img/led_off.png' title="Volume to 30%" alt="30%">
-						</a>
-						<a href="#" onClick="volumeSet(40)">
-							<img id='volume4' src='/web-data/img/led_off.png' title="Volume to 40%" alt="40%">
-						</a>
-						<a href="#" onClick="volumeSet(50)">
-							<img id='volume5' src='/web-data/img/led_off.png' title="Volume to 50%" alt="50%">
-						</a>
-						<a href="#" onClick="volumeSet(60)">
-							<img id='volume6' src='/web-data/img/led_off.png' title="Volume to 60%" alt="60%">
-						</a>
-						<a href="#" onClick="volumeSet(70)">
-							<img id='volume7' src='/web-data/img/led_off.png' title="Volume to 70%" alt="70%">
-						</a>
-						<a href="#" onClick="volumeSet(80)">
-							<img id='volume8' src='/web-data/img/led_off.png' title="Volume to 80%" alt="80%">
-						</a>
-						<a href="#" onClick="volumeSet(90)">
-							<img id='volume9' src='/web-data/img/led_off.png' title="Volume to 90%" alt="90%">
-						</a>
-						<a href="#" onClick="volumeSet(100)">
-							<img id='volume10' src='/web-data/img/led_off.png' title="Volume to 100%" alt="100%">
-						</a>
-						<br>
-						<!-- Volume Control -->
-						<a href="#" onClick="volumeDown()">
-							<img src='/web-data/img/arrow_down.png'  title="Volume Down" alt="Down">
-						</a>
-						<a href="#" onClick="volumeUp()">
-							<img src='/web-data/img/arrow_up.png'  title="Volume Up" alt="Up">
-						</a>
-						<a href="#" onClick="volumeMute()">
-							<img id='speaker' src='/web-data/img/speak_on.png'  title="Mute" alt="Mute">
-						</a>						
-					</span>
+					<span class="boxContent center" style="width: 94%; display:block;">loading...</span>
 				</div>
 				<div id="navSearch">
 					<div id="searchHd" class="header"><div>EPG-Search</div></div>
 					<div class="boxContent">
 						<form action="" onSubmit="loadEPGBySearchString($('epgSearch').value); return false;">
-							<input type="text" id="epgSearch" onfocus="this.value=''" value="Search EPG" />
-							<img style="vertical-align:middle" src="/web-data/img/cross.png" alt="clear..." title="Clear Search" onClick="clearSearch()" />
+							<input type="text" id="epgSearch" value="Search EPG" />
+							<img id="epgSearchClear" style="vertical-align:middle" src="/web-data/img/cross.png" alt="clear..." title="Clear Search"/>
 						</form>						
 					</div>
 				</div>

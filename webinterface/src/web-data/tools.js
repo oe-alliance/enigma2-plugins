@@ -752,7 +752,7 @@ function handleVolumeRequest(request){
 		var mute = b.item(0).getElementsByTagName('e2ismuted').item(0).firstChild.data;
 		debug("[handleVolumeRequest] Volume " + newvalue + " | Mute: " + mute);
 
-		for (var i = 1; i <= 10; i++)		{
+		for (var i = 1; i <= 10; i++){
 			if ( (newvalue/10)>=i){
 				$("volume"+i).src = "/web-data/img/led_on.png";
 			}else{
