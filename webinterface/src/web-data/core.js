@@ -180,15 +180,6 @@ var Volume = Class.create(Controller, {
 	}
 });
 
-var Navcore = Class.create({
-	initialize: function(){
-		hashListener.onHashChanged = this.hashChanged.bind(this);
-	},
-	onHashChanged: function(){
-		console.log(hashListener.getHash());
-	}
-});
-
 var E2WebCore = Class.create({
 	initialize: function(){	
 		this.mediaPlayerStarted = false; 
@@ -228,9 +219,6 @@ var E2WebCore = Class.create({
 		this.current = new Current(new CurrentHandler('currentContent'));
 		this.volume = new Volume(new VolumeHandler('navVolume'));
 		this.movies = new Movies(new MovieListHandler('contentMain'));
-//		this.movieListHandler = new MovieListHandler('contentMain');
-		this.timerHandler = new TimerHandler('contentMain');
-		
 		
 		this.navlut = {
 			'tv': {
@@ -244,10 +232,12 @@ var E2WebCore = Class.create({
 				'all' : this.services.loadAllRadio.bind(this.services),
 			},
 			'timer': {
-				'new' : loadTimerFormNow, //TODO replace loadTimerFormNow;
+				//TODO add & use controller für timer-stuff
+				'new' : loadTimerFormNow, 
 				'edit' : function(){}
 			},
 			'control': {
+				//TODO add & use controller for Boxcontrols
 				'power' : loadControl,
 				'message' : loadControl,
 				'message' : loadControl,
@@ -263,7 +253,6 @@ var E2WebCore = Class.create({
 				'settings' : loadSettings,
 				'tools' : function(){},
 				'about' : loadAbout,
-				
 			}
 		};
 	},
@@ -346,18 +335,17 @@ var E2WebCore = Class.create({
 				this.subMode = '';
 			}
 			this.mode = mode;
-			console.log(this.mode);
-			
 			if(len >2){
 				var subMode = parts[2];
 				if(subMode != this.subMode){
+					this.subMode = subMode;
 					if(mode == 'control'){ //TODO fix this hack
-						this.navlut[this.mode][subMode](subMode);
+						this.navlut[this.mode][this.subMode](subMode);
+						return;
 					} else {
-						this.navlut[this.mode][subMode]();
+						this.navlut[this.mode][this.subMode]();
 					}
 				}
-				this.subMode = subMode;
 				
 				if(len > 3){
 					switch(this.mode){
@@ -379,13 +367,9 @@ var E2WebCore = Class.create({
 	
 	loadDefault: function(){
 		this.reloadNav('tplNavTv', 'TeleVision');
-		this.updateItems();
 		this.bouquets.init(this.services);
 		this.mode = 'tv';
 		this.subMode = 'bouquets';
-		
-//		TODO initMovieList();
-		this.startUpdateCurrentPoller();
 	},
 
 	run: function(){
@@ -421,6 +405,10 @@ var E2WebCore = Class.create({
 		} else {
 			this.loadDefault();
 		}
+		this.updateItems();
+		this.startUpdateCurrentPoller();
+//		TODO initMovieList();
+
 	},
 	
 	registerEvents: function(){
