@@ -502,12 +502,12 @@ class EpgCenterList(GUIComponent):
 					res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetRight, posY, 8, height, self.timer_add_pixmap))
 					
 		if config.plugins.merlinEpgCenter.showDuration.value:
-			width = self.maxWidth * 9 / 100
+			width = self.maxWidth * 7 / 100
 			offsetRight = offsetRight - width - 5
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, remainBeginString, progColor))
 		else:
 			width = self.maxWidth * 6 / 100
-			offsetRight = offsetRight - width
+			offsetRight = offsetRight - width - 5
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, remainBeginString, progColor))
 			
 		if config.plugins.merlinEpgCenter.showDuration.value:

@@ -322,6 +322,9 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			else:
 				self.currentMode = 0
 		self.setMode()
+		
+		if config.plugins.merlinEpgCenter.rememberLastTab.value:
+			self.setSelectionToRunningService(self.currentMode)
 				
 	def initEpgBaseTab(self):
 		# set ourself, the action map and prime time
@@ -1067,8 +1070,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 				else:
 					self["eventProgress"].setValue(percent)
 					
-			self["remaining"].instance.setForegroundColor(textColor)
-				
 			self["beginTime"].setText(beginString)
 			self["endTime"].setText(endString)
 			self["remaining"].setText(remainBeginString)
@@ -1276,6 +1277,10 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		newTimer.match = ''
 		newTimer.enabled = True
 		
+		if begin != None and end != None:
+			begin -= 3600
+			end += 3600
+			
 		self.session.openWithCallback(
 			boundFunction(self.importerCallback, addNewTimer),
 			AutoTimerImporter,
@@ -1415,18 +1420,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			# set the marker to the currently running service on plugin start
 			if self.selectRunningService:
 				self.selectRunningService = False
-				playingSref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-				if not playingSref:
-					return
-				sRef = playingSref.toCompareString()
-				
-				i = 0
-				while i < len(self["list"].list):
-					if self["list"].list[i][2] == sRef:
-						self.lastMultiEpgIndex = i
-						self["list"].instance.moveSelectionTo(self.lastMultiEpgIndex)
-						break
-					i += 1
+				self.setSelectionToRunningService(self.currentMode)
 			elif self.oldMode == SINGLE_EPG or self.oldMode == EPGSEARCH_RESULT or self.oldMode == EPGSEARCH_HISTORY:
 				if self.lastMultiEpgIndex > 0:
 					self["list"].instance.moveSelectionTo(self.lastMultiEpgIndex)
@@ -1435,11 +1429,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		elif self.currentMode == SINGLE_EPG:
 			sRef = None
 			if self.selectRunningService:
-				playingSref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-				if playingSref:
-					sRef = playingSref.toCompareString()
-					if sRef in self["list"].bouquetServices[self.currentBouquetIndex]:
-						self.lastMultiEpgIndex = self["list"].bouquetServices[self.currentBouquetIndex].index(sRef)
+				self.setSelectionToRunningService(self.currentMode)
 			if self.showOutdated and not self.hideOutdated:
 				self.hideOutdated = True
 			elif self.showOutdated and self.hideOutdated:
@@ -1448,8 +1438,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			elif not self.showOutdated and not self.hideOutdated and not self.oldMode == EPGSEARCH_RESULT and not self.selectRunningService:
 				self.lastMultiEpgIndex = self["list"].instance.getCurrentIndex()
 				
-			if self.selectRunningService:
-				self.selectRunningService = False
+			self.selectRunningService = False
 				
 			if switchTvRadio:
 				self.oldMode = None
@@ -1473,6 +1462,26 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self.setButtonText()
 		self.setActions()
 		
+	def setSelectionToRunningService(self, mode):
+		playingSref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+		if not playingSref:
+				return
+				
+		if mode == SINGLE_EPG:
+			sRef = playingSref.toCompareString()
+			if sRef in self["list"].bouquetServices[self.currentBouquetIndex]:
+				self.lastMultiEpgIndex = self["list"].bouquetServices[self.currentBouquetIndex].index(sRef)
+		else:
+			sRef = playingSref.toCompareString()
+			
+			i = 0
+			while i < len(self["list"].list):
+				if self["list"].list[i][2] == sRef:
+					self.lastMultiEpgIndex = i
+					self["list"].instance.moveSelectionTo(self.lastMultiEpgIndex)
+					break
+				i += 1
+				
 	############################################################################################
 	# KEY HANDLING
 	
