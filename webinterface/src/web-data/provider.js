@@ -215,7 +215,7 @@ var BouquetListProvider = Class.create(ServiceListProvider, {
 	 */
 	renderXML: function(xml){
 		var list = new ServiceList(xml).getArray();
-		return {bouquets : list};	
+		return {bouquets : list, hash : core.getBaseHash()};	
 	}
 });
 

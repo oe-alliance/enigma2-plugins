@@ -12,7 +12,7 @@
 													</td>									
 													<td>										
 														<div class="sListSName">
-															<a href="#" id="${bouquet.servicereference}" onclick="{ loadBouquet(this.id, this.innerHTML); }" class="sListSLink" title="Load Bouquet ${bouquet.servicename}">
+															<a href="${hash}/${bouquet.servicereference}" id="${bouquet.servicereference}" class="bListSLink" data-servicename="${bouquet.servicename}" title="Load Bouquet ${bouquet.servicename}">
 																${bouquet.servicename}
 															</a>
 														</div>
@@ -24,6 +24,6 @@
 										<tr><td>
 											<table><tr><td>No Bouquets to Display</td></tr></table>
 										</td></tr>
-										{/for}		
+										{/for}
 									</table>
 <!-- /tplBouquetList -->

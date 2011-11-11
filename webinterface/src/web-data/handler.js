@@ -9,6 +9,7 @@ var AbstractContentHandler = Class.create({
 		this.eventsRegistered = false;
 		this.provider = null;
 		this.ajaxload = false;
+		this.data = {};
 	},
 	
 	load: function(parms, fnc){
@@ -26,7 +27,7 @@ var AbstractContentHandler = Class.create({
 	 **/
 	requestStarted: function(){
 		if(this.ajaxload){
-			setAjaxLoad(this.target);
+//			setAjaxLoad(this.target);
 		}
 	},
 	
@@ -47,6 +48,7 @@ var AbstractContentHandler = Class.create({
 	 * Afterwards call this.finished()
 	 */
 	show : function(data){
+		this.data = data;
 		templateEngine.process(this.tpl, data, this.target, this.finished.bind(this));		
 	},
 	
@@ -136,6 +138,7 @@ var BouquetListHandler = Class.create(AbstractContentHandler, {
 	},
 	
 	show : function(data){
+		this.data = data;
 		if($(this.target) != null && $(this.target != undefined)){
 			templateEngine.process(this.tpl, data, this.target,  this.finished.bind(this));
 			if(this.initServiceList){

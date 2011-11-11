@@ -2,13 +2,15 @@ var Controller = Class.create({
 	initialize: function(model){
 		this.model = model;
 		this.model.onFinished[this.model.onFinished.length] = this.registerEvents.bind(this);
+		this.model.onFinished[this.model.onFinished.length] = this.onFinished.bind(this);
 		this.eventsregistered = false;
 	},
 
 	registerEvents: function(){
 		this.eventsregistered = true;
-		debug('[Controller] INFO: registerEvents not implemented in derived class');
-	}
+	},
+	
+	onFinished: function(){},
 });
 
 var Bouquets = Class.create(Controller, {
@@ -43,6 +45,12 @@ var Bouquets = Class.create(Controller, {
 	loadSatellitesRadio: function(){
 		this.load(satellitesRadio);
 	},
+	
+	onFinished: function(){
+		var bouquet = this.model.data.bouquets[0];
+		if(bouquet)
+			setContentHd(bouquet.servicename);
+	}
 });
 
 var Current = Class.create(Controller, {
@@ -92,6 +100,7 @@ var Services = Class.create(Controller, {
 	initialize: function($super, model, epg){
 		$super(model);
 		this.epg = epg;
+		this.cachedServiceElements = null;
 	},
 	
 	load: function(sRef){
@@ -108,50 +117,51 @@ var Services = Class.create(Controller, {
 	
 	loadAllTv: function(){
 		this.load(allTv);
+		setContentHd("All (Tv)");
 	},
 
 	loadAllRadio: function(){
 		this.load(allRadio);
+		setContentHd("All (Radio)");
 	},
 	
-	registerEvents: function(){
-		if(!this.eventsRegistered){
-			this.eventsRegistered = true;
-			/*
-			var parent = $(this.model.target);
-			parent.on(
-				'click', 
-				'a.sListSLink', 
-				function(event, element){
-					this.model.zap(unescape(element.id));
-				}.bind(this)
-			);
+	onFilterFocus: function(event){
+		event.element().value = '';
+		this.cachedServiceElements = null;
+		this.filter(event);
+	},
+
+	filter: function(event){
+		var needle = event.element().value.toLowerCase();
+		
+		if(cachedServiceElements == null){
+			cachedServiceElements = $$('.sListRow');
+		}
+		
+		for(var i = 0; i < cachedServiceElements.length; i++){
+			var row = cachedServiceElements[i];
+			var serviceName = row.readAttribute('data-servicename').toLowerCase();
 			
-			parent.on(
-				'click', 
-				'a.sListServiceEpg', 
-				function(event, element){
-					var ref = unescape( element.readAttribute('data-servicereference') );
-					this.epg.load(ref);
-				}.bind(this)
-			);
-			
-			parent.on(
-				'click', 
-				'a.sListEPG',
-				function(event, element){
-					var target = $(element.readAttribute('data-target_id'));
-					
-					if(target.visible()){
-						target.hide();
-					} else {
-						target.show();
-					}
-				}
-			);
-			*/
+			if(serviceName.match(needle) != needle && serviceName != ""){
+				row.hide();
+			} else {		
+				row.show();
+			}
 		}
 	},
+	
+	addFilterInput: function(){
+		var input = new Element('input');
+		input.id = 'serviceFilter';
+		input.value = 'Filter Services';		
+		$('contentHdExt').update(input);		
+		input.on('focus', this.onFilterFocus.bind(this));
+		input.on('keyup', this.filter.bind(this));	
+	},
+	
+	onFinished: function(){
+		this.addFilterInput();
+	}
 });
 
 var Timers = Class.create(Controller, {
@@ -170,8 +180,17 @@ var Volume = Class.create(Controller, {
 	}
 });
 
-var E2WebCore = Class.create({
+var Navcore = Class.create({
 	initialize: function(){
+		hashListener.onHashChanged = this.hashChanged.bind(this);
+	},
+	onHashChanged: function(){
+		console.log(hashListener.getHash());
+	}
+});
+
+var E2WebCore = Class.create({
+	initialize: function(){	
 		this.mediaPlayerStarted = false; 
 		this.popUpBlockerHinted = false;
 		this.settings = null;
@@ -198,6 +217,8 @@ var E2WebCore = Class.create({
 		this.tagList = [];
 
 		this.boxtype = "dm8000";
+		this.mode = "";
+		this.subMode = "";
 		
 		//create required Instances
 		this.epg = new EPG(new EpgListHandler());
@@ -209,6 +230,42 @@ var E2WebCore = Class.create({
 		this.movies = new Movies(new MovieListHandler('contentMain'));
 //		this.movieListHandler = new MovieListHandler('contentMain');
 		this.timerHandler = new TimerHandler('contentMain');
+		
+		
+		this.navlut = {
+			'tv': {
+				'bouquets' : this.bouquets.loadBouquetsTv.bind(this.bouquets), 
+				'provider' : this.bouquets.loadProviderTv.bind(this.bouquets),
+				'all' : this.services.loadAllTv.bind(this.services),
+				},
+			'radio': {
+				'bouquets' : this.bouquets.loadBouquetsRadio.bind(this.bouquets),
+				'provider' : this.bouquets.loadProviderRadio.bind(this.bouquets),
+				'all' : this.services.loadAllRadio.bind(this.services),
+			},
+			'timer': {
+				'new' : loadTimerFormNow, //TODO replace loadTimerFormNow;
+				'edit' : function(){}
+			},
+			'control': {
+				'power' : loadControl,
+				'message' : loadControl,
+				'message' : loadControl,
+				'remote' : loadControl,
+				'screenshot' : loadControl,
+				'videoshot' : loadControl,
+				'osdshot' : loadControl,
+			},
+			'extras': {
+				//TODO add & use controller for Extras
+				'deviceinfo' : loadDeviceInfo,
+				'gears' : loadGearsInfo,
+				'settings' : loadSettings,
+				'tools' : function(){},
+				'about' : loadAbout,
+				
+			}
+		};
 	},
 	
 	hideNotifier: function(){
@@ -241,7 +298,10 @@ var E2WebCore = Class.create({
 	},
 	
 	setAjaxLoad: function(targetElement){
-		$(targetElement).update( getAjaxLoad() );
+		target = $(targetElement);
+		if(target != null){
+			target.update( getAjaxLoad() );
+		}
 	},
 	
 	updateItems: function(){
@@ -274,6 +334,59 @@ var E2WebCore = Class.create({
 		debug("[stopUpdateBouquetItemsPoller] called");
 		clearInterval(this.updateBouquetItemsPoller);
 	},
+	
+	onHashChanged: function(){
+		var hash = hashListener.getHash();		
+		var parts = hash.split("/");
+		len = parts.length;
+		if(len >= 2){
+			var mode = parts[1];
+			if(mode != this.mode){
+				this.switchMode(mode);
+				this.subMode = '';
+			}
+			this.mode = mode;
+			console.log(this.mode);
+			
+			if(len >2){
+				var subMode = parts[2];
+				if(subMode != this.subMode){
+					if(mode == 'control'){ //TODO fix this hack
+						this.navlut[this.mode][subMode](subMode);
+					} else {
+						this.navlut[this.mode][subMode]();
+					}
+				}
+				this.subMode = subMode;
+				
+				if(len > 3){
+					switch(this.mode){
+					case 'tv':
+					case 'radio':
+						this.services.load(unescape(parts[3]));
+						break;
+					default:
+						return;
+					}
+				}
+			}
+		}
+	},
+	
+	getBaseHash: function(){
+		return '#!/' + this.mode + '/' + this.subMode;
+	},
+	
+	loadDefault: function(){
+		this.reloadNav('tplNavTv', 'TeleVision');
+		this.updateItems();
+		this.bouquets.init(this.services);
+		this.mode = 'tv';
+		this.subMode = 'bouquets';
+		
+//		TODO initMovieList();
+		this.startUpdateCurrentPoller();
+	},
 
 	run: function(){
 		if( parseNr(userprefs.data.updateCurrentInterval) < 10000){
@@ -290,6 +403,9 @@ var E2WebCore = Class.create({
 			alert("Due to the tremendous amount of work needed to get everthing to " +
 			"work properly, there is (for now) no support for Internet Explorer Versions below 7");
 		}
+		hashListener.onHashChanged = this.onHashChanged.bind(this);
+		hashListener.init();
+		
 		this.registerEvents();
 		
 //		TODO getBoxtype();
@@ -300,13 +416,11 @@ var E2WebCore = Class.create({
 		templateEngine.fetch('tplServiceListEPGItem');
 		templateEngine.fetch('tplBouquetsAndServices');
 		templateEngine.fetch('tplCurrent');
-
-		this.reloadNav('tplNavTv', 'TeleVision');
-		this.updateItems();
-		this.bouquets.init(this.services);
-		
-//		TODO initMovieList();
-		this.startUpdateCurrentPoller();
+		if(hashListener.getHash().length >= 1){
+			this.onHashChanged();
+		} else {
+			this.loadDefault();
+		}
 	},
 	
 	registerEvents: function(){
@@ -332,62 +446,8 @@ var E2WebCore = Class.create({
 					$('epgSearch').value = '';
 				}.bind(this)
 		);
-
-		//Navigation
-		nav = $('navContent');
-		nav.on(
-			'click',
-			'#loadBouquetsTv',
-			function(event, element){
-				this.bouquets.loadBouquetsTv();
-			}.bind(this)
-		);
-		nav.on(
-			'click',
-			'#loadProviderTv',
-			function(event, element){
-				this.bouquets.loadProviderTv();
-			}.bind(this)
-		);
-		nav.on(
-			'click',
-			'#loadAllTv',
-			function(event, element){
-				this.services.loadAllTv();
-			}.bind(this)
-		);
-		nav.on(
-			'click',
-			'#loadBouquetsRadio',
-			function(event, element){
-				this.bouquets.loadBouquetsRadio();
-			}.bind(this)
-		);
-		nav.on(
-			'click',
-			'#loadProviderRadio',
-			function(event, element){
-				this.bouquets.loadProviderRadio();
-			}.bind(this)
-		);
-		nav.on(
-			'click',
-			'#loadAllRadio',
-			function(event, element){
-				this.services.loadAllRadio();
-			}.bind(this)
-		);
 		
-		//Main Menu
-		mainMenu = $('mainMenu');
-		mainMenu.on(
-			'click',
-			'a.switchMode',
-			function(event, element){
-				this.switchMode(element.readAttribute('data-mode'));
-			}.bind(this)
-		);
-		
+		//Volume
 		$('navVolume').on(
 			'click',
 			'a.volume',
@@ -402,10 +462,10 @@ var E2WebCore = Class.create({
 			'click', 
 			'a.sListSLink', 
 			function(event, element){
-				this.model.zap(unescape(element.id));
+				this.services.zap(unescape(element.id));
 			}.bind(this)
 		);
-		
+
 		content.on(
 			'click', 
 			'a.sListServiceEpg', 
@@ -420,11 +480,12 @@ var E2WebCore = Class.create({
 			'a.sListEPG',
 			function(event, element){
 				var target = $(element.readAttribute('data-target_id'));
-				
-				if(target.visible()){
-					target.hide();
-				} else {
-					target.show();
+				if(target){
+					if(target.visible()){
+						target.hide();
+					} else {
+						target.show();
+					}
 				}
 			}
 		);
@@ -503,43 +564,43 @@ var E2WebCore = Class.create({
 	
 	switchMode: function(mode){
 		switch(mode){
-		case "TV":
-			if(currentMode != 'TV' && currentMode != 'Radio'){
+		case "tv":
+			if(currentMode != 'tv' && currentMode != 'radio'){
 				this.services.registerEvents();
 			}
 			this.reloadNav('tplNavTv', 'TeleVision');
 			break;
 	
-		case "Radio":
+		case "radio":
 			if(currentMode != 'TV' && currentMode != 'Radio'){
 				this.services.registerEvents();
 			}		
 			this.reloadNav('tplNavRadio', 'Radio');
 			break;
 	
-		case "Movies":	
+		case "movies":	
 			//The Navigation
 			this.reloadNavDynamic(this.loadMovieNav, 'Movies');
 			// The Movie list
 			this.loadContentDynamic(this.movies.load.bind(this.movies), 'Movies');
 			break;
 	
-		case "Timer":
+		case "timer":
 			//The Navigation
 			this.reloadNav('tplNavTimer', 'Timer');
 			// The Timerlist
 			this.loadContentDynamic(this.timers.load.bind(this.timers), 'Timer');
 			break;
 	
-		case "MediaPlayer":
+		case "mediaplayer":
 			this.loadContentDynamic(loadMediaPlayer, 'MediaPlayer');
 			break;
 	
-		case "BoxControl":
+		case "control":
 			this.reloadNav('tplNavBoxControl', 'BoxControl');
 			break;
 	
-		case "Extras":
+		case "extras":
 			this.reloadNav('tplNavExtras', 'Extras');
 			break;
 			
@@ -547,5 +608,9 @@ var E2WebCore = Class.create({
 			break;
 		}
 	},
+	
+	navigate: function(){
+		
+	}
 });
 core = new E2WebCore();
