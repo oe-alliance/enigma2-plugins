@@ -27,6 +27,7 @@ from Components.Label import Label
 from enigma import eServiceReference,  eTimer, getDesktop
 from ServiceReference import ServiceReference
 from Components.SystemInfo import SystemInfo
+from Components.ParentalControl import parentalControl
 from enigma import eServiceCenter, getBestPlayableServiceReference
 from Components.VideoWindow import VideoWindow
 from enigma import ePoint, eEPGCache
@@ -556,22 +557,26 @@ class VirtualZap(Screen):
 
 	# if available play service in PiP 
 	def playService(self, service):
-		current_service = service
-		n_service = self.pipServiceRelation.get(service.toString(),None) # PiPServiceRelation
-		if n_service is not None:
-			service = eServiceReference(n_service)
-		if service and (service.flags & eServiceReference.isGroup):
-			ref = getBestPlayableServiceReference(service, eServiceReference())
-		else:
-			ref = service
-		if ref and ref.toString() != self.currentPiP:
-			self.pipservice = eServiceCenter.getInstance().play(ref)
-			if self.pipservice and not self.pipservice.setTarget(1):
-				self.pipservice.start()
-				self.currentPiP = current_service.toString()
+		if parentalControl.getProtectionLevel(service.toCompareString()) == -1 or (parentalControl.sessionPinCached and parentalControl.sessionPinCachedValue): # check parentalControl, only play a protected service when Pin-Cache is activated and still valid
+			current_service = service
+			n_service = self.pipServiceRelation.get(service.toString(),None) # PiPServiceRelation
+			if n_service is not None:
+				service = eServiceReference(n_service)
+			if service and (service.flags & eServiceReference.isGroup):
+				ref = getBestPlayableServiceReference(service, eServiceReference())
 			else:
-				self.pipservice = None
-				self.currentPiP = ""
+				ref = service
+			if ref and ref.toString() != self.currentPiP:
+				self.pipservice = eServiceCenter.getInstance().play(ref)
+				if self.pipservice and not self.pipservice.setTarget(1):
+					self.pipservice.start()
+					self.currentPiP = current_service.toString()
+				else:
+					self.pipservice = None
+					self.currentPiP = ""
+		else:
+			self.pipservice = None
+			self.currentPiP = ""
 
 
 	# switch with numbers
