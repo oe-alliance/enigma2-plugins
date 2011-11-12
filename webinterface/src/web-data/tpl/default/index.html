@@ -30,8 +30,8 @@
 	<script type="text/javascript" src="/web-data/statics.js" ></script>
 	<script type="text/javascript" src="/web-data/provider.js" ></script>
 	<script type="text/javascript" src="/web-data/handler.js" ></script>
-	<script type="text/javascript" src="/web-data/tools.js" ></script>
-	<script type="text/javascript" src="/web-data/timer.js" ></script>
+	<!-- <script type="text/javascript" src="/web-data/tools.js" ></script> -->
+	<!-- <script type="text/javascript" src="/web-data/timer.js" ></script> -->
 	<script type="text/javascript" src="/web-data/core.js" ></script>
 	
 
@@ -157,7 +157,7 @@
 	</div>
 	<script language="javascript" type="text/javascript">	
 		function setNavHd(content){
-			set("navHd", '<div style="background-color: #000">'+content+'</div>');
+			$('navHd').update('<div style="background-color: #000">'+content+'</div>');
 		}
 		
 		function setContentHd(content){

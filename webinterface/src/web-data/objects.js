@@ -158,6 +158,84 @@ function getNamedChildren(xml, parentname, childname){
 	}
 }
 
+
+function dec2hex(nr, len){
+	var hex = parseInt(nr, 10).toString(16).toUpperCase();
+	if(len > 0){
+		try{
+			while(hex.length < len){
+				hex = "0"+hex;
+			}
+		} 
+		catch(e){
+			//something went wrong, return -1
+			hex = -1;
+		}
+	}
+	hex = '0x' + hex;
+	return hex;
+}
+
+
+function quotes2html(txt) {
+	if(txt !== undefined){
+		return txt.escapeHTML().replace('\n', '<br>');
+	} else {
+		return "";
+	}
+}
+
+function addLeadingZero(nr){
+	if(nr < 10){
+		return '0' + nr;
+	}
+	return nr;
+}
+
+function repeatedReadable(num) {
+	num = Number(num);
+	if (num === 0) {
+		return "One Time";
+	}
+
+	var retVal = "";
+	var Repeated = {};
+	Repeated["Mo-Su"] = 127;
+	Repeated["Mo-Fr"] = 31;
+	Repeated["Su"] = 64;
+	Repeated["Sa"] = 32;
+	Repeated["Fr"] = 16;
+	Repeated["Th"] = 8;
+	Repeated["We"] = 4;
+	Repeated["Tu"] = 2;
+	Repeated["Mo"] = 1;
+
+	for (var rep in Repeated) {
+		if (rep.toString() != 'extend') {
+			var check = Number(Repeated[rep]);
+			if (!(~num & check)) {
+				num -= check;
+				if (retVal === '') {
+					retVal += rep.toString();
+				} else {
+					retVal = rep.toString() + ',' + retVal;
+				}
+			}
+		}
+	}
+	return retVal;
+}
+
+function dateToString(date){
+	var dateString = "";
+	dateString += date.getFullYear();
+	dateString += "-" + addLeadingZero(date.getMonth()+1);
+	dateString += "-" + addLeadingZero(date.getDate());
+	dateString += " " + addLeadingZero(date.getHours());
+	dateString += ":" + addLeadingZero(date.getMinutes());
+	return dateString;
+}
+
 //START class EPGEvent
 function EPGEvent(xml, number){	
 	this.eventID = getNodeContent(xml, 'e2eventid', '');
@@ -286,7 +364,7 @@ function EPGList(xml){
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
 	} catch (e) {
-		notify("Error Parsing EPG: " + e, false);
+		core.notify("Error Parsing EPG: " + e, false);
 	}
 	
 	this.getArray = function(sortbytime){
@@ -716,6 +794,37 @@ function Timer(xml, cssclass){
 			'cssclass' : cssclass
 	};
 	
+	this.createJson = function(){
+		this.json = {
+				'servicereference' : this.getServiceReference(),
+				'servicename' : quotes2html(this.getServiceName()),
+				'title' : quotes2html(this.getName()),
+				'description' : quotes2html(this.getDescription()),
+				'descriptionextended' : quotes2html(this
+						.getDescriptionExtended()),
+				'begin' : this.getTimeBegin(),
+				'beginDate' : dateToString(this.beginDate),
+				'end' : this.getTimeEnd(),
+				'endDate' : dateToString(this.endDate),
+				'state' : this.getState(),
+				'duration' : Math.ceil((this.getDuration() / 60)),
+				'repeated' : this.getRepeated(),
+				'repeatedReadable' : repeatedReadable(this.getRepeated()),
+				'justplay' : this.getJustplay(),
+				'justplayReadable' : this.justplayReadable[Number(this
+						.getJustplay())],
+				'afterevent' : this.getAfterevent(),
+				'aftereventReadable' : this.aftereventReadable[Number(this
+						.getAfterevent())],
+				'dirname' : this.getDirname(),
+				'tags' : this.getTags(),
+				'disabled' : this.getDisabled(),
+				'onOff' : this.getToggleDisabledIMG(),
+				'enDis' : this.getToggleDisabledText(),
+				'cssclass' : cssclass
+		};		
+	};
+	
 	this.toJSON = function(){
 		return this.json;
 	};
@@ -763,7 +872,7 @@ function DeviceInfo(xml){
 					'model' : model
 			};					
 		} catch (e) {
-			notify("Error parsing frontend data: " + e);
+			core.notify("Error parsing frontend data: " + e);
 		}
 	}
 	
@@ -783,7 +892,7 @@ function DeviceInfo(xml){
 					'free'		: free
 			};
 		} catch(e){
-			notify("Error parsing HDD data: " + e, false);			
+			core.notify("Error parsing HDD data: " + e, false);			
 		}
 	}
 	
@@ -808,7 +917,7 @@ function DeviceInfo(xml){
 					'netmask' : netmask
 			};
 		} catch (e) {
-			notify("Error parsing NIC data: " + e, false);			
+			core.notify("Error parsing NIC data: " + e, false);			
 		}
 	}
 	
@@ -821,7 +930,7 @@ function DeviceInfo(xml){
 				'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data			
 		};
 	} catch (e) {
-		notify("Error parsing deviceinfo data: " + e, false);		
+		core.notify("Error parsing deviceinfo data: " + e, false);		
 	}
 	
 	this.json = {
@@ -841,7 +950,7 @@ function SimpleXMLResult(xml){
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2simplexmlresult").item(0);
 	} catch (e) {
-		notify("Error parsing e2simplexmlresult: " + e, false);
+		core.notify("Error parsing e2simplexmlresult: " + e, false);
 	}
 
 	this.state = getNodeContent(this.xmlitems, 'e2state', 'False');
@@ -867,7 +976,7 @@ function SimpleXMLList(xml, tagname){
 	try{
 		this.xmlitems = xml.getElementsByTagName(tagname);
 	} catch (e) {
-		notify("Error parsing SimpleXMLList: " + e, false);	
+		core.notify("Error parsing SimpleXMLList: " + e, false);	
 	}
 	
 	this.xmllist = [];
@@ -908,7 +1017,7 @@ function Settings(xml){
 		this.xmlitems = xml.getElementsByTagName("e2settings").item(0).getElementsByTagName("e2setting");
 		debug("[Settings] Number of items: " + this.xmlitems);
 	} catch (e) {
-		notify("Error parsing Settings: " + e, false);	
+		core.notify("Error parsing Settings: " + e, false);	
 	}	
 	
 	this.settings = [];
@@ -932,7 +1041,7 @@ function FileList(xml){
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2filelist").item(0).getElementsByTagName("e2file");
 	} catch (e) {
-		notify("Error parsing FileList: " + e, false);
+		core.notify("Error parsing FileList: " + e, false);
 	}
 	this.filelist = [];
 

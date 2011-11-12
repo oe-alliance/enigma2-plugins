@@ -27,7 +27,7 @@ var AbstractContentHandler = Class.create({
 	 **/
 	requestStarted: function(){
 		if(this.ajaxload){
-//			setAjaxLoad(this.target);
+			core.setAjaxLoad(this.target);
 		}
 	},
 	
@@ -49,7 +49,7 @@ var AbstractContentHandler = Class.create({
 	 */
 	show : function(data){
 		this.data = data;
-		templateEngine.process(this.tpl, data, this.target, this.finished.bind(this));		
+		templateEngine.process(this.tpl, data, this.target, this.finished.bind(this));
 	},
 	
 	/**
@@ -60,21 +60,7 @@ var AbstractContentHandler = Class.create({
 	 * @state - false == error (bgcolor red), true == success (bgcolor green)
 	 */
 	notify: function(text, state){
-		notif = $('notification');
-
-		if(notif !== null){
-			//clear possibly existing hideNotifier timeout of a previous notfication
-			clearTimeout(hideNotifierTimeout);
-			if(state === false){
-				notif.style.background = "#C00";
-			} else {
-				notif.style.background = "#85C247";
-			}				
-
-			notif.update("<div>"+text+"</div>");
-			notif.appear({duration : 0.5, to: 0.9 });
-			hideNotifierTimeout = setTimeout(hideNotifier, 10000);
-		}
+		core.notify(text, state);
 	},
 	
 	/**
@@ -121,6 +107,23 @@ var AbstractContentHandler = Class.create({
 	}
 });
 
+var DeviceInfoHandler = Class.create(AbstractContentHandler,{
+	initialize: function($super, target){
+		$super('tplDeviceInfo', target);
+		this.provider = new DeviceInfoProvider(this.show.bind(this));
+	},
+});
+
+var SimplePageHandler = Class.create(AbstractContentHandler,{
+	initialize: function($super, target){
+		$super(null, target);
+	},
+	
+	show: function(tpl, data){
+		templateEngine.process(tpl, data, this.target, this.finished.bind(this));
+	}
+});
+
 var BouquetListHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target, targetMain){
 		$super('tplBouquetList', target);
@@ -162,7 +165,6 @@ var CurrentHandler  = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplCurrent', target);
 		this.provider = new CurrentProvider(this.show.bind(this));
-		this.ajaxload = false;
 	}	
 });
 
@@ -372,6 +374,14 @@ var MovieListHandler  = Class.create(AbstractContentHandler, {
 	}
 });
 
+var ScreenshotHandler = Class.create(AbstractContentHandler, {
+	initialize: function($super, target){
+		$super('tplGrab', target);
+		this.provider = new ScreenshotProvider(this.show.bind(this));
+		this.ajaxload = true;
+	},
+});
+
 var TimerListHandler  = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplTimerList', target);
@@ -426,24 +436,25 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * Parameters:
 	 * @element - the html element calling the load function ( onclick="TimerProvider.load(this)" )
 	 */
-	getData: function(tListItem){
-		var parent = tListItem.up('.tListItem');
-		
-		var t = {
-				servicereference : parent.readAttribute('data-servicereference'),
-				servicename : parent.readAttribute('data-servicename'),
-				description : parent.readAttribute('data-description'),
-				title : parent.readAttribute('data-title'),
-				begin : parent.readAttribute('data-begin'),
-				end : parent.readAttribute('data-end'),
-				repeated : parent.readAttribute('data-repeated'),
-				justplay : parent.readAttribute('data-justplay'),
-				dirname : parent.readAttribute('data-dirname'),
-				tags : parent.readAttribute('data-tags'),
-				afterevent : parent.readAttribute('data-afterevent'),
-				disabled : parent.readAttribute('data-disabled')				
-		};
-		
+	getData: function(element){
+		var parent = element.up('.tListItem');
+		var t = {};
+		if(parent){
+			t = {
+					servicereference : parent.readAttribute('data-servicereference'),
+					servicename : parent.readAttribute('data-servicename'),
+					description : parent.readAttribute('data-description'),
+					title : parent.readAttribute('data-title'),
+					begin : parent.readAttribute('data-begin'),
+					end : parent.readAttribute('data-end'),
+					repeated : parent.readAttribute('data-repeated'),
+					justplay : parent.readAttribute('data-justplay'),
+					dirname : parent.readAttribute('data-dirname'),
+					tags : parent.readAttribute('data-tags'),
+					afterevent : parent.readAttribute('data-afterevent'),
+					disabled : parent.readAttribute('data-disabled')				
+			};
+		}
 		return t;
 	},
 	

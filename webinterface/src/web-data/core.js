@@ -1,3 +1,14 @@
+//General Helpers
+function debug(text){}
+
+function parseNr(num) {
+	if(isNaN(num)){
+		return 0;
+	} else {
+		return parseInt(num);
+	}
+}
+
 var Controller = Class.create({
 	initialize: function(model){
 		this.model = model;
@@ -96,6 +107,42 @@ var Movies = Class.create(Controller, {
 	},
 });
 
+var Screenshots = Class.create(Controller, {
+	TYPE_OSD : 'o',
+	TYPE_VIDEO : 'v',
+	TYPE_ALL : '',
+	
+	load: function(type){
+		var filename = '/tmp/' + new Date().getTime();
+		var params = {'format' : 'jpg', 'r': '720', 'filename' : filename};
+		
+		switch(type){
+			case this.TYPE_OSD:
+				params['o'] = '';
+				params['n'] = '';
+				break;
+			case this.TYPE_VIDEO:
+				params['v'] = '';
+				break;
+			default:
+				break;
+		}
+		this.model.load(params);		
+	},
+
+	shootOsd: function(){
+		this.load(this.TYPE_OSD);
+	},
+	
+	shootVideo: function(){
+		this.load(this.TYPE_VIDEO);
+	},
+	
+	shootAll: function(){
+		this.load(this.TYPE_ALL);
+	},
+});
+
 var Services = Class.create(Controller, {
 	initialize: function($super, model, epg){
 		$super(model);
@@ -164,10 +211,99 @@ var Services = Class.create(Controller, {
 	}
 });
 
-var Timers = Class.create(Controller, {
-	load: function(){
-		this.model.load({});
+var SimplePages = Class.create({
+	PAGE_ABOUT : 'tplAbout',
+	PAGE_GEARS : 'tplGears',
+	PAGE_MESSAGE : 'tplSendMessage',
+	PAGE_POWER : 'tplPower',
+	PAGE_SETTINGS: 'tplSettings',
+	PAGE_TOOLS: 'tplTools',
+	
+	initialize: function(simpleHandler, deviceInfoHandler){
+		this.simpleHandler = simpleHandler;
+		this.deviceInfoHandler = deviceInfoHandler;
+	},
+	
+	show: function(tpl, data){
+		if(!data)
+			data = {};
+		this.simpleHandler.show(tpl, data);
+	},
+
+	loadAbout: function(){
+		this.show(this.PAGE_ABOUT);
+	},
+	
+	loadGears: function(){
+		var enabled = false;
+		
+		if (window.google && google.gears){
+			enabled = gearsEnabled();
+		}
+		
+		data = { 'useGears' : enabled };
+		this.show(this.PAGE_GEARS, data);
+	},
+	
+	loadMessage: function(){
+		this.show(this.PAGE_MESSAGE);
+	},
+	
+	loadPower: function(){
+		this.show(this.PAGE_POWER);
+	},
+	
+	loadSettings: function(){
+		var debug = userprefs.data.debug;
+		var debugChecked = "";
+		if(debug){
+			debugChecked = 'checked';
+		}
+		
+		var updateCurrentInterval = userprefs.data.updateCurrentInterval / 1000;
+		var updateBouquetInterval = userprefs.data.updateBouquetInterval / 1000;
+
+		data = {'debug' : debugChecked,
+				'updateCurrentInterval' : updateCurrentInterval,
+				'updateBouquetInterval' : updateBouquetInterval
+		};
+		this.show(this.PAGE_SETTINGS, data);
+	},
+	
+	loadTools: function(){
+		this.show(this.PAGE_TOOLS);
+	},
+	
+	loadDeviceInfo: function(){
+		this.deviceInfoHandler.load({});
 	}
+});
+
+var Timers = Class.create({
+	initialize: function(listHandler, timerHandler){
+		this.listHandler = listHandler;
+		this.timerHandler = timerHandler;
+	},
+	
+	loadList: function(){
+		this.listHandler.load({});
+	},
+	
+	create: function(){
+		//TODO create Timer;
+	},
+	
+	edit: function(element){
+		this.timerHandler.load(element);
+	},
+	
+	toggleDisabled: function(element){
+		//TODO toggleDisabled
+	},
+	
+	del: function(element){
+		//TODO delete
+	},
 });
 
 var Volume = Class.create(Controller, {
@@ -215,10 +351,18 @@ var E2WebCore = Class.create({
 		this.epg = new EPG(new EpgListHandler());
 		this.services = new Services(new ServiceListHandler('contentServices'), this.epg);
 		this.bouquets = new Bouquets(new BouquetListHandler('contentBouquets', 'contentMain'));
-		this.timers = new Timers(new TimerListHandler('contentMain'));
+		this.timers = new Timers(
+				new TimerListHandler('contentMain'), 
+				new TimerHandler('contentMain')
+			);
 		this.current = new Current(new CurrentHandler('currentContent'));
 		this.volume = new Volume(new VolumeHandler('navVolume'));
 		this.movies = new Movies(new MovieListHandler('contentMain'));
+		this.screenshots = new Screenshots(new ScreenshotHandler('contentMain'));
+		this.simplepages = new SimplePages(
+				new SimplePageHandler('contentMain'),
+				new DeviceInfoHandler('contentMain')
+			);
 		
 		this.navlut = {
 			'tv': {
@@ -233,26 +377,25 @@ var E2WebCore = Class.create({
 			},
 			'timer': {
 				//TODO add & use controller für timer-stuff
-				'new' : loadTimerFormNow, 
-				'edit' : function(){}
+				'create' : this.timers.create.bind(this.timers), //TODO create Timer
 			},
 			'control': {
 				//TODO add & use controller for Boxcontrols
-				'power' : loadControl,
-				'message' : loadControl,
-				'message' : loadControl,
-				'remote' : loadControl,
-				'screenshot' : loadControl,
-				'videoshot' : loadControl,
-				'osdshot' : loadControl,
+				'message' : this.simplepages.loadMessage.bind(this.simplepages),
+				'power' : this.simplepages.loadPower.bind(this.simplepages),
+				'remote' : function(){}, //TODO loadControl
+				'osdshot' : this.screenshots.shootOsd.bind(this.screenshots),
+				'screenshot' : this.screenshots.shootAll.bind(this.screenshots),
+				'videoshot' : this.screenshots.shootVideo.bind(this.screenshots),
+				
 			},
 			'extras': {
 				//TODO add & use controller for Extras
-				'deviceinfo' : loadDeviceInfo,
-				'gears' : loadGearsInfo,
-				'settings' : loadSettings,
-				'tools' : function(){},
-				'about' : loadAbout,
+				'about' : this.simplepages.loadAbout.bind(this.simplepages),
+				'deviceinfo' : this.simplepages.loadDeviceInfo.bind(this.simplepages),
+				'gears' : this.simplepages.loadGears.bind(this.simplepages),
+				'settings' : this.simplepages.loadSettings.bind(this.simplepages),
+				'tools' : this.simplepages.loadTools.bind(this.simplepages),
 			}
 		};
 	},
@@ -327,26 +470,27 @@ var E2WebCore = Class.create({
 	onHashChanged: function(){
 		var hash = hashListener.getHash();		
 		var parts = hash.split("/");
-		len = parts.length;
+		var isReload = false;
+		if(parts.length > 0){
+			if(parts[parts.length - 1] == "reload"){
+				parts.pop();
+				isReload = true;
+			}
+		}
+		var len = parts.length;
 		if(len >= 2){
 			var mode = parts[1];
-			if(mode != this.mode){
+			if(mode != this.mode || isReload){
 				this.switchMode(mode);
 				this.subMode = '';
 			}
 			this.mode = mode;
 			if(len >2){
 				var subMode = parts[2];
-				if(subMode != this.subMode){
+				if(subMode != this.subMode || isReload){
 					this.subMode = subMode;
-					if(mode == 'control'){ //TODO fix this hack
-						this.navlut[this.mode][this.subMode](subMode);
-						return;
-					} else {
-						this.navlut[this.mode][this.subMode]();
-					}
-				}
-				
+					this.navlut[this.mode][this.subMode]();
+				}				
 				if(len > 3){
 					switch(this.mode){
 					case 'tv':
@@ -358,6 +502,8 @@ var E2WebCore = Class.create({
 					}
 				}
 			}
+			if(isReload)
+				hashListener.setHash(parts.join("/"));
 		}
 	},
 	
@@ -446,6 +592,8 @@ var E2WebCore = Class.create({
 		
 		//Content
 		var content = $('contentMain');
+		
+		//Servicelist
 		content.on(
 			'click', 
 			'a.sListSLink', 
@@ -453,7 +601,6 @@ var E2WebCore = Class.create({
 				this.services.zap(unescape(element.id));
 			}.bind(this)
 		);
-
 		content.on(
 			'click', 
 			'a.sListServiceEpg', 
@@ -462,7 +609,6 @@ var E2WebCore = Class.create({
 				this.epg.load(ref);
 			}.bind(this)
 		);
-		
 		content.on(
 			'click', 
 			'a.sListEPG',
@@ -477,7 +623,7 @@ var E2WebCore = Class.create({
 				}
 			}
 		);
-		
+		//Movielist
 		content.on(
 			'click', 
 			'a.mListDelete', 
@@ -485,6 +631,31 @@ var E2WebCore = Class.create({
 				this.movies.del(element);
 			}.bind(this)
 		);
+		//Timerlist
+		content.on(
+			'click', 
+			'a.tListDelete', 
+			function(event, element){
+				this.timers.del(element);
+			}.bind(this)
+		);
+		content.on(
+			'click', 
+			'a.tListToggleDisabled', 
+			function(event, element){
+				this.timers.toogleDisabled(element);
+			}.bind(this)
+		);
+		content.on(
+			'click', 
+			'a.tListEdit', 
+			function(event, element){
+				this.timers.edit(element);
+			}.bind(this)
+		);
+
+		
+		
 	},
 
 	/*
@@ -511,28 +682,13 @@ var E2WebCore = Class.create({
 	loadMovieList: function(){
 		
 	},
-	
-	/*
-	 * Loads dynamic content to $(contentMain) by calling a execution function
-	 * @param fnc - The function used to load the content
-	 * @param title - The Title to set on the contentpanel
-	 * @param [domid] - The ID of the dom-object for the ajax-loading-animation
-	 */
-	loadContentDynamic: function(fnc, title, domid){
-		if(domid !== undefined && $(domid) != null){
-			this.setAjaxLoad(domid);
-		} else {
-			this.setAjaxLoad('contentMain');
-		}
-		this.reloadContentDynamic(fnc, title);
-	},
 
 	/*
 	 * Loads dynamic content to $(contentMain) by calling a execution function
 	 * @param fnc - The function used to load the content
 	 * @param title - The Title to set on the contentpanel
 	 */
-	reloadContentDynamic: function(fnc, title){
+	loadContentDynamic: function(fnc, title){
 		setContentHd(title);
 		this.stopUpdateBouquetItemsPoller();
 		fnc();
@@ -553,14 +709,14 @@ var E2WebCore = Class.create({
 	switchMode: function(mode){
 		switch(mode){
 		case "tv":
-			if(currentMode != 'tv' && currentMode != 'radio'){
+			if(this.mode != 'tv' && this.mode != 'radio'){
 				this.services.registerEvents();
 			}
 			this.reloadNav('tplNavTv', 'TeleVision');
 			break;
 	
 		case "radio":
-			if(currentMode != 'TV' && currentMode != 'Radio'){
+			if(this.mode != 'TV' && this.mode != 'Radio'){
 				this.services.registerEvents();
 			}		
 			this.reloadNav('tplNavRadio', 'Radio');
@@ -577,11 +733,11 @@ var E2WebCore = Class.create({
 			//The Navigation
 			this.reloadNav('tplNavTimer', 'Timer');
 			// The Timerlist
-			this.loadContentDynamic(this.timers.load.bind(this.timers), 'Timer');
+			this.loadContentDynamic(this.timers.loadList.bind(this.timers), 'Timer');
 			break;
 	
 		case "mediaplayer":
-			this.loadContentDynamic(loadMediaPlayer, 'MediaPlayer');
+			//TODO this.loadContentDynamic(loadMediaPlayer, 'MediaPlayer');
 			break;
 	
 		case "control":

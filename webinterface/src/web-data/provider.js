@@ -80,7 +80,7 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 	 */
 	errorback: function(transport){
 		var notif = "Request failed for:  " + transport.request.url + "<br>Status: " + transport.status + " " + transport.statusText;
-		notify(notif, false);
+		core.notify(notif, false);
 	},
 	
 	/**
@@ -249,6 +249,17 @@ var CurrentProvider = Class.create(AbstractContentProvider, {
 	}
 });
 
+var DeviceInfoProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.deviceinfo, showFnc );
+	},
+	
+	renderXML: function(xml){
+		var data = new DeviceInfo(xml);
+		return data;
+	}
+});
+
 var ServiceEpgListProvider = Class.create(AbstractContentProvider, {
 	/**
 	 * initialize
@@ -402,6 +413,30 @@ var MovieListProvider = Class.create(AbstractContentProvider, {
 		var list = new MovieList(xml).getArray();
 		return {movies : list};
 	}
+});
+
+/* this one is a little special! */
+var ScreenshotProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.grab, showFnc);
+		this.buffer = new Image();
+		this.buffer.onload = this.callback.bind(this);
+		this.buffer.onerror = this.errorback.bind(this);
+	},
+	
+	load: function(parms, fnc){
+		this.parms = parms;
+		if(fnc !== undefined){
+			this.callback = fnc;
+		}
+		this.buffer.src = this.url + '?' + $H(parms).toQueryString();
+	},
+	
+	callback: function(transport){
+		var data = { img : { src : this.buffer.src } };
+		this.show(data);
+	},
+		
 });
 
 var TimerListProvider = Class.create(AbstractContentProvider, {
