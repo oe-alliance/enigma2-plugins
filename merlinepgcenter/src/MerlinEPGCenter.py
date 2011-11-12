@@ -96,6 +96,12 @@ try:
 except ImportError:
 	AUTOTIMER = False
 
+# check for IMDb support
+try:
+	from Plugins.Extensions.IMDb.plugin import IMDB
+	IMDB_INSTALLED = True
+except ImportError:
+	IMDB_INSTALLED = False
 
 class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 	(skinFile, skinList) = SkinFinder.getSkinData(SKINLIST, SKINDIR, config.plugins.merlinEpgCenter.skin.value)
@@ -323,8 +329,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 				self.currentMode = 0
 		self.setMode()
 		
-		if config.plugins.merlinEpgCenter.rememberLastTab.value:
-			self.setSelectionToRunningService(self.currentMode)
+		if config.plugins.merlinEpgCenter.rememberLastTab.value and (self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME):
+			self.setSelectionToRunningService()
 				
 	def initEpgBaseTab(self):
 		# set ourself, the action map and prime time
@@ -1164,6 +1170,9 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 					self["key_blue"].setText(_("Outdated off"))
 			else:
 				self["key_blue"].setText("")
+				
+			if IMDB_INSTALLED:
+				self["key_yellow"].setText(_("IMDb"))
 		elif self.currentMode == TIMERLIST:
 			self.key_red_choice = self.EMPTY # TimerEditList method
 			self.key_yellow_choice = self.EMPTY # TimerEditList method
@@ -1420,7 +1429,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			# set the marker to the currently running service on plugin start
 			if self.selectRunningService:
 				self.selectRunningService = False
-				self.setSelectionToRunningService(self.currentMode)
+				self.setSelectionToRunningService()
 			elif self.oldMode == SINGLE_EPG or self.oldMode == EPGSEARCH_RESULT or self.oldMode == EPGSEARCH_HISTORY:
 				if self.lastMultiEpgIndex > 0:
 					self["list"].instance.moveSelectionTo(self.lastMultiEpgIndex)
@@ -1429,7 +1438,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		elif self.currentMode == SINGLE_EPG:
 			sRef = None
 			if self.selectRunningService:
-				self.setSelectionToRunningService(self.currentMode)
+				self.setSelectionToRunningService()
 			if self.showOutdated and not self.hideOutdated:
 				self.hideOutdated = True
 			elif self.showOutdated and self.hideOutdated:
@@ -1462,18 +1471,25 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self.setButtonText()
 		self.setActions()
 		
-	def setSelectionToRunningService(self, mode):
+	def setSelectionToRunningService(self):
 		playingSref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
 		if not playingSref:
-				return
-				
-		if mode == SINGLE_EPG:
-			sRef = playingSref.toCompareString()
-			if sRef in self["list"].bouquetServices[self.currentBouquetIndex]:
-				self.lastMultiEpgIndex = self["list"].bouquetServices[self.currentBouquetIndex].index(sRef)
-		else:
-			sRef = playingSref.toCompareString()
+			return
 			
+		from plugin import getBouquetInformation
+		(self.servicelist, self.currentBouquet, self.bouquetList, self.currentBouquetIndex) = getBouquetInformation()
+		EpgCenterList.bouquetList = self.bouquetList
+		EpgCenterList.currentBouquetIndex = self.currentBouquetIndex
+		sRef = playingSref.toCompareString()
+		self.lastMultiEpgIndex = self["list"].bouquetServices[self.currentBouquetIndex].index(sRef)
+		
+		if self.currentMode == SINGLE_EPG:
+			if sRef in self["list"].bouquetServices[self.currentBouquetIndex]:
+				self.epgTabObjectList[self.currentMode].show(self.oldMode, self.bouquetList[0], self.currentBouquet, self.currentBouquetIndex, self.currentMode, self.showOutdated, sRef, self.timerListMode)
+		else:
+			if sRef in self["list"].bouquetServices[self.currentBouquetIndex]:
+				self.epgTabObjectList[self.currentMode].show(self.currentBouquet, self.currentBouquetIndex, self.currentMode)
+				
 			i = 0
 			while i < len(self["list"].list):
 				if self["list"].list[i][2] == sRef:
@@ -1542,6 +1558,9 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self.setMode(manualSearch = True)
 		elif self.configTabsShown:
 			self.keyEditMode()
+		elif IMDB_INSTALLED and (self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME or self.currentMode == EPGSEARCH_RESULT):
+			cur = self["list"].getCurrent()
+			self.session.open(IMDB, cur[5])
 			
 	def keyBlue(self):
 		if self.currentMode == EPGSEARCH_RESULT:

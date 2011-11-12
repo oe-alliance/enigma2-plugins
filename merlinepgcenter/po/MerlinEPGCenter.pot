@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-11-02 23:56+CET\n"
+"POT-Creation-Date: 2011-11-12 10:31+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgstr ""
 msgid "percent (text)"
 msgstr ""
 
-#: ConfigTabs.py:102 EpgCenterList.py:940
+#: ConfigTabs.py:102 EpgCenterList.py:942
 msgid "disabled"
 msgstr ""
 
@@ -143,27 +143,27 @@ msgstr ""
 msgid "Show short description:"
 msgstr ""
 
-#: EpgCenterList.py:918
+#: EpgCenterList.py:920
 msgid "waiting"
 msgstr ""
 
-#: EpgCenterList.py:921
+#: EpgCenterList.py:923
 msgid "about to start"
 msgstr ""
 
-#: EpgCenterList.py:925
+#: EpgCenterList.py:927
 msgid "zapped"
 msgstr ""
 
-#: EpgCenterList.py:927
+#: EpgCenterList.py:929
 msgid "recording..."
 msgstr ""
 
-#: EpgCenterList.py:930 EpgCenterList.py:936
+#: EpgCenterList.py:932 EpgCenterList.py:938
 msgid "done!"
 msgstr ""
 
-#: EpgCenterList.py:933
+#: EpgCenterList.py:935
 msgid "<unknown>"
 msgstr ""
 
@@ -207,24 +207,24 @@ msgstr ""
 msgid "Unknown date"
 msgstr ""
 
-#: HelperFunctions.py:265
+#: HelperFunctions.py:278
 msgid ""
 "A timer failed to record!\n"
 "Disable TV and try again?\n"
 msgstr ""
 
-#: HelperFunctions.py:269
+#: HelperFunctions.py:282
 msgid ""
 "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr ""
 
-#: HelperFunctions.py:316
+#: HelperFunctions.py:329
 msgid ""
 "A finished record timer wants to set your\n"
 "Dreambox to standby. Do that now?"
 msgstr ""
 
-#: HelperFunctions.py:322
+#: HelperFunctions.py:335
 msgid ""
 "A finished record timer wants to shut down\n"
 "your Dreambox. Shutdown now?"
@@ -250,7 +250,7 @@ msgstr ""
 msgid "Upcoming"
 msgstr ""
 
-#: MerlinEPGCenter.py:43 MerlinEPGCenter.py:1705
+#: MerlinEPGCenter.py:43 MerlinEPGCenter.py:1751
 msgid "Timer"
 msgstr ""
 
@@ -266,127 +266,131 @@ msgstr ""
 msgid "Lists"
 msgstr ""
 
-#: MerlinEPGCenter.py:195
+#: MerlinEPGCenter.py:207
 msgid "Search for:"
 msgstr ""
 
-#: MerlinEPGCenter.py:398
+#: MerlinEPGCenter.py:428
 msgid "Similar"
 msgstr ""
 
-#: MerlinEPGCenter.py:664
+#: MerlinEPGCenter.py:692
 msgid "Record or zap timer"
 msgstr ""
 
-#: MerlinEPGCenter.py:665
+#: MerlinEPGCenter.py:693
 msgid "AutoTimer timer"
 msgstr ""
 
-#: MerlinEPGCenter.py:666
+#: MerlinEPGCenter.py:694
 msgid "Please select a timer type to add:"
 msgstr ""
 
-#: MerlinEPGCenter.py:800
+#: MerlinEPGCenter.py:828
 msgid "Stop current event but not coming events"
 msgstr ""
 
-#: MerlinEPGCenter.py:801
+#: MerlinEPGCenter.py:829
 msgid "Stop current event and disable coming events"
 msgstr ""
 
-#: MerlinEPGCenter.py:802
+#: MerlinEPGCenter.py:830
 msgid "Don't stop current event but disable coming events"
 msgstr ""
 
-#: MerlinEPGCenter.py:804
+#: MerlinEPGCenter.py:832
 msgid "Repeating event currently recording... What do you want to do?"
 msgstr ""
 
-#: MerlinEPGCenter.py:904
+#: MerlinEPGCenter.py:932
 msgid "Match title:"
 msgstr ""
 
-#: MerlinEPGCenter.py:910
+#: MerlinEPGCenter.py:938
 msgid "Services:"
 msgstr ""
 
-#: MerlinEPGCenter.py:916
+#: MerlinEPGCenter.py:944
 msgid "Bouquets:"
 msgstr ""
 
-#: MerlinEPGCenter.py:922
+#: MerlinEPGCenter.py:950
 msgid "Included days:"
 msgstr ""
 
-#: MerlinEPGCenter.py:928
+#: MerlinEPGCenter.py:956
 msgid "Excluded days:"
 msgstr ""
 
-#: MerlinEPGCenter.py:929
+#: MerlinEPGCenter.py:957
 msgid "Record a maximum of x times:"
 msgstr ""
 
-#: MerlinEPGCenter.py:930
+#: MerlinEPGCenter.py:958
 msgid "Amount of recordings left:"
 msgstr ""
 
-#: MerlinEPGCenter.py:931
+#: MerlinEPGCenter.py:959
 msgid "Search type:"
 msgstr ""
 
-#: MerlinEPGCenter.py:932
+#: MerlinEPGCenter.py:960
 msgid "Location:"
 msgstr ""
 
-#: MerlinEPGCenter.py:1142
+#: MerlinEPGCenter.py:1168
 msgid "Outdated on"
 msgstr ""
 
-#: MerlinEPGCenter.py:1144
+#: MerlinEPGCenter.py:1170
 msgid "Outdated off"
 msgstr ""
 
-#: MerlinEPGCenter.py:1152
+#: MerlinEPGCenter.py:1175
+msgid "IMDb"
+msgstr ""
+
+#: MerlinEPGCenter.py:1181
 msgid "Add"
 msgstr ""
 
-#: MerlinEPGCenter.py:1154
+#: MerlinEPGCenter.py:1183
 msgid "Remove"
 msgstr ""
 
-#: MerlinEPGCenter.py:1155
+#: MerlinEPGCenter.py:1184
 msgid "OK"
 msgstr ""
 
-#: MerlinEPGCenter.py:1156
+#: MerlinEPGCenter.py:1185
 msgid "New Search"
 msgstr ""
 
-#: MerlinEPGCenter.py:1166
+#: MerlinEPGCenter.py:1195
 msgid "Remove timer"
 msgstr ""
 
-#: MerlinEPGCenter.py:1169 MerlinEPGCenter.py:1177
+#: MerlinEPGCenter.py:1198 MerlinEPGCenter.py:1206
 msgid "Add timer"
 msgstr ""
 
-#: MerlinEPGCenter.py:1463
+#: MerlinEPGCenter.py:1507
 msgid "Edit Off"
 msgstr ""
 
-#: MerlinEPGCenter.py:1467
+#: MerlinEPGCenter.py:1511
 msgid "Edit On"
 msgstr ""
 
-#: MerlinEPGCenter.py:1485
+#: MerlinEPGCenter.py:1529
 msgid "return"
 msgstr ""
 
-#: MerlinEPGCenter.py:1694
+#: MerlinEPGCenter.py:1740
 msgid "Set search term"
 msgstr ""
 
-#: plugin.py:94
+#: plugin.py:121
 msgid "More than just an EPG..."
 msgstr ""
 
