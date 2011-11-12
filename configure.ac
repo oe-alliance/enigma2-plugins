@@ -379,6 +379,7 @@ permanenttimeshift/po/Makefile
 permanenttimeshift/images/Makefile
 permanenttimeshift/src/Makefile
 permanenttimeshift/src/eitsave/Makefile
+permanenttimeshift/src/createapscfiles/Makefile
 
 pipservicerelation/Makefile
 pipservicerelation/src/Makefile
