@@ -36,18 +36,18 @@ class MountAgainCheckPoller:
 		isPlaying = ""
 		try:
 			service = self.session.nav.getCurrentlyPlayingServiceReference()
-			isPlaying=service.toString()
+			isPlaying = service.toString()
+			if not self.session.nav.RecordTimer.isRecording() and not isPlaying.startswith('1:0:0:0:0:0:0:0:0:0:'):
+				print '[Networkbrowser MountAgain] Mounting network shares...'
+				task = Components.Task.PythonTask(job, _("Mounting network shares..."))
+				task.work = self.JobEpgCache
+				task.weighting = 1
+			elif self.session.nav.RecordTimer.isRecording():
+				print '[Networkbrowser MountAgain] Skipping, as recording is in place.'
+			elif isPlaying.startswith('1:0:0:0:0:0:0:0:0:0:'):
+				print '[Networkbrowser MountAgain] Skipping, as watching a movie file is in place.'
 		except:
 			pass
-		if not self.session.nav.RecordTimer.isRecording() and not isPlaying.startswith('1:0:0:0:0:0:0:0:0:0:'):
-			print '[Networkbrowser MountAgain] Mounting network shares...'
-			task = Components.Task.PythonTask(job, _("Mounting network shares..."))
-			task.work = self.JobEpgCache
-			task.weighting = 1
-		elif self.session.nav.RecordTimer.isRecording():
-			print '[Networkbrowser MountAgain] Skipping, as recording is in place.'
-		elif isPlaying.startswith('1:0:0:0:0:0:0:0:0:0:'):
-			print '[Networkbrowser MountAgain] Skipping, as watching a movie file is in place.'
 		task = Components.Task.PythonTask(job, _("Adding schedule..."))
 		task.work = self.JobSched
 		task.weighting = 1
