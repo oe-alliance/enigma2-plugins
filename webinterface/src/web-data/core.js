@@ -150,6 +150,10 @@ var Services = Class.create(Controller, {
 		this.cachedServiceElements = null;
 	},
 	
+	zap: function(sRef){
+		this.model.zap({'sRef' : sRef});
+	},
+	
 	load: function(sRef){
 		this.model.load({'sRef' : sRef});
 	},
@@ -158,8 +162,8 @@ var Services = Class.create(Controller, {
 		this.model.getNowNext();
 	},
 	
-	getSubServices: function(){
-		this.model.getSubServices();
+	getSubservices: function(){
+		this.model.getSubservices();
 	},
 	
 	loadAllTv: function(){
@@ -421,7 +425,8 @@ var E2WebCore = Class.create({
 
 			this.set('notification', "<div>"+text+"</div>");
 			notif.appear({duration : 0.5, to: 0.9 });
-			this.hideNotifierTimeout = setTimeout(hideNotifier, 10000);
+			var me = this;
+			this.hideNotifierTimeout = setTimeout(me.hideNotifier.bind(this), 10000);
 		}
 	},
 	
@@ -436,6 +441,34 @@ var E2WebCore = Class.create({
 		target = $(targetElement);
 		if(target != null){
 			target.update( getAjaxLoad() );
+		}
+	},
+	
+	messageBox: function(message){
+		alert(message);
+	},
+	
+	popUpBlockerHint: function(){
+		if(!this.popUpBlockerHinted){
+			this.popUpBlockerHinted = true;
+			this.messageBox("Please disable your Popup-Blocker for enigma2 WebControl to work flawlessly!");
+
+		}
+	},
+	
+	setWindowContent: function(window, html){
+		window.document.write(html);
+		window.document.close();
+	},
+	
+	popup: function(title, html, width, height, x, y){
+		try {
+			var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height);		
+			this.setWindowContent(popup, html);
+			return popup;
+		} catch(e){
+			this.popUpBlockerHint();
+			return "";
 		}
 	},
 	
@@ -462,7 +495,8 @@ var E2WebCore = Class.create({
 	startUpdateBouquetItemsPoller: function(){
 		debug("[startUpdateBouquetItemsPoller] called");
 		clearInterval(updateBouquetItemsPoller);
-		updateBouquetItemsPoller = setInterval(this.updateItemsLazy, userprefs.data.updateBouquetInterval);
+		var me = this;
+		updateBouquetItemsPoller = setInterval(me.updateItemsLazy.bind(this), userprefs.data.updateBouquetInterval);
 	},
 	
 	stopUpdateBouquetItemsPoller: function(){
@@ -576,9 +610,10 @@ var E2WebCore = Class.create({
 								window.location == element.href;
 								return;
 							}
-						} else if(curHost == newHost){
+						} else {
 							element.href = window.location;
 						}
+						return false;
 					}
 				}
 			}.bind(this)
@@ -603,6 +638,7 @@ var E2WebCore = Class.create({
 				'click',
 				function(event, element){
 					$('epgSearch').value = '';
+					return false;
 				}.bind(this)
 		);
 		
@@ -612,6 +648,7 @@ var E2WebCore = Class.create({
 			'a.volume',
 			function(event, element){
 				this.volume.set(element.readAttribute('data-volume'));
+				return false;
 			}.bind(this)
 		);
 		
@@ -623,21 +660,29 @@ var E2WebCore = Class.create({
 			'click', 
 			'a.sListSLink', 
 			function(event, element){
+				//FIXME
+				element.href = '#';				
 				this.services.zap(unescape(element.id));
+				return false;
 			}.bind(this)
 		);
 		content.on(
 			'click', 
 			'a.sListServiceEpg', 
 			function(event, element){
+				//FIXME
+				element.href = '#';
 				var ref = unescape( element.readAttribute('data-servicereference') );
 				this.epg.load(ref);
+				return false;
 			}.bind(this)
 		);
 		content.on(
 			'click', 
-			'a.sListEPG',
+			'a.sListExtEpg',
 			function(event, element){
+				//FIXME
+				element.href = '#';
 				var target = $(element.readAttribute('data-target_id'));
 				if(target){
 					if(target.visible()){
@@ -646,14 +691,18 @@ var E2WebCore = Class.create({
 						target.show();
 					}
 				}
-			}
+				return false;
+			}.bind(this)
 		);
 		//Movielist
 		content.on(
 			'click', 
 			'a.mListDelete', 
 			function(event, element){
+				//FIXME
+				element.href = '#';				
 				this.movies.del(element);
+				return false;
 			}.bind(this)
 		);
 		//Timerlist
@@ -661,21 +710,30 @@ var E2WebCore = Class.create({
 			'click', 
 			'a.tListDelete', 
 			function(event, element){
+				//FIXME
+				element.href = '#';				
 				this.timers.del(element);
+				return false;
 			}.bind(this)
 		);
 		content.on(
 			'click', 
 			'a.tListToggleDisabled', 
 			function(event, element){
+				//FIXME
+				element.href = '#';
 				this.timers.toggleDisabled(element);
+				return false;
 			}.bind(this)
 		);
 		content.on(
 			'click', 
 			'a.tListEdit', 
 			function(event, element){
+				//FIXME
+				element.href = '#';
 				this.timers.edit(element);
+				return false;
 			}.bind(this)
 		);
 

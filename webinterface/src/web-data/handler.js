@@ -201,12 +201,9 @@ var ServiceListHandler = Class.create(AbstractContentHandler, {
 	 * Parameters:
 	 * @servicereference - the (unescaped) reference to the service that should be shown
 	 */
-	zap: function(ref){
-		this.provider.simpleResultQuery(URL.zap, {sRef : ref}, this.simpleResultCallback.bind(this));
-	
-		//TODO replace this
-		setTimeout(updateItemsLazy, 7000); //reload epg and subservices
-		setTimeout(updateItems, 3000);
+	zap: function(parms){
+		this.provider.simpleResultQuery(URL.zap, parms, this.simpleResultCallback.bind(this));
+		core.updateItemsLazy();
 	},
 });
 
@@ -225,16 +222,16 @@ var EpgListHandler = Class.create(AbstractContentHandler,{
 	
 	show : function(data){
 		this.data = data;
-		fetchTpl(this.tpl, this.showEpg.bind(this));		
+		templateEngine.fetch(this.tpl, this.showEpg.bind(this));		
 	},
 	
 	showEpg: function(){
-		var html = templates[this.tpl].process(this.data);
+		var html = templateEngine.templates[this.tpl].process(this.data);
 
 		if (!this.window.closed && this.window.location) {
-			setWindowContent(this.window, html);
+			core.setWindowContent(this.window, html);
 		} else {
-			this.window = openPopup("EPG", html, 900, 500);
+			this.window = core.popup("EPG", html, 900, 500);
 		}
 	}
 });
