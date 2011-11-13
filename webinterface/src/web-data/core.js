@@ -378,6 +378,9 @@ var E2WebCore = Class.create({
 			'timer': {
 				//TODO add & use controller für timer-stuff
 				'create' : this.timers.create.bind(this.timers), //TODO create Timer
+				'edit' : false,
+				'delete' : false,
+				'toggle' : false,
 			},
 			'control': {
 				//TODO add & use controller for Boxcontrols
@@ -409,7 +412,7 @@ var E2WebCore = Class.create({
 
 		if(notif !== null){
 			//clear possibly existing hideNotifier timeout of a previous notfication
-			clearTimeout(hideNotifierTimeout);
+			clearTimeout(this.hideNotifierTimeout);
 			if(state === false){
 				notif.style.background = "#C00";
 			} else {
@@ -467,29 +470,27 @@ var E2WebCore = Class.create({
 		clearInterval(this.updateBouquetItemsPoller);
 	},
 	
-	onHashChanged: function(){
+	onHashChanged: function(isReload){
 		var hash = hashListener.getHash();		
 		var parts = hash.split("/");
-		var isReload = false;
-		if(parts.length > 0){
-			if(parts[parts.length - 1] == "reload"){
-				parts.pop();
-				isReload = true;
-			}
-		}
+	
 		var len = parts.length;
 		if(len >= 2){
 			var mode = parts[1];
-			if(mode != this.mode || isReload){
+			if(mode != this.mode || isReload || ( len <= 2 && this.submode != '') ){
 				this.switchMode(mode);
 				this.subMode = '';
 			}
 			this.mode = mode;
-			if(len >2){
+			if(len > 2){
 				var subMode = parts[2];
 				if(subMode != this.subMode || isReload){
 					this.subMode = subMode;
-					this.navlut[this.mode][this.subMode]();
+					if(!this.navlut[this.mode][this.subMode]){
+						return;
+					} else {
+						this.navlut[this.mode][this.subMode]();
+					}
 				}				
 				if(len > 3){
 					switch(this.mode){
@@ -502,8 +503,6 @@ var E2WebCore = Class.create({
 					}
 				}
 			}
-			if(isReload)
-				hashListener.setHash(parts.join("/"));
 		}
 	},
 	
@@ -558,6 +557,32 @@ var E2WebCore = Class.create({
 	},
 	
 	registerEvents: function(){
+		//Hash-Reload-Fix
+		//HACK THIS IS EVIL VOODOO, DON'T TRY THIS AT HOME!
+		document.on(
+			'click',
+			'a',
+			function(event, element){ 
+				var parts = element.href.split('#');
+				var curHost = window.location.href.split('#')[0];
+				//Don't do this crazy stuff when the target is another host!
+				if(curHost == parts[0]){
+					if (parts.length > 1){
+						if(parts[1] != ''){
+							if(window.location == element.href){
+								this.onHashChanged(true);
+								return;
+							}else{
+								window.location == element.href;
+								return;
+							}
+						} else if(curHost == newHost){
+							element.href = window.location;
+						}
+					}
+				}
+			}.bind(this)
+		);
 		//EPG-Search
 		$('epgSearchForm').on(
 			'submit',
@@ -643,7 +668,7 @@ var E2WebCore = Class.create({
 			'click', 
 			'a.tListToggleDisabled', 
 			function(event, element){
-				this.timers.toogleDisabled(element);
+				this.timers.toggleDisabled(element);
 			}.bind(this)
 		);
 		content.on(

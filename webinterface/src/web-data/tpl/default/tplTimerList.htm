@@ -25,19 +25,17 @@
 											data-afterevent="${t.afterevent}"
 											data-disabled="${t.disabled}">
 
-													
 											<td colspan="1" rowspan="1" class="tListRepeat">${t.repeatedReadable}</td>
 											<td colspan="1" rowspan="1" class="tListBegin">${t.beginDate}</td>												
 											<td colspan="1" rowspan="1" class="tListType">${t.justplayReadable}</td>						
 											<td colspan="1" rowspan="2" class="tListOption">
-												<a href="#!/timer" class="tListDelete">
-													<img src="/web-data/img/delete.png" title="Delete timer ${t.title}" border="0"
-														onclick="delTimer('${t.servicereference}','${t.begin}','${t.end}','${t.servicename}','${t.title}','${t.description}',incomingTimerDelResult);">
+												<a href="#" class="tListDelete">
+													<img src="/web-data/img/delete.png" title="Delete timer ${t.title}" border="0">
 												</a>
-												<a href="#!/timer" class="tListToggleDisabled">
-													<img src="/web-data/img/${t.onOff}.png" title="${t.enDis} ${t.title}" border="0" onclick="sendToggleTimerDisable('${t.justplay}','${t.begin}','${t.end}','${t.repeated}','${t.servicereference}','${t.title}','${t.description}','${t.dirname}','${t.tags}','${t.afterevent}','${t.disabled}' );">
+												<a href="#" class="tListToggleDisabled">
+													<img src="/web-data/img/${t.onOff}.png" title="${t.enDis} ${t.title}" border="0">
 												</a>
-												<a href="#!/timer" class="tListEdit">
+												<a href="#" class="tListEdit">
 													<img src="/web-data/img/edit.png" title="Edit timer ${t.title}" border="0" />
 												</a>
 											</td>	
