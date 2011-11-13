@@ -309,7 +309,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 				
 			else:
 				config.plugins.merlinEpgCenter.lastUsedTab.value = self.currentMode
-			config.plugins.merlinEpgCenter.save()
+		config.plugins.merlinEpgCenter.save()
 			
 	def resume(self):
 		self.session.nav.RecordTimer.on_state_change.append(self.onStateChange)
@@ -329,7 +329,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 				self.currentMode = 0
 		self.setMode()
 		
-		if config.plugins.merlinEpgCenter.rememberLastTab.value and (self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME):
+		if config.plugins.merlinEpgCenter.selectRunningService.value and (self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME):
 			self.setSelectionToRunningService()
 				
 	def initEpgBaseTab(self):
@@ -1481,7 +1481,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		EpgCenterList.bouquetList = self.bouquetList
 		EpgCenterList.currentBouquetIndex = self.currentBouquetIndex
 		sRef = playingSref.toCompareString()
-		self.lastMultiEpgIndex = self["list"].bouquetServices[self.currentBouquetIndex].index(sRef)
+		if sRef in self["list"].bouquetServices[self.currentBouquetIndex]:
+			self.lastMultiEpgIndex = self["list"].bouquetServices[self.currentBouquetIndex].index(sRef)
 		
 		if self.currentMode == SINGLE_EPG:
 			if sRef in self["list"].bouquetServices[self.currentBouquetIndex]:
