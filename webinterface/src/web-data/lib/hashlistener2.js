@@ -18,10 +18,11 @@
  *
  * **********************************************************
  * @author Marcelo Eden
+ * @coauthor Stephan Reichholf
  * @copyright (c) 2000 - 2009 OS!Schools
  * @license BSD
  * @created 18/03/2009
- * @updated 20/03/2009
+ * @updated 15/11/2011
  */
 
 var hashListener = {
@@ -78,7 +79,11 @@ var hashListener = {
 	 * Get Hash
 	 */
 	getHash: function () {
-		return location.hash;
+		//firefox escapes the hash when we read it, so we have to extract it from location.href ourselves
+		var parts = location.href.split("#");
+		if(parts.length > 1)
+			return parts[1];
+		return "";
 	},
 		
     /** Important!
