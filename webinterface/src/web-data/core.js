@@ -146,21 +146,21 @@ var EPG = Class.create(Controller, {
 					'click',
 					'a.eListAddTimer',
 					function(event, element){
-						parent.console.log('eListAddTimer');
+						parent.debug('eListAddTimer');
 					}
 				);
 				doc.on(
 					'click',
 					'a.eListZapTimer',
 					function(event, element){
-						parent.console.log('eListZapTimer');
+						parent.debug('eListZapTimer');
 					}
 				);
 				doc.on(
 					'click',
 					'a.eListEditTimer',
 					function(event, element){
-						parent.console.log('eListEditTimer');
+						parent.debug('eListEditTimer');
 					}
 				);
 			}
@@ -170,13 +170,54 @@ var EPG = Class.create(Controller, {
 	}
 });
 
+var Power = Class.create({
+	STATES: {'toggle' : 0, 'deep' : 1, 'reboot' : 2, 'gui' : 3},
+	
+	initialize: function(){
+		this.provider = new PowerstateProvider(this.onLoadFinished.bind(this));
+		this.callbacks = [];
+		this.isLoading = false;
+		this.isStandby = false;
+	},
+	
+	load: function(params){
+		this.isLoading = true;
+		this.provider.load(params);
+	},
+	
+	onLoadFinished:function (isStandby){
+		this.isStandby = isStandby;
+		this.isLoading = false;
+		var len = this.callbacks.length;
+		for(var i = 0; i < len; i++){
+			callback = this.callbacks.pop();
+			callback(this.isStandby);
+		}
+	},
+	
+	isStandby: function(callback){
+		this.callbacks[this.callbacks.length] = callback;
+		if(!this.sLoading){
+			this.load({});
+		}
+	},
+	
+	set: function(newstate, callback){
+		this.callbacks[this.callbacks.length] = callback;
+		this.load({'newstate' : this.STATES[newstate]});
+	}
+});
+
 var LocationsAndTags = Class.create({
 	initialize: function(){
 		this.currentLocation = '';
 		this.locations = [];
 		this.tags = [];
-		this.isLocationsReady = false;
+		this.isCurrentLocationsLoading = false;
 		this.isCurrentLocationReady = false;
+		this.isLocationsLoading = false;
+		this.isLocationsReady = false;
+		this.isTagsLoading = false;
 		this.isTagsReady = false;
 		this.curLocCallbacks = [];
 		this.locCallbacks = [];
@@ -192,14 +233,18 @@ var LocationsAndTags = Class.create({
 		if(this.isCurrentLocationReady){
 			callback(this.currentLocation);
 		} else {
-			this.curlocprovider.load({});
 			this.curLocCallbacks[this.curLocCallbacks.length] = callback;
+			if(!this.isCurrentLocationLoading){
+				this.curlocprovider.load({});
+				this.isCurrentLocationLoading = true;
+			}
 		}
 	},
 	
 	onCurrentLocationAvailable: function(currentLocation){
 		debug("[LocationsAndTags].onCurrentLocationAvailable");
 		this.isCurrentLocationReady = true;
+		this.isCurrentLocationLoading = false;
 		this.currentLocation = currentLocation;
 		var len = this.curLocCallbacks.length;
 		for(var i = 0; i < len; i++){
@@ -213,14 +258,18 @@ var LocationsAndTags = Class.create({
 		if(this.isLocationsReady){
 			callback(this.locations);
 		} else {
-			this.locprovider.load({});
 			this.locCallbacks[this.locCallbacks.length] = callback;
+			if(!this.isLocationsLoading){
+				this.locprovider.load({});
+				this.isLocationsLoading = true;
+			}
 		}
 	},
 	
 	onLocationsAvailable: function(locations){
 		debug("[LocationsAndTags].onLocationsAvailable");
 		this.isLocationsReady = true;
+		this.isLocationsLoading = false;
 		this.locations = locations.getList();
 		var len = this.locCallbacks.length;
 		for(var i = 0; i < len; i++){
@@ -234,14 +283,18 @@ var LocationsAndTags = Class.create({
 		if(this.isTagsReady){
 			callback(this.tags);
 		} else {
-			this.tagprovider.load({});
 			this.tagCallbacks[this.tagCallbacks.length] = callback;
+			if(!this.isTagsLoading){
+				this.tagprovider.load({});
+				this.isTagsLoading = true;
+			}
 		}
 	},
 	
 	onTagsAvailable: function(tags){
 		debug("[LocationsAndTags].onTagsAvailable");
 		this.isTagsReady = true;
+		this.isTagsLoading = false;
 		this.tags = tags.getList();
 		var len = this.tagCallbacks.length;
 		for(var i = 0; i < len; i++){
@@ -255,10 +308,13 @@ var LocationsAndTags = Class.create({
 		if(this.isCurrentLocationReady && this.isLocationsReady && this.isTagsReady){
 			callback(this.currentLocation, this.locations, this.tags);
 		} else {
-			this.curlocprovider.load({});
-			this.locprovider.load({});
-			this.tagprovider.load({});
 			this.locTagCallbacks[this.locTagCallbacks.length] = callback;
+			if(!this.isCurrentLocationLoading)
+				this.curlocprovider.load({});
+			if(!this.isLocationsLoading)
+				this.locprovider.load({});
+			if(!this.isTagsLoading)
+				this.tagprovider.load({});
 		}
 	},
 	
@@ -286,11 +342,7 @@ var Movies = Class.create(Controller, {
 				hashListener.setHash(hash);
 			};
 			if(core.currentLocation == ""){ //wait for currentLocation to be set;
-				if(!core.lt.isCurrentLocationReady){
-					core.lt.curLocCallbacks[core.lt.curLocCallbacks.length] = sethash;
-				} else {
-					core.lt.getCurrentLocation(sethash);
-				}
+				core.lt.getCurrentLocation(sethash);
 			} else {
 				sethash(core.currentLocation);
 			}
@@ -575,7 +627,8 @@ var E2WebCore = Class.create({
 		this.screenshots = new Screenshots('contentMain');
 		this.simplepages = new SimplePages('contentMain');
 		this.lt = new LocationsAndTags();
-		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
+		this.power = new Power();
+		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));		
 		
 		this.navlut = {
 			'tv': {
@@ -592,7 +645,6 @@ var E2WebCore = Class.create({
 				'filter' : function(){} //DON'T TOUCH THIS!
 			},
 			'timer': {
-				//TODO add & use controller für timer-stuff
 				'create' : this.timers.create.bind(this.timers), //TODO create Timer
 				'edit' : false,
 				'delete' : false,
@@ -608,7 +660,6 @@ var E2WebCore = Class.create({
 				'videoshot' : this.screenshots.shootVideo.bind(this.screenshots)
 			},
 			'extras': {
-				//TODO add & use controller for Extras
 				'about' : this.simplepages.loadAbout.bind(this.simplepages),
 				'deviceinfo' : this.simplepages.loadDeviceInfo.bind(this.simplepages),
 				'gears' : this.simplepages.loadGears.bind(this.simplepages),
@@ -803,8 +854,6 @@ var E2WebCore = Class.create({
 		}
 		this.updateItems();
 		this.startUpdateCurrentPoller();
-//		TODO initMovieList();
-
 	},
 	
 	registerEvents: function(){
@@ -863,11 +912,10 @@ var E2WebCore = Class.create({
 			'change',
 			'.mNavLoc',
 			function(event, element){
-				console.log($("locations").value);
-				console.log($("tags").value);
+				debug($("locations").value);
+				debug($("tags").value);
 				var hash = [this.getBaseHash(), encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
 				hashListener.setHash(hash);
-//				this.movies.load($("locations").value, $("tags").value);
 			}.bind(this)
 		);
 		
@@ -875,8 +923,8 @@ var E2WebCore = Class.create({
 			'change',
 			'.mNavTags',
 			function(event, element){
-				console.log($("locations").value);
-				console.log($("tags").value);
+				debug($("locations").value);
+				debug($("tags").value);
 				var hash = [this.getBaseHash(), encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
 				hashListener.setHash(hash);
 			}.bind(this)
@@ -975,6 +1023,20 @@ var E2WebCore = Class.create({
 				return false;
 			}.bind(this)
 		);
+		//Powerstate
+		content.on(
+			'click',
+			'.powerState',
+			function(event, element){
+				var cb = function(isStandby){
+					var text = "Device is now Running";
+					if(isStandby)
+						text = "Device is now in Standby";
+					this.notify(text, true);
+				}.bind(this);
+				this.power.set(element.readAttribute("data-state"), cb);
+			}.bind(this)
+		);
 		//Settings
 		content.on(
 			'click',
@@ -982,7 +1044,7 @@ var E2WebCore = Class.create({
 			function(event, element){
 				this.saveSettings();
 			}.bind(this)
-		);	
+		);
 	},
 
 	/*
@@ -1053,7 +1115,7 @@ var E2WebCore = Class.create({
 	
 		case "mediaplayer":
 			//TODO this.loadContentDynamic(loadMediaPlayer, 'MediaPlayer');
-			console.log("mediaplayer not implemented");
+			debug("mediaplayer not implemented");
 			break;
 	
 		case "control":

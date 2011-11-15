@@ -283,7 +283,7 @@ var CurrentLocationProvider = Class.create(AbstractContentProvider, {
 	}
 });
 
-var PowerStateProvider = Class.create(AbstractContentProvider, {
+var PowerstateProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.powerstate, showFnc);
 	},
