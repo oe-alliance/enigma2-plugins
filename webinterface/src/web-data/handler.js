@@ -77,9 +77,7 @@ var AbstractContentHandler = Class.create({
 		this.notify(result.getStateText(), result.getState());
 	},
 	
-	registerEvents : function(){
-		debug('[AbstractContentHandler] WARNING: registerEvents not implemented in derived class!');
-	},
+	registerEvents : function(){},
 	
 	/**
 	 * finished
@@ -111,7 +109,7 @@ var DeviceInfoHandler = Class.create(AbstractContentHandler,{
 	initialize: function($super, target){
 		$super('tplDeviceInfo', target);
 		this.provider = new DeviceInfoProvider(this.show.bind(this));
-	},
+	}
 });
 
 var SimplePageHandler = Class.create(AbstractContentHandler,{
@@ -133,21 +131,11 @@ var BouquetListHandler = Class.create(AbstractContentHandler, {
 		this.targetMain = targetMain;
 		this.initServiceList = false;
 	},
-	
-	init: function(params, controller){
-		this.serviceController = controller;
-		this.initServiceList = true;
-		this.load(params);
-	},
-	
+		
 	show : function(data){
 		this.data = data;
 		if($(this.target) != null && $(this.target != undefined)){
 			templateEngine.process(this.tpl, data, this.target,  this.finished.bind(this));
-			if(this.initServiceList){
-				this.serviceController.load(decodeURIComponent(data.bouquets[0].servicereference));
-				this.initServiceList = false;
-			}
 		} else {
 			templateEngine.process(					
 					'tplBouquetsAndServices', 
@@ -158,7 +146,7 @@ var BouquetListHandler = Class.create(AbstractContentHandler, {
 					}.bind(this)
 			);
 		}
-	},
+	}
 });
 
 var CurrentHandler  = Class.create(AbstractContentHandler, {
@@ -203,8 +191,14 @@ var ServiceListHandler = Class.create(AbstractContentHandler, {
 	 */
 	zap: function(parms){
 		this.provider.simpleResultQuery(URL.zap, parms, this.simpleResultCallback.bind(this));
-		core.updateItemsLazy();
 	},
+	
+	showSimpleResult: function($super, result){
+		if(result.getState()){
+			core.updateItemsLazy();
+		}
+		$super(result);
+	}
 });
 
 var EpgListHandler = Class.create(AbstractContentHandler,{
@@ -233,6 +227,7 @@ var EpgListHandler = Class.create(AbstractContentHandler,{
 		} else {
 			this.window = core.popup("EPG", html, 900, 500);
 		}
+		this.finished();
 	}
 });
 
@@ -325,7 +320,7 @@ var MovieListHandler  = Class.create(AbstractContentHandler, {
 				servicereference : unescape(parent.readAttribute('data-servicereference')),
 				servicename : unescape(parent.readAttribute('data-servicename')),
 				title : unescape(parent.readAttribute('data-title')),
-				description : unescape(parent.readAttribute('data-description')),
+				description : unescape(parent.readAttribute('data-description'))
 		};
 		
 		return m;
@@ -371,12 +366,23 @@ var MovieListHandler  = Class.create(AbstractContentHandler, {
 	}
 });
 
+var MovieNavHandler = Class.create(AbstractContentHandler,{
+	initialize: function($super, target){
+		$super('tplNavMovies', target);
+	},
+	
+	load: function(locations, tags){
+		data = { 'locations' : locations, 'tags' : tags};
+		this.show(data);
+	}
+});
+
 var ScreenshotHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplGrab', target);
 		this.provider = new ScreenshotProvider(this.show.bind(this));
 		this.ajaxload = true;
-	},
+	}
 });
 
 var TimerListHandler  = Class.create(AbstractContentHandler, {
@@ -464,7 +470,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * Parameters:
 	 * @element - the html element calling the load function ( onclick="TimerProvider.load(this)" )
 	 */
-	load : function(element){
+	load: function(element){
 		var t = this.getData(element);
 			
 		var begin = new Date(t.begin * 1000);
@@ -664,9 +670,3 @@ var VolumeHandler  = Class.create(AbstractContentHandler, {
 		this.ajaxload = false;
 	}	
 });
-//create required Instances
-//var serviceListHandler = new ServiceListHandler('contentServices');
-//var epgListHandler = new EpgListHandler();
-//var movieListHandler = new MovieListHandler('contentMain');
-//var timerListHandler = new TimerListHandler('contentMain');
-//var timerHandler = new TimerHandler('contentMain');

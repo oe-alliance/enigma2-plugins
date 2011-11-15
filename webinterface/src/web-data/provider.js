@@ -191,7 +191,7 @@ var ServiceListProvider = Class.create(AbstractContentProvider, {
 	 * @target: the html target id
 	 */
 	initialize: function($super, showFnc){
-		$super(URL.getservices, showFnc );
+		$super(URL.getservices, showFnc);
 	},
 	
 	/**
@@ -230,7 +230,7 @@ var CurrentProvider = Class.create(AbstractContentProvider, {
 	 * @target: the html target id
 	 */
 	initialize: function($super, showFnc){
-		$super(URL.getcurrent, showFnc );
+		$super(URL.getcurrent, showFnc);
 	},
 	
 	/**
@@ -251,11 +251,45 @@ var CurrentProvider = Class.create(AbstractContentProvider, {
 
 var DeviceInfoProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
-		$super(URL.deviceinfo, showFnc );
+		$super(URL.deviceinfo, showFnc);
 	},
 	
 	renderXML: function(xml){
 		var data = new DeviceInfo(xml);
+		return data;
+	}
+});
+
+
+var LocationProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.getlocations, showFnc);
+	},
+	
+	renderXML: function(xml){
+		var data = new SimpleXMLList(xml, 'e2location');
+		return data;
+	}
+});
+
+var CurrentLocationProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.getcurrlocation, showFnc);
+	},
+	
+	renderXML: function(xml){
+		var data = new SimpleXMLList(xml, 'e2location').getList()[0];
+		return data;
+	}
+});
+
+var TagProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.gettags, showFnc);
+	},
+	
+	renderXML: function(xml){
+		var data = new SimpleXMLList(xml, 'e2tag');
 		return data;
 	}
 });
@@ -267,7 +301,7 @@ var ServiceEpgListProvider = Class.create(AbstractContentProvider, {
 	 * @target: the html target id
 	 */
 	initialize: function($super, showFnc){
-		$super(URL.epgservice, showFnc );
+		$super(URL.epgservice, showFnc);
 	},
 
 	/**
@@ -435,8 +469,7 @@ var ScreenshotProvider = Class.create(AbstractContentProvider, {
 	callback: function(transport){
 		var data = { img : { src : this.buffer.src } };
 		this.show(data);
-	},
-		
+	}	
 });
 
 var TimerListProvider = Class.create(AbstractContentProvider, {

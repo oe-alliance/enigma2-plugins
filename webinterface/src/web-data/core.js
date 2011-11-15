@@ -1,5 +1,33 @@
 //General Helpers
-function debug(text){}
+function toOptionList(lst, selected) {
+	var list = Array();
+	var i = 0;
+	var found = false;
+
+	for (i = 0; i < lst.length; i++) {
+		if (lst[i] == selected) {
+			found = true;
+		}
+	}
+
+	if (!found) {
+		lst = [ selected ].concat(lst);
+	}
+
+	for (i = 0; i < lst.length; i++) {
+		list[i] = {
+				'value': lst[i],
+				'txt': lst[i],
+				'selected': (lst[i] == selected ? "selected" : " ")};
+	}
+
+	return list;
+}
+
+function debug(item){
+	if(userprefs.data.debug)
+		console.log(item);
+}
 
 function parseNr(num) {
 	if(isNaN(num)){
@@ -21,15 +49,18 @@ var Controller = Class.create({
 		this.eventsregistered = true;
 	},
 	
-	onFinished: function(){},
+	onFinished: function(){}
 });
 
 var Bouquets = Class.create(Controller, {
-	init: function(serviceController){
-		this.model.init({ 'sRef' : bouquetsTv }, serviceController);
+	initialize: function($super, targetBouquets, targetMain){
+		$super(new BouquetListHandler(targetBouquets, targetMain));
+		this.loadFirstOnFinished = false;
 	},
-
-	load: function(sRef){
+	
+	load: function(sRef, loadFirstOnFinished){
+		if(loadFirstOnFinished)
+			this.loadFirstOnFinished = true;
 		this.model.load( {'sRef' : sRef} );
 	},
 	
@@ -59,14 +90,20 @@ var Bouquets = Class.create(Controller, {
 	
 	onFinished: function(){
 		var bouquet = this.model.data.bouquets[0];
-		if(bouquet)
+		if(bouquet){
 			setContentHd(bouquet.servicename);
+			if(this.loadFirstOnFinished){
+				this.loadFirstOnFinished = false; 
+				hash = core.getBaseHash() + '/' + bouquet.servicereference;
+				hashListener.setHash(hash);
+			}
+		}
 	}
 });
 
 var Current = Class.create(Controller, {
-	initialize: function($super, model){
-		$super(model);
+	initialize: function($super, target){
+		$super(new CurrentHandler(target));
 		this.display = 'none';
 		this.model.onFinished[this.model.onFinished.length] = this.restoreDisplayStyle.bind(this);
 	},
@@ -88,6 +125,10 @@ var Current = Class.create(Controller, {
 });
 
 var EPG = Class.create(Controller, {
+	initialize: function($super){
+		$super(new EpgListHandler());
+	},
+	
 	load: function(sRef){
 		this.model.load({'sRef' : sRef});
 	},
@@ -95,22 +136,179 @@ var EPG = Class.create(Controller, {
 	search: function(needle){
 		this.model.search({'search' : needle});
 	},
+	
+	registerEvents: function(){
+		if (!this.model.window.closed && this.model.window.location){
+			if(!this.eventsregistered){
+				eventsregistered = true;
+				doc = window.document;
+				doc.on(
+					'click',
+					'a.eListAddTimer',
+					function(event, element){
+						parent.console.log('eListAddTimer');
+					}
+				);
+				doc.on(
+					'click',
+					'a.eListZapTimer',
+					function(event, element){
+						parent.console.log('eListZapTimer');
+					}
+				);
+				doc.on(
+					'click',
+					'a.eListEditTimer',
+					function(event, element){
+						parent.console.log('eListEditTimer');
+					}
+				);
+			}
+		} else {
+			this.eventsregistered = false;
+		}
+	}
+});
+
+var LocationsAndTags = Class.create({
+	initialize: function(){
+		this.currentLocation = '';
+		this.locations = [];
+		this.tags = [];
+		this.isLocationsReady = false;
+		this.isCurrentLocationReady = false;
+		this.isTagsReady = false;
+		this.curLocCallbacks = [];
+		this.locCallbacks = [];
+		this.tagCallbacks = [];
+		this.locTagCallbacks = [];
+		
+		this.curlocprovider = new CurrentLocationProvider(this.onCurrentLocationAvailable.bind(this));
+		this.locprovider = new LocationProvider(this.onLocationsAvailable.bind(this));		
+		this.tagprovider = new TagProvider(this.onTagsAvailable.bind(this));
+	},
+	
+	getCurrentLocation: function(callback){
+		if(this.isCurrentLocationReady){
+			callback(this.currentLocation);
+		} else {
+			this.curlocprovider.load({});
+			this.curLocCallbacks[this.curLocCallbacks.length] = callback;
+		}
+	},
+	
+	onCurrentLocationAvailable: function(currentLocation){
+		debug("[LocationsAndTags].onCurrentLocationAvailable");
+		this.isCurrentLocationReady = true;
+		this.currentLocation = currentLocation;
+		var len = this.curLocCallbacks.length;
+		for(var i = 0; i < len; i++){
+			callback = this.curLocCallbacks.pop();
+			callback(this.currentLocation);
+		}
+		this.onLocationsOrTagsAvailable();
+	},
+	
+	getLocations: function(callback){
+		if(this.isLocationsReady){
+			callback(this.locations);
+		} else {
+			this.locprovider.load({});
+			this.locCallbacks[this.locCallbacks.length] = callback;
+		}
+	},
+	
+	onLocationsAvailable: function(locations){
+		debug("[LocationsAndTags].onLocationsAvailable");
+		this.isLocationsReady = true;
+		this.locations = locations.getList();
+		var len = this.locCallbacks.length;
+		for(var i = 0; i < len; i++){
+			callback = this.locCallbacks.pop();
+			callback(this.locations);
+		}
+		this.onLocationsOrTagsAvailable();
+	},
+	
+	getTags: function(callback){
+		if(this.isTagsReady){
+			callback(this.tags);
+		} else {
+			this.tagprovider.load({});
+			this.tagCallbacks[this.tagCallbacks.length] = callback;
+		}
+	},
+	
+	onTagsAvailable: function(tags){
+		debug("[LocationsAndTags].onTagsAvailable");
+		this.isTagsReady = true;
+		this.tags = tags.getList();
+		var len = this.tagCallbacks.length;
+		for(var i = 0; i < len; i++){
+			callback = this.tagCallbacks.pop();
+			callback(this.tags);
+		}
+		this.onLocationsOrTagsAvailable();
+	},
+	
+	getLocationsAndTags: function(callback){
+		if(this.isCurrentLocationReady && this.isLocationsReady && this.isTagsReady){
+			callback(this.currentLocation, this.locations, this.tags);
+		} else {
+			this.curlocprovider.load({});
+			this.locprovider.load({});
+			this.tagprovider.load({});
+			this.locTagCallbacks[this.locTagCallbacks.length] = callback;
+		}
+	},
+	
+	onLocationsOrTagsAvailable: function(){
+		if(this.isCurrentLocationReady && this.isLocationsReady && this.isTagsReady){
+			var len = this.locTagCallbacks.length;
+			for(var i = 0; i < len; i++){
+				callback = this.locTagCallbacks.pop();
+				callback(this.currentLocation, this.locations, this.tags);
+			}
+		}
+	}
 });
 
 var Movies = Class.create(Controller, {
-	load: function(){
-		this.model.load({});
+	initialize: function($super, listTarget, navTarget){
+		$super(new MovieListHandler(listTarget));
+		this.navModel = new MovieNavHandler(navTarget);
+	},
+	
+	load: function(location, tag){
+		if(!location)
+			location = '';
+		if(!tag)
+			tag = '';
+				
+		this.model.load({'dirname' : location, 'tag' : tag});
+	},
+	
+	loadNav: function(){
+		core.lt.getLocationsAndTags(this.showNav.bind(this));
+	},
+	
+	showNav: function(currentLocation, locations, tags){
+		this.navModel.load(toOptionList(locations, currentLocation), toOptionList(tags));
 	},
 	
 	del: function(element){
 		this.model.del(element);
-	},
+	}
 });
 
 var Screenshots = Class.create(Controller, {
 	TYPE_OSD : 'o',
 	TYPE_VIDEO : 'v',
 	TYPE_ALL : '',
+	
+	initialize: function($super, target){
+		$super(new ScreenshotHandler(target));
+	},
 	
 	load: function(type){
 		var filename = '/tmp/' + new Date().getTime();
@@ -140,12 +338,12 @@ var Screenshots = Class.create(Controller, {
 	
 	shootAll: function(){
 		this.load(this.TYPE_ALL);
-	},
+	}
 });
 
 var Services = Class.create(Controller, {
-	initialize: function($super, model, epg){
-		$super(model);
+	initialize: function($super, target, epg){
+		$super(new ServiceListHandler(target));
 		this.epg = epg;
 		this.cachedServiceElements = null;
 	},
@@ -223,9 +421,9 @@ var SimplePages = Class.create({
 	PAGE_SETTINGS: 'tplSettings',
 	PAGE_TOOLS: 'tplTools',
 	
-	initialize: function(simpleHandler, deviceInfoHandler){
-		this.simpleHandler = simpleHandler;
-		this.deviceInfoHandler = deviceInfoHandler;
+	initialize: function(target){
+		this.simpleHandler = new SimplePageHandler(target);
+		this.deviceInfoHandler = new DeviceInfoHandler(target);
 	},
 	
 	show: function(tpl, data){
@@ -284,9 +482,9 @@ var SimplePages = Class.create({
 });
 
 var Timers = Class.create({
-	initialize: function(listHandler, timerHandler){
-		this.listHandler = listHandler;
-		this.timerHandler = timerHandler;
+	initialize: function(target){
+		this.listHandler = new TimerListHandler(target);
+		this.timerHandler = new TimerHandler(target);
 	},
 	
 	loadList: function(){
@@ -307,10 +505,14 @@ var Timers = Class.create({
 	
 	del: function(element){
 		//TODO delete
-	},
+	}
 });
 
 var Volume = Class.create(Controller, {
+	initialize: function($super, target){
+		$super(new VolumeHandler(target));
+	},
+	
 	load: function(){
 		this.model.load({});
 	},
@@ -353,38 +555,33 @@ var E2WebCore = Class.create({
 		
 		//create required Instances
 		this.epg = new EPG(new EpgListHandler());
-		this.services = new Services(new ServiceListHandler('contentServices'), this.epg);
-		this.bouquets = new Bouquets(new BouquetListHandler('contentBouquets', 'contentMain'));
-		this.timers = new Timers(
-				new TimerListHandler('contentMain'), 
-				new TimerHandler('contentMain')
-			);
-		this.current = new Current(new CurrentHandler('currentContent'));
-		this.volume = new Volume(new VolumeHandler('navVolume'));
-		this.movies = new Movies(new MovieListHandler('contentMain'));
-		this.screenshots = new Screenshots(new ScreenshotHandler('contentMain'));
-		this.simplepages = new SimplePages(
-				new SimplePageHandler('contentMain'),
-				new DeviceInfoHandler('contentMain')
-			);
+		this.services = new Services('contentServices', this.epg);
+		this.bouquets = new Bouquets('contentBouquets', 'contentMain');
+		this.timers = new Timers('contentMain');
+		this.current = new Current('currentContent');
+		this.volume = new Volume('navVolume');
+		this.movies = new Movies('contentMain', 'navContent');
+		this.screenshots = new Screenshots('contentMain');
+		this.simplepages = new SimplePages('contentMain');
+		this.lt = new LocationsAndTags();
 		
 		this.navlut = {
 			'tv': {
 				'bouquets' : this.bouquets.loadBouquetsTv.bind(this.bouquets), 
 				'provider' : this.bouquets.loadProviderTv.bind(this.bouquets),
-				'all' : this.services.loadAllTv.bind(this.services),
+				'all' : this.services.loadAllTv.bind(this.services)
 				},
 			'radio': {
 				'bouquets' : this.bouquets.loadBouquetsRadio.bind(this.bouquets),
 				'provider' : this.bouquets.loadProviderRadio.bind(this.bouquets),
-				'all' : this.services.loadAllRadio.bind(this.services),
+				'all' : this.services.loadAllRadio.bind(this.services)
 			},
 			'timer': {
 				//TODO add & use controller für timer-stuff
 				'create' : this.timers.create.bind(this.timers), //TODO create Timer
 				'edit' : false,
 				'delete' : false,
-				'toggle' : false,
+				'toggle' : false
 			},
 			'control': {
 				//TODO add & use controller for Boxcontrols
@@ -393,8 +590,7 @@ var E2WebCore = Class.create({
 				'remote' : function(){}, //TODO loadControl
 				'osdshot' : this.screenshots.shootOsd.bind(this.screenshots),
 				'screenshot' : this.screenshots.shootAll.bind(this.screenshots),
-				'videoshot' : this.screenshots.shootVideo.bind(this.screenshots),
-				
+				'videoshot' : this.screenshots.shootVideo.bind(this.screenshots)
 			},
 			'extras': {
 				//TODO add & use controller for Extras
@@ -402,7 +598,7 @@ var E2WebCore = Class.create({
 				'deviceinfo' : this.simplepages.loadDeviceInfo.bind(this.simplepages),
 				'gears' : this.simplepages.loadGears.bind(this.simplepages),
 				'settings' : this.simplepages.loadSettings.bind(this.simplepages),
-				'tools' : this.simplepages.loadTools.bind(this.simplepages),
+				'tools' : this.simplepages.loadTools.bind(this.simplepages)
 			}
 		};
 	},
@@ -511,7 +707,7 @@ var E2WebCore = Class.create({
 		var len = parts.length;
 		if(len >= 2){
 			var mode = parts[1];
-			if(mode != this.mode || isReload || ( len <= 2 && this.submode != '') ){
+			if(mode != this.mode || isReload || ( len <= 2 && this.subMode != '') ){
 				this.switchMode(mode);
 				this.subMode = '';
 			}
@@ -545,13 +741,15 @@ var E2WebCore = Class.create({
 	},
 	
 	loadDefault: function(){
-		this.reloadNav('tplNavTv', 'TeleVision');
-		this.bouquets.init(this.services);
+		debug("[E2WebCore].loadDefault");
+		this.switchMode('tv');
 		this.mode = 'tv';
 		this.subMode = 'bouquets';
+		this.bouquets.load(bouquetsTv, true);
 	},
 
 	run: function(){
+		debug("[E2WebCore].run");
 		if( parseNr(userprefs.data.updateCurrentInterval) < 10000){
 			userprefs.data.updateCurrentInterval = 120000;
 			userprefs.save();
@@ -591,6 +789,7 @@ var E2WebCore = Class.create({
 	},
 	
 	registerEvents: function(){
+		debug("[E2WebCore].registerEvents");
 		//Hash-Reload-Fix
 		//HACK THIS IS EVIL VOODOO, DON'T TRY THIS AT HOME!
 		document.on(
@@ -625,23 +824,41 @@ var E2WebCore = Class.create({
 				this.epg.search($F('epgSearch'));
 				return false;
 			}.bind(this)
-		);
-		
+		);		
 		$('epgSearch').on(
 			'focus',
 			function(event, element){
 				element.value = "";
 			}.bind(this)
-		);
-		
+		);		
 		$('epgSearchClear').on(
 				'click',
 				function(event, element){
 					$('epgSearch').value = '';
 					return false;
 				}.bind(this)
+		);		
+		//Movienav
+		var nav = $('navContent');
+		nav.on(
+			'change',
+			'.mNavLoc',
+			function(event, element){
+				console.log($("locations").value);
+				console.log($("tags").value);
+				this.movies.load($("locations").value, $("tags").value);
+			}.bind(this)
 		);
 		
+		nav.on(
+			'change',
+			'.mNavTags',
+			function(event, element){
+				console.log($("locations").value);
+				console.log($("tags").value);
+				this.movies.load($("locations").value, $("tags").value);
+			}.bind(this)
+		);				
 		//Volume
 		$('navVolume').on(
 			'click',
@@ -736,9 +953,14 @@ var E2WebCore = Class.create({
 				return false;
 			}.bind(this)
 		);
-
-		
-		
+		//Settings
+		content.on(
+			'click',
+			'.saveSettings',
+			function(event, element){
+				this.saveSettings();
+			}.bind(this)
+		);	
 	},
 
 	/*
@@ -756,14 +978,6 @@ var E2WebCore = Class.create({
 		this.setAjaxLoad('navContent');
 		setNavHd(title);
 		fnc();
-	},
-	
-	loadMovieNav: function(){
-		console.log("Not implemented");
-	},
-	
-	loadMovieList: function(){
-		
 	},
 
 	/*
@@ -806,21 +1020,18 @@ var E2WebCore = Class.create({
 			break;
 	
 		case "movies":	
-			//The Navigation
-			this.reloadNavDynamic(this.loadMovieNav, 'Movies');
-			// The Movie list
+			this.reloadNavDynamic(this.movies.loadNav.bind(this.movies), 'Movies');
 			this.loadContentDynamic(this.movies.load.bind(this.movies), 'Movies');
 			break;
 	
 		case "timer":
-			//The Navigation
 			this.reloadNav('tplNavTimer', 'Timer');
-			// The Timerlist
 			this.loadContentDynamic(this.timers.loadList.bind(this.timers), 'Timer');
 			break;
 	
 		case "mediaplayer":
 			//TODO this.loadContentDynamic(loadMediaPlayer, 'MediaPlayer');
+			console.log("mediaplayer not implemented");
 			break;
 	
 		case "control":
@@ -836,8 +1047,48 @@ var E2WebCore = Class.create({
 		}
 	},
 	
-	navigate: function(){
+	saveSettings: function(){
+		userprefs.load();
 		
+		var debug = $('enableDebug').checked;
+		var changed = false;
+		if(debug != undefined){
+			if( userprefs.data.debug != debug ){
+				userprefs.data.debug = debug;
+				changed = true;
+			}
+		}
+		
+		var updateCurrentInterval = parseNr( $F('updateCurrentInterval') ) * 1000;
+		if( updateCurrentInterval < 10000){
+			updateCurrentInterval = 120000;
+		}
+		
+		if( userprefs.data.updateCurrentInterval != updateCurrentInterval){
+			userprefs.data.updateCurrentInterval = updateCurrentInterval;
+			
+			changed = true;
+			this.startUpdateCurrentPoller();
+		}
+		
+		var updateBouquetInterval = parseNr( $F('updateBouquetInterval') )  * 1000;
+		if( updateBouquetInterval < 60000){
+			updateBouquetInterval = 300000;
+		}
+		
+		if( userprefs.data.updateBouquetInterval != updateBouquetInterval){
+			userprefs.data.updateBouquetInterval = updateBouquetInterval;
+			
+			changed = true;
+			this.startUpdateBouquetItemsPoller();
+		}
+		
+		if(changed){
+			userprefs.save();
+			this.notify("Settings saved");
+		} else {
+			this.notify("Nothing changed! No need to save!");
+		}
 	}
 });
 core = new E2WebCore();

@@ -12,6 +12,7 @@ var AjaxThing = Class.create({
 	 * @errorback - function to call @ onError;
 	 */
 	getUrl: function(url, parms, callback, errorback){
+		debug("[AjaxThing].getUrl :: url=" + url + " :: parms=" + Object.toJSON(parms));
 		if (!window.google || !google.gears){ //no gears
 			try{
 				new Ajax.Request(url,
@@ -64,7 +65,7 @@ var AjaxThing = Class.create({
 				debug('[AbstractContentProvider.getUrl] Exception: '+ e);
 			}
 		}
-	},
+	}
 });
 
 
@@ -105,7 +106,8 @@ var TemplateEngine = Class.create(AjaxThing, {
 		try{
 			$(domElement).update( result );
 		}catch(ex){
-			//		debug("[renderTpl] exception: " + ex);
+			debug("[TemplateEngine].render catched an exception!");
+			throw ex;
 		}
 	},
 	
@@ -121,7 +123,7 @@ var TemplateEngine = Class.create(AjaxThing, {
 				function(tpl){
 					this.onTemplateReady(tpl, data, domElement, callback); 
 				}.bind(this) );
-	},
+	}
 });
 templateEngine = new TemplateEngine();
 
@@ -368,10 +370,10 @@ function EPGList(xml){
 	}
 	
 	this.getArray = function(sortbytime){
-		debug("[EPGList] Sort by time "+sortbytime);
 		var list = [];
 		
 		if (sortbytime === true){
+			debug("[EPGList].getArray :: Sort by time!");
 			var sortList = [];
 			for(var i=0;i<this.xmlitems.length;i++){
 				var event = new EPGEvent(this.xmlitems.item(i), i).toJSON();
@@ -1116,6 +1118,6 @@ var Vol = Class.create({
 
 	toJSON: function(){
 		return this.json;
-	},
+	}
 });
 //END class Volume

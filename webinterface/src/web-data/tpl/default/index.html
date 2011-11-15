@@ -77,13 +77,15 @@
 				var slc = $(element);
 				size = getWinSize();
 				slc.style.maxHeight = size.height - 200+"px";
+				if(Prototype.Browser.IE){
+					slc.style.height = size.height - 200+"px";
+				}
 			} catch (e) {}
 		}
 
 	</script>
 </head>
-<body onresize="setMaxHeight('contentMain')" onload="document.getElementById('notification').style.display='none'">
-	
+<body onresize="setMaxHeight('contentMain')" onload="document.getElementById('notification').style.display='none'">	
 	<div id="container">
 		<div id="banner">
 			<span id="notification"><div></div></span>
@@ -92,12 +94,12 @@
 					<img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web">
 				</div>
 				<ul id="mainMenu">
-					<li><a href="#!/tv" class="switchMode" data-mode="TV">TeleVision</a></li>
-					<li><a href="#!/radio" class="switchMode" data-mode="Radio">Radio</a></li>
-					<li><a href="#!/movies" class="switchMode" data-mode="Movies"">Movies</a></li>
-					<li><a href="#!/timer" class="switchMode" data-mode="Timer">Timer</a></li>
-					<li><a href="#!/control" class="switchMode" data-mode="BoxControl">BoxControl</a></li>
-					<li><a href="#!/extras" class="switchMode" data-mode="Extras">Extras</a></li>
+					<li><a href="#!/tv">TeleVision</a></li>
+					<li><a href="#!/radio">Radio</a></li>
+					<li><a href="#!/movies">Movies</a></li>
+					<li><a href="#!/timer">Timer</a></li>
+					<li><a href="#!/control">BoxControl</a></li>
+					<li><a href="#!/extras">Extras</a></li>
 					<li>
 						<a href="#" onClick="core.openWebTV();">
 							WebTV
