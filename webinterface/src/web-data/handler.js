@@ -409,10 +409,19 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * initialize
 	 * See the description in AbstractContentProvider
 	 */
-	initialize: function($super, target){
+	initialize: function($super, target, reloadCallback){		
 		$super('tplTimerEdit', target);
 		this.t = {};
+		this.provider = new TimerProvider();
 		this.ajaxload = true;
+		this.reloadCallback = reloadCallback;
+	},
+	
+	showSimpleResult: function(result){
+		this.notify(result.getStateText(), result.getState());
+		if(this.reloadCallback){
+			this.reloadCallback();
+		}
 	},
 	
 	/**
@@ -424,7 +433,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * 	data-servicereference="${t.servicereference}"
 	 * 	data-servicename="${t.servicename}"
 	 * 	data-description="${t.description}"
-	 * 	data-title="${t.title}"
+	 * 	data-name="${t.name}"
 	 * 	data-eventid="${t.eventid}"
 	 * 	data-begin="${t.begin}"
 	 * 	data-end="${t.end}"
@@ -444,18 +453,18 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		var t = {};
 		if(parent){
 			t = {
-					servicereference : parent.readAttribute('data-servicereference'),
-					servicename : parent.readAttribute('data-servicename'),
-					description : parent.readAttribute('data-description'),
-					title : parent.readAttribute('data-title'),
-					begin : parent.readAttribute('data-begin'),
-					end : parent.readAttribute('data-end'),
-					repeated : parent.readAttribute('data-repeated'),
-					justplay : parent.readAttribute('data-justplay'),
-					dirname : parent.readAttribute('data-dirname'),
-					tags : parent.readAttribute('data-tags'),
-					afterevent : parent.readAttribute('data-afterevent'),
-					disabled : parent.readAttribute('data-disabled')				
+					servicereference : unescape(parent.readAttribute('data-servicereference')),
+					servicename : unescape(parent.readAttribute('data-servicename')),
+					description : unescape(parent.readAttribute('data-description')),
+					name : unescape(parent.readAttribute('data-name')),
+					begin : unescape(parent.readAttribute('data-begin')),
+					end : unescape(parent.readAttribute('data-end')),
+					repeated : unescape(parent.readAttribute('data-repeated')),
+					justplay : unescape(parent.readAttribute('data-justplay')),
+					dirname : unescape(parent.readAttribute('data-dirname')),
+					tags : unescape(parent.readAttribute('data-tags')),
+					afterevent : unescape(parent.readAttribute('data-afterevent')),
+					disabled : unescape(parent.readAttribute('data-disabled'))				
 			};
 		}
 		return t;
@@ -513,9 +522,84 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		this.show(data);
 	},
 	
-	toggleDisabled: function(element){
-		//TODO implement toggleDisabled
+	add: function(t){
+		if(t.name = "N/A")
+			t.name = "";
+		if(old.title = "N/A")
+			old.title = "";
+		this.provider.simpleResultQuery(
+			URL.timerchange,
+			{
+				'sRef' : t.servicereference,
+				'begin' : t.begin,
+				'end' : t.end,
+				'name' : t.name,
+				'description' : t.description,
+				'dirname' : t.dirname,
+				'tags' : t.tags,
+				'afterevent' : t.afterevent,
+				'eit' : '0',
+				'disabled' : t.disabled,
+				'justplay' : t.justplay,
+				'repeated' : t.repeated,
+			});
 	},
+	
+	change: function(t, old){
+		if(t.name = "N/A")
+			t.name = "";
+		if(old.name = "N/A")
+			old.name = "";
+		this.provider.simpleResultQuery(
+			URL.timerchange,
+			{
+				'sRef' : t.servicereference,
+				'begin' : t.begin,
+				'end' : t.end,
+				'name' : t.name,
+				'description' : t.description,
+				'dirname' : t.dirname,
+				'tags' : t.tags,
+				'afterevent' : t.afterevent,
+				'eit' : '0',
+				'disabled' : t.disabled,
+				'justplay' : t.justplay,
+				'repeated' : t.repeated,
+				'channelOld' : old.servicereference,
+				'beginOld' : old.begin,
+				'endOld' : old.end,
+				'deleteOldOnSave' : '1'					
+			},
+			this.simpleResultCallback.bind(this)
+		);
+	},
+	
+	del: function(element){
+		var t = this.getData(element);
+		var result = confirm("Selected timer:\n" + "Channel: " + t.servicename + "\n"	+ 
+				"Name: " + t.name + "\n" + "Description: " + t.description + "\n"	+ 
+				"Are you sure that you want to delete the Timer?");
+		if (result) {
+			debug("[TimerListProvider].del ok confirm panel");
+			this.refresh = true;
+			this.provider.simpleResultQuery(
+					URL.timerdelete, 
+					{'sRef' : t.servicereference, 'begin' : t.begin, 'end' : t.end},
+					this.simpleResultCallback.bind(this)
+				);
+		}
+		return result;
+	},
+	
+	toggleDisabled: function(element){
+		var t = this.getData(element);
+		var old = t;
+		if(t.disabled == '0')
+			t.disabled = '1';
+		else
+			t.disabled = '0';
+		this.change(t, old);
+	},	
 	
 	/**
 	 * repeatedDaysList
@@ -604,7 +688,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	/**
 	 * commitForm
 	 * 
-	 * Commit the Timer Form by serialing it and doing executing the request
+	 * Commit the Timer Form by serializing it and executing the request
 	 * @id - id of the Form
 	 */
 	commitForm : function(id){		
@@ -636,7 +720,6 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				this.reloadDays();
 			}.bind(this)
 		);
-		
 	},
 	
 	reloadDays : function(){

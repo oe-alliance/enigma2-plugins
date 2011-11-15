@@ -3,9 +3,7 @@
 				<table id="currentTable">
 					<tr>
 						<td id="currentName">
-							<a href="#" onclick="showhide('trExtCurrent')" title="Click to show/hide extended Description">
-							${current.servicename} - ${current.title}
-							</a>
+							<a href="#" class="currentExtShowHide" title="Click to show/hide extended Description">${current.servicename} - ${current.title}</a>
 						</td>
 						<td id="currentDuration">																	
 							<a href="#" onclick="if ( parentPin( '${current.servicereference}' ) ) { loadEPGByServiceReference( '${current.servicereference}' ); }">
@@ -17,7 +15,7 @@
 							+${current.remaining} of ${current.duration} min
 						</td>
 					</tr>
-					<tr id="trExtCurrent">
+					<tr id="trExtCurrent" style="display: none">
 						<td colspan=2>
 							<table>
 								<tr>

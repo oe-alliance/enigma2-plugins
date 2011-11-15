@@ -7,14 +7,14 @@
 									<table class="timerState${t.state} tListItemTable ${t.cssclass}" border="0" cellpadding="0" cellspacing="0">				
 										<tr class="tListHead">
 											<td colspan="4" rowspan="1" class="tListSName" title="${t.description.escapeHTML()}, ${t.descriptionextended.escapeHTML()}">
-											${t.title} - {if t.description == ''} N/A {else} ${t.description} {/if} (${t.servicename})
+											${t.name} - {if t.description == ''} N/A {else} ${t.description} {/if} (${t.servicename})
 											</td>											
 										</tr>
 										<tr class="tListItem"							
 											data-servicereference="${t.servicereference}"
 											data-servicename="${t.servicename}"
 											data-description="${t.description}"
-											data-title="${t.title}"
+											data-name="${t.name}"
 											data-eventid="${t.eventid}"
 											data-begin="${t.begin}"
 											data-end="${t.end}"
@@ -29,15 +29,15 @@
 											<td colspan="1" rowspan="1" class="tListBegin">${t.beginDate}</td>												
 											<td colspan="1" rowspan="1" class="tListType">${t.justplayReadable}</td>						
 											<td colspan="1" rowspan="2" class="tListOption">
-												<a href="#" class="tListDelete">
-													<img src="/web-data/img/delete.png" title="Delete timer ${t.title}" border="0">
-												</a>
-												<a href="#" class="tListToggleDisabled">
-													<img src="/web-data/img/${t.onOff}.png" title="${t.enDis} ${t.title}" border="0">
-												</a>
-												<a href="#" class="tListEdit">
-													<img src="/web-data/img/edit.png" title="Edit timer ${t.title}" border="0" />
-												</a>
+												<button class="tListDelete">
+													<img src="/web-data/img/delete.png" title="Delete timer ${t.name}" border="0" />
+												</button>
+												<button class="tListToggleDisabled">
+													<img src="/web-data/img/${t.onOff}.png" title="${t.enDis} timer ${t.name}" border="0">
+												</button>
+												<button class="tListEdit">
+													<img src="/web-data/img/edit.png" title="Edit timer ${t.name}" border="0" />
+												</button>
 											</td>	
 										</tr>
 										<tr class="tListItem">						
@@ -55,10 +55,12 @@
 							{/for}
 										
 							<tr style="width:100%;">
-								<td colspan="7"><button onclick="writeTimerListNow()">Write To Memory</button></td>
-							</tr>
-							<tr style="width:100%;">
-								<td colspan="7"><button onclick="cleanTimerListNow()">Cleanup</button></td>
+								<td>
+								<!-- 
+									<button class="tListPersist"></button>
+								 -->
+									<button class="tListCleanup" title="Cleans up the list of timers by removing e.g. finished timers">Timer list cleanup</button>
+								</td>
 							</tr>
 						</table>
 <!-- /tplTimerList -->

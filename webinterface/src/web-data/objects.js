@@ -655,7 +655,7 @@ function Timer(xml, cssclass){
 	};
 	
 	this.getToggleDisabledText = function(){
-		var retVal = this.toggledisabled == "0" ? "Enable timer" : "Disable timer";
+		var retVal = this.toggledisabled == "0" ? "Enable" : "Disable";
 		return retVal;
 	};
 	
@@ -770,7 +770,7 @@ function Timer(xml, cssclass){
 	this.json = {
 			'servicereference' : this.getServiceReference(),
 			'servicename' : quotes2html(this.getServiceName()),
-			'title' : quotes2html(this.getName()),
+			'name' : quotes2html(this.getName()),
 			'description' : quotes2html(this.getDescription()),
 			'descriptionextended' : quotes2html(this
 					.getDescriptionExtended()),

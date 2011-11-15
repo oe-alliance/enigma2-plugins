@@ -1,4 +1,35 @@
-//General Helpers
+Element.prototype.fadeIn = function(parms, out) {
+		var _this = this;
+		var opacityTo = function(elm,v){
+		    elm.style.opacity = v/100;		 
+		    elm.style.MozOpacity =  v/100;		 
+		    elm.style.KhtmlOpacity =  v/100;		 
+		    elm.style.filter=" alpha(opacity ="+v+")";
+		};
+		var delay = parms.delay;
+		var to = parms.to;
+		if(!to)
+			to = 100;
+		
+		_this.style.zoom = 1;
+		// for ie, set haslayout
+		_this.style.display = "block";
+	
+		for (var i=1; i<=to; i++) {
+			(function(j) {
+				setTimeout(function() {
+					if (out == true)
+						j = to - j;
+					opacityTo(_this, j);
+				}, j * delay / to);
+			})(i);
+		};
+	};
+Element.prototype.fadeOut = function(delay) {
+		this.fadeIn({'delay' : delay}, true);
+	};
+
+// General Helpers
 function toOptionList(lst, selected) {
 	var list = Array();
 	var i = 0;
@@ -104,7 +135,6 @@ var Bouquets = Class.create(Controller, {
 var Current = Class.create(Controller, {
 	initialize: function($super, target){
 		$super(new CurrentHandler(target));
-		this.display = 'none';
 		this.model.onFinished[this.model.onFinished.length] = this.restoreDisplayStyle.bind(this);
 	},
 	
@@ -548,7 +578,7 @@ var SimplePages = Class.create({
 var Timers = Class.create({
 	initialize: function(target){
 		this.listHandler = new TimerListHandler(target);
-		this.timerHandler = new TimerHandler(target);
+		this.timerHandler = new TimerHandler(target, this.loadList.bind(this));
 	},
 	
 	loadList: function(){
@@ -564,11 +594,11 @@ var Timers = Class.create({
 	},
 	
 	toggleDisabled: function(element){
-		//TODO toggleDisabled
+		this.timerHandler.toggleDisabled(element);
 	},
 	
 	del: function(element){
-		//TODO delete
+		this.timerHandler.del(element);
 	}
 });
 
@@ -670,10 +700,12 @@ var E2WebCore = Class.create({
 	},
 	
 	hideNotifier: function(){
-		$('notification').fade({duration : 0.5 });
+		debug("[E2WebCore].hideNotifier");
+		$('notification').fadeOut(500);
 	},
 
 	notify: function(text, state){
+		debug("[E2WebCore].notify");
 		notif = $('notification');
 
 		if(notif !== null){
@@ -686,9 +718,9 @@ var E2WebCore = Class.create({
 			}				
 
 			this.set('notification', "<div>"+text+"</div>");
-			notif.appear({duration : 0.5, to: 0.9 });
-			var me = this;
-			this.hideNotifierTimeout = setTimeout(me.hideNotifier.bind(this), 10000);
+			notif.fadeIn({'delay' : 500, 'to' : 90});
+			var _this = this;
+			this.hideNotifierTimeout = setTimeout(_this.hideNotifier.bind(this), 5000);
 		}
 	},
 	
@@ -746,8 +778,8 @@ var E2WebCore = Class.create({
 	
 	startUpdateCurrentPoller: function(){
 		clearInterval(this.updateCurrentPoller);
-		var me = this;
-		this.updateCurrentPoller = setInterval(me.updateItems.bind(this), userprefs.data.updateCurrentInterval);
+		var _this = this;
+		this.updateCurrentPoller = setInterval(_this.updateItems.bind(this), userprefs.data.updateCurrentInterval);
 	},
 	
 	stopUpdateCurrentPoller: function(){
@@ -757,8 +789,8 @@ var E2WebCore = Class.create({
 	startUpdateBouquetItemsPoller: function(){
 		debug("[startUpdateBouquetItemsPoller] called");
 		clearInterval(updateBouquetItemsPoller);
-		var me = this;
-		updateBouquetItemsPoller = setInterval(me.updateItemsLazy.bind(this), userprefs.data.updateBouquetInterval);
+		var _this = this;
+		updateBouquetItemsPoller = setInterval(_this.updateItemsLazy.bind(this), userprefs.data.updateBouquetInterval);
 	},
 	
 	stopUpdateBouquetItemsPoller: function(){
@@ -807,7 +839,11 @@ var E2WebCore = Class.create({
 	},
 	
 	getBaseHash: function(){
-		return '#!/' + this.mode + '/' + this.subMode;
+		var hash = ['#!', this.mode].join("/");
+		if(this.subMode != ''){
+			hash = [hash, this.subMode].join("/");
+		}
+		return hash;
 	},
 	
 	loadDefault: function(){
@@ -884,6 +920,22 @@ var E2WebCore = Class.create({
 					}
 				}
 			}.bind(this)
+		);
+		//Current
+		$('current').on(
+			'click',
+			'.currentExtShowHide',
+			function(event, element){
+				//FIXME
+				element.href = '#';	
+				var ext = $('trExtCurrent');
+				if(ext){
+					if(ext.visible())
+						ext.hide();
+					else
+						ext.show();
+				}
+			}
 		);
 		//EPG-Search
 		$('epgSearchForm').on(
@@ -995,30 +1047,26 @@ var E2WebCore = Class.create({
 		//Timerlist
 		content.on(
 			'click', 
-			'a.tListDelete', 
-			function(event, element){
-				//FIXME
-				element.href = '#';				
+			'.tListDelete', 
+			function(event, element){		
 				this.timers.del(element);
 				return false;
 			}.bind(this)
 		);
 		content.on(
 			'click', 
-			'a.tListToggleDisabled', 
+			'.tListToggleDisabled', 
 			function(event, element){
-				//FIXME
-				element.href = '#';
 				this.timers.toggleDisabled(element);
 				return false;
 			}.bind(this)
 		);
 		content.on(
 			'click', 
-			'a.tListEdit', 
+			'.tListEdit', 
 			function(event, element){
-				//FIXME
-				element.href = '#';
+				var hash = [this.getBaseHash(), "edit"].join("/");
+				hashListener.setHash(hash);
 				this.timers.edit(element);
 				return false;
 			}.bind(this)
