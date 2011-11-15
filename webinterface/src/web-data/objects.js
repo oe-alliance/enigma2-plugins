@@ -1120,4 +1120,14 @@ var Vol = Class.create({
 		return this.json;
 	}
 });
+
+var Powerstate = Class.create({
+	initialize: function(xml){
+		this.instandby = xml.getElementsByTagName("e2instandby").item(0).firstChild.data.strip() == "true";
+	},
+	
+	isStandby: function(){
+		return this.instandby;
+	}
+});
 //END class Volume

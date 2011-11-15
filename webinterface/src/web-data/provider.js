@@ -283,6 +283,17 @@ var CurrentLocationProvider = Class.create(AbstractContentProvider, {
 	}
 });
 
+var PowerStateProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.powerstate, showFnc);
+	},
+	
+	renderXML: function(xml){
+		var data = new Powerstate(xml).isStandby();
+		return data;
+	}
+});
+
 var TagProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.gettags, showFnc);

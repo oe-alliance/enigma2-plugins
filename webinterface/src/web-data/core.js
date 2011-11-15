@@ -279,13 +279,25 @@ var Movies = Class.create(Controller, {
 		this.navModel = new MovieNavHandler(navTarget);
 	},
 	
-	load: function(location, tag){
-		if(!location)
-			location = '';
-		if(!tag)
-			tag = '';
+	load: function(location, tags){	
+		if(!location){
+			var sethash = function(location){
+				var hash = [core.getBaseHash(), encodeURIComponent(location), encodeURIComponent(tags)].join("/");
+				hashListener.setHash(hash);
+			};
+			if(core.currentLocation == ""){ //wait for currentLocation to be set;
+				if(!core.lt.isCurrentLocationReady){
+					core.lt.curLocCallbacks[core.lt.curLocCallbacks.length] = sethash;
+				} else {
+					core.lt.getCurrentLocation(sethash);
+				}
+			} else {
+				sethash(core.currentLocation);
+			}
+			return;
+		}
 				
-		this.model.load({'dirname' : location, 'tag' : tag});
+		this.model.load({'dirname' : location, 'tag' : tags});
 	},
 	
 	loadNav: function(){
@@ -544,8 +556,7 @@ var E2WebCore = Class.create({
 
 		this.isActive = {};
 		this.isActive.getCurrent = false;
-
-		this.currentLocation = "/hdd/movie";
+		
 		this.locationsList = [];
 		this.tagList = [];
 
@@ -564,6 +575,7 @@ var E2WebCore = Class.create({
 		this.screenshots = new Screenshots('contentMain');
 		this.simplepages = new SimplePages('contentMain');
 		this.lt = new LocationsAndTags();
+		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
 		
 		this.navlut = {
 			'tv': {
@@ -575,6 +587,9 @@ var E2WebCore = Class.create({
 				'bouquets' : this.bouquets.loadBouquetsRadio.bind(this.bouquets),
 				'provider' : this.bouquets.loadProviderRadio.bind(this.bouquets),
 				'all' : this.services.loadAllRadio.bind(this.services)
+			},
+			'movies':{
+				'filter' : function(){} //DON'T TOUCH THIS!
 			},
 			'timer': {
 				//TODO add & use controller für timer-stuff
@@ -728,6 +743,10 @@ var E2WebCore = Class.create({
 					case 'radio':
 						this.services.load(unescape(parts[3]));
 						break;
+					case 'movies':
+						var location = decodeURIComponent(parts[3]);						
+						this.currentLocation = location;
+						this.movies.load(decodeURIComponent(parts[3]), decodeURIComponent(parts[4]));
 					default:
 						return;
 					}
@@ -846,7 +865,9 @@ var E2WebCore = Class.create({
 			function(event, element){
 				console.log($("locations").value);
 				console.log($("tags").value);
-				this.movies.load($("locations").value, $("tags").value);
+				var hash = [this.getBaseHash(), encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
+				hashListener.setHash(hash);
+//				this.movies.load($("locations").value, $("tags").value);
 			}.bind(this)
 		);
 		
@@ -856,7 +877,8 @@ var E2WebCore = Class.create({
 			function(event, element){
 				console.log($("locations").value);
 				console.log($("tags").value);
-				this.movies.load($("locations").value, $("tags").value);
+				var hash = [this.getBaseHash(), encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
+				hashListener.setHash(hash);
 			}.bind(this)
 		);				
 		//Volume
@@ -1021,7 +1043,7 @@ var E2WebCore = Class.create({
 	
 		case "movies":	
 			this.reloadNavDynamic(this.movies.loadNav.bind(this.movies), 'Movies');
-			this.loadContentDynamic(this.movies.load.bind(this.movies), 'Movies');
+//			this.loadContentDynamic(this.movies.load.bind(this.movies), 'Movies');
 			break;
 	
 		case "timer":
