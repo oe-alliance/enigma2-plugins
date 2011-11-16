@@ -156,7 +156,16 @@ var Current = Class.create(Controller, {
 
 var EPG = Class.create(Controller, {
 	initialize: function($super){
-		$super(new EpgListHandler());
+		$super(new EpgListHandler(this.show.bind(this)));
+		this.window = '';
+	},
+	
+	show:function(html){
+		if (this.window.closed || !this.window.location){
+			this.eventsregistered = false;
+			this.window = core.popup("EPG", html, 900, 500);
+			this.doRegisterEvents();
+		}
 	},
 	
 	load: function(sRef){
@@ -164,38 +173,38 @@ var EPG = Class.create(Controller, {
 	},
 
 	search: function(needle){
+		this.initWindow();
 		this.model.search({'search' : needle});
 	},
 	
-	registerEvents: function(){
-		if (!this.model.window.closed && this.model.window.location){
-			if(!this.eventsregistered){
-				eventsregistered = true;
-				doc = window.document;
-				doc.on(
+	doRegisterEvents: function(){
+		if(!this.eventsregistered){
+			this.eventsregistered = true;				
+			var win = this.window;
+			win.onload = function(event){
+				var elem = win.document;
+				elem.on(
 					'click',
-					'a.eListAddTimer',
+					'.eListAddTimer',
 					function(event, element){
-						parent.debug('eListAddTimer');
+						debug('eListAddTimer');
 					}
 				);
-				doc.on(
+				elem.on(
 					'click',
-					'a.eListZapTimer',
+					'.eListZapTimer',
 					function(event, element){
-						parent.debug('eListZapTimer');
+						debug('eListZapTimer');
 					}
 				);
-				doc.on(
+				elem.on(
 					'click',
-					'a.eListEditTimer',
+					'.eListEditTimer',
 					function(event, element){
-						parent.debug('eListEditTimer');
+						debug('eListEditTimer');
 					}
 				);
-			}
-		} else {
-			this.eventsregistered = false;
+			}.bind(this);
 		}
 	}
 });
@@ -359,6 +368,16 @@ var LocationsAndTags = Class.create({
 	}
 });
 
+var Messages = Class.create({
+	initialize: function(){
+		this.model = new SimpleRequestHandler();
+	},
+	
+	send: function(text, type, timeout){
+		this.model.load(URL.message, {'text' : text, 'type' : type, 'timeout' : timeout});
+	}
+});
+
 var Movies = Class.create(Controller, {
 	initialize: function($super, listTarget, navTarget){
 		$super(new MovieListHandler(listTarget));
@@ -392,6 +411,92 @@ var Movies = Class.create(Controller, {
 	
 	del: function(element){
 		this.model.del(element);
+	}
+});
+
+var RemoteControl = Class.create({
+	initialize: function(){
+		this.model = new RemoteControlHandler();
+		this.window = '';
+	},
+	
+	open: function(){
+		if(!this.window)
+			this.window = '';
+		if (this.window.closed || !this.window.location){
+			var tpl;
+			switch(core.deviceInfo.info.devicename){
+			case 'dm8000':
+			case 'dm7020hd':
+				tpl = 'tplWebRemote';
+				break;
+			default:
+				tpl = 'tplWebRemoteOld';
+			}
+			
+			templateEngine.fetch(tpl, function(template){
+				this.eventsregistered = false;
+				this.window = core.popup('WebRemote', template, 250, 600);
+				this.registerEvents();
+			}.bind(this));
+		}
+	},
+	
+	sendKey: function(cmd, type, shotType){
+		debug("[RemoteControl].sendKey: " + cmd); 
+		this.model.sendKey({'command' : cmd, 'type': type});
+		
+		var hash = '!/control'; //FIXME
+		switch(shotType){		
+		case undefined:
+		case '':
+			return;
+		case 'osd':
+			hash = [hash, 'osdshot'].join("/");
+			break;
+		case 'all':
+			hash = [hash, 'screenshot'].join("/");
+			break;
+		}
+		//the box needs at least a little bit of time to actually draw the window
+		//wait 250ms before fetching a new screenshot
+		setTimeout(
+				function(){
+					hashListener.setHash(hash);
+					if(hash == hashListener.getHash()){
+						core.onHashChanged(true);
+					}
+				},
+				250);
+	},
+	
+	registerEvents:function(){
+		var win = this.window;
+		var _this = this;
+		win.onload = function(event){
+			var elem = win.document;
+			elem.on(
+				'click',
+				'.remoteKey',
+				function(event, element){
+					var id = element.readAttribute('data-keyid');
+					var long = _this.window.document.getElementById('long').checked;
+					var screenshot = _this.window.document.getElementById('screenshot').checked;
+					var video = _this.window.document.getElementById('video').checked;
+					var type = '';
+					if(long){
+						type = 'long';
+					}
+					var shotType = 'none';
+					if(screenshot && video){
+						shotType = 'all';
+					} else if (screenshot && !video) {
+						shotType = 'osd';
+					}
+					_this.sendKey(id, type, shotType);
+				}
+			);
+		};
 	}
 });
 
@@ -572,6 +677,10 @@ var SimplePages = Class.create({
 	
 	loadDeviceInfo: function(){
 		this.deviceInfoHandler.load({});
+	},
+	
+	getDeviceInfo: function(callback){
+		this.deviceInfoHandler.get({}, callback);
 	}
 });
 
@@ -647,18 +756,22 @@ var E2WebCore = Class.create({
 		this.subMode = "";
 		
 		//create required Instances
-		this.epg = new EPG(new EpgListHandler());
-		this.services = new Services('contentServices', this.epg);
 		this.bouquets = new Bouquets('contentBouquets', 'contentMain');
-		this.timers = new Timers('contentMain');
 		this.current = new Current('currentContent');
-		this.volume = new Volume('navVolume');
+		this.epg = new EPG(new EpgListHandler());
+		this.lt = new LocationsAndTags();
+		this.messages = new Messages();
 		this.movies = new Movies('contentMain', 'navContent');
+		this.power = new Power();
+		this.remote = new RemoteControl();
+		this.services = new Services('contentServices', this.epg);
 		this.screenshots = new Screenshots('contentMain');
 		this.simplepages = new SimplePages('contentMain');
-		this.lt = new LocationsAndTags();
-		this.power = new Power();
-		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));		
+		this.timers = new Timers('contentMain');
+		this.volume = new Volume('navVolume');
+		
+		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
+		this.deviceInfo = this.simplepages.getDeviceInfo(function(info){this.deviceInfo = info;}.bind(this));
 		
 		this.navlut = {
 			'tv': {
@@ -980,7 +1093,13 @@ var E2WebCore = Class.create({
 				var hash = [this.getBaseHash(), encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
 				hashListener.setHash(hash);
 			}.bind(this)
-		);				
+		);
+		//RemoteControl
+		nav.on(
+			'click',
+			'.webremote',
+			this.remote.open.bind(this.remote)
+		);
 		//Volume
 		$('navVolume').on(
 			'click',
@@ -993,7 +1112,51 @@ var E2WebCore = Class.create({
 		
 		//Content
 		var content = $('contentMain');
-		
+		//Message
+		content.on(
+			'click',
+			'.messageSend',
+			function(event, element){
+				var t = $('messageType');
+				text = $('messageText').value;
+				timeout = $('messageTimeout').value;
+				type = t.options[t.selectedIndex].value;
+				this.messages.send(text, type, timeout);
+			}.bind(this)
+		);
+		//Movielist
+		content.on(
+			'click', 
+			'a.mListDelete', 
+			function(event, element){
+				//FIXME
+				element.href = '#';				
+				this.movies.del(element);
+				return false;
+			}.bind(this)
+		);
+		//Powerstate
+		content.on(
+			'click',
+			'.powerState',
+			function(event, element){
+				var cb = function(isStandby){
+					var text = "Device is now Running";
+					if(isStandby)
+						text = "Device is now in Standby";
+					this.notify(text, true);
+				}.bind(this);
+				this.power.set(element.readAttribute("data-state"), cb);
+			}.bind(this)
+		);
+		//Settings
+		content.on(
+			'click',
+			'.saveSettings',
+			function(event, element){
+				this.saveSettings();
+			}.bind(this)
+		);
 		//Servicelist
 		content.on(
 			'click', 
@@ -1033,17 +1196,6 @@ var E2WebCore = Class.create({
 				return false;
 			}.bind(this)
 		);
-		//Movielist
-		content.on(
-			'click', 
-			'a.mListDelete', 
-			function(event, element){
-				//FIXME
-				element.href = '#';				
-				this.movies.del(element);
-				return false;
-			}.bind(this)
-		);
 		//Timerlist
 		content.on(
 			'click', 
@@ -1069,28 +1221,6 @@ var E2WebCore = Class.create({
 				hashListener.setHash(hash);
 				this.timers.edit(element);
 				return false;
-			}.bind(this)
-		);
-		//Powerstate
-		content.on(
-			'click',
-			'.powerState',
-			function(event, element){
-				var cb = function(isStandby){
-					var text = "Device is now Running";
-					if(isStandby)
-						text = "Device is now in Standby";
-					this.notify(text, true);
-				}.bind(this);
-				this.power.set(element.readAttribute("data-state"), cb);
-			}.bind(this)
-		);
-		//Settings
-		content.on(
-			'click',
-			'.saveSettings',
-			function(event, element){
-				this.saveSettings();
 			}.bind(this)
 		);
 	},

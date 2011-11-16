@@ -950,14 +950,19 @@ function DeviceInfo(xml){
 
 function SimpleXMLResult(xml){		
 	try{
-		this.xmlitems = xml.getElementsByTagName("e2simplexmlresult").item(0);
+		this.xmlitems = xml;
 	} catch (e) {
 		core.notify("Error parsing e2simplexmlresult: " + e, false);
 	}
 
-	this.state = getNodeContent(this.xmlitems, 'e2state', 'False');
-	this.statetext = getNodeContent(this.xmlitems, 'e2statetext', 'Error Parsing XML');
-
+	this.state = getNodeContent(this.xmlitems, 'e2state', false);
+	this.statetext = getNodeContent(this.xmlitems, 'e2statetext', false);
+	
+	if(!this.state && !this.statetext){
+		this.state = getNodeContent(this.xmlitems, 'e2result', 'False');
+		this.statetext = getNodeContent(this.xmlitems, 'e2resulttext', 'Error Parsing XML');
+	}
+	
 	this.getState = function(){
 		if(this.state == 'True'){
 			return true;

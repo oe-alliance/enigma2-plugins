@@ -93,10 +93,12 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 	load: function(parms, fnc){
 		this.parms = parms;
 		if(fnc !== undefined){
-			this.callback = fnc;
+			callback = fnc;
+		} else {
+			callback = this.callback.bind(this);
 		}
 		
-		this.getUrl(this.url, parms, this.callback.bind(this), this.errorback.bind(this));
+		this.getUrl(this.url, parms, callback, this.errorback.bind(this));
 	},
 	
 	registerEvents : function(){
@@ -502,7 +504,7 @@ var TimerListProvider = Class.create(AbstractContentProvider, {
 	},
 });
 
-var TimerProvider = Class.create(AbstractContentProvider,{});
+var SimpleRequestProvider = Class.create(AbstractContentProvider,{});
 
 /**
  * Volume

@@ -106,9 +106,34 @@ var AbstractContentHandler = Class.create({
 });
 
 var DeviceInfoHandler = Class.create(AbstractContentHandler,{
-	initialize: function($super, target){
+	initialize: function($super, target, cached){
 		$super('tplDeviceInfo', target);
 		this.provider = new DeviceInfoProvider(this.show.bind(this));
+		this.isCached = true;
+		if(cached === false)
+			this.isCached = false;
+		this.data = null;
+	},
+	
+	load: function($super, parms, callback){
+		if(this.data == null)
+			$super(parms, callback);
+		else
+			this.show(this.data);
+	},
+	
+	get: function(parms, callback){
+		this.requestStarted();
+		if(this.data == null){
+			this.provider.load(parms, 
+					function(transport){
+						var data = this.provider.renderXML(this.provider.getXML(transport));
+						this.data = data;
+						callback(data);
+					}.bind(this));
+		} else {
+			callback(this.data);
+		}
 	}
 });
 
@@ -202,10 +227,10 @@ var ServiceListHandler = Class.create(AbstractContentHandler, {
 });
 
 var EpgListHandler = Class.create(AbstractContentHandler,{
-	initialize: function($super){
+	initialize: function($super, showEpgFnc){
 		$super('tplEpgList');
 		this.provider = new ServiceEpgListProvider(this.show.bind(this));
-		this.window = '';
+		this.showEpg = showEpgFnc;
 		this.data = '';
 	},
 	
@@ -215,19 +240,14 @@ var EpgListHandler = Class.create(AbstractContentHandler,{
 	},
 	
 	show : function(data){
-		this.data = data;
-		templateEngine.fetch(this.tpl, this.showEpg.bind(this));		
-	},
-	
-	showEpg: function(){
-		var html = templateEngine.templates[this.tpl].process(this.data);
-
-		if (!this.window.closed && this.window.location) {
-			core.setWindowContent(this.window, html);
-		} else {
-			this.window = core.popup("EPG", html, 900, 500);
-		}
-		this.finished();
+		this.data = data;		
+		templateEngine.fetch(
+				this.tpl, 
+				function(){
+					var html = templateEngine.templates[this.tpl].process(this.data);
+					this.showEpg(html);
+				}.bind(this) 
+			);		
 	}
 });
 
@@ -385,6 +405,31 @@ var ScreenshotHandler = Class.create(AbstractContentHandler, {
 	}
 });
 
+var SimpleRequestHandler = Class.create(AbstractContentHandler,{
+	initialize: function(){
+		this.provider = new SimpleRequestProvider();
+	},
+	
+	load: function(url, parms){
+		this.provider.simpleResultQuery(
+				url, 
+				parms,
+				this.simpleResultCallback.bind(this)
+			);
+	}	
+});
+
+var RemoteControlHandler = Class.create(SimpleRequestHandler,{
+	sendKey: function(parms){
+		this.load(URL.remotecontrol, parms);
+	},
+	
+	showSimpleResult: function(result){
+		if(!result.getState())
+			this.notify(result.getStateText(), result.getState());
+	},	
+});
+
 var TimerListHandler  = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplTimerList', target);
@@ -412,7 +457,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target, reloadCallback){		
 		$super('tplTimerEdit', target);
 		this.t = {};
-		this.provider = new TimerProvider();
+		this.provider = new SimpleRequestProvider();
 		this.ajaxload = true;
 		this.reloadCallback = reloadCallback;
 	},
