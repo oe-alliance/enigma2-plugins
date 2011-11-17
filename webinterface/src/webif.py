@@ -49,14 +49,10 @@ class OneTimeElement(Element):
 			paramlist = self.source_id.split(",")
 			list = {}
 			for key in paramlist:
-				arg = args.get(key, ())
-				Len = len(arg)
-				if Len == 0:
+				if key in args:
+					list[key] = args[key][0]
+				else:
 					list[key] = None
-				elif Len == 1:
-					list[key] = "".join(arg)
-				elif Len == 2:
-					list[key] = arg[0]
 			self.source.handleCommand(list)
 		else:
 			for c in args.get(self.source_id, ()):
