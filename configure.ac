@@ -283,11 +283,6 @@ moviecut/meta/Makefile
 moviecut/src_cc/Makefile
 moviecut/src_py/Makefile
 
-movielistpreview/Makefile
-movielistpreview/meta/Makefile
-movielistpreview/po/Makefile
-movielistpreview/src/Makefile
-
 movieretitle/Makefile
 movieretitle/meta/Makefile
 movieretitle/po/Makefile

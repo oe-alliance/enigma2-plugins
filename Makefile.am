@@ -43,7 +43,6 @@ SUBDIRS = \
 	meteoitalia \
 	mosaic \
 	moviecut \
-	movielistpreview \
 	movieretitle \
 	moviesearch \
 	movietagger \
