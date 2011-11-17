@@ -198,13 +198,14 @@ class SimpleListFiller(Converter):
 		conv_args = self.converter_arguments		
 		
 		list = [ ]
+		append = list.append
 		for element in conv_args:
 			if isinstance(element, basestring):
-				list.append((element, None))
+				append((element, None))
 			elif isinstance(element, ListItem):
-				list.append((element, element.filternum))
+				append((element, element.filternum))
 			elif isinstance(element, ListMacroItem):
-				list.append(element.macrodict[element.macroname], None)
+				append(element.macrodict[element.macroname], None)
 			else:
 				raise Exception("neither string, ListItem nor ListMacroItem")
 			
@@ -256,13 +257,14 @@ class ListFiller(Converter):
 		# now build a ["string", 1, "string", 2]-styled list, with indices into the
 		# list to avoid lookup of item name for each entry
 		lutlist = [ ]
+		append = lutlist.append
 		for element in conv_args:
 			if isinstance(element, basestring):
-				lutlist.append((element, None))
+				append((element, None))
 			elif isinstance(element, ListItem):
-				lutlist.append((lut[element.name], element.filternum))
+				append((lut[element.name], element.filternum))
 			elif isinstance(element, ListMacroItem):
-				lutlist.append((element.macrodict[element.macroname], None))
+				append((element.macrodict[element.macroname], None))
 			else:
 				raise Exception("neither string, ListItem nor ListMacroItem")
 
