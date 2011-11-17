@@ -411,7 +411,7 @@ class webifHandler(ContentHandler):
 		if name[:3] == "e2:":
 			self.mode += 1
 
-		tag = '<' + name + ''.join([' %s="%s"' % x for x in attrs.items()]) + '>'
+		tag = '<' + name + ''.join([' %s="%s"' % x for x in attrs.iteritems()]) + '>'
 		#tag = tag.encode('utf-8')
 
 		if self.mode == 0:
