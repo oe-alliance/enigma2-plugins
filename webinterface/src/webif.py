@@ -238,11 +238,11 @@ class SimpleListFiller(Converter):
 		for item in l:
 			if item is None:
 				item = ""
-				
-			for (element, filternum) in list:
+			else:
 				#filter out "non-displayable" Characters - at the very end, do it the hard way...
 				item = str(item)#.replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
-				
+
+			for (element, filternum) in list:
 				if not filternum:
 					append(element)
 				elif filternum == 2:
@@ -254,12 +254,12 @@ class SimpleListFiller(Converter):
 				elif filternum == 5:
 					append(quote(item))
 				elif filternum == 6:
-					time = parseint(item) or 0
+					from time import localtime
+					time = int(item) or 0
 					t = localtime(time)
 					append("%02d:%02d" % (t.tm_hour, t.tm_min))
 				elif filternum == 7:
-					time = parseint(item) or 0
-					t = localtime(time)
+					time = int(item) or 0
 					append("%d min" % (time / 60))
 				else:
 					append(item)
@@ -302,18 +302,15 @@ class ListFiller(Converter):
 			for (element, filternum) in lutlist:			
 				#None becomes ""
 				curitem = ""
-				if filternum:
-					#filter out "non-displayable" Characters - at the very end, do it the hard way...
-					curitem = str(item[element])#.replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
-					if curitem is None:
-						curitem = ""
-				else:
+				if not filternum:
 					if element is None:
 						element = ""
-						
-				if not filternum:
 					append(element)
-				elif filternum == 2:
+					continue
+				#filter out "non-displayable" Characters - at the very end, do it the hard way...
+				curitem = str(item[element])#.replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
+
+				if filternum == 2:
 					append(curitem.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 				elif filternum == 3:
 					append( escape_xml( curitem ))
@@ -323,13 +320,11 @@ class ListFiller(Converter):
 					append(quote(curitem))
 				elif filternum == 6:
 					from time import localtime
-					time = int(float(curitem)) or 0
+					time = int(curitem) or 0
 					t = localtime(time)
 					append("%02d:%02d" % (t.tm_hour, t.tm_min))
 				elif filternum == 7:
-					from time import localtime
-					time = int(float(curitem)) or 0
-					t = localtime(time)
+					time = int(curitem) or 0
 					append("%d min" % (time / 60))					
 				else:
 					append(curitem)
