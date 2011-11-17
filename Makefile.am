@@ -56,7 +56,6 @@ SUBDIRS = \
 	orfat \
 	orfteletext \
 	partnerbox \
-	passwordchanger \
 	permanentclock \
 	podcast \
 	porncenter \

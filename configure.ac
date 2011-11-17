@@ -367,11 +367,6 @@ partnerbox/src/Makefile
 partnerbox/src/icons/Makefile
 partnerbox/src/servicewebts/Makefile
 
-passwordchanger/Makefile
-passwordchanger/meta/Makefile
-passwordchanger/po/Makefile
-passwordchanger/src/Makefile
-
 permanentclock/Makefile
 permanentclock/meta/Makefile
 permanentclock/po/Makefile
