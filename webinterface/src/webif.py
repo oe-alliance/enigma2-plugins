@@ -136,9 +136,6 @@ class ListMacroItem:
 # Returns the String as is
 #===============================================================================
 class TextToHTML(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		return self.source.text.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8") # encode & etc. here!
 
@@ -148,9 +145,6 @@ class TextToHTML(Converter):
 # Escapes the given Text to be XML conform
 #===============================================================================
 class TextToXML(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		return escape_xml(self.source.text).replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
 
@@ -160,9 +154,6 @@ class TextToXML(Converter):
 # Escapes the given Text so it can be used inside a URL
 #===============================================================================
 class TextToURL(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		return self.source.text.replace(" ", "%20").replace("+", "%2b").replace("&", "%26").replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8")
 
@@ -172,9 +163,6 @@ class TextToURL(Converter):
 # Returns a XML only consisting of <rootElement />
 #===============================================================================
 class ReturnEmptyXML(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		return "<rootElement />"
 
@@ -184,9 +172,6 @@ class ReturnEmptyXML(Converter):
 # Useful if you only want to issue a command.
 #===============================================================================
 class Null(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		return ""
 
@@ -197,9 +182,6 @@ class Null(Converter):
 # Transforms a string into a javascript update pattern
 #===============================================================================
 class JavascriptUpdate(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		# 3c5x9, added parent. , this is because the ie loads this in a iframe. an the set is in index.html.xml
 		#		 all other will replace this in JS
@@ -211,9 +193,6 @@ class JavascriptUpdate(Converter):
 # The performant 'one-dimensonial listfiller' engine (podlfe)
 #===============================================================================
 class SimpleListFiller(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-		
 	def getText(self):
 		l = self.source.simplelist
 		conv_args = self.converter_arguments		
@@ -269,10 +248,6 @@ class SimpleListFiller(Converter):
 # the performant 'listfiller'-engine (plfe)
 #===============================================================================
 class ListFiller(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-#		print "ListFiller-arg: ",arg
-
 	def getText(self):
 		l = self.source.list
 		lut = self.source.lut
