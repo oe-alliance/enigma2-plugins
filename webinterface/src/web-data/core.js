@@ -1011,9 +1011,7 @@ var E2WebCore = Class.create({
 		templateEngine.fetch('tplServiceListEPGItem');
 		templateEngine.fetch('tplBouquetsAndServices');
 		templateEngine.fetch('tplCurrent');
-		if(hashListener.getHash().length >= 1){
-			this.onHashChanged();
-		} else {
+		if(!hashListener.getHash().length >= 1){
 			this.loadDefault();
 		}
 		this.updateItems();
