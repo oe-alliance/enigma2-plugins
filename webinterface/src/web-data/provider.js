@@ -193,7 +193,7 @@ var ServiceListProvider = Class.create(AbstractContentProvider, {
 	 * @target: the html target id
 	 */
 	initialize: function($super, showFnc){
-		$super(URL.getservices, showFnc);
+		$super(URL.epgnownext, showFnc);
 	},
 	
 	/**
@@ -201,8 +201,8 @@ var ServiceListProvider = Class.create(AbstractContentProvider, {
 	 * See the description in AbstractContentProvider
 	 */
 	renderXML: function(xml){
-		var list = new ServiceList(xml).getArray();
-		return {services : list};	
+		var list = new EPGListNowNext(xml).getArray();
+		return {items : list};	
 	}
 });
 
@@ -210,7 +210,15 @@ var ServiceListProvider = Class.create(AbstractContentProvider, {
  * BouquetListProvider
  * Content provider for bouquet lists.
  */
-var BouquetListProvider = Class.create(ServiceListProvider, {
+var BouquetListProvider = Class.create(AbstractContentProvider, {
+	/**
+	 * initialize
+	 * Parameters:
+	 * @target: the html target id
+	 */
+	initialize: function($super, showFnc){
+		$super(URL.getservices, showFnc);
+	},	
 	/**
 	 * renderXML
 	 * See the description in AbstractContentProvider
@@ -241,11 +249,13 @@ var CurrentProvider = Class.create(AbstractContentProvider, {
 	 */
 	renderXML: function(xml){
 		var epg = new EPGList(xml).getArray()[0];
-		var service = new Service(xml).toJSON(); 
+		var service = new Service(xml).toJSON();
+		var volume = new Vol(xml).toJSON();
 		
 		var data = { 
 					'current' : epg,
-					'service' : service
+					'service' : service,
+					'volume' : volume
 				};
 		return data;
 	}

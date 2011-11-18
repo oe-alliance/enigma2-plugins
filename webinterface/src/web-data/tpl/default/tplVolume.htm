@@ -1,6 +1,4 @@
 <!-- tplVolume -->						
-					<div id="volHd" class="header"><div>Volume</div></div>
-					<span class="boxContent center" style="width: 94%; display:block;">
 						{for state in volume.states}
 						<a href="#" class="volume" data-volume="set${state.percent}">
 							{if state.enabled}
@@ -24,6 +22,5 @@
 							{elseif}
 							<img id='speaker' src='/web-data/img/speak_on.png' title="Mute" alt="Mute">
 							{/if}
-						</a>						
-					</span>
+						</a>
 <!-- /tplVolume -->	

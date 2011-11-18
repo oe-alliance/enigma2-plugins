@@ -133,8 +133,8 @@ var Bouquets = Class.create(Controller, {
 });
 
 var Current = Class.create(Controller, {
-	initialize: function($super, target){
-		$super(new CurrentHandler(target));
+	initialize: function($super, curTarget, volTarget){
+		$super(new CurrentHandler(curTarget, volTarget));
 		this.model.onFinished[this.model.onFinished.length] = this.restoreDisplayStyle.bind(this);
 	},
 	
@@ -181,8 +181,8 @@ var EPG = Class.create(Controller, {
 		if(!this.eventsregistered){
 			this.eventsregistered = true;				
 			var win = this.window;
-			win.onload = function(event){
-				var elem = win.document;
+			var elem = win.document;
+			var onload = function(event){
 				elem.on(
 					'click',
 					'.eListAddTimer',
@@ -204,7 +204,13 @@ var EPG = Class.create(Controller, {
 						debug('eListEditTimer');
 					}
 				);
-			}.bind(this);
+			};
+			if(typeof(elem.on) == "function"){
+				onload();
+			} else {
+				win.onload = onload;
+			}
+			
 		}
 	}
 });
@@ -471,10 +477,11 @@ var RemoteControl = Class.create({
 	},
 	
 	registerEvents:function(){
-		var win = this.window;
 		var _this = this;
-		win.onload = function(event){
-			var elem = win.document;
+		var win = this.window;		
+		var elem = win.document;
+		
+		var onload = function(event){			
 			elem.on(
 				'click',
 				'.remoteKey',
@@ -497,6 +504,11 @@ var RemoteControl = Class.create({
 				}
 			);
 		};
+		if(typeof(elem.on) == "function"){
+			onload();
+		} else {
+			win.onload = onload;
+		}
 	}
 });
 
@@ -552,7 +564,7 @@ var Services = Class.create(Controller, {
 	},
 	
 	load: function(sRef){
-		this.model.load({'sRef' : sRef});
+		this.model.load({'bRef' : sRef});
 	},
 	
 	getNowNext: function(){
@@ -609,6 +621,7 @@ var Services = Class.create(Controller, {
 	
 	onFinished: function(){
 		this.addFilterInput();
+		core.startUpdateBouquetItemsPoller();
 	}
 });
 
@@ -757,7 +770,7 @@ var E2WebCore = Class.create({
 		
 		//create required Instances
 		this.bouquets = new Bouquets('contentBouquets', 'contentMain');
-		this.current = new Current('currentContent');
+		this.current = new Current('currentContent', 'volContent');
 		this.epg = new EPG(new EpgListHandler());
 		this.lt = new LocationsAndTags();
 		this.messages = new Messages();
@@ -768,7 +781,7 @@ var E2WebCore = Class.create({
 		this.screenshots = new Screenshots('contentMain');
 		this.simplepages = new SimplePages('contentMain');
 		this.timers = new Timers('contentMain');
-		this.volume = new Volume('navVolume');
+		this.volume = new Volume('volContent');
 		
 		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
 		this.deviceInfo = this.simplepages.getDeviceInfo(function(info){this.deviceInfo = info;}.bind(this));
@@ -880,16 +893,18 @@ var E2WebCore = Class.create({
 	},
 	
 	updateItems: function(){
-		this.volume.load();
+		debug("[E2WebCore].updateItems");
 		this.current.load();
 	},
 
-	updateItemsLazy: function(){	
+	updateItemsLazy: function(){
+		debug("[E2WebCore].updateItemsLazy");
 		this.services.getNowNext();
 		this.services.getSubservices();
 	},
 	
 	startUpdateCurrentPoller: function(){
+		debug("[E2WebCore].startUpdateCurrentPoller");
 		clearInterval(this.updateCurrentPoller);
 		var _this = this;
 		this.updateCurrentPoller = setInterval(_this.updateItems.bind(this), userprefs.data.updateCurrentInterval);
@@ -900,14 +915,14 @@ var E2WebCore = Class.create({
 	},
 	
 	startUpdateBouquetItemsPoller: function(){
-		debug("[startUpdateBouquetItemsPoller] called");
-		clearInterval(updateBouquetItemsPoller);
+		debug("[E2WebCore].startUpdateBouquetItemsPoller");
+		clearInterval(this.updateBouquetItemsPoller);
 		var _this = this;
-		updateBouquetItemsPoller = setInterval(_this.updateItemsLazy.bind(this), userprefs.data.updateBouquetInterval);
+		this.updateBouquetItemsPoller = setInterval(_this.updateItemsLazy.bind(this), userprefs.data.updateBouquetInterval);
 	},
 	
 	stopUpdateBouquetItemsPoller: function(){
-		debug("[stopUpdateBouquetItemsPoller] called");
+		debug("[E2WebCore].stopUpdateBouquetItemsPoller");
 		clearInterval(this.updateBouquetItemsPoller);
 	},
 	
@@ -1002,7 +1017,7 @@ var E2WebCore = Class.create({
 			this.loadDefault();
 		}
 		this.updateItems();
-		this.startUpdateCurrentPoller();
+		this.startUpdateCurrentPoller();		
 	},
 	
 	registerEvents: function(){
@@ -1185,7 +1200,7 @@ var E2WebCore = Class.create({
 			function(event, element){
 				//FIXME
 				element.href = '#';
-				var target = $(element.readAttribute('data-target_id'));
+				var target = element.down('.sListExtEpgLong');
 				if(target){
 					if(target.visible()){
 						target.hide();

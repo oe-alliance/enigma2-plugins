@@ -359,8 +359,6 @@ function EPGEvent(xml, number){
 	
 }
 //END class EPGEvent
-
-
 function EPGList(xml){
 	// parsing values from xml-element
 	try{
@@ -371,26 +369,28 @@ function EPGList(xml){
 	
 	this.getArray = function(sortbytime){
 		var list = [];
+		var len = this.xmlitems.length;
 		
 		if (sortbytime === true){
 			debug("[EPGList].getArray :: Sort by time!");
 			var sortList = [];
-			for(var i=0;i<this.xmlitems.length;i++){
+			
+			for(var i=0; i<len; i++){
 				var event = new EPGEvent(this.xmlitems.item(i), i).toJSON();
 				sortList.push( [event.starttime, event] );
 			}
 			sortList.sort(this.sortFunction);
 			
 			list = [];
-			for(i=0;i<sortList.length;i++){
+			len = sortList.length;
+			for(i=0; i<len; i++){
 				list.push(sortList[i][1]);
 			}
 			
 			return list;
 			
 		}else{
-			list = [];
-			for (i=0;i<this.xmlitems.length;i++){
+			for (i=0; i<len; i++){
 				xv = new EPGEvent(this.xmlitems.item(i)).toJSON();
 				list.push(xv);			
 			}
@@ -400,6 +400,32 @@ function EPGList(xml){
 	
 	this.sortFunction = function(a, b){
 	  return a[0] - b[0];
+	};
+}
+
+function EPGListNowNext(xml){
+	// parsing values from xml-element
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
+	} catch (e) {
+		core.notify("Error Parsing EPG: " + e, false);
+	}
+	
+	this.getArray = function(){
+		list = [];
+		var len = this.xmlitems.length;
+		
+		var idx = 0;
+		var cssclass = 'even';
+		
+		for (var i=0; i < len; i += 2){
+			cssclass = cssclass == 'even' ? 'odd' : 'even';
+			now = new EPGEvent(this.xmlitems.item(i)).toJSON();
+			next = new EPGEvent(this.xmlitems.item(i+1)).toJSON();
+			list[idx] = {"now" : now, "next" : next, "cssclass": cssclass};
+			idx++;
+		}
+		return list;
 	};
 }
 //END class EPGList
@@ -477,7 +503,8 @@ function ServiceList(xml){
 		if(this.servicelist.length === 0){
 			var cssclass = 'even';
 			
-			for (var i=0;i<this.xmlitems.length;i++){
+			var len = this.xmlitems.length;
+			for (var i=0; i<len; i++){
 				cssclass = cssclass == 'even' ? 'odd' : 'even';
 				var service = new Service(this.xmlitems.item(i), cssclass).toJSON();
 				this.servicelist.push(service);
@@ -596,8 +623,8 @@ function MovieList(xml){
 	this.getArray = function(){
 		if(this.movielist.length === 0){
 			var cssclass = "even";
-			
-			for(var i=0;i<this.xmlitems.length;i++){
+			var len = this.xmlitems.length;
+			for(var i=0; i<len; i++){
 				cssclass = cssclass == 'even' ? 'odd' : 'even';
 				
 				var movie = new Movie(this.xmlitems.item(i), cssclass).toJSON();
@@ -841,8 +868,8 @@ function TimerList(xml){
 	this.getArray = function(){
 		if(this.timerlist.length === 0){
 			var cssclass = 'even';
-			
-			for(var i=0;i<this.xmlitems.length;i++){
+			var len = this.xmlitems.length;
+			for(var i=0; i<len; i++){
 				cssclass = cssclass == 'even' ? 'odd' : 'even';
 				var timer = new Timer(this.xmlitems.item(i), cssclass).toJSON();
 				this.timerlist.push(timer);			
@@ -990,7 +1017,8 @@ function SimpleXMLList(xml, tagname){
 	
 	this.getList = function(){
 		if(this.xmllist.length === 0){
-			for(var i=0;i<this.xmlitems.length;i++){
+			var len = this.xmlitems.length;
+			for(var i=0; i<len; i++){
 				this.xmllist.push(this.xmlitems.item(i).firstChild.data);			
 			}
 		}
@@ -1031,7 +1059,8 @@ function Settings(xml){
 	
 	this.getArray = function(){
 		if(this.settings.length === 0){
-			for (var i=0;i<this.xmlitems.length;i++){
+			var len = this.xmlitems.length;
+			for (var i=0; i < len; i++){
 				var setting = new Setting(this.xmlitems.item(i));
 				this.settings.push(setting);			
 			}
@@ -1054,7 +1083,8 @@ function FileList(xml){
 
 	this.getArray = function(){
 		if(this.filelist.length === 0){
-			for(var i = 0; i < this.xmlitems.length; i++){
+			var len = this.xmlitems.length;
+			for(var i = 0; i < len; i++){
 				var file = new File(this.xmlitems.item(i));
 				this.filelist.push(file);
 			}

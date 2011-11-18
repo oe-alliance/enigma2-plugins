@@ -1,11 +1,7 @@
 import Plugins.Plugin
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-<<<<<<< HEAD
-import os, gettext, sha
-=======
 import os, gettext, hashlib
->>>>>>> remotes/origin/master
 
 __version__ = "1.6.8"
 
@@ -41,11 +37,7 @@ def decrypt_block(src, mod):
 	if len(src) != 128 and len(src) != 202:
 		return None
 	dest = rsa_pub1024(src[:128], mod)
-<<<<<<< HEAD
-	hash = sha.new(dest[1:107])
-=======
 	hash = hashlib.sha1(dest[1:107])
->>>>>>> remotes/origin/master
 	if len(src) == 202:
 		hash.update(src[131:192])	
 	result = hash.digest()

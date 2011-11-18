@@ -14,11 +14,13 @@ var AbstractContentHandler = Class.create({
 	
 	load: function(parms, fnc){
 		this.requestStarted();
+		this.parms = parms;
 		this.provider.load(parms, fnc);
 	},	
 	
 	reload: function(){
-		this.load(this.parms);
+		this.requestStarted();
+		this.provider.reload();
 	},
 	
 	/**
@@ -175,15 +177,23 @@ var BouquetListHandler = Class.create(AbstractContentHandler, {
 });
 
 var CurrentHandler  = Class.create(AbstractContentHandler, {
-	initialize: function($super, target){
-		$super('tplCurrent', target);
+	initialize: function($super, curTarget, volTarget){
+		$super('tplCurrent', curTarget);		
 		this.provider = new CurrentProvider(this.show.bind(this));
-	}	
+		this.volTpl = 'tplVolume';
+		this.volTarget = volTarget;
+	},
+
+	show : function(data){
+		this.data = data;
+		templateEngine.process(this.volTpl, data, this.volTarget);
+		templateEngine.process(this.tpl, data, this.target, this.finished.bind(this));
+	},
 });
 
 var ServiceListHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
-		$super('tplServiceList', target, [this.getNowNext.bind(this),this.getSubservices.bind(this)]);
+		$super('tplServiceList', target, [this.getSubservices.bind(this)]);
 
 		this.provider = new ServiceListProvider(this.show.bind(this));
 		this.epgHandler = new ServiceListEpgHandler();
@@ -198,7 +208,7 @@ var ServiceListHandler = Class.create(AbstractContentHandler, {
 	 * using this.parms.sRef as the servicereference of the bouquet 
 	 */
 	getNowNext: function(){
-		this.epgHandler.provider.getNowNext({bRef : this.provider.parms.sRef});
+		this.epgHandler.load({bRef : this.provider.parms.bRef});
 	},
 	
 	/**
@@ -252,9 +262,12 @@ var EpgListHandler = Class.create(AbstractContentHandler,{
 });
 
 var ServiceListEpgHandler  = Class.create(AbstractContentHandler, {
+	EPG_NOW : 'NOW',
+	EPG_NEXT : 'NEXT',
+	
 	initialize: function($super){
 		$super('tplServiceListEPGItem');
-		this.provider = new ServiceListEpgProvider(this.show.bind(this));
+		this.provider = new ServiceListProvider(this.show.bind(this));
 	},
 	
 	/**
@@ -262,11 +275,11 @@ var ServiceListEpgHandler  = Class.create(AbstractContentHandler, {
 	 * calls this.showItem for each item of @list
 	 * @list - An array of EPGEvents
 	 */	
-	show: function(list, type){
-		for(var i = 0; i < list.length; i++){
-			this.showItem(list[i], type);
+	show: function(list){
+		var len = list.items.length;
+		for(var i = 0; i < len; i++){
+			this.showItem(list.items[i]);
 		}
-		
 		this.finished();
 	},
 	
@@ -278,14 +291,21 @@ var ServiceListEpgHandler  = Class.create(AbstractContentHandler, {
 	 */
 	//TODO: move showItem outta here
 	showItem: function(item, type){
-		if(item.eventid != ''){
-			var data = { epg : item, nownext: type };
-			var id = type + item.servicereference;
-	
-			templateEngine.process('tplServiceListEPGItem', data, id, true);
+		if(item.now.eventid != ''){
+			var id = this.EPG_NOW + item.now.servicereference;
+			templateEngine.process('tplServiceListEPGItem', {'item' : item.now}, id, true);
 
-			var element = $('tr' + id);
-			if(element !== null){
+			var element = $(id).up('.sListEPGNow');
+			if(element){
+				element.show();
+			}
+		}
+		
+		if(item.next.eventid != ''){
+			var id = this.EPG_NEXT + item.now.servicereference;
+			templateEngine.process('tplServiceListEPGItem', {'item' : item.next}, id, true);
+			var element = $(id).up('.sListEPGNext');
+			if(element){
 				element.show();
 			}
 		}

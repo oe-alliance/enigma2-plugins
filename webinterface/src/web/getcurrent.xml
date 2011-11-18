@@ -1,5 +1,5 @@
 <e2:screen name="UpdateWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-<e2currentserviceinformation>																														
+<e2currentserviceinformation>																								
 	<e2service>
 		<e2servicereference><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Reference</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2servicereference>
 		<e2servicename><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2servicename>
@@ -47,5 +47,11 @@
 			<e2eventdescriptionextended><e2:element source="session.Event_Next"><e2:convert type="EventName">ExtendedDescription</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescriptionextended>
 		</e2event>
 	</e2eventlist>	
+	<e2volume>
+		<e2result><e2:element source="Volume"><e2:convert type="VolumeInfo">Result</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2result>
+		<e2resulttext><e2:element source="Volume"><e2:convert type="VolumeInfo">ResultText</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2resulttext>
+		<e2current><e2:element source="Volume"><e2:convert type="VolumeInfo">Volume</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2current>
+		<e2ismuted><e2:element source="Volume"><e2:convert type="VolumeInfo">IsMuted</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2ismuted>
+	</e2volume>				
 </e2currentserviceinformation>
 </e2:screen>

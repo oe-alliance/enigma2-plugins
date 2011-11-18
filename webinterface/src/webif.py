@@ -241,7 +241,7 @@ class SimpleListFiller(Converter):
 				
 			for (element, filternum) in list:
 				#filter out "non-displayable" Characters - at the very end, do it the hard way...
-				item = str(item).replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
+				item = str(item)#.replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
 				
 				if not filternum:
 					append(element)
@@ -304,7 +304,7 @@ class ListFiller(Converter):
 				curitem = ""
 				if filternum:
 					#filter out "non-displayable" Characters - at the very end, do it the hard way...
-					curitem = str(item[element]).replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
+					curitem = str(item[element])#.replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
 					if curitem is None:
 						curitem = ""
 				else:

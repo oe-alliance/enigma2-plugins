@@ -1,21 +1,21 @@
 
 <!-- tplServiceListEPGItem -->	
-	{if epg.title != 'None'}
-	<a href="#" class="sListExtEpg" data-target_id="trExt${nownext}${epg.servicereference}" title="Click to show/hide extended Description">
-		<table cellspacing="0">
-			<tr>
-				<td class="epgStart">${epg.starttime}</td>
-				<td class="epgTitle">${epg.title}</td>
-				{if epg.duration != epg.remaining}
-				<td class="epgLength">+${epg.remaining} of ${epg.duration}</td>
-				{else}
-				<td class="epgLength">${epg.duration}</td>
-				{/if}
-			</tr>
-			<tr id="trExt${nownext}${epg.servicereference}" style="display:none">
-				<td colspan="4" class="epgLong">${epg.extdescription}</td>
-			</tr>
-		</table>
-	</a>
-	{/if}
+															{if item.title != ''}
+															<a href="#" class="sListExtEpg" title="Click to show/hide extended Description">
+																<table cellspacing="0">
+																	<tr>
+																		<td class="epgStart">${item.starttime}</td>
+																		<td class="epgTitle">${item.title}</td>
+																		{if item.duration != item.remaining}
+																		<td class="epgLength">+${item.remaining} of ${item.duration}</td>
+																		{else}
+																		<td class="epgLength">${item.duration}</td>
+																		{/if}
+																	</tr>
+																	<tr class="sListExtEpgLong" style="display:none">
+																		<td colspan="4" class="epgLong">${item.extdescription}</td>
+																	</tr>
+																</table>
+															</a>
+															{/if}
 <!-- /tplServiceListEPGItem -->

@@ -20,8 +20,9 @@ class UpdateWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from Components.Sources.Clock import Clock
-
 		self["CurrentTime"] = Clock()
+		from WebComponents.Sources.Volume import Volume
+		self["Volume"] = Volume(session)
 
 
 class MessageWebScreen(WebScreen):
@@ -76,7 +77,6 @@ class AboutWebScreen(WebScreen):
 class VolumeWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-
 		from WebComponents.Sources.Volume import Volume
 		self["Volume"] = Volume(session)
 
@@ -156,6 +156,7 @@ class EpgWebScreen(WebScreen):
 		self["EpgService"] = EPG(session, func=EPG.SERVICE)
 		self["EpgBouquetNow"] = EPG(session, func=EPG.BOUQUETNOW)
 		self["EpgBouquetNext"] = EPG(session, func=EPG.BOUQUETNEXT)
+		self["EpgBouquetNowNext"] = EPG(session, func=EPG.BOUQUETNOWNEXT)
 		self["EpgServiceNow"] = EPG(session, func=EPG.SERVICENOW)
 		self["EpgServiceNext"] = EPG(session, func=EPG.SERVICENEXT)
 		self["EpgBouquet"] = EPG(session, func=EPG.BOUQUET)
