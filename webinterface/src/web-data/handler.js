@@ -188,7 +188,7 @@ var CurrentHandler  = Class.create(AbstractContentHandler, {
 		this.data = data;
 		templateEngine.process(this.volTpl, data, this.volTarget);
 		templateEngine.process(this.tpl, data, this.target, this.finished.bind(this));
-	},
+	}
 });
 
 var ServiceListHandler = Class.create(AbstractContentHandler, {
@@ -447,7 +447,7 @@ var RemoteControlHandler = Class.create(SimpleRequestHandler,{
 	showSimpleResult: function(result){
 		if(!result.getState())
 			this.notify(result.getStateText(), result.getState());
-	},	
+	}
 });
 
 var TimerListHandler  = Class.create(AbstractContentHandler, {
@@ -606,8 +606,19 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				'eit' : '0',
 				'disabled' : t.disabled,
 				'justplay' : t.justplay,
-				'repeated' : t.repeated,
+				'repeated' : t.repeated
 			});
+	},
+	
+	addByEventId: function(sRef, id, justplay){
+		this.provider.simpleResultQuery(
+			URL.timeraddbyeventid,
+			{
+				'sRef' : sRef,
+				'eventid' : id,
+				'justplay' : justplay
+			},
+			this.simpleResultCallback.bind(this));
 	},
 	
 	change: function(t, old){

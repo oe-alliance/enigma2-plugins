@@ -187,14 +187,16 @@ var EPG = Class.create(Controller, {
 					'click',
 					'.eListAddTimer',
 					function(event, element){
-						debug('eListAddTimer');
+						core.timers.addByEventId(element, 0);
+						return false;
 					}
 				);
 				elem.on(
 					'click',
 					'.eListZapTimer',
 					function(event, element){
-						debug('eListZapTimer');
+						core.timers.addByEventId(element, 1);
+						return false;
 					}
 				);
 				elem.on(
@@ -202,10 +204,11 @@ var EPG = Class.create(Controller, {
 					'.eListEditTimer',
 					function(event, element){
 						debug('eListEditTimer');
+						return false;
 					}
 				);
 			};
-			if(typeof(elem.on) == "function"){
+			if(elem.on){
 				onload();
 			} else {
 				win.onload = onload;
@@ -713,6 +716,13 @@ var Timers = Class.create({
 	
 	edit: function(element){
 		this.timerHandler.load(element);
+	},
+	
+	addByEventId: function(element, justplay){
+		var parent = element.up('.epgListItem');					
+		var sRef = unescape(parent.readAttribute('data-servicereference'));
+		var eventId = unescape(parent.readAttribute('data-eventid'));		
+		this.timerHandler.addByEventId(sRef, eventId, justplay);
 	},
 	
 	toggleDisabled: function(element){

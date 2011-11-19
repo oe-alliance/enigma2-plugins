@@ -511,7 +511,7 @@ var TimerListProvider = Class.create(AbstractContentProvider, {
 	renderXML: function(xml){
 		var list = new TimerList(xml).getArray();
 		return {timer : list};
-	},
+	}
 });
 
 var SimpleRequestProvider = Class.create(AbstractContentProvider,{});
