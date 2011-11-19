@@ -82,18 +82,16 @@ class EPG(Source):
 			search = ['IBDCTSERNX']
 
 			if services: # It's a Bouquet
-				if type is -1: #Now AND Next at once!
+				if type == -1: #Now AND Next at once!
+					append = search.append
 					for service in services:
-						search.append( (service, 0, -1) )
-						search.append( (service, 1, -1) )
+						append((service, 0, -1))
+						append((service, 1, -1))
 				else:
 					search.extend([(service, type, -1) for service in services])
-			print search
 			events = self.epgcache.lookupEvent(search)
 
-		if events:
-			return events
-		return ()
+		return events or ()
 
 	def getEPGofService(self, param, options='IBDCTSERN'):
 		print "[WebComponents.EPG] getEPGofService param: ", param
