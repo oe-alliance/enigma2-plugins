@@ -45,22 +45,23 @@ class OneTimeElement(Element):
 		self.source_id = id
 
 	def handleCommand(self, args):
-		if ',' in self.source_id:
-			paramlist = self.source_id.split(",")
+		source = self.source
+		source_id = self.source_id
+		if ',' in source_id:
+			paramlist = source_id.split(",")
 			list = {}
 			for key in paramlist:
 				if key in args:
 					list[key] = args[key][0]
 				else:
 					list[key] = None
-			self.source.handleCommand(list)
+			source.handleCommand(list)
 		else:
-			for c in args.get(self.source_id, ()):
-				self.source.handleCommand(c)
+			for c in args.get(source_id, ()):
+				source.handleCommand(c)
 
 	def render(self, request):
-		t = self.source.getHTML(self.source_id)
-		request.write(t)
+		request.write(self.source.getHTML(self.source_id))
 
 	def execBegin(self):
 		self.suspended = False
@@ -385,9 +386,10 @@ class webifHandler(ContentHandler):
 		self.sub = [ ]
 
 	def end_convert(self):
-		if len(self.sub) == 1:
-			self.sub = self.sub[0]
-		c = self.converter(self.sub)
+		sub = self.sub
+		if len(sub) == 1:
+			sub = sub[0]
+		c = self.converter(sub)
 		c.connect(self.source)
 		self.source = c
 		del self.sub
@@ -408,7 +410,8 @@ class webifHandler(ContentHandler):
 			self.screens.append(self.screen)
 			return
 
-		if name[:3] == "e2:":
+		n3 = name[:3]
+		if n3 == "e2:":
 			self.mode += 1
 
 		tag = '<' + name + ''.join([' %s="%s"' % x for x in attrs.items()]) + '>'
@@ -420,7 +423,7 @@ class webifHandler(ContentHandler):
 			assert name == "e2:element", "found %s instead of e2:element" % name
 			self.start_element(attrs)
 		elif self.mode == 2: # expect "<e2:convert>"
-			if name[:3] == "e2:":
+			if n3 == "e2:":
 				assert name == "e2:convert"
 				self.start_convert(attrs)
 			else:
@@ -435,16 +438,18 @@ class webifHandler(ContentHandler):
 			self.screen = None
 			return
 
+		n3 = name[:3]
 		tag = "</" + name + ">"
 		if self.mode == 0:
 			self.res.append(tag)
-		elif self.mode == 2 and name[:3] != "e2:":
-			self.sub.append(tag)
-		elif self.mode == 2: # closed 'convert' -> sub
-			self.end_convert()
+		elif self.mode == 2:
+			if n3 == "e2:": # closed 'convert' -> sub
+				self.end_convert()
+			else:
+				self.sub.append(tag)
 		elif self.mode == 1: # closed 'element'
 			self.end_element()
-		if name[:3] == "e2:":
+		if n3 == "e2:":
 			self.mode -= 1
 
 	def processingInstruction(self, target, data):
