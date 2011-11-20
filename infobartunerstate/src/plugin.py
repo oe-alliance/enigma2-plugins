@@ -60,6 +60,12 @@ from skin import parseColor, parseFont
 
 from netstat import netstat
 
+try:
+	from Plugins.Extensions.WebInterface.WebScreens import StreamingWebScreen 
+except:
+	StreamingWebScreen = None
+
+
 NAME = _("InfoBar Tuner State") 
 DESCRIPTION = _("Show InfoBar Tuner State")
 VERSION = "V0.8.2"
@@ -531,14 +537,27 @@ class InfoBarTunerState(object):
 		#eventNewProgramInfo
 		#decoder state
 		
+		try:
+			from Plugins.Extensions.WebInterface.WebScreens import streamingEvents
+			streamingEvents.append(self.onStreamingEventTEST)
+		except:
+			pass
+
+	def onStreamingEventTEST(self, event, stream):
+		if StreamingWebScreen:
+			print str("onStreamingEventTEST")
+			if event == StreamingWebScreen.evStart:
+				print event
+			elif event == StreamingWebScreen.evend:
+				print event
+
 	#def test(self, event):
 	#	print "InfoBarTuner test " + str(event)
 
 	def appendEvents(self):
 		# Recording Events
-		#TEST If we append our function, we will never see the timer state StateEnded for repeating timer
-		#self.session.nav.RecordTimer.on_state_change.insert(0, self.__onRecordingEvent)
-		self.session.nav.RecordTimer.on_state_change.append(self.__onRecordingEvent)
+		# If we append our function, we will never see the timer state StateEnded for repeating timer
+		self.session.nav.RecordTimer.on_state_change.insert(0, self.__onRecordingEvent)
 		# Streaming Events
 		self.session.nav.record_event.append(self.__onStreamingEvent)
 		# Zapping Events
@@ -605,6 +624,9 @@ class InfoBarTunerState(object):
 
 	def __onRecordingEvent(self, timer):
 		if not timer.justplay:
+			print "__onRecordingEvent "
+			print str(timer.name)
+			print str(timer.state)
 			if timer.state == timer.StatePrepared:
 				pass
 			
@@ -631,8 +653,8 @@ class InfoBarTunerState(object):
 					if config.infobartunerstate.show_events.value:
 						self.show(True)
 			
-			# Finished repeating timer will report the state StateEndend+1 
-			elif timer.state >= timer.StateEnded:
+			# Finished repeating timer will report the state StateEnded+1 or StateWaiting
+			else:
 				id = str( timer )
 				if id in self.entries:
 					win = self.entries[id]
