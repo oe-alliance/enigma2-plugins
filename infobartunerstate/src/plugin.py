@@ -1,7 +1,7 @@
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
-#    Vesion 0.8
+#    Vesion 0.8.1
 #    Coded by betonme (c)2011
 #    Support: IHAD
 #
@@ -62,7 +62,7 @@ from netstat import netstat
 
 NAME = _("InfoBar Tuner State") 
 DESCRIPTION = _("Show InfoBar Tuner State")
-VERSION = "V0.8.0"
+VERSION = "V0.8.1"
 INFINITY =  u"\u221E".encode("utf-8")
 #TODO About
 
@@ -626,7 +626,8 @@ class InfoBarTunerState(object):
 					del timer
 					win = self.session.instantiateDialog(TunerState, Record, tuner, tunertype, name, service_ref, filename)
 					self.entries[id] = win
-					self.show(True)
+					if config.infobartunerstate.show_events.value:
+						self.show(True)
 			
 			# Finished repeating timer will report the state StateEndend+1 
 			elif timer.state >= timer.StateEnded:
@@ -642,7 +643,8 @@ class InfoBarTunerState(object):
 					win.updateType( Finished )
 					win.updateTimes( begin, end, endless )
 					
-					self.show(True)
+					if config.infobartunerstate.show_events.value:
+						self.show(True)
 
 	def __onStreamingEvent(self, rec_service, event, getip=True):
 		if event == iRecordableService.evStart:
@@ -725,7 +727,8 @@ class InfoBarTunerState(object):
 							
 						win = self.session.instantiateDialog(TunerState, Stream, tuner, tunertype, name, service_ref, filename, client, ip, port)
 						self.entries[id] = win
-						self.show(True)
+						if config.infobartunerstate.show_events.value:
+							self.show(True)
 						break
 						
 				#print stream.getRecordService()  # iRecordableService
@@ -802,7 +805,8 @@ class InfoBarTunerState(object):
 						win.updateType( Finished )
 						win.updateTimes( begin, end, endless )
 						
-						self.show(True)
+						if config.infobartunerstate.show_events.value:
+							self.show(True)
 
 	def __onPlayableEvent(self, event):
 		#TEST PiP
@@ -836,19 +840,18 @@ class InfoBarTunerState(object):
 				self.__onStreamingEvent(rec_service=stream.getRecordService(), event=iRecordableService.evStart, getip=False)
 
 	def show(self, autohide=False):
-		if config.infobartunerstate.show_events.value:
-			if self.showTimer.isActive():
-				self.showTimer.stop()
-			self.showTimer.start( 100, True )
-			
-			if autohide:
-				# Start timer to avoid permanent displaying
-				# Do not start timer if no timeout is configured
-				idx = config.usage.infobar_timeout.index
-				if idx:
-					if self.hideTimer.isActive():
-						self.hideTimer.stop()
-					self.hideTimer.startLongTimer( int(idx) or 5 )
+		if self.showTimer.isActive():
+			self.showTimer.stop()
+		self.showTimer.start( 100, True )
+		
+		if autohide:
+			# Start timer to avoid permanent displaying
+			# Do not start timer if no timeout is configured
+			idx = config.usage.infobar_timeout.index
+			if idx:
+				if self.hideTimer.isActive():
+					self.hideTimer.stop()
+				self.hideTimer.startLongTimer( int(idx) or 5 )
 
 	def tunerShow(self):
 		if self.entries:
@@ -1393,7 +1396,7 @@ def getTuner(service):
 	data = feinfo and feinfo.getAll(False)
 	number = data and data.get("tuner_number", -1)
 	type = data and data.get("tuner_type", "")
-	if number and number > -1:
+	if number > -1:
 		return ( chr( number + ord('A') ), type)
 	else:
 		return "", ""
