@@ -1,16 +1,27 @@
 <screen name="TunerState" flags="wfNoBorder" position="00,110" size="1000,32" title="Tuner State" zPosition="5">
 	<widget name="Background" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/bg_gradient.png" position="0,0" size="1280,32" zPosition="0" alphatest="off" transparent="1"/>
-	<!-- Default field: Icon -->
-		<widget name="Record"     pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/record.png"  position="30,0" size="42,32" zPosition="1" alphatest="on"/>
-		<widget name="Stopped"    pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/stopped.png" position="30,0" size="42,32" zPosition="1" alphatest="on"/>
+	<!-- Icon -->
+	<widget name="Record"     pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/record.png"   position="30,0" size="32,32" zPosition="1" alphatest="on"/>
+	<widget name="Finished"   pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/finished.png" position="30,0" size="32,32" zPosition="1" alphatest="on"/>
+	<widget name="Stream"     pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/stream.png"   position="30,0" size="32,32" zPosition="1" alphatest="on"/>
 	<!-- Default field: Tuner -->
-		<widget name="Tuner"     font="Regular;22" noWrap="1" position="72,0"  size="50,32" zPosition="1" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
-	<!-- Default field: Number -->
-		<widget name="Number"    font="Regular;22" noWrap="1" position="100,0" size="50,32" zPosition="1" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
-	<!-- Default field: Channel -->
-		<widget name="Channel"   font="Regular;22" noWrap="1" position="200,0" size="50,32" zPosition="1" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
-	<!-- Default field: Name -->
-		<widget name="Name"      font="Regular;22" noWrap="1" position="300,0" size="50,32" zPosition="1" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
+	<widget name="Field0"     font="Regular;22" noWrap="1" position="100,0"  size="100,32" zPosition="1" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+	<!-- Default field: Channel Number -->
+	<widget name="Field1"     font="Regular;22" noWrap="1" position="200,0" size="100,32" zPosition="1" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
+	<!-- Default field: Channel Name -->
+	<widget name="Field2"     font="Regular;22" noWrap="1" position="300,0" size="100,32" zPosition="1" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+	<!-- Default field: Timer Name -->
+	<widget name="Field3"     font="Regular;22" noWrap="1" position="400,0" size="100,32" zPosition="1" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
 	<!-- Default field: Remaining -->
-		<widget name="Remaining" font="Regular;22" noWrap="1" position="400,0" size="50,32" zPosition="1" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+	<widget name="Field4"     font="Regular;22" noWrap="1" position="500,0" size="100,32" zPosition="1" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+	<!-- Default field: None -->
+	<widget name="Field5"     font="Regular;22" noWrap="1" position="600,0" size="100,32" zPosition="1" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
+	<!-- Default field: None -->
+	<widget name="Field6"     font="Regular;22" noWrap="1" position="500,0" size="100,32" zPosition="1" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+	<!-- Default field: None -->
+	<widget name="Field7"     font="Regular;22" noWrap="1" position="600,0" size="100,32" zPosition="1" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
+	<!-- Default field: None -->
+	<widget name="Field8"     font="Regular;22" noWrap="1" position="500,0" size="100,32" zPosition="1" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+	<!-- Default field: None -->
+	<widget name="Field9"     font="Regular;22" noWrap="1" position="600,0" size="100,32" zPosition="1" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
 </screen>

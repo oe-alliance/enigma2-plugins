@@ -1,7 +1,7 @@
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
-#    Vesion 0.6
+#    Vesion 0.7
 #    Coded by betonme (c)2011
 #    Support: IHAD
 #
@@ -20,6 +20,8 @@
 import math
 import os
 import NavigationInstance
+import socket
+import sys
 
 from collections import defaultdict
 from operator import attrgetter, itemgetter
@@ -38,7 +40,7 @@ from Screens.InfoBar import InfoBar
 from Screens.InfoBarGenerics import InfoBarShowHide
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
-from time import time
+from time import time, localtime, strftime
 
 from enigma import iServiceInformation, ePoint, eSize, getDesktop, iFrontendInformation
 
@@ -65,13 +67,38 @@ Version = "V0.6.0"
 
 # Globals
 gInfoBarTunerState = None
-InfoBarShowHideSHOW = None
-InfoBarShowHideHIDE = None
+InfoBarShow = None
+InfoBarHide = None
 
+field_choices = [	
+									("Tuner",							_("Tuner")),
+									("ChannelNumber",			_("Channel Number")),
+									("ChannelName",				_("Channel Name")),
+									("Name",							_("Name")),
+									("TimeLeft",					_("Time Left")),
+									("TimeElapsed",				_("Time Elapsed")),
+									#("TimeLeftDuration",					_("Time Left / Duration")),
+									("TimerBegin",				_("Timer Begin")),
+									("TimerEnd",					_("Timer End")),
+									("TimerDuration",			_("Timer Duration")),
+									("Destination",				_("Destination")),
+									("FileSize",					_("File Size")),
+									("FreeSpace",					_("Free Space")),
+									("None",							_("None")),
+									#("Percent"						_("Percent")),		#TODO also graphically
+								]
+
+date_choices = [	
+									("%H:%M",							_("HH:MM")),
+									("%d.%m %H:%M",				_("DD.MM HH:MM")),
+									("%m/%d %H:%M",				_("MM/DD HH:MM")),
+									("%d.%m.%Y %H:%M",		_("DD.MM.YYYY HH:MM")),
+									("%Y/%m/%d %H:%M",		_("YYYY/MM/DD HH:MM")),
+								]
 
 config.infobartunerstate                           = ConfigSubsection()
 
-config.infobartunerstate.about                     = ConfigSelection(default = "1", choices = [("1", " ")])
+config.infobartunerstate.about                     = ConfigNothing()
 config.infobartunerstate.enabled                   = ConfigEnableDisable(default = True)					#TODO needs a restart
 
 config.infobartunerstate.show_infobar              = ConfigYesNo(default = True)
@@ -80,6 +107,21 @@ config.infobartunerstate.show_overwrite            = ConfigYesNo(default = False
 
 config.infobartunerstate.number_finished_records   = ConfigSelectionNumber(0, 10, 1, default = 5)
 config.infobartunerstate.timeout_finished_records  = ConfigSelectionNumber(0, 600, 10, default = 60)
+
+config.infobartunerstate.time_format               = ConfigSelection(default = "%H:%M", choices = date_choices)
+
+#TODO Show Icon but what else should we show : 	text
+config.infobartunerstate.fields                    = ConfigSubsection()
+config.infobartunerstate.fields.a                  = ConfigSelection(default = "Tuner", choices = field_choices)
+config.infobartunerstate.fields.b                  = ConfigSelection(default = "ChannelNumber", choices = field_choices)
+config.infobartunerstate.fields.c                  = ConfigSelection(default = "ChannelName", choices = field_choices)
+config.infobartunerstate.fields.d                  = ConfigSelection(default = "Name", choices = field_choices)
+config.infobartunerstate.fields.e                  = ConfigSelection(default = "TimeLeft", choices = field_choices)
+config.infobartunerstate.fields.f                  = ConfigSelection(default = "None", choices = field_choices)
+config.infobartunerstate.fields.g                  = ConfigSelection(default = "None", choices = field_choices)
+config.infobartunerstate.fields.h                  = ConfigSelection(default = "None", choices = field_choices)
+config.infobartunerstate.fields.i                  = ConfigSelection(default = "None", choices = field_choices)
+config.infobartunerstate.fields.j                  = ConfigSelection(default = "None", choices = field_choices)
 
 
 def Plugins(**kwargs):
@@ -107,26 +149,18 @@ def setup(session, **kwargs):
 	# Show Live TV Tuners PiP Stream ...
 	# Background: Transparent, Block, Dynamic(Farbverlauf)
 	# Width: FullRow, Adapted/Fitting, Symmetrical
-	# Icon or Text for type
-	# Order of elements
-	# Allow Enable disable of elements 
-	# Sort order of entry rows
-	#		Type: Live pip stream record endedrecords
-	#		Tuner A B C D
-	#		Number
-	#		Channel
-	#		Name
-	#		Remaining >0 infinite -
 	#Rec A 2 RTL blabla 10min to /media/hdd/serien 
 	#Rec A 2 RTL /media/hdd/serien/blabla 10min
 	#alltime permanent display
-	#free space of destination path only records
 	# destination ip only streams
+	# show free tuner with dvb-type
+	# Used disk size
+	# Feldbreitenbegrenzung fuer Namen ...
 	try:
 		session.open(InfoBarTunerStateMenu)
 	except Exception, e:
 		print "InfoBarTunerStateMenu exception " + str(e)
-		import sys, traceback
+		import traceback
 		traceback.print_stack(None, file=sys.stdout)
 
 
@@ -173,7 +207,7 @@ class InfoBarTunerStateMenu(Screen, ConfigListScreen):
 		
 #         _config list entry
 #         _                                                     , config element
-		self.config = [	
+		self.config = [
 			#(  _("About")                                             , config.infobartunerstate.about ),
 			
 			(  _("Enable InfoBarTunerState")                          , config.infobartunerstate.enabled ),
@@ -186,10 +220,18 @@ class InfoBarTunerStateMenu(Screen, ConfigListScreen):
 			(  _("Number of finished records in list")                , config.infobartunerstate.number_finished_records ),
 			(  _("Number of seconds for displaying finished records") , config.infobartunerstate.timeout_finished_records ),
 			
+			(  _("Time format")                                       , config.infobartunerstate.time_format ),
+		]
+		for i, configinfobartunerstatefield in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
+			self.config.append(
+			(  _("Field %d content") % (i)                            , configinfobartunerstatefield )
+			)
+			
+		self.config.extend( [	
 			(  seperatorE2Usage                                       , config.infobartunerstate.about ),
 			(  _("Infobar timeout")                                   , config.usage.infobar_timeout ),
 			(  _("Show Message when Recording starts")                , config.usage.show_message_when_recording_starts ),
-		]
+		] )
 
 	def createConfig(self):
 		list = []
@@ -210,14 +252,32 @@ class InfoBarTunerStateMenu(Screen, ConfigListScreen):
 		#self.createConfig()
 
 	def close(self):
-		# Overwrite Screen close function
-		# Handle new config
-		#TODO enable disable plugin
-		#TODO append onClose  remove events undooverwrite
-		if config.infobartunerstate.show_overwrite.value:
-			overwriteInfoBar()
+		global gInfoBarTunerState
+		# Overwrite Screen close function to handle new config
+		if config.infobartunerstate.enabled.value:
+			if not gInfoBarTunerState:
+				# Plugin is not active, enable it
+				gInfoBarTunerState = InfoBarTunerState(self.session)
+			if gInfoBarTunerState:
+				if config.infobartunerstate.show_overwrite.value:
+					overwriteInfoBar()
+				else:
+					recoverInfoBar()
+				if config.infobartunerstate.show_infobar.value:
+					gInfoBarTunerState.bindInfoBar()
+				else:
+					gInfoBarTunerState.unbindInfoBar()
+				#TODO actually not possible to do this
+				#if config.infobartunerstate.show_events.value:
+				#	gInfoBarTunerState.appendEvents()
+				#else:
+				#	gInfoBarTunerState.removeEvents()
+				gInfoBarTunerState.updateRecordTimer()
+				gInfoBarTunerState.updateStreams()
 		else:
-			undoOverwriteInfoBar()
+			if gInfoBarTunerState:
+				# Plugin is active, disable it
+				gInfoBarTunerState.close()
 		
 		# Call baseclass function
 		Screen.close(self)
@@ -244,62 +304,59 @@ def start(reason, **kwargs):
 	#print str(kwargs)
 	if reason == 0: # start
 		if kwargs.has_key("session"):
-			global gInfoBarTunerState
-			session = kwargs["session"]
-			gInfoBarTunerState = InfoBarTunerState(session)
+			if config.infobartunerstate.enabled.value:
+				global gInfoBarTunerState
+				session = kwargs["session"]
+				gInfoBarTunerState = InfoBarTunerState(session)
 
 
 # InfoBarShowHide for MoviePlayer integration
 def overwriteInfoBar():
-	global InfoBarShowHideSHOW, InfoBarShowHideHIDE
-	if InfoBarShowHideSHOW is None:
+	global InfoBarShow, InfoBarHide
+	if InfoBarShow is None:
 		# Backup original function
-		#InfoBarShowHideSHOW = InfoBarShowHide.startHideTimer   # show not working
-		InfoBarShowHideSHOW = InfoBarShowHide._InfoBarShowHide__onShow
+		InfoBarShow = InfoBarShowHide._InfoBarShowHide__onShow
 		# Overwrite function
-		#InfoBarShowHide.startHideTimer = InfoBarShowHideShow
-		InfoBarShowHide._InfoBarShowHide__onShow = InfoBarShowHideShow
-	if InfoBarShowHideHIDE is None:
+		InfoBarShowHide._InfoBarShowHide__onShow = InfoBarShowTunerState
+	if InfoBarHide is None:
 		# Backup original function
-		#InfoBarShowHideHIDE = InfoBarShowHide.doTimerHide   #hide not working
-		InfoBarShowHideHIDE = InfoBarShowHide._InfoBarShowHide__onHide
+		InfoBarHide = InfoBarShowHide._InfoBarShowHide__onHide
 		# Overwrite function
-		#InfoBarShowHide.doTimerHide = InfoBarShowHideHide
-		InfoBarShowHide._InfoBarShowHide__onHide = InfoBarShowHideHide
+		InfoBarShowHide._InfoBarShowHide__onHide = InfoBarHideTunerState
 
-def undoOverwriteInfoBar():
-	global InfoBarShowHideSHOW, InfoBarShowHideHIDE
-	if InfoBarShowHideSHOW:
-		InfoBarShowHide._InfoBarShowHide__onShow = InfoBarShowHideSHOW
-		InfoBarShowHideSHOW = None
-	if InfoBarShowHideHIDE:
-		InfoBarShowHide._InfoBarShowHide__onHide = InfoBarShowHideHIDE
-		InfoBarShowHideHIDE = None
+def recoverInfoBar():
+	global InfoBarShow, InfoBarHide
+	if InfoBarShow:
+		InfoBarShowHide._InfoBarShowHide__onShow = InfoBarShow
+		InfoBarShow = None
+	if InfoBarHide:
+		InfoBarShowHide._InfoBarShowHide__onHide = InfoBarHide
+		InfoBarHide = None
 
-def InfoBarShowHideShow(self):
-	global gInfoBarTunerState, InfoBarShowHideSHOW
-	if InfoBarShowHideSHOW:
-		InfoBarShowHideSHOW(self)
-	print "InfoBarShowHideShow"
+def InfoBarShowTunerState(self):
+	global gInfoBarTunerState, InfoBarShow
+	if InfoBarShow:
+		InfoBarShow(self)
 	if gInfoBarTunerState:
 		gInfoBarTunerState.tunerShow()
 
-def InfoBarShowHideHide(self):
-	global gInfoBarTunerState, InfoBarShowHideHIDE
-	if InfoBarShowHideHIDE:
-		InfoBarShowHideHIDE(self)
-	print "InfoBarShowHideHide"
+def InfoBarHideTunerState(self):
+	global gInfoBarTunerState, InfoBarHide
+	if InfoBarHide:
+		InfoBarHide(self)
 	if gInfoBarTunerState:
 		gInfoBarTunerState.tunerHide()
 
 
 # Type Enum
-RecordStarted, RecordFinished, Streaming = range(3)
+RecordStarted, RecordFinished, Stream = range(3)
 
 
-class InfoBarTunerState(Screen):
+class InfoBarTunerState(Screen):		#DO I really have to use the Sceen class or is object enough
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		
+		self.infobar = None
 		
 		self.hideTimer = eTimer()
 		self.hideTimer.callback.append(self.tunerHide)
@@ -314,38 +371,30 @@ class InfoBarTunerState(Screen):
 		
 		self.posy = getDesktop(0).size().height()
 		
-		# Recording Events
-		# If we append our function, we will never see the timer state StateEnded for repeating timer
-		self.session.nav.RecordTimer.on_state_change.insert(0, self.__onRecordingEvent)
-		# Streaming Events
-		self.session.nav.record_event.append(self.__onStreamingEvent)
-		# Zapping Events
-		#self.session.nav.event.append(self.__onPlayableEvent)
+		self.appendEvents()
+		
 		#self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 		#	{
 		#		iPlayableService.evStart: self.__onPlayableEvent,
 		#		#iPlayableService.evEnd: self.bindInfoBar,
 		#	})
 		
-		#res_mgr = eDVBResourceManager.getInstance()
-		#if res_mgr:
-		#	res_mgr.frontendUseMaskChanged.get().append(self.__onTunerUseMaskChanged)
-		
-		# Add current running records 
-		self.updateRecordTimer()
-		
-		#self.onLayoutFinish.append(self.bindInfoBar)
-		
 		# Bind InfoBarEvents
 		#self.bindInfoBar()
+		#self.onLayoutFinish.append(self.bindInfoBar)
 		# Workaround
 		# The Plugin starts before the InfoBar is instantiated
 		# Check every second if the InfoBar instance exists and try to bind our functions
 		# Is there an alternative solution?
-		self.forceBindInfoBarTimer.start(1000, False)
+		if config.infobartunerstate.show_infobar.value:
+			self.forceBindInfoBarTimer.start(1000, False)
 		
 		if config.infobartunerstate.show_overwrite.value:
 			overwriteInfoBar()
+		
+		# Add current running records / streams
+		self.updateRecordTimer()
+		self.updateStreams()
 		
 		#TODO PiP
 		#self.session.
@@ -358,13 +407,35 @@ class InfoBarTunerState(Screen):
 		
 	#def test(self, event):
 	#	print "InfoBarTuner test " + str(event)
-	
+
+	def appendEvents(self):
+		# Recording Events
+		# If we append our function, we will never see the timer state StateEnded for repeating timer
+		self.session.nav.RecordTimer.on_state_change.insert(0, self.__onRecordingEvent)
+		# Streaming Events
+		self.session.nav.record_event.append(self.__onStreamingEvent)
+		# Zapping Events
+		#self.session.nav.event.append(self.__onPlayableEvent)
+		#res_mgr = eDVBResourceManager.getInstance()
+		#if res_mgr:
+		#	res_mgr.frontendUseMaskChanged.get().append(self.__onTunerUseMaskChanged)
+
+	def removeEvents(self):
+		# Recording Events
+		# If we append our function, we will never see the timer state StateEnded for repeating timer
+		if self.__onRecordingEvent in self.session.nav.RecordTimer.on_state_change:
+			self.session.nav.RecordTimer.on_state_change.remove(self.__onRecordingEvent)
+		# Streaming Events
+		if self.__onStreamingEvent in self.session.nav.record_event:
+			self.session.nav.record_event.remove(self.__onStreamingEvent)
+
 	def bindInfoBar(self):
 		# Reimport InfoBar to force update of the class instance variable
 		# Rebind only if it isn't done already 
 		from Screens.InfoBar import InfoBar
 		print "InfoBarTunerState InfoBar.instance " + str(InfoBar.instance)
 		if InfoBar.instance:
+			self.infobar = InfoBar.instance
 			bindShow = False
 			bindHide = False
 			if hasattr(InfoBar.instance, "onShow"):
@@ -379,20 +450,27 @@ class InfoBarTunerState(Screen):
 				# Bind was successful
 				self.forceBindInfoBarTimer.stop()
 
+	def unbindInfoBar(self):
+		#TODO not tested yet
+		if self.infobar:
+			if hasattr(self.infobar, "onShow"):
+				if self.__onInfoBarEventShow in self.infobar.onShow:
+					self.infobar.onShow.remove(self.__onInfoBarEventShow)
+			if hasattr(self.infobar, "onHide"):
+				if self.__onInfoBarEventHide in self.infobar.onHide:
+					self.infobar.onHide.remove(self.__onInfoBarEventHide)
+
 	def __onTunerUseMaskChanged(self, mask):
 		print "__onTunerUseMaskChanged    " +str(mask)
 
 	def __onInfoBarEventShow(self):
-		if config.infobartunerstate.show_infobar.value:
-			#TODO check recordings streams ...
-			if self.hideTimer.isActive():
-				self.hideTimer.stop()
-			self.tunerShow()
+		#TODO check recordings streams ...
+		if self.hideTimer.isActive():
+			self.hideTimer.stop()
+		self.tunerShow()
 
 	def __onInfoBarEventHide(self):
-		if config.infobartunerstate.show_infobar.value:
-			#TODO check recordings streams ...
-			self.tunerHide()
+		self.tunerHide()
 
 	def __onRecordingEvent(self, timer):
 		if timer.state == timer.StatePrepared:
@@ -406,57 +484,61 @@ class InfoBarTunerState(Screen):
 				print "__onRecordingEventRun    " +str(timer.eit)
 				print "__onRecordingEventRun    " +str(timer.service_ref)
 				print "__onRecordingEventRun    " +str(timer.service_ref.ref)
-				channel = timer.service_ref.getServiceName()
+				#channel = timer.service_ref.getServiceName()
 				tuner = getTuner(timer.record_service)
-				name = timer.name		# No EPG data available: name = instant record
-				end = timer.end
-				
+				#name = timer.name		# No EPG data available: name = instant record
+					
 				#TEST Bug Repeating timer blocking tuner and are not marked as finished
 				#timer.timeChanged = self.__OnTimeChanged
 				
 				id = str(timer)
 				if not id in self.tunerInfo:
-					win = self.session.instantiateDialog(TunerState, type, tuner, channel, name, end)
+					win = self.session.instantiateDialog(TunerState, type, tuner)
 					self.tunerInfo[id] = win
 					self.showWithTimer()
 			
 		#elif timer.state == timer.StateEnded:
 		else:
-			type = RecordFinished
-			print "__onRecordingEventEnd    " +str(timer.state)
-			
+			print "__onRecordingEventEnd    " +str(timer.state)  # Check state of finished repeating timers !!!!!!
 			id = str(timer)
 			if id in self.tunerInfo:
-				#TODO config 
-				#if config.delete_immediately 
-#				print "__onRecordingEvent removed "
 				win = self.tunerInfo[id]
-#				win.hide()
-#				self.session.deleteDialog(win)
-#				del self.tunerInfo[id]
-#				#TODO config
-				win.changeType(type)
-				#TODO config
+				win.change( RecordFinished )
 				self.showWithTimer()
 
 	def __onStreamingEvent(self, rec_service, event):
 		print "__onStreamingEvent2    " +str(event)
 		print "__onStreamingEvent2    " +str(rec_service)
 		if event == iRecordableService.evStart:
+			type = Stream
 			try:
 				from Plugins.Extensions.WebInterface.WebScreens import streamingScreens
-				from Plugins.Extensions.WebInterface.WebComponents.Sources.RequestData import RequestData
+				#from Plugins.Extensions.WebInterface.WebComponents.Sources.RequestData import RequestData
 			except:
 				streamingScreens = []
-			for stream in streamingScreens :
+			print streamingScreens
+			print len(streamingScreens)
+			for stream in streamingScreens:
 				print stream.getRecordService()  # iRecordableService
+				tuner = getTuner(stream.getRecordService())
+				print tuner
 				print stream.getRecordServiceRef()  # eServiceReference
+				
+				#TEST streamauth ON !!!!!
+
 #				if hasattr( stream, 'request' ):
+#http://twistedmatrix.com/documents/current/api/twisted.web.http.Request.html
 #					print stream.request
 #					#print "request TODO dir info " + str(dir(stream.request))
 #					#print "request TODO vars info " + str(vars(stream.request))
-#					#print stream.request.getRequestHostname()
-#					print stream.request.host
+##TODO Howto resolve hostname from ip
+				print stream.request.getRequestHostname()
+				print stream.request.getHost() #.host or .getHost()
+				print stream.request.getClientIP()	#.client
+				print stream.request.getClient()	#.client
+				print stream.request.args
+					##self.transport.getPeer()
+					##mind.broker.transport.getPeer()
 #					#print str(stream.request.host.port)
 #					print stream.request.method
 #					print stream.request.path
@@ -468,8 +550,34 @@ class InfoBarTunerState(Screen):
 #				if stream.has_key( 'StreamService' ):
 #					print stream["StreamService"]
 				#ServiceReference(stream.getRecordServiceRef())
-		
+#			#TEST1
+#			print([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][0])
+#			#TEST2
+#			try:
+#			    host=socket.gethostbyaddr("66.249.71.15")
+#			    print "Primary hostname:"
+#			    print "  " + host[0]
+#			    print "Addresses:"
+#			    for i in host[2]:
+#			        print i
+#			except socket.herror, x:
+#			    print "Cann't find name:", x 
+			#http://python.about.com/od/pythonstandardlibrary/qt/dnscheck.htm
+			#TEST3 if filestream
+			#http://schwerkraft.elitedvb.net/plugins/scmgit/cgi-bin/gitweb.cgi?p=enigma2-plugins/enigma2-plugins.git;a=blob;f=webinterface/src/WebChilds/FileStreamer.py#l10
+# 			if 'dir' in request.args:
+# 				dir = unquote(request.args['dir'][0])
+# 			elif 'root' in request.args:
+# 				dir = unquote(request.args['root'][0])
+# 			else:
+# 				dir = ''
+# 			if 'file' in request.args:                      
+# 				filename = unquote(request.args["file"][0])
+# 					path = dir + filename
+# 					if not os_path.exists(path):
+# 						path = "/hdd/movie/%s" % (filename)
 		elif event == iRecordableService.evEnd:
+			type = Stream
 			try:
 				from Plugins.Extensions.WebInterface.WebScreens import streamingScreens 
 			except:
@@ -477,6 +585,8 @@ class InfoBarTunerState(Screen):
 			for stream in streamingScreens:
 				#Delete first second any difference !?
 				print stream.getRecordService()  # iRecordableService
+				tuner = getTuner(stream.getRecordService())
+				print tuner
 				print stream.getRecordServiceRef()  # eServiceReference
 
 	def __onPlayableEvent(self, event):
@@ -495,6 +605,10 @@ class InfoBarTunerState(Screen):
 		for timer in NavigationInstance.instance.RecordTimer.timer_list:
 			if timer.isRunning() and not timer.justplay:
 				self.__onRecordingEvent(timer)
+
+	def updateStreams(self):
+		#TODO
+		pass
 
 	def showWithTimer(self):
 		if config.infobartunerstate.show_events.value:
@@ -528,50 +642,45 @@ class InfoBarTunerState(Screen):
 		# Delete entries:
 		#  if entry reached timeout
 		#  if number of entries is reached
-		numberoffinished = 0
+		numberfinished = 0
 		for id, win in sorted( self.tunerInfo.items(), key=lambda x: (x[1].end), reverse=True ):
 			if win.type == RecordFinished:
-				numberoffinished += 1
-			
+				numberfinished += 1
 			if win.toberemoved == True \
-				or win.type == RecordFinished and numberoffinished > int( config.infobartunerstate.number_finished_records.value ):
+				or win.type == RecordFinished and numberfinished > int( config.infobartunerstate.number_finished_records.value ):
 				# Delete Stopped Timers
 				self.session.deleteDialog(win)
 				del self.tunerInfo[id]
 		
+		# Update windows
 		# Dynamic column resizing and repositioning
 		#TODO get Initial Position and Size from skin
 		posy = self.posy
 		posx, sizeh = 0, 0
-		lentuner, lennumber, lenchannel, lenname, lenremaining = 0, 0, 0, 0, 0
+		width = [0] * len( config.infobartunerstate.fields.dict() )
 		for id, win in self.tunerInfo.items():
 			timer = getTimer( id )
 			if timer:
 				win.update( timer )
-				if posx == 0:
-					posx = win.instance.position().x()
-					sizeh = win.instance.size().height()
-				posy       = min( win.instance.position().y(), posy )
-				lentuner   = max( win["Tuner"].instance.calculateSize().width(), lentuner )
-				lennumber  = max( win["Number"].instance.calculateSize().width(), lennumber )
-				lenchannel = max( win["Channel"].instance.calculateSize().width(), lenchannel )
-				lenname    = max( win["Name"].instance.calculateSize().width(), lenname )
-				lenremaining = max( win["Remaining"].instance.calculateSize().width(), lenremaining )
 			else:
 				print "InfoBarTunerState Warning no timer found"
+				#TODO Update without timer ???
+			if posx == 0:
+				posx = win.instance.position().x()
+				sizeh = win.instance.size().height()
+			posy = min( win.instance.position().y(), posy )
+				
+			#TODO width icon as pos offset ?
+			width = map(lambda (i, w): max( win[ "Field"+str(i) ].instance.calculateSize().width(), w ), enumerate( width ) )
 		
 		self.posy = posy
 		
 		# Spacing between the column entries
-		lentuner   += 15
-		lennumber  += 15
-		lenchannel += 15
-		lenname    += 15
-		lenremaining += 15
+		width = [w+15 if w>0 else 0 for w in width]
 		
 		# Resize, move and show windows
-		for win in sorted( self.tunerInfo.itervalues(), key=lambda x: (x.type, x.remaining) ):
-			win.resize(lentuner, lennumber, lenchannel, lenname, lenremaining)
+		for win in sorted( self.tunerInfo.itervalues(), key=lambda x: (x.type, x.timeleft) ):
+			win.resize(width)
 			win.instance.move(ePoint(posx, posy))
 			posy += sizeh
 			# Show windows
@@ -583,35 +692,55 @@ class InfoBarTunerState(Screen):
 		for win in self.tunerInfo.itervalues():
 			win.hide()
 
+	def close(self):
+		#TODO not tested yet it will be used for dynamic disabling the plugin
+		recoverInfoBar()
+		self.unbindInfoBar()
+		self.removeEvents()
+		self.tunerHide()
+		for id, win in self.tunerInfo.items():
+			self.session.deleteDialog(win)
+			del self.tunerInfo[id]
+		Screen.close(self)
+		#TODO before or after Screen.close ????
+		global gInfoBarTunerState
+		gInfoBarTunerState = None
+
 
 class TunerState(Screen):
 	skinfile = "/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/skin.xml" 
 	skin = open(skinfile).read()
 
-	def __init__(self, session, type, tuner, channel, name, end):
+	def __init__(self, session, type, tuner):
 		
 		Screen.__init__(self, session)
 		
+		self.toberemoved = False
 		self.removeTimer = eTimer()
 		self.removeTimer.callback.append(self.remove)
-		self.toberemoved = False
 		
-		self.type = type
 		self["Background"] = Pixmap()
 		self["Record"] = Pixmap()
-		self["Stopped"] = Pixmap()
+		self["Finished"] = Pixmap()
+		self["Stream"] = Pixmap()
+		
+		for i in xrange( len( config.infobartunerstate.fields.dict() ) ):
+			self[ "Field" + str(i) ] = Label()
+		
+		#TODO Avoid multiple data storin, but these are needed for the sorting and performance reasons
+		self.type = type
+		self.tuner = tuner
+		self.channelnumber = -1
+		
+		self.timeleft = 0
+		self.duration = 0
+		self.end = 0
+		
+		#self.channelname = ""
+		#self.name = ""
+		#self.destination = ""
+		
 		self.updateType()
-		
-		self["Tuner"] = Label(tuner)
-		self["Number"] = Label()
-		self["Channel"] = Label(channel)
-		
-		self["Name"] = Label(name)
-		
-		self.remaining = 0
-		self["Remaining"] = Label()
-		
-		self.end = end
 		
 #		skin = None
 #		CoolWide = getDesktop(0).size().width()
@@ -626,86 +755,145 @@ class TunerState(Screen):
 #			self.skin = Cool.read()
 #			Cool.close()
 
-	def changeType(self, type):
-		self.type = type
-		self.updateType()
+	def change(self, type):
+		if self.type != type:
+			self.type = type
+			self.updateType()
 
 	def updateType(self):
 		if self.type == RecordStarted:
 			self["Record"].show()
-			self["Stopped"].hide()
+			self["Finished"].hide()
+			self["Stream"].hide()
 		elif self.type == RecordFinished:
 			self["Record"].hide()
-			self["Stopped"].show()
-			self["Tuner"].setText( "-" )
+			self["Finished"].show()
+			self["Stream"].hide()
+			self.tuner = _("-")
 			# Check if timer is already started
 			if not self.removeTimer.isActive():
 				# Check if timeout is configured
 				if config.infobartunerstate.timeout_finished_records.value:
 					self.removeTimer.startLongTimer( int( config.infobartunerstate.timeout_finished_records.value ) )
+		elif self.type == Stream:
+			self["Record"].hide()
+			self["Finished"].hide()
+			self["Stream"].show()
 
 	def update(self, timer):
-		# Calculate remaining minutes
 		if timer:
+			# Is this really necessary?
+			try: timer.Filename
+			except: timer.calculateFilename()
+			# Update sorting parameters
+			self.timeleft = int( math.ceil( ( timer.end - time() ) / 60.0 ) )
+			self.duration = int( math.ceil( ( timer.end - timer.begin ) / 60.0 ) )
 			self.end = timer.end
-			if not timer.autoincrease:
-				if self.type == RecordFinished:
-					# Show recording length
-					duration = int( math.ceil( ( self.end - timer.begin ) / 60.0 ) )
-					self.remaining = 0
-					self["Remaining"].setText( str(duration) + _(" Min") )
-				elif self.end > 0:
-					# Show remaining recording time
-					self.remaining = int( math.ceil( ( self.end - time() ) / 60.0 ) )
-					self["Remaining"].setText( str(self.remaining) + _(" Min") )
-				else:
-					self.remaining = 0
-					self["Remaining"].setText( "" )
-			else: 
-				# Add infinity symbol for indefinitely recordings
-				self.remaining = 0xFFFFFFFFFFFFFFFF
-				self["Remaining"].setText( u"\u221E".encode("utf-8") )
-				#TODO config update name of infinite recordings
-				epg = eEPGCache.getInstance()
-				event = epg and epg.lookupEventTime(timer.service_ref.ref, -1, 0)
-				if event: 
-					self["Name"].setText( event.getEventName() )
-		else:
-			# No timer available
-			self.remaining = 0
-			self["Remaining"].setText( "" )
+			self.filename = timer.Filename + ".ts"
 		
-		if not self["Number"].getText():
-			if timer and timer.service_ref and timer.service_ref.ref:
-				number = getNumber(timer.service_ref.ref)
-				if number > 0:
-					self["Number"].setText( str(number) )
-		
-		#TODO Handle Live Entry - Update all Labels
-
-	def resize(self, lentuner, lennumber, lenchannel, lenname, lenremaining):
+		#TODO Handle Live / Stream Entries - Update several Labels
+		for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
+			field = "Field"+str(i)
+			content = c.value
+			text = ""
+			
+			if content == "Tuner":
+				if self.tuner:
+					text = self.tuner
+			
+			elif content == "ChannelNumber":
+				if self.channelnumber > -1:
+					text = str( self.channelnumber )
+				elif timer and timer.service_ref and timer.service_ref.ref:
+					number = getNumber(timer.service_ref.ref)
+					if number >= 0:
+						text = str( number )
+			
+			elif content == "ChannelName":
+				if timer and timer.service_ref:
+					text = timer.service_ref.getServiceName()
+			
+			elif content == "Name":
+				if timer:
+					text = timer.name
+			
+			elif content == "TimeLeft":
+				# Calculate timeleft minutes
+				if timer:
+					if not timer.autoincrease:
+						if self.type == RecordFinished:
+							# Show recording length
+							text = _("%d Min") % (self.duration)
+						elif timer.end > 0:
+							# Show timeleft recording time
+							text = _("%d Min") % (self.timeleft)
+					else: 
+						# Add infinity symbol for indefinitely recordings
+						text = u"\u221E".encode("utf-8")
+						#TODO update name of infinite recordings ??? E2 doesn't
+						#epg = eEPGCache.getInstance()
+						#event = epg and epg.lookupEventTime(timer.service_ref.ref, -1, 0)
+						#if event: 
+						#	name = event.getEventName() )
+			
+			elif content == "TimeElapsed":
+				if timer:
+					elapsed = int( math.ceil( ( time() - timer.begin ) / 60.0 ) )
+					text = _("%d Min") % (elapsed)
+			
+			elif content == "TimerBegin":
+				if timer:
+					begin = localtime( timer.begin )  #TODO maybe int() is needed
+					text = strftime( config.infobartunerstate.time_format.value, begin )
+			
+			elif content == "TimerEnd":
+				if timer:
+					end = localtime( timer.end )  #TODO maybe int() is needed
+					text = strftime( config.infobartunerstate.time_format.value, end )
+			
+			elif content == "TimerDuration":
+				if timer:
+					text = _("%d Min") % (self.duration)
+			
+			elif content == "Destination":
+				if timer and self.filename:
+					text = os.path.dirname( self.filename )
+				#TODO if stream display Hostname or IP
+			
+			elif content == "FileSize":
+				if timer and self.filename:
+					if os.path.exists( self.filename ):
+						filesize = os.path.getsize( self.filename ) 
+						text = _("%d MB") % ( filesize / (1024*1024) )
+			
+			elif content == "FreeSpace":
+				if timer and self.filename:
+					try:
+						if os.path.exists( self.filename ):
+							stat = os.statvfs( self.filename )
+							free = ( stat.f_bfree / 1000 * stat.f_bsize / 1000 ) / 1024
+							#free = os.stat(path).st_size/1048576)
+							text = _("%d GB") % (free)
+					except OSError:
+						pass
+			
+			elif content == "None":
+				pass
+			
+			self[field].setText( text )
+	
+	def resize(self, width):
 		sh = self.instance.size().height()
+		py = self["Background"].instance.position().y()
+		#TODO config or skin get offset x position
+		px = self["Record"].instance.position().x()
+		px += self["Record"].instance.size().width() + 15
 		
-		self["Tuner"].instance.resize( eSize(lentuner, sh) )
-		px = self["Tuner"].instance.position().x()
-		py = self["Tuner"].instance.position().y()
-		px += lentuner
-		
-		self["Number"].instance.resize( eSize(lennumber, sh) )
-		self["Number"].instance.move( ePoint(px, py) )
-		px += lennumber
-		
-		self["Channel"].instance.resize( eSize(lenchannel, sh) )
-		self["Channel"].instance.move( ePoint(px, py) )
-		px += lenchannel
-		
-		self["Name"].instance.resize( eSize(lenname, sh) )
-		self["Name"].instance.move( ePoint(px, py) )
-		px += lenname
-		
-		self["Remaining"].instance.resize( eSize(lenremaining, sh) )
-		self["Remaining"].instance.move( ePoint(px, py) )
-		px += lenremaining
+		for i, w in enumerate( width ):
+			field = "Field"+str(i)
+			self[field].instance.resize( eSize(w, sh) )
+			self[field].instance.move( ePoint(px, py) )
+			px += w
 		
 		#TODO config width and style
 		
@@ -715,7 +903,9 @@ class TunerState(Screen):
 		
 		#if background color gradiant
 		bw = self["Background"].instance.size().width()
-		self["Background"].instance.move( ePoint(px-bw, py) )
+		# Avoid background start position is within our window
+		bw = px-bw if px-bw<0 else 0
+		self["Background"].instance.move( ePoint(bw, py) )
 		self.instance.resize( eSize(px, sh) )
 
 	def remove(self):
@@ -734,7 +924,12 @@ def getTuner(service):
 	# service must be an instance of iPlayableService or iRecordableService
 	feinfo = service and service.frontendInfo()
 	frontendData = feinfo and feinfo.getAll(False)
-	return chr( frontendData.get("tuner_number", -1) + ord('A') )
+	tuner = frontendData.get("tuner_number", -1)
+	if tuner > -1:
+		return chr( tuner + ord('A') )
+	else:
+		return ""
+	#TODO detect stream of HDD
 
 def getNumber(actservice):
 	# actservice must be an instance of eServiceReference
