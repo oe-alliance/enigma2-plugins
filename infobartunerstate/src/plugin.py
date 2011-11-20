@@ -1,7 +1,7 @@
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
-#    Vesion 0.8.2
+#    Vesion 0.8.4
 #    Coded by betonme (c)2011
 #    Support: IHAD
 #
@@ -68,7 +68,7 @@ except:
 
 NAME = _("InfoBar Tuner State") 
 DESCRIPTION = _("Show InfoBar Tuner State")
-VERSION = "V0.8.2"
+VERSION = "V0.8.4"
 INFINITY =  u"\u221E".encode("utf-8")
 #TODO About
 
@@ -537,20 +537,6 @@ class InfoBarTunerState(object):
 		#eventNewProgramInfo
 		#decoder state
 		
-		try:
-			from Plugins.Extensions.WebInterface.WebScreens import streamingEvents
-			streamingEvents.append(self.onStreamingEventTEST)
-		except:
-			pass
-
-	def onStreamingEventTEST(self, event, stream):
-		if StreamingWebScreen:
-			print str("onStreamingEventTEST")
-			if event == StreamingWebScreen.evStart:
-				print event
-			elif event == StreamingWebScreen.evend:
-				print event
-
 	#def test(self, event):
 	#	print "InfoBarTuner test " + str(event)
 
