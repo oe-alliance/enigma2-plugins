@@ -1,7 +1,7 @@
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
-#    Vesion 0.8.1
+#    Vesion 0.8.2
 #    Coded by betonme (c)2011
 #    Support: IHAD
 #
@@ -62,7 +62,7 @@ from netstat import netstat
 
 NAME = _("InfoBar Tuner State") 
 DESCRIPTION = _("Show InfoBar Tuner State")
-VERSION = "V0.8.1"
+VERSION = "V0.8.2"
 INFINITY =  u"\u221E".encode("utf-8")
 #TODO About
 
@@ -143,7 +143,8 @@ config.infobartunerstate.fields.j                  = ConfigSelection(default = "
 
 config.infobartunerstate.offset_horizontal         = ConfigSelectionNumber(-1000, 1000, 1, default = 0)
 config.infobartunerstate.offset_vertical           = ConfigSelectionNumber(-1000, 1000, 1, default = 0)
-config.infobartunerstate.offset_content            = ConfigSelectionNumber(-1000, 1000, 1, default = 0)
+config.infobartunerstate.offset_padding            = ConfigSelectionNumber(-1000, 1000, 1, default = 0)
+config.infobartunerstate.offset_spacing            = ConfigSelectionNumber(-1000, 1000, 1, default = 0)
 
 config.infobartunerstate.background_transparency   = ConfigYesNo(default = False)
 
@@ -261,7 +262,8 @@ class InfoBarTunerStateMenu(Screen, ConfigListScreen):
 			(  separator                                              , config.infobartunerstate.about ),
 			(  _("Horizontal offset in pixel")                        , config.infobartunerstate.offset_horizontal ),
 			(  _("Vertical offset in pixel")                          , config.infobartunerstate.offset_vertical ),
-			(  _("Content offset in pixel")                           , config.infobartunerstate.offset_content ),
+			(  _("Text padding offset in pixel")                      , config.infobartunerstate.offset_padding ),
+			(  _("Text spacing offset in pixel")                      , config.infobartunerstate.offset_spacing ),
 			(  _("Background transparency")                           , config.infobartunerstate.background_transparency ),
 		] )
 		
@@ -847,11 +849,11 @@ class InfoBarTunerState(object):
 		if autohide:
 			# Start timer to avoid permanent displaying
 			# Do not start timer if no timeout is configured
-			idx = config.usage.infobar_timeout.index
-			if idx:
+			idx = int(config.usage.infobar_timeout.index)
+			if idx > 0:
 				if self.hideTimer.isActive():
 					self.hideTimer.stop()
-				self.hideTimer.startLongTimer( int(idx) or 5 )
+				self.hideTimer.startLongTimer( int(idx) )
 
 	def tunerShow(self):
 		if self.entries:
@@ -946,7 +948,7 @@ class InfoBarTunerState(object):
 				widths = map( lambda (w1, w2): max( w1, w2 ), zip_longest( widths, win.widths ) )
 			
 			# Calculate field spacing
-			spacing  = self.spacing
+			spacing = self.spacing + int(config.infobartunerstate.offset_spacing.value)
 			widths = [ width+spacing if width>0 else 0 for width in widths ]
 			
 			# Apply user offsets
@@ -1021,7 +1023,7 @@ class TunerStateBase(Screen):
 
 	def reorder(self, widths):
 		# Get initial offset position and apply user offset
-		px = self.padding + int(config.infobartunerstate.offset_content.value)
+		px = self.padding + int(config.infobartunerstate.offset_padding.value)
 		py = 0
 		sh = self.instance.size().height()
 		for field, width in zip( self.fields, widths):
@@ -1089,7 +1091,7 @@ class TunerStateInfo(TunerStateBase):
 			fields.append(field)
 			widths.append( width )
 		
-		spacing = self.spacing
+		spacing = self.spacing + int(config.infobartunerstate.offset_spacing.value)
 		widths = [ width+spacing if width>0 else 0 for width in widths ]
 		
 		self.fields = fields
@@ -1159,9 +1161,9 @@ class TunerState(TunerStateBase):
 				# Check if timer is already started
 				if not self.removeTimer.isActive():
 					# Check if timeout is configured
-					timeout = config.infobartunerstate.timeout_finished_records.value
-					if timeout:
-						self.removeTimer.startLongTimer( int( timeout ) or 5 )
+					timeout = int(config.infobartunerstate.timeout_finished_records.value)
+					if timeout > 0:
+						self.removeTimer.startLongTimer( timeout )
 
 	def updateTimes(self, begin, end, endless):
 		self.begin = begin
@@ -1392,15 +1394,15 @@ def getStream(id):
 
 def getTuner(service):
 	# service must be an instance of iPlayableService or iRecordableService
+	#TODO detect stream of HDD
 	feinfo = service and service.frontendInfo()
 	data = feinfo and feinfo.getAll(False)
-	number = data and data.get("tuner_number", -1)
-	type = data and data.get("tuner_type", "")
-	if number > -1:
-		return ( chr( number + ord('A') ), type)
-	else:
-		return "", ""
-	#TODO detect stream of HDD
+	if data:
+		number = data.get("tuner_number", -1)
+		type = data.get("tuner_type", "")
+		if number is not None and number > -1:
+			return ( chr( int(number) + ord('A') ), type)
+	return "", ""
 
 def getNumber(actservice):
 	# actservice must be an instance of eServiceReference
