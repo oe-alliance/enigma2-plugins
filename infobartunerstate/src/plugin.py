@@ -1,7 +1,7 @@
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
-#    Vesion 0.3
+#    Vesion 0.4
 #    Coded by betonme (c)2011
 #    Support: IHAD
 #
@@ -47,8 +47,16 @@ from enigma import eDVBResourceManager, eActionMap, eListboxPythonMultiContent, 
 
 from skin import parseColor, parseFont
 
+#try:
+#	# try to import EMC module to check for its existence
+#	from Plugins.Extensions.EnhancedMovieCenter.EnhancedMovieCenter import EMCMediaCenter 
+#except ImportError, ie:
+#	class EMCMediaCenter: pass
+
+
 global gInfoBarTunerState
 gInfoBarTunerState = None
+
 
 def Plugins(**kwargs):
 	
@@ -70,16 +78,23 @@ def main(session, **kwargs):
 	# Autostart
 	# Overwrite Skin Position
 	# Show Live TV Tuners PiP Stream ...
-	# Transparent
+	# Background: Transparent, Block, Dynamic(Farbverlauf)
 	# Width: FullRow, Adapted/Fitting, Symmetrical
 	# Icon or Text for type
 	# Order of elements
 	# Allow Enable disable of elements 
 	# Sort order of entry rows
+	#		Type: Live pip stream record endedrecords
+	#		Tuner A B C D
+	#		Number
+	#		Channel
+	#		Name
+	#		Remaining >0 infinite -
 	# Show on start, end, start/end
 	# Show with infobar
 	# Blink recording entry one time on finished
 	# Recording Finished show recording duration
+	# Show on EMCMovieCenter
 	pass
 
 def start(reason, **kwargs):
@@ -92,8 +107,10 @@ def start(reason, **kwargs):
 			session = kwargs["session"]
 			gInfoBarTunerState = InfoBarTunerState(session)
 
+
 # Type Enum
 RecordStarted, RecordFinished = range(2)
+
 
 class InfoBarTunerState(Screen):
 	def __init__(self, session):
@@ -110,8 +127,6 @@ class InfoBarTunerState(Screen):
 		self.forceBindInfoBarTimer.callback.append(self.bindInfoBar)
 		
 		self.tunerInfo = defaultdict(list)
-		
-		self.serviceHandler = eServiceCenter.getInstance()
 		
 		self.posy = getDesktop(0).size().height()
 		
@@ -139,8 +154,8 @@ class InfoBarTunerState(Screen):
 		#self.bindInfoBar()
 		# Workaround
 		# The Plugin starts before the InfoBar is instantiated
-		# 
 		# Check every second if the InfoBar instance exists and try to bind our functions
+		# Is there an alternative solution?
 		self.forceBindInfoBarTimer.start(1000, False)
 		
 		#TODO PiP
@@ -199,16 +214,14 @@ class InfoBarTunerState(Screen):
 				channel = timer.service_ref.getServiceName()
 				tuner = self.getTuner(timer.record_service)
 				name = timer.name
-				number = self.getNumber(timer.service_ref.ref)
 				timer.timeChanged = self.__OnTimeChanged
-				
 				#ts = timer.record_service
 				#print "__onRecordingEvent timer.record_service " + str(timer.record_service)
 				#print "__onRecordingEvent timer.service_ref.ref " + str(timer.service_ref.ref)
 				#try: print "__onRecordingEvent timer.service_ref.ref.name " + str(timer.service_ref.ref.name)
 				#except: pass
 				if not timer in self.tunerInfo:
-					win = self.session.instantiateDialog(TunerState, type, tuner, number, channel, name, timer)
+					win = self.session.instantiateDialog(TunerState, type, tuner, channel, name, timer)
 					self.tunerInfo[timer] = win
 					#TODO config
 					self.__startAvailTimer()
@@ -263,6 +276,14 @@ class InfoBarTunerState(Screen):
 		#TODO Config show on timer time changed
 		self.tunerShow()
 
+	def onExternShow(self):
+		#TODO Config extern
+		self.tunerShow()
+
+	def onExternHide(self):
+		#TODO Config extern
+		self.tunerHide()
+
 	def updateRecordTimer(self):
 		for timer in NavigationInstance.instance.RecordTimer.timer_list:
 			if timer.isRunning() and not timer.justplay:
@@ -271,44 +292,17 @@ class InfoBarTunerState(Screen):
 	def __startAvailTimer(self):
 		#if self.availTimer.isActive():
 		#	self.availTimer.stop()
-		#self.availTimer.start(10, True)
+		#self.availTimer.startLongTimer( 10 )
 		# Show windows
 		self.tunerShow()
 
+	#TODO Howto move this function to the window ?!?
 	def getTuner(self, service):
 		# service must be an instance of iPlayableService or iRecordableService
 		feinfo = service and service.frontendInfo()
 		frontendData = feinfo and feinfo.getAll(False)
 		return chr( frontendData.get("tuner_number", -1) + ord('A') )
 	
-	def getNumber(self, actservice):
-		# actservice must be an instance of eServiceReference
-		from Screens.InfoBar import InfoBar
-		Servicelist = None
-		if InfoBar and InfoBar.instance:
-			Servicelist = InfoBar.instance.servicelist
-		mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
-		number = 0
-		bouquets = Servicelist and Servicelist.getBouquetList()
-		if bouquets:
-			actbouquet = Servicelist.getRoot()
-			for name, bouquet in bouquets:
-				if not bouquet.valid(): #check end of list
-					break
-				if bouquet.flags & eServiceReference.isDirectory:
-					servicelist = self.serviceHandler.list(bouquet)
-					if not servicelist is None:
-						while True:  #TODO
-							service = servicelist.getNext()
-							if not service.valid(): #check end of list
-								break
-							playable = not (service.flags & mask)
-							if playable:
-								number += 1
-							if actbouquet == bouquet and actservice == service:
-								return number
-		return -1
-
 	def tunerShow(self):
 		# Rebind InfoBar Events
 		#self.bindInfoBar()
@@ -316,13 +310,23 @@ class InfoBarTunerState(Screen):
 		# Only show the Tuner information dialog,
 		# if no screen is displayed or the InfoBar is visible
 		#TODO Info can also be showed if info.rectangle is outside currentdialog.rectangle
-		if self.session.current_dialog is None or isinstance(self.session.current_dialog, InfoBar):
+		if self.session.current_dialog is None \
+			or isinstance(self.session.current_dialog, InfoBar):
+			#MAYBE Tuner Informationen werden zusammen mit der EMCMediaCenter InfoBar angezeigt
+			#or isinstance(self.session.current_dialog, EMCMediaCenter):
 			
+			# Delete old entries
+			for timer, win in self.tunerInfo.items():
+				if win.tobedeleted == True:
+					# Delete Stopped Timers
+					self.session.deleteDialog(win)
+					del self.tunerInfo[timer]
+					
 			# Dynamic column resizing and repositioning
 			#TODO get Initial Position and Size from skin
 			posy = self.posy
 			posx, sizeh = 0, 0
-			lentuner, lennumber, lenchannel, lentitle, lenremaining = 0, 0, 0, 0, 0
+			lentuner, lennumber, lenchannel, lenname, lenremaining = 0, 0, 0, 0, 0
 			for win in self.tunerInfo.itervalues():
 				win.updateContent()
 				if posx == 0:
@@ -332,7 +336,7 @@ class InfoBarTunerState(Screen):
 				lentuner   = max( win["Tuner"].instance.calculateSize().width(), lentuner )
 				lennumber  = max( win["Number"].instance.calculateSize().width(), lennumber )
 				lenchannel = max( win["Channel"].instance.calculateSize().width(), lenchannel )
-				lentitle    = max( win["Title"].instance.calculateSize().width(), lentitle )
+				lenname    = max( win["Name"].instance.calculateSize().width(), lenname )
 				lenremaining = max( win["Remaining"].instance.calculateSize().width(), lenremaining )
 			
 			self.posy = posy
@@ -341,12 +345,13 @@ class InfoBarTunerState(Screen):
 			lentuner   += 15
 			lennumber  += 15
 			lenchannel += 15
-			lentitle    += 15
+			lenname    += 15
+			print lenname
 			lenremaining += 15
 			
 			# Resize, move and show windows
 			for win in sorted( self.tunerInfo.itervalues(), key=lambda x: (x.type, x.remaining) ):
-				win.resize(lentuner, lennumber, lenchannel, lentitle, lenremaining)
+				win.resize(lentuner, lennumber, lenchannel, lenname, lenremaining)
 				win.instance.move(ePoint(posx, posy))
 				posy += sizeh
 				# Show windows
@@ -356,30 +361,22 @@ class InfoBarTunerState(Screen):
 			# Do not start timer if no timeout is configured
 			idx = config.usage.infobar_timeout.index
 			if idx:
-				self.hideTimer.start((config.usage.infobar_timeout.index or 1)*1000, True)
+				if self.hideTimer.isActive():
+					self.hideTimer.stop()
+				self.hideTimer.startLongTimer( config.usage.infobar_timeout.index or 1 )
 	
 	def tunerHide(self):
-		for timer, win in self.tunerInfo.items():
+		if self.hideTimer.isActive():
+			self.hideTimer.stop()
+		for win in self.tunerInfo.itervalues():
 			win.hide()
-			if win.tobedeleted == True:
-				# Delete Stopped Timers
-				self.session.deleteDialog(win)
-				del self.tunerInfo[timer]
+
 
 class TunerState(Screen):
-	skin = """
-		<screen name="TunerState" flags="wfNoBorder" position="50,50" size="1000,32" title="Tuner State" zPosition="-1">
-			<widget name="Background" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/bg.png" position="0,0" size="1000,32" zPosition="-1" alphatest="off" transparent="1"/>
-			<widget name="Record"     pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/record.png"  position="0,0" size="42,32" zPosition="1" alphatest="on"/>
-			<widget name="Stopped"    pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/stopped.png" position="0,0" size="42,32" zPosition="1" alphatest="on"/>
-			<widget name="Tuner"     font="Regular;22" noWrap="1" position="42,0"  size="50,32" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
-			<widget name="Number"    font="Regular;22" noWrap="1" position="100,0" size="50,32" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
-			<widget name="Channel"   font="Regular;22" noWrap="1" position="200,0" size="50,32" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
-			<widget name="Title"      font="Regular;22" noWrap="1" position="300,0" size="50,32" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
-			<widget name="Remaining" font="Regular;22" noWrap="1" position="400,0" size="50,32" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
-		</screen>"""
+	skinfile = "/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/skin.xml" 
+	skin = open(skinfile).read()
 
-	def __init__(self, session, type, tuner, number, channel, name, timer=None):
+	def __init__(self, session, type, tuner, channel, name, timer=None):
 		
 		Screen.__init__(self, session)
 		
@@ -396,21 +393,13 @@ class TunerState(Screen):
 		self.updateType()
 		
 		self["Tuner"] = Label(tuner)
-		
-		if number > 0:
-			self["Number"] = Label( str(number) )
-		else:
-			self["Number"] = Label("")
+		self["Number"] = Label()
 		self["Channel"] = Label(channel)
 		
-		self["Title"] = Label(name)
+		self["Name"] = Label(name)
 		
 		self.remaining = 0
-		self["Remaining"] = Label("")
-		
-		#self.onShow.append(self.updateContent)
-		#self.onLayoutFinish.append(self.layoutFinished)
-		#self.onFirstExecBegin.append(self.layoutFinished)
+		self["Remaining"] = Label()
 		
 #		skin = None
 #		CoolWide = getDesktop(0).size().width()
@@ -438,39 +427,9 @@ class TunerState(Screen):
 			self["Stopped"].show()
 			self["Tuner"].setText( "-" )
 			#TODO config
-			self.closeTimer.start(60*1000, True)
+			if not self.closeTimer.isActive():
+				self.closeTimer.startLongTimer( 60 )
 
-	def deleteEntry(self):
-		self.tobedeleted = True 
-
-	def resize(self, lentuner, lennumber, lenchannel, lentitle, lenremaining):
-		sh = self.instance.size().height()
-		
-		self["Tuner"].instance.resize( eSize(lentuner, sh) )
-		px = self["Tuner"].instance.position().x()
-		py = self["Tuner"].instance.position().y()
-		px += lentuner
-		
-		self["Number"].instance.resize( eSize(lennumber, sh) )
-		self["Number"].instance.move( ePoint(px, py) )
-		px += lennumber
-		
-		self["Channel"].instance.resize( eSize(lenchannel, sh) )
-		self["Channel"].instance.move( ePoint(px, py) )
-		px += lenchannel
-		
-		self["Title"].instance.resize( eSize(lentitle, sh) )
-		self["Title"].instance.move( ePoint(px, py) )
-		px += lentitle
-		
-		self["Remaining"].instance.resize( eSize(lenremaining, sh) )
-		self["Remaining"].instance.move( ePoint(px, py) )
-		px += lenremaining
-		
-		#TODO config width style
-		self["Background"].instance.resize( eSize(px, sh) )
-		self.instance.resize( eSize(px, sh) )
-	
 	def updateContent(self):
 		#self.updateType()
 		# Calculate remaining minutes
@@ -489,15 +448,87 @@ class TunerState(Screen):
 				# Add infinity symbol for indefinitely recordings
 				self.remaining = 0xFFFFFFFFFFFFFFFF
 				self["Remaining"].setText( u"\u221E".encode("utf-8") )
-				#TODO config update title of infinite recordings
+				#TODO config update name of infinite recordings
 				epg = eEPGCache.getInstance()
 				event = epg and epg.lookupEventTime(self.timer.service_ref.ref, -1, 0)
 				if event: 
-					self["Title"].setText( event.getEventName() )
+					self["Name"].setText( event.getEventName() )
 		else:
 			# No timer available
 			self.remaining = 0
 			self["Remaining"].setText( "" )
-			
+		
+		if not self["Number"].getText():
+			number = self.getNumber(self.timer.service_ref.ref)
+			if number > 0:
+				self["Number"].setText( str(number) )
+		
 		#TODO Handle Live Entry - Update all Labels
+
+	def getNumber(self, actservice):
+		# actservice must be an instance of eServiceReference
+		from Screens.InfoBar import InfoBar
+		Servicelist = None
+		if InfoBar and InfoBar.instance:
+			Servicelist = InfoBar.instance.servicelist
+		mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
+		number = 0
+		bouquets = Servicelist and Servicelist.getBouquetList()
+		if bouquets:
+			actbouquet = Servicelist.getRoot()
+			serviceHandler = eServiceCenter.getInstance()
+			for name, bouquet in bouquets:
+				if not bouquet.valid(): #check end of list
+					break
+				if bouquet.flags & eServiceReference.isDirectory:
+					servicelist = serviceHandler.list(bouquet)
+					if not servicelist is None:
+						while True:
+							service = servicelist.getNext()
+							if not service.valid(): #check end of list
+								break
+							playable = not (service.flags & mask)
+							if playable:
+								number += 1
+							if actbouquet == bouquet and actservice == service:
+								return number
+		return -1
+
+	def resize(self, lentuner, lennumber, lenchannel, lenname, lenremaining):
+		sh = self.instance.size().height()
+		
+		self["Tuner"].instance.resize( eSize(lentuner, sh) )
+		px = self["Tuner"].instance.position().x()
+		py = self["Tuner"].instance.position().y()
+		px += lentuner
+		
+		self["Number"].instance.resize( eSize(lennumber, sh) )
+		self["Number"].instance.move( ePoint(px, py) )
+		px += lennumber
+		
+		self["Channel"].instance.resize( eSize(lenchannel, sh) )
+		self["Channel"].instance.move( ePoint(px, py) )
+		px += lenchannel
+		
+		self["Name"].instance.resize( eSize(lenname, sh) )
+		self["Name"].instance.move( ePoint(px, py) )
+		px += lenname
+		
+		self["Remaining"].instance.resize( eSize(lenremaining, sh) )
+		self["Remaining"].instance.move( ePoint(px, py) )
+		px += lenremaining
+		
+		#TODO config width and style
+		
+		#if background dynamic
+		#self["Background"].instance.resize( eSize(px, sh) )
+		#self.instance.resize( eSize(px, sh) )
+		
+		#if background color gradiant
+		bw = self["Background"].instance.size().width()
+		self["Background"].instance.move( ePoint(px-bw, py) )
+		self.instance.resize( eSize(px, sh) )
+
+	def deleteEntry(self):
+		self.tobedeleted = True 
 

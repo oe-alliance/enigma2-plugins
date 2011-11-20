@@ -1,0 +1,10 @@
+<screen name="TunerState" flags="wfNoBorder" position="00,40" size="1000,32" title="Tuner State" zPosition="0">
+	<widget name="Background" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/bg_gradient.png" position="0,0" size="1280,32" zPosition="0" alphatest="off" transparent="1"/>
+	<widget name="Record"     pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/record.png"  position="30,0" size="42,32" zPosition="1" alphatest="on"/>
+	<widget name="Stopped"    pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/stopped.png" position="30,0" size="42,32" zPosition="1" alphatest="on"/>
+	<widget name="Tuner"     font="Regular;22" noWrap="1" position="72,0"  size="50,32" zPosition="1" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+	<widget name="Number"    font="Regular;22" noWrap="1" position="100,0" size="50,32" zPosition="1" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
+	<widget name="Channel"   font="Regular;22" noWrap="1" position="200,0" size="50,32" zPosition="1" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+	<widget name="Name"      font="Regular;22" noWrap="1" position="300,0" size="50,32" zPosition="1" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
+	<widget name="Remaining" font="Regular;22" noWrap="1" position="400,0" size="50,32" zPosition="1" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+</screen>
