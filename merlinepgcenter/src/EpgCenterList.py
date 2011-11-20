@@ -227,7 +227,7 @@ class EpgCenterList(GUIComponent):
 				else:
 					timeValue = (now - begin) /  60
 				
-			if (KEEP_OUTDATED_TIME == None and (begin + duration) > now) or (KEEP_OUTDATED_TIME != None and (begin + duration) > now):
+			if (KEEP_OUTDATED_TIME == 0 and (begin + duration) > now) or (KEEP_OUTDATED_TIME != 0 and (begin + duration) > now):
 				if config.plugins.merlinEpgCenter.showDuration.value:
 					remainBeginString = " I "
 				else:

@@ -1001,7 +1001,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 						timeValue = (now - begin) /  60
 						percent = 0
 						
-				if (KEEP_OUTDATED_TIME == None and (begin + duration) > now) or (KEEP_OUTDATED_TIME != None and (begin + duration) > now):
+				if (KEEP_OUTDATED_TIME == 0 and (begin + duration) > now) or (KEEP_OUTDATED_TIME != 0 and (begin + duration) > now):
 					remainBeginString = " I "
 					if timeValue > 0:
 						remainBeginString += "+"
@@ -1163,7 +1163,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			
 		# set button text
 		if self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME or self.currentMode == EPGSEARCH_RESULT:
-			if self.currentMode == SINGLE_EPG and KEEP_OUTDATED_TIME != None:
+			if self.currentMode == SINGLE_EPG and KEEP_OUTDATED_TIME != 0:
 				if not self.showOutdated:
 					self["key_blue"].setText(_("Outdated on"))
 				else:

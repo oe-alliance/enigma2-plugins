@@ -25,6 +25,7 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Tools.BoundFunction import boundFunction
 
 # OWN IMPORTS
+from ConfigTabs import KEEP_OUTDATED_TIME
 from EpgCenterList import MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_PRIMETIME, TIMERLIST, EPGSEARCH_HISTORY, EPGSEARCH_RESULT, EPGSEARCH_MANUAL
 
 class MerlinEPGActions():		
@@ -179,7 +180,8 @@ class MerlinEPGActions():
 			self["epgTabBaseActions"].setEnabled(False)
 			self["epgRedActions"].setEnabled(False)
 			self["epgGreenActions"].setEnabled(False)
-			self["epgBlueActions"].setEnabled(False)
+			if KEEP_OUTDATED_TIME != 0:
+				self["epgBlueActions"].setEnabled(False)
 			if IMDB_INSTALLED:
 				self["epgYellowActions"].setEnabled(False)
 		elif self.oldMode == TIMERLIST:
@@ -213,8 +215,9 @@ class MerlinEPGActions():
 				self["epgYellowActions"].setEnabled(True)
 		elif self.currentMode == SINGLE_EPG:
 			self["epgTabBaseActions"].setEnabled(True)
-			self["epgBlueActions"].setEnabled(True)
 			self["epgGreenActions"].setEnabled(True)
+			if KEEP_OUTDATED_TIME != 0:
+				self["epgBlueActions"].setEnabled(True)
 			if IMDB_INSTALLED:
 				self["epgYellowActions"].setEnabled(True)
 		elif self.currentMode == TIMERLIST:

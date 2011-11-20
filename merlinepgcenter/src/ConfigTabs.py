@@ -48,7 +48,7 @@ SKINLIST =	[ # order is important (HD_BORDER, XD_BORDER, SD, HD, XD)!
 try:
 	KEEP_OUTDATED_TIME = config.merlin2.keep_outdated_epg.value * 60
 except KeyError:
-	KEEP_OUTDATED_TIME = None
+	KEEP_OUTDATED_TIME = 0
 	
 
 # OWN IMPORTS
