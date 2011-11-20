@@ -9,7 +9,7 @@
                     <packagename>enigma2-plugin-extensions-infobartunerstate</packagename>
                     <shortdescription>Show the tuner state as infobar popup</shortdescription>
                     <description>InfoBarTunerState will show all used tuner and it's allocation as infobar popup.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_infobartunerstate_en.jpg" />
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_infobartunerstate.jpg" />
           </info>
 
 	  <files type="package"> <!-- without version, without .ipk -->

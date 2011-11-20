@@ -1,7 +1,7 @@
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
-#    Vesion 0.1
+#    Vesion 0.2
 #    Coded by betonme (c)2011
 #    Support: IHAD
 #
@@ -22,10 +22,12 @@ import os
 import NavigationInstance
 
 from collections import defaultdict
+from operator import itemgetter
 
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Components.Label import Label
+from Components.Pixmap import Pixmap
 #from Screens import InfoBarGenerics
 from Screens.InfoBar import InfoBar
 from Screens.Screen import Screen
@@ -101,14 +103,16 @@ class InfoBarTunerState(Screen):
 		
 		self.serviceHandler = eServiceCenter.getInstance()
 		
+		self.posx = 0
 		self.posy = getDesktop(0).size().height()
+		self.sizeh = 0
 		
 		# Recording Events
 		self.session.nav.RecordTimer.on_state_change.append(self.__onRecordingEvent)
 		# Streaming Events
-		self.session.nav.record_event.append(self.__onStreamingEvent)
+		#self.session.nav.record_event.append(self.__onStreamingEvent)
 		# Zapping Events
-		self.session.nav.event.append(self.__onPlayableEvent)
+		#self.session.nav.event.append(self.__onPlayableEvent)
 		#self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 		#	{
 		#		iPlayableService.evStart: self.__onPlayableEvent,
@@ -147,10 +151,10 @@ class InfoBarTunerState(Screen):
 		from Screens.InfoBar import InfoBar
 		if InfoBar.instance:
 			if hasattr(InfoBar.instance, "onShow"):
-				if self.tunerShow not in InfoBar.instance.onShow:
+				if self.__onInfoBarEventShow not in InfoBar.instance.onShow:
 					InfoBar.instance.onShow.append(self.__onInfoBarEventShow)
 			if hasattr(InfoBar.instance, "onHide"):
-				if self.tunerHide not in InfoBar.instance.onHide:
+				if self.__onInfoBarEventHide not in InfoBar.instance.onHide:
 					InfoBar.instance.onHide.append(self.__onInfoBarEventHide)
 
 	def __onInfoBarEventShow(self):
@@ -168,39 +172,43 @@ class InfoBarTunerState(Screen):
 		if timer.state == timer.StatePrepared:
 			pass
 		elif timer.state == timer.StateRunning:	# timer.isRunning()
-			type = "Rec"
+			type = "Record"
 			print "__onRecordingEventRun    " +str(timer)
 			#print "__onRecordingEventRun    " +str(timer.autoincrease)
 			channel = timer.service_ref.getServiceName()
 			tuner = self.getTuner(timer.record_service)
 			name = timer.name
 			number = self.getNumber(timer.service_ref.ref)
-			end = not timer.autoincrease and timer.end
+			end = timer.end
+			infinite = timer.autoincrease
 			#ts = timer.record_service
 			#print "__onRecordingEvent timer.record_service " + str(timer.record_service)
 			#print "__onRecordingEvent timer.service_ref.ref " + str(timer.service_ref.ref)
 			#try: print "__onRecordingEvent timer.service_ref.ref.name " + str(timer.service_ref.ref.name)
 			#except: pass
 			if not timer in self.tunerInfo:
-				w = self.session.instantiateDialog(TunerState, type, tuner, number, channel, name, end)
-				self.tunerInfo[timer] = w
+				win = self.session.instantiateDialog(TunerState, type, tuner, number, channel, name, end, infinite)
+				self.tunerInfo[timer] = win
 				#TODO config
 				self.__startAvailTimer()
 			
 		else: #timer.state == timer.StateEnded:
-			type = "Rec"
+			type = "Stopped"
 			print "__onRecordingEventEnd    " +str(timer)
-			#print "__onRecordingEventEnd    " +str(timer.end)
-			#print "__onRecordingEvent timer.record_service " + str(timer.record_service)
-			#ts = timer.record_service
+			
 			if timer in self.tunerInfo:
-				print "__onRecordingEvent removed "
-				w = self.tunerInfo[timer]
-				w.hide()
-				self.session.deleteDialog(w)
-				del self.tunerInfo[timer]
+				#TODO config 
+				#if config.delete_immediately 
+#				print "__onRecordingEvent removed "
+				win = self.tunerInfo[timer]
+#				win.hide()
+#				self.session.deleteDialog(win)
+#				del self.tunerInfo[timer]
+#				#TODO config
+				win.changeType(type)
 				#TODO config
 				self.__startAvailTimer()
+
 
 	def __onStreamingEvent(self, rec_service, event):
 		print "__onStreamingEvent0    " +str(rec_service)
@@ -266,7 +274,7 @@ class InfoBarTunerState(Screen):
 								break
 							playable = not (service.flags & mask)
 							if playable:
-								number += 1;
+								number += 1
 							if actbouquet == bouquet and actservice == service:
 								return number
 		return -1
@@ -279,16 +287,19 @@ class InfoBarTunerState(Screen):
 		posy = self.posy
 		posx, sizeh = 0, 0
 		lentuner, lennumber, lenchannel, lenname = 0, 0, 0, 0
-		for w in self.tunerInfo.itervalues():
+		for win in self.tunerInfo.itervalues():
 			if posx == 0:
-				posx = w.instance.position().x()
-				sizeh = w.instance.size().height()
-			posy       = min( w.instance.position().y(), posy )
-			lentuner   = max( w["Tuner"].instance.calculateSize().width(), lentuner )
-			lennumber  = max( w["Number"].instance.calculateSize().width(), lennumber )
-			lenchannel = max( w["Channel"].instance.calculateSize().width(), lenchannel )
-			lenname    = max( w["Name"].instance.calculateSize().width(), lenname )
+				posx = win.instance.position().x()
+				sizeh = win.instance.size().height()
+			posy       = min( win.instance.position().y(), posy )
+			lentuner   = max( win["Tuner"].instance.calculateSize().width(), lentuner )
+			lennumber  = max( win["Number"].instance.calculateSize().width(), lennumber )
+			lenchannel = max( win["Channel"].instance.calculateSize().width(), lenchannel )
+			lenname    = max( win["Name"].instance.calculateSize().width(), lenname )
+		
+		self.posx = posx
 		self.posy = posy
+		self.sizeh = sizeh
 		
 		# Spacing between the column entries
 		lentuner   += 10
@@ -296,33 +307,49 @@ class InfoBarTunerState(Screen):
 		lenchannel += 10
 		lenname    += 10
 		
-		# Set window positions
-		for w in self.tunerInfo.itervalues():
-			w.instance.move(ePoint(posx, posy))
-			w.resize(lentuner, lennumber, lenchannel, lenname)
-			posy += sizeh
+		# Resize elements
+		for win in self.tunerInfo.itervalues():
+			win.resize(lentuner, lennumber, lenchannel, lenname)
 	
 	def tunerShow(self):
 		# Only show the Tuner information dialog,
 		# if no screen is displayed or the InfoBar is visible
+		#TODO Info can also be showed if info.rectangle is outside currentdialog.rectangle
 		if self.session.current_dialog is None or isinstance(self.session.current_dialog, InfoBar):
-			#TODO current_dialog is None: Show Info only if changed
-			for w in self.tunerInfo.itervalues():
-				w.show()
+			posx = self.posx
+			posy = self.posy
+			sizeh = self.sizeh
+			#TODOsort 
+			#sorted_x = sorted(self.tunerInfo.iteritems(), key=itemgetter(1))
+			for win in self.tunerInfo.itervalues():
+				# Reposition windows
+				win.instance.move(ePoint(posx, posy))
+				posy += sizeh
+				# Show windows
+				win.show()
 				
 			# Start timer to avoid permanent displaying
 			self.hideTimer.start((config.usage.infobar_timeout.index or 1)*1000, True)
 	
 	def tunerHide(self):
-		for w in self.tunerInfo.itervalues():
-			w.hide()
+		needsupdate = False
+		for timer in self.tunerInfo.keys():
+			win = self.tunerInfo[timer]
+			win.hide()
+			if win.type == "Stopped":
+				# Delete Stopped Timers
+				self.session.deleteDialog(win)
+				del self.tunerInfo[timer]
+				needsupdate = True
+		if needsupdate:
+			self.resizeElements()
 
 class TunerState(Screen):
 	skin = """
 		<screen name="TunerState" flags="wfNoBorder" position="50,50" size="1000,32" title="Tuner State" zPosition="-1">
-			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/bg.png" position="0,0" size="1000,32" zPosition="-1" alphatest="off" transparent="1"/>
-			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/record.png" position="0,0" size="42,32" zPosition="1" alphatest="blend"/>
-			<widget name="Type"      font="Regular;22" noWrap="1" position="0,0"   size="42,32" halign="center" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
+			<widget name="Background" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/bg.png" position="0,0" size="1000,32" zPosition="-1" alphatest="off" transparent="1"/>
+			<widget name="Record"     pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/record.png" position="0,0" size="42,32" zPosition="1" alphatest="on"/>
+			<widget name="Stopped"    pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/stopped.png" position="0,0" size="42,32" zPosition="1" alphatest="on"/>
 			<widget name="Tuner"     font="Regular;22" noWrap="1" position="42,0"  size="50,32" halign="left"   valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
 			<widget name="Number"    font="Regular;22" noWrap="1" position="100,0" size="50,32" halign="left"   valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
 			<widget name="Channel"   font="Regular;22" noWrap="1" position="200,0" size="50,32" halign="left"   valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
@@ -330,15 +357,20 @@ class TunerState(Screen):
 			<widget name="Remaining" font="Regular;22" noWrap="1" position="400,0" size="50,32" halign="left"   valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
 		</screen>"""
 
-	def __init__(self, session, type, tuner, number, channel, name, end):
+	def __init__(self, session, type, tuner, number, channel, name, end, infinite=False):
 		
 		Screen.__init__(self, session)
 		
-		#if config... = text
-			#self["Type"] = Label(type)
-		#else:
-		self["Type"] = Label("")
+		self.type = type
+		self.end = end
+		self.infinite = infinite
+		
+		self["Background"] = Pixmap()
+		self["Record"] = Pixmap()
+		self["Stopped"] = Pixmap()
+		
 		self["Tuner"] = Label(tuner)
+		
 		if number > 0:
 			self["Number"] = Label( str(number) )
 		else:
@@ -346,14 +378,13 @@ class TunerState(Screen):
 		self["Channel"] = Label(channel)
 		
 		self["Name"] = Label(name)
+		self["Remaining"] = Label("")
 		
-		if end > 0:
-			self["Remaining"] = Label("")
-			self.timerend = end
-			self.onShow.append(self.updateRemaining)
-		else: 
-			# Add infinity symbol for indefinitely recordings
-			self["Remaining"] = Label(u" \u221E ".encode("utf-8"))
+		self.updateIcon()
+		
+		self.onShow.append(self.updateRemaining)
+		#self.onLayoutFinish.append(self.layoutFinished)
+		#self.onFirstExecBegin.append(self.layoutFinished)
 		
 #		skin = None
 #		CoolWide = getDesktop(0).size().width()
@@ -367,6 +398,19 @@ class TunerState(Screen):
 #			Cool = open(skin)
 #			self.skin = Cool.read()
 #			Cool.close()
+
+	def updateIcon(self):
+		if self.type == "Record":
+			self["Record"].show()
+			self["Stopped"].hide()
+		elif self.type == "Stopped":
+			self["Record"].hide()
+			self["Stopped"].show()
+			self["Remaining"].setText( "-" )
+
+	def changeType(self, type):
+		self.type = type
+		self.updateIcon()
 
 	def resize(self, lentuner, lennumber, lenchannel, lenname):
 		sh = self.instance.size().height()
@@ -393,9 +437,21 @@ class TunerState(Screen):
 		self["Remaining"].instance.move( ePoint(px, py) )
 	
 	def updateRemaining(self):
+		#self.updateIcon()
 		# Calculate remaining minutes 
-		remaining = int( math.ceil( ( self.timerend - time() ) / 60.0 ) )
-		self["Remaining"].setText( str(remaining) + _(" Min") )
+		if not self.infinite:
+			if self.end > 0 and self.type != "Stopped":
+				remaining = int( math.ceil( ( self.end - time() ) / 60.0 ) )
+				self["Remaining"].setText( str(remaining) + _(" Min") )
+			else:
+				self["Remaining"].setText( "-" )
+		else: 
+			# Add infinity symbol for indefinitely recordings
+			#TODO update title get it from channel
+			#epgcache = eEPGCache.getInstance()
+			#serviceHandler = eServiceCenter.getInstance()
+			#epg now next ?!?
+			self["Remaining"].setText( u" \u221E ".encode("utf-8") )
 		w = self["Remaining"].instance.calculateSize().width()
 		h = self["Remaining"].instance.size().height()
 		self["Remaining"].instance.resize( eSize(w, h) )
