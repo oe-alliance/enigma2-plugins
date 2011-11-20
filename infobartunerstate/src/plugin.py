@@ -1,7 +1,7 @@
 #######################################################################
 #
 #    InfoBar Tuner State for Enigma-2
-#    Vesion 0.2
+#    Vesion 0.3
 #    Coded by betonme (c)2011
 #    Support: IHAD
 #
@@ -22,7 +22,7 @@ import os
 import NavigationInstance
 
 from collections import defaultdict
-from operator import itemgetter
+from operator import attrgetter, itemgetter
 
 from Components.ActionMap import ActionMap
 from Components.config import config
@@ -43,7 +43,7 @@ from enigma import iPlayableService, iRecordableService
 from Components.GUIComponent import GUIComponent
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Sources.List import List
-from enigma import eDVBResourceManager, eActionMap, eListboxPythonMultiContent, eListboxPythonStringContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, getBestPlayableServiceReference, eServiceCenter, eServiceReference
+from enigma import eDVBResourceManager, eActionMap, eListboxPythonMultiContent, eListboxPythonStringContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, eEPGCache, eServiceCenter, eServiceReference
 
 from skin import parseColor, parseFont
 
@@ -56,9 +56,10 @@ def Plugins(**kwargs):
 	
 	descriptors = []
 	
-	#AutoStart
-	descriptors.append( PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart) ) #needsRestart=False,
-	
+	# AutoStart and SessionStart
+	descriptors.append( PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, fnc = start) ) #needsRestart=False,
+	descriptors.append( PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = start) )
+
 	#TODO Config Screen
 	#descriptors.append( PluginDescriptor(name = "InfoBar Tuner State", description = "Show a Tuner State Dialog", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main) ) #icon = "/EnhancedMovieCenter.png"
 
@@ -70,7 +71,7 @@ def main(session, **kwargs):
 	# Overwrite Skin Position
 	# Show Live TV Tuners PiP Stream ...
 	# Transparent
-	# Border
+	# Width: FullRow, Adapted/Fitting, Symmetrical
 	# Icon or Text for type
 	# Order of elements
 	# Allow Enable disable of elements 
@@ -78,15 +79,21 @@ def main(session, **kwargs):
 	# Show on start, end, start/end
 	# Show with infobar
 	# Blink recording entry one time on finished
+	# Recording Finished show recording duration
 	pass
 
-def autostart(reason, **kwargs):
+def start(reason, **kwargs):
+	#print "InfoBarTunerState autostart "
+	#print str(reason)
+	#print str(kwargs)
 	if reason == 0: # start
 		if kwargs.has_key("session"):
 			global gInfoBarTunerState
 			session = kwargs["session"]
 			gInfoBarTunerState = InfoBarTunerState(session)
 
+# Type Enum
+RecordStarted, RecordFinished = range(2)
 
 class InfoBarTunerState(Screen):
 	def __init__(self, session):
@@ -97,15 +104,16 @@ class InfoBarTunerState(Screen):
 		self.hideTimer.callback.append(self.tunerHide)
 		
 		#self.availTimer = eTimer()
-		#self.availTimer.callback.append(self.resizeElements)
+		#self.availTimer.callback.append(self.tunerShow)
+		
+		self.forceBindInfoBarTimer = eTimer()
+		self.forceBindInfoBarTimer.callback.append(self.bindInfoBar)
 		
 		self.tunerInfo = defaultdict(list)
 		
 		self.serviceHandler = eServiceCenter.getInstance()
 		
-		self.posx = 0
 		self.posy = getDesktop(0).size().height()
-		self.sizeh = 0
 		
 		# Recording Events
 		self.session.nav.RecordTimer.on_state_change.append(self.__onRecordingEvent)
@@ -115,20 +123,25 @@ class InfoBarTunerState(Screen):
 		#self.session.nav.event.append(self.__onPlayableEvent)
 		#self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 		#	{
-		#		iPlayableService.evStart: self.__onPlayableEvent,
-		#		iPlayableService.evStopped: self.__onPlayableEvent,
+		#		iPlayableService.evStart: self.bindInfoBar,
 		#	})
 		
 		#res_mgr = eDVBResourceManager.getInstance()
 		#if res_mgr:
 		#	res_mgr.frontendUseMaskChanged.get().append(self.__onTunerUseMaskChanged)
 		
-		# Bind InfoBarEvents
-		self.bindInfoBar()
+		# Add current running records 
+		self.updateRecordTimer()
 		
-		#TODO Add current running recordings 
-		#recordings = NavigationInstance.instance.getRecordings() gives iRecordableServices ?!?
-		#timer_list = self.session.nav.RecordTimer.timer_list
+		#self.onLayoutFinish.append(self.bindInfoBar)
+		
+		# Bind InfoBarEvents
+		#self.bindInfoBar()
+		# Workaround
+		# The Plugin starts before the InfoBar is instantiated
+		# 
+		# Check every second if the InfoBar instance exists and try to bind our functions
+		self.forceBindInfoBarTimer.start(1000, False)
 		
 		#TODO PiP
 		#self.session.
@@ -142,20 +155,28 @@ class InfoBarTunerState(Screen):
 	#def test(self, event):
 	#	print "InfoBarTuner test " + str(event)
 	
-	def __onTunerUseMaskChanged(self, mask):
-		print "__onTunerUseMaskChanged    " +str(mask)
-	
 	def bindInfoBar(self):
 		# Reimport InfoBar to force update of the class instance variable
 		# Rebind only if it isn't done already 
 		from Screens.InfoBar import InfoBar
+		print "InfoBarTunerState InfoBar.instance " + str(InfoBar.instance)
 		if InfoBar.instance:
+			bindShow = False
+			bindHide = False
 			if hasattr(InfoBar.instance, "onShow"):
 				if self.__onInfoBarEventShow not in InfoBar.instance.onShow:
 					InfoBar.instance.onShow.append(self.__onInfoBarEventShow)
+					bindShow = True
 			if hasattr(InfoBar.instance, "onHide"):
 				if self.__onInfoBarEventHide not in InfoBar.instance.onHide:
 					InfoBar.instance.onHide.append(self.__onInfoBarEventHide)
+					bindHide = True
+			if bindShow and bindHide:
+				# Bind was successful
+				self.forceBindInfoBarTimer.stop()
+
+	def __onTunerUseMaskChanged(self, mask):
+		print "__onTunerUseMaskChanged    " +str(mask)
 
 	def __onInfoBarEventShow(self):
 		#TODO config
@@ -170,30 +191,30 @@ class InfoBarTunerState(Screen):
 
 	def __onRecordingEvent(self, timer):
 		if timer.state == timer.StatePrepared:
-			pass
+			print "__onRecordingEventPrep    " +str(timer)
 		elif timer.state == timer.StateRunning:	# timer.isRunning()
-			type = "Record"
-			print "__onRecordingEventRun    " +str(timer)
-			#print "__onRecordingEventRun    " +str(timer.autoincrease)
-			channel = timer.service_ref.getServiceName()
-			tuner = self.getTuner(timer.record_service)
-			name = timer.name
-			number = self.getNumber(timer.service_ref.ref)
-			end = timer.end
-			infinite = timer.autoincrease
-			#ts = timer.record_service
-			#print "__onRecordingEvent timer.record_service " + str(timer.record_service)
-			#print "__onRecordingEvent timer.service_ref.ref " + str(timer.service_ref.ref)
-			#try: print "__onRecordingEvent timer.service_ref.ref.name " + str(timer.service_ref.ref.name)
-			#except: pass
-			if not timer in self.tunerInfo:
-				win = self.session.instantiateDialog(TunerState, type, tuner, number, channel, name, end, infinite)
-				self.tunerInfo[timer] = win
-				#TODO config
-				self.__startAvailTimer()
+			if not timer.justplay:
+				type = RecordStarted
+				print "__onRecordingEventRun    " +str(timer)
+				channel = timer.service_ref.getServiceName()
+				tuner = self.getTuner(timer.record_service)
+				name = timer.name
+				number = self.getNumber(timer.service_ref.ref)
+				timer.timeChanged = self.__OnTimeChanged
+				
+				#ts = timer.record_service
+				#print "__onRecordingEvent timer.record_service " + str(timer.record_service)
+				#print "__onRecordingEvent timer.service_ref.ref " + str(timer.service_ref.ref)
+				#try: print "__onRecordingEvent timer.service_ref.ref.name " + str(timer.service_ref.ref.name)
+				#except: pass
+				if not timer in self.tunerInfo:
+					win = self.session.instantiateDialog(TunerState, type, tuner, number, channel, name, timer)
+					self.tunerInfo[timer] = win
+					#TODO config
+					self.__startAvailTimer()
 			
 		else: #timer.state == timer.StateEnded:
-			type = "Stopped"
+			type = RecordFinished
 			print "__onRecordingEventEnd    " +str(timer)
 			
 			if timer in self.tunerInfo:
@@ -208,7 +229,6 @@ class InfoBarTunerState(Screen):
 				win.changeType(type)
 				#TODO config
 				self.__startAvailTimer()
-
 
 	def __onStreamingEvent(self, rec_service, event):
 		print "__onStreamingEvent0    " +str(rec_service)
@@ -234,14 +254,24 @@ class InfoBarTunerState(Screen):
 	def __onPlayableEvent(self, event):
 		#TEST PiP
 		print "__onPlayableEvent    " + str(event)
+		#TODO Filter events
 		#self.__startAvailTimer()
+		# Rebind InfoBar Events
+		#self.bindInfoBar()
+		
+	def __OnTimeChanged(self):
+		#TODO Config show on timer time changed
+		self.tunerShow()
+
+	def updateRecordTimer(self):
+		for timer in NavigationInstance.instance.RecordTimer.timer_list:
+			if timer.isRunning() and not timer.justplay:
+				self.__onRecordingEvent(timer)
 
 	def __startAvailTimer(self):
 		#if self.availTimer.isActive():
 		#	self.availTimer.stop()
-		###if not self.shown:
-		#self.availTimer.start(2500, True)
-		self.resizeElements()
+		#self.availTimer.start(10, True)
 		# Show windows
 		self.tunerShow()
 
@@ -279,95 +309,91 @@ class InfoBarTunerState(Screen):
 								return number
 		return -1
 
-	def resizeElements(self):
-		# Rebind InfoBar Events
-		self.bindInfoBar()
-		
-		# Dynamic column resizing and repositioning
-		posy = self.posy
-		posx, sizeh = 0, 0
-		lentuner, lennumber, lenchannel, lenname = 0, 0, 0, 0
-		for win in self.tunerInfo.itervalues():
-			if posx == 0:
-				posx = win.instance.position().x()
-				sizeh = win.instance.size().height()
-			posy       = min( win.instance.position().y(), posy )
-			lentuner   = max( win["Tuner"].instance.calculateSize().width(), lentuner )
-			lennumber  = max( win["Number"].instance.calculateSize().width(), lennumber )
-			lenchannel = max( win["Channel"].instance.calculateSize().width(), lenchannel )
-			lenname    = max( win["Name"].instance.calculateSize().width(), lenname )
-		
-		self.posx = posx
-		self.posy = posy
-		self.sizeh = sizeh
-		
-		# Spacing between the column entries
-		lentuner   += 10
-		lennumber  += 10
-		lenchannel += 10
-		lenname    += 10
-		
-		# Resize elements
-		for win in self.tunerInfo.itervalues():
-			win.resize(lentuner, lennumber, lenchannel, lenname)
-	
 	def tunerShow(self):
+		# Rebind InfoBar Events
+		#self.bindInfoBar()
+		
 		# Only show the Tuner information dialog,
 		# if no screen is displayed or the InfoBar is visible
 		#TODO Info can also be showed if info.rectangle is outside currentdialog.rectangle
 		if self.session.current_dialog is None or isinstance(self.session.current_dialog, InfoBar):
-			posx = self.posx
+			
+			# Dynamic column resizing and repositioning
+			#TODO get Initial Position and Size from skin
 			posy = self.posy
-			sizeh = self.sizeh
-			#TODOsort 
-			#sorted_x = sorted(self.tunerInfo.iteritems(), key=itemgetter(1))
+			posx, sizeh = 0, 0
+			lentuner, lennumber, lenchannel, lentitle, lenremaining = 0, 0, 0, 0, 0
 			for win in self.tunerInfo.itervalues():
-				# Reposition windows
+				win.updateContent()
+				if posx == 0:
+					posx = win.instance.position().x()
+					sizeh = win.instance.size().height()
+				posy       = min( win.instance.position().y(), posy )
+				lentuner   = max( win["Tuner"].instance.calculateSize().width(), lentuner )
+				lennumber  = max( win["Number"].instance.calculateSize().width(), lennumber )
+				lenchannel = max( win["Channel"].instance.calculateSize().width(), lenchannel )
+				lentitle    = max( win["Title"].instance.calculateSize().width(), lentitle )
+				lenremaining = max( win["Remaining"].instance.calculateSize().width(), lenremaining )
+			
+			self.posy = posy
+			
+			# Spacing between the column entries
+			lentuner   += 15
+			lennumber  += 15
+			lenchannel += 15
+			lentitle    += 15
+			lenremaining += 15
+			
+			# Resize, move and show windows
+			for win in sorted( self.tunerInfo.itervalues(), key=lambda x: (x.type, x.remaining) ):
+				win.resize(lentuner, lennumber, lenchannel, lentitle, lenremaining)
 				win.instance.move(ePoint(posx, posy))
 				posy += sizeh
 				# Show windows
 				win.show()
 				
 			# Start timer to avoid permanent displaying
-			self.hideTimer.start((config.usage.infobar_timeout.index or 1)*1000, True)
+			# Do not start timer if no timeout is configured
+			idx = config.usage.infobar_timeout.index
+			if idx:
+				self.hideTimer.start((config.usage.infobar_timeout.index or 1)*1000, True)
 	
 	def tunerHide(self):
-		needsupdate = False
-		for timer in self.tunerInfo.keys():
-			win = self.tunerInfo[timer]
+		for timer, win in self.tunerInfo.items():
 			win.hide()
-			if win.type == "Stopped":
+			if win.tobedeleted == True:
 				# Delete Stopped Timers
 				self.session.deleteDialog(win)
 				del self.tunerInfo[timer]
-				needsupdate = True
-		if needsupdate:
-			self.resizeElements()
 
 class TunerState(Screen):
 	skin = """
 		<screen name="TunerState" flags="wfNoBorder" position="50,50" size="1000,32" title="Tuner State" zPosition="-1">
 			<widget name="Background" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/bg.png" position="0,0" size="1000,32" zPosition="-1" alphatest="off" transparent="1"/>
-			<widget name="Record"     pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/record.png" position="0,0" size="42,32" zPosition="1" alphatest="on"/>
+			<widget name="Record"     pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/record.png"  position="0,0" size="42,32" zPosition="1" alphatest="on"/>
 			<widget name="Stopped"    pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/stopped.png" position="0,0" size="42,32" zPosition="1" alphatest="on"/>
-			<widget name="Tuner"     font="Regular;22" noWrap="1" position="42,0"  size="50,32" halign="left"   valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
-			<widget name="Number"    font="Regular;22" noWrap="1" position="100,0" size="50,32" halign="left"   valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
-			<widget name="Channel"   font="Regular;22" noWrap="1" position="200,0" size="50,32" halign="left"   valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
-			<widget name="Name"      font="Regular;22" noWrap="1" position="300,0" size="50,32" halign="left"   valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
-			<widget name="Remaining" font="Regular;22" noWrap="1" position="400,0" size="50,32" halign="left"   valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+			<widget name="Tuner"     font="Regular;22" noWrap="1" position="42,0"  size="50,32" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+			<widget name="Number"    font="Regular;22" noWrap="1" position="100,0" size="50,32" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
+			<widget name="Channel"   font="Regular;22" noWrap="1" position="200,0" size="50,32" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
+			<widget name="Title"      font="Regular;22" noWrap="1" position="300,0" size="50,32" halign="left" valign="center" foregroundColor="#bbbbbf" backgroundColor="#141415" transparent="1"/>
+			<widget name="Remaining" font="Regular;22" noWrap="1" position="400,0" size="50,32" halign="left" valign="center" foregroundColor="#ffffff" backgroundColor="#141415" transparent="1"/>
 		</screen>"""
 
-	def __init__(self, session, type, tuner, number, channel, name, end, infinite=False):
+	def __init__(self, session, type, tuner, number, channel, name, timer=None):
 		
 		Screen.__init__(self, session)
 		
-		self.type = type
-		self.end = end
-		self.infinite = infinite
+		self.closeTimer = eTimer()
+		self.closeTimer.callback.append(self.deleteEntry)
+		self.tobedeleted = False
 		
+		self.timer = timer
+		
+		self.type = type
 		self["Background"] = Pixmap()
 		self["Record"] = Pixmap()
 		self["Stopped"] = Pixmap()
+		self.updateType()
 		
 		self["Tuner"] = Label(tuner)
 		
@@ -377,12 +403,12 @@ class TunerState(Screen):
 			self["Number"] = Label("")
 		self["Channel"] = Label(channel)
 		
-		self["Name"] = Label(name)
+		self["Title"] = Label(name)
+		
+		self.remaining = 0
 		self["Remaining"] = Label("")
 		
-		self.updateIcon()
-		
-		self.onShow.append(self.updateRemaining)
+		#self.onShow.append(self.updateContent)
 		#self.onLayoutFinish.append(self.layoutFinished)
 		#self.onFirstExecBegin.append(self.layoutFinished)
 		
@@ -399,22 +425,27 @@ class TunerState(Screen):
 #			self.skin = Cool.read()
 #			Cool.close()
 
-	def updateIcon(self):
-		if self.type == "Record":
-			self["Record"].show()
-			self["Stopped"].hide()
-		elif self.type == "Stopped":
-			self["Record"].hide()
-			self["Stopped"].show()
-			self["Remaining"].setText( "-" )
-
 	def changeType(self, type):
 		self.type = type
-		self.updateIcon()
+		self.updateType()
 
-	def resize(self, lentuner, lennumber, lenchannel, lenname):
+	def updateType(self):
+		if self.type == RecordStarted:
+			self["Record"].show()
+			self["Stopped"].hide()
+		elif self.type == RecordFinished:
+			self["Record"].hide()
+			self["Stopped"].show()
+			self["Tuner"].setText( "-" )
+			#TODO config
+			self.closeTimer.start(60*1000, True)
+
+	def deleteEntry(self):
+		self.tobedeleted = True 
+
+	def resize(self, lentuner, lennumber, lenchannel, lentitle, lenremaining):
 		sh = self.instance.size().height()
-
+		
 		self["Tuner"].instance.resize( eSize(lentuner, sh) )
 		px = self["Tuner"].instance.position().x()
 		py = self["Tuner"].instance.position().y()
@@ -423,37 +454,50 @@ class TunerState(Screen):
 		self["Number"].instance.resize( eSize(lennumber, sh) )
 		self["Number"].instance.move( ePoint(px, py) )
 		px += lennumber
-
+		
 		self["Channel"].instance.resize( eSize(lenchannel, sh) )
 		self["Channel"].instance.move( ePoint(px, py) )
 		px += lenchannel
 		
-		self["Name"].instance.resize( eSize(lenname, sh) )
-		self["Name"].instance.move( ePoint(px, py) )
-		px += lenname
+		self["Title"].instance.resize( eSize(lentitle, sh) )
+		self["Title"].instance.move( ePoint(px, py) )
+		px += lentitle
 		
-		#lenremaining = max(self.instance.size().width()-px, 0)
-		#self["Remaining"].instance.resize( eSize(lenremaining, sh) )
+		self["Remaining"].instance.resize( eSize(lenremaining, sh) )
 		self["Remaining"].instance.move( ePoint(px, py) )
+		px += lenremaining
+		
+		#TODO config width style
+		self["Background"].instance.resize( eSize(px, sh) )
+		self.instance.resize( eSize(px, sh) )
 	
-	def updateRemaining(self):
-		#self.updateIcon()
-		# Calculate remaining minutes 
-		if not self.infinite:
-			if self.end > 0 and self.type != "Stopped":
-				remaining = int( math.ceil( ( self.end - time() ) / 60.0 ) )
-				self["Remaining"].setText( str(remaining) + _(" Min") )
-			else:
-				self["Remaining"].setText( "-" )
-		else: 
-			# Add infinity symbol for indefinitely recordings
-			#TODO update title get it from channel
-			#epgcache = eEPGCache.getInstance()
-			#serviceHandler = eServiceCenter.getInstance()
-			#epg now next ?!?
-			self["Remaining"].setText( u" \u221E ".encode("utf-8") )
-		w = self["Remaining"].instance.calculateSize().width()
-		h = self["Remaining"].instance.size().height()
-		self["Remaining"].instance.resize( eSize(w, h) )
-		#TODO resize background equal for all windows ?
+	def updateContent(self):
+		#self.updateType()
+		# Calculate remaining minutes
+		if self.timer:
+			if not self.timer.autoincrease:
+				if self.type == RecordFinished:
+					self.remaining = 0
+					self["Remaining"].setText( "-" )
+				elif self.timer.end > 0:
+					self.remaining = int( math.ceil( ( self.timer.end - time() ) / 60.0 ) )
+					self["Remaining"].setText( str(self.remaining) + _(" Min") )
+				else:
+					self.remaining = 0
+					self["Remaining"].setText( "" )
+			else: 
+				# Add infinity symbol for indefinitely recordings
+				self.remaining = 0xFFFFFFFFFFFFFFFF
+				self["Remaining"].setText( u"\u221E".encode("utf-8") )
+				#TODO config update title of infinite recordings
+				epg = eEPGCache.getInstance()
+				event = epg and epg.lookupEventTime(self.timer.service_ref.ref, -1, 0)
+				if event: 
+					self["Title"].setText( event.getEventName() )
+		else:
+			# No timer available
+			self.remaining = 0
+			self["Remaining"].setText( "" )
+			
 		#TODO Handle Live Entry - Update all Labels
+
