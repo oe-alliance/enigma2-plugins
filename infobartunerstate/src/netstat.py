@@ -5,7 +5,7 @@
 # Changed by betonme
 # Added netstat parameter 
 #  getstate, getuid, getpid   to improve performance
-#  readable                   to get ip and port separated
+#  readable                   to get IP and port separated
 
 import pwd
 import os
