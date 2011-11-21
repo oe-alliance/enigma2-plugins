@@ -298,6 +298,9 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 	def suspend(self):
 		self.session.nav.RecordTimer.on_state_change.remove(self.onStateChange)
 		self.clockTimer.callback.remove(self.checkTimeChange)
+		# reset the timer tab to Timer
+		self.timerListMode = LIST_MODE_TIMER
+		self["tab_text_%d" % TIMERLIST].setText(_("Timer"))
 		
 		if self.blinkTimer.getIsRunning():
 			self["isRecording"].hide()
