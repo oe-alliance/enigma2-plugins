@@ -804,7 +804,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 					this.commitForm('timerEditForm');
 				}.bind(this)
 			);
-	},
+	}
 });
 
 

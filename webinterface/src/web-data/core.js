@@ -136,6 +136,7 @@ var Current = Class.create(Controller, {
 	initialize: function($super, curTarget, volTarget){
 		$super(new CurrentHandler(curTarget, volTarget));
 		this.model.onFinished[this.model.onFinished.length] = this.restoreDisplayStyle.bind(this);
+		this.display = 'none';
 	},
 	
 	load: function(){
@@ -1087,7 +1088,7 @@ var E2WebCore = Class.create({
 			'.currentExtShowHide',
 			function(event, element){
 				//FIXME
-				element.href = '#';	
+				element.href = '#';
 				var ext = $('trExtCurrent');
 				if(ext){
 					if(ext.visible())
@@ -1097,6 +1098,16 @@ var E2WebCore = Class.create({
 				}
 			}
 		);
+		$('current').on(
+				'click',
+				'.currentEpg',
+				function(event, element){
+					//FIXME
+					element.href = '#';
+					var ref = unescape( element.readAttribute('data-servicereference') );
+					this.epg.load(ref);
+				}.bind(this)
+			);
 		//EPG-Search
 		$('epgSearchForm').on(
 			'submit',
@@ -1210,8 +1221,9 @@ var E2WebCore = Class.create({
 			'a.sListSLink', 
 			function(event, element){
 				//FIXME
-				element.href = '#';				
-				this.services.zap(unescape(element.id));
+				element.href = '#';
+				var ref = unescape( element.readAttribute('data-servicereference') );
+				this.services.zap(ref);
 				return false;
 			}.bind(this)
 		);
