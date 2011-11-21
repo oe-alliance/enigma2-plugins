@@ -888,10 +888,16 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 	def getBouquetName(self):
 		name = self.bouquetList[self.currentBouquetIndex][0]
 		if self.infoBarInstance.servicelist.mode == MODE_TV:
-			return 'Bouquet: ' + name.rstrip(' (TV)')
+			if name[len(name) -5:] == ' (TV)':
+				return 'Bouquet: %s' % name[:len(name) -5]
+			else:
+				return 'Bouquet: %s' % name # Partnerbox bouquet
 		else:
-			return 'Bouquet: ' + name.rstrip(' (Radio)')
-			
+			if name[len(name) -8:] == ' (Radio)':
+				return 'Bouquet: %s' % name[:len(name) -8]
+			else:
+				return 'Bouquet: %s' % name # Partnerbox bouquet
+				
 	def onListSelectionChanged(self):
 		isAutoTimer = False
 		
