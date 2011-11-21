@@ -35,6 +35,7 @@ SUBDIRS = \
 	growlee \
 	httpproxy \
 	imdb \
+	infobartunerstate \
 	kiddytimer \
 	lastfm \
 	letterbox \
