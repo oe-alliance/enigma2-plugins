@@ -16,6 +16,7 @@ from skin import parseColor, parseFont
 
 from Components.ActionMap import HelpableActionMap, ActionMap
 from Components.SystemInfo import SystemInfo
+from Components.Sources.StaticText import StaticText
 
 from xml.etree.cElementTree import parse as cet_parse
 try:
@@ -128,7 +129,7 @@ class SortableMenuList(MenuList):
 		l.setFont(0, gFont("Regular", 22))
 		l.setBuildFunc(self.buildListboxEntry)
 		self.selected = None
-		self.selectedColor = 8388608
+		self.selectedColor = 0x8c8c8c
 		self.hiddenColor = 8388564
 
 	def invalidate(self):
@@ -143,7 +144,7 @@ class SortableMenuList(MenuList):
 				elif attrib == "itemHeight":
 					self.l.setItemHeight(int(value))
 				elif attrib == "selectedColor":
-					self.selectedColor = int(parseColor(value))
+					self.selectedColor = parseColor(value).argb()
 				elif attrib == "hiddenColor":
 					self.hiddenColor = int(parseColor(value))
 				else:
@@ -166,21 +167,24 @@ class SortableMenuList(MenuList):
 		return l
 
 class SortableMenu(Menu, HelpableScreen):
-	skin = """<screen name="SortableMenu" position="center,center" size="210,285">
-		<widget source="title" render="Label" position="5,10" size="200,35" font="Regular;23" />
-		<widget name="menu" position="5,55" size="200,225" scrollbarMode="showOnDemand" font="Regular;23" />
+	skin = """<screen name="SortableMenu" position="center,center" size="210,330">
+		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget source="key_blue" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="menu" position="5,95" size="200,225" scrollbarMode="showOnDemand" font="Regular;23" />
 		</screen>"""
 	def __init__(self, *args, **kwargs):
 		baseMethods.Menu__init__(self, *args, **kwargs) # using the base initializer saves us a few cycles
 		HelpableScreen.__init__(self)
 		self.skinName = "SortableMenu"
+		self.setTitle(_("Main menu"))
 
 		# XXX: not nice, but makes our life a little easier
 		l = [(x[0], x[1], x[2], menuWeights.get(x, supportHiding=False), menuWeights.isHidden(x)) for x in self["menu"].list]
 		l.sort(key=itemgetter(3))
 		self["menu"] = SortableMenuList(l)
+		self["key_blue"] = StaticText(_("hide entry"))
 
-		self["WizardActions"] = ActionMap(["WizardActions"],
+		self["DirectionActions"] = ActionMap(["DirectionActions"],
 			{
 				"left": boundFunction(self.doMove, self["menu"].pageUp),
 				"right": boundFunction(self.doMove, self["menu"].pageDown),
