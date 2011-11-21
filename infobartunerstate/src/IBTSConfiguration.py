@@ -16,6 +16,9 @@
 #
 #######################################################################
 
+# for localized messages
+from . import _
+
 # Config
 from Components.config import *
 from Components.ConfigList import ConfigListScreen

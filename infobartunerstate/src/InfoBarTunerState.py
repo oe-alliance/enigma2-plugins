@@ -16,6 +16,9 @@
 #
 #######################################################################
 
+# for localized messages
+from . import _
+
 import math
 import os
 import NavigationInstance
