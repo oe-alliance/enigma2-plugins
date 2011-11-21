@@ -21,30 +21,9 @@
 												<td colspan="3" style="font-size: 12px;">Note: For recurring events date is not required.</td>
 											</tr>
 											<tr>
-												<td colspan="3">Date:</td>
-												<td colspan="3">
-													<select name="year" size="1" id="year">
-														{for y in year}
-														<option value="${y.value}" ${y.selected}>${y.txt}</option>
-														{/for}
-													</select>
-													. 
-													<select name="month" id="month" size="1">
-														{for m in month}
-														<option value="${m.value}" ${m.selected}>${m.txt}</option>
-														{/for}
-													</select>
-													.
-													<select name="day" id="day" size="1">
-														{for d in day}
-														<option value="${d.value}" ${d.selected}>${d.txt}</option>
-														{/for}
-													</select>
-												</td>
-											</tr>
-											<tr>
 												<td colspan="3">Start:</td>
 												<td colspan="3">
+													<input id="dateStart" name="dateStart" value="${timer.beginDate}" size="10" maxlength="10">
 													<select name="shour" id="shour" size="1">
 														{for hour in shour}
 														<option value="${hour.value}" ${hour.selected}>${hour.txt}</option>
@@ -61,6 +40,7 @@
 											<tr>
 												<td colspan="3">End:</td>
 												<td colspan="3">
+													<input id="dateEnd" name="dateEnd" value="${timer.endDate}" size="10" maxlength="10">
 													<select name="ehour" id="ehour" size="1">
 														{for hour in ehour}
 														<option value="${hour.value}" ${hour.selected}>${hour.txt}</option>
@@ -135,7 +115,7 @@
 											<tr>
 												<td colspan="3">After event do:</td>
 												<td colspan="3">
-													<select id="after_event" name="after_event" size="1">
+													<select id="afterevent" name="afterevent" size="1">
 														{for event in afterEvent}
 														<option value="${event.value}" ${event.selected}>${event.txt}</option>
 														{/for}

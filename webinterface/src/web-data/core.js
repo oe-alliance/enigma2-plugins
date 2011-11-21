@@ -1,10 +1,10 @@
 Element.prototype.fadeIn = function(parms, out) {
 		var _this = this;
 		var opacityTo = function(elm,v){
-		    elm.style.opacity = v/100;		 
-		    elm.style.MozOpacity =  v/100;		 
-		    elm.style.KhtmlOpacity =  v/100;		 
-		    elm.style.filter=" alpha(opacity ="+v+")";
+			elm.style.opacity = v/100;
+			elm.style.MozOpacity =  v/100;
+			elm.style.KhtmlOpacity =  v/100;
+			elm.style.filter=" alpha(opacity ="+v+")";
 		};
 		var delay = parms.delay;
 		var to = parms.to;
@@ -597,12 +597,12 @@ var Services = Class.create(Controller, {
 	filter: function(event){
 		var needle = event.element().value.toLowerCase();
 		
-		if(cachedServiceElements == null){
-			cachedServiceElements = $$('.sListRow');
+		if(this.cachedServiceElements == null){
+			this.cachedServiceElements = $$('.sListRow');
 		}
 		
-		for(var i = 0; i < cachedServiceElements.length; i++){
-			var row = cachedServiceElements[i];
+		for(var i = 0; i < this.cachedServiceElements.length; i++){
+			var row = this.cachedServiceElements[i];
 			var serviceName = row.readAttribute('data-servicename').toLowerCase();
 			
 			if(serviceName.match(needle) != needle && serviceName != ""){
@@ -703,7 +703,7 @@ var SimplePages = Class.create({
 var Timers = Class.create({
 	initialize: function(target){
 		this.listHandler = new TimerListHandler(target);
-		this.timerHandler = new TimerHandler(target, this.loadList.bind(this));
+		this.timerHandler = new TimerHandler(target, this.loadList.bind(this), [this.onTimerEditLoadFinished.bind(this)]);
 	},
 	
 	loadList: function(){
@@ -711,7 +711,7 @@ var Timers = Class.create({
 	},
 	
 	create: function(){
-		//TODO create Timer;
+		this.timerHandler.commitForm('timerEditForm');
 	},
 	
 	edit: function(element){
@@ -719,9 +719,9 @@ var Timers = Class.create({
 	},
 	
 	addByEventId: function(element, justplay){
-		var parent = element.up('.epgListItem');					
+		var parent = element.up('.epgListItem');
 		var sRef = unescape(parent.readAttribute('data-servicereference'));
-		var eventId = unescape(parent.readAttribute('data-eventid'));		
+		var eventId = unescape(parent.readAttribute('data-eventid'));
 		this.timerHandler.addByEventId(sRef, eventId, justplay);
 	},
 	
@@ -731,6 +731,30 @@ var Timers = Class.create({
 	
 	del: function(element){
 		this.timerHandler.del(element);
+	},
+	
+	onTimerEditLoadFinished: function(){
+		debug("[Timers].ontimerEditLoadFinished");
+		datePickerController.destroyDatePicker('dateStart');
+		datePickerController.destroyDatePicker('dateEnd');
+		var today = new Date();
+		var pad = function(value, length) { 
+			length = length || 2; 
+			return "0000".substr(0,length - Math.min(String(value).length, length)) + value; 
+		};
+		var opts = { 
+				showWeeks: true,
+				noFadeEffect: true,
+				rangeLow: today.getFullYear() + "" + pad(today.getMonth()+1) + pad(today.getDate())
+			};
+		
+		
+		opts['formElements'] = { 'dateStart' : 'Y-ds-m-ds-d'};
+		datePickerController.createDatePicker(opts);
+		
+		opts['formElements'] = { 'dateEnd' : 'Y-ds-m-ds-d'};
+		datePickerController.createDatePicker(opts);
+
 	}
 });
 
@@ -965,7 +989,7 @@ var E2WebCore = Class.create({
 						this.services.load(unescape(parts[3]));
 						break;
 					case 'movies':
-						var location = decodeURIComponent(parts[3]);						
+						var location = decodeURIComponent(parts[3]);
 						this.currentLocation = location;
 						this.movies.load(decodeURIComponent(parts[3]), decodeURIComponent(parts[4]));
 					default:

@@ -300,7 +300,7 @@ function EPGEvent(xml, number){
 		}
 		return h+":"+m;
 	};
-	this.getDuration = function() {		
+	this.getDuration = function() {
 		var date = new Date( this.duration * 1000);
 		return date;
 	};
@@ -906,7 +906,7 @@ function DeviceInfo(xml){
 	}
 	
 	
-	var hddnodes = xml.getElementsByTagName('e2hdd');			
+	var hddnodes = xml.getElementsByTagName('e2hdd');
 	for( var i = 0; i < hddnodes.length; i++){
 		try{			
 			var hdd = hddnodes.item(i);
@@ -921,7 +921,7 @@ function DeviceInfo(xml){
 					'free'		: free
 			};
 		} catch(e){
-			core.notify("Error parsing HDD data: " + e, false);			
+			core.notify("Error parsing HDD data: " + e, false);
 		}
 	}
 	
@@ -946,17 +946,17 @@ function DeviceInfo(xml){
 					'netmask' : netmask
 			};
 		} catch (e) {
-			core.notify("Error parsing NIC data: " + e, false);			
+			core.notify("Error parsing NIC data: " + e, false);
 		}
 	}
 	
 	try{
 		this.info = {
-				'devicename' : xml.getElementsByTagName('e2devicename').item(0).firstChild.data,	
+				'devicename' : xml.getElementsByTagName('e2devicename').item(0).firstChild.data,
 				'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data,
 				'imageVersion': xml.getElementsByTagName('e2imageversion').item(0).firstChild.data,
 				'fpVersion': this.fpversion,
-				'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data			
+				'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data
 		};
 	} catch (e) {
 		core.notify("Error parsing deviceinfo data: " + e, false);		
@@ -1019,7 +1019,7 @@ function SimpleXMLList(xml, tagname){
 		if(this.xmllist.length === 0){
 			var len = this.xmlitems.length;
 			for(var i=0; i<len; i++){
-				this.xmllist.push(this.xmlitems.item(i).firstChild.data);			
+				this.xmllist.push(this.xmlitems.item(i).firstChild.data);
 			}
 		}
 		

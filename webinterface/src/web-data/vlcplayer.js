@@ -1,3 +1,126 @@
+var WebTv = Class.create(AjaxThing, {
+	initialize: function(vlcObjectTarget){
+		var DBG = userprefs.data.debug || false;
+		if (DBG) {
+			openDebug();
+		}
+
+		this.vlc = $(vlcObjectTarget);
+
+		try {
+			$('vlcVolume').update(this.vlc.audio.volume);
+		} catch (e) {
+			debug('[initWebTv] Error on initializing WebTv');
+		}
+
+		loadVLCBouquets();
+	},
+	
+	play: function() {
+		try {
+			onServiceSelected();
+		} catch (e) {
+			notify("Nothing to play", false);
+		}
+	},
+
+	prev: function() {
+		if ($('channelSelect').selectedIndex > 0) {
+			$('channelSelect').selectedIndex -= 1;
+			onServiceSelected();
+		}
+	},
+
+	next: function() {
+		if ($('channelSelect').selectedIndex < $('channelSelect').length - 1) {
+			$('channelSelect').selectedIndex += 1;
+			onServiceSelected();
+		}
+	},
+
+	pause: function() {
+		this.vlc.playlist.togglePause();
+	},
+
+	stop: function() {
+		try {
+			this.vlc.playlist.stop();
+		} catch (e) {
+			notify("Nothing to stop", false);
+		}
+	},
+
+	volumeUp: function() {
+		if (this.vlc.audio.volume < 200) {
+			if (this.vlc.audio.volume + 10 > 200) {
+				this.vlc.audio.volume = 200;
+			} else {
+				this.vlc.audio.volume += 10;
+			}
+		}
+
+		$('vlcVolume').update(this.vlc.audio.volume);
+	},
+
+	volumeDown: function() {
+		if (this.vlc.audio.volume > 0) {
+			if (this.vlc.audio.volume < 10) {
+				this.vlc.audio.volume = 0;
+			} else {
+				this.vlc.audio.volume -= 10;
+			}
+		}
+
+		$('vlcVolume').update(this.vlc.audio.volume);
+	},
+
+	toogleMute: function() {
+		this.vlc.audio.mute = !this.vlc.audio.mute;
+		if (this.vlc.audio.mute) {
+			$('vlcVolume').update('Muted');
+		} else {
+			$('vlcVolume').update(this.vlc.audio.volume);
+		}
+	},
+
+	fullscreen: function() {
+		if (this.vlc.playlist.isPlaying) {
+			if (this.vlc.input.hasVout) {
+				this.vlc.video.fullscreen = true;
+				return;
+			}
+		}
+
+		notify("Cannot enable fullscreen mode when no Video is being played!",
+				false);
+	},
+
+	teletext: function() {
+		try {
+			this.vlc.video.teletext = 100;
+		} catch (e) {
+			debug("Error - Could not set teletext");
+		}
+		debug("Current Teletext Page:" + this.vlc.video.teletext);
+	},
+
+	playUrl: function(url) {
+		current = this.vlc.playlist.add(url);
+		this.vlc.playlist.playItem(current);
+		$('vlcVolume').update(this.vlc.audio.volume);
+	},
+
+	setStreamTarget: function(servicereference) {
+		host = top.location.host;
+		url = 'http://' + host + ':8001/' + decodeURIComponent(servicereference);
+
+		debug("setStreamTarget " + url);
+		this.vlc.playlist.clear();
+		playUrl(url);
+	}
+});
+webTv = new WebTv();
+
 var vlc = '';
 var currentServiceRef = '';
 var bouquetUpdatePoller = '';
@@ -159,54 +282,54 @@ function vlcNext() {
 }
 
 function vlcPause() {
-	vlc.playlist.togglePause();
+	this.vlc.playlist.togglePause();
 }
 
 function vlcStop() {
 	try {
-		vlc.playlist.stop();
+		this.vlc.playlist.stop();
 	} catch (e) {
 		notify("Nothing to stop", false);
 	}
 }
 
 function vlcVolumeUp() {
-	if (vlc.audio.volume < 200) {
-		if (vlc.audio.volume + 10 > 200) {
-			vlc.audio.volume = 200;
+	if (this.vlc.audio.volume < 200) {
+		if (this.vlc.audio.volume + 10 > 200) {
+			this.vlc.audio.volume = 200;
 		} else {
-			vlc.audio.volume += 10;
+			this.vlc.audio.volume += 10;
 		}
 	}
 
-	set('vlcVolume', vlc.audio.volume);
+	set('vlcVolume', this.vlc.audio.volume);
 }
 
 function vlcVolumeDown() {
-	if (vlc.audio.volume > 0) {
-		if (vlc.audio.volume < 10) {
-			vlc.audio.volume = 0;
+	if (this.vlc.audio.volume > 0) {
+		if (this.vlc.audio.volume < 10) {
+			this.vlc.audio.volume = 0;
 		} else {
-			vlc.audio.volume -= 10;
+			this.vlc.audio.volume -= 10;
 		}
 	}
 
-	set('vlcVolume', vlc.audio.volume);
+	set('vlcVolume', this.vlc.audio.volume);
 }
 
 function vlcToogleMute() {
-	vlc.audio.mute = !vlc.audio.mute;
-	if (vlc.audio.mute) {
+	this.vlc.audio.mute = !this.vlc.audio.mute;
+	if (this.vlc.audio.mute) {
 		set('vlcVolume', 'Muted');
 	} else {
-		set('vlcVolume', vlc.audio.volume);
+		set('vlcVolume', this.vlc.audio.volume);
 	}
 }
 
 function vlcFullscreen() {
-	if (vlc.playlist.isPlaying) {
-		if (vlc.input.hasVout) {
-			vlc.video.fullscreen = true;
+	if (this.vlc.playlist.isPlaying) {
+		if (this.vlc.input.hasVout) {
+			this.vlc.video.fullscreen = true;
 			return;
 		}
 	}
@@ -217,17 +340,17 @@ function vlcFullscreen() {
 
 function vlcTeletext() {
 	try {
-		vlc.video.teletext = 100;
+		this.vlc.video.teletext = 100;
 	} catch (e) {
 		debug("Error - Could not set teletext");
 	}
-	debug("Current Teletext Page:" + vlc.video.teletext);
+	debug("Current Teletext Page:" + this.vlc.video.teletext);
 }
 
 function playUrl(url) {
-	current = vlc.playlist.add(url);
-	vlc.playlist.playItem(current);
-	set('vlcVolume', vlc.audio.volume);
+	current = this.vlc.playlist.add(url);
+	this.vlc.playlist.playItem(current);
+	set('vlcVolume', this.vlc.audio.volume);
 }
 
 function setStreamTarget(servicereference) {
@@ -235,7 +358,7 @@ function setStreamTarget(servicereference) {
 	url = 'http://' + host + ':8001/' + decodeURIComponent(servicereference);
 
 	debug("setStreamTarget " + url);
-	vlc.playlist.clear();
+	this.vlc.playlist.clear();
 	playUrl(url);
 }
 
@@ -262,7 +385,7 @@ function initWebTv() {
 	vlc = $('vlc');
 
 	try {
-		set('vlcVolume', vlc.audio.volume);
+		set('vlcVolume', this.vlc.audio.volume);
 	} catch (e) {
 		debug('[initWebTv] Error on initializing WebTv');
 	}

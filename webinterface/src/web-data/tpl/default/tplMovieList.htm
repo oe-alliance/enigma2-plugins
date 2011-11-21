@@ -19,25 +19,20 @@
 													</a>
 												</div>
 											</td>
-											<!-- 
-											<td style="width: 140px;font-size: 12px;text-align: right;padding-right: 15px;">
-												${movie.tags}
-											</td>
-											 -->
-											<td>
-												<a target="_blank" class="small underline" href="/web/ts.m3u?file=${movie.filename}">stream</a><br/>
-											</td>
-											<td>
-												<a target="_blank" class="small underline" href="/file?file=${movie.filename}">download</a>
-											</td>
-											<td>
-												<a href="#" class="mListDelete">
-													<img src="/web-data/img/delete.png" title="Delete ${movie.title}" border="0">
+											<td style="text-align: right;">
+												<a target="_blank" class="small" href="/web/ts.m3u?file=${movie.filename}" title="Stream ${movie.title}" >
+													<img src="/web-data/img/screen.png" alt="stream" border="0">
+												</a>
+												<a target="_blank" class="small" href="/file?file=${movie.filename}" title="Download ${movie.title}">
+													<img src="/web-data/img/save.png" alt="download" border="0">
+												</a>
+												<a href="#" class="mListDelete" title="Delete ${movie.title}">
+													<img src="/web-data/img/delete.png" border="0">
 												</a>
 											</td>
 										</tr>
 										<tr class="mListDetail">
-											<td colspan="4" class="mListDetailItem">
+											<td colspan="2" class="mListDetailItem">
 												<table cellspacing="0">
 													<tr>
 														<td rowspan="3" class="mStart">${movie.time}</td>

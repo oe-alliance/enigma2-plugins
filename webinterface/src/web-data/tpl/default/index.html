@@ -10,6 +10,7 @@
 	<title>Dreambox WebControl</title>
 	
 	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">
+	<link href="/web-data/tpl/default/datepicker.css" type="text/css" rel="stylesheet">
 	<link rel="shortcut icon" type="/web-data/image/x-icon" href="/web-data/img/favicon.ico">
 	
 
@@ -17,6 +18,15 @@
 	<script type="text/javascript" src="/web-data/lib/curvycorners.js"></script>
 	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
 	<script type="text/javascript" src="/web-data/lib/hashlistener2.js"></script>
+	<script type="text/javascript" src="/web-data/lib/datepicker/datepicker.js">
+	{
+		"nodrag":1,
+		"lang":"en",
+		"buttontabindex":true,
+		"cellformat":["Y-ds-m-ds-d"],
+		"titleformat":["Y-ds-m-ds-d"]
+	}
+	</script>
 
  	<!-- 
 	<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>

@@ -72,7 +72,7 @@ var AbstractContentHandler = Class.create({
 	 * @transport - the xmlhttp transport object
 	 */
 	simpleResultCallback: function(transport){
-		this.provider.simpleResultCallback(transport, this.showSimpleResult.bind(this));		
+		this.provider.simpleResultCallback(transport, this.showSimpleResult.bind(this));
 	},
 	
 	showSimpleResult: function(result){
@@ -164,7 +164,7 @@ var BouquetListHandler = Class.create(AbstractContentHandler, {
 		if($(this.target) != null && $(this.target != undefined)){
 			templateEngine.process(this.tpl, data, this.target,  this.finished.bind(this));
 		} else {
-			templateEngine.process(					
+			templateEngine.process(
 					'tplBouquetsAndServices', 
 					null, 
 					this.targetMain,
@@ -178,7 +178,7 @@ var BouquetListHandler = Class.create(AbstractContentHandler, {
 
 var CurrentHandler  = Class.create(AbstractContentHandler, {
 	initialize: function($super, curTarget, volTarget){
-		$super('tplCurrent', curTarget);		
+		$super('tplCurrent', curTarget);
 		this.provider = new CurrentProvider(this.show.bind(this));
 		this.volTpl = 'tplVolume';
 		this.volTarget = volTarget;
@@ -334,7 +334,7 @@ var ServiceListSubserviceHandler  = Class.create(AbstractContentHandler, {
 			list.shift();
 			
 			var data = { subservices : list };
-			templateEngine.process(this.tpl, data, id);			
+			templateEngine.process(this.tpl, data, id);
 			parent.show();
 		}
 	}
@@ -385,7 +385,7 @@ var MovieListHandler  = Class.create(AbstractContentHandler, {
 		
 		if(result){
 			debug("[MovieListProvider.del] ok confirm panel"); 
-			this.provider.simpleResultQuery(URL.moviedelete, {sRef : movie.servicereference}, this.onDeleted.bind(this));			
+			this.provider.simpleResultQuery(URL.moviedelete, {sRef : movie.servicereference}, this.onDeleted.bind(this));
 		}
 		else{
 			debug("[MovieListProvider.del] cancel confirm panel");
@@ -474,8 +474,8 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * initialize
 	 * See the description in AbstractContentProvider
 	 */
-	initialize: function($super, target, reloadCallback){		
-		$super('tplTimerEdit', target);
+	initialize: function($super, target, reloadCallback, onFinished){
+		$super('tplTimerEdit', target, onFinished);
 		this.t = {};
 		this.provider = new SimpleRequestProvider();
 		this.ajaxload = true;
@@ -487,6 +487,15 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		if(this.reloadCallback){
 			this.reloadCallback();
 		}
+	},
+	
+	toReadableDate: function(date){
+		var dateString = "";
+		dateString += date.getFullYear();
+		dateString += "-" + addLeadingZero(date.getMonth()+1);
+		dateString += "-" + addLeadingZero(date.getDate());
+		
+		return dateString;
 	},
 	
 	/**
@@ -516,20 +525,28 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	getData: function(element){
 		var parent = element.up('.tListItem');
 		var t = {};
+		
 		if(parent){
+			var begin = unescape(parent.readAttribute('data-begin'));
+			var end = unescape(parent.readAttribute('data-end'));
+			var beginD = new Date(begin * 1000);
+			var endD = new Date(end * 1000);
+
 			t = {
 					servicereference : unescape(parent.readAttribute('data-servicereference')),
 					servicename : unescape(parent.readAttribute('data-servicename')),
 					description : unescape(parent.readAttribute('data-description')),
 					name : unescape(parent.readAttribute('data-name')),
-					begin : unescape(parent.readAttribute('data-begin')),
-					end : unescape(parent.readAttribute('data-end')),
+					begin : begin,
+					beginDate : this.toReadableDate(beginD),
+					end : end,
+					endDate : this.toReadableDate(endD),
 					repeated : unescape(parent.readAttribute('data-repeated')),
 					justplay : unescape(parent.readAttribute('data-justplay')),
 					dirname : unescape(parent.readAttribute('data-dirname')),
 					tags : unescape(parent.readAttribute('data-tags')),
 					afterevent : unescape(parent.readAttribute('data-afterevent')),
-					disabled : unescape(parent.readAttribute('data-disabled'))				
+					disabled : unescape(parent.readAttribute('data-disabled'))
 			};
 		}
 		return t;
@@ -545,20 +562,16 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * @element - the html element calling the load function ( onclick="TimerProvider.load(this)" )
 	 */
 	load: function(element){
+		
 		var t = this.getData(element);
 			
 		var begin = new Date(t.begin * 1000);
 		var end = new Date(t.end * 1000);	
 		
-		var bHours = this.numericalOptionList(1, 24, begin.getHours());		
-		var bMinutes = this.numericalOptionList(1, 60, begin.getMinutes());
-		var eHours = this.numericalOptionList(1, 24, end.getHours());		
-		var eMinutes = this.numericalOptionList(1, 60, end.getMinutes());
-		
-		var now = new Date();
-		var years = this.numericalOptionList(now.getFullYear(), now.getFullYear() + 10, begin.getFullYear());
-		var months = this.numericalOptionList(0, 11, begin.getMonth(), 1);
-		var days = this.daysOptionList(begin);
+		var bHours = this.numericalOptionList(0, 23, begin.getHours());
+		var bMinutes = this.numericalOptionList(0, 59, begin.getMinutes());
+		var eHours = this.numericalOptionList(0, 23, end.getHours());
+		var eMinutes = this.numericalOptionList(0, 59, end.getMinutes());
 		
 		var actions = this.ACTIONS;
 		actions[t.justplay].selected = this.SELECTED;
@@ -568,10 +581,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		
 		var repeated = this.repeatedDaysList(t.repeated);
 		
-		var data = { 
-				year : years,
-				month : months,
-				day : days,
+		var data = {
 				shour : bHours,
 				smin : bMinutes,
 				ehour : eHours,
@@ -580,10 +590,18 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				channel : [],
 				afterEvent : afterevents,
 				repeated : repeated,
-				dirname : [],
-				tags : [],
 				timer : t };
-		
+		var _this = this;
+		core.lt.getLocationsAndTags(function(currentLocation, locations, tags){
+			_this.onLocationsAndTagsReady(data, currentLocation, locations, tags);
+		});
+	},
+	
+	onLocationsAndTagsReady: function(data, currentLocation, locations, tags){
+		var l = toOptionList(locations, currentLocation);
+		var t = toOptionList(tags);
+		data['dirname'] = l;
+		data['tags'] = t;
 		this.show(data);
 	},
 	
@@ -644,7 +662,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				'channelOld' : old.servicereference,
 				'beginOld' : old.begin,
 				'endOld' : old.end,
-				'deleteOldOnSave' : '1'					
+				'deleteOldOnSave' : '1'
 			},
 			this.simpleResultCallback.bind(this)
 		);
@@ -652,8 +670,8 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	
 	del: function(element){
 		var t = this.getData(element);
-		var result = confirm("Selected timer:\n" + "Channel: " + t.servicename + "\n"	+ 
-				"Name: " + t.name + "\n" + "Description: " + t.description + "\n"	+ 
+		var result = confirm("Selected timer:\n" + "Channel: " + t.servicename + "\n" + 
+				"Name: " + t.name + "\n" + "Description: " + t.description + "\n" + 
 				"Are you sure that you want to delete the Timer?");
 		if (result) {
 			debug("[TimerListProvider].del ok confirm panel");
@@ -767,8 +785,8 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * Commit the Timer Form by serializing it and executing the request
 	 * @id - id of the Form
 	 */
-	commitForm : function(id){		
-		var values = $(id).serialize();
+	commitForm : function(id){
+		var values = $(id).serialize(true);
 		debug(values);
 	},
 	
@@ -786,39 +804,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 					this.commitForm('timerEditForm');
 				}.bind(this)
 			);
-		
-		$('month').on('change', function(event, element){			
-				this.reloadDays();
-			}.bind(this)
-		);
-		
-		$('year').on('change', function(event, element){			
-				this.reloadDays();
-			}.bind(this)
-		);
 	},
-	
-	reloadDays : function(){
-		var date = new Date($('year').value, $('month').value, $('day').value);
-		var days = this.daysOptionList(date);
-						
-		$('day').update('');
-		this.createOptions(days, $('day'));
-	},
-	
-	createOptions: function(items, element){		
-		for(var i = 0; i < items.length; i++){
-			var item = items[i];
-			
-			var attrs = { value : item.value };
-			if(item.selected == this.SELECTED){
-				attrs = { value : item.value, selected : item.selected };
-			}
-			var option = new Element('option', attrs).update(item.txt);				
-			
-			element.appendChild(option);
-		}
-	}
 });
 
 
