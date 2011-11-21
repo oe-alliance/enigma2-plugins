@@ -214,6 +214,11 @@ imdb/meta/Makefile
 imdb/po/Makefile
 imdb/src/Makefile
 
+infobartunerstate/Makefile
+infobartunerstate/meta/Makefile
+infobartunerstate/po/Makefile
+infobartunerstate/src/Makefile
+
 kiddytimer/Makefile
 kiddytimer/img/Makefile
 kiddytimer/meta/Makefile
