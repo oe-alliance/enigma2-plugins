@@ -62,10 +62,10 @@ class Movie(Source):
 
 	def getMovieList(self):
 		self.movielist.reload(root=self.root, filter_tags=self.tagfilter)
-		list = []
+		lst = []
+		append = lst.append
 
-		tag = self.cmd['tag']
-		tag = tag and tag.lower()
+		loadLength = config.plugins.Webinterface.loadmovielength.value
 		for (serviceref, info, begin, unknown) in self.movielist.list:
 			rtime = info.getInfo(serviceref, iServiceInformation.sTimeCreate)
 
@@ -75,14 +75,14 @@ class Movie(Source):
 			else:
 				begin_string = "undefined"
 
-			if config.plugins.Webinterface.loadmovielength.value:
-				len = info.getLength(serviceref)
-				if len > 0:
-					len = "%d:%02d" % (len / 60, len % 60)
+			if loadLength:
+				Len = info.getLength(serviceref)
+				if Len > 0:
+					Len = "%d:%02d" % (Len / 60, Len % 60)
 				else:
-					len = "?:??"
+					Len = "?:??"
 			else:
-				len = "disabled"
+				Len = "disabled"
 
 			sourceERef = info.getInfoString(serviceref, iServiceInformation.sServiceref)
 			sourceRef = ServiceReference(sourceERef)
@@ -93,22 +93,20 @@ class Movie(Source):
 			filename = "/" + "/".join(serviceref.toString().split("/")[1:])
 			servicename = ServiceReference(serviceref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 			
-			if not tag or tag in info.getInfoString(serviceref, iServiceInformation.sTags).lower():
-				""" add movie only to list, if a given tag is applied to the movie """
-				list.append((
-					serviceref.toString(),
-					servicename,
-					info.getInfoString(serviceref, iServiceInformation.sDescription),
-					rtime,
-					begin_string,
-					len,
-					sourceRef.getServiceName(),
-					info.getInfoString(serviceref, iServiceInformation.sTags),
-					ext,
-					filename,
-					os_stat(filename)[6]
-				))
-		return list
+			append((
+				serviceref.toString(),
+				servicename,
+				info.getInfoString(serviceref, iServiceInformation.sDescription),
+				rtime,
+				begin_string,
+				Len,
+				sourceRef.getServiceName(),
+				info.getInfoString(serviceref, iServiceInformation.sTags),
+				ext,
+				filename,
+				os_stat(filename)[6]
+			))
+		return lst
 
 	def getResult(self):
 		if self.func is self.DEL:
