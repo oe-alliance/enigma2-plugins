@@ -21,7 +21,7 @@ from Components.config import config, getConfigListEntry
 from EPGRefresh import epgrefresh
 from Components.SystemInfo import SystemInfo
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 class EPGRefreshConfiguration(Screen, ConfigListScreen):
 	"""Configuration of EPGRefresh"""
