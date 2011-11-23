@@ -10,7 +10,6 @@ from os import stat as os_stat
 class Movie(Source):
 	LIST = 0
 	DEL = 1
-	TAGS = 2
 
 	def __init__(self, session, movielist, func=LIST):
 		Source.__init__(self)
@@ -19,7 +18,6 @@ class Movie(Source):
 		self.tagfilter = []
 		self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD))
 		self.movielist = movielist #MovieList(self.root)
-		self.movielist.load(self.root, None)
 		self.cmd = ""
 		self.res = ( False, "Missing or Wrong Argument" )
 

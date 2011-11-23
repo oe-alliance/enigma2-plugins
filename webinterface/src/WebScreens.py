@@ -175,7 +175,7 @@ class MovieWebScreen(WebScreen):
 		from Tools.Directories import resolveFilename, SCOPE_HDD
 		from WebComponents.Sources.Movie import Movie
 
-		movielist = MovieList(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD)))
+		movielist = MovieList(None)
 		self["MovieList"] = Movie(session, movielist, func=Movie.LIST)
 		self["MovieFileDel"] = Movie(session, movielist, func=Movie.DEL)
 		self["localip"] = RequestData(request, what=RequestData.HOST)
