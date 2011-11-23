@@ -162,10 +162,8 @@ class AutoMount():
 
 	def CheckMountPoint(self, item, callback):
 		data = self.automounts[item]
-		print "[AutoMount.py] activeMounts:--->",self.activeMountsCounter
 		if not self.MountConsole:
 			self.MountConsole = Console()
-
 		self.command = None
 		path = os.path.join('/media/net', data['sharename'])
 		self.mountcommand = None
@@ -174,7 +172,6 @@ class AutoMount():
 			print "self.automounts without active mounts",self.automounts
 			if data['active'] == 'False' or data['active'] is False:
 				umountcmd = 'umount -fl '+ path
-# 				print "[AutoMount.py] UMOUNT-CMD--->",umountcmd
 				self.MountConsole.ePopen(umountcmd, self.CheckMountPointFinished, [data, callback])
 		else:
 			if data['active'] == 'False' or data['active'] is False:
@@ -207,7 +204,7 @@ class AutoMount():
 					elif data['mounttype'] == 'cifs':
 						if not os.path.ismount(path):
 							tmpusername = data['username'].replace(" ", "\\ ")
-							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
+							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',noatime,noserverino,iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
 							self.mountcommand = tmpcmd.encode("UTF-8")
 # 				except Exception, ex:
 # 					print "[AutoMount.py] Failed to create", path, "Error:", ex
@@ -229,7 +226,6 @@ class AutoMount():
 # 		print "[AutoMount.py] CheckMountPointFinished"
 		(data, callback ) = extra_args
 		path = os.path.join('/media/net', data['sharename'])
-# 		print "PATH in CheckMountPointFinished",path
 		if os.path.exists(path):
 			if os.path.ismount(path):
 				if self.automounts.has_key(data['sharename']):
@@ -296,14 +292,12 @@ class AutoMount():
 		return None
 
 	def setMountsAttribute(self, mountpoint, attribute, value):
-		print "setting for mountpoint", mountpoint, "attribute", attribute, " to value", value
 		if self.automounts.has_key(mountpoint):
 			self.automounts[mountpoint][attribute] = value
 
 	def writeMountsConfig(self):
 		# Generate List in RAM
 		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
-
 		for sharename, sharedata in self.automounts.items():
 			if sharedata['mountusing'] == 'fstab':
 				if sharedata['mounttype'] == 'nfs':
@@ -383,15 +377,10 @@ class AutoMount():
 		list.append('</mountmanager>\n')
 
 		# Try Saving to Flash
-		file = None
 		try:
-			file = open(XML_FSTAB, "w")
-			file.writelines(list)
+			open(XML_FSTAB, "w").writelines(list)
 		except Exception, e:
 			print "[AutoMount.py] Error Saving Mounts List:", e
-		finally:
-			if file is not None:
-				file.close()
 
 	def stopMountConsole(self):
 		if self.MountConsole is not None:

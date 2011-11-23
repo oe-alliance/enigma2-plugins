@@ -309,11 +309,6 @@ movieepg/Makefile
 movieepg/meta/Makefile
 movieepg/src/Makefile
 
-movielistpreview/Makefile
-movielistpreview/meta/Makefile
-movielistpreview/po/Makefile
-movielistpreview/src/Makefile
-
 movieretitle/Makefile
 movieretitle/meta/Makefile
 movieretitle/po/Makefile
@@ -390,11 +385,6 @@ partnerbox/po/Makefile
 partnerbox/src/Makefile
 partnerbox/src/icons/Makefile
 partnerbox/src/servicewebts/Makefile
-
-passwordchanger/Makefile
-passwordchanger/meta/Makefile
-passwordchanger/po/Makefile
-passwordchanger/src/Makefile
 
 permanentclock/Makefile
 permanentclock/meta/Makefile

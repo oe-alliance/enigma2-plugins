@@ -53,7 +53,6 @@ SUBDIRS = \
 	orfat \
 	orfteletext \
 	partnerbox \
-	passwordchanger \
 	permanentclock \
 	pluginhider \
 	podcast \

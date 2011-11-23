@@ -662,7 +662,7 @@ function openSignalPanel(){
 	if (!(!signalWin.closed && signalWin.location)){
 		signalWin = openPopup('SignalPanel', '', 220, 120);
 		if(signalPanelUpdatePoller === ''){
-			signalPanelUpdatePoller = setInterval(reloadSignalPanel, 5000);
+			signalPanelUpdatePoller = setInterval(reloadSignalPanel, 250);
 		}
 	}
 	reloadSignalPanel();
