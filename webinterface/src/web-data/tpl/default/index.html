@@ -11,7 +11,7 @@
 	
 	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">
 	<link href="/web-data/tpl/default/datepicker.css" type="text/css" rel="stylesheet">
-	<link rel="shortcut icon" type="/web-data/image/x-icon" href="/web-data/img/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico">
 	
 
 	<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
@@ -39,8 +39,6 @@
 	<script type="text/javascript" src="/web-data/statics.js" ></script>
 	<script type="text/javascript" src="/web-data/provider.js" ></script>
 	<script type="text/javascript" src="/web-data/handler.js" ></script>
-	<!-- <script type="text/javascript" src="/web-data/tools.js" ></script> -->
-	<!-- <script type="text/javascript" src="/web-data/timer.js" ></script> -->
 	<script type="text/javascript" src="/web-data/core.js" ></script>
 	
 
@@ -116,14 +114,19 @@
 				</ul>
 			</div>
 			<div id="bannerRight">
-				<div>					
-					<a id="openSignalPanel" href="#" >
-						<img id="openSignalPanelImg" border="0" src="/web-data/img/signal.png" alt="Signal" title="Show Signal Panel">
-					</a><br>
-					<a id="doInstantRecord" href="#" onClick="recordNowPopup()">
-						<img  id="doInstantRecordImg" border="0" src="/web-data/img/record.png" alt="R" title="Instant Record">
-					</a>
-				</div>			
+				<table style="width: 100%">
+					<tr>	
+						<td><a id="openSignalPanel" href="#" >
+							<img id="openSignalPanelImg" border="0" src="/web-data/img/transmit_blue.png" alt="Signal" title="Show Signal Panel">
+						</a></td>
+					</tr>
+					<tr>
+						<td><a id="doInstantRecord" href="#" onClick="recordNowPopup()">
+							<img  id="doInstantRecordImg" border="0" src="/web-data/img/clock_red.png" alt="R" title="Instant Record">
+						</a></td>
+						
+					</tr>
+				</table>			
 			</div>
 		</div>
 		<div id="current">

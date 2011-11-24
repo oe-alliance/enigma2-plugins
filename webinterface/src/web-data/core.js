@@ -49,7 +49,7 @@ function toOptionList(lst, selected) {
 		list[i] = {
 				'value': lst[i],
 				'txt': lst[i],
-				'selected': (lst[i] == selected ? "selected" : " ")};
+				'selected': (lst[i] == selected ? "selected" : "")};
 	}
 
 	return list;
@@ -1108,6 +1108,14 @@ var E2WebCore = Class.create({
 					this.epg.load(ref);
 				}.bind(this)
 			);
+		//Signal
+		$('openSignalPanel').on(
+			'click',
+			function(event, element){
+				//TODO openSignalPanel
+			}
+		);
+		
 		//EPG-Search
 		$('epgSearchForm').on(
 			'submit',
@@ -1188,7 +1196,7 @@ var E2WebCore = Class.create({
 			'a.mListDelete', 
 			function(event, element){
 				//FIXME
-				element.href = '#';				
+				element.href = '#';
 				this.movies.del(element);
 				return false;
 			}.bind(this)
@@ -1280,6 +1288,23 @@ var E2WebCore = Class.create({
 				hashListener.setHash(hash);
 				this.timers.edit(element);
 				return false;
+			}.bind(this)
+		);
+		//Timer Editing
+		content.on(
+			'click',
+			'.tEditTag',
+			function(event, element){
+				element.href = '#'; //FIXME
+				var selected = 'selected';
+				var attr = 'data-selected';
+				if(element.hasClassName(selected)){
+					element.removeClassName(selected);
+					element.writeAttribute(attr, '');
+				} else {
+					element.addClassName(selected);
+					element.writeAttribute(attr, selected);
+				}
 			}.bind(this)
 		);
 	},

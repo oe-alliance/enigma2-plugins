@@ -600,6 +600,8 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	onLocationsAndTagsReady: function(data, currentLocation, locations, tags){
 		var l = toOptionList(locations, currentLocation);
 		var t = toOptionList(tags);
+		t.shift();
+		
 		data['dirname'] = l;
 		data['tags'] = t;
 		this.show(data);

@@ -78,7 +78,6 @@
 		vertical-align: bottom;
 	}
 
-
 /***********************
  BANNER with MainMenu
  ***********************/
@@ -671,6 +670,17 @@
 	
 	.timerState3 {
 		color: #000099;		
+	}
+	
+	a.tEditTag {
+		margin: 3px 0px 3px 0px;
+		padding: 3px;
+		display: inline-block;
+		border: 1px solid #CCC
+	}
+	
+	a.selected{
+		background: #FFFF99;
 	}
 	
 /*****************
