@@ -59,7 +59,9 @@ from Components.ProgressBar import ProgressBar
 from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath
 from Components.VideoWindow import VideoWindow
+from Components.VolumeBar import VolumeBar
 from enigma import eServiceReference, eServiceCenter, eEPGCache, getDesktop, eSize, eTimer, fontRenderClass, ePoint, gFont
+from GlobalActions import globalActionMap
 from math import fabs
 import NavigationInstance
 from RecordTimer import AFTEREVENT, RecordTimerEntry
@@ -74,11 +76,12 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_HDD
 from Tools.LoadPixmap import LoadPixmap
 
 # OWN IMPORTS
+from Components.VolumeControl import VolumeControl
 from ConfigTabs import KEEP_OUTDATED_TIME, ConfigBaseTab, ConfigGeneral, ConfigListSettings, ConfigEventInfo, SKINDIR, SKINLIST, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP, STYLE_PERCENT_TEXT
 from EpgActions import MerlinEPGActions
 from EpgCenterList import EpgCenterList, EpgCenterTimerlist, MODE_HD, MODE_XD, MODE_SD, MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_PRIMETIME, TIMERLIST, EPGSEARCH_HISTORY, EPGSEARCH_RESULT, EPGSEARCH_MANUAL, UPCOMING
 from EpgTabs import EpgBaseTab, EpgNowTab, EpgNextTab, EpgSingleTab, EpgPrimeTimeTab, EpgTimerListTab, EpgSearchHistoryTab, EpgSearchManualTab, EpgSearchResultTab
-from HelperFunctions import PiconLoader, findDefaultPicon, ResizeScrollLabel, BlinkTimer, LIST_TYPE_EPG, LIST_TYPE_UPCOMING, RecTimerEntry, TimerListObject
+from HelperFunctions import PiconLoader, findDefaultPicon, ResizeScrollLabel, BlinkTimer, LIST_TYPE_EPG, LIST_TYPE_UPCOMING, RecTimerEntry, TimerListObject, EmbeddedVolumeControl
 from SkinFinder import SkinFinder
 
 # check for Autotimer support
@@ -103,7 +106,7 @@ try:
 except ImportError:
 	IMDB_INSTALLED = False
 
-class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
+class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 	(skinFile, skinList) = SkinFinder.getSkinData(SKINLIST, SKINDIR, config.plugins.merlinEpgCenter.skin.value)
 	if skinFile is not None:
 		if config.plugins.merlinEpgCenter.skin.value != skinFile:
@@ -130,6 +133,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 	def __init__(self, session, servicelist, currentBouquet, bouquetList, currentIndex, startTab = None):
 		Screen.__init__(self, session)
 		MerlinEPGActions.__init__(self) # note: this overwrites TimerEditList.["actions"]
+		EmbeddedVolumeControl.__init__(self)
 		
 		self.session = session
 		self.servicelist = servicelist
@@ -200,6 +204,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self["description"] = Label("")
 		self["bouquet"] = Label("")
 		self["videoPicture"] = VideoWindow(decoder = 0, fb_width = self.desktopSize.width(), fb_height = self.desktopSize.height())
+		self["volume"] = VolumeBar()
+		self["mute"] = Pixmap()
 		
 		self.historyList = config.plugins.merlinEpgCenter.searchHistory.value
 		self["history"] = MenuList(self.historyList)
@@ -293,15 +299,27 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self.setStartTab(self.startTab)
 		self.setBouquetName()
 		
+		self.savedVolUp = None
+		self.savedVolDown = None
+		self.savedVolMute = None
+		self.savedMuteDialog = None
+		
 		self.setNotifier()
 		
 	def suspend(self):
 		self.session.nav.RecordTimer.on_state_change.remove(self.onStateChange)
 		self.clockTimer.callback.remove(self.checkTimeChange)
 		# reset the timer tab to Timer
-		self.timerListMode = LIST_MODE_TIMER
-		self["tab_text_%d" % TIMERLIST].setText(_("Timer"))
-		
+		if self.timerListMode == LIST_MODE_AUTOTIMER:
+			self.timerListMode = LIST_MODE_TIMER
+			self["tab_text_%d" % TIMERLIST].setText(_("Timer"))
+			
+		if config.plugins.merlinEpgCenter.embeddedVolume.value:
+			self.unsetVolumeControl()
+			self.savedMuteDialog = VolumeControl.instance.muteDialog
+			if self.getIsMuted():
+				self.savedMuteDialog.show()
+				
 		if self.blinkTimer.getIsRunning():
 			self["isRecording"].hide()
 			
@@ -315,6 +333,13 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		config.plugins.merlinEpgCenter.save()
 			
 	def resume(self):
+		if config.plugins.merlinEpgCenter.embeddedVolume.value:
+			VolumeControl.instance.muteDialog = self.savedMuteDialog
+			self.setVolumeControl()
+			self.setMutePixmap()
+			if self.getIsMuted():
+				self.savedMuteDialog.hide()
+			
 		self.session.nav.RecordTimer.on_state_change.append(self.onStateChange)
 		self.clockTimer.callback.append(self.checkTimeChange)
 		self.checkTimeChange()
@@ -374,6 +399,35 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self["tab_text_%d" % i].setText(tabList[i])
 			i += 1
 			
+	############################################################################################
+	# VOLUME CONTROL
+	
+	def toggleEmbeddedVolume(self, configElement = None):
+		if configElement.value:
+			self.setVolumeControl()
+		else:
+			self.unsetVolumeControl()
+			
+		self.setMutePixmap()
+		
+	def setVolumeControl(self):
+		global globalActionMap
+		self.savedVolUp = globalActionMap.actions["volumeUp"]
+		self.savedVolDown = globalActionMap.actions["volumeDown"]
+		self.savedVolMute = globalActionMap.actions["volumeMute"]
+		globalActionMap.actions["volumeUp"] = self.volUp
+		globalActionMap.actions["volumeDown"] = self.volDown
+		globalActionMap.actions["volumeMute"] = self.volMute
+		self.setMutePixmap()
+		
+	def unsetVolumeControl(self):
+		if self.savedVolUp == None:
+			return
+		global globalActionMap
+		globalActionMap.actions["volumeUp"] = self.savedVolUp
+		globalActionMap.actions["volumeDown"] = self.savedVolDown
+		globalActionMap.actions["volumeMute"] = self.savedVolMute
+		
 	############################################################################################
 	# MISC FUNCTIONS
 	
@@ -490,6 +544,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self["eventProgressImage"].hide()
 		self["eventProgressText"].hide()
 		self["isRecording"].hide()
+		self["volume"].hide()
+		self["mute"].hide()
 		
 	# get some widget sizes
 	def getWidgetSizes(self):
@@ -614,7 +670,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		config.plugins.merlinEpgCenter.listItemHeight.addNotifier(self.setUpcomingWidgets, initial_call = False)
 		config.plugins.merlinEpgCenter.listProgressStyle.addNotifier(self.setProgressbarStyle, initial_call = True)
 		config.plugins.merlinEpgCenter.adjustFontSize.addNotifier(self.setFontSizes, initial_call = True)
-		
+		config.plugins.merlinEpgCenter.embeddedVolume.addNotifier(self.toggleEmbeddedVolume, initial_call = True)
 		
 	def removeNotifier(self):
 		self["list"].onSelectionChanged.remove(self.onListSelectionChanged)
@@ -635,6 +691,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		config.plugins.merlinEpgCenter.listItemHeight.notifiers.remove(self.setUpcomingWidgets)
 		config.plugins.merlinEpgCenter.listProgressStyle.notifiers.remove(self.setProgressbarStyle)
 		config.plugins.merlinEpgCenter.adjustFontSize.notifiers.remove(self.setFontSizes)
+		config.plugins.merlinEpgCenter.embeddedVolume.notifiers.remove(self.toggleEmbeddedVolume)
 		
 	def setListStyle(self, configElement = None):
 		itemHeight = self.piconSize.height() + int(config.plugins.merlinEpgCenter.listItemHeight.value)

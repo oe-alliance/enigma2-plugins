@@ -31,7 +31,7 @@ from time import localtime, time
 # ENIGMA IMPORTS
 from Components.config import config
 from Components.ScrollLabel import ScrollLabel
-from enigma import eEnv, eSize, fontRenderClass, ePoint, eSlider, eTimer, iRecordableService
+from enigma import eEnv, eSize, fontRenderClass, ePoint, eSlider, eTimer, iRecordableService, eDVBVolumecontrol
 import NavigationInstance
 from RecordTimer import RecordTimerEntry, AFTEREVENT
 from Screens.MessageBox import MessageBox
@@ -46,6 +46,71 @@ LIST_TYPE_UPCOMING = 1
 WEEKSECONDS = 7*86400
 WEEKDAYS = (_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday"))
 
+
+# most functions were taken and modified from Components.VolumeControl
+class EmbeddedVolumeControl():
+	def __init__(self):
+		self.volctrl = eDVBVolumecontrol.getInstance()
+		self.hideVolTimer = eTimer()
+		self.hideVolTimer.callback.append(self.volHide)
+		
+	def volSave(self):
+		if self.volctrl.isMuted():
+			config.audio.volume.value = 0
+		else:
+			config.audio.volume.value = self.volctrl.getVolume()
+		config.audio.volume.save()
+		
+	def volUp(self):
+		self.setVolume(+1)
+		
+	def volDown(self):
+		self.setVolume(-1)
+		
+	def setVolume(self, direction):
+		oldvol = self.volctrl.getVolume()
+		if direction > 0:
+			self.volctrl.volumeUp()
+		else:
+			self.volctrl.volumeDown()
+		is_muted = self.volctrl.isMuted()
+		vol = self.volctrl.getVolume()
+		self["volume"].show()
+		if is_muted:
+			self.volMute() # unmute
+		elif not vol:
+			self.volMute(False, True) # mute but dont show mute symbol
+		if self.volctrl.isMuted():
+			self["volume"].setValue(0)
+		else:
+			self["volume"].setValue(self.volctrl.getVolume())
+		self.volSave()
+		self.hideVolTimer.start(3000, True)
+		
+	def volHide(self):
+		self["volume"].hide()
+		
+	def volMute(self, showMuteSymbol=True, force=False):
+		vol = self.volctrl.getVolume()
+		if vol or force:
+			self.volctrl.volumeToggleMute()
+			if self.volctrl.isMuted():
+				if showMuteSymbol:
+					self["mute"].show()
+				self["volume"].setValue(0)
+			else:
+				self["mute"].hide()
+				self["volume"].setValue(vol)
+				
+	def getIsMuted(self):
+		return self.volctrl.isMuted()
+		
+	def setMutePixmap(self):
+		if self.volctrl.isMuted():
+			self["mute"].show()
+		else:
+			self["mute"].hide()
+			
 class ResizeScrollLabel(ScrollLabel):
 	def __init__(self, text = ""):
 		ScrollLabel.__init__(self, text)

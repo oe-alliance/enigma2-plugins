@@ -107,6 +107,7 @@ config.plugins.merlinEpgCenter.mainTab = ConfigSelection(default = "-1", choices
 				(str(TIMERLIST), TAB_TEXT_EPGLIST[TIMERLIST]),
 				(str(EPGSEARCH_HISTORY), TAB_TEXT_EPGLIST[EPGSEARCH_HISTORY]),
 				])
+config.plugins.merlinEpgCenter.embeddedVolume = ConfigYesNo(False)
 
 # INVISIBLE OPTION
 config.plugins.merlinEpgCenter.setDescriptionSize = ConfigYesNo(True)
@@ -156,6 +157,7 @@ class ConfigGeneral(ConfigBaseTab):
 		cfgList.append(getConfigListEntry(_("Show timer messages:"), config.plugins.merlinEpgCenter.showTimerMessages))
 		cfgList.append(getConfigListEntry(_("Adjust font size:"), config.plugins.merlinEpgCenter.adjustFontSize))
 		cfgList.append(getConfigListEntry(_("Return to main tab with exit:"), config.plugins.merlinEpgCenter.mainTab))
+		cfgList.append(getConfigListEntry(_("Embed volume slider:"), config.plugins.merlinEpgCenter.embeddedVolume))
 		self.configList = cfgList
 		
 # config list settings
