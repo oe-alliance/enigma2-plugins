@@ -11,36 +11,29 @@ class About(Source):
 		self.result = False, "unknown command"
 
 	def command(self):
-		def ConvertIP(list):
-			if len(list) == 4:
-				retstr = "%s.%s.%s.%s" % (list[0], list[1], list[2], list[3])
-			else:
-				retstr = "0.0.0.0"
-			return retstr
-
-		list = []
+		ConvertIP = lambda l: "%s.%s.%s.%s" % tuple(l) if len(l) == 4 else "0.0.0.0"
 
 		if iNetwork.getNumberOfAdapters > 0:
 			iface = iNetwork.getAdapterList()[0]
 			print "[WebComponents.About] iface: %s" % iface
-			list.extend((
+			l = (
 				iNetwork.getAdapterAttribute(iface, "mac"),
 				iNetwork.getAdapterAttribute(iface, "dhcp"),
 				ConvertIP(iNetwork.getAdapterAttribute(iface, "ip")),
 				ConvertIP(iNetwork.getAdapterAttribute(iface, "netmask")),
 				ConvertIP(iNetwork.getAdapterAttribute(iface, "gateway")),
-			))
+			)
 		else:
 			print "[WebComponents.About] no network iface configured!"
-			list.extend((
+			l = (
 				"N/A",
 				"N/A",
 				"N/A",
 				"N/A",
 				"N/A",
-			))
+			)
 
-		return (list,)
+		return (l,)
 
 	list = property(command)
 	lut = { "lanMac": 0
