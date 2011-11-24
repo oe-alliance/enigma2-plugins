@@ -557,7 +557,7 @@ class VirtualZap(Screen):
 
 	# if available play service in PiP 
 	def playService(self, service):
-		if parentalControl.getProtectionLevel(service.toCompareString()) == -1 or (parentalControl.sessionPinCached and parentalControl.sessionPinCachedValue): # check parentalControl, only play a protected service when Pin-Cache is activated and still valid
+		if parentalControl.getProtectionLevel(service.toCompareString()) == -1 or (parentalControl.configInitialized and parentalControl.sessionPinCached and parentalControl.sessionPinCachedValue): # check parentalControl, only play a protected service when Pin-Cache is activated and still valid
 			current_service = service
 			n_service = self.pipServiceRelation.get(service.toString(),None) # PiPServiceRelation
 			if n_service is not None:
