@@ -120,7 +120,7 @@ var Bouquets = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
-		var bouquet = this.model.data.bouquets[0];
+		var bouquet = this.model.data.services[0];
 		if(bouquet){
 			setContentHd(bouquet.servicename);
 			if(this.loadFirstOnFinished){
@@ -135,7 +135,7 @@ var Bouquets = Class.create(Controller, {
 var Current = Class.create(Controller, {
 	initialize: function($super, curTarget, volTarget){
 		$super(new CurrentHandler(curTarget, volTarget));
-		this.model.onFinished[this.model.onFinished.length] = this.restoreDisplayStyle.bind(this);
+		this.model.onFinished[this.model.onFinished.length] = this.onFinished.bind(this);
 		this.display = 'none';
 	},
 	
@@ -147,11 +147,12 @@ var Current = Class.create(Controller, {
 		this.model.load({});
 	},
 	
-	restoreDisplayStyle: function(){
+	onFinished: function(){
 		var ext = $('trExtCurrent'); 
 		if(ext != null){
 			ext.style.display = this.display;
 		}
+		core.currentData = this.model.data;
 	}
 });
 
@@ -716,8 +717,33 @@ var Timers = Class.create({
 	},
 	
 	edit: function(element){
-		this.timerHandler.load(element);
+		this.timerHandler.load(element, true);
 	},
+	
+	save: function(element){
+		this.timerHandler.commitForm(element);
+	},
+	
+	onBouquetChanged: function(bRef){
+		this.timerHandler.onBouquetChanged(bRef, this.onUpdatedServiceListReady.bind(this));
+	},
+	
+	onUpdatedServiceListReady: function(data, timer){
+		var serviceSel = $('service');
+		var options = serviceSel.options;
+		options.length = 0;
+		
+		var i = 0;
+		data.services.each(function(s){
+			var selected = false;
+			if(timer.servicereference == unescape(s.servicereference)){
+				selected = true;
+			}
+			options.add ( new Option(s.servicename, s.servicereference, false, selected) );
+			i++;
+		});
+	},
+
 	
 	addByEventId: function(element, justplay){
 		var parent = element.up('.epgListItem');
@@ -818,6 +844,7 @@ var E2WebCore = Class.create({
 		this.timers = new Timers('contentMain');
 		this.volume = new Volume('volContent');
 		
+		this.currentData = {};
 		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
 		this.deviceInfo = this.simplepages.getDeviceInfo(function(info){this.deviceInfo = info;}.bind(this));
 		
@@ -1305,6 +1332,22 @@ var E2WebCore = Class.create({
 					element.addClassName(selected);
 					element.writeAttribute(attr, selected);
 				}
+			}.bind(this)
+		);
+		
+		content.on(
+			'change',
+			'.tEditBouquet',
+			function(event, element){
+				var value = unescape( element.options[element.selectedIndex].value );
+				core.timers.onBouquetChanged(value);
+			}.bind(this)
+		);
+		content.on(
+			'click',
+			'.tEditSave',
+			function(event, element){
+				this.timers.save($('timerEditForm'));
 			}.bind(this)
 		);
 	},

@@ -152,7 +152,7 @@ var SimplePageHandler = Class.create(AbstractContentHandler,{
 var BouquetListHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target, targetMain){
 		$super('tplBouquetList', target);
-		this.provider = new BouquetListProvider(this.show.bind(this));	
+		this.provider = new SimpleServiceListProvider(this.show.bind(this));	
 		this.ajaxload = false;
 		this.serviceController = null;
 		this.targetMain = targetMain;
@@ -478,8 +478,11 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		$super('tplTimerEdit', target, onFinished);
 		this.t = {};
 		this.provider = new SimpleRequestProvider();
+		this.bouquetListProvider = new SimpleServiceListProvider(this.onBouquetsReady.bind(this));
+		this.serviceListProvider = new SimpleServiceListProvider(this.onServicesReady.bind(this));
 		this.ajaxload = true;
 		this.reloadCallback = reloadCallback;
+		this.data = {};
 	},
 	
 	showSimpleResult: function(result){
@@ -522,7 +525,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * Parameters:
 	 * @element - the html element calling the load function ( onclick="TimerProvider.load(this)" )
 	 */
-	getData: function(element){
+	getData: function(element, setOld){
 		var parent = element.up('.tListItem');
 		var t = {};
 		
@@ -531,9 +534,8 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 			var end = unescape(parent.readAttribute('data-end'));
 			var beginD = new Date(begin * 1000);
 			var endD = new Date(end * 1000);
-
 			t = {
-					servicereference : unescape(parent.readAttribute('data-servicereference')),
+					servicereference : decodeURIComponent(parent.readAttribute('data-servicereference')),
 					servicename : unescape(parent.readAttribute('data-servicename')),
 					description : unescape(parent.readAttribute('data-description')),
 					name : unescape(parent.readAttribute('data-name')),
@@ -546,8 +548,17 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 					dirname : unescape(parent.readAttribute('data-dirname')),
 					tags : unescape(parent.readAttribute('data-tags')),
 					afterevent : unescape(parent.readAttribute('data-afterevent')),
-					disabled : unescape(parent.readAttribute('data-disabled'))
+					disabled : unescape(parent.readAttribute('data-disabled')),
 			};
+			
+			if(setOld){
+				t['servicereferenceOld'] = decodeURIComponent(parent.readAttribute('data-servicereference'));
+				t['beginOld'] = t.begin;
+				t['endOld'] = t.end;
+				t['deleteOldOnSave'] = 1;
+			} else {
+				t['deleteOldOnSave'] = 0;
+			}
 		}
 		return t;
 	},
@@ -561,9 +572,9 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * Parameters:
 	 * @element - the html element calling the load function ( onclick="TimerProvider.load(this)" )
 	 */
-	load: function(element){
+	load: function(element, setOld){
 		
-		var t = this.getData(element);
+		var t = this.getData(element, setOld);
 			
 		var begin = new Date(t.begin * 1000);
 		var end = new Date(t.end * 1000);	
@@ -604,7 +615,35 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		
 		data['dirname'] = l;
 		data['tags'] = t;
-		this.show(data);
+		this.data = data;
+		this.bouquetListProvider.load({'sRef' : bouquetsTv});
+	},
+	
+	onBouquetsReady: function(data){
+		this.data['bouquets'] = data.services;
+		this.serviceListProvider.load({'sRef' : unescape(data.services[0].servicereference)});
+	},
+	
+	onServicesReady: function(data){
+		var services = data.services;		
+		services.each(function(service){
+			if(decodeURIComponent(service.servicereference) == this.data.timer.servicereference)
+				service['selected'] = 'selected';
+			else
+				service['selected'] = '';
+		}.bind(this));
+		
+		this.data['services'] = services;
+		this.show(this.data);
+	},
+	
+	onBouquetChanged: function(bRef, callback){
+		var _this = this;
+		var fnc = function(data){
+			callback(data, _this.data.timer);
+		};
+		var prov = new SimpleServiceListProvider(fnc);
+		prov.load({'sRef' : bRef});
 	},
 	
 	add: function(t){
@@ -789,6 +828,46 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 */
 	commitForm : function(id){
 		var values = $(id).serialize(true);
+		
+		var tags = [];
+		$$('.tEditTag').each(function(element){
+			var selected = element.readAttribute('data-selected');
+			if(selected == "selected"){
+				var value = element.readAttribute('data-value');
+				tags.push(value);
+			}
+		});
+		
+		var repeated = 0;
+		$$('.tEditRepeated').each(function(element){
+			if(element.checked){
+				repeated += Number(element.value);
+			}
+		});
+		
+		var begin = 0;
+		var end = 0;
+		
+		var startDate = $('sdate').value.split('-');
+		var sDate = new Date();
+		sDate.setFullYear(startDate[0], startDate[1] - 1, startDate[2]);
+		sDate.setHours( $('shour').value );
+		sDate.setMinutes( $('smin').value );
+		sDate.setSeconds(0);
+		begin = Math.round(sDate.getTime() / 1000);
+		
+		var endDate = $('edate').value.split('-');
+		var eDate = new Date();
+		eDate.setFullYear(endDate[0], endDate[1] - 1, endDate[2]);
+		eDate.setHours( $('ehour').value );
+		eDate.setMinutes( $('emin').value );
+		eDate.setSeconds(0);
+		end = Math.round(eDate.getTime() / 1000);
+		
+		values['tags'] = tags.join(" ");
+		values['repeated'] = repeated;
+		values['begin'] = begin;
+		values['end'] = end;
 		debug(values);
 	},
 	
@@ -799,13 +878,6 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	renderXML: function(xml){
 		var list = new TimerList(xml).getArray();
 		return {timer : list};
-	},
-	
-	registerEvents: function(){
-		$('saveTimer').on('click', function(event, element){
-					this.commitForm('timerEditForm');
-				}.bind(this)
-			);
 	}
 });
 

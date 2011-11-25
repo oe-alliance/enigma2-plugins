@@ -7,11 +7,19 @@
 		background: #555
 	}
 	
+	input, select{
+		font-family: Tahoma, Sans-Serif;
+		font-size: 14px;
+		font-weight: bold;
+		border: 1px solid #485052;
+		background-color: #fff;
+		color: #485052 
+	}
+	
 	a, a:visited, a:active{
 		color: #485052;
 		text-decoration: none;
-	}
-	
+	}	
 	
 	img{
 		border: 0px;
@@ -611,9 +619,8 @@
 	}
 
 	.tListItem{
-/*		background-color: #EEE; */
 		font-weight: bold;
-		font-size: 12px;
+		font-size: 13px;
 	}
 	
 	.tListTitle{
@@ -676,7 +683,7 @@
 		margin: 3px 0px 3px 0px;
 		padding: 3px;
 		display: inline-block;
-		border: 1px solid #CCC
+		border: 1px solid #CCC;
 	}
 	
 	a.selected{

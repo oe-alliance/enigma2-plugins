@@ -1,14 +1,13 @@
 
 <!-- tplTimerEdit -->
-					
 						<table id="contentTable">
 							<tr>
 								<td>
 									<form id='timerEditForm' onSubmit="return false;">
 										<table>
 											<tr>
-												<td colspan="3">Action:</td>
-												<td colspan="3">
+												<td>Action:</td>
+												<td>
 													<select name="justplay" id="justplay" size="1">
 														{for a in action}
 														<option value="${a.value}" ${a.selected}>${a.txt}</option>
@@ -17,13 +16,13 @@
 												</td>
 											</tr>
 											<tr>
-												<td colspan="3">&nbsp;</td>
-												<td colspan="3" style="font-size: 12px;">Note: For recurring events date is not required.</td>
+												<td>&nbsp;</td>
+												<td style="font-size: 12px;">Note: For recurring events dates are not mandatory.</td>
 											</tr>
 											<tr>
-												<td colspan="3">Start:</td>
-												<td colspan="3">
-													<input id="dateStart" name="dateStart" value="${timer.beginDate}" size="10" maxlength="10">
+												<td>Start:</td>
+												<td>
+													<input id="sdate" name="sdate" value="${timer.beginDate}" size="10" maxlength="10">
 													<select name="shour" id="shour" size="1">
 														{for hour in shour}
 														<option value="${hour.value}" ${hour.selected}>${hour.txt}</option>
@@ -38,9 +37,9 @@
 												</td>
 											</tr>
 											<tr>
-												<td colspan="3">End:</td>
-												<td colspan="3">
-													<input id="dateEnd" name="dateEnd" value="${timer.endDate}" size="10" maxlength="10">
+												<td>End:</td>
+												<td>
+													<input id="edate" name="edate" value="${timer.endDate}" size="10" maxlength="10">
 													<select name="ehour" id="ehour" size="1">
 														{for hour in ehour}
 														<option value="${hour.value}" ${hour.selected}>${hour.txt}</option>
@@ -55,55 +54,57 @@
 												</td>
 											</tr>
 											<tr>
-												<td colspan="3">&nbsp;</td>
-												<td colspan="3" style="font-size: 12px;">Note: For one-time events the "days" field doesn't have to be specified.</td>
+												<td>&nbsp;</td>
+												<td style="font-size: 12px;">Note: For one-time events the days don't have to be specified.</td>
 											</tr>
 											<tr>
-												<td colspan="3">Days:</td>
-												<td colspan="3">
+												<td>Days:</td>
+												<td>
 													{for r in repeated}
-													<input type="checkbox" id="${r.id}" name="${r.name}" value="${r.value}" ${r.checked}>&nbsp;${r.txt}&nbsp;&nbsp;
+													<input class="tEditRepeated" type="checkbox" id="${r.id}" name="${r.name}" value="${r.value}" ${r.checked}>&nbsp;${r.txt}&nbsp;&nbsp;
 													{/for}
 												</td>
 											</tr>
 											<tr>
-												<td colspan="3">Channel:</td>
-												<td colspan="3">
-													<select name="channel" id="channel" size="1" onchange="javascript:addTimerFormChangeChannel($('channel').options[$('channel').selectedIndex].value)">
-														{for c in channel}
-														<option value="${c.value}" ${c.selected}>${c.txt}</option>
+												<td>Channel:</td>
+												<td>
+													<select class="tEditBouquet" name="bouquet" id="bouquet" size="1">
+														{for b in bouquets}
+														<option value="${b.servicereference}">${b.servicename}</option>
+														{/for}	
+													</select>
+													<select name="service" id="service" size="1">
+														{for s in services}
+														<option value="${s.servicereference}" ${s.selected}>${s.servicename}</option>
 														{/for}	
 													</select>
 												</td>
 											</tr>
 											<tr>
-												<td colspan="3">Name:</td>
-												<td colspan="3">
-													<input name="name" id="name" type="text" size="70" maxlength="255" style="color: #000000;" value="${timer.name}">
+												<td>Name:</td>
+												<td>
+													<input name="name" id="name" type="text" size="70" maxlength="255" value="${timer.name}">
 												</td>
 											</tr>
 											<tr>
-												<td colspan="3">Description:</td>
-												<td colspan="3">
-													<input name="descr" id="descr" type="text" size="70" maxlength="255" style="color: #000000;" value="${timer.description}">
+												<td>Description:</td>
+												<td>
+													<input name="descr" id="descr" type="text" size="70" maxlength="255" value="${timer.description}">
 												</td>
 											</tr>
 											<tr>
-												<td colspan="3">Location:</td>
-												<td colspan="3">
-	<!--											<form id="timerDir">-->
+												<td>Location:</td>
+												<td>
 													<select id="dirname" name="dirname" size="1">
 														{for d in dirname}
 														<option value="${d.value}" ${d.selected}>${d.txt}</option>
 														{/for}
 													</select>
-	<!--											</form>-->
 												</td>
 											</tr>
 											<tr>
-												<td colspan="3">Tags:</td>
-												<td colspan="3">
-													<button>Set Tags</button>
+												<td>Tags:</td>
+												<td>
 													<div>
 														{for t in tags}
 														<a href="#" class="tEditTag ${t.selected}" data-value="${t.value}" data-selected="${t.selected}">&nbsp;${t.txt}&nbsp;</a>
@@ -112,8 +113,8 @@
 												</td>
 											</tr>
 											<tr>
-												<td colspan="3">After event do:</td>
-												<td colspan="3">
+												<td>After event:</td>
+												<td>
 													<select id="afterevent" name="afterevent" size="1">
 														{for event in afterEvent}
 														<option value="${event.value}" ${event.selected}>${event.txt}</option>
@@ -123,13 +124,13 @@
 											</tr>
 											<tr><td>&nbsp;&nbsp;</td></tr>
 											<tr>
-												<td colspan="3">&nbsp;</td><td colspan="3">
+												<td>&nbsp;</td><td>
 													<input name="deleteOldOnSave" id="deleteOldOnSave" type="hidden" value="${timer.deleteOldOnSave}">
-													<input name="channelOld" id="channelOld" type="hidden" value="${timer.channelOld}">
+													<input name="serviceOld" id="serviceOld" type="hidden" value="${encodeURIComponent(timer.servicereferenceOld)}">
 													<input name="beginOld" id="beginOld" type="hidden" value="${timer.beginOld}">
 													<input name="endOld" id="endOld" type="hidden" value="${timer.endOld}">
 													<input name="eventID" id="eventID" type="hidden" value="${timer.eventID}">
-													<button id="saveTimer">Add/Save</button>
+													<button class="tEditSave">Save Timer</button>
 												</td>
 											</tr>
 										</table>

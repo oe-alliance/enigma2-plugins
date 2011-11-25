@@ -207,10 +207,10 @@ var ServiceListProvider = Class.create(AbstractContentProvider, {
 });
 
 /**
- * BouquetListProvider
- * Content provider for bouquet lists.
+ * SimpleServiceListProvider
+ * Content provider for service lists wihtout epg (e.g. bouquets).
  */
-var BouquetListProvider = Class.create(AbstractContentProvider, {
+var SimpleServiceListProvider = Class.create(AbstractContentProvider, {
 	/**
 	 * initialize
 	 * Parameters:
@@ -225,7 +225,7 @@ var BouquetListProvider = Class.create(AbstractContentProvider, {
 	 */
 	renderXML: function(xml){
 		var list = new ServiceList(xml).getArray();
-		return {bouquets : list, hash : core.getBaseHash()};	
+		return {services : list, hash : core.getBaseHash()};	
 	}
 });
 
