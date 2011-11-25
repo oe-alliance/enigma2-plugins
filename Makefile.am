@@ -25,6 +25,7 @@ SUBDIRS = \
 	emission \
 	epgrefresh \
 	epgsearch \
+	eurotictv \
 	fancontrol2 \
 	filebrowser \
 	fritzcall \

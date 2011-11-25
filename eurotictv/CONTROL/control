@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-eurotictv
+Version: experimental-git20110215-r0
+Description: Watch eUroticTV via HTTP Live Streaming
+Maintainer: Dream Multimedia
+Depends: enigma2, gst-plugin-fragmented
+
