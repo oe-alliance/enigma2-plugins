@@ -514,7 +514,7 @@ class vps_timer:
 								self.timer.log(0, "[VPS] abort timer due to TimerSanityCheck")
 								return -1
 							
-						self.timer.timeChanged()
+						self.session.nav.RecordTimer.timeChanged(self.timer)
 						#print "[VPS-Plugin] verschiebe Startzeit des Timers (overwrite)"
 					
 					if 30 < self.nextExecution:
