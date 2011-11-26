@@ -34,6 +34,8 @@ from MerlinEPGCenter import MerlinEPGCenter
 from EpgCenterList import MULTI_EPG_NOW, SINGLE_EPG
 
 
+infoBarFunctionSaver = None
+
 class MerlinEPGCenterStarter(object):
 	instance = None
 	merlinEPGCenter = None
@@ -43,18 +45,18 @@ class MerlinEPGCenterStarter(object):
 		assert not MerlinEPGCenterStarter.instance, "only one MerlinEPGCenterStarter instance is allowed!"
 		MerlinEPGCenterStarter.instance = self # set instance
 		
-	def openMerlinEPGCenter(self, startTab = None):
+	def openMerlinEPGCenter(self, startTab = None, doSearch = False):
 		servicelist, currentBouquet, bouquetList, currentIndex = getBouquetInformation()
 		if MerlinEPGCenterStarter.merlinEPGCenter is None:
-			MerlinEPGCenterStarter.merlinEPGCenter = self.session.instantiateDialog(MerlinEPGCenter, servicelist, currentBouquet, bouquetList, currentIndex, startTab)
+			MerlinEPGCenterStarter.merlinEPGCenter = self.session.instantiateDialog(MerlinEPGCenter, servicelist, currentBouquet, bouquetList, currentIndex, startTab, doSearch)
 		else:
 			MerlinEPGCenterStarter.merlinEPGCenter.resume()
 			if startTab != None:
-				MerlinEPGCenterStarter.merlinEPGCenter.setStartTab(startTab)
+				MerlinEPGCenterStarter.merlinEPGCenter.setStartTab(startTab, doSearch)
 			elif config.plugins.merlinEpgCenter.rememberLastTab.value:
-				MerlinEPGCenterStarter.merlinEPGCenter.setStartTab(config.plugins.merlinEpgCenter.lastUsedTab.value)
+				MerlinEPGCenterStarter.merlinEPGCenter.setStartTab(config.plugins.merlinEpgCenter.lastUsedTab.value, doSearch)
 			else:
-				MerlinEPGCenterStarter.merlinEPGCenter.setStartTab(MULTI_EPG_NOW)
+				MerlinEPGCenterStarter.merlinEPGCenter.setStartTab(MULTI_EPG_NOW, doSearch)
 		self.session.execDialog(MerlinEPGCenterStarter.merlinEPGCenter)
 		
 # open "single epg" tab
@@ -79,16 +81,55 @@ class InfoBarFunctionSaver:
 		else: # revert functions
 			InfoBar.openSingleServiceEPG = self.infoBarSingleEpg # Info -> yellow
 			InfoBar.openMultiServiceEPG = self.infoBarMultiEpg # Info -> blue
-
+			
+	def saveInfoBarChannelFunctions(self):
+		self.infoBarSwitchChannelUp = InfoBar.instance["ChannelSelectActions"].actions["switchChannelUp"]
+		self.infoBarSwitchChannelDown = InfoBar.instance["ChannelSelectActions"].actions["switchChannelDown"]
+		
+	def setInfoBarActionMap(self, configElement = None):
+		if configElement == config.plugins.merlinEpgCenter.replaceInfobarChannelUp:
+			value = int(config.plugins.merlinEpgCenter.replaceInfobarChannelUp.value)
+			if value is -1: # disabled
+				if InfoBar.instance["ChannelSelectActions"].actions["switchChannelUp"] is not self.infoBarSwitchChannelUp:
+					InfoBar.instance["ChannelSelectActions"].actions["switchChannelUp"] = self.infoBarSwitchChannelUp
+			else:
+				InfoBar.instance["ChannelSelectActions"].actions["switchChannelUp"] = self.channelUpStarter
+		elif configElement == config.plugins.merlinEpgCenter.replaceInfobarChannelDown:
+			value = int(config.plugins.merlinEpgCenter.replaceInfobarChannelDown.value)
+			if value is -1:
+				if InfoBar.instance["ChannelSelectActions"].actions["switchChannelDown"] is not self.infoBarSwitchChannelDown:
+					InfoBar.instance["ChannelSelectActions"].actions["switchChannelDown"] = self.infoBarSwitchChannelDown
+			else:
+				InfoBar.instance["ChannelSelectActions"].actions["switchChannelDown"] = self.channelDownStarter
+				
+	@staticmethod
+	def channelUpStarter():
+		value = int(config.plugins.merlinEpgCenter.replaceInfobarChannelUp.value)
+		doSearch = value == 5
+		MerlinEPGCenterStarter.instance.openMerlinEPGCenter(value, doSearch)
+		
+	@staticmethod
+	def channelDownStarter():
+		value = int(config.plugins.merlinEpgCenter.replaceInfobarChannelDown.value)
+		doSearch = value == 5
+		MerlinEPGCenterStarter.instance.openMerlinEPGCenter(value, doSearch)
+		
 def autostart(reason, **kwargs):
 	if reason == 1 and MerlinEPGCenterStarter.merlinEPGCenter:
 		MerlinEPGCenterStarter.instance.merlinEPGCenter.shutdown()
 		MerlinEPGCenterStarter.instance.merlinEPGCenter = None
 		MerlinEPGCenterStarter.instance = None
-	
+		
 def sessionstart(reason, session):
+	global infoBarFunctionSaver
 	infoBarFunctionSaver = InfoBarFunctionSaver()
 	MerlinEPGCenterStarter(session)
+	
+# InfoBar is now initialised, our chance to occupy the ChannelSelectActions
+def networkconfigread(reason = None):
+	infoBarFunctionSaver.saveInfoBarChannelFunctions()
+	config.plugins.merlinEpgCenter.replaceInfobarChannelUp.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call = True)
+	config.plugins.merlinEpgCenter.replaceInfobarChannelDown.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call = True)
 	
 def getBouquetInformation():
 	# get current bouquet and bouquetlist from channelselection
@@ -118,6 +159,7 @@ def Plugins(**kwargs):
 	list = [
 		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc=autostart, weight=100),
 		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart, weight=100),
+		PluginDescriptor(where = [PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkconfigread, weight=100),
 		PluginDescriptor(name = "Merlin EPG Center", description = _("More than just an EPG..."), where = [PluginDescriptor.WHERE_EXTENSIONSMENU,
 		PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EVENTINFO], fnc = openMerlinEPGCenter)
 		]

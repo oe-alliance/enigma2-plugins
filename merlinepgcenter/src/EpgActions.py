@@ -128,7 +128,7 @@ class MerlinEPGActions():
 			"yellow":		self.keyYellow,
 		}, -1)
 		
-		# EPG HISTORY ACTIONS
+		# SETTINGS ACTIONS
 		self["settingsActions"] = ActionMap(["SettingsActions"],
 		{
 			"nextTab":		boundFunction(self.keyDirection, direction = 1),
