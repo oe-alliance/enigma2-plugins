@@ -178,6 +178,7 @@ class MovieWebScreen(WebScreen):
 		movielist = MovieList(None)
 		self["MovieList"] = Movie(session, movielist, func=Movie.LIST)
 		self["MovieFileDel"] = Movie(session, movielist, func=Movie.DEL)
+		self["MovieFileMove"] = Movie(session, movielist, func=Movie.MOVE)
 		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 class MediaPlayerWebScreen(WebScreen):
