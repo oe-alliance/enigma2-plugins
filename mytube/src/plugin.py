@@ -279,7 +279,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["ButtonBlue"].hide()
 		self["VKeyIcon"].hide()		
 
-		self["searchactions"] = ActionMap(["ShortcutActions", "WizardActions", "HelpActions", "MediaPlayerActions"],
+		self["searchactions"] = ActionMap(["ShortcutActions", "WizardActions", "HelpActions", "MediaPlayerActions", "DirectionActions"],
 		{
 			"ok": self.keyOK,
 			"back": self.leavePlayer,
@@ -296,7 +296,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"menu" : self.handleMenu,
 		}, -2)
 
-		self["suggestionactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "HelpActions"],
+		self["suggestionactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "HelpActions", "DirectionActions"],
 		{
 			"ok": self.keyOK,
 			"back": self.switchToConfigList,
@@ -310,7 +310,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		}, -2)
 
 
-		self["videoactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "MovieSelectionActions", "HelpActions"],
+		self["videoactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "MovieSelectionActions", "HelpActions", "DirectionActions"],
 		{
 			"ok": self.keyOK,
 			"back": self.leavePlayer,
@@ -335,7 +335,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"menu": self.handleMenu
 		}, -2)
 
-		self["historyactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "MovieSelectionActions", "HelpActions"],
+		self["historyactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "MovieSelectionActions", "HelpActions", "DirectionActions"],
 		{
 			"ok": self.keyOK,
 			"back": self.closeHistory,
@@ -1348,7 +1348,7 @@ class MyTubeVideoInfoScreen(Screen):
 		self["published"] = Label()
 		self["views"] = Label()
 		self["tags"] = Label()
-		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions", "MovieSelectionActions"],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions", "MovieSelectionActions", "DirectionActions"],
 		{
 			"back": self.close,
 			"red": self.close,
@@ -1526,7 +1526,7 @@ class MyTubeVideoHelpScreen(Screen):
 		self["key_red"] = Button(_("Close"))
 		self["detailtext"] = ScrollLabel()
 		
-		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions", "DirectionActions"],
 		{
 			"back": self.close,
 			"red": self.close,

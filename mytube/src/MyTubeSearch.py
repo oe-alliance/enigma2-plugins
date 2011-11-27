@@ -270,7 +270,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		self.skin_path = plugin_path
 		self.session = session
 
-		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions"],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "DirectionActions"],
 		{
 			"ok": self.keyOK,
 			"back": self.keyCancel,
