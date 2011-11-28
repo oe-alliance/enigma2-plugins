@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-11-24 09:02+CET\n"
+"POT-Creation-Date: 2011-11-27 00:06+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,76 +15,68 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: ConfigTabs.py:82
-msgid "single line style"
-msgstr ""
-
-#: ConfigTabs.py:83
-msgid "with short description"
-msgstr ""
-
-#: ConfigTabs.py:92
-msgid "simple"
-msgstr ""
-
-#: ConfigTabs.py:93
-msgid "gradient"
-msgstr ""
-
-#: ConfigTabs.py:94
-msgid "four parts"
-msgstr ""
-
-#: ConfigTabs.py:95
-msgid "percent (text)"
-msgstr ""
-
-#: ConfigTabs.py:102 EpgCenterList.py:942
+#: ConfigTabs.py:59 EpgCenterList.py:942
 msgid "disabled"
 msgstr ""
 
-#: ConfigTabs.py:149
-msgid "Prime time:"
+#: ConfigTabs.py:92
+msgid "single line style"
 msgstr ""
 
-#: ConfigTabs.py:150
-msgid "Remember last tab:"
+#: ConfigTabs.py:93
+msgid "with short description"
+msgstr ""
+
+#: ConfigTabs.py:102
+msgid "simple"
+msgstr ""
+
+#: ConfigTabs.py:103
+msgid "gradient"
+msgstr ""
+
+#: ConfigTabs.py:104
+msgid "four parts"
+msgstr ""
+
+#: ConfigTabs.py:105
+msgid "percent (text)"
 msgstr ""
 
 #: ConfigTabs.py:151
-msgid "Select running service on start:"
+msgid "Prime time:"
 msgstr ""
 
 #: ConfigTabs.py:152
-msgid "Replace InfoBar single and multi EPG:"
+msgid "Remember last tab:"
 msgstr ""
 
 #: ConfigTabs.py:153
-msgid "Show text input help for epg search:"
+msgid "Select running service on start:"
 msgstr ""
 
 #: ConfigTabs.py:154
-msgid "Use skin:"
+msgid "Show text input help for epg search:"
 msgstr ""
 
 #: ConfigTabs.py:155
-msgid "Limit search results to bouquet services:"
+msgid "Use skin:"
 msgstr ""
 
 #: ConfigTabs.py:156
-msgid "Exit on TV <-> Radio switch:"
+msgid "Limit search results to bouquet services:"
 msgstr ""
 
 #: ConfigTabs.py:157
-msgid "Show timer messages:"
+msgid "Exit on TV <-> Radio switch:"
 msgstr ""
 
 #: ConfigTabs.py:158
-msgid "Adjust font size:"
+msgid "Show timer messages:"
 msgstr ""
 
 #: ConfigTabs.py:159
-msgid "Return to main tab with exit:"
+msgid "Adjust font size:"
 msgstr ""
 
 #: ConfigTabs.py:160
@@ -145,6 +137,22 @@ msgstr ""
 
 #: ConfigTabs.py:211
 msgid "Show short description:"
+msgstr ""
+
+#: ConfigTabs.py:229
+msgid "Return to main tab with exit:"
+msgstr ""
+
+#: ConfigTabs.py:230
+msgid "Replace InfoBar single and multi EPG:"
+msgstr ""
+
+#: ConfigTabs.py:231
+msgid "Replace ChannelSelection key up to start with tab:"
+msgstr ""
+
+#: ConfigTabs.py:232
+msgid "Replace ChannelSelection key down to start with tab:"
 msgstr ""
 
 #: EpgCenterList.py:920
@@ -254,7 +262,7 @@ msgstr ""
 msgid "Upcoming"
 msgstr ""
 
-#: MerlinEPGCenter.py:43 MerlinEPGCenter.py:315 MerlinEPGCenter.py:1818
+#: MerlinEPGCenter.py:43 MerlinEPGCenter.py:317 MerlinEPGCenter.py:1837
 msgid "Timer"
 msgstr ""
 
@@ -267,134 +275,138 @@ msgid "General"
 msgstr ""
 
 #: MerlinEPGCenter.py:44
+msgid "Keys"
+msgstr ""
+
+#: MerlinEPGCenter.py:44
 msgid "Lists"
 msgstr ""
 
-#: MerlinEPGCenter.py:213
+#: MerlinEPGCenter.py:214
 msgid "Search for:"
 msgstr ""
 
-#: MerlinEPGCenter.py:485
+#: MerlinEPGCenter.py:495
 msgid "Similar"
 msgstr ""
 
-#: MerlinEPGCenter.py:752
+#: MerlinEPGCenter.py:762
 msgid "Record or zap timer"
 msgstr ""
 
-#: MerlinEPGCenter.py:753
+#: MerlinEPGCenter.py:763
 msgid "AutoTimer timer"
 msgstr ""
 
-#: MerlinEPGCenter.py:754
+#: MerlinEPGCenter.py:764
 msgid "Please select a timer type to add:"
 msgstr ""
 
-#: MerlinEPGCenter.py:888
+#: MerlinEPGCenter.py:898
 msgid "Stop current event but not coming events"
 msgstr ""
 
-#: MerlinEPGCenter.py:889
+#: MerlinEPGCenter.py:899
 msgid "Stop current event and disable coming events"
 msgstr ""
 
-#: MerlinEPGCenter.py:890
+#: MerlinEPGCenter.py:900
 msgid "Don't stop current event but disable coming events"
 msgstr ""
 
-#: MerlinEPGCenter.py:892
+#: MerlinEPGCenter.py:902
 msgid "Repeating event currently recording... What do you want to do?"
 msgstr ""
 
-#: MerlinEPGCenter.py:998
+#: MerlinEPGCenter.py:1008
 msgid "Match title:"
 msgstr ""
 
-#: MerlinEPGCenter.py:1004
+#: MerlinEPGCenter.py:1014
 msgid "Services:"
 msgstr ""
 
-#: MerlinEPGCenter.py:1010
+#: MerlinEPGCenter.py:1020
 msgid "Bouquets:"
 msgstr ""
 
-#: MerlinEPGCenter.py:1016
+#: MerlinEPGCenter.py:1026
 msgid "Included days:"
 msgstr ""
 
-#: MerlinEPGCenter.py:1022
+#: MerlinEPGCenter.py:1032
 msgid "Excluded days:"
 msgstr ""
 
-#: MerlinEPGCenter.py:1023
+#: MerlinEPGCenter.py:1033
 msgid "Record a maximum of x times:"
 msgstr ""
 
-#: MerlinEPGCenter.py:1024
+#: MerlinEPGCenter.py:1034
 msgid "Amount of recordings left:"
 msgstr ""
 
-#: MerlinEPGCenter.py:1025
+#: MerlinEPGCenter.py:1035
 msgid "Search type:"
 msgstr ""
 
-#: MerlinEPGCenter.py:1026
+#: MerlinEPGCenter.py:1036
 msgid "Location:"
 msgstr ""
 
-#: MerlinEPGCenter.py:1234
+#: MerlinEPGCenter.py:1244
 msgid "Outdated on"
 msgstr ""
 
-#: MerlinEPGCenter.py:1236
+#: MerlinEPGCenter.py:1246
 msgid "Outdated off"
 msgstr ""
 
-#: MerlinEPGCenter.py:1241
+#: MerlinEPGCenter.py:1251
 msgid "IMDb"
 msgstr ""
 
-#: MerlinEPGCenter.py:1247
+#: MerlinEPGCenter.py:1257
 msgid "Add"
 msgstr ""
 
-#: MerlinEPGCenter.py:1249
+#: MerlinEPGCenter.py:1259
 msgid "Remove"
 msgstr ""
 
-#: MerlinEPGCenter.py:1250
+#: MerlinEPGCenter.py:1260
 msgid "OK"
 msgstr ""
 
-#: MerlinEPGCenter.py:1251
+#: MerlinEPGCenter.py:1261
 msgid "New Search"
 msgstr ""
 
-#: MerlinEPGCenter.py:1261
+#: MerlinEPGCenter.py:1271
 msgid "Remove timer"
 msgstr ""
 
-#: MerlinEPGCenter.py:1264 MerlinEPGCenter.py:1272
+#: MerlinEPGCenter.py:1274 MerlinEPGCenter.py:1282
 msgid "Add timer"
 msgstr ""
 
-#: MerlinEPGCenter.py:1574
+#: MerlinEPGCenter.py:1593
 msgid "Edit Off"
 msgstr ""
 
-#: MerlinEPGCenter.py:1578
+#: MerlinEPGCenter.py:1597
 msgid "Edit On"
 msgstr ""
 
-#: MerlinEPGCenter.py:1596
+#: MerlinEPGCenter.py:1615
 msgid "return"
 msgstr ""
 
-#: MerlinEPGCenter.py:1807
+#: MerlinEPGCenter.py:1826
 msgid "Set search term"
 msgstr ""
 
-#: plugin.py:121
+#: plugin.py:163
 msgid "More than just an EPG..."
 msgstr ""
 

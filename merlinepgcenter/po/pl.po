@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MerlinEPGCenter\n"
-"POT-Creation-Date: 2011-11-03 21:20+CET\n"
+"POT-Creation-Date: 2011-11-27 21:20+CET\n"
 "PO-Revision-Date: \n"
 "Last-Translator: kosmacz <anteneczka@gmail.com>\n"
 "Language-Team: Shaderman <shaderman@dreambox-tools.info>\n"
@@ -63,6 +63,9 @@ msgstr "Edycja Wył."
 msgid "Edit On"
 msgstr "Edycja Wł."
 
+msgid "Embed volume slider:"
+msgstr "Osadzić suwak głośności:"
+
 msgid "Event Info"
 msgstr "Wydarz. Info"
 
@@ -78,6 +81,9 @@ msgstr "Piątek"
 msgid "General"
 msgstr "Ogólne"
 
+msgid "IMDb"
+msgstr "IMDb"
+
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "W celu nagrania z timera, TV został przełączony do usługi nagrywania!\n"
 
@@ -86,6 +92,9 @@ msgstr "Dołączone dni:"
 
 msgid "Increase list item height:"
 msgstr "Zwiększenie wysokości elementu listy:"
+
+msgid "Keys"
+msgstr "Klawisze"
 
 msgid "Limit search results to bouquet services:"
 msgstr "Ogranicz wyniki wyszukiwania do kanałów bukietu:"
@@ -157,6 +166,12 @@ msgid "Repeating event currently recording... What do you want to do?"
 msgstr ""
 "Powtarzające się wydarzenie w trakcie nagrania ...\n"
 "Co chcesz zrobić?"
+
+msgid "Replace ChannelSelection key down to start with tab:"
+msgstr "Podmień klawisz wyboru kanału (-) ,aby rozpocząć z karty:"
+
+msgid "Replace ChannelSelection key up to start with tab:"
+msgstr "Podmień klawisz wyboru kanału (+) ,aby rozpocząć z karty:"
 
 msgid "Replace InfoBar single and multi EPG:"
 msgstr "Zamień InfoBar pojedyńczy i multi EPG:"
