@@ -295,6 +295,66 @@ var CurrentLocationProvider = Class.create(AbstractContentProvider, {
 	}
 });
 
+var MediaPlayerProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.mediaplayerlist, showFnc);
+	},
+
+	renderXML: function(xml){
+		var files = new FileList(xml).getArray();
+		debug("[MediaPlayerProvider].renderXML :: " + files.length + " entries in mediaplayer filelist");
+
+		var mp = {};
+
+		var root = files[0].getRoot();
+		if (root != "playlist") {
+			mp = {'root': root};
+			if(root != '/') {
+				var re = new RegExp(/(.*)\/(.*)\/$/);
+				re.exec(root);
+				var newroot = RegExp.$1+'/';
+				if(newroot == '//') {
+					newroot = '/';
+				}
+				mp = {
+						'root': root,
+						'servicereference': newroot,
+						'name': '..'
+				};	
+			}
+		}
+
+		var items = Array();
+		files.each(function(file){
+			if(file.getNameOnly() == '') {
+				return;
+			}
+			var isdir = 'true';
+
+			if (file.getIsDirectory() == "False") {
+				isdir = 'false';
+			}
+
+			items.push({
+					'isdir' : isdir,
+					'servicereference': file.getServiceReference(),
+					'root': file.getRoot(),
+					'name': file.getNameOnly()
+			});
+		});
+
+		var data = { 
+			'mp' : mp,
+			'items': items
+		};
+		
+		return data;
+		
+	}
+	
+	
+});
+
 var PowerstateProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.powerstate, showFnc);

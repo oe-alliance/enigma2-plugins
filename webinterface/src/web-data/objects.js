@@ -318,6 +318,14 @@ function EPGEvent(xml, number){
 		}
 	};
 	
+	this.getProgress = function(){
+		var progress = 100 - ( ( this.getTimeRemainingString() / ( this.getDuration() / 60000 ) ) * 100 );
+		progress = Math.ceil(progress);
+		if(isNaN(progress))
+			progress = 0;
+		return progress;
+	};
+	
 	this.getTitle = function() {
 		return this.title;
 	};
@@ -347,6 +355,7 @@ function EPGEvent(xml, number){
 			'description': quotes2html(this.getDescription()),
 			'endtime': this.getTimeEndString(), 
 			'remaining': this.getTimeRemainingString(),
+			'progress' : this.getProgress(),
 			'extdescription': quotes2html(this.getDescriptionExtended()),
 			'number': String(this.number),
 			'start': this.getTimeBegin(),

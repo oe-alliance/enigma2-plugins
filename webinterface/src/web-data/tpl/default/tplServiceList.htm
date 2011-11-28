@@ -6,7 +6,10 @@
 											<td class="${item.cssclass}">
 												<table class="sListItem">
 													<tr>
-														<td style="width: 640px;">
+														<td style="width: 70px;">
+															<div class="sListSProgress" title="${item.now.progress}%"><div class="sListSProgressBar" style="width: ${item.now.progress}%"></div></div>
+														</td>
+														<td style="width: 460px;">
 															<div class="sListSName">
 																<a href="#" id="${item.now.servicereference}" class="sListSLink" title="Zap to ${item.now.servicename}">
 																	${item.now.servicename}
@@ -14,18 +17,18 @@
 															</div>
 														</td>
 														<td>
-															<a href="#" class="sListServiceEpg" data-servicereference="${item.now.servicereference}">
+															<a href="#" class="sListServiceEpg right block" data-servicereference="${item.now.servicereference}">
 																<img src="/web-data/img/epg.png" border="0" title="Show EPG for ${item.now.servicename}"/>
 															</a>
 														</td>
 														<td>
-															<a target="_blank" href="/web/stream.m3u?ref=${item.now.servicereference}">
+															<a class="right block" target="_blank" href="/web/stream.m3u?ref=${item.now.servicereference}">
 																<img src="/web-data/img/screen.png" title="Stream ${item.now.servicename}" border="0">
 															</a>
 														</td>
 													</tr>
 													<tr class="sListEPGNow">
-														<td id="NOW${item.now.servicereference}" class="sListEPGItem" colspan="3">
+														<td id="NOW${item.now.servicereference}" class="sListEPGItem" colspan="4">
 															{if item.now.title != ''}
 															<a href="#" class="sListExtEpg" title="Click to show/hide extended Description">
 																<table cellspacing="0">
@@ -47,7 +50,7 @@
 														</td>
 													</tr>
 													<tr class="sListEPGNext">
-														<td id="NEXT${item.now.servicereference}" class="sListEPGItem" colspan="3">
+														<td id="NEXT${item.now.servicereference}" class="sListEPGItem" colspan="4">
 															{if item.next.title != ''}
 															<a href="#" class="sListExtEpg" title="Click to show/hide extended Description">
 																<table cellspacing="0">
@@ -65,7 +68,7 @@
 																	</tr>
 																</table>
 															</a>
-															{/if}														
+															{/if}
 														</td>
 													</tr>
 													<tr id="trSUB${item.now.servicereference}" class="sListSubService" style="display:none;">

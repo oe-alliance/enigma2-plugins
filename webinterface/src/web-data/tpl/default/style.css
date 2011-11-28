@@ -82,6 +82,10 @@
 	.right{
 		text-align:right;
 	}
+	
+	.block{
+		display: block;
+	}
 	.bottom{
 		vertical-align: bottom;
 	}
@@ -359,11 +363,37 @@
 		color: #485052;
 		display: block;
 	}
-	
+
 	.sListEPGItem{
 		font-size:12px;
 		margin: 0px;
 		padding: 0px;
+	}
+	
+	
+	.sListSProgress{
+		display: inline-block;
+		margin: 0px;
+		border: 1px solid #ccc;
+		width: 60px;
+		height: 12px;
+	}
+	
+	.sListSProgressBar{
+		display: inline-block;
+		margin: 0px;
+		font-size: 10px;
+		text-align: center;
+		background-color: #485052;
+		font-size: 10px;
+		width: 0%;
+		height: 100%;
+	}
+	
+	table.sListExtEpg{
+		width: 580px;
+		margin:0;
+		padding:0;
 	}
 	
 	.header{
@@ -419,8 +449,7 @@
 	}
 	
 	.sListItem{
-		/*border-bottom: 2px solid #CCC;*/
-		width: 580px;
+		width: 585px;
 		color: #485052;
 	}
 	
@@ -428,6 +457,14 @@
 		/*border-bottom: 2px solid #CCC;*/
 		width: 780px;
 		color: #485052;
+	}
+
+/*****************
+* MediaPlayer
+******************/
+
+	.mpListItem{
+		mListItem;
 	}
 
 /*****************
@@ -439,7 +476,7 @@
 	}
 	
 	.epgTitle{
-		width: 430px;
+		width: 420px;
 		color: #485052;
 	}
 	

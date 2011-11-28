@@ -27,11 +27,11 @@ function url() {
 	this.signal = "/web/signal";
 	this.deviceinfo = "/web/deviceinfo";
 	
-	this.mediaplayerlist= "/web/mediaplayerlist?types=audio&path="; // plus full qualified path
-	this.mediaplayerplay= "/web/mediaplayerplay?file="; // plus file-serviceref
-	this.mediaplayerremove= "/web/mediaplayerremove?file="; // plus file-serviceref
-	this.mediaplayercmd= "/web/mediaplayercmd?command="; // plus command
-	this.mediaplayerwrite= "/web/mediaplayerwrite?filename="; // plus filename
+	this.mediaplayerlist= "/web/mediaplayerlist"; // plus full qualified path
+	this.mediaplayerplay= "/web/mediaplayerplay"; // plus file-serviceref
+	this.mediaplayerremove= "/web/mediaplayerremove"; // plus file-serviceref
+	this.mediaplayercmd= "/web/mediaplayercmd"; // plus command
+	this.mediaplayerwrite= "/web/mediaplayerwrite"; // plus filename
 	
 	this.filelist = "/web/mediaplayerlist?path="; // plus full qualified path
 	

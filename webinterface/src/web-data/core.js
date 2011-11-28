@@ -403,6 +403,20 @@ var LocationsAndTags = Class.create({
 	}
 });
 
+var MediaPlayer = Class.create(Controller, {
+	initialize: function($super, target){
+		$super(new MediaPlayerHandler(target));
+	},
+
+	load: function(directory){
+		if(!directory){
+			directory = 'Filesystems';
+		}
+		var parms = {'directory' : directory};
+		this.model.load(parms);
+	}
+});
+
 var Messages = Class.create({
 	initialize: function(){
 		this.model = new SimpleRequestHandler();
@@ -858,6 +872,7 @@ var E2WebCore = Class.create({
 		this.current = new Current('currentContent', 'volContent');
 		this.epg = new EPG(new EpgListHandler());
 		this.lt = new LocationsAndTags();
+		this.mediaplayer = new MediaPlayer('contentMain');
 		this.messages = new Messages();
 		this.movies = new Movies('contentMain', 'navContent');
 		this.power = new Power();
@@ -905,6 +920,7 @@ var E2WebCore = Class.create({
 				'about' : this.simplepages.loadAbout.bind(this.simplepages),
 				'deviceinfo' : this.simplepages.loadDeviceInfo.bind(this.simplepages),
 				'gears' : this.simplepages.loadGears.bind(this.simplepages),
+				'mediaplayer' : this.mediaplayer.load.bind(this.mediaplayer),
 				'settings' : this.simplepages.loadSettings.bind(this.simplepages),
 				'tools' : this.simplepages.loadTools.bind(this.simplepages)
 			}
@@ -1432,6 +1448,13 @@ var E2WebCore = Class.create({
 			'.tEditSave',
 			function(event, element){
 				this.timers.save($('timerEditForm'));
+			}.bind(this)
+		);
+		
+		$('webTv').on(
+			'click',
+			function(event, element){
+				window.open('/web-data/streaminterface.html', 'WebTV', 'scrollbars=no, width=800, height=740');
 			}.bind(this)
 		);
 	},

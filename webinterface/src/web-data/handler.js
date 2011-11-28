@@ -49,7 +49,7 @@ var AbstractContentHandler = Class.create({
 	 * in this.target.
 	 * Afterwards call this.finished()
 	 */
-	show : function(data){
+	show: function(data){
 		this.data = data;
 		templateEngine.process(this.tpl, data, this.target, this.finished.bind(this));
 	},
@@ -337,6 +337,13 @@ var ServiceListSubserviceHandler  = Class.create(AbstractContentHandler, {
 			templateEngine.process(this.tpl, data, id);
 			parent.show();
 		}
+	}
+});
+
+var MediaPlayerHandler = Class.create(AbstractContentHandler, {
+	initialize: function($super, target){
+		$super('tplMediaPlayer', target);
+		this.provider = new MediaPlayerProvider(this.show.bind(this));
 	}
 });
 

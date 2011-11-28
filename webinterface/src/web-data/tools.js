@@ -1169,7 +1169,6 @@ function showSettings(){
 	
 	var updateCurrentInterval = userprefs.data.updateCurrentInterval / 1000;
 	var updateBouquetInterval = userprefs.data.updateBouquetInterval / 1000;
-	
 
 	data = {'debug' : debugChecked,
 			'updateCurrentInterval' : updateCurrentInterval,
@@ -1257,17 +1256,11 @@ function incomingMediaPlayer(request){
 					'servicereference': file.getServiceReference(),
 					'exec': exec,
 					'exec_description': exec_description,
-					'color': color,							
+					'color': color,
 					'root': file.getRoot(),
 					'name': file.getNameOnly()
 			};
-
 		}
-		/*
-		if (root == "playlist") {
-			listerHtml += tplMediaPlayerFooterPlaylist;
-		}
-		 */
 
 		var data = { mp : namespace,
 				items: itemnamespace
@@ -1276,7 +1269,6 @@ function incomingMediaPlayer(request){
 		processTpl('tplMediaPlayer', data, 'contentMain');
 		var sendMediaPlayerTMP = sendMediaPlayer;
 		sendMediaPlayer = false;
-		// setBodyMainContent('BodyContent');
 		sendMediaPlayer = sendMediaPlayerTMP;
 	}		
 }
