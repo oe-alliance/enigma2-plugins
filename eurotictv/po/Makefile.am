@@ -1,3 +1,3 @@
 PLUGIN = eUroticTV
-LANGS = de
+LANGS = de fr
 include $(top_srcdir)/Rules-po.mak
