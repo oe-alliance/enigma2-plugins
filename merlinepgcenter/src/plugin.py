@@ -86,6 +86,9 @@ class InfoBarFunctionSaver:
 		self.infoBarSwitchChannelUp = InfoBar.instance["ChannelSelectActions"].actions["switchChannelUp"]
 		self.infoBarSwitchChannelDown = InfoBar.instance["ChannelSelectActions"].actions["switchChannelDown"]
 		
+	def saveInfoBarEventViewFunctions(self):
+		self.infoBarEventView = InfoBar.instance["EPGActions"].actions["showEventInfo"]
+		
 	def setInfoBarActionMap(self, configElement = None):
 		if configElement == config.plugins.merlinEpgCenter.replaceInfobarChannelUp:
 			value = int(config.plugins.merlinEpgCenter.replaceInfobarChannelUp.value)
@@ -101,6 +104,13 @@ class InfoBarFunctionSaver:
 					InfoBar.instance["ChannelSelectActions"].actions["switchChannelDown"] = self.infoBarSwitchChannelDown
 			else:
 				InfoBar.instance["ChannelSelectActions"].actions["switchChannelDown"] = self.channelDownStarter
+		elif configElement == config.plugins.merlinEpgCenter.replaceShowEventView:
+			value = int(config.plugins.merlinEpgCenter.replaceShowEventView.value)
+			if value is -1:
+				if InfoBar.instance["EPGActions"].actions["showEventInfo"] is not self.infoBarEventView:
+					InfoBar.instance["EPGActions"].actions["showEventInfo"] = self.infoBarEventView
+			else:
+				InfoBar.instance["EPGActions"].actions["showEventInfo"] = self.showEventInfoStarter
 				
 	@staticmethod
 	def channelUpStarter():
@@ -111,6 +121,12 @@ class InfoBarFunctionSaver:
 	@staticmethod
 	def channelDownStarter():
 		value = int(config.plugins.merlinEpgCenter.replaceInfobarChannelDown.value)
+		doSearch = value == 5
+		MerlinEPGCenterStarter.instance.openMerlinEPGCenter(value, doSearch)
+		
+	@staticmethod
+	def showEventInfoStarter():
+		value = int(config.plugins.merlinEpgCenter.replaceShowEventView.value)
 		doSearch = value == 5
 		MerlinEPGCenterStarter.instance.openMerlinEPGCenter(value, doSearch)
 		
@@ -128,8 +144,10 @@ def sessionstart(reason, session):
 # InfoBar is now initialised, our chance to occupy the ChannelSelectActions
 def networkconfigread(reason = None):
 	infoBarFunctionSaver.saveInfoBarChannelFunctions()
+	infoBarFunctionSaver.saveInfoBarEventViewFunctions()
 	config.plugins.merlinEpgCenter.replaceInfobarChannelUp.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call = True)
 	config.plugins.merlinEpgCenter.replaceInfobarChannelDown.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call = True)
+	config.plugins.merlinEpgCenter.replaceShowEventView.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call = True)
 	
 def getBouquetInformation():
 	# get current bouquet and bouquetlist from channelselection

@@ -78,6 +78,7 @@ config.plugins.merlinEpgCenter.selectRunningService = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.replaceInfobarEpg = ConfigYesNo(False)
 config.plugins.merlinEpgCenter.replaceInfobarChannelUp = ConfigSelection(default = "-1", choices = TAB_CHOICES)
 config.plugins.merlinEpgCenter.replaceInfobarChannelDown = ConfigSelection(default = "-1", choices = TAB_CHOICES)
+config.plugins.merlinEpgCenter.replaceShowEventView = ConfigSelection(default = "-1", choices = TAB_CHOICES)
 config.plugins.merlinEpgCenter.epgPaths = ConfigSelection(default = eEnv.resolve('${datadir}/enigma2/picon_50x30/'), choices = [
 				(eEnv.resolve('${datadir}/enigma2/picon_50x30/'), eEnv.resolve('${datadir}/enigma2/picon_50x30')),
 				('/media/cf/picon_50x30/', '/media/cf/picon_50x30'),
@@ -230,5 +231,6 @@ class ConfigKeys(ConfigBaseTab):
 		cfgList.append(getConfigListEntry(_("Replace InfoBar single and multi EPG:"), config.plugins.merlinEpgCenter.replaceInfobarEpg))
 		cfgList.append(getConfigListEntry(_("Replace ChannelSelection key up to start with tab:"), config.plugins.merlinEpgCenter.replaceInfobarChannelUp))
 		cfgList.append(getConfigListEntry(_("Replace ChannelSelection key down to start with tab:"), config.plugins.merlinEpgCenter.replaceInfobarChannelDown))
+		cfgList.append(getConfigListEntry(_("Replace EventView key to start with tab:"), config.plugins.merlinEpgCenter.replaceShowEventView))
 		self.configList = cfgList
 		
