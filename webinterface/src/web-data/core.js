@@ -40,7 +40,7 @@ function toOptionList(lst, selected, split) {
 	if(split && !selected == ''){
 		selected = selected.split(split);
 	} else {
-		if(!selected.empty()){
+		if(selected && selected != ""){
 			selected = [selected];
 		} else {
 			selected = [];
