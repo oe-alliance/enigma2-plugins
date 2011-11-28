@@ -799,8 +799,7 @@ function Timer(xml, cssclass){
 			'servicename' : quotes2html(this.getServiceName()),
 			'name' : quotes2html(this.getName()),
 			'description' : quotes2html(this.getDescription()),
-			'descriptionextended' : quotes2html(this
-					.getDescriptionExtended()),
+			'descriptionextended' : quotes2html(this.getDescriptionExtended()),
 			'begin' : this.getTimeBegin(),
 			'beginDate' : dateToString(this.beginDate),
 			'end' : this.getTimeEnd(),
@@ -810,48 +809,15 @@ function Timer(xml, cssclass){
 			'repeated' : this.getRepeated(),
 			'repeatedReadable' : repeatedReadable(this.getRepeated()),
 			'justplay' : this.getJustplay(),
-			'justplayReadable' : this.justplayReadable[Number(this
-					.getJustplay())],
+			'justplayReadable' : this.justplayReadable[Number(this.getJustplay())],
 			'afterevent' : this.getAfterevent(),
-			'aftereventReadable' : this.aftereventReadable[Number(this
-					.getAfterevent())],
+			'aftereventReadable' : this.aftereventReadable[Number(this.getAfterevent())],
 			'dirname' : this.getDirname(),
 			'tags' : this.getTags(),
 			'disabled' : this.getDisabled(),
 			'onOff' : this.getToggleDisabledIMG(),
 			'enDis' : this.getToggleDisabledText(),
 			'cssclass' : cssclass
-	};
-	
-	this.createJson = function(){
-		this.json = {
-				'servicereference' : this.getServiceReference(),
-				'servicename' : quotes2html(this.getServiceName()),
-				'title' : quotes2html(this.getName()),
-				'description' : quotes2html(this.getDescription()),
-				'descriptionextended' : quotes2html(this
-						.getDescriptionExtended()),
-				'begin' : this.getTimeBegin(),
-				'beginDate' : dateToString(this.beginDate),
-				'end' : this.getTimeEnd(),
-				'endDate' : dateToString(this.endDate),
-				'state' : this.getState(),
-				'duration' : Math.ceil((this.getDuration() / 60)),
-				'repeated' : this.getRepeated(),
-				'repeatedReadable' : repeatedReadable(this.getRepeated()),
-				'justplay' : this.getJustplay(),
-				'justplayReadable' : this.justplayReadable[Number(this
-						.getJustplay())],
-				'afterevent' : this.getAfterevent(),
-				'aftereventReadable' : this.aftereventReadable[Number(this
-						.getAfterevent())],
-				'dirname' : this.getDirname(),
-				'tags' : this.getTags(),
-				'disabled' : this.getDisabled(),
-				'onOff' : this.getToggleDisabledIMG(),
-				'enDis' : this.getToggleDisabledText(),
-				'cssclass' : cssclass
-		};		
 	};
 	
 	this.toJSON = function(){

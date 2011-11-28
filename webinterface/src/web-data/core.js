@@ -29,30 +29,54 @@ Element.prototype.fadeOut = function(delay) {
 		this.fadeIn({'delay' : delay}, true);
 	};
 
+String.prototype.e = function(){
+	return this.replace("\"","&quot;");
+};
+	
 // General Helpers
-function toOptionList(lst, selected) {
-	var list = Array();
-	var i = 0;
-	var found = false;
-
-	for (i = 0; i < lst.length; i++) {
-		if (lst[i] == selected) {
-			found = true;
+function toOptionList(lst, selected, split) {
+	var retList = Array();
+	retList.push("");
+	if(split && !selected == ''){
+		selected = selected.split(split);
+	} else {
+		if(!selected.empty()){
+			selected = [selected];
+		} else {
+			selected = [];
 		}
 	}
 
-	if (!found) {
-		lst = [ selected ].concat(lst);
-	}
+	selected.each(function(item){
+		var found = false;
+		lst.each(function(listItem){
+			
+			if (listItem == item) {
+				found = true;
+			}
+		});
+		if (!found) {
+			lst.push(item);
+		}
+	});
 
-	for (i = 0; i < lst.length; i++) {
-		list[i] = {
-				'value': lst[i],
-				'txt': lst[i],
-				'selected': (lst[i] == selected ? "selected" : "")};
-	}
+	
+	lst.each(function(listItem){
+		var sel = '';
+		selected.each(function(item){
+			if (listItem == item) {
+				sel = 'selected';
+			}
+		});
+		
+		retList.push({
+			'value': listItem,
+			'txt': listItem,
+			'selected': sel
+		});
+	});
 
-	return list;
+	return retList;
 }
 
 function debug(item){
@@ -713,7 +737,7 @@ var Timers = Class.create({
 	},
 	
 	create: function(){
-		this.timerHandler.commitForm('timerEditForm');
+		this.timerHandler.load({}, false, true);
 	},
 	
 	edit: function(element){
@@ -761,9 +785,9 @@ var Timers = Class.create({
 	},
 	
 	onTimerEditLoadFinished: function(){
-		debug("[Timers].ontimerEditLoadFinished");
-		datePickerController.destroyDatePicker('dateStart');
-		datePickerController.destroyDatePicker('dateEnd');
+		debug("[Timers].onTimerEditLoadFinished");
+		datePickerController.destroyDatePicker('sdate');
+		datePickerController.destroyDatePicker('edate');
 		var today = new Date();
 		var pad = function(value, length) { 
 			length = length || 2; 
@@ -776,10 +800,10 @@ var Timers = Class.create({
 			};
 		
 		
-		opts['formElements'] = { 'dateStart' : 'Y-ds-m-ds-d'};
+		opts['formElements'] = { 'sdate' : 'Y-ds-m-ds-d'};
 		datePickerController.createDatePicker(opts);
 		
-		opts['formElements'] = { 'dateEnd' : 'Y-ds-m-ds-d'};
+		opts['formElements'] = { 'edate' : 'Y-ds-m-ds-d'};
 		datePickerController.createDatePicker(opts);
 
 	}
@@ -1319,6 +1343,75 @@ var E2WebCore = Class.create({
 		);
 		//Timer Editing
 		content.on(
+			'change',
+			'.tEditRepeated',
+			function(event, element){
+				var days = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
+				var weekdays = days.slice(0,5);
+				
+				switch(element.id){
+				case 'mf':
+					var checked = element.checked;
+					weekdays.each(function(day){
+						$(day).checked = checked;
+					});
+					if(checked){
+						var others = ['sa', 'su', 'ms'];
+						others.each(function(item){
+							$(item).checked = false;
+						});
+					}
+					break;
+				case 'ms':
+					var checked = element.checked;
+					days.each(function(day){
+						$(day).checked = checked;
+					});
+					if(checked){
+						$('mf').checked = false;
+					}
+					break;
+				default:
+					var weekdays = true;
+					var alldays = true;
+					days.each(function(day){
+						day = $(day);
+						if(day.value <= 64){
+							if(!day.checked){
+								alldays = false;
+								if(day.value <= 16){
+									weekdays = false;
+									return
+								}
+							} else {
+								if(day.value > 16){
+									weekdays = false;
+								}
+							}
+						}
+					});
+					if(alldays){
+						$('mf').checked = false;
+						$('ms').checked = true;
+					} else if (weekdays) {
+						$('mf').checked = true;
+						$('ms').checked = false;
+					} else {
+						$('mf').checked = false;
+						$('ms').checked = false;
+					}
+				}
+			}
+		);
+		content.on(
+			'change',
+			'.tEditBouquet',
+			function(event, element){
+				var value = unescape( element.options[element.selectedIndex].value );
+				core.timers.onBouquetChanged(value);
+			}.bind(this)
+		);
+		content.on(
 			'click',
 			'.tEditTag',
 			function(event, element){
@@ -1332,15 +1425,6 @@ var E2WebCore = Class.create({
 					element.addClassName(selected);
 					element.writeAttribute(attr, selected);
 				}
-			}.bind(this)
-		);
-		
-		content.on(
-			'change',
-			'.tEditBouquet',
-			function(event, element){
-				var value = unescape( element.options[element.selectedIndex].value );
-				core.timers.onBouquetChanged(value);
 			}.bind(this)
 		);
 		content.on(

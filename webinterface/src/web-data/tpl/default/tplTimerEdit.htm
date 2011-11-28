@@ -59,10 +59,15 @@
 											</tr>
 											<tr>
 												<td>Days:</td>
-												<td>
-													{for r in repeated}
-													<input class="tEditRepeated" type="checkbox" id="${r.id}" name="${r.name}" value="${r.value}" ${r.checked}>&nbsp;${r.txt}&nbsp;&nbsp;
-													{/for}
+												<td>{for r in repeated}
+													<input 
+														class="tEditRepeated" 
+														type="checkbox" 
+														id="${r.id}" 
+														name="${r.name}" 
+														value="${r.value}" 
+														title="${r.long}" 
+														${r.checked}>&nbsp;${r.txt}&nbsp;&nbsp;</input>{/for}
 												</td>
 											</tr>
 											<tr>
@@ -83,13 +88,13 @@
 											<tr>
 												<td>Name:</td>
 												<td>
-													<input name="name" id="name" type="text" size="70" maxlength="255" value="${timer.name}">
+													<input name="name" id="name" type="text" size="70" maxlength="255" value="${timer.name.e()}">
 												</td>
 											</tr>
 											<tr>
 												<td>Description:</td>
 												<td>
-													<input name="descr" id="descr" type="text" size="70" maxlength="255" value="${timer.description}">
+													<input name="description" id="description" type="text" size="70" maxlength="255" value="${timer.description.e()}">
 												</td>
 											</tr>
 											<tr>
@@ -125,11 +130,12 @@
 											<tr><td>&nbsp;&nbsp;</td></tr>
 											<tr>
 												<td>&nbsp;</td><td>
+													<input name="disabled" id="disabled" type="hidden" value="${timer.disabled}">
+													<input name="eventId" id="eventId" type="hidden" value="${timer.eventId}">
 													<input name="deleteOldOnSave" id="deleteOldOnSave" type="hidden" value="${timer.deleteOldOnSave}">
-													<input name="serviceOld" id="serviceOld" type="hidden" value="${encodeURIComponent(timer.servicereferenceOld)}">
+													<input name="servicereferenceOld" id="servicereferenceOld" type="hidden" value="${encodeURIComponent(timer.servicereferenceOld)}">
 													<input name="beginOld" id="beginOld" type="hidden" value="${timer.beginOld}">
 													<input name="endOld" id="endOld" type="hidden" value="${timer.endOld}">
-													<input name="eventID" id="eventID" type="hidden" value="${timer.eventID}">
 													<button class="tEditSave">Save Timer</button>
 												</td>
 											</tr>

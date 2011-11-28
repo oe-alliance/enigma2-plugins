@@ -506,7 +506,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * 
 	 * Extracts the data of a timer from the .tListItem elements data-* attributes
 	 * 
-	 * <tr class="tListItem"							
+	 * <tr class="tListItem"
 	 * 	data-servicereference="${t.servicereference}"
 	 * 	data-servicename="${t.servicename}"
 	 * 	data-description="${t.description}"
@@ -535,20 +535,21 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 			var beginD = new Date(begin * 1000);
 			var endD = new Date(end * 1000);
 			t = {
-					servicereference : decodeURIComponent(parent.readAttribute('data-servicereference')),
-					servicename : unescape(parent.readAttribute('data-servicename')),
-					description : unescape(parent.readAttribute('data-description')),
-					name : unescape(parent.readAttribute('data-name')),
-					begin : begin,
-					beginDate : this.toReadableDate(beginD),
-					end : end,
-					endDate : this.toReadableDate(endD),
-					repeated : unescape(parent.readAttribute('data-repeated')),
-					justplay : unescape(parent.readAttribute('data-justplay')),
-					dirname : unescape(parent.readAttribute('data-dirname')),
-					tags : unescape(parent.readAttribute('data-tags')),
-					afterevent : unescape(parent.readAttribute('data-afterevent')),
-					disabled : unescape(parent.readAttribute('data-disabled')),
+				servicereference : decodeURIComponent(parent.readAttribute('data-servicereference')),
+				servicename : unescape(parent.readAttribute('data-servicename')),
+				description : unescape(parent.readAttribute('data-description')),
+				name : unescape(parent.readAttribute('data-name')),
+				eventId : unescape(parent.readAttribute('data-eventid')),
+				begin : begin,
+				beginDate : this.toReadableDate(beginD),
+				end : end,
+				endDate : this.toReadableDate(endD),
+				repeated : unescape(parent.readAttribute('data-repeated')),
+				justplay : unescape(parent.readAttribute('data-justplay')),
+				dirname : unescape(parent.readAttribute('data-dirname')),
+				tags : unescape(parent.readAttribute('data-tags')),
+				afterevent : unescape(parent.readAttribute('data-afterevent')),
+				disabled : unescape(parent.readAttribute('data-disabled'))
 			};
 			
 			if(setOld){
@@ -572,12 +573,36 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * Parameters:
 	 * @element - the html element calling the load function ( onclick="TimerProvider.load(this)" )
 	 */
-	load: function(element, setOld){
+	load: function(element, setOld, initial){
+		var t = {};
+		var begin = new Date();
+		var end = new Date();
 		
-		var t = this.getData(element, setOld);
-			
-		var begin = new Date(t.begin * 1000);
-		var end = new Date(t.end * 1000);	
+		if(initial){
+			end.setHours(end.getHours() + 1);
+			t = {
+				servicereference : "",
+				servicename : "",
+				description : "",
+				name : "",
+				eventId : "0",
+				begin : "0",
+				beginDate : this.toReadableDate(begin),
+				end : "0",
+				endDate : this.toReadableDate(end),
+				repeated : "0",
+				justplay : "0",
+				dirname : "",
+				tags : "",
+				afterevent : "3",
+				disabled : "0"
+			};
+		} else {
+			t = this.getData(element, setOld);
+			begin = new Date(t.begin * 1000);
+			end = new Date(t.end * 1000);
+		}
+		
 		
 		var bHours = this.numericalOptionList(0, 23, begin.getHours());
 		var bMinutes = this.numericalOptionList(0, 59, begin.getMinutes());
@@ -604,17 +629,21 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				timer : t };
 		var _this = this;
 		core.lt.getLocationsAndTags(function(currentLocation, locations, tags){
-			_this.onLocationsAndTagsReady(data, currentLocation, locations, tags);
+			_this.onLocationsAndTagsReady(data, currentLocation, locations, tags, initial);
 		});
 	},
 	
-	onLocationsAndTagsReady: function(data, currentLocation, locations, tags){
+	onLocationsAndTagsReady: function(data, currentLocation, locations, tags, initial){
 		var l = toOptionList(locations, currentLocation);
-		var t = toOptionList(tags);
+		var t = toOptionList(tags, data.timer.tags, " ");
 		t.shift();
+		l.shift();
 		
 		data['dirname'] = l;
 		data['tags'] = t;
+		if(initial){
+			data.timer.dirname = currentLocation;
+		}
 		this.data = data;
 		this.bouquetListProvider.load({'sRef' : bouquetsTv});
 	},
@@ -646,29 +675,6 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		prov.load({'sRef' : bRef});
 	},
 	
-	add: function(t){
-		if(t.name = "N/A")
-			t.name = "";
-		if(old.title = "N/A")
-			old.title = "";
-		this.provider.simpleResultQuery(
-			URL.timerchange,
-			{
-				'sRef' : t.servicereference,
-				'begin' : t.begin,
-				'end' : t.end,
-				'name' : t.name,
-				'description' : t.description,
-				'dirname' : t.dirname,
-				'tags' : t.tags,
-				'afterevent' : t.afterevent,
-				'eit' : '0',
-				'disabled' : t.disabled,
-				'justplay' : t.justplay,
-				'repeated' : t.repeated
-			});
-	},
-	
 	addByEventId: function(sRef, id, justplay){
 		this.provider.simpleResultQuery(
 			URL.timeraddbyeventid,
@@ -681,30 +687,36 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	},
 	
 	change: function(t, old){
-		if(t.name = "N/A")
-			t.name = "";
-		if(old.name = "N/A")
-			old.name = "";
-		this.provider.simpleResultQuery(
-			URL.timerchange,
-			{
-				'sRef' : t.servicereference,
-				'begin' : t.begin,
-				'end' : t.end,
-				'name' : t.name,
-				'description' : t.description,
-				'dirname' : t.dirname,
-				'tags' : t.tags,
-				'afterevent' : t.afterevent,
-				'eit' : '0',
-				'disabled' : t.disabled,
-				'justplay' : t.justplay,
-				'repeated' : t.repeated,
+		var parms = {
+			'sRef' : t.servicereference,
+			'begin' : t.begin,
+			'end' : t.end,
+			'name' : t.name,
+			'eventID' : t.eventId,
+			'description' : t.description,
+			'dirname' : t.dirname,
+			'tags' : t.tags,
+			'afterevent' : t.afterevent,
+			'eit' : '0',
+			'disabled' : t.disabled,
+			'justplay' : t.justplay,
+			'repeated' : t.repeated
+		};
+		
+		if(old){
+			Object.extend(parms, {
 				'channelOld' : old.servicereference,
 				'beginOld' : old.begin,
 				'endOld' : old.end,
-				'deleteOldOnSave' : '1'
-			},
+				'deleteOldOnSave' : old.deleteOldOnSave
+			});
+		} else {
+			parms['deleteOldOnSave'] = 0;
+		}
+		
+		this.provider.simpleResultQuery(
+			URL.timerchange,
+			parms,
 			this.simpleResultCallback.bind(this)
 		);
 	},
@@ -727,7 +739,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	},
 	
 	toggleDisabled: function(element){
-		var t = this.getData(element);
+		var t = this.getData(element, true);
 		var old = t;
 		if(t.disabled == '0')
 			t.disabled = '1';
@@ -745,24 +757,16 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 **/
 	repeatedDaysList: function(num){
 		var days = [{id : 'mo', value : 1, txt : 'Mo', long : 'Monday'}, 
-		            {id : 'tu', value : 2, txt : 'Tu', long : 'Tuesday'},
-		            {id : 'we', value : 4, txt : 'We', long : 'Wednesday'},
-		            {id : 'th', value : 8, txt : 'Th', long : 'Thursday'},
-		            {id : 'fr', value : 16, txt : 'Fr', long : 'Friday'},
-		            {id : 'sa', value : 32, txt : 'Sa', long : 'Saturday'},
-		            {id : 'su', value : 64, txt : 'Su', long : 'Sunday'},
-		            {id : 'mf', value : 31, txt : 'Mo-Fr', long : 'Monday to Friday'},
-		            {id : 'ms', value : 127, txt : 'Mo-Su', long : 'Monday to Sunday'}
-		            ];
-		
-		
-		//check for special cases (Mo-Fr & Mo-Su)
-		if(num == 31){
-			days[7].checked = this.CHECKED;
-		} else if (num == 127){
-			days[8].checked == this.CHECKED;
-		}
-
+					{id : 'tu', value : 2, txt : 'Tu', long : 'Tuesday'},
+					{id : 'we', value : 4, txt : 'We', long : 'Wednesday'},
+					{id : 'th', value : 8, txt : 'Th', long : 'Thursday'},
+					{id : 'fr', value : 16, txt : 'Fr', long : 'Friday'},
+					{id : 'sa', value : 32, txt : 'Sa', long : 'Saturday'},
+					{id : 'su', value : 64, txt : 'Su', long : 'Sunday'},
+					{id : 'mf', value : 31, txt : 'Mo-Fr', long : 'Monday to Friday'},
+					{id : 'ms', value : 127, txt : 'Mo-Su', long : 'Monday to Sunday'}
+					];
+		var orgNum = num;
 		// num is the decimal value of the bitmask for checked days
 		for(var i = 0; i < days.length; i++){
 			days[i].checked = "";
@@ -774,6 +778,13 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 			
 			// shift one bit to the right
 			num = num >> 1;
+		}
+		
+		//check for special cases (Mo-Fr & Mo-Su)
+		if(orgNum == 31){
+			days[7].checked = this.CHECKED;
+		} else if (orgNum == 127){
+			days[8].checked = this.CHECKED;
 		}
 		
 		return days;
@@ -823,10 +834,11 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	/**
 	 * commitForm
 	 * 
-	 * Commit the Timer Form by serializing it and executing the request
+	 * Commit the Timer Form by serializing it, generating the correct paramteters and then executing the change Method
 	 * @id - id of the Form
 	 */
 	commitForm : function(id){
+		debug("TimerHandler.commitForm");
 		var values = $(id).serialize(true);
 		
 		var tags = [];
@@ -841,7 +853,9 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		var repeated = 0;
 		$$('.tEditRepeated').each(function(element){
 			if(element.checked){
-				repeated += Number(element.value);
+				if(element.value != 31 && element.value != 127){
+					repeated += Number(element.value);
+				}
 			}
 		});
 		
@@ -854,7 +868,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		sDate.setHours( $('shour').value );
 		sDate.setMinutes( $('smin').value );
 		sDate.setSeconds(0);
-		begin = Math.round(sDate.getTime() / 1000);
+		begin = Math.floor(sDate.getTime() / 1000);
 		
 		var endDate = $('edate').value.split('-');
 		var eDate = new Date();
@@ -862,13 +876,36 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		eDate.setHours( $('ehour').value );
 		eDate.setMinutes( $('emin').value );
 		eDate.setSeconds(0);
-		end = Math.round(eDate.getTime() / 1000);
+		end = Math.floor(eDate.getTime() / 1000);
 		
-		values['tags'] = tags.join(" ");
-		values['repeated'] = repeated;
-		values['begin'] = begin;
-		values['end'] = end;
-		debug(values);
+		timer = {
+			'servicereference' : decodeURIComponent(values.service),
+			'begin' : begin,
+			'end' : end,
+			'name' : values.name,
+			'eventId' : values.eventId,
+			'description' : values.description,
+			'dirname' : values.dirname,
+			'tags' : tags.join(" "),
+			'afterevent' : values.afterevent,
+			'eit' : 0,
+			'disabled' : values.disabled,
+			'justplay' : values.justplay,
+			'repeated' : repeated
+		};
+		var old = null;
+		if(values.deleteOldOnSave == "1"){
+			old = {
+				'servicereference' : decodeURIComponent(values.servicereferenceOld),
+				'begin' : values.beginOld,
+				'end' : values.endOld,
+				'deleteOldOnSave' : values.deleteOldOnSave
+			};
+		}
+		
+		debug(timer);
+		debug(old);
+		this.change(timer, old);
 	},
 	
 	/**
