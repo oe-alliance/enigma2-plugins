@@ -304,11 +304,14 @@ var MediaPlayerProvider = Class.create(AbstractContentProvider, {
 		var files = new FileList(xml).getArray();
 		debug("[MediaPlayerProvider].renderXML :: " + files.length + " entries in mediaplayer filelist");
 
-		var mp = {};
+		var mp = { 'hasparent' : false};
 
 		var root = files[0].getRoot();
-		if (root != "playlist") {
-			mp = {'root': root};
+		if (root != "playlist" && root != '') {
+			mp = {
+					'root': root,
+					'hasparent' : false
+			};
 			if(root != '/') {
 				var re = new RegExp(/(.*)\/(.*)\/$/);
 				re.exec(root);
@@ -317,10 +320,12 @@ var MediaPlayerProvider = Class.create(AbstractContentProvider, {
 					newroot = '/';
 				}
 				mp = {
+						'hasparent' : true,
 						'root': root,
-						'servicereference': newroot,
+						'servicereference': encodeURIComponent(newroot),
 						'name': '..'
-				};	
+				};
+				files.shift();
 			}
 		}
 
@@ -329,15 +334,16 @@ var MediaPlayerProvider = Class.create(AbstractContentProvider, {
 			if(file.getNameOnly() == '') {
 				return;
 			}
-			var isdir = 'true';
+			
+			var isdir = true;
 
 			if (file.getIsDirectory() == "False") {
-				isdir = 'false';
+				isdir = false;
 			}
 
 			items.push({
 					'isdir' : isdir,
-					'servicereference': file.getServiceReference(),
+					'servicereference': encodeURIComponent(file.getServiceReference()),
 					'root': file.getRoot(),
 					'name': file.getNameOnly()
 			});

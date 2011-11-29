@@ -344,7 +344,43 @@ var MediaPlayerHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplMediaPlayer', target);
 		this.provider = new MediaPlayerProvider(this.show.bind(this));
+	},
+	
+	command: function(command){
+		this.provider.simpleResultQuery(
+				URL.mediaplayercmd, 
+				{'command' : command},
+				this.simpleResultCallback.bind(this)
+			);
+	},
+	
+	playFile: function(file){
+		this.provider.simpleResultQuery(
+				URL.mediaplayerplay, 
+				{'file' : file},
+				this.simpleResultCallback.bind(this)
+			);
+	},
+	
+	removeFile: function(file){
+		this.provider.simpleResultQuery(
+				URL.mediaplayerremove, 
+				{'file' : file},
+				function(data){
+					this.simpleResultCallback(data);
+					this.reload();
+				}.bind(this)
+			);
+	},
+	
+	savePlaylist: function(filename){
+		this.provider.simpleResultQuery(
+				URL.mediaplayerwrite, 
+				{'filename' : filename},
+				this.simpleResultCallback.bind(this)
+			);
 	}
+	
 });
 
 var MovieListHandler  = Class.create(AbstractContentHandler, {

@@ -408,12 +408,28 @@ var MediaPlayer = Class.create(Controller, {
 		$super(new MediaPlayerHandler(target));
 	},
 
-	load: function(directory){
-		if(!directory){
-			directory = 'Filesystems';
+	load: function(path){
+		if(!path){
+			path = 'Filesystems';
 		}
-		var parms = {'directory' : directory};
+		var parms = {'path' : path};
 		this.model.load(parms);
+	},
+	
+	playFile: function(file){
+		this.model.playFile(file);
+	},
+	
+	removeFile: function(file){
+		this.model.removeFile(file);
+	},
+	
+	savePlaylist: function(filename){
+		this.model.savePlaylist(filename);
+	},
+	
+	command: function(cmd){
+		this.model.command(cmd);
 	}
 });
 
@@ -1060,6 +1076,10 @@ var E2WebCore = Class.create({
 						var location = decodeURIComponent(parts[3]);
 						this.currentLocation = location;
 						this.movies.load(decodeURIComponent(parts[3]), decodeURIComponent(parts[4]));
+					case 'extras':
+						if(subMode == 'mediaplayer'){
+							this.mediaplayer.load(decodeURIComponent(parts[3]));
+						}
 					default:
 						return;
 					}
@@ -1117,7 +1137,7 @@ var E2WebCore = Class.create({
 			this.loadDefault();
 		}
 		this.updateItems();
-		this.startUpdateCurrentPoller();		
+		this.startUpdateCurrentPoller();
 	},
 	
 	registerEvents: function(){
@@ -1216,7 +1236,6 @@ var E2WebCore = Class.create({
 				hashListener.setHash(hash);
 			}.bind(this)
 		);
-		
 		nav.on(
 			'change',
 			'.mNavTags',
@@ -1245,6 +1264,44 @@ var E2WebCore = Class.create({
 		
 		//Content
 		var content = $('contentMain');
+		//MediaPlayer
+		content.on(
+			'click',
+			'.mpCmd',
+			function(event, element){
+				this.mediaplayer.command(element.readAttribute('data-command'));
+			}.bind(this)
+		);
+		content.on(
+			'click',
+			'.mpPlayFile',
+			function(event, element){
+				element.href = '#'; //FIXME
+				var parent = element.up('.mpListItem');
+				var ref = decodeURIComponent( parent.readAttribute('data-servicereference') );
+				this.mediaplayer.playFile(ref);
+			}.bind(this)
+		);
+		content.on(
+			'click',
+			'.mpRemoveFile',
+			function(event, element){
+				element.href = '#'; //FIXME
+				var parent = element.up('.mpListItem');
+				var ref = decodeURIComponent( parent.readAttribute('data-servicereference') );
+				this.mediaplayer.removeFile(ref);
+			}.bind(this)
+		);
+		content.on(
+				'click',
+				'.mpSavePlaylist',
+				function(event, element){
+					var filename = prompt('Please enter a filename for the playlist', 'playlist');
+					if(filename != null && filename != ""){
+						this.mediaplayer.savePlaylist(filename);
+					}
+				}.bind(this)
+			);
 		//Message
 		content.on(
 			'click',

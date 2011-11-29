@@ -375,17 +375,15 @@
 		display: inline-block;
 		margin: 0px;
 		border: 1px solid #485052;
-		width: 60px;
-		height: 12px;
+		width: 50px;
+		height: 10px;
+		padding: 1px;
 	}
 	
 	.sListSProgressBar{
 		display: inline-block;
-		margin: 0px;
-		font-size: 10px;
-		text-align: center;
-		background-color: #AACCFF;
-		font-size: 10px;
+		margin: 0;
+		background-color: #00C6ED;
 		width: 0%;
 		height: 100%;
 	}
