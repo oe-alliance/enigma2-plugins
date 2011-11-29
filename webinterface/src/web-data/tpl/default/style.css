@@ -374,7 +374,7 @@
 	.sListSProgress{
 		display: inline-block;
 		margin: 0px;
-		border: 1px solid #ccc;
+		border: 1px solid #485052;
 		width: 60px;
 		height: 12px;
 	}
@@ -384,7 +384,7 @@
 		margin: 0px;
 		font-size: 10px;
 		text-align: center;
-		background-color: #485052;
+		background-color: #AACCFF;
 		font-size: 10px;
 		width: 0%;
 		height: 100%;
