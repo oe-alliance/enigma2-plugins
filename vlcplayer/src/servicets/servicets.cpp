@@ -633,8 +633,8 @@ bool eStreamThread::scanAudioInfo(unsigned char buf[], int len)
 }
 
 void eStreamThread::thread() {
-	const int bufsize = 40000;
-	unsigned char buf[bufsize];
+	const int bufsize = 50*1024;
+	unsigned char *buf = (unsigned char *)malloc(bufsize);
 	bool eof = false;
 	fd_set rfds;
 	fd_set wfds;
@@ -643,6 +643,12 @@ void eStreamThread::thread() {
 	time_t next_scantime = 0;
 	bool sosSend = false;
 	m_running = true;
+
+	if(buf == NULL)
+	{
+		eDebug("eStreamThread::thread: failed to allocate buffer, aborting!");
+		m_stop = true;
+	}
 
 	r = w = 0;
 	hasStarted();
@@ -712,6 +718,7 @@ void eStreamThread::thread() {
 			break;
 		}
 	}
+	free(buf);
 	eDebug("eStreamThread end");
 }
 
