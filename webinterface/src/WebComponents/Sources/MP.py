@@ -97,12 +97,12 @@ class MP(Source):
 			matchingPattern = param["types"]
 
 		path = param["path"]
-		if path != None:
+		if path is not None:
 			if path.lower() == "filesystems":
 				path = None
-		elif path is not None and not os_path.isdir(path):
-			# TODO: returning something is better than just dying but is this return sane?
-			return ((None, True, path),)
+			elif not os_path.isdir(path):
+				# TODO: returning something is better than just dying but is this return sane?
+				return ((None, True, path),)
 
 		filelist = FileList(path, showDirectories=True, showFiles=True, matchingPattern=matchingPattern, useServiceRef=useServiceRef, isTop=False)
 		list = filelist.getFileList()
