@@ -83,7 +83,12 @@ class MP(Source):
 			else:
 				return (("empty", True, "playlist"),)
 
-		matchingPattern = "(?i)^.*\.(mp2|mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob|avi|divx|m4v|mkv|mp4|m4a|dat|flac|mov|m2ts)" #MediaPlayer-Match
+		# try to extract current pattern from media player and use it over our hardcoded one as default
+		try:
+			matchingPattern = mp.filelist.matchingPattern
+		except Exception:
+			matchingPattern = "(?i)^.*\.(mp2|mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob|avi|divx|m4v|mkv|mp4|m4a|dat|flac|mov|m2ts)" #MediaPlayer-Match
+
 		useServiceRef = False
 		if param["types"] == "audio":
 			matchingPattern = "(?i)^.*\.(mp3|ogg|wav|wave|m3u|pls|e2pls)"
