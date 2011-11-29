@@ -118,12 +118,32 @@
 						</a></td>
 					</tr>
 					<tr>
-						<td><a id="doInstantRecord" href="#" onClick="recordNowPopup()">
-							<img  id="doInstantRecordImg" border="0" src="/web-data/img/clock_red.png" alt="R" title="Instant Record">
-						</a></td>
+						<td><a id="instantRecord" href="#">
+								<img  id="instantRecordImg" border="0" src="/web-data/img/clock_red.png" alt="R" title="Instant Record">
+							</a>
+						</td>
 						
 					</tr>
-				</table>			
+				</table>
+				<div id="instantRecordMenu" style="display: none;">
+					<table>
+						<tr>
+							<th>Instant record</th>
+						</tr>
+						<tr>
+							<td><button class="doInstantRecord" data-type="current">Record current event</button></td>
+						</tr>
+						<!-- 
+						<tr>
+							<td><button class="doInstantRecord" data-type="minutes">Record for (minutes)</button></td>
+						</tr>
+						 -->
+						<tr>
+							<td><button class="doInstantRecord" data-type="infinite">Start infinite recording</button></td>
+						</tr>
+					</table>
+					
+				</div>
 			</div>
 		</div>
 		<div id="current">

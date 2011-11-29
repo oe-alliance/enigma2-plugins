@@ -798,6 +798,9 @@ var Timers = Class.create({
 		});
 	},
 
+	recordNow: function(type, callback){
+		this.timerHandler.recordNow(type, callback);
+	},
 	
 	addByEventId: function(element, justplay){
 		var parent = element.up('.epgListItem');
@@ -1143,7 +1146,7 @@ var E2WebCore = Class.create({
 	registerEvents: function(){
 		debug("[E2WebCore].registerEvents");
 		//Hash-Reload-Fix
-		//HACK THIS IS EVIL VOODOO, DON'T TRY THIS AT HOME!
+		//HACK :: THIS IS EVIL VOODOO, DON'T TRY THIS AT HOME!
 		document.on(
 			'click',
 			'a',
@@ -1167,6 +1170,33 @@ var E2WebCore = Class.create({
 						return false;
 					}
 				}
+			}.bind(this)
+		);
+		//Header
+		$('instantRecord').on(
+			'click',
+			function(event, element){
+				//FIXME
+				$('instantRecord').href = '#';
+				var menu = $('instantRecordMenu');
+				if(menu.visible()){
+					menu.hide();
+				} else {
+					menu.show();
+				}
+			}
+		);
+		document.on(
+			'click',
+			'.doInstantRecord',
+			function(event, element){
+				var menu = $('instantRecordMenu');
+				this.timers.recordNow(
+					element.readAttribute('data-type'),
+					function(result){
+						menu.hide();
+					}
+				);
 			}.bind(this)
 		);
 		//Current

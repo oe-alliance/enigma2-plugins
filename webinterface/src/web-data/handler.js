@@ -528,9 +528,21 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		this.data = {};
 	},
 	
-	showSimpleResult: function(result){
-		this.notify(result.getStateText(), result.getState());
-		if(this.reloadCallback){
+	simpleResultCallback: function(transport, callback){
+		this.provider.simpleResultCallback(
+				transport, 
+				function(result){
+					this.showSimpleResult(result, callback);
+				}.bind(this)
+			);
+	},
+	
+	showSimpleResult: function($super, result, callback){
+		$super(result);
+		if(callback){
+			callback(result);
+			return;
+		} else if(this.reloadCallback){
 			this.reloadCallback();
 		}
 	},
@@ -717,6 +729,21 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		var prov = new SimpleServiceListProvider(fnc);
 		prov.load({'sRef' : bRef});
 	},
+	
+	recordNow: function(type, callback){
+		this.provider.simpleResultQuery(
+			URL.recordnow,
+			{
+				'recordnow' : type,
+			},
+			function(result){
+				if(!callback)
+					callback = function(){}; //Avoid automatic reload
+				this.simpleResultCallback(result, callback);
+			}.bind(this));
+	},
+	
+	
 	
 	addByEventId: function(sRef, id, justplay){
 		this.provider.simpleResultQuery(
