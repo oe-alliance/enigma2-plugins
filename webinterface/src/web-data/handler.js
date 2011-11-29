@@ -753,7 +753,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		this.provider.simpleResultQuery(
 			URL.recordnow,
 			{
-				'recordnow' : type,
+				'recordnow' : type
 			},
 			function(result){
 				if(!callback)
@@ -761,8 +761,6 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				this.simpleResultCallback(result, callback);
 			}.bind(this));
 	},
-	
-	
 	
 	addByEventId: function(sRef, id, justplay){
 		this.provider.simpleResultQuery(
