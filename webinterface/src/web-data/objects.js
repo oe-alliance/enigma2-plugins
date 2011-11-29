@@ -1133,11 +1133,32 @@ var Vol = Class.create({
 
 var Powerstate = Class.create({
 	initialize: function(xml){
-		this.instandby = xml.getElementsByTagName("e2instandby").item(0).firstChild.data.strip() == "true";
+		this.instandby = getNodeContent("e2instandby").strip() == "true";
 	},
 	
 	isStandby: function(){
 		return this.instandby;
 	}
+});
+
+var Signal = Class.create({
+	initialize: function(xml){
+		this.snrdb = getNodeContent(xml, 'e2snrdb');
+		this.snr = getNodeContent(xml, 'e2snr');
+		this.ber = getNodeContent(xml, 'e2ber');
+		this.acg = getNodeContent(xml, 'e2acg');
+		
+		this.json = {
+			'snrdb' : this.snrdb,
+			'snr' : this.snr,
+			'ber' : this.ber,
+			'acg' : this.acg
+		};
+	},
+	
+	toJSON: function(){
+		return this.json;
+	}
+
 });
 //END class Volume

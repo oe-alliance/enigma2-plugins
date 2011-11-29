@@ -561,6 +561,17 @@ var ScreenshotProvider = Class.create(AbstractContentProvider, {
 	}	
 });
 
+var SignalProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.signal, showFnc);
+	},
+	
+	renderXML: function(xml){
+		var signal = new Signal(xml).toJSON();
+		return {'signal' : signal};
+	}
+});
+
 var TimerListProvider = Class.create(AbstractContentProvider, {
 	/**
 	 * initialize

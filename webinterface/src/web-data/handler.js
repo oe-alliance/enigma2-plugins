@@ -340,6 +340,25 @@ var ServiceListSubserviceHandler  = Class.create(AbstractContentHandler, {
 	}
 });
 
+var SignalHandler = Class.create(AbstractContentHandler,{
+	initialize: function($super, showSignalFnc){
+		$super('tplSignalPanel');
+		this.provider = new SignalProvider(this.show.bind(this));
+		this.showSignal = showSignalFnc;
+	},
+	
+	show : function(data){
+		this.data = data;		
+		templateEngine.fetch(
+				this.tpl, 
+				function(){
+					var html = templateEngine.templates[this.tpl].process(this.data);
+					this.showSignal(html);
+				}.bind(this) 
+			);		
+	}
+});
+
 var MediaPlayerHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplMediaPlayer', target);

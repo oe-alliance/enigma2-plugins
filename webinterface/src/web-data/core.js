@@ -187,11 +187,8 @@ var EPG = Class.create(Controller, {
 	},
 	
 	show:function(html){
-		if (this.window.closed || !this.window.location){
-			this.eventsregistered = false;
-			this.window = core.popup("EPG", html, 900, 500);
-			this.doRegisterEvents();
-		}
+		var win = core.popup("EPG" + new Date().getTime(), html, 900, 500);
+		this.doRegisterEvents(win);
 	},
 	
 	load: function(sRef){
@@ -199,47 +196,41 @@ var EPG = Class.create(Controller, {
 	},
 
 	search: function(needle){
-		this.initWindow();
 		this.model.search({'search' : needle});
 	},
 	
-	doRegisterEvents: function(){
-		if(!this.eventsregistered){
-			this.eventsregistered = true;				
-			var win = this.window;
-			var elem = win.document;
-			var onload = function(event){
-				elem.on(
-					'click',
-					'.eListAddTimer',
-					function(event, element){
-						core.timers.addByEventId(element, 0);
-						return false;
-					}
-				);
-				elem.on(
-					'click',
-					'.eListZapTimer',
-					function(event, element){
-						core.timers.addByEventId(element, 1);
-						return false;
-					}
-				);
-				elem.on(
-					'click',
-					'.eListEditTimer',
-					function(event, element){
-						debug('eListEditTimer');
-						return false;
-					}
-				);
-			};
-			if(elem.on){
-				onload();
-			} else {
-				win.onload = onload;
-			}
-			
+	doRegisterEvents: function(win){
+		var elem = win.document;
+		var onload = function(event){
+			elem.on(
+				'click',
+				'.eListAddTimer',
+				function(event, element){
+					core.timers.addByEventId(element, 0);
+					return false;
+				}
+			);
+			elem.on(
+				'click',
+				'.eListZapTimer',
+				function(event, element){
+					core.timers.addByEventId(element, 1);
+					return false;
+				}
+			);
+			elem.on(
+				'click',
+				'.eListEditTimer',
+				function(event, element){
+					debug('eListEditTimer');
+					return false;
+				}
+			);
+		};
+		if(elem.on){
+			onload();
+		} else {
+			win.onload = onload;
 		}
 	}
 });
@@ -684,6 +675,49 @@ var Services = Class.create(Controller, {
 	}
 });
 
+var SignalWindow = Class.create(Controller, {
+	initialize: function($super, seconds){
+		$super(new SignalHandler(this.show.bind(this)));
+		this.window = '';
+		if(!isNaN(Number(seconds))){
+			this.seconds = seconds * 1000;
+		} else {
+			this.seconds = 5000;
+		} 
+		this.interval = '';
+	},
+	
+	load: function(){
+		this.model.load({});
+	},
+	
+	reload: function(){
+		debug('[SignalWindow].reload');
+		if (!this.window.closed && this.window.location){
+			this.load();
+		} else {
+			clearInterval(this.interval);
+		}
+	},
+
+	show: function(html){
+		debug('[SignalWindow].show');
+		if (this.window.closed || !this.window.location){
+			this.window = core.popup("SignalPanel", html, 220, 120);
+			this.window.onbeforeunload = function(){
+				clearInterval(this.interval);
+			};
+			
+			var _this = this;
+			clearInterval(_this.interval);
+			this.interval = setInterval(_this.reload.bind(this), _this.seconds);
+		} else if(!this.window.closed && this.window.location) {
+			this.window.document.write(html);
+			this.window.document.close();
+		}
+	}
+});
+
 var SimplePages = Class.create({
 	PAGE_ABOUT : 'tplAbout',
 	PAGE_GEARS : 'tplGears',
@@ -896,8 +930,9 @@ var E2WebCore = Class.create({
 		this.movies = new Movies('contentMain', 'navContent');
 		this.power = new Power();
 		this.remote = new RemoteControl();
-		this.services = new Services('contentServices', this.epg);
 		this.screenshots = new Screenshots('contentMain');
+		this.services = new Services('contentServices', this.epg);
+		this.signal = new SignalWindow(3);
 		this.simplepages = new SimplePages('contentMain');
 		this.timers = new Timers('contentMain');
 		this.volume = new Volume('volContent');
@@ -1173,6 +1208,15 @@ var E2WebCore = Class.create({
 			}.bind(this)
 		);
 		//Header
+		
+		$('openSignalPanel').on(
+			'click',
+			function(event, element){
+				//FIXME
+				$('openSignalPanel').href = '#';
+				this.signal.load();
+			}.bind(this)
+		);
 		$('instantRecord').on(
 			'click',
 			function(event, element){
@@ -1384,7 +1428,7 @@ var E2WebCore = Class.create({
 			function(event, element){
 				//FIXME
 				element.href = '#';
-				var ref = unescape( element.readAttribute('data-servicereference') );
+				var ref = decodeURIComponent( element.id );
 				this.services.zap(ref);
 				return false;
 			}.bind(this)
