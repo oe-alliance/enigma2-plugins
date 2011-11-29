@@ -26,7 +26,7 @@ from . import _
 
 
 NUM_EPG_TABS = 5 # 0 based
-NUM_CONFIG_TABS = 2 # 0 based
+NUM_CONFIG_TABS = 3 # 0 based
 
 STYLE_SINGLE_LINE = "0"
 STYLE_SHORT_DESCRIPTION = "1"
@@ -41,7 +41,7 @@ LIST_MODE_TIMER = 0
 LIST_MODE_AUTOTIMER = 1
 
 TAB_TEXT_EPGLIST = (_("Now"), _("Upcoming"), _("Single"), _("Prime Time"), _("Timer"), _("Search"))
-TAB_TEXT_CONFIGLIST = [_("General"), _("Lists"), _("Event Info"), "", "", ""]
+TAB_TEXT_CONFIGLIST = [_("General"), _("Lists"), _("Event Info"), _("Keys"), "", ""]
 	
 # PYTHON IMPORTS
 from time import localtime, strftime, mktime, time
@@ -59,7 +59,9 @@ from Components.ProgressBar import ProgressBar
 from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath
 from Components.VideoWindow import VideoWindow
+from Components.VolumeBar import VolumeBar
 from enigma import eServiceReference, eServiceCenter, eEPGCache, getDesktop, eSize, eTimer, fontRenderClass, ePoint, gFont
+from GlobalActions import globalActionMap
 from math import fabs
 import NavigationInstance
 from RecordTimer import AFTEREVENT, RecordTimerEntry
@@ -74,11 +76,12 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_HDD
 from Tools.LoadPixmap import LoadPixmap
 
 # OWN IMPORTS
-from ConfigTabs import KEEP_OUTDATED_TIME, ConfigBaseTab, ConfigGeneral, ConfigListSettings, ConfigEventInfo, SKINDIR, SKINLIST, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP, STYLE_PERCENT_TEXT
+from Components.VolumeControl import VolumeControl
+from ConfigTabs import KEEP_OUTDATED_TIME, ConfigBaseTab, ConfigGeneral, ConfigListSettings, ConfigEventInfo, ConfigKeys, SKINDIR, SKINLIST, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP, STYLE_PERCENT_TEXT
 from EpgActions import MerlinEPGActions
 from EpgCenterList import EpgCenterList, EpgCenterTimerlist, MODE_HD, MODE_XD, MODE_SD, MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_PRIMETIME, TIMERLIST, EPGSEARCH_HISTORY, EPGSEARCH_RESULT, EPGSEARCH_MANUAL, UPCOMING
 from EpgTabs import EpgBaseTab, EpgNowTab, EpgNextTab, EpgSingleTab, EpgPrimeTimeTab, EpgTimerListTab, EpgSearchHistoryTab, EpgSearchManualTab, EpgSearchResultTab
-from HelperFunctions import PiconLoader, findDefaultPicon, ResizeScrollLabel, BlinkTimer, LIST_TYPE_EPG, LIST_TYPE_UPCOMING, RecTimerEntry, TimerListObject
+from HelperFunctions import PiconLoader, findDefaultPicon, ResizeScrollLabel, BlinkTimer, LIST_TYPE_EPG, LIST_TYPE_UPCOMING, RecTimerEntry, TimerListObject, EmbeddedVolumeControl
 from SkinFinder import SkinFinder
 
 # check for Autotimer support
@@ -96,8 +99,14 @@ try:
 except ImportError:
 	AUTOTIMER = False
 
+# check for IMDb support
+try:
+	from Plugins.Extensions.IMDb.plugin import IMDB
+	IMDB_INSTALLED = True
+except ImportError:
+	IMDB_INSTALLED = False
 
-class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
+class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 	(skinFile, skinList) = SkinFinder.getSkinData(SKINLIST, SKINDIR, config.plugins.merlinEpgCenter.skin.value)
 	if skinFile is not None:
 		if config.plugins.merlinEpgCenter.skin.value != skinFile:
@@ -121,15 +130,22 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 	ADD_TIMER = 3
 	REMOVE_TIMER = 4
 
-	def __init__(self, session, servicelist, currentBouquet, bouquetList, currentIndex, startWithTab = None):
+	def __init__(self, session, servicelist, currentBouquet, bouquetList, currentIndex, startTab = None, doSearch = False):
 		Screen.__init__(self, session)
+		MerlinEPGActions.__init__(self) # note: this overwrites TimerEditList.["actions"]
+		EmbeddedVolumeControl.__init__(self)
 		
 		self.session = session
 		self.servicelist = servicelist
 		self.currentBouquet = currentBouquet # eServiceReference of the current bouquet
 		self.currentBouquetIndex = currentIndex # current bouquet index from InfoBar
 		self.bouquetList = bouquetList # a list of tuples of all bouquets (Name, eServicereference)
-		self.startWithTab = startWithTab
+		self.startTab = startTab
+		self.doSearch = doSearch
+		
+		from Screens.InfoBar import InfoBar
+		self.infoBarInstance = InfoBar.instance
+		self.epgcache = eEPGCache.getInstance()
 		
 		self.piconLoader = PiconLoader()
 		self.piconSize = eSize(50,30)
@@ -169,6 +185,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self["tabbar"] = MultiPixmap()
 		self["tabBackground"] = Pixmap()
 		self["upcoming"] = EpgCenterList(self.blinkTimer, LIST_TYPE_UPCOMING, self.videoMode, self.piconLoader, bouquetList, currentIndex, self.piconSize, self.listStyle, self.epgList)
+		self["upcoming"].mode = UPCOMING
 		self["upcomingSeparator"] = Pixmap()
 		self["list"] = EpgCenterList(self.blinkTimer, LIST_TYPE_EPG, self.videoMode, self.piconLoader, bouquetList, currentIndex, self.piconSize, self.listStyle, self.epgList)
 		self["timerlist"] = EpgCenterTimerlist(list, self.videoMode, self.piconLoader, self.piconSize, self.listStyle)
@@ -188,6 +205,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self["description"] = Label("")
 		self["bouquet"] = Label("")
 		self["videoPicture"] = VideoWindow(decoder = 0, fb_width = self.desktopSize.width(), fb_height = self.desktopSize.height())
+		self["volume"] = VolumeBar()
+		self["mute"] = Pixmap()
 		
 		self.historyList = config.plugins.merlinEpgCenter.searchHistory.value
 		self["history"] = MenuList(self.historyList)
@@ -207,25 +226,32 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		
 		self.initTabLabels(TAB_TEXT_EPGLIST)
 		
+		self.getPrimeTime()
+		self.initEpgBaseTab()
+		
+		if config.plugins.merlinEpgCenter.selectRunningService.value:
+			self.selectRunningService = True
+		else:
+			self.selectRunningService = False
+			
+		self.lastMultiEpgIndex = None
+		self.showOutdated = False
+		self.hideOutdated = False
+		self.numNextEvents = None
+		self.configTabsShown = False
+		self.configEditMode = False
+		self.oldMode = None
+		self.currentMode = None
+		
 		self.onLayoutFinish.append(self.startRun)
 		
 	############################################################################################
 	# INITIALISATION & CLEANUP
 	
 	def startRun(self):
-		MerlinEPGActions.__init__(self) # note: this overwrites TimerEditList.["actions"]
-		
-		self.getPrimeTime()
-		self.initEpgBaseTab()
-		
-		from Screens.InfoBar import InfoBar
-		self.infoBarInstance = InfoBar.instance
-		self.hideWidgets()
-		self["upcoming"].mode = UPCOMING
 		self.getWidgetSizes()
 		self.searchField.help_window.hide()
-		
-		self.epgcache = eEPGCache.getInstance()
+		self.hideWidgets()
 		
 		# store the current minute for list refreshs
 		t = localtime(time())
@@ -257,14 +283,11 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self["list"].onSelectionChanged.append(self.onListSelectionChanged)
 		self["timerlist"].onSelectionChanged.append(self.onListSelectionChanged)
 		
-		# set tab captions
-		self.configTabsShown = False
-		self.configEditMode = False
-		
 		self.configTabObjectList = []
 		self.configTabObjectList.append(ConfigGeneral())
 		self.configTabObjectList.append(ConfigListSettings())
 		self.configTabObjectList.append(ConfigEventInfo())
+		self.configTabObjectList.append(ConfigKeys())
 		
 		# similar events
 		self.similarTimer = eTimer()
@@ -272,36 +295,94 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self.similarTimer.callback.append(self.getUpcomingEvents)
 		self.similarShown = False
 		
-		# initialize
-		if self.startWithTab is not None:
-			self.currentMode = self.startWithTab
+		searchFieldPos = self["search"].getPosition()
+		self["search"].getCurrent()[1].help_window.instance.move(ePoint(searchFieldPos[0], searchFieldPos[1] + 40))
+		
+		self.setStartTab(self.startTab, self.doSearch)
+		self.setBouquetName()
+		
+		self.savedVolUp = None
+		self.savedVolDown = None
+		self.savedVolMute = None
+		self.savedMuteDialog = None
+		
+		self.setNotifier()
+		
+	def suspend(self):
+		self.suspendedInMode = self.infoBarInstance.servicelist.mode
+		self.session.nav.RecordTimer.on_state_change.remove(self.onStateChange)
+		self.clockTimer.callback.remove(self.checkTimeChange)
+		# reset the timer tab to Timer
+		if self.timerListMode == LIST_MODE_AUTOTIMER:
+			self.timerListMode = LIST_MODE_TIMER
+			self["tab_text_%d" % TIMERLIST].setText(_("Timer"))
+			
+		if config.plugins.merlinEpgCenter.embeddedVolume.value:
+			self.unsetVolumeControl()
+			self.savedMuteDialog = VolumeControl.instance.muteDialog
+			if self.getIsMuted():
+				self.savedMuteDialog.show()
+				
+		if self.blinkTimer.getIsRunning():
+			self["isRecording"].hide()
+			
+		self.blinkTimer.suspend()
+		if config.plugins.merlinEpgCenter.rememberLastTab.value:
+			if self.currentMode > NUM_EPG_TABS:
+				config.plugins.merlinEpgCenter.lastUsedTab.value = NUM_EPG_TABS
+				
+			else:
+				config.plugins.merlinEpgCenter.lastUsedTab.value = self.currentMode
+		config.plugins.merlinEpgCenter.save()
+			
+	def resume(self):
+		# reset the tab text color of the last tab before suspending
+		lastTab = config.plugins.merlinEpgCenter.rememberLastTab.value
+		self["tab_text_%d" % lastTab].instance.setForegroundColor(parseColor("#ffffff")) # inactive
+		
+		# reread bouquet information if TV or radio mode was changed while we were suspended
+		if self.suspendedInMode is not self.infoBarInstance.servicelist.mode:
+			self.updateBouquets()
+			
+		if config.plugins.merlinEpgCenter.embeddedVolume.value:
+			VolumeControl.instance.muteDialog = self.savedMuteDialog
+			self.setVolumeControl()
+			self.setMutePixmap()
+			if self.getIsMuted():
+				self.savedMuteDialog.hide()
+			
+		self.session.nav.RecordTimer.on_state_change.append(self.onStateChange)
+		self.clockTimer.callback.append(self.checkTimeChange)
+		self.checkTimeChange()
+		self.blinkTimer.resume()
+		
+	############################################################################################
+	# TAB STUFF
+	
+	def setStartTab(self, startTab, doSearch):
+		if doSearch:
+			lastUsedTab = config.plugins.merlinEpgCenter.lastUsedTab.value
+			self["tab_text_%d" % lastUsedTab].instance.setForegroundColor(parseColor("#ffffff")) # inactive
+			self.oldMode = EPGSEARCH_HISTORY
+			self.currentMode = EPGSEARCH_HISTORY
+			self.epgTabObjectList[self.oldMode].hide()
+			self.epgTabObjectList[self.currentMode].show()
+			
+		if startTab is not None:
+			if self.currentMode != startTab:
+				self.oldMode = self.currentMode
+				self.currentMode = startTab
 		else:
 			if config.plugins.merlinEpgCenter.rememberLastTab.value:
 				self.currentMode = config.plugins.merlinEpgCenter.lastUsedTab.value
 			else:
 				self.currentMode = 0
-				
-		self.oldMode = None
+		self.setMode(doSearch = doSearch)
+		
+		if config.plugins.merlinEpgCenter.selectRunningService.value and (self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME):
+			self.setSelectionToRunningService()
+			self.setBouquetName()
 			
-		if config.plugins.merlinEpgCenter.selectRunningService.value:
-			self.selectRunningService = True
-		else:
-			self.selectRunningService = False
-			
-		self.lastMultiEpgIndex = None
-		self.showOutdated = False
-		self.hideOutdated = False
-		self.numNextEvents = None
-		
-		searchFieldPos = self["search"].getPosition()
-		self["search"].getCurrent()[1].help_window.instance.move(ePoint(searchFieldPos[0], searchFieldPos[1] + 40))
-		
-		self.setMode()
-		self.setBouquetName()
-		
-		self.setNotifier()
-		self.onClose.append(self.removeNotifier)
-				
 	def initEpgBaseTab(self):
 		# set ourself, the action map and prime time
 		EpgBaseTab.parentInstance	= self
@@ -321,9 +402,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		EpgBaseTab.parentInstance	= None
 		EpgBaseTab.primeTime		= None
 		
-	############################################################################################
-	# TAB STUFF
-	
 	def initTabLabels(self, tabList):
 		i = 0
 		while i <= NUM_EPG_TABS:
@@ -341,6 +419,58 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self["tab_text_%d" % i].setText(tabList[i])
 			i += 1
 			
+	def setTabs(self):
+		if self.configTabsShown:
+			numTabs = NUM_CONFIG_TABS
+		else:
+			numTabs = NUM_EPG_TABS
+			
+		# set tab text color
+		if self.currentMode > numTabs:
+			self["tabbar"].setPixmapNum(numTabs) # last tab
+		else:
+			self["tabbar"].setPixmapNum(self.currentMode)
+			
+		if self.oldMode != None:
+			if self.oldMode >= numTabs:
+				self["tab_text_%d" % numTabs].instance.setForegroundColor(parseColor("#ffffff")) # inactive
+			else:
+				self["tab_text_%d" % self.oldMode].instance.setForegroundColor(parseColor("#ffffff")) # inactive
+				
+		if self.currentMode >= numTabs:
+			self["tab_text_%d" % numTabs].instance.setForegroundColor(parseColor("#ef7f1a")) # active
+		else:
+			self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor("#ef7f1a")) # active
+			
+	############################################################################################
+	# VOLUME CONTROL
+	
+	def toggleEmbeddedVolume(self, configElement = None):
+		if configElement.value:
+			self.setVolumeControl()
+		else:
+			self.unsetVolumeControl()
+			
+		self.setMutePixmap()
+		
+	def setVolumeControl(self):
+		global globalActionMap
+		self.savedVolUp = globalActionMap.actions["volumeUp"]
+		self.savedVolDown = globalActionMap.actions["volumeDown"]
+		self.savedVolMute = globalActionMap.actions["volumeMute"]
+		globalActionMap.actions["volumeUp"] = self.volUp
+		globalActionMap.actions["volumeDown"] = self.volDown
+		globalActionMap.actions["volumeMute"] = self.volMute
+		self.setMutePixmap()
+		
+	def unsetVolumeControl(self):
+		if self.savedVolUp == None:
+			return
+		global globalActionMap
+		globalActionMap.actions["volumeUp"] = self.savedVolUp
+		globalActionMap.actions["volumeDown"] = self.savedVolDown
+		globalActionMap.actions["volumeMute"] = self.savedVolMute
+		
 	############################################################################################
 	# MISC FUNCTIONS
 	
@@ -457,6 +587,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self["eventProgressImage"].hide()
 		self["eventProgressText"].hide()
 		self["isRecording"].hide()
+		self["volume"].hide()
+		self["mute"].hide()
 		
 	# get some widget sizes
 	def getWidgetSizes(self):
@@ -581,13 +713,11 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		config.plugins.merlinEpgCenter.listItemHeight.addNotifier(self.setUpcomingWidgets, initial_call = False)
 		config.plugins.merlinEpgCenter.listProgressStyle.addNotifier(self.setProgressbarStyle, initial_call = True)
 		config.plugins.merlinEpgCenter.adjustFontSize.addNotifier(self.setFontSizes, initial_call = True)
-		
+		config.plugins.merlinEpgCenter.embeddedVolume.addNotifier(self.toggleEmbeddedVolume, initial_call = True)
 		
 	def removeNotifier(self):
 		self["list"].onSelectionChanged.remove(self.onListSelectionChanged)
 		self["timerlist"].onSelectionChanged.remove(self.onListSelectionChanged)
-		
-		self.clockTimer.callback.remove(self.checkTimeChange)
 		
 		self.piconLoader.removeNotifier()
 		
@@ -604,6 +734,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		config.plugins.merlinEpgCenter.listItemHeight.notifiers.remove(self.setUpcomingWidgets)
 		config.plugins.merlinEpgCenter.listProgressStyle.notifiers.remove(self.setProgressbarStyle)
 		config.plugins.merlinEpgCenter.adjustFontSize.notifiers.remove(self.setFontSizes)
+		config.plugins.merlinEpgCenter.embeddedVolume.notifiers.remove(self.toggleEmbeddedVolume)
 		
 	def setListStyle(self, configElement = None):
 		itemHeight = self.piconSize.height() + int(config.plugins.merlinEpgCenter.listItemHeight.value)
@@ -857,13 +988,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self["timerlist"].l.setList(self.list)
 			self["timerlist"].invalidate()
 			
-	def getBouquetName(self):
-		name = self.bouquetList[self.currentBouquetIndex][0]
-		if self.infoBarInstance.servicelist.mode == MODE_TV:
-			return 'Bouquet: ' + name.rstrip(' (TV)')
-		else:
-			return 'Bouquet: ' + name.rstrip(' (Radio)')
-			
 	def onListSelectionChanged(self):
 		isAutoTimer = False
 		
@@ -973,7 +1097,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 						timeValue = (now - begin) /  60
 						percent = 0
 						
-				if (KEEP_OUTDATED_TIME == None and (begin + duration) > now) or (KEEP_OUTDATED_TIME != None and (begin + duration) > now):
+				if (KEEP_OUTDATED_TIME == 0 and (begin + duration) > now) or (KEEP_OUTDATED_TIME != 0 and (begin + duration) > now):
 					remainBeginString = " I "
 					if timeValue > 0:
 						remainBeginString += "+"
@@ -1048,8 +1172,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 				else:
 					self["eventProgress"].setValue(percent)
 					
-			self["remaining"].instance.setForegroundColor(textColor)
-				
 			self["beginTime"].setText(beginString)
 			self["endTime"].setText(endString)
 			self["remaining"].setText(remainBeginString)
@@ -1092,12 +1214,12 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		if self.infoTextShown:
 			self.keyInfo()
 			
-		from plugin import getBouquetInformation
 		if mode == MODE_TV:
 			self.infoBarInstance.servicelist.setModeTv()
 		else:
 			self.infoBarInstance.servicelist.setModeRadio()
 		self.infoBarInstance.servicelist.zap()
+		self.updateBouquets()
 		
 		(self.servicelist, self.currentBouquet, self.bouquetList, self.currentBouquetIndex) = getBouquetInformation()
 		self.similarShown = False
@@ -1137,13 +1259,16 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			
 		# set button text
 		if self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME or self.currentMode == EPGSEARCH_RESULT:
-			if self.currentMode == SINGLE_EPG and KEEP_OUTDATED_TIME != None:
+			if self.currentMode == SINGLE_EPG and KEEP_OUTDATED_TIME != 0:
 				if not self.showOutdated:
 					self["key_blue"].setText(_("Outdated on"))
 				else:
 					self["key_blue"].setText(_("Outdated off"))
 			else:
 				self["key_blue"].setText("")
+				
+			if IMDB_INSTALLED:
+				self["key_yellow"].setText(_("IMDb"))
 		elif self.currentMode == TIMERLIST:
 			self.key_red_choice = self.EMPTY # TimerEditList method
 			self.key_yellow_choice = self.EMPTY # TimerEditList method
@@ -1182,9 +1307,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		if not (size == 0 or self.configTabsShown or (self.currentMode != MULTI_EPG_NOW and self.currentMode != MULTI_EPG_NEXT and self.currentMode != MULTI_EPG_PRIMETIME and self.currentMode != EPGSEARCH_RESULT)):
 			self["upcoming"].l.invalidate()
 			
-	def setBouquetName(self):
-		self["bouquet"].setText(self.getBouquetName())
-		
 	def setRecordingBlinkState(self):
 		if self.blinkTimer.getBlinkState() and not self.blinkTimer.getIsStopping():
 			self["isRecording"].show()
@@ -1228,6 +1350,41 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self.searchField.help_window.hide()
 			
 	############################################################################################
+	# BOUQUET RELATED FUNCTIONS
+	
+	def getBouquetName(self):
+		name = self.bouquetList[self.currentBouquetIndex][0]
+		if self.infoBarInstance.servicelist.mode == MODE_TV:
+			if name[len(name) -5:] == ' (TV)':
+				return 'Bouquet: %s' % name[:len(name) -5]
+			else:
+				return 'Bouquet: %s' % name # Partnerbox bouquet
+		else:
+			if name[len(name) -8:] == ' (Radio)':
+				return 'Bouquet: %s' % name[:len(name) -8]
+			else:
+				return 'Bouquet: %s' % name # Partnerbox bouquet
+				
+	def setBouquetName(self):
+		self["bouquet"].setText(self.getBouquetName())
+		
+	def updateBouquets(self):
+		from plugin import getBouquetInformation
+		(self.servicelist, self.currentBouquet, self.bouquetList, self.currentBouquetIndex) = getBouquetInformation()
+		self.similarShown = False
+		
+		EpgCenterList.bouquetList = self.bouquetList
+		EpgCenterList.currentBouquetIndex = self.currentBouquetIndex
+		EpgCenterList.updateBouquetServices()
+		
+		if self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME:
+			self.selectRunningService = True
+			self.setMode(switchTvRadio = True)
+			self["list"].l.invalidate()
+			
+		self.setBouquetName()
+		
+	############################################################################################
 	# AUTOTIMER
 
 	def getAutoTimerInstance(self):
@@ -1257,6 +1414,10 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		newTimer.match = ''
 		newTimer.enabled = True
 		
+		if begin != None and end != None:
+			begin -= 3600
+			end += 3600
+			
 		self.session.openWithCallback(
 			boundFunction(self.importerCallback, addNewTimer),
 			AutoTimerImporter,
@@ -1321,32 +1482,9 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self.onListSelectionChanged()
 		
 	############################################################################################
-	# TAB HANDLING
-
-	def setTabs(self):
-		if self.configTabsShown:
-			numTabs = NUM_CONFIG_TABS
-		else:
-			numTabs = NUM_EPG_TABS
-			
-		# set tab text color
-		if self.currentMode > numTabs:
-			self["tabbar"].setPixmapNum(numTabs) # last tab
-		else:
-			self["tabbar"].setPixmapNum(self.currentMode)
-			
-		if self.oldMode != None:
-			if self.oldMode >= numTabs:
-				self["tab_text_%d" % numTabs].instance.setForegroundColor(parseColor("#ffffff")) # inactive
-			else:
-				self["tab_text_%d" % self.oldMode].instance.setForegroundColor(parseColor("#ffffff")) # inactive
-			
-		if self.currentMode >= numTabs:
-			self["tab_text_%d" % numTabs].instance.setForegroundColor(parseColor("#ef7f1a")) # active
-		else:
-			self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor("#ef7f1a")) # active
-			
-	def setMode(self, searchEpg = False, historySearch = False, manualSearch = False, switchTvRadio = False):
+	# MODE CONTROL
+	
+	def setMode(self, searchEpg = False, historySearch = False, manualSearch = False, switchTvRadio = False, doSearch = False):
 		self.setTabs()
 		self.setUpcomingWidgets()
 		
@@ -1357,7 +1495,17 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		if not historySearch and self.oldMode != None:
 			self.epgTabObjectList[self.oldMode].hide()
 			
-		if searchEpg:
+		if doSearch:
+			playingSref = NavigationInstance.instance.getCurrentlyPlayingServiceReference() # get the currently playing service
+			if playingSref is not None:
+				event = self.epgcache.lookupEventTime(playingSref, -1, 0) # get the matching event
+				if event is not None:
+					searchString = event.getEventName() # set the event name as search string
+				else:
+					searchString = ""
+				self.currentMode = EPGSEARCH_RESULT
+				self.epgTabObjectList[self.currentMode].show(searchString, self.currentMode)
+		elif searchEpg:
 			cur = None
 			if self.oldMode == MULTI_EPG_NOW or self.oldMode == MULTI_EPG_NEXT or self.oldMode == SINGLE_EPG or self.oldMode == MULTI_EPG_PRIMETIME:
 				cur = self["list"].getCurrent()
@@ -1396,18 +1544,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			# set the marker to the currently running service on plugin start
 			if self.selectRunningService:
 				self.selectRunningService = False
-				playingSref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-				if not playingSref:
-					return
-				sRef = playingSref.toCompareString()
-				
-				i = 0
-				while i < len(self["list"].list):
-					if self["list"].list[i][2] == sRef:
-						self.lastMultiEpgIndex = i
-						self["list"].instance.moveSelectionTo(self.lastMultiEpgIndex)
-						break
-					i += 1
+				self.setSelectionToRunningService()
 			elif self.oldMode == SINGLE_EPG or self.oldMode == EPGSEARCH_RESULT or self.oldMode == EPGSEARCH_HISTORY:
 				if self.lastMultiEpgIndex > 0:
 					self["list"].instance.moveSelectionTo(self.lastMultiEpgIndex)
@@ -1416,11 +1553,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		elif self.currentMode == SINGLE_EPG:
 			sRef = None
 			if self.selectRunningService:
-				playingSref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-				if playingSref:
-					sRef = playingSref.toCompareString()
-					if sRef in self["list"].bouquetServices[self.currentBouquetIndex]:
-						self.lastMultiEpgIndex = self["list"].bouquetServices[self.currentBouquetIndex].index(sRef)
+				self.setSelectionToRunningService()
 			if self.showOutdated and not self.hideOutdated:
 				self.hideOutdated = True
 			elif self.showOutdated and self.hideOutdated:
@@ -1429,8 +1562,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			elif not self.showOutdated and not self.hideOutdated and not self.oldMode == EPGSEARCH_RESULT and not self.selectRunningService:
 				self.lastMultiEpgIndex = self["list"].instance.getCurrentIndex()
 				
-			if self.selectRunningService:
-				self.selectRunningService = False
+			self.selectRunningService = False
 				
 			if switchTvRadio:
 				self.oldMode = None
@@ -1444,7 +1576,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self.onListSelectionChanged()
 			self["timerlist"].moveToIndex(0)
 			self.epgTabObjectList[self.currentMode].show()
-			
 		if self.listStyle == STYLE_SINGLE_LINE:
 			if (self.currentMode == SINGLE_EPG or self.currentMode == EPGSEARCH_RESULT) and (self.oldMode != SINGLE_EPG and self.oldMode != EPGSEARCH_RESULT):
 				self.setUpcomingWidgets()
@@ -1454,6 +1585,34 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 		self.setButtonText()
 		self.setActions()
 		
+	def setSelectionToRunningService(self):
+		playingSref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+		if not playingSref:
+			return
+			
+		from plugin import getBouquetInformation
+		(self.servicelist, self.currentBouquet, self.bouquetList, self.currentBouquetIndex) = getBouquetInformation()
+		EpgCenterList.bouquetList = self.bouquetList
+		EpgCenterList.currentBouquetIndex = self.currentBouquetIndex
+		sRef = playingSref.toCompareString()
+		if sRef in self["list"].bouquetServices[self.currentBouquetIndex]:
+			self.lastMultiEpgIndex = self["list"].bouquetServices[self.currentBouquetIndex].index(sRef)
+		
+		if self.currentMode == SINGLE_EPG:
+			if sRef in self["list"].bouquetServices[self.currentBouquetIndex]:
+				self.epgTabObjectList[self.currentMode].show(self.oldMode, self.bouquetList[0], self.currentBouquet, self.currentBouquetIndex, self.currentMode, self.showOutdated, sRef, self.timerListMode)
+		else:
+			if sRef in self["list"].bouquetServices[self.currentBouquetIndex]:
+				self.epgTabObjectList[self.currentMode].show(self.currentBouquet, self.currentBouquetIndex, self.currentMode)
+				
+			i = 0
+			while i < len(self["list"].list):
+				if self["list"].list[i][2] == sRef:
+					self.lastMultiEpgIndex = i
+					self["list"].instance.moveSelectionTo(self.lastMultiEpgIndex)
+					break
+				i += 1
+				
 	############################################################################################
 	# KEY HANDLING
 	
@@ -1514,6 +1673,9 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self.setMode(manualSearch = True)
 		elif self.configTabsShown:
 			self.keyEditMode()
+		elif IMDB_INSTALLED and (self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME or self.currentMode == EPGSEARCH_RESULT):
+			cur = self["list"].getCurrent()
+			self.session.open(IMDB, cur[5])
 			
 	def keyBlue(self):
 		if self.currentMode == EPGSEARCH_RESULT:
@@ -1598,20 +1760,19 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions):
 			self.setActions()
 			self.setButtonText()
 		else:
-			self.blinkTimer.timer.callback.remove(self.setEventPiconBlinkState)
-			self.blinkTimer.timer.callback.remove(self.setRecordingBlinkState)
-			if config.plugins.merlinEpgCenter.rememberLastTab.value:
-				if self.currentMode > NUM_EPG_TABS:
-					config.plugins.merlinEpgCenter.lastUsedTab.value = NUM_EPG_TABS
-				else:
-					config.plugins.merlinEpgCenter.lastUsedTab.value = self.currentMode
-			config.plugins.merlinEpgCenter.save()
-			self.session.nav.RecordTimer.on_state_change.remove(self.onStateChange)
-			self.releaseEpgBaseTab()
-			config.usage.show_message_when_recording_starts.value = self.showRecordingMessage
-			self.blinkTimer.shutdown()
+			self.suspend()
 			self.close(None)
 			
+	# really shutdown everything when enigma2 is shut down
+	def shutdown(self):
+		self.removeNotifier()
+		self.blinkTimer.timer.callback.remove(self.setEventPiconBlinkState)
+		self.blinkTimer.timer.callback.remove(self.setRecordingBlinkState)
+		self.releaseEpgBaseTab()
+		config.usage.show_message_when_recording_starts.value = self.showRecordingMessage
+		self.blinkTimer.suspend()
+		self.close(None)
+		
 	def keyDirection(self, direction):
 		if self.similarShown:
 			self.keyRed()

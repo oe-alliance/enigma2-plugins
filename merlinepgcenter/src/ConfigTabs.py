@@ -48,13 +48,21 @@ SKINLIST =	[ # order is important (HD_BORDER, XD_BORDER, SD, HD, XD)!
 try:
 	KEEP_OUTDATED_TIME = config.merlin2.keep_outdated_epg.value * 60
 except KeyError:
-	KEEP_OUTDATED_TIME = None
+	KEEP_OUTDATED_TIME = 0
 	
 
 # OWN IMPORTS
 from EpgCenterList import MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_PRIMETIME, TIMERLIST, EPGSEARCH_HISTORY
 from MerlinEPGCenter import STYLE_SINGLE_LINE, STYLE_SHORT_DESCRIPTION, TAB_TEXT_EPGLIST
 from SkinFinder import SkinFinder
+
+TAB_CHOICES = [ ("-1", _("disabled")),
+		(str(MULTI_EPG_NOW), TAB_TEXT_EPGLIST[MULTI_EPG_NOW]),
+		(str(MULTI_EPG_NEXT), TAB_TEXT_EPGLIST[MULTI_EPG_NEXT]),
+		(str(SINGLE_EPG), TAB_TEXT_EPGLIST[SINGLE_EPG]),
+		(str(MULTI_EPG_PRIMETIME), TAB_TEXT_EPGLIST[MULTI_EPG_PRIMETIME]),
+		(str(TIMERLIST), TAB_TEXT_EPGLIST[TIMERLIST]),
+		(str(EPGSEARCH_HISTORY), TAB_TEXT_EPGLIST[EPGSEARCH_HISTORY]),]
 
 
 config.plugins.merlinEpgCenter = ConfigSubsection()
@@ -68,6 +76,9 @@ config.plugins.merlinEpgCenter.showVideoPicture = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.rememberLastTab = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.selectRunningService = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.replaceInfobarEpg = ConfigYesNo(False)
+config.plugins.merlinEpgCenter.replaceInfobarChannelUp = ConfigSelection(default = "-1", choices = TAB_CHOICES)
+config.plugins.merlinEpgCenter.replaceInfobarChannelDown = ConfigSelection(default = "-1", choices = TAB_CHOICES)
+config.plugins.merlinEpgCenter.replaceShowEventView = ConfigSelection(default = "-1", choices = TAB_CHOICES)
 config.plugins.merlinEpgCenter.epgPaths = ConfigSelection(default = eEnv.resolve('${datadir}/enigma2/picon_50x30/'), choices = [
 				(eEnv.resolve('${datadir}/enigma2/picon_50x30/'), eEnv.resolve('${datadir}/enigma2/picon_50x30')),
 				('/media/cf/picon_50x30/', '/media/cf/picon_50x30'),
@@ -98,15 +109,8 @@ config.plugins.merlinEpgCenter.showTimerMessages = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.blinkingPicon = ConfigYesNo(False)
 config.plugins.merlinEpgCenter.showShortDescInEventInfo = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.adjustFontSize = ConfigSelectionNumber(min = -5, max = 5, stepwidth = 1, default = 0)
-config.plugins.merlinEpgCenter.mainTab = ConfigSelection(default = "-1", choices = [
-				("-1", _("disabled")),
-				(str(MULTI_EPG_NOW), TAB_TEXT_EPGLIST[MULTI_EPG_NOW]),
-				(str(MULTI_EPG_NEXT), TAB_TEXT_EPGLIST[MULTI_EPG_NEXT]),
-				(str(SINGLE_EPG), TAB_TEXT_EPGLIST[SINGLE_EPG]),
-				(str(MULTI_EPG_PRIMETIME), TAB_TEXT_EPGLIST[MULTI_EPG_PRIMETIME]),
-				(str(TIMERLIST), TAB_TEXT_EPGLIST[TIMERLIST]),
-				(str(EPGSEARCH_HISTORY), TAB_TEXT_EPGLIST[EPGSEARCH_HISTORY]),
-				])
+config.plugins.merlinEpgCenter.mainTab = ConfigSelection(default = "-1", choices = TAB_CHOICES)
+config.plugins.merlinEpgCenter.embeddedVolume = ConfigYesNo(False)
 
 # INVISIBLE OPTION
 config.plugins.merlinEpgCenter.setDescriptionSize = ConfigYesNo(True)
@@ -148,14 +152,13 @@ class ConfigGeneral(ConfigBaseTab):
 		cfgList.append(getConfigListEntry(_("Prime time:"), config.plugins.merlinEpgCenter.primeTime))
 		cfgList.append(getConfigListEntry(_("Remember last tab:"), config.plugins.merlinEpgCenter.rememberLastTab))
 		cfgList.append(getConfigListEntry(_("Select running service on start:"), config.plugins.merlinEpgCenter.selectRunningService))
-		cfgList.append(getConfigListEntry(_("Replace InfoBar single and multi EPG:"), config.plugins.merlinEpgCenter.replaceInfobarEpg))
 		cfgList.append(getConfigListEntry(_("Show text input help for epg search:"), config.plugins.merlinEpgCenter.showInputHelp))
 		cfgList.append(getConfigListEntry(_("Use skin:"), config.plugins.merlinEpgCenter.skinSelection))
 		cfgList.append(getConfigListEntry(_("Limit search results to bouquet services:"), config.plugins.merlinEpgCenter.limitSearchToBouquetServices))
 		cfgList.append(getConfigListEntry(_("Exit on TV <-> Radio switch:"), config.plugins.merlinEpgCenter.exitOnTvRadioSwitch))
 		cfgList.append(getConfigListEntry(_("Show timer messages:"), config.plugins.merlinEpgCenter.showTimerMessages))
 		cfgList.append(getConfigListEntry(_("Adjust font size:"), config.plugins.merlinEpgCenter.adjustFontSize))
-		cfgList.append(getConfigListEntry(_("Return to main tab with exit:"), config.plugins.merlinEpgCenter.mainTab))
+		cfgList.append(getConfigListEntry(_("Embed volume slider:"), config.plugins.merlinEpgCenter.embeddedVolume))
 		self.configList = cfgList
 		
 # config list settings
@@ -214,4 +217,20 @@ class ConfigEventInfo(ConfigBaseTab):
 		
 	def removeNotifier(self):
 		config.plugins.merlinEpgCenter.showEventInfo.notifiers.remove(self.expandableSettingChanged)
+		
+# config key settings
+class ConfigKeys(ConfigBaseTab):
+	def __init__(self):
+		ConfigBaseTab.__init__(self)
+		self.configList = []
+		self.buildConfigList()
+		
+	def buildConfigList(self):
+		cfgList = []
+		cfgList.append(getConfigListEntry(_("Return to main tab with exit:"), config.plugins.merlinEpgCenter.mainTab))
+		cfgList.append(getConfigListEntry(_("Replace InfoBar single and multi EPG:"), config.plugins.merlinEpgCenter.replaceInfobarEpg))
+		cfgList.append(getConfigListEntry(_("Replace ChannelSelection key up to start with tab:"), config.plugins.merlinEpgCenter.replaceInfobarChannelUp))
+		cfgList.append(getConfigListEntry(_("Replace ChannelSelection key down to start with tab:"), config.plugins.merlinEpgCenter.replaceInfobarChannelDown))
+		cfgList.append(getConfigListEntry(_("Replace EventView key to start with tab:"), config.plugins.merlinEpgCenter.replaceShowEventView))
+		self.configList = cfgList
 		

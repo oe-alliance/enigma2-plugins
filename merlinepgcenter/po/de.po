@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MerlinEPGCenter\n"
-"POT-Creation-Date: 2011-11-02 23:56+CET\n"
+"POT-Creation-Date: 2011-11-28 21:50+CET\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Shaderman <shaderman@dreambox-tools.info>\n"
 "Language-Team: Shaderman <shaderman@dreambox-tools.info>\n"
@@ -12,157 +12,173 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ConfigTabs.py:82
-msgid "single line style"
-msgstr "Einzelne Zeile"
-
-#: ConfigTabs.py:83
-msgid "with short description"
-msgstr "Mit Kurzbeschreibung"
-
-#: ConfigTabs.py:92
-msgid "simple"
-msgstr "Einfach"
-
-#: ConfigTabs.py:93
-msgid "gradient"
-msgstr "Farbverlauf"
-
-#: ConfigTabs.py:94
-msgid "four parts"
-msgstr "Vier Teile"
-
-#: ConfigTabs.py:95
-msgid "percent (text)"
-msgstr "Prozent (Text)"
-
-#: ConfigTabs.py:102
-#: EpgCenterList.py:940
+#: ConfigTabs.py:59
+#: EpgCenterList.py:942
 msgid "disabled"
 msgstr "deaktiviert"
 
-#: ConfigTabs.py:148
+#: ConfigTabs.py:93
+msgid "single line style"
+msgstr "Einzelne Zeile"
+
+#: ConfigTabs.py:94
+msgid "with short description"
+msgstr "Mit Kurzbeschreibung"
+
+#: ConfigTabs.py:103
+msgid "simple"
+msgstr "Einfach"
+
+#: ConfigTabs.py:104
+msgid "gradient"
+msgstr "Farbverlauf"
+
+#: ConfigTabs.py:105
+msgid "four parts"
+msgstr "Vier Teile"
+
+#: ConfigTabs.py:106
+msgid "percent (text)"
+msgstr "Prozent (Text)"
+
+#: ConfigTabs.py:152
 msgid "Prime time:"
 msgstr "Prime time:"
 
-#: ConfigTabs.py:149
+#: ConfigTabs.py:153
 msgid "Remember last tab:"
 msgstr "Speichere letzten Tab:"
 
-#: ConfigTabs.py:150
+#: ConfigTabs.py:154
 msgid "Select running service on start:"
 msgstr "Wähle laufende Sendung beim Start:"
 
-#: ConfigTabs.py:151
-msgid "Replace InfoBar single and multi EPG:"
-msgstr "Ersetze Einzel- und Multi-EPG der InfoBar:"
-
-#: ConfigTabs.py:152
+#: ConfigTabs.py:155
 msgid "Show text input help for epg search:"
 msgstr "Zeige Eingabehilfe bei EPG-Suche:"
 
-#: ConfigTabs.py:153
+#: ConfigTabs.py:156
 msgid "Use skin:"
 msgstr "Verwende Skin:"
 
-#: ConfigTabs.py:154
+#: ConfigTabs.py:157
 msgid "Limit search results to bouquet services:"
 msgstr "Reduziere Suchergebnisse auf Sender in Bouquets:"
 
-#: ConfigTabs.py:155
+#: ConfigTabs.py:158
 msgid "Exit on TV <-> Radio switch:"
 msgstr "Beenden beim Wechsel TV <--> Radio:"
 
-#: ConfigTabs.py:156
+#: ConfigTabs.py:159
 msgid "Show timer messages:"
 msgstr "Zeige Meldungen von Timern:"
 
-#: ConfigTabs.py:157
+#: ConfigTabs.py:160
 msgid "Adjust font size:"
 msgstr "Schriftgröße anpassen:"
 
-#: ConfigTabs.py:158
-msgid "Return to main tab with exit:"
-msgstr "Wechsle zu Haupttab mit Exit:"
+#: ConfigTabs.py:161
+msgid "Embed volume slider:"
+msgstr "Lautstärkeregelung einbetten:"
 
-#: ConfigTabs.py:171
+#: ConfigTabs.py:174
 msgid "Show list numbers:"
 msgstr "Zeige Sendernummern:"
 
-#: ConfigTabs.py:172
+#: ConfigTabs.py:175
 msgid "Show picons:"
 msgstr "Zeige Picons:"
 
-#: ConfigTabs.py:174
+#: ConfigTabs.py:177
 msgid "Use picons (50x30) from:"
 msgstr "Verwende Picons (50x30) von:"
 
-#: ConfigTabs.py:175
+#: ConfigTabs.py:178
 msgid "Show service name:"
 msgstr "Zeige den Sendernamen:"
 
-#: ConfigTabs.py:176
+#: ConfigTabs.py:179
 msgid "Show duration:"
 msgstr "Zeige Sendungsdauer:"
 
-#: ConfigTabs.py:177
+#: ConfigTabs.py:180
 msgid "Show multi colored begin/remain times:"
 msgstr "Zeige mehrfarbige Beginnzeit und Dauer:"
 
-#: ConfigTabs.py:178
+#: ConfigTabs.py:181
 msgid "Increase list item height:"
 msgstr "Zeilenhöhe vergrößern:"
 
-#: ConfigTabs.py:179
+#: ConfigTabs.py:182
 msgid "List style:"
 msgstr "Darstellung der Listen:"
 
-#: ConfigTabs.py:180
+#: ConfigTabs.py:183
 msgid "Progress bar style:"
 msgstr "Darstellung der Fortschrittsbalken:"
 
-#: ConfigTabs.py:181
+#: ConfigTabs.py:184
 msgid "Number of upcoming events to show:"
 msgstr "Anzahl der folgenden Sendungen anzeigen:"
 
-#: ConfigTabs.py:205
+#: ConfigTabs.py:208
 msgid "Show event information:"
 msgstr "Zeige Informationen zur Sendung:"
 
-#: ConfigTabs.py:207
+#: ConfigTabs.py:210
 msgid "Show video picture:"
 msgstr "Zeige Videobild:"
 
-#: ConfigTabs.py:208
+#: ConfigTabs.py:211
 msgid "Show blinking picon for running timers:"
 msgstr "Zeige blinkende Picons für laufende Timer:"
 
-#: ConfigTabs.py:209
+#: ConfigTabs.py:212
 msgid "Show short description:"
 msgstr "Zeige Kurzbeschreibung:"
 
-#: EpgCenterList.py:918
+#: ConfigTabs.py:230
+msgid "Return to main tab with exit:"
+msgstr "Wechsle zu Haupttab mit Exit:"
+
+#: ConfigTabs.py:231
+msgid "Replace InfoBar single and multi EPG:"
+msgstr "Ersetze Einzel- und Multi-EPG der InfoBar:"
+
+#: ConfigTabs.py:232
+msgid "Replace ChannelSelection key up to start with tab:"
+msgstr "Ersetze ChannelSelection Taste hoch und starte damit Tab:"
+
+#: ConfigTabs.py:233
+msgid "Replace ChannelSelection key down to start with tab:"
+msgstr "Ersetze ChannelSelection Taste runter und starte damit Tab:"
+
+#: ConfigTabs.py:234
+msgid "Replace EventView key to start with tab:"
+msgstr "Ersetze EventView Taste und starte damit Tab:"
+
+#: EpgCenterList.py:920
 msgid "waiting"
 msgstr "wartend"
 
-#: EpgCenterList.py:921
+#: EpgCenterList.py:923
 msgid "about to start"
 msgstr "startet gleich"
 
-#: EpgCenterList.py:925
+#: EpgCenterList.py:927
 msgid "zapped"
 msgstr "umgeschaltet"
 
-#: EpgCenterList.py:927
+#: EpgCenterList.py:929
 msgid "recording..."
 msgstr "nimmt auf..."
 
-#: EpgCenterList.py:930
-#: EpgCenterList.py:936
+#: EpgCenterList.py:932
+#: EpgCenterList.py:938
 msgid "done!"
 msgstr "erledigt!"
 
-#: EpgCenterList.py:933
+#: EpgCenterList.py:935
 msgid "<unknown>"
 msgstr "<unbekannt>"
 
@@ -194,19 +210,19 @@ msgstr "Dienstag"
 msgid "Wednesday"
 msgstr "Mittwoch"
 
-#: HelperFunctions.py:126
+#: HelperFunctions.py:191
 msgid "Today"
 msgstr "Heute"
 
-#: HelperFunctions.py:129
+#: HelperFunctions.py:194
 msgid "Tomorrow"
 msgstr "Morgen"
 
-#: HelperFunctions.py:137
+#: HelperFunctions.py:202
 msgid "Unknown date"
 msgstr "Unbekanntes Datum"
 
-#: HelperFunctions.py:265
+#: HelperFunctions.py:343
 msgid ""
 "A timer failed to record!\n"
 "Disable TV and try again?\n"
@@ -214,11 +230,11 @@ msgstr ""
 "Timeraufnahme fehlgeschlagen.\n"
 "Fernsehprogramm ändern und erneut versuchen?\n"
 
-#: HelperFunctions.py:269
+#: HelperFunctions.py:347
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Um die Timeraufnahme durchführen zu können, wurde auf den aufzunehmenden Sender umgeschaltet!\n"
 
-#: HelperFunctions.py:316
+#: HelperFunctions.py:394
 msgid ""
 "A finished record timer wants to set your\n"
 "Dreambox to standby. Do that now?"
@@ -226,7 +242,7 @@ msgstr ""
 "Ein Aufnahmetimer will Ihre Dreambox in den Standby-Modus schalten.\n"
 "Jetzt ausführen?"
 
-#: HelperFunctions.py:322
+#: HelperFunctions.py:400
 msgid ""
 "A finished record timer wants to shut down\n"
 "your Dreambox. Shutdown now?"
@@ -255,7 +271,8 @@ msgid "Upcoming"
 msgstr "Nächste"
 
 #: MerlinEPGCenter.py:43
-#: MerlinEPGCenter.py:1705
+#: MerlinEPGCenter.py:318
+#: MerlinEPGCenter.py:1866
 msgid "Timer"
 msgstr "Timer"
 
@@ -268,133 +285,141 @@ msgid "General"
 msgstr "Allgemein"
 
 #: MerlinEPGCenter.py:44
+msgid "Keys"
+msgstr "Tasten"
+
+#: MerlinEPGCenter.py:44
 msgid "Lists"
 msgstr "Listen"
 
-#: MerlinEPGCenter.py:195
+#: MerlinEPGCenter.py:214
 msgid "Search for:"
 msgstr "Suche nach:"
 
-#: MerlinEPGCenter.py:398
+#: MerlinEPGCenter.py:528
 msgid "Similar"
 msgstr "Ähnlich"
 
-#: MerlinEPGCenter.py:664
+#: MerlinEPGCenter.py:795
 msgid "Record or zap timer"
 msgstr "Aufnahme- oder Umschalttimer"
 
-#: MerlinEPGCenter.py:665
+#: MerlinEPGCenter.py:796
 msgid "AutoTimer timer"
 msgstr "AutoTimer Timer"
 
-#: MerlinEPGCenter.py:666
+#: MerlinEPGCenter.py:797
 msgid "Please select a timer type to add:"
 msgstr "Bitte den hinzuzufügenden Timertyp wählen:"
 
-#: MerlinEPGCenter.py:800
+#: MerlinEPGCenter.py:931
 msgid "Stop current event but not coming events"
 msgstr "Laufendes Ereignis abbrechen, aber kommende ausführen"
 
-#: MerlinEPGCenter.py:801
+#: MerlinEPGCenter.py:932
 msgid "Stop current event and disable coming events"
 msgstr "Laufendes Ereignis abbrechen und kommende ignorieren"
 
-#: MerlinEPGCenter.py:802
+#: MerlinEPGCenter.py:933
 msgid "Don't stop current event but disable coming events"
 msgstr "Aktuelle Aufnahme nicht beenden aber zukünftige deaktivieren"
 
-#: MerlinEPGCenter.py:804
+#: MerlinEPGCenter.py:935
 msgid "Repeating event currently recording... What do you want to do?"
 msgstr ""
 "Wiederholender Aufnahmetimer ist zurzeit aktiv...\n"
 "Was wollen Sie machen?"
 
-#: MerlinEPGCenter.py:904
+#: MerlinEPGCenter.py:1028
 msgid "Match title:"
 msgstr "Finde in Titel:"
 
-#: MerlinEPGCenter.py:910
+#: MerlinEPGCenter.py:1034
 msgid "Services:"
 msgstr "Sender:"
 
-#: MerlinEPGCenter.py:916
+#: MerlinEPGCenter.py:1040
 msgid "Bouquets:"
 msgstr "Bouquets:"
 
-#: MerlinEPGCenter.py:922
+#: MerlinEPGCenter.py:1046
 msgid "Included days:"
 msgstr "Eingeschl. Tage:"
 
-#: MerlinEPGCenter.py:928
+#: MerlinEPGCenter.py:1052
 msgid "Excluded days:"
 msgstr "Ausgeschl. Tage:"
 
-#: MerlinEPGCenter.py:929
+#: MerlinEPGCenter.py:1053
 msgid "Record a maximum of x times:"
 msgstr "Höchstens X-mal aufnehmen:"
 
-#: MerlinEPGCenter.py:930
+#: MerlinEPGCenter.py:1054
 msgid "Amount of recordings left:"
 msgstr "Verbleibende Anzahl Aufnahmen:"
 
-#: MerlinEPGCenter.py:931
+#: MerlinEPGCenter.py:1055
 msgid "Search type:"
 msgstr "Suchtyp:"
 
-#: MerlinEPGCenter.py:932
+#: MerlinEPGCenter.py:1056
 msgid "Location:"
 msgstr "Aufnahmeverzeichnis:"
 
-#: MerlinEPGCenter.py:1142
+#: MerlinEPGCenter.py:1264
 msgid "Outdated on"
 msgstr "Vergangene an"
 
-#: MerlinEPGCenter.py:1144
+#: MerlinEPGCenter.py:1266
 msgid "Outdated off"
 msgstr "Vergangene aus"
 
-#: MerlinEPGCenter.py:1152
+#: MerlinEPGCenter.py:1271
+msgid "IMDb"
+msgstr "IMDb"
+
+#: MerlinEPGCenter.py:1277
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: MerlinEPGCenter.py:1154
+#: MerlinEPGCenter.py:1279
 msgid "Remove"
 msgstr "Entfernen"
 
-#: MerlinEPGCenter.py:1155
+#: MerlinEPGCenter.py:1280
 msgid "OK"
 msgstr "Ok"
 
-#: MerlinEPGCenter.py:1156
+#: MerlinEPGCenter.py:1281
 msgid "New Search"
 msgstr "Neue Suche"
 
-#: MerlinEPGCenter.py:1166
+#: MerlinEPGCenter.py:1291
 msgid "Remove timer"
 msgstr "Entferne Timer"
 
-#: MerlinEPGCenter.py:1169
-#: MerlinEPGCenter.py:1177
+#: MerlinEPGCenter.py:1294
+#: MerlinEPGCenter.py:1302
 msgid "Add timer"
 msgstr "Timer setzen"
 
-#: MerlinEPGCenter.py:1463
+#: MerlinEPGCenter.py:1622
 msgid "Edit Off"
 msgstr "Bearbeiten an"
 
-#: MerlinEPGCenter.py:1467
+#: MerlinEPGCenter.py:1626
 msgid "Edit On"
 msgstr "Bearbeiten aus"
 
-#: MerlinEPGCenter.py:1485
+#: MerlinEPGCenter.py:1644
 msgid "return"
 msgstr "zurück"
 
-#: MerlinEPGCenter.py:1694
+#: MerlinEPGCenter.py:1855
 msgid "Set search term"
 msgstr "Als Suchbegriff"
 
-#: plugin.py:94
+#: plugin.py:181
 msgid "More than just an EPG..."
 msgstr "Mehr als nur ein EPG..."
 

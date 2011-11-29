@@ -25,6 +25,7 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Tools.BoundFunction import boundFunction
 
 # OWN IMPORTS
+from ConfigTabs import KEEP_OUTDATED_TIME
 from EpgCenterList import MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_PRIMETIME, TIMERLIST, EPGSEARCH_HISTORY, EPGSEARCH_RESULT, EPGSEARCH_MANUAL
 
 class MerlinEPGActions():		
@@ -127,7 +128,7 @@ class MerlinEPGActions():
 			"yellow":		self.keyYellow,
 		}, -1)
 		
-		# EPG HISTORY ACTIONS
+		# SETTINGS ACTIONS
 		self["settingsActions"] = ActionMap(["SettingsActions"],
 		{
 			"nextTab":		boundFunction(self.keyDirection, direction = 1),
@@ -166,16 +167,23 @@ class MerlinEPGActions():
 		self["toggleConfigActions"].setEnabled(True)
 		
 	def setActions(self):
+		from MerlinEPGCenter import IMDB_INSTALLED
+		
 		# unset action map
 		if self.oldMode == MULTI_EPG_NOW or self.oldMode == MULTI_EPG_NEXT or self.oldMode == MULTI_EPG_PRIMETIME or self.oldMode == EPGSEARCH_RESULT:
 			self["epgTabBaseActions"].setEnabled(False)
 			self["epgRedActions"].setEnabled(False)
 			self["epgGreenActions"].setEnabled(False)
+			if IMDB_INSTALLED:
+				self["epgYellowActions"].setEnabled(False)
 		elif self.oldMode == SINGLE_EPG:
 			self["epgTabBaseActions"].setEnabled(False)
 			self["epgRedActions"].setEnabled(False)
 			self["epgGreenActions"].setEnabled(False)
-			self["epgBlueActions"].setEnabled(False)
+			if KEEP_OUTDATED_TIME != 0:
+				self["epgBlueActions"].setEnabled(False)
+			if IMDB_INSTALLED:
+				self["epgYellowActions"].setEnabled(False)
 		elif self.oldMode == TIMERLIST:
 			self["actions"].setEnabled(False)
 		elif self.oldMode == EPGSEARCH_HISTORY:
@@ -203,10 +211,15 @@ class MerlinEPGActions():
 		elif self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == MULTI_EPG_PRIMETIME or self.currentMode == EPGSEARCH_RESULT:
 			self["epgTabBaseActions"].setEnabled(True)
 			self["epgGreenActions"].setEnabled(True)
+			if IMDB_INSTALLED:
+				self["epgYellowActions"].setEnabled(True)
 		elif self.currentMode == SINGLE_EPG:
 			self["epgTabBaseActions"].setEnabled(True)
-			self["epgBlueActions"].setEnabled(True)
 			self["epgGreenActions"].setEnabled(True)
+			if KEEP_OUTDATED_TIME != 0:
+				self["epgBlueActions"].setEnabled(True)
+			if IMDB_INSTALLED:
+				self["epgYellowActions"].setEnabled(True)
 		elif self.currentMode == TIMERLIST:
 			self["actions"].setEnabled(True)
 		elif self.currentMode == EPGSEARCH_HISTORY:

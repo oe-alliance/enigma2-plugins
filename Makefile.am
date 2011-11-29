@@ -25,6 +25,7 @@ SUBDIRS = \
 	emission \
 	epgrefresh \
 	epgsearch \
+	eurotictv \
 	fancontrol2 \
 	filebrowser \
 	fritzcall \
@@ -35,6 +36,7 @@ SUBDIRS = \
 	growlee \
 	httpproxy \
 	imdb \
+	infobartunerstate \
 	kiddytimer \
 	lastfm \
 	letterbox \
@@ -66,6 +68,7 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
+	permanenttimeshift \
 	pipservicerelation \
 	pipzap \
 	pluginhider \

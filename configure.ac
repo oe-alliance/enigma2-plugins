@@ -167,6 +167,11 @@ epgsearch/meta/Makefile
 epgsearch/po/Makefile
 epgsearch/src/Makefile
 
+eurotictv/Makefile
+eurotictv/meta/Makefile
+eurotictv/po/Makefile
+eurotictv/src/Makefile
+
 fancontrol2/Makefile
 fancontrol2/meta/Makefile
 fancontrol2/po/Makefile
@@ -213,6 +218,11 @@ imdb/Makefile
 imdb/meta/Makefile
 imdb/po/Makefile
 imdb/src/Makefile
+
+infobartunerstate/Makefile
+infobartunerstate/meta/Makefile
+infobartunerstate/po/Makefile
+infobartunerstate/src/Makefile
 
 kiddytimer/Makefile
 kiddytimer/img/Makefile
@@ -372,6 +382,14 @@ permanentclock/Makefile
 permanentclock/meta/Makefile
 permanentclock/po/Makefile
 permanentclock/src/Makefile
+
+permanenttimeshift/Makefile
+permanenttimeshift/meta/Makefile
+permanenttimeshift/po/Makefile
+permanenttimeshift/images/Makefile
+permanenttimeshift/src/Makefile
+permanenttimeshift/src/eitsave/Makefile
+permanenttimeshift/src/createapscfiles/Makefile
 
 pipservicerelation/Makefile
 pipservicerelation/src/Makefile

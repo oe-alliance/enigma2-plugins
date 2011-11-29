@@ -50,10 +50,10 @@ def localeInit():
 	environ["LANGUAGE"] = lang[:2]
 	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 	gettext.textdomain("enigma2")
-	gettext.bindtextdomain("PTSPlugin", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PermanentTimeshift/locale/"))
+	gettext.bindtextdomain("PermanentTimeshift", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PermanentTimeshift/locale/"))
 
 def _(txt):
-	t = gettext.dgettext("PTSPlugin", txt)
+	t = gettext.dgettext("PermanentTimeshift", txt)
 	if t == txt:
 		t = gettext.gettext(txt)
 	return t

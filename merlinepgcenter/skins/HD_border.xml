@@ -42,9 +42,11 @@
 		<widget name="isRecording" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/HD_BORDER/recording.png" position="869,633" size="361,35" zPosition="2" transparent="1" alphatest="on" />
 		<widget name="description" position="875,260" size="350,366" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="top" />
 		<widget name="videoPicture" position="880,461" size="345,165" zPosition="1" backgroundColor="transparent" />
-		<widget name="bouquet" position="875,639" size="350,23" zPosition="1" font="Regular;20" transparent="1" halign="center" valign="center" />
+		<widget name="bouquet" position="875,639" size="350,23" zPosition="4" font="Regular;20" transparent="1" halign="center" valign="center" />
 		
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/HD_BORDER/button_background.png" position="50,631" size="1180,39" transparent="1" alphatest="on" />
+		<widget name="volume" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/HD_BORDER/volume.png" position="869,633" size="361,35" zPosition="3" transparent="1" />
+		<widget name="mute" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/HD_BORDER/mute.png" position="871,634" size="32,32" zPosition="3" transparent="1" alphatest="on" />
 		<widget font="Regular;18" halign="left" valign="center" name="key_red" position="90,635" size="134,30" transparent="1" zPosition="2"/>
 		<widget font="Regular;18" halign="left" valign="center" name="key_green" position="260,635" size="134,30" transparent="1" zPosition="2"/>
 		<widget font="Regular;18" halign="left" valign="center" name="key_yellow" position="430,635" size="134,30" transparent="1" zPosition="2"/>

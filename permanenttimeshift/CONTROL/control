@@ -3,4 +3,4 @@ Version: 1.0.2
 Description: Permanent Timeshift Plugin for E2 Dreamboxes.
 Maintainer: Homey <homey@dreambox-plugins.de>
 Homepage: www.dreambox-plugins.de
-Depends: enigma2, enigma2-plugin-extensions-reconstructapsc
+Depends: enigma2
