@@ -292,13 +292,13 @@ RESULT eServiceTS::start()
 
 RESULT eServiceTS::stop()
 {
+	printf("TS: %s stop\n", m_filename.c_str());
+	m_streamthread->stop();
 	if (m_destfd >= 0)
 	{
 		::close(m_destfd);
 		m_destfd = -1;
 	}
-	printf("TS: %s stop\n", m_filename.c_str());
-	m_streamthread->stop();
 	m_decodedemux->flush();
 	m_audioInfo = 0;
 	m_channel = 0;
