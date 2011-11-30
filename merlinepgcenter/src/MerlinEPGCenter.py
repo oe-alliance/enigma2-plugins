@@ -106,6 +106,14 @@ try:
 except ImportError:
 	IMDB_INSTALLED = False
 
+# check for YTTrailer support
+try:
+	from Plugins.Extensions.YTTrailer.plugin import YTTrailerList
+	YTTRAILER_INSTALLED = True
+except ImportError:
+	YTTRAILER_INSTALLED = False
+	
+
 class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 	(skinFile, skinList) = SkinFinder.getSkinData(SKINLIST, SKINDIR, config.plugins.merlinEpgCenter.skin.value)
 	if skinFile is not None:
@@ -1976,6 +1984,17 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 	def keyRadio(self):
 		self.switchTvRadio(MODE_RADIO)
 		
+	def keyVideo(self):
+		if YTTRAILER_INSTALLED:
+			if self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME or self.currentMode == EPGSEARCH_RESULT:
+				cur = self["list"].getCurrent()
+				if cur:
+					self.session.open(YTTrailerList, cur[5])
+			elif self.currentMode == TIMERLIST:
+				cur = self["timerlist"].getCurrent()
+				if cur:
+					self.session.open(YTTrailerList, cur.name)
+					
 	############################################################################################
 	# TAB TOGGLING
 	
