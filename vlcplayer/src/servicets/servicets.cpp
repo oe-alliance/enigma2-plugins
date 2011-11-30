@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/ioctl.h>
 #include <string>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -346,8 +347,14 @@ RESULT eServiceTS::pause(ePtr<iPauseableService> &ptr)
 // iPausableService
 RESULT eServiceTS::pause()
 {
-	m_streamthread->stop();
-	m_decoder->pause();
+	if(!m_streamthread->stopping())
+	{
+		eDebug("eServiceTS::pause: pausing thread!");
+		m_streamthread->stop();
+		m_decoder->pause();
+	}
+	else
+		eDebug("eServiceTS::pause: thread already stopping - ignoring request!");
 	return 0;
 }
 
@@ -503,8 +510,14 @@ void eStreamThread::start(int srcfd, int destfd) {
 }
 
 void eStreamThread::stop() {
-	m_stop = true;
-	kill();
+	if(!stopping())
+	{
+		m_stop = true;
+		::ioctl(m_destfd, 0);
+		kill();
+	}
+	else
+		eDebug("eStreamThread::stop: thread already stopping, ignoring kill request!");
 }
 
 void eStreamThread::recvEvent(const int &evt)

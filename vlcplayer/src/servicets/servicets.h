@@ -136,6 +136,7 @@ public:
 	void start(int srcfd, int destfd);
 	void stop();
 	bool running() { return m_running; }
+	bool stopping() { return m_stop || !m_running; }
 
 	virtual void thread();
 	virtual void thread_finished();
