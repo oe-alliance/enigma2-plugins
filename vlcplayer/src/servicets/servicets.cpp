@@ -673,7 +673,7 @@ void eStreamThread::thread() {
 		maxfd = 0;
 		timeout.tv_sec = 1;
 		timeout.tv_usec = 0;
-		if (r < bufsize) {
+		if (r < bufsize && !eof) {
 			FD_SET(m_srcfd, &rfds);
 			maxfd = MAX(maxfd, m_srcfd);
 		}
@@ -707,7 +707,7 @@ void eStreamThread::thread() {
 				if (r == bufsize) eDebug("eStreamThread::thread: buffer full");
 			}
 		}
-		if (FD_ISSET(m_destfd, &wfds) && (w < r) && ((r > bufsize/4) || eof)) {
+		if (FD_ISSET(m_destfd, &wfds) && ((r > 10*1024) || eof)) {
 			rc = ::write(m_destfd, buf+w, r-w);
 			if (rc < 0) {
 				eDebug("eStreamThread::thread: error in write (%d)", errno);
