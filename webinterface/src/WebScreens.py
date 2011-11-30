@@ -280,6 +280,7 @@ class StreamingWebScreen(WebScreen):
 		self.screenIndex = len(streamingScreens) - 1
 		self.stateChanged(StreamingWebScreen.EVENT_START)
 		self.onClose.append(boundFunction(self.stateChanged, self.EVENT_END))
+		self.clientIP = request.getAllHeaders().get('x-forwarded-for', request.getClientIP())
 
 	def stateChanged(self, event):
 		for f in streamingEvents:
