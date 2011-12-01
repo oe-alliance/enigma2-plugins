@@ -1133,7 +1133,7 @@ var Vol = Class.create({
 
 var Powerstate = Class.create({
 	initialize: function(xml){
-		this.instandby = getNodeContent("e2instandby").strip() == "true";
+		this.instandby = (getNodeContent(xml, "e2instandby").strip() == "true");
 	},
 	
 	isStandby: function(){

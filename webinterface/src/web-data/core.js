@@ -222,8 +222,10 @@ var EPG = Class.create(Controller, {
 				'click',
 				'.eListEditTimer',
 				function(event, element){
-					debug('eListEditTimer');
-					return false;
+					var hash = ["#!/timer", "edit"].join("/");
+					hashListener.setHash(hash);
+					core.timers.editFromEvent(element);
+					//return false;
 				}
 			);
 		};
@@ -260,15 +262,15 @@ var Power = Class.create({
 		}
 	},
 	
-	isStandby: function(callback){
-		this.callbacks[this.callbacks.length] = callback;
-		if(!this.sLoading){
+	inStandby: function(callback){
+		this.callbacks.push(callback);
+		if(!this.isLoading){
 			this.load({});
 		}
 	},
 	
 	set: function(newstate, callback){
-		this.callbacks[this.callbacks.length] = callback;
+		this.callbacks.push(callback);
 		this.load({'newstate' : this.STATES[newstate]});
 	}
 });
@@ -443,7 +445,7 @@ var Movies = Class.create(Controller, {
 	load: function(location, tags){	
 		if(!location){
 			var sethash = function(location){
-				var hash = [core.getBaseHash(), encodeURIComponent(location), encodeURIComponent(tags)].join("/");
+				var hash = [core.getBaseHash(), "filter", encodeURIComponent(location), encodeURIComponent(tags)].join("/");
 				hashListener.setHash(hash);
 			};
 			if(core.currentLocation == ""){ //wait for currentLocation to be set;
@@ -462,7 +464,7 @@ var Movies = Class.create(Controller, {
 	},
 	
 	showNav: function(currentLocation, locations, tags){
-		this.navModel.load(toOptionList(locations, currentLocation), toOptionList(tags));
+		this.navModel.load(toOptionList(locations, currentLocation), toOptionList(tags, core.currentTag));
 	},
 	
 	del: function(element){
@@ -808,6 +810,10 @@ var Timers = Class.create({
 		this.timerHandler.load(element, true);
 	},
 	
+	editFromEvent: function(element){
+		this.timerHandler.load(element, false, false, true);
+	},
+	
 	save: function(element){
 		this.timerHandler.commitForm(element);
 	},
@@ -939,6 +945,7 @@ var E2WebCore = Class.create({
 		
 		this.currentData = {};
 		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
+		this.currentTag = "";
 		this.deviceInfo = this.simplepages.getDeviceInfo(function(info){this.deviceInfo = info;}.bind(this));
 		
 		this.navlut = {
@@ -953,19 +960,16 @@ var E2WebCore = Class.create({
 				'all' : this.services.loadAllRadio.bind(this.services)
 			},
 			'movies':{
-				'filter' : function(){} //DON'T TOUCH THIS!
+				'list' : function(){}
 			},
 			'timer': {
-				'create' : this.timers.create.bind(this.timers), //TODO create Timer
+				'create' : this.timers.create.bind(this.timers),
 				'edit' : false,
-				'delete' : false,
-				'toggle' : false
+				'list' : function() { this.loadContentDynamic(this.timers.loadList.bind(this.timers), 'Timer'); }.bind(this)
 			},
 			'control': {
-				//TODO add & use controller for Boxcontrols
 				'message' : this.simplepages.loadMessage.bind(this.simplepages),
 				'power' : this.simplepages.loadPower.bind(this.simplepages),
-				'remote' : function(){}, //TODO loadControl
 				'osdshot' : this.screenshots.shootOsd.bind(this.screenshots),
 				'screenshot' : this.screenshots.shootAll.bind(this.screenshots),
 				'videoshot' : this.screenshots.shootVideo.bind(this.screenshots)
@@ -1051,6 +1055,15 @@ var E2WebCore = Class.create({
 	updateItems: function(){
 		debug("[E2WebCore].updateItems");
 		this.current.load();
+		this.power.inStandby(this.onPowerStateAvailable.bind(this));
+	},
+	
+	onPowerStateAvailable: function(isStandby){
+		if(isStandby){
+			$('openSignalPanelImg').src="/web-data/img/transmit_grey.png";
+		} else {
+			$('openSignalPanelImg').src="/web-data/img/transmit_blue.png";
+		}
 	},
 
 	updateItemsLazy: function(){
@@ -1101,9 +1114,10 @@ var E2WebCore = Class.create({
 					if(!this.navlut[this.mode][this.subMode]){
 						return;
 					} else {
-						this.navlut[this.mode][this.subMode]();
+						if(this.mode != "movies")
+							this.navlut[this.mode][this.subMode]();
 					}
-				}				
+				}
 				if(len > 3){
 					switch(this.mode){
 					case 'tv':
@@ -1111,13 +1125,24 @@ var E2WebCore = Class.create({
 						this.services.load(unescape(parts[3]));
 						break;
 					case 'movies':
-						var location = decodeURIComponent(parts[3]);
+						var location = decodeURIComponent(parts[4]);
+						var tag = decodeURIComponent(parts[5]);
+						
 						this.currentLocation = location;
-						this.movies.load(decodeURIComponent(parts[3]), decodeURIComponent(parts[4]));
+						this.currentTag = tag;
+						this.loadContentDynamic(
+							function(){
+								this.movies.load(location, tag);
+							}.bind(this),
+							'Movies'
+						);
+						
+						break;
 					case 'extras':
 						if(subMode == 'mediaplayer'){
 							this.mediaplayer.load(decodeURIComponent(parts[3]));
 						}
+						break;
 					default:
 						return;
 					}
@@ -1306,7 +1331,7 @@ var E2WebCore = Class.create({
 			function(event, element){
 				debug($("locations").value);
 				debug($("tags").value);
-				var hash = [this.getBaseHash(), encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
+				var hash = [this.getBaseHash(), "filter", encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
 				hashListener.setHash(hash);
 			}.bind(this)
 		);
@@ -1316,7 +1341,7 @@ var E2WebCore = Class.create({
 			function(event, element){
 				debug($("locations").value);
 				debug($("tags").value);
-				var hash = [this.getBaseHash(), encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
+				var hash = [this.getBaseHash(), "filter", encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
 				hashListener.setHash(hash);
 			}.bind(this)
 		);
@@ -1409,6 +1434,7 @@ var E2WebCore = Class.create({
 					if(isStandby)
 						text = "Device is now in Standby";
 					this.notify(text, true);
+					this.onPowerStateAvailable(isStandby);
 				}.bind(this);
 				this.power.set(element.readAttribute("data-state"), cb);
 			}.bind(this)
@@ -1482,7 +1508,7 @@ var E2WebCore = Class.create({
 			'click', 
 			'.tListEdit', 
 			function(event, element){
-				var hash = [this.getBaseHash(), "edit"].join("/");
+				var hash = ["#!/timer", "edit"].join("/");
 				hashListener.setHash(hash);
 				this.timers.edit(element);
 				return false;
@@ -1653,7 +1679,7 @@ var E2WebCore = Class.create({
 	
 		case "timer":
 			this.reloadNav('tplNavTimer', 'Timer');
-			this.loadContentDynamic(this.timers.loadList.bind(this.timers), 'Timer');
+//			this.loadContentDynamic(this.timers.loadList.bind(this.timers), 'Timer');
 			break;
 	
 		case "mediaplayer":

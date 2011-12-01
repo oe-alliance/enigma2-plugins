@@ -638,6 +638,38 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		return t;
 	},
 	
+	getDataFromEvent: function(element){
+		var parent = element.up('.epgListItem');
+		var t = {};
+		
+		if(parent){
+			var begin = unescape(parent.readAttribute('data-start'));
+			var end = unescape(parent.readAttribute('data-end'));
+			var beginD = new Date(begin * 1000);
+			var endD = new Date(end * 1000);
+			t = {
+				servicereference : decodeURIComponent(parent.readAttribute('data-servicereference')),
+				servicename : unescape(parent.readAttribute('data-servicename')),
+				description : unescape(parent.readAttribute('data-description')),
+				name : unescape(parent.readAttribute('data-title')),
+				eventId : unescape(parent.readAttribute('data-eventid')),
+				begin : begin,
+				beginDate : this.toReadableDate(beginD),
+				end : end,
+				endDate : this.toReadableDate(endD),
+				repeated : "0",
+				justplay : "0",
+				dirname : "",
+				tags : "",
+				afterevent : "3",
+				disabled : "0",
+				deleteOldOnSave : "0"
+			};
+		}
+		return t;
+	},
+	
+	
 	/**
 	 * @override
 	 * load
@@ -647,7 +679,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * Parameters:
 	 * @element - the html element calling the load function ( onclick="TimerProvider.load(this)" )
 	 */
-	load: function(element, setOld, initial){
+	load: function(element, setOld, initial, fromEvent){
 		var t = {};
 		var begin = new Date();
 		var end = new Date();
@@ -672,7 +704,11 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				disabled : "0"
 			};
 		} else {
-			t = this.getData(element, setOld);
+			if(fromEvent){
+				t = this.getDataFromEvent(element);
+			} else {
+				t = this.getData(element, setOld);
+			}
 			begin = new Date(t.begin * 1000);
 			end = new Date(t.end * 1000);
 		}
