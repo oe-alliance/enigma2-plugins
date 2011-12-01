@@ -9,16 +9,26 @@
 	
 	<title>Dreambox WebControl</title>
 	
-	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">
-	<link href="/web-data/tpl/default/datepicker.css" type="text/css" rel="stylesheet">
+	<!-- <link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet"> -->
+	<link href="/web-data/tpl/default/style.min.css" type="text/css" rel="stylesheet">
 	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico">
-	
-
+	<!-- 
 	<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
 	<script type="text/javascript" src="/web-data/lib/curvycorners.js"></script>
 	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
 	<script type="text/javascript" src="/web-data/lib/hashlistener2.js"></script>
 	<script type="text/javascript" src="/web-data/lib/datepicker/datepicker.js">
+ 	{
+		"nodrag":1,
+		"lang":"en",
+		"buttontabindex":true,
+		"cellformat":["Y-ds-m-ds-d"],
+		"titleformat":["Y-ds-m-ds-d"]
+	}
+	</script>
+	 -->
+
+	<script type="text/javascript" src="/web-data/lib/libs_minified.js">
 	{
 		"nodrag":1,
 		"lang":"en",
@@ -27,32 +37,8 @@
 		"titleformat":["Y-ds-m-ds-d"]
 	}
 	</script>
-
- 	<!-- 
-	<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>
-	 -->
-	<!-- userprefs Object -->
-	<script type="text/javascript" src="/web-data/userprefs.js"></script>
-		
-	<!-- our stuff //-->
-	<script type="text/javascript" src="/web-data/objects.js" ></script>
-	<script type="text/javascript" src="/web-data/statics.js" ></script>
-	<script type="text/javascript" src="/web-data/provider.js" ></script>
-	<script type="text/javascript" src="/web-data/handler.js" ></script>
-	<script type="text/javascript" src="/web-data/core.js" ></script>
-	
-
-	<!-- Gears-->
-	<script type="text/javascript" src="/web-data/lib/gears_init.js"></script>
-	<script type="text/javascript" src="/web-data/gears_handler.js" ></script>
-
-	<!-- Live RSS Feeds //-->
-	<link rel="alternate" type="application/rss+xml" title="Movie List" href="/web/movielist.rss?tag" >
-
-
-	<script language="javascript" type="text/javascript">
-		
-		if (!window.$) {
+ 	<script language="javascript" type="text/javascript">
+	 	if (!window.$) {
 			window.$ = function(id) { return document.getElementById(id); }
 		}
 		
@@ -73,14 +59,14 @@
 			} 
 			return s; 
 		} 
-
+	
 		function getBody(w) 
 		{ 
 			return (w.document.compatMode && w.document.compatMode == "CSS1Compat") ? w.document.documentElement : w.document.body || null; 
 		} 
 		
 		function setMaxHeight(element){
-			try{			
+			try{
 				var slc = $(element);
 				size = getWinSize();
 				slc.style.maxHeight = size.height - 200+"px";
@@ -89,8 +75,33 @@
 				}
 			} catch (e) {}
 		}
-
+		function setNavHd(content){
+			$('navHd').update('<div style="background-color: #000">'+content+'</div>');
+		}
+		
+		function setContentHd(content){
+			var div = new Element('div');
+			div.setStyle({background: 'black'});
+			div.update(content);
+			$('contentHd').update(div);
+			$('contentHdExt').update('');
+		}
+		
+		function getAjaxLoad(){
+			return ('<center><img style="padding-top: 50px;" src="/web-data/gfx/ajaxload.gif" alt="loading..."></center>');
+		}
 	</script>
+	
+	<!-- Webinterface Stuff -->
+	<script type="text/javascript" src="/web-data/userprefs.js"></script>
+	<script type="text/javascript" src="/web-data/statics.js" ></script>
+	<script type="text/javascript" src="/web-data/objects.js" ></script>
+	<script type="text/javascript" src="/web-data/provider.js" ></script>
+	<script type="text/javascript" src="/web-data/handler.js" ></script>
+	<script type="text/javascript" src="/web-data/core.js" ></script>
+
+	<!-- Live RSS Feeds //-->
+	<link rel="alternate" type="application/rss+xml" title="Movie List" href="/web/movielist.rss?tag" >
 </head>
 <body onresize="setMaxHeight('contentMain')" onload="document.getElementById('notification').style.display='none'">	
 	<div id="container">
@@ -171,7 +182,7 @@
 						<form id="epgSearchForm" action="">
 							<input type="text" id="epgSearch" value="Search EPG" />
 							<img id="epgSearchClear" style="vertical-align:middle" src="/web-data/img/cross.png" alt="clear..." title="Clear Search"/>
-						</form>						
+						</form>
 					</div>
 				</div>
 			</div>
@@ -186,23 +197,8 @@
 			</div>	
 		</div>
 	</div>
-	<script language="javascript" type="text/javascript">	
-		function setNavHd(content){
-			$('navHd').update('<div style="background-color: #000">'+content+'</div>');
-		}
-		
-		function setContentHd(content){
-			var div = new Element('div');
-			div.setStyle({background: 'black'});
-			div.update(content);
-			$('contentHd').update(div);
-			$('contentHdExt').update('');
-		}
-		
-		function getAjaxLoad(){
-			return ('<center><img style="padding-top: 50px;" src="/web-data/gfx/ajaxload.gif" alt="loading..."></center>');
-		}		
-		setMaxHeight('contentMain');				
+	<script language="javascript" type="text/javascript">
+		setMaxHeight('contentMain');
 		core.run();
 	</script>
 

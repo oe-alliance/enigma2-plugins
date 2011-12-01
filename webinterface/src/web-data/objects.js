@@ -13,57 +13,31 @@ var AjaxThing = Class.create({
 	 */
 	getUrl: function(url, parms, callback, errorback){
 		debug("[AjaxThing].getUrl :: url=" + url + " :: parms=" + Object.toJSON(parms));
-		if (!window.google || !google.gears){ //no gears
-			try{
-				new Ajax.Request(url,
-						{
-							parameters: parms,
-							asynchronous: true,
-							method: 'POST',
-							requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
-							onException: function(o,e){ 
-									console.log(o); 
-									console.log(e);
-									throw(e);
-								}.bind(this),				
-							onSuccess: function (transport, json) {						
-								if(callback !== undefined){
-									callback(transport);
-								}
+		try{
+			new Ajax.Request(url,
+					{
+						parameters: parms,
+						asynchronous: true,
+						method: 'POST',
+						requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
+						onException: function(o,e){ 
+								console.log(o); 
+								console.log(e);
+								throw(e);
 							}.bind(this),
-							onFailure: function(transport){
-								if(errorback !== undefined){
-									errorback(transport);
-								}
-							}.bind(this)
-//							onComplete: this.requestFinished.bind(this)
-						});
-			} catch(e) {
-				debug('[AbstractContentProvider.getUrl] Exception: '+ e);
-			}
-		} else { //we're on gears!
-			try{
-				url = url + "?" + $H(parms).toQueryString();
-				
-				var request = google.gears.factory.create('beta.httprequest');
-				request.open('GET', url);
-	
-	
-				request.onreadystatechange = function(){				
-					if(request.readyState == 4){
-						if(request.status == 200){
-							if( callback !== undefined ){
-								callback(request);
+						onSuccess: function (transport, json) {
+							if(callback !== undefined){
+								callback(transport);
 							}
-						} else {
-							this.errorback(request);
-						}
-					}
-				}.bind(this);
-				request.send();
-			} catch(e) {
-				debug('[AbstractContentProvider.getUrl] Exception: '+ e);
-			}
+						}.bind(this),
+						onFailure: function(transport){
+							if(errorback !== undefined){
+								errorback(transport);
+							}
+						}.bind(this)
+					});
+		} catch(e) {
+			debug('[AbstractContentProvider.getUrl] Exception: '+ e);
 		}
 	}
 });
