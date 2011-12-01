@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - merlinepgcenter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-29 00:44+0100\n"
+"POT-Creation-Date: 2011-11-30 22:47+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -272,8 +272,8 @@ msgid "Prime Time"
 msgstr "Primetime"
 
 #: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:318
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1866
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:326
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1874
 msgid "Timer"
 msgstr "Timer"
 
@@ -297,128 +297,128 @@ msgstr "Info evento"
 msgid "Keys"
 msgstr "Tasti"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:214
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:222
 msgid "Search for:"
 msgstr "Ricerca per:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:528
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:536
 msgid "Similar"
 msgstr "Simile"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:795
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:803
 msgid "Record or zap timer"
 msgstr "Timer: registrazione o zap"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:796
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:804
 msgid "AutoTimer timer"
 msgstr "Timer Autotimer:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:797
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:805
 msgid "Please select a timer type to add:"
 msgstr "Selezionare il tipo di timer da aggiungere:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:931
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:939
 msgid "Stop current event but not coming events"
 msgstr "Arrestare l'evento corrente ma non i futuri"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:932
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:940
 msgid "Stop current event and disable coming events"
 msgstr "Arrestare l'evento corrente e disabilitare i futuri"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:933
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:941
 msgid "Don't stop current event but disable coming events"
 msgstr "Non interrompere l'evento corrente ma annullare i futuri"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:935
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:943
 msgid "Repeating event currently recording... What do you want to do?"
 msgstr "Registrazione in corso di evento ricorrente. Cosa si desidera fare?"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1028
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1036
 msgid "Match title:"
 msgstr "Confronto titolo:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1034
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1042
 msgid "Services:"
 msgstr "Canali:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1040
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1048
 msgid "Bouquets:"
 msgstr "Bouquet:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1046
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1054
 msgid "Included days:"
 msgstr "Giorni compresi:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1052
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1060
 msgid "Excluded days:"
 msgstr "Giorni esclusi:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1053
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1061
 msgid "Record a maximum of x times:"
 msgstr "Registrare per un massimo di \"x\" volte:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1054
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1062
 msgid "Amount of recordings left:"
 msgstr "Numero di registrazioni residue:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1055
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1063
 msgid "Search type:"
 msgstr "Tipo ricerca:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1056
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1064
 msgid "Location:"
 msgstr "Destinazione:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1264
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1272
 msgid "Outdated on"
-msgstr "Terminati on"
+msgstr "Terminati On"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1266
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1274
 msgid "Outdated off"
-msgstr "Terminati off"
+msgstr "Terminati Off"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1271
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1279
 msgid "IMDb"
-msgstr "single line style"
+msgstr "IMDb"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1277
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1285
 msgid "Add"
 msgstr "Agg."
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1279
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1287
 msgid "Remove"
 msgstr "Rim."
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1280
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1288
 msgid "OK"
 msgstr "Ok"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1281
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1289
 msgid "New Search"
 msgstr "Nuova ricerca"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1291
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1299
 msgid "Remove timer"
 msgstr "Rim. timer"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1294
 #: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1302
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1310
 msgid "Add timer"
 msgstr "Agg. timer"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1622
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1630
 msgid "Edit Off"
 msgstr "Mod. Off"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1626
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1634
 msgid "Edit On"
 msgstr "Mod. On"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1644
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1652
 msgid "return"
 msgstr "Uscire"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1855
+#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1863
 msgid "Set search term"
 msgstr "Ricercare"
 
