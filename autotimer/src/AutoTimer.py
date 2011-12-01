@@ -45,7 +45,7 @@ def getTimeDiff(timer, begin, end):
 typeMap = {
 	"exact": eEPGCache.EXAKT_TITLE_SEARCH,
 	"partial": eEPGCache.PARTIAL_TITLE_SEARCH,
-	"description": "AUTOTIMER_CUSTOM_DESCRIPTION_SEARCH"
+	"description": -99
 }
 
 caseMap = {
@@ -217,11 +217,11 @@ class AutoTimer:
 			if timer.searchType == "description":
 				test = []
 				epgmatches = []
-				
+
 				casesensitive = timer.searchCase == "sensitive"
 				if not casesensitive:
 					match = match.lower()
-				
+
 				#if timer.services or timer.bouquets:
 				# Service filter defined
 				# Search only using the specified services
@@ -237,12 +237,12 @@ class AutoTimer:
 								break
 							if not (service.flags & mask):
 								test.append( (service.toString(), 0, -1, -1 ) )
-				
+
 				if not test:
 				#else:
 					# No service filter defined
 					# Search within all services - could be very slow
-					
+
 					# Get all bouquets
 					bouquetlist = []
 					refstr = '1:134:1:0:0:0:0:0:0:0:FROM BOUQUET \"bouquets.tv\" ORDER BY bouquet'
@@ -263,7 +263,7 @@ class AutoTimer:
 						info = serviceHandler.info(bouquetroot)
 						if info:
 							bouquetlist.append((info.getName(bouquetroot), bouquetroot))
-					
+
 					# Get all services
 					mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
 					for name, bouquet in bouquetlist:
@@ -278,23 +278,23 @@ class AutoTimer:
 										break
 									if not (service.flags & mask):
 										test.append( (service.toString(), 0, -1, -1 ) )
-				
+
 				if test:
 					# Get all events
 					#  eEPGCache.lookupEvent( [ format of the returned tuples, ( service, 0 = event intersects given start_time, start_time -1 for now_time), ] )
 					test.insert(0, 'RITBDSE')
 					allevents = epgcache.lookupEvent( test ) or []
-					
-					# Filter events 
+
+					# Filter events
 					for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
 						if ( shortdesc if casesensitive else shortdesc.lower() ).find(match) > -1 \
 							or ( extdesc if casesensitive else extdesc.lower() ).find(match) > -1:
 							epgmatches.append( (serviceref, eit, name, begin, duration, shortdesc, extdesc) )
-			
+
 			else:
 				# Search EPG, default to empty list
 				epgmatches = epgcache.search( ('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
-			
+
 			# Sort list of tuples by begin time 'B'
 			epgmatches.sort(key=itemgetter(3))
 
