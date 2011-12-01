@@ -541,7 +541,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 		extend((' encoding="', str(defaultTimer.encoding), '"'))
 
 	# SearchType
-	if defaultTimer.searchType:
+	if defaultTimer.searchType != "partial":
 		extend((' searchType="', str(defaultTimer.searchType), '"'))
 
 	# Only display searchCase if sensitive
@@ -675,7 +675,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 			extend((' encoding="', str(timer.encoding), '"'))
 
 		# SearchType
-		if timer.searchType:
+		if timer.searchType != "partial":
 			extend((' searchType="', str(timer.searchType), '"'))
 
 		# Only display searchCase if sensitive
