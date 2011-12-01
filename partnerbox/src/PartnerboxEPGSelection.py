@@ -86,10 +86,7 @@ def PartnerboxInit(self, filterRef):
 	
 
 def Partnerbox_EPGSelection_ZapTo(self): # just used in multiepg
-	if not (self.zapFunc and self.key_red_choice == self.ZAP):
-		self.session.openWithCallback(self.NewPartnerBoxSelected, PartnerboxEntriesListConfigScreen, 0)
-	else:
-		baseEPGSelection_ZapTo(self)
+	baseEPGSelection_ZapTo(self)
 
 def NewPartnerBoxSelected(self, session, what, partnerboxentry = None):
 	if partnerboxentry is not None:
