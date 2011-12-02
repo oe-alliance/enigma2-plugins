@@ -287,8 +287,8 @@ class AutoTimer:
 
 					# Filter events
 					for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-						if ( shortdesc if casesensitive else shortdesc.lower() ).find(match) > -1 \
-							or ( extdesc if casesensitive else extdesc.lower() ).find(match) > -1:
+						if match in (shortdesc if casesensitive else shortdesc.lower()) \
+							or match in (extdesc if casesensitive else extdesc.lower()):
 							epgmatches.append( (serviceref, eit, name, begin, duration, shortdesc, extdesc) )
 
 			else:
