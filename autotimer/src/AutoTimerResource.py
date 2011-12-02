@@ -395,7 +395,7 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.refresh.value,
 				config.plugins.autotimer.try_guessing.value,
 				config.plugins.autotimer.editor.value,
-				config.plugins.autotimer.addsimilar_on_conflict,
+				config.plugins.autotimer.addsimilar_on_conflict.value,
 				config.plugins.autotimer.disabled_on_conflict.value,
 				config.plugins.autotimer.show_in_extensionsmenu.value,
 				config.plugins.autotimer.fastscan.value,
