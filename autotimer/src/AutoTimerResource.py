@@ -1,4 +1,5 @@
 from AutoTimer import AutoTimer
+from AutoTimerConfiguration import CURRENT_CONFIG_VERSION
 from Components.config import config
 from RecordTimer import AFTEREVENT
 from twisted.web import http, resource
@@ -10,7 +11,7 @@ from enigma import eServiceReference
 from . import _, iteritems
 from . import plugin
 
-API_VERSION = "1.0"
+API_VERSION = "1.1"
 
 class AutoTimerBaseResource(resource.Resource):
 	_remove = False
@@ -384,6 +385,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingname>hasVps</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
+	<e2setting>
+		<e2settingname>version</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
 </e2settings>""" % (
 				config.plugins.autotimer.autopoll.value,
 				config.plugins.autotimer.interval.value,
@@ -397,4 +402,5 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.notifconflict.value,
 				config.plugins.autotimer.notifsimilar.value,
 				hasVps,
+				CURRENT_CONFIG_VERSION,
 			)
