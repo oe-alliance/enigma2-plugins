@@ -143,6 +143,8 @@ def sessionstart(reason, session):
 	
 # InfoBar is now initialised, our chance to occupy the ChannelSelectActions
 def networkconfigread(reason = None):
+	if not InfoBar.instance:
+		return
 	infoBarFunctionSaver.saveInfoBarChannelFunctions()
 	infoBarFunctionSaver.saveInfoBarEventViewFunctions()
 	config.plugins.merlinEpgCenter.replaceInfobarChannelUp.addNotifier(infoBarFunctionSaver.setInfoBarActionMap, initial_call = True)
