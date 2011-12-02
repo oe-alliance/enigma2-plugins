@@ -11,7 +11,18 @@ from ServiceReference import ServiceReference
 
 from enigma import eServiceReference
 
-CURRENT_CONFIG_VERSION = "5"
+"""
+Configuration Version.
+To be bumped for any modification of the config format.
+Incompatible changes (e.g. different parameter names) require a compatible
+parser to be implemented as for example parseConfigOld which is capable of
+parsing every config format before version 5.
+Previously this variable was only bumped for incompatible changes, but as this
+is the only reliable way to make remote tools aware of our capabilities without
+much overhead (read: a special api just for this) we chose to change the meaning
+of the version attribue.
+"""
+CURRENT_CONFIG_VERSION = "6"
 
 def getValue(definitions, default):
 	# Initialize Output
@@ -31,7 +42,13 @@ def getValue(definitions, default):
 	return ret.strip() or default
 
 def parseConfig(configuration, list, version = None, uniqueTimerId = 0, defaultTimer = None):
-	if version != CURRENT_CONFIG_VERSION:
+	try:
+		intVersion = int(version)
+	except ValueError:
+		print('[AutoTimer] Config version "%s" is not a valid integer, assuming old version' % version)
+		intVersion = -1
+
+	if intVersion < 5:
 		parseConfigOld(configuration, list, uniqueTimerId)
 		return
 
