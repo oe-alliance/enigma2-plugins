@@ -1,97 +1,3 @@
-Element.prototype.fadeIn = function(parms, out) {
-		var _this = this;
-		var opacityTo = function(elm,v){
-			elm.style.opacity = v/100;
-			elm.style.MozOpacity =  v/100;
-			elm.style.KhtmlOpacity =  v/100;
-			elm.style.filter=" alpha(opacity ="+v+")";
-		};
-		var delay = parms.delay;
-		var to = parms.to;
-		if(!to)
-			to = 100;
-		
-		_this.style.zoom = 1;
-		// for ie, set haslayout
-		_this.style.display = "block";
-	
-		for (var i=1; i<=to; i++) {
-			(function(j) {
-				setTimeout(function() {
-					if (out == true)
-						j = to - j;
-					opacityTo(_this, j);
-				}, j * delay / to);
-			})(i);
-		};
-	};
-Element.prototype.fadeOut = function(delay) {
-		this.fadeIn({'delay' : delay}, true);
-	};
-
-String.prototype.e = function(){
-	return this.replace("\"","&quot;");
-};
-	
-// General Helpers
-function toOptionList(lst, selected, split) {
-	var retList = Array();
-	retList.push("");
-	if(split && !selected == ''){
-		selected = selected.split(split);
-	} else {
-		if(selected && selected != ""){
-			selected = [selected];
-		} else {
-			selected = [];
-		}
-	}
-
-	selected.each(function(item){
-		var found = false;
-		lst.each(function(listItem){
-			
-			if (listItem == item) {
-				found = true;
-			}
-		});
-		if (!found) {
-			lst.push(item);
-		}
-	});
-
-	
-	lst.each(function(listItem){
-		var sel = '';
-		selected.each(function(item){
-			if (listItem == item) {
-				sel = 'selected';
-			}
-		});
-		
-		retList.push({
-			'value': listItem,
-			'txt': listItem,
-			'selected': sel
-		});
-	});
-
-	return retList;
-}
-
-function debug(item){
-	if(userprefs.data.debug)
-		console.log(item);
-}
-
-function parseNr(num) {
-	if(isNaN(num)){
-		return 0;
-	} else {
-		return parseInt(num);
-	}
-}
-
 var Controller = Class.create({
 	initialize: function(model){
 		this.model = model;
@@ -1237,22 +1143,20 @@ var E2WebCore = Class.create({
 		$('openSignalPanel').on(
 			'click',
 			function(event, element){
-				//FIXME
-				$('openSignalPanel').href = '#';
 				this.signal.load();
+				event.stop();
 			}.bind(this)
 		);
 		$('instantRecord').on(
 			'click',
 			function(event, element){
-				//FIXME
-				$('instantRecord').href = '#';
 				var menu = $('instantRecordMenu');
 				if(menu.visible()){
 					menu.hide();
 				} else {
 					menu.show();
 				}
+				event.stop();
 			}
 		);
 		document.on(
@@ -1273,8 +1177,6 @@ var E2WebCore = Class.create({
 			'click',
 			'.currentExtShowHide',
 			function(event, element){
-				//FIXME
-				element.href = '#';
 				var ext = $('trExtCurrent');
 				if(ext){
 					if(ext.visible())
@@ -1282,26 +1184,18 @@ var E2WebCore = Class.create({
 					else
 						ext.show();
 				}
+				event.stop();
 			}
 		);
 		$('current').on(
 				'click',
 				'.currentEpg',
 				function(event, element){
-					//FIXME
-					element.href = '#';
 					var ref = unescape( element.readAttribute('data-servicereference') );
 					this.epg.load(ref);
+					event.stop();
 				}.bind(this)
 			);
-		//Signal
-		$('openSignalPanel').on(
-			'click',
-			function(event, element){
-				//TODO openSignalPanel
-			}
-		);
-		
 		//EPG-Search
 		$('epgSearchForm').on(
 			'submit',
@@ -1375,20 +1269,20 @@ var E2WebCore = Class.create({
 			'click',
 			'.mpPlayFile',
 			function(event, element){
-				element.href = '#'; //FIXME
 				var parent = element.up('.mpListItem');
 				var ref = decodeURIComponent( parent.readAttribute('data-servicereference') );
 				this.mediaplayer.playFile(ref);
+				event.stop();
 			}.bind(this)
 		);
 		content.on(
 			'click',
 			'.mpRemoveFile',
 			function(event, element){
-				element.href = '#'; //FIXME
 				var parent = element.up('.mpListItem');
 				var ref = decodeURIComponent( parent.readAttribute('data-servicereference') );
 				this.mediaplayer.removeFile(ref);
+				event.stop();
 			}.bind(this)
 		);
 		content.on(
@@ -1418,10 +1312,8 @@ var E2WebCore = Class.create({
 			'click', 
 			'a.mListDelete', 
 			function(event, element){
-				//FIXME
-				element.href = '#';
 				this.movies.del(element);
-				return false;
+				event.stop();
 			}.bind(this)
 		);
 		//Powerstate
@@ -1452,30 +1344,24 @@ var E2WebCore = Class.create({
 			'click', 
 			'a.sListSLink', 
 			function(event, element){
-				//FIXME
-				element.href = '#';
 				var ref = decodeURIComponent( element.id );
 				this.services.zap(ref);
-				return false;
+				event.stop();
 			}.bind(this)
 		);
 		content.on(
 			'click', 
 			'a.sListServiceEpg', 
 			function(event, element){
-				//FIXME
-				element.href = '#';
 				var ref = unescape( element.readAttribute('data-servicereference') );
 				this.epg.load(ref);
-				return false;
+				event.stop();
 			}.bind(this)
 		);
 		content.on(
 			'click', 
 			'a.sListExtEpg',
 			function(event, element){
-				//FIXME
-				element.href = '#';
 				var target = element.down('.sListExtEpgLong');
 				if(target){
 					if(target.visible()){
@@ -1484,7 +1370,7 @@ var E2WebCore = Class.create({
 						target.show();
 					}
 				}
-				return false;
+				event.stop();
 			}.bind(this)
 		);
 		//Timerlist
@@ -1493,7 +1379,7 @@ var E2WebCore = Class.create({
 			'.tListDelete', 
 			function(event, element){		
 				this.timers.del(element);
-				return false;
+				event.stop();
 			}.bind(this)
 		);
 		content.on(
@@ -1501,7 +1387,7 @@ var E2WebCore = Class.create({
 			'.tListToggleDisabled', 
 			function(event, element){
 				this.timers.toggleDisabled(element);
-				return false;
+				event.stop();
 			}.bind(this)
 		);
 		content.on(
@@ -1588,7 +1474,6 @@ var E2WebCore = Class.create({
 			'click',
 			'.tEditTag',
 			function(event, element){
-				element.href = '#'; //FIXME
 				var selected = 'selected';
 				var attr = 'data-selected';
 				if(element.hasClassName(selected)){
@@ -1598,6 +1483,7 @@ var E2WebCore = Class.create({
 					element.addClassName(selected);
 					element.writeAttribute(attr, selected);
 				}
+				event.stop();
 			}.bind(this)
 		);
 		content.on(
@@ -1611,7 +1497,8 @@ var E2WebCore = Class.create({
 		$('webTv').on(
 			'click',
 			function(event, element){
-				window.open('/web-data/streaminterface.html', 'WebTV', 'scrollbars=no, width=800, height=740');
+				window.open('/web-data/tpl/default/streaminterface/index.html', 'WebTV', 'scrollbars=no, width=800, height=740');
+				event.abort();
 			}.bind(this)
 		);
 	},
@@ -1674,17 +1561,10 @@ var E2WebCore = Class.create({
 	
 		case "movies":	
 			this.reloadNavDynamic(this.movies.loadNav.bind(this.movies), 'Movies');
-//			this.loadContentDynamic(this.movies.load.bind(this.movies), 'Movies');
 			break;
 	
 		case "timer":
 			this.reloadNav('tplNavTimer', 'Timer');
-//			this.loadContentDynamic(this.timers.loadList.bind(this.timers), 'Timer');
-			break;
-	
-		case "mediaplayer":
-			//TODO this.loadContentDynamic(loadMediaPlayer, 'MediaPlayer');
-			debug("mediaplayer not implemented");
 			break;
 	
 		case "control":

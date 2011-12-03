@@ -154,9 +154,7 @@ var BouquetListHandler = Class.create(AbstractContentHandler, {
 		$super('tplBouquetList', target);
 		this.provider = new SimpleServiceListProvider(this.show.bind(this));	
 		this.ajaxload = false;
-		this.serviceController = null;
 		this.targetMain = targetMain;
-		this.initServiceList = false;
 	},
 		
 	show : function(data){

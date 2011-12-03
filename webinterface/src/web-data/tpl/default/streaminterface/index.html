@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+	<title>Dreambox WebTV</title>
+	
+	<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>
+	
+	<!-- userprefs Object -->
+	<script type="text/javascript" src="/web-data/userprefs.js"></script>	
+	
+	<!-- our stuff //-->
+	<script type="text/javascript" src="/web-data/statics.js" ></script>
+	<script type="text/javascript" src="/web-data/objects.js" ></script>
+	<script type="text/javascript" src="/web-data/provider.js" ></script>
+	<script type="text/javascript" src="/web-data/handler.js" ></script>
+	<script type="text/javascript" src="/web-data/vlcplayer.js" ></script>
+	
+	<link href="/web-data/tpl/default/streaminterface/style.css" type="text/css" rel="stylesheet">
+	<link rel="shortcut icon" type="/web-data/image/x-icon" href="/web-data/img/favicon.ico">
+</head>
+<body>
+	<div id="container">
+		<div id="banner">
+			<span id="notification" style="display: none;"><div></div></span>
+			<div id="bannerLeft">
+				<div id="bannerText" style="font-size: 24px;">
+					<img src="/web-data/img/dreamboxwebtv.png" alt="Dreambox WebTV">
+				</div>
+				<div id="current">
+				</div>
+			</div>			
+			<div id="bannerRight">
+				<table id="volumeTable">
+					<tr>
+						<td>Volume: </td>
+						<td id="vlcVolume"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!--		<div id="current">-->
+<!--			<div id="currentContent">-->
+<!--				<ul id="mainMenu">-->
+<!--					<li><a href="#" onClick="switchStreamMode('TV')">TeleVision</a></li>-->
+<!--					<li><a href="#" onClick="switchStreamMode('Radio')">Radio</a></li>-->
+<!--				</ul>-->
+<!--			</div>-->
+<!--		</div>-->
+		<div id="content">
+			<div id="contentMain">
+				<center>
+					<div id="vlcPlayer">
+						<embed 
+							type="application/x-vlc-plugin" 
+							pluginspage="http://www.videolan.org" 
+							version="VideoLAN.VLCPlugin.2"
+							width="768"
+							height="576"
+							id="vlc">
+						</embed>
+					</div>
+					<div id="vlcButtons">
+						<button class="vlcPrev" title="Previous Service">
+							<img src="/web-data/img/control_start_blue.png" alt="&lt;&lt;" />
+						</button>
+						<button class="vlcPlay" title="Play">
+							<img src="/web-data/img/control_play_blue.png" alt="&gt;" />
+						</button>
+						<button class="vlcNext" title="Next Service">
+							<img src="/web-data/img/control_end_blue.png" alt="&lt;&lt;" />
+						</button>
+						<button class="vlcStop" title="Stop">
+							<img src="/web-data/img/control_stop_blue.png" alt="Stop" />
+						</button>
+						<button class="vlcFullscreen" title="Fullscren">
+							<img src="/web-data/img/monitor.png" alt="Fullscreen" />
+						</button>
+						<button class="vlcVolumeDown" title="Volume Down">
+							<img src="/web-data/img/sound_delete.png" alt="Vol-" />
+						</button>
+						<button class="vlcToggleMute"  title="Mute Audio">
+							<img src="/web-data/img/sound_mute.png" alt="Mute" />
+						</button>
+						<button class="vlcVolumeUp"  title="Volume Up">
+							<img src="/web-data/img/sound_add.png" alt="Vol+" />
+						</button>
+						<input type="checkbox" id="vlcZap" title="Also zap on TV (for Subservices)">Zap</input>
+						<br>
+						<span id="bouquetList"></span>
+						<span id="serviceList"></span>
+					</div>
+				</center>
+			</div>				
+		</div>	
+	</div>
+	
+	<script language="JavaScript" type="Text/Javascript">
+		function addtoFavorites(){ 
+			var url = location.href.replace("#", ""); 
+			var title = "Dreambox WebTV"; 
+			
+			if (window.sidebar){
+				// firefox
+				window.sidebar.addPanel(title, url, "");
+			} else if(window.opera && window.print){
+				// opera
+				var elem = document.createElement('a');
+				elem.setAttribute('href', url);
+				elem.setAttribute('title', title);
+				elem.setAttribute('rel', 'sidebar');
+				elem.click();
+			} else if(document.all){
+				// ie
+				window.external.AddFavorite(url, title);
+			}
+		}
+		core.run();
+	</script>
+	<div>
+		<a style="color: #FFF;font-size: 12px; font-weight: normal;" href="#" onClick="addtoFavorites(); return false;">Add to Favorites</a>
+	</div>
+</body>
+</html>

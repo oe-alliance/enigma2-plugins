@@ -1,8 +1,8 @@
 
 <!-- tplBouquetList -->
-		<select id="bouquetSelect" onChange="onBouquetSelected()" width="100px">
-			{for b in bouquets}
-			<option id="${b.servicereference}" >${b.servicename}</option>
+		<select class="bouquets" id="bouquets" width="100px">
+			{for s in services}
+			<option id="${s.servicereference}" >${s.servicename}</option>
 			{/for}
 		</select>
 <!-- tplBouquetList -->

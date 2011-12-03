@@ -1,108 +1,97 @@
 // $Header$
-// store all objects here
-
-var AjaxThing = Class.create({
-	/**
-	 * getUrl
-	 * creates a new Ajax.Request
-	 * Parameters:
-	 * @url - the url to fetch
-	 * @parms - an json object containing  {parameter : value} pairs for the request
-	 * @callback - function to call @ onSuccess;
-	 * @errorback - function to call @ onError;
-	 */
-	getUrl: function(url, parms, callback, errorback){
-		debug("[AjaxThing].getUrl :: url=" + url + " :: parms=" + Object.toJSON(parms));
-		try{
-			new Ajax.Request(url,
-					{
-						parameters: parms,
-						asynchronous: true,
-						method: 'POST',
-						requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
-						onException: function(o,e){ 
-								console.log(o); 
-								console.log(e);
-								throw(e);
-							}.bind(this),
-						onSuccess: function (transport, json) {
-							if(callback !== undefined){
-								callback(transport);
-							}
-						}.bind(this),
-						onFailure: function(transport){
-							if(errorback !== undefined){
-								errorback(transport);
-							}
-						}.bind(this)
-					});
-		} catch(e) {
-			debug('[AbstractContentProvider.getUrl] Exception: '+ e);
-		}
-	}
-});
-
-
-var TemplateEngine = Class.create(AjaxThing, {
-	initialize: function(){
-		this.templates = {};
-	},
-
-	cache: function(request, tplName){
-		debug("[TemplateEngine].cache caching template: " + tplName);
-		this.templates[tplName] = request.responseText;
-	},
+//Helper functions
+Element.prototype.fadeIn = function(parms, out) {
+	var _this = this;
+	var opacityTo = function(elm,v){
+		elm.style.opacity = v/100;
+		elm.style.MozOpacity =  v/100;
+		elm.style.KhtmlOpacity =  v/100;
+		elm.style.filter=" alpha(opacity ="+v+")";
+	};
+	var delay = parms.delay;
+	var to = parms.to;
+	if(!to)
+		to = 100;
 	
-	fetch: function(tplName, callback){
-		if(this.templates[tplName] === undefined) {
-			var url = URL.tpl+tplName+".htm";
-			
-			this.getUrl(
-					url, 
-					{},
-					function(transport){
-						this.cache(transport, tplName);
-						if(typeof(callback) == 'function'){
-							callback(this.templates[tplName]);
-						}
-					}.bind(this)
-			);
+	_this.style.zoom = 1;
+	// for ie, set haslayout
+	_this.style.display = "block";
+
+	for (var i=1; i<=to; i++) {
+		(function(j) {
+			setTimeout(function() {
+				if (out == true)
+					j = to - j;
+				opacityTo(_this, j);
+			}, j * delay / to);
+		})(i);
+	};
+};
+Element.prototype.fadeOut = function(delay) {
+	this.fadeIn({'delay' : delay}, true);
+};
+
+String.prototype.e = function(){
+return this.replace("\"","&quot;");
+};
+
+//General Helpers
+function toOptionList(lst, selected, split) {
+	var retList = Array();
+	retList.push("");
+	if (split && !selected == '') {
+		selected = selected.split(split);
+	} else {
+		if (selected && selected != "") {
+			selected = [ selected ];
 		} else {
-			if(typeof(callback) == 'function'){
-				callback(this.templates[tplName]);
-			}
+			selected = [];
 		}
-	},
-	
-	render: function(tpl, data, domElement) {	
-		var result = tpl.process(data);
-	
-		try{
-			$(domElement).update( result );
-		}catch(ex){
-			debug("[TemplateEngine].render catched an exception!");
-			throw ex;
-		}
-	},
-	
-	onTemplateReady: function(tpl, data, domElement, callback){
-		this.render(tpl, data, domElement);
-		if(typeof(callback) == 'function') {
-			callback();
-		}
-	},
-	
-	process: function(tplName, data, domElement, callback){
-		this.fetch( tplName, 
-				function(tpl){
-					this.onTemplateReady(tpl, data, domElement, callback); 
-				}.bind(this) );
 	}
-});
-templateEngine = new TemplateEngine();
 
+	selected.each(function(item) {
+		var found = false;
+		lst.each(function(listItem) {
 
-//START class EPGList 
+			if (listItem == item) {
+				found = true;
+			}
+		});
+		if (!found) {
+			lst.push(item);
+		}
+	});
+
+	lst.each(function(listItem) {
+		var sel = '';
+		selected.each(function(item) {
+			if (listItem == item) {
+				sel = 'selected';
+			}
+		});
+
+		retList.push({
+			'value' : listItem,
+			'txt' : listItem,
+			'selected' : sel
+		});
+	});
+
+	return retList;
+}
+
+function debug(item) {
+	if (userprefs.data.debug)
+		console.log(item);
+}
+
+function parseNr(num) {
+	if (isNaN(num)) {
+		return 0;
+	} else {
+		return parseInt(num);
+	}
+}
 
 function getNodeContent(xml, nodename, defaultString){
 	try{
@@ -211,6 +200,108 @@ function dateToString(date){
 	dateString += ":" + addLeadingZero(date.getMinutes());
 	return dateString;
 }
+
+// store all objects here
+
+var AjaxThing = Class.create({
+	/**
+	 * getUrl
+	 * creates a new Ajax.Request
+	 * Parameters:
+	 * @url - the url to fetch
+	 * @parms - an json object containing  {parameter : value} pairs for the request
+	 * @callback - function to call @ onSuccess;
+	 * @errorback - function to call @ onError;
+	 */
+	getUrl: function(url, parms, callback, errorback){
+		debug("[AjaxThing].getUrl :: url=" + url + " :: parms=" + Object.toJSON(parms));
+		try{
+			new Ajax.Request(url,
+					{
+						parameters: parms,
+						asynchronous: true,
+						method: 'POST',
+						requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
+						onException: function(o,e){ 
+								console.log(o); 
+								console.log(e);
+								throw(e);
+							}.bind(this),
+						onSuccess: function (transport, json) {
+							if(callback !== undefined){
+								callback(transport);
+							}
+						}.bind(this),
+						onFailure: function(transport){
+							if(errorback !== undefined){
+								errorback(transport);
+							}
+						}.bind(this)
+					});
+		} catch(e) {
+			debug('[AbstractContentProvider.getUrl] Exception: '+ e);
+		}
+	}
+});
+
+
+var TemplateEngine = Class.create(AjaxThing, {
+	initialize: function(){
+		this.templates = {};
+	},
+
+	cache: function(request, tplName){
+		debug("[TemplateEngine].cache caching template: " + tplName);
+		this.templates[tplName] = request.responseText;
+	},
+	
+	fetch: function(tplName, callback){
+		if(this.templates[tplName] === undefined) {
+			var url = URL.tpl+tplName+".htm";
+			
+			this.getUrl(
+					url, 
+					{},
+					function(transport){
+						this.cache(transport, tplName);
+						if(typeof(callback) == 'function'){
+							callback(this.templates[tplName]);
+						}
+					}.bind(this)
+			);
+		} else {
+			if(typeof(callback) == 'function'){
+				callback(this.templates[tplName]);
+			}
+		}
+	},
+	
+	render: function(tpl, data, domElement) {	
+		var result = tpl.process(data);
+	
+		try{
+			$(domElement).update( result );
+		}catch(ex){
+			debug("[TemplateEngine].render catched an exception!");
+			throw ex;
+		}
+	},
+	
+	onTemplateReady: function(tpl, data, domElement, callback){
+		this.render(tpl, data, domElement);
+		if(typeof(callback) == 'function') {
+			callback();
+		}
+	},
+	
+	process: function(tplName, data, domElement, callback){
+		this.fetch( tplName, 
+				function(tpl){
+					this.onTemplateReady(tpl, data, domElement, callback); 
+				}.bind(this) );
+	}
+});
+templateEngine = new TemplateEngine();
 
 //START class EPGEvent
 function EPGEvent(xml, number){	
