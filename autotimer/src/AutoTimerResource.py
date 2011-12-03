@@ -302,6 +302,8 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.notifconflict.value = True if value == "true" else False
 			elif key == "notifsimilar":
 				config.plugins.autotimer.notifsimilar.value = True if value == "true" else False
+			elif key == "maxdaysinfuture":
+				config.plugins.autotimer.maxdaysinfuture.value = int(value)
 
 		if config.plugins.autotimer.autopoll.value:
 			if plugin.autopoller is None:
@@ -382,6 +384,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.maxdaysinfuture</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>hasVps</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
@@ -401,6 +407,7 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.fastscan.value,
 				config.plugins.autotimer.notifconflict.value,
 				config.plugins.autotimer.notifsimilar.value,
+				config.plugins.autotimer.maxdaysinfuture.value,
 				hasVps,
 				CURRENT_CONFIG_VERSION,
 			)
