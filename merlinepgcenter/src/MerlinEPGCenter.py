@@ -335,17 +335,16 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self["isRecording"].hide()
 			
 		self.blinkTimer.suspend()
-		if config.plugins.merlinEpgCenter.rememberLastTab.value:
-			if self.currentMode > NUM_EPG_TABS:
-				config.plugins.merlinEpgCenter.lastUsedTab.value = NUM_EPG_TABS
-				
-			else:
-				config.plugins.merlinEpgCenter.lastUsedTab.value = self.currentMode
+		
+		if self.currentMode > NUM_EPG_TABS:
+			config.plugins.merlinEpgCenter.lastUsedTab.value = NUM_EPG_TABS
+		else:
+			config.plugins.merlinEpgCenter.lastUsedTab.value = self.currentMode
 		config.plugins.merlinEpgCenter.save()
 			
 	def resume(self):
 		# reset the tab text color of the last tab before suspending
-		lastTab = config.plugins.merlinEpgCenter.rememberLastTab.value
+		lastTab = config.plugins.merlinEpgCenter.lastUsedTab.value
 		self["tab_text_%d" % lastTab].instance.setForegroundColor(parseColor("#ffffff")) # inactive
 		
 		# reread bouquet information if TV or radio mode was changed while we were suspended
@@ -1949,10 +1948,15 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			else:
 				# get the selected entry
 				cur = self["list"].getCurrent()
-				title = cur[5]
-				shortDesc = cur[6]
-				description = cur[7]
-				
+				if cur is None:
+					title = ""
+					shortDesc = ""
+					description = ""
+				else:
+					title = cur[5]
+					shortDesc = cur[6]
+					description = cur[7]
+					
 				if title != None and title != "":
 					infoText = title
 				else:
