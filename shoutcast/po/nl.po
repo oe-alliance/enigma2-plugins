@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shoutcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -93,6 +93,9 @@ msgstr "Geef een nieuwe naam op voor de favoriet"
 
 msgid "Enter text to search for"
 msgstr "Geef zoekargument op"
+
+msgid "Error downloading cover..."
+msgstr "Fout met het downloaden van cover..."
 
 msgid "Favorite list"
 msgstr "Favorietenlijst"
@@ -197,12 +200,11 @@ msgstr "Stations"
 msgid "Stop record"
 msgstr "Stop opname"
 
+msgid "Stream stopped playing, playback of stream stopped!"
+msgstr "Stream gestopt met afspelen, afspelen van stream gestopt!"
+
 msgid "Streaming rate:"
 msgstr "Bitrate:"
-
-#, python-format
-msgid "This Dreambox can't decode %s streams!"
-msgstr "Deze Dreambox kan %s stream niet decoderen!"
 
 #, python-format
 msgid "Title: %s"
@@ -237,3 +239,5 @@ msgstr "hernoemen"
 msgid "search-criteria %s"
 msgstr "Zoekcriterium %s"
 
+#~ msgid "This Dreambox can't decode %s streams!"
+#~ msgstr "Deze Dreambox kan %s stream niet decoderen!"

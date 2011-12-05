@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shoutcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: Dr.Best <dr.best@dreambox-tools.info>\n"
@@ -93,6 +93,9 @@ msgstr "Neuen Namen fÃ¼r Favoriten eingeben"
 
 msgid "Enter text to search for"
 msgstr "Suchtext eingeben"
+
+msgid "Error downloading cover..."
+msgstr ""
 
 msgid "Favorite list"
 msgstr "Favoritenliste"
@@ -195,12 +198,11 @@ msgstr "Stationen"
 msgid "Stop record"
 msgstr "Beende Aufnahme"
 
+msgid "Stream stopped playing, playback of stream stopped!"
+msgstr ""
+
 msgid "Streaming rate:"
 msgstr "Bitrate:"
-
-#, python-format
-msgid "This Dreambox can't decode %s streams!"
-msgstr "%s kann nicht dekodiert werden."
 
 #, python-format
 msgid "Title: %s"
@@ -234,3 +236,6 @@ msgstr "Umbenennen"
 #, python-format
 msgid "search-criteria %s"
 msgstr "Suchkriterium %s"
+
+#~ msgid "This Dreambox can't decode %s streams!"
+#~ msgstr "%s kann nicht dekodiert werden."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
 "PO-Revision-Date: 2009-04-15 13:46+0100\n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: WeeGull <weegull@hotmail.com>\n"
@@ -42,6 +42,9 @@ msgstr ""
 
 msgid "Add new network mount point"
 msgstr "Lägg till ny nätverks monteringspunkt"
+
+msgid "Adding schedule..."
+msgstr ""
 
 msgid ""
 "Are you sure you want to save this network mount?\n"
@@ -162,6 +165,9 @@ msgstr ""
 "Monterad/\n"
 "Omonterad"
 
+msgid "Mounting network shares..."
+msgstr ""
+
 msgid "Mountpoints management"
 msgstr "Monteringspunkts hantering"
 
@@ -173,6 +179,9 @@ msgstr "Monteringshantering"
 
 msgid "NFS share"
 msgstr "NFS delning"
+
+msgid "Network Browser"
+msgstr ""
 
 msgid "NetworkBrowser"
 msgstr "Nätverksbläddring"
@@ -222,13 +231,28 @@ msgstr "Tryck OK för att spara inställning."
 msgid "Press OK to select."
 msgstr "Tryck OK för att välja."
 
+msgid "Re-mount network shares every (in hours)"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
 msgid "Rescan"
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Scan NFS share"
 msgstr ""
 
 msgid "Scan range"
+msgstr ""
+
+msgid "Schedule MountAgain"
+msgstr ""
+
+msgid "Schedule a auto remount of your network shares."
 msgstr ""
 
 msgid "Search for network shares"
@@ -245,6 +269,9 @@ msgstr "Server IP"
 
 msgid "Server share"
 msgstr "Server delning"
+
+msgid "Setup Mount Again"
+msgstr ""
 
 msgid "User management"
 msgstr "Användarhantering"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - networkbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
 "PO-Revision-Date: 2009-10-29 14:01+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: WWW.Linsat.net <spaeleus@croci.org>\n"
@@ -41,6 +41,9 @@ msgstr ""
 
 msgid "Add new network mount point"
 msgstr "Aggiungere nuovo mount point di rete"
+
+msgid "Adding schedule..."
+msgstr ""
 
 msgid ""
 "Are you sure you want to save this network mount?\n"
@@ -161,6 +164,9 @@ msgstr ""
 "Montata\n"
 "Non Montata"
 
+msgid "Mounting network shares..."
+msgstr ""
+
 msgid "Mountpoints management"
 msgstr "Gestione mount point"
 
@@ -172,6 +178,9 @@ msgstr "Gestione mount"
 
 msgid "NFS share"
 msgstr "Condivisione NFS"
+
+msgid "Network Browser"
+msgstr ""
 
 msgid "NetworkBrowser"
 msgstr "NetworkBrowser"
@@ -221,14 +230,29 @@ msgstr "Ok -> Salvare configurazione."
 msgid "Press OK to select."
 msgstr "Ok -> Selezionare."
 
+msgid "Re-mount network shares every (in hours)"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
 msgid "Rescan"
 msgstr "Ripetere Ricerca"
+
+msgid "Save"
+msgstr ""
 
 msgid "Scan NFS share"
 msgstr "Ric. cond. NFS"
 
 msgid "Scan range"
 msgstr "Intervallo ricerca"
+
+msgid "Schedule MountAgain"
+msgstr ""
+
+msgid "Schedule a auto remount of your network shares."
+msgstr ""
 
 msgid "Search for network shares"
 msgstr "Ricerca condivisioni di rete"
@@ -244,6 +268,9 @@ msgstr "IP Server"
 
 msgid "Server share"
 msgstr "Condivisione Server"
+
+msgid "Setup Mount Again"
+msgstr ""
 
 msgid "User management"
 msgstr "Gestione User"

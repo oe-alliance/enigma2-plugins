@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - tageditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-03 22:38+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
 "PO-Revision-Date: 2011-10-03 22:39+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,40 +17,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/tageditor\n"
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:26
-msgid "edit tags"
-msgstr "Mod. etich."
+msgid "Add new tag..."
+msgstr "Aggiungere nuova etichetta..."
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:47
 msgid "Cancel"
 msgstr "Annull."
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:48
-msgid "OK"
-msgstr "Ok"
+msgid "Delete all tags..."
+msgstr "Cancellare tutte le etichette"
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:49
-msgid "New"
-msgstr "Nuovo"
+msgid "Delete this tag..."
+msgstr "Cancellare etichetta..."
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:50
-msgid "Load"
-msgstr "Caricare"
+msgid "Delete unused tags"
+msgstr "Cancellare le etichette inutilizzate"
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:79
-msgid "Edit Tags"
-msgstr "Mod. etich."
+msgid ""
+"Do you really want to delete all tags everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Cancellare ovunque tutte le etichetta?\n"
+"(Nota: \"Annull.\" non potrà annullare!)"
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:85
-msgid "Please enter the new tag"
-msgstr "Inserire la nuova etichetta"
-
-#: .../enigma2-plugins/tageditor/src/plugin.py:208
-#, python-format
-msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
-msgstr "Sostituire ovunque l'etichetta \"%s\" con:   (Nota: \"Annull.\" non potrà annullare!)"
-
-#: .../enigma2-plugins/tageditor/src/plugin.py:228
 #, python-format
 msgid ""
 "Do you really want to delete tag \"%s\" everywhere?\n"
@@ -59,31 +47,33 @@ msgstr ""
 "Cancellare ovunque l'etichetta \"%s\" ?\n"
 "(Nota: \"Annull.\" non potrà annullare!)"
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:245
-msgid ""
-"Do you really want to delete all tags everywhere?\n"
-"(Note that 'Cancel' will not undo this!)"
-msgstr ""
-"Cancellare ovunque tutte le etichetta?\n"
-"(Nota: \"Annull.\" non potrà annullare!)"
+#. TRANSLATORS: This is the title of the TagEditor main screen
+msgid "Edit Tags"
+msgstr "Mod. etich."
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:259
-msgid "Add new tag..."
-msgstr "Aggiungere nuova etichetta..."
+msgid "Load"
+msgstr "Caricare"
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:260
+msgid "New"
+msgstr "Nuovo"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Please enter the new tag"
+msgstr "Inserire la nuova etichetta"
+
 msgid "Rename this tag..."
 msgstr "Rinominare etichetta..."
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:261
-msgid "Delete this tag..."
-msgstr "Cancellare etichetta..."
+#, python-format
+msgid ""
+"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
+"this!)"
+msgstr ""
+"Sostituire ovunque l'etichetta \"%s\" con:   (Nota: \"Annull.\" non potrà "
+"annullare!)"
 
-#: .../enigma2-plugins/tageditor/src/plugin.py:262
-msgid "Delete unused tags"
-msgstr "Cancellare le etichette inutilizzate"
-
-#: .../enigma2-plugins/tageditor/src/plugin.py:263
-msgid "Delete all tags..."
-msgstr "Cancellare tutte le etichette"
-
+#. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+msgid "edit tags"
+msgstr "Mod. etich."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
 "PO-Revision-Date: 2009-01-09 13:40+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -147,6 +147,9 @@ msgid "Start automatically with Enigma2"
 msgstr "Comenzar automáticamente con Enigma2"
 
 msgid "Subscribe Newsfeed..."
+msgstr ""
+
+msgid "Ticker"
 msgstr ""
 
 msgid "Update Feed"

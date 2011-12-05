@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - namezap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-18 22:35+0100\n"
+"POT-Creation-Date: 2011-11-26 12:30+0000\n"
 "PO-Revision-Date: 2011-09-20 21:53+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -18,41 +18,30 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/namezap\n"
 
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:33
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:74
-#: .../enigma2-plugins/namezap/src/plugin.py:107
-msgid "NameZAP Setup"
-msgstr "Configurazione NameZAP"
-
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:39
-msgid "Zapper Style"
-msgstr "Stile zapper"
-
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:39
-msgid "Controls the visual appearance of the number zap dialog."
-msgstr "Controllare l'aspetto delle informazioni numero/nome canale nello zapping."
-
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:56
-msgid "OK"
-msgstr "Ok"
-
-#: .../enigma2-plugins/namezap/src/NamezapSetup.py:57
 msgid "Cancel"
 msgstr "Annull."
 
-#: .../enigma2-plugins/namezap/src/plugin.py:17
-msgid "Only Number"
-msgstr "Solo numero"
+msgid "Controls the visual appearance of the number zap dialog."
+msgstr ""
+"Controllare l'aspetto delle informazioni numero/nome canale nello zapping."
 
-#: .../enigma2-plugins/namezap/src/plugin.py:18
-msgid "Service Name"
-msgstr "Nome canale"
+msgid "NameZAP Setup"
+msgstr "Configurazione NameZAP"
 
-#: .../enigma2-plugins/namezap/src/plugin.py:19
 msgid "Number and Name"
 msgstr "Numero e nome"
 
-#: .../enigma2-plugins/namezap/src/plugin.py:91
+msgid "OK"
+msgstr "Ok"
+
+msgid "Only Number"
+msgstr "Solo numero"
+
+msgid "Service Name"
+msgstr "Nome canale"
+
 msgid "Unknown Service"
 msgstr "Canale sconosciuto"
 
+msgid "Zapper Style"
+msgstr "Stile zapper"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 SimpleRSS Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
 "PO-Revision-Date: 2009-09-10 23:22+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: german <de@li.org>\n"
@@ -146,6 +146,9 @@ msgstr "Automatisch mit Enigma2 starten"
 
 msgid "Subscribe Newsfeed..."
 msgstr "Nachrichtenkanal abonieren..."
+
+msgid "Ticker"
+msgstr ""
 
 msgid "Update Feed"
 msgstr "Kanal aktualisieren"

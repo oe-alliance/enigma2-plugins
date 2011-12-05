@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
 "PO-Revision-Date: 2007-06-14 10:15+0300\n"
 "Last-Translator: enigma® <enigma.ua@gmail.com>\n"
 "Language-Team: Russian / enigma(c) Ukraine, Kiev>\n"
@@ -37,6 +37,9 @@ msgid "Add a new NFS or CIFS mount point to your Dreambox."
 msgstr ""
 
 msgid "Add new network mount point"
+msgstr ""
+
+msgid "Adding schedule..."
 msgstr ""
 
 msgid ""
@@ -154,6 +157,9 @@ msgid ""
 "Unmounted"
 msgstr ""
 
+msgid "Mounting network shares..."
+msgstr ""
+
 msgid "Mountpoints management"
 msgstr ""
 
@@ -164,6 +170,9 @@ msgid "Mounts management"
 msgstr ""
 
 msgid "NFS share"
+msgstr ""
+
+msgid "Network Browser"
 msgstr ""
 
 msgid "NetworkBrowser"
@@ -214,13 +223,28 @@ msgstr ""
 msgid "Press OK to select."
 msgstr ""
 
+msgid "Re-mount network shares every (in hours)"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
 msgid "Rescan"
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Scan NFS share"
 msgstr ""
 
 msgid "Scan range"
+msgstr ""
+
+msgid "Schedule MountAgain"
+msgstr ""
+
+msgid "Schedule a auto remount of your network shares."
 msgstr ""
 
 msgid "Search for network shares"
@@ -236,6 +260,9 @@ msgid "Server IP"
 msgstr ""
 
 msgid "Server share"
+msgstr ""
+
+msgid "Setup Mount Again"
 msgstr ""
 
 msgid "User management"

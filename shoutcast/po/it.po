@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - shoutcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleusòcroci.org>\n"
@@ -94,6 +94,9 @@ msgstr "Inserire il nuovo nome per il preferito"
 
 msgid "Enter text to search for"
 msgstr "Inserire il testo da cercare"
+
+msgid "Error downloading cover..."
+msgstr ""
 
 msgid "Favorite list"
 msgstr "Elenco preferiti"
@@ -194,12 +197,11 @@ msgstr "Stazioni"
 msgid "Stop record"
 msgstr "Stop reg."
 
+msgid "Stream stopped playing, playback of stream stopped!"
+msgstr ""
+
 msgid "Streaming rate:"
 msgstr "Velocità streaming: "
-
-#, python-format
-msgid "This Dreambox can't decode %s streams!"
-msgstr ""
 
 #, python-format
 msgid "Title: %s"

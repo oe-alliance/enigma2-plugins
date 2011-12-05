@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 plugin - Networkbrowser serbian\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
 "PO-Revision-Date: 2009-09-10 20:32+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -41,6 +41,9 @@ msgstr ""
 
 msgid "Add new network mount point"
 msgstr "Dodaj novu mrežnu tačku za maunt"
+
+msgid "Adding schedule..."
+msgstr ""
 
 msgid ""
 "Are you sure you want to save this network mount?\n"
@@ -161,6 +164,9 @@ msgstr ""
 "Mauntan/\n"
 "Nemauntan"
 
+msgid "Mounting network shares..."
+msgstr ""
+
 msgid "Mountpoints management"
 msgstr "Upravljanje maunt tačkama"
 
@@ -172,6 +178,9 @@ msgstr "Upravljanje mauntima"
 
 msgid "NFS share"
 msgstr "NFS deljenje"
+
+msgid "Network Browser"
+msgstr ""
 
 msgid "NetworkBrowser"
 msgstr "Pretraživač mreže"
@@ -221,13 +230,28 @@ msgstr "Pritisni OK da sačuvaš postavke."
 msgid "Press OK to select."
 msgstr "Pritisni OK da izabereš."
 
+msgid "Re-mount network shares every (in hours)"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
 msgid "Rescan"
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Scan NFS share"
 msgstr ""
 
 msgid "Scan range"
+msgstr ""
+
+msgid "Schedule MountAgain"
+msgstr ""
+
+msgid "Schedule a auto remount of your network shares."
 msgstr ""
 
 msgid "Search for network shares"
@@ -244,6 +268,9 @@ msgstr "Server IP"
 
 msgid "Server share"
 msgstr "Server "
+
+msgid "Setup Mount Again"
+msgstr ""
 
 msgid "User management"
 msgstr "Korisnikovo upravljanje"

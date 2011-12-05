@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - imdb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-18 17:45+0100\n"
+"POT-Creation-Date: 2011-11-26 12:30+0000\n"
 "PO-Revision-Date: 2011-09-20 21:42+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,140 +17,123 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/imdb\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/imdb\n"
 
-#: .../enigma2-plugins/imdb/src/plugin.py:56
-msgid "Channel Selection"
-msgstr "Selezione Canale"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:85
-msgid "Lookup"
-msgstr "Ricerca"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:154
-msgid "The Internet Movie Database"
-msgstr "Il Database Internet dei Film"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:170
-msgid "Exit"
-msgstr "Uscire"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:323
-msgid "Ambiguous results"
-msgstr "Risultati ambigui"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:324
-msgid "Please select the matching entry"
-msgstr "Selezionare la voce di confronto"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:327
-msgid "Title Menu"
-msgstr "Menu Titolo"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:328
-#: .../enigma2-plugins/imdb/src/plugin.py:540
-msgid "Details"
-msgstr "Dettagli"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:339
-#: .../enigma2-plugins/imdb/src/plugin.py:505
-#: .../enigma2-plugins/imdb/src/plugin.py:521
-#, python-format
-msgid "Re-Query IMDb: %s..."
-msgstr "Ripetere ricerca IMDb: %s"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:371
-msgid "Enter search"
-msgstr "Testo ricerca"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:372
-msgid "Select from EPG"
-msgstr "Selezionare da EPG"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:377
-msgid "Play Trailer"
-msgstr "Riprodurre trailer"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:378
-msgid "Search Trailer"
-msgstr "Ricercare trailer"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:415
-msgid "Enter text to search for"
-msgstr "Inserire il testo per la ricerca"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:447
-#, python-format
-msgid "Query IMDb: %s..."
-msgstr "Ricerca IMDb: %s"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:456
-msgid "Could't get Eventname"
-msgstr "Nome evento non ottenibile!"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:460
-msgid "IMDb Download failed"
-msgstr "Download IMDb fallito!"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:489
-msgid "IMDb Download completed"
-msgstr "Download IMDb completato!"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:515
-#: .../enigma2-plugins/imdb/src/plugin.py:516
-msgid "No IMDb match."
-msgstr "Nessun riscontro IMDb!"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:527
-msgid "IMDb query failed!"
-msgstr "Ricerca IMDb fallita!"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:530
-msgid "IMDb Re-Download completed"
-msgstr "Ripetizione Download IMDb completato"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:538
-msgid "No details found."
-msgstr "Nessun dettaglio trovato!"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:541
-#: .../enigma2-plugins/imdb/src/plugin.py:621
-msgid "IMDb Details parsed"
-msgstr "Dettagli IMDb analizzati"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:566
-msgid "no user rating yet"
-msgstr "Valutazioni non ancora disponibili!"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:570
-msgid "User Rating"
-msgstr "Valutazione utente"
-
-#: .../enigma2-plugins/imdb/src/plugin.py:583
 msgid " as "
 msgstr " nel ruolo di  "
 
-#: .../enigma2-plugins/imdb/src/plugin.py:587
+msgid "Ambiguous results"
+msgstr "Risultati ambigui"
+
+msgid "Cancel"
+msgstr ""
+
 msgid "Cast: "
 msgstr "Cast: "
 
-#: .../enigma2-plugins/imdb/src/plugin.py:589
-msgid "No cast list found in the database."
-msgstr "Nessuna lista cast trovata nel database!"
+msgid "Channel Selection"
+msgstr "Selezione Canale"
 
-#: .../enigma2-plugins/imdb/src/plugin.py:595
+msgid "Could't get Eventname"
+msgstr "Nome evento non ottenibile!"
+
+msgid "Details"
+msgstr "Dettagli"
+
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "Download Poster Film: %s"
 
-#: .../enigma2-plugins/imdb/src/plugin.py:615
+msgid ""
+"Enable this to be able to access the IMDb from within the plugin browser."
+msgstr ""
+
+msgid "Enter search"
+msgstr "Testo ricerca"
+
+msgid "Enter text to search for"
+msgstr "Inserire il testo per la ricerca"
+
+msgid "Exit"
+msgstr "Uscire"
+
 msgid "Extra Info"
 msgstr "Info Extra"
 
-#: .../enigma2-plugins/imdb/src/plugin.py:648
+msgid "IMDb Details"
+msgstr ""
+
+msgid "IMDb Details parsed"
+msgstr "Dettagli IMDb analizzati"
+
+msgid "IMDb Download completed"
+msgstr "Download IMDb completato!"
+
+msgid "IMDb Download failed"
+msgstr "Download IMDb fallito!"
+
 msgid "IMDb Plugin"
 msgstr "Plugin IMDb"
 
-#: .../enigma2-plugins/imdb/src/plugin.py:659
-#: .../enigma2-plugins/imdb/src/plugin.py:666
+msgid "IMDb Re-Download completed"
+msgstr "Ripetizione Download IMDb completato"
+
+msgid "IMDb Setup"
+msgstr ""
+
+msgid "IMDb query failed!"
+msgstr "Ricerca IMDb fallita!"
+
+msgid "Lookup"
+msgstr "Ricerca"
+
+msgid "No IMDb match."
+msgstr "Nessun riscontro IMDb!"
+
+msgid "No cast list found in the database."
+msgstr "Nessuna lista cast trovata nel database!"
+
+msgid "No details found."
+msgstr "Nessun dettaglio trovato!"
+
+msgid "OK"
+msgstr ""
+
+msgid "Play Trailer"
+msgstr "Riprodurre trailer"
+
+msgid "Please select the matching entry"
+msgstr "Selezionare la voce di confronto"
+
+#, python-format
+msgid "Query IMDb: %s..."
+msgstr "Ricerca IMDb: %s"
+
 msgid "Query details from the Internet Movie Database"
 msgstr "Ricerca dettagli da \"Internet Movie Database\""
 
+#, python-format
+msgid "Re-Query IMDb: %s..."
+msgstr "Ripetere ricerca IMDb: %s"
+
+msgid "Search Trailer"
+msgstr "Ricercare trailer"
+
+msgid "Select from EPG"
+msgstr "Selezionare da EPG"
+
+msgid "Setup"
+msgstr ""
+
+msgid "Show in plugin browser"
+msgstr ""
+
+msgid "The Internet Movie Database"
+msgstr "Il Database Internet dei Film"
+
+msgid "Title Menu"
+msgstr "Menu Titolo"
+
+msgid "User Rating"
+msgstr "Valutazione utente"
+
+msgid "no user rating yet"
+msgstr "Valutazioni non ancora disponibili!"

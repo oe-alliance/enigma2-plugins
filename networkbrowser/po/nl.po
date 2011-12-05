@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - networkbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-09-28 12:41+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"PO-Revision-Date: 2011-12-05 15:53+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: \n"
@@ -42,6 +42,9 @@ msgstr "Voeg een nieuw NFS of CIFS mountpoint toe aan uw Dreambox."
 
 msgid "Add new network mount point"
 msgstr "Voeg een nieuwe netwerkverbinding toe"
+
+msgid "Adding schedule..."
+msgstr "Voegt schema toe..."
 
 msgid ""
 "Are you sure you want to save this network mount?\n"
@@ -162,6 +165,9 @@ msgstr ""
 "Verbonden/\n"
 "Niet verbonden"
 
+msgid "Mounting network shares..."
+msgstr "Network shares worden gemount..."
+
 msgid "Mountpoints management"
 msgstr "Verbindingsbeheer"
 
@@ -173,6 +179,9 @@ msgstr "Verbindingsbeheer"
 
 msgid "NFS share"
 msgstr "NFS share"
+
+msgid "Network Browser"
+msgstr "Network Browser"
 
 msgid "NetworkBrowser"
 msgstr "Netwerk browser"
@@ -222,14 +231,29 @@ msgstr "Druk op OK om te bewaren."
 msgid "Press OK to select."
 msgstr "Druk op OK om te selecteren."
 
+msgid "Re-mount network shares every (in hours)"
+msgstr "Network shares opnieuw mounten elke xx uur"
+
+msgid "Really close without saving settings?"
+msgstr "Echt afsluiten zonder op te slaan?"
+
 msgid "Rescan"
 msgstr "Scan opnieuw"
+
+msgid "Save"
+msgstr "Sla op"
 
 msgid "Scan NFS share"
 msgstr "Zoek NFS share"
 
 msgid "Scan range"
 msgstr "Scan bereik"
+
+msgid "Schedule MountAgain"
+msgstr "\"Opnieuw mounten\" programmeren"
+
+msgid "Schedule a auto remount of your network shares."
+msgstr "Programmeer automatisch opnieuw mounten van uw network shares."
 
 msgid "Search for network shares"
 msgstr "Zoeken naar gedeelde mappen"
@@ -245,6 +269,9 @@ msgstr "Server IP"
 
 msgid "Server share"
 msgstr "Server share"
+
+msgid "Setup Mount Again"
+msgstr "\"Opnieuw mounten\" instellen"
 
 msgid "User management"
 msgstr "Gebruikersbeheer"

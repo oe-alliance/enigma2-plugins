@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: e2 NetworkBrowser Plugin Turkish locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
 "PO-Revision-Date: 2009-02-23 18:43+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
@@ -38,6 +38,9 @@ msgstr ""
 
 msgid "Add new network mount point"
 msgstr "Yeni ağ bağlantı noktası ekle"
+
+msgid "Adding schedule..."
+msgstr ""
 
 msgid ""
 "Are you sure you want to save this network mount?\n"
@@ -158,6 +161,9 @@ msgstr ""
 "Bağlı/\n"
 "Bağlı değil"
 
+msgid "Mounting network shares..."
+msgstr ""
+
 msgid "Mountpoints management"
 msgstr "Bağlantı noktası yönetimi"
 
@@ -169,6 +175,9 @@ msgstr "Ağ Diski Yönetimi"
 
 msgid "NFS share"
 msgstr "NFS paylaşım"
+
+msgid "Network Browser"
+msgstr ""
 
 msgid "NetworkBrowser"
 msgstr "Ağ gezgini"
@@ -218,13 +227,28 @@ msgstr "Ayarları kaydetmek için OK tuşuna basın."
 msgid "Press OK to select."
 msgstr "Seçmek için OK tuşuna basın."
 
+msgid "Re-mount network shares every (in hours)"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
 msgid "Rescan"
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Scan NFS share"
 msgstr ""
 
 msgid "Scan range"
+msgstr ""
+
+msgid "Schedule MountAgain"
+msgstr ""
+
+msgid "Schedule a auto remount of your network shares."
 msgstr ""
 
 msgid "Search for network shares"
@@ -241,6 +265,9 @@ msgstr "Sunucu IP"
 
 msgid "Server share"
 msgstr "Paylaşım klasörü"
+
+msgid "Setup Mount Again"
+msgstr ""
 
 msgid "User management"
 msgstr "Kullanıcı yönetimi"
