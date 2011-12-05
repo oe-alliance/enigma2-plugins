@@ -148,7 +148,7 @@ class AutoTimerComponent(object):
 	searchCase = property(lambda self: self._searchCase, setSearchCase)
 
 	def setSearchType(self, type):
-		assert type in ("exact", "partial"), "search type must be exact or partial"
+		assert type in ("exact", "partial", "description"), "search type must be exact, partial or description"
 		self._searchType = type
 
 	searchType = property(lambda self: self._searchType, setSearchType)

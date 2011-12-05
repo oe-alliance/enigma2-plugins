@@ -1,4 +1,5 @@
 from AutoTimer import AutoTimer
+from AutoTimerConfiguration import CURRENT_CONFIG_VERSION
 from Components.config import config
 from RecordTimer import AFTEREVENT
 from twisted.web import http, resource
@@ -10,7 +11,7 @@ from enigma import eServiceReference
 from . import _, iteritems
 from . import plugin
 
-API_VERSION = "1.0"
+API_VERSION = "1.1"
 
 class AutoTimerBaseResource(resource.Resource):
 	_remove = False
@@ -301,6 +302,8 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.notifconflict.value = True if value == "true" else False
 			elif key == "notifsimilar":
 				config.plugins.autotimer.notifsimilar.value = True if value == "true" else False
+			elif key == "maxdaysinfuture":
+				config.plugins.autotimer.maxdaysinfuture.value = int(value)
 
 		if config.plugins.autotimer.autopoll.value:
 			if plugin.autopoller is None:
@@ -381,7 +384,15 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.maxdaysinfuture</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>hasVps</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>version</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 </e2settings>""" % (
@@ -390,11 +401,13 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.refresh.value,
 				config.plugins.autotimer.try_guessing.value,
 				config.plugins.autotimer.editor.value,
-				config.plugins.autotimer.addsimilar_on_conflict,
+				config.plugins.autotimer.addsimilar_on_conflict.value,
 				config.plugins.autotimer.disabled_on_conflict.value,
 				config.plugins.autotimer.show_in_extensionsmenu.value,
 				config.plugins.autotimer.fastscan.value,
 				config.plugins.autotimer.notifconflict.value,
 				config.plugins.autotimer.notifsimilar.value,
+				config.plugins.autotimer.maxdaysinfuture.value,
 				hasVps,
+				CURRENT_CONFIG_VERSION,
 			)

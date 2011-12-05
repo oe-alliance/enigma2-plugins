@@ -106,6 +106,14 @@ try:
 except ImportError:
 	IMDB_INSTALLED = False
 
+# check for YTTrailer support
+try:
+	from Plugins.Extensions.YTTrailer.plugin import YTTrailerList
+	YTTRAILER_INSTALLED = True
+except ImportError:
+	YTTRAILER_INSTALLED = False
+	
+
 class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 	(skinFile, skinList) = SkinFinder.getSkinData(SKINLIST, SKINDIR, config.plugins.merlinEpgCenter.skin.value)
 	if skinFile is not None:
@@ -327,17 +335,16 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self["isRecording"].hide()
 			
 		self.blinkTimer.suspend()
-		if config.plugins.merlinEpgCenter.rememberLastTab.value:
-			if self.currentMode > NUM_EPG_TABS:
-				config.plugins.merlinEpgCenter.lastUsedTab.value = NUM_EPG_TABS
-				
-			else:
-				config.plugins.merlinEpgCenter.lastUsedTab.value = self.currentMode
+		
+		if self.currentMode > NUM_EPG_TABS:
+			config.plugins.merlinEpgCenter.lastUsedTab.value = NUM_EPG_TABS
+		else:
+			config.plugins.merlinEpgCenter.lastUsedTab.value = self.currentMode
 		config.plugins.merlinEpgCenter.save()
 			
 	def resume(self):
 		# reset the tab text color of the last tab before suspending
-		lastTab = config.plugins.merlinEpgCenter.rememberLastTab.value
+		lastTab = config.plugins.merlinEpgCenter.lastUsedTab.value
 		self["tab_text_%d" % lastTab].instance.setForegroundColor(parseColor("#ffffff")) # inactive
 		
 		# reread bouquet information if TV or radio mode was changed while we were suspended
@@ -1941,10 +1948,15 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			else:
 				# get the selected entry
 				cur = self["list"].getCurrent()
-				title = cur[5]
-				shortDesc = cur[6]
-				description = cur[7]
-				
+				if cur is None:
+					title = ""
+					shortDesc = ""
+					description = ""
+				else:
+					title = cur[5]
+					shortDesc = cur[6]
+					description = cur[7]
+					
 				if title != None and title != "":
 					infoText = title
 				else:
@@ -1976,6 +1988,17 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 	def keyRadio(self):
 		self.switchTvRadio(MODE_RADIO)
 		
+	def keyVideo(self):
+		if YTTRAILER_INSTALLED:
+			if self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME or self.currentMode == EPGSEARCH_RESULT:
+				cur = self["list"].getCurrent()
+				if cur:
+					self.session.open(YTTrailerList, cur[5])
+			elif self.currentMode == TIMERLIST:
+				cur = self["timerlist"].getCurrent()
+				if cur:
+					self.session.open(YTTrailerList, cur.name)
+					
 	############################################################################################
 	# TAB TOGGLING
 	

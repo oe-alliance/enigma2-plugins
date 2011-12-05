@@ -31,7 +31,7 @@ from EpgCenterList import MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_P
 class MerlinEPGActions():		
 	def __init__(self):
 		# TIMEREDITLIST
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions", "YttrailerActions"],
 		{
 			"ok":			self.openEdit,
 			"cancel":		self.keyExit, # overwritten to use our own exit function
@@ -41,6 +41,7 @@ class MerlinEPGActions():
 			"right":		self.right,
 			"up":			self.up,
 			"down":			self.down,
+			"video":		self.keyVideo,
 		}, -1)
 		
 		# TAB NAVIGATION
@@ -70,6 +71,7 @@ class MerlinEPGActions():
 			"showTv":		self.keyTv,
 			"showEventInfo":	self.keyInfo,
 			"ok":			self.keyOk,
+			"video":		self.keyVideo,
 		}, -1)
 		
 		# EPG HISTORY ACTIONS
