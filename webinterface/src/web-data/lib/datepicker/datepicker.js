@@ -1,5 +1,5 @@
 /*
-        DatePicker v5.4 by frequency-decoder.com
+DatePicker v5.4 by frequency-decoder.com
 
         Released under a creative commons Attribution-Share Alike 3.0 Unported license (http://creativecommons.org/licenses/by-sa/3.0/)
 

@@ -1,8 +1,8 @@
 var Controller = Class.create({
-	initialize: function(model){
-		this.model = model;
-		this.model.onFinished[this.model.onFinished.length] = this.registerEvents.bind(this);
-		this.model.onFinished[this.model.onFinished.length] = this.onFinished.bind(this);
+	initialize: function(handler){
+		this.handler = handler;
+		this.handler.onFinished.push(this.registerEvents.bind(this));
+		this.handler.onFinished.push(this.onFinished.bind(this));
 		this.eventsregistered = false;
 	},
 
@@ -22,7 +22,7 @@ var Bouquets = Class.create(Controller, {
 	load: function(sRef, loadFirstOnFinished){
 		if(loadFirstOnFinished)
 			this.loadFirstOnFinished = true;
-		this.model.load( {'sRef' : sRef} );
+		this.handler.load( {'sRef' : sRef} );
 	},
 	
 	loadBouquetsTv: function(){
@@ -50,7 +50,7 @@ var Bouquets = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
-		var bouquet = this.model.data.services[0];
+		var bouquet = this.handler.data.services[0];
 		if(bouquet){
 			setContentHd(bouquet.servicename);
 			if(this.loadFirstOnFinished){
@@ -65,7 +65,7 @@ var Bouquets = Class.create(Controller, {
 var Current = Class.create(Controller, {
 	initialize: function($super, curTarget, volTarget){
 		$super(new CurrentHandler(curTarget, volTarget));
-		this.model.onFinished[this.model.onFinished.length] = this.onFinished.bind(this);
+		this.handler.onFinished[this.handler.onFinished.length] = this.onFinished.bind(this);
 		this.display = 'none';
 	},
 	
@@ -74,7 +74,7 @@ var Current = Class.create(Controller, {
 		if(ext != null){
 			this.display = $('trExtCurrent').style.display;
 		}
-		this.model.load({});
+		this.handler.load({});
 	},
 	
 	onFinished: function(){
@@ -82,7 +82,7 @@ var Current = Class.create(Controller, {
 		if(ext != null){
 			ext.style.display = this.display;
 		}
-		core.currentData = this.model.data;
+		core.currentData = this.handler.data;
 	}
 });
 
@@ -98,11 +98,11 @@ var EPG = Class.create(Controller, {
 	},
 	
 	load: function(sRef){
-		this.model.load({'sRef' : sRef});
+		this.handler.load({'sRef' : sRef});
 	},
 
 	search: function(needle){
-		this.model.search({'search' : needle});
+		this.handler.search({'search' : needle});
 	},
 	
 	doRegisterEvents: function(win){
@@ -147,6 +147,8 @@ var Power = Class.create({
 	STATES: {'toggle' : 0, 'deep' : 1, 'reboot' : 2, 'gui' : 3},
 	
 	initialize: function(){
+		//As we do not have an real templates here, there is no handler for powerstate.
+		//The Handling is up to the caller of this class
 		this.provider = new PowerstateProvider(this.onLoadFinished.bind(this));
 		this.callbacks = [];
 		this.isLoading = false;
@@ -312,40 +314,40 @@ var MediaPlayer = Class.create(Controller, {
 			path = 'Filesystems';
 		}
 		var parms = {'path' : path};
-		this.model.load(parms);
+		this.handler.load(parms);
 	},
 	
 	playFile: function(file){
-		this.model.playFile(file);
+		this.handler.playFile(file);
 	},
 	
 	removeFile: function(file){
-		this.model.removeFile(file);
+		this.handler.removeFile(file);
 	},
 	
 	savePlaylist: function(filename){
-		this.model.savePlaylist(filename);
+		this.handler.savePlaylist(filename);
 	},
 	
 	command: function(cmd){
-		this.model.command(cmd);
+		this.handler.command(cmd);
 	}
 });
 
 var Messages = Class.create({
 	initialize: function(){
-		this.model = new SimpleRequestHandler();
+		this.handler = new SimpleRequestHandler();
 	},
 	
 	send: function(text, type, timeout){
-		this.model.load(URL.message, {'text' : text, 'type' : type, 'timeout' : timeout});
+		this.handler.load(URL.message, {'text' : text, 'type' : type, 'timeout' : timeout});
 	}
 });
 
 var Movies = Class.create(Controller, {
 	initialize: function($super, listTarget, navTarget){
 		$super(new MovieListHandler(listTarget));
-		this.navModel = new MovieNavHandler(navTarget);
+		this.navHandler = new MovieNavHandler(navTarget);
 	},
 	
 	load: function(location, tags){	
@@ -362,7 +364,7 @@ var Movies = Class.create(Controller, {
 			return;
 		}
 				
-		this.model.load({'dirname' : location, 'tag' : tags});
+		this.handler.load({'dirname' : location, 'tag' : tags});
 	},
 	
 	loadNav: function(){
@@ -370,17 +372,17 @@ var Movies = Class.create(Controller, {
 	},
 	
 	showNav: function(currentLocation, locations, tags){
-		this.navModel.load(toOptionList(locations, currentLocation), toOptionList(tags, core.currentTag));
+		this.navHandler.load(toOptionList(locations, currentLocation), toOptionList(tags, core.currentTag));
 	},
 	
 	del: function(element){
-		this.model.del(element);
+		this.handler.del(element);
 	}
 });
 
 var RemoteControl = Class.create({
 	initialize: function(){
-		this.model = new RemoteControlHandler();
+		this.handler = new RemoteControlHandler();
 		this.window = '';
 	},
 	
@@ -408,7 +410,7 @@ var RemoteControl = Class.create({
 	
 	sendKey: function(cmd, type, shotType){
 		debug("[RemoteControl].sendKey: " + cmd); 
-		this.model.sendKey({'command' : cmd, 'type': type});
+		this.handler.sendKey({'command' : cmd, 'type': type});
 		
 		var hash = '!/control'; //FIXME
 		switch(shotType){		
@@ -494,18 +496,21 @@ var Screenshots = Class.create(Controller, {
 			default:
 				break;
 		}
-		this.model.load(params);		
+		this.handler.load(params);		
 	},
 
 	shootOsd: function(){
+		setContentHd('Screenshot (OSD)');
 		this.load(this.TYPE_OSD);
 	},
 	
 	shootVideo: function(){
+		setContentHd('Screenshot (Video)');
 		this.load(this.TYPE_VIDEO);
 	},
 	
 	shootAll: function(){
+		setContentHd('Screenshot (All)');
 		this.load(this.TYPE_ALL);
 	}
 });
@@ -518,19 +523,19 @@ var Services = Class.create(Controller, {
 	},
 	
 	zap: function(sRef){
-		this.model.zap({'sRef' : sRef});
+		this.handler.zap({'sRef' : sRef});
 	},
 	
 	load: function(sRef){
-		this.model.load({'bRef' : sRef});
+		this.handler.load({'bRef' : sRef});
 	},
 	
 	getNowNext: function(){
-		this.model.getNowNext();
+		this.handler.getNowNext();
 	},
 	
 	getSubservices: function(){
-		this.model.getSubservices();
+		this.handler.getSubservices();
 	},
 	
 	loadAllTv: function(){
@@ -596,7 +601,7 @@ var SignalWindow = Class.create(Controller, {
 	},
 	
 	load: function(){
-		this.model.load({});
+		this.handler.load({});
 	},
 	
 	reload: function(){
@@ -628,7 +633,6 @@ var SignalWindow = Class.create(Controller, {
 
 var SimplePages = Class.create({
 	PAGE_ABOUT : 'tplAbout',
-	PAGE_GEARS : 'tplGears',
 	PAGE_MESSAGE : 'tplSendMessage',
 	PAGE_POWER : 'tplPower',
 	PAGE_SETTINGS: 'tplSettings',
@@ -646,29 +650,22 @@ var SimplePages = Class.create({
 	},
 
 	loadAbout: function(){
+		setContentHd('About');
 		this.show(this.PAGE_ABOUT);
 	},
 	
-	loadGears: function(){
-		var enabled = false;
-		
-		if (window.google && google.gears){
-			enabled = gearsEnabled();
-		}
-		
-		data = { 'useGears' : enabled };
-		this.show(this.PAGE_GEARS, data);
-	},
-	
 	loadMessage: function(){
+		setContentHd('Message');
 		this.show(this.PAGE_MESSAGE);
 	},
 	
 	loadPower: function(){
+		setContentHd('PowerControl');
 		this.show(this.PAGE_POWER);
 	},
 	
 	loadSettings: function(){
+		setContentHd('Settings');
 		var debug = userprefs.data.debug;
 		var debugChecked = "";
 		if(debug){
@@ -686,10 +683,12 @@ var SimplePages = Class.create({
 	},
 	
 	loadTools: function(){
+		setContentHd('Tools');
 		this.show(this.PAGE_TOOLS);
 	},
 	
 	loadDeviceInfo: function(){
+		setContentHd('Device Info');
 		this.deviceInfoHandler.load({});
 	},
 	
@@ -794,11 +793,11 @@ var Volume = Class.create(Controller, {
 	},
 	
 	load: function(){
-		this.model.load({});
+		this.handler.load({});
 	},
 	
 	set: function(value){
-		this.model.load({'set' : value});
+		this.handler.load({'set' : value});
 	}
 });
 
@@ -883,7 +882,6 @@ var E2WebCore = Class.create({
 			'extras': {
 				'about' : this.simplepages.loadAbout.bind(this.simplepages),
 				'deviceinfo' : this.simplepages.loadDeviceInfo.bind(this.simplepages),
-				'gears' : this.simplepages.loadGears.bind(this.simplepages),
 				'mediaplayer' : this.mediaplayer.load.bind(this.mediaplayer),
 				'settings' : this.simplepages.loadSettings.bind(this.simplepages),
 				'tools' : this.simplepages.loadTools.bind(this.simplepages)

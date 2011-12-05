@@ -95,7 +95,7 @@
 	<!-- Webinterface Stuff -->
 	<script type="text/javascript" src="/web-data/userprefs.js"></script>
 	<script type="text/javascript" src="/web-data/statics.js" ></script>
-	<script type="text/javascript" src="/web-data/objects.js" ></script>
+	<script type="text/javascript" src="/web-data/helpers.js" ></script>
 	<script type="text/javascript" src="/web-data/provider.js" ></script>
 	<script type="text/javascript" src="/web-data/handler.js" ></script>
 	<script type="text/javascript" src="/web-data/core.js" ></script>
@@ -103,7 +103,7 @@
 	<!-- Live RSS Feeds //-->
 	<link rel="alternate" type="application/rss+xml" title="Movie List" href="/web/movielist.rss?tag" >
 </head>
-<body onresize="setMaxHeight('contentMain')" onload="document.getElementById('notification').style.display='none'">	
+<body onresize="setMaxHeight('contentMain')" onload="document.getElementById('notification').style.display='none'">
 	<div id="container">
 		<div id="banner">
 			<span id="notification"><div></div></span>
@@ -142,15 +142,16 @@
 							<th>Instant record</th>
 						</tr>
 						<tr>
-							<td><button class="doInstantRecord" data-type="current">Record current event</button></td>
+							<td colspan="2"><button class="doInstantRecord" data-type="current">Record current event</button></td>
 						</tr>
-						<!-- 
+						<!--
 						<tr>
-							<td><button class="doInstantRecord" data-type="minutes">Record for (minutes)</button></td>
+							<td><button class="doInstantRecord" data-type="minutes" style="width: 140px">Record for (min.)</button>
+							<td style="text-align: right"><input type="text" size="2" maxlength="3" value="60"></input></td></td>
 						</tr>
-						 -->
+						-->
 						<tr>
-							<td><button class="doInstantRecord" data-type="infinite">Start infinite recording</button></td>
+							<td colspan="2"><button class="doInstantRecord" data-type="infinite">Start infinite recording</button></td>
 						</tr>
 					</table>
 					
