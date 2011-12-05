@@ -406,17 +406,10 @@ class AutoTimer:
 							del append
 
 					for movieinfo in moviedict.get(dest, ()):
-						if movieinfo.get("name") == name \
-							and movieinfo.get("shortdesc") == shortdesc:
-							# Some channels indicate replays in the extended descriptions
-							# If the similarity percent is higher then 0.8 it is a very close match
-							extdescM = movieinfo.get("extdesc")
-							if ( len(extdesc) == len(extdescM) and extdesc == extdescM ) \
-								or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, extdescM).ratio() ):
-								print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
-								movieExists = True
-								break
-
+						if self.checkSimilarity(timer, name, movieinfo.get("name"), shortdesc, movieinfo.get("shortdesc"), extdesc, movieinfo.get("extdesc") ):
+							print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
+							movieExists = True
+							break
 					if movieExists:
 						continue
 
@@ -457,13 +450,9 @@ class AutoTimer:
 
 						break
 					elif timer.avoidDuplicateDescription >= 1 \
-						and not rtimer.disabled \
-						and rtimer.name == name \
-						and rtimer.description == shortdesc:
-							# Some channels indicate replays in the extended descriptions
-							# If the similarity percent is higher then 0.8 it is a very close match
-							if ( len(extdesc) == len(rtimer.extdesc) and extdesc == rtimer.extdesc ) \
-								or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, rtimer.extdesc).ratio() ):
+						and not rtimer.disabled:
+							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
+							# if searchForDuplicateDescription > 1 then check short description
 								oldExists = True
 								print("[AutoTimer] We found a timer (similar service) with same description, skipping event")
 								break
@@ -477,16 +466,11 @@ class AutoTimer:
 					# We want to search for possible doubles
 					if timer.avoidDuplicateDescription >= 2:
 						for rtimer in chain.from_iterable( itervalues(recorddict) ):
-							if not rtimer.disabled \
-								and rtimer.name == name \
-								and rtimer.description == shortdesc:
-									# Some channels indicate replays in the extended descriptions
-									# If the similarity percent is higher then 0.8 it is a very close match
-									if ( len(extdesc) == len(rtimer.extdesc) and extdesc == rtimer.extdesc ) \
-										or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, rtimer.extdesc).ratio() ):
-										oldExists = True
-										print("[AutoTimer] We found a timer (any service) with same description, skipping event")
-										break
+							if not rtimer.disabled:
+								if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
+									oldExists = True
+									print("[AutoTimer] We found a timer (any service) with same description, skipping event")
+									break
 						if oldExists:
 							continue
 
@@ -584,3 +568,25 @@ class AutoTimer:
 							conflicts = recordHandler.record(newEntry)
 
 		return (total, new, modified, timers, conflicting, similars)
+
+	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2 ):
+		# Always check title
+		foundTitle = (name1 == name2)
+		print("[AutoTimer] Check name:" + name1 + "=" + name2 + ">>", foundTitle)
+		if timer.searchForDuplicateDescription >= 2: # Check titles if searchForDuplicateDescription > 2
+			foundShort = (shortdesc1 == shortdesc2)
+			print("[AutoTimer] Check short desc:" + shortdesc1 + "=" + shortdesc2 + ">>", foundShort)
+		else:
+			foundShort = True;
+		if timer.searchForDuplicateDescription == 3: # Check Extended if searchForDuplicateDescription = 3
+			# Some channels indicate replays in the extended descriptions
+			# If the similarity percent is higher then 0.8 it is a very close match
+			foundExt = ( len(extdesc1) == len(extdesc2) and extdesc1 == extdesc2 ) \
+			 or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+			print("[AutoTimer] Check ext desc:" + extdesc1[:10] + "=" + extdesc2[:10] + ">>", foundExt)
+		else:
+			foundExt = True;
+		retVal = (foundTitle and foundShort and foundExt)
+		print("[AutoTimer] Check similarity returning >>", retVal)
+
+		return retVal

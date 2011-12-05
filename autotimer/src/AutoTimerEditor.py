@@ -320,6 +320,15 @@ class AutoTimerEditorBase:
 			default = str(timer.getAvoidDuplicateDescription())
 		))
 
+		# Search for Duplicate Desciption in...
+		self.searchForDuplicateDescription = NoSave(ConfigSelection([
+				("1", _("Title")),
+				("2", _("Title and Short description")),
+				("3", _("Title and all descriptions")),
+			],
+		    default = str(timer.getSearchForDuplicateDescription())
+		))
+
 		# Custom Location
 		if timer.hasDestination():
 			default = True
@@ -409,6 +418,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.afterevent.addNotifier(self.reloadList, initial_call = False)
 		self.afterevent_timespan.addNotifier(self.reloadList, initial_call = False)
 		self.counter.addNotifier(self.reloadList, initial_call = False)
+		self.avoidDuplicateDescription.addNotifier(self.reloadList, initial_call = False)
 		self.useDestination.addNotifier(self.reloadList, initial_call = False)
 		self.vps_enabled.addNotifier(self.reloadList, initial_call = False)
 
@@ -512,6 +522,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.counterLeft: _("Number of scheduled recordings left."),
 			self.counterFormatString: _("The counter can automatically be reset to the limit at certain intervals."),
 			self.avoidDuplicateDescription: _("When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."),
+			self.searchForDuplicateDescription: _("Defines where to search for duplicates (only title, short description or even extended description)"),
 			self.useDestination: _("Should timers created by this AutoTimer be recorded to a custom location?"),
 			self.destination: _("Select the location to save the recording to."),
 			self.tags: _("Tags the Timer/Recording will have."),
@@ -589,6 +600,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			list.append(getConfigListEntry(_("Reset count"), self.counterFormatString))
 
 		list.append(getConfigListEntry(_("Require description to be unique"), self.avoidDuplicateDescription))
+
+		if self.avoidDuplicateDescription.value > 0:
+			list.append(getConfigListEntry(_("Check for uniqueness in"), self.searchForDuplicateDescription))
 
 		# We always add this option though its expert only in enigma2
 		list.append(getConfigListEntry(_("Use a custom location"), self.useDestination))
@@ -812,6 +826,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.matchFormatString = ''
 
 		self.timer.avoidDuplicateDescription = int(self.avoidDuplicateDescription.value)
+		self.timer.searchForDuplicateDescription = int(self.searchForDuplicateDescription.value)
 
 		if self.useDestination.value:
 			self.timer.destination = self.destination.value

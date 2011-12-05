@@ -262,6 +262,7 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			timer.lastBegin = int(get("lastBegin", timer.lastBegin))
 
 		timer.avoidDuplicateDescription = int(get("avoidDuplicateDescription", timer.avoidDuplicateDescription))
+		timer.searchForDuplicateDescription = int(get("searchForDuplicateDescription", timer.searchForDuplicateDescription))
 		timer.destination = get("location", timer.destination) or None
 
 		if newTimer:

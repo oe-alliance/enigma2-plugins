@@ -46,13 +46,14 @@ class AutoTimerComponent(object):
 	"""
 	 Keeps init small and helps setting many values at once
 	"""
-	def setValues(self, name, match, enabled, timespan = None, services = None, offset = None, \
-			afterevent = [], exclude = None, maxduration = None, destination = None, \
-			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
-			lastBegin = 0, justplay = False, avoidDuplicateDescription = 0, bouquets = None, \
-			tags = None, encoding = None, searchType = "partial", searchCase = "insensitive", \
-			overrideAlternatives = False, timeframe = None, vps_enabled = False, \
-			vps_overwrite = False):
+	def setValues(self, name, match, enabled, timespan=None, services=None, \
+			offset=None, afterevent=[], exclude=None, maxduration=None, \
+			destination=None, include=None, matchCount=0, matchLeft=0, \
+			matchLimit='', matchFormatString='', lastBegin=0, justplay=False, \
+			avoidDuplicateDescription=0, searchForDuplicateDescription=3, bouquets=None, \
+			tags=None, encoding=None, searchType="partial", searchCase="insensitive", \
+			overrideAlternatives=False, timeframe=None, vps_enabled=False, \
+			vps_overwrite=False):
 		self.name = name
 		self.match = match
 		self.enabled = enabled
@@ -71,6 +72,7 @@ class AutoTimerComponent(object):
 		self.lastBegin = lastBegin
 		self.justplay = justplay
 		self.avoidDuplicateDescription = avoidDuplicateDescription
+		self.searchForDuplicateDescription = searchForDuplicateDescription
 		self.bouquets = bouquets
 		self.tags = tags or []
 		self.encoding = encoding or getDefaultEncoding()
@@ -263,6 +265,8 @@ class AutoTimerComponent(object):
 ### Makes saving Config easier
 
 	getAvoidDuplicateDescription = lambda self: self.avoidDuplicateDescription
+
+	getSearchForDuplicateDescription = lambda self: self.searchForDuplicateDescription
 
 	getBouquets = lambda self: self._bouquets
 
@@ -515,6 +519,7 @@ class AutoTimerComponent(object):
 			lastBegin = self.lastBegin,
 			justplay = self.justplay,
 			avoidDuplicateDescription = self.avoidDuplicateDescription,
+			searchForDuplicateDescription = self.searchForDuplicateDescription,
 			bouquets = self.bouquets,
 			tags = self.tags,
 			encoding = self.encoding,
@@ -547,6 +552,7 @@ class AutoTimerComponent(object):
 			lastBegin = self.lastBegin,
 			justplay = self.justplay,
 			avoidDuplicateDescription = self.avoidDuplicateDescription,
+			searchForDuplicateDescription = self.searchForDuplicateDescription,
 			bouquets = self.bouquets[:],
 			tags = self.tags[:],
 			encoding = self.encoding,
@@ -581,30 +587,31 @@ class AutoTimerComponent(object):
 					str(self.encoding),
 					str(self.searchCase),
 					str(self.searchType),
-			 		str(self.timespan),
-			 		str(self.services),
-			 		str(self.offset),
-			 		str(self.afterevent),
-			 		str(([x.pattern for x in self.exclude[0]],
+					str(self.timespan),
+					str(self.services),
+					str(self.offset),
+					str(self.afterevent),
+					str(([x.pattern for x in self.exclude[0]],
 						[x.pattern for x in self.exclude[1]],
 						[x.pattern for x in self.exclude[2]],
 						self.exclude[3]
 					)),
-			 		str(([x.pattern for x in self.include[0]],
+					str(([x.pattern for x in self.include[0]],
 						[x.pattern for x in self.include[1]],
 						[x.pattern for x in self.include[2]],
 						self.include[3]
 					)),
-			 		str(self.maxduration),
-			 		str(self.enabled),
-			 		str(self.destination),
-			 		str(self.matchCount),
-			 		str(self.matchLeft),
-			 		str(self.matchLimit),
-			 		str(self.matchFormatString),
-			 		str(self.lastBegin),
-			 		str(self.justplay),
-			 		str(self.avoidDuplicateDescription),
+					str(self.maxduration),
+					str(self.enabled),
+					str(self.destination),
+					str(self.matchCount),
+					str(self.matchLeft),
+					str(self.matchLimit),
+					str(self.matchFormatString),
+					str(self.lastBegin),
+					str(self.justplay),
+					str(self.avoidDuplicateDescription),
+					str(self.searchForDuplicateDescription),
 					str(self.bouquets),
 					str(self.tags),
 					str(self.overrideAlternatives),

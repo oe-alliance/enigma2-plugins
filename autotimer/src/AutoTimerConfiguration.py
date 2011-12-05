@@ -22,7 +22,7 @@ is the only reliable way to make remote tools aware of our capabilities without
 much overhead (read: a special api just for this) we chose to change the meaning
 of the version attribue.
 """
-CURRENT_CONFIG_VERSION = "6"
+CURRENT_CONFIG_VERSION = "7"
 
 def getValue(definitions, default):
 	# Initialize Output
@@ -157,6 +157,7 @@ def parseEntry(element, baseTimer, defaults = False):
 
 	# Read out avoidDuplicateDescription
 	baseTimer.avoidDuplicateDescription = int(element.get("avoidDuplicateDescription", 0))
+	baseTimer.searchForDuplicateDescription = int(element.get("searchForDuplicateDescription", 3))
 
 	# Read out allowed services
 	l = element.findall("serviceref")
@@ -406,6 +407,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 
 		# Read out avoidDuplicateDescription
 		avoidDuplicateDescription = int(timer.get("avoidDuplicateDescription", 0))
+		searchForDuplicateDescription = int(timer.get("searchForDuplicateDescription", 3))
 
 		# Read out afterevent (compatible to V* though behaviour for V3- is different as V4+ allows multiple afterevents while the last definication was chosen before)
 		idx = {
@@ -504,6 +506,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				lastBegin = lastBegin,
 				justplay = justplay,
 				avoidDuplicateDescription = avoidDuplicateDescription,
+				searchForDuplicateDescription = searchForDuplicateDescription,
 				bouquets = bouquets,
 				tags = tags
 		))
@@ -549,6 +552,9 @@ def buildConfig(defaultTimer, timers, webif = False):
 	if defaultTimer.getAvoidDuplicateDescription():
 		extend((' avoidDuplicateDescription="', str(defaultTimer.getAvoidDuplicateDescription()), '"'))
 
+		if defaultTimer.getAvoidDuplicateDescription() > 0:
+			if defaultTimer.getSearchForDuplicateDescription() != 3:
+				extend((' searchForDuplicateDescription="', str(defaultTimer.getSearchForDuplicateDescription()), '"'))
 	# Only display justplay if true
 	if defaultTimer.justplay:
 		extend((' justplay="', str(defaultTimer.getJustplay()), '"'))
@@ -682,6 +688,8 @@ def buildConfig(defaultTimer, timers, webif = False):
 		# Duplicate Description
 		if timer.getAvoidDuplicateDescription():
 			extend((' avoidDuplicateDescription="', str(timer.getAvoidDuplicateDescription()), '"'))
+			if timer.getSearchForDuplicateDescription() != 3:
+				extend((' searchForDuplicateDescription="', str(timer.getSearchForDuplicateDescription()), '"'))
 
 		# Only display justplay if true
 		if timer.justplay:
