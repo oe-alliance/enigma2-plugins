@@ -322,11 +322,11 @@ class AutoTimerEditorBase:
 
 		# Search for Duplicate Desciption in...
 		self.searchForDuplicateDescription = NoSave(ConfigSelection([
-				("1", _("Title")),
-				("2", _("Title and Short description")),
-				("3", _("Title and all descriptions")),
+				("0", _("Title")),
+				("1", _("Title and Short description")),
+				("2", _("Title and all descriptions")),
 			],
-		    default = str(timer.getSearchForDuplicateDescription())
+		    default = str(timer.searchForDuplicateDescription)
 		))
 
 		# Custom Location

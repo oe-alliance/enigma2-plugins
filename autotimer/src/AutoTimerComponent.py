@@ -50,7 +50,7 @@ class AutoTimerComponent(object):
 			offset=None, afterevent=[], exclude=None, maxduration=None, \
 			destination=None, include=None, matchCount=0, matchLeft=0, \
 			matchLimit='', matchFormatString='', lastBegin=0, justplay=False, \
-			avoidDuplicateDescription=0, searchForDuplicateDescription=3, bouquets=None, \
+			avoidDuplicateDescription=0, searchForDuplicateDescription=2, bouquets=None, \
 			tags=None, encoding=None, searchType="partial", searchCase="insensitive", \
 			overrideAlternatives=False, timeframe=None, vps_enabled=False, \
 			vps_overwrite=False):
@@ -265,8 +265,6 @@ class AutoTimerComponent(object):
 ### Makes saving Config easier
 
 	getAvoidDuplicateDescription = lambda self: self.avoidDuplicateDescription
-
-	getSearchForDuplicateDescription = lambda self: self.searchForDuplicateDescription
 
 	getBouquets = lambda self: self._bouquets
 

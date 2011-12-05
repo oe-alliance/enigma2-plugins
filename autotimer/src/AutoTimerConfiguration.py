@@ -157,7 +157,7 @@ def parseEntry(element, baseTimer, defaults = False):
 
 	# Read out avoidDuplicateDescription
 	baseTimer.avoidDuplicateDescription = int(element.get("avoidDuplicateDescription", 0))
-	baseTimer.searchForDuplicateDescription = int(element.get("searchForDuplicateDescription", 3))
+	baseTimer.searchForDuplicateDescription = int(element.get("searchForDuplicateDescription", 2))
 
 	# Read out allowed services
 	l = element.findall("serviceref")
@@ -407,7 +407,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 
 		# Read out avoidDuplicateDescription
 		avoidDuplicateDescription = int(timer.get("avoidDuplicateDescription", 0))
-		searchForDuplicateDescription = int(timer.get("searchForDuplicateDescription", 3))
+		searchForDuplicateDescription = int(timer.get("searchForDuplicateDescription", 2))
 
 		# Read out afterevent (compatible to V* though behaviour for V3- is different as V4+ allows multiple afterevents while the last definication was chosen before)
 		idx = {
@@ -553,8 +553,8 @@ def buildConfig(defaultTimer, timers, webif = False):
 		extend((' avoidDuplicateDescription="', str(defaultTimer.getAvoidDuplicateDescription()), '"'))
 
 		if defaultTimer.getAvoidDuplicateDescription() > 0:
-			if defaultTimer.getSearchForDuplicateDescription() != 3:
-				extend((' searchForDuplicateDescription="', str(defaultTimer.getSearchForDuplicateDescription()), '"'))
+			if defaultTimer.searchForDuplicateDescription != 2:
+				extend((' searchForDuplicateDescription="', str(defaultTimer.searchForDuplicateDescription), '"'))
 	# Only display justplay if true
 	if defaultTimer.justplay:
 		extend((' justplay="', str(defaultTimer.getJustplay()), '"'))
@@ -688,8 +688,8 @@ def buildConfig(defaultTimer, timers, webif = False):
 		# Duplicate Description
 		if timer.getAvoidDuplicateDescription():
 			extend((' avoidDuplicateDescription="', str(timer.getAvoidDuplicateDescription()), '"'))
-			if timer.getSearchForDuplicateDescription() != 3:
-				extend((' searchForDuplicateDescription="', str(timer.getSearchForDuplicateDescription()), '"'))
+			if timer.searchForDuplicateDescription != 2:
+				extend((' searchForDuplicateDescription="', str(timer.searchForDuplicateDescription), '"'))
 
 		# Only display justplay if true
 		if timer.justplay:
