@@ -601,7 +601,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		list.append(getConfigListEntry(_("Require description to be unique"), self.avoidDuplicateDescription))
 
-		if self.avoidDuplicateDescription.value > 0:
+		if int(self.avoidDuplicateDescription.value > 0):
 			list.append(getConfigListEntry(_("Check for uniqueness in"), self.searchForDuplicateDescription))
 
 		# We always add this option though its expert only in enigma2
