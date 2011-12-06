@@ -200,7 +200,7 @@ var LocationsAndTags = Class.create({
 		this.locTagCallbacks = [];
 		
 		this.curlocprovider = new CurrentLocationProvider(this.onCurrentLocationAvailable.bind(this));
-		this.locprovider = new LocationProvider(this.onLocationsAvailable.bind(this));		
+		this.locprovider = new LocationProvider(this.onLocationsAvailable.bind(this));
 		this.tagprovider = new TagProvider(this.onTagsAvailable.bind(this));
 	},
 	
@@ -350,7 +350,7 @@ var Movies = Class.create(Controller, {
 		this.navHandler = new MovieNavHandler(navTarget);
 	},
 	
-	load: function(location, tags){	
+	load: function(location, tags){
 		if(!location){
 			var sethash = function(location){
 				var hash = [core.getBaseHash(), "filter", encodeURIComponent(location), encodeURIComponent(tags)].join("/");
@@ -413,7 +413,7 @@ var RemoteControl = Class.create({
 		this.handler.sendKey({'command' : cmd, 'type': type});
 		
 		var hash = '!/control'; //FIXME
-		switch(shotType){		
+		switch(shotType){
 		case undefined:
 		case '':
 			return;
@@ -427,21 +427,21 @@ var RemoteControl = Class.create({
 		//the box needs at least a little bit of time to actually draw the window
 		//wait 250ms before fetching a new screenshot
 		setTimeout(
-				function(){
-					hashListener.setHash(hash);
-					if(hash == hashListener.getHash()){
-						core.onHashChanged(true);
-					}
-				},
-				250);
+			function(){
+				hashListener.setHash(hash);
+				if(hash == hashListener.getHash()){
+					core.onHashChanged(true);
+				}
+			},
+			250);
 	},
 	
 	registerEvents:function(){
 		var _this = this;
-		var win = this.window;		
+		var win = this.window;
 		var elem = win.document;
 		
-		var onload = function(event){			
+		var onload = function(event){
 			elem.on(
 				'click',
 				'.remoteKey',
@@ -464,7 +464,7 @@ var RemoteControl = Class.create({
 				}
 			);
 		};
-		if(typeof(elem.on) == "function"){
+		if(elem.on){
 			onload();
 		} else {
 			win.onload = onload;
@@ -496,7 +496,7 @@ var Screenshots = Class.create(Controller, {
 			default:
 				break;
 		}
-		this.handler.load(params);		
+		this.handler.load(params);
 	},
 
 	shootOsd: function(){
@@ -567,7 +567,7 @@ var Services = Class.create(Controller, {
 			
 			if(serviceName.match(needle) != needle && serviceName != ""){
 				row.hide();
-			} else {		
+			} else {
 				row.show();
 			}
 		}
@@ -576,10 +576,10 @@ var Services = Class.create(Controller, {
 	addFilterInput: function(){
 		var input = new Element('input');
 		input.id = 'serviceFilter';
-		input.value = 'Filter Services';		
-		$('contentHdExt').update(input);		
+		input.value = 'Filter Services';
+		$('contentHdExt').update(input);
 		input.on('focus', this.onFilterFocus.bind(this));
-		input.on('keyup', this.filter.bind(this));	
+		input.on('keyup', this.filter.bind(this));
 	},
 	
 	onFinished: function(){
@@ -767,9 +767,9 @@ var Timers = Class.create({
 		datePickerController.destroyDatePicker('sdate');
 		datePickerController.destroyDatePicker('edate');
 		var today = new Date();
-		var pad = function(value, length) { 
-			length = length || 2; 
-			return "0000".substr(0,length - Math.min(String(value).length, length)) + value; 
+		var pad = function(value, length) {
+			length = length || 2;
+			return "0000".substr(0,length - Math.min(String(value).length, length)) + value;
 		};
 		var opts = { 
 				showWeeks: true,
@@ -802,7 +802,7 @@ var Volume = Class.create(Controller, {
 });
 
 var E2WebCore = Class.create({
-	initialize: function(){	
+	initialize: function(){
 		this.mediaPlayerStarted = false; 
 		this.popUpBlockerHinted = false;
 		this.settings = null;
@@ -905,7 +905,7 @@ var E2WebCore = Class.create({
 				notif.style.background = "#C00";
 			} else {
 				notif.style.background = "#85C247";
-			}				
+			}
 
 			this.set('notification', "<div>"+text+"</div>");
 			notif.fadeIn({'delay' : 500, 'to' : 90});
@@ -1000,7 +1000,7 @@ var E2WebCore = Class.create({
 	},
 	
 	onHashChanged: function(isReload){
-		var hash = hashListener.getHash();		
+		var hash = hashListener.getHash();
 		var parts = hash.split("/");
 	
 		var len = parts.length;
@@ -1091,8 +1091,6 @@ var E2WebCore = Class.create({
 		hashListener.init();
 		
 		this.registerEvents();
-		
-//		TODO getBoxtype();
 
 		this.setAjaxLoad('navContent');
 		this.setAjaxLoad('contentMain');
@@ -1137,7 +1135,6 @@ var E2WebCore = Class.create({
 			}.bind(this)
 		);
 		//Header
-		
 		$('openSignalPanel').on(
 			'click',
 			function(event, element){
@@ -1339,8 +1336,8 @@ var E2WebCore = Class.create({
 		);
 		//Servicelist
 		content.on(
-			'click', 
-			'a.sListSLink', 
+			'click',
+			'a.sListSLink',
 			function(event, element){
 				var ref = decodeURIComponent( element.id );
 				this.services.zap(ref);
@@ -1375,7 +1372,7 @@ var E2WebCore = Class.create({
 		content.on(
 			'click', 
 			'.tListDelete', 
-			function(event, element){		
+			function(event, element){
 				this.timers.del(element);
 				event.stop();
 			}.bind(this)
@@ -1572,7 +1569,7 @@ var E2WebCore = Class.create({
 		case "extras":
 			this.reloadNav('tplNavExtras', 'Extras');
 			break;
-			
+	
 		default:
 			break;
 		}
@@ -1602,7 +1599,7 @@ var E2WebCore = Class.create({
 			this.startUpdateCurrentPoller();
 		}
 		
-		var updateBouquetInterval = parseNr( $F('updateBouquetInterval') )  * 1000;
+		var updateBouquetInterval = parseNr( $F('updateBouquetInterval') ) * 1000;
 		if( updateBouquetInterval < 60000){
 			updateBouquetInterval = 300000;
 		}

@@ -13,7 +13,6 @@ var VlcServiceListHandler = Class.create(AbstractContentHandler, {
 //		this.subServiceHandler = new ServiceListSubserviceHandler();
 	},
 	
-	
 	/**
 	 * getSubservices
 	 * calls this.subServiceHandler.load() to show Now/Next epg information

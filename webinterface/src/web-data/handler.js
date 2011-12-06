@@ -41,8 +41,6 @@ var AbstractContentHandler = Class.create({
 //		TODO requestFinished actions
 	},
 	
-	//TODO insert renderTpl, templateEngine.process & Co. here or somewhere else... (maybe a separate class?)
-	
 	/**
 	 * show
 	 * Show the data that has been fetched by a request (and prepared by renderXML)
@@ -152,7 +150,7 @@ var SimplePageHandler = Class.create(AbstractContentHandler,{
 var BouquetListHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target, targetMain){
 		$super('tplBouquetList', target);
-		this.provider = new SimpleServiceListProvider(this.show.bind(this));	
+		this.provider = new SimpleServiceListProvider(this.show.bind(this));
 		this.ajaxload = false;
 		this.targetMain = targetMain;
 	},
@@ -160,7 +158,7 @@ var BouquetListHandler = Class.create(AbstractContentHandler, {
 	show : function(data){
 		this.data = data;
 		if($(this.target) != null && $(this.target != undefined)){
-			templateEngine.process(this.tpl, data, this.target,  this.finished.bind(this));
+			templateEngine.process(this.tpl, data, this.target, this.finished.bind(this));
 		} else {
 			templateEngine.process(
 					'tplBouquetsAndServices', 

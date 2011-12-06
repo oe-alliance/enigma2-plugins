@@ -62,7 +62,7 @@ var TrimPath;
         if (func != null)
             return new optEtc.Template(optTmplName, tmplContent, funcSrc, func, optEtc);
         return null;
-    }
+    };
     
     try {
         String.prototype.process = function(context, optFlags) {
@@ -70,7 +70,7 @@ var TrimPath;
             if (template != null)
                 return template.process(context, optFlags);
             return this;
-        }
+        };
     } catch (e) { // Swallow exception, such as when String.prototype is sealed.
     }
     
@@ -111,13 +111,13 @@ var TrimPath;
                                    "{ var _OUT_arr = []; var _OUT = { write: function(m) { if (m) _OUT_arr.push(m); } }; " ].join('');
                      } }, 
         "/macro"  : { delta: -1, prefix: " return _OUT_arr.join(''); };" }
-    }
+    };
     TrimPath.parseTemplate_etc.modifierDef = {
         "eat"        : function(v)    { return ""; },
         "escape"     : function(s)    { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); },
         "capitalize" : function(s)    { return String(s).toUpperCase(); },
         "default"    : function(s, d) { return s != null ? s : d; }
-    }
+    };
     TrimPath.parseTemplate_etc.modifierDef.h = TrimPath.parseTemplate_etc.modifierDef.escape;
 
     TrimPath.parseTemplate_etc.Template = function(tmplName, tmplContent, funcSrc, func, etc) {
@@ -146,20 +146,20 @@ var TrimPath;
                 return result;
             }
             return resultArr.join("");
-        }
+        };
         this.name       = tmplName;
         this.source     = tmplContent; 
         this.sourceFunc = funcSrc;
-        this.toString   = function() { return "TrimPath.Template [" + tmplName + "]"; }
-    }
+        this.toString   = function() { return "TrimPath.Template [" + tmplName + "]"; };
+    };
     TrimPath.parseTemplate_etc.ParseError = function(name, line, message) {
         this.name    = name;
         this.line    = line;
         this.message = message;
-    }
+    };
     TrimPath.parseTemplate_etc.ParseError.prototype.toString = function() { 
         return ("TrimPath template ParseError in " + this.name + ": line " + this.line + ", " + this.message);
-    }
+    };
     
     var parse = function(body, tmplName, etc) {
         body = cleanWhiteSpace(body);
@@ -225,7 +225,7 @@ var TrimPath;
             throw new etc.ParseError(tmplName, state.line, "unclosed, unmatched statement(s): " + state.stack.join(","));
         funcText.push("}}; TrimPath_Template_TEMP");
         return funcText.join("");
-    }
+    };
     
     var emitStatement = function(stmtStr, state, funcText, tmplName, etc) {
         var parts = stmtStr.slice(1, -1).split(' ');
@@ -262,7 +262,7 @@ var TrimPath;
             }
             funcText.push(stmt.suffix);
         }
-    }
+    };
 
     var emitSectionText = function(text, funcText) {
         if (text.length <= 0)
@@ -297,7 +297,7 @@ var TrimPath;
             funcText.push(s);
             funcText.push('");');
         }
-    }
+    };
     
     var emitSectionTextLine = function(line, funcText) {
         var endMarkPrev = '}';
@@ -328,7 +328,7 @@ var TrimPath;
             endMarkPrev = endMark;
         }
         emitText(line.substring(endExprPrev + endMarkPrev.length), funcText); 
-    }
+    };
     
     var emitText = function(text, funcText) {
         if (text == null ||
@@ -340,7 +340,7 @@ var TrimPath;
         funcText.push('_OUT.write("');
         funcText.push(text);
         funcText.push('");');
-    }
+    };
     
     var emitExpression = function(exprArr, index, funcText) {
         // Ex: foo|a:x|b:y1,y2|c:z1,z2 is emitted as c(b(a(foo,x),y1,y2),z1,z2)
@@ -359,7 +359,7 @@ var TrimPath;
             funcText.push(parts[1]);
         }
         funcText.push(')');
-    }
+    };
 
     var cleanWhiteSpace = function(result) {
         result = result.replace(/\t/g,   "    ");
@@ -367,7 +367,7 @@ var TrimPath;
         result = result.replace(/\r/g,   "\n");
         result = result.replace(/^(\s*\S*(\s+\S+)*)\s*$/, '$1'); // Right trim by Igor Poteryaev.
         return result;
-    }
+    };
 
     var scrubWhiteSpace = function(result) {
         result = result.replace(/^\s+/g,   "");
@@ -375,7 +375,7 @@ var TrimPath;
         result = result.replace(/\s+/g,   " ");
         result = result.replace(/^(\s*\S*(\s+\S+)*)\s*$/, '$1'); // Right trim by Igor Poteryaev.
         return result;
-    }
+    };
 
     // The DOM helper functions depend on DOM/DHTML, so they only work in a browser.
     // However, these are not considered core to the engine.
@@ -389,9 +389,9 @@ var TrimPath;
             content = element.innerHTML; // Like textarea.innerHTML.
         content = content.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
         return TrimPath.parseTemplate(content, elementId, optEtc);
-    }
+    };
 
     TrimPath.processDOMTemplate = function(elementId, context, optFlags, optDocument, optEtc) {
         return TrimPath.parseDOMTemplate(elementId, optDocument, optEtc).process(context, optFlags);
-    }
+    };
 }) ();
