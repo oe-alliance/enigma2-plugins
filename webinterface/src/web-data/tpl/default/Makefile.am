@@ -2,4 +2,7 @@ installdir = $(libdir)/enigma2/python/Plugins/Extensions/WebInterface/web-data/t
 
 SUBDIRS = streaminterface
 
-install_DATA = index.html style.css *.htm
+install_DATA = 	index.html \
+				style.css \
+				style.min.css \
+				*.htm
