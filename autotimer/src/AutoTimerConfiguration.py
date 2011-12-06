@@ -407,7 +407,9 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 
 		# Read out avoidDuplicateDescription
 		avoidDuplicateDescription = int(timer.get("avoidDuplicateDescription", 0))
-		searchForDuplicateDescription = int(timer.get("searchForDuplicateDescription", 2))
+		searchForDuplicateDescription = int(timer.get("searchForDuplicateDescription", 3)) - 1
+		if searchForDuplicateDescription < 0 or searchForDuplicateDescription > 2:
+			searchForDuplicateDescription = 2
 
 		# Read out afterevent (compatible to V* though behaviour for V3- is different as V4+ allows multiple afterevents while the last definication was chosen before)
 		idx = {
