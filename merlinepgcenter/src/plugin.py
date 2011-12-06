@@ -64,7 +64,7 @@ def startMerlinEPGCenterSingle(self):
 	MerlinEPGCenterStarter.instance.openMerlinEPGCenter(SINGLE_EPG)
 	
 # open "multi epg now" tab
-def startMerlinEPGCenterMulti(self):
+def startMerlinEPGCenterMulti(self, withCallback=None): # withCallback is an extra parameter which is passed when called form a service without EPG data
 	MerlinEPGCenterStarter.instance.openMerlinEPGCenter(MULTI_EPG_NOW)
 	
 class InfoBarFunctionSaver:
