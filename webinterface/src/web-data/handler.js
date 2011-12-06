@@ -513,7 +513,16 @@ var TimerListHandler  = Class.create(AbstractContentHandler, {
 		$super('tplTimerList', target);
 		this.provider = new TimerListProvider(this.show.bind(this));
 		this.ajaxload = true;
-	}	
+	},
+	
+	cleanup: function(){
+		this.provider.simpleResultQuery(
+				URL.timercleanup, {}, 
+				function(transport, callback){
+					this.simpleResultCallback(transport, callback);
+					this.reload();
+				}.bind(this));
+	},
 });
 
 var TimerHandler = Class.create(AbstractContentHandler, {	

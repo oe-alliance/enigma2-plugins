@@ -146,7 +146,7 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 	 * @parms - an json object containing  {parameter : value} pairs for the request
 	 */
 	simpleResultQuery: function(url, parms, callback){
-		this.getUrl(url, parms, callback);		
+		this.getUrl(url, parms, callback);
 	},
 	
 	/**

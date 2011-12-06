@@ -707,6 +707,10 @@ var Timers = Class.create({
 		this.listHandler.load({});
 	},
 	
+	cleanupList: function(){
+		this.listHandler.cleanup();
+	},
+	
 	create: function(){
 		this.timerHandler.load({}, false, true);
 	},
@@ -1392,6 +1396,14 @@ var E2WebCore = Class.create({
 				var hash = ["#!/timer", "edit"].join("/");
 				hashListener.setHash(hash);
 				this.timers.edit(element);
+				return false;
+			}.bind(this)
+		);
+		content.on(
+			'click', 
+			'.tListCleanup', 
+			function(event, element){
+				this.timers.cleanupList();
 				return false;
 			}.bind(this)
 		);
