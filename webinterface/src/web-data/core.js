@@ -1200,7 +1200,7 @@ var E2WebCore = Class.create({
 			'submit',
 			function(event, element){
 				this.epg.search($F('epgSearch'));
-				return false;
+				event.stop();
 			}.bind(this)
 		);		
 		$('epgSearch').on(
@@ -1337,6 +1337,14 @@ var E2WebCore = Class.create({
 			function(event, element){
 				this.saveSettings();
 			}.bind(this)
+		);
+		//Bouquets
+		content.on(
+			'click',
+			'a.bListSLink',
+			function(event, element){
+				setContentHd(element.readAttribute("data-servicename"));
+			}
 		);
 		//Servicelist
 		content.on(
