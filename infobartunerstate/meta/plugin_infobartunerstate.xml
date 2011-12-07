@@ -1,7 +1,6 @@
 <default>
 	  <prerequisites>
                     <tag type="Recording" />
-                    <tag type="Network" />
 	  </prerequisites>
           <info>
                     <author>betonme</author>
