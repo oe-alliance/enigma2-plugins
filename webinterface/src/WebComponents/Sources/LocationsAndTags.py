@@ -1,5 +1,6 @@
 from Components.Sources.Source import Source
 from Components.config import config
+from Tools.Directories import resolveFilename, SCOPE_CONFIG, SCOPE_HDD
 import os
 
 class LocationsAndTags(Source):
@@ -30,18 +31,16 @@ class LocationsAndTags(Source):
 			self.result = False
 
 	def getCurrentLocation(self):
-		path = config.movielist.last_videodir.value or "/hdd/movie"
-		if not os.path.exists(path):
-			path = "/hdd/movie"
-		
-		return path
+		if config.movielist.last_videodir.value and os.path.exists(config.movielist.last_videodir.value):
+			return config.movielist.last_videodir.value
+		return resolveFilename(SCOPE_HDD)
 
 	def getLocations(self):
 		return config.movielist.videodirs.value
 
 	def getTags(self):
 		try:
-			file = open("/etc/enigma2/movietags")
+			file = open(resolveFilename(SCOPE_CONFIG, "movietags"))
 			tags = [x.rstrip() for x in file]
 			while "" in tags:
 				tags.remove("")
