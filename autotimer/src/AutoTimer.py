@@ -362,6 +362,10 @@ class AutoTimer:
 					begin -= config.recording.margin_before.value * 60
 					end += config.recording.margin_after.value * 60
 
+				# Overwrite endtime if requested
+				if timer.justplay and not timer.setEndtime:
+					end = begin
+
 				# Eventually change service to alternative
 				if timer.overrideAlternatives:
 					serviceref = timer.getAlternative(serviceref)

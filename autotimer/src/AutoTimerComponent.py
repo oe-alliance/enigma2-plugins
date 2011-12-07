@@ -53,7 +53,7 @@ class AutoTimerComponent(object):
 			avoidDuplicateDescription=0, searchForDuplicateDescription=2, bouquets=None, \
 			tags=None, encoding=None, searchType="partial", searchCase="insensitive", \
 			overrideAlternatives=False, timeframe=None, vps_enabled=False, \
-			vps_overwrite=False):
+			vps_overwrite=False, setEndtime=False):
 		self.name = name
 		self.match = match
 		self.enabled = enabled
@@ -82,6 +82,7 @@ class AutoTimerComponent(object):
 		self.timeframe = timeframe
 		self.vps_enabled = vps_enabled
 		self.vps_overwrite = vps_overwrite
+		self.setEndtime = setEndtime
 
 ### Attributes / Properties
 

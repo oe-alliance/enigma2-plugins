@@ -140,6 +140,9 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			try: justplay = int(justplay)
 			except ValueError: justplay = justplay == "zap"
 			timer.justplay = justplay
+		setEndtime = get("setEndtime")
+		if setEndtime is not None:
+			timer.setEndtime = int(setEndtime)
 
 		# Timespan
 		start = get("timespanFrom")

@@ -154,6 +154,7 @@ def parseEntry(element, baseTimer, defaults = False):
 
 	# Read out justplay
 	baseTimer.justplay = int(element.get("justplay", 0))
+	baseTimer.setEndtime = int(element.get("setEndtime", 1))
 
 	# Read out avoidDuplicateDescription
 	baseTimer.avoidDuplicateDescription = int(element.get("avoidDuplicateDescription", 0))
@@ -404,6 +405,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 
 		# Read out justplay
 		justplay = int(timer.get("justplay", '0'))
+		setEndtime = int(timer.get("setEndtime", '1'))
 
 		# Read out avoidDuplicateDescription
 		avoidDuplicateDescription = int(timer.get("avoidDuplicateDescription", 0))
@@ -507,6 +509,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				matchFormatString = counterFormat,
 				lastBegin = lastBegin,
 				justplay = justplay,
+				setEndtime = setEndtime,
 				avoidDuplicateDescription = avoidDuplicateDescription,
 				searchForDuplicateDescription = searchForDuplicateDescription,
 				bouquets = bouquets,
@@ -560,6 +563,8 @@ def buildConfig(defaultTimer, timers, webif = False):
 	# Only display justplay if true
 	if defaultTimer.justplay:
 		extend((' justplay="', str(defaultTimer.getJustplay()), '"'))
+		if not defaultTimer.setEndtime:
+			append(' setEndtime="0"')
 
 	# Only display encoding if != utf-8
 	if defaultTimer.encoding != defaultEncoding or webif:
@@ -696,6 +701,8 @@ def buildConfig(defaultTimer, timers, webif = False):
 		# Only display justplay if true
 		if timer.justplay:
 			extend((' justplay="', str(timer.getJustplay()), '"'))
+			if not timer.setEndtime:
+				append(' setEndtime="0"')
 
 		# Only display encoding if != utf-8
 		if timer.encoding != defaultEncoding or webif:
