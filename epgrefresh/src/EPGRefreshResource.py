@@ -25,7 +25,7 @@ class EPGRefreshStartRefreshResource(resource.Resource):
 			output = "could not initiate refresh"
 
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
@@ -119,7 +119,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 			output = 'service restriction changed'
 
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
@@ -132,7 +132,7 @@ class EPGRefreshListServicesResource(resource.Resource):
 	def render(self, req):
 		# show xml
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(epgrefresh.buildConfiguration(webif = True))
 
@@ -188,7 +188,7 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 			epgrefresh.stop()
 
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
@@ -200,7 +200,7 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 class EPGRefreshSettingsResource(resource.Resource):
 	def render(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
 		from time import time, localtime, mktime

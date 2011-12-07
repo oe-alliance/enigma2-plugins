@@ -29,7 +29,7 @@ class AutoTimerBaseResource(resource.Resource):
 		return plugin.autotimer
 	def returnResult(self, req, state, statetext):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
@@ -56,7 +56,7 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 
 		# show xml
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(autotimer.getXml())
 
@@ -327,7 +327,7 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 class AutoTimerSettingsResource(resource.Resource):
 	def render(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
 		try:
