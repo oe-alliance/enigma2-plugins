@@ -50,10 +50,10 @@ var Bouquets = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
-		var services = this.handler.data.services;
-		if(services){
-			if(this.loadFirstOnFinished){
-				var bouquet = this.handler.data.services[0];
+		var bouquets = this.handler.data.services;
+		if(bouquets){
+			if(this.loadFirstOnFinished || bouquets.length == 1){
+				var bouquet = bouquets[0];
 				setContentHd(bouquet.servicename);
 				this.loadFirstOnFinished = false; 
 				hash = core.getBaseHash() + '/' + bouquet.servicereference;
@@ -61,9 +61,9 @@ var Bouquets = Class.create(Controller, {
 			} else {
 				var currentBouquet = hashListener.getHash().split('/')[3];
 				if(currentBouquet){
-					services.each(function(service){
-						if(service.servicereference == currentBouquet){
-							setContentHd(service.servicename);
+					bouquets.each(function(bouquet){
+						if(bouquet.servicereference == currentBouquet){
+							setContentHd(bouquet.servicename);
 						}
 					});
 				}

@@ -386,7 +386,7 @@ function EPGEvent(xml, number){
 	this.getProgress = function(){
 		var progress = 100 - ( ( this.getTimeRemainingString() / ( this.getDuration() / 60000 ) ) * 100 );
 		progress = Math.ceil(progress);
-		if(isNaN(progress))
+		if(isNaN(progress) || progress > 100)
 			progress = 0;
 		return progress;
 	};
