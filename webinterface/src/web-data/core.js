@@ -70,7 +70,6 @@ var Bouquets = Class.create(Controller, {
 			}
 		}
 	}
-
 });
 
 var Current = Class.create(Controller, {
@@ -542,8 +541,8 @@ var Services = Class.create(Controller, {
 		this.cachedServiceElements = null;
 	},
 	
-	zap: function(sRef){
-		this.handler.zap({'sRef' : sRef});
+	zap: function(sRef, callback){
+		this.handler.zap({'sRef' : sRef}, callback);
 	},
 	
 	load: function(sRef){
@@ -1378,7 +1377,7 @@ var E2WebCore = Class.create({
 			'a.sListSLink',
 			function(event, element){
 				var ref = decodeURIComponent( element.id );
-				this.services.zap(ref);
+				this.services.zap(ref, this.updateItems.bind(this));
 				event.stop();
 			}.bind(this)
 		);

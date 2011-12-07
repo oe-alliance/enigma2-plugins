@@ -220,8 +220,15 @@ var ServiceListHandler = Class.create(AbstractContentHandler, {
 	 * Parameters:
 	 * @servicereference - the (unescaped) reference to the service that should be shown
 	 */
-	zap: function(parms){
-		this.provider.simpleResultQuery(URL.zap, parms, this.simpleResultCallback.bind(this));
+	zap: function(parms, callback){
+		this.provider.simpleResultQuery(
+				URL.zap, 
+				parms, 
+				function(transport){
+					this.simpleResultCallback.bind(this);
+					if(callback)
+						callback();
+				}.bind(this));
 	},
 	
 	showSimpleResult: function($super, result){
@@ -769,13 +776,20 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	},
 	
 	onServicesReady: function(data){
-		var services = data.services;		
+		var services = data.services;
+		var serviceFound = false;
+		var timer = this.data.timer;
 		services.each(function(service){
-			if(decodeURIComponent(service.servicereference) == this.data.timer.servicereference)
+			if(decodeURIComponent(service.servicereference) == timer.servicereference){
 				service['selected'] = 'selected';
-			else
+				serviceFound = true;
+			}else{
 				service['selected'] = '';
+			}
 		}.bind(this));
+		if(!serviceFound){
+			services.push( {'servicereference' : timer.servicereference, 'servicename' : timer.servicename, 'selected' : 'selected'});
+		}
 		
 		this.data['services'] = services;
 		this.show(this.data);

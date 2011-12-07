@@ -58,7 +58,7 @@ a.underline{text-decoration:underline;}
 .sListMarker{background-color:#485052;color:#FFF;}
 .sListEPGItem{font-size:12px;margin:0px;padding:0px;}
 .sListSProgress{display:inline-block;margin:0px;border:1px solid #485052;width:50px;height:10px;padding:1px;}
-.sListSProgressBar{display:inline-block;margin:0;background-color:#00C6ED;width:0%;height:100%;}
+.sListSProgressBar{display:inline-block;margin:0;background-color:#60aef2;width:0%;height:100%;}
 table.sListExtEpg{width:580px;margin:0;padding:0;}
 .header{padding-top:2px;padding-left:4px;padding-right:4px;display:block;height:22px;}
 #container{margin:0 auto;text-align:left;width:1005px;}
