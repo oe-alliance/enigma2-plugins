@@ -16,9 +16,8 @@
 														</td>
 														<td style="width: 470px;">
 															<div class="sListSName">
-																<a href="#" id="${item.now.servicereference}" class="sListSLink" title="Zap to ${item.now.servicename}">
-																	${item.now.servicename}
-																</a>
+																
+																<a href="#" id="${item.now.servicereference}" class="sListSLink" title="Zap to ${item.now.servicename}">${item.now.servicename}</a>
 															</div>
 														</td>
 														<td>
@@ -39,7 +38,7 @@
 																<table cellspacing="0">
 																	<tr>
 																		<td class="epgStart">${item.now.starttime}</td>
-																		<td class="epgTitle">${item.now.title}</td>
+																		<td class="epgTitle"><img class="sListBulletToggle" src="/web-data/img/toggle_expand_small.png" alt="+">&nbsp;${item.now.title}</td>
 																		{if item.now.duration != item.now.remaining}
 																		<td class="epgLength">+${item.now.remaining} of ${item.now.duration}</td>
 																		{else}
@@ -61,7 +60,7 @@
 																<table cellspacing="0">
 																	<tr>
 																		<td class="epgStart">${item.next.starttime}</td>
-																		<td class="epgTitle">${item.next.title}</td>
+																		<td class="epgTitle"><img class="sListBulletToggle" src="/web-data/img/toggle_expand_small.png" alt="+">&nbsp;${item.next.title}</td>
 																		{if item.next.duration != item.next.remaining}
 																		<td class="epgLength">+${item.next.remaining} of ${item.next.duration}</td>
 																		{else}

@@ -169,6 +169,10 @@ a.underline {
 	text-align: right;
 }
 
+.currentBulletToggle{
+	vertical-align: middle;
+}
+
 #mainMenu {
 	background-color: #485052;
 	text-align: center;
@@ -378,9 +382,8 @@ a.underline {
 }
 
 .sListMarker{
-	background-color: #FFF;
-	color:#485052;
-	text-align:center;
+	background-color: #485052;
+	color:#FFF;
 }
 
 .sListEPGItem {
