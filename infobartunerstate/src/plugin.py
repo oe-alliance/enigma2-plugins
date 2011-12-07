@@ -36,7 +36,7 @@ from InfoBarTunerState import InfoBarTunerState, TunerStateInfo
 # Contants
 NAME = _("InfoBar Tuner State") 
 DESCRIPTION = _("Show InfoBar Tuner State")
-VERSION = "V0.9.1"
+VERSION = "V0.9.2"
 #TODO About
 
 
@@ -97,6 +97,7 @@ config.infobartunerstate.extensions_menu           = ConfigYesNo(default = True)
 
 config.infobartunerstate.show_infobar              = ConfigYesNo(default = True)
 config.infobartunerstate.show_events               = ConfigYesNo(default = True)		#TODO Show on start, end, start/end
+config.infobartunerstate.show_streams              = ConfigYesNo(default = True)
 config.infobartunerstate.show_overwrite            = ConfigYesNo(default = False)		# Show with MoviePlayer only is actually not possible
 
 config.infobartunerstate.time_format               = ConfigSelection(default = "%H:%M", choices = date_choices)

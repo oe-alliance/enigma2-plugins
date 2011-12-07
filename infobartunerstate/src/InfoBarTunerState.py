@@ -121,7 +121,7 @@ def InfoBarHideTunerState(self):
 	if InfoBarHide:
 		InfoBarHide(self)
 	if gInfoBarTunerState:
-		gInfoBarTunerState.tunerHide()
+		gInfoBarTunerState.hide()
 
 
 #######################################################
@@ -189,8 +189,8 @@ class InfoBarTunerState(object):
 		# The Plugin starts before the InfoBar is instantiated
 		# Check every second if the InfoBar instance exists and try to bind our functions
 		# Is there an alternative solution?
-		if config.infobartunerstate.show_infobar.value:
-			self.forceBindInfoBarTimer.start(1000, False)
+#		if config.infobartunerstate.show_infobar.value:
+#			self.forceBindInfoBarTimer.start(1000, False)
 		
 		if config.infobartunerstate.show_overwrite.value:
 			overwriteInfoBar()
@@ -203,6 +203,12 @@ class InfoBarTunerState(object):
 		#Events:
 		#eventNewProgramInfo
 		#decoder state
+				
+		# Add current running records / streams
+		# We do it right here to ensure the InfoBar is intantiated
+		self.updateRecordTimer()
+		if config.infobartunerstate.show_streams.value:
+			self.updateStreams()
 
 	def appendEvents(self):
 		# Recording Events
@@ -210,13 +216,14 @@ class InfoBarTunerState(object):
 		if self.__onRecordingEvent not in self.session.nav.RecordTimer.on_state_change:
 			self.session.nav.RecordTimer.on_state_change.insert(0, self.__onRecordingEvent)
 		# Streaming Events
-		if StreamingWebScreen:
-			try:
-				from Plugins.Extensions.WebInterface.WebScreens import streamingEvents
-				if self.__onStreamingEvent not in streamingEvents:
-					streamingEvents.append(self.__onStreamingEvent)
-			except:
-				pass
+		if config.infobartunerstate.show_streams.value:
+			if StreamingWebScreen:
+				try:
+					from Plugins.Extensions.WebInterface.WebScreens import streamingEvents
+					if self.__onStreamingEvent not in streamingEvents:
+						streamingEvents.append(self.__onStreamingEvent)
+				except:
+					pass
 
 	def removeEvents(self):
 		# Recording Events
@@ -251,11 +258,6 @@ class InfoBarTunerState(object):
 			if bindShow and bindHide:
 				# Bind was successful
 				self.forceBindInfoBarTimer.stop()
-				
-				# Add current running records / streams
-				# We do it right here to ensure the InfoBar is intantiated
-				self.updateRecordTimer()
-				self.updateStreams()
 
 	def unbindInfoBar(self):
 		if self.infobar:
@@ -267,18 +269,13 @@ class InfoBarTunerState(object):
 					self.infobar.onHide.remove(self.__onInfoBarEventHide)
 
 	def __onInfoBarEventShow(self):
-		if self.hideTimer.isActive():
-			self.hideTimer.stop()
 		self.show()
 
 	def __onInfoBarEventHide(self):
-		self.tunerHide()
+		self.hide()
 
 	def __onRecordingEvent(self, timer):
 		if not timer.justplay:
-			print "__onRecordingEvent "
-			print str(timer.name)
-			print str(timer.state)
 			if timer.state == timer.StatePrepared:
 				pass
 			
@@ -328,11 +325,9 @@ class InfoBarTunerState(object):
 						self.show(True)
 
 	def __onStreamingEvent(self, event, stream):
-		print "StreamingWebScreen "
 		if StreamingWebScreen and stream:
 			
 			if event == StreamingWebScreen.EVENT_START:
-				print "StreamingWebScreen.evStart "
 				
 				try:
 					from Plugins.Extensions.WebInterface.WebScreens import streamingScreens
@@ -390,7 +385,6 @@ class InfoBarTunerState(object):
 					self.show(True)
 			
 			elif event == StreamingWebScreen.EVENT_END:
-				print "StreamingWebScreen.evEnd"
 				
 				# Remove Finished Stream
 				id = stream.screenIndex
@@ -435,9 +429,8 @@ class InfoBarTunerState(object):
 	def show(self, autohide=False):
 		if self.showTimer.isActive():
 			self.showTimer.stop()
-		self.showTimer.start( 100, True )
-		
-		if autohide or self.session.current_dialog is None:
+		self.showTimer.start( 10, True )
+		if autohide or self.session.current_dialog is None or not issubclass(self.session.current_dialog.__class__, InfoBarShowHide):
 			# Start timer to avoid permanent displaying
 			# Do not start timer if no timeout is configured
 			idx = int(config.usage.infobar_timeout.index)
@@ -513,38 +506,41 @@ class InfoBarTunerState(object):
 						win.updateTimes( begin, end, endless )
 						win.update()
 				elif win.type == Stream:
-					#TODO Avolid blocking - avoid using getStream to update the current name
-					stream = getStream( id )
-					if stream:
-						ref = stream.getRecordServiceRef()
-						
-						if not win.tuner or not win.tunertype:
-							win.tuner, win.tunertype = getTuner(stream.getRecordService())
-						
-						del stream
-						
-						epg = eEPGCache.getInstance()
-						event = epg and epg.lookupEventTime(ref, -1, 0)
-						if event: 
-							name = event.getEventName()
+					if config.infobartunerstate.show_streams.value:
+						#TODO Avolid blocking - avoid using getStream to update the current name
+						stream = getStream( id )
+						if stream:
+							ref = stream.getRecordServiceRef()
+							
+							if not win.tuner or not win.tunertype:
+								win.tuner, win.tunertype = getTuner(stream.getRecordService())
+							
+							del stream
+							
+							epg = eEPGCache.getInstance()
+							event = epg and epg.lookupEventTime(ref, -1, 0)
+							if event: 
+								name = event.getEventName()
+							else:
+								name = ""
+							
+							begin = win.begin
+							end = None
+							endless = True
+							
+							service_ref = None
+							if not win.number:
+								service_ref = ServiceReference(ref)
+								win.number = service_ref and getNumber(service_ref.ref)
+							if not win.channel:
+								service_ref = service_ref or ServiceReference(ref)
+								win.channel = win.channel or service_ref and service_ref.getServiceName()
+							
+							win.updateName( name )
+							win.updateTimes( begin, end, endless )
+							win.update()
 						else:
-							name = ""
-						
-						begin = win.begin
-						end = None
-						endless = True
-						
-						service_ref = None
-						if not win.number:
-							service_ref = ServiceReference(ref)
-							win.number = service_ref and getNumber(service_ref.ref)
-						if not win.channel:
-							service_ref = service_ref or ServiceReference(ref)
-							win.channel = win.channel or service_ref and service_ref.getServiceName()
-						
-						win.updateName( name )
-						win.updateTimes( begin, end, endless )
-						win.update()
+							win.toberemoved == True
 					else:
 						# Should never happen delete
 						begin = win.begin
@@ -578,9 +574,12 @@ class InfoBarTunerState(object):
 				# Show windows
 				win.show()
 	
-	def tunerHide(self):
+	def hide(self):
 		if self.hideTimer.isActive():
 			self.hideTimer.stop()
+		self.hideTimer.start( 10, True )
+
+	def tunerHide(self):
 		for win in self.entries.itervalues():
 			win.hide()
 
@@ -589,7 +588,7 @@ class InfoBarTunerState(object):
 		removeExtension()
 		self.unbindInfoBar()
 		self.removeEvents()
-		self.tunerHide()
+		self.hide()
 		for id, win in self.entries.items():
 			self.session.deleteDialog(win)
 			del self.entries[id]
@@ -1024,6 +1023,15 @@ def getTuner(service):
 		if number is not None and number > -1:
 			return ( chr( int(number) + ord('A') ), type)
 	return "", ""
+
+def readBouquetList(self):
+	serviceHandler = eServiceCenter.getInstance()
+	refstr = '1:134:1:0:0:0:0:0:0:0:FROM BOUQUET \"bouquets.tv\" ORDER BY bouquet'
+	bouquetroot = eServiceReference(refstr)
+	self.bouquetlist = {}
+	list = serviceHandler.list(bouquetroot)
+	if list is not None:
+		self.bouquetlist = list.getContent("CN", True)
 
 def getNumber(actservice):
 	# actservice must be an instance of eServiceReference
