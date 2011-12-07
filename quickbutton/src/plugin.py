@@ -42,10 +42,10 @@ config.plugins.Quickbutton.blue = ConfigText(default = _("Nothing"), visible_wid
 
 from  Screens.InfoBarGenerics import InfoBarPlugins
 baseInfoBarPlugins__init__ = None
-DM8000 = False
+ENABLE_RED_BUTTON = False
 
 def autostart(reason, **kwargs):
-	global baseInfoBarPlugins__init__,DM8000
+	global baseInfoBarPlugins__init__,ENABLE_RED_BUTTON
 	if "session" in kwargs:
 		session = kwargs["session"]
 		if baseInfoBarPlugins__init__ is None:
@@ -55,8 +55,8 @@ def autostart(reason, **kwargs):
 		InfoBarPlugins.yellowlong = yellowlong
 		InfoBarPlugins.redlong = redlong
 		InfoBarPlugins.bluelong = bluelong
-		if HardwareInfo().get_device_name() == "dm8000":
-			DM8000 = True		
+		if HardwareInfo().get_device_name() in ("dm8000", "dm7020hd"):
+			ENABLE_RED_BUTTON = True		
 			InfoBarPlugins.red = red
 
 def setup(session,**kwargs):
@@ -75,7 +75,7 @@ def InfoBarPlugins__init__(self):
 			"yellow_l": (self.yellowlong, _("Assign plugin to long yellow key pressed")),
 			"red_l": (self.redlong, _("Assign plugin to long red key pressed")),
 			"blue_l": (self.bluelong, _("Assign plugin to long blue key pressed"))}
-		if DM8000:
+		if ENABLE_RED_BUTTON:
 			x["red_b"] = (self.red, _("Assign plugin to red key pressed"))
 		self["QuickbuttonActions"] = HelpableActionMap(self, "QuickbuttonActions",x)
 	else:
@@ -84,7 +84,7 @@ def InfoBarPlugins__init__(self):
 		InfoBarPlugins.yellowlong = None
 		InfoBarPlugins.redlong = None
 		InfoBarPlugins.bluelong = None
-		if DM8000:
+		if ENABLE_RED_BUTTON:
 			InfoBarPlugins.red = None
 	baseInfoBarPlugins__init__(self)
 
@@ -215,7 +215,7 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			getConfigListEntry(_("assigned to long blue"), self.bluechoice)
 
 			]
-		if DM8000:
+		if ENABLE_RED_BUTTON:
 			self.red_b_choice = ConfigSelection(default = red_b_selectedindex, choices = self.entryguilist)
 			cfglist.append(getConfigListEntry(_("assigned to red"), self.red_b_choice))
 		ConfigListScreen.__init__(self, cfglist, session)
@@ -247,7 +247,7 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		config.plugins.Quickbutton.green.value = self.entryguilist[int(self.greenchoice.value)][1]
 		config.plugins.Quickbutton.yellow.value = self.entryguilist[int(self.yellowchoice.value)][1]
 		config.plugins.Quickbutton.blue.value = self.entryguilist[int(self.bluechoice.value)][1]
-		if DM8000:
+		if ENABLE_RED_BUTTON:
 			config.plugins.Quickbutton.red_b.value = self.entryguilist[int(self.red_b_choice.value)][1]
 		config.plugins.Quickbutton.save()
 		configfile.save()
