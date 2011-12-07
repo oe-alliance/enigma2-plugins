@@ -207,7 +207,8 @@ class InfoBarTunerState(object):
 		# Add current running records / streams
 		# We do it right here to ensure the InfoBar is intantiated
 		self.updateRecordTimer()
-		self.updateStreams()
+		if config.infobartunerstate.show_streams.value:
+			self.updateStreams()
 
 	def appendEvents(self):
 		# Recording Events
@@ -215,13 +216,14 @@ class InfoBarTunerState(object):
 		if self.__onRecordingEvent not in self.session.nav.RecordTimer.on_state_change:
 			self.session.nav.RecordTimer.on_state_change.insert(0, self.__onRecordingEvent)
 		# Streaming Events
-		if StreamingWebScreen:
-			try:
-				from Plugins.Extensions.WebInterface.WebScreens import streamingEvents
-				if self.__onStreamingEvent not in streamingEvents:
-					streamingEvents.append(self.__onStreamingEvent)
-			except:
-				pass
+		if config.infobartunerstate.show_streams.value:
+			if StreamingWebScreen:
+				try:
+					from Plugins.Extensions.WebInterface.WebScreens import streamingEvents
+					if self.__onStreamingEvent not in streamingEvents:
+						streamingEvents.append(self.__onStreamingEvent)
+				except:
+					pass
 
 	def removeEvents(self):
 		# Recording Events
@@ -504,38 +506,41 @@ class InfoBarTunerState(object):
 						win.updateTimes( begin, end, endless )
 						win.update()
 				elif win.type == Stream:
-					#TODO Avolid blocking - avoid using getStream to update the current name
-					stream = getStream( id )
-					if stream:
-						ref = stream.getRecordServiceRef()
-						
-						if not win.tuner or not win.tunertype:
-							win.tuner, win.tunertype = getTuner(stream.getRecordService())
-						
-						del stream
-						
-						epg = eEPGCache.getInstance()
-						event = epg and epg.lookupEventTime(ref, -1, 0)
-						if event: 
-							name = event.getEventName()
+					if config.infobartunerstate.show_streams.value:
+						#TODO Avolid blocking - avoid using getStream to update the current name
+						stream = getStream( id )
+						if stream:
+							ref = stream.getRecordServiceRef()
+							
+							if not win.tuner or not win.tunertype:
+								win.tuner, win.tunertype = getTuner(stream.getRecordService())
+							
+							del stream
+							
+							epg = eEPGCache.getInstance()
+							event = epg and epg.lookupEventTime(ref, -1, 0)
+							if event: 
+								name = event.getEventName()
+							else:
+								name = ""
+							
+							begin = win.begin
+							end = None
+							endless = True
+							
+							service_ref = None
+							if not win.number:
+								service_ref = ServiceReference(ref)
+								win.number = service_ref and getNumber(service_ref.ref)
+							if not win.channel:
+								service_ref = service_ref or ServiceReference(ref)
+								win.channel = win.channel or service_ref and service_ref.getServiceName()
+							
+							win.updateName( name )
+							win.updateTimes( begin, end, endless )
+							win.update()
 						else:
-							name = ""
-						
-						begin = win.begin
-						end = None
-						endless = True
-						
-						service_ref = None
-						if not win.number:
-							service_ref = ServiceReference(ref)
-							win.number = service_ref and getNumber(service_ref.ref)
-						if not win.channel:
-							service_ref = service_ref or ServiceReference(ref)
-							win.channel = win.channel or service_ref and service_ref.getServiceName()
-						
-						win.updateName( name )
-						win.updateTimes( begin, end, endless )
-						win.update()
+							win.toberemoved == True
 					else:
 						# Should never happen delete
 						begin = win.begin
