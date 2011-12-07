@@ -2,6 +2,11 @@
 <!-- tplServiceList -->
 									<table>
 										{for item in items}
+										{if item.now.ismarker}
+										<tr>
+											<td class="sListMarker">${item.now.servicename}</td>
+										</tr>
+										{else}
 										<tr class="sListRow" data-servicename="${item.now.servicename}">
 											<td class="${item.cssclass}">
 												<table class="sListItem">
@@ -11,9 +16,8 @@
 														</td>
 														<td style="width: 470px;">
 															<div class="sListSName">
-																<a href="#" id="${item.now.servicereference}" class="sListSLink" title="Zap to ${item.now.servicename}">
-																	${item.now.servicename}
-																</a>
+																
+																<a href="#" id="${item.now.servicereference}" class="sListSLink" title="Zap to ${item.now.servicename}">${item.now.servicename}</a>
 															</div>
 														</td>
 														<td>
@@ -34,7 +38,7 @@
 																<table cellspacing="0">
 																	<tr>
 																		<td class="epgStart">${item.now.starttime}</td>
-																		<td class="epgTitle">${item.now.title}</td>
+																		<td class="epgTitle"><img class="sListBulletToggle" src="/web-data/img/toggle_expand_small.png" alt="+">&nbsp;${item.now.title}</td>
 																		{if item.now.duration != item.now.remaining}
 																		<td class="epgLength">+${item.now.remaining} of ${item.now.duration}</td>
 																		{else}
@@ -56,7 +60,7 @@
 																<table cellspacing="0">
 																	<tr>
 																		<td class="epgStart">${item.next.starttime}</td>
-																		<td class="epgTitle">${item.next.title}</td>
+																		<td class="epgTitle"><img class="sListBulletToggle" src="/web-data/img/toggle_expand_small.png" alt="+">&nbsp;${item.next.title}</td>
 																		{if item.next.duration != item.next.remaining}
 																		<td class="epgLength">+${item.next.remaining} of ${item.next.duration}</td>
 																		{else}
@@ -77,6 +81,7 @@
 												</table>
 											</td>
 										</tr>
+										{/if}
 										{forelse}
 										<tr>
 											<td>

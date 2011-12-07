@@ -57,6 +57,9 @@ waiting_shutdown = 0
 toplevel = None
 server.VERSION = "Enigma2 WebInterface Server $Revision$".replace("$Revi", "").replace("sion: ", "").replace("$", "")
 
+server_pem = resolveFilename(SCOPE_CONFIG, "server.pem")
+cacert_pem = resolveFilename(SCOPE_CONFIG, "cacert.pem")
+
 #===============================================================================
 # Helperclass to close running Instances of the Webinterface
 #===============================================================================
@@ -96,30 +99,20 @@ class Closer:
 
 def checkCertificates():
 	print "[WebInterface] checking for SSL Certificates"
-	srvcert = '%sserver.pem' %resolveFilename(SCOPE_CONFIG) 
-	cacert = '%scacert.pem' %resolveFilename(SCOPE_CONFIG)
+	return os_isfile(server_pem) and os_isfile(cacert_pem)
 
-	# Check whether there are regular certificates, if not copy the default ones over
-	if not os_isfile(srvcert) or not os_isfile(cacert):
-		return False
-	
-	else:
-		return True
-		
 def installCertificates(session, callback = None, l2k = None):
 	print "[WebInterface] Installing SSL Certificates to %s" %resolveFilename(SCOPE_CONFIG)
 	
-	srvcert = '%sserver.pem' %resolveFilename(SCOPE_CONFIG) 
-	cacert = '%scacert.pem' %resolveFilename(SCOPE_CONFIG)	
 	scope_webif = '%sExtensions/WebInterface/' %resolveFilename(SCOPE_PLUGINS)
 	
 	source = '%setc/server.pem' %scope_webif
-	target = srvcert
+	target = server_pem
 	ret = copyfile(source, target)
 	
 	if ret == 0:
 		source = '%setc/cacert.pem' %scope_webif
-		target = cacert
+		target = cacert_pem
 		ret = copyfile(source, target)
 		
 		if ret == 0 and callback != None:
@@ -260,8 +253,8 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 	else:
 		site = server.Site(toplevel)
 
-	if usessl:		
-		ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem', '/etc/enigma2/cacert.pem', sslmethod=SSL.SSLv23_METHOD)
+	if usessl:
+		ctx = ssl.DefaultOpenSSLContextFactory(server_pem, cacert_pem, sslmethod=SSL.SSLv23_METHOD)
 		try:
 			d = reactor.listenSSL(port, site, ctx, interface=ipaddress)			
 		except CannotListenError:

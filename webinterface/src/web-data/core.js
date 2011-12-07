@@ -50,16 +50,27 @@ var Bouquets = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
-		var bouquet = this.handler.data.services[0];
-		if(bouquet){
-			setContentHd(bouquet.servicename);
+		var services = this.handler.data.services;
+		if(services){
 			if(this.loadFirstOnFinished){
+				var bouquet = this.handler.data.services[0];
+				setContentHd(bouquet.servicename);
 				this.loadFirstOnFinished = false; 
 				hash = core.getBaseHash() + '/' + bouquet.servicereference;
 				hashListener.setHash(hash);
+			} else {
+				var currentBouquet = hashListener.getHash().split('/')[3];
+				if(currentBouquet){
+					services.each(function(service){
+						if(service.servicereference == currentBouquet){
+							setContentHd(service.servicename);
+						}
+					});
+				}
 			}
 		}
 	}
+
 });
 
 var Current = Class.create(Controller, {
@@ -81,6 +92,15 @@ var Current = Class.create(Controller, {
 		var ext = $('trExtCurrent'); 
 		if(ext != null){
 			ext.style.display = this.display;
+			
+			var bullet = $('currentName').down('.currentBulletToggle');
+			if(ext.visible()){
+				bullet.src = '/web-data/img/toggle_collapse.png';
+				bullet.alt = "-";
+			}else{
+				bullet.src = '/web-data/img/toggle_expand.png';
+				bullet.alt = "+";
+			}
 		}
 		core.currentData = this.handler.data;
 	}
@@ -1178,10 +1198,16 @@ var E2WebCore = Class.create({
 			function(event, element){
 				var ext = $('trExtCurrent');
 				if(ext){
-					if(ext.visible())
+					var bullet = element.down('.currentBulletToggle');
+					if(ext.visible()){
+						bullet.src = '/web-data/img/toggle_expand.png';
+						bullet.alt = "+";
 						ext.hide();
-					else
+					}else{
+						bullet.src = '/web-data/img/toggle_collapse.png';
+						bullet.alt = "-";
 						ext.show();
+					}
 				}
 				event.stop();
 			}
@@ -1370,11 +1396,17 @@ var E2WebCore = Class.create({
 			'a.sListExtEpg',
 			function(event, element){
 				var target = element.down('.sListExtEpgLong');
+				
 				if(target){
+					var bullet = element.down('.sListBulletToggle');
 					if(target.visible()){
 						target.hide();
+						bullet.src = "/web-data/img/toggle_expand_small.png";
+						bullet.alt = "+";
 					} else {
 						target.show();
+						bullet.src = "/web-data/img/toggle_collapse_small.png";
+						bullet.alt = "-";
 					}
 				}
 				event.stop();

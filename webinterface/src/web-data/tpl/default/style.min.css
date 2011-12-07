@@ -27,6 +27,7 @@ a.underline{text-decoration:underline;}
 .techInfo{font-size:10px;}
 #currentTable{margin-bottom:10px;padding-left:2px;padding-top:3px;width:100%;}
 #currentDuration{text-align:right;}
+.currentBulletToggle{vertical-align: middle;}
 #mainMenu{background-color:#485052;text-align:center;overflow:hidden;background:#000;margin:0;padding:0;width:940px;}
 #mainMenu li{list-style:none;float:left;width:130px;height:21px;margin-left:2px;background:#485052;margin-top:6px;margin-bottom:0px;padding:0px;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
 #mainMenu a:hover,#mainMenu a:hover{background:#AAA;}
@@ -54,6 +55,7 @@ a.underline{text-decoration:underline;}
 .navTable a:hover{background-color:#CCC;color:#485052;display:block;}
 .sListSName a{display:block;margin-right:5px;color:#485052;}
 .sListSName a:hover{background-color:#CCC;color:#485052;display:block;}
+.sListMarker{background-color:#485052;color:#FFF;}
 .sListEPGItem{font-size:12px;margin:0px;padding:0px;}
 .sListSProgress{display:inline-block;margin:0px;border:1px solid #485052;width:50px;height:10px;padding:1px;}
 .sListSProgressBar{display:inline-block;margin:0;background-color:#00C6ED;width:0%;height:100%;}

@@ -88,6 +88,8 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 #			(  _("Pop-Up time in seconds")                            , config.infobartunerstate.popup_time ),
 			(  _("Show and hide with InfoBar")                        , config.infobartunerstate.show_infobar ),
 			(  _("Show on events")                                    , config.infobartunerstate.show_events ),
+			(  _("Show streams")                                      , config.infobartunerstate.show_streams ),
+			
 			(  _("MoviePlayer integration")                           , config.infobartunerstate.show_overwrite ),
 			(  _("Time format")                                       , config.infobartunerstate.time_format ),
 			(  _("Number of finished records in list")                , config.infobartunerstate.number_finished_records ),
@@ -195,9 +197,14 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 				#else:
 				#	gInfoBarTunerState.removeEvents()
 				
-							# Check for actual events
+				# Remove and append because of show streams handling
+				gInfoBarTunerState.removeEvents()
+				gInfoBarTunerState.appendEvents()
+				
+				# Check for actual events
 				gInfoBarTunerState.updateRecordTimer()
-				gInfoBarTunerState.updateStreams()
+				if config.infobartunerstate.show_streams.value:
+					gInfoBarTunerState.updateStreams()
 		else:
 			# Plugin should be disabled
 			if gInfoBarTunerState:

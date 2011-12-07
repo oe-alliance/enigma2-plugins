@@ -12,6 +12,7 @@ from PlayService import ServiceplayerResource
 from Uploader import UploadResource
 from ServiceListSave import ServiceList
 from RedirecToCurrentStream import RedirecToCurrentStreamResource
+from Tools.Directories import resolveFilename, SCOPE_MEDIA
 
 from External.__init__ import importExternalModules
 externalChildren = []
@@ -44,8 +45,8 @@ def getToplevel(session):
 	root.putChild("streamcurrent", RedirecToCurrentStreamResource(session))
 		
 	if config.plugins.Webinterface.includemedia.value is True:
-		root.putChild("media", File("/media"))
-		root.putChild("hdd", File("/media/hdd"))
+		root.putChild("media", File(resolveFilename(SCOPE_MEDIA)))
+		root.putChild("hdd", File(resolveFilename(SCOPE_MEDIA, "hdd")))
 		
 	
 	importExternalModules()
