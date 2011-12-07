@@ -522,7 +522,7 @@ var TimerListHandler  = Class.create(AbstractContentHandler, {
 					this.simpleResultCallback(transport, callback);
 					this.reload();
 				}.bind(this));
-	},
+	}
 });
 
 var TimerHandler = Class.create(AbstractContentHandler, {	
