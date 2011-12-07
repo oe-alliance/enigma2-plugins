@@ -1,0 +1,38 @@
+2011-12-06  Christian Weiske  <cweiske@cweiske.de>
+
+	* Fix crash that occured when the box is slow
+	* Fix crash showing headers when no headers available
+	* Fix bug: Saving URLs was broken
+	* Show error message when feed loading fails
+	* Add usage instructions to README
+	* Add docblocks to the code
+	* Error messages can be translated now
+	* Version 1.0
+
+2011-11-24  Christian Weiske  <cweiske@cweiske.de>
+
+	* Show headers when pressing info button
+	* Version 0.4
+
+2011-11-23  Christian Weiske  <cweiske@cweiske.de>
+
+	* Add page list import via Atom feed
+
+2011-11-21  Christian Weiske  <cweiske@cweiske.de>
+
+	* Hide color buttons when no/only one page configured
+	* Hide default page config option when no page defined
+	* Show current page when multiple ones are defined: "2/6"
+	* Configurable text font size per page
+
+2011-11-18  Christian Weiske  <cweiske@cweiske.de>
+
+	* Add help screens
+	* Fix fixed size menu title setting
+	* Add messages.pot to ipkg distribution
+	* Translations work now
+	* Version 0.3
+
+2011-11-17  Christian Weiske  <cweiske@cweiske.de>
+
+	* Version 0.2
