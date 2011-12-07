@@ -50,16 +50,27 @@ var Bouquets = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
-		var bouquet = this.handler.data.services[0];
-		if(bouquet){
-			setContentHd(bouquet.servicename);
+		var services = this.handler.data.services;
+		if(services){
 			if(this.loadFirstOnFinished){
+				var bouquet = this.handler.data.services[0];
+				setContentHd(bouquet.servicename);
 				this.loadFirstOnFinished = false; 
 				hash = core.getBaseHash() + '/' + bouquet.servicereference;
 				hashListener.setHash(hash);
+			} else {
+				var currentBouquet = hashListener.getHash().split('/')[3];
+				if(currentBouquet){
+					services.each(function(service){
+						if(service.servicereference == currentBouquet){
+							setContentHd(service.servicename);
+						}
+					});
+				}
 			}
 		}
 	}
+
 });
 
 var Current = Class.create(Controller, {
@@ -81,13 +92,15 @@ var Current = Class.create(Controller, {
 		var ext = $('trExtCurrent'); 
 		if(ext != null){
 			ext.style.display = this.display;
-		}
-		if(ext.visible()){
-			bullet.src = '/web-data/img/toggle_expand.png';
-			bullet.alt = "+";
-		}else{
-			bullet.src = '/web-data/img/toggle_collapse.png';
-			bullet.alt = "-";
+			
+			var bullet = $('currentName').down('.currentBulletToggle');
+			if(ext.visible()){
+				bullet.src = '/web-data/img/toggle_collapse.png';
+				bullet.alt = "-";
+			}else{
+				bullet.src = '/web-data/img/toggle_expand.png';
+				bullet.alt = "+";
+			}
 		}
 		core.currentData = this.handler.data;
 	}
