@@ -1,5 +1,6 @@
 # Code for the AutoTimerPlugin
 from Components.Sources.Source import Source
+from Tools.Directories import resolveFilename, SCOPE_HDD
 
 class AT(Source):
 	LIST = 0
@@ -95,7 +96,7 @@ class AT(Source):
 			if timer.hasDestination():
 				innerList.append(timer.destination) # 19
 			else:
-				innerList.append("/hdd/movie/") # 19
+				innerList.append(resolveFilename(SCOPE_HDD)) # 19
 
 			if timer.hasCounterFormatString():
 				innerList.append(timer.getCounterFormatString()) # 20

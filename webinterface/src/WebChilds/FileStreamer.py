@@ -1,6 +1,7 @@
 from twisted.web import resource, http, server, static
 from urllib import unquote
 from os import path as os_path
+from Tools.Directories import resolveFilename, SCOPE_HDD
 
 class FileStreamer(resource.Resource):
 	addSlash = True
@@ -19,7 +20,7 @@ class FileStreamer(resource.Resource):
 
 			#dirty backwards compatibility hack
 			if not os_path.exists(path):
-				path = "/hdd/movie/%s" % (filename)
+				path = resolveFilename(SCOPE_HDD, filename)
 			
 			print "[WebChilds.FileStreamer] path is %s" %path
 			

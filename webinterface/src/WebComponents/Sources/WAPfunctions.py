@@ -3,6 +3,7 @@ Version = '$Header$';
 from Components.Sources.Source import Source
 from Components.Sources.ServiceList import ServiceList
 from Components.config import config
+from Tools.Directories import resolveFilename, SCOPE_CONFIG, SCOPE_HDD
 from enigma import eServiceReference
 
 from re import sub
@@ -275,7 +276,7 @@ class WAPfunctions(Source):
 		dirname = param
 		lst = config.movielist.videodirs.value
 		if not dirname:
-			dirname = "/hdd/movie/"
+			dirname = resolveFilename(SCOPE_HDD)
 		if not dirname in lst:
 			lst = [dirname] + lst
 		returnList = [[lst[i], i, dirname == lst[i] and "selected" or ""] for i in range(len(lst))]
@@ -285,7 +286,7 @@ class WAPfunctions(Source):
 		print "tagList", param
 		tag = param
 		try:
-			file = open("/etc/enigma2/movietags")
+			file = open(resolveFilename(SCOPE_CONFIG, "movietags"))
 			taglist = [x.rstrip() for x in file]
 			while "" in taglist:
 				taglist.remove("")

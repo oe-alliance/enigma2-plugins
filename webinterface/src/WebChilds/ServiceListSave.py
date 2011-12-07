@@ -1,5 +1,6 @@
 from twisted.web import resource, http, server
 from enigma import eDVBDB
+from Tools.Directories import resolveFilename, SCOPE_CONFIG
 import os
 from xml.dom.minidom import parseString as xml_dom_minidom_parseString
 from urllib import unquote as urllib_unquote
@@ -43,7 +44,7 @@ class ServiceListSave(resource.Resource):
 	TYPE_TV = 0
 	TYPE_RADIO = 1
 	EXTENSIONS = ['.tv', '.radio']
-	DIR = "/etc/enigma2/"
+	DIR = resolveFilename(SCOPE_CONFIG)
 	undefinded_tag = "%n/a%"
 	undefinded_and = "%und%"
 
