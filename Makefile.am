@@ -13,6 +13,7 @@ SUBDIRS = \
 	bitrateviewer \
 	bonjour \
 	cdinfo \
+	curlytx \
 	dreamirc \
 	dreammediathek \
 	dyndns \

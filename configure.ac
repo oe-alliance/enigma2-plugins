@@ -111,6 +111,11 @@ cdinfo/Makefile
 cdinfo/meta/Makefile
 cdinfo/src/Makefile
 
+curlytx/Makefile
+curlytx/meta/Makefile
+curlytx/po/Makefile
+curlytx/src/Makefile
+
 dreamirc/Makefile
 dreamirc/meta/Makefile
 dreamirc/src/Makefile
