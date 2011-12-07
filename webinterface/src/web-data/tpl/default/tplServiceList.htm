@@ -2,6 +2,11 @@
 <!-- tplServiceList -->
 									<table>
 										{for item in items}
+										{if item.now.ismarker}
+										<tr>
+											<td class="sListMarker">${item.now.servicename}</td>
+										</tr>
+										{else}
 										<tr class="sListRow" data-servicename="${item.now.servicename}">
 											<td class="${item.cssclass}">
 												<table class="sListItem">
@@ -77,6 +82,7 @@
 												</table>
 											</td>
 										</tr>
+										{/if}
 										{forelse}
 										<tr>
 											<td>

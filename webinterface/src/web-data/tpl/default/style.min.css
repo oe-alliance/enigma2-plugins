@@ -54,6 +54,7 @@ a.underline{text-decoration:underline;}
 .navTable a:hover{background-color:#CCC;color:#485052;display:block;}
 .sListSName a{display:block;margin-right:5px;color:#485052;}
 .sListSName a:hover{background-color:#CCC;color:#485052;display:block;}
+.sListMarker{background-color: #FFF;color:#485052;text-align:center;}
 .sListEPGItem{font-size:12px;margin:0px;padding:0px;}
 .sListSProgress{display:inline-block;margin:0px;border:1px solid #485052;width:50px;height:10px;padding:1px;}
 .sListSProgressBar{display:inline-block;margin:0;background-color:#00C6ED;width:0%;height:100%;}

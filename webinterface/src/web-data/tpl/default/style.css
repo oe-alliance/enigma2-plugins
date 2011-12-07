@@ -377,6 +377,12 @@ a.underline {
 	display: block;
 }
 
+.sListMarker{
+	background-color: #FFF;
+	color:#485052;
+	text-align:center;
+}
+
 .sListEPGItem {
 	font-size: 12px;
 	margin: 0px;

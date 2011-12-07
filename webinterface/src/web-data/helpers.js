@@ -406,26 +406,30 @@ function EPGEvent(xml, number){
 	this.getServiceName = function() {
 		return this.serviceName;
 	};
+	this.isMarker = function(){
+		return this.serviceRef.startsWith("1:64:0:0:0:0:0:0:0:0");
+	};
 	
 	this.json = {
-			'date': this.getTimeDay(),
-			'eventid': this.getEventId(),
-			'servicereference': this.getServiceReference(),
-			'servicename': quotes2html(this.getServiceName()),
-			'title': quotes2html(this.getTitle()),
-			'shorttitle': quotes2html(this.getTitle().substring(0, 40) ) + '...',
-			'titleESC': escape(this.getTitle()),
-			'starttime': this.getTimeStartString(), 
-			'duration': Math.ceil(this.getDuration()/60000), 
-			'description': quotes2html(this.getDescription()),
-			'endtime': this.getTimeEndString(), 
-			'remaining': this.getTimeRemainingString(),
-			'progress' : this.getProgress(),
-			'extdescription': quotes2html(this.getDescriptionExtended()),
-			'number': String(this.number),
-			'start': this.getTimeBegin(),
-			'end': this.getTimeEnd()
-			};
+		'date': this.getTimeDay(),
+		'eventid': this.getEventId(),
+		'servicereference': this.getServiceReference(),
+		'servicename': quotes2html(this.getServiceName()),
+		'ismarker' : this.isMarker(),
+		'title': quotes2html(this.getTitle()),
+		'shorttitle': quotes2html(this.getTitle().substring(0, 40) ) + '...',
+		'titleESC': escape(this.getTitle()),
+		'starttime': this.getTimeStartString(), 
+		'duration': Math.ceil(this.getDuration()/60000), 
+		'description': quotes2html(this.getDescription()),
+		'endtime': this.getTimeEndString(), 
+		'remaining': this.getTimeRemainingString(),
+		'progress' : this.getProgress(),
+		'extdescription': quotes2html(this.getDescriptionExtended()),
+		'number': String(this.number),
+		'start': this.getTimeBegin(),
+		'end': this.getTimeEnd()
+	};
 	
 	this.toJSON = function() {
 		return this.json;
@@ -545,6 +549,10 @@ function Service(xml, cssclass){
 		cssclass = 'odd';
 	}
 	
+	this.isMarker = function(){
+		return this.getClearServiceReference().startsWith("1:64:0:0:0:0:0:0:0:0");
+	};
+	
 	this.json = { 	
 			'servicereference' : this.getServiceReference(),
 			'servicename' : this.getServiceName(),
@@ -560,7 +568,8 @@ function Service(xml, cssclass){
 			'tsid' : this.tsid,
 			'onid' : this.onid,
 			'sid' : this.sid,
-			'cssclass' : cssclass
+			'cssclass' : cssclass,
+			'ismarker' : this.isMarker()
 	};
 	
 	this.toJSON = function(){
