@@ -14,7 +14,6 @@
 	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico">
 	<!-- 
 	<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
-	<script type="text/javascript" src="/web-data/lib/curvycorners.js"></script>
 	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
 	<script type="text/javascript" src="/web-data/lib/hashlistener2.js"></script>
 	<script type="text/javascript" src="/web-data/lib/datepicker/datepicker.js">
@@ -26,7 +25,7 @@
 		"titleformat":["Y-ds-m-ds-d"]
 	}
 	</script>
-	 -->
+ 	-->
 
 	<script type="text/javascript" src="/web-data/lib/libs_minified.js">
 	{
@@ -37,6 +36,7 @@
 		"titleformat":["Y-ds-m-ds-d"]
 	}
 	</script>
+
  	<script language="javascript" type="text/javascript">
 	 	if (!window.$) {
 			window.$ = function(id) { return document.getElementById(id); }
@@ -70,9 +70,11 @@
 				var slc = $(element);
 				size = getWinSize();
 				slc.style.maxHeight = size.height - 200+"px";
+				/*
 				if(Prototype.Browser.IE){
 					slc.style.height = size.height - 200+"px";
 				}
+				*/
 			} catch (e) {}
 		}
 		function setNavHd(content){
@@ -105,20 +107,20 @@
 </head>
 <body onresize="setMaxHeight('contentMain')" onload="document.getElementById('notification').style.display='none'">
 	<div id="container">
-		<div id="banner">
+		<div id="banner" class="rounded">
 			<span id="notification"><div></div></span>
 			<div id="bannerLeft">
 				<div id="bannerText" style="font-size: 24px;">
 					<img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web">
 				</div>
 				<ul id="mainMenu">
-					<li><a href="#!/tv">TeleVision</a></li>
-					<li><a href="#!/radio">Radio</a></li>
-					<li><a href="#!/movies/list/filter//">Movies</a></li>
-					<li><a href="#!/timer/list">Timer</a></li>
-					<li><a href="#!/control">BoxControl</a></li>
-					<li><a href="#!/extras">Extras</a></li>
-					<li><a href="#" id="webTv">WebTV</a></li>
+					<li class="rounded"><a class="rounded" href="#!/tv">TeleVision</a></li>
+					<li class="rounded"><a class="rounded" href="#!/radio">Radio</a></li>
+					<li class="rounded"><a class="rounded" href="#!/movies/list/filter//">Movies</a></li>
+					<li class="rounded"><a class="rounded" href="#!/timer/list">Timer</a></li>
+					<li class="rounded"><a class="rounded" href="#!/control">BoxControl</a></li>
+					<li class="rounded"><a class="rounded" href="#!/extras">Extras</a></li>
+					<li class="rounded"><a class="rounded" href="#" id="webTv">WebTV</a></li>
 				</ul>
 			</div>
 			<div id="bannerRight">
@@ -136,7 +138,7 @@
 						
 					</tr>
 				</table>
-				<div id="instantRecordMenu" style="display: none;">
+				<div id="instantRecordMenu" class="rounded" style="display: none;">
 					<table>
 						<tr>
 							<th>Instant record</th>
@@ -158,7 +160,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="current">
+		<div id="current" class="rounded">
 			<div id="currentContent">
 				<table id="currentTable">
 					<tr>
@@ -169,15 +171,15 @@
 		</div>
 		<div id="main">
 			<div id="navContainer">
-				<div id="nav">
+				<div id="nav" class="rounded">
 					<div id="navHd" class="header"><div>SubNav</div></div>
 					<div id="navContent">loading...</div>
 				</div>
-				<div id="navVolume">
+				<div id="navVolume" class="rounded">
 					<div id="volHd" class="header"><div>Volume</div></div>
 					<span id="volContent" class="boxContent center" style="width: 94%; display:block;">loading...</span>
 				</div>
-				<div id="navSearch">
+				<div id="navSearch" class="rounded">
 					<div id="searchHd" class="header"><div>EPG-Search</div></div>
 					<div class="boxContent">
 						<form id="epgSearchForm" action="">
@@ -187,7 +189,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="content">
+			<div id="content" class="rounded">
 				<table style="margin:0px; padding:0px; background:#000;width:100%" cellpadding="0" cellspacing="0">
 					<tr>
 						<td><div id="contentHd" class="header"><div>Content</div></div></td>

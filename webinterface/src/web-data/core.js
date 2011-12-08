@@ -382,7 +382,7 @@ var Movies = Class.create(Controller, {
 			}
 			return;
 		}
-				
+		
 		this.handler.load({'dirname' : location, 'tag' : tags});
 	},
 	

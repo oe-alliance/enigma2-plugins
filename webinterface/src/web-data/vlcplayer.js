@@ -71,7 +71,7 @@ var WebTv = Class.create({
 			'.bouquets',
 			function(event, element){
 				var bref = decodeURIComponent ( $('bouquets').options[$('bouquets').selectedIndex].id );
-				this.bouquetHandler.load({ 'bRef' : bref });
+				this.serviceHandler.load({ 'bRef' : bref });
 			}.bind(this)
 		);
 		

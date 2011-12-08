@@ -17,6 +17,13 @@ from Tools.Directories import resolveFilename, SCOPE_MEDIA
 from External.__init__ import importExternalModules
 externalChildren = []
 
+"""
+	.htc Files for IE Fixes need a certain Content-Type
+"""
+import mimetypes
+mimetypes.add_type('text/x-component', '.htc')
+static.File.contentTypes = static.loadMimeTypes()
+
 if hasattr(static.File, 'render_GET'):
 	class File(static.File):
 		def render_POST(self, request):
