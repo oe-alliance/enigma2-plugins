@@ -192,7 +192,7 @@ class AutoTimerEditorBase:
 
 		# Justplay
 		self.justplay = NoSave(ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)]))
-		self.set_endtime = NoSave(ConfigYesNo(default=timer.set_endtime))
+		self.setEndtime = NoSave(ConfigYesNo(default=timer.setEndtime))
 
 		# Timespan
 		now = [x for x in localtime()]
@@ -503,7 +503,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.searchType: _("Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"),
 			self.searchCase: _("Select whether or not you want to enforce case correctness."),
 			self.justplay: _("Add zap timer instead of record timer?"),
-			self.set_endtime: _("Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."),
+			self.setEndtime: _("Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."),
 			self.overrideAlternatives: _("With this option enabled the channel to record on can be changed to a alternative service it is restricted to."),
 			self.timespan: _("Should this AutoTimer be restricted to a timespan?"),
 			self.timespanbegin: _("Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"),
@@ -547,7 +547,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			getConfigListEntry(_("Timer type"), self.justplay),
 		))
 		if self.justplay.value == "zap":
-			list.append(_("Set End Time"), self.set_endtime)
+			list.append(_("Set End Time"), self.setEndtime)
 		list.extend((
 			getConfigListEntry(_("Override found with alternative service"), self.overrideAlternatives),
 			getConfigListEntry(_("Only match during timespan"), self.timespan)
@@ -752,7 +752,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Justplay
 		self.timer.justplay = self.justplay.value == "zap"
-		self.timer.setEndtime = self.set_endtime.value
+		self.timer.setEndtime = self.setEndtime.value
 
 		# Timespan
 		if self.timespan.value:
