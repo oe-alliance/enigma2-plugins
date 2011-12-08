@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - AutoTimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-19 22:52+0100\n"
-"PO-Revision-Date: 2011-11-19 22:54+0100\n"
+"POT-Creation-Date: 2011-12-07 21:17+0100\n"
+"PO-Revision-Date: 2011-12-07 21:17+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.yeam <spaeleus@croci.org>\n"
 "Language: \n"
@@ -90,6 +90,10 @@ msgstr "Corrispondenza parziale"
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:187
 msgid "exact match"
 msgstr "Corrispondenza esatta"
+
+#: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:187
+msgid "description match"
+msgstr "Corrispondenza descrizione"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:188
 msgid "case-sensitive search"
@@ -244,8 +248,8 @@ msgid "Encoding the channel uses for it's EPG data. You only need to change this
 msgstr "Codifica caratteri utilizzata dal canale per i dati EPG. Potrebbe essere necessario modificarla solo per caratteri speciali (es: umlaut tedesca)."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:492
-msgid "Select \"exact match\" to enforce \"Match title\" to match exactly or \"partial match\" if you only want to search for a part of the event title."
-msgstr "Selezionare \"Corrispondenza esatta\" per un confronto letterale, \"Corrispondenza parziale\" per un confronto anche solo parziale del titolo."
+msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"
+msgstr "Selezionare \"Corrispondenza esatta\" per costringere \"Corrispondenza titolo\" a un confronto letterale, \"Corrispondenza parziale\" per un confronto solo parziale del titolo o \"Corrispondenza descrizione\" per la ricerca di una parte della descrizione evento."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:493
 msgid "Select whether or not you want to enforce case correctness."
@@ -744,7 +748,7 @@ msgstr "Ord. per Ora"
 msgid "Sort AutoTimer"
 msgstr "Ord. Autotimer"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:45
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:46
 #: .../enigma2-plugins/autotimer/src/plugin.py:133
 #, python-format
 msgid ""
@@ -760,32 +764,32 @@ msgstr ""
 "Conflitti riscontrati: %d\n"
 "Simili aggiunti: %d"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:71
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:72
 msgid "AutoTimer was removed"
 msgstr " AutoTimer rimosso"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:73
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:74
 msgid "missing parameter \"id\""
 msgstr "Parametro \"id\" mancante"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:99
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:100
 #, python-format
 msgid "unable to find timer with id %i"
 msgstr "Impossibile trovare il timer con id %i"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:105
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:106
 msgid "autotimers need a match attribute"
 msgstr "Autotimer richiede una corrispondenza"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:268
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:269
 msgid "AutoTimer was added successfully"
 msgstr "AutoTimer aggiunto correttamente"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:270
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:271
 msgid "AutoTimer was changed successfully"
 msgstr "AutoTimer modificato correttamente"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:322
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:325
 msgid "config changed."
 msgstr "Comfigurazione modificata."
 
