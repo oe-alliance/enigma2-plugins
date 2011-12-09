@@ -547,7 +547,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			getConfigListEntry(_("Timer type"), self.justplay),
 		))
 		if self.justplay.value == "zap":
-			list.append(_("Set End Time"), self.setEndtime)
+			list.append(getConfigListEntry(_("Set End Time"), self.setEndtime))
 		list.extend((
 			getConfigListEntry(_("Override found with alternative service"), self.overrideAlternatives),
 			getConfigListEntry(_("Only match during timespan"), self.timespan)
