@@ -357,7 +357,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self.setMutePixmap()
 			if self.getIsMuted():
 				self.savedMuteDialog.hide()
-			
+				
+		self.getPrimeTime()
 		self.session.nav.RecordTimer.on_state_change.append(self.onStateChange)
 		self.clockTimer.callback.append(self.checkTimeChange)
 		self.checkTimeChange()
