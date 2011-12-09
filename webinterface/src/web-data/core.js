@@ -23,29 +23,39 @@ var Bouquets = Class.create(Controller, {
 		if(loadFirstOnFinished)
 			this.loadFirstOnFinished = true;
 		this.handler.load( {'sRef' : sRef} );
+		var services = $('contentServices');
+		if(services){
+			services.update('Please select a bouquet');
+		}
 	},
 	
 	loadBouquetsTv: function(){
+		setContentHd('Bouquets (TV)');
 		this.load(bouquetsTv);
 	},
 	
 	loadProviderTv: function(){
+		setContentHd('Providers (TV)');
 		this.load(providerTv);
 	},
 	
 	loadSatellitesTv: function(){
+		setContentHd('Satellites (TV)');
 		this.load(satellitesTv);
 	},
 	
 	loadBouquetsRadio: function(){
+		setContentHd('Bouquets (Radio)');
 		this.load(bouquetsRadio);
 	},
 	
 	loadProviderRadio: function(){
+		setContentHd('Providers (Radio)');
 		this.load(providerRadio);
 	},
 	
 	loadSatellitesRadio: function(){
+		setContentHd('Satellites (Radio)');
 		this.load(satellitesRadio);
 	},
 	
@@ -557,13 +567,32 @@ var Services = Class.create(Controller, {
 		this.handler.getSubservices();
 	},
 	
+	loadAll: function(ref){
+		var tpl = 'tplBouquetsAndServices';
+		var fnc = function(){
+			$('contentBouquets').update('All Services');
+			this.load(ref);
+		}.bind(this);
+		
+		if($('contentBouquets')){
+			fnc();
+		} else {
+			templateEngine.process(
+				tpl, 
+				null, 
+				'contentMain',
+				fnc
+			);
+			}
+	},
+	
 	loadAllTv: function(){
-		this.load(allTv);
+		this.loadAll(allTv);
 		setContentHd("All (Tv)");
 	},
 
 	loadAllRadio: function(){
-		this.load(allRadio);
+		this.loadAll(allRadio);
 		setContentHd("All (Radio)");
 	},
 	
@@ -879,12 +908,12 @@ var E2WebCore = Class.create({
 		this.navlut = {
 			'tv': {
 				'bouquets' : this.bouquets.loadBouquetsTv.bind(this.bouquets), 
-				'provider' : this.bouquets.loadProviderTv.bind(this.bouquets),
+				'providers' : this.bouquets.loadProviderTv.bind(this.bouquets),
 				'all' : this.services.loadAllTv.bind(this.services)
 				},
 			'radio': {
 				'bouquets' : this.bouquets.loadBouquetsRadio.bind(this.bouquets),
-				'provider' : this.bouquets.loadProviderRadio.bind(this.bouquets),
+				'providers' : this.bouquets.loadProviderRadio.bind(this.bouquets),
 				'all' : this.services.loadAllRadio.bind(this.services)
 			},
 			'movies':{
@@ -905,7 +934,7 @@ var E2WebCore = Class.create({
 			'extras': {
 				'about' : this.simplepages.loadAbout.bind(this.simplepages),
 				'deviceinfo' : this.simplepages.loadDeviceInfo.bind(this.simplepages),
-				'mediaplayer' : this.mediaplayer.load.bind(this.mediaplayer),
+				'mediaplayer' : function() { this.loadContentDynamic(this.mediaplayer.load.bind(this.mediaplayer), 'MediaPlayer'); }.bind(this),
 				'settings' : this.simplepages.loadSettings.bind(this.simplepages),
 				'tools' : this.simplepages.loadTools.bind(this.simplepages)
 			}
@@ -1030,7 +1059,7 @@ var E2WebCore = Class.create({
 		if(len >= 2){
 			var mode = parts[1];
 			if(mode != this.mode || isReload || ( len <= 2 && this.subMode != '') ){
-				this.switchMode(mode);
+				this.switchMode(mode, len == 2);
 				this.subMode = '';
 			}
 			this.mode = mode;
@@ -1589,7 +1618,16 @@ var E2WebCore = Class.create({
 		templateEngine.process(template, null, 'contentMain');
 	},
 	
-	switchMode: function(mode){
+	setEmptyContent: function(id, text){
+		$(id).update('<div class="block center fullwidth oneliner">' + text + '</div>');
+	},
+	
+	switchMode: function(mode, initContent){
+		if(initContent){
+			this.setEmptyContent('contentMain', 'please select a submenu on the left...');
+			setContentHd('...');
+		}
+		
 		switch(mode){
 		case "tv":
 			if(this.mode != 'tv' && this.mode != 'radio'){

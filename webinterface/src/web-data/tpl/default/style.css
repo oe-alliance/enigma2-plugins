@@ -73,6 +73,13 @@ form {
 	text-align: center
 }
 
+.oneliner {
+	position: absolute;
+	top: 50%;
+	height: 16px;
+	margin-top: -8px
+}
+
 .small {
 	font-size: 11px;
 	font-weight: normal
@@ -425,10 +432,8 @@ table.sListExtEpg {
 
 #contentMain {
 	padding: 8px;
-	margin-bottom: 5px
-}
-
-#contentMain {
+	margin-bottom: 5px;
+	min-height: 365px;
 	clear: both;
 	overflow-y: auto;
 	width: 815px;

@@ -154,10 +154,10 @@ var BouquetListHandler = Class.create(AbstractContentHandler, {
 		this.ajaxload = false;
 		this.targetMain = targetMain;
 	},
-		
+	
 	show : function(data){
 		this.data = data;
-		if($(this.target) != null && $(this.target != undefined)){
+		if($(this.target)){
 			templateEngine.process(this.tpl, data, this.target, this.finished.bind(this));
 		} else {
 			templateEngine.process(

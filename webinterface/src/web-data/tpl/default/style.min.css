@@ -11,6 +11,7 @@ form{margin:2px}
 .even{background-color:#DDD}
 .fullwidth{width:100%}
 .center{text-align:center}
+.oneliner{position:absolute;top:50%;height:16px;margin-top:-8px}
 .small{font-size:11px;font-weight:normal}
 a.underline{text-decoration:underline}
 .right{text-align:right}
@@ -67,8 +68,7 @@ table.sListExtEpg{width:580px;margin:0;padding:0}
 #contentServices{vertical-align:top;width:585px}
 #contentServices table{scrollbar:auto;width:585px}
 #contentBouquets{border-right:1px solid #ccc;vertical-align:top;width:220px}
-#contentMain{padding:8px;margin-bottom:5px}
-#contentMain{clear:both;overflow-y:auto;width:815px;color:#485052}
+#contentMain{padding:8px;margin-bottom:5px;min-height:365px;clear:both;overflow-y:auto;width:815px;color:#485052}
 #contentMain div table{float:left;width:599px}
 .sListItem{width:585px;color:#485052}
 .mListItem{width:780px;color:#485052}
