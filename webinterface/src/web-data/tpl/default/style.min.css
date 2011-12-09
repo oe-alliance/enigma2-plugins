@@ -1,5 +1,5 @@
 html,body{font-family:Tahoma,Sans-Serif;font-size:14px;font-weight:bold;color:#fff;text-align:center;background:#555;}
-input,select{font-family:Tahoma,Sans-Serif;font-size:14px;font-weight:bold;border:1px solid #485052;background-color:#fff;color:#485052}
+input[type="text"],input[type="password"],select{font-family:Tahoma,Sans-Serif;font-size:14px;font-weight:bold;border:1px solid #485052;background-color:#fff;color:#485052}
 a,a:visited,a:active{color:#485052;text-decoration:none}
 img{border:0}
 form{margin:2px}
@@ -183,4 +183,3 @@ div.static-datepicker table{-webkit-box-shadow:0 0 0 transparent}
 div.datepicker-focus table{-webkit-box-shadow:0 0 5px #aaa}
 div.datePicker table td,div.datePicker table tbody th{padding:.1em;-webkit-border-radius:2px}
 div.datePicker table tbody td.date-picker-hover{-webkit-box-shadow:0 0 1px #6482aa}
-}

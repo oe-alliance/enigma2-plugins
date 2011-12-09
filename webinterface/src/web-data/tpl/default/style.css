@@ -7,7 +7,7 @@ html,body {
 	background: #555;
 }
 
-input,select {
+input[type="text"],input[type="password"],select {
 	font-family: Tahoma, Sans-Serif;
 	font-size: 14px;
 	font-weight: bold;

@@ -1108,7 +1108,7 @@ var E2WebCore = Class.create({
 	},
 	
 	getBaseHash: function(){
-		var hash = ['#!', this.mode].join("/");
+		var hash = ['!', this.mode].join("/");
 		if(this.subMode != ''){
 			hash = [hash, this.subMode].join("/");
 		}
@@ -1271,25 +1271,19 @@ var E2WebCore = Class.create({
 				}.bind(this)
 		);		
 		//Movienav
+		var changeevt = Prototype.Browser.IE ? "click" : "change";
 		var nav = $('navContent');
 		nav.on(
-			'change',
-			'.mNavLoc',
+			changeevt,
+			'.mNavLocTag',
 			function(event, element){
-				debug($("locations").value);
-				debug($("tags").value);
-				var hash = [this.getBaseHash(), "filter", encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
-				hashListener.setHash(hash);
-			}.bind(this)
-		);
-		nav.on(
-			'change',
-			'.mNavTags',
-			function(event, element){
-				debug($("locations").value);
-				debug($("tags").value);
-				var hash = [this.getBaseHash(), "filter", encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
-				hashListener.setHash(hash);
+				var l = $('locations');
+				var t = $('tags');
+				var location = l.options[l.selectedIndex].value;
+				var tag = t.options[t.selectedIndex].value;
+				var hash = [this.getBaseHash(), "filter", encodeURIComponent(location), encodeURIComponent(tag)].join("/");
+				if(hash != hashListener.getHash() || !Prototype.Browser.IE)
+					hashListener.setHash(hash);
 			}.bind(this)
 		);
 		//RemoteControl
@@ -1573,7 +1567,7 @@ var E2WebCore = Class.create({
 			'click',
 			function(event, element){
 				window.open('/web-data/tpl/default/streaminterface/index.html', 'WebTV', 'scrollbars=no, width=800, height=740');
-				event.abort();
+				event.stop();
 			}.bind(this)
 		);
 	},

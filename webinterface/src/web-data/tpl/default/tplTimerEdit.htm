@@ -22,7 +22,7 @@
 											<tr>
 												<td>Start:</td>
 												<td>
-													<input id="sdate" name="sdate" value="${timer.beginDate}" size="10" maxlength="10">
+													<input type="text" id="sdate" name="sdate" value="${timer.beginDate}" size="10" maxlength="10">
 													<select name="shour" id="shour" size="1">
 														{for hour in shour}
 														<option value="${hour.value}" ${hour.selected}>${hour.txt}</option>
@@ -39,7 +39,7 @@
 											<tr>
 												<td>End:</td>
 												<td>
-													<input id="edate" name="edate" value="${timer.endDate}" size="10" maxlength="10">
+													<input type="text" id="edate" name="edate" value="${timer.endDate}" size="10" maxlength="10">
 													<select name="ehour" id="ehour" size="1">
 														{for hour in ehour}
 														<option value="${hour.value}" ${hour.selected}>${hour.txt}</option>
