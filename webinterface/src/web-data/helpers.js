@@ -103,12 +103,11 @@ function getNodeContent(xml, nodename, defaultString){
 		} else if (retVal === "None"){
 			return "";
 		}
-		
 		return retVal;
 	} catch(e){
 		if(typeof(defaultString) !== 'undefined') {
 			return defaultString;
-		}		
+		}
 	}
 	
 	return 'N/A';
@@ -144,7 +143,7 @@ function dec2hex(nr, len){
 
 function quotes2html(txt) {
 	if(txt !== undefined){
-		return txt.escapeHTML().replace('\n', '<br>');
+		return txt.escapeHTML().replace(/\x8a/g, '<br>');
 	} else {
 		return "";
 	}
