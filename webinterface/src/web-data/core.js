@@ -1108,7 +1108,7 @@ var E2WebCore = Class.create({
 	},
 	
 	getBaseHash: function(){
-		var hash = ['!', this.mode].join("/");
+		var hash = ['#!', this.mode].join("/");
 		if(this.subMode != ''){
 			hash = [hash, this.subMode].join("/");
 		}
@@ -1282,7 +1282,7 @@ var E2WebCore = Class.create({
 				var location = l.options[l.selectedIndex].value;
 				var tag = t.options[t.selectedIndex].value;
 				var hash = [this.getBaseHash(), "filter", encodeURIComponent(location), encodeURIComponent(tag)].join("/");
-				if(hash != hashListener.getHash() || !Prototype.Browser.IE)
+				if(hash != '#'+hashListener.getHash() || !Prototype.Browser.IE)
 					hashListener.setHash(hash);
 			}.bind(this)
 		);
