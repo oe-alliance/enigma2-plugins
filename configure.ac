@@ -558,7 +558,6 @@ webinterface/Makefile
 webinterface/meta/Makefile
 webinterface/po/Makefile
 webinterface/src/Makefile
-webinterface/src/etc/Makefile
 webinterface/src/mobile/Makefile
 webinterface/src/web/Makefile
 webinterface/src/web-data/Makefile

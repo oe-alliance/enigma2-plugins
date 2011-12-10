@@ -18,9 +18,10 @@ from twisted.web import server, http, util, static, resource
 
 from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname
-from OpenSSL import SSL
+from OpenSSL import SSL, crypto
+from time import gmtime
+from os.path import isfile as os_isfile, exists as os_exists
 
-from os.path import isfile as os_isfile
 from __init__ import _, __version__, decrypt_block
 from webif import get_random, validate_certificate
 
@@ -57,8 +58,8 @@ waiting_shutdown = 0
 toplevel = None
 server.VERSION = "Enigma2 WebInterface Server $Revision$".replace("$Revi", "").replace("sion: ", "").replace("$", "")
 
-server_pem = resolveFilename(SCOPE_CONFIG, "server.pem")
-cacert_pem = resolveFilename(SCOPE_CONFIG, "cacert.pem")
+KEY_FILE = resolveFilename(SCOPE_CONFIG, "key.pem")
+CERT_FILE = resolveFilename(SCOPE_CONFIG, "cert.pem")
 
 #===============================================================================
 # Helperclass to close running Instances of the Webinterface
@@ -97,36 +98,43 @@ class Closer:
 			if self.callback is not None:
 				self.callback(self.session, self.l2k)
 
-def checkCertificates():
-	print "[WebInterface] checking for SSL Certificates"
-	return os_isfile(server_pem) and os_isfile(cacert_pem)
+def installCertificates(session):
+	if not os_exists(CERT_FILE) \
+			or not os_exists(KEY_FILE):
+		print "[Webinterface].installCertificates :: Generating SSL key pair and CACert"
+		# create a key pair
+		k = crypto.PKey()
+		k.generate_key(crypto.TYPE_RSA, 1024)
 
-def installCertificates(session, callback = None, l2k = None):
-	print "[WebInterface] Installing SSL Certificates to %s" %resolveFilename(SCOPE_CONFIG)
-	
-	scope_webif = '%sExtensions/WebInterface/' %resolveFilename(SCOPE_PLUGINS)
-	
-	source = '%setc/server.pem' %scope_webif
-	target = server_pem
-	ret = copyfile(source, target)
-	
-	if ret == 0:
-		source = '%setc/cacert.pem' %scope_webif
-		target = cacert_pem
-		ret = copyfile(source, target)
-		
-		if ret == 0 and callback != None:
-			callback(session, l2k)
-	
-	if ret < 0:
-		config.plugins.Webinterface.https.enabled.value = False
-		config.plugins.Webinterface.https.enabled.save()
-		
-		# Start without https
-		callback(session, l2k)
-		
-		#Inform the user
-		session.open(MessageBox, "Couldn't install SSL-Certifactes for https access\nHttps access is now disabled!", MessageBox.TYPE_ERROR)
+		# create a self-signed cert
+		cert = crypto.X509()
+		cert.get_subject().C = "DE"
+		cert.get_subject().ST = "Home"
+		cert.get_subject().L = "Home"
+		cert.get_subject().O = "Dreambox"
+		cert.get_subject().OU = "STB"
+		cert.get_subject().CN = socket_gethostname()
+		cert.set_serial_number(1000)
+		cert.gmtime_adj_notBefore(0)
+		cert.gmtime_adj_notAfter(10 * 365 * 24 * 60 * 60)
+		cert.set_issuer(cert.get_subject())
+		cert.set_pubkey(k)
+		print "[Webinterface].installCertificates :: Signing SSL key pair with new CACert"
+		cert.sign(k, 'sha1')
+
+		try:
+			print "[Webinterface].installCertificates ::  Installing newly generated certificate and key pair"
+			open(CERT_FILE, "wt").write(
+				crypto.dump_certificate(crypto.FILETYPE_PEM, cert))
+			open(KEY_FILE, "wt").write(
+				crypto.dump_privatekey(crypto.FILETYPE_PEM, k))
+		except IOError, e:
+			#Disable https
+			config.plugins.Webinterface.https.enabled.value = False
+			config.plugins.Webinterface.https.enabled.save()
+			#Inform the user
+			session.open(MessageBox, "Couldn't install generated SSL-Certifactes for https access\nHttps access is disabled!", MessageBox.TYPE_ERROR)
+
 	
 #===============================================================================
 # restart the Webinterface for all configured Interfaces
@@ -168,10 +176,8 @@ def startWebserver(session, l2k):
 		# If they're not there we'll exit via return here 
 		# and get called after Certificates are installed properly
 		if config.plugins.Webinterface.https.enabled.value:
-			if not checkCertificates():
-				print "[Webinterface] Installing Webserver Certificates for SSL encryption"
-				installCertificates(session, startWebserver, l2k)
-				return
+			installCertificates(session)
+		
 		# Listen on all Interfaces
 		ip = "0.0.0.0"
 		#HTTP
@@ -254,7 +260,7 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 		site = server.Site(toplevel)
 
 	if usessl:
-		ctx = ssl.DefaultOpenSSLContextFactory(server_pem, cacert_pem, sslmethod=SSL.SSLv23_METHOD)
+		ctx = ssl.DefaultOpenSSLContextFactory(KEY_FILE, CERT_FILE, sslmethod=SSL.SSLv23_METHOD)
 		try:
 			d = reactor.listenSSL(port, site, ctx, interface=ipaddress)			
 		except CannotListenError:
