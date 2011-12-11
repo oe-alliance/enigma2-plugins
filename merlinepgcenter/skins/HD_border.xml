@@ -38,7 +38,7 @@
 		<widget name="eventProgressText" position="935,235" size="95,20" zPosition="1" font="Regular;20" transparent="1" halign="center" valign="center" />
 		<widget name="endTime" position="1040,235" size="60,20" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="center" />
 		<widget name="duration" position="1120,236" size="45,17" zPosition="1" font="Regular;20" transparent="1" halign="right" valign="center" />
-		<widget name="remaining" position="1175,237" size="80,17" foregroundColors="#ef7f1a,#e31e24,#009846,#ffed00,#ffffff" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="center" />
+		<widget name="remaining" position="1175,237" size="80,17" foregroundColors="#ef7f1a,#e31e24,#74de0a,#ffed00,#ffffff" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="center" />
 		<widget name="isRecording" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/HD_BORDER/recording.png" position="869,633" size="361,35" zPosition="2" transparent="1" alphatest="on" />
 		<widget name="description" position="875,260" size="350,366" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="top" />
 		<widget name="videoPicture" position="880,461" size="345,165" zPosition="1" backgroundColor="transparent" />

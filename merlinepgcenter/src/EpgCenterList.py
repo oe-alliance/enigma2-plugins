@@ -279,7 +279,7 @@ class EpgCenterList(GUIComponent):
 			elif remainBeginString.endswith('d'): # begins in... days
 				progColor = 0x00e31e24 # red
 			elif remainBeginString.startswith(' I +') or remainBeginString.startswith('+'): # already running
-				progColor = 0x00009846 # green
+				progColor = 0x0074de0a # green
 			elif remainBeginString.startswith(' I -') or remainBeginString.startswith('-'): # begins in... minutes
 				progColor = 0x00ffed00 # yellow
 			else: # undefined, shouldn't happen
