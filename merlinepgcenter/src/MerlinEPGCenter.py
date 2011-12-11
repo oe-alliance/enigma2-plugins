@@ -91,7 +91,7 @@ try:
 	from Plugins.Extensions.AutoTimer.AutoTimerConfiguration import buildConfig
 	from Plugins.Extensions.AutoTimer.AutoTimerComponent import preferredAutoTimerComponent
 	from Plugins.Extensions.AutoTimer.AutoTimerEditor import AutoTimerEditor, weekdays
-	from Plugins.Extensions.AutoTimer.AutoTimerSettings import AutoTimerSettings
+	from Plugins.Extensions.AutoTimer.AutoTimerOverview import AutoTimerPreview
 	from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
 	AUTOTIMER = True
 	# now we need a ChoiceBox to select between timer and autotimer on green button
@@ -866,8 +866,15 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			if isinstance(cur, RecordTimerEntry):
 				self.session.openWithCallback(self.finishedEdit, TimerLog, cur)
 			else:
-				self.session.open(AutoTimerSettings)
+				global autotimer
+				self.getAutoTimerInstance()
+				total, new, modified, timers, conflicts, similars = autotimer.parseEPG(simulateOnly = True)
+				self.session.openWithCallback(self.cbAutoTimerPreview, AutoTimerPreview, timers)
 				
+	def cbAutoTimerPreview(self, ret):
+		# clear the AutoTimer instance
+		self.deleteAutoTimerInstance()
+		
 	def cbOpenEdit(self, ret):
 		if ret:
 			self.updateAutoTimerEntry(ret.getId(), ret)
@@ -1407,8 +1414,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self.removeAutoTimerInstance = False
 			
 	def deleteAutoTimerInstance(self):
-		global autotimer
 		if self.removeAutoTimerInstance:
+			global autotimer
 			autotimer = None
 			
 	# Taken from AutoTimerEditor
