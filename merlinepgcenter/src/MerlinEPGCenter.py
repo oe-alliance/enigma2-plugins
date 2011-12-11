@@ -336,6 +336,9 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			
 		self.blinkTimer.suspend()
 		
+		if self.similarShown:
+			self.keyRed(forceHideSimilar = True)
+			
 		if self.currentMode > NUM_EPG_TABS:
 			config.plugins.merlinEpgCenter.lastUsedTab.value = NUM_EPG_TABS
 		else:
@@ -1642,12 +1645,15 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			else:
 				self["key_yellow"].setText("")
 				
-	def keyRed(self):
+	def keyRed(self, forceHideSimilar = False):
 		if self.currentMode == EPGSEARCH_HISTORY:
 			self.removeFromEpgSearchHistory()
 		else:
-			self.similarShown = not self.similarShown
-		
+			if not forceHideSimilar:
+				self.similarShown = not self.similarShown
+			else:
+				self.similarShown = False
+				
 			if not self.similarShown:
 				self.epgTabObjectList[self.currentMode].hideSimilar()
 				self["key_red"].setText("")
