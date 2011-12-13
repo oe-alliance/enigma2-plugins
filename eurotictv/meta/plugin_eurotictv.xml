@@ -1,6 +1,6 @@
 <default>
 	  <prerequisites>
-                    <tag type="multimedia" />
+                    <tag type="Multimedia" />
 	  </prerequisites>
           <info>
                     <author>Dream Multimedia</author>
