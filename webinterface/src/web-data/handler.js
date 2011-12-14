@@ -482,6 +482,26 @@ var MovieNavHandler = Class.create(AbstractContentHandler,{
 	}
 });
 
+var MultiEpgHandler  = Class.create(AbstractContentHandler, {
+	initialize: function($super, showMultiEpgFnc){
+		$super('tplMultiEpg', null);
+		this.provider = new MultiEpgProvider(this.show.bind(this));
+		this.ajaxload = false;
+		this.showEpg = showMultiEpgFnc;
+	},
+	
+	show : function(data){
+		this.data = data;
+		templateEngine.fetch(
+			this.tpl, 
+			function(){
+				var html = templateEngine.templates[this.tpl].process(this.data);
+				this.showEpg(html);
+			}.bind(this) 
+		);
+	}
+});
+
 var ScreenshotHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplGrab', target);

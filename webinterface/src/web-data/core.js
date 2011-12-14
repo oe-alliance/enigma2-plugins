@@ -172,6 +172,106 @@ var EPG = Class.create(Controller, {
 	}
 });
 
+var MultiEpg = Class.create(Controller, {
+	initialize: function($super){
+		$super(new MultiEpgHandler(this.show.bind(this)));
+		this.tplDetails = "";
+	},
+	
+	load: function(bRef){
+		templateEngine.fetch(
+			'tplMultiEpgDetail', 
+			function(tpl){
+				this.tplDetails = tpl;
+				this.doLoad(bRef);
+			}.bind(this));
+	},
+	
+	doLoad: function(bRef){
+		this.handler.load({'bRef' : bRef});
+	},
+	
+	show:function(html){
+		var win = core.popup("MultiEpg" + new Date().getTime(), html, 900, 570);
+		this.doRegisterEvents(win);
+	},
+	
+	doRegisterEvents: function(win){
+		var elem = win.document;
+		var _this = this;
+		var onload = function(event){
+			elem.on(
+				'click',
+				'.mEpgItem',
+				function(event, element){
+					var detail = elem.getElementById('mEpgDetail');
+					if(detail){
+						var e = {};
+						e.servicereference = element.readAttribute('data-servicereference');
+						e.servicename = element.readAttribute('data-servicename');
+						e.eventid = element.readAttribute('data-eventid');
+						e.date = element.readAttribute('data-date');
+						e.start = element.readAttribute('data-start');
+						e.starttime = element.readAttribute('data-starttime');
+						e.end = element.readAttribute('data-end');
+						e.endtime = element.readAttribute('data-endtime');
+						e.duration = element.readAttribute('data-duration');
+						e.title = element.readAttribute('data-title');
+						e.description = element.readAttribute('data-description');
+						e.extdescription = element.readAttribute('data-extdescription');
+						var data = {'e' : e};
+						detail.update(_this.tplDetails.process(data));
+						detail.show();
+					}
+					event.stop();
+				}
+			);
+			elem.on(
+				'click',
+				'.close',
+				function(event, element){
+					var detail = elem.getElementById('mEpgDetail');
+					if(detail)
+						detail.hide();
+					event.stop();
+				}
+			);
+			
+			elem.on(
+				'click',
+				'.eListAddTimer',
+				function(event, element){
+					core.timers.addByEventId(element, 0);
+					event.stop();
+				}
+			);
+			elem.on(
+				'click',
+				'.eListZapTimer',
+				function(event, element){
+					core.timers.addByEventId(element, 1);
+					event.stop();
+				}
+			);
+			elem.on(
+				'click',
+				'.eListEditTimer',
+				function(event, element){
+					var hash = ["#!/timer", "edit"].join("/");
+					hashListener.setHash(hash);
+					core.timers.editFromEvent(element);
+					event.stop();
+				}
+			);
+		};
+		if(elem.on){
+			onload();
+		} else {
+			win.onload = onload;
+		}
+	}
+});
+
 var Power = Class.create({
 	STATES: {'toggle' : 0, 'deep' : 1, 'reboot' : 2, 'gui' : 3},
 	
@@ -875,11 +975,7 @@ var E2WebCore = Class.create({
 
 		this.isActive = {};
 		this.isActive.getCurrent = false;
-		
-		this.locationsList = [];
-		this.tagList = [];
 
-		this.boxtype = "dm8000";
 		this.mode = "";
 		this.subMode = "";
 		
@@ -891,6 +987,7 @@ var E2WebCore = Class.create({
 		this.mediaplayer = new MediaPlayer('contentMain');
 		this.messages = new Messages();
 		this.movies = new Movies('contentMain', 'navContent');
+		this.multiepg = new MultiEpg();
 		this.power = new Power();
 		this.remote = new RemoteControl();
 		this.screenshots = new Screenshots('contentMain');
@@ -1394,6 +1491,16 @@ var E2WebCore = Class.create({
 				setContentHd(element.readAttribute("data-servicename"));
 			}
 		);
+		content.on(
+			'click',
+			'a.bListEpg',
+			function(event, element){
+				var sref = decodeURIComponent( element.readAttribute("data-servicereference") );
+				this.multiepg.load(sref);
+				event.stop();
+			}.bind(this)
+		);
+		
 		//Servicelist
 		content.on(
 			'click',

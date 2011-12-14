@@ -296,7 +296,7 @@ class ListFiller(Converter):
 					append("%02d:%02d" % (t.tm_hour, t.tm_min))
 				elif filternum == 7:
 					time = int(curitem) or 0
-					append("%d min" % (time / 60))					
+					append("%d min" % (time / 60))
 				else:
 					append(curitem)
 		# (this will be done in c++ later!)

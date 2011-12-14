@@ -13,6 +13,7 @@ function url() {
 	this.epgnow = "/web/epgnow"; // plus bouquetRev
 	this.epgnext = "/web/epgnext"; // plus bouquetRev
 	this.epgnownext = "/web/epgnownext";
+	this.epgmulti = "/web/epgmulti";
 	
 	this.getservices = "/web/getservices"; // plus serviceref
 	this.subservices = "/web/subservices"; // subservices for current service

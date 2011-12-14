@@ -491,18 +491,98 @@ function EPGListNowNext(xml){
 	this.getArray = function(){
 		list = [];
 		var len = this.xmlitems.length;
-		
-		var idx = 0;
 		var cssclass = 'even';
-		
+		var _this = this;
 		for (var i=0; i < len; i += 2){
 			cssclass = cssclass == 'even' ? 'odd' : 'even';
-			now = new EPGEvent(this.xmlitems.item(i)).toJSON();
-			next = new EPGEvent(this.xmlitems.item(i+1)).toJSON();
-			list[idx] = {"now" : now, "next" : next, "cssclass": cssclass};
-			idx++;
+			now = new EPGEvent(_this.xmlitems.item(i)).toJSON();
+			next = new EPGEvent(_this.xmlitems.item(i+1)).toJSON();
+			list.push({"now" : now, "next" : next, "cssclass": cssclass});
 		}
 		return list;
+	};
+}
+
+function MultiEPGList(xml){
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
+	} catch (e) {
+		core.notify("Error Parsing EPG: " + e, false);
+	}
+	
+	this.getArray = function(visibleMinutes){
+		list = [];
+		var len = this.xmlitems.length;
+		if(!visibleMinutes)
+			visibleMinutes = 240;
+		var scale = 3;
+		
+		var epg = [];
+		var maxEndTime = '0';
+		
+		var currentServiceRef = '';
+		var currentServiceEpg = [];
+		var _this = this;
+		for (var i=0; i < len; i++){
+			var item = new EPGEvent(_this.xmlitems.item(i)).toJSON();
+//			item = item.toJSON();
+			item.size = item.remaining * scale;
+			if(item.end > maxEndTime)
+				maxEndTime = item.end;
+			if(item.servicereference != currentServiceRef){
+				if(currentServiceEpg.length > 0)
+					epg.push(currentServiceEpg);
+				currentServiceEpg = [];
+				currentServiceRef = item.servicereference;
+			}
+			currentServiceEpg.push(item);
+		}
+		if(currentServiceEpg.length > 0)
+			epg.push(currentServiceEpg);
+		
+		var currentDate = new Date();
+		var endDate = new Date(maxEndTime * 1000);
+		if(endDate.getMinutes != 0){
+			endDate.setHours(endDate.getHours() + 1);
+			endDate.setMinutes(0);
+		}
+		
+		niceTime = function(date){
+			var m = date.getMinutes();
+			if(m < 10)
+				m = '0'+m;
+			return date.getHours() + ":" + m;
+		};
+		currentDate.setSeconds(0);
+		currentDate.setMilliseconds(0);
+		var currentTs = currentDate.getTime() / 1000;
+		
+		endDate.setSeconds(0);
+		endDate.setMilliseconds(0);
+		var endTs = endDate.getTime() / 1000;
+		var totalMin = ( endTs - currentTs ) / 60;
+		var mod = totalMin % 60;
+		
+		var timeScale = {};
+		timeScale.current = 
+			{	'scale': mod * scale, 
+				'time' : niceTime(currentDate)
+			};
+		
+		timeScale.times = [];
+		var hours = (totalMin - mod) / 60;
+		var width = 60 * scale;
+		for(var i = 0; i < hours; i++){
+			var ts = (currentTs * 1000) + ( (mod + (i * 60) ) * 60000 ); 
+			var date = new Date(ts);
+			timeScale.times.push(
+				{	'scale' : width, 
+					'time' : niceTime(date), 
+					'date' : date.toLocaleDateString()
+				});
+		}
+		
+		return {'epg' : epg, 'timescale' : timeScale};
 	};
 }
 //END class EPGList

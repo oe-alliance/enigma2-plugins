@@ -272,6 +272,21 @@ var DeviceInfoProvider = Class.create(AbstractContentProvider, {
 	}
 });
 
+var MultiEpgProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.epgmulti, showFnc);
+	},
+
+	/**
+	 * renderXML
+	 * See the description in AbstractContentProvider
+	 */
+	renderXML: function(xml){
+		var list = new MultiEPGList(xml).getArray();
+		return {items : list};
+	}
+});
+
 
 var LocationProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
