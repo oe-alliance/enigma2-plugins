@@ -1046,7 +1046,6 @@ var E2WebCore = Class.create({
 	notify: function(text, state){
 		debug("[E2WebCore].notify");
 		notif = $('notification');
-
 		if(notif !== null){
 			//clear possibly existing hideNotifier timeout of a previous notfication
 			clearTimeout(this.hideNotifierTimeout);
@@ -1055,7 +1054,6 @@ var E2WebCore = Class.create({
 			} else {
 				notif.style.background = "#85C247";
 			}
-
 			this.set('notification', "<div>"+text+"</div>");
 			notif.fadeIn({'delay' : 500, 'to' : 90});
 			var _this = this;

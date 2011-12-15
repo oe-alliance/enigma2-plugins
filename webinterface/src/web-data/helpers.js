@@ -1,38 +1,43 @@
 // $Header$
 //Helper functions
-Element.prototype.fadeIn = function(parms, out) {
-	var _this = this;
-	var opacityTo = function(elm,v){
-		elm.style.opacity = v/100;
-		elm.style.MozOpacity =  v/100;
-		elm.style.KhtmlOpacity =  v/100;
-		elm.style.filter=" alpha(opacity ="+v+")";
-	};
-	var delay = parms.delay;
-	var to = parms.to;
-	if(!to)
-		to = 100;
+Element.addMethods({
+	fadeIn: function(element, parms, out) {
+		var setOpacity = function(elm,v){
+			elm.style.opacity = v/100;
+			elm.style.MozOpacity =  v/100;
+			elm.style.KhtmlOpacity =  v/100;
+			elm.style.filter=" alpha(opacity ="+v+")";
+		};
+		var delay = parms.delay;
+		var to = parms.to;
+		if(!to){
+			to = 100;
+			if(!out){
+				setOpacity(element, 0);
+			}
+		}
+		
+		element.style.zoom = 1;
+		// for ie, set haslayout
+		element.style.display = "block";
 	
-	_this.style.zoom = 1;
-	// for ie, set haslayout
-	_this.style.display = "block";
-
-	for (var i=1; i<=to; i++) {
-		(function(j) {
-			setTimeout(function() {
-				if (out == true)
-					j = to - j;
-				opacityTo(_this, j);
-			}, j * delay / to);
-		})(i);
-	};
-};
-Element.prototype.fadeOut = function(delay) {
-	this.fadeIn({'delay' : delay}, true);
-};
+		for (var i=1; i<=to; i++) {
+			(function(j) {
+				setTimeout(function() {
+					if (out == true)
+						j = to - j;
+					setOpacity(element, j);
+				}, j * delay / to);
+			})(i);
+		};
+	},
+	fadeOut: function(element, delay) {
+		element.fadeIn({'delay' : delay}, true);
+	}
+});
 
 String.prototype.e = function(){
-return this.replace("\"","&quot;");
+	return this.replace("\"","&quot;");
 };
 
 //General Helpers
