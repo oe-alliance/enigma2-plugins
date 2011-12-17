@@ -200,6 +200,16 @@ var MultiEpg = Class.create(Controller, {
 		var elem = win.document;
 		var _this = this;
 		var onload = function(event){
+//			elem.on(
+//				'resize',
+//				function(event, element){
+//					var tbody = $('mEpgTBody');
+//					var top = tbody.cumulativeOffset().top;
+//					var height = elem.viewport.height - top;
+//					tbody.style.height = height;
+//					console.log(offset);
+//				}
+//			);
 			elem.on(
 				'click',
 				'.mEpgItem',
@@ -221,7 +231,7 @@ var MultiEpg = Class.create(Controller, {
 						e.extdescription = element.readAttribute('data-extdescription');
 						var data = {'e' : e};
 						detail.update(_this.tplDetails.process(data));
-						detail.show();
+						detail.fadeIn({'delay' : 300, 'to' : 95});
 					}
 					event.stop();
 				}
@@ -232,7 +242,7 @@ var MultiEpg = Class.create(Controller, {
 				function(event, element){
 					var detail = elem.getElementById('mEpgDetail');
 					if(detail)
-						detail.hide();
+						detail.fadeOut({'delay' : 300});
 					event.stop();
 				}
 			);

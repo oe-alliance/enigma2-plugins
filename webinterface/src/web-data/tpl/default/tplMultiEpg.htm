@@ -5,119 +5,14 @@
 	<head>
 		<meta content="text/html; charset=UTF-8" http-equiv="content-type">
 		<title>Enigma2 WebControl - MultiEPG</title>
-		<style>
-			html,body {
-				font-family: Tahoma, Sans-Serif;
-				font-size: 12px;
-				font-weight: bold;
-				color: #fff;
-				background: #555;
-				margin: 5px;
-				padding: 5px;
-			}
-			
-			th{
-				font-size:14px;
-			}
-			a,a:visited,a:active{
-				color: #485052;
-				text-decoration: none;
-			}
-			.mEpgCell{
-				margin:0px;
-				padding:0px;
-			}
-			.mEpgItem{
-				padding:0px;
-				background:#FFF;
-				border-top:1px solid #485052;
-				border-right:1px solid #485052;
-				display:block;
-				overflow:hidden;
-				margin-bottom: -1px;
-			}
-			a.mEpgItem:hover{
-				background: #DDD;
-			}
-			
-			#wrap{
-				width:100%;
-				display:block;
-				position: relative;
-			}
-			#mEpgDetail{
-				position:fixed;
-				top: 0;
-				left: 2%;
-				width:96%;
-				z-index:9999;
-				background: #FFF;
-				color: #485052;
-				display:table-row;
-				border: 1px solid #000;
-				opacity: 0.95;
-			}
-			#mEpgDetail > table{
-				width: 100%;
-			}
-			#mEpgDetail * tr{
-				background-color: #DDDDDD;
-				width: 100%;
-			}
-			
-			#mEpg{
-				height:500px;
-			}
-			#mEpg > table{
-				table-layout:fixed;
-				height:98%"
-			}
-			#mEpg > table > thead, #mEpg > table > tbody{
-				display: block;
-				/*height: 98%; width:98%;*/
-			}
-			#mEpg > table > tbody{
-				overflow-y: auto;
-				height:490px;
-				padding-right: 15px;
-			}
-			#mEpg * tr{
-				style="vertical-align: top"
-			}
-			#mEpg * th, #mEpg * td{
-				width:175px;
-				min-width:175px;
-			}
-			.mEpgDate{
-				width: 150px;
-			}
-			.closeContainer{
-				width: 30px;
-			}
-			.close{
-				background: #F00;
-				color: #FFF;
-				display:block
-			}
-			a.close, a.close:active, a.close.visited{
-				color: #FFF;
-				text-decoration: none;
-			}
-			a.close:hover{
-				text-decoration: underline;
-			}
-			.cBlack{
-				color: #000;
-			}
-		</style>
-		<!-- <link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">  -->
-		<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
+		<link href="/web-data/tpl/default/multiepg.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="/web-data/lib/libs.packed.js"></script>
 		<script type="text/javascript" src="/web-data/helpers.js"></script>
 	</head>
 	<body>
 		<div id="mEpgDetail" style="display:none"></div>
 		<div id="mEpg">
-			<table cellpadding="0" cellspacing="0">
+			<table  id="mEpgT" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
 						{for epg in items.epg}
@@ -161,6 +56,11 @@
 				</tbody>
 			</table>
 		</div>
+		
+		<script type="text/javascript" language="javscript">
+			fxheaderInit('mEpgT',530,1,0);
+			fxheader();
+		</script>
 	</body>
 <!-- /tplMultiEpg -->
 </html>
