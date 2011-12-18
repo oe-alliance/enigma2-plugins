@@ -1229,6 +1229,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		if self.configTabsShown or mode == self.infoBarInstance.servicelist.mode:
 			return
 			
+		self.similarShown = False
 		if self.infoTextShown:
 			self.keyInfo()
 			
@@ -1238,13 +1239,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self.infoBarInstance.servicelist.setModeRadio()
 		self.infoBarInstance.servicelist.zap()
 		self.updateBouquets()
-		
-		(self.servicelist, self.currentBouquet, self.bouquetList, self.currentBouquetIndex) = getBouquetInformation()
-		self.similarShown = False
-		
-		EpgCenterList.bouquetList = self.bouquetList
-		EpgCenterList.currentBouquetIndex = self.currentBouquetIndex
-		EpgCenterList.updateBouquetServices()
 		
 		if self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME:
 			self.selectRunningService = True
