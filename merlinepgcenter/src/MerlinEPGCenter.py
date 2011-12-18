@@ -735,17 +735,17 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		for configTabObject in self.configTabObjectList:
 			configTabObject.removeNotifier()
 		
-		config.plugins.merlinEpgCenter.primeTime.notifiers.remove(self.getPrimeTime)
-		config.plugins.merlinEpgCenter.showVideoPicture.notifiers.remove(self.setVideoPicture)
-		config.plugins.merlinEpgCenter.showEventInfo.notifiers.remove(self.setEventInfo)
-		config.plugins.merlinEpgCenter.showInputHelp.notifiers.remove(self.setInputHelp)
-		config.plugins.merlinEpgCenter.listStyle.notifiers.remove(self.setListStyle)
-		config.plugins.merlinEpgCenter.skinSelection.notifiers.remove(self.setSkinFile)
-		config.plugins.merlinEpgCenter.numNextEvents.notifiers.remove(self.setUpcomingWidgets)
-		config.plugins.merlinEpgCenter.listItemHeight.notifiers.remove(self.setUpcomingWidgets)
-		config.plugins.merlinEpgCenter.listProgressStyle.notifiers.remove(self.setProgressbarStyle)
-		config.plugins.merlinEpgCenter.adjustFontSize.notifiers.remove(self.setFontSizes)
-		config.plugins.merlinEpgCenter.embeddedVolume.notifiers.remove(self.toggleEmbeddedVolume)
+		config.plugins.merlinEpgCenter.primeTime.removeNotifier(self.getPrimeTime)
+		config.plugins.merlinEpgCenter.showVideoPicture.removeNotifier(self.setVideoPicture)
+		config.plugins.merlinEpgCenter.showEventInfo.removeNotifier(self.setEventInfo)
+		config.plugins.merlinEpgCenter.showInputHelp.removeNotifier(self.setInputHelp)
+		config.plugins.merlinEpgCenter.listStyle.removeNotifier(self.setListStyle)
+		config.plugins.merlinEpgCenter.skinSelection.removeNotifier(self.setSkinFile)
+		config.plugins.merlinEpgCenter.numNextEvents.removeNotifier(self.setUpcomingWidgets)
+		config.plugins.merlinEpgCenter.listItemHeight.removeNotifier(self.setUpcomingWidgets)
+		config.plugins.merlinEpgCenter.listProgressStyle.removeNotifier(self.setProgressbarStyle)
+		config.plugins.merlinEpgCenter.adjustFontSize.removeNotifier(self.setFontSizes)
+		config.plugins.merlinEpgCenter.embeddedVolume.removeNotifier(self.toggleEmbeddedVolume)
 		
 	def setListStyle(self, configElement = None):
 		itemHeight = self.piconSize.height() + int(config.plugins.merlinEpgCenter.listItemHeight.value)

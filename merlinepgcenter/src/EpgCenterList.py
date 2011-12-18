@@ -543,8 +543,8 @@ class EpgCenterList(GUIComponent):
 	def preWidgetRemove(self, instance):
 		instance.setContent(None)
 		instance.selectionChanged.get().remove(self.selectionChanged)
-		config.plugins.merlinEpgCenter.listItemHeight.notifiers.remove(self.changeHeight)
-		config.plugins.merlinEpgCenter.adjustFontSize.notifiers.remove(self.setFontSizes)
+		config.plugins.merlinEpgCenter.listItemHeight.removeNotifier(self.changeHeight)
+		config.plugins.merlinEpgCenter.adjustFontSize.removeNotifier(self.setFontSizes)
 		self.blinkTimer.callbacks.remove(self.invalidateList)
 		
 	def moveToIndex(self, index):
@@ -904,8 +904,8 @@ class EpgCenterTimerlist(TimerList):
 	def preWidgetRemove(self, instance):
 		instance.setContent(None)
 		instance.selectionChanged.get().remove(self.selectionChanged)
-		config.plugins.merlinEpgCenter.listItemHeight.notifiers.remove(self.changeHeight)
-		config.plugins.merlinEpgCenter.adjustFontSize.notifiers.remove(self.setFontSizes)
+		config.plugins.merlinEpgCenter.listItemHeight.removeNotifier(self.changeHeight)
+		config.plugins.merlinEpgCenter.adjustFontSize.removeNotifier(self.setFontSizes)
 		
 	def buildTimerEntry(self, timer, processed):
 		width = self.l.getItemSize().width()

@@ -189,8 +189,8 @@ class ConfigListSettings(ConfigBaseTab):
 		config.plugins.merlinEpgCenter.epgPaths.addNotifier(self.piconPathChanged, initial_call = False)
 		
 	def removeNotifier(self):
-		config.plugins.merlinEpgCenter.showPicons.notifiers.remove(self.expandableSettingChanged)
-		config.plugins.merlinEpgCenter.epgPaths.notifiers.remove(self.piconPathChanged)
+		config.plugins.merlinEpgCenter.showPicons.removeNotifier(self.expandableSettingChanged)
+		config.plugins.merlinEpgCenter.epgPaths.removeNotifier(self.piconPathChanged)
 		
 	def piconPathChanged(self, configElement = None):
 		config.plugins.merlinEpgCenter.epgPaths.save()
@@ -216,7 +216,7 @@ class ConfigEventInfo(ConfigBaseTab):
 		config.plugins.merlinEpgCenter.showEventInfo.addNotifier(self.expandableSettingChanged, initial_call = False)
 		
 	def removeNotifier(self):
-		config.plugins.merlinEpgCenter.showEventInfo.notifiers.remove(self.expandableSettingChanged)
+		config.plugins.merlinEpgCenter.showEventInfo.removeNotifier(self.expandableSettingChanged)
 		
 # config key settings
 class ConfigKeys(ConfigBaseTab):
