@@ -195,11 +195,8 @@ def getFuzzyDay(t):
 	elif nt < t and (t - nt) < WEEKSECONDS:
 		# same week
 		date = WEEKDAYS[d.tm_wday]
-	elif d[0] == n[0]:
-		# same year
-		date = "%d.%d.%d" % (d.tm_mday, d.tm_mon, d.tm_year)
 	else:
-		date = _("Unknown date")
+		date = "%d.%d.%d" % (d.tm_mday, d.tm_mon, d.tm_year)
 		
 	return date
 	
