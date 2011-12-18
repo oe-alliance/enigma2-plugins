@@ -77,7 +77,6 @@ SUBDIRS = \
 	webbouqueteditor \
 	webcamviewer \
 	werbezapper \
-	youtubeplayer \
 	yttrailer \
 	zaphistorybrowser \
 	zapstatistic \
