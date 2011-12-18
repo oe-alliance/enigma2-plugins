@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MerlinEPGCenter\n"
-"POT-Creation-Date: 2011-11-27 21:20+CET\n"
+"POT-Creation-Date: 2011-12-18 21:20+CET\n"
 "PO-Revision-Date: \n"
 "Last-Translator: kosmacz <anteneczka@gmail.com>\n"
 "Language-Team: Shaderman <shaderman@dreambox-tools.info>\n"
@@ -168,10 +168,13 @@ msgstr ""
 "Co chcesz zrobić?"
 
 msgid "Replace ChannelSelection key down to start with tab:"
-msgstr "Podmień klawisz wyboru kanału (-) ,aby rozpocząć z karty:"
+msgstr "Zamień klawisz wyboru kanału (w dół) ,aby rozpocząć z karty:"
 
 msgid "Replace ChannelSelection key up to start with tab:"
-msgstr "Podmień klawisz wyboru kanału (+) ,aby rozpocząć z karty:"
+msgstr "Zamień klawisz wyboru kanału (w górę) ,aby rozpocząć z karty:"
+
+msgid "Replace EventView key to start with tab:"
+msgstr "Zamień klawisz Widok Wydarzeń ,aby rozpocząć z karty:"
 
 msgid "Replace InfoBar single and multi EPG:"
 msgstr "Zamień InfoBar pojedyńczy i multi EPG:"
