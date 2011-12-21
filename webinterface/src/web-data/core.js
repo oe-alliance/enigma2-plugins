@@ -460,6 +460,10 @@ var MediaPlayer = Class.create(Controller, {
 		this.handler.playFile(file);
 	},
 	
+	addFile: function(file){
+		this.handler.addFile(file);
+	},
+	
 	removeFile: function(file){
 		this.handler.removeFile(file);
 	},
@@ -1427,6 +1431,16 @@ var E2WebCore = Class.create({
 				event.stop();
 			}.bind(this)
 		);
+		content.on(
+				'click',
+				'.mpAddFile',
+				function(event, element){
+					var parent = element.up('.mpListItem');
+					var ref = decodeURIComponent( parent.readAttribute('data-servicereference') );
+					this.mediaplayer.addFile(ref);
+					event.stop();
+				}.bind(this)
+			);
 		content.on(
 			'click',
 			'.mpRemoveFile',

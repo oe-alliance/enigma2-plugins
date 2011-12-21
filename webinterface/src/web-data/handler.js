@@ -384,6 +384,14 @@ var MediaPlayerHandler = Class.create(AbstractContentHandler, {
 			);
 	},
 	
+	addFile: function(file){
+		this.provider.simpleResultQuery(
+				URL.mediaplayeradd, 
+				{'file' : file},
+				this.simpleResultCallback.bind(this)
+			);
+	},
+	
 	removeFile: function(file){
 		this.provider.simpleResultQuery(
 				URL.mediaplayerremove, 

@@ -28,6 +28,7 @@ function url() {
 	this.signal = "/web/signal";
 	this.deviceinfo = "/web/deviceinfo";
 	
+	this.mediaplayeradd= "/web/mediaplayeradd"; // plus file-serviceref
 	this.mediaplayerlist= "/web/mediaplayerlist"; // plus full qualified path
 	this.mediaplayerplay= "/web/mediaplayerplay"; // plus file-serviceref
 	this.mediaplayerremove= "/web/mediaplayerremove"; // plus file-serviceref

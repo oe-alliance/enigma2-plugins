@@ -29,7 +29,7 @@ class RemoteControl(Source):
 		else:
 			self.remotetype = self.TYPE_STANDARD
 			
-		print "[RemoteControl.__init__] Configured RCU-Type is '%s'" %(self.remotetype)										
+		print "[RemoteControl.__init__] Configured RCU-Type is '%s'" %(self.remotetype)
 
 	def handleCommand(self, cmd):
 		self.cmd = cmd
