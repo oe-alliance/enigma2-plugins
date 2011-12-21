@@ -96,7 +96,6 @@ var Current = Class.create(Controller, {
 	toggleVisibility: function(element){
 		var ext = $('trExtCurrent');
 		if(ext){
-			this.display = ext.style.display;
 			var bullet = element.down('.currentBulletToggle');
 			if(ext.visible()){
 				bullet.src = '/web-data/img/toggle_expand.png';
@@ -107,6 +106,7 @@ var Current = Class.create(Controller, {
 				bullet.alt = "-";
 				ext.show();
 			}
+			this.display = ext.style.display;
 			setMaxHeight('contentMain');
 		}
 	},
@@ -114,7 +114,7 @@ var Current = Class.create(Controller, {
 	onFinished: function(){
 		setMaxHeight('contentMain');
 		var ext = $('trExtCurrent'); 
-		if(ext != null){
+		if(ext){
 			ext.style.display = this.display;
 			var bullet = $('currentName').down('.currentBulletToggle');
 			if(ext.visible()){
