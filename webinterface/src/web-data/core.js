@@ -90,18 +90,32 @@ var Current = Class.create(Controller, {
 	},
 	
 	load: function(){
-		var ext = $('trExtCurrent'); 
-		if(ext != null){
-			this.display = $('trExtCurrent').style.display;
-		}
 		this.handler.load({});
 	},
 	
+	toggleVisibility: function(element){
+		var ext = $('trExtCurrent');
+		if(ext){
+			this.display = ext.style.display;
+			var bullet = element.down('.currentBulletToggle');
+			if(ext.visible()){
+				bullet.src = '/web-data/img/toggle_expand.png';
+				bullet.alt = "+";
+				ext.hide();
+			}else{
+				bullet.src = '/web-data/img/toggle_collapse.png';
+				bullet.alt = "-";
+				ext.show();
+			}
+			setMaxHeight('contentMain');
+		}
+	},
+	
 	onFinished: function(){
+		setMaxHeight('contentMain');
 		var ext = $('trExtCurrent'); 
 		if(ext != null){
 			ext.style.display = this.display;
-			
 			var bullet = $('currentName').down('.currentBulletToggle');
 			if(ext.visible()){
 				bullet.src = '/web-data/img/toggle_collapse.png';
@@ -1333,21 +1347,9 @@ var E2WebCore = Class.create({
 			'click',
 			'.currentExtShowHide',
 			function(event, element){
-				var ext = $('trExtCurrent');
-				if(ext){
-					var bullet = element.down('.currentBulletToggle');
-					if(ext.visible()){
-						bullet.src = '/web-data/img/toggle_expand.png';
-						bullet.alt = "+";
-						ext.hide();
-					}else{
-						bullet.src = '/web-data/img/toggle_collapse.png';
-						bullet.alt = "-";
-						ext.show();
-					}
-				}
+				this.current.toggleVisibility(element);
 				event.stop();
-			}
+			}.bind(this)
 		);
 		$('current').on(
 				'click',

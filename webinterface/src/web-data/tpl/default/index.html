@@ -36,44 +36,16 @@
 	}
 	</script>
  	<script language="javascript" type="text/javascript">
-	 	if (!window.$) {
-			window.$ = function(id) { return document.getElementById(id); }
-		}
-		
-		function getWinSize(win) 
-		{ 
-			if(!win) win = window; 
-			var s = {}; 
-			if(typeof win.innerWidth != 'undefined') 
-			{ 
-				s.width = win.innerWidth; 
-				s.height = win.innerHeight; 
-			} 
-			else 
-			{ 
-				 var obj = getBody(win); 
-				 s.width = parseInt(obj.clientWidth); 
-				 s.height = parseInt(obj.clientHeight); 
-			} 
-			return s; 
-		} 
-	
-		function getBody(w) 
-		{ 
-			return (w.document.compatMode && w.document.compatMode == "CSS1Compat") ? w.document.documentElement : w.document.body || null; 
-		} 
-		
 		function setMaxHeight(element){
 			try{
 				var slc = $(element);
-				size = getWinSize();
-				slc.style.maxHeight = size.height - 200+"px";
-				/*
-				if(Prototype.Browser.IE){
-					slc.style.height = size.height - 200+"px";
-				}
-				*/
-			} catch (e) {}
+				var top = slc.cumulativeOffset().top;
+				var height = document.viewport.getHeight() - top - 40;
+				console.log(height);
+				slc.style.maxHeight = height+"px";
+			} catch (e) {
+				console.log(e);
+			}
 		}
 		function setNavHd(content){
 			$('navHd').update('<div style="background-color: #000">'+content+'</div>');
