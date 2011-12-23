@@ -28,6 +28,9 @@ msgstr ""
 msgid "Side by side"
 msgstr ""
 
+msgid "Top/Bottom"
+msgstr ""
+
 msgid "2D mode"
 msgstr ""
 
