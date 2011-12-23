@@ -68,6 +68,10 @@ audiosync/meta/Makefile
 audiosync/po/Makefile
 audiosync/src/Makefile
 
+auto3dosdswitch/Makefile
+auto3dosdswitch/meta/Makefile
+auto3dosdswitch/src/Makefile
+
 automaticcleanup/Makefile
 automaticcleanup/meta/Makefile
 automaticcleanup/po/Makefile
