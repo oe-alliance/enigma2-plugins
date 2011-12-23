@@ -4,7 +4,6 @@ SUBDIRS = \
 	aihdcontroler \
 	antiscrollbar \
 	audiosync \
-	auto3dosdswitch \
 	automaticcleanup \
 	automatictimerlistcleanup \
 	automaticvolumeadjustment \

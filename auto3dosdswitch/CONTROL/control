@@ -1,6 +1,0 @@
-Package: enigma2-plugin-systemplugins-auto3dosdswitch
-Version: 1.0
-Description: Auto 3D OSD Switcher
-Maintainer: Dr. Best <dr.best@dreambox-tools.info>
-Homepage: http://www.dreambox-tools.info
-Depends: enigma2
