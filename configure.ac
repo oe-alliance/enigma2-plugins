@@ -283,6 +283,7 @@ merlinepgcenter/images/HD_BORDER/Makefile
 merlinepgcenter/images/SD/Makefile
 merlinepgcenter/images/XD/Makefile
 merlinepgcenter/images/XD_BORDER/Makefile
+merlinepgcenter/images/HD_Elgato/Makefile
 
 merlinmusicplayer/Makefile
 merlinmusicplayer/meta/Makefile
