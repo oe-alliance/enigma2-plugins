@@ -39,9 +39,6 @@ config.plugins.merlinEpgCenter.tabTextColorSelected.setValue("#ffffff")
    <widget name="remaining" position="1175,202" size="65,17" foregroundColors="#ef7f1a,#e31e24,#74de0a,#ffed00,#ffffff" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="center" />
    <widget name="description" position="880,230" size="360,420" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="top" />
    <widget name="videoPicture" position="880,451" backgroundColor="transparent" size="360,203" zPosition="3" />
-   <widget position="880,451" backgroundColor="transparent" render="MiniTV" size="360,203" source="ServiceEventReference" zPosition="4">
-      <convert type="MiniTVDisplay"/>
-   </widget>
    <eLabel position="40,61" size="1200,44" backgroundColor="white" zPosition="1"/>
    <eLabel position="40,61" size="1200,41" backgroundColor="#546475" zPosition="2"/>
    <widget name="isRecording" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/HD_Elgato/rec.png" position="830,59" size="38,38" zPosition="3" alphatest="on" />
@@ -50,10 +47,10 @@ config.plugins.merlinEpgCenter.tabTextColorSelected.setValue("#ffffff")
    <widget name="mute" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/HD_Elgato/mute.png" position="1198,66" size="32,32" zPosition="3" transparent="1" alphatest="on" />
    <eLabel position="40,654" size="1200,3" backgroundColor="white" />
     <widget source="global.CurrentTime" render="Label" position="1160,660" size="80,28" font="Regular;24" halign="right" transparent="1">
-      <convert type="mConvClockToText">Default</convert>
+      <convert type="ClockToText">Default</convert>
    </widget>
    <widget source="global.CurrentTime" render="Label" position="1060,660" size="160,28" font="Regular;24" halign="left" transparent="1">
-      <convert type="mConvClockToText">LocaleKurz: %w %d %m</convert>
+      <convert type="ClockToText">Format: %a %d. %b</convert>
    </widget>
    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/HD_Elgato/red.png" position=" 50,690" size="250,2" alphatest="on"/>
    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/HD_Elgato/green.png" position="300,690" size="250,2" alphatest="on"/>
