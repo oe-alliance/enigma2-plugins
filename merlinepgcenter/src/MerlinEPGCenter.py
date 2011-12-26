@@ -449,9 +449,9 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				self["tab_text_%d" % self.oldMode].instance.setForegroundColor(parseColor("#ffffff")) # inactive
 				
 		if self.currentMode >= numTabs:
-			self["tab_text_%d" % numTabs].instance.setForegroundColor(parseColor("#ef7f1a")) # active
+			self["tab_text_%d" % numTabs].instance.setForegroundColor(parseColor(config.plugins.merlinEpgCenter.tabTextColorSelected.value)) # active
 		else:
-			self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor("#ef7f1a")) # active
+			self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor(config.plugins.merlinEpgCenter.tabTextColorSelected.value)) # active
 			
 	############################################################################################
 	# VOLUME CONTROL
@@ -2021,10 +2021,10 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self.oldMode = self.savedOldMode
 			self.setTabText(TAB_TEXT_EPGLIST)
 			if self.currentMode <= NUM_EPG_TABS:
-				self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor("#ef7f1a")) # active
+				self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor(config.plugins.merlinEpgCenter.tabTextColorSelected.value)) # active
 				self["tabbar"].setPixmapNum(self.currentMode)
 			else:
-				self["tab_text_%d" % NUM_EPG_TABS].instance.setForegroundColor(parseColor("#ef7f1a")) # active
+				self["tab_text_%d" % NUM_EPG_TABS].instance.setForegroundColor(parseColor(config.plugins.merlinEpgCenter.tabTextColorSelected.value)) # active
 				self["tabbar"].setPixmapNum(NUM_EPG_TABS)
 			
 			if self.currentMode == EPGSEARCH_MANUAL:
@@ -2053,7 +2053,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self.savedOldMode = self.oldMode
 			self.currentMode = 0 # first config tab
 			self.setTabText(TAB_TEXT_CONFIGLIST)
-			self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor("#ef7f1a")) # active
+			self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor(config.plugins.merlinEpgCenter.tabTextColorSelected.value)) # active
 			self["tabbar"].setPixmapNum(self.currentMode)
 			self.configTabsShown = True
 			self.configEditMode = True
@@ -2127,4 +2127,28 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		self.setUpcomingWidgets()
 		self.setVideoPicture()
 		self.setDescriptionSize()
+		self.setListPixmaps()
 		
+	def setListPixmaps(self):
+		backgroundPixmap = None
+		if config.plugins.merlinEpgCenter.showEventInfo.value and config.plugins.merlinEpgCenter.backgroundPixmapShort.value != "":
+			backgroundPixmap = LoadPixmap(cached = True, path = config.plugins.merlinEpgCenter.backgroundPixmapShort.value)
+		elif not config.plugins.merlinEpgCenter.showEventInfo.value and config.plugins.merlinEpgCenter.backgroundPixmapLong.value != "":
+			backgroundPixmap = LoadPixmap(cached = True, path = config.plugins.merlinEpgCenter.backgroundPixmapLong.value)
+		if backgroundPixmap is not None:
+			self["timerlist"].instance.setBackgroundPicture(backgroundPixmap)
+			self["list"].instance.setBackgroundPicture(backgroundPixmap)
+			self["history"].instance.setBackgroundPicture(backgroundPixmap)
+			self["settings"].instance.setBackgroundPicture(backgroundPixmap)
+			
+		selectionPixmap = None
+		if config.plugins.merlinEpgCenter.showEventInfo.value and config.plugins.merlinEpgCenter.selectionPixmapShort.value != "":
+			selectionPixmap = LoadPixmap(cached = True, path = config.plugins.merlinEpgCenter.selectionPixmapShort.value)
+		elif not config.plugins.merlinEpgCenter.showEventInfo.value and config.plugins.merlinEpgCenter.selectionPixmapLong.value != "":
+			selectionPixmap = LoadPixmap(cached = True, path = config.plugins.merlinEpgCenter.selectionPixmapLong.value)
+		if selectionPixmap is not None:
+			self["timerlist"].instance.setSelectionPicture(selectionPixmap)
+			self["list"].instance.setSelectionPicture(selectionPixmap)
+			self["history"].instance.setSelectionPicture(selectionPixmap)
+			self["settings"].instance.setSelectionPicture(selectionPixmap)
+			

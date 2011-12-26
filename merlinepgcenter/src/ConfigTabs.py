@@ -113,7 +113,22 @@ config.plugins.merlinEpgCenter.mainTab = ConfigSelection(default = "-1", choices
 config.plugins.merlinEpgCenter.embeddedVolume = ConfigYesNo(False)
 
 # INVISIBLE OPTION
-config.plugins.merlinEpgCenter.setDescriptionSize = ConfigYesNo(True)
+# These config values should be set in the skin in a <applet type="onLayoutFinish"></applet> tag
+
+# Set it to false to disable the dependency between the videoPicture/MiniTv and the description widget.
+# This allows moving the videoPicture/MiniTv widget above the description text.
+config.plugins.merlinEpgCenter.setDescriptionSize = NoSave(ConfigYesNo(True))
+
+# Two background Pixmaps can be set. These will be swapped for the lists "timerlist", "list", "history" and "settings",
+# depending on the value of config.plugins.merlinEpgCenter.showEventInfo
+config.plugins.merlinEpgCenter.backgroundPixmapShort = NoSave(ConfigText(default = ""))
+config.plugins.merlinEpgCenter.backgroundPixmapLong = NoSave(ConfigText(default = ""))
+
+config.plugins.merlinEpgCenter.selectionPixmapShort = NoSave(ConfigText(default = ""))
+config.plugins.merlinEpgCenter.selectionPixmapLong = NoSave(ConfigText(default = ""))
+
+# Use this to override the default tab text color
+config.plugins.merlinEpgCenter.tabTextColorSelected = NoSave(ConfigText(default = "#ef7f1a"))
 
 
 ############################################################################################
