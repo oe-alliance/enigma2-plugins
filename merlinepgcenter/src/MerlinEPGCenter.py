@@ -1662,6 +1662,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 	def keyGreen(self):
 		if self.currentMode == EPGSEARCH_HISTORY:
 			self.setMode(historySearch = True)
+		elif self.currentMode == EPGSEARCH_MANUAL:
+			self.keyOk()
 		else:
 			cur = self["list"].getCurrent()
 			if cur == None or cur[1] == None or cur[2] == "":
@@ -2118,7 +2120,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			
 		border = 5
 		self["timerlist"].instance.resize(newSize)
-		self["search"].instance.resize(eSize(newSize.width() - border, newSize.height()))
+		self["search"].instance.resize(eSize(newSize.width() - border -15, newSize.height()))
 		self["history"].instance.resize(eSize(newSize.width() - border, newSize.height()))
 		self["settings"].instance.resize(eSize(newSize.width() - border, newSize.height()))
 		self["upcomingSeparator"].instance.resize(eSize(newSize.width() + border, newSize.height())) # touch the event info separator
