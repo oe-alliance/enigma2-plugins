@@ -129,7 +129,7 @@ def InfoBarHideTunerState(self):
 def addExtension():
 	# Add to extension menu
 	from Components.PluginComponent import plugins
-	from Plugins.Extensions.InfoBarTunerState.plugin import NAME, DESCRIPTION
+	from Plugins.Extensions.InfoBarTunerState.plugin import NAME, DESCRIPTION, extension
 	if plugins:
 		for p in plugins.getPlugins( where = PluginDescriptor.WHERE_EXTENSIONSMENU ):
 			if p.name == NAME:
@@ -189,8 +189,8 @@ class InfoBarTunerState(object):
 		# The Plugin starts before the InfoBar is instantiated
 		# Check every second if the InfoBar instance exists and try to bind our functions
 		# Is there an alternative solution?
-#		if config.infobartunerstate.show_infobar.value:
-#			self.forceBindInfoBarTimer.start(1000, False)
+		if config.infobartunerstate.show_infobar.value:
+			self.forceBindInfoBarTimer.start(1000, False)
 		
 		if config.infobartunerstate.show_overwrite.value:
 			overwriteInfoBar()
@@ -337,27 +337,30 @@ class InfoBarTunerState(object):
 				# Extract parameters
 				tuner, tunertype = getTuner( stream.getRecordService() ) 
 				ref = stream.getRecordServiceRef()
-				id = stream.screenIndex
+				ip = stream.clientIP
+				id = str(stream.screenIndex) + str(ip)
 				
 				# Delete references to avoid blocking tuners
 				del stream
 				
-				ip, port, host, client = "", "", "", ""
+				port, host, client = "", "", ""
 				
-				# Workaround to retrieve the client ip
-				# Change later and use the WebScreens getActiveStreamingClients if implemented
-				ipports = [ (win.ip, win.port) for win in self.entries.itervalues() ]
-				for conn in netstat(getstate='ESTABLISHED', getuid=False, getpid=False, readable=False):
-					# Check if it is a streaming connection
-					if conn[3] == '8001':
-						ip = conn[4]
-						port = conn[5]
-						# Check if ip and port is already known
-						if (ip, port) not in ipports:
-							break
-				else:
-					# No new connection found, leave it empty
-					ip, port, = "", ""
+#				# Workaround to retrieve the client ip
+#				# Change later and use the WebScreens getActiveStreamingClients if implemented
+#				ipports = [ (win.ip, win.port) for win in self.entries.itervalues() ]
+#				for conn in netstat(getstate='ESTABLISHED', getuid=False, getpid=False, readable=False):
+#					# Check if it is a streaming connection
+#					if conn[3] == '8001':
+#						ip = conn[4]
+#						port = conn[5]
+#						# Check if ip and port is already known
+#						if (ip, port) not in ipports:
+#							break
+#				else:
+#					# No new connection found, leave it empty
+#					ip, port, = "", ""
+				
+				#TODO Port is actually not given
 				
 				epg = ref and eEPGCache.getInstance()
 				event = epg and epg.lookupEventTime(ref, -1, 0)
@@ -387,7 +390,7 @@ class InfoBarTunerState(object):
 			elif event == StreamingWebScreen.EVENT_END:
 				
 				# Remove Finished Stream
-				id = stream.screenIndex
+				id = str(stream.screenIndex) + str(stream.clientIP)
 				# Delete references to avoid blocking tuners
 				del stream
 				
@@ -1008,7 +1011,7 @@ def getStream(id):
 	
 	for stream in streamingScreens:
 		if stream:
-			if id == stream.screenIndex:
+			if id == str(stream.screenIndex) + str(stream.clientIP):
 				return stream
 	return None
 
