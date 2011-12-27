@@ -36,7 +36,7 @@ from InfoBarTunerState import InfoBarTunerState, TunerStateInfo
 # Contants
 NAME = _("InfoBar Tuner State") 
 DESCRIPTION = _("Show InfoBar Tuner State")
-VERSION = "V0.9.2"
+VERSION = "V0.9.3"
 #TODO About
 
 
