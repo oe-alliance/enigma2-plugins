@@ -130,6 +130,9 @@ config.plugins.merlinEpgCenter.selectionPixmapLong = NoSave(ConfigText(default =
 # Use this to override the default tab text color
 config.plugins.merlinEpgCenter.tabTextColorSelected = NoSave(ConfigText(default = "#ef7f1a"))
 
+# Default is to show the text "Bouquet:" in front of a bouquet name. Use this option to hide it
+config.plugins.merlinEpgCenter.showBouquetText = NoSave(ConfigYesNo(True))
+
 
 ############################################################################################
 # CONFIG CLASSES

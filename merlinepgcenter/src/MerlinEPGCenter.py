@@ -252,6 +252,9 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		self.currentMode = None
 		
 		self.onLayoutFinish.append(self.startRun)
+		self.onShown.append(self.setListPixmaps)
+		self.onShown.append(self.setTabs)
+		self.onShown.append(self.setBouquetName)
 		
 	############################################################################################
 	# INITIALISATION & CLEANUP
@@ -1366,16 +1369,29 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 	
 	def getBouquetName(self):
 		name = self.bouquetList[self.currentBouquetIndex][0]
+		showBouquetText = config.plugins.merlinEpgCenter.showBouquetText.value
 		if self.infoBarInstance.servicelist.mode == MODE_TV:
 			if name[len(name) -5:] == ' (TV)':
-				return 'Bouquet: %s' % name[:len(name) -5]
+				if showBouquetText:
+					return 'Bouquet: %s' % name[:len(name) -5]
+				else:
+					return '%s' % name[:len(name) -5]
 			else:
-				return 'Bouquet: %s' % name # Partnerbox bouquet
+				if showBouquetText:
+					return 'Bouquet: %s' % name # Partnerbox bouquet
+				else:
+					return '%s' % name # Partnerbox bouquet
 		else:
 			if name[len(name) -8:] == ' (Radio)':
-				return 'Bouquet: %s' % name[:len(name) -8]
+				if showBouquetText:
+					return 'Bouquet: %s' % name[:len(name) -8]
+				else:
+					return '%s' % name[:len(name) -8]
 			else:
-				return 'Bouquet: %s' % name # Partnerbox bouquet
+				if showBouquetText:
+					return 'Bouquet: %s' % name # Partnerbox bouquet
+				else:
+					return '%s' % name # Partnerbox bouquet
 				
 	def setBouquetName(self):
 		self["bouquet"].setText(self.getBouquetName())
