@@ -276,11 +276,11 @@ class StreamingWebScreen(WebScreen):
 		WebScreen.__init__(self, session, request)
 		from Components.Sources.StreamService import StreamService
 		self["StreamService"] = StreamService(self.session.nav)
-		streamingScreens.append(self)
 		self.screenIndex = len(streamingScreens) - 1
-		self.stateChanged(StreamingWebScreen.EVENT_START)
-		self.onClose.append(boundFunction(self.stateChanged, self.EVENT_END))
 		self.clientIP = request.getAllHeaders().get('x-forwarded-for', request.getClientIP())
+		self.onClose.append(boundFunction(self.stateChanged, self.EVENT_END))
+		streamingScreens.append(self)
+		self.stateChanged(StreamingWebScreen.EVENT_START)
 
 	def stateChanged(self, event):
 		for f in streamingEvents:
