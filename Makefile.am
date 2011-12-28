@@ -55,6 +55,7 @@ SUBDIRS = \
 	partnerbox \
 	permanentclock \
 	pluginhider \
+	pluginsort \
 	podcast \
 	porncenter \
 	quickbutton \

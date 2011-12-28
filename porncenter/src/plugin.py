@@ -190,21 +190,17 @@ class PornCenterLocationSelection(Screen):
 
 	def __init__(self, session, dir="/"):
 		Screen.__init__(self, session)
-		
 		self["key_green"] = Label(_("Select"))
-		
 		try: self["filelist"] = FileList(dir, showDirectories=True, showFiles=False)
 		except: self["filelist"] = FileList("/", showDirectories, showFiles)
-		
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
 			{
 				"ok": self.okClicked,
 				"cancel": self.exit,
 				"green": self.select
 			}, -1)
-		
 		self.onLayoutFinish.append(self.updateDirectoryName)
-		
+
 	def okClicked(self):
 		if self["filelist"].canDescent():
 			self["filelist"].descent()

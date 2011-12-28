@@ -282,7 +282,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 				# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
 				self["red"].setText(_("Manage extensions"))
 				self["green"].setText(_("Sort") if not self.movemode else _("End Sort"))
-				self["SoftwareActions"].setEnabled(True)
+# 				self["SoftwareActions"].setEnabled(True)
 				self["PluginDownloadActions"].setEnabled(False)
 				self["ColorActions"].setEnabled(True)
 			else:
@@ -290,13 +290,13 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 				self["red"].setText(_("Remove Plugins"))
 				# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
 				self["green"].setText(_("Download Plugins"))
-				self["SoftwareActions"].setEnabled(False)
+# 				self["SoftwareActions"].setEnabled(False)
 				self["PluginDownloadActions"].setEnabled(True)
 				self["ColorActions"].setEnabled(False)
 		else:
 			self["red"].setText("")
 			self["green"].setText(_("Sort") if not self.movemode else _("End Sort"))
-			self["SoftwareActions"].setEnabled(False)
+# 			self["SoftwareActions"].setEnabled(False)
 			self["PluginDownloadActions"].setEnabled(False)
 			self["ColorActions"].setEnabled(True)
 
