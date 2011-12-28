@@ -718,7 +718,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			
 	def setNotifier(self):
 		config.plugins.merlinEpgCenter.primeTime.addNotifier(self.getPrimeTime, initial_call = False)
-		config.plugins.merlinEpgCenter.showVideoPicture.addNotifier(self.setVideoPicture, initial_call = True)
+		config.plugins.merlinEpgCenter.showVideoPicture.addNotifier(self.setVideoPicture, initial_call = False)
 		config.plugins.merlinEpgCenter.showEventInfo.addNotifier(self.setEventInfo, initial_call = True)
 		config.plugins.merlinEpgCenter.showInputHelp.addNotifier(self.setInputHelp, initial_call = False)
 		config.plugins.merlinEpgCenter.listStyle.addNotifier(self.setListStyle, initial_call = False)
@@ -768,8 +768,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		
 		for widget, font, fontSize in self.widgetFontSizes:
 			self[widget].instance.setFont(gFont(font, fontSize + diff))
-			
-		self.setDescriptionSize()
 			
 	def getPrimeTime(self, configElement = None):
 		now = localtime(time())
@@ -2091,7 +2089,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				self["videoPicture"].show()
 			else:
 				self["videoPicture"].hide()
-			self.setDescriptionSize()
 			
 	def setDescriptionSize(self):
 		# Invisible option to allow moving the videoPicture above the event description in skins
@@ -2144,7 +2141,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		
 		self.setUpcomingWidgets()
 		self.setVideoPicture()
-		self.setDescriptionSize()
 		self.setListPixmaps()
 		
 	def setListPixmaps(self):
