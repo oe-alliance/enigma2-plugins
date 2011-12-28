@@ -30,7 +30,7 @@ config.plugins.merlinEpgCenter.showBouquetText.setValue(False)
    <widget name="eventInfoSeparator" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/HD_Elgato/separator_v.png" position="861,104" size="3,548" zPosition="1" alphatest="on" />
    <widget name="picon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/PiconMissing.png" position="1140,123" size="100,60" zPosition="1" transparent="1" alphatest="on" />
    <widget name="serviceName" position="880,168" size="240,24" zPosition="1" font="Regular;22" transparent="1" halign="left" />
-   <widget name="eventTitle" position="880,114" size="240,46" zPosition="1" font="Regular;22" transparent="1" halign="left" valign="top" foregroundColor="#00ef7f1a"/>
+   <widget name="eventTitle" position="880,123" size="240,50" zPosition="1" font="Regular;22" transparent="1" halign="left" valign="top" foregroundColor="#00ef7f1a"/>
    <widget name="beginTime" position="880,202" size="66,20" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="center" />
    <widget name="eventProgress" position="950,203" size="80,15" zPosition="1" transparent="1" borderWidth="1" />
    <widget name="eventProgressImage" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_0.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_1.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_2.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_3.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_4.png" position="944,205" size="80,15" zPosition="1" transparent="1" alphatest="on" />
