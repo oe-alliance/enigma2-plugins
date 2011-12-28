@@ -50,7 +50,7 @@ config.plugins.merlinEpgCenter.showBouquetText.setValue(False)
     <widget source="global.CurrentTime" render="Label" position="1165,70" size="70,28" font="Regular;24" zPosition="3" halign="right" transparent="1">
       <convert type="ClockToText">Default</convert>
    </widget>
-   <widget source="global.CurrentTime" render="Label" position="1050,70" size="110,28" font="Regular;24" zPosition="3" halign="right" transparent="1">
+   <widget source="global.CurrentTime" render="Label" position="1030,70" size="130,28" font="Regular;24" zPosition="3" halign="right" transparent="1">
       <convert type="ClockToText">Format: %a %d. %b</convert>
    </widget>
    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/HD_Elgato/red.png" position=" 50,690" size="250,2" alphatest="on"/>
