@@ -62,7 +62,7 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
         # BUTTONS
         self["key_red"] = Button(_("Cancel"))
         self["key_green"] = Button(_("Save"))
-        self["key_yellow"] = Button(_(" "))
+        self["key_yellow"] = Button(" ")
         self["key_blue"] = Button(" ")
 
         self["setupActions"] = NumberActionMap(["SetupActions", "ColorActions"],
