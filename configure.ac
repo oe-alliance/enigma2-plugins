@@ -497,6 +497,22 @@ startuptostandby/Makefile
 startuptostandby/meta/Makefile
 startuptostandby/src/Makefile
 
+SubsDownloader2/Makefile
+SubsDownloader2/meta/Makefile
+SubsDownloader2/src/Makefile
+SubsDownloader2/src/pic/Makefile
+SubsDownloader2/src/pic/buttons/Makefile
+SubsDownloader2/src/pic/buttons/HD/Makefile
+SubsDownloader2/src/pic/res/Makefile
+SubsDownloader2/src/SourceCode/Makefile
+SubsDownloader2/src/SourceCode/chardet/Makefile
+SubsDownloader2/src/SourceCode/periscope/Makefile
+SubsDownloader2/src/SourceCode/periscope/services/Makefile
+SubsDownloader2/src/SourceCode/periscope/services/BierDopje/Makefile
+SubsDownloader2/src/SourceCode/periscope/services/OpenSubtitle/Makefile
+SubsDownloader2/src/SourceCode/xbmc_subtitles/Makefile
+SubsDownloader2/src/SourceCode/xbmc_subtitles/services/Makefile
+
 svdrp/Makefile
 svdrp/meta/Makefile
 svdrp/src/Makefile
