@@ -164,9 +164,6 @@ class PiconLoader():
 	def piconPathChanged(self, configElement = None):
 		self.nameCache.clear()
 		
-	def removeNotifier(self):
-		config.plugins.merlinEpgCenter.epgPaths.removeNotifier(self.piconPathChanged)
-		
 def findDefaultPicon(serviceName):
 	searchPaths = (eEnv.resolve('${datadir}/enigma2/%s/'), '/media/cf/%s/', '/media/usb/%s/')
 	

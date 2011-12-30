@@ -733,8 +733,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		self["list"].onSelectionChanged.remove(self.onListSelectionChanged)
 		self["timerlist"].onSelectionChanged.remove(self.onListSelectionChanged)
 		
-		self.piconLoader.removeNotifier()
-		
 		for configTabObject in self.configTabObjectList:
 			configTabObject.removeNotifier()
 		
