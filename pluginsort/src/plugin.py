@@ -10,6 +10,7 @@ from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Components.PluginComponent import PluginComponent, plugins
 from Components.PluginList import PluginEntryComponent
+from Components.Label import Label
 from Tools.Directories import resolveFilename, fileExists, SCOPE_SKIN_IMAGE, SCOPE_PLUGINS
 from Tools.BoundFunction import boundFunction
 from Screens.InfoBarGenerics import InfoBarPlugins
@@ -198,12 +199,14 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		OriginalPluginBrowser.__init__(self, *args, **kwargs)
 		self.skinName = ["SortingPluginBrowser", "PluginBrowser"]
 
+		self["yellow"] = Label()
+
 		self["ColorActions"] = ActionMap(["ColorActions"],
 			{
-				"green": self.toggleMoveMode,
+				"yellow": self.toggleMoveMode,
 			}, -2
 		)
-		self["ColorActions"].setEnabled(False)
+# 		self["ColorActions"].setEnabled(False)
 
 		self["WizardActions"] = ActionMap(["WizardActions"],
 			{
@@ -278,25 +281,17 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		self.list = [PluginEntryComponent(plugin) for plugin in self.pluginlist]
 		self["list"].l.setList(self.list)
 		if self.where == PluginDescriptor.WHERE_PLUGINMENU:
-			if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
-				# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
-				self["red"].setText(_("Manage extensions"))
-				self["green"].setText(_("Sort") if not self.movemode else _("End Sort"))
-# 				self["SoftwareActions"].setEnabled(True)
-				self["PluginDownloadActions"].setEnabled(False)
-				self["ColorActions"].setEnabled(True)
-			else:
-				# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
-				self["red"].setText(_("Remove Plugins"))
-				# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
-				self["green"].setText(_("Download Plugins"))
-# 				self["SoftwareActions"].setEnabled(False)
-				self["PluginDownloadActions"].setEnabled(True)
-				self["ColorActions"].setEnabled(False)
+			# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+			self["red"].setText(_("Remove Plugins"))
+			# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+			self["green"].setText(_("Download Plugins"))
+			self["yellow"].setText(_("Sort") if not self.movemode else _("End Sort"))
+			self["PluginDownloadActions"].setEnabled(True)
+			self["ColorActions"].setEnabled(True)
 		else:
 			self["red"].setText("")
-			self["green"].setText(_("Sort") if not self.movemode else _("End Sort"))
-# 			self["SoftwareActions"].setEnabled(False)
+			self["green"].setText("")
+			self["yellow"].setText(_("Sort") if not self.movemode else _("End Sort"))
 			self["PluginDownloadActions"].setEnabled(False)
 			self["ColorActions"].setEnabled(True)
 
@@ -371,7 +366,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			(_("move event extensions"), boundFunction(self.openMover, PluginDescriptor.WHERE_EVENTINFO)),
 		]
 
-		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginHider/plugin.py")):
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginHider/plugin.pyo")):
 			list.insert(0, (_("hide selected plugin"), self.hidePlugin))
 
 		if pluginSortHelp:
@@ -406,8 +401,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		if self.movemode:
 			if self.selected != -1:
 				self.save()
-			if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
-				self["green"].setText(_("Sort"))
+			self["yellow"].setText(_("Sort"))
 
 			for plugin in self.pluginlist:
 				pluginWeights.set(plugin)
@@ -418,8 +412,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 				self.movemode = False
 				return self.close()
 		else:
-			if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
-				self["green"].setText(_("End Sort"))
+			self["yellow"].setText(_("End Sort"))
 		self.movemode = not self.movemode
 
 def autostart(reason, *args, **kwargs):
