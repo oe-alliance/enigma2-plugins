@@ -111,8 +111,9 @@ config.plugins.merlinEpgCenter.showShortDescInEventInfo = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.adjustFontSize = ConfigSelectionNumber(min = -5, max = 5, stepwidth = 1, default = 0)
 config.plugins.merlinEpgCenter.mainTab = ConfigSelection(default = "-1", choices = TAB_CHOICES)
 config.plugins.merlinEpgCenter.embeddedVolume = ConfigYesNo(False)
+config.plugins.merlinEpgCenter.columnSpace = ConfigSelectionNumber(min = 0, max = 40, stepwidth = 1, default = 5, wraparound = True)
 
-# INVISIBLE OPTION
+# INVISIBLE OPTIONS
 # These config values should be set in the skin in a <applet type="onLayoutFinish"></applet> tag
 
 # Set it to false to disable the dependency between the videoPicture/MiniTv and the description widget.
@@ -197,6 +198,7 @@ class ConfigListSettings(ConfigBaseTab):
 		cfgList.append(getConfigListEntry(_("Show duration:"), config.plugins.merlinEpgCenter.showDuration))
 		cfgList.append(getConfigListEntry(_("Show multi colored begin/remain times:"), config.plugins.merlinEpgCenter.showColoredEpgTimes))
 		cfgList.append(getConfigListEntry(_("Increase list item height:"), config.plugins.merlinEpgCenter.listItemHeight))
+		cfgList.append(getConfigListEntry(_("Space between columns:"), config.plugins.merlinEpgCenter.columnSpace))
 		cfgList.append(getConfigListEntry(_("List style:"), config.plugins.merlinEpgCenter.listStyle))
 		cfgList.append(getConfigListEntry(_("Progress bar style:"), config.plugins.merlinEpgCenter.listProgressStyle))
 		cfgList.append(getConfigListEntry(_("Number of upcoming events to show:"), config.plugins.merlinEpgCenter.numNextEvents))

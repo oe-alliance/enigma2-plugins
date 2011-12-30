@@ -200,6 +200,7 @@ class EpgCenterList(GUIComponent):
 		self.l.setItemHeight(self.itemHeight)
 		
 	def buildEpgEntry(self, ignoreMe, eventid, sRef, begin, duration, title, short, desc):
+		columnSpace = config.plugins.merlinEpgCenter.columnSpace.getValue()
 		progressPixmap = None
 		offsetLeft = 5
 		offsetRight = self.maxWidth - 5 - 8 # 8 = timer pixmap width, 5 = border
@@ -326,7 +327,7 @@ class EpgCenterList(GUIComponent):
 			else:
 				width = self.maxWidth * 4 / 100
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, chNumber))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if config.plugins.merlinEpgCenter.showPicons.value:
 			if ((self.mode == SINGLE_EPG and not self.similarShown) or self.mode == UPCOMING) and self.instance.getCurrentIndex() != 0:
@@ -337,7 +338,7 @@ class EpgCenterList(GUIComponent):
 			width = self.piconSize.width()
 			if picon:
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetLeft, (self.itemHeight - self.baseHeight) / 2, width, self.itemHeight, picon))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if config.plugins.merlinEpgCenter.showServiceName.value:
 			if self.videoMode == MODE_SD:
@@ -354,7 +355,7 @@ class EpgCenterList(GUIComponent):
 					serviceName = ServiceReference(sRef).getServiceName()
 					
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceName))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if self.mode == MULTI_EPG_NOW and not self.similarShown:
 			if self.videoMode == MODE_SD:
@@ -384,7 +385,7 @@ class EpgCenterList(GUIComponent):
 				else:
 					font = 3
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, width, self.halfItemHeight - border, font, RT_HALIGN_CENTER|RT_VALIGN_TOP, str(percent) + "%", secondLineColor))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 		else:
 			if self.videoMode == MODE_SD:
 				width = self.maxWidth * 18 / 100
@@ -396,7 +397,7 @@ class EpgCenterList(GUIComponent):
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, width, self.halfItemHeight - border, 2, RT_HALIGN_CENTER|RT_VALIGN_TOP, fd, secondLineColor))
 			else:
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_CENTER|RT_VALIGN_CENTER, timeString, textColor))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if begin != None and duration != None:
 			(timerPixmaps, zapPixmaps, isRunning) = self.getTimerPixmapsForEntry(sRef, eventid, begin, duration)
@@ -511,27 +512,27 @@ class EpgCenterList(GUIComponent):
 					res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetRight, posY, 8, height, self.timer_add_pixmap))
 					
 		if config.plugins.merlinEpgCenter.showDuration.value:
-			width = self.maxWidth * 7 / 100
-			offsetRight = offsetRight - width - 5
+			width = self.maxWidth * 8 / 100
+			offsetRight = offsetRight - width
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, remainBeginString, progColor))
 		else:
 			width = self.maxWidth * 6 / 100
-			offsetRight = offsetRight - width - 5
+			offsetRight = offsetRight - width
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, remainBeginString, progColor))
 			
 		if config.plugins.merlinEpgCenter.showDuration.value:
 			width = self.maxWidth * 6 / 100
 			offsetRight = offsetRight - width
 			
-		# TODO description + short laenger machen wenn showDuration aus ist
+		titleWidth = offsetRight - offsetLeft - columnSpace
 		if self.listStyle == STYLE_SINGLE_LINE:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, offsetRight - offsetLeft, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, title, textColor))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, titleWidth, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, title, textColor))
 		elif self.listStyle == STYLE_SHORT_DESCRIPTION:
 			if short and title != short:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, offsetRight - offsetLeft, self.halfItemHeight - border, 1, RT_HALIGN_LEFT|RT_VALIGN_TOP, title, textColor))
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, offsetRight - offsetLeft, self.halfItemHeight - border, 2, RT_HALIGN_LEFT|RT_VALIGN_TOP, short, secondLineColor))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, titleWidth, self.halfItemHeight - border, 1, RT_HALIGN_LEFT|RT_VALIGN_TOP, title, textColor))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, titleWidth, self.halfItemHeight - border, 2, RT_HALIGN_LEFT|RT_VALIGN_TOP, short, secondLineColor))
 			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, offsetRight - offsetLeft, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, title, textColor))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, titleWidth, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, title, textColor))
 			
 		if config.plugins.merlinEpgCenter.showDuration.value:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, duraString, textColor))
