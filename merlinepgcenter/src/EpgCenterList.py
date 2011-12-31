@@ -228,31 +228,34 @@ class EpgCenterList(GUIComponent):
 					timeValue = (begin + duration - now) /  60 + 1
 				else:
 					timeValue = (now - begin) /  60
-				
-			if (KEEP_OUTDATED_TIME == 0 and (begin + duration) > now) or (KEEP_OUTDATED_TIME != 0 and (begin + duration) > now):
-				if config.plugins.merlinEpgCenter.showDuration.value:
-					remainBeginString = " I "
-				else:
-					remainBeginString = ""
 					
-				if timeValue >= 0:
-					remainBeginString += "+"
-				if fabs(timeValue) >= 120 and fabs(timeValue) < 1440:
-					timeValue /= 60
-					remainBeginString += "%0dh" % timeValue
-				elif fabs(timeValue) >= 1440:
-					timeValue = (timeValue / 1440) +1
-					remainBeginString += "%02dd" % timeValue
-				else:
-					if timeValue < 0:
-						remainBeginString += "%03d" % timeValue
+			if config.plugins.merlinEpgCenter.showBeginRemainTime.value:
+				if (KEEP_OUTDATED_TIME == 0 and (begin + duration) > now) or (KEEP_OUTDATED_TIME != 0 and (begin + duration) > now):
+					if config.plugins.merlinEpgCenter.showDuration.value:
+						remainBeginString = " I "
 					else:
-						remainBeginString += "%02d" % timeValue
-			else:
-				if config.plugins.merlinEpgCenter.showDuration.value:
-					remainBeginString = " I <->"
+						remainBeginString = ""
+					
+					if timeValue >= 0:
+						remainBeginString += "+"
+					if fabs(timeValue) >= 120 and fabs(timeValue) < 1440:
+						timeValue /= 60
+						remainBeginString += "%0dh" % timeValue
+					elif fabs(timeValue) >= 1440:
+						timeValue = (timeValue / 1440) +1
+						remainBeginString += "%02dd" % timeValue
+					else:
+						if timeValue < 0:
+							remainBeginString += "%03d" % timeValue
+						else:
+							remainBeginString += "%02d" % timeValue
 				else:
-					remainBeginString = "<->"
+					if config.plugins.merlinEpgCenter.showDuration.value:
+						remainBeginString = " I <->"
+					else:
+						remainBeginString = "<->"
+			else:
+				remainBeginString = ""
 				
 			if config.plugins.merlinEpgCenter.showDuration.value:
 				duraString = "%d" % (duration / 60)
@@ -274,7 +277,7 @@ class EpgCenterList(GUIComponent):
 				progColor = parseColor("eventNotAvailable").argb()
 			except:
 				progColor = 0x777777
-		elif config.plugins.merlinEpgCenter.showColoredEpgTimes.value:
+		elif config.plugins.merlinEpgCenter.showBeginRemainTime.value and config.plugins.merlinEpgCenter.showColoredEpgTimes.value:
 			outdated = False
 			if remainBeginString.endswith('h'): # begins in... hours
 				progColor = 0x00ef7f1a # brown
@@ -511,17 +514,20 @@ class EpgCenterList(GUIComponent):
 					height = self.itemHeight - 4
 					res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetRight, posY, 8, height, self.timer_add_pixmap))
 					
-		if config.plugins.merlinEpgCenter.showDuration.value:
+		if config.plugins.merlinEpgCenter.showBeginRemainTime.value and config.plugins.merlinEpgCenter.showDuration.value:
 			width = self.maxWidth * 8 / 100
 			offsetRight = offsetRight - width
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, remainBeginString, progColor))
-		else:
+		elif config.plugins.merlinEpgCenter.showBeginRemainTime.value:
 			width = self.maxWidth * 6 / 100
 			offsetRight = offsetRight - width
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, remainBeginString, progColor))
 			
 		if config.plugins.merlinEpgCenter.showDuration.value:
 			width = self.maxWidth * 6 / 100
+			offsetRight = offsetRight - width
+		elif not config.plugins.merlinEpgCenter.showDuration.value and not config.plugins.merlinEpgCenter.showBeginRemainTime.value:
+			width = self.maxWidth * 1 / 100
 			offsetRight = offsetRight - width
 			
 		titleWidth = offsetRight - offsetLeft - columnSpace

@@ -99,6 +99,7 @@ config.plugins.merlinEpgCenter.limitSearchToBouquetServices = ConfigYesNo(False)
 config.plugins.merlinEpgCenter.exitOnTvRadioSwitch = ConfigYesNo(False)
 config.plugins.merlinEpgCenter.numNextEvents = ConfigSelectionNumber(min = 0, max = 3, stepwidth = 1, default = 1, wraparound = True)
 config.plugins.merlinEpgCenter.showDuration = ConfigYesNo(True)
+config.plugins.merlinEpgCenter.showBeginRemainTime = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.listProgressStyle = ConfigSelection(default = STYLE_PIXMAP_BAR, choices = [
 				(STYLE_SIMPLE_BAR, _("simple")),
 				(STYLE_PIXMAP_BAR, _("gradient")),
@@ -196,7 +197,9 @@ class ConfigListSettings(ConfigBaseTab):
 			cfgList.append(getConfigListEntry(_("Use picons (50x30) from:"), config.plugins.merlinEpgCenter.epgPaths))
 		cfgList.append(getConfigListEntry(_("Show service name:"), config.plugins.merlinEpgCenter.showServiceName))
 		cfgList.append(getConfigListEntry(_("Show duration:"), config.plugins.merlinEpgCenter.showDuration))
-		cfgList.append(getConfigListEntry(_("Show multi colored begin/remain times:"), config.plugins.merlinEpgCenter.showColoredEpgTimes))
+		cfgList.append(getConfigListEntry(_("Show begin/remain times:"), config.plugins.merlinEpgCenter.showBeginRemainTime))
+		if config.plugins.merlinEpgCenter.showBeginRemainTime.value:
+			cfgList.append(getConfigListEntry(_("Show multi colored begin/remain times:"), config.plugins.merlinEpgCenter.showColoredEpgTimes))
 		cfgList.append(getConfigListEntry(_("Increase list item height:"), config.plugins.merlinEpgCenter.listItemHeight))
 		cfgList.append(getConfigListEntry(_("Space between columns:"), config.plugins.merlinEpgCenter.columnSpace))
 		cfgList.append(getConfigListEntry(_("List style:"), config.plugins.merlinEpgCenter.listStyle))
@@ -207,10 +210,12 @@ class ConfigListSettings(ConfigBaseTab):
 	def setNotifier(self):
 		config.plugins.merlinEpgCenter.showPicons.addNotifier(self.expandableSettingChanged, initial_call = False)
 		config.plugins.merlinEpgCenter.epgPaths.addNotifier(self.piconPathChanged, initial_call = False)
+		config.plugins.merlinEpgCenter.showBeginRemainTime.addNotifier(self.expandableSettingChanged, initial_call = False)
 		
 	def removeNotifier(self):
 		config.plugins.merlinEpgCenter.showPicons.removeNotifier(self.expandableSettingChanged)
 		config.plugins.merlinEpgCenter.epgPaths.removeNotifier(self.piconPathChanged)
+		config.plugins.merlinEpgCenter.showBeginRemainTime.removeNotifier(self.expandableSettingChanged)
 		
 	def piconPathChanged(self, configElement = None):
 		config.plugins.merlinEpgCenter.epgPaths.save()
