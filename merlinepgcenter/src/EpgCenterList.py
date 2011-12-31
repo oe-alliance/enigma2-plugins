@@ -918,6 +918,7 @@ class EpgCenterTimerlist(TimerList):
 		config.plugins.merlinEpgCenter.adjustFontSize.removeNotifier(self.setFontSizes)
 		
 	def buildTimerEntry(self, timer, processed):
+		columnSpace = config.plugins.merlinEpgCenter.columnSpace.getValue()
 		width = self.l.getItemSize().width()
 		offsetLeft = 5 # 5 = left border
 		offsetRight = self.maxWidth - 5 # 5 = right border
@@ -962,7 +963,7 @@ class EpgCenterTimerlist(TimerList):
 			width = self.maxWidth * 3 / 100
 			# 30 breite
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, number))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if config.plugins.merlinEpgCenter.showPicons.value:
 			width = self.piconSize.width()
@@ -974,7 +975,7 @@ class EpgCenterTimerlist(TimerList):
 				picon = self.piconLoader.getPicon(str(timer.service_ref))
 			if picon:
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetLeft, (self.itemHeight - self.baseHeight) / 2, width, height, picon))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if config.plugins.merlinEpgCenter.showServiceName.value:
 			if self.videoMode == MODE_SD:
@@ -988,7 +989,7 @@ class EpgCenterTimerlist(TimerList):
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.service_ref.getServiceName()))
 			else: # AutoTimer entry
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "AutoTimer"))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if self.videoMode == MODE_SD:
 			width = self.maxWidth * 18 / 100
@@ -1003,7 +1004,7 @@ class EpgCenterTimerlist(TimerList):
 		else: # AutoTimer entry
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_CENTER|RT_VALIGN_CENTER, timeString))
 			
-		offsetLeft = offsetLeft + width + 5 # abstand
+		offsetLeft = offsetLeft + width + columnSpace
 		
 		width = self.maxWidth * 22 / 100
 		offsetRight = offsetRight - width
