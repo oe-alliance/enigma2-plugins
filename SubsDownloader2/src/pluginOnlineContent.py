@@ -12,7 +12,7 @@ from Components.Ipkg import IpkgComponent
 
 zlib_link = "http://subs-downloader.googlecode.com/files/libzen_0.4.22-0.0_mipsel.ipk"
 libmediainfo_link = "http://subs-downloader.googlecode.com/files/libmediainfo_0.7.50-0.0_mipsel.ipk"
-flag_counter = ""
+#flag_counter = ""
 flag_counter_url = "http://s10.flagcounter.com/count/gEB/bg_FFFFFF/txt_000000/border_CCCCCC/columns_9/maxflags_50/viewers_Plugin+Users/labels_1/pageviews_1/flags_0/"
 
 class IsNewVersionCheck(threading.Thread):
@@ -110,10 +110,11 @@ class PluginIpkUpdate(Screen, IsNewVersionCheck):
 	    self.close(None)		
 		
 		
-def flagcounetr():
-    flag = urllib.urlopen(flag_counter_url)
-    flag_counter_png_data = flag.read()
+def flagcounetr(CallBackFunction):
+    flag = urllib.urlopen(flag_counter_url,)
+    Subtitle_Downloader_temp_dir = '/tmp/SubsDownloader_cache/' # Sprawdzac czy sciezka jest taka sama jak w plugin.py
+    picture_file = open(Subtitle_Downloader_temp_dir+"plugin_users.png", "wb")
+    picture_file.write(flag.read())
     flag.close()
-    #savefile = open("/tmp/flag.png","wb")
-    #savefile.write(flag_counter_png_data)
-    #savefile.close()
+    picture_file.close()
+    CallBackFunction

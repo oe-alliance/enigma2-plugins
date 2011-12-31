@@ -95,7 +95,6 @@ config.plugins.subsdownloader.SubsDownloader2ndLang = ConfigSelection(default ="
 config.plugins.subsdownloader.SubsDownloader3rdLang = ConfigSelection(default ="German", choices = SubsDownloaderLangs)
 config.plugins.subsdownloader.Napisy24SearchMethod = ConfigSelection(default = "IMDB", choices = [(_("IMDB"),"IMDB"), (_("IMDB then movie filname"),"IMDB then movie filname"), (_("movie filname"),"movie filname")])
 
-
 class SubsDownloaderApplication(Screen):
 	def __init__(self, session, args = 0):
 		
@@ -104,6 +103,8 @@ class SubsDownloaderApplication(Screen):
 		global Screen_width
 		global Screen_height
 		global is_libmediainfo
+		global Subtitle_Downloader_temp_dir
+		Subtitle_Downloader_temp_dir = '/tmp/SubsDownloader_cache/'
 		
 		Screen_width= getDesktop(0).size().width() #1280		
 		Screen_height = getDesktop(0).size().height() #720		
@@ -225,10 +226,10 @@ class SubsDownloaderApplication(Screen):
 		self.CommertialPicture = ePicLoad()
 		self["commertialPicture"] = Pixmap()
 		self.CommertialPicture.PictureData.get().append(self.DecodeCommertialPictureAction)
-		#self.CommertialPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/none1.jpg"
-		flagcounetr() #remove it in next veriosn
-		self.CommertialPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/commertial_banner.jpg"
+		self.CommertialPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/none1.jpg"
 		self.onLayoutFinish.append(self.Show_Commertial_Picture)
+		
+		flagcounetr(self.display_Commmertial_Picture(Subtitle_Downloader_temp_dir+"plugin_users.png")) #remove it in next veriosn
 
 		"""Oczywiscie trzeba stworzyc widget i pokopiowac odpowiednie funkcje inicjalizujace"""
 		#PICTURE INITIALIZATION
@@ -285,12 +286,6 @@ class SubsDownloaderApplication(Screen):
 	def display_Server_Picture(self):
 		"""Function display suittalbe picture in ["serverPicture"] (based on subtitle server)""" 
 		self.serverPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/%s.jpg" % config.plugins.subsdownloader.subtitleserver.value
-		#if config.plugins.subsdownloader.subtitleserver.value == "OpenSubtitle":
-		#	self.serverPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/OpenSubtitle.jpg"
-		#if config.plugins.subsdownloader.subtitleserver.value == "NapiProjekt":
-		#	self.serverPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/NapiProject.jpg"
-		#if config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
-		#	self.serverPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/Napisy24.jpg"		
 		self.ServerPicture.startDecode(self.serverPicturePath)
 		
 	def Show_Server_Picture(self):
@@ -317,8 +312,10 @@ class SubsDownloaderApplication(Screen):
 		#text = picInfo.split('\n',1)    #WYSWIETLA INFORMACJE NA TEMAT OBRAZKA
 		#self["label"].setText(text[1])  #WYSWIETLA INFORMACJE NA TEMAT OBRAZKA		
 		
-	def display_Commmertial_Picture(self):
-		pass
+	def display_Commmertial_Picture(self, picture_path):
+		self.CommertialPicturePath = picture_path
+		self.CommertialPicture.startDecode(self.CommertialPicturePath)
+		
 		
 	
 # !!!!!!!!!!!! PICTURE FUNCTIONS !!!!!!!!!!!!!!	
@@ -476,13 +473,14 @@ class SubsDownloaderApplication(Screen):
 			if self.return_media_kind(self.return_extention(self.movie_filename))=="movie":
 				if config.plugins.subsdownloader.subtitleserver.value in PERISCOPE_PLUGINS: #== "OpenSubtitle":
 					exec('from Plugins.Extensions.SubsDownloader2.SourceCode.periscope.services.%s.services import %s as SERVICE') % (config.plugins.subsdownloader.subtitleserver.value,config.plugins.subsdownloader.subtitleserver.value)
-					self.subtitles = SERVICE(None,'/tmp/SubsDownloader_cache/')
-					try:
-						self.subtitle_database=self.subtitles.process(self.movie_filename,[config.plugins.subsdownloader.SubsDownloader1stLang.value,config.plugins.subsdownloader.SubsDownloader2ndLang.value,config.plugins.subsdownloader.SubsDownloader3rdLang.value])
-					except:
-						pass
+					self.subtitles = SERVICE(None,Subtitle_Downloader_temp_dir)
+					#try:
+					self.subtitle_database=self.subtitles.process(self.movie_filename,[config.plugins.subsdownloader.SubsDownloader1stLang.value,config.plugins.subsdownloader.SubsDownloader2ndLang.value,config.plugins.subsdownloader.SubsDownloader3rdLang.value])
+					#except:
+					#	pass
 					#TODO TU BY SIE PRZYDALA OBSLUGA WYJATKOW Z KOMENDY POWYZEJ
-					if len(self.subtitle_database) == 0:
+					#if len(self.subtitle_database) == 0:
+					if self.subtitle_database == []:	
 						self.clearSubList()
 						self.session.open(MessageBox,_("There is no subtitle on this server to Your movie. \nPlease try another language or subtitle server.\n\nIf error still appears please check network connection with server."), MessageBox.TYPE_INFO, timeout = 5)
 					else:
@@ -783,7 +781,7 @@ class SubsDownloaderApplication(Screen):
 			#TODO OTHER SUBTITLE SERVERS HANDLE
 				
 	def closeApplication(self):
-		os.system('rm -r /tmp/SubsDownloader_cache')
+		os.system('rm -r %s' % Subtitle_Downloader_temp_dir)
 		print "\n[SubsDownloaderApplication] cancel\n"
 		self.session.nav.playService(self.altservice)
 		if config.plugins.subsdownloader.pathSave.value == True:
