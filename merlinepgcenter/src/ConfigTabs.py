@@ -136,8 +136,8 @@ config.plugins.merlinEpgCenter.tabTextColorSelected = NoSave(ConfigText(default 
 config.plugins.merlinEpgCenter.showBouquetText = NoSave(ConfigYesNo(True))
 
 # Allows changing the color of the event title in lists
-config.plugins.merlinEpgCenter.titleColor = NoSave(ConfigInteger(default = 0x00ff8000))
-config.plugins.merlinEpgCenter.titleColorSelected = NoSave(ConfigInteger(default = 0x00ffed00))
+config.plugins.merlinEpgCenter.titleColor = NoSave(ConfigInteger(default = 0x00ffffff))
+config.plugins.merlinEpgCenter.titleColorSelected = NoSave(ConfigInteger(default = 0x00ffffff))
 
 
 ############################################################################################
