@@ -532,7 +532,7 @@ class EpgCenterList(GUIComponent):
 			
 		titleWidth = offsetRight - offsetLeft - columnSpace
 		if self.listStyle == STYLE_SINGLE_LINE:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, titleWidth, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, title, textColor))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, titleWidth, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, title, config.plugins.merlinEpgCenter.titleColor.value, config.plugins.merlinEpgCenter.titleColorSelected.value))
 		elif self.listStyle == STYLE_SHORT_DESCRIPTION:
 			if short and title != short:
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, titleWidth, self.halfItemHeight - border, 1, RT_HALIGN_LEFT|RT_VALIGN_TOP, title, textColor))
@@ -1014,7 +1014,7 @@ class EpgCenterTimerlist(TimerList):
 		
 		width = self.maxWidth * 22 / 100
 		offsetRight = offsetRight - width
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, offsetRight - offsetLeft, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, offsetRight - offsetLeft, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.name, config.plugins.merlinEpgCenter.titleColor.value, config.plugins.merlinEpgCenter.titleColorSelected.value))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, state, color))
 		
 		return res
