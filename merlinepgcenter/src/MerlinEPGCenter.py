@@ -2150,6 +2150,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		if backgroundPixmap is not None:
 			self["timerlist"].instance.setBackgroundPicture(backgroundPixmap)
 			self["list"].instance.setBackgroundPicture(backgroundPixmap)
+			self["upcoming"].instance.setBackgroundPicture(backgroundPixmap)
 			self["history"].instance.setBackgroundPicture(backgroundPixmap)
 			self["settings"].instance.setBackgroundPicture(backgroundPixmap)
 			
