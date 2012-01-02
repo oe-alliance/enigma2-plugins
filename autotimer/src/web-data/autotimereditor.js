@@ -451,6 +451,12 @@ var AutoTimerEditController = Class.create(Controller, {
 		}
 		this.onchangeCheckbox( $('usebouquets') );
 		this.onchangeCheckbox( $('useservices') );
+		var services = $$('.service');
+		for (var i = 0; i < services.size(); i++) {
+			if (services[i].lastElementChild.className == 'add'){
+				this.onchangeSelectBouquet(services[i].firstElementChild.firstElementChild);
+			}
+		}
 		
 		AnyTime.noPicker( 'from' );
 		AnyTime.picker( 'from', { format: "%H:%i" } );
