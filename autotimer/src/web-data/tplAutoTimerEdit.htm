@@ -57,11 +57,23 @@
 					<tr>
 						<td class="optionTitle">Timer type:</td>
 						<td class="optionContent">
-							<select id="justplay" size="1" class="select">
-								{for e in justplay}
-									<option value="${e.value}" ${e.selected}>${e.txt}</option>
-								{/for}	
-							</select>
+							<table border="0" cellpadding="0" cellspacing="0"> 
+								<tr>
+									<td class="optionMain">
+										<select id="justplay" size="1" class="select">
+											{for e in justplay}
+												<option value="${e.value}" ${e.selected}>${e.txt}</option>
+											{/for}	
+										</select>
+									</td>
+									<td>
+										<div id="justplaycontent" class="optionSub">
+											Set end time:
+											<input id="setEndtime" type="checkbox" class="input" ${setEndtime}>
+										</div>
+									</td>
+								</tr>
+							</table>
 						</td>
 					</tr>
 					<tr>

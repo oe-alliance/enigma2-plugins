@@ -437,13 +437,14 @@ var AutoTimerEditController = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
+		this.onchangeSelect( $('justplay') );
 		this.onchangeCheckbox( $('timespan') );
 		this.onchangeCheckbox( $('timeframe') );
 		this.onchangeCheckbox( $('offset') );
 		this.onchangeCheckbox( $('maxdurationavailable') );
 		this.onchangeCheckbox( $('locationavailable') );
 		this.onchangeSelectAfterEvent( $('afterevent') );
-		this.onchangeSelectCounter( $('counter') );
+		this.onchangeSelect( $('counter') );
 		this.onchangeCheckbox( $('usefilters') );
 		var filterwheres = $$('.filterwhere');
 		for (var i = 0; i < filterwheres.size(); i++) {
@@ -471,7 +472,7 @@ var AutoTimerEditController = Class.create(Controller, {
 		AnyTime.noPicker( 'aftereventto' );
 		AnyTime.picker( 'aftereventto', { format: "%H:%i" } );
 	},
-
+	
 	onchangeCheckbox: function(x) {
 		if (x.checked){
 			$(x.id+'content').style.display = 'block';
@@ -479,7 +480,15 @@ var AutoTimerEditController = Class.create(Controller, {
 			$(x.id+'content').style.display = 'none';
 		}
 	},
-
+	
+	onchangeSelect: function(x) {
+		if (x.value > 0){
+			$(x.id+'content').style.display = 'block';
+		} else{
+			$(x.id+'content').style.display = 'none';
+		}
+	},
+	
 	onchangeSelectAfterEvent: function(x) {
 		if (x.value == 'default'){
 			x.nextElementSibling.checked = '';
@@ -489,15 +498,7 @@ var AutoTimerEditController = Class.create(Controller, {
 		}
 		this.onchangeCheckbox( $('aftereventusetimespan') );
 	},
-
-	onchangeSelectCounter: function(x) {
-		if (x.value > 0){
-			$(x.id+'content').style.display = 'block';
-		} else{
-			$(x.id+'content').style.display = 'none';
-		}
-	},
-
+	
 	onchangeSelectFilter: function(x) {
 		if (x.value == 'dayofweek'){
 			x.parentNode.nextElementSibling.children[0].style.display = 'none';
@@ -622,6 +623,10 @@ var AutoTimerEditController = Class.create(Controller, {
 				return;
 			}
 			data[options[id]] = $(options[id]).value;
+		}
+		
+		if ($('justplay').value > 0){
+				data['setEndtime']            = ($('setEndtime').checked) ? '1' : '0';
 		}
 		
 		data['overrideAlternatives'] = ($('overrideAlternatives').checked) ? '1' : '0';
@@ -828,6 +833,12 @@ var AutoTimerEditController = Class.create(Controller, {
 	},
 	
 	registerEvents: function(){
+		$('justplay').on(
+			'change',
+			function(event, element){
+				this.onchangeSelect(element);
+			}.bind(this)
+		);
 		$('timespan').on(
 			'change',
 			function(event, element){
@@ -873,7 +884,7 @@ var AutoTimerEditController = Class.create(Controller, {
 		$('counter').on(
 			'change',
 			function(event, element){
-				this.onchangeSelectCounter(element);
+				this.onchangeSelect(element);
 			}.bind(this)
 		);
 		$('taglist').on(
@@ -1288,7 +1299,15 @@ function AutoTimer(xml, defaults){
 	options['0'] = 'record';
 	options['1'] = 'zap';
 	this.justplay = createOptionList(options, justplay);
-
+	
+	var setEndtime = getAttribute(xml, 'setEndtime', defaults);
+	if (setEndtime==undefined || setEndtime=='1'){
+		setEndtime = 'checked';
+	}else{
+		setEndtime = '';
+	}
+	this.setEndtime = setEndtime;
+	
 	this.overrideAlternatives = (getAttribute(xml, 'overrideAlternatives', defaults)) ? 'checked' : '';
 	
 	var from = getAttribute(xml, 'from', defaults);
@@ -1547,7 +1566,9 @@ function AutoTimer(xml, defaults){
 			
 			'searchType' :            this.searchType,
 			'searchCase' :            this.searchCase,
+			
 			'justplay' :              this.justplay,
+			'setEndtime' :            this.setEndtime,
 			
 			'overrideAlternatives' :  this.overrideAlternatives,
 			'timespan' :              this.timespan,
