@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-subsdownloader
-Version: 0.24.3-20120101
+Version: 0.24.6-20120103
 Description: Subtitle Downloader
 Section: extra
 Priority: optional
