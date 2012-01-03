@@ -6,6 +6,7 @@ import os
 from urllib import quote
 from operator import itemgetter#, attrgetter
 from Plugins.Extensions.SubsDownloader2.SourceCode.archives_extractor import zip_extractor
+from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
 
 #  Copyright (C) 2011 Dawid Bankowski <enigma2subsdownloader at gmail.com>
 #
@@ -262,13 +263,17 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 	    print "Reild to download subtitle zip."
             return False
 
+class GuessFileData_from_FileName(SubtitleDatabase.SubtitleDB):
+    def __init__(self, tvshowRegex, tvshowRegex2, movieRegex):
+        self.tvshowRegex = SubtitleDatabase.tvshowRegex
+        self.tvshowRegex2 = SubtitleDatabase.tvshowRegex2
+        self.movieRegex = SubtitleDatabase.movieRegex
+        pass
 
-#USE
-#aa = Napisy24_pl("C:/1111/Lord of the ring.avi","Lord of the ring")
-
-#aa.getNapisy24_SubtitleListXML("downloada_subtitle_list_by_film_name") #(if)
-#aa.IMDB_idenifier_search()!= False:
-#aa.getNapisy24_SubtitleListXML("downloada_subtitle_list_by_IMDB")== True:
-#aa.save_downloaded_zip(1)
-#extracted_file_path = aa.extract_zip_file()
+    def return_data_string(self,file_path):
+        file_data = self.guessFileData(file_path)
+        if file_data['type'] == 'tvshow':
+            return str(file_data['name']+" "+str(file_data['season'])+"x"+str(file_data['episode']))
+        elif file_data['type'] =='movie' or file_data['type'] == 'unknown':
+            return str(file_data['name'])
 
