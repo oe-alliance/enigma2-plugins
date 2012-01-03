@@ -16,11 +16,11 @@ Element.addMethods({
 				setOpacity(element, 0);
 			}
 		}
-		
+
 		element.style.zoom = 1;
 		// for ie, set haslayout
 		element.style.display = "block";
-	
+
 		for (var i=1; i<=to; i++) {
 			(function(j) {
 				setTimeout(function() {
@@ -104,7 +104,7 @@ function getNodeContent(xml, nodename, defaultString){
 		var retVal = node.item(0).firstChild.data;
 
 		if(retVal === "" || retVal === null){
-			return 'N/A';		
+			return 'N/A';
 		} else if (retVal === "None"){
 			return "";
 		}
@@ -114,7 +114,7 @@ function getNodeContent(xml, nodename, defaultString){
 			return defaultString;
 		}
 	}
-	
+
 	return 'N/A';
 }
 
@@ -135,7 +135,7 @@ function dec2hex(nr, len){
 			while(hex.length < len){
 				hex = "0"+hex;
 			}
-		} 
+		}
 		catch(e){
 			//something went wrong, return -1
 			hex = -1;
@@ -226,8 +226,8 @@ var AjaxThing = Class.create({
 						asynchronous: true,
 						method: 'POST',
 						requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
-						onException: function(o,e){ 
-								console.log(o); 
+						onException: function(o,e){
+								console.log(o);
 								console.log(e);
 								throw(e);
 							}.bind(this),
@@ -258,13 +258,13 @@ var TemplateEngine = Class.create(AjaxThing, {
 		debug("[TemplateEngine].cache caching template: " + tplName);
 		this.templates[tplName] = request.responseText;
 	},
-	
+
 	fetch: function(tplName, callback){
 		if(this.templates[tplName] === undefined) {
 			var url = URL.tpl+tplName+".htm";
-			
+
 			this.getUrl(
-					url, 
+					url,
 					{},
 					function(transport){
 						this.cache(transport, tplName);
@@ -279,10 +279,10 @@ var TemplateEngine = Class.create(AjaxThing, {
 			}
 		}
 	},
-	
-	render: function(tpl, data, domElement) {	
+
+	render: function(tpl, data, domElement) {
 		var result = tpl.process(data);
-	
+
 		try{
 			$(domElement).update( result );
 		}catch(ex){
@@ -290,42 +290,42 @@ var TemplateEngine = Class.create(AjaxThing, {
 			throw ex;
 		}
 	},
-	
+
 	onTemplateReady: function(tpl, data, domElement, callback){
 		this.render(tpl, data, domElement);
 		if(typeof(callback) == 'function') {
 			callback();
 		}
 	},
-	
+
 	process: function(tplName, data, domElement, callback){
-		this.fetch( tplName, 
+		this.fetch( tplName,
 				function(tpl){
-					this.onTemplateReady(tpl, data, domElement, callback); 
+					this.onTemplateReady(tpl, data, domElement, callback);
 				}.bind(this) );
 	}
 });
 templateEngine = new TemplateEngine();
 
 //START class EPGEvent
-function EPGEvent(xml, number){	
+function EPGEvent(xml, number){
 	this.eventID = getNodeContent(xml, 'e2eventid', '');
-	this.startTime = parseNr(getNodeContent(xml, 'e2eventstart', ''));	
+	this.startTime = parseNr(getNodeContent(xml, 'e2eventstart', ''));
 	this.duration = parseNr(getNodeContent(xml, 'e2eventduration', ''));
 	this.currentTime = parseNr(getNodeContent(xml, 'e2eventcurrenttime')),
 	this.title = getNodeContent(xml, 'e2eventtitle', '');
 	this.serviceRef = getNodeContent(xml, 'e2eventservicereference', '');
 	this.serviceName = getNodeContent(xml, 'e2eventservicename', '');
-	this.fileName = getNodeContent(xml, 'e2filename', '');	
+	this.fileName = getNodeContent(xml, 'e2filename', '');
 	this.description = getNodeContent(xml, 'e2eventdescription');
 	this.descriptionE = getNodeContent(xml, 'e2eventdescriptionextended');
-	
+
 	if(typeof(number) != "undefined"){
 		this.number = number;
 	} else {
 		this.number = 0;
 	}
-	
+
 	this.getFilename = function() {
 		return this.fileName;
 	};
@@ -350,7 +350,7 @@ function EPGEvent(xml, number){
 		var day = this.getTimeStart().getDate();
 		var month = this.getTimeStart().getMonth()+1;
 		var year = this.getTimeStart().getFullYear();
-		
+
 		return wday+".&nbsp;"+day+"."+month+"."+year;
 	};
 	this.getTimeBegin = function(){
@@ -374,7 +374,7 @@ function EPGEvent(xml, number){
 		return date;
 	};
 	this.getTimeRemainingString = function() {
-		
+
 		if( this.currentTime <= this.startTime ){
 			return Math.ceil(this.getDuration() / 60000);
 		} else {
@@ -386,7 +386,7 @@ function EPGEvent(xml, number){
 			}
 		}
 	};
-	
+
 	this.getProgress = function(){
 		var progress = 100 - ( ( this.getTimeRemainingString() / ( this.getDuration() / 60000 ) ) * 100 );
 		progress = Math.ceil(progress);
@@ -394,7 +394,7 @@ function EPGEvent(xml, number){
 			progress = 0;
 		return progress;
 	};
-	
+
 	this.getTitle = function() {
 		return this.title;
 	};
@@ -413,7 +413,7 @@ function EPGEvent(xml, number){
 	this.isMarker = function(){
 		return this.serviceRef.startsWith("1:64:0:0:0:0:0:0:0:0");
 	};
-	
+
 	this.json = {
 		'date': this.getTimeDay(),
 		'eventid': this.getEventId(),
@@ -423,10 +423,10 @@ function EPGEvent(xml, number){
 		'title': quotes2html(this.getTitle()),
 		'shorttitle': quotes2html(this.getTitle().substring(0, 40) ) + '...',
 		'titleESC': escape(this.getTitle()),
-		'starttime': this.getTimeStartString(), 
-		'duration': Math.ceil(this.getDuration()/60000), 
+		'starttime': this.getTimeStartString(),
+		'duration': Math.ceil(this.getDuration()/60000),
 		'description': quotes2html(this.getDescription()),
-		'endtime': this.getTimeEndString(), 
+		'endtime': this.getTimeEndString(),
 		'remaining': this.getTimeRemainingString(),
 		'progress' : this.getProgress(),
 		'extdescription': quotes2html(this.getDescriptionExtended()),
@@ -434,11 +434,11 @@ function EPGEvent(xml, number){
 		'start': this.getTimeBegin(),
 		'end': this.getTimeEnd()
 	};
-	
+
 	this.toJSON = function() {
 		return this.json;
 	};
-	
+
 }
 //END class EPGEvent
 function EPGList(xml){
@@ -448,38 +448,38 @@ function EPGList(xml){
 	} catch (e) {
 		core.notify("Error Parsing EPG: " + e, false);
 	}
-	
+
 	this.getArray = function(sortbytime){
 		var list = [];
 		var len = this.xmlitems.length;
-		
+
 		if (sortbytime === true){
 			debug("[EPGList].getArray :: Sort by time!");
 			var sortList = [];
-			
+
 			for(var i=0; i<len; i++){
 				var event = new EPGEvent(this.xmlitems.item(i), i).toJSON();
 				sortList.push( [event.starttime, event] );
 			}
 			sortList.sort(this.sortFunction);
-			
+
 			list = [];
 			len = sortList.length;
 			for(i=0; i<len; i++){
 				list.push(sortList[i][1]);
 			}
-			
+
 			return list;
-			
+
 		}else{
 			for (i=0; i<len; i++){
 				xv = new EPGEvent(this.xmlitems.item(i)).toJSON();
-				list.push(xv);			
+				list.push(xv);
 			}
 			return list;
 		}
 	};
-	
+
 	this.sortFunction = function(a, b){
 	  return a[0] - b[0];
 	};
@@ -492,7 +492,7 @@ function EPGListNowNext(xml){
 	} catch (e) {
 		core.notify("Error Parsing EPG: " + e, false);
 	}
-	
+
 	this.getArray = function(){
 		list = [];
 		var len = this.xmlitems.length;
@@ -514,17 +514,17 @@ function MultiEPGList(xml){
 	} catch (e) {
 		core.notify("Error Parsing EPG: " + e, false);
 	}
-	
+
 	this.getArray = function(visibleMinutes){
 		list = [];
 		var len = this.xmlitems.length;
 		if(!visibleMinutes)
 			visibleMinutes = 240;
 		var scale = 3;
-		
+
 		var epg = [];
 		var maxEndTime = '0';
-		
+
 		var currentServiceRef = '';
 		var currentServiceEpg = [];
 		var _this = this;
@@ -544,14 +544,14 @@ function MultiEPGList(xml){
 		}
 		if(currentServiceEpg.length > 0)
 			epg.push(currentServiceEpg);
-		
+
 		var currentDate = new Date();
 		var endDate = new Date(maxEndTime * 1000);
 		if(endDate.getMinutes != 0){
 			endDate.setHours(endDate.getHours() + 1);
 			endDate.setMinutes(0);
 		}
-		
+
 		niceTime = function(date){
 			var m = date.getMinutes();
 			if(m < 10)
@@ -561,39 +561,39 @@ function MultiEPGList(xml){
 		currentDate.setSeconds(0);
 		currentDate.setMilliseconds(0);
 		var currentTs = currentDate.getTime() / 1000;
-		
+
 		endDate.setSeconds(0);
 		endDate.setMilliseconds(0);
 		var endTs = endDate.getTime() / 1000;
 		var totalMin = ( endTs - currentTs ) / 60;
 		var mod = totalMin % 60;
-		
+
 		var timeScale = {};
-		timeScale.current = 
-			{	'scale': mod * scale, 
+		timeScale.current =
+			{	'scale': mod * scale,
 				'time' : niceTime(currentDate)
 			};
-		
+
 		timeScale.times = [];
 		var hours = (totalMin - mod) / 60;
 		var width = 60 * scale;
 		for(var i = 0; i < hours; i++){
-			var ts = (currentTs * 1000) + ( (mod + (i * 60) ) * 60000 ); 
+			var ts = (currentTs * 1000) + ( (mod + (i * 60) ) * 60000 );
 			var date = new Date(ts);
 			timeScale.times.push(
-				{	'scale' : width, 
-					'time' : niceTime(date), 
+				{	'scale' : width,
+					'time' : niceTime(date),
 					'date' : date.toLocaleDateString()
 				});
 		}
-		
+
 		return {'epg' : epg, 'timescale' : timeScale};
 	};
 }
 //END class EPGList
 
 // START class Service
-function Service(xml, cssclass){	
+function Service(xml, cssclass){
 	this.servicereference = getNodeContent(xml, 'e2servicereference', '');
 	this.servicename = getNodeContent(xml, 'e2servicename');
 	this.videowidth = getNodeContent(xml, 'e2videowidth');
@@ -608,36 +608,36 @@ function Service(xml, cssclass){
 	this.tsid = dec2hex( getNodeContent(xml, 'e2tsid'),4 );
 	this.onid = dec2hex( getNodeContent(xml, 'e2onid'),4 );
 	this.sid = dec2hex( getNodeContent(xml, 'e2sid'),4 );
-	
+
 	this.getServiceReference = function(){
 		return encodeURIComponent(this.servicereference);
 	};
-	
+
 	this.getClearServiceReference = function(){
 		return this.servicereference;
 	};
-		
+
 	this.getServiceName = function(){
 		return this.servicename.replace('&quot;', '"');
 	};
-	
+
 	this.setServiceReference = function(sref){
 		this.servicereference = sref;
 	};
-		
+
 	this.setServiceName = function(sname){
 		this.servicename = sname.replace('&quot;', '"');
 	};
-	
+
 	if( typeof( cssclass ) == undefined ){
 		cssclass = 'odd';
 	}
-	
+
 	this.isMarker = function(){
 		return this.getClearServiceReference().startsWith("1:64:0:0:0:0:0:0:0:0");
 	};
-	
-	this.json = { 	
+
+	this.json = {
 			'servicereference' : this.getServiceReference(),
 			'servicename' : this.getServiceName(),
 			'videowidth' : this.videowidth,
@@ -655,11 +655,11 @@ function Service(xml, cssclass){
 			'cssclass' : cssclass,
 			'ismarker' : this.isMarker()
 	};
-	
+
 	this.toJSON = function(){
 		return this.json;
 	};
-}	
+}
 //END class Service
 
 // START class ServiceList
@@ -669,7 +669,7 @@ function ServiceList(xml){
 	this.getArray = function(){
 		if(this.servicelist.length === 0){
 			var cssclass = 'even';
-			
+
 			var len = this.xmlitems.length;
 			for (var i=0; i<len; i++){
 				cssclass = cssclass == 'even' ? 'odd' : 'even';
@@ -677,7 +677,7 @@ function ServiceList(xml){
 				this.servicelist.push(service);
 			}
 		}
-		
+
 		return this.servicelist;
 	};
 }
@@ -685,7 +685,7 @@ function ServiceList(xml){
 
 
 // START class Movie
-function Movie(xml, cssclass){	
+function Movie(xml, cssclass){
 	this.servicereference = getNodeContent(xml, 'e2servicereference');
 	this.servicename = getNodeContent(xml, 'e2servicename');
 	this.title = getNodeContent(xml, 'e2title');
@@ -700,12 +700,12 @@ function Movie(xml, cssclass){
 	this.getLength = function() {
 		return this.length;
 	};
-	
+
 	this.getTimeStart = function() {
 		var date = new Date(parseInt(this.startTime, 10)*1000);
 		return date;
 	};
-	
+
 	this.getTimeStartString = function() {
 		var h = this.getTimeStart().getHours();
 		var m = this.getTimeStart().getMinutes();
@@ -714,14 +714,14 @@ function Movie(xml, cssclass){
 		}
 		return h+":"+m;
 	};
-	
+
 	this.getTimeDay = function() {
 		var Wochentag = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 		var wday = Wochentag[this.getTimeStart().getDay()];
 		var day = this.getTimeStart().getDate();
 		var month = this.getTimeStart().getMonth()+1;
 		var year = this.getTimeStart().getFullYear();
-		
+
 		return wday+".&nbsp;"+day+"."+month+"."+year;
 	};
 
@@ -731,41 +731,41 @@ function Movie(xml, cssclass){
 	this.getServiceName = function(){
 		return this.servicename.replace('&quot;', '"');
 	};
-	
+
 	this.getTitle = function(){
 		return this.title;
 	};
-	
+
 	this.getDescription = function(){
 		return this.description;
 	};
-	
+
 	this.getDescriptionExtended = function(){
 		return this.descriptionextended;
 	};
-	
-	this.getTags = function(){		
+
+	this.getTags = function(){
 		return this.tags.split(" ");
 	};
-	
-	this.getFilename = function(){		
-		return encodeURIComponent(this.filename);		
+
+	this.getFilename = function(){
+		return encodeURIComponent(this.filename);
 	};
-	
-	this.getFilesizeMB = function(){		
+
+	this.getFilesizeMB = function(){
 		return Math.round((parseInt(this.filesize, 10)/1024)/1024)+"MB";
 	};
-	
+
 	if( typeof( cssclass) == 'undefined'){
 		cssclass = 'odd';
 	}
-	
+
 	this.json = {
 			'servicereference': this.getServiceReference(),
 			'servicename': this.getServiceName(),
 			'title': this.getTitle(),
 			'escapedTitle': escape(this.getTitle()),
-			'description': this.getDescription(), 
+			'description': this.getDescription(),
 			'descriptionextended': this.getDescriptionExtended(),
 			'filename': String(this.getFilename()),
 			'filesize': this.getFilesizeMB(),
@@ -774,11 +774,11 @@ function Movie(xml, cssclass){
 			'time': this.getTimeDay()+"&nbsp;"+ this.getTimeStartString(),
 			'cssclass' : cssclass
 	};
-	
+
 	this.toJSON = function(){
 		return this.json;
 	};
-}	
+}
 //END class Movie
 
 
@@ -786,19 +786,19 @@ function Movie(xml, cssclass){
 function MovieList(xml){
 	this.xmlitems = getNamedChildren(xml, "e2movielist", "e2movie");
 	this.movielist = [];
-	
+
 	this.getArray = function(){
 		if(this.movielist.length === 0){
 			var cssclass = "even";
 			var len = this.xmlitems.length;
 			for(var i=0; i<len; i++){
 				cssclass = cssclass == 'even' ? 'odd' : 'even';
-				
+
 				var movie = new Movie(this.xmlitems.item(i), cssclass).toJSON();
-				this.movielist.push(movie);			
+				this.movielist.push(movie);
 			}
 		}
-		
+
 		return this.movielist;
 	};
 }
@@ -807,7 +807,7 @@ function MovieList(xml){
 
 
 // START class Timer
-function Timer(xml, cssclass){	
+function Timer(xml, cssclass){
 	this.servicereference = getNodeContent(xml, 'e2servicereference');
 	this.servicename = getNodeContent(xml, 'e2servicename');
 	this.eventid = getNodeContent(xml, 'e2eit');
@@ -839,72 +839,72 @@ function Timer(xml, cssclass){
 	this.getColor = function(){
 		return this.color;
 	};
-	
+
 	this.getToggleDisabled = function(){
 		return this.toggledisabled;
 	};
-	
+
 	this.getToggleDisabledIMG = function(){
 		return this.toggledisabledimg;
 	};
-	
+
 	this.getToggleDisabledText = function(){
 		var retVal = this.toggledisabled == "0" ? "Enable" : "Disable";
 		return retVal;
 	};
-	
+
 	this.getServiceReference = function(){
 		return encodeURIComponent(this.servicereference);
 	};
-	
+
 	this.getServiceName = function(){
 		return this.servicename.replace('&quot;', '"');
 	};
-	
+
 	this.getEventID = function(){
 		return this.eventid;
 	};
-	
+
 	this.getName = function(){
 		return this.name;
 	};
-	
+
 	this.getDescription = function(){
 		return this.description;
 	};
-	
+
 	this.getDescriptionExtended = function(){
 		return this.descriptionextended;
 	};
-	
+
 	this.getDisabled = function(){
 		return this.disabled;
 	};
-	
+
 	this.getTimeBegin = function(){
 		return this.timebegin;
 	};
-	
+
 	this.getTimeEnd = function(){
 		return this.timeend;
 	};
-	
+
 	this.getDuration = function(){
 		return parseInt(this.duration, 10);
 	};
-	
+
 	this.getStartPrepare = function(){
 		return this.startprepare;
 	};
-	
+
 	this.getJustplay = function(){
 		return this.justplay;
 	};
-	
+
 	this.getAfterevent = function(){
 		return this.afterevent;
 	};
-	
+
 	this.getDirname = function(){
 		return this.dirname;
 	};
@@ -916,51 +916,51 @@ function Timer(xml, cssclass){
 	this.getLogentries = function(){
 		return this.logentries;
 	};
-	
+
 	this.getFilename = function(){
 		return this.tfilename;
 	};
-	
+
 	this.getBackoff = function(){
 		return this.backoff;
 	};
-	
+
 	this.getNextActivation = function(){
 		return this.nextactivation;
 	};
-	
+
 	this.getFirsttryprepare = function(){
 		return this.firsttryprepare;
 	};
-	
+
 	this.getState = function(){
 		return this.state;
 	};
-	
+
 	this.getRepeated = function(){
 		return this.repeated;
 	};
-	
+
 	this.getDontSave = function(){
 		return this.dontsave;
 	};
-	
+
 	this.isCancled = function(){
 		return this.cancled;
 	};
-	
+
 	if( typeof( cssclass ) == undefined ){
 		cssclass = 'odd';
 	}
-	
+
 	this.beginDate = new Date(Number(this.getTimeBegin()) * 1000);
 	this.endDate = new Date(Number(this.getTimeEnd()) * 1000);
-	
+
 	this.aftereventReadable = [ 'Nothing', 'Standby',
 	                            'Deepstandby/Shutdown', 'Auto' ];
-	
+
 	this.justplayReadable = [ 'record', 'zap' ];
-	
+
 	this.json = {
 			'servicereference' : this.getServiceReference(),
 			'servicename' : quotes2html(this.getServiceName()),
@@ -986,7 +986,7 @@ function Timer(xml, cssclass){
 			'enDis' : this.getToggleDisabledText(),
 			'cssclass' : cssclass
 	};
-	
+
 	this.toJSON = function(){
 		return this.json;
 	};
@@ -997,7 +997,7 @@ function Timer(xml, cssclass){
 function TimerList(xml){
 	this.xmlitems = getNamedChildren(xml, "e2timerlist", "e2timer");
 	this.timerlist = [];
-	
+
 	this.getArray = function(){
 		if(this.timerlist.length === 0){
 			var cssclass = 'even';
@@ -1005,50 +1005,50 @@ function TimerList(xml){
 			for(var i=0; i<len; i++){
 				cssclass = cssclass == 'even' ? 'odd' : 'even';
 				var timer = new Timer(this.xmlitems.item(i), cssclass).toJSON();
-				this.timerlist.push(timer);			
+				this.timerlist.push(timer);
 			}
 		}
-		
+
 		return this.timerlist;
 	};
 }
 //END class TimerList
 function DeviceInfo(xml){
 	xml = xml.getElementsByTagName("e2deviceinfo").item(0);
-	
+
 	this.info = {};
-	
+
 	this.nims = [];
 	this.hdds = [];
 	this.nics = [];
-	
+
 	this.fpversion = "V"+xml.getElementsByTagName('e2fpversion').item(0).firstChild.data;
-	
-	var nimnodes = xml.getElementsByTagName('e2frontends').item(0).getElementsByTagName('e2frontend');			
-	for(var i = 0; i < nimnodes.length; i++){					
+
+	var nimnodes = xml.getElementsByTagName('e2frontends').item(0).getElementsByTagName('e2frontend');
+	for(var i = 0; i < nimnodes.length; i++){
 		try {
 			var name = nimnodes.item(i).getElementsByTagName('e2name').item(0).firstChild.data;
 			var model = nimnodes.item(i).getElementsByTagName('e2model').item(0).firstChild.data;
-			this.nims[i] = { 
-					'name' : name, 
+			this.nims[i] = {
+					'name' : name,
 					'model' : model
-			};					
+			};
 		} catch (e) {
 			core.notify("Error parsing frontend data: " + e);
 		}
 	}
-	
-	
+
+
 	var hddnodes = xml.getElementsByTagName('e2hdd');
 	for( var i = 0; i < hddnodes.length; i++){
-		try{			
+		try{
 			var hdd = hddnodes.item(i);
-	
+
 			var model 	= hdd.getElementsByTagName('e2model').item(0).firstChild.data;
 			var capacity = hdd.getElementsByTagName('e2capacity').item(0).firstChild.data;
 			var free		= hdd.getElementsByTagName('e2free').item(0).firstChild.data;
-	
-			this.hdds[i] = {	
+
+			this.hdds[i] = {
 					'model'		: model,
 					'capacity' 	: capacity,
 					'free'		: free
@@ -1057,8 +1057,8 @@ function DeviceInfo(xml){
 			core.notify("Error parsing HDD data: " + e, false);
 		}
 	}
-	
-	
+
+
 	var nicnodes = xml.getElementsByTagName('e2interface');
 	for( var i = 0; i < nicnodes.length; i++){
 		try {
@@ -1069,7 +1069,7 @@ function DeviceInfo(xml){
 			var ip = nic.getElementsByTagName('e2ip').item(0).firstChild.data;
 			var gateway = nic.getElementsByTagName('e2gateway').item(0).firstChild.data;
 			var netmask = nic.getElementsByTagName('e2netmask').item(0).firstChild.data;
-	
+
 			this.nics[i] = {
 					'name' : name,
 					'mac' : mac,
@@ -1082,7 +1082,7 @@ function DeviceInfo(xml){
 			core.notify("Error parsing NIC data: " + e, false);
 		}
 	}
-	
+
 	try{
 		this.info = {
 				'devicename' : xml.getElementsByTagName('e2devicename').item(0).firstChild.data,
@@ -1092,23 +1092,23 @@ function DeviceInfo(xml){
 				'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data
 		};
 	} catch (e) {
-		core.notify("Error parsing deviceinfo data: " + e, false);		
+		core.notify("Error parsing deviceinfo data: " + e, false);
 	}
-	
+
 	this.json = {
 			info : this.info,
-			hdds : this.hdds,		
+			hdds : this.hdds,
 			nics : this.nics,
 			nims : this.nims
 	};
-	
+
 	this.toJSON = function(){
 		return this.json;
 	};
-	
+
 }
 
-function SimpleXMLResult(xml){		
+function SimpleXMLResult(xml){
 	try{
 		this.xmlitems = xml;
 	} catch (e) {
@@ -1117,12 +1117,12 @@ function SimpleXMLResult(xml){
 
 	this.state = getNodeContent(this.xmlitems, 'e2state', false);
 	this.statetext = getNodeContent(this.xmlitems, 'e2statetext', false);
-	
+
 	if(!this.state && !this.statetext){
 		this.state = getNodeContent(this.xmlitems, 'e2result', 'False');
 		this.statetext = getNodeContent(this.xmlitems, 'e2resulttext', 'Error Parsing XML');
 	}
-	
+
 	this.getState = function(){
 		if(this.state == 'True'){
 			return true;
@@ -1130,7 +1130,7 @@ function SimpleXMLResult(xml){
 			return false;
 		}
 	};
-	
+
 	this.getStateText = function(){
 			return this.statetext;
 	};
@@ -1143,11 +1143,11 @@ function SimpleXMLList(xml, tagname){
 	try{
 		this.xmlitems = xml.getElementsByTagName(tagname);
 	} catch (e) {
-		core.notify("Error parsing SimpleXMLList: " + e, false);	
+		core.notify("Error parsing SimpleXMLList: " + e, false);
 	}
-	
+
 	this.xmllist = [];
-	
+
 	this.getList = function(){
 		if(this.xmllist.length === 0){
 			var len = this.xmlitems.length;
@@ -1155,7 +1155,7 @@ function SimpleXMLList(xml, tagname){
 				this.xmllist.push(this.xmlitems.item(i).firstChild.data);
 			}
 		}
-		
+
 		return this.xmllist;
 	};
 }
@@ -1163,18 +1163,18 @@ function SimpleXMLList(xml, tagname){
 
 
 // START class Setting
-function Setting(xml){	
+function Setting(xml){
 	this.settingvalue = getNodeContent(xml, 'e2settingvalue');
 	this.settingname = getNodeContent(xml, 'e2settingname');
-	
+
 	this.getSettingValue = function(){
 		return this.settingvalue;
 	};
-		
+
 	this.getSettingName = function(){
 		return this.settingname;
 	};
-	
+
 }
 
 
@@ -1185,21 +1185,21 @@ function Settings(xml){
 		this.xmlitems = xml.getElementsByTagName("e2settings").item(0).getElementsByTagName("e2setting");
 		debug("[Settings] Number of items: " + this.xmlitems);
 	} catch (e) {
-		core.notify("Error parsing Settings: " + e, false);	
-	}	
-	
+		core.notify("Error parsing Settings: " + e, false);
+	}
+
 	this.settings = [];
-	
+
 	this.getArray = function(){
 		if(this.settings.length === 0){
 			var len = this.xmlitems.length;
 			for (var i=0; i < len; i++){
 				var setting = new Setting(this.xmlitems.item(i));
-				this.settings.push(setting);			
+				this.settings.push(setting);
 			}
 		}
-		
-		return this.settings;		
+
+		return this.settings;
 	};
 }
 //END class Settings
@@ -1229,7 +1229,7 @@ function FileList(xml){
 //END class FileList
 
 //START class File
-function File(xml){	
+function File(xml){
 	// parsing values from xml-element
 	this.servicereference = getNodeContent(xml, 'e2servicereference', 'Filesystems');
 	this.isdirectory = getNodeContent(xml, 'e2isdirectory');
@@ -1238,7 +1238,7 @@ function File(xml){
 	this.getServiceReference = function(){
 		return this.servicereference;
 	};
-	
+
 	this.getNameOnly = function(){
 		if(this.root == '/' || this.isdirectory == "True") {
 			return this.servicereference.replace(this.root, '');
@@ -1246,15 +1246,15 @@ function File(xml){
 			return this.servicereference.replace('4097:0:0:0:0:0:0:0:0:0:', '').replace(this.root, '');
 		}
 	};
-	
+
 	this.getIsDirectory = function(){
 		return this.isdirectory;
 	};
-	
+
 	this.getRoot = function(){
 		return this.root;
 	};
-}	
+}
 //END class File
 
 //class Volume
@@ -1262,19 +1262,19 @@ var Vol = Class.create({
 	initialize: function(xml){
 		this.result = getNodeContent(xml, 'e2result', 'False');
 		this.resultText = getNodeContent(xml, 'e2resulttext', 'Parser Error!');
-		this.volume = getNodeContent(xml, 'e2current', '100');		
+		this.volume = getNodeContent(xml, 'e2current', '100');
 		var mute = getNodeContent(xml, 'e2ismuted', 'False');
 		this.isMuted = mute == "True" ? true : false;
 		this.states = [];
-		
+
 		for(var i = 1; i <= 10; i++){
 			var enabled = false;
 			if(this.volume >= i * 10){
 				enabled = true;
-			}		
+			}
 			this.states[i-1] = {'enabled' : enabled, 'percent' : i*10};
 		}
-		
+
 		this.json = {
 				result : this.result,
 				resultText : this.resultText,
@@ -1293,7 +1293,7 @@ var Powerstate = Class.create({
 	initialize: function(xml){
 		this.instandby = (getNodeContent(xml, "e2instandby").strip() == "true");
 	},
-	
+
 	isStandby: function(){
 		return this.instandby;
 	}
@@ -1305,7 +1305,7 @@ var Signal = Class.create({
 		this.snr = getNodeContent(xml, 'e2snr');
 		this.ber = getNodeContent(xml, 'e2ber');
 		this.acg = getNodeContent(xml, 'e2acg');
-		
+
 		this.json = {
 			'snrdb' : this.snrdb,
 			'snr' : this.snr,
@@ -1313,10 +1313,56 @@ var Signal = Class.create({
 			'acg' : this.acg
 		};
 	},
-	
+
 	toJSON: function(){
 		return this.json;
 	}
 
+});
+
+var External = Class.create({
+	initialize: function(xml){
+		this.path = getNodeContent(xml, 'e2path');
+		this.name = getNodeContent(xml, 'e2name');
+		this.version = getNodeContent(xml, 'e2externalversion');
+		this.hasGui = getNodeContent(xml, 'e2hasgui') == "True";
+
+		this.json = {
+			'path' : this.path,
+			'name' : this.name,
+			'version' : this.version,
+			'hasGui' : this.hasGui
+		};
+	},
+
+	toJSON: function(){
+		return this.json;
+	}
+
+});
+
+var ExternalList = Class.create({
+	initialize: function(xml){
+		this.anyGui = false;
+		this.list = this.parse(xml);
+	},
+
+	parse: function(xml){
+		var items = xml.getElementsByTagName("e2webifexternal");
+		var list = [];
+		var len = items.length;
+		for(var i = 0; i < len; i++){
+			var external = new External(items[i]);
+			if(external.hasGui)
+				this.anyGui = true;
+			list.push(external);
+		}
+
+		return list;
+	},
+
+	getArray: function(){
+		return this.list;
+	}
 });
 //END class Volume
