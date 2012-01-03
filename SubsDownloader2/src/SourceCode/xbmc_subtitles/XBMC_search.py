@@ -1,21 +1,21 @@
 #from XBMC.utilities import *
 #from periscope.plugins.SubtitleDatabase import SubtitleDB
-from Plugins.Extensions.SubsDownloader2.SourceCode.periscope.SubtitleDatabase import SubtitleDB
+from Plugins.Extensions.SubsDownloader2.SourceCode.periscope.SubtitleDatabase import SubtitleDB, tvshowRegex, tvshowRegex2, movieRegex
 import os
+#from XBMC.archives_extractor import zip_extractor
+from Plugins.Extensions.SubsDownloader2.SourceCode.archives_extractor import zip_extractor
 
-def list_XBMC_Periscope_plugins(XMBC_periscope_plugin_path):
+def list_XBMC_Periscope_plugins(XBMC_periscope_plugin_path):
     plugin_list = []
-    for x in os.listdir(XMBC_periscope_plugin_path):
-        if os.path.isdir(XMBC_periscope_plugin_path+x) == True:
+    for x in os.listdir(XBMC_periscope_plugin_path):
+        if os.path.isdir(XBMC_periscope_plugin_path+x) == True:
             plugin_list.append(x)    
     return plugin_list
-
-
 
 def list_directory_files(dir_path):
     file_list = []
     for x in os.listdir(dir_path):
-        if os.path.isdir(dir_path+x) == False:
+        if os.path.isdir(XMBC_plugin_path+x) == False:
             file_list.append(dir_path+x)    
     return file_list
 
@@ -30,21 +30,21 @@ def new_file_in_directory(files_before, files_after):
             
 
 class XBMCSubtitle(SubtitleDB):
-    def __init__(self,service, file_path):
-        self.tvshowRegex = re.compile('(?P<show>.*)S(?P<season>[0-9]{2})E(?P<episode>[0-9]{2}).(?P<teams>.*)', re.IGNORECASE)
-        self.tvshowRegex2 = re.compile('(?P<show>.*).(?P<season>[0-9]{1,2})x(?P<episode>[0-9]{1,2}).(?P<teams>.*)', re.IGNORECASE)
-        self.movieRegex = re.compile('(?P<movie>.*)[\.|\[|\(| ]{1}(?P<year>(?:(?:19|20)[0-9]{2}))(?P<teams>.*)', re.IGNORECASE)
-       
+    def __init__(self,service):
+        self.tvshowRegex = tvshowRegex
+        self.tvshowRegex2 = tvshowRegex2
+        self.movieRegex = movieRegex
         
         exec ('from XBMC.services.%s import *' % service)
         exec ('from XBMC.services.%s import service as Service' % service)        
         self.service = Service
+
+    
+    def XBMC_search_subtitles(self, file_path, lang1, lang2,lang3, year = None, set_temp = False, rar = False, stock = True):
         self.file_path = file_path
         self.__subtitle_list = []
         self.__session_id = None
-        self.__msg = None
-    
-    def XBMC_search_subtitles(self, lang1, lang2,lang3, year = None, set_temp = False, rar = False):
+        self.__msg = None        
         fileData = self.guessFileData(self.file_path)
         #===============================================================================
         # Public interface functions
@@ -63,7 +63,17 @@ class XBMCSubtitle(SubtitleDB):
         # rar -> True iff video is inside a rar archive
         # lang1, lang2, lang3 -> Languages selected by the user
         #return self..search_subtitles(self.file_path,fileData['name'],fileData['type'], year, fileData['season'],fileData['episode'],set_temp,rar, lang1, lang2, lang3, 1)
-        self.__subtitles_list, self.__session_id, self.__msg = self.service.search_subtitles(file_path, fileData['name'], fileData['name'], year, fileData['season'], fileData['episode'], set_temp, rar, lang1, lang2, lang3)
+        if fileData['type'] == 'tvshow':
+            tvShow = fileData['name']
+            season = fileData['season']
+            episode = fileData['episode']
+            #print fileData
+        elif fileData['type'] =='movie' or fileData['type'] =='unknown':
+            tvShow = []
+            season = []
+            episode = []  
+            #print fileData
+        self.__subtitles_list, self.__session_id, self.__msg = self.service.search_subtitles(file_path, fileData['name'], tvShow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stock)
         return self.__subtitles_list
     
     def XBMC_download_subtitles(self, pos):
@@ -71,33 +81,5 @@ class XBMCSubtitle(SubtitleDB):
         zipped_subs_path = self.file_path.rsplit(".",1)[0]+".zip"
         session_id = self.__session_id
         subtitles_list = self.__subtitles_list
-        self.service.download_subtitles (subtitles_list, pos, zipped_subs_path, tmp_sub_dir, sub_folder, session_id)
-            
-        
-"""       
-file_path = "C:/!Roboczy/How.I.Met.Your.Mother.S07E11.HDTV.XviD-ASAP.[VTV].avi"
-subtitle = XBMCSubtitle("Subscene", file_path)
-bb = subtitle.XBMC_search_subtitles("Chinese" , "English","Polish")
+        return self.service.download_subtitles (subtitles_list, pos, zipped_subs_path, tmp_sub_dir, sub_folder, session_id) #ZWRAA False, language, subs_file #standard output
 
-before = list_directory_files("C:/!Roboczy/")
-subtitle.XBMC_download_subtitles(0)
-afeter = list_directory_files("C:/!Roboczy/")
-new_file = new_file_in_directory(before, afeter)
-
-
-
-XMBC_plugin_path= "C:/Python26/Lib/XBMC/services/"
-cc = list_XBMC_plugins(XMBC_plugin_path)
-before = list_directory_files("C:/Python26/Lib/XBMC/services/")
-afeter = list_directory_files("C:/Python26/Lib/XBMC/services/")
-new_file = new_file_in_directory(before, afeter)
-
-a = ['1','2','3']
-b =['4','5','6']
-
-if '1' in a:
-    print 'a'
-elif '1' in b:
-    print 'b'
-    
-"""

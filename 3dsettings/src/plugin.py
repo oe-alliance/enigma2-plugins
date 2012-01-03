@@ -30,6 +30,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServiceReference
 from ServiceReference import ServiceReference
+from os.path import basename as os_basename
 
 # for localized messages
 from . import _
@@ -95,14 +96,18 @@ class AutoThreeD(Screen):
 			self.newService = False
 			ref = self.session.nav.getCurrentService() 
 			serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
-			if serviceRef.getPath():
-				serviceHandler = eServiceCenter.getInstance()
-				r = eServiceReference(ref.info().getInfoString(iServiceInformation.sServiceref))
-				info = serviceHandler.info(r)
-				if info:
-					name = ServiceReference(info.getInfoString(r, iServiceInformation.sServiceref)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+			spath = serviceRef.getPath()
+			if spath:
+				if spath[0] == '/':
+					serviceHandler = eServiceCenter.getInstance()
+					r = eServiceReference(ref.info().getInfoString(iServiceInformation.sServiceref))
+					info = serviceHandler.info(r)
+					if info:
+						name = ServiceReference(info.getInfoString(r, iServiceInformation.sServiceref)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+					else:
+						name = os_basename(spath) # filename
 				else:
-					name = ""
+					name = serviceRef.getName() # partnerbox servicename
 			else:
 				name =  ServiceReference(ref.info().getInfoString(iServiceInformation.sServiceref)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 			if "3d" in name.lower():

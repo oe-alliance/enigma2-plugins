@@ -14,7 +14,7 @@ from Plugins.Extensions.SubsDownloader2.SourceCode.anysub2srt import SubConv
 from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.XBMC_search import list_XBMC_Periscope_plugins
 from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
 from Plugins.Extensions.SubsDownloader2.SourceCode.NapiProjekt import NapiProjekt #*
-from Plugins.Extensions.SubsDownloader2.SourceCode.Napisy24_pl import Napisy24_pl
+from Plugins.Extensions.SubsDownloader2.SourceCode.Napisy24_pl import Napisy24_pl, GuessFileData_from_FileName
 from Plugins.Extensions.SubsDownloader2.SourceCode.chardet_OutpuyTranslation import chardetOutputTranslation
 from Plugins.Extensions.SubsDownloader2.SourceCode.myFileList import EXTENSIONS, FileList #*
 from Plugins.Extensions.SubsDownloader2.pluginOnlineContent import IsNewVersionCheck, zlib_link, libmediainfo_link, PluginIpkUpdate, InstallDownloadableContent, flagcounetr
@@ -80,10 +80,7 @@ XBMC_PLUGINS = list_XBMC_Periscope_plugins('/usr/lib/enigma2/python/Plugins/Exte
 for server in XBMC_PLUGINS:
 	SUBTITLE_SERVER_LIST.append((server,server))
 config.plugins.subsdownloader.subtitleserver = ConfigSelection(default = "OpenSubtitle", choices = SUBTITLE_SERVER_LIST)
-#Create Subtitle Server plugin list
-#config.plugins.subsdownloader.subtitleserver = ConfigSelection(default = "OpenSubtitle", choices = [(("OpenSubtitle"),"OpenSubtitle"), (("NapiProjekt"),"NapiProjekt"), (("Napisy24"),"Napisy24")])
 
-#Create Subtitle language list
 from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import toScriptLang
 SubsDownloaderLangs = []
 SubsDownloaderLangs.append(getConfigListEntry("None","None"))
@@ -94,6 +91,7 @@ config.plugins.subsdownloader.SubsDownloader1stLang = ConfigSelection(default ="
 config.plugins.subsdownloader.SubsDownloader2ndLang = ConfigSelection(default ="Polish", choices = SubsDownloaderLangs)
 config.plugins.subsdownloader.SubsDownloader3rdLang = ConfigSelection(default ="German", choices = SubsDownloaderLangs)
 config.plugins.subsdownloader.Napisy24SearchMethod = ConfigSelection(default = "IMDB", choices = [(_("IMDB"),"IMDB"), (_("IMDB then movie filname"),"IMDB then movie filname"), (_("movie filname"),"movie filname")])
+config.plugins.subsdownloader.Napisy24MovieNameMethod = ConfigYesNo(default = True)
 
 class SubsDownloaderApplication(Screen):
 	def __init__(self, session, args = 0):
@@ -517,7 +515,12 @@ class SubsDownloaderApplication(Screen):
 
 	def virtualKeyboardOpen(self):
 		if config.plugins.subsdownloader.Napisy24SearchMethod.value == "IMDB then movie filname" or config.plugins.subsdownloader.Napisy24SearchMethod.value == "movie filname":
-			self.session.openWithCallback(self.VirtualKeyboartCallback, VirtualKeyBoard, title = ("Search subtitle(s) for:\n%s" % self["fileList"].getFilename()), text = self["fileList"].getFilename().rsplit(".",1)[0])
+			if config.plugins.subsdownloader.Napisy24MovieNameMethod.value == False:
+				movie_name = self["fileList"].getFilename().rsplit(".",1)[0]
+			elif config.plugins.subsdownloader.Napisy24MovieNameMethod.value == True:
+				temp_struct = GuessFileData_from_FileName(SubtitleDatabase.tvshowRegex, SubtitleDatabase.tvshowRegex2, SubtitleDatabase.movieRegex)
+				movie_name = temp_struct.return_data_string(self["fileList"].getFilename())			
+			self.session.openWithCallback(self.VirtualKeyboartCallback, VirtualKeyBoard, title = ("Search subtitle(s) for:\n%s" % self["fileList"].getFilename()), text = movie_name)
 		else:
 			self.VirtualKeyboartCallback(callback = None)
 							
@@ -868,6 +871,7 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 			pass
 		if config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
 			self.list.append(getConfigListEntry(_("Choose Napisy24 search method:"), config.plugins.subsdownloader.Napisy24SearchMethod))
+			self.list.append(getConfigListEntry(_("Use \"guessFileData\' method fot movie filname:"), config.plugins.subsdownloader.Napisy24MovieNameMethod))
 			pass 
 		self.list.append(getConfigListEntry(_("Extended configuratin menu:"), config.plugins.subsdownloader.extendedMenuConfig))
 		if config.plugins.subsdownloader.extendedMenuConfig.value == True:

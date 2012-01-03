@@ -2,7 +2,7 @@
 
 function url() {
 	this.tpl = '/web-data/tpl/default/';
-	
+
 	this.zap = '/web/zap';
 	this.getcurrent = '/web/getcurrent';
 	this.volume = '/web/vol';
@@ -14,29 +14,30 @@ function url() {
 	this.epgnext = "/web/epgnext"; // plus bouquetRev
 	this.epgnownext = "/web/epgnownext";
 	this.epgmulti = "/web/epgmulti";
-	
+
 	this.getservices = "/web/getservices"; // plus serviceref
 	this.subservices = "/web/subservices"; // subservices for current service
 	this.streamsubservices = "/web/streamsubservices?sRef="; // subservices for streaming service
-	
+
 	this.movielist= "/web/movielist"; // plus dirname,tag
 	this.moviedelete= "/web/moviedelete"; // plus serviceref
-	
-	this.about= "/web/about";	
-	this.settings= "/web/settings";	
+
+	this.about= "/web/about";
+	this.settings= "/web/settings";
 	this.parentcontrol= "/web/parentcontrollist";
 	this.signal = "/web/signal";
 	this.deviceinfo = "/web/deviceinfo";
-	
+	this.external = "/web/external";
+
 	this.mediaplayeradd= "/web/mediaplayeradd"; // plus file-serviceref
 	this.mediaplayerlist= "/web/mediaplayerlist"; // plus full qualified path
 	this.mediaplayerplay= "/web/mediaplayerplay"; // plus file-serviceref
 	this.mediaplayerremove= "/web/mediaplayerremove"; // plus file-serviceref
 	this.mediaplayercmd= "/web/mediaplayercmd"; // plus command
 	this.mediaplayerwrite= "/web/mediaplayerwrite"; // plus filename
-	
+
 	this.filelist = "/web/mediaplayerlist?path="; // plus full qualified path
-	
+
 	this.timerlist= "/web/timerlist";
 	this.recordnow= "/web/recordnow";
 	this.timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,dirname,tags,eit,disabled,justplay,afterevent
@@ -45,14 +46,14 @@ function url() {
 	this.timerdelete= "/web/timerdelete"; // plus serviceref,begin,end
 	this.timerlistwrite="/web/timerlistwrite?write=saveWriteNow";
 	this.timercleanup="/web/timercleanup?cleanup=true";
-	
+
 	this.getcurrlocation="/web/getcurrlocation";
 	this.getlocations="/web/getlocations";
 	this.gettags="/web/gettags";
-	
+
 	this.message = "/web/message"; // plus text,type,timeout
-	this.messageanswer = "/web/messageanswer?getanswer=now"; 
-	
+	this.messageanswer = "/web/messageanswer?getanswer=now";
+
 	this.powerstate = "/web/powerstate"; // plus new powerstate
 	this.remotecontrol = "/web/remotecontrol"; // plus command
 	this.grab = "/grab";

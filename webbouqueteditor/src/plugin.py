@@ -25,8 +25,8 @@ def autostart(reason, **kwargs):
 		root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) )
 		root.putChild('tmp', File('/tmp'))
 		root.putChild("uploadfile",WebUploadResource(session))
-		addExternalChild( ("bouqueteditor", root) )
+		addExternalChild( ("bouqueteditor", root, "BouquetEditor", 1, True) )
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name="WebBouquetEditor", description=_("WebBouquetEditor"), where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]  
+	list = [PluginDescriptor(name="WebBouquetEditor", description=_("WebBouquetEditor"), where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]
 	return list
