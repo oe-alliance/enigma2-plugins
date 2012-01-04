@@ -16,6 +16,8 @@ class Vps(Timer):
 			vpsplugin_time = None
 			if 'vpsplugin_time' in param:
 				vpsplugin_time = int(float(param['vpsplugin_time']))
+				if vpsplugin_time == -1:
+					vpsplugin_time = None
 			for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
 				if sRef == str(timer.service_ref) and eit == timer.eit:
 					print "[WebComponents.Vps] addTimerByEventID: Found new timer, changing!"
@@ -43,6 +45,8 @@ class Vps(Timer):
 			vpsplugin_time = None
 			if 'vpsplugin_time' in param:
 				vpsplugin_time = int(float(param['vpsplugin_time']))
+				if vpsplugin_time == -1:
+					vpsplugin_time = None
 			for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
 				if sRef == str(timer.service_ref) and begin == int(timer.begin) \
 						and end == int(timer.end) and name == timer.name \
