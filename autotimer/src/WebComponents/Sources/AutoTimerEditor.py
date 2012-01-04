@@ -1,22 +1,13 @@
-from enigma import eServiceReference, eServiceCenter, eDVBDB
 from Components.Sources.Source import Source
-from Screens.ChannelSelection import service_types_tv, MODE_TV, MODE_RADIO
-from Components.config import config
-from os import remove, path, popen
-from Screens.InfoBar import InfoBar
-from ServiceReference import ServiceReference
-from Components.ParentalControl import parentalControl, IMG_WHITESERVICE, IMG_WHITEBOUQUET, IMG_BLACKSERVICE, IMG_BLACKBOUQUET, LIST_BLACKLIST
+from os import path, popen
 from re import compile as re_compile
-from Components.NimManager import nimmanager 
 
 class AutoTimerEditor(Source):
+	BACKUP = 0
+	RESTORE = 1
 
-	BACKUP = 10
-	RESTORE = 11
-	
 	BACKUP_PATH = "/tmp"
 	BACKUP_FILENAME = "autotimer_backup.tar"
-	
 
 	def __init__(self, session, func=BACKUP):
 		Source.__init__(self)
@@ -25,7 +16,6 @@ class AutoTimerEditor(Source):
 		self.command = None
 		self.bouquet_rootstr = ""
 		self.result = ( False, "one two three four unknown command" )
-		
 
 	def handleCommand(self, cmd):
 		print "[WebComponents.AutoTimerEditor] handleCommand with cmd = ", cmd
@@ -76,7 +66,7 @@ class AutoTimerEditor(Source):
 					check_tar = True
 					break
 			if check_tar:
-				files = []	
+				files = []
 				for autotimerfile in files:
 					if path.exists(autotimerfile):
 						remove(autotimerfile)

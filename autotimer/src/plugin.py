@@ -15,12 +15,10 @@ from Plugins.Plugin import PluginDescriptor
 # Webinterface
 from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
 from Plugins.Extensions.WebInterface.WebChilds.Screenpage import ScreenPage
+
 # Twisted
 from twisted.web import static
 from twisted.python import util
-#
-from enigma import eEnv
-
 
 # Initialize Configuration
 config.plugins.autotimer = ConfigSubsection()
@@ -61,42 +59,21 @@ except Exception as e:
 	autotimerHelp = None
 #pragma mark -
 
-# Webinterface
-if hasattr(static.File, 'render_GET'):
-	class File(static.File):
-		def render_POST(self, request):
-			return self.render_GET(request)
-else:
-	File = static.File
-
-
 # Autostart
 def autostart(reason, **kwargs):
 	global autotimer
 	global autopoller
 
 	# Startup
-	if reason == 0:
-		if config.plugins.autotimer.autopoll.value:
-			# Initialize AutoTimer
-			from AutoTimer import AutoTimer
-			autotimer = AutoTimer()
-	
-			# Start Poller
-			from AutoPoller import AutoPoller
-			autopoller = AutoPoller()
-			autopoller.start()
+	if reason == 0 and config.plugins.autotimer.autopoll.value:
+		# Initialize AutoTimer
+		from AutoTimer import AutoTimer
+		autotimer = AutoTimer()
 
-		# Webinterface
-		if "session" in kwargs:
-			from WebChilds.UploadResource import UploadResource
-			session = kwargs["session"]
-			root = File(eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/AutoTimer/web-data"))
-			root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) )
-			root.putChild('tmp', File('/tmp'))
-			root.putChild("uploadfile", UploadResource(session))
-			addExternalChild( ("autotimereditor", root) )
-
+		# Start Poller
+		from AutoPoller import AutoPoller
+		autopoller = AutoPoller()
+		autopoller.start()
 	# Shutdown
 	elif reason == 1:
 		# Stop Poller
@@ -117,6 +94,24 @@ def autostart(reason, **kwargs):
 
 			# Remove AutoTimer
 			autotimer = None
+
+# Webgui
+def sessionstart(reason, **kwargs):
+	if reason == 0 and "session" in kwargs:
+		from WebChilds.UploadResource import UploadResource
+		if hasattr(static.File, 'render_GET'):
+			class File(static.File):
+				def render_POST(self, request):
+					return self.render_GET(request)
+		else:
+			File = static.File
+
+		session = kwargs["session"]
+		root = File(util.sibpath(__file__, "web-data"))
+		root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) )
+		root.putChild('tmp', File('/tmp'))
+		root.putChild("uploadfile", UploadResource(session))
+		addExternalChild( ("autotimereditor", root, "AutoTimer", "1", True) )
 
 # Mainfunction
 def main(session, **kwargs):
@@ -210,7 +205,8 @@ extDescriptor = PluginDescriptor(name="AutoTimer", description = _("Edit Timers 
 
 def Plugins(**kwargs):
 	l = [
-		PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart, needsRestart = False),
+		PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart=False),
+		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart, needsRestart=False),
 		# TRANSLATORS: description of AutoTimer in PluginBrowser
 		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main, needsRestart = False),
 		# TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
