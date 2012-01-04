@@ -653,6 +653,11 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		for (attrib, value) in self["videoPicture"].skinAttributes:
 			if attrib == "position":
 				self.videoPicturePosX, self.videoPicturePosY = [int(x) for x in value.split(",")]
+		# self["infoText"]
+		for (attrib, value) in self["infoText"].skinAttributes:
+			if attrib == "font":
+				font = [x for x in value.split(";")]
+				self.widgetFontSizes.append(("infoText", font[0], int(font[1])))
 				
 	def setSkinFile(self, configElement = None):
 		config.plugins.merlinEpgCenter.skin.value = configElement.getValue()
@@ -765,7 +770,10 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		diff = configElement.getValue()
 		
 		for widget, font, fontSize in self.widgetFontSizes:
-			self[widget].instance.setFont(gFont(font, fontSize + diff))
+			if widget == "infoText":
+				self[widget].long_text.setFont(gFont(font, fontSize + diff))
+			else:
+				self[widget].instance.setFont(gFont(font, fontSize + diff))
 			
 	def getPrimeTime(self, configElement = None):
 		now = localtime(time())
@@ -2150,6 +2158,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		if backgroundPixmap is not None:
 			self["timerlist"].instance.setBackgroundPicture(backgroundPixmap)
 			self["list"].instance.setBackgroundPicture(backgroundPixmap)
+			self["upcoming"].instance.setBackgroundPicture(backgroundPixmap)
 			self["history"].instance.setBackgroundPicture(backgroundPixmap)
 			self["settings"].instance.setBackgroundPicture(backgroundPixmap)
 			

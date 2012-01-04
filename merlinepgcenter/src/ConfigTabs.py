@@ -135,6 +135,10 @@ config.plugins.merlinEpgCenter.tabTextColorSelected = NoSave(ConfigText(default 
 # Default is to show the text "Bouquet:" in front of a bouquet name. Use this option to hide it
 config.plugins.merlinEpgCenter.showBouquetText = NoSave(ConfigYesNo(True))
 
+# Allows changing the color of the event title in lists
+config.plugins.merlinEpgCenter.titleColor = NoSave(ConfigInteger(default = 0x00ffffff))
+config.plugins.merlinEpgCenter.titleColorSelected = NoSave(ConfigInteger(default = 0x00ffffff))
+
 
 ############################################################################################
 # CONFIG CLASSES
