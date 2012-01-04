@@ -7,7 +7,7 @@ class External(Source):
 		append = l.append
 		for child in Toplevel.externalChildren:
 			Len = len(child)
-			if Len == 5:
+			if Len > 4:
 				child = (child[0], child[2], child[3], child[4])
 			elif Len == 4:
 				child = (child[0], child[2], child[3], False)
