@@ -24,7 +24,23 @@ def autostart(reason, **kwargs):
 			session = kwargs["session"]
 			vps_timers.session = session
 			vps_timers.checkTimer()
-		
+
+			from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
+			from Plugins.Extensions.WebInterface.WebChilds.Screenpage import ScreenPage
+			from twisted.web import static
+			from twisted.python import util
+			from enigma import eEnv
+			if hasattr(static.File, 'render_GET'):
+				class File(static.File):
+					def render_POST(self, request):
+						return self.render_GET(request)
+			else:
+				File = static.File
+
+			root = File(eEnv.resolve("${libdir}/enigma2/python/Plugins/SystemPlugins/vps/web-data"))
+			root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True))
+			addExternalChild(("vpsplugin", root, "VPS-Plugin", "1", False))
+
 		register_vps()
 	
 	elif reason == 1:

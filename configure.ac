@@ -556,6 +556,10 @@ vps/meta/Makefile
 vps/po/Makefile
 vps/src_cc/Makefile
 vps/src_py/Makefile
+vps/src_py/web/Makefile
+vps/src_py/web-data/Makefile
+vps/src_py/WebComponents/Makefile
+vps/src_py/WebComponents/Sources/Makefile
 
 weatherplugin/Makefile
 weatherplugin/meta/Makefile
