@@ -96,6 +96,12 @@ autotimer/Makefile
 autotimer/meta/Makefile
 autotimer/po/Makefile
 autotimer/src/Makefile
+autotimer/src/WebChilds/Makefile
+autotimer/src/WebComponents/Makefile
+autotimer/src/WebComponents/Sources/Makefile
+autotimer/src/WebScreens/Makefile
+autotimer/src/web/Makefile
+autotimer/src/web-data/Makefile
 autotimer/src/webinterface/Makefile
 
 babelzapper/Makefile
