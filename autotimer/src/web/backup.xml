@@ -1,4 +1,4 @@
-<e2:screen external_module="Plugins.Extensions.AutoTimer.WebScreens.AutoTimerEditorWebScreens" name="AutoTimerEditorWebScreens">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:screen external_module="Plugins.Extensions.AutoTimer.WebScreens.AutoTimerEditorWebScreens" name="AutoTimerEditorWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
 <e2:element source="Backup" id="Filename">
 	<e2:convert type="web:Null" />
 </e2:element>
