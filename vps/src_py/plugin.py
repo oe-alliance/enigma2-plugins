@@ -39,7 +39,7 @@ def autostart(reason, **kwargs):
 
 			root = File(eEnv.resolve("${libdir}/enigma2/python/Plugins/SystemPlugins/vps/web-data"))
 			root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True))
-			addExternalChild(("vpsplugin", root, "VPS-Plugin", "1", False))
+			addExternalChild(("vpsplugin", root, "VPS-Plugin", "1"))
 
 		register_vps()
 	
