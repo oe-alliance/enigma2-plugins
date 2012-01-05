@@ -11,7 +11,7 @@ from enigma import eServiceReference
 from . import _, iteritems
 from . import plugin
 
-API_VERSION = "1.1"
+API_VERSION = "1.2"
 
 class AutoTimerBaseResource(resource.Resource):
 	_remove = False
@@ -268,6 +268,20 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		timer.searchForDuplicateDescription = int(get("searchForDuplicateDescription", timer.searchForDuplicateDescription))
 		timer.destination = get("location", timer.destination) or None
 
+		# vps
+		enabled = get("vps_enabled")
+		if enabled is not None:
+			try: enabled = int(enabled)
+			except ValueError: enabled = enabled == "yes"
+			timer.vps_enabled = enabled
+		vps_overwrite = get("vps_overwrite")
+		if vps_overwrite is not None:
+			try: vps_overwrite = int(vps_overwrite)
+			except ValueError: vps_overwrite = vps_overwrite == "yes"
+			timer.vps_overwrite = vps_overwrite
+		if not timer.vps_enabled and timer.vps_overwrite:
+			timer.vps_overwrite = False
+
 		if newTimer:
 			autotimer.add(timer)
 			message = _("AutoTimer was added successfully")
@@ -399,6 +413,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingname>version</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
+	<e2setting>
+		<e2settingname>api_version</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
 </e2settings>""" % (
 				config.plugins.autotimer.autopoll.value,
 				config.plugins.autotimer.interval.value,
@@ -414,4 +432,5 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.maxdaysinfuture.value,
 				hasVps,
 				CURRENT_CONFIG_VERSION,
+				API_VERSION,
 			)
