@@ -278,8 +278,8 @@
 		color: #485052;
 	}
 	.editor{
-    margin-top: 5px;
-    margin-bottom: 5px;
+		margin-top: 5px;
+		margin-bottom: 5px;
 		width: 100%;
 	}
 	
@@ -364,6 +364,10 @@
 	
 	.invisible{
 		display: none;
+	}
+	
+	.fixedwidth{
+		width : 150px;
 	}
 	
 	.timepicker{
