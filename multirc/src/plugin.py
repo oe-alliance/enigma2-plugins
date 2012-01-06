@@ -139,7 +139,7 @@ def multirc_autostart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="Multi RemoteControl",
-				description=_("Multi Dreambox RC layer setup"),
+				description=_("Multi Receiver RC layer setup"),
 				where=PluginDescriptor.WHERE_PLUGINMENU,
 				fnc = multirc_setup),
 

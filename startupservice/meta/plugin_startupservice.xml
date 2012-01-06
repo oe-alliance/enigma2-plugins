@@ -7,7 +7,7 @@
                     <name>StartUpService</name>
                     <packagename>enigma2-plugin-systemplugins-startupservice</packagename>
                     <shortdescription>Define a startup service</shortdescription>
-                    <description>Define a startup service for your Dreambox.</description>
+                    <description>Define a startup service for your Receiver.</description>
           </info>
 
 	  <files type="package"> <!-- without version, without .ipk -->

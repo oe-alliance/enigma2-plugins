@@ -6,8 +6,8 @@
                     <author>Dr.Best</author>
                     <name>WeatherPlugin</name>
                     <packagename>enigma2-plugin-extensions-weatherplugin</packagename>
-                    <shortdescription>Weatherforecast on your Dreambox</shortdescription>
-                    <description>WeatherPlugin shows weatherforecasts on your Dreambox.</description>
+                    <shortdescription>Weatherforecast on your Receiver</shortdescription>
+                    <description>WeatherPlugin shows weatherforecasts on your Receiver.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_weatherplugin.jpg" />		    
           </info>
 

@@ -7,7 +7,7 @@
                     <name>YouTubePlayer</name>
                     <packagename>enigma2-plugin-extensions-youtubeplayer</packagename>
                     <shortdescription>Playback of Youtube through a PC</shortdescription>
-                    <description>With YouTubePlayer you can watch YouTube-Videos on the Dreambox.\n
+                    <description>With YouTubePlayer you can watch YouTube-Videos on the Receiver.\n
 		    This plugin requires a PC with the VLC program running.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_youtubeplayer_en.jpg" />		    
           </info>

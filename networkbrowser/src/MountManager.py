@@ -73,10 +73,10 @@ class AutoMountManager(Screen):
 	def updateList(self):
 		self.list = []
 		okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
-		self.list.append((_("Add new network mount point"),"add", _("Add a new NFS or CIFS mount point to your Dreambox."), okpng ))
-		self.list.append((_("Mountpoints management"),"view", _("View, edit or delete mountpoints on your Dreambox."), okpng ))
+		self.list.append((_("Add new network mount point"),"add", _("Add a new NFS or CIFS mount point to your Receiver."), okpng ))
+		self.list.append((_("Mountpoints management"),"view", _("View, edit or delete mountpoints on your Receiver."), okpng ))
 		self.list.append((_("User management"),"user", _("View, edit or delete usernames and passwords for your network."), okpng))
-		self.list.append((_("Change hostname"),"hostname", _("Change the hostname of your Dreambox."), okpng))
+		self.list.append((_("Change hostname"),"hostname", _("Change the hostname of your Receiver."), okpng))
 		self.list.append((_("Setup Mount Again"),"mountagain", _("Schedule a auto remount of your network shares."), okpng))
 		self["config"].setList(self.list)
 
@@ -111,7 +111,7 @@ class AutoMountManager(Screen):
 			fp = open('/etc/hostname', 'r')
 			self.hostname = fp.read()
 			fp.close()
-			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title = (_("Enter new hostname for your Dreambox")), text = self.hostname)
+			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title = (_("Enter new hostname for your Receiver")), text = self.hostname)
 
 	def hostnameCallback(self, callback = None):
 		if callback is not None and len(callback):

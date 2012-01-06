@@ -19,7 +19,7 @@
 			&lt;enclosure type="video/mpeg" url="http://<e2:item macro="ipadress" filter="xml" /><e2:item name="Filename" filter="urlencode"/>"/>
 			&lt;pubDate><e2:item name="TimeString" filter="xml" />&lt;/pubDate>
 			&lt;category><e2:item name="ServiceName" filter="xml" />&lt;/category>
-			&lt;author>Dreambox Enigma2&lt;/author>
+			&lt;author>Enigma2&lt;/author>
 		&lt;/item></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
 	</channel>
 </rss>

@@ -6,8 +6,8 @@
                     <author>Georg Lukas</author>
                     <name>Multirc</name>
                     <packagename>enigma2-plugin-extensions-multirc</packagename>
-                    <shortdescription>control multiple Dreamboxes with different RCs</shortdescription>
-                    <description>Use and control multiple Dreamboxes with different RCs.</description>
+                    <shortdescription>control multiple receiver's with different RCs</shortdescription>
+                    <description>Use and control multiple receiver's with different RCs.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_multirc.jpg" />
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->

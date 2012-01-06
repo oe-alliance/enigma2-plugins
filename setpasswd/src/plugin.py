@@ -127,6 +127,6 @@ def main(session, **kwargs):
 def Plugins(**kwargs):
 	return PluginDescriptor(
 		name=title, 
-		description=_("Change or reset the root password of your dreambox"),
+		description=_("Change or reset the root password of your Receiver"),
 		where = [PluginDescriptor.WHERE_MENU], fnc = startChange)
 	

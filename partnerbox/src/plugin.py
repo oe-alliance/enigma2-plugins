@@ -129,7 +129,7 @@ def main(session,**kwargs):
 	partnerboxpluginStart(session, 2)
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name="Partnerbox: RemoteTimer", description=_("Manage timer for other dreamboxes in network"), 
+	list = [PluginDescriptor(name="Partnerbox: RemoteTimer", description=_("Manage timer for other receiveres in network"), 
 		where = [PluginDescriptor.WHERE_EVENTINFO ], fnc=main)]
 	if config.plugins.Partnerbox.enablepartnerboxintimerevent.value:
 		list.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart_RemoteTimerInit))
@@ -137,7 +137,7 @@ def Plugins(**kwargs):
 		list.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart_Partnerbox_EPGList))
 	list.append(PluginDescriptor(name="Setup Partnerbox", description=_("setup for partnerbox"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup))
 	if config.plugins.Partnerbox.showremotetimerinextensionsmenu.value:
-		list.append(PluginDescriptor(name="Partnerbox: RemoteTimer", description=_("Manage timer for other dreamboxes in network"), 
+		list.append(PluginDescriptor(name="Partnerbox: RemoteTimer", description=_("Manage timer for other receiveres in network"), 
 		where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
 	if config.plugins.Partnerbox.showremotetvinextensionsmenu.value:
 		list.append(PluginDescriptor(name="Partnerbox: RemoteTV Player", description=_("Stream TV from your Partnerbox"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=remotetvplayer))

@@ -7,7 +7,7 @@
                     <name>DVD Backup</name>
                     <packagename>enigma2-plugin-extensions-dvdbackup</packagename>
                     <shortdescription>Create a backup of your Video-DVD</shortdescription>
-                    <description>Create a backup of your Video DVD on your DreamBox hard drive.</description>
+                    <description>Create a backup of your Video DVD on your receiver hard drive.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_dvdbackup_en.jpg" />	
           </info>
 

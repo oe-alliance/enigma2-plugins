@@ -7,7 +7,7 @@
                     <name>GoogleMaps</name>
                     <packagename>enigma2-plugin-extensions-googlemaps</packagename>
                     <shortdescription>View Google maps</shortdescription>
-                    <description>View Google maps with your Dreambox.</description>
+                    <description>View Google maps with your receiver.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_googlemaps.jpg" />
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->

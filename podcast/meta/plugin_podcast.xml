@@ -7,7 +7,7 @@
                     <name>Podcast</name>
                     <packagename>enigma2-plugin-extensions-podcast</packagename>
                     <shortdescription>Stream podcasts</shortdescription>
-                    <description>PodCast streams podcasts to your Dreambox.</description>
+                    <description>PodCast streams podcasts to your receiver.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_podcast.jpg" />		    
           </info>
 

@@ -9,8 +9,8 @@
 </head>
 <body>
 <div class="wap">
-	<p><center><a href="/web/powerstate?newstate=1">Deepstandby Dreambox</a></center></p>
-	<p><center><a href="/web/powerstate?newstate=2">Reboot Dreambox</a></center></p>
+	<p><center><a href="/web/powerstate?newstate=1">Deepstandby Receiver</a></center></p>
+	<p><center><a href="/web/powerstate?newstate=2">Reboot Receiver</a></center></p>
 	<hr/>
 	<p><center><a href="/web/powerstate?newstate=3">Restart Enigma2</a></center></p>
 </div>

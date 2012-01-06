@@ -6,8 +6,8 @@
                     <author>Bacicciosat-Lupomeo</author>
                     <name>MeteoItalia</name>
                     <packagename>enigma2-plugin-extensions-meteoitalia</packagename>
-                    <shortdescription>Italian Weather forecast on Dreambox</shortdescription>
-                    <description>Italian Weather forecast on Dreambox from www.google.it.</description>
+                    <shortdescription>Italian Weather forecast on receiver</shortdescription>
+                    <description>Italian Weather forecast on receiver from www.google.it.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_meteoitalia.jpg" />		    
           </info>
 

@@ -8,8 +8,8 @@
                     <author>Reichi</author>
                     <name>WebInterface</name>
                     <packagename>enigma2-plugin-extensions-webinterface</packagename>
-                    <shortdescription>Control your Dreambox with your browser</shortdescription>
-                    <description>Control your Dreambox with your Web browser.</description>
+                    <shortdescription>Control your Receiver with your browser</shortdescription>
+                    <description>Control your Receiver with your Web browser.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_webinterface.jpg" />		    
           </info>
 

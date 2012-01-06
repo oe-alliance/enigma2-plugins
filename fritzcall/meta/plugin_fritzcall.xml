@@ -8,7 +8,7 @@
                     <name>FritzCall</name>
                     <packagename>enigma2-plugin-extensions-fritzcall</packagename>
                     <shortdescription>Callmonitor for the Fritz!Box routers</shortdescription>
-                    <description>FritzCall shows incoming calls to your Fritz!Box on your Dreambox.</description>
+                    <description>FritzCall shows incoming calls to your Fritz!Box on your receiver.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_fritzcall_en.jpg" />
           </info>
 

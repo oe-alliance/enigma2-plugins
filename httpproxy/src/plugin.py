@@ -148,7 +148,7 @@ def autostart(reason,**kwargs):
 
 def Plugins(**kwargs):
   return [
-          PluginDescriptor(name="HTTP Proxy",description="use your Dreambox as Web Proxy",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main),
+          PluginDescriptor(name="HTTP Proxy",description="use your receiver as Web Proxy",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main),
           PluginDescriptor(where = [PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc = autostart)
           ]
 

@@ -7,7 +7,7 @@
                     <name>remoteTimer</name>
                     <packagename>enigma2-plugin-extensions-remotetimer</packagename>
                     <shortdescription>Create remote timers</shortdescription>
-                    <description>Create timers on remote Dreamboxes.</description>
+                    <description>Create timers on remote receiver's.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_remotetimer_en.jpg" />		    
           </info>
 

@@ -361,7 +361,7 @@ def _gotPageLoad(session, timerEntry, html):
 	session.openWithCallback(
 		boundFunction(_gotPageLoadCb, timerEntry, doClose),
 		MessageBox,
-		_("Set Timer on Remote DreamBox via WebIf:\n%s") % (remoteresponse),
+		_("Set Timer on Remote Receiver via WebIf:\n%s") % (remoteresponse),
 		MessageBox.TYPE_INFO
 	)
 
@@ -369,7 +369,7 @@ def errorLoad(session, error):
 	#print "[RemoteTimer] errorLoad ERROR:", error
 	session.open(
 		MessageBox,
-		_("ERROR - Set Timer on Remote DreamBox via WebIf:\n%s") % (error),
+		_("ERROR - Set Timer on Remote Receiver via WebIf:\n%s") % (error),
 		MessageBox.TYPE_INFO
 	)
 

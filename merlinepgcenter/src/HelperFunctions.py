@@ -310,12 +310,12 @@ class RecTimerEntry(RecordTimerEntry):
 				self.record_service = None
 			if self.afterEvent == AFTEREVENT.STANDBY:
 				if not Screens.Standby.inStandby and config.plugins.merlinEpgCenter.showTimerMessages.value: # not already in standby
-					self.session.openWithCallback(self.sendStandbyNotification, MessageBox, _("A finished record timer wants to set your\nDreambox to standby. Do that now?"), timeout = 20)
+					self.session.openWithCallback(self.sendStandbyNotification, MessageBox, _("A finished record timer wants to set your\nreceiver to standby. Do that now?"), timeout = 20)
 			elif self.afterEvent == AFTEREVENT.DEEPSTANDBY:
 				if not Screens.Standby.inTryQuitMainloop: # not a shutdown messagebox is open
 					if Screens.Standby.inStandby: # in standby
 						RecordTimerEntry.TryQuitMainloop() # start shutdown handling without screen
 					elif config.plugins.merlinEpgCenter.showTimerMessages.value:
-						self.session.openWithCallback(self.sendTryQuitMainloopNotification, MessageBox, _("A finished record timer wants to shut down\nyour Dreambox. Shutdown now?"), timeout = 20)
+						self.session.openWithCallback(self.sendTryQuitMainloopNotification, MessageBox, _("A finished record timer wants to shut down\nyour receiver. Shutdown now?"), timeout = 20)
 			return True
 			

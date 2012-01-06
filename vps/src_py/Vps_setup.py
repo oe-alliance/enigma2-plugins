@@ -77,7 +77,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		elif cur == self.vps_default_overwrite:
 			self["help"].text = _("Enable \"Recording controlled by channel\" by default (new timers)")
 		elif cur == self.vps_allow_wakeup:
-			self["help"].text = _("If enabled and necessary, the plugin will wake up the Dreambox from Deep-Standby for the defined starting time to control whether the programme begins earlier.")
+			self["help"].text = _("If enabled and necessary, the plugin will wake up the Receiver from Deep-Standby for the defined starting time to control whether the programme begins earlier.")
 		elif cur == self.vps_allow_seeking_multiple_pdc:
 			self["help"].text = _("If a programme is interrupted and divided into separate events, the plugin will search for the connected events.")
 

@@ -7,7 +7,7 @@
                     <name>FTPBrowser</name>
                     <packagename>enigma2-plugin-extensions-ftpbrowser</packagename>
                     <shortdescription>A basic ftp client</shortdescription>
-                    <description>FTPBrowser allows uploading and downloading files between your Dreambox and a server using the file transfer protocol.</description>
+                    <description>FTPBrowser allows uploading and downloading files between your receiver and a server using the file transfer protocol.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_ftpbrowser_en.jpg" />
           </info>
 
