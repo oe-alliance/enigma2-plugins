@@ -1,4 +1,4 @@
-Subtitle Downloader v. 0.24.6 2012-01-03
+Subtitle Downloader v. 0.24.7 2012-01-07
 
 Enigma2 plugin which downloads subtitle to Your movie.
 
@@ -28,6 +28,9 @@ HELP - show about info
 < - change widget to FileList
 TEXT - download subtitle or avaliable on server subtitle list
 OK - on FileList play media/ on SubsList download subtitle
+
+ver 0.24.7:
+- correction in makefile.am.
 
 ver 0.24.6:
 - fixed SubtitleDatabase.py,
