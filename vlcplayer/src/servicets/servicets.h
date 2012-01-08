@@ -1,5 +1,5 @@
 /*******************************************************************************
- VLC Player Plugin by A. Lätsch 2007
+ VLC Player Plugin by A. L√§tsch 2007
 
  This is free software; you can redistribute it and/or modify it under
  the terms of the GNU General Public License as published by the Free
@@ -117,7 +117,6 @@ private:
 	ePtr<iTSMPEGDecoder> m_decoder;
 	ePtr<eStreamThread> m_streamthread;
 	ePtr<TSAudioInfo> m_audioInfo;
-	eUsePtr<iDVBPVRChannel> m_channel;
 
 	eServiceTS(const eServiceReference &url);
 	int openHttpConnection(std::string url);
@@ -136,7 +135,6 @@ public:
 	void start(int srcfd, int destfd);
 	void stop();
 	bool running() { return m_running; }
-	bool stopping() { return m_stop || !m_running; }
 
 	virtual void thread();
 	virtual void thread_finished();

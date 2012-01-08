@@ -26,57 +26,70 @@
 #include <openssl/bn.h>
 #include <openssl/sha.h>
 
-eBitrateCalc::eBitrateCalc(const eServiceReference &ref, int pid, int refreshintervall, int buffer_size): m_size(0), m_refresh_intervall(refreshintervall)
+eBitrateCalc::eBitrateCalc(int pid, int dvbnamespace, int tsid, int onid, int refreshintervall, int buffer_size): m_size(0), m_refresh_intervall(refreshintervall)
 {
 	m_send_data_timer = eTimer::create(eApp);
 	CONNECT(m_send_data_timer->timeout, eBitrateCalc::sendDataTimerTimeoutCB);
-	eDVBChannelID chid;
-	if (ref.type == eServiceReference::idDVB)
+	eDVBChannelID chid; //(eDVBNamespace(dvbnamespace), eTransportStreamID(tsid), eOriginalNetworkID(onid));  <-- weird, that does not work
+	chid.dvbnamespace = eDVBNamespace(dvbnamespace);
+	chid.transport_stream_id = eTransportStreamID(tsid);
+	chid.original_network_id = eOriginalNetworkID(onid);
+	ePtr<eDVBResourceManager> res_mgr;
+	eDVBResourceManager::getInstance(res_mgr);
+	eUsePtr<iDVBChannel> channel;
+	int success = 0;
+	m_reader = NULL;
+	if (!res_mgr->allocateChannel(chid, channel, false))
 	{
-		int success = 0;
-		eUsePtr<iDVBChannel> channel;
-		eUsePtr<iDVBPVRChannel> pvr_channel;
 		ePtr<iDVBDemux> demux;
-		ePtr<eDVBResourceManager> res_mgr;
-		eDVBResourceManager::getInstance(res_mgr);
-		const eServiceReferenceDVB &dvb_ref = (eServiceReferenceDVB&)ref;
-		eDVBChannelID chid;
-		dvb_ref.getChannelID(chid);
-		bool is_pvr = !chid.pvr_source.empty();
-		m_reader = NULL;
-		if ((is_pvr && !res_mgr->allocateChannel(chid, pvr_channel)) ||
-		    (!is_pvr && !res_mgr->allocateChannel(chid, channel)))
+		if (!channel->getDemux(demux))
 		{
-			if (is_pvr)
-				channel = pvr_channel;
-			if (!channel->getDemux(demux))
+			if (!demux->createPESReader(eApp, m_reader))
 			{
-				if (!demux->createPESReader(eApp, m_reader))
+				if (!m_reader->connectRead(slot(*this, &eBitrateCalc::dataReady), m_pes_connection))
 				{
-					if (!m_reader->connectRead(slot(*this, &eBitrateCalc::dataReady), m_pes_connection))
-					{
-						channel->connectStateChange(slot(*this, &eBitrateCalc::stateChange), m_channel_connection);
-						success = 1;
-					}
-					else
-						eDebug("[eBitrateCalc] connect pes reader failed...");
+					channel->connectStateChange(slot(*this, &eBitrateCalc::stateChange), m_channel_connection);
+					success = 1;
 				}
 				else
-					eDebug("[eBitrateCalc] create PES reader failed...");
+					eDebug("[eBitrateCalc] connect pes reader failed...");
 			}
 			else
-				eDebug("[eBitrateCalc] getDemux failed...");
+				eDebug("[eBitrateCalc] create PES reader failed...");
 		}
-		if (m_reader && success)
+		else 
+			eDebug("[eBitrateCalc] getDemux failed...");
+	}
+	else
+	{
+		eDebug("[eBitrateCalc] allocate channel failed...trying pvr_allocate_demux");
+		ePtr<eDVBAllocatedDemux> pvr_allocated_demux;
+		int i = 0;
+		if (!res_mgr->allocateDemux(NULL,pvr_allocated_demux,i))
 		{
-			clock_gettime(CLOCK_MONOTONIC, &m_start);
-			m_reader->setBufferSize(buffer_size);
-			m_reader->start(pid);
-			m_send_data_timer->start(m_refresh_intervall, true);
+			eDVBDemux &demux = pvr_allocated_demux->get();
+			if (!demux.createPESReader(eApp, m_reader))
+			{
+				if (!m_reader->connectRead(slot(*this, &eBitrateCalc::dataReady), m_pes_connection))
+					success = 1;
+				else
+					eDebug("[eBitrateCalc] connect pes reader failed...");
+			}
+			else
+				eDebug("[eBitrateCalc] create PES reader failed...");
 		}
 		else
-			sendData(-1,0);
+			eDebug("[eBitrateCalc] allocate pvr_allocated_demux failed...");
 	}
+	if (m_reader && success)
+	{
+		clock_gettime(CLOCK_MONOTONIC, &m_start);
+		m_reader->setBufferSize(buffer_size);
+		m_reader->start(pid);
+		m_send_data_timer->start(m_refresh_intervall, true);
+	}
+	else
+		sendData(-1,0);
 }
 
 void eBitrateCalc::dataReady(const __u8*,  int size)
@@ -214,7 +227,6 @@ static const unsigned char tpm_root_mod[128] = {
 
 static bool signature()
 {
-	return true;
 	int chk = 1;
 	FILE *fp; 
 	fp = fopen ("/proc/stb/info/model", "r");
@@ -302,11 +314,10 @@ eBitrateCalculatorPy_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 {
 	eBitrateCalculatorPy *self = (eBitrateCalculatorPy *)type->tp_alloc(type, 0);
 	int size = PyTuple_Size(args);
-	char *refstr=NULL;
-	int refreshinterval, buffer_size, pid;
-	if (size < 4 || !PyArg_ParseTuple(args, "isii", &pid, &refstr, &refreshinterval, &buffer_size))
+	int pid, dvbnamespace, tsid, onid, refreshinterval, buffer_size;
+	if (size < 6 || !PyArg_ParseTuple(args, "iiiiii", &pid, &dvbnamespace, &tsid, &onid, &refreshinterval, &buffer_size))
 		return NULL;
-	self->bc = new eBitrateCalc(eServiceReference(refstr), pid, refreshinterval, buffer_size);
+	self->bc = new eBitrateCalc(pid, dvbnamespace, tsid, onid, refreshinterval, buffer_size);
 	return (PyObject *)self;
 }
 
