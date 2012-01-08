@@ -203,6 +203,12 @@ msgstr "Nadawca:"
 msgid "Set search term"
 msgstr "Ustaw szukany termin"
 
+msgid "Show MiniTV:"
+msgstr "Pokaż MiniTV:"
+
+msgid "Show begin/remain times:"
+msgstr "Pokaż rozpoczęty i pozostały czas:"
+
 msgid "Show blinking picon for running timers:"
 msgstr "Pokaż mrugającą Pikonę dla uruchomionych Timerów:"
 
@@ -241,6 +247,9 @@ msgstr "Podobny"
 
 msgid "Single"
 msgstr "Pojedyńczy"
+
+msgid "Space between columns:"
+msgstr "Odstęp między kolumnami:"
 
 msgid "Stop current event and disable coming events"
 msgstr "Zatrzymaj bieżące wydarzenie i wyłącz nadchodzące"
