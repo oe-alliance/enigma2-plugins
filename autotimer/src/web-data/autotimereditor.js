@@ -493,10 +493,10 @@ var AutoTimerEditController = Class.create(Controller, {
 	
 	onchangeSelectAfterEvent: function(x) {
 		if (x.value == 'default'){
-			x.nextElementSibling.checked = '';
-			x.nextElementSibling.style.visibility = "hidden";
+			$('aftereventusetimespan').checked = '';
+			$(x.id+'content').style.visibility = "hidden";
 		} else{
-			x.nextElementSibling.style.visibility = 'visible';
+			$(x.id+'content').style.visibility = 'visible';
 		}
 		this.onchangeCheckbox( $('aftereventusetimespan') );
 	},

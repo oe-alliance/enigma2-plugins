@@ -186,9 +186,12 @@
 																<option value="${e.value}" ${e.selected}>${e.txt}</option>
 															{/for}	
 														</select>
-														<input id="aftereventusetimespan" type="checkbox" class="input" ${afterevent.usetimespan}>
 													</td>
 													<td>
+														<div id="aftereventcontent" class="optionSub">
+															Time span:
+															<input id="aftereventusetimespan" type="checkbox" class="input" ${afterevent.usetimespan}>
+														</div>
 														<div id="aftereventusetimespancontent" class="optionSub">
 															From:
 															<input id="aftereventfrom" type="text" class="input timepicker" size="6" value="${afterevent.from}">
