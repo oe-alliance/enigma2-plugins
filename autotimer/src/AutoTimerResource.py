@@ -207,8 +207,14 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 						"standby": AFTEREVENT.STANDBY,
 						"auto": AFTEREVENT.AUTO
 					}.get(afterevent, AFTEREVENT.AUTO)
-				# TODO: add afterevent timespan
-				timer.afterevent = [(afterevent, None)]
+				start = get("aftereventFrom")
+				end = get("aftereventTo")
+				if start and end:
+					start = [int(x) for x in start.split(':')]
+					end = [int(x) for x in end.split(':')]
+					timer.afterevent = [(afterevent, (start, end))]
+				else:
+					timer.afterevent = [(afterevent, None)]
 
 		# Maxduration
 		maxduration = get("maxduration")

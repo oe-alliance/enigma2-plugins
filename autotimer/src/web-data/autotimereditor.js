@@ -469,10 +469,10 @@ var AutoTimerEditController = Class.create(Controller, {
 		AnyTime.picker( 'after', { format: "%Y-%m-%d", firstDOW: 1 } );
 		AnyTime.noPicker( 'before' );
 	  AnyTime.picker( 'before', { format: "%Y-%m-%d", firstDOW: 1 } );
-		AnyTime.noPicker( 'aftereventfrom' );
-		AnyTime.picker( 'aftereventfrom', { format: "%H:%i" } );
-		AnyTime.noPicker( 'aftereventto' );
-		AnyTime.picker( 'aftereventto', { format: "%H:%i" } );
+		AnyTime.noPicker( 'aftereventFrom' );
+		AnyTime.picker( 'aftereventFrom', { format: "%H:%i" } );
+		AnyTime.noPicker( 'aftereventTo' );
+		AnyTime.picker( 'aftereventTo', { format: "%H:%i" } );
 	},
 	
 	onchangeCheckbox: function(x) {
@@ -688,8 +688,8 @@ var AutoTimerEditController = Class.create(Controller, {
 		data['afterevent']              = afterevent;
 		//TODO AfterEvent TimeSpan is not implemented in AutoTimerRessource
 		if ($('aftereventusetimespan').checked){
-			data['aftereventfrom']        = $('aftereventfrom').value;
-			data['aftereventto']          = $('aftereventto').value;
+			data['aftereventFrom']        = $('aftereventFrom').value;
+			data['aftereventTo']          = $('aftereventTo').value;
 		}
 
 		data['counter']                 = $('counter').value;		
@@ -1385,17 +1385,17 @@ function AutoTimer(xml, defaults){
 	
 	var xmlafterevents = xml.getElementsByTagName('afterevent');
 	var afterevent = '';
-	var aftereventfrom = '';
-	var aftereventto = '';
+	var aftereventFrom = '';
+	var aftereventTo = '';
 	if (xmlafterevents.length > 0){
 		var xmlafterevent = xmlafterevents.item(0);
 		afterevent = xmlafterevent.firstChild.nodeValue;
-		aftereventfrom = xmlafterevent.getAttribute('from');
-		aftereventto = xmlafterevent.getAttribute('to');
+		aftereventFrom = xmlafterevent.getAttribute('from');
+		aftereventTo = xmlafterevent.getAttribute('to');
 	}
-	var useaftereventtimespan = (aftereventfrom || aftereventto) ? 'checked' : '';
-	if (aftereventfrom == undefined || aftereventfrom == '') aftereventfrom = '23:15';
-	if (aftereventto == undefined || aftereventto =='') aftereventto = '07:00';
+	var useaftereventtimespan = (aftereventFrom || aftereventTo) ? 'checked' : '';
+	if (aftereventFrom == undefined || aftereventFrom == '') aftereventFrom = '23:15';
+	if (aftereventTo == undefined || aftereventTo =='') aftereventTo = '07:00';
 	if (afterevent == '') afterevent = 'default';
 	//TODO AutoTimer is a bit inconsistent: sometimes it is none or nothing
 	if (afterevent == 'shutdown') afterevent = 'deepstandby';
@@ -1410,8 +1410,8 @@ function AutoTimer(xml, defaults){
 	this.afterevent = {
 		'options' : createOptionList(options, afterevent),
 		'usetimespan' : useaftereventtimespan,
-		'from' : aftereventfrom,
-		'to' : aftereventto,
+		'from' : aftereventFrom,
+		'to' : aftereventTo,
 	}
 	
 	//TODO TEST lastactivation lastbegin
