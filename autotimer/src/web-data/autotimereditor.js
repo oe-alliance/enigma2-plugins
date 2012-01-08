@@ -1541,7 +1541,7 @@ function AutoTimer(xml, defaults){
 				});
 			bouquet.push({
 					'value' : '',
-					'txt' : '',
+					'txt' : '---',
 					'selected' : 'selected'
 				});
 			services.push({ 
