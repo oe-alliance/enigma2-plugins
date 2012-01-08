@@ -14,7 +14,8 @@ function url() {
 	this.backup           = '/autotimereditor/web/backup';
 	this.restore          = '/autotimereditor/web/restore';
 	this.list             = '/autotimer';
-	this.get              = '/autotimer';
+	this.get              = '/autotimer/get';
+	this.set              = '/autotimer/set';
 	this.edit             = '/autotimer/edit';
 	this.add              = '/autotimer/edit';
 	this.remove           = '/autotimer/remove';
@@ -140,10 +141,13 @@ function getAttribute(xml, key, defaults){
 var AutoTimerEditorCore = Class.create({
 	initialize: function(){
 		// Instantiate all elements
+		this.services = new AutoTimerServiceController();
+		this.settings = new AutoTimerSettingsController
+		
 		this.menu = new AutoTimerMenuController('contentAutoTimerMenu');
 		this.list = new AutoTimerListController('contentAutoTimerList');
 		this.edit = new AutoTimerEditController('contentAutoTimerEdit'); //, this.reload.bind(this), [this.loadFinished.bind(this)]);
-		this.services = new ServiceController(); 
+		
 		
 		// Display menu
 		this.menu.load();
@@ -175,7 +179,17 @@ var AutoTimerEditorCore = Class.create({
 	},
 	
 	loadThird: function(){
-		// At third load and display autotimer list
+		// At third load autotimer settings
+		this.settings.load(this.loadSettingsCallback.bind(this));
+	},
+	
+	loadSettingsCallback: function(settings){
+		this.hasVps = settings['hasVps'];
+		this.loadFourth();
+	},
+	
+	loadFourth: function(){
+		// At fourth load and display autotimer list
 		this.list.load();
 	},
 });
@@ -183,6 +197,42 @@ var AutoTimerEditorCore = Class.create({
 
 ///////////////////////////////////////////////////////////////////////////////
 // Controller
+var AutoTimerServiceController = Class.create(Controller, {
+	initialize: function($super){
+		$super(new AutoTimerServiceListHandler());
+	},
+	
+	load: function(sRef, callback){
+		this.handler.load( {'sRef' : sRef}, callback );
+	},
+	
+	loadBouquetsTv: function(callback){
+		this.load(bouquetsTv, callback);
+	},
+	
+	onFinished: function(){
+	},
+	
+	registerEvents: function(){
+	}
+});
+
+var AutoTimerSettingsController = Class.create(Controller, {
+	initialize: function($super){
+		$super(new AutoTimerSettingsHandler());
+	},
+	
+	load: function(callback){
+		this.handler.load( callback );
+	},
+	
+	onFinished: function(){
+	},
+	
+	registerEvents: function(){
+	}
+});
+
 var AutoTimerMenuController  = Class.create(Controller, {
 	initialize: function($super, target){
 		$super(new AutoTimerMenuHandler(target));
@@ -999,29 +1049,53 @@ var AutoTimerEditController = Class.create(Controller, {
 	}
 });
 
-var ServiceController = Class.create(Controller, {
-	initialize: function($super){
-		$super(new ServiceListHandler());
-	},
-	
-	load: function(sRef, callback){
-		this.handler.load( {'sRef' : sRef}, callback );
-	},
-	
-	loadBouquetsTv: function(callback){
-		this.load(bouquetsTv, callback);
-	},
-	
-	onFinished: function(){
-	},
-	
-	registerEvents: function(){
-	}
-});
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // Handler
+var AutoTimerServiceListHandler = Class.create(AbstractContentHandler, {
+	initialize: function($super){
+		$super(null, null);
+		this.provider = new SimpleServiceListProvider (this.onServicesReady.bind(this));
+		this.ajaxload = false;
+	},
+	
+	load: function( ref, callback ){
+		this.callback = callback;
+		this.provider.load(ref);
+	},
+	
+	onServicesReady: function(data){
+		var services = {};
+		var len = data.services.length;
+		for (var i=0; i<len; i++){
+			services[data.services[i].servicereference] = data.services[i].servicename;
+		}
+		if (this.callback){
+			this.callback(services);
+		}
+	}
+});
+
+var AutoTimerSettingsHandler = Class.create(AbstractContentHandler, {
+	initialize: function($super){
+		$super(null, null);
+		this.provider = new AutoTimerSettingsProvider(this.onSettingsReady.bind(this));
+		this.ajaxload = false;
+	},
+	
+	load: function( callback ){
+		this.callback = callback;
+		this.provider.load();
+	},
+	
+	onSettingsReady: function(data){
+		var settings = data;
+		if (this.callback){
+			this.callback(settings);
+		}
+	}
+});
+
 var AutoTimerMenuHandler = Class.create(AbstractContentHandler,{
 	initialize: function($super, target){
 		$super('tplAutoTimerMenu', target);
@@ -1132,33 +1206,30 @@ var AutoTimerEditHandler = Class.create(AbstractContentHandler, {
 	},
 });
 
-var ServiceListHandler = Class.create(AbstractContentHandler, {
-	initialize: function($super){
-		$super(null, null);
-		this.provider = new SimpleServiceListProvider (this.onServicesReady.bind(this));
-		this.ajaxload = false;
-	},
-	
-	load: function( ref, callback ){
-		this.callback = callback;
-		this.provider.load(ref);
-	},
-	
-	onServicesReady: function(data){
-		if (this.callback){
-			var services = {};
-			var len = data.services.length;
-			for (var i=0; i<len; i++){
-				services[data.services[i].servicereference] = data.services[i].servicename;
-			}
-			this.callback(services);
-		}
-	}
-});
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // Provider
+var AutoTimerSettingsProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.get, showFnc);
+	},
+	
+	load: function( ){
+		callback = this.callback.bind(this);
+		this.getUrl(this.url, null, callback, this.errorback.bind(this));
+	},
+	
+	callback: function(transport){
+		var data = this.renderXML(this.getXML(transport));
+		this.show(data);
+	},
+	
+	renderXML: function(xml){
+		this.settings = new AutoTimerSettings(xml).toJSON();
+		return this.settings;
+	},
+});
+
 var AutoTimerListProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.list, showFnc);
@@ -1194,7 +1265,7 @@ var AutoTimerListProvider = Class.create(AbstractContentProvider, {
 
 var AutoTimerEditProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
-		$super(URL.get, showFnc);
+		$super(URL.list, showFnc);
 	},
 	
 	load: function( id ){
@@ -1216,6 +1287,22 @@ var AutoTimerEditProvider = Class.create(AbstractContentProvider, {
 
 ///////////////////////////////////////////////////////////////////////////////
 // Objects
+function AutoTimerSettings(xml){
+	this.xmlitems = getNamedChildren(xml, "e2settings", "e2setting");
+	this.json = new Array();
+	var len = this.xmlitems.length;
+	for (var i=0; i<len; i++){
+		var element = this.xmlitems[i].getElementsByTagName('e2settingname');
+		var name = element[0].firstChild.nodeValue;
+		var element = this.xmlitems[i].getElementsByTagName('e2settingvalue');
+		var value = element[0].firstChild.nodeValue;
+		this.json[name] = value;
+	}
+	this.toJSON = function(){
+		return this.json;
+	};
+}
+
 function AutoTimerList(xml){
 	this.xmlitems = getNamedChildren(xml, "autotimer", "timer");
 	this.list = [];
@@ -1575,9 +1662,11 @@ function AutoTimer(xml, defaults){
 		'services' : services,
 	}
 	
+	var hasVps = (autotimereditorcore.hasVps == "True") ? '' : 'invisible';
 	var vps_enabled = (getAttribute(xml, 'vps_enabled', defaults)) ? 'checked' : '';
 	var vps_overwrite = (getAttribute(xml, 'vps_overwrite', defaults)) ? 'checked' : '';
 	this.vps = {
+		'hasVPS' : hasVps,
 		'vps_enabled' : vps_enabled,
 		'vps_overwrite' : vps_overwrite,
 	}
