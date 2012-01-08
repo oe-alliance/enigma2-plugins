@@ -352,7 +352,7 @@
 																{for b in bouquets.bouquets}
 																	<tr class="bouquet">
 																		<td class="nopadding">
-																			<select size="1" class="select fixedwidth">
+																			<select size="1" class="select fixedwidthbouquet">
 																				{for bb in b.bouquet}
 																					<option value="${bb.value}" ${bb.selected}>${bb.txt}</option>
 																				{/for}
@@ -382,14 +382,14 @@
 																{for s in services.services}
 																	<tr class="service">
 																		<td class="nopadding">
-																			<select size="1" class="select servicebouquet fixedwidth">
+																			<select size="1" class="select servicebouquet fixedwidthbouquet">
 																				{for b in s.bouquet}
 																					<option value="${b.value}" ${b.selected}>${b.txt}</option>
 																				{/for}
 																			</select>
 																		</td>
 																		<td class="nopadding">
-																			<select size="1" class="select fixedwidth">
+																			<select size="1" class="select fixedwidthservice">
 																				{for ss in s.service}
 																					<option value="${ss.value}" ${ss.selected}>${ss.txt}</option>
 																				{/for}

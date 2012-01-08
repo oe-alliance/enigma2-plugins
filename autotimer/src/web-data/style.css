@@ -69,6 +69,10 @@
 	.fullwidth {
 		width: 100%;
 	}
+
+	.halfwidth {
+		width: 50%;
+	}
 	
 	.center {
 		text-align: center;
@@ -368,6 +372,14 @@
 	
 	.fixedwidth{
 		width : 150px;
+	}
+	
+	.fixedwidthbouquet{
+		width : 150px;
+	}
+	
+	.fixedwidthservice{
+		width : 240px;
 	}
 	
 	.timepicker{
