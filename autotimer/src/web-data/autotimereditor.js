@@ -310,6 +310,7 @@ var AutoTimerMenuController  = Class.create(Controller, {
 });
 
 var AutoTimerListController = Class.create(Controller, {
+	//TODO What about a clone AutoTimer function
 	initialize: function($super, target){
 		$super(new AutoTimerListHandler(target));
 		this.select = null;
@@ -458,6 +459,7 @@ var AutoTimerEditController = Class.create(Controller, {
 				this.onchangeSelectBouquet(services[i].firstElementChild.firstElementChild);
 			}
 		}
+		this.onchangeCheckbox( $('vps_enabled') );
 		
 		AnyTime.noPicker( 'from' );
 		AnyTime.picker( 'from', { format: "%H:%i" } );
@@ -807,6 +809,14 @@ var AutoTimerEditController = Class.create(Controller, {
 		});
 		data['services'] = services.join(',');
 		
+		if ($('vps_enabled').checked){
+			data['vps_enabled'] = ($('vps_enabled').checked) ? '1' : '0';
+			data['vps_overwrite'] = ($('vps_overwrite').checked) ? '1' : '0';
+		} else{
+			data['vps_enabled'] = '0';
+			data['vps_overwrite'] = '0';
+		}
+		
 		this.saveurl = [];
 		for( key in data ){
 			var value = data[key];
@@ -963,6 +973,12 @@ var AutoTimerEditController = Class.create(Controller, {
 			}.bind(this)
 		);
 		$('useservices').on(
+			'change',
+			function(event, element){
+				this.onchangeCheckbox(element);
+			}.bind(this)
+		);
+		$('vps_enabled').on(
 			'change',
 			function(event, element){
 				this.onchangeCheckbox(element);
@@ -1556,7 +1572,14 @@ function AutoTimer(xml, defaults){
 		'useservices' : useservices,
 		'services' : services,
 	}
-
+	
+	var vps_enabled = (getAttribute(xml, 'vps_enabled', defaults)) ? 'checked' : '';
+	var vps_overwrite = (getAttribute(xml, 'vps_overwrite', defaults)) ? 'checked' : '';
+	this.vps = {
+		'vps_enabled' : vps_enabled,
+		'vps_overwrite' : vps_overwrite,
+	}
+	
 	this.json = { 	
 			'id' :                    this.id,
 			'enabled' :               this.enabled,
@@ -1585,6 +1608,8 @@ function AutoTimer(xml, defaults){
 			'filters' :                    this.filters,
 			'bouquets' :                   this.bouquets,
 			'services' :                   this.services,
+			
+			'vps' :                   this.vps,
 	};
 
 	this.toJSON = function(){
