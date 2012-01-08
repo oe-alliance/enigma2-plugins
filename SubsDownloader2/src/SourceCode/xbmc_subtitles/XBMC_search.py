@@ -1,9 +1,9 @@
 #from XBMC.utilities import *
 #from periscope.plugins.SubtitleDatabase import SubtitleDB
-from Plugins.Extensions.SubsDownloader2.SourceCode.periscope.SubtitleDatabase import SubtitleDB, tvshowRegex, tvshowRegex2, movieRegex
+#from Plugins.Extensions.SubsDownloader2.SourceCode.periscope.SubtitleDatabase import SubtitleDB, tvshowRegex, tvshowRegex2, movieRegex
 import os
 #from XBMC.archives_extractor import zip_extractor
-from Plugins.Extensions.SubsDownloader2.SourceCode.archives_extractor import zip_extractor
+#from Plugins.Extensions.SubsDownloader2.SourceCode.archives_extractor import zip_extractor
 
 def list_XBMC_Periscope_plugins(XBMC_periscope_plugin_path):
     plugin_list = []
@@ -12,13 +12,14 @@ def list_XBMC_Periscope_plugins(XBMC_periscope_plugin_path):
             plugin_list.append(x)    
     return plugin_list
 
+"""
 def list_directory_files(dir_path):
     file_list = []
     for x in os.listdir(dir_path):
         if os.path.isdir(XMBC_plugin_path+x) == False:
             file_list.append(dir_path+x)    
-    return file_list
-
+    return file_list"""
+"""
 def new_file_in_directory(files_before, files_after):
     new_file = []
     for x in files_after:
@@ -26,17 +27,18 @@ def new_file_in_directory(files_before, files_after):
             pass
         else:
             new_file.append(x)
-    return new_file
+    return new_file"""
             
-
+#XBMCSubtitle not USED
+"""
 class XBMCSubtitle(SubtitleDB):
     def __init__(self,service):
         self.tvshowRegex = tvshowRegex
         self.tvshowRegex2 = tvshowRegex2
         self.movieRegex = movieRegex
         
-        exec ('from XBMC.services.%s import *' % service)
-        exec ('from XBMC.services.%s import service as Service' % service)        
+        exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % service)
+        exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as Service' % service)        
         self.service = Service
 
     
@@ -82,4 +84,4 @@ class XBMCSubtitle(SubtitleDB):
         session_id = self.__session_id
         subtitles_list = self.__subtitles_list
         return self.service.download_subtitles (subtitles_list, pos, zipped_subs_path, tmp_sub_dir, sub_folder, session_id) #ZWRAA False, language, subs_file #standard output
-
+"""

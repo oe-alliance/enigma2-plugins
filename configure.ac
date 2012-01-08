@@ -512,6 +512,7 @@ SubsDownloader2/src/SourceCode/periscope/services/BierDopje/Makefile
 SubsDownloader2/src/SourceCode/periscope/services/OpenSubtitle/Makefile
 SubsDownloader2/src/SourceCode/xbmc_subtitles/Makefile
 SubsDownloader2/src/SourceCode/xbmc_subtitles/services/Makefile
+SubsDownloader2/src/SourceCode/xbmc_subtitles/services/Napisyme/Makefile
 
 svdrp/Makefile
 svdrp/meta/Makefile

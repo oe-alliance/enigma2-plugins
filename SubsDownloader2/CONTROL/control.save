@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-subsdownloader
-Version: 0.27.0-20120108
+Versin: 0.24.6-20120103
 Description: Subtitle Downloader
 Section: extra
 Priority: optional
@@ -7,5 +7,5 @@ Maintainer: Silelis
 Architecture: mipsel
 OE: enigma2-plugins-2.6cvs20090103
 Homepage: http://code.google.com/p/subs-downloader/
-Depends: enigma2(>2.6git20091016), gst-plugin-flv, enigma2-plugin-extensions-pictureplayer, enigma2-plugin-extensions-dvdplayer, python-zlib, python-io, python-shell, python-compression, python-html
+Depends: enigma2(>2.6git20091016), gst-plugin-flv, enigma2-plugin-extensions-pictureplayer, enigma2-plugin-extensions-dvdplayer, python-zlib, python-io, python-shell, python-compression
 Source: http://code.google.com/p/subs-downloader/

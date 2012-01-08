@@ -268,7 +268,6 @@ class GuessFileData_from_FileName(SubtitleDatabase.SubtitleDB):
         self.tvshowRegex = SubtitleDatabase.tvshowRegex
         self.tvshowRegex2 = SubtitleDatabase.tvshowRegex2
         self.movieRegex = SubtitleDatabase.movieRegex
-        pass
 
     def return_data_string(self,file_path):
         file_data = self.guessFileData(file_path)
@@ -276,4 +275,160 @@ class GuessFileData_from_FileName(SubtitleDatabase.SubtitleDB):
             return str(file_data['name']+" "+str(file_data['season'])+"x"+str(file_data['episode']))
         elif file_data['type'] =='movie' or file_data['type'] == 'unknown':
             return str(file_data['name'])
+    
+    def return_movie_data_to_XBMC(self,file_path):
+	fileData = self.guessFileData(file_path)
+	if fileData['type'] == 'tvshow':
+            tvShow = fileData['name']
+            season = fileData['season']
+            episode = fileData['episode']
+            #print fileData
+        elif fileData['type'] =='movie' or fileData['type'] =='unknown':
+            tvShow = []
+            season = []
+            episode = []  
+            #print fileData
+	return fileData['name'], tvShow, season, episode
+	
+	
+class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
+    def __init__(self, tvshowRegex, tvshowRegex2, movieRegex, file_extentions):
+        self.tvshowRegex = SubtitleDatabase.tvshowRegex
+        self.tvshowRegex2 = SubtitleDatabase.tvshowRegex2
+        self.movieRegex = SubtitleDatabase.movieRegex
+        self.__file_extentions = file_extentions
+    
+    def __movie_file_extensions(self, extensions_dict):
+        movie_file_extensions = []
+        for x in extensions_dict:
+            if extensions_dict[x] == "movie":
+                movie_file_extensions.append(x)        
+        return movie_file_extensions
 
+    
+    def __return_movie_file_list(self, movie_path):
+        """Funstion takes movie file path and based on EXTENSIONS from myListy.pl
+        returns list of movies in movie file directory"""
+        movie_dir = movie_path.rsplit("/",1)[0]
+        movie_file_list =[]
+        movie_extentionds = self.__movie_file_extensions(self.__file_extentions)
+        for x in os.listdir(movie_dir):
+            if x.rsplit(".",1)[-1]in movie_extentionds:
+                movie_file_list.append(movie_dir+"/"+x)		
+	#USUNAC URL Z NAPISY24
+        return movie_file_list
+
+    def moviePath_and_movieFileData(self,file_path):
+        self.__file_path = file_path
+        """Function returns structure (file_path, {guesseFileData})"""
+        movie_file_list = self.__return_movie_file_list(file_path)
+        movie_file_data = []
+        for x in movie_file_list:
+            movie_file_data.append((x, self.guessFileData(x)))
+        return movie_file_data
+    
+    def subtitlePath_and_subtitleFileData(self,file_path_list):
+        """Function returns structure (file_path, {guesseFileData})"""
+        subtile_file_data = []        
+        for x in file_path_list:
+            subtile_file_data.append((x, self.guessFileData(x)))
+        return subtile_file_data
+    
+    def compare_movie_and_subtitle_FileData(self, movie_file_data, subtitle_file_data):
+        compare_result = []
+        for x in movie_file_data:
+	    wynik = 0
+            for y in subtitle_file_data:
+                wynik = 0
+                #Cause and effect for subtitle and movie guesseFileData results
+                if x[1].has_key('type') and y[1].has_key('type'):
+                    if x[1]['type'] == y[1]['type']:
+                        wynik = wynik + 0.1600
+                if x[1].has_key('name') and y[1].has_key('name'):
+                    if x[1]['name'] == y[1]['name']:
+                        wynik = wynik +0.0900
+                if x[1].has_key('season') and y[1].has_key('season'):   
+                    if x[1]['season'] == y[1]['season']:
+                        wynik = wynik +0.0225
+                if x[1].has_key('episode') and y[1].has_key('episode'):  
+                    if x[1]['episode'] == y[1]['episode']:
+                        wynik = wynik +0.0225
+                if x[1].has_key('season') and y[1].has_key('part'): 
+                    if x[1]['season'] == y[1]['part']:
+                        wynik = wynik +0.0060
+                if x[1].has_key('episode') and y[1].has_key('part'): 
+                    if x[1]['episode'] == y[1]['part']:
+                        wynik = wynik +0.0060
+                if x[1].has_key('part') and y[1].has_key('part'): 
+                    if x[1]['part'] == y[1]['part']:
+                        wynik = wynik +0.0400
+                if x[1].has_key('teams') and y[1].has_key('teams'):
+                    if x[1]['teams'] == y[1]['teams']:
+                        wynik = wynik +0.0025
+                if x[1].has_key('year') and y[1].has_key('year'):
+                    if x[1]['year'] == y[1]['year']:
+                        wynik = wynik +0.0049
+                #Cause and effect for subtitle and movie guesseFileData results
+                compare_result.append({"movie":x[0],"subtitle":y[0],"propability": wynik})                       
+               # print x[0], y[0], wynik
+        return compare_result
+        #musi sprawdzic czy film jest najbardziej prawdopodobny
+            
+        
+    def give_movie_subtitle_consistent_data(self, movie_file_data, subtitle_file_data):
+        """Returns best matching movie <--> subtitle table."""
+        m_s_temp_data = []
+        preliminary_movie_subtitle_list = self.compare_movie_and_subtitle_FileData(movie_file_data, subtitle_file_data)
+        for x in preliminary_movie_subtitle_list:
+            """ Delete 0 'propability' registry"""
+            if x['propability'] != 0:
+                m_s_temp_data.append(x)
+
+        temp_movieList = []
+        for x in m_s_temp_data:
+            """Check what movies are still in registry"""
+            if x['movie'] not in temp_movieList:
+                temp_movieList.append(x['movie'])
+                
+        final_movie_subtitle_list = []
+        matching_movie = False
+        for x in temp_movieList:
+            """For all movies in temp_movieList checks best subtitles"""
+            final_propability = 0
+            for y in preliminary_movie_subtitle_list:
+                if y['movie'] == x and  y['propability'] > final_propability:
+                    if self.__file_path == y['movie']:
+                        """Check it primary movie is in results matching_movie = True"""
+                        matching_movie = True
+                    best_entry = y
+                    final_propability = y['propability']
+            final_movie_subtitle_list.append(best_entry)   
+	    
+	"""Filtering by subtitle name - if there is no multiple subtitles"""
+	preliminary_movie_subtitle_list = final_movie_subtitle_list
+	temp_movieList = [] #now subtile
+	for x in preliminary_movie_subtitle_list:
+            """Check what movies are still in registry"""
+            if x['subtitle'] not in temp_movieList:
+                temp_movieList.append(x['subtitle'])
+				
+	final_movie_subtitle_list = []	
+	matching_movie = False
+        for x in temp_movieList: #now subtile
+            """For all subtitles in temp_movieList which now is subtitle checks best movie
+	    This makes that one subtitle don't belong to multi movies.	    
+	    """
+            final_propability = 0
+            for y in preliminary_movie_subtitle_list:
+                if y['subtitle'] == x and  y['propability'] > final_propability:
+                    if self.__file_path == y['movie']:
+                        """Check it primary movie is in results matching_movie = True"""
+                        matching_movie = True
+                    best_entry = y
+                    final_propability = y['propability']
+            final_movie_subtitle_list.append(best_entry)
+	
+        if  matching_movie == True:
+            return final_movie_subtitle_list
+        else:
+            return []
