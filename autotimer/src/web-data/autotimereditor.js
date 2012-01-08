@@ -1526,7 +1526,9 @@ function AutoTimer(xml, defaults){
 		name = name.item(0).firstChild.nodeValue;
 		var reference = xmlservices.item(i).getElementsByTagName('e2servicereference');
 		reference = escape(reference.item(0).firstChild.nodeValue);
-		if (reference.match("BOUQUET")){
+		// Check if service is a bouquet
+		// Service reference flags == isDirectory | mustDescent | canDescent (== 7)
+		if (unescape(reference).slice(2,3) == "7"){
 			bouquets.push({
 				'bouquet' : createOptionList(autotimereditorcore.bouquets, reference),
 				'class' : 'remove',
