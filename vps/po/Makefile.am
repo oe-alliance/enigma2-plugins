@@ -1,6 +1,6 @@
 PLUGIN = vps
 CATEGORY = SystemPlugins
-LANGS = de cs nl it
+LANGS = ar bg ca cs da de el en es et fi fr fy hr hu is it lt lv nl no pl pt ru sv sk sl sr th tr uk
 
 CATEGORY ?= "Extensions"
 
