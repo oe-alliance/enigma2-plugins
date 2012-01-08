@@ -11,7 +11,7 @@ def localeInit():
 	#print "[%s] set language to " %(PluginLanguageDomain), lang
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
-def __(txt):
+def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
 		print "[%s] fallback to default translation for %s" %(PluginLanguageDomain, txt)

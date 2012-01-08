@@ -20,7 +20,7 @@ from __init__ import __
 
 class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 	STATE_DISCONNECTED, STATE_CONNECTING, STATE_PLAYING, STATE_PAUSED, STATE_FAILURE = range(5)
-	STATE_NAMES = [__("disconnected"), __("connecting..."), __("LIVE"), __("pause"), __("No Connection")]
+	STATE_NAMES = [_("disconnected"), _("connecting..."), _("LIVE"), _("pause"), _("No Connection")]
 	STREAM_DIM = (768, 576)
 	PIP_DIM = (432, 324)
 	STREAM_URI = "http://174.121.228.234/hls-live/livepkgr/_definst_/liveevent/etv-livestream_2.m3u86"
@@ -55,10 +55,10 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 		self.old_service = session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
 
-		self["key_red"] = StaticText(__("Exit"))
-		self["key_green"] = StaticText(__("Play"))
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_green"] = StaticText(_("Play"))
 		self["key_yellow"] = StaticText((""))
-		self["key_blue"] = StaticText(__("Fullscreen"))
+		self["key_blue"] = StaticText(_("Fullscreen"))
 		self["connection_label"] = MultiColorLabel()
 		self["do_blink"] = Boolean(False)
 		self["pig_mode"] = Boolean(True)
@@ -200,4 +200,4 @@ def main(session, **kwargs):
 	session.open(EuroticTVPlayer)
 
 def Plugins(**kwargs):
- 	return PluginDescriptor(name="eUroticTV", description=__("Watch eUroticTV via HTTP Live Streaming"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", needsRestart = False, fnc=main)
+ 	return PluginDescriptor(name="eUroticTV", description=_("Watch eUroticTV via HTTP Live Streaming"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", needsRestart = False, fnc=main)
