@@ -1,0 +1,192 @@
+html,body{font-family:Tahoma,Sans-Serif;font-size:14px;font-weight:bold;color:#fff;text-align:center;background:#555;}
+input[type="text"],input[type="password"],select{font-family:Tahoma,Sans-Serif;font-size:14px;font-weight:bold;border:1px solid #485052;background-color:#fff;color:#485052}
+a,a:visited,a:active{color:#485052;text-decoration:none}
+img{border:0}
+form{margin:2px}
+#notification{color:#000;width:50%;height:32px;position:absolute;top:0;left:25%;text-align:center;vertical-align:bottom;z-index:2}
+.wap a,.wap a:visited,.wap a:active{color:#fff}
+.rounded{display:block;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;behavior:url(/web-data/PIE.htc);}
+.black{background:#000;color:#FFF}
+.odd{background-color:#FFF}
+.even{background-color:#DDD}
+.fullwidth{width:100%}
+.center{text-align:center}
+.oneliner{position:absolute;top:50%;height:16px;margin-top:-8px}
+.small{font-size:11px;font-weight:normal}
+a.underline{text-decoration:underline}
+.right{text-align:right}
+.block{display:block}
+.bottom{vertical-align:bottom}
+.liHeader{border-top:#000;border-bottom:#000}
+#banner{width:1000px;height:67px;background:#000;padding-left:5px;margin-bottom:8px;position:relative;}
+#banner a,#banner a:visited,#banner a:active{color:#FFF;text-decoration:none;}
+#bannerText{margin-bottom:5px;padding-left:2px;padding-top:6px}
+#bannerLeft{width:940px;float:left}
+#powerState{border:0;margin-left:93px;text-align:right}
+#bannerRight{width:50px;text-align:right;height:60px;float:left}
+#bannerRight img{padding-top:5px}
+#current a{background:#000;color:#FFF;}
+#current{width:999px;background:#000;padding-left:3px;padding-right:3px;padding-bottom:1px;margin-bottom:8px;position:relative;}
+.techInfo{font-size:10px}
+#currentTable{margin-bottom:10px;padding-left:2px;padding-top:3px;width:100%}
+#currentDuration{text-align:right}
+.currentBulletToggle{vertical-align:middle}
+#mainMenu{background-color:#485052;text-align:center;overflow:hidden;background:#000;margin:0;padding:0;width:940px}
+#mainMenu li{list-style:none;float:left;width:130px;height:21px;margin-left:2px;background:#485052;margin-top:6px;margin-bottom:0;padding:0;position:relative;z-index:2}
+#mainMenu a:hover,#mainMenu a:hover{background:#AAA;position:relative;z-index:3}
+#mainMenu li.hover,#mainMenu li.hover{background:#AAA;position:relative;z-index:3}
+#mainMenu a{display:block;padding-top:1px;padding-bottom:3px}
+#instantRecordMenu{z-index:1000;position:relative;top:5px;right:165px;background:#FFF;color:#485052;width:205px;border:1px solid #000;opacity:.98;text-align:left}
+#instantRecordMenu button{width:200px;text-align:center}
+#navContainer{float:left;width:160px}
+#nav{width:100%;height:250px;background:#000;padding-left:5px;border:2px solid #000;position:relative;}
+#nav a{display:block}
+#nav{background:#FFF;padding-left:0;padding-right:0}
+#navHd{background:#000;text-align:center;width:153px}
+#navContent{color:#485052;padding:5px}
+#navExternalsContainer{margin:0;padding:0}
+#navSearch{width:100%;height:61px;background:#FFF;margin-top:8px;border:2px solid #000;position:relative;}
+#searchHd{background:#000;text-align:center;width:153px}
+#navVolume{width:100%;height:75px;background:#FFF;margin-top:8px;border:2px solid #000;position:relative;}
+#volHd{background:#000;text-align:center;width:153px}
+#content{float:left;background:#FFF;width:833px;min-height:308px;margin-left:8px;border:2px solid #000;position:relative;}
+#contentHd{background:#000;width:527px}
+#contentHdExt{background:#000;dipslay:block}
+#contentHdExt input{padding:1px;margin-right:2px;margin-bottom:2px;border:0;color:#485052}
+#epgSearch{width:120px}
+.boxContent{color:#485052;padding:3px}
+.navTable{width:100%;margin:0;padding:0}
+.navTable li{list-style:none;margin:3px;padding:0;position:relative;display:block}
+.navTable a:hover{background-color:#CCC;color:#485052;display:block}
+.bListSLink {display:inline-block;margin-right:5px;color:#485052;}
+.bListSLink:hover{display:inline-block;background-color:#CCC;color:#485052}
+.sListSName a{display:block;margin-right:5px;color:#485052;}
+.sListSName a:hover{background-color:#CCC;color:#485052;display:block}
+.sListMarker{background-color:#485052;color:#FFF}
+.sListEPGItem{font-size:12px;margin:0;padding:0}
+.sListSProgress{display:inline-block;margin:0;border:1px solid #485052;width:50px;height:10px;padding:1px}
+.sListSProgressBar{display:inline-block;margin:0;background-color:#60aef2;width:0;height:100%}
+table.sListExtEpg{width:580px;margin:0;padding:0}
+.header{padding-top:2px;padding-left:4px;padding-right:4px;display:block;height:22px}
+#container{margin:0 auto;text-align:left;width:1005px}
+#contentTable{scrollbar:auto;width:785px}
+#contentServices{vertical-align:top;width:585px}
+#contentServices table{scrollbar:auto;width:585px}
+#bouquetTable{width:100%;margin:0;padding:0}
+#bouquetTable li{list-style:none;margin:5px;padding:0;position:relative;display:block}
+#contentBouquets{border-right:1px solid #ccc;vertical-align:top;width:220px}
+#contentMain{padding:8px;margin-bottom:5px;min-height:365px;clear:both;overflow-y:auto;width:815px;color:#485052}
+#contentMain div table{float:left;width:599px}
+.sListItem{width:585px;color:#485052}
+.mListItem{width:780px;color:#485052}
+.mpListItem{mListItem}
+.epgStart{width:50px;color:#485052}
+.epgTitle{width:420px;color:#485052}
+.epgLength{width:100px;text-align:right;color:#485052}
+.mListDetail{font-size:12px;color:#485052}
+.mStart{width:160px;color:#485052}
+.mTitle{width:650px;color:#485052}
+.mLength{width:90px;text-align:right;color:#485052}
+#tools{font-size:12px;text-align:center}
+#tools h1{font-size:14px}
+.tools a,.tools a:hover,.tools a:visited{text-decoration:underline}
+.toolsHeader{color:#FFF;font-weight:bold;background-color:#000}
+.tools{border:1px solid #CCC;width:100%;margin:0;padding:0}
+.tools td{font-size:12px;padding:5px;vertical-align:top}
+.toolsElementLeft{font-weight:bold;width:15%;text-align:left}
+.toolsElementCenter{text-align:left}
+.toolsElementRight{width:10%;text-align:left}
+#about{font-size:12px;text-align:center}
+#about h1{font-size:14px}
+#about a,#about a:hover,#about a:visited{text-decoration:underline}
+.aboutHeader{width:100%;color:#FFF;font-weight:bold;background-color:#000}
+.about{border:1px solid #CCC;width:100%;margin:0;padding:0}
+.about td{font-size:12px}
+.aboutElementLeft{font-weight:bold;width:50%;text-align:left}
+.aboutElementRight{width:50%}
+.w200h50{width:200px;height:50px}
+.textRight{text-align:right}
+.textLeft{text-align:left}
+.textCenter{text-align:center}
+.tListItemTable{width:100%}
+.tListSName{text-align:left}
+.tListItem{font-weight:bold;font-size:13px}
+.tListTitle{width:150px;text-align:left}
+.tListDescr{width:150px;text-align:left}
+.tListRepeat{width:70px;text-align:left}
+.tListDuration{width:70px;text-align:left}
+.tListBegin{width:100px;text-align:left}
+.tListEnd{width:100px;text-align:left}
+.tListAfter{width:85px;text-align:left}
+.tListOption{width:80px;text-align:center}
+.timerState0{color:#485052}
+.timerState1{color:#900}
+.timerState2{color:#090}
+.timerState3{color:#009}
+a.tEditTag{margin:3px 0 3px 0;padding:3px;display:inline-block;border:1px solid #CCC}
+a.selected{background:#ff9}
+.epgListItem{font-size:12px;font-weight:bold}
+* html #banner{width:1005px;height:78px}
+* html #bannerRight{width:120px;height:60px}
+* html #nav{width:99%;height:250px;background:#000;padding-left:5px}
+* html .navTable{width:95%}
+input.fd-hidden-input,select.fd-hidden-input{display:none}
+.fd-screen-reader{position:absolute;left:-999em;top:0;width:1px;height:1px;overflow:hidden;outline:0 none;-moz-outline:0 none}
+a.dp-disabled,.dp-disabled table{opacity:.3!important;filter:alpha(opacity = 40)}
+.dp-disabled,.dp-disabled td,.dp-disabled th,.dp-disabled th span{cursor:default!important}
+a.date-picker-control:focus,div.datePicker table td:focus{overflow:hidden;outline:0 none;-moz-outline:0 none;color:#6482aa!important}
+div.datePicker{position:absolute;z-index:9999;text-align:center;font-size:11px;background:transparent;color:#485052;padding:0;-moz-user-select:none;-khtml-user-select:none}
+div.static-datepicker{position:relative;top:5px;left:0}
+div.datePicker table{width:auto;height:auto;border-collapse:separate;border-spacing:1px;background:#fff}
+div.datePicker tfoot th.drag-enabled,div.datePicker thead th.drag-enabled,div.datePicker thead th.drag-enabled span{cursor:move}
+iframe.iehack{position:absolute;background:#fff;z-index:9998;padding:0;border:0;display:none;margin:0}
+a.date-picker-control:link,a.date-picker-control:visited{position:relative;display:-moz-inline-stack;border:0 none;padding:0;margin:0 0 0 4px;background:transparent url(/web-data/lib/datepicker/media/cal-grey.gif) no-repeat 50% 50%;min-width:16px;line-height:1;cursor:pointer;visibility:visible;text-decoration:none;vertical-align:top}
+a.date-picker-control:hover,a.date-picker-control:active,a.date-picker-control:focus,a.dp-button-active:link,a.dp-button-active:visited,a.dp-button-active:hover,a.dp-button-active:active,a.dp-button-active:focus{background:transparent url(/web-data/lib/datepicker/media/cal.gif) no-repeat 50% 50%!important}
+* html a.date-picker-control{width:16px}
+a.date-picker-control{display:inline-block}
+a.date-picker-control span{display:block;width:16px;height:16px;margin:auto 0}
+div.datePicker thead th span{display:block;padding:0;margin:0;text-align:center;line-height:1em;border:0 none;background:transparent;font-weight:bold;cursor:pointer}
+div.datePicker th span.month-display,div.datePicker th span.year-display{display:inline;text-transform:uppercase;letter-spacing:1px;font-size:13px;cursor:default}
+div.datePicker th span.prev-but,div.datePicker th span.next-but{font-weight:lighter;font-size:13px;cursor:pointer!important}
+div.datePicker th span.prev-but:hover,div.datePicker th span.next-but:hover,div.datePicker th span.today-but:hover{color:#a84444}
+div.datePicker th span.today-but{text-align:center;margin:0;font-size:13px;width:100%;text-decoration:none;padding-top:.3em;text-transform:uppercase;vertical-align:middle;cursor:pointer!important}
+div.dp-disabled th span.prev-but,div.dp-disabled th span.next-but,div.dp-disabled th span.today-but,div.dp-disabled th span.prev-but:hover,div.dp-disabled th span.next-but:hover,div.dp-disabled th span.today-but:hover,div.datePicker th span.prev-but.fd-disabled:hover,div.datePicker th span.next-but.fd-disabled:hover,div.datePicker thead th span.fd-disabled,div.datePicker th span.fd-disabled:hover{color:#aaa;cursor:default!important;opacity:1}
+div.datePicker th span.fd-day-header{text-align:center;margin:0;font-size:11px;text-decoration:none;text-transform:lowercase;cursor:pointer}
+div.datePicker table{margin:0;padding:0;border:1px solid #000;background:#fff;text-align:center;width:auto;empty-cells:show;border-radius:3px;-moz-border-radius:3px;-moz-box-shadow:0 0 5px #aaa}
+div.datePicker table tbody th,div.datePicker table td{border:0 none;padding:0;text-align:center;vertical-align:middle;cursor:pointer;background:#fff;width:2em;height:2em;overflow:hidden;outline:transparent none 0;border:1px solid #ccc;text-transform:none;-moz-border-radius:2px;border-radius:2px}
+div.datePicker table td:focus,div.datePicker table td:active{outline:0 none red}
+div.datePicker table th{border:0 none;padding:0;font-weight:bold;color:#222;text-align:center;vertical-align:middle;text-transform:none}
+div.datePicker table thead th{height:auto!important}
+div.datePicker table tbody th{border:1px solid #dcdcdc}
+div.datePicker table thead th.date-picker-week-header,div.datePicker table tbody th.date-picker-week-header{background:url(/web-data/lib/datepicker/media/backstripes.gif);color:#ccc;font-style:oblique;background:transparent;cursor:default}
+div.datePicker table thead th.date-picker-week-header{cursor:help;border:0 none;padding:0 0 .2em 0}
+div.datePicker tfoot th{cursor:default;font-weight:normal;text-transform:uppercase;letter-spacing:.1em;border:0 none;background:#fff;height:2.8em}
+div.datePicker table tbody td.date-picker-unused{background:#fff url(/web-data/lib/datepicker/media/backstripes.gif);border-color:#dcdcdc;cursor:default!important}
+div.datePicker table thead th.date-picker-title{width:auto;height:auto;padding:.4em 0;background:#000;color:#FFF}
+div.datePicker table thead th.date-picker-day-header{text-transform:lowercase;cursor:help;height:auto}
+div.datePicker table tbody td.date-picker-today{background:#fff url(/web-data/lib/datepicker/media/bullet2.gif) no-repeat 0 0;color:#646464!important}
+div.datePicker table tbody td.month-out.date-picker-highlight{color:#a86!important}
+div.datePicker table tbody td.date-picker-highlight,div.datePicker table thead th.date-picker-highlight{color:#a86666!important}
+div.datePicker table tbody td.date-picker-hover{background:#fff url(/web-data/lib/datepicker/media/bg_header.jpg) no-repeat 0 0;cursor:pointer;border-color:#6482aa!important;color:#6482aa;text-shadow:0 1px 1px #fff}
+div.datePicker table tbody td.day-disabled{background:#fff url(/web-data/lib/datepicker/media/backstripes.gif) no-repeat 0 0;color:#aaa!important;cursor:default;text-decoration:line-through}
+div.datePicker table tbody td.month-out{border-color:#ddd;color:#aaa!important;background:#fff url(/web-data/lib/datepicker/media/gradient-e5e5e5-ffffff.gif) repeat-x 0 -40px}
+div.datePicker table tbody td.date-picker-selected-date{color:#333!important;border-color:#333!important}
+div.datePicker table tbody td.out-of-range,div.datePicker table tbody td.not-selectable{color:#ccc!important;font-style:oblique;background:#fcfcfc!important;cursor:default!important}
+div.datePicker table tbody th.month-out,div.datePicker table tbody th.out-of-range{color:#aaa!important;font-style:oblique;background:#fcfcfc!important}
+div.datePicker table tbody th.out-of-range{opacity:.6;filter:alpha(opacity = 60)}
+div.datePicker table tbody td.not-selectable{opacity:.8;filter:alpha(opacity = 80)}
+div.datePicker table tbody tr{display:table-row}
+div.datePicker table tfoot sup{letter-spacing:normal;text-transform:none;height:0;line-height:1;position:relative;top:-0.2em;vertical-align:baseline!important;vertical-align:top}
+div.datepicker-focus table.datePickerTable{border-color:#999!important}
+div.datePicker table tbody tr td:focus,div.datePicker table tbody td.date-picker-hover{overflow:hidden;outline:0 solid #f00;-moz-outline:0 none;-o-highlight:0 none;color:#6482aa!important}
+div.static-datepicker table{-moz-box-shadow:0 0 0 transparent}
+div.datepicker-focus table{outline:0;-moz-box-shadow:0 0 5px #aaa}
+*:-o-prefocus{outline:-o-highlight-border}
+* html div.datePicker table td{background-image:none}
+* html div.datePicker table td.date-picker-unused{background:#f2f2f2}
+body.fd-drag-active{-webkit-user-select:none}
+@media screen and (-webkit-min-device-pixel-ratio:0){div.datePicker table{-webkit-box-shadow:0 0 5px #aaa;-webkit-border-radius:3px}
+div.static-datepicker table{-webkit-box-shadow:0 0 0 transparent}
+div.datepicker-focus table{-webkit-box-shadow:0 0 5px #aaa}
+div.datePicker table td,div.datePicker table tbody th{padding:.1em;-webkit-border-radius:2px}
+div.datePicker table tbody td.date-picker-hover{-webkit-box-shadow:0 0 1px #6482aa}

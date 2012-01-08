@@ -1,20 +1,28 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional"
        "http://www.w3.org/TR/html4/loose.dtd">  
 <html>
-<!-- tplEpgList -->     
+<!-- tplEpgList -->
 	<head>
 		<meta content="text/html; charset=UTF-8" http-equiv="content-type">
 		<title>Enigma2 WebControl - EPG</title>
-		
+				
 		<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">
-		<script type="text/javascript" src="/web-data/tools.js" ></script>
+		<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
 	</head>
 	<body style="scrollbar: auto; color: #485052;">
 		<table style="width: 100%">
 			<tr>
 				<td>
 					{for e in epg}
-					<table class="epgListItem" width="100%" border="0" cellspacing="1" cellpadding="0">
+					<table 	class="epgListItem" width="100%" border="0" cellspacing="1" cellpadding="0"
+							data-servicereference="${e.servicereference}"
+							data-servicename="${e.servicename}"
+							data-eventid="${e.eventid}"
+							data-start="${e.start}"
+							data-end=${e.end}
+							data-title="${e.title}"
+							data-description="${e.description}">
+						
 						<tr style="background-color: #DDDDDD;">
 							<td width="10%">${e.date}</td>
 							<td width="30%">${e.servicename}</td>
@@ -34,17 +42,19 @@
 
 						<tr style="background-color: #DDDDDD;">
 							<td>
-								<a href="#" onclick="return false;"><img src="/web-data/img/timer.png" title="Add Timer" border="0" onclick=" if( opener.parentPin( '${e.servicereference}' ) ) { opener.addTimerByID('${e.servicereference}','${e.eventid}','0');}"></a>&nbsp;&nbsp;
-								<a href="#" onclick="return false;"><img src="/web-data/img/zap.png" title="Add zap Timer" border="0" onclick="if ( opener.parentPin( '${e.servicereference}' ) ) { opener.addTimerByID('${e.servicereference}','${e.eventid}','1');}"></a>&nbsp;&nbsp;
-								<a href="#" onclick="return false;"><img src="/web-data/img/edit.png" title="Edit and add timer" border="0" onclick="opener.loadTimerEditForm(0,'${e.start}','${e.end}',0,'${e.servicereference}','${e.servicename.esc()}','${e.title.esc()}','${e.description.esc()}',0,'','3',0,'${e.eventid}');"></a><br/>
-								<a target="_blank" href="/web/epgsearch.rss?search=${e.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed for this Title" border="0"></a><br/>
-								<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${e.titleESC}" ><img src="/web-data/img/world.png" title="Search IMDb" border="0"></a><br/>
+								<a href="#" class="eListAddTimer"><img src="/web-data/img/clock.png" title="Add Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+								<a href="#" class="eListZapTimer"><img src="/web-data/img/clock_play.png" title="Add zap Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+								<a href="#" class="eListEditTimer"><img src="/web-data/img/clock_edit.png" title="Edit and add timer" onClick="return false;" border="0"></a><br/><br/>
+								<a target="_blank" href="/web/epgsearch.rss?search=${e.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed for this Title" border="0"></a>&nbsp;
+								<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${e.titleESC}" ><img src="/web-data/img/imdb.png" title="Search IMDb" border="0"></a><br/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3">&nbsp;</td>
 						</tr>
 					</table>
+					{forelse}
+						<h1 style="color: white;">Nothing found...</h1>
 					{/for}
 				</td>
 			</tr>

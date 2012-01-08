@@ -94,22 +94,29 @@ class IPKGConsoleStream:
 	def __init__(self, request, cmd):
 		self.request = request
 		self.request.write("<html><body>\n")		
+		if hasattr(self.request, 'notifyFinish'):
+			self.request.notifyFinish().addErrback(self.connectionLost)
 		self.container = eConsoleAppContainer()
 		self.lastdata = None
+		self.stillAlive = True
 
 		self.container.dataAvail.append(self.dataAvail)
 		self.container.appClosed.append(self.cmdFinished)
 
 		self.container.execute(*cmd)
 
+	def connectionLost(self, err):
+		self.stillAlive = False
+
 	def cmdFinished(self, data):
-		self.request.write("</body></html>\n")
-		self.request.finish()
+		if self.stillAlive:
+			self.request.write("</body></html>\n")
+			self.request.finish()
 
 	def dataAvail(self, data):
 		print"[IPKGConsoleStream].dataAvail: '%s'" %data
 		#FIXME - filter strange reapeated outputs since we switched to opkg
-		if data != self.lastdata or self.lastdata is None:
+		if data != self.lastdata or self.lastdata is None and self.stillAlive:
 			self.lastdata = data
 			self.request.write(data.replace("\n", "<br>\n"))
 

@@ -1,4 +1,4 @@
-var MODE = { tv : 0, radio : 1}
+var MODE = { tv : 0, radio : 1};
 var NAV_SERVICE = { provider : 0, sat : 1, all : 2 };
 var currentMode = null;
 var currentNav = null;
@@ -147,7 +147,7 @@ function onServiceSearchBlur(event){
 function serviceSearch(event){
 	var needle = event.element().value.toLowerCase();
 		
-	//Nur Gecko-basierte Browser können <option> elemente ausblenden
+	//Nur Gecko-basierte Browser kï¿½nnen <option> elemente ausblenden
 	if(Prototype.Browser.Gecko){
 		var serviceElements = $$('.providerservice');
 		
@@ -161,11 +161,11 @@ function serviceSearch(event){
 				option.show();
 			}
 		}
-	//für alle anderen Anderen Browser muss die Liste komplett neu aufgebaut werden
+	//fï¿½r alle anderen Anderen Browser muss die Liste komplett neu aufgebaut werden
 	} else {
-		currentProviderServiceListFiltered = []
+		currentProviderServiceListFiltered = [];
 		$A(currentProviderServiceList).each(function(service){
-			var serviceName = service.servicename.toLowerCase()
+			var serviceName = service.servicename.toLowerCase();
 			if(serviceName.indexOf(needle) != -1 || serviceName == ""){
 				currentProviderServiceListFiltered[currentProviderServiceListFiltered.length] = service;
 			}			
@@ -406,7 +406,7 @@ function BouquetEditorServiceList(xml){
 
 function getProviderList(type) {
 
-	url = ''
+	url = '';
 	switch (type){
 		case NAV_SERVICE.provider: 
 			if (currentMode == MODE.tv) 
@@ -605,7 +605,7 @@ function bouquetlistChange(selectObj) {
 	var idx = selectObj.selectedIndex; 
 	var current = selectObj.options[idx];
 	var hasProtection = $(current).readAttribute("data-hasprotection");
-	var button = $("togglebouquetprotection")
+	var button = $("togglebouquetprotection");
 	if (protectionConfigured) {
 		if ( protectionType == "0") {
 			if (hasProtection == "0"){
@@ -809,7 +809,8 @@ function addAlternativeServiceCallback(request) {
 function addServiceToBouquet(selectObj) {
 	var bouqueref = currentBouquetRef;
 	var selectList = $(selectObj);
-	var idx = selectList.selectedIndex; 
+	var idx = selectList.selectedIndex;
+	var refServicelist = "";
 		if ( idx != -1){
 		var ref = unescape(selectList.options[idx].value);
 		var selectServicelist = $('servicelist');
@@ -819,7 +820,7 @@ function addServiceToBouquet(selectObj) {
 			currentServicelistIndex = idxServicelist + 1;
 			if ( idxServicelist != -1 && idxServicelist != selectServicelistOptions.length){
 				if ( idxServicelist + 1 < selectServicelistOptions.length){
-					var refServicelist = unescape(selectServicelist.options[idxServicelist+1].value);
+					refServicelist = unescape(selectServicelist.options[idxServicelist+1].value);
 				}
 			}
 		}
@@ -955,7 +956,7 @@ function toggleBouquetProtectionCallback(request) {
 		var result = new SimpleXMLResult(getXML(request));
 		simpleResultHandler(result);
 		if(result.getState()){
-			getBouquetServiceList()
+			getBouquetServiceList();
 		}
 	}
 }
@@ -991,7 +992,7 @@ function incommingBackupResult(request) {
 	if (request.readyState == 4) {
 		var result = new SimpleXMLResult(getXML(request));
 		if(result.getState()){
-			startDownloadBackupFile(result.getStateText())
+			startDownloadBackupFile(result.getStateText());
 		}
 		else
 			simpleResultHandler(result);
@@ -1019,7 +1020,8 @@ function incommingRestoreResult(request) {
 function renameService(selectObj) {
 	var bouqueref = currentBouquetRef;
 	var selectList = $(selectObj);
-	var idx = selectList.selectedIndex; 
+	var idx = selectList.selectedIndex;
+	var refServicelist = "";
 	if ( idx != -1) {
 		var ref = unescape(selectList.options[idx].value); 
 	
@@ -1031,7 +1033,7 @@ function renameService(selectObj) {
 				currentServicelistIndex = idxServicelist;
 				if ( idxServicelist != -1 && idxServicelist != selectServicelistOptions.length){
 					if ( idxServicelist + 1 < selectServicelistOptions.length){
-						var refServicelist = unescape(selectList.options[idxServicelist+1].value);
+						refServicelist = unescape(selectList.options[idxServicelist+1].value);
 					}
 				}
 			}
@@ -1060,6 +1062,7 @@ function addMarkerToBouquet(selectObj) {
 	var bouqueref = currentBouquetRef;
 	var selectList = $(selectObj);
 	var markername=prompt('Please enter a marker name:', '');
+	var refServicelist = "";
 	if (markername) {
 		var selectServicelistOptions = selectList.getElementsByTagName('option');
 		if (selectServicelistOptions.length > 0) {
@@ -1067,7 +1070,7 @@ function addMarkerToBouquet(selectObj) {
 			currentServicelistIndex = idxServicelist + 1;
 			if ( idxServicelist != -1 && idxServicelist != selectServicelistOptions.length){
 				if ( idxServicelist + 1 < selectServicelistOptions.length){
-					var refServicelist = unescape(selectList.options[idxServicelist+1].value);
+					refServicelist = unescape(selectList.options[idxServicelist+1].value);
 				}
 			}
 		}
@@ -1101,7 +1104,7 @@ function fileUpload(form, action_url)
 	// Add event...
 	var eventHandler = function(){
 		// Message from server...
-		var resdoc;
+		var resdoc = "";
 
 		if (iframe.contentDocument) {
 				resdoc = iframe.contentDocument;
@@ -1125,7 +1128,7 @@ function fileUpload(form, action_url)
 			// remove iframe
 			iframe.parentNode().removeChild(iframe);
 		} catch(e){return;}
-    }
+    };
 	
 	iframe.observe("load", eventHandler);
 	// Set properties of form...

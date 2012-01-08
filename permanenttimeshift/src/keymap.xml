@@ -1,0 +1,10 @@
+<keymap>
+	<map context="PTS_GlobalActions">
+		<key id="KEY_RECORD" mapto="instantRecord" flags="m" />
+	</map>
+	<map context="PTS_SeekPointerActions">
+		<key id="KEY_OK" mapto="SeekPointerOK" flags="m" />
+		<key id="KEY_LEFT" mapto="SeekPointerLeft" flags="mr" />
+		<key id="KEY_RIGHT" mapto="SeekPointerRight" flags="mr" />
+	</map>
+</keymap>

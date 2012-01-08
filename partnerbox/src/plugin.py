@@ -21,6 +21,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
+from Screens.InputBox import PinInput
 from Components.config import config
 from Components.ScrollLabel import ScrollLabel
 from Components.ActionMap import ActionMap, NumberActionMap
@@ -135,6 +136,11 @@ def Plugins(**kwargs):
 		list.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart_RemoteTimerInit))
 	if config.plugins.Partnerbox.enablepartnerboxepglist.value:
 		list.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart_Partnerbox_EPGList))
+
+
+	list.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart_ChannelContextMenu))
+
+
 	list.append(PluginDescriptor(name="Setup Partnerbox", description=_("setup for partnerbox"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup))
 	if config.plugins.Partnerbox.showremotetimerinextensionsmenu.value:
 		list.append(PluginDescriptor(name="Partnerbox: RemoteTimer", description=_("Manage timer for other receiveres in network"), 
@@ -481,6 +487,7 @@ class RemoteTimerBouquetList(Screen):
 			servicereference = str(servives.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
 			servicename = str(servives.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore'))))
 		self["bouquetlist"].buildList(BouquetList)
+
 
 class RemoteTimerChannelList(Screen):
 	EMPTY = 0
@@ -1641,3 +1648,205 @@ class RemoteTimerEventView(Screen):
 
 	def pageDown(self):
 		self["epg_description"].pageDown()
+
+
+###########################################
+# ChannelContextMenu
+###########################################
+from Screens.ChannelSelection import ChannelContextMenu, OFF, MODE_TV
+from Components.ChoiceList import ChoiceEntryComponent
+from Tools.BoundFunction import boundFunction
+
+def autostart_ChannelContextMenu(session, **kwargs):
+	partnerboxChannelContextMenuInit()
+
+baseChannelContextMenu__init__ = None
+def partnerboxChannelContextMenuInit():
+	global baseChannelContextMenu__init__
+	if baseChannelContextMenu__init__ is None:
+		baseChannelContextMenu__init__ = ChannelContextMenu.__init__
+	ChannelContextMenu.__init__ = partnerboxChannelContextMenu__init__
+	# new methods
+	ChannelContextMenu.addPartnerboxService = addPartnerboxService
+	ChannelContextMenu.callbackPartnerboxServiceList = callbackPartnerboxServiceList
+	ChannelContextMenu.startAddParnerboxService = startAddParnerboxService
+	ChannelContextMenu.setPartnerboxService = setPartnerboxService
+	ChannelContextMenu.setParentalControlPin = setParentalControlPin
+	ChannelContextMenu.parentalControlPinEntered = parentalControlPinEntered
+
+def partnerboxChannelContextMenu__init__(self, session, csel):
+	baseChannelContextMenu__init__(self, session, csel)
+	if csel.mode == MODE_TV:
+		current_root = csel.getRoot()
+		inBouquetRootList = current_root and current_root.getPath().find('FROM BOUQUET "bouquets.') != -1 #FIXME HACK
+		inBouquet = csel.getMutableList() is not None
+		if csel.bouquet_mark_edit == OFF and not csel.movemode:
+			if not inBouquetRootList:
+				if inBouquet:
+					if config.ParentalControl.configured.value:
+						callFunction = self.setParentalControlPin
+					else:
+						callFunction = self.addPartnerboxService
+					self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("add Partnerbox service"), boundFunction(callFunction,0))))
+			if (not inBouquetRootList and not inBouquet) or (inBouquetRootList):
+				if config.usage.multibouquet.value:
+					if config.ParentalControl.configured.value:
+						callFunction = self.setParentalControlPin
+					else:
+						callFunction = self.addPartnerboxService
+					self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("add Partnerbox bouquet"), boundFunction(callFunction,1))))
+
+def addPartnerboxService(self, insertType):
+	count = config.plugins.Partnerbox.entriescount.value
+	if count == 1:
+		self.startAddParnerboxService(insertType, None, None, config.plugins.Partnerbox.Entries[0])
+	else:
+		self.session.openWithCallback(boundFunction(self.startAddParnerboxService,insertType), PartnerboxEntriesListConfigScreen, 0)
+
+def startAddParnerboxService(self, insertType, session, what, partnerboxentry = None):
+	if partnerboxentry is None:
+		self.close()
+	else:
+		if int(partnerboxentry.enigma.value) == 0:
+			self.session.openWithCallback(self.callbackPartnerboxServiceList, PartnerBouquetList, [], partnerboxentry, 1, insertType)
+		else:
+			self.session.open(MessageBox,_("You can not add services or bouquets from Enigma1-receivers into the channellist..."), MessageBox.TYPE_INFO)
+
+def setParentalControlPin(self, insertType):
+		self.session.openWithCallback(boundFunction(self.parentalControlPinEntered, insertType), PinInput, pinList = [config.ParentalControl.servicepin[0].value], triesEntry = config.ParentalControl.retries.servicepin, title = _("Enter the service pin"), windowTitle = _("Change pin code"))
+
+def parentalControlPinEntered(self, insertType, result):
+		if result:
+			self.addPartnerboxService(insertType)
+		else:
+			self.session.openWithCallback(self.close, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR)
+
+def callbackPartnerboxServiceList(self, result): 
+	if result and result[1]:
+		isBouquet = result[0]
+		partnerboxentry = result[2]
+		if isBouquet == 0:
+			servicelist = result[1]
+			item = servicelist[0]
+			current_root = self.csel.getRoot()
+			mutableList = self.csel.getMutableList(current_root)
+			if not mutableList is None:
+				service = self.setPartnerboxService(item, partnerboxentry)
+				if not mutableList.addService(service):
+					self.csel.bouquetNumOffsetCache = { }
+					mutableList.flushChanges()
+					self.csel.servicelist.addService(service)
+		elif isBouquet == 1:
+			servicelist = result[1][0]
+			bouquet = result[1][1]
+			services = []
+			for item in servicelist:
+				services.append(self.setPartnerboxService(item, partnerboxentry))
+			self.csel.addBouquet("%s (%s)" % (bouquet.servicename.replace("(TV)",""), partnerboxentry.name.value), services)
+	self.close()
+
+def setPartnerboxService(self, item, partnerboxentry):
+	password = partnerboxentry.password.value
+	ip = "%d.%d.%d.%d" % tuple(partnerboxentry.ip.value)
+	port = 8001
+	if password:
+		http = "http://root:%s@%s:%d/%s" % (password,ip,port, item.servicereference)
+	else:
+		http = "http://%s:%d/%s" % (ip,port, item.servicereference)
+	service = eServiceReference(item.servicereference)
+	service.setPath(http)
+	service.setName("%s (%s)" % (item.servicename, partnerboxentry.name.value))
+	return service	
+
+class PartnerBouquetList(RemoteTimerBouquetList):
+	def __init__(self, session, E2Timerlist, partnerboxentry, playeronly, insertType):
+		RemoteTimerBouquetList.__init__(self, session, E2Timerlist, partnerboxentry, playeronly)
+		self.skinName = "RemoteTimerBouquetList"
+		self.useinternal = 0 # always use partnerbox services
+		self.insertType = insertType
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions"],
+		{
+			"ok": self.action,
+			"back": self.closeScreen,
+		}, -1)
+
+	def action(self):
+		if self.insertType == 0:
+			try:
+				sel = self["bouquetlist"].l.getCurrentSelection()[0]
+				if sel is None:
+					return
+				self.session.openWithCallback(self.callbackChannelList, PartnerChannelList, self.E2TimerList, sel.servicereference, sel.servicename, self.PartnerboxEntry, self.playeronly)
+			except: return
+		else:
+			self.takeBouquet()
+
+	def callbackChannelList(self, result):
+		self.close((0, result, self.PartnerboxEntry))
+
+	def closeScreen(self):
+		self.close(None)
+
+	def takeBouquet(self):
+		sel = None
+		try:
+			sel = self["bouquetlist"].l.getCurrentSelection()[0]
+			if sel is None:
+				return
+		except: return
+		ref = urllib.quote(sel.servicereference.decode('utf8').encode('latin-1','ignore'))
+		url = self.http + "/web/epgnow?bRef=" + ref
+		sendPartnerBoxWebCommand(url, None,10, self.username, self.password).addCallback(self.ChannelListDownloadCallback, sel).addErrback(self.ChannelListDownloadError)
+
+	def ChannelListDownloadCallback(self, xmlstring, sel):
+		e2ChannelList = []
+		if xmlstring:
+			root = xml.etree.cElementTree.fromstring(xmlstring)
+			for events in root.findall("e2event"):
+				servicereference = str(events.findtext("e2eventservicereference", '').encode("utf-8", 'ignore'))
+				servicename = str(events.findtext("e2eventservicename", 'n/a').encode("utf-8", 'ignore'))
+				e2ChannelList.append(E2EPGListAllData(servicereference = servicereference, servicename = servicename))
+		result = (e2ChannelList, sel)
+		self.close((1, result, self.PartnerboxEntry))
+
+	def ChannelListDownloadError(self, error = None):
+		if error is not None:
+			self["text"].setText(str(error.getErrorMessage()))
+
+class PartnerChannelList(RemoteTimerChannelList):
+	def __init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, playeronly):
+		RemoteTimerChannelList.__init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, "",  playeronly)
+		self.skinName = "RemoteTimerChannelList"
+		self.useinternal = 0 # always use partnerbox services
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions"],
+		{
+			"ok": self.getEntry,
+			"back": self.closeScreen,
+			"yellow": self.doNothing,
+			"blue": self.doNothing,
+			"red": self.closeScreen,
+		}, -1)
+		self["key_green"].setText(_("Apply"))
+		self.key_green_choice = self.EMPTY
+		self["key_yellow"].setText("")
+		self["key_blue"].setText("")
+		self["key_red"].setText(_("Abort"))
+
+	def onSelectionChanged(self):
+		pass
+
+	def doNothing(self):
+		pass
+
+	def getEntry(self):
+		sel = None
+		try:
+			sel = self["channellist"].l.getCurrentSelection()[0]
+		except:return
+		if sel is None:
+			return
+		self.close([sel])
+
+	def closeScreen(self):
+		self.close(None)
+

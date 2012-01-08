@@ -1,9 +1,10 @@
+# -*- coding: UTF-8 -*-
 from Components.Sources.Source import Source
 from enigma import eServiceCenter, eServiceReference, eEPGCache
 
 class EPG(Source):
 	BOUQUETNOW = 0
-	BOUQUETNEXT = 1
+	BOUQUETNEXT = 1	
 	SERVICENOW = 2
 	SERVICENEXT = 3
 	SERVICE = 4
@@ -11,6 +12,7 @@ class EPG(Source):
 	BOUQUET = 6
 	MULTI = 7
 	SEARCHSIMILAR = 8
+	BOUQUETNOWNEXT = 9
 	
 	def __init__(self, navcore, func=BOUQUETNOW, endtm=False):
 		self.func = func
@@ -37,6 +39,8 @@ class EPG(Source):
 				func = self.getBouquetEPGNow
 			elif self.func is self.BOUQUETNEXT:
 				func = self.getBouquetEPGNext
+			elif self.func is self.BOUQUETNOWNEXT:
+				func = self.getBouquetEPGNowNext
 			elif self.func is self.BOUQUET:
 				func = self.getEPGofBouquet
 			elif self.func is self.MULTI:
@@ -48,6 +52,9 @@ class EPG(Source):
 
 			return func(self.command)
 		return ()
+
+	def getBouquetEPGNowNext(self, ref):
+		return self.getEPGNowNext(ref, -1)
 
 	def getBouquetEPGNow(self, ref):
 		return self.getEPGNowNext(ref, 0)
@@ -76,13 +83,16 @@ class EPG(Source):
 			search = ['IBDCTSERNX']
 
 			if services: # It's a Bouquet
-				search.extend([(service, type, -1) for service in services])
-
+				if type == -1: #Now AND Next at once!
+					append = search.append
+					for service in services:
+						append((service, 0, -1))
+						append((service, 1, -1))
+				else:
+					search.extend([(service, type, -1) for service in services])
 			events = self.epgcache.lookupEvent(search)
 
-		if events:
-			return events
-		return ()
+		return events or ()
 
 	def getEPGofService(self, param, options='IBDCTSERN'):
 		print "[WebComponents.EPG] getEPGofService param: ", param
@@ -177,6 +187,7 @@ class EPG(Source):
 
 	def searchEvent(self, needle):
 		print "[WebComponents.EPG] searching EPG: ", needle
+
 		self.search = True
 
 		events = self.epgcache.search(('IBDTSERN', 256, eEPGCache.PARTIAL_TITLE_SEARCH, needle, 1));

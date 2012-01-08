@@ -21,17 +21,7 @@ class Network(Source):
 		elif device is self.WLAN:
 			self.iface = "ath0"
 
-	def ConvertIP(self, list):
-		retstr = None
-		
-		if list != None:
-			if(len(list) == 4):
-				retstr = "%s.%s.%s.%s" % (list[0], list[1], list[2], list[3])
-		
-		if retstr is None:
-			retstr = "0.0.0.0"
-			
-		return retstr
+	ConvertIP = lambda self, l: "%s.%s.%s.%s" % tuple(l) if l and len(l) == 4 else "0.0.0.0"
 
 	def getInterface(self):
 		iface = Interface(self.iface)

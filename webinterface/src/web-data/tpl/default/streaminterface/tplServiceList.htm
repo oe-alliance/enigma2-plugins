@@ -1,12 +1,12 @@
 
 <!-- tplServiceList -->
-<select id="channelSelect" onChange="onServiceSelected()" width="100px">
+<select class="services" id="services" width="100px">
 	<option id="vlcemptyservice"></option>
-	{for e in events}
-	<option id="${e.servicereference}" >
-	${e.servicename}	
-	{if e.duration != 0} 
-		(${e.shorttitle}) +${e.remaining} of ${e.duration} min.
+	{for s in items}
+	<option id="${s.now.servicereference}" >
+	${s.now.servicename}	
+	{if s.now.duration != 0  && !isNaN(s.now.duration)} 
+		(${s.now.shorttitle}) +${s.now.remaining} of ${s.now.duration} min.
 	{/if}
 	</option>
 	{/for}

@@ -1,271 +1,285 @@
-var vlc = '';
-var currentServiceRef = '';
-var bouquetUpdatePoller = '';
-var currentBouquetRef = '';
-/*
- * incoming request-data for Current Service Epg
- */
-function incomingVLCServiceEPG(request) {
-	if (request.readyState == 4) {
-		var events = getXML(request).getElementsByTagName("e2eventlist")
-				.item(0).getElementsByTagName("e2event");
-
-		var event = new EPGEvent(events.item(0)).toJSON();
-
-		var data = {
-			'current' : event
-		};
-		processTpl('streaminterface/tplCurrent', data, 'current');
+var VlcBouquetListHandler = Class.create(AbstractContentHandler, {
+	initialize: function($super, target){
+		$super('streaminterface/tplBouquetList', target);
+		this.provider = new SimpleServiceListProvider(this.show.bind(this));
 	}
-}
+});
 
-/*
- * Load Now information for Service
- */
-function loadVLCEPGServiceNow(servicereference) {
-	doRequest(URL.epgservicenow + servicereference, incomingVLCServiceEPG);
-}
+var VlcServiceListHandler = Class.create(AbstractContentHandler, {
+	initialize: function($super, target){
+		$super('streaminterface/tplServiceList', target, [this.getSubservices.bind(this)]);
 
-function onServiceSelected() {
-	currentServiceRef = $('channelSelect').options[$('channelSelect').selectedIndex].id;
+		this.provider = new ServiceListProvider(this.show.bind(this));
+//		this.subServiceHandler = new ServiceListSubserviceHandler();
+	},
 	
-	if(currentServiceRef !== "vlcemptyservice"){
-		loadVLCEPGServiceNow(currentServiceRef);
-		setStreamTarget(currentServiceRef);
-		
-		if($('vlcZap').checked){			
-			doRequest("/web/zap?sRef=" + currentServiceRef);			
+	/**
+	 * getSubservices
+	 * calls this.subServiceHandler.load() to show Now/Next epg information
+	 */
+	getSubservices: function(){
+//		this.subServiceHandler.load({});
+	},
+	
+	/**
+	 * call this to switch to a service
+	 * Parameters:
+	 * @servicereference - the (unescaped) reference to the service that should be shown
+	 */
+	zap: function(parms){
+		this.provider.simpleResultQuery(URL.zap, parms, this.simpleResultCallback.bind(this));
+	},
+	
+	showSimpleResult: function($super, result){
+		if(result.getState()){
+			core.updateItemsLazy();
 		}
-		delayedLoadVlcSubservices();
-	} else {
-		vlcStop();
+		$super(result);
 	}
-}
+});
 
-function incomingVLCBouquetList(request) {
-	if (request.readyState == 4) {
-		var services = new ServiceList(getXML(request)).getArray();
-
-		data = {
-			bouquets : services
-		};
-
-		processTpl('streaminterface/tplBouquetList', data, 'bouquetList');
-		loadVLCBouquet(services[0].servicereference);
-	}
-}
-function reloadVLCBouquet(){
-	loadVLCBouquet(currentBouquetRef);
-}
-
-
-function loadVLCBouquet(servicereference) {
-//	clearInterval(bouquetUpdatePoller);	
-	currentBouquetRef = servicereference;
+var WebTv = Class.create({
+	initialize: function(vlcObjectTarget){
+		this.target = vlcObjectTarget;
+		this.instance = null;
+		this.bouquetHandler = new VlcBouquetListHandler('bouquetList');
+		this.serviceHandler = new VlcServiceListHandler('serviceList');
+		this.bouquetHandler.onFinished.push(this.onLoadBouquetFinished.bind(this));
+	},
 	
-	loadVLCChannelList(servicereference);
-	
-//	bouquetUpdatePoller = setInterval(reloadVLCBouquet, 30000);
-}
+	run: function(){
+		this.instance = $(this.target);
 
-function incomingVLCSubservices(request){
-	if (request.readyState == 4) {
-		var services = new ServiceList(getXML(request)).getArray();
-		debug("[incomincVLCSubservices] Got " + services.length + " SubServices");
+		try {
+			$('vlcVolume').update(this.instance.audio.volume);
+		} catch (e) {
+			debug('[WebTv].run Error on initializing WebTv');
+		}
+		this.registerEvents();
+		this.bouquetHandler.load({'bRef' : bouquetsTv});
+	},
+	
+	onLoadBouquetFinished: function(){
+		var bref = decodeURIComponent( this.bouquetHandler.data.services[0].servicereference );
+		this.serviceHandler.load({'bRef' : bref});
+	},
+	
+	
+	registerEvents: function(){
+		$('bouquetList').on(
+			'change',
+			'.bouquets',
+			function(event, element){
+				var bref = decodeURIComponent ( $('bouquets').options[$('bouquets').selectedIndex].id );
+				this.serviceHandler.load({ 'bRef' : bref });
+			}.bind(this)
+		);
 		
-		if(services.length > 1) {			
-			var masterref = $(services[0].servicereference);
-			var lastoption = masterref;
+		$('serviceList').on(
+			'change',
+			'.services',
+			function(event, element){
+				this.onServiceChanged();
+			}.bind(this)
+		);
+		
+		var buttons = $('vlcButtons');
+		buttons.on(
+			'click',
+			'.vlcPrev',
+			function(event, element){
+				this.prev();
+			}.bind(this)
+		);
+		buttons.on(
+			'click',
+			'.vlcPlay',
+			function(event, element){
+				this.play();
+			}.bind(this)
+		);
+		buttons.on(
+			'click',
+			'.vlcNext',
+			function(event, element){
+				this.next();
+			}.bind(this)
+		);
+		buttons.on(
+			'click',
+			'.vlcStop',
+			function(event, element){
+				this.stop();
+			}.bind(this)
+		);
+		buttons.on(
+			'click',
+			'.vlcFullscreen',
+			function(event, element){
+				this.fullscreen();
+			}.bind(this)
+		);
+		buttons.on(
+			'click',
+			'.vlcTeletext',
+			function(event, element){
+				this.teletext();
+			}.bind(this)
+		);
+		buttons.on(
+			'click',
+			'.vlcVolumeDown',
+			function(event, element){
+				this.volumeDown();
+			}.bind(this)
+		);
+		buttons.on(
+			'click',
+			'.vlcVolumeUp',
+			function(event, element){
+				this.volumeUp();
+			}.bind(this)
+		);
+		buttons.on(
+			'click',
+			'.vlcToggleMute',
+			function(event, element){
+				this.toggleMute();
+			}.bind(this)
+		);
+	},
+	
+	onServiceChanged: function(){
+		var sref = decodeURIComponent (  $('services').options[$('services').selectedIndex].id );
+		this.setStreamTarget(sref);
+	},
+	
+	play: function() {
+		try {
+			this.onServiceChanged();
+		} catch (e) {
+			notify("Nothing to play", false);
+		}
+	},
 
-			
-			if(lastoption !== null){
-				// we already have the main service in our servicelist so we'll
-				// start with the second element
-				// to avoid crazy things happening, just check it's not the master-service we've gotten
-				
-				for ( var i = 1; i < services.length ; i++){
-					var service = services[i];
-					
-					//TODO: FIX THIS UGLY CODE
-					if(service.servicereference != masterref){
-						var option = $(service.servicereference);
-						if(option !== null){
-							option.remove();
-						}
-						option = new Option(' |- ' + service.servicename);
-						option.id =  service.servicereference;
-						
-						lastoption.insert( { after : option } );
-						
-						lastoption = option;
-					}
-				}
+	prev: function() {
+		if ($('services').selectedIndex > 0) {
+			$('services').selectedIndex -= 1;
+			this.onServiceChanged();
+		}
+	},
+
+	next: function() {
+		if ($('services').selectedIndex < $('services').length - 1) {
+			$('services').selectedIndex += 1;
+			this.onServiceChanged();
+		}
+	},
+
+	pause: function() {
+		this.instance.playlist.togglePause();
+	},
+
+	stop: function() {
+		try {
+			this.instance.playlist.stop();
+		} catch (e) {
+			notify("Nothing to stop", false);
+		}
+	},
+
+	volumeUp: function() {
+		if (this.instance.audio.volume < 200) {
+			if (this.instance.audio.volume + 10 > 200) {
+				this.instance.audio.volume = 200;
+			} else {
+				this.instance.audio.volume += 10;
 			}
 		}
-	}
-}
 
-function loadVlcSubservices(){
-	var url = URL.streamsubservices + currentServiceRef;
-	doRequest(url, incomingVLCSubservices);
-}
+		$('vlcVolume').update(this.instance.audio.volume);
+	},
 
-function delayedLoadVlcSubservices(){
-	setTimeout(loadVlcSubservices, 7500);
-}
+	volumeDown: function() {
+		if (this.instance.audio.volume > 0) {
+			if (this.instance.audio.volume < 10) {
+				this.instance.audio.volume = 0;
+			} else {
+				this.instance.audio.volume -= 10;
+			}
+		}
 
-/*
- * Incoming request-data for EPG Now information
- * Builds the Channellist
- */
-function incomingVLCChannelList(request) {
-	if (request.readyState == 4) {
-		var events = new EPGList(getXML(request)).getArray();
+		$('vlcVolume').update(this.instance.audio.volume);
+	},
 
-		var data = {
-			'events' : events
-		};
-		processTpl('streaminterface/tplServiceList', data, 'channelList');
-	}
-}
-
-/*
- * Load List of all Channels with epg now where available
- */
-function loadVLCChannelList(bouquetreference) {
-	doRequest(URL.epgnow + bouquetreference, incomingVLCChannelList);
-}
-
-function vlcPlay() {
-	try {
-		onServiceSelected();
-	} catch (e) {
-		notify("Nothing to play", false);
-	}
-}
-
-function vlcPrev() {
-	if ($('channelSelect').selectedIndex > 0) {
-		$('channelSelect').selectedIndex -= 1;
-		onServiceSelected();
-	}
-}
-
-function vlcNext() {
-	if ($('channelSelect').selectedIndex < $('channelSelect').length - 1) {
-		$('channelSelect').selectedIndex += 1;
-		onServiceSelected();
-	}
-}
-
-function vlcPause() {
-	vlc.playlist.togglePause();
-}
-
-function vlcStop() {
-	try {
-		vlc.playlist.stop();
-	} catch (e) {
-		notify("Nothing to stop", false);
-	}
-}
-
-function vlcVolumeUp() {
-	if (vlc.audio.volume < 200) {
-		if (vlc.audio.volume + 10 > 200) {
-			vlc.audio.volume = 200;
+	toggleMute: function() {
+		this.instance.audio.mute = !this.instance.audio.mute;
+		if (this.instance.audio.mute) {
+			$('vlcVolume').update('Muted');
 		} else {
-			vlc.audio.volume += 10;
+			$('vlcVolume').update(this.instance.audio.volume);
 		}
-	}
+	},
 
-	set('vlcVolume', vlc.audio.volume);
-}
-
-function vlcVolumeDown() {
-	if (vlc.audio.volume > 0) {
-		if (vlc.audio.volume < 10) {
-			vlc.audio.volume = 0;
-		} else {
-			vlc.audio.volume -= 10;
+	fullscreen: function() {
+		if (this.instance.playlist.isPlaying) {
+			if (this.instance.input.hasVout) {
+				this.instance.video.fullscreen = true;
+				return;
+			}
 		}
-	}
 
-	set('vlcVolume', vlc.audio.volume);
-}
+		notify("Cannot enable fullscreen mode when no Video is being played!",
+				false);
+	},
 
-function vlcToogleMute() {
-	vlc.audio.mute = !vlc.audio.mute;
-	if (vlc.audio.mute) {
-		set('vlcVolume', 'Muted');
-	} else {
-		set('vlcVolume', vlc.audio.volume);
-	}
-}
-
-function vlcFullscreen() {
-	if (vlc.playlist.isPlaying) {
-		if (vlc.input.hasVout) {
-			vlc.video.fullscreen = true;
-			return;
+	teletext: function() {
+		try {
+			this.instance.video.teletext = 100;
+		} catch (e) {
+			debug("Error - Could not set teletext");
 		}
-	}
+		debug("Current Teletext Page:" + this.instance.video.teletext);
+	},
 
-	notify("Cannot enable fullscreen mode when no Video is being played!",
-			false);
-}
+	playUrl: function(url) {
+		current = this.instance.playlist.add(url);
+		this.instance.playlist.playItem(current);
+		$('vlcVolume').update(this.instance.audio.volume);
+	},
 
-function vlcTeletext() {
-	try {
-		vlc.video.teletext = 100;
-	} catch (e) {
-		debug("Error - Could not set teletext");
-	}
-	debug("Current Teletext Page:" + vlc.video.teletext);
-}
+	setStreamTarget: function(servicereference) {
+		host = top.location.host;
+		url = 'http://' + host + ':8001/' + decodeURIComponent(servicereference);
 
-function playUrl(url) {
-	current = vlc.playlist.add(url);
-	vlc.playlist.playItem(current);
-	set('vlcVolume', vlc.audio.volume);
-}
-
-function setStreamTarget(servicereference) {
-	host = top.location.host;
-	url = 'http://' + host + ':8001/' + decodeURIComponent(servicereference);
-
-	debug("setStreamTarget " + url);
-	vlc.playlist.clear();
-	playUrl(url);
-}
-
-function loadVLCBouquets() {
-	url = URL.getservices + bouquetsTv;
-	doRequest(url, incomingVLCBouquetList);
+		debug("setStreamTarget " + url);
+		this.instance.playlist.clear();
+		this.playUrl(url);
+	},
 	
-}
+	notify: function(text, state){
+		debug("[E2WebCore].notify");
+		notif = $('notification');
 
-/*
- * Event when the user selected a Bouquet in the bouquets <select>
- */
-function onBouquetSelected() {
-	var servicereference = $('bouquetSelect').options[$('bouquetSelect').selectedIndex].id;
-	loadVLCBouquet(servicereference);
-}
+		if(notif !== null){
+			//clear possibly existing hideNotifier timeout of a previous notfication
+			clearTimeout(this.hideNotifierTimeout);
+			if(state === false){
+				notif.style.background = "#C00";
+			} else {
+				notif.style.background = "#85C247";
+			}				
 
-function initWebTv() {
-	var DBG = userprefs.data.debug || false;
-	if (DBG) {
-		openDebug();
+			this.set('notification', "<div>"+text+"</div>");
+			notif.fadeIn({'delay' : 500, 'to' : 90});
+			var _this = this;
+			this.hideNotifierTimeout = setTimeout(_this.hideNotifier.bind(this), 5000);
+		}
+	},
+	
+	getBaseHash: function(){
+		return '#';
 	}
+});
 
-	vlc = $('vlc');
-
-	try {
-		set('vlcVolume', vlc.audio.volume);
-	} catch (e) {
-		debug('[initWebTv] Error on initializing WebTv');
-	}
-
-	loadVLCBouquets();
-}
+core = new WebTv('vlc');

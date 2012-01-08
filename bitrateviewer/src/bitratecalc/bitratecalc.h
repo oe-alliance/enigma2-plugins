@@ -41,7 +41,7 @@ private:
 	ePtr<eTimer> m_send_data_timer;
 	void sendDataTimerTimeoutCB();
 public:
-	eBitrateCalc(int pid, int dvbnamespace, int tsid, int onid, int refreshintervall, int buffer_size);
+	eBitrateCalc(const eServiceReference &ref, int pid, int refreshintervall, int buffer_size);
 	PSignal2<void, int, int> dataSent;
 };
 

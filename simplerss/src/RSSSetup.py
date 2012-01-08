@@ -200,8 +200,8 @@ class RSSSetup(ConfigListScreen, Screen):
 		simpleRSS = config.plugins.simpleRSS
 
 		# Remove Notifier
-		simpleRSS.autostart.notifiers.remove(self.elementChanged)
-		simpleRSS.enable_google_reader.notifiers.remove(self.elementChanged)
+		simpleRSS.autostart.removeNotifier(self.elementChanged)
+		simpleRSS.enable_google_reader.removeNotifier(self.elementChanged)
 
 		# Handle ticker
 		self.notificationChanged(simpleRSS.update_notification)

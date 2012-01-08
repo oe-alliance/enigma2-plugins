@@ -1,16 +1,16 @@
 <skin>
-	<screen name="MerlinEPGCenter" title="MerlinEPGCenter" position="0,0" size="1024,576" flags="wfNoBorder">
+	<screen name="MerlinEPGCenter" title="Merlin EPG Center" position="0,0" size="1024,576" flags="wfNoBorder">
 		
 		<widget name="tabBackground" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_background.png" position="35,35" size="954,31" zPosition="0" alphatest="on" />
 
 		<widget name="tabbar" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_1.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_2.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_3.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_4.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_5.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/tab_marker_6.png" position="35,35" size="954,31" transparent="1" zPosition="1" alphatest="on" />
 		
-		<widget name="tab_text_0" position="65,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
-		<widget name="tab_text_1" position="225,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
-		<widget name="tab_text_2" position="385,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
-		<widget name="tab_text_3" position="545,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
-		<widget name="tab_text_4" position="705,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
-		<widget name="tab_text_5" position="865,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#9a9a9a" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_0" position="65,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_1" position="225,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_2" position="385,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_3" position="545,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_4" position="705,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
+		<widget name="tab_text_5" position="865,35" size="134,31" zPosition="2" valign="center" halign="left" font="Regular;16" transparent="1" foregroundColor="#ffffff" shadowColor="black" shadowOffset="0,0" />
 		
 		<widget name="timerlist" position="35,71" size="655,451" scrollbarMode="showNever" />
 		<widget name="list" position="35,71" size="655,431" scrollbarMode="showNever" />
@@ -27,7 +27,7 @@
 		<widget source="global.CurrentTime" render="Label" position="885,80" size="100,24" font="Regular;22" halign="right" transparent="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="785,105" size="200,26" font="Regular;22" halign="right" transparent="1">
+		<widget source="global.CurrentTime" render="Label" position="785,104" size="200,24" font="Regular;22" halign="right" transparent="1">
 			<convert type="ClockToText">Format: %a %d. %b</convert>
 		</widget>
 		<widget name="serviceName" position="705,145" size="284,26" zPosition="1" font="Regular;20" transparent="1" halign="left" valign="center" />
@@ -35,15 +35,18 @@
 		<widget name="beginTime" position="705,220" size="60,20" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
 		<widget name="eventProgress" position="745,223" size="80,15" zPosition="1" borderWidth="1" />
 		<widget name="eventProgressImage" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_0.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_1.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_2.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_3.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/EventProgress_4.png" position="745,223" size="80,15" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="eventProgressText" position="770,220" size="48,20" zPosition="1" font="Regular;16" transparent="1" halign="center" valign="center" />
 		<widget name="endTime" position="828,220" size="60,20" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
 		<widget name="duration" position="875,220" size="45,20" zPosition="1" font="Regular;16" transparent="1" halign="right" valign="center" />
-		<widget name="remaining" position="920,220" size="65,20" foregroundColors="#ef7f1a,#e31e24,#009846,#ffed00,#ffffff" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
+		<widget name="remaining" position="920,220" size="65,20" foregroundColors="#ef7f1a,#e31e24,#74de0a,#ffed00,#ffffff" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="center" />
 		<widget name="isRecording" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/recording.png" position="696,511" size="293,29" zPosition="2" transparent="1" alphatest="on" />
 		<widget name="description" position="705,245" size="280,260" zPosition="1" font="Regular;16" transparent="1" halign="left" valign="top" />
 		<widget name="videoPicture" position="712,390" size="270,115" zPosition="1" backgroundColor="transparent" />
-		<widget name="bouquet" position="695,515" size="294,21" zPosition="1" font="Regular;16" transparent="1" halign="center" valign="center" />
+		<widget name="bouquet" position="695,515" size="294,21" zPosition="4" font="Regular;16" transparent="1" halign="center" valign="center" />
 		
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/button_background.png" position="35,510" size="954,31" transparent="1" alphatest="on" />
+		<widget name="volume" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/volume.png" position="696,511" size="293,29" zPosition="3" transparent="1" />
+		<widget name="mute" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPGCenter/images/XD_BORDER/mute.png" position="698,513" size="24,24" zPosition="3" transparent="1" alphatest="on" />
 		<widget font="Regular;16" halign="left" valign="center" name="key_red" position="75,513" size="140,25" transparent="1" zPosition="2"/>
 		<widget font="Regular;16" halign="left" valign="center" name="key_green" position="225,513" size="140,25" transparent="1" zPosition="2"/>
 		<widget font="Regular;16" halign="left" valign="center" name="key_yellow" position="375,513" size="140,25" transparent="1" zPosition="2"/>

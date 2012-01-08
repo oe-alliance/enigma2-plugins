@@ -20,6 +20,10 @@
 #  distributed other than under the conditions noted above.
 #
 
+
+# for localized messages
+from . import _
+
 #PYTHON IMPORTS
 from datetime import timedelta as dt_timedelta, date as dt_date
 from time import localtime, time
@@ -27,7 +31,7 @@ from time import localtime, time
 # ENIGMA IMPORTS
 from Components.config import config
 from Components.ScrollLabel import ScrollLabel
-from enigma import eEnv, eSize, fontRenderClass, ePoint, eSlider, eTimer, iRecordableService
+from enigma import eEnv, eSize, fontRenderClass, ePoint, eSlider, eTimer, iRecordableService, eDVBVolumecontrol
 import NavigationInstance
 from RecordTimer import RecordTimerEntry, AFTEREVENT
 from Screens.MessageBox import MessageBox
@@ -35,14 +39,78 @@ import Screens.Standby
 from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, SCOPE_CURRENT_PLUGIN
 from Tools.LoadPixmap import LoadPixmap
 
-# for localized messages
-from . import _
-
 
 LIST_TYPE_EPG = 0
 LIST_TYPE_UPCOMING = 1
 
+WEEKSECONDS = 7*86400
+WEEKDAYS = (_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday"))
 
+
+# most functions were taken and modified from Components.VolumeControl
+class EmbeddedVolumeControl():
+	def __init__(self):
+		self.volctrl = eDVBVolumecontrol.getInstance()
+		self.hideVolTimer = eTimer()
+		self.hideVolTimer.callback.append(self.volHide)
+		
+	def volSave(self):
+		if self.volctrl.isMuted():
+			config.audio.volume.value = 0
+		else:
+			config.audio.volume.value = self.volctrl.getVolume()
+		config.audio.volume.save()
+		
+	def volUp(self):
+		self.setVolume(+1)
+		
+	def volDown(self):
+		self.setVolume(-1)
+		
+	def setVolume(self, direction):
+		oldvol = self.volctrl.getVolume()
+		if direction > 0:
+			self.volctrl.volumeUp()
+		else:
+			self.volctrl.volumeDown()
+		is_muted = self.volctrl.isMuted()
+		vol = self.volctrl.getVolume()
+		self["volume"].show()
+		if is_muted:
+			self.volMute() # unmute
+		elif not vol:
+			self.volMute(False, True) # mute but dont show mute symbol
+		if self.volctrl.isMuted():
+			self["volume"].setValue(0)
+		else:
+			self["volume"].setValue(self.volctrl.getVolume())
+		self.volSave()
+		self.hideVolTimer.start(3000, True)
+		
+	def volHide(self):
+		self["volume"].hide()
+		
+	def volMute(self, showMuteSymbol=True, force=False):
+		vol = self.volctrl.getVolume()
+		if vol or force:
+			self.volctrl.volumeToggleMute()
+			if self.volctrl.isMuted():
+				if showMuteSymbol:
+					self["mute"].show()
+				self["volume"].setValue(0)
+			else:
+				self["mute"].hide()
+				self["volume"].setValue(vol)
+				
+	def getIsMuted(self):
+		return self.volctrl.isMuted()
+		
+	def setMutePixmap(self):
+		if self.volctrl.isMuted():
+			self["mute"].show()
+		else:
+			self["mute"].hide()
+			
 class ResizeScrollLabel(ScrollLabel):
 	def __init__(self, text = ""):
 		ScrollLabel.__init__(self, text)
@@ -96,9 +164,6 @@ class PiconLoader():
 	def piconPathChanged(self, configElement = None):
 		self.nameCache.clear()
 		
-	def removeNotifier(self):
-		config.plugins.merlinEpgCenter.epgPaths.notifiers.remove(self.piconPathChanged)
-		
 def findDefaultPicon(serviceName):
 	searchPaths = (eEnv.resolve('${datadir}/enigma2/%s/'), '/media/cf/%s/', '/media/usb/%s/')
 	
@@ -124,14 +189,11 @@ def getFuzzyDay(t):
 	elif dt_date.fromtimestamp(t) == dt_date.today() + dt_timedelta(days = 1):
 		# next day
 		date = _("Tomorrow")
-	elif ((t - nt) < 7*86400) and (nt < t):
+	elif nt < t and (t - nt) < WEEKSECONDS:
 		# same week
-		date = (_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday"))[d[6]]
-	elif d[0] == n[0]:
-		# same year
-		date = "%d.%d.%d" % (d[2], d[1], d[0])
+		date = WEEKDAYS[d.tm_wday]
 	else:
-		date = _("Unknown date")
+		date = "%d.%d.%d" % (d.tm_mday, d.tm_mon, d.tm_year)
 		
 	return date
 	
@@ -146,9 +208,8 @@ class BlinkTimer():
 		self.stopping = False
 		self.timerRunning = False
 		self.timer = eTimer()
-		self.timer.callback.append(self.changeBlinkState)
-		self.session.nav.record_event.append(self.gotRecordEvent)
 		self.callbacks = []
+		self.resume()
 		
 	def gotRecordEvent(self, service, event):
 		if event in (iRecordableService.evEnd, iRecordableService.evStart, None):
@@ -162,9 +223,23 @@ class BlinkTimer():
 			elif not numRecs and self.timerRunning and not self.stopping:
 				self.stopping = True
 				
-	def shutdown(self):
-		self.session.nav.record_event.remove(self.gotRecordEvent)
-		self.timer.callback.remove(self.changeBlinkState)
+	def suspend(self):
+		if self.gotRecordEvent in self.session.nav.record_event:
+			self.session.nav.record_event.remove(self.gotRecordEvent)
+		if self.changeBlinkState in self.timer.callback:
+			self.timer.callback.remove(self.changeBlinkState)
+		if self.getIsRunning():
+			self.timer.stop()
+			self.delay = 0
+			self.stopping = False
+			self.state = False
+			self.timerRunning = False
+			
+	def resume(self):
+		self.timer.callback.insert(0, self.changeBlinkState) # order is important, this callback must be called first!
+		self.session.nav.record_event.append(self.gotRecordEvent)
+		if self.session.nav.RecordTimer.isRecording():
+			self.gotRecordEvent(None, None)
 			
 	def appendList(self, l):
 		self.lists.append(l)
@@ -319,3 +394,29 @@ class RecTimerEntry(RecordTimerEntry):
 						self.session.openWithCallback(self.sendTryQuitMainloopNotification, MessageBox, _("A finished record timer wants to shut down\nyour receiver. Shutdown now?"), timeout = 20)
 			return True
 			
+# interface between AutoTimer and our timer list
+class TimerListObject(object):
+	def __init__(self, begin, end, service_ref, name, justplay, disabled, autoTimerId, match, searchType, counter, counterLeft, destination, services, bouquets, includedDays, excludedDays):
+		self.begin		= begin
+		self.end		= end
+		self.service_ref 	= service_ref
+		self.name		= name
+		self.justplay		= justplay
+		self.disabled		= disabled
+		self.autoTimerId	= autoTimerId
+		self.state		= 0 # TimerEntry.StateWaiting
+		
+		# additional information
+		self.match		= match
+		self.searchType		= searchType
+		self.counter		= counter
+		self.counterLeft	= counterLeft
+		self.destination	= destination
+		self.services		= services
+		self.bouquets		= bouquets
+		self.includedDays	= includedDays
+		self.excludedDays	= excludedDays
+		
+	def isRunning(self):
+		return False
+		

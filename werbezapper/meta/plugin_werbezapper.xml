@@ -9,7 +9,7 @@
                     <shortdescription>Zap between commercials</shortdescription>
                     <description>With Werbezapper you can bridge commercials by creating short timers\n
 		    (between 1 and 9 minutes long) which will automatically zap back to the original channel after execution.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_werbezapper_en.jpg" />		    
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_werbezapper.jpg" />		    
           </info>
 
 	  <files type="package"> <!-- without version, without .ipk -->

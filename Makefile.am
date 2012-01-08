@@ -11,8 +11,10 @@ SUBDIRS = \
 	babelzapper \
 	bonjour \
 	cdinfo \
+	curlytx \
 	dreamirc \
 	dreammediathek \
+	dvdbackup \
 	easyinfo \
 	easymedia \
 	ecasa \
@@ -21,6 +23,7 @@ SUBDIRS = \
 	emission \
 	epgrefresh \
 	epgsearch \
+	eurotictv \
 	filebrowser \
 	fritzcall \
 	fstabeditor \
@@ -29,6 +32,7 @@ SUBDIRS = \
 	growlee \
 	httpproxy \
 	imdb \
+	infobartunerstate \
 	kiddytimer \
 	lastfm \
 	letterbox \
@@ -54,6 +58,8 @@ SUBDIRS = \
 	orfteletext \
 	partnerbox \
 	permanentclock \
+	pipservicerelation \
+	pipzap \
 	pluginhider \
 	pluginsort \
 	podcast \
@@ -66,6 +72,8 @@ SUBDIRS = \
 	shoutcast \
 	showclock \
 	simplerss \
+	startupservice \
+	SubsDownloader2 \
 	svdrp \
 	tageditor \
 	trafficinfo \

@@ -184,7 +184,7 @@ class AutoTimerEditorBase:
 		self.encoding = NoSave(ConfigSelection(choices = selection, default = default))
 
 		# ...
-		self.searchType = NoSave(ConfigSelection(choices = [("partial", _("partial match")), ("exact", _("exact match"))], default = timer.searchType))
+		self.searchType = NoSave(ConfigSelection(choices = [("partial", _("partial match")), ("exact", _("exact match")), ("description", _("description match"))], default = timer.searchType))
 		self.searchCase = NoSave(ConfigSelection(choices = [("sensitive", _("case-sensitive search")), ("insensitive", _("case-insensitive search"))], default = timer.searchCase))
 
 		# Alternatives override
@@ -192,6 +192,7 @@ class AutoTimerEditorBase:
 
 		# Justplay
 		self.justplay = NoSave(ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)]))
+		self.setEndtime = NoSave(ConfigYesNo(default=timer.setEndtime))
 
 		# Timespan
 		now = [x for x in localtime()]
@@ -320,6 +321,15 @@ class AutoTimerEditorBase:
 			default = str(timer.getAvoidDuplicateDescription())
 		))
 
+		# Search for Duplicate Desciption in...
+		self.searchForDuplicateDescription = NoSave(ConfigSelection([
+				("0", _("Title")),
+				("1", _("Title and Short description")),
+				("2", _("Title and all descriptions")),
+			],
+		    default = str(timer.searchForDuplicateDescription)
+		))
+
 		# Custom Location
 		if timer.hasDestination():
 			default = True
@@ -409,6 +419,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.afterevent.addNotifier(self.reloadList, initial_call = False)
 		self.afterevent_timespan.addNotifier(self.reloadList, initial_call = False)
 		self.counter.addNotifier(self.reloadList, initial_call = False)
+		self.avoidDuplicateDescription.addNotifier(self.reloadList, initial_call = False)
 		self.useDestination.addNotifier(self.reloadList, initial_call = False)
 		self.vps_enabled.addNotifier(self.reloadList, initial_call = False)
 
@@ -489,9 +500,10 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.name: _("This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."),
 			self.match: _("This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."),
 			self.encoding: _("Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."),
-			self.searchType: _("Select \"exact match\" to enforce \"Match title\" to match exactly or \"partial match\" if you only want to search for a part of the event title."),
+			self.searchType: _("Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"),
 			self.searchCase: _("Select whether or not you want to enforce case correctness."),
 			self.justplay: _("Add zap timer instead of record timer?"),
+			self.setEndtime: _("Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."),
 			self.overrideAlternatives: _("With this option enabled the channel to record on can be changed to a alternative service it is restricted to."),
 			self.timespan: _("Should this AutoTimer be restricted to a timespan?"),
 			self.timespanbegin: _("Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"),
@@ -512,6 +524,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.counterLeft: _("Number of scheduled recordings left."),
 			self.counterFormatString: _("The counter can automatically be reset to the limit at certain intervals."),
 			self.avoidDuplicateDescription: _("When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."),
+			self.searchForDuplicateDescription: _("Defines where to search for duplicates (only title, short description or even extended description)"),
 			self.useDestination: _("Should timers created by this AutoTimer be recorded to a custom location?"),
 			self.destination: _("Select the location to save the recording to."),
 			self.tags: _("Tags the Timer/Recording will have."),
@@ -532,6 +545,10 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			getConfigListEntry(_("Search type"), self.searchType),
 			getConfigListEntry(_("Search strictness"), self.searchCase),
 			getConfigListEntry(_("Timer type"), self.justplay),
+		))
+		if self.justplay.value == "zap":
+			list.append(getConfigListEntry(_("Set End Time"), self.setEndtime))
+		list.extend((
 			getConfigListEntry(_("Override found with alternative service"), self.overrideAlternatives),
 			getConfigListEntry(_("Only match during timespan"), self.timespan)
 		))
@@ -589,6 +606,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			list.append(getConfigListEntry(_("Reset count"), self.counterFormatString))
 
 		list.append(getConfigListEntry(_("Require description to be unique"), self.avoidDuplicateDescription))
+
+		if int(self.avoidDuplicateDescription.value) > 0:
+			list.append(getConfigListEntry(_("Check for uniqueness in"), self.searchForDuplicateDescription))
 
 		# We always add this option though its expert only in enigma2
 		list.append(getConfigListEntry(_("Use a custom location"), self.useDestination))
@@ -732,6 +752,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Justplay
 		self.timer.justplay = self.justplay.value == "zap"
+		self.timer.setEndtime = self.setEndtime.value
 
 		# Timespan
 		if self.timespan.value:
@@ -812,6 +833,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.matchFormatString = ''
 
 		self.timer.avoidDuplicateDescription = int(self.avoidDuplicateDescription.value)
+		self.timer.searchForDuplicateDescription = int(self.searchForDuplicateDescription.value)
 
 		if self.useDestination.value:
 			self.timer.destination = self.destination.value

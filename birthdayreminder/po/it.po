@@ -1,0 +1,304 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 plugin - birthday reminder\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-13 22:31+0100\n"
+"PO-Revision-Date: 2011-12-13 23:25+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: Italy\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder\n"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:73
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:102
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:452
+#, python-format
+msgid ""
+"Error reading file %s.\n"
+"\n"
+"Error: %s, %s"
+msgstr ""
+"%s: errore in lettura file.\n"
+"\n"
+"Errore: %s, %s"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:86
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:126
+#, python-format
+msgid ""
+"Error writing file %s.\n"
+"\n"
+"Error: %s, %s"
+msgstr ""
+"%s: errore in scrittura file.\n"
+"\n"
+"Errore: %s, %s"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:183
+msgid "Birthday Reminder"
+msgstr "Birthday Reminder"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:194
+msgid "Exit the plugin"
+msgstr "Uscire"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:199
+msgid "Add a birthday"
+msgstr "Agg. compleanno"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:200
+msgid "Open the extras menu"
+msgstr "Aprire menu extra"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:206
+msgid "Edit the selected entry"
+msgstr "Mod. voce selezionata"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:207
+msgid "Remove the selected entry"
+msgstr "Rimuov. voce selezionata"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:212
+msgid "Sorting next"
+msgstr "Crescente"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:213
+msgid "Sorting previous"
+msgstr "Decrescente"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:216
+msgid "Add"
+msgstr "Agg."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:219
+msgid "Extras"
+msgstr "Extra"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:221
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/plugin.py:47
+msgid "Name"
+msgstr "Nome"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:222
+msgid "Birthday"
+msgstr "Compleanno"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:223
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/plugin.py:49
+msgid "Age"
+msgstr "Età"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:257
+#, python-format
+msgid "Do you really want to delete the entry for %s?"
+msgstr "%s: RIMUOVERE la voce?"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:267
+msgid "Edit"
+msgstr "Mod."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:268
+msgid "Remove"
+msgstr "Rimuov."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:272
+msgid "Export CSV file"
+msgstr "Esportare come CVS"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:272
+msgid "Import CSV file"
+msgstr "Importare CVS"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:272
+msgid "Distribute birthdays to other Dreamboxes"
+msgstr "Distribuire compleanni ad altri Dreambox"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:273
+msgid "What do you want to do?"
+msgstr "Cosa si desidera fare?"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:437
+#, python-format
+msgid "Wrote CSV file %s."
+msgstr "Scritto file CVS %s."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:439
+#, python-format
+msgid "Can't write CSV file %s."
+msgstr "Impossibile scrivere file CVS %s."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:445
+#, python-format
+msgid "Can't find CSV file %s!"
+msgstr "Impossibile trovare file CVS %s."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:471
+#, python-format
+msgid "Can't import CSV data from file %s."
+msgstr "Impossible importare dati dal file %s."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:486
+msgid "CSV import successful!"
+msgstr "Importazione CVS corretta."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:549
+msgid "Add birthday"
+msgstr "Aggiungere compleanno"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:555
+msgid "Edit birthday"
+msgstr "Modificare compleanno"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:562
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:582
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:587
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:622
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:645
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:651
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:729
+msgid "Cancel"
+msgstr "Annullare"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:563
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:623
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:652
+msgid "Save"
+msgstr "Salvare"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:564
+msgid "Invalid date!"
+msgstr "Data non valida."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:568
+msgid "Name:"
+msgstr "Nome:"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:570
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:574
+msgid "Month:"
+msgstr "Mese:"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:571
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:573
+msgid "Day:"
+msgstr "Giorno:"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:575
+msgid "Year:"
+msgstr "Anno:"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:588
+msgid "Accept changes"
+msgstr "Conf. modifiche"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:615
+msgid "Birthday Reminder Settings"
+msgstr "Configurazione Birthday Reminder"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:624
+msgid "Birthdays"
+msgstr "Compleanni"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:631
+msgid "Path to birthday file:"
+msgstr "Percorso file compleanni:"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:632
+msgid "Birthday filename:"
+msgstr "Nome file compleanni:"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:633
+msgid "Date format:"
+msgstr "Formato data"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:634
+msgid "Remind before birthday:"
+msgstr "Avvisare con un anticipo di:"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:635
+msgid "Notification time:"
+msgstr "Ora notifica:"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:636
+msgid "Sort birthdays by:"
+msgstr "Ordinare per:"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:637
+msgid "Show plugin in extensions menu:"
+msgstr "Mostrare nel menu estensioni:"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:638
+msgid "Networking port (default: 7374):"
+msgstr "Porta (predefinita: 7374):"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:646
+msgid "Change path"
+msgstr "Mod. percorso"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:653
+msgid "Edit birthdays"
+msgstr "Mod. compleanni"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:730
+msgid "OK"
+msgstr "Ok"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayReminder.py:764
+msgid "Invalid Location"
+msgstr "estinazione non valida"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayTimer.py:57
+#, python-format
+msgid "%s will turn %s in %s!"
+msgstr "%s compirà %s anni fra %s."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayTimer.py:67
+#, python-format
+msgid ""
+"Today is %s's birthday!\n"
+"\n"
+"She/he was born on %s and is now %s year(s) old."
+msgstr ""
+"Oggi è il compleanno di %s!\n"
+"\n"
+"Data di nascita: %s - Età: %s."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/BirthdayTimer.py:243
+#, python-format
+msgid "Birthday Reminder received %s birthdays from %s."
+msgstr "Birthday Reminder: ricevuti %s compleanni da %s."
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/plugin.py:42
+msgid "Disabled"
+msgstr "Disabilitato"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/plugin.py:42
+msgid "1 day"
+msgstr "1 giorno"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/plugin.py:42
+msgid "3 days"
+msgstr "3 giorni"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/plugin.py:42
+msgid "1 week"
+msgstr "1 settimana"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/plugin.py:48
+msgid "Next birthday"
+msgstr "Prossimo compleanno"
+
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/plugin.py:71
+#: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder/plugin.py:73
+msgid "Helps to remind of birthdays"
+msgstr "Un aiuto per ricordare i compleanni"
+

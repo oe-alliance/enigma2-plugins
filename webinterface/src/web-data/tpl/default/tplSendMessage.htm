@@ -5,26 +5,26 @@
 								<td>
 									<table style="width: 100%;">
 										<tr>
-											<td>Text</td>
-											<td><textarea id="MessageSendFormText" cols="40" rows="5"></textarea></td>
+											<td>Message</td>
+											<td><textarea id="messageText" cols="40" rows="5"></textarea></td>
 										</tr>
 										<tr>
 											<td>Timeout</td>
-											<td><input type="text" id="MessageSendFormTimeout" value="30"></td>
+											<td><input type="text" id="messageTimeout" value="30"></td>
 										</tr>
 										<tr>
-											<td>Typ</td>
+											<td>Type</td>
 											<td>
-												<select id="MessageSendFormType">';
+												<select id="messageType">';
 													<option value="2">Info</option>';
 													<option value="1">Warning</option>';
-													<option value="0">YesNo</option>';													
+													<!-- <option value="0">YesNo</option>';  -->													
 													<option value="3">Error</option>';
 												</select>
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2"><button onclick="sendMessage()">Send Message</button></td>
+											<td colspan="2"><button class="messageSend">Send Message</button></td>
 										</tr>
 									</table>
 								</td>

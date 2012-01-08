@@ -26,9 +26,6 @@ from WebScreens import *
 from __init__ import decrypt_block
 from os import urandom
 
-global screen_cache
-screen_cache = {}
-
 # The classes and Function in File handle all ScreenPage-based requests
 # ScreenPages use enigma2 standard functionality to bring contents to a webfrontend
 #
@@ -45,26 +42,23 @@ class OneTimeElement(Element):
 		self.source_id = id
 
 	def handleCommand(self, args):
-		if ',' in self.source_id:
-			paramlist = self.source_id.split(",")
+		source = self.source
+		source_id = self.source_id
+		if ',' in source_id:
+			paramlist = source_id.split(",")
 			list = {}
 			for key in paramlist:
-				arg = args.get(key, ())
-				Len = len(arg)
-				if Len == 0:
+				if key in args:
+					list[key] = args[key][0]
+				else:
 					list[key] = None
-				elif Len == 1:
-					list[key] = "".join(arg)
-				elif Len == 2:
-					list[key] = arg[0]
-			self.source.handleCommand(list)
+			source.handleCommand(list)
 		else:
-			for c in args.get(self.source_id, ()):
-				self.source.handleCommand(c)
+			for c in args.get(source_id, ()):
+				source.handleCommand(c)
 
 	def render(self, request):
-		t = self.source.getHTML(self.source_id)
-		request.write(t)
+		request.write(self.source.getHTML(self.source_id))
 
 	def execBegin(self):
 		self.suspended = False
@@ -140,9 +134,6 @@ class ListMacroItem:
 # Returns the String as is
 #===============================================================================
 class TextToHTML(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		return self.source.text.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8") # encode & etc. here!
 
@@ -152,9 +143,6 @@ class TextToHTML(Converter):
 # Escapes the given Text to be XML conform
 #===============================================================================
 class TextToXML(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		return escape_xml(self.source.text).replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
 
@@ -164,9 +152,6 @@ class TextToXML(Converter):
 # Escapes the given Text so it can be used inside a URL
 #===============================================================================
 class TextToURL(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		return self.source.text.replace(" ", "%20").replace("+", "%2b").replace("&", "%26").replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8")
 
@@ -176,9 +161,6 @@ class TextToURL(Converter):
 # Returns a XML only consisting of <rootElement />
 #===============================================================================
 class ReturnEmptyXML(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		return "<rootElement />"
 
@@ -188,9 +170,6 @@ class ReturnEmptyXML(Converter):
 # Useful if you only want to issue a command.
 #===============================================================================
 class Null(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		return ""
 
@@ -201,9 +180,6 @@ class Null(Converter):
 # Transforms a string into a javascript update pattern
 #===============================================================================
 class JavascriptUpdate(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-
 	def getHTML(self, id):
 		# 3c5x9, added parent. , this is because the ie loads this in a iframe. an the set is in index.html.xml
 		#		 all other will replace this in JS
@@ -215,21 +191,19 @@ class JavascriptUpdate(Converter):
 # The performant 'one-dimensonial listfiller' engine (podlfe)
 #===============================================================================
 class SimpleListFiller(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-		
 	def getText(self):
 		l = self.source.simplelist
 		conv_args = self.converter_arguments		
 		
 		list = [ ]
+		append = list.append
 		for element in conv_args:
 			if isinstance(element, basestring):
-				list.append((element, None))
+				append((element, None))
 			elif isinstance(element, ListItem):
-				list.append((element, element.filternum))
+				append((element, element.filternum))
 			elif isinstance(element, ListMacroItem):
-				list.append(element.macrodict[element.macroname], None)
+				append(element.macrodict[element.macroname], None)
 			else:
 				raise Exception("neither string, ListItem nor ListMacroItem")
 			
@@ -238,11 +212,11 @@ class SimpleListFiller(Converter):
 		for item in l:
 			if item is None:
 				item = ""
-				
-			for (element, filternum) in list:
+			else:
 				#filter out "non-displayable" Characters - at the very end, do it the hard way...
-				item = str(item).replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
-				
+				item = str(item)#.replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
+
+			for (element, filternum) in list:
 				if not filternum:
 					append(element)
 				elif filternum == 2:
@@ -254,12 +228,12 @@ class SimpleListFiller(Converter):
 				elif filternum == 5:
 					append(quote(item))
 				elif filternum == 6:
-					time = parseint(item) or 0
+					from time import localtime
+					time = int(item) or 0
 					t = localtime(time)
 					append("%02d:%02d" % (t.tm_hour, t.tm_min))
 				elif filternum == 7:
-					time = parseint(item) or 0
-					t = localtime(time)
+					time = int(item) or 0
 					append("%d min" % (time / 60))
 				else:
 					append(item)
@@ -273,10 +247,6 @@ class SimpleListFiller(Converter):
 # the performant 'listfiller'-engine (plfe)
 #===============================================================================
 class ListFiller(Converter):
-	def __init__(self, arg):
-		Converter.__init__(self, arg)
-#		print "ListFiller-arg: ",arg
-
 	def getText(self):
 		l = self.source.list
 		lut = self.source.lut
@@ -285,13 +255,14 @@ class ListFiller(Converter):
 		# now build a ["string", 1, "string", 2]-styled list, with indices into the
 		# list to avoid lookup of item name for each entry
 		lutlist = [ ]
+		append = lutlist.append
 		for element in conv_args:
 			if isinstance(element, basestring):
-				lutlist.append((element, None))
+				append((element, None))
 			elif isinstance(element, ListItem):
-				lutlist.append((lut[element.name], element.filternum))
+				append((lut[element.name], element.filternum))
 			elif isinstance(element, ListMacroItem):
-				lutlist.append((element.macrodict[element.macroname], None))
+				append((element.macrodict[element.macroname], None))
 			else:
 				raise Exception("neither string, ListItem nor ListMacroItem")
 
@@ -302,18 +273,15 @@ class ListFiller(Converter):
 			for (element, filternum) in lutlist:			
 				#None becomes ""
 				curitem = ""
-				if filternum:
-					#filter out "non-displayable" Characters - at the very end, do it the hard way...
-					curitem = str(item[element]).replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
-					if curitem is None:
-						curitem = ""
-				else:
+				if not filternum:
 					if element is None:
 						element = ""
-						
-				if not filternum:
 					append(element)
-				elif filternum == 2:
+					continue
+				#filter out "non-displayable" Characters - at the very end, do it the hard way...
+				curitem = str(item[element])#.replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
+
+				if filternum == 2:
 					append(curitem.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 				elif filternum == 3:
 					append( escape_xml( curitem ))
@@ -323,14 +291,12 @@ class ListFiller(Converter):
 					append(quote(curitem))
 				elif filternum == 6:
 					from time import localtime
-					time = int(float(curitem)) or 0
+					time = int(curitem) or 0
 					t = localtime(time)
 					append("%02d:%02d" % (t.tm_hour, t.tm_min))
 				elif filternum == 7:
-					from time import localtime
-					time = int(float(curitem)) or 0
-					t = localtime(time)
-					append("%d min" % (time / 60))					
+					time = int(curitem) or 0
+					append("%d min" % (time / 60))
 				else:
 					append(curitem)
 		# (this will be done in c++ later!)
@@ -417,9 +383,10 @@ class webifHandler(ContentHandler):
 		self.sub = [ ]
 
 	def end_convert(self):
-		if len(self.sub) == 1:
-			self.sub = self.sub[0]
-		c = self.converter(self.sub)
+		sub = self.sub
+		if len(sub) == 1:
+			sub = sub[0]
+		c = self.converter(sub)
 		c.connect(self.source)
 		self.source = c
 		del self.sub
@@ -440,7 +407,8 @@ class webifHandler(ContentHandler):
 			self.screens.append(self.screen)
 			return
 
-		if name[:3] == "e2:":
+		n3 = name[:3]
+		if n3 == "e2:":
 			self.mode += 1
 
 		tag = '<' + name + ''.join([' %s="%s"' % x for x in attrs.items()]) + '>'
@@ -452,7 +420,7 @@ class webifHandler(ContentHandler):
 			assert name == "e2:element", "found %s instead of e2:element" % name
 			self.start_element(attrs)
 		elif self.mode == 2: # expect "<e2:convert>"
-			if name[:3] == "e2:":
+			if n3 == "e2:":
 				assert name == "e2:convert"
 				self.start_convert(attrs)
 			else:
@@ -467,16 +435,18 @@ class webifHandler(ContentHandler):
 			self.screen = None
 			return
 
+		n3 = name[:3]
 		tag = "</" + name + ">"
 		if self.mode == 0:
 			self.res.append(tag)
-		elif self.mode == 2 and name[:3] != "e2:":
-			self.sub.append(tag)
-		elif self.mode == 2: # closed 'convert' -> sub
-			self.end_convert()
+		elif self.mode == 2:
+			if n3 == "e2:": # closed 'convert' -> sub
+				self.end_convert()
+			else:
+				self.sub.append(tag)
 		elif self.mode == 1: # closed 'element'
 			self.end_element()
-		if name[:3] == "e2:":
+		if n3 == "e2:":
 			self.mode -= 1
 
 	def processingInstruction(self, target, data):

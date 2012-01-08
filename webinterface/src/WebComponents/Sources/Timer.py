@@ -420,13 +420,42 @@ class Timer(Source):
 		timerlist = []
 
 		for item in self.recordtimer.timer_list + self.recordtimer.processed_timers:
-			timer = [
+			try:
+				filename = item.Filename
+			except AttributeError:
+				filename = ""
+
+			try:
+				next_activation = item.next_activation
+			except AttributeError:
+				next_activation = ""
+
+			if item.eit is not None:
+				event = self.epgcache.lookupEvent(['EX', ("%s" % item.service_ref , 2, item.eit)])
+				if event and event[0][0] is not None:
+					extdesc = event[0][0]
+				else:
+					extdesc = "N/A"
+			else:
+				extdesc = "N/A"
+
+			#toggleDisabled
+			if item.disabled:
+				disabled = "1"
+				toggleDisabled = "0"
+				toggleDisabledImg = "on"
+			else:
+				disabled = "0"
+				toggleDisabled = "1"
+				toggleDisabledImg = "off"
+
+			timerlist.append((
 				item.service_ref,
 				item.service_ref.getServiceName(),
 				item.eit,
 				item.name,
 				item.description,
-				"1" if item.disabled else "0",
+				disabled,
 				item.begin,
 				item.end,
 				item.end - item.begin,
@@ -442,34 +471,12 @@ class Timer(Source):
 				item.repeated,
 				1 if item.dontSave else 0,
 				item.cancelled,
-			]
-
-			try:
-				timer.append(item.Filename)
-			except AttributeError:
-				timer.append("")
-
-			try:
-				timer.append(item.next_activation)
-			except AttributeError:
-				timer.append("")
-
-			if item.eit is not None:
-				event = self.epgcache.lookupEvent(['EX', ("%s" % item.service_ref , 2, item.eit)])
-				if event and event[0][0] is not None:
-					timer.append(event[0][0])
-				else:
-					timer.append("N/A")
-			else:
-				timer.append("N/A")
-
-			#toggleDisabled
-			if item.disabled:
-				timer.extend(("0", "on"))
-			else:
-				timer.extend(("1", "off"))
-
-			timerlist.append(timer)
+				filename,
+				next_activation,
+				extdesc,
+				toggleDisabled,
+				toggleDisabledImg,
+			))
 
 		return timerlist
 

@@ -2,44 +2,42 @@
 
 function url() {
 	this.tpl = '/web-data/tpl/default/';
-	
+
+	this.zap = '/web/zap';
 	this.getcurrent = '/web/getcurrent';
-	
-	this.getvolume = '/web/vol'; 
-	this.setvolume = '/web/vol?set=set'; // plus new value eg: set=set15
-	this.volumeup = '/web/vol?set=up';
-	this.volumedown = '/web/vol?set=down';
-	this.volumemute = '/web/vol?set=mute';
-	
-	this.epgservice = "/web/epgservice?sRef="; // plus serviceRef
-	this.epgsearch = "/web/epgsearch?search="; // plus serviceRef
+	this.volume = '/web/vol';
+	this.epgservice = "/web/epgservice"; // plus serviceRef
+	this.epgsearch = "/web/epgsearch"; // plus needle
 	this.epgservicenow = "/web/epgservicenow?sRef="; // plus serviceRef
 	this.epgservicenext = "/web/epgservicenext?sRef="; // plus serviceRef
-	this.epgnow = "/web/epgnow?bRef="; // plus bouquetRev
-	this.epgnext = "/web/epgnext?bRef="; // plus bouquetRev
-	
-	this.getservices = "/web/getservices?sRef="; // plus serviceref
+	this.epgnow = "/web/epgnow"; // plus bouquetRev
+	this.epgnext = "/web/epgnext"; // plus bouquetRev
+	this.epgnownext = "/web/epgnownext";
+	this.epgmulti = "/web/epgmulti";
+
+	this.getservices = "/web/getservices"; // plus serviceref
 	this.subservices = "/web/subservices"; // subservices for current service
 	this.streamsubservices = "/web/streamsubservices?sRef="; // subservices for streaming service
-	
+
 	this.movielist= "/web/movielist"; // plus dirname,tag
 	this.moviedelete= "/web/moviedelete"; // plus serviceref
-	
-	this.about= "/web/about";	
-	this.settings= "/web/settings";	
+
+	this.about= "/web/about";
+	this.settings= "/web/settings";
 	this.parentcontrol= "/web/parentcontrollist";
 	this.signal = "/web/signal";
 	this.deviceinfo = "/web/deviceinfo";
-	
-	this.mediaplayerlist= "/web/mediaplayerlist?types=audio&path="; // plus full qualified path
-	this.mediaplayerplay= "/web/mediaplayerplay?file="; // plus file-serviceref
-	this.mediaplayeradd= "/web/mediaplayeradd?file="; // plus file-serviceref
-	this.mediaplayerremove= "/web/mediaplayerremove?file="; // plus file-serviceref
-	this.mediaplayercmd= "/web/mediaplayercmd?command="; // plus command
-	this.mediaplayerwrite= "/web/mediaplayerwrite?filename="; // plus filename
-	
+	this.external = "/web/external";
+
+	this.mediaplayeradd= "/web/mediaplayeradd"; // plus file-serviceref
+	this.mediaplayerlist= "/web/mediaplayerlist"; // plus full qualified path
+	this.mediaplayerplay= "/web/mediaplayerplay"; // plus file-serviceref
+	this.mediaplayerremove= "/web/mediaplayerremove"; // plus file-serviceref
+	this.mediaplayercmd= "/web/mediaplayercmd"; // plus command
+	this.mediaplayerwrite= "/web/mediaplayerwrite"; // plus filename
+
 	this.filelist = "/web/mediaplayerlist?path="; // plus full qualified path
-	
+
 	this.timerlist= "/web/timerlist";
 	this.recordnow= "/web/recordnow";
 	this.timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,dirname,tags,eit,disabled,justplay,afterevent
@@ -48,16 +46,17 @@ function url() {
 	this.timerdelete= "/web/timerdelete"; // plus serviceref,begin,end
 	this.timerlistwrite="/web/timerlistwrite?write=saveWriteNow";
 	this.timercleanup="/web/timercleanup?cleanup=true";
-	
+
 	this.getcurrlocation="/web/getcurrlocation";
 	this.getlocations="/web/getlocations";
 	this.gettags="/web/gettags";
-	
+
 	this.message = "/web/message"; // plus text,type,timeout
-	this.messageanswer = "/web/messageanswer?getanswer=now"; 
-	
+	this.messageanswer = "/web/messageanswer?getanswer=now";
+
 	this.powerstate = "/web/powerstate"; // plus new powerstate
 	this.remotecontrol = "/web/remotecontrol"; // plus command
+	this.grab = "/grab";
 };
 
 var URL = new url();

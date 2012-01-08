@@ -2,3 +2,5 @@ installdir = $(datadir)/meta/
 
 dist_install_DATA = plugin_merlinepgcenter.xml
 
+EXTRA_DIST = merlinepgcenter.jpg
+

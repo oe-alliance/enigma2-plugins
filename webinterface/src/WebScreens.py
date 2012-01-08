@@ -1,6 +1,8 @@
 from enigma import eServiceReference
 from Screens.Screen import Screen
+from Tools.BoundFunction import boundFunction
 from WebComponents.Sources.RequestData import RequestData
+
 
 class WebScreen(Screen):
 	def __init__(self, session, request):
@@ -18,8 +20,9 @@ class UpdateWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from Components.Sources.Clock import Clock
-
 		self["CurrentTime"] = Clock()
+		from WebComponents.Sources.Volume import Volume
+		self["Volume"] = Volume(session)
 
 
 class MessageWebScreen(WebScreen):
@@ -74,7 +77,6 @@ class AboutWebScreen(WebScreen):
 class VolumeWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-
 		from WebComponents.Sources.Volume import Volume
 		self["Volume"] = Volume(session)
 
@@ -154,6 +156,7 @@ class EpgWebScreen(WebScreen):
 		self["EpgService"] = EPG(session, func=EPG.SERVICE)
 		self["EpgBouquetNow"] = EPG(session, func=EPG.BOUQUETNOW)
 		self["EpgBouquetNext"] = EPG(session, func=EPG.BOUQUETNEXT)
+		self["EpgBouquetNowNext"] = EPG(session, func=EPG.BOUQUETNOWNEXT)
 		self["EpgServiceNow"] = EPG(session, func=EPG.SERVICENOW)
 		self["EpgServiceNext"] = EPG(session, func=EPG.SERVICENEXT)
 		self["EpgBouquet"] = EPG(session, func=EPG.BOUQUET)
@@ -172,9 +175,10 @@ class MovieWebScreen(WebScreen):
 		from Tools.Directories import resolveFilename, SCOPE_HDD
 		from WebComponents.Sources.Movie import Movie
 
-		movielist = MovieList(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD)))
+		movielist = MovieList(None)
 		self["MovieList"] = Movie(session, movielist, func=Movie.LIST)
 		self["MovieFileDel"] = Movie(session, movielist, func=Movie.DEL)
+		self["MovieFileMove"] = Movie(session, movielist, func=Movie.MOVE)
 		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 class MediaPlayerWebScreen(WebScreen):
@@ -262,14 +266,25 @@ class WapWebScreen(WebScreen):
 		self["WAPdeleteOldOnSave"] = WAPfunctions(session, func=WAPfunctions.DELETEOLD)
 
 streamingScreens = []
+streamingEvents = []
 
 class StreamingWebScreen(WebScreen):
+	EVENT_START = 0
+	EVENT_END = 1
+	
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from Components.Sources.StreamService import StreamService
 		self["StreamService"] = StreamService(self.session.nav)
-		streamingScreens.append(self)
 		self.screenIndex = len(streamingScreens) - 1
+		self.clientIP = request.getAllHeaders().get('x-forwarded-for', request.getClientIP())
+		self.onClose.append(boundFunction(self.stateChanged, self.EVENT_END))
+		streamingScreens.append(self)
+		self.stateChanged(StreamingWebScreen.EVENT_START)
+
+	def stateChanged(self, event):
+		for f in streamingEvents:
+			f(event, self)
 
 	def getRecordService(self):
 		if self.has_key("StreamService"):

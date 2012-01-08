@@ -3,14 +3,7 @@ from Components.NimManager import nimmanager
 
 class Frontend(Source):
 	def getList(self):
-		nims = []
-		for nim in nimmanager.nimList():
-			info = nim.split(":")
-			nims.append((
-						info[0],
-						info[1]
-					))
-		return nims
+		return [nim.split(":") for nim in nimmanager.nimList()]
 
 	list = property(getList)
 	lut = {

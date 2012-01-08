@@ -63,7 +63,7 @@ from Screens.Setup import SetupSummary
 
 
 ###############################################################################        
-VERSION = "0.1.6"
+VERSION = "0.1.7"
 # History:
 # 0.1.2 First public version
 # 0.1.3 Prevention of timerlist cleanup if duplicated with EMC plugin
@@ -77,6 +77,7 @@ VERSION = "0.1.6"
 #       Cleanup crashlog feature invalidated for DMM plugin feed distribution
 # 0.1.5 Fix infinite loop when timerlist cleanup is set to option "immediately after recording"
 # 0.1.6 Fix crash if settings backup file date ends with "2"
+# 0.1.7 Cleanup of orphaned movie files modified to support EMC v3
 ###############################################################################  
 pluginPrintname = "[AutomaticCleanup Ver. %s]" %VERSION
 DEBUG = False # If set True, plugin won't remove any file physically, instead prints file names in log for verification purposes
@@ -373,9 +374,20 @@ class AutomaticCleanup:
 				# try to import EMC module to check for its existence
 				from Plugins.Extensions.EnhancedMovieCenter.EnhancedMovieCenter import EnhancedMovieCenterMenu 
 				moviePath.append(config.EMC.movie_homepath.value)
-				if len(config.EMC.movie_trashpath.value) > 1:	# Trashpath specified?
-					if config.EMC.movie_trashpath.value.endswith('/'): excludePath.append(config.EMC.movie_trashpath.value)
-					else: excludePath.append(config.EMC.movie_trashpath.value + "/")
+				try: # with v3 name
+					if len(config.EMC.movie_trashcan_path.value) > 1:	# Trashpath specified?
+						if DEBUG: print pluginPrintname, "EMC v3 trashcan path is", config.EMC.movie_trashcan_path.value
+						if config.EMC.movie_trashcan_path.value.endswith('/'): excludePath.append(config.EMC.movie_trashcan_path.value)
+						else: excludePath.append(config.EMC.movie_trashcan_path.value + "/")
+				except KeyError, ke:
+					print pluginPrintname, "EMC v3 trashcan path not specified", ke
+					try: # else with v2 name
+						if len(config.EMC.movie_trashpath.value) > 1:	# Trashpath specified?
+							if DEBUG: print pluginPrintname, "EMC v2 trashcan path is", config.EMC.movie_trashpath.value
+							if config.EMC.movie_trashpath.value.endswith('/'): excludePath.append(config.EMC.movie_trashpath.value)
+							else: excludePath.append(config.EMC.movie_trashpath.value + "/")
+					except KeyError, ke:
+						print pluginPrintname, "EMC v2 trashcan path not specified", ke
 			except ImportError, ie:
 				print pluginPrintname, "EMC not installed:", ie
 

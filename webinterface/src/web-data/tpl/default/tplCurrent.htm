@@ -1,14 +1,16 @@
+
 <!-- tplCurrent -->
-			{if current.title != ""}		
+			{if current.title != ""}
 				<table id="currentTable">
 					<tr>
-						<td id="currentName">
-							<a href="#" onclick="showhide('trExtCurrent')" title="Click to show/hide extended Description">
-							${current.servicename} - ${current.title}
-							</a>
+						<td style="width: 60px;">
+							<div class="sListSProgress" title="${current.progress}%"><div class="sListSProgressBar" style="width: ${current.progress}%"></div></div>
 						</td>
-						<td id="currentDuration">																	
-							<a href="#" onclick="if ( parentPin( '${current.servicereference}' ) ) { loadEPGByServiceReference( '${current.servicereference}' ); }">
+						<td id="currentName">
+							<a href="#" class="currentExtShowHide" title="Click to show/hide extended Description"><img class="currentBulletToggle" src="/web-data/img/toggle_expand.png" alt="+">${current.servicename} - ${current.title}</a>
+						</td>
+						<td id="currentDuration">
+							<a href="#" class="currentEpg" data-servicereference="${current.servicereference}">
 								<img src="/web-data/img/epg.png" border="0" title="Show EPG for ${current.servicename}"/>
 							</a>
 							<a target="_blank" onclick="return parentPin( '${current.servicereference}' );" href="/web/stream.m3u?ref=${current.servicereference}">
@@ -17,8 +19,8 @@
 							+${current.remaining} of ${current.duration} min
 						</td>
 					</tr>
-					<tr id="trExtCurrent">
-						<td colspan=2>
+					<tr id="trExtCurrent" style="display: none">
+						<td colspan=3>
 							<table>
 								<tr>
 									<td class="epgLong">${current.extdescription}</td>
@@ -41,21 +43,21 @@
 												<td>VPID:</td>
 												<td>${service.vpid}</td>
 											</tr>
-											<tr>									
+											<tr>
 												<td>PCRPID:</td> 
 												<td>${service.pcrpid}</td>
 												<td>PMTPID:</td> 
 												<td>${service.pmtpid}</td>
 											</tr>
-											<tr>										
+											<tr>
 												<td>TXTPID:</td> 
-												<td>${service.txtpid}</td>									
+												<td>${service.txtpid}</td>
 												<td>TSID:</td> 
 												<td>${service.tsid}</td>
 											</tr>
-											<tr>										
+											<tr>
 												<td>ONID:</td> 
-												<td>${service.onid}</td>						
+												<td>${service.onid}</td>
 												<td>SID:</td> 
 												<td>${service.sid}</td>
 											</tr>
@@ -70,7 +72,7 @@
 			{elseif}
 				<table id="currentTable">
 					<tr>
-						<td id="currentName">Nothing running</td>					
+						<td id="currentName">Nothing running</td>
 					</tr>	
 				</table>
 			{/if}

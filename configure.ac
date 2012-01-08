@@ -136,6 +136,11 @@ cdinfo/Makefile
 cdinfo/meta/Makefile
 cdinfo/src/Makefile
 
+curlytx/Makefile
+curlytx/meta/Makefile
+curlytx/po/Makefile
+curlytx/src/Makefile
+
 dreamirc/Makefile
 dreamirc/meta/Makefile
 dreamirc/src/Makefile
@@ -193,6 +198,11 @@ epgsearch/meta/Makefile
 epgsearch/po/Makefile
 epgsearch/src/Makefile
 
+eurotictv/Makefile
+eurotictv/meta/Makefile
+eurotictv/po/Makefile
+eurotictv/src/Makefile
+
 fancontrol2/Makefile
 fancontrol2/meta/Makefile
 fancontrol2/po/Makefile
@@ -240,6 +250,11 @@ imdb/meta/Makefile
 imdb/po/Makefile
 imdb/src/Makefile
 
+infobartunerstate/Makefile
+infobartunerstate/meta/Makefile
+infobartunerstate/po/Makefile
+infobartunerstate/src/Makefile
+
 kiddytimer/Makefile
 kiddytimer/img/Makefile
 kiddytimer/meta/Makefile
@@ -284,6 +299,7 @@ merlinepgcenter/images/HD_BORDER/Makefile
 merlinepgcenter/images/SD/Makefile
 merlinepgcenter/images/XD/Makefile
 merlinepgcenter/images/XD_BORDER/Makefile
+merlinepgcenter/images/HD_Elgato/Makefile
 
 merlinmusicplayer/Makefile
 merlinmusicplayer/meta/Makefile
@@ -391,6 +407,10 @@ permanentclock/meta/Makefile
 permanentclock/po/Makefile
 permanentclock/src/Makefile
 
+pipservicerelation/Makefile
+pipservicerelation/src/Makefile
+pipservicerelation/meta/Makefile
+
 pipzap/Makefile
 pipzap/meta/Makefile
 pipzap/src/Makefile
@@ -462,6 +482,22 @@ startupservice/meta/Makefile
 startupservice/po/Makefile
 startupservice/src/Makefile
 
+SubsDownloader2/Makefile
+SubsDownloader2/meta/Makefile
+SubsDownloader2/src/Makefile
+SubsDownloader2/src/pic/Makefile
+SubsDownloader2/src/pic/buttons/Makefile
+SubsDownloader2/src/pic/buttons/HD/Makefile
+SubsDownloader2/src/pic/res/Makefile
+SubsDownloader2/src/SourceCode/Makefile
+SubsDownloader2/src/SourceCode/chardet/Makefile
+SubsDownloader2/src/SourceCode/periscope/Makefile
+SubsDownloader2/src/SourceCode/periscope/services/Makefile
+SubsDownloader2/src/SourceCode/periscope/services/BierDopje/Makefile
+SubsDownloader2/src/SourceCode/periscope/services/OpenSubtitle/Makefile
+SubsDownloader2/src/SourceCode/xbmc_subtitles/Makefile
+SubsDownloader2/src/SourceCode/xbmc_subtitles/services/Makefile
+
 svdrp/Makefile
 svdrp/meta/Makefile
 svdrp/src/Makefile
@@ -500,6 +536,10 @@ vps/meta/Makefile
 vps/po/Makefile
 vps/src_cc/Makefile
 vps/src_py/Makefile
+vps/src_py/web/Makefile
+vps/src_py/web-data/Makefile
+vps/src_py/WebComponents/Makefile
+vps/src_py/WebComponents/Sources/Makefile
 
 weatherplugin/Makefile
 weatherplugin/meta/Makefile
@@ -525,13 +565,15 @@ webinterface/Makefile
 webinterface/meta/Makefile
 webinterface/po/Makefile
 webinterface/src/Makefile
-webinterface/src/etc/Makefile
 webinterface/src/mobile/Makefile
 webinterface/src/web/Makefile
 webinterface/src/web-data/Makefile
 webinterface/src/web-data/gfx/Makefile
 webinterface/src/web-data/img/Makefile
 webinterface/src/web-data/lib/Makefile
+webinterface/src/web-data/lib/lang/Makefile
+webinterface/src/web-data/lib/datepicker/Makefile
+webinterface/src/web-data/lib/datepicker/media/Makefile
 webinterface/src/web-data/tpl/Makefile
 webinterface/src/web-data/tpl/default/Makefile
 webinterface/src/web-data/tpl/default/streaminterface/Makefile

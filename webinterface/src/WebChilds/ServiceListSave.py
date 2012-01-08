@@ -1,5 +1,6 @@
 from twisted.web import resource, http, server
 from enigma import eDVBDB
+from Tools.Directories import resolveFilename, SCOPE_CONFIG
 import os
 from xml.dom.minidom import parseString as xml_dom_minidom_parseString
 from urllib import unquote as urllib_unquote
@@ -14,7 +15,7 @@ class ServiceList(resource.Resource):
 
 class ServiceListReload(resource.Resource):
 	def render(self, request):
-		request.setHeader('Content-type', 'application; xhtml+xml;' )
+		request.setHeader('Content-type', 'application/xhtml+xml;' )
 		request.setHeader('charset', 'UTF-8')
 				
 		try:
@@ -43,7 +44,7 @@ class ServiceListSave(resource.Resource):
 	TYPE_TV = 0
 	TYPE_RADIO = 1
 	EXTENSIONS = ['.tv', '.radio']
-	DIR = "/etc/enigma2/"
+	DIR = resolveFilename(SCOPE_CONFIG)
 	undefinded_tag = "%n/a%"
 	undefinded_and = "%und%"
 
@@ -88,7 +89,7 @@ class ServiceListSave(resource.Resource):
 #			raise http.HTTPError(responsecode.BAD_REQUEST)
 
 	def render(self, request):			
-		request.setHeader('Content-type', 'application; xhtml+xml;' )
+		request.setHeader('Content-type', 'application/xhtml+xml;' )
 		request.setHeader('charset', 'UTF-8')
 		
 		try:

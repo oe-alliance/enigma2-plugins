@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Software" />
+	  </prerequisites>
+          <info>
+                    <author>Shaderman</author>
+                    <name>Birthday Reminder</name>
+                    <packagename>enigma2-plugin-extensions-birthdayreminder</packagename>
+                    <shortdescription>Reminds you of birthdays</shortdescription>
+                    <description>Reminds you of birthdays</description>
+                    <screenshot/>		    
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-birthdayreminder" />
+	  </files>
+</default>

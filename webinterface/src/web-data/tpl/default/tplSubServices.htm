@@ -1,9 +1,9 @@
 
-<!-- tplSubServices -->								
-								{for s in subservices}				
+<!-- tplSubServices -->
+								{for s in subservices}
 									<table style="width: 586px;">
 										<tr>
-											<td style="width: 576px;">										
+											<td style="width: 576px;">
 												<div class="sListSName">
 													<a href="#" id="${s.servicereference}" onclick="{ zap(this.id); }" class="sListSLink" title="Zap to ${s.servicename}">
 														${s.servicename}
@@ -14,7 +14,7 @@
 												<a target="_blank" onclick="return parentPin( '${s.servicereference}' );" href="/web/stream.m3u?ref=${s.servicereference}">
 													<img src="/web-data/img/screen.png" title="Stream ${s.servicename}" border="0">
 												</a>
-											</td>											
+											</td>
 										</tr>
 									</table>
 								{/for}

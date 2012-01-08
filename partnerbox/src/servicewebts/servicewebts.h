@@ -139,6 +139,7 @@ private:
 	std::string m_filename;
 	int m_vpid, m_apid;
 	int m_destfd;
+	eUsePtr<iDVBPVRChannel> m_channel;
 	ePtr<iDVBDemux> m_decodedemux;
 	ePtr<iTSMPEGDecoder> m_decoder;
 	ePtr<eStreamThreadWeb> m_streamthread;

@@ -1,4 +1,5 @@
 from AutoTimer import AutoTimer
+from AutoTimerConfiguration import CURRENT_CONFIG_VERSION
 from Components.config import config
 from RecordTimer import AFTEREVENT
 from twisted.web import http, resource
@@ -10,7 +11,7 @@ from enigma import eServiceReference
 from . import _, iteritems
 from . import plugin
 
-API_VERSION = "1.0"
+API_VERSION = "1.1"
 
 class AutoTimerBaseResource(resource.Resource):
 	_remove = False
@@ -28,7 +29,7 @@ class AutoTimerBaseResource(resource.Resource):
 		return plugin.autotimer
 	def returnResult(self, req, state, statetext):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
@@ -42,7 +43,7 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def render(self, req):
 		autotimer = self.getAutoTimerInstance()
 		ret = autotimer.parseEPG()
-		output = _("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered, %d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5]))
+		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5]))
 
 		if self._remove:
 			autotimer.writeXml()
@@ -55,7 +56,7 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 
 		# show xml
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(autotimer.getXml())
 
@@ -139,6 +140,9 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			try: justplay = int(justplay)
 			except ValueError: justplay = justplay == "zap"
 			timer.justplay = justplay
+		setEndtime = get("setEndtime")
+		if setEndtime is not None:
+			timer.setEndtime = int(setEndtime)
 
 		# Timespan
 		start = get("timespanFrom")
@@ -261,6 +265,7 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			timer.lastBegin = int(get("lastBegin", timer.lastBegin))
 
 		timer.avoidDuplicateDescription = int(get("avoidDuplicateDescription", timer.avoidDuplicateDescription))
+		timer.searchForDuplicateDescription = int(get("searchForDuplicateDescription", timer.searchForDuplicateDescription))
 		timer.destination = get("location", timer.destination) or None
 
 		if newTimer:
@@ -301,6 +306,8 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.notifconflict.value = True if value == "true" else False
 			elif key == "notifsimilar":
 				config.plugins.autotimer.notifsimilar.value = True if value == "true" else False
+			elif key == "maxdaysinfuture":
+				config.plugins.autotimer.maxdaysinfuture.value = int(value)
 
 		if config.plugins.autotimer.autopoll.value:
 			if plugin.autopoller is None:
@@ -324,7 +331,7 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 class AutoTimerSettingsResource(resource.Resource):
 	def render(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
 		try:
@@ -381,7 +388,15 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.maxdaysinfuture</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>hasVps</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>version</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 </e2settings>""" % (
@@ -390,11 +405,13 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.refresh.value,
 				config.plugins.autotimer.try_guessing.value,
 				config.plugins.autotimer.editor.value,
-				config.plugins.autotimer.addsimilar_on_conflict,
+				config.plugins.autotimer.addsimilar_on_conflict.value,
 				config.plugins.autotimer.disabled_on_conflict.value,
 				config.plugins.autotimer.show_in_extensionsmenu.value,
 				config.plugins.autotimer.fastscan.value,
 				config.plugins.autotimer.notifconflict.value,
 				config.plugins.autotimer.notifsimilar.value,
+				config.plugins.autotimer.maxdaysinfuture.value,
 				hasVps,
+				CURRENT_CONFIG_VERSION,
 			)

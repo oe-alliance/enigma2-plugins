@@ -56,7 +56,8 @@ def getTimeDiff(timer, begin, end):
 
 typeMap = {
 	"exact": eEPGCache.EXAKT_TITLE_SEARCH,
-	"partial": eEPGCache.PARTIAL_TITLE_SEARCH
+	"partial": eEPGCache.PARTIAL_TITLE_SEARCH,
+	"description": -99
 }
 
 caseMap = {
@@ -247,8 +248,87 @@ class AutoTimer:
 				except UnicodeDecodeError:
 					pass
 
-			# Search EPG, default to empty list
-			epgmatches = epgcache.search(('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or []
+			if timer.searchType == "description":
+				test = []
+				epgmatches = []
+
+				casesensitive = timer.searchCase == "sensitive"
+				if not casesensitive:
+					match = match.lower()
+
+				#if timer.services or timer.bouquets:
+				# Service filter defined
+				# Search only using the specified services
+				for service in timer.services:
+					test.append( (service, 0, -1, -1 ) )
+				mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
+				for bouquet in timer.bouquets:
+					services = serviceHandler.list(eServiceReference(bouquet))
+					if not services is None:
+						while True:
+							service = services.getNext()
+							if not service.valid(): #check end of list
+								break
+							if not (service.flags & mask):
+								test.append( (service.toString(), 0, -1, -1 ) )
+
+				if not test:
+				#else:
+					# No service filter defined
+					# Search within all services - could be very slow
+
+					# Get all bouquets
+					bouquetlist = []
+					refstr = '1:134:1:0:0:0:0:0:0:0:FROM BOUQUET \"bouquets.tv\" ORDER BY bouquet'
+					bouquetroot = eServiceReference(refstr)
+					mask = eServiceReference.isDirectory
+					if config.usage.multibouquet.value:
+						bouquets = serviceHandler.list(bouquetroot)
+						if bouquets:
+							while True:
+								s = bouquets.getNext()
+								if not s.valid():
+									break
+								if s.flags & mask:
+									info = serviceHandler.info(s)
+									if info:
+										bouquetlist.append((info.getName(s), s))
+					else:
+						info = serviceHandler.info(bouquetroot)
+						if info:
+							bouquetlist.append((info.getName(bouquetroot), bouquetroot))
+
+					# Get all services
+					mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
+					for name, bouquet in bouquetlist:
+						if not bouquet.valid(): #check end of list
+							break
+						if bouquet.flags & eServiceReference.isDirectory:
+							services = serviceHandler.list(bouquet)
+							if not services is None:
+								while True:
+									service = services.getNext()
+									if not service.valid(): #check end of list
+										break
+									if not (service.flags & mask):
+										test.append( (service.toString(), 0, -1, -1 ) )
+
+				if test:
+					# Get all events
+					#  eEPGCache.lookupEvent( [ format of the returned tuples, ( service, 0 = event intersects given start_time, start_time -1 for now_time), ] )
+					test.insert(0, 'RITBDSE')
+					allevents = epgcache.lookupEvent( test ) or []
+
+					# Filter events
+					for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
+						if match in (shortdesc if casesensitive else shortdesc.lower()) \
+							or match in (extdesc if casesensitive else extdesc.lower()):
+							epgmatches.append( (serviceref, eit, name, begin, duration, shortdesc, extdesc) )
+
+			else:
+				# Search EPG, default to empty list
+				epgmatches = epgcache.search( ('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
+
 			# Sort list of tuples by begin time 'B'
 			epgmatches.sort(key=itemgetter(3))
 
@@ -320,6 +400,10 @@ class AutoTimer:
 					begin -= config.recording.margin_before.value * 60
 					end += config.recording.margin_after.value * 60
 
+				# Overwrite endtime if requested
+				if timer.justplay and not timer.setEndtime:
+					end = begin
+
 				# Eventually change service to alternative
 				if timer.overrideAlternatives:
 					serviceref = timer.getAlternative(serviceref)
@@ -364,17 +448,10 @@ class AutoTimer:
 							del append
 
 					for movieinfo in moviedict.get(dest, ()):
-						if movieinfo.get("name") == name \
-							and movieinfo.get("shortdesc") == shortdesc:
-							# Some channels indicate replays in the extended descriptions
-							# If the similarity percent is higher then 0.8 it is a very close match
-							extdescM = movieinfo.get("extdesc")
-							if ( len(extdesc) == len(extdescM) and extdesc == extdescM ) \
-								or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, extdescM).ratio() ):
-								print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
-								movieExists = True
-								break
-
+						if self.checkSimilarity(timer, name, movieinfo.get("name"), shortdesc, movieinfo.get("shortdesc"), extdesc, movieinfo.get("extdesc") ):
+							print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
+							movieExists = True
+							break
 					if movieExists:
 						continue
 
@@ -415,13 +492,9 @@ class AutoTimer:
 
 						break
 					elif timer.avoidDuplicateDescription >= 1 \
-						and not rtimer.disabled \
-						and rtimer.name == name \
-						and rtimer.description == shortdesc:
-							# Some channels indicate replays in the extended descriptions
-							# If the similarity percent is higher then 0.8 it is a very close match
-							if ( len(extdesc) == len(rtimer.extdesc) and extdesc == rtimer.extdesc ) \
-								or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, rtimer.extdesc).ratio() ):
+						and not rtimer.disabled:
+							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
+							# if searchForDuplicateDescription > 1 then check short description
 								oldExists = True
 								print("[AutoTimer] We found a timer (similar service) with same description, skipping event")
 								break
@@ -435,16 +508,11 @@ class AutoTimer:
 					# We want to search for possible doubles
 					if timer.avoidDuplicateDescription >= 2:
 						for rtimer in chain.from_iterable( itervalues(recorddict) ):
-							if not rtimer.disabled \
-								and rtimer.name == name \
-								and rtimer.description == shortdesc:
-									# Some channels indicate replays in the extended descriptions
-									# If the similarity percent is higher then 0.8 it is a very close match
-									if ( len(extdesc) == len(rtimer.extdesc) and extdesc == rtimer.extdesc ) \
-										or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, rtimer.extdesc).ratio() ):
-										oldExists = True
-										print("[AutoTimer] We found a timer (any service) with same description, skipping event")
-										break
+							if not rtimer.disabled:
+								if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
+									oldExists = True
+									print("[AutoTimer] We found a timer (any service) with same description, skipping event")
+									break
 						if oldExists:
 							continue
 
@@ -540,9 +608,8 @@ class AutoTimer:
 							newEntry.disabled = True
 							# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 							conflicts = recordHandler.record(newEntry)
-
 			sleep(0.5)
-# 		return (self.total, self.new, self.modified, self.timers, len(self.conflicting), len(self.similars))
+#		return (total, new, modified, timers, conflicting, similars)
 
 		if self.autoPoll:
 			if conflicting and config.plugins.autotimer.notifconflict.value:
@@ -561,12 +628,23 @@ class AutoTimer:
 				)
 		else:
 			AddPopup(
-				_("Found a total of %d matching Events.\n%d Timer were added and %d modified, \n%d conflicts encountered, %d similars added.") % (total, new, modified, len(conflicting), len(similars)),
+				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (total, new, modified, len(conflicting), len(similars)),
 				MessageBox.TYPE_INFO,
 				5,
 				NOTIFICATIONID
 			)
 
+	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2):
+		foundTitle = (name1 == name2)
+		foundShort = (shortdesc1 == shortdesc2) if timer.searchForDuplicateDescription > 0 else True
+		foundExt = True
+		if timer.searchForDuplicateDescription == 2:
+			# Some channels indicate replays in the extended descriptions
+			# If the similarity percent is higher then 0.8 it is a very close match
+			foundExt = ( len(extdesc1) == len(extdesc2) and extdesc1 == extdesc2 ) \
+			 or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+
+		return foundTitle and foundShort and foundExt
 
 class AutoTimerTask(Components.Task.LoggingTask):
 	def prepare(self):

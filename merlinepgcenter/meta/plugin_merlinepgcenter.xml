@@ -1,6 +1,6 @@
 <default>
 	  <prerequisites>
-                    <tag type="Software" />
+                    <tag type="EPG" />
 	  </prerequisites>
           <info>
                     <author>Shaderman</author>
@@ -8,7 +8,7 @@
                     <packagename>enigma2-plugin-extensions-merlinepgcenter</packagename>
                     <shortdescription>more than just an EPG...</shortdescription>
                     <description>more than just an EPG...</description>
-                    <screenshot/>		    
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_merlinepgcenter.jpg" />
           </info>
 
 	  <files type="package"> <!-- without version, without .ipk -->

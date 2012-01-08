@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>Homey</author>
+                    <name>PermanentTimeshift</name>
+                    <packagename>enigma2-plugin-extensions-permanenttimeshift</packagename>
+                    <shortdescription>Permanent Timeshift Plugin for E2 Dreamboxes</shortdescription>
+                    <description>Permanent Timeshift Plugin for E2 Dreamboxes</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-permanenttimeshift" />
+	  </files>
+</default>

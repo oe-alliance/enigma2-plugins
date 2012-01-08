@@ -27,7 +27,7 @@ def addHost(name):
 	s.enable_outgoing = ConfigYesNo(default=False)
 	s.address = ConfigText(fixed_size=False)
 	s.password = ConfigPassword()
-	s.protocol = ConfigSelection(default="growl", choices=[("growl", "Growl"), ("snarl", "Snarl"), ("prowl", "Prowl"), ("syslog", "Syslog UDP")])
+	s.protocol = ConfigSelection(default="growl", choices=[("growl", "Growl"), ("gntp", "GNTP"), ("snarl", "Snarl"), ("prowl", "Prowl"), ("syslog", "Syslog UDP")])
 	s.level = ConfigSelection(default="-1", choices=[("-1", _("Low (Yes/No)")), ("0", _("Normal (Information)")), ("1", _("High (Warning)")), ("2", _("Highest (Emergency)"))])
 	s.blacklist = ConfigSet(choices=[])
 	config.plugins.growlee.hosts.append(s)
@@ -157,10 +157,10 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 	def setupList(self, *args):
 		last = self.cur
 		if self.setupList in last.protocol.notifiers:
-			last.protocol.notifiers.remove(self.setupList)
+			last.protocol.removeNotifier(self.setupList)
 		cur = self.hostElement.value
 		self.cur = cur
-		cur.protocol.notifiers.append(self.setupList)
+		cur.protocol.addNotifier(self.setupList, initial_call=False)
 
 		l = [
 			getConfigListEntry(_("Host"), self.hostElement),
@@ -174,11 +174,10 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 		if proto ==  "prowl":
 			l.append(getConfigListEntry(_("API Key"), cur.password))
 		else:
-			l.extend((
-				getConfigListEntry(_("Receive Notifications?"), cur.enable_incoming),
-				getConfigListEntry(_("Address"), cur.address),
-			))
-			if proto == "growl":
+			if proto != "gntp":
+				l.append(getConfigListEntry(_("Receive Notifications?"), cur.enable_incoming))
+			l.append(getConfigListEntry(_("Address"), cur.address))
+			if proto == "growl" or proto == "gntp":
 				l.append(
 					getConfigListEntry(_("Password"), cur.password)
 				)
@@ -213,7 +212,7 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 
 	def close(self):
 		if self.setupList in self.cur.protocol.notifiers:
-			self.cur.protocol.notifiers.remove(self.setupList)
+			self.cur.protocol.removeNotifier(self.setupList)
 		Screen.close(self)
 
 def configuration(session, **kwargs):
