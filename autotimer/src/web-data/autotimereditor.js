@@ -146,8 +146,8 @@ var AutoTimerEditorCore = Class.create({
 		
 		this.menu = new AutoTimerMenuController('contentAutoTimerMenu');
 		this.list = new AutoTimerListController('contentAutoTimerList');
-		this.edit = new AutoTimerEditController('contentAutoTimerEdit'); //, this.reload.bind(this), [this.loadFinished.bind(this)]);
-		
+		this.edit = new AutoTimerEditController('contentAutoTimerContent');
+		this.preview = new AutoTimerPreviewController('contentAutoTimerContent');
 		
 		// Display menu
 		this.menu.load();
@@ -240,6 +240,10 @@ var AutoTimerMenuController  = Class.create(Controller, {
 	
 	load: function(){
 		this.handler.load({});
+	},
+	
+	preview: function(){
+		autotimereditorcore.preview.load();
 	},
 	
 	backup: function() {
@@ -342,6 +346,12 @@ var AutoTimerMenuController  = Class.create(Controller, {
 			'click',
 			function(event, element){
 				autotimereditorcore.list.parse();
+			}.bind(this)
+		);
+		$('preview').on(
+			'click',
+			function(event, element){
+				this.preview();
 			}.bind(this)
 		);
 		$('backup').on(
@@ -1049,6 +1059,34 @@ var AutoTimerEditController = Class.create(Controller, {
 	}
 });
 
+var AutoTimerPreviewController = Class.create(Controller, {
+	initialize: function($super, target){
+		$super(new AutoTimerPreviewHandler(target));
+	},
+	
+	load: function(){
+		this.handler.load();
+	},
+	
+	/*preview: function(){
+		//this.handler.preview( this.previewCallback.bind(this));
+		this.handler.preview();
+	},*/
+	/*previewCallback: function(data){
+		//var selectList = $('list');
+		//var selectOptions = selectList.getElementsByTagName('option');
+		//var idx = selectList.selectedIndex;
+		//if (idx>=0){
+		//		selectOptions[idx].selected = false;
+		//}
+	},*/
+	
+	onFinished: function(){
+	},
+	
+	registerEvents: function(){
+	}
+});
 
 ///////////////////////////////////////////////////////////////////////////////
 // Handler
@@ -1148,9 +1186,9 @@ var AutoTimerListHandler  = Class.create(AbstractContentHandler, {
 	},
 	
 	parse: function(parms){
-		this.provider.simpleResultQuery(
-			URL.parse, 
-			parms, 
+		this.provider.parse(
+			URL.parse,
+			parms,
 			this.simpleResultCallback.bind(this));
 	},
 	
@@ -1206,6 +1244,38 @@ var AutoTimerEditHandler = Class.create(AbstractContentHandler, {
 	},
 });
 
+var AutoTimerPreviewHandler = Class.create(AbstractContentHandler, {
+	initialize: function($super, target){
+		$super('tplAutoTimerPreview', target);
+		this.provider = new AutoTimerPreviewProvider(this.show.bind(this));
+		this.ajaxload = true;
+	},
+	
+	load: function(){
+		this.provider.load( { 'simulate' : 1 } );
+	},
+	
+	/*preview: function(parms, callback){
+		this.provider.preview(
+			parms,
+			function(callback, data){
+				callback(data);
+			}.bind(this, callback));
+	},*/
+	
+	save: function(parms, callback){
+		this.callback = callback;
+		this.provider.simpleResultQuery(
+			URL.edit, 
+			parms, 
+			function(transport, callback){
+				this.simpleResultCallback(transport, callback);
+				if(this.callback !== undefined){
+					this.callback();
+				}
+			}.bind(this));
+	},
+});
 
 ///////////////////////////////////////////////////////////////////////////////
 // Provider
@@ -1236,7 +1306,7 @@ var AutoTimerListProvider = Class.create(AbstractContentProvider, {
 	},
 	
 	renderXML: function(xml){
-		this.list = new AutoTimerList(xml).getArray();
+		this.list = new AutoTimerList(xml).getList();
 		return {list : this.list};
 	},
 	
@@ -1284,6 +1354,37 @@ var AutoTimerEditProvider = Class.create(AbstractContentProvider, {
 	},
 });
 
+var AutoTimerPreviewProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.parse, showFnc);
+	},
+	
+	/*load: function( params ){
+		this.getUrl(this.url, params, callback, this.errorback.bind(this));
+	},*/
+	
+	/*preview: function(parms, callback){
+		this.simpleResultQuery(
+			URL.parse,
+			parms,
+			function(callback, transport){
+				this.previewdata = new AutoTimerPreview(this.getXML(transport)).getList();
+				if(typeof(callback) == "function"){
+					callback(this.previewdata);
+				}
+			}.bind(this, callback));
+	},*/
+	
+	callback: function(transport){
+		var data = this.renderXML(this.getXML(transport));
+		this.show(data);
+	},
+	
+	renderXML: function(xml){
+		this.list = new AutoTimerPreview(xml).getList();
+		return {list : this.list};
+	},
+});
 
 ///////////////////////////////////////////////////////////////////////////////
 // Objects
@@ -1303,10 +1404,33 @@ function AutoTimerSettings(xml){
 	};
 }
 
+function AutoTimerPreview(xml){
+	this.xmlitems = getNamedChildren(xml, "autotimersimulate", "timer");
+	this.list = [];
+	this.getList = function(){
+		if(this.list.length === 0){
+			var len = this.xmlitems.length;
+			for (var i=0; i<len; i++){
+				var xmlitem = this.xmlitems[i];
+				var timer = {
+					'name' :           xmlitem.getAttribute('name'),
+					'begin' :          toReadableDate( new Date( xmlitem.getAttribute('begin') * 1000 ) ),
+					'end' :            toReadableDate( new Date( xmlitem.getAttribute('end') * 1000 ) ),
+					'servicename' :    xmlitem.getAttribute('servicename'),
+					'autotimer' :      xmlitem.getAttribute('autotimer'),
+				};
+				this.list.push(timer);
+			}
+			this.list.sort(sortAutoTimer);
+			return this.list;
+		}
+	};
+}
+
 function AutoTimerList(xml){
 	this.xmlitems = getNamedChildren(xml, "autotimer", "timer");
 	this.list = [];
-	this.getArray = function(){
+	this.getList = function(){
 		if(this.list.length === 0){
 			var len = this.xmlitems.length;
 			for (var i=0; i<len; i++){
@@ -1328,7 +1452,7 @@ function AutoTimerListEntry(xml){
 	if ( (this.name == undefined) || (this.name == '') ){
 		this.name = xml.getAttribute('match');
 	}
-	this.json = { 	
+	this.json = {
 		'id' :                this.id,
 		'enabled' :           this.enabled,
 		'css' :               this.css,

@@ -8,10 +8,20 @@ try:
 except ImportError as ie:
 	from urllib.parse import unquote
 from enigma import eServiceReference
+from ServiceReference import ServiceReference
 from . import _, iteritems
 from . import plugin
+from xml.etree.cElementTree import Element, SubElement, ElementTree, tostring, parse
+from xml.dom import minidom
 
 API_VERSION = "1.2"
+
+def prettify(elem):
+	"""Return a pretty-printed XML string for the Element.
+	"""
+	rough_string = tostring(elem, 'utf-8')
+	reparsed = minidom.parseString(rough_string)
+	return reparsed.toprettyxml(indent="  ")
 
 class AutoTimerBaseResource(resource.Resource):
 	_remove = False
@@ -42,13 +52,44 @@ class AutoTimerBaseResource(resource.Resource):
 class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def render(self, req):
 		autotimer = self.getAutoTimerInstance()
-		ret = autotimer.parseEPG()
+
+		simulate = req.args.get("simulate")
+		simulate = simulate[0] if simulate else None
+		if simulate is not None:
+			try: simulate = int(simulate)
+			except ValueError: simulate = simulate == "yes"
+		else:
+			simulate = False
+
+		ret = autotimer.parseEPG(simulateOnly=simulate)
 		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5]))
 
 		if self._remove:
 			autotimer.writeXml()
 
-		return self.returnResult(req, True, output)
+		if simulate:
+			req.setResponseCode(http.OK)
+			req.setHeader('Content-type', 'application/xhtml+xml')
+			req.setHeader('charset', 'UTF-8')
+
+			root = Element('autotimersimulate')
+			#root.set('version', VERSION)
+			for (name, begin, end, serviceref, autotimername) in ret[3]:
+				# Add timer element
+				eservice = eServiceReference(serviceref)
+				service = ServiceReference(eservice)	
+				element = SubElement(root, "timer",
+														{	'name' : str(name),
+															'begin' : str(begin),
+															'end' : str(end),
+															'servicename' : str(service.getServiceName()),
+															'autotimer' : str(autotimername),
+														})
+			proot = prettify(root)
+			return str(proot)
+
+		else:
+			return self.returnResult(req, True, output)
 
 class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
