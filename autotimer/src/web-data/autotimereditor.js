@@ -20,9 +20,9 @@ function url() {
 	this.add              = '/autotimer/edit';
 	this.remove           = '/autotimer/remove';
 	this.parse            = '/autotimer/parse';
+	this.preview          = '/autotimer/simulate';
 	this.tmp              = '/autotimereditor/tmp/';
 	this.getservices      = '/web/getservices';
-	this.preview          = '/autotimer/simulate';
 };
 var URL = new url();
 
@@ -249,6 +249,10 @@ var AutoTimerMenuController  = Class.create(Controller, {
 		$super(new AutoTimerMenuHandler(target));
 	},
 	
+	back: function(){
+		window.location = window.location.origin;
+	},
+	
 	load: function(){
 		this.handler.load({});
 	},
@@ -347,36 +351,48 @@ var AutoTimerMenuController  = Class.create(Controller, {
 	},
 	
 	registerEvents: function(){
+		$('back').on(
+			'click',
+			function(event, element){
+				this.back();
+			}.bind(this)
+		);
+		$('back').title = "Back to Dreambox Webcontrol";
 		$('reload').on(
 			'click',
 			function(event, element){
 				autotimereditorcore.list.reload();
 			}.bind(this)
 		);
+		$('reload').title = "Reload the AutoTimer list";
 		$('parse').on(
 			'click',
 			function(event, element){
 				autotimereditorcore.list.parse();
 			}.bind(this)
 		);
+		$('parse').title = "Run AutoTimer and add timer";
 		$('preview').on(
 			'click',
 			function(event, element){
 				this.preview();
 			}.bind(this)
 		);
+		$('preview').title = "Simulate and show the matching timer";
 		$('backup').on(
 			'click',
 			function(event, element){
 				this.backup();
 			}.bind(this)
 		);
+		$('backup').title = "Backup the AutoTimer configuration";
 		$('restore').on(
 			'click',
 			function(event, element){
 				this.restore();
 			}.bind(this)
 		);
+		$('restore').title = "Restore a previous backuped AutoTimer configuration";
 	},
 });
 
@@ -430,7 +446,7 @@ var AutoTimerListController = Class.create(Controller, {
 	},
 	
 	parse: function(){
-		this.handler.parse();
+		this.handler.parse({}, this.reload.bind(this));
 	},
 	
 	add: function(){
@@ -590,7 +606,6 @@ var AutoTimerEditController = Class.create(Controller, {
 	
 	loadServicesCallback: function(x, services) {
 		var select = x.parentNode.nextElementSibling.firstElementChild;
-		//var myNewOption = new Option("My Option", "123");
 		for (i = select.options.length - 1; i>=0; i--) {
 			select.options.remove(i);
 		}
@@ -757,7 +772,6 @@ var AutoTimerEditController = Class.create(Controller, {
 		
 		var afterevent = $('afterevent').value;
 		data['afterevent']              = afterevent;
-		//TODO AfterEvent TimeSpan is not implemented in AutoTimerRessource
 		if ($('aftereventusetimespan').checked){
 			data['aftereventFrom']        = $('aftereventFrom').value;
 			data['aftereventTo']          = $('aftereventTo').value;
@@ -1079,19 +1093,6 @@ var AutoTimerPreviewController = Class.create(Controller, {
 		this.handler.load();
 	},
 	
-	/*preview: function(){
-		//this.handler.preview( this.previewCallback.bind(this));
-		this.handler.preview();
-	},*/
-	/*previewCallback: function(data){
-		//var selectList = $('list');
-		//var selectOptions = selectList.getElementsByTagName('option');
-		//var idx = selectList.selectedIndex;
-		//if (idx>=0){
-		//		selectOptions[idx].selected = false;
-		//}
-	},*/
-	
 	onFinished: function(){
 	},
 	
@@ -1119,7 +1120,7 @@ var AutoTimerServiceListHandler = Class.create(AbstractContentHandler, {
 		for (var i=0; i<len; i++){
 			services[data.services[i].servicereference] = data.services[i].servicename;
 		}
-		if (this.callback){
+		if(typeof(this.callback) == "function"){
 			this.callback(services);
 		}
 	}
@@ -1139,7 +1140,7 @@ var AutoTimerSettingsHandler = Class.create(AbstractContentHandler, {
 	
 	onSettingsReady: function(data){
 		var settings = data;
-		if (this.callback){
+		if(typeof(this.callback) == "function"){
 			this.callback(settings);
 		}
 	}
@@ -1156,34 +1157,32 @@ var AutoTimerMenuHandler = Class.create(AbstractContentHandler,{
 	},
 	
 	backup: function(parms, callback){
-		this.callback = callback;
 		this.provider.simpleResultQuery(
 			URL.backup,
 			parms,
-			function(transport){
-				this.provider.simpleResultCallback(transport, this.backupCallback.bind(this, this.callback));
-			}.bind(this));
+			function(callback, transport){
+				this.provider.simpleResultCallback(transport, this.backupCallback.bind(this, callback));
+			}.bind(this, callback));
 	},
 	backupCallback: function(callback, result){
 		var text = result.getStateText();
 		this.notify(text, result.getState());
-		if (callback){
+		if(typeof(callback) == "function"){
 			callback(text);
 		}
 	},
 
 	restore: function(parms, callback){
-		this.callback = callback;
 		this.provider.simpleResultQuery(
 			URL.restore,
 			parms,
-			function(transport){
-				this.provider.simpleResultCallback(transport, this.restoreCallback.bind(this, this.callback));
-			}.bind(this));
+			function(callback, transport){
+				this.provider.simpleResultCallback(transport, this.restoreCallback.bind(this, callback));
+			}.bind(this, callback));
 	},
 	restoreCallback: function(callback, result){
 		this.notify(result.getStateText(), result.getState());
-		if (callback){
+		if(typeof(callback) == "function"){
 			callback();
 		}
 	},
@@ -1193,40 +1192,43 @@ var AutoTimerListHandler  = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplAutoTimerList', target);
 		this.provider = new AutoTimerListProvider(this.show.bind(this));
-		this.ajaxload = true; //false
+		this.ajaxload = true;
 	},
 	
-	parse: function(parms){
+	parse: function(parms, callback){
 		this.provider.simpleResultQuery(
 			URL.parse,
 			parms,
-			this.simpleResultCallback.bind(this));
+			function(callback, transport){
+				this.simpleResultCallback(transport, callback);
+				if(typeof(callback) == "function"){
+					callback();
+				}
+			}.bind(this, callback));
 	},
 	
 	add: function(parms, callback){
-		this.callback = callback;
 		this.provider.simpleResultQuery(
 			URL.add, 
 			parms, 
-			function(transport, callback){
+			function(callback, transport){
 				this.simpleResultCallback(transport, callback);
-				if(this.callback !== undefined){
-					this.callback();
+				if(typeof(callback) == "function"){
+					callback();
 				}
-			}.bind(this));
+			}.bind(this, callback));
 	},
 	
 	remove: function(parms, callback){
-		this.callback = callback;
 		this.provider.simpleResultQuery(
 			URL.remove, 
 			parms, 
-			function(transport, callback){
+			function(callback, transport){
 				this.simpleResultCallback(transport, callback);
-				if(this.callback !== undefined){
-					this.callback();
+				if(typeof(callback) == "function"){
+					callback();
 				}
-			}.bind(this));
+			}.bind(this, callback));
 	},
 });
 
@@ -1242,16 +1244,15 @@ var AutoTimerEditHandler = Class.create(AbstractContentHandler, {
 	},
 	
 	save: function(parms, callback){
-		this.callback = callback;
 		this.provider.simpleResultQuery(
 			URL.edit, 
 			parms, 
-			function(transport, callback){
+			function(callback, transport){
 				this.simpleResultCallback(transport, callback);
-				if(this.callback !== undefined){
-					this.callback();
+				if(typeof(callback) == "function"){
+					callback();
 				}
-			}.bind(this));
+			}.bind(this, callback));
 	},
 });
 
@@ -1265,27 +1266,6 @@ var AutoTimerPreviewHandler = Class.create(AbstractContentHandler, {
 	load: function(){
 		this.provider.load();
 	},
-	
-	/*preview: function(parms, callback){
-		this.provider.preview(
-			parms,
-			function(callback, data){
-				callback(data);
-			}.bind(this, callback));
-	},*/
-	
-	save: function(parms, callback){
-		this.callback = callback;
-		this.provider.simpleResultQuery(
-			URL.edit, 
-			parms, 
-			function(transport, callback){
-				this.simpleResultCallback(transport, callback);
-				if(this.callback !== undefined){
-					this.callback();
-				}
-			}.bind(this));
-	},
 });
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1296,11 +1276,10 @@ var AutoTimerSettingsProvider = Class.create(AbstractContentProvider, {
 	},
 	
 	load: function( ){
-		callback = this.callback.bind(this);
-		this.getUrl(this.url, null, callback, this.errorback.bind(this));
+		this.getUrl(this.url, null, this.loadCallback.bind(this), this.errorback.bind(this));
 	},
 	
-	callback: function(transport){
+	loadCallback: function(transport){
 		var data = this.renderXML(this.getXML(transport));
 		this.show(data);
 	},
@@ -1369,22 +1348,6 @@ var AutoTimerPreviewProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.preview, showFnc);
 	},
-	
-	/*load: function( params ){
-		this.getUrl(this.url, params, callback, this.errorback.bind(this));
-	},*/
-	
-	/*preview: function(parms, callback){
-		this.simpleResultQuery(
-			URL.parse,
-			parms,
-			function(callback, transport){
-				this.previewdata = new AutoTimerPreview(this.getXML(transport)).getList();
-				if(typeof(callback) == "function"){
-					callback(this.previewdata);
-				}
-			}.bind(this, callback));
-	},*/
 	
 	callback: function(transport){
 		var data = this.renderXML(this.getXML(transport));
