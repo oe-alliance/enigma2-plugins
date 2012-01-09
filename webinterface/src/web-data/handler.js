@@ -304,10 +304,11 @@ var ServiceListEpgHandler  = Class.create(AbstractContentHandler, {
 	//TODO: move showItem outta here
 	showItem: function(item, type){
 		if(item.now.eventid != ''){
-			var progressBar = $(this.PROGRESS + item.now.servicereference).down('.sListSProgressBar');
-			if(progressBar)
-				progressBar.style.width = item.now.progress + "%";
-			
+			var progress = $(this.PROGRESS + item.now.servicereference)
+			if(progress)
+				progress.down('.sListSProgress').title = item.now.progress + "%";
+				progress.down('.sListSProgressBar').style.width = item.now.progress + "%";
+
 			var id = this.EPG_NOW + item.now.servicereference;
 			templateEngine.process('tplServiceListEPGItem', {'item' : item.now}, id, true);
 			var element = $(id).up('.sListEPGNow');
