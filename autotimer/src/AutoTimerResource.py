@@ -7,21 +7,13 @@ try:
 	from urllib import unquote
 except ImportError as ie:
 	from urllib.parse import unquote
-from enigma import eServiceReference
 from ServiceReference import ServiceReference
+from Tools.XMLTools import stringToXML
+from enigma import eServiceReference
 from . import _, iteritems
 from . import plugin
-from xml.etree.cElementTree import Element, SubElement, ElementTree, tostring, parse
-from xml.dom import minidom
 
 API_VERSION = "1.2"
-
-def prettify(elem):
-	"""Return a pretty-printed XML string for the Element.
-	"""
-	rough_string = tostring(elem, 'utf-8')
-	reparsed = minidom.parseString(rough_string)
-	return reparsed.toprettyxml(indent="  ")
 
 class AutoTimerBaseResource(resource.Resource):
 	_remove = False
@@ -48,48 +40,45 @@ class AutoTimerBaseResource(resource.Resource):
 	<e2statetext>%s</e2statetext>
 </e2simplexmlresult>""" % ('True' if state else 'False', statetext)
 
-
 class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def render(self, req):
 		autotimer = self.getAutoTimerInstance()
 
-		simulate = req.args.get("simulate")
-		simulate = simulate[0] if simulate else None
-		if simulate is not None:
-			try: simulate = int(simulate)
-			except ValueError: simulate = simulate == "yes"
-		else:
-			simulate = False
-
-		ret = autotimer.parseEPG(simulateOnly=simulate)
+		ret = autotimer.parseEPG()
 		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5]))
 
 		if self._remove:
 			autotimer.writeXml()
 
-		if simulate:
-			req.setResponseCode(http.OK)
-			req.setHeader('Content-type', 'application/xhtml+xml')
-			req.setHeader('charset', 'UTF-8')
+		return self.returnResult(req, True, output)
 
-			root = Element('autotimersimulate')
-			#root.set('version', VERSION)
-			for (name, begin, end, serviceref, autotimername) in ret[3]:
-				# Add timer element
-				eservice = eServiceReference(serviceref)
-				service = ServiceReference(eservice)	
-				element = SubElement(root, "timer",
-														{	'name' : str(name),
-															'begin' : str(begin),
-															'end' : str(end),
-															'servicename' : str(service.getServiceName()),
-															'autotimer' : str(autotimername),
-														})
-			proot = prettify(root)
-			return str(proot)
+class AutoTimerSimulateResource(AutoTimerBaseResource):
+	def render(self, req):
+		autotimer = self.getAutoTimerInstance()
 
-		else:
-			return self.returnResult(req, True, output)
+		ret = autotimer.parseEPG(simulateOnly=True)
+
+		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
+		extend = returnlist.extend
+
+		for (name, begin, end, serviceref, autotimername) in ret[3]:
+			ref = ServiceReference(str(serviceref))
+			extend((
+				'<e2simulatedtimer>\n'
+				'   <e2servicereference>', stringToXML(serviceref), '</e2servicereference>\n',
+				'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
+				'   <e2name>', stringToXML(name), '</e2name>\n',
+				'   <e2timebegin>', str(begin), '</e2timebegin>\n',
+				'   <e2timeend>', str(end), '</e2timeend>\n',
+				'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n'
+				'</e2simulatedtimer>\n'
+			))
+		returnlist.append('</e2autotimersimulate>')
+
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application/xhtml+xml')
+		req.setHeader('charset', 'UTF-8')
+		return ''.join(returnlist)
 
 class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):

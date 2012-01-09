@@ -22,6 +22,7 @@ function url() {
 	this.parse            = '/autotimer/parse';
 	this.tmp              = '/autotimereditor/tmp/';
 	this.getservices      = '/web/getservices';
+	this.preview          = '/autotimer/simulate';
 };
 var URL = new url();
 
@@ -1252,7 +1253,7 @@ var AutoTimerPreviewHandler = Class.create(AbstractContentHandler, {
 	},
 	
 	load: function(){
-		this.provider.load( { 'simulate' : 1 } );
+		this.provider.load();
 	},
 	
 	/*preview: function(parms, callback){
@@ -1356,7 +1357,7 @@ var AutoTimerEditProvider = Class.create(AbstractContentProvider, {
 
 var AutoTimerPreviewProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
-		$super(URL.parse, showFnc);
+		$super(URL.preview, showFnc);
 	},
 	
 	/*load: function( params ){
@@ -1405,7 +1406,7 @@ function AutoTimerSettings(xml){
 }
 
 function AutoTimerPreview(xml){
-	this.xmlitems = getNamedChildren(xml, "autotimersimulate", "timer");
+	this.xmlitems = getNamedChildren(xml, "e2autotimersimulate", "e2simulatedtimer");
 	this.list = [];
 	this.getList = function(){
 		if(this.list.length === 0){
@@ -1413,11 +1414,11 @@ function AutoTimerPreview(xml){
 			for (var i=0; i<len; i++){
 				var xmlitem = this.xmlitems[i];
 				var timer = {
-					'name' :           xmlitem.getAttribute('name'),
-					'begin' :          toReadableDate( new Date( xmlitem.getAttribute('begin') * 1000 ) ),
-					'end' :            toReadableDate( new Date( xmlitem.getAttribute('end') * 1000 ) ),
-					'servicename' :    xmlitem.getAttribute('servicename'),
-					'autotimer' :      xmlitem.getAttribute('autotimer'),
+					'name' :           getNodeContent(xmlitem, 'e2name'),
+					'begin' :          toReadableDate( new Date( getNodeContent(xmlitem, 'e2timebegin') * 1000 ) ),
+					'end' :            toReadableDate( new Date( getNodeContent(xmlitem, 'e2timeend') * 1000 ) ),
+					'servicename' :    getNodeContent(xmlitem, 'e2servicename'),
+					'autotimer' :      getNodeContent(xmlitem, 'e2autotimername'),
 				};
 				this.list.push(timer);
 			}
