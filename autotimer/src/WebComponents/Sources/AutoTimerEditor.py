@@ -1,5 +1,5 @@
 from Components.Sources.Source import Source
-from os import path, popen
+from os import remove, path, popen
 from re import compile as re_compile
 
 class AutoTimerEditor(Source):

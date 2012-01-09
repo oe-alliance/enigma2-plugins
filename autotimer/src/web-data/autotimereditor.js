@@ -73,6 +73,16 @@ function toReadableDate(date){
 	return dateString;
 }
 
+function toReadableDateTime(date){
+	var dateString = "";
+	dateString += date.getFullYear();
+	dateString += "-" + addLeadingZero(date.getMonth()+1);
+	dateString += "-" + addLeadingZero(date.getDate());
+	dateString += " " + addLeadingZero(date.getHours());
+	dateString += ":" + addLeadingZero(date.getMinutes());
+	return dateString;
+}
+
 function toTimestamp(date){
 		date = date.split('-');
 		var sDate = new Date();
@@ -1187,7 +1197,7 @@ var AutoTimerListHandler  = Class.create(AbstractContentHandler, {
 	},
 	
 	parse: function(parms){
-		this.provider.parse(
+		this.provider.simpleResultQuery(
 			URL.parse,
 			parms,
 			this.simpleResultCallback.bind(this));
@@ -1415,8 +1425,8 @@ function AutoTimerPreview(xml){
 				var xmlitem = this.xmlitems[i];
 				var timer = {
 					'name' :           getNodeContent(xmlitem, 'e2name'),
-					'begin' :          toReadableDate( new Date( getNodeContent(xmlitem, 'e2timebegin') * 1000 ) ),
-					'end' :            toReadableDate( new Date( getNodeContent(xmlitem, 'e2timeend') * 1000 ) ),
+					'begin' :          toReadableDateTime( new Date( getNodeContent(xmlitem, 'e2timebegin') * 1000 ) ),
+					'end' :            toReadableDateTime( new Date( getNodeContent(xmlitem, 'e2timeend') * 1000 ) ),
 					'servicename' :    getNodeContent(xmlitem, 'e2servicename'),
 					'autotimer' :      getNodeContent(xmlitem, 'e2autotimername'),
 				};
