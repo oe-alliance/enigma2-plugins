@@ -24,6 +24,8 @@ from os import path as path
 # We want a list of unique services
 from EPGRefreshService import EPGRefreshService
 
+from OrderedSet import OrderedSet
+
 # Configuration
 from Components.config import config
 
@@ -45,7 +47,7 @@ class EPGRefresh:
 
 	def __init__(self):
 		# Initialize
-		self.services = (set(), set())
+		self.services = (OrderedSet(), OrderedSet())
 		self.forcedScan = False
 		self.session = None
 		self.beginOfTimespan = 0
@@ -166,6 +168,24 @@ class EPGRefresh:
 		self.maybeStopAdapter()
 		epgrefreshtimer.clear()
 
+	def addServices(self, fromList, toList, channelIds):
+		for scanservice in fromList:
+			service = eServiceReference(scanservice.sref)
+			if not service.valid() \
+				or (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+
+				continue
+
+			channelID = '%08x%04x%04x' % (
+				service.getUnsignedData(4), # NAMESPACE
+				service.getUnsignedData(2), # TSID
+				service.getUnsignedData(3), # ONID
+			)
+
+			if channelID not in channelIds:
+				toList.append(scanservice)
+				channelIds.append(channelID)
+
 	def prepareRefresh(self):
 		print("[EPGRefresh] About to start refreshing EPG")
 
@@ -206,6 +226,10 @@ class EPGRefresh:
 				if removeInstance:
 					autotimer = None
 
+		scanServices = []
+		channelIdList = []
+		self.addServices(self.services[0], scanServices, channelIdList)
+
 		serviceHandler = eServiceCenter.getInstance()
 		for bouquet in self.services[1].union(additionalBouquets):
 			myref = eServiceReference(bouquet.sref)
@@ -220,24 +244,7 @@ class EPGRefresh:
 						break
 		del additionalBouquets[:]
 
-		scanServices = []
-		channelIdList = []
-		for scanservice in self.services[0].union(additionalServices):
-			service = eServiceReference(scanservice.sref)
-			if not service.valid() \
-				or (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
-
-				continue
-
-			channelID = '%08x%04x%04x' % (
-				service.getUnsignedData(4), # NAMESPACE
-				service.getUnsignedData(2), # TSID
-				service.getUnsignedData(3), # ONID
-			)
-
-			if channelID not in channelIdList:
-				scanServices.append(scanservice)
-				channelIdList.append(channelID)
+		self.addServices(additionalServices, scanServices, channelIdList)
 		del additionalServices[:]
 
 		# Debug
