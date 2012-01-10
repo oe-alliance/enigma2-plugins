@@ -1708,7 +1708,12 @@ function AutoTimer(xml, defaults){
 	var len = xmlservices.length;
 	for (var i=0; i<len; i++){
 		var name = xmlservices.item(i).getElementsByTagName('e2servicename');
-		name = name.item(0).firstChild.nodeValue;
+		if(name.item(0).firstChild == null){
+			name = '';
+		}
+		else{
+			name = name.item(0).firstChild.nodeValue;
+		}
 		var reference = xmlservices.item(i).getElementsByTagName('e2servicereference');
 		reference = escape(reference.item(0).firstChild.nodeValue);
 		// Check if service is a bouquet
