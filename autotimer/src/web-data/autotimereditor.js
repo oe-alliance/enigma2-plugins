@@ -1099,6 +1099,7 @@ var AutoTimerPreviewController = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
+		$('list').selectedIndex=-1;
 	},
 	
 	registerEvents: function(){
