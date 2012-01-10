@@ -1654,7 +1654,7 @@ function AutoTimer(xml, defaults){
 	if (location == undefined) {
 		location = '';
 	}
-	var l = toOptionList(autotimereditorcore.locations, this.location);
+	var l = toOptionList(autotimereditorcore.locations, location);
 	l.shift();
 	this.location = {
 		'uselocation' : uselocation,
