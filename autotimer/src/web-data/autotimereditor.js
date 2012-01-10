@@ -630,10 +630,10 @@ var AutoTimerEditController = Class.create(Controller, {
 		var parent = x.parentNode;
 		if (parent.children[1].firstElementChild.value == 'dayofweek' || parent.children[2].firstElementChild.value){
 			var node = parent.cloneNode(true);
-			node.children[0].firstElementChild.selectedIndex = parent.children[0].firstElementChild.selectedIndex
-			node.children[1].firstElementChild.selectedIndex = parent.children[1].firstElementChild.selectedIndex
-			node.children[2].firstElementChild.value = parent.children[2].firstElementChild.value
-			node.children[2].lastElementChild.selectedIndex = parent.children[2].lastElementChild.selectedIndex
+			node.children[0].firstElementChild.selectedIndex = parent.children[0].firstElementChild.selectedIndex;
+			node.children[1].firstElementChild.selectedIndex = parent.children[1].firstElementChild.selectedIndex;
+			node.children[2].firstElementChild.value = parent.children[2].firstElementChild.value;
+			node.children[2].lastElementChild.selectedIndex = parent.children[2].lastElementChild.selectedIndex;
 			node.children[3].className = 'remove';
 			$('filterlist').firstElementChild.insertBefore(node, parent);
 		}
@@ -660,7 +660,7 @@ var AutoTimerEditController = Class.create(Controller, {
 	addBouquet: function(x) {
 		var parent = x.parentNode;
 		var node = parent.cloneNode(true);
-		node.children[0].firstElementChild.selectedIndex = parent.children[0].firstElementChild.selectedIndex
+		node.children[0].firstElementChild.selectedIndex = parent.children[0].firstElementChild.selectedIndex;
 		node.children[1].className = 'remove';
 		$('bouquetlist').firstElementChild.insertBefore(node, parent);
 	},
@@ -678,10 +678,15 @@ var AutoTimerEditController = Class.create(Controller, {
 	addService: function(x) {
 		var parent = x.parentNode;
 		var node = parent.cloneNode(true);
-		node.children[0].firstElementChild.selectedIndex = parent.children[0].firstElementChild.selectedIndex
-		node.children[1].firstElementChild.selectedIndex = parent.children[1].firstElementChild.selectedIndex
-		node.children[2].className = 'remove';
-		$('servicelist').firstElementChild.insertBefore(node, parent);
+		// Check if service is not a marker
+		// Service reference flags == isMarker (== 64)
+		var reference = parent.children[1].firstElementChild.value;
+		if (unescape(reference).slice(2,4) != "64"){
+			node.children[0].firstElementChild.selectedIndex = parent.children[0].firstElementChild.selectedIndex;
+			node.children[1].firstElementChild.selectedIndex = parent.children[1].firstElementChild.selectedIndex;
+			node.children[2].className = 'remove';
+			$('servicelist').firstElementChild.insertBefore(node, parent);
+		}
 	},
 	
 	removeService: function(x) {
