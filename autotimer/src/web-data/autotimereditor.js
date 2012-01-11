@@ -83,6 +83,13 @@ function toReadableDateTime(date){
 	return dateString;
 }
 
+function toReadableTime(date){
+	var dateString = "";
+	dateString = addLeadingZero(date.getHours());
+	dateString += ":" + addLeadingZero(date.getMinutes());
+	return dateString;
+}
+
 function toTimestamp(date){
 		date = date.split('-');
 		var sDate = new Date();
@@ -1391,10 +1398,13 @@ function AutoTimerPreview(xml){
 			var len = this.xmlitems.length;
 			for (var i=0; i<len; i++){
 				var xmlitem = this.xmlitems[i];
+				var begin = new Date( getNodeContent(xmlitem, 'e2timebegin') * 1000 );
+				var end = new Date( getNodeContent(xmlitem, 'e2timeend') * 1000 );
 				var timer = {
 					'name' :           getNodeContent(xmlitem, 'e2name'),
-					'begin' :          toReadableDateTime( new Date( getNodeContent(xmlitem, 'e2timebegin') * 1000 ) ),
-					'end' :            toReadableDateTime( new Date( getNodeContent(xmlitem, 'e2timeend') * 1000 ) ),
+					'date' :           toReadableDate( begin ),
+					'begin' :          toReadableTime( begin ),
+					'end' :            toReadableTime( end ),
 					'servicename' :    getNodeContent(xmlitem, 'e2servicename'),
 					'autotimer' :      getNodeContent(xmlitem, 'e2autotimername'),
 				};
