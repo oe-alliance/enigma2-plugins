@@ -1,5 +1,6 @@
 # Python OrderedSet implementation
 # taken from http://code.activestate.com/recipes/576694-orderedset/
+from __future__ import print_function
 import collections
 
 KEY, PREV, NEXT = range(3)
@@ -65,7 +66,9 @@ class OrderedSet(collections.MutableSet):
     def __del__(self):
         self.clear()                    # remove circular references
 
-            
+    union = lambda self, other: self.__or__(other)
+
 if __name__ == '__main__':
     print(OrderedSet('abracadaba'))
     print(OrderedSet('simsalabim'))
+    print(OrderedSet('asdf').union('moep'))
