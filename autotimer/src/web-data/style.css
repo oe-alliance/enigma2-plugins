@@ -420,7 +420,7 @@
 		margin-bottom: 5px;
 		width: 100%;
 	}
-	.preview td{
+	.preview td not(.nopadding){
 		padding-left: 5px;
 	}
 
