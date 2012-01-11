@@ -129,16 +129,16 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
         videofilename = filename
         srtbasefilename = videofilename.rsplit(".", 1)[0]
         self.downloadFile(suburl, srtbasefilename + ".srt.gz")
-        try:
-            f = gzip.open(srtbasefilename+".srt.gz")
-            dump = open(srtbasefilename+".srt", "wb")
-            dump.write(f.read())
-            dump.close()
-            f.close()
-            os.remove(srtbasefilename+".srt.gz")
-            return srtbasefilename+".srt"
-        except:
-            return "None"
+#        try:
+        f = gzip.open(srtbasefilename+".srt.gz")
+        dump = open(srtbasefilename+".srt", "wb")
+        dump.write(f.read())
+        dump.close()
+        f.close()
+        os.remove(srtbasefilename+".srt.gz")
+        return srtbasefilename+".srt"
+#        except:
+#            return "None"
         
 
     def hashFile(self, name):

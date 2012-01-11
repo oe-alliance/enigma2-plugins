@@ -364,7 +364,7 @@ var AutoTimerMenuController  = Class.create(Controller, {
 				this.back();
 			}.bind(this)
 		);
-		$('back').title = "Back to Dreambox Webcontrol";
+		$('back').title = "Return to Dreambox Webcontrol";
 		$('reload').on(
 			'click',
 			function(event, element){
@@ -378,14 +378,14 @@ var AutoTimerMenuController  = Class.create(Controller, {
 				autotimereditorcore.list.parse();
 			}.bind(this)
 		);
-		$('parse').title = "Run AutoTimer and add timer";
+		$('parse').title = "Run AutoTimer and add timers";
 		$('preview').on(
 			'click',
 			function(event, element){
 				this.preview();
 			}.bind(this)
 		);
-		$('preview').title = "Simulate and show the matching timer";
+		$('preview').title = "Show events matching your AutoTimers";
 		$('backup').on(
 			'click',
 			function(event, element){
@@ -399,7 +399,7 @@ var AutoTimerMenuController  = Class.create(Controller, {
 				this.restore();
 			}.bind(this)
 		);
-		$('restore').title = "Restore a previous backuped AutoTimer configuration";
+		$('restore').title = "Restore a previous configuration backup";
 	},
 });
 
@@ -457,7 +457,7 @@ var AutoTimerListController = Class.create(Controller, {
 	},
 	
 	add: function(){
-		this.match = prompt("Name des AutoTimers:");
+		this.match = prompt("Name for the new AutoTimer:");
 		if (this.match.length){
 			var selectList = $('list');
 			var selectOptions = selectList.getElementsByTagName('option');
@@ -1106,6 +1106,7 @@ var AutoTimerPreviewController = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
+		$('list').selectedIndex=-1;
 	},
 	
 	registerEvents: function(){

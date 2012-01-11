@@ -160,7 +160,7 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 			last.protocol.removeNotifier(self.setupList)
 		cur = self.hostElement.value
 		self.cur = cur
-		cur.protocol.addNotifier(self.setupList)
+		cur.protocol.addNotifier(self.setupList, initial_call=False)
 
 		l = [
 			getConfigListEntry(_("Host"), self.hostElement),

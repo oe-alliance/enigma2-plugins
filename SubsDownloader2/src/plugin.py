@@ -1,4 +1,4 @@
-import shutil
+#import shutil
 import os
 try:
 	is_libmediainfo = True
@@ -11,10 +11,11 @@ from Plugins.Extensions.SubsDownloader2.SourceCode import chardet
 from Plugins.Extensions.SubsDownloader2.SourceCode.anysub2srt import SubConv
 # jak zmienie sciezke SubsDownloader2 (nazwe katalogu to trzeba ja tez zmienic w pliku OpenSubtitles.py
 #from Plugins.Extensions.SubsDownloader2.SourceCode.periscope.services.OpenSubtitle.services import OpenSubtitle
-from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.XBMC_search import list_XBMC_Periscope_plugins
+from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.XBMC_search import list_XBMC_Periscope_plugins#, XBMCSubtitle
+
 from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
 from Plugins.Extensions.SubsDownloader2.SourceCode.NapiProjekt import NapiProjekt #*
-from Plugins.Extensions.SubsDownloader2.SourceCode.Napisy24_pl import Napisy24_pl, GuessFileData_from_FileName
+from Plugins.Extensions.SubsDownloader2.SourceCode.Napisy24_pl import Napisy24_pl, GuessFileData_from_FileName, CompareMovie_and_Subtite_FileData
 from Plugins.Extensions.SubsDownloader2.SourceCode.chardet_OutpuyTranslation import chardetOutputTranslation
 from Plugins.Extensions.SubsDownloader2.SourceCode.myFileList import EXTENSIONS, FileList #*
 from Plugins.Extensions.SubsDownloader2.pluginOnlineContent import IsNewVersionCheck, zlib_link, libmediainfo_link, PluginIpkUpdate, InstallDownloadableContent, flagcounetr
@@ -139,7 +140,7 @@ class SubsDownloaderApplication(Screen):
 		
 		os.system('mkdir /tmp/SubsDownloader_cache')
 		self.subsListDownloaded=0
-		self.movie_fps=0
+		#self.movie_fps=0
 		self.localConvertion = False
 		#self.subtitleExtention = "srt|txt|sub|nfo" #add other if someone gives remark
 		self.MyBox = HardwareInfo().get_device_name()
@@ -327,17 +328,29 @@ class SubsDownloaderApplication(Screen):
 		self.set_listFile_enabled()
 		
 	def setServerAvailableSubtitles_for_PERISCOPE(self,serverList):
-		"""Function preper (appends) serverAvailableSubtitles which is seted by 
+		"""Function preper (appends) serverAvailableSubtitles which is seted by
 		comend self["subsList"].setList(self.serverAvailableSubtitles)"""
 		self.serverAvailableSubtitles=[]
 		position = 0
 		for x  in serverList:
-			self.serverAvailableSubtitles.append((_("["+str(x['lang'])+"]___"+str(x['release'])), str(position))) #makes list of subtitles
+			self.serverAvailableSubtitles.append((_("["+str(x['lang'])+"]___"+str(x['release'])), str(position)))
 			position = position +1
 		self.subsListDownloaded=1
 		self["subsList"].setList(self.serverAvailableSubtitles)
 		self.set_listSubs_enabled()
 			
+	def setServerAvailableSubtitles_for_XBMC_SUBTITLES(self,serverList):
+		"""Function preper (appends) serverAvailableSubtitles which is seted by
+		comend self["subsList"].setList(self.serverAvailableSubtitles)"""
+		self.serverAvailableSubtitles=[]
+		position = 0
+		for x  in serverList:
+			self.serverAvailableSubtitles.append((_("["+str(x['language_name'])+"]_"+str(x['filename'])), position))
+			position = position +1
+		self.subsListDownloaded=1
+		self["subsList"].setList(self.serverAvailableSubtitles)
+		self.set_listSubs_enabled()
+		
 	def setServerAvailableSubtitles_for_Napisy24(self,serverList):
 		"""Function preper (appends) serverAvailableSubtitles which is seted by 
 		comend self["subsList"].setList(self.serverAvailableSubtitles)"""
@@ -356,7 +369,7 @@ class SubsDownloaderApplication(Screen):
 	def saveSubtitleasSRT(self, subtitleFile, fps, subtitleCodePage):
 		"""Function converts and saves downloaded subtitle in suitable ditectory"""
 		#codePageDecoded= self.chardetOutputTranslation(subtitleCodePage)
-		self.subtitle_codepade = codePageDecoded= chardetOutputTranslation(subtitleCodePage)
+		subtitle_codepade = codePageDecoded= chardetOutputTranslation(subtitleCodePage)
 		convertedSubtitle = SubConv(subtitleFile, codePageDecoded)
 		#convertedSubtitle.subs_file = convertedSubtitle.to_utf_8(convertedSubtitle.subs_file,codePageDecoded)
 		#convertedSubtitle.subs_file = convertedSubtitle.to_utf_8(convertedSubtitle.subs_file)
@@ -425,39 +438,43 @@ class SubsDownloaderApplication(Screen):
 		"""Search dir for subtitle file and converts it to given movie file"""
 		selected_movie_dir = self["fileList"].getCurrentDirectory()
 		selected_movie_file = self["fileList"].getFilename()
-		self.local_subtitle = []
+		local_subtitle = []
 		if self.selectedList == self["fileList"] and self.return_media_kind(self.return_extention(selected_movie_file))=="movie":
 			self.localConvertion = True
 			self.session.open(MessageBox,_("Local subtitle convertion for:\n%s." % (str(selected_movie_file))), MessageBox.TYPE_INFO, timeout = 15)
 			self.__defaults_before_subtitle_download_and_convertion()
 			self.movie_filename = selected_movie_dir+selected_movie_file
-			file_list = self["fileList"].getFileList()
+			file_list = self["fileList"].getFileList()			
 			for x  in file_list:
 				if x[0][-1] != True: #not directory
 					if self.return_media_kind(self.return_extention(x[0][0]))=="text":# and LocalConvertedSubtitle.detect_format(LocalConvertedSubtitle.subs_file) != "None":
 						#localCodePageDecoded= self.chardetOutputTranslation(self.getSubtitleCodepade(selected_movie_dir+x[0][0]))
-						self.subtitle_codepade = localCodePageDecoded = chardetOutputTranslation(self.getSubtitleCodepade(selected_movie_dir+x[0][0]))
+						self.subtitle_codepade = localCodePageDecoded = chardetOutputTranslation(self.getSubtitleCodepade(selected_movie_dir+x[0][0])) 
 						LocalConvertedSubtitle = SubConv((selected_movie_dir + x[0][0]), localCodePageDecoded)
 						if LocalConvertedSubtitle.detect_format(LocalConvertedSubtitle.subs_file) != "None":
-							self.local_subtitle.append((_(x[0][0]), str(selected_movie_dir+x[0][0]))) #makes list of subtitles"""
+							local_subtitle.append((_(x[0][0]), str(selected_movie_dir+x[0][0]))) #makes list of subtitles"""
 							self.subsListDownloaded = 1							
-			self["subsList"].setList(self.local_subtitle)
+			self["subsList"].setList(local_subtitle)
 			self.set_listSubs_enabled()
 		else:
 			self.session.open(MessageBox,_("I can't convert subtitle for this kind of media!!!"), MessageBox.TYPE_INFO, timeout = 5)
-		
-	def localConvertionFileConvert(self,callbackAnswer):
-		if callbackAnswer is True:
-			try:
-				if self.whichSubtitleDownload != self.subtitle_filename:
-					shutil.copy2(str(self.whichSubtitleDownload), str(self.subtitle_filename))
-				self.subtitle_codepade = self.getSubtitleCodepade(self.subtitle_filename)
-				self.movie_fps = self.getMovieFPS(self.movie_filename)
-				self.subtitle_filename_type = self.saveSubtitleasSRT(self.subtitle_filename, self.movie_fps, self.subtitle_codepade)
-				self["fileList"].refresh()
-			except:
-				self.failed_to_download_subtitle_nfo(self.subtitle_filename,self.subtitle_codepade,self.subtitle_filename_type,self.movie_fps)		
-		
+
+	def convert_subtitle_to_movie(self, movie_filename, subtitle_filename):
+		if (movie_filename.rsplit(".", 1)[0]+".srt") == subtitle_filename:
+			pass
+		else:
+			rename_filename = (movie_filename.rsplit(".", 1)[0]+".srt")
+			os.rename(subtitle_filename, rename_filename)
+			subtitle_filename = rename_filename
+		try:
+			subtitle_codepade = self.getSubtitleCodepade(subtitle_filename)
+			movie_fps = self.getMovieFPS(movie_filename)
+			subtitle_filename_type = self.saveSubtitleasSRT(subtitle_filename, movie_fps, subtitle_codepade)
+			self["fileList"].refresh()
+		except:
+			self.failed_to_download_subtitle_nfo(subtitle_filename,subtitle_codepade,subtitle_filename_type,movie_fps)			
+				
+			
 	def downloadSubtitle(self):
 		"""Download Subtitle for movie variable self.textEXTENSIONS has defived all supported files and their king.
 		Variable self.textEXTENSIONS is self.textEXTENSIONS and EXTENSIONS union"""
@@ -483,27 +500,53 @@ class SubsDownloaderApplication(Screen):
 						self.session.open(MessageBox,_("There is no subtitle on this server to Your movie. \nPlease try another language or subtitle server.\n\nIf error still appears please check network connection with server."), MessageBox.TYPE_INFO, timeout = 5)
 					else:
 						self.setServerAvailableSubtitles_for_PERISCOPE(self.subtitle_database)
+				elif config.plugins.subsdownloader.subtitleserver.value in  XBMC_PLUGINS:
+					
+					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % config.plugins.subsdownloader.subtitleserver.value)
+					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value)        
+					
+					temp_struct = GuessFileData_from_FileName(SubtitleDatabase.tvshowRegex, SubtitleDatabase.tvshowRegex2, SubtitleDatabase.movieRegex)
+					show_name, show_type, show_season, show_episode = temp_struct.return_movie_data_to_XBMC(self.movie_filename)
+					lang1 =config.plugins.subsdownloader.SubsDownloader1stLang.value
+					lang2 = config.plugins.subsdownloader.SubsDownloader2ndLang.value
+					lang3 = config.plugins.subsdownloader.SubsDownloader3rdLang.value
+					self.subtitle_database, self.__session_id, self.__msg = SERVICE.search_subtitles(self.movie_filename, show_name, show_type, "year", show_season, show_episode, Subtitle_Downloader_temp_dir, False, lang1, lang2, lang3, True)
+
+					
+					#self.subtitle_database= self.subtitles.XBMC_search_subtitles(self.movie_filename,config.plugins.subsdownloader.SubsDownloader1stLang.value,config.plugins.subsdownloader.SubsDownloader2ndLang.value,config.plugins.subsdownloader.SubsDownloader3rdLang.value)
+					if self.subtitle_database == []:
+						self.clearSubList()
+						self.session.open(MessageBox,_("There is no subtitle on this server to Your movie. \nPlease try another language or subtitle server.\n\nIf error still appears please check network connection with server."), MessageBox.TYPE_INFO, timeout = 5)
+					else:
+						#os.system('echo "%s" >> /text' % str(self.subtitle_database))
+						self.setServerAvailableSubtitles_for_XBMC_SUBTITLES(self.subtitle_database)
 				elif config.plugins.subsdownloader.subtitleserver.value == "NapiProjekt":
-					self.isSubtitleDowloaded=0
-					self.whichSubtitleDownload="None"
-					self.subtitle_filename = "None"
-					self.movie_fps = "None"
-					self.subtitle_codepade = "None"
-					self.subtitle_filename_type = "None"
+					#self.isSubtitleDowloaded=0
+					#self.whichSubtitleDownload="None"
+					subtitle_filename = []
+					#self.movie_fps = "None"
+					#self.subtitle_codepade = "None"
+					#self.subtitle_filename_type = "None"
 					
 					self.movie_filename = self["fileList"].getCurrentDirectory() + self["fileList"].getFilename()
 					self.NapiSubtitle = NapiProjekt()
-					try:
+					self.NapiSubtitle.getnapi(self.movie_filename)
+					
+					#subtitle_filename.append(self.NapiSubtitle.save())
+					self.convert_subtitle_to_movie(self.movie_filename, self.NapiSubtitle.save())
+					
+					"""try:
 						self.NapiSubtitle.getnapi(self.movie_filename)
 						self.subtitle_filename = self.NapiSubtitle.save()
+						
+						
 						self.subtitle_codepade = self.getSubtitleCodepade(self.subtitle_filename)
 						self.movie_fps = self.getMovieFPS(self.movie_filename)
 						self.subtitle_filename_type = self.saveSubtitleasSRT(self.subtitle_filename, self.movie_fps, self.subtitle_codepade)
 					except:
-						self.failed_to_download_subtitle_nfo(self.subtitle_filename,self.subtitle_codepade,self.subtitle_filename_type,self.movie_fps)
-					self["fileList"].refresh()
+						self.failed_to_download_subtitle_nfo(self.subtitle_filename,self.subtitle_codepade,self.subtitle_filename_type,self.movie_fps)"""
+					#self["fileList"].refresh()
 					#TODO SUBTITLE SELECTION AND DOWNLOAD OTHER SERVERS
-					pass
 				elif config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
 					N24_movie_name = None
 					N24_imdb_search = None
@@ -711,76 +754,63 @@ class SubsDownloaderApplication(Screen):
 						else:
 							self.session.open(MessageBox, _("File size is bigger than 61440.\n\n Subs Downloader can't manage it with vEditor."), MessageBox.TYPE_INFO, timeout = 5)
 		if self.selectedList == self["subsList"]:
-			self.isSubtitleDowloaded=0
-			self.whichSubtitleDownload="None"
-			self.subtitle_filename = "None"
-			self.movie_fps = "None"
-			self.subtitle_codepade = "None"
-			self.subtitle_filename_type = "None"
-			self.is_subtitle_saved = "None"
+			#self.isSubtitleDowloaded=0
+			whichSubtitleDownload="None"
+			subtitle_filename = []
+			#self.movie_fps = "None"
+			#self.subtitle_codepade = "None"
+			#self.subtitle_filename_type = "None"
+			#self.is_subtitle_saved = "None"
 			if self.localConvertion == False:
-				#download subtitle from server
+				#download subtitle from server\
 				if config.plugins.subsdownloader.subtitleserver.value in PERISCOPE_PLUGINS: #== "OpenSubtitle":
-					self.whichSubtitleDownload = self["subsList"].getCurrent()[1]
-					self.subtitle_filename = self.subtitles.createFile(self.subtitle_database[int(self.whichSubtitleDownload)],self.movie_filename)
-					#self["fileList"].refresh()
-					try:
-						self.subtitle_codepade = self.getSubtitleCodepade(self.subtitle_filename)
-						self.movie_fps = self.getMovieFPS(self.movie_filename)
-						self.subtitle_filename_type = self.saveSubtitleasSRT(self.subtitle_filename, self.movie_fps, self.subtitle_codepade)
-					except:
-						self.failed_to_download_subtitle_nfo(self.subtitle_filename,self.subtitle_codepade,self.subtitle_filename_type,self.movie_fps)
-					"""if self.subtitle_filename == "None":
-						self.failed_to_download_subtitle_nfo()
-					else:	
-						self.subtitle_codepade = self.getSubtitleCodepade(self.subtitle_filename)
-						self.movie_fps = self.getMovieFPS(self.movie_filename)
-						self.saveSubtitleasSRT(self.subtitle_filename, self.movie_fps, self.subtitle_codepade)"""
+					whichSubtitleDownload = self["subsList"].getCurrent()[1]
+					subtitle_filename = self.subtitles.createFile(self.subtitle_database[int(whichSubtitleDownload)],self.movie_filename)
+					#self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
 				if config.plugins.subsdownloader.subtitleserver.value == "NapiProjekt":
 					pass #PASS BECAUDE NAPI PROJECT DOWNLOAD ONLY PL FILE AND IT'S DIRECTLY IN DOWNLOAD SUBTITLE FUNCTION.
+				if config.plugins.subsdownloader.subtitleserver.value in  XBMC_PLUGINS:
+					
+					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % config.plugins.subsdownloader.subtitleserver.value)
+					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value) 
+					
+					pos = self["subsList"].getCurrent()[1]
+					tmp_sub_dir = sub_folder = self.movie_filename.rsplit("/",1)[0]
+					zipped_subs_path = self.movie_filename.rsplit(".",1)[0]+".zip"
+					TRUE_FALSE, language, subtitle_filename = SERVICE.download_subtitles (self.subtitle_database, pos, zipped_subs_path, tmp_sub_dir, sub_folder, self.__session_id)
+					
 				if config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
-					self.whichSubtitleDownload = self["subsList"].getCurrent()[1]
-					if self.subtitles.save_downloaded_zip (self.whichSubtitleDownload)== True:
-						extracted_file_path = self.subtitles.extract_zip_file()
-						#Tutaj trzeba zrobic if dla configu dotyczacego autousuwania sciagfnietego pliku ZIP
+					whichSubtitleDownload = self["subsList"].getCurrent()[1]
+					if self.subtitles.save_downloaded_zip (whichSubtitleDownload)== True:
+						subtitle_filename = self.subtitles.extract_zip_file()
 						try:
 							os.remove(self.subtitles.ZipFilePath) #remove downloaded zip file
 						except:
 							print "Can't delete file: %s" % self.subtitles.ZipFilePath
-						if extracted_file_path != False:
-							#auto konwerjsa sciagnietych z Napisy24 plikow
-							if len(extracted_file_path) == 1:
-								
-								# ##### TO potem ubrac w jedna funkjce jak dorobie automatyczne wykrywanie ilosci sciagnietych plikow i  ilosci epizodow filmu
-								self.whichSubtitleDownload = extracted_file_path[0]
-								self.session.open(MessageBox, _("File path: \n %s") % (extracted_file_path[0]) , MessageBox.TYPE_INFO, timeout = 5)
-								self.subtitle_codepade = self.getSubtitleCodepade(self.whichSubtitleDownload)
-								self.movie_fps = self.getMovieFPS(self.movie_filename)								
-								self.subtitle_filename = (str(self.movie_filename).rsplit(".", 1)[0])+".srt"
-								self.localConvertionFileConvert(True)
-								try:
-									os.remove(self.subtitles.ZipFilePath) #remove downloaded zip file
-								except:
-									print "Can't delete file: %s" % self.subtitles.ZipFilePath
-								# ##### TO potem ubrac w jedna funkjce jak dorobie automatyczne wykrywanie ilosci sciagnietych plikow i  ilosci epizodow filmu
-								
-								
-							#elif jesli ilosc sciagnietych i rozpakowanyc plikow jest rowna ilosci plikow w katalogu i wtedy skasowac ELSA ponizej
-							#elif jesli ilosc sciagnietych i rozpakowanyc plikow jest rowna ilosci plikow w katalogu i wtedy skasowac ELSA ponizej
-							else:
-								self.session.open(MessageBox, _("%i file(s) was extracted: \n Please make local convertion (long TXEXT).\n\n Automatic option will be implemented ASAP.") % (len(extracted_file_path)) , MessageBox.TYPE_INFO, timeout = 5)
-							
-					else:
-						self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
-				self["fileList"].refresh()
-			else:
+				
+				if type(subtitle_filename) == type("string"):
+					self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename)	
+				elif type(subtitle_filename) == type([]):
+					if len(subtitle_filename) == 1:
+						self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
+					elif len(subtitle_filename) > 1:
+						CompareMovie_and_Subtite = CompareMovie_and_Subtite_FileData(SubtitleDatabase.tvshowRegex, SubtitleDatabase.tvshowRegex2, SubtitleDatabase.movieRegex, EXTENSIONS)
+						mathing_movie_subtitles = CompareMovie_and_Subtite.give_movie_subtitle_consistent_data(CompareMovie_and_Subtite.moviePath_and_movieFileData(self.movie_filename),CompareMovie_and_Subtite.subtitlePath_and_subtitleFileData(subtitle_filename))
+						if mathing_movie_subtitles != []:
+							for x in mathing_movie_subtitles:
+								self.convert_subtitle_to_movie(x['movie'], x['subtitle'])
+						else:
+							self["fileList"].refresh()
+							self.session.open(MessageBox, _("%i file(s) was extracted and I didn't match them automatically this time. \n Please make local convertion (long TEXT).") % (len(subtitle_filename)) , MessageBox.TYPE_INFO, timeout = 10)
+				if subtitle_filename == [] or subtitle_filename == "":
+					self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
+			
+			elif self.localConvertion == True:
 				#local convertion in progress
-				self.whichSubtitleDownload = self["subsList"].getCurrent()[1]
-				self.subtitle_filename = (str(self.movie_filename).rsplit(".", 1)[0])+".srt"
-				if os.path.isfile(self.subtitle_filename) == True:
-					self.session.openWithCallback(self.localConvertionFileConvert, MessageBox,(_("It seems that subtitle file: %s exists. \n Should I overwrite it and continue anyway?") % self.subtitle_filename), MessageBox.TYPE_YESNO, default = False)
-				else:
-					self.localConvertionFileConvert(True)
+				whichSubtitleDownload = self["subsList"].getCurrent()[1]
+				subtitle_filename.append(whichSubtitleDownload)				
+				self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
+			#self["fileList"].refresh()
 			#TODO OTHER SUBTITLE SERVERS HANDLE
 				
 	def closeApplication(self):
@@ -871,7 +901,7 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 			pass
 		if config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
 			self.list.append(getConfigListEntry(_("Choose Napisy24 search method:"), config.plugins.subsdownloader.Napisy24SearchMethod))
-			self.list.append(getConfigListEntry(_("Use \"guessFileData\' method fot movie filname:"), config.plugins.subsdownloader.Napisy24MovieNameMethod))
+			self.list.append(getConfigListEntry(_("Use \"guessFileData\" method for movie filname:"), config.plugins.subsdownloader.Napisy24MovieNameMethod))
 			pass 
 		self.list.append(getConfigListEntry(_("Extended configuratin menu:"), config.plugins.subsdownloader.extendedMenuConfig))
 		if config.plugins.subsdownloader.extendedMenuConfig.value == True:
