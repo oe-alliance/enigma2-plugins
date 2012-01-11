@@ -3,6 +3,44 @@
 // replace ' with \' for in-html javascript
 String.prototype.esc = function(){ return this.valueOf().gsub("'", "\\'"); };
 
+//$Header$
+//Helper functions
+Element.addMethods({
+	fadeIn: function(element, parms, out) {
+		var setOpacity = function(elm,v){
+			elm.style.opacity = v/100;
+			elm.style.MozOpacity =  v/100;
+			elm.style.KhtmlOpacity =  v/100;
+			elm.style.filter=" alpha(opacity ="+v+")";
+		};
+		var delay = parms.delay;
+		var to = parms.to;
+		if(!to){
+			to = 100;
+			if(!out){
+				setOpacity(element, 0);
+			}
+		}
+
+		element.style.zoom = 1;
+		// for ie, set haslayout
+		element.style.display = "block";
+
+		for (var i=1; i<=to; i++) {
+			(function(j) {
+				setTimeout(function() {
+					if (out == true)
+						j = to - j;
+					setOpacity(element, j);
+				}, j * delay / to);
+			})(i);
+		};
+	},
+	fadeOut: function(element, delay) {
+		element.fadeIn({'delay' : delay}, true);
+	}
+});
+
 var templates = {};
 var loadedChannellist = {};
 
@@ -117,7 +155,7 @@ function set(element, value){
 }
 
 function hideNotifier(){
-	$('notification').fade({duration : 0.5 });
+	$('notification').fadeOut({delay : 300 });
 }
 
 function notify(text, state){
@@ -133,7 +171,7 @@ function notify(text, state){
 		}				
 
 		set('notification', "<div>"+text+"</div>");
-		notif.appear({duration : 0.5, to: 0.9 });
+		notif.fadeIn({delay : 300, to: 90 });
 		hideNotifierTimeout = setTimeout(hideNotifier, 10000);
 	}
 }
