@@ -184,7 +184,7 @@
 	}
 
 /***************
- AutoTimer Overview
+ AutoTimer List
  ***************/
 
 	#navContainer{
@@ -410,7 +410,19 @@
 		background-image:url("calendar_hover.png");
 		background-position:98% center; background-repeat:no-repeat;
 	}
-	
+
+
+/**************
+ AutoTimer Preview
+ **************/
+	.preview{
+		margin-top: 5px;
+		margin-bottom: 5px;
+		width: 100%;
+	}
+	.preview td{
+		padding-left: 5px;
+	}
 
 
 /*****************
