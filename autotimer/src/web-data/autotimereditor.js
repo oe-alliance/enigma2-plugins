@@ -449,11 +449,17 @@ var AutoTimerListController = Class.create(Controller, {
 	
 	reload: function(){
 		this.select = $('list').value;
+		$('contentAutoTimerContent').update('<div></div>');
 		this.load();
 	},
 	
 	parse: function(){
-		this.handler.parse({}, this.reload.bind(this));
+		this.handler.parse({}, this.parseCallback.bind(this));
+	},
+	parseCallback: function(){
+		if ($('list').value){
+			autotimereditorcore.edit.reload();
+		}
 	},
 	
 	add: function(){
@@ -938,7 +944,11 @@ var AutoTimerEditController = Class.create(Controller, {
 		this.handler.save( this.saveurl, this.saveCallback.bind(this) );
 	},
 	saveCallback: function() {
-		autotimereditorcore.list.reload();
+		//autotimereditorcore.list.reload();
+		var selectList = $('list');
+		var idx = selectList.selectedIndex;
+		selectList.options[idx].text = '\u00A0' + $('name').value; // &nbsp;
+		this.reload();
 	},
 	
 	cancel: function() {
@@ -1108,7 +1118,7 @@ var AutoTimerPreviewController = Class.create(Controller, {
 	},
 	
 	load: function(){
-		this.handler.load();
+		this.handler.load({});
 	},
 	
 	onFinished: function(){
@@ -1255,10 +1265,12 @@ var AutoTimerEditHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplAutoTimerEdit', target);
 		this.provider = new AutoTimerEditProvider(this.show.bind(this));
-		this.ajaxload = true;
+		this.ajaxload = false;
 	},
 	
 	load: function( id ){
+		this.requestStarted();
+		this.parms = id;
 		this.provider.load( id );
 	},
 	
@@ -1280,10 +1292,6 @@ var AutoTimerPreviewHandler = Class.create(AbstractContentHandler, {
 		$super('tplAutoTimerPreview', target);
 		this.provider = new AutoTimerPreviewProvider(this.show.bind(this));
 		this.ajaxload = true;
-	},
-	
-	load: function(){
-		this.provider.load();
 	},
 });
 
