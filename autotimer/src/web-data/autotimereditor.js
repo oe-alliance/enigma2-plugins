@@ -257,7 +257,7 @@ var AutoTimerMenuController  = Class.create(Controller, {
 	},
 	
 	back: function(){
-		window.location = window.location.origin;
+		window.location = window.location.protocol + "//" + window.location.hostname;
 	},
 	
 	load: function(){
