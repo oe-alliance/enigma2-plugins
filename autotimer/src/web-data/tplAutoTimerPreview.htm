@@ -19,19 +19,19 @@
 										<td>AutoTimer</td>
 									</tr>
 									<tr class="optionTitle">
-										<td colspan="6">
+										<td colspan="6" class="nopadding">
 											<hr />
 										</td>
 									</tr>
 									{for timer in list}
 										<tr class="optionContent">
-											<td>
+											<td class="nopadding">
 												<div class="headerindent">${timer.name}</div>
 											</td>
-											<td>${timer.date}</td>
-											<td>${timer.begin}</td>
-											<td>${timer.end}</td>
-											<td>${timer.servicename}</td>
+											<td class="nobreak">${timer.date}</td>
+											<td class="nobreak">${timer.begin}</td>
+											<td class="nobreak">${timer.end}</td>
+											<td class="nobreak">${timer.servicename}</td>
 											<td>${timer.autotimer}</td>
 										</tr>
 									{/for}

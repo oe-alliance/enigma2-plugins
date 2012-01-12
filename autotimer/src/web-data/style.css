@@ -416,12 +416,17 @@
  AutoTimer Preview
  **************/
 	.preview{
-		margin-top: 5px;
-		margin-bottom: 5px;
 		width: 100%;
 	}
-	.preview td not(.nopadding){
-		padding-left: 5px;
+	.preview tr{
+		margin-bottom: 3px;
+	}
+	.preview td{
+		vertical-align: text-top;
+		padding-top: 3px;
+	}
+	.preview td:not(.nopadding){
+		padding-left: 10px;
 	}
 
 
@@ -447,6 +452,9 @@
 		margin-left: 5px;
 	}
 
+	.nobreak {
+	  white-space: nowrap;
+	}
 
 /***************
 * IE6 Hackstuff
