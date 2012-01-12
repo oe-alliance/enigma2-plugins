@@ -28,7 +28,7 @@ class SubConv():
         re_tmp = re.compile("^(\d+):(\d+):(\d+):(.*)")
         re_sub2 = re.compile("^(\d+):(\d+):(\d+)\.\d+\s*\,.*")
         re_mpl2 = re.compile("\[(?P<start>\d+)\]\[(?P<stop>\d+)\](?P<line>.*)", re.S)
-        #for line in list:
+        #for line in list:	
         while len(list) > 0 :
             line = list.pop(0)
             if re_mdvd.match(line):

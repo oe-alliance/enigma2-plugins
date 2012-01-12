@@ -1,0 +1,474 @@
+	html, body{
+		font-family: Tahoma, Sans-Serif;
+		font-size: 14px;
+		font-weight: bold;
+		color: #fff;
+		text-align: center;
+		background: #555
+	}
+
+	a, a:visited, a:active{
+		color: #485052;
+		text-decoration: none;
+	}
+
+	img{
+		border: 0px;
+	}
+
+	hr{
+		margin: 0px;
+		padding: 0px;
+		height: 1px;
+		color: grey;
+		background-color: grey;
+		border: none;
+	}
+	
+	form{
+		margin: 2px;		
+	}
+
+	#notification{		
+		color: #000;
+		width: 50%;
+		height: 32px;
+		position: absolute;
+		top: 0px;
+		left: 25%;		
+		text-align: center;
+		vertical-align: bottom;
+		z-index: 2;		
+	}
+
+
+/***********************
+ WAP
+ ***********************/
+
+	.wap a, .wap a:visited, .wap a:active{
+		color: #fff;		
+	}
+
+
+/***********************
+ GENERAL
+ ***********************/
+	.black{
+		background: #000;
+	}
+	
+	.odd{
+		background-color: #FFF;
+	}
+	
+	.even{
+		background-color: #DDD;
+	}
+	
+	.fullwidth {
+		width: 100%;
+	}
+
+	.halfwidth {
+		width: 50%;
+	}
+	
+	.center {
+		text-align: center;
+	}
+
+	.buttonbar {
+		margin: 5px;
+	}
+
+/***********************
+ BANNER with MainMenu
+ ***********************/
+
+	#banner{
+		width: 1000px;
+		height: auto;
+		background: #000;
+		padding-left: 5px;
+		margin-bottom: 8px;
+   	border-radius: 5px;
+   	-webkit-border-radius: 5px;
+   	-moz-border-radius: 5px;
+	}
+	
+	#banner a, #banner a:visited, #banner a:active{
+		color: #FFF;
+		text-decoration: none;
+	}
+	
+	#bannerText{
+		margin-bottom: 5px;
+		padding-left: 2px;
+		padding-top: 6px;
+	}
+
+	#bannerLeft{
+		width: 940px;
+		float: left;
+	}
+	
+	#bannerCenter{
+		padding: 10px;
+		text-align: center;
+		vertical-align: middle;
+		height: auto;
+	}
+	
+	#powerState{
+		border: 0px;
+		margin-left: 93px;
+		text-align: right;
+	}
+	
+	#bannerRight{
+		width: 50px;
+		text-align: right;
+		height: 60px;
+		float: left;
+	}
+	
+	#bannerRight img{
+		padding-top: 5px;
+	}
+		
+	#menu{
+		width: 999px;
+		height: auto;
+		background: #000;
+		padding-left: 3px;
+		padding-right: 3px;
+		padding-bottom: 1px;
+		margin-bottom: 8px;
+   	border-radius: 5px;
+   	-webkit-border-radius: 5px;
+   	-moz-border-radius: 5px; 	
+	}
+	
+	#menuTable{
+		width: 100%;
+		height: auto;
+		vertical-align: middle;
+		margin: 0px;
+		padding: 3px;
+	}
+
+	#menuBack{
+		overflow:hidden;
+		width: 10%;
+		height: auto;
+		text-align: left;
+	}
+	
+	#menuLeft{
+		overflow:hidden;
+		width: 30%;
+		height: auto;
+		text-align: left;
+	}
+
+	#menuRight{
+		overflow:hidden;
+		width: 60%;
+		height: auto;
+		text-align: right;
+	}
+
+	.inline{
+		display: inline;
+	}
+
+/***************
+ AutoTimer List
+ ***************/
+
+	#navContainer{
+		float:left;
+		width: 320px;
+	}
+	 
+	#nav{
+		width: 100%;
+		min-height: 308px;
+		background: #FFF;
+		border: 2px solid #000;
+		border-radius: 5px;
+    -webkit-border-radius: 5px;
+   	-moz-border-radius: 5px;
+	}
+
+	#navHd{
+		background: #000;
+	}
+
+	#navContent{
+		color: #485052;
+	}
+
+	#navSearch{
+		width: 100%;
+		height: 61px;
+		background: #FFF;
+		margin-top: 8px;
+		border: 2px solid #000;
+		border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+	}
+
+	#searchHd{
+		background: #000;
+		text-align: center;
+		width: 153px;
+	}
+	
+	#navVolume{
+		width: 100%;
+		height: 75px;
+		background: #FFF;
+		margin-top: 8px;
+		border: 2px solid #000;
+		border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+	}
+
+	#volHd{
+		background: #000;
+		text-align: center;
+		width: 153px;
+	}
+	
+	.tabOverview{
+		width: 100%;
+	}
+	.overview{
+		width: 100%;
+		margin : 0px;
+		padding: 0px;
+		border: 0px
+	}
+	.enabled{
+		background-color: #58FA58;
+	}
+	.disabled{
+		background-color: #D8D8D8;
+	}
+
+
+/**************
+ AutoTimer Editor
+ **************/
+	#contentContainer{
+		float: left;
+		background: #FFF;
+		width: 673px;
+		min-height: 308px;
+		margin-left: 8px;
+		border: 2px solid #000;		
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+	}
+	#content{
+	}
+	#contentHd{
+		background: #000;
+	}
+	#contentHdExt{
+		background: #000;		
+		dipslay:block;
+	}
+	.tabEditor{
+		width: 100%;
+		color: #485052;
+	}
+	.editor{
+		margin-top: 5px;
+		margin-bottom: 5px;
+		width: 100%;
+	}
+	
+	.optionTitle{
+		padding-left: 5px;
+		padding-right: 5px;
+		padding-bottom: 5px;
+		white-space: nowrap;
+		/*vertical-align:top;*/
+	}
+	.optionContent{
+		height: 25px;
+		font-weight: normal;
+		padding: 2px;
+	}
+	.optionMain{
+		padding-right: 2px;
+		/*vertical-align:top;*/
+	}
+	.optionSub{
+		padding-left: 5px;
+	}
+	
+	.input,.select, a.tags, .list tr {
+		font-family: Tahoma, Sans-Serif;
+		font-size: 14px;
+		font-weight: normal;
+		border: 1px solid #CCC;
+		background-color: #fff;
+		color: #485052;
+		margin: 2px;
+	}
+	.text{
+		width: 350px;
+	}
+	
+	a.tags {
+		margin: 3px 0px 3px 0px;
+		padding: 3px;
+		display: inline-block;
+	}
+	a.tags:hover {
+    box-shadow: 0 0 5px #485052;
+    -webkit-box-shadow: 0 0 5px #485052; 
+    -moz-box-shadow: 0 0 5px #485052; 
+	}
+	a.selected {
+		background: #FFFF99;
+	}
+	a.selected:hover {
+    box-shadow: 0 0 5px #485052;
+    -webkit-box-shadow: 0 0 5px #485052; 
+    -moz-box-shadow: 0 0 5px #485052; 
+	}
+	
+	.list{
+		border-collapse: collapse;
+		margin: 3px;
+	}
+	.list td{
+		padding: 3px; 
+	}
+	.list .nopadding{
+		padding: 0px; 
+	}
+	.list tr:hover{
+		background: none repeat scroll 0 0 #D8D6D0;
+	}
+	
+	.list .add{
+		width : 30px;
+		cursor: pointer;
+		background-image:url("add.png");
+		background-position:center center; background-repeat:no-repeat;
+	}
+	.list .remove{
+		width : 30px;
+		cursor: pointer;
+		background-image:url("remove.png");
+		background-position:center center; background-repeat:no-repeat;
+	}
+	
+	.invisible{
+		display: none;
+	}
+	
+	.fixedwidth{
+		width : 150px;
+	}
+	
+	.fixedwidthbouquet{
+		width : 150px;
+	}
+	
+	.fixedwidthservice{
+		width : 240px;
+	}
+	
+	.timepicker{
+		display: inline;
+		background-image:url("clock.png");
+		background-position:96% center; background-repeat:no-repeat;
+	}
+	.timepicker:hover{
+		cursor: pointer;
+		background-image:url("clock_hover.png");
+		background-position:96% center; background-repeat:no-repeat;
+	}
+	
+	.datepicker{
+		display: inline;
+		background-image:url("calendar.png");
+		background-position:98% center; background-repeat:no-repeat;
+	}
+	.datepicker:hover{
+		cursor: pointer;
+		background-image:url("calendar_hover.png");
+		background-position:98% center; background-repeat:no-repeat;
+	}
+
+
+/**************
+ AutoTimer Preview
+ **************/
+	.preview{
+		margin-top: 5px;
+		margin-bottom: 5px;
+		width: 100%;
+	}
+	.preview td not(.nopadding){
+		padding-left: 5px;
+	}
+
+
+/*****************
+* General
+******************/
+
+	#container {
+		margin: 0 auto;   /* align for good browsers */
+		text-align: left; /* counter the body center */
+		width: 1005px;
+	}
+
+	.header{
+		padding-top: 2px;
+		padding-left: 4px;
+		padding-right: 4px;
+		display: block;
+		height: 22px;
+	}
+
+	.headerindent{
+		margin-left: 5px;
+	}
+
+
+/***************
+* IE6 Hackstuff
+***************/
+
+	* html #banner{
+		width: 1005px;
+		height: 78px;
+	}
+	
+	* html #bannerRight{
+		width: 120px;
+		height: 60px;		
+	}
+
+	* html #nav{
+		width: 99%;
+		height: 250px;
+		background: #000;
+		padding-left: 5px;
+	}
+	
+	* html .navTable{
+		width: 95%;
+	}

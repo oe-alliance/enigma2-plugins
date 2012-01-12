@@ -412,6 +412,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.onChangedEntry = []
 
 		# We might need to change shown items, so add some notifiers
+		self.justplay.addNotifier(self.reloadList, initial_call = False)
 		self.timespan.addNotifier(self.reloadList, initial_call = False)
 		self.timeframe.addNotifier(self.reloadList, initial_call = False)
 		self.offset.addNotifier(self.reloadList, initial_call = False)

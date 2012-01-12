@@ -1,6 +1,7 @@
-from Plugins.Extensions.WebInterface.WebComponents.Sources.Timer import Timer
+irom Plugins.Extensions.WebInterface.WebComponents.Sources.Timer import Timer
+from Plugins.SystemPlugins.vps.Vps import vps_timers
+import time
 
-# TODO: add "checksoon"-support (check begin when adding a vps-enabled timer)
 class Vps(Timer):
 	def addTimerByEventID(self, param):
 		state, statetext = Timer.addTimerByEventID(self, param)
@@ -24,6 +25,10 @@ class Vps(Timer):
 					timer.vpsplugin_enabled = vpsplugin_enabled
 					timer.vpsplugin_overwrite = vpsplugin_overwrite
 					timer.vpsplugin_time = vpsplugin_time
+
+					now = int(time.time())
+					if vps_enabled and timer.begin <= now + 900 and now <= timer.end:
+						vps_timers.checksoon()
 					break
 		return state, statetext
 
@@ -55,6 +60,10 @@ class Vps(Timer):
 					timer.vpsplugin_enabled = vpsplugin_enabled
 					timer.vpsplugin_overwrite = vpsplugin_overwrite
 					timer.vpsplugin_time = vpsplugin_time
+
+					now = int(time.time())
+					if vps_enabled and begin <= now + 900 and now <= end:
+						vps_timers.checksoon()
 					break
 		return state, statetext
 

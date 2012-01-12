@@ -116,6 +116,12 @@ autotimer/Makefile
 autotimer/meta/Makefile
 autotimer/po/Makefile
 autotimer/src/Makefile
+autotimer/src/WebChilds/Makefile
+autotimer/src/WebComponents/Makefile
+autotimer/src/WebComponents/Sources/Makefile
+autotimer/src/WebScreens/Makefile
+autotimer/src/web/Makefile
+autotimer/src/web-data/Makefile
 autotimer/src/webinterface/Makefile
 
 babelzapper/etc/Makefile
@@ -497,6 +503,7 @@ SubsDownloader2/src/SourceCode/periscope/services/BierDopje/Makefile
 SubsDownloader2/src/SourceCode/periscope/services/OpenSubtitle/Makefile
 SubsDownloader2/src/SourceCode/xbmc_subtitles/Makefile
 SubsDownloader2/src/SourceCode/xbmc_subtitles/services/Makefile
+SubsDownloader2/src/SourceCode/xbmc_subtitles/services/Napisyme/Makefile
 
 svdrp/Makefile
 svdrp/meta/Makefile

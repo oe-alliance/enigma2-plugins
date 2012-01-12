@@ -7,11 +7,13 @@ try:
 	from urllib import unquote
 except ImportError as ie:
 	from urllib.parse import unquote
+from ServiceReference import ServiceReference
+from Tools.XMLTools import stringToXML
 from enigma import eServiceReference
 from . import _, iteritems
 from . import plugin
 
-API_VERSION = "1.1"
+API_VERSION = "1.2"
 
 class AutoTimerBaseResource(resource.Resource):
 	_remove = False
@@ -38,10 +40,10 @@ class AutoTimerBaseResource(resource.Resource):
 	<e2statetext>%s</e2statetext>
 </e2simplexmlresult>""" % ('True' if state else 'False', statetext)
 
-
 class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def render(self, req):
 		autotimer = self.getAutoTimerInstance()
+
 		ret = autotimer.parseEPG()
 		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5]))
 
@@ -49,6 +51,34 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 			autotimer.writeXml()
 
 		return self.returnResult(req, True, output)
+
+class AutoTimerSimulateResource(AutoTimerBaseResource):
+	def render(self, req):
+		autotimer = self.getAutoTimerInstance()
+
+		ret = autotimer.parseEPG(simulateOnly=True)
+
+		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
+		extend = returnlist.extend
+
+		for (name, begin, end, serviceref, autotimername) in ret[3]:
+			ref = ServiceReference(str(serviceref))
+			extend((
+				'<e2simulatedtimer>\n'
+				'   <e2servicereference>', stringToXML(serviceref), '</e2servicereference>\n',
+				'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
+				'   <e2name>', stringToXML(name), '</e2name>\n',
+				'   <e2timebegin>', str(begin), '</e2timebegin>\n',
+				'   <e2timeend>', str(end), '</e2timeend>\n',
+				'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n'
+				'</e2simulatedtimer>\n'
+			))
+		returnlist.append('</e2autotimersimulate>')
+
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application/xhtml+xml')
+		req.setHeader('charset', 'UTF-8')
+		return ''.join(returnlist)
 
 class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
@@ -207,8 +237,14 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 						"standby": AFTEREVENT.STANDBY,
 						"auto": AFTEREVENT.AUTO
 					}.get(afterevent, AFTEREVENT.AUTO)
-				# TODO: add afterevent timespan
-				timer.afterevent = [(afterevent, None)]
+				start = get("aftereventFrom")
+				end = get("aftereventTo")
+				if start and end:
+					start = [int(x) for x in start.split(':')]
+					end = [int(x) for x in end.split(':')]
+					timer.afterevent = [(afterevent, (start, end))]
+				else:
+					timer.afterevent = [(afterevent, None)]
 
 		# Maxduration
 		maxduration = get("maxduration")
@@ -267,6 +303,20 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		timer.avoidDuplicateDescription = int(get("avoidDuplicateDescription", timer.avoidDuplicateDescription))
 		timer.searchForDuplicateDescription = int(get("searchForDuplicateDescription", timer.searchForDuplicateDescription))
 		timer.destination = get("location", timer.destination) or None
+
+		# vps
+		enabled = get("vps_enabled")
+		if enabled is not None:
+			try: enabled = int(enabled)
+			except ValueError: enabled = enabled == "yes"
+			timer.vps_enabled = enabled
+		vps_overwrite = get("vps_overwrite")
+		if vps_overwrite is not None:
+			try: vps_overwrite = int(vps_overwrite)
+			except ValueError: vps_overwrite = vps_overwrite == "yes"
+			timer.vps_overwrite = vps_overwrite
+		if not timer.vps_enabled and timer.vps_overwrite:
+			timer.vps_overwrite = False
 
 		if newTimer:
 			autotimer.add(timer)
@@ -399,6 +449,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingname>version</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
+	<e2setting>
+		<e2settingname>api_version</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
 </e2settings>""" % (
 				config.plugins.autotimer.autopoll.value,
 				config.plugins.autotimer.interval.value,
@@ -414,4 +468,5 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.maxdaysinfuture.value,
 				hasVps,
 				CURRENT_CONFIG_VERSION,
+				API_VERSION,
 			)
