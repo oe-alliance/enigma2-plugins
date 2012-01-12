@@ -831,22 +831,24 @@ var AutoTimerEditController = Class.create(Controller, {
 		var notshortdescription = [];
 		var notdescription = [];
 		var notdayofweek = [];
-		$$('.filter').each(function(element){
-			if (element.lastElementChild.className != 'add'){
-				var where = element.children[1].firstElementChild.value;
-				if (element.children[0].firstElementChild.value == 'include'){
-					if (where == 'title' ) title.push(element.children[2].firstElementChild.value);
-					if (where == 'shortdescription' ) shortdescription.push(element.children[2].firstElementChild.value);
-					if (where == 'description' ) description.push(element.children[2].firstElementChild.value);
-					if (where == 'dayofweek' ) dayofweek.push(element.children[2].lastElementChild.value);
-				} else{
-					if (where == 'title' ) nottitle.push(element.children[2].firstElementChild.value);
-					if (where == 'shortdescription' ) notshortdescription.push(element.children[2].firstElementChild.value);
-					if (where == 'description' ) notdescription.push(element.children[2].firstElementChild.value);
-					if (where == 'dayofweek' ) notdayofweek.push(element.children[2].lastElementChild.value);
+		if ($('usefilters').checked){
+			$$('.filter').each(function(element){
+				if (element.lastElementChild.className != 'add'){
+					var where = element.children[1].firstElementChild.value;
+					if (element.children[0].firstElementChild.value == 'include'){
+						if (where == 'title' ) title.push(element.children[2].firstElementChild.value);
+						if (where == 'shortdescription' ) shortdescription.push(element.children[2].firstElementChild.value);
+						if (where == 'description' ) description.push(element.children[2].firstElementChild.value);
+						if (where == 'dayofweek' ) dayofweek.push(element.children[2].lastElementChild.value);
+					} else{
+						if (where == 'title' ) nottitle.push(element.children[2].firstElementChild.value);
+						if (where == 'shortdescription' ) notshortdescription.push(element.children[2].firstElementChild.value);
+						if (where == 'description' ) notdescription.push(element.children[2].firstElementChild.value);
+						if (where == 'dayofweek' ) notdayofweek.push(element.children[2].lastElementChild.value);
+					}
 				}
-			}
-		});
+			});
+		}
 		if (title.length > 0){
 			data['title'] = title;
 		}else{
@@ -889,21 +891,25 @@ var AutoTimerEditController = Class.create(Controller, {
 		}
 		
 		var bouquets = [];
-		$$('.bouquet').each(function(element){
-			if (element.lastElementChild.className != 'add'){
-				var select = element.children[0].firstElementChild;
-				bouquets.push( select.value );
-			}
-		});
+		if ($('usebouquets').checked){
+			$$('.bouquet').each(function(element){
+				if (element.lastElementChild.className != 'add'){
+					var select = element.children[0].firstElementChild;
+					bouquets.push( select.value );
+				}
+			});
+		}
 		data['bouquets'] = bouquets.join(',');
 		
 		var services = [];
-		$$('.service').each(function(element){
-			if (element.lastElementChild.className != 'add'){
-				var select = element.children[1].firstElementChild;
-				services.push( select.value );
-			}
-		});
+		if ($('useservices').checked){
+			$$('.service').each(function(element){
+				if (element.lastElementChild.className != 'add'){
+					var select = element.children[1].firstElementChild;
+					services.push( select.value );
+				}
+			});
+		}
 		data['services'] = services.join(',');
 		
 		if ($('vps_enabled').checked){
