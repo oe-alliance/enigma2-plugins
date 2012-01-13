@@ -90,7 +90,7 @@ SUBDIRS = \
 	simplerss \
 	startupservice \
 	startuptostandby \
-	SubsDownloader2 \
+	subsdownloader2 \
 	svdrp \
 	tageditor \
 	trafficinfo \
