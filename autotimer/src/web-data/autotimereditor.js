@@ -538,6 +538,7 @@ var AutoTimerEditController = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
+		$('headerautotimercontent').innerHTML = "AutoTimer Editor: " + $('name').value + " (" + this.id + ")" 
 		this.onchangeSelect( $('justplay') );
 		this.onchangeCheckbox( $('timespan') );
 		this.onchangeCheckbox( $('timeframe') );
@@ -1123,6 +1124,7 @@ var AutoTimerPreviewController = Class.create(Controller, {
 	
 	onFinished: function(){
 		$('list').selectedIndex=-1;
+		$('headerautotimercontent').innerHTML = "AutoTimer Preview:"
 	},
 	
 	registerEvents: function(){
@@ -1265,7 +1267,7 @@ var AutoTimerEditHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplAutoTimerEdit', target);
 		this.provider = new AutoTimerEditProvider(this.show.bind(this));
-		this.ajaxload = false;
+		this.ajaxload = true;
 	},
 	
 	load: function( id ){
