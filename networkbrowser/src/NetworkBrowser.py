@@ -217,9 +217,9 @@ class NetworkBrowser(Screen):
 		self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
 		if len(self.IP):
 			strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
-			nwlist.append(netscan.netzInfo(strIP))
-		tmplist = nwlist[0]
-		return tmplist
+			nm = ipscan.PortScanner()
+			nwlist = nm.ipscan(strIP)
+		return nwlist
 
 	def getNetworkShares(self,hostip,hostname,devicetype):
 		sharelist = []
