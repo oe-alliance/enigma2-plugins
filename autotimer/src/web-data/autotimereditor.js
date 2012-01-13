@@ -157,7 +157,17 @@ function getAttribute(xml, key, defaults){
 ///////////////////////////////////////////////////////////////////////////////
 // AutoTimerEditorCore
 var AutoTimerEditorCore = Class.create({
-	initialize: function(){
+	initialize: function(name, servicename, servicereference, from, to){
+		this.newautotimer = {
+			'enabled' : 'yes',
+			'name' : name,
+			'match' : name,
+			'from' : from,
+			'to' : to,
+			'e2servicename' : servicename,
+			'e2servicereference' : servicereference,
+		}
+		
 		// Instantiate all elements
 		this.services = new AutoTimerServiceController();
 		this.settings = new AutoTimerSettingsController
@@ -208,7 +218,13 @@ var AutoTimerEditorCore = Class.create({
 	
 	loadFourth: function(){
 		// At fourth load and display autotimer list
-		this.list.load();
+		if (this.newautotimer.name!=''){
+			// Load autotimer list and show a new autotimer
+			this.list.loadNew();
+		}else{
+			// Load autotimer list and select the first autotimer
+			this.list.load();
+		}
 	},
 });
 
@@ -413,7 +429,12 @@ var AutoTimerListController = Class.create(Controller, {
 	load: function(){
 		this.handler.load({});
 	},
-	
+
+	loadNew: function(){
+		this.select = -1;
+		this.handler.load({});
+	},
+
 	onFinished: function(){
 		this.onChange();
 	},
@@ -431,19 +452,29 @@ var AutoTimerListController = Class.create(Controller, {
 					}
 				}
 				this.select = null;
-			}
-			var idx = selectList.selectedIndex;
-			if (idx < 0){
-				// Select at least the first element
-				idx = 0;
-				selectOptions[idx].selected = true;
+			}else{
+				var idx = selectList.selectedIndex;
+				if (idx < 0){
+					// Select at least the first element
+					idx = 0;
+					selectOptions[idx].selected = true;
+				}
 			}
 
 			// Update editor
-			var id = unescape(selectList.options[idx].value); 
-			autotimereditorcore.edit.load( id );
+			idx = selectList.selectedIndex;
+			if (idx >= 0){
+				// Load autotimer
+				var id = unescape(selectList.options[idx].value); 
+				autotimereditorcore.edit.load( id );
+			}else{
+				// Show empty editor for new AutoTimer
+				autotimereditorcore.edit.load( -1 );
+			}
+		
 		} else if (selectOptions.length == 0){
-			//TODO TEST we should see an empty editor page?
+			// Show empty editor for new AutoTimer
+			autotimereditorcore.edit.load( -1 );
 		}
 	},
 	
@@ -465,10 +496,8 @@ var AutoTimerListController = Class.create(Controller, {
 	add: function(){
 		this.match = prompt("Name for the new AutoTimer:");
 		if (this.match.length){
-			var selectList = $('list');
-			var selectOptions = selectList.getElementsByTagName('option');
 			// Retrieve next selected entry
-			this.select = selectOptions.length+1;
+			this.select = $('list').length+1;
 			// Add new AutoTimer: Use edit without an id
 			this.handler.add( 
 				{'match' : this.match},
@@ -477,22 +506,25 @@ var AutoTimerListController = Class.create(Controller, {
 				}.bind(this));
 		}
 	},
-	
+		
 	remove: function(){
 		var selectList = $('list');
 		var selectOptions = selectList.getElementsByTagName('option');
 		var idx = selectList.selectedIndex; 
 		var id = unescape(selectOptions[idx].value);
 		// Retrieve next selected entry
+		var select = -1;
 		if ( selectOptions.length > 0){
 			if ( selectOptions.length > (idx+1)){
-				this.select = unescape(selectOptions[idx+1].value);
+				select = unescape(selectOptions[idx+1].value);
 			} else if ( (idx-1) > 0 ){
-				this.select = unescape(selectOptions[idx-1].value);
+				select = unescape(selectOptions[idx-1].value);
 			}
+			select = select<parseInt(id) ? select : select-1;
 		}
 		var check = confirm("Do you really want to delete the AutoTimer\n" + selectList.options[idx].text + " ?");
 		if (check == true){
+			this. select = select;
 			this.handler.remove(
 				{'id' : id},
 				function(request){
@@ -538,7 +570,8 @@ var AutoTimerEditController = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
-		$('headerautotimercontent').innerHTML = "AutoTimer Editor: " + $('name').value + " (" + this.id + ")" 
+		var id = this.id>0 ? this.id : 'new';
+		$('headerautotimercontent').innerHTML = "AutoTimer Editor: " + $('name').value + " (" + id + ")";
 		this.onchangeSelect( $('justplay') );
 		this.onchangeCheckbox( $('timespan') );
 		this.onchangeCheckbox( $('timeframe') );
@@ -719,8 +752,9 @@ var AutoTimerEditController = Class.create(Controller, {
 		var data = {}
 		var selectList = $('list');
 		var idx = selectList.selectedIndex;
-		data['id'] = unescape(selectList.options[idx].value);
-		
+		if (idx>=0){
+			data['id'] = unescape(selectList.options[idx].value);
+		}
 		data['enabled'] = ($('enabled').checked) ? '1' : '0';
 		
 		options = ['match','name','encoding','searchType','searchCase','justplay','avoidDuplicateDescription'];
@@ -948,8 +982,15 @@ var AutoTimerEditController = Class.create(Controller, {
 		//autotimereditorcore.list.reload();
 		var selectList = $('list');
 		var idx = selectList.selectedIndex;
-		selectList.options[idx].text = '\u00A0' + $('name').value; // &nbsp;
-		this.reload();
+		if (idx>=0){
+			// User changed an existing autotimer
+			selectList.options[idx].text = '\u00A0' + $('name').value; // &nbsp;
+			this.reload();
+		}else{
+			// User added a new autotimer
+			autotimereditorcore.list.select = $('list').length+1;
+			autotimereditorcore.list.load();
+		}
 	},
 	
 	cancel: function() {
@@ -1123,8 +1164,8 @@ var AutoTimerPreviewController = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
-		$('list').selectedIndex=-1;
-		$('headerautotimercontent').innerHTML = "AutoTimer Preview:"
+		$('list').selectedIndex = -1;
+		$('headerautotimercontent').innerHTML = "AutoTimer Preview:";
 	},
 	
 	registerEvents: function(){
@@ -1481,6 +1522,18 @@ function AutoTimerEdit(xml, id){
 				this.autotimer = new AutoTimer(this.xmlitems.item(i), this.defaults).toJSON();
 				break;
 			}
+		}
+		if (this.autotimer==null){
+			// Create empty AutoTimer with default values
+			var newautotimer = autotimereditorcore.newautotimer;
+			var timer = new Element('timer', newautotimer);
+			var e2service = new Element('e2service');
+			var e2servicename = new Element('e2servicename').update(newautotimer.e2servicename)
+			var e2servicereference = new Element('e2servicereference').update(newautotimer.e2servicereference);
+			e2service.appendChild( e2servicename );
+			e2service.appendChild( e2servicereference );
+			timer.appendChild( e2service );
+			this.autotimer = new AutoTimer(timer, this.defaults).toJSON();
 		}
 		return this.autotimer;
 	};

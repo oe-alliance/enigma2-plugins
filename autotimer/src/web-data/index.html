@@ -98,7 +98,27 @@
 	</div>
 
 	<script language="JavaScript">
-		autotimereditorcore = new AutoTimerEditorCore();
+		
+		// Read get parameters
+		HTTP_GET_VARS=new Array();
+		strGET=document.location.search.substr(1,document.location.search.length);
+		if(strGET!=''){
+	    gArr=strGET.split('&');
+	    for(i=0;i<gArr.length;++i){
+	      v='';vArr=gArr[i].split('=');
+	      if(vArr.length>1){v=vArr[1];}
+	      HTTP_GET_VARS[unescape(vArr[0])]=unescape(v);
+		  }
+		}
+		 
+		function GET(v){
+			if(!HTTP_GET_VARS[v]){return '';}
+			return HTTP_GET_VARS[v];
+		}
+		
+		// Instantiate the AutotimerEditor
+		autotimereditorcore = new AutoTimerEditorCore(GET('name'), GET('servicename'), GET('servicereference'), GET('from'), GET('to'));
+		
 	</script>
 
 </body>
