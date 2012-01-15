@@ -25,11 +25,6 @@ $(PLUGIN).pot: $(PLUGIN)-py.pot $(PLUGIN)-xml.pot
 	else \
 		$(MSGINIT) -l $@ -o $@ -i $< --no-translator; \
 	fi
-	if [ -f $@.pre ]; then \
-		$(MSGMERGE) --backup=none --no-location -s -N -U $@.pre $< && touch $@.pre; \
-	else \
-		$(MSGINIT) -l $@ -o $@.pre -i $< --no-translator; \
-	fi
 endif
 
 .po.mo:
@@ -45,7 +40,7 @@ install-data-local: $(LANGMO)
 		$(mkinstalldirs) $(DESTDIR)$(plugindir)/locale/$$lang/LC_MESSAGES; \
 		$(INSTALL_DATA) $$lang.mo $(DESTDIR)$(plugindir)/locale/$$lang/LC_MESSAGES/$(PLUGIN).mo; \
 		$(mkinstalldirs) $(DESTDIR)$(datadir)/po; \
-		$(INSTALL_DATA) $$lang.po.pre $(DESTDIR)$(datadir)/po/$(PLUGIN)-$$lang.po; \
+		$(INSTALL_DATA) $$lang.po $(DESTDIR)$(datadir)/po/$(PLUGIN)-$$lang.po; \
 	done
 
 uninstall-local:
