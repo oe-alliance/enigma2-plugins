@@ -20,6 +20,7 @@ from time import time
 from stat import ST_MTIME
 
 import netscan
+import ipscan
 from MountManager import AutoMountManager
 from AutoMount import iAutoMount
 from MountEdit import AutoMountEdit
@@ -237,7 +238,6 @@ class NetworkBrowser(Screen):
 		else:
 			username = "username"
 			password = "password"
-
 		if devicetype == 'unix':
 			smblist=netscan.smbShare(hostip,hostname,username,password)
 			for x in smblist:
