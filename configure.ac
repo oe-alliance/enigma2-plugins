@@ -189,10 +189,6 @@ emailclient/meta/Makefile
 emailclient/po/Makefile
 emailclient/src/Makefile
 
-#emission/Makefile
-#emission/meta/Makefile
-#emission/src/Makefile
-
 epgrefresh/Makefile
 epgrefresh/meta/Makefile
 epgrefresh/po/Makefile
@@ -286,10 +282,6 @@ mediadownloader/meta/Makefile
 mediadownloader/po/Makefile
 mediadownloader/src/Makefile
 
-#menusort/Makefile
-#menusort/meta/Makefile
-#menusort/src/Makefile
-
 merlinepg/Makefile
 merlinepg/meta/Makefile
 merlinepg/src/Makefile
@@ -327,10 +319,6 @@ moviecut/meta/Makefile
 moviecut/src_cc/Makefile
 moviecut/src_py/Makefile
 
-#movieepg/Makefile
-#movieepg/meta/Makefile
-#movieepg/src/Makefile
-
 movieretitle/Makefile
 movieretitle/meta/Makefile
 movieretitle/po/Makefile
@@ -363,11 +351,6 @@ mytube/Makefile
 mytube/meta/Makefile
 mytube/po/Makefile
 mytube/src/Makefile
-
-#namezap/Makefile
-#namezap/meta/Makefile
-#namezap/po/Makefile
-#namezap/src/Makefile
 
 ncidclient/Makefile
 ncidclient/meta/Makefile
@@ -416,20 +399,6 @@ permanentclock/src/Makefile
 pipservicerelation/Makefile
 pipservicerelation/src/Makefile
 pipservicerelation/meta/Makefile
-
-#pipzap/Makefile
-#pipzap/meta/Makefile
-#pipzap/src/Makefile
-
-#pluginhider/Makefile
-#pluginhider/meta/Makefile
-#pluginhider/po/Makefile
-#pluginhider/src/Makefile
-
-#pluginsort/Makefile
-#pluginsort/meta/Makefile
-#pluginsort/po/Makefile
-#pluginsort/src/Makefile
 
 podcast/Makefile
 podcast/etc/Makefile
