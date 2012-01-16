@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 650 $
-$Date: 2011-07-03 16:23:41 +0200 (So, 03 Jul 2011) $
-$Id: plugin.py 650 2011-07-03 14:23:41Z michael $
+$Revision: 660 $
+$Date: 2011-12-10 21:35:47 +0100 (Sat, 10 Dec 2011) $
+$Id: plugin.py 660 2011-12-10 20:35:47Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -292,8 +292,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 650 $"[1:-2] + "\n" + 
-							"$Date: 2011-07-03 16:23:41 +0200 (So, 03 Jul 2011) $"[1:23] + "\n"
+							"$Revision: 660 $"[1:-2] + "\n" + 
+							"$Date: 2011-12-10 21:35:47 +0100 (Sat, 10 Dec 2011) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1212,7 +1212,7 @@ class FritzCallFBF:
 		found = re.match('.*"dsl_carrier_state": "(\d+)"', html, re.S)
 		if found:
 			# debug("[FritzCallFBF] _okSetDslState: dsl_carrier_state: " + found.group(1))
-			dslState = [ found.group(1), None ]
+			dslState = [ found.group(1), "" ]
 			found = re.match('.*"dsl_ds_nrate": "(\d+)"', html, re.S)
 			if found:
 				# debug("[FritzCallFBF] _okSetDslState: dsl_ds_nrate: " + found.group(1))
@@ -1707,7 +1707,7 @@ class FritzMenu(Screen, HelpableScreen):
 					else:
 						self["FBFMailbox"].setText(str(tamActive[0]) + ' ' + _('mailboxes active') + ' ' + message)
 	
-			if fritzbox.info[FBF_dectActive] and dectActive:
+			if fritzbox.info[FBF_dectActive] and dectActive and self.has_key("dect_inactive"):
 				self["dect_inactive"].hide()
 				self["dect_active"].show()
 				if dectActive == 0:
@@ -2721,7 +2721,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 650 $"[1: - 1] + "$Date: 2011-07-03 16:23:41 +0200 (So, 03 Jul 2011) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 660 $"[1: - 1] + "$Date: 2011-12-10 21:35:47 +0100 (Sat, 10 Dec 2011) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2958,7 +2958,7 @@ def findFace(number, name):
 class MessageBoxPixmap(Screen):
 	def __init__(self, session, text, number = "", name = "", timeout = -1):
 		self.skin = """
-	<screen name="MessageBoxPixmap" position="center,center" size="600,10" title="MessageBoxPixmap">
+	<screen name="MessageBoxPixmap" position="center,center" size="600,10" title="New Call">
 		<widget name="text" position="115,8" size="520,0" font="Regular;%d" />
 		<widget name="InfoPixmap" pixmap="%s" position="5,5" size="100,100" alphatest="on" />
 	</screen>
@@ -2988,6 +2988,8 @@ class MessageBoxPixmap(Screen):
 	def _finishLayout(self):
 		# pylint: disable=W0142
 		debug("[FritzCall] MessageBoxPixmap/setInfoPixmap number: %s/%s" % (self._number, self._name))
+
+		self.setTitle(_("New call"))
 
 		faceFile = findFace(self._number, self._name)
 		picPixmap = LoadPixmap(faceFile)
@@ -3185,7 +3187,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 650 $"[1:-1]	+ "$Date: 2011-07-03 16:23:41 +0200 (So, 03 Jul 2011) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 660 $"[1:-1]	+ "$Date: 2011-12-10 21:35:47 +0100 (Sat, 10 Dec 2011) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

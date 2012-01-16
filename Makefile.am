@@ -72,8 +72,7 @@ SUBDIRS = \
 	shoutcast \
 	showclock \
 	simplerss \
-	startupservice \
-	SubsDownloader2 \
+	subsdownloader2 \
 	svdrp \
 	tageditor \
 	trafficinfo \

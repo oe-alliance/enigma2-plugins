@@ -157,7 +157,17 @@ function getAttribute(xml, key, defaults){
 ///////////////////////////////////////////////////////////////////////////////
 // AutoTimerEditorCore
 var AutoTimerEditorCore = Class.create({
-	initialize: function(){
+	initialize: function(name, servicename, servicereference, from, to){
+		this.newautotimer = {
+			'enabled' : 'yes',
+			'name' : name,
+			'match' : name,
+			'from' : from,
+			'to' : to,
+			'e2servicename' : servicename,
+			'e2servicereference' : servicereference,
+		}
+		
 		// Instantiate all elements
 		this.services = new AutoTimerServiceController();
 		this.settings = new AutoTimerSettingsController
@@ -208,7 +218,13 @@ var AutoTimerEditorCore = Class.create({
 	
 	loadFourth: function(){
 		// At fourth load and display autotimer list
-		this.list.load();
+		if (this.newautotimer.name!=''){
+			// Load autotimer list and show a new autotimer
+			this.list.loadNew();
+		}else{
+			// Load autotimer list and select the first autotimer
+			this.list.load();
+		}
 	},
 });
 
@@ -257,7 +273,7 @@ var AutoTimerMenuController  = Class.create(Controller, {
 	},
 	
 	back: function(){
-		window.location = window.location.origin;
+		window.location = window.location.protocol + "//" + window.location.hostname;
 	},
 	
 	load: function(){
@@ -413,7 +429,12 @@ var AutoTimerListController = Class.create(Controller, {
 	load: function(){
 		this.handler.load({});
 	},
-	
+
+	loadNew: function(){
+		this.select = -1;
+		this.handler.load({});
+	},
+
 	onFinished: function(){
 		this.onChange();
 	},
@@ -431,38 +452,52 @@ var AutoTimerListController = Class.create(Controller, {
 					}
 				}
 				this.select = null;
-			}
-			var idx = selectList.selectedIndex;
-			if (idx < 0){
-				// Select at least the first element
-				idx = 0;
-				selectOptions[idx].selected = true;
+			}else{
+				var idx = selectList.selectedIndex;
+				if (idx < 0){
+					// Select at least the first element
+					idx = 0;
+					selectOptions[idx].selected = true;
+				}
 			}
 
 			// Update editor
-			var id = unescape(selectList.options[idx].value); 
-			autotimereditorcore.edit.load( id );
+			idx = selectList.selectedIndex;
+			if (idx >= 0){
+				// Load autotimer
+				var id = unescape(selectList.options[idx].value); 
+				autotimereditorcore.edit.load( id );
+			}else{
+				// Show empty editor for new AutoTimer
+				autotimereditorcore.edit.load( -1 );
+			}
+		
 		} else if (selectOptions.length == 0){
-			//TODO TEST we should see an empty editor page?
+			// Show empty editor for new AutoTimer
+			autotimereditorcore.edit.load( -1 );
 		}
 	},
 	
 	reload: function(){
 		this.select = $('list').value;
+		$('contentAutoTimerContent').update('<div></div>');
 		this.load();
 	},
 	
 	parse: function(){
-		this.handler.parse({}, this.reload.bind(this));
+		this.handler.parse({}, this.parseCallback.bind(this));
+	},
+	parseCallback: function(){
+		if ($('list').value){
+			autotimereditorcore.edit.reload();
+		}
 	},
 	
 	add: function(){
 		this.match = prompt("Name for the new AutoTimer:");
 		if (this.match.length){
-			var selectList = $('list');
-			var selectOptions = selectList.getElementsByTagName('option');
 			// Retrieve next selected entry
-			this.select = selectOptions.length+1;
+			this.select = $('list').length+1;
 			// Add new AutoTimer: Use edit without an id
 			this.handler.add( 
 				{'match' : this.match},
@@ -471,22 +506,25 @@ var AutoTimerListController = Class.create(Controller, {
 				}.bind(this));
 		}
 	},
-	
+		
 	remove: function(){
 		var selectList = $('list');
 		var selectOptions = selectList.getElementsByTagName('option');
 		var idx = selectList.selectedIndex; 
 		var id = unescape(selectOptions[idx].value);
 		// Retrieve next selected entry
+		var select = -1;
 		if ( selectOptions.length > 0){
 			if ( selectOptions.length > (idx+1)){
-				this.select = unescape(selectOptions[idx+1].value);
+				select = unescape(selectOptions[idx+1].value);
 			} else if ( (idx-1) > 0 ){
-				this.select = unescape(selectOptions[idx-1].value);
+				select = unescape(selectOptions[idx-1].value);
 			}
+			select = select<parseInt(id) ? select : select-1;
 		}
 		var check = confirm("Do you really want to delete the AutoTimer\n" + selectList.options[idx].text + " ?");
 		if (check == true){
+			this. select = select;
 			this.handler.remove(
 				{'id' : id},
 				function(request){
@@ -532,6 +570,8 @@ var AutoTimerEditController = Class.create(Controller, {
 	},
 	
 	onFinished: function(){
+		var id = this.id>0 ? this.id : 'new';
+		$('headerautotimercontent').innerHTML = "AutoTimer Editor: " + $('name').value + " (" + id + ")";
 		this.onchangeSelect( $('justplay') );
 		this.onchangeCheckbox( $('timespan') );
 		this.onchangeCheckbox( $('timeframe') );
@@ -712,8 +752,9 @@ var AutoTimerEditController = Class.create(Controller, {
 		var data = {}
 		var selectList = $('list');
 		var idx = selectList.selectedIndex;
-		data['id'] = unescape(selectList.options[idx].value);
-		
+		if (idx>=0){
+			data['id'] = unescape(selectList.options[idx].value);
+		}
 		data['enabled'] = ($('enabled').checked) ? '1' : '0';
 		
 		options = ['match','name','encoding','searchType','searchCase','justplay','avoidDuplicateDescription'];
@@ -831,22 +872,24 @@ var AutoTimerEditController = Class.create(Controller, {
 		var notshortdescription = [];
 		var notdescription = [];
 		var notdayofweek = [];
-		$$('.filter').each(function(element){
-			if (element.lastElementChild.className != 'add'){
-				var where = element.children[1].firstElementChild.value;
-				if (element.children[0].firstElementChild.value == 'include'){
-					if (where == 'title' ) title.push(element.children[2].firstElementChild.value);
-					if (where == 'shortdescription' ) shortdescription.push(element.children[2].firstElementChild.value);
-					if (where == 'description' ) description.push(element.children[2].firstElementChild.value);
-					if (where == 'dayofweek' ) dayofweek.push(element.children[2].lastElementChild.value);
-				} else{
-					if (where == 'title' ) nottitle.push(element.children[2].firstElementChild.value);
-					if (where == 'shortdescription' ) notshortdescription.push(element.children[2].firstElementChild.value);
-					if (where == 'description' ) notdescription.push(element.children[2].firstElementChild.value);
-					if (where == 'dayofweek' ) notdayofweek.push(element.children[2].lastElementChild.value);
+		if ($('usefilters').checked){
+			$$('.filter').each(function(element){
+				if (element.lastElementChild.className != 'add'){
+					var where = element.children[1].firstElementChild.value;
+					if (element.children[0].firstElementChild.value == 'include'){
+						if (where == 'title' ) title.push(element.children[2].firstElementChild.value);
+						if (where == 'shortdescription' ) shortdescription.push(element.children[2].firstElementChild.value);
+						if (where == 'description' ) description.push(element.children[2].firstElementChild.value);
+						if (where == 'dayofweek' ) dayofweek.push(element.children[2].lastElementChild.value);
+					} else{
+						if (where == 'title' ) nottitle.push(element.children[2].firstElementChild.value);
+						if (where == 'shortdescription' ) notshortdescription.push(element.children[2].firstElementChild.value);
+						if (where == 'description' ) notdescription.push(element.children[2].firstElementChild.value);
+						if (where == 'dayofweek' ) notdayofweek.push(element.children[2].lastElementChild.value);
+					}
 				}
-			}
-		});
+			});
+		}
 		if (title.length > 0){
 			data['title'] = title;
 		}else{
@@ -889,21 +932,25 @@ var AutoTimerEditController = Class.create(Controller, {
 		}
 		
 		var bouquets = [];
-		$$('.bouquet').each(function(element){
-			if (element.lastElementChild.className != 'add'){
-				var select = element.children[0].firstElementChild;
-				bouquets.push( select.value );
-			}
-		});
+		if ($('usebouquets').checked){
+			$$('.bouquet').each(function(element){
+				if (element.lastElementChild.className != 'add'){
+					var select = element.children[0].firstElementChild;
+					bouquets.push( select.value );
+				}
+			});
+		}
 		data['bouquets'] = bouquets.join(',');
 		
 		var services = [];
-		$$('.service').each(function(element){
-			if (element.lastElementChild.className != 'add'){
-				var select = element.children[1].firstElementChild;
-				services.push( select.value );
-			}
-		});
+		if ($('useservices').checked){
+			$$('.service').each(function(element){
+				if (element.lastElementChild.className != 'add'){
+					var select = element.children[1].firstElementChild;
+					services.push( select.value );
+				}
+			});
+		}
 		data['services'] = services.join(',');
 		
 		if ($('vps_enabled').checked){
@@ -932,7 +979,18 @@ var AutoTimerEditController = Class.create(Controller, {
 		this.handler.save( this.saveurl, this.saveCallback.bind(this) );
 	},
 	saveCallback: function() {
-		autotimereditorcore.list.reload();
+		//autotimereditorcore.list.reload();
+		var selectList = $('list');
+		var idx = selectList.selectedIndex;
+		if (idx>=0){
+			// User changed an existing autotimer
+			selectList.options[idx].text = '\u00A0' + $('name').value; // &nbsp;
+			this.reload();
+		}else{
+			// User added a new autotimer
+			autotimereditorcore.list.select = $('list').length+1;
+			autotimereditorcore.list.load();
+		}
 	},
 	
 	cancel: function() {
@@ -1102,11 +1160,12 @@ var AutoTimerPreviewController = Class.create(Controller, {
 	},
 	
 	load: function(){
-		this.handler.load();
+		this.handler.load({});
 	},
 	
 	onFinished: function(){
-		$('list').selectedIndex=-1;
+		$('list').selectedIndex = -1;
+		$('headerautotimercontent').innerHTML = "AutoTimer Preview:";
 	},
 	
 	registerEvents: function(){
@@ -1253,6 +1312,8 @@ var AutoTimerEditHandler = Class.create(AbstractContentHandler, {
 	},
 	
 	load: function( id ){
+		this.requestStarted();
+		this.parms = id;
 		this.provider.load( id );
 	},
 	
@@ -1274,10 +1335,6 @@ var AutoTimerPreviewHandler = Class.create(AbstractContentHandler, {
 		$super('tplAutoTimerPreview', target);
 		this.provider = new AutoTimerPreviewProvider(this.show.bind(this));
 		this.ajaxload = true;
-	},
-	
-	load: function(){
-		this.provider.load();
 	},
 });
 
@@ -1465,6 +1522,18 @@ function AutoTimerEdit(xml, id){
 				this.autotimer = new AutoTimer(this.xmlitems.item(i), this.defaults).toJSON();
 				break;
 			}
+		}
+		if (this.autotimer==null){
+			// Create empty AutoTimer with default values
+			var newautotimer = autotimereditorcore.newautotimer;
+			var timer = new Element('timer', newautotimer);
+			var e2service = new Element('e2service');
+			var e2servicename = new Element('e2servicename').update(newautotimer.e2servicename)
+			var e2servicereference = new Element('e2servicereference').update(newautotimer.e2servicereference);
+			e2service.appendChild( e2servicename );
+			e2service.appendChild( e2servicereference );
+			timer.appendChild( e2service );
+			this.autotimer = new AutoTimer(timer, this.defaults).toJSON();
 		}
 		return this.autotimer;
 	};

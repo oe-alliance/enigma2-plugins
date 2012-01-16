@@ -72,17 +72,53 @@
 			</div>
 		</div>
 
-		<div id="contentAutoTimerMenu"></div>
+		<div id="menu">
+			<div id="contentAutoTimerMenu"></div>
+		</div>
 
-		<div id="main" class="inline">
-			<div id="contentAutoTimerList"></div>
-			<div id="contentAutoTimerContent"></div>
+		<div id="main">
+			<div id="navContainer">
+				<div id="nav">
+					<div id="navHd" class="header">
+						<div class="headerindent">AutoTimer List</div>
+					</div>
+					<div id="contentAutoTimerList"></div>
+				</div>
+			</div>
+			<div id="contentContainer">
+				<div id="content">
+					<div id="contentHd" class="header">
+						<div id="headerautotimercontent" class="headerindent">AutoTimer</div>
+					</div>
+					<div id="contentAutoTimerContent"></div>
+				</div>
+			</div>
 		</div>
 
 	</div>
 
 	<script language="JavaScript">
-		autotimereditorcore = new AutoTimerEditorCore();
+		
+		// Read get parameters
+		HTTP_GET_VARS=new Array();
+		strGET=document.location.search.substr(1,document.location.search.length);
+		if(strGET!=''){
+	    gArr=strGET.split('&');
+	    for(i=0;i<gArr.length;++i){
+	      v='';vArr=gArr[i].split('=');
+	      if(vArr.length>1){v=vArr[1];}
+	      HTTP_GET_VARS[unescape(vArr[0])]=unescape(v);
+		  }
+		}
+		 
+		function GET(v){
+			if(!HTTP_GET_VARS[v]){return '';}
+			return HTTP_GET_VARS[v];
+		}
+		
+		// Instantiate the AutotimerEditor
+		autotimereditorcore = new AutoTimerEditorCore(GET('name'), GET('servicename'), GET('servicereference'), GET('from'), GET('to'));
+		
 	</script>
 
 </body>
