@@ -20,7 +20,6 @@ SUBDIRS = \
 	ecasa \
 	eibox \
 	emailclient \
-	emission \
 	epgrefresh \
 	epgsearch \
 	eurotictv \
@@ -37,7 +36,6 @@ SUBDIRS = \
 	lastfm \
 	letterbox \
 	mediadownloader \
-	menusort \
 	merlinepg \
 	merlinepgcenter \
 	merlinmusicplayer \
@@ -49,7 +47,6 @@ SUBDIRS = \
 	mphelp \
 	multirc \
 	mytube \
-	namezap \
 	ncidclient \
 	netcaster \
 	networkbrowser \
@@ -59,9 +56,6 @@ SUBDIRS = \
 	partnerbox \
 	permanentclock \
 	pipservicerelation \
-	pipzap \
-	pluginhider \
-	pluginsort \
 	podcast \
 	porncenter \
 	quickbutton \
