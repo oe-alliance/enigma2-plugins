@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-10-12 10:32+0100\n"
+"POT-Creation-Date: 2012-01-15 13:09+0000\n"
+"PO-Revision-Date: 2012-01-17 11:40+0100\n"
 "Last-Translator: R.L. van der Does\n"
-"Language-Team: Rob van der Does\n"
+"Language-Team: AndyBlac/Rob van der Does\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,8 +41,8 @@ msgstr "Gefeliciteerd"
 msgid "Delay if not in standby (minutes)"
 msgstr "Vertraging indien niet in standby (minuten)"
 
-msgid "Duration to stay on service-channels (minutes)"
-msgstr "Hoe lang op kanalen afgestemd te blijven (minuten)"
+msgid "Duration to stay on service (seconds)"
+msgstr "Hoe lang op een kanaal afstemmen (seconden)?"
 
 msgid "EPG refresh auto-start earliest (hh:mm)"
 msgstr "Vroegste EPG refresh auto-start (hh:mm)"
@@ -256,42 +256,3 @@ msgstr "Verwijderen"
 
 msgid "never"
 msgstr "nooit"
-
-#~ msgid "Configure EPGRefresh"
-#~ msgstr "EPGRefresh instellen"
-
-#~ msgid "Delay when not in Standby (in m)"
-#~ msgstr "Vertraging wanneer niet in Standby (in min)"
-
-#~ msgid "Inherit Services from AutoTimer if available"
-#~ msgstr "AutoTimer zenders overnemen indien beschikbaar"
-
-#~ msgid "Make AutoTimer parse EPG if available"
-#~ msgstr "EPG van AutoTimer doorgeven indien beschikbaar"
-
-#~ msgid "Refresh EPG after"
-#~ msgstr "EPG vernieuwen na"
-
-#~ msgid "Refresh EPG before"
-#~ msgstr "EPG vernieuwen voor"
-
-#~ msgid "Refresh automatically"
-#~ msgstr "Automatisch vernieuwen"
-
-#~ msgid "Shutdown after refresh"
-#~ msgstr "Afsluiten na het vernieuwen"
-
-#~ msgid ""
-#~ "This might have been an automated bootup to refresh the EPG. For this to "
-#~ "happen it is recommmended to put the receiver to Standby.\n"
-#~ "Do you want to do this now?"
-#~ msgstr ""
-#~ "Dit zou een automatische start lkunnen zijn om de EPG te vernieuwen. Om "
-#~ "dit te bereiken wordt aanbevolen de ontvanger in standby te plaatsen.\n"
-#~ "Wilt u dit nu doen?"
-
-#~ msgid "Time to stay on service (in m)"
-#~ msgstr "Tijd om op de zender te blijven staan (in min)"
-
-#~ msgid "Wakeup from Deep-Standby to refresh EPG"
-#~ msgstr "EPG vernieuwen indien in Deep-Standby"

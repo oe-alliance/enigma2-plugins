@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-09-28 12:48+0100\n"
+"POT-Creation-Date: 2012-01-15 13:09+0000\n"
+"PO-Revision-Date: 2012-01-17 11:35+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
@@ -19,83 +19,57 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
-#: ../src/RemoteTimerEntry.py:135
-#: ../src/RemoteTimerEntry.py:415
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
-#: ../src/plugin.py:1266
-#: ../src/plugin.py:1271
-#: ../src/plugin.py:1319
-#: ../src/plugin.py:1324
 msgid "(ZAP)"
 msgstr "(ZAP)"
 
-#: ../src/plugin.py:1287
-#: ../src/plugin.py:1347
-#: ../src/plugin.py:1349
 msgid "<unknown>"
 msgstr "<onbekend>"
 
-#: ../src/PartnerboxSetup.py:135
+msgid "Abort"
+msgstr "Breek af"
+
 msgid "Add"
 msgstr "Voeg toe"
 
-#: ../src/plugin.py:975
-#: ../src/plugin.py:1034
 msgid "Add timer"
 msgstr "Voeg timer toe"
 
-#: ../src/RemoteTimerEntry.py:177
-#: ../src/RemoteTimerEntry.py:179
-#: ../src/RemoteTimerEntry.py:464
-#: ../src/RemoteTimerEntry.py:466
 msgid "After event"
 msgstr "Na event"
 
-#: ../src/PartnerboxSetup.py:76
-#: ../src/PartnerboxSetup.py:256
-#: ../src/RemoteTimerEntry.py:73
+msgid "Apply"
+msgstr "Pas toe"
+
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: ../src/RemoteTimerEntry.py:171
-#: ../src/RemoteTimerEntry.py:458
+msgid "Change pin code"
+msgstr "Verander PIN"
+
 msgid "Channel"
 msgstr "Kanaal"
 
-#: ../src/plugin.py:237
 msgid "Clean up"
 msgstr "Opschonen"
 
-#: ../src/plugin.py:322
 msgid "Cleaning up finished timer entries..."
 msgstr "Bezig met opschonen afgewerkte timers..."
 
-#: ../src/RemoteTimerEntry.py:132
-#: ../src/RemoteTimerEntry.py:412
 msgid "DVR"
 msgstr "PVR"
 
-#: ../src/RemoteTimerEntry.py:158
-#: ../src/RemoteTimerEntry.py:445
 msgid "Date"
 msgstr "Datum"
 
-#: ../src/PartnerboxSetup.py:137
-#: ../src/PartnerboxSetup.py:258
-#: ../src/plugin.py:234
 msgid "Delete"
 msgstr "Verwijder"
 
-#: ../src/RemoteTimerEntry.py:155
-#: ../src/RemoteTimerEntry.py:442
 msgid "Description"
 msgstr "Beschrijving"
 
-#: ../src/PartnerboxEPGSelection.py:123
-#: ../src/plugin.py:341
-#: ../src/plugin.py:1183
 #, python-format
 msgid ""
 "Do you really want to delete the timer \n"
@@ -105,144 +79,93 @@ msgstr ""
 "%s  \n"
 "verwijderen?"
 
-#: ../src/plugin.py:236
-#: ../src/plugin.py:510
-#: ../src/plugin.py:669
 msgid "EPG Selection"
 msgstr "EPG Selectie"
 
-#: ../src/PartnerboxSetup.py:136
 msgid "Edit"
 msgstr "Bewerk:"
 
-#: ../src/PartnerboxSetup.py:86
 msgid "Enable Partnerbox-Function in EPGList"
 msgstr "Schakel Partnerbox-Functie in EPG-Lijst in"
 
-#: ../src/PartnerboxSetup.py:85
 msgid "Enable Partnerbox-Function in TimerEvent"
 msgstr "Schakel Partnerbox-Functie in TimerEvent in"
 
-#: ../src/RemoteTimerEntry.py:164
-#: ../src/RemoteTimerEntry.py:169
-#: ../src/RemoteTimerEntry.py:451
-#: ../src/RemoteTimerEntry.py:456
 msgid "EndTime"
 msgstr "Eindtijd"
 
-#: ../src/PartnerboxSetup.py:43
 msgid "Enigma 1"
 msgstr "Enigma 1"
 
-#: ../src/PartnerboxSetup.py:43
 msgid "Enigma 2"
 msgstr "Enigma 2"
 
-#: ../src/PartnerboxSetup.py:134
-#: ../src/PartnerboxSetup.py:273
 msgid "Enigma Type"
 msgstr "Enigma Type"
 
-#: ../src/plugin.py:1339
+msgid "Enter the service pin"
+msgstr "Voer de service PIN in"
+
 msgid "Error: No space left"
 msgstr "Fout: geen ruimte genoeg"
 
-#: ../src/plugin.py:1345
 msgid "Error: Outdated"
 msgstr "Fout: Achterhaald"
 
-#: ../src/plugin.py:1341
 msgid "Error: User aborted"
 msgstr "Fout: gebruiker heeft afgebroken"
 
-#: ../src/plugin.py:1343
 msgid "Error: Zap failed"
 msgstr "Fout: ZAP mislukt"
 
-#: ../src/plugin.py:1254
-#: ../src/plugin.py:1307
-#: ../src/plugin.py:1447
 msgid "Fri"
 msgstr "vr"
 
-#: ../src/RemoteTimerEntry.py:144
-#: ../src/RemoteTimerEntry.py:423
 msgid "Friday"
 msgstr "vrijdag"
 
-#: ../src/plugin.py:515
 msgid "Getting Channel Information..."
 msgstr "Bezig kanaal informatie te verkrijgen..."
 
-#: ../src/plugin.py:979
 msgid "Getting EPG Information..."
 msgstr "Bezig EPG informatie te verkrijgen..."
 
-#: ../src/plugin.py:403
 msgid "Getting Partnerbox Bouquet Information..."
 msgstr "Bezig Partnerbox boeket informatie te verkrijgen..."
 
-#: ../src/plugin.py:238
 msgid "Getting Partnerbox Information..."
 msgstr "Bezig Partnerbox informatie te verkrijgen..."
 
-#: ../src/PartnerboxSetup.py:132
-#: ../src/PartnerboxSetup.py:271
 msgid "IP"
 msgstr "IP"
 
-#: ../src/plugin.py:513
-#: ../src/plugin.py:670
-#: ../src/plugin.py:978
-#: ../src/plugin.py:1029
 msgid "Info"
 msgstr "Informatie"
 
-#: ../src/RemoteTimerEntry.py:174
-#: ../src/RemoteTimerEntry.py:461
 msgid "Location"
 msgstr "Lokatie"
 
-#: ../src/plugin.py:129
-#: ../src/plugin.py:137
-msgid "Manage timer for other dreamboxes in network"
-msgstr "Manage timer voor andere dreamboxen in netwerk"
+msgid "Manage timer for other receiveres in network"
+msgstr "Beheer timers voor andere ontvangers in uw netwerk"
 
-#: ../src/plugin.py:1254
-#: ../src/plugin.py:1307
-#: ../src/plugin.py:1447
 msgid "Mon"
 msgstr "ma"
 
-#: ../src/RemoteTimerEntry.py:144
-#: ../src/RemoteTimerEntry.py:423
 msgid "Monday"
 msgstr "maandag"
 
-#: ../src/RemoteTimerEntry.py:132
-#: ../src/RemoteTimerEntry.py:412
 msgid "NGRAB"
 msgstr "NGRAB"
 
-#: ../src/PartnerboxSetup.py:131
-#: ../src/PartnerboxSetup.py:270
-#: ../src/RemoteTimerEntry.py:154
-#: ../src/RemoteTimerEntry.py:441
 msgid "Name"
 msgstr "Naam"
 
-#: ../src/RemoteTimerEntry.py:290
 msgid "No"
 msgstr "Nee"
 
-#: ../src/PartnerboxSetup.py:77
-#: ../src/PartnerboxSetup.py:257
-#: ../src/RemoteTimerEntry.py:72
 msgid "OK"
 msgstr "OK"
 
-#: ../src/RemoteTimerEntry.py:525
-#: ../src/RemoteTimerEntry.py:535
 #, python-format
 msgid ""
 "Partnerbox Answer: \n"
@@ -251,233 +174,152 @@ msgstr ""
 "Partnerbox antwoord: \n"
 "%s"
 
-#: ../src/PartnerboxSetup.py:78
 msgid "Partnerbox Entries"
 msgstr "Partnerbox entries"
 
-#: ../src/PartnerboxSetup.py:228
 msgid "Partnerbox: Edit Entry"
 msgstr "Partnerbox: bewerk entry"
 
-#: ../src/PartnerboxSetup.py:126
 msgid "Partnerbox: List of Entries"
 msgstr "Partnerbox: Lijst met entries"
 
-#: ../src/PartnerboxSetup.py:274
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: ../src/PartnerboxSetup.py:133
-#: ../src/PartnerboxSetup.py:272
 msgid "Port"
 msgstr "Port"
 
-#: ../src/PartnerboxSetup.py:176
-#: ../src/PartnerboxSetup.py:320
 msgid "Really delete this Partnerbox Entry?"
 msgstr "Deze Partnerbox entry echt verwijderen?"
 
-#: ../src/RemoteTimerEntry.py:313
 msgid "Remote Timer"
 msgstr "Remote Timer"
 
-#: ../src/PartnerboxEPGSelection.py:174
-#: ../src/plugin.py:1038
 msgid "Remove timer"
 msgstr "Verwijder timer"
 
-#: ../src/plugin.py:1254
-#: ../src/plugin.py:1307
-#: ../src/plugin.py:1447
 msgid "Sat"
 msgstr "za"
 
-#: ../src/RemoteTimerEntry.py:144
-#: ../src/RemoteTimerEntry.py:423
 msgid "Saturday"
 msgstr "zaterdag"
 
-#: ../src/PartnerboxSetup.py:275
 msgid "Servicelists/EPG"
 msgstr "Servicelijsten/EPG"
 
-#: ../src/PartnerboxSetup.py:83
 msgid "Show 'RemoteTV Player' in E-Menu"
 msgstr "Toon 'RemoteTV Player' in extensie-menu"
 
-#: ../src/PartnerboxSetup.py:82
 msgid "Show 'RemoteTimer' in E-Menu"
 msgstr "Toon 'RemoteTimer' in extensie-menu"
 
-#: ../src/PartnerboxSetup.py:84
 msgid "Show 'Stream current Service' in E-Menu"
 msgstr "Toon Stream current Service' in extensie-menu"
 
-#: ../src/RemoteTimerEntry.py:160
-#: ../src/RemoteTimerEntry.py:447
 msgid "StartTime"
 msgstr "Starttijd"
 
-#: ../src/plugin.py:140
 msgid "Stream TV from your Partnerbox"
 msgstr "Stream TV van uw Partnerbox"
 
-#: ../src/plugin.py:142
 msgid "Stream current service from partnerbox"
 msgstr "Stream huidige service van Partnerbox"
 
-#: ../src/plugin.py:1254
-#: ../src/plugin.py:1307
-#: ../src/plugin.py:1447
 msgid "Sun"
 msgstr "zo"
 
-#: ../src/RemoteTimerEntry.py:144
-#: ../src/RemoteTimerEntry.py:423
 msgid "Sunday"
 msgstr "zondag"
 
-#: ../src/plugin.py:1254
-#: ../src/plugin.py:1307
-#: ../src/plugin.py:1447
+msgid "The pin code you entered is wrong."
+msgstr "U voerde een verkeerde PIN in."
+
 msgid "Thu"
 msgstr "do"
 
-#: ../src/RemoteTimerEntry.py:144
-#: ../src/RemoteTimerEntry.py:423
 msgid "Thursday"
 msgstr "donderdag"
 
-#: ../src/RemoteTimerEntry.py:156
-#: ../src/RemoteTimerEntry.py:443
 msgid "Timer Type"
 msgstr "Timer Type"
 
-#: ../src/plugin.py:1254
-#: ../src/plugin.py:1307
-#: ../src/plugin.py:1447
 msgid "Tue"
 msgstr "di"
 
-#: ../src/RemoteTimerEntry.py:144
-#: ../src/RemoteTimerEntry.py:423
 msgid "Tuesday"
 msgstr "dinsdag"
 
-#: ../src/plugin.py:1254
-#: ../src/plugin.py:1307
-#: ../src/plugin.py:1447
 msgid "Wed"
 msgstr "wo"
 
-#: ../src/RemoteTimerEntry.py:144
-#: ../src/RemoteTimerEntry.py:423
 msgid "Wednesday"
 msgstr "woensdag"
 
-#: ../src/plugin.py:113
+msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
+msgstr "U kunt geen zenders en favorieten van Enigma1-ontvangers toevoegen aan de kanaallijst..."
+
 msgid "You have to restart Enigma2 to activate your new preferences!"
 msgstr "U moet Enigma2 herstarten om uw instellingen door te voeren!"
 
-#: ../src/plugin.py:507
 msgid "Zap"
 msgstr "Zap"
 
-#: ../src/PartnerboxSetup.py:276
 msgid "Zap to service when streaming"
 msgstr "Zap naar service tijdens streamen"
 
-#: ../src/plugin.py:1278
 msgid "about to start"
 msgstr "op het punt te beginnen"
 
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:408
+msgid "add Partnerbox bouquet"
+msgstr "voeg Partnerbox favoriet toe"
+
+msgid "add Partnerbox service"
+msgstr "voeg Partnerbox zender toe"
+
 msgid "auto"
 msgstr "auto"
 
-#: ../src/plugin.py:1290
 msgid "disabled"
 msgstr "uitgeschakeld"
 
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:133
-#: ../src/RemoteTimerEntry.py:408
-#: ../src/RemoteTimerEntry.py:413
 msgid "do nothing"
 msgstr "doe niets"
 
-#: ../src/plugin.py:1285
-#: ../src/plugin.py:1336
 msgid "done!"
 msgstr "uitgevoerd!"
 
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:133
-#: ../src/RemoteTimerEntry.py:408
-#: ../src/RemoteTimerEntry.py:413
 msgid "go to deep standby"
 msgstr "ga naar deep standby"
 
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:133
-#: ../src/RemoteTimerEntry.py:408
-#: ../src/RemoteTimerEntry.py:413
 msgid "go to standby"
 msgstr "ga naar standby"
 
-#: ../src/plugin.py:824
-#: ../src/plugin.py:910
-#: ../src/plugin.py:1268
-#: ../src/plugin.py:1273
-#: ../src/plugin.py:1321
-#: ../src/plugin.py:1324
-#: ../src/plugin.py:1326
-#: ../src/plugin.py:1434
-#: ../src/plugin.py:1631
 msgid "mins"
 msgstr "min"
 
-#: ../src/RemoteTimerEntry.py:128
-#: ../src/RemoteTimerEntry.py:407
 msgid "record"
 msgstr "opname"
 
-#: ../src/plugin.py:1283
-#: ../src/plugin.py:1334
 msgid "recording..."
 msgstr "aan het opnemen..."
 
-#: ../src/plugin.py:135
 msgid "setup for partnerbox"
 msgstr "Partnerbox instellingen"
 
-#: ../src/plugin.py:1616
 msgid "unknown service"
 msgstr "onbekende service"
 
-#: ../src/PartnerboxSetup.py:45
 msgid "use external"
 msgstr "gebruik extern"
 
-#: ../src/PartnerboxSetup.py:45
 msgid "use internal"
 msgstr "gebruik intern"
 
-#: ../src/plugin.py:1276
-#: ../src/plugin.py:1329
 msgid "waiting"
 msgstr "aan het wachten"
 
-#: ../src/RemoteTimerEntry.py:128
-#: ../src/RemoteTimerEntry.py:132
-#: ../src/RemoteTimerEntry.py:407
-#: ../src/RemoteTimerEntry.py:412
 msgid "zap"
 msgstr "zap"
 
-#: ../src/plugin.py:1281
-#: ../src/plugin.py:1332
 msgid "zapped"
 msgstr "gezapd"
-
