@@ -166,13 +166,13 @@ class AutoMount():
 			self.MountConsole = Console()
 		self.command = None
 		path = os.path.join('/media/net', data['sharename'])
+		self.command = []
 		self.mountcommand = None
 		self.unmountcommand = None
 		if self.activeMountsCounter == 0:
 			print "self.automounts without active mounts",self.automounts
 			if data['active'] == 'False' or data['active'] is False:
-				umountcmd = 'umount -fl '+ path
-				self.MountConsole.ePopen(umountcmd, self.CheckMountPointFinished, [data, callback])
+				self.unmountcommand = 'umount -fl '+ path
 		else:
 			if data['active'] == 'False' or data['active'] is False:
 				self.unmountcommand = 'umount -fl '+ path
@@ -211,7 +211,6 @@ class AutoMount():
 # 					self.command = None
 
 			if self.unmountcommand is not None or self.mountcommand is not None:
-				self.command = []
 				if self.unmountcommand is not None:
 					self.command.append(self.unmountcommand)
 				if self.mountcommand is not None:
