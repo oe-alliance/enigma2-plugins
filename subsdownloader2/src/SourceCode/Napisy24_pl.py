@@ -343,10 +343,12 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
                 #Cause and effect for subtitle and movie guesseFileData results
                 if x[1].has_key('type') and y[1].has_key('type'):
                     if x[1]['type'] == y[1]['type']:
-                        wynik = wynik + 0.1600
+                        #wynik = wynik + 0.1600
+			wynik = wynik +0.0900
                 if x[1].has_key('name') and y[1].has_key('name'):
                     if x[1]['name'] == y[1]['name']:
-                        wynik = wynik +0.0900
+                        #wynik = wynik +0.0900
+			wynik = wynik + 0.1600
                 if x[1].has_key('season') and y[1].has_key('season'):   
                     if x[1]['season'] == y[1]['season']:
                         wynik = wynik +0.0225

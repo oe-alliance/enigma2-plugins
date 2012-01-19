@@ -144,23 +144,6 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
 		sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
 	return subtitles
        
-#       try:
-#            while len(list)>0:
-#                if re1.match(list.pop(0), 0):
-#                    m = re2.match(list.pop(0), 0)
-#                    if m:
-#                        subt = [int(m.group(1))*3600 + int(m.group(2))*60 + int(m.group(3)) + int(m.group(4))/1000.0]
-#                        subt.append(int(m.group(5))*3600 + int(m.group(6))*60 + int(m.group(7)) + int(m.group(8))/1000.0)
-#                        l = list.pop(0)
-#                        while not re3.match(l, 0):
-#                            subt.append(l.strip())
-#                            l = list.pop(0)
-#                        subtitles.append(subt)
-#        #except IndexError:
-#	except:
-#            sys.stderr.write("Warning: it seems like input file is damaged or too short.\n")
-#        return subtitles
-
     def read_tmp(self,list):
         """
 Reads tmplayer (tmp) subtitles.
