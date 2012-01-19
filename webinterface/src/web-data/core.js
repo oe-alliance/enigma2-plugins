@@ -1584,6 +1584,33 @@ var E2WebCore = Class.create({
 				event.stop();
 			}.bind(this)
 		);
+		content.on(
+			'click',
+			'.sListAddTimer',
+			function(event, element){
+				core.timers.addByEventId(element, 0);
+				event.stop();
+			}
+		);
+		content.on(
+			'click',
+			'.sListZapTimer',
+			function(event, element){
+				core.timers.addByEventId(element, 1);
+				event.stop();
+			}
+		);
+		content.on(
+			'click',
+			'.sListEditTimer',
+			function(event, element){
+				var hash = ["#!/timer", "edit"].join("/");
+				hashListener.setHash(hash);
+				core.timers.editFromEvent(element);
+				event.stop();
+			}
+		);
+
 		//Timerlist
 		content.on(
 			'click',

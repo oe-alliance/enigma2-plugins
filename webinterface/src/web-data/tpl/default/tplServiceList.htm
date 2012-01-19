@@ -16,7 +16,7 @@
 														</td>
 														<td style="width: 470px;">
 															<div class="sListSName">
-																
+
 																<a href="#" id="${item.now.servicereference}" class="sListSLink" title="Zap to ${item.now.servicename}">${item.now.servicename}</a>
 															</div>
 														</td>
@@ -46,7 +46,19 @@
 																		{/if}
 																	</tr>
 																	<tr class="sListExtEpgLong" style="display:none">
-																		<td colspan="4" class="epgLong">${item.now.extdescription}</td>
+																		<td colspan="4" class="epgListItem epgLong"
+																			data-servicereference="${item.now.servicereference}"
+																			data-servicename="${item.now.servicename}"
+																			data-eventid="${item.now.eventid}"
+																			data-start="${item.now.start}"
+																			data-end=${item.now.end}
+																			data-title="${item.now.title}"
+																			data-description="${item.now.description}">${item.now.extdescription}<br>
+																			<div style="text-align:right;">
+																				<a href="#" class="sListAddTimer"><img src="/web-data/img/clock.png" title="Add Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																				<a href="#" class="sListZapTimer"><img src="/web-data/img/clock_play.png" title="Add zap Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																				<a href="#" class="sListEditTimer"><img src="/web-data/img/clock_edit.png" title="Edit and add timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																			</div>
 																	</tr>
 																</table>
 															</a>
@@ -68,7 +80,19 @@
 																		{/if}
 																	</tr>
 																	<tr class="sListExtEpgLong" style="display:none">
-																		<td colspan="4" class="epgLong">${item.next.extdescription}</td>
+																		<td colspan="4" class="epgListItem epgLong"
+																			data-servicereference="${item.next.servicereference}"
+																			data-servicename="${item.next.servicename}"
+																			data-eventid="${item.next.eventid}"
+																			data-start="${item.next.start}"
+																			data-end=${item.next.end}
+																			data-title="${item.next.title}"
+																			data-description="${item.next.description}">${item.next.extdescription}<br>
+																			<div style="text-align:right;">
+																				<a href="#" class="sListAddTimer"><img src="/web-data/img/clock.png" title="Add Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																				<a href="#" class="sListZapTimer"><img src="/web-data/img/clock_play.png" title="Add zap Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																				<a href="#" class="sListEditTimer"><img src="/web-data/img/clock_edit.png" title="Edit and add timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																			</div>
 																	</tr>
 																</table>
 															</a>

@@ -1,5 +1,5 @@
 
-<!-- tplServiceListEPGItem -->	
+<!-- tplServiceListEPGItem -->
 															{if item.title != ''}
 															<a href="#" class="sListExtEpg" title="Click to show/hide extended Description">
 																<table cellspacing="0">
@@ -14,6 +14,21 @@
 																	</tr>
 																	<tr class="sListExtEpgLong" style="display:none">
 																		<td colspan="4" class="epgLong">${item.extdescription}</td>
+																	</tr>
+																	<tr class="sListExtEpgLong" style="display:none">
+																		<td colspan="4" class="epgListItem epgLong"
+																			data-servicereference="${item.servicereference}"
+																			data-servicename="${item.servicename}"
+																			data-eventid="${item.eventid}"
+																			data-start="${item.start}"
+																			data-end=${item.end}
+																			data-title="${item.title}"
+																			data-description="${item.description}">${item.extdescription}<br>
+																			<div style="text-align:right;">
+																				<a href="#" class="sListAddTimer"><img src="/web-data/img/clock.png" title="Add Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																				<a href="#" class="sListZapTimer"><img src="/web-data/img/clock_play.png" title="Add zap Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																				<a href="#" class="sListEditTimer"><img src="/web-data/img/clock_edit.png" title="Edit and add timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																			</div>
 																	</tr>
 																</table>
 															</a>
