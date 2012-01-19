@@ -5,17 +5,18 @@
 																<table cellspacing="0">
 																	<tr>
 																		<td class="epgStart">${item.starttime}</td>
-																		<td class="epgTitle"><img class="sListBulletToggle" src="/web-data/img/toggle_expand_small.png" alt="+">&nbsp;${item.title}</td>
+																		<td class="epgTitle">
+																			<img
+																				class="sListBulletToggle"
+																				{if isVisible}src="/web-data/img/toggle_collapse_small.png" alt="-"
+																				{else}src="/web-data/img/toggle_expand_small.png" alt="+"{/if}>&nbsp;${item.title}</td>
 																		{if item.duration != item.remaining}
 																		<td class="epgLength">+${item.remaining} of ${item.duration}</td>
 																		{else}
 																		<td class="epgLength">${item.duration}</td>
 																		{/if}
 																	</tr>
-																	<tr class="sListExtEpgLong" style="display:none">
-																		<td colspan="4" class="epgLong">${item.extdescription}</td>
-																	</tr>
-																	<tr class="sListExtEpgLong" style="display:none">
+																	<tr class="sListExtEpgLong" {if !isVisible}style="display:none"{/if}>
 																		<td colspan="4" class="epgListItem epgLong"
 																			data-servicereference="${item.servicereference}"
 																			data-servicename="${item.servicename}"
