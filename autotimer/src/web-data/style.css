@@ -388,6 +388,10 @@
 	.fixedwidthservice{
 		width : 240px;
 	}
+
+	.fixedwidthseries{
+		width : 220px;
+	}
 	
 	.timepicker{
 		display: inline;

@@ -261,6 +261,10 @@ def parseEntry(element, baseTimer, defaults = False):
 			tags.append(value.encode("UTF-8"))
 		baseTimer.tags = tags
 
+	# Read out episode_naming
+	baseTimer.series_service = element.get("series_service", "None")
+	baseTimer.series_id = element.get("series_id", "")
+
 	return True
 
 def parseConfigOld(configuration, list, uniqueTimerId = 0):
@@ -413,6 +417,10 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 		if searchForDuplicateDescription < 0 or searchForDuplicateDescription > 2:
 			searchForDuplicateDescription = 2
 
+		# Episode naming
+		series_service = timer.get("series_service", "None")
+		series_id = timer.get("series_id", "")
+
 		# Read out afterevent (compatible to V* though behaviour for V3- is different as V4+ allows multiple afterevents while the last definication was chosen before)
 		idx = {
 			"none": AFTEREVENT.NONE,
@@ -513,7 +521,9 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				avoidDuplicateDescription = avoidDuplicateDescription,
 				searchForDuplicateDescription = searchForDuplicateDescription,
 				bouquets = bouquets,
-				tags = tags
+				tags = tags,
+				series_service = series_service,
+				series_id = series_id,
 		))
 
 def buildConfig(defaultTimer, timers, webif = False):
@@ -577,6 +587,11 @@ def buildConfig(defaultTimer, timers, webif = False):
 	# Only display searchCase if sensitive
 	if defaultTimer.searchCase == "sensitive":
 		extend((' searchCase="', str(defaultTimer.searchCase), '"'))
+
+	# Episode naming
+	if defaultTimer.hasSeriesService():
+		extend((' series_service="', str(defaultTimer.getSeriesService()), '"'))
+		extend((' series_id="', str(defaultTimer.getSeriesId()), '"'))
 
 	# Close still opened defaults tag
 	append('>\n')
@@ -719,6 +734,11 @@ def buildConfig(defaultTimer, timers, webif = False):
 		# Only display overrideAlternatives if true
 		if timer.overrideAlternatives:
 			extend((' overrideAlternatives="', str(timer.getOverrideAlternatives()), '"'))
+
+		# Episode naming
+		if timer.hasSeriesService():
+			extend((' series_service="', str(timer.getSeriesService()), '"'))
+			extend((' series_id="', str(timer.getSeriesId()), '"'))
 
 		# Only add vps related entries if true
 		if timer.vps_enabled:

@@ -44,9 +44,78 @@ config.plugins.autotimer.notifconflict = ConfigYesNo(default = True)
 config.plugins.autotimer.notifsimilar = ConfigYesNo(default = True)
 config.plugins.autotimer.maxdaysinfuture = ConfigNumber(default = 0)
 config.plugins.autotimer.show_help = ConfigYesNo(default = True)
+config.plugins.autotimer.episode_scheme = ConfigSelection(choices = [
+		(" S{season:02d}E{episode:02d}",  _("S01E01")),
+		(" S{season:d}E{episode:d}",      _("S1E1")),
+		(" S{season:02d}xE{episode:02d}", _("S01xE01")),
+		(" S{season:d}xE{episode:d}",     _("S1xE1")),
+		(" S{season:02d}.E{episode:02d}", _("S01.E01")),
+		(" S{season:d}.E{episode:d}",     _("S1.E1")),
+		(" S{season:02d} E{episode:02d}", _("S01 E01")),
+		(" S{season:d} E{episode:d}",     _("S1 E1")),
+		(" {season:02d}{episode:02d}",    _("0101")),
+		(" {season:d}{episode:02d}",      _("101")),
+		(" {season:02d}x{episode:02d}",   _("01x01")),
+		(" {season:d}x{episode:d}",       _("1x1")),
+		(" {season:02d}.{episode:02d}",   _("01.01")),
+		(" {season:d}.{episode:d}",       _("1.1")),
+		(" {season:02d} {episode:02d}",   _("01 01")),
+		(" {season:d} {episode:d}",       _("1 1")),
+		("_S{season:02d}E{episode:02d}",  _("_S01E01")),
+		("_S{season:d}E{episode:d}",      _("_S1E1")),
+		("_S{season:02d}xE{episode:02d}", _("_S01xE01")),
+		("_S{season:d}xE{episode:d}",     _("_S1xE1")),
+		("_S{season:02d}.E{episode:02d}", _("_S01.E01")),
+		("_S{season:d}.E{episode:d}",     _("_S1.E1")),
+		("_S{season:02d} E{episode:02d}", _("_S01 E01")),
+		("_S{season:d} E{episode:d}",     _("_S1 E1")),
+		("_{season:02d}{episode:02d}",    _("_0101")),
+		("_{season:d}{episode:02d}",      _("_101")),
+		("_{season:02d}x{episode:02d}",   _("_01x01")),
+		("_{season:d}x{episode:d}",       _("_1x1")),
+		("_{season:02d}.{episode:02d}",   _("_01.01")),
+		("_{season:d}.{episode:d}",       _("_1.1")),
+		("_{season:02d} {episode:02d}",   _("_01 01")),
+		("_{season:d} {episode:d}",       _("_1 1")),
+
+		(" S{season:02d}E{episode:02d} {title:s}",  _("S01E01 title")),
+		(" S{season:d}E{episode:d} {title:s}",      _("S1E1 title")),
+		(" S{season:02d}xE{episode:02d} {title:s}", _("S01xE01 title")),
+		(" S{season:d}xE{episode:d} {title:s}",     _("S1xE1 title")),
+		(" S{season:02d}.E{episode:02d} {title:s}", _("S01.E01 title")),
+		(" S{season:d}.E{episode:d} {title:s}",     _("S1.E1 title")),
+		(" S{season:02d} E{episode:02d} {title:s}", _("S01 E01 title")),
+		(" S{season:d} E{episode:d} {title:s}",     _("S1 E1 title")),
+		(" {season:02d}{episode:02d} {title:s}",    _("0101 title")),
+		(" {season:d}{episode:02d} {title:s}",      _("101 title")),
+		(" {season:02d}x{episode:02d} {title:s}",   _("01x01 title")),
+		(" {season:d}x{episode:d} {title:s}",       _("1x1 title")),
+		(" {season:02d}.{episode:02d} {title:s}",   _("01.01 title")),
+		(" {season:d}.{episode:d} {title:s}",       _("1.1 title")),
+		(" {season:02d} {episode:02d} {title:s}",   _("01 01 title")),
+		(" {season:d} {episode:d} {title:s}",       _("1 1 title")),
+		("_S{season:02d}E{episode:02d}_{title:s}",  _("_S01E01_title")),
+		("_S{season:d}E{episode:d}_{title:s}",      _("_S1E1_title")),
+		("_S{season:02d}xE{episode:02d}_{title:s}", _("_S01xE01_title")),
+		("_S{season:d}xE{episode:d}_{title:s}",     _("_S1xE1_title")),
+		("_S{season:02d}.E{episode:02d}_{title:s}", _("_S01.E01_title")),
+		("_S{season:d}.E{episode:d}_{title:s}",     _("_S1.E1_title")),
+		("_S{season:02d} E{episode:02d}_{title:s}", _("_S01 E01_title")),
+		("_S{season:d} E{episode:d}_{title:s}",     _("_S1 E1_title")),
+		("_{season:02d}{episode:02d}_{title:s}",    _("_0101_title")),
+		("_{season:d}{episode:02d}_{title:s}",      _("_101_title")),
+		("_{season:02d}x{episode:02d}_{title:s}",   _("_01x01_title")),
+		("_{season:d}x{episode:d}_{title:s}",       _("_1x1_title")),
+		("_{season:02d}.{episode:02d}_{title:s}",   _("_01.01_title")),
+		("_{season:d}.{episode:d}_{title:s}",       _("_1.1_title")),
+		("_{season:02d} {episode:02d}_{title:s}",   _("_01 01_title")),
+		("_{season:d} {episode:d}_{title:s}",       _("_1 1_title")),
+	], default = " S{season:02d}E{episode:02d} {title:s}"
+)
 
 autotimer = None
 autopoller = None
+autotimerseries = None
 
 #pragma mark - Help
 try:
@@ -63,9 +132,14 @@ except Exception as e:
 def autostart(reason, **kwargs):
 	global autotimer
 	global autopoller
+	global autotimerseries
 
 	# Startup
 	if reason == 0 and config.plugins.autotimer.autopoll.value:
+		# Initialize AutoTimerSeries
+		from AutoTimerSeries import AutoTimerSeries
+		autotimerseries = AutoTimerSeries()
+
 		# Initialize AutoTimer
 		from AutoTimer import AutoTimer
 		autotimer = AutoTimer()
@@ -94,6 +168,7 @@ def autostart(reason, **kwargs):
 
 			# Remove AutoTimer
 			autotimer = None
+			autotimerseries = None
 
 # Webgui
 def sessionstart(reason, **kwargs):
@@ -117,6 +192,11 @@ def sessionstart(reason, **kwargs):
 def main(session, **kwargs):
 	global autotimer
 	global autopoller
+	global autotimerseries
+
+	if autotimerseries is None:
+		from AutoTimerSeries import AutoTimerSeries
+		autotimerseries = AutoTimerSeries()
 
 	if autotimer is None:
 		from AutoTimer import AutoTimer

@@ -9,20 +9,22 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Statics
 function url() {
-	this.tpl              = '';
-	this.editor           = '/autotimereditor';
-	this.backup           = '/autotimereditor/web/backup';
-	this.restore          = '/autotimereditor/web/restore';
-	this.list             = '/autotimer';
-	this.get              = '/autotimer/get';
-	this.set              = '/autotimer/set';
-	this.edit             = '/autotimer/edit';
-	this.add              = '/autotimer/edit';
-	this.remove           = '/autotimer/remove';
-	this.parse            = '/autotimer/parse';
-	this.preview          = '/autotimer/simulate';
-	this.tmp              = '/autotimereditor/tmp/';
-	this.getservices      = '/web/getservices';
+	this.tpl               = '';
+	this.getservices       = '/web/getservices';
+	this.list              = '/autotimer';
+	this.get               = '/autotimer/get';
+	this.set               = '/autotimer/set';
+	this.edit              = '/autotimer/edit';
+	this.add               = '/autotimer/edit';
+	this.remove            = '/autotimer/remove';
+	this.parse             = '/autotimer/parse';
+	this.preview           = '/autotimer/simulate';
+	this.getseriesservices = '/autotimer/getseriesservices';
+	this.getserieslist     = '/autotimer/getserieslist';
+	this.editor            = '/autotimereditor';
+	this.backup            = '/autotimereditor/web/backup';
+	this.restore           = '/autotimereditor/web/restore';
+	this.tmp               = '/autotimereditor/tmp/';
 };
 var URL = new url();
 
@@ -170,7 +172,8 @@ var AutoTimerEditorCore = Class.create({
 		
 		// Instantiate all elements
 		this.services = new AutoTimerServiceController();
-		this.settings = new AutoTimerSettingsController
+		this.settings = new AutoTimerSettingsController();
+		this.autotimerseries = new AutoTimerSeriesController();
 		
 		this.menu = new AutoTimerMenuController('contentAutoTimerMenu');
 		this.list = new AutoTimerListController('contentAutoTimerList');
@@ -180,50 +183,48 @@ var AutoTimerEditorCore = Class.create({
 		// Display menu
 		this.menu.load();
 		
-		// Start loading
-		this.loadFirst();
-	},
-	
-	loadFirst: function(){
-		// At first load locations and tags
+		// Load locations and tags
 		core.lt.getLocationsAndTags(this.loadLocationsAndTagsCallback.bind(this));
+		// Load bouquet list
+		this.services.loadBouquetsTv(this.loadBouquetsCallback.bind(this));
+		// Load autotimer settings
+		this.settings.load(this.loadSettingsCallback.bind(this));
+		// Load series services
+		this.autotimerseries.loadSeriesServices(this.loadSeriesServicesCallback.bind(this));
 	},
 	
 	loadLocationsAndTagsCallback: function(currentLocation, locations, tags){
 		this.currentLocation = currentLocation;
 		this.locations = locations;
 		this.tags = tags;
-		this.loadSecond();
-	},
-	
-	loadSecond: function(){
-		// At second load bouquet list
-		this.services.loadBouquetsTv(this.loadBouquetsCallback.bind(this));
+		this.loadFinal();
 	},
 	
 	loadBouquetsCallback: function(bouquets){
 		this.bouquets = bouquets;
-		this.loadThird();
-	},
-	
-	loadThird: function(){
-		// At third load autotimer settings
-		this.settings.load(this.loadSettingsCallback.bind(this));
+		this.loadFinal();
 	},
 	
 	loadSettingsCallback: function(settings){
 		this.hasVps = settings['hasVps'];
-		this.loadFourth();
+		this.loadFinal();
 	},
 	
-	loadFourth: function(){
-		// At fourth load and display autotimer list
-		if (this.newautotimer.name!=''){
-			// Load autotimer list and show a new autotimer
-			this.list.loadNew();
-		}else{
-			// Load autotimer list and select the first autotimer
-			this.list.load();
+	loadSeriesServicesCallback: function(data){
+		this.seriesServices = data;
+		this.loadFinal();
+	},
+	
+	loadFinal: function(){
+		if (this.locations != undefined && this.tags != undefined && this.bouquets != undefined && this.hasVps != undefined && this.seriesServices != undefined ){
+			// Load and display autotimer list
+			if (this.newautotimer.name!=''){
+				// Load autotimer list and show a new autotimer
+				this.list.loadNew();
+			}else{
+				// Load autotimer list and select the first autotimer
+				this.list.load();
+			}
 		}
 	},
 });
@@ -260,11 +261,29 @@ var AutoTimerSettingsController = Class.create(Controller, {
 		this.handler.load( callback );
 	},
 	
-	onFinished: function(){
+	onFinished: function(){},
+	registerEvents: function(){},
+});
+
+var AutoTimerSeriesController = Class.create(Controller, {
+	initialize: function($super){
+		$super(new AutoTimerSeriesHandler());
 	},
 	
-	registerEvents: function(){
-	}
+	loadSeriesServices: function(callback){
+		this.handler.loadSeriesServices( callback );
+	},
+	
+	loadSeriesList: function(series_service, name, callback){
+		params = {
+			'series_service' : series_service,
+			'name' :           name,
+		},
+		this.handler.loadSeriesList( params, callback );
+	},
+	
+	onFinished: function(){},
+	registerEvents: function(){},
 });
 
 var AutoTimerMenuController  = Class.create(Controller, {
@@ -443,7 +462,7 @@ var AutoTimerListController = Class.create(Controller, {
 		var selectList = $('list');
 		var selectOptions = selectList.getElementsByTagName('option');
 		if ( selectOptions.length > 0){
-			if (this.select != null){
+			if (this.select != undefined && this.select != null && this.select != ""){
 				// Select the given AutoTimer because of add/remove action
 				for (idx in selectOptions){
 					if ( this.select == unescape(selectOptions[idx].value) ){
@@ -577,9 +596,10 @@ var AutoTimerEditController = Class.create(Controller, {
 		this.onchangeCheckbox( $('timeframe') );
 		this.onchangeCheckbox( $('offset') );
 		this.onchangeCheckbox( $('maxdurationavailable') );
-		this.onchangeCheckbox( $('locationavailable') );
 		this.onchangeSelectAfterEvent( $('afterevent') );
 		this.onchangeSelect( $('counter') );
+		this.onchangeCheckbox( $('locationavailable') );
+		this.onchangeSelectSeriesService( $('series_service') );
 		this.onchangeCheckbox( $('usefilters') );
 		var filterwheres = $$('.filterwhere');
 		for (var i = 0; i < filterwheres.size(); i++) {
@@ -635,6 +655,32 @@ var AutoTimerEditController = Class.create(Controller, {
 		this.onchangeCheckbox( $('aftereventusetimespan') );
 	},
 	
+	onchangeSelectSeriesService: function(x) {
+		if (x.value != 'None'){
+			var select = $('series_id');
+			var id = select.value
+			for (i = select.options.length - 1; i>=0; i--) {
+				select.options.remove(i);
+			}
+			$(x.id+'content').style.display = 'block';
+			// Load series list
+			autotimereditorcore.autotimerseries.loadSeriesList( $('series_service').value, $('name').value, this.seriesListCallback.bind(this, id) );
+		} else{
+			$(x.id+'content').style.display = 'none';
+		}
+	},
+	seriesListCallback: function(id, serieslist) {
+		var select = $('series_id');
+		for (var series in serieslist) {
+			var option = new Option(String(serieslist[series]), series);
+			if (id == series){
+				option.selected = true;
+			}
+			select.options.add( option );
+		}
+		//$('series_servicecontent').style.display = 'block';
+	},
+	
 	onchangeSelectFilter: function(x) {
 		if (x.value == 'dayofweek'){
 			x.parentNode.nextElementSibling.children[0].style.display = 'none';
@@ -646,17 +692,16 @@ var AutoTimerEditController = Class.create(Controller, {
 	},
 	
 	onchangeSelectBouquet: function(x) {
-		// Load services of selected bouquet
-		var service = unescape(x.value);
-		autotimereditorcore.services.load( service, this.loadServicesCallback.bind(this, x) );
-	},
-	
-	loadServicesCallback: function(x, services) {
 		var select = x.parentNode.nextElementSibling.firstElementChild;
 		for (i = select.options.length - 1; i>=0; i--) {
 			select.options.remove(i);
 		}
-		for ( var service in services) {
+		// Load services of selected bouquet
+		autotimereditorcore.services.load( unescape(x.value), this.servicesCallback.bind(this, x) );
+	},
+	servicesCallback: function(x, services) {
+		var select = x.parentNode.nextElementSibling.firstElementChild;
+		for (var service in services) {
 			select.options.add( new Option(String(services[service]), service ) );
 		}
 	},
@@ -754,6 +799,7 @@ var AutoTimerEditController = Class.create(Controller, {
 		var idx = selectList.selectedIndex;
 		if (idx>=0){
 			data['id'] = unescape(selectList.options[idx].value);
+			selectList.options[idx].className = ($('enabled').checked) ? 'enabled' : 'disabled';
 		}
 		data['enabled'] = ($('enabled').checked) ? '1' : '0';
 		
@@ -848,6 +894,16 @@ var AutoTimerEditController = Class.create(Controller, {
 			data['location']             = $('location').value;
 		} else{
 			data['location']             = '';
+		}
+		
+		var series_service = $('series_service').value;
+		var series_id = $('series_id').value;
+		if (series_service != 'None' && series_id != ""){
+				data['series_service'] = series_service;
+				data['series_id'] = series_id;
+		} else{
+				data['series_service'] = '';
+				data['series_id'] = '';
 		}
 		
 		var tags = [];
@@ -1028,12 +1084,6 @@ var AutoTimerEditController = Class.create(Controller, {
 				this.onchangeCheckbox(element);
 			}.bind(this)
 		);
-		$('locationavailable').on(
-			'change',
-			function(event, element){
-				this.onchangeCheckbox(element);
-			}.bind(this)
-		);
 		$('afterevent').on(
 			'change',
 			function(event, element){
@@ -1050,6 +1100,18 @@ var AutoTimerEditController = Class.create(Controller, {
 			'change',
 			function(event, element){
 				this.onchangeSelect(element);
+			}.bind(this)
+		);
+		$('locationavailable').on(
+			'change',
+			function(event, element){
+				this.onchangeCheckbox(element);
+			}.bind(this)
+		);
+		$('series_service').on(
+			'change',
+			function(event, element){
+				this.onchangeSelectSeriesService(element);
 			}.bind(this)
 		);
 		$('taglist').on(
@@ -1177,7 +1239,7 @@ var AutoTimerPreviewController = Class.create(Controller, {
 var AutoTimerServiceListHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super){
 		$super(null, null);
-		this.provider = new SimpleServiceListProvider (this.onServicesReady.bind(this));
+		this.provider = new SimpleServiceListProvider (this.onReady.bind(this));
 		this.ajaxload = false;
 	},
 	
@@ -1186,7 +1248,7 @@ var AutoTimerServiceListHandler = Class.create(AbstractContentHandler, {
 		this.provider.load(ref);
 	},
 	
-	onServicesReady: function(data){
+	onReady: function(data){
 		var services = {};
 		var len = data.services.length;
 		for (var i=0; i<len; i++){
@@ -1201,7 +1263,7 @@ var AutoTimerServiceListHandler = Class.create(AbstractContentHandler, {
 var AutoTimerSettingsHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super){
 		$super(null, null);
-		this.provider = new AutoTimerSettingsProvider(this.onSettingsReady.bind(this));
+		this.provider = new AutoTimerSettingsProvider(this.onReady.bind(this));
 		this.ajaxload = false;
 	},
 	
@@ -1210,10 +1272,34 @@ var AutoTimerSettingsHandler = Class.create(AbstractContentHandler, {
 		this.provider.load();
 	},
 	
-	onSettingsReady: function(data){
-		var settings = data;
+	onReady: function(data){
 		if(typeof(this.callback) == "function"){
-			this.callback(settings);
+			this.callback(data);
+		}
+	}
+});
+
+var AutoTimerSeriesHandler = Class.create(AbstractContentHandler, {
+	initialize: function($super){
+		$super(null, null);
+		this.provider = new AutoTimerSeriesProvider(this.onReady.bind(this));
+		this.ajaxload = false;
+	},
+	
+	loadSeriesServices: function( callback ){
+		this.callback = callback;
+		this.provider.loadSeriesServices();
+	},
+
+	loadSeriesList: function( params, callback ){
+		this.callback = callback;
+		this.provider.loadSeriesList(params);
+	},
+	
+	onReady: function(data){
+		if(typeof(this.callback) == "function"){
+			this.callback(data);
+			this.callback = undefined
 		}
 	}
 });
@@ -1348,15 +1434,43 @@ var AutoTimerSettingsProvider = Class.create(AbstractContentProvider, {
 	load: function( ){
 		this.getUrl(this.url, null, this.loadCallback.bind(this), this.errorback.bind(this));
 	},
-	
 	loadCallback: function(transport){
 		var data = this.renderXML(this.getXML(transport));
 		this.show(data);
 	},
-	
 	renderXML: function(xml){
 		this.settings = new AutoTimerSettings(xml).toJSON();
 		return this.settings;
+	},
+});
+
+var AutoTimerSeriesProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(undefined, showFnc);
+	},
+	
+	loadSeriesServices: function( ){
+		this.getUrl(URL.getseriesservices, null, this.seriesServicesCallback.bind(this), this.errorback.bind(this));
+	},
+	seriesServicesCallback: function(transport){
+		var data = this.renderSeriesServices(this.getXML(transport));
+		this.show(data);
+	},
+	renderSeriesServices: function(xml){
+		this.seriesservices = new AutoTimerSeriesServices(xml).toJSON();
+		return this.seriesservices;
+	},
+
+	loadSeriesList: function( params ){
+		this.getUrl(URL.getserieslist, params, this.seriesListCallback.bind(this), this.errorback.bind(this));
+	},
+	seriesListCallback: function(transport){
+		var data = this.renderSeriesList(this.getXML(transport));
+		this.show(data);
+	},
+	renderSeriesList: function(xml){
+		this.serieslist = new AutoTimerSeriesList(xml).toJSON();
+		return this.serieslist;
 	},
 });
 
@@ -1448,10 +1562,41 @@ function AutoTimerSettings(xml){
 	};
 }
 
+function AutoTimerSeriesServices(xml){
+	this.xmlitems = getNamedChildren(xml, "e2autotimerseriesservices", "e2seriesservice");
+	this.json = {};
+	var len = this.xmlitems.length;
+	for (var i=0; i<len; i++){
+		var element = this.xmlitems[i].getElementsByTagName('e2serviceid');
+		var id = element[0].firstChild.nodeValue;
+		var element = this.xmlitems[i].getElementsByTagName('e2servicename');
+		var name = element[0].firstChild.nodeValue;
+		this.json[id] = name;
+	}
+	this.toJSON = function(){
+		return this.json;
+	};
+}
+
+function AutoTimerSeriesList(xml){
+	this.xmlitems = getNamedChildren(xml, "e2autotimerserieslist", "e2series");
+	this.json = {};
+	var len = this.xmlitems.length;
+	for (var i=0; i<len; i++){
+		var element = this.xmlitems[i].getElementsByTagName('e2seriesid');
+		var id = element[0].firstChild.nodeValue;
+		var element = this.xmlitems[i].getElementsByTagName('e2seriesname');
+		var name = element[0].firstChild.nodeValue;
+		this.json[id] = name;
+	}
+	this.toJSON = function(){
+		return this.json;
+	};
+}
+
 function AutoTimerPreview(xml){
 	this.xmlitems = getNamedChildren(xml, "e2autotimersimulate", "e2simulatedtimer");
 	this.list = [];
-	this.getList = function(){
 		if(this.list.length === 0){
 			var len = this.xmlitems.length;
 			for (var i=0; i<len; i++){
@@ -1469,23 +1614,24 @@ function AutoTimerPreview(xml){
 				this.list.push(timer);
 			}
 			this.list.sort(sortAutoTimer);
+	}
+	this.getList = function(){
 			return this.list;
-		}
 	};
 }
 
 function AutoTimerList(xml){
 	this.xmlitems = getNamedChildren(xml, "autotimer", "timer");
 	this.list = [];
-	this.getList = function(){
 		if(this.list.length === 0){
 			var len = this.xmlitems.length;
 			for (var i=0; i<len; i++){
 				var autotimer = new AutoTimerListEntry(this.xmlitems.item(i)).toJSON();
 				this.list.push(autotimer);
 			}
-		}
 		this.list.sort(sortAutoTimer);
+		}
+	this.getList = function(){
 		return this.list;
 	};
 }
@@ -1548,7 +1694,8 @@ function AutoTimerDefaults(xml){
 	return this.defaults;
 }
 
-function AutoTimer(xml, defaults){	
+function AutoTimer(xml, defaults){
+	//QUESTION: Is it possible to get all options dynamically?	
 	// Items that must exist
 	this.id = xml.getAttribute('id');
 	this.enabled = (xml.getAttribute('enabled')=='yes') ? 'checked' : '';
@@ -1741,6 +1888,18 @@ function AutoTimer(xml, defaults){
 		'locations' : l,
 	}
 	
+	var series_service = getAttribute(xml, 'series_service', defaults);
+	var series_id = getAttribute(xml, 'series_id', defaults);
+	if (series_service==undefined) series_service = 'None';
+	if (series_id==undefined) series_id = '';
+	var series_id_options = {};
+	//Maybe later: It is also possible to get the series name from the service
+	series_id_options[series_id] = series_id;
+	this.episode = {
+		'service' : createOptionList(autotimereditorcore.seriesServices, series_service),
+		'id' : createOptionList(series_id_options, series_id),
+	}
+
 	var xmltags = xml.getElementsByTagName('e2tags');
 	var tags = '';
 	if (xmltags.length > 0){
@@ -1816,6 +1975,7 @@ function AutoTimer(xml, defaults){
 					'txt' : name,
 					'selected' : 'selected'
 				});
+			//Maybe later: It is also possible to get the bouquet of the service
 			bouquet.push({
 					'value' : '',
 					'txt' : '---',
@@ -1883,6 +2043,8 @@ function AutoTimer(xml, defaults){
 			
 			'avoidDuplicateDescription' :  this.avoidDuplicateDescription,
 			'location' :                   this.location,
+			'episode' :                    this.episode,
+			
 			'tags' :                       this.tags,
 			'filters' :                    this.filters,
 			'bouquets' :                   this.bouquets,

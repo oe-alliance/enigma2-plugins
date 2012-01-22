@@ -53,7 +53,7 @@ class AutoTimerComponent(object):
 			avoidDuplicateDescription=0, searchForDuplicateDescription=2, bouquets=None, \
 			tags=None, encoding=None, searchType="partial", searchCase="insensitive", \
 			overrideAlternatives=False, timeframe=None, vps_enabled=False, \
-			vps_overwrite=False, setEndtime=False):
+			vps_overwrite=False, setEndtime=False, series_service="None", series_id=""):
 		self.name = name
 		self.match = match
 		self.enabled = enabled
@@ -83,6 +83,8 @@ class AutoTimerComponent(object):
 		self.vps_enabled = vps_enabled
 		self.vps_overwrite = vps_overwrite
 		self.setEndtime = setEndtime
+		self.series_service = series_service
+		self.series_id = series_id
 
 ### Attributes / Properties
 
@@ -207,6 +209,9 @@ class AutoTimerComponent(object):
 	def hasTimeframe(self):
 		return self.timeframe is not None
 
+	def hasSeriesService(self):
+		return self.series_service!="None" and self.series_id!=""
+
 ### Helper
 
 	"""
@@ -320,6 +325,9 @@ class AutoTimerComponent(object):
 	getTimeframe = lambda self: self.timeframe
 	getTimeframeBegin = lambda self: int(self.timeframe[0])
 	getTimeframeEnd	= lambda self: int(self.timeframe[1])
+
+	getSeriesService = lambda self: self.series_service
+	getSeriesId = lambda self: self.series_id
 
 	isOffsetEqual = lambda self: self.offset[0] == self.offset[1]
 
@@ -528,6 +536,8 @@ class AutoTimerComponent(object):
 			timeframe = self.timeframe,
 			vps_enabled = self.vps_enabled,
 			vps_overwrite = self.vps_overwrite,
+			series_service = self.series_service,
+			series_id = self.series_id,
 		)
 
 	def __deepcopy__(self, memo):
@@ -561,6 +571,8 @@ class AutoTimerComponent(object):
 			timeframe = self.timeframe,
 			vps_enabled = self.vps_enabled,
 			vps_overwrite = self.vps_overwrite,
+			series_service = self.series_service,
+			series_id = self.series_id,
 		)
 
 	def __eq__(self, other):
@@ -617,6 +629,8 @@ class AutoTimerComponent(object):
 					str(self.timeframe),
 					str(self.vps_enabled),
 					str(self.vps_overwrite),
+					str(self.series_service),
+					str(self.series_id),
 			 )),
 			 ")>"
 		))

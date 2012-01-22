@@ -132,6 +132,14 @@ class AutoTimerEPGSelection(EPGSelection):
 class AutoTimerEditorBase:
 	""" Base Class for all Editors """
 	def __init__(self, timer, editingDefaults = False):
+	
+		from plugin import autotimerseries
+		self.autotimerseries = autotimerseries
+		# Create instance if needed
+		if self.autotimerseries is None:
+			from AutoTimerSeries import AutoTimerSeries
+			self.autotimerseries = AutoTimerSeries()
+		
 		# Keep Timer
 		self.timer = timer
 		self.editingDefaults = editingDefaults
@@ -327,7 +335,7 @@ class AutoTimerEditorBase:
 				("1", _("Title and Short description")),
 				("2", _("Title and all descriptions")),
 			],
-		    default = str(timer.searchForDuplicateDescription)
+			default = str(timer.searchForDuplicateDescription)
 		))
 
 		# Custom Location
@@ -344,6 +352,27 @@ class AutoTimerEditorBase:
 		if default not in choices:
 			choices.append(default)
 		self.destination = NoSave(ConfigSelection(default = default, choices = choices))
+
+		# Episode naming
+		self.series_service = NoSave(ConfigSelection(
+			self.autotimerseries.getServices(),
+			default = str(timer.series_service)
+		))
+
+		serieslist = []
+		if timer.series_service != "None":
+			#TODO service anfragen
+			serieslist = self.autotimerseries.getSeriesList( self.series_service.value, self.name.value.strip() )
+		if serieslist:
+			ids = [id for (id, name) in serieslist]
+			default = timer.series_id if timer.series_id in ids else ids[0]
+		else:
+			serieslist = [ (timer.series_id, timer.series_id) ]
+			default = timer.series_id
+		self.series_id = NoSave(ConfigSelection(
+			default = timer.series_id, 
+			choices = serieslist
+		))
 
 		# Tags
 		self.timerentry_tags = timer.tags
@@ -385,6 +414,15 @@ class AutoTimerEditorBase:
 				self.timerentry_tags
 			)
 
+	def selectSeriesId(self):
+		serieslist = self.autotimerseries.getSeriesList( self.series_service.value, self.name.value.strip() )
+		if serieslist:
+			self.series_id.setChoices( serieslist )
+		else:
+			self.series_id.setChoices( [ "", "" ] )
+			self.series_id.value = ""
+
+
 class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	"""Edit AutoTimer"""
 
@@ -422,6 +460,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.counter.addNotifier(self.reloadList, initial_call = False)
 		self.avoidDuplicateDescription.addNotifier(self.reloadList, initial_call = False)
 		self.useDestination.addNotifier(self.reloadList, initial_call = False)
+		self.series_service.addNotifier(self.reloadList, initial_call = False)
 		self.vps_enabled.addNotifier(self.reloadList, initial_call = False)
 
 		self.refresh()
@@ -529,6 +568,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.useDestination: _("Should timers created by this AutoTimer be recorded to a custom location?"),
 			self.destination: _("Select the location to save the recording to."),
 			self.tags: _("Tags the Timer/Recording will have."),
+			self.series_service: _("Service for series and episode numbers."),
+			self.series_id: _("Press OK to update the matching series (based on the AutoTimer name)."),
 		}
 
 	def refresh(self):
@@ -616,6 +657,10 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		if self.useDestination.value:
 			list.append(getConfigListEntry(_("Custom location"), self.destination))
 
+		list.append(getConfigListEntry(_("Service for episode numbering"), self.series_service))
+		if self.series_service.value != "None":
+			list.append(getConfigListEntry(_("Series id for lookup service"), self.series_id))
+
 		list.append(getConfigListEntry(_("Tags"), self.tags))
 
 		if hasVps:
@@ -684,6 +729,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.chooseDestination()
 		elif cur == self.tags:
 			self.chooseTags()
+		elif cur == self.series_id:
+			self.selectSeriesId()
 		else:
 			ConfigListScreen.keyOK(self)
 
@@ -840,6 +887,13 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.destination = self.destination.value
 		else:
 			self.timer.destination = None
+
+		if self.series_service.value != 'None' and self.series_id.value != "":
+			self.timer.series_service = self.series_service.value
+			self.timer.series_id = self.series_id.value
+		else:
+			self.timer.series_service = 'None'
+			self.timer.series_id = ''
 
 		self.timer.tags = self.timerentry_tags
 
