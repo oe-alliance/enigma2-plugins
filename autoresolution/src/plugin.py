@@ -119,7 +119,7 @@ class AutoRes(Screen):
 		if port_changed:
 			print "port changed to", configEntry.value
 			if port:
-				config.av.videomode[port].removeNotifier(self.defaultModeChanged)
+				config.av.videomode[port].notifiers.remove(self.defaultModeChanged)
 			port = config.av.videoport.value
 			if port in config.av.videomode:
 				config.av.videomode[port].addNotifier(self.defaultModeChanged)
