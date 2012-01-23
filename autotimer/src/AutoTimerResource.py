@@ -57,7 +57,7 @@ class AutoTimerBackgroundThread(threading.Thread):
 	def run(self):
 		req = self.__req
 		ret = self.__fnc(req)
-		if self.__stillAlive or ret == server.NOT_DONE_YET:
+		if self.__stillAlive and ret != server.NOT_DONE_YET:
 			req.write(ret)
 			req.finish()
 
