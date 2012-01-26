@@ -468,6 +468,7 @@ subsdownloader2/src/SourceCode/periscope/services/OpenSubtitle/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/services/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/services/Napisyme/Makefile
+subsdownloader2/src/SourceCode/xbmc_subtitles/services/Itasa/Makefile
 
 svdrp/Makefile
 svdrp/meta/Makefile

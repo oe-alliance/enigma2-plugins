@@ -1,4 +1,4 @@
-irom Plugins.Extensions.WebInterface.WebComponents.Sources.Timer import Timer
+from Plugins.Extensions.WebInterface.WebComponents.Sources.Timer import Timer
 from Plugins.SystemPlugins.vps.Vps import vps_timers
 import time
 

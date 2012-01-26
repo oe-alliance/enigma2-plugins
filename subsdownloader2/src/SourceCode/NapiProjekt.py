@@ -22,6 +22,9 @@ import getopt
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+prog = "NapiProjekt"
+i = 0
+i_total = 0
 try:
     from hashlib import md5 as md5
 except ImportError:

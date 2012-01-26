@@ -23,7 +23,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from os import stat as os_stat
 from os import walk as os_walk
 from Screens.Screen import Screen
-from Components.config import config, ConfigSubList, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, getConfigListEntry, ConfigDirectory, ConfigSelection
+from Components.config import config, ConfigSubList, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, getConfigListEntry, ConfigDirectory, ConfigSelection, ConfigPassword
 from Components.ConfigList import ConfigListScreen
 from Components.MenuList import MenuList
 from Components.Label import Label
@@ -70,6 +70,8 @@ config.plugins.subsdownloader.BlueButtonMenu = ConfigYesNo(default = True)
 config.plugins.subsdownloader.AutoUpdate = ConfigYesNo(default = True)
 config.plugins.subsdownloader.pathUseMediaPaternFilter = ConfigYesNo(default = False)
 config.plugins.subsdownloader.extendedMenuConfig = ConfigYesNo(default = False)
+config.plugins.subsdownloader.ItasaUser = ConfigText(default = "login", fixed_size = False)
+config.plugins.subsdownloader.ItasaPassword = ConfigPassword(default = "password", fixed_size = False)
 #config.plugins.subsdownloader.del_sub_after_conv = ConfigYesNo(default = False)
 
 #Create Subtitle Server plugin list
@@ -150,7 +152,8 @@ class SubsDownloaderApplication(Screen):
 		        "sub": "text",
 		        "nfo": "text",
 		        "cuts": "movie_timer",
-		        "zip": "package"
+		        "zip": "package",
+		        "rar": "package"
 		        }
 		#self.mediaPatern = "^.*\.(jpe|)"
 		#TODO OBSLUGA PLIKOW BZIP, ZIP, RAR
@@ -333,7 +336,7 @@ class SubsDownloaderApplication(Screen):
 		self.serverAvailableSubtitles=[]
 		position = 0
 		for x  in serverList:
-			self.serverAvailableSubtitles.append((_("["+str(x['lang'])+"]___"+str(x['release'])), str(position)))
+			self.serverAvailableSubtitles.append(("["+str(x['lang'])+"]___"+str(x['release']), str(position)))
 			position = position +1
 		self.subsListDownloaded=1
 		self["subsList"].setList(self.serverAvailableSubtitles)
@@ -344,9 +347,14 @@ class SubsDownloaderApplication(Screen):
 		comend self["subsList"].setList(self.serverAvailableSubtitles)"""
 		self.serverAvailableSubtitles=[]
 		position = 0
-		for x  in serverList:
-			self.serverAvailableSubtitles.append((_("["+str(x['language_name'])+"]_"+str(x['filename'])), position))
-			position = position +1
+		if serverList[0].has_key('no_files'):
+			for x  in serverList:
+				self.serverAvailableSubtitles.append(("["+str(x['language_name'])+"]_"+str(x['no_files'])+"cd__"+str(x['filename']), position))
+				position = position +1			
+		else:			
+			for x  in serverList:
+				self.serverAvailableSubtitles.append(("["+str(x['language_name'])+"]_"+str(x['filename']), position))
+				position = position +1
 		self.subsListDownloaded=1
 		self["subsList"].setList(self.serverAvailableSubtitles)
 		self.set_listSubs_enabled()
@@ -358,7 +366,7 @@ class SubsDownloaderApplication(Screen):
 		position = 0
 		for x  in serverList:
 			self.serverAvailableSubtitles.append((str(x['language']).replace("u'","").replace("'","")+"_" \
-			                                      +str(x['cd']).replace("u'","").replace("'","")+"cd"+"__"\
+			                                      +str(x['cd']).replace("u'","").replace("'","")+"cd__"\
 			                                      +str(x['title']).replace("u'","").replace("'","")+" "\
 			                                      +str(x['release']).replace("u'","").replace("'",""), position)) #makes list of subtitles
 			position = position +1
@@ -452,7 +460,7 @@ class SubsDownloaderApplication(Screen):
 						self.subtitle_codepade = localCodePageDecoded = chardetOutputTranslation(self.getSubtitleCodepade(selected_movie_dir+x[0][0])) 
 						LocalConvertedSubtitle = SubConv((selected_movie_dir + x[0][0]), localCodePageDecoded)
 						if LocalConvertedSubtitle.detect_format(LocalConvertedSubtitle.subs_file) != "None":
-							local_subtitle.append((_(x[0][0]), str(selected_movie_dir+x[0][0]))) #makes list of subtitles"""
+							local_subtitle.append((x[0][0], str(selected_movie_dir+x[0][0]))) #makes list of subtitles"""
 							self.subsListDownloaded = 1							
 			self["subsList"].setList(local_subtitle)
 			self.set_listSubs_enabled()
@@ -510,7 +518,7 @@ class SubsDownloaderApplication(Screen):
 					lang1 =config.plugins.subsdownloader.SubsDownloader1stLang.value
 					lang2 = config.plugins.subsdownloader.SubsDownloader2ndLang.value
 					lang3 = config.plugins.subsdownloader.SubsDownloader3rdLang.value
-					self.subtitle_database, self.__session_id, self.__msg = SERVICE.search_subtitles(self.movie_filename, show_name, show_type, "year", show_season, show_episode, Subtitle_Downloader_temp_dir, False, lang1, lang2, lang3, True)
+					self.subtitle_database, self.__session_id, self.__msg = SERVICE.search_subtitles(self.movie_filename, show_name, show_type, "year", show_season, show_episode, Subtitle_Downloader_temp_dir, False, lang1, lang2, lang3, True, self.session)
 
 					
 					#self.subtitle_database= self.subtitles.XBMC_search_subtitles(self.movie_filename,config.plugins.subsdownloader.SubsDownloader1stLang.value,config.plugins.subsdownloader.SubsDownloader2ndLang.value,config.plugins.subsdownloader.SubsDownloader3rdLang.value)
@@ -532,8 +540,11 @@ class SubsDownloaderApplication(Screen):
 					self.NapiSubtitle = NapiProjekt()
 					self.NapiSubtitle.getnapi(self.movie_filename)
 					
-					#subtitle_filename.append(self.NapiSubtitle.save())
-					self.convert_subtitle_to_movie(self.movie_filename, self.NapiSubtitle.save())
+					subtitle_filename.append(self.NapiSubtitle.save())
+					if subtitle_filename[0] != "None":
+						self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
+					else:
+						self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
 					
 					"""try:
 						self.NapiSubtitle.getnapi(self.movie_filename)
@@ -776,8 +787,8 @@ class SubsDownloaderApplication(Screen):
 					
 					pos = self["subsList"].getCurrent()[1]
 					tmp_sub_dir = sub_folder = self.movie_filename.rsplit("/",1)[0]
-					zipped_subs_path = self.movie_filename.rsplit(".",1)[0]+".zip"
-					TRUE_FALSE, language, subtitle_filename = SERVICE.download_subtitles (self.subtitle_database, pos, zipped_subs_path, tmp_sub_dir, sub_folder, self.__session_id)
+					zipped_subs_path = self.movie_filename.rsplit(".",1)[0]+".zip" #for some plugins
+					TRUE_FALSE, language, subtitle_filename = SERVICE.download_subtitles (self.subtitle_database, pos, zipped_subs_path, tmp_sub_dir, sub_folder, self.__session_id, self.session)
 					
 				if config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
 					whichSubtitleDownload = self["subsList"].getCurrent()[1]
@@ -790,7 +801,7 @@ class SubsDownloaderApplication(Screen):
 				
 				if type(subtitle_filename) == type("string"):
 					self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename)	
-				elif type(subtitle_filename) == type([]):
+				elif type(subtitle_filename) == type([]) or subtitle_filename == None:
 					if len(subtitle_filename) == 1:
 						self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
 					elif len(subtitle_filename) > 1:
@@ -893,6 +904,9 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Choose subtitle server:"), config.plugins.subsdownloader.subtitleserver))
 		if config.plugins.subsdownloader.subtitleserver.value in PERISCOPE_PLUGINS or config.plugins.subsdownloader.subtitleserver.value in XBMC_PLUGINS: #== "OpenSubtitle":
+			if config.plugins.subsdownloader.subtitleserver.value == "Itasa":
+				self.list.append(getConfigListEntry(_("Itasa server user:"), config.plugins.subsdownloader.ItasaUser))
+				self.list.append(getConfigListEntry(_("Itasa server password:"), config.plugins.subsdownloader.ItasaPassword))
 			#TODO LOGIN AND PASSWORD TO OPENSUBTITLE
 			self.list.append(getConfigListEntry(_("1st subtitle language:"), config.plugins.subsdownloader.SubsDownloader1stLang))
 			self.list.append(getConfigListEntry(_("2nd subtitle language:"), config.plugins.subsdownloader.SubsDownloader2ndLang))

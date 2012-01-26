@@ -290,7 +290,7 @@ var ServiceListEpgHandler  = Class.create(AbstractContentHandler, {
 	show: function(list){
 		var len = list.items.length;
 		for(var i = 0; i < len; i++){
-			this.showItem(list.items[i]);
+			this.updateEpg(list.items[i]);
 		}
 		this.finished();
 	},
@@ -302,25 +302,30 @@ var ServiceListEpgHandler  = Class.create(AbstractContentHandler, {
 	 * @item - The EPGEvent object
 	 */
 	//TODO: move showItem outta here
-	showItem: function(item, type){
+	updateEpg: function(item){
 		if(item.now.eventid != ''){
-			var progress = $(this.PROGRESS + item.now.servicereference)
-			if(progress)
+			var progress = $(this.PROGRESS + item.now.servicereference);
+			if(progress){
 				progress.down('.sListSProgress').title = item.now.progress + "%";
 				progress.down('.sListSProgressBar').style.width = item.now.progress + "%";
-
-			var id = this.EPG_NOW + item.now.servicereference;
-			templateEngine.process('tplServiceListEPGItem', {'item' : item.now}, id, true);
-			var element = $(id).up('.sListEPGNow');
-			if(element){
-				element.show();
 			}
 		}
+		this.showItem(this.EPG_NOW, item.now,'.sListEPGNow');
+		this.showItem(this.EPG_NEXT, item.next,'.sListEPGNext');
+	},
 
-		if(item.next.eventid != ''){
-			var id = this.EPG_NEXT + item.now.servicereference;
-			templateEngine.process('tplServiceListEPGItem', {'item' : item.next}, id, true);
-			var element = $(id).up('.sListEPGNext');
+	showItem: function(type, epgItem, parent){
+		var id = type + epgItem.servicereference;
+		var epgElement = $(id);
+		if(epgElement){ //Markers don't have any EPG
+			var isVisible = false;
+			var target = epgElement.down('.sListExtEpgLong');
+			if(target){
+				isVisible = target.visible();
+			}
+
+			templateEngine.process('tplServiceListEPGItem', {'item' : epgItem, 'isVisible' : isVisible}, id, true);
+			var element = $(id).up(parent);
 			if(element){
 				element.show();
 			}

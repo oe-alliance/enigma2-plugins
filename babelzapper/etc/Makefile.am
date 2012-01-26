@@ -1,4 +1,4 @@
-installdir = /etc/babelzapper
+installdir = $(sysconfdir)/babelzapper
 install_DATA = \
 	babelzapper.zbb \
 	colormenu.zbb \

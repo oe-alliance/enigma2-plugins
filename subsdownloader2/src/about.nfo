@@ -1,4 +1,4 @@
-Subtitle Downloader v. 0.27.0 2012-01-08
+Subtitle Downloader v. 0.28.6 2012-01-19
 
 Enigma2 plugin which downloads subtitle to Your movie.
 
@@ -29,10 +29,19 @@ HELP - show about info
 TEXT - download subtitle or avaliable on server subtitle list
 OK - on FileList play media/ on SubsList download subtitle
 
+ver 0.28.6:
+- Itasa subtitle server support,
+- setServerAvailableSubtitles_for_Napisy24 optimization should work little faster,
+- setServerAvailableSubtitles_for_PERISCOPE optimization should work little faster,
+- setServerAvailableSubtitles_for_XBMC_SUBTITLES optimization should work little faster,
+- correction in Napisy.Me class,
+- localConvertionSublist optimization should work little faster,
+- fixed greenscreen in NapiProject module when subtitles are not found.
+
 ver 0.27.0:
 - Napisy.me subtitle server support,
-- required memory optimalizacion,
-- subtitle convertion function improved,
+- required memory optimization,
+- subtitle conversion function improved,
 - subtitle and movie matching function added (experimental),
 - changes in CONTROL file depends (python-html added).
 

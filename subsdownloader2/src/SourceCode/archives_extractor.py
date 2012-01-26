@@ -1,5 +1,7 @@
 import zipfile
 
+#from Plugins.Extensions.SubsDownloader2.SourceCode import rarfile
+
 #  Copyright (C) 2011 Dawid Bankowski <enigma2subsdownloader@gmail.com>
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -61,9 +63,57 @@ class zip_extractor():
           else:
                print "%s is not a zip file." % zip__path
                return False
+""" 
+class rar_extractor():
+     def __init__(self, rar__path, destination_dir = None, extracted_extension_filter = None):
+          self.__rar__path = rar__path
+          self.__destination_dir = destination_dir
+          self.__extracted_extension_filter = extracted_extension_filter       
+         
+     def open_rar_file_to_read(self,rar__path):
+          try:
+               rar_data = rarfile.RarFile(rar__path)
+               rar_file_list = rar_data.namelist()              
+               return rar_data,  rar_file_list     
+               rar_data.close()
+          except:
+               print "There is problem with %s reading" % rar__path
+               return False
+             
      
-
-
+     def rared_file_list(self, rar_file_temp_list, extraction_filter = None):
+          rar_file_list =[]
+          for x in rar_file_temp_list:
+               if extraction_filter != None:
+                    if x.rsplit(".",1)[1] in extraction_filter:
+                         rar_file_list.append(x)
+               else:
+                    rar_file_list.append(x)
+          return rar_file_list  
+ 
+ 
+     def extract_rared_file(self):
+          if self.__destination_dir == None:
+               destination_dir = (self.__rar__path.rsplit("/",1))[0]
+          else:
+               destination_dir = self.__destination_dir
+          if rarfile.is_rarfile(self.__rar__path):
+               rar_data, rar_file_list = self.open_rar_file_to_read(self.__rar__path)
+               extraction_file_list = self.rared_file_list(rar_file_list, self.__extracted_extension_filter)
+               #try:
+               extracted_files_path =[]
+               for x in extraction_file_list:
+                    rar_data.extract(x, destination_dir)
+                    print "Files %s from rar %s extracted to dir: %s.\n" % (x,self.__rar__path,destination_dir)  
+                    extracted_files_path.append(destination_dir+"/"+x)
+                    return extracted_files_path   
+               #except:
+               #    print "Rar %s was not extracted to dir: %s" % (self.__rar__path,destination_dir) 
+               #    return False
+          else:
+               print "%s is not a rar file." % rar__path
+               return False"""
+ 
 #USE
 #zip__path = "C:/1111/Lord of the ring.zip"
 #aa = zip_extractor(zip__path,None,("txt","sub","srt"))
