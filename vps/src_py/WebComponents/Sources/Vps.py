@@ -7,7 +7,7 @@ class Vps(Timer):
 		state, statetext = Timer.addTimerByEventID(self, param)
 		if state:
 			sRef = param['sRef']
-			eit = param['eventid']
+			eit = int(param['eventid'])
 			vpsplugin_enabled = None
 			if 'vpsplugin_enabled' in param:
 				vpsplugin_enabled = True if param['vpsplugin_enabled'] == '1' else False
@@ -27,7 +27,7 @@ class Vps(Timer):
 					timer.vpsplugin_time = vpsplugin_time
 
 					now = int(time.time())
-					if vps_enabled and timer.begin <= now + 900 and now <= timer.end:
+					if vpsplugin_enabled and timer.begin <= now + 900 and now <= timer.end:
 						vps_timers.checksoon()
 					break
 		return state, statetext
@@ -62,7 +62,7 @@ class Vps(Timer):
 					timer.vpsplugin_time = vpsplugin_time
 
 					now = int(time.time())
-					if vps_enabled and begin <= now + 900 and now <= end:
+					if vpsplugin_enabled and begin <= now + 900 and now <= end:
 						vps_timers.checksoon()
 					break
 		return state, statetext
