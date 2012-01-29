@@ -1,4 +1,4 @@
-Subtitle Downloader v. 0.28.6 2012-01-19
+Subtitle Downloader v. 0.28.7 2012-01-29
 
 Enigma2 plugin which downloads subtitle to Your movie.
 
@@ -28,6 +28,9 @@ HELP - show about info
 < - change widget to FileList
 TEXT - download subtitle or avaliable on server subtitle list
 OK - on FileList play media/ on SubsList download subtitle
+
+ver 0.28.7 
+- git repository corrections (Subtitulos bringed back to git IPK).
 
 ver 0.28.6:
 - Itasa subtitle server support,
