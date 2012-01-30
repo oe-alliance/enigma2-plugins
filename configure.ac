@@ -516,7 +516,7 @@ subsdownloader2/src/SourceCode/periscope/Makefile
 subsdownloader2/src/SourceCode/periscope/services/Makefile
 subsdownloader2/src/SourceCode/periscope/services/BierDopje/Makefile
 subsdownloader2/src/SourceCode/periscope/services/OpenSubtitle/Makefile
-subsdownloader2/src/SourceCode/periscope/servive/Subtitulos/Makefile
+subsdownloader2/src/SourceCode/periscope/services/Subtitulos/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/services/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/services/Napisyme/Makefile
