@@ -19,6 +19,7 @@ from RecordTimer import AFTEREVENT
 
 # Needed to convert our timestamp back and forth
 from time import localtime
+from AutoTimerEditor import weekdays
 
 from enigma import eServiceReference
 
@@ -120,10 +121,11 @@ class AutoTimerImporter(Screen):
 		self["key_yellow"] = StaticText()
  		self["key_blue"] = StaticText()
 
-		list = []
+		entries = []
+		append = entries.append
 
 		if disabled is not None:
-			list.append(
+			append(
 				SelectionEntryComponent(
 					': '.join((_("Enabled"), {True: _("disable"), False: _("enable")}[bool(disabled)])),
 					not disabled,
@@ -132,34 +134,41 @@ class AutoTimerImporter(Screen):
 			))
 
 		if name != "":
-			list.extend([
+			append(
 				SelectionEntryComponent(
 					_("Match title: %s") % (name),
 					name,
 					1,
 					True
-				),
+			))
+			append(
 				SelectionEntryComponent(
 					_("Exact match"),
 					True,
 					8,
 					True
-				)
-			])
+			))
 
 		if begin and end:
 			begin = localtime(begin)
 			end = localtime(end)
-			list.append(
+			append(
 				SelectionEntryComponent(
 					_("Match Timespan: %02d:%02d - %02d:%02d") % (begin[3], begin[4], end[3], end[4]),
 					((begin[3], begin[4]), (end[3], end[4])),
 					2,
 					True
 			))
+			append(
+				SelectionEntryComponent(
+					_("Only on Weekday: %s") % (weekdays[begin.tm_wday][1],), # XXX: the lookup is dirty but works :P
+					str(begin.tm_wday),
+					9,
+					True
+			))
 
 		if sref:
-			list.append(
+			append(
 				SelectionEntryComponent(
 					_("Only on Service: %s") % (sref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')),
 					str(sref),
@@ -168,7 +177,7 @@ class AutoTimerImporter(Screen):
 			))
 
 		if afterEvent is not None:
-			list.append(
+			append(
 				SelectionEntryComponent(
 					': '.join((_("After event"), afterevent[afterEvent])),
 					afterEvent,
@@ -177,7 +186,7 @@ class AutoTimerImporter(Screen):
 			))
 
 		if justplay is not None:
-			list.append(
+			append(
 				SelectionEntryComponent(
 					': '.join((_("Timer type"), {0: _("record"), 1: _("zap")}[int(justplay)])),
 					int(justplay),
@@ -186,7 +195,7 @@ class AutoTimerImporter(Screen):
 			))
 
 		if dirname is not None:
-			list.append(
+			append(
 				SelectionEntryComponent(
 					': '.join((_("Location"), dirname or "/hdd/movie/")),
 					dirname,
@@ -195,7 +204,7 @@ class AutoTimerImporter(Screen):
 			))
 
 		if tags:
-			list.append(
+			append(
 				SelectionEntryComponent(
 					': '.join((_("Tags"), ', '.join(tags))),
 					tags,
@@ -203,7 +212,7 @@ class AutoTimerImporter(Screen):
 					True
 			))
 
-		self["list"] = SelectionList(list)
+		self["list"] = SelectionList(entries)
 
 		# Define Actions
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
@@ -291,6 +300,14 @@ class AutoTimerImporter(Screen):
 			elif item[2] == 8: # Exact match
 				autotimer.searchType = "exact"
 				autotimer.searchCase = "sensitive"
+			elif item[2] == 9: # Weekday
+				includes = [
+						autotimer.getIncludedTitle(),
+						autotimer.getIncludedShort(),
+						autotimer.getIncludedDescription(),
+						[item[1]],
+				]
+				autotimer.include = includes
 
 		if autotimer.match == "":
 			self.session.openWithCallback(

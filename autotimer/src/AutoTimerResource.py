@@ -3,7 +3,8 @@ from AutoTimerSeries import AutoTimerSeries
 from AutoTimerConfiguration import CURRENT_CONFIG_VERSION
 from Components.config import config
 from RecordTimer import AFTEREVENT
-from twisted.web import http, resource
+from twisted.web import http, resource, server
+import threading
 try:
 	from urllib import quote, unquote
 except ImportError as ie:
@@ -46,8 +47,36 @@ class AutoTimerBaseResource(resource.Resource):
 	<e2statetext>%s</e2statetext>
 </e2simplexmlresult>""" % ('True' if state else 'False', statetext)
 
-class AutoTimerDoParseResource(AutoTimerBaseResource):
+class AutoTimerBackgroundThread(threading.Thread):
+	def __init__(self, req, fnc):
+		threading.Thread.__init__(self)
+		self.__req = req
+		if hasattr(req, 'notifyFinish'):
+			req.notifyFinish().addErrback(self.connectionLost)
+		self.__stillAlive = True
+		self.__fnc = fnc
+		self.start()
+
+	def connectionLost(self, err):
+		self.__stillAlive = False
+
+	def run(self):
+		req = self.__req
+		ret = self.__fnc(req)
+		if self.__stillAlive and ret != server.NOT_DONE_YET:
+			req.write(ret)
+			req.finish()
+
+class AutoTimerBackgroundingResource(AutoTimerBaseResource, threading.Thread):
 	def render(self, req):
+		AutoTimerBackgroundThread(req, self.renderBackground)
+		return server.NOT_DONE_YET
+
+	def renderBackground(self, req):
+		pass
+
+class AutoTimerDoParseResource(AutoTimerBackgroundingResource):
+	def renderBackground(self, req):
 		autotimer = self.getAutoTimerInstance()
 
 		ret = autotimer.parseEPG()
@@ -58,8 +87,8 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 
 		return self.returnResult(req, True, output)
 
-class AutoTimerSimulateResource(AutoTimerBaseResource):
-	def render(self, req):
+class AutoTimerSimulateResource(AutoTimerBackgroundingResource):
+	def renderBackground(self, req):
 		autotimer = self.getAutoTimerInstance()
 
 		ret = autotimer.parseEPG(simulateOnly=True)
