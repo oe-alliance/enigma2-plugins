@@ -48,7 +48,6 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 				getConfigListEntry(_("Show notification on similars"), config.plugins.autotimer.notifsimilar, _("By enabling this you will be notified about similar timers added during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over.")),
 				getConfigListEntry(_("Editor for new AutoTimers"), config.plugins.autotimer.editor, _("The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor.")),
 				getConfigListEntry(_("Support \"Fast Scan\"?"), config.plugins.autotimer.fastscan, _("When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it.")),
-				getConfigListEntry(_("Episode naming scheme"), config.plugins.autotimer.episode_scheme, _("Select the general episode naming scheme for series. You have to select a episode service for every Autotimer!")),
 			],
 			session = session,
 			on_change = self.changed

@@ -279,32 +279,6 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="optionTitle">Episode naming:</td>
-										<td class="optionContent">
-											<table border="0" cellpadding="0" cellspacing="0"> 
-												<tr>
-													<td class="optionMain">
-														<select id="series_service" size="1" class="select">
-															{for es in episode.service}
-																<option value="${es.value}" ${es.selected}>${es.txt}</option>
-															{/for}	
-														</select>
-													</td>
-													<td>
-														<div id="series_servicecontent" class="optionSub">
-															Select series:
-															<select id="series_id" size="1" class="select fixedwidthseries">
-																{for eid in episode.id}
-																	<option value="${eid.value}" ${eid.selected}>${eid.txt}</option>
-																{/for}	
-															</select>
-														</div>
-													</td>
-												</tr>
-											</table>
-										</td>
-									</tr>
-									<tr>
 										<td class="optionTitle">Tags:</td>
 										<td class="optionContent">
 											<div id="taglist">
