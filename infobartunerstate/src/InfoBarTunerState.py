@@ -944,13 +944,10 @@ class TunerState(TunerStateBase):
 				if self.progress is not None:
 					self["Progress"].setValue( self.progress )
 					self["Progress"].show()
-					
+				
 				# No resize necessary
 				fields.append( "Progress" )
-				if not self.endless:
-					widths.append( self["Progress"].instance.size().width() )
-				else:
-					widths.append( 0 )
+				widths.append( self["Progress"].instance.size().width() )
 			
 			elif content == "TimerDestination":
 				text = self.destination

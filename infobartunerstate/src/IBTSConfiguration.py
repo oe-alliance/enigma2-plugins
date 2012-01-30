@@ -25,8 +25,8 @@ from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 
 from Components.ActionMap import ActionMap
+from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-
 from Screens.Setup import SetupSummary
 
 # Plugin internal
@@ -135,7 +135,10 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			x()
 		#self.createConfig()
 
-	def close(self):
+	# Overwrite ConfigListScreen keySave function
+	def keySave(self):
+		self.saveAll()
+
 		# Check field configuration
 		fieldicon = []
 		fieldprogress = []
@@ -210,7 +213,15 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			if gInfoBarTunerState:
 				# Plugin is active, disable it
 				gInfoBarTunerState.close()
-		
+
+		self.close()
+	
+	# Overwrite Screen close function
+	def close(self):
+		from plugin import ABOUT
+		self.session.openWithCallback(self.closeConfirm, MessageBox, ABOUT, MessageBox.TYPE_INFO)
+
+	def closeConfirm(self, dummy=None):
 		# Call baseclass function
 		Screen.close(self)
 

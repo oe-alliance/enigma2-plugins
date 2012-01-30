@@ -36,8 +36,8 @@ from InfoBarTunerState import InfoBarTunerState, TunerStateInfo
 # Contants
 NAME = _("InfoBar Tuner State") 
 DESCRIPTION = _("Show InfoBar Tuner State")
-VERSION = "V0.9.3"
-#TODO About
+VERSION = "V0.9.4"
+ABOUT = "\n  InfoBarTunerState " +VERSION+ "\n\n  (C) 2011 by betonme @ IHAD \n\n  If You like this plugin and want to support it,\n  or if just want to say ''thanks'',\n  feel free to donate via PayPal. \n\n  Thanks a lot ! \n\n  PayPal: http://bit.ly/ibtspaypal  "
 
 
 # Globals
