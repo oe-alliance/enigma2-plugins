@@ -157,9 +157,6 @@ class AutoTimer:
 			print("[AutoTimer] Navigation is not available, can't parse EPG")
 			return (0, 0, 0, [], [], [])
 
-		# Import auto episodes handler
-		from plugin import autotimerseries
-
 		total = 0
 		new = 0
 		modified = 0
@@ -479,20 +476,6 @@ class AutoTimer:
 				newEntry.tags = timer.tags
 				newEntry.vpsplugin_enabled = timer.vps_enabled
 				newEntry.vpsplugin_overwrite = timer.vps_overwrite
-
-				episodeid = ""
-				if timer.hasSeriesService():
-					# Create instance if needed
-					if autotimerseries is None:
-						from AutoTimerSeries import AutoTimerSeries
-						autotimerseries = AutoTimerSeries()
-					series_service = timer.getSeriesService()
-					series_id = timer.getSeriesId()
-					data = autotimerseries.getEpisodeId(series_service, series_id, evtBegin, evtEnd)
-					if data:
-						season, episode, title = data
-						episodeid = config.plugins.autotimer.episode_scheme.value.format( **{'season': season, 'episode': episode, 'title': title} )
-						newEntry.name = newEntry.name + episodeid
 
 				if oldExists:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?

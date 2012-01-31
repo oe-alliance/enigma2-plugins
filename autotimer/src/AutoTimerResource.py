@@ -1,14 +1,13 @@
 from AutoTimer import AutoTimer
-from AutoTimerSeries import AutoTimerSeries
 from AutoTimerConfiguration import CURRENT_CONFIG_VERSION
 from Components.config import config
 from RecordTimer import AFTEREVENT
 from twisted.web import http, resource, server
 import threading
 try:
-	from urllib import quote, unquote
+	from urllib import unquote
 except ImportError as ie:
-	from urllib.parse import quote, unquote
+	from urllib.parse import unquote
 from ServiceReference import ServiceReference
 from Tools.XMLTools import stringToXML
 from enigma import eServiceReference
@@ -31,11 +30,6 @@ class AutoTimerBaseResource(resource.Resource):
 			return autotimer
 		self._remove = False
 		return plugin.autotimer
-	def getAutoSeriesInstance(self):
-		if plugin.autotimerseries is None:
-			autotimerseries = AutoTimerSeries()
-			return autotimerseries
-		return plugin.autotimerseries
 	def returnResult(self, req, state, statetext):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
@@ -339,10 +333,6 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		timer.searchForDuplicateDescription = int(get("searchForDuplicateDescription", timer.searchForDuplicateDescription))
 		timer.destination = get("location", timer.destination) or None
 
-		# Episode naming
-		timer.series_service = get("series_service", timer.series_service)
-		timer.series_id = get("series_id", timer.series_id)
-
 		# vps
 		enabled = get("vps_enabled")
 		if enabled is not None:
@@ -397,8 +387,6 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.notifsimilar.value = True if value == "true" else False
 			elif key == "maxdaysinfuture":
 				config.plugins.autotimer.maxdaysinfuture.value = int(value)
-			elif key == "episode_scheme":
-				config.plugins.autotimer.episode_scheme.value = value
 
 		if config.plugins.autotimer.autopoll.value:
 			if plugin.autopoller is None:
@@ -483,10 +471,6 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
-		<e2settingname>config.plugins.autotimer.episode_scheme</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
 		<e2settingname>hasVps</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
@@ -511,94 +495,7 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.notifconflict.value,
 				config.plugins.autotimer.notifsimilar.value,
 				config.plugins.autotimer.maxdaysinfuture.value,
-				config.plugins.autotimer.episode_scheme.value,
 				hasVps,
 				CURRENT_CONFIG_VERSION,
 				API_VERSION,
 			)
-
-class AutoTimerGetSeriesServicesResource(AutoTimerBaseResource):
-	def render(self, req):
-		autotimerseries = self.getAutoSeriesInstance()
-
-		servicelist = autotimerseries.getServices()
-
-		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimergetseriesservices api_version=\"", str(API_VERSION), "\">\n"]
-		extend = returnlist.extend
-
-		for (id, name) in servicelist:
-			extend((
-				'<e2seriesservice>\n'
-				'   <e2serviceid>', stringToXML(id), '</e2serviceid>\n',
-				'   <e2servicename>', stringToXML(name), '</e2servicename>\n',
-				'</e2seriesservice>\n'
-			))
-		returnlist.append('</e2autotimergetseriesservices>')
-
-		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application/xhtml+xml')
-		req.setHeader('charset', 'UTF-8')
-		return ''.join(returnlist)
-
-class AutoTimerGetSeriesServicesResource(AutoTimerBaseResource):
-	def render(self, req):
-		autotimerseries = self.getAutoSeriesInstance()
-
-		servicelist = autotimerseries.getServices()
-
-		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimerseriesservices api_version=\"", str(API_VERSION), "\">\n"]
-		extend = returnlist.extend
-
-		if servicelist:
-			for (id, name) in servicelist:
-				extend((
-					'<e2seriesservice>\n'
-					'   <e2serviceid>', stringToXML(id), '</e2serviceid>\n',
-					'   <e2servicename>', stringToXML(name), '</e2servicename>\n',
-					'</e2seriesservice>\n'
-				))
-			returnlist.append('</e2autotimerseriesservices>')
-
-		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application/xhtml+xml')
-		req.setHeader('charset', 'UTF-8')
-		return ''.join(returnlist)
-
-class AutoTimerGetSeriesListResource(AutoTimerBaseResource):
-	def render(self, req):
-		def get(name, default=None):
-			ret = req.args.get(name)
-			return ret[0] if ret else default
-
-		autotimerseries = self.getAutoSeriesInstance()
-
-		service = get("series_service")
-		name = get("name")
-		serieslist = autotimerseries.getSeriesList(service, name)
-
-		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimerserieslist api_version=\"", str(API_VERSION), "\">\n"]
-		extend = returnlist.extend
-
-		if serieslist:
-			for (id, name) in serieslist:
-				#TODO Is there no other way?
-				try:
-					name.decode('utf-8')
-				except UnicodeDecodeError:
-					try:
-						name = name.decode("cp1252").encode("utf-8")
-					except UnicodeDecodeError:
-						name = name.decode("iso-8859-1").encode("utf-8")
-				extend((
-					'<e2series>\n'
-					'   <e2seriesid>', stringToXML(id), '</e2seriesid>\n',
-					'   <e2seriesname>', stringToXML(name), '</e2seriesname>\n',
-					'</e2series>\n'
-				))
-
-		returnlist.append('</e2autotimerserieslist>')
-
-		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application/xhtml+xml')
-		req.setHeader('charset', 'UTF-8')
-		return ''.join(returnlist)
