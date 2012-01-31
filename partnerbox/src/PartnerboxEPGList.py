@@ -49,8 +49,8 @@ def Partnerbox_EPGListInit():
 	EPGList.buildSimilarEntry = Partnerbox_SimilarEntry
 	EPGList.buildMultiEntry = Partnerbox_MultiEntry
 
-def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer = None, time_epoch = config.GraphEPG.prev_time_period.value, overjump_empty = config.GraphEPG.overjump.value):
-	baseEPGList__init__(self, type, selChangedCB, timer, time_epoch = config.GraphEPG.prev_time_period.value, overjump_empty = config.GraphEPG.overjump.value)
+def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer = None, time_epoch = config.epgselction.prev_time.value, overjump_empty = config.epgselction.overjump.value):
+	baseEPGList__init__(self, type, selChangedCB, timer, time_epoch = config.epgselction.prev_time.value, overjump_empty = config.epgselction.overjump.value)
 	# Partnerbox Clock Icons
 	self.remote_clock_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock.png')
 	self.remote_clock_add_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock_add.png')
