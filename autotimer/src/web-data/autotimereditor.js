@@ -170,7 +170,7 @@ var AutoTimerEditorCore = Class.create({
 		
 		// Instantiate all elements
 		this.services = new AutoTimerServiceController();
-		this.settings = new AutoTimerSettingsController
+		this.settings = new AutoTimerSettingsController();
 		
 		this.menu = new AutoTimerMenuController('contentAutoTimerMenu');
 		this.list = new AutoTimerListController('contentAutoTimerList');
@@ -443,7 +443,7 @@ var AutoTimerListController = Class.create(Controller, {
 		var selectList = $('list');
 		var selectOptions = selectList.getElementsByTagName('option');
 		if ( selectOptions.length > 0){
-			if (this.select != null){
+			if (this.select != undefined && this.select != null && this.select != ""){
 				// Select the given AutoTimer because of add/remove action
 				for (idx in selectOptions){
 					if ( this.select == unescape(selectOptions[idx].value) ){
@@ -646,16 +646,15 @@ var AutoTimerEditController = Class.create(Controller, {
 	},
 	
 	onchangeSelectBouquet: function(x) {
-		// Load services of selected bouquet
-		var service = unescape(x.value);
-		autotimereditorcore.services.load( service, this.loadServicesCallback.bind(this, x) );
-	},
-	
-	loadServicesCallback: function(x, services) {
 		var select = x.parentNode.nextElementSibling.firstElementChild;
 		for (i = select.options.length - 1; i>=0; i--) {
 			select.options.remove(i);
 		}
+		// Load services of selected bouquet
+		autotimereditorcore.services.load( unescape(x.value), this.servicesCallback.bind(this, x) );
+	},
+	servicesCallback: function(x, services) {
+		var select = x.parentNode.nextElementSibling.firstElementChild;
 		for ( var service in services) {
 			select.options.add( new Option(String(services[service]), service ) );
 		}
@@ -754,6 +753,7 @@ var AutoTimerEditController = Class.create(Controller, {
 		var idx = selectList.selectedIndex;
 		if (idx>=0){
 			data['id'] = unescape(selectList.options[idx].value);
+			selectList.options[idx].className = ($('enabled').checked) ? 'enabled' : 'disabled';
 		}
 		data['enabled'] = ($('enabled').checked) ? '1' : '0';
 		
@@ -1028,12 +1028,6 @@ var AutoTimerEditController = Class.create(Controller, {
 				this.onchangeCheckbox(element);
 			}.bind(this)
 		);
-		$('locationavailable').on(
-			'change',
-			function(event, element){
-				this.onchangeCheckbox(element);
-			}.bind(this)
-		);
 		$('afterevent').on(
 			'change',
 			function(event, element){
@@ -1050,6 +1044,12 @@ var AutoTimerEditController = Class.create(Controller, {
 			'change',
 			function(event, element){
 				this.onchangeSelect(element);
+			}.bind(this)
+		);
+		$('locationavailable').on(
+			'change',
+			function(event, element){
+				this.onchangeCheckbox(element);
 			}.bind(this)
 		);
 		$('taglist').on(
@@ -1177,7 +1177,7 @@ var AutoTimerPreviewController = Class.create(Controller, {
 var AutoTimerServiceListHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super){
 		$super(null, null);
-		this.provider = new SimpleServiceListProvider (this.onServicesReady.bind(this));
+		this.provider = new SimpleServiceListProvider (this.onReady.bind(this));
 		this.ajaxload = false;
 	},
 	
@@ -1186,7 +1186,7 @@ var AutoTimerServiceListHandler = Class.create(AbstractContentHandler, {
 		this.provider.load(ref);
 	},
 	
-	onServicesReady: function(data){
+	onReady: function(data){
 		var services = {};
 		var len = data.services.length;
 		for (var i=0; i<len; i++){
@@ -1201,7 +1201,7 @@ var AutoTimerServiceListHandler = Class.create(AbstractContentHandler, {
 var AutoTimerSettingsHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super){
 		$super(null, null);
-		this.provider = new AutoTimerSettingsProvider(this.onSettingsReady.bind(this));
+		this.provider = new AutoTimerSettingsProvider(this.onReady.bind(this));
 		this.ajaxload = false;
 	},
 	
@@ -1210,10 +1210,9 @@ var AutoTimerSettingsHandler = Class.create(AbstractContentHandler, {
 		this.provider.load();
 	},
 	
-	onSettingsReady: function(data){
-		var settings = data;
+	onReady: function(data){
 		if(typeof(this.callback) == "function"){
-			this.callback(settings);
+			this.callback(data);
 		}
 	}
 });
@@ -1348,12 +1347,10 @@ var AutoTimerSettingsProvider = Class.create(AbstractContentProvider, {
 	load: function( ){
 		this.getUrl(this.url, null, this.loadCallback.bind(this), this.errorback.bind(this));
 	},
-	
 	loadCallback: function(transport){
 		var data = this.renderXML(this.getXML(transport));
 		this.show(data);
 	},
-	
 	renderXML: function(xml){
 		this.settings = new AutoTimerSettings(xml).toJSON();
 		return this.settings;
@@ -1451,7 +1448,6 @@ function AutoTimerSettings(xml){
 function AutoTimerPreview(xml){
 	this.xmlitems = getNamedChildren(xml, "e2autotimersimulate", "e2simulatedtimer");
 	this.list = [];
-	this.getList = function(){
 		if(this.list.length === 0){
 			var len = this.xmlitems.length;
 			for (var i=0; i<len; i++){
@@ -1469,23 +1465,24 @@ function AutoTimerPreview(xml){
 				this.list.push(timer);
 			}
 			this.list.sort(sortAutoTimer);
+	}
+	this.getList = function(){
 			return this.list;
-		}
 	};
 }
 
 function AutoTimerList(xml){
 	this.xmlitems = getNamedChildren(xml, "autotimer", "timer");
 	this.list = [];
-	this.getList = function(){
 		if(this.list.length === 0){
 			var len = this.xmlitems.length;
 			for (var i=0; i<len; i++){
 				var autotimer = new AutoTimerListEntry(this.xmlitems.item(i)).toJSON();
 				this.list.push(autotimer);
 			}
-		}
 		this.list.sort(sortAutoTimer);
+		}
+	this.getList = function(){
 		return this.list;
 	};
 }
@@ -1816,6 +1813,7 @@ function AutoTimer(xml, defaults){
 					'txt' : name,
 					'selected' : 'selected'
 				});
+			//Maybe later: It is also possible to get the bouquet of the service
 			bouquet.push({
 					'value' : '',
 					'txt' : '---',
