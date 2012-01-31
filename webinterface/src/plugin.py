@@ -33,6 +33,7 @@ hw = HardwareInfo()
 #init the config
 config.plugins.Webinterface = ConfigSubsection()
 config.plugins.Webinterface.enabled = ConfigYesNo(default=True)
+config.plugins.Webinterface.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.Webinterface.allowzapping = ConfigYesNo(default=True)
 config.plugins.Webinterface.includemedia = ConfigYesNo(default=False)
 config.plugins.Webinterface.autowritetimer = ConfigYesNo(default=False)
@@ -494,7 +495,11 @@ def configCB(result, session):
 def Plugins(**kwargs):
 	p = PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)
 	p.weight = 100 #webif should start as last plugin
-	return [p,
+	list = [p,
 #			PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkstart),
 			PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),
 							where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=openconfig)]
+	if config.plugins.Webinterface.show_in_extensionsmenu.value:	
+		list.append(PluginDescriptor(name="Webinterface", description=_("Configuration for the Webinterface"), 
+			where = PluginDescriptor.WHERE_EXTENSIONSMENU, icon="plugin.png", fnc=openconfig))						
+	return list
