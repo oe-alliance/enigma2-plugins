@@ -12,14 +12,6 @@ from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
-# Webinterface
-from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
-from Plugins.Extensions.WebInterface.WebChilds.Screenpage import ScreenPage
-
-# Twisted
-from twisted.web import static
-from twisted.python import util
-
 # Initialize Configuration
 config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default = False)
@@ -98,20 +90,28 @@ def autostart(reason, **kwargs):
 # Webgui
 def sessionstart(reason, **kwargs):
 	if reason == 0 and "session" in kwargs:
-		from WebChilds.UploadResource import UploadResource
-		if hasattr(static.File, 'render_GET'):
-			class File(static.File):
-				def render_POST(self, request):
-					return self.render_GET(request)
+		try:
+			from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
+			from Plugins.Extensions.WebInterface.WebChilds.Screenpage import ScreenPage
+			from twisted.web import static
+			from twisted.python import util
+			from WebChilds.UploadResource import UploadResource
+		except ImportError as ie:
+			pass
 		else:
-			File = static.File
+			if hasattr(static.File, 'render_GET'):
+				class File(static.File):
+					def render_POST(self, request):
+						return self.render_GET(request)
+			else:
+				File = static.File
 
-		session = kwargs["session"]
-		root = File(util.sibpath(__file__, "web-data"))
-		root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) )
-		root.putChild('tmp', File('/tmp'))
-		root.putChild("uploadfile", UploadResource(session))
-		addExternalChild( ("autotimereditor", root, "AutoTimer", "1", True) )
+			session = kwargs["session"]
+			root = File(util.sibpath(__file__, "web-data"))
+			root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) )
+			root.putChild('tmp', File('/tmp'))
+			root.putChild("uploadfile", UploadResource(session))
+			addExternalChild( ("autotimereditor", root, "AutoTimer", "1", True) )
 
 # Mainfunction
 def main(session, **kwargs):
