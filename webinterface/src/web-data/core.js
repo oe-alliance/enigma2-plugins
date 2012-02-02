@@ -1567,7 +1567,7 @@ var E2WebCore = Class.create({
 			'click',
 			'a.sListExtEpg',
 			function(event, element){
-				var target = element.down('.sListExtEpgLong');
+				var target = element.up('.sListEPGItem').down('.sListExtEpgLong');
 
 				if(target){
 					var bullet = element.down('.sListBulletToggle');

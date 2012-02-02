@@ -17,6 +17,9 @@ a.underline{text-decoration:underline}
 .right{text-align:right}
 .block{display:block}
 .bottom{vertical-align:bottom}
+.leftCol{float:left;width:50%}
+.rightCol{float:right;width:50%}
+.right{text-align:right}
 .liHeader{border-top:#000;border-bottom:#000}
 #banner{width:1000px;height:67px;background:#000;padding-left:5px;margin-bottom:8px;position:relative;}
 #banner a,#banner a:visited,#banner a:active{color:#FFF;text-decoration:none;}
@@ -66,7 +69,7 @@ a.underline{text-decoration:underline}
 .sListEPGItem{font-size:12px;margin:0;padding:0}
 .sListSProgress{display:inline-block;margin:0;border:1px solid #485052;width:50px;height:10px;padding:1px}
 .sListSProgressBar{display:inline-block;margin:0;background-color:#60aef2;width:0;height:100%}
-table.sListExtEpg{width:580px;margin:0;padding:0}
+.sListExtEpg{display: block}
 .header{padding-top:2px;padding-left:4px;padding-right:4px;display:block;height:22px}
 #container{margin:0 auto;text-align:left;width:1005px}
 #contentTable{scrollbar:auto;width:785px}
