@@ -19,7 +19,7 @@ from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.config import config
-from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_MULTI
+from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_MULTI, days
 from Components.TimerList import TimerList
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.Event import Event
@@ -74,7 +74,7 @@ class EPGSearchList(EPGList):
 		serviceref = ServiceReference(service) # for Servicename
 		res = [
 			None, # no private data needed
-			(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
+			(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, days[t[6]]),
 			(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
 		]
 		if rec1 or rec2:
