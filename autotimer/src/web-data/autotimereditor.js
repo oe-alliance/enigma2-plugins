@@ -158,72 +158,75 @@ function getAttribute(xml, key, defaults){
 // AutoTimerEditorCore
 var AutoTimerEditorCore = Class.create({
 	initialize: function(name, servicename, servicereference, from, to){
-		this.newautotimer = {
-			'enabled' : 'yes',
-			'name' : name,
-			'match' : name,
-			'from' : from,
-			'to' : to,
-			'e2servicename' : servicename,
-			'e2servicereference' : servicereference,
+		// Check WebIf Version
+		if (typeof core == "undefined"){
+			alert("Old WebInterface found!\nPlease update the WebInterface Plugin first.");
+		
+		} else {
+			// Start AutoTimer WebIf
+			this.newautotimer = {
+				'enabled' : 'yes',
+				'name' : name,
+				'match' : name,
+				'from' : from,
+				'to' : to,
+				'e2servicename' : servicename,
+				'e2servicereference' : servicereference,
+			}
+			
+			// Instantiate all elements
+			this.services = new AutoTimerServiceController();
+			this.settings = new AutoTimerSettingsController();
+			
+			this.menu = new AutoTimerMenuController('contentAutoTimerMenu');
+			this.list = new AutoTimerListController('contentAutoTimerList');
+			this.edit = new AutoTimerEditController('contentAutoTimerContent');
+			this.preview = new AutoTimerPreviewController('contentAutoTimerContent');
+			
+			// Display menu
+			this.menu.load();
+			
+			// Load locations and tags
+			core.lt.getLocationsAndTags(this.loadLocationsAndTagsCallback.bind(this));
+			// Load bouquet list
+			this.services.loadBouquetsTv(this.loadBouquetsCallback.bind(this));
+			// Load autotimer settings
+			this.settings.load(this.loadSettingsCallback.bind(this));
 		}
-		
-		// Instantiate all elements
-		this.services = new AutoTimerServiceController();
-		this.settings = new AutoTimerSettingsController();
-		
-		this.menu = new AutoTimerMenuController('contentAutoTimerMenu');
-		this.list = new AutoTimerListController('contentAutoTimerList');
-		this.edit = new AutoTimerEditController('contentAutoTimerContent');
-		this.preview = new AutoTimerPreviewController('contentAutoTimerContent');
-		
-		// Display menu
-		this.menu.load();
-		
-		// Start loading
-		this.loadFirst();
-	},
-	
-	loadFirst: function(){
-		// At first load locations and tags
-		core.lt.getLocationsAndTags(this.loadLocationsAndTagsCallback.bind(this));
 	},
 	
 	loadLocationsAndTagsCallback: function(currentLocation, locations, tags){
 		this.currentLocation = currentLocation;
 		this.locations = locations;
 		this.tags = tags;
-		this.loadSecond();
-	},
-	
-	loadSecond: function(){
-		// At second load bouquet list
-		this.services.loadBouquetsTv(this.loadBouquetsCallback.bind(this));
+		this.loadFinal();
 	},
 	
 	loadBouquetsCallback: function(bouquets){
 		this.bouquets = bouquets;
-		this.loadThird();
-	},
-	
-	loadThird: function(){
-		// At third load autotimer settings
-		this.settings.load(this.loadSettingsCallback.bind(this));
+		this.loadFinal();
 	},
 	
 	loadSettingsCallback: function(settings){
 		this.hasVps = settings['hasVps'];
-		this.loadFourth();
+		this.loadFinal();
 	},
 	
-	loadFourth: function(){
-		// At fourth load and display autotimer list
-		if (this.newautotimer.name!=''){
-			// Load autotimer list and show a new autotimer
-			this.list.loadNew();
-		}else{
-			// Load autotimer list and select the first autotimer
-			this.list.load();
+	loadSeriesServicesCallback: function(data){
+		this.seriesServices = data;
+		this.loadFinal();
+	},
+	
+	loadFinal: function(){
+		if (this.locations != undefined && this.tags != undefined && this.bouquets != undefined && this.hasVps != undefined ){
+			// Load and display autotimer list
+			if (this.newautotimer.name!=''){
+				// Load autotimer list and show a new autotimer
+				this.list.loadNew();
+			}else{
+				// Load autotimer list and select the first autotimer
+				this.list.load();
+			}
 		}
 	},
 });
@@ -260,11 +263,8 @@ var AutoTimerSettingsController = Class.create(Controller, {
 		this.handler.load( callback );
 	},
 	
-	onFinished: function(){
-	},
-	
-	registerEvents: function(){
-	}
+	onFinished: function(){},
+	registerEvents: function(){},
 });
 
 var AutoTimerMenuController  = Class.create(Controller, {
