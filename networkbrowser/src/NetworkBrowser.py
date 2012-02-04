@@ -205,7 +205,8 @@ class NetworkBrowser(Screen):
 				self.inv_cache = 1
 		if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
 			print '[Networkbrowser] Getting fresh network list'
-			self.networklist = self.getNetworkIPs()
+			tmpnetworklist = self.getNetworkIPs()
+			tmpnetworklist += self.getNetworkIPs2()
 			write_cache(self.cache_file, self.networklist)
 		if len(self.networklist) > 0:
 			self.updateHostsList()
@@ -213,6 +214,16 @@ class NetworkBrowser(Screen):
 			self.setStatus('error')
 
 	def getNetworkIPs(self):
+		nwlist = []
+		sharelist = []
+		self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
+		if len(self.IP):
+			strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
+			nwlist.append(netscan.netzInfo(strIP))
+		tmplist = nwlist[0]
+		return tmplist
+
+	def getNetworkIPs2(self):
 		nwlist = []
 		sharelist = []
 		self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")

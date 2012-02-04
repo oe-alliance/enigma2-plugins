@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: latin-1 -*-
+# -*- coding: utf8 -*-
 
 import os
 import re
@@ -29,34 +29,7 @@ class PortScanner(object):
 		self._nmap_subversion_number = 0    # nmap subversion number
 		self._nmap_last_output = ''  # last full ascii nmap output
 		is_nmap_found = False       # true if we have found nmap
-
 		self.__process = None
-
-		# regex used to detect nmap
-		regex = re.compile('nmap version [0-9]*\.[0-9]*[^ ]* \( http://www.insecure.org/nmap/ \)')
-		# launch 'nmap -V', we wait after 'Nmap version 5.0 ( http://nmap.org )'
-		p = subprocess.Popen(['nmap', '-V'], bufsize=10000, stdout=subprocess.PIPE)
-		self._nmap_last_output = p.communicate()[0] # store stdout
-		for line in self._nmap_last_output.split('\n'):
-			if regex.match(line) is not None:
-				is_nmap_found = True
-				# Search for version number
-				regex_version = re.compile('[0-9]+')
-				regex_subversion = re.compile('\.[0-9]+')
-
-				rv = regex_version.search(line)
-				rsv = regex_subversion.search(line)
-
-				if rv is not None and rsv is not None:
-					# extract version/subversion
-					self._nmap_version_number = int(line[rv.start():rv.end()])
-					self._nmap_subversion_number = int(line[rsv.start()+1:rsv.end()])
-				break
-
-		if is_nmap_found == False:
-			raise PortScannerError('nmap program was not found in path')
-
-		return
 
 	def ipscan(self, hosts='127.0.0.1'):
 		assert type(hosts) in types.StringTypes, 'Wrong type for [hosts], should be a string [was {0}]'.format(type(hosts))
@@ -90,7 +63,6 @@ class PortScanner(object):
 						pass
 					else:
 						raise PortScannerError(nmap_err)
-
 
 		# nmap xml output looks like :
 		#  <host starttime="1267974521" endtime="1267974522">
