@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma - autotimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-15 13:09+0000\n"
-"PO-Revision-Date: 2012-01-17 11:24+0100\n"
+"POT-Creation-Date: 2012-02-03 15:30+0000\n"
+"PO-Revision-Date: 2012-02-04 10:03+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: \n"
@@ -422,6 +422,10 @@ msgstr "Gelijke gedurende tijdspanne"
 #, python-format
 msgid "Only on Service: %s"
 msgstr "Alleen op zender: %s"
+
+#, python-format
+msgid "Only on Weekday: %s"
+msgstr "Alleen op werkdagen: %s"
 
 msgid "Only poll while in standby"
 msgstr "Alleen controleren tijdens standby"
