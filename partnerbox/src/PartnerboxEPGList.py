@@ -67,7 +67,7 @@ def Partnerbox_SingleEntry(self, service, eventId, beginTime, duration, EventNam
 	t = localtime(beginTime)
 	res = [
 		None, # no private data needed
-		(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, days[t[6]]),
+		(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, _(days[t[6]])),
 		(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
 	]
 	if rec1 or rec2:
@@ -102,7 +102,7 @@ def Partnerbox_SimilarEntry(self, service, eventId, beginTime, service_name, dur
 	t = localtime(beginTime)
 	res = [
 		None,  # no private data needed
-		(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, days[t[6]]),
+		(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, _(days[t[6]])),
 		(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
 	]
 	if rec1 or rec2:

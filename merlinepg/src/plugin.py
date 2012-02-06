@@ -161,13 +161,13 @@ class MerlinEPGList(EPGList):
 				None,
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_LEFT, "  _________________"),
 				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 100, 1, 21, 21, self.PTpicture),
-				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_LEFT, (("%02d:%02d"%(t[3],t[4]))+" - "+days[t[6]]))
+				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_LEFT, (("%02d:%02d"%(t[3],t[4]))+" - "+_(days[t[6]])))
 			]
 		else:
 			res = [
 				None,
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_LEFT, "___________________"),
-				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_LEFT, (("%02d:%02d"%(t[3],t[4]))+" - "+days[t[6]]))
+				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_LEFT, (("%02d:%02d"%(t[3],t[4]))+" - "+_(days[t[6]])))
 			]
 		if rec:
 			res.extend((
@@ -997,7 +997,7 @@ if epgSpresent:
 			serviceref = ServiceReference(service)
 			res = [
 				None,
-				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_LEFT, days[t[6]]),
+				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_LEFT, _(days[t[6]])),
 				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width()-20, r1.height(), 0, RT_HALIGN_LEFT, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
 			]
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, EventName + " <" + serviceref.getServiceName()))
