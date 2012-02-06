@@ -12,6 +12,7 @@ from Components.Network import iNetwork
 from Components.Input import Input
 from Components.config import getConfigListEntry, NoSave, config, ConfigIP
 from Components.ConfigList import ConfigList, ConfigListScreen
+from Components.Console import Console
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from Tools.LoadPixmap import LoadPixmap
 from cPickle import dump, load
@@ -104,6 +105,7 @@ class NetworkBrowser(Screen):
 		self.expanded = []
 		self.cache_ttl = 604800 #Seconds cache is considered valid, 7 Days should be ok
 		self.cache_file = '/etc/enigma2/networkbrowser.cache' #Path to cache directory
+		self.Console = Console()
 
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Mounts management"))
@@ -140,6 +142,7 @@ class NetworkBrowser(Screen):
 		iNetwork.stopGetInterfacesConsole()
 
 	def startRun(self):
+		self["shortcuts"].setEnabled(False)
 		self.expanded = []
 		self.setStatus('update')
 		self.mounts = iAutoMount.getMountsList()
@@ -205,13 +208,19 @@ class NetworkBrowser(Screen):
 				self.inv_cache = 1
 		if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
 			print '[Networkbrowser] Getting fresh network list'
-			tmpnetworklist = self.getNetworkIPs()
-			tmpnetworklist += self.getNetworkIPs2()
-			write_cache(self.cache_file, self.networklist)
-		if len(self.networklist) > 0:
-			self.updateHostsList()
+			self.networklist = self.getNetworkIPs()
+			nwlist = []
+			sharelist = []
+			self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
+			if len(self.IP):
+				strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
+				self.Console.ePopen("nmap -oX - " + strIP + ' -sP', self.Stage1SettingsComplete)
 		else:
-			self.setStatus('error')
+			if len(self.networklist) > 0:
+				self.updateHostsList()
+			else:
+				self.setStatus('error')
+			self["shortcuts"].setEnabled(True)
 
 	def getNetworkIPs(self):
 		nwlist = []
@@ -223,15 +232,30 @@ class NetworkBrowser(Screen):
 		tmplist = nwlist[0]
 		return tmplist
 
-	def getNetworkIPs2(self):
-		nwlist = []
-		sharelist = []
-		self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
-		if len(self.IP):
-			strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
-			nm = ipscan.PortScanner()
-			nwlist = nm.ipscan(strIP)
-		return nwlist
+	def Stage1SettingsComplete(self, result, retval, extra_args):
+		import xml.dom.minidom
+
+		dom = xml.dom.minidom.parseString(result)
+		scan_result = []
+		for dhost in dom.getElementsByTagName('host'):
+			# host ip
+			host = ''
+			hostname = ''
+			host = dhost.getElementsByTagName('address')[0].getAttributeNode('addr').value
+			for dhostname in dhost.getElementsByTagName('hostname'):
+				hostname = dhostname.getAttributeNode('name').value
+				hostname = hostname.split('.')
+				hostname = hostname[0]
+				host = dhost.getElementsByTagName('address')[0].getAttributeNode('addr').value
+				scan_result.append(['host',str(hostname).upper(),str(host),'00:00:00:00:00:00'])
+
+		self.networklist += scan_result
+		write_cache(self.cache_file, self.networklist)
+		if len(self.networklist) > 0:
+			self.updateHostsList()
+		else:
+			self.setStatus('error')
+		self["shortcuts"].setEnabled(True)
 
 	def getNetworkShares(self,hostip,hostname,devicetype):
 		sharelist = []
