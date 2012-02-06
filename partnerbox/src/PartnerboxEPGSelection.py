@@ -22,7 +22,7 @@ from Screens.MessageBox import MessageBox
 from Components.config import config
 from PartnerboxSetup import PartnerboxEntriesListConfigScreen
 from Screens.EpgSelection import EPGSelection
-from Components.EpgList import EPG_TYPE_SINGLE, EPG_TYPE_SIMILAR, EPG_TYPE_MULTI
+from Components.EpgList import EPG_TYPE_SINGLE, EPG_TYPE_SIMILAR, EPG_TYPE_MULTI, EPG_TYPE_GRAPH
 from Tools.BoundFunction import boundFunction
 from PartnerboxFunctions import  SetPartnerboxTimerlist, isInTimerList, sendPartnerBoxWebCommand, FillE1TimerList, FillE2TimerList
 import PartnerboxFunctions as partnerboxfunctions
