@@ -372,7 +372,7 @@ class MovieList(GUIComponent):
 			if info is None:
 				continue
 			begin = info.getInfo(serviceref, iServiceInformation.sTimeCreate)
-			this_tags = info.getInfoString(serviceref, iServiceInformation.sTags)
+			this_tags = info.getInfoString(serviceref, iServiceInformation.sTags).split(' ')
 
 			# convert space-seperated list of tags into a set
 			if this_tags == ['']:
