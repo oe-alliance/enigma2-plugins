@@ -249,6 +249,9 @@ class MyTubeFeedEntry():
 		for fmtstring in tmp_fmtUrlDATA:
 			if videoinfo.has_key('url_encoded_fmt_stream_map'):
 				(fmturl, fmtid) = fmtstring.split('&itag=')
+				if len(fmtid) >= 3:
+					if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid[:2]):
+						fmtid = fmtid[:2]
 				if fmturl.find("url=") !=-1:
 					fmturl = fmturl.replace("url=","")
 			else:
