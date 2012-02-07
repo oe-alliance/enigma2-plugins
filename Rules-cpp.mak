@@ -9,6 +9,7 @@ AM_CPPFLAGS = \
 
 AM_CXXFLAGS = \
 	-Wall \
+	-fno-exceptions \
 	@DEBUG_CFLAGS@ \
 	@ENIGMA2_CFLAGS@ \
 	@GSTREAMER_CFLAGS@ \
