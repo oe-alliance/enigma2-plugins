@@ -9,16 +9,16 @@ class UploadResource(resource.Resource):
 	default_uploaddir = "/tmp/"
 	restricted_paths = frozenset(("/bin/", "/boot/", "/dev/", "/etc/", "/lib/", "/proc/", "/sbin/", "/sys/", "/usr/", "/var/"))
 
-	def out_POST(self, state, statetext, isXml):
+	def out_POST(self, req, state, statetext, isXml):
 		req.setResponseCode(http.OK)
 		if isXml:
 			req.setHeader('Content-type', 'application/xhtml+xml;' )
 			req.setHeader('charset', 'UTF-8')
 			return """<?xml version="1.0" encoding="UTF-8" ?>
-				<e2simplexmlresult>
-					<e2state>%s</e2state>
-					<e2statetext>%s</e2statetext>
-				</e2simplexmlresult>""" % ('True' if state else 'False', statetext)
+<e2simplexmlresult>
+	<e2state>%s</e2state>
+	<e2statetext>%s</e2statetext>
+</e2simplexmlresult>""" % ('True' if state else 'False', statetext)
 		else:
 			req.setResponseCode(http.OK)
 			req.setHeader('Content-type', 'text/html')
@@ -33,11 +33,11 @@ class UploadResource(resource.Resource):
 				if uploaddir[-1] != "/":
 					uploaddir += "/"
 			else:
-				return self.out_POST(False, "path '%s' to upload not existing!" % req.args['path'][0], isXml)
+				return self.out_POST(req, False, "path '%s' to upload not existing!" % req.args['path'][0], isXml)
 
 		data = req.args['file'][0]
 		if not data:
-			return self.out_POST(False, "filesize was 0, not uploaded", isXml)
+			return self.out_POST(req, False, "filesize was 0, not uploaded", isXml)
 
 		# allw to overwrite files (if the user requests it), but not in critical directories
 		overwrite = 'overwrite' in req.args and req.args['overwrite'][0] == 'True'
@@ -64,10 +64,10 @@ class UploadResource(resource.Resource):
 				os_unlink(fn)
 			except OSError, oe:
 				pass
-			return self.out_POST(False, "error writing to disk, not uploaded", isXml)
+			return self.out_POST(req, False, "error writing to disk, not uploaded", isXml)
 		else:
 			statetext = fn if isXml else "uploaded to %s" % fn
-			return self.out_POST(True, statetext, isXml)
+			return self.out_POST(req, True, statetext, isXml)
 
 	def render_GET(self, req):
 		try:
