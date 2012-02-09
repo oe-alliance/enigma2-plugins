@@ -250,15 +250,14 @@ class MyTubeFeedEntry():
 			if videoinfo.has_key('url_encoded_fmt_stream_map'):
 				(fmturl, fmtid) = fmtstring.split('&itag=')
 				if len(fmtid) >= 3:
-					if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid[:2]):
-						fmtid = fmtid[:2]
+					fmtid = fmtid[:2]
 				if fmturl.find("url=") !=-1:
 					fmturl = fmturl.replace("url=","")
 			else:
 				(fmtid,fmturl) = fmtstring.split('|')
 			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
-			fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
+				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print "[MyTube] got",sorted(fmt_infomap.iterkeys())
 		if video_fmt_map and len(video_fmt_map):
 			print "[MyTube] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
