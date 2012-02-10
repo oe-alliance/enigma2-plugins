@@ -85,7 +85,6 @@ SUBDIRS = \
 	seekbar \
 	serienfilm \
 	setpasswd \
-	shoutcast \
 	showclock \
 	simplerss \
 	startupservice \
