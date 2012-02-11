@@ -132,7 +132,7 @@ def setPWM(fanid, value):
 config.plugins.FanControl = ConfigSubsection()
 config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin"))], default = "disabled")
 config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="false")
-config.plugins.FanControl.minRPM = ConfigSlider(default = 600, increment = 50, limits = (0, 1000))
+config.plugins.FanControl.minRPM = ConfigSlider(default = 600, increment = 50, limits = (0, 1500))
 config.plugins.FanControl.maxRPM = ConfigSlider(default = 3000, increment = 50, limits = (500, 6000))
 config.plugins.FanControl.temp = ConfigSlider(default = 40, increment = 1, limits = (30, 50))
 config.plugins.FanControl.tempmax = ConfigSlider(default = 50, increment = 1, limits = (35, 55))
@@ -306,7 +306,7 @@ class FanControl2Test(ConfigListScreen,Screen):
 			ok = ("OK" if config.plugins.FanControl.maxRPM.value <= self.rpm else ("!!<%d" % (config.plugins.FanControl.maxRPM.value)))
 			self["TextTest7"].setText(_("Max Fan %d rpm at PWM=255 and VLT=255 (%s)") % (self.rpm, ok))
 
-		if SaveFan == "3pin":
+		elif SaveFan == "3pin":
 			setVoltage(self.id,0)
 			time.sleep(10)
 			self.VoltUp()
@@ -321,6 +321,9 @@ class FanControl2Test(ConfigListScreen,Screen):
 			time.sleep(6)
 			ok = ("OK" if config.plugins.FanControl.maxRPM.value <= GetFanRPM() else ("!!<%d" % (config.plugins.FanControl.maxRPM.value)))
 			self["TextTest3"].setText(_("Max Fan %d rpm at VLT=255 (%s)") % (GetFanRPM(), ok))
+
+		else:
+			self["TextTest1"].setText(_("please set fan type (3Pin or 4Pin)"))
 
 		setVoltage(self.id,SaveAktVLT)
 		setPWM(self.id,SaveAktPWM)
@@ -414,8 +417,9 @@ class FanControl2Monitor(Screen, ConfigListScreen):
 		if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value !="never":
 			GetHDDtemp(True)
 			for hdd in harddiskmanager.HDDList():
-				if hdd[1].isSleeping():
-					(stat,wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
+				if hdd[1].model().startswith("ATA"):
+					if hdd[1].isSleeping():
+						(stat,wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
 
 class FanControl2SpezialSetup(Screen, ConfigListScreen):
 	skin = """
@@ -733,23 +737,24 @@ def HDDtestTemp():
 	if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value !="never":
 		disableHDDread = False
 		for hdd in harddiskmanager.HDDList():
-			FClog("%s %s Mode:%s" % (hdd[1].model(), hdd[1].getDeviceName(), config.plugins.FanControl.CheckHDDTemp.value))
-			if config.plugins.FanControl.CheckHDDTemp.value == "auto":
-				(stat,wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
-				time.sleep(0.5)
-				(stat,wert)=ReadHDDtemp(hdd[1].getDeviceName())
-				if stat != 0:
-					(stat,wert)=getstatusoutput("smartctl --smart=on %s" % hdd[1].getDeviceName())
-					FClog("HDD Temperature not readable")
-				time.sleep(0.5)
-				(stat,wert)=getstatusoutput("hdparm -C %s" % hdd[1].getDeviceName())
-				if wert.find("standby")>0:
-					FClog("HDD supports Temp reading without Spinup")
-				else:
-					if hdd[1].isSleeping():
-						(stat,wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
-					FClog("HDD not supports Temp reading without Spinup -> Disabled")
-					disableHDDread = True
+			if hdd[1].model().startswith("ATA"):
+				FClog("%s %s Mode:%s" % (hdd[1].model(), hdd[1].getDeviceName(), config.plugins.FanControl.CheckHDDTemp.value))
+				if config.plugins.FanControl.CheckHDDTemp.value == "auto":
+					(stat,wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
+					time.sleep(0.5)
+					(stat,wert)=ReadHDDtemp(hdd[1].getDeviceName())
+					if stat != 0:
+						(stat,wert)=getstatusoutput("smartctl --smart=on %s" % hdd[1].getDeviceName())
+						FClog("HDD Temperature not readable")
+					time.sleep(0.5)
+					(stat,wert)=getstatusoutput("hdparm -C %s" % hdd[1].getDeviceName())
+					if wert.find("standby")>0:
+						FClog("HDD supports Temp reading without Spinup")
+					else:
+						if hdd[1].isSleeping():
+							(stat,wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
+						FClog("HDD not supports Temp reading without Spinup -> Disabled")
+						disableHDDread = True
 
 def ReadHDDtemp(D):
 	return getstatusoutput("smartctl -A %s | grep \"194 Temp\" | grep Always" % D)
@@ -759,26 +764,28 @@ def GetHDDtemp(OneTime):
 	AktHDD = []
 	if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value != "never" or OneTime == True:
 		for hdd in harddiskmanager.HDDList():
-			sleeptime = int((time.time() - hdd[1].last_access))
-#			FClog("HDD Temp reading %s %s %ds %s" % (config.plugins.FanControl.CheckHDDTemp.value, disableHDDread, sleeptime, hdd[1].isSleeping()))
-			if config.plugins.FanControl.CheckHDDTemp.value == "true" or (config.plugins.FanControl.CheckHDDTemp.value == "auto" and not disableHDDread) or ((not hdd[1].isSleeping()) and sleeptime < 120) or OneTime == True:
-				(stat,wert)=ReadHDDtemp(hdd[1].getDeviceName())
-				if stat == 0:
-					try:
-						AktHDD.append(int(wert[wert.find("Always")+6:].replace(" ","").replace("-","")[:2]))
-					except:
-						AktHDD.append(0)
-				if len(AktHDD) == 0:
-					AktHDD = [0]
-				FClog("HDD Temp %dC" % (AktHDD[-1]))
+			if hdd[1].model().startswith("ATA"):
+				sleeptime = int((time.time() - hdd[1].last_access))
+#				FClog("HDD Temp reading %s %s %ds %s" % (config.plugins.FanControl.CheckHDDTemp.value, disableHDDread, sleeptime, hdd[1].isSleeping()))
+				if config.plugins.FanControl.CheckHDDTemp.value == "true" or (config.plugins.FanControl.CheckHDDTemp.value == "auto" and not disableHDDread) or ((not hdd[1].isSleeping()) and sleeptime < 120) or OneTime == True:
+					(stat,wert)=ReadHDDtemp(hdd[1].getDeviceName())
+					if stat == 0:
+						try:
+							AktHDD.append(int(wert[wert.find("Always")+6:].replace(" ","").replace("-","")[:2]))
+						except:
+							AktHDD.append(0)
+					if len(AktHDD) == 0:
+						AktHDD = [0]
+					FClog("HDD Temp %dC" % (AktHDD[-1]))
 	if len(AktHDD) == 0:
 		AktHDD = [0]
 	return
 
 def HDDsSleeping(): 
 	for hdd in harddiskmanager.HDDList():
-		if not hdd[1].isSleeping():
-			return False
+		if hdd[1].model().startswith("ATA"):
+			if not hdd[1].isSleeping():
+				return False
 	return True
 
 def FC2systemStatus():
