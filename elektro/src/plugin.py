@@ -72,7 +72,7 @@ pluginPrintname = "[Elektro]"
 debug = False # If set True, plugin will print some additional status info to track logic flow
 session = None
 ElektroWakeUpTime = -1
-elektro_pluginversion = "3.4.5"
+elektro_pluginversion = "3.4.5a"
 elektrostarttime = 60 
 elektrosleeptime = 5
 elektroShutdownThreshold = 60 * 20
@@ -122,7 +122,6 @@ config.plugins.elektro.hddsleep =  ConfigYesNo(default = False)
 config.plugins.elektro.IPenable =  ConfigYesNo(default = False)
 
 config.plugins.elektro.NASenable = ConfigSelection(choices = [("false", "no"), ("true", "yes"), ("1", _("yes, Profile 1")), ("2", _("yes, Profile 2"))], default="false")
-#config.plugins.elektro.NASenable =  ConfigYesNo(default = False)
 config.plugins.elektro.NASname = ConfigText(default = "", fixed_size = False, visible_width = 50)
 config.plugins.elektro.NASuser = ConfigText(default = "", fixed_size = False, visible_width = 50)
 config.plugins.elektro.NASpass = ConfigText(default = "", fixed_size = False, visible_width = 50)
@@ -412,10 +411,6 @@ class ElektroNAS(ConfigListScreen,Screen):
 
 	def run(self):
 		self.session.open(ElektroNASrun)
-#		self.session.open(WaitScreen)
-#		ret = NASpowerdown(config.plugins.elektro.NASname.value, config.plugins.elektro.NASuser.value, config.plugins.elektro.NASpass.value, config.plugins.elektro.NAScommand.value, config.plugins.elektro.NASport.value)
-#		self.session.close(WaitScreen)
-#		self.session.open(MessageBox, ret, MessageBox.TYPE_INFO)
 
 	def save(self):
 		#print "saving"
@@ -813,8 +808,9 @@ class DoElektro(Screen):
 		# No Sleep on HDD running - joergm6
 		if (config.plugins.elektro.hddsleep.value == True) and (harddiskmanager.HDDCount() > 0):
 			hddlist = harddiskmanager.HDDList()
-			if not hddlist[0][1].isSleeping():
-				trysleep = False
+			if hddlist[0][1].model().startswith("ATA"):
+				if not hddlist[0][1].isSleeping():
+					trysleep = False
 		
 		# Will there be a recording in a short while?
 		nextRecTime = self.session.nav.RecordTimer.getNextRecordingTime()

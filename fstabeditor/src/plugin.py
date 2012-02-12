@@ -127,7 +127,7 @@ class fstabViewerScreen(Screen,HelpableScreen):
 			entryList = []
 			self.counter = 0
 			for line in fstabFile:
-				if line[0] != "\n":
+				if line[0] != "\n" and line[0] != "#":
 					entry = line.split()
 					entryList.append(entry)
 					global lenghtList
