@@ -1126,7 +1126,7 @@ function fileUpload(form, action_url)
 			// unregister Eventhandler
 			iframe.stopObserving();
 			// remove iframe
-			iframe.parentNode().removeChild(iframe);
+			iframe.parentNode.removeChild(iframe);
 		} catch(e){return;}
     };
 	
