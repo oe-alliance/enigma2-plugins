@@ -56,7 +56,7 @@ class AutoTimerEditor(Source):
 
 	def restoreFiles(self, param):
 		tarFilename = param
-		backupFilename = tarFilename #path.join(self.BACKUP_PATH, tarFilename)
+		backupFilename = tarFilename
 		if path.exists(backupFilename):
 			check_tar = False
 			lines = popen('tar -tf %s' % backupFilename).readlines()
@@ -73,6 +73,22 @@ class AutoTimerEditor(Source):
 				lines = popen('tar xvf %s -C / --exclude tmp/.autotimeredit' % backupFilename).readlines()
 
 				remove(backupFilename)
+				
+				# Reload AutoTimer
+				from Plugins.Extensions.AutoTimer import plugin
+				from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+				if plugin.autotimer is None:
+					autotimer = AutoTimer()
+				else:
+					autotimer = plugin.autotimer
+				try:
+					# Force config reload
+					autotimer.configMtime = -1
+					autotimer.readXml()
+				except Exception:
+					# TODO: proper error handling
+					pass
+				
 				return (True, "AutoTimer-settings were restored successfully")
 			else:
 				return (False, "Error, %s was not created with AutoTimerWebEditor..." % backupFilename)
