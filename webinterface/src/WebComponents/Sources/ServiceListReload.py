@@ -30,6 +30,7 @@ class ServiceListReload(Source):
 
 	def reloadLameDB(self):
 		print "[ServiceListReload] reloading lamedb"
+		self.eDVBDB.removeServices()
 		self.eDVBDB.reloadServicelist()
 
 	def reloadUserBouquets(self):
