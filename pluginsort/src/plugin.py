@@ -28,6 +28,7 @@ try:
 	from xml.etree.cElementTree import ParseError
 except ImportError as ie:
 	ParseError = SyntaxError
+from Tools.XMLTools import stringToXML
 
 from shutil import copyfile, Error
 
@@ -116,7 +117,7 @@ class PluginWeights:
 			where = idmap[key]
 			extend((' <where type="', str(where), '">\n'))
 			for key, value in iteritems(whereplugins):
-				extend(('  <plugin name="', str(key), '" weight="', str(value), '" />\n'))
+				extend(('  <plugin name="', stringToXML(str(key)), '" weight="', str(value), '" />\n'))
 			append((' </where>\n'))
 		append('\n</pluginsort>\n')
 		

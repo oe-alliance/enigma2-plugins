@@ -22,6 +22,7 @@ try:
 	from xml.etree.cElementTree import ParseError
 except ImportError as ie:
 	ParseError = SyntaxError
+from Tools.XMLTools import stringToXML
 
 try:
 	dict.iteritems
@@ -82,7 +83,7 @@ class MenuWeights:
 
 		for text, values in iteritems(self.weights):
 			weight, hidden = values
-			extend((' <entry text="', str(text), '" weight="', str(weight), '" hidden="', "yes" if hidden else "no", '"/>\n'))
+			extend((' <entry text="', stringToXML(str(text)), '" weight="', str(weight), '" hidden="', "yes" if hidden else "no", '"/>\n'))
 		append('\n</menusort>\n')
 
 		file = open(XML_CONFIG, 'w')
