@@ -74,20 +74,15 @@ class AutoTimerEditor(Source):
 
 				remove(backupFilename)
 				
-				# Reload AutoTimer
-				from Plugins.Extensions.AutoTimer import plugin
-				from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-				if plugin.autotimer is None:
-					autotimer = AutoTimer()
-				else:
-					autotimer = plugin.autotimer
-				try:
-					# Force config reload
-					autotimer.configMtime = -1
-					autotimer.readXml()
-				except Exception:
-					# TODO: proper error handling
-					pass
+				from Plugins.Extensions.AutoTimer.plugin import autotimer
+				if autotimer is not None:
+					try:
+						# Force config reload
+						autotimer.configMtime = -1
+						autotimer.readXml()
+					except Exception:
+						# TODO: proper error handling
+						pass
 				
 				return (True, "AutoTimer-settings were restored successfully")
 			else:
