@@ -1,9 +1,23 @@
-///////////////////////////////////////////////////////////////////////////////
-// Global variables
-//TODO remove globals
-//var currentAutoTimerListIndex = null;
-//var currentAutoTimerList = [];
-//TODO var currentAutoTimer = null;
+/***
+
+		AutoTimer WebIf for Enigma-2
+		Coded by betonme (c) 2012 @ IHAD <glaserfrank(at)gmail.com>
+		Support: http://www.i-have-a-dreambox.com/wbb2/thread.php?threadid=79391
+		
+		All Files of this Software are licensed under the Creative Commons 
+		Attribution-NonCommercial-ShareAlike 3.0 Unported 
+		License if not stated otherwise in a files head. To view a copy of this license, visit
+		http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
+		Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
+		
+		Alternatively, this plugin may be distributed and executed on hardware which
+		is licensed by Dream Multimedia GmbH.
+		
+		This plugin is NOT free software. It is open source, you are allowed to
+		modify it (if you keep the license), but it may not be commercially 
+		distributed other than under the conditions noted above.
+
+***/
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -182,6 +196,7 @@ var AutoTimerEditorCore = Class.create({
 			this.list = new AutoTimerListController('contentAutoTimerList');
 			this.edit = new AutoTimerEditController('contentAutoTimerContent');
 			this.preview = new AutoTimerPreviewController('contentAutoTimerContent');
+			this.about = new AboutPage('contentAutoTimerContent');
 			
 			// Display menu
 			this.menu.load();
@@ -373,6 +388,10 @@ var AutoTimerMenuController  = Class.create(Controller, {
 		autotimereditorcore.list.reload();
 	},
 	
+	about: function(){
+		autotimereditorcore.about.load();
+	},
+	
 	registerEvents: function(){
 		$('back').on(
 			'click',
@@ -416,6 +435,13 @@ var AutoTimerMenuController  = Class.create(Controller, {
 			}.bind(this)
 		);
 		$('restore').title = "Restore a previous configuration backup";
+		$('about').on(
+			'click',
+			function(event, element){
+				this.about();
+			}.bind(this)
+		);
+		$('about').title = "Some information about autor, license, support...";
 	},
 });
 
@@ -424,6 +450,7 @@ var AutoTimerListController = Class.create(Controller, {
 	initialize: function($super, target){
 		$super(new AutoTimerListHandler(target));
 		this.select = null;
+		this.idx = null;
 	},
 	
 	load: function(){
@@ -442,8 +469,15 @@ var AutoTimerListController = Class.create(Controller, {
 	onChange: function(){
 		var selectList = $('list');
 		var selectOptions = selectList.getElementsByTagName('option');
+		
+		// Set new row size of list
+		selectList.size = selectOptions.length + 2;
+		
+		console.log("onchange");
+		console.log(selectOptions.length);
 		if ( selectOptions.length > 0){
 			if (this.select != undefined && this.select != null && this.select != ""){
+				console.log("select");
 				// Select the given AutoTimer because of add/remove action
 				for (idx in selectOptions){
 					if ( this.select == unescape(selectOptions[idx].value) ){
@@ -452,7 +486,17 @@ var AutoTimerListController = Class.create(Controller, {
 					}
 				}
 				this.select = null;
+			}else if (this.idx != undefined && this.idx != null && this.idx != ""){
+				// Select the given index / row
+				console.log("idx");
+				if ( selectOptions.length > this.idx){
+					console.log("idx");
+					console.log(this.idx);
+					selectOptions[this.idx].selected = true;
+					this.idx = null;
+				}
 			}else{
+				console.log("first");
 				var idx = selectList.selectedIndex;
 				if (idx < 0){
 					// Select at least the first element
@@ -460,7 +504,7 @@ var AutoTimerListController = Class.create(Controller, {
 					selectOptions[idx].selected = true;
 				}
 			}
-
+			
 			// Update editor
 			idx = selectList.selectedIndex;
 			if (idx >= 0){
@@ -509,22 +553,24 @@ var AutoTimerListController = Class.create(Controller, {
 		
 	remove: function(){
 		var selectList = $('list');
-		var selectOptions = selectList.getElementsByTagName('option');
 		var idx = selectList.selectedIndex; 
+		var selectOptions = selectList.getElementsByTagName('option');
 		var id = unescape(selectOptions[idx].value);
-		// Retrieve next selected entry
-		var select = -1;
+		
+		var nextidx = -1;
 		if ( selectOptions.length > 0){
+			console.log(selectOptions.length);
 			if ( selectOptions.length > (idx+1)){
-				select = unescape(selectOptions[idx+1].value);
+				nextidx = idx;
 			} else if ( (idx-1) > 0 ){
-				select = unescape(selectOptions[idx-1].value);
+				nextidx = idx-1;
+				console.log("2");
 			}
-			select = select<parseInt(id) ? select : select-1;
 		}
+		console.log(nextidx);
 		var check = confirm("Do you really want to delete the AutoTimer\n" + selectList.options[idx].text + " ?");
 		if (check == true){
-			this. select = select;
+			this.idx = nextidx;
 			this.handler.remove(
 				{'id' : id},
 				function(request){
@@ -760,7 +806,7 @@ var AutoTimerEditController = Class.create(Controller, {
 		options = ['match','name','encoding','searchType','searchCase','justplay','avoidDuplicateDescription'];
 		for (var id = 0; id < options.length; id++) {
 			if ($(options[id]).value == ''){
-				notify('Error: ' + options[id] + ' is empty', false);
+				core.notify('Error: ' + options[id] + ' is empty', false);
 				return;
 			}
 			data[options[id]] = $(options[id]).value;
@@ -776,7 +822,7 @@ var AutoTimerEditController = Class.create(Controller, {
 			options = ['from','to'];
 			for (var id = 0; id < options.length; id++) {
 				if ($(options[id]).value == ''){
-					notify('Error: ' + options[id] + ' is empty', false);
+					core.notify('Error: ' + options[id] + ' is empty', false);
 					return;
 				}
 			}
@@ -792,7 +838,7 @@ var AutoTimerEditController = Class.create(Controller, {
 			options = ['before','after'];
 			for (var id = 0; id < options.length; id++) {
 				if ($(options[id]).value == ''){
-					notify('Error: ' + options[id] + ' is empty', false);
+					core.notify('Error: ' + options[id] + ' is empty', false);
 					return;
 				}
 			}
@@ -805,7 +851,7 @@ var AutoTimerEditController = Class.create(Controller, {
 		
 		if ($('offset').checked){
 			if ($('offset').value == ''){
-				notify('Error: offset is empty', false);
+				core.notify('Error: offset is empty', false);
 				return;
 			}
 			data['offset']                  = $('offsetbegin').value + ',' + $('offsetend').value;
@@ -815,7 +861,7 @@ var AutoTimerEditController = Class.create(Controller, {
 		
 		if ($('maxdurationavailable').checked){
 			if ($('maxduration').value == ''){
-				notify('Error: maxduration is empty', false);
+				core.notify('Error: maxduration is empty', false);
 				return;
 			}
 			data['maxduration']             = $('maxduration').value;
@@ -842,7 +888,7 @@ var AutoTimerEditController = Class.create(Controller, {
 		
 		if ($('locationavailable').checked){
 			if ($('location').value == ''){
-				notify('Error: location is empty', false);
+				core.notify('Error: location is empty', false);
 				return;
 			}
 			data['location']             = $('location').value;
@@ -1160,16 +1206,34 @@ var AutoTimerPreviewController = Class.create(Controller, {
 	},
 	
 	load: function(){
+		$('list').selectedIndex = -1;
+		$('headerautotimercontent').innerHTML = "AutoTimer Preview:";
 		this.handler.load({});
 	},
 	
 	onFinished: function(){
-		$('list').selectedIndex = -1;
-		$('headerautotimercontent').innerHTML = "AutoTimer Preview:";
 	},
 	
 	registerEvents: function(){
 	}
+});
+
+var AboutPage = Class.create({
+	initialize: function(target){
+		this.simpleHandler = new SimplePageHandler(target);
+	},
+
+	show: function(tpl, data){
+		if(!data)
+			data = {};
+		this.simpleHandler.show(tpl, data);
+	},
+
+	load: function(){
+		$('list').selectedIndex = -1;
+		$('headerautotimercontent').innerHTML = "AutoTimer WebIf About:";
+		this.show('tplAbout');
+	},
 });
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1788,42 +1852,45 @@ function AutoTimer(xml, defaults){
 	var services = [];
 	var xmlservices = xml.getElementsByTagName('e2service');
 	var len = xmlservices.length;
-	for (var i=0; i<len; i++){
-		var name = xmlservices.item(i).getElementsByTagName('e2servicename');
-		if(name.item(0).firstChild == null){
-			name = '';
-		}
-		else{
-			name = name.item(0).firstChild.nodeValue;
-		}
-		var reference = xmlservices.item(i).getElementsByTagName('e2servicereference');
-		reference = escape(reference.item(0).firstChild.nodeValue);
-		// Check if service is a bouquet
-		// Service reference flags == isDirectory | mustDescent | canDescent (== 7)
-		if (unescape(reference).slice(2,3) == "7"){
-			bouquets.push({
-				'bouquet' : createOptionList(autotimereditorcore.bouquets, reference),
-				'class' : 'remove',
-			});
-		}else{
-			var service = [];
-			var bouquet = bouquetoptions.slice(0);
-			service.push({
-					'value' : reference,
-					'txt' : name,
-					'selected' : 'selected'
+	if (typeof xmlservices == "undefined"){
+		for (var i=0; i<len; i++){
+			var name = xmlservices.item(i).getElementsByTagName('e2servicename');
+			if(name.item(0).firstChild == null){
+				name = '';
+			}
+			else{
+				name = name.item(0).firstChild.nodeValue;
+			}
+			
+			var reference = xmlservices.item(i).getElementsByTagName('e2servicereference');
+			reference = escape(reference.item(0).firstChild.nodeValue);
+			// Check if service is a bouquet
+			// Service reference flags == isDirectory | mustDescent | canDescent (== 7)
+			if (unescape(reference).slice(2,3) == "7"){
+				bouquets.push({
+					'bouquet' : createOptionList(autotimereditorcore.bouquets, reference),
+					'class' : 'remove',
 				});
-			//Maybe later: It is also possible to get the bouquet of the service
-			bouquet.push({
-					'value' : '',
-					'txt' : '---',
-					'selected' : 'selected'
+			}else{
+				var service = [];
+				var bouquet = bouquetoptions.slice(0);
+				service.push({
+						'value' : reference,
+						'txt' : name,
+						'selected' : 'selected'
+					});
+				//Maybe later: It is also possible to get the bouquet of the service
+				bouquet.push({
+						'value' : '',
+						'txt' : '---',
+						'selected' : 'selected'
+					});
+				services.push({ 
+					'bouquet' : bouquet,
+					'service' : service,
+					'class' : 'remove',
 				});
-			services.push({ 
-				'bouquet' : bouquet,
-				'service' : service,
-				'class' : 'remove',
-			});
+			}
 		}
 	}
 	
