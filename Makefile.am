@@ -92,6 +92,7 @@ SUBDIRS = \
 	subsdownloader2 \
 	svdrp \
 	tageditor \
+	toolkit \
 	trafficinfo \
 	tvcharts \
 	unwetterinfo \

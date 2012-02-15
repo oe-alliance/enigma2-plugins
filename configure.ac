@@ -525,6 +525,9 @@ tageditor/meta/Makefile
 tageditor/po/Makefile
 tageditor/src/Makefile
 
+toolkit/Makefile
+toolkit/src/Makefile
+
 trafficinfo/Makefile
 trafficinfo/meta/Makefile
 trafficinfo/src/Makefile
