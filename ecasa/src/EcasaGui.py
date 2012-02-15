@@ -30,10 +30,11 @@ from .TagStrip import strip_readable
 #pragma mark Flickr
 from .FlickrApi import FlickrApi
 
-from enigma import ePicLoad, ePythonMessagePump, eTimer, getDesktop
+from enigma import ePicLoad, eTimer, getDesktop
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Notifications import AddPopup
 from collections import deque
+from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
 
 try:
 	xrange = xrange
@@ -344,7 +345,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 				history.insert(0, text)
 			config.plugins.ecasa.searchhistory.save()
 
-			thread = EcasaThread(lambda:self.api.getSearch(text, limit=str(config.plugins.ecasa.searchlimit.value)))
+			thread = SimpleThread(lambda:self.api.getSearch(text, limit=str(config.plugins.ecasa.searchlimit.value)))
 			self.session.open(EcasaFeedview, thread, api=self.api, title=_("Search for %s") % (text))
 
 	def contextMenu(self):
@@ -429,7 +430,7 @@ class EcasaOverview(EcasaPictureWall):
 	def __init__(self, session):
 		EcasaPictureWall.__init__(self, session)
 		self.skinName = ["EcasaOverview", "EcasaPictureWall"]
-		thread = EcasaThread(self.api.getFeatured)
+		thread = SimpleThread(self.api.getFeatured)
 		thread.deferred.addCallbacks(self.gotPictures, self.errorPictures)
 		thread.start()
 
@@ -448,12 +449,12 @@ class EcasaOverview(EcasaPictureWall):
 				self['image%d' % i].instance.setPixmap(None)
 			self["waitingtext"].show()
 
-			thread = EcasaThread(self.api.getFeatured)
+			thread = SimpleThread(self.api.getFeatured)
 			thread.deferred.addCallbacks(self.gotPictures, self.errorPictures)
 			thread.start()
 
 	def __onClose(self):
-		thread = EcasaThread(lambda: self.api.cleanupCache(config.plugins.ecasa.cachesize.value))
+		thread = SimpleThread(lambda: self.api.cleanupCache(config.plugins.ecasa.cachesize.value))
 		thread.start()
 
 	def layoutFinished(self):
@@ -526,7 +527,7 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		self.setTitle(_("eCasa: Albums for user %s") % (self.user.encode('utf-8'),))
 
 	def acquireAlbumsForUser(self, user):
-		thread = EcasaThread(lambda:self.api.getAlbums(user=user))
+		thread = SimpleThread(lambda:self.api.getAlbums(user=user))
 		thread.deferred.addCallbacks(self.gotAlbums, self.errorAlbums)
 		thread.start()
 
@@ -550,7 +551,7 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		if cur and cur[-1]:
 			album = cur[-1]
 			title = cur[0] # NOTE: retrieve from array to be independent of underlaying API as the flickr and picasa albums are not compatible here
-			thread = EcasaThread(lambda:self.api.getAlbum(album))
+			thread = SimpleThread(lambda:self.api.getAlbum(album))
 			self.session.open(EcasaFeedview, thread, api=self.api, title=title)
 
 	def users(self):
@@ -797,35 +798,3 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 	def next(self):
 		if self.nextFunc: self.reloadData(self.nextFunc())
 		self['pixmap'].instance.setPixmap(None)
-
-#pragma mark - Thread
-
-import threading
-from twisted.internet import defer
-
-class EcasaThread(threading.Thread):
-	def __init__(self, fnc):
-		threading.Thread.__init__(self)
-		self.deferred = defer.Deferred()
-		self.__pump = ePythonMessagePump()
-		self.__pump.recv_msg.get().append(self.gotThreadMsg)
-		self.__asyncFunc = fnc
-		self.__result = None
-		self.__err = None
-
-	def gotThreadMsg(self, msg):
-		if self.__err:
-			self.deferred.errback(self.__err)
-		else:
-			try:
-				self.deferred.callback(self.__result)
-			except Exception as e:
-				self.deferred.errback(e)
-
-	def run(self):
-		try:
-			self.__result = self.__asyncFunc()
-		except Exception as e:
-			self.__err = e
-		finally:
-			self.__pump.send(0)
