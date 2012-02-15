@@ -441,7 +441,7 @@ var AutoTimerMenuController  = Class.create(Controller, {
 				this.about();
 			}.bind(this)
 		);
-		$('about').title = "Some information about autor, license, support...";
+		$('about').title = "Some information about author, license, support...";
 	},
 });
 
