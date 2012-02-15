@@ -25,7 +25,7 @@ from Components.config import config
 
 #pragma mark Picasa
 from .PicasaApi import PicasaApi
-from .TagStrip import strip_readable
+from Plugins.SystemPlugins.Toolkit.SimpleThread.TagStrip import strip_readable
 
 #pragma mark Flickr
 from .FlickrApi import FlickrApi

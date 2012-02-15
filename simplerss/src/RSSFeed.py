@@ -1,4 +1,4 @@
-from TagStrip import strip, strip_readable
+from Plugins.SystemPlugins.Toolkit.TagStrip import strip, strip_readable
 from Components.Scanner import ScanFile
 
 NS_RDF = "{http://www.w3.org/1999/02/22-rdf-syntax-ns#}"
