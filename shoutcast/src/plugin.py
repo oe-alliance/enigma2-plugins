@@ -207,7 +207,7 @@ class SHOUTcastWidget(Screen):
 		{
 			"ok": self.ok_pressed,
 			"back": self.close,
-			"Menu": self.menu_pressed,
+			"menu": self.menu_pressed,
 			"red": self.red_pressed,
 			"green": self.green_pressed,
 			"yellow": self.yellow_pressed,
