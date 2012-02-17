@@ -17,7 +17,7 @@
 	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
 	<script type="text/javascript" src="/web-data/lib/hashlistener2.js"></script>
 	<script type="text/javascript" src="/web-data/lib/datepicker/datepicker.js">
- 	{
+	{
 		"nodrag":1,
 		"lang":"en",
 		"buttontabindex":true,
@@ -35,7 +35,7 @@
 		"titleformat":["Y-ds-m-ds-d"]
 	}
 	</script>
- 	<script language="javascript" type="text/javascript">
+	<script language="javascript" type="text/javascript">
 	 	if (!window.$) {
 			window.$ = function(id) { return document.getElementById(id); }
 		}
@@ -103,14 +103,14 @@
 		HTTP_GET_VARS=new Array();
 		strGET=document.location.search.substr(1,document.location.search.length);
 		if(strGET!=''){
-			gArr=strGET.split('&');
-			for(i=0;i<gArr.length;++i){
-				v='';vArr=gArr[i].split('=');
-				if(vArr.length>1){v=vArr[1];}
-				HTTP_GET_VARS[unescape(vArr[0])]=unescape(v);
-			}
+	    gArr=strGET.split('&');
+	    for(i=0;i<gArr.length;++i){
+	      v='';vArr=gArr[i].split('=');
+	      if(vArr.length>1){v=vArr[1];}
+	      HTTP_GET_VARS[unescape(vArr[0])]=unescape(v);
+		  }
 		}
-		
+		 
 		function GET(v){
 			if(!HTTP_GET_VARS[v]){return '';}
 			return HTTP_GET_VARS[v];
