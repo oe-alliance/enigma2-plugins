@@ -23,20 +23,26 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Statics
 function url() {
-	this.tpl              = '';
-	this.editor           = '/autotimereditor';
-	this.backup           = '/autotimereditor/web/backup';
-	this.restore          = '/autotimereditor/web/restore';
-	this.list             = '/autotimer';
-	this.get              = '/autotimer/get';
-	this.set              = '/autotimer/set';
-	this.edit             = '/autotimer/edit';
-	this.add              = '/autotimer/edit';
-	this.remove           = '/autotimer/remove';
-	this.parse            = '/autotimer/parse';
-	this.preview          = '/autotimer/simulate';
-	this.tmp              = '/autotimereditor/tmp/';
-	this.getservices      = '/web/getservices';
+	this.tpl               = '';
+	this.editor            = '/autotimereditor';
+	this.backup            = '/autotimereditor/web/backup';
+	this.restore           = '/autotimereditor/web/restore';
+	this.list              = '/autotimer';
+	this.get               = '/autotimer/get';
+	this.set               = '/autotimer/set';
+	this.edit              = '/autotimer/edit';
+	this.add               = '/autotimer/edit';
+	this.remove            = '/autotimer/remove';
+	this.parse             = '/autotimer/parse';
+	this.preview           = '/autotimer/simulate';
+	this.timerlist         = '/web/timerlist';
+	this.timerchange       = "/web/timerchange";
+	this.timerdelete       = "/web/timerdelete";
+	this.tmp               = '/autotimereditor/tmp/';
+	this.getcurrlocation   = "/web/getcurrlocation";
+	this.getlocations      = "/web/getlocations";
+	this.gettags           = "/web/gettags";
+	this.getservices       = '/web/getservices';
 };
 var URL = new url();
 
@@ -196,6 +202,7 @@ var AutoTimerEditorCore = Class.create({
 			this.list = new AutoTimerListController('contentAutoTimerList');
 			this.edit = new AutoTimerEditController('contentAutoTimerContent');
 			this.preview = new AutoTimerPreviewController('contentAutoTimerContent');
+			this.timers = new TimerController('contentAutoTimerContent');
 			this.about = new AboutPage('contentAutoTimerContent');
 			
 			// Display menu
@@ -262,11 +269,9 @@ var AutoTimerServiceController = Class.create(Controller, {
 		this.load(bouquetsTv, callback);
 	},
 	
-	onFinished: function(){
-	},
+	onFinished: function(){},
 	
-	registerEvents: function(){
-	}
+	registerEvents: function(){}
 });
 
 var AutoTimerSettingsController = Class.create(Controller, {
@@ -407,13 +412,6 @@ var AutoTimerMenuController  = Class.create(Controller, {
 			}.bind(this)
 		);
 		$('reload').title = "Reload the AutoTimer list";
-		$('parse').on(
-			'click',
-			function(event, element){
-				autotimereditorcore.list.parse();
-			}.bind(this)
-		);
-		$('parse').title = "Run AutoTimer and add timers";
 		$('preview').on(
 			'click',
 			function(event, element){
@@ -421,6 +419,20 @@ var AutoTimerMenuController  = Class.create(Controller, {
 			}.bind(this)
 		);
 		$('preview').title = "Show events matching your AutoTimers";
+		$('parse').on(
+			'click',
+			function(event, element){
+				autotimereditorcore.list.parse();
+			}.bind(this)
+		);
+		$('parse').title = "Run AutoTimer and add timers";
+		$('timer').on(
+			'click',
+			function(event, element){
+				autotimereditorcore.timers.load();
+			}.bind(this)
+		);
+		$('timer').title = "Open timer list";
 		$('backup').on(
 			'click',
 			function(event, element){
@@ -473,11 +485,8 @@ var AutoTimerListController = Class.create(Controller, {
 		// Set new row size of list
 		selectList.size = selectOptions.length + 2;
 		
-		console.log("onchange");
-		console.log(selectOptions.length);
 		if ( selectOptions.length > 0){
 			if (this.select != undefined && this.select != null && this.select != ""){
-				console.log("select");
 				// Select the given AutoTimer because of add/remove action
 				for (idx in selectOptions){
 					if ( this.select == unescape(selectOptions[idx].value) ){
@@ -488,15 +497,11 @@ var AutoTimerListController = Class.create(Controller, {
 				this.select = null;
 			}else if (this.idx != undefined && this.idx != null && this.idx != ""){
 				// Select the given index / row
-				console.log("idx");
 				if ( selectOptions.length > this.idx){
-					console.log("idx");
-					console.log(this.idx);
 					selectOptions[this.idx].selected = true;
 					this.idx = null;
 				}
 			}else{
-				console.log("first");
 				var idx = selectList.selectedIndex;
 				if (idx < 0){
 					// Select at least the first element
@@ -532,14 +537,12 @@ var AutoTimerListController = Class.create(Controller, {
 		this.handler.parse({}, this.parseCallback.bind(this));
 	},
 	parseCallback: function(){
-		if ($('list').value){
-			autotimereditorcore.edit.reload();
-		}
+		autotimereditorcore.timers.load();
 	},
 	
 	add: function(){
 		this.match = prompt("Name for the new AutoTimer:");
-		if (this.match.length){
+		if (this.match!=null && this.match!=""){
 			// Retrieve next selected entry
 			this.select = $('list').length+1;
 			// Add new AutoTimer: Use edit without an id
@@ -559,15 +562,12 @@ var AutoTimerListController = Class.create(Controller, {
 		
 		var nextidx = -1;
 		if ( selectOptions.length > 0){
-			console.log(selectOptions.length);
 			if ( selectOptions.length > (idx+1)){
 				nextidx = idx;
 			} else if ( (idx-1) > 0 ){
 				nextidx = idx-1;
-				console.log("2");
 			}
 		}
-		console.log(nextidx);
 		var check = confirm("Do you really want to delete the AutoTimer\n" + selectList.options[idx].text + " ?");
 		if (check == true){
 			this.idx = nextidx;
@@ -1100,6 +1100,7 @@ var AutoTimerEditController = Class.create(Controller, {
 		);
 		$('taglist').on(
 			'click',
+			'.tags',
 			function(event, element){
 				this.changeTag(element);
 				event.stop();
@@ -1211,10 +1212,48 @@ var AutoTimerPreviewController = Class.create(Controller, {
 		this.handler.load({});
 	},
 	
-	onFinished: function(){
+	onFinished: function(){},
+	
+	registerEvents: function(){}
+});
+
+var TimerController = Class.create(Controller, {
+	initialize: function($super, target){
+		$super(new TimerListHandler(target));
+		this.timerHandler = new TimerHandler(target, this.load.bind(this), []);
+	},
+
+	load: function(){
+		$('list').selectedIndex = -1;
+		$('headerautotimercontent').innerHTML = "Timer:";
+		this.handler.load({});
+	},
+
+	toggleDisabled: function(element){
+		this.timerHandler.toggleDisabled(element);
+	},
+
+	del: function(element){
+		this.timerHandler.del(element);
 	},
 	
 	registerEvents: function(){
+		$('timerlist').on(
+			'click',
+			'.tListDelete',
+			function(event, element){
+				this.del(element);
+				event.stop();
+			}.bind(this)
+		);
+		$('timerlist').on(
+			'click',
+			'.tListToggleDisabled',
+			function(event, element){
+				this.toggleDisabled(element);
+				event.stop();
+			}.bind(this)
+		);
 	}
 });
 
@@ -1235,6 +1274,7 @@ var AboutPage = Class.create({
 		this.show('tplAbout');
 	},
 });
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Handler

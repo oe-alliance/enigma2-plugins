@@ -441,23 +441,107 @@
 /**************
  AutoTimer Preview
  **************/
-	.preview{
+	#previewlist{
 		width: 100%;
 	}
-	.preview tr{
+	#previewlist tr{
 		margin-bottom: 3px;
 	}
-	.preview td{
+	#previewlist td{
 		vertical-align: text-top;
 		padding-top: 3px;
 	}
-	.preview td:not(.nopadding){
+	#previewlist td:not(.nopadding){
 		padding-left: 10px;
 	}
 
 
 /**************
- AutoTimer Aboout
+ AutoTimer Timers
+ **************/
+	#timerlist{
+		width: 100%;
+	}
+	#timerlist tr{
+		margin-bottom: 3px;
+	}
+	#timerlist td{
+		vertical-align: text-top;
+		padding-top: 3px;
+	}
+	
+	.tListItemTable {
+		width: 100%
+	}
+	
+	.tListSName {
+		text-align: left
+	}
+	
+	.tListItem {
+		font-weight: bold;
+		font-size: 13px
+	}
+	
+	.tListTitle {
+		width: 150px;
+		text-align: left
+	}
+	
+	.tListDescr {
+		width: 150px;
+		text-align: left
+	}
+	
+	.tListRepeat {
+		width: 70px;
+		text-align: left
+	}
+	
+	.tListDuration {
+		width: 70px;
+		text-align: left
+	}
+	
+	.tListBegin {
+		width: 100px;
+		text-align: left
+	}
+	
+	.tListEnd {
+		width: 100px;
+		text-align: left
+	}
+	
+	.tListAfter {
+		width: 85px;
+		text-align: left
+	}
+	
+	.tListOption {
+		width: 80px;
+		text-align: center
+	}
+	
+	.timerState0 {
+		color: #485052
+	}
+	
+	.timerState1 {
+		color: #900
+	}
+	
+	.timerState2 {
+		color: #090
+	}
+	
+	.timerState3 {
+		color: #009
+	}
+
+
+/**************
+ AutoTimer About
  **************/
 	.about{
 		font-size: 12px;
@@ -494,12 +578,13 @@
 	}
 
 	.headerindent{
-		margin-left: 5px;
+		margin-left: 7px;
 	}
 
 	.nobreak {
 	  white-space: nowrap;
 	}
+
 
 /***************
 * IE6 Hackstuff
