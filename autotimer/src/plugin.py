@@ -96,6 +96,11 @@ def sessionstart(reason, **kwargs):
 			from twisted.web import static
 			from twisted.python import util
 			from WebChilds.UploadResource import UploadResource
+
+			from AutoTimerResource import AutoTimerDoParseResource, \
+				AutoTimerListAutoTimerResource, AutoTimerAddOrEditAutoTimerResource, \
+				AutoTimerRemoveAutoTimerResource, AutoTimerChangeSettingsResource, \
+				AutoTimerSettingsResource, AutoTimerSimulateResource, API_VERSION
 		except ImportError as ie:
 			pass
 		else:
@@ -106,6 +111,17 @@ def sessionstart(reason, **kwargs):
 			else:
 				File = static.File
 
+			# webapi
+			root = AutoTimerListAutoTimerResource()
+			root.putChild('parse', AutoTimerDoParseResource())
+			root.putChild('remove', AutoTimerRemoveAutoTimerResource())
+			root.putChild('edit', AutoTimerAddOrEditAutoTimerResource())
+			root.putChild('get', AutoTimerSettingsResource())
+			root.putChild('set', AutoTimerChangeSettingsResource())
+			root.putChild('simulate', AutoTimerSimulateResource())
+			addExternalChild( ("autotimer", root , "AutoTimer-Plugin", API_VERSION, False) )
+
+			# webgui
 			session = kwargs["session"]
 			root = File(util.sibpath(__file__, "web-data"))
 			root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) )
