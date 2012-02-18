@@ -102,7 +102,6 @@ autotimer/src/WebComponents/Sources/Makefile
 autotimer/src/WebScreens/Makefile
 autotimer/src/web/Makefile
 autotimer/src/web-data/Makefile
-autotimer/src/webinterface/Makefile
 
 babelzapper/Makefile
 babelzapper/etc/Makefile
