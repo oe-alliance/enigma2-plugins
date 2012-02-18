@@ -113,7 +113,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			autotimerHelp.open(self.session)
 
 	def setCustomTitle(self):
-		self.setTitle(_("AutoTimer overview"))
+		self.setTitle(_("AutoTimer"))
 
 	def createSummary(self):
 		return AutoTimerOverviewSummary
