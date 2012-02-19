@@ -162,7 +162,7 @@ class SubsDownloaderApplication(Screen):
 		#TODO COMERTIAL for sponsor
 		#TODO OTHER SUBTITLE FEEDERS
 		#TODO VERSION CHANGE
-		#TODO Think about automatic media patern make based on FileList module
+		#TODO Think about automatic media pattern make based on FileList module
 		self["key_menu"] = StaticText("Config menu")
 		self["key_help"] = StaticText("About...")
 		self["key_text"] = StaticText("Subtitle download")
@@ -544,7 +544,7 @@ class SubsDownloaderApplication(Screen):
 					if subtitle_filename[0] != "None":
 						self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
 					else:
-						self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
+						self.session.open(MessageBox, _("There is problem with downloading or saving subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
 					
 					"""try:
 						self.NapiSubtitle.getnapi(self.movie_filename)
@@ -623,7 +623,7 @@ class SubsDownloaderApplication(Screen):
 		self.session.open(MessageBox,_("Failed to download or save file.\nPossible problems:\n- Subtitle filname:\n%s\n- Subtitle codepage:\n%s\n- Subtitle filetype:\n%s\n- Movie fsp:\n%s\n.") % (subtitle_filename,subtitle_codepade_,subtitle_filename_type,movie_fps), MessageBox.TYPE_INFO, timeout = 15)
 		
 	def make_media_patern(self):
-		"""Creare media patern to file browser based on self.textEXTENSIONS from this module
+		"""Create media pattern to file browser based on self.textEXTENSIONS from this module
 		and EXTENSIONS fron FileList module"""
 		self.textEXTENSIONS.update(EXTENSIONS)
 		return "^.*\.(" + str.join('|',self.textEXTENSIONS.keys()) + ")"
@@ -814,7 +814,7 @@ class SubsDownloaderApplication(Screen):
 							self["fileList"].refresh()
 							self.session.open(MessageBox, _("%i file(s) was extracted and I didn't match them automatically this time. \n Please make local convertion (long TEXT).") % (len(subtitle_filename)) , MessageBox.TYPE_INFO, timeout = 10)
 				if subtitle_filename == [] or subtitle_filename == "":
-					self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
+					self.session.open(MessageBox, _("There is problem with downloading or saving subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
 			
 			elif self.localConvertion == True:
 				#local convertion in progress
@@ -882,7 +882,7 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 		        "ok": self.saveConfig,
 		        "yellow": self.installLibMediaInfo,
 		        #"cancel": self.canceWithoutSaveMsg
-		        #"cancel": self.session.openWithCallback(self.cancelWithoutSave,MessageBox,_("Do you realy want to exit without configuration saving?"), MessageBox.TYPE_YESNO)
+		        #"cancel": self.session.openWithCallback(self.cancelWithoutSave,MessageBox,_("Do you really want to exit without configuration saving?"), MessageBox.TYPE_YESNO)
 			"cancel": self.cancelWithoutSave # add the RC Command "cancel" to close your Screen
 		}, -1)
 		self.createConfigMenu()
@@ -917,10 +917,10 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Choose Napisy24 search method:"), config.plugins.subsdownloader.Napisy24SearchMethod))
 			self.list.append(getConfigListEntry(_("Use \"guessFileData\" method for movie filname:"), config.plugins.subsdownloader.Napisy24MovieNameMethod))
 			pass 
-		self.list.append(getConfigListEntry(_("Extended configuratin menu:"), config.plugins.subsdownloader.extendedMenuConfig))
+		self.list.append(getConfigListEntry(_("Extended configuration menu:"), config.plugins.subsdownloader.extendedMenuConfig))
 		if config.plugins.subsdownloader.extendedMenuConfig.value == True:
 			self.list.append(getConfigListEntry(_("Save last FileList path:"), config.plugins.subsdownloader.pathSave))
-			self.list.append(getConfigListEntry(_("Use media patern filter in FileList:"), config.plugins.subsdownloader.pathUseMediaPaternFilter))
+			self.list.append(getConfigListEntry(_("Use media pattern filter in FileList:"), config.plugins.subsdownloader.pathUseMediaPaternFilter))
 			self.list.append(getConfigListEntry(_("Add Subs Downloader to BlueButton menu:"), config.plugins.subsdownloader.BlueButtonMenu))
 			#self.list.append(getConfigListEntry(_("Delete oryginal subtitle after local convertion:"), config.plugins.subsdownloader.del_sub_after_conv))
 			self.list.append(getConfigListEntry(_("Plugin autoupdate:"), config.plugins.subsdownloader.AutoUpdate))
@@ -929,10 +929,10 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 		
 	"""def canceWithoutSaveMsg(self):
 		dei = self.session.openWithCallback(self.cancelWithoutSave(),MessageBox,_("Do you realy want to exit without configuration saving?"), MessageBox.TYPE_YESNO)
-		dei.setTitle(_("Exit without saveing ..."))"""
+		dei.setTitle(_("Exit without saving ..."))"""
 		
 	def cancelWithoutSave(self):
-		#TODO RETURN TO APPLICATION AND NOTIFICATRION ABOIUT NOT SAVEING
+		#TODO RETURN TO APPLICATION AND NOTIFICATION ABOUT NOT SAVING
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close ()
