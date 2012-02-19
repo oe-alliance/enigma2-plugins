@@ -812,7 +812,7 @@ class SubsDownloaderApplication(Screen):
 								self.convert_subtitle_to_movie(x['movie'], x['subtitle'])
 						else:
 							self["fileList"].refresh()
-							self.session.open(MessageBox, _("%i file(s) was extracted and I didn't match them automatically this time. \n Please make local convertion (long TEXT).") % (len(subtitle_filename)) , MessageBox.TYPE_INFO, timeout = 10)
+							self.session.open(MessageBox, _("%d file(s) was extracted and I didn't match them automatically this time. \n Please make local convertion (long TEXT).") % (len(subtitle_filename)) , MessageBox.TYPE_INFO, timeout = 10)
 				if subtitle_filename == [] or subtitle_filename == "":
 					self.session.open(MessageBox, _("There is problem with downloading or saving subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
 			
