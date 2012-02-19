@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - fancontrol2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-03 17:26+0100\n"
+"POT-Creation-Date: 2012-02-19 11:41+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -14,303 +14,307 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: .../enigma2-plugins/fancontrol2\n"
-"X-Poedit-SearchPath-0: .../enigma2-plugins/fancontrol2\n"
+"X-Poedit-Basepath: /media/TREKSTOR/git/enigma2-plugins/fancontrol2\n"
+"X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/fancontrol2\n"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:48
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:48
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:49
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:49
 msgid "Speed"
 msgstr "Velocit&agrave;"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:50
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:50
 msgid "Voltage"
 msgstr "Voltaggio"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:57
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:57
 msgid "Sensors"
 msgstr "Sensori"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:152
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:188
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:152
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:188
 msgid "active"
 msgstr "Attivo"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:155
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:191
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:155
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:191
 msgid "turn off"
 msgstr "Disattivare"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:158
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:194
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:158
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:194
 msgid "not active"
 msgstr "Non attivo"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:161
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:197
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:161
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:197
 msgid "turn on"
 msgstr "Attivare"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:166
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:168
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:202
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:204
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:166
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:168
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:202
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:204
 #, python-format
 msgid "Filesize : %d %sByte"
 msgstr "Dim. file: %d %s Byte"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:170
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:206
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:170
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:206
 #, python-format
 msgid "Disk free : %d MByte"
 msgstr "Spazio libero su disco: %d MByte"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:173
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:209
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:173
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:209
 msgid "Download"
 msgstr "Download"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:177
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:213
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:177
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:213
 msgid "Delete"
 msgstr "Rimuovere"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:181
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:181
 msgid "Delete older 48h"
 msgstr "Rimuovere se più vecchi di 48h"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:184
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:221
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:184
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:221
 #, python-format
 msgid "File %s does not exists"
 msgstr "Il file %s non esiste"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:223
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:223
 #, python-format
 msgid "Logging-Path: %s"
 msgstr "Percorso log: %s"
 
-#: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:224
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/FC2webSite.py:224
 #, python-format
 msgid "Auto-Delete older %s Days"
 msgstr "Rimuovere autom. dati più vecchi di %s (giorni)"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:31
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/globals.py:31
 msgid "below Tunerslot 4"
 msgstr "Sotto il tuner 4"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:32
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/globals.py:32
 msgid "near XILINX Spartan"
 msgstr "Vicino XILINX Spartan"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:33
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/globals.py:33
 msgid "under the WLAN"
 msgstr "Sotto la WLAN"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:34
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/globals.py:34
 msgid "left of the Battery"
 msgstr "A sx della batteria"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:35
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/globals.py:35
 msgid "left near Front-CI"
 msgstr "A sx della CI frontale"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:36
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/globals.py:36
 msgid "left near Card-Slot"
 msgstr "A sx dello slot card"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:37
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/globals.py:37
 msgid "over Security Card"
 msgstr "Sopra la security card"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:38
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/globals.py:38
 msgid "under the Fan"
 msgstr "Sotto la ventola"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:88
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:88
 msgid "."
 msgstr "."
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:133
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:133
 msgid "disabled"
 msgstr "Disabilitato"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:133
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:133
 msgid "Control disabled"
 msgstr "Controllo disabilitato"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:133
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:133
 msgid "3Pin"
 msgstr "3Pin"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:133
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:133
 msgid "4Pin"
 msgstr "4Pin"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:134
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:147
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:150
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:134
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:147
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:150
 msgid "no"
 msgstr "No"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:134
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:150
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:134
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:150
 msgid "yes"
 msgstr "Sì"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:134
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:134
 msgid "yes, Except for Recording or HDD"
 msgstr "Sì, ma non durante registrazioni o attività HDD"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:141
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:141
 msgid "do nothing"
 msgstr "Non fare nulla"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:141
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:141
 msgid "display Info"
 msgstr "Mostrare info"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:141
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:141
 msgid "Box Shutdown"
 msgstr "Spegnere il box"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:150
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:150
 msgid "auto"
 msgstr "Automaticamente"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:150
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:150
 msgid "never"
 msgstr "Mai"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:235
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:235
 msgid "please wait (until 3min)..."
 msgstr "Attendere... (occorreranno almeno 3 minuti)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:273
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:273
 #, python-format
 msgid "Min Fan Start %d rpm at PWM=%d"
 msgstr "Avvio minimo %d rpm a PWM=%d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:279
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:279
 #, python-format
 msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
 msgstr "Stop minimo %d rpm a PWM=%d (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:285
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:285
 #, python-format
 msgid "Max Fan %d rpm at PWM=255 (%s)"
 msgstr "Vel. max %d rpm a PWM=255 (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:287
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:287
 msgid "Extended Control Range"
 msgstr "Controllo esteso"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:297
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:297
 #, python-format
 msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
 msgstr "Avvio minimo %d rpm a VLT=%d e PWM=0"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:300
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:300
 #, python-format
 msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
 msgstr "Stop minimo %d rpm a VLT=%d e PWM=0 (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:307
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:307
 #, python-format
 msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
 msgstr "Vel. max %d rpm a PWM=255 e VLT=255 (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:315
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:315
 #, python-format
 msgid "Min Fan Start %d rpm at VLT=%d"
 msgstr "Avvio minimo %d rpm a VLT=%d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:318
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:318
 #, python-format
 msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
 msgstr "Stop minimo %d rpm a VLT=%d (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:323
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:323
 #, python-format
 msgid "Max Fan %d rpm at VLT=255 (%s)"
 msgstr "Vel max %d rpm a VLT=255 (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:395
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:397
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:401
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:326
+msgid "please set fan type (3Pin or 4Pin)"
+msgstr "Specificare il modello di ventola (3pin o 4pin)"
+
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:398
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:400
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:404
 #, python-format
 msgid "%s   %02d C"
 msgstr "%s   %02d C"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:403
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:406
 msgid "press Info for HDD-Temp"
 msgstr "Info -> Temp. HDD"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:404
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:650
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:407
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:654
 #, python-format
 msgid "Current rpm  %4d"
 msgstr "RPM attuali: %4d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:435
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:439
 msgid "Action in case of Fan failure"
 msgstr "In caso di avaria della ventola:"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:436
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:440
 msgid "Box shutdown at Temperature (C)"
-msgstr "Spegnimento box a temperatura di (C)"
+msgstr "Spegnere il box a temperatura di (C)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:437
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:441
 msgid "increases overheating protection to (C)"
 msgstr "Aumentare la protezione da surriscaldamento di (C)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:438
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:442
 msgid "read HDD-Temperature in HDD-Standby-Mode"
-msgstr "Rilevare la temperatura del disco anche in standby"
+msgstr "Rilevare la temperatura del disco in standby"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:439
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:443
 msgid "disable DMM-FanControl"
 msgstr "Disabilitare DMM-FanControl"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:440
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:444
 msgid "Show Fan Speed as"
 msgstr "Mostrare velocità ventola come"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:441
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:445
 msgid "Show Plugin in Extension-Menu"
 msgstr "Mostrare il plugin nel menu estensioni"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:442
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:446
 msgid "Show Monitor in Extension-Menu"
 msgstr "Mostrare Monitor nel menu estensioni"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:443
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:447
 msgid "Number of WebIF-Log-Entries"
 msgstr "Numero di voci nel log"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:444
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:448
 msgid "Logging path"
 msgstr "Percorso log"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:445
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:449
 msgid "Enable Data Logging"
 msgstr "Abilitare log dati"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:446
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:450
 msgid "Auto-Delete Data older than (Days)"
-msgstr "Rimuovere autom. dati se più vecchi di (giorni)"
+msgstr "Rimuovere automaticamente dati se più vecchi di (giorni)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:447
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:451
 msgid "Enable Event Logging"
 msgstr "Abilitare log eventi"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:462
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:466
 msgid "Choose path"
 msgstr "Scegliere il percorso"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:496
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:500
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
@@ -318,105 +322,105 @@ msgstr ""
 "L'attivazione delle modifiche richiede\n"
 "il riavvio di enigma2. Riavviare ora?"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:497
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:501
 msgid "Restart GUI now?"
 msgstr "Riavviare la GUI?"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:563
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:567
 msgid "Fan type"
 msgstr "Tipo ventola"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:564
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:568
 msgid "Fan off in Standby"
 msgstr "Ventola off in standby"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:565
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:569
 msgid "min Speed rpm"
 msgstr "Velocità min rpm"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:566
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:570
 msgid "max Speed rpm"
 msgstr "Velocità max rpm"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:567
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:571
 msgid "Static temp C"
-msgstr "Temperatura \"di riposo\" C"
+msgstr "Temp. \"di riposo\" C"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:568
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:572
 msgid "End temperature C"
-msgstr "Temperatura massima C"
+msgstr "Temp. massima C"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:569
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:573
 msgid "Initial Voltage"
 msgstr "Voltaggio iniziale"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:570
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:574
 msgid "Initial PWM"
 msgstr "PWM iniziale"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:575
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:579
 msgid "Cancel"
 msgstr "Annull."
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:576
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:580
 msgid "Save"
 msgstr "Salvare"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:577
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:581
 msgid "Check"
 msgstr "Verif."
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:578
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:582
 msgid "Help"
 msgstr "Aiuto"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:615
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:619
 #, python-format
 msgid "Current value: %s"
 msgstr "Valore attuale: %s"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:648
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:652
 #, python-format
 msgid "Temperature C  %4.1f"
 msgstr "Temperatura C %4.1f"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:649
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:653
 #, python-format
 msgid "Target rpm  %4d"
 msgstr "Obiettivo rpm: %4d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:651
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:655
 #, python-format
 msgid "Voltage  %03d"
 msgstr "Voltaggio %03d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:652
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:656
 #, python-format
 msgid "PWM  %03d"
 msgstr "PWM %03d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:677
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:681
 msgid "Information"
 msgstr "Informazioni"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:677
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:681
 msgid "readme.txt"
 msgstr "readmeit.txt"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:827
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:834
 msgid "FanControl2 emergency, Box Shutdown now?"
 msgstr "FanControl2 in emergenza: spegnere il box?"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:998
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:1005
 #, python-format
 msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
 msgstr "RPM attuale:%d obiettivo RPM:%d Temp:%4.1f"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:1005
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:1012
 msgid "Fan is not working!"
 msgstr "La ventola non funziona!"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:1063
+#: /media/TREKSTOR/git/enigma2-plugins/fancontrol2/src/plugin.py:1070
 msgid "Box has no fancontrol hardware -> FC2 deactivated"
 msgstr "Controllo hardware ventola non disponibile >> FC2 disasttivato"
 
