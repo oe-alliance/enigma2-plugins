@@ -296,6 +296,7 @@ class ChainedOpenSSLContextFactory(ssl.DefaultOpenSSLContextFactory):
 		ctx.use_certificate_chain_file(self.certificateChainFileName)
 		ctx.use_privatekey_file(self.privateKeyFileName)
 		self._context = ctx
+
 #===============================================================================
 # HTTPAuthResource
 # Handles HTTP Authorization for a given Resource
