@@ -3,4 +3,4 @@ Version: 0.1
 Description: Bonjour/avahi-daemon management for your Dreambox
 Maintainer: Stephan Reichholf <stephan@reichholf.net>
 Homepage: http://enigma2-plugins.schwerkraft.elitedvb.net/
-Depends: enigma2,avahi-daemon
+Depends: enigma2, avahi-daemon
