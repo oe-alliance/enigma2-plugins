@@ -1892,7 +1892,7 @@ function AutoTimer(xml, defaults){
 	var services = [];
 	var xmlservices = xml.getElementsByTagName('e2service');
 	var len = xmlservices.length;
-	if (typeof xmlservices == "undefined"){
+	if (typeof xmlservices != "undefined"){
 		for (var i=0; i<len; i++){
 			var name = xmlservices.item(i).getElementsByTagName('e2servicename');
 			if(name.item(0).firstChild == null){
