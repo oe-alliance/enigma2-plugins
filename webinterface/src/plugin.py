@@ -25,6 +25,8 @@ from os.path import isfile as os_isfile, exists as os_exists
 from __init__ import _, __version__, decrypt_block
 from webif import get_random, validate_certificate
 
+import random
+
 tpm = eTPM()
 rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
 hw = HardwareInfo()
@@ -79,7 +81,7 @@ class Closer:
 		for d in running_defered:
 			print "[Webinterface] stopping interface on ", d.interface, " with port", d.port
 			x = d.stopListening()
-			
+
 			try:
 				x.addCallback(self.isDown)
 				self.counter += 1
@@ -115,9 +117,9 @@ def installCertificates(session):
 		cert.get_subject().O = "Dreambox"
 		cert.get_subject().OU = "STB"
 		cert.get_subject().CN = socket_gethostname()
-		cert.set_serial_number(1000)
-		cert.gmtime_adj_notBefore(0)
-		cert.gmtime_adj_notAfter(10 * 365 * 24 * 60 * 60)
+		cert.set_serial_number(random.randint(1000000,1000000000))
+		cert.set_notBefore("201201010000Z");
+		cert.set_notAfter("203012312359Z")
 		cert.set_issuer(cert.get_subject())
 		cert.set_pubkey(k)
 		print "[Webinterface].installCertificates :: Signing SSL key pair with new CACert"
@@ -136,7 +138,7 @@ def installCertificates(session):
 			#Inform the user
 			session.open(MessageBox, "Couldn't install generated SSL-Certifactes for https access\nHttps access is disabled!", MessageBox.TYPE_ERROR)
 
-	
+
 #===============================================================================
 # restart the Webinterface for all configured Interfaces
 #===============================================================================
@@ -154,31 +156,31 @@ def restartWebserver(session, l2k):
 		Closer(session, startWebserver, l2k).stop()
 	else:
 		startWebserver(session, l2k)
-	
+
 #===============================================================================
 # start the Webinterface for all configured Interfaces
 #===============================================================================
 def startWebserver(session, l2k):
 	global running_defered
 	global toplevel
-	
+
 	session.mediaplayer = None
 	session.messageboxanswer = None
 	if toplevel is None:
 		toplevel = getToplevel(session)
-	
+
 	errors = ""
-	
+
 	if config.plugins.Webinterface.enabled.value is not True:
 		print "[Webinterface] is disabled!"
-	
+
 	else:
 		# IF SSL is enabled we need to check for the certs first
-		# If they're not there we'll exit via return here 
+		# If they're not there we'll exit via return here
 		# and get called after Certificates are installed properly
 		if config.plugins.Webinterface.https.enabled.value:
 			installCertificates(session)
-		
+
 		# Listen on all Interfaces
 		ip = "0.0.0.0"
 		#HTTP
@@ -188,25 +190,25 @@ def startWebserver(session, l2k):
 				errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.http.port.value)
 			else:
 				registerBonjourService('http', config.plugins.Webinterface.http.port.value)
-			
+
 		#Streaming requires listening on 127.0.0.1:80 no matter what, ensure it its available
 		if config.plugins.Webinterface.http.port.value != 80 or not config.plugins.Webinterface.http.enabled.value:
 			#LOCAL HTTP Connections (Streamproxy)
-			ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.http.auth.value, l2k)			
+			ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.http.auth.value, l2k)
 			if ret == False:
 				errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
-			
+
 			if errors != "":
 				session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), type=MessageBox.TYPE_ERROR, timeout=30)
-				
-		#HTTPS		
-		if config.plugins.Webinterface.https.enabled.value is True:					
+
+		#HTTPS
+		if config.plugins.Webinterface.https.enabled.value is True:
 			ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, l2k, True)
 			if ret == False:
 				errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.https.port.value)
 			else:
 				registerBonjourService('https', config.plugins.Webinterface.https.port.value)
-		
+
 #===============================================================================
 # stop the Webinterface for all configured Interfaces
 #===============================================================================
@@ -230,40 +232,40 @@ def stopWebserver(session):
 #===============================================================================
 def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usessl=False):
 	if hw.get_device_name().lower() != "dm7025":
-		l3k = None		
+		l3k = None
 		l3c = tpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
-		
+
 		if l3c is None:
-			return False			
-		
-		l3k = validate_certificate(l3c, l2k)
-		if l3k is None:			
 			return False
-		
+
+		l3k = validate_certificate(l3c, l2k)
+		if l3k is None:
+			return False
+
 		random = get_random()
 		if random is None:
 			return False
-	
+
 		value = tpm.challenge(random)
 		result = decrypt_block(value, l3k)
-		
+
 		if result is None:
 			return False
 		else:
-			if result [80:88] != random:		
+			if result [80:88] != random:
 				return False
-		
+
 	if useauth:
-# HTTPAuthResource handles the authentication for every Resource you want it to			
+# HTTPAuthResource handles the authentication for every Resource you want it to
 		root = HTTPAuthResource(toplevel, "Enigma2 WebInterface")
-		site = server.Site(root)			
+		site = server.Site(root)
 	else:
 		site = server.Site(toplevel)
 
 	if usessl:
-		ctx = ssl.DefaultOpenSSLContextFactory(KEY_FILE, CERT_FILE, sslmethod=SSL.SSLv23_METHOD)
+		ctx = ChainedOpenSSLContextFactory(KEY_FILE, CERT_FILE)
 		try:
-			d = reactor.listenSSL(port, site, ctx, interface=ipaddress)			
+			d = reactor.listenSSL(port, site, ctx, interface=ipaddress)
 		except CannotListenError:
 			print "[Webinterface] FAILED to listen on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
 			return False
@@ -273,14 +275,27 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 		except CannotListenError:
 			print "[Webinterface] FAILED to listen on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
 			return False
-	
+
 	running_defered.append(d)
 	print "[Webinterface] started on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
 	return True
-	
+
 	#except Exception, e:
-		#print "[Webinterface] starting FAILED on %s:%i!" % (ipaddress, port), e		
+		#print "[Webinterface] starting FAILED on %s:%i!" % (ipaddress, port), e
 		#return False
+
+class ChainedOpenSSLContextFactory(ssl.DefaultOpenSSLContextFactory):
+	def __init__(self, privateKeyFileName, certificateChainFileName, sslmethod=SSL.SSLv23_METHOD):
+		self.privateKeyFileName = privateKeyFileName
+		self.certificateChainFileName = certificateChainFileName
+		self.sslmethod = sslmethod
+		self.cacheContext()
+
+	def cacheContext(self):
+		ctx = SSL.Context(self.sslmethod)
+		ctx.use_certificate_chain_file(self.certificateChainFileName)
+		ctx.use_privatekey_file(self.privateKeyFileName)
+		self._context = ctx
 #===============================================================================
 # HTTPAuthResource
 # Handles HTTP Authorization for a given Resource
@@ -293,57 +308,57 @@ class HTTPAuthResource(resource.Resource):
 		self.authorized = False
 		self.tries = 0
 		self.unauthorizedResource = UnauthorizedResource(self.realm)
-	
+
 	def unautorized(self, request):
 		request.setResponseCode(http.UNAUTHORIZED)
 		request.setHeader('WWW-authenticate', 'basic realm="%s"' % self.realm)
 
 		return self.unauthorizedResource
-	
-	def isAuthenticated(self, request):		
+
+	def isAuthenticated(self, request):
 		host = request.getHost().host
 		#If streamauth is disabled allow all acces from localhost
-		if not config.plugins.Webinterface.streamauth.value:			
+		if not config.plugins.Webinterface.streamauth.value:
 			if( host == "127.0.0.1" or host == "localhost" ):
 				print "[WebInterface.plugin.isAuthenticated] Streaming auth is disabled bypassing authcheck because host is '%s'" %host
 				return True
-					
+
 		# get the Session from the Request
 		sessionNs = request.getSession().sessionNamespaces
-		
+
 		# if the auth-information has not yet been stored to the session
 		if not sessionNs.has_key('authenticated'):
 			if request.getUser() != '':
 				sessionNs['authenticated'] = check_passwd(request.getUser(), request.getPassword())
 			else:
 				sessionNs['authenticated'] = False
-		
-		#if the auth-information already is in the session				
+
+		#if the auth-information already is in the session
 		else:
 			if sessionNs['authenticated'] is False:
 				sessionNs['authenticated'] = check_passwd(request.getUser(), request.getPassword() )
-		
-		#return the current authentication status						
+
+		#return the current authentication status
 		return sessionNs['authenticated']
-													
+
 #===============================================================================
-# Call render of self.resource (if authenticated)													
+# Call render of self.resource (if authenticated)
 #===============================================================================
-	def render(self, request):			
-		if self.isAuthenticated(request) is True:	
+	def render(self, request):
+		if self.isAuthenticated(request) is True:
 			return self.resource.render(request)
-		
+
 		else:
 			print "[Webinterface.HTTPAuthResource.render] !!! unauthorized !!!"
 			return self.unautorized(request).render(request)
 
 #===============================================================================
-# Override to call getChildWithDefault of self.resource (if authenticated)	
+# Override to call getChildWithDefault of self.resource (if authenticated)
 #===============================================================================
 	def getChildWithDefault(self, path, request):
 		if self.isAuthenticated(request) is True:
 			return self.resource.getChildWithDefault(path, request)
-		
+
 		else:
 			print "[Webinterface.HTTPAuthResource.render] !!! unauthorized !!!"
 			return self.unautorized(request)
@@ -357,11 +372,11 @@ class UnauthorizedResource(resource.Resource):
 		resource.Resource.__init__(self)
 		self.realm = realm
 		self.errorpage = static.Data('<html><body>Access Denied.</body></html>', 'text/html')
-	
+
 	def getChild(self, path, request):
 		return self.errorpage
-		
-	def render(self, request):	
+
+	def render(self, request):
 		return self.errorpage.render(request)
 
 
@@ -378,15 +393,15 @@ def check_passwd(name, passwd):
 		cryptedpass = getpwnam(name)[1]
 	except:
 		return False
-	
+
 	if cryptedpass:
 		#shadowed or not, that's the questions here
 		if cryptedpass == 'x' or cryptedpass == '*':
 			try:
 				cryptedpass = getspnam(name)[1]
 			except:
-				return False			
-				
+				return False
+
 		return crypt(passwd, cryptedpass) == cryptedpass
 	return False
 
@@ -394,7 +409,7 @@ global_session = None
 
 #===============================================================================
 # sessionstart
-# Actions to take place on Session start 
+# Actions to take place on Session start
 #===============================================================================
 def sessionstart(reason, session):
 	global global_session
@@ -402,37 +417,37 @@ def sessionstart(reason, session):
 	networkstart(True, session)
 
 
-def registerBonjourService(protocol, port):	
+def registerBonjourService(protocol, port):
 	try:
 		from Plugins.Extensions.Bonjour.Bonjour import bonjour
-				
+
 		service = bonjour.buildService(protocol, port)
 		bonjour.registerService(service, True)
-		print "[WebInterface.registerBonjourService] Service for protocol '%s' with port '%i' registered!" %(protocol, port) 
+		print "[WebInterface.registerBonjourService] Service for protocol '%s' with port '%i' registered!" %(protocol, port)
 		return True
-		
+
 	except ImportError, e:
 		print "[WebInterface.registerBonjourService] %s" %e
 		return False
 
-def unregisterBonjourService(protocol):	
+def unregisterBonjourService(protocol):
 	try:
 		from Plugins.Extensions.Bonjour.Bonjour import bonjour
-						
+
 		bonjour.unregisterService(protocol)
-		print "[WebInterface.unregisterBonjourService] Service for protocol '%s' unregistered!" %(protocol) 
+		print "[WebInterface.unregisterBonjourService] Service for protocol '%s' unregistered!" %(protocol)
 		return True
-		
+
 	except ImportError, e:
 		print "[WebInterface.unregisterBonjourService] %s" %e
 		return False
-	
+
 def checkBonjour():
 	if ( not config.plugins.Webinterface.http.enabled.value ) or ( not config.plugins.Webinterface.enabled.value ):
 		unregisterBonjourService('http')
 	if ( not config.plugins.Webinterface.https.enabled.value ) or ( not config.plugins.Webinterface.enabled.value ):
 		unregisterBonjourService('https')
-		
+
 #===============================================================================
 # networkstart
 # Actions to take place after Network is up (startup the Webserver)
@@ -441,50 +456,50 @@ def checkBonjour():
 def networkstart(reason, session):
 	l2r = False
 	l2k = None
-	if hw.get_device_name().lower() != "dm7025":		
+	if hw.get_device_name().lower() != "dm7025":
 		l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
-		
+
 		if l2c is None:
 			return
-		
+
 		l2k = validate_certificate(l2c, rootkey)
 		if l2k is None:
 			return
-			
+
 		l2r = True
 	else:
 		l2r = True
-		
-	if l2r:	
+
+	if l2r:
 		if reason is True:
 			startWebserver(session, l2k)
 			checkBonjour()
-			
+
 		elif reason is False:
 			stopWebserver(session)
 			checkBonjour()
-		
+
 def openconfig(session, **kwargs):
 	session.openWithCallback(configCB, WebIfConfigScreen)
 
 def configCB(result, session):
 	l2r = False
 	l2k = None
-	if hw.get_device_name().lower() != "dm7025":		
+	if hw.get_device_name().lower() != "dm7025":
 		l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
-		
+
 		if l2c is None:
 			return
-		
+
 		l2k = validate_certificate(l2c, rootkey)
 		if l2k is None:
 			return
-			
+
 		l2r = True
 	else:
 		l2r = True
-		
-	if l2r:	
+
+	if l2r:
 		if result:
 			print "[WebIf] config changed"
 			restartWebserver(session, l2k)
@@ -499,7 +514,7 @@ def Plugins(**kwargs):
 #			PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkstart),
 			PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),
 							where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=openconfig)]
-	if config.plugins.Webinterface.show_in_extensionsmenu.value:	
-		list.append(PluginDescriptor(name="Webinterface", description=_("Configuration for the Webinterface"), 
-			where = PluginDescriptor.WHERE_EXTENSIONSMENU, icon="plugin.png", fnc=openconfig))						
+	if config.plugins.Webinterface.show_in_extensionsmenu.value:
+		list.append(PluginDescriptor(name="Webinterface", description=_("Configuration for the Webinterface"),
+			where = PluginDescriptor.WHERE_EXTENSIONSMENU, icon="plugin.png", fnc=openconfig))
 	return list
