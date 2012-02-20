@@ -1892,7 +1892,7 @@ function AutoTimer(xml, defaults){
 	var services = [];
 	var xmlservices = xml.getElementsByTagName('e2service');
 	var len = xmlservices.length;
-	if (typeof xmlservices != "undefined"){
+	if (xmlservices){
 		for (var i=0; i<len; i++){
 			var name = xmlservices.item(i).getElementsByTagName('e2servicename');
 			if(name.item(0).firstChild == null){
@@ -1903,33 +1903,36 @@ function AutoTimer(xml, defaults){
 			}
 			
 			var reference = xmlservices.item(i).getElementsByTagName('e2servicereference');
-			reference = escape(reference.item(0).firstChild.nodeValue);
-			// Check if service is a bouquet
-			// Service reference flags == isDirectory | mustDescent | canDescent (== 7)
-			if (unescape(reference).slice(2,3) == "7"){
-				bouquets.push({
-					'bouquet' : createOptionList(autotimereditorcore.bouquets, reference),
-					'class' : 'remove',
-				});
-			}else{
-				var service = [];
-				var bouquet = bouquetoptions.slice(0);
-				service.push({
-						'value' : reference,
-						'txt' : name,
-						'selected' : 'selected'
+			var firstChild = reference.item(0).firstChild;
+			if (firstChild){
+				reference = escape(firstChild.nodeValue);
+				// Check if service is a bouquet
+				// Service reference flags == isDirectory | mustDescent | canDescent (== 7)
+				if (unescape(reference).slice(2,3) == "7"){
+					bouquets.push({
+						'bouquet' : createOptionList(autotimereditorcore.bouquets, reference),
+						'class' : 'remove',
 					});
-				//Maybe later: It is also possible to get the bouquet of the service
-				bouquet.push({
-						'value' : '',
-						'txt' : '---',
-						'selected' : 'selected'
+				}else{
+					var service = [];
+					var bouquet = bouquetoptions.slice(0);
+					service.push({
+							'value' : reference,
+							'txt' : name,
+							'selected' : 'selected'
+						});
+					//Maybe later: It is also possible to get the bouquet of the service
+					bouquet.push({
+							'value' : '',
+							'txt' : '---',
+							'selected' : 'selected'
+						});
+					services.push({ 
+						'bouquet' : bouquet,
+						'service' : service,
+						'class' : 'remove',
 					});
-				services.push({ 
-					'bouquet' : bouquet,
-					'service' : service,
-					'class' : 'remove',
-				});
+				}
 			}
 		}
 	}
