@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-29 15:49+0100\n"
-"PO-Revision-Date: 2011-10-29 18:23+0100\n"
+"POT-Creation-Date: 2012-02-19 11:38+0100\n"
+"PO-Revision-Date: 2012-02-21 19:19+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
@@ -133,5 +133,5 @@ msgstr "ricerca EPG..."
 
 #: .../enigma2-plugins/epgsearch/src/plugin.py:69
 msgid "search EPG"
-msgstr "EPGRicerca "
+msgstr "Ricercare EPG"
 
