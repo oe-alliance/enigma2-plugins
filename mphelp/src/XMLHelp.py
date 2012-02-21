@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from MPHelp import HelpPage
 from xml.etree.cElementTree import parse as cet_parse
 
@@ -9,7 +12,8 @@ class XMLHelpPage(HelpPage):
 	def getText(self):
 		node = self.node.find('text')
 		if node is not None:
-			return _(node.get('value', ''))
+			text = _(node.get('value', ''))
+ 			return text.replace('/n','\n')
 		return ""
 
 	def getTitle(self):
