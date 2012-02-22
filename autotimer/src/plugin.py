@@ -160,25 +160,9 @@ def main(session, **kwargs):
 		autotimer
 	)
 
-def editCallback(session):
+def handleAutoPoller():
 	global autotimer
 	global autopoller
-
-	# XXX: canceling of GUI (Overview) won't affect config values which might have been changed - is this intended?
-
-	# Don't parse EPG if editing was canceled
-	if session is not None:
-		# Poll EPGCache
-		ret = autotimer.parseEPG()
-		session.open(
-			MessageBox,
-			_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
-			type = MessageBox.TYPE_INFO,
-			timeout = 10
-		)
-
-		# Save xml
-		autotimer.writeXml()
 
 	# Start autopoller again if wanted
 	if config.plugins.autotimer.autopoll.value:
@@ -190,6 +174,26 @@ def editCallback(session):
 	else:
 		autopoller = None
 		autotimer = None
+
+def editCallback(session):
+	# Don't parse EPG if editing was canceled
+	if session is not None:
+		autotimer.parseEPGAsync().addCallback(parseEPGCallback, session)
+	else:
+		handleAutoPoller()
+
+def parseEPGCallback(ret, session):
+	# XXX: use notification?
+	session.open(
+		MessageBox,
+		_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
+		type = MessageBox.TYPE_INFO,
+		timeout = 10
+	)
+
+	# Save xml
+	autotimer.writeXml()
+	handleAutoPoller()
 
 # Movielist
 def movielist(session, service, **kwargs):
