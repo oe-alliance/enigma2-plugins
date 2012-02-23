@@ -42,6 +42,7 @@ class WerbeZapperChoiceBox(ChoiceBox):
 		# Start timer to update the ChoiceBox every second
 		self.update_timer.start(1000)
 		self.setTitle( "WerbeZapper" )
+		self.update()
 
 	def update(self):
 		#TODO getServiceName() begin end
