@@ -115,15 +115,14 @@ MoviePlayer.__init__ = MoviePlayer___init__
 def MoviePlayer_close(self, *args, **kwargs):
 	global movieEpgMoviePlayerInstance
 	movieEpgMoviePlayerInstance = None
-	self.servicelist.secretMovieMode = MODE_OFF
+	if hasattr(self, 'servicelist'):
+		self.servicelist.secretMovieMode = MODE_OFF
 	baseMoviePlayer_close(self, *args, **kwargs)
 baseMoviePlayer_close = MoviePlayer.close
 MoviePlayer.close = MoviePlayer_close
 
-# Configuration
-from MovieEpgSetup import MovieEpgSetup
-
 def main(session):
+	from MovieEpgSetup import MovieEpgSetup
 	session.open(MovieEpgSetup)
 
 def Plugins(**kwargs):
