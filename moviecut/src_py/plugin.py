@@ -284,7 +284,10 @@ class MovieCutSpawn:
 #			self.mess = global_mcut_errors[WEXITSTATUS(retval)] % (self.name)
 #		else:
 #			self.mess = global_mcut_errors[-1] % (self.name)
-		self.mess = global_mcut_errors[retval] % (self.name)
+		if retval < 0 or retval > 10:
+			self.mess = global_mcut_errors[11] % (self.name)
+		else:
+			self.mess = global_mcut_errors[retval] % (self.name)
 		self.doWaitAck()
 
 	def doWaitAck(self):
