@@ -5,6 +5,8 @@ from string import split, rstrip
 
 from xml.dom.minidom import parseString
 
+# for localized messages
+from . import _
 
 
 class LastFMEventRegister:
@@ -400,9 +402,9 @@ class LastFM(LastFMHandler):
     def changeStationCB(self,result):
         res = self._parselines(result)
         if res["response"] == "OK":
-            self.onStationChanged("Station changed")
+            self.onStationChanged (_("Station changed"))
         else:
-            self.onCommandFailed("Server returned "+res["response"])
+            self.onCommandFailed (_("Server returned") + " " +res["response"])
 
 ############
 class LastFMPlaylist:

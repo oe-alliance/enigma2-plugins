@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PornCenter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 13:12+0100\n"
+"POT-Creation-Date: 2011-06-12 18:57+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: AliAbdul <aliabdul1978@hotmail.de>\n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: AliAbdul <aliabdul1978@hotmail.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,70 +13,70 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src\n"
+"X-Poedit-SearchPath-0: ../src\n"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:54
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:108
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:171
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:189
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:237
+#: ../src/plugin.py:54
+#: ../src/plugin.py:108
+#: ../src/plugin.py:171
+#: ../src/plugin.py:189
+#: ../src/plugin.py:237
 msgid "Porn Center"
 msgstr "Porn Center"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:55
+#: ../src/plugin.py:55
 msgid "Adult streaming plugins for dm800/dm8000"
-msgstr "Erwachsenen-Streaming Plugins für die dm800/dm8000"
+msgstr "Filme für Erwachsene auf der Dreambox"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:58
+#: ../src/plugin.py:58
 msgid "delete"
 msgstr "löschen"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:58
+#: ../src/plugin.py:58
 msgid "keep on device"
 msgstr "auf Datenträger behalten"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:58
+#: ../src/plugin.py:58
 msgid "ask me"
-msgstr "frage mich"
+msgstr "nachfragen"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:120
+#: ../src/plugin.py:120
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Filme herunterladen: %s"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:159
+#: ../src/plugin.py:159
 msgid "Stop playing this movie?"
 msgstr "Diesen Film stoppen?"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:194
+#: ../src/plugin.py:194
 msgid "Select"
-msgstr "Selektiere"
+msgstr "Wählen"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:252
+#: ../src/plugin.py:252
 msgid "Name:"
 msgstr "Name:"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:253
+#: ../src/plugin.py:253
 msgid "Description:"
 msgstr "Beschreibung:"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:254
+#: ../src/plugin.py:254
 msgid "Buffer:"
 msgstr "Puffer:"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:255
+#: ../src/plugin.py:255
 msgid "Buffer device:"
 msgstr "Puffergerät:"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:256
+#: ../src/plugin.py:256
 msgid "Buffer file handling:"
 msgstr "Pufferdateihandhabung:"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:381
+#: ../src/plugin.py:382
 msgid "Error while getting video url!"
-msgstr "Fehler waehrend dem Ermitteln der Video url!"
+msgstr "Fehler bei Ermittlung der Video URL!"
 
-#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src/plugin.py:394
+#: ../src/plugin.py:395
 msgid "Delete this movie?"
 msgstr "Diesen Film löschen?"
 

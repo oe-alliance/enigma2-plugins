@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # for localized messages
 from . import _
 
@@ -17,7 +19,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications
 from FTPServerManager import FTPServerManager
 from FTPQueueManager import FTPQueueManager
-from NTIVirtualKeyBoard import NTIVirtualKeyBoard
+from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
 # GUI (Components)
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -53,7 +55,7 @@ def FTPFileEntryComponent(file, directory):
 	else:
 		extension = name.split('.')
 		extension = extension[-1].lower()
-		if EXTENSIONS.has_key(extension):
+		if extension in EXTENSIONS:
 			png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/" + EXTENSIONS[extension] + ".png"))
 		else:
 			png = None
@@ -219,7 +221,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		# XXX: but do we also want to do this when we just returned from a notification?
 		try:
 			self["remote"].refresh()
-		except AttributeError, ae:
+		except AttributeError as ae:
 			# NOTE: we assume the connection was timed out by the server
 			self.ftpclient = None
 			self["remote"].ftpclient = None
@@ -339,7 +341,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 			try:
 				os_rename(absLocalFile, newLocalFile)
-			except OSError, ose:
+			except OSError as ose:
 				AddPopup(_("Could not rename %s.") % (fileName), MessageBox.TYPE_ERROR, -1)
 			else:
 				AddPopup(_("Renamed %s to %s.") % (fileName, newName), MessageBox.TYPE_INFO, -1)
@@ -391,7 +393,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 			try:
 				os_unlink(absLocalFile)
-			except OSError, oe:
+			except OSError as oe:
 				AddPopup(_("Could not delete %s.") % (fileName), MessageBox.TYPE_ERROR, -1)
 			else:
 				AddPopup(_("Removed %s.") % (fileName), MessageBox.TYPE_INFO, -1)
@@ -527,7 +529,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 			try:
 				self.file = open(absLocalFile, 'w')
-			except IOError, ie:
+			except IOError as ie:
 				# TODO: handle this
 				raise ie
 			else:
@@ -562,7 +564,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			try:
 				self.fileSize = int(os_path.getsize(absLocalFile))
 				self.file = open(absLocalFile, 'rb')
-			except (IOError, OSError), e:
+			except (IOError, OSError) as e:
 				# TODO: handle this
 				raise e
 			else:
@@ -722,7 +724,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 		try:
 			self.file.write(data)
-		except IOError, ie:
+		except IOError as ie:
 			# TODO: handle this
 			self.file = None
 			raise ie
@@ -803,7 +805,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		creator.connectTCP(host, port, timeout).addCallback(self.controlConnectionMade).addErrback(self.connectionFailed)
 
 	def controlConnectionMade(self, ftpclient):
-		print "[FTPBrowser] connection established"
+		print("[FTPBrowser] connection established")
 		self.ftpclient = ftpclient
 		self["remote"].ftpclient = ftpclient
 		self["remoteText"].text = _("Remote")
@@ -811,7 +813,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self["remote"].changeDir(self.server.getPath())
 
 	def connectionFailed(self, *args):
-		print "[FTPBrowser] connection failed", args
+		print("[FTPBrowser] connection failed", args)
 
 		self.server = None
 		self["remoteText"].text = _("Remote (not connected)")

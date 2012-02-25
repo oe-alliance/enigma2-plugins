@@ -32,7 +32,7 @@ class ServicePlayable(Source):
 			self.info = self.sci.info(refToPlay)
 		
 		if refPlaying is None:
-			return self.convertStrTrueFalse( self.info.isPlayable(refToPLay) )
+			return self.convertStrTrueFalse( self.info.isPlayable(refToPlay) )
 		else:
 			return self.convertStrTrueFalse( self.info.isPlayable(refToPlay, refPlaying))
 			

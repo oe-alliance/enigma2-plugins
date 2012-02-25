@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>Dr.Best</author>
+                    <name>3D OSD Switcher</name>
+                    <packagename>enigma2-plugin-systemplugins-3dsettings</packagename>
+                    <shortdescription>3D OSD Switcher</shortdescription>
+                    <description>Switch OSD from 2D to 3D and vice versa</description>
+                    <screenshot/>		    
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-3dsettings" />
+	  </files>
+</default>

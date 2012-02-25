@@ -4,15 +4,17 @@ from SVDRP import SimpleVDRProtocolAbstraction
 
 connection = None
 
-def autostart(**kwargs):
+def autostart(reason, **kwargs):
 	global connection
-	connection = SimpleVDRProtocolAbstraction()
+	if reason == 0 and connection is None:
+		connection = SimpleVDRProtocolAbstraction()
 
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
-			where=PluginDescriptor.WHERE_SESSIONSTART,
+			where=PluginDescriptor.WHERE_AUTOSTART,
 			fnc=autostart,
+			needsRestart=False,
 		),
 	]
 

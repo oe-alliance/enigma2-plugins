@@ -11,12 +11,13 @@ class MP(Source):
 	ADD = 5
 	REMOVE = 6
 	CURRENT = 7
+	LOADPLAYLIST = 8
 
 	def __init__(self, session, func=LIST):
 		Source.__init__(self)
 		self.func = func
 		self.session = session
-		error = "unknown command (%s)" % func
+		error = "Unknown command (%s)" % func
 		if func is self.LIST:
 			self.result = ((error, error, error),)
 		else:
@@ -33,6 +34,8 @@ class MP(Source):
 			self.result = self.command(cmd)
 		elif func is self.WRITEPLAYLIST:
 			self.result = self.writePlaylist(cmd)
+		elif func is self.LOADPLAYLIST:
+			self.result = self.loadPlaylist(cmd)
 		elif func is self.REMOVE:
 			self.result = self.removeFile(cmd)
 		elif func is self.ADD:
@@ -80,7 +83,12 @@ class MP(Source):
 			else:
 				return (("empty", True, "playlist"),)
 
-		matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)" #MediaPlayer-Match
+		# try to extract current pattern from media player and use it over our hardcoded one as default
+		try:
+			matchingPattern = mp.filelist.matchingPattern
+		except Exception:
+			matchingPattern = "(?i)^.*\.(mp2|mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob|avi|divx|m4v|mkv|mp4|m4a|dat|flac|mov|m2ts)" #MediaPlayer-Match
+
 		useServiceRef = False
 		if param["types"] == "audio":
 			matchingPattern = "(?i)^.*\.(mp3|ogg|wav|wave|m3u|pls|e2pls)"
@@ -94,11 +102,12 @@ class MP(Source):
 			matchingPattern = param["types"]
 
 		path = param["path"]
-		if path == "Filesystems":
-			path = None
-		elif path is not None and not os_path.isdir(path):
-			# TODO: returning something is better than just dying but is this return sane?
-			return ((None, True, path),)
+		if path is not None:
+			if path.lower() == "filesystems":
+				path = None
+			elif not os_path.isdir(path):
+				# TODO: returning something is better than just dying but is this return sane?
+				return ((None, True, path),)
 
 		filelist = FileList(path, showDirectories=True, showFiles=True, matchingPattern=matchingPattern, useServiceRef=useServiceRef, isTop=False)
 		list = filelist.getFileList()
@@ -116,18 +125,18 @@ class MP(Source):
 		# TODO: fix error handling
 		mp = self.tryOpenMP()
 		if mp is None:
-			return (False, "mediaplayer not installed")
+			return (False, "Mediaplayer not installed")
 
 		file = param["file"]
 		doAdd = False if param["root"] == "playlist" else True
 
 		if not file:
-			return (False, "missing or invalid parameter file")
+			return (False, "Missing or invalid parameter file")
 
 		ref = eServiceReference(file)
 		if not ref.valid():
 			if not os_path.isfile(file):
-				return (False, "%s is neither a valid reference nor a valid file" % file)
+				return (False, "'%s' is neither a valid reference nor a valid file" % file)
 			ref = eServiceReference(4097, 0, file)
 
 		if doAdd:
@@ -136,19 +145,22 @@ class MP(Source):
 			mp.playServiceRefEntry(ref)
 
 		mp.playlist.updateList()
-		return (True, "%s added to playlist and/or playback started" % (file))
-
+		if doPlay:
+			return (True, "Playback of '%s' started" % (file))
+		else:
+			return (True, "'%s' has been added to playlist" % (file))
+	
 	def removeFile(self, file):
 		# TODO: fix error handling
 		mp = self.tryOpenMP()
 		if mp is None:
-			return (False, "mediaplayer not installed")
+			return (False, "Mediaplayer not installed")
 
 		ref = eServiceReference(file)
 		if not ref.valid():
-			if not os_path.isfile(file):
-				return (False, "%s is neither a valid reference nor a valid file" % file)
 			ref = eServiceReference(4097, 0, file)
+			if not ref.valid():
+				return (False, "'%s' is neither a valid reference nor a valid file" % file)
 
 		serviceRefList = mp.playlist.getServiceRefList()
 		i = 0
@@ -156,32 +168,46 @@ class MP(Source):
 			if mpref == ref:
 				mp.playlist.deleteFile(i)
 				mp.playlist.updateList()
-				return (True, "%s removed from playlist" % file)
+				return (True, "'%s' removed from playlist" % file)
 			i += 1
 
-		return (False, "%s not found in playlist" % file)
+		return (False, "'%s' not found in playlist" % file)
 
-	def writePlaylist(self, param):
-		filename = "playlist/%s.e2pls" % param
-		from Tools.Directories import resolveFilename, SCOPE_CONFIG
+	def loadPlaylist(self, param):
+		from Tools.Directories import resolveFilename, SCOPE_PLAYLIST
 
 		# TODO: fix error handling
 		mp = self.tryOpenMP()
 		if mp is None:
-			return (False, "mediaplayer not installed")
+			return (False, "Mediaplayer not installed")
 
-		fullPath = resolveFilename(SCOPE_CONFIG, filename)
-		mp.playlistIOInternal.save(resolveFilename(SCOPE_CONFIG, filename))
-		return (True, "playlist saved to %s" % fullPath)
+		fullPath = resolveFilename(SCOPE_PLAYLIST, param)
+		if not os_path.isfile(fullPath):
+			return (False, "Playlist '%s' does not exist" % fullPath)
+		mp.PlaylistSelected((param, fullPath))
+		return (True, "Playlist loaded from '%s'" % fullPath)
+
+	def writePlaylist(self, param):
+		filename = "%s.e2pls" % param
+		from Tools.Directories import resolveFilename, SCOPE_PLAYLIST
+
+		# TODO: fix error handling
+		mp = self.tryOpenMP()
+		if mp is None:
+			return (False, "Mediaplayer not installed")
+
+		fullPath = resolveFilename(SCOPE_PLAYLIST, filename)
+		mp.playlistIOInternal.save(fullPath)
+		return (True, "Playlist saved to '%s'" % fullPath)
 
 	def command(self, param):
 		# TODO: fix error handling
 		noCreate = True if param == "exit" else False
 		mp = self.tryOpenMP(noCreate=noCreate)
 		if mp is None:
-			return (False, "mediaplayer not installed")
+			return (False, "Mediaplayer not installed")
 		elif mp is False:
-			return (True, "mediaplayer was not active")
+			return (True, "Mediaplayer was not active")
 
 		if param == "previous":
 			mp.previousMarkOrEntry()
@@ -195,14 +221,18 @@ class MP(Source):
 			mp.stopEntry()
 		elif param == "exit":
 			mp.exit()
+		elif param == "shuffle":
+			mp.playlist.PlayListShuffle()
+		elif param == "clear":
+			mp.clear_playlist()
 		else:
-			return (False, "unknown parameter %s" % param)
-		return (True, "executed %s" % param)
+			return (False, "Unknown parameter %s" % param)
+		return (True, "Command '%s' executed" % param)
 
 	def getCurrent(self):
 		mp = self.tryOpenMP()
 		if mp is None:
-			msg = "mediaplayer not installed"
+			msg = "Mediaplayer not installed"
 			return ((msg, msg, msg, msg, msg, msg),)
 
 		return ((

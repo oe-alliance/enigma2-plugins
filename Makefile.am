@@ -1,9 +1,11 @@
 ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS = \
+	3dsettings \
 	aihdcontroler \
 	antiscrollbar \
 	audiosync \
+	automaticcleanup \
 	automatictimerlistcleanup \
 	automaticvolumeadjustment \
 	autoresolution \
@@ -12,42 +14,54 @@ SUBDIRS = \
 	bitrateviewer \
 	bonjour \
 	cdinfo \
+	curlytx \
 	dreamirc \
 	dreammediathek \
 	dvdbackup \
 	dyndns \
 	easyinfo \
 	easymedia \
+	ecasa \
 	eibox \
 	elektro \
 	emailclient \
+	emission \
 	epgrefresh \
 	epgsearch \
+	eurotictv \
 	fancontrol2 \
 	filebrowser \
 	fritzcall \
+	fstabeditor \
 	ftpbrowser \
 	genuinedreambox \
 	googlemaps \
 	growlee \
 	httpproxy \
 	imdb \
+	infobartunerstate \
 	kiddytimer \
 	lastfm \
 	letterbox \
 	logomanager \
 	mediadownloader \
+	menusort \
 	merlinepg \
+	merlinepgcenter \
 	merlinmusicplayer \
 	meteoitalia \
 	mosaic \
 	moviecut \
 	movielistpreview \
 	movieretitle \
+	moviesearch \
 	movieselectionquickbutton \
 	movietagger \
+	movieepg \
+	mphelp \
 	multirc \
 	mytube \
+	namezap \
 	ncidclient \
 	netcaster \
 	networkbrowser \
@@ -57,6 +71,11 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
+	permanenttimeshift \
+	pipservicerelation \
+	pipzap \
+	pluginhider \
+	pluginsort \
 	podcast \
 	porncenter \
 	quickbutton \
@@ -66,23 +85,28 @@ SUBDIRS = \
 	seekbar \
 	serienfilm \
 	setpasswd \
-	shoutcast \
+	showclock \
 	simplerss \
 	startupservice \
 	startuptostandby \
+	subsdownloader2 \
+	svdrp \
 	tageditor \
+	toolkit \
 	trafficinfo \
 	tvcharts \
 	unwetterinfo \
 	valixdcontrol \
 	virtualzap \
 	vlcplayer \
+	vps \
 	weatherplugin \
 	webcamviewer \
 	webbouqueteditor \
 	webinterface \
 	werbezapper \
 	youtubeplayer \
+	yttrailer \
 	zaphistorybrowser \
 	zapstatistic \
 	zdfmediathek

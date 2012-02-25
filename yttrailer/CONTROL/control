@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-yttrailer
+Version: 1.1
+Description: YTTrailer: watch trailer from epglist/eventview
+Maintainer: Dr. Best <dr.best@dreambox-tools.info>
+Homepage: http://www.dreambox-tools.info
+Depends: enigma2 (>> 2.6git20090520), python-twisted-web, python-gdata, gst-plugin-flv

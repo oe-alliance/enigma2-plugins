@@ -1,10 +1,7 @@
 #######################################################################
 #
-#
 #    Ai-HD-Skins Control for Dreambox/Enigma-2
 #    Coded by Vali (c)2009-2011
-#    Support: www.dreambox-tools.info
-#
 #
 #  This plugin is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -14,11 +11,9 @@
 #  Alternatively, this plugin may be distributed and executed on hardware which
 #  is licensed by Dream Multimedia GmbH.
 #
-#
 #  This plugin is NOT free software. It is open source, you are allowed to
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
-#
 #
 #######################################################################
 
@@ -37,6 +32,7 @@ from Components.Label import Label
 from Tools.Directories import fileExists
 from skin import parseColor
 from os import system
+from enigma import eEnv
 
 
 
@@ -87,12 +83,14 @@ class AIHDsetup(ConfigListScreen, Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.release = ".release20110202"
+		self.release = ".release20110505"
 		Screen.__init__(self, session)
 		self.session = session
-		self.datei = "/usr/share/enigma2/Ai.HD/skin.xml"
-		self.daten = "/usr/lib/enigma2/python/Plugins/Extensions/AiHDcontroler/data/"
-		self.komponente = "/usr/lib/enigma2/python/Plugins/Extensions/AiHDcontroler/comp/"
+		self.datadir = eEnv.resolve("${datadir}")
+		self.libdir = eEnv.resolve("${libdir}")
+		self.datei = self.datadir + "/enigma2/Ai.HD/skin.xml"
+		self.daten = self.libdir + "/enigma2/python/Plugins/Extensions/AiHDcontroler/data/"
+		self.komponente = self.libdir + "/enigma2/python/Plugins/Extensions/AiHDcontroler/comp/"
 		list = []
 		list.append(getConfigListEntry(_("Infobar and window style:"), config.plugins.vhd.Style))
 		list.append(getConfigListEntry(_("Channel and EPG selectors style:"), config.plugins.vhd.ChannSelector))
@@ -109,15 +107,15 @@ class AIHDsetup(ConfigListScreen, Screen):
 	def UpdateComponents(self):
 		if not fileExists(self.datei + self.release):
 			system("tar -xzvf " + self.komponente + "AiHD.tar.gz" + " -C /")
-			system('cp ' + self.komponente + 'vhdRendVolumeText.py /usr/lib/enigma2/python/Components/Renderer/vhdRendVolumeText.py')
-			system('cp ' + self.komponente + 'vhdRendChNumber.py /usr/lib/enigma2/python/Components/Renderer/vhdRendChNumber.py')
-			system('cp ' + self.komponente + 'vhdRendVideoSize.py /usr/lib/enigma2/python/Components/Renderer/vhdRendVideoSize.py')
-			system('cp ' + self.komponente + 'vhdRendMovieDirSize.py /usr/lib/enigma2/python/Components/Renderer/vhdRendMovieDirSize.py')
-			system('cp ' + self.komponente + 'vhdRendMaxTemp.py /usr/lib/enigma2/python/Components/Renderer/vhdRendMaxTemp.py')
-			system('cp ' + self.komponente + 'vhdRendNextEvent.py /usr/lib/enigma2/python/Components/Renderer/vhdRendNextEvent.py')
-			system('cp ' + self.komponente + 'vhdConvSmartInfo.py /usr/lib/enigma2/python/Components/Converter/vhdConvSmartInfo.py')
-			system('cp ' + self.komponente + 'vhdConvClockToText.py /usr/lib/enigma2/python/Components/Converter/vhdConvClockToText.py')
-			system('cp ' + self.komponente + 'valiRefString.py /usr/lib/enigma2/python/Components/Converter/valiRefString.py')
+			system('cp ' + self.komponente + 'vhdRendVolumeText.py ' + self.libdir + '/enigma2/python/Components/Renderer/vhdRendVolumeText.py')
+			system('cp ' + self.komponente + 'vhdRendChNumber.py ' + self.libdir + '/enigma2/python/Components/Renderer/vhdRendChNumber.py')
+			system('cp ' + self.komponente + 'vhdRendVideoSize.py ' + self.libdir + '/enigma2/python/Components/Renderer/vhdRendVideoSize.py')
+			system('cp ' + self.komponente + 'vhdRendMovieDirSize.py ' + self.libdir + '/enigma2/python/Components/Renderer/vhdRendMovieDirSize.py')
+			system('cp ' + self.komponente + 'vhdRendMaxTemp.py ' + self.libdir + '/enigma2/python/Components/Renderer/vhdRendMaxTemp.py')
+			system('cp ' + self.komponente + 'vhdRendNextEvent.py ' + self.libdir + '/enigma2/python/Components/Renderer/vhdRendNextEvent.py')
+			system('cp ' + self.komponente + 'vhdConvSmartInfo.py ' + self.libdir + '/enigma2/python/Components/Converter/vhdConvSmartInfo.py')
+			system('cp ' + self.komponente + 'vhdConvClockToText.py ' + self.libdir + '/enigma2/python/Components/Converter/vhdConvClockToText.py')
+			system('cp ' + self.komponente + 'valiRefString.py ' + self.libdir + '/enigma2/python/Components/Converter/valiRefString.py')
 			system("touch " + self.datei + self.release)
 
 	def save(self):

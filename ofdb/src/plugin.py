@@ -93,25 +93,26 @@ class OFDBEPGSelection(EPGSelection):
 
 class OFDB(Screen):
 	skin = """
-		<screen name="OFDb" position="90,95" size="560,420" title="Online-Filmdatenbank Details Plugin" >
+		<screen name="OFDb" position="center,center" size="600,420" title="Online-Filmdatenbank Details Plugin" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="565,5" zPosition="0" size="35,25" alphatest="on" />
 			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#9f1313" transparent="1" />
 			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#a08500" transparent="1" />
 			<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#18188b" transparent="1" />
 			<widget name="titellabel" position="10,40" size="330,45" valign="center" font="Regular;22"/>
-			<widget name="detailslabel" position="105,90" size="445,140" font="Regular;18" />
-			<widget name="castlabel" position="10,235" size="540,155" font="Regular;18" />
-			<widget name="extralabel" position="10,40" size="540,350" font="Regular;18" />
-			<widget name="ratinglabel" position="340,62" size="210,20" halign="center" font="Regular;18" foregroundColor="#f0b400"/>
-			<widget name="statusbar" position="10,404" size="540,16" font="Regular;16" foregroundColor="#cccccc" />
+			<widget name="detailslabel" position="105,90" size="485,140" font="Regular;18" />
+			<widget name="castlabel" position="10,235" size="580,155" font="Regular;18" />
+			<widget name="extralabel" position="10,40" size="580,350" font="Regular;18" />
+			<widget name="ratinglabel" position="340,62" size="250,20" halign="center" font="Regular;18" foregroundColor="#f0b400"/>
+			<widget name="statusbar" position="10,404" size="580,16" font="Regular;16" foregroundColor="#cccccc" />
 			<widget name="poster" position="4,90" size="96,140" alphatest="on" />
-			<widget name="menu" position="10,115" size="540,275" zPosition="3" scrollbarMode="showOnDemand" />
-			<widget name="starsbg" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OFDb/starsbar_empty.png" position="340,40" zPosition="0" size="210,21" transparent="1" alphatest="on" />
-			<widget name="stars" position="340,40" size="210,21" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OFDb/starsbar_filled.png" transparent="1" />
+			<widget name="menu" position="10,115" size="580,275" zPosition="3" scrollbarMode="showOnDemand" />
+			<widget name="starsbg" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OFDb/starsbar_empty.png" position="340,40" zPosition="0" size="250,21" transparent="1" alphatest="on" />
+			<widget name="stars" position="340,40" size="250,21" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OFDb/starsbar_filled.png" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session, eventName, args = None):
@@ -285,8 +286,8 @@ class OFDB(Screen):
 		self.resetLabels()
 		if self.eventName is "":
 			s = self.session.nav.getCurrentService()
-			info = s.info()
-			event = info.getEvent(0) # 0 = now, 1 = next
+			info = s and s.info()
+			event = info and info.getEvent(0) # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
 

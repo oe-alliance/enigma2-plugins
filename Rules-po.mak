@@ -5,6 +5,9 @@ plugindir = $(libdir)/enigma2/python/Plugins/$(CATEGORY)/$(PLUGIN)
 LANGMO = $(LANGS:=.mo)
 LANGPO = $(LANGS:=.po)
 
+BUILT_SOURCES = $(LANGMO)
+CLEANFILES = $(LANGMO)
+
 if UPDATE_PO
 # the TRANSLATORS: allows putting translation comments before the to-be-translated line.
 $(PLUGIN)-py.pot: $(srcdir)/../src/*.py
@@ -22,13 +25,12 @@ $(PLUGIN).pot: $(PLUGIN)-py.pot $(PLUGIN)-xml.pot
 	else \
 		$(MSGINIT) -l $@ -o $@ -i $< --no-translator; \
 	fi
+
+CLEANFILES += $(PLUGIN)-py.pot $(PLUGIN)-xml.pot $(PLUGIN).pot
 endif
 
 .po.mo:
 	$(MSGFMT) -o $@ $<
-
-BUILT_SOURCES = $(LANGMO)
-CLEANFILES = $(LANGMO) $(PLUGIN)-py.pot $(PLUGIN)-xml.pot $(PLUGIN).pot
 
 dist-hook: $(LANGPO)
 

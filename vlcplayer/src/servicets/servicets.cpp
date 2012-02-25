@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/ioctl.h>
 #include <string>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -252,8 +253,17 @@ RESULT eServiceTS::start()
 {
 	ePtr<eDVBResourceManager> rmgr;
 	eDVBResourceManager::getInstance(rmgr);
-	eDVBChannel dvbChannel(rmgr, 0);
-	if (dvbChannel.getDemux(m_decodedemux, iDVBChannel::capDecode) != 0) {
+	// FIXMEE hardcoded chid... this only works for one eServiceWebTS
+	eDVBChannelID chid;
+	chid.dvbnamespace = eDVBNamespace(0);
+	chid.transport_stream_id = eTransportStreamID(0);
+	chid.original_network_id = eOriginalNetworkID(0);
+	chid.pvr_source = "/eServiceTS";
+	if (rmgr->allocateChannel(chid, m_channel)) {
+		eDebug("Cannot allocate pvr channel");
+		return -1;
+	}
+	if (m_channel->getDemux(m_decodedemux, iDVBChannel::capDecode) != 0) {
 		eDebug("Cannot allocate decode-demux");
 		return -1;
 	}
@@ -283,15 +293,16 @@ RESULT eServiceTS::start()
 
 RESULT eServiceTS::stop()
 {
+	printf("TS: %s stop\n", m_filename.c_str());
+	m_streamthread->stop();
 	if (m_destfd >= 0)
 	{
 		::close(m_destfd);
 		m_destfd = -1;
 	}
-	printf("TS: %s stop\n", m_filename.c_str());
-	m_streamthread->stop();
 	m_decodedemux->flush();
 	m_audioInfo = 0;
+	m_channel = 0;
 	return 0;
 }
 
@@ -336,8 +347,14 @@ RESULT eServiceTS::pause(ePtr<iPauseableService> &ptr)
 // iPausableService
 RESULT eServiceTS::pause()
 {
-	m_streamthread->stop();
-	m_decoder->pause();
+	if(!m_streamthread->stopping())
+	{
+		eDebug("eServiceTS::pause: pausing thread!");
+		m_streamthread->stop();
+		m_decoder->pause();
+	}
+	else
+		eDebug("eServiceTS::pause: thread already stopping - ignoring request!");
 	return 0;
 }
 
@@ -493,8 +510,14 @@ void eStreamThread::start(int srcfd, int destfd) {
 }
 
 void eStreamThread::stop() {
-	m_stop = true;
-	kill();
+	if(!stopping())
+	{
+		m_stop = true;
+		::ioctl(m_destfd, 0);
+		kill();
+	}
+	else
+		eDebug("eStreamThread::stop: thread already stopping, ignoring kill request!");
 }
 
 void eStreamThread::recvEvent(const int &evt)
@@ -623,8 +646,8 @@ bool eStreamThread::scanAudioInfo(unsigned char buf[], int len)
 }
 
 void eStreamThread::thread() {
-	const int bufsize = 40000;
-	unsigned char buf[bufsize];
+	const int bufsize = 50*1024;
+	unsigned char *buf = (unsigned char *)malloc(bufsize);
 	bool eof = false;
 	fd_set rfds;
 	fd_set wfds;
@@ -633,6 +656,12 @@ void eStreamThread::thread() {
 	time_t next_scantime = 0;
 	bool sosSend = false;
 	m_running = true;
+
+	if(buf == NULL)
+	{
+		eDebug("eStreamThread::thread: failed to allocate buffer, aborting!");
+		m_stop = true;
+	}
 
 	r = w = 0;
 	hasStarted();
@@ -644,7 +673,7 @@ void eStreamThread::thread() {
 		maxfd = 0;
 		timeout.tv_sec = 1;
 		timeout.tv_usec = 0;
-		if (r < bufsize) {
+		if (r < bufsize && !eof) {
 			FD_SET(m_srcfd, &rfds);
 			maxfd = MAX(maxfd, m_srcfd);
 		}
@@ -678,7 +707,7 @@ void eStreamThread::thread() {
 				if (r == bufsize) eDebug("eStreamThread::thread: buffer full");
 			}
 		}
-		if (FD_ISSET(m_destfd, &wfds) && (w < r) && ((r > bufsize/4) || eof)) {
+		if (FD_ISSET(m_destfd, &wfds) && ((r > 10*1024) || eof)) {
 			rc = ::write(m_destfd, buf+w, r-w);
 			if (rc < 0) {
 				eDebug("eStreamThread::thread: error in write (%d)", errno);
@@ -702,6 +731,7 @@ void eStreamThread::thread() {
 			break;
 		}
 	}
+	free(buf);
 	eDebug("eStreamThread end");
 }
 

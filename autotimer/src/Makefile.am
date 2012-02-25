@@ -1,6 +1,6 @@
 installdir = $(libdir)/enigma2/python/Plugins/Extensions/AutoTimer
 
-SUBDIRS = webinterface
+SUBDIRS = web web-data WebComponents WebChilds WebScreens
 
 install_PYTHON = *.py
-install_DATA = plugin.png autotimerwizard.xml maintainer.info LICENSE
+install_DATA = faq.xml mphelp.xml plugin.png autotimerwizard.xml maintainer.info LICENSE

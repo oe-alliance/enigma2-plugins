@@ -2,7 +2,6 @@
 #
 #    ORFteletext for Dreambox-Enigma2
 #    Coded by Vali (c)2010
-#    Support: www.dreambox-tools.info
 #
 #  This plugin is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -12,11 +11,9 @@
 #  Alternatively, this plugin may be distributed and executed on hardware which
 #  is licensed by Dream Multimedia GmbH.
 #
-#
 #  This plugin is NOT free software. It is open source, you are allowed to
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
-#
 #
 #######################################################################
 
@@ -31,7 +28,7 @@ from Components.Pixmap import Pixmap
 from Components.MenuList import MenuList
 from Components.Label import Label
 from Tools.Directories import fileExists
-from enigma import ePicLoad, getDesktop
+from enigma import ePicLoad, getDesktop, eEnv
 from os import system as os_system
 from Components.config import config, ConfigSubsection, ConfigText, ConfigInteger
 
@@ -128,7 +125,7 @@ class ORFteletextScreen(Screen):
 		if fileExists("/tmp/bild"):
 			self.whatPic = "/tmp/bild"
 		else:
-			self.whatPic = "/usr/lib/enigma2/python/Plugins/Extensions/ORFteletext/nodata.png"
+			self.whatPic = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/ORFteletext/nodata.png")
 		self.EXpicload.PictureData.get().append(self.DecodeAction)
 		self.onLayoutFinish.append(self.firstStart)
 
@@ -169,7 +166,7 @@ class ORFteletextScreen(Screen):
 		if fileExists("/tmp/bild"):
 			self.whatPic = "/tmp/bild"
 		else:
-			self.whatPic = "/usr/lib/enigma2/python/Plugins/Extensions/ORFteletext/nodata.png"
+			self.whatPic = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/ORFteletext/nodata.png")
 		self.Show_Picture()
 
 	def showMe(self):

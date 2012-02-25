@@ -3,11 +3,13 @@ from enigma import eListboxPythonMultiContent
 from enigma import ePicLoad
 from enigma import loadPNG
 from enigma import gFont
+from enigma import eEnv
 ### Picturelist
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
+from Screens.InfoBarGenerics import InfoBarNotifications
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
@@ -19,9 +21,11 @@ from Components.config import config, ConfigSubsection,ConfigSelection,ConfigTex
 from Components.Input import Input
 from Components.Pixmap import Pixmap
 from Plugins.Plugin import PluginDescriptor
+from Tools.Notifications import AddPopup
 ### System
 import os
 from re import compile
+from itertools import chain
 ## XML
 from pyexpat import ExpatError
 import xml.dom.minidom
@@ -64,21 +68,38 @@ def startWebcamviewer(session, **kwargs):
 	originalservice = session.nav.getCurrentlyPlayingServiceReference()
 	if config.plugins.pictureviewer.stopserviceonstart.value:
 		session.nav.stopService()
-	xmlfile = "/usr/lib/enigma2/python/Plugins/Extensions/WebcamViewer/webcam.xml"
-	if os.path.isfile(xmlfile):
-		try:
-			xmlnode = xml.dom.minidom.parse(open(xmlfile))
-			session.openWithCallback(mainCB, WebcamViewer, xmlnode.childNodes[1])
-		except ExpatError,e:
-			session.open(
-				MessageBox,
-				_("Loading config file failed!\n\n%s") % e,
-				MessageBox.TYPE_WARNING
-			)
-	else:
+	xmlpaths = [
+		eEnv.resolve("${sysconfdir}/enigma2/webcam.xml"),
+		eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/WebcamViewer/webcam.xml"),
+	]
+	warnmsgs = []
+	errmsgs = []
+	while xmlpaths:
+		path = xmlpaths.pop(0)
+		if not os.path.isfile(path):
+			warnmsgs.append(_("Config file %s not found.") % (path))
+			continue
+		with open(path) as fp:
+			try:
+				xmlnode = xml.dom.minidom.parse(fp)
+				session.openWithCallback(mainCB, WebcamViewer, xmlnode.childNodes[1])
+
+				# show errors in a popup and cleanup pending messages
+				if errmsgs:
+					AddPopup(
+						'\n'.join(errmsgs),
+						MessageBox.TYPE_WARNING,
+						-1
+					)
+				del errmsgs[:]
+				del warnmsgs[:]
+				break
+			except ExpatError as e:
+				errmsgs.append(_("Loading config file %s failed: %s") % (path, e))
+	if errmsgs or warnmsgs:
 		session.open(
 			MessageBox,
-			_("Loading config file failed!\n\nconfigfile not found!"),
+			'\n'.join(chain(warnmsgs, errmsgs)),
 			MessageBox.TYPE_WARNING
 		)
 
@@ -430,7 +451,7 @@ class PictureViewer(Screen):
 	def openMenu(self):
 		self.session.open(WebcamViewerMenu)
 ###################
-class WebcamViewer(Screen):
+class WebcamViewer(Screen, InfoBarNotifications):
 	skin = ""
 	filelist = []
 	def __init__(self, session,xmlnode, args = 0):
@@ -447,6 +468,7 @@ class WebcamViewer(Screen):
 		</screen>""" % (pos_x,pos_y,size_x,size_y,myname,size_x,size_y)
 		self.skin = skin
 		Screen.__init__(self, session)
+		InfoBarNotifications.__init__(self)
 
 		self.filelist = MenuList(self.getMenuData())
 		self["menu"] = self.filelist

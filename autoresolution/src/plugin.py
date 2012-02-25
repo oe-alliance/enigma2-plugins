@@ -11,6 +11,9 @@ from enigma import iPlayableService, iServiceInformation, eTimer
 from Plugins.Plugin import PluginDescriptor
 from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
 
+# for localized messages
+from . import _
+
 usable = False
 preferedmodes = None
 default = None
@@ -66,14 +69,28 @@ class AutoRes(Screen):
 			})
 		self.timer = eTimer()
 		self.timer.callback.append(self.determineContent)
-		self.lastmode = config.av.videomode[config.av.videoport.value].value
+		if config.av.videoport.value in config.av.videomode:
+			self.lastmode = config.av.videomode[config.av.videoport.value].value
 		config.av.videoport.addNotifier(self.defaultModeChanged)
 		config.plugins.autoresolution.enable.addNotifier(self.enableChanged, initial_call = False)
 		config.plugins.autoresolution.deinterlacer.addNotifier(self.enableChanged, initial_call = False)
 		config.plugins.autoresolution.deinterlacer_progressive.addNotifier(self.enableChanged, initial_call = False)
-		self.setMode(default[0], False)
+		if default:
+			self.setMode(default[0], False)
 		self.after_switch_delay = False
 		self.newService = False
+		if "720p" in config.av.videorate:
+			config.av.videorate["720p"].addNotifier(self.__videorate_720p_changed, initial_call = False, immediate_feedback = False)
+		if "1080i" in config.av.videorate:
+			config.av.videorate["1080i"].addNotifier(self.__videorate_1080i_changed, initial_call = False, immediate_feedback = False)
+
+	def __videorate_720p_changed(self, configEntry):
+		if self.lastmode == "720p":
+			self.changeVideomode()
+
+	def __videorate_1080i_changed(self, configEntry):
+		if self.lastmode == "1080i":
+			self.changeVideomode()
 
 	def __evStart(self):
 		self.newService = True
@@ -94,9 +111,10 @@ class AutoRes(Screen):
 		if port_changed:
 			print "port changed to", configEntry.value
 			if port:
-				config.av.videomode[port].notifiers.remove(self.defaultModeChanged)
+				config.av.videomode[port].removeNotifier(self.defaultModeChanged)
 			port = config.av.videoport.value
-			config.av.videomode[port].addNotifier(self.defaultModeChanged)
+			if port in config.av.videomode:
+				config.av.videomode[port].addNotifier(self.defaultModeChanged)
 			usable = config.plugins.autoresolution.enable.value and not port in ('DVI-PC', 'Scart')
 		else: # videomode changed in normal av setup
 			global videoresolution_dictionary
@@ -211,7 +229,7 @@ class AutoRes(Screen):
 				self.session.openWithCallback(
 					self.confirm,
 					MessageBox,
-					_("Autoresolution Plugin Testmode:\nIs %s ok?") % (resolutionlabeltxt),
+					_("Autoresolution Plugin Testmode:\nIs %s OK?") % (resolutionlabeltxt),
 					MessageBox.TYPE_YESNO,
 					timeout = 15,
 					default = False
@@ -288,6 +306,8 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 				for mode, label in resolutions:
 					self.list.append(getConfigListEntry(label, videoresolution_dictionary[mode]))
 				self.list.extend((
+					getConfigListEntry(_("Refresh Rate")+" 720p", config.av.videorate["720p"]),
+					getConfigListEntry(_("Refresh Rate")+" 1080i", config.av.videorate["1080i"]),
 					getConfigListEntry(_("Show info screen"), config.plugins.autoresolution.showinfo),
 					getConfigListEntry(_("Delay x seconds after service started"), config.plugins.autoresolution.delay_switch_mode),
 					getConfigListEntry(_("Running in testmode"), config.plugins.autoresolution.testmode),
@@ -339,7 +359,7 @@ def autostart(reason, **kwargs):
 def startSetup(menuid):
 	if menuid != "system":
 		return [ ]
-	return [("Autoresolution...", autoresSetup, "autores_setup", 45)]
+	return [(_("Autoresolution"), autoresSetup, "autores_setup", 45)]
 
 def autoresSetup(session, **kwargs):
 	autostart(reason=0, session=session)

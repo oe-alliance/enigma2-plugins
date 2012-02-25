@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from twisted.internet.defer import Deferred
 from twisted.internet.protocol import ClientFactory, ServerFactory
 from twisted.internet import reactor
@@ -68,7 +70,7 @@ class SimpleVDRProtocol(LineReceiver):
 		self.transport.loseConnection()
 
 	def NOT_IMPLEMENTED(self, args):
-		print "[SVDRP] command not implemented."
+		print("[SVDRP] command not implemented.")
 		payload = "%d command not implemented." % (CODE_IMP_FUNC,)
 		self.sendLine(payload)
 
@@ -148,7 +150,7 @@ class SimpleVDRProtocol(LineReceiver):
 		if timer.state == timer.StateRunning: flags |= 8
 		try:
 			channelid = self.channelList.index(str(timer.service_ref)) + 1
-		except ValueError, e:
+		except ValueError as e:
 			# XXX: ignore timers on channels that are not in our favourite bouquet
 			return False
 		else:
@@ -159,14 +161,17 @@ class SimpleVDRProtocol(LineReceiver):
 			self.sendLine(line)
 			return True
 
-	def LSTT(self, args):
+	def getTimerList(self):
 		import NavigationInstance
 		list = []
 		recordTimer = NavigationInstance.instance.RecordTimer
 		list.extend(recordTimer.timer_list)
 		list.extend(recordTimer.processed_timers)
-		list.sort(cmp = lambda x, y: x.begin < y.begin)
+		list.sort(key=attrgetter('begin'))
+		return list
 
+	def LSTT(self, args):
+		list = self.getTimerList()
 		lastItem = list.pop()
 		idx = 1
 		for timer in list:
@@ -190,12 +195,7 @@ class SimpleVDRProtocol(LineReceiver):
 			payload = "%d argument error" % (CODE_SYNTAX,)
 			return self.sendLine(payload)
 
-		import NavigationInstance
-		list = []
-		recordTimer = NavigationInstance.instance.RecordTimer
-		list.extend(recordTimer.timer_list)
-		list.extend(recordTimer.processed_timers)
-		list.sort(cmp = lambda x, y: x.begin < y.begin)
+		list = self.getTimerList()
 
 		if timerId < 1:
 			payload = "%d argument error" % (CODE_SYNTAX,)
@@ -214,10 +214,10 @@ class SimpleVDRProtocol(LineReceiver):
 			timestruct = strptime(endstring, '%H%M')
 			end = mktime((datestruct.tm_year, datestruct.tm_mon, datestruct.tm_mday, timestruct.tm_hour, timestruct.tm_min, 0, datestruct.tm_wday, datestruct.tm_yday, -1))
 			del datestruct, timestruct
-		except ValueError, e:
+		except ValueError as e:
 			payload = "%d argument error" % (CODE_SYNTAX,)
 			return self.sendLine(payload)
-		except KeyError, e:
+		except KeyError as e:
 			payload = "%d argument error" % (CODE_SYNTAX,)
 			return self.sendLine(payload)
 
@@ -255,12 +255,7 @@ class SimpleVDRProtocol(LineReceiver):
 				payload = "%d argument error" % (CODE_SYNTAX,)
 				return self.sendLine(payload)
 
-			import NavigationInstance
-			list = []
-			recordTimer = NavigationInstance.instance.RecordTimer
-			list.extend(recordTimer.timer_list)
-			list.extend(recordTimer.processed_timers)
-			list.sort(cmp = lambda x, y: x.begin < y.begin)
+			list = self.getTimerList()
 
 			if timerId < 1 or len(list) < timerId:
 				payload = "%d argument error" % (CODE_SYNTAX,)
@@ -295,12 +290,7 @@ class SimpleVDRProtocol(LineReceiver):
 			payload = "%d argument error" % (CODE_SYNTAX,)
 			return self.sendLine(payload)
 
-		import NavigationInstance
-		list = []
-		recordTimer = NavigationInstance.instance.RecordTimer
-		list.extend(recordTimer.timer_list)
-		list.extend(recordTimer.processed_timers)
-		list.sort(cmp = lambda x, y: x.begin < y.begin)
+		list = self.getTimerList()
 
 		if timerId < 1 or len(list) < timerId:
 			payload = "%d argument error" % (CODE_SYNTAX,)
@@ -359,8 +349,7 @@ class SimpleVDRProtocol(LineReceiver):
 			return self.sendLine(payload)
 		funcs, args = args
 		if not args:
-			funcnames = funcs.keys()
-			funcnames.sort() # make sure this is sorted
+			funcnames = sorted(funcs.keys())
 			payload = "%d-This is Enigma2 VDR-Plugin version %s" % (CODE_HELP, VERSION)
 			self.sendLine(payload)
 			payload = "%d-Topics:" % (CODE_HELP,)
@@ -492,7 +481,7 @@ class SimpleVDRProtocol(LineReceiver):
 		if self.client or not self.transport or not data:
 			return
 
-		print "[SVDRP] incoming message:", data
+		print("[SVDRP] incoming message:", data)
 		list = data.split(' ', 1)
 		command = list.pop(0).upper()
 		args = list[0] if list else ''
@@ -520,7 +509,7 @@ class SimpleVDRProtocol(LineReceiver):
 
 		try:
 			call(args)
-		except Exception, e:
+		except Exception as e:
 			import traceback, sys
 			traceback.print_exc(file=sys.stdout)
 			payload = "%d exception occured: %s" % (CODE_ERR, str(e).replace('\n', ' ').replace('\r', ''))

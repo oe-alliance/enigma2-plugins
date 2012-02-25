@@ -68,7 +68,11 @@ class GrabResource(resource.Resource):
 
 		else:
 			request.setHeader('Content-Disposition', 'inline; filename=screenshot.%s;' %imageformat)
-			request.setHeader('Content-Type','image/%s' %imageformat)
+			mimetype = imageformat
+			if mimetype == 'jpg':
+				mimetype = 'jpeg'
+				
+			request.setHeader('Content-Type','image/%s' %mimetype)
 
 			filename = "%s.%s" %(filename,imageformat)
 			append(filename)

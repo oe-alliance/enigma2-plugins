@@ -60,22 +60,18 @@ class BitrateCalculator(Screen):
 
 		}, -1)
 		ref = session.nav.getCurrentlyPlayingServiceReference()
-		vpid = apid = dvbnamespace = tsid = onid = -1
+		vpid = apid = -1
 		service = session.nav.getCurrentService()
 		if service:
 			serviceInfo = service.info()
 			vpid = serviceInfo.getInfo(iServiceInformation.sVideoPID)
 			apid = serviceInfo.getInfo(iServiceInformation.sAudioPID)
-		if not ref.getPath():
-			tsid = ref.getData(2)
-			onid = ref.getData(3)
-			dvbnamespace = ref.getData(4)
-		if vpid:
-			self.videoBitrate = eBitrateCalculator(vpid, dvbnamespace, tsid, onid, 1000, 1024*1024) # pid, dvbnamespace, tsid, onid, refresh intervall, buffer size
-			self.videoBitrate.callback.append(self.getVideoBitrateData)
-		if apid:
-			self.audioBitrate = eBitrateCalculator(apid, dvbnamespace, tsid, onid, 1000, 64*1024)
-			self.audioBitrate.callback.append(self.getAudioBitrateData)
+			if vpid:
+				self.videoBitrate = eBitrateCalculator(vpid, ref.toString(), 1000, 1024*1024) # pid, dvbnamespace, tsid, onid, refresh intervall, buffer size
+				self.videoBitrate.callback.append(self.getVideoBitrateData)
+			if apid:
+				self.audioBitrate = eBitrateCalculator(apid, ref.toString(), 1000, 64*1024)
+				self.audioBitrate.callback.append(self.getAudioBitrateData)
 
 	def getVideoBitrateData(self,value, status): # value = rate in kbit/s, status ( 1  = ok || 0 = nok (zapped?))
 		if status:

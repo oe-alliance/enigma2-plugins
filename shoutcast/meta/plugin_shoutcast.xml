@@ -1,13 +1,14 @@
 <default>
 	  <prerequisites>
                     <tag type="Multimedia" />
+                    <tag type="Recording" />
 	  </prerequisites>
           <info>
                     <author>Dr.Best</author>
                     <name>SHOUTcast</name>
                     <packagename>enigma2-plugin-extensions-shoutcast</packagename>
-                    <shortdescription>Listen and record internet radio</shortdescription>
-                    <description>Listen and record shoutcast internet radio on your Dreambox.</description>
+                    <shortdescription>Play Internet Radio downloaded from ShoutCast</shortdescription>
+                    <description>Listen and record Shoutcast Internet Radio on your Dreambox.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_shoutcast.jpg" />		    
           </info>
 

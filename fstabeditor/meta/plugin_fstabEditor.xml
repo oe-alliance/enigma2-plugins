@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>dre</author>
+                    <name>fstabEditor</name>
+                    <packagename>enigma2-plugin-extensions-fstabeditor</packagename>
+                    <shortdescription>Editor for fstab</shortdescription>
+                    <description>A plugin to add / remove / modify entries of fstab.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_fstabeditor.jpg" />		    
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-fstabeditor" />
+	  </files>
+</default>

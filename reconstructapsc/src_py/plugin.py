@@ -4,10 +4,10 @@ from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 import Screens.Standby
 from Components.ActionMap import ActionMap
-from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer
+from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer, eEnv
 from os import access, chmod, X_OK
 
-recons_path = "/usr/lib/enigma2/python/Plugins/Extensions/ReconstructApSc/bin/reconstruct_apsc"
+recons_path = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/ReconstructApSc/bin/reconstruct_apsc")
 
 def main(session, service, **kwargs):
 	# Hack to make sure it is executable

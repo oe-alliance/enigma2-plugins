@@ -1,0 +1,144 @@
+# German translations for PTS Plugin package.
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Automatically generated, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pts-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-28 23:54+0000\n"
+"PO-Revision-Date: 2010-06-26 13:22+0100\n"
+"Last-Translator: Homey <homey@battletracker.com>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Country: GERMANY\n"
+
+msgid "Save and stop"
+msgstr "Save and stop"
+
+msgid "Save and record"
+msgstr "Save and record"
+
+msgid "Don't save"
+msgstr "Nicht speichern"
+
+msgid "Saving Timeshift files"
+msgstr "Speichere Timeshift Dateien"
+
+msgid "Merging Timeshift files"
+msgstr "Füge Timeshift Dateien zusammen"
+
+msgid "Saving timeshift as movie now. This might take a while!"
+msgstr "Speichere nun Timeshift als Film. Das kann eine Weile dauern!"
+
+msgid "Records successfully merged!"
+msgstr "Aufnahmen erfolgreich zusammengefügt!"
+
+msgid "Record started! Stopping timeshift now ..."
+msgstr "Aufnahme gestartet! Stoppe timeshift aufnahme ..."
+
+msgid "Record"
+msgstr "Aufnahme"
+
+msgid "Timeshift"
+msgstr "Timeshift"
+
+msgid ""
+"Could not activate Permanent-Timeshift!\n"
+"Timeshift-Path does not exist"
+msgstr ""
+"Permanent-Timeshift konnte nicht aktiviert werden!\n"
+"Aufnahmeverzeichnis existiert nicht!"
+
+msgid ""
+"OH NO!\n"
+"The timeshift that was marked to save at end of event, was lost because you zapped away!"
+msgstr ""
+"OH NEIN!\n"
+"Die Timeshiftaufnahme wurde noch nicht gespeichert weil du zu früh weggezapped hast!"
+
+msgid "Timeshift saved to your harddisk!"
+msgstr "Timeshiftaufnahme auf Festplatte gespeichert!"
+
+msgid "Timeshift copied to your harddisk!"
+msgstr "Timeshiftaufnahme auf Festplatte kopiert!"
+
+msgid "Timeshift save failed!"
+msgstr "Fehler beim speichern der Timeshiftaufnahme!"
+
+msgid "No Timeshift found to save as recording!"
+msgstr "Keine Timeshift Datei gefunden zum speichern!"
+
+msgid "Permanent Timeshift Settings"
+msgstr "Permanent Timeshift Einstellungen"
+
+msgid ""
+"The Timeshift record was not saved yet!\n"
+"What do you want to do now with the timeshift file?"
+msgstr ""
+"Die Timeshiftaufnahme wurde noch nicht gespeichert!\n"
+"Was möchtest du nun mit der Timeshift aufnahme tun?"
+
+msgid "Which event do you want to save permanently?"
+msgstr "Welche Sendung möchtest du permanent speichern?"
+
+msgid "Save Timeshift as Movie and stop recording"
+msgstr "Timeshiftaufnahme als Film speichern und Aufnahme beenden"
+
+msgid "Save Timeshift as Movie and continue recording"
+msgstr "Timeshiftaufnahme als Film speichern und weiter aufnehmen"
+
+msgid "Don't save Timeshift as Movie"
+msgstr "Timeshiftaufnahme nicht als Film speichern"
+
+msgid "Current Event:"
+msgstr "Aktuelle Sendung:"
+
+msgid "Getting Event Info failed!"
+msgstr "Fehler bei lesen der Event-Infos!"
+
+msgid ""
+"Maximum Timeshift length per Event reached!\n"
+"Restarting Timeshift now ..."
+msgstr ""
+"Maximale länge für eine Timeshiftaufnahme erreicht!\n"
+"Timeshiftaufnahme wird neu gestartet ..."
+
+msgid "Timeshift will get saved at end of event!"
+msgstr "Timeshiftaufnahme wird am Ende dieses Films gespeichert!"
+
+msgid "save recording (stop after current event)"
+msgstr "Aufnahme speichern (Aktuelle Sendung)"
+
+msgid "save recording (Select event)"
+msgstr "Aufnahme speichern (Sendung auswählen)"
+
+msgid "Permanent Timeshift Enable"
+msgstr "Permanent Timeshift aktivieren"
+
+msgid "Permanent Timeshift Max Events"
+msgstr "Permanent Timeshift Max Sendungen"
+
+msgid "Permanent Timeshift Max Length"
+msgstr "Permanent Timeshift Max Länge"
+
+msgid "Permanent Timeshift Start Delay"
+msgstr "Permanent Timeshift Start Verzögerung"
+
+msgid "Timeshift-Save Action on zap"
+msgstr "Timeshift-Save Aktion beim zap"
+
+msgid "Show PTS Infobar while timeshifting?"
+msgstr "PTS Infobar anzeigen während des timeshiftens?"
+
+msgid "Stop timeshift while recording?"
+msgstr "Timeshift beenden wenn Aufnahme läuft?"
+
+msgid "Creating Hardlink to Timeshift file failed!"
+msgstr "Fehler beim erstellen des Hardlinks zur Timeshift Datei!"
+

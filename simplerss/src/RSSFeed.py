@@ -1,4 +1,4 @@
-from TagStrip import strip, strip_readable
+from Plugins.SystemPlugins.Toolkit.TagStrip import strip, strip_readable
 from Components.Scanner import ScanFile
 
 NS_RDF = "{http://www.w3.org/1999/02/22-rdf-syntax-ns#}"
@@ -81,6 +81,9 @@ class RSSWrapper(ElementWrapper):
 		self.len = len(self)-1
 		return self
 
+	def __next__(self):
+		return self.next()
+
 	def next(self):
 		idx = self.idx
 		if idx > self.len:
@@ -101,12 +104,22 @@ class RSS1Wrapper(RSSWrapper):
 			feed.findall(ns + 'item'), ns
 		)
 
+	def __getattr__(self, tag):
+		if tag == 'logo': # XXX: afaik not officially part of older rss, but can't hurt
+			tag = 'image'
+		return ElementWrapper.__getattr__(self, tag)
+
 class RSS2Wrapper(RSSWrapper):
 	def __init__(self, feed, ns):
 		channel = feed.find("channel")
 		RSSWrapper.__init__(
 			self, channel, channel.findall("item")
 		)
+
+	def __getattr__(self, tag):
+		if tag == 'logo':
+			tag = 'image'
+		return ElementWrapper.__getattr__(self, tag)
 
 class PEAWrapper(RSSWrapper):
 	def __init__(self, feed, ns):
@@ -134,6 +147,7 @@ class BaseFeed:
 		# Initialize
 		self.title = title or uri.encode("UTF-8")
 		self.description = description
+		self.logoUrl = ''
 		self.history = []
 
 	def __str__(self):
@@ -214,12 +228,13 @@ class UniversalFeed(BaseFeed):
 			elif feed.tag.endswith("feed"):
 				self.wrapper = PEAWrapper
 			else:
-				raise NotImplementedError, 'Unsupported Feed: %s' % feed.tag
+				raise NotImplementedError('Unsupported Feed: %s' % feed.tag)
 
 			wrapper = self.wrapper(feed, self.ns)
 
 			self.title = strip(wrapper.title).encode("UTF-8")
 			self.description = strip_readable(wrapper.description or "").encode("UTF-8")
+			self.logoUrl = wrapper.logo
 
 		return self.gotWrapper(wrapper)
 

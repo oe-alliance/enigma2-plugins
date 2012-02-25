@@ -2,8 +2,6 @@
 #
 #    Merlin Programm Guide for Dreambox-Enigma2
 #    Coded by Vali (c)2010-2011
-#    Support: www.dreambox-tools.info
-#
 #
 #  This plugin is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -13,11 +11,9 @@
 #  Alternatively, this plugin may be distributed and executed on hardware which
 #  is licensed by Dream Multimedia GmbH.
 #
-#
 #  This plugin is NOT free software. It is open source, you are allowed to
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
-#
 #
 #######################################################################
 
@@ -355,10 +351,20 @@ class Merlin_PGII(Screen):
 		return self.list
 
 	def onLayoutReady(self):
-		service = self.session.nav.getCurrentService()
-		info = service and service.info()
-		if (info is not None) and not(config.plugins.MerlinEPG.StartFirst.value):
-			nameROH = info.getName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+		#service = self.session.nav.getCurrentService()
+		#info = service and service.info()
+		#if (info is not None) and not(config.plugins.MerlinEPG.StartFirst.value):
+			#nameROH = info.getName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+		if self.srvList:
+			service = ServiceReference(self.srvList.getCurrentSelection())
+			info = service and service.info()
+			nameROH = info and info.getName(service.ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
+		else:
+			service = self.session.nav.getCurrentService()
+			info = service and service.info()
+			nameROH = info and info.getName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+		if (nameROH is not None) and not(config.plugins.MerlinEPG.StartFirst.value):
+		#
 			for idx in range(1, len(self.list)):
 				name = str(idx) + ". " + nameROH
 				if name == self.list[idx-1]:
@@ -775,10 +781,20 @@ class Merlin_PGd(Screen):
 		self.onLayoutFinish.append(self.onLayoutReady)
 
 	def onLayoutReady(self):
-		service = self.session.nav.getCurrentService()
-		info = service and service.info()
-		if (info is not None) and not(config.plugins.MerlinEPG.StartFirst.value):
-			nameROH = info.getName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+		#service = self.session.nav.getCurrentService()
+		#info = service and service.info()
+		#if (info is not None) and not(config.plugins.MerlinEPG.StartFirst.value):
+			#nameROH = info.getName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+		if self.srvList:
+			service = ServiceReference(self.srvList.getCurrentSelection())
+			info = service and service.info()
+			nameROH = info and info.getName(service.ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
+		else:
+			service = self.session.nav.getCurrentService()
+			info = service and service.info()
+			nameROH = info and info.getName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+		if (nameROH is not None) and not(config.plugins.MerlinEPG.StartFirst.value):
+		#
 			for idx in range(1, len(self.list)):
 				name = str(idx) + ". " + nameROH
 				if name == self.list[idx-1]:

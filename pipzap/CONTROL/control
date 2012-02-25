@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-pipzap
+Version: 0.0.1-20110611-r0
+Description: allows to zap using the picture in picture
+Maintainer: Moritz Venn <moritz.venn@freaque.net>
+Homepage: http://www.ritzmo.de
+Depends: enigma2 (>= 3.1git20110000), enigma2-plugin-systemplugins-mphelp

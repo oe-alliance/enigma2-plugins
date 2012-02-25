@@ -473,10 +473,10 @@ class DBUpdateStatus(Screen):
 		self.recordtimer = session.nav.RecordTimer
 		self.NetworkConnectionAvailable = False
 		self.LastTimerlistUpdate = 0
-
+		
 		self.timerlist = ""
 		self.pluginlist = ""
-		
+
 		self.onShow.append(self.restartTimer)
 
 	def restartTimer(self):
@@ -535,6 +535,7 @@ class DBUpdateStatus(Screen):
 		self.ImageVersion = about.getVersionString()
 
 		# Get TimerList
+		self.timerlist = ""
 		if config.plugins.tvcharts.submittimers.value and self.LastTimerlistUpdate <= (time()-1800):
 			self.LastTimerlistUpdate = time()
 			try:
@@ -547,7 +548,7 @@ class DBUpdateStatus(Screen):
 		# Get Pluginlist
 		if config.plugins.tvcharts.submitplugins.value and self.pluginlist == "":
 			try:
-				os_system("ipkg list_installed | grep enigma2-plugin- > /tmp/plugins.txt")
+				os_system("opkg list_installed | grep enigma2-plugin- > /tmp/plugins.txt")
 				for plugin in open('/tmp/plugins.txt', 'r'):
 					self.pluginlist += plugin[0:plugin.find(' - ')]+"\n"
 				os_system("rm -f /tmp/plugins.txt")
@@ -555,7 +556,7 @@ class DBUpdateStatus(Screen):
 				print "[TVCharts] Error loading plugins!"
 		
 		# Status Update
-		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', timeout=60, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'eventdescr' : event_description, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist, 'pluginlist' : self.pluginlist})).addErrback(self.updateError)
+		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', agent="Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)", timeout=60, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'eventdescr' : event_description, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist, 'pluginlist' : self.pluginlist})).addErrback(self.updateError)
 
 		# Restart Timer
 		self.DBStatusTimer.start(900000, True)

@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>Dream Multimedia</author>
+                    <name>etv</name>
+                    <packagename>enigma2-plugin-extensions-etv</packagename>
+                    <shortdescription>EuroticTV</shortdescription>
+                    <description>Watch EuroticTV via HTTP Live Streaming.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_eurotictv.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-eurotictv" />
+	  </files>
+</default>

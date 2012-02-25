@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ <title>URL list for CurlyTx</title>
+ <author>
+  <name>Christian Weiske</name>
+  <email>cweiske@cweiske.de</email>
+ </author>
+ <link rel="self" href="http://home.cweiske.de/pagefeed.atom"/>
+ <entry>
+  <id>ip</id>
+  <title>My IP</title>
+  <!-- url missing -->
+ </entry>
+ <entry>
+  <id>temp</id>
+  <title>House temperatures</title>
+  <link rel="alternate" type="text/html" href="http://home/temperatures.txt" />
+ </entry>
+</feed>

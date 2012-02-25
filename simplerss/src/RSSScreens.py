@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # for localized messages
 from . import _
 
@@ -295,7 +297,7 @@ class RSSFeedView(RSSBaseView):
 		self.rssPoller.removeCallback(self.pollCallback)
 
 	def pollCallback(self, id = None):
-		print "[SimpleRSS] SimpleRSSFeed called back"
+		print("[SimpleRSS] SimpleRSSFeed called back")
 
 		if id is None or id+1 == self.id:
 			self["content"].updateList(self.feed.history)
@@ -429,7 +431,9 @@ class RSSOverview(RSSBaseView):
 		self.feeds.extend([(feed,) for feed in self.rssPoller.feeds])
 
 	def pollCallback(self, id = None):
-		print "[SimpleRSS] SimpleRSS called back"
+		print("[SimpleRSS] SimpleRSS called back")
+		self.fillFeeds()
+		self["content"].setList(self.feeds)
 		self.updateInfo()
 		self["content"].invalidate()
 

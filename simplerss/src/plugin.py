@@ -5,6 +5,8 @@ from Components.config import config, ConfigSubsection, ConfigSubList, \
 	ConfigEnableDisable, ConfigNumber, ConfigText, ConfigSelection, \
 	ConfigYesNo, ConfigPassword
 
+from Components.PluginComponent import plugins
+
 # Initialize Configuration
 config.plugins.simpleRSS = ConfigSubsection()
 simpleRSS = config.plugins.simpleRSS
@@ -12,6 +14,7 @@ simpleRSS.update_notification = ConfigSelection(
 	choices = [
 		("notification", _("Notification")),
 		("preview", _("Preview")),
+		("ticker", _("Ticker")),
 		("none", _("none"))
 	],
 	default = "preview"
@@ -48,8 +51,8 @@ def main(session, **kwargs):
 		from RSSPoller import RSSPoller
 		rssPoller = RSSPoller()
 
-	# Show Overview when we have feeds
-	if rssPoller.feeds:
+	# Show Overview when we have feeds (or retrieving them from google)
+	if rssPoller.feeds or config.plugins.simpleRSS.enable_google_reader.value:
 		from RSSScreens import RSSOverview
 		session.openWithCallback(closed, RSSOverview, rssPoller)
 	# Show Setup otherwise
@@ -73,9 +76,14 @@ def closed():
 def autostart(reason, **kwargs):
 	global rssPoller
 
-	# Instanciate when autostart active, session present and enigma2 is launching
-	if config.plugins.simpleRSS.autostart.value and \
-		kwargs.has_key("session") and reason == 0:
+	if "session" in kwargs and config.plugins.simpleRSS.update_notification.value == "ticker":
+		import RSSTickerView as tv
+		if tv.tickerView is None:
+			tv.tickerView = kwargs["session"].instantiateDialog(tv.RSSTickerView)
+
+	# Instanciate when enigma2 is launching, autostart active and session present or installed during runtime
+	if reason == 0 and config.plugins.simpleRSS.autostart.value and \
+		(not plugins.firstRun or "session" in kwargs):
 
 		from RSSPoller import RSSPoller
 		rssPoller = RSSPoller()
@@ -131,20 +139,24 @@ def Plugins(**kwargs):
 			name = "RSS Reader",
 			description = _("A simple to use RSS reader"),
 			where = PluginDescriptor.WHERE_PLUGINMENU,
-			fnc=main
+			fnc=main,
+			needsRestart=False,
 		),
  		PluginDescriptor(
 			where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART],
-			fnc = autostart
+			fnc = autostart,
+			needsRestart=False,
 		),
  		PluginDescriptor(
 			name = _("View RSS..."),
 			description = "Let's you view current RSS entries",
 			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-			fnc=main
+			fnc=main,
+			needsRestart=False,
 		),
  		PluginDescriptor(
 			where = PluginDescriptor.WHERE_FILESCAN,
-			fnc = filescan
+			fnc = filescan,
+			needsRestart=False,
 		)
 	]

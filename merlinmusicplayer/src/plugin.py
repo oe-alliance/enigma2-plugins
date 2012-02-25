@@ -98,6 +98,7 @@ config.plugins.merlinmusicplayer.merlinmusicplayermainmenu = ConfigYesNo(default
 
 from enigma import ePythonMessagePump
 from threading import Thread, Lock
+from timer import TimerEntry
 
 class ThreadQueue:
 	def __init__(self):
@@ -500,6 +501,15 @@ class MerlinMusicPlayerScreenSaver(Screen):
 	        self.coverMoveTimer.timeout.get().append(self.moveCoverArt)
 	        self.coverMoveTimer.start(1)
 		self["display"] = Label()
+		self.onClose.append(self.__onClose)
+		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
+	
+	def sleepTimerEntryOnStateChange(self, timer):
+		if timer.state == TimerEntry.StateEnded:
+			self.close()
+
+	def __onClose(self):
+		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 
 	def updateDisplayText(self, text):
 		self["display"].setText(text)
@@ -599,6 +609,11 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 		if self.idx:
 		        self.showHideTimer.start(self.idx * 1000)
 		self.displayShown = True
+		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
+	
+	def sleepTimerEntryOnStateChange(self, timer):
+		if timer.state == TimerEntry.StateEnded:
+			self.close()
 
 	def showHide(self):
 		if self.displayShown:
@@ -783,6 +798,7 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 			self.pipservice.start()
 
 	def __onClose(self):
+		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 		self.pipservice = None
 		if self.showHideTimer.isActive():
 			self.showHideTimer.stop()
@@ -940,6 +956,12 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.currentService = currentservice
 		self.serviceList = servicelist
 
+		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
+	
+	def sleepTimerEntryOnStateChange(self, timer):
+		if timer.state == TimerEntry.StateEnded:
+			self.closePlayer()
+
 	def embeddedCoverArt(self):		
 		self["coverArt"].embeddedCoverArt()
 		if self.screenSaverScreen:
@@ -982,6 +1004,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.resetScreenSaverTimer()
 		
 	def __onClose(self):
+		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 		del self["coverArt"].picload
 		self.seek = None
 
@@ -1222,7 +1245,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 
 	def googleImageCallback(self, result):
 		foundPos = result.find("imgres?imgurl=")
-		foundPos2 = result.find("&imgrefurl=")
+		foundPos2 = result.find("&amp;imgrefurl=")
 		if foundPos != -1 and foundPos2 != -1:
 			url = result[foundPos+14:foundPos2]
 			parts = url.split("/")
@@ -1489,61 +1512,41 @@ class MerlinMusicPlayerLyrics(Screen):
 		self.onLayoutFinish.append(self.startRun)
 
 	def startRun(self):
-		# leoslyrics does not work anymore
-		#url = "http://api.leoslyrics.com/api_search.php?auth=duane&artist=%s&songtitle=%s" % (quote(self.currentSong.artist), quote(self.currentSong.title))
-		#sendUrlCommand(url, None,10).addCallback(self.getHID).addErrback(self.urlError)
 		# get lyric-text from id3 tag
 		try:
 			audio = ID3(self.currentSong.filename)
 		except:
 			audio = None
-		if audio:
-			text = getEncodedString(self.getLyricsFromID3Tag(audio)).replace("\r\n","\n")
-			text = text.replace("\r","\n")
-			self["lyric_text"].setText(text)
-		else:
-			self["lyric_text"].setText("No lyrics found")
+		text = getEncodedString(self.getLyricsFromID3Tag(audio)).replace("\r\n","\n")
+		text = text.replace("\r","\n")
+		self["lyric_text"].setText(text)
   
 	def getLyricsFromID3Tag(self,tag):
-		for frame in tag.values():
-			if frame.FrameID == "USLT":
-				return frame.text
-		return "No lyrics found in id3-tag"
-
+		if tag:
+			for frame in tag.values():
+				if frame.FrameID == "USLT":
+					return frame.text
+		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(self.currentSong.artist), quote(self.currentSong.title))
+		sendUrlCommand(url, None,10).addCallback(self.gotLyrics).addErrback(self.urlError)
+		return "No lyrics found in id3-tag, trying api.chartlyrics.com..."
 	
 	def urlError(self, error = None):
 		if error is not None:
 			self["resulttext"].setText(str(error.getErrorMessage()))
+			self["lyric_text"].setText("")
 
-	def getHID(self, xmlstring):
-		root = cet_fromstring(xmlstring)
-		url = ""
-		child = root.find("searchResults")
-		if child:
-			child2 = child.find("result")
-			if child2:
-				url = "http://api.leoslyrics.com/api_lyrics.php?auth=duane&hid=%s" % quote(child2.get("hid"))
-				sendUrlCommand(url, None,10).addCallback(self.getLyrics).addErrback(self.urlError)
-		if not url:
-			self["resulttext"].setText(_("No lyrics found"))
-
-	def getLyrics(self, xmlstring):
+	def gotLyrics(self, xmlstring):
 		root = cet_fromstring(xmlstring)
 		lyrictext = ""
-		child = root.find("lyric")
-		if child:
-			title = child.findtext("title").encode("utf-8", 'ignore')
-			child2 = child.find("artist")
-			if child2:
-				artist = child2.findtext("name").encode("utf-8", 'ignore')
-			else:
-				artist = ""
-			lyrictext = child.findtext("text").encode("utf-8", 'ignore')
-			self["lyric_text"].setText(lyrictext)
-			result = _("Response -> lyrics for: %s (%s)") % (title,artist)
-			self["resulttext"].setText(result)
+		lyrictext = root.findtext("{http://api.chartlyrics.com/}Lyric").encode("utf-8", 'ignore')
+		self["lyric_text"].setText(lyrictext)
+		title = root.findtext("{http://api.chartlyrics.com/}LyricSong").encode("utf-8", 'ignore')
+		artist = root.findtext("{http://api.chartlyrics.com/}LyricArtist").encode("utf-8", 'ignore')
+		result = _("Response -> lyrics for: %s (%s)") % (title,artist)
+		self["resulttext"].setText(result)
 		if not lyrictext:
 			self["resulttext"].setText(_("No lyrics found"))
+			self["lyric_text"].setText("")
 
 	def pageUp(self):
 		self["lyric_text"].pageUp()
@@ -1739,6 +1742,12 @@ class iDreamMerlin(Screen):
 
 		self.startMerlinPlayerScreenTimer = eTimer()
 		self.startMerlinPlayerScreenTimer.timeout.get().append(self.info_pressed)
+
+		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
+	
+	def sleepTimerEntryOnStateChange(self, timer):
+		if timer.state == TimerEntry.StateEnded:
+			self.close()
 
 	def getPlayList(self):
 		connection = OpenDatabase()
@@ -2519,6 +2528,7 @@ class iDreamMerlin(Screen):
 		self.close()
 		
 	def __onClose(self):
+		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 		self.startMerlinPlayerScreenTimer.stop()
 		if self.player is not None:
 			self.player.closePlayer()
@@ -3003,6 +3013,12 @@ class MerlinMusicPlayerFileList(Screen):
 		self.startMerlinPlayerScreenTimer = eTimer()
 		self.startMerlinPlayerScreenTimer.timeout.get().append(self.info_pressed)
 
+		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
+	
+	def sleepTimerEntryOnStateChange(self, timer):
+		if timer.state == TimerEntry.StateEnded:
+			self.close()
+
 	def startRun(self):
 		if config.plugins.merlinmusicplayer.startlastsonglist.value:
 			self.startPlayerTimer = eTimer()
@@ -3312,6 +3328,7 @@ class MerlinMusicPlayerFileList(Screen):
 		self.summaries.setText(text,4)
 
 	def __onClose(self):
+		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 		self.startMerlinPlayerScreenTimer.stop()
 		if self.player is not None:
 			self.player.closePlayer()
@@ -3336,14 +3353,16 @@ def main(session,**kwargs):
 	if kwargs.has_key("servicelist"):
 		servicelist = kwargs["servicelist"]
 	else:
-		servicelist = None
+		from Screens.InfoBar import InfoBar
+		servicelist = InfoBar.instance.servicelist
 	session.open(iDreamMerlin, servicelist)
 
 def merlinmusicplayerfilelist(session,**kwargs):
 	if kwargs.has_key("servicelist"):
 		servicelist = kwargs["servicelist"]
 	else:
-		servicelist = None
+		from Screens.InfoBar import InfoBar
+		servicelist = InfoBar.instance.servicelist
 	session.open(MerlinMusicPlayerFileList, servicelist)
 
 def menu_merlinmusicplayerfilelist(menuid, **kwargs):

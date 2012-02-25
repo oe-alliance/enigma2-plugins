@@ -17,13 +17,13 @@ class Hdd(Source):
 	def getList(self):
 		disks = []
 		for hdd in harddiskmanager.hdd:
-			model = "%s" % (hdd.model())
-			capacity = "%s" % (hdd.capacity())
+			model = str(hdd.model())
+			capacity = str(hdd.capacity())
 
 			if hdd.free() <= 1024:
 				free = "%i MB" % (hdd.free())
 			else:
-				free = float(hdd.free()) / float(1024)
+				free = hdd.free() / float(1024)
 				free = "%.3f GB" % free
 			disks.append((model, capacity, free))
 

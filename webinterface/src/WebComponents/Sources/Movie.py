@@ -10,7 +10,7 @@ from os import stat as os_stat
 class Movie(Source):
 	LIST = 0
 	DEL = 1
-	TAGS = 2
+	MOVE = 2
 
 	def __init__(self, session, movielist, func=LIST):
 		Source.__init__(self)
@@ -19,19 +19,19 @@ class Movie(Source):
 		self.tagfilter = []
 		self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD))
 		self.movielist = movielist #MovieList(self.root)
-		self.movielist.load(self.root, None)
-		self.cmd = ""
 		self.res = ( False, "Missing or Wrong Argument" )
 
 	def handleCommand(self, cmd):
 		if cmd is not None:
-			self.cmd = cmd
-			if self.func is self.DEL:
-				self.res = self.delMovie(cmd)
-			elif self.func is self.LIST:
+			func = self.func
+			if func is self.LIST:
 				if cmd['dirname']:
 					self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + cmd['dirname'])
 				self.tagfilter = cmd['tag'] and cmd['tag'].split(' ') or []
+			elif func is self.DEL:
+				self.res = self.delMovie(cmd)
+			elif func is self.MOVE:
+				self.res = self.moveMovie(cmd)
 
 	def delMovie(self, param):
 #		print "[WebComponents.delMovie] %s" %param
@@ -60,12 +60,105 @@ class Movie(Source):
 
 		return ( result, "Illegal Parameter Value: sRef - '%s'" % param )
 
+	def moveMovie(self, param):
+		import os
+		import threading
+		if not param['sRef']:
+			return False, "Missing Parameter: sRef"
+		elif not param['dirname']:
+			return False, "Missing Paramter: dirname"
+
+		try:
+			force = int(param['force']) if 'force' in param else False
+		except Exception:
+			force = False
+
+		try:
+			background = int(param['background']) if 'background' in param else False
+		except Exception:
+			background = False
+
+		destdir = param['dirname']
+		if not destdir[-1] == '/':
+			destdir = destdir + '/'
+		service = ServiceReference(param['sRef'])
+		result = False
+
+		if service is not None:
+			serviceHandler = eServiceCenter.getInstance()
+			info = serviceHandler.info(service.ref)
+			path = service.ref.getPath()
+			name = info and info.getName(service.ref) or "this recording"
+			basedir = '/'.join(path.split('/')[:-1]) + '/'
+			basename = path.split('/')[-1]
+
+			if basedir == destdir:
+				return False, "Source and destination folders are the same."
+			elif not os.path.exists(path):
+				return False, "'%s' does not exist in source directory." % name
+			elif not force and os.path.exists(destdir + basename):
+				return False, "'%s' already exists in destination directory '%s', set force=1 to move anyway." % (basename, destdir)
+			elif not os.path.exists(destdir):
+				return False, "Destination dir '%s' does not exist." % destdir
+
+			# remove known movie suffixes
+			wasTs = False
+			forcedSuffix = None
+			if basename.endswith('.ts'):
+				wasTs = True
+				basename = basename[:-3]
+			elif basename.endswith(('.avi', '.mkv', '.mpg', '.mp4', '.m4v', '.flv', '.mov', '.iso', '.vob')):
+				forcedSuffix = basename[-4:]
+				basename = basename[:-4]
+			elif basename.endswith(('.divx', '.mpeg', '.m2ts')):
+				forcedSuffix = basename[-5:]
+				basename = basename[:-5]
+			else:
+				suffix = basename.split('.')[-1]
+				return False, "Movie '%s' has unknown suffix '%s'." % (name, suffix)
+
+			def moveFunc():
+				exists = os.path.exists
+				move = os.rename
+				errorlist = []
+				if wasTs:
+					suffixes = ".ts.meta", ".ts.cuts", ".ts.ap", ".ts.sc", ".eit", ".ts", ".jpg"
+				else:
+					suffixes = "%s.ts.meta" % forcedSuffix, "%s.cuts" % forcedSuffix, forcedSuffix, '.jpg', '.eit'
+
+				for suffix in suffixes:
+					src = basedir + basename + suffix
+					if exists(src):
+						try:
+							move(src, destdir + basename + suffix)
+						except OSError as ose:
+							errorlist.append(str(ose))
+				return errorlist
+
+			if background:
+				class StupidThread(threading.Thread):
+					def __init__(self, fnc):
+						threading.Thread.__init__(self)
+						self.fnc = fnc
+						self.start()
+					def run(self):
+						self.fnc()
+				StupidThread(moveFunc)
+				return True, "Moving Movie '%s' to '%s' in background." % (name, destdir)
+			else:
+				errlist = moveFunc()
+				if not errlist:
+					return True, "Movie '%s' moved to '%s' without errors." % (name, destdir)
+				else:
+					return False, "%d error while moving Movie '%s' to '%s': %s" % (len(errlist), name, destdir, ',\n'.join(errlist))
+		return ( result, "Illegal Parameter Value: sRef - '%s'" % param['sRef'] )
+
 	def getMovieList(self):
 		self.movielist.reload(root=self.root, filter_tags=self.tagfilter)
-		list = []
+		lst = []
+		append = lst.append
 
-		tag = self.cmd['tag']
-		tag = tag and tag.lower()
+		loadLength = config.plugins.Webinterface.loadmovielength.value
 		for (serviceref, info, begin, unknown) in self.movielist.list:
 			rtime = info.getInfo(serviceref, iServiceInformation.sTimeCreate)
 
@@ -75,14 +168,14 @@ class Movie(Source):
 			else:
 				begin_string = "undefined"
 
-			if config.plugins.Webinterface.loadmovielength.value:
-				len = info.getLength(serviceref)
-				if len > 0:
-					len = "%d:%02d" % (len / 60, len % 60)
+			if loadLength:
+				Len = info.getLength(serviceref)
+				if Len > 0:
+					Len = "%d:%02d" % (Len / 60, Len % 60)
 				else:
-					len = "?:??"
+					Len = "?:??"
 			else:
-				len = "disabled"
+				Len = "disabled"
 
 			sourceERef = info.getInfoString(serviceref, iServiceInformation.sServiceref)
 			sourceRef = ServiceReference(sourceERef)
@@ -93,25 +186,25 @@ class Movie(Source):
 			filename = "/" + "/".join(serviceref.toString().split("/")[1:])
 			servicename = ServiceReference(serviceref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 			
-			if not tag or tag in info.getInfoString(serviceref, iServiceInformation.sTags).lower():
-				""" add movie only to list, if a given tag is applied to the movie """
-				list.append((
-					serviceref.toString(),
-					servicename,
-					info.getInfoString(serviceref, iServiceInformation.sDescription),
-					rtime,
-					begin_string,
-					len,
-					sourceRef.getServiceName(),
-					info.getInfoString(serviceref, iServiceInformation.sTags),
-					ext,
-					filename,
-					os_stat(filename)[6]
-				))
-		return list
+			append((
+				serviceref.toString(),
+				servicename,
+				info.getInfoString(serviceref, iServiceInformation.sDescription),
+				rtime,
+				begin_string,
+				Len,
+				sourceRef.getServiceName(),
+				info.getInfoString(serviceref, iServiceInformation.sTags),
+				ext,
+				filename,
+				os_stat(filename)[6]
+			))
+		return lst
 
 	def getResult(self):
 		if self.func is self.DEL:
+			return self.res
+		elif self.func is self.MOVE:
 			return self.res
 
 		return ( False, "illegal call" )

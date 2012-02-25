@@ -311,7 +311,7 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 		<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,35" size="15,16"/>
 		<widget font="Regular;18" name="languagetext" position="60,30" size="200,30"/>
 		<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
-		<widget alphatest="on" name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="500,50" size="154,500" zPosition="10"/>
+		<widget alphatest="on" name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="500,50" size="154,500" zPosition="10"/>
 		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
 		<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
 		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
@@ -327,7 +327,7 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 			<widget font="Regular;18" name="languagetext" position="60,30" size="200,30"/>
 			<widget name="config" position="50,340" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>            
 			<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
-			<widget alphatest="on" name="rc" pixmap="skin_default/rc.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="rc" pixmap="skin_default/rc0.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
 			<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
 			<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
 			<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
@@ -342,7 +342,7 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 			<widget font="Regular;18" name="languagetext" position="60,30" size="200,30"/>
 			<widget name="config" position="50,340" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>            
 			<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
-			<widget alphatest="on" name="rc" pixmap="skin_default/rc.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="rc" pixmap="skin_default/rc0.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
 			<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
 			<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
 			<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
@@ -357,7 +357,7 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 			<widget font="Regular;18" name="languagetext" position="60,30" size="200,30"/>
 			<widget name="config" position="50,340" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>            
 			<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
-			<widget alphatest="on" name="rc" pixmap="skin_default/rc.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="rc" pixmap="skin_default/rc0.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
 			<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
 			<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
 			<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
@@ -377,7 +377,7 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 			</convert>
 		</widget>
 		<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
-		<widget alphatest="on" name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="500,50" size="154,500" zPosition="10"/>
+		<widget alphatest="on" name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="500,50" size="154,500" zPosition="10"/>
 		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
 		<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
 		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
@@ -388,7 +388,7 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 		<widget font="Regular;23" name="text" position="50,100" size="440,202"/>
 		<widget name="list" position="50,310" size="440,200" zPosition="1"/>
 		<ePixmap alphatest="blend" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
-		<widget alphatest="on" name="rc" pixmap="skin_default/rc.png" position="500,600" size="154,475" zPosition="10"/>
+		<widget alphatest="on" name="rc" pixmap="skin_default/rc0.png" position="500,600" size="154,475" zPosition="10"/>
 		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="0,0" size="37,70" zPosition="11"/>
 		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
 		<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
@@ -398,7 +398,7 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 		<eLabel font="Regular;40" position="400,40" size="220,60" text="help..."/>
 		<widget name="list" position="50,100" scrollbarMode="showOnDemand" size="450,380"/>
 		<ePixmap alphatest="blend" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
-		<widget alphatest="on" name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="540,10" size="154,500" zPosition="10"/>
+		<widget alphatest="on" name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="540,10" size="154,500" zPosition="10"/>
 		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
 		<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
 		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
@@ -415,7 +415,7 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 		<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,35" size="15,16"/>
 		<widget font="Regular;18" name="languagetext" position="60,30" size="200,30"/>
 		<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
-		<widget alphatest="on" name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="540,10" size="154,500" zPosition="10"/>
+		<widget alphatest="on" name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="540,10" size="154,500" zPosition="10"/>
 		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
 		<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
 		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>

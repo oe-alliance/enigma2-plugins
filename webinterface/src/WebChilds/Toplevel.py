@@ -12,21 +12,38 @@ from PlayService import ServiceplayerResource
 from Uploader import UploadResource
 from ServiceListSave import ServiceList
 from RedirecToCurrentStream import RedirecToCurrentStreamResource
+from Tools.Directories import resolveFilename, SCOPE_MEDIA
 
 from External.__init__ import importExternalModules
 externalChildren = []
+
+"""
+	.htc Files for IE Fixes need a certain Content-Type
+"""
+import mimetypes
+mimetypes.add_type('text/x-component', '.htc')
+static.File.contentTypes = static.loadMimeTypes()
+
+if hasattr(static.File, 'render_GET'):
+	class File(static.File):
+		def render_POST(self, request):
+			return self.render_GET(request)
+else:
+	File = static.File
 
 def addExternalChild(child):
 	externalChildren.append(child)
 
 def getToplevel(session):
-	root = static.File(util.sibpath(__file__, "web-data/tpl/default"))
+	root = File(util.sibpath(__file__, "web-data/tpl/default"))
 	
 	root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) ) # "/web/*"
-	root.putChild("web-data", static.File(util.sibpath(__file__, "web-data")))
+	root.putChild("web-data", File(util.sibpath(__file__, "web-data")))
 	root.putChild("file", FileStreamer())
 	root.putChild("grab", GrabResource())
-	root.putChild("ipkg", IPKGResource())
+	res = IPKGResource()
+	root.putChild("opkg", res)
+	root.putChild("ipkg", res)
 	root.putChild("play", ServiceplayerResource(session))
 	root.putChild("wap", RedirectorResource("/mobile/"))
 	root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True) )
@@ -35,14 +52,14 @@ def getToplevel(session):
 	root.putChild("streamcurrent", RedirecToCurrentStreamResource(session))
 		
 	if config.plugins.Webinterface.includemedia.value is True:
-		root.putChild("media", static.File("/media"))
-		root.putChild("hdd", static.File("/media/hdd"))
+		root.putChild("media", File(resolveFilename(SCOPE_MEDIA)))
+		root.putChild("hdd", File(resolveFilename(SCOPE_MEDIA, "hdd")))
 		
 	
 	importExternalModules()
 
 	for child in externalChildren:
-		if len(child) == 2:
+		if len(child) > 1:
 			root.putChild(child[0], child[1])
 	
 	return root

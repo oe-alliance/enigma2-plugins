@@ -1,3 +1,5 @@
+include $(top_srcdir)/Rules-cpp.mak
+
 plugindir = $(libdir)/enigma2/python/Plugins/Extensions/VlcPlayer
 
 plugin_LTLIBRARIES = servicets.la

@@ -1,6 +1,8 @@
 from enigma import eServiceReference
 from Screens.Screen import Screen
+from Tools.BoundFunction import boundFunction
 from WebComponents.Sources.RequestData import RequestData
+
 
 class WebScreen(Screen):
 	def __init__(self, session, request):
@@ -18,8 +20,9 @@ class UpdateWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from Components.Sources.Clock import Clock
-
 		self["CurrentTime"] = Clock()
+		from WebComponents.Sources.Volume import Volume
+		self["Volume"] = Volume(session)
 
 
 class MessageWebScreen(WebScreen):
@@ -44,6 +47,7 @@ class AudioWebScreen(WebScreen):
 
 		self["AudioTracks"] = AudioTracks(session, func=AudioTracks.GET)
 		self["SelectAudioTrack"] = AudioTracks(session, func=AudioTracks.SET)
+		self["Downmix"] = AudioTracks(session, func=AudioTracks.DOWNMIX)
 
 class AboutWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -74,7 +78,6 @@ class AboutWebScreen(WebScreen):
 class VolumeWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-
 		from WebComponents.Sources.Volume import Volume
 		self["Volume"] = Volume(session)
 
@@ -102,28 +105,28 @@ class StreamSubServiceWebScreen(WebScreen):
 class ServiceListWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		
+
 		from Components.Sources.ServiceList import ServiceList
 		from Screens.ChannelSelection import service_types_tv
-	
+
 		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		self["ServiceList"] = ServiceList(fav, command_func=self.getServiceList, validate_commands=False)
 		self["localip"] = RequestData(request, what=RequestData.HOST)
-		
+
 	def getServiceList(self, sRef):
-		self["ServiceList"].root = sRef	
+		self["ServiceList"].root = sRef
 
 class ServiceListRecursiveWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		
+
 		from WebComponents.Sources.ServiceListRecursive import ServiceListRecursive
 		self["ServiceListRecursive"] = ServiceListRecursive(session, func=ServiceListRecursive.FETCH)
 
 class SwitchServiceWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		
+
 		from WebComponents.Sources.SwitchService import SwitchService
 		self["SwitchService"] = SwitchService(session)
 
@@ -154,9 +157,11 @@ class EpgWebScreen(WebScreen):
 		self["EpgService"] = EPG(session, func=EPG.SERVICE)
 		self["EpgBouquetNow"] = EPG(session, func=EPG.BOUQUETNOW)
 		self["EpgBouquetNext"] = EPG(session, func=EPG.BOUQUETNEXT)
+		self["EpgBouquetNowNext"] = EPG(session, func=EPG.BOUQUETNOWNEXT)
 		self["EpgServiceNow"] = EPG(session, func=EPG.SERVICENOW)
 		self["EpgServiceNext"] = EPG(session, func=EPG.SERVICENEXT)
 		self["EpgBouquet"] = EPG(session, func=EPG.BOUQUET)
+		self["EpgMulti"] = EPG(session, func=EPG.MULTI)
 		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 		self["EpgServiceWap"] = EPG(session, func=EPG.SERVICE, endtm=True)
@@ -171,9 +176,10 @@ class MovieWebScreen(WebScreen):
 		from Tools.Directories import resolveFilename, SCOPE_HDD
 		from WebComponents.Sources.Movie import Movie
 
-		movielist = MovieList(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD)))
+		movielist = MovieList(None)
 		self["MovieList"] = Movie(session, movielist, func=Movie.LIST)
 		self["MovieFileDel"] = Movie(session, movielist, func=Movie.DEL)
+		self["MovieFileMove"] = Movie(session, movielist, func=Movie.MOVE)
 		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 class MediaPlayerWebScreen(WebScreen):
@@ -188,6 +194,7 @@ class MediaPlayerWebScreen(WebScreen):
 		self["Command"] = MP(session, func=MP.COMMAND)
 		self["WritePlaylist"] = MP(session, func=MP.WRITEPLAYLIST)
 		self["CurrentTrack"] = MP(session, func=MP.CURRENT)
+		self["LoadPlaylist"] = MP(session, func=MP.LOADPLAYLIST)
 
 class AutoTimerWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -260,14 +267,25 @@ class WapWebScreen(WebScreen):
 		self["WAPdeleteOldOnSave"] = WAPfunctions(session, func=WAPfunctions.DELETEOLD)
 
 streamingScreens = []
+streamingEvents = []
 
 class StreamingWebScreen(WebScreen):
+	EVENT_START = 0
+	EVENT_END = 1
+
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from Components.Sources.StreamService import StreamService
 		self["StreamService"] = StreamService(self.session.nav)
-		streamingScreens.append(self)
 		self.screenIndex = len(streamingScreens) - 1
+		self.clientIP = request.getAllHeaders().get('x-forwarded-for', request.getClientIP())
+		self.onClose.append(boundFunction(self.stateChanged, self.EVENT_END))
+		streamingScreens.append(self)
+		self.stateChanged(StreamingWebScreen.EVENT_START)
+
+	def stateChanged(self, event):
+		for f in streamingEvents:
+			f(event, self)
 
 	def getRecordService(self):
 		if self.has_key("StreamService"):
@@ -356,19 +374,33 @@ class ServicePlayableWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from WebComponents.Sources.ServicePlayable import ServicePlayable
-		
+
 		self["ServicePlayable"] = ServicePlayable(session, type=ServicePlayable.SINGLE)
 
 class ServiceListPlayableWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from WebComponents.Sources.ServicePlayable import ServicePlayable
-		
+
 		self["ServiceListPlayable"] = ServicePlayable(session, type=ServicePlayable.BOUQUET)
 
 class SleepTimerWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		
-		from WebComponents.Sources.SleepTimer import SleepTimer		
+
+		from WebComponents.Sources.SleepTimer import SleepTimer
 		self["SleepTimer"] = SleepTimer(session)
+
+class TPMWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+
+		from WebComponents.Sources.TPMChallenge import TPMChallenge
+		self["TPM"] = TPMChallenge()
+
+class ExternalWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+
+		from WebComponents.Sources.External import External
+		self["External"] = External()

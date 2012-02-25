@@ -3,7 +3,7 @@ from Components.config import config
 import time
 
 PLUGIN_BASE = "KiddyTimer"
-PLUGIN_VERSION = "1.0d"
+PLUGIN_VERSION = "1.2"
 
 DAYNAMES= (_("Sunday"),
           _("Monday"),

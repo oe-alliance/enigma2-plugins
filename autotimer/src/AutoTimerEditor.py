@@ -52,6 +52,13 @@ weekdays = [
 	("weekday", _("Weekday"))
 ]
 
+try:
+	from Plugins.SystemPlugins.vps import Vps
+except ImportError as ie:
+	hasVps = False
+else:
+	hasVps = True
+
 class ExtendedConfigText(ConfigText):
 	def __init__(self, default = "", fixed_size = True, visible_width = False):
 		ConfigText.__init__(self, default = default, fixed_size = fixed_size, visible_width = visible_width)
@@ -177,7 +184,7 @@ class AutoTimerEditorBase:
 		self.encoding = NoSave(ConfigSelection(choices = selection, default = default))
 
 		# ...
-		self.searchType = NoSave(ConfigSelection(choices = [("partial", _("partial match")), ("exact", _("exact match"))], default = timer.searchType))
+		self.searchType = NoSave(ConfigSelection(choices = [("partial", _("partial match")), ("exact", _("exact match")), ("description", _("description match"))], default = timer.searchType))
 		self.searchCase = NoSave(ConfigSelection(choices = [("sensitive", _("case-sensitive search")), ("insensitive", _("case-insensitive search"))], default = timer.searchCase))
 
 		# Alternatives override
@@ -185,6 +192,7 @@ class AutoTimerEditorBase:
 
 		# Justplay
 		self.justplay = NoSave(ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)]))
+		self.setEndtime = NoSave(ConfigYesNo(default=timer.setEndtime))
 
 		# Timespan
 		now = [x for x in localtime()]
@@ -308,8 +316,18 @@ class AutoTimerEditorBase:
 				("0", _("No")),
 				("1", _("On same service")),
 				("2", _("On any service")),
+				("3", _("Any service/recording")),
 			],
 			default = str(timer.getAvoidDuplicateDescription())
+		))
+
+		# Search for Duplicate Desciption in...
+		self.searchForDuplicateDescription = NoSave(ConfigSelection([
+				("0", _("Title")),
+				("1", _("Title and Short description")),
+				("2", _("Title and all descriptions")),
+			],
+		    default = str(timer.searchForDuplicateDescription)
 		))
 
 		# Custom Location
@@ -330,6 +348,10 @@ class AutoTimerEditorBase:
 		# Tags
 		self.timerentry_tags = timer.tags
 		self.tags = NoSave(ConfigSelection(choices = [len(self.timerentry_tags) == 0 and _("None") or ' '.join(self.timerentry_tags)]))
+
+		# Vps
+		self.vps_enabled = NoSave(ConfigYesNo(default = timer.vps_enabled))
+		self.vps_overwrite = NoSave(ConfigYesNo(default = timer.vps_overwrite))
 
 	def pathSelected(self, res):
 		if res is not None:
@@ -390,6 +412,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.onChangedEntry = []
 
 		# We might need to change shown items, so add some notifiers
+		self.justplay.addNotifier(self.reloadList, initial_call = False)
 		self.timespan.addNotifier(self.reloadList, initial_call = False)
 		self.timeframe.addNotifier(self.reloadList, initial_call = False)
 		self.offset.addNotifier(self.reloadList, initial_call = False)
@@ -397,7 +420,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.afterevent.addNotifier(self.reloadList, initial_call = False)
 		self.afterevent_timespan.addNotifier(self.reloadList, initial_call = False)
 		self.counter.addNotifier(self.reloadList, initial_call = False)
+		self.avoidDuplicateDescription.addNotifier(self.reloadList, initial_call = False)
 		self.useDestination.addNotifier(self.reloadList, initial_call = False)
+		self.vps_enabled.addNotifier(self.reloadList, initial_call = False)
 
 		self.refresh()
 		self.initHelpTexts()
@@ -452,7 +477,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
 		if cur:
-			self["help"].text = self.helpDict[cur[1]]
+			self["help"].text = self.helpDict.get(cur[1], "")
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -476,9 +501,10 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.name: _("This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."),
 			self.match: _("This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."),
 			self.encoding: _("Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."),
-			self.searchType: _("Select \"exact match\" to enforce \"Match title\" to match exactly or \"partial match\" if you only want to search for a part of the event title."),
+			self.searchType: _("Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"),
 			self.searchCase: _("Select whether or not you want to enforce case correctness."),
 			self.justplay: _("Add zap timer instead of record timer?"),
+			self.setEndtime: _("Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."),
 			self.overrideAlternatives: _("With this option enabled the channel to record on can be changed to a alternative service it is restricted to."),
 			self.timespan: _("Should this AutoTimer be restricted to a timespan?"),
 			self.timespanbegin: _("Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"),
@@ -490,15 +516,16 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.offsetbegin: _("Time in minutes to prepend to recording."),
 			self.offsetend: _("Time in minutes to append to recording."),
 			self.duration: _("Should this AutoTimer only match up to a certain event duration?"),
-			self.durationlength: _("Maximum event duration to match. If an event is longer than this ammount of time (without offset) it won't be matched."),
+			self.durationlength: _("Maximum event duration to match. If an event is longer than this amount of time (without offset) it won't be matched."),
 			self.afterevent: _("Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."),
 			self.afterevent_timespan: _("Restrict \"after event\" to a certain timespan?"),
 			self.afterevent_timespanbegin: _("Lower bound of timespan."),
 			self.afterevent_timespanend: _("Upper bound of timespan."),
-			self.counter: _("With this option you can restrict the AutoTimer to a certain ammount of scheduled recordings. Set this to 0 to disable this functionality."),
+			self.counter: _("With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. Set this to 0 to disable this functionality."),
 			self.counterLeft: _("Number of scheduled recordings left."),
 			self.counterFormatString: _("The counter can automatically be reset to the limit at certain intervals."),
 			self.avoidDuplicateDescription: _("When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."),
+			self.searchForDuplicateDescription: _("Defines where to search for duplicates (only title, short description or even extended description)"),
 			self.useDestination: _("Should timers created by this AutoTimer be recorded to a custom location?"),
 			self.destination: _("Select the location to save the recording to."),
 			self.tags: _("Tags the Timer/Recording will have."),
@@ -519,6 +546,10 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			getConfigListEntry(_("Search type"), self.searchType),
 			getConfigListEntry(_("Search strictness"), self.searchCase),
 			getConfigListEntry(_("Timer type"), self.justplay),
+		))
+		if self.justplay.value == "zap":
+			list.append(getConfigListEntry(_("Set End Time"), self.setEndtime))
+		list.extend((
 			getConfigListEntry(_("Override found with alternative service"), self.overrideAlternatives),
 			getConfigListEntry(_("Only match during timespan"), self.timespan)
 		))
@@ -572,10 +603,13 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		# Only allow setting matchLeft when counting hits
 		if self.counter.value:
 			if not self.editingDefaults:
-				list.append(getConfigListEntry(_("Ammount of recordings left"), self.counterLeft))
+				list.append(getConfigListEntry(_("Amount of recordings left"), self.counterLeft))
 			list.append(getConfigListEntry(_("Reset count"), self.counterFormatString))
 
 		list.append(getConfigListEntry(_("Require description to be unique"), self.avoidDuplicateDescription))
+
+		if int(self.avoidDuplicateDescription.value) > 0:
+			list.append(getConfigListEntry(_("Check for uniqueness in"), self.searchForDuplicateDescription))
 
 		# We always add this option though its expert only in enigma2
 		list.append(getConfigListEntry(_("Use a custom location"), self.useDestination))
@@ -583,6 +617,11 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			list.append(getConfigListEntry(_("Custom location"), self.destination))
 
 		list.append(getConfigListEntry(_("Tags"), self.tags))
+
+		if hasVps:
+			list.append(getConfigListEntry(_("Activate VPS"), self.vps_enabled))
+			if self.vps_enabled.value:
+				list.append(getConfigListEntry(_("Control recording completely by service"), self.vps_overwrite))
 
 		self.list = list
 
@@ -714,6 +753,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Justplay
 		self.timer.justplay = self.justplay.value == "zap"
+		self.timer.setEndtime = self.setEndtime.value
 
 		# Timespan
 		if self.timespan.value:
@@ -794,6 +834,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.matchFormatString = ''
 
 		self.timer.avoidDuplicateDescription = int(self.avoidDuplicateDescription.value)
+		self.timer.searchForDuplicateDescription = int(self.searchForDuplicateDescription.value)
 
 		if self.useDestination.value:
 			self.timer.destination = self.destination.value
@@ -801,6 +842,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.destination = None
 
 		self.timer.tags = self.timerentry_tags
+
+		self.timer.vps_enabled = self.vps_enabled.value
+		self.timer.vps_overwrite = self.vps_overwrite.value
 
 		# Close
 		self.close(self.timer)
@@ -1121,7 +1165,8 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		return SetupSummary
 
 	def remove(self):
-		if self["config"].getCurrentIndex() != 0:
+		idx = self["config"].getCurrentIndex()
+		if idx and idx > 1:
 			list = self["config"].getList()
 			list.remove(self["config"].getCurrent())
 			self["config"].setList(list)
@@ -1189,15 +1234,16 @@ def addAutotimerFromSearchString(session, match):
 		autotimer = AutoTimer()
 		autotimer.readXml()
 
+	newTimer = autotimer.defaultTimer.clone()
+	newTimer.id = autotimer.getUniqueId()
+	newTimer.name = match
+	newTimer.match = ''
+	newTimer.enabled = True
+
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		preferredAutoTimerComponent(
-			autotimer.getUniqueId(),
-			match,
-			'',		# Match
-			True	# Enabled
-		),
+		newTimer,
 		match,		# Proposed Match
 		None,		# Proposed Begin
 		None,		# Proposed End
@@ -1244,15 +1290,16 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 
 	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
 
+	newTimer = autotimer.defaultTimer.clone()
+	newTimer.id = autotimer.getUniqueId()
+	newTimer.name = name
+	newTimer.match = ''
+	newTimer.enabled = True
+
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		preferredAutoTimerComponent(
-			autotimer.getUniqueId(),
-			name,
-			'',		# Match
-			True	# Enabled
-		),
+		newTimer,
 		match,		# Proposed Match
 		begin,		# Proposed Begin
 		end,		# Proposed End
@@ -1304,17 +1351,18 @@ def addAutotimerFromService(session, service = None):
 	tags = info.getInfoString(service, iServiceInformation.sTags)
 	tags = tags and tags.split(' ') or []
 
+	newTimer = autotimer.defaultTimer.clone()
+	newTimer.id = autotimer.getUniqueId()
+	newTimer.name = name
+	newTimer.match = ''
+	newTimer.enabled = True
+
 	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
 
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		preferredAutoTimerComponent(
-			autotimer.getUniqueId(),
-			name,
-			'',		# Match
-			True	# Enabled
-		),
+		newTimer,
 		match,		# Proposed Match
 		begin,		# Proposed Begin
 		end,		# Proposed End
@@ -1335,17 +1383,11 @@ def importerCallback(ret):
 			AutoTimerEditor,
 			ret
 		)
-	else:
-		# Remove instance if not running in background
-		if not config.plugins.autotimer.autopoll.value:
-			from plugin import autotimer
-			autotimer = None
 
 def editorCallback(ret):
 	if ret:
 		from plugin import autotimer
 
-		# Create instance if needed (should have been created by addAutotimerFrom* above though)
 		if autotimer is None:
 			from AutoTimer import AutoTimer
 			autotimer = AutoTimer()
@@ -1355,8 +1397,4 @@ def editorCallback(ret):
 
 		# Save modified xml
 		autotimer.writeXml()
-
-	# Remove instance if not running in background
-	if not config.plugins.autotimer.autopoll.value:
-		autotimer = None
 

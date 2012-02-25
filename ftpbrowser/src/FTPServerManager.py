@@ -5,7 +5,7 @@ from . import _
 from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from NTIVirtualKeyBoard import NTIVirtualKeyBoard
+from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
 # GUI (Summary)
 from Screens.Setup import SetupSummary
@@ -20,7 +20,10 @@ from Components.config import config, ConfigInteger, ConfigSubsection, \
 		ConfigText, ConfigPassword, ConfigYesNo, getConfigListEntry
 
 # For new and improved _parse
-from urlparse import urlparse, urlunparse
+try:
+	from urlparse import urlparse, urlunparse
+except ImportError as ie:
+	from urllib.parse import urlparse, urlunparse
 
 def _parse(url, defaultPort = None):
 	url = url.strip()

@@ -10,6 +10,9 @@ from enigma import eServiceReference, eServiceCenter
 # To get preferred component
 from Components.config import config
 
+# Default encoding
+from Components.Language import language
+
 class AutoTimerComponent(object):
 	"""AutoTimer Component which also handles validity checks"""
 
@@ -43,12 +46,14 @@ class AutoTimerComponent(object):
 	"""
 	 Keeps init small and helps setting many values at once
 	"""
-	def setValues(self, name, match, enabled, timespan = None, services = None, offset = None, \
-			afterevent = [], exclude = None, maxduration = None, destination = None, \
-			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
-			lastBegin = 0, justplay = False, avoidDuplicateDescription = 0, bouquets = None, \
-			tags = None, encoding = 'UTF-8', searchType = "partial", searchCase = "insensitive", \
-			overrideAlternatives = False, timeframe = None):
+	def setValues(self, name, match, enabled, timespan=None, services=None, \
+			offset=None, afterevent=[], exclude=None, maxduration=None, \
+			destination=None, include=None, matchCount=0, matchLeft=0, \
+			matchLimit='', matchFormatString='', lastBegin=0, justplay=False, \
+			avoidDuplicateDescription=0, searchForDuplicateDescription=2, bouquets=None, \
+			tags=None, encoding=None, searchType="partial", searchCase="insensitive", \
+			overrideAlternatives=False, timeframe=None, vps_enabled=False, \
+			vps_overwrite=False, setEndtime=False):
 		self.name = name
 		self.match = match
 		self.enabled = enabled
@@ -67,13 +72,17 @@ class AutoTimerComponent(object):
 		self.lastBegin = lastBegin
 		self.justplay = justplay
 		self.avoidDuplicateDescription = avoidDuplicateDescription
+		self.searchForDuplicateDescription = searchForDuplicateDescription
 		self.bouquets = bouquets
 		self.tags = tags or []
-		self.encoding = encoding
+		self.encoding = encoding or getDefaultEncoding()
 		self.searchType = searchType
 		self.searchCase = searchCase
 		self.overrideAlternatives = overrideAlternatives
 		self.timeframe = timeframe
+		self.vps_enabled = vps_enabled
+		self.vps_overwrite = vps_overwrite
+		self.setEndtime = setEndtime
 
 ### Attributes / Properties
 
@@ -100,8 +109,12 @@ class AutoTimerComponent(object):
 	bouquets = property(lambda self: self._bouquets , setBouquets)
 
 	def setEncoding(self, encoding):
-		if encoding:
+		if encoding == '(null)':
+			self._encoding = getDefaultEncoding()
+		elif encoding:
 			self._encoding = encoding
+		elif not self._encoding:
+			self._encoding = getDefaultEncoding()
 
 	encoding = property(lambda self: self._encoding, setEncoding)
 
@@ -138,7 +151,7 @@ class AutoTimerComponent(object):
 	searchCase = property(lambda self: self._searchCase, setSearchCase)
 
 	def setSearchType(self, type):
-		assert type in ("exact", "partial"), "search type must be exact or partial"
+		assert type in ("exact", "partial", "description"), "search type must be exact, partial or description"
 		self._searchType = type
 
 	searchType = property(lambda self: self._searchType, setSearchType)
@@ -337,7 +350,7 @@ class AutoTimerComponent(object):
 		return length > self.maxduration
 
 	def checkExcluded(self, title, short, extended, dayofweek):
-		if self.exclude[3]:
+		if dayofweek and self.exclude[3]:
 			list = self.exclude[3]
 			if dayofweek in list:
 				return True
@@ -364,7 +377,7 @@ class AutoTimerComponent(object):
 		return self.checkIncluded(title, short, extended, dayofweek)
 
 	def checkIncluded(self, title, short, extended, dayofweek):
-		if self.include[3]:
+		if dayofweek and self.include[3]:
 			list = self.include[3][:]
 			if "weekend" in list:
 				list.extend(("5", "6"))
@@ -505,6 +518,7 @@ class AutoTimerComponent(object):
 			lastBegin = self.lastBegin,
 			justplay = self.justplay,
 			avoidDuplicateDescription = self.avoidDuplicateDescription,
+			searchForDuplicateDescription = self.searchForDuplicateDescription,
 			bouquets = self.bouquets,
 			tags = self.tags,
 			encoding = self.encoding,
@@ -512,6 +526,8 @@ class AutoTimerComponent(object):
 			searchCase = self.searchCase,
 			overrideAlternatives = self.overrideAlternatives,
 			timeframe = self.timeframe,
+			vps_enabled = self.vps_enabled,
+			vps_overwrite = self.vps_overwrite,
 		)
 
 	def __deepcopy__(self, memo):
@@ -535,13 +551,16 @@ class AutoTimerComponent(object):
 			lastBegin = self.lastBegin,
 			justplay = self.justplay,
 			avoidDuplicateDescription = self.avoidDuplicateDescription,
+			searchForDuplicateDescription = self.searchForDuplicateDescription,
 			bouquets = self.bouquets[:],
 			tags = self.tags[:],
 			encoding = self.encoding,
 			searchType = self.searchType,
 			searchCase = self.searchCase,
 			overrideAlternatives = self.overrideAlternatives,
-			timeframe = self.timeframe
+			timeframe = self.timeframe,
+			vps_enabled = self.vps_enabled,
+			vps_overwrite = self.vps_overwrite,
 		)
 
 	def __eq__(self, other):
@@ -567,34 +586,37 @@ class AutoTimerComponent(object):
 					str(self.encoding),
 					str(self.searchCase),
 					str(self.searchType),
-			 		str(self.timespan),
-			 		str(self.services),
-			 		str(self.offset),
-			 		str(self.afterevent),
-			 		str(([x.pattern for x in self.exclude[0]],
+					str(self.timespan),
+					str(self.services),
+					str(self.offset),
+					str(self.afterevent),
+					str(([x.pattern for x in self.exclude[0]],
 						[x.pattern for x in self.exclude[1]],
 						[x.pattern for x in self.exclude[2]],
 						self.exclude[3]
 					)),
-			 		str(([x.pattern for x in self.include[0]],
+					str(([x.pattern for x in self.include[0]],
 						[x.pattern for x in self.include[1]],
 						[x.pattern for x in self.include[2]],
 						self.include[3]
 					)),
-			 		str(self.maxduration),
-			 		str(self.enabled),
-			 		str(self.destination),
-			 		str(self.matchCount),
-			 		str(self.matchLeft),
-			 		str(self.matchLimit),
-			 		str(self.matchFormatString),
-			 		str(self.lastBegin),
-			 		str(self.justplay),
-			 		str(self.avoidDuplicateDescription),
+					str(self.maxduration),
+					str(self.enabled),
+					str(self.destination),
+					str(self.matchCount),
+					str(self.matchLeft),
+					str(self.matchLimit),
+					str(self.matchFormatString),
+					str(self.lastBegin),
+					str(self.justplay),
+					str(self.avoidDuplicateDescription),
+					str(self.searchForDuplicateDescription),
 					str(self.bouquets),
 					str(self.tags),
 					str(self.overrideAlternatives),
 					str(self.timeframe),
+					str(self.vps_enabled),
+					str(self.vps_overwrite),
 			 )),
 			 ")>"
 		))
@@ -687,6 +709,11 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 							else:
 								break
 		return override_service
+
+def getDefaultEncoding():
+	if 'de' in language.getLanguage():
+		return 'ISO8859-15'
+	return 'UTF-8'
 
 # very basic factory ;-)
 preferredAutoTimerComponent = lambda *args, **kwargs: AutoTimerFastscanComponent(*args, **kwargs) if config.plugins.autotimer.fastscan.value else AutoTimerComponent(*args, **kwargs)

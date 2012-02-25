@@ -26,9 +26,9 @@ from os import unlink
 
 class PictureView(Screen):
 	skin = """
-		<screen position="0,0" size="720,576" flags="wfNoBorder" title="UWZ" >
+		<screen position="center,center" size="720,576" flags="wfNoBorder" title="UWZ" >
 			<eLabel position="0,0" zPosition="1" size="720,576" backgroundColor="black" />
-			<ePixmap position="635,540" zPosition="2" size="36,20" pixmap="skin_default/buttons/key_info.png" alphatest="on" />
+			<ePixmap position="655,540" zPosition="2" size="36,20" pixmap="skin_default/buttons/key_info.png" alphatest="on" />
 			<widget name="picture" position="80,10" zPosition="2" size="550,550" />
 		</screen>"""
 
@@ -68,10 +68,12 @@ class PictureView(Screen):
 
 class HelpPictureView(Screen):
 	skin = """
-		<screen position="25,200" size="670,290" title="Warnstufen" >
-			<eLabel position="0,0" zPosition="1" size="670,290" backgroundColor="black" />
-			<ePixmap position="320,260" zPosition="2" size="36,20" pixmap="skin_default/arrowdown.png" alphatest="on" />
-			<widget name="picture" position="-10,20" zPosition="2" size="690,225" />
+		<screen position="center,center" size="700,320" title="Warnstufen" >
+			<eLabel position="0,0" zPosition="1" size="700,320" backgroundColor="black" />
+			<ePixmap position="80,270" zPosition="2" size="45,45" pixmap="skin_default/vkey_left.png" alphatest="on" />
+			<ePixmap position="328,270" zPosition="2" size="45,45" pixmap="skin_default/vkey_esc.png" alphatest="on" />
+			<ePixmap position="575,270" zPosition="2" size="45,45" pixmap="skin_default/vkey_right.png" alphatest="on" />
+			<widget name="picture" position="5,20" zPosition="2" size="690,225" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -128,7 +130,7 @@ class HelpPictureView(Screen):
 
 class UnwetterMain(Screen):
 	skin = """
-		<screen position="110,83" size="530,430" title="Unwetterzentrale" >
+		<screen position="center,center" size="530,430" title="Unwetterzentrale" >
 			<widget name="hmenu" position="5,0" zPosition="1" size="530,220" scrollbarMode="showOnDemand" />
 			<widget name="thumbnail" position="185,250" zPosition="2" size="140,150" />
 			<widget name="thumbland" position="435,390" zPosition="2" size="90,40" />
@@ -174,14 +176,16 @@ class UnwetterMain(Screen):
 		output= util.unescape(output,trans)
 
 		if self.land == "de":
-			startpos = output.find('<!-- Anfang Navigation -->')
-			endpos = output.find('<!-- Ende Navigation -->')
+			startpos = output.find('<div id="navigation">')
+			endpos = output.find('<a class="section-link" title="FAQ"', startpos)
 			bereich = output[startpos:endpos]
 			a = findall(r'href=(?P<text>.*?)</a>',bereich)
-			for x in a[1:16]:
+			for x in a:
 				x = x.replace('">',"#").replace('"',"").split('#')
 				if not len(x) > 1:
 					break
+				if x[0] == "index.html":
+					continue
 				name = x[1]
 				link = self.baseurl + x[0]
 				self.menueintrag.append(name)
@@ -190,12 +194,12 @@ class UnwetterMain(Screen):
 			self.menueintrag.append("Lagebericht")
 			self.link.append(self.weatherreporturl)
 
-			startpos = output.find('<table class="selection_box report">')
-			endpos = output.find('</table>', startpos)
+			startpos = output.find('<div id="select_dropdownprovinces"')
+			endpos = output.find('</div>', startpos)
 			bereich = output[startpos:endpos]
 			a = findall(r'<a href=(?P<text>.*?)</a>',bereich)
 			for x in a[1:13]:
-				x = x.replace('">',"#").replace('"',"").replace(' style=font-weight:;',"")
+				x = x.replace('">',"#").replace('"',"")
 				if x != '#&nbsp;':
 						x = x.split('#')
 						if not len(x) > 1:
@@ -304,13 +308,13 @@ class UnwetterMain(Screen):
 		self.loadinginprogress = False
 		if self.land == "de":
 			startpos = output.find('<!-- Anfang msg_Box Content -->')
-			endpos = output.find('<!-- Ende msg_Box Content -->')
+			endpos = output.find('<!-- Ende msg_Box Content -->', startpos)
 			bereich = output[startpos:endpos]
 			picurl = search(r'<img src="(?P<text>.*?)" width=',bereich)
 			picurl = self.baseurl + picurl.group(1)
 		else:
-			picurl = search(r'<img class="map_big" src="(?P<url>.*?)" lang=', output)
-			picurl = picurl.group(1).replace('&amp;','&')
+			picurl = search(r'<img class="map mapper" src="(?P<url>.*?)" lang=', output)
+			picurl = self.baseurl + picurl.group(1).replace('&amp;','&')
 		self.downloadPic(picurl)
 
 	def getPic(self,output):
@@ -327,20 +331,21 @@ class UnwetterMain(Screen):
 			startpos = output.find('<!-- Anfang msg_Box Content -->')
 			endpos = output.find('<!-- Ende msg_Box Content -->')
 			bereich = output[startpos:endpos]
+			bereich = bereich.replace('<strong>', '\n')
 		else:
-			startpos = output.find('<div class="content">')
+			startpos = output.find('<div class="content"')
 			endpos = output.find('</div>', startpos)
 			bereich = output[startpos:endpos]
-			bereich = sub('<br />',"\n",bereich)
 
+		bereich = sub('<br\s*/?>',"\n",bereich)
 		bereich = sub('<[^>]*>',"",bereich)
 		bereich = sub('Fronten- und Isobarenkarte.*',"",bereich)
 		bereich = bereich.strip()
-		bereich = sub("\n\s*\n*", "\n\n", bereich)
+		bereich = sub("\n[\s\n]+", "\n\n", bereich)
 
 		f = open(self.reportfile, "w")
 		f.write("%s" % bereich)
-		f.close
+		f.close()
 		self.session.open(Console,_("Warnlagebericht"),["cat %s" % self.reportfile])
 
 	def downloadError(self,output):
@@ -356,9 +361,14 @@ class UnwetterMain(Screen):
 		getPage(url).addCallback(self.getPicUrl).addErrback(self.downloadError)
 
 	def downloadPic(self,picurl):
+		headers = {}
 		self.loadinginprogress = True
 #		self["statuslabel"].setText("Lade Bild: %s" % picurl)
-		getPage(picurl).addCallback(self.getPic).addErrback(self.downloadError)
+		if self.land == "a":
+			c = self["hmenu"].getCurrent()
+			x = self.menueintrag.index(c)
+			headers["Referer"] = self.link[x]
+		getPage(picurl, headers=headers).addCallback(self.getPic).addErrback(self.downloadError)
 
 	def downloadWeatherReport(self):
 		self.loadinginprogress = True
@@ -380,7 +390,7 @@ class UnwetterMain(Screen):
 		if self.land == "de":
 			self.land = "a"
 			self.baseurl = "http://www.uwz.at/"
-			self.menuurl = self.baseurl + "index.php"
+			self.menuurl = self.baseurl + "karte/alle_warnungen"
 			self.weatherreporturl = self.baseurl + "at/de/lagebericht/aktuelle-wetterlage"
 		else:
 			self.land = "de"

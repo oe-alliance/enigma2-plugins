@@ -1,0 +1,114 @@
+html,body {
+	font-family: Tahoma, Sans-Serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #fff;
+	background: #555;
+	margin: 5px;
+	padding: 5px;
+}
+
+th {
+	font-size: 14px;
+}
+
+a,a:visited,a:active {
+	color: #485052;
+	text-decoration: none;
+}
+
+.mEpgCell {
+	margin: 0px;
+	padding: 0px;
+}
+
+.mEpgItem {
+	padding: 0px;
+	background: #FFF;
+	border-top: 1px solid #485052;
+	border-right: 1px solid #485052;
+	display: block;
+	overflow: hidden;
+	margin-bottom: -1px;
+}
+
+a.mEpgItem:hover {
+	background: #DDD;
+}
+
+#wrap {
+	width: 100%;
+	display: block;
+	position: relative;
+}
+
+#mEpgDetail {
+	position: fixed;
+	top: 0;
+	left: 2%;
+	width: 96%;
+	z-index: 9999;
+	background: #FFF;
+	color: #485052;
+	display: table-row;
+	border: 1px solid #000;
+	opacity: 0.95;
+}
+
+#mEpgDetail>table {
+	width: 100%;
+}
+
+#mEpgDetail * tr {
+	background-color: #DDDDDD;
+	width: 100%;
+}
+
+#mEpg {
+	height: 100%;
+}
+
+#mEpg>table {
+	table-layout: fixed;
+	height: 98%"
+}
+
+#mEpg>table>thead,#mEpg>table>tbody {
+	display: block;
+}
+
+#mEpg * tr {
+	vertical-align: top
+}
+
+#mEpg * th,#mEpg * td {
+	width: 175px;
+	min-width: 175px;
+}
+
+.mEpgDate {
+	width: 150px;
+}
+
+.closeContainer {
+	width: 30px;
+}
+
+.close {
+	background: #F00;
+	color: #FFF;
+	display: block
+}
+
+a.close,a.close:active,a.close.visited {
+	color: #FFF;
+	text-decoration: none;
+}
+
+a.close:hover {
+	text-decoration: underline;
+}
+
+.cBlack {
+	color: #000;
+}

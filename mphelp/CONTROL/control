@@ -1,0 +1,6 @@
+Package: enigma2-plugin-systemplugins-mphelp
+Version: 0.1.0-20110628-r0
+Description: reusable help component
+Maintainer: Moritz Venn <moritz.venn@freaque.net>
+Homepage: http://www.ritzmo.de
+Depends: enigma2 (>= 2.6git20090120), python-xml

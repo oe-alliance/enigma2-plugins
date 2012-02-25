@@ -1,15 +1,28 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
+
 # for localized messages
 from . import _
 
-from AutoTimerComponent import preferredAutoTimerComponent
+from AutoTimerComponent import preferredAutoTimerComponent, getDefaultEncoding
 from RecordTimer import AFTEREVENT
 from Tools.XMLTools import stringToXML
 from ServiceReference import ServiceReference
 
 from enigma import eServiceReference
 
-CURRENT_CONFIG_VERSION = "5"
+"""
+Configuration Version.
+To be bumped for any modification of the config format.
+Incompatible changes (e.g. different parameter names) require a compatible
+parser to be implemented as for example parseConfigOld which is capable of
+parsing every config format before version 5.
+Previously this variable was only bumped for incompatible changes, but as this
+is the only reliable way to make remote tools aware of our capabilities without
+much overhead (read: a special api just for this) we chose to change the meaning
+of the version attribue.
+"""
+CURRENT_CONFIG_VERSION = "7"
 
 def getValue(definitions, default):
 	# Initialize Output
@@ -29,7 +42,13 @@ def getValue(definitions, default):
 	return ret.strip() or default
 
 def parseConfig(configuration, list, version = None, uniqueTimerId = 0, defaultTimer = None):
-	if version != CURRENT_CONFIG_VERSION:
+	try:
+		intVersion = int(version)
+	except ValueError:
+		print('[AutoTimer] Config version "%s" is not a valid integer, assuming old version' % version)
+		intVersion = -1
+
+	if intVersion < 5:
 		parseConfigOld(configuration, list, uniqueTimerId)
 		return
 
@@ -55,13 +74,13 @@ def parseEntry(element, baseTimer, defaults = False):
 		# Read out match
 		baseTimer.match = element.get("match", "").encode("UTF-8")
 		if not baseTimer.match:
-			print '[AutoTimer] Erroneous config is missing attribute "match", skipping entry'
+			print('[AutoTimer] Erroneous config is missing attribute "match", skipping entry')
 			return False
 
 		# Read out name
 		baseTimer.name = element.get("name", "").encode("UTF-8")
 		if not baseTimer.name:
-			print '[AutoTimer] Timer is missing attribute "name", defaulting to match'
+			print('[AutoTimer] Timer is missing attribute "name", defaulting to match')
 			baseTimer.name = baseTimer.match
 
 		# Read out enabled
@@ -71,7 +90,7 @@ def parseEntry(element, baseTimer, defaults = False):
 		elif enabled == "yes":
 			baseTimer.enabled = True
 		else:
-			print '[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', disabling'
+			print('[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', disabling')
 			baseTimer.enabled = False
 
 		# Read timeframe
@@ -79,6 +98,13 @@ def parseEntry(element, baseTimer, defaults = False):
 		after = element.get("after")
 		if before and after:
 			baseTimer.timeframe = (int(after), int(before))
+
+		# VPS-Plugin settings
+		vps_enabled = element.get("vps_enabled", "no")
+		vps_overwrite = element.get("vps_overwrite", "no")
+		baseTimer.vps_enabled = True if vps_enabled == "yes" else False
+		baseTimer.vps_overwrite = True if vps_overwrite == "yes" else False
+		del vps_enabled, vps_overwrite
 
 	# Read out encoding (won't change if no value is set)
 	baseTimer.encoding = element.get("encoding")
@@ -128,9 +154,11 @@ def parseEntry(element, baseTimer, defaults = False):
 
 	# Read out justplay
 	baseTimer.justplay = int(element.get("justplay", 0))
+	baseTimer.setEndtime = int(element.get("setEndtime", 1))
 
 	# Read out avoidDuplicateDescription
 	baseTimer.avoidDuplicateDescription = int(element.get("avoidDuplicateDescription", 0))
+	baseTimer.searchForDuplicateDescription = int(element.get("searchForDuplicateDescription", 2))
 
 	# Read out allowed services
 	l = element.findall("serviceref")
@@ -176,10 +204,10 @@ def parseEntry(element, baseTimer, defaults = False):
 		for afterevent in l:
 			value = afterevent.text
 
-			if idx.has_key(value):
+			if value in idx:
 				value = idx[value]
 			else:
-				print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
+				print('[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition')
 				continue
 
 			start = afterevent.get("from")
@@ -203,7 +231,7 @@ def parseEntry(element, baseTimer, defaults = False):
 			if not (value and where):
 				continue
 
-			if idx.has_key(where):
+			if where in idx:
 				excludes[idx[where]].append(value.encode("UTF-8"))
 		baseTimer.exclude = excludes
 
@@ -217,7 +245,7 @@ def parseEntry(element, baseTimer, defaults = False):
 			if not (value and where):
 				continue
 
-			if idx.has_key(where):
+			if where in idx:
 				includes[idx[where]].append(value.encode("UTF-8"))
 		baseTimer.include = includes
 
@@ -236,7 +264,7 @@ def parseEntry(element, baseTimer, defaults = False):
 	return True
 
 def parseConfigOld(configuration, list, uniqueTimerId = 0):
-	print "[AutoTimer] Trying to parse old config"
+	print("[AutoTimer] Trying to parse old config")
 
 	# Iterate Timers
 	for timer in configuration.findall("timer"):
@@ -253,7 +281,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			name = getValue(timer.findall("name"), "").encode("UTF-8")
 
 		if not name:
-			print '[AutoTimer] Erroneous config is missing attribute "name", skipping entry'
+			print('[AutoTimer] Erroneous config is missing attribute "name", skipping entry')
 			continue
 
 		# Read out match (V3+)
@@ -262,7 +290,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			# Read out match
 			match = match.encode("UTF-8")
 			if not match:
-				print '[AutoTimer] Erroneous config contains empty attribute "match", skipping entry'
+				print('[AutoTimer] Erroneous config contains empty attribute "match", skipping entry')
 				continue
 		# V2-
 		else:
@@ -278,7 +306,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			elif enabled == "yes":
 				enabled = True
 			else:
-				print '[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', skipping entry'
+				print('[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', skipping entry')
 				enabled = False
 		# V1
 		else:
@@ -311,7 +339,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 					end = [int(x) for x in end.split(':')]
 					timetuple = (start, end)
 				else:
-					print '[AutoTimer] Erroneous config contains invalid definition of "timespan", ignoring definition'
+					print('[AutoTimer] Erroneous config contains invalid definition of "timespan", ignoring definition')
 					timetuple = None
 			else:
 				timetuple = None
@@ -377,9 +405,13 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 
 		# Read out justplay
 		justplay = int(timer.get("justplay", '0'))
+		setEndtime = int(timer.get("setEndtime", '1'))
 
 		# Read out avoidDuplicateDescription
 		avoidDuplicateDescription = int(timer.get("avoidDuplicateDescription", 0))
+		searchForDuplicateDescription = int(timer.get("searchForDuplicateDescription", 3)) - 1
+		if searchForDuplicateDescription < 0 or searchForDuplicateDescription > 2:
+			searchForDuplicateDescription = 2
 
 		# Read out afterevent (compatible to V* though behaviour for V3- is different as V4+ allows multiple afterevents while the last definication was chosen before)
 		idx = {
@@ -393,10 +425,10 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 		for element in timer.findall("afterevent"):
 			value = element.text
 
-			if idx.has_key(value):
+			if value in idx:
 				value = idx[value]
 			else:
-				print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
+				print('[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition')
 				continue
 
 			start = element.get("from")
@@ -417,7 +449,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			if not (value and where):
 				continue
 
-			if idx.has_key(where):
+			if where in idx:
 				excludes[idx[where]].append(value.encode("UTF-8"))
 
 		# Read out includes (use same idx) (V4+ feature, should not harm V3-)
@@ -428,7 +460,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			if not (value and where):
 				continue
 
-			if idx.has_key(where):
+			if where in idx:
 				includes[idx[where]].append(value.encode("UTF-8"))
 
 		# Read out max length (V4+)
@@ -477,7 +509,9 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				matchFormatString = counterFormat,
 				lastBegin = lastBegin,
 				justplay = justplay,
+				setEndtime = setEndtime,
 				avoidDuplicateDescription = avoidDuplicateDescription,
+				searchForDuplicateDescription = searchForDuplicateDescription,
 				bouquets = bouquets,
 				tags = tags
 		))
@@ -485,65 +519,73 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 def buildConfig(defaultTimer, timers, webif = False):
 	# Generate List in RAM
 	list = ['<?xml version="1.0" ?>\n<autotimer version="', CURRENT_CONFIG_VERSION, '">\n\n']
+	append = list.append
+	extend = list.extend
+	defaultEncoding = getDefaultEncoding()
 
 	# This gets deleted afterwards if we do not have set any defaults
-	list.append(' <defaults')
+	append(' <defaults')
 	if webif:
-		list.extend((' id="', str(defaultTimer.getId()),'"'))
+		extend((' id="', str(defaultTimer.getId()),'"'))
 
 	# Timespan
 	if defaultTimer.hasTimespan():
-		list.extend((' from="', defaultTimer.getTimespanBegin(), '" to="', defaultTimer.getTimespanEnd(), '"'))
+		extend((' from="', defaultTimer.getTimespanBegin(), '" to="', defaultTimer.getTimespanEnd(), '"'))
 
 	# Duration
 	if defaultTimer.hasDuration():
-		list.extend((' maxduration="', str(defaultTimer.getDuration()), '"'))
+		extend((' maxduration="', str(defaultTimer.getDuration()), '"'))
 
 	# Destination
 	if defaultTimer.hasDestination():
-		list.extend((' location="', stringToXML(defaultTimer.destination), '"'))
+		extend((' location="', stringToXML(defaultTimer.destination), '"'))
 
 	# Offset
 	if defaultTimer.hasOffset():
 		if defaultTimer.isOffsetEqual():
-			list.extend((' offset="', str(defaultTimer.getOffsetBegin()), '"'))
+			extend((' offset="', str(defaultTimer.getOffsetBegin()), '"'))
 		else:
-			list.extend((' offset="', str(defaultTimer.getOffsetBegin()), ',', str(defaultTimer.getOffsetEnd()), '"'))
+			extend((' offset="', str(defaultTimer.getOffsetBegin()), ',', str(defaultTimer.getOffsetEnd()), '"'))
 
 	# Counter
 	if defaultTimer.hasCounter():
-		list.extend((' counter="', str(defaultTimer.getCounter()), '"'))
+		extend((' counter="', str(defaultTimer.getCounter()), '"'))
 		if defaultTimer.hasCounterFormatString():
-			list.extend((' counterFormat="', str(defaultTimer.getCounterFormatString()), '"'))
+			extend((' counterFormat="', str(defaultTimer.getCounterFormatString()), '"'))
 
 	# Duplicate Description
 	if defaultTimer.getAvoidDuplicateDescription():
-		list.append(' avoidDuplicateDescription="1" ')
+		extend((' avoidDuplicateDescription="', str(defaultTimer.getAvoidDuplicateDescription()), '"'))
 
+		if defaultTimer.getAvoidDuplicateDescription() > 0:
+			if defaultTimer.searchForDuplicateDescription != 2:
+				extend((' searchForDuplicateDescription="', str(defaultTimer.searchForDuplicateDescription), '"'))
 	# Only display justplay if true
 	if defaultTimer.justplay:
-		list.extend((' justplay="', str(defaultTimer.getJustplay()), '"'))
+		extend((' justplay="', str(defaultTimer.getJustplay()), '"'))
+		if not defaultTimer.setEndtime:
+			append(' setEndtime="0"')
 
 	# Only display encoding if != utf-8
-	if defaultTimer.encoding != 'UTF-8':
-		list.extend((' encoding="', str(defaultTimer.encoding), '"'))
+	if defaultTimer.encoding != defaultEncoding or webif:
+		extend((' encoding="', str(defaultTimer.encoding), '"'))
 
-	# Only display searchType if exact
-	if defaultTimer.searchType == "exact":
-		list.extend((' searchType="', str(defaultTimer.searchType), '"'))
+	# SearchType
+	if defaultTimer.searchType != "partial":
+		extend((' searchType="', str(defaultTimer.searchType), '"'))
 
 	# Only display searchCase if sensitive
 	if defaultTimer.searchCase == "sensitive":
-		list.extend((' searchCase="', str(defaultTimer.searchCase), '"'))
+		extend((' searchCase="', str(defaultTimer.searchCase), '"'))
 
 	# Close still opened defaults tag
-	list.append('>\n')
+	append('>\n')
 
 	if webif:
 		# Services + Bouquets
 		for serviceref in defaultTimer.services + defaultTimer.bouquets:
 			ref = ServiceReference(str(serviceref))
-			list.extend((
+			extend((
 				'  <e2service>\n',
 				'   <e2servicereference>', str(serviceref), '</e2servicereference>\n',
 				'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
@@ -553,14 +595,14 @@ def buildConfig(defaultTimer, timers, webif = False):
 		# Services
 		for serviceref in defaultTimer.services:
 			ref = ServiceReference(str(serviceref))
-			list.extend(('  <serviceref>', serviceref, '</serviceref>',
+			extend(('  <serviceref>', serviceref, '</serviceref>',
 						' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
 			))
 
 		# Bouquets
 		for bouquet in defaultTimer.bouquets:
 			ref = ServiceReference(str(bouquet))
-			list.extend(('  <bouquet>', str(bouquet), '</bouquet>',
+			extend(('  <bouquet>', str(bouquet), '</bouquet>',
 						' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
 			))
 
@@ -574,111 +616,124 @@ def buildConfig(defaultTimer, timers, webif = False):
 		}
 		for afterevent in defaultTimer.afterevent:
 			action, timespan = afterevent
-			list.append('  <afterevent')
+			append('  <afterevent')
 			if timespan[0] is not None:
-				list.append(' from="%02d:%02d" to="%02d:%02d"' % (timespan[0][0], timespan[0][1], timespan[1][0], timespan[1][1]))
-			list.extend(('>', idx[action], '</afterevent>\n'))
+				append(' from="%02d:%02d" to="%02d:%02d"' % (timespan[0][0], timespan[0][1], timespan[1][0], timespan[1][1]))
+			extend(('>', idx[action], '</afterevent>\n'))
 
 	# Excludes
 	for title in defaultTimer.getExcludedTitle():
-		list.extend(('  <exclude where="title">', stringToXML(title), '</exclude>\n'))
+		extend(('  <exclude where="title">', stringToXML(title), '</exclude>\n'))
 	for short in defaultTimer.getExcludedShort():
-		list.extend(('  <exclude where="shortdescription">', stringToXML(short), '</exclude>\n'))
+		extend(('  <exclude where="shortdescription">', stringToXML(short), '</exclude>\n'))
 	for desc in defaultTimer.getExcludedDescription():
-		list.extend(('  <exclude where="description">', stringToXML(desc), '</exclude>\n'))
+		extend(('  <exclude where="description">', stringToXML(desc), '</exclude>\n'))
 	for day in defaultTimer.getExcludedDays():
-		list.extend(('  <exclude where="dayofweek">', stringToXML(day), '</exclude>\n'))
+		extend(('  <exclude where="dayofweek">', stringToXML(day), '</exclude>\n'))
 
 	# Includes
 	for title in defaultTimer.getIncludedTitle():
-		list.extend(('  <include where="title">', stringToXML(title), '</include>\n'))
+		extend(('  <include where="title">', stringToXML(title), '</include>\n'))
 	for short in defaultTimer.getIncludedShort():
-		list.extend(('  <include where="shortdescription">', stringToXML(short), '</include>\n'))
+		extend(('  <include where="shortdescription">', stringToXML(short), '</include>\n'))
 	for desc in defaultTimer.getIncludedDescription():
-		list.extend(('  <include where="description">', stringToXML(desc), '</include>\n'))
+		extend(('  <include where="description">', stringToXML(desc), '</include>\n'))
 	for day in defaultTimer.getIncludedDays():
-		list.extend(('  <include where="dayofweek">', stringToXML(day), '</include>\n'))
+		extend(('  <include where="dayofweek">', stringToXML(day), '</include>\n'))
 
 	# Tags
-	for tag in defaultTimer.tags:
-		list.extend(('  <tag>', stringToXML(tag), '</tag>\n'))
+	if webif and defaultTimer.tags:
+		extend(('  <e2tags>', stringToXML(' '.join(defaultTimer.tags)), '</e2tags>\n'))
+	else:
+		for tag in defaultTimer.tags:
+			extend(('  <tag>', stringToXML(tag), '</tag>\n'))
 
 	# Keep the list clean
 	if len(list) == 5:
 		list.pop() # >
 		list.pop() # <defaults
 	else:
-		list.append(' </defaults>\n\n')
+		append(' </defaults>\n\n')
 
 	# Iterate timers
 	for timer in timers:
 		# Common attributes (match, enabled)
-		list.extend((' <timer name="', stringToXML(timer.name), '" match="', stringToXML(timer.match), '" enabled="', timer.getEnabled(), '"'))
+		extend((' <timer name="', stringToXML(timer.name), '" match="', stringToXML(timer.match), '" enabled="', timer.getEnabled(), '"'))
 		if webif:
-			list.extend((' id="', str(timer.getId()),'"'))
+			extend((' id="', str(timer.getId()),'"'))
 
 		# Timespan
 		if timer.hasTimespan():
-			list.extend((' from="', timer.getTimespanBegin(), '" to="', timer.getTimespanEnd(), '"'))
+			extend((' from="', timer.getTimespanBegin(), '" to="', timer.getTimespanEnd(), '"'))
 
 		# Timeframe
 		if timer.hasTimeframe():
-			list.extend((' after="', str(timer.getTimeframeBegin()), '" before="', str(timer.getTimeframeEnd()), '"'))
+			extend((' after="', str(timer.getTimeframeBegin()), '" before="', str(timer.getTimeframeEnd()), '"'))
 
 		# Duration
 		if timer.hasDuration():
-			list.extend((' maxduration="', str(timer.getDuration()), '"'))
+			extend((' maxduration="', str(timer.getDuration()), '"'))
 
 		# Destination
 		if timer.hasDestination():
-			list.extend((' location="', stringToXML(timer.destination), '"'))
+			extend((' location="', stringToXML(timer.destination), '"'))
 
 		# Offset
 		if timer.hasOffset():
 			if timer.isOffsetEqual():
-				list.extend((' offset="', str(timer.getOffsetBegin()), '"'))
+				extend((' offset="', str(timer.getOffsetBegin()), '"'))
 			else:
-				list.extend((' offset="', str(timer.getOffsetBegin()), ',', str(timer.getOffsetEnd()), '"'))
+				extend((' offset="', str(timer.getOffsetBegin()), ',', str(timer.getOffsetEnd()), '"'))
 
 		# Counter
 		if timer.hasCounter():
-			list.extend((' lastBegin="', str(timer.getLastBegin()), '" counter="', str(timer.getCounter()), '" left="', str(timer.getCounterLeft()) ,'"'))
+			extend((' lastBegin="', str(timer.getLastBegin()), '" counter="', str(timer.getCounter()), '" left="', str(timer.getCounterLeft()) ,'"'))
 			if timer.hasCounterFormatString():
-				list.extend((' lastActivation="', str(timer.getCounterLimit()), '"'))
-				list.extend((' counterFormat="', str(timer.getCounterFormatString()), '"'))
+				extend((' lastActivation="', str(timer.getCounterLimit()), '"'))
+				extend((' counterFormat="', str(timer.getCounterFormatString()), '"'))
 
 		# Duplicate Description
 		if timer.getAvoidDuplicateDescription():
-			list.extend((' avoidDuplicateDescription="', str(timer.getAvoidDuplicateDescription()), '"'))
+			extend((' avoidDuplicateDescription="', str(timer.getAvoidDuplicateDescription()), '"'))
+			if timer.searchForDuplicateDescription != 2:
+				extend((' searchForDuplicateDescription="', str(timer.searchForDuplicateDescription), '"'))
 
 		# Only display justplay if true
 		if timer.justplay:
-			list.extend((' justplay="', str(timer.getJustplay()), '"'))
+			extend((' justplay="', str(timer.getJustplay()), '"'))
+			if not timer.setEndtime:
+				append(' setEndtime="0"')
 
 		# Only display encoding if != utf-8
-		if timer.encoding != 'UTF-8':
-			list.extend((' encoding="', str(timer.encoding), '"'))
+		if timer.encoding != defaultEncoding or webif:
+			extend((' encoding="', str(timer.encoding), '"'))
 
-		# Only display searchType if exact
-		if timer.searchType == "exact":
-			list.extend((' searchType="', str(timer.searchType), '"'))
+		# SearchType
+		if timer.searchType != "partial":
+			extend((' searchType="', str(timer.searchType), '"'))
 
 		# Only display searchCase if sensitive
 		if timer.searchCase == "sensitive":
-			list.extend((' searchCase="', str(timer.searchCase), '"'))
+			extend((' searchCase="', str(timer.searchCase), '"'))
 
 		# Only display overrideAlternatives if true
 		if timer.overrideAlternatives:
-			list.extend((' overrideAlternatives="', str(timer.getOverrideAlternatives()), '"'))
+			extend((' overrideAlternatives="', str(timer.getOverrideAlternatives()), '"'))
+
+		# Only add vps related entries if true
+		if timer.vps_enabled:
+			append(' vps_enabled="yes"')
+			if timer.vps_overwrite:
+				append(' vps_overwrite="yes"')
 
 		# Close still opened timer tag
-		list.append('>\n')
+		append('>\n')
 
 		if webif:
 			# Services + Bouquets
 			for serviceref in timer.services + timer.bouquets:
 				ref = ServiceReference(str(serviceref))
-				list.extend((
+				extend((
 					'  <e2service>\n',
 					'   <e2servicereference>', str(serviceref), '</e2servicereference>\n',
 					'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
@@ -688,14 +743,14 @@ def buildConfig(defaultTimer, timers, webif = False):
 			# Services
 			for serviceref in timer.services:
 				ref = ServiceReference(str(serviceref))
-				list.extend(('  <serviceref>', serviceref, '</serviceref>',
+				extend(('  <serviceref>', serviceref, '</serviceref>',
 							' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
 				))
 
 			# Bouquets
 			for bouquet in timer.bouquets:
 				ref = ServiceReference(str(bouquet))
-				list.extend(('  <bouquet>', str(bouquet), '</bouquet>',
+				extend(('  <bouquet>', str(bouquet), '</bouquet>',
 							' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
 				))
 
@@ -709,40 +764,43 @@ def buildConfig(defaultTimer, timers, webif = False):
 			}
 			for afterevent in timer.afterevent:
 				action, timespan = afterevent
-				list.append('  <afterevent')
+				append('  <afterevent')
 				if timespan[0] is not None:
-					list.append(' from="%02d:%02d" to="%02d:%02d"' % (timespan[0][0], timespan[0][1], timespan[1][0], timespan[1][1]))
-				list.extend(('>', idx[action], '</afterevent>\n'))
+					append(' from="%02d:%02d" to="%02d:%02d"' % (timespan[0][0], timespan[0][1], timespan[1][0], timespan[1][1]))
+				extend(('>', idx[action], '</afterevent>\n'))
 
 		# Excludes
 		for title in timer.getExcludedTitle():
-			list.extend(('  <exclude where="title">', stringToXML(title), '</exclude>\n'))
+			extend(('  <exclude where="title">', stringToXML(title), '</exclude>\n'))
 		for short in timer.getExcludedShort():
-			list.extend(('  <exclude where="shortdescription">', stringToXML(short), '</exclude>\n'))
+			extend(('  <exclude where="shortdescription">', stringToXML(short), '</exclude>\n'))
 		for desc in timer.getExcludedDescription():
-			list.extend(('  <exclude where="description">', stringToXML(desc), '</exclude>\n'))
+			extend(('  <exclude where="description">', stringToXML(desc), '</exclude>\n'))
 		for day in timer.getExcludedDays():
-			list.extend(('  <exclude where="dayofweek">', stringToXML(day), '</exclude>\n'))
+			extend(('  <exclude where="dayofweek">', stringToXML(day), '</exclude>\n'))
 
 		# Includes
 		for title in timer.getIncludedTitle():
-			list.extend(('  <include where="title">', stringToXML(title), '</include>\n'))
+			extend(('  <include where="title">', stringToXML(title), '</include>\n'))
 		for short in timer.getIncludedShort():
-			list.extend(('  <include where="shortdescription">', stringToXML(short), '</include>\n'))
+			extend(('  <include where="shortdescription">', stringToXML(short), '</include>\n'))
 		for desc in timer.getIncludedDescription():
-			list.extend(('  <include where="description">', stringToXML(desc), '</include>\n'))
+			extend(('  <include where="description">', stringToXML(desc), '</include>\n'))
 		for day in timer.getIncludedDays():
-			list.extend(('  <include where="dayofweek">', stringToXML(day), '</include>\n'))
+			extend(('  <include where="dayofweek">', stringToXML(day), '</include>\n'))
 
 		# Tags
-		for tag in timer.tags:
-			list.extend(('  <tag>', stringToXML(tag), '</tag>\n'))
+		if webif and timer.tags:
+			extend(('  <e2tags>', stringToXML(' '.join(timer.tags)), '</e2tags>\n'))
+		else:
+			for tag in timer.tags:
+				extend(('  <tag>', stringToXML(tag), '</tag>\n'))
 
 		# End of Timer
-		list.append(' </timer>\n\n')
+		append(' </timer>\n\n')
 
 	# End of Configuration
-	list.append('</autotimer>\n')
+	append('</autotimer>\n')
 
 	return list
 

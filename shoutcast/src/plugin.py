@@ -57,13 +57,14 @@ from enigma import eConsoleAppContainer
 from Components.Input import Input
 from Screens.InputBox import InputBox
 from Components.FileList import FileList
+from timer import TimerEntry
 # for localized messages
 from . import _
-
 
 containerStreamripper = None
 
 config.plugins.shoutcast = ConfigSubsection()
+config.plugins.shoutcast.showinextensions = ConfigYesNo(default = False)
 config.plugins.shoutcast.streamingrate = ConfigSelection(default="0", choices = [("0",_("All")), ("64",_(">= 64 kbps")), ("128",_(">= 128 kbps")), ("192",_(">= 192 kbps")), ("256",_(">= 256 kbps"))])
 config.plugins.shoutcast.reloadstationlist = ConfigSelection(default="0", choices = [("0",_("Off")), ("1",_("every minute")), ("3",_("every three minutes")), ("5",_("every five minutes"))])
 config.plugins.shoutcast.dirname = ConfigDirectory(default = "/hdd/streamripper/")
@@ -103,12 +104,13 @@ def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
 
-
 def main(session,**kwargs):
 	session.open(SHOUTcastWidget)
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main)]
+	list = [PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=main)] # always show in plugin menu
+	if config.plugins.shoutcast.showinextensions.value:
+		list.append (PluginDescriptor(name="SHOUTcast", description=_("listen to shoutcast internet-radio"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
 	return list
 
 class SHOUTcastWidget(Screen, InfoBarSeek):
@@ -186,7 +188,6 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				<widget name="cover" zPosition="2" position="50,400" size="102,110" alphatest="blend" />
 				<ePixmap position="550,77" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
 			</screen>"""
-
 	
 	def __init__(self, session):
 		self.session = session
@@ -268,6 +269,12 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			# just to hear to recording music when starting the plugin...
 			self.currentStreamingStation = _("Recording stream station")
 			self.playServiceStream("http://localhost:9191")
+			
+		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
+	
+	def sleepTimerEntryOnStateChange(self, timer):
+		if timer.state == TimerEntry.StateEnded:
+			self.close()
 
 	def streamripperClosed(self, retval):
 		if retval == 0:
@@ -375,7 +382,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self["headertext"].setText("")
 		self["statustext"].setText(_("Getting SHOUTcast genre list..."))
 		self["list"].hide()
-		url = "http://yp.shoutcast.com/sbin/newxml.phtml"
+		url = "http://207.200.98.1/sbin/newxml.phtml"
 		sendUrlCommand(url, None,10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
@@ -433,7 +440,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				elif self.mode == self.STATIONLIST:
 					self.stationListIndex = self["list"].getCurrentIndex()
 					self.stopPlaying()
-					url = "http://yp.shoutcast.com%s?id=%s" % (self.tunein, sel.id)
+					url = "http://207.200.98.1%s?id=%s" % (self.tunein, sel.id)
 					self["list"].hide()
 					self["statustext"].setText(_("Getting streaming data from\n%s") % sel.name)
 					self.currentStreamingStation = sel.name
@@ -492,7 +499,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self["headertext"].setText("")
 		self["statustext"].setText(_("Getting %s") %  self.headerTextString)
 		self["list"].hide()
-		self.stationListURL = "http://yp.shoutcast.com/sbin/newxml.phtml?genre=%s" % genre
+		self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?genre=%s" % genre
 		self.stationListIndex = 0
 		sendUrlCommand(self.stationListURL, None,10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
@@ -563,7 +570,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 	def addStationToFavorite(self):
 		sel = self.getSelectedItem()
 		if sel is not None:
-			self.addFavorite(name = sel.name, text = "http://yp.shoutcast.com%s?id=%s" % (self.tunein, sel.id), favoritetype = "pls", audio = sel.mt, bitrate = sel.br)			
+			self.addFavorite(name = sel.name, text = "http://207.200.98.1%s?id=%s" % (self.tunein, sel.id), favoritetype = "pls", audio = sel.mt, bitrate = sel.br)			
 
 	def addCurrentStreamToFavorite(self):
 		self.addFavorite(name = self.currentStreamingStation, text = self.currentStreamingURL, favoritetype = "url")
@@ -617,7 +624,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			self["headertext"].setText("")
 			self["statustext"].setText(_("Searching SHOUTcast for %s...") % searchstring)
 			self["list"].hide()
-			self.stationListURL = "http://yp.shoutcast.com/sbin/newxml.phtml?search=%s" % searchstring
+			self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?search=%s" % searchstring
 			self.mode = self.SEARCHLIST
 			self.searchSHOUTcastString = searchstring
 			self.stationListIndex = 0
@@ -649,6 +656,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			except: pass
 	
 	def __onClose(self):
+		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 		self.stopReloadStationListTimer()
 		self.session.nav.playService(self.CurrentService)
 		containerStreamripper.dataAvail.remove(self.streamripperDataAvail)
@@ -656,7 +664,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 
 	def GoogleImageCallback(self, result):
 		foundPos = result.find("imgres?imgurl=")
-		foundPos2 = result.find("&imgrefurl=")
+		foundPos2 = result.find("&amp;imgrefurl=")
 		if foundPos != -1 and foundPos2 != -1:
 			print "[SHOUTcast] downloading cover from %s " % result[foundPos+14:foundPos2]
 			downloadPage(result[foundPos+14:foundPos2] ,"/tmp/.cover").addCallback(self.coverDownloadFinished).addErrback(self.coverDownloadFailed)
@@ -838,11 +846,11 @@ class SHOUTcastLCDScreen(Screen):
 	<screen position="0,0" size="132,64" title="SHOUTcast">
 		<widget name="text1" position="4,0" size="132,14" font="Regular;12" halign="center" valign="center"/>
 		<widget name="text2" position="4,14" size="132,49" font="Regular;10" halign="center" valign="center"/>
-	</screen>"""
+	</screen>""" 
 
 	def __init__(self, session, parent):
 		Screen.__init__(self, session)
-		self["text1"] = Label("SHOUTcast")
+		self["text1"] =  Label("SHOUTcast")
 		self["text2"] = Label("")
 
 	def setText(self, text):
@@ -852,15 +860,15 @@ class SHOUTcastLCDScreen(Screen):
 class SHOUTcastSetup(Screen, ConfigListScreen):
 
 	skin = """
-		<screen position="center,center" size="560,400" title="SHOUTcast Setup" >
-			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="config" position="20,50" size="520,330" scrollbarMode="showOnDemand" />
-		</screen>"""
+		<screen position="center,center" size="600,400" title="SHOUTcast Setup" >
+			<ePixmap pixmap="skin_default/buttons/red.png" position="10,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="300,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="445,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<widget render="Label" source="key_red" position="10,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_green" position="150,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="config" position="10,50" size="580,400" scrollbarMode="showOnDemand" />
+		</screen>""" 
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -868,15 +876,17 @@ class SHOUTcastSetup(Screen, ConfigListScreen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 
-
-		self.list = [ ]
-		self.list.append(getConfigListEntry(_("Streaming rate:"), config.plugins.shoutcast.streamingrate))
-		self.list.append(getConfigListEntry(_("Reload station list:"), config.plugins.shoutcast.reloadstationlist))
-		self.list.append(getConfigListEntry(_("Rip to single file, name is timestamped"), config.plugins.shoutcast.riptosinglefile))
-		self.list.append(getConfigListEntry(_("Create a directory for each stream"), config.plugins.shoutcast.createdirforeachstream))
-		self.list.append(getConfigListEntry(_("Add sequence number to output file"), config.plugins.shoutcast.addsequenceoutputfile))
+		self.list = [
+			getConfigListEntry(_("Show in extension menu:"), config.plugins.shoutcast.showinextensions),
+			getConfigListEntry(_("Streaming rate:"), config.plugins.shoutcast.streamingrate),
+			getConfigListEntry(_("Reload station list:"), config.plugins.shoutcast.reloadstationlist),
+			getConfigListEntry(_("Rip to single file, name is timestamped"), config.plugins.shoutcast.riptosinglefile),
+			getConfigListEntry(_("Create a directory for each stream"), config.plugins.shoutcast.createdirforeachstream),
+			getConfigListEntry(_("Add sequence number to output file"), config.plugins.shoutcast.addsequenceoutputfile),
+				]
 		self.dirname = getConfigListEntry(_("Recording location:"), config.plugins.shoutcast.dirname)
 		self.list.append(self.dirname)
+		
 		ConfigListScreen.__init__(self, self.list, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -917,6 +927,7 @@ class SHOUTcastStreamripperRecordingPath(Screen):
 			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
+		
 	def __init__(self, session, initDir):
 		Screen.__init__(self, session)
 		inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]

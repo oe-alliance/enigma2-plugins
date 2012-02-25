@@ -61,7 +61,8 @@ class PowerState(Source):
 			elif 0 < type < 4:
 				print "[PowerState.py] TryQuitMainloop"
 				from Screens.Standby import TryQuitMainloop
-				self.session.open(TryQuitMainloop, type)
+				from twisted.internet import reactor
+				reactor.callLater(1, self.session.open, TryQuitMainloop, type)
 				return "true"
 							
 			else:

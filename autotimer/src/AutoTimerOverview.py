@@ -7,9 +7,9 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from AutoTimerEditor import AutoTimerEditor, AutoTimerChannelSelection
-from AutoTimerSettings import AutoTimerSettings
-from AutoTimerPreview import AutoTimerPreview
 from AutoTimerImporter import AutoTimerImportSelector
+from AutoTimerPreview import AutoTimerPreview
+from AutoTimerSettings import AutoTimerSettings
 from AutoTimerWizard import AutoTimerWizard
 
 # GUI (Components)
@@ -95,6 +95,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 			{
+				"red": self.cancel,
 				"green": (self.save, _("Close and save changes")),
 				"yellow": (self.remove, _("Remove selected AutoTimer")),
 				"blue": (self.add, _("Add new AutoTimer")),
@@ -102,6 +103,14 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		)
 
 		self.onLayoutFinish.append(self.setCustomTitle)
+		self.onFirstExecBegin.append(self.firstExec)
+
+	def firstExec(self):
+		from plugin import autotimerHelp
+		if config.plugins.autotimer.show_help.value and autotimerHelp:
+			config.plugins.autotimer.show_help.value = False
+			config.plugins.autotimer.show_help.save()
+			autotimerHelp.open(self.session)
 
 	def setCustomTitle(self):
 		self.setTitle(_("AutoTimer overview"))
@@ -213,6 +222,11 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			(_("Edit new timer defaults"), "defaults"),
 		]
 
+		from plugin import autotimerHelp
+		if autotimerHelp:
+			list.insert(0, (_("Help"), "help"))
+			list.insert(1, (_("Frequently asked questions") , "faq"))
+
 		if config.plugins.autotimer.editor.value == "wizard":
 			list.append((_("Create a new timer using the classic editor"), "newplain"))
 		else:
@@ -227,8 +241,17 @@ class AutoTimerOverview(Screen, HelpableScreen):
 	def menuCallback(self, ret):
 		ret = ret and ret[1]
 		if ret:
-			if ret == "preview":
-				total, new, modified, timers, conflicts = self.autotimer.parseEPG(simulateOnly = True)
+			if ret == "help":
+				from plugin import autotimerHelp
+				autotimerHelp.open(self.session)
+			elif ret == "faq":
+				from Plugins.SystemPlugins.MPHelp import PluginHelp, XMLHelpReader
+				from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+				reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/faq.xml"))
+				autotimerFaq = PluginHelp(*reader)
+				autotimerFaq.open(self.session)
+			elif ret == "preview":
+				total, new, modified, timers, conflicts, similars = self.autotimer.parseEPG(simulateOnly = True)
 				self.session.open(
 					AutoTimerPreview,
 					timers

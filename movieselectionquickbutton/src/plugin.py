@@ -28,7 +28,7 @@ from Components.ActionMap import HelpableActionMap, ActionMap
 from Components.Button import Button
 from Components.PluginComponent import plugins
 from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import ConfigSubsection, ConfigText, configfile, ConfigSelection, getConfigListEntry
+from Components.config import ConfigSubsection, ConfigText, ConfigYesNo, configfile, ConfigSelection, getConfigListEntry
 from Components.config import config
 from Screens.MessageBox import MessageBox
 # for localized messages
@@ -40,6 +40,7 @@ config.plugins.MovieSelectionQuickButton.green = ConfigText(default = _("Nothing
 config.plugins.MovieSelectionQuickButton.yellow = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 config.plugins.MovieSelectionQuickButton.blue = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 config.plugins.MovieSelectionQuickButton.buttoncaption = ConfigSelection(default="0", choices = [("0", _("display plugin name")),("1", _("display plugin description"))])
+config.plugins.MovieSelectionQuickButton.show_in_extensionsmenu = ConfigYesNo(default = False)
 
 ###########################################
 # MovieSelection
@@ -205,6 +206,7 @@ class MovieSelectionButtonSetup(ConfigListScreen, Screen):
 			getConfigListEntry(_("assigned to yellow"), self.yellowchoice),
 			getConfigListEntry(_("assigned to blue"), self.bluechoice),
 			getConfigListEntry(_("button caption"), config.plugins.MovieSelectionQuickButton.buttoncaption),
+			getConfigListEntry(_("Show Setup in Extensions menu"), config.plugins.MovieSelectionQuickButton.show_in_extensionsmenu)
 			]
 		ConfigListScreen.__init__(self, cfglist, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -245,7 +247,11 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = main)]	
-	list.append(PluginDescriptor(name="Setup MovieSelection QuickButton", description=_("Setup for MovieSelection QuickButton"), where = [PluginDescriptor.WHERE_PLUGINMENU],
-	icon = "plugin.png", fnc=setup))
+	list.append(PluginDescriptor(name="Setup MovieSelection QuickButton", description=_("Setup for MovieSelection QuickButton"),
+	where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = setup))
+	
+	if config.plugins.MovieSelectionQuickButton.show_in_extensionsmenu.value:	
+		list.append(PluginDescriptor(name="Setup MovieSelection QuickButton", description=_("Setup for MovieSelection QuickButton"),
+		where = PluginDescriptor.WHERE_EXTENSIONSMENU, icon = "plugin.png", fnc = setup))
 	return list
 

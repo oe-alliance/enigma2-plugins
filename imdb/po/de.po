@@ -7,95 +7,142 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-17 11:29+0100\n"
-"PO-Revision-Date: 2009-02-17 11:31+0100\n"
-"Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
+"POT-Creation-Date: 2011-06-12 18:45+0100\n"
+"PO-Revision-Date: 2011-06-12 18:45+0100\n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../src\n"
 
-msgid " as "
-msgstr " als "
-
-msgid "Ambiguous results"
-msgstr "Kein eindeutiger Treffer"
-
-msgid "Cast: "
-msgstr "Darsteller: "
-
+#: ../src/plugin.py:44
 msgid "Channel Selection"
 msgstr "Kanalliste"
 
-msgid "Could't get Eventname"
-msgstr "Konnte Sendungstitel nicht feststellen"
-
-msgid "Details"
-msgstr ""
-
-#, python-format
-msgid "Downloading Movie Poster: %s..."
-msgstr "Lade Filmplakat herunter: %s..."
-
-msgid "Exit"
-msgstr "Beenden"
-
-msgid "Extra Info"
-msgstr "Zusatzinfos"
-
-msgid "IMDb Details parsed"
-msgstr "Filminformationen eingelesen"
-
-msgid "IMDb Download completed"
-msgstr "Download von IMDb abgeschlossen"
-
-msgid "IMDb Download failed"
-msgstr "Download von IMDb fehlgeschlagen"
-
-msgid "IMDb Plugin"
-msgstr ""
-
-msgid "IMDb Re-Download completed"
-msgstr "Erneuten Download ausgeführt"
-
-msgid "IMDb query failed!"
-msgstr "Anfrage an IMDb fehlgeschlagen!"
-
+#: ../src/plugin.py:73
 msgid "Lookup"
 msgstr "Suchen"
 
-msgid "No IMDb match."
-msgstr "Keine passenden Einträge gefunden."
+#: ../src/plugin.py:142
+msgid "The Internet Movie Database"
+msgstr "Die Internet Movie Database"
 
-msgid "No cast list found in the database."
-msgstr "Keine Darstellerliste in der Datenbank gefunden."
+#: ../src/plugin.py:158
+msgid "Exit"
+msgstr "Beenden"
 
-msgid "No details found."
-msgstr "Keine Details gefunden."
+#: ../src/plugin.py:309
+msgid "Ambiguous results"
+msgstr "Kein eindeutiger Treffer"
 
+#: ../src/plugin.py:310
 msgid "Please select the matching entry"
 msgstr "Bitte passenden Eintrag auswählen"
 
-#, python-format
-msgid "Query IMDb: %s..."
-msgstr "Frage bei IMDb an: %s..."
+#: ../src/plugin.py:313
+msgid "Title Menu"
+msgstr "Titelauswahl"
 
-msgid "Query details from the Internet Movie Database"
-msgstr "Filminformationen aus der Internet Movie Database"
+#: ../src/plugin.py:314
+#: ../src/plugin.py:490
+msgid "Details"
+msgstr "Details"
 
+#: ../src/plugin.py:325
+#: ../src/plugin.py:470
 #, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "Frage erneut bei IMDb an: %s..."
 
-msgid "The Internet Movie Database"
-msgstr "Die Internet Movie Database"
+#: ../src/plugin.py:357
+msgid "Enter search"
+msgstr "Suchen"
 
-msgid "Title Menu"
-msgstr "Titelauswahl"
+#: ../src/plugin.py:358
+msgid "Select from EPG"
+msgstr "Aus  EPG wählen"
 
+#: ../src/plugin.py:374
+msgid "Enter text to search for"
+msgstr "Bitte Suchtext eingeben"
+
+#: ../src/plugin.py:406
+#, python-format
+msgid "Query IMDb: %s..."
+msgstr "Frage bei IMDb an: %s..."
+
+#: ../src/plugin.py:413
+msgid "Could't get Eventname"
+msgstr "Konnte Sendungstitel nicht feststellen"
+
+#: ../src/plugin.py:417
+msgid "IMDb Download failed"
+msgstr "Download von IMDb fehlgeschlagen"
+
+#: ../src/plugin.py:446
+msgid "IMDb Download completed"
+msgstr "Download von IMDb abgeschlossen"
+
+#: ../src/plugin.py:464
+#: ../src/plugin.py:465
+msgid "No IMDb match."
+msgstr "Keine passenden Einträge gefunden."
+
+#: ../src/plugin.py:477
+msgid "IMDb query failed!"
+msgstr "Anfrage an IMDb fehlgeschlagen!"
+
+#: ../src/plugin.py:480
+msgid "IMDb Re-Download completed"
+msgstr "Erneuten Download ausgeführt"
+
+#: ../src/plugin.py:488
+msgid "No details found."
+msgstr "Keine Details gefunden."
+
+#: ../src/plugin.py:491
+#: ../src/plugin.py:571
+msgid "IMDb Details parsed"
+msgstr "Filminformationen eingelesen"
+
+#: ../src/plugin.py:516
+msgid "no user rating yet"
+msgstr "noch keine Nutzerwertung"
+
+#: ../src/plugin.py:520
 msgid "User Rating"
 msgstr "Nutzer-Bewertung"
 
-msgid "no user rating yet"
-msgstr "noch keine Nutzerwertung"
+#: ../src/plugin.py:533
+msgid " as "
+msgstr " als "
+
+#: ../src/plugin.py:537
+msgid "Cast: "
+msgstr "Darsteller: "
+
+#: ../src/plugin.py:539
+msgid "No cast list found in the database."
+msgstr "Keine Darstellerliste in der Datenbank gefunden."
+
+#: ../src/plugin.py:545
+#, python-format
+msgid "Downloading Movie Poster: %s..."
+msgstr "Lade Filmplakat herunter: %s..."
+
+#: ../src/plugin.py:565
+msgid "Extra Info"
+msgstr "Zusatzinfos"
+
+#: ../src/plugin.py:598
+msgid "IMDb Plugin"
+msgstr "IMDb Plugin"
+
+#: ../src/plugin.py:609
+#: ../src/plugin.py:616
+msgid "Query details from the Internet Movie Database"
+msgstr "Filminformationen aus der Internet Movie Database"
+

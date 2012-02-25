@@ -9,7 +9,7 @@ class WebUploadResource(resource.Resource):
 
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application; xhtml+xml;' )
+		req.setHeader('Content-type', 'application/xhtml+xml;' )
 		req.setHeader('charset', 'UTF-8')	
 		data = req.args['file'][0]
 		if not data:

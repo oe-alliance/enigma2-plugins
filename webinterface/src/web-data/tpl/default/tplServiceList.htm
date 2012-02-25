@@ -1,47 +1,130 @@
 
 <!-- tplServiceList -->
 									<table>
-										{for service in services}
-										<tr class="sListRow" data-servicename="${service.servicename}">
-											<td class="${service.cssclass}">
+										{for item in items}
+										{if item.now.ismarker}
+										<tr>
+											<td class="sListMarker">${item.now.servicename}</td>
+										</tr>
+										{else}
+										<tr class="sListRow" data-servicename="${item.now.servicename}">
+											<td class="${item.cssclass}">
 												<table class="sListItem">
 													<tr>
-														<td style="width: 640px;">										
+														<td id="PROGRESS${item.now.servicereference}" style="width: 60px;">
+															<div class="sListSProgress" title="${item.now.progress}%"><div class="sListSProgressBar" style="width: ${item.now.progress}%"></div></div>
+														</td>
+														<td style="width: 470px;">
 															<div class="sListSName">
-																<a href="#" id="${service.servicereference}" onclick="{ zap(this.id); }" class="sListSLink" title="Zap to ${service.servicename}">
-																	${service.servicename}
-																</a>
+
+																<a href="#" id="${item.now.servicereference}" class="sListSLink" title="Zap to ${item.now.servicename}">${item.now.servicename}</a>
 															</div>
 														</td>
 														<td>
-															<a href="#" onclick="if ( parentPin( '${service.servicereference}' ) ) { loadEPGByServiceReference( '${service.servicereference}' ); }">
-																<img src="/web-data/img/epg.png" border="0" title="Show EPG for ${service.servicename}"/>
+															<a href="#" class="sListServiceEpg right block" data-servicereference="${item.now.servicereference}">
+																<img src="/web-data/img/epg.png" border="0" title="Show EPG for ${item.now.servicename}"/>
 															</a>
 														</td>
 														<td>
-															<a target="_blank" onclick="return parentPin( '${service.servicereference}' );" href="/web/stream.m3u?ref=${service.servicereference}">
-																<img src="/web-data/img/screen.png" title="Stream ${service.servicename}" border="0">
+															<a class="right block" target="_blank" href="/web/stream.m3u?ref=${item.now.servicereference}">
+																<img src="/web-data/img/screen.png" title="Stream ${item.now.servicename}" border="0" />
 															</a>
-														</td>											
+														</td>
 													</tr>
-													<tr id="trNOW${service.servicereference}" class="sListEPGNow" style="display:none;">
-														<td id="NOW${service.servicereference}" class="sListEPGItem" colspan="3"></td>
+													<tr class="sListEPGNow">
+														<td id="NOW${item.now.servicereference}" class="sListEPGItem" colspan="4">
+															{if item.now.title != ''}
+															<table cellspacing="0">
+																<tr>
+																	<td class="epgStart">${item.now.starttime}</td>
+																	<td class="epgTitle">
+																		<a href="#" class="sListExtEpg" title="Click to show/hide extended Description" style="display:block">
+																			<img class="sListBulletToggle" src="/web-data/img/toggle_expand_small.png" alt="+">&nbsp;${item.now.title}
+																		</a>
+																	</td>
+																	{if item.now.duration != item.now.remaining}
+																	<td class="epgLength">+${item.now.remaining} of ${item.now.duration}</td>
+																	{else}
+																	<td class="epgLength">${item.now.duration}</td>
+																	{/if}
+																</tr>
+																<tr class="sListExtEpgLong" style="display:none">
+																	<td colspan="4" class="epgListItem epgLong"
+																		data-servicereference="${item.now.servicereference}"
+																		data-servicename="${item.now.servicename}"
+																		data-eventid="${item.now.eventid}"
+																		data-start="${item.now.start}"
+																		data-end=${item.now.end}
+																		data-title="${item.now.title}"
+																		data-description="${item.now.description}">${item.now.extdescription}<br>
+																		<div class="leftCol">
+																			<a target="_blank" href="/web/epgsearch.rss?search=${item.now.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed for ${item.now.title.e()}" border="0"></a>&nbsp;&nbsp;
+																			<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${item.now.titleESC}" ><img src="/web-data/img/imdb.png" title="Search IMDb" border="0"></a>
+																		</div>
+																		<div class="right rightCol">
+																			<a href="#" class="sListAddTimer"><img src="/web-data/img/clock.png" title="Add Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																			<a href="#" class="sListZapTimer"><img src="/web-data/img/clock_play.png" title="Add zap Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																			<a href="#" class="sListEditTimer"><img src="/web-data/img/clock_edit.png" title="Edit and add timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																		</div>
+																	</td>
+																</tr>
+															</table>
+															{/if}
+														</td>
 													</tr>
-													<tr id="trNEXT${service.servicereference}" class="sListEPGNext" style="display:none;">
-														<td id="NEXT${service.servicereference}" class="sListEPGItem" colspan="3"></td>
+													<tr class="sListEPGNext">
+														<td id="NEXT${item.now.servicereference}" class="sListEPGItem" colspan="4">
+															{if item.next.title != ''}
+															<table cellspacing="0">
+																<tr>
+																	<td class="epgStart">${item.next.starttime}</td>
+																	<td class="epgTitle">
+																		<a href="#" class="sListExtEpg" title="Click to show/hide extended Description">
+																			<img class="sListBulletToggle" src="/web-data/img/toggle_expand_small.png" alt="+">&nbsp;${item.next.title}
+																		</a>
+																	</td>
+																	{if item.next.duration != item.next.remaining}
+																	<td class="epgLength">+${item.next.remaining} of ${item.next.duration}</td>
+																	{else}
+																	<td class="epgLength">${item.next.duration}</td>
+																	{/if}
+																</tr>
+																<tr class="sListExtEpgLong" style="display:none">
+																	<td colspan="4" class="epgListItem epgLong"
+																		data-servicereference="${item.next.servicereference}"
+																		data-servicename="${item.next.servicename}"
+																		data-eventid="${item.next.eventid}"
+																		data-start="${item.next.start}"
+																		data-end=${item.next.end}
+																		data-title="${item.next.title}"
+																		data-description="${item.next.description}">${item.next.extdescription}<br>
+																		<div class="leftCol">
+																			<a target="_blank" href="/web/epgsearch.rss?search=${item.next.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed for ${item.next.title.e()}" border="0"></a>&nbsp;&nbsp;
+																			<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${item.next.titleESC}" ><img src="/web-data/img/imdb.png" title="Search IMDb" border="0"></a>
+																		</div>
+																		<div class="right rightCol">
+																			<a href="#" class="sListAddTimer"><img src="/web-data/img/clock.png" title="Add Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																			<a href="#" class="sListZapTimer"><img src="/web-data/img/clock_play.png" title="Add zap Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																			<a href="#" class="sListEditTimer"><img src="/web-data/img/clock_edit.png" title="Edit and add timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																		</div>
+																</tr>
+															</table>
+															{/if}
+														</td>
 													</tr>
-													<tr id="trSUB${service.servicereference}" class="sListSubService" style="display:none;">
-														<td id="SUB${service.servicereference}" colspan="3"></td>
+													<tr id="trSUB${item.now.servicereference}" class="sListSubService" style="display:none;">
+														<td id="SUB${item.now.servicereference}" colspan="4"></td>
 													</tr>
 												</table>
 											</td>
 										</tr>
+										{/if}
 										{forelse}
 										<tr>
 											<td>
 												<table><tr><td>No Services to Display</td></tr></table>
 											</td>
 										</tr>
-										{/for}		
-									</table>						
+										{/for}
+									</table>
 <!-- /tplServiceList -->

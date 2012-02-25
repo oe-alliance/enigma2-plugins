@@ -1,0 +1,265 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Partnerbox\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-23 20:12+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Ni Hao <ni_hao_1@hotmail.com>\n"
+"Language-Team: Dr. Best <dr.best@dreambox-tools.info>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: Netherlands\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "<unknown>"
+msgstr "<onbekend>"
+
+msgid "Add"
+msgstr "Toevoegen"
+
+msgid "Add timer"
+msgstr "Voeg timer toe"
+
+msgid "After event"
+msgstr "Na het event"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Channel"
+msgstr "Zender"
+
+msgid "Clean up"
+msgstr "Opschonen"
+
+msgid "Cleaning up finished timer entries..."
+msgstr "Timer opschonen..."
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Delete"
+msgstr "Verwijderen"
+
+msgid "Description"
+msgstr "Omschrijving"
+
+msgid ""
+"Do you really want to delete the timer \n"
+"%s ?"
+msgstr ""
+"Wil je de timeropdracht\n"
+"%s\n"
+" werkelijk verwijderen?"
+
+msgid "EPG Selection"
+msgstr "EPG Keuze"
+
+msgid "Edit"
+msgstr "Bewerken"
+
+msgid "Enable Partnerbox-Function in EPGList"
+msgstr "Partnerbox funktie in EPG overzicht activeren"
+
+msgid "Enable Partnerbox-Function in TimerEvent"
+msgstr "Partnerbox functie in TimerEvent activeren"
+
+msgid "EndTime"
+msgstr "Eindtijd"
+
+msgid "Enigma Type"
+msgstr "Enigma type"
+
+msgid "Error: No space left"
+msgstr "Fout: Niet genoeg ruimte"
+
+msgid "Error: Outdated"
+msgstr "Fout: te oud"
+
+msgid "Error: User aborted"
+msgstr "Fout: door gebruiker afgebroken"
+
+msgid "Error: Zap failed"
+msgstr "Fout: schakel (zap) fout"
+
+msgid "Fri"
+msgstr "Vrij"
+
+msgid "Friday"
+msgstr "Vrijdag"
+
+msgid "Getting Channel Information..."
+msgstr "Zender informatie ophalen..."
+
+msgid "Getting EPG Information..."
+msgstr "EPG informatie ophalen..."
+
+msgid "Getting Partnerbox Bouquet Information..."
+msgstr "Partnerbox boeket informatie ophalen"
+
+msgid "Getting Partnerbox Information..."
+msgstr "Partnerbox infomatie ophalen..."
+
+msgid "Location"
+msgstr "Locatie"
+
+msgid "Manage timer for other dreamboxes in network"
+msgstr "Timer voor andere dreamboxen in het netwerk bewerken"
+
+msgid "Mon"
+msgstr "Maa"
+
+msgid "Monday"
+msgstr "Maandag"
+
+msgid "No"
+msgstr "Nee"
+
+msgid ""
+"Partnerbox Answer: \n"
+"%s"
+msgstr ""
+"Partnerbox antwoordt:\n"
+"%s"
+
+msgid "Partnerbox Entries"
+msgstr "Partnerbox regels"
+
+msgid "Partnerbox: Edit Entry"
+msgstr "Partnerbox: regel bewerken"
+
+msgid "Partnerbox: List of Entries"
+msgstr "Partnerbox: overzicht"
+
+msgid "Password"
+msgstr "Wachtwoord"
+
+msgid "Really delete this Partnerbox Entry?"
+msgstr "Deze partnerbox regel echt verwijderen?"
+
+msgid "Remove timer"
+msgstr "Timer verwijderen"
+
+msgid "Sat"
+msgstr "Za"
+
+msgid "Saturday"
+msgstr "Zaterdag"
+
+msgid "Servicelists/EPG"
+msgstr "Zenderlijsten/EPG"
+
+msgid "Show 'RemoteTV Player' in E-Menu"
+msgstr "'Remote TV Player' in E-Menu tonen"
+
+msgid "Show 'RemoteTimer' in E-Menu"
+msgstr "'Remote Timer' in E-Menu tonen"
+
+msgid "Show 'Stream current Service' in E-Menu"
+msgstr "'Actuele stream' in E-Menu tonen"
+
+msgid "StartTime"
+msgstr "Starttijd"
+
+msgid "Stream TV from your Partnerbox"
+msgstr "TV-beeld van je partnerbox tonen"
+
+msgid "Stream current service from partnerbox"
+msgstr "Actueel TV-beeld van de partnerbox tonen"
+
+msgid "Sun"
+msgstr "Zo"
+
+msgid "Sunday"
+msgstr "Zondag"
+
+msgid "Thu"
+msgstr "Do"
+
+msgid "Thursday"
+msgstr "Donderdag"
+
+msgid "Timer Type"
+msgstr "Timer-type"
+
+msgid "Tue"
+msgstr "Di"
+
+msgid "Tuesday"
+msgstr "Dinsdag"
+
+msgid "Wed"
+msgstr "Woe"
+
+msgid "Wednesday"
+msgstr "Woensdag"
+
+msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
+msgstr "Je kunt geen zenders of boeketten van Enigma1 ontvangers aan de kanalenlijst toevoegen..."
+
+msgid "You have to restart Enigma2 to activate your new preferences!"
+msgstr "Om de nieuwe voorkeuren te gebruiken moet Enigma2 opnieuw worden gestart!"
+
+msgid "Zap"
+msgstr "Schakel (zap)"
+
+msgid "Zap to service when streaming"
+msgstr "Tijdens het streamen naar deze zender schakelen"
+
+msgid "about to start"
+msgstr "wordt gestart"
+
+msgid "add Partnerbox bouquet"
+msgstr "Partnerbox boeket toevoegen"
+
+msgid "add Partnerbox service"
+msgstr "Partnerbox zender toevoegen"
+
+msgid "disabled"
+msgstr "uitgeschakeld"
+
+msgid "do nothing"
+msgstr "niets doen"
+
+msgid "done!"
+msgstr "gereed!"
+
+msgid "go to deep standby"
+msgstr "ontvanger in diepe standby"
+
+msgid "go to standby"
+msgstr "ga in standby"
+
+msgid "mins"
+msgstr "minuten"
+
+msgid "record"
+msgstr "opname"
+
+msgid "recording..."
+msgstr "opnemen..."
+
+msgid "setup for partnerbox"
+msgstr "instellingen voor partnerbox"
+
+msgid "unknown service"
+msgstr "onbekende zender"
+
+msgid "use external"
+msgstr "extern"
+
+msgid "use internal"
+msgstr "intern"
+
+msgid "waiting"
+msgstr "wachtende"
+
+msgid "zap"
+msgstr "schakel (zap)"
+
+msgid "zapped"
+msgstr "omgeschakeld"
+

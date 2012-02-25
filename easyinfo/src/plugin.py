@@ -2,7 +2,6 @@
 #
 #    EasyInfo for Dreambox-Enigma2
 #    Coded by Vali (c)2011
-#    Support: www.dreambox-tools.info
 #
 #  This plugin is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -97,7 +96,7 @@ config.plugins.EasyInfo.pos11 = ConfigSelection(default="no", choices = CHOICELI
 config.plugins.EasyInfo.EvInStart = ConfigSelection(default="yes", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.EasyInfo.bEvInYellow = ConfigSelection(default="singleepg", choices=[("singleepg", _("Single EPG")),("multiepg", _("Multi EPG")),("easypg", _("Easy-PG")),("graphepg", _("Graphik multi-EPG")),("merlinepg", _("Merlin EPG")),("cooltv", _("Cool-TV")),("imdbinfo", _("IMDB info"))])
 config.plugins.EasyInfo.bEvInBlue = ConfigSelection(default="multiepg", choices=[("singleepg", _("Single EPG")),("multiepg", _("Multi EPG")),("easypg", _("Easy-PG")),("graphepg", _("Graphik multi-EPG")),("merlinepg", _("Merlin EPG")),("cooltv", _("Cool-TV")),("imdbinfo", _("IMDB info"))])
-config.plugins.EasyInfo.myPicons = ConfigSelection(default="/media/usb/epgpicon/", choices = [("/media/usb/epgpicon/", "/media/usb/epgpicon/"), ("/media/cf/epgpicon/", "/media/cf/epgpicon/"), ("/media/hdd/epgpicon/", "/media/hdd/epgpicon/")])
+config.plugins.EasyInfo.myPicons = ConfigSelection(default="/media/usb/epgpicon/", choices = [("/media/usb/epgpicon/", "/media/usb/epgpicon/"), ("/media/cf/epgpicon/", "/media/cf/epgpicon/"), ("/media/hdd/epgpicon/", "/media/hdd/epgpicon/"), ("/usr/share/enigma2/epgpicon/", "/usr/share/enigma2/epgpicon/")])
 config.plugins.EasyInfo.epgOKFunc = ConfigSelection(default="info", choices = [("info", _("Event info")), ("zap", _("Just zap")),("exitzap", _("Zap and Exit"))])
 config.plugins.EasyInfo.Primetime1 = ConfigClock(default = 63000)
 config.plugins.EasyInfo.Primetime2 = ConfigClock(default = 69300)
@@ -297,32 +296,32 @@ class EasyInfo(Screen):
 			<screen backgroundColor="background" flags="wfNoBorder" position="0,0" size="1280,720" title="Easy Info">
 				<widget name="list" position="55,30" size="110,660" scrollbarMode="showNever" transparent="1" zPosition="2"/>
 				<eLabel backgroundColor="#666666" position="250,359" size="1280,2"/>
-				<widget font="Regular;24" foregroundColor="#fcc000" position="600,50" render="Label" size="600,30" source="session.CurrentService" transparent="1" zPosition="1">
+				<widget font="Regular;24" foregroundColor="#fcc000" position="630,50" render="Label" size="600,30" source="session.CurrentService" transparent="1" zPosition="1">
 					<convert type="ServiceName">Name</convert>
 				</widget>
-				<widget font="Regular;24" position="250,50" render="Label" size="70,30" source="session.Event_Now" transparent="1" zPosition="1">
+				<widget font="Regular;24" position="250,50" render="Label" size="100,30" source="session.Event_Now" transparent="1" zPosition="1">
 					<convert type="EventTime">StartTime</convert>
 					<convert type="ClockToText">Default</convert>
 				</widget>
 				<widget font="Regular;24" noWrap="1" position="250,90" render="Label" size="900,30" source="session.Event_Now" transparent="1" zPosition="1">
 					<convert type="EventName">Name</convert>
 				</widget>
-				<widget font="Regular;22" foregroundColor="#fcc000" position="320,50" halign="right" render="Label" size="130,30" source="session.Event_Now" transparent="1" zPosition="1">
+				<widget font="Regular;22" foregroundColor="#fcc000" position="350,50" halign="right" render="Label" size="130,30" source="session.Event_Now" transparent="1" zPosition="1">
 					<convert type="EventTime">Remaining</convert>
 					<convert type="RemainingToText">InMinutes</convert>
 				</widget>
-				<widget font="Regular;24" position="250,400" render="Label" size="70,30" source="session.Event_Next" transparent="1" zPosition="1">
+				<widget font="Regular;24" position="250,400" render="Label" size="100,30" source="session.Event_Next" transparent="1" zPosition="1">
 					<convert type="EventTime">StartTime</convert>
 					<convert type="ClockToText">Default</convert>
 				</widget>
 				<widget font="Regular;24" foregroundColor="#aaaaaa" noWrap="1" position="250,370" render="Label" size="900,30" source="session.Event_Next" transparent="1" zPosition="1">
 					<convert type="EventName">Name</convert>
 				</widget>
-				<widget font="Regular;24" foregroundColor="#aaaaaa" position="320,400" render="Label" size="130,30" source="session.Event_Next" transparent="1" zPosition="1">
+				<widget font="Regular;24" foregroundColor="#aaaaaa" position="350,400" render="Label" size="130,30" source="session.Event_Next" transparent="1" zPosition="1">
 					<convert type="EventTime">Duration</convert>
 					<convert type="ClockToText">InMinutes</convert>
 				</widget>
-				<widget backgroundColor="#555555" borderColor="#555555" borderWidth="4" position="460,57" render="Progress" size="120,14" source="session.Event_Now" zPosition="2">
+				<widget backgroundColor="#555555" borderColor="#555555" borderWidth="4" position="490,57" render="Progress" size="120,14" source="session.Event_Now" zPosition="2">
 					<convert type="EventTime">Progress</convert>
 				</widget>
 				<widget font="Regular;22" position="250,127" render="Label" size="950,225" source="session.Event_Now" transparent="1" valign="top" zPosition="5">
@@ -395,31 +394,36 @@ class EasyInfo(Screen):
 		self.__keys = []
 		MPaskList = []
 		fertig = False
+		self["key_info"] = StaticText(" ")
+		self["key_yellow"] = StaticText(" ")
+		self["key_green"] = StaticText(" ")
+		self["key_red"] = StaticText(" ")
+		self["key_blue"] = StaticText(" ")
 		if True:
 			if config.plugins.EasyInfo.pos1.value != "no":
 				self.__keys.append(config.plugins.EasyInfo.pos1.value)
 				MPaskList.append(("info", config.plugins.EasyInfo.pos1.value))
-				self["key_info"] = StaticText(_(getPluginByName(config.plugins.EasyInfo.pos1.value)))
+				self["key_info"].setText(_(getPluginByName(config.plugins.EasyInfo.pos1.value)))
 			else: fertig = True
 			if config.plugins.EasyInfo.pos2.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos2.value)
 				MPaskList.append(("red", config.plugins.EasyInfo.pos2.value))
-				self["key_red"] = StaticText(_(getPluginByName(config.plugins.EasyInfo.pos2.value)))
+				self["key_red"].setText(_(getPluginByName(config.plugins.EasyInfo.pos2.value)))
 			else: fertig = True
 			if config.plugins.EasyInfo.pos3.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos3.value)
 				MPaskList.append(("green", config.plugins.EasyInfo.pos3.value))
-				self["key_green"] = StaticText(_(getPluginByName(config.plugins.EasyInfo.pos3.value)))
+				self["key_green"].setText(_(getPluginByName(config.plugins.EasyInfo.pos3.value)))
 			else: fertig = True
 			if config.plugins.EasyInfo.pos4.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos4.value)
 				MPaskList.append(("yellow", config.plugins.EasyInfo.pos4.value))
-				self["key_yellow"] = StaticText(_(getPluginByName(config.plugins.EasyInfo.pos4.value)))
+				self["key_yellow"].setText(_(getPluginByName(config.plugins.EasyInfo.pos4.value)))
 			else: fertig = True
 			if config.plugins.EasyInfo.pos5.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos5.value)
 				MPaskList.append(("blue", config.plugins.EasyInfo.pos5.value))
-				self["key_blue"] = StaticText(_(getPluginByName(config.plugins.EasyInfo.pos5.value)))
+				self["key_blue"].setText(_(getPluginByName(config.plugins.EasyInfo.pos5.value)))
 			else: fertig = True
 			if config.plugins.EasyInfo.pos6.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos6.value)
@@ -1217,8 +1221,9 @@ class EasySelection(EPGSelection, Screen):
 		ask_time = int(mktime(pt))
 		if ask_time > int(mktime(heute)):
 			self["list"].fillMultiEPG(self.services, ask_time)
+			pt = (heute[0],heute[1],heute[2],config.plugins.EasyInfo.Primetime3.value[0],config.plugins.EasyInfo.Primetime3.value[1],0,heute[6],heute[7],0)
+			ask_time = int(mktime(pt))
 			self["listN"].fillMultiEPG(self.services, ask_time)
-			self["listN"].updateMultiEPG(1)
 
 	def NowNextLook(self):
 		self["list"].fillMultiEPG(self.services, -1)

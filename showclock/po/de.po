@@ -1,0 +1,116 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Show Clock\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-17 10:28+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
+"Language-Team: JuSt611 <Software@Strasdas.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+#: ../src/plugin.py:73
+msgid "Show Clock setup"
+msgstr "Show Clock einrichten"
+
+#: ../src/plugin.py:74
+msgid "Push \"Exit\" long to show/hide clock"
+msgstr "Uhr mit Taste \"Exit lange\" ein-/ausblenden"
+
+#: ../src/plugin.py:75
+msgid "Plugin menu"
+msgstr "Plugin Menü"
+
+#: ../src/plugin.py:75
+msgid "Extensions menu"
+msgstr "Erweiterungs-Menü"
+
+#: ../src/plugin.py:111
+#: ../src/plugin.py:166
+msgid "Show Clock Setup"
+msgstr "Show Clock Einstellungen"
+
+#: ../src/plugin.py:116
+msgid "Clock show timeout"
+msgstr "Dauer der Uhr-Einblendung"
+
+#: ../src/plugin.py:117
+msgid "Specify how long (seconds) the clock shall be shown before it disappears. Set to \"0\" to show clock until hidden manually."
+msgstr "Wie lange (Sekunden) soll die Uhr eingeblendet werden? Bei der Einstellung \"0\" wird die Uhr nur mit der Taste \"EXIT lange\" ausgeblendet."
+
+#: ../src/plugin.py:118
+msgid "Show in"
+msgstr "Zeigen in"
+
+#: ../src/plugin.py:119
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr "Auswahl, ob Show Clock Einstellungen im Plugin Menü oder Erweiterungs-Menü gezeigt werden sollen (erfordert GUI Neustart)."
+
+#: ../src/plugin.py:120
+msgid "Name"
+msgstr "Name"
+
+#: ../src/plugin.py:121
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr "Name, unter dem das Plugin im Menü erscheinen soll (erfordert GUI Neustart)."
+
+#: ../src/plugin.py:122
+msgid "Description"
+msgstr "Beschreibung"
+
+#: ../src/plugin.py:123
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr "Beschreibung, mit der das Plugin im Menü erscheinen soll (erfordert GUI Neustart)."
+
+#: ../src/plugin.py:141
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: ../src/plugin.py:142
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:143
+msgid "Help"
+msgstr "Hilfe"
+
+#: ../src/plugin.py:144
+msgid "Move clock"
+msgstr "Uhr verschieben"
+
+#: ../src/plugin.py:166
+#: ../src/plugin.py:392
+#: ../src/plugin.py:400
+msgid "Ver."
+msgstr "Ver."
+
+#: ../src/plugin.py:203
+msgid ""
+"Modify the settings to match your preferences. To change the clock position, select \"Move clock\" and relocate using the direction keys. Press OK to store current position and return to the setup menu or EXIT to cancel the moving.\n"
+"\n"
+"Push key \"Exit long\" to show the clock while watching TV. Clock will disappear after the specified timeout or by pushing key \"Exit long\" again.\n"
+"\n"
+"If GP3 is installed, weekday shows up in selected language, otherwise always in english."
+msgstr ""
+"Ändern Sie die Einstellungen wunschgemäß. Per \"Uhr verschieben\" kann die Position der Uhr mit den Steuertasten geändert werden. Die neue Position mit \"OK\" speichern und zurück zum Menü oder mit \"EXIT\" den Vorgang abbrechen.\n"
+"\n"
+"Mit der Taste \"Exit lange\" wird die Uhr eingeblendet, während Sie fernsehen. Die Uhr wird nach dem eingestellten Zeitintervall oder mit der Taste \"Exit lange\" wieder ausgeblendet.\n"
+"\n"
+"Wenn GP3 installiert ist, wird der Wochentag in der aktuellen Sprache gezeigt, ansonsten in Englisch."
+
+#: ../src/plugin.py:210
+msgid ""
+"Please use direction keys to move the clock.\n"
+"\n"
+"Press OK to store current position and return to the setup menu or EXIT to cancel the moving."
+msgstr ""
+"Die Uhr kann mit den Steuertasten verschoben werden.\n"
+"\n"
+"Die neue Position mit \"OK\" speichern und zurück zum Menü oder mit \"EXIT\" den Vorgang abbrechen."
+

@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 '''
-$Id$
-$Author$
-$Revision$
-$Date$
+$Id: nrzuname.py 655 2011-08-06 11:11:07Z michael $
+$Author: michael $
+$Revision: 655 $
+$Date: 2011-08-06 13:11:07 +0200 (Sa, 06 Aug 2011) $
 '''
 
 import re, sys, os
@@ -26,7 +26,7 @@ except ValueError:
 			print message
 
 import htmlentitydefs
-def html2unicode(in_html, charset):
+def html2unicode(in_html):
 #===============================================================================
 #	# sanity checks
 #	try:
@@ -236,7 +236,7 @@ class ReverseLookupAndNotifier:
 		def cleanName(text):
 			item = text.replace("%20"," ").replace("&nbsp;"," ").replace("</b>","").replace(","," ").replace('\n',' ').replace('\t',' ')
 
-			item = html2unicode(item, self.charset)
+			item = html2unicode(item)
 			#===================================================================
 			# try: # this works under Windows
 			#	item = item.encode('iso-8859-1')

@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # for localized messages
 from . import _
 
@@ -74,6 +76,7 @@ class RSSPoller:
 
 		self.reloading = False
 		if self.do_poll:
+			self.doCallback()
 			self.poll_timer.start(0, 1)
 
 	def googleSubscriptionFailed(self, res = None):
@@ -103,7 +106,7 @@ class RSSPoller:
 				pass
 
 	def error(self, error = ""):
-		print "[SimpleRSS] failed to fetch feed:", error
+		print("[SimpleRSS] failed to fetch feed:", error)
 
 		# Assume its just a temporary failure and jump over to next feed
 		self.next_feed()
@@ -114,7 +117,7 @@ class RSSPoller:
 			self.gotPage(data, id)
 			if callback:
 				self.doCallback(id)
-		except NotImplementedError, errmsg:
+		except NotImplementedError as errmsg:
 			# Don't show this error when updating in background
 			if id is not None:
 				AddPopup(
@@ -141,12 +144,12 @@ class RSSPoller:
 		# For Single-Polling
 		if id is not None:
 			self.feeds[id].gotFeed(feed)
-			print "[SimpleRSS] single feed parsed..."
+			print("[SimpleRSS] single feed parsed...")
 			return
 
 		new_items = self.feeds[self.current_feed].gotFeed(feed)
 
-		print "[SimpleRSS] feed parsed..."
+		print("[SimpleRSS] feed parsed...")
 
 		# Append new items to locally bound ones
 		if new_items is not None:
@@ -161,13 +164,13 @@ class RSSPoller:
 	def poll(self):
 		# Reloading, reschedule
 		if self.reloading:
-			print "[SimpleRSS] timer triggered while reloading, rescheduling"
+			print("[SimpleRSS] timer triggered while reloading, rescheduling")
 			self.poll_timer.start(10000, 1)
 		# End of List
 		elif len(self.feeds) <= self.current_feed:
 			# New Items
 			if self.newItemFeed.history:
-				print "[SimpleRSS] got new items, calling back"
+				print("[SimpleRSS] got new items, calling back")
 				self.doCallback()
 
 				# Inform User
@@ -192,9 +195,15 @@ class RSSPoller:
 						5,
 						NOTIFICATIONID
 					)
+				elif update_notification_value == "ticker":
+					from RSSTickerView import tickerView
+					if not tickerView:
+						print("[SimpleRSS] missing ticker instance, something with my code is wrong :-/")
+					else:
+						tickerView.display(self.newItemFeed)
 			# No new Items
 			else:
-				print "[SimpleRSS] no new items"
+				print("[SimpleRSS] no new items")
 
 			self.current_feed = 0
 			self.poll_timer.startLongTimer(config.plugins.simpleRSS.interval.value*60)
@@ -206,14 +215,14 @@ class RSSPoller:
 				from Tools.Notifications import current_notifications, notifications
 				for x in current_notifications:
 					if x[0] == NOTIFICATIONID:
-						print "[SimpleRSS] timer triggered while preview on screen, rescheduling"
+						print("[SimpleRSS] timer triggered while preview on screen, rescheduling")
 						self.poll_timer.start(10000, 1)
 						return
 
 				if clearHistory:
 					for x in notifications:
 						if x[4] and x[4] == NOTIFICATIONID:
-							print "[SimpleRSS] wont wipe history because it was never read"
+							print("[SimpleRSS] wont wipe history because it was never read")
 							clearHistory = False
 							break
 
@@ -227,7 +236,7 @@ class RSSPoller:
 				getPage(feed.uri).addCallback(self._gotPage).addErrback(self.error)
 			# Go to next feed
 			else:
-				print "[SimpleRSS] passing feed"
+				print("[SimpleRSS] passing feed")
 				self.next_feed()
 
 	def next_feed(self):
@@ -237,6 +246,7 @@ class RSSPoller:
 	def shutdown(self):
 		self.poll_timer.callback.remove(self.poll)
 		self.poll_timer = None
+		self.do_poll = False
 
 	def triggerReload(self):
 		self.reloading = True

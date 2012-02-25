@@ -125,6 +125,17 @@ class RSSSetup(ConfigListScreen, Screen):
 		self.createSetup()
 		self["config"].setList(self.list)
 
+	def notificationChanged(self, instance):
+		import RSSTickerView as tv
+		if instance and instance.value == "ticker":
+			if tv.tickerView is None:
+				print("[SimpleRSS] Ticker instantiated on startup")
+				tv.tickerView = self.session.instantiateDialog(tv.RSSTickerView)
+		else:
+			if tv.tickerView is not None:
+				self.session.deleteDialog(tv.tickerView)
+				tv.tickerView = None
+
 	def delete(self):
 		from Screens.MessageBox import MessageBox
 
@@ -181,12 +192,14 @@ class RSSSetup(ConfigListScreen, Screen):
 		ConfigListScreen.keySave(self)
 
 	def abort(self):
-		print "[SimpleRSS] Closing Setup Dialog"
 		simpleRSS = config.plugins.simpleRSS
 
 		# Remove Notifier
-		simpleRSS.autostart.notifiers.remove(self.elementChanged)
-		simpleRSS.enable_google_reader.notifiers.remove(self.elementChanged)
+		simpleRSS.autostart.removeNotifier(self.elementChanged)
+		simpleRSS.enable_google_reader.removeNotifier(self.elementChanged)
+
+		# Handle ticker
+		self.notificationChanged(simpleRSS.update_notification)
 
 		# Keep feedcount sane
 		simpleRSS.feedcount.value = len(simpleRSS.feed)

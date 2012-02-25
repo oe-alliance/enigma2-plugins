@@ -81,6 +81,6 @@ msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo t
 msgstr "Zameni oznaku \"%s\" svuda sa:   (Znajte da 'Otkaži' neće ovo vratiti!)"
 
 #: ../src/plugin.py:25
-msgid "edit tags..."
-msgstr "Uredi oznake..."
+msgid "edit tags"
+msgstr "Uredi oznake"
 
