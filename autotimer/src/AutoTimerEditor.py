@@ -63,15 +63,15 @@ class ExtendedConfigText(ConfigText):
 	def __init__(self, default = "", fixed_size = True, visible_width = False):
 		ConfigText.__init__(self, default = default, fixed_size = fixed_size, visible_width = visible_width)
 
-		# Workaround some characters currently not "typeable" using NumericalTextInput
-		mapping = self.mapping
-		if mapping:
-			if "&" not in mapping[0]:
-				mapping[0] += "&"
-			if ";" not in mapping[0]:
-				mapping[0] += ";"
-			if "%" not in mapping[0]:
-				mapping[0] += "%"
+#		# Workaround some characters currently not "typeable" using NumericalTextInput
+# 		mapping = self.mapping
+# 		if mapping:
+# 			if "&" not in mapping[0]:
+# 				mapping[0] += "&"
+# 			if ";" not in mapping[0]:
+# 				mapping[0] += ";"
+# 			if "%" not in mapping[0]:
+# 				mapping[0] += "%"
 
 class SimpleBouquetSelection(SimpleChannelSelection):
 	def __init__(self, session, title):
