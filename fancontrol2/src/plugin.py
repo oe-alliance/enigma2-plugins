@@ -1063,7 +1063,7 @@ def autostart(reason, **kwargs):
 			root.putChild("log", FC2webLog())
 			root.putChild("chart", FC2webChart())
 			if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web/external.xml"):
-				addExternalChild( ("fancontrol", root, "Fan Control 2", Version) )
+				addExternalChild( ("fancontrol", root, "Fan Control 2", Version, True) )
 			else:
 				addExternalChild( ("fancontrol", root) )
 		if not os.path.exists("/proc/stb/fp/fan_vlt"):
