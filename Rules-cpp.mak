@@ -15,3 +15,8 @@ AM_CXXFLAGS = \
 	@GSTREAMER_CFLAGS@ \
 	@LIBCRYPTO_CFLAGS@ \
 	@PTHREAD_CFLAGS@
+
+PLUGIN_LIBTOOL_FLAGS = \
+	-avoid-version \
+	-module \
+	-shared
