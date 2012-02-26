@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from HelpableNumberActionMap import HelpableNumberActionMap
 from Components.config import config
 from __init__ import _
@@ -14,7 +17,7 @@ class MovableScreen():
 
         self["MovableScreenActions"] = HelpableNumberActionMap(self, "MovableScreenActions",
         {
-            "ok":       (self.moveKeyOk,                   _("Save values and close screen")),
+            "ok":       (self.moveKeyOk,                _("Save values and close screen")),
             "cancel":   (self.moveKeyCancel,            _("Discard changes and close screen")),
             "left":     (self.moveKeyLeft,              _("Move screen to the left")),
             "right":    (self.moveKeyRight,             _("Move screen to the right")),

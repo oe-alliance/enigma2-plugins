@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from AC3utils import AC3, PCM, AC3GLOB, PCMGLOB, AC3PCM
 from Components.config import config
 from enigma import eTimer
