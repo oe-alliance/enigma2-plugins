@@ -10,6 +10,7 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer, eEnv
 from os import access, chmod, X_OK
+from __init__ import _
 
 mcut_path = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut")
 
