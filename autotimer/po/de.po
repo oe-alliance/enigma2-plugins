@@ -868,7 +868,7 @@ msgstr "Bestimme bestehende Timer anhand Anfang-/Endzeit"
 
 #: ../src/AutoTimerSettings.py:44
 #, python-format
-msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
+msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80%% of the it."
 msgstr "Ist dies aktiv, so wird ein bestehender Timer ab einer Schwelle von 80% übereinstimmender Sendezeit einer Sendung zugeordnet."
 
 #: ../src/AutoTimerSettings.py:45
