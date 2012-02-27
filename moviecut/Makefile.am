@@ -1,3 +1,3 @@
-SUBDIRS = src_cc src_py meta
+SUBDIRS = src_cc src_py po meta
 
 EXTRA_DIST = Readme-MovieCut.txt
