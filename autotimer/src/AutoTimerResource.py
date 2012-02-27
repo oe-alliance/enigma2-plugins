@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from AutoTimer import AutoTimer
 from AutoTimerConfiguration import CURRENT_CONFIG_VERSION
 from Components.config import config
