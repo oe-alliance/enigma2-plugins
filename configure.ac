@@ -307,6 +307,7 @@ mosaic/src/Makefile
 
 moviecut/Makefile
 moviecut/meta/Makefile
+moviecut/po/Makefile
 moviecut/src_cc/Makefile
 moviecut/src_py/Makefile
 
