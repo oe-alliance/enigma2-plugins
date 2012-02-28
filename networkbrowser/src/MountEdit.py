@@ -31,6 +31,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.session = session
 		Screen.__init__(self, self.session)
 
+		self.onChangedEntry = [ ]
 		self.mountinfo = mountinfo
 		if self.mountinfo is None:
 			#Initialize blank mount enty
@@ -63,10 +64,26 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self["HelpWindow"] = Pixmap()
 		self["introduction"] = StaticText(_("Press OK to activate the settings."))
 		self["key_red"] = StaticText(_("Cancel"))
+		self.selectionChanged()
 
+	# for summary:
+	def changedEntry(self):
+		for x in self.onChangedEntry:
+			x()
+
+	def getCurrentEntry(self):
+		return self["config"].getCurrent()[0]
+
+	def getCurrentValue(self):
+		return str(self["config"].getCurrent()[1].getText())
+
+	def createSummary(self):
+		from Screens.Setup import SetupSummary
+		return SetupSummary
 
 	def layoutFinished(self):
-		self.setTitle(_("Mounts editor"))
+ 		self.setup_title = _("Mounts editor")
+ 		Screen.setTitle(self, _(self.setup_title))
 		self["VKeyIcon"].hide()
 		self["VirtualKB"].setEnabled(False)
 		self["HelpWindow"].hide()

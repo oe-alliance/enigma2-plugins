@@ -77,11 +77,7 @@ def MountManagerMain(session, iface = None, **kwargs):
 	session.open(AutoMountManager, iface, plugin_path)
 
 def NetworkBrowserCallFunction(iface):
-	interfaceState = iNetwork.getAdapterAttribute(iface, "up")
-	if interfaceState is True:
-		return NetworkBrowserMain
-	else:
-		return None
+	return NetworkBrowserMain
 
 def MountManagerCallFunction(iface):
 	return MountManagerMain
@@ -91,8 +87,7 @@ def RemountMain(session, iface = None, **kwargs):
 	iAutoMount.getAutoMountPoints() 
 
 def RemountCallFunction(iface):
-	if iNetwork.getAdapterAttribute(iface, "up"):
-		return RemountMain
+	return RemountMain
 
 def SchedMount(session, **kwargs):
 	session.open(MountAgainCheck)
@@ -102,11 +97,7 @@ def Plugins(path, **kwargs):
 	plugin_path = path
 	return [
 		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART,PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
-		PluginDescriptor(name=_("NetworkBrowser"), description=_("Search for network shares"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": NetworkBrowserCallFunction, "menuEntryName": lambda x: _("NetworkBrowser"), "menuEntryDescription": lambda x: _("Search for network shares...")}),
-		PluginDescriptor(name=_("MountManager"), description=_("Manage network shares"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": MountManagerCallFunction, "menuEntryName": lambda x: _("MountManager"), "menuEntryDescription": lambda x: _("Manage your network shares...")}),
-		PluginDescriptor(name=_("Mount again"), description=_("Attempt to mount shares again"), where = PluginDescriptor.WHERE_NETWORKSETUP,
-			fnc={"ifaceSupported": RemountCallFunction,
-				"menuEntryName": lambda x: _("Mount again"),
-				"menuEntryDescription": lambda x: _("Attempt to recover lost mounts (in background)")})
+		PluginDescriptor(name=_("Network Browser"), description=_("Search for network shares"), where = PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": NetworkBrowserCallFunction, "menuEntryName": lambda x: _("Network Browser"), "menuEntryDescription": lambda x: _("Search for network shares...")}),
+		PluginDescriptor(name=_("Mount Manager"), description=_("Manage network shares"), where = PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": MountManagerCallFunction, "menuEntryName": lambda x: _("Mount Manager"), "menuEntryDescription": lambda x: _("Manage your network shares...")}),
+		PluginDescriptor(name=_("Mount Again"), description=_("Attempt to mount shares again"), where = PluginDescriptor.WHERE_NETWORKMOUNTS, fnc={"ifaceSupported": RemountCallFunction, "menuEntryName": lambda x: _("Mount again"), "menuEntryDescription": lambda x: _("Attempt to recover lost mounts (in background)")})
 	]
-

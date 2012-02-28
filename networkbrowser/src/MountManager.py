@@ -47,6 +47,7 @@ class AutoMountManager(Screen):
 		self.hostname = None
 		self.restartLanRef = None
 		Screen.__init__(self, session)
+		self.onChangedEntry = [ ]
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"ok": self.keyOK,
@@ -63,8 +64,27 @@ class AutoMountManager(Screen):
 		self.onClose.append(self.cleanup)
 		self.onShown.append(self.setWindowTitle)
 
+		if not self.selectionChanged in self["config"].onSelectionChanged:
+			self["config"].onSelectionChanged.append(self.selectionChanged)
+		self.selectionChanged()
+
+	def createSummary(self):
+		from Screens.PluginBrowser import PluginBrowserSummary
+		return PluginBrowserSummary
+
+	def selectionChanged(self):
+		item = self["config"].getCurrent()
+		if item:
+			name = str(self["config"].getCurrent()[0])
+			desc = str(self["config"].getCurrent()[2])
+		else:
+			name = ""
+			desc = ""
+		for cb in self.onChangedEntry:
+			cb(name, desc)
+
 	def setWindowTitle(self):
-		self.setTitle(_("MountManager"))
+		self.setTitle(_("Mount Manager"))
 
 	def cleanup(self):
 		iNetwork.stopRestartConsole()
@@ -79,6 +99,8 @@ class AutoMountManager(Screen):
 		self.list.append((_("Change hostname"),"hostname", _("Change the hostname of your Receiver."), okpng))
 		self.list.append((_("Setup Mount Again"),"mountagain", _("Schedule a auto remount of your network shares."), okpng))
 		self["config"].setList(self.list)
+		if config.usage.sort_settings.value:
+			self["config"].list.sort()
 
 	def exit(self):
 		self.close()
@@ -153,6 +175,7 @@ class MountManagerMenu(Screen,ConfigListScreen):
 		Screen.__init__(self, session)
 		self.skinName = "Setup"
 		self.setup_title = _("Setup Mount Again")
+		self.setTitle(_(self.setup_title))
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)

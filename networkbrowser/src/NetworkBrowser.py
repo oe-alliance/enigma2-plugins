@@ -102,6 +102,7 @@ class NetworkBrowser(Screen):
 		self.networklist = None
 		self.device = None
 		self.mounts = None
+		self.onChangedEntry = [ ]
 		self.expanded = []
 		self.cache_ttl = 604800 #Seconds cache is considered valid, 7 Days should be ok
 		self.cache_file = '/etc/enigma2/networkbrowser.cache' #Path to cache directory
@@ -386,19 +387,40 @@ class NetworkBrowser(Screen):
 
 		return((share, verticallineIcon, None, sharedir, sharedescription, newpng, isMountedpng))
 
+	def createSummary(self):
+		from Screens.PluginBrowser import PluginBrowserSummary
+		return PluginBrowserSummary
+
 	def selectionChanged(self):
 		current = self["list"].getCurrent()
 		self.listindex = self["list"].getIndex()
 		if current:
 			if len(current[0]) >= 2:
+				name = str(current[2])
 				if current[0][0] in ("nfsShare", "smbShare"):
 					self["infotext"].setText(_("Press OK to mount this share!"))
+					name = str(current[0][2]) + ' ( ' + str(current[0][1]) + ' )'
 				else:
+					name = str(current[2])
 					selectedhost = current[0][2]
 					if selectedhost in self.expanded:
 						self["infotext"].setText(_("Press OK to collapse this host"))
 					else:
 						self["infotext"].setText(_("Press OK to expand this host"))
+				if current[0][0] == "nfsShare":
+					desc = str(current[0][4])
+				elif current[0][0] == "smbShare":
+					desc = str(current[0][3])
+				else:
+					desc = ""
+			else:
+				name = ""
+				desc = ""
+		else:
+			name = ""
+			desc = ""
+		for cb in self.onChangedEntry:
+			cb(name, desc)
 
 	def go(self):
 		sel = self["list"].getCurrent()
