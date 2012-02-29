@@ -7,36 +7,50 @@ from os import remove as os_remove
 class Bonjour:
 	AVAHI_SERVICES_DIR = '/etc/avahi/services/'
 	AVAHI_START_SCRIPT = '/etc/init.d/avahi-daemon'
-	 
-	def __init__(self):	
-		self.services = []		
-		self.files = {}		
+
+	def __init__(self):
+		self.services = []
+		self.files = {}
 		self.reloadConfig()
-		
+
 	def __createServiceConfig(self, service):
 		lines = [
 				'<?xml version="1.0" standalone="no"?><!--*-nxml-*-->\n',
 				'<!DOCTYPE service-group SYSTEM "avahi-service.dtd">\n',
-				'<!-- This file has been created by enigma2-plugin-extensions-bonjour -->\n',				
+				'<!-- This file has been created by enigma2-plugin-extensions-bonjour -->\n',
 				'<service-group>\n',
 				'\t<name replace-wildcards="yes">%s</name>\n' %(service['name']),
 				'\t<service>\n',
 				'\t\t<type>%s</type>\n' %(service['type']),
-				'\t\t<port>%s</port>\n' %(service['port']) 
+				'\t\t<port>%s</port>\n' %(service['port'])
 				]
-		
-		if service['text'] is not None and service['text'] != "":
-			lines.add('\t\t<text-record>%s</text-record>\n' %(service['text']) )
-		
+		text = service.get('text', None)
+		if text:
+			lines.append( '\t\t<txt-record>%s</txt-record>\n' %(text) )
+
 		lines.extend([
-					'\t</service>\n', 
+					'\t</service>\n',
 					'</service-group>\n'
 					])
-		
+
 		return lines
-	
+
+	def txtFromDict(self, dict):
+		if not dict:
+			return '\0'
+		parts = []
+		for name, value in dict.iteritems():
+			if value is None:
+				item = name
+			else:
+				item = '%s=%s' % (name, value)
+			if len(item) > 255:
+				item = item[:255]
+			parts.append(item)
+		return ' '.join(parts)
+
 	def __writeService(self, service):
-		print "[Bonjour.__writeService] Creating service file '%s'" %(service['file'])	
+		print "[Bonjour.__writeService] Creating service file '%s'" %(service['file'])
 		if 'type' in service and 'port' in service and 'file' in service:
 			filepath = "%s%s" %(self.AVAHI_SERVICES_DIR, service['file'])
 			try:
@@ -46,49 +60,49 @@ class Bonjour:
 				return True
 			except IOError:
 				pass
-		
-		print "[Bonjour.__writeService] Cannot create service file '%s'" %(service['file'])		
+
+		print "[Bonjour.__writeService] Cannot create service file '%s'" %(service['file'])
 		return False
-	
-	def __deleteService(self, protocol):		
+
+	def __deleteService(self, protocol):
 		filepath = "%s%s.service" %(self.AVAHI_SERVICES_DIR, protocol)
 		if path.exists(filepath):
-			
+
 			os_remove(filepath)
 			return True
-		
+
 		return False
-				
+
 	def __parse(self, file):
-		print "[Bonjour.__parse] parsing %s%s" %(self.AVAHI_SERVICES_DIR, file) 
+		print "[Bonjour.__parse] parsing %s%s" %(self.AVAHI_SERVICES_DIR, file)
 		config = cet_parse(self.AVAHI_SERVICES_DIR + file).getroot()
-		
+
 		name = config.find('name').text
-		
-		service = config.find('service')		
+
+		service = config.find('service')
 		type = service.find('type').text
 		port = service.find('port').text
 		text = service.get('text-record')
 		if text is None:
 			text = ""
-		else: 
+		else:
 			text = text.text
-		
-		service = self.buildServiceFull(file, name, type, port, text)		
+
+		service = self.buildServiceFull(file, name, type, port, text)
 		self.registerService(service)
-	
-	def __removeServiceFromList(self, service):	
+
+	def __removeServiceFromList(self, service):
 		oldservices = self.services
 		self.services = []
-		
+
 		for s in oldservices:
 			if s['file'] != service['file']:
 				self.services.append(s)
 				self.files[s['file']] = len(self.services) - 1
-		
+
 		self.files[service['file']] = None
-	
-	
+
+
 	def reloadConfig(self):
 		self.services = []
 		self.files = {}
@@ -97,63 +111,63 @@ class Bonjour:
 			service_files = filter( lambda x: x.endswith('.service'), listdir(self.AVAHI_SERVICES_DIR) )
 			for file in service_files:
 				self.__parse(file)
-		
+
 		self.registerDefaultServices()
 
-	
+
 	def registerService(self, service, replace = False):
 		print "[Bonjour.registerService] %s" %service
-		
-		if 'type' in service and 'port' in service and 'file' in service:					
+
+		if 'type' in service and 'port' in service and 'file' in service:
 			if (service['file'] not in self.files) or replace:
 				filepath = "%s%s" %(self.AVAHI_SERVICES_DIR, service['file'])
 				if not self.__writeService(service):
 					return False
-					
-				if replace and service['file'] in self.files:				
+
+				if replace and service['file'] in self.files:
 					self.__removeServiceFromList(service)
-				
-				
+
+
 				self.services.append(service)
 				self.files[service['file']] = len(self.services) - 1
-				
+
 				return True
-				
+
 		else:
 			print "[Bonjour.registerService] Missing port or type definition in %s%s" %(self.AVAHI_SERVICES_DIR, service['file'])
-			return False	
-	
-	
+			return False
+
+
 	def updateService(self, service):
 		if 'type' in service and 'port' in service and 'file' in service:
-			
+
 			filepath = "%s%s" %(self.AVAHI_SERVICES_DIR, service['file'])
 			if not path.exists(filepath):
 				print "[Bonjour.updateService] Cannot update non-existent service file '%s'" %(service['file'])
 				return False
-			
+
 			else:
 				if not self.__writeService(service):
 					print "[Bonjour.updateService] Cannot write service file '%s'" %(service['file'])
 					return False
 
 		return True
-	
+
 	def unregisterService(self, protocol):
 		if self.__deleteService(protocol):
 			self.reloadConfig()
-		
-	
+
+
 	def buildService(self, protocol, port, text="", udp = False):
 		file = "%s.service" %protocol
-		
+
 		type = "_%s._tcp" %protocol
 		if udp:
-			type = "_%s._udp" %protocol	
-		
+			type = "_%s._udp" %protocol
+
 		name = "%h "
 		name += protocol.upper()
-		
+
 		return {
 				'file' : file,
 				'name' : name,
@@ -161,8 +175,8 @@ class Bonjour:
 				'port' : port,
 				'text' : text
 				}
-	
-	def buildServiceFull(self, file, name, type, port, text="", udp = False):		
+
+	def buildServiceFull(self, file, name, type, port, text="", udp = False):
 		return {
 				'file' : file,
 				'name' : name,
@@ -170,14 +184,14 @@ class Bonjour:
 				'port' : port,
 				'text' : text
 				}
-	
+
 	def registerDefaultServices(self):
 		print "[Bonjour.registerDefaultServices] called"
 		service = self.buildService('ftp', '21')
 		filepath = "%s%s" %(self.AVAHI_SERVICES_DIR, service['file'])
 		if not path.exists(filepath):
 			self.registerService(service)
-			
+
 		service = self.buildService('ssh', '22')
 		filepath = "%s%s" %(self.AVAHI_SERVICES_DIR, service['file'])
 		if not path.exists(filepath):
@@ -192,5 +206,5 @@ class Bonjour:
 		filepath = "%s%s" %(self.AVAHI_SERVICES_DIR, service['file'])
 		if not path.exists(filepath):
 			self.registerService(service)
-			
+
 bonjour = Bonjour()
