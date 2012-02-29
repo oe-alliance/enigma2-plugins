@@ -1,3 +1,3 @@
 PLUGIN = MovieCut
-LANGS = de sv
+LANGS = de sv it
 include $(top_srcdir)/Rules-po.mak
