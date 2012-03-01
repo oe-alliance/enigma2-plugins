@@ -26,8 +26,11 @@ class Bonjour:
 				]
 		text = service.get('text', None)
 		if text:
-			lines.append( '\t\t<txt-record>%s</txt-record>\n' %(text) )
-
+			if isinstance(text, (basestring)):
+				lines.append( '\t\t<txt-record>%s</txt-record>\n' %(text) )
+			else:
+				for txt in text:
+					lines.append( '\t\t<txt-record>%s</txt-record>\n' %(txt))
 		lines.extend([
 					'\t</service>\n',
 					'</service-group>\n'
@@ -47,7 +50,7 @@ class Bonjour:
 			if len(item) > 255:
 				item = item[:255]
 			parts.append(item)
-		return ' '.join(parts)
+		return parts
 
 	def __writeService(self, service):
 		print "[Bonjour.__writeService] Creating service file '%s'" %(service['file'])
@@ -82,13 +85,13 @@ class Bonjour:
 		service = config.find('service')
 		type = service.find('type').text
 		port = service.find('port').text
-		text = service.get('text-record')
-		if text is None:
-			text = ""
-		else:
-			text = text.text
-
-		service = self.buildServiceFull(file, name, type, port, text)
+		text = service.findall('txt-record')
+		textList = []
+		if text != None:
+			for txt in text:
+				textList.append(txt.text)
+		print textList
+		service = self.buildServiceFull(file, name, type, port, textList)
 		self.registerService(service)
 
 	def __removeServiceFromList(self, service):
@@ -158,7 +161,7 @@ class Bonjour:
 			self.reloadConfig()
 
 
-	def buildService(self, protocol, port, text="", udp = False):
+	def buildService(self, protocol, port, text=[], udp = False):
 		file = "%s.service" %protocol
 
 		type = "_%s._tcp" %protocol
@@ -176,7 +179,7 @@ class Bonjour:
 				'text' : text
 				}
 
-	def buildServiceFull(self, file, name, type, port, text="", udp = False):
+	def buildServiceFull(self, file, name, type, port, text=[], udp = False):
 		return {
 				'file' : file,
 				'name' : name,
