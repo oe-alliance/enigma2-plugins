@@ -1,6 +1,6 @@
 Package: enigma2-plugin-extensions-infobartunerstate
-Version: 0.9.5
+Version: 0.9.6
 Description: Show the tuner state as infobar popup
 Maintainer: betonme (Frank Glaser <glaserfrank(at)gmail.com>)
 Homepage: http://tecjunkie.blogspot.com/
-Depends: enigma2 (>> 2.6git20090614), enigma2-plugin-extensions-webinterface (>= 1.6.8git20120126), enigma2-streamproxy (>= 1.0git20111030)
+Depends: enigma2 (>> 2.6git20090614), enigma2-plugin-extensions-webinterface (>= 1.6.8git20120126), enigma2-streamproxy (>= 1.0git20111030), python-shell, python-re

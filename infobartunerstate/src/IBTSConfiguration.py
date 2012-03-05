@@ -84,7 +84,8 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			
 			(  _("Enable InfoBarTunerState")                          , config.infobartunerstate.enabled ),
 			(  separator                                              , config.infobartunerstate.about ),
-			(  _("Add to extension menu")                             , config.infobartunerstate.extensions_menu ),
+			(  _("Add Show to extension menu")                        , config.infobartunerstate.extensions_menu_show ),
+			(  _("Add Setup to extension menu")                       , config.infobartunerstate.extensions_menu_setup ),
 #			(  _("Pop-Up time in seconds")                            , config.infobartunerstate.popup_time ),
 			(  _("Show and hide with InfoBar")                        , config.infobartunerstate.show_infobar ),
 			(  _("Show on events")                                    , config.infobartunerstate.show_events ),
@@ -122,7 +123,6 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 		for conf in self.config:
 			# 0 entry text
 			# 1 variable
-			# 2 validation
 			list.append( getConfigListEntry( conf[0], conf[1]) )
 		self.list = list
 		self["config"].setList(self.list)
@@ -181,7 +181,7 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 					recoverInfoBar()
 				
 				# Handle extension menu integration
-				if config.infobartunerstate.extensions_menu.value:
+				if config.infobartunerstate.extensions_menu_show.value or config.infobartunerstate.extensions_menu_setup.value:
 					# Add to extension menu
 					addExtension()
 				else:
