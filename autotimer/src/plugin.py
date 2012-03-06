@@ -12,14 +12,6 @@ from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
-# Webinterface
-# from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
-# from Plugins.Extensions.WebInterface.WebChilds.Screenpage import ScreenPage
-
-# Twisted
-# from twisted.web import static
-# from twisted.python import util
-
 # Initialize Configuration
 config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default = True)
@@ -97,22 +89,46 @@ def autostart(reason, **kwargs):
 			autotimer = None
 
 # Webgui
-# def sessionstart(reason, **kwargs):
-# 	if reason == 0 and "session" in kwargs:
-# 		from WebChilds.UploadResource import UploadResource
-# 		if hasattr(static.File, 'render_GET'):
-# 			class File(static.File):
-# 				def render_POST(self, request):
-# 					return self.render_GET(request)
-# 		else:
-# 			File = static.File
-# 
-# 		session = kwargs["session"]
-# 		root = File(util.sibpath(__file__, "web-data"))
-# 		root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) )
-# 		root.putChild('tmp', File('/tmp'))
-# 		root.putChild("uploadfile", UploadResource(session))
-# 		addExternalChild( ("autotimereditor", root, "AutoTimer", "1", True) )
+def sessionstart(reason, **kwargs):
+	if reason == 0 and "session" in kwargs:
+		try:
+			from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
+			from Plugins.Extensions.WebInterface.WebChilds.Screenpage import ScreenPage
+			from twisted.web import static
+			from twisted.python import util
+			from WebChilds.UploadResource import UploadResource
+
+			from AutoTimerResource import AutoTimerDoParseResource, \
+				AutoTimerListAutoTimerResource, AutoTimerAddOrEditAutoTimerResource, \
+				AutoTimerRemoveAutoTimerResource, AutoTimerChangeSettingsResource, \
+				AutoTimerSettingsResource, AutoTimerSimulateResource, API_VERSION
+		except ImportError as ie:
+			pass
+		else:
+			if hasattr(static.File, 'render_GET'):
+				class File(static.File):
+					def render_POST(self, request):
+						return self.render_GET(request)
+			else:
+				File = static.File
+
+			# webapi
+			root = AutoTimerListAutoTimerResource()
+			root.putChild('parse', AutoTimerDoParseResource())
+			root.putChild('remove', AutoTimerRemoveAutoTimerResource())
+			root.putChild('edit', AutoTimerAddOrEditAutoTimerResource())
+			root.putChild('get', AutoTimerSettingsResource())
+			root.putChild('set', AutoTimerChangeSettingsResource())
+			root.putChild('simulate', AutoTimerSimulateResource())
+			addExternalChild( ("autotimer", root , "AutoTimer-Plugin", API_VERSION, False) )
+
+			# webgui
+			session = kwargs["session"]
+			root = File(util.sibpath(__file__, "web-data"))
+			root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) )
+			root.putChild('tmp', File('/tmp'))
+			root.putChild("uploadfile", UploadResource(session))
+			addExternalChild( ("autotimereditor", root, "AutoTimer", "1", True) )
 
 # Mainfunction
 def main(session, **kwargs):
@@ -202,7 +218,7 @@ pluginlist = PluginDescriptor(name="AutoTimer", description = _("Edit Timers and
 def Plugins(**kwargs):
 	l = [
 		PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart=False),
-# 		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart, needsRestart=False),
+		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart, needsRestart=False),
 		# TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
 		PluginDescriptor(name="AutoTimer", description= _("add AutoTimer"), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist, needsRestart = False),
 		# TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)

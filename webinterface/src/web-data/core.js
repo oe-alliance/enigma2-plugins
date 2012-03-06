@@ -664,6 +664,7 @@ var Screenshots = Class.create(Controller, {
 			case this.TYPE_OSD:
 				params['o'] = '';
 				params['n'] = '';
+				params['format'] = 'png';
 				break;
 			case this.TYPE_VIDEO:
 				params['v'] = '';
@@ -754,7 +755,7 @@ var Services = Class.create(Controller, {
 		if(this.cachedServiceElements == null){
 			this.cachedServiceElements = $$('.sListRow');
 		}
-
+		var cls = 'even';
 		for(var i = 0; i < this.cachedServiceElements.length; i++){
 			var row = this.cachedServiceElements[i];
 			var serviceName = row.readAttribute('data-servicename').toLowerCase();
@@ -762,6 +763,13 @@ var Services = Class.create(Controller, {
 			if(serviceName.match(needle) != needle && serviceName != ""){
 				row.hide();
 			} else {
+				cls = cls == 'odd' ? 'even' : 'odd';
+				notCls = cls == 'odd' ? 'even' : 'odd';
+
+				var td = row.firstDescendant();
+				td.removeClassName(notCls);
+				td.addClassName(cls);
+
 				row.show();
 			}
 		}
@@ -1567,7 +1575,7 @@ var E2WebCore = Class.create({
 			'click',
 			'a.sListExtEpg',
 			function(event, element){
-				var target = element.down('.sListExtEpgLong');
+				var target = element.up('.sListEPGItem').down('.sListExtEpgLong');
 
 				if(target){
 					var bullet = element.down('.sListBulletToggle');

@@ -39,6 +39,8 @@ from collections import defaultdict
 from difflib import SequenceMatcher
 from operator import itemgetter
 
+# from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
+
 from . import xrange, itervalues
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
@@ -170,6 +172,11 @@ class AutoTimer:
 			idx += 1
 		self.timers.append(timer)
 
+# 	def parseEPGAsync(self, simulateOnly=False):
+# 	   t = SimpleThread(lambda: self.parseEPG(simulateOnly=simulateOnly))
+# 	   t.start()
+# 	   return t.deferred
+ 	
 	# Main function
 	def parseEPG(self, autoPoll = False, simulateOnly = False):
 		self.autoPoll = autoPoll
@@ -227,7 +234,7 @@ class AutoTimer:
 	def createTask(self):
 		self.timer_count = 1
 		self.completed = []
-		job = Components.Task.Job(_("AutoTimerTask"))
+		job = Components.Task.Job(_("AutoTimer"))
 		timer = None
 
 		# Iterate Timer
@@ -242,7 +249,7 @@ class AutoTimer:
 			task.work = self.JobMessage
 			task.weighting = 1
 
-			return job
+		return job
 
 	def JobStart(self):
 		for timer in self.timers:
@@ -603,21 +610,21 @@ class AutoTimer:
 				AddPopup(
 					_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(self.conflicting), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.conflicting])),
 					MessageBox.TYPE_INFO,
-					5,
+					15,
 					CONFLICTNOTIFICATIONID
 				)
 			elif self.similars and config.plugins.autotimer.notifsimilar.value:
 				AddPopup(
 					_("%d conflict(s) solved with similar timer(s):\n%s") % (len(self.similars), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.similars])),
 					MessageBox.TYPE_INFO,
-					5,
+					15,
 					SIMILARNOTIFICATIONID
 				)
 		else:
 			AddPopup(
 				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (self.total, self.new, self.modified, len(self.conflicting), len(self.similars)),
 				MessageBox.TYPE_INFO,
-				5,
+				15,
 				NOTIFICATIONID
 			)
 

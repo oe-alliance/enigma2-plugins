@@ -47,6 +47,7 @@ class AudioWebScreen(WebScreen):
 
 		self["AudioTracks"] = AudioTracks(session, func=AudioTracks.GET)
 		self["SelectAudioTrack"] = AudioTracks(session, func=AudioTracks.SET)
+		self["Downmix"] = AudioTracks(session, func=AudioTracks.DOWNMIX)
 
 class AboutWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -104,28 +105,28 @@ class StreamSubServiceWebScreen(WebScreen):
 class ServiceListWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		
+
 		from Components.Sources.ServiceList import ServiceList
 		from Screens.ChannelSelection import service_types_tv
-	
+
 		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		self["ServiceList"] = ServiceList(fav, command_func=self.getServiceList, validate_commands=False)
 		self["localip"] = RequestData(request, what=RequestData.HOST)
-		
+
 	def getServiceList(self, sRef):
-		self["ServiceList"].root = sRef	
+		self["ServiceList"].root = sRef
 
 class ServiceListRecursiveWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		
+
 		from WebComponents.Sources.ServiceListRecursive import ServiceListRecursive
 		self["ServiceListRecursive"] = ServiceListRecursive(session, func=ServiceListRecursive.FETCH)
 
 class SwitchServiceWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		
+
 		from WebComponents.Sources.SwitchService import SwitchService
 		self["SwitchService"] = SwitchService(session)
 
@@ -271,7 +272,7 @@ streamingEvents = []
 class StreamingWebScreen(WebScreen):
 	EVENT_START = 0
 	EVENT_END = 1
-	
+
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from Components.Sources.StreamService import StreamService
@@ -373,27 +374,27 @@ class ServicePlayableWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from WebComponents.Sources.ServicePlayable import ServicePlayable
-		
+
 		self["ServicePlayable"] = ServicePlayable(session, type=ServicePlayable.SINGLE)
 
 class ServiceListPlayableWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from WebComponents.Sources.ServicePlayable import ServicePlayable
-		
+
 		self["ServiceListPlayable"] = ServicePlayable(session, type=ServicePlayable.BOUQUET)
 
 class SleepTimerWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		
-		from WebComponents.Sources.SleepTimer import SleepTimer		
+
+		from WebComponents.Sources.SleepTimer import SleepTimer
 		self["SleepTimer"] = SleepTimer(session)
-		
+
 class TPMWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		
+
 		from WebComponents.Sources.TPMChallenge import TPMChallenge
 		self["TPM"] = TPMChallenge()
 

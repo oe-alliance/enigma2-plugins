@@ -102,6 +102,20 @@ a.underline {
 	vertical-align: bottom
 }
 
+.leftCol {
+	float: left;
+	width: 50%
+}
+
+.rightCol {
+	float: right;
+	width: 50%
+}
+
+.right {
+	text-align: right
+}
+
 .liHeader {
 	border-top: #000;
 	border-bottom: #000
@@ -422,10 +436,8 @@ a.underline {
 	height: 100%
 }
 
-table.sListExtEpg {
-	width: 580px;
-	margin: 0;
-	padding: 0
+.sListExtEpg {
+	display: block
 }
 
 .header {

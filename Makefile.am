@@ -63,12 +63,12 @@ SUBDIRS = \
 	remotetimer \
 	rsdownloader \
 	setpasswd \
-	shoutcast \
 	showclock \
 	simplerss \
 	subsdownloader2 \
 	svdrp \
 	tageditor \
+	toolkit \
 	trafficinfo \
 	tvcharts \
 	unwetterinfo \

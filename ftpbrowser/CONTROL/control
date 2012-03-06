@@ -3,4 +3,4 @@ Version: 0.2-20090917-r0
 Description: FTP-Browser-Plugin for Enigma2
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
 Homepage: http://www.ritzmo.de
-Depends: enigma2 (>= 2.6git20091014), python-twisted-protocols, python-shell
+Depends: enigma2 (>= 2.6git20091014), python-twisted-protocols, python-shell, enigma2-plugin-systemplugins-toolkit

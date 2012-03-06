@@ -27,7 +27,10 @@ import sys
 
 from collections import defaultdict
 from operator import attrgetter, itemgetter
-from itertools import izip_longest as zip_longest # py3k
+try:
+	from itertools import izip_longest as zip_longest # py2x
+except:
+	from itertools import zip_longest # py3k
 
 # Plugin
 from Plugins.Plugin import PluginDescriptor
@@ -129,26 +132,41 @@ def InfoBarHideTunerState(self):
 def addExtension():
 	# Add to extension menu
 	from Components.PluginComponent import plugins
-	from Plugins.Extensions.InfoBarTunerState.plugin import NAME, DESCRIPTION, extension
+	from Plugins.Extensions.InfoBarTunerState.plugin import IBTSSHOW, IBTSSETUP, show, setup
 	if plugins:
-		for p in plugins.getPlugins( where = PluginDescriptor.WHERE_EXTENSIONSMENU ):
-			if p.name == NAME:
-				# Plugin is already in menu
-				break
-		else:
-			# Plugin not in menu - add it
-			plugin = PluginDescriptor(name = NAME, description = DESCRIPTION, where = PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart = False, fnc = extension)
-			plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].append(plugin)
+		if config.infobartunerstate.extensions_menu_show.value:
+			for p in plugins.getPlugins( where = PluginDescriptor.WHERE_EXTENSIONSMENU ):
+				if p.name == IBTSSHOW:
+					# Plugin is already in menu
+					break
+			else:
+				# Plugin not in menu - add it
+				plugin = PluginDescriptor(name = IBTSSHOW, description = IBTSSHOW, where = PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart = False, fnc = show)
+				plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].append(plugin)
+		if config.infobartunerstate.extensions_menu_setup.value:
+			for p in plugins.getPlugins( where = PluginDescriptor.WHERE_EXTENSIONSMENU ):
+				if p.name == IBTSSETUP:
+					# Plugin is already in menu
+					break
+			else:
+				# Plugin not in menu - add it
+				plugin = PluginDescriptor(name = IBTSSETUP, description = IBTSSETUP, where = PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart = False, fnc = setup)
+				plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].append(plugin)
 
 def removeExtension():
 	# Remove from extension menu
 	from Components.PluginComponent import plugins
-	from Plugins.Extensions.InfoBarTunerState.plugin import NAME, DESCRIPTION
-	for p in plugins.getPlugins( where = PluginDescriptor.WHERE_EXTENSIONSMENU ):
-		if p.name == NAME:
-			plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].remove(p)
-			break
-
+	from Plugins.Extensions.InfoBarTunerState.plugin import IBTSSHOW, IBTSSETUP
+	if config.infobartunerstate.extensions_menu_show.value:
+		for p in plugins.getPlugins( where = PluginDescriptor.WHERE_EXTENSIONSMENU ):
+			if p.name == IBTSSHOW:
+				plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].remove(p)
+				break
+	if config.infobartunerstate.extensions_menu_setup.value:
+		for p in plugins.getPlugins( where = PluginDescriptor.WHERE_EXTENSIONSMENU ):
+			if p.name == IBTSSETUP:
+				plugins.plugins[PluginDescriptor.WHERE_EXTENSIONSMENU].remove(p)
+				break
 
 #######################################################
 # Logical background task
@@ -944,13 +962,10 @@ class TunerState(TunerStateBase):
 				if self.progress is not None:
 					self["Progress"].setValue( self.progress )
 					self["Progress"].show()
-					
+				
 				# No resize necessary
 				fields.append( "Progress" )
-				if not self.endless:
-					widths.append( self["Progress"].instance.size().width() )
-				else:
-					widths.append( 0 )
+				widths.append( self["Progress"].instance.size().width() )
 			
 			elif content == "TimerDestination":
 				text = self.destination

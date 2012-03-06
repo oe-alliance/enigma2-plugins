@@ -2,16 +2,22 @@
 		font-family: Tahoma, Sans-Serif;
 		font-size: 14px;
 		font-weight: bold;
-		color: #fff;
+		color: #485052;
 		text-align: center;
 		background: #555
 	}
 
-	a, a:visited, a:active{
+	a, a:visited, a:active,{
 		color: #485052;
 		text-decoration: none;
 	}
-
+	
+	a, a:visited, a:active, .remark{
+		color: #485052;
+		text-decoration: none;
+		margin-top: 15px;
+	}
+	
 	img{
 		border: 0px;
 	}
@@ -24,12 +30,21 @@
 		background-color: grey;
 		border: none;
 	}
-	
+
 	form{
-		margin: 2px;		
+		margin: 2px;
 	}
 
-	#notification{		
+	table, table tr, table td{
+		margin: 0px;
+		padding: 0px;
+		border-width: 0 0 0 0;
+		border-style: collapse;
+		border-spacing: 0px;
+		border: 0px;
+	}
+
+	#notification{
 		color: #000;
 		width: 50%;
 		height: 32px;
@@ -38,7 +53,7 @@
 		left: 25%;		
 		text-align: center;
 		vertical-align: bottom;
-		z-index: 2;		
+		z-index: 2;
 	}
 
 
@@ -47,7 +62,7 @@
  ***********************/
 
 	.wap a, .wap a:visited, .wap a:active{
-		color: #fff;		
+		color: #fff;
 	}
 
 
@@ -77,7 +92,11 @@
 	.center {
 		text-align: center;
 	}
-
+	
+	.underline {
+		text-decoration:underline;
+	}
+	
 	.buttonbar {
 		margin: 5px;
 	}
@@ -92,9 +111,9 @@
 		background: #000;
 		padding-left: 5px;
 		margin-bottom: 8px;
-   	border-radius: 5px;
-   	-webkit-border-radius: 5px;
-   	-moz-border-radius: 5px;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
 	}
 	
 	#banner a, #banner a:visited, #banner a:active{
@@ -145,9 +164,9 @@
 		padding-right: 3px;
 		padding-bottom: 1px;
 		margin-bottom: 8px;
-   	border-radius: 5px;
-   	-webkit-border-radius: 5px;
-   	-moz-border-radius: 5px; 	
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px; 	
 	}
 	
 	#menuTable{
@@ -160,21 +179,28 @@
 
 	#menuBack{
 		overflow:hidden;
-		width: 10%;
+		width: auto;
 		height: auto;
 		text-align: left;
 	}
 	
 	#menuLeft{
 		overflow:hidden;
-		width: 30%;
+		width: auto;
 		height: auto;
 		text-align: left;
 	}
 
 	#menuRight{
 		overflow:hidden;
-		width: 60%;
+		width: auto;
+		height: auto;
+		text-align: right;
+	}
+
+	#menuAbout{
+		overflow:hidden;
+		width: auto;
 		height: auto;
 		text-align: right;
 	}
@@ -194,12 +220,12 @@
 	 
 	#nav{
 		width: 100%;
-		min-height: 308px;
+		min-height: 50px;
 		background: #FFF;
 		border: 2px solid #000;
 		border-radius: 5px;
-    -webkit-border-radius: 5px;
-   	-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
 	}
 
 	#navHd{
@@ -217,8 +243,8 @@
 		margin-top: 8px;
 		border: 2px solid #000;
 		border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
 	}
 
 	#searchHd{
@@ -234,8 +260,8 @@
 		margin-top: 8px;
 		border: 2px solid #000;
 		border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
 	}
 
 	#volHd{
@@ -268,7 +294,7 @@
 		float: left;
 		background: #FFF;
 		width: 673px;
-		min-height: 308px;
+		min-height: 50px;
 		margin-left: 8px;
 		border: 2px solid #000;		
 		border-radius: 5px;
@@ -333,17 +359,17 @@
 		display: inline-block;
 	}
 	a.tags:hover {
-    box-shadow: 0 0 5px #485052;
-    -webkit-box-shadow: 0 0 5px #485052; 
-    -moz-box-shadow: 0 0 5px #485052; 
+		box-shadow: 0 0 5px #485052;
+		-webkit-box-shadow: 0 0 5px #485052; 
+		-moz-box-shadow: 0 0 5px #485052; 
 	}
 	a.selected {
 		background: #FFFF99;
 	}
 	a.selected:hover {
-    box-shadow: 0 0 5px #485052;
-    -webkit-box-shadow: 0 0 5px #485052; 
-    -moz-box-shadow: 0 0 5px #485052; 
+		box-shadow: 0 0 5px #485052;
+		-webkit-box-shadow: 0 0 5px #485052; 
+		-moz-box-shadow: 0 0 5px #485052; 
 	}
 	
 	.list{
@@ -415,18 +441,120 @@
 /**************
  AutoTimer Preview
  **************/
-	.preview{
+	#previewlist{
 		width: 100%;
 	}
-	.preview tr{
+	#previewlist tr{
 		margin-bottom: 3px;
 	}
-	.preview td{
+	#previewlist td{
 		vertical-align: text-top;
 		padding-top: 3px;
 	}
-	.preview td:not(.nopadding){
+	#previewlist td:not(.nopadding){
 		padding-left: 10px;
+	}
+
+
+/**************
+ AutoTimer Timers
+ **************/
+	#timerlist{
+		width: 100%;
+	}
+	#timerlist tr{
+		margin-bottom: 3px;
+	}
+	#timerlist td{
+		vertical-align: text-top;
+		padding-top: 3px;
+	}
+	
+	.tListItemTable {
+		width: 100%
+	}
+	
+	.tListSName {
+		text-align: left
+	}
+	
+	.tListItem {
+		font-weight: bold;
+		font-size: 13px
+	}
+	
+	.tListTitle {
+		width: 150px;
+		text-align: left
+	}
+	
+	.tListDescr {
+		width: 150px;
+		text-align: left
+	}
+	
+	.tListRepeat {
+		width: 70px;
+		text-align: left
+	}
+	
+	.tListDuration {
+		width: 70px;
+		text-align: left
+	}
+	
+	.tListBegin {
+		width: 100px;
+		text-align: left
+	}
+	
+	.tListEnd {
+		width: 100px;
+		text-align: left
+	}
+	
+	.tListAfter {
+		width: 85px;
+		text-align: left
+	}
+	
+	.tListOption {
+		width: 80px;
+		text-align: center
+	}
+	
+	.timerState0 {
+		color: #485052
+	}
+	
+	.timerState1 {
+		color: #900
+	}
+	
+	.timerState2 {
+		color: #090
+	}
+	
+	.timerState3 {
+		color: #009
+	}
+
+
+/**************
+ AutoTimer About
+ **************/
+	.about{
+		font-size: 12px;
+	}
+	
+	.about h1{
+		font-size: 16px;
+		margin-left: 20px;
+	}
+
+	.about div, .about pre{
+		margin-left: 25px;
+		margin-bottom: 10px;
 	}
 
 
@@ -441,6 +569,7 @@
 	}
 
 	.header{
+		color: #FFF;
 		padding-top: 2px;
 		padding-left: 4px;
 		padding-right: 4px;
@@ -449,12 +578,13 @@
 	}
 
 	.headerindent{
-		margin-left: 5px;
+		margin-left: 7px;
 	}
 
 	.nobreak {
 	  white-space: nowrap;
 	}
+
 
 /***************
 * IE6 Hackstuff

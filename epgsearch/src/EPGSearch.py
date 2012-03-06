@@ -13,7 +13,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from NTIVirtualKeyBoard import NTIVirtualKeyBoard
+from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
 from Components.ActionMap import ActionMap
 from Components.Button import Button

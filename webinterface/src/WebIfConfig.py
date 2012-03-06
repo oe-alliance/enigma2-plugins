@@ -58,6 +58,7 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 	def createSetup(self):
 		list = [
 			getConfigListEntry(_("Start Webinterface"), config.plugins.Webinterface.enabled),
+			getConfigListEntry(_("Show Setup in Extensions menu"), config.plugins.Webinterface.show_in_extensionsmenu),
 			getConfigListEntry(_("Enable /media"), config.plugins.Webinterface.includemedia),
 			getConfigListEntry(_("Allow zapping via Webinterface"), config.plugins.Webinterface.allowzapping),
 			getConfigListEntry(_("Autowrite timer"), config.plugins.Webinterface.autowritetimer),

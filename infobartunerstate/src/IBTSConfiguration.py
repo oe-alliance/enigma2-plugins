@@ -25,8 +25,8 @@ from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 
 from Components.ActionMap import ActionMap
+from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-
 from Screens.Setup import SetupSummary
 
 # Plugin internal
@@ -84,7 +84,8 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			
 			(  _("Enable InfoBarTunerState")                          , config.infobartunerstate.enabled ),
 			(  separator                                              , config.infobartunerstate.about ),
-			(  _("Add to extension menu")                             , config.infobartunerstate.extensions_menu ),
+			(  _("Add Show to extension menu")                        , config.infobartunerstate.extensions_menu_show ),
+			(  _("Add Setup to extension menu")                       , config.infobartunerstate.extensions_menu_setup ),
 #			(  _("Pop-Up time in seconds")                            , config.infobartunerstate.popup_time ),
 			(  _("Show and hide with InfoBar")                        , config.infobartunerstate.show_infobar ),
 			(  _("Show on events")                                    , config.infobartunerstate.show_events ),
@@ -122,7 +123,6 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 		for conf in self.config:
 			# 0 entry text
 			# 1 variable
-			# 2 validation
 			list.append( getConfigListEntry( conf[0], conf[1]) )
 		self.list = list
 		self["config"].setList(self.list)
@@ -135,7 +135,10 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			x()
 		#self.createConfig()
 
-	def close(self):
+	# Overwrite ConfigListScreen keySave function
+	def keySave(self):
+		self.saveAll()
+
 		# Check field configuration
 		fieldicon = []
 		fieldprogress = []
@@ -178,7 +181,7 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 					recoverInfoBar()
 				
 				# Handle extension menu integration
-				if config.infobartunerstate.extensions_menu.value:
+				if config.infobartunerstate.extensions_menu_show.value or config.infobartunerstate.extensions_menu_setup.value:
 					# Add to extension menu
 					addExtension()
 				else:
@@ -210,7 +213,15 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			if gInfoBarTunerState:
 				# Plugin is active, disable it
 				gInfoBarTunerState.close()
-		
+
+		self.close()
+	
+	# Overwrite Screen close function
+	def close(self):
+		from plugin import ABOUT
+		self.session.openWithCallback(self.closeConfirm, MessageBox, ABOUT, MessageBox.TYPE_INFO)
+
+	def closeConfirm(self, dummy=None):
 		# Call baseclass function
 		Screen.close(self)
 

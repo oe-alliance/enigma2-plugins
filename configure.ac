@@ -122,7 +122,6 @@ autotimer/src/WebComponents/Sources/Makefile
 autotimer/src/WebScreens/Makefile
 autotimer/src/web/Makefile
 autotimer/src/web-data/Makefile
-autotimer/src/webinterface/Makefile
 
 babelzapper/etc/Makefile
 babelzapper/Makefile
@@ -316,6 +315,7 @@ mosaic/src/Makefile
 
 moviecut/Makefile
 moviecut/meta/Makefile
+moviecut/po/Makefile
 moviecut/src_cc/Makefile
 moviecut/src_py/Makefile
 
@@ -438,11 +438,6 @@ setpasswd/meta/Makefile
 setpasswd/po/Makefile
 setpasswd/src/Makefile
 
-shoutcast/Makefile
-shoutcast/meta/Makefile
-shoutcast/po/Makefile
-shoutcast/src/Makefile
-
 showclock/Makefile
 showclock/meta/Makefile
 showclock/po/Makefile
@@ -466,6 +461,7 @@ subsdownloader2/src/SourceCode/periscope/Makefile
 subsdownloader2/src/SourceCode/periscope/services/Makefile
 subsdownloader2/src/SourceCode/periscope/services/BierDopje/Makefile
 subsdownloader2/src/SourceCode/periscope/services/OpenSubtitle/Makefile
+subsdownloader2/src/SourceCode/periscope/services/Subtitulos/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/services/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/services/Napisyme/Makefile
@@ -479,6 +475,9 @@ tageditor/Makefile
 tageditor/meta/Makefile
 tageditor/po/Makefile
 tageditor/src/Makefile
+
+toolkit/Makefile
+toolkit/src/Makefile
 
 trafficinfo/Makefile
 trafficinfo/meta/Makefile

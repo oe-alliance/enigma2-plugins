@@ -19,7 +19,7 @@ from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from os import environ as os_environ
-from NTIVirtualKeyBoard import NTIVirtualKeyBoard
+from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 import re
 try:
 	import htmlentitydefs

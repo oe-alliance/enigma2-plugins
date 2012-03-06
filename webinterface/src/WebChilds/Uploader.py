@@ -7,8 +7,25 @@ from re import search
 
 class UploadResource(resource.Resource):
 	default_uploaddir = "/tmp/"
+	restricted_paths = frozenset(("/bin/", "/boot/", "/dev/", "/etc/", "/lib/", "/proc/", "/sbin/", "/sys/", "/usr/", "/var/"))
+
+	def out_POST(self, req, state, statetext, isXml):
+		req.setResponseCode(http.OK)
+		if isXml:
+			req.setHeader('Content-type', 'application/xhtml+xml;' )
+			req.setHeader('charset', 'UTF-8')
+			return """<?xml version="1.0" encoding="UTF-8" ?>
+<e2simplexmlresult>
+	<e2state>%s</e2state>
+	<e2statetext>%s</e2statetext>
+</e2simplexmlresult>""" % ('True' if state else 'False', statetext)
+		else:
+			req.setResponseCode(http.OK)
+			req.setHeader('Content-type', 'text/html')
+			return statetext
 
 	def render_POST(self, req):
+		isXml = 'xml' in req.args and req.args['xml'][0] == 'True'
 		uploaddir = self.default_uploaddir
 		if req.args['path'][0]:
 			if os_path.isdir(req.args['path'][0]):
@@ -16,24 +33,25 @@ class UploadResource(resource.Resource):
 				if uploaddir[-1] != "/":
 					uploaddir += "/"
 			else:
-				req.setResponseCode(http.OK)
-				req.setHeader('Content-type', 'text/html')
-				return "path '%s' to upload not existing!" % req.args['path'][0]
+				return self.out_POST(req, False, "path '%s' to upload not existing!" % req.args['path'][0], isXml)
 
 		data = req.args['file'][0]
 		if not data:
-			req.setResponseCode(http.OK)
-			req.setHeader('Content-type', 'text/html')
-			return "filesize was 0, not uploaded"
+			return self.out_POST(req, False, "filesize was 0, not uploaded", isXml)
+
+		# allw to overwrite files (if the user requests it), but not in critical directories
+		overwrite = 'overwrite' in req.args and req.args['overwrite'][0] == 'True'
+		if overwrite and uploaddir in self.restricted_paths:
+			overwrite = False
 
 		try:
 			matches = search('.*?filename="(.*?)"\r\n.*?', req.content.getvalue())
-			fn=os_path.join(uploaddir, matches.group(1))
+			fn = os_path.join(uploaddir, matches.group(1))
 		except Exception, e:
-			fn= None
+			fn = None
 
-		# NOTE: we only accept the given filename if no such file exists yet
-		if fn and not os_path.exists(fn):
+		# NOTE: we only accept the given filename if no such file exists yet or the user requested it AND we think its safe
+		if fn and (overwrite or not os_path.exists(fn)):
 			fd = os_open(fn, O_WRONLY | O_CREAT)
 		else:
 			fd, fn = mkstemp(dir = uploaddir)
@@ -46,13 +64,10 @@ class UploadResource(resource.Resource):
 				os_unlink(fn)
 			except OSError, oe:
 				pass
-			req.setResponseCode(http.OK)
-			req.setHeader('Content-type', 'text/html')
-			return "error writing to disk, not uploaded"
+			return self.out_POST(req, False, "error writing to disk, not uploaded", isXml)
 		else:
-			req.setResponseCode(http.OK)
-			req.setHeader('Content-type', 'text/html')
-			return "uploaded to %s" % fn
+			statetext = fn if isXml else "uploaded to %s" % fn
+			return self.out_POST(req, True, statetext, isXml)
 
 	def render_GET(self, req):
 		try:

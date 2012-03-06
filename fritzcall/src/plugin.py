@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 660 $
-$Date: 2011-12-10 21:35:47 +0100 (Sat, 10 Dec 2011) $
-$Id: plugin.py 660 2011-12-10 20:35:47Z michael $
+$Revision: 669 $
+$Date: 2012-02-03 16:06:26 +0100 (Fri, 03 Feb 2012) $
+$Id: plugin.py 669 2012-02-03 15:06:26Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -107,6 +107,7 @@ config.plugins.FritzCall.prefix = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.prefix.setUseableChars('0123456789')
 config.plugins.FritzCall.connectionVerbose = ConfigEnableDisable(default=True)
 config.plugins.FritzCall.ignoreUnknown = ConfigEnableDisable(default=False)
+config.plugins.FritzCall.reloadPhonebookTime = ConfigInteger(default=8, limits=(0, 99))
 
 
 def getMountedDevs():
@@ -292,8 +293,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 660 $"[1:-2] + "\n" + 
-							"$Date: 2011-12-10 21:35:47 +0100 (Sat, 10 Dec 2011) $"[1:23] + "\n"
+							"$Revision: 669 $"[1:-2] + "\n" + 
+							"$Date: 2012-02-03 16:06:26 +0100 (Fri, 03 Feb 2012) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -494,7 +495,7 @@ class FritzCallFBF:
 						'var:pagename':'fonbuch',
 						'var:menu':'fon',
 						'sid':self._md5Sid,
-						'telcfg:settings/Phonebook/Books/Select':self._phoneBookID, # this selects always the first phonbook
+						'telcfg:settings/Phonebook/Books/Select':self._phoneBookID, # this selects always the first phonbook first
 						})
 		url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 		debug("[FritzCallFBF] _loadFritzBoxPhonebook: '" + url + "' parms: '" + parms + "'")
@@ -505,6 +506,14 @@ class FritzCallFBF:
 					}, postdata=parms).addCallback(self._parseFritzBoxPhonebook).addErrback(self._errorLoad)
 
 	def _parseFritzBoxPhonebook(self, html):
+		def cleanNumber(number):
+			number = number.replace('(','').replace(')','').replace(' ','').replace('-','')
+			if number[0] == '+':
+				number = '00' + number[1:]
+			if number.startswith(config.plugins.FritzCall.country.value):
+				number = '0' + number[len(config.plugins.FritzCall.country.value):]
+			return number
+				
 		debug("[FritzCallFBF] _parseFritzBoxPhonebook")
 
 		# first, let us get the charset
@@ -537,14 +546,14 @@ class FritzCallFBF:
 			#  Photo could be fetched with http://192.168.0.1/lua/photo.lua?photo=<Path to picture[7:]&sid=????
 			#===============================================================================
 			debug("[FritzCallFBF] _parseFritzBoxPhonebook: discovered newer firmware")
-			found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name(\d+)" value="[Dd]reambox" id="uiPostPhonebookName\d+" disabled>', html, re.S)
+			found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name\d+" value="[Dd]reambox" id="uiPostPhonebookName\d+" disabled>\s*<input type="hidden" name="telcfg:settings/Phonebook/Books/Id\d+" value="(\d+)" id="uiPostPhonebookId\d+" disabled>', html, re.S)
 			if found:
 				phoneBookID = found.group(1)
 				debug("[FritzCallFBF] _parseFritzBoxPhonebook: found dreambox phonebook with id: " + phoneBookID)
 				if self._phoneBookID != phoneBookID:
 					self._phoneBookID = phoneBookID
 					debug("[FritzCallFBF] _parseFritzBoxPhonebook: reload phonebook")
-					self._loadFritzBoxPhonebook(self._phoneBookID) # reload with dreambox phonebook
+					self._loadFritzBoxPhonebook(None) # reload with dreambox phonebook
 					return
 
 			entrymask = re.compile('(TrFonName\("[^"]+", "[^"]+", "[^"]*"(?:, "[^"]*")?\);.*?)document.write\(TrFon1\(\)', re.S)
@@ -583,6 +592,7 @@ class FritzCallFBF:
 						if config.plugins.FritzCall.showVanity.value and found.group(4):
 							thisname = thisname + ", " + _("Vanity") + ": " + found.group(4)
 
+						thisnumber = cleanNumber(thisnumber)
 						debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						phonebook.phonebook[thisnumber] = thisname
@@ -2130,7 +2140,17 @@ class FritzCallPhonebook:
 		debug("[FritzCallPhonebook] init")
 		# Beware: strings in phonebook.phonebook have to be in utf-8!
 		self.phonebook = {}
+		if config.plugins.FritzCall.reloadPhonebookTime.value > 0:
+			self.loop = eTimer()
+			self.loop.callback.append(self.startReload)
+			self.loop.start(config.plugins.FritzCall.reloadPhonebookTime.value*60*60*1000, 1)
 		self.reload()
+
+	def startReload(self):
+		self.loop.stop()
+		debug("[FritzCallPhonebook] reloading phonebooks " + time.ctime())
+		self.reload()
+		self.loop.start(config.plugins.FritzCall.reloadPhonebookTime.value*60*60*1000, 1)
 
 	def reload(self):
 		debug("[FritzCallPhonebook] reload")
@@ -2721,7 +2741,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 660 $"[1: - 1] + "$Date: 2011-12-10 21:35:47 +0100 (Sat, 10 Dec 2011) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 669 $"[1: - 1] + "$Date: 2012-02-03 16:06:26 +0100 (Fri, 03 Feb 2012) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2781,6 +2801,9 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 				self.list.append(getConfigListEntry(_("PhoneBook Location"), config.plugins.FritzCall.phonebookLocation))
 				if config.plugins.FritzCall.lookup.value:
 					self.list.append(getConfigListEntry(_("Automatically add new Caller to PhoneBook"), config.plugins.FritzCall.addcallers))
+
+			if config.plugins.FritzCall.phonebook.value or config.plugins.FritzCall.fritzphonebook.value:
+				self.list.append(getConfigListEntry(_("Reload interval for phonebooks (hours)"), config.plugins.FritzCall.reloadPhonebookTime))
 
 			self.list.append(getConfigListEntry(_("Strip Leading 0"), config.plugins.FritzCall.internal))
 			# self.list.append(getConfigListEntry(_("Default display mode for FRITZ!Box calls"), config.plugins.FritzCall.fbfCalls))
@@ -3187,7 +3210,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 660 $"[1:-1]	+ "$Date: 2011-12-10 21:35:47 +0100 (Sat, 10 Dec 2011) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 669 $"[1:-1]	+ "$Date: 2012-02-03 16:06:26 +0100 (Fri, 03 Feb 2012) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

@@ -155,7 +155,7 @@ off64_t readoff(int fa, int fao, int fs, int fso, double t, int beg, double& tr)
       exit(8);
     }
     time_offset = buf0[1];
-    if (buf1[1] > buf0[1] && buf1[1] - buf0[1] < 450000)
+    if (buf1[1] > buf0[1] && buf1[1] - buf0[1] < 900000)
       time_offset -= (buf1[1]-buf0[1])*buf0[0]/(buf1[0]-buf0[0]);
     else if (buf1[1] > buf0[1] || buf0[1] - buf1[1] > 45000)
       time_offset = buf1[1];
@@ -170,7 +170,7 @@ off64_t readoff(int fa, int fao, int fs, int fso, double t, int beg, double& tr)
     readbufinternal(fa, buf0);
     readbufinternal(fa, buf1);
     time_offset = buf0[1];
-    if (buf1[1] > buf0[1] && buf1[1] - buf0[1] < 450000)
+    if (buf1[1] > buf0[1] && buf1[1] - buf0[1] < 900000)
       time_offset -= (buf1[1]-buf0[1])*buf0[0]/(buf1[0]-buf0[0]);
     else if (buf1[1] > buf0[1] || buf0[1] - buf1[1] > 45000)
       time_offset = buf1[1];
@@ -199,8 +199,8 @@ off64_t readoff(int fa, int fao, int fs, int fso, double t, int beg, double& tr)
       writebufinternal(fao, buf0);
     if (endp)
       break;
-    if (buf0[1] - buf1[1] > 45000 || buf1[1] - buf0[1] > 450000) {
-      if (absless(buf1[1] + ((long long int)1)<<33 - buf0[1], 450000))
+    if (buf0[1] - buf1[1] > 45000 || buf1[1] - buf0[1] > 900000) {
+      if (absless(buf1[1] + ((long long int)1)<<33 - buf0[1], 900000))
 	time_offset -= ((long long int)1)<<33;
       else
 	time_offset += buf1[1] - buf0[1];

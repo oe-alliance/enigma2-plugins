@@ -5,7 +5,7 @@
 # gerrit <gerrit@nedlinux.nl>, 2008, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
 "PO-Revision-Date: 2011-10-12 10:36+0100\n"
@@ -353,6 +353,9 @@ msgstr "Network mount"
 msgid "New"
 msgstr "Nieuw"
 
+msgid "New call"
+msgstr ""
+
 msgid "No DECT phone registered"
 msgstr "Geen DECT telefoon geregistreerd"
 
@@ -447,6 +450,9 @@ msgstr "Lees telefoonboek van FRITZ!Box"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Refresh status"
 msgstr "Verversings status"
+
+msgid "Reload interval for phonebooks (hours)"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
@@ -663,64 +669,3 @@ msgstr "niets weergeven"
 msgid "work"
 msgstr "werk"
 
-#~ msgid "Areacode to add to Outgoing Calls (if necessary)"
-#~ msgstr "Netnummer bij uitgaande gesprekken  (indien nodig)"
-
-#~ msgid "CF Drive"
-#~ msgstr "CF kaart"
-
-#~ msgid "Could not load calls from FRITZ!Box - Error: %s"
-#~ msgstr "Kon de gesprekken niet laden van FRITZ!Box - Fout: %s"
-
-#~ msgid "Dialling failed - Error: %s"
-#~ msgstr "FRITZ!Box Login mislukt! - Error: %s"
-
-#~ msgid "FRITZ!Box Login failed! - Wrong Password!"
-#~ msgstr "FRITZ!Box Login mislukt! - Onjuist wachtwoord"
-
-#, fuzzy
-#~ msgid "FRITZ!Box Login failed: "
-#~ msgstr "FRITZ!Box Login mislukt! - Error: %s"
-
-#~ msgid "Full screen display"
-#~ msgstr "Volledig scherm"
-
-#~ msgid "Harddisk"
-#~ msgstr "Harde schijf"
-
-#~ msgid ""
-#~ "Incoming Call on %(date)s from\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "to: %(phone)s"
-#~ msgstr ""
-#~ "Binnenkomend gesprek op %(date)s van\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "to: %(phone)s"
-
-#~ msgid ""
-#~ "Outgoing Call on %(date)s to\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "from: %(phone)s"
-#~ msgstr ""
-#~ "Uitgaand gesprek op %(date)s to\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "van: %(phone)s"
-
-#~ msgid "Show Calls for specific MSN"
-#~ msgstr "Laat gesprekken van een specifieke MSN zien"
-
-#, fuzzy
-#~ msgid "Toggle "
-#~ msgstr "WLAN Aan/Uit"

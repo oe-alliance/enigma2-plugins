@@ -496,13 +496,14 @@ function EPGListNowNext(xml){
 	this.getArray = function(){
 		list = [];
 		var len = this.xmlitems.length;
-		var cssclass = 'even';
+		var cssclass = 'odd';
 		var _this = this;
 		for (var i=0; i < len; i += 2){
-			cssclass = cssclass == 'even' ? 'odd' : 'even';
 			now = new EPGEvent(_this.xmlitems.item(i)).toJSON();
 			next = new EPGEvent(_this.xmlitems.item(i+1)).toJSON();
 			list.push({"now" : now, "next" : next, "cssclass": cssclass});
+			if(!now.ismarker)
+				cssclass = cssclass == 'even' ? 'odd' : 'even';
 		}
 		return list;
 	};
@@ -668,13 +669,14 @@ function ServiceList(xml){
 	this.servicelist = [];
 	this.getArray = function(){
 		if(this.servicelist.length === 0){
-			var cssclass = 'even';
+			var cssclass = 'odd';
 
 			var len = this.xmlitems.length;
 			for (var i=0; i<len; i++){
-				cssclass = cssclass == 'even' ? 'odd' : 'even';
 				var service = new Service(this.xmlitems.item(i), cssclass).toJSON();
 				this.servicelist.push(service);
+				if(!service.ismarker)
+					cssclass = cssclass == 'even' ? 'odd' : 'even';
 			}
 		}
 

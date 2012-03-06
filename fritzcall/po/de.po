@@ -7,13 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-01-15 16:21+0100\n"
+"POT-Creation-Date: 2012-02-03 12:59+0100\n"
+"PO-Revision-Date: 2012-02-03 12:59+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. TRANSLATORS: this is a window title.
@@ -286,7 +286,7 @@ msgid "IP Address:"
 msgstr "IP Adresse:"
 
 msgid "Ignore callers with no phone number"
-msgstr ""
+msgstr "Ignoriere Anrufe ohne Rufnummer"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Incoming"
@@ -349,6 +349,9 @@ msgstr "Netzwerk"
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
 msgstr "Neu"
+
+msgid "New call"
+msgstr "Neuer Anruf"
 
 msgid "No DECT phone registered"
 msgstr "Kein Schnurlostelefon angemeldet"
@@ -442,6 +445,9 @@ msgstr "Telefonbuch der FRITZ!Box auslesen"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Refresh status"
 msgstr "Status neu holen"
+
+msgid "Reload interval for phonebooks (hours)"
+msgstr "Lade Telefonbücher neu nach soviel Stunden"
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
@@ -570,9 +576,6 @@ msgstr ""
 "\n"
 "Es könnte eine Kommunikationsproblem mit der FRITZ!Box sein.\n"
 "Versuchen Sie es nochmal."
-
-msgid "business"
-msgstr ""
 
 msgid "call redirections active"
 msgstr "Rufumleitungen aktiv"
