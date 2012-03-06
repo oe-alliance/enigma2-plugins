@@ -20,9 +20,6 @@ from datetime import timedelta, date
 # EPGCache & Event
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
 
-# Enigma2 Config
-from Components.config import config
-
 # AutoTimer Component
 from AutoTimerComponent import preferredAutoTimerComponent
 
@@ -33,7 +30,7 @@ from operator import itemgetter
 
 from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
 
-from . import xrange, itervalues
+from . import config, xrange, itervalues
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
