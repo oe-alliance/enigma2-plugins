@@ -483,7 +483,10 @@ class AutoTimer:
 				if config.plugins.autotimer.add_autotimer_to_tags.value:
 					tags.append('AutoTimer')
 				if config.plugins.autotimer.add_name_to_tags.value:
-					tags.append(timer.name)
+					name = timer.name.strip()
+					if name:
+						name = name[0].upper() + name[1:].replace(" ", "_")
+						tags.append(name)
 				newEntry.tags = tags
 
 				if oldExists:
