@@ -1,0 +1,156 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"PO-Revision-Date: 2012-03-05 22:58+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/plugin.py:370
+msgid "Autoresolution"
+msgstr "Auto resolution"
+
+#: ../src/plugin.py:237
+#, python-format
+msgid ""
+"Autoresolution Plugin Testmode:\n"
+"Is %s OK?"
+msgstr ""
+"Auto resolution Plugin Test mode:\n"
+"Is %s OK?"
+
+#: ../src/plugin.py:378
+msgid "Autoresolution Switch"
+msgstr "Auto resolution Switch"
+
+#: ../src/plugin.py:326
+msgid "Autoresolution is not working in Scart/DVI-PC Mode"
+msgstr "Auto resolution is not working in Scart/DVI-PC Mode"
+
+#: ../src/plugin.py:308
+msgid "Autoresolution settings"
+msgstr "Auto resolution settings"
+
+#: ../src/plugin.py:286
+msgid "Autoresolution videomode setup"
+msgstr "Auto resolution video mode setup"
+
+#: ../src/plugin.py:302
+msgid "Cancel"
+msgstr "Cancel"
+
+#: ../src/plugin.py:322
+msgid "Deinterlacer mode for interlaced content"
+msgstr "De-interlace mode for interlaced content"
+
+#: ../src/plugin.py:323
+msgid "Deinterlacer mode for progressive content"
+msgstr "De-interlace mode for progressive content"
+
+#: ../src/plugin.py:320
+msgid "Delay x seconds after service started"
+msgstr "Delay x seconds after service started"
+
+#: ../src/plugin.py:31
+msgid "Enable 1080p24 Mode"
+msgstr "Enable 1080p24 Mode"
+
+#: ../src/plugin.py:32
+msgid "Enable 1080p25 Mode"
+msgstr "Enable 1080p25 Mode"
+
+#: ../src/plugin.py:32
+msgid "Enable 1080p30 Mode"
+msgstr "Enable 1080p30 Mode"
+
+#: ../src/plugin.py:31
+msgid "Enable 720p24 Mode"
+msgstr "Enable 720p24 Mode"
+
+#: ../src/plugin.py:311
+msgid "Enable Autoresolution"
+msgstr "Enable Auto resolution"
+
+#: ../src/plugin.py:30
+msgid "HD Interlace Mode"
+msgstr "HD Interlace Mode"
+
+#: ../src/plugin.py:30
+msgid "HD Progressive Mode"
+msgstr "HD Progressive Mode"
+
+#: ../src/plugin.py:301
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:317 ../src/plugin.py:318
+msgid "Refresh Rate"
+msgstr "Refresh Rate"
+
+#: ../src/plugin.py:321
+msgid "Running in testmode"
+msgstr "Running in test mode"
+
+#: ../src/plugin.py:28
+msgid "SD 24HZ Progressive mode"
+msgstr "SD 24HZ Progressive mode"
+
+#: ../src/plugin.py:27
+msgid "SD 25/50HZ Interlace Mode"
+msgstr "SD 25/50HZ Interlace Mode"
+
+#: ../src/plugin.py:29
+msgid "SD 25/50HZ Progressive Mode"
+msgstr "SD 25/50HZ Progressive Mode"
+
+#: ../src/plugin.py:27
+msgid "SD 30/60HZ Interlace Mode"
+msgstr "SD 30/60HZ Interlace Mode"
+
+#: ../src/plugin.py:29
+msgid "SD 30/60HZ Progressive Mode"
+msgstr "SD 30/60HZ Progressive Mode"
+
+#: ../src/plugin.py:319
+msgid "Show info screen"
+msgstr "Show info screen"
+
+#: ../src/plugin.py:39 ../src/plugin.py:41
+msgid "auto"
+msgstr "auto"
+
+#: ../src/plugin.py:39 ../src/plugin.py:41
+msgid "bob"
+msgstr "bob"
+
+#: ../src/plugin.py:130
+msgid "default"
+msgstr "default"
+
+#: ../src/plugin.py:39 ../src/plugin.py:41
+msgid "off"
+msgstr "off"
+
+#: ../src/plugin.py:39 ../src/plugin.py:41
+msgid "on"
+msgstr "on"
+
+#: ../src/plugin.py:44
+msgid "second"
+msgstr "second"
+
+#: ../src/plugin.py:43 ../src/plugin.py:44 ../src/plugin.py:45
+#: ../src/plugin.py:46
+msgid "seconds"
+msgstr "seconds"
