@@ -13,7 +13,7 @@ from Tools.XMLTools import stringToXML
 from enigma import eServiceReference
 from . import _, config, iteritems, plugin
 
-API_VERSION = "1.2"
+API_VERSION = "1.3"
 
 class AutoTimerBaseResource(resource.Resource):
 	_remove = False
@@ -386,6 +386,10 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.notifsimilar.value = True if value == "true" else False
 			elif key == "maxdaysinfuture":
 				config.plugins.autotimer.maxdaysinfuture.value = int(value)
+			elif key == "add_autotimer_to_tags":
+				config.plugins.autotimer.add_autotimer_to_tags.value = True if value == "true" else False
+			elif key == "add_name_to_tags":
+				config.plugins.autotimer.add_name_to_tags.value = True if value == "true" else False
 
 		if config.plugins.autotimer.autopoll.value:
 			if plugin.autopoller is None:
@@ -470,6 +474,14 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.add_autotimer_to_tags</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.add_name_to_tags</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>hasVps</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
@@ -494,6 +506,8 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.notifconflict.value,
 				config.plugins.autotimer.notifsimilar.value,
 				config.plugins.autotimer.maxdaysinfuture.value,
+				config.plugins.autotimer.add_autotimer_to_tags.value,
+				config.plugins.autotimer.add_name_to_tags.value,
 				hasVps,
 				CURRENT_CONFIG_VERSION,
 				API_VERSION,
