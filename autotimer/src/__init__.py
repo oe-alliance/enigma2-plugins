@@ -24,6 +24,8 @@ config.plugins.autotimer.editor = ConfigSelection(choices=[
 	], default="wizard"
 )
 config.plugins.autotimer.addsimilar_on_conflict = ConfigEnableDisable(default=False)
+config.plugins.autotimer.add_autotimer_to_tags = ConfigYesNo(default=False)
+config.plugins.autotimer.add_name_to_tags = ConfigYesNo(default=False)
 config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default=False)
 config.plugins.autotimer.show_in_extensionsmenu = ConfigYesNo(default=False)
 config.plugins.autotimer.fastscan = ConfigYesNo(default=False)
