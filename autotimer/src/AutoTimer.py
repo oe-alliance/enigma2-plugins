@@ -228,7 +228,8 @@ class AutoTimer:
 		self.timer_count = 1
 		self.completed = []
 		job = Components.Task.Job(_("AutoTimerTask"))
-		
+		timer = None
+
 		# Iterate Timer
 		for timer in self.getEnabledTimerList():
 			task = Components.Task.PythonTask(job, timer.name)
@@ -236,11 +237,12 @@ class AutoTimer:
 			task.weighting = 1
 			self.timer_count += 1
 
-		task = Components.Task.PythonTask(job, timer.name)
-		task.work = self.JobMessage
-		task.weighting = 1
+		if timer:
+			task = Components.Task.PythonTask(job, timer.name)
+			task.work = self.JobMessage
+			task.weighting = 1
 
-		return job
+			return job
 
 	def JobStart(self):
 		for timer in self.timers:
