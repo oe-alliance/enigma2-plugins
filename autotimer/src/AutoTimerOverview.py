@@ -1,5 +1,5 @@
 # for localized messages
-from . import _
+from . import _, config
 
 # GUI (Screens)
 from Screens.Screen import Screen
@@ -15,7 +15,6 @@ from AutoTimerWizard import AutoTimerWizard
 # GUI (Components)
 from AutoTimerList import AutoTimerList
 from Components.ActionMap import HelpableActionMap
-from Components.config import config
 from Components.Sources.StaticText import StaticText
 
 class AutoTimerOverviewSummary(Screen):

@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 from AutoTimer import AutoTimer
 from AutoTimerConfiguration import CURRENT_CONFIG_VERSION
-from Components.config import config
 from RecordTimer import AFTEREVENT
 from twisted.web import http, resource, server
 import threading
@@ -12,8 +11,7 @@ except ImportError as ie:
 from ServiceReference import ServiceReference
 from Tools.XMLTools import stringToXML
 from enigma import eServiceReference
-from . import _, iteritems
-from . import plugin
+from . import _, config, iteritems, plugin
 
 API_VERSION = "1.2"
 
