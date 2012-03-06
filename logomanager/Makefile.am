@@ -1,1 +1,1 @@
-SUBDIRS = src logodir_hdd meta
+SUBDIRS = src meta
