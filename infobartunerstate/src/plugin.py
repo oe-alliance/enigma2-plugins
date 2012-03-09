@@ -37,7 +37,7 @@ from InfoBarTunerState import InfoBarTunerState, TunerStateInfo
 NAME = _("InfoBarTunerState")
 IBTSSHOW = _("Show InfoBarTunerState")
 IBTSSETUP = _("InfoBarTunerState Setup")
-VERSION = "V0.9.6"
+VERSION = "0.9.6.1"
 ABOUT = "\n  InfoBarTunerState " +VERSION+ "\n\n  (C) 2011 by betonme @ IHAD \n\n  If You like this plugin and want to support it,\n  or if just want to say ''thanks'',\n  feel free to donate via PayPal. \n\n  Thanks a lot ! \n\n  PayPal: http://bit.ly/ibtspaypal  "
 
 
@@ -93,9 +93,6 @@ config.infobartunerstate.enabled                   = ConfigEnableDisable(default
 config.infobartunerstate.extensions_menu_show      = ConfigYesNo(default = True)
 config.infobartunerstate.extensions_menu_setup     = ConfigYesNo(default = False)
 #config.infobartunerstate.popup_time               = ConfigSelectionNumber(0, 10, 1, default = 5)
-#Todo item enabler
-#Show records
-#Show streams
 
 config.infobartunerstate.show_infobar              = ConfigYesNo(default = True)
 config.infobartunerstate.show_events               = ConfigYesNo(default = True)		#TODO Show on start, end, start/end
@@ -129,14 +126,11 @@ config.infobartunerstate.background_transparency   = ConfigYesNo(default = False
 #######################################################
 # Plugin main function
 def Plugins(**kwargs):
-	#TODO localeInit()
-	
 	descriptors = []
 	
 	if config.infobartunerstate.enabled.value:
-		# AutoStart and SessionStart
-		descriptors.append( PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, fnc = start, needsRestart = False) )
-		#descriptors.append( PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = start, needsRestart = False) )
+		if config.infobartunerstate.enabled.value:
+			descriptors.append( PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = sessionstart, needsRestart = False) )
 		if config.infobartunerstate.extensions_menu_show.value:
 			descriptors.append( PluginDescriptor(name = IBTSSHOW, description = IBTSSHOW, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = show, needsRestart = False) )
 		if config.infobartunerstate.extensions_menu_setup.value:
@@ -169,23 +163,19 @@ def setup(session, **kwargs):
 
 
 #######################################################
-# Autostart and Sessionstart
-def start(reason, **kwargs):
-	#print "InfoBarTunerState autostart "
-	#print str(reason)
-	#print str(kwargs)
-	if reason == 0: # start
-		if kwargs.has_key("session"):
-			if config.infobartunerstate.enabled.value:
-				global gInfoBarTunerState
-				session = kwargs["session"]
-				gInfoBarTunerState = InfoBarTunerState(session)
-
+# Sessionstart
+def sessionstart(reason, **kwargs):
+	# Startup
+	if reason == 0 and "session" in kwargs:
+		session = kwargs["session"]
+		gInfoBarTunerState = InfoBarTunerState(session)
+	# Shutdown
+	elif reason == 1:
+		gInfoBarTunerState = None
 
 #######################################################
 # Extension Menu
 def show(session, **kwargs):
-	global gInfoBarTunerState
 	if gInfoBarTunerState:
 		if gInfoBarTunerState.entries:
 			# There are active entries
