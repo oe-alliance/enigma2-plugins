@@ -14,7 +14,7 @@ from Vps import vps_exe
 import NavigationInstance
 from xml.etree.cElementTree import parse as xml_parse
 
-check_pdc_interval_available = 3600*24*30*8
+check_pdc_interval_available = 3600*24*30*12
 check_pdc_interval_unavailable = 3600*24*30*2
 
 class VPS_check_PDC:
@@ -187,7 +187,7 @@ class VPS_check_PDC_Screen(Screen):
 		onid = self.service.getData(3)
 		demux = "/dev/dvb/adapter0/demux" + str(self.demux)
 		
-		cmd = vps_exe + " "+ demux +" 10 "+ str(onid) +" "+ str(tsid) +" "+ str(sid) +" 0 0"
+		cmd = vps_exe + " "+ demux +" 10 "+ str(onid) +" "+ str(tsid) +" "+ str(sid) +" 0"
 		self.program.execute(cmd)
 	
 	def program_closed(self, retval):
@@ -240,8 +240,9 @@ class VPS_check_PDC_Screen(Screen):
 	
 	def finish_callback(self, result):
 		if not result:
-			self.timer_entry.timerentry_vpsplugin_enabled.value = False
+			self.timer_entry.timerentry_vpsplugin_enabled.value = "no"
 			self.timer_entry.createSetup("config")
+			self.timer_entry.timerentry_vpsplugin_dontcheck_pdc = False
 			#self.timer_entry["config"].setCurrentIndex(self.timer_entry["config"].getCurrentIndex() + 1)
 		
 		self.close()

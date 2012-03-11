@@ -119,31 +119,25 @@ def new_TimerEntry_createConfig(self):
 	# added by VPS-Plugin
 	try:
 		self.timerentry_vpsplugin_dontcheck_pdc = False
+		default_value = "no"
+		
 		if self.timer.vpsplugin_enabled is not None:
-			self.timerentry_vpsplugin_enabled = ConfigYesNo(default = self.timer.vpsplugin_enabled)
 			self.timerentry_vpsplugin_dontcheck_pdc = self.timer.vpsplugin_enabled
-		elif self.timer.eit is not None and self.timer.name != "" and self.timer not in self.session.nav.RecordTimer.timer_list and self.timer not in self.session.nav.RecordTimer.processed_timers and config.plugins.vps.default_vps.value:
+			if self.timer.vpsplugin_enabled:
+				default_value = {False: "yes_safe", True: "yes"}[self.timer.vpsplugin_overwrite]
+		
+		elif config.plugins.vps.vps_default.value != "no" and self.timer.eit is not None and self.timer.name != "" and self.timer not in self.session.nav.RecordTimer.timer_list and self.timer not in self.session.nav.RecordTimer.processed_timers:
 			from Vps_check import Check_PDC, VPS_check_PDC_Screen
 			service = self.timerentry_service_ref.ref
 			if service and service.flags & eServiceReference.isGroup:
 				service = getBestPlayableServiceReference(service, eServiceReference())
 			has_pdc, last_check, default_vps = Check_PDC.check_service(service)
 			if has_pdc == 1 or default_vps == 1:
-				enable_vps = True
 				self.timerentry_vpsplugin_dontcheck_pdc = True
-			else:
-				enable_vps = False
-			
-			self.timerentry_vpsplugin_enabled = ConfigYesNo(default = enable_vps)
-		else:
-			self.timerentry_vpsplugin_enabled = ConfigYesNo(default = False)
-	
-		if self.timer.vpsplugin_overwrite is not None:
-			self.timerentry_vpsplugin_overwrite = ConfigYesNo(default = self.timer.vpsplugin_overwrite)
-		elif config.plugins.vps.allow_overwrite.value == True:
-			self.timerentry_vpsplugin_overwrite = ConfigYesNo(default = config.plugins.vps.default_overwrite.value)
-		else:
-			self.timerentry_vpsplugin_overwrite = ConfigYesNo(default = False)
+				default_value = config.plugins.vps.vps_default.value
+		
+		
+		self.timerentry_vpsplugin_enabled = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default = default_value)
 	
 		if self.timer.vpsplugin_time is not None:
 			self.timerentry_vpsplugin_time_date = ConfigDateTime(default = self.timer.vpsplugin_time, formatstring = _("%d.%B %Y"), increment = 86400)
@@ -166,10 +160,7 @@ def new_TimerEntry_createSetup(self, widget):
 			self.timerVps_enabled_Entry = getConfigListEntry(_("Enable VPS"), self.timerentry_vpsplugin_enabled)
 			self.list.append(self.timerVps_enabled_Entry)
 			
-			if self.timerentry_vpsplugin_enabled.value == True:
-				if config.plugins.vps.allow_overwrite.value == True:
-					self.list.append(getConfigListEntry(_("Recording controlled by channel"), self.timerentry_vpsplugin_overwrite))
-				
+			if self.timerentry_vpsplugin_enabled.value != "no":
 				from Vps_check import Check_PDC, VPS_check_PDC_Screen
 				service = self.timerentry_service_ref.ref
 				if service and service.flags & eServiceReference.isGroup:
@@ -184,16 +175,16 @@ def new_TimerEntry_createSetup(self, widget):
 					
 					self.list.append(getConfigListEntry(_("VPS-Time (date)"), self.timerentry_vpsplugin_time_date))
 					self.list.append(getConfigListEntry(_("VPS-Time (time)"), self.timerentry_vpsplugin_time_clock))
-				
-				# Hilfetext
+					
 				elif not self.timerentry_vpsplugin_dontcheck_pdc:
 					self.timerentry_vpsplugin_dontcheck_pdc = True
 					has_pdc, last_check, default_vps = Check_PDC.check_service(service)
 					if default_vps != 1 and (has_pdc != 1 or Check_PDC.recheck(has_pdc, last_check)):
 						self.session.open(VPS_check_PDC_Screen, service, self, False)
-				
-					if config.plugins.vps.infotext.value != 3:
-						config.plugins.vps.infotext.value = 3
+					
+					# Hilfetext
+					if config.plugins.vps.infotext.value != 2:
+						config.plugins.vps.infotext.value = 2
 						config.plugins.vps.infotext.save()
 						VPS_show_info(self.session)
 	except:
@@ -201,14 +192,15 @@ def new_TimerEntry_createSetup(self, widget):
 	# added by VPS-Plugin
 	self[widget].list = self.list
 	self[widget].l.setList(self.list)
-	
 
 def new_TimerEntry_newConfig(self):
 	self._newConfig_old_rn_vps()
 	
 	# added by VPS-Plugin
 	if self["config"].getCurrent() == self.timerVps_enabled_Entry:
-		self.timerentry_vpsplugin_dontcheck_pdc = False
+		if self.timerentry_vpsplugin_enabled.value == "no":
+			self.timerentry_vpsplugin_dontcheck_pdc = False
+		
 		self.createSetup("config")
 		self["config"].setCurrentIndex(self["config"].getCurrentIndex() + 1)
 	# added by VPS-Plugin
@@ -217,8 +209,8 @@ def new_TimerEntry_newConfig(self):
 def new_TimerEntry_keyGo(self):
 	# added by VPS-Plugin
 	try:
-		self.timer.vpsplugin_enabled = self.timerentry_vpsplugin_enabled.value
-		self.timer.vpsplugin_overwrite = self.timerentry_vpsplugin_overwrite.value
+		self.timer.vpsplugin_enabled = self.timerentry_vpsplugin_enabled.value != "no"
+		self.timer.vpsplugin_overwrite = self.timerentry_vpsplugin_enabled.value == "yes"
 		if self.timer.vpsplugin_enabled == True:
 			from Plugins.SystemPlugins.vps.Vps import vps_timers
 			vps_timers.checksoon()
@@ -241,7 +233,7 @@ def new_TimerEntry_finishedChannelSelection(self, *args):
 	self._finishedChannelSelection_old_rn_vps(*args)
 	
 	try:
-		if self.timerentry_vpsplugin_enabled.value:
+		if self.timerentry_vpsplugin_enabled.value != "no":
 			self.timerentry_vpsplugin_dontcheck_pdc = False
 			self.createSetup("config")
 	except:
