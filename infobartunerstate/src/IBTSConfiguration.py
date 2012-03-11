@@ -60,10 +60,9 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 		
 		# Initialize Configuration part
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
-		
 		self.config = []
 		self.defineConfig()
+		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
 		self.createConfig()
 		
 		# Trigger change
@@ -80,8 +79,6 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 #         _config list entry
 #         _                                                     , config element
 		self.config = [
-			#(  _("About")                                             , config.infobartunerstate.about ),
-			
 			(  _("Enable InfoBarTunerState")                          , config.infobartunerstate.enabled ),
 			(  separator                                              , config.infobartunerstate.about ),
 			(  _("Add Show to extension menu")                        , config.infobartunerstate.extensions_menu_show ),
@@ -124,6 +121,8 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			# 0 entry text
 			# 1 variable
 			list.append( getConfigListEntry( conf[0], conf[1]) )
+			if not config.infobartunerstate.enabled.value:
+				break
 		self.list = list
 		self["config"].setList(self.list)
 
@@ -133,7 +132,7 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 	def changed(self):
 		for x in self.onChangedEntry:
 			x()
-		#self.createConfig()
+		self.createConfig()
 
 	# Overwrite ConfigListScreen keySave function
 	def keySave(self):
