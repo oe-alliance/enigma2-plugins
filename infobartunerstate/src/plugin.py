@@ -37,7 +37,7 @@ from InfoBarTunerState import InfoBarTunerState, TunerStateInfo
 NAME = _("InfoBarTunerState")
 IBTSSHOW = _("Show InfoBarTunerState")
 IBTSSETUP = _("InfoBarTunerState Setup")
-VERSION = "0.9.6.1"
+VERSION = "0.9.6.2"
 ABOUT = "\n  InfoBarTunerState " +VERSION+ "\n\n  (C) 2011 by betonme @ IHAD \n\n  If You like this plugin and want to support it,\n  or if just want to say ''thanks'',\n  feel free to donate via PayPal. \n\n  Thanks a lot ! \n\n  PayPal: http://bit.ly/ibtspaypal  "
 
 
@@ -129,8 +129,8 @@ def Plugins(**kwargs):
 	descriptors = []
 	
 	if config.infobartunerstate.enabled.value:
-		if config.infobartunerstate.enabled.value:
-			descriptors.append( PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = sessionstart, needsRestart = False) )
+		# SessionStart
+		descriptors.append( PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = start, needsRestart = False) )
 		if config.infobartunerstate.extensions_menu_show.value:
 			descriptors.append( PluginDescriptor(name = IBTSSHOW, description = IBTSSHOW, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = show, needsRestart = False) )
 		if config.infobartunerstate.extensions_menu_setup.value:
@@ -164,14 +164,15 @@ def setup(session, **kwargs):
 
 #######################################################
 # Sessionstart
-def sessionstart(reason, **kwargs):
-	# Startup
-	if reason == 0 and "session" in kwargs:
-		session = kwargs["session"]
-		gInfoBarTunerState = InfoBarTunerState(session)
-	# Shutdown
-	elif reason == 1:
-		gInfoBarTunerState = None
+def start(reason, **kwargs):
+	if reason == 0: # start
+		if kwargs.has_key("session"):
+			if config.infobartunerstate.enabled.value:
+				global gInfoBarTunerState
+				session = kwargs["session"]
+				gInfoBarTunerState = InfoBarTunerState(session)
+	# Do not cleanup on session shutdown, it will break the movie player integration
+
 
 #######################################################
 # Extension Menu
