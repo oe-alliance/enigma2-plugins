@@ -30,4 +30,4 @@ stamp-h1
 *.lo
 *.mo
 *.o
-
+*.bak
