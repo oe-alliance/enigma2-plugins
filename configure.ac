@@ -108,6 +108,11 @@ babelzapper/etc/Makefile
 babelzapper/meta/Makefile
 babelzapper/src/Makefile
 
+birthdayreminder/Makefile
+birthdayreminder/meta/Makefile
+birthdayreminder/po/Makefile
+birthdayreminder/src/Makefile
+
 bitrateviewer/Makefile
 bitrateviewer/meta/Makefile
 bitrateviewer/src/Makefile
