@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FanControl2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-15 13:09+0000\n"
-"PO-Revision-Date: 2012-01-17 11:24+0100\n"
+"POT-Creation-Date: 2012-03-11 13:30+0000\n"
+"PO-Revision-Date: 2012-03-14 12:05+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: \n"
@@ -287,6 +287,9 @@ msgstr "Niet Actief"
 msgid "over Security Card"
 msgstr "boven de Security Card"
 
+msgid "please set fan type (3Pin or 4Pin)"
+msgstr "Stel het juiste ventilator type in (3- of 4 pins)"
+
 msgid "please wait (until 3min)..."
 msgstr "wachten aub (tot 3 min)..."
 
@@ -316,3 +319,4 @@ msgstr "ja"
 
 msgid "yes, Except for Recording or HDD"
 msgstr "ja, behalve voor Opname of HDD"
+

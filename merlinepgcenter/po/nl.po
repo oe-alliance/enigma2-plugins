@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-15 13:09+0000\n"
-"PO-Revision-Date: 2012-01-17 12:02+0100\n"
+"PO-Revision-Date: 2012-03-14 12:27+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: nl\n"
@@ -31,11 +31,15 @@ msgid ""
 "A finished record timer wants to shut down\n"
 "your receiver. Shutdown now?"
 msgstr ""
+"Een afgewerkte timer wil uw ontvanger uitschakelen\n"
+"Nu uitschakelen?"
 
 msgid ""
 "A timer failed to record!\n"
 "Disable TV and try again?\n"
 msgstr ""
+"Een opname is mislukt!\n"
+"TV uitschakelen en opnieuw proberen?\n"
 
 msgid "Add"
 msgstr "Voeg toe"
@@ -56,7 +60,7 @@ msgid "Bouquets:"
 msgstr "Favorieten:"
 
 msgid "Don't stop current event but disable coming events"
-msgstr ""
+msgstr "Het huidige programma laten doorgaan, maar de volgende programma's uitschakelen"
 
 msgid "Edit Off"
 msgstr "Bewerken aan"
@@ -74,7 +78,7 @@ msgid "Excluded days:"
 msgstr "Uitgesloten dagen:"
 
 msgid "Exit on TV <-> Radio switch:"
-msgstr ""
+msgstr "Exit tijdens TV <-> Radio toets:"
 
 msgid "Friday"
 msgstr "vrijdag"
@@ -86,19 +90,19 @@ msgid "IMDb"
 msgstr "IMDb"
 
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
-msgstr ""
+msgstr "Om een opname te kunnen maken, is de TV naar het op te nemen kanaal overgeschakeld!\n"
 
 msgid "Included days:"
 msgstr "Inbegrepen dagen:"
 
 msgid "Increase list item height:"
-msgstr ""
+msgstr "Vergroot de regelhoogte:"
 
 msgid "Keys"
 msgstr "Knoppen"
 
 msgid "Limit search results to bouquet services:"
-msgstr ""
+msgstr "Beperk zoekresultaten tot kanalen in het boeket:"
 
 msgid "List style:"
 msgstr "Lijst stijl:"
@@ -164,22 +168,22 @@ msgid "Remove timer"
 msgstr "Verwijder timer"
 
 msgid "Repeating event currently recording... What do you want to do?"
-msgstr ""
+msgstr "Een herhaalde timer neemt momenteel op... Wat wilt u doen?"
 
 msgid "Replace ChannelSelection key down to start with tab:"
-msgstr ""
+msgstr "Vervang ChannelSelection-toets naar beneden te starten met tab:"
 
 msgid "Replace ChannelSelection key up to start with tab:"
-msgstr ""
+msgstr "Vervang ChannelSelection-toets te starten met tab:"
 
 msgid "Replace EventView key to start with tab:"
-msgstr ""
+msgstr "Vervang EventView-toets te starten met tab:"
 
 msgid "Replace InfoBar single and multi EPG:"
-msgstr ""
+msgstr "Vervang de informatiebalk en multi-EPG:"
 
 msgid "Return to main tab with exit:"
-msgstr ""
+msgstr "Keer met 'Exit' terug naar hoofdtab:"
 
 msgid "Saturday"
 msgstr "zaterdag"
@@ -194,7 +198,7 @@ msgid "Search type:"
 msgstr "Zoek type:"
 
 msgid "Select running service on start:"
-msgstr ""
+msgstr "Kies lopend kanaal bij aanvang:"
 
 msgid "Services:"
 msgstr "Zenders:"
@@ -206,7 +210,7 @@ msgid "Show begin/remain times:"
 msgstr "Toon begin/resterende tijd:"
 
 msgid "Show blinking picon for running timers:"
-msgstr ""
+msgstr "Toon knipperende icoon voor lopende timers:"
 
 msgid "Show duration:"
 msgstr "Toon duur:"
@@ -218,7 +222,7 @@ msgid "Show list numbers:"
 msgstr "Toon lijstnummers"
 
 msgid "Show multi colored begin/remain times:"
-msgstr ""
+msgstr "Toon meerkleurige begin- en eindtijden:"
 
 msgid "Show picons:"
 msgstr "Toon picons:"
@@ -230,7 +234,7 @@ msgid "Show short description:"
 msgstr "Toon korte beschrijving:"
 
 msgid "Show text input help for epg search:"
-msgstr ""
+msgstr "Toon tekstinvoer-help voor EPG-search:"
 
 msgid "Show timer messages:"
 msgstr "Toon timer berichten:"
