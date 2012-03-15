@@ -75,8 +75,12 @@ function compareStrings(a, b){
 	return (b < a) - (a < b);
 }
 
-function sortAutoTimer(a,b){
+function sortAutoTimerByName(a,b){
 	return compareStrings(a.name, b.name);
+}
+
+function sortAutoTimerByStart(a,b){
+	return (b.start < a.start);
 }
 
 function in_array(a,p){
@@ -1560,6 +1564,7 @@ function AutoTimerPreview(xml){
 				var end = new Date( getNodeContent(xmlitem, 'e2timeend') * 1000 );
 				var timer = {
 					'name' :           getNodeContent(xmlitem, 'e2name'),
+					'start' :          begin,
 					'date' :           toReadableDate( begin ),
 					'begin' :          toReadableTime( begin ),
 					'end' :            toReadableTime( end ),
@@ -1568,7 +1573,7 @@ function AutoTimerPreview(xml){
 				};
 				this.list.push(timer);
 			}
-			this.list.sort(sortAutoTimer);
+			this.list.sort(sortAutoTimerByStart);
 	}
 	this.getList = function(){
 			return this.list;
@@ -1584,7 +1589,7 @@ function AutoTimerList(xml){
 				var autotimer = new AutoTimerListEntry(this.xmlitems.item(i)).toJSON();
 				this.list.push(autotimer);
 			}
-		this.list.sort(sortAutoTimer);
+		this.list.sort(sortAutoTimerByName);
 		}
 	this.getList = function(){
 		return this.list;
