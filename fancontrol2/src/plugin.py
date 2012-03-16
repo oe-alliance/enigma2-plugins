@@ -172,37 +172,37 @@ def GetBox():
 		f.close()
 	return B
 
-def isDMMdisabled():
-	value = False
-	if os.path.exists("/usr/lib/enigma2/python/Components/FanControl.py"):
-		FCfile = open("/usr/lib/enigma2/python/Components/FanControl.py", "r")
-		text=FCfile.read()
-		FCfile.close()
-		if text.find("#Disabled by FC2 config.misc.standbyCounter.addNotifier") is not -1:
-			value = True
-	return value
-
-def disableDMM():
-	if os.path.exists("/usr/lib/enigma2/python/Components/FanControl.py"):
-		FCfile = open("/usr/lib/enigma2/python/Components/FanControl.py", "r")
-		text=FCfile.read()
-		FCfile.close()
-		FCfile = open("/usr/lib/enigma2/python/Components/FanControl.py", "w")
-		text=text.replace("config.misc.standbyCounter.addNotifier","#Disabled by FC2 config.misc.standbyCounter.addNotifier")
-		text=FCfile.write(text)
-		FCfile.close()
-		FClog("Fancontrol disabled - please restart E2")
-
-def enableDMM():
-	if os.path.exists("/usr/lib/enigma2/python/Components/FanControl.py"):
-		FCfile = open("/usr/lib/enigma2/python/Components/FanControl.py", "r")
-		text=FCfile.read()
-		FCfile.close()
-		FCfile = open("/usr/lib/enigma2/python/Components/FanControl.py", "w")
-		text=text.replace("#Disabled by FC2 config.misc.standbyCounter.addNotifier","config.misc.standbyCounter.addNotifier")
-		text=FCfile.write(text)
-		FCfile.close()
-
+# def isDMMdisabled():
+# 	value = False
+# 	if os.path.exists("/usr/lib/enigma2/python/Components/FanControl.py"):
+# 		FCfile = open("/usr/lib/enigma2/python/Components/FanControl.py", "r")
+# 		text=FCfile.read()
+# 		FCfile.close()
+# 		if text.find("#Disabled by FC2 config.misc.standbyCounter.addNotifier") is not -1:
+# 			value = True
+# 	return value
+# 
+# def disableDMM():
+# 	if os.path.exists("/usr/lib/enigma2/python/Components/FanControl.py"):
+# 		FCfile = open("/usr/lib/enigma2/python/Components/FanControl.py", "r")
+# 		text=FCfile.read()
+# 		FCfile.close()
+# 		FCfile = open("/usr/lib/enigma2/python/Components/FanControl.py", "w")
+# 		text=text.replace("config.misc.standbyCounter.addNotifier","#Disabled by FC2 config.misc.standbyCounter.addNotifier")
+# 		text=FCfile.write(text)
+# 		FCfile.close()
+# 		FClog("Fancontrol disabled - please restart E2")
+# 
+# def enableDMM():
+# 	if os.path.exists("/usr/lib/enigma2/python/Components/FanControl.py"):
+# 		FCfile = open("/usr/lib/enigma2/python/Components/FanControl.py", "r")
+# 		text=FCfile.read()
+# 		FCfile.close()
+# 		FCfile = open("/usr/lib/enigma2/python/Components/FanControl.py", "w")
+# 		text=text.replace("#Disabled by FC2 config.misc.standbyCounter.addNotifier","config.misc.standbyCounter.addNotifier")
+# 		text=FCfile.write(text)
+# 		FCfile.close()
+ 
 class FanControl2Test(ConfigListScreen,Screen):
 	skin = """
 		<screen position="center,center" size="630,300" title="Fan Control 2 - Test" >
@@ -430,7 +430,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 	def __init__(self, session, args = None):
 		Screen.__init__(self, session)
 
-		config.plugins.FanControl.DisableDMM.value = isDMMdisabled()
+# 		config.plugins.FanControl.DisableDMM.value = isDMMdisabled()
 		self.HDDmode = config.plugins.FanControl.CheckHDDTemp.value
 		self.MonitorMode = config.plugins.FanControl.MonitorInExtension.value
 		self.FanControlMode = config.plugins.FanControl.FanControlInExtension.value
@@ -440,7 +440,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Box shutdown at Temperature (C)"), config.plugins.FanControl.ShutdownTemp))
 		self.list.append(getConfigListEntry(_("increases overheating protection to (C)"), config.plugins.FanControl.AddOverheat))
 		self.list.append(getConfigListEntry(_("read HDD-Temperature in HDD-Standby-Mode"), config.plugins.FanControl.CheckHDDTemp))
-		self.list.append(getConfigListEntry(_("disable System FanControl"), config.plugins.FanControl.DisableDMM))
+# 		self.list.append(getConfigListEntry(_("disable System FanControl"), config.plugins.FanControl.DisableDMM))
 		self.list.append(getConfigListEntry(_("Show Fan Speed as"), config.plugins.FanControl.Multi))
 		self.list.append(getConfigListEntry(_("Show Plugin in Extension-Menu"), config.plugins.FanControl.FanControlInExtension))
 		self.list.append(getConfigListEntry(_("Show Monitor in Extension-Menu"), config.plugins.FanControl.MonitorInExtension))
@@ -478,13 +478,13 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 		if config.plugins.FanControl.LogPath.value[-1:] != "/":
 			config.plugins.FanControl.LogPath.value += "/"
 		NeuStart = False
-		if os.path.exists("/usr/lib/enigma2/python/Components/FanControl.py"):
-			if not isDMMdisabled() and config.plugins.FanControl.DisableDMM.value:
-				disableDMM()
-				NeuStart = True
-			if isDMMdisabled() and not config.plugins.FanControl.DisableDMM.value:
-				enableDMM()
-				NeuStart = True
+# 		if os.path.exists("/usr/lib/enigma2/python/Components/FanControl.py"):
+# 			if not isDMMdisabled() and config.plugins.FanControl.DisableDMM.value:
+# 				disableDMM()
+# 				NeuStart = True
+# 			if isDMMdisabled() and not config.plugins.FanControl.DisableDMM.value:
+# 				enableDMM()
+# 				NeuStart = True
 		if config.plugins.FanControl.CheckHDDTemp.value == "auto" and config.plugins.FanControl.CheckHDDTemp.value != self.HDDmode:
 			disableHDDread = True
 		if config.plugins.FanControl.MonitorInExtension.value != self.MonitorMode:
@@ -816,8 +816,8 @@ class FanControl2(Screen):
 		FClog("Starting up")
 		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class.org"):
 			os.rename("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class.org","/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class")
-		if not isDMMdisabled() and config.plugins.FanControl.DisableDMM.value:
-			disableDMM()
+# 		if not isDMMdisabled() and config.plugins.FanControl.DisableDMM.value:
+# 			disableDMM()
 		Box = GetBox()
 		HDDtestTemp()
 		GetHDDtemp(False)
