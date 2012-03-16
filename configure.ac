@@ -438,6 +438,11 @@ setpasswd/meta/Makefile
 setpasswd/po/Makefile
 setpasswd/src/Makefile
 
+shoutcast/Makefile
+shoutcast/meta/Makefile
+shoutcast/po/Makefile
+shoutcast/src/Makefile
+
 showclock/Makefile
 showclock/meta/Makefile
 showclock/po/Makefile

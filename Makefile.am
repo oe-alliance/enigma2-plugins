@@ -63,7 +63,8 @@ SUBDIRS = \
 	remotetimer \
 	rsdownloader \
 	setpasswd \
-	showclock \
+	shoutcast \
+    showclock \
 	simplerss \
 	subsdownloader2 \
 	svdrp \
