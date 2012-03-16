@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
-"PO-Revision-Date: 2012-03-05 22:58+0000\n"
-"Last-Translator: Automatically generated\n"
+"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"PO-Revision-Date: 2012-03-16 14:20+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -446,6 +446,9 @@ msgstr "Read PhoneBook from FRITZ!Box"
 msgid "Refresh status"
 msgstr "Refresh status"
 
+msgid "Reload interval for phonebooks (hours)"
+msgstr "Reload interval for phonebooks (hours)"
+
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Reset"
@@ -655,3 +658,4 @@ msgstr "show nothing"
 
 msgid "work"
 msgstr "work"
+

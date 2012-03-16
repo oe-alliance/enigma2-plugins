@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-05 22:58+0000\n"
-"PO-Revision-Date: 2012-03-05 22:58+0000\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2012-03-16 16:37+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -61,23 +61,30 @@ msgstr "Shows the watched services with some statistic"
 msgid "Sort (date+)"
 msgstr "Sort (date+)"
 
-#: ../src/plugin.py:456 ../src/plugin.py:539
+#: ../src/plugin.py:456
+#: ../src/plugin.py:539
 msgid "Sort (date-)"
 msgstr "Sort (date-)"
 
-#: ../src/plugin.py:229 ../src/plugin.py:327
+#: ../src/plugin.py:229
+#: ../src/plugin.py:327
 msgid "Sort (duration+)"
 msgstr "Sort (duration+)"
 
-#: ../src/plugin.py:230 ../src/plugin.py:328
+#: ../src/plugin.py:230
+#: ../src/plugin.py:328
 msgid "Sort (duration-)"
 msgstr "Sort (duration-)"
 
-#: ../src/plugin.py:227 ../src/plugin.py:325 ../src/plugin.py:451
+#: ../src/plugin.py:227
+#: ../src/plugin.py:325
+#: ../src/plugin.py:451
 msgid "Sort (name+)"
 msgstr "Sort (name+)"
 
-#: ../src/plugin.py:228 ../src/plugin.py:326 ../src/plugin.py:454
+#: ../src/plugin.py:228
+#: ../src/plugin.py:326
+#: ../src/plugin.py:454
 #: ../src/plugin.py:524
 msgid "Sort (name-)"
 msgstr "Sort (name-)"
@@ -98,7 +105,10 @@ msgstr "Sort by name (ascending)"
 msgid "Sort by name (descending)"
 msgstr "Sort by name (descending)"
 
-#: ../src/plugin.py:220 ../src/plugin.py:317 ../src/plugin.py:422
+#: ../src/plugin.py:220
+#: ../src/plugin.py:317
+#: ../src/plugin.py:422
 #: ../src/plugin.py:598
 msgid "Zap Statistic"
 msgstr "Zap Statistic"
+

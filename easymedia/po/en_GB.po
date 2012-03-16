@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-05 22:58+0000\n"
-"PO-Revision-Date: 2012-03-05 22:58+0000\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2012-03-16 13:23+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -50,11 +50,21 @@ msgstr "DVD player:"
 msgid "DVDPlayer Plugin is not installed!"
 msgstr "DVDPlayer Plugin is not installed!"
 
-#: ../src/plugin.py:55 ../src/plugin.py:56 ../src/plugin.py:57
-#: ../src/plugin.py:58 ../src/plugin.py:59 ../src/plugin.py:60
-#: ../src/plugin.py:61 ../src/plugin.py:62 ../src/plugin.py:63
-#: ../src/plugin.py:64 ../src/plugin.py:65 ../src/plugin.py:66
-#: ../src/plugin.py:67 ../src/plugin.py:68 ../src/plugin.py:69
+#: ../src/plugin.py:55
+#: ../src/plugin.py:56
+#: ../src/plugin.py:57
+#: ../src/plugin.py:58
+#: ../src/plugin.py:59
+#: ../src/plugin.py:60
+#: ../src/plugin.py:61
+#: ../src/plugin.py:62
+#: ../src/plugin.py:63
+#: ../src/plugin.py:64
+#: ../src/plugin.py:65
+#: ../src/plugin.py:66
+#: ../src/plugin.py:67
+#: ../src/plugin.py:68
+#: ../src/plugin.py:69
 msgid "Disabled"
 msgstr "Disabled"
 
@@ -66,10 +76,18 @@ msgstr "DreamExplorer"
 msgid "EasyMedia settings..."
 msgstr "EasyMedia settings..."
 
-#: ../src/plugin.py:57 ../src/plugin.py:58 ../src/plugin.py:59
-#: ../src/plugin.py:60 ../src/plugin.py:61 ../src/plugin.py:62
-#: ../src/plugin.py:63 ../src/plugin.py:64 ../src/plugin.py:65
-#: ../src/plugin.py:66 ../src/plugin.py:67 ../src/plugin.py:68
+#: ../src/plugin.py:57
+#: ../src/plugin.py:58
+#: ../src/plugin.py:59
+#: ../src/plugin.py:60
+#: ../src/plugin.py:61
+#: ../src/plugin.py:62
+#: ../src/plugin.py:63
+#: ../src/plugin.py:64
+#: ../src/plugin.py:65
+#: ../src/plugin.py:66
+#: ../src/plugin.py:67
+#: ../src/plugin.py:68
 #: ../src/plugin.py:69
 msgid "Enabled"
 msgstr "Enabled"
@@ -98,7 +116,8 @@ msgstr "Merlin iDream is not installed!"
 msgid "MerlinMusicPlayer"
 msgstr "MerlinMusicPlayer"
 
-#: ../src/plugin.py:286 ../src/plugin.py:330
+#: ../src/plugin.py:286
+#: ../src/plugin.py:330
 msgid "Movies"
 msgstr "Movies"
 
@@ -273,3 +292,4 @@ msgstr "ZDFmediathek player:"
 #: ../src/plugin.py:366
 msgid "iDream"
 msgstr "iDream"
+

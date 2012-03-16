@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-15 14:10+0000\n"
-"PO-Revision-Date: 2012-03-16 14:19+0100\n"
+"PO-Revision-Date: 2012-03-16 14:25+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -17,34 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Exit"
-msgstr "Exit"
+msgid "Channel: "
+msgstr "Channel: "
 
-msgid "Fullscreen"
-msgstr "Fullscreen"
+msgid "Countdown:"
+msgstr "Countdown:"
 
-msgid "LIVE"
-msgstr "LIVE"
+msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
+msgstr "Error while creating screenshot. You need grab version 0.8 or higher!"
 
-msgid "No Connection"
-msgstr "No Connection"
-
-msgid "Play"
-msgstr "Play"
-
-#, python-format
-msgid "Streaming error: %s"
-msgstr ""
-
-msgid "Watch eUroticTV via HTTP Live Streaming"
-msgstr "Watch eUroticTV via HTTP Live Streaming"
-
-msgid "connecting..."
-msgstr "connecting..."
-
-msgid "disconnected"
-msgstr "disconnected"
-
-msgid "pause"
-msgstr "pause"
+msgid "Mosaic"
+msgstr "Mosaic"
 

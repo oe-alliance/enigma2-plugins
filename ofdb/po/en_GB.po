@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-05 22:58+0000\n"
-"PO-Revision-Date: 2012-03-05 22:58+0000\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2012-03-16 14:31+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,8 @@ msgstr "Channel Selection"
 msgid "Could't get Eventname"
 msgstr "Could't get Event name"
 
-#: ../src/plugin.py:224 ../src/plugin.py:385
+#: ../src/plugin.py:224
+#: ../src/plugin.py:385
 msgid "Details"
 msgstr "Details"
 
@@ -50,7 +51,8 @@ msgstr "Exit"
 msgid "Lookup"
 msgstr "Lookup"
 
-#: ../src/plugin.py:369 ../src/plugin.py:370
+#: ../src/plugin.py:369
+#: ../src/plugin.py:370
 msgid "No OFDb match."
 msgstr "No OFDb match."
 
@@ -62,7 +64,8 @@ msgstr "No cast list found in the database."
 msgid "No details found."
 msgstr "No details found."
 
-#: ../src/plugin.py:386 ../src/plugin.py:455
+#: ../src/plugin.py:386
+#: ../src/plugin.py:455
 msgid "OFDb Details parsed"
 msgstr "OFDb Details parsed"
 
@@ -95,7 +98,9 @@ msgstr "Please select the matching entry"
 msgid "Query OFDb: %s..."
 msgstr "Query OFDb: %s..."
 
-#: ../src/plugin.py:496 ../src/plugin.py:501 ../src/plugin.py:508
+#: ../src/plugin.py:496
+#: ../src/plugin.py:501
+#: ../src/plugin.py:508
 msgid "Query details from the Online-Filmdatenbank"
 msgstr "Query details from the Online-Filmdatenbank"
 
@@ -115,3 +120,4 @@ msgstr "Title Menu"
 #: ../src/plugin.py:416
 msgid "no user rating yet"
 msgstr "no user rating yet"
+

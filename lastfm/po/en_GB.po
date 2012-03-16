@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-05 22:58+0000\n"
-"PO-Revision-Date: 2012-03-05 22:58+0000\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2012-03-16 14:23+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,8 @@ msgstr "Interval for Cover art Animation"
 msgid "Interval to refresh Metadata (seconds)"
 msgstr "Interval to refresh Metadata (seconds)"
 
-#: ../src/LastFMConfig.py:14 ../src/plugin.py:35
+#: ../src/LastFMConfig.py:14
+#: ../src/plugin.py:35
 msgid "Last.FM"
 msgstr "Last.FM"
 
@@ -110,7 +111,8 @@ msgstr "Loading Friends"
 msgid "Loading Global Tags"
 msgstr "Loading Global Tags"
 
-#: ../src/plugin.py:509 ../src/plugin.py:513
+#: ../src/plugin.py:509
+#: ../src/plugin.py:513
 msgid "Loading Loved Tracks"
 msgstr "Loading Loved Tracks"
 
@@ -130,7 +132,8 @@ msgstr "Loading Top Tacks"
 msgid "Love"
 msgstr "Love"
 
-#: ../src/plugin.py:154 ../src/plugin.py:457
+#: ../src/plugin.py:154
+#: ../src/plugin.py:457
 msgid "Loved Tracks"
 msgstr "Loved Tracks"
 
@@ -190,7 +193,8 @@ msgstr "Personal Recommendations"
 msgid "Personal Stations"
 msgstr "Personal Stations"
 
-#: ../src/plugin.py:178 ../src/plugin.py:407
+#: ../src/plugin.py:178
+#: ../src/plugin.py:407
 msgid "Play"
 msgstr "Play"
 
@@ -246,7 +250,8 @@ msgstr "Send now playing Audio Tracks"
 msgid "Server returned"
 msgstr "Server returned"
 
-#: ../src/LastFMConfig.py:27 ../src/plugin.py:209
+#: ../src/LastFMConfig.py:27
+#: ../src/plugin.py:209
 msgid "Setup"
 msgstr "Setup"
 
@@ -350,7 +355,9 @@ msgstr "Use LastFM Proxy"
 msgid "Use Screensaver"
 msgstr "Use Screensaver"
 
-#: ../src/plugin.py:92 ../src/plugin.py:100 ../src/plugin.py:135
+#: ../src/plugin.py:92
+#: ../src/plugin.py:100
+#: ../src/plugin.py:135
 #: ../src/plugin.py:413
 msgid "Ver."
 msgstr "Ver."
@@ -379,3 +386,4 @@ msgstr "playing:"
 #, python-format
 msgid "please enter an %s name to listen to"
 msgstr "please enter an %s name to listen to"
+

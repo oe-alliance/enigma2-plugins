@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-05 22:58+0000\n"
-"PO-Revision-Date: 2012-03-05 22:58+0000\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2012-03-16 16:33+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -30,11 +30,13 @@ msgstr "A simple to use RSS reader"
 msgid "Autoupdate"
 msgstr "Autoupdate"
 
-#: ../src/RSSSetup.py:28 ../src/RSSSetup.py:78
+#: ../src/RSSSetup.py:28
+#: ../src/RSSSetup.py:78
 msgid "Cancel"
 msgstr "Cancel"
 
-#: ../src/RSSScreens.py:460 ../src/RSSScreens.py:465
+#: ../src/RSSScreens.py:460
+#: ../src/RSSScreens.py:465
 msgid "Close"
 msgstr "Close"
 
@@ -42,26 +44,26 @@ msgstr "Close"
 msgid "Delete"
 msgstr "Delete"
 
-#: ../src/RSSScreens.py:126 ../src/RSSScreens.py:213
+#: ../src/RSSScreens.py:126
+#: ../src/RSSScreens.py:213
 msgid "Enclosures"
 msgstr "Enclosures"
 
-#: ../src/RSSScreens.py:414 ../src/RSSScreens.py:442
+#: ../src/RSSScreens.py:414
+#: ../src/RSSScreens.py:442
 msgid "Entries"
 msgstr "Entries"
 
-#: ../src/RSSScreens.py:121 ../src/RSSScreens.py:208 ../src/RSSScreens.py:316
+#: ../src/RSSScreens.py:121
+#: ../src/RSSScreens.py:208
+#: ../src/RSSScreens.py:316
 #, python-format
 msgid "Entry %s/%s"
 msgstr "Entry %s/%s"
 
 #: ../src/RSSScreens.py:57
-msgid ""
-"Error while parsing Feed, this usually means there is something wrong with "
-"it."
-msgstr ""
-"Error while parsing Feed, this usually means there is something wrong with "
-"it."
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
+msgstr "Error while parsing Feed, this usually means there is something wrong with it."
 
 #: ../src/RSSPoller.py:84
 msgid "Failed to get subscriptions from Google Reader."
@@ -75,7 +77,8 @@ msgstr "Failed to login to Google Reader."
 msgid "Feed"
 msgstr "Feed"
 
-#: ../src/RSSScreens.py:415 ../src/RSSScreens.py:443
+#: ../src/RSSScreens.py:415
+#: ../src/RSSScreens.py:443
 #, python-format
 msgid "Feed %s/%s"
 msgstr "Feed %s/%s"
@@ -84,7 +87,8 @@ msgstr "Feed %s/%s"
 msgid "Feed URI"
 msgstr "Feed URI"
 
-#: ../src/RSSScreens.py:319 ../src/RSSScreens.py:321
+#: ../src/RSSScreens.py:319
+#: ../src/RSSScreens.py:321
 msgid "Feed is empty."
 msgstr "Feed is empty."
 
@@ -112,7 +116,8 @@ msgstr "Keep running in background"
 msgid "New"
 msgstr "New"
 
-#: ../src/RSSPoller.py:37 ../src/RSSTickerView.py:85
+#: ../src/RSSPoller.py:37
+#: ../src/RSSTickerView.py:85
 msgid "New Items"
 msgstr "New Items"
 
@@ -120,7 +125,8 @@ msgstr "New Items"
 msgid "New Items since last Auto-Update"
 msgstr "New Items since last Auto-Update"
 
-#: ../src/RSSScreens.py:152 ../src/RSSScreens.py:215
+#: ../src/RSSScreens.py:152
+#: ../src/RSSScreens.py:215
 msgid "No such Item."
 msgstr "No such Item."
 
@@ -128,7 +134,8 @@ msgstr "No such Item."
 msgid "Notification"
 msgstr "Notification"
 
-#: ../src/RSSSetup.py:29 ../src/RSSSetup.py:79
+#: ../src/RSSSetup.py:29
+#: ../src/RSSSetup.py:79
 msgid "OK"
 msgstr "OK"
 
@@ -149,7 +156,8 @@ msgstr ""
 msgid "Received %d new news item(s)."
 msgstr "Received %d new news item(s)."
 
-#: ../src/RSSScreens.py:459 ../src/RSSScreens.py:464
+#: ../src/RSSScreens.py:459
+#: ../src/RSSScreens.py:464
 msgid "Setup"
 msgstr "Setup"
 
@@ -161,11 +169,13 @@ msgstr "Show new Messages as"
 msgid "Simple RSS Reader"
 msgstr "Simple RSS Reader"
 
-#: ../src/RSSSetup.py:42 ../src/RSSSetup.py:96
+#: ../src/RSSSetup.py:42
+#: ../src/RSSSetup.py:96
 msgid "Simple RSS Reader Setup"
 msgstr "Simple RSS Reader Setup"
 
-#: ../src/RSSScreens.py:146 ../src/RSSScreens.py:308
+#: ../src/RSSScreens.py:146
+#: ../src/RSSScreens.py:308
 #, python-format
 msgid "Simple RSS Reader: %s"
 msgstr "Simple RSS Reader: %s"
@@ -218,3 +228,4 @@ msgstr "What to do?"
 #: ../src/plugin.py:18
 msgid "none"
 msgstr "none"
+

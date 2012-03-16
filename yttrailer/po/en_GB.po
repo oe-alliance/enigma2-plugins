@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
-"PO-Revision-Date: 2012-03-05 22:58+0000\n"
-"Last-Translator: Automatically generated\n"
+"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"PO-Revision-Date: 2012-03-16 16:36+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -17,46 +17,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/plugin.py:49
 msgid "1080p"
 msgstr "1080p"
 
-#: ../src/plugin.py:49
 msgid "720p"
 msgstr "720p"
 
-#: ../src/plugin.py:430
 msgid "Best resolution"
 msgstr "Best resolution"
 
-#: ../src/plugin.py:425
 msgid "Cancel"
 msgstr "Cancel"
 
-#: ../src/plugin.py:432
 msgid "Close Player with exit-key"
 msgstr "Close Player with exit-key"
 
-#: ../src/plugin.py:429
 msgid "Extended search filter"
 msgstr "Extended search filter"
 
-#: ../src/plugin.py:431
 msgid "Max. results in list-mode"
 msgstr "Max. results in list-mode"
 
-#: ../src/plugin.py:49
 msgid "No HD streaming"
 msgstr "No HD streaming"
 
-#: ../src/plugin.py:426
 msgid "Save"
 msgstr "Save"
 
-#: ../src/plugin.py:104
-msgid "YT-Trailer Setup"
-msgstr "YT-Trailer Setup"
+msgid "Show Setup in Extensions menu"
+msgstr "Show Setup in Extensions menu"
 
-#: ../src/plugin.py:379 ../src/plugin.py:385
+msgid "YouTube-Trailer Setup"
+msgstr "YouTube-Trailer Setup"
+
 msgid "leave movie player..."
 msgstr "leave movie player..."
+
+#~ msgid "YT-Trailer Setup"
+#~ msgstr "YT-Trailer Setup"

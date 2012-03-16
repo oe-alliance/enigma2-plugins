@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-05 22:58+0000\n"
-"PO-Revision-Date: 2012-03-05 22:58+0000\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2012-03-16 13:07+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -73,7 +73,8 @@ msgstr "Browse network neighbourhood"
 msgid "CIFS share"
 msgstr "CIFS share"
 
-#: ../src/MountEdit.py:66 ../src/MountManager.py:183
+#: ../src/MountEdit.py:66
+#: ../src/MountManager.py:183
 #: ../src/NetworkBrowser.py:555
 msgid "Cancel"
 msgstr "Cancel"
@@ -86,8 +87,10 @@ msgstr "Change hostname"
 msgid "Change the hostname of your Receiver."
 msgstr "Change the hostname of your Receiver."
 
-#: ../src/MountManager.py:58 ../src/MountView.py:64
-#: ../src/NetworkBrowser.py:111 ../src/UserDialog.py:91
+#: ../src/MountManager.py:58
+#: ../src/MountView.py:64
+#: ../src/NetworkBrowser.py:111
+#: ../src/UserDialog.py:91
 #: ../src/UserManager.py:50
 msgid "Close"
 msgstr "Close"
@@ -104,7 +107,8 @@ msgstr "Delete mount"
 msgid "Dir:"
 msgstr "Dir:"
 
-#: ../src/NetworkBrowser.py:448 ../src/NetworkBrowser.py:450
+#: ../src/NetworkBrowser.py:448
+#: ../src/NetworkBrowser.py:450
 #: ../src/NetworkBrowser.py:463
 msgid "Do you want to enter a username and password for this host?\n"
 msgstr "Do you want to enter a username and password for this host?\n"
@@ -125,7 +129,8 @@ msgstr "Enter new hostname for your Receiver"
 msgid "Enter options:"
 msgstr "Enter options:"
 
-#: ../src/MountEdit.py:246 ../src/UserDialog.py:141
+#: ../src/MountEdit.py:246
+#: ../src/UserDialog.py:141
 msgid "Enter password:"
 msgstr "Enter password:"
 
@@ -141,7 +146,8 @@ msgstr "Enter share name:"
 msgid "Enter user and password for host: "
 msgstr "Enter user and password for host: "
 
-#: ../src/MountEdit.py:244 ../src/UserDialog.py:139
+#: ../src/MountEdit.py:244
+#: ../src/UserDialog.py:139
 msgid "Enter username:"
 msgstr "Enter username:"
 
@@ -181,7 +187,8 @@ msgstr "Manage your network shares..."
 msgid "Mount Again"
 msgstr "Mount Again"
 
-#: ../src/MountManager.py:87 ../src/plugin.py:101
+#: ../src/MountManager.py:87
+#: ../src/plugin.py:101
 msgid "Mount Manager"
 msgstr "Mount Manager"
 
@@ -237,7 +244,8 @@ msgstr "Mounts management"
 msgid "NFS share"
 msgstr "NFS share"
 
-#: ../src/plugin.py:35 ../src/plugin.py:100
+#: ../src/plugin.py:35
+#: ../src/plugin.py:100
 msgid "Network Browser"
 msgstr "Network Browser"
 
@@ -245,7 +253,8 @@ msgstr "Network Browser"
 msgid "No network devices found!"
 msgstr "No network devices found!"
 
-#: ../src/MountEdit.py:224 ../src/UserDialog.py:130
+#: ../src/MountEdit.py:224
+#: ../src/UserDialog.py:130
 msgid "Password"
 msgstr "Password"
 
@@ -325,7 +334,8 @@ msgstr "Scan NFS share"
 msgid "Scan range"
 msgstr "Scan range"
 
-#: ../src/MountManager.py:201 ../src/MountManager.py:209
+#: ../src/MountManager.py:201
+#: ../src/MountManager.py:209
 msgid "Schedule MountAgain"
 msgstr "Schedule MountAgain"
 
@@ -353,7 +363,8 @@ msgstr "Server IP"
 msgid "Server share"
 msgstr "Server share"
 
-#: ../src/MountManager.py:100 ../src/MountManager.py:177
+#: ../src/MountManager.py:100
+#: ../src/MountManager.py:177
 msgid "Setup Mount Again"
 msgstr "Setup Mount Again"
 
@@ -365,7 +376,8 @@ msgstr "User management"
 msgid "Usermanager"
 msgstr "User manager"
 
-#: ../src/MountEdit.py:222 ../src/UserDialog.py:128
+#: ../src/MountEdit.py:222
+#: ../src/UserDialog.py:128
 msgid "Username"
 msgstr "Username"
 
@@ -392,3 +404,4 @@ msgstr "Your network mount has been updated."
 #: ../src/MountEdit.py:212
 msgid "use as HDD replacement"
 msgstr "use as HDD replacement"
+

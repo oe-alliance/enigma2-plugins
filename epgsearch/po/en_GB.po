@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-05 22:58+0000\n"
-"PO-Revision-Date: 2012-03-05 22:58+0000\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2012-03-16 13:25+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,8 @@ msgstr "Add AutoTimer"
 msgid "Add timer"
 msgstr "Add timer"
 
-#: ../src/EPGSearch.py:361 ../src/EPGSearchSetup.py:64
+#: ../src/EPGSearch.py:361
+#: ../src/EPGSearchSetup.py:64
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -42,33 +43,27 @@ msgstr "Could not read AutoTimer timer list: %s"
 msgid "EPG Search"
 msgstr "EPG Search"
 
-#: ../src/EPGSearchSetup.py:102 ../src/plugin.py:39
+#: ../src/EPGSearchSetup.py:102
+#: ../src/plugin.py:39
 msgid "EPGSearch"
 msgstr "EPGSearch"
 
-#: ../src/EPGSearchSetup.py:38 ../src/EPGSearchSetup.py:81
+#: ../src/EPGSearchSetup.py:38
+#: ../src/EPGSearchSetup.py:81
 msgid "EPGSearch Setup"
 msgstr "EPGSearch Setup"
 
 #: ../src/EPGSearchSetup.py:44
-msgid ""
-"Enable this to be able to access the EPG-Search from within the plugin "
-"browser."
-msgstr ""
-"Enable this to be able to access the EPG-Search from within the plugin "
-"browser."
+msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
+msgstr "Enable this to be able to access the EPG-Search from within the plugin browser."
 
 #: ../src/EPGSearch.py:195
 msgid "Enter text to search for"
 msgstr "Enter text to search for"
 
 #: ../src/EPGSearchSetup.py:45
-msgid ""
-"How many entries to keep in the search history at most. 0 disables history "
-"entirely!"
-msgstr ""
-"How many entries to keep in the search history at most. 0 disables history "
-"entirely!"
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr "How many entries to keep in the search history at most. 0 disables history entirely!"
 
 #: ../src/EPGSearch.py:126
 msgid "IMDb Search"
@@ -98,7 +93,8 @@ msgstr "New Search"
 msgid "No history"
 msgstr "No history"
 
-#: ../src/EPGSearch.py:362 ../src/EPGSearchSetup.py:63
+#: ../src/EPGSearch.py:362
+#: ../src/EPGSearchSetup.py:63
 msgid "OK"
 msgstr "OK"
 
@@ -122,7 +118,8 @@ msgstr "Search EPG"
 msgid "Select a timer to search"
 msgstr "Select a timer to search"
 
-#: ../src/EPGSearch.py:265 ../src/EPGSearch.py:302
+#: ../src/EPGSearch.py:265
+#: ../src/EPGSearch.py:302
 msgid "Select text to search for"
 msgstr "Select text to search for"
 
@@ -147,3 +144,4 @@ msgstr "search EPG"
 #: ../src/plugin.py:45
 msgid "search EPG..."
 msgstr "search EPG..."
+

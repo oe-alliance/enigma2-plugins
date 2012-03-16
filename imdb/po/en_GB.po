@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-05 22:58+0000\n"
-"PO-Revision-Date: 2012-03-05 22:58+0000\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2012-03-16 14:21+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,8 @@ msgstr "Channel Selection"
 msgid "Could't get Eventname"
 msgstr "Could't get Event name"
 
-#: ../src/plugin.py:340 ../src/plugin.py:555
+#: ../src/plugin.py:340
+#: ../src/plugin.py:555
 msgid "Details"
 msgstr "Details"
 
@@ -51,10 +52,8 @@ msgid "Downloading Movie Poster: %s..."
 msgstr "Downloading Movie Poster: %s..."
 
 #: ../src/plugin.py:689
-msgid ""
-"Enable this to be able to access the IMDb from within the plugin browser."
-msgstr ""
-"Enable this to be able to access the IMDb from within the plugin browser."
+msgid "Enable this to be able to access the IMDb from within the plugin browser."
+msgstr "Enable this to be able to access the IMDb from within the plugin browser."
 
 #: ../src/plugin.py:383
 msgid "Enter search"
@@ -72,11 +71,13 @@ msgstr "Exit"
 msgid "Extra Info"
 msgstr "Extra Info"
 
-#: ../src/plugin.py:745 ../src/plugin.py:765
+#: ../src/plugin.py:745
+#: ../src/plugin.py:765
 msgid "IMDb Details"
 msgstr "IMDb Details"
 
-#: ../src/plugin.py:556 ../src/plugin.py:636
+#: ../src/plugin.py:556
+#: ../src/plugin.py:636
 msgid "IMDb Details parsed"
 msgstr "IMDb Details parsed"
 
@@ -96,7 +97,8 @@ msgstr "IMDb Plugin"
 msgid "IMDb Re-Download completed"
 msgstr "IMDb Re-Download completed"
 
-#: ../src/plugin.py:683 ../src/plugin.py:724
+#: ../src/plugin.py:683
+#: ../src/plugin.py:724
 msgid "IMDb Setup"
 msgstr "IMDb Setup"
 
@@ -108,7 +110,8 @@ msgstr "IMDb query failed!"
 msgid "Lookup"
 msgstr "Lookup"
 
-#: ../src/plugin.py:529 ../src/plugin.py:530
+#: ../src/plugin.py:529
+#: ../src/plugin.py:530
 msgid "No IMDb match."
 msgstr "No IMDb match."
 
@@ -137,11 +140,14 @@ msgstr "Please select the matching entry"
 msgid "Query IMDb: %s..."
 msgstr "Query IMDb: %s..."
 
-#: ../src/plugin.py:765 ../src/plugin.py:769
+#: ../src/plugin.py:765
+#: ../src/plugin.py:769
 msgid "Query details from the Internet Movie Database"
 msgstr "Query details from the Internet Movie Database"
 
-#: ../src/plugin.py:351 ../src/plugin.py:519 ../src/plugin.py:535
+#: ../src/plugin.py:351
+#: ../src/plugin.py:519
+#: ../src/plugin.py:535
 #, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "Re-Query IMDb: %s..."
@@ -177,3 +183,4 @@ msgstr "User Rating"
 #: ../src/plugin.py:581
 msgid "no user rating yet"
 msgstr "no user rating yet"
+
