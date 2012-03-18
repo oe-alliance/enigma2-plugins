@@ -1808,15 +1808,13 @@ function AutoTimer(xml, defaults){
 		lastActivation = '';
 	}else if (lastActivation == '0') {
 		lastBegin = '0';
-	} else{
-		lastActivation = toReadableDate(lastActivation);
 	}
 	if (lastBegin == undefined || lastBegin == '') {
 		lastBegin = '';
 	}else if (lastBegin == '0') {
 		lastBegin = '0';
 	} else{
-		lastBegin = toReadableDate(lastBegin);
+		lastBegin = toReadableDate(new Date( parseInt(lastBegin) * 1000 ));
 	}
 	this.counter = {
 		'options' : numericalOptionList(0, 100, counter),
