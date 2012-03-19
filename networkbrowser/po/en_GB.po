@@ -110,8 +110,8 @@ msgstr "Dir:"
 #: ../src/NetworkBrowser.py:448
 #: ../src/NetworkBrowser.py:450
 #: ../src/NetworkBrowser.py:463
-msgid "Do you want to enter a username and password for this host?\n"
-msgstr "Do you want to enter a username and password for this host?\n"
+msgid "Do you want to enter a username and password for this host?"
+msgstr "Do you want to enter a username and password for this host?"
 
 #: ../src/MountEdit.py:116
 msgid "Enigma2 (mount using enigma2"

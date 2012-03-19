@@ -445,9 +445,9 @@ class NetworkBrowser(Screen):
 						self.hostdata = load_cache(self.hostcache_file)
 						self.passwordQuestion(False)
 					except:
-						self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n") ) )
+						self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
 				else:
-					self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n") ) )
+					self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
 
 		if sel[0][0] == 'nfsShare': # share entry selected
 			print '[Networkbrowser] sel nfsShare'
@@ -460,7 +460,7 @@ class NetworkBrowser(Screen):
 				print '[Networkbrowser] userinfo found from ',self.sharecache_file
 				self.openMountEdit(sel[0])
 			else:
-				self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n") ) )
+				self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
 
 	def passwordQuestion(self, ret = False):
 		sel = self["list"].getCurrent()
