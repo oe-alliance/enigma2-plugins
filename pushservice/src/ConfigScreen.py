@@ -133,7 +133,6 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		self["plugin_actions"].setEnabled(False)
 		
 		# Initialize Configuration part
-		print "PushService config"
 		self.list = []
 		self.state = MAIN
 		self.build()
@@ -325,17 +324,20 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		# Build xml config and write it
 		self.save()
 		
-		from plugin import gPushService
-		global gPushService
+		# If we need assign / "write" access import the plugin
+		# global won't work across module scope
+		import plugin
 		if config.pushservice.enable.value:
-			if gPushService:
-				gPushService.copyfrom(self)
-				gPushService.start()
+			if plugin.gPushService:
+				plugin.gPushService.copyfrom(self)
+				plugin.gPushService.start()
 			else:
-				gPushService = PushService()
-				gPushService.start()
+				#global gPushService
+				plugin.gPushService = PushService()
+				plugin.gPushService.start()
 		else:
-			gPushService = None
+			#global gPushService
+			plugin.gPushService = None
 		
 		self.close()
 

@@ -31,12 +31,11 @@ from Components.config import config, ConfigSubsection, ConfigNothing, ConfigEna
 from __init__ import _, localeInit
 from PushService import PushService
 #from ConfigScreen import ConfigScreen
-import ConfigScreen
 
 
 # Constants
 NAME = "PushService"
-VERSION = "0.2"
+VERSION = "0.2.1"
 SUPPORT = "http://www.i-have-a-dreambox.com/wbb2/thread.php?threadid=167779"
 DONATE = "http://bit.ly/pspaypal"
 ABOUT = "\n  " + NAME + " " + VERSION + "\n\n" \
@@ -71,9 +70,9 @@ config.pushservice.period                    = ConfigSelectionNumber(0, 1000, 1,
 def setup(session, **kwargs):
 	try:
 		### For testing only
+		import ConfigScreen
 		reload(ConfigScreen)
 		###
-		print "PushService setup"
 		session.open(ConfigScreen.ConfigScreen)
 	except Exception, e:
 		print _("PushService setup exception ") + str(e)

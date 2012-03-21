@@ -311,7 +311,7 @@ class PushServiceBase(Modules, ConfigFile):
 			elif arg:
 				print str(arg)
 
-	def push(self, plugin, subject, text, attachments):
+	def push(self, plugin, subject, text="", attachments=[]):
 		services = self.services
 		if not services:
 			# Fallback to PopUp
