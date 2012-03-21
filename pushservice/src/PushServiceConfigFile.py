@@ -1,0 +1,87 @@
+import os
+
+# XML
+from xml.etree.cElementTree import ElementTree, tostring, parse
+
+# Plugin internal
+from . import _
+from PluginModules import PluginModules
+
+
+def indent(elem, level=0):
+	i = "\n" + level*"  "
+	if len(elem):
+		if not elem.text or not elem.text.strip():
+			elem.text = i + "  "
+		if not elem.tail or not elem.tail.strip():
+			elem.tail = i
+		for elem in elem:
+			indent(elem, level+1)
+		if not elem.tail or not elem.tail.strip():
+			elem.tail = i
+	else:
+		if level and (not elem.tail or not elem.tail.strip()):
+			elem.tail = i
+
+
+class PushServiceConfigFile(object):
+
+	def __init__(self):
+		self.path = ""
+		self.mtime = -1
+		self.cache = ""
+
+	def __setPath(self, path):
+		if self.path != path:
+			self.path = path
+			self.mtime = -1
+			self.cache = ""
+
+	def readXML(self, path):
+		self.__setPath(path)
+		
+		# Abort if no config found
+		if not os.path.exists(path):
+			print _("[PushService] No configuration file present")
+			return None
+		
+		# Parse if mtime differs from whats saved
+		mtime = os.path.getmtime(path)
+		if mtime == self.mtime:
+			# No changes in configuration, won't read again
+			return self.cache
+		
+		# Parse XML
+		try:
+			etree = parse(path).getroot()
+		except Exception, e:
+			print _("[PushService] Exception in readXML: ") + str(e)
+			etree = None
+			mtime = -1
+		
+		# Save time and cache file content
+		self.mtime = mtime
+		self.cache = etree
+		return self.cache
+
+	def writeXML(self, etree, path):
+		self.__setPath(path)
+		
+		indent(etree)
+		data = tostring(etree, 'utf-8')
+		
+		f = None
+		try:
+			f = open(path, 'w')
+			if data:
+				f.writelines(data)
+		except Exception, e:
+			print _("[PushService] Exception in writeXML: ") + str(e)
+		finally:
+			if f is not None:
+				f.close()
+		
+		# Save time and cache file content
+		self.mtime = os.path.getmtime( path )
+		self.cache = etree
+
