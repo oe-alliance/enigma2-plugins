@@ -28,6 +28,7 @@ import NavigationInstance
 from time import localtime, strftime
 
 
+# Constants
 SUBJECT = _("Record Summary")
 BODY    = _("Finished record list:\n%s")
 TAG     = _("FinishedTimerPushed")
@@ -43,12 +44,12 @@ class RecordSummary(PluginBase):
 		self.timers = []
 		
 		# Default configuration
-		self.setOption( 'remove_timer', NoSave(ConfigYesNo( default = False )), _("Remove finished timer(s) only after ") )
+		self.setOption( 'remove_timer', NoSave(ConfigYesNo( default = False )), _("Remove finished timer(s)") )
 
-	def run(self):
-		# Return Header, Body, Attachment
+	def run(self, callback, errback):
+		# At the end a plugin has to call one of the functions: callback or errback
+		# Callback should return with at least one of the parameter: Header, Body, Attachment
 		# If empty or none is returned, nothing will be sent
-		# Search finished timers
 		self.timers = []
 		text = ""
 		for timer in NavigationInstance.instance.RecordTimer.processed_timers:
@@ -60,13 +61,13 @@ class RecordSummary(PluginBase):
 							+ "\n"
 				self.timers.append( timer )
 		if self.timers and text:
-			return SUBJECT, BODY % text
+			callback( SUBJECT, BODY % text )
 		else:
-			return None
+			callback()
 
 	# Callback functions
-	def success(self):
-		# Called after successful sending the message
+	def callback(self):
+		# Called after all services succeded
 		if self.getValue('remove_timer'):
 			# Remove finished timers
 			for timer in self.timers[:]:
@@ -80,6 +81,6 @@ class RecordSummary(PluginBase):
 				NavigationInstance.instance.RecordTimer.saveTimer()
 				self.timers.remove(timer)
 
-	def error(self):
-		# Called after message sent has failed
+	def errback(self):
+		# Called after all services has returned, but at least one has failed
 		self.timers = []

@@ -27,6 +27,7 @@ from Plugins.Extensions.PushService.PluginBase import PluginBase
 import os
 
 
+# Constants
 SUBJECT = _("Free space warning")
 BODY    = _("Free disk space limit has been reached:\n") \
 				+ _("Path:  %s\n") \
@@ -47,8 +48,9 @@ class FreeSpace(PluginBase):
 		self.setOption( 'path',     NoSave(ConfigText(   default = "/media/hdd/movie", fixed_size = False )), _("Where to check free space") )
 		self.setOption( 'limit',    NoSave(ConfigNumber( default = 100 )),                                    _("Free space limit in GB") )
 	
-	def run(self):
-		# Return Header, Body, Attachment
+	def run(self, callback, errback):
+		# At the end a plugin has to call one of the functions: callback or errback
+		# Callback should return with at least one of the parameter: Header, Body, Attachment
 		# If empty or none is returned, nothing will be sent
 		path = self.getValue('path')
 		limit = self.getValue('limit')
@@ -70,10 +72,7 @@ class FreeSpace(PluginBase):
 						if hdd.isSleeping():
 							# Don't wake up HDD
 							print _("[FreeSpace] HDD is idle: ") + str(path)
-							return
-						#TODO TEST
-						else:
-							print _("[FreeSpace] TEST HDD is not idle: ") + str(path)
+							callback()
 		
 		# Check free space on path
 		if os.path.exists( path ):
@@ -85,7 +84,7 @@ class FreeSpace(PluginBase):
 				else:
 					free = "%d MB" %(free)
 				# Not enough free space
-				return SUBJECT, BODY % (path, limit, free)
+				callback( SUBJECT, BODY % (path, limit, free) )
 			else:
 				# There is enough free space
-				return None
+				callback()

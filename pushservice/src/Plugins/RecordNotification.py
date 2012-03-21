@@ -20,7 +20,7 @@
 from Components.config import ConfigYesNo, NoSave
 
 # Plugin internal
-from Plugins.Extensions.PushService.__init__ import _
+#from Plugins.Extensions.PushService.__init__ import _
 from Plugins.Extensions.PushService.PluginBase import PluginBase
 
 # Plugin specific
@@ -29,6 +29,7 @@ from time import localtime, strftime
 from enigma import eTimer
 
 
+# Constants
 SUBJECT = _("Record Notification")
 
 
@@ -46,6 +47,7 @@ class RecordNotification(PluginBase):
 		# Default configuration
 		self.setOption( 'send_on_start', NoSave(ConfigYesNo( default = False )), _("Send notification on record start") )
 		self.setOption( 'send_on_end',   NoSave(ConfigYesNo( default = True )),  _("Send notification on record end") )
+		#TODO option to send free space
 
 	def begin(self):
 		# Is called after starting PushSerive
@@ -67,6 +69,12 @@ class RecordNotification(PluginBase):
 			# Remove callback function
 			if self.onRecordEvent in NavigationInstance.instance.RecordTimer.on_state_change:
 				NavigationInstance.instance.RecordTimer.on_state_change.remove(self.onRecordEvent)
+
+	def run(self, callback, errback):
+		# At the end a plugin has to call one of the functions: callback or errback
+		# Callback should return with at least one of the parameter: Header, Body, Attachment
+		# If empty or none is returned, nothing will be sent
+		callback()
 
 	def onRecordEvent(self, timer):
 		text = ""
@@ -97,5 +105,5 @@ class RecordNotification(PluginBase):
 			# Push mail
 			from Plugins.Extensions.PushService.plugin import gPushService
 			if gPushService:
-				gPushService.push(SUBJECT, text, [], self.success, self.error)
+				gPushService.push(self, SUBJECT, text)
 

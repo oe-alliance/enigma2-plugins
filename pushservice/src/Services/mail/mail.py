@@ -132,10 +132,6 @@ def sendmail(mailconf, message):
     retries = mailconf.get("retries", 0)
     timeout = mailconf.get("timeout", 30)
     
-    print port
-    print ssl
-    print tls
-    
     if not isinstance(port, types.IntType):
         raise ValueError("mailconf requires a proper 'port' configuration")
     

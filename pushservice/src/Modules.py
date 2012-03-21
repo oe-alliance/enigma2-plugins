@@ -16,85 +16,93 @@
 #
 #######################################################################
 
-# Plugin framework
-import os, imp, sys, traceback
+import os, sys, traceback
 
-# Path
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+# Plugin framework
+import imp, inspect
 
 # Plugin internal
 from . import _
+from ModuleBase import ModuleBase
+from ServiceBase import ServiceBase
 from PluginBase import PluginBase
 
 
-# Constants
-PLUGIN_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Plugins/" )
-MODULE_PREFIX = 'PushService'
-
-
-class PluginModules(object):
+class Modules(object):
 
 	def __init__(self):
-		self.modules = {}
-		
-		self.loadModules()
+		pass
 
 	#######################################################
 	# Module functions
-	def loadModules(self, path = PLUGIN_PATH):
-		self.modules = {}
+	def loadModules(self, path, base):
+		modules = {}
 		
 		if not os.path.exists(path):
 			return
 		
+		# Import all subfolders to allow relative imports
+		for root, dirs, files in os.walk(path):
+			if root not in sys.path:
+				sys.path.append(root)
+		
+		# Import PushService modules
 		files = [fname[:-3] for fname in os.listdir(path) if fname.endswith(".py")]
 		for name in files:
 			module = None
 			
+			if name == "__init__":
+				continue
+			
 			try:
 				fp, pathname, description = imp.find_module(name, [path])
 			except Exception, e:
-				print _("[PushService] Find: ") + str(e)
+				print _("[PushService] Find module exception: ") + str(e)
 				fp = None
 			
 			if not fp:
-				print _("[PushService] Load: no module")
+				print _("[PushService] No module found: ") + str(name)
 				continue
 			
 			try:
-				# Use a prefix to avoid namespace conflicts
-				module = imp.load_module(MODULE_PREFIX+name, fp, pathname, description)
+				module = imp.load_module( name, fp, pathname, description)
 			except Exception, e:
-				print _("[PushService] Load: ") + str(e)
+				print _("[PushService] Load exception: ") + str(e)
 			finally:
 				# Since we may exit via an exception, close fp explicitly.
-				if fp:
-					fp.close()
+				if fp: fp.close()
 			
 			if not module:
+				print _("[PushService] No module available: ") + str(name)
 				continue
 			
-			# Instantiate only if the class is available
+			# Continue only if the attribute is available
 			if not hasattr(module, name):
-				print _("[PushService] Warning no class definition")
+				print _("[PushService] Warning attribute not available: ") + str(name)
 				continue
 			
-			# Instantiate only if the class is a subclass of PluginBase
-			if not issubclass( getattr(module, name), PluginBase):
-				print _("[PushService] Warning no subclass of PluginBase")
+			# Continue only if attr is a class
+			attr = getattr(module, name)
+			if not inspect.isclass(attr):
+				print _("[PushService] Warning no class definition: ") + str(name)
+				continue
+			
+			# Continue only if the class is a subclass of the corresponding base class
+			if not issubclass( attr, base):
+				print _("[PushService] Warning no subclass of base: ") + str(name)
 				continue
 			
 			# Add module to the module list
-			self.modules[name] = getattr(module, name)
+			modules[name] = attr
+		return modules
 
-	def instantiatePlugin(self, name):
-		plugin = self.modules.get(name)
-		if plugin and callable(plugin):
-			# Create plugin instance
+	def instantiateModule(self, module):
+		if module and callable(module):
+			# Create instance
 			try:
-				return plugin()
+				return module()
 			except Exception, e:
-				print _("[PushService] Instantiate: ") + name + "\n" + str(e)
+				print _("[PushService] Instantiate exception: ") + str(module) + "\n" + str(e)
 				if sys.exc_info()[0]:
 					print _("Unexpected error: "), sys.exc_info()[0]
 					traceback.print_exc(file=sys.stdout)

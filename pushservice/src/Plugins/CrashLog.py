@@ -27,6 +27,7 @@ from Plugins.Extensions.PushService.PluginBase import PluginBase
 import os
 
 
+# Constants
 CRASHLOG_DIR = '/media/hdd'
 
 SUBJECT = _("Found CrashLog(s)")
@@ -45,10 +46,10 @@ class CrashLog(PluginBase):
 		# Default configuration
 		self.setOption( 'delete_logs', NoSave(ConfigYesNo( default = False )), _("Delete crashlog(s)") )
 
-	def run(self):
-		# Return Header, Body, Attachment
+	def run(self, callback, errback):
+		# At the end a plugin has to call one of the functions: callback or errback
+		# Callback should return with at least one of the parameter: Header, Body, Attachment
 		# If empty or none is returned, nothing will be sent
-		# Search crashlog files
 		self.crashlogs = []
 		text = "Found crashlogs, see attachment(s)\n"
 		for file in os.listdir( CRASHLOG_DIR ):
@@ -56,13 +57,13 @@ class CrashLog(PluginBase):
 				crashlog = os.path.join( CRASHLOG_DIR, file )
 				self.crashlogs.append(crashlog)
 		if self.crashlogs:
-			return SUBJECT, BODY, self.crashlogs
+			callback( SUBJECT, BODY, self.crashlogs )
 		else:
-			return None
+			callback()
 
 	# Callback functions
-	def success(self):
-		# Called after successful sending the message
+	def callback(self):
+		# Called after all services succeded
 		if self.getValue('delete_logs'):
 			# Delete crashlogs
 			for crashlog in self.crashlogs[:]:
@@ -79,6 +80,6 @@ class CrashLog(PluginBase):
 					os.rename(crashlog,newfilename)
 				self.crashlogs.remove( crashlog )
 
-	def error(self):
-		# Called after message sent has failed
+	def errback(self):
+		# Called after all services has returned, but at least one has failed
 		self.crashlogs = []

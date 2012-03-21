@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-pushservice
-Version: 0.1.3
+Version: 0.2
 Description: Push mail service for Enigma2
 Section: extra
 Priority: optional

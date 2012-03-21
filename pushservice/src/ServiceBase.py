@@ -16,12 +16,11 @@
 #
 #######################################################################
 
-
 from ModuleBase import ModuleBase
 
 
-# Plugin base class
-class PluginBase(ModuleBase):
+# Service base class
+class ServiceBase(ModuleBase):
 	# You only have to overwrite the functions You need
 	# If You don't have to save something, You don't need getOptions / setOptions
 	
@@ -32,8 +31,8 @@ class PluginBase(ModuleBase):
 	def __init__(self):
 		ModuleBase.__init__(self)
 		# Is called on instance creation
-		PluginBase.UniqueCounter += 1
-		self.uniqueid = PluginBase.UniqueCounter
+		ServiceBase.UniqueCounter += 1
+		self.uniqueid = ServiceBase.UniqueCounter
 
 
 	################################################
@@ -44,26 +43,16 @@ class PluginBase(ModuleBase):
 
 	@staticmethod
 	def resetUniqueID():
-		PluginBase.UniqueCounter = 0
+		ServiceBase.UniqueCounter = 0
 
 
 	################################################
 	# Functions to be implemented in the plugin
-	def run(self, callback, errback):
-		# At the end a plugin has to call one of the functions: callback or errback
-		# Callback should return with at least one of the parameter: Header, Body, Attachment
-		# If empty or none is returned, nothing will be sent
-		errback( "Not implemented: " + self.getName() + ".run()")
+	def push(self, callback, errback, pluginname, subject, body="", attachments=[]):
+		# Will be called, if a plugin wants to send a notification
+		# At the end a service has to call one of the functions: callback or errback
+		errback( "Not implemented: " + self.getName() + ".push()")
 
-	# Callback functions
-	def callback(self):
-		# Called after all services succeded
-		pass
-
-	def errback(self):
-		# Called after all services has returned, but at least one has failed
-		pass
-
-#	def test(self):
+#	def test(self, plugin, subject, body="", attachments=[], callback=None, errback=None):
 #		# Normally you don't have to overwrite this function
-#		self.run(self)
+#		self.push(self, plugin, subject, body="", attachments=[], callback=None, errback=None)

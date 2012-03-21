@@ -26,9 +26,11 @@ from Plugins.Extensions.PushService.PluginBase import PluginBase
 # Plugin specific
 import os
 from time import time
+from Tools.BoundFunction import boundFunction
 from Plugins.SystemPlugins.SoftwareManager.SoftwareTools import iSoftwareTools
 
 
+# Constants
 SUBJECT = _("IPKG Update Notification")
 BODY    = _("There are updates available:\n%s")
 
@@ -44,52 +46,52 @@ class IPKGUpdateNotification(PluginBase):
 		# Default configuration
 		self.setOption( 'selfcheck', NoSave(ConfigYesNo( default = False )), _("Start update check if not done yet") )
 
-	def run(self):
-		# Return Header, Body, Attachment
+	def run(self, callback, errback):
+		# At the end a plugin has to call one of the functions: callback or errback
+		# Callback should return with at least one of the parameter: Header, Body, Attachment
 		# If empty or none is returned, nothing will be sent
-		# Adapted from Software Manager
 		if iSoftwareTools.lastDownloadDate is not None and iSoftwareTools.lastDownloadDate > ( time() - (24*60*60) ):
 			# Last refresh was within one day
-			updates = self.buildList()
-			if updates:
-				return SUBJECT, BODY % (updates)
+			return self.buildList(callback, errback)
 		else:
 			print "IPKGUpdateNotification run else"
 			if self.getValue('selfcheck'):
 				# Refresh package list
-				iSoftwareTools.startSoftwareTools(self.getUpdateInfosCB)
-				#TODO async
+				iSoftwareTools.startSoftwareTools( boundFunction(self.getUpdateInfosCB, callback, errback) )
+				return
+		callback()
 
-	def getUpdateInfosCB(self, retval = None):
+	def getUpdateInfosCB(self, callback, errback, retval = None):
 		if retval is not None:
 			if retval is True:
 				if iSoftwareTools.available_updates is not 0:
 					# _("There are at least ") + str(iSoftwareTools.available_updates) + _(" updates available.")
 					print "Updates available."
-					return self.buildList()
+					return self.buildList(callback, errback)
 				else:
 					# _("There are no updates available.")
 					print "There are no updates available."
-					pass
+					return callback()
 			elif retval is False:
 				if iSoftwareTools.lastDownloadDate is None:
 					if iSoftwareTools.NetworkConnectionAvailable:
 						# _("Updatefeed not available.")
 						print "Updatefeed not available."
-						pass
+						return errback(_("Updatefeed not available."))
 					else:
 						# _("No network connection available.")
 						print "No network connection available."
-						pass
+						return errback(_("No network connection available."))
 				else:
 					print "IPKGUpdateNotification getUpdates"
 					# Call update
 					iSoftwareTools.lastDownloadDate = time()
 					iSoftwareTools.list_updating = True
-					iSoftwareTools.getUpdates(self.getUpdateInfosCB)
-					#TODO async
+					iSoftwareTools.getUpdates( boundFunction(self.getUpdateInfosCB, callback, errback) )
+					return
+		callback()
 
-	def buildList(self):
+	def buildList(self, callback, errback):
 		updates = ""
 		for package in iSoftwareTools.available_updatelist:
 			packagename = package[0]
@@ -102,5 +104,8 @@ class IPKGUpdateNotification(PluginBase):
 					updversion = v
 					break
 			updates += packagename + " :\t" + instversion + " :\t" + updversion + "\n"
-		return updates
+		if updates:
+			callback( SUBJECT, BODY % (updates) )
+		else:
+			callback()
 

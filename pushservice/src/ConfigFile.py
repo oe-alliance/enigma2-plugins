@@ -18,12 +18,14 @@
 
 import os
 
+# Config
+from Components.config import config
+
 # XML
 from xml.etree.cElementTree import ElementTree, tostring, parse
 
 # Plugin internal
 from . import _
-from PluginModules import PluginModules
 
 
 def indent(elem, level=0):
@@ -42,21 +44,14 @@ def indent(elem, level=0):
 			elem.tail = i
 
 
-class PushServiceConfigFile(object):
+class ConfigFile(object):
 
 	def __init__(self):
-		self.path = ""
 		self.mtime = -1
 		self.cache = ""
 
-	def __setPath(self, path):
-		if self.path != path:
-			self.path = path
-			self.mtime = -1
-			self.cache = ""
-
-	def readXML(self, path):
-		self.__setPath(path)
+	def readXML(self):
+		path = config.pushservice.xmlpath.value
 		
 		# Abort if no config found
 		if not os.path.exists(path):
@@ -82,8 +77,8 @@ class PushServiceConfigFile(object):
 		self.cache = etree
 		return self.cache
 
-	def writeXML(self, etree, path):
-		self.__setPath(path)
+	def writeXML(self, etree):
+		path = config.pushservice.xmlpath.value
 		
 		indent(etree)
 		data = tostring(etree, 'utf-8')
