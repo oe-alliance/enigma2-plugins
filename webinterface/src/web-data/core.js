@@ -1158,6 +1158,11 @@ var E2WebCore = Class.create({
 		}
 	},
 
+	delayedUpdateItems: function(){
+		var _this = this;
+		setTimeout(_this.updateItems.bind(this), 2000);
+	},
+
 	updateItems: function(){
 		debug("[E2WebCore].updateItems");
 		this.current.load();
@@ -1581,7 +1586,7 @@ var E2WebCore = Class.create({
 			'a.sListSLink',
 			function(event, element){
 				var ref = decodeURIComponent( element.id );
-				this.services.zap(ref, this.updateItems.bind(this));
+				this.services.zap(ref, this.delayedUpdateItems.bind(this));
 				event.stop();
 			}.bind(this)
 		);
