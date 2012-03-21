@@ -1,8 +1,20 @@
-'''
-Created on 14.11.2011
-
-@author: Frank Glaser
-'''
+#######################################################################
+#
+#    Push Service for Enigma-2
+#    Coded by betonme (c) 2012 <glaserfrank(at)gmail.com>
+#    Support: http://www.i-have-a-dreambox.com/wbb2/thread.php?threadid=167779
+#
+#    This program is free software; you can redistribute it and/or
+#    modify it under the terms of the GNU General Public License
+#    as published by the Free Software Foundation; either version 2
+#    of the License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#######################################################################
 
 import os
 import inspect
@@ -32,7 +44,7 @@ class PushMail(object):
 		from plugin import NAME, VERSION, SUPPORT, DONATE
 		
 		from_addr = config.pushservice.mailfrom.value
-		to_addrs = [config.pushservice.mailfrom.value or config.pushservice.mailto.value]
+		to_addrs = [config.pushservice.mailto.value or config.pushservice.mailfrom.value]
 		
 		# Set SMTP parameters
 		mailconf = {}
@@ -40,7 +52,8 @@ class PushMail(object):
 		mailconf["port"] = config.pushservice.smtpport.value
 		mailconf["username"] = config.pushservice.username.value
 		mailconf["password"] = config.pushservice.password.value
-		mailconf["tls"] = config.pushservice.smtptyp.value
+		mailconf["ssl"] = config.pushservice.smtpssl.value
+		mailconf["tls"] = config.pushservice.smtptls.value
 		mailconf["timeout"] = timeout
 		
 		# Create message object

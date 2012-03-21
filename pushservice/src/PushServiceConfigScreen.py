@@ -55,127 +55,119 @@ class PushServiceConfigScreen(Screen, ConfigListScreen, HelpableScreen):
 #			<widget source="help" render="Label" position="5,280" size="555,63" font="Regular;21" />
 
 	def __init__(self, session):
+		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
+		self.skinName = ["PushServiceConfigScreen", "ConfigListScreen"]
+		
+		# Summary
+		from plugin import NAME, VERSION, gPushService
+		self.setup_title = NAME + " " + _("Configuration") + " " + VERSION
+		
+		if gPushService:
+			# Save PushService instance
+			self.pushservice = gPushService
+			# Stop PushService
+			self.pushservice.stop()
+		else:
+			# PushService not running - Instantiate a new one
+			global gPushService
+			self.pushservice = PushService()
+		
+		# Load local plugins to work on
+		self.plugins = self.pushservice.load()
+		
+		# Buttons
+		self["key_red"]   = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_blue"]  = StaticText(_("Add plugin"))
+		self["key_yellow"]  = StaticText(_("Remove plugin"))
 		#TODO
-		try:
-			Screen.__init__(self, session)
-			HelpableScreen.__init__(self)
-			self.skinName = ["PushServiceConfigScreen", "ConfigListScreen"]
-			
-			# Summary
-			from plugin import NAME, VERSION, gPushService
-			self.setup_title = NAME + " " + _("Configuration") + " " + VERSION
-			
-			if gPushService:
-				# Save PushService instance
-				self.pushservice = gPushService
-				# Stop PushService
-				self.pushservice.stop()
-			else:
-				# PushService not running - Instantiate a new one
-				global gPushService
-				self.pushservice = PushService()
-			
-			# Load local plugins to work on
-			self.plugins = self.pushservice.load()
-			
-			# Buttons
-			self["key_red"]   = StaticText(_("Cancel"))
-			self["key_green"] = StaticText(_("OK"))
-			self["key_blue"]  = StaticText(_("Add plugin"))
-			self["key_yellow"]  = StaticText(_("Remove plugin"))
-			#TODO
-			#self["key_info"] test mail
-			#self["key_play"] test run
-			
-			#TODO Maybe LATER
-			#self["help"] = StaticText()
-			#self["HelpWindow"].hide()
-			#self["VirtualKB"].setEnabled(False)
-			#self["VKeyIcon"].boolean = False
-			self.help_window = None
-			
-			# Define Actions
-			#Bug self["custom_actions"] = HelpableActionMap(self, ["SetupActions", "ColorActions", "PushServiceConfigActions"],
-			self["custom_actions"] = HelpableActionMap(self, "PushServiceConfigActions",
-			{
-				"cancel":				(self.keyCancel,    _("Exit without saving")),
-				"save":					(self.keySave,      _("Save and exit.")),
-				"blue":					(self.addPlugin,    _("Add plugin")),
-				"yellow":				(self.removePlugin, _("Remove plugin")),
-				"pageUp":				(self.pageUp,       _("Page up")),
-				"pageDown":			(self.pageDown,     _("Page down")),
-				"testMail":			(self.testMail,     _("Send a test mail")),
-				"runNow":				(self.runNow,       _("Test run")),
-			}, -2) # higher priority
-			
-			# Initialize Configuration part
-			self.list = []
-			ConfigListScreen.__init__(self, self.list, session = session, on_change = self.buildConfig)
-			self.buildConfig()
-			
-			# Override selectionChanged because our config tuples are bigger
-			self.onChangedEntry = [ ]
-			def selectionChanged():
-				current = self["config"].getCurrent()
-				if self["config"].current != current:
-					if self["config"].current:
-						self["config"].current[1].onDeselect(self.session)
-					if current:
-						current[1].onSelect(self.session)
-					self["config"].current = current
-				for x in self["config"].onSelectionChanged:
-					x()
-			self["config"].selectionChanged = selectionChanged
-			
-			self.setTitle(self.setup_title)
-		except Exception, e:
-			print "PushServiceConfigScreen init exception " + str(e)
+		#self["key_info"] test mail
+		#self["key_play"] test run
+		
+		#TODO Maybe LATER
+		#self["help"] = StaticText()
+		#self["HelpWindow"].hide()
+		#self["VirtualKB"].setEnabled(False)
+		#self["VKeyIcon"].boolean = False
+		self.help_window = None
+		
+		# Define Actions
+		#Bug self["custom_actions"] = HelpableActionMap(self, ["SetupActions", "ColorActions", "PushServiceConfigActions"],
+		self["custom_actions"] = HelpableActionMap(self, "PushServiceConfigActions",
+		{
+			"cancel":				(self.keyCancel,    _("Exit without saving")),
+			"save":					(self.keySave,      _("Save and exit.")),
+			"blue":					(self.addPlugin,    _("Add plugin")),
+			"yellow":				(self.removePlugin, _("Remove plugin")),
+			"pageUp":				(self.pageUp,       _("Page up")),
+			"pageDown":			(self.pageDown,     _("Page down")),
+			"testMail":			(self.testMail,     _("Send a test mail")),
+			"runNow":				(self.runNow,       _("Test run")),
+		}, -2) # higher priority
+		
+		# Initialize Configuration part
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.buildConfig)
+		self.buildConfig()
+		
+		# Override selectionChanged because our config tuples are bigger
+		self.onChangedEntry = [ ]
+		def selectionChanged():
+			current = self["config"].getCurrent()
+			if self["config"].current != current:
+				if self["config"].current:
+					self["config"].current[1].onDeselect(self.session)
+				if current:
+					current[1].onSelect(self.session)
+				self["config"].current = current
+			for x in self["config"].onSelectionChanged:
+				x()
+		self["config"].selectionChanged = selectionChanged
+		
+		self.setTitle(self.setup_title)
 
 	def buildConfig(self, selectuniqueid=None):
-		#TODO
-		try:
-			self.list = []
-			select = None
-			lappend = self.list.append
-			
-			lappend( getConfigListEntry( _("Enable PushService"), config.pushservice.enable, 0 ) )
-			
-			if config.pushservice.enable.value:
-				lappend( getConfigListEntry( _("Dreambox name"), config.pushservice.boxname, 0 ) )
-				lappend( getConfigListEntry( _("Config file"), config.pushservice.xmlpath, 0 ) )
+		self.list = []
+		select = None
+		lappend = self.list.append
+		
+		lappend( getConfigListEntry( _("Enable PushService"), config.pushservice.enable, 0 ) )
+		
+		if config.pushservice.enable.value:
+			lappend( getConfigListEntry( _("Dreambox name"), config.pushservice.boxname, 0 ) )
+			lappend( getConfigListEntry( _("Config file"), config.pushservice.xmlpath, 0 ) )
 
-				lappend( getConfigListEntry( _("Start time (HH:MM)"), config.pushservice.time, 0 ) )
-				lappend( getConfigListEntry( _("Period in hours (0=disabled)"), config.pushservice.period, 0 ) )
-				lappend( getConfigListEntry( _("Run on boot"), config.pushservice.runonboot, 0 ) )
+			lappend( getConfigListEntry( _("Start time (HH:MM)"), config.pushservice.time, 0 ) )
+			lappend( getConfigListEntry( _("Period in hours (0=disabled)"), config.pushservice.period, 0 ) )
+			lappend( getConfigListEntry( _("Run on boot"), config.pushservice.runonboot, 0 ) )
+			
+			lappend( getConfigListEntry( _("SMTP Server"), config.pushservice.smtpserver, 0 ) )
+			lappend( getConfigListEntry( _("SMTP Port"), config.pushservice.smtpport, 0 ) )
+			lappend( getConfigListEntry( _("SMTP SSL"), config.pushservice.smtpssl, 0 ) )
+			lappend( getConfigListEntry( _("SMTP TLS"), config.pushservice.smtptls, 0 ) )
+			lappend( getConfigListEntry( _("User name"), config.pushservice.username, 0 ) )
+			lappend( getConfigListEntry( _("Password"), config.pushservice.password, 0 ) )
+			lappend( getConfigListEntry( _("Mail from"), config.pushservice.mailfrom, 0 ) )
+			lappend( getConfigListEntry( _("Mail to or leave empty"), config.pushservice.mailto, 0 ) )
+			
+			if self.plugins:
+				lappend( getConfigListEntry( separator, config.pushservice.about, 0 ) )
 				
-				lappend( getConfigListEntry( _("SMTP Server"), config.pushservice.smtpserver, 0 ) )
-				lappend( getConfigListEntry( _("SMTP Port"), config.pushservice.smtpport, 0 ) )
-				lappend( getConfigListEntry( _("SMTP SSL"), config.pushservice.smtptyp, 0 ) )
-				lappend( getConfigListEntry( _("User name"), config.pushservice.username, 0 ) )
-				lappend( getConfigListEntry( _("Password"), config.pushservice.password, 0 ) )
-				lappend( getConfigListEntry( _("Mail from"), config.pushservice.mailfrom, 0 ) )
-				lappend( getConfigListEntry( _("Mail to or leave empty"), config.pushservice.mailto, 0 ) )
-				
-				if self.plugins:
-					lappend( getConfigListEntry( separator, config.pushservice.about, 0 ) )
-					
-					for idx, plugin in enumerate(self.plugins):
-						lappend( getConfigListEntry( plugin.getNameId(), plugin.getConfigEnable(), idx ) )
-						if plugin.getUniqueID() == selectuniqueid:
-							# Select the added plugin
-							select = len(self.list)-1
-						if plugin.getEnable():
-							for key, element, description in plugin.getConfigOptions():
-								lappend( getConfigListEntry( "  " + str(description), element, idx ) )
-			
-			self["config"].setList( self.list )
-			del lappend
-			
-			if select is not None:
-				self["config"].instance.moveSelectionTo(select)
-			
-		except Exception, e:
-			print _("PushServiceConfigScreen build exception ") + str(e)
+				for idx, plugin in enumerate(self.plugins):
+					lappend( getConfigListEntry( plugin.getNameId(), plugin.getConfigEnable(), idx ) )
+					if plugin.getUniqueID() == selectuniqueid:
+						# Select the added plugin
+						select = len(self.list)-1
+					if plugin.getEnable():
+						for key, element, description in plugin.getConfigOptions():
+							lappend( getConfigListEntry( "  " + str(description), element, idx ) )
+		
+		self["config"].setList( self.list )
+		del lappend
+		
+		if select is not None:
+			self["config"].instance.moveSelectionTo(select)
 
 	def addPlugin(self):
 		self.hideHelpWindow()

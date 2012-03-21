@@ -16,10 +16,12 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 #
-# Changes:
-# 24.02.2012  betonme
+# Changes by betonme
+# 24.02.2012
 #             Added retries and timeout parameter
 #             Return deferred and connector
+# 03.03.2012
+#             Added SSL parameter
   
 """Implementation of e-mail Message and SMTP with and without SSL"""
   
@@ -98,26 +100,27 @@ class Message(object):
 
 def sendmail(mailconf, message):
     """Takes a regular dictionary as mailconf, as follows:
-  
     mailconf["host"] = "your.smtp.com" (required)
     mailconf["port"] = 25 (optional, default 25 or 587 for TLS)
     mailconf["username"] = "username" (optional)
     mailconf["password"] = "password" (optional)
+    mailconf["ssl"] = True | False (optional, default False)
     mailconf["tls"] = True | False (optional, default False)
     mailconf["retries"] = 0 (optional, default 0)
     mailconf["timeout"] = 30 (optional, default 30)
     """
     if not isinstance(mailconf, types.DictType):
         raise TypeError("mailconf must be a regular python dictionary")
-  
+    
     if not isinstance(message, Message):
         raise TypeError("message must be an instance of nuswit.mail.Message")
-  
+    
     host = mailconf.get("host")
     if not isinstance(host, types.StringType):
         raise ValueError("mailconf requires a 'host' configuration")
-  
-    if mailconf.get("tls", False) is True:
+    
+    tls = mailconf.get("tls", True)
+    if mailconf.get("ssl", True) is True:
         port = mailconf.get("port", 587)
         contextFactory = ClientContextFactory()
         contextFactory.method = SSLv3_METHOD
@@ -138,6 +141,7 @@ def sendmail(mailconf, message):
         message.from_addr, message.to_addrs, message.render(),
         deferred, contextFactory=contextFactory,
         requireAuthentication=(username and password),
+        requireTransportSecurity=tls,
         retries=retries, timeout=timeout)
     
     connector = reactor.connectTCP(host, port, factory, timeout=timeout)
