@@ -291,7 +291,6 @@ class PushServiceConfigScreen(Screen, ConfigListScreen, HelpableScreen):
 			self.testMailBox.setText(_("The mail has been sent successfully"))
 	def error(self, e):
 		if self.testMailBox:
-			self.testMailBox.setText(_("Mail sent failed:\n\n%s") % e.getErrorMessage())
 			self.testMailBox.setText(_("Mail sent failed:\n\n%s\n\n%s") % (e.type, e.value))
 
 	def runNow(self):
@@ -317,7 +316,6 @@ class TestMailBox(MessageBox):
 	def setText(self, text):
 		self.stopTimer()
 		self["text"].setText(text)
-		#self.resize()
 		self.createGUIScreen(self.instance, self.desktop, updateonly = True)
 
 

@@ -22,25 +22,25 @@
 #             Return deferred and connector
 # 03.03.2012
 #             Added SSL parameter
-  
+
 """Implementation of e-mail Message and SMTP with and without SSL"""
-  
+
 import types
 import os.path
 from cStringIO import StringIO
 from OpenSSL.SSL import SSLv3_METHOD
-  
+
 from email import Encoders
 from email.MIMEText import MIMEText
 from email.MIMEBase import MIMEBase
 from email.MIMEMultipart import MIMEMultipart
 from email.Utils import COMMASPACE, formatdate
-  
+
 from twisted.internet import reactor
 from twisted.internet.defer import Deferred
 from twisted.internet.ssl import ClientContextFactory
 from twisted.mail.smtp import ESMTPSenderFactory
-  
+
 class Message(object):
     def __init__(self, from_addr, to_addrs, subject, message, mime="text/plain", charset="utf-8"):
         self.subject = subject
@@ -119,8 +119,9 @@ def sendmail(mailconf, message):
     if not isinstance(host, types.StringType):
         raise ValueError("mailconf requires a 'host' configuration")
     
+    ssl = mailconf.get("ssl", True)
     tls = mailconf.get("tls", True)
-    if mailconf.get("ssl", True) is True:
+    if ssl is True:
         port = mailconf.get("port", 587)
         contextFactory = ClientContextFactory()
         contextFactory.method = SSLv3_METHOD
@@ -130,6 +131,10 @@ def sendmail(mailconf, message):
     
     retries = mailconf.get("retries", 0)
     timeout = mailconf.get("timeout", 30)
+    
+    print port
+    print ssl
+    print tls
     
     if not isinstance(port, types.IntType):
         raise ValueError("mailconf requires a proper 'port' configuration")
@@ -144,6 +149,9 @@ def sendmail(mailconf, message):
         requireTransportSecurity=tls,
         retries=retries, timeout=timeout)
     
-    connector = reactor.connectTCP(host, port, factory, timeout=timeout)
+    if not ssl:
+        connector = reactor.connectTCP(host, port, factory, timeout=timeout)
+    else:
+        connector = reactor.connectSSL(host, port, factory, contextFactory, timeout=timeout)
     
     return deferred, connector

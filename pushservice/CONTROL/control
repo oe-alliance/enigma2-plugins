@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-pushservice
-Version: 0.1.2
+Version: 0.1.3
 Description: Push mail service for Enigma2
 Section: extra
 Priority: optional
@@ -7,4 +7,4 @@ Maintainer: betonme
 Architecture: all
 OE: PushService
 Homepage: IHAD
-Depends: enigma2 (>= 2.6git20090615), python-email, python-twisted-core, python-twisted-mail, python-twisted-names, python-twisted-protocols, python-twisted-web, python-pyopenssl
+Depends: enigma2 (>= 2.6git20090615), python-xml, python-email, python-twisted-core, python-twisted-mail, python-twisted-names, python-twisted-protocols, python-twisted-web, python-pyopenssl, python-io

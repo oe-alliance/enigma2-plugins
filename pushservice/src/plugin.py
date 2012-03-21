@@ -35,7 +35,7 @@ from PushServiceConfigScreen import PushServiceConfigScreen
 
 # Constants
 NAME = "PushService"
-VERSION = "0.1.2"
+VERSION = "0.1.3"
 SUPPORT = "http://www.i-have-a-dreambox.com/wbb2/thread.php?threadid=167779"
 DONATE = "http://bit.ly/pspaypal"
 ABOUT = "\n  " + NAME + " " + VERSION + "\n\n" \
