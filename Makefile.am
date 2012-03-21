@@ -79,6 +79,7 @@ SUBDIRS = \
 	pluginsort \
 	podcast \
 	porncenter \
+	pushservice \
 	quickbutton \
 	reconstructapsc \
 	remotetimer \

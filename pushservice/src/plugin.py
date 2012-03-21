@@ -28,14 +28,14 @@ from Components.config import config, ConfigSubsection, ConfigNothing, ConfigEna
 #from Components.Language import language
 
 # Plugin internal
-from __init__ import _, localeInit
+from __init__ import _
 from PushService import PushService
 #from ConfigScreen import ConfigScreen
 
 
 # Constants
 NAME = "PushService"
-VERSION = "0.2.1"
+VERSION = "0.2.2"
 SUPPORT = "http://www.i-have-a-dreambox.com/wbb2/thread.php?threadid=167779"
 DONATE = "http://bit.ly/pspaypal"
 ABOUT = "\n  " + NAME + " " + VERSION + "\n\n" \
@@ -98,7 +98,6 @@ def autostart(reason, **kwargs):
 #######################################################
 # Plugin main function
 def Plugins(**kwargs):
-	localeInit()
 	
 	descriptors = []
 	

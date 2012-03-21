@@ -42,6 +42,8 @@ class GNTP(ServiceBase):
 	def __init__(self):
 		# Is called on instance creation
 		ServiceBase.__init__(self)
+		#self.sockets = []
+		
 		# Default configuration
 		self.setOption( 'growlhost',  NoSave(ConfigText(default="host", fixed_size = False)),  _("Growl Host name") )
 		self.setOption( 'growlport',  NoSave(ConfigNumber(default = 23053)),                   _("Growl Port") )
@@ -75,6 +77,7 @@ class GNTP(ServiceBase):
 		growl.register()
 		
 		# Send a message
+		#socket = 
 		sent = growl.notify(
 			noteType    = nottype,
 			title       = subject,
@@ -83,8 +86,19 @@ class GNTP(ServiceBase):
 			sticky      = self.getValue('sticky'),
 			priority    = self.getValue('priority')
 		)
+		#self.sockets.append(socket)
 		
 		if sent is True:
 			callback()
 		else:
 			errback(sent)
+
+#TODO Maybe later
+# we have to rewrite the gntp client
+# it has to use asynchronous connection - maybe twisted
+# and it should return the active socket / connector
+#	def cancel(self):
+#		# Cancel push
+#		if self.sockets:
+#			for socket in self.sockets:
+#				socket.close()

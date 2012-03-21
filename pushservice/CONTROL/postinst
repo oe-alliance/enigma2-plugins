@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "********************************************************"
 echo "*  PushService installed                               *"
-echo "*  Coded by betonme (c) 2011                           *"
+echo "*  Coded by betonme (c) 2012                           *"
 echo "*  Support: IHAD                                       *"
 echo "*                                                      *"
 echo "*  Restart Enigma-2 GUI to activate the plugin         *"

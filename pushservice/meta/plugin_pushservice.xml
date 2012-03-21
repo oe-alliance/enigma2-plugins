@@ -1,0 +1,18 @@
+<default>
+	  <prerequisites>
+                    <tag type="Software" />
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>betonme</author>
+                    <name>PushService</name>
+                    <packagename>enigma2-plugin-extensions-pushservice</packagename>
+                    <shortdescription>A flexible event notification service</shortdescription>
+                    <description>Never miss any free space warning, update or timer conflict</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_pushservice.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-pushservice" />
+	  </files>
+</default>
