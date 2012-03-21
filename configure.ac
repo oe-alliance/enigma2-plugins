@@ -448,6 +448,15 @@ porncenter/po/Makefile
 porncenter/src/Makefile
 porncenter/src/Additions/Makefile
 
+pushservice/Makefile
+pushservice/meta/Makefile
+pushservice/po/Makefile
+pushservice/src/Makefile
+pushservice/src/Plugins/Makefile
+pushservice/src/Services/Makefile
+pushservice/src/Services/gntp/Makefile
+pushservice/src/Services/mail/Makefile
+
 quickbutton/Makefile
 quickbutton/meta/Makefile
 quickbutton/po/Makefile
