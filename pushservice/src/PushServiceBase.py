@@ -35,7 +35,7 @@ from . import _
 from Modules import Modules
 from ConfigFile import ConfigFile
 from ServiceBase import ServiceBase
-from PluginBase import PluginBase
+from ControllerBase import ControllerBase
 
 
 # Constants
@@ -43,8 +43,8 @@ SERVICE = "Service"
 PLUGIN = "Plugin"
 OPTION = "Option"
 
-SERVICE_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Services/" )
-PLUGIN_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Plugins/" )
+SERVICES_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Services/" )
+CONTROLLER_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Controller/" )
 
 
 class PushServiceBase(Modules, ConfigFile):
@@ -60,8 +60,8 @@ class PushServiceBase(Modules, ConfigFile):
 		self.pusherrbacks = {}
 		
 		# Read module files from subfolders
-		self.servicemodules = self.loadModules(SERVICE_PATH, ServiceBase)
-		self.pluginmodules = self.loadModules(PLUGIN_PATH, PluginBase)
+		self.servicemodules = self.loadModules(SERVICES_PATH, ServiceBase)
+		self.pluginmodules = self.loadModules(CONTROLLER_PATH, ControllerBase)
 
 
 	######################################
@@ -170,7 +170,7 @@ class PushServiceBase(Modules, ConfigFile):
 			
 			# Reset the unique id counters
 			ServiceBase.resetUniqueID()
-			PluginBase.resetUniqueID()
+			ControllerBase.resetUniqueID()
 			# Parse Config
 			def parse(root, typ, modules):
 				instances = []

@@ -81,13 +81,17 @@ class ModuleBase(object):
 		# [ (key, value) , ]
 		# If something is missing, the last/default value is used
 		for key, value in options:
-			default = self.getValue(key)
-			if type(default) is str:
-				self.setValue(key, value)
-			elif type(default) is bool:
-				self.setValue(key, eval(value))
-			elif type(default) is int:
-				self.setValue(key, int(value))
+			try:
+				default = self.getValue(key)
+				if type(default) is str:
+					self.setValue(key, value)
+				elif type(default) is bool:
+					self.setValue(key, eval(value))
+				elif type(default) is int:
+					self.setValue(key, int(value))
+			except:
+				print _("[PushService] Module %s: Skipping config option: %s %s") % ( self.getName(), str(key), str(value) )
+				continue
 
 	def getUniqueID(self):
 		return self.uniqueid

@@ -24,7 +24,7 @@ from Plugins.Extensions.PushService.__init__ import _
 from Plugins.Extensions.PushService.ServiceBase import ServiceBase
 
 # Plugin specific
-from Plugins.Extensions.PushService.Services.mail.mail import Message, sendmail
+from mail.mail import Message, sendmail
 
 
 # Constants

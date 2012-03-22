@@ -21,7 +21,7 @@ from Components.config import ConfigYesNo, NoSave
 
 # Plugin internal
 from Plugins.Extensions.PushService.__init__ import _
-from Plugins.Extensions.PushService.PluginBase import PluginBase
+from Plugins.Extensions.PushService.ControllerBase import ControllerBase
 
 # Plugin specific
 import NavigationInstance
@@ -34,13 +34,13 @@ BODY    = _("Deactivated timer list:\n%s")
 TAG     = _("DeactivatedTimerPushed")
 
 
-class DeactivatedTimers(PluginBase):
+class DeactivatedTimers(ControllerBase):
 	
 	ForceSingleInstance = True
 	
 	def __init__(self):
 		# Is called on instance creation
-		PluginBase.__init__(self)
+		ControllerBase.__init__(self)
 		self.timers = []
 		
 		# Default configuration

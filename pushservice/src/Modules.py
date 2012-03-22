@@ -25,7 +25,7 @@ import imp, inspect
 from . import _
 from ModuleBase import ModuleBase
 from ServiceBase import ServiceBase
-from PluginBase import PluginBase
+from ControllerBase import ControllerBase
 
 
 class Modules(object):

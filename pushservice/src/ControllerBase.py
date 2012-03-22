@@ -21,7 +21,7 @@ from ModuleBase import ModuleBase
 
 
 # Plugin base class
-class PluginBase(ModuleBase):
+class ControllerBase(ModuleBase):
 	# You only have to overwrite the functions You need
 	# If You don't have to save something, You don't need getOptions / setOptions
 	
@@ -32,8 +32,8 @@ class PluginBase(ModuleBase):
 	def __init__(self):
 		ModuleBase.__init__(self)
 		# Is called on instance creation
-		PluginBase.UniqueCounter += 1
-		self.uniqueid = PluginBase.UniqueCounter
+		ControllerBase.UniqueCounter += 1
+		self.uniqueid = ControllerBase.UniqueCounter
 
 
 	################################################
@@ -44,7 +44,7 @@ class PluginBase(ModuleBase):
 
 	@staticmethod
 	def resetUniqueID():
-		PluginBase.UniqueCounter = 0
+		ControllerBase.UniqueCounter = 0
 
 
 	################################################

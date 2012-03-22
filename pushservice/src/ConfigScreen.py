@@ -41,7 +41,7 @@ from PushService import PushService
 from PushServiceBase import PushServiceBase
 from ModuleBase import ModuleBase
 from ServiceBase import ServiceBase
-from PluginBase import PluginBase
+from ControllerBase import ControllerBase
 
 
 # States
@@ -422,7 +422,7 @@ class TestConsole(Screen):
 		if isinstance(test, ServiceBase):
 			title = _("Testing Service") + " " + test.getName()
 			text = _("Testing...\n\nCancel?")
-		elif isinstance(test, PluginBase):
+		elif isinstance(test, ControllerBase):
 			title = _("Testing Plugin") + " " + test.getName()
 			text = _("Testing...\n\nCancel?")
 		else:
@@ -436,7 +436,7 @@ class TestConsole(Screen):
 		try:
 			if isinstance(test, ServiceBase):
 				test.push( self.callback, self.errback, _("PushService Config"), _("Push test"), _("If You can see this, Your configuration is correct.") )
-			elif isinstance(test, PluginBase):
+			elif isinstance(test, ControllerBase):
 				test.run( self.callback, self.errback )
 		except Exception, e:
 			text = _("PushService Test exception:") + "\n\n"
@@ -451,7 +451,7 @@ class TestConsole(Screen):
 		if args:
 			for arg in args:
 				text += str(arg) + "\n"
-		elif self.test and isinstance(self.test, PluginBase):
+		elif self.test and isinstance(self.test, ControllerBase):
 			text += _("Nothing to push")
 		self.setText(text)
 
