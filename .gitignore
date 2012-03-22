@@ -8,6 +8,7 @@ configure
 depcomp
 enigma2-plugins-config.h
 enigma2-plugins-config.h.in
+enigma2-plugins-config.h.in~
 index-enigma2-plugins.xml
 install-sh
 libtool
