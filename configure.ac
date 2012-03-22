@@ -452,7 +452,7 @@ pushservice/Makefile
 pushservice/meta/Makefile
 pushservice/po/Makefile
 pushservice/src/Makefile
-pushservice/src/Plugins/Makefile
+pushservice/src/Controller/Makefile
 pushservice/src/Services/Makefile
 pushservice/src/Services/gntp/Makefile
 pushservice/src/Services/mail/Makefile
