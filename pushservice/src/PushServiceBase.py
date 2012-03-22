@@ -40,10 +40,10 @@ from ControllerBase import ControllerBase
 
 # Constants
 SERVICE = "Service"
-PLUGIN = "Plugin"
+CONTROLLER = "Controller"
 OPTION = "Option"
 
-SERVICES_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Services/" )
+SERVICE_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Services/" )
 CONTROLLER_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/Controller/" )
 
 
@@ -54,14 +54,14 @@ class PushServiceBase(Modules, ConfigFile):
 		ConfigFile.__init__(self)
 		
 		self.services = []
-		self.plugins = []
+		self.controllers = []
 		
 		self.pushcallbacks = {}
 		self.pusherrbacks = {}
 		
 		# Read module files from subfolders
-		self.servicemodules = self.loadModules(SERVICES_PATH, ServiceBase)
-		self.pluginmodules = self.loadModules(CONTROLLER_PATH, ControllerBase)
+		self.servicemodules = self.loadModules(SERVICE_PATH, ServiceBase)
+		self.controllermodules = self.loadModules(CONTROLLER_PATH, ControllerBase)
 
 
 	######################################
@@ -83,7 +83,7 @@ class PushServiceBase(Modules, ConfigFile):
 				if module.forceSingle():
 					# We have to check if there is already a plugin instance
 					if name in serviceclasses:
-						# A plugin instance already exists
+						# A service instance already exists
 						continue
 				slist.append( (name, module) )
 			slist.sort()
@@ -106,67 +106,67 @@ class PushServiceBase(Modules, ConfigFile):
 		if service in self.services:
 			self.services.remove( service )
 
-	def getPlugins(self):
-		return self.plugins or []
+	def getControllers(self):
+		return self.controllers or []
 
-	def getPlugin(self, idx):
-		if idx < len(self.plugins):
-			return self.plugins[idx]
+	def getController(self, idx):
+		if idx < len(self.controllers):
+			return self.controllers[idx]
 		else:
 			return None
 
-	def getAvlPlugins(self):
+	def getAvlControllers(self):
 		plist = []
-		if self.pluginmodules:
-			pluginclasses = [ plugin.getClass() for plugin in self.plugins] if self.plugins else []
-			for name, module in self.pluginmodules.iteritems():
+		if self.controllermodules:
+			controllerclasses = [ controller.getClass() for controller in self.controllers] if self.controllers else []
+			for name, module in self.controllermodules.iteritems():
 				if module.forceSingle():
-					# We have to check if there is already a plugin instance
-					if name in pluginclasses:
-						# A plugin instance already exists
+					# We have to check if there is already a controller instance
+					if name in controllerclasses:
+						# A controller instance already exists
 						continue
 				plist.append( (name, module) )
 			plist.sort()
 		return plist
 
-	def getPluginInstances(self):
-		return [( plugin.getNameId(), plugin ) for plugin in self.getPlugins() ]
+	def getControllerInstances(self):
+		return [( controller.getNameId(), controller ) for controller in self.getControllers() ]
 
-	def addPlugin(self, module):
+	def addController(self, module):
 		id = None
-		plugin = module and self.instantiateModule( module )
-		if plugin:
-			plugin.setEnable(True)
-			self.plugins.append( plugin )
-			self.plugins.sort( key=lambda x: ( x.getUniqueID() ) )
-			id = plugin.getUniqueID()
+		controller = module and self.instantiateModule( module )
+		if controller:
+			controller.setEnable(True)
+			self.controllers.append( controller )
+			self.controllers.sort( key=lambda x: ( x.getUniqueID() ) )
+			id = controller.getUniqueID()
 		return id
 
-	def removePlugin(self, plugin):
-		if plugin in self.plugins:
-			self.plugins.remove( plugin )
+	def removeController(self, controller):
+		if controller in self.controllers:
+			self.controllers.remove( controller )
 
 
 	######################################
 	# Config
 	def copyto(self, destination):
 		destination.services = self.services
-		destination.plugins = self.plugins
+		destination.controllers = self.controllers
 		destination.servicemodules = self.servicemodules
-		destination.pluginmodules = self.pluginmodules
+		destination.controllermodules = self.controllermodules
 
 	def copyfrom(self, source):
 		self.services = source.services
-		self.plugins = source.plugins
+		self.controllers = source.controllers
 		self.servicemodules = source.servicemodules
-		self.pluginmodules = source.pluginmodules
+		self.controllermodules = source.controllermodules
 
 	def load(self):
 		# Read xml config file
 		root = self.readXML()
 		if root:
 			services = []
-			plugins = []
+			controllers = []
 			
 			# Reset the unique id counters
 			ServiceBase.resetUniqueID()
@@ -195,23 +195,23 @@ class PushServiceBase(Modules, ConfigFile):
 								if options:
 									instance.setOptions(options)
 								
-								# Append to active plugin list
+								# Append to active controller list
 								instances.append(instance)
 				return instances
 			services = parse( root, SERVICE, self.servicemodules )
-			plugins = parse( root, PLUGIN, self.pluginmodules )
+			controllers = parse( root, CONTROLLER, self.controllermodules )
 			
 			self.services = services
-			self.plugins = plugins
+			self.controllers = controllers
 		else:
 			self.services = []
-			self.plugins = []
+			self.controllers = []
 
 	def save(self):
 		# Generate List in RAM
 		root = None
 		services = self.services
-		plugins = self.plugins
+		controllers = self.controllers
 		
 		# Build Header
 		from plugin import NAME, VERSION
@@ -222,7 +222,7 @@ class PushServiceBase(Modules, ConfigFile):
 		# Build Body
 		def build(root, instances, typ):
 			for instance in instances:
-				# Add plugin
+				# Add module
 				element = SubElement( root, typ, name = stringToXML(instance.getName()), enable = stringToXML(instance.getStringEnable()) )
 				# Add options
 				options = instance.getStringOptions()
@@ -233,58 +233,58 @@ class PushServiceBase(Modules, ConfigFile):
 		
 		if services:
 			root = build( root, services, SERVICE)
-		if plugins:
-			root = build( root, plugins, PLUGIN)
+		if controllers:
+			root = build( root, controllers, CONTROLLER)
 		
 		self.writeXML( root )
 
 
 	######################################
-	# Plugin handling
+	# Controller handling
 	def begin(self):
 		# Loop over all Services
 		for service in self.getServices():
 			if service.getEnable():
 				service.begin()
-		# Loop over all Plugins
-		for plugin in self.getPlugins():
-			if plugin.getEnable():
-				plugin.begin()
+		# Loop over all Controllers
+		for controller in self.getControllers():
+			if controller.getEnable():
+				controller.begin()
 
 	def end(self):
 		# Loop over all Services
 		for service in self.getServices():
 			if service.getEnable():
 				service.end()
-		# Loop over all Plugins
-		for plugin in self.getPlugins():
-			if plugin.getEnable():
-				plugin.end()
+		# Loop over all Controllers
+		for controller in self.getControllers():
+			if controller.getEnable():
+				controller.end()
 
 	def run(self):
 		print _("PushService started: ") + strftime( _("%d.%m.%Y %H:%M"), localtime() )
 		
-		plugins = self.plugins
+		controllers = self.controllers
 		self.pushcallbacks = {}
 		self.pusherrbacks = {}
 		
-		# Loop over all Plugins
-		if plugins:
-			for plugin in plugins:
-				if plugin.getEnable():
-					print _("PushService running: ") + str( plugin.getName() )
+		# Loop over all Controllers
+		if controllers:
+			for controller in controllers:
+				if controller.getEnable():
+					print _("PushService running: ") + str( controller.getName() )
 					
 					try:
-						# Run plugin
-						ret = plugin.run(
-								boundFunction(self.runcallback, plugin),
-								boundFunction(self.runcallback, plugin) )
+						# Run controller
+						ret = controller.run(
+								boundFunction(self.runcallback, controller),
+								boundFunction(self.runcallback, controller) )
 					except Exception, e:
-						print _("PushService Plugin run() exception")
+						print _("PushService controller run() exception")
 						exc_type, exc_value, exc_traceback = sys.exc_info()
 						traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stdout)
 
-	def runcallback(self, plugin, *args):
+	def runcallback(self, controller, *args):
 		services = self.services
 		subject, body, attachments = "", "", []
 		
@@ -301,53 +301,57 @@ class PushServiceBase(Modules, ConfigFile):
 			
 			if subject:
 				# Push notification
-				self.push(plugin, subject, body, attachments)
+				self.push(controller, subject, body, attachments)
 
-	def runerrback(self, plugin, *args):
-		print _("Plugin %s returned error(s)") % plugin.getName()
+	def runerrback(self, controller, *args):
+		print _("controller %s returned error(s)") % controller.getName()
 		for arg in args:
 			if isinstance(arg, Exception):
 				print str(arg.type), str(arg.value)
 			elif arg:
 				print str(arg)
 
-	def push(self, plugin, subject, text="", attachments=[]):
+	def push(self, controller, subject, text="", attachments=[]):
+		print "push"
 		services = self.services
 		if not services:
 			# Fallback to PopUp
-			module = self.pluginmodules.get("PopUp", None)
+			module = self.controllermodules.get("PopUp", None)
 			popup = self.instantiateModule(module)
 			# Missing but not necessary: popup.begin() -> popup.push(...) -> popup.end()
 			services = [popup]
 		if services:
 			for service in services:
-				try:
-					service.push(
-							boundFunction(self.pushcallback, service, plugin),
-							boundFunction(self.pusherrback, service, plugin),
-							plugin.getName(),
-							subject, text, attachments )
-				except Exception, e:
-					print _("PushService Service push() exception")
-					exc_type, exc_value, exc_traceback = sys.exc_info()
-					traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stdout)
+				if service.getEnable():
+					try:
+						service.push(
+								boundFunction(self.pushcallback, service, controller),
+								boundFunction(self.pusherrback, service, controller),
+								controller.getName(),
+								subject, text, attachments )
+					except Exception, e:
+						print _("PushService Service push() exception")
+						exc_type, exc_value, exc_traceback = sys.exc_info()
+						traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stdout)
 
-	def pushcallback(self, service, plugin, *args):
-		key = (service, plugin)
+	def pushcallback(self, service, controller, *args):
+		print "pushcallback"
+		key = (service, controller)
 		if key not in self.pushcallbacks:
 			self.pushcallbacks[key] = list(args)
 		else:
 			self.pushcallbacks[key].extend(list(args))
 		self.pushcheckbacks(key)
 
-	def pusherrback(self, service, plugin, *args):
+	def pusherrback(self, service, controller, *args):
+		print "pusherrback"
 		print _("Service %s returned error(s)") % service.getName()
 		for arg in args:
 			if isinstance(arg, Exception):
 				print str(arg.type), str(arg.value)
 			elif arg:
 				print str(arg)
-		key = (service, plugin)
+		key = (service, controller)
 		if key not in self.pusherrbacks:
 			self.pusherrbacks[key] = list(args)
 		else:
@@ -355,17 +359,21 @@ class PushServiceBase(Modules, ConfigFile):
 		self.pushcheckbacks(key)
 
 	def pushcheckbacks(self, key):
+		print "pushcheckbacks"
 		callparam = self.pushcallbacks.get(key, [])
 		cntcall = len(callparam)
 		errparam = self.pusherrbacks.get(key, [])
 		cnterr = len(errparam)
+		cntservices = len( [ service for service in self.services if service.getEnable() ] )
 		
 		# Check if all services already called and returned
-		if ( len(self.services) == (cntcall + cnterr) ):
-			service, plugin = key
-			if plugin:
+		if ( cntservices == (cntcall + cnterr) ):
+			service, controller = key
+			if controller:
 				# Check if no error is logged
 				if ( cnterr == 0 ):
-					plugin.callback()
+					print "controller.callback()"
+					controller.callback()
 				else:
-					plugin.errback()
+					controller.errback()
+					print "controller.errback()"

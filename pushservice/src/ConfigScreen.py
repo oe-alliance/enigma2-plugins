@@ -45,9 +45,9 @@ from ControllerBase import ControllerBase
 
 
 # States
-(MAIN, SERVICES, PLUGINS) = range(3)
+(MAIN, SERVICES, CONTROLLERS) = range(3)
 #IDEA combine into one screen
-#(MAIN, SERVICES, ADDSERVICE, REMOVESERVICE, PLUGINS, ADDPLUGIN, REMOVEPLUGIN) = range(7)
+#(MAIN, SERVICES, ADDSERVICE, REMOVESERVICE, CONTROLLERS, ADDCONTROLLER, REMOVECONTROLLER) = range(7)
 
 
 #######################################################
@@ -81,7 +81,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		if gPushService:
 			gPushService.stop()
 		
-		# Load local plugins to work on
+		# Load local moduls to work on
 		self.load()
 		
 		# Buttons
@@ -109,8 +109,8 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		
 		self["main_actions_enabled"] = HelpableActionMap(self, "PushServiceConfigActions",
 		{
-			"yellow":				(self.showServices,    _("Show Services")),
-			"blue":					(self.showPlugins,     _("Show Plugins")),
+			"yellow":				(self.showServices,     _("Show Services")),
+			"blue":					(self.showControllers,  _("Show Controllers")),
 		}, -2) # higher priority
 		self["main_actions_enabled"].setEnabled(False)
 		
@@ -123,14 +123,14 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		}, -2) # higher priority
 		self["service_actions"].setEnabled(False)
 		
-		self["plugin_actions"] = HelpableActionMap(self, "PushServiceConfigActions",
+		self["controller_actions"] = HelpableActionMap(self, "PushServiceConfigActions",
 		{
-			"red":					(self.showMain,        _("Back to main screen")),
-			"green":				(self.testPlugin,      _("Test selected Plugin")),
-			"yellow":				(self.addPlugins,      _("Add Plugin")),
-			"blue": 				(self.removePlugins,   _("Remove Plugin")),
+			"red":					(self.showMain,            _("Back to main screen")),
+			"green":				(self.testController,      _("Test selected Controller")),
+			"yellow":				(self.addControllers,      _("Add Controller")),
+			"blue": 				(self.removeControllers,   _("Remove Controller")),
 		}, -2) # higher priority
-		self["plugin_actions"].setEnabled(False)
+		self["controller_actions"].setEnabled(False)
 		
 		# Initialize Configuration part
 		self.list = []
@@ -182,11 +182,11 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 			self["key_red"].setText(_("Cancel"))
 			self["key_green"].setText(_("OK"))
 			self["service_actions"].setEnabled(False)
-			self["plugin_actions"].setEnabled(False)
+			self["controller_actions"].setEnabled(False)
 			self["main_actions"].setEnabled(True)
 			if config.pushservice.enable.value:
 				self["key_yellow"].setText(_("Services"))
-				self["key_blue"].setText(_("Plugins"))
+				self["key_blue"].setText(_("Controllers"))
 				self["main_actions_enabled"].setEnabled(True)
 			else:
 				self["key_yellow"].setText(_(""))
@@ -210,22 +210,22 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 			self["key_blue"].setText(_("Remove service"))
 			self["main_actions"].setEnabled(False)
 			self["main_actions_enabled"].setEnabled(False)
-			self["plugin_actions"].setEnabled(False)
+			self["controller_actions"].setEnabled(False)
 			self["service_actions"].setEnabled(True)
 			
 			select = buildEntries(self.getServices())
 		
-		elif self.state == PLUGINS:
+		elif self.state == CONTROLLERS:
 			self["key_red"].setText(_("Main"))
 			self["key_green"].setText(_("Test"))
-			self["key_yellow"].setText(_("Add plugin"))
-			self["key_blue"].setText(_("Remove plugin"))
+			self["key_yellow"].setText(_("Add controller"))
+			self["key_blue"].setText(_("Remove controller"))
 			self["main_actions"].setEnabled(False)
 			self["main_actions_enabled"].setEnabled(False)
 			self["service_actions"].setEnabled(False)
-			self["plugin_actions"].setEnabled(True)
+			self["controller_actions"].setEnabled(True)
 			
-			select = buildEntries(self.getPlugins())
+			select = buildEntries(self.getControllers())
 			
 		return select
 
@@ -275,7 +275,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 			select = current[2]
 		slist = self.getServiceInstances()
 		if slist:
-			self.session.openWithCallback(self.removeServicesCB, ChoiceBox,_("Remove plugin"), list=slist, selection=select)
+			self.session.openWithCallback(self.removeServicesCB, ChoiceBox,_("Remove controller"), list=slist, selection=select)
 
 	def removeServicesCB(self, result):
 		service = result and result[1]
@@ -283,35 +283,35 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 			self.removeService(service)
 			self.change()
 
-	def showPlugins(self):
+	def showControllers(self):
 		self.hideHelpWindow()
-		self.state = PLUGINS
+		self.state = CONTROLLERS
 		self.change()
 
-	def addPlugins(self):
+	def addControllers(self):
 		self.hideHelpWindow()
-		self.session.openWithCallback(self.addPluginsCB, ChoiceBox,_("Add Plugin"), self.getAvlPlugins())
+		self.session.openWithCallback(self.addControllersCB, ChoiceBox,_("Add Controller"), self.getAvlControllers())
 
-	def addPluginsCB(self, result):
+	def addControllersCB(self, result):
 		module = result and result[1]
 		if module:
-			id = self.addPlugin(module)
+			id = self.addController(module)
 			self.change( id )
 
-	def removePlugins(self):
+	def removeControllers(self):
 		self.hideHelpWindow()
 		select = 0
 		current = self["config"].getCurrent()
 		if current:
 			select = current[2]
-		plist = self.getPluginInstances()
+		plist = self.getControllerInstances()
 		if plist:
-			self.session.openWithCallback(self.removePluginsCB, ChoiceBox,_("Remove plugin"), list=plist, selection=select)
+			self.session.openWithCallback(self.removeControllersCB, ChoiceBox,_("Remove controller"), list=plist, selection=select)
 
-	def removePluginsCB(self, result):
-		plugin = result and result[1]
-		if plugin:
-			self.removePlugin(plugin)
+	def removeControllersCB(self, result):
+		controller = result and result[1]
+		if controller:
+			self.removeController(controller)
 			self.change()
 
 	# Overwrite ConfigListScreen keySave function
@@ -344,7 +344,7 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 	# Overwrite ConfigListScreen keyCancel function
 	def keyCancel(self):
 		self.hideHelpWindow()
-		# Always ask user, because we don't get a change notification from the services or plugins
+		# Always ask user, because we don't get a change notification from the services or controllers
 		self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
 
 	# Overwrite ConfigListScreen cancelConfirm function
@@ -380,17 +380,17 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 		if service and service.getEnable():
 			self.session.open(TestConsole, service)
 
-	def testPlugin(self):
+	def testController(self):
 		# Allows testing the actually not saved configuration
-		#if self.state != PLUGINS: return
+		#if self.state != CONTROLLERS: return
 		self.hideHelpWindow()
 		
-		# Get the selected Plugin
+		# Get the selected Controller
 		current = self["config"].getCurrent()
-		plugin = current and self.getPlugin(current[2])
+		controller = current and self.getController(current[2])
 		
-		if plugin and plugin.getEnable():
-			self.session.open(TestConsole, plugin)
+		if controller and controller.getEnable():
+			self.session.open(TestConsole, controller)
 
 	def hideHelpWindow(self):
 		current = self["config"].getCurrent()
@@ -423,7 +423,7 @@ class TestConsole(Screen):
 			title = _("Testing Service") + " " + test.getName()
 			text = _("Testing...\n\nCancel?")
 		elif isinstance(test, ControllerBase):
-			title = _("Testing Plugin") + " " + test.getName()
+			title = _("Testing Controller") + " " + test.getName()
 			text = _("Testing...\n\nCancel?")
 		else:
 			title = _("Testing")
