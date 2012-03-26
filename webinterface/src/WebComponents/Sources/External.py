@@ -7,14 +7,16 @@ class External(Source):
 		append = l.append
 		for child in Toplevel.externalChildren:
 			Len = len(child)
-			if Len > 4:
-				child = (child[0], child[2], child[3], child[4])
+			if Len > 5:
+				child = (child[0], child[2], child[3], child[4], child[5])
+			if Len == 5:
+				child = (child[0], child[2], child[3], child[4], "_blank")
 			elif Len == 4:
-				child = (child[0], child[2], child[3], False)
+				child = (child[0], child[2], child[3], False, "_blank")
 			elif Len == 3:
-				child = (child[0], child[2], "unknown", False)
+				child = (child[0], child[2], "unknown", False, "_blank")
 			elif Len == 2:
-				child = (child[0], child[0], "unknown", False)
+				child = (child[0], child[0], "unknown", False, "_blank")
 			else:
 				continue
 			append(child)
@@ -25,5 +27,6 @@ class External(Source):
 				"Path":0,
 				"Name":1,
 				"Version":2,
-				"HasGUI":3
+				"HasGUI":3,
+				"GUITarget":4,
 	}

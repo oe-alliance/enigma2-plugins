@@ -1328,12 +1328,14 @@ var External = Class.create({
 		this.name = getNodeContent(xml, 'e2name');
 		this.version = getNodeContent(xml, 'e2externalversion');
 		this.hasGui = getNodeContent(xml, 'e2hasgui') == "True";
+		this.target = getNodeContent(xml, 'e2guitarget');
 
 		this.json = {
 			'path' : this.path,
 			'name' : this.name,
 			'version' : this.version,
-			'hasGui' : this.hasGui
+			'hasGui' : this.hasGui,
+			'target' : this.target,
 		};
 	},
 
