@@ -21,7 +21,7 @@ from Components.config import ConfigYesNo, NoSave
 
 # Plugin internal
 #from Plugins.Extensions.PushService.__init__ import _
-from Plugins.Extensions.PushService.PluginBase import PluginBase
+from Plugins.Extensions.PushService.ControllerBase import ControllerBase
 
 # Plugin specific
 import NavigationInstance
@@ -33,13 +33,13 @@ from enigma import eTimer
 SUBJECT = _("Record Notification")
 
 
-class RecordNotification(PluginBase):
+class RecordNotification(ControllerBase):
 	
 	ForceSingleInstance = True
 	
 	def __init__(self):
 		# Is called on instance creation
-		PluginBase.__init__(self)
+		ControllerBase.__init__(self)
 		
 		self.forceBindRecordTimer = eTimer()
 		self.forceBindRecordTimer.callback.append(self.begin)

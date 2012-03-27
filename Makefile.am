@@ -11,7 +11,7 @@ SUBDIRS = \
 	autoresolution \
 	autotimer \
 	babelzapper \
-	birthdayreminder \	
+	birthdayreminder \
 	bitrateviewer \
 	bonjour \
 	cdinfo \

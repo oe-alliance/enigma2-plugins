@@ -21,7 +21,7 @@ from Components.config import ConfigYesNo, ConfigText, ConfigNumber, NoSave
 
 # Plugin internal
 from Plugins.Extensions.PushService.__init__ import _
-from Plugins.Extensions.PushService.PluginBase import PluginBase
+from Plugins.Extensions.PushService.ControllerBase import ControllerBase
 
 # Plugin specific
 import os
@@ -35,13 +35,13 @@ BODY    = _("Free disk space limit has been reached:\n") \
 				+ _("Left:  %s")
 
 
-class FreeSpace(PluginBase):
+class FreeSpace(ControllerBase):
 	
 	ForceSingleInstance = False
 	
 	def __init__(self):
 		# Is called on instance creation
-		PluginBase.__init__(self)
+		ControllerBase.__init__(self)
 		
 		# Default configuration
 		self.setOption( 'wakehdd',  NoSave(ConfigYesNo(  default = False )),                                  _("Allow HDD wake up") )

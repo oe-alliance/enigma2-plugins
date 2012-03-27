@@ -3,7 +3,7 @@
 	{if anyGui}
 	<div class="center black">WebPlugins</div>
 	<ul id="navExternals" class="navTable" style="height: 100px; overflow: auto">
-		{for e in externals}{if e.hasGui}<li><a href="${e.path}" target="_blank">${e.name}</a></li>{/if}{/for}
+		{for e in externals}{if e.hasGui}<li><a href="${e.path}" target="${e.target}">${e.name}</a></li>{/if}{/for}
 	</ul>
 	{/if}
 <!-- /tplNavExtrasExternals -->

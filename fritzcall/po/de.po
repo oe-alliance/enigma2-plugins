@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-03 12:59+0100\n"
+"POT-Creation-Date: 2012-03-18 15:13+0100\n"
 "PO-Revision-Date: 2012-02-03 12:59+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
@@ -61,6 +61,10 @@ msgstr "Anrufanzeige"
 
 msgid "Call redirection"
 msgstr "Rufumleitung"
+
+#, python-format
+msgid "Calling %s"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -244,6 +248,9 @@ msgstr "FRITZ!Box FON Adresse (Name oder IP-Adresse)"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Fon Status"
+
+msgid "FRITZ!Box not available for calling"
+msgstr ""
 
 msgid "Filter also list of calls"
 msgstr "Filter auch auf Anrufliste anwenden"

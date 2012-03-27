@@ -21,7 +21,7 @@ from Components.config import ConfigYesNo, ConfigText, ConfigNumber, NoSave
 
 # Plugin internal
 from Plugins.Extensions.PushService.__init__ import _
-from Plugins.Extensions.PushService.PluginBase import PluginBase
+from Plugins.Extensions.PushService.ControllerBase import ControllerBase
 
 # Plugin specific
 import os
@@ -35,13 +35,13 @@ SUBJECT = _("IPKG Update Notification")
 BODY    = _("There are updates available:\n%s")
 
 
-class IPKGUpdateNotification(PluginBase):
+class IPKGUpdateNotification(ControllerBase):
 	
 	ForceSingleInstance = True
 	
 	def __init__(self):
 		# Is called on instance creation
-		PluginBase.__init__(self)
+		ControllerBase.__init__(self)
 		
 		# Default configuration
 		self.setOption( 'selfcheck', NoSave(ConfigYesNo( default = False )), _("Start update check if not done yet") )

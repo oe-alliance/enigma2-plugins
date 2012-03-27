@@ -302,20 +302,20 @@ class Timer(Source):
 				for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
 					if str(timer.service_ref) == str(channelOld):
 						if int(timer.begin) == beginOld:
-							if int(timer.end) == endOld:								
-								#we've found the timer we've been searching for								
-								
+							if int(timer.end) == endOld:
+								#we've found the timer we've been searching for
+
 								#Delete the old entry
 								self.recordtimer.removeEntry(timer)
 								old = timer
-								
+
 								timer = RecordTimerEntry(service_ref, begin, end, name, description, 0, disabled, justplay, afterEvent, dirname=dirname, tags=tags)
 								timer.repeated = repeated
-								timer.log_entries = old.log_entries								
-								
-								timer.processRepeated()								
+								timer.log_entries = old.log_entries
+
+								timer.processRepeated()
 								#send the changed timer back to enigma2 and hope it's good
-								
+
 								conflicts = self.recordtimer.record(timer)
 								if conflicts is None:
 									print "[WebComponents.Timer] editTimer: Timer changed!"
@@ -324,9 +324,9 @@ class Timer(Source):
 									print "[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts)
 									msg = ""
 									for timer in conflicts:
-										msg = "%s / %s" %(msg, timer.name)				
-										
-									return (False, "Conflicting Timer(s) detected! %s" %(msg)) 
+										msg = "%s / %s" %(msg, timer.name)
+
+									return (False, "Conflicting Timer(s) detected! %s" %(msg))
 
 			except Exception:
 				#obviously some value was not good, return an error
@@ -348,10 +348,10 @@ class Timer(Source):
 				print "[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts)
 				msg = ""
 				for timer in conflicts:
-					msg = "%s / %s" %(msg, timer.name)				
-					
-				return (False, "Conflicting Timer(s) detected! %s" %(msg)) 
-				
+					msg = "%s / %s" %(msg, timer.name)
+
+				return (False, "Conflicting Timer(s) detected! %s" %(msg))
+
 		except Exception, e:
 			#something went wrong, most possibly one of the given paramater-values was wrong
 			print "[WebComponents.Timer] editTimer exception: %s" %(e)
@@ -387,7 +387,7 @@ class Timer(Source):
 		(begin, end, name, description, eit) = parseEvent(event)
 
 		timer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.AUTO, dirname=location, tags=tags)
-		
+
 		conflicts = self.recordtimer.record(timer)
 		if conflicts is None:
 			return ( True, "Timer '%s' added" %(timer.name) )
@@ -395,9 +395,9 @@ class Timer(Source):
 			print "[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts)
 			msg = ""
 			for timer in conflicts:
-				msg = "%s / %s" %(msg, timer.name)				
-				
-			return (False, "Conflicting Timer(s) detected! %s" %(msg)) 
+				msg = "%s / %s" %(msg, timer.name)
+
+			return (False, "Conflicting Timer(s) detected! %s" %(msg))
 
 
 	def writeTimerList(self, force=False):

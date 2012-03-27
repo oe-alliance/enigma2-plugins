@@ -21,66 +21,65 @@ from Components.config import ConfigYesNo, NoSave
 
 # Plugin internal
 from Plugins.Extensions.PushService.__init__ import _
-from Plugins.Extensions.PushService.PluginBase import PluginBase
+from Plugins.Extensions.PushService.ControllerBase import ControllerBase
 
 # Plugin specific
-import NavigationInstance
-from time import localtime, strftime
+import os
 
 
 # Constants
-SUBJECT = _("Record Summary")
-BODY    = _("Finished record list:\n%s")
-TAG     = _("FinishedTimerPushed")
+CRASHLOG_DIR = '/media/hdd'
+
+SUBJECT = _("Found CrashLog(s)")
+BODY    = _("Crashlog(s) are attached")
 
 
-class RecordSummary(PluginBase):
+class CrashLog(ControllerBase):
 	
 	ForceSingleInstance = True
 	
 	def __init__(self):
 		# Is called on instance creation
-		PluginBase.__init__(self)
-		self.timers = []
-		
+		ControllerBase.__init__(self)
+		self.crashlogs = []
+
 		# Default configuration
-		self.setOption( 'remove_timer', NoSave(ConfigYesNo( default = False )), _("Remove finished timer(s)") )
+		self.setOption( 'delete_logs', NoSave(ConfigYesNo( default = False )), _("Delete crashlog(s)") )
 
 	def run(self, callback, errback):
 		# At the end a plugin has to call one of the functions: callback or errback
 		# Callback should return with at least one of the parameter: Header, Body, Attachment
 		# If empty or none is returned, nothing will be sent
-		self.timers = []
-		text = ""
-		for timer in NavigationInstance.instance.RecordTimer.processed_timers:
-			if not timer.disabled and TAG not in timer.tags:
-				text += str(timer.name) + "\t" \
-							+ strftime(_("%Y.%m.%d %H:%M"), localtime(timer.begin)) + " - " \
-							+ strftime(_("%H:%M"), localtime(timer.end)) + "\t" \
-							+ str(timer.service_ref and timer.service_ref.getServiceName() or "") \
-							+ "\n"
-				self.timers.append( timer )
-		if self.timers and text:
-			callback( SUBJECT, BODY % text )
+		self.crashlogs = []
+		text = "Found crashlogs, see attachment(s)\n"
+		for file in os.listdir( CRASHLOG_DIR ):
+			if file.startswith("enigma2_crash_") and file.endswith(".log"):
+				crashlog = os.path.join( CRASHLOG_DIR, file )
+				self.crashlogs.append(crashlog)
+		if self.crashlogs:
+			callback( SUBJECT, BODY, self.crashlogs )
 		else:
 			callback()
 
 	# Callback functions
 	def callback(self):
 		# Called after all services succeded
-		if self.getValue('remove_timer'):
-			# Remove finished timers
-			for timer in self.timers[:]:
-				if timer in NavigationInstance.instance.RecordTimer.processed_timers:
-					NavigationInstance.instance.RecordTimer.processed_timers.remove(timer)
-				self.timers.remove(timer)
+		if self.getValue('delete_logs'):
+			# Delete crashlogs
+			for crashlog in self.crashlogs[:]:
+				if os.path.exists( crashlog ):
+					os.remove( crashlog )
+				self.crashlogs.remove( crashlog )
 		else:
-			# Set tag to avoid resending it
-			for timer in self.timers[:]:
-				timer.tags.append(TAG)
-				NavigationInstance.instance.RecordTimer.saveTimer()
-				self.timers.remove(timer)
+			# Rename crashlogs to avoid resending it
+			for crashlog in self.crashlogs[:]:
+				if os.path.exists( crashlog ):
+					# Adapted from autosubmit - instead of .sent we will use .pushed
+					currfilename = str(os.path.basename(crashlog))
+					newfilename = "/media/hdd/" + currfilename + ".pushed"
+					os.rename(crashlog,newfilename)
+				self.crashlogs.remove( crashlog )
 
 	def errback(self):
 		# Called after all services has returned, but at least one has failed
-		self.timers = []
+		self.crashlogs = []

@@ -2122,9 +2122,13 @@ class FritzOfferAction(Screen):
 		self._setTextAndResize(str(name.replace(", ", "\n")))
 
 	def _call(self):
-		debug("[FritzOfferAction] add: %s" %self._number)
-		fritzbox.dial(self._number)
-		self._exit()
+		if fritzbox:
+			debug("[FritzOfferAction] call: %s" %self._number)
+			self.session.open(MessageBox, _("Calling %s") %self._number, type=MessageBox.TYPE_INFO)
+			fritzbox.dial(self._number)
+		else:
+			debug("[FritzOfferAction] call: no fritzbox object?!?!")
+			self.session.open(MessageBox, _("FRITZ!Box not available for calling"), type=MessageBox.TYPE_INFO)
 
 	def _add(self):
 		debug("[FritzOfferAction] add: %s, %s" %(self._number, self._name))

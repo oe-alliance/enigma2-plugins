@@ -580,12 +580,12 @@ var TimerListHandler  = Class.create(AbstractContentHandler, {
 
 var TimerHandler = Class.create(AbstractContentHandler, {
 	ACTIONS: [{value : 0, txt : 'Record'},
-	          {value : 1, txt : 'Zap'}],
+			{value : 1, txt : 'Zap'}],
 
 	AFTEREVENTS: [{value : 0, txt : 'Nothing'},
-	              {value : 1, txt : 'Standby'},
-	              {value : 2, txt : 'Deepstandby/Shutdown'},
-	              {value : 3, txt : 'Auto'}],
+				{value : 1, txt : 'Standby'},
+				{value : 2, txt : 'Deepstandby/Shutdown'},
+				{value : 3, txt : 'Auto'}],
 
 	SELECTED : "selected",
 	CHECKED: "checked",
@@ -802,7 +802,10 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	},
 
 	onLocationsAndTagsReady: function(data, currentLocation, locations, tags, initial){
-		var l = toOptionList(locations, currentLocation);
+		var dirname = data.timer.dirname;
+		if(dirname == "")
+			dirname = currentLocation;
+		var l = toOptionList(locations, dirname);
 		var t = toOptionList(tags, data.timer.tags, " ");
 		t.shift();
 		l.shift();

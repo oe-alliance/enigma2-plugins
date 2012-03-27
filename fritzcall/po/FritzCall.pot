@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-03 16:06+0100\n"
+"POT-Creation-Date: 2012-03-18 15:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,6 +61,10 @@ msgid "Call monitoring"
 msgstr ""
 
 msgid "Call redirection"
+msgstr ""
+
+#, python-format
+msgid "Calling %s"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -229,6 +233,9 @@ msgstr ""
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
+msgstr ""
+
+msgid "FRITZ!Box not available for calling"
 msgstr ""
 
 msgid "Filter also list of calls"

@@ -5,6 +5,7 @@
 		&lt;e2name><e2:item name="Name" filter="xml"/>&lt;/e2name>
 		&lt;e2externalversion><e2:item name="Version" filter="xml"/>&lt;/e2externalversion>
 		&lt;e2hasgui><e2:item name="HasGUI" filter="xml"/>&lt;/e2hasgui>
+		&lt;e2guitarget><e2:item name="GUITarget" filter="xml"/>&lt;/e2guitarget>
 	&lt;/e2webifexternal></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
 </e2webifexternals>
 </e2:screen>
