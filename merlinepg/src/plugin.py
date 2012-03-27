@@ -38,7 +38,7 @@ from enigma import eServiceReference, eServiceCenter, getDesktop, eTimer, gFont,
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT
 from ServiceReference import ServiceReference
 from ShowMe import ShowMe
-from time import localtime
+from time import localtime, strftime
 if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AutoTimer/AutoTimerEditor.pyo"):
 	from Plugins.Extensions.AutoTimer.AutoTimerEditor import addAutotimerFromEvent
 	from Plugins.Extensions.AutoTimer.plugin import main as AutoTimerView

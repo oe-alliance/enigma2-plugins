@@ -23,7 +23,7 @@ from Components.TimerList import TimerList
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.Event import Event
 
-from time import localtime
+from time import localtime, strftime
 from operator import itemgetter
 
 # Partnerbox installed and icons in epglist enabled?

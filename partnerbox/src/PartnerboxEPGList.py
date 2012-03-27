@@ -22,7 +22,7 @@ from Components.EpgList import EPGList
 from enigma import eListboxPythonMultiContent, \
 	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_HALIGN_CENTER
 
-from time import localtime
+from time import localtime, strftime
 
 from Tools.LoadPixmap import LoadPixmap
 import PartnerboxFunctions as partnerboxfunctions
