@@ -227,7 +227,7 @@ a.underline {
 	z-index: 3
 }
 
-#mainMenu li.hover,#mainMenu li.hover {
+#mainMenu li.hover {
 	background: #AAA;
 	position: relative;
 	z-index: 3
@@ -237,6 +237,12 @@ a.underline {
 	display: block;
 	padding-top: 1px;
 	padding-bottom: 3px
+}
+
+#mainMenu li.navselected {
+	background: #AAA;
+	position: relative;
+	z-index: 3
 }
 
 #instantRecordMenu {

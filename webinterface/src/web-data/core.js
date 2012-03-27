@@ -1206,6 +1206,19 @@ var E2WebCore = Class.create({
 		clearInterval(this.updateBouquetItemsPoller);
 	},
 
+	setNavHighlight: function(){
+		var navitems = $$(".navmenu");
+		navitems.each(function(element){
+			var mode = element.readAttribute("data-mode");
+			var navselected = "navselected";
+			if(mode == this.mode){
+				element.addClassName(navselected);
+			} else {
+				element.removeClassName(navselected);
+			}
+		}.bind(this));
+	},
+
 	onHashChanged: function(isReload){
 		var hash = hashListener.getHash();
 		var parts = hash.split("/");
@@ -1218,6 +1231,9 @@ var E2WebCore = Class.create({
 				this.subMode = '';
 			}
 			this.mode = mode;
+
+			this.setNavHighlight();
+
 			if(len > 2){
 				var subMode = parts[2];
 				if(subMode != this.subMode || isReload){

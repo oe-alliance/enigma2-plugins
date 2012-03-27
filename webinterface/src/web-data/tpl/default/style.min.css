@@ -37,8 +37,9 @@ a.underline{text-decoration:underline}
 #mainMenu{background-color:#485052;text-align:center;overflow:hidden;background:#000;margin:0;padding:0;width:940px}
 #mainMenu li{list-style:none;float:left;width:130px;height:21px;margin-left:2px;background:#485052;margin-top:6px;margin-bottom:0;padding:0;position:relative;z-index:2}
 #mainMenu a:hover,#mainMenu a:hover{background:#AAA;position:relative;z-index:3}
-#mainMenu li.hover,#mainMenu li.hover{background:#AAA;position:relative;z-index:3}
+#mainMenu li.hover{background:#AAA;position:relative;z-index:3}
 #mainMenu a{display:block;padding-top:1px;padding-bottom:3px}
+#mainMenu li.navselected{background:#AAA;position:relative;z-index:3}
 #instantRecordMenu{z-index:1000;position:relative;top:5px;right:165px;background:#FFF;color:#485052;width:205px;border:1px solid #000;opacity:.98;text-align:left}
 #instantRecordMenu button{width:200px;text-align:center}
 #navContainer{float:left;width:160px}
