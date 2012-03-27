@@ -3,7 +3,7 @@
 #    Merlin Programm Guide for Dreambox-Enigma2
 #    Coded by Vali (c)2010-2011
 #
-#  This plugin is licensed under the Creative Commons 
+#  This plugin is licensed under the Creative Commons
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 #  or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -12,7 +12,7 @@
 #  is licensed by Dream Multimedia GmbH.
 #
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 #######################################################################
@@ -30,7 +30,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from Components.Label import Label
-from Components.EpgList import EPGList, EPG_TYPE_SINGLE, Rect, days
+from Components.EpgList import EPGList, EPG_TYPE_SINGLE, Rect
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigInteger, getConfigListEntry
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists
 from Tools.LoadPixmap import LoadPixmap
@@ -161,13 +161,13 @@ class MerlinEPGList(EPGList):
 				None,
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_LEFT, "  _________________"),
 				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 100, 1, 21, 21, self.PTpicture),
-				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_LEFT, (("%02d:%02d"%(t[3],t[4]))+" - "+_(days[t[6]])))
+				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_LEFT, (strftime("%-H:%M", t)+" - "+_(strftime("%a", t))))
 			]
 		else:
 			res = [
 				None,
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_LEFT, "___________________"),
-				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_LEFT, (("%02d:%02d"%(t[3],t[4]))+" - "+_(days[t[6]])))
+				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_LEFT, (strftime("%-H:%M", t)+" - "+_(strftime("%a", t))))
 			]
 		if rec:
 			res.extend((
@@ -219,7 +219,7 @@ class Merlin_PGII(Screen):
 			<widget itemHeight="70" name="epg_list4" position="753,80" scrollbarMode="showOnDemand" size="225,560" transparent="1" zPosition="4"/>
 			<widget itemHeight="70" name="epg_list5" position="984,80" scrollbarMode="showOnDemand" size="225,560" transparent="1" zPosition="4"/>
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPG/buttons.png" position="60,655" size="430,24"/>
-			<widget backgroundColor="background" font="Regular;18" foregroundColor="#ffc000" position="500,655" render="Label" size="200,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">	
+			<widget backgroundColor="background" font="Regular;18" foregroundColor="#ffc000" position="500,655" render="Label" size="200,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
 				<convert type="ClockToText">Format:%H:%M  %a %d. %b</convert>
 			</widget>
 		</screen>"""
@@ -240,7 +240,7 @@ class Merlin_PGII(Screen):
 			<widget itemHeight="70" name="epg_list3" position="512,80" scrollbarMode="showOnDemand" size="225,420" transparent="1" zPosition="4"/>
 			<widget itemHeight="70" name="epg_list4" position="743,80" scrollbarMode="showOnDemand" size="225,420" transparent="1" zPosition="4"/>
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPG/buttons.png" position="50,518" size="430,24"/>
-			<widget backgroundColor="background" font="Regular;18" foregroundColor="#ffc000" position="490,518" render="Label" size="200,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">	
+			<widget backgroundColor="background" font="Regular;18" foregroundColor="#ffc000" position="490,518" render="Label" size="200,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
 				<convert type="ClockToText">Format:%H:%M  %a %d. %b</convert>
 			</widget>
 			<!-- <widget font="Regular;18" name="fullEventInfo" position="300,200" size="300,200" transparent="0" zPosition="12"/> -->
@@ -262,7 +262,7 @@ class Merlin_PGII(Screen):
 			<widget itemHeight="70" name="epg_list3" position="360,90" scrollbarMode="showOnDemand" size="155,420" transparent="1" zPosition="4"/>
 			<widget itemHeight="70" name="epg_list4" position="515,90" scrollbarMode="showOnDemand" size="155,420" transparent="1" zPosition="4"/>
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPG/buttons.png" position="50,518" size="430,24"/>
-			<widget backgroundColor="background" font="Regular;18" foregroundColor="#ffc000" position="490,518" render="Label" size="200,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">	
+			<widget backgroundColor="background" font="Regular;18" foregroundColor="#ffc000" position="490,518" render="Label" size="200,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
 				<convert type="ClockToText">Format:%H:%M  %a %d. %b</convert>
 			</widget>
 		</screen>"""
@@ -302,7 +302,7 @@ class Merlin_PGII(Screen):
 		self["epg_list3"] = MerlinEPGList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
 		self["epg_list4"] = MerlinEPGList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
 		self["actions"] = ActionMap(["OkCancelActions", "EPGSelectActions", "DirectionActions", "ColorActions", "MenuActions", "NumberActions", "HelpActions", "InfobarActions"], {
-						"ok": self.UserOK, 
+						"ok": self.UserOK,
 						"cancel": self.close,
 						"nextBouquet": self.AllUp,
 						"prevBouquet": self.AllDown,
@@ -439,7 +439,7 @@ class Merlin_PGII(Screen):
 		if config.plugins.MerlinEPG.AutoPT.value:
 			 self.AutoPrime.start(500)
 
-	def onSelectionChanged(self):		
+	def onSelectionChanged(self):
 		curEV = self["epg_list"+str(self.ActiveEPG)].getCurrent()
 		event = curEV[0]
 		ext = event and event.getExtendedDescription() or ""
@@ -544,7 +544,7 @@ class Merlin_PGII(Screen):
 		else:
 			self.NextPage()
 		self.onSelectionChanged()
-		
+
 	def showEventInfo(self):
 		if not IMDbPresent:
 			self.showConfirmedInfo([None,"Ei"])
@@ -608,7 +608,7 @@ class Merlin_PGII(Screen):
 				simulTimerList = self.session.nav.RecordTimer.record(entry)
 				if simulTimerList is not None:
 					self.session.openWithCallback(self.finishSanityCorrection, TimerSanityConflict, simulTimerList)
-	
+
 	def finishSanityCorrection(self, answer):
 		self.finishedAdd(answer)
 
@@ -733,7 +733,7 @@ class Merlin_PGd(Screen):
 			<widget font="Regular;22" foregroundColor="#ffc000" halign="center" name="currCh" position="57,133" size="252,66" transparent="1" valign="center" zPosition="2"/>
 			<widget font="LCD;28" halign="left" position="60,95" render="Label" size="91,32" source="global.CurrentTime" transparent="1" zPosition="3">
 				<convert type="ClockToText">Default</convert>
-			</widget>	
+			</widget>
 			<widget font="Regular;16" position="60,65" render="Label" size="276,26" source="global.CurrentTime" transparent="1" zPosition="3">
 				<convert type="ClockToText">Date</convert>
 			</widget>
@@ -753,7 +753,7 @@ class Merlin_PGd(Screen):
 		self["prg_list"] = MenuList(self.getChannels())
 		self["epg_list"] = EPGList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
 		self["actions"] = ActionMap(["OkCancelActions", "EPGSelectActions", "ColorActions", "DirectionActions", "MenuActions", "HelpActions", "InfobarActions"], {
-									"ok": self.ok, 
+									"ok": self.ok,
 									"cancel": self.close,
 									"nextBouquet": self.prgDown,
 									"prevBouquet": self.prgUp,
@@ -813,7 +813,7 @@ class Merlin_PGd(Screen):
 	def prgUp(self):
 		self["prg_list"].down()
 		self.updateInfos()
-	
+
 	def prgDown(self):
 		self["prg_list"].up()
 		self.updateInfos()
@@ -856,7 +856,7 @@ class Merlin_PGd(Screen):
 		service = curEV[1]
 		if event is not None:
 			self.session.open(EventViewSimple, event, service)
-			
+
 	def ZapTo(self):
 		if self.srvList==None:
 			return
@@ -883,7 +883,7 @@ class Merlin_PGd(Screen):
 	def CheckItNow(self):
 		self.CheckForEPG.stop()
 		self.updateInfos()
-			
+
 	def timerAdd(self):
 		if not AutoTimerPresent:
 			self.AddConfirmedTimer([None,"NT"])
@@ -1050,7 +1050,7 @@ if epgSpresent:
 			pass
 
 
-	
+
 
 
 

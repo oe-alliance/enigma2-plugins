@@ -1,4 +1,4 @@
-# for localized messages  	 
+# for localized messages
 from . import _
 
 from enigma import eEPGCache, eServiceReference, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent
@@ -18,7 +18,7 @@ from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.config import config
-from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_MULTI, days
+from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_MULTI
 from Components.TimerList import TimerList
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.Event import Event
@@ -61,7 +61,7 @@ class EPGSearchList(EPGList):
 
 	def buildEPGSearchEntry(self, service, eventId, beginTime, duration, EventName):
 		rec1 = beginTime and self.timer.isInTimer(eventId, beginTime, duration, service)
-		# Partnerbox 
+		# Partnerbox
 		if PartnerBoxIconsEnabled:
 			rec2 = beginTime and isInRemoteTimer(self,beginTime, duration, service)
 		else:
@@ -73,11 +73,11 @@ class EPGSearchList(EPGList):
 		serviceref = ServiceReference(service) # for Servicename
 		res = [
 			None, # no private data needed
-			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _(days[t[6]])),
-			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%02d/%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
+			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _(strftime("%a", t))),
+			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, strftime("%e/%m, %-H:%M", t))
 		]
 		if rec1 or rec2:
-			if rec1:			
+			if rec1:
 				clock_pic = self.getClockPixmap(service, beginTime, duration, eventId)
 				# maybe Partnerbox too
 				if rec2:
