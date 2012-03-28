@@ -1073,34 +1073,18 @@ def autostart(reason, **kwargs):
 		session = kwargs["session"]
 		session.open(FanControl2)
 
+def selSetup(menuid, **kwargs):
+	if menuid != "system":
+		return [ ]
+	return [(_("Fan Control 2"), main, "fansetup_config", 70)]
+
 def Plugins(**kwargs):
 	list = [
-	PluginDescriptor(name=_("Fan Control 2"),
-	description=_("Fan Control"),
-	where = [PluginDescriptor.WHERE_SESSIONSTART,
-	PluginDescriptor.WHERE_AUTOSTART],
-	needsRestart = True,
-	fnc = autostart)]
+	PluginDescriptor(name=_("Fan Control 2"),description=_("Fan Control"),where = [PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART],needsRestart = True,fnc = autostart)]
 	if os.path.exists("/proc/stb/fp/fan_vlt"):
-		list.append(PluginDescriptor(name=_("Fan Control 2"),
-		description=_("Fan Control"),
-		where = PluginDescriptor.WHERE_PLUGINMENU,
-		icon = "plugin.png",
-		needsRestart = True,
-		fnc = main))
+		list.append(PluginDescriptor(name=_("Fan Control 2"), description=_("setup Fancontol inStandby mode"), where = PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=selSetup))
 		if config.plugins.FanControl.FanControlInExtension.value:
-			list.append(PluginDescriptor(name=_("Fan Control 2"),
-			description=_("Fan Control"),
-			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-			icon = "plugin.png",
-			needsRestart = True,
-			fnc = main))
+			list.append(PluginDescriptor(name=_("Fan Control 2"),description=_("Fan Control"),where = PluginDescriptor.WHERE_EXTENSIONSMENU,icon = "plugin.png",needsRestart = True,fnc = main))
 		if config.plugins.FanControl.MonitorInExtension.value:
-			list.append(PluginDescriptor(
-			name=_("Fan Control 2 - Monitor"),
-			description=_("Fan Control"),
-			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-			icon = "plugin.png",
-			needsRestart = True,
-			fnc = mainMonitor))
+			list.append(PluginDescriptor(name=_("Fan Control 2 - Monitor"),description=_("Fan Control"),where = PluginDescriptor.WHERE_EXTENSIONSMENU,icon = "plugin.png",needsRestart = True,fnc = mainMonitor))
 	return list
