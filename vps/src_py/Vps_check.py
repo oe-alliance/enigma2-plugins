@@ -10,7 +10,8 @@ from Screens.ChoiceBox import ChoiceBox
 from Tools.XMLTools import stringToXML
 from Tools import Directories
 from time import time
-from Vps import vps_exe
+from Components.config import config
+from Vps import vps_exe, vps_timers
 import NavigationInstance
 from xml.etree.cElementTree import parse as xml_parse
 
@@ -100,12 +101,12 @@ Check_PDC = VPS_check_PDC()
 
 
 # Prüfen, ob PDC-Descriptor vorhanden ist.
-class VPS_check_PDC_Screen(Screen):
+class VPS_check(Screen):
 	skin = """<screen name="vpsCheck" position="center,center" size="540,110" title="VPS-Plugin">
 		<widget source="infotext" render="Label" position="10,10" size="520,90" font="Regular;21" valign="center" halign="center" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 	
-	def __init__(self, session, service, timer_entry, manual_timer = True):
+	def __init__(self, session, service):
 		Screen.__init__(self, session)
 		
 		self["infotext"] = StaticText(_("VPS-Plugin checks if the channel supports VPS ..."))
@@ -128,12 +129,10 @@ class VPS_check_PDC_Screen(Screen):
 		self.simulate_recordService = None
 		self.last_serviceref = None
 		self.calledfinished = False
-		self.timer_entry = timer_entry
-		self.manual_timer = manual_timer
 		
 		self.has_pdc, self.last_check, self.default_vps = Check_PDC.check_service(self.service)
 		
-		self.check.start(100, True)
+		self.check.start(50, True)
 
 	
 	def doCheck(self):
@@ -223,6 +222,19 @@ class VPS_check_PDC_Screen(Screen):
 		if self.last_serviceref is not None:
 			NavigationInstance.instance.playService(self.last_serviceref)
 		
+		self.ask_user()
+	
+	def ask_user(self):
+		pass
+
+
+class VPS_check_PDC_Screen(VPS_check):
+	def __init__(self, session, service, timer_entry, manual_timer = True):
+		self.timer_entry = timer_entry
+		self.manual_timer = manual_timer
+		VPS_check.__init__(self, session, service)
+	
+	def ask_user(self):
 		if self.manual_timer:
 			if self.has_pdc == 1: # PDC vorhanden
 				self.close()
@@ -256,3 +268,42 @@ class VPS_check_PDC_Screen(Screen):
 			Check_PDC.setServicePDC(self.service, self.has_pdc, 1) # nicht mehr nachfragen
 		
 		self.close()
+
+class VPS_check_on_instanttimer(VPS_check):
+	def __init__(self, session, service, timer):
+		self.timer = timer
+		VPS_check.__init__(self, session, service)
+
+	def ask_user(self):
+		choiceList = [(_("No"), 0), (_("Yes (safe mode)"), 1), (_("Yes"), 2)]
+		
+		if self.has_pdc == 1:
+			if config.plugins.vps.instanttimer.value == "yes":
+				self.enable_vps()
+			elif config.plugins.vps.instanttimer.value == "yes_safe":
+				self.enable_vps_safe()
+			else:
+				self.session.openWithCallback(self.finish_callback, ChoiceBox, title = _("The channel may support VPS\n Do you want to enable VPS?"), list = choiceList)
+		else:
+			self.session.openWithCallback(self.finish_callback, ChoiceBox, title = _("VPS-Plugin couldn't check if the channel supports VPS.\n Do you want to enable VPS anyway?"), list = choiceList)
+			
+	def enable_vps(self):
+		self.timer.vpsplugin_enabled = True
+		self.timer.vpsplugin_overwrite = True
+		vps_timers.checksoon()
+		self.close()
+
+	def enable_vps_safe(self):
+		self.timer.vpsplugin_enabled = True
+		self.timer.vpsplugin_overwrite = False
+		vps_timers.checksoon()
+		self.close()
+	
+	def finish_callback(self, result):
+		if result is None or result[1] == 0:
+			self.close()
+		elif result[1] == 1:
+			self.enable_vps_safe()
+		else:
+			self.enable_vps()
+

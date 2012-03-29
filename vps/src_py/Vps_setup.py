@@ -33,6 +33,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		self.vps_allow_wakeup = getConfigListEntry(_("Wakeup from Deep-Standby is allowed"), config.plugins.vps.allow_wakeup)
 		self.vps_allow_seeking_multiple_pdc = getConfigListEntry(_("Seeking connected events"), config.plugins.vps.allow_seeking_multiple_pdc)
 		self.vps_default = getConfigListEntry(_("VPS enabled by default"), config.plugins.vps.vps_default)
+		self.vps_instanttimer = getConfigListEntry(_("Enable VPS on instant records"), config.plugins.vps.instanttimer)
 		
 		self.list = []
 		self.list.append(self.vps_enabled)
@@ -40,6 +41,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		self.list.append(self.vps_allow_wakeup)
 		self.list.append(self.vps_allow_seeking_multiple_pdc)
 		self.list.append(self.vps_default)
+		self.list.append(self.vps_instanttimer)
 
 		ConfigListScreen.__init__(self, self.list, session = session)
 		self["config"].onSelectionChanged.append(self.updateHelp)
@@ -72,6 +74,8 @@ class VPS_Setup(Screen, ConfigListScreen):
 			self["help"].text = _("If enabled and necessary, the plugin will wake up the Dreambox from Deep-Standby for the defined starting time to control whether the programme begins earlier.")
 		elif cur == self.vps_allow_seeking_multiple_pdc:
 			self["help"].text = _("If a programme is interrupted and divided into separate events, the plugin will search for the connected events.")
+		elif cur == self.vps_instanttimer:
+			self["help"].text = _("When yes, VPS will be enabled on instant records (stop after current event), if the channel supports VPS.")
 
 	def show_info(self):
 		VPS_show_info(self.session)

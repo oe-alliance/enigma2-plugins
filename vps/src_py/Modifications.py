@@ -8,6 +8,7 @@ from Tools import Directories
 from Tools.XMLTools import stringToXML
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
+from Screens.InfoBarGenerics import InfoBarInstantRecord
 from time import time
 from enigma import getBestPlayableServiceReference, eServiceReference
 import xml.etree.cElementTree
@@ -240,6 +241,21 @@ def new_TimerEntry_finishedChannelSelection(self, *args):
 		pass
 
 
+def new_InfoBarInstantRecord_recordQuestionCallback(self, answer):
+	self._recordQuestionCallback_old_rn_vps(answer)
+	
+	try:
+		entry = len(self.recording)-1
+		if answer is not None and answer[1] == "event" and config.plugins.vps.instanttimer.value != "no" and entry is not None and entry >= 0:
+			from Vps_check import VPS_check_on_instanttimer
+			rec_ref = self.recording[entry].service_ref.ref
+			if rec_ref and rec_ref.flags & eServiceReference.isGroup:
+				rec_ref = getBestPlayableServiceReference(rec_ref, eServiceReference())
+			self.session.open(VPS_check_on_instanttimer, rec_ref, self.recording[entry])
+			
+	except:
+		pass
+
 # VPS-Plugin in Enigma-Klassen einhängen
 def register_vps():
 	global vps_already_registered
@@ -270,5 +286,8 @@ def register_vps():
 		
 		TimerEntry._finishedChannelSelection_old_rn_vps = TimerEntry.finishedChannelSelection
 		TimerEntry.finishedChannelSelection = new_TimerEntry_finishedChannelSelection
+		
+		InfoBarInstantRecord._recordQuestionCallback_old_rn_vps = InfoBarInstantRecord.recordQuestionCallback
+		InfoBarInstantRecord.recordQuestionCallback = new_InfoBarInstantRecord_recordQuestionCallback
 		
 		vps_already_registered = True
