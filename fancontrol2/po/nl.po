@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FanControl2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-11 13:30+0000\n"
-"PO-Revision-Date: 2012-03-14 12:05+0100\n"
-"Last-Translator: R.L. van der Does\n"
-"Language-Team: AndyBlac/Rob van der Does\n"
+"POT-Creation-Date: 2012-03-28 17:29+0100\n"
+"PO-Revision-Date: 2012-03-30 06:52+0100\n"
+"Last-Translator: \n"
+"Language-Team: AndyBlac, Rob van der Does\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,6 +95,15 @@ msgstr "Eindtemperatuur C"
 
 msgid "Extended Control Range"
 msgstr "Uitgebreid controlebereik"
+
+msgid "Fan Control"
+msgstr "Fan Control"
+
+msgid "Fan Control 2"
+msgstr "Fan Control 2"
+
+msgid "Fan Control 2 - Monitor"
+msgstr "Fan Control 2 - Monitor"
 
 msgid "Fan is not working!"
 msgstr "Fan werkt niet!"
@@ -242,9 +251,6 @@ msgstr "onder Tunerslot 4"
 msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
 msgstr "actueelRPM:%d doelRPM:%d Temp:%4.1f"
 
-msgid "disable System FanControl"
-msgstr "Schakel System ventiliatorcontrole uit"
-
 msgid "disabled"
 msgstr "uitgeschakeld"
 
@@ -302,6 +308,9 @@ msgstr "HDD-temp tijdens HDD-Standby-Mode uitlezen"
 msgid "readme.txt"
 msgstr "leesmij.txt"
 
+msgid "setup Fancontol inStandby mode"
+msgstr "Instellinge Fancontol in Standby"
+
 msgid "turn off"
 msgstr "Uitschakelen"
 
@@ -320,3 +329,5 @@ msgstr "ja"
 msgid "yes, Except for Recording or HDD"
 msgstr "ja, behalve voor Opname of HDD"
 
+#~ msgid "disable System FanControl"
+#~ msgstr "Schakel System ventiliatorcontrole uit"
