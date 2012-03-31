@@ -104,7 +104,7 @@ class IMDBEPGSelection(EPGSelection):
 		cur = self["list"].getCurrent()
 		evt = cur[0]
 		sref = cur[1]
-		if not evt: 
+		if not evt:
 			return
 
 		if self.openPlugin:
@@ -146,7 +146,7 @@ class IMDB(Screen):
 		Screen.__init__(self, session)
 
 		self.eventName = eventName
-		
+
 		self.callbackNeeded = callbackNeeded
 		self.callbackData = ""
 		self.callbackGenre = ""
@@ -753,11 +753,12 @@ class IMDbSetup(Screen, ConfigListScreen):
 		return SetupSummary
 
 def eventinfo(session, eventName="", **kwargs):
-	if eventName != "":
-		session.open(IMDB, eventName)
-	else:
-		ref = session.nav.getCurrentlyPlayingServiceReference()
-		session.open(IMDBEPGSelection, ref)
+	s = session.nav.getCurrentService()
+	if s:
+		info = s.info()
+		event = info.getEvent(0) # 0 = now, 1 = next
+		name = event and event.getEventName() or ''
+		session.open(IMDB, name)
 
 def main(session, eventName="", **kwargs):
 	session.open(IMDB, eventName)
@@ -765,7 +766,7 @@ def main(session, eventName="", **kwargs):
 pluginlist = PluginDescriptor(name=_("IMDb Details"), description=_("Query details from the Internet Movie Database"), icon="imdb.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, needsRestart=False)
 
 def Plugins(**kwargs):
-	l = [PluginDescriptor(name="IMDb Details",
+	l = [PluginDescriptor(name=_("IMDb Details") + "...",
 			description=_("Query details from the Internet Movie Database"),
 			where=PluginDescriptor.WHERE_EVENTINFO,
 			fnc=eventinfo,
