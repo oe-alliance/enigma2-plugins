@@ -9,7 +9,7 @@ class External(Source):
 			Len = len(child)
 			if Len > 5:
 				child = (child[0], child[2], child[3], child[4], child[5])
-			if Len == 5:
+			elif Len == 5:
 				child = (child[0], child[2], child[3], child[4], "_blank")
 			elif Len == 4:
 				child = (child[0], child[2], child[3], False, "_blank")
