@@ -186,15 +186,7 @@ class EPGRefresh:
 				toList.append(scanservice)
 				channelIds.append(channelID)
 
-	def prepareRefresh(self):
-		print("[EPGRefresh] About to start refreshing EPG")
-
-		# Maybe read in configuration
-		try:
-			self.readConfiguration()
-		except Exception as e:
-			print("[EPGRefresh] Error occured while reading in configuration:", e)
-
+	def generateServicelist(self, services, bouquets):
 		# This will hold services which are not explicitely in our list
 		additionalServices = []
 		additionalBouquets = []
@@ -228,10 +220,10 @@ class EPGRefresh:
 
 		scanServices = []
 		channelIdList = []
-		self.addServices(self.services[0], scanServices, channelIdList)
+		self.addServices(services, scanServices, channelIdList)
 
 		serviceHandler = eServiceCenter.getInstance()
-		for bouquet in self.services[1].union(additionalBouquets):
+		for bouquet in bouquets.union(additionalBouquets):
 			myref = eServiceReference(bouquet.sref)
 			list = serviceHandler.list(myref)
 			if list is not None:
@@ -247,8 +239,21 @@ class EPGRefresh:
 		self.addServices(additionalServices, scanServices, channelIdList)
 		del additionalServices[:]
 
+		return scanServices
+
+	def prepareRefresh(self):
+		print("[EPGRefresh] About to start refreshing EPG")
+
+		# Maybe read in configuration
+		try:
+			self.readConfiguration()
+		except Exception as e:
+			print("[EPGRefresh] Error occured while reading in configuration:", e)
+
+		self.scanServices = self.generateServicelist(self.services[0], self.services[1])
+
 		# Debug
-		print("[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in scanServices]))
+		print("[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in self.scanServices]))
 
 		self.maybeStopAdapter()
 		# NOTE: start notification is handled in adapter initializer
@@ -266,7 +271,6 @@ class EPGRefresh:
 			refreshAdapter.prepare()
 		self.refreshAdapter = refreshAdapter
 
-		self.scanServices = scanServices
 		self.refresh()
 
 	def cleanUp(self):
