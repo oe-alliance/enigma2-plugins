@@ -12,7 +12,7 @@ except ImportError as ie:
 	from urllib.parse import unquote
 	iteritems = lambda d: d.items()
 
-API_VERSION = "1.0"
+API_VERSION = "1.1"
 
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
@@ -155,11 +155,6 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 				if value:
 					t = localtime(int(value))
 					config.plugins.epgrefresh.end.value = [t.tm_hour, t.tm_min]
-			elif key == "interval":
-				statetext += " parameter \"interval\" is deprecated. please use new \"interval_seconds\" parameter instead."
-				value = int(value)
-				if value:
-					config.plugins.epgrefresh.interval_seconds.value = value*60
 			elif key == "interval_seconds":
 				value = int(value)
 				if value:
@@ -178,9 +173,6 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.wakeup.value = True if value == "true" else False
 			elif key == "parse_autotimer":
 				config.plugins.epgrefresh.parse_autotimer.value = True if value == "true" else False
-			elif key == "background":
-				statetext += " parameter \"background\" is deprecated. please use new \"adapter\" parameter instead."
-				config.plugins.epgrefresh.adapter.value = "pip_hidden" if value == "true" else "main"
 			elif key == "adapter":
 				if value in config.plugins.epgrefresh.adapter.choices:
 					config.plugins.epgrefresh.adapter.value = value
@@ -246,11 +238,6 @@ class EPGRefreshSettingsResource(resource.Resource):
   <e2settingname>config.plugins.epgrefresh.end</e2settingname>
   <e2settingvalue>%d</e2settingvalue>
  </e2setting>
- <!-- deprecated, pending removal -->
- <e2setting>
-  <e2settingname>config.plugins.epgrefresh.interval</e2settingname>
-  <e2settingvalue>%d</e2settingvalue>
- </e2setting>
  <e2setting>
   <e2settingname>config.plugins.epgrefresh.interval_seconds</e2settingname>
   <e2settingvalue>%d</e2settingvalue>
@@ -284,11 +271,6 @@ class EPGRefreshSettingsResource(resource.Resource):
   <e2settingvalue>%d</e2settingvalue>
  </e2setting>
  <e2setting>
-  <!-- deprecated, pending removal -->
-  <e2settingname>config.plugins.epgrefresh.background</e2settingname>
-  <e2settingvalue>%s</e2settingvalue>
- </e2setting>
- <e2setting>
   <e2settingname>config.plugins.epgrefresh.adapter</e2settingname>
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
@@ -305,7 +287,6 @@ class EPGRefreshSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.enablemessage.value,
 				begin,
 				end,
-				int(config.plugins.epgrefresh.interval_seconds.value/60),
 				config.plugins.epgrefresh.interval_seconds.value,
 				config.plugins.epgrefresh.delay_standby.value,
 				config.plugins.epgrefresh.inherit_autotimer.value,
@@ -314,7 +295,6 @@ class EPGRefreshSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.wakeup.value,
 				config.plugins.epgrefresh.parse_autotimer.value,
 				config.plugins.epgrefresh.lastscan.value,
-				config.plugins.epgrefresh.adapter.value in ("pip", "pip_hidden"),
 				config.plugins.epgrefresh.adapter.value,
 				canDoBackgroundRefresh,
 				hasAutoTimer,
