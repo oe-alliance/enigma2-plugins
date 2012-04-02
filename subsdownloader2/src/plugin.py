@@ -18,7 +18,7 @@ from Plugins.Extensions.SubsDownloader2.SourceCode.NapiProjekt import NapiProjek
 from Plugins.Extensions.SubsDownloader2.SourceCode.Napisy24_pl import Napisy24_pl, GuessFileData_from_FileName, CompareMovie_and_Subtite_FileData
 from Plugins.Extensions.SubsDownloader2.SourceCode.chardet_OutpuyTranslation import chardetOutputTranslation
 from Plugins.Extensions.SubsDownloader2.SourceCode.myFileList import EXTENSIONS, FileList #*
-from Plugins.Extensions.SubsDownloader2.pluginOnlineContent import IsNewVersionCheck, zlib_link, libmediainfo_link, PluginIpkUpdate, InstallDownloadableContent, flagcounetr
+from Plugins.Extensions.SubsDownloader2.pluginOnlineContent import IsNewVersionCheck, zlib_link, libmediainfo_link, Subtitle_Downloader_temp_dir, PluginIpkUpdate, InstallDownloadableContent, CommertialBannerDownload #flagcounetr,
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from os import stat as os_stat
 from os import walk as os_walk
@@ -39,7 +39,7 @@ from time import strftime as time_strftime
 from time import localtime as time_localtime
 from re import compile as re_compile
 from os import path as os_path, listdir
-from enigma import eConsoleAppContainer, eServiceReference, ePicLoad, getDesktop, eServiceCenter
+from enigma import eConsoleAppContainer, eServiceReference, ePicLoad, getDesktop, eServiceCenter, eTimer
 
 #import players like Picture player, dvd player, music palyer
 if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/PicturePlayer/plugin.pyo") or os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/PicturePlayer/plugin.pyc"):
@@ -104,8 +104,8 @@ class SubsDownloaderApplication(Screen):
 		global Screen_width
 		global Screen_height
 		global is_libmediainfo
-		global Subtitle_Downloader_temp_dir
-		Subtitle_Downloader_temp_dir = '/tmp/SubsDownloader_cache/'
+		#global Subtitle_Downloader_temp_dir
+		#Subtitle_Downloader_temp_dir = '/tmp/SubsDownloader_cache/'
 		
 		Screen_width= getDesktop(0).size().width() #1280		
 		Screen_height = getDesktop(0).size().height() #720		
@@ -138,6 +138,10 @@ class SubsDownloaderApplication(Screen):
 	        <widget source=\"key_last\" render=\"Label\" position=\""+str(widget_source_x_position+43)+","+str(widget_source_y_position+widget_source_y_size*4)+"\" zPosition=\"1\" size=\""+str(widget_source_x_size)+","+str(widget_source_y_size)+"\" font=\"Regular;"+str(font_size)+"\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
 	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_info.png\" position=\""+str(widget_source_x_position)+","+str(widget_source_y_position+widget_source_y_size*5)+"\" size=\"36,"+str(widget_source_y_size)+"\" zPosition=\"1\" alphatest=\"on\" /> \
 	        <widget source=\"key_info\" render=\"Label\" position=\""+str(widget_source_x_position+43)+","+str(widget_source_y_position+widget_source_y_size*5)+"\" zPosition=\"1\" size=\""+str(widget_source_x_size)+","+str(widget_source_y_size)+"\" font=\"Regular;"+str(font_size)+"\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
+	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_0.png\" position=\""+str(widget_source_x_position)+","+str(widget_source_y_position+widget_source_y_size*6)+"\" size=\"36,"+str(widget_source_y_size)+"\" zPosition=\"1\" alphatest=\"on\" /> \
+	        <widget source=\"key_0\" render=\"Label\" position=\""+str(widget_source_x_position+43)+","+str(widget_source_y_position+widget_source_y_size*6)+"\" zPosition=\"1\" size=\""+str(widget_source_x_size)+","+str(widget_source_y_size)+"\" font=\"Regular;"+str(font_size)+"\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
+	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_blue.png\" position=\""+str(widget_source_x_position)+","+str(widget_source_y_position+widget_source_y_size*7)+"\" size=\"36,"+str(widget_source_y_size)+"\" zPosition=\"1\" alphatest=\"on\" /> \
+		<widget source=\"key_blue\" render=\"Label\" position=\""+str(widget_source_x_position+43)+","+str(widget_source_y_position+widget_source_y_size*7)+"\" zPosition=\"1\" size=\""+str(widget_source_x_size)+","+str(widget_source_y_size)+"\" font=\"Regular;"+str(font_size)+"\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
 	        </screen>"
 		
 		os.system('mkdir /tmp/SubsDownloader_cache')
@@ -162,15 +166,17 @@ class SubsDownloaderApplication(Screen):
 		#TODO COMERTIAL for sponsor
 		#TODO OTHER SUBTITLE FEEDERS
 		#TODO VERSION CHANGE
-		#TODO Think about automatic media pattern make based on FileList module
+		#TODO Think about automatic media patern make based on FileList module
 		self["key_menu"] = StaticText("Config menu")
 		self["key_help"] = StaticText("About...")
 		self["key_text"] = StaticText("Subtitle download")
 		self["key_next"] = StaticText("SubsList enable")
 		self["key_last"] = StaticText("FileList enable")
 		self["key_info"] = StaticText("File size")
+		self["key_0"] = StaticText("Show/Hide")
+		self["key_blue"] = StaticText("Enable FileManager")
 		self.mediaPatern = self.make_media_patern()
-		
+				
 		try:
 			fileListPath = config.plugins.subsdownloader.path.value
 		except:
@@ -189,29 +195,9 @@ class SubsDownloaderApplication(Screen):
 		self.clearSubList()
 		self.set_listFile_enabled()
 		
-		self["myActionMap"] = ActionMap(["ChannelSelectBaseActions","WizardActions", "DirectionActions","MenuActions","NumberActions","ColorActions","SubsDownloaderApplication_actions"],                            
-		{
-		        "ok": self.ok,
-		        "back": self.closeApplication,
-		        "about": self.showAboutScreen,
-		        "subSelect": self.downloadSubtitle,
-		        "menu": self.showConfigScreen,
-		        "nextMarker": self.set_listSubs_enabled,
-		        "prevMarker": self.set_listFile_enabled,
-		        "up": self.goUp,
-		        "down": self.goDown,
-		        "left": self.goLeft,
-		        "right": self.goRight,
-		        "info": self.FM_file_Info, 
-		        "localConv": self.localConvertionSublist,
-		        #"0": self.show_hide_skin,
-		        #"red": self.goRed,
-		        #"green": self.goGreen,
-		        #"yellow": self.goYellow,
-		        #"blue": self.goBlue,		        
-		}, -2)
-		
-	
+		self.isVisible = True
+			
+		self["myActionMap"] = self.key_bind()
 		
 		#PICTURE INITIALIZATION
 		self.EXscale = (AVSwitch().getFramebufferScale())
@@ -231,23 +217,85 @@ class SubsDownloaderApplication(Screen):
 		self.CommertialPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/none1.jpg"
 		self.onLayoutFinish.append(self.Show_Commertial_Picture)
 		
-		flagcounetr(self.display_Commmertial_Picture(Subtitle_Downloader_temp_dir+"plugin_users.png")) #remove it in next veriosn
-
+		self.download_commertial_pictures = CommertialBannerDownload()
+		self.are_banners_downloaded = False 
+		self.are_banners_downloaded = self.download_commertial_pictures.run()
+		self.__commertial_pictures_display_counter = 0
+		self.__commertial_pictures = []
+		self.CommertialBannerTimer = eTimer()
+		self.CommertialBannerTimer.callback.append(self.CommertialBannerDisplayTimerAction)
+		self.CommertialBannerTimer.start(1200, False)
 		"""Oczywiscie trzeba stworzyc widget i pokopiowac odpowiednie funkcje inicjalizujace"""
 		#PICTURE INITIALIZATION
 		self.set_title()
 		
-		              
-	def call(c = None):
-		pass
+	def CommertialBannerDisplayTimerAction(self):		
+		if self.are_banners_downloaded == True:
+			self.__commertial_pictures = self.Find_Commertial_Picure()
+			#del self.are_banners_downloaded
+			self.__commertial_pictures.sort()
+			self.are_banners_downloaded = False
+		if self.__commertial_pictures  != []:	
+			if self.__commertial_pictures_display_counter > len(self.__commertial_pictures)-1:
+				self.__commertial_pictures_display_counter = 0
+			self.display_Commmertial_Picture(self.__commertial_pictures[self.__commertial_pictures_display_counter])
+			self.__commertial_pictures_display_counter = self.__commertial_pictures_display_counter + 1
+		self.CommertialBannerTimer.start(7500, False)
 		
+	def key_bind(self):			
+		primary_bind = ActionMap(["ChannelSelectBaseActions","WizardActions", "DirectionActions","MenuActions","NumberActions","ColorActions","SubsDownloaderApplication_actions"],                            
+	        {
+	                "ok": self.ok,
+	                "back": self.closeApplication,
+	                "about": self.showAboutScreen,
+	                "subSelect": self.downloadSubtitle,
+	                "menu": self.showConfigScreen,
+	                "nextMarker": self.set_listSubs_enabled,
+	                "prevMarker": self.set_listFile_enabled,
+	                "up": self.goUp,
+	                "down": self.goDown,
+	                "left": self.goLeft,
+	                "right": self.goRight,
+	                "info": self.FM_file_Info, 
+	                "localConv": self.localConvertionSublist,
+	                "0": self.visibility,
+	                #"red": self.goRed,
+	                #"green": self.goGreen,
+	                #"yellow": self.goYellow,
+	                "blue": self.showFilemanagerScreen,		        
+	        }, -2)		
+		return primary_bind		
+		
+	def visibility(self):
+		if self.isVisible == True:
+			self.isVisible = False
+			def key_bind_for_hidden():
+				secondary_bind = ActionMap(["ChannelSelectBaseActions","WizardActions", "DirectionActions","MenuActions","NumberActions","ColorActions","SubsDownloaderApplication_actions"],                            
+				{
+					"0": self.visibility,
+				}, -2)
+				return secondary_bind
+			self["myActionMap"].doUnbind()
+			self["myActionMap"] = key_bind_for_hidden()
+			self["myActionMap"].doBind()			
+			self.hide()
+		else:
+			self.isVisible = True
+			self["myActionMap"].doUnbind()
+			self["myActionMap"] = self.key_bind()
+			self["myActionMap"].doBind()
+			self.show()
+		             
+	
 	def set_title(self):
 		if is_libmediainfo == False:
 			self.setTitle("Subtitle downloader (without libmediainfo)")
 		elif is_libmediainfo == True:
 			self.setTitle("Subtitle downloader (with libmediainfo)")
 
-
+	def showFilemanagerScreen(self):
+		self.session.open(MessageBox,_('Support soon...'), MessageBox.TYPE_INFO, timeout = 5)
+	
 #!!!!!!!!!!!! file manager functions!!!!!!#
 	def FM_file_Info(self):
 		if self["fileList"].canDescent():
@@ -302,6 +350,18 @@ class SubsDownloaderApplication(Screen):
 		#text = picInfo.split('\n',1)    #WYSWIETLA INFORMACJE NA TEMAT OBRAZKA
 		#self["label"].setText(text[1])  #WYSWIETLA INFORMACJE NA TEMAT OBRAZKA
 	
+	def Find_Commertial_Picure(self):
+		commertial_pictures = []
+		for x in os.listdir(Subtitle_Downloader_temp_dir):
+			if self.return_media_kind(self.return_extention(x))=="picture":
+				commertial_pictures.append(Subtitle_Downloader_temp_dir+x)
+		if commertial_pictures == []:
+			return ["/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/none1.jpg"]
+		else:
+			return commertial_pictures
+				
+		
+		
 	def Show_Commertial_Picture(self):
 		"""This function is required to init witget ["commertialPicture"] and picture class self.CommertialPicture"""
 		self.CommertialPicture.setPara([self["commertialPicture"].instance.size().width(), self["commertialPicture"].instance.size().height(), self.EXscale[0], self.EXscale[1], 0, 1, "#002C2C39"])
@@ -544,7 +604,7 @@ class SubsDownloaderApplication(Screen):
 					if subtitle_filename[0] != "None":
 						self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
 					else:
-						self.session.open(MessageBox, _("There is problem with downloading or saving subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
+						self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
 					
 					"""try:
 						self.NapiSubtitle.getnapi(self.movie_filename)
@@ -623,7 +683,7 @@ class SubsDownloaderApplication(Screen):
 		self.session.open(MessageBox,_("Failed to download or save file.\nPossible problems:\n- Subtitle filname:\n%s\n- Subtitle codepage:\n%s\n- Subtitle filetype:\n%s\n- Movie fsp:\n%s\n.") % (subtitle_filename,subtitle_codepade_,subtitle_filename_type,movie_fps), MessageBox.TYPE_INFO, timeout = 15)
 		
 	def make_media_patern(self):
-		"""Create media pattern to file browser based on self.textEXTENSIONS from this module
+		"""Creare media patern to file browser based on self.textEXTENSIONS from this module
 		and EXTENSIONS fron FileList module"""
 		self.textEXTENSIONS.update(EXTENSIONS)
 		return "^.*\.(" + str.join('|',self.textEXTENSIONS.keys()) + ")"
@@ -691,24 +751,9 @@ class SubsDownloaderApplication(Screen):
 				testFileName = self["fileList"].getFilename()
 				testFileName = testFileName.lower()
 				if filename != None:
-					"""if self.return_media_kind(self.return_extention(filename))=="movie":
-						#try:
-							#check if its GP3 if yes use ExMoviePlayer
-						from Plugins.Bp.geminimain.gMoviePlayer import ExMoviePlayer
-						self.session.open(ExMoviePlayer, "/hdd/Net_HDD/Filmy/Hop/Hop 2011 PLDUBB.720p.BluRay.x264-DiAM0ND.mkv")
-						#except:
-							#if it's not GP3 use Dream Explorer II exxecution mode
-						#	pass"""
-					if testFileName.endswith(".ts"):
-						fileRef = eServiceReference("1:0:0:0:0:0:0:0:0:0:" + filename)
-						self.session.open(MoviePlayer, fileRef)
-					elif (testFileName.endswith(".mpg")) or (testFileName.endswith(".mpeg")) or (testFileName.endswith(".mkv")) or (testFileName.endswith(".m2ts")) or (testFileName.endswith(".vob")) or (testFileName.endswith(".mod")):
-						fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + filename)
-						self.session.open(MoviePlayer, fileRef)
-					elif (testFileName.endswith(".avi")) or (testFileName.endswith(".mp4")) or (testFileName.endswith(".divx")) or (testFileName.endswith(".mov")) or (testFileName.endswith(".flv")) or (testFileName.endswith(".3gp")):
-						if not(self.MyBox=="dm7025"):	
-							fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + filename)
-							self.session.open(MoviePlayer, fileRef)						
+					if self.return_media_kind(self.return_extention(testFileName)) == "movie":
+						#self.session.open(MoviePlayer, filename)
+						self.session.openWithCallback(self["fileList"].refresh, MoviePlayer, filename)
 					elif (testFileName.endswith(".mp3")) or (testFileName.endswith(".wav")) or (testFileName.endswith(".ogg")) or (testFileName.endswith(".m4a")) or (testFileName.endswith(".mp2")) or (testFileName.endswith(".flac")):
 						if (self.MyBox=="dm7025") and ((testFileName.endswith(".m4a")) or (testFileName.endswith(".mp2")) or (testFileName.endswith(".flac"))):
 							return
@@ -765,26 +810,18 @@ class SubsDownloaderApplication(Screen):
 						else:
 							self.session.open(MessageBox, _("File size is bigger than 61440.\n\n Subs Downloader can't manage it with vEditor."), MessageBox.TYPE_INFO, timeout = 5)
 		if self.selectedList == self["subsList"]:
-			#self.isSubtitleDowloaded=0
 			whichSubtitleDownload="None"
 			subtitle_filename = []
-			#self.movie_fps = "None"
-			#self.subtitle_codepade = "None"
-			#self.subtitle_filename_type = "None"
-			#self.is_subtitle_saved = "None"
 			if self.localConvertion == False:
 				#download subtitle from server\
 				if config.plugins.subsdownloader.subtitleserver.value in PERISCOPE_PLUGINS: #== "OpenSubtitle":
 					whichSubtitleDownload = self["subsList"].getCurrent()[1]
 					subtitle_filename = self.subtitles.createFile(self.subtitle_database[int(whichSubtitleDownload)],self.movie_filename)
-					#self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
 				if config.plugins.subsdownloader.subtitleserver.value == "NapiProjekt":
 					pass #PASS BECAUDE NAPI PROJECT DOWNLOAD ONLY PL FILE AND IT'S DIRECTLY IN DOWNLOAD SUBTITLE FUNCTION.
 				if config.plugins.subsdownloader.subtitleserver.value in  XBMC_PLUGINS:
-					
 					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % config.plugins.subsdownloader.subtitleserver.value)
 					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value) 
-					
 					pos = self["subsList"].getCurrent()[1]
 					tmp_sub_dir = sub_folder = self.movie_filename.rsplit("/",1)[0]
 					zipped_subs_path = self.movie_filename.rsplit(".",1)[0]+".zip" #for some plugins
@@ -812,16 +849,15 @@ class SubsDownloaderApplication(Screen):
 								self.convert_subtitle_to_movie(x['movie'], x['subtitle'])
 						else:
 							self["fileList"].refresh()
-							self.session.open(MessageBox, _("%d file(s) was extracted and I didn't match them automatically this time. \n Please make local convertion (long TEXT).") % (len(subtitle_filename)) , MessageBox.TYPE_INFO, timeout = 10)
+							self.session.open(MessageBox, _("%i file(s) was extracted and I didn't match them automatically this time. \n Please make local convertion (long TEXT).") % (len(subtitle_filename)) , MessageBox.TYPE_INFO, timeout = 10)
 				if subtitle_filename == [] or subtitle_filename == "":
-					self.session.open(MessageBox, _("There is problem with downloading or saving subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
+					self.session.open(MessageBox, _("There is problem with downloading or saveing subtitles on storage device."), MessageBox.TYPE_INFO, timeout = 5)
 			
 			elif self.localConvertion == True:
 				#local convertion in progress
 				whichSubtitleDownload = self["subsList"].getCurrent()[1]
 				subtitle_filename.append(whichSubtitleDownload)				
 				self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
-			#self["fileList"].refresh()
 			#TODO OTHER SUBTITLE SERVERS HANDLE
 				
 	def closeApplication(self):
@@ -842,7 +878,6 @@ class SubsDownloaderApplication(Screen):
 		self.selectedList.down()
 	
 	def showAboutScreen(self):
-		#self.session.open(SubsDownloaderAboutScreen) #nie wiem czy nie with callback
 		self.session.open(vEditor, '/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/about.nfo')
 
 	def searchMusic(self):
@@ -881,8 +916,6 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 		        "right": self.keyRight,
 		        "ok": self.saveConfig,
 		        "yellow": self.installLibMediaInfo,
-		        #"cancel": self.canceWithoutSaveMsg
-		        #"cancel": self.session.openWithCallback(self.cancelWithoutSave,MessageBox,_("Do you really want to exit without configuration saving?"), MessageBox.TYPE_YESNO)
 			"cancel": self.cancelWithoutSave # add the RC Command "cancel" to close your Screen
 		}, -1)
 		self.createConfigMenu()
@@ -917,22 +950,18 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Choose Napisy24 search method:"), config.plugins.subsdownloader.Napisy24SearchMethod))
 			self.list.append(getConfigListEntry(_("Use \"guessFileData\" method for movie filname:"), config.plugins.subsdownloader.Napisy24MovieNameMethod))
 			pass 
-		self.list.append(getConfigListEntry(_("Extended configuration menu:"), config.plugins.subsdownloader.extendedMenuConfig))
+		self.list.append(getConfigListEntry(_("Extended configuratin menu:"), config.plugins.subsdownloader.extendedMenuConfig))
 		if config.plugins.subsdownloader.extendedMenuConfig.value == True:
 			self.list.append(getConfigListEntry(_("Save last FileList path:"), config.plugins.subsdownloader.pathSave))
-			self.list.append(getConfigListEntry(_("Use media pattern filter in FileList:"), config.plugins.subsdownloader.pathUseMediaPaternFilter))
+			self.list.append(getConfigListEntry(_("Use media patern filter in FileList:"), config.plugins.subsdownloader.pathUseMediaPaternFilter))
 			self.list.append(getConfigListEntry(_("Add Subs Downloader to BlueButton menu:"), config.plugins.subsdownloader.BlueButtonMenu))
 			#self.list.append(getConfigListEntry(_("Delete oryginal subtitle after local convertion:"), config.plugins.subsdownloader.del_sub_after_conv))
 			self.list.append(getConfigListEntry(_("Plugin autoupdate:"), config.plugins.subsdownloader.AutoUpdate))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
 		
-	"""def canceWithoutSaveMsg(self):
-		dei = self.session.openWithCallback(self.cancelWithoutSave(),MessageBox,_("Do you realy want to exit without configuration saving?"), MessageBox.TYPE_YESNO)
-		dei.setTitle(_("Exit without saving ..."))"""
-		
 	def cancelWithoutSave(self):
-		#TODO RETURN TO APPLICATION AND NOTIFICATION ABOUT NOT SAVING
+		#TODO RETURN TO APPLICATION AND NOTIFICATRION ABOIUT NOT SAVEING
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close ()
@@ -1137,15 +1166,78 @@ class PictureExplorerII(Screen):
 			self["State"].visible = True
 			self["State"].setText(_(self.whatPic))
 
-
-
 class MoviePlayer(MP_parent):
-	def __init__(self, session, service):
+	def __init__(self, session, filename):
+		self.moviename = filename
+
+		if self.moviename.endswith(".ts"):
+			fileRef = eServiceReference("1:0:0:0:0:0:0:0:0:0:" + self.moviename)
+		elif (self.moviename.endswith(".mpg")) or (self.moviename.endswith(".mpeg")) or (self.moviename.endswith(".mkv")) or (self.moviename.endswith(".m2ts")) or (self.moviename.endswith(".vob")) or (self.moviename.endswith(".mod")):
+			fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + self.moviename)
+		elif (self.moviename.endswith(".avi")) or (self.moviename.endswith(".mp4")) or (self.moviename.endswith(".divx")) or (self.moviename.endswith(".mov")) or (self.moviename.endswith(".flv")) or (self.moviename.endswith(".3gp")):
+			if not(HardwareInfo().get_device_name()=="dm7025"):	
+				fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + self.moviename)
 		self.session = session
 		self.WithoutStopClose = False
-		MP_parent.__init__(self, self.session, service)
-				
+		MP_parent.__init__(self, self.session, fileRef)
+		self.cut_list = []
+		self.downloadCuesheet()
+		
+	def addLastPosition(self):
+		print("", self, "I")
+		service = self.session.nav.getCurrentService()
+		seek = service and service.seek()
+		if seek != None:
+			pts = seek.getPlayPosition()[1]
+			
+			found = False
+			for i in range(len(self.cut_list)):
+				if self.cut_list[i][1] == self.CUT_TYPE_LAST:
+					self.cut_list[i] = (pts, self.CUT_TYPE_LAST, )
+					found = True
+					break
+			
+			if found is False:
+				self.cut_list.append((pts, self.CUT_TYPE_LAST, ))
+
+	def uploadCuesheet(self):
+		print("", self, "I")
+		try:
+			import struct
+			packed = ''
+			for cue in self.cut_list:
+				print cue
+				packed += struct.pack('>QI', cue[0], cue[1])
+			
+			if len(packed) > 0:
+				f = open(self.moviename + ".cuts", "wb")
+				f.write(packed)
+				f.close()
+			else:
+				os.remove(self.moviename + ".cuts")
+		except Exception, ex:
+			print("Exception (ef): " + str(ex), self, "E")
+			
+	def downloadCuesheet(self):
+		print("", self, "I")
+		self.cut_list = []
+		try:
+			import struct
+			f = open(self.moviename + ".cuts", "rb")
+			packed = f.read()
+			f.close()
+			
+			while len(packed) > 0:
+				packedCue = packed[:12]
+				packed = packed[12:]
+				cue = struct.unpack('>QI', packedCue)
+				self.cut_list.append(cue)
+		except Exception, ex:
+			print("Exception (ef): " + str(ex), self, "E")
+		
 	def leavePlayer(self):
+		self.addLastPosition()
+		self.uploadCuesheet()		
 		self.is_closing = True
 		self.close()
 
@@ -1170,7 +1262,10 @@ class MoviePlayer(MP_parent):
 		if not(self.WithoutStopClose):
 			self.session.nav.playService(self.lastservice)
 
-
+class FileManager(Screen):
+	def __init__(self,session):
+		self.session = session
+		
 
 class MusicExplorer(MoviePlayer):
 	def __init__(self, session, service, MusicDir, theFile):
