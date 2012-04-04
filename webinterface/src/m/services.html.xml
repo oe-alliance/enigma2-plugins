@@ -1,0 +1,49 @@
+<e2:screen name="EpgWebScreen">&lt;!DOCTYPE html><html>
+<head>
+	<title>Services</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+	<link rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
+	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.0.1.min.css" />
+
+	<script src="/web-data/lib/jquery-1.6.4.min.js" />
+	<script language="javascript" type="text/javascript">
+		$(document).bind("mobileinit", function(){
+			$.extend(  $.mobile , {
+				defaultPageTransition: 'none',
+				defaultDialogTransition: 'none'
+			});
+		});
+	</script>
+	<script src="/web-data/m/script/jquery.mobile-1.0.1.min.js" />
+</head>
+<body>
+
+<div data-role="page" id="main" data-title="Services" data-theme="a">
+	<div data-role="header">
+		<h1>Services</h1>
+		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home" data-ajax="false">Home</a>
+	</div><!-- /header -->
+	<div data-role="content">
+		<ul data-role="listview" data-split-icon="forward" data-split-theme="a">
+			<e2:element source="EpgBouquetNow" id="bRef"><e2:convert type="web:ListFiller" >
+			&lt;li data-icon="">
+				&lt;a href="epg.html?sRef=<e2:item name="ServiceReference" filter="uriAttribute"/>" data-ajax="false">
+					&lt;h3><e2:item name="ServiceName" filter="html"/>&lt;/h3>
+					&lt;p><e2:item name="TimeStart" filter="time"/>: <e2:item name="Title" filter="html"/>&lt;br />
+					<e2:item name="Duration" filter="minutes"/>&lt;/p>
+					<!-- &lt;a href="/web/stream.m3u?ref=<e2:item name="ServiceReference" filter="uriAttribute"/>" target="_blank" data-ajax="false" class="ui-li-aside">Stream&lt;/a>  -->
+				&lt;/a>
+				&lt;a href="zap.html?sRef=<e2:item name="ServiceReference" filter="uriAttribute"/>" data-rel="dialog">Zap&lt;/a>
+			&lt;/li>
+			</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+		</ul>
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div><!-- /main -->
+</body>
+</html>
+</e2:screen>
