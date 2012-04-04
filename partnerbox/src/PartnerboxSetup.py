@@ -104,10 +104,10 @@ class PartnerboxSetup(ConfigListScreen, Screen):
 class PartnerboxEntriesListConfigScreen(Screen):
 	skin = """
 		<screen position="center,center" size="550,400" title="%s" >
-			<widget name="name" position="5,0" size="150,50" font="Regular;20" halign="left"/>
-			<widget name="ip" position="120,0" size="50,50" font="Regular;20" halign="left"/>
-			<widget name="port" position="270,0" size="100,50" font="Regular;20" halign="left"/>
-			<widget name="type" position="410,0" size="160,50" font="Regular;20" halign="left"/>
+			<widget name="name" position="5,0" size="200,50" font="Regular;20" halign="left"/>
+			<widget name="ip" position="215,0" size="140,50" font="Regular;20" halign="left"/>
+			<widget name="port" position="350,0" size="80,50" font="Regular;20" halign="left"/>
+			<widget name="type" position="430,0" size="120,50" font="Regular;20" halign="left"/>
 			<widget name="entrylist" position="0,50" size="550,300" scrollbarMode="showOnDemand"/>
 
 			<widget name="key_red" position="0,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -193,16 +193,16 @@ class PartnerboxEntryList(MenuList):
 		self.list=[]
 		for c in config.plugins.Partnerbox.Entries:
 			res = [c]
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.name.value)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 200, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.name.value)))
 			ip = "%d.%d.%d.%d" % tuple(c.ip.value)
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 120, 0, 150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(ip)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 210, 0, 130, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(ip)))
 			port = "%d"%(c.port.value)
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 270, 0, 100, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(port)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 350, 0, 80, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(port)))
 			if int(c.enigma.value) == 0:
 				e_type = "Enigma2"
 			else:
 				e_type = "Enigma1"
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 410, 0, 100, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(e_type)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 430, 0, 120, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(e_type)))
 			self.list.append(res)
 		self.l.setList(self.list)
 		self.moveToIndex(0)
