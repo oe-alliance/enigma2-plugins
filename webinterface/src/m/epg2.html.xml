@@ -1,0 +1,45 @@
+<e2:screen name="EpgWebScreen">&lt;!DOCTYPE html><html>
+<head>
+	<title>EPG</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+	<link rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
+	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.0.1.min.css" />
+
+	<script src="/web-data/lib/jquery-1.6.4.min.js" />
+	<script language="javascript" type="text/javascript">
+		$(document).bind("mobileinit", function(){
+			$.extend(  $.mobile , {
+				defaultPageTransition: 'none',
+				defaultDialogTransition: 'none'
+			});
+		});
+	</script>
+	<script src="/web-data/m/script/jquery.mobile-1.0.1.min.js" />
+</head>
+<body>
+
+<div data-role="page" id="epg" data-title="EPG" data-theme="a">
+	<div data-role="header">
+		<h1>EPG</h1>
+	</div><!-- /header -->
+	<div data-role="content">
+		<div data-role="collapsible-set">
+			<e2:element source="EpgService" id="sRef,time,endTime"><e2:convert type="web:ListFiller">
+			&lt;div data-role="collapsible" data-content-theme="a">
+				&lt;h3><e2:item name="Title" filter="html"/> (<e2:item name="Duration" filter="minutes"/>)&lt;/h3>
+				&lt;p><e2:item name="TimeStart" filter="date"/> - <e2:item name="TimeStart" filter="time"/>&lt;br />
+				<e2:item name="Description" filter="html"/>&lt;/p>
+				&lt;p><e2:item name="DescriptionExtended" filter="html"/>&lt;/p>
+			&lt;/div>
+			</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+		</div>
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div><!-- /main -->
+</body>
+</html>
+</e2:screen>
