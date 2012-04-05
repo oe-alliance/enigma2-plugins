@@ -618,6 +618,7 @@ webinterface/Makefile
 webinterface/meta/Makefile
 webinterface/po/Makefile
 webinterface/src/Makefile
+webinterface/src/m/Makefile
 webinterface/src/mobile/Makefile
 webinterface/src/web/Makefile
 webinterface/src/web-data/Makefile
@@ -627,6 +628,11 @@ webinterface/src/web-data/lib/Makefile
 webinterface/src/web-data/lib/lang/Makefile
 webinterface/src/web-data/lib/datepicker/Makefile
 webinterface/src/web-data/lib/datepicker/media/Makefile
+webinterface/src/web-data/m/Makefile
+webinterface/src/web-data/m/css/Makefile
+webinterface/src/web-data/m/css/themes/Makefile
+webinterface/src/web-data/m/css/themes/images/Makefile
+webinterface/src/web-data/m/script/Makefile
 webinterface/src/web-data/tpl/Makefile
 webinterface/src/web-data/tpl/default/Makefile
 webinterface/src/web-data/tpl/default/streaminterface/Makefile
