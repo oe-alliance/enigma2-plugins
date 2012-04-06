@@ -218,29 +218,32 @@ class SubsDownloaderApplication(Screen):
 		self.onLayoutFinish.append(self.Show_Commertial_Picture)
 		
 		self.download_commertial_pictures = CommertialBannerDownload()
-		self.are_banners_downloaded = False 
-		self.are_banners_downloaded = self.download_commertial_pictures.run()
+		self.download_commertial_pictures.start()
 		self.__commertial_pictures_display_counter = 0
 		self.__commertial_pictures = []
 		self.CommertialBannerTimer = eTimer()
 		self.CommertialBannerTimer.callback.append(self.CommertialBannerDisplayTimerAction)
-		self.CommertialBannerTimer.start(1200, False)
+		self.CommertialBannerTimer.start(120, False)
 		"""Oczywiscie trzeba stworzyc widget i pokopiowac odpowiednie funkcje inicjalizujace"""
 		#PICTURE INITIALIZATION
 		self.set_title()
 		
 	def CommertialBannerDisplayTimerAction(self):		
-		if self.are_banners_downloaded == True:
+		if self.download_commertial_pictures.is_alive() == False and self.__commertial_pictures  == []:
 			self.__commertial_pictures = self.Find_Commertial_Picure()
-			#del self.are_banners_downloaded
 			self.__commertial_pictures.sort()
-			self.are_banners_downloaded = False
+			self.CommertialBannerTimer.start(10, False)			
+		else:
+			self.CommertialBannerTimer.start(120, False)
 		if self.__commertial_pictures  != []:	
 			if self.__commertial_pictures_display_counter > len(self.__commertial_pictures)-1:
 				self.__commertial_pictures_display_counter = 0
 			self.display_Commmertial_Picture(self.__commertial_pictures[self.__commertial_pictures_display_counter])
 			self.__commertial_pictures_display_counter = self.__commertial_pictures_display_counter + 1
-		self.CommertialBannerTimer.start(7500, False)
+			if len(self.__commertial_pictures) == 1:
+				self.CommertialBannerTimer.stop()
+			else:
+				self.CommertialBannerTimer.start(7500, False)
 		
 	def key_bind(self):			
 		primary_bind = ActionMap(["ChannelSelectBaseActions","WizardActions", "DirectionActions","MenuActions","NumberActions","ColorActions","SubsDownloaderApplication_actions"],                            
@@ -1338,14 +1341,11 @@ def main(session, **kwargs):
 	print "\n[SubsDownloaderApplication] start\n"	
 	if config.plugins.subsdownloader.AutoUpdate.value == True:
 		session.open(SubsDownloaderApplication)
-		autoupdate = IsNewVersionCheck()
-		if autoupdate.run() != False:
-			session.open(PluginIpkUpdate)		
+		autoupdate = IsNewVersionCheck(session)
+		autoupdate.start()
 	else:
 		session.open(SubsDownloaderApplication)
 
-
-	
 	
 #########################################################################
 

@@ -1,4 +1,4 @@
-Subtitle Downloader v. 0.30.8 2012-04-02
+Subtitle Downloader v. 0.31.0 2012-04-06
 
 Enigma2 plugin which downloads subtitle to Your movie.
 
@@ -30,6 +30,9 @@ TEXT - download subtitle or avaliable on server subtitle list
 OK - on FileList play media/ on SubsList download subtitle
 0 - Shows/ Hide skin
 BLUE - FileManager
+
+ver 0.31.0
+- fixed threading - now plugin starts faster.
 
 ver 0.30.8
 - "0" key skin show/hide,
