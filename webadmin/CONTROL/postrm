@@ -1,0 +1,5 @@
+#!/bin/sh
+
+rm -f /usr/lib/enigma2/python/Plugins/Extensions/WebAdmin/web-data/tpl/tplCurrent.htm
+rm -f /usr/lib/enigma2/python/Plugins/Extensions/WebAdmin/web-data/tpl/tplVolume.htm
+rm -f /usr/lib/enigma2/python/Plugins/Extensions/WebAdmin/web-data/tpl/tplEpgList.htm

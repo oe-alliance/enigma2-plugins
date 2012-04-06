@@ -587,6 +587,19 @@ weatherplugin/meta/Makefile
 weatherplugin/po/Makefile
 weatherplugin/src/Makefile
 
+webadmin/Makefile
+webadmin/meta/Makefile
+webadmin/src/Makefile
+webadmin/src/mobile/Makefile
+webadmin/src/web/Makefile
+webadmin/src/WebChilds/Makefile
+webadmin/src/WebComponents/Makefile
+webadmin/src/WebComponents/Sources/Makefile
+webadmin/src/web-data/Makefile
+webadmin/src/web-data/tpl/Makefile
+webadmin/src/web-data/img/Makefile
+webadmin/src/WebScreens/Makefile
+
 webcamviewer/Makefile
 webcamviewer/meta/Makefile
 webcamviewer/src/Makefile

@@ -1,0 +1,88 @@
+
+<!-- tplPkgSettings -->
+						<table id="contentTable">
+							${CSS=""}
+							{for file in files}
+							<tr>
+								<td class="{if CSS == '' | CSS == 'even'}${CSS='odd'}{else}${CSS='even'}{/if}" >
+									<table class="sPkgConfItem">
+										<tr>
+											<td style="width: 750px;">
+												<a class="sPkgConfsLinkExt" href="#" title="Click to show/hide content of ${file.name}">
+													<img class="sPkgConfBulletToggle" src="/web-data/img/toggle_expand.png" alt="+"></img>
+														${file.name}
+												</a>
+											</td >
+											<td align="right">
+											{if file.name != "opkg.conf" & file.name != "arch.conf"}
+												{if file.state == "1"}
+												<a class="sPkgConfFeedsLink" data-name="${file.name}" href="#" title="disable ${file.name}" >
+													<img id="${file.name}-pic" src="/web-data/img/minus.png" alt="disable" border="0"></img>
+												</a>
+												{else}
+												<a class="sPkgConfFeedsLink" data-name="${file.name}" href="#" title="enable ${file.name}" >
+													<img id="${file.name}-pic" src="/web-data/img/plus.png" alt="enable" border="0"></img>
+												</a>
+												{/if}
+											{/if}
+											</td>
+										</tr>
+										<tr class="trExtPkgConf" style="display : none;">
+											<td colspan=0>
+												<table>
+													<tr >
+														<td>
+															<form target="_blank" action="uploadtext?path=/etc/opkg/&filename=${file.name}" method="post"  enctype="multipart/form-data">
+																<P>
+																	<textarea name="text" rows={if file.name == "opkg.conf"}16{elseif file.name ==  "arch.conf"}8{else}1{/if} cols=100>${file.text}</textarea><br/>
+																	<input target="_blank" type="submit" value="Save" onClick="return confirm('save file to dreambox?')" >
+																	{if file.state == "1"}
+																	<input type="hidden" name="filename" id="${file.name}-name" value="${file.name}" >
+																	{else}
+																	<input type="hidden" name="filename" id="${file.name}-name" value="${file.name}.off" >
+																	{/if}
+																	<input type="reset">
+																</P>
+															</form>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{forelse}
+							<tr>
+								<td>
+									<table>
+										<tr>
+											<td>No Packages to Display</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{/for}
+							<tr>
+								<td>
+									<form target="new feed Upload" action="uploadtext?path=/etc/opkg/" method="post" enctype="multipart/form-data">
+										<table>
+										<hr/>
+											<tr>
+												<td>
+													<tr>
+														<td>Upload new *-feed.conf</td>
+														<td><input id="finput" name="text" type="file" onChange="confirm_suffix('.conf');"></td>
+														<input type="hidden" name="filename" id="fname" >
+													</tr>
+													<tr>
+														<td colspan="2"><input type="submit" ></td>
+													</tr>
+												</td>
+											</tr>
+										</table>
+									</form>
+								</td>
+							</tr>
+						</table>
+<!-- /tplPkgSettings -->

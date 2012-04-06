@@ -1,0 +1,17 @@
+
+<!-- tplTerminal -->
+						<table id="contentTable" border="1" >
+							<tr>
+								<td >
+									<applet CODEBASE="." ARCHIVE="jta26.jar" CODE="de.mud.jta.Applet" WIDTH=794 HEIGHT=480 >
+										<param name="config" value="terminal.conf">
+										<param name="plugins" value="Status,Socket,Telnet,Terminal">
+										<param name="Terminal.buffer" value="1000">
+										<param name="Terminal.scrollBar" value="East" >
+										<param name="Socket.host" value="${host}">
+										<!--<param name="Socket.port" value="${port}">--> 
+									</applet>
+								</td>
+							</tr>
+						</table>
+<!-- /tplTerminal -->
