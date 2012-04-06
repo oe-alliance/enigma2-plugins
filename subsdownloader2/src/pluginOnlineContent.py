@@ -17,7 +17,8 @@ URL_text_file = "http://subs-downloader.googlecode.com/svn/commertial_banners.tx
 Subtitle_Downloader_temp_dir = '/tmp/SubsDownloader_cache/'
 
 class IsNewVersionCheck(threading.Thread):
-    def __init__(self):
+    def __init__(self, session):
+	self.session = session
         threading.Thread.__init__(self)
         self.__latest_version_info_url = "http://subs-downloader.googlecode.com/svn/current_version.txt"
         self.__installed_version_info_file = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/about.nfo"
@@ -37,17 +38,15 @@ class IsNewVersionCheck(threading.Thread):
             latest_verion = latest_vestion_data.readlines()
             latest_vestion_data.close()
             print "Latest version: %s" % str(latest_verion[0])
-        #else:
         except:
-            #latest_vestion_data.close()
             error_detected = 1
                   
         if error_detected == 1:
             return False
         else:
-            if latest_verion[0] > current_verion:
+            if latest_verion[0] > current_verion:		
                 print "Jest nowa wersja pluginu" 
-                return latest_verion[1]
+                self.session.open(PluginIpkUpdate,latest_verion[1])
             else:
                 print "Posiadasz najnowsza wersje pluginu"
                 return False
@@ -73,15 +72,17 @@ class InstallDownloadableContent():
 	    pass
             
 
-class PluginIpkUpdate(Screen, IsNewVersionCheck):
+class PluginIpkUpdate(Screen): #, IsNewVersionCheck):
 	skin = """
 		<screen position="150,200" size="460,250" title="New plugin version is avaliable." >
 			<widget name="myMenu" position="10,10" size="420,240" scrollbarMode="showOnDemand" />
 		</screen>"""
-	def __init__(self, session, args = 0):
+	#def __init__(self, session, args = 0):
+	def __init__(self, session, new_version_url):
 		self.session = session
+	        self.new_wersion_url = new_version_url
 		list = []
-		self.autoupdate = IsNewVersionCheck()
+		#self.autoupdate = IsNewVersionCheck()
 		list.append((_("Install plugin"), "install"))
 		list.append((_("Not now"), "exit"))
 		
@@ -92,7 +93,7 @@ class PluginIpkUpdate(Screen, IsNewVersionCheck):
 			"ok": self.go#,
 			#"cancel": self.close(None)
 		}, -1)
-		self.new_wersion_url = self.autoupdate.run()
+		#self.new_wersion_url = self.autoupdate.run()
 		
 	def go(self):
 		returnValue = self["myMenu"].l.getCurrentSelection()[1]
