@@ -1,0 +1,86 @@
+
+<!-- tplPkgSettings -->
+						<table id="contentTable">
+							${CSS=""}
+							{for file in files}
+							<tr>
+								<td class="{if CSS == '' | CSS == 'even'}${CSS='odd'}{else}${CSS='even'}{/if}" >
+									<table class="sPkgConfItem">
+										<tr>
+											<td style="width: 750px;">
+												<a class="sPkgConfsLinkExt" href="#" title="Click to show/hide content of ${file.name}">
+													<img class="sPkgConfBulletToggle" src="/web-data/img/toggle_expand.png" alt="+"></img>
+														${file.name}
+												</a>
+											</td >
+										</tr>
+										<tr class="trExtPkgConf" style="display : none;">
+											<td colspan=0>
+												<table>
+													<tr >
+														<td>
+															<form target="_blank" action="uploadtext?path=/usr/script/&filename=${file.name}" method="post"  enctype="multipart/form-data">
+																<P>
+																	<textarea name="text" rows=16 cols=100>${file.text}</textarea><br/>
+																	<input target="_blank" type="submit" value="Save" onClick="return confirm('save file to dreambox?')" >
+																	<input type="hidden" name="filename" id="${file.name}-name" value="${file.name}" >
+																	<input type="reset">
+																</P>
+															</form>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<form target="_blank" action="script">
+													Command: 
+													<input disabled name="command" type="text" id="com-${file.name}" size="30" maxlength="256" value="${file.name}" onfocus="closeIf(this,'${file.name}');" >
+													<select onchange="selectExec('${file.name}', this.value);" >
+														<option value="${file.name}" >none</option>
+														<option value="${file.name} start" >start</option>
+														<option value="${file.name} stop" >stop</option>
+														<option value="${file.name} " >userdef</option>
+													</select>
+													<input type="submit" value="exec" onclick="this.form.command.disabled=false;">
+												</form>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{forelse}
+							<tr>
+								<td>
+									<table>
+										<tr>
+											<td>No Packages to Display</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{/for}
+							<tr>
+								<td>
+									<form target="Script Upload" action="uploadtext?path=/usr/script/" method="post" enctype="multipart/form-data">
+										<table>
+										<hr/>
+											<tr>
+												<td>
+													<tr>
+														<td>Upload new *.sh</td>
+														<td><input id="finput" name="text" type="file" onChange="confirm_suffix('.sh');"></td>
+														<input type="hidden" name="filename" id="fname" >
+													</tr>
+													<tr>
+														<td colspan="2"><input type="submit" ></td>
+													</tr>
+												</td>
+											</tr>
+										</table>
+									</form>
+								</td>
+							</tr>
+						</table>
+<!-- /tplPkgSettings -->
