@@ -436,6 +436,17 @@ class SubsDownloaderApplication(Screen):
 		self.subsListDownloaded=1
 		self["subsList"].setList(self.serverAvailableSubtitles)
 		self.set_listSubs_enabled()
+	
+	def setsubsList_for_FileManager(self,serverList):
+		"""Funstion display dirs structure in subsList widget"""
+		pass
+		def dir_list(root_dir):
+			temp_dir_list = os.listdir(root_dir)
+			final_dir_list = []
+			final_dir_list.append(("..", root_dir))
+			for x in temp_dir_list:
+				final_dir_list.append((x, root_dir+"/"+x))
+			self["subsList"].setList(final_dir_list)
 		
 	def saveSubtitleasSRT(self, subtitleFile, fps, subtitleCodePage):
 		"""Function converts and saves downloaded subtitle in suitable ditectory"""
