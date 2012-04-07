@@ -1,0 +1,36 @@
+<e2:screen external_module="Plugins.Extensions.WebAdmin.WebScreens.WebAdminScreen" name="WebAdminScreen" >&lt;html>
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+	<title>E²mobile - WebAdmin</title>
+		
+	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" />
+	<link rel="dm icon" href="/web-data/img/favicon.ico" type="image/x-icon" />
+
+</head>
+<body>
+<h1>E²mobile - WebAdmin</h1>
+<table border="1" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><b>Package(ipk)</b></td>
+		<td align="middle" ><b>Updates</b></td>
+		<td align="middle" ><b>Installed</b></td>
+		<td><b></b></td>
+		<td><b></b></td>
+		<td><b></b></td>
+	</tr>
+	<e2:element source="PkgListWap" id="filter" >
+	<e2:convert type="web:ListFiller" >
+        	&lt;tr>
+			&lt;td><e2:item name="Packagename" filter="xml"/>&lt;/td>
+			&lt;td align="middle" ><e2:item name="Update" filter="xml"/>&lt;/td>
+			&lt;td align=middle ><e2:item name="State" filter="xml"/>&lt;/td>
+			&lt;td align=middle >&lt;a href="pkg?command=install&amp;package=<e2:item name="Packagename" filter="xml"/>">&lt;img src="/web-data/img/plus.png" title="install <e2:item name="Packagename" filter="xml"/>" border="0" alt="install" >&lt;/a>&lt;/td>
+			&lt;td align=middle >&lt;p border="0" >&lt;&gt;&lt;/p>&lt;/td>
+			&lt;td align=middle >&lt;a href="pkg?command=remove&amp;package=<e2:item name="Packagename" filter="xml"/>">&lt;img src="/web-data/img/off.png" title="remove <e2:item name="Packagename" filter="xml"/>" border="0" alt="remove" >&lt;/a>&lt;/td>
+        	&lt;/tr>
+	</e2:convert>
+	<e2:convert type="web:TextToHTML" />
+	</e2:element>
+</table>
+</body>
+</e2:screen>
