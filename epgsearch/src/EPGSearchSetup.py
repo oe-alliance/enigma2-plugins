@@ -1,4 +1,4 @@
-# for localized messages  	 
+# for localized messages
 from . import _
 
 # GUI (Screens)
@@ -11,6 +11,9 @@ from Screens.Setup import SetupSummary
 # GUI (Components)
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
+from Components.Label import Label
+from Components.Pixmap import Pixmap
+from Components.Sources.Boolean import Boolean
 
 # Configuration
 from Components.config import config, getConfigListEntry
@@ -33,9 +36,16 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.skinName = "Setup"
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
+		self["VKeyIcon"] = Boolean(False)
+		self['footnote'] = Label("")
+		self["status"] = StaticText()
 
 		# Summary
 		self.setup_title = _("EPGSearch Setup")
+		Screen.setTitle(self, _(self.setup_title))
 		self.onChangedEntry = []
 
 		ConfigListScreen.__init__(
@@ -46,56 +56,41 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 # 				getConfigListEntry(_("Add \"Search\" Button to EPG"), config.plugins.epgsearch.add_search_to_epg , _("If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG.")),
 			],
 			session = session,
-			on_change = self.changed
+			on_change = self.changedEntry
 		)
-		def selectionChanged():
-			if self["config"].current:
-				self["config"].current[1].onDeselect(self.session)
-			self["config"].current = self["config"].getCurrent()
-			if self["config"].current:
-				self["config"].current[1].onSelect(self.session)
-			for x in self["config"].onSelectionChanged:
-				x()
-		self["config"].selectionChanged = selectionChanged
-		self["config"].onSelectionChanged.append(self.updateHelp)
+		if config.usage.sort_settings.value:
+			self["config"].list.sort()
 
-		# Initialize widgets
-		self["key_green"] = StaticText(_("OK"))
+		self["actions"] = ActionMap(["SetupActions", 'ColorActions'],
+		{
+			"red": self.cancel,
+			"green": self.save,
+			"save": self.save,
+			"cancel": self.cancel,
+			"ok": self.save,
+		}, -2)
 		self["key_red"] = StaticText(_("Cancel"))
-		self["help"] = StaticText()
+		self["key_green"] = StaticText(_("OK"))
+		if not self.selectionChanged in self["config"].onSelectionChanged:
+			self["config"].onSelectionChanged.append(self.selectionChanged)
+		self.selectionChanged()
 
-		# Define Actions
-		self["actions"] = ActionMap(["SetupActions"],
-			{
-				"cancel": self.keyCancel,
-				"save": self.Save,
-			}
-		)
+	def selectionChanged(self):
+		self["status"].setText(self["config"].getCurrent()[2])
 
-		# Trigger change
-		self.changed()
-
-		self.onLayoutFinish.append(self.setCustomTitle)
-
-	def setCustomTitle(self):
-		self.setTitle(_("EPGSearch Setup"))
-
-	def updateHelp(self):
-		cur = self["config"].getCurrent()
-		if cur:
-			self["help"].text = cur[2]
-
-	def changed(self):
+	# for summary:
+	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
-
 	def getCurrentEntry(self):
 		return self["config"].getCurrent()[0]
-
 	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[0])
+		return str(self["config"].getCurrent()[1].getText())
+	def createSummary(self):
+		from Screens.Setup import SetupSummary
+		return SetupSummary
 
-	def Save(self):
+	def save(self):
 		self.saveAll()
 		if not config.plugins.epgsearch.showinplugins.value:
 			for plugin in plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU):
@@ -104,6 +99,11 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.close()
+
+	def cancel(self):
+		for x in self["config"].list:
+			x[1].cancel()
+		self.close(False)
 
 	def createSummary(self):
 		return SetupSummary
