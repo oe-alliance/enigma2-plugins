@@ -38,14 +38,12 @@
 					<p>... you have recorded</p>
 				</a>
 			</li>
-<!--
 			<li>
-				<a href="#timeredit">
+				<a href="timers.html">
 					<h3>Timers</h3>
-					<p>Create new or edit existing Timers.</p>
+					<p>... that have been set</p>
 				</a>
 			</li>
--->
 			<li>
 				<a href="#control">
 					<h3>Control</h3>
@@ -233,8 +231,8 @@
 		<h1>About</h1>
 	</div><!-- /header -->
 	<div data-role="content">
-		<p>Dreambox WebControl Mobile - v2.0 alpha 1<br />
-		powered by <a href="http://www.jquerymobile.com" target="_blank">jquerymobile.com</a><br />	
+		<p>Dreambox WebControl Mobile - v2.0 alpha 1 - r2<br />
+		powered by <a href="http://www.jquerymobile.com" target="_blank">jquerymobile.com</a><br />
 		All rights reserved</p>
 	</div><!-- /content -->
 	<div data-role="footer">
