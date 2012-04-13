@@ -1336,7 +1336,7 @@ var External = Class.create({
 			'name' : this.name,
 			'version' : this.version,
 			'hasGui' : this.hasGui,
-			'target' : this.target,
+			'target' : this.target
 		};
 	},
 
