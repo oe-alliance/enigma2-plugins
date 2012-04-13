@@ -8,4 +8,6 @@ install_DATA = \
 	movies.html.xml \
 	power.html.xml \
 	services.html.xml \
+	timeraddbyeventid.html.xml \
+	timers.html.xml \
 	zap.html.xml
