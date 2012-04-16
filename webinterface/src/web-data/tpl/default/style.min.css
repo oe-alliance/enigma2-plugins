@@ -80,7 +80,7 @@ a.underline{text-decoration:underline}
 #bouquetTable{width:100%;margin:0;padding:0}
 #bouquetTable li{list-style:none;margin:3px;padding:3px;position:relative;display:block;clear:both}
 .bouquetIcons{float:left;width:40px}
-.bouquetName{float:right;width:160px}
+.bouquetName{float:right;width:158px}
 #contentBouquets{border-right:1px solid #ccc;vertical-align:top;width:220px}
 #contentMain{padding:8px;margin-bottom:5px;min-height:365px;clear:both;overflow-y:auto;width:815px;color:#485052}
 #contentMain div table{float:left;width:599px}
