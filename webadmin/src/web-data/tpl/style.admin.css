@@ -1,11 +1,3 @@
-
-
-
- 
-#navContent {
-	margin-top: -7px;
-}
-
 #navMemory {
 	width: 100%;
 	height: 61px;
@@ -47,7 +39,6 @@
 
 .trExtPkgConf {
 	color: #485052
-
 }
 
 .sPkgConfsLinkExt {
@@ -65,7 +56,10 @@
 
 .PkgNavSeperator {
 	color: #fff;
-	background-color:black;
-	height:3px;
-	width:145px
+	background: #AAA;
+	border: 0px;
+	height: 1px;
+	margin: 1px 0px;
+	padding: 0;
+	width: 100%;
 }

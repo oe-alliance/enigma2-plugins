@@ -4,7 +4,7 @@ html,body {
 	font-weight: bold;
 	color: #fff;
 	text-align: center;
-	background: #555;
+	background: #555
 }
 
 input[type="text"],input[type="password"],select {
@@ -50,7 +50,7 @@ form {
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-	behavior: url(/web-data/PIE.htc);
+	behavior: url(/web-data/PIE.htc)
 }
 
 .black {
@@ -127,12 +127,12 @@ a.underline {
 	background: #000;
 	padding-left: 5px;
 	margin-bottom: 8px;
-	position: relative;
+	position: relative
 }
 
 #banner a,#banner a:visited,#banner a:active {
 	color: #FFF;
-	text-decoration: none;
+	text-decoration: none
 }
 
 #bannerText {
@@ -165,7 +165,7 @@ a.underline {
 
 #current a {
 	background: #000;
-	color: #FFF;
+	color: #FFF
 }
 
 #current {
@@ -175,7 +175,7 @@ a.underline {
 	padding-right: 3px;
 	padding-bottom: 1px;
 	margin-bottom: 8px;
-	position: relative;
+	position: relative
 }
 
 .techInfo {
@@ -274,11 +274,19 @@ a.underline {
 	background: #000;
 	padding-left: 5px;
 	border: 2px solid #000;
-	position: relative;
+	position: relative
 }
 
 #nav a {
-	display: block
+	display: block;
+	height: 20px;
+	padding: 2px
+}
+
+#nav li div {
+	display: table-cell;
+	height: 20px;
+	vertical-align: middle
 }
 
 #nav {
@@ -295,7 +303,7 @@ a.underline {
 
 #navContent {
 	color: #485052;
-	padding: 5px
+	padding: 0px
 }
 
 #navExternalsContainer {
@@ -309,7 +317,7 @@ a.underline {
 	background: #FFF;
 	margin-top: 8px;
 	border: 2px solid #000;
-	position: relative;
+	position: relative
 }
 
 #searchHd {
@@ -324,7 +332,7 @@ a.underline {
 	background: #FFF;
 	margin-top: 8px;
 	border: 2px solid #000;
-	position: relative;
+	position: relative
 }
 
 #volHd {
@@ -340,7 +348,7 @@ a.underline {
 	min-height: 308px;
 	margin-left: 8px;
 	border: 2px solid #000;
-	position: relative;
+	position: relative
 }
 
 #contentHd {
@@ -378,7 +386,7 @@ a.underline {
 
 .navTable li {
 	list-style: none;
-	margin: 3px;
+	margin: 0px;
 	padding: 0;
 	position: relative;
 	display: block
@@ -393,7 +401,7 @@ a.underline {
 .bListSLink {
 	display: block;
 	margin-right: 5px;
-	color: #485052;
+	color: #485052
 }
 
 .bListSLink:hover {
@@ -405,7 +413,7 @@ a.underline {
 .sListSName a {
 	display: block;
 	margin-right: 5px;
-	color: #485052;
+	color: #485052
 }
 
 .sListSName a:hover {
