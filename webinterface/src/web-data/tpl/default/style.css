@@ -391,13 +391,13 @@ a.underline {
 }
 
 .bListSLink {
-	display: inline-block;
+	display: block;
 	margin-right: 5px;
 	color: #485052;
 }
 
 .bListSLink:hover {
-	display: inline-block;
+	display: block;
 	background-color: #CCC;
 	color: #485052
 }
@@ -467,12 +467,11 @@ a.underline {
 
 #contentServices {
 	vertical-align: top;
-	width: 585px
+	width: 575px
 }
 
 #contentServices table {
-	scrollbar: auto;
-	width: 585px
+	scrollbar: auto
 }
 
 #bouquetTable {
@@ -483,10 +482,21 @@ a.underline {
 
 #bouquetTable li {
 	list-style: none;
-	margin: 5px;
-	padding: 0;
+	margin: 3px;
+	padding: 3px;
 	position: relative;
-	display: block
+	display: block;
+	clear: both
+}
+
+.bouquetIcons {
+	float: left;
+	width: 40px
+}
+
+.bouquetName {
+	float: right;
+	width: 160px
 }
 
 #contentBouquets {
@@ -511,7 +521,7 @@ a.underline {
 }
 
 .sListItem {
-	width: 585px;
+	width: 570px !important;
 	color: #485052
 }
 
