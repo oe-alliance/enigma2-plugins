@@ -62,8 +62,8 @@ a.underline{text-decoration:underline}
 .navTable{width:100%;margin:0;padding:0}
 .navTable li{list-style:none;margin:3px;padding:0;position:relative;display:block}
 .navTable a:hover{background-color:#CCC;color:#485052;display:block}
-.bListSLink {display:inline-block;margin-right:5px;color:#485052;}
-.bListSLink:hover{display:inline-block;background-color:#CCC;color:#485052}
+.bListSLink {display:block;margin-right:5px;color:#485052;}
+.bListSLink:hover{display:block;background-color:#CCC;color:#485052}
 .sListSName a{display:block;margin-right:5px;color:#485052;}
 .sListSName a:hover{background-color:#CCC;color:#485052;display:block}
 .sListMarker{background-color:#485052;color:#FFF}
@@ -74,14 +74,16 @@ a.underline{text-decoration:underline}
 .header{padding-top:2px;padding-left:4px;padding-right:4px;display:block;height:22px}
 #container{margin:0 auto;text-align:left;width:1005px}
 #contentTable{scrollbar:auto;width:785px}
-#contentServices{vertical-align:top;width:585px}
-#contentServices table{scrollbar:auto;width:585px}
+#contentServices{vertical-align:top;width:575px}
+#contentServices table{scrollbar:auto}
 #bouquetTable{width:100%;margin:0;padding:0}
-#bouquetTable li{list-style:none;margin:5px;padding:0;position:relative;display:block}
+#bouquetTable li{list-style:none;margin:3px;padding:3px;position:relative;display:block;clear:both}
+.bouquetIcons{float:left;width:40px}
+.bouquetName{float:right;width:160px}
 #contentBouquets{border-right:1px solid #ccc;vertical-align:top;width:220px}
 #contentMain{padding:8px;margin-bottom:5px;min-height:365px;clear:both;overflow-y:auto;width:815px;color:#485052}
 #contentMain div table{float:left;width:599px}
-.sListItem{width:585px;color:#485052}
+.sListItem{width:570px !important;color:#485052}
 .mListItem{width:780px;color:#485052}
 .mpListItem{mListItem}
 .epgStart{width:50px;color:#485052}
