@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-	"http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE HTML>
+<html manifest="/web-data/tpl/default/default.appcache">
 
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
-	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 
 	<title>Dreambox WebControl</title>
 
@@ -36,6 +33,25 @@
 	}
 	</script>
 	<script language="javascript" type="text/javascript">
+		var appCache = window.applicationCache;
+		if(appCache){
+			window.addEventListener(
+				'load',
+				function(e) {
+					window.applicationCache
+						.addEventListener(
+							'updateready',
+							function(e) {
+								if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+									window.applicationCache.swapCache();
+									if (confirm('A new version of this site is available. Load it?')) {
+										window.location.reload();
+									}
+								}// Manifest didn't change. Nothing to do.
+							}, false);
+				}, false);
+		}
+
 		function setMaxHeight(element){
 			try{
 				var slc = $(element);
