@@ -2,8 +2,8 @@ installdir = $(libdir)/enigma2/python/Plugins/Extensions/WebInterface/web-data/t
 
 SUBDIRS = streaminterface
 
-install_DATA = 	index.html \
+install_DATA = 	default.appcache \
+				index.html \
 				multiepg.css \
-				style.css \
 				style.min.css \
 				*.htm
