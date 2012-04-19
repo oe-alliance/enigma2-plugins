@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-satloader
+Version: 1.0
+Description: updates transponder file (satellites.xml)
+Maintainer: ismail <ismail.demir@gmx.at>
+Homepage: http://www.satloader.net
+Depends: enigma2 (>> 1.0git20090601)
