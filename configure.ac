@@ -477,6 +477,10 @@ rsdownloader/po/Makefile
 rsdownloader/src/Makefile
 rsdownloader/src/container/Makefile
 
+satloader/Makefile
+satloader/meta/Makefile
+satloader/src/Makefile
+
 seekbar/Makefile
 seekbar/meta/Makefile
 seekbar/po/Makefile

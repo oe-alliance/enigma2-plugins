@@ -84,6 +84,7 @@ SUBDIRS = \
 	reconstructapsc \
 	remotetimer \
 	rsdownloader \
+	satloader \
 	seekbar \
 	serienfilm \
 	setpasswd \
