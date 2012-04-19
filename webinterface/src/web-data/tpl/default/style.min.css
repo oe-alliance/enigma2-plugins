@@ -1,5 +1,5 @@
 html,body{font-family:Tahoma,Sans-Serif;font-size:14px;font-weight:bold;color:#fff;text-align:center;background:#555}
-table{font-family:inherit;font-size:inherit;font-weight:inherit;color:inherit}
+table{font-family:inherit;font-size:inherit;font-weight:inherit;color:inherit;border-spacing:0;border-collapse:collapse}
 input[type="text"],input[type="password"],select{font-family:Tahoma,Sans-Serif;font-size:14px;font-weight:bold;border:1px solid #485052;background-color:#fff;color:#485052}
 a,a:visited,a:active{color:#485052;text-decoration:none}
 img{border:0}
@@ -29,23 +29,25 @@ a.underline{text-decoration:underline}
 #powerState{border:0;margin-left:93px;text-align:right}
 #bannerRight{width:50px;text-align:right;height:60px;float:left}
 #bannerRight img{padding-top:5px}
-#current a{background:#000;color:#FFF}
 #current{width:999px;background:#000;padding-left:3px;padding-right:3px;padding-bottom:1px;margin-bottom:8px;position:relative}
 .techInfo{font-size:10px}
-#currentTable{margin-bottom:10px;padding-left:2px;padding-top:3px;width:100%}
+#current a{background:#000;color:#FFF}
+#current img{vertical-align: bottom}
+#currentTable{width:100%}
 #currentDuration{text-align:right}
-.currentBulletToggle{vertical-align:middle}
 #mainMenu{background-color:#485052;text-align:center;overflow:hidden;background:#000;margin:0;padding:0;width:940px}
 #mainMenu li{list-style:none;float:left;width:130px;height:21px;margin-left:2px;background:#485052;margin-top:6px;margin-bottom:0;padding:0;position:relative;z-index:2}
 #mainMenu a:hover,#mainMenu a:hover{background:#AAA;position:relative;z-index:3}
 #mainMenu li.hover{background:#AAA;position:relative;z-index:3}
-#mainMenu a{display:block;padding-top:1px;padding-bottom:3px}
+#mainMenu a{display:block;height:100%}
+#mainMenu span{display:block;padding-top: 3px}
 #mainMenu li.navselected{background:#AAA;position:relative;z-index:3}
 #instantRecordMenu{z-index:1000;position:relative;top:5px;right:165px;background:#FFF;color:#485052;width:205px;border:1px solid #000;opacity:.98;text-align:left}
 #instantRecordMenu button{width:200px;text-align:center}
 #navContainer{float:left;width:160px}
 #nav{width:100%;height:250px;background:#000;padding-left:5px;border:2px solid #000;position:relative}
 #nav a{display:block;height:20px;padding:2px}
+#nav a:hover{padding:1px;border: 1px solid #AAA}
 #nav li div{display:table-cell;height:20px;vertical-align:middle}
 #nav{background:#FFF;padding-left:0;padding-right:0}
 #navHd{background:#000;text-align:center;width:153px}
@@ -64,15 +66,15 @@ a.underline{text-decoration:underline}
 .navTable{width:100%;margin:0;padding:0}
 .navTable li{list-style:none;margin:0px;padding:0;position:relative;display:block}
 .navTable a:hover{background-color:#CCC;color:#485052;display:block}
-.bListSLink {display:block;margin-right:5px;color:#485052}
-.bListSLink:hover{display:block;background-color:#CCC;color:#485052}
-.sListSName a{display:block;margin-right:5px;color:#485052}
-.sListSName a:hover{background-color:#CCC;color:#485052;display:block}
+.bListSLink {display:block;margin-right:5px;color:#485052;padding:4px;}
+.bListSLink:hover{display:block;background-color:#CCC;color:#485052;padding:3px;border:1px solid #AAA}
+.sListSName a{display:block;margin-right:5px;color:#485052;padding:4px}
+.sListSName a:hover{display:block;background-color:#CCC;color:#485052;padding:3px;border:1px solid #AAA}
 .sListMarker{background-color:#485052;color:#FFF}
 .sListEPGItem{font-size:12px;margin:0;padding:0}
-.sListSProgress{display:inline-block;margin:0;border:1px solid #485052;width:50px;height:10px;padding:1px}
+.sListSProgress{display:inline-block;margin:4px 1px 1px 1px;border:1px solid #485052;width:50px;height:10px;padding:1px}
 .sListSProgressBar{margin:0;background-color:#60aef2;width:0;height:100%}
-.sListExtEpg{display: block}
+.sListExtEpg{display: block;padding:1px}
 .header{padding-top:2px;padding-left:4px;padding-right:4px;display:block;height:22px}
 #container{margin:0 auto;text-align:left;width:1005px}
 #contentTable{scrollbar:auto;width:785px}
@@ -80,7 +82,7 @@ a.underline{text-decoration:underline}
 #contentServices table{scrollbar:auto}
 #bouquetTable{width:100%;margin:0;padding:0}
 #bouquetTable li{list-style:none;margin:3px;padding:3px;position:relative;display:block;clear:both}
-.bouquetIcons{float:left;width:40px}
+.bouquetIcons{float:left;width:40px;padding-top:3px}
 .bouquetName{float:right;width:158px}
 #contentBouquets{border-right:1px solid #ccc;vertical-align:top;width:220px}
 #contentMain{padding:8px;margin-bottom:5px;min-height:365px;clear:both;overflow-y:auto;width:815px;color:#485052}
@@ -131,6 +133,7 @@ a.underline{text-decoration:underline}
 .timerState1{color:#900}
 .timerState2{color:#090}
 .timerState3{color:#009}
+#timerEditForm table{cell-spacing:1px}
 a.tEditTag{margin:3px 0 3px 0;padding:3px;display:inline-block;border:1px solid #CCC}
 a.selected{background:#ff9}
 .epgListItem{font-size:12px;font-weight:bold}
