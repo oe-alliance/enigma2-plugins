@@ -251,7 +251,12 @@ class Timer(Source):
 			return ( False, "Missing Parameter: description" )
 		description = param['description'].replace("\n", " ")
 
-		eit = int(param.get("eit", "0"))
+		eit = param.get("eit", "")
+		if eit.strip() == "":
+			eit = 0
+		else:
+			eit = int(eit)
+
 		print "[WebComponents.Sources.Timer]: eit=%s" %eit
 		if eit != 0:
 			#check if the given event exists, if it doesn't return an error
