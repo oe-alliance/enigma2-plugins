@@ -7,6 +7,7 @@ form{margin:2px}
 #notification{color:#000;width:50%;height:32px;position:absolute;top:0;left:25%;text-align:center;vertical-align:bottom;z-index:2}
 .wap a,.wap a:visited,.wap a:active{color:#fff}
 .rounded{display:block;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;behavior:url(/web-data/PIE.htc)}
+.roundedNav{display:block;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px}
 .black{background:#000;color:#FFF}
 .odd{background-color:#FFF}
 .even{background-color:#DDD}
