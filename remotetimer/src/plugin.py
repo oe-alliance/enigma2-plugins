@@ -170,6 +170,7 @@ class RemoteTimerScreen(Screen):
 						sname = str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')),
 						name = str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
 						disabled = int(timer.findtext("e2disabled", 0)),
+						failed = int(timer.findtext("e2failed", 0)),
 						timebegin = int(timer.findtext("e2timebegin", 0)),
 						timeend = int(timer.findtext("e2timeend", 0)),
 						duration = int(timer.findtext("e2duration", 0)),
@@ -188,13 +189,14 @@ class RemoteTimerScreen(Screen):
 			]
 
 class E2Timer:
-	def __init__(self, sref = "", sname = "", name = "", disabled = 0, \
+	def __init__(self, sref = "", sname = "", name = "", disabled = 0, failed = 0, \
 			timebegin = 0, timeend = 0, duration = 0, startprepare = 0, \
 			state = 0, repeated = 0, justplay = 0, eventId = 0, afterevent = 0, \
 			dirname = "", description = ""):
 		self.service_ref = RemoteService(sref, sname)
 		self.name = name
 		self.disabled = disabled
+		self.failed = failed
 		self.begin = timebegin
 		self.end = timeend
 		self.duration = duration
