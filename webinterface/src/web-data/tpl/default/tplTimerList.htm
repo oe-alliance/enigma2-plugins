@@ -60,17 +60,21 @@
 								<td>No Timers Available!</td>
 							</tr>
 							{/for}
+							<tr>
+								<td>
+									<div class="legendRow">
+										<div class="legendCol">Legend:</div>
+										<div class="legendCol timerState0">Waiting</div>
+										<div class="legendCol timerState1">Error</div>
+										<div class="legendCol timerState2">Running</div>
+										<div class="legendCol timerState3">Finished</div>
+									</div>
+								</td>
+							</tr>
 							<tr style="width:100%;">
 								<td>
 									<button class="tListCleanup" title="Cleans up the list of timers by removing e.g. finished timers">Timer list cleanup</button>
 								</td>
 							</tr>
 						</table>
-						<div class="row">
-							<div class="col">Legend:</div>
-							<div class="col timerState0">Waiting</div>
-							<div class="col timerState1">Error</div>
-							<div class="col timerState2">Running</div>
-							<div class="col timerState3">Finished</div>
-						</div>
 <!-- /tplTimerList -->
