@@ -1,5 +1,6 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Screens.Standby import TryQuitMainloop
 from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -37,9 +38,9 @@ class Satloader(Screen):
 			</screen>"""
 
 	
-	def __init__(self, session, url = None, path = None):
+	def __init__(self, session, url=None, path=None):
 		self.session = session
-		
+
 		list = []
 		list.append((_("Kingofsat satellites.xml (no feed)"), "http://satellites.satloader.net/satellites.xml"))
 		list.append((_("Kingofsat satellites.xml (with feed)"), "http://satellites.satloader.net/feeds.xml"))
@@ -79,8 +80,13 @@ class getSatfromUrl(object):
 		self.session.open(MessageBox, text = _("Error downloading"), type = MessageBox.TYPE_ERROR)
 
 	def downloadDone(self,raw):
-		self.session.open(MessageBox, text = _("Downloading: Success\n\nPlease restart Enigma2 manually"), type = MessageBox.TYPE_INFO)
+		restart = self.session.openWithCallback(self.restart,MessageBox,_("satellites.xml is up-to-date")+_("\n\n")+_("GUI needs a restart to apply changes.")+_("\n")+_("Do you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
+		restart.setTitle(_("Restart GUI now?"))
 
+	def restart(self, ret):
+		if ret is True:
+			self.session.open(TryQuitMainloop, 3)
+		
 ###########################################################################
 
 def main(session, **kwargs):
