@@ -591,7 +591,7 @@ class InfoBar(InfoBarOrg):
 		# Workaround: Show Dummy Popup for a second to prevent StandBy Bug
 		if action is None and postaction == "standby" and (config.plugins.pts.favoriteSaveAction.value == "savetimeshift" or config.plugins.pts.favoriteSaveAction.value == "savetimeshiftandrecord"):
 			self.session.open(MessageBox, _("Saving timeshift as movie now. This might take a while!"), MessageBox.TYPE_INFO, timeout=1)
-
+			
 		# Post PTS Actions like ZAP or whatever the user requested
 		if self.save_timeshift_postaction == "zapUp":
 			InfoBarChannelSelection.zapUp(self)
@@ -1593,11 +1593,26 @@ def instantRecord(self):
 	dir = preferredInstantRecordPath()
 	if not dir or not fileExists(dir, 'w'):
 		dir = defaultMoviePath()
-	try:
-		stat = os_stat(dir)
-	except:
-		self.session.open(MessageBox, _("No HDD found or HDD not initialized!"), MessageBox.TYPE_ERROR)
-		return
+		
+	if not harddiskmanager.inside_mountpoint(dir):
+		if harddiskmanager.HDDCount() and not harddiskmanager.HDDEnabledCount():
+			self.session.open(MessageBox, _("Unconfigured storage devices found!") + "\n" \
+				+ _("Please make sure to set up your storage devices with the storage management in menu -> setup -> system -> storage devices."), MessageBox.TYPE_ERROR)
+			return
+		elif harddiskmanager.HDDEnabledCount() and defaultStorageDevice() == "<undefined>":
+			self.session.open(MessageBox, _("No default storage device found!") + "\n" \
+				+ _("Please make sure to set up your default storage device in menu -> setup -> system -> recording paths."), MessageBox.TYPE_ERROR)
+			return
+		elif harddiskmanager.HDDEnabledCount() and defaultStorageDevice() != "<undefined>":
+			part = harddiskmanager.getDefaultStorageDevicebyUUID(defaultStorageDevice())
+			if part is None:
+				self.session.open(MessageBox, _("Default storage device is not available!") + "\n" \
+					+ _("Please verify if your default storage device is attached or set up your default storage device in menu -> setup -> system -> recording paths."), MessageBox.TYPE_ERROR)
+				return
+		else:
+			# XXX: this message is a little odd as we might be recording to a remote device
+			self.session.open(MessageBox, _("No HDD found or HDD not initialized!"), MessageBox.TYPE_ERROR)
+			return
 
 	if self.isInstantRecordRunning():
 		self.session.openWithCallback(self.recordQuestionCallback, ChoiceBox, \
