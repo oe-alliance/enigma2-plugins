@@ -8,6 +8,7 @@
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigInteger, ConfigSelection, NoSave
+from Components.Harddisk import harddiskmanager
 from Components.Label import Label
 from Components.Language import language
 from Components.Pixmap import Pixmap
