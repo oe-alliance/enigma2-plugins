@@ -476,6 +476,9 @@ class InfoBar(InfoBarOrg):
 			if self.isSeekable():
 				self.pts_switchtolive = True
 				self.ptsSetNextPlaybackFile("")
+				#IF NEW OE 2.0:
+				#self.doSeekRelative(3600 * 24 * 60 * 90000)
+				#ELSE:
 				self.setSeekState(self.SEEK_STATE_PAUSE)
 				if self.seekstate != self.SEEK_STATE_PLAY:
 					self.setSeekState(self.SEEK_STATE_PLAY)
