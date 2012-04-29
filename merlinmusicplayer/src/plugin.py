@@ -918,6 +918,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self["album"] = Label()
 		self["artist"] = Label()
 		self["genre"] = Label()
+		self["track"] = Label()
 		self["nextTitle"] = Label()
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 			{
@@ -1069,7 +1070,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			self.session.nav.playService(sref)
 			if self.iDreamMode:
 				self.updateMusicInformation( self.songList[self.currentIndex][0].artist, self.songList[self.currentIndex][0].title, 
-					self.songList[self.currentIndex][0].album, self.songList[self.currentIndex][0].genre, self.songList[self.currentIndex][0].date, clear = True )
+					self.songList[self.currentIndex][0].album, self.songList[self.currentIndex][0].genre, self.songList[self.currentIndex][0].date, self.songList[self.currentIndex][0].track.replace("Track",""), clear = True )
 			else:
 				path,filename = os_path.split(self.currentFilename)
 				audio, isAudio, title, genre,artist,album,tracknr,track,date,length,bitrate = getID3Tags(path,filename)
@@ -1078,7 +1079,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 						year = "(%s)" % str(date)
 					else:
 						year = ""
-					self.updateMusicInformation( artist, title, album, genre, year, clear = True )
+					self.updateMusicInformation( artist, title, album, genre, year, track, clear = True )
 				else:
 					self.updateMusicInformation( title = title, clear = True)
 				audio = None
@@ -1115,6 +1116,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.updateSingleMusicInformation("artist", self.songList[self.currentIndex][0].artist, True)
 		self.updateSingleMusicInformation("title", self.songList[self.currentIndex][0].title, True)
 		self.updateSingleMusicInformation("album", self.songList[self.currentIndex][0].album, True)
+		self.updateSingleMusicInformation("track", self.songList[self.currentIndex][0].track.replace("Track",""), True)
 		self.summaries.setText(self.songList[self.currentIndex][0].title,1)
 		if self.screenSaverScreen:
 			self.screenSaverScreen.updateLCD(self.songList[self.currentIndex][0].title,1)
@@ -1137,25 +1139,39 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			sArtist = currPlay.info().getInfoString(iServiceInformation.sTagArtist)
 			sGenre = currPlay.info().getInfoString(iServiceInformation.sTagGenre)
 			sYear = currPlay.info().getInfoString(iServiceInformation.sTagDate)
+			# unfortunately servicemp3 is not supporting (lets change this...) sTagTrackNumber and sTagTrackCount ...
+#			sTrackNumber = currPlay.info().getInfoString(iServiceInformation.sTagTrackNumber)
+#			sTrackCount = currPlay.info().getInfoString(iServiceInformation.sTagTrackCount)
+			track = ""
+#			if sTrackNumber:
+#				track = sTrackNumber
+#			if sTrackNumber and sTrackCount:
+#				track = "%s/%s" % (sTrackNumber,sTrackCount)
+#			else:
+#				track = sTrackNumber
+			path,filename = os_path.split(self.currentFilename)
+			audio, isAudio, title, genre,artist,album,tracknr,track,date,length,bitrate = getID3Tags(path,filename)
 			if sYear:
 				sYear = "(%s)" % sYear
 			if not sTitle:
 				sTitle = os_path.splitext(os_path.basename(self.currentFilename))[0]
 			
 			if self.songList[self.currentIndex][0].PTS is None:
-				self.updateMusicInformation( sArtist, sTitle, sAlbum, sGenre, sYear, clear = True )
+				self.updateMusicInformation( sArtist, sTitle, sAlbum, sGenre, sYear, track, clear = True )
 			else:
 				self.updateSingleMusicInformation("genre", sGenre, True)
 		else:
 			self.updateMusicInformation()
 
-	def updateMusicInformation(self, artist = "", title = "", album = "", genre = "", year = "", clear = False):
+	def updateMusicInformation(self, artist = "", title = "", album = "", genre = "", year = "", track = "", clear = False):
 		if year and album:
 			album = "%s %s" % (album, year)
 		self.updateSingleMusicInformation("artist", artist, clear)
 		self.updateSingleMusicInformation("title", title, clear)
 		self.updateSingleMusicInformation("album", album, clear)
 		self.updateSingleMusicInformation("genre", genre, clear)
+		self.updateSingleMusicInformation("track", track, clear)
+
 		self.currentTitle = title
 		if not self.iDreamMode and self.songList[self.currentIndex][0].PTS is None:
 			# for lyrics

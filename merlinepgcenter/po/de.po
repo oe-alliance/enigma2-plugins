@@ -69,10 +69,6 @@ msgstr "Reduziere Suchergebnisse auf Sender in Bouquets:"
 msgid "Exit on TV <-> Radio switch:"
 msgstr "Beenden beim Wechsel TV <--> Radio:"
 
-#: ConfigTabs.py:179
-msgid "Show timer messages:"
-msgstr "Zeige Meldungen von Timern:"
-
 #: ConfigTabs.py:180
 msgid "Adjust font size:"
 msgstr "Schriftgröße anpassen:"
