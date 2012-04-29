@@ -74,10 +74,6 @@ msgstr "Limitare i risultati ai canali nei bouquet:"
 msgid "Exit on TV <-> Radio switch:"
 msgstr "Uscire al passaggio TV <<>> Radio"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:179
-msgid "Show timer messages:"
-msgstr "Mostrare i messaggi timer:"
-
 #: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:180
 msgid "Adjust font size:"
 msgstr "Regolare dim. carattere:"

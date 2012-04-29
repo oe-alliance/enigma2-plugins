@@ -71,10 +71,6 @@ msgstr ""
 msgid "Exit on TV <-> Radio switch:"
 msgstr ""
 
-#: ConfigTabs.py:179
-msgid "Show timer messages:"
-msgstr ""
-
 #: ConfigTabs.py:180
 msgid "Adjust font size:"
 msgstr ""
