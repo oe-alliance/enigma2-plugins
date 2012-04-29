@@ -6,8 +6,10 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from twisted.web.client import downloadPage
-from enigma import getDesktop
+from enigma import getDesktop, eListbox, eListboxPythonMultiContent, gFont, RT_VALIGN_CENTER
+from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
+import os
 
 #######################
 
@@ -15,7 +17,7 @@ class Satloader(Screen):
 	framewidth = getDesktop(0).size().width()
 	if framewidth == 1280:
 		skin = """
-			<screen position="240,130" size="800,450" title="Satloader Plugin" >
+			<screen position="240,130" size="800,500" title="Satloader Plugin" >
 				<ePixmap position="8,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_red_sm.png" alphatest="on" />
 				<ePixmap position="206,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_green_sm.png" alphatest="on" />
 				<ePixmap position="404,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_yellow_sm.png" alphatest="on" />
@@ -24,8 +26,8 @@ class Satloader(Screen):
 				<widget name="key_green" position="206,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_yellow" position="404,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_blue" position="602,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="config" position="10,40" size="780,360" scrollbarMode="showOnDemand" />
-				<widget name="info" position="10,410" size="780,30" zPosition="10" font="Regular;22" valign="center" halign="center" />
+				<widget name="config" position="10,40" size="780,400" scrollbarMode="showOnDemand" />
+				<widget name="info" position="10,450" size="780,40" zPosition="10" font="Regular;22" valign="center" halign="center" />
 			</screen>"""
 	elif framewidth == 720:
 		skin = """
@@ -46,7 +48,7 @@ class Satloader(Screen):
 		self.session = session
 
 		Screen.__init__(self, session)
-		self["config"] = MenuList(list)
+		self["config"] = SatloaderList(list)
 		self["info"] = Label()
 		self["key_red"] = Label(_("Cancel"))
 		self["key_green"] = Label()
@@ -81,10 +83,11 @@ class Satloader(Screen):
 			self.buildSatellites()
 
 	def btnYellow(self):
+		png="/usr/share/enigma2/skin_default/icons/lock_off.png"
 		list = []
-		list.append((_("Kingofsat satellites.xml (no feed)"), "http://satellites.satloader.net/satellites.xml"))
-		list.append((_("Kingofsat satellites.xml (with feed)"), "http://satellites.satloader.net/feeds.xml"))
-		list.append((_("Satbeams satellites.xml"), "http://satellites.satloader.net/satbeam.xml"))
+		list.append((self, MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(35, 25), png=LoadPixmap(png)), MultiContentEntryText(pos=(40, 3), size=(750, 25), font=0, flags=RT_VALIGN_CENTER, text="Kingofsat satellites.xml"), "http://satellites.satloader.net/satellites.xml"))
+		list.append((self, MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(35, 25), png=LoadPixmap(png)), MultiContentEntryText(pos=(40, 3), size=(750, 25), font=0, flags=RT_VALIGN_CENTER, text="Kingofsat satellites.xml (feed)"), "http://satellites.satloader.net/feeds.xml"))
+		list.append((self, MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(35, 25), png=LoadPixmap(png)), MultiContentEntryText(pos=(40, 3), size=(750, 25), font=0, flags=RT_VALIGN_CENTER, text="Satbeams satellites.xml"), "http://satellites.satloader.net/satbeam.xml"))
 
 		self["key_green"].setText("OK")
 		self["info"].setText("Press green or ok button to download satellites.xml")
@@ -92,25 +95,26 @@ class Satloader(Screen):
 
 	def btnBlue(self):
 		self["info"].setText("Downloading feeds from server ...")
-		self.downloadList("list")
+		self.downloadList("entry")
 
 	def downloadList(self, key):
-		if key == "sat":
-			downloadPage(self["config"].l.getCurrentSelection()[1], "/etc/tuxbox/satellites.xml").addCallback(self.downloadListSATCallback).addErrback(self.downloadListError)
+		if key == "entry":
+			downloadPage("http://satellites.satloader.net/transponder/transponder.lst", "/tmp/transponder.lst").addCallback(self.downloadListEntryCallback).addErrback(self.downloadListError)
+		elif key == "sat":
+			downloadPage(self["config"].l.getCurrentSelection()[3], "/etc/tuxbox/satellites.xml").addCallback(self.downloadListSATCallback).addErrback(self.downloadListError)
 		elif key == "tp":
-			downloadPage(self["config"].l.getCurrentSelection()[1], "/tmp/tp_"+self["config"].l.getCurrentSelection()[0]+".xml").addCallback(self.downloadListBUILDCallback).addErrback(self.downloadListError)
-		elif key == "list":
-			downloadPage("http://satellites.satloader.net/transponder/transponder.lst", "/tmp/transponder.lst").addCallback(self.downloadListTPCallback).addErrback(self.downloadListError)
+	  		if not os.path.exists("/tmp/transponder"):
+				os.mkdirs("/tmp/transponder")
 
-	def downloadListError(self, raw):
+			satname=self["config"].l.getCurrentSelection()[3].split("/")
+			downloadPage(self["config"].l.getCurrentSelection()[3], "/tmp/transponder/"+satname[4]).addCallback(self.downloadListTPCallback).addErrback(self.downloadListError)
+
+	def downloadListError(self, ret):
 		self.session.open(MessageBox, text = _("Error downloading!"), type = MessageBox.TYPE_ERROR)
 		self["info"].setText("Error downloading!")
 
-	def downloadListSATCallback(self, raw):
-		restart = self.session.openWithCallback(self.restart,MessageBox,_("satellites.xml is up-to-date")+_("\n\n")+_("GUI needs a restart to apply changes.")+_("\n")+_("Do you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
-		restart.setTitle(_("Restart GUI now?"))
-
-	def downloadListTPCallback(self, raw):
+	def downloadListEntryCallback(self, ret):
+		png = "/usr/share/enigma2/skin_default/icons/lock_off.png"
 		self["info"].setText("Parsing Feeds ...")
 
 		try:
@@ -118,9 +122,9 @@ class Satloader(Screen):
 			f = open('/tmp/transponder.lst', 'r')
 			for line in f.readlines():
 				m = line.split(";")
-				list.append((_(m[0]), m[1]))
+				list.append((self, MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(35, 25), png=LoadPixmap(png)), MultiContentEntryText(pos=(40, 3), size=(750, 25), font=0, flags=RT_VALIGN_CENTER, text=m[0]), m[1]))
 			f.close()
-			
+
 			if list is not None:
 				self["key_green"].setText("Build")
 				self["info"].setText("Press ok button to download selected transponders")
@@ -129,15 +133,36 @@ class Satloader(Screen):
 			print "Error:", e
 			self["info"].setText("Error:", e)
 
-	def downloadListBUILDCallback(self, raw):
-		self["info"].setText(self["config"].l.getCurrentSelection()[0] + " added.")
+	def downloadListSATCallback(self, ret):
+		restart = self.session.openWithCallback(self.restart,MessageBox,_("satellites.xml is up-to-date")+"\n\n"+_("GUI needs a restart to apply changes.")+"\n"+_("Do you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
+		restart.setTitle(_("Restart GUI now?"))
+
+	def downloadListTPCallback(self, ret):
+		self["info"].setText(self["config"].l.getCurrentSelection()[2][7]+" added.")
+
+	def buildSatellites(self):
+		f = open('/etc/tuxbox/satellites.xml', 'w+')
+		f.write('<?xml version="1.0" ?>\n<!--\nsatellites.xml generated by Satloader Plugin\n(c)2009-2012 Ismail Demir www.satloader.net\n-->\n\n<satellites>\n')
+		
+		for fname in os.listdir("/tmp/transponder"):
+			f.write(open("/tmp/transponder/"+fname,"rb").read())
+			os.remove("/tmp/transponder/"+fname)
+
+		f.write('</satellites>')
+		f.close()
+		
+		restart = self.session.openWithCallback(self.restart,MessageBox,_("satellites.xml building finished!")+"\n\n"+_("GUI needs a restart to apply changes.")+"\n"+_("Do you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
+		restart.setTitle(_("Restart GUI now?"))
 
 	def restart(self, ret):
 		if ret is True:
 			self.session.open(TryQuitMainloop, 3)
 
-	def buildSatellites(self):
-		self.session.open(MessageBox, text = _("coming soon ..."), type = MessageBox.TYPE_INFO)
+class SatloaderList(MenuList):
+	def __init__(self, list):
+		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
+		self.l.setItemHeight(25)
+		self.l.setFont(0, gFont("Regular", 22))
 
 #######################
 
