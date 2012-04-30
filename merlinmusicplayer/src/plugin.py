@@ -1145,7 +1145,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			if sTrackNumber and sTrackCount:
 				track = "%s/%s" % (sTrackNumber,sTrackCount)
 			elif sTrackNumber:
-				track = sTrackNumber
+				track = str(sTrackNumber)
 			if sYear:
 				sYear = "(%s)" % sYear
 			if not sTitle:
