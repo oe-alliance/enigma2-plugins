@@ -1139,18 +1139,13 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			sArtist = currPlay.info().getInfoString(iServiceInformation.sTagArtist)
 			sGenre = currPlay.info().getInfoString(iServiceInformation.sTagGenre)
 			sYear = currPlay.info().getInfoString(iServiceInformation.sTagDate)
-			# unfortunately servicemp3 is not supporting (lets change this...) sTagTrackNumber and sTagTrackCount ...
-#			sTrackNumber = currPlay.info().getInfoString(iServiceInformation.sTagTrackNumber)
-#			sTrackCount = currPlay.info().getInfoString(iServiceInformation.sTagTrackCount)
+			sTrackNumber = currPlay.info().getInfo(iServiceInformation.sTagTrackNumber)
+			sTrackCount = currPlay.info().getInfo(iServiceInformation.sTagTrackCount)
 			track = ""
-#			if sTrackNumber:
-#				track = sTrackNumber
-#			if sTrackNumber and sTrackCount:
-#				track = "%s/%s" % (sTrackNumber,sTrackCount)
-#			else:
-#				track = sTrackNumber
-			path,filename = os_path.split(self.currentFilename)
-			audio, isAudio, title, genre,artist,album,tracknr,track,date,length,bitrate = getID3Tags(path,filename)
+			if sTrackNumber and sTrackCount:
+				track = "%s/%s" % (sTrackNumber,sTrackCount)
+			elif sTrackNumber:
+				track = sTrackNumber
 			if sYear:
 				sYear = "(%s)" % sYear
 			if not sTitle:
