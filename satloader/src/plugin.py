@@ -104,7 +104,7 @@ class Satloader(Screen):
 			downloadPage(self["config"].l.getCurrentSelection()[3], "/etc/tuxbox/satellites.xml").addCallback(self.downloadListSATCallback).addErrback(self.downloadListError)
 		elif key == "tp":
 	  		if not os.path.exists("/tmp/transponder"):
-				os.mkdirs("/tmp/transponder")
+				os.mkdir("/tmp/transponder")
 
 			satname=self["config"].l.getCurrentSelection()[3].split("/")
 			downloadPage(self["config"].l.getCurrentSelection()[3], "/tmp/transponder/"+satname[4]).addCallback(self.downloadListTPCallback).addErrback(self.downloadListError)
