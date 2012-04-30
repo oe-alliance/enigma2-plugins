@@ -452,7 +452,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		else:
 			self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor(config.plugins.merlinEpgCenter.tabTextColorSelected.value)) # active
 			
-############################################################################################
+	############################################################################################
 	# VOLUME CONTROL
 	
 	def toggleEmbeddedVolume(self, configElement = None):
@@ -2024,6 +2024,14 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				if cur:
 					self.session.open(YTTrailerList, cur.name)
 					
+	def keyAudio(self):
+		if self.currentMode == SINGLE_EPG:
+			if self.epgTabObjectList[self.currentMode].sortMode == EpgSingleTab.SORT_MODE_TIME:
+				self.epgTabObjectList[self.currentMode].sortMode = EpgSingleTab.SORT_MODE_NAME
+			else:
+				self.epgTabObjectList[self.currentMode].sortMode = EpgSingleTab.SORT_MODE_TIME
+			self.epgTabObjectList[self.currentMode].sort()
+			
 	############################################################################################
 	# TAB TOGGLING
 	
