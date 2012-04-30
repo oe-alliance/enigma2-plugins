@@ -2024,7 +2024,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				if cur:
 					self.session.open(YTTrailerList, cur.name)
 					
-	def keyAudio(self):
+	def keyText(self):
 		if self.currentMode == SINGLE_EPG:
 			if self.epgTabObjectList[self.currentMode].sortMode == EpgSingleTab.SORT_MODE_TIME:
 				self.epgTabObjectList[self.currentMode].sortMode = EpgSingleTab.SORT_MODE_NAME
