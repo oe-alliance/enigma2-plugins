@@ -141,7 +141,7 @@ def Plugins(**kwargs):
 	list.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart_ChannelContextMenu))
 
 
-	list.append(PluginDescriptor(name="Setup Partnerbox", description=_("setup for partnerbox"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup))
+	list.append(PluginDescriptor(name="Setup Partnerbox", description=_("setup for partnerbox"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "Setup_Partnerbox.png", fnc=setup))
 	if config.plugins.Partnerbox.showremotetimerinextensionsmenu.value:
 		list.append(PluginDescriptor(name="Partnerbox: RemoteTimer", description=_("Manage timer for other dreamboxes in network"), 
 		where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
