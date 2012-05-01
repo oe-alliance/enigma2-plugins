@@ -276,7 +276,7 @@ def playService(self, service):
 
 def Plugins(**kwargs):
 	list = []
-	list.append(PluginDescriptor(name="Setup PiPServiceRelation", description=_("setup for PiPServiceRelation"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup))
+	list.append(PluginDescriptor(name="Setup PiPServiceRelation", description=_("setup for PiPServiceRelation"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "PiPServiceRelation.png", fnc=setup))
 	list.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart_PictureInPicture))
 	return list
 
