@@ -1,7 +1,6 @@
 Package: enigma2-plugin-extensions-svdrp
 Version: 0.1-20110227-r0
 Description: basic remote control server using svdrp
-Architecture: mipsel
 Section: extra
 Priority: optional
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
