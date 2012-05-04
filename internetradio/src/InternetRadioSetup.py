@@ -27,6 +27,9 @@ from Components.config import config, getConfigListEntry, configfile
 from Components.FileList import FileList
 from Components.Sources.StaticText import StaticText
 
+# for localized messages
+from . import _
+
 class InternetRadioSetup(Screen, ConfigListScreen):
 
 	skin = """

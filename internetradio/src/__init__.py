@@ -27,7 +27,7 @@ import os,gettext
 def localeInit():
 	lang = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
 	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-	gettext.bindtextdomain("InternetRadio", resolveFilename(SCOPE_PLUGINS, "SystemPlugins/InternetRadio/locale"))
+	gettext.bindtextdomain("InternetRadio", resolveFilename(SCOPE_PLUGINS, "Extensions/InternetRadio/locale"))
 
 def _(txt):
 	t = gettext.dgettext("InternetRadio", txt)
