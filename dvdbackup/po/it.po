@@ -36,10 +36,10 @@ msgstr "Errone in esecuzione backup DVD!"
 
 #: /home/dario/Plugins/DVDBackup/plugin.py:169
 msgid ""
-"mkisofs job done.\n"
+"genisoimage job done.\n"
 "Delete DVD directory?"
 msgstr ""
-"mkisofs job terminato.\n"
+"genisoimage job terminato.\n"
 "Cancellare la cartella DVD?"
 
 #: /home/dario/Plugins/DVDBackup/plugin.py:184
