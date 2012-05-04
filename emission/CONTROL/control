@@ -1,7 +1,6 @@
 Package: enigma2-plugin-extensions-emission
 Version: 1.0-20110929-r0
 Description: basic frontend to the transmission bittorrent client
-Architecture: mipsel
 Section: extra
 Priority: optional
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
