@@ -79,13 +79,13 @@ def eject(dev):
 class DVDBackupFile:
 	def __init__(self, name, size):
 		self.name = name
-		if name != "mkisofs":
+		if name != "genisoimage":
 			self.name = ("%s/%s/%s"%(config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value, name)).replace("//", "/")
 		self.size = size
 		self.progress = 0
 
 	def checkProgress(self):
-		if self.name != "mkisofs":
+		if self.name != "genisoimage":
 			if fileExists(self.name):
 				if self.progress < 100:
 					file_stats = os.stat(self.name)
@@ -157,15 +157,15 @@ class DVDBackup:
 				path = ("%s/%s"%(config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value)).replace("//", "/")
 				if not self.console:
 					self.console = eConsole()
-				self.mkisofs = DVDBackupFile("mkisofs", 0)
-				self.files.append(self.mkisofs)
-				cmd = 'mkisofs -dvd-video -udf -o "%s.iso" "%s"'%(path, path)
-				self.console.ePopen(cmd, self.mkisofsCallback)
-				self.console.appContainers[cmd].dataAvail.append(boundFunction(self.mkisofsProgress, cmd))
+				self.genisoimage = DVDBackupFile("genisoimage", 0)
+				self.files.append(self.genisoimage)
+				cmd = 'genisoimage -dvd-video -udf -o "%s.iso" "%s"'%(path, path)
+				self.console.ePopen(cmd, self.genisoimageCallback)
+				self.console.appContainers[cmd].dataAvail.append(boundFunction(self.genisoimageProgress, cmd))
 			else:
 				self.finished()
 
-	def mkisofsProgress(self, name, data):
+	def genisoimageProgress(self, name, data):
 		if data.__contains__("%"):
 			for x in data.split("\n"):
 				if x.__contains__("%"):
@@ -174,18 +174,18 @@ class DVDBackup:
 						x = x[:x.index(".")]
 					x = x.replace(" ", "")
 					if x != "":
-						self.mkisofs.progress = int(x)
+						self.genisoimage.progress = int(x)
 
-	def mkisofsCallback(self, result, retval, extra_args):
+	def genisoimageCallback(self, result, retval, extra_args):
 		if retval != 0:
 			message(_("Error while backup of DVD!"))
 			print "[DVD Backup]", result
 			self.working = False
 		else:
-			self.mkisofs.progress = 100
-			SESSION.openWithCallback(self.mkisofsCallback2, MessageBox, _("mkisofs job done.\nDelete DVD directory?"))
+			self.genisoimage.progress = 100
+			SESSION.openWithCallback(self.genisoimageCallback2, MessageBox, _("genisoimage job done.\nDelete DVD directory?"))
 
-	def mkisofsCallback2(self, yesno):
+	def genisoimageCallback2(self, yesno):
 		if yesno:
 			cmd = ("rm -R %s/%s"%(config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value)).replace("//", "/")
 			try: os.system(cmd)
@@ -289,8 +289,8 @@ class DVDBackupProgress(Screen):
 				self.console = eConsole()
 			tool = "dvdbackup"
 			for file in dvdbackup.files:
-				if file.name == "mkisofs":
-					tool = "mkisofs"
+				if file.name == "genisoimage":
+					tool = "genisoimage"
 			self.console.ePopen("killall -9 %s"%tool, self.abortCallback)
 
 	def abortCallback(self, result, retval, extra_args):

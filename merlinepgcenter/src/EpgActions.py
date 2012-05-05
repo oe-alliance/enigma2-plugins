@@ -72,6 +72,7 @@ class MerlinEPGActions():
 			"showEventInfo":	self.keyInfo,
 			"ok":			self.keyOk,
 			"video":		self.keyVideo,
+			"text":			self.keyText,
 		}, -1)
 		
 		# EPG HISTORY ACTIONS

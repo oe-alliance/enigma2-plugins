@@ -41,6 +41,7 @@ SUBDIRS = \
 	httpproxy \
 	imdb \
 	infobartunerstate \
+	internetradio \
 	kiddytimer \
 	lastfm \
 	letterbox \

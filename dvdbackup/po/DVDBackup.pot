@@ -34,7 +34,7 @@ msgstr ""
 
 #: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:186
 msgid ""
-"mkisofs job done.\n"
+"genisoimage job done.\n"
 "Delete DVD directory?"
 msgstr ""
 
