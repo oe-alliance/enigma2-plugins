@@ -5,6 +5,8 @@ from enigma import eServiceReference
 from Components.config import config
 from Components.SystemInfo import SystemInfo
 from time import localtime
+from OrderedSet import OrderedSet
+from ServiceReference import ServiceReference
 try:
 	from urllib import unquote
 	iteritems = lambda d: d.iteritems()
@@ -12,7 +14,7 @@ except ImportError as ie:
 	from urllib.parse import unquote
 	iteritems = lambda d: d.items()
 
-API_VERSION = "1.1"
+API_VERSION = "1.2"
 
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
@@ -135,6 +137,57 @@ class EPGRefreshListServicesResource(resource.Resource):
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(epgrefresh.buildConfiguration(webif = True))
+
+class EPGRefreshPreviewServicesResource(resource.Resource):
+	def render(self, req):
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application/xhtml+xml')
+		req.setHeader('charset', 'UTF-8')
+
+		if 'sref' in req.args:
+			services = OrderedSet()
+			bouquets = OrderedSet()
+			for sref in req.args.get('sref'):
+				sref = unquote(sref)
+				ref = eServiceReference(sref)
+				if not ref.valid():
+					services = bouquets = None
+					break
+				elif (ref.flags & 7) == 7:
+					epgservice = EPGRefreshService(sref, duration)
+					if epgservice not in bouquets:
+						services.add(epgservice)
+				else:
+					if not (ref.flags & eServiceReference.isGroup):
+						# strip all after last :
+						pos = sref.rfind(':')
+						if pos != -1:
+							if sref[pos-1] == ':':
+								pos -= 1
+							sref = sref[:pos+1]
+
+					epgservice = EPGRefreshService(sref, None)
+					if epgservice not in services:
+						services.add(epgservice)
+			if services is not None and bouquets is not None:
+				scanServices = epgrefresh.generateServicelist(services, bouquets)
+			else:
+				scanServices = []
+		else:
+			scanServices = epgrefresh.generateServicelist(epgrefresh.services[0], epgrefresh.services[1])
+
+		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2servicelist>"]
+		extend = returnlist.extend
+		for serviceref in scanServices:
+			ref = ServiceReference(str(serviceref))
+			returnlist.extend((
+				' <e2service>\n',
+				'  <e2servicereference>', str(serviceref), '</e2servicereference>\n',
+				'  <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
+				' </e2service>\n',
+			))
+		returnlist.append('\n</e2servicelist>')
+		return ''.join(returnlist)
 
 class EPGRefreshChangeSettingsResource(resource.Resource):
 	def render(self, req):
