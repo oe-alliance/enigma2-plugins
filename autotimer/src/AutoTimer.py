@@ -33,15 +33,11 @@ from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
 try:
 	from Plugins.Extensions.SeriesPlugin.plugin import labelTimer
 except ImportError as ie:
-	hasSeriesPlugin = False
-else:
-	hasSeriesPlugin = True
+	labelTimer = None
 
 from . import config, xrange, itervalues
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
-
-DIFF_THRESHOLD = 0.8
 
 def getTimeDiff(timer, begin, end):
 	if begin <= timer.begin <= end:
@@ -170,8 +166,9 @@ class AutoTimer:
 			print("[AutoTimer] Navigation is not available, can't parse EPG")
 			return (0, 0, 0, [], [], [])
 
-		new = []
-		modified = []
+		total = 0
+		new = 0
+		modified = 0
 		timers = []
 		conflicting = []
 		similar = defaultdict(list)			# Contains the the marked similar eits and the conflicting strings
@@ -190,7 +187,6 @@ class AutoTimer:
 		epgcache = eEPGCache.getInstance()
 		serviceHandler = eServiceCenter.getInstance()
 		recordHandler = NavigationInstance.instance.RecordTimer
-		seriesPlugin = None
 
 		# Save Recordings in a dict to speed things up a little
 		# We include processed timers as we might search for duplicate descriptions
@@ -381,6 +377,8 @@ class AutoTimer:
 				if timer.overrideAlternatives:
 					serviceref = timer.getAlternative(serviceref)
 
+				total += 1
+
 				# Append to timerlist and abort if simulating
 				timers.append((name, begin, end, serviceref, timer.name))
 				if simulateOnly:
@@ -427,6 +425,7 @@ class AutoTimer:
 							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name))
 
 						newEntry = rtimer
+						modified += 1
 
 						# Modify values saved in timer
 						newEntry.name = name
@@ -434,8 +433,6 @@ class AutoTimer:
 						newEntry.begin = int(begin)
 						newEntry.end = int(end)
 						newEntry.service_ref = ServiceReference(serviceref)
-
-						modified.append(newEntry)
 
 						break
 					elif timer.avoidDuplicateDescription >= 1 \
@@ -541,12 +538,11 @@ class AutoTimer:
 
 					if conflicts is None:
 						timer.decrementCounter()
+						new += 1
 						newEntry.extdesc = extdesc
-						new.append(newEntry)
 						recorddict[serviceref].append(newEntry)
-						if hasSeriesPlugin and timer.series_labeling:
-							if seriesPlugin is None:
-								labelTimer(newEntry, evtBegin, evtEnd)
+						if labelTimer is not None and timer.series_labeling:
+							labelTimer(newEntry, evtBegin, evtEnd)
 
 						# Similar timers are in new timers list and additionally in similar timers list
 						if similarTimer:
@@ -563,9 +559,7 @@ class AutoTimer:
 							# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 							conflicts = recordHandler.record(newEntry)
 
-
-
-		return (len(timers), len(new), len(modified), timers, conflicting, similars)
+		return (total, new, modified, timers, conflicting, similars)
 
 # Supporting functions
 
@@ -594,20 +588,14 @@ class AutoTimer:
 				})
 
 	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2):
-		# What's the best strategy to find equal names?
-		foundTitle = (name1 == name2) or (name1 in name2) or (name2 in name1)
-
-		foundShort = True
-		if timer.searchForDuplicateDescription > 0 and foundTitle:
-			#foundShort = (shortdesc1 == shortdesc2) or (shortdesc1 in shortdesc2) or (shortdesc2 in shortdesc1)
-			foundShort = ( DIFF_THRESHOLD < SequenceMatcher(lambda x: x == " ",shortdesc1, shortdesc2).ratio() )
-
+		foundTitle = (name1 == name2)
+		foundShort = (shortdesc1 == shortdesc2) if timer.searchForDuplicateDescription > 0 else True
 		foundExt = True
 		# NOTE: only check extended if short description already is a match because otherwise
 		# it won't evaluate to True anyway
 		if timer.searchForDuplicateDescription == 2 and foundShort:
 			# Some channels indicate replays in the extended descriptions
 			# If the similarity percent is higher then 0.8 it is a very close match
-			foundExt = ( DIFF_THRESHOLD < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+			foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
 
 		return foundTitle and foundShort and foundExt
