@@ -8,6 +8,8 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry
 
+VERSION = "1.1"
+
 class VPS_Setup(Screen, ConfigListScreen):
 
 	skin = """<screen name="vpsConfiguration" title="VPS-Plugin" position="center,center" size="600,370">
@@ -25,9 +27,10 @@ class VPS_Setup(Screen, ConfigListScreen):
 	
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		
-		self.setup_title = "VPS-Plugin Einstellungen"
-		
+
+		#Summary
+		self.setup_title = _("VPS Setup Version %s") %VERSION
+
 		self.vps_enabled = getConfigListEntry(_("Enable VPS-Plugin"), config.plugins.vps.enabled)
 		self.vps_initial_time = getConfigListEntry(_("Starting time"), config.plugins.vps.initial_time)
 		self.vps_allow_wakeup = getConfigListEntry(_("Wakeup from Deep-Standby is allowed"), config.plugins.vps.allow_wakeup)
@@ -61,6 +64,11 @@ class VPS_Setup(Screen, ConfigListScreen):
 				"blue": self.show_info,
 			}
 		)
+		
+		self.onLayoutFinish.append(self.setCustomTitle)
+		
+	def setCustomTitle(self):
+		self.setTitle(self.setup_title)
 	
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
@@ -117,6 +125,9 @@ class VPS_Screen_Info(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		
+		#Summary
+		self.info_title = _("VPS-Plugin Information")
+		
 		self["text"] = ScrollLabel(_("VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n\nIf you enable VPS, the recording will only start, when the channel flags the programme as running.\n\nIf you select \"yes (safe mode)\", the recording is definitely starting at the latest at the startTime you defined. The recording may start earlier or last longer.\n\n\nSupported channels\n\nGermany:\n ARD and ZDF\n\nAustria:\n ORF\n\nSwitzerland:\n SF\n\nCzech Republic:\n CT\n\nIf a timer is programmed manually (not via EPG), it is necessary to set a VPS-Time to enable VPS. VPS-Time (also known as PDC) is the first published start time, e.g. given in magazines. If you set a VPS-Time, you have to leave timer name empty."))
 		
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"], 
@@ -126,6 +137,11 @@ class VPS_Screen_Info(Screen):
 				"up": self["text"].pageUp,
 				"down": self["text"].pageDown,
 			}, -1)
+		
+		self.onLayoutFinish.append(self.setCustomTitle)
+		
+	def setCustomTitle(self):
+		self.setTitle(self.info_title)
 		
 	
 def VPS_show_info(session):

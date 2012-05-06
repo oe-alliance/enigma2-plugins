@@ -60,7 +60,7 @@ def doneConfig(session, **kwargs):
 def startSetup(menuid):
 	if menuid != "system":
 		return []
-	return [("VPS-Plugin", setup, "vps", 50)]
+	return [(_("VPS Settings"), setup, "vps", 50)]
 
 def getNextWakeup():
 	return vps_timers.NextWakeup()
@@ -80,7 +80,7 @@ def Plugins(**kwargs):
 			needsRestart = True
 		),
 		PluginDescriptor(
-			name = "VPS-Plugin",
+			name = _("VPS Settings"),
 			where = PluginDescriptor.WHERE_MENU,
 			fnc = startSetup,
 			needsRestart = True
