@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-15 13:09+0000\n"
-"PO-Revision-Date: 2012-01-17 11:40+0100\n"
-"Last-Translator: R.L. van der Does\n"
+"PO-Revision-Date: 2012-05-05 07:28+0100\n"
+"Last-Translator: \n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-Country: NETHERLANDS\n"
 
 msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled."
-msgstr "Na eensuccesvolle refresh zal AutoTimer automatisch naar nieuwe overeenkomsten zoeken als dat is ingeschakeld."
+msgstr "Na een succesvolle refresh zal AutoTimer automatisch naar nieuwe overeenkomsten zoeken als dat is ingeschakeld."
 
 msgid "An automated refresh will start after this time of day, but before the time specified in next setting."
 msgstr "Automatische refresh zal starten na de ingestelde tijd, maar voor de tijd die in de volgende instelling staat."
@@ -87,7 +87,7 @@ msgid "Enable this to be able to access the EPGRefresh configuration from within
 msgstr "Toon EPG Refresh instellingsmenu in het extensie menu."
 
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
-msgstr "Breidt d elijst met kanalen uit met die kanalen die AutoTimers gebruikt?"
+msgstr "Breidt de lijst met kanalen uit met die kanalen die AutoTimers gebruikt?"
 
 msgid "Fake recording"
 msgstr "Nep opname"
@@ -256,3 +256,4 @@ msgstr "Verwijderen"
 
 msgid "never"
 msgstr "nooit"
+

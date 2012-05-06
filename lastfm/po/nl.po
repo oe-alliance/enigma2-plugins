@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-10-12 10:41+0100\n"
-"Last-Translator: R.L. van der Does\n"
+"PO-Revision-Date: 2012-05-05 07:34+0100\n"
+"Last-Translator: \n"
 "Language-Team: Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -38,15 +38,15 @@ msgstr "Ban"
 
 #: ../src/plugin.py:208
 msgid "Ban Track, never play"
-msgstr "Ban Track, nooit afspelen"
+msgstr "Ban track, nooit afspelen"
 
 #: ../src/plugin.py:155
 msgid "Banned Tracks"
-msgstr "Banned Tracks"
+msgstr "Banned tracks"
 
 #: ../src/plugin.py:271
 msgid "Banned Tracks loaded"
-msgstr "Banned Tracks geladen"
+msgstr "Banned tracks geladen"
 
 #: ../src/LastFMConfig.py:55
 msgid "Cancel"
@@ -70,11 +70,11 @@ msgstr "Vrienden geladen"
 
 #: ../src/plugin.py:151
 msgid "Global Tags"
-msgstr "Globale Tags"
+msgstr "Globale tags"
 
 #: ../src/plugin.py:259
 msgid "Global Tags loaded"
-msgstr "Globale Tags geladen"
+msgstr "Globale tags geladen"
 
 #: ../src/plugin.py:490
 msgid "Group of"
@@ -82,7 +82,7 @@ msgstr "Groep van"
 
 #: ../src/LastFMConfig.py:52
 msgid "Interval for Coverart Animation"
-msgstr "Interval voor  Coverart Animatie"
+msgstr "Interval voor  coverart animatie"
 
 #: ../src/LastFMConfig.py:46
 msgid "Interval to refresh Metadata (seconds)"
@@ -99,11 +99,11 @@ msgstr "Last.FM gebruikersnaam"
 
 #: ../src/LastFMConfig.py:41
 msgid "LastFM Proxy port"
-msgstr "LastFM Proxy port"
+msgstr "Last.FM proxy poort"
 
 #: ../src/plugin.py:36
 msgid "Listen to Last.FM Internet Radio"
-msgstr "Luister naarLast.FM Internet Radio"
+msgstr "Luister naar Last.FM internet radio"
 
 #: ../src/plugin.py:521
 msgid "Loading Friends"
@@ -111,12 +111,12 @@ msgstr "Vrienden worden geladen"
 
 #: ../src/plugin.py:497
 msgid "Loading Global Tags"
-msgstr "Global Tags worden geladen"
+msgstr "Global tags worden geladen"
 
 #: ../src/plugin.py:509
 #: ../src/plugin.py:513
 msgid "Loading Loved Tracks"
-msgstr "Geliefde Tracks worden geladen"
+msgstr "Geliefde tracks worden geladen"
 
 #: ../src/plugin.py:517
 msgid "Loading Neighbours"
@@ -124,11 +124,11 @@ msgstr "Buren worden geladen"
 
 #: ../src/plugin.py:505
 msgid "Loading Recent Tracks"
-msgstr "Recente Tracks worden geladen"
+msgstr "Recente tracks worden geladen"
 
 #: ../src/plugin.py:501
 msgid "Loading Top Tacks"
-msgstr "Top Tacks worden geladen"
+msgstr "Top tacks worden geladen"
 
 #: ../src/plugin.py:180
 msgid "Love"
@@ -137,15 +137,15 @@ msgstr "Geliefd"
 #: ../src/plugin.py:154
 #: ../src/plugin.py:457
 msgid "Loved Tracks"
-msgstr "Geliefde Tracks"
+msgstr "Geliefde tracks"
 
 #: ../src/plugin.py:275
 msgid "Loved Tracks loaded"
-msgstr "geliefde Tracks geladen"
+msgstr "geliefde tracks geladen"
 
 #: ../src/plugin.py:207
 msgid "Mark Track as loved"
-msgstr "Markeer Track als geliefd"
+msgstr "Markeer track als geliefd"
 
 #: ../src/LastFMConfig.py:35
 msgid "Name (needs GUI restart)"
@@ -157,7 +157,7 @@ msgstr "Buren"
 
 #: ../src/plugin.py:452
 msgid "Neighbours Tracks"
-msgstr "Buren Tracks"
+msgstr "Buren tracks"
 
 #: ../src/plugin.py:279
 msgid "Neighbours loaded"
@@ -226,11 +226,11 @@ msgstr "Verlaat"
 
 #: ../src/plugin.py:153
 msgid "Recent Tracks"
-msgstr "Recente Tracks"
+msgstr "Recente tracks"
 
 #: ../src/plugin.py:267
 msgid "Recent Tracks loaded"
-msgstr "Recente Tracks geladen"
+msgstr "Recente tracks geladen"
 
 #: ../src/LastFMConfig.py:42
 msgid "Recommendation level"
@@ -238,15 +238,15 @@ msgstr "Aanbevolen niveau"
 
 #: ../src/plugin.py:199
 msgid "Select next Tab"
-msgstr "Selecteer volgende Tab"
+msgstr "Selecteer volgende tab"
 
 #: ../src/plugin.py:200
 msgid "Select prev Tab"
-msgstr "Selecteer vorige Tab"
+msgstr "Selecteer vorige tab"
 
 #: ../src/LastFMConfig.py:39
 msgid "Send now playing Audio Tracks"
-msgstr "Stuur now playing Audio Tracks"
+msgstr "Stuur now playing audio tracks"
 
 #: ../src/LastFM.py:407
 msgid "Server returned"
@@ -259,15 +259,15 @@ msgstr "Instellingen"
 
 #: ../src/LastFMConfig.py:43
 msgid "Show Coverart"
-msgstr "Toon Coverart"
+msgstr "Toon coverart"
 
 #: ../src/LastFMConfig.py:50
 msgid "Show Coverart Animation in Screensaver"
-msgstr "Toon Coverart Animatie in Screensaver"
+msgstr "Toon coverart animatie in screensaver"
 
 #: ../src/LastFMConfig.py:49
 msgid "Show Coverart in Screensaver"
-msgstr "Toon Coverart in Screensaver"
+msgstr "Toon coverart in screensaver"
 
 #: ../src/LastFMConfig.py:34
 msgid "Show in (needs GUI restart)"
@@ -283,7 +283,7 @@ msgstr "Sla huidige track over"
 
 #: ../src/LastFMConfig.py:51
 msgid "Speed for Coverart Animation"
-msgstr "Snelheid voor Coverart Animatie"
+msgstr "Snelheid voor coverart animatie"
 
 #: ../src/plugin.py:205
 msgid "Start/stop streaming"
@@ -311,7 +311,7 @@ msgstr "Schakel naar geselecteerd Station"
 
 #: ../src/LastFMConfig.py:44
 msgid "Timeout Statustext (seconds)"
-msgstr "Timeout Statustekst (secondes)"
+msgstr "Timeout statustekst (secondes)"
 
 #: ../src/LastFMConfig.py:45
 msgid "Timeout to select a Tab (seconds)"
@@ -319,11 +319,11 @@ msgstr "Timeout voor selecterenTabs (secondes)"
 
 #: ../src/plugin.py:152
 msgid "Top Tracks"
-msgstr "Top Tracks"
+msgstr "Top tracks"
 
 #: ../src/plugin.py:263
 msgid "Top Tracks loaded"
-msgstr "Top Tracks geladen"
+msgstr "Top tracks geladen"
 
 #: ../src/plugin.py:168
 msgid "Track"
@@ -355,7 +355,7 @@ msgstr "Gebruik LastFM Proxy"
 
 #: ../src/LastFMConfig.py:47
 msgid "Use Screensaver"
-msgstr "Gebruik Screensaver"
+msgstr "Gebruik screensaver"
 
 #: ../src/plugin.py:92
 #: ../src/plugin.py:100
