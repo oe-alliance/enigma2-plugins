@@ -2,6 +2,7 @@
 from AutoTimer import AutoTimer
 from AutoTimerConfiguration import CURRENT_CONFIG_VERSION
 from RecordTimer import AFTEREVENT
+from twisted.internet import reactor
 from twisted.web import http, resource, server
 import threading
 try:
@@ -57,8 +58,10 @@ class AutoTimerBackgroundThread(threading.Thread):
 		req = self.__req
 		ret = self.__fnc(req)
 		if self.__stillAlive and ret != server.NOT_DONE_YET:
-			req.write(ret)
-			req.finish()
+			def finishRequest():
+				req.write(ret)
+				req.finish()
+			reactor.callFromThread(finishRequest)
 
 class AutoTimerBackgroundingResource(AutoTimerBaseResource, threading.Thread):
 	def render(self, req):
