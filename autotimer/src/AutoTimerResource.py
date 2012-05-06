@@ -68,8 +68,10 @@ class AutoTimerBackgroundingResource(AutoTimerBaseResource, threading.Thread):
 	def renderBackground(self, req):
 		pass
 
-class AutoTimerDoParseResource(AutoTimerBackgroundingResource):
-	def renderBackground(self, req):
+class AutoTimerDoParseResource(AutoTimerBaseResource):
+	def render(self, req):
+#class AutoTimerDoParseResource(AutoTimerBackgroundingResource):
+#	def renderBackground(self, req):
 		autotimer = self.getAutoTimerInstance()
 
 		ret = autotimer.parseEPG()
@@ -80,8 +82,10 @@ class AutoTimerDoParseResource(AutoTimerBackgroundingResource):
 
 		return self.returnResult(req, True, output)
 
-class AutoTimerSimulateResource(AutoTimerBackgroundingResource):
-	def renderBackground(self, req):
+class AutoTimerSimulateResource(AutoTimerBaseResource):
+	def render(self, req):
+#class AutoTimerSimulateResource(AutoTimerBackgroundingResource):
+#	def renderBackground(self, req):
 		autotimer = self.getAutoTimerInstance()
 
 		ret = autotimer.parseEPG(simulateOnly=True)
