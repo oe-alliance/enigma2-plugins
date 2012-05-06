@@ -371,12 +371,16 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 
 			self.list = [MyPluginEntryComponent(plugin) for plugin in self.pluginlist]
 			if DEBUG: print("[PluginSort] NEW LIST:", [(plugin.name, plugin.weight) for plugin in self.pluginlist])
-			self["pluginlist"].list = self.list
+			# XXX: modifyEntry is broken - I'd say a job well done :P
+			#self["pluginlist"].modifyEntry(newpos, self.list[newpos])
+			self["pluginlist"].updateList(self.list)
 			self.selected = -1
 		else:
 			self.selected = self["pluginlist"].index
 			self.list[self.selected] = SelectedPluginEntryComponent(self.pluginlist[self.selected])
-			self["pluginlist"].list = self.list
+			# XXX: modifyEntry is broken - I'd say a job well done :P
+			#self["pluginlist"].modifyEntry(self.selected, self.list[self.selected])
+			self["pluginlist"].updateList(self.list)
 	
 	def openMenu(self):
 		if self.movemode:
