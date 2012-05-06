@@ -66,6 +66,7 @@ language.addCallback(localeInit)
 #####  CONFIG SETTINGS   #####
 ##############################
 
+VERSION = "1.2"
 config.plugins.pts = ConfigSubsection()
 config.plugins.pts.enabled = ConfigYesNo(default = True)
 config.plugins.pts.maxevents = ConfigInteger(default=5, limits=(1, 99))
@@ -1675,7 +1676,8 @@ class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = [ "PTSSetup", "Setup" ]
-		self.setup_title = _("Permanent Timeshift Settings")
+		#Summary
+		self.setup_title = _("Permanent Timeshift Settings Version %s") %VERSION
 
 		self.onChangedEntry = [ ]
 		self.list = [ ]
