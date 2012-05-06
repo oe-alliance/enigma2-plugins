@@ -656,7 +656,6 @@ class VirtualZap(Screen):
 				self.setServicelistSelection(bouquet, ref)
 		# close ChannelSelection
 		self.servicelist.revertMode = None
-		self.servicelist.asciiOff()
 		self.servicelist.close(None)
 
 		# clean up
