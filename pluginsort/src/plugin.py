@@ -9,11 +9,13 @@ from Screens import PluginBrowser
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Components.PluginComponent import PluginComponent, plugins
-from Components.PluginList import PluginEntryComponent
 from Tools.Directories import resolveFilename, fileExists, SCOPE_SKIN_IMAGE, SCOPE_PLUGINS
 from Tools.BoundFunction import boundFunction
 from Screens.InfoBarGenerics import InfoBarPlugins
 from Components.config import config, ConfigSubsection, ConfigYesNo
+from Components.PluginList import PluginList
+from Components.Converter.TemplatedMultiContent import TemplatedMultiContent
+from Components.Renderer.Listbox import Listbox as ListboxRenderer
 
 from Components.ActionMap import ActionMap, NumberActionMap
 from operator import attrgetter # python 2.5+
@@ -38,19 +40,48 @@ DEBUG = False
 config.plugins.pluginsort = ConfigSubsection()
 config.plugins.pluginsort.show_help = ConfigYesNo(default=True)
 
-def SelectedPluginEntryComponent(plugin):
+def MyPluginEntryComponent(plugin, backcolor_sel=None):
 	if plugin.icon is None:
 		png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/plugin.png"))
 	else:
 		png = plugin.icon
 
 	return [
-		plugin,
-		MultiContentEntryText(pos=(0,0), size=(440, 50), backcolor_sel=8388608),
-		MultiContentEntryText(pos=(120, 5), size=(320, 25), font=0, text=plugin.name),
-		MultiContentEntryText(pos=(120, 26), size=(320, 17), font=1, text=plugin.description),
-		MultiContentEntryPixmapAlphaTest(pos=(10, 5), size=(100, 40), png = png),
+		plugin, plugin.name, plugin.description, png,
+		#plugin, backcolor_sel, plugin.name, plugin.description, png,
 	]
+
+# TODO: make selected color themable
+SelectedPluginEntryComponent = lambda plugin: MyPluginEntryComponent(plugin, backcolor_sel=8388608)
+
+class MyPluginList(PluginList):
+	def __init__(self, *args, **kwargs):
+		PluginList.__init__(self, *args, **kwargs)
+		self.__inst = None
+
+	def __instance(self):
+		if self.__inst is not None:
+			return self.__inst
+		for x in self.downstream_elements:
+			if isinstance(x, TemplatedMultiContent):
+				for y in x.downstream_elements:
+					if isinstance(y, ListboxRenderer):
+						self.__inst = y.instance
+						return self.__inst
+		return None
+
+	def up(self):
+		instance = self.__instance()
+		if instance: instance.moveSelection(instance.moveUp)
+	def down(self):
+		instance = self.__instance()
+		if instance: instance.moveSelection(instance.moveDown)
+	def pageUp(self):
+		instance = self.__instance()
+		if instance: instance.moveSelection(instance.pageUp)
+	def pageDown(self):
+		instance = self.__instance()
+		if instance: instance.moveSelection(instance.pageDown)
 
 WHEREMAP = {}
 pdict = PluginDescriptor.__dict__
@@ -197,21 +228,22 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			self.where = PluginDescriptor.WHERE_PLUGINMENU
 
 		OriginalPluginBrowser.__init__(self, *args, **kwargs)
-		self.skinName = ["SortingPluginBrowser", "PluginBrowser"]
+		self.skinName = ["SortingPluginBrowser", "PluginBrowser"] # XXX: fallback is evil because it makes moving more confusing :P
+
+		self["pluginlist"] = MyPluginList(self.list)
 
 		self["ColorActions"] = ActionMap(["ColorActions"],
 			{
 				"green": self.toggleMoveMode,
 			}, -2
 		)
-		self["ColorActions"].setEnabled(False)
 
 		self["WizardActions"] = ActionMap(["WizardActions"],
 			{
-				"left": boundFunction(self.doMove, self["list"].pageUp),
-				"right": boundFunction(self.doMove, self["list"].pageDown),
-				"up": boundFunction(self.doMove, self["list"].up),
-				"down": boundFunction(self.doMove, self["list"].down),
+				"left": boundFunction(self.doMove, self["pluginlist"].pageUp),
+				"right": boundFunction(self.doMove, self["pluginlist"].pageDown),
+				"up": boundFunction(self.doMove, self["pluginlist"].up),
+				"down": boundFunction(self.doMove, self["pluginlist"].down),
 			}, -2
 		)
 
@@ -261,7 +293,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		if not self.movemode:
 			realnumber = (number - 1) % 10
 			if realnumber < len(self.list):
-				self["list"].moveToIndex(realnumber)
+				self["pluginlist"].index = realnumber
 				self.save()
 
 	def close(self, *args, **kwargs):
@@ -276,39 +308,28 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			self.pluginlist.sort(key=attrgetter('weight', 'name')) # sort first by weight, then by name; we get pretty much a weight sorted but otherwise random list
 		else: #if self.where in (PluginDescriptor.WHERE_EVENTINFO, PluginDescriptor.WHERE_MOVIELIST):
 			self.pluginlist.sort(key=attrgetter('weight'))
-		self.list = [PluginEntryComponent(plugin) for plugin in self.pluginlist]
-		self["list"].l.setList(self.list)
+		self.list = [MyPluginEntryComponent(plugin) for plugin in self.pluginlist]
+		self["pluginlist"].list = self.list
 		if self.where == PluginDescriptor.WHERE_PLUGINMENU:
-			if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
-				# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
-				self["red"].setText(_("Manage extensions"))
-				self["green"].setText(_("Sort") if not self.movemode else _("End Sort"))
-				self["SoftwareActions"].setEnabled(True)
-				self["PluginDownloadActions"].setEnabled(False)
-				self["ColorActions"].setEnabled(True)
-			else:
-				# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
-				self["red"].setText(_("Remove Plugins"))
-				# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
-				self["green"].setText(_("Download Plugins"))
-				self["SoftwareActions"].setEnabled(False)
-				self["PluginDownloadActions"].setEnabled(True)
-				self["ColorActions"].setEnabled(False)
+			# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+			self["red"].setText(_("Manage extensions"))
+			self["green"].setText(_("Sort") if not self.movemode else _("End Sort"))
 		else:
 			self["red"].setText("")
 			self["green"].setText(_("Sort") if not self.movemode else _("End Sort"))
 			self["SoftwareActions"].setEnabled(False)
-			self["PluginDownloadActions"].setEnabled(False)
-			self["ColorActions"].setEnabled(True)
 
 	def doMove(self, func):
 		if self.selected != -1:
-			oldpos = self["list"].getSelectedIndex()
+			oldpos = self["pluginlist"].index
 			func()
 			entry = self.list.pop(oldpos)
-			newpos = self["list"].getSelectedIndex()
+			newpos = self["pluginlist"].index
 			self.list.insert(newpos, entry)
-			self["list"].l.setList(self.list)
+			# XXX: modifyEntry is broken - I'd say a job well done :P
+			#self["pluginlist"].modifyEntry(oldpos, self.list[oldpos])
+			#self["pluginlist"].modifyEntry(newpos, self.list[newpos])
+			self["pluginlist"].updateList(self.list)
 		else:
 			func()
 
@@ -318,7 +339,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			OriginalPluginBrowser.save(self)
 		elif selected != -1:
 			Len = len(self.pluginlist)
-			newpos = self["list"].getSelectedIndex()
+			newpos = self["pluginlist"].index
 			entry = self.pluginlist[selected]
 			self.pluginlist.remove(entry)
 			self.pluginlist.insert(newpos, entry)
@@ -348,14 +369,14 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			else:
 				if DEBUG: print("[PluginSort]", entry.name, "did not move (%d to %d)?" % (selected, newpos))
 
-			self.list = [PluginEntryComponent(plugin) for plugin in self.pluginlist]
+			self.list = [MyPluginEntryComponent(plugin) for plugin in self.pluginlist]
 			if DEBUG: print("[PluginSort] NEW LIST:", [(plugin.name, plugin.weight) for plugin in self.pluginlist])
-			self["list"].l.setList(self.list)
+			self["pluginlist"].list = self.list
 			self.selected = -1
 		else:
-			self.selected = self["list"].getSelectedIndex()
+			self.selected = self["pluginlist"].index
 			self.list[self.selected] = SelectedPluginEntryComponent(self.pluginlist[self.selected])
-			self["list"].l.setList(self.list)
+			self["pluginlist"].list = self.list
 	
 	def openMenu(self):
 		if self.movemode:
@@ -396,7 +417,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		except Exception as e:
 			self.session.open(MessageBox, _("Unable to load PluginHider"), MessageBox.TYPE_ERROR)
 		else:
-			hidePlugin(self["list"].l.getCurrentSelection()[0])
+			hidePlugin(self["pluginlist"].current[0])
 
 			# we were actually in move mode, so save the current position
 			if self.selected != -1:
@@ -440,7 +461,7 @@ def autostart(reason, *args, **kwargs):
 				else: self.__dict__[key] = value
 			PluginComponent.__setattr__ = PluginComponent__setattr__
 
-			if hasattr(plugins, 'PluginComponent.pluginHider_baseGetPlugins'):
+			if hasattr(plugins, 'pluginHider_baseGetPlugins'):
 				pluginlist = plugins.pluginHider_baseGetPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_MOVIELIST, PluginDescriptor.WHERE_EVENTINFO])
 			else:
 				pluginlist = plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_MOVIELIST, PluginDescriptor.WHERE_EVENTINFO])

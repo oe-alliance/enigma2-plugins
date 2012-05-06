@@ -16,7 +16,7 @@
 #
 #######################################################################
 
-import sys, traceback
+import os, sys, traceback
 
 # Config
 from Components.config import *
@@ -34,6 +34,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.HelpMenu import HelpableScreen
 from Tools.BoundFunction import boundFunction
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 # Plugin internal
 from . import _
@@ -54,20 +55,8 @@ from ControllerBase import ControllerBase
 # Configuration screen
 class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 
-	skin = """
-		<screen name="ConfigScreen" title="" position="center,center" size="565,350">
-			<ePixmap position="0,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="140,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap position="280,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap position="420,5" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-			<widget source="key_red" render="Label" position="0,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget source="key_green" render="Label" position="140,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget source="key_yellow" render="Label" position="280,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget source="key_blue" render="Label" position="420,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="config" position="5,50" size="555,225" enableWrapAround="1" scrollbarMode="showOnDemand" />
-			<ePixmap pixmap="skin_default/div-h.png" position="0,275" zPosition="1" size="565,2" />
-		</screen>
-	"""
+	skinfile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/skin.xml" )
+	skin = open(skinfile).read()
 
 	def __init__(self, session):
 		Screen.__init__(self, session)

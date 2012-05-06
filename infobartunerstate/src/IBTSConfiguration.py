@@ -162,16 +162,18 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			return
 		
 		# Overwrite Screen close function to handle new config
-		from Plugins.Extensions.InfoBarTunerState.plugin import gInfoBarTunerState
-		global gInfoBarTunerState
+		
+		# We need assign / "write" access import the plugin module
+		# global won't work across module scope
+		import plugin
 		if config.infobartunerstate.enabled.value:
 			# Plugin should be enabled
 			#TODO use a separate init function similar to the close
-			if not gInfoBarTunerState:
+			if not plugin.gInfoBarTunerState:
 				# Plugin is not active - enable it
-				gInfoBarTunerState = InfoBarTunerState(self.session)
+				plugin.gInfoBarTunerState = InfoBarTunerState(self.session)
 			
-			if gInfoBarTunerState:
+			if plugin.gInfoBarTunerState:
 				
 				# Handle InfoBar overwrite
 				if config.infobartunerstate.show_overwrite.value:
@@ -189,29 +191,29 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 				
 				# Handle show with InfoBar
 				if config.infobartunerstate.show_infobar.value:
-					gInfoBarTunerState.bindInfoBar()
+					plugin.gInfoBarTunerState.bindInfoBar()
 				else:
-					gInfoBarTunerState.unbindInfoBar()
+					plugin.gInfoBarTunerState.unbindInfoBar()
 				
 				#TODO actually not possible to do this, because these events provides the relevant information
 				#if config.infobartunerstate.show_events.value:
-				#	gInfoBarTunerState.appendEvents()
+				#	plugin.gInfoBarTunerState.appendEvents()
 				#else:
-				#	gInfoBarTunerState.removeEvents()
+				#	plugin.gInfoBarTunerState.removeEvents()
 				
 				# Remove and append because of show streams handling
-				gInfoBarTunerState.removeEvents()
-				gInfoBarTunerState.appendEvents()
+				plugin.gInfoBarTunerState.removeEvents()
+				plugin.gInfoBarTunerState.appendEvents()
 				
 				# Check for actual events
-				gInfoBarTunerState.updateRecordTimer()
+				plugin.gInfoBarTunerState.updateRecordTimer()
 				if config.infobartunerstate.show_streams.value:
-					gInfoBarTunerState.updateStreams()
+					plugin.gInfoBarTunerState.updateStreams()
 		else:
 			# Plugin should be disabled
-			if gInfoBarTunerState:
+			if plugin.gInfoBarTunerState:
 				# Plugin is active, disable it
-				gInfoBarTunerState.close()
+				plugin.gInfoBarTunerState.close()
 
 		self.close()
 	

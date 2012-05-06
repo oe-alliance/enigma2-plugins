@@ -37,9 +37,16 @@ from InfoBarTunerState import InfoBarTunerState, TunerStateInfo
 NAME = _("InfoBarTunerState")
 IBTSSHOW = _("Show InfoBarTunerState")
 IBTSSETUP = _("InfoBarTunerState Setup")
-VERSION = "0.9.6.2"
-ABOUT = "\n  InfoBarTunerState " +VERSION+ "\n\n  (C) 2011 by betonme @ IHAD \n\n  If You like this plugin and want to support it,\n  or if just want to say ''thanks'',\n  feel free to donate via PayPal. \n\n  Thanks a lot ! \n\n  PayPal: http://bit.ly/ibtspaypal  "
-
+VERSION = "1.0"
+SUPPORT = "http://bit.ly/ibtsihad"
+DONATE = "http://bit.ly/ibtspaypal"
+ABOUT = "\n  " + NAME + " " + VERSION + "\n\n" \
+				+ _("  (C) 2012 by betonme @ IHAD \n\n") \
+				+ _("  If You like this plugin and want to support it,\n") \
+				+ _("  or if just want to say ''thanks'',\n") \
+				+ _("  feel free to donate via PayPal. \n\n") \
+				+ _("  Thanks a lot ! \n  PayPal: ") + DONATE + "\n" \
+				+ _("  SUPPORT: ") + SUPPORT
 
 # Globals
 gInfoBarTunerState = None
@@ -145,6 +152,7 @@ def Plugins(**kwargs):
 #######################################################
 # Plugin # Plugin configuration
 def setup(session, **kwargs):
+	print "InfoBarTunerState setup"
 	#TODO config
 	# Overwrite Skin Position
 	# Show Live TV Tuners PiP LiveStream FileStream
@@ -165,27 +173,31 @@ def setup(session, **kwargs):
 #######################################################
 # Sessionstart
 def start(reason, **kwargs):
+	print "InfoBarTunerState start"
 	if reason == 0: # start
 		if kwargs.has_key("session"):
 			if config.infobartunerstate.enabled.value:
 				global gInfoBarTunerState
 				session = kwargs["session"]
-				gInfoBarTunerState = InfoBarTunerState(session)
+				try:
+					gInfoBarTunerState = InfoBarTunerState(session)
+				except Exception, e:
+					print "InfoBarTunerState start exception " + str(e)
 	# Do not cleanup on session shutdown, it will break the movie player integration
 
 
 #######################################################
 # Extension Menu
 def show(session, **kwargs):
+	print "InfoBarTunerState show"
+	print gInfoBarTunerState
 	if gInfoBarTunerState:
-		if gInfoBarTunerState.entries:
-			# There are active entries
-			gInfoBarTunerState.show(True)
-		else:
-			# No entries available
-			gInfoBarTunerState.info = gInfoBarTunerState.session.instantiateDialog( TunerStateInfo, _("Nothing running") )
-			gInfoBarTunerState.info.show()
+		try:
+			gInfoBarTunerState.show(True, forceshow=True)
+		except Exception, e:
+			print "InfoBarTunerState show exception " + str(e)
 	else:
 		# No InfoBarTunerState Instance running
+		print "InfoBarTunerState disabled"
 		session.open(MessageBox, _("InfoBarTunerState is disabled"), MessageBox.TYPE_INFO, 3)
 

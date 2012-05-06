@@ -6,5 +6,5 @@ Priority: optional
 Maintainer: Silelis
 OE: enigma2-plugins-2.6cvs20090103
 Homepage: http://code.google.com/p/subs-downloader/
-Depends: enigma2(>2.6git20091016), gst-plugin-good-flv, enigma2-plugin-extensions-pictureplayer, enigma2-plugin-extensions-dvdplayer, python-zlib, python-io, python-shell, python-compression, python-html
+Depends: enigma2(>2.6git20091016), gst-plugins-good-flv, enigma2-plugin-extensions-pictureplayer, enigma2-plugin-extensions-dvdplayer, python-zlib, python-io, python-shell, python-compression, python-html
 Source: http://code.google.com/p/subs-downloader/

@@ -39,16 +39,17 @@ from Plugins.Plugin import PluginDescriptor
 from Components.config import *
 
 # Screen
-from Screens.Screen import Screen
 from Components.Label import Label
 from Components.Language import *
 from Components.Pixmap import Pixmap, MultiPixmap
 from Components.ProgressBar import ProgressBar
 from Components.ServiceEventTracker import ServiceEventTracker
-
+from Screens.Screen import Screen
 from Screens.InfoBar import InfoBar
 from Screens.InfoBarGenerics import InfoBarShowHide
 from Screens.Screen import Screen
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+
 from ServiceReference import ServiceReference
 from time import time, localtime, strftime
 
@@ -176,6 +177,8 @@ class InfoBarTunerState(object):
 		
 		self.infobar = None
 		self.info = None
+		
+		self.epg = eEPGCache.getInstance()
 		
 		self.showTimer = eTimer()
 		self.showTimer.callback.append(self.tunerShow)
@@ -356,7 +359,10 @@ class InfoBarTunerState(object):
 				tuner, tunertype = getTuner( stream.getRecordService() ) 
 				ref = stream.getRecordServiceRef()
 				ip = stream.clientIP
+				#TEST_MULTIPLESTREAMS 
 				id = str(stream.screenIndex) + str(ip)
+				#id = str(ref) + str(ip)
+				##id = str(ref.toString()) + str(ip)
 				
 				# Delete references to avoid blocking tuners
 				del stream
@@ -380,8 +386,7 @@ class InfoBarTunerState(object):
 				
 				#TODO Port is actually not given
 				
-				epg = ref and eEPGCache.getInstance()
-				event = epg and epg.lookupEventTime(ref, -1, 0)
+				event = ref and self.epg and self.epg.lookupEventTime(ref, -1, 0)
 				if event: 
 					name = event.getEventName()
 				else:
@@ -408,7 +413,11 @@ class InfoBarTunerState(object):
 			elif event == StreamingWebScreen.EVENT_END:
 				
 				# Remove Finished Stream
+				#TEST_MULTIPLESTREAMS 
 				id = str(stream.screenIndex) + str(stream.clientIP)
+				#id = str(stream.getRecordServiceRef()) + str(stream.clientIP)
+				##id = str(stream.getRecordServiceRef().toString()) + str(stream.clientIP)
+				
 				# Delete references to avoid blocking tuners
 				del stream
 				
@@ -447,10 +456,14 @@ class InfoBarTunerState(object):
 			if stream and stream.request and 'file' not in stream.request.args:
 				self.__onStreamingEvent(StreamingWebScreen.EVENT_START, stream)
 
-	def show(self, autohide=False):
+	def show(self, autohide=False, forceshow=False):
+		print "IBTS show"
 		if self.showTimer.isActive():
 			self.showTimer.stop()
-		self.showTimer.start( 10, True )
+		if forceshow:
+			self.tunerShow(forceshow=forceshow)
+		else:
+			self.showTimer.start( 1, True )
 		if autohide or self.session.current_dialog is None or not issubclass(self.session.current_dialog.__class__, InfoBarShowHide):
 			# Start timer to avoid permanent displaying
 			# Do not start timer if no timeout is configured
@@ -460,13 +473,15 @@ class InfoBarTunerState(object):
 					self.hideTimer.stop()
 				self.hideTimer.startLongTimer( int(idx) )
 
-	def tunerShow(self):
+	def tunerShow(self, forceshow=False):
+		print "IBTS tunerShow"
+		
 		if self.entries:
+			# There are active entries
+			
 			# Close info screen
 			if self.info:
 				self.info.hide()
-				self.session.deleteDialog(self.info)
-				self.info = None
 			
 			# Rebind InfoBar Events
 			#self.bindInfoBar()
@@ -538,8 +553,7 @@ class InfoBarTunerState(object):
 							
 							del stream
 							
-							epg = eEPGCache.getInstance()
-							event = epg and epg.lookupEventTime(ref, -1, 0)
+							event = ref and self.epg and self.epg.lookupEventTime(ref, -1, 0)
 							if event: 
 								name = event.getEventName()
 							else:
@@ -594,7 +608,15 @@ class InfoBarTunerState(object):
 				posy += height
 				# Show windows
 				win.show()
-	
+		elif forceshow:
+			# No entries available
+			try:
+				if not self.info:
+					self.info = self.session.instantiateDialog( TunerStateInfo, _("Nothing running") )
+				self.info.show()
+			except Exception, e:
+				print "InfoBarTunerState show exception " + str(e)
+
 	def hide(self):
 		if self.hideTimer.isActive():
 			self.hideTimer.stop()
@@ -603,6 +625,8 @@ class InfoBarTunerState(object):
 	def tunerHide(self):
 		for win in self.entries.itervalues():
 			win.hide()
+		if self.info:
+			self.info.hide()
 
 	def close(self):
 		recoverInfoBar()
@@ -622,7 +646,7 @@ class InfoBarTunerState(object):
 # Base screen class, contains all skin relevant parts
 class TunerStateBase(Screen):
 	# Skin will only be read once
-	skinfile = "/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/skin.xml" 
+	skinfile = skinfile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/InfoBarTunerState/skin.xml" )
 	skin = open(skinfile).read()
 	
 	def __init__(self, session):
@@ -690,36 +714,45 @@ class TunerStateInfo(TunerStateBase):
 		self.type = INFO
 		self.name = name
 		
-		self.closeTimer = eTimer()
-		self.closeTimer.callback.append(self.close)
-		
-		self.onLayoutFinish.append(self.popup)
-
-	def popup(self):
-		self.onLayoutFinish.remove(self.popup)
-		
-		fields = []
-		widths = []
-		
 		if not config.infobartunerstate.background_transparency.value:
 			self["Background"].show()
 		else:
 			self["Background"].hide()
 		
 		self["Type"].setPixmapNum(3)
-		fields.append( "Type" )
-		widths.append( self["Type"].instance.size().width() )
-		
 		self["Progress"].hide()
 		
-		height = self.instance.size().height()
 		for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
 			field = "Field"+str(i)
 			
 			if field == "Field0":
 				self[field].setText( str(self.name) )
+		
+		self.onLayoutFinish.append(self.popup)
+
+	def popup(self):
+		print "IBTS popup"
+		
+		fields = []
+		fields.append( "Type" )
+		
+		widths = []
+		widths.append( self["Type"].instance.size().width() )
+		
+		height = self.instance.size().height()
+		
+		for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
+			field = "Field"+str(i)
+			
+			#Workaround#1
+			self[field].instance.resize( eSize(1000, height) )
 			
 			width = self[field].instance.calculateSize().width()
+			print width
+			
+			#Workaround#2
+			width = int( width * 1.10 )
+			
 			self[field].instance.resize( eSize(width, height) )
 			
 			fields.append(field)
@@ -736,16 +769,6 @@ class TunerStateInfo(TunerStateBase):
 		
 		self.reorder( widths )
 		self.move( posx, posy )
-		
-		#self.closeTimer.startLongTimer( int(config.infobartunerstate.popup_time.value) or int(config.usage.infobar_timeout.index) or 5 )
-		self.closeTimer.startLongTimer( int(config.usage.infobar_timeout.index) or 5 )
-
-	def close(self):
-		self.hide()
-		from Plugins.Extensions.InfoBarTunerState.plugin import gInfoBarTunerState
-		global gInfoBarTunerState
-		gInfoBarTunerState.session.deleteDialog(self)
-		gInfoBarTunerState.info = None
 
 
 #######################################################
@@ -997,7 +1020,15 @@ class TunerState(TunerStateBase):
 			self[field].setText( text )
 			fields.append( field )
 			
+			#Workaround#1
+			self[field].instance.resize( eSize(1000, height) )
+			
 			width = self[field].instance.calculateSize().width()
+			print width
+			
+			#Workaround#2
+			width = int( width * 1.10 )
+			
 			self[field].instance.resize( eSize(width, height) )
 			
 			widths.append( width )
@@ -1026,7 +1057,10 @@ def getStream(id):
 	
 	for stream in streamingScreens:
 		if stream:
+			#TEST_MULTIPLESTREAMS 
 			if id == str(stream.screenIndex) + str(stream.clientIP):
+			#if id == str(stream.getRecordServiceRef()) + str(stream.clientIP):
+			##if(id == str(stream.getRecordServiceRef().toString()) + str(stream.clientIP)):
 				return stream
 	return None
 

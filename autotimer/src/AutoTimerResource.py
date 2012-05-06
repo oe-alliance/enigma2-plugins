@@ -2,6 +2,7 @@
 from AutoTimer import AutoTimer
 from AutoTimerConfiguration import CURRENT_CONFIG_VERSION
 from RecordTimer import AFTEREVENT
+from twisted.internet import reactor
 from twisted.web import http, resource, server
 import threading
 try:
@@ -57,8 +58,10 @@ class AutoTimerBackgroundThread(threading.Thread):
 		req = self.__req
 		ret = self.__fnc(req)
 		if self.__stillAlive and ret != server.NOT_DONE_YET:
-			req.write(ret)
-			req.finish()
+			def finishRequest():
+				req.write(ret)
+				req.finish()
+			reactor.callFromThread(finishRequest)
 
 class AutoTimerBackgroundingResource(AutoTimerBaseResource, threading.Thread):
 	def render(self, req):
@@ -346,6 +349,13 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		if not timer.vps_enabled and timer.vps_overwrite:
 			timer.vps_overwrite = False
 
+		# SeriesPlugin
+		series_labeling = get("series_labeling")
+		if series_labeling is not None:
+			try: series_labeling = int(series_labeling)
+			except ValueError: series_labeling = series_labeling == "yes"
+			timer.series_labeling = series_labeling
+
 		if newTimer:
 			autotimer.add(timer)
 			message = _("AutoTimer was added successfully")
@@ -423,6 +433,13 @@ class AutoTimerSettingsResource(resource.Resource):
 		else:
 			hasVps = True
 
+		try:
+			from Plugins.Extensions.SeriesPlugin.plugin import Plugins
+		except ImportError as ie:
+			hasSeriesPlugin = False
+		else:
+			hasSeriesPlugin = True
+
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2settings>
 	<e2setting>
@@ -486,6 +503,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>hasSeriesPlugin</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>version</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
@@ -509,6 +530,7 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.add_autotimer_to_tags.value,
 				config.plugins.autotimer.add_name_to_tags.value,
 				hasVps,
+				hasSeriesPlugin,
 				CURRENT_CONFIG_VERSION,
 				API_VERSION,
 			)

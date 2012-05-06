@@ -79,8 +79,27 @@ function sortAutoTimerByName(a,b){
 	return compareStrings(a.name, b.name);
 }
 
+// Now we will define our date comparison functions. These are callbacks
+// that we will be providing to the array sort method below.
+var date_sort_asc = function (date1, date2) {
+	// This is a comparison function that will result in dates being sorted in
+	// ASCENDING order. As you can see, JavaScript's native comparison operators
+	// can be used to compare dates. This was news to me.
+	if (date1 > date2) return 1;
+	if (date1 < date2) return -1;
+	return 0;
+};
+
+var date_sort_desc = function (date1, date2) {
+	// This is a comparison function that will result in dates being sorted in
+	// DESCENDING order.
+	if (date1 > date2) return -1;
+	if (date1 < date2) return 1;
+	return 0;
+};
+
 function sortAutoTimerByStart(a,b){
-	return (b.start < a.start);
+	return date_sort_asc(a.start, b.start);
 }
 
 function in_array(a,p){
@@ -206,6 +225,7 @@ var AutoTimerEditorCore = Class.create({
 			this.list = new AutoTimerListController('contentAutoTimerList');
 			this.edit = new AutoTimerEditController('contentAutoTimerContent');
 			this.preview = new AutoTimerPreviewController('contentAutoTimerContent');
+			this.parse = new AutoTimerParseController('contentAutoTimerContent');
 			this.timers = new TimerController('contentAutoTimerContent');
 			this.about = new AboutPage('contentAutoTimerContent');
 			
@@ -235,16 +255,12 @@ var AutoTimerEditorCore = Class.create({
 	
 	loadSettingsCallback: function(settings){
 		this.hasVps = settings['hasVps'];
-		this.loadFinal();
-	},
-	
-	loadSeriesServicesCallback: function(data){
-		this.seriesServices = data;
+		this.hasSeriesPlugin = settings['hasSeriesPlugin'];
 		this.loadFinal();
 	},
 	
 	loadFinal: function(){
-		if (this.locations != undefined && this.tags != undefined && this.bouquets != undefined && this.hasVps != undefined ){
+		if (this.locations != undefined && this.tags != undefined && this.bouquets != undefined && this.hasVps != undefined && this.hasSeriesPlugin != undefined ){
 			// Load and display autotimer list
 			if (this.newautotimer.name!=''){
 				// Load autotimer list and show a new autotimer
@@ -302,10 +318,6 @@ var AutoTimerMenuController  = Class.create(Controller, {
 	
 	load: function(){
 		this.handler.load({});
-	},
-	
-	preview: function(){
-		autotimereditorcore.preview.load();
 	},
 	
 	backup: function() {
@@ -419,14 +431,14 @@ var AutoTimerMenuController  = Class.create(Controller, {
 		$('preview').on(
 			'click',
 			function(event, element){
-				this.preview();
+				autotimereditorcore.preview.load();
 			}.bind(this)
 		);
 		$('preview').title = "Show events matching your AutoTimers";
 		$('parse').on(
 			'click',
 			function(event, element){
-				autotimereditorcore.list.parse();
+				autotimereditorcore.parse.load();
 			}.bind(this)
 		);
 		$('parse').title = "Run AutoTimer and add timers";
@@ -535,13 +547,6 @@ var AutoTimerListController = Class.create(Controller, {
 		this.select = $('list').value;
 		$('contentAutoTimerContent').update('<div></div>');
 		this.load();
-	},
-	
-	parse: function(){
-		this.handler.parse({}, this.parseCallback.bind(this));
-	},
-	parseCallback: function(){
-		autotimereditorcore.timers.load();
 	},
 	
 	add: function(){
@@ -1011,6 +1016,12 @@ var AutoTimerEditController = Class.create(Controller, {
 			data['vps_overwrite'] = '0';
 		}
 		
+		if ($('series_labeling').checked){
+			data['series_labeling'] = ($('series_labeling').checked) ? '1' : '0';
+		} else{
+			data['series_labeling'] = '0';
+		}
+		
 		this.saveurl = [];
 		for( key in data ){
 			var value = data[key];
@@ -1221,6 +1232,27 @@ var AutoTimerPreviewController = Class.create(Controller, {
 	registerEvents: function(){}
 });
 
+var AutoTimerParseController = Class.create(Controller, {
+	initialize: function($super, target){
+		$super(new AutoTimerParseHandler(target));
+	},
+	
+	load: function(){
+		$('list').selectedIndex = -1;
+		$('headerautotimercontent').innerHTML = "AutoTimer Parse:";
+		this.handler.load(
+			{},
+			function(){
+				// Maybe if autotimereditorcore.hasSeriesPlugin == "True" then wait a little
+				autotimereditorcore.timers.load();
+			}.bind(this));
+	},
+	
+	onFinished: function(){},
+	
+	registerEvents: function(){}
+});
+
 var TimerController = Class.create(Controller, {
 	initialize: function($super, target){
 		$super(new TimerListHandler(target));
@@ -1374,18 +1406,6 @@ var AutoTimerListHandler  = Class.create(AbstractContentHandler, {
 		this.ajaxload = true;
 	},
 	
-	parse: function(parms, callback){
-		this.provider.simpleResultQuery(
-			URL.parse,
-			parms,
-			function(callback, transport){
-				this.simpleResultCallback(transport, callback);
-				if(typeof(callback) == "function"){
-					callback();
-				}
-			}.bind(this, callback));
-	},
-	
 	add: function(parms, callback){
 		this.provider.simpleResultQuery(
 			URL.add, 
@@ -1443,6 +1463,27 @@ var AutoTimerPreviewHandler = Class.create(AbstractContentHandler, {
 		this.provider = new AutoTimerPreviewProvider(this.show.bind(this));
 		this.ajaxload = true;
 	},
+});
+
+var AutoTimerParseHandler = Class.create(AbstractContentHandler, {
+	initialize: function($super, target){
+		$super(null, target);
+		this.provider = new SimpleRequestProvider();
+		this.ajaxload = true;
+	},
+	
+	load: function(parms, callback){
+		this.requestStarted();
+		this.provider.simpleResultQuery(
+		URL.parse,
+		parms,
+		function(transport){
+			this.simpleResultCallback.bind(this);
+			if(callback)
+				callback();
+		}.bind(this));
+	},
+	
 });
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1534,6 +1575,7 @@ var AutoTimerPreviewProvider = Class.create(AbstractContentProvider, {
 		return {list : this.list};
 	},
 });
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Objects
@@ -1970,6 +2012,13 @@ function AutoTimer(xml, defaults){
 		'vps_overwrite' : vps_overwrite,
 	}
 	
+	var hasSeriesPlugin = (autotimereditorcore.hasSeriesPlugin == "True") ? '' : 'invisible';
+	var series_labeling = (getAttribute(xml, 'series_labeling', defaults)) ? 'checked' : '';
+	this.seriesplugin = {
+		'hasSeriesPlugin' : hasSeriesPlugin,
+		'series_labeling' : series_labeling,
+	}
+	
 	this.json = { 	
 			'id' :                    this.id,
 			'enabled' :               this.enabled,
@@ -2000,6 +2049,7 @@ function AutoTimer(xml, defaults){
 			'services' :                   this.services,
 			
 			'vps' :                   this.vps,
+			'seriesplugin' :          this.seriesplugin,
 	};
 
 	this.toJSON = function(){

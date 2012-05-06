@@ -35,15 +35,16 @@ from PushService import PushService
 
 # Constants
 NAME = "PushService"
-VERSION = "0.2.3"
-SUPPORT = "http://www.i-have-a-dreambox.com/wbb2/thread.php?threadid=167779"
+VERSION = "0.2.4"
+SUPPORT = "http://bit.ly/psihad"
 DONATE = "http://bit.ly/pspaypal"
 ABOUT = "\n  " + NAME + " " + VERSION + "\n\n" \
 				+ _("  (C) 2012 by betonme @ IHAD \n\n") \
 				+ _("  If You like this plugin and want to support it,\n") \
 				+ _("  or if just want to say ''thanks'',\n") \
 				+ _("  feel free to donate via PayPal. \n\n") \
-				+ _("  Thanks a lot ! \n\n  PayPal: ") + DONATE
+				+ _("  Thanks a lot ! \n  PayPal: ") + DONATE + "\n" \
+				+ _("  Support: ") + SUPPORT
 
 
 # Globals
