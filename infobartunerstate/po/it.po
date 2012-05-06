@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - infobartunerstate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-14 22:53+0100\n"
-"PO-Revision-Date: 2012-03-14 22:57+0100\n"
+"POT-Creation-Date: 2012-05-06 22:30+0100\n"
+"PO-Revision-Date: 2012-05-06 22:36+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
@@ -117,48 +117,52 @@ msgstr "Consentire un solo campo icona:"
 msgid "Only one Graphical Progress field allowed:"
 msgstr "Consentire un solo campo di progresso grafico:"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:795
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:796
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:615
+msgid "Nothing running"
+msgstr "Nulla è attivo"
+
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:818
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:819
 msgid "-"
 msgstr "-"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:893
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:916
 msgid "Record"
 msgstr "Registrazione"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:895
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:918
 msgid "Stream"
 msgstr "Stream"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:897
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:920
 msgid "Finished"
 msgstr "Terminato"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:909
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:932
 #, python-format
 msgid "%d"
 msgstr "%d"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:922
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:929
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:937
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:940
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:955
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:945
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:952
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:960
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:963
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:978
 #, python-format
 msgid "%d Min"
 msgstr "%d min"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:959
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:982
 #, python-format
 msgid "%d %%"
 msgstr "%d %%"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:986
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:1009
 #, python-format
 msgid "%d MB"
 msgstr "%d MB"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:990
+#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:1013
 #, python-format
 msgid "%d GB"
 msgstr "%d GB"
@@ -175,139 +179,172 @@ msgstr "Mostrare InfoBar Tuner State"
 msgid "InfoBarTunerState Setup"
 msgstr "Configurazione InfoBar TunerState"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:50
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:44
+msgid ""
+"  (C) 2012 by betonme @ IHAD \n"
+"\n"
+msgstr ""
+"  (C) 2012 by betonme @ IHAD \n"
+"\n"
+
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:45
+msgid "  If You like this plugin and want to support it,\n"
+msgstr "  Se questo plugin piace e si desiderasse supportarlo,\n"
+
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:46
+msgid "  or if just want to say ''thanks'',\n"
+msgstr "  o semplicemente si volesse ringraziare,\n"
+
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:47
+msgid ""
+"  feel free to donate via PayPal. \n"
+"\n"
+msgstr ""
+"  è possibile contribuire con PayPal.\n"
+"\n"
+
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:48
+msgid ""
+"  Thanks a lot ! \n"
+"  PayPal: "
+msgstr ""
+"  Mille grazie!\n"
+"\n"
+"  PayPal: "
+
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:49
+msgid "  SUPPORT: "
+msgstr "SUPPORTO: "
+
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:57
 msgid "Type (Icon)"
 msgstr "Tipo (icona)"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:51
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:58
 msgid "Type (Text)"
 msgstr "Tipo (testo)"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:52
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:59
 msgid "Tuner"
 msgstr "Tuner"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:53
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:60
 msgid "Tuner Type"
 msgstr "Tipo tuner"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:54
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:61
 msgid "Channel Number"
 msgstr "Numero canale"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:55
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:62
 msgid "Channel Name"
 msgstr "Nome canale"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:56
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:63
 msgid "Name"
 msgstr "Nome"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:57
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:64
 msgid "Time Left / Duration"
 msgstr "Tempo residuo / Durata"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:58
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:65
 msgid "Time Left"
 msgstr "Tempo residuo"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:59
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:66
 msgid "Time Elapsed"
 msgstr "Tempo trascorso"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:60
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:67
 msgid "Begin"
 msgstr "Inizio"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:61
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:68
 msgid "End"
 msgstr "Fine"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:62
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:69
 msgid "Duration"
 msgstr "Durata"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:63
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:70
 msgid "Timer Progress (Graphical)"
 msgstr "Progresso timer (grafico)"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:64
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:71
 msgid "Timer Progress (Text)"
 msgstr "Progresso timer (testo)"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:65
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:72
 msgid "Destination"
 msgstr "Destinazione"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:66
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:73
 msgid "Stream Client"
 msgstr "Client stream"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:67
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:74
 msgid "Stream Client with Port"
 msgstr "Client stream con porta"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:68
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:75
 msgid "Destination / Client"
 msgstr "Destinazione / Client"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:71
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:78
 msgid "File Size"
 msgstr "Dimensioni file"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:72
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:79
 msgid "Free Space"
 msgstr "Spazio libero"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:73
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:80
 msgid "None"
 msgstr "Nulla"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:77
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:84
 msgid "HH:MM"
 msgstr "HH:MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:78
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:85
 msgid "DD.MM HH:MM"
 msgstr "GG.MM HH:MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:79
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:86
 msgid "MM/DD HH:MM"
 msgstr "MM/GG HH:MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:80
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:87
 msgid "DD.MM.YYYY HH:MM"
 msgstr "GG.MM.YYYY HH:MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:81
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:88
 msgid "YYYY/MM/DD HH:MM"
 msgstr "YYYY/MM/GG HH:MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:82
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:89
 msgid "HH:MM DD.MM"
 msgstr "HH:MM GG.MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:83
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:90
 msgid "HH:MM MM/DD"
 msgstr "HH:MM MM/GG"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:84
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:91
 msgid "HH:MM DD.MM.YYYY"
 msgstr "HH:MM GG.MM.YYYY"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:85
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:92
 msgid "HH:MM YYYY/MM/DD"
 msgstr "HH:MM YYYY/MM/GG"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:140
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:147
 msgid "configuration"
 msgstr "Configurazione"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:186
-msgid "Nothing running"
-msgstr "Nulla è attivo"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:190
+#: .../enigma2-plugins/infobartunerstate/src/plugin.py:202
 msgid "InfoBarTunerState is disabled"
 msgstr "InfoBarTunerState è disabilitato"
 
