@@ -2,4 +2,4 @@ Package: enigma2-plugin-extensions-eurotictv
 Version: 20110215
 Description: Watch eUroticTV via HTTP Live Streaming
 Maintainer: Dream Multimedia
-Depends: enigma2, gst-plugin-bad-fragmented
+Depends: enigma2, gst-plugins-bad-fragmented
