@@ -15,8 +15,12 @@ def emergencyDisable(*args, **kwargs):
 	if growleeConnection:
 		growleeConnection.stop()
 
-	if gotNotification in Notifications.notificationAdded:
-		Notifications.notificationAdded.remove(gotNotification)
+	if hasattr(Notifications, 'notificationQueue'):
+		addedList = Notifications.notificationQueue.addedCB
+	else:
+		addedList = Notifications.notificationAdded
+	if gotNotification in addedList:
+		addedList.remove(gotNotification)
 	Notifications.AddPopup(
 		_("Network error.\nDisabling Growlee until next restart!"),
 		MessageBox.TYPE_ERROR,
@@ -24,9 +28,15 @@ def emergencyDisable(*args, **kwargs):
 	)
 
 def gotNotification():
-	notifications = Notifications.notifications
+	if hasattr(Notifications, 'notificationQueue'):
+		notifications = Notifications.notificationQueue.queue
+		def handler(note):
+			return note.fnc, note.screen, note.args, note.kwargs, note.id
+	else:
+		notifications = Notifications.notifications
+		handler = lambda note: note
 	if notifications:
-		_, screen, args, kwargs, id = notifications[-1]
+		_, screen, args, kwargs, id = handler(notifications[-1])
 		if screen is MessageBox and id != NOTIFICATIONID:
 
 			# NOTE: priority is in [-2; 2] but type is [0; 3] so map it

@@ -220,9 +220,13 @@ def configuration(session, **kwargs):
 
 def autostart(reason, **kwargs):
 	if reason == 0:
+		if hasattr(Notifications, 'notificationQueue'):
+			addedList = Notifications.notificationQueue.addedCB
+		else:
+			addedList = Notifications.notificationAdded
 		# NOTE: we need to be the first one to be notified since other listeners
 		# may remove the notifications from the list for good
-		Notifications.notificationAdded.insert(0, gotNotification)
+		addedList.insert(0, gotNotification)
 
 		growleeConnection.listen()
 
