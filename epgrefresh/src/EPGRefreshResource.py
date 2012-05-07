@@ -335,6 +335,10 @@ class EPGRefreshSettingsResource(resource.Resource):
   <e2settingname>hasAutoTimer</e2settingname>
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
+ <e2setting>
+  <e2settingname>api_version</e2settingname>
+  <e2settingvalue>%s</e2settingvalue>
+ </e2setting>
 </e2settings>""" % (
 				config.plugins.epgrefresh.enabled.value,
 				config.plugins.epgrefresh.enablemessage.value,
@@ -351,5 +355,6 @@ class EPGRefreshSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.adapter.value,
 				canDoBackgroundRefresh,
 				hasAutoTimer,
+				API_VERSION,
 			)
 
