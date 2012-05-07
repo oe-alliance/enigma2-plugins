@@ -252,21 +252,19 @@ class Timer(Source):
 		description = param['description'].replace("\n", " ")
 
 		eit = param.get("eit", None)
-		if eit is None:
-			eit = ""
-
-		if eit.strip() == "":
+		if eit is None or eit.strip() == "":
 			eit = 0
 		else:
-			eit = int(eit)
+			try: eit = int(eit)
+			except ValueError: return ( False, "Illegal Parameter value for Parameter edit : '%s'" % eit )
 
-		print "[WebComponents.Sources.Timer]: eit=%s" %eit
+		print "[WebComponents.Sources.Timer]: eit=%d" %eit
 		if eit != 0:
 			#check if the given event exists, if it doesn't return an error
 			epgcache = eEPGCache.getInstance()
 			event = epgcache.lookupEventId(eServiceReference(param['sRef']), eit)
 			if event is None:
-				return ( False, "Event with id %s not found" %eit)
+				return ( False, "Event with id %d not found" %eit)
 			eit = event.getEventId()
 
 		disabled = False #Default to: Enabled
