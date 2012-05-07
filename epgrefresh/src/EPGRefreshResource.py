@@ -155,9 +155,9 @@ class EPGRefreshPreviewServicesResource(resource.Resource):
 					services = bouquets = None
 					break
 				elif (ref.flags & 7) == 7:
-					epgservice = EPGRefreshService(sref, duration)
+					epgservice = EPGRefreshService(sref, None)
 					if epgservice not in bouquets:
-						services.add(epgservice)
+						bouquets.add(epgservice)
 				else:
 					if not (ref.flags & eServiceReference.isGroup):
 						# strip all after last :
@@ -183,7 +183,7 @@ class EPGRefreshPreviewServicesResource(resource.Resource):
 			ref = ServiceReference(str(serviceref))
 			returnlist.extend((
 				' <e2service>\n',
-				'  <e2servicereference>', str(serviceref), '</e2servicereference>\n',
+				'  <e2servicereference>', stringToXML(str(serviceref)), '</e2servicereference>\n',
 				'  <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
 				' </e2service>\n',
 			))
