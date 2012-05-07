@@ -251,7 +251,10 @@ class Timer(Source):
 			return ( False, "Missing Parameter: description" )
 		description = param['description'].replace("\n", " ")
 
-		eit = param.get("eit", "")
+		eit = param.get("eit", None)
+		if eit is None:
+			eit = ""
+
 		if eit.strip() == "":
 			eit = 0
 		else:
