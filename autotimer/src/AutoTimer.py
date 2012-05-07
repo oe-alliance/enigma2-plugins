@@ -427,14 +427,7 @@ class AutoTimer:
 						newEntry = rtimer
 						modified += 1
 
-						# Modify only the time values saved in timer
-						# Else the timer will lost the series labeling
-						#newEntry.name = name
-						#newEntry.description = shortdesc
-						newEntry.begin = int(begin)
-						newEntry.end = int(end)
-						newEntry.service_ref = ServiceReference(serviceref)
-
+						self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref)
 						break
 					elif timer.avoidDuplicateDescription >= 1 \
 						and not rtimer.disabled:
@@ -564,6 +557,13 @@ class AutoTimer:
 
 # Supporting functions
 
+	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref):
+		timer.name = name
+		timer.description = shortdesc
+		timer.begin = int(begin)
+		timer.end = int(end)
+		timer.service_ref = ServiceReference(serviceref)
+
 	def addDirectoryToMovieDict(self, moviedict, dest, serviceHandler):
 		movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
 		if movielist is None:
@@ -589,10 +589,8 @@ class AutoTimer:
 				})
 
 	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2):
-		# Instead of an equal comparison, we have to use an in string comparison
-		# Else we won't find similar timers with series labeling
-		foundTitle = (name1 in name2)
-		foundShort = (shortdesc1 in shortdesc2) if timer.searchForDuplicateDescription > 0 else True
+		foundTitle = name1 == name2
+		foundShort = shortdesc1 == shortdesc2 if timer.searchForDuplicateDescription > 0 else True
 		foundExt = True
 		# NOTE: only check extended if short description already is a match because otherwise
 		# it won't evaluate to True anyway
