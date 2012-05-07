@@ -394,8 +394,7 @@ var AutoTimerMenuController  = Class.create(Controller, {
 		iframe.observe("load", eventHandler);
 		// Set properties of form...
 		form.setAttribute("target","upload_iframe");
-		//form.setAttribute("action", action_url);
-		form.setAttribute("action", "uploadfile");
+		form.setAttribute("action","uploadfile");
 		form.setAttribute("method","post");
 		form.setAttribute("enctype","multipart/form-data");
 		form.setAttribute("encoding","multipart/form-data");
