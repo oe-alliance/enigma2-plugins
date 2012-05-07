@@ -4,6 +4,7 @@ from . import _, config
 
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
+from Tools.Notifications import AddPopup
 
 # Plugin
 from Components.PluginComponent import plugins
@@ -150,17 +151,16 @@ def handleAutoPoller():
 def editCallback(session):
 	# Don't parse EPG if editing was canceled
 	if session is not None:
-		autotimer.parseEPGAsync().addCallback(parseEPGCallback, session)
+		autotimer.parseEPGAsync().addCallback(parseEPGCallback)
 	else:
 		handleAutoPoller()
 
-def parseEPGCallback(ret, session):
-	# XXX: use notification?
-	session.open(
-		MessageBox,
+def parseEPGCallback(ret):
+	AddPopup(
 		_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
-		type = MessageBox.TYPE_INFO,
-		timeout = 10
+		MessageBox.TYPE_INFO,
+		10,
+		'AT_PopUp_ID_ParseEPGCallback'
 	)
 
 	# Save xml
