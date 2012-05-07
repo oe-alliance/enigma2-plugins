@@ -7,6 +7,7 @@ from Components.SystemInfo import SystemInfo
 from time import localtime
 from OrderedSet import OrderedSet
 from ServiceReference import ServiceReference
+from Tools.XMLTools import stringToXML
 try:
 	from urllib import unquote
 	iteritems = lambda d: d.iteritems()
