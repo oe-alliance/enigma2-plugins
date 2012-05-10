@@ -3,4 +3,4 @@ Version: 0.1-r0
 Description: GUI that allows user to change the ftp- / telnet-password
 Maintainer: Nabil Hanna <nabil1978@web.de>
 Homepage: http://www.lt-forums.org/ali
-Depends: enigma2 (>= 2.6git20090615)
+Depends: enigma2

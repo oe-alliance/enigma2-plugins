@@ -3,4 +3,4 @@ Version: 1.6
 Description: Enigma2 Plugin to play AVI/DIVX/WMV/etc. videos from PC on your dreambox. Needs a running VLC (see www.vieolan.org)
 Maintainer: Alex Laetsch <alex@laetsch.de>
 Homepage: http://www.i-have-a-dreambox.com/wbb2/board.php?boardid=240
-Depends: enigma2 (>= 2.5git20080501)
+Depends: enigma2

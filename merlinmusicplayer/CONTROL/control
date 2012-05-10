@@ -3,4 +3,4 @@ Version: 1.1
 Description: Merlin Music Player and iDream (music management)
 Maintainer: Dr. Best <dr.best@dreambox-tools.info>
 Homepage: http://www.dreambox-tools.info
-Depends: enigma2 (>> 2.6git20090615), python-twisted-web, python-mutagen, python-sqlite3
+Depends: enigma2, python-twisted-web, python-mutagen, python-sqlite3

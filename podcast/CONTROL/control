@@ -3,4 +3,4 @@ Version: 0.1-r0
 Description: Stream podcasts
 Maintainer: Nabil Hanna <nabil1978@web.de>
 Homepage: http://www.lt-forums.org/ali
-Depends: enigma2 (>= 2.6git20090520), python-twisted-web
+Depends: enigma2, python-twisted-web

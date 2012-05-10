@@ -3,4 +3,4 @@ Version: 1.0
 Description: manage local Files
 Maintainer: 3c5x9 <3c5x9@gmx.net>
 Homepage: http://www.i-have-a-dreambox.com
-Depends: enigma2 (>> 1.0git20090601)
+Depends: enigma2

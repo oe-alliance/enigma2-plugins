@@ -6,4 +6,4 @@ Priority: optional
 Maintainer: Martin Gauk <mart-g@web.de>
 Replaces: enigma2-plugin-extensions-vps
 Conflicts: enigma2-plugin-extensions-vps
-Depends: enigma2 (>= 2.6git20091203)
+Depends: enigma2

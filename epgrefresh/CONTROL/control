@@ -3,4 +3,4 @@ Version: 1.1.0-20111123-r0
 Description: Plugin to refresh EPG Data when Receiver is inactive
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
 Homepage: http://www.ritzmo.de
-Depends: enigma2 (>= 2.6git20090615), python-codecs, python-lang, python-xml, enigma2-plugin-systemplugins-mphelp
+Depends: enigma2, python-codecs, python-lang, python-xml, enigma2-plugin-systemplugins-mphelp

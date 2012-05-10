@@ -3,4 +3,4 @@ Version: 0.2.3
 Description: A flexible event notification service. Never miss any free space warning, update or timer conflict.
 Maintainer: betonme (Frank Glaser <glaserfrank(at)gmail.com>)
 Homepage: http://tecjunkie.blogspot.com/
-Depends: enigma2 (>= 2.6git20090615), python-xml, python-email, python-twisted-core, python-twisted-mail, python-twisted-names, python-twisted-protocols, python-twisted-web, python-pyopenssl, python-io
+Depends: enigma2, python-xml, python-email, python-twisted-core, python-twisted-mail, python-twisted-names, python-twisted-protocols, python-twisted-web, python-pyopenssl, python-io
