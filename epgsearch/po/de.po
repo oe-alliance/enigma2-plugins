@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:30+0000\n"
-"PO-Revision-Date: 2011-09-09 19:05+0100\n"
-"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
+"POT-Creation-Date: 2012-05-06 15:59+0100\n"
+"PO-Revision-Date: 2012-05-08 18:41+0100\n"
+"Last-Translator: Ralf Biedermann <ralf.biedermann@rbsoft.de>\n"
 "Language-Team: none\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../src\n"
 
 msgid "Add AutoTimer"
-msgstr ""
+msgstr "AutoTimer hinzufügen"
 
 msgid "Add timer"
 msgstr "Timer hinzufügen"
@@ -37,28 +37,22 @@ msgid "EPG Search"
 msgstr "EPG Suche"
 
 msgid "EPGSearch"
-msgstr ""
+msgstr "EPGSuche"
 
 msgid "EPGSearch Setup"
 msgstr "EPGSearch Einrichtung"
 
-msgid ""
-"Enable this to be able to access the EPG-Search from within the plugin "
-"browser."
-msgstr ""
+msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
+msgstr "Diesen Punkt aktivieren wenn EPGSuche in Erweiterungen aufgeführt werden soll."
 
 msgid "Enter text to search for"
 msgstr "Zu suchenden Text eingeben"
 
-msgid ""
-"How many entries to keep in the search history at most. 0 disables history "
-"entirely!"
-msgstr ""
-"Maximale Anzahl von Einträgen im Suchverlauf. Diesen Wert auf \"0\" setzen, "
-"um den Verlauf zu deaktivieren."
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr "Maximale Anzahl von Einträgen im Suchverlauf. Diesen Wert auf \"0\" setzen, um den Verlauf zu deaktivieren."
 
 msgid "IMDb Search"
-msgstr ""
+msgstr "IMDb Suche"
 
 msgid "Import from AutoTimer"
 msgstr "Importiere aus AutoTimer"
@@ -81,6 +75,9 @@ msgstr "Verlauf ist leer"
 msgid "OK"
 msgstr "OK"
 
+msgid "Open selected in IMDb"
+msgstr "Gewählten Eintrag in IMDb öffnen"
+
 msgid "Save search as AutoTimer"
 msgstr "Suchbegriff als AutoTimer speichern"
 
@@ -100,10 +97,10 @@ msgid "Setup"
 msgstr "Suche einrichten"
 
 msgid "Show in plugin browser"
-msgstr ""
+msgstr "Diesen Punkt aktivieren wenn EPGSuche in Erweiterungen aufgeführt werden soll."
 
 msgid "Show search history"
-msgstr ""
+msgstr "Letzten Suchen zeigen"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
