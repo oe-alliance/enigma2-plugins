@@ -1,9 +1,2 @@
-Package: enigma2-plugin-extensions-svdrp
-Version: 0.1-20110227-r0
 Description: basic remote control server using svdrp
-Section: extra
-Priority: optional
-Maintainer: Moritz Venn <moritz.venn@freaque.net>
-Homepage: http://www.ritzmo.de
 Depends: enigma2, python-twisted-protocols
-Source: http://www.ritzmo.de

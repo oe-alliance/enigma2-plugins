@@ -1,9 +1,2 @@
-Package: enigma2-plugin-extensions-curlytx
-Version: 1.0
 Description: Fetch and display remote text files via HTTP
-Maintainer: Christian Weiske <cweiske@cweiske.de>
 Depends: enigma2, python-twisted-web
-License: GPLv3 or later
-OE: enigma2-plugins
-Homepage: https://open-dreambox.org/trac/dreambox/wiki/CurlyTx
-Source: git://git.cweiske.de/enigma2-curlytx.git

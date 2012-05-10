@@ -1,6 +1,2 @@
-Package: enigma2-plugin-extensions-easyinfo
-Version: 1.0
 Description: Easy Info
-Maintainer: Vali
-Homepage: http://www.dreambox-tools.info
 Depends: enigma2

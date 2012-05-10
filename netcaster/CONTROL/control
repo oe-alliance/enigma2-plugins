@@ -1,6 +1,2 @@
-Package: enigma2-plugin-extensions-netcaster
-Version: 0.1-20072203-r0
 Description: Player for Network and Internet Streams
-Maintainer: 3c5x9 <3c5x9@gmx.net>
-Homepage: http://enigma2-plugins.schwerkraft.elitedvb.net/
 Depends: enigma2, gst-plugins-good-icydemux

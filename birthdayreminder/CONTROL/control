@@ -1,6 +1,2 @@
-Package: enigma2-plugin-extensions-birthdayreminder
-Version: 1.5.6
 Description: Birthday Reminder: Reminds you of birthdays
-Maintainer: Shaderman <shaderman@dreambox-tools.info>
-Homepage: http://www.dreambox-tools.info
 Depends: python-textutils

@@ -1,6 +1,2 @@
-Package: enigma2-plugin-extensions-partnerbox
-Version: 0.93
 Description: Partnerbox (Remote Timer and Remote TV Player)
-Maintainer: Dr. Best <dr.best@dreambox-tools.info>
-Homepage: http://www.dreambox-tools.info
 Depends: enigma2, python-twisted-web

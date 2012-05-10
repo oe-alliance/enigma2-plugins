@@ -1,6 +1,2 @@
-Package: enigma2-plugin-extensions-ardmediathek
-Version: 1.0
 Description: Zugriff auf die ARD-Mediathek
-Maintainer: Nabil Hanna <nabil1978@web.de>
-Homepage: http://www.lt-forums.org/ali
 Depends: enigma2, python-twisted-web

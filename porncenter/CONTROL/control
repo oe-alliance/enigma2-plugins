@@ -1,6 +1,2 @@
-Package: enigma2-plugin-extensions-porncenter
-Version: 1.0
 Description: Adult streaming plugins for dm800/dm8000
-Maintainer: Nabil Hanna <nabil1978@web.de>
-Homepage: http://www.lt-forums.org/ali
 Depends: enigma2, python-twisted-web

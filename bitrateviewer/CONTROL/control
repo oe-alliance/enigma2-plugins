@@ -1,6 +1,2 @@
-Package: enigma2-plugin-extensions-bitrateviewer
-Version: 0.1
 Description: BitrateViewer
-Maintainer: Dr. Best <dr.best@dreambox-tools.info>
-Homepage: http://www.dreambox-tools.info
 Depends: enigma2
