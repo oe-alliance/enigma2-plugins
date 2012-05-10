@@ -360,6 +360,14 @@ class EPGRefresh:
 			# Clean up
 			self.cleanUp()
 		else:
+			# If the current adapter is unable to run in background and we are in fact in background now,
+			# fall back to main picture
+			if (not self.refreshAdapter.backgroundCapable and Screens.Standby.inStandby):
+				print("[EPGRefresh] Adapter is not able to run in background or not available, falling back to MainPictureAdapter")
+				self.maybeStopAdapter()
+				self.refreshAdapter = MainPictureAdapter(self.session)
+				self.refreshAdapter.prepare()
+
 			# Play next service
 			# XXX: we might want to check the return value
 			self.refreshAdapter.play(eServiceReference(service.sref))
