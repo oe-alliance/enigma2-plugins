@@ -60,7 +60,7 @@ def skal(x, x1, x2, y1, y2):
 	return y
 
 def FClog(wert):
-	print "[FanControl2]",wert
+# 	print "[FanControl2]",wert
 	while len(FC2Log) > config.plugins.FanControl.LogCount.value:
 		del FC2Log[5]
 	FC2Log.append(strftime("%H:%M:%S ") + wert)
