@@ -102,7 +102,7 @@ class Satloader(Screen):
 		self.list.addSelection("Kingofsat satellites.xml", "http://satellites.satloader.net/satellites.xml", 0, None)
 		self.list.addSelection("Kingofsat satellites.xml (feed)", "http://satellites.satloader.net/feeds.xml", 1, None)
 		self.list.addSelection("Satbeams satellites.xml", "http://satellites.satloader.net/satbeam.xml", 2, None)
-		self["key_green"].setText(_("install"))
+		self["key_green"].setText(_("Install"))
 		self["info"].setText("Press ok or green button to install satellites.xml")
 
 	def btnBlue(self):
