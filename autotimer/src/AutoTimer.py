@@ -31,9 +31,9 @@ from operator import itemgetter
 from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
 
 try:
-	from Plugins.Extensions.SeriesPlugin.plugin import labelTimer
+	from Plugins.Extensions.SeriesPlugin.plugin import modifyTimer
 except ImportError as ie:
-	labelTimer = None
+	modifyTimer = None
 
 from . import config, xrange, itervalues
 
@@ -491,6 +491,10 @@ class AutoTimer:
 				if oldExists:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?
 					recordHandler.timeChanged(newEntry)
+
+					if timer.series_labeling and modifyTimer is not None:
+						modifyTimer(newEntry, name)
+
 				else:
 					conflictString = ""
 					if similarTimer:
@@ -505,38 +509,39 @@ class AutoTimer:
 						conflictString += ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
 						print("[AutoTimer] conflict with %s detected" % (conflictString))
 
-					if conflicts and config.plugins.autotimer.addsimilar_on_conflict.value:
-						# We start our search right after our actual index
-						# Attention we have to use a copy of the list, because we have to append the previous older matches
-						lepgm = len(epgmatches)
-						for i in xrange(lepgm):
-							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[ (i+idx+1)%lepgm ]
-							if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS ):
-								# Check if the similar is already known
-								if eitS not in similar:
-									print("[AutoTimer] Found similar Timer: " + name)
+						if config.plugins.autotimer.addsimilar_on_conflict.value:
+							# We start our search right after our actual index
+							# Attention we have to use a copy of the list, because we have to append the previous older matches
+							lepgm = len(epgmatches)
+							for i in xrange(lepgm):
+								servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[ (i+idx+1)%lepgm ]
+								if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS ):
+									# Check if the similar is already known
+									if eitS not in similar:
+										print("[AutoTimer] Found similar Timer: " + name)
 
-									# Store the actual and similar eit and conflictString, so it can be handled later
-									newEntry.conflictString = conflictString
-									similar[eit] = newEntry
-									similar[eitS] = newEntry
-									similarTimer = True
-									if beginS <= evtBegin:
-										# Event is before our actual epgmatch so we have to append it to the epgmatches list
-										epgmatches.append((servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS))
-									# If we need a second similar it will be found the next time
-								else:
-									similarTimer = False
-									newEntry = similar[eitS]
-								break
+										# Store the actual and similar eit and conflictString, so it can be handled later
+										newEntry.conflictString = conflictString
+										similar[eit] = newEntry
+										similar[eitS] = newEntry
+										similarTimer = True
+										if beginS <= evtBegin:
+											# Event is before our actual epgmatch so we have to append it to the epgmatches list
+											epgmatches.append((servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS))
+										# If we need a second similar it will be found the next time
+									else:
+										similarTimer = False
+										newEntry = similar[eitS]
+									break
 
 					if conflicts is None:
 						timer.decrementCounter()
 						new += 1
 						newEntry.extdesc = extdesc
 						recorddict[serviceref].append(newEntry)
-						if labelTimer is not None and timer.series_labeling:
-							labelTimer(newEntry, evtBegin, evtEnd)
+
+						if timer.series_labeling and modifyTimer is not None:
+							modifyTimer(newEntry, name)
 
 						# Similar timers are in new timers list and additionally in similar timers list
 						if similarTimer:
