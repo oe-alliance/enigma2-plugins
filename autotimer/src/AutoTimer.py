@@ -492,7 +492,7 @@ class AutoTimer:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?
 					recordHandler.timeChanged(newEntry)
 
-					if timer.series_labeling and modifyTimer is not None:
+					if modifyTimer is not None and timer.series_labeling:
 						modifyTimer(newEntry, name)
 
 				else:
@@ -540,7 +540,7 @@ class AutoTimer:
 						newEntry.extdesc = extdesc
 						recorddict[serviceref].append(newEntry)
 
-						if timer.series_labeling and modifyTimer is not None:
+						if modifyTimer is not None and timer.series_labeling:
 							modifyTimer(newEntry, name)
 
 						# Similar timers are in new timers list and additionally in similar timers list
