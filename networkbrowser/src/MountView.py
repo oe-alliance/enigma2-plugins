@@ -41,7 +41,7 @@ class AutoMountView(Screen):
 			<ePixmap pixmap="skin_default/div-h.png" position="0,310" zPosition="1" size="560,2" />
 			<widget source="introduction" render="Label" position="110,320" size="300,20" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
 		</screen>"""
-	
+
 	def __init__(self, session, plugin_path):
 		self.skin_path = plugin_path
 		self.session = session
@@ -139,16 +139,19 @@ class AutoMountView(Screen):
 			iAutoMount.removeMount(returnValue,self.removeDataAvail)
 
 	def removeDataAvail(self, data):
+		print '!!!!!!remove mount test1',data
 		if data is True:
 			iAutoMount.writeMountsConfig()
 			iAutoMount.getAutoMountPoints(self.deleteDataAvail)
 
 	def deleteDataAvail(self, data):
+		print '!!!!!!remove mount test2',data
 		if data is True:
 			if self.applyConfigRef.execing:
 				self.applyConfigRef.close(True)
 
 	def applyConfigfinishedCB(self,data):
+		print '!!!!!!remove mount test3',data
 		if data is True:
 			self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, _("Your network mount has been removed."), type = MessageBox.TYPE_INFO, timeout = 10)
 
