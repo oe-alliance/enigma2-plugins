@@ -6,9 +6,9 @@ var VlcBouquetListHandler = Class.create(AbstractContentHandler, {
 });
 
 var VlcServiceListHandler = Class.create(AbstractContentHandler, {
-	initialize: function($super, target){
+	initialize: function($super, target, zapCallback){
 		$super('streaminterface/tplServiceList', target, [this.getSubservices.bind(this)]);
-
+		this.zapCallback = zapCallback;
 		this.provider = new ServiceListProvider(this.show.bind(this));
 //		this.subServiceHandler = new ServiceListSubserviceHandler();
 	},
@@ -32,6 +32,8 @@ var VlcServiceListHandler = Class.create(AbstractContentHandler, {
 
 	showSimpleResult: function($super, result){
 		if(result.getState()){
+			if(this.zapCallback)
+				this.zapCallback();
 			core.updateItemsLazy();
 		}
 		$super(result);
@@ -43,7 +45,7 @@ var WebTv = Class.create({
 		this.target = vlcObjectTarget;
 		this.instance = null;
 		this.bouquetHandler = new VlcBouquetListHandler('bouquetList');
-		this.serviceHandler = new VlcServiceListHandler('serviceList');
+		this.serviceHandler = new VlcServiceListHandler('serviceList', this.setStreamTarget.bind(this));
 		this.bouquetHandler.onFinished.push(this.onLoadBouquetFinished.bind(this));
 	},
 
@@ -63,7 +65,6 @@ var WebTv = Class.create({
 		var bref = decodeURIComponent( this.bouquetHandler.data.services[0].servicereference );
 		this.serviceHandler.load({'bRef' : bref});
 	},
-
 
 	registerEvents: function(){
 		$('bouquetList').on(
@@ -157,8 +158,12 @@ var WebTv = Class.create({
 	},
 
 	onServiceChanged: function(){
-		var sref = decodeURIComponent (  $('services').options[$('services').selectedIndex].id );
-		this.setStreamTarget(sref);
+		if($('vlcZap').checked){
+			var sref = decodeURIComponent ( $('services').options[$('services').selectedIndex].id );
+			this.serviceHandler.zap({'sRef': sref});
+		} else {
+			this.setStreamTarget();
+		}
 		this.setDeinterlace($('deinterlace'));
 	},
 
@@ -266,9 +271,10 @@ var WebTv = Class.create({
 		$('vlcVolume').update(this.instance.audio.volume);
 	},
 
-	setStreamTarget: function(servicereference) {
+	setStreamTarget: function() {
+		var sref = decodeURIComponent (  $('services').options[$('services').selectedIndex].id );
 		host = top.location.host;
-		url = 'http://' + host + ':8001/' + decodeURIComponent(servicereference);
+		url = 'http://' + host + ':8001/' + decodeURIComponent(sref);
 
 		debug("setStreamTarget " + url);
 		this.instance.playlist.clear();
