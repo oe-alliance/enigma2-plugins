@@ -258,9 +258,10 @@ baseTimerkeyLeft = None
 baseTimerkeyRight = None
 baseTimerkeySelect = None
 baseTimercreateConfig = None
+baseTimer__init__ = None
 
 def RemoteTimerInit():
-	global baseTimerEntrySetup, baseTimerEntryGo, baseTimerEntrynewConfig, baseTimerkeyLeft, baseTimerkeyRight, baseTimerkeySelect, baseTimercreateConfig
+	global baseTimerEntrySetup, baseTimerEntryGo, baseTimerEntrynewConfig, baseTimerkeyLeft, baseTimerkeyRight, baseTimerkeySelect, baseTimercreateConfig, baseTimer__init__
 	if baseTimerEntrySetup is None:
 		baseTimerEntrySetup = TimerEntry.createSetup
 	if baseTimerEntryGo is None:
@@ -275,6 +276,8 @@ def RemoteTimerInit():
 		baseTimerkeySelect = TimerEntry.keySelect
 	if baseTimercreateConfig is None:
 		baseTimercreateConfig  = TimerEntry.createConfig
+	if baseTimer__init__ is None:
+		baseTimer__init__ = TimerEntry.__init__
 	
 	TimerEntry.createConfig = RemoteTimerConfig
 	TimerEntry.keyLeft = RemoteTimerkeyLeft 
@@ -283,6 +286,12 @@ def RemoteTimerInit():
 	TimerEntry.createSetup = createRemoteTimerSetup
 	TimerEntry.keyGo = RemoteTimerGo
 	TimerEntry.newConfig = RemoteTimernewConfig
+	TimerEntry.__init__ = RemoteTimer__init__
+
+def RemoteTimer__init__(self, session, timer):
+	baseTimer__init__(self, session, timer)
+	if int(self.timerentry_remote.value) != 0:
+		RemoteTimernewConfig(self)
 	
 def RemoteTimerConfig(self):
 	self.Locations = []
@@ -526,7 +535,7 @@ def AddTimerE2Callback(self, session, answer):
 	if statetext:
 		text =  statetext.encode("utf-8", 'ignore')
 	ok = state == "True"
-	session.open(MessageBox,_("Partnerbox Answer: \n%s") % (text),MessageBox.TYPE_INFO, timeout = 3)
+	session.open(MessageBox,_("Partnerbox Answer: \n%s") % (text),MessageBox.TYPE_INFO, timeout = 10)
 	if ok:
 		if (config.plugins.Partnerbox.enablepartnerboxepglist.value): 
 			# Timerlist der Partnerbox neu laden --> Anzeige fuer EPGList, aber nur, wenn die gleiche IP in EPGList auch angezeigt wird
@@ -536,7 +545,7 @@ def AddTimerE2Callback(self, session, answer):
 
 def AddTimerE1Callback(self, session, answer):
 	ok = answer == "Timer event was created successfully."
-	session.open(MessageBox,_("Partnerbox Answer: \n%s") % (answer),MessageBox.TYPE_INFO, timeout = 3)
+	session.open(MessageBox,_("Partnerbox Answer: \n%s") % (answer),MessageBox.TYPE_INFO, timeout = 10)
 	if ok:
 		if (config.plugins.Partnerbox.enablepartnerboxepglist.value): 
 			# Timerlist der Partnerbox neu laden --> Anzeige fuer EPGList, aber nur, wenn die gleiche IP in EPGList auch angezeigt wird
