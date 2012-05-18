@@ -73,6 +73,7 @@ config.plugins.Partnerbox.showcurrentstreaminextensionsmenu= ConfigYesNo(default
 config.plugins.Partnerbox.showremotetimerinextensionsmenu= ConfigYesNo(default = True)
 config.plugins.Partnerbox.enablepartnerboxintimerevent = ConfigYesNo(default = False)
 config.plugins.Partnerbox.enablepartnerboxepglist = ConfigYesNo(default = False)
+config.plugins.Partnerbox.enabledefaultpartnerboxintimeredit = ConfigYesNo(default = False)
 config.plugins.Partnerbox.entriescount =  ConfigInteger(0)
 config.plugins.Partnerbox.Entries = ConfigSubList()
 initConfig()

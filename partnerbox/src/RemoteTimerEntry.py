@@ -292,7 +292,11 @@ def RemoteTimerConfig(self):
 	for c in config.plugins.Partnerbox.Entries:
 		self.entryguilist.append((str(index),str(c.name.value),c))
 		index = index + 1
-	self.timerentry_remote = ConfigSelection(default = "0", choices = self.entryguilist)
+	if config.plugins.Partnerbox.enabledefaultpartnerboxintimeredit.value and index > 1:
+		default = "1"
+	else:
+		default = "0"
+	self.timerentry_remote = ConfigSelection(default = default, choices = self.entryguilist)
 	baseTimercreateConfig(self)
 
 #def getLocationsError(self, error):
