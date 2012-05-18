@@ -96,6 +96,7 @@ SUBDIRS = \
 	subsdownloader2 \
 	svdrp \
 	tageditor \
+	teletext \
 	toolkit \
 	trafficinfo \
 	tvcharts \

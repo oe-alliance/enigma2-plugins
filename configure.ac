@@ -557,6 +557,11 @@ tageditor/meta/Makefile
 tageditor/po/Makefile
 tageditor/src/Makefile
 
+teletext/Makefile
+teletext/meta/Makefile
+teletext/po/Makefile
+teletext/src/Makefile
+
 toolkit/Makefile
 toolkit/src/Makefile
 
