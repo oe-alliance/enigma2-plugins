@@ -46,6 +46,7 @@ CMD_FLOF=19
 CMD_PAGEINPUT=20
 CMD_EDGE_CUT=21
 CMD_TEXTLEVEL=22
+CMD_REGION=23
 CMD_CLOSE_DMN=99
 
 SPLIT_MODE_PAT = "pat"
@@ -53,6 +54,7 @@ SPLIT_MODE_TAP = "tap"
 SPLIT_MODE_TIP = "tip"
 splittingModeList = [ (SPLIT_MODE_PAT, _("picture and teletext")), (SPLIT_MODE_TAP, _("teletext and picture")), (SPLIT_MODE_TIP, _("teletext in picture")) ]
 textlevelModeList = [ ("0", "1.0"), ("1", "1.5"), ("2", "2.5"), ("3", "3.5") ]
+regionList = [ ("0", _("Western and Central Europe")), ("8", _("Eastern Europe")), ("16", _("Western Europe and Turkey")), ("24", _("Central and Southeast Europe")), ("32", _("Cyrillic")), ("48", _("...")), ("64", _("Arabic")), ("80", _("...")) ]
 
 HELP_TEXT_POS          = _("Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically.")
 HELP_TEXT_TIP_POS      = _("Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically.")
@@ -64,6 +66,7 @@ HELP_TEXT_EDGE_CUT     = _("Display first and last row.")
 HELP_TEXT_MESSAGES     = _("Show message if no teletext available or exit silently.")
 HELP_TEXT_DEBUG        = _("Print debug messages to /tmp/dbttcp.log.")
 HELP_TEXT_TEXTLEVEL    = _("Select teletext version to use.")
+HELP_TEXT_REGION       = _("Select your region to use the proper font.")
 
 dsk_size   = getDesktop(0).size()
 dsk_width  = dsk_size.width()
@@ -84,6 +87,7 @@ config.plugins.TeleText.messages = ConfigEnableDisable(default=True)
 config.plugins.TeleText.edge_cut = ConfigEnableDisable(default=False)
 config.plugins.TeleText.splitting_mode = ConfigSelection(splittingModeList, default=SPLIT_MODE_PAT)
 config.plugins.TeleText.textlevel      = ConfigSelection(textlevelModeList, default="2")
+config.plugins.TeleText.region   = ConfigSelection(regionList, default="16")
 config.plugins.TeleText.debug    = ConfigEnableDisable(default=False)
 config.plugins.TeleText.pos      = ConfigSequence(default=[0, 0, dsk_width, dsk_height], seperator = ",", limits = [(0,dsk_width>>3),(0,dsk_height>>3),(dsk_width-(dsk_width>>3),dsk_width),(dsk_height-(dsk_height>>3),dsk_height)])
 config.plugins.TeleText.tip_pos  = ConfigSequence(default=[(dsk_width>>1)+(dsk_width>>2), (dsk_height>>1)+(dsk_height>>2), dsk_width, dsk_height], seperator = ",", limits = [(0,dsk_width-MIN_W),(0,dsk_height-MIN_H),(MIN_W,dsk_width),(MIN_H,dsk_height)])
@@ -584,6 +588,11 @@ class TeleText(Screen):
 
   def sendSettings(self, result = True):
     if result:
+      # region
+      x = array.array('B')
+      x.append(CMD_REGION)
+      x.append(int(config.plugins.TeleText.region.value))
+      self.socketSend(x)
       # Helligkeit
       x = array.array('B')
       x.append(CMD_SET_BRIGH)
@@ -777,14 +786,14 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
   def __init__(self, session):
     width = 492
-    height = 330
+    height = 350
     left = (dsk_width - width)>>1
     top = (dsk_height - height)>>1
     log("[menu] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
-        <widget name="config" position="0,0"   size="492,255" scrollbarMode="showOnDemand" zPosition="1"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,260" zPosition="1" size="492,2" />
-        <widget name="label"  position="0,265" size="492,65" font="Regular;16" zPosition="1" halign="left" valign="top"/>
+        <widget name="config" position="0,0"   size="492,275" scrollbarMode="showOnDemand" zPosition="1"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,280" zPosition="1" size="492,2" />
+        <widget name="label"  position="0,285" size="492,65" font="Regular;16" zPosition="1" halign="left" valign="top"/>
       </screen>""" % (left, top, width, height, _("TeleText settings"))
 
     Screen.__init__(self, session)
@@ -835,6 +844,8 @@ class TeleTextMenu(ConfigListScreen, Screen):
       self["label"].setText(HELP_TEXT_EDGE_CUT)
     elif configele == config.plugins.TeleText.textlevel:
       self["label"].setText(HELP_TEXT_TEXTLEVEL)
+    elif configele == config.plugins.TeleText.region:
+      self["label"].setText(HELP_TEXT_REGION)
 
   def createConfig(self, configele):
     if not self.isInitialized:
@@ -853,6 +864,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
       getConfigListEntry(_("Contrast"),          config.plugins.TeleText.contrast),
       getConfigListEntry(_("Transparency"),      config.plugins.TeleText.transparency),
       getConfigListEntry(_("Text level"),        config.plugins.TeleText.textlevel),
+      getConfigListEntry(_("Region"),            config.plugins.TeleText.region),
       getConfigListEntry(_("Position and size"), config.plugins.TeleText.pos),
       getConfigListEntry(_("Display edges"),     config.plugins.TeleText.edge_cut),
       getConfigListEntry(_("Splitting mode"),    config.plugins.TeleText.splitting_mode)
