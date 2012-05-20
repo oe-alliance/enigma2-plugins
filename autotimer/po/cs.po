@@ -879,7 +879,7 @@ msgstr "Při podpoře Fast Scan se ignoruje typ programu. Tuto funkci nemusíte 
 
 #: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:83
 msgid "Configure AutoTimer behavior"
-msgstr "Nastavit chování AutoČasovače
+msgstr "Nastavit chování AutoČasovače"
 
 #: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:21
 msgid "Only AutoTimers created during this session"
