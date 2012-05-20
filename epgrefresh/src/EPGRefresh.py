@@ -34,6 +34,7 @@ from Screens.MessageBox import MessageBox
 from Tools import Notifications
 
 # ... II
+from . import _, NOTIFICATIONID
 from MainPictureAdapter import MainPictureAdapter
 from PipAdapter import PipAdapter
 from RecordAdapter import RecordAdapter
@@ -309,7 +310,7 @@ class EPGRefresh:
 			)
 
 		if not Screens.Standby.inStandby and not config.plugins.epgrefresh.background and config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddNotification(MessageBox, _("EPG refresh finished."), type=MessageBox.TYPE_INFO, timeout=4)
+			Notifications.AddPopup(_("EPG refresh finished."), MessageBox.TYPE_INFO, 4, NOTIFICATIONID)
 		self.forcedScan = False
 		epgrefreshtimer.cleanup()
 		self.maybeStopAdapter()
