@@ -1,0 +1,208 @@
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - teletext\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-20 14:47+0100\n"
+"PO-Revision-Date: 2012-05-20 19:07+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleusòcroci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .../enigma2-plugins/teletext\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: Italy\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/teletext\n"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:54
+msgid "picture and teletext"
+msgstr "Immagine e teletext"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:54
+msgid "teletext and picture"
+msgstr "Teletext e immagine"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:54
+msgid "teletext in picture"
+msgstr "Teletext nell'immagine"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:57
+#: .../enigma2-plugins/teletext/src/plugin.py:58
+msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
+msgstr "Inserire i valori (Sx, Alto, Dx, Basso) o premere EXIT per muovere e ridimensionare il teletext graficamente."
+
+#: .../enigma2-plugins/teletext/src/plugin.py:59
+msgid "Select splitting mode."
+msgstr "Selezionare modalità divisa."
+
+#: .../enigma2-plugins/teletext/src/plugin.py:60
+msgid "Select brightness."
+msgstr "Regolare la luminosità."
+
+#: .../enigma2-plugins/teletext/src/plugin.py:61
+msgid "Select contrast."
+msgstr "Regolare il contrasto."
+
+#: .../enigma2-plugins/teletext/src/plugin.py:62
+msgid "Select transparency."
+msgstr "Regolare la trasparenza."
+
+#: .../enigma2-plugins/teletext/src/plugin.py:63
+msgid "Display first and last row."
+msgstr "Visualizzare la prima e l'ultima riga."
+
+#: .../enigma2-plugins/teletext/src/plugin.py:64
+msgid "Show message if no teletext available or exit silently."
+msgstr "Mostrare un messaggio su teletext non disponibile."
+
+#: .../enigma2-plugins/teletext/src/plugin.py:65
+msgid "Print debug messages to /tmp/dbttcp.log."
+msgstr "Salvare i messaggi di debug in /tmp/dbttcp.log."
+
+#: .../enigma2-plugins/teletext/src/plugin.py:66
+msgid "Select teletext version to use."
+msgstr "Selezionare la versione teletext da utilizzare."
+
+#: .../enigma2-plugins/teletext/src/plugin.py:161
+#: .../enigma2-plugins/teletext/src/plugin.py:162
+#: .../enigma2-plugins/teletext/src/plugin.py:163
+#: .../enigma2-plugins/teletext/src/plugin.py:164
+#: .../enigma2-plugins/teletext/src/plugin.py:165
+#: .../enigma2-plugins/teletext/src/plugin.py:166
+#: .../enigma2-plugins/teletext/src/plugin.py:167
+#: .../enigma2-plugins/teletext/src/plugin.py:168
+msgid "enter page number"
+msgstr "Inserire numero pagina"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:169
+msgid "enter page number / page 100"
+msgstr "Inserire il numero pagina / Pagina 100"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:170
+msgid "enter page number / rezap"
+msgstr "Inserire numero pagina / Rezap"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:171
+#: .../enigma2-plugins/teletext/src/plugin.py:190
+msgid "exit"
+msgstr "Uscire"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:172
+msgid "start page catching / select page"
+msgstr "Selezionare la pagina"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:175
+msgid "increase height"
+msgstr "Aumentare altezza"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:176
+msgid "decrease height"
+msgstr "Diminuire altezza"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:177
+msgid "toggle info"
+msgstr "Nascondere l'informazione"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:178
+msgid "teletext settings"
+msgstr "Configurazione teletext"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:179
+msgid "next page / catch page / move"
+msgstr "Pagina successiva / Spostare"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:180
+msgid "prev sub page / move"
+msgstr "Sottopagina prec. / Spostare"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:181
+msgid "next sub page / move"
+msgstr "Sottopagina succ. / Spostare"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:182
+msgid "prev page / catch page / move"
+msgstr "Pagina precedente / Spostare"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:183
+msgid "toggle flof"
+msgstr "Commutare FLOF"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:184
+msgid "red teletext link"
+msgstr "Link teletext Rosso"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:185
+msgid "green teletext link"
+msgstr "Link teletext Verde"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:186
+msgid "yellow teletext link"
+msgstr "Link teletext Giallo"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:187
+msgid "blue teletext link"
+msgstr "Link teletext Blu"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:188
+msgid "split screen"
+msgstr "Dividere lo schermo"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:189
+msgid "toggle transparency"
+msgstr "Commutare trasparenza."
+
+#: .../enigma2-plugins/teletext/src/plugin.py:788
+msgid "TeleText settings"
+msgstr "Configurazione TeleText"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:852
+msgid "Brightness"
+msgstr "Luminosità"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:853
+msgid "Contrast"
+msgstr "Contrasto"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:854
+msgid "Transparency"
+msgstr "Trasparenza"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:855
+msgid "Text level"
+msgstr "Livello testo"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:856
+#: .../enigma2-plugins/teletext/src/plugin.py:861
+msgid "Position and size"
+msgstr "Posizione e dimensioni"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:857
+msgid "Display edges"
+msgstr "Mostrare i margini"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:858
+msgid "Splitting mode"
+msgstr "Schermo diviso"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:862
+msgid "Message"
+msgstr "Messaggio"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:863
+msgid "Debug"
+msgstr "Debug"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:930
+msgid "Discard changes?"
+msgstr "Annullare le modifiche?"
+
+#: .../enigma2-plugins/teletext/src/plugin.py:1011
+msgid "No teletext available."
+msgstr "Teletext non disponibile."
+
