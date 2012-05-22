@@ -1,6 +1,6 @@
 from __init__ import _, _debug , _log
 
-from enigma import iServiceInformation, iPlayableService, eSocketNotifier, getDesktop, eConsoleAppContainer, ePoint, eSize
+from enigma import iServiceInformation, iPlayableService, eSocketNotifier, getDesktop, ePoint, eSize
 
 from Screens.HelpMenu import HelpMenu
 from Screens.MessageBox import MessageBox
@@ -999,9 +999,6 @@ class TeleTextMenuSummary(Screen):
 
 def sessionstart(reason, session):
   log("----- sessionstart(%s) -----" % session)
-  # Daemon starten
-  container = eConsoleAppContainer()
-  container.execute("/usr/bin/dbttcd")
   # Plugin initialisieren
   global ttx_screen;
   ttx_screen = session.instantiateDialog(TeleText)
