@@ -125,7 +125,7 @@ class Satloader(Screen):
 			if not os.path.exists('/tmp/transponder'):
 				os.mkdir('/tmp/transponder', 644)
 
-			os.system("tar -xf /tmp/transponder.tar.gz -C/tmp/transponder")
+			os.system("tar -xzf /tmp/transponder.tar.gz -C/tmp/transponder")
 			os.system("rm -f /tmp/transponder.tar.gz")
 			self.list.clearList()
 			idx=0
