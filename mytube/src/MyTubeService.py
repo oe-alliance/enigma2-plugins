@@ -433,6 +433,9 @@ class MyTubePlayerService():
 				return link.href
 		return None
 
+	def getCurrentPage(self):
+		return int(int(self.feed.start_index.text) / int(self.itemCount())) + 1
+
 class YoutubeQueryThread(Thread):
 	def __init__(self, query, param, gotFeed, gotFeedError, callback, errorback):
 		Thread.__init__(self)

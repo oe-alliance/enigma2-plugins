@@ -991,14 +991,25 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			print "[MyTubePlayer] searchDialogClosed: ", searchContext
 			self.searchFeed(searchContext)
 
-	def searchFeed(self, searchContext):
-		print "[MyTubePlayer] searchFeed"
+	def searchFeed(self, searchContext, vals = {}):
+		print "[MyTubePlayer] searchFeed"		
+		
+		defaults = {
+			'time': config.plugins.mytube.search.time.value,
+			'orderby': config.plugins.mytube.search.orderBy.value,
+			'startIndex': 1,
+			'maxResults': 25,
+		}
+
+		defaults.update(vals)
+
 		self.queryStarted()
 		self.appendEntries = False
-		self.queryThread = myTubeService.search(searchContext,
-					orderby = config.plugins.mytube.search.orderBy.value,
-					time = config.plugins.mytube.search.time.value,
-					racy = config.plugins.mytube.search.racy.value,
+		self.queryThread = myTubeService.search(searchContext, 
+					orderby = defaults['orderby'],
+					time = defaults['time'],
+					maxResults = defaults['maxResults'],
+					startIndex = defaults['startIndex'],
 					lr = config.plugins.mytube.search.lr.value,
 					categories = [ config.plugins.mytube.search.categories.value ],
 					sortOrder = config.plugins.mytube.search.sortOrder.value,
