@@ -2,105 +2,99 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TeleText\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-23 19:47+0100\n"
-"PO-Revision-Date: 2012-05-23 19:47+0100\n"
-"Last-Translator: Andreas Laux <lespuck@web.de>\n"
-"Language-Team: Andreas Laux <lespuck@web.de>\n"
-"Language: \n"
+"POT-Creation-Date: 2012-05-20 23:32+0100\n"
+"PO-Revision-Date: 2012-05-23 14:16+0100\n"
+"Last-Translator: bschaar\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: /home/andreas/TeleText/po\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: ../src\n"
+"X-Poedit-Basepath: /home/andreas\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-SearchPath-0: TeleText\n"
 
 #: ../src/plugin.py:55
 msgid "picture and teletext"
-msgstr "Bild und TeleText"
+msgstr "Beeld en TeleText"
 
 #: ../src/plugin.py:55
 msgid "teletext and picture"
-msgstr "TeleText und Bild"
+msgstr "TeleText en beeld"
 
 #: ../src/plugin.py:55
 msgid "teletext in picture"
-msgstr "TeleText in Bild"
+msgstr "TeleText in beeld"
 
 #: ../src/plugin.py:57
 msgid "Western and Central Europe"
-msgstr "West- und Zentraleuropa"
+msgstr "West- en Centraal-europa"
 
 #: ../src/plugin.py:57
 msgid "Eastern Europe"
-msgstr "Osteuropa"
+msgstr "Oost-europa"
 
 #: ../src/plugin.py:57
 msgid "Western Europe and Turkey"
-msgstr "Westeuropa und Türkei"
+msgstr "West-europa en Turkije"
 
 #: ../src/plugin.py:57
 msgid "Central and Southeast Europe"
-msgstr "Zentral- und Südosteuropa"
+msgstr "Centraal- en Zuidoost-europa"
 
 #: ../src/plugin.py:57
 msgid "Cyrillic"
 msgstr "Kyrillisch"
 
 #: ../src/plugin.py:57
-msgid "Turkish / Greek"
-msgstr "Türkisch / Griechisch"
+msgid "..."
+msgstr "..."
 
 #: ../src/plugin.py:57
 msgid "Arabic"
 msgstr "Arabisch"
 
-#: ../src/plugin.py:57
-msgid "Hebrew / Arabic"
-msgstr "Hebräisch / Arabisch"
-
 #: ../src/plugin.py:59
 #: ../src/plugin.py:60
 msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
-msgstr "Geben Sie Werte ein (links, oben, rechts, unten) oder drücken Sie TEXT, um den TeleText grafisch zu verschieben und zu vergrößern."
+msgstr "Geef de waarden in (links, bovenaan, rechts, onderaan) of druk TEXT, om de TeleText grafisch te verplaatsen en afmeting aan te passen."
 
 #: ../src/plugin.py:61
 msgid "Select splitting mode."
-msgstr "Wählen Sie den Modus für den geteilten Bildschirm aus."
+msgstr "Split-mode instellen."
 
 #: ../src/plugin.py:62
 msgid "Select brightness."
-msgstr "Stellen Sie die Helligkeit ein."
+msgstr "Helderheid instellen."
 
 #: ../src/plugin.py:63
 msgid "Select contrast."
-msgstr "Stellen Sie den Kontrast ein."
+msgstr "Contrast instellen."
 
 #: ../src/plugin.py:64
 msgid "Select transparency."
-msgstr "Stellen Sie die Transparenz ein."
+msgstr "Transparantie instellen."
 
 #: ../src/plugin.py:65
 msgid "Display first and last row."
-msgstr "Erste und letzte Spalte anzeigen."
+msgstr "Eerste en laatste rij weergeven."
 
 #: ../src/plugin.py:66
 msgid "Show message if no teletext available or exit silently."
-msgstr "Nachricht anzeigen, wenn kein TeleText verfügbar ist."
+msgstr "Bericht weergeven indien geen teletext beschikbaar."
 
 #: ../src/plugin.py:67
 msgid "Print debug messages to /tmp/dbttcp.log."
-msgstr "Debug-Messages in die Datei /tmp/dbttcp.log schreiben."
+msgstr "Debug-berichten in /tmp/dbttcp.log bewaren."
 
 #: ../src/plugin.py:68
 msgid "Select teletext version to use."
-msgstr "Wählen Sie die zu benutzende TeleText-Version."
+msgstr "Selecteer de TeleTextversie."
 
 #: ../src/plugin.py:69
 msgid "Select your region to use the proper font."
-msgstr "Wählen Sie Ihre Region, um den passenden Zeichensatz zu verwenden."
+msgstr "Selecteer uw regio, om de passende tekens te gebruiken."
 
 #: ../src/plugin.py:165
 #: ../src/plugin.py:166
@@ -111,125 +105,125 @@ msgstr "Wählen Sie Ihre Region, um den passenden Zeichensatz zu verwenden."
 #: ../src/plugin.py:171
 #: ../src/plugin.py:172
 msgid "enter page number"
-msgstr "Seitenzahl eingeben"
+msgstr "Paginanr. ingeven"
 
 #: ../src/plugin.py:173
 msgid "enter page number / page 100"
-msgstr "Seitenzahl eingeben / Seite 100"
+msgstr "Paginanr. ingeven / pagina 100"
 
 #: ../src/plugin.py:174
 msgid "enter page number / rezap"
-msgstr "Seitenzahl eingeben / Rezap"
+msgstr "Paginanr. ingeven / rezap"
 
 #: ../src/plugin.py:175
 #: ../src/plugin.py:194
 msgid "exit"
-msgstr "Schliessen"
+msgstr "Sluiten"
 
 #: ../src/plugin.py:176
 msgid "start page catching / select page"
-msgstr "Seitenlink auswählen"
+msgstr "Pagina selecteren"
 
 #: ../src/plugin.py:179
 msgid "increase height"
-msgstr "Höhe vergrößern"
+msgstr "Hoogte vergroten"
 
 #: ../src/plugin.py:180
 msgid "decrease height"
-msgstr "Höhe verringern"
+msgstr "Hoogte verkleinen"
 
 #: ../src/plugin.py:181
 msgid "toggle info"
-msgstr "versteckte Informationen"
+msgstr "verborgen info"
 
 #: ../src/plugin.py:182
 msgid "teletext settings"
-msgstr "TeleText Einstellungen"
+msgstr "TeleText instellingen"
 
 #: ../src/plugin.py:183
 msgid "next page / catch page / move"
-msgstr "n. Seite / n. Link / positionieren"
+msgstr "volgende pagina / pagina inlezen / verplaatsen"
 
 #: ../src/plugin.py:184
 msgid "prev sub page / move"
-msgstr "v. Unterseite / positionieren"
+msgstr "vorige sub-pagina / verplaatsen"
 
 #: ../src/plugin.py:185
 msgid "next sub page / move"
-msgstr "n. Unterseite / positionieren"
+msgstr "volgende sub-pagina / verplaatsen"
 
 #: ../src/plugin.py:186
 msgid "prev page / catch page / move"
-msgstr "v. Seite / v. Link / positionieren"
+msgstr "vorige pagina / pagina inlezen / verplaatsen"
 
 #: ../src/plugin.py:187
 msgid "toggle flof"
-msgstr "FLOF umschalten"
+msgstr "FLOF omschakelen"
 
 #: ../src/plugin.py:188
 msgid "red teletext link"
-msgstr "roter Textlink"
+msgstr "rode textlink"
 
 #: ../src/plugin.py:189
 msgid "green teletext link"
-msgstr "grüner Textlink"
+msgstr "groene textlink"
 
 #: ../src/plugin.py:190
 msgid "yellow teletext link"
-msgstr "gelber Textlink"
+msgstr "gele textlink"
 
 #: ../src/plugin.py:191
 msgid "blue teletext link"
-msgstr "blauer Textlink"
+msgstr "blauwe textlink"
 
 #: ../src/plugin.py:192
 msgid "split screen"
-msgstr "geteilter Bildschirm"
+msgstr "gedeeld beeldscherm"
 
 #: ../src/plugin.py:193
 msgid "toggle transparency"
-msgstr "Transparenz umschalten"
+msgstr "Transparantie instellen"
 
 #: ../src/plugin.py:797
 msgid "TeleText settings"
-msgstr "TeleText Einstellungen"
+msgstr "TeleText instellingen"
 
 #: ../src/plugin.py:863
 msgid "Brightness"
-msgstr "Helligkeit"
+msgstr "Helderheid"
 
 #: ../src/plugin.py:864
 msgid "Contrast"
-msgstr "Kontrast"
+msgstr "Contrast"
 
 #: ../src/plugin.py:865
 msgid "Transparency"
-msgstr "Transparenz"
+msgstr "Transparantie"
 
 #: ../src/plugin.py:866
 msgid "Text level"
-msgstr "TeleText Version"
+msgstr "TeleText Versie"
 
 #: ../src/plugin.py:867
 msgid "Region"
-msgstr "Region"
+msgstr "Regio"
 
 #: ../src/plugin.py:868
 #: ../src/plugin.py:873
 msgid "Position and size"
-msgstr "Position und Größe"
+msgstr "Positie en afmeting"
 
 #: ../src/plugin.py:869
 msgid "Display edges"
-msgstr "Ränder anzeigen"
+msgstr "Randen weergeven"
 
 #: ../src/plugin.py:870
 msgid "Splitting mode"
-msgstr "Geteilter Bildschirm"
+msgstr "Split-mode"
 
 #: ../src/plugin.py:874
 msgid "Message"
-msgstr "Nachricht"
+msgstr "Bericht"
 
 #: ../src/plugin.py:875
 msgid "Debug"
@@ -237,39 +231,23 @@ msgstr "Debug"
 
 #: ../src/plugin.py:942
 msgid "Discard changes?"
-msgstr "Änderungen verwerfen?"
+msgstr "Wijzigingen annuleren?"
 
-#: ../src/plugin.py:1020
+#: ../src/plugin.py:1023
 msgid "No teletext available."
-msgstr "Kein TeleText verfügbar."
+msgstr "Geen teletext beschikbaar."
 
-#~ msgid "..."
-#~ msgstr "..."
+msgid "Use cursor keys to move teletext. Press MENU to resize teletext. Press OK to accept new position and size. Press EXIT to return to previous values."
+msgstr "Gebruik de navigatieknoppen om de TeleText te verplaatsen. Druk MENU om de TeleText te vergroten. Druken OK om de nieuwe positie en grootte te gebruiken. Druk EXIT om de vorige instelling te gebruiken."
+
+msgid "Use cursor keys to resize teletext (move bottom-right corner). Press MENU to move teletext. Press OK to accept new position and size. Press EXIT to return to previous values."
+msgstr "Gebruik de navigatieknoppen om de TeleText te vergroten (rechtse onderste hoek verplaatsen). Druk MENU om de TeleText te verplaatsen. Druken OK om de nieuwe positie en grootte te gebruiken. Druk EXIT om de vorige instelling te gebruiken."
 
 #~ msgid "increase width"
-#~ msgstr "Breite vergrößern"
+#~ msgstr "Brredte vergroten"
 
 #~ msgid "decrease width"
-#~ msgstr "Breite verringern"
+#~ msgstr "Breedte verkleinen"
 
 #~ msgid "Daemon not running."
-#~ msgstr "Dienst läuft nicht."
-
-#~ msgid ""
-#~ "Use cursor keys to move teletext. Press MENU to resize teletext. Press OK "
-#~ "to accept new position and size. Press EXIT to return to previous values."
-#~ msgstr ""
-#~ "Benutzern Sie die Pfeiltasten um den TeleText zu bewegen. Drücken Sie "
-#~ "MENU um den TeleText zu vergrößern. Drücken Sie OK, um die neue Position "
-#~ "und Größe anzuwenden. Drücken Sie EXIT, um zur vorherigen Position und "
-#~ "Größe zurückzukehren."
-
-#~ msgid ""
-#~ "Use cursor keys to resize teletext (move bottom-right corner). Press MENU "
-#~ "to move teletext. Press OK to accept new position and size. Press EXIT to "
-#~ "return to previous values."
-#~ msgstr ""
-#~ "Benutzern Sie die Pfeiltasten um den TeleText zu vergrößern (rechte "
-#~ "untere Ecke zu bewegen). Drücken Sie MENU um den TeleText zu verschieben. "
-#~ "Drücken Sie OK, um die neue Position und Größe anzuwenden. Drücken Sie "
-#~ "EXIT, um zur vorherigen Position und Größe zurückzukehren."
+#~ msgstr "Deamon niet actief."
