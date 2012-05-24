@@ -31,9 +31,9 @@ from operator import itemgetter
 from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
 
 try:
-	from Plugins.Extensions.SeriesPlugin.plugin import modifyTimer
+	from Plugins.Extensions.SeriesPlugin.plugin import renameTimer
 except ImportError as ie:
-	modifyTimer = None
+	renameTimer = None
 
 from . import config, xrange, itervalues
 
@@ -492,8 +492,8 @@ class AutoTimer:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?
 					recordHandler.timeChanged(newEntry)
 
-					if modifyTimer is not None and timer.series_labeling:
-						modifyTimer(newEntry, name)
+					if renameTimer is not None and timer.series_labeling:
+						renameTimer(newEntry, name, evtBegin, evtEnd)
 
 				else:
 					conflictString = ""
@@ -540,8 +540,8 @@ class AutoTimer:
 						newEntry.extdesc = extdesc
 						recorddict[serviceref].append(newEntry)
 
-						if modifyTimer is not None and timer.series_labeling:
-							modifyTimer(newEntry, name)
+						if renameTimer is not None and timer.series_labeling:
+							renameTimer(newEntry, name, evtBegin, evtEnd)
 
 						# Similar timers are in new timers list and additionally in similar timers list
 						if similarTimer:
