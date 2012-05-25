@@ -527,7 +527,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			menulist = [(_("MyTube Settings"), "settings")]
 			menulist.extend((
 					(_("View related videos"), "related"),
-					(_("View response videos"), "response")
+					(_("View Users Video"), "user_videos"),					
+					(_("View response videos"), "response"),
 				))
 			if config.usage.setup_level.index >= 2: # expert+
 				menulist.extend((
@@ -547,6 +548,10 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			current = self["feedlist"].getCurrent()[0]
 			self.setState('getFeed')
 			self.getRelatedVideos(current)
+		elif answer == "user_videos":
+			current = self["feedlist"].getCurrent()[0]
+			self.setState('getFeed')
+			self.getUserVideos(current)
 		elif answer == "response":
 			current = self["feedlist"].getCurrent()[0]
 			self.setState('getFeed')
@@ -975,6 +980,14 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			if myurl is not None:
 				self.appendEntries = False
 				self.getFeed(myurl, _("Response video entries."))
+
+	def getUserVideos(self, myentry):
+		if myentry:
+			myurl =  myentry.getUserVideos()
+			print "RESPONSEURL--->",myurl
+			if myurl is not None:
+				self.appendEntries = False
+				self.getFeed(myurl, _("User video entries."))
 
 	def runSearch(self, searchContext = None):
 		print "[MyTubePlayer] runSearch"

@@ -282,6 +282,13 @@ class MyTubeFeedEntry():
 				print "Found Responses: ", link.href
 				return link.href
 
+	def getUserVideos(self):
+		print "[MyTubeFeedEntry] getUserVideos()"
+		username = self.getAuthor()
+		myuri = 'http://gdata.youtube.com/feeds/api/users/%s/uploads' % username
+		print "Found Uservideos: ", myuri
+		return myuri
+
 class MyTubePlayerService():
 #	Do not change the client_id and developer_key in the login-section!
 #	ClientId: ytapi-dream-MyTubePlayer-i0kqrebg-0
