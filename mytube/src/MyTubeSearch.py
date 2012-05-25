@@ -1,4 +1,4 @@
-from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, gFont, eTimer
+from enigma import eTimer, ePythonMessagePump
 from MyTubeService import GoogleSuggestions
 from Screens.Screen import Screen
 from Screens.LocationBox import MovieLocationBox
@@ -14,7 +14,7 @@ from Components.Task import job_manager
 from Tools.Directories import resolveFilename, SCOPE_HDD
 
 from threading import Thread
-from threading import Condition
+from ThreadQueue import ThreadQueue
 from xml.etree.cElementTree import parse as cet_parse
 from StringIO import StringIO
 #import urllib
@@ -23,55 +23,76 @@ from urllib import FancyURLopener
 class MyOpener(FancyURLopener):
 	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
 
+class SuggestionsQueryThread(Thread):
+	def __init__(self, query, param, callback, errorback):
+		Thread.__init__(self)
+		self.messagePump = ePythonMessagePump()
+		self.messages = ThreadQueue()
+		self.query = query
+		self.param = param
+		self.callback = callback
+		self.errorback = errorback
+		self.canceled = False
+		self.messagePump.recv_msg.get().append(self.finished)
+	
+	def cancel(self):
+		self.canceled = True
+	
+	def run(self):
+		if self.param not in (None, ""):
+			try:
+				suggestions = self.query.getSuggestions(self.param)
+				self.messages.push((suggestions, self.callback))
+				self.messagePump.send(0)
+			except Exception, ex:
+				self.messages.push((ex, self.errorback))
+				self.messagePump.send(0)			
+	
+	def finished(self, val):
+		if not self.canceled:
+			message = self.messages.pop()
+			message[1](message[0])
+
 class ConfigTextWithGoogleSuggestions(ConfigText):
-	class SuggestionsThread(Thread):
-		def __init__(self, suggestionsService):
-			Thread.__init__(self)
-			self.suggestionsService = suggestionsService
-			self.value = None
-			self.running = True
-			self.condition = Condition()
-
-		def run(self):
-			while self.running:
-				self.condition.acquire()
-				if self.value is None:
-					self.condition.wait()
-				value = self.value
-				self.value = None
-				self.condition.release()
-				if value is not None:
-					self.suggestionsService.getSuggestions(value)
-
-		def stop(self):
-			self.running = False
-			self.condition.acquire()
-			self.condition.notify()
-			self.condition.release()
-			self.join()
-
-		def getSuggestions(self, value):
-			self.condition.acquire()
-			self.value = value
-			self.condition.notify()
-			self.condition.release()
-
-	def __init__(self, default = "", fixed_size = True, visible_width = False, threaded = False):
+	def __init__(self, default = "", fixed_size = True, visible_width = False):
 		ConfigText.__init__(self, default, fixed_size, visible_width)
-		self.suggestions = GoogleSuggestions(self.propagateSuggestions, ds = "yt", hl = "en")
+		self.suggestions = GoogleSuggestions()
 		self.suggestionsThread = None
-		self.threaded = threaded
+		self.suggestionsThreadRunning = False
 		self.suggestionsListActivated = False
 
+	def prepareSuggestionsThread(self):
+		self.suggestions.hl = "en"
+		if config.plugins.mytube.search.lr.value is not None:
+			self.suggestions.hl=config.plugins.mytube.search.lr.value
+		
+	def suggestionsThreadStarted(self):
+		if self.suggestionsThreadRunning:
+			self.cancelSuggestionsThread()
+		self.suggestionsThreadRunning = True		
+	
+	def suggestionsThreadFinished(self):
+		self.suggestionsThreadRunning = False
+	
+	def cancelSuggestionsThread(self):
+		if self.suggestionsThread is not None:
+			self.suggestionsThread.cancel()
+		self.suggestionsThreadFinished()
+
 	def propagateSuggestions(self, suggestionsList):
+		self.cancelSuggestionsThread()
+		print "[MyTube - ConfigTextWithGoogleSuggestions] propagateSuggestions:",suggestionsList
 		if self.suggestionsWindow:
 			self.suggestionsWindow.update(suggestionsList)
 
+	def gotSuggestionsError(self, val):
+		print "[MyTube - ConfigTextWithGoogleSuggestions] gotSuggestionsError:",val
+
 	def getSuggestions(self):
-		if self.suggestionsThread is not None:
-			self.suggestionsThread.getSuggestions(self.value)
-		else:
-			self.suggestions.getSuggestions(self.value)
+		self.prepareSuggestionsThread()
+		self.suggestionsThreadStarted()
+		self.suggestionsThread = SuggestionsQueryThread(self.suggestions, self.value, self.propagateSuggestions, self.gotSuggestionsError)
+		self.suggestionsThread.start()
 
 	def handleKey(self, key):
 		if not self.suggestionsListActivated:
@@ -80,23 +101,15 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 				self.getSuggestions()
 
 	def onSelect(self, session):
-		if self.threaded:
-			if self.suggestionsThread is not None:
-				self.suggestionsThread.stop()
-			self.suggestionsThread = ConfigTextWithGoogleSuggestions.SuggestionsThread(self.suggestions)
-			self.suggestionsThread.start()
-		else:
-			self.suggestionsThread = None
 		ConfigText.onSelect(self, session)
 		if session is not None:
 			self.suggestionsWindow = session.instantiateDialog(MyTubeSuggestionsListScreen, self)
 			self.suggestionsWindow.deactivate()
 			self.suggestionsWindow.hide()
-		self.suggestions.getSuggestions(self.value)
+		self.getSuggestions()
 
 	def onDeselect(self, session):
-		if self.suggestionsThread is not None:
-			self.suggestionsThread.stop()
+		self.cancelSuggestionsThread()
 		ConfigText.onDeselect(self, session)
 		if self.suggestionsWindow:
 			session.deleteDialog(self.suggestionsWindow)
