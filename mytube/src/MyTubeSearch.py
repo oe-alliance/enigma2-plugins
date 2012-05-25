@@ -323,6 +323,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		if config.usage.setup_level.index >= 2: # expert+
 			self.searchContextEntries.append(self.VideoDirname)
 		self.searchContextEntries.append(getConfigListEntry(_("Clear history on Exit:"), config.plugins.mytube.general.clearHistoryOnClose))
+		self.searchContextEntries.append(getConfigListEntry(_("Ask to load new entries"), config.plugins.mytube.general.AutoLoadFeeds))
 
 		self["config"].list = self.searchContextEntries
 		self["config"].l.setList(self.searchContextEntries)
@@ -388,6 +389,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		config.plugins.mytube.general.on_exit.save()
 		config.plugins.mytube.general.videodir.save()
 		config.plugins.mytube.general.clearHistoryOnClose.save()
+		config.plugins.mytube.general.AutoLoadFeeds.save()
 		if config.plugins.mytube.general.clearHistoryOnClose.value:
 			config.plugins.mytube.general.history.value = ""
 			config.plugins.mytube.general.history.save()
