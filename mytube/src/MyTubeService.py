@@ -348,7 +348,7 @@ class MyTubePlayerService():
 		return queryThread		
 
 	def search(self, searchTerms, startIndex = 1, maxResults = 25,
-					orderby = "relevance", racy = "include", 
+					orderby = "relevance", time = 'all_time', racy = "include", 
 					author = "", lr = "", categories = "", sortOrder = "ascending", 
 					callback = None, errorback = None):
 		print "[MyTube] MyTubePlayerService - search()"
@@ -356,6 +356,7 @@ class MyTubePlayerService():
 		query = gdata.youtube.service.YouTubeVideoQuery()
 		query.vq = searchTerms
 		query.orderby = orderby
+		query.time = time
 		query.racy = racy
 		query.sortorder = sortOrder
 		if lr is not None:

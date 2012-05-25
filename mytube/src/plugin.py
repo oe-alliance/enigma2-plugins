@@ -997,6 +997,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.appendEntries = False
 		self.queryThread = myTubeService.search(searchContext, 
 					orderby = config.plugins.mytube.search.orderBy.value,
+					time = config.plugins.mytube.search.time.value,
 					racy = config.plugins.mytube.search.racy.value,
 					lr = config.plugins.mytube.search.lr.value,
 					categories = [ config.plugins.mytube.search.categories.value ],
