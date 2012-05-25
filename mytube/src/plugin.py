@@ -141,6 +141,7 @@ if default not in tmp:
 config.plugins.mytube.general.videodir = ConfigSelection(default = default, choices = tmp)
 config.plugins.mytube.general.history = ConfigText(default="")
 config.plugins.mytube.general.clearHistoryOnClose = ConfigYesNo(default = False)
+config.plugins.mytube.general.AutoLoadFeeds = ConfigYesNo(default = True)
 #config.plugins.mytube.general.useHTTPProxy = ConfigYesNo(default = False)
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
 #config.plugins.mytube.general.ProxyPort = ConfigNumber(default=8080)
@@ -750,7 +751,11 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			print self[self.currList].count()
 			print self[self.currList].index
 			if self[self.currList].index == self[self.currList].count()-1 and myTubeService.getNextFeedEntriesURL() is not None:
-				self.session.openWithCallback(self.getNextEntries, MessageBox, _("Do you want to see more entries?"))
+				# load new feeds on last selected item
+				if config.plugins.mytube.general.AutoLoadFeeds.value is False:
+					self.session.openWithCallback(self.getNextEntries, MessageBox, _("Do you want to see more entries?"))
+				else:
+					self.getNextEntries(True)
 			else:
 				self[self.currList].selectNext()
 		elif self.currList == "historylist":
@@ -977,13 +982,21 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			print "[MyTubePlayer] searchDialogClosed: ", searchContext
 			self.searchFeed(searchContext)
 
-	def searchFeed(self, searchContext):
+	def searchFeed(self, searchContext, vals = {}):
 		print "[MyTubePlayer] searchFeed"		
+		
+		defaults = {
+		  'time': config.plugins.mytube.search.orderBy.value,
+			'orderby': config.plugins.mytube.search.orderBy.value,
+		}
+		
+		defaults.update(vals)
+		
 		self.queryStarted()		
 		self.appendEntries = False
 		self.queryThread = myTubeService.search(searchContext, 
-					orderby = config.plugins.mytube.search.orderBy.value,
-					racy = config.plugins.mytube.search.racy.value,
+					orderby = defaults['orderby'],
+					time = defaults['time'],
 					lr = config.plugins.mytube.search.lr.value,
 					categories = [ config.plugins.mytube.search.categories.value ],
 					sortOrder = config.plugins.mytube.search.sortOrder.value,
