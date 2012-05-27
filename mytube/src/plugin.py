@@ -145,6 +145,8 @@ config.plugins.mytube.general.videodir = ConfigSelection(default = default, choi
 config.plugins.mytube.general.history = ConfigText(default="")
 config.plugins.mytube.general.clearHistoryOnClose = ConfigYesNo(default = False)
 config.plugins.mytube.general.AutoLoadFeeds = ConfigYesNo(default = True)
+config.plugins.mytube.general.username = ConfigText(default="")
+config.plugins.mytube.general.password = ConfigText(default="")
 #config.plugins.mytube.general.useHTTPProxy = ConfigYesNo(default = False)
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
 #config.plugins.mytube.general.ProxyPort = ConfigNumber(default=8080)
@@ -468,6 +470,14 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				if self.FirstRun == True:
 					self.appendEntries = False
 					myTubeService.startService()
+					
+					# auth user
+					if not config.plugins.mytube.general.username.value is "" and not config.plugins.mytube.general.password.value is "":
+						try:
+							myTubeService.auth_user(config.plugins.mytube.general.username.value, config.plugins.mytube.general.password.value)
+						except Exception as e:
+							self.session.open(MessageBox, 'Login-Error: ' + str(e), MessageBox.TYPE_INFO)
+											
 				if self.HistoryWindow is not None:
 					self.HistoryWindow.deactivate()
 					self.HistoryWindow.instance.hide()
@@ -528,6 +538,13 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					(_("View Users Video"), "user_videos"),
 					(_("View response videos"), "response"),
 				))
+			
+			if myTubeService.is_auth is True:
+				menulist.extend((
+						(_("Subscribe to user"), "subscribe"),
+						(_("Add to favorites"), "favorite"),
+					))				
+			
 			if config.usage.setup_level.index >= 2: # expert+
 				menulist.extend((
 					(_("Download Video"), "download"),
@@ -550,6 +567,13 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			current = self["feedlist"].getCurrent()[0]
 			self.setState('getFeed')
 			self.getUserVideos(current)
+		elif answer == "subscribe":
+			current = self["feedlist"].getCurrent()[0]
+			self.session.open(MessageBox, current.subscribeToUser(), MessageBox.TYPE_INFO)
+		elif answer == "favorite":
+			current = self["feedlist"].getCurrent()[0]
+			self.session.open(MessageBox, current.addToFavorites(), MessageBox.TYPE_INFO)
+					
 		elif answer == "response":
 			current = self["feedlist"].getCurrent()[0]
 			self.setState('getFeed')

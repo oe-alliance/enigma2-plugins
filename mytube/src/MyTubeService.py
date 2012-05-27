@@ -182,6 +182,14 @@ class MyTubeFeedEntry():
 		author = ", ".join(authors)
 		return author
 
+	def subscribeToUser(self):
+		username = self.getAuthor()
+		return myTubeService.SubscribeToUser(username)
+		
+	def addToFavorites(self):
+		video_id = self.getTubeId()
+		return myTubeService.addToFavorites(video_id)
+
 	def PrintEntryDetails(self):
 		EntryDetails = { 'Title': None, 'TubeID': None, 'Published': None, 'Published': None, 'Description': None, 'Category': None, 'Tags': None, 'Duration': None, 'Views': None, 'Rating': None, 'Thumbnails': None}
 		EntryDetails['Title'] = self.entry.media.title.text
@@ -321,6 +329,9 @@ class MyTubePlayerService():
 #	Do not change the client_id and developer_key in the login-section!
 #	ClientId: ytapi-dream-MyTubePlayer-i0kqrebg-0
 #	DeveloperKey: AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw
+
+	is_auth = False
+	
 	def __init__(self):
 		print "[MyTube] MyTubePlayerService - init"
 		self.feedentries = []
@@ -328,10 +339,13 @@ class MyTubePlayerService():
 
 	def startService(self):
 		print "[MyTube] MyTubePlayerService - startService"
-		self.yt_service = gdata.youtube.service.YouTubeService(
-			developer_key = 'AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw',
-			client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0'
-		)
+
+		self.yt_service = gdata.youtube.service.YouTubeService()
+		
+		# dont use it on class init; error on post and auth
+		self.yt_service.developer_key = 'AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw'
+		self.yt_service.client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0' 	
+		
 #		self.loggedIn = False
 		#os.environ['http_proxy'] = 'http://169.229.50.12:3128'
 		#proxy = os.environ.get('http_proxy')
@@ -342,6 +356,15 @@ class MyTubePlayerService():
 	def stopService(self):
 		print "[MyTube] MyTubePlayerService - stopService"
 		del self.ytService
+
+	def auth_user(self, username, password):
+		print "[MyTube] MyTubePlayerService - auth_use - " + str(username)
+		
+		self.yt_service.email = username
+		self.yt_service.password  = password
+				
+		self.yt_service.ProgrammaticLogin()
+		self.is_auth = True
 
 	def getFeedService(self, feedname):
 		if feedname == "top_rated":
@@ -414,7 +437,36 @@ class MyTubePlayerService():
 		if errorback is not None:
 			errorback(exception)
 
-
+	def SubscribeToUser(self, username):
+		try:
+			new_subscription = self.yt_service.AddSubscriptionToChannel(username_to_subscribe_to=username)
+	
+			if isinstance(new_subscription, gdata.youtube.YouTubeSubscriptionEntry):
+				print '[MyTube] MyTubePlayerService: New subscription added'
+				return _('New subscription added')
+			
+			return _('Unknown error')
+		except gdata.service.RequestError as req:
+			return str('Error: ' + str(req[0]["body"]))
+		except Exception as e:
+			return str('Error: ' + e)
+	
+	def addToFavorites(self, video_id):
+		try:
+			video_entry = self.yt_service.GetYouTubeVideoEntry(video_id=video_id)
+			response = self.yt_service.AddVideoEntryToFavorites(video_entry)
+			
+			# The response, if succesfully posted is a YouTubeVideoEntry
+			if isinstance(response, gdata.youtube.YouTubeVideoEntry):
+				print '[MyTube] MyTubePlayerService: Video successfully added to favorites'
+				return _('Video successfully added to favorites')	
+	
+			return _('Unknown error')
+		except gdata.service.RequestError as req:
+			return str('Error: ' + str(req[0]["body"]))
+		except Exception as e:
+			return str('Error: ' + e)
+	
 	def getTitle(self):
 		return self.feed.title.text
 
@@ -474,3 +526,4 @@ class YoutubeQueryThread(Thread):
 				self.gotFeedError(message[1], message[2])
 
 myTubeService = MyTubePlayerService()
+
