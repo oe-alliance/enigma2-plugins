@@ -3,14 +3,17 @@
 # This file is distributed under the same license as the tuxbox-enigma package.
 # Automatically generated, 2005.
 #
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - mytube\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-29 17:38+0200\n"
-"PO-Revision-Date: 2009-05-29 19:31+0100\n"
+"POT-Creation-Date: 2012-05-28 21:09+0100\n"
+"PO-Revision-Date: 2012-05-28 21:17+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,620 +21,395 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: Italy\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: /home/dario/Plugins/mytube\n"
-"X-Poedit-SearchPath-0: /home/dario/Plugins/mytube\n"
+"X-Poedit-Basepath: .../enigma2-plugins/mytube\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/mytube\n"
 
-#: ../src/MyTubeSearch.py:309
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:214
 msgid " Results"
 msgstr "Risultati"
 
-#: ../src/plugin.py:1104
-#: ../src/plugin.py:1270
-msgid "Added: "
-msgstr "Aggiunti: "
-
-#: ../src/MyTubeSearch.py:180
-#: ../src/MyTubeSearch.py:200
-#: ../src/plugin.py:68
-#: ../src/plugin.py:88
-msgid "All"
-msgstr "Tutte"
-
-#: ../src/MyTubeSearch.py:168
-#: ../src/plugin.py:56
-msgid "All Time"
-msgstr "Sempre"
-
-#: ../src/plugin.py:423
-msgid "An error occured."
-msgstr "Si è verificato un errore."
-
-#: ../src/MyTubeSearch.py:228
-#: ../src/plugin.py:116
-msgid "Ascending"
-msgstr "Crescente"
-
-#: ../src/MyTubeSearch.py:249
-#: ../src/MyTubeSearch.py:252
-#: ../src/plugin.py:136
-#: ../src/plugin.py:139
-msgid "Ask user"
-msgstr "Chiedere all'utente"
-
-#: ../src/MyTubeSearch.py:201
-#: ../src/MyTubeSearch.py:208
-#: ../src/plugin.py:89
-#: ../src/plugin.py:96
-msgid "Australia"
-msgstr "Australia"
-
-#: ../src/plugin.py:1267
-msgid "Author: "
-msgstr "Autore: "
-
-#: ../src/MyTubeSearch.py:182
-#: ../src/plugin.py:70
-msgid "Autos & Vehicles"
-msgstr "Auto & veicoli"
-
-#: ../src/MyTubeSearch.py:202
-#: ../src/plugin.py:90
-msgid "Brazil"
-msgstr "Brasile"
-
-#: ../src/MyTubeSearch.py:203
-#: ../src/plugin.py:91
-msgid "Canada"
-msgstr "Canada"
-
-#: ../src/MyTubeSearch.py:455
-msgid "Choose target folder"
-msgstr "Selezionare la cartella di destinazione"
-
-#: ../src/MyTubeSearch.py:433
-msgid "Clear history on Exit:"
-msgstr "Ripulire la history in uscita:"
-
-#: ../src/MyTubeSearch.py:393
-#: ../src/MyTubeSearch.py:558
-#: ../src/plugin.py:269
-#: ../src/plugin.py:1209
-#: ../src/plugin.py:1398
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:298
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:464
+#: .../enigma2-plugins/mytube/src/plugin.py:279
+#: .../enigma2-plugins/mytube/src/plugin.py:1310
+#: .../enigma2-plugins/mytube/src/plugin.py:1496
 msgid "Close"
 msgstr "Chiudere"
 
-#: ../src/MyTubeSearch.py:189
-#: ../src/plugin.py:77
-msgid "Comedy"
-msgstr "Commedia"
-
-#: ../src/MyTubeSearch.py:204
-#: ../src/plugin.py:92
-msgid "Czech Republic"
-msgstr "Repubblica Ceca"
-
-#: ../src/MyTubeSearch.py:229
-#: ../src/plugin.py:117
-msgid "Descending"
-msgstr "Discendente"
-
-#: ../src/MyTubeSearch.py:414
-msgid "Display search results by:"
-msgstr "Mostrare i risultati della ricerca per:"
-
-#: ../src/plugin.py:719
-msgid "Do you want to see more entries?"
-msgstr "Visualizzare altre voci?"
-
-#: ../src/plugin.py:485
-msgid "Download Video"
-msgstr "Download filmato"
-
-#: ../src/MyTubeSearch.py:430
-msgid "Download location"
-msgstr "Collocazione download"
-
-#: ../src/plugin.py:1238
-msgid "Downloading screenshots. Please wait..."
-msgstr "Attendere: download screenshot in corso..."
-
-#: ../src/plugin.py:1104
-#: ../src/plugin.py:1264
-msgid "Duration: "
-msgstr "Durata: "
-
-#: ../src/MyTubeSearch.py:193
-#: ../src/plugin.py:81
-msgid "Education"
-msgstr "Educativi"
-
-#: ../src/plugin.py:526
-msgid "Enter your search term(s)"
-msgstr "Inserire le voci di ricerca"
-
-#: ../src/MyTubeSearch.py:192
-#: ../src/plugin.py:80
-msgid "Entertainment"
-msgstr "Intrattenimento"
-
-#: ../src/plugin.py:371
-#: ../src/plugin.py:413
-msgid "Fetching feed entries"
-msgstr "Recupero feed in corso"
-
-#: ../src/plugin.py:418
-msgid "Fetching search entries"
-msgstr "Recupero voci di ricerca in corso"
-
-#: ../src/MyTubeSearch.py:181
-#: ../src/plugin.py:69
-msgid "Film & Animation"
-msgstr "Film & Animazione"
-
-#: ../src/MyTubeSearch.py:205
-#: ../src/plugin.py:93
-msgid "France"
-msgstr "Francia"
-
-#: ../src/MyTubeSearch.py:188
-#: ../src/plugin.py:76
-msgid "Gaming"
-msgstr "Giochi"
-
-#: ../src/MyTubeSearch.py:206
-#: ../src/plugin.py:94
-msgid "Germany"
-msgstr "Germania"
-
-#: ../src/MyTubeSearch.py:207
-#: ../src/plugin.py:95
-msgid "Great Britain"
-msgstr "Gran Bretagna"
-
-#: ../src/MyTubeSearch.py:237
-#: ../src/plugin.py:125
-#: ../src/plugin.py:752
-msgid "HD videos"
-msgstr "Filmati HD"
-
-#: ../src/plugin.py:1416
-msgid "Help"
-msgstr "Aiuto"
-
-#: ../src/plugin.py:271
-msgid "History"
-msgstr "History"
-
-#: ../src/MyTubeSearch.py:209
-#: ../src/plugin.py:97
-msgid "Holland"
-msgstr "Olanda"
-
-#: ../src/MyTubeSearch.py:210
-#: ../src/plugin.py:98
-msgid "Hong Kong"
-msgstr "Hong Kong"
-
-#: ../src/MyTubeSearch.py:194
-#: ../src/plugin.py:82
-msgid "Howto & Style"
-msgstr "Howto & Stile"
-
-#: ../src/MyTubeSearch.py:211
-#: ../src/plugin.py:99
-msgid "India"
-msgstr "India"
-
-#: ../src/MyTubeSearch.py:212
-#: ../src/plugin.py:100
-msgid "Ireland"
-msgstr "Irlanda"
-
-#: ../src/MyTubeSearch.py:213
-#: ../src/plugin.py:101
-msgid "Israel"
-msgstr "Israele"
-
-#: ../src/MyTubeSearch.py:214
-#: ../src/plugin.py:102
-msgid "Italy"
-msgstr "Italia"
-
-#: ../src/MyTubeSearch.py:215
-#: ../src/plugin.py:103
-msgid "Japan"
-msgstr "Giappone"
-
-#: ../src/MyTubeSearch.py:418
-msgid "Load feed on startup:"
-msgstr "Caricare fedd all'avvio:"
-
-#: ../src/MyTubeSearch.py:216
-#: ../src/plugin.py:104
-msgid "Mexico"
-msgstr "Messico"
-
-#: ../src/plugin.py:929
-msgid "More video entries."
-msgstr "Ulteriori filmati"
-
-#: ../src/MyTubeSearch.py:241
-#: ../src/plugin.py:129
-#: ../src/plugin.py:759
-msgid "Most discussed"
-msgstr "Più discussi"
-
-#: ../src/MyTubeSearch.py:243
-#: ../src/plugin.py:131
-#: ../src/plugin.py:760
-msgid "Most linked"
-msgstr "Più \"linkati\""
-
-#: ../src/plugin.py:757
-msgid "Most popular"
-msgstr "Più popolari"
-
-#: ../src/MyTubeSearch.py:245
-#: ../src/plugin.py:133
-#: ../src/plugin.py:758
-msgid "Most recent"
-msgstr "Più recenti"
-
-#: ../src/MyTubeSearch.py:244
-#: ../src/plugin.py:132
-#: ../src/plugin.py:762
-msgid "Most responded"
-msgstr "Più affidabili"
-
-#: ../src/MyTubeSearch.py:238
-#: ../src/plugin.py:126
-#: ../src/plugin.py:756
-msgid "Most viewed"
-msgstr "Più visti"
-
-#: ../src/MyTubeSearch.py:183
-#: ../src/plugin.py:71
-msgid "Music"
-msgstr "Musica"
-
-#: ../src/plugin.py:1738
-msgid "My TubePlayer"
-msgstr "My TubePlayer"
-
-#: ../src/plugin.py:472
-#: ../src/plugin.py:478
-msgid "MyTube Settings"
-msgstr "Configurazione MyTube"
-
-#: ../src/plugin.py:384
-msgid "MyTubePlayer"
-msgstr "MyTubePlayer"
-
-#: ../src/plugin.py:450
-#: ../src/plugin.py:452
-#: ../src/plugin.py:459
-msgid "MyTubePlayer Help"
-msgstr "Aiuto su MyTubePlayer"
-
-#: ../src/MyTubeSearch.py:571
-#: ../src/MyTubeSearch.py:588
-msgid "MyTubePlayer active video downloads"
-msgstr "MyTubePlayer: download filmati attivi"
-
-#: ../src/MyTubeSearch.py:407
-#: ../src/MyTubeSearch.py:410
-msgid "MyTubePlayer settings"
-msgstr "Configurazione MyTubePlayer"
-
-#: ../src/plugin.py:1279
-msgid "MyTubeVideoInfoScreen"
-msgstr "MyTubeVideoInfoScreen"
-
-#: ../src/plugin.py:1425
-msgid "MyTubeVideohelpScreen"
-msgstr "MyTubeVideohelpScreen"
-
-#: ../src/MyTubeSearch.py:217
-#: ../src/plugin.py:105
-msgid "New Zealand"
-msgstr "Nuova Zelanda"
-
-#: ../src/MyTubeSearch.py:191
-#: ../src/plugin.py:79
-msgid "News & Politics"
-msgstr "Notizie & politica"
-
-#: ../src/MyTubeSearch.py:176
-#: ../src/plugin.py:64
-#: ../src/plugin.py:571
-#: ../src/plugin.py:577
-msgid "No"
-msgstr "No"
-
-#: ../src/plugin.py:1702
-msgid "No playable video found! Stop playing this movie?"
-msgstr "Nessun filmato riproducibile trovato! Arrestare la riproduzione?"
-
-#: ../src/plugin.py:429
-msgid "No videos to display"
-msgstr "Nessun filmato da mostrare"
-
-#: ../src/plugin.py:1695
-msgid "No, but play video again"
-msgstr "No: riprodurre nuovamente il filmato"
-
-#: ../src/plugin.py:572
-msgid "No, but switch to video entries."
-msgstr "No: commutare sull'elenco filmati"
-
-#: ../src/plugin.py:578
-msgid "No, but switch to video search."
-msgstr "No, ma passare alla ricerca filmati"
-
-#: ../src/MyTubeSearch.py:195
-#: ../src/plugin.py:83
-msgid "Nonprofits & Activism"
-msgstr "Nonprofit & attivismo"
-
-#: ../src/plugin.py:433
-msgid "Not fetching feed entries"
-msgstr "Voci feed non recuperate"
-
-#: ../src/MyTubeSearch.py:190
-#: ../src/plugin.py:78
-msgid "People & Blogs"
-msgstr "Gente & blog"
-
-#: ../src/MyTubeSearch.py:184
-#: ../src/plugin.py:72
-msgid "Pets & Animals"
-msgstr "Cuccioli & animali"
-
-#: ../src/plugin.py:1739
-msgid "Play YouTube movies"
-msgstr "Riprodurre filmati YouTube"
-
-#: ../src/MyTubeSearch.py:249
-#: ../src/plugin.py:136
-msgid "Play next video"
-msgstr "Riprodurre il filmato successivo"
-
-#: ../src/MyTubeSearch.py:249
-#: ../src/plugin.py:136
-msgid "Play video again"
-msgstr "Riprodurre nuovamente il filmato"
-
-#: ../src/plugin.py:433
-msgid "Please enter your search term."
-msgstr "Inserire le voci di ricerca"
-
-#: ../src/plugin.py:429
-msgid "Please select a standard feed or try searching for videos."
-msgstr "Selezionare un feed standard o eseguire una ricerca filmati."
-
-#: ../src/MyTubeSearch.py:218
-#: ../src/plugin.py:106
-msgid "Poland"
-msgstr "Polonia"
-
-#: ../src/MyTubeSearch.py:163
-#: ../src/plugin.py:51
-msgid "Published"
-msgstr "Pubblicato"
-
-#: ../src/MyTubeSearch.py:164
-#: ../src/plugin.py:52
-msgid "Rating"
-msgstr "Valutazioni"
-
-#: ../src/plugin.py:1104
-msgid "Ratings: "
-msgstr "Valutazioni: "
-
-#: ../src/plugin.py:580
-msgid "Really quit MyTube Player?"
-msgstr "Uscire da MyTubePlayer?"
-
-#: ../src/MyTubeSearch.py:240
-#: ../src/plugin.py:128
-#: ../src/plugin.py:761
-msgid "Recently featured"
-msgstr "Posti in primo piano di recente"
-
-#: ../src/plugin.py:936
-msgid "Related video entries."
-msgstr "Filmati collegati."
-
-#: ../src/MyTubeSearch.py:161
-#: ../src/plugin.py:49
-msgid "Relevance"
-msgstr "Rilevanza"
-
-#: ../src/plugin.py:943
-msgid "Response video entries."
-msgstr "Filmati disponibili"
-
-#: ../src/MyTubeSearch.py:249
-#: ../src/MyTubeSearch.py:252
-#: ../src/plugin.py:136
-#: ../src/plugin.py:139
-msgid "Return to movie list"
-msgstr "Ritornare all'elenco filmati"
-
-#: ../src/MyTubeSearch.py:219
-#: ../src/plugin.py:107
-msgid "Russia"
-msgstr "Russia"
-
-#: ../src/MyTubeSearch.py:394
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:299
 msgid "Save"
 msgstr "Salvare"
 
-#: ../src/MyTubeSearch.py:196
-#: ../src/plugin.py:84
-msgid "Science & Technology"
-msgstr "Scienza e tecnologia"
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:312
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:315
+msgid "MyTubePlayer settings"
+msgstr "Configurazione MyTubePlayer"
 
-#: ../src/plugin.py:388
-msgid "Search Term(s)"
-msgstr "Voci di ricerca"
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:319
+msgid "Display search results by:"
+msgstr "Mostrare i risultati della ricerca per:"
 
-#: ../src/MyTubeSearch.py:416
-msgid "Search category:"
-msgstr "Categoria di ricerca"
-
-#: ../src/MyTubeSearch.py:417
-msgid "Search region:"
-msgstr "Regione di ricerca"
-
-#: ../src/MyTubeSearch.py:415
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:320
 msgid "Search restricted content:"
 msgstr "Ricarcare contenuti vietati"
 
-#: ../src/plugin.py:764
-msgid "Select new feed to view."
-msgstr "Selezionare il nuovo feed da visualizzare."
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:321
+msgid "Search category:"
+msgstr "Categoria di ricerca"
 
-#: ../src/plugin.py:475
-#: ../src/plugin.py:490
-msgid "Select your choice."
-msgstr "Selezionare una voce."
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:322
+msgid "Search region:"
+msgstr "Regione di ricerca"
 
-#: ../src/MyTubeSearch.py:187
-#: ../src/plugin.py:75
-msgid "Short Movies"
-msgstr "Corti"
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:323
+msgid "Load feed on startup:"
+msgstr "Caricare fedd all'avvio:"
 
-#: ../src/plugin.py:684
-msgid "Sorry, video is not available!"
-msgstr "Filmato non disponibile!"
-
-#: ../src/MyTubeSearch.py:220
-#: ../src/plugin.py:108
-msgid "South Korea"
-msgstr "Corea del Sud"
-
-#: ../src/MyTubeSearch.py:221
-#: ../src/plugin.py:109
-msgid "Spain"
-msgstr "Spagna"
-
-#: ../src/MyTubeSearch.py:185
-#: ../src/plugin.py:73
-msgid "Sports"
-msgstr "Sport"
-
-#: ../src/MyTubeSearch.py:421
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:326
 msgid "Start with following feed:"
 msgstr "Partire dal feed seguente:"
 
-#: ../src/plugin.py:270
-msgid "Std. Feeds"
-msgstr "Feed std."
-
-#: ../src/plugin.py:1700
-msgid "Stop playing this movie?"
-msgstr "Arrestare la riproduzione?"
-
-#: ../src/MyTubeSearch.py:222
-#: ../src/plugin.py:110
-msgid "Sweden"
-msgstr "Svezia"
-
-#: ../src/plugin.py:1276
-msgid "Tags: "
-msgstr "Etrichette: "
-
-#: ../src/MyTubeSearch.py:223
-#: ../src/plugin.py:111
-msgid "Taiwan"
-msgstr "Taiwan"
-
-#: ../src/plugin.py:423
-msgid "There was an error getting the feed entries. Please try again."
-msgstr "Si è generato un errore recuperando le voci del feed. Riprovare..."
-
-#: ../src/MyTubeSearch.py:169
-#: ../src/plugin.py:57
-msgid "This Month"
-msgstr "Questo mese"
-
-#: ../src/MyTubeSearch.py:170
-#: ../src/plugin.py:58
-msgid "This Week"
-msgstr "Questa settimana"
-
-#: ../src/plugin.py:1420
-msgid "This is the help screen. Feed me with something to display."
-msgstr "Questo è una schermata d'aiuto. Datemi qualcosa da mostrare..."
-
-#: ../src/MyTubeSearch.py:171
-#: ../src/plugin.py:59
-msgid "Today"
-msgstr "Oggi"
-
-#: ../src/MyTubeSearch.py:242
-#: ../src/plugin.py:130
-#: ../src/plugin.py:755
-msgid "Top favorites"
-msgstr "Top preferiti"
-
-#: ../src/MyTubeSearch.py:239
-#: ../src/plugin.py:127
-#: ../src/plugin.py:754
-msgid "Top rated"
-msgstr "Top valutazioni"
-
-#: ../src/MyTubeSearch.py:186
-#: ../src/plugin.py:74
-msgid "Travel & Events"
-msgstr "Viaggi & eventi"
-
-#: ../src/plugin.py:371
-#: ../src/plugin.py:413
-msgid "Trying to download the Youtube feed entries. Please wait..."
-msgstr "Attendere: download elenco dal feed Youtube in corso..."
-
-#: ../src/plugin.py:418
-msgid "Trying to download the Youtube search results. Please wait..."
-msgstr "Attendere: download dei risultati della ricerca da Youtube in corso..."
-
-#: ../src/MyTubeSearch.py:224
-#: ../src/plugin.py:112
-msgid "United States"
-msgstr "Stati Uniti"
-
-#: ../src/MyTubeSearch.py:423
-msgid "Videobrowser exit behavior:"
-msgstr "Comportamento browser video su uscita: "
-
-#: ../src/MyTubeSearch.py:422
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:327
 msgid "Videoplayer stop/exit behavior:"
 msgstr "Comportamento player video su stop/uscita: "
 
-#: ../src/MyTubeSearch.py:162
-#: ../src/plugin.py:50
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:328
+msgid "Videobrowser exit behavior:"
+msgstr "Comportamento browser video su uscita: "
+
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:335
+msgid "Download location"
+msgstr "Collocazione download"
+
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:338
+msgid "Clear history on Exit:"
+msgstr "Ripulire la cronologia in uscita:"
+
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:339
+msgid "Ask to load new entries"
+msgstr "Chiedere prima di caricare nuove voci"
+
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:360
+msgid "Choose target folder"
+msgstr "Selezionare la cartella di destinazione"
+
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:477
+#: .../enigma2-plugins/mytube/src/MyTubeSearch.py:493
+msgid "MyTubePlayer active video downloads"
+msgstr "MyTubePlayer: download filmati attivi"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:45
+msgid "Relevance"
+msgstr "Rilevanza"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:46
 msgid "View Count"
 msgstr "Visual. conteggio"
 
-#: ../src/plugin.py:486
-msgid "View active downloads"
-msgstr "Visualizzare i download attivi"
+#: .../enigma2-plugins/mytube/src/plugin.py:47
+msgid "Published"
+msgstr "Pubblicato"
 
-#: ../src/plugin.py:480
-msgid "View related videos"
-msgstr "Visualizzare filmati collegati"
+#: .../enigma2-plugins/mytube/src/plugin.py:48
+msgid "Rating"
+msgstr "Valutazioni"
 
-#: ../src/plugin.py:481
-msgid "View response videos"
-msgstr "Visualizzare filmati disponibili"
+#: .../enigma2-plugins/mytube/src/plugin.py:52
+msgid "All Time"
+msgstr "Sempre"
 
-#: ../src/plugin.py:1104
-#: ../src/plugin.py:1273
-msgid "Views: "
-msgstr "Visite: "
+#: .../enigma2-plugins/mytube/src/plugin.py:53
+msgid "This Month"
+msgstr "Questo mese"
 
-#: ../src/plugin.py:260
+#: .../enigma2-plugins/mytube/src/plugin.py:54
+msgid "This Week"
+msgstr "Questa settimana"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:55
+msgid "Today"
+msgstr "Oggi"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:59
+#: .../enigma2-plugins/mytube/src/plugin.py:614
+#: .../enigma2-plugins/mytube/src/plugin.py:620
+#: .../enigma2-plugins/mytube/src/plugin.py:1772
+msgid "Yes"
+msgstr "Sì"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:60
+#: .../enigma2-plugins/mytube/src/plugin.py:615
+#: .../enigma2-plugins/mytube/src/plugin.py:621
+msgid "No"
+msgstr "No"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:64
+#: .../enigma2-plugins/mytube/src/plugin.py:84
+msgid "All"
+msgstr "Tutte"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:65
+msgid "Film & Animation"
+msgstr "Film & Animazione"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:66
+msgid "Autos & Vehicles"
+msgstr "Auto & veicoli"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:67
+msgid "Music"
+msgstr "Musica"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:68
+msgid "Pets & Animals"
+msgstr "Cuccioli & animali"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:69
+msgid "Sports"
+msgstr "Sport"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:70
+msgid "Travel & Events"
+msgstr "Viaggi & eventi"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:71
+msgid "Short Movies"
+msgstr "Corti"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:72
+msgid "Gaming"
+msgstr "Giochi"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:73
+msgid "Comedy"
+msgstr "Commedia"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:74
+msgid "People & Blogs"
+msgstr "Gente & blog"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:75
+msgid "News & Politics"
+msgstr "Notizie & politica"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:76
+msgid "Entertainment"
+msgstr "Intrattenimento"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:77
+msgid "Education"
+msgstr "Educativi"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:78
+msgid "Howto & Style"
+msgstr "Howto & Stile"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:79
+msgid "Nonprofits & Activism"
+msgstr "Nonprofit & attivismo"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:80
+msgid "Science & Technology"
+msgstr "Scienza e tecnologia"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:85
+#: .../enigma2-plugins/mytube/src/plugin.py:92
+msgid "Australia"
+msgstr "Australia"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:86
+msgid "Brazil"
+msgstr "Brasile"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:87
+msgid "Canada"
+msgstr "Canada"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:88
+msgid "Czech Republic"
+msgstr "Repubblica Ceca"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:89
+msgid "France"
+msgstr "Francia"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:90
+msgid "Germany"
+msgstr "Germania"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:91
+msgid "Great Britain"
+msgstr "Gran Bretagna"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:93
+msgid "Holland"
+msgstr "Olanda"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:94
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:95
+msgid "India"
+msgstr "India"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:96
+msgid "Ireland"
+msgstr "Irlanda"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:97
+msgid "Israel"
+msgstr "Israele"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:98
+msgid "Italy"
+msgstr "Italia"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:99
+msgid "Japan"
+msgstr "Giappone"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:100
+msgid "Mexico"
+msgstr "Messico"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:101
+msgid "New Zealand"
+msgstr "Nuova Zelanda"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:102
+msgid "Poland"
+msgstr "Polonia"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:103
+msgid "Russia"
+msgstr "Russia"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:104
+msgid "South Korea"
+msgstr "Corea del Sud"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:105
+msgid "Spain"
+msgstr "Spagna"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:106
+msgid "Sweden"
+msgstr "Svezia"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:107
+msgid "Taiwan"
+msgstr "Taiwan"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:108
+msgid "United States"
+msgstr "Stati Uniti"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:112
+msgid "Ascending"
+msgstr "Crescente"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:113
+msgid "Descending"
+msgstr "Discendente"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:121
+#: .../enigma2-plugins/mytube/src/plugin.py:790
+msgid "HD videos"
+msgstr "Filmati HD"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:122
+#: .../enigma2-plugins/mytube/src/plugin.py:794
+msgid "Most viewed"
+msgstr "Più visti"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:123
+#: .../enigma2-plugins/mytube/src/plugin.py:792
+msgid "Top rated"
+msgstr "Top valutazioni"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:124
+#: .../enigma2-plugins/mytube/src/plugin.py:799
+msgid "Recently featured"
+msgstr "Posti in primo piano di recente"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:125
+#: .../enigma2-plugins/mytube/src/plugin.py:797
+msgid "Most discussed"
+msgstr "Più discussi"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:126
+#: .../enigma2-plugins/mytube/src/plugin.py:793
+msgid "Top favorites"
+msgstr "Top preferiti"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:127
+#: .../enigma2-plugins/mytube/src/plugin.py:798
+msgid "Most linked"
+msgstr "Più \"linkati\""
+
+#: .../enigma2-plugins/mytube/src/plugin.py:128
+#: .../enigma2-plugins/mytube/src/plugin.py:800
+msgid "Most responded"
+msgstr "Più affidabili"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:129
+#: .../enigma2-plugins/mytube/src/plugin.py:796
+msgid "Most recent"
+msgstr "Più recenti"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:130
+#: .../enigma2-plugins/mytube/src/plugin.py:795
+msgid "Most popular"
+msgstr "Più popolari"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:131
+#: .../enigma2-plugins/mytube/src/plugin.py:801
+msgid "Most shared"
+msgstr "Più condivise"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:132
+#: .../enigma2-plugins/mytube/src/plugin.py:802
+msgid "Trending videos"
+msgstr "Filmati di \"tendenza\""
+
+#: .../enigma2-plugins/mytube/src/plugin.py:135
+#: .../enigma2-plugins/mytube/src/plugin.py:138
+msgid "Ask user"
+msgstr "Chiedere all'utente"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:135
+#: .../enigma2-plugins/mytube/src/plugin.py:138
+msgid "Return to movie list"
+msgstr "Ritornare all'elenco filmati"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:135
+msgid "Play next video"
+msgstr "Riprodurre il filmato successivo"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:135
+msgid "Play video again"
+msgstr "Riprodurre nuovamente il filmato"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:269
+msgid ""
+"Welcome to the MyTube Youtube Player.\n"
+"\n"
+"While entering your search term(s) you will get suggestions displayed matching your search term.\n"
+"\n"
+"To select a suggestion press DOWN on your remote, select the desired result and press OK on your remote to start the search.\n"
+"\n"
+"Press exit to get back to the input field."
+msgstr ""
+"benvenuti in MyTube Youtube player.\n"
+"\n"
+"Durante l'iserimento dei criteri di ricerca, verranno mostrati suggerimenti circa le possibili corrispondenze.\n"
+"\n"
+"Per selezionare un suggerimento, premere GIU' sul telecomando, scegliere la voce desiderata poi premere Ok per avviare la ricerca.\n"
+"\n"
+"Premere EXIT per tornare alla schermata di inserimento."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:270
 msgid ""
 "Welcome to the MyTube Youtube Player.\n"
 "\n"
@@ -657,37 +435,228 @@ msgstr ""
 "\n"
 "HELP -> Mostrare di nuovo puesta pagina di aiuto."
 
-#: ../src/plugin.py:259
-msgid ""
-"Welcome to the MyTube Youtube Player.\n"
-"\n"
-"While entering your search term(s) you will get suggestions displayed matching your search term.\n"
-"\n"
-"To select a suggestion press DOWN on your remote, select the desired result and press OK on your remote to start the search.\n"
-"\n"
-"Press exit to get back to the input field."
-msgstr ""
-"benvenuti in MyTube Youtube player.\n"
-"\n"
-"Durante l'iserimento dei criteri di ricerca, verranno mostrati suggerimenti circa le possibili corrispondenze.\n"
-"\n"
-"Per selezionare un suggerimento, premere GIU' sul telecomando, scegliere la voce desiderata poi premere Ok per avviare la ricerca.\n"
-"\n"
-"Premere EXIT per tornare alla schermata di inserimento."
+#: .../enigma2-plugins/mytube/src/plugin.py:280
+msgid "Std. Feeds"
+msgstr "Feed std."
 
-#: ../src/MyTubeSearch.py:175
-#: ../src/plugin.py:63
-#: ../src/plugin.py:570
-#: ../src/plugin.py:576
-#: ../src/plugin.py:1694
-msgid "Yes"
-msgstr "Sì"
+#: .../enigma2-plugins/mytube/src/plugin.py:281
+msgid "History"
+msgstr "Cronologia"
 
-#: ../src/plugin.py:1696
+#: .../enigma2-plugins/mytube/src/plugin.py:397
+#: .../enigma2-plugins/mytube/src/plugin.py:421
+#: .../enigma2-plugins/mytube/src/plugin.py:463
+msgid "Genuine Dreambox validation failed!"
+msgstr "Validazione Genuine Dreambox fallita!"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:397
+#: .../enigma2-plugins/mytube/src/plugin.py:421
+#: .../enigma2-plugins/mytube/src/plugin.py:463
+msgid "Verify your Dreambox authenticity by running the genuine dreambox plugin!"
+msgstr "Verificare l'autenticità del Dreambox tramite il plugin Genuine Dreambox!"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:416
+#: .../enigma2-plugins/mytube/src/plugin.py:475
+msgid "Fetching feed entries"
+msgstr "Recupero feed in corso"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:416
+#: .../enigma2-plugins/mytube/src/plugin.py:475
+msgid "Trying to download the Youtube feed entries. Please wait..."
+msgstr "Attendere: download elenco dal feed Youtube in corso..."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:433
+msgid "MyTubePlayer"
+msgstr "MyTubePlayer"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:437
+msgid "Search Term(s)"
+msgstr "Voci di ricerca"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:477
+msgid "Fetching search entries"
+msgstr "Recupero voci di ricerca in corso"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:477
+msgid "Trying to download the Youtube search results. Please wait..."
+msgstr "Attendere: download dei risultati della ricerca da Youtube in corso..."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:479
+msgid "An error occured."
+msgstr "Si è verificato un errore."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:479
+msgid "There was an error getting the feed entries. Please try again."
+msgstr "Si è generato un errore recuperando le voci del feed. Riprovare..."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:482
+msgid "No videos to display"
+msgstr "Nessun filmato da mostrare"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:482
+msgid "Please select a standard feed or try searching for videos."
+msgstr "Selezionare un feed standard o eseguire una ricerca filmati."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:484
+msgid "Not fetching feed entries"
+msgstr "Voci feed non recuperate"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:484
+msgid "Please enter your search term."
+msgstr "Inserire le voci di ricerca"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:498
+#: .../enigma2-plugins/mytube/src/plugin.py:500
+#: .../enigma2-plugins/mytube/src/plugin.py:507
+msgid "MyTubePlayer Help"
+msgstr "Aiuto su MyTubePlayer"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:519
+#: .../enigma2-plugins/mytube/src/plugin.py:525
+msgid "MyTube Settings"
+msgstr "Configurazione MyTube"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:522
+#: .../enigma2-plugins/mytube/src/plugin.py:538
+msgid "Select your choice."
+msgstr "Selezionare una voce."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:527
+msgid "View related videos"
+msgstr "Visualizzare filmati collegati"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:528
+msgid "View Users Video"
+msgstr "Visualizzare filmati degli utenti"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:529
+msgid "View response videos"
+msgstr "Visualizzare filmati disponibili"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:533
+msgid "Download Video"
+msgstr "Download filmato"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:534
+msgid "View active downloads"
+msgstr "Visualizzare i download attivi"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:576
+msgid "Enter your search term(s)"
+msgstr "Inserire le voci di ricerca"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:616
+msgid "No, but switch to video entries."
+msgstr "No: commutare sull'elenco filmati"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:622
+msgid "No, but switch to video search."
+msgstr "No, ma passare alla ricerca filmati"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:624
+msgid "Really quit MyTube Player?"
+msgstr "Uscire da MyTubePlayer?"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:718
+msgid "Sorry, video is not available!"
+msgstr "Filmato non disponibile!"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:755
+msgid "Do you want to see more entries?"
+msgstr "Visualizzare altre voci?"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:804
+msgid "Select new feed to view."
+msgstr "Selezionare il nuovo feed da visualizzare."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:962
+msgid "More video entries."
+msgstr "Ulteriori filmati"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:970
+msgid "Related video entries."
+msgstr "Filmati collegati."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:978
+msgid "Response video entries."
+msgstr "Filmati disponibili"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:986
+msgid "User video entries."
+msgstr "Voci video utente."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1133
+#: .../enigma2-plugins/mytube/src/plugin.py:1371
+msgid "Added: "
+msgstr "Aggiunti: "
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1133
+#: .../enigma2-plugins/mytube/src/plugin.py:1374
+msgid "Views: "
+msgstr "Visite: "
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1133
+#: .../enigma2-plugins/mytube/src/plugin.py:1365
+msgid "Duration: "
+msgstr "Durata: "
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1133
+msgid "Ratings: "
+msgstr "Valutazioni: "
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1339
+msgid "Downloading screenshots. Please wait..."
+msgstr "Attendere: download screenshot in corso..."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1368
+msgid "Author: "
+msgstr "Autore: "
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1377
+msgid "Tags: "
+msgstr "Etrichette: "
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1380
+msgid "MyTubeVideoInfoScreen"
+msgstr "MyTubeVideoInfoScreen"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1514
+msgid "Help"
+msgstr "Aiuto"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1518
+msgid "This is the help screen. Feed me with something to display."
+msgstr "Questo è una schermata d'aiuto. Datemi qualcosa da mostrare..."
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1523
+msgid "MyTubeVideohelpScreen"
+msgstr "MyTubeVideohelpScreen"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1773
+msgid "No, but play video again"
+msgstr "No: riprodurre nuovamente il filmato"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1774
 msgid "Yes, but play next video"
 msgstr "Sì: riprodurre il filmato successivo"
 
-#: ../src/plugin.py:1697
+#: .../enigma2-plugins/mytube/src/plugin.py:1775
 msgid "Yes, but play previous video"
 msgstr "Sì: riprodurre il filmato precedente"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1778
+msgid "Stop playing this movie?"
+msgstr "Arrestare la riproduzione?"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1780
+msgid "No playable video found! Stop playing this movie?"
+msgstr "Nessun filmato riproducibile trovato! Arrestare la riproduzione?"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1826
+msgid "My TubePlayer"
+msgstr "My TubePlayer"
+
+#: .../enigma2-plugins/mytube/src/plugin.py:1827
+msgid "Play YouTube movies"
+msgstr "Riprodurre filmati YouTube"
 
