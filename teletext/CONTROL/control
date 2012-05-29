@@ -1,2 +1,2 @@
 Description: TeleText with precaching pages.
-Depends: enigma2, dbttcd (>= 1.1)
+Depends: enigma2 (>= 3.999git20120526), dbttcd (>= 1.1)

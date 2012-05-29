@@ -113,6 +113,7 @@ class TeleText(Screen):
   edgeValue   = False
   opaqueValue = False
   nav_mode    = NAV_MODE_TEXT
+  zoom        = TeletextInterface.MODE_FULL
 
   onChangedEntry = [ ]  
 
@@ -176,7 +177,7 @@ class TeleText(Screen):
     self.helpList.append((self["actions"], "OkCancelActions", [("ok", _("start page catching / select page"))]))
 #    self.helpList.append((self["actions"], "TeleTextActions", [("volUp",_("increase width"))]))
 #    self.helpList.append((self["actions"], "TeleTextActions", [("volDown",_("decrease width"))]))
-    self.helpList.append((self["actions"], "TeleTextActions", [("nextBouquet",_("increase height"))]))
+    self.helpList.append((self["actions"], "TeleTextActions", [("nextBouquet",_("zoom / increase height"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("prevBouquet",_("decrease height"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("info", _("toggle info"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("menu", _("teletext settings"))]))
@@ -239,7 +240,7 @@ class TeleText(Screen):
 #      if (x[0] + x[1]) == 0:
 #        log("recv update %s" % (x))
       if not self.isDM7025:
-        self.ttx.update(x[0], x[1], x[2], x[3]);
+        self.ttx.update(x[0], x[1], x[2], x[3], self.zoom);
       conn.close()
 
   def __execBegin(self):
@@ -308,6 +309,8 @@ class TeleText(Screen):
       if self.catchPage:
         x = array.array('B', (CMD_CATCHPAGE, 2, 0))
       else:
+        if self.zoom == TeletextInterface.MODE_LOWER_HALF:
+          self.zoom = TeletextInterface.MODE_UPPER_HALF
         x = array.array('B')
         x.append(CMD_PAGE_NEXT)
       self.socketSend(x)
@@ -325,6 +328,8 @@ class TeleText(Screen):
       if self.catchPage:
         x = array.array('B', (CMD_CATCHPAGE, 2, 1))
       else:
+        if self.zoom == TeletextInterface.MODE_LOWER_HALF:
+          self.zoom = TeletextInterface.MODE_UPPER_HALF
         x = array.array('B')
         x.append(CMD_PAGE_PREV)
       self.socketSend(x)
@@ -339,6 +344,8 @@ class TeleText(Screen):
       if self.catchPage or self.pageInput != 0:
         return
       log("left pressed")
+      if self.zoom == TeletextInterface.MODE_LOWER_HALF:
+        self.zoom = TeletextInterface.MODE_UPPER_HALF
       x = array.array('B')
       x.append(CMD_SUBP_PREV)
       self.socketSend(x)
@@ -353,6 +360,8 @@ class TeleText(Screen):
       if self.catchPage or self.pageInput != 0:
         return
       log("right pressed")
+      if self.zoom == TeletextInterface.MODE_LOWER_HALF:
+        self.zoom = TeletextInterface.MODE_UPPER_HALF
       x = array.array('B')
       x.append(CMD_SUBP_NEXT)
       self.socketSend(x)
@@ -363,13 +372,23 @@ class TeleText(Screen):
         self.updateLayout()
 
   def nextBouquetPressed(self):
-    if self.nav_mode == NAV_MODE_TEXT:
-      return
     log("bouqet+ pressed")
-    if self.nav_pos[3] < dsk_height:
-      self.nav_pos[3] = self.nav_pos[3] + 1
-    elif self.nav_pos[1] > 0:
-      self.nav_pos[1] = self.nav_pos[1] - 1
+    if self.nav_mode == NAV_MODE_TEXT:
+      if self.catchPage or self.pageInput != 0:
+        return
+      # zoom teletext
+      if self.zoom == TeletextInterface.MODE_UPPER_HALF:
+        self.zoom = TeletextInterface.MODE_LOWER_HALF
+      elif self.zoom == TeletextInterface.MODE_LOWER_HALF:
+        self.zoom = TeletextInterface.MODE_FULL
+      else:
+        self.zoom = TeletextInterface.MODE_UPPER_HALF
+    else:
+      # position setup
+      if self.nav_pos[3] < dsk_height:
+        self.nav_pos[3] = self.nav_pos[3] + 1
+      elif self.nav_pos[1] > 0:
+        self.nav_pos[1] = self.nav_pos[1] - 1
     self.updateLayout()
 
   def prevBouquetPressed(self):
@@ -575,7 +594,7 @@ class TeleText(Screen):
 
     self.ttx.hide()
     self.ttx.show(self.instance)
-    self.ttx.update(0,0,492,250)
+    self.ttx.update(0,0,492,250,self.zoom)
 
   def resetVideo(self):
     log("reset video")
@@ -642,6 +661,7 @@ class TeleText(Screen):
       else:
         x = array.array('B', (CMD_CATCHPAGE, 1, 0))
         self.catchPage = True
+        self.zoom = TeletextInterface.MODE_FULL
       self.socketSend(x)
     else:
       if self.nav_mode == NAV_MODE_SIZE_TEXT:

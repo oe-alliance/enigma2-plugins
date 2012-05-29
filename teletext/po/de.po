@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TeleText\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-23 19:47+0100\n"
-"PO-Revision-Date: 2012-05-23 19:47+0100\n"
+"POT-Creation-Date: 2012-05-29 19:39+0100\n"
+"PO-Revision-Date: 2012-05-29 19:39+0100\n"
 "Last-Translator: Andreas Laux <lespuck@web.de>\n"
 "Language-Team: Andreas Laux <lespuck@web.de>\n"
 "Language: \n"
@@ -102,7 +102,6 @@ msgstr "Wählen Sie die zu benutzende TeleText-Version."
 msgid "Select your region to use the proper font."
 msgstr "Wählen Sie Ihre Region, um den passenden Zeichensatz zu verwenden."
 
-#: ../src/plugin.py:165
 #: ../src/plugin.py:166
 #: ../src/plugin.py:167
 #: ../src/plugin.py:168
@@ -110,136 +109,137 @@ msgstr "Wählen Sie Ihre Region, um den passenden Zeichensatz zu verwenden."
 #: ../src/plugin.py:170
 #: ../src/plugin.py:171
 #: ../src/plugin.py:172
+#: ../src/plugin.py:173
 msgid "enter page number"
 msgstr "Seitenzahl eingeben"
 
-#: ../src/plugin.py:173
+#: ../src/plugin.py:174
 msgid "enter page number / page 100"
 msgstr "Seitenzahl eingeben / Seite 100"
 
-#: ../src/plugin.py:174
+#: ../src/plugin.py:175
 msgid "enter page number / rezap"
 msgstr "Seitenzahl eingeben / Rezap"
 
-#: ../src/plugin.py:175
-#: ../src/plugin.py:194
+#: ../src/plugin.py:176
+#: ../src/plugin.py:195
 msgid "exit"
 msgstr "Schliessen"
 
-#: ../src/plugin.py:176
+#: ../src/plugin.py:177
 msgid "start page catching / select page"
 msgstr "Seitenlink auswählen"
 
-#: ../src/plugin.py:179
-msgid "increase height"
-msgstr "Höhe vergrößern"
-
 #: ../src/plugin.py:180
+msgid "zoom / increase height"
+msgstr "Zoom / Höhe vergrößern"
+
+#: ../src/plugin.py:181
 msgid "decrease height"
 msgstr "Höhe verringern"
 
-#: ../src/plugin.py:181
+#: ../src/plugin.py:182
 msgid "toggle info"
 msgstr "versteckte Informationen"
 
-#: ../src/plugin.py:182
+#: ../src/plugin.py:183
 msgid "teletext settings"
 msgstr "TeleText Einstellungen"
 
-#: ../src/plugin.py:183
+#: ../src/plugin.py:184
 msgid "next page / catch page / move"
 msgstr "n. Seite / n. Link / positionieren"
 
-#: ../src/plugin.py:184
+#: ../src/plugin.py:185
 msgid "prev sub page / move"
 msgstr "v. Unterseite / positionieren"
 
-#: ../src/plugin.py:185
+#: ../src/plugin.py:186
 msgid "next sub page / move"
 msgstr "n. Unterseite / positionieren"
 
-#: ../src/plugin.py:186
+#: ../src/plugin.py:187
 msgid "prev page / catch page / move"
 msgstr "v. Seite / v. Link / positionieren"
 
-#: ../src/plugin.py:187
+#: ../src/plugin.py:188
 msgid "toggle flof"
 msgstr "FLOF umschalten"
 
-#: ../src/plugin.py:188
+#: ../src/plugin.py:189
 msgid "red teletext link"
 msgstr "roter Textlink"
 
-#: ../src/plugin.py:189
+#: ../src/plugin.py:190
 msgid "green teletext link"
 msgstr "grüner Textlink"
 
-#: ../src/plugin.py:190
+#: ../src/plugin.py:191
 msgid "yellow teletext link"
 msgstr "gelber Textlink"
 
-#: ../src/plugin.py:191
+#: ../src/plugin.py:192
 msgid "blue teletext link"
 msgstr "blauer Textlink"
 
-#: ../src/plugin.py:192
+#: ../src/plugin.py:193
 msgid "split screen"
 msgstr "geteilter Bildschirm"
 
-#: ../src/plugin.py:193
+#: ../src/plugin.py:194
 msgid "toggle transparency"
 msgstr "Transparenz umschalten"
 
-#: ../src/plugin.py:797
+#: ../src/plugin.py:817
 msgid "TeleText settings"
 msgstr "TeleText Einstellungen"
 
-#: ../src/plugin.py:863
+#: ../src/plugin.py:883
 msgid "Brightness"
 msgstr "Helligkeit"
 
-#: ../src/plugin.py:864
+#: ../src/plugin.py:884
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: ../src/plugin.py:865
+#: ../src/plugin.py:885
 msgid "Transparency"
 msgstr "Transparenz"
 
-#: ../src/plugin.py:866
+#: ../src/plugin.py:886
 msgid "Text level"
 msgstr "TeleText Version"
 
-#: ../src/plugin.py:867
+#: ../src/plugin.py:887
 msgid "Region"
 msgstr "Region"
 
-#: ../src/plugin.py:868
-#: ../src/plugin.py:873
+#: ../src/plugin.py:888
+#: ../src/plugin.py:893
 msgid "Position and size"
 msgstr "Position und Größe"
 
-#: ../src/plugin.py:869
+#: ../src/plugin.py:889
 msgid "Display edges"
 msgstr "Ränder anzeigen"
 
-#: ../src/plugin.py:870
+#: ../src/plugin.py:890
 msgid "Splitting mode"
 msgstr "Geteilter Bildschirm"
 
-#: ../src/plugin.py:874
+#: ../src/plugin.py:894
 msgid "Message"
 msgstr "Nachricht"
 
-#: ../src/plugin.py:875
+#: ../src/plugin.py:895
 msgid "Debug"
 msgstr "Debug"
 
-#: ../src/plugin.py:942
+#: ../src/plugin.py:962
 msgid "Discard changes?"
 msgstr "Änderungen verwerfen?"
 
-#: ../src/plugin.py:1020
+#: ../src/plugin.py:1040
 msgid "No teletext available."
 msgstr "Kein TeleText verfügbar."
 
