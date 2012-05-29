@@ -285,6 +285,8 @@ class TeleText(Screen):
     x = array.array('B')
     if self.pageInput == 0:
       if number == 0:
+        if self.zoom == TeletextInterface.MODE_LOWER_HALF:
+          self.zoom = TeletextInterface.MODE_UPPER_HALF
         x.append(CMD_RZAP_PAGE)
       elif number == 9:
         x.fromlist([CMD_SHOW_PAGE, 1, 0, 0])
@@ -812,15 +814,16 @@ class TeleTextMenu(ConfigListScreen, Screen):
     top = (dsk_height - height)>>1
     log("[menu] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
-        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,0"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/yellow.png" position="176,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/green.png"  position="352,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <widget render="Label" source="key_r" position="0,0"   size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget render="Label" source="key_y" position="176,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget render="Label" source="key_g" position="352,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget name="config" position="0,50"   size="492,275" scrollbarMode="showOnDemand" zPosition="1"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,330" zPosition="1" size="492,2" />
-        <widget name="label"  position="0,335" size="492,65" font="Regular;16" zPosition="1" halign="left" valign="top"/>
+        <widget name="config" position="0,0"   size="492,275" scrollbarMode="showOnDemand" zPosition="1"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,280" zPosition="1" size="492,2" />
+        <widget name="label"  position="0,285" size="492,65" font="Regular;16" zPosition="1" halign="left" valign="top"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,355" zPosition="1" size="492,2" />
+        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,360"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/green.png"  position="176,360" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/yellow.png" position="352,360" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <widget render="Label" source="key_r" position="0,360"   size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget render="Label" source="key_g" position="176,360" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget render="Label" source="key_y" position="352,360" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
       </screen>""" % (left, top, width, height, _("TeleText settings"))
 
     Screen.__init__(self, session)
