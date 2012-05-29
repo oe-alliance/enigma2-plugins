@@ -10,6 +10,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ServiceEventTracker import ServiceEventTracker
+from Components.Sources.StaticText import StaticText
 from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigEnableDisable, ConfigSlider, ConfigSelection, ConfigSequence
 from GlobalActions import globalActionMap
 from Plugins.Plugin import PluginDescriptor
@@ -806,14 +807,20 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
   def __init__(self, session):
     width = 492
-    height = 350
+    height = 400
     left = (dsk_width - width)>>1
     top = (dsk_height - height)>>1
     log("[menu] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
-        <widget name="config" position="0,0"   size="492,275" scrollbarMode="showOnDemand" zPosition="1"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,280" zPosition="1" size="492,2" />
-        <widget name="label"  position="0,285" size="492,65" font="Regular;16" zPosition="1" halign="left" valign="top"/>
+        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,0"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/yellow.png" position="176,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/green.png"  position="352,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <widget render="Label" source="key_r" position="0,0"   size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget render="Label" source="key_y" position="176,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget render="Label" source="key_g" position="352,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="config" position="0,50"   size="492,275" scrollbarMode="showOnDemand" zPosition="1"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,330" zPosition="1" size="492,2" />
+        <widget name="label"  position="0,335" size="492,65" font="Regular;16" zPosition="1" halign="left" valign="top"/>
       </screen>""" % (left, top, width, height, _("TeleText settings"))
 
     Screen.__init__(self, session)
@@ -827,13 +834,18 @@ class TeleTextMenu(ConfigListScreen, Screen):
     {
       "ok"     : self.okPressed,
       "cancel" : self.cancelPressed,
+      "red"    : self.cancelPressed,
+      "green"  : self.okPressed,
+      "yellow" : self.resetPressed,
       "menu"   : self.cancelPressed,
       "text"   : self.textPressed
     }, -2)
     self["actions"].setEnabled(True)
 
     self["label"] = Label("Info")
-
+    self["key_r"] = StaticText(_("Cancel"))
+    self["key_y"] = StaticText(_("Default"))
+    self["key_g"] = StaticText(_("OK")) 
     self.onLayoutFinish.append(self.__layoutFinished)
 
   def __layoutFinished(self):
@@ -903,6 +915,20 @@ class TeleTextMenu(ConfigListScreen, Screen):
     config.plugins.TeleText.splitting_mode.addNotifier(self.createConfig)
 
     self.isInitialized = True
+
+  def resetPressed(self):
+    log("[menu] reset pressed")
+    config.plugins.TeleText.brightness.setValue(8)
+    config.plugins.TeleText.contrast.setValue(12)
+    config.plugins.TeleText.transparency.setValue(8)
+    config.plugins.TeleText.messages.setValue(True)
+    config.plugins.TeleText.edge_cut.setValue(False)
+    config.plugins.TeleText.splitting_mode.setValue(SPLIT_MODE_PAT)
+    config.plugins.TeleText.textlevel.setValue("2")
+    config.plugins.TeleText.region.setValue("16")
+    config.plugins.TeleText.debug.setValue(False)
+    config.plugins.TeleText.pos.setValue([0, 0, dsk_width, dsk_height])
+    config.plugins.TeleText.tip_pos.setValue([(dsk_width>>1)+(dsk_width>>2), (dsk_height>>1)+(dsk_height>>2), dsk_width, dsk_height])
 
   def textPressed(self):
     log("[menu] text pressed")
