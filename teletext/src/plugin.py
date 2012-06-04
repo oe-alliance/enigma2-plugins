@@ -24,6 +24,7 @@ from os import unlink
 from select import POLLIN, POLLPRI, POLLHUP, POLLERR
 
 from enigma import Teletext as TeletextInterface
+from enigma import DISABLED, BILINEAR, ANISOTROPIC, SHARP, SHARPER, BLURRY, ANTI_FLUTTER, ANTI_FLUTTER_BLURRY, ANTI_FLUTTER_SHARP
 
 CMD_CTL_CACHE=1
 CMD_SHOW_PAGE=2
@@ -56,6 +57,7 @@ SPLIT_MODE_TIP = "tip"
 splittingModeList = [ (SPLIT_MODE_PAT, _("picture and teletext")), (SPLIT_MODE_TAP, _("teletext and picture")), (SPLIT_MODE_TIP, _("teletext in picture")) ]
 textlevelModeList = [ ("0", "1.0"), ("1", "1.5"), ("2", "2.5"), ("3", "3.5") ]
 regionList = [ ("0", _("Western and Central Europe")), ("8", _("Eastern Europe")), ("16", _("Western Europe and Turkey")), ("24", _("Central and Southeast Europe")), ("32", _("Cyrillic")), ("48", _("Turkish / Greek")), ("64", _("Arabic")), ("80", _("Hebrew / Arabic")) ]
+filterList = [ ("%d"%DISABLED,_("Disabled")), ("%d"%BILINEAR,_("bilinear")), ("%d"%ANISOTROPIC,_("anisotropic")), ("%d"%SHARP,_("sharp")), ("%d"%SHARPER,_("sharper")), ("%d"%BLURRY,_("blurry")), ("%d"%ANTI_FLUTTER,_("anti flutter")), ("%d"%ANTI_FLUTTER_BLURRY,_("anti flutter blurry")), ("%d"%ANTI_FLUTTER_SHARP,_("anti flutter sharp"))]
 
 HELP_TEXT_POS          = _("Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically.")
 HELP_TEXT_TIP_POS      = _("Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically.")
@@ -68,6 +70,7 @@ HELP_TEXT_MESSAGES     = _("Show message if no teletext available or exit silent
 HELP_TEXT_DEBUG        = _("Print debug messages to /tmp/dbttcp.log.")
 HELP_TEXT_TEXTLEVEL    = _("Select teletext version to use.")
 HELP_TEXT_REGION       = _("Select your region to use the proper font.")
+HELP_TEXT_SCALE_FILTER = _("Select your favourite scale filter.")
 
 dsk_size   = getDesktop(0).size()
 dsk_width  = dsk_size.width()
@@ -81,6 +84,7 @@ NAV_MODE_SIZE_TEXT     = 1
 NAV_MODE_SIZE_TIP_TEXT = 2
 
 config.plugins.TeleText = ConfigSubsection()
+config.plugins.TeleText.scale_filter = ConfigSelection(filterList, default="%d"%BILINEAR)
 config.plugins.TeleText.brightness   = ConfigSlider(default=8,  increment=1, limits=(0,15))
 config.plugins.TeleText.contrast     = ConfigSlider(default=12, increment=1, limits=(0,15))
 config.plugins.TeleText.transparency = ConfigSlider(default=8,  increment=1, limits=(0,15))
@@ -241,7 +245,7 @@ class TeleText(Screen):
 #      if (x[0] + x[1]) == 0:
 #        log("recv update %s" % (x))
       if not self.isDM7025:
-        self.ttx.update(x[0], x[1], x[2], x[3], self.zoom);
+        self.ttx.update(x[0], x[1], x[2], x[3], self.zoom, int(config.plugins.TeleText.scale_filter.value));
       conn.close()
 
   def __execBegin(self):
@@ -597,7 +601,7 @@ class TeleText(Screen):
 
     self.ttx.hide()
     self.ttx.show(self.instance)
-    self.ttx.update(0,0,492,250,self.zoom)
+    self.ttx.update(0,0,492,250,self.zoom, int(config.plugins.TeleText.scale_filter.value))
 
   def resetVideo(self):
     log("reset video")
@@ -809,21 +813,21 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
   def __init__(self, session):
     width = 492
-    height = 400
+    height = 420
     left = (dsk_width - width)>>1
     top = (dsk_height - height)>>1
     log("[menu] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
-        <widget name="config" position="0,0"   size="492,275" scrollbarMode="showOnDemand" zPosition="1"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,280" zPosition="1" size="492,2" />
-        <widget name="label"  position="0,285" size="492,65" font="Regular;16" zPosition="1" halign="left" valign="top"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,355" zPosition="1" size="492,2" />
-        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,360"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/green.png"  position="176,360" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/yellow.png" position="352,360" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <widget render="Label" source="key_r" position="0,360"   size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget render="Label" source="key_g" position="176,360" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget render="Label" source="key_y" position="352,360" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="config" position="0,0"   size="492,295" scrollbarMode="showOnDemand" zPosition="1"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,300" zPosition="1" size="492,2" />
+        <widget name="label"  position="0,300" size="492,70" font="Regular;16" zPosition="1" halign="left" valign="top"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,375" zPosition="1" size="492,2" />
+        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,380"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/green.png"  position="176,380" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/yellow.png" position="352,380" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <widget render="Label" source="key_r" position="0,380"   size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget render="Label" source="key_g" position="176,380" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget render="Label" source="key_y" position="352,380" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
       </screen>""" % (left, top, width, height, _("TeleText settings"))
 
     Screen.__init__(self, session)
@@ -881,6 +885,8 @@ class TeleTextMenu(ConfigListScreen, Screen):
       self["label"].setText(HELP_TEXT_TEXTLEVEL)
     elif configele == config.plugins.TeleText.region:
       self["label"].setText(HELP_TEXT_REGION)
+    elif configele == config.plugins.TeleText.scale_filter:
+      self["label"].setText(HELP_TEXT_SCALE_FILTER)
 
   def createConfig(self, configele):
     if not self.isInitialized:
@@ -895,6 +901,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
       x[1].clearNotifiers() 
 
     self.list = [
+      getConfigListEntry(_("Scale filter"),      config.plugins.TeleText.scale_filter),
       getConfigListEntry(_("Brightness"),        config.plugins.TeleText.brightness),
       getConfigListEntry(_("Contrast"),          config.plugins.TeleText.contrast),
       getConfigListEntry(_("Transparency"),      config.plugins.TeleText.transparency),
@@ -921,6 +928,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
   def resetPressed(self):
     log("[menu] reset pressed")
+    config.plugins.TeleText.scale_filter.setValue("%d"%BILINEAR)
     config.plugins.TeleText.brightness.setValue(8)
     config.plugins.TeleText.contrast.setValue(12)
     config.plugins.TeleText.transparency.setValue(8)
