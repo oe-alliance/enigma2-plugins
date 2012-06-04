@@ -57,7 +57,7 @@ SPLIT_MODE_TIP = "tip"
 splittingModeList = [ (SPLIT_MODE_PAT, _("picture and teletext")), (SPLIT_MODE_TAP, _("teletext and picture")), (SPLIT_MODE_TIP, _("teletext in picture")) ]
 textlevelModeList = [ ("0", "1.0"), ("1", "1.5"), ("2", "2.5"), ("3", "3.5") ]
 regionList = [ ("0", _("Western and Central Europe")), ("8", _("Eastern Europe")), ("16", _("Western Europe and Turkey")), ("24", _("Central and Southeast Europe")), ("32", _("Cyrillic")), ("48", _("Turkish / Greek")), ("64", _("Arabic")), ("80", _("Hebrew / Arabic")) ]
-filterList = [ ("%d"%DISABLED,_("Disabled")), ("%d"%BILINEAR,_("bilinear")), ("%d"%ANISOTROPIC,_("anisotropic")), ("%d"%SHARP,_("sharp")), ("%d"%SHARPER,_("sharper")), ("%d"%BLURRY,_("blurry")), ("%d"%ANTI_FLUTTER,_("anti flutter")), ("%d"%ANTI_FLUTTER_BLURRY,_("anti flutter blurry")), ("%d"%ANTI_FLUTTER_SHARP,_("anti flutter sharp"))]
+filterList = [ ("%d"%DISABLED,_("Disabled")), ("%d"%BILINEAR,_("bilinear")), ("%d"%ANISOTROPIC,_("anisotropic")), ("%d"%SHARP,_("sharp")), ("%d"%SHARPER,_("sharper"))]
 
 HELP_TEXT_POS          = _("Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically.")
 HELP_TEXT_TIP_POS      = _("Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically.")
@@ -85,6 +85,7 @@ NAV_MODE_SIZE_TIP_TEXT = 2
 
 config.plugins.TeleText = ConfigSubsection()
 config.plugins.TeleText.scale_filter = ConfigSelection(filterList, default="%d"%BILINEAR)
+config.plugins.TeleText.scale_filter_zoom = ConfigSelection(filterList, default="%d"%BILINEAR)
 config.plugins.TeleText.brightness   = ConfigSlider(default=8,  increment=1, limits=(0,15))
 config.plugins.TeleText.contrast     = ConfigSlider(default=12, increment=1, limits=(0,15))
 config.plugins.TeleText.transparency = ConfigSlider(default=8,  increment=1, limits=(0,15))
@@ -245,7 +246,11 @@ class TeleText(Screen):
 #      if (x[0] + x[1]) == 0:
 #        log("recv update %s" % (x))
       if not self.isDM7025:
-        self.ttx.update(x[0], x[1], x[2], x[3], self.zoom, int(config.plugins.TeleText.scale_filter.value));
+        if self.zoom:
+          filter_mode = int(config.plugins.TeleText.scale_filter_zoom.value)
+        else:
+          filter_mode = int(config.plugins.TeleText.scale_filter.value)
+        self.ttx.update(x[0], x[1], x[2], x[3], self.zoom, filter_mode);
       conn.close()
 
   def __execBegin(self):
@@ -601,7 +606,11 @@ class TeleText(Screen):
 
     self.ttx.hide()
     self.ttx.show(self.instance)
-    self.ttx.update(0,0,492,250,self.zoom, int(config.plugins.TeleText.scale_filter.value))
+    if self.zoom:
+      filter_mode = int(config.plugins.TeleText.scale_filter_zoom.value)
+    else:
+      filter_mode = int(config.plugins.TeleText.scale_filter.value)
+    self.ttx.update(0,0,492,250,self.zoom,filter_mode)
 
   def resetVideo(self):
     log("reset video")
@@ -887,6 +896,8 @@ class TeleTextMenu(ConfigListScreen, Screen):
       self["label"].setText(HELP_TEXT_REGION)
     elif configele == config.plugins.TeleText.scale_filter:
       self["label"].setText(HELP_TEXT_SCALE_FILTER)
+    elif configele == config.plugins.TeleText.scale_filter_zoom:
+      self["label"].setText(HELP_TEXT_SCALE_FILTER)
 
   def createConfig(self, configele):
     if not self.isInitialized:
@@ -902,6 +913,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
     self.list = [
       getConfigListEntry(_("Scale filter"),      config.plugins.TeleText.scale_filter),
+      getConfigListEntry(_("Scale filter zoom"), config.plugins.TeleText.scale_filter_zoom),
       getConfigListEntry(_("Brightness"),        config.plugins.TeleText.brightness),
       getConfigListEntry(_("Contrast"),          config.plugins.TeleText.contrast),
       getConfigListEntry(_("Transparency"),      config.plugins.TeleText.transparency),
@@ -929,6 +941,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
   def resetPressed(self):
     log("[menu] reset pressed")
     config.plugins.TeleText.scale_filter.setValue("%d"%BILINEAR)
+    config.plugins.TeleText.scale_filter_zoom.setValue("%d"%BILINEAR)
     config.plugins.TeleText.brightness.setValue(8)
     config.plugins.TeleText.contrast.setValue(12)
     config.plugins.TeleText.transparency.setValue(8)
