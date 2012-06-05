@@ -62,6 +62,7 @@ a.underline{text-decoration:underline}
 #contentHd{background:#000;width:527px}
 #contentHdExt{background:#000;dipslay:block}
 #contentHdExt input{padding:1px;margin-right:2px;margin-bottom:2px;border:0;color:#485052}
+#contentHdExt li div{padding:1px;margin-right:2px;margin-bottom:2px;border:0;color:#485052}
 #epgSearch{width:120px}
 .boxContent{color:#485052;padding:3px}
 .navTable{width:100%;margin:0;padding:0}

@@ -498,13 +498,20 @@ var MovieListHandler  = Class.create(AbstractContentHandler, {
 });
 
 var MovieNavHandler = Class.create(AbstractContentHandler,{
-	initialize: function($super, target){
-		$super('tplNavMovies', target);
+	initialize: function($super, tagTarget, locTarget){
+		$super('tplMovieTags', tagTarget);
+		this.targetLocations = locTarget;
+		this.tplLocations = 'tplMovieLocations';
 	},
 
 	load: function(locations, tags){
 		data = { 'locations' : locations, 'tags' : tags};
 		this.show(data);
+		this.showLocations(data);
+	},
+
+	showLocations: function(data){
+		templateEngine.process(this.tplLocations, data, this.targetLocations);
 	}
 });
 
