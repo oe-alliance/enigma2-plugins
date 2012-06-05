@@ -1,0 +1,13 @@
+
+<!-- tplMovieTags -->
+<ul id="navMovies" class="navTable">
+	<li>Tag Filter:</li>
+	<li>
+		<select class="mNavLocTag fullwidth" id="tags" name="tags" size="1">
+			{for t in tags}
+			<option value="${t.value}" ${t.selected}>${t.txt}</option>
+			{/for}
+		</select>
+	</li>
+</ul>
+<!-- /tplMovieTags -->

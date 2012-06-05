@@ -520,9 +520,9 @@ var Messages = Class.create({
 });
 
 var Movies = Class.create(Controller, {
-	initialize: function($super, listTarget, navTarget){
+	initialize: function($super, listTarget, navTarget, locTarget){
 		$super(new MovieListHandler(listTarget));
-		this.navHandler = new MovieNavHandler(navTarget);
+		this.navHandler = new MovieNavHandler(navTarget, locTarget);
 	},
 
 	load: function(location, tags){
@@ -1041,7 +1041,7 @@ var E2WebCore = Class.create({
 		this.lt = new LocationsAndTags();
 		this.mediaplayer = new MediaPlayer('contentMain');
 		this.messages = new Messages();
-		this.movies = new Movies('contentMain', 'navContent');
+		this.movies = new Movies('contentMain', 'navContent', 'contentHdExt');
 		this.multiepg = new MultiEpg();
 		this.power = new Power();
 		this.remote = new RemoteControl();
@@ -1261,7 +1261,8 @@ var E2WebCore = Class.create({
 							function(){
 								this.movies.load(location, tag);
 							}.bind(this),
-							'Movies'
+							'Movies',
+							true
 						);
 
 						break;
@@ -1433,6 +1434,19 @@ var E2WebCore = Class.create({
 		var changeevt = Prototype.Browser.IE ? "click" : "change";
 		var nav = $('navContent');
 		nav.on(
+			changeevt,
+			'.mNavLocTag',
+			function(event, element){
+				var l = $('locations');
+				var t = $('tags');
+				var location = l.options[l.selectedIndex].value;
+				var tag = t.options[t.selectedIndex].value;
+				var hash = [this.getBaseHash(), "filter", encodeURIComponent(location), encodeURIComponent(tag)].join("/");
+				if(hash != '#'+hashListener.getHash() || !Prototype.Browser.IE)
+					hashListener.setHash(hash);
+			}.bind(this)
+		);
+		$('contentHdExt').on(
 			changeevt,
 			'.mNavLocTag',
 			function(event, element){
@@ -1823,8 +1837,8 @@ var E2WebCore = Class.create({
 	 * @param fnc - The function used to load the content
 	 * @param title - The Title to set on the contentpanel
 	 */
-	loadContentDynamic: function(fnc, title){
-		setContentHd(title);
+	loadContentDynamic: function(fnc, title, keepHdExt){
+		setContentHd(title, keepHdExt);
 		this.stopUpdateBouquetItemsPoller();
 		fnc();
 	},

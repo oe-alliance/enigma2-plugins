@@ -65,12 +65,13 @@
 			$('navHd').update('<div style="background-color: #000">'+content+'</div>');
 		}
 
-		function setContentHd(content){
+		function setContentHd(content, keepHdExt){
 			var div = new Element('div');
 			div.setStyle({background: 'black'});
 			div.update(content);
 			$('contentHd').update(div);
-			$('contentHdExt').update('');
+			if(!keepHdExt)
+				$('contentHdExt').update('');
 		}
 
 		function getAjaxLoad(){
