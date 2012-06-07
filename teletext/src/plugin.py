@@ -100,6 +100,7 @@ config.plugins.TeleText.tip_pos  = ConfigSequence(default=[(dsk_width>>1)+(dsk_w
 # state
 config.plugins.TeleText.textOnly = ConfigEnableDisable(default=True)
 config.plugins.TeleText.opaque   = ConfigEnableDisable(default=False)
+config.plugins.TeleText.background_caching = ConfigEnableDisable(default=True)
 
 # global functions
 
@@ -200,6 +201,7 @@ class TeleText(Screen):
     self.helpList.append((self["actions"], "TeleTextActions", [("radio", _("toggle transparency"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("text", _("exit"))]))
 
+    self.inMenu = False
     self.connected = False
 
     self.ttx = TeletextInterface()
@@ -256,6 +258,9 @@ class TeleText(Screen):
   def __execBegin(self):
     log("execBegin")
 
+    if not (config.plugins.TeleText.background_caching.value or self.inMenu):
+      self.checkServiceInfo(True)
+
     self.updateLayout()
 
     # send brightness, contrast and transparency...
@@ -282,6 +287,9 @@ class TeleText(Screen):
       stride = self.ttx.getRenderBufferStride()
     x = array.array('B', (CMD_RQ_UPDATE, 0, (renderOffset&0xFF000000)>>24, (renderOffset&0xFF0000)>>16, (renderOffset&0xFF00)>>8, renderOffset&0xFF, (stride&0xFF00) >> 8, stride&0xFF))
     self.socketSend(x)
+
+    if not (config.plugins.TeleText.background_caching.value or self.inMenu):
+      self.stopCaching()
 
   def __layoutFinished(self):
     log("__layoutFinished")
@@ -532,9 +540,11 @@ class TeleText(Screen):
     log("menu pressed")
     self.__closed()
     self.resetVideo()
+    self.inMenu = True
     self.session.openWithCallback(self.menuResult, TeleTextMenu)
 
   def menuResult(self, result):
+    self.inMenu = False
     if result is None:
       return
     
@@ -725,11 +735,17 @@ class TeleText(Screen):
 
   def serviceStopped(self):
     log("service stopped")
+    self.stopCaching()
+
+  def stopCaching(self):
     x = array.array('B', (CMD_CTL_CACHE, 0, 0, 0))
     self.socketSend(x)
 
   def serviceInfoChanged(self):
     log("serviceInfoChanged")
+    self.checkServiceInfo(config.plugins.TeleText.background_caching.value or self.inMenu or self.execing)
+
+  def checkServiceInfo(self, do_send=False):
     service = self.session.nav.getCurrentService()
     info = service and service.info()
     txtpid = info and info.getInfo(iServiceInformation.sTXTPID)
@@ -742,7 +758,7 @@ class TeleText(Screen):
 
     log("TXT PID %s DEMUX %s" % (txtpid, demux))
 
-    if demux > -1 and self.hasText:
+    if demux > -1 and self.hasText and do_send:
       x = array.array('B', (CMD_CTL_CACHE, (txtpid & 0xFF00) >> 8, (txtpid&0xFF), demux))
       self.socketSend(x)
 
@@ -868,7 +884,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
     self.isInitialized = True
     if not self.selectionChanged in self["config"].onSelectionChanged:
       self["config"].onSelectionChanged.append(self.selectionChanged)
-    self.selectionChanged()     
+    self.selectionChanged()
 
   def selectionChanged(self):
     configele = self["config"].getCurrent()[1]
@@ -921,7 +937,8 @@ class TeleTextMenu(ConfigListScreen, Screen):
       getConfigListEntry(_("Region"),            config.plugins.TeleText.region),
       getConfigListEntry(_("Position and size"), config.plugins.TeleText.pos),
       getConfigListEntry(_("Display edges"),     config.plugins.TeleText.edge_cut),
-      getConfigListEntry(_("Splitting mode"),    config.plugins.TeleText.splitting_mode)
+      getConfigListEntry(_("Splitting mode"),    config.plugins.TeleText.splitting_mode),
+      getConfigListEntry(_("Background caching"),config.plugins.TeleText.background_caching),
     ]
     if config.plugins.TeleText.splitting_mode.value == SPLIT_MODE_TIP:
       self.list.append(getConfigListEntry("... %s" % _("Position and size"),   config.plugins.TeleText.tip_pos))
@@ -953,6 +970,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
     config.plugins.TeleText.debug.setValue(False)
     config.plugins.TeleText.pos.setValue([0, 0, dsk_width, dsk_height])
     config.plugins.TeleText.tip_pos.setValue([(dsk_width>>1)+(dsk_width>>2), (dsk_height>>1)+(dsk_height>>2), dsk_width, dsk_height])
+    config.plugins.TeleText.background_caching.setValue(True)
 
   def textPressed(self):
     log("[menu] text pressed")
