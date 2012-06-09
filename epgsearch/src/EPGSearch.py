@@ -106,6 +106,7 @@ class EPGSearch(EPGSelection):
 
 		self.searchargs = args
 		self.currSearch = ""
+		self.longbuttonpressed = False
 
 		# XXX: we lose sort begin/end here
 		self["key_yellow"] = Button(_("New Search"))
