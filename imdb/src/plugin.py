@@ -460,10 +460,11 @@ class IMDB(Screen):
 			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
 			event_quoted = quoteEventName(self.eventName)
 			localfile = "/tmp/imdbquery.html"
-			if self.IMDBlanguage:
-				fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
-			else:
-				fetchurl = "http://akas.imdb.com/find?s=tt;mx=20;q=" + event_quoted
+			fetchurl = "http://imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
+			#if self.IMDBlanguage:
+			#	fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
+			#else:
+			#	fetchurl = "http://akas.imdb.com/find?s=tt;mx=20;q=" + event_quoted
 			print("[IMDB] Downloading Query " + fetchurl + " to " + localfile)
 			downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
 		else:
