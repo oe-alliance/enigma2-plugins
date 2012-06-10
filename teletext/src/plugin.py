@@ -1,7 +1,8 @@
 from __init__ import _, _debug , _log
 
-from enigma import iServiceInformation, iPlayableService, eSocketNotifier, getDesktop, ePoint, eSize
+from enigma import iServiceInformation, iPlayableService, eSocketNotifier, getDesktop, ePoint, eSize, eServiceReference
 
+from Screens.ChannelSelection import service_types_tv
 from Screens.HelpMenu import HelpMenu
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
@@ -10,7 +11,6 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ServiceEventTracker import ServiceEventTracker
-from Components.Sources.StaticText import StaticText
 from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigEnableDisable, ConfigSlider, ConfigSelection, ConfigSequence
 from GlobalActions import globalActionMap
 from Plugins.Plugin import PluginDescriptor
@@ -19,6 +19,8 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import array
 import socket
 import struct
+
+import NavigationInstance
 
 from os import unlink
 from select import POLLIN, POLLPRI, POLLHUP, POLLERR
@@ -71,10 +73,11 @@ HELP_TEXT_DEBUG        = _("Print debug messages to /tmp/dbttcp.log.")
 HELP_TEXT_TEXTLEVEL    = _("Select teletext version to use.")
 HELP_TEXT_REGION       = _("Select your region to use the proper font.")
 HELP_TEXT_SCALE_FILTER = _("Select your favourite scale filter.")
+HELP_TEXT_CACHING      = _("If caching is disabled, each teletext page will searched when you entered its number.") 
 
 dsk_size   = getDesktop(0).size()
 dsk_width  = dsk_size.width()
-dsk_height = dsk_size.height()  
+dsk_height = dsk_size.height()
 
 MIN_W = 400
 MIN_H = 300
@@ -111,18 +114,23 @@ def log(message):
 
 class TeleText(Screen):
 
-  isDM7025    = False
   pageInput   = 0
   hasText     = False
   catchPage   = False
-  flofValue   = True
+  naviValue   = True
   infoValue   = False
   edgeValue   = False
   opaqueValue = False
   nav_mode    = NAV_MODE_TEXT
   zoom        = TeletextInterface.MODE_FULL
+  filter_mode = BILINEAR
+  pid_list = []
+  pid_index = 0
+  demux  = -1
+  txtpid = -1
+  txtpid_origin = -1
 
-  onChangedEntry = [ ]  
+  onChangedEntry = [ ]
 
   def __init__(self, session):
     TeleText.skin = """<screen position="0,0" size="%d,%d" title="TeleText" flags="wfNoBorder"/>""" % (dsk_width, dsk_height)
@@ -148,6 +156,10 @@ class TeleText(Screen):
       "8" : self.keyNumberGlobal,
       "9" : self.keyNumberGlobal,
       "0" : self.keyNumberGlobal,
+      "prev":   self.prevPressed,
+      "next":   self.nextPressed,
+      "prev_long": self.prevLongPressed,
+      "next_long": self.nextLongPressed,
       "red":    self.redPressed,
       "green":  self.greenPressed,
       "yellow": self.yellowPressed,
@@ -179,9 +191,10 @@ class TeleText(Screen):
     self.helpList.append((self["actions"], "TeleTextActions", [("7", _("enter page number"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("8", _("enter page number"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("9", _("enter page number / page 100"))]))
+    self.helpList.append((self["actions"], "TeleTextActions", [("prev", _("prev channel / channel list"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("0", _("enter page number / rezap"))]))
+    self.helpList.append((self["actions"], "TeleTextActions", [("next", _("next channel / channel list"))]))
     self.helpList.append((self["actions"], "OkCancelActions", [("cancel", _("exit"))]))
-    self.helpList.append((self["actions"], "OkCancelActions", [("ok", _("start page catching / select page"))]))
 #    self.helpList.append((self["actions"], "TeleTextActions", [("volUp",_("increase width"))]))
 #    self.helpList.append((self["actions"], "TeleTextActions", [("volDown",_("decrease width"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("nextBouquet",_("zoom / increase height"))]))
@@ -190,9 +203,10 @@ class TeleText(Screen):
     self.helpList.append((self["actions"], "TeleTextActions", [("menu", _("teletext settings"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("up", _("next page / catch page / move"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("left", _("prev sub page / move"))]))
+    self.helpList.append((self["actions"], "OkCancelActions", [("ok", _("start page catching / select page"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("right", _("next sub page / move"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("down", _("prev page / catch page / move"))]))
-    self.helpList.append((self["actions"], "TeleTextActions", [("video", _("toggle flof"))]))
+    self.helpList.append((self["actions"], "TeleTextActions", [("video", _("toggle flof/top"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("red", _("red teletext link"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("green", _("green teletext link"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("yellow", _("yellow teletext link"))]))
@@ -226,16 +240,32 @@ class TeleText(Screen):
     try:
       s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
       s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+      s.settimeout(5.0)
+      if config.plugins.TeleText.debug.value:
+        log("... connecting")
       s.connect('/tmp/dbttcd.socket')
-      s.setblocking(0)
-      s.sendall(buf)
+    except socket.error, msg:
+      log("couldn't connect to /tmp/dbttcd.socket")
+      log(msg)
+      return
+
+    try:
+      msg_len = len(buf)
+      totalsent = 0
+      while totalsent < msg_len:
+        if config.plugins.TeleText.debug.value:
+          log("... sending")
+        sent = s.send(buf[totalsent:])
+        if sent == 0:
+          raise RuntimeError("socket connection broken")
+        elif config.plugins.TeleText.debug.value:
+          log("    sent %s bytes" % sent)
+        totalsent = totalsent + sent
       s.close()
+      s = None
     except socket.error, msg:
       log("couldn't send data to /tmp/dbttcd.socket")
-      log(socket.errno)
       log(msg)
-#      self.session.open(MessageBox, _("Daemon not running."), MessageBox.TYPE_ERROR, timeout = 3)
-#      self.close()
 
   def listen_data_avail(self, what):
     conn, addr = self.socket.accept()
@@ -245,14 +275,7 @@ class TeleText(Screen):
     if (x[0] + x[1] + x[2] + x[3]) == 0:
       self.catchPage = False
     else:
-#      if (x[0] + x[1]) == 0:
-#        log("recv update %s" % (x))
-      if not self.isDM7025:
-        if self.zoom:
-          filter_mode = int(config.plugins.TeleText.scale_filter_zoom.value)
-        else:
-          filter_mode = int(config.plugins.TeleText.scale_filter.value)
-        self.ttx.update(x[0], x[1], x[2], x[3], self.zoom, filter_mode);
+      self.ttx.update(x[0], x[1], x[2], x[3], self.zoom, self.filter_mode);
       conn.close()
 
   def __execBegin(self):
@@ -266,12 +289,8 @@ class TeleText(Screen):
     # send brightness, contrast and transparency...
     self.sendSettings()
 
-    if self.isDM7025:
-      renderOffset = 0x75488
-      stride = 0xb80
-    else:
-      renderOffset = self.ttx.getRenderBufferOffset()
-      stride = self.ttx.getRenderBufferStride()
+    renderOffset = self.ttx.getRenderBufferOffset()
+    stride = self.ttx.getRenderBufferStride()
 
     log("framebuffer offset is %08x stride is %08x" % (renderOffset, stride))
     x = array.array('B', (CMD_RQ_UPDATE, 1, (renderOffset&0xFF000000)>>24, (renderOffset&0xFF0000)>>16, (renderOffset&0xFF00)>>8, renderOffset&0xFF, (stride&0xFF00) >> 8, stride&0xFF))
@@ -279,12 +298,8 @@ class TeleText(Screen):
 
   def __closed(self):
     log("__closed")
-    if self.isDM7025:
-      renderOffset = 0x75488
-      stride = 0xb80
-    else:
-      renderOffset = self.ttx.getRenderBufferOffset()
-      stride = self.ttx.getRenderBufferStride()
+    renderOffset = self.ttx.getRenderBufferOffset()
+    stride = self.ttx.getRenderBufferStride()
     x = array.array('B', (CMD_RQ_UPDATE, 0, (renderOffset&0xFF000000)>>24, (renderOffset&0xFF0000)>>16, (renderOffset&0xFF00)>>8, renderOffset&0xFF, (stride&0xFF00) >> 8, stride&0xFF))
     self.socketSend(x)
 
@@ -403,6 +418,11 @@ class TeleText(Screen):
         self.zoom = TeletextInterface.MODE_FULL
       else:
         self.zoom = TeletextInterface.MODE_UPPER_HALF
+
+      if self.zoom:
+        self.filter_mode = int(config.plugins.TeleText.scale_filter_zoom.value)
+      else:
+        self.filter_mode = int(config.plugins.TeleText.scale_filter.value)
     else:
       # position setup
       if self.nav_pos[3] < dsk_height:
@@ -492,7 +512,7 @@ class TeleText(Screen):
     if self.nav_mode != NAV_MODE_TEXT or self.catchPage or self.pageInput != 0:
       return
     log("video pressed")
-    self.flofValue = not self.flofValue
+    self.naviValue = not self.naviValue
     for i in self.onChangedEntry:
       i()
     x = array.array('B')
@@ -532,6 +552,9 @@ class TeleText(Screen):
     log("text pressed")
     self.resetVideo()
     self.__closed()
+    if self.txtpid != self.txtpid_origin:
+      self.txtpid = self.txtpid_origin
+      self.switchChannel()
     self.close()
 
   def menuPressed(self):
@@ -546,13 +569,16 @@ class TeleText(Screen):
   def menuResult(self, result):
     self.inMenu = False
     if result is None:
+      config.plugins.TeleText.pos.load()
+      config.plugins.TeleText.tip_pos.load()
+      self.updateLayout()
       return
-    
+
     self.nav_text_only = config.plugins.TeleText.textOnly.value
-    self.nav_config = result
-    self.nav_orig_pos   = result.value
-    self.nav_pos    = result.value
-    
+    self.nav_config   = result
+    self.nav_orig_pos = result.value
+    self.nav_pos      = result.value
+
     if result == config.plugins.TeleText.pos:
       self.nav_mode = NAV_MODE_SIZE_TEXT
       config.plugins.TeleText.textOnly.value = True
@@ -616,11 +642,7 @@ class TeleText(Screen):
 
     self.ttx.hide()
     self.ttx.show(self.instance)
-    if self.zoom:
-      filter_mode = int(config.plugins.TeleText.scale_filter_zoom.value)
-    else:
-      filter_mode = int(config.plugins.TeleText.scale_filter.value)
-    self.ttx.update(0,0,492,250,self.zoom,filter_mode)
+    self.ttx.update(0,0,492,250,self.zoom,self.filter_mode)
 
   def resetVideo(self):
     log("reset video")
@@ -671,10 +693,70 @@ class TeleText(Screen):
         x.append(CMD_OPAQUE)
         self.socketSend(x)
 
+  def prevPressed(self):
+    if self.nav_mode == NAV_MODE_TEXT:
+      log("prev pressed")
+
+      if len(self.pid_list) < 2:
+        return
+
+      new_pid = -1
+      while new_pid == -1:
+        if self.pid_index == 0:
+          self.pid_index = len(self.pid_list) - 1
+        else:
+          self.pid_index = self.pid_index - 1
+        new_pid = self.pid_list[self.pid_index][2]
+
+      self.txtpid = new_pid
+      log("new txtpid: %s" % new_pid)
+      self.switchChannel()
+
+  def nextPressed(self):
+    if self.nav_mode == NAV_MODE_TEXT:
+      log("next pressed")
+
+      if len(self.pid_list) < 2:
+        return
+
+      new_pid = -1
+      while new_pid == -1:
+        if self.pid_index == (len(self.pid_list) - 1):
+          self.pid_index = 0
+        else:
+          self.pid_index = self.pid_index + 1
+        new_pid = self.pid_list[self.pid_index][2]
+
+      self.txtpid = new_pid
+      log("new txtpid: %s" % new_pid)
+      self.switchChannel()
+
+  def prevLongPressed(self):
+    if self.nav_mode == NAV_MODE_TEXT:
+      log("prev long pressed")
+      if len(self.pid_list) > 0:
+        self.__closed()
+        self.resetVideo()
+        self.session.openWithCallback(self.transponderResult, TeleTextTransponderMenu, self.pid_list, self.pid_index)
+
+  def nextLongPressed(self):
+    if self.nav_mode == NAV_MODE_TEXT:
+      log("next long pressed")
+      self.prevLongPressed()
+
+  def transponderResult(self, result):
+    log("transponder result: %s" % result)
+    if result > -1 and result != self.txtpid:
+      self.txtpid = result
+      log("new txtpid: %s" % result)
+      self.switchChannel()
+    self.updateLayout()
+
+
   def helpPressed(self):
     self.__closed()
     self.resetVideo()
-    self.session.open(HelpMenu, self.helpList)     
+    self.session.open(HelpMenu, self.helpList)
 
   def okPressed(self):
     if self.nav_mode == NAV_MODE_TEXT:
@@ -688,6 +770,7 @@ class TeleText(Screen):
         x = array.array('B', (CMD_CATCHPAGE, 1, 0))
         self.catchPage = True
         self.zoom = TeletextInterface.MODE_FULL
+        self.filter_mode = int(config.plugins.TeleText.scale_filter.value)
       self.socketSend(x)
     else:
       if self.nav_mode == NAV_MODE_SIZE_TEXT:
@@ -716,6 +799,9 @@ class TeleText(Screen):
       else:
         self.resetVideo()
         self.__closed()
+        if self.txtpid != self.txtpid_origin:
+          self.txtpid = self.txtpid_origin
+          self.switchChannel()
         self.close()
     else:
       if self.nav_mode == NAV_MODE_SIZE_TEXT:
@@ -743,23 +829,50 @@ class TeleText(Screen):
 
   def serviceInfoChanged(self):
     log("serviceInfoChanged")
-    self.checkServiceInfo(config.plugins.TeleText.background_caching.value or self.inMenu or self.execing)
+    self.checkServiceInfo()
 
-  def checkServiceInfo(self, do_send=False):
+  def checkServiceInfo(self):
     service = self.session.nav.getCurrentService()
     info = service and service.info()
-    txtpid = info and info.getInfo(iServiceInformation.sTXTPID)
+    self.txtpid_origin = info and info.getInfo(iServiceInformation.sTXTPID)
+    self.txtpid = self.txtpid_origin
 
-    self.hasText = txtpid is not None and txtpid > -1
+    self.hasText = self.txtpid is not None and self.txtpid > -1
 
     stream = service and service.stream()
     demux = stream and stream.getStreamingData()
-    demux = demux and demux.get("demux", -1)
+    self.demux = demux and demux.get("demux", -1)
 
-    log("TXT PID %s DEMUX %s" % (txtpid, demux))
+    log("TXT PID %s DEMUX %s" % (self.txtpid, self.demux))
+    self.switchChannel()
 
-    if demux > -1 and self.hasText and do_send:
-      x = array.array('B', (CMD_CTL_CACHE, (txtpid & 0xFF00) >> 8, (txtpid&0xFF), demux))
+    # read all txtpids and channels from transponder
+    cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+    if cur_ref is None:
+      self.channel_and_txt_pid = []
+      self.pid_index = 0
+    else:
+      pos = service_types_tv.rfind(':')
+      refstr = '%s (channelID == %08x%04x%04x) && %s ORDER BY name' % (service_types_tv[:pos+1],
+          cur_ref.getUnsignedData(4), # NAMESPACE
+          cur_ref.getUnsignedData(2), # TSID
+          cur_ref.getUnsignedData(3), # ONID
+          service_types_tv[pos+1:])
+      ref = eServiceReference(refstr)
+      self.pid_list = self.ttx.getTextPidsAndName(ref)
+
+    i = 0
+    for x in self.pid_list:
+      if x[2] == self.txtpid:
+        self.pid_index = i
+      i = i + 1
+
+    log("transponder: %s" % self.pid_list)
+
+  def switchChannel(self):
+    do_send = config.plugins.TeleText.background_caching.value or self.inMenu or self.execing
+    if self.demux > -1 and self.txtpid > -1 and do_send:
+      x = array.array('B', (CMD_CTL_CACHE, (self.txtpid & 0xFF00) >> 8, (self.txtpid & 0xFF), self.demux))
       self.socketSend(x)
 
   def showMessages(self):
@@ -770,9 +883,9 @@ class TeleText(Screen):
   def createSummary(self):
     return TeleTextSummary
 
-  def flofEnabled(self):
-    return self.flofValue
-    
+  def naviEnabled(self):
+    return self.naviValue
+
   def infoEnabled(self):
     return self.infoValue
 
@@ -787,22 +900,22 @@ class TeleTextSummary(Screen):
     TeleTextSummary.skin = """<screen name="TeleTextSummary" position="0,0" size="132,64">
       <widget name="SetupTitle" position="6,4" size="120,20" font="Regular;20" halign="center"/>
 
-      <widget name="flof_off" position="24,28" size="20,20" pixmap="%s" zPosition="1"/>
+      <widget name="navi_off" position="24,28" size="20,20" pixmap="%s" zPosition="1"/>
       <widget name="info_off" position="88,28" size="20,20" pixmap="%s" zPosition="1"/>
-      <widget name="flof_on"  position="24,28" size="20,20" pixmap="%s" zPosition="2"/>
+      <widget name="navi_on"  position="24,28" size="20,20" pixmap="%s" zPosition="2"/>
       <widget name="info_on"  position="88,28" size="20,20" pixmap="%s" zPosition="2"/>
 
-      <widget name="flof_txt" position="10,50" size="48,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
-      <widget name="info_txt" position="74,50" size="48,12" font="Regular;12" valign="center" halign="center" zPosition="1"/> 
+      <widget name="navi_txt" position="10,50" size="48,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
+      <widget name="info_txt" position="74,50" size="48,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
     </screen>""" % (offPic, offPic, onPic, onPic)
 
     Screen.__init__(self, session, parent = parent)
     self["SetupTitle"] = Label("TeleText")
-    self["flof_txt"] = Label("FLOF")
+    self["navi_txt"] = Label("NAVI")
     self["info_txt"] = Label("INFO")
-    self["flof_off"] = Pixmap()
+    self["navi_off"] = Pixmap()
     self["info_off"] = Pixmap()
-    self["flof_on"]  = Pixmap()
+    self["navi_on"]  = Pixmap()
     self["info_on"]  = Pixmap()
     self.onShow.append(self.addWatcher)
     self.onHide.append(self.removeWatcher)
@@ -815,12 +928,12 @@ class TeleTextSummary(Screen):
     self.parent.onChangedEntry.remove(self.selectionChanged)
 
   def selectionChanged(self):
-    if self.parent.flofEnabled():
-      self["flof_off"].hide()
-      self["flof_on"].show()
+    if self.parent.naviEnabled():
+      self["navi_off"].hide()
+      self["navi_on"].show()
     else:
-      self["flof_on"].hide()
-      self["flof_off"].show()
+      self["navi_on"].hide()
+      self["navi_off"].show()
 
     if self.parent.infoEnabled():
       self["info_off"].hide()
@@ -828,6 +941,102 @@ class TeleTextSummary(Screen):
     else:
       self["info_on"].hide()
       self["info_off"].show()
+
+# ----------------------------------------
+
+class TeleTextTransponderMenu(Screen):
+
+  ch_list = []
+  ch_index = 0
+
+  def __init__(self, session, list, index):
+    log("[transponder] __init__")
+
+    self.ch_list = list
+    self.ch_index = index
+
+    width = 360
+    height = 70
+    left = (dsk_width - width)>>1
+    top = (dsk_height - height)>>1
+    log("[transponder] screen rect %s %s %s %s" % (left, top, width, height))
+    TeleTextTransponderMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
+        <widget name="prev"    position="0,0"   size="35,25"  zPosition="4" pixmap="%s"/>
+        <widget name="channel" position="40,2"  size="200,20" zPosition="5" valign="center" halign="left"  font="Regular;21" transparent="1" foregroundColor="white"/>
+        <widget name="zapped"  position="240,2" size="80,20"  zPosition="5" valign="center" halign="right" font="Regular;21" transparent="1" foregroundColor="#888888"/>
+        <widget name="next"    position="325,0" size="35,25"  zPosition="4" pixmap="%s"/>
+
+        <ePixmap pixmap="skin_default/div-h.png" position="0,27" zPosition="1" size="360,2" />
+
+        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,30"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/green.png"  position="220,30" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <widget name="key_r" position="0,30"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_g" position="220,30" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+      </screen>""" % (left, top, width, height, _("Select teletext"), resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/key_lt.png"), resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/key_gt.png"))
+    Screen.__init__(self, session)
+
+    self["actions"] = ActionMap(["OkCancelActions", "TeleTextActions"],
+    {
+      "ok"     : self.okPressed,
+      "cancel" : self.cancelPressed,
+      "red"    : self.cancelPressed,
+      "green"  : self.okPressed,
+      "prev"   : self.prevPressed,
+      "next"   : self.nextPressed,
+      "prev_long": self.prevPressed,
+      "next_long": self.nextPressed
+    }, -2)
+    self["actions"].setEnabled(True)
+
+    self["key_r"] = Label(_("Cancel"))
+    self["key_g"] = Label(_("OK"))
+
+    self["channel"] = Label("")
+    self["prev"] = Pixmap()
+    self["next"] = Pixmap()
+    self["zapped"] = Label("*")
+    self["zapped"].hide()
+    if len(self.ch_list) == 1:
+      self["prev"].hide()
+      self["next"].hide()
+    else:
+      self["prev"].show()
+      self["next"].show()
+    self.updateLayout()
+
+  def updateLayout(self):
+    if self.ch_list[self.ch_index][2] == -1:
+      self["zapped"].show()
+      self["key_g"].setText("")
+    else:
+      self["zapped"].hide()
+      self["key_g"].setText(_("OK"))
+    self["channel"].setText(self.ch_list[self.ch_index][1])
+
+  def prevPressed(self):
+    log("[transponder] prev pressed")
+    if self.ch_index == 0:
+      self.ch_index = len(self.ch_list) - 1
+    else:
+      self.ch_index = self.ch_index - 1
+    self.updateLayout()
+
+  def nextPressed(self):
+    log("[transponder] next pressed")
+    if self.ch_index == (len(self.ch_list) - 1):
+      self.ch_index = 0
+    else:
+      self.ch_index = self.ch_index + 1
+    self.updateLayout()
+
+  def okPressed(self):
+    log("[transponder] ok pressed")
+    if self.ch_list[self.ch_index][2] > -1:
+      self.close(self.ch_list[self.ch_index][2])
+
+  def cancelPressed(self):
+    log("[transponder] cancel pressed")
+    self.close(-1)
 
 # ----------------------------------------
 
@@ -850,16 +1059,16 @@ class TeleTextMenu(ConfigListScreen, Screen):
         <ePixmap pixmap="skin_default/buttons/red.png"    position="0,380"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
         <ePixmap pixmap="skin_default/buttons/green.png"  position="176,380" zPosition="0" size="140,40" transparent="1" alphatest="on" />
         <ePixmap pixmap="skin_default/buttons/yellow.png" position="352,380" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <widget render="Label" source="key_r" position="0,380"   size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget render="Label" source="key_g" position="176,380" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget render="Label" source="key_y" position="352,380" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_r" position="0,380"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_g" position="176,380" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_y" position="352,380" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
       </screen>""" % (left, top, width, height, _("TeleText settings"))
 
     Screen.__init__(self, session)
 
     # create config list
-    self.list = [] 
-    ConfigListScreen.__init__(self, self.list) 
+    self.list = []
+    ConfigListScreen.__init__(self, self.list)
     self.createConfigList()
 
     self["actions"] = ActionMap(["OkCancelActions", "TeleTextActions"],
@@ -875,9 +1084,9 @@ class TeleTextMenu(ConfigListScreen, Screen):
     self["actions"].setEnabled(True)
 
     self["label"] = Label("Info")
-    self["key_r"] = StaticText(_("Cancel"))
-    self["key_y"] = StaticText(_("Default"))
-    self["key_g"] = StaticText(_("OK")) 
+    self["key_r"] = Label(_("Cancel"))
+    self["key_y"] = Label(_("Default"))
+    self["key_g"] = Label(_("OK"))
     self.onLayoutFinish.append(self.__layoutFinished)
 
   def __layoutFinished(self):
@@ -914,6 +1123,8 @@ class TeleTextMenu(ConfigListScreen, Screen):
       self["label"].setText(HELP_TEXT_SCALE_FILTER)
     elif configele == config.plugins.TeleText.scale_filter_zoom:
       self["label"].setText(HELP_TEXT_SCALE_FILTER)
+    elif configele == config.plugins.TeleText.background_caching:
+      self["label"].setText(HELP_TEXT_CACHING)
 
   def createConfig(self, configele):
     if not self.isInitialized:
@@ -925,7 +1136,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
     # remove notifiers
     for x in self["config"].list:
-      x[1].clearNotifiers() 
+      x[1].clearNotifiers()
 
     self.list = [
       getConfigListEntry(_("Scale filter"),      config.plugins.TeleText.scale_filter),
@@ -937,11 +1148,11 @@ class TeleTextMenu(ConfigListScreen, Screen):
       getConfigListEntry(_("Region"),            config.plugins.TeleText.region),
       getConfigListEntry(_("Position and size"), config.plugins.TeleText.pos),
       getConfigListEntry(_("Display edges"),     config.plugins.TeleText.edge_cut),
-      getConfigListEntry(_("Splitting mode"),    config.plugins.TeleText.splitting_mode),
-      getConfigListEntry(_("Background caching"),config.plugins.TeleText.background_caching),
+      getConfigListEntry(_("Splitting mode"),    config.plugins.TeleText.splitting_mode)
     ]
     if config.plugins.TeleText.splitting_mode.value == SPLIT_MODE_TIP:
       self.list.append(getConfigListEntry("... %s" % _("Position and size"),   config.plugins.TeleText.tip_pos))
+    self.list.append(getConfigListEntry(_("Background caching"),config.plugins.TeleText.background_caching))
     self.list.append(getConfigListEntry(_("Message"), config.plugins.TeleText.messages))
     self.list.append(getConfigListEntry(_("Debug"),   config.plugins.TeleText.debug))
 
@@ -986,7 +1197,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
     for x in self["config"].list:
       x[1].save()
     configfile.save()
-    self.close(None) 
+    self.close(None)
 
   def checkPositionValues(self, configele):
     pos = configele.value
@@ -1017,7 +1228,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
       pos[3] = dsk_height
       update = True
     log("... new pos: %s %s %s %s" % (pos[0], pos[1], pos[2], pos[3]))
-      
+
     if update:
       configele.setValue(pos)
 
@@ -1029,7 +1240,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
     if confirm:
       self.session.openWithCallback(self.DiscardConfirm, MessageBox, _("Discard changes?"))
     else:
-      self.close(None) 
+      self.close(None)
 
   def DiscardConfirm(self, result):
     if result:
@@ -1081,7 +1292,7 @@ class TeleTextMenuSummary(Screen):
 
   def selectionChanged(self):
     self["SetupEntry"].text = self.parent.getCurrentEntry()
-    self["SetupValue"].text = self.parent.getCurrentValue() 
+    self["SetupValue"].text = self.parent.getCurrentValue()
 
 # ----------------------------------------
 
