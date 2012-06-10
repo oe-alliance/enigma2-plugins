@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TeleText\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-29 20:14+0100\n"
+"PO-Revision-Date: 2012-06-07 12:14+0100\n"
+"Last-Translator: Sebastian <zbigzbig2@wp.pl>\n"
+"Language-Team: Andreas Laux <lespuck@web.de>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: /home/andreas/TeleText/po\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+msgid "Arabic"
+msgstr "Arabski"
+
+msgid "Brightness"
+msgstr "Jasność"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Central and Southeast Europe"
+msgstr "Centralna i Południowa Europa"
+
+msgid "Contrast"
+msgstr "Kontrast"
+
+msgid "Cyrillic"
+msgstr "Cyrylica"
+
+msgid "Debug"
+msgstr "Debuguj"
+
+msgid "Default"
+msgstr "Domyślnie"
+
+msgid "Discard changes?"
+msgstr "Odrzucić zmiany?"
+
+msgid "Display edges"
+msgstr "Wyświetl krawędzie"
+
+msgid "Display first and last row."
+msgstr "Wyświetl pierwszy i ostatni rząd"
+
+msgid "Eastern Europe"
+msgstr "Wschodnia Europa"
+
+msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
+msgstr "Wpisz wartości (lewo, góra, prawo, dół) lub wciśnij TEXT aby przesunąć lub zmienić rozmiar teletekstu graficznie"
+
+msgid "Hebrew / Arabic"
+msgstr "Hebrajski / Arabski"
+
+msgid "Message"
+msgstr "Wiadomość"
+
+msgid "No teletext available."
+msgstr "Brak teletekstu"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Position and size"
+msgstr "Pozycja i rozmiar"
+
+msgid "Print debug messages to /tmp/dbttcp.log."
+msgstr "Prześlij wiadomości debugowania do /tmp/dbttcp.log"
+
+msgid "Region"
+msgstr "Region"
+
+msgid "Scale filter"
+msgstr "Filtr skalowania"
+
+msgid "Scale filter zoom"
+msgstr "Powiększony filtr skalowania"
+
+msgid "Select brightness."
+msgstr "Wybierz jasność"
+
+msgid "Select contrast."
+msgstr "Wybierz kontrast"
+
+msgid "Select splitting mode."
+msgstr "Wybierz tryb podzielony"
+
+msgid "Select teletext version to use."
+msgstr "Wybierz wersję teletekstu do użycia"
+
+msgid "Select transparency."
+msgstr "Wybierz przezroczystość"
+
+msgid "Select your favourite scale filter."
+msgstr "Wybierz ulubiony tryb skalowania"
+
+msgid "Select your region to use the proper font."
+msgstr "Wybierz swój region aby użyć odpowiedniej czcionki"
+
+msgid "Show message if no teletext available or exit silently."
+msgstr "Pokaż wiadomość gdy brak teletekstu lub wyjdź po cichu"
+
+msgid "Splitting mode"
+msgstr "Tryb podziału"
+
+msgid "TeleText settings"
+msgstr "Ustawienia teletekstu"
+
+msgid "Text level"
+msgstr "Wersja tekstu"
+
+msgid "Transparency"
+msgstr "Przezroczystość"
+
+msgid "Turkish / Greek"
+msgstr "Turecki / Grecki"
+
+msgid "Western Europe and Turkey"
+msgstr "Zachodnia Europa i Turcja"
+
+msgid "Western and Central Europe"
+msgstr "Zachodnia i Centralna Europa"
+
+msgid "anisotropic"
+msgstr "Anizotropowy"
+
+msgid "bilinear"
+msgstr "Bilinearny"
+
+msgid "blue teletext link"
+msgstr "Niebieski link teletekstu"
+
+msgid "decrease height"
+msgstr "Zmniejsz wysokość"
+
+msgid "enter page number"
+msgstr "Wpisz numer strony"
+
+msgid "enter page number / page 100"
+msgstr "Wpisz numer strony / strona 100"
+
+msgid "enter page number / rezap"
+msgstr "Wpisz numer strony / wróć"
+
+msgid "exit"
+msgstr "Wyjdź"
+
+msgid "green teletext link"
+msgstr "Zielony link teletekstu"
+
+msgid "next page / catch page / move"
+msgstr "Następna strona / przechwycona / przesuń"
+
+msgid "next sub page / move"
+msgstr "Następna podstrona / przesuń"
+
+msgid "picture and teletext"
+msgstr "Obraz i teletekst"
+
+msgid "prev page / catch page / move"
+msgstr "Poprzednia strona / przechwycona / przesuń"
+
+msgid "prev sub page / move"
+msgstr "Poprzednia podstrona / przesuń"
+
+msgid "red teletext link"
+msgstr "Czerwony link teletekstu"
+
+msgid "sharp"
+msgstr "Ostry"
+
+msgid "sharper"
+msgstr "Ostrzejszy"
+
+msgid "split screen"
+msgstr "Podziel ekran"
+
+msgid "start page catching / select page"
+msgstr "Przechwyt strony startowej / wybierz stronę"
+
+msgid "teletext and picture"
+msgstr "Teletekst i obraz"
+
+msgid "teletext in picture"
+msgstr "Teletekst w obrazie"
+
+msgid "teletext settings"
+msgstr "Ustawienia teletekstu"
+
+msgid "toggle flof"
+msgstr "Przełącz flof"
+
+msgid "toggle info"
+msgstr "Przełącz info"
+
+msgid "toggle transparency"
+msgstr "Przełącz przezroczytość"
+
+msgid "yellow teletext link"
+msgstr "Żółty link teletekstu"
+
+msgid "zoom / increase height"
+msgstr "Powiększ / zwiększ wysokość"
+
