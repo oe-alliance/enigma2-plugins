@@ -188,7 +188,7 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("VLC player:"), config.plugins.easyMedia.vlc))
 		list.append(getConfigListEntry(_("DVD player:"), config.plugins.easyMedia.dvd))
 		list.append(getConfigListEntry(_("Weather plugin:"), config.plugins.easyMedia.weather))
-		list.append(getConfigListEntry(_("NetRadio player:"), config.plugins.easyMedia.iradio))
+		list.append(getConfigListEntry(_("InternetRadio player:"), config.plugins.easyMedia.iradio))
 		list.append(getConfigListEntry(_("Show Merlin-iDream:"), config.plugins.easyMedia.idream))
 		list.append(getConfigListEntry(_("ZDFmediathek player:"), config.plugins.easyMedia.zdfmedia))
 		list.append(getConfigListEntry(_("MyVideo player:"), config.plugins.easyMedia.myvideo))
@@ -212,8 +212,22 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 
 class AddPlug(Screen):
 	skin = """
-		<screen name="AddPlug" position="center,center" size="440,375" title="EasyMedia...">
-			<widget name="list" position="0,10" size="440,355" scrollbarMode="showOnDemand" />
+		<screen name="AddPlug" position="center,center" size="440,420" title="EasyMedia...">
+		<widget source="pluginlist" render="Listbox" position="10,10" size="420,400" scrollbarMode="showOnDemand">
+			<convert type="TemplatedMultiContent">
+			{"templates":
+				{"default": (50,[
+						MultiContentEntryText(pos = (120, 5), size = (320, 25), font = 0, text = 1), # index 1 is the plugin.name
+						MultiContentEntryText(pos = (120, 26), size = (320, 17), font = 1, text = 2), # index 2 is the plugin.description
+						MultiContentEntryPixmapAlphaTest(pos = (10, 5), size = (100, 40), png = 3), # index 3 is the icon
+						
+					]),
+				},
+				"fonts": [gFont("Regular", 20), gFont("Regular", 14)],
+				"itemHeight": 50
+			}
+			</convert>
+		</widget>
 		</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -221,14 +235,16 @@ class AddPlug(Screen):
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.session = session
 		self.list = []
-		self["list"] = PluginList(self.list)
-		self.updateList()
+		self["pluginlist"] = PluginList(self.list)
+		#self.updateList()
+		self.pluginlist = []
 		self["actions"] = ActionMap(["WizardActions"],
 		{
 			"ok": self.save,
 			"back": self.close
 		}, -1)
 		self.onExecBegin.append(self.checkWarnings)
+		self.onShown.append(self.updateList)
 
 	def checkWarnings(self):
 		if len(plugins.warnings):
@@ -239,14 +255,13 @@ class AddPlug(Screen):
 			self.session.open(MessageBox, text = text, type = MessageBox.TYPE_WARNING)
 
 	def updateList(self):
-		self.list = [ ]
 		self.pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU)
-		for plugin in self.pluginlist:
-			self.list.append(PluginEntryComponent(plugin))
-		self["list"].l.setList(self.list)
+		self.list = [PluginEntryComponent(plugin) for plugin in self.pluginlist]
+		self["pluginlist"].setList(self.list)
 
 	def save(self):
-		plugin = self["list"].l.getCurrentSelection()[0]
+		plugin = self["pluginlist"].getCurrent()[0]
+		print plugin
 		plugin.icon = None
 		if not fileExists("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/" + plugin.name + ".plug"):
 			try:
@@ -359,8 +374,8 @@ class EasyMedia(Screen):
 			self.__keys.append("files")
 			MPaskList.append((_("Files"), "FILES"))
 		if config.plugins.easyMedia.iradio.value != "no":
-			self.__keys.append("shoutcast")
-			MPaskList.append((_("SHOUTcast"), "SHOUTCAST"))
+			self.__keys.append("internetradio")
+			MPaskList.append((_("InternetRadio"), "INTERNETRADIO"))
 		if config.plugins.easyMedia.idream.value != "no":
 			self.__keys.append("idream")
 			MPaskList.append((_("iDream"), "IDREAM"))
@@ -527,10 +542,10 @@ def MPcallbackFunc(answer):
 			MyTubeMain(EMsession)
 		else:
 			EMsession.open(MessageBox, text = _('MyTube Plugin is not installed!'), type = MessageBox.TYPE_ERROR)
-	elif answer == "SHOUTCAST":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/plugin.pyo"):
-			from Plugins.Extensions.SHOUTcast.plugin import SHOUTcastWidget
-			EMsession.open(SHOUTcastWidget)
+	elif answer == "INTERNETRADIO":
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/InternetRadio/plugin.pyo"):
+			from Plugins.Extensions.InternetRadio.InternetRadioScreen import InternetRadioScreen
+			EMsession.open(InternetRadioScreen)
 		else:
 			EMsession.open(MessageBox, text = _('SHOUTcast Plugin is not installed!'), type = MessageBox.TYPE_ERROR)
 	elif answer == "ZDF":
