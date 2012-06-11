@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TeleText\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-04 20:52+0100\n"
-"PO-Revision-Date: 2012-06-04 22:18+0100\n"
+"POT-Creation-Date: 2012-06-10 23:57+0100\n"
+"PO-Revision-Date: 2012-06-11 08:10+0100\n"
 "Last-Translator: bschaar\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,287 +15,310 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-SearchPath-0: TeleText\n"
 
-#: ../src/plugin.py:57
+#: ../src/plugin.py:59
 msgid "picture and teletext"
 msgstr "Beeld en TeleText"
 
-#: ../src/plugin.py:57
+#: ../src/plugin.py:59
 msgid "teletext and picture"
 msgstr "TeleText en beeld"
 
-#: ../src/plugin.py:57
+#: ../src/plugin.py:59
 msgid "teletext in picture"
 msgstr "TeleText in beeld"
 
-#: ../src/plugin.py:59
+#: ../src/plugin.py:61
 msgid "Western and Central Europe"
 msgstr "West- en Centraal-europa"
 
-#: ../src/plugin.py:59
+#: ../src/plugin.py:61
 msgid "Eastern Europe"
 msgstr "Oost-europa"
 
-#: ../src/plugin.py:59
+#: ../src/plugin.py:61
 msgid "Western Europe and Turkey"
 msgstr "West-europa en Turkije"
 
-#: ../src/plugin.py:59
+#: ../src/plugin.py:61
 msgid "Central and Southeast Europe"
 msgstr "Centraal- en Zuidoost-europa"
 
-#: ../src/plugin.py:59
+#: ../src/plugin.py:61
 msgid "Cyrillic"
 msgstr "Kyrillisch"
 
-#: ../src/plugin.py:59
+#: ../src/plugin.py:61
 msgid "Turkish / Greek"
 msgstr "Turks / Grieks"
 
-#: ../src/plugin.py:59
+#: ../src/plugin.py:61
 msgid "Arabic"
 msgstr "Arabisch"
 
-#: ../src/plugin.py:59
+#: ../src/plugin.py:61
 msgid "Hebrew / Arabic"
 msgstr "Hebreeuws / Arabisch"
 
-#: ../src/plugin.py:60
+#: ../src/plugin.py:62
 msgid "Disabled"
 msgstr "Gedeactiveerd"
 
-#: ../src/plugin.py:60
+#: ../src/plugin.py:62
 msgid "bilinear"
 msgstr "bilineair"
 
-#: ../src/plugin.py:60
+#: ../src/plugin.py:62
 msgid "anisotropic"
 msgstr "anisotropisch"
 
-#: ../src/plugin.py:60
+#: ../src/plugin.py:62
 msgid "sharp"
 msgstr "scherp"
 
-#: ../src/plugin.py:60
+#: ../src/plugin.py:62
 msgid "sharper"
 msgstr "scherper"
 
-#: ../src/plugin.py:60
-msgid "blurry"
-msgstr "wazig"
-
-#: ../src/plugin.py:60
-msgid "anti flutter"
-msgstr "anti-flikker"
-
-#: ../src/plugin.py:60
-msgid "anti flutter blurry"
-msgstr "anti-flikker wazig"
-
-#: ../src/plugin.py:60
-msgid "anti flutter sharp"
-msgstr "anti-flikker scherp"
-
-#: ../src/plugin.py:62
-#: ../src/plugin.py:63
+#: ../src/plugin.py:64
+#: ../src/plugin.py:65
 msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
 msgstr "Geef de waarden in (links, bovenaan, rechts, onderaan) of druk TEXT, om de TeleText grafisch te verplaatsen en afmeting aan te passen."
 
-#: ../src/plugin.py:64
+#: ../src/plugin.py:66
 msgid "Select splitting mode."
 msgstr "Split-mode instellen."
 
-#: ../src/plugin.py:65
+#: ../src/plugin.py:67
 msgid "Select brightness."
 msgstr "Helderheid instellen."
 
-#: ../src/plugin.py:66
+#: ../src/plugin.py:68
 msgid "Select contrast."
 msgstr "Contrast instellen."
 
-#: ../src/plugin.py:67
+#: ../src/plugin.py:69
 msgid "Select transparency."
 msgstr "Transparantie instellen."
 
-#: ../src/plugin.py:68
+#: ../src/plugin.py:70
 msgid "Display first and last row."
 msgstr "Eerste en laatste rij weergeven."
 
-#: ../src/plugin.py:69
+#: ../src/plugin.py:71
 msgid "Show message if no teletext available or exit silently."
 msgstr "Bericht weergeven indien geen teletext beschikbaar."
 
-#: ../src/plugin.py:70
+#: ../src/plugin.py:72
 msgid "Print debug messages to /tmp/dbttcp.log."
 msgstr "Debug-berichten in /tmp/dbttcp.log bewaren."
 
-#: ../src/plugin.py:71
+#: ../src/plugin.py:73
 msgid "Select teletext version to use."
 msgstr "Selecteer de TeleTextversie."
 
-#: ../src/plugin.py:72
+#: ../src/plugin.py:74
 msgid "Select your region to use the proper font."
 msgstr "Selecteer uw regio, om de passende tekens te gebruiken."
 
-#: ../src/plugin.py:73
+#: ../src/plugin.py:75
 msgid "Select your favourite scale filter."
 msgstr "Kies de filter voor het schalen."
 
-#: ../src/plugin.py:171
-#: ../src/plugin.py:172
-#: ../src/plugin.py:173
-#: ../src/plugin.py:174
-#: ../src/plugin.py:175
-#: ../src/plugin.py:176
-#: ../src/plugin.py:177
-#: ../src/plugin.py:178
+#: ../src/plugin.py:76
+msgid "If caching is disabled, each teletext page will searched when you entered its number."
+msgstr "Als de caching uitgeschakeld is, wordt elke pagina pas geladen na ingave van de paginanummer."
+
+#: ../src/plugin.py:185
+#: ../src/plugin.py:186
+#: ../src/plugin.py:187
+#: ../src/plugin.py:188
+#: ../src/plugin.py:189
+#: ../src/plugin.py:190
+#: ../src/plugin.py:191
+#: ../src/plugin.py:192
 msgid "enter page number"
 msgstr "Paginanr. ingeven"
 
-#: ../src/plugin.py:179
+#: ../src/plugin.py:193
 msgid "enter page number / page 100"
 msgstr "Paginanr. ingeven / pagina 100"
 
-#: ../src/plugin.py:180
+#: ../src/plugin.py:194
+msgid "prev channel / channel list"
+msgstr "vorig kanaal / kanaallijst"
+
+#: ../src/plugin.py:195
 msgid "enter page number / rezap"
 msgstr "Paginanr. ingeven / rezap"
 
-#: ../src/plugin.py:181
-#: ../src/plugin.py:200
+#: ../src/plugin.py:196
+msgid "next channel / channel list"
+msgstr "volgend kanaal / kanaallijst"
+
+#: ../src/plugin.py:197
+#: ../src/plugin.py:216
 msgid "exit"
 msgstr "Sluiten"
 
-#: ../src/plugin.py:182
-msgid "start page catching / select page"
-msgstr "Pagina selecteren"
-
-#: ../src/plugin.py:185
+#: ../src/plugin.py:200
 msgid "zoom / increase height"
 msgstr "zoom / hoogte vergroten"
 
-#: ../src/plugin.py:186
+#: ../src/plugin.py:201
 msgid "decrease height"
 msgstr "Hoogte verkleinen"
 
-#: ../src/plugin.py:187
+#: ../src/plugin.py:202
 msgid "toggle info"
 msgstr "verborgen info"
 
-#: ../src/plugin.py:188
+#: ../src/plugin.py:203
 msgid "teletext settings"
 msgstr "TeleText instellingen"
 
-#: ../src/plugin.py:189
+#: ../src/plugin.py:204
 msgid "next page / catch page / move"
 msgstr "volgende pagina / pagina inlezen / verplaatsen"
 
-#: ../src/plugin.py:190
+#: ../src/plugin.py:205
 msgid "prev sub page / move"
 msgstr "vorige sub-pagina / verplaatsen"
 
-#: ../src/plugin.py:191
+#: ../src/plugin.py:206
+msgid "start page catching / select page"
+msgstr "Pagina selecteren"
+
+#: ../src/plugin.py:207
 msgid "next sub page / move"
 msgstr "volgende sub-pagina / verplaatsen"
 
-#: ../src/plugin.py:192
+#: ../src/plugin.py:208
 msgid "prev page / catch page / move"
 msgstr "vorige pagina / pagina inlezen / verplaatsen"
 
-#: ../src/plugin.py:193
-msgid "toggle flof"
-msgstr "FLOF omschakelen"
+#: ../src/plugin.py:209
+msgid "toggle flof/top"
+msgstr "FLOF/TOP omschakelen"
 
-#: ../src/plugin.py:194
+#: ../src/plugin.py:210
 msgid "red teletext link"
 msgstr "rode textlink"
 
-#: ../src/plugin.py:195
+#: ../src/plugin.py:211
 msgid "green teletext link"
 msgstr "groene textlink"
 
-#: ../src/plugin.py:196
+#: ../src/plugin.py:212
 msgid "yellow teletext link"
 msgstr "gele textlink"
 
-#: ../src/plugin.py:197
+#: ../src/plugin.py:213
 msgid "blue teletext link"
 msgstr "blauwe textlink"
 
-#: ../src/plugin.py:198
+#: ../src/plugin.py:214
 msgid "split screen"
 msgstr "gedeeld beeldscherm"
 
-#: ../src/plugin.py:199
+#: ../src/plugin.py:215
 msgid "toggle transparency"
 msgstr "Transparantie instellen"
 
-#: ../src/plugin.py:831
-msgid "TeleText settings"
-msgstr "TeleText instellingen"
+#: ../src/plugin.py:975
+msgid "Select teletext"
+msgstr "Teletext selecteren"
 
-#: ../src/plugin.py:853
+#: ../src/plugin.py:991
+#: ../src/plugin.py:1087
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../src/plugin.py:854
-msgid "Default"
-msgstr "Standaard"
-
-#: ../src/plugin.py:855
+#: ../src/plugin.py:992
+#: ../src/plugin.py:1013
+#: ../src/plugin.py:1089
 msgid "OK"
 msgstr "OK"
 
-#: ../src/plugin.py:904
+#: ../src/plugin.py:1065
+msgid "TeleText settings"
+msgstr "TeleText instellingen"
+
+#: ../src/plugin.py:1088
+msgid "Default"
+msgstr "Standaard"
+
+#: ../src/plugin.py:1142
 msgid "Scale filter"
 msgstr "Schalen"
 
-#: ../src/plugin.py:905
+#: ../src/plugin.py:1143
+msgid "Scale filter zoom"
+msgstr "Schalen zoom"
+
+#: ../src/plugin.py:1144
 msgid "Brightness"
 msgstr "Helderheid"
 
-#: ../src/plugin.py:906
+#: ../src/plugin.py:1145
 msgid "Contrast"
 msgstr "Contrast"
 
-#: ../src/plugin.py:907
+#: ../src/plugin.py:1146
 msgid "Transparency"
 msgstr "Transparantie"
 
-#: ../src/plugin.py:908
+#: ../src/plugin.py:1147
 msgid "Text level"
 msgstr "TeleText Versie"
 
-#: ../src/plugin.py:909
+#: ../src/plugin.py:1148
 msgid "Region"
 msgstr "Regio"
 
-#: ../src/plugin.py:910
-#: ../src/plugin.py:915
+#: ../src/plugin.py:1149
+#: ../src/plugin.py:1154
 msgid "Position and size"
 msgstr "Positie en afmeting"
 
-#: ../src/plugin.py:911
+#: ../src/plugin.py:1150
 msgid "Display edges"
 msgstr "Randen weergeven"
 
-#: ../src/plugin.py:912
+#: ../src/plugin.py:1151
 msgid "Splitting mode"
 msgstr "Split-mode"
 
-#: ../src/plugin.py:916
+#: ../src/plugin.py:1155
+msgid "Background caching"
+msgstr "Caching in de achtergrond"
+
+#: ../src/plugin.py:1156
 msgid "Message"
 msgstr "Bericht"
 
-#: ../src/plugin.py:917
+#: ../src/plugin.py:1157
 msgid "Debug"
 msgstr "Debug"
 
-#: ../src/plugin.py:999
+#: ../src/plugin.py:1241
 msgid "Discard changes?"
 msgstr "Wijzigingen annuleren?"
 
-#: ../src/plugin.py:1077
+#: ../src/plugin.py:1319
 msgid "No teletext available."
 msgstr "Geen teletext beschikbaar."
+
+#~ msgid "blurry"
+#~ msgstr "wazig"
+
+#~ msgid "anti flutter"
+#~ msgstr "anti-flikker"
+
+#~ msgid "anti flutter blurry"
+#~ msgstr "anti-flikker wazig"
+
+#~ msgid "anti flutter sharp"
+#~ msgstr "anti-flikker scherp"
 
 #~ msgid "..."
 #~ msgstr "..."

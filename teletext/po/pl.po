@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: TeleText\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-29 20:14+0100\n"
-"PO-Revision-Date: 2012-06-07 12:14+0100\n"
+"PO-Revision-Date: 2012-06-11 19:21+0100\n"
 "Last-Translator: Sebastian <zbigzbig2@wp.pl>\n"
 "Language-Team: Andreas Laux <lespuck@web.de>\n"
 "Language: \n"
@@ -19,6 +19,9 @@ msgstr ""
 
 msgid "Arabic"
 msgstr "Arabski"
+
+msgid "Background caching"
+msgstr "Cache w tle"
 
 msgid "Brightness"
 msgstr "Jasność"
@@ -40,6 +43,9 @@ msgstr "Debuguj"
 
 msgid "Default"
 msgstr "Domyślnie"
+
+msgid "Disabled"
+msgstr "Wyłączony"
 
 msgid "Discard changes?"
 msgstr "Odrzucić zmiany?"
@@ -131,11 +137,23 @@ msgstr "Zachodnia i Centralna Europa"
 msgid "anisotropic"
 msgstr "Anizotropowy"
 
+msgid "anti flutter"
+msgstr "Bez migotania"
+
+msgid "anti flutter blurry"
+msgstr "Bez migotania rozmyte"
+
+msgid "anti flutter sharp"
+msgstr "Bez migotania ostre"
+
 msgid "bilinear"
 msgstr "Bilinearny"
 
 msgid "blue teletext link"
 msgstr "Niebieski link teletekstu"
+
+msgid "blurry"
+msgstr "Rozmyte"
 
 msgid "decrease height"
 msgstr "Zmniejsz wysokość"
