@@ -102,11 +102,25 @@
 	
 	<!--  ##### PluginBrowser ##### -->
 	<screen backgroundColor="background" name="PluginBrowser" position="center,80" size="500,445" title="Plugin browser">
-		<widget name="list" position="10,10" scrollbarMode="showNever" size="480,400"/>
 		<ePixmap alphatest="on" name="bg_red" pixmap="Vali-XD/buttons/red.png" position="10,420" size="35,25" transparent="1" zPosition="2"/>
 		<ePixmap alphatest="on" name="bg_green" pixmap="Vali-XD/buttons/green.png" position="260,420" size="35,25" transparent="1" zPosition="2"/>
 		<widget backgroundColor="background" font="Regular;17" halign="left" name="red" position="45,421" size="210,22" transparent="1" zPosition="2"/>
 		<widget backgroundColor="background" font="Regular;17" halign="left" name="green" position="295,421" size="200,24" transparent="1" zPosition="2"/>
+		<widget source="pluginlist" render="Listbox" position="10,10" size="480,400" scrollbarMode="showNever">
+			<convert type="TemplatedMultiContent">
+			{"templates":
+				{"default": (50,[
+						MultiContentEntryText(pos = (120, 5), size = (320, 25), font = 0, text = 1), # index 1 is the plugin.name
+						MultiContentEntryText(pos = (120, 26), size = (320, 17), font = 1, text = 2), # index 2 is the plugin.description
+						MultiContentEntryPixmapAlphaTest(pos = (10, 5), size = (100, 40), png = 3), # index 3 is the icon
+						
+					]),
+				},
+				"fonts": [gFont("Regular", 20), gFont("Regular", 14)],
+				"itemHeight": 50
+			}
+			</convert>
+		</widget>
 	</screen>
 	
 	<!--  ##### Shooter-II ##### -->
