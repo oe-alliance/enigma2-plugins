@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+
+	<title>Dreambox WebAdmin</title>
+
+	<!-- <link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet"> -->
+	<link href="/web-data/tpl/default/style.min.css" type="text/css" rel="stylesheet">
+	<link href="/webadmin/tpl/style.admin.css" type="text/css" rel="stylesheet">
+	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico">
+	<!--
+	<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
+	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
+	<script type="text/javascript" src="/web-data/lib/hashlistener2.js"></script>
+	<script type="text/javascript" src="/web-data/lib/datepicker/datepicker.js">
+	{
+		"nodrag":1,
+		"lang":"en",
+		"buttontabindex":true,
+		"cellformat":["Y-ds-m-ds-d"],
+		"titleformat":["Y-ds-m-ds-d"]
+	}
+	</script>
+	-->
+	<script type="text/javascript" src="/web-data/lib/libs_minified.js">
+	{
+		"nodrag":1,
+		"lang":"en",
+		"buttontabindex":true,
+		"cellformat":["Y-ds-m-ds-d"],
+		"titleformat":["Y-ds-m-ds-d"]
+	}
+	</script>
+	<script language="javascript" type="text/javascript">
+		function setMaxHeight(element){
+			try{
+				var slc = $(element);
+				var top = slc.cumulativeOffset().top;
+				var height = document.viewport.getHeight() - top - 40;
+				slc.style.maxHeight = height+"px";
+			} catch (e) {
+				console.log(e);
+			}
+		}
+		function setNavHd(content){
+			$('navHd').update('<div style="background-color: #000">'+content+'</div>');
+		}
+
+		function setContentHd(content){
+			var div = new Element('div');
+			div.setStyle({background: 'black'});
+			div.update(content);
+			$('contentHd').update(div);
+			$('contentHdExt').update('');
+		}
+
+		function getAjaxLoad(){
+			return ('<center><img style="padding-top: 50px;" src="/web-data/gfx/ajaxload.gif" alt="loading..."></center>');
+		}
+	</script>
+
+	<!-- Webinterface Stuff -->
+	<script type="text/javascript" src="/web-data/userprefs.js"></script>
+	<script type="text/javascript" src="/web-data/statics.js" ></script>
+	<script type="text/javascript" src="/web-data/helpers.js" ></script>
+	<script type="text/javascript" src="/web-data/provider.js" ></script>
+	<script type="text/javascript" src="/web-data/handler.js" ></script>
+	<script type="text/javascript" src="/web-data/core.js" ></script>
+	<script type="text/javascript" src="/webadmin/helpers.js" ></script>
+	<script type="text/javascript" src="/webadmin/handler.js" ></script>
+	<script type="text/javascript" src="/webadmin/provider.js" ></script>
+	<script type="text/javascript" src="/webadmin/admin.js" ></script>
+
+	<!-- Live RSS Feeds //-->
+	<link rel="alternate" type="application/rss+xml" title="Movie List" href="/web/movielist.rss?tag" >
+</head>
+<body onresize="setMaxHeight('contentMain')" onload="document.getElementById('notification').style.display='none'">
+	<div id="container">
+		<div id="banner" class="rounded">
+			<span id="notification"><div></div></span>
+			<div id="bannerLeft">
+				<div id="bannerText" style="font-size: 24px;">
+					<img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web">
+				</div>
+				<ul id="mainMenu">
+					<li class="rounded navmenu" data-mode="tv"><a class="rounded" href="../#!/tv"><span>TeleVision</span></a></li>
+					<li class="rounded navmenu" data-mode="radio"><a class="rounded" href="../#!/radio"><span>Radio</span></a></li>
+					<li class="rounded navmenu" data-mode="movies"><a class="rounded" href="../#!/movies/list/filter//"><span>Movies</span></a></li>
+					<li class="rounded navmenu" data-mode="timer"><a class="rounded" href="../#!/timer/list"><span>Timer</span></a></li>
+					<li class="rounded navmenu" data-mode="control"><a class="rounded" href="../#!/control"><span>BoxControl</span></a></li>
+					<li class="rounded navmenu" data-mode="extras"><a class="rounded" href="../#!/extras"><span>Extras</span></a></li>
+					<li class="rounded navmenu"><a class="rounded" href="../#" id="webTv"><span>WebTV</span></a></li>
+				</ul>
+			</div>
+			<div id="bannerRight">
+				<table style="width: 100%">
+					<tr>
+						<td><a id="openSignalPanel" href="#" >
+							<img id="openSignalPanelImg" border="0" src="/web-data/img/transmit_blue.png" alt="Signal" title="Show Signal Panel">
+						</a></td>
+					</tr>
+					<tr>
+						<td><a id="instantRecord" href="#">
+								<img  id="instantRecordImg" border="0" src="/web-data/img/clock_red.png" alt="R" title="Instant Record">
+							</a>
+						</td>
+
+					</tr>
+				</table>
+				<div id="instantRecordMenu" class="rounded" style="display: none;">
+					<table>
+						<tr>
+							<th>Instant record</th>
+						</tr>
+						<tr>
+							<td colspan="2"><button class="doInstantRecord" data-type="current">Record current event</button></td>
+						</tr>
+						<!--
+						<tr>
+							<td><button class="doInstantRecord" data-type="minutes" style="width: 140px">Record for (min.)</button>
+							<td style="text-align: right"><input type="text" size="2" maxlength="3" value="60"></input></td></td>
+						</tr>
+						-->
+						<tr>
+							<td colspan="2"><button class="doInstantRecord" data-type="infinite">Start infinite recording</button></td>
+						</tr>
+					</table>
+
+				</div>
+			</div>
+		</div>
+		<div id="current" class="rounded">
+			<div id="currentContent">
+				<table id="currentTable">
+					<tr>
+						<td id="currentName">N/A</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="main">
+			<div id="navContainer">
+				<div id="nav" class="rounded">
+					<div id="navHd" class="header"><div>SubNav</div></div>
+					<div id="navContent">loading...</div>
+				</div>
+				<div id="navVolume" class="rounded">
+					<div id="volHd" class="header"><div>Volume</div></div>
+					<span id="volContent" class="boxContent center" style="width: 94%; display:block;">loading...</span>
+				</div>
+				<div id="navSearch" class="rounded">
+					<div id="searchHd" class="header"><div>EPG-Search</div></div>
+					<div class="boxContent">
+						<form id="epgSearchForm" action="">
+							<input type="text" id="epgSearch" value="Search EPG" />
+							<img id="epgSearchClear" style="vertical-align:middle" src="/web-data/img/cross.png" alt="clear..." title="Clear Search"/>
+						</form>
+					</div>
+				</div>
+				<div id="navMemory" class="rounded">
+					<div id="memHd" class="header"><div>Memory</div></div>
+					<span id="memContent" class="boxContent center" style="width: 94%; display:block;">loading...</span>
+				</div>
+			</div>
+			<div id="content" class="rounded">
+				<table style="margin:0px; padding:0px; background:#000;width:100%" cellpadding="0" cellspacing="0">
+					<tr>
+						<td><div id="contentHd" class="header"><div>Content</div></div></td>
+						<td style="text-align: right"><div id="contentHdExt"></div></td>
+					</tr>
+				</table>
+				<div id="contentMain">loading...</div>
+			</div>
+		</div>
+	</div>
+	<script language="javascript" type="text/javascript">
+		setMaxHeight('contentMain');
+		URL.tpl='/webadmin/tpl/'
+		admincore.run();
+	</script>
+
+</body>
+</html>

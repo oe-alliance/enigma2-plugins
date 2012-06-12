@@ -19,7 +19,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications
 from FTPServerManager import FTPServerManager
 from FTPQueueManager import FTPQueueManager
-from NTIVirtualKeyBoard import NTIVirtualKeyBoard
+from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
 # GUI (Components)
 from Components.ActionMap import ActionMap, HelpableActionMap

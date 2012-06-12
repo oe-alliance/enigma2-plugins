@@ -13,7 +13,7 @@ from Components.Pixmap import Pixmap
 from Components.GUIComponent import GUIComponent
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigPassword, ConfigYesNo, ConfigText
-from enigma import eListboxPythonMultiContent, eServiceReference, getDesktop, iPlayableService, eSize, ePicLoad
+from enigma import eListboxPythonMultiContent, eServiceReference, getDesktop, iPlayableService, eSize, ePicLoad, iServiceInformation
 from ServiceReference import ServiceReference
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename
 from __init__ import __
@@ -41,7 +41,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<widget name="poster" position="%i,60" size="%i,%i" alphatest="on" zPosition="2" />
-		<widget name="connection_label" position="85,434" size="384,24" font="Regular;24" halign="center" foregroundColors="#000000,#FFFF00,#00FF00,#AAAAAA,#FF0000" />
+		<widget name="connection_label" position="85,422" size="384,48" font="Regular;24" valign="center" halign="center" foregroundColors="#000000,#FFFF00,#00FF00,#AAAAAA,#FF0000" />
 		<widget source="do_blink" render="FixedLabel" text=" " position="85,434" zPosition="1" size="384,24">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
@@ -86,6 +86,7 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 				iPlayableService.evUpdatedEventInfo: self.__streamStarted,
 				iPlayableService.evTuneFailed: self.__streamFailed,
 				iPlayableService.evEOF: self.__evEOF,
+				iPlayableService.evUser+15: self.__streamFailed
 			})	
 
 		self.onClose.append(self.__onClose)
@@ -138,11 +139,15 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 
 	def __streamFailed(self):
 		print "__streamFailed"
+		currPlay = self.session.nav.getCurrentService()
+		message = currPlay.info().getInfoString(iServiceInformation.sUser+12)
 		self.setState(self.STATE_FAILURE)
+		self["connection_label"].setText(_("Streaming error: %s") % message)
 
 	def __evEOF(self):
 		print "__evEOF"
-		self.setState(self.STATE_DISCONNECTED)
+		if self.state != self.STATE_FAILURE:
+			self.setState(self.STATE_DISCONNECTED)
 
 	def keyPass(self):
 		print "keyPass"

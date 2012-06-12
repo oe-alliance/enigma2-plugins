@@ -1,6 +1,7 @@
 ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS = \
+	3dsettings \
 	aihdcontroler \
 	antiscrollbar \
 	audiosync \
@@ -10,6 +11,7 @@ SUBDIRS = \
 	autoresolution \
 	autotimer \
 	babelzapper \
+	birthdayreminder \
 	bitrateviewer \
 	bonjour \
 	cdinfo \
@@ -39,6 +41,7 @@ SUBDIRS = \
 	httpproxy \
 	imdb \
 	infobartunerstate \
+	internetradio \
 	kiddytimer \
 	lastfm \
 	letterbox \
@@ -77,20 +80,24 @@ SUBDIRS = \
 	pluginsort \
 	podcast \
 	porncenter \
+	pushservice \
 	quickbutton \
 	reconstructapsc \
 	remotetimer \
 	rsdownloader \
+	satloader \
 	seekbar \
 	serienfilm \
 	setpasswd \
-	shoutcast \
 	showclock \
 	simplerss \
 	startupservice \
 	startuptostandby \
+	subsdownloader2 \
 	svdrp \
 	tageditor \
+	teletext \
+	toolkit \
 	trafficinfo \
 	tvcharts \
 	unwetterinfo \
@@ -99,6 +106,7 @@ SUBDIRS = \
 	vlcplayer \
 	vps \
 	weatherplugin \
+	webadmin \
 	webcamviewer \
 	webbouqueteditor \
 	webinterface \

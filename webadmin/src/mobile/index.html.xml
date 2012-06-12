@@ -1,0 +1,33 @@
+<e2:screen name="DummyWebScreen">
+<html>
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+	<title>E²mobile - WebAdmin</title>
+
+	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" />
+	<link rel="dm icon" href="/web-data/img/favicon.ico" type="image/x-icon" />
+
+</head>
+<body>
+
+	<h1 style="text-align: center;"><big>Enigma²</big></h1>
+	<h1 style="text-align: center;">WebAdmin</h1>
+<br/>
+<div class="wap" style="text-align: center;">
+
+<a href="/webadmin/mobile/pkglist.html?filter=installed">List installed Packages</a><br/>
+<a href="/webadmin/mobile/pkglist.html?filter=upgradable">List upgradable Packages</a><br/>
+<a href="/webadmin/mobile/pkglist.html?filter=">List All Packages</a><br/>
+<br/>
+<a href="/ipkg?command=update">Update</a><br/>
+<a href="/ipkg?command=upgrade">Upgrade Software</a><br/>
+<br/>
+<form method="GET" action="/webadmin/mobile/pkglist.html">
+	<input name="filter" id="filter" type="text" size="15" maxlength="60" value="" />
+	<input type="submit" size="50" value="Ok" />
+</form>
+
+</div>
+</body>
+</html>
+</e2:screen>

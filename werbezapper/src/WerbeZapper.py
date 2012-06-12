@@ -26,6 +26,47 @@ from enigma import eEPGCache
 from Components.config import *
 
 
+class WerbeZapperChoiceBox(ChoiceBox):
+	def __init__(self, session, title="", list=[], keys=None, selection=0, zap_time=0, zap_service=None, monitored_event=None, monitored_service=None, skin_name=[]):
+		ChoiceBox.__init__(self, session, title, list, keys, selection, skin_name)
+		
+		self.update_timer = eTimer()
+		self.update_timer.callback.append(self.update)
+		
+		self.zap_time = zap_time
+		self.zap_service = zap_service
+		self.monitored_event = monitored_event
+		self.monitored_service = monitored_service
+		
+		# Start timer to update the ChoiceBox every second
+		self.update_timer.start(1000)
+		self.setTitle( "WerbeZapper" )
+		self.update()
+
+	def update(self):
+		#TODO getServiceName() begin end
+		text = ""
+		if self.monitored_event:
+			name = self.monitored_event and self.monitored_event.getEventName()
+			remaining = ( self.monitored_event.getDuration() - ( time() - self.monitored_event.getBeginTime() ) )
+			if remaining > 0:
+				text += _("Monitoring: %s (%d:%02d Min)") % (name, remaining/60, remaining%60)
+		if self.zap_time:
+			remaining = int( math.floor( self.zap_time - time() ) )
+			if remaining > 0:
+				remainstr = ("%d:%02d") % (remaining/60, remaining%60)
+				text += "\n" + _("Zapping back in %d:%02d Min") % (remaining/60, remaining%60)
+		if text:
+			self.setText(text)
+
+	def setText(self, text):
+		self["text"].setText(text)
+
+	def close(self, param=None):
+		self.update_timer.stop()
+		ChoiceBox.close(self, param)
+
+
 class WerbeZapper(Screen):
 	"""Simple Plugin to automatically zap back to a Service after a given amount
 	   of time."""
@@ -56,7 +97,7 @@ class WerbeZapper(Screen):
 		
 		#	Initialize monitoring
 		self.monitored_service = None
-		self.event = None
+		self.monitored_event = None
 		self.__event_tracker = None
 		
 		# Keep Cleanup
@@ -65,8 +106,8 @@ class WerbeZapper(Screen):
 	def showSelection(self):
 		title = _("When to Zap back?")
 		select = int(config.werbezapper.duration.value)
-		keys = []	
-			
+		keys = []
+
 		# Number keys
 		choices = [
 								( _("Custom"), 'custom'),
@@ -81,39 +122,31 @@ class WerbeZapper(Screen):
 								('9 ' + _('minutes'), 9),
 							]
 		keys.extend( [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ] )
-		
+
 		# Dummy entry to seperate the color keys
 		choices.append( ( "------", 'close' ) )
 		keys.append( "" )  # No key
-		
+
 		# Blue key - Covers the monitoring functions without closing Werbezapper
 		if self.monitor_timer.isActive():
-			#TODO what is monitored
-			# Number Channel Name Remaining
-			name = ""
-			if self.event:
-				name = self.event and self.event.getEventName()
-				remaining = ( self.event.getDuration() - ( time() - self.event.getBeginTime() ) )
-				title += "\n\n" + _("Monitoring:\n%s (%d:%02d Min)") % (name, remaining/60, remaining%60)
-			choices.append( ( _("Stop monitoring: %s") % (name), 'stopmonitoring' ) )
+			choices.append( ( _("Stop monitoring"), 'stopmonitoring' ) )
 		else:
-			choices.append( ( _("Start monitoring..."), 'startmonitoring' ) )
+			choices.append( ( _("Start monitoring"), 'startmonitoring' ) )
 		keys.append( "blue" )
 
 		# Red key - Covers all stop and close functions
-		if self.zap_timer.isActive() and self.zap_time:
-			remaining = int( math.floor( self.zap_time - time() ) )
-			remaining = remaining if remaining > 0 else 0
-			remainstr = ("%d:%02d") % (remaining/60, remaining%60)
-			title += "\n\n" + _("Zapping back in (%s Min)") % (remainstr)
-			remaining /= 60
-			select = remaining if 0 < remaining and remaining < 10 else select
-			choices.append( ( _("Stop timer (%s Min)") % (remainstr), 'stoptimer' ) )
+		if self.zap_timer.isActive():
+			if self.zap_time:
+				remaining = int( math.floor( self.zap_time - time() ) )
+				remaining = remaining if remaining > 0 else 0
+				remaining /= 60
+				select = remaining if 0 < remaining and remaining < 10 else select
+			choices.append( ( _("Stop timer"), 'stoptimer' ) )
 			keys.append( "red" )
 		else:
 			choices.append( ( "------", 'close' ) )
 			keys.append( "" )  # No key
-		
+
 		# Green key - Manual rezap
 		if self.zap_timer.isActive():
 			choices.append( ( _("Rezap"), 'rezap' ) )
@@ -121,17 +154,21 @@ class WerbeZapper(Screen):
 		else:
 			choices.append( ( "------", 'close' ) )
 			keys.append( "" )  # No key
-		
+
 		# Select Timer Length
 		self.session.openWithCallback(
 			self.choicesCallback,
-			ChoiceBox,
+			WerbeZapperChoiceBox,
 			title,
 			choices,
 			keys,
-			select
+			select,
+			self.zap_time,
+			self.zap_service,
+			self.monitored_event,
+			self.monitored_service
 		)
-		
+
 	def choicesCallback(self, result):
 		result = result and result[1]
 		
@@ -208,7 +245,7 @@ class WerbeZapper(Screen):
 			event = ref and ref.valid() and epg.lookupEventTime(ref, -1)
 		if event:
 			# Set monitoring end time
-			self.event = event
+			self.monitored_event = event
 			duration = event.getDuration() - ( time() - event.getBeginTime() )
 			self.monitor_timer.startLongTimer( int( duration ) )
 			if notify:
@@ -240,11 +277,7 @@ class WerbeZapper(Screen):
 		
 		if notify:
 			# Notify the User that the monitoring is ending
-			#TODO get event channelnumber and channelname
-			#number = 
-			#channel = 
-			#_("Monitoring\n%d %s %s\nends") % (number, channel, name),
-			name = self.event and self.event.getEventName()
+			name = self.monitored_event and self.monitored_event.getEventName()
 			AddPopup(
 								_("WerbeZapper\nMonitoring ends\n%s") % (name),
 								MessageBox.TYPE_INFO,
@@ -253,7 +286,7 @@ class WerbeZapper(Screen):
 							)
 		
 		self.monitored_service = None
-		self.event = None
+		self.monitored_event = None
 
 	def serviceStarted(self):
 		# Verify monitoring is active
@@ -263,7 +296,7 @@ class WerbeZapper(Screen):
 				# Is the zap away check already running
 				if not self.delay_timer.isActive():
 					# Delay the zap away check only once
-					self.delay_timer.startLongTimer( 10 )
+					self.delay_timer.startLongTimer( 3 )
 
 	def zappedAway(self):
 		# Verify that the currently played service has changed
@@ -297,7 +330,6 @@ class WerbeZapper(Screen):
 		
 		if notify:
 			# Remind the User of what he just did
-			#TEST deactivate message on zap because of monitoring
 			AddPopup(
 								_("Zapping back in %d Minute(s)") % (duration),
 								MessageBox.TYPE_INFO,
@@ -309,8 +341,7 @@ class WerbeZapper(Screen):
 		self.zap_timer.stop()
 		self.zap_time = None
 
-	def zap(self, notify= False):
-		#TODO add notify ?
+	def zap(self, notify=True):
 		if self.zap_service is not None:
 			if self.root:
 				import ServiceReference
@@ -330,6 +361,15 @@ class WerbeZapper(Screen):
 
 			# Play zap_service (won't rezap if service equals to move_service)
 			self.session.nav.playService(self.zap_service)
+
+		if notify:
+			# Remind the User what happens here
+			AddPopup(
+								_("Zapping back"),
+								MessageBox.TYPE_INFO,
+								3,
+								"WerbeZapperZapBack"
+							)
 
 		# Cleanup if end timer is not running
 		if not self.monitor_timer.isActive():

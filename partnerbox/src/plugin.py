@@ -73,6 +73,7 @@ config.plugins.Partnerbox.showcurrentstreaminextensionsmenu= ConfigYesNo(default
 config.plugins.Partnerbox.showremotetimerinextensionsmenu= ConfigYesNo(default = True)
 config.plugins.Partnerbox.enablepartnerboxintimerevent = ConfigYesNo(default = False)
 config.plugins.Partnerbox.enablepartnerboxepglist = ConfigYesNo(default = False)
+config.plugins.Partnerbox.enabledefaultpartnerboxintimeredit = ConfigYesNo(default = False)
 config.plugins.Partnerbox.entriescount =  ConfigInteger(0)
 config.plugins.Partnerbox.Entries = ConfigSubList()
 initConfig()
@@ -141,7 +142,7 @@ def Plugins(**kwargs):
 	list.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart_ChannelContextMenu))
 
 
-	list.append(PluginDescriptor(name="Setup Partnerbox", description=_("setup for partnerbox"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup))
+	list.append(PluginDescriptor(name="Setup Partnerbox", description=_("setup for partnerbox"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "Setup_Partnerbox.png", fnc=setup))
 	if config.plugins.Partnerbox.showremotetimerinextensionsmenu.value:
 		list.append(PluginDescriptor(name="Partnerbox: RemoteTimer", description=_("Manage timer for other dreamboxes in network"), 
 		where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))

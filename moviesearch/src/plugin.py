@@ -1,6 +1,6 @@
 from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
-from NTIVirtualKeyBoard import NTIVirtualKeyBoard
+from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 from Tools.BoundFunction import boundFunction
 from Screens.MessageBox import MessageBox
 from enigma import eServiceCenter, eServiceReference, \

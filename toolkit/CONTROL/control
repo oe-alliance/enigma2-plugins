@@ -1,0 +1,2 @@
+Description: common reusable tools for enigma2 plugins
+Depends: enigma2, python-twisted-core, python-threading, python-html, python-re

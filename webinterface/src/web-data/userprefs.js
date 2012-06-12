@@ -2,15 +2,20 @@
  * This code is inspired by http://www.phpied.com/json-javascript-cookies/
  * and modified for use with prototype
  * It's a pretty straight forward way to store and load settings in a nice to use JSON-Object
- */ 
+ */
 
 var userprefs = {
 	data : {},
 
 	load : function() {
 		var the_cookie = document.cookie.split(';');
-		if (the_cookie[0]) {
-			this.data = unescape(the_cookie[0]).evalJSON();
+
+		var idx = 0;
+		if(the_cookie[idx].startsWith("TWISTED_SESSION")){
+			idx = 1;
+		}
+		if (the_cookie[idx]) {
+			this.data = unescape(the_cookie[idx]).evalJSON();
 		}
 		return this.data;
 	},

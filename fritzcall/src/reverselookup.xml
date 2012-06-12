@@ -754,24 +754,12 @@
 		</website>
 	</country>
 	<country code="+39">
-		<website name="paginebianche.it" url="http://www.paginebianche.it/execute.cgi?btt=1&amp;ts=106&amp;cb=8&amp;mr=10&amp;rk=&amp;om=&amp;qs=$NUMBER" prefix="0">
+		<website name="paginebianche.it" url="http://www.paginebianche.it/ricerca-da-numero?qs=$NUMBER" prefix="0">
 			<entry>
-				<name>class=&quot;org&quot;&gt;([^&lt;]*)&lt;</name>
+				<name>class=&quot;org fn&quot;&gt;&lt;h2 class=&quot;rgs&quot;&gt;&lt;a href=&quot;[^&quot;]+&quot; title=&quot;[^&quot;]+&quot; rel=&quot;nofollow&quot;&gt;([^&lt;]*)&lt;</name>
 				<street>class=&quot;street-address&quot;>([^&lt;]*)&lt;</street>
 				<city>class=&quot;locality&quot;>([^&lt;]*)&lt;</city>
 				<zipcode>class=&quot;postal-code&quot;>([^&lt;]*)&lt;</zipcode>
-			</entry>
-			<entry>
-				<name>&lt;a [^&gt;]*&gt;&lt;img [^&gt;]*&gt;&lt;/a&gt;&lt;a [^&gt;]*&gt;([^&lt;]*)</name>
-				<street>&lt;font [^&gt;]*&gt;[0-9]*&amp;nbsp;[^&amp;]*[^-]*-([^&lt;]*)&lt;</street>
-				<city>&lt;font [^&gt;]*&gt;[0-9]*&amp;nbsp;([^&amp;]*)[^-]*-[^&lt;]*&lt;</city>
-				<zipcode>&lt;font [^&gt;]*&gt;([0-9]*)&amp;nbsp;[^&amp;]*[^-]*-[^&lt;]*&lt;</zipcode>
-			</entry>
-			<entry>
-				<name>&lt;td class=&quot;dati&quot;&gt;&lt;span [^&gt;]*&gt;([^&lt;]*)&lt;/span&gt;&lt;br&gt;[0-9]*&amp;nbsp;[^&amp;]*[^-]*-[^&lt;]*&lt;</name>
-				<street>&lt;td class=&quot;dati&quot;&gt;&lt;span [^&gt;]*&gt;[^&lt;]*&lt;/span&gt;&lt;br&gt;[0-9]*&amp;nbsp;[^&amp;]*[^-]*-([^&lt;]*)&lt;</street>
-				<city>&lt;td class=&quot;dati&quot;&gt;&lt;span [^&gt;]*&gt;[^&lt;]*&lt;/span>&lt;br&gt;[0-9]*&amp;nbsp;([^&amp;]*)[^-]*-[^&lt;]*&lt;</city>
-				<zipcode>&lt;td class=&quot;dati&quot;&gt;&lt;span [^&gt;]*&gt;[^&lt;]*&lt;/span&gt;&lt;br&gt;([0-9]*)&amp;nbsp;[^&amp;]*[^-]*-[^&lt;]*&lt;</zipcode>
 			</entry>
 		</website>
 		<website name="pronto.it" url="http://www.pronto.it/?q=$NUMBER" prefix="0">
@@ -828,10 +816,10 @@
 	<country code="+43">
 		<website name="herold.at (Privat)" url="http://www.herold.at/servlet/at.herold.sp.servlet.SPWPSearchServlet?searchmask=2&amp;phone=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;td class=&quot;last&quot;&gt;&lt;h[1-9]&gt;&lt;a href=&quot;[^&quot;]*&quot;(?:\s*class=&quot;bold&quot;)?&gt;([^&lt;]*)&lt;/a&gt;&lt;/h[1-9]&gt;</name>
-				<street>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?[^,]*,\s*([^&lt;]*)&lt;br /&gt;&lt;/p&gt;</street>
-				<city>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?\d+ ([^,]*),\s*[^&lt;]*&lt;br /&gt;&lt;/p&gt;</city>
-				<zipcode>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?(\d+) [^,]*,\s*[^&lt;]*&lt;br /&gt;&lt;/p&gt;</zipcode>
+				<name>&lt;h2 class=&quot;fullw&quot;&gt;&lt;a href=&quot;[^&quot;]*&quot;&gt;([^&lt;]*)&lt;/a&gt;&lt;/h2&gt;&lt;div class=&quot;addr fullw&quot;&gt;&lt;p&gt;[\d]+ [^&lt;]*&lt;br /&gt;</name>
+				<street>&lt;h2 class=&quot;fullw&quot;&gt;&lt;a href=&quot;[^&quot;]*&quot;&gt;[^&lt;]*&lt;/a&gt;&lt;/h2&gt;&lt;div class=&quot;addr fullw&quot;&gt;&lt;p&gt;[\d]+ [^,]*, ([^&lt;]*)&lt;br /&gt;</street>
+				<city>&lt;h2 class=&quot;fullw&quot;&gt;&lt;a href=&quot;[^&quot;]*&quot;&gt;[^&lt;]*&lt;/a&gt;&lt;/h2&gt;&lt;div class=&quot;addr fullw&quot;&gt;&lt;p&gt;[\d]+ ([^,]*), [^&lt;]*&lt;br /&gt;</city>
+				<zipcode>&lt;h2 class=&quot;fullw&quot;&gt;&lt;a href=&quot;[^&quot;]*&quot;&gt;[^&lt;]*&lt;/a&gt;&lt;/h2&gt;&lt;div class=&quot;addr fullw&quot;&gt;&lt;p&gt;([\d]+) [^,]*, [^&lt;]*&lt;br /&gt;</zipcode>
 			</entry>
 		</website>
 		<website name="herold.at (Firma)" url="http://www.herold.at/servlet/at.herold.sp.servlet.SPYPSearchServlet?searchmask=2&amp;phone=$NUMBER" prefix="0">
@@ -937,6 +925,12 @@
 	</country>
 	<country code="+49">
 		<website name="www.dasoertliche.de" url="http://dasoertliche.de/Controller?form_name=search_inv&amp;ph=$NUMBER" prefix="0">
+	        <entry>
+				<name>var data = getItemData\('[^']+', '[^']+', '[^']+', '[^']+', '[^']+', '([^']+)', '[^']+', '[^']+', '[^']+'\);</name>
+				<city>var data = getItemData\('[^']+', '[^']+', '[^']+', '[^']+', '([^']+)', '[^']+', '[^']+', '[^']+', '[^']+'\);</city>
+				<street>&lt;div class=&quot;strasse&quot;&gt;\s*([^&amp;]+&amp;nbsp;[^,]+),&amp;nbsp;</street>
+				<zipcode>var data = getItemData\('[^']+', '[^']+', '[^']+', '([^']+)', '[^']+', '[^']+', '[^']+', '[^']+', '[^']+'\);</zipcode>
+			</entry>
 			<entry firstOccurance="zipcode">
 				<name>\sna: &quot;([^&quot;]*)&quot;,</name>
 				<street>&lt;p class="data track"&gt;\s*([^&lt;]*)&lt;br /&gt;[^&lt;]*&lt;/p&gt;</street>

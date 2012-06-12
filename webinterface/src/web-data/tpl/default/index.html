@@ -1,23 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-	"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
-
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
-	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-	
+
 	<title>Dreambox WebControl</title>
-	
+
 	<!-- <link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet"> -->
 	<link href="/web-data/tpl/default/style.min.css" type="text/css" rel="stylesheet">
 	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico">
-	<!-- 
+	<!--
 	<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
 	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
 	<script type="text/javascript" src="/web-data/lib/hashlistener2.js"></script>
 	<script type="text/javascript" src="/web-data/lib/datepicker/datepicker.js">
- 	{
+	{
 		"nodrag":1,
 		"lang":"en",
 		"buttontabindex":true,
@@ -25,8 +21,7 @@
 		"titleformat":["Y-ds-m-ds-d"]
 	}
 	</script>
- 	-->
-
+	-->
 	<script type="text/javascript" src="/web-data/lib/libs_minified.js">
 	{
 		"nodrag":1,
@@ -36,64 +31,54 @@
 		"titleformat":["Y-ds-m-ds-d"]
 	}
 	</script>
-
- 	<script language="javascript" type="text/javascript">
-	 	if (!window.$) {
-			window.$ = function(id) { return document.getElementById(id); }
+	<script language="javascript" type="text/javascript">
+		var appCache = window.applicationCache;
+		if(appCache){
+			window.addEventListener(
+				'load',
+				function(e) {
+					window.applicationCache
+						.addEventListener(
+							'updateready',
+							function(e) {
+								if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+									window.applicationCache.swapCache();
+									if (confirm('A new version of this site is available. Load it?')) {
+										window.location.reload();
+									}
+								}// Manifest didn't change. Nothing to do.
+							}, false);
+				}, false);
 		}
-		
-		function getWinSize(win) 
-		{ 
-			if(!win) win = window; 
-			var s = {}; 
-			if(typeof win.innerWidth != 'undefined') 
-			{ 
-				s.width = win.innerWidth; 
-				s.height = win.innerHeight; 
-			} 
-			else 
-			{ 
-				 var obj = getBody(win); 
-				 s.width = parseInt(obj.clientWidth); 
-				 s.height = parseInt(obj.clientHeight); 
-			} 
-			return s; 
-		} 
-	
-		function getBody(w) 
-		{ 
-			return (w.document.compatMode && w.document.compatMode == "CSS1Compat") ? w.document.documentElement : w.document.body || null; 
-		} 
-		
+
 		function setMaxHeight(element){
 			try{
 				var slc = $(element);
-				size = getWinSize();
-				slc.style.maxHeight = size.height - 200+"px";
-				/*
-				if(Prototype.Browser.IE){
-					slc.style.height = size.height - 200+"px";
-				}
-				*/
-			} catch (e) {}
+				var top = slc.cumulativeOffset().top;
+				var height = document.viewport.getHeight() - top - 40;
+				slc.style.maxHeight = height+"px";
+			} catch (e) {
+				console.log(e);
+			}
 		}
 		function setNavHd(content){
 			$('navHd').update('<div style="background-color: #000">'+content+'</div>');
 		}
-		
-		function setContentHd(content){
+
+		function setContentHd(content, keepHdExt){
 			var div = new Element('div');
 			div.setStyle({background: 'black'});
 			div.update(content);
 			$('contentHd').update(div);
-			$('contentHdExt').update('');
+			if(!keepHdExt)
+				$('contentHdExt').update('');
 		}
-		
+
 		function getAjaxLoad(){
 			return ('<center><img style="padding-top: 50px;" src="/web-data/gfx/ajaxload.gif" alt="loading..."></center>');
 		}
 	</script>
-	
+
 	<!-- Webinterface Stuff -->
 	<script type="text/javascript" src="/web-data/userprefs.js"></script>
 	<script type="text/javascript" src="/web-data/statics.js" ></script>
@@ -114,18 +99,18 @@
 					<img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web">
 				</div>
 				<ul id="mainMenu">
-					<li class="rounded"><a class="rounded" href="#!/tv">TeleVision</a></li>
-					<li class="rounded"><a class="rounded" href="#!/radio">Radio</a></li>
-					<li class="rounded"><a class="rounded" href="#!/movies/list/filter//">Movies</a></li>
-					<li class="rounded"><a class="rounded" href="#!/timer/list">Timer</a></li>
-					<li class="rounded"><a class="rounded" href="#!/control">BoxControl</a></li>
-					<li class="rounded"><a class="rounded" href="#!/extras">Extras</a></li>
-					<li class="rounded"><a class="rounded" href="#" id="webTv">WebTV</a></li>
+					<li class="roundedNav navmenu" data-mode="tv"><a class="roundedNav" href="#!/tv"><span>TeleVision</span></a></li>
+					<li class="roundedNav navmenu" data-mode="radio"><a class="roundedNav" href="#!/radio"><span>Radio</span></a></li>
+					<li class="roundedNav navmenu" data-mode="movies"><a class="roundedNav" href="#!/movies/list/filter//"><span>Movies</span></a></li>
+					<li class="roundedNav navmenu" data-mode="timer"><a class="roundedNav" href="#!/timer/list"><span>Timer</span></a></li>
+					<li class="roundedNav navmenu" data-mode="control"><a class="roundedNav" href="#!/control"><span>BoxControl</span></a></li>
+					<li class="roundedNav navmenu" data-mode="extras"><a class="roundedNav" href="#!/extras"><span>Extras</span></a></li>
+					<li class="roundedNav navmenu"><a class="roundedNav" href="#" id="webTv"><span>WebTV</span></a></li>
 				</ul>
 			</div>
 			<div id="bannerRight">
 				<table style="width: 100%">
-					<tr>	
+					<tr>
 						<td><a id="openSignalPanel" href="#" >
 							<img id="openSignalPanelImg" border="0" src="/web-data/img/transmit_blue.png" alt="Signal" title="Show Signal Panel">
 						</a></td>
@@ -135,7 +120,7 @@
 								<img  id="instantRecordImg" border="0" src="/web-data/img/clock_red.png" alt="R" title="Instant Record">
 							</a>
 						</td>
-						
+
 					</tr>
 				</table>
 				<div id="instantRecordMenu" class="rounded" style="display: none;">
@@ -156,7 +141,7 @@
 							<td colspan="2"><button class="doInstantRecord" data-type="infinite">Start infinite recording</button></td>
 						</tr>
 					</table>
-					
+
 				</div>
 			</div>
 		</div>
@@ -165,7 +150,7 @@
 				<table id="currentTable">
 					<tr>
 						<td id="currentName">N/A</td>
-					</tr>	
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -197,7 +182,7 @@
 					</tr>
 				</table>
 				<div id="contentMain">loading...</div>
-			</div>	
+			</div>
 		</div>
 	</div>
 	<script language="javascript" type="text/javascript">

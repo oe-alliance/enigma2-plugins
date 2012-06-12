@@ -1,0 +1,12 @@
+
+<!-- tplMovieLocations -->
+<ul class="navTable">
+	<li>
+		<select class="mNavLocTag fullwidth" id="locations" name="locations" size="1">
+			{for l in locations}
+			<option value="${l.value}" ${l.selected}>${l.txt}</option>
+			{/for}
+		</select>
+	</li>
+</ul>
+<!-- /tplMovieLocations -->

@@ -9,6 +9,6 @@
 		<text value="While the screen does not immediately show it, it does have a lot to offer. The topmost line allows you to choose between the editor for channels and bouquets and the following lines contain the channels/bouquets you chose to refresh.\n\nYou can use the BLUE button to add a new entry to the list or the YELLOW button to remove an existing one.\n\n\nFor most people it should be sufficient to add the &quot;Favourites&quot; bouquet by selecting &quot;Bouquets&quot; in the first line and by adding it using the BLUE button."/>
 	</page>
 	<page title="Congratulations">
-		<text value="You now know how to do your first steps in EPGRefresh.\n\nAs a final note I want to hint you at the fact that this plugin will not do anything on it's own without YOU telling it to. So if you want the refresh to happen automatically in the background you need to configure the plugin to do so.\nThis was not done to cause you any inconvenience but rather to give you the freedom of choice."/>
+		<text value="You now know how to do your first steps in EPGRefresh.\n\nAs a final note I want to hint you at the fact that this plugin will not do anything on its own without YOU telling it to. So if you want the refresh to happen automatically in the background you need to configure the plugin to do so.\nThis was not done to cause you any inconvenience but rather to give you the freedom of choice."/>
 	</page>
 </mphelp>

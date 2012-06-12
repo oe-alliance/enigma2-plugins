@@ -1,8 +1,8 @@
 /**
  * AbstractContentProvider
- * 
- * Abstract Class for "AbstractContentProvider" Classes 
- * A Content handler is a class that provides content for the webpage 
+ *
+ * Abstract Class for "AbstractContentProvider" Classes
+ * A Content handler is a class that provides content for the webpage
  * e.g. a list of channels, or a list of recordings and/or is able of
  * doing the handling of all events for that content (e.g. deleting a recording)
  */
@@ -26,13 +26,13 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 		this.refresh = false;
 		this.eventsRegistered = false;
 	},
-		
+
 	/**
 	 * getXML
 	 * Converts the incoming transport result into a DOM object
 	 * Parameters:
 	 * @transport - the xmlhttp transport object
-	 * 
+	 *
 	 **/
 	getXML: function(transport){
 		var xmlDoc = "";
@@ -51,7 +51,7 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 
 		return xmlDoc;
 	},
-	
+
 	/**
 	 * renderXML
 	 * renders the XML and returns what's required by this.show();
@@ -60,7 +60,7 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 		debug('[AbstractContentProvider] ERROR: renderXML not implemented in derived class!');
 		return {};
 	},
-	
+
 	/**
 	 * callback
 	 * The default function that is being called for the onSuccess event of this.load();
@@ -71,7 +71,7 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 		var data = this.renderXML(this.getXML(transport));
 		this.show(data);
 	},
-	
+
 	/**
 	 * errorback
 	 * The default function that is being called for the onError event of this.load();
@@ -82,10 +82,10 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 		var notif = "Request failed for:  " + transport.request.url + "<br>Status: " + transport.status + " " + transport.statusText;
 		core.notify(notif, false);
 	},
-	
+
 	/**
 	 * load
-	 * Calls this.getURL 
+	 * Calls this.getURL
 	 * Parameters
 	 * @parms - an json object containing  {parameter : value} pairs for the request
 	 * @fnc - function to replace this.callback (which is being called @ onSuccess)
@@ -97,14 +97,14 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 		} else {
 			callback = this.callback.bind(this);
 		}
-		
+
 		this.getUrl(this.url, parms, callback, this.errorback.bind(this));
 	},
-	
+
 	registerEvents : function(){
 		debug('[AbstractContentProvider] WARNING: registerEvents not implemented in derived class!');
 	},
-	
+
 	/**
 	 * finished
 	 * Calls all functions this.onFinished contains this.registerEvents
@@ -115,7 +115,7 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 			this.registerEvents();
 			this.eventsRegistered = true;
 		}
-		
+
 		if(this.onFinished !== undefined){
 			for(var i = 0; i < this.onFinished.length; i++){
 				var fnc = this.onFinished[i];
@@ -125,18 +125,18 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 			}
 		}
 	},
-	
+
 	/**
 	 * reload
 	 * rexecute this.load() using this.parms and set this.refresh to false
 	 * Parameters:
 	 * @fnc - function to call @ onSuccess (passed through to this.load() )
-	 */	
+	 */
 	reload: function(fnc){
 		this.refresh = false;
 		this.load(this.parms, fnc);
 	},
-	
+
 	/**
 	 * simpleResultQuery
 	 * Call any URL that returns a SimpleXMLResult with this.simpleResultCallback for
@@ -148,7 +148,7 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 	simpleResultQuery: function(url, parms, callback){
 		this.getUrl(url, parms, callback);
 	},
-	
+
 	/**
 	 * simpleResultCallback
 	 * Callback for @ onSuccess of this.simpleResultQuery()
@@ -161,13 +161,13 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 		if(typeof(callback) == "function"){
 			callback(result);
 		}
-		
+
 		if(this.refresh){
 			this.reload();
 		}
-		
+
 	},
-	
+
 	/**
 	 * simpleResultRenderXML
 	 * Renders the result of this.simpleResultQuery() and returns an SimpleXMLResult object for it
@@ -179,7 +179,7 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 		return result;
 	}
 
-	
+
 });
 
 /**
@@ -195,14 +195,14 @@ var ServiceListProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.epgnownext, showFnc);
 	},
-	
+
 	/**
 	 * renderXML
 	 * See the description in AbstractContentProvider
 	 */
 	renderXML: function(xml){
 		var list = new EPGListNowNext(xml).getArray();
-		return {items : list};	
+		return {items : list};
 	}
 });
 
@@ -218,14 +218,14 @@ var SimpleServiceListProvider = Class.create(AbstractContentProvider, {
 	 */
 	initialize: function($super, showFnc){
 		$super(URL.getservices, showFnc);
-	},	
+	},
 	/**
 	 * renderXML
 	 * See the description in AbstractContentProvider
 	 */
 	renderXML: function(xml){
 		var list = new ServiceList(xml).getArray();
-		return {services : list, hash : core.getBaseHash()};	
+		return {services : list, hash : core.getBaseHash()};
 	}
 });
 
@@ -242,7 +242,7 @@ var CurrentProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.getcurrent, showFnc);
 	},
-	
+
 	/**
 	 * renderXML
 	 * See the description in AbstractContentProvider
@@ -251,8 +251,8 @@ var CurrentProvider = Class.create(AbstractContentProvider, {
 		var epg = new EPGList(xml).getArray()[0];
 		var service = new Service(xml).toJSON();
 		var volume = new Vol(xml).toJSON();
-		
-		var data = { 
+
+		var data = {
 					'current' : epg,
 					'service' : service,
 					'volume' : volume
@@ -265,10 +265,40 @@ var DeviceInfoProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.deviceinfo, showFnc);
 	},
-	
+
 	renderXML: function(xml){
 		var data = new DeviceInfo(xml);
 		return data;
+	}
+});
+
+var ExternalsProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.external, showFnc);
+	},
+
+	renderXML: function(xml){
+		var ext = new ExternalList(xml);
+		var data = {
+				'externals' : ext.getArray(),
+				'anyGui' : ext.anyGui
+			};
+		return data;
+	}
+});
+
+var MultiEpgProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.epgmulti, showFnc);
+	},
+
+	/**
+	 * renderXML
+	 * See the description in AbstractContentProvider
+	 */
+	renderXML: function(xml){
+		var list = new MultiEPGList(xml).getArray();
+		return {items : list};
 	}
 });
 
@@ -277,7 +307,7 @@ var LocationProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.getlocations, showFnc);
 	},
-	
+
 	renderXML: function(xml){
 		var data = new SimpleXMLList(xml, 'e2location');
 		return data;
@@ -288,7 +318,7 @@ var CurrentLocationProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.getcurrlocation, showFnc);
 	},
-	
+
 	renderXML: function(xml){
 		var data = new SimpleXMLList(xml, 'e2location').getList()[0];
 		return data;
@@ -334,7 +364,7 @@ var MediaPlayerProvider = Class.create(AbstractContentProvider, {
 			if(file.getNameOnly() == '') {
 				return;
 			}
-			
+
 			var isdir = true;
 
 			if (file.getIsDirectory() == "False") {
@@ -349,23 +379,23 @@ var MediaPlayerProvider = Class.create(AbstractContentProvider, {
 			});
 		});
 
-		var data = { 
+		var data = {
 			'mp' : mp,
 			'items': items
 		};
-		
+
 		return data;
-		
+
 	}
-	
-	
+
+
 });
 
 var PowerstateProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.powerstate, showFnc);
 	},
-	
+
 	renderXML: function(xml){
 		var data = new Powerstate(xml).isStandby();
 		return data;
@@ -376,7 +406,7 @@ var TagProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.gettags, showFnc);
 	},
-	
+
 	renderXML: function(xml){
 		var data = new SimpleXMLList(xml, 'e2tag');
 		return data;
@@ -399,9 +429,9 @@ var ServiceEpgListProvider = Class.create(AbstractContentProvider, {
 	 */
 	renderXML: function(xml){
 		var list = new EPGList(xml).getArray();
-		return {epg : list};	
+		return {epg : list};
 	},
-	
+
 	search: function(parms, fnc){
 		this.parms = parms;
 		if(fnc !== undefined){
@@ -420,11 +450,11 @@ var ServiceListEpgProvider = Class.create(AbstractContentProvider, {
 	//Constants
 	NOW : 'NOW',
 	NEXT : 'NEXT',
-	
+
 	/**
 	 * initialize
 	 * See the description in AbstractContentProvider
-	 */	
+	 */
 	initialize: function($super, showFnc){
 		$super(URL.epgnow, showFnc);
 		this.type = this.NOW;
@@ -438,7 +468,7 @@ var ServiceListEpgProvider = Class.create(AbstractContentProvider, {
 		var list = new EPGList(xml).getArray();
 		return list;
 	},
-	
+
 	/**
 	 * callback
 	 * custom callback
@@ -451,8 +481,8 @@ var ServiceListEpgProvider = Class.create(AbstractContentProvider, {
 		if(this.callbackType !== undefined){
 			this.get(this.callbackType);
 		}
-	},	
-	
+	},
+
 	/**
 	 * getNowNext
 	 * call this.get to show epg-now and epg-next
@@ -461,24 +491,24 @@ var ServiceListEpgProvider = Class.create(AbstractContentProvider, {
 	 */
 	getNowNext: function(parms){
 		this.parms = parms;
-		this.get(this.NOW, this.NEXT);		
+		this.get(this.NOW, this.NEXT);
 	},
-	
+
 	/**
 	 * get
-	 * Load epg information for type and - if set - callbackType 
+	 * Load epg information for type and - if set - callbackType
 	 * (ServiceListEpgProvider.NOW or ServiceListEpgProvider.NEXT)
 	 * Parameters:
 	 * @type - ServiceListEpgProvider.NOW or ServiceListEpgProvider.NEXT
 	 * @callbackType - ServiceListEpgProvider.NOW or ServiceListEpgProvider.NEXT
 	 */
-	get: function(type, callbackType){		
+	get: function(type, callbackType){
 		this.type = type;
 		//just in case... don't do it twice...
 		if(type != callbackType){
 			this.callbackType = callbackType;
 		}
-		
+
 		switch(this.type){
 			case this.NOW:
 				this.url = URL.epgnow;
@@ -487,7 +517,7 @@ var ServiceListEpgProvider = Class.create(AbstractContentProvider, {
 				this.url = URL.epgnext;
 				break;
 		}
-		
+
 		this.load(this.parms);
 	}
 });
@@ -500,7 +530,7 @@ var ServiceListSubserviceProvider = Class.create(AbstractContentProvider, {
 	/**
 	 * initialize
 	 * See the description in AbstractContentProvider
-	 */		
+	 */
 	initialize: function($super, showFnc){
 		$super(URL.subservices, showFnc);
 	},
@@ -508,7 +538,7 @@ var ServiceListSubserviceProvider = Class.create(AbstractContentProvider, {
 	/**
 	 * renderXML
 	 * See the description in AbstractContentProvider
-	 */		
+	 */
 	renderXML: function(xml){
 		var list = new ServiceList(xml).getArray();
 		return list;
@@ -525,13 +555,13 @@ var MovieListProvider = Class.create(AbstractContentProvider, {
 	 * See the description in AbstractContentProvider
 	 */
 	initialize: function($super, showFnc){
-		$super(URL.movielist, showFnc);		
+		$super(URL.movielist, showFnc);
 	},
-	
+
 	/**
 	 * renderXML
 	 * See the description in AbstractContentProvider
-	 */	
+	 */
 	renderXML: function(xml){
 		var list = new MovieList(xml).getArray();
 		return {movies : list};
@@ -542,30 +572,29 @@ var MovieListProvider = Class.create(AbstractContentProvider, {
 var ScreenshotProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.grab, showFnc);
-		this.buffer = new Image();
-		this.buffer.onload = this.callback.bind(this);
-		this.buffer.onerror = this.errorback.bind(this);
+		this.src = "";
 	},
-	
+
 	load: function(parms, fnc){
 		this.parms = parms;
 		if(fnc !== undefined){
 			this.callback = fnc;
 		}
-		this.buffer.src = this.url + '?' + $H(parms).toQueryString();
+		this.src = this.url + '?' + $H(parms).toQueryString();
+		this.callback(null);
 	},
-	
+
 	callback: function(transport){
-		var data = { img : { src : this.buffer.src } };
+		var data = { img : { src : this.src } };
 		this.show(data);
-	}	
+	}
 });
 
 var SignalProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.signal, showFnc);
 	},
-	
+
 	renderXML: function(xml){
 		var signal = new Signal(xml).toJSON();
 		return {'signal' : signal};
@@ -580,11 +609,11 @@ var TimerListProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.timerlist, showFnc);
 	},
-	
+
 	/**
 	 * renderXML
 	 * See the description in AbstractContentProvider
-	 */	
+	 */
 	renderXML: function(xml){
 		var list = new TimerList(xml).getArray();
 		return {timer : list};
@@ -606,7 +635,7 @@ var VolumeProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.volume, showFnc);
 	},
-	
+
 	/**
 	 * renderXML
 	 * See the description in AbstractContentProvider

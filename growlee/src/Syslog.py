@@ -34,6 +34,7 @@ except AttributeError:
 	reverse = lambda map: dict((v,k) for k,v in map.items())
 
 SEVERITYMAP = {
+	-1: SEVERITY['info'],
 	MessageBox.TYPE_YESNO: SEVERITY['debug'],
 	MessageBox.TYPE_INFO: SEVERITY['info'],
 	MessageBox.TYPE_WARNING: SEVERITY['warning'],

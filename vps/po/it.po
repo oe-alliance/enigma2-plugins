@@ -1,9 +1,11 @@
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - vps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-19 23:01+0100\n"
-"PO-Revision-Date: 2011-09-20 22:05+0100\n"
+"POT-Creation-Date: 2012-05-06 22:49+0100\n"
+"PO-Revision-Date: 2012-05-06 22:57+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
@@ -18,36 +20,55 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/vps\n"
 
-#: .../enigma2-plugins/vps/src_py/Modifications.py:149
-#: .../enigma2-plugins/vps/src_py/Modifications.py:152
+#: .../enigma2-plugins/vps/src_py/Modifications.py:141
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:250
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:278
+#: .../enigma2-plugins/vps/src_py/plugin.py:16
+#: .../enigma2-plugins/vps/src_py/plugin.py:17
+msgid "No"
+msgstr "No"
+
+#: .../enigma2-plugins/vps/src_py/Modifications.py:141
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:278
+#: .../enigma2-plugins/vps/src_py/plugin.py:16
+#: .../enigma2-plugins/vps/src_py/plugin.py:17
+msgid "Yes (safe mode)"
+msgstr "Sì (modalità sicura)"
+
+#: .../enigma2-plugins/vps/src_py/Modifications.py:141
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:250
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:278
+#: .../enigma2-plugins/vps/src_py/plugin.py:16
+#: .../enigma2-plugins/vps/src_py/plugin.py:17
+msgid "Yes"
+msgstr "Sì"
+
+#: .../enigma2-plugins/vps/src_py/Modifications.py:144
+#: .../enigma2-plugins/vps/src_py/Modifications.py:147
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
-#: .../enigma2-plugins/vps/src_py/Modifications.py:166
+#: .../enigma2-plugins/vps/src_py/Modifications.py:161
 msgid "Enable VPS"
 msgstr "Abilitare VPS"
 
-#: .../enigma2-plugins/vps/src_py/Modifications.py:171
-msgid "Recording controlled by channel"
-msgstr "Registrazione controllata dal canale"
-
-#: .../enigma2-plugins/vps/src_py/Modifications.py:185
+#: .../enigma2-plugins/vps/src_py/Modifications.py:177
 msgid "VPS-Time (date)"
 msgstr "VPS-Time (data)"
 
-#: .../enigma2-plugins/vps/src_py/Modifications.py:186
+#: .../enigma2-plugins/vps/src_py/Modifications.py:178
 msgid "VPS-Time (time)"
 msgstr "VPS-Time (ora)"
 
-#: .../enigma2-plugins/vps/src_py/Vps.py:421
+#: .../enigma2-plugins/vps/src_py/Vps.py:402
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "In seguito a registr. programmata: la TV è stata sintonizzata sul canale da registrare!\n"
 
-#: .../enigma2-plugins/vps/src_py/Vps_check.py:111
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:112
 msgid "VPS-Plugin checks if the channel supports VPS ..."
 msgstr "Verifica del supporto VPS sul canale in corso..."
 
-#: .../enigma2-plugins/vps/src_py/Vps_check.py:231
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:243
 msgid ""
 "The selected channel doesn't support VPS for manually programmed timers!\n"
 " Do you really want to enable VPS?"
@@ -55,7 +76,7 @@ msgstr ""
 "Il canale selezionato non supporta la funzione VPS per i timer programmati manualmente.\n"
 "Abilitare comunque la funzione VPS?"
 
-#: .../enigma2-plugins/vps/src_py/Vps_check.py:233
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:245
 msgid ""
 "The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n"
 " Do you really want to enable VPS?"
@@ -63,19 +84,11 @@ msgstr ""
 "Impossibile verificare se il canale selezionato supporti la funzione VP per i timer programmati manualmente.\n"
 "Abilitare comunque la funzione VPS?"
 
-#: .../enigma2-plugins/vps/src_py/Vps_check.py:238
-msgid "No"
-msgstr "No"
-
-#: .../enigma2-plugins/vps/src_py/Vps_check.py:238
-msgid "Yes"
-msgstr "Sì"
-
-#: .../enigma2-plugins/vps/src_py/Vps_check.py:238
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:250
 msgid "Yes, don't ask again"
 msgstr "Sì. La richiesta non verrà ripetuta."
 
-#: .../enigma2-plugins/vps/src_py/Vps_check.py:239
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:251
 msgid ""
 "VPS-Plugin couldn't check if the selected channel supports VPS.\n"
 " Do you really want to enable VPS?"
@@ -83,94 +96,111 @@ msgstr ""
 "Impossibile verificare se il canale specificato supporti la funzione VPS.\n"
 "Abilitare comunque la funzione VPS?"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:31
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:286
+msgid ""
+"The channel may support VPS\n"
+" Do you want to enable VPS?"
+msgstr ""
+"Il canale supporta VPS.\n"
+"Abilitare la funzione VPS?"
+
+#: .../enigma2-plugins/vps/src_py/Vps_check.py:288
+msgid ""
+"VPS-Plugin couldn't check if the channel supports VPS.\n"
+" Do you want to enable VPS anyway?"
+msgstr ""
+"Impossibile verificare se il canale supporti VPS.\n"
+"Abilitare comunque la funzione VPS?"
+
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:32
+#, python-format
+msgid "VPS Setup Version %s"
+msgstr "Configurazione VPS versione %s"
+
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:34
 msgid "Enable VPS-Plugin"
 msgstr "Abilitare il plugin VPS"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:32
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:35
 msgid "Starting time"
 msgstr "Ora di avvio"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:33
-msgid "Recordings can be controlled by channel"
-msgstr "Le registrazioni possono essere controllate dal canale"
-
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:34
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:36
 msgid "Wakeup from Deep-Standby is allowed"
 msgstr "Abilitare riavvio da deep standby"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:35
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:37
 msgid "Seeking connected events"
 msgstr "Ricerca eventi collegati in corso"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:36
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:38
 msgid "VPS enabled by default"
 msgstr "VPS abilitato di default"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:37
-msgid "Recordings are controlled by channel by default"
-msgstr "Le registrazioni sono controllate dal, canale per default"
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:39
+msgid "Enable VPS on instant records"
+msgstr "Abilitare VPS su registrazioni istantanee"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:52
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:53
 msgid "Cancel"
 msgstr "Annull."
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:53
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:54
 msgid "OK"
 msgstr "Ok"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:54
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:55
 msgid "Information"
 msgstr "Informazioni"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:70
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:76
 msgid "This plugin can determine whether a programme begins earlier or lasts longer. The channel has to provide reliable data."
 msgstr "Questo plugin è in grado di determinare se un programma inizi in anticipo o duri più a lungo. Il canale deve fornire informazioni attendibili."
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:72
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:78
 msgid "If possible, x minutes before a timer starts VPS-Plugin will control whether the programme begins earlier. (0 disables feature)"
 msgstr "Se possibile, VPS verificherà X minuti prima dell'avvio di un timer se il programma inizi in anticipo (0 >> disabilitare la funzione)"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:74
-msgid "If enabled, you can decide whether a timer should be controlled by channel (Running-Status). Programmed start and end time will be ignored."
-msgstr "Se abilitata, la funzione assegnerà il controllo dei timer al canale (stato attivo). Gli orari programmati precedentemente saranno ignorati."
-
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:76
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:80
 msgid "Enable VPS by default (new timers)"
 msgstr "Abilitare VP di default (su nuovi timer)"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:78
-msgid "Enable \"Recording controlled by channel\" by default (new timers)"
-msgstr "Abilitare \"Registrazione controllata dal canale\" di default (su nuovi timer)"
-
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:80
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:82
 msgid "If enabled and necessary, the plugin will wake up the Dreambox from Deep-Standby for the defined starting time to control whether the programme begins earlier."
 msgstr "Se abilitata e necessaria, la funzione riavvierà il Dreambox da deep standby all'ora prestabilita per verificare se il programma cominci in anticipo."
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:82
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:84
 msgid "If a programme is interrupted and divided into separate events, the plugin will search for the connected events."
 msgstr "Se un programma viene interrotto o diviso in eventi separati, il plugin cercherà di ricostruire gli eventi collegati."
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:103
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:86
+msgid "When yes, VPS will be enabled on instant records (stop after current event), if the channel supports VPS."
+msgstr "Se attivata, la funzione abiliterà VPS sulle registrazioni istantanee (arresto al termine dell'evento in corso), se il canale lo supporta."
+
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:107
 msgid "Really close without saving settings?"
 msgstr "Chiudere senza salvare le modifiche?"
 
-#: .../enigma2-plugins/vps/src_py/Vps_setup.py:124
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:129
+msgid "VPS-Plugin Information"
+msgstr "Plugin VPS: informazioni"
+
+#: .../enigma2-plugins/vps/src_py/Vps_setup.py:131
 msgid ""
-"The VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n"
+"VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n"
 "\n"
-"If you enable VPS, the recording is definitely starting at the latest at the startTime. The recording may start earlier or lasts longer.\n"
+"If you enable VPS, the recording will only start, when the channel flags the programme as running.\n"
 "\n"
-"If you also enable \"Recording controlled by channel\", the recording will only start, when the channel flags the programme as running.\n"
+"If you select \"yes (safe mode)\", the recording is definitely starting at the latest at the startTime you defined. The recording may start earlier or last longer.\n"
 "\n"
 "\n"
 "Supported channels\n"
 "\n"
 "Germany:\n"
-" ARD, ZDF, Sky and DMAX\n"
+" ARD and ZDF\n"
 "\n"
 "Austria:\n"
-" ORF and Servus TV\n"
+" ORF\n"
 "\n"
 "Switzerland:\n"
 " SF\n"
@@ -180,20 +210,21 @@ msgid ""
 "\n"
 "If a timer is programmed manually (not via EPG), it is necessary to set a VPS-Time to enable VPS. VPS-Time (also known as PDC) is the first published start time, e.g. given in magazines. If you set a VPS-Time, you have to leave timer name empty."
 msgstr ""
-"Il plugin VPS è in grado di ovviare agli errori causati dal mancato rispetto degli orari di inizio e fine di un programma. Solo alcuni canali supportano questa funzione.\n"
+"Il plugin VPS è in grado di ovviare al mancato rispetto degli orari di inizio e fine di un programma. Tuttavia, solo alcuni canali supportano questa funzione.\n"
 "\n"
-"Abilitando VPS, una registrazione si avvierà al più tardi all'orario programmato, ma saranno evitati errori nel caso di avvio anticipato o durata superiore al previsto.\n"
+"Abilitando VPS, una registrazione programmata verrà avviata solo quando il canale segnalerà il programma come iniziato .\n"
 "\n"
-"Abilitando anche \"Registrazione controllata dal canale\", le registrazioni si avvieranno solo quando il canale invierà la conferma dell'inizio del programma.\n"
+"Abilitando l'opzione \"Sì (modalità sicura)\", le registrazioni si avvieranno comunque all'ora di inizio programmata (anche se il programma non fosse ancora iniziato)\n"
+"Tale registrazione però potrebbe avviarsi in anticipo o durare più a lungo..\n"
 "\n"
 "\n"
 "Canali supportati:\n"
 "\n"
 "Germania:\n"
-"ARD, ZDF, Sky e DMAX\n"
+"ARD, ZDF\n"
 "\n"
 "Austria:\n"
-" ORF e Servus TV\n"
+" ORF\n"
 "\n"
 "Svizzera:\n"
 " SF\n"
@@ -201,5 +232,14 @@ msgstr ""
 "Repubblica Ceca:\n"
 " CT\n"
 "\n"
-"Se un timer viene programmato manualmente (non tramite EPG) è necessario configurare un VPS-Time per abiliatare VPS. VPS-Time (noto anche come PDC) consiste in un orario di avvio pubblicato (ad es. da una rivista). Configurando un VPS-Time, il nome del timer non va inserito."
+"Se un timer viene programmato manualmente (non tramite EPG) sarà necessario configurare un VPS-Time per abiliatare VPS. VPS-Time (noto anche come PDC) consiste in un orario di avvio pubblicato (ad es. da una rivista). Configurando un VPS-Time, il nome del timer non andrà inserito."
+
+#: .../enigma2-plugins/vps/src_py/plugin.py:17
+msgid "always ask"
+msgstr "Chiedere sempre"
+
+#: .../enigma2-plugins/vps/src_py/plugin.py:63
+#: .../enigma2-plugins/vps/src_py/plugin.py:83
+msgid "VPS Settings"
+msgstr "Configurazione VPS"
 

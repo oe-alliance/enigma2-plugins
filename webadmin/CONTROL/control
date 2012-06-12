@@ -1,0 +1,2 @@
+Description: Extension for enigma2 webinterface to install Ipkgs telnet client
+Depends: enigma2-plugin-extensions-webinterface

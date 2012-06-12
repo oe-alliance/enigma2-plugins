@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-15 16:20+0100\n"
-"PO-Revision-Date: 2011-01-15 16:21+0100\n"
+"POT-Creation-Date: 2012-03-18 15:13+0100\n"
+"PO-Revision-Date: 2012-02-03 12:59+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: \n"
@@ -61,6 +61,10 @@ msgstr "Anrufanzeige"
 
 msgid "Call redirection"
 msgstr "Rufumleitung"
+
+#, python-format
+msgid "Calling %s"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -245,6 +249,9 @@ msgstr "FRITZ!Box FON Adresse (Name oder IP-Adresse)"
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Fon Status"
 
+msgid "FRITZ!Box not available for calling"
+msgstr ""
+
 msgid "Filter also list of calls"
 msgstr "Filter auch auf Anrufliste anwenden"
 
@@ -284,6 +291,9 @@ msgstr "Hole Status von der FRITZ!Box..."
 
 msgid "IP Address:"
 msgstr "IP Adresse:"
+
+msgid "Ignore callers with no phone number"
+msgstr "Ignoriere Anrufe ohne Rufnummer"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Incoming"
@@ -346,6 +356,9 @@ msgstr "Netzwerk"
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
 msgstr "Neu"
+
+msgid "New call"
+msgstr "Neuer Anruf"
 
 msgid "No DECT phone registered"
 msgstr "Kein Schnurlostelefon angemeldet"
@@ -439,6 +452,9 @@ msgstr "Telefonbuch der FRITZ!Box auslesen"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Refresh status"
 msgstr "Status neu holen"
+
+msgid "Reload interval for phonebooks (hours)"
+msgstr "Lade Telefonbücher neu nach soviel Stunden"
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text

@@ -157,7 +157,7 @@ class TextToURL(Converter):
 
 #===============================================================================
 # ReturnEmptyXML
-# 
+#
 # Returns a XML only consisting of <rootElement />
 #===============================================================================
 class ReturnEmptyXML(Converter):
@@ -193,8 +193,8 @@ class JavascriptUpdate(Converter):
 class SimpleListFiller(Converter):
 	def getText(self):
 		l = self.source.simplelist
-		conv_args = self.converter_arguments		
-		
+		conv_args = self.converter_arguments
+
 		list = [ ]
 		append = list.append
 		for element in conv_args:
@@ -206,7 +206,7 @@ class SimpleListFiller(Converter):
 				append(element.macrodict[element.macroname], None)
 			else:
 				raise Exception("neither string, ListItem nor ListMacroItem")
-			
+
 		strlist = [ ]
 		append = strlist.append
 		for item in l:
@@ -219,30 +219,14 @@ class SimpleListFiller(Converter):
 			for (element, filternum) in list:
 				if not filternum:
 					append(element)
-				elif filternum == 2:
-					append(item.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
-				elif filternum == 3:					
-					append(escape_xml(item))
-				elif filternum == 4:
-					append(item.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
-				elif filternum == 5:
-					append(quote(item))
-				elif filternum == 6:
-					from time import localtime
-					time = int(item) or 0
-					t = localtime(time)
-					append("%02d:%02d" % (t.tm_hour, t.tm_min))
-				elif filternum == 7:
-					time = int(item) or 0
-					append("%d min" % (time / 60))
+					continue
 				else:
-					append(item)
-		# (this will be done in c++ later!)
+					appendListItem(item, filternum, append)
 
-		return ''.join(strlist)		
-	
+		return ''.join(strlist)
+
 	text = property(getText)
-			
+
 #===============================================================================
 # the performant 'listfiller'-engine (plfe)
 #===============================================================================
@@ -270,7 +254,7 @@ class ListFiller(Converter):
 		strlist = [ ]
 		append = strlist.append
 		for item in l:
-			for (element, filternum) in lutlist:			
+			for (element, filternum) in lutlist:
 				#None becomes ""
 				curitem = ""
 				if not filternum:
@@ -278,32 +262,57 @@ class ListFiller(Converter):
 						element = ""
 					append(element)
 					continue
-				#filter out "non-displayable" Characters - at the very end, do it the hard way...
-				curitem = str(item[element])#.replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
-
-				if filternum == 2:
-					append(curitem.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
-				elif filternum == 3:
-					append( escape_xml( curitem ))
-				elif filternum == 4:
-					append(curitem.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
-				elif filternum == 5:
-					append(quote(curitem))
-				elif filternum == 6:
-					from time import localtime
-					time = int(curitem) or 0
-					t = localtime(time)
-					append("%02d:%02d" % (t.tm_hour, t.tm_min))
-				elif filternum == 7:
-					time = int(curitem) or 0
-					append("%d min" % (time / 60))					
 				else:
-					append(curitem)
-		# (this will be done in c++ later!)
+					curitem = str(item[element])
+					appendListItem(curitem, filternum, append)
 
 		return ''.join(strlist)
 
 	text = property(getText)
+
+def appendListItem(item, filternum, append):
+	if filternum == 2:
+		append(item.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
+	elif filternum == 3:
+		append( escape_xml( item ))
+	elif filternum == 4:
+		append(item.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
+	elif filternum == 5:
+		append(quote(item))
+	elif filternum == 6:
+		from time import localtime
+		time = 0
+		try:
+			time = int(item)
+			t = localtime(time)
+			append("%04d-%02d-%02d" % (t.tm_year, t.tm_mon, t.tm_mday))
+		except:
+			append("---")
+	elif filternum == 7:
+		from time import localtime
+		time = 0
+		try:
+			time = int(item)
+			t = localtime(time)
+			append("%02d:%02d" % (t.tm_hour, t.tm_min))
+		except:
+			append("--:--")
+	elif filternum == 8:
+		time = 0
+		try:
+			time = int(item)
+			append("%d min" % (time / 60))
+		except:
+			append("-- min")
+	elif filternum == 9:
+		append(quote(item).replace("\"", "%22"))
+	elif filternum == 10:
+		if item == "None":
+			append("n/a")
+		else:
+			append(item.replace("\n", "<br />"))
+	else:
+		append(item)
 
 #===============================================================================
 # webifHandler
@@ -323,7 +332,6 @@ class webifHandler(ContentHandler):
 
 	def start_element(self, attrs):
 		scr = self.screen
-
 		wsource = attrs["source"]
 
 		path = wsource.split('.')
@@ -393,7 +401,7 @@ class webifHandler(ContentHandler):
 
 	def parse_item(self, attrs):
 		if "name" in attrs:
-			filter = {"": 1, "javascript_escape": 2, "xml": 3, "uri": 4, "urlencode": 5, "time": 6, "minutes": 7}[attrs.get("filter", "")]
+			filter = {"": 1, "javascript_escape": 2, "xml": 3, "uri": 4, "urlencode": 5, "date": 6, "time": 7, "minutes": 8, "uriAttribute": 9, "html": 10}[attrs.get("filter", "")]
 			self.sub.append(ListItem(attrs["name"], filter))
 		else:
 			assert "macro" in attrs, "e2:item must have a name= or macro= attribute!"
@@ -518,16 +526,16 @@ def renderPage(request, path, session):
 	# but instead do that when the client disconnects.
 	if finish:
 		requestFinish(handler, request)
-	
-	else:	
+
+	else:
 		def requestFinishDeferred(nothing, handler, request):
 			from twisted.internet import reactor
-			reactor.callLater(0, requestFinish, handler, request)				
-		
+			reactor.callLater(0, requestFinish, handler, request)
+
 		d = request.notifyFinish()
 
 		d.addBoth( requestFinishDeferred, handler, request )
-							
+
 #===============================================================================
 # requestFinish
 #
@@ -535,12 +543,12 @@ def renderPage(request, path, session):
 #===============================================================================
 def requestFinish(handler, request):
 	handler.cleanup()
-	request.finish()	
-	
+	request.finish()
+
 	del handler
 
 def validate_certificate(cert, key):
-	buf = decrypt_block(cert[8:], key) 
+	buf = decrypt_block(cert[8:], key)
 	if buf is None:
 		return None
 	return buf[36:107] + cert[139:196]
@@ -551,7 +559,7 @@ def get_random():
 		random = urandom(8)
 		x = str(time())[-8:]
 		result = xor(random, x)
-				
+
 		return result
 	except:
 		return None

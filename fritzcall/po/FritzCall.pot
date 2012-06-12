@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-15 16:20+0100\n"
+"POT-Creation-Date: 2012-03-18 15:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,6 +61,10 @@ msgid "Call monitoring"
 msgstr ""
 
 msgid "Call redirection"
+msgstr ""
+
+#, python-format
+msgid "Calling %s"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -231,6 +235,9 @@ msgstr ""
 msgid "FRITZ!Box Fon Status"
 msgstr ""
 
+msgid "FRITZ!Box not available for calling"
+msgstr ""
+
 msgid "Filter also list of calls"
 msgstr ""
 
@@ -263,6 +270,9 @@ msgid "Getting status from FRITZ!Box Fon..."
 msgstr ""
 
 msgid "IP Address:"
+msgstr ""
+
+msgid "Ignore callers with no phone number"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -319,6 +329,9 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
+msgstr ""
+
+msgid "New call"
 msgstr ""
 
 msgid "No DECT phone registered"
@@ -406,6 +419,9 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Refresh status"
+msgstr ""
+
+msgid "Reload interval for phonebooks (hours)"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button

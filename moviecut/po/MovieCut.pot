@@ -1,0 +1,178 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MovieCut\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-15 16:04+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/plugin.py:23
+msgid "Execute cuts..."
+msgstr ""
+
+#: ../src/plugin.py:37
+msgid "Don't cut"
+msgstr ""
+
+#: ../src/plugin.py:38
+msgid "Replace the original movie with the cut movie"
+msgstr ""
+
+#: ../src/plugin.py:39
+msgid "Place the cut movie in a new file ending with \" cut\""
+msgstr ""
+
+#: ../src/plugin.py:40
+msgid "Advanced cut specification..."
+msgstr ""
+
+#: ../src/plugin.py:42
+#, python-format
+msgid "How would you like to cut \"%s\"?"
+msgstr ""
+
+#: ../src/plugin.py:86
+msgid "OK"
+msgstr ""
+
+#: ../src/plugin.py:87
+msgid "Cancel"
+msgstr ""
+
+#: ../src/plugin.py:95
+msgid "No"
+msgstr ""
+
+#: ../src/plugin.py:95
+msgid "Yes"
+msgstr ""
+
+#: ../src/plugin.py:103
+msgid "Cutlist"
+msgstr ""
+
+#: ../src/plugin.py:103
+msgid "Manual specification"
+msgstr ""
+
+#: ../src/plugin.py:117
+msgid "Replace original:"
+msgstr ""
+
+#: ../src/plugin.py:118
+msgid "New filename:"
+msgstr ""
+
+#: ../src/plugin.py:119
+msgid "New title:"
+msgstr ""
+
+#: ../src/plugin.py:120
+msgid "New description:"
+msgstr ""
+
+#: ../src/plugin.py:121
+msgid "New location:"
+msgstr ""
+
+#: ../src/plugin.py:122
+msgid "Cut source:"
+msgstr ""
+
+#: ../src/plugin.py:123
+msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
+msgstr ""
+
+#: ../src/plugin.py:130
+msgid "Cut Parameter Input"
+msgstr ""
+
+#: ../src/plugin.py:178
+msgid "Choose target folder"
+msgstr ""
+
+#: ../src/plugin.py:245
+#, python-format
+msgid "The movie \"%s\" is successfully cut"
+msgstr ""
+
+#: ../src/plugin.py:246
+#: ../src/plugin.py:247
+#: ../src/plugin.py:248
+#: ../src/plugin.py:249
+#: ../src/plugin.py:250
+#: ../src/plugin.py:251
+#: ../src/plugin.py:252
+#: ../src/plugin.py:253
+#: ../src/plugin.py:254
+#: ../src/plugin.py:255
+#, python-format
+msgid "Cutting failed for movie \"%s\""
+msgstr ""
+
+#: ../src/plugin.py:246
+msgid "Bad arguments"
+msgstr ""
+
+#: ../src/plugin.py:247
+msgid "Couldn't open input .ts file"
+msgstr ""
+
+#: ../src/plugin.py:248
+msgid "Couldn't open input .cuts file"
+msgstr ""
+
+#: ../src/plugin.py:249
+msgid "Couldn't open input .ap file"
+msgstr ""
+
+#: ../src/plugin.py:250
+msgid "Couldn't open output .ts file"
+msgstr ""
+
+#: ../src/plugin.py:251
+msgid "Couldn't open output .cuts file"
+msgstr ""
+
+#: ../src/plugin.py:252
+msgid "Couldn't open output .ap file"
+msgstr ""
+
+#: ../src/plugin.py:253
+msgid "Empty .ap file"
+msgstr ""
+
+#: ../src/plugin.py:254
+msgid "No cuts specified"
+msgstr ""
+
+#: ../src/plugin.py:255
+msgid "Read/write error (disk full?)"
+msgstr ""
+
+#: ../src/plugin.py:256
+#, python-format
+msgid "Cutting was aborted for movie \"%s\""
+msgstr ""
+
+#: ../src/plugin.py:275
+#, python-format
+msgid "The movie \"%s\" is cut in the background."
+msgstr ""
+
+#: ../src/plugin.py:277
+#, python-format
+msgid ""
+"Another movie is currently cut.\n"
+"The movie \"%s\" will be cut in the background after it."
+msgstr ""

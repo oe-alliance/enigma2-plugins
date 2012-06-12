@@ -9,7 +9,7 @@ merlinmp3player_la_SOURCES = \
 	merlinmp3player.h
 
 merlinmp3player_la_LDFLAGS = \
-	-avoid-version -module
+	$(PLUGIN_LIBTOOL_FLAGS)
 
 merlinmp3player_la_LIBADD = \
 	@GSTREAMER_LIBS@

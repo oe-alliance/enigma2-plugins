@@ -1,0 +1,65 @@
+#navMemory {
+	width: 100%;
+	height: 61px;
+	background: #FFF;
+	margin-top: 8px;
+	border: 2px solid #000;
+	position: relative;
+}
+
+#memHd {
+	background: #000;
+	text-align: center;
+	width: 153px
+}
+
+.sPkgInstallSLink {
+	display: inline-block;
+	margin-right: 5px;
+	color: #485052
+}
+
+.sPkgInstallSLink:hover {
+	display: inline-block;
+	background-color: #CCC;
+	color: #485052
+}
+
+.sPkgRemoveSLink:hover {
+	display: inline-block;
+	background-color: #CCC;
+	color: #485052
+}
+
+.sPkgRemoveSLink {
+	display: inline-block;
+	margin-right: 5px;
+	color: #485052
+}
+
+.trExtPkgConf {
+	color: #485052
+}
+
+.sPkgConfsLinkExt {
+	display: inline-block;
+	color: #485052;
+}
+
+.sPkgConfBulletToggle {
+	vertical-align: middle
+}
+
+.sPkgConfItem {
+	font-size: 12px
+}
+
+.PkgNavSeperator {
+	color: #fff;
+	background: #AAA;
+	border: 0px;
+	height: 1px;
+	margin: 1px 0px;
+	padding: 0;
+	width: 100%;
+}

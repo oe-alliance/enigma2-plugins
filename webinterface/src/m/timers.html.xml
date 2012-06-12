@@ -1,0 +1,77 @@
+<e2:screen name="TimerWebScreen">&lt;!DOCTYPE html><html>
+<head>
+	<title>Timer</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+	<link rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
+	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.0.min.css" />
+
+	<script src="/web-data/lib/jquery-1.7.1.min.js" />
+	<script language="javascript" type="text/javascript">
+		$(document).bind("mobileinit", function(){
+			$.extend(  $.mobile , {
+				defaultPageTransition: 'none',
+				defaultDialogTransition: 'none'
+			});
+		});
+	</script>
+	<script src="/web-data/m/script/jquery.mobile-1.1.0.min.js" />
+</head>
+<body>
+
+<div data-role="page" id="main" data-title="Timer" data-theme="a">
+	<div data-role="header">
+		<h1>Timer</h1>
+		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home" data-ajax="false">Home</a>
+	</div><!-- /header -->
+	<div data-role="content">
+		<ul data-role="listview" data-split-icon="forward" data-split-theme="a">
+			<e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
+			&lt;li data-icon="">
+				&lt;a href="#">
+					&lt;h3><e2:item name="Name" filter="html"/> (<e2:item name="Duration" filter="minutes"/>)&lt;/h3>
+					&lt;h4><e2:item name="ServiceName" filter="html"/>&lt;/h4>
+					&lt;p><e2:item name="TimeBegin" filter="date"/> <e2:item name="TimeBegin" filter="time"/>&lt;br /><e2:item name="TimeEnd" filter="date"/> <e2:item name="TimeEnd" filter="time"/>&lt;/p>
+				&lt;/a>
+			&lt;/li>
+			</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+<!--
+	&lt;e2timer>
+		&lt;e2servicereference><e2:item name="ServiceReference" />&lt;/e2servicereference>
+		&lt;e2servicename><e2:item name="ServiceName" filter="xml"/>&lt;/e2servicename>
+		&lt;e2eit><e2:item name="EIT" />&lt;/e2eit>
+		&lt;e2name><e2:item name="Name" filter="xml"/>&lt;/e2name>
+		&lt;e2description><e2:item name="Description" filter="xml"/>&lt;/e2description>
+		&lt;e2descriptionextended><e2:item name="DescriptionExtended" filter="xml"/>&lt;/e2descriptionextended>
+		&lt;e2disabled><e2:item name="Disabled" />&lt;/e2disabled>
+		&lt;e2timebegin><e2:item name="TimeBegin" />&lt;/e2timebegin>
+		&lt;e2timeend><e2:item name="TimeEnd" />&lt;/e2timeend>
+		&lt;e2duration><e2:item name="Duration" />&lt;/e2duration>
+		&lt;e2startprepare><e2:item name="startPrepare" />&lt;/e2startprepare>
+		&lt;e2justplay><e2:item name="justPlay" />&lt;/e2justplay>
+		&lt;e2afterevent><e2:item name="afterEvent" />&lt;/e2afterevent>
+		&lt;e2location><e2:item name="Location" filter="xml"/>&lt;/e2location>
+		&lt;e2tags><e2:item name="Tags" filter="xml"/>&lt;/e2tags>
+		&lt;e2logentries><e2:item name="LogEntries" filter="xml"/>&lt;/e2logentries>
+		&lt;e2filename><e2:item name="Filename" filter="xml"/>&lt;/e2filename>
+		&lt;e2backoff><e2:item name="Backoff" />&lt;/e2backoff>
+		&lt;e2nextactivation><e2:item name="nextActivation" />&lt;/e2nextactivation>
+		&lt;e2firsttryprepare><e2:item name="firstTryPrepare" />&lt;/e2firsttryprepare>
+		&lt;e2state><e2:item name="State" />&lt;/e2state>
+		&lt;e2repeated><e2:item name="Repeated" />&lt;/e2repeated>
+		&lt;e2dontsave><e2:item name="dontSave" />&lt;/e2dontsave>
+		&lt;e2cancled><e2:item name="Cancled" />&lt;/e2cancled>
+		&lt;e2toggledisabled><e2:item name="toggleDisabled" />&lt;/e2toggledisabled>
+		&lt;e2toggledisabledimg><e2:item name="toggleDisabledIMG" />&lt;/e2toggledisabledimg>
+	&lt;/e2timer>
+-->
+		</ul>
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div><!-- /main -->
+</body>
+</html>
+</e2:screen>

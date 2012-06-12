@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-15 16:20+0100\n"
+"POT-Creation-Date: 2012-03-18 15:13+0100\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -64,6 +64,10 @@ msgstr "Kontrola poziva"
 
 msgid "Call redirection"
 msgstr "Preusmerenje poziva"
+
+#, python-format
+msgid "Calling %s"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -244,6 +248,9 @@ msgstr "FRITZ!Box FON Adresse (Name oder IP-Adresse)"
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Stanje telefona"
 
+msgid "FRITZ!Box not available for calling"
+msgstr ""
+
 msgid "Filter also list of calls"
 msgstr ""
 
@@ -277,6 +284,9 @@ msgstr "Dobijanje stanja FRITZ!Box telefona..."
 
 msgid "IP Address:"
 msgstr "IP Adresa:"
+
+msgid "Ignore callers with no phone number"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Incoming"
@@ -333,6 +343,9 @@ msgstr ""
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
 msgstr "Neu"
+
+msgid "New call"
+msgstr ""
 
 msgid "No DECT phone registered"
 msgstr "Nijedan DECT tel. nije registrovan "
@@ -420,6 +433,9 @@ msgstr "Pročitaj tel. imenik iz FRITZ!Box-a"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Refresh status"
 msgstr "Stanje osvežavanja"
+
+msgid "Reload interval for phonebooks (hours)"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text

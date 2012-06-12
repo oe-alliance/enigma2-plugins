@@ -11,6 +11,8 @@ from Tools import Notifications
 # Config
 from Components.config import config
 
+from . import _, NOTIFICATIONID
+
 class PipAdapter:
 	backgroundCapable = False
 	def __init__(self, session, hide=True):
@@ -27,7 +29,7 @@ class PipAdapter:
 			return False
 
 		if config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddNotification(MessageBox, _("EPG refresh started in background.") + "\n" + _("Please don't use PiP meanwhile!"), type=MessageBox.TYPE_INFO, timeout=4)
+			Notifications.AddPopup(_("EPG refresh started in background.") + "\n" + _("Please don't use PiP meanwhile!"), MessageBox.TYPE_INFO, 4, NOTIFICATIONID)
 		if self.session.pipshown:
 			# Hijack PiP
 			self.wasShown = True
@@ -74,7 +76,7 @@ class PipAdapter:
 		if not self.pipAvail: return
 
 		if config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddNotification(MessageBox, _("EPG refresh finished. PiP available now."), type=MessageBox.TYPE_INFO, timeout=4)
+			Notifications.AddPopup(_("EPG refresh finished.") + "\n" + _("PiP available now."), MessageBox.TYPE_INFO, 4, NOTIFICATIONID)
 
 		# remove pip preemptively
 		try: del self.session.pip

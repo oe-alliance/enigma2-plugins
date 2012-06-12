@@ -1,13 +1,14 @@
 #####################################################
 # Permanent Timeshift Plugin for Enigma2 Dreamboxes
-# Coded by Homey (c) 2011
+# Coded by Homey (c) 2012
 #
-# Version: 1.1
+# Version: 1.2
 # Support: www.dreambox-plugins.de
 #####################################################
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigInteger, ConfigSelection, NoSave
+from Components.Harddisk import harddiskmanager
 from Components.Label import Label
 from Components.Language import language
 from Components.Pixmap import Pixmap
@@ -33,7 +34,7 @@ from RecordTimer import RecordTimer, RecordTimerEntry, parseEvent
 
 from random import randint
 from enigma import eTimer, eServiceCenter, eBackgroundFileEraser, iPlayableService, iRecordableService, iServiceInformation
-from os import environ, stat as os_stat, listdir as os_listdir, link as os_link, path as os_path, remove as os_remove, system as os_system, statvfs
+from os import environ, stat as os_stat, listdir as os_listdir, link as os_link, path as os_path, system as os_system, statvfs
 from time import localtime, time, gmtime, strftime
 from timer import TimerEntry
 
@@ -65,6 +66,7 @@ language.addCallback(localeInit)
 #####  CONFIG SETTINGS   #####
 ##############################
 
+VERSION = "1.2"
 config.plugins.pts = ConfigSubsection()
 config.plugins.pts.enabled = ConfigYesNo(default = True)
 config.plugins.pts.maxevents = ConfigInteger(default=5, limits=(1, 99))
@@ -87,12 +89,12 @@ class PTSTimeshiftState(Screen):
 			<widget source="session.CurrentService" render="Label" position="95,5" size="120,27" font="Regular;20" halign="left" foregroundColor="white" backgroundColor="transpBlack">
 				<convert type="ServicePosition">Position</convert>
 			</widget>
-			<widget source="session.CurrentService" render="Label" position="340,5" size="65,27" font="Regular;20" halign="left" foregroundColor="white" backgroundColor="transpBlack">
+			<widget source="session.CurrentService" render="Label" position="335,5" size="70,27" font="Regular;20" halign="left" foregroundColor="white" backgroundColor="transpBlack">
 				<convert type="ServicePosition">Length</convert>
 			</widget>
 			<widget name="PTSSeekPointer" position="8,30" zPosition="3" size="19,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentTimeshift/images/timeline-now.png" alphatest="on" />
 			<ePixmap position="10,33" size="840,15" zPosition="1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentTimeshift/images/slider_back.png" alphatest="on"/>
-			   <widget source="session.CurrentService" render="Progress" position="10,33" size="390,15" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentTimeshift/images/slider.png" transparent="1">
+				<widget source="session.CurrentService" render="Progress" position="10,33" size="390,15" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentTimeshift/images/slider.png" transparent="1">
 				<convert type="ServicePosition">Position</convert>
 			</widget>
 			<widget name="eventname" position="10,49" zPosition="4" size="420,20" font="Regular;18" halign="center" backgroundColor="transpBlack" />
@@ -410,20 +412,6 @@ class InfoBar(InfoBarOrg):
 			self.pts_currplaying = self.pts_eventcount
 			self.ptsSetNextPlaybackFile("pts_livebuffer.%s" % (self.pts_eventcount))
 
-	def eraseFile(self, filePath):
-		# We only want to use E2 Background Eraser if file has no other links on it.
-		# Early Enigma2 3.20 Releases had a bug that also affected the hardlinked files.
-		if fileExists(filePath):
-			if os_stat(filePath).st_nlink != 1:
-				os_remove(filePath)
-			else:
-				self.BgFileEraser.erase(filePath)
-
-	def eraseTimeshiftFile(self):
-		for filename in os_listdir(config.usage.timeshift_path.value):
-			if filename.startswith("timeshift.") and not filename.endswith(".del") and not filename.endswith(".copy"):
-				self.eraseFile("%s/%s" % (config.usage.timeshift_path.value,filename))
-
 	def activatePermanentTimeshift(self):
 		if self.ptsCheckTimeshiftPath() is False or self.session.screen["Standby"].boolean is True or self.ptsLiveTVStatus() is False or (config.plugins.pts.stopwhilerecording.value and self.pts_record_running):
 			return
@@ -490,6 +478,9 @@ class InfoBar(InfoBarOrg):
 			if self.isSeekable():
 				self.pts_switchtolive = True
 				self.ptsSetNextPlaybackFile("")
+				#IF NEW OE 2.0:
+				#self.doSeekRelative(3600 * 24 * 60 * 90000)
+				#ELSE:
 				self.setSeekState(self.SEEK_STATE_PAUSE)
 				if self.seekstate != self.SEEK_STATE_PLAY:
 					self.setSeekState(self.SEEK_STATE_PLAY)
@@ -507,9 +498,6 @@ class InfoBar(InfoBarOrg):
 		ts = self.getTimeshift()
 		if ts is None:
 			return
-
-		# Get rid of old timeshift file before E2 truncates its filesize
-		self.eraseTimeshiftFile()
 
 		# Stop Timeshift now
 		try:
@@ -605,10 +593,10 @@ class InfoBar(InfoBarOrg):
 			config.plugins.pts.isRecording.value = False
 			self.save_current_timeshift = False
 
-		# Get rid of old timeshift file before E2 truncates its filesize
-		if self.save_timeshift_postaction is not None:
-			self.eraseTimeshiftFile()
-
+		# Workaround: Show Dummy Popup for a second to prevent StandBy Bug
+		if action is None and postaction == "standby" and (config.plugins.pts.favoriteSaveAction.value == "savetimeshift" or config.plugins.pts.favoriteSaveAction.value == "savetimeshiftandrecord"):
+			self.session.open(MessageBox, _("Saving timeshift as movie now. This might take a while!"), MessageBox.TYPE_INFO, timeout=1)
+			
 		# Post PTS Actions like ZAP or whatever the user requested
 		if self.save_timeshift_postaction == "zapUp":
 			InfoBarChannelSelection.zapUp(self)
@@ -638,7 +626,7 @@ class InfoBar(InfoBarOrg):
 
 		if savefilename is None:
 			for filename in os_listdir(config.usage.timeshift_path.value):
-				if filename.startswith("timeshift.") and not filename.endswith(".del") and not filename.endswith(".copy"):
+				if filename.startswith("timeshift.") and not filename.endswith(".del") and not filename.endswith(".copy") and not filename.endswith(".sc"):
 					try:
 						statinfo = os_stat("%s/%s" % (config.usage.timeshift_path.value,filename))
 						if statinfo.st_mtime > (time()-5.0):
@@ -808,7 +796,7 @@ class InfoBar(InfoBarOrg):
 					# if no write for 5 sec = stranded timeshift
 					if statinfo.st_mtime < (time()-5.0):
 						print "PTS-Plugin: Erasing stranded timeshift %s" % filename
-						self.eraseFile("%s/%s" % (config.usage.timeshift_path.value,filename))
+						self.BgFileEraser.erase("%s/%s" % (config.usage.timeshift_path.value,filename))
 
 						# Delete Meta and EIT File too
 						if filename.startswith("pts_livebuffer.") is True:
@@ -865,12 +853,12 @@ class InfoBar(InfoBarOrg):
 
 	def ptsCreateHardlink(self):
 		for filename in os_listdir(config.usage.timeshift_path.value):
-			if filename.startswith("timeshift.") and not filename.endswith(".del") and not filename.endswith(".copy"):
+			if filename.startswith("timeshift.") and not filename.endswith(".del") and not filename.endswith(".copy") and not filename.endswith(".sc"):
 				try:
 					statinfo = os_stat("%s/%s" % (config.usage.timeshift_path.value,filename))
 					if statinfo.st_mtime > (time()-5.0):
 						try:
-							self.eraseFile("%s/pts_livebuffer.%s" % (config.usage.timeshift_path.value,self.pts_eventcount))
+							self.BgFileEraser.erase("%s/pts_livebuffer.%s" % (config.usage.timeshift_path.value,self.pts_eventcount))
 							self.BgFileEraser.erase("%s/pts_livebuffer.%s.meta" % (config.usage.timeshift_path.value,self.pts_eventcount))
 						except Exception, errormsg:
 							print "PTS Plugin: %s" % (errormsg)
@@ -1006,7 +994,7 @@ class InfoBar(InfoBarOrg):
 	def ptsCopyFilefinished(self, srcfile, destfile):
 		# Erase Source File
 		if fileExists(srcfile):
-			self.eraseFile(srcfile)
+			self.BgFileEraser.erase(srcfile)
 
 		# Restart Merge Timer
 		if self.pts_mergeRecords_timer.isActive():
@@ -1023,7 +1011,7 @@ class InfoBar(InfoBarOrg):
 			os_system("echo \"\" > \"%s.pts.del\"" % (srcfile[0:-3]))
 		else:
 			# Delete Instant Record permanently now ... R.I.P.
-			self.eraseFile("%s" % (srcfile))
+			self.BgFileEraser.erase("%s" % (srcfile))
 			self.BgFileEraser.erase("%s.ap" % (srcfile))
 			self.BgFileEraser.erase("%s.sc" % (srcfile))
 			self.BgFileEraser.erase("%s.meta" % (srcfile))
@@ -1059,7 +1047,7 @@ class InfoBar(InfoBarOrg):
 		for filename in filelist:
 			if filename.endswith(".pts.del"):
 				srcfile = config.usage.default_path.value + "/" + filename[0:-8] + ".ts"
-				self.eraseFile("%s" % (srcfile))
+				self.BgFileEraser.erase("%s" % (srcfile))
 				self.BgFileEraser.erase("%s.ap" % (srcfile))
 				self.BgFileEraser.erase("%s.sc" % (srcfile))
 				self.BgFileEraser.erase("%s.meta" % (srcfile))
@@ -1567,7 +1555,7 @@ RecordTimer.getNextRecordingTime = getNextRecordingTime
 #InfoBarTimeshiftState Hack#
 ############################
 def _mayShow(self):
-	if self.execing and self.timeshift_enabled and self.isSeekable():
+	if InfoBar and InfoBar.instance and self.execing and self.timeshift_enabled and self.isSeekable():
 		InfoBar.ptsSeekPointerSetCurrentPos(self)
 		self.pvrStateDialog.show()
 
@@ -1610,11 +1598,26 @@ def instantRecord(self):
 	dir = preferredInstantRecordPath()
 	if not dir or not fileExists(dir, 'w'):
 		dir = defaultMoviePath()
-	try:
-		stat = os_stat(dir)
-	except:
-		self.session.open(MessageBox, _("No HDD found or HDD not initialized!"), MessageBox.TYPE_ERROR)
-		return
+		
+	if not harddiskmanager.inside_mountpoint(dir):
+		if harddiskmanager.HDDCount() and not harddiskmanager.HDDEnabledCount():
+			self.session.open(MessageBox, _("Unconfigured storage devices found!") + "\n" \
+				+ _("Please make sure to set up your storage devices with the storage management in menu -> setup -> system -> storage devices."), MessageBox.TYPE_ERROR)
+			return
+		elif harddiskmanager.HDDEnabledCount() and defaultStorageDevice() == "<undefined>":
+			self.session.open(MessageBox, _("No default storage device found!") + "\n" \
+				+ _("Please make sure to set up your default storage device in menu -> setup -> system -> recording paths."), MessageBox.TYPE_ERROR)
+			return
+		elif harddiskmanager.HDDEnabledCount() and defaultStorageDevice() != "<undefined>":
+			part = harddiskmanager.getDefaultStorageDevicebyUUID(defaultStorageDevice())
+			if part is None:
+				self.session.open(MessageBox, _("Default storage device is not available!") + "\n" \
+					+ _("Please verify if your default storage device is attached or set up your default storage device in menu -> setup -> system -> recording paths."), MessageBox.TYPE_ERROR)
+				return
+		else:
+			# XXX: this message is a little odd as we might be recording to a remote device
+			self.session.open(MessageBox, _("No HDD found or HDD not initialized!"), MessageBox.TYPE_ERROR)
+			return
 
 	if self.isInstantRecordRunning():
 		self.session.openWithCallback(self.recordQuestionCallback, ChoiceBox, \
@@ -1673,7 +1676,8 @@ class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = [ "PTSSetup", "Setup" ]
-		self.setup_title = _("Permanent Timeshift Settings")
+		#Summary
+		self.setup_title = _("Permanent Timeshift Settings Version %s") %VERSION
 
 		self.onChangedEntry = [ ]
 		self.list = [ ]

@@ -39,7 +39,7 @@ config.plugins.mytube = ConfigSubsection()
 config.plugins.mytube.search = ConfigSubsection()
 
 
-config.plugins.mytube.search.searchTerm = ConfigTextWithGoogleSuggestions("", False, threaded = True)
+config.plugins.mytube.search.searchTerm = ConfigTextWithGoogleSuggestions("", False)
 config.plugins.mytube.search.orderBy = ConfigSelection(
 				[
 				 ("relevance", _("Relevance")),
@@ -126,8 +126,11 @@ config.plugins.mytube.general.startFeed = ConfigSelection(
 				 ("top_favorites", _("Top favorites")),
 				 ("most_linked", _("Most linked")),
 				 ("most_responded", _("Most responded")),
-				 ("most_recent", _("Most recent"))
-				], "most_viewed")
+				 ("most_recent", _("Most recent")),
+				 ("most_popular", _("Most popular")),
+				 ("most_shared", _("Most shared")),
+				 ("on_the_web", _("Trending videos"))
+				], "top_rated")
 config.plugins.mytube.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
 	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
 
@@ -141,6 +144,7 @@ if default not in tmp:
 config.plugins.mytube.general.videodir = ConfigSelection(default = default, choices = tmp)
 config.plugins.mytube.general.history = ConfigText(default="")
 config.plugins.mytube.general.clearHistoryOnClose = ConfigYesNo(default = False)
+config.plugins.mytube.general.AutoLoadFeeds = ConfigYesNo(default = True)
 #config.plugins.mytube.general.useHTTPProxy = ConfigYesNo(default = False)
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
 #config.plugins.mytube.general.ProxyPort = ConfigNumber(default=8080)
@@ -485,12 +489,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				self['feedlist'].setList(self.statuslist)
 				if self.FirstRun == True:
 					if config.plugins.mytube.general.loadFeedOnOpen.value:
-						if config.plugins.mytube.general.startFeed.value == 'hd':
-							self.FeedURL = "http://gdata.youtube.com/feeds/api/videos/-/HD"
-						else:
-							self.FeedURL = self.BASE_STD_FEEDURL + str(config.plugins.mytube.general.startFeed.value)
-						self.getFeed(self.FeedURL, str(config.plugins.mytube.general.startFeed.value))
-
+						self.getFeed(self.BASE_STD_FEEDURL, str(config.plugins.mytube.general.startFeed.value))
 
 	def handleHelpWindow(self):
 		print "[handleHelpWindow]"
@@ -526,7 +525,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			menulist = [(_("MyTube Settings"), "settings")]
 			menulist.extend((
 					(_("View related videos"), "related"),
-					(_("View response videos"), "response")
+					(_("View Users Video"), "user_videos"),					
+					(_("View response videos"), "response"),
 				))
 			if config.usage.setup_level.index >= 2: # expert+
 				menulist.extend((
@@ -546,6 +546,10 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			current = self["feedlist"].getCurrent()[0]
 			self.setState('getFeed')
 			self.getRelatedVideos(current)
+		elif answer == "user_videos":
+			current = self["feedlist"].getCurrent()[0]
+			self.setState('getFeed')
+			self.getUserVideos(current)
 		elif answer == "response":
 			current = self["feedlist"].getCurrent()[0]
 			self.setState('getFeed')
@@ -598,13 +602,9 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def openStandardFeedClosed(self, answer):
 		answer = answer and answer[1]
 		if answer is not None:
-			if answer == 'hd':
-				self.FeedURL = "http://gdata.youtube.com/feeds/api/videos/-/HD"
-			else:
-				self.FeedURL = self.BASE_STD_FEEDURL + str(answer)
 			self.setState('getFeed')
 			self.appendEntries = False
-			self.getFeed(self.FeedURL, str(answer))
+			self.getFeed(self.BASE_STD_FEEDURL, str(answer))
 
 	def handleLeave(self, how):
 		self.is_closing = True
@@ -750,7 +750,11 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			print self[self.currList].count()
 			print self[self.currList].index
 			if self[self.currList].index == self[self.currList].count()-1 and myTubeService.getNextFeedEntriesURL() is not None:
-				self.session.openWithCallback(self.getNextEntries, MessageBox, _("Do you want to see more entries?"))
+				# load new feeds on last selected item
+				if config.plugins.mytube.general.AutoLoadFeeds.value is False:
+					self.session.openWithCallback(self.getNextEntries, MessageBox, _("Do you want to see more entries?"))
+				else:
+					self.getNextEntries(True)
 			else:
 				self[self.currList].selectNext()
 		elif self.currList == "historylist":
@@ -793,7 +797,9 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			(_("Most discussed"), "most_discussed"),
 			(_("Most linked"), "most_linked"),
 			(_("Recently featured"), "recently_featured"),
-			(_("Most responded"), "most_responded")
+			(_("Most responded"), "most_responded"),
+			(_("Most shared"), "most_shared"),
+			(_("Trending videos"), "on_the_web")
 		))
 		self.session.openWithCallback(self.openStandardFeedClosed, ChoiceBox, title=_("Select new feed to view."), list = menulist)
 
@@ -945,7 +951,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 	def getFeed(self, feedUrl, feedName):
 		self.queryStarted()
-		self.queryThread = myTubeService.getFeed(feedUrl, self.gotFeed, self.gotFeedError)
+		self.queryThread = myTubeService.getFeed(feedUrl, feedName, self.gotFeed, self.gotFeedError)
 
 	def getNextEntries(self, result):
 		if not result:
@@ -971,6 +977,14 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				self.appendEntries = False
 				self.getFeed(myurl, _("Response video entries."))
 
+	def getUserVideos(self, myentry):
+		if myentry:
+			myurl =  myentry.getUserVideos()
+			print "RESPONSEURL--->",myurl
+			if myurl is not None:
+				self.appendEntries = False
+				self.getFeed(myurl, _("User video entries."))
+
 	def runSearch(self, searchContext = None):
 		print "[MyTubePlayer] runSearch"
 		if searchContext is not None:
@@ -983,6 +997,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.appendEntries = False
 		self.queryThread = myTubeService.search(searchContext, 
 					orderby = config.plugins.mytube.search.orderBy.value,
+					time = config.plugins.mytube.search.time.value,
 					racy = config.plugins.mytube.search.racy.value,
 					lr = config.plugins.mytube.search.lr.value,
 					categories = [ config.plugins.mytube.search.categories.value ],

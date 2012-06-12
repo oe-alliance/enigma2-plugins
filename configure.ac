@@ -52,6 +52,11 @@ AM_CONDITIONAL(UPDATE_PO, test "$with_po" = "yes")
 AC_CONFIG_FILES([
 Makefile
 
+3dsettings/Makefile
+3dsettings/meta/Makefile
+3dsettings/po/Makefile
+3dsettings/src/Makefile
+
 aihdcontroler/Makefile
 aihdcontroler/meta/Makefile
 aihdcontroler/src/Makefile
@@ -91,12 +96,22 @@ autotimer/Makefile
 autotimer/meta/Makefile
 autotimer/po/Makefile
 autotimer/src/Makefile
-autotimer/src/webinterface/Makefile
+autotimer/src/WebChilds/Makefile
+autotimer/src/WebComponents/Makefile
+autotimer/src/WebComponents/Sources/Makefile
+autotimer/src/WebScreens/Makefile
+autotimer/src/web/Makefile
+autotimer/src/web-data/Makefile
 
 babelzapper/Makefile
 babelzapper/etc/Makefile
 babelzapper/meta/Makefile
 babelzapper/src/Makefile
+
+birthdayreminder/Makefile
+birthdayreminder/meta/Makefile
+birthdayreminder/po/Makefile
+birthdayreminder/src/Makefile
 
 bitrateviewer/Makefile
 bitrateviewer/meta/Makefile
@@ -234,6 +249,19 @@ infobartunerstate/meta/Makefile
 infobartunerstate/po/Makefile
 infobartunerstate/src/Makefile
 
+internetradio/Makefile
+internetradio/meta/Makefile
+internetradio/po/Makefile
+internetradio/src/Makefile
+internetradio/src/images/Makefile
+internetradio/src/WebComponents/Makefile
+internetradio/src/WebComponents/Sources/Makefile
+internetradio/src/WebScreens/Makefile
+internetradio/src/web/Makefile
+internetradio/src/web-data/Makefile
+internetradio/src/web-data/img/Makefile
+internetradio/src/web-data/tpl/Makefile
+
 kiddytimer/Makefile
 kiddytimer/img/Makefile
 kiddytimer/meta/Makefile
@@ -278,6 +306,7 @@ merlinepgcenter/images/HD_BORDER/Makefile
 merlinepgcenter/images/SD/Makefile
 merlinepgcenter/images/XD/Makefile
 merlinepgcenter/images/XD_BORDER/Makefile
+merlinepgcenter/images/HD_Elgato/Makefile
 
 merlinmusicplayer/Makefile
 merlinmusicplayer/meta/Makefile
@@ -296,6 +325,7 @@ mosaic/src/Makefile
 
 moviecut/Makefile
 moviecut/meta/Makefile
+moviecut/po/Makefile
 moviecut/src_cc/Makefile
 moviecut/src_py/Makefile
 
@@ -431,6 +461,15 @@ porncenter/po/Makefile
 porncenter/src/Makefile
 porncenter/src/Additions/Makefile
 
+pushservice/Makefile
+pushservice/meta/Makefile
+pushservice/po/Makefile
+pushservice/src/Makefile
+pushservice/src/Controller/Makefile
+pushservice/src/Services/Makefile
+pushservice/src/Services/gntp/Makefile
+pushservice/src/Services/mail/Makefile
+
 quickbutton/Makefile
 quickbutton/meta/Makefile
 quickbutton/po/Makefile
@@ -451,6 +490,10 @@ rsdownloader/po/Makefile
 rsdownloader/src/Makefile
 rsdownloader/src/container/Makefile
 
+satloader/Makefile
+satloader/meta/Makefile
+satloader/src/Makefile
+
 seekbar/Makefile
 seekbar/meta/Makefile
 seekbar/po/Makefile
@@ -466,11 +509,6 @@ setpasswd/Makefile
 setpasswd/meta/Makefile
 setpasswd/po/Makefile
 setpasswd/src/Makefile
-
-shoutcast/Makefile
-shoutcast/meta/Makefile
-shoutcast/po/Makefile
-shoutcast/src/Makefile
 
 showclock/Makefile
 showclock/meta/Makefile
@@ -491,6 +529,25 @@ startuptostandby/Makefile
 startuptostandby/meta/Makefile
 startuptostandby/src/Makefile
 
+subsdownloader2/Makefile
+subsdownloader2/meta/Makefile
+subsdownloader2/src/Makefile
+subsdownloader2/src/pic/Makefile
+subsdownloader2/src/pic/buttons/Makefile
+subsdownloader2/src/pic/buttons/HD/Makefile
+subsdownloader2/src/pic/res/Makefile
+subsdownloader2/src/SourceCode/Makefile
+subsdownloader2/src/SourceCode/chardet/Makefile
+subsdownloader2/src/SourceCode/periscope/Makefile
+subsdownloader2/src/SourceCode/periscope/services/Makefile
+subsdownloader2/src/SourceCode/periscope/services/BierDopje/Makefile
+subsdownloader2/src/SourceCode/periscope/services/OpenSubtitle/Makefile
+subsdownloader2/src/SourceCode/periscope/services/Subtitulos/Makefile
+subsdownloader2/src/SourceCode/xbmc_subtitles/Makefile
+subsdownloader2/src/SourceCode/xbmc_subtitles/services/Makefile
+subsdownloader2/src/SourceCode/xbmc_subtitles/services/Napisyme/Makefile
+subsdownloader2/src/SourceCode/xbmc_subtitles/services/Itasa/Makefile
+
 svdrp/Makefile
 svdrp/meta/Makefile
 svdrp/src/Makefile
@@ -499,6 +556,14 @@ tageditor/Makefile
 tageditor/meta/Makefile
 tageditor/po/Makefile
 tageditor/src/Makefile
+
+teletext/Makefile
+teletext/meta/Makefile
+teletext/po/Makefile
+teletext/src/Makefile
+
+toolkit/Makefile
+toolkit/src/Makefile
 
 trafficinfo/Makefile
 trafficinfo/meta/Makefile
@@ -534,11 +599,28 @@ vps/meta/Makefile
 vps/po/Makefile
 vps/src_cc/Makefile
 vps/src_py/Makefile
+vps/src_py/web/Makefile
+vps/src_py/web-data/Makefile
+vps/src_py/WebComponents/Makefile
+vps/src_py/WebComponents/Sources/Makefile
 
 weatherplugin/Makefile
 weatherplugin/meta/Makefile
 weatherplugin/po/Makefile
 weatherplugin/src/Makefile
+
+webadmin/Makefile
+webadmin/meta/Makefile
+webadmin/src/Makefile
+webadmin/src/mobile/Makefile
+webadmin/src/web/Makefile
+webadmin/src/WebChilds/Makefile
+webadmin/src/WebComponents/Makefile
+webadmin/src/WebComponents/Sources/Makefile
+webadmin/src/web-data/Makefile
+webadmin/src/web-data/tpl/Makefile
+webadmin/src/web-data/img/Makefile
+webadmin/src/WebScreens/Makefile
 
 webcamviewer/Makefile
 webcamviewer/meta/Makefile
@@ -558,7 +640,7 @@ webinterface/Makefile
 webinterface/meta/Makefile
 webinterface/po/Makefile
 webinterface/src/Makefile
-webinterface/src/etc/Makefile
+webinterface/src/m/Makefile
 webinterface/src/mobile/Makefile
 webinterface/src/web/Makefile
 webinterface/src/web-data/Makefile
@@ -568,6 +650,11 @@ webinterface/src/web-data/lib/Makefile
 webinterface/src/web-data/lib/lang/Makefile
 webinterface/src/web-data/lib/datepicker/Makefile
 webinterface/src/web-data/lib/datepicker/media/Makefile
+webinterface/src/web-data/m/Makefile
+webinterface/src/web-data/m/css/Makefile
+webinterface/src/web-data/m/css/themes/Makefile
+webinterface/src/web-data/m/css/themes/images/Makefile
+webinterface/src/web-data/m/script/Makefile
 webinterface/src/web-data/tpl/Makefile
 webinterface/src/web-data/tpl/default/Makefile
 webinterface/src/web-data/tpl/default/streaminterface/Makefile

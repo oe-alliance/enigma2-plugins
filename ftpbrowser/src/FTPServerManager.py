@@ -5,7 +5,7 @@ from . import _
 from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from NTIVirtualKeyBoard import NTIVirtualKeyBoard
+from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
 # GUI (Summary)
 from Screens.Setup import SetupSummary

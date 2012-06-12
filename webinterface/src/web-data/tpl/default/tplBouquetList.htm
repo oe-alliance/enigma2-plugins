@@ -1,29 +1,27 @@
 
-<!-- tplBouquetList -->	
-									<table id="bouquetTable">
+<!-- tplBouquetList -->
+									<ul id="bouquetTable">
 										{for bouquet in services}
-										<tr><td>
-											<table>
-												<tr>
-													<td>
-														<a target="_blank" href="/web/services.m3u?bRef=${bouquet.servicereference}">
-															<img src="/web-data/img/screen.png" title="Open ${bouquet.servicename} as Playlist" border="0">
-														</a>
-													</td>
-													<td>
-														<div class="sListSName">
-															<a href="${hash}/${bouquet.servicereference}" id="${bouquet.servicereference}" class="bListSLink" data-servicename="${bouquet.servicename}" title="Load Bouquet ${bouquet.servicename}">
-																${bouquet.servicename}
-															</a>
-														</div>
-													</td>
-												</tr>
-											</table>
-										</td></tr>
+										<li>
+											<div class="bouquetIcons">
+												<a target="_blank" href="/web/services.m3u?bRef=${bouquet.servicereference}">
+													<img src="/web-data/img/screen.png" title="Open ${bouquet.servicename} as Playlist" border="0" alt="Playlist">
+												</a>
+												<a href="#" class="bListEpg" data-servicereference="${bouquet.servicereference}">
+													<img src="/web-data/img/epg.png" title="Open Multi-EPG for ${bouquet.servicename}" border="0" alt="Multi EPG">
+												</a>
+											</div>
+											<div class="bouquetName">
+												<a 	href="${hash}/${bouquet.servicereference}"
+													id="${bouquet.servicereference}"
+													class="bListSLink"
+													data-servicename="${bouquet.servicename}"
+													title="Load Bouquet ${bouquet.servicename}"
+													style="display: block">${bouquet.servicename}</a>
+											</div>
+										</li>
 										{forelse}
-										<tr><td>
-											<table><tr><td>No Bouquets to Display</td></tr></table>
-										</td></tr>
+										<p>No Bouquets to Display</p>
 										{/for}
-									</table>
+									</ul>
 <!-- /tplBouquetList -->

@@ -149,6 +149,7 @@ class EpgCenterList(GUIComponent):
 		self.progressPixmap_2 = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/Progress_2.png"))
 		self.progressPixmap_3 = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/Progress_3.png"))
 		self.progressPixmap_4 = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/Progress_4.png"))
+		self.progressPixmapWidth = self.progressPixmap.size().width()
 		
 		self.epgcache = eEPGCache.getInstance()
 		
@@ -199,6 +200,7 @@ class EpgCenterList(GUIComponent):
 		self.l.setItemHeight(self.itemHeight)
 		
 	def buildEpgEntry(self, ignoreMe, eventid, sRef, begin, duration, title, short, desc):
+		columnSpace = config.plugins.merlinEpgCenter.columnSpace.getValue()
 		progressPixmap = None
 		offsetLeft = 5
 		offsetRight = self.maxWidth - 5 - 8 # 8 = timer pixmap width, 5 = border
@@ -226,31 +228,34 @@ class EpgCenterList(GUIComponent):
 					timeValue = (begin + duration - now) /  60 + 1
 				else:
 					timeValue = (now - begin) /  60
-				
-			if (KEEP_OUTDATED_TIME == 0 and (begin + duration) > now) or (KEEP_OUTDATED_TIME != 0 and (begin + duration) > now):
-				if config.plugins.merlinEpgCenter.showDuration.value:
-					remainBeginString = " I "
-				else:
-					remainBeginString = ""
 					
-				if timeValue >= 0:
-					remainBeginString += "+"
-				if fabs(timeValue) >= 120 and fabs(timeValue) < 1440:
-					timeValue /= 60
-					remainBeginString += "%0dh" % timeValue
-				elif fabs(timeValue) >= 1440:
-					timeValue = (timeValue / 1440) +1
-					remainBeginString += "%02dd" % timeValue
-				else:
-					if timeValue < 0:
-						remainBeginString += "%03d" % timeValue
+			if config.plugins.merlinEpgCenter.showBeginRemainTime.value:
+				if (KEEP_OUTDATED_TIME == 0 and (begin + duration) > now) or (KEEP_OUTDATED_TIME != 0 and (begin + duration) > now):
+					if config.plugins.merlinEpgCenter.showDuration.value:
+						remainBeginString = " I "
 					else:
-						remainBeginString += "%02d" % timeValue
-			else:
-				if config.plugins.merlinEpgCenter.showDuration.value:
-					remainBeginString = " I <->"
+						remainBeginString = ""
+					
+					if timeValue >= 0:
+						remainBeginString += "+"
+					if fabs(timeValue) >= 120 and fabs(timeValue) < 1440:
+						timeValue /= 60
+						remainBeginString += "%0dh" % timeValue
+					elif fabs(timeValue) >= 1440:
+						timeValue = (timeValue / 1440) +1
+						remainBeginString += "%02dd" % timeValue
+					else:
+						if timeValue < 0:
+							remainBeginString += "%03d" % timeValue
+						else:
+							remainBeginString += "%02d" % timeValue
 				else:
-					remainBeginString = "<->"
+					if config.plugins.merlinEpgCenter.showDuration.value:
+						remainBeginString = " I <->"
+					else:
+						remainBeginString = "<->"
+			else:
+				remainBeginString = ""
 				
 			if config.plugins.merlinEpgCenter.showDuration.value:
 				duraString = "%d" % (duration / 60)
@@ -272,14 +277,14 @@ class EpgCenterList(GUIComponent):
 				progColor = parseColor("eventNotAvailable").argb()
 			except:
 				progColor = 0x777777
-		elif config.plugins.merlinEpgCenter.showColoredEpgTimes.value:
+		elif config.plugins.merlinEpgCenter.showBeginRemainTime.value and config.plugins.merlinEpgCenter.showColoredEpgTimes.value:
 			outdated = False
 			if remainBeginString.endswith('h'): # begins in... hours
 				progColor = 0x00ef7f1a # brown
 			elif remainBeginString.endswith('d'): # begins in... days
 				progColor = 0x00e31e24 # red
 			elif remainBeginString.startswith(' I +') or remainBeginString.startswith('+'): # already running
-				progColor = 0x00009846 # green
+				progColor = 0x0074de0a # green
 			elif remainBeginString.startswith(' I -') or remainBeginString.startswith('-'): # begins in... minutes
 				progColor = 0x00ffed00 # yellow
 			else: # undefined, shouldn't happen
@@ -325,7 +330,7 @@ class EpgCenterList(GUIComponent):
 			else:
 				width = self.maxWidth * 4 / 100
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, chNumber))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if config.plugins.merlinEpgCenter.showPicons.value:
 			if ((self.mode == SINGLE_EPG and not self.similarShown) or self.mode == UPCOMING) and self.instance.getCurrentIndex() != 0:
@@ -336,7 +341,7 @@ class EpgCenterList(GUIComponent):
 			width = self.piconSize.width()
 			if picon:
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetLeft, (self.itemHeight - self.baseHeight) / 2, width, self.itemHeight, picon))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if config.plugins.merlinEpgCenter.showServiceName.value:
 			if self.videoMode == MODE_SD:
@@ -353,7 +358,7 @@ class EpgCenterList(GUIComponent):
 					serviceName = ServiceReference(sRef).getServiceName()
 					
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceName))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if self.mode == MULTI_EPG_NOW and not self.similarShown:
 			if self.videoMode == MODE_SD:
@@ -364,18 +369,26 @@ class EpgCenterList(GUIComponent):
 			
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, width, self.halfItemHeight - border + (self.singleLineBorder * 2), 1, RT_HALIGN_CENTER|RT_VALIGN_TOP, timeString))
 			if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP and progressPixmap is not None:
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetLeft, self.halfItemHeight + (self.halfItemHeight - progressHeight) / 2 + self.singleLineBorder, width, progressHeight, progressPixmap))
+				if width > self.progressPixmapWidth:
+					progressOffset = int((width - self.progressPixmapWidth) / 2)
+				else:
+					progressOffset = 0
+				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetLeft + progressOffset, self.halfItemHeight + (self.halfItemHeight - progressHeight) / 2 + self.singleLineBorder, width, progressHeight, progressPixmap))
 			elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_SIMPLE_BAR:
 				res.append((eListboxPythonMultiContent.TYPE_PROGRESS, offsetLeft, self.halfItemHeight + (self.halfItemHeight - progressHeight) / 2 + self.singleLineBorder, width, progressHeight, percent, 1, secondLineColor))
 			elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PIXMAP_BAR and progressPixmap is not None:
-				res.append((eListboxPythonMultiContent.TYPE_PROGRESS_PIXMAP, offsetLeft, self.halfItemHeight + (self.halfItemHeight - progressHeight) / 2 + self.singleLineBorder, width, progressHeight, percent, progressPixmap, 0))
+				if width > self.progressPixmapWidth:
+					progressOffset = int((width - self.progressPixmapWidth) / 2)
+				else:
+					progressOffset = 0
+				res.append((eListboxPythonMultiContent.TYPE_PROGRESS_PIXMAP, offsetLeft + progressOffset, self.halfItemHeight + (self.halfItemHeight - progressHeight) / 2 + self.singleLineBorder, width, progressHeight, percent, progressPixmap, 0))
 			elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT:
 				if self.videoMode == MODE_SD: # we need a bigger font for SD skins
 					font = 2
 				else:
 					font = 3
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, width, self.halfItemHeight - border, font, RT_HALIGN_CENTER|RT_VALIGN_TOP, str(percent) + "%", secondLineColor))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 		else:
 			if self.videoMode == MODE_SD:
 				width = self.maxWidth * 18 / 100
@@ -387,7 +400,7 @@ class EpgCenterList(GUIComponent):
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, width, self.halfItemHeight - border, 2, RT_HALIGN_CENTER|RT_VALIGN_TOP, fd, secondLineColor))
 			else:
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_CENTER|RT_VALIGN_CENTER, timeString, textColor))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if begin != None and duration != None:
 			(timerPixmaps, zapPixmaps, isRunning) = self.getTimerPixmapsForEntry(sRef, eventid, begin, duration)
@@ -501,28 +514,31 @@ class EpgCenterList(GUIComponent):
 					height = self.itemHeight - 4
 					res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetRight, posY, 8, height, self.timer_add_pixmap))
 					
-		if config.plugins.merlinEpgCenter.showDuration.value:
-			width = self.maxWidth * 7 / 100
-			offsetRight = offsetRight - width - 5
+		if config.plugins.merlinEpgCenter.showBeginRemainTime.value and config.plugins.merlinEpgCenter.showDuration.value:
+			width = self.maxWidth * 8 / 100
+			offsetRight = offsetRight - width
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, remainBeginString, progColor))
-		else:
+		elif config.plugins.merlinEpgCenter.showBeginRemainTime.value:
 			width = self.maxWidth * 6 / 100
-			offsetRight = offsetRight - width - 5
+			offsetRight = offsetRight - width
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, remainBeginString, progColor))
 			
 		if config.plugins.merlinEpgCenter.showDuration.value:
 			width = self.maxWidth * 6 / 100
 			offsetRight = offsetRight - width
+		elif not config.plugins.merlinEpgCenter.showDuration.value and not config.plugins.merlinEpgCenter.showBeginRemainTime.value:
+			width = self.maxWidth * 1 / 100
+			offsetRight = offsetRight - width
 			
-		# TODO description + short laenger machen wenn showDuration aus ist
+		titleWidth = offsetRight - offsetLeft - columnSpace
 		if self.listStyle == STYLE_SINGLE_LINE:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, offsetRight - offsetLeft, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, title, textColor))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, titleWidth, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, title, config.plugins.merlinEpgCenter.titleColor.value, config.plugins.merlinEpgCenter.titleColorSelected.value))
 		elif self.listStyle == STYLE_SHORT_DESCRIPTION:
 			if short and title != short:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, offsetRight - offsetLeft, self.halfItemHeight - border, 1, RT_HALIGN_LEFT|RT_VALIGN_TOP, title, textColor))
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, offsetRight - offsetLeft, self.halfItemHeight - border, 2, RT_HALIGN_LEFT|RT_VALIGN_TOP, short, secondLineColor))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, titleWidth, self.halfItemHeight - border, 1, RT_HALIGN_LEFT|RT_VALIGN_TOP, title, textColor))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, titleWidth, self.halfItemHeight - border, 2, RT_HALIGN_LEFT|RT_VALIGN_TOP, short, secondLineColor))
 			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, offsetRight - offsetLeft, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, title, textColor))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, titleWidth, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, title, textColor))
 			
 		if config.plugins.merlinEpgCenter.showDuration.value:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, duraString, textColor))
@@ -543,8 +559,8 @@ class EpgCenterList(GUIComponent):
 	def preWidgetRemove(self, instance):
 		instance.setContent(None)
 		instance.selectionChanged.get().remove(self.selectionChanged)
-		config.plugins.merlinEpgCenter.listItemHeight.notifiers.remove(self.changeHeight)
-		config.plugins.merlinEpgCenter.adjustFontSize.notifiers.remove(self.setFontSizes)
+		config.plugins.merlinEpgCenter.listItemHeight.removeNotifier(self.changeHeight)
+		config.plugins.merlinEpgCenter.adjustFontSize.removeNotifier(self.setFontSizes)
 		self.blinkTimer.callbacks.remove(self.invalidateList)
 		
 	def moveToIndex(self, index):
@@ -904,10 +920,11 @@ class EpgCenterTimerlist(TimerList):
 	def preWidgetRemove(self, instance):
 		instance.setContent(None)
 		instance.selectionChanged.get().remove(self.selectionChanged)
-		config.plugins.merlinEpgCenter.listItemHeight.notifiers.remove(self.changeHeight)
-		config.plugins.merlinEpgCenter.adjustFontSize.notifiers.remove(self.setFontSizes)
+		config.plugins.merlinEpgCenter.listItemHeight.removeNotifier(self.changeHeight)
+		config.plugins.merlinEpgCenter.adjustFontSize.removeNotifier(self.setFontSizes)
 		
 	def buildTimerEntry(self, timer, processed):
+		columnSpace = config.plugins.merlinEpgCenter.columnSpace.getValue()
 		width = self.l.getItemSize().width()
 		offsetLeft = 5 # 5 = left border
 		offsetRight = self.maxWidth - 5 # 5 = right border
@@ -952,7 +969,7 @@ class EpgCenterTimerlist(TimerList):
 			width = self.maxWidth * 3 / 100
 			# 30 breite
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, number))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if config.plugins.merlinEpgCenter.showPicons.value:
 			width = self.piconSize.width()
@@ -964,7 +981,7 @@ class EpgCenterTimerlist(TimerList):
 				picon = self.piconLoader.getPicon(str(timer.service_ref))
 			if picon:
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, offsetLeft, (self.itemHeight - self.baseHeight) / 2, width, height, picon))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if config.plugins.merlinEpgCenter.showServiceName.value:
 			if self.videoMode == MODE_SD:
@@ -978,7 +995,7 @@ class EpgCenterTimerlist(TimerList):
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.service_ref.getServiceName()))
 			else: # AutoTimer entry
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "AutoTimer"))
-			offsetLeft = offsetLeft + width + 5 # abstand
+			offsetLeft = offsetLeft + width + columnSpace
 			
 		if self.videoMode == MODE_SD:
 			width = self.maxWidth * 18 / 100
@@ -993,11 +1010,11 @@ class EpgCenterTimerlist(TimerList):
 		else: # AutoTimer entry
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_CENTER|RT_VALIGN_CENTER, timeString))
 			
-		offsetLeft = offsetLeft + width + 5 # abstand
+		offsetLeft = offsetLeft + width + columnSpace
 		
 		width = self.maxWidth * 22 / 100
 		offsetRight = offsetRight - width
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, offsetRight - offsetLeft, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, offsetRight - offsetLeft, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.name, config.plugins.merlinEpgCenter.titleColor.value, config.plugins.merlinEpgCenter.titleColorSelected.value))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetRight, 0, width, self.itemHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, state, color))
 		
 		return res

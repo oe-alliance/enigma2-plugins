@@ -9,4 +9,4 @@ servicets_la_SOURCES = \
 	servicets.h
 
 servicets_la_LDFLAGS = \
-	-avoid-version -module
+	$(PLUGIN_LIBTOOL_FLAGS)

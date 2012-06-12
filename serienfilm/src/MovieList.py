@@ -173,7 +173,7 @@ class MovieList(GUIComponent):
 		if pixmap is not None:
 			res.append(pixmap)
 
-		XPOS = 30
+		XPOS = 25
 
 		if self.list_type & MovieList.LISTTYPE_ORIGINAL:
 			res.append(MultiContentEntryText(pos=(XPOS, 0), size=(width, 30), font = 0, flags = RT_HALIGN_LEFT, text=txt))
@@ -191,7 +191,7 @@ class MovieList(GUIComponent):
 				res.append(MultiContentEntryText(pos=(width-60, line2), size=(60, 20), font=2, flags=RT_HALIGN_RIGHT, text=len))
 			return res
 
-		tslen = 55
+		tslen = 80
 		if self.show_times & self.SHOW_RECORDINGTIME:
 			tslen += 50
 			date_string = begin_string
@@ -288,7 +288,7 @@ class MovieList(GUIComponent):
 			t = m[3]
 #			print "[SF-Plugin] removeService try: %x, %s -- %s" % (m[0].flags,  str(t[1]), str(t[2]))
 			if not m[0].flags & eServiceReference.canDescent and t[2] == tinfo[2] and isinstance(t[1], str) and t[1][0] == "#":
-			   	repeats += 1
+				repeats += 1
 				rc = int(t[1][1:])
 				if rc > repnr:
 					rc -= 1
@@ -323,7 +323,7 @@ class MovieList(GUIComponent):
 		info = self.serviceHandler.info(root)
 		pwd = info and info.getName(root)
 		print "[SF-Plugin] MovieList.realDirUp: pwd = >%s<" % (str(pwd))
-		if pwd and not os.path.samefile(pwd, defaultMoviePath()):
+		if pwd and os.path.exists(pwd) and not os.path.samefile(pwd, defaultMoviePath()):
 			parentdir = pwd[:pwd.rfind("/", 0, -1)] + "/"
 			parent = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + parentdir)
 			info = self.serviceHandler.info(parent)
@@ -372,7 +372,7 @@ class MovieList(GUIComponent):
 			if info is None:
 				continue
 			begin = info.getInfo(serviceref, iServiceInformation.sTimeCreate)
-			this_tags = info.getInfoString(serviceref, iServiceInformation.sTags)
+			this_tags = info.getInfoString(serviceref, iServiceInformation.sTags).split(' ')
 
 			# convert space-seperated list of tags into a set
 			if this_tags == ['']:

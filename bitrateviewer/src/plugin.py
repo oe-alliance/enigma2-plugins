@@ -30,17 +30,17 @@ from bitratecalc import eBitrateCalculator
 class BitrateCalculator(Screen):
 	sz_w = getDesktop(0).size().width()
 	if sz_w == 1280:
-		left = 1030
+		left = 1000
 	elif sz_w == 1024:
 		left = 774
 	else:
 		left = 470
 	skin = """
-		<screen position="%d,40" size="205,68" flags="wfNoBorder" title="BitrateViewer">
+		<screen position="%d,40" size="235,68" flags="wfNoBorder" title="BitrateViewer">
 			<widget render="Label" source="video_caption" position="10,10" zPosition="1" size="70,23" font="Regular;22" transparent="1"/>
 			<widget render="Label" source="audio_caption" position="10,35" zPosition="1" size="70,23" font="Regular;22" transparent="1"/>
-			<widget render="Label" source="video" position="75,10" zPosition="1" size="120,23" font="Regular;22" halign="right" transparent="1"/>
-			<widget render="Label" source="audio" position="75,35" zPosition="1" size="120,23" font="Regular;22" halign="right" transparent="1"/>
+			<widget render="Label" source="video" position="75,10" zPosition="1" size="150,23" font="Regular;22" halign="right" transparent="1"/>
+			<widget render="Label" source="audio" position="75,35" zPosition="1" size="150,23" font="Regular;22" halign="right" transparent="1"/>
 		</screen>""" % left
 
 	def __init__(self, session, args = None):

@@ -169,7 +169,7 @@ class VlcServer:
 				path = normpath(element.getAttribute("path").encode("utf8"))
 				if path is not None:
 					elementType = element.getAttribute("type")
-					if elementType == "directory":
+					if elementType == "directory" or elementType == "dir":
 						directories.append([name, path])
 					elif elementType == "file":
 						if regex is None or regex.search(path):

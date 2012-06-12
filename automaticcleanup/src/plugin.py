@@ -63,7 +63,7 @@ from Screens.Setup import SetupSummary
 
 
 ###############################################################################        
-VERSION = "0.1.7"
+VERSION = "0.1.8"
 # History:
 # 0.1.2 First public version
 # 0.1.3 Prevention of timerlist cleanup if duplicated with EMC plugin
@@ -78,6 +78,7 @@ VERSION = "0.1.7"
 # 0.1.5 Fix infinite loop when timerlist cleanup is set to option "immediately after recording"
 # 0.1.6 Fix crash if settings backup file date ends with "2"
 # 0.1.7 Cleanup of orphaned movie files modified to support EMC v3
+# 0.1.8 Performance improvement: avoid duplicate cleanup of orphaned movie files if EMC movie_homepath is same as E2 moviePath
 ###############################################################################  
 pluginPrintname = "[AutomaticCleanup Ver. %s]" %VERSION
 DEBUG = False # If set True, plugin won't remove any file physically, instead prints file names in log for verification purposes
@@ -364,7 +365,8 @@ class AutomaticCleanup:
 			excludePath = []
 			
 			from Components.UsageConfig import defaultMoviePath
-			moviePath.append(defaultMoviePath())
+			if defaultMoviePath().endswith('/'): moviePath.append(defaultMoviePath())
+			else: moviePath.append(defaultMoviePath() + "/")
 			if config.usage.instantrec_path.value.endswith('/'): excludePath.append(config.usage.instantrec_path.value)
 			else: excludePath.append(config.usage.instantrec_path.value + "/")			
 			if config.usage.timeshift_path.value.endswith('/'): excludePath.append(config.usage.timeshift_path.value)
@@ -372,8 +374,12 @@ class AutomaticCleanup:
 
 			try:
 				# try to import EMC module to check for its existence
-				from Plugins.Extensions.EnhancedMovieCenter.EnhancedMovieCenter import EnhancedMovieCenterMenu 
-				moviePath.append(config.EMC.movie_homepath.value)
+				from Plugins.Extensions.EnhancedMovieCenter.EnhancedMovieCenter import EnhancedMovieCenterMenu
+				if config.EMC.movie_homepath.value:
+					path = config.EMC.movie_homepath.value
+					if not path.endswith("/"): path += "/"
+					if path not in moviePath:
+						moviePath.append(path)
 				try: # with v3 name
 					if len(config.EMC.movie_trashcan_path.value) > 1:	# Trashpath specified?
 						if DEBUG: print pluginPrintname, "EMC v3 trashcan path is", config.EMC.movie_trashcan_path.value
@@ -396,6 +402,7 @@ class AutomaticCleanup:
 			else:
 				for f in range(len(excludePath)):
 					if excludePath[f].startswith("/hdd"): excludePath[f] = "/media" + excludePath[f]
+				print pluginPrintname, "Movie path:", moviePath
 				print pluginPrintname, "Excluded movie path:", excludePath
 				for checkPath in moviePath:	
 					self.filterMovies(str(checkPath), excludePath)				

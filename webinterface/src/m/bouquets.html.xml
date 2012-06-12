@@ -1,0 +1,47 @@
+<e2:screen name="ServiceListWebScreen">&lt;!DOCTYPE html><html>
+<head>
+	<title>Services</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+	<link rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
+	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.0.min.css" />
+
+	<script src="/web-data/lib/jquery-1.7.1.min.js" />
+	<script language="javascript" type="text/javascript">
+		$(document).bind("mobileinit", function(){
+			$.extend(  $.mobile , {
+				defaultPageTransition: 'none',
+				defaultDialogTransition: 'none'
+			});
+		});
+	</script>
+	<script src="/web-data/m/script/jquery.mobile-1.1.0.min.js" />
+</head>
+<body>
+
+<div data-role="page" id="main" data-title="Bouquets" data-theme="a">
+	<div data-role="header">
+		<h1>Bouquets</h1>
+		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home" data-ajax="false">Home</a>
+	</div><!-- /header -->
+	<div data-role="content">
+		<ul data-role="listview">
+			<e2:element source="ServiceList" id="sRef">
+			<e2:convert type="web:ListFiller">
+			&lt;li>
+				&lt;a href="services.html?bRef=<e2:item name="Reference" filter="uriAttribute" />">
+					&lt;h3><e2:item name="Name" filter="xml" />&lt;/h3>
+				&lt;/a>
+			&lt;/li>
+			</e2:convert><e2:convert type="web:TextToHTML" />
+			</e2:element>
+		</ul>
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div><!-- /main -->
+</body>
+</html>
+</e2:screen>

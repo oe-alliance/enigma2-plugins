@@ -2,50 +2,78 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VPS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-06 13:54+0100\n"
+"POT-Creation-Date: 2012-05-06 06:33+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SearchPath-0: ../src_py\n"
-"X-Poedit-SearchPath-1: ../src_cc\n"
 
-#: ../src_py/Modifications.py:149
-#: ../src_py/Modifications.py:152
+#: ../src_py/Modifications.py:141
+#: ../src_py/plugin.py:16
+#: ../src_py/plugin.py:17
+#: ../src_py/Vps_check.py:250
+#: ../src_py/Vps_check.py:278
+msgid "No"
+msgstr ""
+
+#: ../src_py/Modifications.py:141
+#: ../src_py/plugin.py:16
+#: ../src_py/plugin.py:17
+#: ../src_py/Vps_check.py:278
+msgid "Yes (safe mode)"
+msgstr "Ja (Sicherheitsmodus)"
+
+#: ../src_py/Modifications.py:141
+#: ../src_py/plugin.py:16
+#: ../src_py/plugin.py:17
+#: ../src_py/Vps_check.py:250
+#: ../src_py/Vps_check.py:278
+msgid "Yes"
+msgstr ""
+
+#: ../src_py/Modifications.py:144
+#: ../src_py/Modifications.py:147
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
-#: ../src_py/Modifications.py:166
+#: ../src_py/Modifications.py:161
 msgid "Enable VPS"
 msgstr "VPS aktivieren"
 
-#: ../src_py/Modifications.py:171
-msgid "Recording controlled by channel"
-msgstr "Aufnahme komplett durch Sender steuern lassen"
-
-#: ../src_py/Modifications.py:185
+#: ../src_py/Modifications.py:177
 msgid "VPS-Time (date)"
 msgstr "VPS-Zeit (Datum)"
 
-#: ../src_py/Modifications.py:186
+#: ../src_py/Modifications.py:178
 msgid "VPS-Time (time)"
 msgstr "VPS-Zeit (Uhrzeit)"
 
-#: ../src_py/Vps.py:421
+#: ../src_py/plugin.py:17
+msgid "always ask"
+msgstr "immer fragen"
+
+#: ../src_py/plugin.py:63
+#: ../src_py/plugin.py:83
+msgid "VPS Settings"
+msgstr "VPS Einstellungen"
+
+#: ../src_py/Vps.py:402
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Der Receiver wurde für eine Aufnahme auf den entsprechenden Kanal umgeschaltet!\n"
 
-#: ../src_py/Vps_check.py:111
+#: ../src_py/Vps_check.py:112
 msgid "VPS-Plugin checks if the channel supports VPS ..."
 msgstr "Das VPS-Plugin prüft gerade, ob der Sender VPS unterstützt ..."
 
-#: ../src_py/Vps_check.py:231
+#: ../src_py/Vps_check.py:243
 msgid ""
 "The selected channel doesn't support VPS for manually programmed timers!\n"
 " Do you really want to enable VPS?"
@@ -53,7 +81,7 @@ msgstr ""
 "Der Sender unterstützt kein VPS für manuell programmierte Timer!\n"
 "VPS wirklich aktivieren?"
 
-#: ../src_py/Vps_check.py:233
+#: ../src_py/Vps_check.py:245
 msgid ""
 "The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n"
 " Do you really want to enable VPS?"
@@ -61,19 +89,11 @@ msgstr ""
 "Das VPS-Plugin konnte nicht überprüfen, ob der Sender für manuell programmierte Timer VPS unterstützt.\n"
 "VPS wirklich aktivieren?"
 
-#: ../src_py/Vps_check.py:238
-msgid "No"
-msgstr ""
-
-#: ../src_py/Vps_check.py:238
-msgid "Yes"
-msgstr ""
-
-#: ../src_py/Vps_check.py:238
+#: ../src_py/Vps_check.py:250
 msgid "Yes, don't ask again"
 msgstr "Ja, nicht wieder fragen"
 
-#: ../src_py/Vps_check.py:239
+#: ../src_py/Vps_check.py:251
 msgid ""
 "VPS-Plugin couldn't check if the selected channel supports VPS.\n"
 " Do you really want to enable VPS?"
@@ -81,33 +101,50 @@ msgstr ""
 "Das VPS-Plugin konnte nicht eindeutig feststellen, ob der Sender VPS unterstützt.\n"
 "VPS wirklich aktivieren?"
 
+#: ../src_py/Vps_check.py:286
+msgid ""
+"The channel may support VPS\n"
+" Do you want to enable VPS?"
+msgstr ""
+"Der Sender unterstützt vermutlich VPS.\n"
+" Soll VPS aktiviert werden?"
+
+#: ../src_py/Vps_check.py:288
+msgid ""
+"VPS-Plugin couldn't check if the channel supports VPS.\n"
+" Do you want to enable VPS anyway?"
+msgstr ""
+"Das VPS-Plugin konnte nicht eindeutig feststellen, ob der Sender VPS unterstützt.\n"
+" Soll VPS trotzdem aktiviert werden?"
+
 #: ../src_py/Vps_setup.py:31
+#, python-format
+msgid "VPS Setup Version %s"
+msgstr "VPS Einstellungen Version %s"
+
+#: ../src_py/Vps_setup.py:33
 msgid "Enable VPS-Plugin"
 msgstr "VPS-Plugin eingeschaltet"
 
-#: ../src_py/Vps_setup.py:32
+#: ../src_py/Vps_setup.py:34
 msgid "Starting time"
 msgstr "Kontroll-Vorlaufzeit"
 
-#: ../src_py/Vps_setup.py:33
-msgid "Recordings can be controlled by channel"
-msgstr "Aufnahmen können durch den Sender gesteuert werden"
-
-#: ../src_py/Vps_setup.py:34
+#: ../src_py/Vps_setup.py:35
 msgid "Wakeup from Deep-Standby is allowed"
 msgstr "Starten aus dem Deep-Standby erlaubt"
 
-#: ../src_py/Vps_setup.py:35
+#: ../src_py/Vps_setup.py:36
 msgid "Seeking connected events"
 msgstr "Nach zusammenhängenden EPG-Einträgen suchen"
 
-#: ../src_py/Vps_setup.py:36
+#: ../src_py/Vps_setup.py:37
 msgid "VPS enabled by default"
 msgstr "VPS standardmäßig aktivieren"
 
-#: ../src_py/Vps_setup.py:37
-msgid "Recordings are controlled by channel by default"
-msgstr "Aufnahmen standardmäßig durch den Sender steuern lassen"
+#: ../src_py/Vps_setup.py:38
+msgid "Enable VPS on instant records"
+msgstr "VPS bei Sofortaufnahmen aktivieren"
 
 #: ../src_py/Vps_setup.py:52
 msgid "Cancel"
@@ -121,54 +158,54 @@ msgstr ""
 msgid "Information"
 msgstr "Information"
 
-#: ../src_py/Vps_setup.py:70
+#: ../src_py/Vps_setup.py:75
 msgid "This plugin can determine whether a programme begins earlier or lasts longer. The channel has to provide reliable data."
 msgstr "Das VPS-Plugin kann feststellen, ob eine Sendung früher beginnt oder länger dauert als im Timer programmiert wurde. Der Sender muss verlässliche Daten liefern!"
 
-#: ../src_py/Vps_setup.py:72
+#: ../src_py/Vps_setup.py:77
 msgid "If possible, x minutes before a timer starts VPS-Plugin will control whether the programme begins earlier. (0 disables feature)"
 msgstr "Wenn möglich, wird x Minuten vor eigentlichem Beginn der Aufnahme überprüft, ob die Sendung früher anfängt. (0 deaktiviert das Feature)"
 
-#: ../src_py/Vps_setup.py:74
-msgid "If enabled, you can decide whether a timer should be controlled by channel (Running-Status). Programmed start and end time will be ignored."
-msgstr "Wenn eingeschaltet, kann bei jedem Timer angegeben werden, ob die Aufnahme komplett von den Senderangaben (Running-Status) gesteuert werden soll. In dem Fall werden die programmierten Timer-Zeiten nicht beachtet!"
-
-#: ../src_py/Vps_setup.py:76
+#: ../src_py/Vps_setup.py:79
 msgid "Enable VPS by default (new timers)"
 msgstr "Soll VPS bei neuen Timern standardmäßig aktiviert sein?"
 
-#: ../src_py/Vps_setup.py:78
-msgid "Enable \"Recording controlled by channel\" by default (new timers)"
-msgstr "Soll die Funktion \"durch Sender steuern lassen\" bei neuen Timern standardmäßig aktiviert sein?"
-
-#: ../src_py/Vps_setup.py:80
+#: ../src_py/Vps_setup.py:81
 msgid "If enabled and necessary, the plugin will wake up the Dreambox from Deep-Standby for the defined starting time to control whether the programme begins earlier."
 msgstr "Wenn eingeschaltet und notwendig, wird das Plugin die Dreambox für die Kontroll-Vorlaufzeit aus dem Deep-Standby holen, um zu überprüfen, ob die Sendung früher anfängt."
 
-#: ../src_py/Vps_setup.py:82
+#: ../src_py/Vps_setup.py:83
 msgid "If a programme is interrupted and divided into separate events, the plugin will search for the connected events."
 msgstr "Im EPG wird nach weiteren Einträgen gesucht, die zur aufzunehmenden Sendung gehören. Wenn eine Sendung z.B. durch Nachrichten unterbrochen wird, versucht das Plugin trotzdem die komplette Sendung aufzunehmen."
 
-#: ../src_py/Vps_setup.py:103
+#: ../src_py/Vps_setup.py:85
+msgid "When yes, VPS will be enabled on instant records (stop after current event), if the channel supports VPS."
+msgstr "Wenn ja ausgewählt, wird VPS automatisch bei Sofortaufnahmen (aktuelle Sendung) aktiviert, soweit VPS vom Sender unterstützt wird."
+
+#: ../src_py/Vps_setup.py:106
 msgid "Really close without saving settings?"
 msgstr ""
 
-#: ../src_py/Vps_setup.py:124
+#: ../src_py/Vps_setup.py:127
+msgid "VPS-Plugin Information"
+msgstr "VPS-Plugin Information"
+
+#: ../src_py/Vps_setup.py:129
 msgid ""
-"The VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n"
+"VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n"
 "\n"
-"If you enable VPS, the recording is definitely starting at the latest at the startTime. The recording may start earlier or lasts longer.\n"
+"If you enable VPS, the recording will only start, when the channel flags the programme as running.\n"
 "\n"
-"If you also enable \"Recording controlled by channel\", the recording will only start, when the channel flags the programme as running.\n"
+"If you select \"yes (safe mode)\", the recording is definitely starting at the latest at the startTime you defined. The recording may start earlier or last longer.\n"
 "\n"
 "\n"
 "Supported channels\n"
 "\n"
 "Germany:\n"
-" ARD, ZDF, Sky and DMAX\n"
+" ARD and ZDF\n"
 "\n"
 "Austria:\n"
-" ORF and Servus TV\n"
+" ORF\n"
 "\n"
 "Switzerland:\n"
 " SF\n"
@@ -180,19 +217,18 @@ msgid ""
 msgstr ""
 "VPS dient dazu, bei Aufnahmen von Sendungen auf Verschiebungen der Anfangszeit und Überziehungen der Sendedauer zu reagieren. VPS wird nur von bestimmten Sendern unterstützt!\n"
 "\n"
-"Wenn VPS aktiviert wird, werden die programmierten Timer-Zeiten beachtet. Die Aufnahme wird nur ggf. früher starten bzw. länger dauern, aber niemals kürzer.\n"
+"Wenn VPS aktiviert wird, startet die Aufnahme erst dann, wenn der Sender angibt, dass die Sendung begonnen hat. Die Aufnahme endet, wenn angegeben wird, dass die Sendung vorbei ist.\n"
 "\n"
-"Wenn zusätzlich \"komplett durch Sender steuern\" aktiviert ist (in den Plugin-Einstellungen und im Timer), wird die Aufnahme erst starten, wenn der Sender angibt, dass die Sendung begonnen hat, und genau dann enden, wenn angegeben wird, dass die Sendung vorbei ist.\n"
-"\n"
+"Wenn der Sicherheitsmodus verwendet wird, wird die programmierte Start- und Endzeit eingehalten. Die Aufnahme wird nur ggf. früher starten bzw. länger dauern, aber niemals kürzer.\n"
 "\n"
 "\n"
 "Unterstützte Sender\n"
 "\n"
 "Deutschland:\n"
-" Sender von ARD und ZDF sowie teilweise Sky und DMAX\n"
+" ARD und ZDF (d.h. einschließlich allen Dritten Programmen, 3sat, arte, Phoenix, KiKa, ZDFinfo, zdf_neo, zdf.kultur, EinsExtra, EinsPlus, Einsfestival)\n"
 "\n"
 "Österreich:\n"
-" ORF und Servus TV\n"
+" ORF\n"
 "\n"
 "Schweiz:\n"
 " SF\n"

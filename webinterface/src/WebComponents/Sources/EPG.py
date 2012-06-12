@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from Components.Sources.Source import Source
 from enigma import eServiceCenter, eServiceReference, eEPGCache
 
@@ -186,6 +187,7 @@ class EPG(Source):
 
 	def searchEvent(self, needle):
 		print "[WebComponents.EPG] searching EPG: ", needle
+
 		self.search = True
 
 		events = self.epgcache.search(('IBDTSERN', 256, eEPGCache.PARTIAL_TITLE_SEARCH, needle, 1));

@@ -34,10 +34,10 @@ msgstr "Fehler beim Sichern der DVD!"
 
 #: ../src/plugin.py:186
 msgid ""
-"mkisofs job done.\n"
+"genisoimage job done.\n"
 "Delete DVD directory?"
 msgstr ""
-"mkisofs Job erledigt.\n"
+"genisoimage Job erledigt.\n"
 "DVD Ordner löschen?"
 
 #: ../src/plugin.py:201

@@ -1,9 +1,11 @@
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-30 22:38+0100\n"
-"PO-Revision-Date: 2011-10-03 21:49+0100\n"
+"POT-Creation-Date: 2012-05-20 19:11+0100\n"
+"PO-Revision-Date: 2012-05-20 19:13+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
@@ -17,7 +19,8 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/epgrefresh\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/epgrefresh\n"
 
-#: .../enigma2-plugins/epgrefresh/src/EPGRefresh.py:295
+#: .../enigma2-plugins/epgrefresh/src/EPGRefresh.py:313
+#: .../enigma2-plugins/epgrefresh/src/PipAdapter.py:79
 msgid "EPG refresh finished."
 msgstr "EPG refresh terminato."
 
@@ -110,8 +113,8 @@ msgid "If this is enabled, the plugin will wake up the receiver from deep standb
 msgstr "Se la funzione è abilitata il plugin riattiverà automaticamente il ricevitore in deep-standby, se possibile. In caso contrario, dovrà essere già attivo."
 
 #: .../enigma2-plugins/epgrefresh/src/EPGRefreshConfiguration.py:64
-msgid "Duration to stay on service-channels (minutes)"
-msgstr "Permanenza sul canale (minuti)"
+msgid "Duration to stay on service (seconds)"
+msgstr "Permanenza sul canale (secondi)"
 
 #: .../enigma2-plugins/epgrefresh/src/EPGRefreshConfiguration.py:64
 msgid "This is the duration each service/channel will stay active during a refresh."
@@ -206,22 +209,22 @@ msgstr "Ultimo aggiornamento: %s"
 msgid "Really close without saving settings?"
 msgstr "Chiudere senza salvare le modifiche?"
 
-#: .../enigma2-plugins/epgrefresh/src/MainPictureAdapter.py:19
+#: .../enigma2-plugins/epgrefresh/src/MainPictureAdapter.py:21
 msgid "EPG refresh starts scanning channels."
 msgstr "EPG Refresh ha iniziato la scansione dei canali."
 
-#: .../enigma2-plugins/epgrefresh/src/PipAdapter.py:30
-#: .../enigma2-plugins/epgrefresh/src/RecordAdapter.py:27
+#: .../enigma2-plugins/epgrefresh/src/PipAdapter.py:32
+#: .../enigma2-plugins/epgrefresh/src/RecordAdapter.py:29
 msgid "EPG refresh started in background."
 msgstr "EPG refresh avviato in background."
 
-#: .../enigma2-plugins/epgrefresh/src/PipAdapter.py:30
+#: .../enigma2-plugins/epgrefresh/src/PipAdapter.py:32
 msgid "Please don't use PiP meanwhile!"
 msgstr "Non utilizzare la PiP nel frattempo!"
 
-#: .../enigma2-plugins/epgrefresh/src/PipAdapter.py:77
-msgid "EPG refresh finished. PiP available now."
-msgstr "EPG refresh terminato. PiP di nuovo disponibile."
+#: .../enigma2-plugins/epgrefresh/src/PipAdapter.py:79
+msgid "PiP available now."
+msgstr "PiP di nuovo disponibile."
 
 #: .../enigma2-plugins/epgrefresh/src/plugin.py:37
 msgid "Main Picture"
@@ -239,7 +242,7 @@ msgstr "Picture in Picture (invisibile)"
 msgid "Fake recording"
 msgstr "Falsa registrazione"
 
-#: .../enigma2-plugins/epgrefresh/src/plugin.py:87
+#: .../enigma2-plugins/epgrefresh/src/plugin.py:92
 msgid ""
 "This might have been an automated bootup to refresh the EPG. For this to happen it is recommended to put the receiver to Standby.\n"
 "Do you want to do this now?"
@@ -247,38 +250,12 @@ msgstr ""
 "Si potrebbe trattare di un avvio automatico per aggiornamento EPG. Perchè ciò avvenga si raccomanda di porre il ricevitore in standby.\n"
 "Farlo ora?"
 
-#: .../enigma2-plugins/epgrefresh/src/plugin.py:189
-#: .../enigma2-plugins/epgrefresh/src/plugin.py:219
+#: .../enigma2-plugins/epgrefresh/src/plugin.py:194
+#: .../enigma2-plugins/epgrefresh/src/plugin.py:224
 msgid "Automatically refresh EPG"
 msgstr "Aggiornare automaticamente EPG"
 
-#: .../enigma2-plugins/epgrefresh/src/plugin.py:212
+#: .../enigma2-plugins/epgrefresh/src/plugin.py:217
 msgid "add to EPGRefresh"
 msgstr "aggiungere a EPGRefresh"
 
-#~ msgid "Configure EPGRefresh"
-#~ msgstr "Configurare Agg. automatizzato EPG"
-
-#~ msgid "Refresh EPG after"
-#~ msgstr "Aggiornare EPG dopo le"
-
-#~ msgid "Refresh EPG before"
-#~ msgstr "Aggiornare EPG prima delle"
-
-#~ msgid ""
-#~ "If you're also using the AutoTimer plugin this allows to extend the list "
-#~ "of services to refresh by the services your AutoTimers are restricted to."
-#~ msgstr ""
-#~ "Se è in uso anche il plugin AutoTimer, questa funzione permette di "
-#~ "estendere la lista dei canali da aggiornare con quelli configurati in "
-#~ "AutoTimer."
-
-#~ msgid "Make AutoTimer parse EPG if available"
-#~ msgstr "Se disponibile, effettuare una ricerca EPG AutoTimer"
-
-#~ msgid ""
-#~ "If you're also using the AutoTimer plugin this will initiate a scan of "
-#~ "the EPG after a completed refresh."
-#~ msgstr ""
-#~ "Se è in uso anche il plugin AutoTimer, quest'ultimo effettuerà una "
-#~ "scansione dell'EPG al termine dell'aggiornamento."

@@ -9,7 +9,7 @@ var Controller = Class.create({
 	registerEvents: function(){
 		this.eventsregistered = true;
 	},
-	
+
 	onFinished: function(){}
 });
 
@@ -18,44 +18,54 @@ var Bouquets = Class.create(Controller, {
 		$super(new BouquetListHandler(targetBouquets, targetMain));
 		this.loadFirstOnFinished = false;
 	},
-	
+
 	load: function(sRef, loadFirstOnFinished){
 		if(loadFirstOnFinished)
 			this.loadFirstOnFinished = true;
 		this.handler.load( {'sRef' : sRef} );
+		var services = $('contentServices');
+		if(services){
+			services.update('Please select a bouquet');
+		}
 	},
-	
+
 	loadBouquetsTv: function(){
+		setContentHd('Bouquets (TV)');
 		this.load(bouquetsTv);
 	},
-	
+
 	loadProviderTv: function(){
+		setContentHd('Providers (TV)');
 		this.load(providerTv);
 	},
-	
+
 	loadSatellitesTv: function(){
+		setContentHd('Satellites (TV)');
 		this.load(satellitesTv);
 	},
-	
+
 	loadBouquetsRadio: function(){
+		setContentHd('Bouquets (Radio)');
 		this.load(bouquetsRadio);
 	},
-	
+
 	loadProviderRadio: function(){
+		setContentHd('Providers (Radio)');
 		this.load(providerRadio);
 	},
-	
+
 	loadSatellitesRadio: function(){
+		setContentHd('Satellites (Radio)');
 		this.load(satellitesRadio);
 	},
-	
+
 	onFinished: function(){
 		var bouquets = this.handler.data.services;
 		if(bouquets){
 			if(this.loadFirstOnFinished || bouquets.length == 1){
 				var bouquet = bouquets[0];
 				setContentHd(bouquet.servicename);
-				this.loadFirstOnFinished = false; 
+				this.loadFirstOnFinished = false;
 				hash = core.getBaseHash() + '/' + bouquet.servicereference;
 				hashListener.setHash(hash);
 			} else {
@@ -78,20 +88,34 @@ var Current = Class.create(Controller, {
 		this.handler.onFinished[this.handler.onFinished.length] = this.onFinished.bind(this);
 		this.display = 'none';
 	},
-	
+
 	load: function(){
-		var ext = $('trExtCurrent'); 
-		if(ext != null){
-			this.display = $('trExtCurrent').style.display;
-		}
 		this.handler.load({});
 	},
-	
+
+	toggleVisibility: function(element){
+		var ext = $('trExtCurrent');
+		if(ext){
+			var bullet = element.down('.currentBulletToggle');
+			if(ext.visible()){
+				bullet.src = '/web-data/img/toggle_expand.png';
+				bullet.alt = "+";
+				ext.hide();
+			}else{
+				bullet.src = '/web-data/img/toggle_collapse.png';
+				bullet.alt = "-";
+				ext.show();
+			}
+			this.display = ext.style.display;
+			setMaxHeight('contentMain');
+		}
+	},
+
 	onFinished: function(){
-		var ext = $('trExtCurrent'); 
-		if(ext != null){
+		setMaxHeight('contentMain');
+		var ext = $('trExtCurrent');
+		if(ext){
 			ext.style.display = this.display;
-			
 			var bullet = $('currentName').down('.currentBulletToggle');
 			if(ext.visible()){
 				bullet.src = '/web-data/img/toggle_collapse.png';
@@ -105,17 +129,35 @@ var Current = Class.create(Controller, {
 	}
 });
 
+var Externals = Class.create(Controller, {
+	initialize: function($super, target){
+		$super(new ExternalsHandler(target));
+		this.loaded = false;
+	},
+
+	load: function(){
+		if(!this.loaded)
+			this.handler.load({});
+		else
+			this.handler.show(this.handler.data);
+	},
+
+	onFinished: function(){
+		this.loaded = true;
+	}
+});
+
 var EPG = Class.create(Controller, {
 	initialize: function($super){
 		$super(new EpgListHandler(this.show.bind(this)));
 		this.window = '';
 	},
-	
+
 	show:function(html){
 		var win = core.popup("EPG" + new Date().getTime(), html, 900, 500);
 		this.doRegisterEvents(win);
 	},
-	
+
 	load: function(sRef){
 		this.handler.load({'sRef' : sRef});
 	},
@@ -123,7 +165,7 @@ var EPG = Class.create(Controller, {
 	search: function(needle){
 		this.handler.search({'search' : needle});
 	},
-	
+
 	doRegisterEvents: function(win){
 		var elem = win.document;
 		var onload = function(event){
@@ -162,9 +204,119 @@ var EPG = Class.create(Controller, {
 	}
 });
 
+var MultiEpg = Class.create(Controller, {
+	initialize: function($super){
+		$super(new MultiEpgHandler(this.show.bind(this)));
+		this.tplDetails = "";
+	},
+
+	load: function(bRef){
+		templateEngine.fetch(
+			'tplMultiEpgDetail',
+			function(tpl){
+				this.tplDetails = tpl;
+				this.doLoad(bRef);
+			}.bind(this));
+	},
+
+	doLoad: function(bRef){
+		this.handler.load({'bRef' : bRef});
+	},
+
+	show:function(html){
+		var win = core.popup("MultiEpg" + new Date().getTime(), html, 900, 570);
+		this.doRegisterEvents(win);
+	},
+
+	doRegisterEvents: function(win){
+		var elem = win.document;
+		var _this = this;
+		var onload = function(event){
+//			elem.on(
+//				'resize',
+//				function(event, element){
+//					var tbody = $('mEpgTBody');
+//					var top = tbody.cumulativeOffset().top;
+//					var height = elem.viewport.height - top;
+//					tbody.style.height = height;
+//					console.log(offset);
+//				}
+//			);
+			elem.on(
+				'click',
+				'.mEpgItem',
+				function(event, element){
+					var detail = elem.getElementById('mEpgDetail');
+					if(detail){
+						var e = {};
+						e.servicereference = element.readAttribute('data-servicereference');
+						e.servicename = element.readAttribute('data-servicename');
+						e.eventid = element.readAttribute('data-eventid');
+						e.date = element.readAttribute('data-date');
+						e.start = element.readAttribute('data-start');
+						e.starttime = element.readAttribute('data-starttime');
+						e.end = element.readAttribute('data-end');
+						e.endtime = element.readAttribute('data-endtime');
+						e.duration = element.readAttribute('data-duration');
+						e.title = element.readAttribute('data-title');
+						e.description = element.readAttribute('data-description');
+						e.extdescription = element.readAttribute('data-extdescription');
+						var data = {'e' : e};
+						detail.update(_this.tplDetails.process(data));
+						detail.fadeIn({'delay' : 300, 'to' : 95});
+					}
+					event.stop();
+				}
+			);
+			elem.on(
+				'click',
+				'.close',
+				function(event, element){
+					var detail = elem.getElementById('mEpgDetail');
+					if(detail)
+						detail.fadeOut({'delay' : 300});
+					event.stop();
+				}
+			);
+
+			elem.on(
+				'click',
+				'.eListAddTimer',
+				function(event, element){
+					core.timers.addByEventId(element, 0);
+					event.stop();
+				}
+			);
+			elem.on(
+				'click',
+				'.eListZapTimer',
+				function(event, element){
+					core.timers.addByEventId(element, 1);
+					event.stop();
+				}
+			);
+			elem.on(
+				'click',
+				'.eListEditTimer',
+				function(event, element){
+					var hash = ["#!/timer", "edit"].join("/");
+					hashListener.setHash(hash);
+					core.timers.editFromEvent(element);
+					event.stop();
+				}
+			);
+		};
+		if(elem.on){
+			onload();
+		} else {
+			win.onload = onload;
+		}
+	}
+});
+
 var Power = Class.create({
 	STATES: {'toggle' : 0, 'deep' : 1, 'reboot' : 2, 'gui' : 3},
-	
+
 	initialize: function(){
 		//As we do not have an real templates here, there is no handler for powerstate.
 		//The Handling is up to the caller of this class
@@ -173,12 +325,12 @@ var Power = Class.create({
 		this.isLoading = false;
 		this.isStandby = false;
 	},
-	
+
 	load: function(params){
 		this.isLoading = true;
 		this.provider.load(params);
 	},
-	
+
 	onLoadFinished:function (isStandby){
 		this.isStandby = isStandby;
 		this.isLoading = false;
@@ -188,14 +340,14 @@ var Power = Class.create({
 			callback(this.isStandby);
 		}
 	},
-	
+
 	inStandby: function(callback){
 		this.callbacks.push(callback);
 		if(!this.isLoading){
 			this.load({});
 		}
 	},
-	
+
 	set: function(newstate, callback){
 		this.callbacks.push(callback);
 		this.load({'newstate' : this.STATES[newstate]});
@@ -217,12 +369,12 @@ var LocationsAndTags = Class.create({
 		this.locCallbacks = [];
 		this.tagCallbacks = [];
 		this.locTagCallbacks = [];
-		
+
 		this.curlocprovider = new CurrentLocationProvider(this.onCurrentLocationAvailable.bind(this));
 		this.locprovider = new LocationProvider(this.onLocationsAvailable.bind(this));
 		this.tagprovider = new TagProvider(this.onTagsAvailable.bind(this));
 	},
-	
+
 	getCurrentLocation: function(callback){
 		if(this.isCurrentLocationReady){
 			callback(this.currentLocation);
@@ -234,7 +386,7 @@ var LocationsAndTags = Class.create({
 			}
 		}
 	},
-	
+
 	onCurrentLocationAvailable: function(currentLocation){
 		debug("[LocationsAndTags].onCurrentLocationAvailable");
 		this.isCurrentLocationReady = true;
@@ -247,7 +399,7 @@ var LocationsAndTags = Class.create({
 		}
 		this.onLocationsOrTagsAvailable();
 	},
-	
+
 	getLocations: function(callback){
 		if(this.isLocationsReady){
 			callback(this.locations);
@@ -259,7 +411,7 @@ var LocationsAndTags = Class.create({
 			}
 		}
 	},
-	
+
 	onLocationsAvailable: function(locations){
 		debug("[LocationsAndTags].onLocationsAvailable");
 		this.isLocationsReady = true;
@@ -272,7 +424,7 @@ var LocationsAndTags = Class.create({
 		}
 		this.onLocationsOrTagsAvailable();
 	},
-	
+
 	getTags: function(callback){
 		if(this.isTagsReady){
 			callback(this.tags);
@@ -284,7 +436,7 @@ var LocationsAndTags = Class.create({
 			}
 		}
 	},
-	
+
 	onTagsAvailable: function(tags){
 		debug("[LocationsAndTags].onTagsAvailable");
 		this.isTagsReady = true;
@@ -297,7 +449,7 @@ var LocationsAndTags = Class.create({
 		}
 		this.onLocationsOrTagsAvailable();
 	},
-	
+
 	getLocationsAndTags: function(callback){
 		if(this.isCurrentLocationReady && this.isLocationsReady && this.isTagsReady){
 			callback(this.currentLocation, this.locations, this.tags);
@@ -311,7 +463,7 @@ var LocationsAndTags = Class.create({
 				this.tagprovider.load({});
 		}
 	},
-	
+
 	onLocationsOrTagsAvailable: function(){
 		if(this.isCurrentLocationReady && this.isLocationsReady && this.isTagsReady){
 			var len = this.locTagCallbacks.length;
@@ -335,19 +487,23 @@ var MediaPlayer = Class.create(Controller, {
 		var parms = {'path' : path};
 		this.handler.load(parms);
 	},
-	
+
 	playFile: function(file){
 		this.handler.playFile(file);
 	},
-	
+
+	addFile: function(file){
+		this.handler.addFile(file);
+	},
+
 	removeFile: function(file){
 		this.handler.removeFile(file);
 	},
-	
+
 	savePlaylist: function(filename){
 		this.handler.savePlaylist(filename);
 	},
-	
+
 	command: function(cmd){
 		this.handler.command(cmd);
 	}
@@ -357,18 +513,18 @@ var Messages = Class.create({
 	initialize: function(){
 		this.handler = new SimpleRequestHandler();
 	},
-	
+
 	send: function(text, type, timeout){
 		this.handler.load(URL.message, {'text' : text, 'type' : type, 'timeout' : timeout});
 	}
 });
 
 var Movies = Class.create(Controller, {
-	initialize: function($super, listTarget, navTarget){
+	initialize: function($super, listTarget, navTarget, locTarget){
 		$super(new MovieListHandler(listTarget));
-		this.navHandler = new MovieNavHandler(navTarget);
+		this.navHandler = new MovieNavHandler(navTarget, locTarget);
 	},
-	
+
 	load: function(location, tags){
 		if(!location){
 			var sethash = function(location){
@@ -382,18 +538,18 @@ var Movies = Class.create(Controller, {
 			}
 			return;
 		}
-		
+
 		this.handler.load({'dirname' : location, 'tag' : tags});
 	},
-	
+
 	loadNav: function(){
 		core.lt.getLocationsAndTags(this.showNav.bind(this));
 	},
-	
+
 	showNav: function(currentLocation, locations, tags){
 		this.navHandler.load(toOptionList(locations, currentLocation), toOptionList(tags, core.currentTag));
 	},
-	
+
 	del: function(element){
 		this.handler.del(element);
 	}
@@ -404,7 +560,7 @@ var RemoteControl = Class.create({
 		this.handler = new RemoteControlHandler();
 		this.window = '';
 	},
-	
+
 	open: function(){
 		if(!this.window)
 			this.window = '';
@@ -418,7 +574,7 @@ var RemoteControl = Class.create({
 			default:
 				tpl = 'tplWebRemoteOld';
 			}
-			
+
 			templateEngine.fetch(tpl, function(template){
 				this.eventsregistered = false;
 				this.window = core.popup('WebRemote', template, 250, 600);
@@ -426,11 +582,11 @@ var RemoteControl = Class.create({
 			}.bind(this));
 		}
 	},
-	
+
 	sendKey: function(cmd, type, shotType){
-		debug("[RemoteControl].sendKey: " + cmd); 
+		debug("[RemoteControl].sendKey: " + cmd);
 		this.handler.sendKey({'command' : cmd, 'type': type});
-		
+
 		var hash = '!/control'; //FIXME
 		switch(shotType){
 		case undefined:
@@ -454,12 +610,12 @@ var RemoteControl = Class.create({
 			},
 			250);
 	},
-	
+
 	registerEvents:function(){
 		var _this = this;
 		var win = this.window;
 		var elem = win.document;
-		
+
 		var onload = function(event){
 			elem.on(
 				'click',
@@ -495,19 +651,20 @@ var Screenshots = Class.create(Controller, {
 	TYPE_OSD : 'o',
 	TYPE_VIDEO : 'v',
 	TYPE_ALL : '',
-	
+
 	initialize: function($super, target){
 		$super(new ScreenshotHandler(target));
 	},
-	
+
 	load: function(type){
 		var filename = '/tmp/' + new Date().getTime();
 		var params = {'format' : 'jpg', 'r': '720', 'filename' : filename};
-		
+
 		switch(type){
 			case this.TYPE_OSD:
 				params['o'] = '';
 				params['n'] = '';
+				params['format'] = 'png';
 				break;
 			case this.TYPE_VIDEO:
 				params['v'] = '';
@@ -522,12 +679,12 @@ var Screenshots = Class.create(Controller, {
 		setContentHd('Screenshot (OSD)');
 		this.load(this.TYPE_OSD);
 	},
-	
+
 	shootVideo: function(){
 		setContentHd('Screenshot (Video)');
 		this.load(this.TYPE_VIDEO);
 	},
-	
+
 	shootAll: function(){
 		setContentHd('Screenshot (All)');
 		this.load(this.TYPE_ALL);
@@ -540,33 +697,52 @@ var Services = Class.create(Controller, {
 		this.epg = epg;
 		this.cachedServiceElements = null;
 	},
-	
+
 	zap: function(sRef, callback){
 		this.handler.zap({'sRef' : sRef}, callback);
 	},
-	
+
 	load: function(sRef){
 		this.handler.load({'bRef' : sRef});
 	},
-	
+
 	getNowNext: function(){
 		this.handler.getNowNext();
 	},
-	
+
 	getSubservices: function(){
 		this.handler.getSubservices();
 	},
-	
+
+	loadAll: function(ref){
+		var tpl = 'tplBouquetsAndServices';
+		var fnc = function(){
+			$('contentBouquets').update('All Services');
+			this.load(ref);
+		}.bind(this);
+
+		if($('contentBouquets')){
+			fnc();
+		} else {
+			templateEngine.process(
+				tpl,
+				null,
+				'contentMain',
+				fnc
+			);
+			}
+	},
+
 	loadAllTv: function(){
-		this.load(allTv);
+		this.loadAll(allTv);
 		setContentHd("All (Tv)");
 	},
 
 	loadAllRadio: function(){
-		this.load(allRadio);
+		this.loadAll(allRadio);
 		setContentHd("All (Radio)");
 	},
-	
+
 	onFilterFocus: function(event){
 		event.element().value = '';
 		this.cachedServiceElements = null;
@@ -575,23 +751,30 @@ var Services = Class.create(Controller, {
 
 	filter: function(event){
 		var needle = event.element().value.toLowerCase();
-		
+
 		if(this.cachedServiceElements == null){
 			this.cachedServiceElements = $$('.sListRow');
 		}
-		
+		var cls = 'even';
 		for(var i = 0; i < this.cachedServiceElements.length; i++){
 			var row = this.cachedServiceElements[i];
 			var serviceName = row.readAttribute('data-servicename').toLowerCase();
-			
+
 			if(serviceName.match(needle) != needle && serviceName != ""){
 				row.hide();
 			} else {
+				cls = cls == 'odd' ? 'even' : 'odd';
+				notCls = cls == 'odd' ? 'even' : 'odd';
+
+				var td = row.firstDescendant();
+				td.removeClassName(notCls);
+				td.addClassName(cls);
+
 				row.show();
 			}
 		}
 	},
-	
+
 	addFilterInput: function(){
 		var input = new Element('input');
 		input.id = 'serviceFilter';
@@ -600,7 +783,7 @@ var Services = Class.create(Controller, {
 		input.on('focus', this.onFilterFocus.bind(this));
 		input.on('keyup', this.filter.bind(this));
 	},
-	
+
 	onFinished: function(){
 		this.addFilterInput();
 		core.startUpdateBouquetItemsPoller();
@@ -615,14 +798,14 @@ var SignalWindow = Class.create(Controller, {
 			this.seconds = seconds * 1000;
 		} else {
 			this.seconds = 5000;
-		} 
+		}
 		this.interval = '';
 	},
-	
+
 	load: function(){
 		this.handler.load({});
 	},
-	
+
 	reload: function(){
 		debug('[SignalWindow].reload');
 		if (!this.window.closed && this.window.location){
@@ -639,7 +822,7 @@ var SignalWindow = Class.create(Controller, {
 			this.window.onbeforeunload = function(){
 				clearInterval(this.interval);
 			};
-			
+
 			var _this = this;
 			clearInterval(_this.interval);
 			this.interval = setInterval(_this.reload.bind(this), _this.seconds);
@@ -656,12 +839,12 @@ var SimplePages = Class.create({
 	PAGE_POWER : 'tplPower',
 	PAGE_SETTINGS: 'tplSettings',
 	PAGE_TOOLS: 'tplTools',
-	
+
 	initialize: function(target){
 		this.simpleHandler = new SimplePageHandler(target);
 		this.deviceInfoHandler = new DeviceInfoHandler(target);
 	},
-	
+
 	show: function(tpl, data){
 		if(!data)
 			data = {};
@@ -672,17 +855,17 @@ var SimplePages = Class.create({
 		setContentHd('About');
 		this.show(this.PAGE_ABOUT);
 	},
-	
+
 	loadMessage: function(){
 		setContentHd('Message');
 		this.show(this.PAGE_MESSAGE);
 	},
-	
+
 	loadPower: function(){
 		setContentHd('PowerControl');
 		this.show(this.PAGE_POWER);
 	},
-	
+
 	loadSettings: function(){
 		setContentHd('Settings');
 		var debug = userprefs.data.debug;
@@ -690,7 +873,7 @@ var SimplePages = Class.create({
 		if(debug){
 			debugChecked = 'checked';
 		}
-		
+
 		var updateCurrentInterval = userprefs.data.updateCurrentInterval / 1000;
 		var updateBouquetInterval = userprefs.data.updateBouquetInterval / 1000;
 
@@ -700,17 +883,17 @@ var SimplePages = Class.create({
 		};
 		this.show(this.PAGE_SETTINGS, data);
 	},
-	
+
 	loadTools: function(){
 		setContentHd('Tools');
 		this.show(this.PAGE_TOOLS);
 	},
-	
+
 	loadDeviceInfo: function(){
 		setContentHd('Device Info');
 		this.deviceInfoHandler.load({});
 	},
-	
+
 	getDeviceInfo: function(callback){
 		this.deviceInfoHandler.get({}, callback);
 	}
@@ -721,40 +904,40 @@ var Timers = Class.create({
 		this.listHandler = new TimerListHandler(target);
 		this.timerHandler = new TimerHandler(target, this.loadList.bind(this), [this.onTimerEditLoadFinished.bind(this)]);
 	},
-	
+
 	loadList: function(){
 		this.listHandler.load({});
 	},
-	
+
 	cleanupList: function(){
 		this.listHandler.cleanup();
 	},
-	
+
 	create: function(){
 		this.timerHandler.load({}, false, true);
 	},
-	
+
 	edit: function(element){
 		this.timerHandler.load(element, true);
 	},
-	
+
 	editFromEvent: function(element){
 		this.timerHandler.load(element, false, false, true);
 	},
-	
+
 	save: function(element){
 		this.timerHandler.commitForm(element);
 	},
-	
+
 	onBouquetChanged: function(bRef){
 		this.timerHandler.onBouquetChanged(bRef, this.onUpdatedServiceListReady.bind(this));
 	},
-	
+
 	onUpdatedServiceListReady: function(data, timer){
 		var serviceSel = $('service');
 		var options = serviceSel.options;
 		options.length = 0;
-		
+
 		var i = 0;
 		data.services.each(function(s){
 			var selected = false;
@@ -769,22 +952,22 @@ var Timers = Class.create({
 	recordNow: function(type, callback){
 		this.timerHandler.recordNow(type, callback);
 	},
-	
+
 	addByEventId: function(element, justplay){
 		var parent = element.up('.epgListItem');
 		var sRef = unescape(parent.readAttribute('data-servicereference'));
 		var eventId = unescape(parent.readAttribute('data-eventid'));
 		this.timerHandler.addByEventId(sRef, eventId, justplay);
 	},
-	
+
 	toggleDisabled: function(element){
 		this.timerHandler.toggleDisabled(element);
 	},
-	
+
 	del: function(element){
 		this.timerHandler.del(element);
 	},
-	
+
 	onTimerEditLoadFinished: function(){
 		debug("[Timers].onTimerEditLoadFinished");
 		datePickerController.destroyDatePicker('sdate');
@@ -794,16 +977,16 @@ var Timers = Class.create({
 			length = length || 2;
 			return "0000".substr(0,length - Math.min(String(value).length, length)) + value;
 		};
-		var opts = { 
+		var opts = {
 				showWeeks: true,
 				noFadeEffect: true,
 				rangeLow: today.getFullYear() + "" + pad(today.getMonth()+1) + pad(today.getDate())
 			};
-		
-		
+
+
 		opts['formElements'] = { 'sdate' : 'Y-ds-m-ds-d'};
 		datePickerController.createDatePicker(opts);
-		
+
 		opts['formElements'] = { 'edate' : 'Y-ds-m-ds-d'};
 		datePickerController.createDatePicker(opts);
 
@@ -814,11 +997,11 @@ var Volume = Class.create(Controller, {
 	initialize: function($super, target){
 		$super(new VolumeHandler(target));
 	},
-	
+
 	load: function(){
 		this.handler.load({});
 	},
-	
+
 	set: function(value){
 		this.handler.load({'set' : value});
 	}
@@ -826,7 +1009,7 @@ var Volume = Class.create(Controller, {
 
 var E2WebCore = Class.create({
 	initialize: function(){
-		this.mediaPlayerStarted = false; 
+		this.mediaPlayerStarted = false;
 		this.popUpBlockerHinted = false;
 		this.settings = null;
 		this.parentControlList = null;
@@ -846,22 +1029,20 @@ var E2WebCore = Class.create({
 
 		this.isActive = {};
 		this.isActive.getCurrent = false;
-		
-		this.locationsList = [];
-		this.tagList = [];
 
-		this.boxtype = "dm8000";
 		this.mode = "";
 		this.subMode = "";
-		
+
 		//create required Instances
 		this.bouquets = new Bouquets('contentBouquets', 'contentMain');
 		this.current = new Current('currentContent', 'volContent');
+		this.externals = new Externals('navExternalsContainer');
 		this.epg = new EPG(new EpgListHandler());
 		this.lt = new LocationsAndTags();
 		this.mediaplayer = new MediaPlayer('contentMain');
 		this.messages = new Messages();
-		this.movies = new Movies('contentMain', 'navContent');
+		this.movies = new Movies('contentMain', 'navContent', 'contentHdExt');
+		this.multiepg = new MultiEpg();
 		this.power = new Power();
 		this.remote = new RemoteControl();
 		this.screenshots = new Screenshots('contentMain');
@@ -870,21 +1051,21 @@ var E2WebCore = Class.create({
 		this.simplepages = new SimplePages('contentMain');
 		this.timers = new Timers('contentMain');
 		this.volume = new Volume('volContent');
-		
+
 		this.currentData = {};
 		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
 		this.currentTag = "";
 		this.deviceInfo = this.simplepages.getDeviceInfo(function(info){this.deviceInfo = info;}.bind(this));
-		
+
 		this.navlut = {
 			'tv': {
-				'bouquets' : this.bouquets.loadBouquetsTv.bind(this.bouquets), 
-				'provider' : this.bouquets.loadProviderTv.bind(this.bouquets),
+				'bouquets' : this.bouquets.loadBouquetsTv.bind(this.bouquets),
+				'providers' : this.bouquets.loadProviderTv.bind(this.bouquets),
 				'all' : this.services.loadAllTv.bind(this.services)
 				},
 			'radio': {
 				'bouquets' : this.bouquets.loadBouquetsRadio.bind(this.bouquets),
-				'provider' : this.bouquets.loadProviderRadio.bind(this.bouquets),
+				'providers' : this.bouquets.loadProviderRadio.bind(this.bouquets),
 				'all' : this.services.loadAllRadio.bind(this.services)
 			},
 			'movies':{
@@ -905,13 +1086,13 @@ var E2WebCore = Class.create({
 			'extras': {
 				'about' : this.simplepages.loadAbout.bind(this.simplepages),
 				'deviceinfo' : this.simplepages.loadDeviceInfo.bind(this.simplepages),
-				'mediaplayer' : this.mediaplayer.load.bind(this.mediaplayer),
+				'mediaplayer' : function() { this.loadContentDynamic(this.mediaplayer.load.bind(this.mediaplayer), 'MediaPlayer'); }.bind(this),
 				'settings' : this.simplepages.loadSettings.bind(this.simplepages),
 				'tools' : this.simplepages.loadTools.bind(this.simplepages)
 			}
 		};
 	},
-	
+
 	hideNotifier: function(){
 		debug("[E2WebCore].hideNotifier");
 		$('notification').fadeOut(500);
@@ -920,7 +1101,6 @@ var E2WebCore = Class.create({
 	notify: function(text, state){
 		debug("[E2WebCore].notify");
 		notif = $('notification');
-
 		if(notif !== null){
 			//clear possibly existing hideNotifier timeout of a previous notfication
 			clearTimeout(this.hideNotifierTimeout);
@@ -929,32 +1109,31 @@ var E2WebCore = Class.create({
 			} else {
 				notif.style.background = "#85C247";
 			}
-
 			this.set('notification', "<div>"+text+"</div>");
 			notif.fadeIn({'delay' : 500, 'to' : 90});
 			var _this = this;
 			this.hideNotifierTimeout = setTimeout(_this.hideNotifier.bind(this), 5000);
 		}
 	},
-	
+
 	set: function(element, value){
 		element = parent.$(element);
 		if (element){
 			element.update(value);
 		}
 	},
-	
+
 	setAjaxLoad: function(targetElement){
 		target = $(targetElement);
 		if(target != null){
 			target.update( getAjaxLoad() );
 		}
 	},
-	
+
 	messageBox: function(message){
 		alert(message);
 	},
-	
+
 	popUpBlockerHint: function(){
 		if(!this.popUpBlockerHinted){
 			this.popUpBlockerHinted = true;
@@ -962,15 +1141,15 @@ var E2WebCore = Class.create({
 
 		}
 	},
-	
+
 	setWindowContent: function(window, html){
 		window.document.write(html);
 		window.document.close();
 	},
-	
+
 	popup: function(title, html, width, height, x, y){
 		try {
-			var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height);		
+			var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height);
 			this.setWindowContent(popup, html);
 			return popup;
 		} catch(e){
@@ -978,13 +1157,18 @@ var E2WebCore = Class.create({
 			return "";
 		}
 	},
-	
+
+	delayedUpdateItems: function(){
+		var _this = this;
+		setTimeout(_this.updateItems.bind(this), 2000);
+	},
+
 	updateItems: function(){
 		debug("[E2WebCore].updateItems");
 		this.current.load();
 		this.power.inStandby(this.onPowerStateAvailable.bind(this));
 	},
-	
+
 	onPowerStateAvailable: function(isStandby){
 		if(isStandby){
 			$('openSignalPanelImg').src="/web-data/img/transmit_grey.png";
@@ -998,42 +1182,58 @@ var E2WebCore = Class.create({
 		this.services.getNowNext();
 		this.services.getSubservices();
 	},
-	
+
 	startUpdateCurrentPoller: function(){
 		debug("[E2WebCore].startUpdateCurrentPoller");
 		clearInterval(this.updateCurrentPoller);
 		var _this = this;
 		this.updateCurrentPoller = setInterval(_this.updateItems.bind(this), userprefs.data.updateCurrentInterval);
 	},
-	
+
 	stopUpdateCurrentPoller: function(){
 		clearInterval(this.updateCurrentPoller);
 	},
-	
+
 	startUpdateBouquetItemsPoller: function(){
 		debug("[E2WebCore].startUpdateBouquetItemsPoller");
 		clearInterval(this.updateBouquetItemsPoller);
 		var _this = this;
 		this.updateBouquetItemsPoller = setInterval(_this.updateItemsLazy.bind(this), userprefs.data.updateBouquetInterval);
 	},
-	
+
 	stopUpdateBouquetItemsPoller: function(){
 		debug("[E2WebCore].stopUpdateBouquetItemsPoller");
 		clearInterval(this.updateBouquetItemsPoller);
 	},
-	
+
+	setNavHighlight: function(){
+		var navitems = $$(".navmenu");
+		navitems.each(function(element){
+			var mode = element.readAttribute("data-mode");
+			var navselected = "navselected";
+			if(mode == this.mode){
+				element.addClassName(navselected);
+			} else {
+				element.removeClassName(navselected);
+			}
+		}.bind(this));
+	},
+
 	onHashChanged: function(isReload){
 		var hash = hashListener.getHash();
 		var parts = hash.split("/");
-	
+
 		var len = parts.length;
 		if(len >= 2){
 			var mode = parts[1];
 			if(mode != this.mode || isReload || ( len <= 2 && this.subMode != '') ){
-				this.switchMode(mode);
+				this.switchMode(mode, len == 2);
 				this.subMode = '';
 			}
 			this.mode = mode;
+
+			this.setNavHighlight();
+
 			if(len > 2){
 				var subMode = parts[2];
 				if(subMode != this.subMode || isReload){
@@ -1054,16 +1254,17 @@ var E2WebCore = Class.create({
 					case 'movies':
 						var location = decodeURIComponent(parts[4]);
 						var tag = decodeURIComponent(parts[5]);
-						
+
 						this.currentLocation = location;
 						this.currentTag = tag;
 						this.loadContentDynamic(
 							function(){
 								this.movies.load(location, tag);
 							}.bind(this),
-							'Movies'
+							'Movies',
+							true
 						);
-						
+
 						break;
 					case 'extras':
 						if(subMode == 'mediaplayer'){
@@ -1077,7 +1278,7 @@ var E2WebCore = Class.create({
 			}
 		}
 	},
-	
+
 	getBaseHash: function(){
 		var hash = ['#!', this.mode].join("/");
 		if(this.subMode != ''){
@@ -1085,7 +1286,7 @@ var E2WebCore = Class.create({
 		}
 		return hash;
 	},
-	
+
 	loadDefault: function(){
 		debug("[E2WebCore].loadDefault");
 		this.switchMode('tv');
@@ -1100,19 +1301,19 @@ var E2WebCore = Class.create({
 			userprefs.data.updateCurrentInterval = 120000;
 			userprefs.save();
 		}
-		
+
 		if( parseNr(userprefs.data.updateBouquetInterval) < 60000 ){
 			userprefs.data.updateBouquetInterval = 300000;
 			userprefs.save();
 		}
-		
+
 		if (typeof document.body.style.maxHeight == undefined) {
 			alert("Due to the tremendous amount of work needed to get everthing to " +
 			"work properly, there is (for now) no support for Internet Explorer Versions below 7");
 		}
 		hashListener.onHashChanged = this.onHashChanged.bind(this);
 		hashListener.init();
-		
+
 		this.registerEvents();
 
 		this.setAjaxLoad('navContent');
@@ -1127,7 +1328,7 @@ var E2WebCore = Class.create({
 		this.updateItems();
 		this.startUpdateCurrentPoller();
 	},
-	
+
 	registerEvents: function(){
 		debug("[E2WebCore].registerEvents");
 		//Hash-Reload-Fix
@@ -1135,7 +1336,7 @@ var E2WebCore = Class.create({
 		document.on(
 			'click',
 			'a',
-			function(event, element){ 
+			function(event, element){
 				var parts = element.href.split('#');
 				var curHost = window.location.href.split('#')[0];
 				//Don't do this crazy stuff when the target is another host!
@@ -1195,21 +1396,9 @@ var E2WebCore = Class.create({
 			'click',
 			'.currentExtShowHide',
 			function(event, element){
-				var ext = $('trExtCurrent');
-				if(ext){
-					var bullet = element.down('.currentBulletToggle');
-					if(ext.visible()){
-						bullet.src = '/web-data/img/toggle_expand.png';
-						bullet.alt = "+";
-						ext.hide();
-					}else{
-						bullet.src = '/web-data/img/toggle_collapse.png';
-						bullet.alt = "-";
-						ext.show();
-					}
-				}
+				this.current.toggleVisibility(element);
 				event.stop();
-			}
+			}.bind(this)
 		);
 		$('current').on(
 				'click',
@@ -1227,40 +1416,47 @@ var E2WebCore = Class.create({
 				this.epg.search($F('epgSearch'));
 				event.stop();
 			}.bind(this)
-		);		
+		);
 		$('epgSearch').on(
 			'focus',
 			function(event, element){
 				element.value = "";
 			}.bind(this)
-		);		
+		);
 		$('epgSearchClear').on(
 				'click',
 				function(event, element){
 					$('epgSearch').value = '';
 					return false;
 				}.bind(this)
-		);		
+		);
 		//Movienav
+		var changeevt = Prototype.Browser.IE ? "click" : "change";
 		var nav = $('navContent');
 		nav.on(
-			'change',
-			'.mNavLoc',
+			changeevt,
+			'.mNavLocTag',
 			function(event, element){
-				debug($("locations").value);
-				debug($("tags").value);
-				var hash = [this.getBaseHash(), "filter", encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
-				hashListener.setHash(hash);
+				var l = $('locations');
+				var t = $('tags');
+				var location = l.options[l.selectedIndex].value;
+				var tag = t.options[t.selectedIndex].value;
+				var hash = [this.getBaseHash(), "filter", encodeURIComponent(location), encodeURIComponent(tag)].join("/");
+				if(hash != '#'+hashListener.getHash() || !Prototype.Browser.IE)
+					hashListener.setHash(hash);
 			}.bind(this)
 		);
-		nav.on(
-			'change',
-			'.mNavTags',
+		$('contentHdExt').on(
+			changeevt,
+			'.mNavLocTag',
 			function(event, element){
-				debug($("locations").value);
-				debug($("tags").value);
-				var hash = [this.getBaseHash(), "filter", encodeURIComponent($("locations").value), encodeURIComponent($("tags").value)].join("/");
-				hashListener.setHash(hash);
+				var l = $('locations');
+				var t = $('tags');
+				var location = l.options[l.selectedIndex].value;
+				var tag = t.options[t.selectedIndex].value;
+				var hash = [this.getBaseHash(), "filter", encodeURIComponent(location), encodeURIComponent(tag)].join("/");
+				if(hash != '#'+hashListener.getHash() || !Prototype.Browser.IE)
+					hashListener.setHash(hash);
 			}.bind(this)
 		);
 		//RemoteControl
@@ -1278,7 +1474,7 @@ var E2WebCore = Class.create({
 				return false;
 			}.bind(this)
 		);
-		
+
 		//Content
 		var content = $('contentMain');
 		//MediaPlayer
@@ -1299,6 +1495,16 @@ var E2WebCore = Class.create({
 				event.stop();
 			}.bind(this)
 		);
+		content.on(
+				'click',
+				'.mpAddFile',
+				function(event, element){
+					var parent = element.up('.mpListItem');
+					var ref = decodeURIComponent( parent.readAttribute('data-servicereference') );
+					this.mediaplayer.addFile(ref);
+					event.stop();
+				}.bind(this)
+			);
 		content.on(
 			'click',
 			'.mpRemoveFile',
@@ -1333,8 +1539,8 @@ var E2WebCore = Class.create({
 		);
 		//Movielist
 		content.on(
-			'click', 
-			'a.mListDelete', 
+			'click',
+			'a.mListDelete',
 			function(event, element){
 				this.movies.del(element);
 				event.stop();
@@ -1345,14 +1551,37 @@ var E2WebCore = Class.create({
 			'click',
 			'.powerState',
 			function(event, element){
+				var newState = element.readAttribute("data-state");
 				var cb = function(isStandby){
 					var text = "Device is now Running";
-					if(isStandby)
-						text = "Device is now in Standby";
+					switch(this.power.STATES[newState]){
+					case this.power.STATES.toggle:
+						if(isStandby)
+							text = "Device is now in Soft-Standby";
+						break;
+					case this.power.STATES.deep:
+						if(isStandby)
+							text = "Device will go into deep standby (if possible, check OSD for messages)";
+						else
+							text = "Cannot shutdown!";
+						break;
+					case this.power.STATES.reboot:
+						if(isStandby)
+							text = "Device will reboot now (if possible, check OSD for messages)";
+						else
+							text = "Cannot reboot!";
+						break;
+					case this.power.STATES.gui:
+						if(isStandby)
+							text = "GUI will restart now (if possible, check OSD for messages)";
+						else
+							text = "Cannot restart GUI!";
+						break;
+					}
 					this.notify(text, true);
 					this.onPowerStateAvailable(isStandby);
 				}.bind(this);
-				this.power.set(element.readAttribute("data-state"), cb);
+				this.power.set(newState, cb);
 			}.bind(this)
 		);
 		//Settings
@@ -1371,19 +1600,29 @@ var E2WebCore = Class.create({
 				setContentHd(element.readAttribute("data-servicename"));
 			}
 		);
+		content.on(
+			'click',
+			'a.bListEpg',
+			function(event, element){
+				var sref = decodeURIComponent( element.readAttribute("data-servicereference") );
+				this.multiepg.load(sref);
+				event.stop();
+			}.bind(this)
+		);
+
 		//Servicelist
 		content.on(
 			'click',
 			'a.sListSLink',
 			function(event, element){
 				var ref = decodeURIComponent( element.id );
-				this.services.zap(ref, this.updateItems.bind(this));
+				this.services.zap(ref, this.delayedUpdateItems.bind(this));
 				event.stop();
 			}.bind(this)
 		);
 		content.on(
-			'click', 
-			'a.sListServiceEpg', 
+			'click',
+			'a.sListServiceEpg',
 			function(event, element){
 				var ref = unescape( element.readAttribute('data-servicereference') );
 				this.epg.load(ref);
@@ -1391,11 +1630,11 @@ var E2WebCore = Class.create({
 			}.bind(this)
 		);
 		content.on(
-			'click', 
+			'click',
 			'a.sListExtEpg',
 			function(event, element){
-				var target = element.down('.sListExtEpgLong');
-				
+				var target = element.up('.sListEPGItem').down('.sListExtEpgLong');
+
 				if(target){
 					var bullet = element.down('.sListBulletToggle');
 					if(target.visible()){
@@ -1411,26 +1650,53 @@ var E2WebCore = Class.create({
 				event.stop();
 			}.bind(this)
 		);
+		content.on(
+			'click',
+			'.sListAddTimer',
+			function(event, element){
+				core.timers.addByEventId(element, 0);
+				event.stop();
+			}
+		);
+		content.on(
+			'click',
+			'.sListZapTimer',
+			function(event, element){
+				core.timers.addByEventId(element, 1);
+				event.stop();
+			}
+		);
+		content.on(
+			'click',
+			'.sListEditTimer',
+			function(event, element){
+				var hash = ["#!/timer", "edit"].join("/");
+				hashListener.setHash(hash);
+				core.timers.editFromEvent(element);
+				event.stop();
+			}
+		);
+
 		//Timerlist
 		content.on(
-			'click', 
-			'.tListDelete', 
+			'click',
+			'.tListDelete',
 			function(event, element){
 				this.timers.del(element);
 				event.stop();
 			}.bind(this)
 		);
 		content.on(
-			'click', 
-			'.tListToggleDisabled', 
+			'click',
+			'.tListToggleDisabled',
 			function(event, element){
 				this.timers.toggleDisabled(element);
 				event.stop();
 			}.bind(this)
 		);
 		content.on(
-			'click', 
-			'.tListEdit', 
+			'click',
+			'.tListEdit',
 			function(event, element){
 				var hash = ["#!/timer", "edit"].join("/");
 				hashListener.setHash(hash);
@@ -1439,8 +1705,8 @@ var E2WebCore = Class.create({
 			}.bind(this)
 		);
 		content.on(
-			'click', 
-			'.tListCleanup', 
+			'click',
+			'.tListCleanup',
 			function(event, element){
 				this.timers.cleanupList();
 				return false;
@@ -1453,7 +1719,7 @@ var E2WebCore = Class.create({
 			function(event, element){
 				var days = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 				var weekdays = days.slice(0,5);
-				
+
 				switch(element.id){
 				case 'mf':
 					var checked = element.checked;
@@ -1539,12 +1805,12 @@ var E2WebCore = Class.create({
 				this.timers.save($('timerEditForm'));
 			}.bind(this)
 		);
-		
+
 		$('webTv').on(
 			'click',
 			function(event, element){
 				window.open('/web-data/tpl/default/streaminterface/index.html', 'WebTV', 'scrollbars=no, width=800, height=740');
-				event.abort();
+				event.stop();
 			}.bind(this)
 		);
 	},
@@ -1554,9 +1820,9 @@ var E2WebCore = Class.create({
 	 * @param template - The name of the template
 	 * @param title - The title to set for the navigation
 	 */
-	reloadNav: function(template, title){
+	reloadNav: function(template, title, callback){
 		this.setAjaxLoad('navContent');
-		templateEngine.process(template, null, 'navContent');
+		templateEngine.process(template, null, 'navContent', callback);
 		setNavHd(title);
 	},
 
@@ -1571,8 +1837,8 @@ var E2WebCore = Class.create({
 	 * @param fnc - The function used to load the content
 	 * @param title - The Title to set on the contentpanel
 	 */
-	loadContentDynamic: function(fnc, title){
-		setContentHd(title);
+	loadContentDynamic: function(fnc, title, keepHdExt){
+		setContentHd(title, keepHdExt);
 		this.stopUpdateBouquetItemsPoller();
 		fnc();
 	},
@@ -1588,8 +1854,17 @@ var E2WebCore = Class.create({
 		this.stopUpdateBouquetItemsPoller();
 		templateEngine.process(template, null, 'contentMain');
 	},
-	
-	switchMode: function(mode){
+
+	setEmptyContent: function(id, text){
+		$(id).update('<div class="block center fullwidth oneliner">' + text + '</div>');
+	},
+
+	switchMode: function(mode, initContent){
+		if(initContent){
+			this.setEmptyContent('contentMain', 'please select a submenu on the left...');
+			setContentHd('...');
+		}
+
 		switch(mode){
 		case "tv":
 			if(this.mode != 'tv' && this.mode != 'radio'){
@@ -1597,38 +1872,38 @@ var E2WebCore = Class.create({
 			}
 			this.reloadNav('tplNavTv', 'TeleVision');
 			break;
-	
+
 		case "radio":
 			if(this.mode != 'TV' && this.mode != 'Radio'){
 				this.services.registerEvents();
-			}		
+			}
 			this.reloadNav('tplNavRadio', 'Radio');
 			break;
-	
-		case "movies":	
+
+		case "movies":
 			this.reloadNavDynamic(this.movies.loadNav.bind(this.movies), 'Movies');
 			break;
-	
+
 		case "timer":
 			this.reloadNav('tplNavTimer', 'Timer');
 			break;
-	
+
 		case "control":
 			this.reloadNav('tplNavBoxControl', 'BoxControl');
 			break;
-	
+
 		case "extras":
-			this.reloadNav('tplNavExtras', 'Extras');
+			this.reloadNav('tplNavExtras', 'Extras', this.externals.load.bind(this.externals));
 			break;
-	
+
 		default:
 			break;
 		}
 	},
-	
+
 	saveSettings: function(){
 		userprefs.load();
-		
+
 		var debug = $('enableDebug').checked;
 		var changed = false;
 		if(debug != undefined){
@@ -1637,31 +1912,31 @@ var E2WebCore = Class.create({
 				changed = true;
 			}
 		}
-		
+
 		var updateCurrentInterval = parseNr( $F('updateCurrentInterval') ) * 1000;
 		if( updateCurrentInterval < 10000){
 			updateCurrentInterval = 120000;
 		}
-		
+
 		if( userprefs.data.updateCurrentInterval != updateCurrentInterval){
 			userprefs.data.updateCurrentInterval = updateCurrentInterval;
-			
+
 			changed = true;
 			this.startUpdateCurrentPoller();
 		}
-		
+
 		var updateBouquetInterval = parseNr( $F('updateBouquetInterval') ) * 1000;
 		if( updateBouquetInterval < 60000){
 			updateBouquetInterval = 300000;
 		}
-		
+
 		if( userprefs.data.updateBouquetInterval != updateBouquetInterval){
 			userprefs.data.updateBouquetInterval = updateBouquetInterval;
-			
+
 			changed = true;
 			this.startUpdateBouquetItemsPoller();
 		}
-		
+
 		if(changed){
 			userprefs.save();
 			this.notify("Settings saved");

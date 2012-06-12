@@ -1,11 +1,11 @@
-MovieCut-1.3
+MovieCut-1.4
 ------------
-2009-12-04
+2012-02-26
 Anders Holst (aho@sics.se)
 
 
 This module makes it possible to execute the cuts specified by the
-Cutlist editor on DM7025, i.e. the specified sections are actually
+Cutlist editor in enigma2, i.e. the specified sections are actually
 removed from the file, saving disk space and simplifying if the movie
 is to be e.g. burned to a DVD. When installed it will be accessible
 from the file list menu (i.e. selecting a file in the file list and
@@ -20,6 +20,15 @@ keep watching on your dreambox, and a typical movie takes about 15-20
 minutes to process. The program "mcut" can also be called directly
 from a shell. With no arguments it will give a brief description of
 the options.
+
+
+News since version 1.3
+
+* Language support added (thanks, Thorsten Manthei). Initially only
+  with german and swedish, but more translations will hopefully
+  follow.
+
+* Minor bug-fixes.
 
 
 News since version 1.2
@@ -75,15 +84,6 @@ News since version 1.0
 
 Caveats
 
-* Since some time in the spring 2008 there seems to be a change/bug in
-  enigma2 that makes the elapsed time calculation somewhat offset
-  compared to earlier. This appears such that cut marks placed with
-  earlier versions appears to have drifted when watched in the new
-  version of enigma2. MovieCut is still callibrated to the earlier
-  calculation, and may thus also place the cuts somewhat offset from
-  the intended places. Always cut to a new file and check the result
-  to be on the safe side!
-
 * The manual specification of cuts in the "advanced cut parameter"
   dialogue is as awkward as before to specify with the remote control:
   "0" is mapped to ".","0", and ":" since this was most
@@ -92,12 +92,9 @@ Caveats
   *excluded* as in the cutlist editor (i.e. there is first an IN time,
   followed by OUT, and so on).
 
-* Although the flickering between cuts may be gone when looking at the
-  movie on the dreambox, there is no guarantee that they are gone when
-  trying to convert it to mpeg for burning to DVD or similar. It is
-  not even guaranteed that they can be easily converted at all - at
-  least one program is reported to fail to continue after the first
-  cut.
+* There may still be occasional flickering at the cut points, at least
+  on some platforms and for some services. It is hard to do much
+  better without remuxing.
 
 
 Disclaimer

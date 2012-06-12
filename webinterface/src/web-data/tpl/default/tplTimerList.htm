@@ -3,49 +3,56 @@
 						<table id="contentTable" style="width: 100%;">
 							{for t in timer}
 							<tr style="width:100%;">
-								<td style="width:100%;">
-									<table class="timerState${t.state} tListItemTable ${t.cssclass}" border="0" cellpadding="0" cellspacing="0">
-										<tr class="tListHead">
-											<td colspan="4" rowspan="1" class="tListSName" title="${t.description.escapeHTML()}, ${t.descriptionextended.escapeHTML()}">
-											${t.name} - {if t.description == ''} N/A {else} ${t.description} {/if} (${t.servicename})
-											</td>
-										</tr>
-										<tr class="tListItem"
-											data-servicereference="${t.servicereference}"
-											data-servicename="${t.servicename.e()}"
-											data-description="${t.description.e()}"
-											data-name="${t.name.e()}"
-											data-eventid="${t.eventid}"
-											data-begin="${t.begin}"
-											data-end="${t.end}"
-											data-repeated="${t.repeated}"
-											data-justplay="${t.justplay}"
-											data-dirname="${t.dirname}"
-											data-tags="${t.tags}"
-											data-afterevent="${t.afterevent}"
-											data-disabled="${t.disabled}">
-
-											<td colspan="1" rowspan="1" class="tListRepeat">${t.repeatedReadable}</td>
-											<td colspan="1" rowspan="1" class="tListBegin">${t.beginDate}</td>
-											<td colspan="1" rowspan="1" class="tListType">${t.justplayReadable}</td>
-											<td colspan="1" rowspan="2" class="tListOption">
-												<button class="tListDelete" title="Delete timer ${t.name}">
-													<img src="/web-data/img/delete.png" border="0" />
-												</button>
-												<button class="tListToggleDisabled" title="${t.enDis} timer ${t.name}">
-													<img src="/web-data/img/${t.onOff}.png" border="0">
-												</button>
-												<button class="tListEdit" title="Edit timer ${t.name}">
-													<img src="/web-data/img/clock_edit.png" border="0" />
-												</button>
-											</td>	
-										</tr>
-										<tr class="tListItem">
-											<td class="tListDuration">${t.duration}&nbsp;Min</td>
-											<td class="tListEnd">${t.endDate}</td>
-											<td class="tListAfter">${t.aftereventReadable}</td>
-										</tr>
-									</table>
+								<td class="timerList tListItem"
+									data-servicereference="${t.servicereference}"
+									data-servicename="${t.servicename.e()}"
+									data-description="${t.description.e()}"
+									data-name="${t.name.e()}"
+									data-eventid="${t.eventid}"
+									data-begin="${t.begin}"
+									data-end="${t.end}"
+									data-repeated="${t.repeated}"
+									data-justplay="${t.justplay}"
+									data-dirname="${t.dirname}"
+									data-tags="${t.tags}"
+									data-afterevent="${t.afterevent}"
+									data-disabled="${t.disabled}">
+									<a href="#" class="tListEdit" title="Edit timer ${t.name}">
+										<table class="tListItemTable">
+											<tr class="tListHead">
+												<td colspan="4" rowspan="1" class="tListSName" title="${t.description.escapeHTML()}, ${t.descriptionextended.escapeHTML()}">
+												${t.name} - {if t.description == ''} N/A {else} ${t.description} {/if} (${t.servicename})
+												</td>
+											</tr>
+											<tr>
+												<td class="tListRepeat">${t.repeatedReadable}</td>
+												<td class="tListBegin">${t.beginDate}</td>
+												<td class="tListType">${t.justplayReadable}</td>
+												<td rowspan="2" class="tListOption">
+												<!-- 
+													<button class="tListDelete" title="Delete timer ${t.name}">
+														<img src="/web-data/img/delete.png" border="0" />
+													</button>
+													<button class="tListToggleDisabled" title="${t.enDis} timer ${t.name}">
+														<img src="/web-data/img/${t.onOff}.png" border="0">
+													</button>
+												 -->
+												</td>
+											</tr>
+											<tr class="tListItem">
+												<td class="tListDuration">${t.duration}&nbsp;Min</td>
+												<td class="tListEnd">${t.endDate}</td>
+												<td class="tListAfter">${t.aftereventReadable}</td>
+											</tr>
+										</table>
+									</a>
+									<span class="timerState${t.state} timerState">&nbsp;</span>
+									<a href="#" class="tListDelete" title="Delete timer ${t.name}">
+										<button class="tListButton"><img src="/web-data/img/delete.png" border="0" />Delete</button>
+									</a>
+									<a href="#" class="tListToggleDisabled" title="${t.enDis} timer ${t.name}">
+										<button class="tListButton"><img src="/web-data/img/${t.onOff}.png" border="0">${t.enDis}</button>
+									</a>
 								</td>
 							</tr>
 							{forelse}
@@ -53,6 +60,17 @@
 								<td>No Timers Available!</td>
 							</tr>
 							{/for}
+							<tr>
+								<td>
+									<div class="legendRow">
+										<div class="legendCol">Legend:</div>
+										<div class="legendCol timerState0">Waiting</div>
+										<div class="legendCol timerState1">Error</div>
+										<div class="legendCol timerState2">Running</div>
+										<div class="legendCol timerState3">Finished</div>
+									</div>
+								</td>
+							</tr>
 							<tr style="width:100%;">
 								<td>
 									<button class="tListCleanup" title="Cleans up the list of timers by removing e.g. finished timers">Timer list cleanup</button>

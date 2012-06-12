@@ -164,9 +164,6 @@ class PiconLoader():
 	def piconPathChanged(self, configElement = None):
 		self.nameCache.clear()
 		
-	def removeNotifier(self):
-		config.plugins.merlinEpgCenter.epgPaths.notifiers.remove(self.piconPathChanged)
-		
 def findDefaultPicon(serviceName):
 	searchPaths = (eEnv.resolve('${datadir}/enigma2/%s/'), '/media/cf/%s/', '/media/usb/%s/')
 	
@@ -195,11 +192,8 @@ def getFuzzyDay(t):
 	elif nt < t and (t - nt) < WEEKSECONDS:
 		# same week
 		date = WEEKDAYS[d.tm_wday]
-	elif d[0] == n[0]:
-		# same year
-		date = "%d.%d.%d" % (d.tm_mday, d.tm_mon, d.tm_year)
 	else:
-		date = _("Unknown date")
+		date = "%d.%d.%d" % (d.tm_mday, d.tm_mon, d.tm_year)
 		
 	return date
 	
@@ -309,97 +303,6 @@ class BlinkTimer():
 		self.listSets[LIST_TYPE_EPG].clear()
 		self.listSets[LIST_TYPE_UPCOMING].clear()
 		
-class RecTimerEntry(RecordTimerEntry):
-	def __init__(self, session, serviceref, begin, end, name, description, eit, disabled = False, justplay = False, afterEvent = AFTEREVENT.AUTO, checkOldTimers = False, dirname = None, tags = None):
-		self.session = session
-		RecordTimerEntry.__init__(self, serviceref, begin, end, name, description, eit, disabled = False, justplay = False, afterEvent = AFTEREVENT.AUTO, checkOldTimers = False, dirname = None, tags = None)
-		
-	def activate(self):
-		next_state = self.state + 1
-		self.log(5, "activating state %d" % next_state)
-
-		if next_state == self.StatePrepared:
-			if self.tryPrepare():
-				self.log(6, "prepare ok, waiting for begin")
-				# create file to "reserve" the filename
-				# because another recording at the same time on another service can try to record the same event
-				# i.e. cable / sat.. then the second recording needs an own extension... when we create the file
-				# here than calculateFilename is happy
-				if not self.justplay:
-					open(self.Filename + ".ts", "w").close() 
-				# fine. it worked, resources are allocated.
-				self.next_activation = self.begin
-				self.backoff = 0
-				return True
-
-			self.log(7, "prepare failed")
-			if self.first_try_prepare:
-				self.first_try_prepare = False
-				cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-				if cur_ref and not cur_ref.getPath():
-					if not config.recording.asktozap.value:
-						self.log(8, "asking user to zap away")
-						if config.plugins.merlinEpgCenter.showTimerMessages.value:
-							self.session.openWithCallback(self.failureCB, MessageBox, _("A timer failed to record!\nDisable TV and try again?\n"), timeout=20)
-					else: # zap without asking
-						self.log(9, "zap without asking")
-						if config.plugins.merlinEpgCenter.showTimerMessages.value:
-							self.session.open(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=config.merlin2.timeout_message_channel_switch.value)
-						self.failureCB(True)
-				elif cur_ref:
-					self.log(8, "currently running service is not a live service.. so stop it makes no sense")
-				else:
-					self.log(8, "currently no service running... so we dont need to stop it")
-			return False
-		elif next_state == self.StateRunning:
-			# if this timer has been cancelled, just go to "end" state.
-			if self.cancelled:
-				return True
-
-			if self.justplay:
-				if Screens.Standby.inStandby:
-					self.log(11, "wakeup and zap")
-					#set service to zap after standby
-					Screens.Standby.inStandby.prev_running_service = self.service_ref.ref
-					#wakeup standby
-					Screens.Standby.inStandby.Power()
-				else:
-					self.log(11, "zapping")
-					NavigationInstance.instance.playService(self.service_ref.ref)
-				return True
-			else:
-				self.log(11, "start recording")
-				record_res = self.record_service.start()
-				
-				if record_res:
-					self.log(13, "start record returned %d" % record_res)
-					self.do_backoff()
-					# retry
-					self.begin = time() + self.backoff
-					return False
-
-				return True
-		elif next_state == self.StateEnded:
-			old_end = self.end
-			if self.setAutoincreaseEnd():
-				self.log(12, "autoincrase recording %d minute(s)" % int((self.end - old_end)/60))
-				self.state -= 1
-				return True
-			self.log(12, "stop recording")
-			if not self.justplay:
-				NavigationInstance.instance.stopRecordService(self.record_service)
-				self.record_service = None
-			if self.afterEvent == AFTEREVENT.STANDBY:
-				if not Screens.Standby.inStandby and config.plugins.merlinEpgCenter.showTimerMessages.value: # not already in standby
-					self.session.openWithCallback(self.sendStandbyNotification, MessageBox, _("A finished record timer wants to set your\nDreambox to standby. Do that now?"), timeout = 20)
-			elif self.afterEvent == AFTEREVENT.DEEPSTANDBY:
-				if not Screens.Standby.inTryQuitMainloop: # not a shutdown messagebox is open
-					if Screens.Standby.inStandby: # in standby
-						RecordTimerEntry.TryQuitMainloop() # start shutdown handling without screen
-					elif config.plugins.merlinEpgCenter.showTimerMessages.value:
-						self.session.openWithCallback(self.sendTryQuitMainloopNotification, MessageBox, _("A finished record timer wants to shut down\nyour Dreambox. Shutdown now?"), timeout = 20)
-			return True
-			
 # interface between AutoTimer and our timer list
 class TimerListObject(object):
 	def __init__(self, begin, end, service_ref, name, justplay, disabled, autoTimerId, match, searchType, counter, counterLeft, destination, services, bouquets, includedDays, excludedDays):

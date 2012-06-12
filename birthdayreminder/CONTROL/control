@@ -1,0 +1,2 @@
+Description: Birthday Reminder: Reminds you of birthdays
+Depends: python-textutils

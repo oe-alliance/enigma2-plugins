@@ -1,0 +1,63 @@
+
+<!-- tplTimerList -->
+						<table id="timerlist" style="width: 100%;">
+							{for t in timer}
+							<tr style="width:100%;">
+								<td style="width:100%;">
+									<table class="timerState${t.state} tListItemTable ${t.cssclass}" border="0" cellpadding="0" cellspacing="0">
+										<tr class="tListHead">
+											<td colspan="4" rowspan="1" class="tListSName" title="${t.description.escapeHTML()}, ${t.descriptionextended.escapeHTML()}">
+												<div class="headerindent">
+													${t.name} - {if t.description == ''} N/A {else} ${t.description} {/if} (${t.servicename})
+												</div>
+											</td>
+										</tr>
+										<tr class="tListItem"
+											data-servicereference="${t.servicereference}"
+											data-servicename="${t.servicename.e()}"
+											data-description="${t.description.e()}"
+											data-name="${t.name.e()}"
+											data-eventid="${t.eventid}"
+											data-begin="${t.begin}"
+											data-end="${t.end}"
+											data-repeated="${t.repeated}"
+											data-justplay="${t.justplay}"
+											data-dirname="${t.dirname}"
+											data-tags="${t.tags}"
+											data-afterevent="${t.afterevent}"
+											data-disabled="${t.disabled}">
+											<td colspan="1" rowspan="1" class="tListRepeat"><div class="headerindent">${t.repeatedReadable}</div></td>
+											<td colspan="1" rowspan="1" class="tListBegin">${t.beginDate}</td>
+											<td colspan="1" rowspan="1" class="tListType">${t.justplayReadable}</td>
+											<td colspan="1" rowspan="2" class="tListOption">
+												<button class="tListDelete" title="Delete timer ${t.name}">
+													<img src="/web-data/img/delete.png" border="0" />
+												</button>
+												<button class="tListToggleDisabled" title="${t.enDis} timer ${t.name}">
+													<img src="/web-data/img/${t.onOff}.png" border="0">
+												</button>
+												<!-- Not supported
+												<button class="tListEdit" title="Edit timer ${t.name}">
+													<img src="/web-data/img/clock_edit.png" border="0" />
+												</button>
+												-->
+											</td>
+										</tr>
+										<tr class="tListItem">
+											<td class="tListDuration"><div class="headerindent">${t.duration}&nbsp;Min</div></td>
+											<td class="tListEnd">${t.endDate}</td>
+											<td class="tListAfter">${t.aftereventReadable}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{forelse}
+							<tr style="width:100%;">
+								<td>No Timers Available!</td>
+							</tr>
+							{/for}
+						</table>
+						<div class="center remark">
+							If You are using the SeriesPlugin, reload the timer list a few seconds after the parsing has been finished, to see all series information!
+						</div>
+<!-- /tplTimerList -->

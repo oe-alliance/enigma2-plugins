@@ -20,9 +20,6 @@ from datetime import timedelta, date
 # EPGCache & Event
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
 
-# Enigma2 Config
-from Components.config import config
-
 # AutoTimer Component
 from AutoTimerComponent import preferredAutoTimerComponent
 
@@ -31,7 +28,14 @@ from collections import defaultdict
 from difflib import SequenceMatcher
 from operator import itemgetter
 
-from . import xrange, itervalues
+from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
+
+try:
+	from Plugins.Extensions.SeriesPlugin.plugin import renameTimer
+except ImportError as ie:
+	renameTimer = None
+
+from . import config, xrange, itervalues
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
@@ -149,6 +153,11 @@ class AutoTimer:
 				return
 			idx += 1
 		self.timers.append(timer)
+
+	def parseEPGAsync(self, simulateOnly=False):
+		t = SimpleThread(lambda: self.parseEPG(simulateOnly=simulateOnly))
+		t.start()
+		return t.deferred
 
 # Main function
 
@@ -304,8 +313,6 @@ class AutoTimer:
 			# Loop over all EPG matches
 			for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
 
-				#Question: Do we need this?
-				#Question: Move to separate function getRealService()
 				eserviceref = eServiceReference(serviceref)
 				evt = epgcache.lookupEventId(eserviceref, eit)
 				if not evt:
@@ -345,7 +352,7 @@ class AutoTimer:
 					dayofweek = str(timestamp.tm_wday)
 
 				# Check timer conditions
-				# NOTE: similar matches to not care about the day/time they are on, so ignore them
+				# NOTE: similar matches do not care about the day/time they are on, so ignore them
 				if timer.checkServices(serviceref) \
 					or timer.checkDuration(duration) \
 					or (not similarTimer and (\
@@ -382,33 +389,8 @@ class AutoTimer:
 					# Reset movie Exists
 					movieExists = False
 
-					# Eventually create cache
 					if dest and dest not in moviedict:
-						#Question: Move to a separate function getRecordDict()
-						movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
-						if movielist is None:
-							print("[AutoTimer] listing of movies in " + dest + " failed")
-						else:
-							append = moviedict[dest].append
-							while 1:
-								movieref = movielist.getNext()
-								if not movieref.valid():
-									break
-								if movieref.flags & eServiceReference.mustDescent:
-									continue
-								info = serviceHandler.info(movieref)
-								if info is None:
-									continue
-								event = info.getEvent(movieref)
-								if event is None:
-									continue
-								append({
-									"name": info.getName(movieref),
-									"shortdesc": info.getInfoString(movieref, iServiceInformation.sDescription),
-									"extdesc": event.getExtendedDescription() or '' # XXX: does event.getExtendedDescription() actually return None on no description or an empty string?
-								})
-							del append
-
+						self.addDirectoryToMovieDict(moviedict, dest, serviceHandler)
 					for movieinfo in moviedict.get(dest, ()):
 						if self.checkSimilarity(timer, name, movieinfo.get("name"), shortdesc, movieinfo.get("shortdesc"), extdesc, movieinfo.get("extdesc") ):
 							print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
@@ -445,13 +427,7 @@ class AutoTimer:
 						newEntry = rtimer
 						modified += 1
 
-						# Modify values saved in timer
-						newEntry.name = name
-						newEntry.description = shortdesc
-						newEntry.begin = int(begin)
-						newEntry.end = int(end)
-						newEntry.service_ref = ServiceReference(serviceref)
-
+						self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref)
 						break
 					elif timer.avoidDuplicateDescription >= 1 \
 						and not rtimer.disabled:
@@ -500,13 +476,25 @@ class AutoTimer:
 
 				newEntry.dirname = timer.destination
 				newEntry.justplay = timer.justplay
-				newEntry.tags = timer.tags
 				newEntry.vpsplugin_enabled = timer.vps_enabled
 				newEntry.vpsplugin_overwrite = timer.vps_overwrite
+				tags = timer.tags[:]
+				if config.plugins.autotimer.add_autotimer_to_tags.value:
+					tags.append('AutoTimer')
+				if config.plugins.autotimer.add_name_to_tags.value:
+					name = timer.name.strip()
+					if name:
+						name = name[0].upper() + name[1:].replace(" ", "_")
+						tags.append(name)
+				newEntry.tags = tags
 
 				if oldExists:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?
 					recordHandler.timeChanged(newEntry)
+
+					if renameTimer is not None and timer.series_labeling:
+						renameTimer(newEntry, name, evtBegin, evtEnd)
+
 				else:
 					conflictString = ""
 					if similarTimer:
@@ -517,20 +505,17 @@ class AutoTimer:
 					conflicts = recordHandler.record(newEntry)
 
 					if conflicts:
+						# Maybe use newEntry.log
 						conflictString += ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
 						print("[AutoTimer] conflict with %s detected" % (conflictString))
 
-					if conflicts and config.plugins.autotimer.addsimilar_on_conflict.value:
-						# We start our search right after our actual index
-						# Attention we have to use a copy of the list, because we have to append the previous older matches
-						lepgm = len(epgmatches)
-						for i in xrange(lepgm):
-							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[ (i+idx+1)%lepgm ]
-							if shortdesc == shortdescS:
-								# Some channels indicate replays in the extended descriptions
-								# If the similarity percent is higher then 0.8 it is a very close match
-								if ( len(extdesc) == len(extdescS) and extdesc == extdescS ) \
-									or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, extdescS).ratio() ):
+						if config.plugins.autotimer.addsimilar_on_conflict.value:
+							# We start our search right after our actual index
+							# Attention we have to use a copy of the list, because we have to append the previous older matches
+							lepgm = len(epgmatches)
+							for i in xrange(lepgm):
+								servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[ (i+idx+1)%lepgm ]
+								if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS ):
 									# Check if the similar is already known
 									if eitS not in similar:
 										print("[AutoTimer] Found similar Timer: " + name)
@@ -544,17 +529,19 @@ class AutoTimer:
 											# Event is before our actual epgmatch so we have to append it to the epgmatches list
 											epgmatches.append((servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS))
 										# If we need a second similar it will be found the next time
-										break
 									else:
 										similarTimer = False
 										newEntry = similar[eitS]
-										break
+									break
 
 					if conflicts is None:
 						timer.decrementCounter()
 						new += 1
 						newEntry.extdesc = extdesc
 						recorddict[serviceref].append(newEntry)
+
+						if renameTimer is not None and timer.series_labeling:
+							renameTimer(newEntry, name, evtBegin, evtEnd)
 
 						# Similar timers are in new timers list and additionally in similar timers list
 						if similarTimer:
@@ -573,14 +560,48 @@ class AutoTimer:
 
 		return (total, new, modified, timers, conflicting, similars)
 
+# Supporting functions
+
+	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref):
+		timer.name = name
+		timer.description = shortdesc
+		timer.begin = int(begin)
+		timer.end = int(end)
+		timer.service_ref = ServiceReference(serviceref)
+
+	def addDirectoryToMovieDict(self, moviedict, dest, serviceHandler):
+		movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
+		if movielist is None:
+			print("[AutoTimer] listing of movies in " + dest + " failed")
+		else:
+			append = moviedict[dest].append
+			while 1:
+				movieref = movielist.getNext()
+				if not movieref.valid():
+					break
+				if movieref.flags & eServiceReference.mustDescent:
+					continue
+				info = serviceHandler.info(movieref)
+				if info is None:
+					continue
+				event = info.getEvent(movieref)
+				if event is None:
+					continue
+				append({
+					"name": info.getName(movieref),
+					"shortdesc": info.getInfoString(movieref, iServiceInformation.sDescription),
+					"extdesc": event.getExtendedDescription() or '' # XXX: does event.getExtendedDescription() actually return None on no description or an empty string?
+				})
+
 	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2):
-		foundTitle = (name1 == name2)
-		foundShort = (shortdesc1 == shortdesc2) if timer.searchForDuplicateDescription > 0 else True
+		foundTitle = name1 == name2
+		foundShort = shortdesc1 == shortdesc2 if timer.searchForDuplicateDescription > 0 else True
 		foundExt = True
-		if timer.searchForDuplicateDescription == 2:
+		# NOTE: only check extended if short description already is a match because otherwise
+		# it won't evaluate to True anyway
+		if timer.searchForDuplicateDescription == 2 and foundShort:
 			# Some channels indicate replays in the extended descriptions
 			# If the similarity percent is higher then 0.8 it is a very close match
-			foundExt = ( len(extdesc1) == len(extdesc2) and extdesc1 == extdesc2 ) \
-			 or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+			foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
 
 		return foundTitle and foundShort and foundExt

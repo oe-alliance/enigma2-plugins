@@ -120,6 +120,10 @@ def ChannelSelection_togglePipzap(self):
 
 def ChannelSelection_zap(self, *args, **kwargs):
 	if self.enable_pipzap and self.dopipzap:
+		if not self.session.pipshown:
+			self.session.pip = self.session.instantiateDialog(PictureInPicture)
+			self.session.pip.show()
+			self.session.pipshown = True
 		self.revertMode=None
 		ref = self.session.pip.getCurrentService()
 		nref = self.getCurrentSelection()

@@ -1,0 +1,18 @@
+<default>
+	<prerequisites>
+		<tag type="Network" />
+		<tag type="System" />
+		<tag type="Multimedia" />
+	</prerequisites>
+	<info>
+		<author>emanuel</author>
+		<name>Webadmin</name>
+		<packagename>enigma2-plugin-extensions-webadmin</packagename>
+		<shortdescription>Web-Ipkg-Admin for PC</shortdescription>
+		<description>Web-Ipkg-Admin for PC</description>
+		<screenshot src="http://www.dreamboxupdate.com/preview/plugin_webadmin.jpg" />
+	</info>
+	<files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-webadmin" />
+	</files>
+</default>

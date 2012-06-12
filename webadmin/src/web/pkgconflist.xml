@@ -1,0 +1,9 @@
+<e2:screen external_module="Plugins.Extensions.WebAdmin.WebScreens.WebAdminScreen" name="WebAdminScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2pkgconflist><e2:element source="PkgConfList" id="filter" ><e2:convert type="web:ListFiller" >
+	&lt;e2pkgconf>
+		&lt;e2name><e2:item name="Name" filter="xml"/>&lt;/e2name>
+		&lt;e2text><e2:item name="Text" filter="xml"/>&lt;/e2text>
+	&lt;/e2pkgconf>
+	</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+</e2pkgconflist>
+</e2:screen>

@@ -59,6 +59,13 @@ except ImportError as ie:
 else:
 	hasVps = True
 
+try:
+	from Plugins.Extensions.SeriesPlugin.plugin import Plugins
+except ImportError as ie:
+	hasSeriesPlugin = False
+else:
+	hasSeriesPlugin = True
+
 class ExtendedConfigText(ConfigText):
 	def __init__(self, default = "", fixed_size = True, visible_width = False):
 		ConfigText.__init__(self, default = default, fixed_size = fixed_size, visible_width = visible_width)
@@ -192,7 +199,7 @@ class AutoTimerEditorBase:
 
 		# Justplay
 		self.justplay = NoSave(ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)]))
-		self.set_endtime = NoSave(ConfigYesNo(default=timer.set_endtime))
+		self.setEndtime = NoSave(ConfigYesNo(default=timer.setEndtime))
 
 		# Timespan
 		now = [x for x in localtime()]
@@ -353,6 +360,9 @@ class AutoTimerEditorBase:
 		self.vps_enabled = NoSave(ConfigYesNo(default = timer.vps_enabled))
 		self.vps_overwrite = NoSave(ConfigYesNo(default = timer.vps_overwrite))
 
+		# SeriesPlugin
+		self.series_labeling = NoSave(ConfigYesNo(default = timer.series_labeling))
+
 	def pathSelected(self, res):
 		if res is not None:
 			# I'm pretty sure this will always fail
@@ -412,6 +422,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.onChangedEntry = []
 
 		# We might need to change shown items, so add some notifiers
+		self.justplay.addNotifier(self.reloadList, initial_call = False)
 		self.timespan.addNotifier(self.reloadList, initial_call = False)
 		self.timeframe.addNotifier(self.reloadList, initial_call = False)
 		self.offset.addNotifier(self.reloadList, initial_call = False)
@@ -503,7 +514,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.searchType: _("Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"),
 			self.searchCase: _("Select whether or not you want to enforce case correctness."),
 			self.justplay: _("Add zap timer instead of record timer?"),
-			self.set_endtime: _("Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."),
+			self.setEndtime: _("Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."),
 			self.overrideAlternatives: _("With this option enabled the channel to record on can be changed to a alternative service it is restricted to."),
 			self.timespan: _("Should this AutoTimer be restricted to a timespan?"),
 			self.timespanbegin: _("Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"),
@@ -528,6 +539,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.useDestination: _("Should timers created by this AutoTimer be recorded to a custom location?"),
 			self.destination: _("Select the location to save the recording to."),
 			self.tags: _("Tags the Timer/Recording will have."),
+			self.series_labeling: _("Label Timers with season, episode and title, according to the SeriesPlugin settings."),
 		}
 
 	def refresh(self):
@@ -547,7 +559,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			getConfigListEntry(_("Timer type"), self.justplay),
 		))
 		if self.justplay.value == "zap":
-			list.append(_("Set End Time"), self.set_endtime)
+			list.append(getConfigListEntry(_("Set End Time"), self.setEndtime))
 		list.extend((
 			getConfigListEntry(_("Override found with alternative service"), self.overrideAlternatives),
 			getConfigListEntry(_("Only match during timespan"), self.timespan)
@@ -607,7 +619,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		list.append(getConfigListEntry(_("Require description to be unique"), self.avoidDuplicateDescription))
 
-		if int(self.avoidDuplicateDescription.value > 0):
+		if int(self.avoidDuplicateDescription.value) > 0:
 			list.append(getConfigListEntry(_("Check for uniqueness in"), self.searchForDuplicateDescription))
 
 		# We always add this option though its expert only in enigma2
@@ -621,6 +633,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			list.append(getConfigListEntry(_("Activate VPS"), self.vps_enabled))
 			if self.vps_enabled.value:
 				list.append(getConfigListEntry(_("Control recording completely by service"), self.vps_overwrite))
+
+		if hasSeriesPlugin:
+			list.append(getConfigListEntry(_("Label series"), self.series_labeling))
 
 		self.list = list
 
@@ -752,7 +767,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Justplay
 		self.timer.justplay = self.justplay.value == "zap"
-		self.timer.setEndtime = self.set_endtime.value
+		self.timer.setEndtime = self.setEndtime.value
 
 		# Timespan
 		if self.timespan.value:
@@ -844,6 +859,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		self.timer.vps_enabled = self.vps_enabled.value
 		self.timer.vps_overwrite = self.vps_overwrite.value
+
+		self.timer.series_labeling = self.series_labeling.value
 
 		# Close
 		self.close(self.timer)

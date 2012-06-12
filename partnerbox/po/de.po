@@ -484,4 +484,5 @@ msgstr "Sender oder Bouquets können nicht von Enigma1-Receivern in the Kanallis
 msgid "Zap to service when streaming"
 msgstr "Beim Streamen auf Sender zappen"
 
-
+msgid "Enable first Partnerbox-entry in Timeredit as default"
+msgstr "Ersten Partnerbox-Eintrag als Default in Timeredit aktivieren"

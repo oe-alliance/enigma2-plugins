@@ -8,6 +8,7 @@ configure
 depcomp
 enigma2-plugins-config.h
 enigma2-plugins-config.h.in
+enigma2-plugins-config.h.in~
 index-enigma2-plugins.xml
 install-sh
 libtool
@@ -19,6 +20,7 @@ m4/lt~obsolete.m4
 m4/ltoptions.m4
 m4/ltsugar.m4
 m4/ltversion.m4
+mipsel-oe-linux-libtool
 missing
 py-compile
 stamp-h1
@@ -29,3 +31,4 @@ stamp-h1
 *.lo
 *.mo
 *.o
+*.bak
