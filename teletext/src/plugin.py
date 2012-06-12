@@ -73,7 +73,7 @@ HELP_TEXT_DEBUG        = _("Print debug messages to /tmp/dbttcp.log.")
 HELP_TEXT_TEXTLEVEL    = _("Select teletext version to use.")
 HELP_TEXT_REGION       = _("Select your region to use the proper font.")
 HELP_TEXT_SCALE_FILTER = _("Select your favourite scale filter.")
-HELP_TEXT_CACHING      = _("If caching is disabled, each teletext page will searched when you entered its number.") 
+HELP_TEXT_CACHING      = _("If caching is disabled, each teletext page will searched when you entered its number.")
 
 dsk_size   = getDesktop(0).size()
 dsk_width  = dsk_size.width()
@@ -126,9 +126,11 @@ class TeleText(Screen):
   filter_mode = BILINEAR
   pid_list = []
   pid_index = 0
+  pid_count = 0
   demux  = -1
   txtpid = -1
   txtpid_origin = -1
+  cur_page = "100-00/00"
 
   onChangedEntry = [ ]
 
@@ -272,11 +274,16 @@ class TeleText(Screen):
     buf = conn.recv(8, socket.MSG_WAITALL)
     x = array.array('H')
     x.fromstring(buf)
-    if (x[0] + x[1] + x[2] + x[3]) == 0:
+    if x[0] == 0:
       self.catchPage = False
     else:
-      self.ttx.update(x[0], x[1], x[2], x[3], self.zoom, self.filter_mode);
-      conn.close()
+      self.ttx.update(0,0,492,250, self.zoom, self.filter_mode)
+      if x[1] == 2303:
+        x[1] = 0x0100
+      self.cur_page = "%s%s%s-%s%s/%s%s" % ((x[1]&0x0F00)>>8, (x[1]&0xF0)>>4, x[1]&0x0F, x[2]/10, x[2]%10, x[3]/10, x[3]%10)
+      for i in self.onChangedEntry:
+        i()
+    conn.close()
 
   def __execBegin(self):
     log("execBegin")
@@ -328,12 +335,6 @@ class TeleText(Screen):
     else:
       x.fromlist([CMD_PAGEINPUT, number])
       self.pageInput = (self.pageInput + 1) % 3
-    self.socketSend(x)
-
-  def pageSet(self, page):
-    log("pageSet(%d)" % (page))
-    page = int("%d" % (page), 16)
-    x = array.array('B', (CMD_SHOW_PAGE, (page & 0xFF00) >> 8, (page&0xFF), 0))
     self.socketSend(x)
 
   def upPressed(self):
@@ -554,7 +555,7 @@ class TeleText(Screen):
     self.__closed()
     if self.txtpid != self.txtpid_origin:
       self.txtpid = self.txtpid_origin
-      self.switchChannel()
+      self.switchChannel(True)
     self.close()
 
   def menuPressed(self):
@@ -710,7 +711,7 @@ class TeleText(Screen):
 
       self.txtpid = new_pid
       log("new txtpid: %s" % new_pid)
-      self.switchChannel()
+      self.switchChannel(True)
 
   def nextPressed(self):
     if self.nav_mode == NAV_MODE_TEXT:
@@ -729,7 +730,7 @@ class TeleText(Screen):
 
       self.txtpid = new_pid
       log("new txtpid: %s" % new_pid)
-      self.switchChannel()
+      self.switchChannel(True)
 
   def prevLongPressed(self):
     if self.nav_mode == NAV_MODE_TEXT:
@@ -749,7 +750,7 @@ class TeleText(Screen):
     if result > -1 and result != self.txtpid:
       self.txtpid = result
       log("new txtpid: %s" % result)
-      self.switchChannel()
+      self.switchChannel(True)
     self.updateLayout()
 
 
@@ -801,7 +802,7 @@ class TeleText(Screen):
         self.__closed()
         if self.txtpid != self.txtpid_origin:
           self.txtpid = self.txtpid_origin
-          self.switchChannel()
+          self.switchChannel(True)
         self.close()
     else:
       if self.nav_mode == NAV_MODE_SIZE_TEXT:
@@ -829,9 +830,9 @@ class TeleText(Screen):
 
   def serviceInfoChanged(self):
     log("serviceInfoChanged")
-    self.checkServiceInfo()
+    self.checkServiceInfo(config.plugins.TeleText.background_caching.value or self.inMenu or self.execing)
 
-  def checkServiceInfo(self):
+  def checkServiceInfo(self, do_send = True):
     service = self.session.nav.getCurrentService()
     info = service and service.info()
     self.txtpid_origin = info and info.getInfo(iServiceInformation.sTXTPID)
@@ -844,7 +845,7 @@ class TeleText(Screen):
     self.demux = demux and demux.get("demux", -1)
 
     log("TXT PID %s DEMUX %s" % (self.txtpid, self.demux))
-    self.switchChannel()
+    self.switchChannel(do_send)
 
     # read all txtpids and channels from transponder
     cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
@@ -862,15 +863,18 @@ class TeleText(Screen):
       self.pid_list = self.ttx.getTextPidsAndName(ref)
 
     i = 0
+    available = 0
     for x in self.pid_list:
+      if x[2] != -1:
+        available = available + 1
       if x[2] == self.txtpid:
         self.pid_index = i
       i = i + 1
+    self.pid_count = available
 
     log("transponder: %s" % self.pid_list)
 
-  def switchChannel(self):
-    do_send = config.plugins.TeleText.background_caching.value or self.inMenu or self.execing
+  def switchChannel(self, do_send = True):
     if self.demux > -1 and self.txtpid > -1 and do_send:
       x = array.array('B', (CMD_CTL_CACHE, (self.txtpid & 0xFF00) >> 8, (self.txtpid & 0xFF), self.demux))
       self.socketSend(x)
@@ -882,6 +886,12 @@ class TeleText(Screen):
 
   def createSummary(self):
     return TeleTextSummary
+
+  def getCurrentPage(self):
+    return self.cur_page
+
+  def getAvailableTxtPidCount(self):
+    return self.pid_count
 
   def naviEnabled(self):
     return self.naviValue
@@ -898,20 +908,24 @@ class TeleTextSummary(Screen):
     offPic = resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/lcd_off.png")
 
     TeleTextSummary.skin = """<screen name="TeleTextSummary" position="0,0" size="132,64">
-      <widget name="SetupTitle" position="6,4" size="120,20" font="Regular;20" halign="center"/>
+      <widget name="page"     position="0,0"   size="132,20" font="Regular;20" valign="center" halign="center" zPosition="1"/>
 
-      <widget name="navi_off" position="24,28" size="20,20" pixmap="%s" zPosition="1"/>
-      <widget name="info_off" position="88,28" size="20,20" pixmap="%s" zPosition="1"/>
-      <widget name="navi_on"  position="24,28" size="20,20" pixmap="%s" zPosition="2"/>
-      <widget name="info_on"  position="88,28" size="20,20" pixmap="%s" zPosition="2"/>
+      <widget name="navi_off" position="12,28"  size="20,20" pixmap="%s" zPosition="1"/>
+      <widget name="info_off" position="100,28" size="20,20" pixmap="%s" zPosition="1"/>
+      <widget name="navi_on"  position="12,28"  size="20,20" pixmap="%s" zPosition="2"/>
+      <widget name="info_on"  position="100,28" size="20,20" pixmap="%s" zPosition="2"/>
+      <widget name="tp_count" position="44,28"  size="44,20" font="Regular;16" valign="center" halign="center" zPosition="1"/>
 
-      <widget name="navi_txt" position="10,50" size="48,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
-      <widget name="info_txt" position="74,50" size="48,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
+      <widget name="navi_txt" position="0,50"  size="44,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
+      <widget name="tp_txt"   position="44,50" size="44,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
+      <widget name="info_txt" position="88,50" size="44,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
     </screen>""" % (offPic, offPic, onPic, onPic)
 
     Screen.__init__(self, session, parent = parent)
-    self["SetupTitle"] = Label("TeleText")
+    self["page"] = Label("")
     self["navi_txt"] = Label("NAVI")
+    self["tp_txt"] = Label("TPT")
+    self["tp_count"] = Label("<1>")
     self["info_txt"] = Label("INFO")
     self["navi_off"] = Pixmap()
     self["info_off"] = Pixmap()
@@ -928,6 +942,8 @@ class TeleTextSummary(Screen):
     self.parent.onChangedEntry.remove(self.selectionChanged)
 
   def selectionChanged(self):
+    self["tp_count"].setText("< %s >"%self.parent.getAvailableTxtPidCount())
+    self["page"].setText(self.parent.getCurrentPage())
     if self.parent.naviEnabled():
       self["navi_off"].hide()
       self["navi_on"].show()
@@ -949,29 +965,35 @@ class TeleTextTransponderMenu(Screen):
   ch_list = []
   ch_index = 0
 
+  cur_service = ""
+  new_service = ""
+
+  onChangedEntry = [ ]
+
   def __init__(self, session, list, index):
     log("[transponder] __init__")
 
     self.ch_list = list
     self.ch_index = index
+    self.cur_service = self.ch_list[self.ch_index][1]
 
     width = 360
-    height = 70
+    height = 75
     left = (dsk_width - width)>>1
     top = (dsk_height - height)>>1
     log("[transponder] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextTransponderMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
-        <widget name="prev"    position="0,0"   size="35,25"  zPosition="4" pixmap="%s"/>
-        <widget name="channel" position="40,2"  size="200,20" zPosition="5" valign="center" halign="left"  font="Regular;21" transparent="1" foregroundColor="white"/>
-        <widget name="zapped"  position="240,2" size="80,20"  zPosition="5" valign="center" halign="right" font="Regular;21" transparent="1" foregroundColor="#888888"/>
-        <widget name="next"    position="325,0" size="35,25"  zPosition="4" pixmap="%s"/>
+        <widget name="prev"    position="0,5"   size="35,25"  zPosition="4" pixmap="%s"/>
+        <widget name="channel" position="40,7"  size="200,20" zPosition="5" valign="center" halign="left"  font="Regular;21" transparent="1" foregroundColor="white"/>
+        <widget name="zapped"  position="240,7" size="80,20"  zPosition="5" valign="center" halign="right" font="Regular;21" transparent="1" foregroundColor="#888888"/>
+        <widget name="next"    position="325,5" size="35,25"  zPosition="4" pixmap="%s"/>
 
-        <ePixmap pixmap="skin_default/div-h.png" position="0,27" zPosition="1" size="360,2" />
+        <ePixmap pixmap="skin_default/div-h.png" position="0,32" zPosition="1" size="360,2" />
 
-        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,30"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/green.png"  position="220,30" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <widget name="key_r" position="0,30"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget name="key_g" position="220,30" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,35"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/green.png"  position="220,35" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <widget name="key_r" position="0,35"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_g" position="220,35" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
       </screen>""" % (left, top, width, height, _("Select teletext"), resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/key_lt.png"), resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/key_gt.png"))
     Screen.__init__(self, session)
 
@@ -1011,7 +1033,10 @@ class TeleTextTransponderMenu(Screen):
     else:
       self["zapped"].hide()
       self["key_g"].setText(_("OK"))
-    self["channel"].setText(self.ch_list[self.ch_index][1])
+    self.new_service = self.ch_list[self.ch_index][1]
+    self["channel"].setText(self.new_service)
+    for i in self.onChangedEntry:
+      i()
 
   def prevPressed(self):
     log("[transponder] prev pressed")
@@ -1038,6 +1063,45 @@ class TeleTextTransponderMenu(Screen):
     log("[transponder] cancel pressed")
     self.close(-1)
 
+  # ---- for summary (lcd) ----
+
+  def createSummary(self):
+    return TeleTextTransponderSummary
+
+  def getCurrentService(self):
+    return self.cur_service
+
+  def getNewService(self):
+    return self.new_service
+
+# ----------------------------------------
+
+class TeleTextTransponderSummary(Screen):
+
+  def __init__(self, session, parent):
+
+    TeleTextTransponderSummary.skin = """<screen name="TeleTextTransponderSummary" position="0,0" size="132,64">
+      <widget name="c_service" position="0,5"   size="100,20" font="Regular;20" halign="left"/>
+      <ePixmap pixmap="skin_default/div-h.png" position="46,32" size="40,2" zPosition="1"/>
+      <widget name="n_service" position="32,39" size="100,20" font="Regular;20" halign="right"/>
+    </screen>"""
+
+    Screen.__init__(self, session, parent = parent)
+    self["c_service"] = Label(self.parent.getCurrentService())
+    self["n_service"] = Label(self.parent.getNewService())
+    self.onShow.append(self.addWatcher)
+    self.onHide.append(self.removeWatcher)
+
+  def addWatcher(self):
+    self.parent.onChangedEntry.append(self.selectionChanged)
+    self.selectionChanged()
+
+  def removeWatcher(self):
+    self.parent.onChangedEntry.remove(self.selectionChanged)
+
+  def selectionChanged(self):
+    self["n_service"].setText(self.parent.getNewService())
+
 # ----------------------------------------
 
 class TeleTextMenu(ConfigListScreen, Screen):
@@ -1047,21 +1111,21 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
   def __init__(self, session):
     width = 492
-    height = 420
+    height = 480
     left = (dsk_width - width)>>1
     top = (dsk_height - height)>>1
     log("[menu] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
-        <widget name="config" position="0,0"   size="492,295" scrollbarMode="showOnDemand" zPosition="1"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,300" zPosition="1" size="492,2" />
-        <widget name="label"  position="0,300" size="492,70" font="Regular;16" zPosition="1" halign="left" valign="top"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,375" zPosition="1" size="492,2" />
-        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,380"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/green.png"  position="176,380" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/yellow.png" position="352,380" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <widget name="key_r" position="0,380"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget name="key_g" position="176,380" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget name="key_y" position="352,380" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="config" position="0,0"   size="492,355" scrollbarMode="showOnDemand" zPosition="1"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,358" zPosition="1" size="492,2" />
+        <widget name="label"  position="0,360" size="492,70" font="Regular;16" zPosition="1" halign="left" valign="top"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,435" zPosition="1" size="492,2" />
+        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,440"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/green.png"  position="176,440" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/yellow.png" position="352,440" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <widget name="key_r" position="0,440"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_g" position="176,440" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_y" position="352,440" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
       </screen>""" % (left, top, width, height, _("TeleText settings"))
 
     Screen.__init__(self, session)
@@ -1182,6 +1246,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
     config.plugins.TeleText.pos.setValue([0, 0, dsk_width, dsk_height])
     config.plugins.TeleText.tip_pos.setValue([(dsk_width>>1)+(dsk_width>>2), (dsk_height>>1)+(dsk_height>>2), dsk_width, dsk_height])
     config.plugins.TeleText.background_caching.setValue(True)
+    self["config"].selectionChanged()
 
   def textPressed(self):
     log("[menu] text pressed")
@@ -1275,7 +1340,7 @@ class TeleTextMenuSummary(Screen):
 
   def __init__(self, session, parent):
     Screen.__init__(self, session, parent = parent)
-    self["SetupTitle"] = Label("TeleText")
+    self["SetupTitle"] = Label(_("TeleText settings"))
     self["SetupEntry"] = Label("")
     self["SetupValue"] = Label("")
     self.onShow.append(self.addWatcher)
