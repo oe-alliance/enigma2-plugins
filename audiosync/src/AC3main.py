@@ -274,7 +274,8 @@ class AudioTools():
         config.misc.standbyCounter.addNotifier(self.enterStandby, initial_call = False)
 
     def enterStandby(self,configElement):
-        Standby.inStandby.onClose.append(self.endStandby)
+	if config.plugins.AC3LipSync.restartAudioAfterStandby.value:
+	        Standby.inStandby.onClose.append(self.endStandby)
       
     def endStandby(self):
         self.audioRestart()

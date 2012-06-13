@@ -48,6 +48,7 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
             getConfigListEntry(_("Step in ms for key %i") % (2), config.plugins.AC3LipSync.absoluteStep2),
             getConfigListEntry(_("Step in ms for key %i") % (5), config.plugins.AC3LipSync.absoluteStep5),
             getConfigListEntry(_("Step in ms for key %i") % (8), config.plugins.AC3LipSync.absoluteStep8),
+	    getConfigListEntry(_("Restart audio after standby"), config.plugins.AC3LipSync.restartAudioAfterStandby),
             getConfigListEntry(_("Restart audio after Enigma2 start"), config.plugins.AC3LipSync.restartAudioOnEnigma2Start),
             getConfigListEntry(_("Restart audio delay (in sec)"), config.plugins.AC3LipSync.restartAudioDelay)
         ]

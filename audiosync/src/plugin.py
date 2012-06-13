@@ -16,6 +16,7 @@ config.plugins.AC3LipSync.absoluteStep5 = ConfigInteger(default = 0, limits = (-
 config.plugins.AC3LipSync.absoluteStep8 = ConfigInteger(default = 0, limits = (-10000,10000))
 config.plugins.AC3LipSync.position_x = ConfigInteger(default=0)
 config.plugins.AC3LipSync.position_y = ConfigInteger(default=0)
+config.plugins.AC3LipSync.restartAudioAfterStandby = ConfigBoolean(default=False)
 config.plugins.AC3LipSync.restartAudioOnEnigma2Start = ConfigBoolean(default=False)
 config.plugins.AC3LipSync.restartAudioDelay = ConfigInteger(default = 5, limits = (0,30))
 
