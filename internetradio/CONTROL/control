@@ -1,2 +1,2 @@
 Description: Internet Radio
-Depends: enigma2, gst-plugins-good-spectrum, streamripper
+Depends: enigma2, gst-plugins-good-spectrum, streamripper, gst-plugins-bad-faad
