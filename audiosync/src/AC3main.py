@@ -1,19 +1,17 @@
-from AC3delay import AC3delay
 from AC3utils import AC3, PCM, AC3GLOB, PCMGLOB, AC3PCM, SKIN
-from Components.Label import Label, MultiColorLabel
+from AC3delay import AC3delay
+from enigma import ePoint
+from HelpableNumberActionMap import HelpableNumberActionMap
+from Components.Label import Label,MultiColorLabel
 from Components.Pixmap import MultiPixmap
 from Components.ProgressBar import ProgressBar
-from Components.SystemInfo import SystemInfo
-from Components.config import config, config
-from HelpableNumberActionMap import HelpableNumberActionMap
+from Components.config import config
 from MovableScreen import MovableScreen
-from Screens import Standby
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from __init__ import _
-from enigma import ePoint, eTimer
 
 class AC3LipSync(Screen, HelpableScreen, MovableScreen):
 
@@ -266,32 +264,3 @@ class AC3SetCustomValue:
             self.session.open(MessageBox,_("Key %(Key)s successfully set to %(delay)i ms") %dict(Key=answer[1],delay=self.iDelay), MessageBox.TYPE_INFO, 5)
         else:
             self.session.open(MessageBox,_("Invalid selection"), MessageBox.TYPE_ERROR, 5)
-
-class AudioTools():
-    def __init__(self):
-        self.activateTimer = eTimer()
-        self.activateTimer.callback.append(self.restartAudio)
-        config.misc.standbyCounter.addNotifier(self.enterStandby, initial_call = False)
-
-    def enterStandby(self,configElement):
-	if config.plugins.AC3LipSync.restartAudioAfterStandby.value:
-	        Standby.inStandby.onClose.append(self.endStandby)
-      
-    def endStandby(self):
-        self.audioRestart()
-
-    def audioRestart(self):
-        self.activateDelay = config.plugins.AC3LipSync.restartAudioDelay.value*1000
-        print "[AudioSync] audio restart in ",self.activateDelay
-        self.activateTimer.start(self.activateDelay, True)
-
-    def restartAudio(self):
-        ac3delay = AC3delay()
-        if (ac3delay.channelAudio == AC3) and (SystemInfo["CanDownmixAC3"]) and (config.av.downmix_ac3.value == False):
-            config.av.downmix_ac3.value = True
-            config.av.downmix_ac3.save()
-            config.av.downmix_ac3.value = False
-            config.av.downmix_ac3.save()
-            print "[AudioSync] audio restartet"
-
-audioTools = AudioTools()
