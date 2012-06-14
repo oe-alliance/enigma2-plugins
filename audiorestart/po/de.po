@@ -14,51 +14,51 @@ msgstr ""
 
 #: src/plugin.py:15
 msgid "disabled"
-msgstr ""
+msgstr "deaktiviert"
 
 #: src/plugin.py:15
 msgid "after restart"
-msgstr ""
+msgstr "nach Neustart"
 
 #: src/plugin.py:15
 msgid "after standby"
-msgstr ""
+msgstr "nach Standby"
 
 #: src/plugin.py:15
 msgid "after restart/standby"
-msgstr ""
+msgstr "nach Neustart/Standby"
 
 #: src/plugin.py:93
 #: src/plugin.py:144
 msgid "Restart audio"
-msgstr ""
+msgstr "Audio neu starten"
 
 #: src/plugin.py:94
 msgid "Restart audio delay (in sec)"
-msgstr ""
+msgstr "Verzögerung (in sek)"
 
 #: src/plugin.py:104
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
-msgstr ""
+msgstr "Plugin: %(plugin)s , Version: %(version)s"
 
 #: src/plugin.py:107
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: src/plugin.py:108
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: src/plugin.py:109
 msgid " "
-msgstr ""
+msgstr " "
 
 #: src/plugin.py:142
 msgid "Audio restart Setup"
-msgstr ""
+msgstr "Audio restart Setup"
 
 #: src/plugin.py:142
 msgid "Setup for the AudioRestart Plugin"
-msgstr ""
+msgstr "Setup für das AudioRestart Plugin"
 
