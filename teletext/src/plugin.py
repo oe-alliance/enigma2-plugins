@@ -983,10 +983,10 @@ class TeleTextTransponderMenu(Screen):
     top = (dsk_height - height)>>1
     log("[transponder] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextTransponderMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
-        <widget name="prev"    position="0,5"   size="35,25"  zPosition="4" pixmap="%s"/>
+        <widget name="prev"    position="0,5"   size="35,25"  zPosition="4" pixmap="%s" alphatest="on" />
         <widget name="channel" position="40,7"  size="200,20" zPosition="5" valign="center" halign="left"  font="Regular;21" transparent="1" foregroundColor="white"/>
         <widget name="zapped"  position="240,7" size="80,20"  zPosition="5" valign="center" halign="right" font="Regular;21" transparent="1" foregroundColor="#888888"/>
-        <widget name="next"    position="325,5" size="35,25"  zPosition="4" pixmap="%s"/>
+        <widget name="next"    position="325,5" size="35,25"  zPosition="4" pixmap="%s" alphatest="on" />
 
         <ePixmap pixmap="skin_default/div-h.png" position="0,32" zPosition="1" size="360,2" />
 
