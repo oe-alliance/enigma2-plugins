@@ -907,7 +907,7 @@ class TeleTextSummary(Screen):
     onPic  = resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/lcd_on.png")
     offPic = resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/lcd_off.png")
 
-    TeleTextSummary.skin = """<screen name="TeleTextSummary" position="0,0" size="132,64">
+    TeleTextSummary.skin = ("""<screen name="TeleTextSummary" position="0,0" size="132,64" id="1">
       <widget name="page"     position="0,0"   size="132,20" font="Regular;20" valign="center" halign="center" zPosition="1"/>
 
       <widget name="navi_off" position="12,28"  size="20,20" pixmap="%s" zPosition="1"/>
@@ -919,7 +919,20 @@ class TeleTextSummary(Screen):
       <widget name="navi_txt" position="0,50"  size="44,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
       <widget name="tp_txt"   position="44,50" size="44,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
       <widget name="info_txt" position="88,50" size="44,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
-    </screen>""" % (offPic, offPic, onPic, onPic)
+    </screen>""" % (offPic, offPic, onPic, onPic),
+    """<screen name="TeleTextSummary" position="0,0" size="96,64" id="2">
+      <widget name="page"     position="0,0"   size="96,20" font="Regular;20" valign="center" halign="center" zPosition="1"/>
+
+      <widget name="navi_off" position="6,28"  size="20,20" pixmap="%s" zPosition="1"/>
+      <widget name="info_off" position="70,28" size="20,20" pixmap="%s" zPosition="1"/>
+      <widget name="navi_on"  position="6,28"  size="20,20" pixmap="%s" zPosition="2"/>
+      <widget name="info_on"  position="70,28" size="20,20" pixmap="%s" zPosition="2"/>
+      <widget name="tp_count" position="32,28" size="32,20" font="Regular;16" valign="center" halign="center" zPosition="1"/>
+
+      <widget name="navi_txt" position="0,50"  size="32,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
+      <widget name="tp_txt"   position="36,50" size="32,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
+      <widget name="info_txt" position="64,50" size="32,12" font="Regular;12" valign="center" halign="center" zPosition="1"/>
+    </screen>""" % (offPic, offPic, onPic, onPic))
 
     Screen.__init__(self, session, parent = parent)
     self["page"] = Label("")
@@ -977,23 +990,23 @@ class TeleTextTransponderMenu(Screen):
     self.ch_index = index
     self.cur_service = self.ch_list[self.ch_index][1]
 
-    width = 360
+    width = 420
     height = 75
     left = (dsk_width - width)>>1
     top = (dsk_height - height)>>1
     log("[transponder] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextTransponderMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
-        <widget name="prev"    position="0,5"   size="35,25"  zPosition="4" pixmap="%s" alphatest="on" />
-        <widget name="channel" position="40,7"  size="200,20" zPosition="5" valign="center" halign="left"  font="Regular;21" transparent="1" foregroundColor="white"/>
-        <widget name="zapped"  position="240,7" size="80,20"  zPosition="5" valign="center" halign="right" font="Regular;21" transparent="1" foregroundColor="#888888"/>
-        <widget name="next"    position="325,5" size="35,25"  zPosition="4" pixmap="%s" alphatest="on" />
+        <widget name="prev"    position="0,5"   size="35,25"  zPosition="4" pixmap="%s" alphatest="on"/>
+        <widget name="channel" position="40,7"  size="325,20" zPosition="5" valign="center" halign="left"  font="Regular;21" transparent="1" foregroundColor="white"/>
+        <widget name="zapped"  position="365,7" size="20,20"  zPosition="5" valign="center" halign="right" font="Regular;21" transparent="1" foregroundColor="#888888"/>
+        <widget name="next"    position="385,5" size="35,25"  zPosition="4" pixmap="%s" alphatest="on"/>
 
-        <ePixmap pixmap="skin_default/div-h.png" position="0,32" zPosition="1" size="360,2" />
+        <ePixmap pixmap="skin_default/div-h.png" position="0,32" zPosition="1" size="420,2" />
 
         <ePixmap pixmap="skin_default/buttons/red.png"    position="0,35"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/green.png"  position="220,35" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/green.png"  position="280,35" zPosition="0" size="140,40" transparent="1" alphatest="on" />
         <widget name="key_r" position="0,35"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget name="key_g" position="220,35" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_g" position="280,35" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
       </screen>""" % (left, top, width, height, _("Select teletext"), resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/key_lt.png"), resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/key_gt.png"))
     Screen.__init__(self, session)
 
@@ -1080,11 +1093,16 @@ class TeleTextTransponderSummary(Screen):
 
   def __init__(self, session, parent):
 
-    TeleTextTransponderSummary.skin = """<screen name="TeleTextTransponderSummary" position="0,0" size="132,64">
+    TeleTextTransponderSummary.skin = ("""<screen name="TeleTextTransponderSummary" position="0,0" size="132,64" id="1">
       <widget name="c_service" position="0,5"   size="100,20" font="Regular;20" halign="left"/>
       <ePixmap pixmap="skin_default/div-h.png" position="46,32" size="40,2" zPosition="1"/>
       <widget name="n_service" position="32,39" size="100,20" font="Regular;20" halign="right"/>
-    </screen>"""
+    </screen>""",
+    """<screen name="TeleTextTransponderSummary" position="0,0" size="96,64" id="2">
+      <widget name="c_service" position="0,5"   size="90,20" font="Regular;20" halign="left"/>
+      <ePixmap pixmap="skin_default/div-h.png" position="28,32" size="40,2" zPosition="1"/>
+      <widget name="n_service" position="6,39" size="90,20" font="Regular;20" halign="right"/>
+    </screen>""")
 
     Screen.__init__(self, session, parent = parent)
     self["c_service"] = Label(self.parent.getCurrentService())
@@ -1332,11 +1350,16 @@ class TeleTextMenu(ConfigListScreen, Screen):
 # ----------------------------------------
 
 class TeleTextMenuSummary(Screen):
-  skin = """<screen name="TeleTextMenuSummary" position="0,0" size="132,64">
+  skin = ("""<screen name="TeleTextMenuSummary" position="0,0" size="132,64", id="1">
       <widget name="SetupTitle" position="6,4"  size="120,20" font="Regular;20" halign="center"/>
       <widget name="SetupEntry" position="6,30" size="120,12" font="Regular;12" halign="left"/>
       <widget name="SetupValue" position="6,48" size="120,12" font="Regular;12" halign="right"/>
-    </screen>"""
+    </screen>""",
+    """<screen name="TeleTextMenuSummary" position="0,0" size="96,64", id="2">
+      <widget name="SetupTitle" position="3,4"  size="90,20" font="Regular;20" halign="center"/>
+      <widget name="SetupEntry" position="3,30" size="90,12" font="Regular;12" halign="left"/>
+      <widget name="SetupValue" position="3,48" size="90,12" font="Regular;12" halign="right"/>
+    </screen>""")
 
   def __init__(self, session, parent):
     Screen.__init__(self, session, parent = parent)
