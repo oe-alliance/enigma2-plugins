@@ -1350,12 +1350,12 @@ class TeleTextMenu(ConfigListScreen, Screen):
 # ----------------------------------------
 
 class TeleTextMenuSummary(Screen):
-  skin = ("""<screen name="TeleTextMenuSummary" position="0,0" size="132,64", id="1">
+  skin = ("""<screen name="TeleTextMenuSummary" position="0,0" size="132,64" id="1">
       <widget name="SetupTitle" position="6,4"  size="120,20" font="Regular;20" halign="center"/>
       <widget name="SetupEntry" position="6,30" size="120,12" font="Regular;12" halign="left"/>
       <widget name="SetupValue" position="6,48" size="120,12" font="Regular;12" halign="right"/>
     </screen>""",
-    """<screen name="TeleTextMenuSummary" position="0,0" size="96,64", id="2">
+    """<screen name="TeleTextMenuSummary" position="0,0" size="96,64" id="2">
       <widget name="SetupTitle" position="3,4"  size="90,20" font="Regular;20" halign="center"/>
       <widget name="SetupEntry" position="3,30" size="90,12" font="Regular;12" halign="left"/>
       <widget name="SetupValue" position="3,48" size="90,12" font="Regular;12" halign="right"/>
