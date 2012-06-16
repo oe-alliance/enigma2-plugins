@@ -341,7 +341,7 @@ var AutoTimerMenuController  = Class.create(Controller, {
 	
 	upload: function(){
 		//TODO move to a separate class
-		var form = $('backupform');
+		var form = $('restoreform');
 		
 		if($('file').value.trim() == ""){
 			core.notify("Please select a File to restore!");
