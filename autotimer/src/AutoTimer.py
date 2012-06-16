@@ -515,7 +515,7 @@ class AutoTimer:
 							lepgm = len(epgmatches)
 							for i in xrange(lepgm):
 								servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[ (i+idx+1)%lepgm ]
-								if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS ):
+								if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS, force=True ):
 									# Check if the similar is already known
 									if eitS not in similar:
 										print("[AutoTimer] Found similar Timer: " + name)
@@ -593,13 +593,13 @@ class AutoTimer:
 					"extdesc": event.getExtendedDescription() or '' # XXX: does event.getExtendedDescription() actually return None on no description or an empty string?
 				})
 
-	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2):
+	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2, force=False):
 		foundTitle = name1 == name2
-		foundShort = shortdesc1 == shortdesc2 if timer.searchForDuplicateDescription > 0 else True
+		foundShort = shortdesc1 == shortdesc2 if (timer.searchForDuplicateDescription > 0 or force) else True
 		foundExt = True
 		# NOTE: only check extended if short description already is a match because otherwise
 		# it won't evaluate to True anyway
-		if timer.searchForDuplicateDescription == 2 and foundShort:
+		if (timer.searchForDuplicateDescription > 0 or force) and foundShort:
 			# Some channels indicate replays in the extended descriptions
 			# If the similarity percent is higher then 0.8 it is a very close match
 			foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
