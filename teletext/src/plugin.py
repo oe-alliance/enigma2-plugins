@@ -51,6 +51,7 @@ CMD_PAGEINPUT=20
 CMD_EDGE_CUT=21
 CMD_TEXTLEVEL=22
 CMD_REGION=23
+CMD_VERSION=24
 CMD_CLOSE_DMN=99
 
 SPLIT_MODE_PAT = "pat"
@@ -115,7 +116,6 @@ def log(message):
 class TeleText(Screen):
 
   pageInput   = 0
-  hasText     = False
   catchPage   = False
   naviValue   = True
   infoValue   = False
@@ -131,6 +131,7 @@ class TeleText(Screen):
   txtpid = -1
   txtpid_origin = -1
   cur_page = "100-00/00"
+  daemonVersion = "0.0"
 
   onChangedEntry = [ ]
 
@@ -269,6 +270,12 @@ class TeleText(Screen):
       log("couldn't send data to /tmp/dbttcd.socket")
       log(msg)
 
+  def getDaemonVersion(self):
+    x = array.array('B')
+    x.append(CMD_VERSION)
+    self.socketSend(x)
+
+
   def listen_data_avail(self, what):
     conn, addr = self.socket.accept()
     buf = conn.recv(8, socket.MSG_WAITALL)
@@ -276,13 +283,16 @@ class TeleText(Screen):
     x.fromstring(buf)
     if x[0] == 0:
       self.catchPage = False
-    else:
+    elif x[0] == 1:
       self.ttx.update(0,0,492,250, self.zoom, self.filter_mode)
       if x[1] == 2303:
         x[1] = 0x0100
-      self.cur_page = "%s%s%s-%s%s/%s%s" % ((x[1]&0x0F00)>>8, (x[1]&0xF0)>>4, x[1]&0x0F, x[2]/10, x[2]%10, x[3]/10, x[3]%10)
+      self.cur_page = "%s%s%s-%s%s/%s%s" % ((x[1]&0x0F00)>>8, (x[1]&0xF0)>>4, x[1]&0x0F, x[2]>>4, x[2]&0x0F, x[3]>>4, x[3]&0x0F)
       for i in self.onChangedEntry:
         i()
+    elif x[0] == 2:
+      self.daemonVersion = "%s.%s" % (x[1], x[2])
+      log("daemon version %s" % self.daemonVersion)
     conn.close()
 
   def __execBegin(self):
@@ -302,6 +312,9 @@ class TeleText(Screen):
     log("framebuffer offset is %08x stride is %08x" % (renderOffset, stride))
     x = array.array('B', (CMD_RQ_UPDATE, 1, (renderOffset&0xFF000000)>>24, (renderOffset&0xFF0000)>>16, (renderOffset&0xFF00)>>8, renderOffset&0xFF, (stride&0xFF00) >> 8, stride&0xFF))
     self.socketSend(x)
+    
+    # get daemon version
+    self.getDaemonVersion()
 
   def __closed(self):
     log("__closed")
@@ -343,7 +356,7 @@ class TeleText(Screen):
         return
       log("up pressed")
       if self.catchPage:
-        x = array.array('B', (CMD_CATCHPAGE, 2, 0))
+        x = array.array('B', (CMD_CATCHPAGE, 2, 2))
       else:
         if self.zoom == TeletextInterface.MODE_LOWER_HALF:
           self.zoom = TeletextInterface.MODE_UPPER_HALF
@@ -362,7 +375,7 @@ class TeleText(Screen):
         return
       log("down pressed")
       if self.catchPage:
-        x = array.array('B', (CMD_CATCHPAGE, 2, 1))
+        x = array.array('B', (CMD_CATCHPAGE, 2, 3))
       else:
         if self.zoom == TeletextInterface.MODE_LOWER_HALF:
           self.zoom = TeletextInterface.MODE_UPPER_HALF
@@ -377,13 +390,16 @@ class TeleText(Screen):
 
   def leftPressed(self):
     if self.nav_mode == NAV_MODE_TEXT:
-      if self.catchPage or self.pageInput != 0:
+      if self.pageInput != 0:
         return
       log("left pressed")
-      if self.zoom == TeletextInterface.MODE_LOWER_HALF:
-        self.zoom = TeletextInterface.MODE_UPPER_HALF
-      x = array.array('B')
-      x.append(CMD_SUBP_PREV)
+      if self.catchPage:
+        x = array.array('B', (CMD_CATCHPAGE, 2, 0))
+      else:
+        if self.zoom == TeletextInterface.MODE_LOWER_HALF:
+          self.zoom = TeletextInterface.MODE_UPPER_HALF
+        x = array.array('B')
+        x.append(CMD_SUBP_PREV)
       self.socketSend(x)
     else:
       if self.nav_pos[0] > 0 and self.nav_pos[2] > self.nav_config.limits[2][0]:
@@ -393,13 +409,16 @@ class TeleText(Screen):
 
   def rightPressed(self):
     if self.nav_mode == NAV_MODE_TEXT:
-      if self.catchPage or self.pageInput != 0:
+      if self.pageInput != 0:
         return
       log("right pressed")
-      if self.zoom == TeletextInterface.MODE_LOWER_HALF:
-        self.zoom = TeletextInterface.MODE_UPPER_HALF
-      x = array.array('B')
-      x.append(CMD_SUBP_NEXT)
+      if self.catchPage:
+        x = array.array('B', (CMD_CATCHPAGE, 2, 1))
+      else:
+        if self.zoom == TeletextInterface.MODE_LOWER_HALF:
+          self.zoom = TeletextInterface.MODE_UPPER_HALF
+        x = array.array('B')
+        x.append(CMD_SUBP_NEXT)
       self.socketSend(x)
     else:
       if self.nav_pos[0] < self.nav_config.limits[0][1] and self.nav_pos[2] < dsk_width:
@@ -565,7 +584,7 @@ class TeleText(Screen):
     self.__closed()
     self.resetVideo()
     self.inMenu = True
-    self.session.openWithCallback(self.menuResult, TeleTextMenu)
+    self.session.openWithCallback(self.menuResult, TeleTextMenu, parent = self)
 
   def menuResult(self, result):
     self.inMenu = False
@@ -753,7 +772,6 @@ class TeleText(Screen):
       self.switchChannel(True)
     self.updateLayout()
 
-
   def helpPressed(self):
     self.__closed()
     self.resetVideo()
@@ -837,8 +855,6 @@ class TeleText(Screen):
     info = service and service.info()
     self.txtpid_origin = info and info.getInfo(iServiceInformation.sTXTPID)
     self.txtpid = self.txtpid_origin
-
-    self.hasText = self.txtpid is not None and self.txtpid > -1
 
     stream = service and service.stream()
     demux = stream and stream.getStreamingData()
@@ -1016,6 +1032,8 @@ class TeleTextTransponderMenu(Screen):
       "cancel" : self.cancelPressed,
       "red"    : self.cancelPressed,
       "green"  : self.okPressed,
+      "left"   : self.prevPressed,
+      "right"  : self.nextPressed,
       "prev"   : self.prevPressed,
       "next"   : self.nextPressed,
       "prev_long": self.prevPressed,
@@ -1126,8 +1144,9 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
   onChangedEntry = [ ]
   isInitialized = False
+  parent = None
 
-  def __init__(self, session):
+  def __init__(self, session, parent):
     width = 492
     height = 480
     left = (dsk_width - width)>>1
@@ -1146,7 +1165,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
         <widget name="key_y" position="352,440" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
       </screen>""" % (left, top, width, height, _("TeleText settings"))
 
-    Screen.__init__(self, session)
+    Screen.__init__(self, session, parent)
 
     # create config list
     self.list = []
@@ -1161,7 +1180,8 @@ class TeleTextMenu(ConfigListScreen, Screen):
       "green"  : self.okPressed,
       "yellow" : self.resetPressed,
       "menu"   : self.cancelPressed,
-      "text"   : self.textPressed
+      "text"   : self.textPressed,
+      "info"   : self.infoPressed
     }, -2)
     self["actions"].setEnabled(True)
 
@@ -1265,6 +1285,10 @@ class TeleTextMenu(ConfigListScreen, Screen):
     config.plugins.TeleText.tip_pos.setValue([(dsk_width>>1)+(dsk_width>>2), (dsk_height>>1)+(dsk_height>>2), dsk_width, dsk_height])
     config.plugins.TeleText.background_caching.setValue(True)
     self["config"].selectionChanged()
+
+  def infoPressed(self):
+    log("[menu] info pressed")
+    self.session.open(MessageBox, "Daemon Version: %s" % self.parent.daemonVersion, MessageBox.TYPE_INFO, timeout = 15)
 
   def textPressed(self):
     log("[menu] text pressed")
@@ -1387,8 +1411,10 @@ class TeleTextMenuSummary(Screen):
 def sessionstart(reason, session):
   log("----- sessionstart(%s) -----" % session)
   # Plugin initialisieren
-  global ttx_screen;
+  global ttx_screen
+  global my_session
   ttx_screen = session.instantiateDialog(TeleText)
+  my_session = session
 
 def autostart(reason, **kwargs):
   log("autostart(%s, %s)" % (reason, kwargs))
@@ -1400,11 +1426,22 @@ def autostart(reason, **kwargs):
 def mainText(session, **kwargs):
   global ttx_screen
   log("mainText")
-  if ttx_screen.hasText:
+  if ttx_screen.txtpid != -1:
     session.execDialog(ttx_screen)
   else:
     if ttx_screen.showMessages():
       session.open(MessageBox, _("No teletext available."), MessageBox.TYPE_INFO, timeout = 3)
+    else:
+      session.openWithCallback(selectText, TeleTextTransponderMenu, ttx_screen.pid_list, ttx_screen.pid_index)
+
+def selectText(result):
+  global my_session
+  global ttx_screen
+  if result > -1:
+    ttx_screen.txtpid = result
+    ttx_screen.txtpid_origin = result
+    ttx_screen.switchChannel(True)
+    my_session.execDialog(ttx_screen)
 
 def mainMenu(session, **kwargs):
   global ttx_screen
