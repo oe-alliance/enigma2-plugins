@@ -3,12 +3,13 @@
 from Components.ActionMap import HelpableActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Label import Label
+from Components.Sources.List import List
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Pixmap import Pixmap
 from Components.PluginComponent import plugins
 from enigma import eListboxPythonMultiContent, ePicLoad, eServiceReference, eTimer, getDesktop, gFont
-from os import listdir
+from os import listdir, path as os_path, remove as os_remove
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
@@ -18,11 +19,23 @@ from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from time import sleep
 from Tools.BoundFunction import boundFunction
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN
 from Tools.HardwareInfo import HardwareInfo
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
 import htmlentitydefs, re, urllib2
+from urllib2 import Request, URLError, urlopen as urlopen2
+from socket import error
+from httplib import HTTPConnection, HTTPException
+
+HTTPConnection.debuglevel = 1
+
+std_headers = {
+	'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
+	'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+	'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+	'Accept-Language': 'en-us,en;q=0.5',
+}
 
 ###################################################
 
@@ -42,10 +55,12 @@ LIST_NONE = 2
 deviceName = HardwareInfo().get_device_name()
 
 PLAY_MP4 = False
+PLAY_WMV = False
 
 if not deviceName.startswith("dm7025"):
 	PLAY_MP4 = True
-
+if deviceName.startswith("dm7020hd"):
+	PLAY_WMV = True
 try:
 	from LT.LTStreamPlayer import streamplayer
 except ImportError:
@@ -155,6 +170,18 @@ def getMovieDetails(div):
 	else:
 		return None
 
+def getCounts(counts):
+	count = counts[0]
+	if '">' in count:
+		while '">' in count:
+			idx = count.index('">')
+			count = count[idx+2:]
+	if '"/>' in count:
+		while '"/>' in count:
+			idx = count.index('"/>')
+			count = count[idx+3:]
+	return count
+
 def getCategoryDetails(div):
 	list = []
 	# Lese Rubrik...
@@ -188,44 +215,26 @@ def getCategoryDetails(div):
 	reonecat = re.compile(r'">(.+?)BEITR&Auml;GE ZUR SENDUNG</a></p>', re.DOTALL)
 	counts = reonecat.findall(div)
 	if len(counts):
-		count = counts[0]
-		if '">' in count:
-			while '">' in count:
-				idx = count.index('">')
-				count = count[idx+2:]
-		if '"/>' in count:
-			while '"/>' in count:
-				idx = count.index('"/>')
-				count = count[idx+3:]
+		count = getCounts(counts)
 		list.append("%sBeitraege"%count)
 	else:
 		reonecat = re.compile(r'">(.+?)BEITR&Auml;GE ZUM THEMA</a></p>', re.DOTALL)
 		counts = reonecat.findall(div)
 		if len(counts):
-			count = counts[0]
-			if '">' in count:
-				while '">' in count:
-					idx = count.index('">')
-					count = count[idx+2:]
-			if '"/>' in count:
-				while '"/>' in count:
-					idx = count.index('"/>')
-					count = count[idx+3:]
+			count = getCounts(counts)
 			list.append("%sBeitraege"%count)
 		else:
 			reonecat = re.compile(r'">(.+?)BEITR&Auml;GE ZUR RUBRIK</a></p>', re.DOTALL)
 			counts = reonecat.findall(div)
 			if len(counts):
-				count = counts[0]
-				if '">' in count:
-					while '">' in count:
-						idx = count.index('">')
-						count = count[idx+2:]
-				if '"/>' in count:
-					while '"/>' in count:
-						idx = count.index('"/>')
-						count = count[idx+3:]
+				count = getCounts(counts)
 				list.append("%sBeitraege"%count)
+			else:
+				reonecat = re.compile(r'">(.+?)BEITR&Auml;GE</a></p>', re.DOTALL)
+				counts = reonecat.findall(div)
+				if len(counts):
+					count = getCounts(counts)
+					list.append("%sBeitraege"%count)
 	# Alles gefunden?
 	if len(list) == 5:
 		return list
@@ -235,16 +244,33 @@ def getCategoryDetails(div):
 ###################################################
 
 def getMovieUrl(url):
+	req = Request(url, None, std_headers)
 	try:
-		f = urllib2.urlopen(url)
-		txt = f.read()
-		f.close()
-	except:
-		txt = ""
+		txt = urlopen2(req).read()
+	except (URLError, HTTPException, error), err:
+		print "[ZDFMediaThek] Error: Unable to retrieve videopage - Error code: ", str(err)
+		return ""
+
 	if ('rtsp' in txt) and ('.mp4' in txt):
 		idx = txt.index('rtsp')
 		idx2 = txt.index('.mp4')
 		return txt[idx:idx2+4]
+	if ('rtsp' in txt) and ('.sdp' in txt):
+		idx = txt.index('rtsp')
+		idx2 = txt.index('.sdp')
+		return txt[idx:idx2+4]
+	elif ('mms' in txt) and ('.wmv' in txt):
+		idx = txt.index('mms')
+		idx2 = txt.index('.wmv')
+		return txt[idx:idx2+4]
+	elif ('http' in txt) and ('.asx?' in txt):
+		idx = txt.index('http')
+		idx2 = txt.index('.asx?')
+		return txt[idx:idx2+4]
+	elif ('mms' in txt) and ('reflector:' in txt):
+		idx = txt.index('mms')
+		idx2 = txt.index('" />')
+		return txt[idx:idx2]
 	else:
 		return None
 
@@ -282,14 +308,14 @@ def getLeftMenu(html):
 
 def getRightMenu(html):
 	list = []
-	# Suche Filme...
+	print "# Suche Filme..."
 	if '" class="play" target="_blank">Abspielen</a></li>' in html:
-		reonecat = re.compile(r'<li>(.+?)<a href="(.+?)" class="play" target="_blank">Abspielen</a></li>', re.DOTALL)
+		reonecat = re.compile(r'<li>(.+?) <a href="(.+?)" class="play" target="_blank">Abspielen</a></li>', re.DOTALL)
 		for speed, movie in reonecat.findall(html):
 			list.append([speed, movie])
 		if len(list):
 			return [TYPE_MOVIE, list]
-	# Suche podcasts...
+	print "# Suche podcasts..."
 	if '<!-- Start:Podcasts -->' in html:
 		reonecat = re.compile(r'<!-- Start:Podcasts -->(.+?)<!-- Ende:Podcasts -->', re.DOTALL)
 		tmp = reonecat.findall(html)
@@ -300,7 +326,7 @@ def getRightMenu(html):
 				list.append([podcast[0], podcast[1]])
 		if len(list):
 			return [TYPE_PODCAST, list]
-	# Suche Videos und Rubriken...
+	print "# Suche Videos und Rubriken..."
 	start = '<div class="beitragListe">'
 	if '<div class="beitragFooterSuche">' in html:
 		end = '<div class="beitragFooterSuche">'
@@ -319,7 +345,7 @@ def getRightMenu(html):
 					details = None
 					if ('VIDEO, ' in div) or ('>LIVE<' in div):
 						details = getMovieDetails(div)
-					elif 'BEITR&Auml;GE ZU' in div:
+					elif 'BEITR&Auml;GE' in div:	
 						details = getCategoryDetails(div)
 					if details:
 						list.append([details[0], details[1], details[2], details[3], details[4]])
@@ -332,7 +358,7 @@ def getRightMenu(html):
 				while 'href="' in more:
 					idx = more.index('href="')
 					more = more[idx+6:]
-			list.append([more, "", "", "", "Weitere  Beitraege laden."])
+			list.append([more, "", "", "", "Weitere Beitraege laden."])
 	if len(list):
 		return [TYPE_MOVIELIST_CATEGORY, list]
 	# Nichts :(
@@ -417,15 +443,35 @@ class LeftMenuList(MenuList):
 
 ###################################################
 
-class RightMenuList(MenuList):
-	def __init__(self):
-		MenuList.__init__(self, [], False, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", 18))
-		self.l.setFont(1, gFont("Regular", 16))
+def RightMenuEntryPixmap(thumbID, png_cache):
+	png = png_cache.get(thumbID, None)
+	if png is None:
+		png = png_cache.get("missing", None)
+		if png is None:
+			png = LoadPixmap(resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/ZDFMediathek/logo.png"))
+			png_cache["missing"] = png
+	return png
+
+
+class RightMenuList(List):
+	
+	png_cache = {}
+	
+	def __init__(self, list = [ ], enableWrapAround=False):
+		List.__init__(self, list, enableWrapAround, item_height = 50 )
+		self.pixmaps_to_load = []
+		self.picloads = {}
 		self.listCompleted = []
+		self.lastListLength = 0
+		self.lastIndex = 0
 		self.callback = None
 		self.idx = 0
 		self.thumb = ""
+		self.active = True
+		self.ListUpdate = False
+
+	def setActive(self, active):
+		self.active = active
 
 	def buildEntries(self):
 		if self.type == TYPE_PODCAST:
@@ -443,78 +489,124 @@ class RightMenuList(MenuList):
 			if self.callback:
 				self.callback()
 		elif self.type == TYPE_MOVIELIST_CATEGORY:
-			if self.idx == len(self.list):
-				self.setList(self.listCompleted)
-				if self.callback:
-					self.callback()
+			for entry in self.list:
+				if entry[4] != "Weitere Beitraege laden.":
+					self.listCompleted.append(( entry[0],entry[1],entry[2],entry[3],entry[4],entry[3].rsplit("/",1)[1]))
+				else:
+					self.listCompleted.append(( entry[0],entry[1],entry[2],entry[3],entry[4], None))
+
+	def buildEntry(self, vurl, txt1, title, turl, txt2, thumbid):
+		#print "[ZDF Mediathek - buildEntry ] --> ", txt1, title, txt2, thumbid
+		menupng = None
+		if self.png_cache.get(thumbid, None) is None:
+			if thumbid is not None:
+				self.pixmaps_to_load.append(thumbid)
+				self.downloadThumbnail(turl)
 			else:
-				self.downloadThumbnail()
-
-	def downloadThumbnail(self):
-		thumbUrl = self.list[self.idx][3]
-		if not thumbUrl.startswith("http://"):
-			thumbUrl = "%s%s"%(MAIN_PAGE, thumbUrl)
-		try:
-			req = urllib2.Request(thumbUrl)
-			url_handle = urllib2.urlopen(req)
-			headers = url_handle.info()
-			contentType = headers.getheader("content-type")
-		except:
-			contentType = None
-		if contentType:
-			if 'image/jpeg' in contentType:
-				self.thumb = "/tmp/zdf.jpg"
-			elif 'image/gif' in contentType:
-				self.thumb = "/tmp/zdf.gif"
-			elif 'image/png' in contentType:
-				self.thumb = "/tmp/zdf.png"
-			else:
-				print "[ZDF Mediathek] Unknown thumbnail content-type:", contentType
-				self.thumb = None
+				menupng = RightMenuEntryPixmap(thumbid, self.png_cache)
 		else:
-			self.thumb = None
-		if self.thumb:
-			downloadPage(thumbUrl, self.thumb).addCallback(self.downloadThumbnailCallback).addErrback(self.downloadThumbnailError)
-		else:
-			self.buildEntry(None)
+			menupng = RightMenuEntryPixmap(thumbid, self.png_cache)
+		return(( vurl, txt1, title, turl, txt2, thumbid, menupng ))
 
-	def downloadThumbnailError(self, err):
-		print "[ZDF Mediathek] Error:", err
-		self.buildEntry(None)
+	def getMovieCategoryIndexByThumbID(self, ThumbID):
+		idx = 0
+		for entry in self.listCompleted:
+			if entry[5] == ThumbID:
+				return idx
+			idx += 1
+		return None
 
-	def downloadThumbnailCallback(self, txt=""):
-		sc = AVSwitch().getFramebufferScale()
-		self.picload = ePicLoad()
-		self.picload.PictureData.get().append(self.buildEntry)
-		self.picload.setPara((94, 60, sc[0], sc[1], False, 1, "#00000000"))
-		self.picload.startDecode(self.thumb)
+	def downloadThumbnail(self,thumbUrl):
+		if thumbUrl is not None:
+			thumbID = thumbUrl.rsplit("/",1)[1]
+			thumbFile = None
+			if not thumbUrl.startswith("http://"):
+				thumbUrl = "%s%s"%(MAIN_PAGE, thumbUrl)
+			try:
+				req = urllib2.Request(thumbUrl)
+				url_handle = urllib2.urlopen(req)
+				headers = url_handle.info()
+				contentType = headers.getheader("content-type")
+			except:
+				contentType = None
 
-	def buildEntry(self, picInfo=None):
-		x = self.list[self.idx]
-		res = [(x[0], x[2])]
-		if picInfo:
-			ptr = self.picload.getData()
-			if ptr != None:
-				res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(94, 60), png=ptr))
-		res.append(MultiContentEntryText(pos=(100, 0), size=(430, 20), font=0, text=x[2]))
-		res.append(MultiContentEntryText(pos=(100, 20), size=(430, 20), font=0, text=x[4]))
-		res.append(MultiContentEntryText(pos=(100, 40), size=(430, 20), font=1, text=x[1]))
-		self.listCompleted.append(res)
-		self.idx += 1
-		self.buildEntries()
+			if contentType:
+				if 'image/jpeg' in contentType:
+					thumbFile = "/tmp/" + thumbID + ".jpg"
+				elif 'image/gif' in contentType:
+					thumbID = None
+				#	thumbFile = "/tmp/" + thumbID + ".gif"
+				elif 'image/png' in contentType:
+					thumbFile = "/tmp/" + thumbID + ".png"
+				else:
+					print "[ZDF Mediathek] Unknown thumbnail content-type:", contentType
+			if thumbFile is not None:
+				if (os_path.exists(thumbFile) == True): #already downloaded
+					self.downloadThumbnailCallback(None, thumbFile, thumbID)
+				else:
+					if self.png_cache.get(thumbID, None) is None:
+						downloadPage(thumbUrl, thumbFile).addCallback(self.downloadThumbnailCallback, thumbFile, thumbID).addErrback(self.downloadThumbnailError, thumbID)
+					else:
+						self.updateEntry(thumbID, thumbFile)
+
+	def downloadThumbnailError(self, err, thumbID):
+		self.pixmaps_to_load.remove(thumbID)
+		print "[ZDF Mediathek] downloadThumbnailError:", thumbID, err.getErrorMessage()
+
+	def downloadThumbnailCallback(self, txt, thumbFile, thumbID):
+		if (os_path.exists( thumbFile) == True):
+			self.pixmaps_to_load.remove(thumbID)
+			sc = AVSwitch().getFramebufferScale()
+			self.picloads[thumbID] = ePicLoad()
+			self.picloads[thumbID].PictureData.get().append(boundFunction(self.finishedThumbnailDecode, thumbID, thumbFile))
+			self.picloads[thumbID].setPara((94, 60, sc[0], sc[1], False, 1, "#00000000"))
+			self.picloads[thumbID].startDecode(thumbFile)
+
+	def finishedThumbnailDecode(self, thumbID = "", thumbFile = "", picInfo = None):
+		ptr = self.picloads[thumbID].getData()
+		if ptr != None:
+			self.png_cache[thumbID] = ptr
+			del self.picloads[thumbID]
+			self.updateEntry(thumbID, thumbFile)
+
+	def updateEntry(self, thumbID, thumbFile):
+		if (os_path.exists(thumbFile) == True):
+			os_remove(thumbFile)
+		idx = self.getMovieCategoryIndexByThumbID(thumbID)
+		if idx is not None:
+			print "[ZDF Mediathek] updateEntry", thumbID, thumbFile, idx
+			self.entry_changed(idx)
 
 	def SetList(self, l):
+		if self.ListUpdate:
+			self.lastIndex = self.index
+			self.lastListLength = len(self.list)
+		else:
+			self.lastIndex = 0
+			self.lastListLength = len(l[1])			
 		self.type = l[0]
 		self.list = l[1]
 		if self.type == TYPE_PODCAST:
-			self.l.setItemHeight(20)
 			self.buildEntries()
 		elif self.type == TYPE_MOVIELIST_CATEGORY:
-			self.l.setItemHeight(60)
 			del self.listCompleted
 			self.listCompleted = []
 			self.idx = 0
 			self.buildEntries()
+			if len(self.listCompleted):
+				if self.ListUpdate:
+					if len(self.list) > self.lastListLength:
+						self.updateList(self.listCompleted)
+						self.setIndex(self.lastIndex)
+					else:
+						self.setBuildFunc(self.buildEntry)
+						self.setList(self.listCompleted)
+					self.ListUpdate = False
+				else:
+					self.setBuildFunc(self.buildEntry)
+					self.setList(self.listCompleted)
+				if self.callback:
+					self.callback()
 		else:
 			self.setList([])
 			if self.callback:
@@ -556,26 +648,70 @@ class ZDFMediathekCache(Screen):
 
 ###################################################
 
+TYPE_NOTHING = 0
+TYPE_MOVIE = 1
+TYPE_PODCAST = 2
+TYPE_MOVIELIST_CATEGORY = 3
+
+LIST_LEFT = 0
+LIST_RIGHT = 1
+LIST_NONE = 2
+
 class ZDFMediathek(Screen, HelpableScreen):
+	desktop = getDesktop(0)
+	size = desktop.size()
+	width = size.width()
+	if width == 720:
+		skin = """<screen name="ZDFMediathek" position="0,0" size="720,576" title="ZDF Mediathek" flags="wfNoBorder" backgroundColor="#252525" >
+				<ePixmap position="20,30" size="133,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/logo.png" />
+				<widget name="navigationTitle" position="250,40" size="430,25" font="Regular;18" backgroundColor="#252525" foregroundColor="#f47d19" noWrap="1" />
+				<widget name="leftList" position="20,70" size="220,440" transparent="1" selectionDisabled="1" />
+				<widget source="rightList" render="Listbox" position="250,70" size="430,480" backgroundColor="#3d3c3c" backgroundColorSelected="#565656" scrollbarMode="showOnDemand">
+					<convert type="TemplatedMultiContent">
+					{"templates":
+						{"default": (60,[
+								MultiContentEntryPixmapAlphaTest(pos = (0,0), size = (94,60), png = 6),
+								MultiContentEntryText(pos = (100, 0), size = (430, 20), font = 0, text = 2),
+								MultiContentEntryText(pos = (100, 20), size = (430, 20), font = 0, text = 4),
+								MultiContentEntryText(pos = (100, 40), size = (430, 20), font = 1, text = 1),
+							]),
+						},
+						"fonts": [gFont("Regular", 20), gFont("Regular", 18)],
+						"itemHeight": 60
+					}
+					</convert>
+				</widget>
+				<ePixmap pixmap="skin_default/buttons/key_menu.png" position="20,520" size="35,25" transparent="1" alphatest="on" />
+				<widget name="serverName" position="60,520" size="160,20" font="Regular;18" backgroundColor="#252525" foregroundColor="#f47d19" />
+				<widget name="fakeList" position="0,0" size="0,0" />
+			</screen>"""
+	else:
+		skin = """<screen name="ZDFMediathek" position="center,center" size="900,580" title="ZDF Mediathek" backgroundColor="#252525" >
+				<ePixmap position="20,30" size="133,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/logo.png" />
+				<widget name="navigationTitle" position="250,40" size="430,25" font="Regular;18" backgroundColor="#252525" foregroundColor="#f47d19" noWrap="1" />
+				<widget name="leftList" position="20,70" size="220,440" transparent="1" selectionDisabled="1" />
+				<widget source="rightList" render="Listbox" position="250,70" size="600,496" backgroundColor="#3d3c3c" backgroundColorSelected="#565656" scrollbarMode="showOnDemand">
+					<convert type="TemplatedMultiContent">
+					{"templates":
+						{"default": (62,[
+								MultiContentEntryPixmapAlphaTest(pos = (2,1), size = (94,60), png = 6),
+								MultiContentEntryText(pos = (100, 0), size = (500, 20), font = 0, text = 2),
+								MultiContentEntryText(pos = (100, 20), size = (500, 20), font = 0, text = 4),
+								MultiContentEntryText(pos = (100, 40), size = (500, 20), font = 1, text = 1),
+							]),
+						},
+						"fonts": [gFont("Regular", 20), gFont("Regular", 18)],
+						"itemHeight": 62
+					}
+					</convert>
+				</widget>
+				<ePixmap pixmap="skin_default/buttons/key_menu.png" position="20,540" size="35,25" transparent="1" alphatest="on" />
+				<widget name="serverName" position="60,540" size="160,20" font="Regular;18" backgroundColor="#252525" foregroundColor="#f47d19" />
+				<widget name="fakeList" position="0,0" size="0,0" />
+			</screen>"""
+
 	def __init__(self, session):
 		self.session = session
-		
-		desktop = getDesktop(0)
-		size = desktop.size()
-		width = size.width()
-		
-		if width == 720:
-			self.skin = """<screen position="0,0" size="720,576" flags="wfNoBorder" backgroundColor="#252525" >"""
-		else:
-			self.skin = """<screen position="center,center" size="720,576" title="ZDF Mediathek" backgroundColor="#252525" >"""
-		self.skin += """<ePixmap position="40,30" size="133,40" pixmap="%s" />
-				<widget name="navigationTitle" position="250,40" size="430,25" font="Regular;18" backgroundColor="#252525" foregroundColor="#f47d19" noWrap="1" />
-				<widget name="leftList" position="40,70" size="200,440" transparent="1" selectionDisabled="1" />
-				<widget name="rightList" position="250,70" size="430,480" backgroundColor="#3d3c3c" backgroundColorSelected="#565656" selectionDisabled="1" scrollbarMode="showOnDemand" />
-				<ePixmap pixmap="skin_default/buttons/key_menu.png" position="40,520" size="35,25" transparent="1" alphatest="on" />
-				<widget name="serverName" position="80,520" size="160,20" font="Regular;18" backgroundColor="#252525" foregroundColor="#f47d19" />
-				<widget name="fakeList" position="0,0" size="0,0" />
-			</screen>""" % (PNG_PATH+"logo.png")
 		
 		Screen.__init__(self, session)
 		
@@ -613,6 +749,11 @@ class ZDFMediathek(Screen, HelpableScreen):
 		self.cacheTimer.callback.append(self.chechCachedFile)
 		
 		self.onLayoutFinish.append(self.getPage)
+		self.onClose.append(self.__onClose)
+
+	def __onClose(self):
+		del self.cacheTimer
+		self["rightList"].png_cache = {}
 
 	def getPage(self, page=None):
 		self.working = True
@@ -629,11 +770,31 @@ class ZDFMediathek(Screen, HelpableScreen):
 	def gotPage(self, html=""):
 		rightMenu = getRightMenu(html)
 		if rightMenu[0] == TYPE_MOVIE:
-			list = []
+			tmplist = []
 			for x in rightMenu[1]:
-				list.append(("%s %s"%(x[0], x[1].split(".")[-1]), x[1]))
-			if len(list):
-				self.session.openWithCallback(self.play, ChoiceBox, title="Selektiere...", list=list)
+				if PLAY_WMV:
+					if x[1].endswith(".asx"):
+						if len(x[0]) > 8:
+							x[0] = x[0].split("<li>")[-1]
+						tmplist.append(("%s %s"%(x[0], x[1].split(".")[-1]), x[1]))
+					if x[1].endswith(".mov"):
+						continue
+				else:
+					if x[1].endswith(".asx"):
+						continue
+					tmplist.append(("%s %s"%(x[0], x[1].split(".")[-1]), x[1]))
+			if len(tmplist):
+				if len(tmplist) == 1:  #only one entry, play directly.
+					self.play(tmplist[0])
+				else:
+					entry = None
+					for x in tmplist:
+						if "DSL 2000" in x[0]:
+							entry = x
+					if entry:
+						self.play(entry)
+					else:
+						self.session.openWithCallback(self.play, ChoiceBox, title="Selektiere...", list=tmplist)
 			else:
 				self.working = False
 		else:
@@ -655,7 +816,8 @@ class ZDFMediathek(Screen, HelpableScreen):
 			self["leftList"].SetList(getLeftMenu(html), True)
 			self["rightList"].SetList(rightMenu)
 			self["leftList"].selectionEnabled(0)
-			self["rightList"].selectionEnabled(1)
+			self["rightList"].setSelectionEnabled(1)
+			self["rightList"].setActive(True)
 			self["fakeList"].selectionEnabled(0)
 			self["leftList"].setActive(False)
 
@@ -673,10 +835,24 @@ class ZDFMediathek(Screen, HelpableScreen):
 		self.working = False
 		if callback is not None:
 			url = callback[1]
-			if url.endswith(".mov"):
+			if url.endswith(".mov") or url.endswith(".asx"):
 				url = getMovieUrl(url)
+				if url and url.endswith(".asx"):
+					newurl = getMovieUrl(url)
+					if newurl:
+						url = newurl
+			print "[ZDFMediathek]->PLAY:",url
 			if url:
 				if PLAY_MP4 and url.endswith(".mp4"):
+					ref = eServiceReference(4097, 0, url)
+					self.session.open(ChangedMoviePlayer, ref)
+				elif PLAY_MP4 and url.startswith("rtsp") and url.endswith(".sdp"):
+					ref = eServiceReference(4097, 0, url)
+					self.session.open(ChangedMoviePlayer, ref)
+				elif PLAY_WMV and url.endswith(".wmv"):
+					ref = eServiceReference(4097, 0, url)
+					self.session.open(ChangedMoviePlayer, ref)
+				elif PLAY_WMV and url.startswith("mms") and "reflector:" in url:
 					ref = eServiceReference(4097, 0, url)
 					self.session.open(ChangedMoviePlayer, ref)
 				else: # Die Hardware kann das Format nicht direkt abspielen, mit Stream2Dream oder vlc Server probieren...
@@ -689,7 +865,7 @@ class ZDFMediathek(Screen, HelpableScreen):
 								self.cacheDialog.start()
 								self.cacheTimer.start(1000, False)
 						else:
-							self.transcodeServer.play(self.session, url, self["rightList"].getCurrent()[0][1])
+							self.transcodeServer.play(self.session, url, self["rightList"].getCurrent()[1])
 					else:
 						self.session.open(MessageBox, "Es wurde kein Server ausgewählt!", MessageBox.TYPE_ERROR)
 			else:
@@ -728,11 +904,15 @@ class ZDFMediathek(Screen, HelpableScreen):
 				self.currentList = LIST_RIGHT
 				self["leftList"].setActive(False)
 				self["fakeList"].selectionEnabled(0)
-				self["rightList"].selectionEnabled(1)
+				self["rightList"].setSelectionEnabled(1)
+				self["rightList"].setActive(True)
+				self["rightList"].ListUpdate = False
 			elif self.currentList == LIST_RIGHT:
 				self.currentList = LIST_LEFT
 				self["leftList"].setActive(True)
-				self["rightList"].selectionEnabled(0)
+				self["rightList"].setSelectionEnabled(0)
+				self["rightList"].setActive(False)
+				self["rightList"].ListUpdate = False
 				self["fakeList"].selectionEnabled(1)
 
 	def selectServer(self):
@@ -797,7 +977,11 @@ class ZDFMediathek(Screen, HelpableScreen):
 			elif self.currentList == LIST_RIGHT:
 				curr = self["rightList"].getCurrent()
 				if curr:
-					self.getPage(curr[0][0])
+					if curr[4] == "Weitere Beitraege laden.":
+						self["rightList"].ListUpdate = True
+					else:
+						self["rightList"].ListUpdate = False
+					self.getPage(curr[0])
 			elif streamplayer:
 				if streamplayer.connected:
 					if streamplayer.caching or streamplayer.streaming:
@@ -807,29 +991,29 @@ class ZDFMediathek(Screen, HelpableScreen):
 		if not self.working:
 			if self.currentList == LIST_LEFT:
 				self["leftList"].first()
-			elif self.currentList == LIST_RIGHT:
+			elif self.currentList == LIST_RIGHT and self["rightList"].active:
 				self["rightList"].pageUp()
 
 	def right(self):
 		if not self.working:
 			if self.currentList == LIST_LEFT:
 				self["leftList"].last()
-			elif self.currentList == LIST_RIGHT:
+			elif self.currentList == LIST_RIGHT and self["rightList"].active:
 				self["rightList"].pageDown()
 
 	def up(self):
 		if not self.working:
 			if self.currentList == LIST_LEFT:
 				self["leftList"].previous()
-			elif self.currentList == LIST_RIGHT:
-				self["rightList"].up()
+			elif self.currentList == LIST_RIGHT and self["rightList"].active:
+				self["rightList"].selectPrevious()
 
 	def down(self):
 		if not self.working:
 			if self.currentList == LIST_LEFT:
 				self["leftList"].next()
-			elif self.currentList == LIST_RIGHT:
-				self["rightList"].down()
+			elif self.currentList == LIST_RIGHT and self["rightList"].active:
+				self["rightList"].selectNext()
 
 ###################################################
 
