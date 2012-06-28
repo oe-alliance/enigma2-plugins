@@ -1,0 +1,126 @@
+<e2:screen name="ServiceListWebScreen">&lt;!DOCTYPE html><html>
+<head>
+	<title>Edit Timer</title>
+	<meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<link type="text/css" rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
+	<link type="text/css" rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.0.min.css" />
+	<link type="text/css" rel="stylesheet" href="/web-data/m/css/mobiscroll-2.0.full.min.css" />
+
+	<script src="/web-data/lib/jquery-1.7.1.min.js" />
+	<script language="javascript" type="text/javascript">
+		$(document).bind("mobileinit", function(){
+			$.extend(  $.mobile , {
+				defaultPageTransition: 'none',
+				defaultDialogTransition: 'none'
+			});
+		});
+	</script>
+	<script src="/web-data/m/script/jquery.mobile-1.1.0.min.js" />
+	<script src="/web-data/m/script/mobiscroll-2.0.full.min.js" />
+	<script>
+		$(document).ready(
+			function(){
+				$.scroller.themes.jqm.defaults = {
+					jqmBody:"a",
+					jqmHeader:"a",
+					jqmWheel:"a",
+					jqmClickPick:"d",
+					jqmSet:"d",
+					jqmCancel:"a"
+				};
+				var now = new Date();
+				$('#begin').scroller({
+					preset: 'datetime',
+					minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
+					dateFormat: 'yyyy-mm-dd ',
+					dateOrder: 'yyyymmdd',
+					timeFormat: 'HH:ii',
+					timeWheels: 'HH:ii',
+					theme: 'jqm',
+					display: 'modal',
+					mode: 'mixed'
+				});
+				$('#end').scroller({
+					preset: 'datetime',
+					minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
+					dateFormat: 'yyyy-mm-dd ',
+					dateOrder: 'yyyymmdd',
+					timeFormat: 'HH:ii',
+					timeWheels: 'HH:ii',
+					theme: 'jqm',
+					display: 'modal',
+					mode: 'mixed'
+				});
+			}
+		);
+	</script>
+</head>
+<body>
+
+<div data-role="page" id="timeredit" data-title="Edit Timer" data-theme="a">
+	<div data-role="header">
+		<h1>Edit Timer</h1>
+		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home">Home</a>
+	</div><!-- /header -->
+	<div data-role="content">
+		<form action="index.html" method="get" data-inset="true">
+			<div data-role="fieldcontain">
+				<label for="action">Action: </label>
+				<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" id="action">
+					<label for="radio-action-record">Record</label>
+					<input type="radio" name="action" id="radio-action-record" value="record" checked="checked"/>
+
+					<label for="radio-action-zap">Zap</label>
+					<input type="radio" name="action" id="radio-action-zap" value="zap"/>
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="name">Name:</label>
+				<input type="text" name="name" id="name" placeholder="Name"/>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="description">Description:</label>
+				<input type="text" name="description" id="description" placeholder="Description"/>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="begin">Begin</label>
+				<input placeholder="Begin date and time" name="begin" id="begin" type="text"/>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="end">End</label>
+				<input placeholder="End date and time" name="end" id="end" type="text"/>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="select-service">Service:</label>
+				<select id="select-service" name="select-service">
+					<option value="ARD">ARD</option>
+					<option value="ZDF">ZDF</option>
+				</select>
+				<label for="select-bouquet">Bouquet:</label>
+				<select id="select-bouquet" name="select-bouquet">
+					<option value="favorites">Favorites (TV)</option>
+				</select>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="select-location">Location:</label>
+				<select id="select-location" name="select-location">
+					<option value="ARD">/hdd/movie</option>
+					<option value="ZDF">/media/ST394839</option>
+				</select>
+			</div>
+			<fieldset>
+				<button type="submit" name="save" value="submit-save" data-inline="true">Save</button>
+				<button type="cancel" name="cancel" value="submit-cancel" data-inline="true">Cancel</button>
+			</fieldset>
+		</form>
+	</div>
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div>
+
+</body>
+</html>
+</e2:screen>
