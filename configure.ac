@@ -67,6 +67,12 @@ antiscrollbar/Makefile
 antiscrollbar/meta/Makefile
 antiscrollbar/src/Makefile
 
+audiorestart/Makefile
+audiorestart/img/Makefile
+audiorestart/meta/Makefile
+audiorestart/po/Makefile
+audiorestart/src/Makefile
+
 audiosync/Makefile
 audiosync/img/Makefile
 audiosync/meta/Makefile
