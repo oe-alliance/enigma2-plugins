@@ -1640,6 +1640,7 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 	def __evEOF(self):
 		print "evEOF=%d" % iPlayableService.evEOF
 		print "Event EOF"
+		self.pauseService()
 		self.handleLeave(config.plugins.mytube.general.on_movie_stop.value)
 
 	def __setHideTimer(self):
