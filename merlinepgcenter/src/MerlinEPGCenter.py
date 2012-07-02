@@ -151,6 +151,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		self.startTab = startTab
 		self.doSearch = doSearch
 		
+		self.onChangedEntry = [ ]
 		from Screens.InfoBar import InfoBar
 		self.infoBarInstance = InfoBar.instance
 		self.epgcache = eEPGCache.getInstance()
