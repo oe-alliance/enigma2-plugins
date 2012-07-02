@@ -3,4 +3,4 @@ Version: 1.0
 Description: Vali-XD skins Control
 Maintainer: Vali
 Homepage: http://www.dreambox-tools.info
-Depends: enigma2 (>> 3.2git20110927)
+Depends: enigma2
