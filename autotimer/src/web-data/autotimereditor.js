@@ -404,7 +404,7 @@ var AutoTimerMenuController  = Class.create(Controller, {
 				this.back();
 			}.bind(this)
 		);
-		$('back').title = "Return to Dreambox Webcontrol";
+		$('back').title = "Return to Receiver Webcontrol";
 		$('reload').on(
 			'click',
 			function(event, element){
