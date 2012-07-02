@@ -567,9 +567,14 @@ class TeleText(Screen):
     self.socketSend(x)
 
   def textPressed(self):
-    if self.nav_mode != NAV_MODE_TEXT or self.catchPage or self.pageInput != 0:
+    if self.nav_mode != NAV_MODE_TEXT or self.catchPage:
       return
     log("text pressed")
+    if self.pageInput != 0:
+      self.pageInput = 0
+      x = array.array('B')
+      x.fromlist([CMD_PAGEINPUT, 0x0a])
+      self.socketSend(x)
     self.resetVideo()
     self.__closed()
     if self.txtpid != self.txtpid_origin:
@@ -808,10 +813,13 @@ class TeleText(Screen):
 
   def cancelPressed(self):
     if self.nav_mode == NAV_MODE_TEXT:
-      if self.pageInput != 0:
-        return
       log("cancel pressed")
-      if self.catchPage:
+      if self.pageInput != 0:
+        self.pageInput = 0
+        x = array.array('B')
+        x.fromlist([CMD_PAGEINPUT, 0x0a])
+        self.socketSend(x)
+      elif self.catchPage:
         x = array.array('B', (CMD_CATCHPAGE, 3, 0))
         self.socketSend(x)
         self.catchPage = False
