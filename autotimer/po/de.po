@@ -419,7 +419,7 @@ msgstr "Nur auf Sender: %s"
 
 #, python-format
 msgid "Only on Weekday: %s"
-msgstr "Nur an Wochentag:%s"
+msgstr "Nur an Wochentag: %s"
 
 msgid "Only poll while in standby"
 msgstr "Nur prüfen wenn in StandBy"
