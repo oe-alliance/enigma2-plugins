@@ -1,0 +1,11 @@
+Package: enigma2-plugin-extensions-schiffe
+Version: 0.2-r0
+Description: Battleship Game
+Section: extra
+Priority: optional
+Maintainer: DarkVolli
+License: GPL
+Architecture: mipsel
+OE: enigma2-plugin-extensions-schiffe
+Homepage: http://www.dreambox-tools.info
+Source: file://*.py file://*.png

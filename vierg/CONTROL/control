@@ -1,0 +1,11 @@
+Package: enigma2-plugin-extensions-vierg
+Version: 0.2-r1
+Description: Vier gewinnt Game
+Section: extra
+Priority: optional
+Maintainer: DarkVolli
+License: GPL
+Architecture: mipsel
+OE: enigma2-plugin-extensions-vierg
+Homepage: http://www.dreambox-tools.info
+Source: file://*.py file://*.png

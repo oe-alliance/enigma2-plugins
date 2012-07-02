@@ -1,0 +1,246 @@
+version 0.1
+* first beta :)
+
+version 0.2
+* fix: crash settings color buttons
+* new: cover display
+
+version: 0.3
+* new: movie info search over tmdb
+* new: movie info/cover download over tmdb
+
+version: 0.4
+* multiple layout changes
+
+version: 0.5
+* new: own movie info screen (info button)
+* new: movie info/cover can also be displayed for non *.ts movies while played
+* new: lcd/oled screens
+* new: manual search in download movie info/cover
+* changed: many things in the skin ;(
+
+version: 0.6
+* fix: crash in menu tmdb search
+* new: more services can be displayed in the lcd/oled
+* new: movie info/Cover options in the menuof the movie list
+
+version: 0.7
+* new: *.cutsr and *.gm files also deleted if availiable
+* fix: dasplay the movie description when a directory is selected
+* fix: tmdb search with utf8
+* new: with long info the merlinepg can be started while playing
+* new: action while start/stop/end of movie can be set in settings
+
+version: 0.8
+* fix: finally delete *.cutsr and *.gm files - hope so :)
+* new: set position of the movie Infobar
+
+version: 0.9
+* new: plugin is 100% tanslated
+* new: with long info the cooltvguide can be started while playing
+* changed: lcd/oled display,movie info with cover and long info works also when coverdisplay is disabled in the movie list
+* fix: crash while renaming
+
+version: 1.0
+* changed: plugin settings from menu->settings->system moved to menu->settings
+* changed: some strings because of the skins
+* new: question to reboot box or only Enigma2 when disabling the plugin
+* changed: list hight for skins
+* new: color for movie status in the list can be changed
+* new: date in the movie list can be enabled/disabled
+* new: movie length in the movie list can be enabled/disabled
+* new: format of date can be changed in the movie list
+* new: nl translation (thx @ Bschaar)
+* changed: blue sel.png instead of grey for the standard skin (thx @ Joachim_Ernst)
+* fix: sort the button assignment
+Skinners ATTENTION , the screens AdvancedMovieSelectionButtonSetupSD, AdvancedMovieSelectionButtonSetupXD, AdvancedMovieSelectionButtonSetupHD have changed
+
+version: 1.1
+* new: channel name on/off in the advanced oneliner list
+* new: icon in the movie list for new recordings (only availiable with gp3 installed)
+* new: icon in the movie list for new recordings can be set on/off in the settings (only availiable with gp3 installed)
+* changed: nl translation
+* new: cover displayed for directory (folder.jpg must be availiable in the directory)
+
+version: 1.2
+* new: mini tv can be set on/off
+* fix: overlapping texts with "weird" fonts :)
+* fix: setting for channel name was not saved permanently
+* fix: cover display with dvd file structure
+* fix: meta files were created wrong with dvd file structure
+* fix: eit file creation when titel <= 2 characters
+* fix: delete complete dvd, cover and movie info with dvd file structure
+Skinners ATTENTION , new screens added
+
+version: 1.3
+* new: directory name instead of folder.jpg for the display of covers with directories (can be set on/off in the settings)
+* fix: crash when playing over the gp3 file browser if the movie was played with AMS before
+* fix: markers added with 0 were not displayed
+* fix: with the standard e2 date in the movie list the year was truncated
+
+version: 1.4
+* fix: compact display in the movie list when tags are availiable
+* new: tageditor fix in the plugins (can be set on/off in the settings)
+* new: tags can be assigned to timers and autotimers
+* new: display tags can be set on/off in the movie list (function availiable in the standard/compact and advanced list if the channel names are disabled)
+* new: automatically start the movie at the first marker (can be set on/off in the settings)
+* new: filter according to tags can be assigned to a color button, and/or display in the menu of the movie list
+
+version: 1.5
+* new: if the yttrailer plugin is installed, it can be started over the menu of the movie list (can be set on/off in the settings), can also be assigned to a color button
+* new: move/copy can be assigned to a color button
+* changed: nl translation (thx @ Bschaar)
+
+version: 1.6
+* new: movie description while searching/downloading covers/info scrollable(buttons left/right)
+* new: movie description in info scrollable
+* new: exit button can be activated to stop the movie
+* new: option download covers/info for ALL movies can be switched on/off in the settings
+* new: while searching info/cover the movie list is reloaded after exit/save
+* changed: rename for other file types
+* changed: rename no longer displayes as movie plugin
+* changed: nl translation (thx @ Bschaar)
+* fix: save movie info/cover with tmdb search
+* fix: help texts
+* fix: some internal stuff :)
+Skinners ATTENTION , the screens AdvancedMovieSelectionEventViewSD, AdvancedMovieSelectionEventViewXD, AdvancedMovieSelectionEventViewHD have changed
+
+version: 1.7
+* new: bookmarks can be displayed in the movie list
+* new: show/hide bookmarks can be assigned to a color button
+* new: TMDb search and saving cover/movieinfo for single movie can be startet over color button
+* new: icon in the movie list for new recordings  can be set over the menu, or when activated it will be reset automatically when setting the movie as unseen (only active with gp3 installed)
+* new: set movie as seen/unseen can be assigned to color button, also the reset of the icon can be assigned
+* new: info messages can be enabled/disabled
+* new: alternative jump functions
+* changed: set movie as seen/unseen function only displayed with selected movie
+* changed: nl translation (thx @ Bschaar)
+* changed: cover saved also when no description availiable
+* fix: possible crash with cover/info download when the internet service was not reachable
+
+version. 1.8
+* new: two new options when end of movie reached (box deep standby and box in standby)
+* new: trashcan
+* new: info in the movie list and trashcan when confirmation before delete is activated
+* new: delete movie while still recorded no longer possible
+* new: movie from start when stopped x minutes befor movie end
+* new: display channel logo for dreambox recording when no cover availiable
+* fix: save bookmarks on/off when changed over color button
+* fix: delete bookmarks over the delete function in the movie list
+* fix: improved search movie info/cover with '-' im movie title
+Skinners ATTENTION , all screens fot the movie list have extra entries (4 ex./resolution), AdvancedMovieSelectionTrashHD, AdvancedMovieSelectionTrashXD and AdvancedMovieSelectionTrashSD are new
+
+version. 1.9
+* new: usb devices can be displayed in the movie list
+* new: display channel logo on/off
+* new: zoom channel logo or keep original size
+* new: path for channel logos can be set
+* new: back icon instead og directory
+* new: hide files/directories (with gp3 over the gemini_DateiBrowser.conf and with cvs images over the AdvancedMovieSelection.conf in /etc/enigma2)
+* changed: dasplay channel logo function (now without own renderer)
+Skinners ATTENTION , AdvancedMovieSelectionCoverHD,AdvancedMovieSelectionCoverCD,AdvancedMovieSelectionCoverSD removed (therefor changes in AdvancedMovieSelectionHD,AdvancedMovieSelectionXD or AdvancedMovieSelectionSD)
+
+version 2.0
+* new: multi-selection (with radio button)
+* new: color for multi-selection can be set
+* new: movie description and cover/channel logo displayed in the movie infobar (if the MoviePlayerExtended screen in the skin is availiable)
+* new: delete active recording incl. timer (with or without confirmation)
+* new: trashcan function can be assigned to color button, and switched on/off in the menu
+* new: channel logos displayed centered also with the original size
+* new: if availiable the short description is displayed in the movie list as wall in the lcd/oled while playing movie
+* new: display while playing movie from active skin or from the plugin
+* changed: the function for starting in the last active directory (only when opening the movie list, no longer when stopping the movie)
+* changed: nl translation
+* changed: display cover in the movie info (if no cover availiable and the movie is a dreambox recording, the channel logo will be used)
+Skinners ATTENTION , AdvancedMovieSelectionInfoCoverHD,AdvancedMovieSelectionInfoCoverXD,AdvancedMovieSelectionInfoCoverSD removed (therefor changes in AdvancedMovieSelectionEventViewHD,AdvancedMovieSelectionEventViewXD or AdvancedMovieSelectionEventViewSD)
+ 
+version 2.1
+* fix: lcd/oled display when movie title and short description are the same
+* fix: crash when tag in timer menu is changed
+* fix: crash when movie length is missing
+* new: trashcan amptied automatically
+* new: genre is displayed in the movie list when availiable (only for  non-*.ts files)
+
+version 2.2
+* fix: reported errors from 2.1 fixed
+* fix: delete with multiselection when active recordings are selected
+* changed: faulty spaces (plenks)
+* changed: nl translation
+* new: directories and movies can be renamed
+* new: ask if movie should be deleted and return to movie list
+* new: with long info the merlinepgcenter can be started while playing
+* new: with missing short description the oled/lcd display can display the date of the recording, the time of the recording or the actual date
+Skinners ATTENTION , the screens AdvancedMovieSelection_summary and MoviePlayerExtended_summary can use <widget source="Seperator" (separator line which ist displayed automatically)
+AdvancedMovieSelection_Rename_HD, AdvancedMovieSelection_Rename_XD and AdvancedMovieSelection_Rename_SD are new
+
+version 2.2.1
+* fix: delete bug without trashcan
+
+version 2.3
+* new: remote maintenance (empty trashcan from remote boxes), only possible with activated trashcan (settings are availiable menu -> settings -> menu reachable, or can be displayed in the menu of the movie list)
+* new: display the movie length for non-*.ts files from the eit file when availiable
+* new: display the size of directories/bookmarks in the movie list (with or without subdirectories, andof course parameter in the settings, also decimals settable)
+* new: rename bookmarks
+* changed: new recordings also displayed without gp3
+* changed: confirmation before deleting only asked when info messages are enabled
+* changed: short description only displayed if not equal as movie title (in the onliner list)
+* fix: wakeup hdd´s from standby 
+Skinners ATTENTION , AdvancedMovieSelection_ClientSetup_HD, AdvancedMovieSelection_ClientSetup_XD and AdvancedMovieSelection_ClientSetup_SD are new, and in AdvancedMovieSelectionSetupHD,XD and SD the <widget name="MenuIcon" has been added
+
+version 2.4
+* new: percent or progressbar in the movie list
+* new: file size in mb/gb, with gb up to 3 decimals selectable in trashcan
+* new: status display in trashcan (number of files and total size of the files in trashcan)
+* new: remote maintenance selectable over menu button in the trashcan
+* new: standard list view (advanced) added
+* new: optical rating (stars) for tmdb search & d/l 
+* new: remote maintenance server kan be switched on/off
+* new: show directory(on/off) can be assigned to color button
+* new: mark movie as seen/unseen (in toggle modus) can be assigned to color button
+* new: sort according to description
+* new: tmdb search & d/l if no match found, and an & is in the search string, automaticcaly the part bevore & is searched again
+* new: timer list can be accessed over the color buttons
+* fix: new recording icon if status icon is deactivated, and movie marked as seen
+* fix: don't display cover/channel logo if movie description is deactivated
+* fix: selection of plugins by color buttons after changing the system language (functions need to be reassigned)
+* fix: crash with special characters in tmdb search in the advanced infos
+* fix: tmdb search and download if system language is english
+* fix: tmdb search & d/l for files with extention *.ts
+* changed: advanced info for tmdb search & d/l expanded
+* changed: bookmark text if bookmark on/off is assigned to color button
+* changed: no cover image (in German and English)
+Skinners ATTENTION , the screens AdvancedMovieSelectionTrashHD, AdvancedMovieSelectionTrashXD, AdvancedMovieSelectionTrashSD, TMDbMainHD, TMDbMainXD and TMDbMainSD have changed
+
+version 2.4.1
+* fix: crash with dvd´s in the movie list (thx @ b_lisa for reporting)
+* fix: crash with selection toggle over radio button (thx @ Nightrider for reporting)
+
+version 2.5
+* new: search ans save info/cover from thetvdb.com (@thetvdb.com thx for the api key)
+* new: display cover for series (series.jpg must be in the directory/path)
+* changed: many internal function for tmdb info & d/l
+* fix: DVD-Player start and resume function
+* fix: remaining cuts after deleting
+* fix: rename ts movies without meta file
+* fix: crash with enigma2-plugin-systemplugins-eventnavigator plugin
+Skinners ATTENTION ,TMDbMainHD, TMDbMainXD,TMDbMainSD have changed, the screens TheTVDBMainHD, TheTVDBMainXD,and TheTVDBMainSD are new
+
+version 2.5.1
+* new: in the info overview of the movie the previous/next movie can be selected with left/right
+* fix: tvdb series were not always found
+* fix: remaining files after deleting without trashcan
+* fix: tag assignment of non-ts movies
+* fix: crash when showing trashcan
+* fix: crash renaming movies without meta file
+
+version 2.6
+* new: preview of the selected movie in the movie list
+* new: check if bookmarks/mounts are online
+* new: display changelog for the versions
+* new: changelog in German, English and Dutch
+* new: marker is displayed for non-ts movies
+* fix: playing dvd from *.img files
+* fix: resume for dvd´s
+* fix: crash with directory settings if not skinned
+* fix: delete movie info and covers for non-ts files
+Skinners ATTENTION ,AdvancedMovieSelectionAboutDetails_HD, AdvancedMovieSelectionAboutDetails_XD are AdvancedMovieSelectionAboutDetails_SD are new

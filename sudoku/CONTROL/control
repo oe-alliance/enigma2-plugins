@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-sudoku
+Version: 0.1-r1
+Description: Sudoku game for enigma2
+Section: extra
+Priority: optional
+Maintainer: DarkVolli
+Architecture: mipsel
+OE: enigma2-plugin-extensions-sudoku-0.1
+Homepage: http://www.dreambox-tools.info
+Source: file://__init__.py file://plugin.py file://Readme.txt

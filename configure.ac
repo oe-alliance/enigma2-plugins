@@ -34,6 +34,8 @@ AM_CONDITIONAL(DREAMBOX, test `echo "$BOXTYPE" | cut -b 1-2` == "dm")
 AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm500hd)
 AM_CONDITIONAL(VUPLUS, test `echo "$BOXTYPE" | cut -b 1-2` == "vu")
 AM_CONDITIONAL(XTREND, test `echo "$BOXTYPE" | cut -b 1-2` == "et")
+AM_CONDITIONAL(XTREND, test `echo "$BOXTYPE" | cut -b 1-2` == "et")
+AM_CONDITIONAL(GIGABLUE, test `echo "$BOXTYPE" | cut -b 1-5` == "gb800")
 AM_CONDITIONAL(VUUNO, test "$BOXTYPE" == vuuno)
 AM_CONDITIONAL(VUULTIMO, test "$BOXTYPE" == vuultimo)
 AM_CONDITIONAL(VUSOLO, test "$BOXTYPE" == vusolo)
@@ -41,6 +43,12 @@ AM_CONDITIONAL(VUDUO, test "$BOXTYPE" == vuduo)
 AM_CONDITIONAL(ET5X00, test "$BOXTYPE" == et5x00)
 AM_CONDITIONAL(ET6X00, test "$BOXTYPE" == et6x00)
 AM_CONDITIONAL(ET9X00, test "$BOXTYPE" == et9x00)
+AM_CONDITIONAL(GB800SE, test "$BOXTYPE" == gb800se)
+AM_CONDITIONAL(GB800SOLO, test "$BOXTYPE" == gb800solo)
+AM_CONDITIONAL(GB800UE, test "$BOXTYPE" == gb800ue)
+AM_CONDITIONAL(GBQUAD, test "$BOXTYPE" == gbquad)
+AM_CONDITIONAL(VENTONHDX, test "$BOXTYPE" == venton-hdx)
+AM_CONDITIONAL(ODINM9, test "$BOXTYPE" == odinm9)
 
 PKG_CHECK_MODULES(ENIGMA2, enigma2)
 PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
@@ -79,6 +87,13 @@ AM_CONDITIONAL(UPDATE_PO, test "$with_po" = "yes")
 
 AC_CONFIG_FILES([
 Makefile
+
+advancedmovieselection/Makefile
+advancedmovieselection/po/Makefile
+advancedmovieselection/src/Makefile
+advancedmovieselection/src/buttons/Makefile
+advancedmovieselection/src/images/Makefile
+advancedmovieselection/src/skin/Makefile
 
 aihdcontroler/Makefile
 aihdcontroler/meta/Makefile
@@ -132,6 +147,19 @@ bitrateviewer/Makefile
 bitrateviewer/meta/Makefile
 bitrateviewer/src/Makefile
 bitrateviewer/src/bitratecalc/Makefile
+
+bmediacenter/Makefile
+bmediacenter/po/Makefile
+bmediacenter/src/Makefile
+bmediacenter/src/icons/Makefile
+bmediacenter/src/icons/70x70/Makefile
+bmediacenter/src/radio/Makefile
+bmediacenter/src/saver/Makefile
+bmediacenter/src/skins/Makefile
+bmediacenter/src/skins/default/Makefile
+bmediacenter/src/skins/default/images/Makefile
+bmediacenter/src/skins/defaultHD/Makefile
+bmediacenter/src/skins/defaultHD/images/Makefile
 
 bonjour/Makefile
 bonjour/meta/Makefile
@@ -193,6 +221,10 @@ epgrefresh/meta/Makefile
 epgrefresh/po/Makefile
 epgrefresh/src/Makefile
 epgrefresh/src/webinterface/Makefile
+
+esame/Makefile
+esame/src/Makefile
+esame/src/data/Makefile
 
 epgsearch/Makefile
 epgsearch/meta/Makefile
@@ -385,6 +417,10 @@ orfteletext/Makefile
 orfteletext/meta/Makefile
 orfteletext/src/Makefile
 
+oscaminfo/Makefile
+oscaminfo/src/Makefile
+oscaminfo/src/po/Makefile
+
 partnerbox/Makefile
 partnerbox/meta/Makefile
 partnerbox/po/Makefile
@@ -433,6 +469,9 @@ rsdownloader/po/Makefile
 rsdownloader/src/Makefile
 rsdownloader/src/container/Makefile
 
+schiffe/Makefile
+schiffe/src/Makefile
+
 setpasswd/Makefile
 setpasswd/meta/Makefile
 setpasswd/po/Makefile
@@ -472,6 +511,9 @@ subsdownloader2/src/SourceCode/xbmc_subtitles/services/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/services/Napisyme/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/services/Itasa/Makefile
 
+sudoku/Makefile
+sudoku/src/Makefile
+
 svdrp/Makefile
 svdrp/meta/Makefile
 svdrp/src/Makefile
@@ -501,6 +543,9 @@ valixdcontrol/meta/Makefile
 valixdcontrol/src/Makefile
 valixdcontrol/src/comp/Makefile
 valixdcontrol/src/data/Makefile
+
+vierg/Makefile
+vierg/src/Makefile
 
 vlcplayer/Makefile
 vlcplayer/meta/Makefile

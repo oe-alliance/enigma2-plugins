@@ -1,0 +1,247 @@
+version: 0.1
+* erste beta :)
+
+version: 0.2
+* fix: crash bei farbtasten einstellungen
+* neu: coveranzeige
+
+version: 0.3
+* neu: filminfo suche über tmdb
+* neu: filminfo/cover download über tmdb
+
+version: 0.4
+* diverse optische veränderungen
+
+version: 0.5
+* neu: eigenen filminfo screen (info taste)
+* neu: filminfo/cover können nun auch bei nicht *.ts inhalten während des abspielens angezeigt werden
+* neu: lcd/oled screens
+* neu: manuelle suche unter herunterladen und speichern von filminfo/cover
+* geändert: viel in der abteilung skin ;(
+
+version: 0.6
+* fix: crash bei der suche über den menüpunkt tmdb suche
+* neu: es können mehr services im lcd/oled angezeigt werden
+* neu: Filminfo/Cover Optionen im Menü der Filmliste anzeigen:
+
+version: 0.7
+* neu: *.cutsr und *.gm werden auch gelöscht wenn vorhanden
+* fix: anzeige der filmbeschreibung wenn ein ordner ausgewählt ist
+* fix: tmdb suche bei utf8
+* neu: mit lange info kann wenn installiert der merlinepg während der filmwiedergabe aufgerufen werden
+* neu: verhalten bei film start/stop/ende unter einstellungen konfigurierbar
+
+version: 0.8
+* fix: hoffentlich nun endlich das mit den *.cutsr und *.gm dateien :)
+* neu: bei der Filminfoleiste ist nun die position einstellbar
+
+version: 0.9
+* neu: erweiterung ist nun zu 100% übersetzt
+* neu: mit lange info kann wenn installiert der cooltvguide während der filmwiedergabe aufgerufen werden
+* geändert: lcd/oled anzeige,filminfo mit cover anzeige und lange info funktion auch wenn die coveranzeige in der filmliste ausgeschalten ist
+* fix: crash beim umbenennen
+
+version: 1.0
+* geändert: plugin einstellungen von menü->einstellungen->system nach menü->einstellungen geändert
+* geändert: einige texte wegen den skins
+* neu: abfrage wenn plugin deaktiviert wird ob kompl. oder nur e2 neu gestartet werden soll
+* geändert: listenhöhe für skins
+* neu: farbe vom filmstatus in der filmliste kann verändert werden
+* neu: datum in der filmliste kann ein/aus geschalten werden
+* neu: filmlänge in der filmliste kann ein/aus geschalten werden
+* neu: datumsformat in der filmliste kann verˮdert werden
+* neu: nl übersetzung (thx @ Bschaar)
+* geändert: blaues sel.png anstatt graues beim standard skin für die filmauswahl (thx @ Joachim_Ernst)
+* fix: tastenzuordnung sortieren
+ACHTUNG an die skinner, die screens AdvancedMovieSelectionButtonSetupSD, AdvancedMovieSelectionButtonSetupXD, AdvancedMovieSelectionButtonSetupHD haben sich geändert
+
+version: 1.1
+* neu: sendername ein/aus in der in der erweiterten einzeiligen listenansicht
+* neu: icon in der filmlist für neue aufnahmen (nur aktiv wenn gp3 installiert)
+* neu: icon in der filmlist für neue aufnahmen kann ein/aus geschalten werden in den einstellungen (nur aktiv wenn gp3 installiert)
+* geändert: nl übersetzung
+* neu: cover anzeige bei ordnern (folder.jpg muss im ordner/pfad vorhanden sein)
+
+version: 1.2
+* neu: mini tv kann ein/aus geschalten werden
+* fix: überschneiden von texten in der filmliste bei "komischen" schriften :)
+* fix: einstellung des sendernamens wurde nicht permanent gespeichert
+* fix: coveranzeige bei dvd dateistruktur
+* fix: meta datei wurde bei dvd dateistruktur falsch erzeugt
+* fix: eit datei erstellung wenn titel <= 2 ziffern/buchstaben
+* fix: löschen ganzer dvd, sowie löschen von cover,filminfo bei dvd dateistruktur
+ACHTUNG an die skinner, neue screens sind dazu gekommen
+
+version: 1.3
+* neu: ordnername anstelle von folder.jpg für das anzeigen der covers bei ordnern (kann in den einstellungen ein/aus geschalten werden)
+* fix: crash beim abspielen über den gp3 dateimanager wenn zuvor ein film mit der erweiterten filmliste wiedergegeben wurde
+* fix: marker wurden nicht angezeigt die mit der taste 0 angelegt wurden
+* fix: bei der e2 standard datumsanzeige in der filmliste wurden das jahr abgeschnitten
+
+version: 1.4
+* fix: kompakte ansicht der filmliste wenn tags vorhanden sind
+* neu: tageditor fix in der erweiterung (kann in den einstellungen ein/aus geschalten werden)
+* neu: tags können nun auch bei timern und autotimern zugeordnet werden
+* neu: tags anzeigen kann ein/aus geschalten werden in der filmliste (funktion verfügbar in der standard/kompakten und bei der erweiterten listenansicht nur wenn die sendernamen abgeschalten sind)
+* neu: wiedergabe kann automatisch beim ersten marker starten (kann natürlich ein/aus geschalten werden)
+* neu: nach tags filtern kann einer farbtaste zugeordnet werden, und/oder im menü der filmliste angezeigt werden
+
+version: 1.5
+* neu: die yttrailer erweiterung kann wenn installiert über das menü der filmliste aufgerufen werden (kann natürlich ein/aus geschalten werden), oder einer farbtaste zugeordnet werden
+* neu: verschieben/kopieren kann auf die farbtasten gelegt werden
+* geändert: nl übersetzung (thx @ Bschaar)
+
+version: 1.6
+* neu: filmbeschreibung beim suchen/herunterladen von covers/infos kann nun gescrollt werden (pfeiltasten links/rechts)
+* neu: filmbeschreibung unter info kann nun gescrollt werden
+* neu: exit taste kann für das beenden während der wiedergabe aktiviert werden
+* neu: option herunterladen von covers/infos ALLER filme kann nun in den einstellungen ein/aus geschalten werden
+* neu: bei der info/coversuche wird nach dem beenden/speichern automatisch zur filmliste zurückgekehrt
+* geändert: umbennen um dateitypen erweitert
+* geändert: umbennen taucht nun nicht mehr unter den filmlisten erweiterungen auf
+* geändert: nl übersetzung (thx @ Bschaar)
+* fix: speichern von filminfo/cover bei der option tmdb suche
+* fix: hilfetexte
+* fix: so manch internes :)
+ACHTUNG an die skinner, die screens AdvancedMovieSelectionEventViewSD, AdvancedMovieSelectionEventViewXD, AdvancedMovieSelectionEventViewHD haben sich geändert
+
+version: 1.7
+* neu: angelegte lesezeichen können nun in der filmliste angezeigt werden
+* neu: lesezeichen in der filmliste anzeigen/ausblenden kann auf eine farbtaste gelegt werden
+* neu: TMDb suche und das speichern der cover/filminfo einzelner filme kann über die farbtasten gestartet werden
+* neu: icon in der filmlist für neue aufnahmen kann nachträglich wieder gesetzt werden über das menü der filmliste, oder wenn aktiviert wird es automatisch bei der funktion film als ungesehen markieren erledigt (nur aktiv wenn gp3 installiert)
+* neu: film als gesehen/ungesehen markieren kann den farbtasten zugeordnet werden, sowie das erneute anzeigen des neue aufnahme icons
+* neu: info nachrichten können ein/aus geschalten werden
+* neu: alternative sprungfunktionen
+* geändert: film als gesehen/ungesehen markieren funktion wird nun nur mehr bei filmen angezeigt
+* geändert: nl übersetzung (thx @ Bschaar)
+* geändert: cover werden auch wenn keine filmbeschreibung verfügbar gespeichert
+* fix: möglicher crash beim cover/info herunterladen wenn der service per internet nicht erreichbar ist
+
+version: 1.8
+* neu: zwei neue optionen wenn filmende erreicht (box herunterfahren und box in bereitschaft)
+* neu: papierkorb
+* neu: info in der filmliste und papierkorb wenn nachfragen vor dem löschen deaktiviert ist
+* neu: löschen einer aufnahme während diese gerade aufgenommen wird ist nun nicht mehr möglich
+* neu: filmwiedergabe von anfang wenn stop x minuten vor filmende
+* neu: senderlogo anzeige bei dreambox aufnahmen wenn kein cover vorhanden
+* fix: speichern von lesezeichen ein/aus wenn über farbtasten diese ein/aus geschalten werden
+* fix: löschen von lesezeichen über die löschfunktion im menü der filmliste
+* fix: verbesserung bei der filminfo/cover suche wenn '-' im filmtitel
+ACHTUNG an die skinner, bei allen screens für die filmliste ist etwas dazu gekommen (4 stk. pro auflösung), AdvancedMovieSelectionTrashHD, AdvancedMovieSelectionTrashXD und AdvancedMovieSelectionTrashSD sind neu
+
+version: 1.9
+* neu: usb geräte können in der filmliste angezeigt werden
+* neu: senderlogo anzeige ein/aus
+* neu: senderlogo gezoomt oder orig. grösse
+* neu: speicherort senderlogo kann eingestellt werden  
+* neu: zurück icon anstatt ordner
+* neu: ausblenden von dateien/ordnern (bei gp3 über die gemini_DateiBrowser.conf und bei cvs images über die AdvancedMovieSelection.conf in /etc/enigma2)
+* geändert: senderlogo anzeigen funktion (nun ohne eigenen renderer)
+ACHTUNG an die skinner, AdvancedMovieSelectionCoverHD,AdvancedMovieSelectionCoverCD,AdvancedMovieSelectionCoverSD gibt es nicht mehr (dadurch auch änderungen in AdvancedMovieSelectionHD,AdvancedMovieSelectionXD bzw. AdvancedMovieSelectionSD)
+
+version: 2.0
+* neu: merhfachauswahl (mit radio taste)
+* neu: farbe für mehrfachauswahl kann eingestellt werden
+* neu: filmbeschreibung und cover/senderlogo wird in der filmwiedergabe infobar angezeigt (wenn entsprechender MoviePlayerExtended screen im skin vorhanden ist)
+* neu: aktive aufnahme inkl. timer löschen (mit oder ohne nachfrage natürlich)
+* neu: papierkorb funktion kann den farbtasten zugeordnet werden, und auch im menü der filmliste ausgeblendet werden
+* neu: senderlogos werden nun auch in der original grösse zentriert angezeigt
+* neu: die kurzbeschreibung wird nun wenn vorhanden auch in der filmliste sowie bei der wiedergabe am lcd/oled angezeigt
+* neu: display anzeige bei filmwiedergabe vom aktivem skin oder eigene bzw. die von der erweiterung
+* geändert: die funktion der einstellung am letzten speicherort starten (nur mehr beim öffnen der filmliste, und nicht mehr wenn filmliste während wiedergabe geöffnet wird, bzw. beim stoppen der wiedergabe)
+* geändert: nl übersetzung
+* geändert: cover anzeige in der filminfo (nun wird wenn kein cover vorhanden und es sich um eine dreambox aufnahme handelt das senderlogo angezeigt)
+ACHTUNG an die skinner, AdvancedMovieSelectionInfoCoverHD,AdvancedMovieSelectionInfoCoverXD,AdvancedMovieSelectionInfoCoverSD gibt es nicht mehr (dadurch auch änderung in AdvancedMovieSelectionEventViewHD,AdvancedMovieSelectionEventViewXD bzw. AdvancedMovieSelectionEventViewSD)
+ 
+version: 2.1
+* fix: lcd/oled anzeige wenn filmtitel und kurzbeschreibung gleich sind
+* fix: crash wenn tag im timermenü geändert wird
+* fix: crash wenn keine filmlänge vorhanden
+* neu: automatisches papierkorb leeren
+* neu: genre wird nun wenn vorhanden in der filmliste angezeigt (nur bei nicht *.ts dateien)
+
+version: 2.2
+* fix: gemeldete fehler von 2.1 behoben
+* fix: löschen mit mehrfachauswahl wenn mehrere aktive aufnahmen dabei sind
+* geändert: falsch gesetzte leerzeichen (plenks)
+* geändert: nl übersetzung
+* neu: es können nun ordner und filme umbenannt werden
+* neu: abfrage ob film gelöscht werden soll und zurück zur filmliste
+* neu: mit lange info kann nun wenn installiert das merlinepgcenter während der filmwiedergabe aufgerufen werden
+* neu: bei der oled/lcd anzeige kann wenn keine kurzbeschreibung verfügbar ist eingestellt werden ob das datum der erstellung bzw. aufnahmezeitpunkt oder das aktuelle datum angezeigt werden soll
+ACHTUNG an die skinner, bei den screens AdvancedMovieSelection_summary und MoviePlayerExtended_summary kann nun auch <widget source="Seperator" geskinnt werden (trennlinie die automatisch ein/ausgeblendet wird)
+AdvancedMovieSelection_Rename_HD, AdvancedMovieSelection_Rename_XD und AdvancedMovieSelection_Rename_SD sind hinzugekommen
+
+version: 2.2.1
+* fix: löschen bug ohne papierkorb
+
+version: 2.3
+* neu: fernwartung (leeren vom papierkorb von entfernten boxen), kann nur benutzt werden wenn papierkorb aktiv (einstellungen sind dann unter menü -> einstellungen -> menü erreichbar, oder kann im menü der filmliste angezeigt werden)
+* neu: anzeige der filmlänge bei nicht *.ts dateien aus der eit datei wenn vorhanden 
+* neu: anzeige der grösse vom verzeichnis/lesezeichen in der filmliste (mit oder ohne unterverzeichnisse und natürlich abschaltbar, bzw. dezimalstellen einstellbar)
+* neu: lesezeichen umbenennen
+* geändert: neue aufnahmen werden nun auch ohne gp3 angezeigt
+* geändert: vor dem löschen nachfragen warnung wird nur mehr angezeigt wenn auch info nachrichten anzeigen eingeschalten ist
+* geändert: kurbeschreibung wird nur mehr angezeigt wenn sie nicht gleich ist wie der filmtitel (in der erweiterten einzeiligen listenansicht)
+* fix: wecken von hdd´s aus dem standby 
+ACHTUNG an die skinner, AdvancedMovieSelection_ClientSetup_HD, AdvancedMovieSelection_ClientSetup_XD und AdvancedMovieSelection_ClientSetup_SD sind hinzugekommen, und in den AdvancedMovieSelectionSetupHD,XD und SD ist das <widget name="MenuIcon" dazugekommen
+
+version: 2.4
+* neu: prozentanzeige oder fortschrittsbalken in der filmliste
+* neu: dateigrösse in mb/gb, und bei gb bis zu drei dezimalstellen einstellbar im papierkorb
+* neu: statusanzeige im papierkorb (anzahl der dateien im papierkorb, und die gesamtgrösse der dateien im papierkorb)
+* neu: fernwartung kann auch über die menü taste aus dem papierkorb aufgerufen werden
+* neu: standard listenansicht (erweitert) hinzugefügt
+* neu: optische bewertungsanzeige (sterne) bei der tmdb suche & d/l 
+* neu: fernwartungsserver kann ein/aus geschalten werden 
+* neu: ordner anzeigen (ein/aus) kann den farbtasten zugeordnet werden
+* neu: film als gesehen/ungesehen markieren (im toggle modus) kann den farbtasten zugeordnet werden
+* neu: sortieren nach filmbeschreibung
+* neu: tmdb suche & d/l wenn nichts gefunden wurde und es ist ein & im text gibt wird mit dem teil vor dem & nochmal automatisch gesucht
+* neu: timerliste kann über die farbtasten angezeigt werden
+* fix: neue aufnahme icon wenn status icon deaktiviert ist, und film als gesehen markiert wurde
+* fix: keine cover/senderlogo anzeige wenn filmbeschreibung anzeigen deaktiviert ist
+* fix: aufruf von erweiterungen über farbtasten wenn systemsprache geändert wurde (funktionen müssen neu zugeordnet werden)
+* fix: crash bei sonderzeichen in der tmdb suche unter den erweiterten infos
+* fix: tmdb suche und download wenn systemsprache auf englisch
+* fix: tmdb suche & d/l suche bei dateien mit endung *.ts
+* geändert: erweiterte info bei der tmdb suche & d/l erweitert
+* geändert: lesezeichen text wenn lesezeichen ein/aus einer farbtaste zugewiesen ist
+* geändert: no cover anzeige (bild nun in de und en sprache)
+ACHTUNG an die skinner, bei den screens AdvancedMovieSelectionTrashHD, AdvancedMovieSelectionTrashXD, AdvancedMovieSelectionTrashSD, TMDbMainHD, TMDbMainXD und TMDbMainSD gab es änderungen
+
+version: 2.4.1
+* fix: crash bei dvd´s in der filmliste (thx @ b_lisa fürs melden)
+* fix: crash bei der toggle auswahl mit der radio taste (thx @ Nightrider fürs melden)
+
+version: 2.5
+* neu: suchen und speichern von info/cover über thetvdb.com (@thetvdb.com thx for the api key)
+* neu: cover anzeige bei serien (series.jpg muss im ordner/pfad vorhanden sein)
+* geändert: viele interne funktionen bei tmdb info & d/l
+* fix: DVD-Player start und fortfahren funktion
+* fix: übriggebliebene cuts nach dem löschen
+* fix: umbenennen von ts filmen ohne meta datei
+* fix: crash mit enigma2-plugin-systemplugins-eventnavigator plugin
+ACHTUNG an die skinner,TMDbMainHD, TMDbMainXD,TMDbMainSD gab es änderungen, die screens TheTVDBMainHD, TheTVDBMainXD,und TheTVDBMainSD sind neu
+
+version: 2.5.1
+* neu: in der info übersicht des films kann mit rechts/links der nächste/vorige film gewählt werden   
+* fix: tvdb serien wurden nicht immer gefunden
+* fix: übriggebliebene dateien beim löschen ohne papierkorb
+* fix: tag zuordnung von nicht ts filmen
+* fix: crash beim papierkorb anzeigen
+* fix: crash beim umbenennen von filmen wenn keine meta vorhanden ist
+
+version: 2.6
+* neu: filme in der filmliste werden zur vorschau angespielt
+* neu: überprüfung ob lesezeichen/mounts auch wirklich online sind (wenn nicht werden sie nicht angezeigt)
+* neu: anzeige der versions änderungen
+* neu: änderungstext nun in deutsch, englisch und niederländisch
+* neu: marker werden für nicht ts filme angezeigt
+* fix: dvd wiedergabe von *.img dateien
+* fix: wiedergabe fortsetzen bei dvd´s
+* fix: crash bei verzeichnis einstellungen wenn nicht geskinnt
+* fix: löschen von filminfo und cover's für nicht ts dateien
+ACHTUNG an die skinner, AdvancedMovieSelectionAboutDetails_HD, AdvancedMovieSelectionAboutDetails_XD und AdvancedMovieSelectionAboutDetails_SD sind neu
+ 

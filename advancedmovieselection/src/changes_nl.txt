@@ -1,0 +1,246 @@
+versie 0.1
+* eerste beta :)
+
+versie 0.2
+* fix: crash bij instellingen kleurknoppen
+* nieuw: coverweergave
+
+versie: 0.3
+* nieuw: filminfo zoeken via tmdb
+* nieuw: filminfo/cover download via tmdb
+
+versie: 0.4
+* diverse visuele aanpassingen
+
+versie: 0.5
+* nieuw: eigen filminfo screen (infoknop)
+* nieuw: filminfo/cover kan nu ook bij niet *.ts filmen tijdens het afspelen weergegeven worden
+* nieuw: lcd/oled screens
+* nieuw: manueel zoeken bij download en bewaren van filminfo/cover
+* aanpassing: veel in de skinafdeling ;(
+
+versie: 0.6
+* fix: crash tijdens het zoeken via het menu tmdb zoeken
+* nieuw: meer services kunnen weergegeven worden in het lcd/oled
+* nieuw: filminfo/cover opties in het menu van de filmlijst
+
+versie: 0.7
+* nieuw: *.cutsr en *.gm worden ook gewist indien aanwezig
+* fix: weergave van de filmbeschrijving als een map geselecteerd is
+* fix: tmdb zoeken met utf8
+* nieuw: met lang info kan tijdens het afspelen de merlinepg weergegeven worden - indien geïnstalleerd
+* nieuw: gedrag bij start/stop/einde van de film instelbaar in de instellingen
+
+versie: 0.8
+* fix: hopelijk definitied het wissen van *.cutsr en *.gm bestanden :)
+* nieuw: bij de filminfobar is nu de positie instelbaar
+
+versie: 0.9
+* nieuw: plugin ist nu 100% vertaald
+* nieuw: met lang info kan tijdens het afspelen de cooltvguide weergegeven worden - indien geïnstalleerd
+* aanpassing: lcd/oled weergave, filminfo met coverweergave en lang info functie ook als de coverweergave in de filmlijst uitgeschakeld is
+* fix: crash bij hernoemen
+
+versie: 1.0
+* aanpassing: plugin instellingen van menu->instellingen->system naar menu->instellingen verplaatst
+* aanpassing: enkele teksten vanwege skins
+* nieuw: vraag of box volledig herstart moet worden of enkel e2 bij het deactiveren van de plugin
+* aanpassing: lijsthoogte voor skins
+* nieuw: kleur voor filmstatus in de filmlijst kan aangepast worden
+* nieuw: datum in de filmlijst kan aan/uit geschakeld worden
+* nieuw: filmlengte in de filmlijst kan aan/uit geschakeld worden
+* nieuw: datumformaat in de filmlijst kan aangepast worden
+* nieuw: nl vertaling (thx @ Bschaar)
+* aanpassing: blauw sel.png i.p.v. grijs bij standaard skin voor de filmselectie (thx @ Joachim_Ernst)
+* fix: toewijzing knoppen sorteren
+OPGELET voor de skinners, de screens AdvancedMovieSelectionButtonSetupSD, AdvancedMovieSelectionButtonSetupXD, AdvancedMovieSelectionButtonSetupHD zijn gewijzigd
+
+versie: 1.1
+* nieuw: kanaalnaam aan/uit in de uitgebreide lijstweergave op 1 lijn
+* nieuw: icoon in de filmlijst voor nieuwe opnames (enkel actief indien gp3 geïnstalleerd)
+* nieuw: icoon in de filmlijst voor nieuwe opnames kan aan/uit geschakeld worden in de instellingen (enkel actief indien gp3 geïnstalleerd)
+* aanpassing: nl vertaling
+* nieuw: coverweergave voor mappen (folder.jpg moet in de map beschikbaar zijn)
+
+versie: 1.2
+* nieuw: mini-tv kan aan/uit geschakeld worden
+* fix: overlappende teksten in de filmlijst bij "eigenaardige" lettertypes :)
+* fix: instelling voor de kanaalnaam werd niet permanent bewaard
+* fix: coverweergave voor dvd-bestandsstructuur
+* fix: meta-bestand werd bij dvd-bestandsstructuur foutief gecreëerd
+* fix: eit-bestand creatie als titel <= 2 tekens
+* fix: verwijderen van volledige dvd, alsook het verwijderen van cover,filminfo bij dvd-bestandsstructuur
+OPGELET voor de skinners, nieuwe screens toegevoegd
+
+versie: 1.3
+* nieuw: bestandsnaam i.p.v. folder.jpg voor het weergeven van covers bij mappen (kan in de instellingen aan/uit geschakeld worden)
+* fix: crash bij afspelen via de gp3 bestandsbrowser indien de film voordien met AMS afgespeeld werd
+* fix: marker werd niet weergegeven indien met 0 toegevoegd
+* fix: bij de e2 standaard datumweergave in de filmlijst werd het jaar onvolledig weergegeven
+
+versie: 1.4
+* fix: compacte weergave van de filmlijst indien tags beschikbaar
+* nieuw: tageditor fix in de uitbreiding (kan in de instellingen aan/uit geschakeld worden)
+* nieuw: tags kunnen nu ook bij timer en autotimer toegewezen worden
+* nieuw: tags weergeven kan aan/uit geschakeld worden in de filmlijst (functie beschikbaar in de standaard/compacte en bij de uitgebreide weergave enkel als de kanaalnaam uitgeschakeld is)
+* nieuw: afspelen kan automatisch bij de eerste marker starten (kan natuurlijk aan/uit geschakeld worden)
+* nieuw: volgens tags filteren kan aan een kleurknop toegewezen worden, en/of in het menu van de filmlijste weergegeven worden
+
+versie: 1.5
+* nieuw: indien geïnstalleerd kan de yttrailer-plugin over het menu in de filmlijst opgeroepen worden (kan natuurlijk aan/uit geschakeld worden), of aan een kleurknop toegewezen worden
+* nieuw: verplaatsen/kopiëren kan aan een kleurknop toegewezen worden
+* aanpassing: nl vertaling (thx @ Bschaar)
+
+versie: 1.6
+* nieuw: filmbeschrijving bij zoeken/downloaden van covers/infos kan nu gescrollt worden (pijlknoppen links/rechts)
+* nieuw: filmbeschrijving onder info kan nu gescrollt worden
+* nieuw: exit taste kann für das beenden während der wiedergabe aktiviert werden
+* nieuw: optie downloaden van covers/infos van ALLE filmen kan nu in de einstellingen aan/uit geschakeld worden
+* nieuw: bij het zoeken naar info/cover wordt na het beëindigen/bewaren automatisch naar de filmlijst gesprongen
+* aanpassing: extra bestandstypes toegevoegd voor hernoemen
+* aanpassing: hernoemen verschijnt nu niet meer bij de uitbreidingen
+* aanpassing: nl vertaling (thx @ Bschaar)
+* fix: bewaren van filminfo/cover bij de optie tmdb zoeken
+* fix: helpteksten
+* fix: hele reeks interne zaken :)
+OPGELET voor de skinners, de screens AdvancedMovieSelectionEventViewSD, AdvancedMovieSelectionEventViewXD, AdvancedMovieSelectionEventViewHD gewijzigd
+
+versie: 1.7
+* nieuw: bestaande bookmarks kunnen nu ook in de filmlijst weergegeven worden
+* nieuw: bookmarks in de filmlijst weergeven/verbergen kan aan een kleurknop toegewezen worden
+* nieuw: TMDb zoeken en het bewaren van cover/filminfo voor een enkele film kan een een kleurknop toegewezen worden
+* nieuw: icoon in de filmlijst voor nieuwe opnames kan nadien weer via het menu gezet worden, of indien geactiveerd wordt dit automatisch uitgevoerd bij het ongezien zetten van de film (enkel aktief indien gp3 geïnstalleerd)
+* nieuw: film als gezien/ongezien markeren kan aan een kleurknop toegewezen worden, alsook het activeren van het ongezien-icoon
+* nieuw: infoberichten kunnen aan/uit geschakeld worden
+* nieuw: alternatieve springfunctie
+* aanpassing: film als gezien/ongezien markeren wordt enkel nog bij filmen weergegeven
+* aanpassing: nl vertaling (thx @ Bschaar)
+* aanpassing: covers worden ook bewaard als er geen beschrijving beschikbaar is
+* fix: mogelijke crash bij cover/info download als de service over internet niet bereikbaar is
+
+versie. 1.8
+* nieuw: 2 nieuwe opties als het filmeinde bereikt wordt (box uitschakelen en box in standby)
+* nieuw: prullemand
+* nieuw: info in de filmlijst en prullemand als bevestiging voor het verwijderen gedeactiveerd is
+* nieuw: verwijderen van een lopende opname is niet meer mogelijk
+* nieuw: filmweergave van begin indien gestopt op x minuten voor het filmeinde
+* nieuw: kanaallogo weergeven bij dreamboxopname indien er geen cover aanwezig is
+* fix: bewaren van bookmarks aan/ui indien deze via de kleurknoppen aan/uit geschakeld worden
+* fix: verwijderen van bookmarks met de wisfunctie in het menu van de filmlijst
+* fix: optimalisatie van het zoeken naar filminfo/cover met '-' in de filmtitel
+OPGELET voor de skinners, bij alle screens voor de filmlijst nieuwe elementen (4 per resolutie), AdvancedMovieSelectionTrashHD, AdvancedMovieSelectionTrashXD en AdvancedMovieSelectionTrashSD zijn nieuw
+
+versie. 1.9
+* nieuw: usb media kunnen in de filmlijst weergegeven worden
+* nieuw: kanaallogo weergave aan/uit
+* nieuw: kanaallogo zoomen of originele afmeting
+* nieuw: pad voor kanaallogo kan ingesteld worden
+* nieuw: teruf-icoon i.p.v. map
+* nieuw: verbergen van bestanden/mappen (bij gp3 over de gemini_DateiBrowser.conf en bij cvs images over de AdvancedMovieSelection.conf in /etc/enigma2)
+* aanpassing: kanaallogo weergavefunctie (nu zonder eigen renderer)
+OPGELET voor de skinners, AdvancedMovieSelectionCoverHD,AdvancedMovieSelectionCoverCD,AdvancedMovieSelectionCoverSD verwijderd (daardoor ook wijzigingen in AdvancedMovieSelectionHD,AdvancedMovieSelectionXD en AdvancedMovieSelectionSD)
+
+versie 2.0
+* nieuw: meervoudige selectie (met radioknop)
+* nieuw: kleur voor meervoudige selectie kan ingesteld worden
+* nieuw: filmbeschrijving en cover/kanaallogo wordt in de filminfobar weergegeven (indien de MoviePlayerExtended screen in de skin beschikbaar is)
+* nieuw: actieve opname incl. timer verwijderen (natuurlijk met of zonder bevestiging)
+* nieuw: prullemand kan aan kleurknop toegewezen worden, en ook in het menu verborgen worden
+* nieuw: kanaallogos worden nu ook met de originele afmetingen gecentreerd weergegeven
+* nieuw: de korte beschrijving wordt nu indien beschikbaar ook in de filmlijst alsook bij de weergave in de lcd/oled weergegeven
+* nieuw: display weergave bij afspelen film van de actieve skin of de eigen respectievelijk die van de plugin
+* aanpassing: de functie voor start in de laatste map(nu enkel bij het openen van de filmlijst, en niet meer als de filmlijst tijdens de weergave geopend wordt, of bij het stoppen van het afspelen)
+* aanpassing: nl vertaling
+* aanpassing: coverweergave in de filminfo (nu wordt indien geen cover beschikbaar en bij een dreambox-opname het kanaallogo weergegeven)
+OPGELET voor de skinners, AdvancedMovieSelectionInfoCoverHD,AdvancedMovieSelectionInfoCoverXD,AdvancedMovieSelectionInfoCoverSD verwijderd (daardoor ook wijzigingen in AdvancedMovieSelectionEventViewHD,AdvancedMovieSelectionEventViewXD en AdvancedMovieSelectionEventViewSD)
+ 
+versie 2.1
+* fix: lcd/oled weergave als filmtitel en korte beschrijving gelijk zijn
+* fix: crash als tag in het timermenu aangepast wordt
+* fix: crash indien geen filmlengte beschikbaar
+* nieuw: prullemand automatisch ledigen
+* nieuw: genre wordt indien beschikbaar in de filmlijst weergegeven (enkel bij niet-*.ts bestanden)
+
+versie 2.2
+* fix: gerapporteerde fouten van 2.1 opgelost
+* fix: verwijderen met meervoudige selectie indien er actieve opnames bij zijn
+* aanpassing: foutief geplaatste spaties (plenks)
+* aanpassing: nl vertaling
+* nieuw: mappen en filmen kunnen nu hernoemd worden
+* nieuw: bevestiging of film verwijderd moet worden en terug naar de filmlijst
+* nieuw: met lang info kan tijdens het afspelen het merlinepgcenter weergegeven worden
+* nieuw: bij de oled/lcd weergave kan, indien geen korte beschrijving beschikbaar is, ingesteld worden of de datum van creatie, opnamedatum of de actuele datum weergegeven wordt
+OPGELET voor de skinners, bij de screens AdvancedMovieSelection_summary en MoviePlayerExtended_summary kan nu ook <widget source="Seperator" geskint worden (scheidingslijn trennlinie die automatisch in/uitgeschakeld wordt)
+AdvancedMovieSelection_Rename_HD, AdvancedMovieSelection_Rename_XD en AdvancedMovieSelection_Rename_SD toegevoegd
+
+versie 2.2.1
+* fix: bug met verwijderen zonder prullemand
+
+versie 2.3
+* nieuw: onderhoud op afstand (ledigen van prullemand op andere boxen), kan enkel gebruikt worden indien prullemand actief (instellingen zijn dnn onder menu -> instellingen -> menu beschikbaar, of kan in het menu van de filmlijst weergegeven worden)
+* nieuw: weergave van de filmlengte bij niet-*.ts bestanden uit het eit-bestand indien beschikbaar
+* nieuw: weergave van de grootte van de map/bookmark in de filmlijst (met of zonder onderliggende mappen en natuurlijk instelbaar, en eveneens decimalen instelbaar)
+* nieuw: hernoemen bookmarks
+* aanpassing: nieuwe opnames worden nu ook zonder gp3 aangeduid
+* aanpassing: voor het verwijderen wordt de waarschuwing niet meer weergegeven, ook als infoberichten ingeschakeld zijn
+* aanpassing: korte bescherijving wordt enkel weergegeven indien deze verschillend is van de filmtitel
+* fix: opstarten van harde schijven uit sleep
+OPGELET voor de skinners, AdvancedMovieSelection_ClientSetup_HD, AdvancedMovieSelection_ClientSetup_XD en AdvancedMovieSelection_ClientSetup_SD toegevoegd, en in de AdvancedMovieSelectionSetupHD,XD en SD is <widget name="MenuIcon" toegevoegd
+
+versie 2.4
+* nieuw: percentweergave od voortgangsbalk in de filmlijst
+* nieuw: bestandsgrootte in mb/gb, en bij gb tot drie decimalen instelbaar in de prullemand
+* nieuw: statusweergave in de prullemand (aantal bestanden, totaalgrootte in de prullemand)
+* nieuw: onderhoud op afstand kan ook via menu in de prullemand opgeroepen worden
+* nieuw: standaard lijstweergave (uitgebreid) toegevoegd
+* nieuw: visuele beoordeling (sterren) bij tmdb zoeken & d/l 
+* nieuw: onderhoud op afstand, server kan in/uit geschakeld worden
+* nieuw: map weergeven (aan/uit) kan aan kleurknop toegewezen worden
+* nieuw: film als gezien/ongezien markeren (in toggle mode) kan aan kleurknop toegewezen worden
+* nieuw: sorteren volgens filmbeschrijving
+* nieuw: tmdb zoeken & d/l indien geen resultaat en er is een & in de tekst, wordt er automatisch opnieuw gezocht met het deel voor de &
+* nieuw: timerlijst kan aan kleurknop toegewezen worden
+* fix: icoon nieuwe opname als statusicoon gedeactiveerd is, en als film als gezien gemarkeerd wordt
+* fix: geen cover/kanaallogo weergeven als filmbeschrijving weergeven gedeactiveerd is
+* fix: starten van plugins over kleurknoppen als de systeemtaal aangepast werd (functies moeten nieuw toegewezen worden)
+* fix: crash bij speciale tekens in tmdb-zoeken onder uitgebreide info
+* fix: tmdb-zoeken en download indien systeemtaal op engels
+* fix: tmdb-zoeken en download bij bestanden met einde *.ts
+* aanpassing: uitgebreide info bij tmdb-zoeken en download uitgebreid
+* aanpassing: bookmarktekst als bookmark toegewezen is aan kleurknop
+* aanpassing: no cover weergave (beeld nu in de en en)
+OPGELET voor de skinners, de screens AdvancedMovieSelectionTrashHD, AdvancedMovieSelectionTrashXD, AdvancedMovieSelectionTrashSD, TMDbMainHD, TMDbMainXD en TMDbMainSD gewijzigd
+
+versie 2.4.1
+* fix: crash bij dvd´s in de filmlijst (thx @ b_lisa voor het melden)
+* fix: crash bij de meervoudige selectie met de radioknop (thx @ Nightrider voor het melden)
+
+versie 2.5
+* nieuw: zoeken en bewaren van info/cover via thetvdb.com (@thetvdb.com thx for the api key)
+* nieuw: coverweergave bij series (series.jpg moet in map beschikbaar zijn)
+* aanpassing: vele interne functies bij tmdb info & d/l
+* fix: DVD-Player start en hervatten functie
+* fix: resterende cuts na het verwijderen
+* fix: hernoemen van ts-filmen zonder meta-bestand
+* fix: crash met enigma2-plugin-systemplugins-eventnavigator plugin
+OPGELET voor de skinners,TMDbMainHD, TMDbMainXD,TMDbMainSD gewijzigd, de screens TheTVDBMainHD, TheTVDBMainXD en TheTVDBMainSD toegevoegd
+
+versie 2.5.1
+* nieuw: in het info-overzicht van de film kan met rechts/links naar de volgende/vorige film gewisseld worden
+* fix: tvdb series werden niet altijd gevonden
+* fix: resterende bestanden bij verwijderen zonder prullemand
+* fix: toewijzen tag voor niet-ts filmen
+* fix: crash bij prullemand weergeven
+* fix: crash bij hernoemen van filmen zonder meta-bestand
+
+versie 2.6
+* nieuw: filmen in de filmlijst worden als preview afgespeeld
+* nieuw: controle of bookmarks/mounts werkelijk online zijn
+* nieuw: weergave van de wijzigingen per versie
+* nieuw: lijst met wijzigingen vertaald in Duits, Engels en Nederlands
+* nieuw: marker wordt weergegeven voor niet-ts movies
+* fix: dvd-weergave van *.img-bestanden
+* fix: afspelen hervatten bij dvd´s
+* fix: crash bij mapinstellingen indien niet geskint
+* fix: verwijderen van filminfo en covers voor niet-ts bestanden
+OPGELET voor de skinners, AdvancedMovieSelectionAboutDetails_HD, AdvancedMovieSelectionAboutDetails_XD en AdvancedMovieSelectionAboutDetails_SD toegevoegd

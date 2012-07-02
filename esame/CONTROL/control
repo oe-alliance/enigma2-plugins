@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-esame
+Version: 0.1-r1
+Description: eSame game for enigma2
+Section: extra
+Priority: optional
+Maintainer: DarkVolli
+Architecture: mipsel
+OE: enigma2-plugin-extensions-esame-0.1
+Homepage: http://www.dreambox-tools.info
+Source: file://*.py file://data/*.png

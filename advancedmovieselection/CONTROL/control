@@ -1,0 +1,9 @@
+Package: enigma2-plugin-extensions-advancedmovieselection
+Version: 2.6
+Description: Erweiterte Filmauswahl
+Section: extra
+Priority: optional
+Maintainer: JackDaniel, cmikula
+Architecture: mipsel
+Homepage: http://www.i-have-a-dreambox.com
+Depends: 
