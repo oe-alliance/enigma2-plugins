@@ -113,11 +113,19 @@ class AutoMountEdit(Screen, ConfigListScreen):
 
 		self.mountusing = []
 		self.mountusing.append(("fstab", _("FSTAB (mount using linux)")))
-		self.mountusing.append(("enigma2", _("Enigma2 (mount using enigma2")))
+		self.mountusing.append(("enigma2", _("Enigma2 (mount using enigma2)")))
+		self.mountusing.append(("old_enigma2", _("Enigma2 old format (mount using linux)")))
 
 		self.sharetypelist = []
 		self.sharetypelist.append(("nfs", _("NFS share")))
 		self.sharetypelist.append(("cifs", _("CIFS share")))
+
+		if self.mountinfo.has_key('mountusing'):
+			mountusing = self.mountinfo['mountusing']
+			if mountusing is False:
+				mountusing = "fstab"
+		else:
+			mountusing = "fstab"
 
 		if self.mountinfo.has_key('mounttype'):
 			mounttype = self.mountinfo['mounttype']
@@ -182,7 +190,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if password is False:
 			password = ""
 
-		self.mountusingConfigEntry = NoSave(ConfigSelection(self.mountusing, default = 'fstab' ))
+		self.mountusingConfigEntry = NoSave(ConfigSelection(self.mountusing, default = mountusing ))
 		self.activeConfigEntry = NoSave(ConfigEnableDisable(default = active))
 		self.ipConfigEntry = NoSave(ConfigIP(default = ip))
 		self.sharenameConfigEntry = NoSave(ConfigText(default = sharename, visible_width = 50, fixed_size = False))
