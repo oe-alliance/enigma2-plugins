@@ -1,0 +1,110 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 - Plugin Elektro Power Save\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-04-26 11:35+0100\n"
+"PO-Revision-Date: 2009-09-27 17:47+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: plugin.py:110
+msgid "Monday"
+msgstr "Ponedeljak"
+
+#: plugin.py:111
+msgid "Tuesday"
+msgstr "Utorak"
+
+#: plugin.py:112
+msgid "Wednesday"
+msgstr "Sreda"
+
+#: plugin.py:113
+msgid "Thursday"
+msgstr "Četvrtak"
+
+#: plugin.py:114
+msgid "Friday"
+msgstr "Petak "
+
+#: plugin.py:115
+msgid "Saturday"
+msgstr "Subota"
+
+#: plugin.py:116
+msgid "Sunday"
+msgstr "Nedelja"
+
+#: plugin.py:195
+msgid "Enable Elektro Power Save"
+msgstr "Uključi štednju elektr. energije"
+
+#: plugin.py:196
+#: plugin.py:300
+msgid "Standby on boot"
+msgstr "Pripravnost posle podizanja"
+
+#: plugin.py:197
+msgid "Standby on manual boot"
+msgstr "Pripravnost posle ručnog podizanja"
+
+#: plugin.py:198
+msgid "Standby on boot screen timeout"
+msgstr "Predah ekrana posle dizanja u stendbaj"
+
+#: plugin.py:199
+msgid "Force sleep (even when not in standby)"
+msgstr "Nateraj u mod spavanja (iako nije u pripravnosti)"
+
+#: plugin.py:200
+msgid "Dont wake up"
+msgstr "Ne budi"
+
+#: plugin.py:201
+msgid "Holiday mode (experimental)"
+msgstr "Mod odmora (Eksperimentalno)"
+
+#: plugin.py:203
+msgid "Next day starts at"
+msgstr "Sledećeg dana startuj u"
+
+#: plugin.py:206
+msgid "Wakeup"
+msgstr "Buđenje"
+
+#: plugin.py:207
+msgid "Sleep"
+msgstr "Spavanje"
+
+#: plugin.py:211
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: plugin.py:212
+msgid "Ok"
+msgstr "OK"
+
+#: plugin.py:213
+msgid "Help"
+msgstr "Pomoć"
+
+#: plugin.py:237
+msgid "Showing Elektro readme.txt"
+msgstr "Prikazujem Elektro readme.txt"
+
+#: plugin.py:323
+msgid "Go to Standby now?"
+msgstr "Idi u pripravnost sada?"
+
+#: plugin.py:465
+msgid "Go to sleep now?"
+msgstr "Idi u mod spavanja sada?"
+

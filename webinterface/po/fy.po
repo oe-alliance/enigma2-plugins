@@ -1,0 +1,120 @@
+# translation of WebInterface_fy.po to gerrit
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# gerrit <gerrit@nedlinux.nl>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: WebInterface_fy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-01-09 17:25+0100\n"
+"Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
+"Language-Team: gerrit <fy@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+msgid "Allow zapping via Webinterface"
+msgstr "Zappe via Webynterface tastean"
+
+msgid "Autowrite timer"
+msgstr "Automatysk skriuwen Tiidsbarren"
+
+msgid "Cancel"
+msgstr "Ôfbrekke"
+
+msgid "Configuration for the Webinterface"
+msgstr "Ynstellingen foar de Webynterface"
+
+msgid "Enable /media"
+msgstr ""
+
+msgid "Enable HTTP Access"
+msgstr ""
+
+msgid "Enable HTTP Authentication"
+msgstr ""
+
+msgid "Enable HTTPS Access"
+msgstr ""
+
+msgid "Enable HTTPS Authentication"
+msgstr ""
+
+msgid "Enable Streaming Authentication"
+msgstr ""
+
+msgid "HTTP Port"
+msgstr ""
+
+msgid "HTTPS Port"
+msgstr ""
+
+msgid "Load movie-length"
+msgstr "Film lingte ynlade"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Start Webinterface"
+msgstr "Start de Webynterface"
+
+msgid "Webinterface"
+msgstr "Webynterface"
+
+msgid "Webinterface: Main Setup"
+msgstr "Webynterface: Haad ynstellingen"
+
+#~ msgid "Add"
+#~ msgstr "Tafoegje"
+
+#~ msgid "Address"
+#~ msgstr "Adres"
+
+#~ msgid "Authorization"
+#~ msgstr "Autorisaasje"
+
+#~ msgid "Change"
+#~ msgstr "Feroarje"
+
+#~ msgid "Delete"
+#~ msgstr "Ferwiderje"
+
+#~ msgid "Disabled"
+#~ msgstr "Utskeakele"
+
+#~ msgid "Enable /hdd"
+#~ msgstr "/hdd ynskeakelje"
+
+#~ msgid "Interfaces"
+#~ msgstr "Ynterfaces"
+
+#~ msgid "Port"
+#~ msgstr "Poort"
+
+#~ msgid "Really delete this Interface?"
+#~ msgstr "Dizze ynterface wier ferwiderje ?"
+
+#~ msgid "Require Authorization"
+#~ msgstr "Autorisaasje fereaske"
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "SSL Encryption"
+#~ msgstr "SSL enkripsje"
+
+#~ msgid "Webinterface: Edit Interface"
+#~ msgstr "Webynterface: bewurkje ynterface"
+
+#~ msgid "Webinterface: List of configured Interfaces"
+#~ msgstr "Webynterface: lyst fan oanwêzige ynterfaces"
+
+#~ msgid "no"
+#~ msgstr "nee"
+
+#~ msgid "yes"
+#~ msgstr "ja"

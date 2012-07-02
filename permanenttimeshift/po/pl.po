@@ -1,0 +1,155 @@
+# Polish translations for PTS Plugin package.
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Converted from German version.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version:  1.0.0.RC11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-16 13:00+0200\n"
+"PO-Revision-Date: 2010-06-15 12:42+0200\n"
+"Last-Translator: Maciek  <tv_sat@maciej-orzech.pl>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+msgid "Save and stop"
+msgstr "Zapisz i zatrzymaj"
+
+msgid "Save and record"
+msgstr "Zapisz i nagraj"
+
+msgid "Don't save"
+msgstr "Nie zapisuj"
+
+msgid "Timeshift"
+msgstr "Timeshift"
+
+msgid ""
+"OH NO!\n"
+"The timeshift that was marked to save at end of event, was lost because you zapped away!"
+msgstr ""
+"O NIE!\n"
+"Timeshift oznaczony jako do zapisu po wydarzeniu został utracony gdyż przełączono kanał!!"
+
+msgid "Timeshift saved to your harddisk!"
+msgstr "Timeshift zapisany  na Twój dysk twardy!"
+
+msgid "Timeshift copied to your harddisk!"
+msgstr "Timeshift skopiowany na Twój dysk twardy!"
+
+msgid "Timeshift save failed!"
+msgstr "Zapis timeshift-u nie powiódł się!"
+
+msgid "No Timeshift found to save as recording!"
+msgstr "Nie znaleziono timeshift-u do zapisu jako nagranie!"
+
+msgid "Permanent Timeshift Settings"
+msgstr "Ustawienia automatycznego timeshift-u"
+
+msgid ""
+"The Timeshift record was not saved yet!\n"
+"What do you want to do now with the timeshift file?"
+msgstr ""
+"Timeshift nie został jeszcze zapisany!\n"
+"Co zrobić z plikiem timeshift-u?"
+
+msgid "Which event do you want to save permanently?"
+msgstr "Które z wydarzeń zapisań na stałe?"
+
+msgid "Save Timeshift as Movie and stop recording"
+msgstr "Zapisz timeshift jako film i zakończ nagrywanie"
+
+msgid "Save Timeshift as Movie and continue recording"
+msgstr "Zapisz timeshift jako film i kontynuuj nagrywanie"
+
+msgid "Don't save Timeshift as Movie"
+msgstr "Nie zapisuj timeshift-u jako film"
+
+msgid "Current Event:"
+msgstr "Bieżące wydarzenie:"
+
+msgid "Getting Event Info failed!"
+msgstr "Pobieranie informacji o wydarzeniu nie powiodło się!"
+
+msgid ""
+"Maximum Timeshift length per Event reached!\n"
+"Restarting Timeshift now ..."
+msgstr ""
+"Osiągnięto maksymalną długość timeshift-u dla wydarzenia!\n"
+"Trwa ponowne uruchomienie timeshift-u ..."
+
+msgid "Timeshift will get saved at end of event!"
+msgstr "Timeshift zostanie nagrany po zakończeniu wydarzenia!"
+
+msgid "save recording (stop after current event)"
+msgstr "zapisz nagranie (zatrzymaj po bieżącym wydarzeniu)"
+
+msgid "save recording (Select event)"
+msgstr "zapisz nagranie (wybierz wydarzenie)"
+
+msgid "Permanent Timeshift Enable"
+msgstr "Automatyczny timeshift aktywny"
+
+msgid "Permanent Timeshift Max Events"
+msgstr "Maksymalna liczba wydarzeń"
+
+msgid "Permanent Timeshift Max Length"
+msgstr "Maksymalna długość"
+
+msgid "Permanent Timeshift Start Delay"
+msgstr "Początkowe opóźnienie"
+
+msgid "Timeshift-Save Action on zap"
+msgstr "Zachowanie dot. zapisywania przy przełączaniu"
+
+msgid "Clean Timeshift Buffer on zap?"
+msgstr "Czyścić bufor timeshift przy przełączaniu?"
+
+msgid "Creating Hardlink to Timeshift file failed!"
+msgstr "Utworzenie twardego dowiązania do pliku timeshift-u nie powiodło się!"
+
+msgid "Timeshift Buffer Full!\n Cleaning Buffer and restarting timeshift ..."
+msgstr "Bufor timeshiftu-u zapełniony!\n Trwa czyszczenie bufora i ponowne uruchomianie timeshift-u ..."
+
+msgid "We try to copy the file now. This might take a while!"
+msgstr "Próba kopiowania pliku. To może potrwać!"
+
+msgid "Filesystems like FAT32 do not support hardlinks!"
+msgstr "Niektóre systemy plików (np. FAT32) nie pozwalają na twarde dowiązania!"
+
+msgid "\nFilesystems like FAT32 do not support hardlinks!"
+msgstr "\nNiektóre systemy plików (np. FAT32) nie pozwalają na twarde dowiązania!"
+
+msgid "Merging Timeshift records now!\nThis might take a while ..."
+msgstr "Trwa łączenie nagrań timeshift-u!\nProszę czekać ..."
+
+msgid "Could not activate Permanent-Timeshift!\n\nTimeshift-Path does not exist"
+msgstr "Nie można aktywować automatycznego timeshift-u!\n\nŚcieżka timeshift-u nie istnieje"
+
+msgid "Timeshift Settings"
+msgstr "Ustawienia timeshift-u"
+
+msgid "Beta: Copy Movie when hardlinking failed?"
+msgstr "TEST: Skopiować film gdy utowrzenie twardego łącza nie uda się?"
+
+msgid "Beta: Show PTS Infobar while timeshifting?"
+msgstr "TEST: Pokazać infobar timeshift-a podczas działania?"
+
+msgid "Beta: Merge PTS and Instant Record later?"
+msgstr "TEST: Łączyć timeshift i szybkie nagranie później?"
+
+msgid "Beta: Margin after recording current event?"
+msgstr "TEST: Margines po nagraniu bieżącego wydarzenia?"
+
+msgid "Copy Movie when hardlinking failed?"
+msgstr "Skopiować film gdy utowrzenie twardego łącza nie uda się?"
+
+msgid "Show PTS Infobar while timeshifting?"
+msgstr "Pokazać infobar timeshift-a podczas działania?"
+
+msgid "Stop timeshift while recording?"
+msgstr "Zatrzymać timeshift podczas nagrywania?"

@@ -1,0 +1,318 @@
+# English translations for fancontrol package.
+# Copyright (C) 2012 THE fancontrol'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the fancontrol package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fancontrol 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"PO-Revision-Date: 2012-03-16 14:19+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: none\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%s   %02d C"
+msgstr "%s   %02d C"
+
+msgid "."
+msgstr "."
+
+msgid "3Pin"
+msgstr "3Pin"
+
+msgid "4Pin"
+msgstr "4Pin"
+
+msgid "Action in case of Fan failure"
+msgstr "Action in case of Fan failure"
+
+msgid "Auto-Delete Data older than (Days)"
+msgstr "Auto-Delete Data older than (Days)"
+
+#, python-format
+msgid "Auto-Delete older %s Days"
+msgstr "Auto-Delete older %s Days"
+
+msgid "Box Shutdown"
+msgstr "Box Shutdown"
+
+msgid "Box has no fancontrol hardware -> FC2 deactivated"
+msgstr "Box has no fan control hardware -> FC2 deactivated"
+
+msgid "Box shutdown at Temperature (C)"
+msgstr "Box shutdown at Temperature (C)"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Check"
+msgstr "Check"
+
+msgid "Choose path"
+msgstr "Choose path"
+
+msgid "Control disabled"
+msgstr "Control disabled"
+
+#, python-format
+msgid "Current rpm  %4d"
+msgstr "Current rpm  %4d"
+
+#, python-format
+msgid "Current value: %s"
+msgstr "Current value: %s"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Delete older 48h"
+msgstr "Delete older 48h"
+
+#, python-format
+msgid "Disk free : %d MByte"
+msgstr "Disk free : %d MByte"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Enable Data Logging"
+msgstr "Enable Data Logging"
+
+msgid "Enable Event Logging"
+msgstr "Enable Event Logging"
+
+msgid "End temperature C"
+msgstr "End temperature C"
+
+msgid "Extended Control Range"
+msgstr "Extended Control Range"
+
+msgid "Fan is not working!"
+msgstr "Fan is not working!"
+
+msgid "Fan off in Standby"
+msgstr "Fan off in Standby"
+
+msgid "Fan type"
+msgstr "Fan type"
+
+msgid "FanControl2 emergency, Box Shutdown now?"
+msgstr "FanControl2 emergency, Box Shutdown now?"
+
+#, python-format
+msgid "File %s does not exists"
+msgstr "File %s does not exists"
+
+#, python-format
+msgid "Filesize : %d %sByte"
+msgstr "File size : %d %sByte"
+
+msgid ""
+"GUI needs a restart to apply the changes.\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+"GUI needs a restart to apply the changes.\n"
+"Do you want to Restart the GUI now?"
+
+msgid "Help"
+msgstr "Help"
+
+msgid "Information"
+msgstr "Information"
+
+msgid "Initial PWM"
+msgstr "Initial PWM"
+
+msgid "Initial Voltage"
+msgstr "Initial Voltage"
+
+msgid "Logging path"
+msgstr "Logging path"
+
+#, python-format
+msgid "Logging-Path: %s"
+msgstr "Logging-Path: %s"
+
+#, python-format
+msgid "Max Fan %d rpm at PWM=255 (%s)"
+msgstr "Max Fan %d rpm at PWM=255 (%s)"
+
+#, python-format
+msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
+msgstr "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
+
+#, python-format
+msgid "Max Fan %d rpm at VLT=255 (%s)"
+msgstr "Max Fan %d rpm at VLT=255 (%s)"
+
+#, python-format
+msgid "Min Fan Start %d rpm at PWM=%d"
+msgstr "Min Fan Start %d rpm at PWM=%d"
+
+#, python-format
+msgid "Min Fan Start %d rpm at VLT=%d"
+msgstr "Min Fan Start %d rpm at VLT=%d"
+
+#, python-format
+msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
+msgstr "Min Fan Start %d rpm at VLT=%d and PWM=0"
+
+#, python-format
+msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
+msgstr "Min Fan Stop %d rpm at PWM=%d (%s)"
+
+#, python-format
+msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
+msgstr "Min Fan Stop %d rpm at VLT=%d (%s)"
+
+#, python-format
+msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
+msgstr "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
+
+msgid "Number of WebIF-Log-Entries"
+msgstr "Number of WebIF-Log-Entries"
+
+#, python-format
+msgid "PWM  %03d"
+msgstr "PWM  %03d"
+
+msgid "Restart GUI now?"
+msgstr "Restart GUI now?"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Sensors"
+msgstr "Sensors"
+
+msgid "Show Fan Speed as"
+msgstr "Show Fan Speed as"
+
+msgid "Show Monitor in Extension-Menu"
+msgstr "Show Monitor in Extension-Menu"
+
+msgid "Show Plugin in Extension-Menu"
+msgstr "Show Plugin in Extension-Menu"
+
+msgid "Speed"
+msgstr "Speed"
+
+msgid "Static temp C"
+msgstr "Static temp C"
+
+#, python-format
+msgid "Target rpm  %4d"
+msgstr "Target rpm  %4d"
+
+msgid "Temperature"
+msgstr "Temperature"
+
+#, python-format
+msgid "Temperature C  %4.1f"
+msgstr "Temperature C  %4.1f"
+
+msgid "Voltage"
+msgstr "Voltage"
+
+#, python-format
+msgid "Voltage  %03d"
+msgstr "Voltage  %03d"
+
+msgid "active"
+msgstr "active"
+
+msgid "auto"
+msgstr "auto"
+
+msgid "below Tunerslot 4"
+msgstr "below Tuner slot 4"
+
+#, python-format
+msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
+msgstr "currentRPM:%d targetRPM:%d Temp:%4.1f"
+
+msgid "disable System FanControl"
+msgstr "disable System FanControl"
+
+msgid "disabled"
+msgstr "disabled"
+
+msgid "display Info"
+msgstr "display Info"
+
+msgid "do nothing"
+msgstr "do nothing"
+
+msgid "increases overheating protection to (C)"
+msgstr "increases overheating protection to (C)"
+
+msgid "left near Card-Slot"
+msgstr "left near Card-Slot"
+
+msgid "left near Front-CI"
+msgstr "left near Front-CI"
+
+msgid "left of the Battery"
+msgstr "left of the Battery"
+
+msgid "max Speed rpm"
+msgstr "max Speed rpm"
+
+msgid "min Speed rpm"
+msgstr "min Speed rpm"
+
+msgid "near XILINX Spartan"
+msgstr "near XILINX Spartan"
+
+msgid "never"
+msgstr "never"
+
+msgid "no"
+msgstr "no"
+
+msgid "not active"
+msgstr "not active"
+
+msgid "over Security Card"
+msgstr "over Security Card"
+
+msgid "please set fan type (3Pin or 4Pin)"
+msgstr "please set fan type (3Pin or 4Pin)"
+
+msgid "please wait (until 3min)..."
+msgstr "please wait (until 3min)..."
+
+msgid "press Info for HDD-Temp"
+msgstr "press Info for HDD-Temp"
+
+msgid "read HDD-Temperature in HDD-Standby-Mode"
+msgstr "read HDD-Temperature in HDD-Standby-Mode"
+
+msgid "readme.txt"
+msgstr "readme.txt"
+
+msgid "turn off"
+msgstr "turn off"
+
+msgid "turn on"
+msgstr "turn on"
+
+msgid "under the Fan"
+msgstr "under the Fan"
+
+msgid "under the WLAN"
+msgstr "under the WLAN"
+
+msgid "yes"
+msgstr "yes"
+
+msgid "yes, Except for Recording or HDD"
+msgstr "yes, Except for Recording or HDD"
+

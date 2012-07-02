@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Network" />
+	  </prerequisites>
+          <info>
+                    <author>Reichi</author>
+                    <name>Bonjour</name>
+                    <packagename>enigma2-plugin-extensions-bonjour</packagename>
+                    <shortdescription>Bonjour/Avahi control plugin</shortdescription>
+                    <description>Bonjour/Avahi control plugin.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_bonjour.jpg" />		    
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-bonjour" />
+	  </files>
+</default>

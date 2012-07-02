@@ -1,0 +1,14 @@
+
+<!-- tplServiceList -->
+<select class="services" id="services" width="100px">
+	<option id="vlcemptyservice"></option>
+	{for s in items}
+	<option id="${s.now.servicereference}" >
+	${s.now.servicename}	
+	{if s.now.duration != 0  && !isNaN(s.now.duration)} 
+		(${s.now.shorttitle}) +${s.now.remaining} of ${s.now.duration} min.
+	{/if}
+	</option>
+	{/for}
+</select>
+<!-- /tplServiceList -->

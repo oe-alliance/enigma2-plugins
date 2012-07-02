@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - werbezapper\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-11 13:30+0000\n"
+"PO-Revision-Date: 2012-03-14 12:16+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Andy Blackburn, Rob van der Does\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid "Automatically zaps back to current service after given Time"
+msgstr "Zapt automatisch terug naar de huidige zender na bepaalde tijd"
+
+msgid "Custom"
+msgstr "Aangepast"
+
+msgid "How many minutes to wait until zapping back?"
+msgstr "Hoeveel minuten wachten om terug te zappen?"
+
+#, python-format
+msgid "Monitoring: %s (%d:%02d Min)"
+msgstr "Controleer: %s (%d:%02d Min)"
+
+msgid "Rezap"
+msgstr "Zap opnieuw"
+
+msgid "Start / Stop monitoring instantly"
+msgstr "Start/Stop controleren onmiddellijk"
+
+msgid "Start monitoring"
+msgstr "Start controleren"
+
+msgid "Stop monitoring"
+msgstr "Stop controleren"
+
+msgid "Stop timer"
+msgstr "Stop timer"
+
+#, python-format
+msgid ""
+"WerbeZapper\n"
+"Monitoring ends\n"
+"%s"
+msgstr ""
+"WerbeZapper\n"
+"Controleren eindigt\n"
+"%s"
+
+#, python-format
+msgid ""
+"WerbeZapper\n"
+"Monitoring started\n"
+"%s"
+msgstr ""
+"WerbeZapper\n"
+"Controleren gestart\n"
+"%s"
+
+msgid ""
+"WerbeZapper\n"
+"Monitoring started unlimited\n"
+"Has to be deactivated manually"
+msgstr ""
+"WerbeZapper\n"
+"Ongelimiteerd controleren gestart\n"
+"Moet handmatig geactiveerd worden"
+
+msgid "When to Zap back?"
+msgstr "Wanneer terug zappen?"
+
+msgid "Zapping back"
+msgstr "Terug zappen"
+
+#, python-format
+msgid "Zapping back in %d Minute(s)"
+msgstr "Zapt terug in %d Minuut(en)"
+
+#, python-format
+msgid "Zapping back in %d:%02d Min"
+msgstr "Zapt terug in %d:%02d Min"
+
+msgid "minute"
+msgstr "minuut"
+
+msgid "minutes"
+msgstr "minuten"
+
+#~ msgid ""
+#~ "Timer already running.\n"
+#~ "Stop it?"
+#~ msgstr ""
+#~ "Timer reeds gestart.\n"
+#~ "Deze stoppen?"
+
+#~ msgid "Zapping back in %d Minutes"
+#~ msgstr "Terug zappen in %d minuten"

@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - mediadownloader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-05-31 02:26+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/mediadownloader\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/mediadownloader\n"
+
+#, python-format
+msgid "%d kb/s"
+msgstr "%d kb/s"
+
+msgid "?? kb/s"
+msgstr "?? kb/s"
+
+msgid "Do you want to try to open the downloaded file?"
+msgstr "Tentare di aprire il file scaricato?"
+
+msgid "Download..."
+msgstr "Download..."
+
+msgid "Downloading..."
+msgstr "Download in corso..."
+
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr "Stimato %d:%02d min"
+
+msgid "ETA ??:?? h"
+msgstr "Stimato ??:?? h"
+
+#, python-format
+msgid "Error while downloading file %s"
+msgstr "Errore durante il download di %s!"
+
+msgid "No suitable Viewer found!"
+msgstr "Nessun visualizzatore trovato!"
+
+msgid "Where to save?"
+msgstr "Dove salvare?"
+
+msgid "Which file do you want to download?"
+msgstr "Quale file scaricare?"

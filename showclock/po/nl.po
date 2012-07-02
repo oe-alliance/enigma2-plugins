@@ -1,0 +1,97 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2011 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-10-12 10:55+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Rob van der DOes\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Clock show timeout"
+msgstr "Toon klok timeout"
+
+msgid "Description"
+msgstr "Beschrijving"
+
+msgid "Extensions menu"
+msgstr "Extensie menu"
+
+msgid "Help"
+msgstr "Help"
+
+msgid ""
+"Modify the settings to match your preferences. To change the clock position, select \"Move clock\" and relocate using the direction keys. Press OK to store current position and return to the setup menu or EXIT to cancel the moving.\n"
+"\n"
+"Push key \"Exit long\" to show the clock while watching TV. Clock will disappear after the specified timeout or by pushing key \"Exit long\" again.\n"
+"\n"
+"If GP3 is installed, weekday shows up in selected language, otherwise always in english."
+msgstr ""
+"Modify the settings to match your preferences. To change the clock position, select \"Move clock\" and relocate using the direction keys. Press OK to store current position and return to the setup menu or EXIT to cancel the moving.\n"
+"\n"
+"Push key \"Exit long\" to show the clock while watching TV. Clock will disappear after the specified timeout or by pushing key \"Exit long\" again.\n"
+"\n"
+"If GP3 is installed, weekday shows up in selected language, otherwise always in english."
+
+msgid "Move clock"
+msgstr "Verplaats klok"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "OK"
+msgstr "OK"
+
+msgid ""
+"Please use direction keys to move the clock.\n"
+"\n"
+"Press OK to store current position and return to the setup menu or EXIT to cancel the moving."
+msgstr ""
+"Gebruik navigatietoetsen om de klok te verplaatsen.\n"
+"\n"
+"Druk op OK om de huidige positie te behouden en terug te keren naar het vorige menu, of exit om de verplaatsing te annuleren."
+
+msgid "Plugin menu"
+msgstr "Plugin menu"
+
+msgid "Push \"Exit\" long to show/hide clock"
+msgstr "Druk op \"Exit\" lang om de klok te tonen/verbergen."
+
+msgid "Show Clock Setup"
+msgstr "Show Clock instellingen"
+
+msgid "Show Clock setup"
+msgstr "Show Clock instellingen"
+
+msgid "Show in"
+msgstr "Toon over"
+
+msgid "Specify how long (seconds) the clock shall be shown before it disappears. Set to \"0\" to show clock until hidden manually."
+msgstr "Geef aan hoe lang (secondes) de klok vertoond zal worden alvorens die verborgen wordt. Gebruik \"0\" om de klok continu te laten zien, tot deze handmatig verborgen wordt."
+
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr "Geef de pluigin beschrijving die in het menu gebruikt moet worden (GUI herstart noodzakelijk)."
+
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr "Geef de pluigin naam die in het menu gebruikt moet worden (GUI herstart noodzakelijk)."
+
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr "Geef aan of de plugin in het plugin menu of in het extensie menu getoond moet worden (GUI herstart noodzakelijk)"
+
+msgid "Ver."
+msgstr "Ver."
+

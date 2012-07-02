@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - epgsearch\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-19 11:38+0100\n"
+"PO-Revision-Date: 2012-02-21 19:19+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: .../enigma2-plugins/epgsearch\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/epgsearch\n"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:72
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:451
+msgid "Search"
+msgstr "Cercare"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:137
+msgid "New Search"
+msgstr "Nuova ricerca"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:138
+msgid "History"
+msgstr "History"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:153
+msgid "Add timer"
+msgstr "Agg. timer"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:196
+msgid "EPG Search"
+msgstr "Ricerca EPG"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:220
+msgid "Enter text to search for"
+msgstr "Inserire il testo da cercare"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:225
+msgid "Import from Timer"
+msgstr "Importare da timer"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:226
+msgid "Import from EPG"
+msgstr "Importare da EPG"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:231
+msgid "Import from AutoTimer"
+msgstr "Importare da AutoTimer"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:232
+msgid "Save search as AutoTimer"
+msgstr "Salvare la ricerca come AutoTimer"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:233
+msgid "Export selected as AutoTimer"
+msgstr "Esportare la selezione come AutoTimer"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:236
+msgid "Open selected in IMDb"
+msgstr "Aprire scheda in IMDb"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:238
+msgid "Setup"
+msgstr "Configurazione"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:279
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Impossibile leggere la lista timer AutoTimer: %s"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:290
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:327
+msgid "Select text to search for"
+msgstr "Selezionare il testo da cercare"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:333
+msgid "No history"
+msgstr "Nessuna history"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:385
+#: .../enigma2-plugins/epgsearch/src/EPGSearchSetup.py:58
+msgid "Cancel"
+msgstr "Annull."
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:386
+#: .../enigma2-plugins/epgsearch/src/EPGSearchSetup.py:57
+msgid "OK"
+msgstr "Ok"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:400
+msgid "Select a timer to search"
+msgstr "Selezionare un timer da cercare"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearch.py:423
+msgid "Channel Selection"
+msgstr "Selezione canale"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearchSetup.py:33
+#: .../enigma2-plugins/epgsearch/src/EPGSearchSetup.py:75
+msgid "EPGSearch Setup"
+msgstr "Configurazione EPGSearch"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearchSetup.py:39
+msgid "Length of History"
+msgstr "Dimensione History"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearchSetup.py:39
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr "Numero massimo di voci da conservare nella history. 0 >> disabilitare l'opzione history."
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearchSetup.py:40
+msgid "Add \"Search\" Button to EPG"
+msgstr "Aggiungere il pulsante \"Ricerca\" all'EPG"
+
+#: .../enigma2-plugins/epgsearch/src/EPGSearchSetup.py:40
+msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
+msgstr "Abilitando l'opzione, verrà aggiunto un pulsante di ricerca all'EPG standard."
+
+#: .../enigma2-plugins/epgsearch/src/plugin.py:55
+msgid "Search EPG"
+msgstr "Cercare EPG"
+
+#: .../enigma2-plugins/epgsearch/src/plugin.py:62
+msgid "search EPG..."
+msgstr "ricerca EPG..."
+
+#: .../enigma2-plugins/epgsearch/src/plugin.py:69
+msgid "search EPG"
+msgstr "Ricercare EPG"
+

@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 - Quickbutton\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-10-12 10:51+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Rob van der Does\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid "Assign plugin to long blue key pressed"
+msgstr "Wijs plugin toe aan lang ingedrukte blauwe toets"
+
+msgid "Assign plugin to long green key pressed"
+msgstr "Wijs plugin toe aan lang ingedrukte groene toets"
+
+msgid "Assign plugin to long red key pressed"
+msgstr "Wijs plugin toe aan lang ingedrukte rode toets"
+
+msgid "Assign plugin to long yellow key pressed"
+msgstr "Wijs plugin toe aan lang ingedrukte gele toets"
+
+msgid "Assign plugin to red key pressed"
+msgstr "Wijs plugin toe aan rode toets"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Display 4:3 content as"
+msgstr "Toon 4:3 materiaal als"
+
+#, python-format
+msgid ""
+"Error!\n"
+"Error Text: %s"
+msgstr ""
+"Fout!\n"
+"Fout boodschap: %s"
+
+msgid "Just Scale"
+msgstr "Alleen schalen"
+
+msgid "MediaPlayer"
+msgstr "Mediaspeler"
+
+msgid "Multi EPG"
+msgstr "Multi EPG"
+
+msgid "No plugin assigned!"
+msgstr "Geen toegewezen plugin!"
+
+msgid "Nothing"
+msgstr "Niets"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Pan&Scan"
+msgstr "Pan&Scan"
+
+msgid "Pillarbox"
+msgstr "Pillarbox"
+
+msgid "Plugin browser"
+msgstr "Plugin browser"
+
+msgid "Plugin not found!"
+msgstr "Plugin niet gevonden!"
+
+msgid "Single EPG"
+msgstr "Single EPG"
+
+msgid "Timer"
+msgstr "Timer"
+
+msgid "Unknown Error"
+msgstr "Onbekende fout"
+
+msgid "assigned to long blue"
+msgstr "Toegewezen aan lange blauwe toetsdruk"
+
+msgid "assigned to long green"
+msgstr "Toegewezen aan lange groene toetsdruk"
+
+msgid "assigned to long red"
+msgstr "Toegewezen aan lange rode toetsdruk"
+
+msgid "assigned to long yellow"
+msgstr "Toegewezen aan lange gele toetsdruk"
+
+msgid "assigned to red"
+msgstr "Toegewezen aan rode toets"
+
+msgid "setup for Quickbutton"
+msgstr "Sneltoets instellingen"
+
+msgid "switch 4:3 content display"
+msgstr "Ga naar 4:3 layout"
+
+#~ msgid "EPG List"
+#~ msgstr "EPG Lijst"

@@ -1,0 +1,243 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shoutcast\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Andy Blackburn/Rob van der Does\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+#, python-format
+msgid ""
+"%s\n"
+"Press OK to try again..."
+msgstr ""
+"%s\n"
+"Druk op OK om te herhalen..."
+
+#, python-format
+msgid ""
+"%s\n"
+"Press green-button to try again..."
+msgstr ""
+"%s\n"
+"Druk op de groene toets om te herhalen...."
+
+msgid ">= 128 kbps"
+msgstr ">= 128 kbps"
+
+msgid ">= 192 kbps"
+msgstr ">= 192 kbps"
+
+msgid ">= 256 kbps"
+msgstr ">= 256 kbps"
+
+msgid ">= 64 kbps"
+msgstr ">= 64 kbps"
+
+msgid "Add current playing stream to favorite"
+msgstr "Lopende zender aan favorietenlijst toevoegen"
+
+msgid "Add current selected genre to favorite"
+msgstr "Geselekteerd genre aan favorietenlijst toevoegen"
+
+msgid "Add current selected station to favorite"
+msgstr "Geselekteerd station aan favorietenlijst toevoegen"
+
+msgid "Add sequence number to output file"
+msgstr "Voeg volgordenummer toe aan outputbestand"
+
+msgid "All"
+msgstr "Alle"
+
+#, python-format
+msgid "Audio: %s"
+msgstr "Audio: %s"
+
+#, python-format
+msgid "Bit rate: %s kbps"
+msgstr "Bitrate: %s kbps"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Config"
+msgstr "Configuratie"
+
+msgid "Coverheight:"
+msgstr "Coverhoogte:"
+
+msgid "Coverwidth:"
+msgstr "Coverbreedte:"
+
+msgid "Create a directory for each stream"
+msgstr "Voor elke opname een eigen map maken"
+
+msgid "Do you really want to stop the recording?"
+msgstr "Wilt u d eopname echt stoppen?"
+
+msgid "Enter in minutes (0 means unlimited)"
+msgstr "Geef Minuten aan (0 = onbeperkt)"
+
+msgid "Enter new name for favorite item"
+msgstr "Geef een nieuwe naam op voor de favoriet"
+
+msgid "Enter text to search for"
+msgstr "Geef zoekargument op"
+
+msgid "Error downloading cover..."
+msgstr "Fout met het downloaden van cover..."
+
+msgid "Favorite list"
+msgstr "Favorietenlijst"
+
+msgid "Favorites"
+msgstr "Favorieten"
+
+msgid "Genres"
+msgstr "Genres"
+
+#, python-format
+msgid "Getting %s"
+msgstr "Verkrijg %s"
+
+#, python-format
+msgid "Getting SHOUTcast genre list for %s..."
+msgstr "Verkrijgt SHOUTcast genre lijst voor %s..."
+
+msgid "Getting SHOUTcast genre list..."
+msgstr "SHOUTcast genrelijst laden..."
+
+#, python-format
+msgid ""
+"Getting streaming data from\n"
+"%s"
+msgstr ""
+"Verkrijg data van \n"
+"%s"
+
+msgid ""
+"Got 0 genres. Could be a network problem.\n"
+"Please try again..."
+msgstr ""
+"Geen genres geladen. Dit kan een netwerkprobleem zijn.\n"
+"Probeer het nogmaals..."
+
+msgid "Hide"
+msgstr "Verbergen"
+
+msgid "Invalid Location"
+msgstr "Ongeldig opnamepad"
+
+msgid "No streaming data found..."
+msgstr "Geen data gevonden...."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Off"
+msgstr "Uit"
+
+msgid "Only running streamings can be recorded!"
+msgstr ""
+"Alleen aktuele streams kunnen worden opgenomen.\n"
+"Opname wordt niet gestart."
+
+msgid "Record"
+msgstr "Opname"
+
+msgid "Recording length"
+msgstr "Opname duur"
+
+msgid "Recording location:"
+msgstr "Opnamepad:"
+
+msgid "Recording stream station"
+msgstr "Momenteel lopende opname"
+
+msgid "Reload station list:"
+msgstr "Stationslijst opnieuw laden:"
+
+msgid "Rip to single file, name is timestamped"
+msgstr "Opslaan als enkel bestand (datum/tijd wordt daaraan toegevoegd)"
+
+msgid "SHOUTcast genre list"
+msgstr "SHOUTcast genelijst"
+
+#, python-format
+msgid "SHOUTcast station list for %s"
+msgstr "SHOUTcast stationsljist voor %s"
+
+msgid "Search"
+msgstr "Zoek"
+
+#, python-format
+msgid "Searching SHOUTcast for %s..."
+msgstr "Doorzoek SHOUTcast naar %s..."
+
+msgid "Show cover:"
+msgstr "Toon cover:"
+
+msgid "Show in extension menu:"
+msgstr "Toon in extensie menu:"
+
+#, python-format
+msgid "Station: %s"
+msgstr "Station: %s"
+
+msgid "Stations"
+msgstr "Stations"
+
+msgid "Stop record"
+msgstr "Stop opname"
+
+msgid "Stream stopped playing, playback of stream stopped!"
+msgstr "Stream gestopt met afspelen, afspelen van stream gestopt!"
+
+msgid "Streaming rate:"
+msgstr "Bitrate:"
+
+#, python-format
+msgid "Title: %s"
+msgstr "Titel: %s"
+
+msgid "Title: n/a"
+msgstr "Titel: n/a"
+
+msgid "every five minutes"
+msgstr "elke 5 minuten"
+
+msgid "every minute"
+msgstr "elke minuut"
+
+msgid "every three minutes"
+msgstr "elke 3 minuten"
+
+#, python-format
+msgid "genre %s"
+msgstr "genre %s"
+
+msgid "listen to shoutcast internet-radio"
+msgstr "luister naar Shoutcast internet-radio"
+
+msgid "remove current selected favorite"
+msgstr "Verwijderen"
+
+msgid "rename current selected favorite"
+msgstr "hernoemen"
+
+#, python-format
+msgid "search-criteria %s"
+msgstr "Zoekcriterium %s"
+
+#~ msgid "This Dreambox can't decode %s streams!"
+#~ msgstr "Deze Dreambox kan %s stream niet decoderen!"

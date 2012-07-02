@@ -1,0 +1,117 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"PO-Revision-Date: 2012-03-16 13:20+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: none\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:141
+msgid "Add"
+msgstr "Add"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:140
+#: ../src/AutomaticVolumeAdjustmentSetup.py:266
+msgid "Adjustment value"
+msgstr "Adjustment value"
+
+#: ../src/plugin.py:49
+#: ../src/plugin.py:52
+msgid "Automatic Volume Adjustment"
+msgstr "Automatic Volume Adjustment"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:56
+msgid "Automatic Volume Adjustment - Config"
+msgstr "Automatic Volume Adjustment - Config"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:243
+msgid "Automatic Volume Adjustment - Entry Config"
+msgstr "Automatic Volume Adjustment - Entry Config"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:138
+msgid "Automatic Volume Adjustment - Service Config"
+msgstr "Automatic Volume Adjustment - Service Config"
+
+#: ../src/AutomaticVolumeAdjustmentConfig.py:72
+msgid "Automatic volume adjust"
+msgstr "Automatic volume adjust"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:64
+#: ../src/AutomaticVolumeAdjustmentSetup.py:251
+msgid "Cancel"
+msgstr "Cancel"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:274
+msgid "Channel Selection"
+msgstr "Channel Selection"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:81
+msgid "Default volume adjustment value for AC3/DTS"
+msgstr "Default volume adjustment value for AC3/DTS"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:144
+msgid "Delete"
+msgstr "Delete"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:185
+msgid "Do you really want to delete this entry?"
+msgstr "Do you really want to delete this entry?"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:143
+msgid "Edit"
+msgstr "Edit"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:75
+msgid "Enable"
+msgstr "Enable"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:82
+msgid "Max. volume for mpeg audio"
+msgstr "Max. volume for mpeg audio"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:78
+msgid "Modus"
+msgstr "Modus"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:65
+#: ../src/AutomaticVolumeAdjustmentSetup.py:142
+#: ../src/AutomaticVolumeAdjustmentSetup.py:252
+msgid "OK"
+msgstr "OK"
+
+#: ../src/AutomaticVolumeAdjustmentConfig.py:91
+msgid "Press OK to select a service"
+msgstr "Press OK to select a service"
+
+#: ../src/AutomaticVolumeAdjustmentConfig.py:72
+msgid "Remember service volume value"
+msgstr "Remember service volume value"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:139
+#: ../src/AutomaticVolumeAdjustmentSetup.py:264
+msgid "Servicename"
+msgstr "Service name"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:83
+msgid "Services"
+msgstr "Services"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:86
+msgid "Show volumebar when volume-value was changed"
+msgstr "Show volume bar when volume-value was changed"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:294
+msgid "You must select a valid service!"
+msgstr "You must select a valid service!"
+

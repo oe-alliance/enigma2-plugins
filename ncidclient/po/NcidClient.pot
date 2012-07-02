@@ -1,0 +1,212 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. TRANSLATORS: this is a window title.
+msgid "Add entry to phonebook"
+msgstr ""
+
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr ""
+
+msgid "Austria"
+msgstr ""
+
+msgid "Automatically add new Caller to PhoneBook"
+msgstr ""
+
+msgid "Call monitoring"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Cancel"
+msgstr ""
+
+msgid "Compact Flash"
+msgstr ""
+
+msgid "Connected to NCID Server"
+msgstr ""
+
+#, python-format
+msgid ""
+"Connecting to NCID Server failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+
+msgid "Connecting to NCID Server..."
+msgstr ""
+
+#, python-format
+msgid ""
+"Connection to NCID Server lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Delete"
+msgstr ""
+
+msgid "Display Fon calls on screen"
+msgstr ""
+
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Edit"
+msgstr ""
+
+msgid "Enter Search Terms"
+msgstr ""
+
+msgid "Entry incomplete."
+msgstr ""
+
+msgid "Flash"
+msgstr ""
+
+msgid "France"
+msgstr ""
+
+msgid "Germany"
+msgstr ""
+
+#, python-format
+msgid ""
+"Incoming Call on %s from\n"
+"---------------------------------------------\n"
+"%s\n"
+"%s\n"
+"---------------------------------------------"
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "Last 10 calls:\n"
+msgstr ""
+
+msgid "Media directory"
+msgstr ""
+
+#. TRANSLATORS: this is a window title.
+msgid "NCID Client - Setup"
+msgstr ""
+
+msgid "NCID server (Name or IP)"
+msgstr ""
+
+msgid "NCID server listening port (1-65535)"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Network mount"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "New"
+msgstr ""
+
+msgid "No entry selected"
+msgstr ""
+
+msgid "No phonebook"
+msgstr ""
+
+msgid "Number"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "OK"
+msgstr ""
+
+msgid "PhoneBook Location"
+msgstr ""
+
+#. TRANSLATORS: this is a window title.
+msgid "Phonebook"
+msgstr ""
+
+msgid "Plugin not active"
+msgstr ""
+
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Search"
+msgstr ""
+
+msgid "Search phonebook"
+msgstr ""
+
+msgid "Show after Standby"
+msgstr ""
+
+msgid "Show connection information popups"
+msgstr ""
+
+msgid "Strip Leading 0"
+msgstr ""
+
+msgid "Switzerland"
+msgstr ""
+
+msgid "The Netherlands"
+msgstr ""
+
+msgid "Timeout for Call Notifications (seconds)"
+msgstr ""
+
+msgid "UNKNOWN"
+msgstr ""
+
+msgid "USB Device"
+msgstr ""
+
+msgid "Use internal PhoneBook"
+msgstr ""
+
+msgid "no calls"
+msgstr ""
+
+msgid "number suppressed"
+msgstr ""
+
+msgid "show as list"
+msgstr ""
+
+msgid "show each call"
+msgstr ""
+
+msgid "show nothing"
+msgstr ""

@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-zaphistorybrowser
+Version: 0.1-r0
+Description: Shows a list containing the zapping-history and allows user to zap to the entries or to modify them
+Maintainer: Nabil Hanna <nabil1978@web.de>
+Homepage: http://www.lt-forums.org/ali
+Depends: enigma2 (>= 2.6git20090615)

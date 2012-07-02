@@ -1,0 +1,66 @@
+<skin>
+<!--
+		<ePixmap name="red" position="10,10" size="21,21" pixmap="Nemesis.GlassLine_Mod/red.png" alphatest="on" />
+		<ePixmap name="green" position="140,10" size="21,21" pixmap="Nemesis.GlassLine_Mod/green.png" alphatest="on" />
+		<ePixmap name="yellow" position="280,10" size="21,21" pixmap="Nemesis.GlassLine_Mod/yellow.png" alphatest="on" />
+		<ePixmap name="blue" position="420,10" size="21,21" pixmap="Nemesis.GlassLine_Mod/blue.png" alphatest="on" />
+		<widget name="key_red" position="40,10" size="115,21" halign="left" valign="center" font="Regular;20" />
+		<widget name="key_green" position="170,10" size="115,21" halign="left" valign="center" font="Regular;20" />
+		<widget name="key_yellow" position="310,10" size="115,21" halign="left" valign="center" font="Regular;20" />
+		<widget name="key_blue" position="450,10" size="115,21" halign="left" valign="center" font="Regular;20" />
+-->
+	<!-- YouTube-Player -->
+	<screen name = "YouTubeVideoDetailsScreen" position = "80,85" size = "560,410" title = "Video Details" transparent = "0">
+		<widget name = "video_thumbnail_1" position = "10,10" size = "130,97" alphatest = "on" />
+		<widget name = "video_thumbnail_2" position = "10,110" size = "130,97" alphatest = "on" />
+		<widget name = "video_thumbnail_3" position = "10,210" size = "130,97" alphatest = "on" />
+		<widget name = "label_video_duration" position = "150,10" size = "95,20" font = "Regular;20" halign = "right" />
+		<widget name = "video_duration" position = "250,10" size = "90,20" valign = "left" font = "Regular;20"/>
+		<widget name = "label_video_rating_average" position = "345,10" size = "95,20" font = "Regular;20" halign = "right" />
+		<widget name = "starsbg" pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/YouTubePlayer/starsbar_empty.png" position = "445,10" zPosition = "0" size = "100,20" transparent = "1" alphatest = "on" />
+		<widget name = "stars" position = "445,10" size = "100,20" pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/YouTubePlayer/starsbar_filled.png" transparent = "1" />
+		<widget name = "label_video_statistics_view_count" position = "150,30" size = "95,20" font = "Regular;20" halign = "right" />
+		<widget name = "video_statistics_view_count" position = "250,30" size = "90,20" valign = "left" font = "Regular;20"/>
+		<widget name = "label_video_numraters" position = "345,30" size = "95,20" font = "Regular;20" halign = "right" />
+		<widget name = "video_numraters" position = "445,30" size = "105,20" valign = "left" font = "Regular;20"/>
+		<widget name = "label_video_statistics_favorite_count" position = "150,50" size = "95,20" font = "Regular;20" halign = "right" />
+		<widget name = "video_statistics_favorite_count" position = "250,50" size = "90,20" valign = "left" font = "Regular;20"/>
+		<widget name = "label_video_published_on" position = "345,50" size = "95,20" font = "Regular;20" halign = "right" />
+		<widget name = "video_published_on" position = "445,50" size = "105,20" valign = "left" font = "Regular;20"/>
+		<widget name = "label_video_author" position = "150,70" size = "95,20" font = "Regular;20" halign = "right" />
+		<widget name = "video_author" position = "250,70" size = "300,20" valign = "left" font = "Regular;20"/>
+		<widget name = "label_video_category" position = "150,90" size = "95,20" font = "Regular;20" halign = "right" />
+		<widget name = "video_category" position = "250,90" size = "300,20" valign = "left" font = "Regular;20"/>
+		<widget name = "label_video_tags" position = "150,110" size = "95,20" font = "Regular;20" halign = "right" />
+		<widget name = "video_tags" position = "250,110" size = "300,60" valign = "left" font = "Regular;20"/>
+		<ePixmap pixmap="Nemesis.GlassLine_Mod/separator.png" position="150,178" zPosition="1" size="400,4" />
+		<widget name = "video_description" position = "150,190" size = "400,210" font = "Regular;20" />
+	</screen>
+
+	<screen name = "YouTubeListScreen" position = "80,85" size = "560,410" title = "YouTube Videos" transparent = "0">
+		<widget name = "label_total_results" position = "0,13" size = "160,20" font = "Regular;20" halign = "right" />
+		<widget name = "total_results" position = "170,13" size = "110,20" font = "Regular;20" />
+		<widget name = "label_currently_shown" position = "280,13" size = "110,20" font = "Regular;20" halign = "right" />
+		<widget name = "currently_shown" position = "400,13" size = "160,20" font = "Regular;20" />
+		<ePixmap pixmap="Nemesis.GlassLine_Mod/separator.png" position="0,43" zPosition="1" size="560,4" />
+		<widget name = "list" position = "5,55" size = "550,315" scrollbarMode = "showOnDemand" />
+		<ePixmap name = "key_red" position = "40,370" zPosition = "1" size = "200,40" pixmap = "skin_default/buttons/red-big.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "key_green" position = "320,370" zPosition = "1" size = "200,40" pixmap = "skin_default/buttons/green-big.png" transparent = "1" alphatest = "on" />
+		<widget name = "red" position = "40,370" size = "200,40" font = "Regular;19" valign = "center" halign = "center" transparent = "1" zPosition = "2" />
+		<widget name = "green" position = "320,370" size = "200,40" font = "Regular;19" valign = "center" halign = "center" transparent = "1" zPosition = "2" />
+	</screen>
+
+	<screen name = "YouTubeUserListScreen" position = "80,85" size = "560,410" title = "YouTube User-Profiles" >
+		<widget name = "label_info" position = "10,9" size = "540,42" halign = "center" valign = "center" font = "Regular;21" />
+		<ePixmap pixmap="Nemesis.GlassLine_Mod/separator.png" position="0,55" zPosition="1" size="560,4" />
+		<widget name = "userlist" position = "10,62" size = "540,283"  scrollbarMode = "showOnDemand"/>
+		<ePixmap name = "red"    position = "0,370"   zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/red.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "green"  position = "140,370" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/green.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "yellow" position = "280,370" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/yellow.png" transparent = "1" alphatest = "on" />
+		<ePixmap name = "blue"   position = "420,370" zPosition = "4" size = "140,40" pixmap = "skin_default/buttons/blue.png" transparent = "1" alphatest = "on" />
+		<widget name = "key_red" position = "0,370" zPosition = "5" size = "140,40" valign = "center" halign = "center" font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
+		<widget name = "key_green" position = "140,370" zPosition = "5" size = "140,40" valign = "center" halign = "center" font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
+		<widget name = "key_yellow" position = "280,370" zPosition = "5" size = "140,40" valign = "center" halign = "center"  font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
+		<widget name = "key_blue" position = "420,370" zPosition = "5" size = "140,40" valign = "center" halign = "center" font = "Regular;21" transparent = "1" foregroundColor = "white" shadowColor = "black" shadowOffset = "-1,-1" />
+	</screen>
+</skin>

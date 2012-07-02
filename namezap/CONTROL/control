@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-namezap
+Version: 0.0.1-20110613-r0
+Description: displays service name instead of number when zapping via number keys
+Maintainer: Moritz Venn <moritz.venn@freaque.net>
+Homepage: http://www.ritzmo.de
+Depends: enigma2 (>= 2.6git20090120)

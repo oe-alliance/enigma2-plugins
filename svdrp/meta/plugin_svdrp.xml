@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Network" />
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>SVDRP</name>
+                    <packagename>enigma2-plugin-extensions-svdrp</packagename>
+                    <shortdescription>SVDRP server for Enigma2</shortdescription>
+                    <description>SVDRP is a protocol developed for the VDR software to control a set-top box remotely.\n
+This plugin only supports a subset of SVDRP and starts automatically using default settings.\n\n
+You probably don't need this plugin and should use the regular Web Interface for Enigma2 instead.</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-svdrp" />
+	  </files>
+</default>

@@ -1,0 +1,246 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"PO-Revision-Date: 2012-03-16 14:22+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: none\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%d"
+msgstr "%d"
+
+#, python-format
+msgid "%d %%"
+msgstr "%d %%"
+
+#, python-format
+msgid "%d GB"
+msgstr "%d GB"
+
+#, python-format
+msgid "%d MB"
+msgstr "%d MB"
+
+#, python-format
+msgid "%d Min"
+msgstr "%d Min"
+
+msgid "-"
+msgstr "-"
+
+msgid "Add Setup to extension menu"
+msgstr "Add Setup to extension menu"
+
+msgid "Add Show to extension menu"
+msgstr "Add Show to extension menu"
+
+msgid "Background transparency"
+msgstr "Background transparency"
+
+msgid "Begin"
+msgstr "Begin"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Channel Name"
+msgstr "Channel Name"
+
+msgid "Channel Number"
+msgstr "Channel Number"
+
+msgid "Configuration"
+msgstr "Configuration"
+
+msgid "DD.MM HH:MM"
+msgstr "DD.MM HH:MM"
+
+msgid "DD.MM.YYYY HH:MM"
+msgstr "DD.MM.YYYY HH:MM"
+
+msgid "Destination"
+msgstr "Destination"
+
+msgid "Destination / Client"
+msgstr "Destination / Client"
+
+msgid "Duration"
+msgstr "Duration"
+
+msgid "Enable InfoBarTunerState"
+msgstr "Enable InfoBarTunerState"
+
+msgid "End"
+msgstr "End"
+
+#, python-format
+msgid "Field %d content"
+msgstr "Field %d content"
+
+msgid "File Size"
+msgstr "File Size"
+
+msgid "Finished"
+msgstr "Finished"
+
+msgid "Free Space"
+msgstr "Free Space"
+
+msgid "HH:MM"
+msgstr "HH:MM"
+
+msgid "HH:MM DD.MM"
+msgstr "HH:MM DD.MM"
+
+msgid "HH:MM DD.MM.YYYY"
+msgstr "HH:MM DD.MM.YYYY"
+
+msgid "HH:MM MM/DD"
+msgstr "HH:MM MM/DD"
+
+msgid "HH:MM YYYY/MM/DD"
+msgstr "HH:MM YYYY/MM/DD"
+
+msgid "Horizontal offset in pixel"
+msgstr "Horizontal offset in pixel"
+
+msgid "InfoBarTunerState"
+msgstr "InfoBarTunerState"
+
+msgid "InfoBarTunerState Setup"
+msgstr "InfoBarTunerState Setup"
+
+msgid "InfoBarTunerState is disabled"
+msgstr "InfoBarTunerState is disabled"
+
+msgid "Infobar timeout"
+msgstr "Infobar timeout"
+
+msgid "MM/DD HH:MM"
+msgstr "MM/DD HH:MM"
+
+msgid "MoviePlayer integration"
+msgstr "MoviePlayer integration"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "None"
+msgstr "None"
+
+msgid "Nothing running"
+msgstr "Nothing running"
+
+msgid "Number of finished records in list"
+msgstr "Number of finished records in list"
+
+msgid "Number of seconds for displaying finished records"
+msgstr "Number of seconds for displaying finished records"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Only one Graphical Progress field allowed:"
+msgstr "Only one Graphical Progress field allowed:"
+
+msgid "Only one Icon field allowed:"
+msgstr "Only one Icon field allowed:"
+
+msgid "Record"
+msgstr "Record"
+
+msgid "Show InfoBarTunerState"
+msgstr "Show InfoBarTunerState"
+
+msgid "Show Message when Recording starts"
+msgstr "Show Message when Recording starts"
+
+msgid "Show and hide with InfoBar"
+msgstr "Show and hide with InfoBar"
+
+msgid "Show on events"
+msgstr "Show on events"
+
+msgid "Show streams"
+msgstr "Show streams"
+
+msgid "Stream"
+msgstr "Stream"
+
+msgid "Stream Client"
+msgstr "Stream Client"
+
+msgid "Stream Client with Port"
+msgstr "Stream Client with Port"
+
+msgid "Text padding offset in pixel"
+msgstr "Text padding offset in pixel"
+
+msgid "Text spacing offset in pixel"
+msgstr "Text spacing offset in pixel"
+
+msgid "Time Elapsed"
+msgstr "Time Elapsed"
+
+msgid "Time Left"
+msgstr "Time Left"
+
+msgid "Time Left / Duration"
+msgstr "Time Left / Duration"
+
+msgid "Time format"
+msgstr "Time format"
+
+msgid "Timer Progress (Graphical)"
+msgstr "Timer Progress (Graphical)"
+
+msgid "Timer Progress (Text)"
+msgstr "Timer Progress (Text)"
+
+msgid "Tuner"
+msgstr "Tuner"
+
+msgid "Tuner State"
+msgstr "Tuner State"
+
+msgid "Tuner Type"
+msgstr "Tuner Type"
+
+msgid "Type (Icon)"
+msgstr "Type (Icon)"
+
+msgid "Type (Text)"
+msgstr "Type (Text)"
+
+msgid "Usage"
+msgstr "Usage"
+
+msgid "Vertical offset in pixel"
+msgstr "Vertical offset in pixel"
+
+msgid "YYYY/MM/DD HH:MM"
+msgstr "YYYY/MM/DD HH:MM"
+
+msgid "configuration"
+msgstr "configuration"
+
+#~ msgid "Add to extension menu"
+#~ msgstr "Add to extension menu"
+
+#~ msgid "InfoBar Tuner State"
+#~ msgstr "InfoBar Tuner State"
+
+#~ msgid "Show InfoBar Tuner State"
+#~ msgstr "Show InfoBar Tuner State"

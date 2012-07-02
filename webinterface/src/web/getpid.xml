@@ -1,0 +1,3 @@
+<e2:screen name="GetPidWebScreen">
+http://<e2:element source="localip" />:31339/0,<e2:element source="pids"><e2:convert type="web:TextToHTML" /></e2:element>
+</e2:screen>

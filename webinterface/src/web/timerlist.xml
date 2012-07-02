@@ -1,0 +1,32 @@
+<e2:screen name="TimerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2timerlist><e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
+	&lt;e2timer>
+		&lt;e2servicereference><e2:item name="ServiceReference" />&lt;/e2servicereference>
+		&lt;e2servicename><e2:item name="ServiceName" filter="xml"/>&lt;/e2servicename>
+		&lt;e2eit><e2:item name="EIT" />&lt;/e2eit>
+		&lt;e2name><e2:item name="Name" filter="xml"/>&lt;/e2name>
+		&lt;e2description><e2:item name="Description" filter="xml"/>&lt;/e2description>
+		&lt;e2descriptionextended><e2:item name="DescriptionExtended" filter="xml"/>&lt;/e2descriptionextended>
+		&lt;e2disabled><e2:item name="Disabled" />&lt;/e2disabled>
+		&lt;e2timebegin><e2:item name="TimeBegin" />&lt;/e2timebegin>
+		&lt;e2timeend><e2:item name="TimeEnd" />&lt;/e2timeend>
+		&lt;e2duration><e2:item name="Duration" />&lt;/e2duration>
+		&lt;e2startprepare><e2:item name="startPrepare" />&lt;/e2startprepare>
+		&lt;e2justplay><e2:item name="justPlay" />&lt;/e2justplay>
+		&lt;e2afterevent><e2:item name="afterEvent" />&lt;/e2afterevent>
+		&lt;e2location><e2:item name="Location" filter="xml"/>&lt;/e2location>
+		&lt;e2tags><e2:item name="Tags" filter="xml"/>&lt;/e2tags>
+		&lt;e2logentries><e2:item name="LogEntries" filter="xml"/>&lt;/e2logentries>
+		&lt;e2filename><e2:item name="Filename" filter="xml"/>&lt;/e2filename>
+		&lt;e2backoff><e2:item name="Backoff" />&lt;/e2backoff>
+		&lt;e2nextactivation><e2:item name="nextActivation" />&lt;/e2nextactivation>
+		&lt;e2firsttryprepare><e2:item name="firstTryPrepare" />&lt;/e2firsttryprepare>
+		&lt;e2state><e2:item name="State" />&lt;/e2state>
+		&lt;e2repeated><e2:item name="Repeated" />&lt;/e2repeated>
+		&lt;e2dontsave><e2:item name="dontSave" />&lt;/e2dontsave>
+		&lt;e2cancled><e2:item name="Cancled" />&lt;/e2cancled>
+		&lt;e2toggledisabled><e2:item name="toggleDisabled" />&lt;/e2toggledisabled>
+		&lt;e2toggledisabledimg><e2:item name="toggleDisabledIMG" />&lt;/e2toggledisabledimg>
+	&lt;/e2timer></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+</e2timerlist>
+</e2:screen>

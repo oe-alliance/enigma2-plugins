@@ -1,0 +1,49 @@
+<e2:screen name="AboutWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2abouts>
+	<e2about>
+		<e2enigmaversion><e2:element source="EnigmaVersion"><e2:convert type="web:TextToHTML" /></e2:element></e2enigmaversion>
+		<e2imageversion><e2:element source="ImageVersion"><e2:convert type="web:TextToHTML" /></e2:element></e2imageversion>
+		<e2webifversion><e2:element source="WebIfVersion"><e2:convert type="web:TextToHTML" /></e2:element></e2webifversion>
+		<e2fpversion><e2:element source="FpVersion"><e2:convert type="web:TextToHTML" /></e2:element></e2fpversion>
+		<e2model><e2:element source="DeviceName"><e2:convert type="web:TextToHTML" /></e2:element></e2model>
+		
+		<e2:element source="About" ><e2:convert type="web:ListFiller" >	
+		&lt;e2lanmac><e2:item name="lanMac" filter="xml"/>&lt;/e2lanmac>
+		&lt;e2landhcp><e2:item name="lanDHCP" filter="xml"/>&lt;/e2landhcp>
+		&lt;e2lanip><e2:item name="lanIP" filter="xml"/>&lt;/e2lanip>
+		&lt;e2lanmask><e2:item name="lanMask" filter="xml"/>&lt;/e2lanmask>
+		&lt;e2langw><e2:item name="lanGW" filter="xml"/>&lt;/e2langw>					
+		</e2:convert><e2:convert type="web:TextToHTML" />
+		</e2:element>
+		
+		<e2:element source="Hdd"><e2:convert type="web:ListFiller">
+		&lt;e2hddinfo>
+			&lt;model><e2:item name="Model" filter="xml"/>&lt;/model>
+			&lt;capacity><e2:item name="Capacity" filter="xml"/>&lt;/capacity>
+			&lt;free><e2:item name="Free" filter="xml"/>&lt;/free>
+		&lt;/e2hddinfo>
+		</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>		
+		<e2tunerinfo><e2:element source="Frontends"><e2:convert type="web:ListFiller" >
+			&lt;e2nim>
+				&lt;name><e2:item name="Name" filter="xml"/>&lt;/name>
+				&lt;type><e2:item name="Type" filter="xml"/>&lt;/type>
+			&lt;/e2nim></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+		</e2tunerinfo>		
+		<e2servicename><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2servicename>
+		<e2servicenamespace />
+		<e2serviceaspect />
+		<e2serviceprovider><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Provider</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2serviceprovider>
+		<e2videowidth><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoWidth</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2videowidth>
+		<e2videoheight><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoHeight</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2videoheight>
+		<e2servicevideosize><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoWidth</e2:convert><e2:convert type="web:TextToXML" /></e2:element>x<e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoHeight</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2servicevideosize>
+		<e2apid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">AudioPid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2apid>
+		<e2vpid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoPid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2vpid>
+		<e2pcrpid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">PcrPid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2pcrpid>
+		<e2pmtpid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">PmtPid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2pmtpid>
+		<e2txtpid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">TxtPid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2txtpid>
+		<e2tsid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">TsId</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2tsid>
+		<e2onid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">OnId</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2onid>
+		<e2sid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">Sid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2sid>
+	</e2about>
+</e2abouts>
+</e2:screen>

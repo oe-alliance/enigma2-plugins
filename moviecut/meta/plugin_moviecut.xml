@@ -1,0 +1,18 @@
+<default>
+	  <prerequisites>
+                    <tag type="Recording" />
+	  </prerequisites>
+          <info>
+                    <author>Anders Holst</author>
+                    <name>MovieCut</name>
+                    <packagename>enigma2-plugin-extensions-moviecut</packagename>
+                    <shortdescription>Cut your movies</shortdescription>
+                    <description>Execute the cuts, as set by the CutlistEditor,
+ by physically removing unwanted parts from the files.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_moviecut.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-moviecut" />
+	  </files>
+</default>

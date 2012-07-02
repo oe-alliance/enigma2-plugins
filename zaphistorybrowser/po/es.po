@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZapHistoryBrowser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-01-09 14:34+0100\n"
+"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
+"Language-Team: none\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/"
+"zaphistorybrowser/src\n"
+
+msgid "Clear"
+msgstr "Limpiar"
+
+msgid "Config"
+msgstr ""
+
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "Enable zap history:"
+msgstr ""
+
+msgid "Enigma1-like history:"
+msgstr ""
+
+msgid "Maximum zap history entries:"
+msgstr ""
+
+msgid "Zap & Close"
+msgstr ""
+
+msgid "Zap-History Browser"
+msgstr "Lista Historia-Zapeo"
+
+msgid "Zap-History Configurator"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+msgid "disabled at parental lock"
+msgstr ""
+
+msgid "enabled"
+msgstr ""

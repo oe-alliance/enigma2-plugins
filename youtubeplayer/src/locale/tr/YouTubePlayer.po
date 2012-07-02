@@ -1,0 +1,297 @@
+# Zulfikar VEYISOGLU <zveyis@gmail.com>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 plugin youtubeplayer Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-10-15 15:54+0100\n"
+"PO-Revision-Date: 2008-11-26 12:46+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
+"Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TUEKEY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer\n"
+"X-Poedit-SearchPath-0: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer\n"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/plugin.py:94
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/plugin.py:114
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:442
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:464
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:486
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:512
+msgid "Login not successful"
+msgstr "Oturum açılamadı"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/plugin.py:138
+msgid "Search and play YouTube movies"
+msgstr "YouTube filmi ara ve oynat"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:79
+msgid "To use the selected feature you have to login to YouTube. Select a user-profile to login!"
+msgstr "Seçtiğiniz özelliği kullanabilmeniz için YouTube'da oturum açmanız gerekiyor. Kullanıcı profilini seçin ve oturum açın!"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:81
+msgid "delete user"
+msgstr "kullanıcı sil"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:82
+msgid "add user"
+msgstr "kullanıcı ekle"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:83
+msgid "edit user"
+msgstr "kullanıcı düzenle"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:84
+msgid "set default"
+msgstr "varsayılan olarak ata"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:122
+#, python-format
+msgid "Really delete %(user)s?"
+msgstr "%(user)s silmek istiyor musunuz?"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:40
+msgid "Most Viewed"
+msgstr "En çok İzlenenler"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:41
+msgid "Top Rated"
+msgstr "Yüksek Oy Alanlar"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:42
+msgid "Recently Featured"
+msgstr "Son Önerilenler"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:43
+msgid "Watch On Mobile"
+msgstr "Mobil aygıtta izle"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:44
+msgid "Most Discussed"
+msgstr "En çok Tartışılan"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:45
+msgid "Top Favorites"
+msgstr "En Favoriler"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:46
+msgid "Most Linked"
+msgstr "En çok Linklenenler"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:47
+msgid "Most Responded"
+msgstr "En çok Yorumlananlar"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:48
+msgid "Most Recent"
+msgstr "En Yeniler"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeSearchDialog.py:67
+msgid "Std.Feeds"
+msgstr "Stand.Beslemeler"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeSearchDialog.py:68
+msgid "Search"
+msgstr "Ara"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeSearchDialog.py:69
+msgid "Playlists"
+msgstr "Oynatma listeleri"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeSearchDialog.py:70
+msgid "Favorites"
+msgstr "Favoriler"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeSearchDialog.py:73
+msgid "Search Term(s)"
+msgstr "Anahtar Kelimeler"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserConfig.py:119
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:53
+msgid "Cancel"
+msgstr "Vazgeç"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserConfig.py:120
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:54
+msgid "Save"
+msgstr "Kaydet"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserConfig.py:125
+msgid "User Profile Name"
+msgstr "Kullanıcı Profil Adı"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserConfig.py:126
+msgid "E-Mail Address"
+msgstr "E-Posta Adresi"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserConfig.py:127
+msgid "Password"
+msgstr "Parola"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubePlayList.py:57
+msgid "Delete Playlist"
+msgstr "Oynatma Listesini Sil"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubePlayList.py:58
+msgid "Add new Playlist"
+msgstr "Yeni Oynatma Listesi"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubePlayList.py:87
+#, python-format
+msgid "Really delete %(playlist)s?"
+msgstr "%(playlist)s silmek istiyor musunuz?"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:83
+msgid "Duration"
+msgstr "Süre"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:86
+msgid "Rate"
+msgstr "Oy"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:90
+msgid "Ratings"
+msgstr "Aldığı Oy"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:93
+msgid "Favorited"
+msgstr "Favorileyen"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:96
+msgid "Views"
+msgstr "İzlenme"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:99
+msgid "Author:"
+msgstr "Gönderen:"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:102
+msgid "Added"
+msgstr "Eklendi"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:105
+msgid "Category"
+msgstr "Kategori"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:107
+msgid "Tags"
+msgstr "Etiketler"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:211
+msgid "Select a VLC-Server"
+msgstr "VLC-Server seçin"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:212
+msgid "New YouTube search"
+msgstr "Yeni YouTube araması"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:217
+msgid "Total results"
+msgstr "Arama sonuçları"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:220
+msgid "Shown"
+msgstr "Gösterilen"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:253
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:264
+msgid "Load further entries of current Feed?"
+msgstr "Geçerli beslemeden başka video da yüklensin mi?"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:312
+msgid "Searching, be patient ..."
+msgstr "Aranıyor, lütfen bekleyin ..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:324
+msgid "Loading playlist, be patient ..."
+msgstr "Oynatma listesi yükleniyor, lütfen bekleyin ..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:335
+msgid "Loading favorits, be patient ..."
+msgstr "Favoriler yükleniyor, lütfen bekleyin ..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:341
+msgid "Loading standard feed, be patient ..."
+msgstr "Standart besleme yükleniyor, lütfen bekleyin ..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:362
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:370
+msgid "Loading additional videos, be patient ..."
+msgstr "Eklenen videolar yükleniyor, lütfen bekleyin ..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:374
+msgid "Loading related videos, be patient ..."
+msgstr "Benzer videolar yükleniyor, lütfen bekleyin ..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:379
+msgid "Loading response videos, be patient ..."
+msgstr "Yorumlanan videolar yükleniyor, lütfen bekleyin ..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:386
+msgid "Back in history, be patient ..."
+msgstr "Geçmişte geri gidiliyor, lütfen bekleyin ..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:392
+msgid "Forward in history, be patient ..."
+msgstr "Geçmişte ileri gidiliyor, lütfen bekleyin ..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:570
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:609
+msgid "Show video detail info"
+msgstr "Video detay bilgisini göster"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:572
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:611
+msgid "Remove from favorites"
+msgstr "Favorilerden kaldır"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:574
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:613
+msgid "Add to favorites"
+msgstr "Favorile"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:577
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:615
+msgid "Remove from playlist"
+msgstr "Oynatma listesinden kaldır"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:579
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:617
+msgid "Add to playlist"
+msgstr "Oynatma listesine ekle"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:580
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:618
+msgid "Get related videos"
+msgstr "Benzer videoları getir"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:581
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:619
+msgid "Get video responses"
+msgstr "Video yorumlarını getir"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:36
+msgid "Name"
+msgstr "Ad"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:37
+msgid "Description"
+msgstr "Açıklama"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:59
+msgid "Playlist Name"
+msgstr "Oynatma Listesi Adı"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:60
+msgid "Playlist Description"
+msgstr "Oynatma Listesi Açıklaması"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:61
+msgid "private"
+msgstr "özel"
+

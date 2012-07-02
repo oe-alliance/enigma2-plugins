@@ -1,0 +1,227 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - ftpbrowser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/ftpbrowser\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/ftpbrowser\n"
+
+#, python-format
+msgid "%d kb/s"
+msgstr "%d kb/s"
+
+msgid "A basic FTP client"
+msgstr "Un semplice client FTP "
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists locally.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Un file con lo stesso nome (%s) è già presente localmente!\n"
+"Sovrascriverlo?"
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists on the remote host.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Un file con lo stesso nome (%s) è già presente sull'host remoto!\n"
+"Sovrascriverlo?"
+
+msgid ""
+"A transfer is currently in progress.\n"
+"What do you want to do?"
+msgstr ""
+"Un trasferimento è in corso!\n"
+"Come si vuole procedere??"
+
+msgid "Abort transfer"
+msgstr "Annullare il trasferimento"
+
+msgid "Add"
+msgstr "Agg."
+
+msgid "Address:"
+msgstr "Indirizzo:"
+
+#, python-format
+msgid "Are you sure you want to delete %s?"
+msgstr "Cancellare %s?"
+
+msgid "Cancel"
+msgstr "Annullare"
+
+msgid "Configuration saved."
+msgstr "Configurazione salvata."
+
+msgid "Connect to FTP..."
+msgstr "Connessione a FTP..."
+
+msgid "Could not connect to ftp server!"
+msgstr "Impossibile connettersi al server ftp!"
+
+#, python-format
+msgid "Could not delete %s."
+msgstr "Impossibile rimuovere %s"
+
+msgid "Could not obtain list of files."
+msgstr "Impossibile ottenere la lista file."
+
+#, python-format
+msgid "Could not rename %s."
+msgstr "Impossibile rinominare %s."
+
+msgid "Delete"
+msgstr "Canc."
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Download finished."
+msgstr "Download terminato."
+
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr "ETA %d:%02d min"
+
+msgid "Edit"
+msgstr "Mod."
+
+msgid "Enter URI"
+msgstr "Inserire URI"
+
+msgid "Enter URI of FTP Server:"
+msgstr "Inserire URI del server FTP:"
+
+msgid "Enter new filename:"
+msgstr "Inserire il nuovo nome file:"
+
+msgid "Error"
+msgstr "Errore"
+
+msgid "Error during download."
+msgstr "Errore nel download."
+
+msgid "Exit"
+msgstr "Uscire"
+
+msgid "FTP Queue Manager"
+msgstr "Gestione code FTP"
+
+msgid "FTP Server Editor"
+msgstr "Editor server FTP"
+
+msgid "FTP Server Manager"
+msgstr "Gestione server FTP"
+
+msgid "Local"
+msgstr "Locale"
+
+msgid "Name:"
+msgstr "Nome:"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Parent Directory"
+msgstr "Cartella padre"
+
+msgid "Passive:"
+msgstr "Passivo:"
+
+msgid "Password:"
+msgstr "Password:"
+
+msgid "Port:"
+msgstr "Porta:"
+
+msgid "Queue Manager"
+msgstr "Gestione code"
+
+msgid "Queue processed."
+msgstr "Coda processata."
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Cancellare questa voce?\n"
+"Non potrà essere recuperata!"
+
+msgid "Remote"
+msgstr "Remoto"
+
+msgid "Remote (not connected)"
+msgstr "Remoto (non connesso)"
+
+#, python-format
+msgid "Removed %s."
+msgstr "%s rimosso."
+
+msgid "Removing directories is not supported."
+msgstr "La rimozione di cartelle non è supportata"
+
+msgid "Rename"
+msgstr "Rinominare"
+
+#, python-format
+msgid "Renamed %s to %s."
+msgstr "Tinominare %s come %s."
+
+msgid "Run in Background"
+msgstr "Eseguire in background"
+
+msgid "Save"
+msgstr "Salvare"
+
+msgid "Select local file list"
+msgstr "Selezionare elenco file locali"
+
+msgid "Select remote file list"
+msgstr "Selezionare elenco file remoti"
+
+msgid "Server Manager"
+msgstr "Gestione server"
+
+msgid ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+msgstr ""
+"Un trasferimento è già attivo.\n"
+"Annullarlo?"
+
+msgid "There already is an active transfer."
+msgstr "Un trasferimento è già attivo."
+
+msgid "Upload"
+msgstr "Upload"
+
+msgid "Upload finished."
+msgstr "Caricamento terminato."
+
+msgid "Username:"
+msgstr "Nome User:"
+
+msgid "Which server do you want to connect to?"
+msgstr "A quale server connettersi?"
+
+msgid "close"
+msgstr "Chiudere"
+
+msgid "enter directory/get file/put file"
+msgstr "Inserire cartella/Origine/Destinazione"
+
+msgid "open menu"
+msgstr "Menu"

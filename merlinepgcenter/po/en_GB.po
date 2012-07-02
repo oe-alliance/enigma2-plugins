@@ -1,0 +1,328 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"PO-Revision-Date: 2012-03-16 14:25+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: none\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "<unknown>"
+msgstr "<unknown>"
+
+msgid ""
+"A finished record timer wants to set your\n"
+"receiver to standby. Do that now?"
+msgstr ""
+"A finished record timer wants to set your\n"
+"receiver to standby. Do that now?"
+
+msgid ""
+"A finished record timer wants to shut down\n"
+"your receiver. Shutdown now?"
+msgstr ""
+"A finished record timer wants to shut down\n"
+"your receiver. Shutdown now?"
+
+msgid ""
+"A timer failed to record!\n"
+"Disable TV and try again?\n"
+msgstr ""
+"A timer failed to record!\n"
+"Disable TV and try again?\n"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Add timer"
+msgstr "Add timer"
+
+msgid "Adjust font size:"
+msgstr "Adjust font size:"
+
+msgid "Amount of recordings left:"
+msgstr "Amount of recordings left:"
+
+msgid "AutoTimer timer"
+msgstr "AutoTimer timer"
+
+msgid "Bouquets:"
+msgstr "Bouquets:"
+
+msgid "Don't stop current event but disable coming events"
+msgstr "Don't stop current event but disable coming events"
+
+msgid "Edit Off"
+msgstr "Edit Off"
+
+msgid "Edit On"
+msgstr "Edit On"
+
+msgid "Embed volume slider:"
+msgstr "Embed volume slider:"
+
+msgid "Event Info"
+msgstr "Event Info"
+
+msgid "Excluded days:"
+msgstr "Excluded days:"
+
+msgid "Exit on TV <-> Radio switch:"
+msgstr "Exit on TV <-> Radio switch:"
+
+msgid "Friday"
+msgstr "Friday"
+
+msgid "General"
+msgstr "General"
+
+msgid "IMDb"
+msgstr "IMDb"
+
+msgid "In order to record a timer, the TV was switched to the recording service!\n"
+msgstr "In order to record a timer, the TV was switched to the recording service!\n"
+
+msgid "Included days:"
+msgstr "Included days:"
+
+msgid "Increase list item height:"
+msgstr "Increase list item height:"
+
+msgid "Keys"
+msgstr "Keys"
+
+msgid "Limit search results to bouquet services:"
+msgstr "Limit search results to bouquet services:"
+
+msgid "List style:"
+msgstr "List style:"
+
+msgid "Lists"
+msgstr "Lists"
+
+msgid "Location:"
+msgstr "Location:"
+
+msgid "Match title:"
+msgstr "Match title:"
+
+msgid "Monday"
+msgstr "Monday"
+
+msgid "More than just an EPG..."
+msgstr "More than just an EPG..."
+
+msgid "New Search"
+msgstr "New Search"
+
+msgid "Now"
+msgstr "Now"
+
+msgid "Number of upcoming events to show:"
+msgstr "Number of upcoming events to show:"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Outdated off"
+msgstr "Outdated off"
+
+msgid "Outdated on"
+msgstr "Outdated on"
+
+msgid "Please select a timer type to add:"
+msgstr "Please select a timer type to add:"
+
+msgid "Prime Time"
+msgstr "Prime Time"
+
+msgid "Prime time:"
+msgstr "Prime time:"
+
+msgid "Progress bar style:"
+msgstr "Progress bar style:"
+
+msgid "Record a maximum of x times:"
+msgstr "Record a maximum of x times:"
+
+msgid "Record or zap timer"
+msgstr "Record or zap timer"
+
+msgid "Remember last tab:"
+msgstr "Remember last tab:"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Remove timer"
+msgstr "Remove timer"
+
+msgid "Repeating event currently recording... What do you want to do?"
+msgstr "Repeating event currently recording... What do you want to do?"
+
+msgid "Replace ChannelSelection key down to start with tab:"
+msgstr "Replace ChannelSelection key down to start with tab:"
+
+msgid "Replace ChannelSelection key up to start with tab:"
+msgstr "Replace ChannelSelection key up to start with tab:"
+
+msgid "Replace EventView key to start with tab:"
+msgstr "Replace EventView key to start with tab:"
+
+msgid "Replace InfoBar single and multi EPG:"
+msgstr "Replace InfoBar single and multi EPG:"
+
+msgid "Return to main tab with exit:"
+msgstr "Return to main tab with exit:"
+
+msgid "Saturday"
+msgstr "Saturday"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Search for:"
+msgstr "Search for:"
+
+msgid "Search type:"
+msgstr "Search type:"
+
+msgid "Select running service on start:"
+msgstr "Select running service on start:"
+
+msgid "Services:"
+msgstr "Services:"
+
+msgid "Set search term"
+msgstr "Set search term"
+
+msgid "Show begin/remain times:"
+msgstr "Show begin/remain times:"
+
+msgid "Show blinking picon for running timers:"
+msgstr "Show blinking picon for running timers:"
+
+msgid "Show duration:"
+msgstr "Show duration:"
+
+msgid "Show event information:"
+msgstr "Show event information:"
+
+msgid "Show list numbers:"
+msgstr "Show list numbers:"
+
+msgid "Show multi colored begin/remain times:"
+msgstr "Show multi coloured begin/remain times:"
+
+msgid "Show picons:"
+msgstr "Show picon's:"
+
+msgid "Show service name:"
+msgstr "Show service name:"
+
+msgid "Show short description:"
+msgstr "Show short description:"
+
+msgid "Show text input help for epg search:"
+msgstr "Show text input help for epg search:"
+
+msgid "Show timer messages:"
+msgstr "Show timer messages:"
+
+msgid "Show video picture:"
+msgstr "Show video picture:"
+
+msgid "Similar"
+msgstr "Similar"
+
+msgid "Single"
+msgstr "Single"
+
+msgid "Space between columns:"
+msgstr "Space between columns:"
+
+msgid "Stop current event and disable coming events"
+msgstr "Stop current event and disable coming events"
+
+msgid "Stop current event but not coming events"
+msgstr "Stop current event but not coming events"
+
+msgid "Sunday"
+msgstr "Sunday"
+
+msgid "Thursday"
+msgstr "Thursday"
+
+msgid "Timer"
+msgstr "Timer"
+
+msgid "Today"
+msgstr "Today"
+
+msgid "Tomorrow"
+msgstr "Tomorrow"
+
+msgid "Tuesday"
+msgstr "Tuesday"
+
+msgid "Upcoming"
+msgstr "Upcoming"
+
+msgid "Use picons (50x30) from:"
+msgstr "Use picon's (50x30) from:"
+
+msgid "Use skin:"
+msgstr "Use skin:"
+
+msgid "Wednesday"
+msgstr "Wednesday"
+
+msgid "about to start"
+msgstr "about to start"
+
+msgid "disabled"
+msgstr "disabled"
+
+msgid "done!"
+msgstr "done!"
+
+msgid "four parts"
+msgstr "four parts"
+
+msgid "gradient"
+msgstr "gradient"
+
+msgid "percent (text)"
+msgstr "percent (text)"
+
+msgid "recording..."
+msgstr "recording..."
+
+msgid "return"
+msgstr "return"
+
+msgid "simple"
+msgstr "simple"
+
+msgid "single line style"
+msgstr "single line style"
+
+msgid "waiting"
+msgstr "waiting"
+
+msgid "with short description"
+msgstr "with short description"
+
+msgid "zapped"
+msgstr "zapped"
+

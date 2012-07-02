@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+		    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>MenuSort</name>
+                    <packagename>enigma2-plugin-extensions-menusort</packagename>
+                    <shortdescription>Allows to change the order of entries in the main menu manually.</shortdescription>
+		    <description>If installed, the plugin allows to modify the order in which entries of the main menu are shown.
+		    It can be changed using the \"MenuSort\" plugin, launchable from the regular plugin overview.</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-menusort" />
+	  </files>
+</default>

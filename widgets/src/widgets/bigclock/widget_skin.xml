@@ -1,0 +1,14 @@
+<skin>
+		<desktopwidget name="bigclock">
+			<widget source="global.CurrentTime" render="Label" position="0,0" size="200,50" font="Regular;40" halign="center" valign="center">
+				<convert type="ClockToText">Format:%H:%M:%S</convert>
+			</widget>
+			<widget source="global.CurrentTime" render="Label" position="0,50" size="200,50" font="Regular;38" halign="center" valign="center">
+				<convert type="ClockToText">Format:%A</convert>
+			</widget>
+			<widget source="global.CurrentTime" render="Label" position="0,100" size="200,50" font="Regular;38" halign="center" valign="center">
+				<convert type="ClockToText">Format:%d.%m.%Y</convert>
+			</widget>
+		
+		</desktopwidget>
+</skin>

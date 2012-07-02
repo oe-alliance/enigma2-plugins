@@ -1,0 +1,94 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2011 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-09-28 13:09+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Andy Blackburn/Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: dutch\n"
+"X-Poedit-Country: netherlands\n"
+
+#. TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+#: ../src/plugin.py:284
+msgid "Download Plugins"
+msgstr "Download Plugins"
+
+#: ../src/plugin.py:276
+#: ../src/plugin.py:290
+#: ../src/plugin.py:414
+msgid "End Sort"
+msgstr "Beëindig sorteren"
+
+#: ../src/plugin.py:370
+msgid "Help"
+msgstr "Help"
+
+#. TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+#: ../src/plugin.py:275
+msgid "Manage extensions"
+msgstr "Behandel extensies"
+
+#. TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+#: ../src/plugin.py:282
+msgid "Remove Plugins"
+msgstr "Verwijder Plugins"
+
+#: ../src/plugin.py:276
+#: ../src/plugin.py:290
+#: ../src/plugin.py:402
+msgid "Sort"
+msgstr "Sorteer"
+
+#: ../src/plugin.py:245
+msgid "Sort EventInfo Extensions"
+msgstr "Sorteer EventInfo extensies"
+
+#: ../src/plugin.py:243
+msgid "Sort Extensions"
+msgstr "Sorteer extensies"
+
+#: ../src/plugin.py:244
+msgid "Sort MovieList Extensions"
+msgstr "Sorteer MovieLijst Extensies"
+
+#: ../src/plugin.py:388
+msgid "Unable to load PluginHider"
+msgstr "Kan PluginHider niet laden"
+
+#. TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
+#: ../src/plugin.py:354
+msgid "disable move mode"
+msgstr "schakel verplaats mode uit"
+
+#. TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
+#: ../src/plugin.py:357
+msgid "enable move mode"
+msgstr "schakel verplaats mode in"
+
+#: ../src/plugin.py:367
+msgid "hide selected plugin"
+msgstr "verberg geselecteerde plugins"
+
+#: ../src/plugin.py:363
+msgid "move event extensions"
+msgstr "verplaats event extensies"
+
+#: ../src/plugin.py:361
+msgid "move extensions"
+msgstr "verplaats extensies"
+
+#: ../src/plugin.py:362
+msgid "move movie extensions"
+msgstr "verplaats movie extensies"
+

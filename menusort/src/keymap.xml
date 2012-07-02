@@ -1,0 +1,18 @@
+<keymap>
+	<map context="MenuSortActions">
+		<!-- ripped from OkCancelActions -->
+		<key id="\x0a" mapto="ignore" flags="m" />
+		<key id="KEY_OK" mapto="ignore" flags="m" />
+		<key id="KEY_ENTER" mapto="ignore" flags="m" />
+
+		<key id="\x0a" mapto="toggleSelection" flags="b" />
+		<key id="KEY_OK" mapto="toggleSelection" flags="b" />
+		<key id="KEY_ENTER" mapto="toggleSelection" flags="b" />
+
+		<key id="\x0a" mapto="selectEntry" flags="l" />
+		<key id="KEY_OK" mapto="selectEntry" flags="l" />
+		<key id="KEY_ENTER" mapto="selectEntry" flags="l" />
+
+		<key id="KEY_BLUE" mapto="hideEntry" flags="m" />
+	</map>
+</keymap>

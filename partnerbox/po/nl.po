@@ -1,0 +1,325 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2011 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-15 13:09+0000\n"
+"PO-Revision-Date: 2012-01-17 11:35+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Andy Blackburn/Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid "%d.%B %Y"
+msgstr "%d.%B %Y"
+
+msgid "(ZAP)"
+msgstr "(ZAP)"
+
+msgid "<unknown>"
+msgstr "<onbekend>"
+
+msgid "Abort"
+msgstr "Breek af"
+
+msgid "Add"
+msgstr "Voeg toe"
+
+msgid "Add timer"
+msgstr "Voeg timer toe"
+
+msgid "After event"
+msgstr "Na event"
+
+msgid "Apply"
+msgstr "Pas toe"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Change pin code"
+msgstr "Verander PIN"
+
+msgid "Channel"
+msgstr "Kanaal"
+
+msgid "Clean up"
+msgstr "Opschonen"
+
+msgid "Cleaning up finished timer entries..."
+msgstr "Bezig met opschonen afgewerkte timers..."
+
+msgid "DVR"
+msgstr "PVR"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Delete"
+msgstr "Verwijder"
+
+msgid "Description"
+msgstr "Beschrijving"
+
+#, python-format
+msgid ""
+"Do you really want to delete the timer \n"
+"%s ?"
+msgstr ""
+"Wilt u echt de timer \n"
+"%s  \n"
+"verwijderen?"
+
+msgid "EPG Selection"
+msgstr "EPG Selectie"
+
+msgid "Edit"
+msgstr "Bewerk:"
+
+msgid "Enable Partnerbox-Function in EPGList"
+msgstr "Schakel Partnerbox-Functie in EPG-Lijst in"
+
+msgid "Enable Partnerbox-Function in TimerEvent"
+msgstr "Schakel Partnerbox-Functie in TimerEvent in"
+
+msgid "EndTime"
+msgstr "Eindtijd"
+
+msgid "Enigma 1"
+msgstr "Enigma 1"
+
+msgid "Enigma 2"
+msgstr "Enigma 2"
+
+msgid "Enigma Type"
+msgstr "Enigma Type"
+
+msgid "Enter the service pin"
+msgstr "Voer de service PIN in"
+
+msgid "Error: No space left"
+msgstr "Fout: geen ruimte genoeg"
+
+msgid "Error: Outdated"
+msgstr "Fout: Achterhaald"
+
+msgid "Error: User aborted"
+msgstr "Fout: gebruiker heeft afgebroken"
+
+msgid "Error: Zap failed"
+msgstr "Fout: ZAP mislukt"
+
+msgid "Fri"
+msgstr "vr"
+
+msgid "Friday"
+msgstr "vrijdag"
+
+msgid "Getting Channel Information..."
+msgstr "Bezig kanaal informatie te verkrijgen..."
+
+msgid "Getting EPG Information..."
+msgstr "Bezig EPG informatie te verkrijgen..."
+
+msgid "Getting Partnerbox Bouquet Information..."
+msgstr "Bezig Partnerbox boeket informatie te verkrijgen..."
+
+msgid "Getting Partnerbox Information..."
+msgstr "Bezig Partnerbox informatie te verkrijgen..."
+
+msgid "IP"
+msgstr "IP"
+
+msgid "Info"
+msgstr "Informatie"
+
+msgid "Location"
+msgstr "Lokatie"
+
+msgid "Manage timer for other receiveres in network"
+msgstr "Beheer timers voor andere ontvangers in uw netwerk"
+
+msgid "Mon"
+msgstr "ma"
+
+msgid "Monday"
+msgstr "maandag"
+
+msgid "NGRAB"
+msgstr "NGRAB"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "No"
+msgstr "Nee"
+
+msgid "OK"
+msgstr "OK"
+
+#, python-format
+msgid ""
+"Partnerbox Answer: \n"
+"%s"
+msgstr ""
+"Partnerbox antwoord: \n"
+"%s"
+
+msgid "Partnerbox Entries"
+msgstr "Partnerbox entries"
+
+msgid "Partnerbox: Edit Entry"
+msgstr "Partnerbox: bewerk entry"
+
+msgid "Partnerbox: List of Entries"
+msgstr "Partnerbox: Lijst met entries"
+
+msgid "Password"
+msgstr "Wachtwoord"
+
+msgid "Port"
+msgstr "Port"
+
+msgid "Really delete this Partnerbox Entry?"
+msgstr "Deze Partnerbox entry echt verwijderen?"
+
+msgid "Remote Timer"
+msgstr "Remote Timer"
+
+msgid "Remove timer"
+msgstr "Verwijder timer"
+
+msgid "Sat"
+msgstr "za"
+
+msgid "Saturday"
+msgstr "zaterdag"
+
+msgid "Servicelists/EPG"
+msgstr "Servicelijsten/EPG"
+
+msgid "Show 'RemoteTV Player' in E-Menu"
+msgstr "Toon 'RemoteTV Player' in extensie-menu"
+
+msgid "Show 'RemoteTimer' in E-Menu"
+msgstr "Toon 'RemoteTimer' in extensie-menu"
+
+msgid "Show 'Stream current Service' in E-Menu"
+msgstr "Toon Stream current Service' in extensie-menu"
+
+msgid "StartTime"
+msgstr "Starttijd"
+
+msgid "Stream TV from your Partnerbox"
+msgstr "Stream TV van uw Partnerbox"
+
+msgid "Stream current service from partnerbox"
+msgstr "Stream huidige service van Partnerbox"
+
+msgid "Sun"
+msgstr "zo"
+
+msgid "Sunday"
+msgstr "zondag"
+
+msgid "The pin code you entered is wrong."
+msgstr "U voerde een verkeerde PIN in."
+
+msgid "Thu"
+msgstr "do"
+
+msgid "Thursday"
+msgstr "donderdag"
+
+msgid "Timer Type"
+msgstr "Timer Type"
+
+msgid "Tue"
+msgstr "di"
+
+msgid "Tuesday"
+msgstr "dinsdag"
+
+msgid "Wed"
+msgstr "wo"
+
+msgid "Wednesday"
+msgstr "woensdag"
+
+msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
+msgstr "U kunt geen zenders en favorieten van Enigma1-ontvangers toevoegen aan de kanaallijst..."
+
+msgid "You have to restart Enigma2 to activate your new preferences!"
+msgstr "U moet Enigma2 herstarten om uw instellingen door te voeren!"
+
+msgid "Zap"
+msgstr "Zap"
+
+msgid "Zap to service when streaming"
+msgstr "Zap naar service tijdens streamen"
+
+msgid "about to start"
+msgstr "op het punt te beginnen"
+
+msgid "add Partnerbox bouquet"
+msgstr "voeg Partnerbox favoriet toe"
+
+msgid "add Partnerbox service"
+msgstr "voeg Partnerbox zender toe"
+
+msgid "auto"
+msgstr "auto"
+
+msgid "disabled"
+msgstr "uitgeschakeld"
+
+msgid "do nothing"
+msgstr "doe niets"
+
+msgid "done!"
+msgstr "uitgevoerd!"
+
+msgid "go to deep standby"
+msgstr "ga naar deep standby"
+
+msgid "go to standby"
+msgstr "ga naar standby"
+
+msgid "mins"
+msgstr "min"
+
+msgid "record"
+msgstr "opname"
+
+msgid "recording..."
+msgstr "aan het opnemen..."
+
+msgid "setup for partnerbox"
+msgstr "Partnerbox instellingen"
+
+msgid "unknown service"
+msgstr "onbekende service"
+
+msgid "use external"
+msgstr "gebruik extern"
+
+msgid "use internal"
+msgstr "gebruik intern"
+
+msgid "waiting"
+msgstr "aan het wachten"
+
+msgid "zap"
+msgstr "zap"
+
+msgid "zapped"
+msgstr "gezapd"

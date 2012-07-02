@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-zdfmediathek
+Version: 1.0
+Description: Zugriff auf die ZDF-Mediathek
+Maintainer: Nabil Hanna <nabil1978@web.de>
+Homepage: http://www.lt-forums.org/ali
+Depends: enigma2 (>= 2.6git20090615), python-html, python-twisted-web

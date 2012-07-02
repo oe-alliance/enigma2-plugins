@@ -1,0 +1,102 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Podcast\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Nabil Hanna <nabil1978@web.de>\n"
+"Language-Team: Nabil Hanna <nabil1978@web.de>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/"
+"enigma2/python/Plugins/Extensions/Podcast\n"
+
+msgid " (Audio)"
+msgstr " (Audio)"
+
+msgid " (Video)"
+msgstr " (Video)"
+
+msgid "Buffer device:"
+msgstr "Puffergerät:"
+
+msgid "Buffer file handling:"
+msgstr "Behandlung der Pufferdatei:"
+
+msgid "Buffer:"
+msgstr "Puffer:"
+
+msgid "Delete this movie?"
+msgstr "Diesen Film löschen?"
+
+#, python-format
+msgid "Downloading movie: %s"
+msgstr "Film wird heruntergeladen: %s"
+
+msgid "Error getting categories"
+msgstr "Fehler beim Ermitteln der Kategorien"
+
+msgid "Error getting episodes"
+msgstr "Fehler beim Ermitteln der Episoden"
+
+msgid "Error getting genres"
+msgstr "Fehler beim Ermitteln des Genres"
+
+msgid "Error getting movies"
+msgstr "Fehler beim Ermitteln der Filme"
+
+msgid "Error getting podcast url"
+msgstr "Fehler beim Ermitteln der podcast url"
+
+msgid "Error getting podcasts"
+msgstr "Fehler beim Ermitteln der Podcasts"
+
+msgid "Error getting rss feed"
+msgstr "Fehler beim Ermitteln des rss-Feeds"
+
+msgid "Length"
+msgstr "Länge"
+
+msgid "Podcast"
+msgstr "Podcast"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Select"
+msgstr "Selektiere"
+
+msgid "Stop playing this movie?"
+msgstr ""
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "ask me"
+msgstr "frage mich"
+
+msgid "configuration"
+msgstr "Konfiguration"
+
+msgid "delete"
+msgstr "lösche"
+
+msgid "from xml"
+msgstr "aus xml"
+
+msgid "keep on device"
+msgstr "behalte auf Gerät"
+
+msgid "podcast.com"
+msgstr "podcast.com"
+
+msgid "podcast.de"
+msgstr "podcast.de"
+
+#~ msgid "Date"
+#~ msgstr "Datum"

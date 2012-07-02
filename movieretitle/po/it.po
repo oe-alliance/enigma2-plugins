@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - movieretitle\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-10-29 20:37+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/movieretitle\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/movieretitle\n"
+
+msgid "Cancel"
+msgstr "Annull."
+
+msgid "Choose target folder"
+msgstr "Cartella destinazione"
+
+msgid "Description"
+msgstr "Descrizione"
+
+#, python-format
+msgid "Failed to move the movie %s to %s in the background"
+msgstr "Modifica di %s in %s in background fallita!"
+
+msgid "Filename"
+msgstr "Nome file"
+
+msgid "Location"
+msgstr "Destinazione"
+
+msgid "Name and Description Input"
+msgstr "Inserimento nome e descrizione"
+
+msgid "OK"
+msgstr "Ok"
+
+#, python-format
+msgid "Successfully moved the movie %s"
+msgstr "Modifica di %s terminata con successo!"
+
+#, python-format
+msgid ""
+"Target file %s.ts already exist.\n"
+"Do you want to replace it?"
+msgstr ""
+"File destinazione %s.ts esistente!\n"
+"Sovrascriverlo?"
+
+#, python-format
+msgid "The movie is moved in the background from %s to %s."
+msgstr "Il video verrà spostato in background da %s a %s."
+
+msgid "The target directory is not found. The file is not renamed."
+msgstr "Cartella destinazione non trovata. Il file non è stato rinominato."
+
+msgid "Title"
+msgstr "Titolo"
+
+msgid "change name..."
+msgstr "Rinominare"

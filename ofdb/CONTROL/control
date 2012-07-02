@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-ofdb
+Version: 0.1-20080502-r0
+Description: query movie details from the Online Film Datenbank
+Maintainer: fraxinas <andreas.frisch@multimedia-labs.de>
+Depends: enigma2 (>> 1.0git20070908), python-html, python-twisted-web

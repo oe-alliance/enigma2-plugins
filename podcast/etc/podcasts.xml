@@ -1,0 +1,57 @@
+<podcasts>
+	<language name="German" >
+		<provider name="ARD" >
+			<podcast name="Deppendorfs Woche" url="http://www.tagesschau.de/export/video-podcast/deppendorfswoche/" />
+			<podcast name="Tagesschau" url="http://www.tagesschau.de/export/video-podcast/tagesschau/" />
+			<podcast name="Tagesthemen" url="http://www.tagesschau.de/export/video-podcast/tagesthemen/" />
+			<podcast name="Nachtmagazin" url="http://www.tagesschau.de/export/video-podcast/nachtmagazin/" />
+			<podcast name="Bericht aus Berlin" url="http://www.tagesschau.de/export/video-podcast/bab/" />
+			<podcast name="Wochenspiegel" url="http://www.tagesschau.de/export/video-podcast/wochenspiegel/" />
+		</provider>
+		<provider name="Pro 7" >
+			<podcast name="Galileo - 100 Sekunden" url="http://prosieben-galileo-100sek.feedplace.de/rss+all" />
+			<podcast name="Switch reloaded" url="http://prosieben-switch-reloaded.feedplace.de/rss+all" />
+			<podcast name="Galileo" url="http://pro7-galileo.feedplace.de/rss+all" />
+			<podcast name="Blockbuster TV" url="http://pro7-blockbuster-tv.feedplace.de/rss+all" />
+			<podcast name="SevenGames TV" url="http://pro7-sevengames.feedplace.de/rss+all" />
+			<podcast name="taff" url="http://pro7-taff.feedplace.de/rss" />
+			<podcast name="SAM" url="http://pro7-sam.feedplace.de/rss" />
+			<podcast name="POPSTARS - Just 4 Girls!" url="http://pro7-popstars.feedplace.de/rss" />
+		</provider>
+		<provider name="rbb Radio" >
+			<podcast name="Blue Moon" url="http://www.fritz.de/podcasts/sendungen/Blue_Moon.feed.podcast.xml" />
+		</provider>
+		<provider name="ZDF" >
+			<podcast name="Berlinale 2008" url="http://www.zdf.de/ZDFmediathek/content/426566?view=podcast" />
+			<podcast name="Das aktuelle sportstudio" url="http://www.zdf.de/ZDFmediathek/content/440294?view=podcast" />
+			<podcast name="Forum am freitag" url="http://content.zdf.de/podcast/zdf_podcasts/forum_v.xml" />
+			<podcast name="heute - die aktuelle 19 Uhr-Nachrichtensendung" url="http://content.zdf.de/podcast/zdf_heute/heute.xml" />
+			<podcast name="heute-journal - das aktuelle Nachrichtenmagazin" url="http://content.zdf.de/podcast/zdf_hjo/hjo.xml" />
+			<podcast name="Lanz kocht" url="http://www.zdf.de/ZDFmediathek/content/362696?view=podcast" />
+			<podcast name="logo! Deine Nachrichten" url="http://content.zdf.de/podcast/zdf_logo/logo_v.xml" />
+			<podcast name="Momasurfer vom Morgenmagazin" url="http://www.zdf.de/ZDFmediathek/content/399788?view=podcast" />
+			<podcast name="Neues aus der Anstalt" url="http://content.zdf.de/podcast/zdf_neuada/neuada_v.xml" />
+			<podcast name="Godpod" url="http://content.zdf.de/podcast/zdf_kirche/kirche_v.xml" />
+			<podcast name="Toll! Satire von Doyé und Wiemers" url="http://content.zdf.de/podcast/zdf_f21/f21toll_v.xml" />
+			<podcast name="Wetten, dass...?" url="http://content.zdf.de/podcast/zdf_wd/wd_v.xml" />
+		</provider>
+	</language>
+	<language name="Swiss" >
+		<provider name="SF TV" >
+			<podcast name="DOK" url="http://feeds.sf.tv/podcast/dok" />
+			<podcast name="Aeschbacher" url="http://feeds.sf.tv/podcast/aeschbacher" />
+			<podcast name="Giaccobbo / Mueller" url="http://feeds.sf.tv/podcast/giacobbomueller" />
+			<podcast name="Einstein" url="http://feeds.sf.tv/podcast/einstein" />
+			<podcast name="ECO" url="http://feeds.sf.tv/podcast/eco" />
+			<podcast name="Rundschau" url="http://feeds.sf.tv/podcast/rundschau" />
+			<podcast name="Reporter" url="http://feeds.sf.tv/podcast/reporter" />
+			<podcast name="SF Unterwegs" url="http://feeds.sf.tv/podcast/sfunterwegs" />
+			<podcast name="SF bi de Luet" url="http://feeds.sf.tv/podcast/sfbideluet" />
+		</provider> 
+	</language>
+	<language name="The Netherlands" >
+		<provider name="NOS" >
+			<podcast name="Journaal 20:00" url="http://feeds.nos.nl/journaal20uur" />
+		</provider>
+	</language>
+</podcasts>

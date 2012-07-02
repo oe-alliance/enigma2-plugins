@@ -1,0 +1,4 @@
+<e2:screen name="StreamingWebScreen"><e2:element source="StreamService" streaming="yes">
+<e2:convert type="Streaming" />
+<e2:convert type="web:TextToHTML" />
+</e2:element></e2:screen>

@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-genuinedreambox
+Version: 20090808
+Description: Dreambox Authenticity test
+Maintainer: nixkoenner@newnigma2.to
+Homepage: http://www.newnigma2.to
+Depends: enigma2 (>> 2.6git20090409), python-twisted-web

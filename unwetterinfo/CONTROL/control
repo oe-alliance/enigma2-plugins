@@ -1,0 +1,5 @@
+Package: unwetterinfo
+Version: 1.1a
+Description: Unwetterinfos von www.unwetterzentrale.de und www.uwz.at Plugin for enigma2 (view german tempest forecasts)
+Maintainer: barabas
+Depends: enigma2, python-twisted-web

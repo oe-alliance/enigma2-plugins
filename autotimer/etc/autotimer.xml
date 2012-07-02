@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!-- Sample -->
+
+<!-- All timers are enclosed in this elements -->
+<autotimer version="5">
+
+ <!--
+    Set default for new Autotimers. You can set everything as usual but
+    name/match/enabled is not supported to set a default for, so are the
+    counter properties left and lastActivation.
+    
+    Here the Dialog to add a new Autotimer will be prefilled with
+      - a timespan 16:30-23:15
+      - offset 5min before and 10min after event
+      - services restricted to those in (single bouquet) favourites
+ -->
+ <defaults from="16:30" to="23:15" offset="5,10">
+  <bouquet>1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) || (type == 134) FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet</bouquet> <!-- favourites (in single bouquet mode)-->
+ </defaults>
+
+ <!-- 
+    - Record all Events with "House" in its Title
+    - When aired between 20:15 and 23:00 on a weekday
+    - And add a margin of 5 minutes before and after the recording
+      (regardless of enigma2 defaults)
+ -->
+ <timer name="Record House" match="House" enabled="no" from="20:15" to="23:00" offset="5">
+  <!-- Record only on german station "RTL" -->
+  <serviceref>1:0:1:2EE3:441:1:C00000:0:0:0:</serviceref>
+  <!-- Go to standby after recording finished -->
+  <afterevent>standby</afterevent>
+  <!-- Record only on a weekday -->
+  <include where="dayofweek">weekday</include>
+  <!-- Don't record when description contains "Wiederholung" -->
+  <exclude where="description">Wiederholung</exclude>
+  <!-- Don't record when shortdescription contains "Season 1" -->
+  <exclude where="shortdescription">Season 1</exclude>
+ </timer>
+
+ <!--
+    - Record all Events with "ouse" in its Title
+    - No specific timespan
+    - Add 2 minutes before and 3 after event to recording
+ -->
+ <timer name="Containing ouse" match="ouse" enabled="no" offset="2,3">
+  <!-- Record on german station "Pro Sieben" and austrian station "ORF 1" -->
+  <serviceref>1:0:1:445D:453:1:C00000:0:0:0:</serviceref>
+  <serviceref>1:0:1:32C9:45D:1:C00000:0:0:0:</serviceref>
+  <!-- No specific afterEvent, use whatever enigma2 would use -->
+  <!-- Don't record when title contains "Dr." -->
+  <exclude where="title">Dr.</exclude>
+ </timer>
+
+ <!--
+    - Record all Events with "Malcolm" in its Title
+    - When their extended description matches a rather weird regular expression
+      (must contain upper case L and end with "al" - any better example?)
+    - Save recordings into /media/net/Malcolm
+ -->
+ <timer name="Events with Malcolm" match="Malcolm" location="/media/net/Malcolm/" enabled="no">
+  <!-- Don't limit stations to record on -->
+  <!-- If the recording ends between 23:00 and 06:00 shutdown afterwards -->
+  <afterevent from="23:00" to="06:00">shutdown</afterevent>
+  <!-- Make use of a regular expression to include only specific events -->
+  <include where="extended">L(.*?)al$</include>
+  <!-- Don't record on Wednesday -->
+  <exclude where="dayofweek">2</exclude>
+  <!-- Don't record on Weekends -->
+  <exclude where="dayofweek">weekend</exclude>
+ </timer>
+
+</autotimer>
+ 

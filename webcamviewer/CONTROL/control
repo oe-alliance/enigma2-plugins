@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-webcamviewer
+Version: 1.1
+Description: view Pictures and Webcams on your TV Screen
+Maintainer: 3c5x9 <3c5x9@gmx.net>
+Depends: enigma2 (>> 2.5git20081120), python-twisted-web, python-shell

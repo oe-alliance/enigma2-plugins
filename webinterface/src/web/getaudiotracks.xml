@@ -1,0 +1,13 @@
+<e2:screen name="AudioWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2audiotracklist><e2:element source="AudioTracks">
+	<e2:convert type="web:ListFiller" >
+		&lt;e2audiotrack>
+			&lt;e2audiotrackdescription><e2:item name="Description" filter="xml"/>&lt;/e2audiotrackdescription>
+			&lt;e2audiotrackid><e2:item name="Id" filter="xml"/>&lt;/e2audiotrackid>
+			&lt;e2audiotrackpid><e2:item name="Pid" filter="xml"/>&lt;/e2audiotrackpid>
+			&lt;e2audiotrackactive><e2:item name="Active" filter="xml"/>&lt;/e2audiotrackactive>
+		&lt;/e2audiotrack>
+	</e2:convert>
+<e2:convert type="web:TextToHTML" /></e2:element>
+</e2audiotracklist>
+</e2:screen>

@@ -1,0 +1,252 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 Plugin - RS Downloader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: 2009-09-27 18:11+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/e2-plugins/enigma2-plugins/"
+"rsdownloader/src\n"
+
+msgid "Abort all downloads"
+msgstr ""
+
+msgid "Add"
+msgstr "Dodaj"
+
+msgid "Add downloads from txt files"
+msgstr "Dodaj preuzimanja iz txt datoteka"
+
+msgid "Add files from container"
+msgstr "Dodaj datoteke iz sanduka"
+
+#, python-format
+msgid "Added %s to the download-list."
+msgstr "Dodato %s u listu preuzimanja."
+
+msgid "Allow downloading on friday:"
+msgstr "Dopusti preuzimanje u petak:"
+
+msgid "Allow downloading on monday:"
+msgstr "Dopusti preuzimanje u ponedeljak:"
+
+msgid "Allow downloading on saturday:"
+msgstr "Dopusti preuzimanje u subotu:"
+
+msgid "Allow downloading on sunday:"
+msgstr "Dopusti preuzimanje u nedelju:"
+
+msgid "Allow downloading on thursday:"
+msgstr "Dopusti preuzimanje u četvrtak:"
+
+msgid "Allow downloading on tuesday:"
+msgstr "Dopusti preuzimanje u utorak:"
+
+msgid "Allow downloading on wednesday:"
+msgstr "Dopusti preuzimanje u sredu:"
+
+msgid "Checking"
+msgstr "Proveravam"
+
+msgid "Choose reconnect script:"
+msgstr ""
+
+msgid "Clear finished downloads"
+msgstr "Obriši završena preuzimanja"
+
+msgid "Close plugin"
+msgstr "Zatvori dodatak"
+
+msgid "Config"
+msgstr "Konfig."
+
+msgid "Delete"
+msgstr "Obriši"
+
+#, python-format
+msgid "Delete %s?"
+msgstr "Obriši %s?"
+
+msgid "Delete download"
+msgstr "Obriši preuzimanje"
+
+msgid "Delete failed downloads"
+msgstr "Obriši neuspela preuzimanja"
+
+msgid "Delete log"
+msgstr "Obriši zapis"
+
+msgid "Don't download after:"
+msgstr "Ne preuzimati posle:"
+
+msgid "Don't download before:"
+msgstr "Ne preuzimati pre:"
+
+msgid "Don't reconnect after:"
+msgstr ""
+
+msgid "Don't reconnect before:"
+msgstr ""
+
+msgid "Download files from rapidshare"
+msgstr "Pruzmi datoteke sa rapidšera"
+
+msgid "Download in the background:"
+msgstr "Preuzmi u pozadini:"
+
+msgid "Downloading"
+msgstr "Preuzimam"
+
+msgid "Downloads directory:"
+msgstr "Direktorijum preuzimanja:"
+
+msgid "Enter unrar password:"
+msgstr ""
+
+#, python-format
+msgid "Error while adding %s to the download-list!"
+msgstr "Greška kod dodavanja %s u listu preuzimanja!"
+
+#, python-format
+msgid "Error while decrypting %s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Greška kod traženja http://rapidshare-search-engine.com!\n"
+"\n"
+"Greška: %s"
+
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: Nothing found, sorry."
+msgstr ""
+"Greška kod traženja http://rapidshare-search-engine.com!\n"
+"\n"
+"Greška:Ništa nije nađeno,žao mi je."
+
+msgid "Failed"
+msgstr "Neuspelo"
+
+msgid "Finished"
+msgstr "Završeno"
+
+msgid "Ignore download times:"
+msgstr "Ignoriši vremena preuzimanja:"
+
+msgid "Install unrar"
+msgstr ""
+
+msgid "Installing unrar..."
+msgstr ""
+
+msgid "Lists directory:"
+msgstr "Direktorijum listi:"
+
+msgid "Loading next page... please wait!"
+msgstr "Učitavam narednu stranu...molim sačekajte!"
+
+msgid "Loading previous page... please wait!"
+msgstr "Učitavam prethodnu stranu...molim sačekajte!"
+
+msgid "Mark files < 1 MB as failed:"
+msgstr ""
+
+msgid "Maximal downloads:"
+msgstr "Maksimalna pruzimanja:"
+
+msgid "Menu"
+msgstr "Meni"
+
+msgid "No reconnect"
+msgstr ""
+
+msgid "Nothing found, sorry."
+msgstr "Ništa nije nađeno,žao mi je."
+
+msgid "Open unrar Manager"
+msgstr ""
+
+#, python-format
+msgid "Page %d / %d. Push < > to switch the page..."
+msgstr "Strana %d / %d. Pritisni < > da promeniš stranu..."
+
+msgid "Password (netload.in):"
+msgstr ""
+
+msgid "Password (uploaded.to):"
+msgstr ""
+
+msgid "Password:"
+msgstr "Lozinka:"
+
+msgid "Please choose a function..."
+msgstr "Molim izaberite svrhu..."
+
+msgid "RS Downloader"
+msgstr "RS Preuzimač"
+
+msgid "Reconnect type:"
+msgstr ""
+
+msgid "Restart failed after 10 minutes:"
+msgstr "Restart nije uspeo posle 10 minuta:"
+
+msgid "Restart failed downloads"
+msgstr "Restartuj neuspela preuzimanja"
+
+msgid "Save"
+msgstr "Sačuvaj"
+
+msgid "Script"
+msgstr ""
+
+msgid "Search"
+msgstr "Traži"
+
+msgid "Search http://rapidshare-search-engine.com for:"
+msgstr "Pretraži http://rapidshare-search-engine.com za:"
+
+msgid "Show log"
+msgstr "Prikaži zapis"
+
+msgid "Take x downloads to list:"
+msgstr "Uzmi x preuzimanja u listu:"
+
+msgid "Unrar is already working!"
+msgstr ""
+
+msgid "Use search engine"
+msgstr "Koristi mašinu za traženje"
+
+msgid "Username (netload.in):"
+msgstr ""
+
+msgid "Username (uploaded.to):"
+msgstr ""
+
+msgid "Username:"
+msgstr "Korisničko ime:"
+
+msgid "Waiting"
+msgstr "Čekam"
+
+msgid "Write log:"
+msgstr "Napiši zapis:"
+
+msgid "fritz.Box"
+msgstr ""

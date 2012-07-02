@@ -1,0 +1,48 @@
+# German translations for enigma2-plugins package.
+# Copyright (C) 2009 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-05-22 11:23+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Change Root Password"
+msgstr "Root Passwort aendern"
+
+msgid "Change or reset the root password of your dreambox"
+msgstr "Aendern oder resetten sie das RootPasswort ihrer Receiver"
+
+msgid "Enter new Password"
+msgstr "Neues Passwort eingeben"
+
+msgid "Enter your password here:"
+msgstr "Neues Passwort hier eingeben:"
+
+msgid "Set Password"
+msgstr "Passwd setzten"
+
+msgid "Sucessfully changed password for root user to: "
+msgstr "Passwort fuer root wurde erfolgreich geaendert auf: "
+
+msgid "Unable to change/reset password for root user"
+msgstr "Konnte das Passwort nicht aendern"
+
+msgid "new Random"
+msgstr "Zufallspasswd"
+
+msgid "virt. Keyboard"
+msgstr ""

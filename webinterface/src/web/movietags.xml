@@ -1,0 +1,8 @@
+<e2:screen name="LocationsAndTagsWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2tags>
+<e2:element source="Tags"><e2:convert type="web:SimpleListFiller">
+	&lt;e2tag><e2:item name="" filter="xml" />&lt;/e2tag>
+</e2:convert><e2:convert type="web:TextToHTML" />	
+</e2:element>
+</e2tags>
+</e2:screen>

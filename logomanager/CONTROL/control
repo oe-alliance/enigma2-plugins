@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-logomanager
+Version: 0.1
+Description: manage logos to display at boottime or radiomode
+Maintainer: 3c5x9 <3c5x9 at gmx.net>
+Depends: enigma2 (>> 1.0git20070401), enigma2-plugin-extensions-filebrowser

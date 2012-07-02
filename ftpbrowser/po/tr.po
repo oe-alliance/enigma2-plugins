@@ -1,0 +1,224 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 FTP Browser plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-09-23 20:11+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#, python-format
+msgid "%d kb/s"
+msgstr "%d kb/s"
+
+msgid "A basic FTP client"
+msgstr "FTP istemci"
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists locally.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Yerelde, %s isminde bir dosya zaten mevcut.\n"
+"Üzerine yazılmasını ister misiniz?"
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists on the remote host.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Uzak sunucuda, %s isminde bir dosya zaten mevcut.\n"
+"Üzerine yazılmasını ister misiniz?"
+
+msgid ""
+"A transfer is currently in progress.\n"
+"What do you want to do?"
+msgstr ""
+"Devam eden bir aktarım işlemi mevcut.\n"
+"Ne yapmak istiyorsunuz?"
+
+msgid "Abort transfer"
+msgstr "Aktarımı iptal et"
+
+msgid "Add"
+msgstr "Ekle"
+
+msgid "Address:"
+msgstr "Adres:"
+
+#, python-format
+msgid "Are you sure you want to delete %s?"
+msgstr "%s dosyasını silmek istediğinizden emin misiniz?"
+
+msgid "Cancel"
+msgstr "Vazgeç"
+
+msgid "Configuration saved."
+msgstr "Yapılandırma kaydedildi."
+
+msgid "Connect to FTP..."
+msgstr "FTP sunucuya bağlanılıyor..."
+
+msgid "Could not connect to ftp server!"
+msgstr "Ftp sunucuya bağlanılamıyor!"
+
+#, python-format
+msgid "Could not delete %s."
+msgstr "%s silinemiyor."
+
+msgid "Could not obtain list of files."
+msgstr "Dosya listesi alınamıyor."
+
+#, python-format
+msgid "Could not rename %s."
+msgstr "%s dosyasının adı değiştirilemiyor."
+
+msgid "Delete"
+msgstr "Sil"
+
+msgid "Download"
+msgstr "İndir"
+
+msgid "Download finished."
+msgstr "İndirme tamamlandı."
+
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr "TBS %d:%02d dk."
+
+msgid "Edit"
+msgstr "Düzenle"
+
+msgid "Enter URI"
+msgstr "URI Girin"
+
+msgid "Enter URI of FTP Server:"
+msgstr "FTP sunucu için URI bilgisini girin:"
+
+msgid "Enter new filename:"
+msgstr "Yeni dosya adını girin:"
+
+msgid "Error"
+msgstr "Hata"
+
+msgid "Error during download."
+msgstr "İndirilirken hata oluştu."
+
+msgid "Exit"
+msgstr "Çıkış"
+
+msgid "FTP Queue Manager"
+msgstr "FTP kuyruk yöneticisi"
+
+msgid "FTP Server Editor"
+msgstr "FTP sunucu düzenleyici"
+
+msgid "FTP Server Manager"
+msgstr "FTP sunucu yöneticisi"
+
+msgid "Local"
+msgstr "Yerel"
+
+msgid "Name:"
+msgstr "Adı:"
+
+msgid "OK"
+msgstr "Tamam"
+
+msgid "Parent Directory"
+msgstr "Kök Klasör"
+
+msgid "Passive:"
+msgstr ""
+
+msgid "Password:"
+msgstr "Parola:"
+
+msgid "Port:"
+msgstr "Port:"
+
+msgid "Queue Manager"
+msgstr "Kuyruk yöneticisi"
+
+msgid "Queue processed."
+msgstr "Kuyruk işleme alındı."
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Bu kaydı silmek istiyor musunuz?\n"
+"Geri kurtarılamayabilir!"
+
+msgid "Remote"
+msgstr "Uzak"
+
+msgid "Remote (not connected)"
+msgstr "Uzak (bağlı değil)"
+
+#, python-format
+msgid "Removed %s."
+msgstr "%s kaldırıldı."
+
+msgid "Removing directories is not supported."
+msgstr "Klasör kaldırma özelliği desteklenmiyor."
+
+msgid "Rename"
+msgstr "Ad değiştir "
+
+#, python-format
+msgid "Renamed %s to %s."
+msgstr "%s dosyasının adı %s olarak değiştirildi."
+
+msgid "Run in Background"
+msgstr "Arkaplanda çalış"
+
+msgid "Save"
+msgstr "Kaydet"
+
+msgid "Select local file list"
+msgstr "Yerel için dosya listesini seç"
+
+msgid "Select remote file list"
+msgstr "Uzak için dosya listesini seç"
+
+msgid "Server Manager"
+msgstr "Sunucu yöneticisi"
+
+msgid ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+msgstr ""
+"Etkin bir bağlantınız var.\n"
+"Kesmek istiyor musunuz?"
+
+msgid "There already is an active transfer."
+msgstr "Aktarım işlemi devam ediyor."
+
+msgid "Upload"
+msgstr "Yükle"
+
+msgid "Upload finished."
+msgstr "Yükleme tamamlandı."
+
+msgid "Username:"
+msgstr "Kullanıcı adı:"
+
+msgid "Which server do you want to connect to?"
+msgstr "Hangi sunucuya bağlanmak istiyor sunuz?"
+
+msgid "close"
+msgstr "Kapat"
+
+msgid "enter directory/get file/put file"
+msgstr "Klasör içine gir/dosyayı getir/dosyayı gönder"
+
+msgid "open menu"
+msgstr "Menü'yü aç"

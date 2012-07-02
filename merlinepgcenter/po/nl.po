@@ -1,0 +1,328 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-15 13:09+0000\n"
+"PO-Revision-Date: 2012-03-14 12:27+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: AndyBlac/Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "<unknown>"
+msgstr "<onbekend>"
+
+msgid ""
+"A finished record timer wants to set your\n"
+"receiver to standby. Do that now?"
+msgstr ""
+"Een afgewerkte timer wil uw ontvanger in standby zetten\n"
+"Wilt u dat?"
+
+msgid ""
+"A finished record timer wants to shut down\n"
+"your receiver. Shutdown now?"
+msgstr ""
+"Een afgewerkte timer wil uw ontvanger uitschakelen\n"
+"Nu uitschakelen?"
+
+msgid ""
+"A timer failed to record!\n"
+"Disable TV and try again?\n"
+msgstr ""
+"Een opname is mislukt!\n"
+"TV uitschakelen en opnieuw proberen?\n"
+
+msgid "Add"
+msgstr "Voeg toe"
+
+msgid "Add timer"
+msgstr "Voeg timer toe"
+
+msgid "Adjust font size:"
+msgstr "Pas lettergrootte aan:"
+
+msgid "Amount of recordings left:"
+msgstr "Aantal overgebleven opnames:"
+
+msgid "AutoTimer timer"
+msgstr "AutoTimer timer"
+
+msgid "Bouquets:"
+msgstr "Favorieten:"
+
+msgid "Don't stop current event but disable coming events"
+msgstr "Het huidige programma laten doorgaan, maar de volgende programma's uitschakelen"
+
+msgid "Edit Off"
+msgstr "Bewerken aan"
+
+msgid "Edit On"
+msgstr "Bewerken uit"
+
+msgid "Embed volume slider:"
+msgstr "Embed volume slider:"
+
+msgid "Event Info"
+msgstr "Event Info"
+
+msgid "Excluded days:"
+msgstr "Uitgesloten dagen:"
+
+msgid "Exit on TV <-> Radio switch:"
+msgstr "Exit tijdens TV <-> Radio toets:"
+
+msgid "Friday"
+msgstr "vrijdag"
+
+msgid "General"
+msgstr "Algemeen"
+
+msgid "IMDb"
+msgstr "IMDb"
+
+msgid "In order to record a timer, the TV was switched to the recording service!\n"
+msgstr "Om een opname te kunnen maken, is de TV naar het op te nemen kanaal overgeschakeld!\n"
+
+msgid "Included days:"
+msgstr "Inbegrepen dagen:"
+
+msgid "Increase list item height:"
+msgstr "Vergroot de regelhoogte:"
+
+msgid "Keys"
+msgstr "Knoppen"
+
+msgid "Limit search results to bouquet services:"
+msgstr "Beperk zoekresultaten tot kanalen in het boeket:"
+
+msgid "List style:"
+msgstr "Lijst stijl:"
+
+msgid "Lists"
+msgstr "lijsten"
+
+msgid "Location:"
+msgstr "Locatie:"
+
+msgid "Match title:"
+msgstr "Titel overeenkomst:"
+
+msgid "Monday"
+msgstr "maandag"
+
+msgid "More than just an EPG..."
+msgstr "Meer dan alleen maar een EPG..."
+
+msgid "New Search"
+msgstr "Opnieuw zoeken"
+
+msgid "Now"
+msgstr "Nu"
+
+msgid "Number of upcoming events to show:"
+msgstr "Toont xx komende gebeurtenissen:"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Outdated off"
+msgstr "Achterhaald uit"
+
+msgid "Outdated on"
+msgstr "Achterhaald aan"
+
+msgid "Please select a timer type to add:"
+msgstr "Kies een timer type om toe te voegen:"
+
+msgid "Prime Time"
+msgstr "Prime Time"
+
+msgid "Prime time:"
+msgstr "Prime time:"
+
+msgid "Progress bar style:"
+msgstr "Voortgangsbalk stijl:"
+
+msgid "Record a maximum of x times:"
+msgstr "Maximaal xx maal opnemen:"
+
+msgid "Record or zap timer"
+msgstr "Opname of zap timer"
+
+msgid "Remember last tab:"
+msgstr "Onthoud laatste tab"
+
+msgid "Remove"
+msgstr "Verwijder"
+
+msgid "Remove timer"
+msgstr "Verwijder timer"
+
+msgid "Repeating event currently recording... What do you want to do?"
+msgstr "Een herhaalde timer neemt momenteel op... Wat wilt u doen?"
+
+msgid "Replace ChannelSelection key down to start with tab:"
+msgstr "Vervang ChannelSelection-toets naar beneden te starten met tab:"
+
+msgid "Replace ChannelSelection key up to start with tab:"
+msgstr "Vervang ChannelSelection-toets te starten met tab:"
+
+msgid "Replace EventView key to start with tab:"
+msgstr "Vervang EventView-toets te starten met tab:"
+
+msgid "Replace InfoBar single and multi EPG:"
+msgstr "Vervang de informatiebalk en multi-EPG:"
+
+msgid "Return to main tab with exit:"
+msgstr "Keer met 'Exit' terug naar hoofdtab:"
+
+msgid "Saturday"
+msgstr "zaterdag"
+
+msgid "Search"
+msgstr "Zoek"
+
+msgid "Search for:"
+msgstr "Zoek naar:"
+
+msgid "Search type:"
+msgstr "Zoek type:"
+
+msgid "Select running service on start:"
+msgstr "Kies lopend kanaal bij aanvang:"
+
+msgid "Services:"
+msgstr "Zenders:"
+
+msgid "Set search term"
+msgstr "Geef zoek term"
+
+msgid "Show begin/remain times:"
+msgstr "Toon begin/resterende tijd:"
+
+msgid "Show blinking picon for running timers:"
+msgstr "Toon knipperende icoon voor lopende timers:"
+
+msgid "Show duration:"
+msgstr "Toon duur:"
+
+msgid "Show event information:"
+msgstr "Toon event informatie:"
+
+msgid "Show list numbers:"
+msgstr "Toon lijstnummers"
+
+msgid "Show multi colored begin/remain times:"
+msgstr "Toon meerkleurige begin- en eindtijden:"
+
+msgid "Show picons:"
+msgstr "Toon picons:"
+
+msgid "Show service name:"
+msgstr "Toon zendernaam:"
+
+msgid "Show short description:"
+msgstr "Toon korte beschrijving:"
+
+msgid "Show text input help for epg search:"
+msgstr "Toon tekstinvoer-help voor EPG-search:"
+
+msgid "Show timer messages:"
+msgstr "Toon timer berichten:"
+
+msgid "Show video picture:"
+msgstr "Toon video:"
+
+msgid "Similar"
+msgstr "Soortgelijk"
+
+msgid "Single"
+msgstr "Enkel"
+
+msgid "Space between columns:"
+msgstr "Ruimte tussen kolommen:"
+
+msgid "Stop current event and disable coming events"
+msgstr "Stop huidige event en schakel komende events uit"
+
+msgid "Stop current event but not coming events"
+msgstr "Stop huidige event maar niet de komende"
+
+msgid "Sunday"
+msgstr "zondag"
+
+msgid "Thursday"
+msgstr "donderdag"
+
+msgid "Timer"
+msgstr "Timer"
+
+msgid "Today"
+msgstr "Vandaag"
+
+msgid "Tomorrow"
+msgstr "Morgen"
+
+msgid "Tuesday"
+msgstr "dinsdag"
+
+msgid "Upcoming"
+msgstr "Aanstaande"
+
+msgid "Use picons (50x30) from:"
+msgstr "Gebruik picons (50x30) van:"
+
+msgid "Use skin:"
+msgstr "Gebruik skin:"
+
+msgid "Wednesday"
+msgstr "woensdag"
+
+msgid "about to start"
+msgstr "op het punt te neginnen"
+
+msgid "disabled"
+msgstr "uitgeschakeld"
+
+msgid "done!"
+msgstr "gereed!"
+
+msgid "four parts"
+msgstr "vier delen"
+
+msgid "gradient"
+msgstr "gradient"
+
+msgid "percent (text)"
+msgstr "percentage (tekst)"
+
+msgid "recording..."
+msgstr "aan het opnemen..."
+
+msgid "return"
+msgstr "ga terug"
+
+msgid "simple"
+msgstr "eenvoudig"
+
+msgid "single line style"
+msgstr "enkele lijn stijl"
+
+msgid "waiting"
+msgstr "aan het wachten"
+
+msgid "with short description"
+msgstr "met korte beschrijving"
+
+msgid "zapped"
+msgstr "gezapped"
+

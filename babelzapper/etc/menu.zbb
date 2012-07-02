@@ -1,0 +1,9 @@
+DOWN; $KEY_DOWN
+RIGHT; $KEY_RIGHT
+UP; $KEY_UP
+LEFT; $KEY_LEFT
+OK; $KEY_OK; GOTO 1
+EXIT; $KEY_EXIT; GOTO 0
+colors; LOAD colormenu
+numbers; LOAD numbermenu
+<==; $KEY_MENU; LOAD

@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - porncenter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/PornCenter\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/PornCenter\n"
+
+msgid "Adult streaming plugins for dm800/dm8000"
+msgstr "Plugin di streaming per adulti (dm800/dm8000)"
+
+msgid "Buffer device:"
+msgstr ""
+
+msgid "Buffer file handling:"
+msgstr ""
+
+msgid "Buffer:"
+msgstr ""
+
+msgid "Delete this movie?"
+msgstr ""
+
+msgid "Description:"
+msgstr "Descrizione:"
+
+#, python-format
+msgid "Downloading movie: %s"
+msgstr ""
+
+msgid "Error while getting video url!"
+msgstr "Errore nell'ottenimento url video!"
+
+msgid "Name:"
+msgstr "Nome:"
+
+msgid "Porn Center"
+msgstr "Porn Center"
+
+msgid "Select"
+msgstr ""
+
+msgid "Stop playing this movie?"
+msgstr "Arrestare la riproduzione?"
+
+msgid "ask me"
+msgstr ""
+
+msgid "delete"
+msgstr ""
+
+msgid "keep on device"
+msgstr ""

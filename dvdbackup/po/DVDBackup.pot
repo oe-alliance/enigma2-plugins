@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/plugin.py:250
+msgid "Abort"
+msgstr ""
+
+#: ../src/plugin.py:323
+msgid "Backup"
+msgstr ""
+
+#: ../src/plugin.py:201
+msgid "Backup of DVD finished."
+msgstr ""
+
+#: ../src/plugin.py:440
+msgid "Backup your Video-DVD to your harddisk"
+msgstr ""
+
+#: ../src/plugin.py:143
+msgid "Could not find any file to backup!"
+msgstr ""
+
+#: ../src/plugin.py:421
+msgid "Could not install needed dvdbackup package!"
+msgstr ""
+
+#: ../src/plugin.py:146
+msgid "Could not read the DVD informations!"
+msgstr ""
+
+#: ../src/plugin.py:335
+msgid "Create iso:"
+msgstr ""
+
+#: ../src/plugin.py:437 ../src/plugin.py:440
+msgid "DVD Backup"
+msgstr ""
+
+#: ../src/plugin.py:331
+msgid "Device:"
+msgstr ""
+
+#: ../src/plugin.py:332
+msgid "Directory:"
+msgstr ""
+
+#: ../src/plugin.py:201
+msgid "Duration:"
+msgstr ""
+
+#: ../src/plugin.py:201
+msgid "Eject DVD?"
+msgstr ""
+
+#: ../src/plugin.py:152 ../src/plugin.py:181
+msgid "Error while backup of DVD!"
+msgstr ""
+
+#: ../src/plugin.py:324
+msgid "Keyboard"
+msgstr ""
+
+#: ../src/plugin.py:325
+msgid "Location"
+msgstr ""
+
+#: ../src/plugin.py:334
+msgid "Log:"
+msgstr ""
+
+#: ../src/plugin.py:50 ../src/plugin.py:401
+msgid "Name of DVD"
+msgstr ""
+
+#: ../src/plugin.py:333
+msgid "Name:"
+msgstr ""
+
+#: ../src/plugin.py:322
+msgid "Progress"
+msgstr ""
+
+#: ../src/plugin.py:186
+msgid ""
+"mkisofs job done.\n"
+"Delete DVD directory?"
+msgstr ""

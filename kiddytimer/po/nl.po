@@ -1,0 +1,204 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2011 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-10-12 10:40+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid "01:00"
+msgstr "01:00"
+
+msgid "??:??"
+msgstr "??:??"
+
+msgid "Allows to controls your kids' daily TV usage"
+msgstr "Beheers het dagelijkse TV gebruik van uw kinderen"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Center screen at the lower border"
+msgstr "Centreer scherm op de onder rand"
+
+msgid "Center screen at the upper border"
+msgstr "Centreer scherm op de boven rand"
+
+msgid ""
+"Cheat attempt detected. \n"
+"Box has not been shudown correctly. \n"
+"Remaining time was set to 0."
+msgstr ""
+"Poging tot bedrog gedetecteerd. \n"
+"De box is niet correct afgesloten. \n"
+"Resterende tijd is op 0 gezet."
+
+msgid "Clock"
+msgstr "Klok"
+
+msgid "Decrease remaining time"
+msgstr "Verminder de resterende tijd"
+
+msgid "Disable KiddyTimer"
+msgstr "KiddyTimer uitgeschakeld"
+
+msgid "Discard changes and close screen"
+msgstr "Verwijder veranderingen en sluit scherm"
+
+msgid "Do you want to start the kiddytimer- plugin now."
+msgstr "Wilt u de kiddytimer- plugin nu starten?"
+
+msgid "Don't monitor TV started after"
+msgstr "Bewaak geen TV die begonnen is na"
+
+msgid "Don't monitor TV started before"
+msgstr "Bewaak geen TV die begonnen is voor"
+
+msgid "Enable KiddyTimer"
+msgstr "Schakel  KiddyTimer in"
+
+msgid "Enable KiddyTimer for x minutes"
+msgstr "Schakel KiddyTimer in voor x minuten"
+
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+msgid "Enter pin code"
+msgstr "Toets uw PIN-code in"
+
+msgid "Friday"
+msgstr "vrijdag"
+
+msgid "Increase remaining time"
+msgstr "Vergroot resterende tijd"
+
+msgid "Invalid selection"
+msgstr "Ongeldige keuze"
+
+msgid "KiddyTimer"
+msgstr "KiddyTimer"
+
+#, python-format
+msgid "Last day started: %s"
+msgstr "Laatste dag dat gestart is: %s"
+
+msgid "Monday"
+msgstr "maandag"
+
+msgid "Move clock"
+msgstr "Verplaats klok"
+
+msgid "Move screen down"
+msgstr "Verplaats scherm naar beneden"
+
+msgid "Move screen to the center of your TV"
+msgstr "Verplaats scherm naar het centrum van het beeld"
+
+msgid "Move screen to the left"
+msgstr "Verplaats scherm naar links"
+
+msgid "Move screen to the lower left corner"
+msgstr "Verplaats scherm naar de linker onder hoek"
+
+msgid "Move screen to the lower right corner"
+msgstr "Verplaats scherm naar de rechter onder hoek"
+
+msgid "Move screen to the middle of the left border"
+msgstr "Verplaats scherm naar het midden van de linker rand"
+
+msgid "Move screen to the middle of the right border"
+msgstr "Verplaats scherm naar het midden van de rechter rand"
+
+msgid "Move screen to the right"
+msgstr "Verplaats scherm naar rechts"
+
+msgid "Move screen to the upper left corner"
+msgstr "Verplaats scherm naar de linker boven hoek"
+
+msgid "Move screen to the upper right corner"
+msgstr "Verplaats scherm naar de rechter boven hoek"
+
+msgid "Move screen up"
+msgstr "Verplaats scherm naar boven"
+
+msgid "PIN"
+msgstr "PIN"
+
+msgid "Please enter the correct pin code"
+msgstr "Geef de juiste PIN-code in"
+
+msgid "Please select your KiddyTimer- option"
+msgstr "Selecteer de KiddyTimer- optie"
+
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr "Plugin: %(plugin)s , Versie: %(version)s"
+
+#, python-format
+msgid "Remaining time: %s"
+msgstr "Resterende tijd: %s"
+
+msgid "Reset clock"
+msgstr "Zet klok terug"
+
+msgid "Reset saved position"
+msgstr "Zet opgeslagen positie terug"
+
+msgid "Reset todays remaining time"
+msgstr "Zet resterende tijd voor vandaag terug"
+
+msgid "Saturday"
+msgstr "zaterdag"
+
+msgid "Save"
+msgstr "Sla op"
+
+msgid "Save values and close screen"
+msgstr "Sla waardes op en sluit scherm"
+
+msgid "Set remaining time"
+msgstr "Stel resterende tijd in"
+
+msgid "Smiley"
+msgstr "Smiley"
+
+msgid "Start KiddyTimer"
+msgstr "Start KiddyTimer"
+
+msgid "Stop KiddyTimer (this session only)"
+msgstr "Stop KiddyTimer (alleen deze sessie)"
+
+msgid "Style of timer"
+msgstr "Timer stijl"
+
+msgid "Sunday"
+msgstr "zondag"
+
+msgid "The pin code you entered is wrong."
+msgstr "Onjuiste PIN-code"
+
+msgid "Thursday"
+msgstr "donderdag"
+
+msgid "Timeout for activation dialog"
+msgstr "Timeout voor uitschakelen dialoog"
+
+msgid "Tuesday"
+msgstr "dinsdag"
+
+msgid "Wednesday"
+msgstr "woensdag"
+

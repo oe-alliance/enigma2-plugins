@@ -1,0 +1,18 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+                    <tag type="Recording" />
+	  </prerequisites>
+          <info>
+                    <author>Dr.Best</author>
+                    <name>SHOUTcast</name>
+                    <packagename>enigma2-plugin-extensions-shoutcast</packagename>
+                    <shortdescription>Play Internet Radio downloaded from ShoutCast</shortdescription>
+                    <description>Listen and record Shoutcast Internet Radio on your Receiver.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_shoutcast.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-shoutcast" />
+	  </files>
+</default>

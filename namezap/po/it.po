@@ -1,0 +1,47 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 plugin - namezap\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-26 12:30+0000\n"
+"PO-Revision-Date: 2011-09-20 21:53+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .../enigma2-plugins/namezap\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: ITALIAN\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/namezap\n"
+
+msgid "Cancel"
+msgstr "Annull."
+
+msgid "Controls the visual appearance of the number zap dialog."
+msgstr ""
+"Controllare l'aspetto delle informazioni numero/nome canale nello zapping."
+
+msgid "NameZAP Setup"
+msgstr "Configurazione NameZAP"
+
+msgid "Number and Name"
+msgstr "Numero e nome"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Only Number"
+msgstr "Solo numero"
+
+msgid "Service Name"
+msgstr "Nome canale"
+
+msgid "Unknown Service"
+msgstr "Canale sconosciuto"
+
+msgid "Zapper Style"
+msgstr "Stile zapper"

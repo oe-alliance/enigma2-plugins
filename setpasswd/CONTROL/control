@@ -1,0 +1,5 @@
+Package: enigma2-plugin-systemplugins-changepassword
+Version: 20090520-r0
+Description: change or reset root password on your dreambox
+Maintainer: Michael Alexejew <luke_s@opendreambox.org>
+Homepage: http://enigma2-plugins.schwerkraft.elitedvb.net

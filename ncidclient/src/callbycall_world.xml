@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- the syntax of this file is fairly self-explanatory
+     However, one thing needs to be said. Entries are
+     processed in the order they are placed. This is important
+     when there are overlapping prefixes, e.g. 010 and 0100, in
+     this case 0100 must be placed before 010 or else 010 will
+     be used instead causing errors.-->
+
+<callbycalls>
+	<country code="+31">
+		<callbycall>
+			<prefix>16</prefix>
+			<length>4</length>
+		</callbycall>
+	</country>
+	<country code="+39">
+		<callbycall>
+			<prefix>10</prefix>
+			<length>4</length>
+		</callbycall>
+	</country>
+	<country code="+41">
+		<callbycall>
+			<prefix>10</prefix>
+			<length>5</length>
+		</callbycall>
+	</country>
+	<country code="+49">
+	        <callbycall>
+		        <prefix>0100</prefix>
+	                <length>6</length>
+	        </callbycall>
+		<callbycall>
+		        <prefix>010</prefix>
+			<length>5</length>
+		</callbycall>
+	</country>
+</callbycalls>
+	
+
+	

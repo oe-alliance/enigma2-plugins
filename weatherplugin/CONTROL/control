@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-weatherplugin
+Version: 1.0
+Description: E2 Weather Plugin
+Maintainer: Dr. Best <dr.best@dreambox-tools.info>
+Homepage: http://www.dreambox-tools.info
+Depends: enigma2 (>> 2.6git20090518), python-twisted-web

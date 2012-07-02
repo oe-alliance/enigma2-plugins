@@ -1,0 +1,18 @@
+<default>
+	  <prerequisites>
+		  <hardware type="dm8000" />
+		  <hardware type="dm7025" />
+		  <hardware type="dm7020hd" />
+		  <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>PiP-Zap</name>
+                    <packagename>enigma2-plugin-extensions-pipzap</packagename>
+                    <shortdescription>Allows to zap using the picture in picture.</shortdescription>
+		    <description>Allows to zap using the picture in picture.</description>
+          </info>
+	  <files type="package">
+		<file type="package" name="enigma2-plugin-extensions-pipzap" />
+	  </files>
+</default>

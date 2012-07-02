@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, python-format
+msgid "%d kb/s"
+msgstr ""
+
+msgid "A basic FTP client"
+msgstr ""
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists locally.\n"
+"Do you want to overwrite it?"
+msgstr ""
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists on the remote host.\n"
+"Do you want to overwrite it?"
+msgstr ""
+
+msgid ""
+"A transfer is currently in progress.\n"
+"What do you want to do?"
+msgstr ""
+
+msgid "Abort transfer"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Address:"
+msgstr ""
+
+#, python-format
+msgid "Are you sure you want to delete %s?"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Configuration saved."
+msgstr ""
+
+msgid "Connect to FTP..."
+msgstr ""
+
+msgid "Could not connect to ftp server!"
+msgstr ""
+
+#, python-format
+msgid "Could not delete %s."
+msgstr ""
+
+msgid "Could not obtain list of files."
+msgstr ""
+
+#, python-format
+msgid "Could not rename %s."
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Download finished."
+msgstr ""
+
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Enter URI"
+msgstr ""
+
+msgid "Enter URI of FTP Server:"
+msgstr ""
+
+msgid "Enter new filename:"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Error during download."
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "FTP Queue Manager"
+msgstr ""
+
+msgid "FTP Server Editor"
+msgstr ""
+
+msgid "FTP Server Manager"
+msgstr ""
+
+msgid "Local"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Parent Directory"
+msgstr ""
+
+msgid "Passive:"
+msgstr ""
+
+msgid "Password:"
+msgstr ""
+
+msgid "Port:"
+msgstr ""
+
+msgid "Queue Manager"
+msgstr ""
+
+msgid "Queue processed."
+msgstr ""
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+
+msgid "Remote"
+msgstr ""
+
+msgid "Remote (not connected)"
+msgstr ""
+
+#, python-format
+msgid "Removed %s."
+msgstr ""
+
+msgid "Removing directories is not supported."
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+#, python-format
+msgid "Renamed %s to %s."
+msgstr ""
+
+msgid "Run in Background"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Select local file list"
+msgstr ""
+
+msgid "Select remote file list"
+msgstr ""
+
+msgid "Server Manager"
+msgstr ""
+
+msgid ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+msgstr ""
+
+msgid "There already is an active transfer."
+msgstr ""
+
+msgid "Upload"
+msgstr ""
+
+msgid "Upload finished."
+msgstr ""
+
+msgid "Username:"
+msgstr ""
+
+msgid "Which server do you want to connect to?"
+msgstr ""
+
+msgid "close"
+msgstr ""
+
+msgid "enter directory/get file/put file"
+msgstr ""
+
+msgid "open menu"
+msgstr ""

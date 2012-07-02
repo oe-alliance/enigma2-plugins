@@ -1,0 +1,28 @@
+<e2:screen name="DummyWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2frontendstatus>	
+	<e2snrdb>
+		<e2:element source="session.FrontendStatus"  id="SNRdB">
+			<e2:convert type="FrontendInfo">SNRdB</e2:convert>
+			<e2:convert type="web:TextToXML" />
+		</e2:element>
+	</e2snrdb>
+	<e2snr>
+		<e2:element source="session.FrontendStatus"  id="SNR">
+			<e2:convert type="FrontendInfo">SNR</e2:convert>
+			<e2:convert type="web:TextToXML" />
+		</e2:element>
+	</e2snr>
+	<e2ber>
+		<e2:element source="session.FrontendStatus"  id="BER">
+			<e2:convert type="FrontendInfo">BER</e2:convert>
+			<e2:convert type="web:TextToXML" />
+		</e2:element>
+	</e2ber>
+	<e2acg>
+		<e2:element source="session.FrontendStatus"  id="AGC">
+			<e2:convert type="FrontendInfo">AGC</e2:convert>
+			<e2:convert type="web:TextToXML" />
+		</e2:element>
+	</e2acg>
+</e2frontendstatus>
+</e2:screen>

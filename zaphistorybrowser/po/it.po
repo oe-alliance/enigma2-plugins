@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - zaphistorybrowser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-04-08 20:25+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/"
+"zaphistorybrowser\n"
+
+msgid "Clear"
+msgstr "Pulire"
+
+msgid "Config"
+msgstr "Configurare"
+
+msgid "Delete"
+msgstr "Cancellare"
+
+msgid "Enable zap history:"
+msgstr "Abilitare "
+
+msgid "Enigma1-like history:"
+msgstr "History in veste enigma1"
+
+msgid "Maximum zap history entries:"
+msgstr "Numero massimo di voci nella history: "
+
+msgid "Zap & Close"
+msgstr "Zap & chiudere"
+
+msgid "Zap-History Browser"
+msgstr "Zap-History Browser"
+
+msgid "Zap-History Configurator"
+msgstr "Configuratore di Zap-History"
+
+msgid "disabled"
+msgstr "Disabilitato"
+
+msgid "disabled at parental lock"
+msgstr "Disabilitato su blocco parentale"
+
+msgid "enabled"
+msgstr "Abilitato"

@@ -1,0 +1,18 @@
+<e2:screen name="MovieWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2movielist><e2:element source="MovieList" id="dirname,tag"><e2:convert type="web:ListFiller" >
+	&lt;e2movie>
+		&lt;e2servicereference><e2:item name="ServiceReference" filter="xml"/>&lt;/e2servicereference>
+		&lt;e2title><e2:item name="Title" filter="xml"/>&lt;/e2title>
+		&lt;e2description><e2:item name="Description" filter="xml"/>&lt;/e2description>
+		&lt;e2descriptionextended><e2:item name="DescriptionExtended" filter="xml"/>&lt;/e2descriptionextended>
+		&lt;e2servicename><e2:item name="ServiceName" filter="xml"/>&lt;/e2servicename>
+		&lt;e2time><e2:item name="Time"/>&lt;/e2time>
+		&lt;e2length><e2:item name="Length"/>&lt;/e2length>
+		&lt;e2tags><e2:item name="Tags" filter="xml"/>&lt;/e2tags>
+		&lt;e2filename><e2:item name="Filename" filter="xml"/>&lt;/e2filename>
+		&lt;e2filesize><e2:item name="Filesize"/>&lt;/e2filesize>
+	&lt;/e2movie>
+	</e2:convert>
+	<e2:convert type="web:TextToHTML" /></e2:element>
+</e2movielist>
+</e2:screen>

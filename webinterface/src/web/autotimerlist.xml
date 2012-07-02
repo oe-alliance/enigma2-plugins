@@ -1,0 +1,35 @@
+<e2:screen name="AutoTimerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2autotmerlist><e2:element source="AutoTimerList" id="gl"><e2:convert type="web:ListFiller" >
+	&lt;e2autotimer>
+		&lt;e2name><e2:item name="Name"  filter="xml"/>&lt;/e2name>
+		&lt;e2match><e2:item name="Match"  filter="xml"/>&lt;/e2match>
+  	    &lt;e2enabled><e2:item name="Enabled"  filter="xml"/>&lt;/e2enabled>
+  	    &lt;e2excludetitle><e2:item name="ExcludedTitle"  filter="xml"/>&lt;/e2excludetitle>
+  	    &lt;e2excludeshort><e2:item name="ExcludedShort"  filter="xml"/>&lt;/e2excludeshort>
+  	    &lt;e2excludedescription><e2:item name="ExcludedDescription"  filter="xml"/>&lt;/e2excludedescription>
+  	    &lt;e2excludedays><e2:item name="ExcludedDays"  filter="xml"/>&lt;/e2excludedays>
+  	    &lt;e2includetitle><e2:item name="IncludedTitle"  filter="xml"/>&lt;/e2includetitle>
+  	    &lt;e2includeshort><e2:item name="IncludedShort"  filter="xml"/>&lt;/e2includeshort>
+  	    &lt;e2includedescription><e2:item name="IncludedDescription"  filter="xml"/>&lt;/e2includedescription>
+  	    &lt;e2includedays><e2:item name="IncludedDays"  filter="xml"/>&lt;/e2includedays>
+  	    &lt;e2services><e2:item name="Services"  filter="xml"/>&lt;/e2services>
+  	    &lt;e2bouquets><e2:item name="Bouquets"  filter="xml"/>&lt;/e2bouquets>
+  	    &lt;e2timespanbegin><e2:item name="TimespanBegin"  filter="xml"/>&lt;/e2timespanbegin>
+  	    &lt;e2timespanend><e2:item name="TimespanEnd"  filter="xml"/>&lt;/e2timespanend>
+  	    &lt;e2duration><e2:item name="Duration"  filter="xml"/>&lt;/e2duration>
+  	    &lt;e2counter><e2:item name="Counter"  filter="xml"/>&lt;/e2counter>
+  	    &lt;e2counterleft><e2:item name="CounterLeft"  filter="xml"/>&lt;/e2counterleft>
+  	    &lt;e2counterlimit><e2:item name="CounterLimit"  filter="xml"/>&lt;/e2counterlimit>
+  	    &lt;e2destination><e2:item name="Destination"  filter="xml"/>&lt;/e2destination>
+  	    &lt;e2counterformatstring><e2:item name="CounterFormatString"  filter="xml"/>&lt;/e2counterformatstring>
+  	    &lt;e2lastbegin><e2:item name="LastBegin"  filter="xml"/>&lt;/e2lastbegin>
+  	    &lt;e2justplay><e2:item name="Justplay"  filter="xml"/>&lt;/e2justplay>
+  	    &lt;e2avoidduplicatedescription><e2:item name="AvoidDuplicateDescription"  filter="xml"/>&lt;/e2avoidduplicatedescription>
+  	    &lt;e2tags><e2:item name="Tags"  filter="xml"/>&lt;/e2tags>
+  	    &lt;e2afterevent><e2:item name="AfterEvent"  filter="xml"/>&lt;/e2afterevent>
+  	    &lt;e2toggledisableimg><e2:item name="toggleDisabledIMG"  filter="xml"/>&lt;/e2toggledisableimg>
+	&lt;/e2autotimer>
+	</e2:convert>
+	<e2:convert type="web:TextToHTML" /></e2:element>
+</e2autotmerlist>
+</e2:screen>

@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektro plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: 2011-10-12 10:21+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Rob van der Does\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "(actual)"
+msgstr "(actueel)"
+
+msgid "(offline!)"
+msgstr "(offline!)"
+
+msgid "(online)"
+msgstr "(online)"
+
+msgid "(set point)"
+msgstr "(instel punt)"
+
+msgid "Visualization for European Installation Bus"
+msgstr "Visualisatie European Installation Bus"
+
+msgid "beleuchtung:helligkeitswerte:esstisch"
+msgstr "belichting: helderheidswaarde: eettafel"
+
+msgid "beleuchtung:helligkeitswerte:schlafen_decke"
+msgstr "belichting: helderheidswaarde: slapen_plafond"
+
+msgid "beleuchtung:helligkeitswerte:wohnzimmer_decke_1"
+msgstr "belichting: helderheidswaarde: woonkamer_plafond_1"
+
+msgid "down"
+msgstr "naar beneden"
+
+msgid "not found"
+msgstr "niet gevonden"
+
+msgid "parser error"
+msgstr "fout in samenstellen"
+
+msgid "up"
+msgstr "omhoog"
+

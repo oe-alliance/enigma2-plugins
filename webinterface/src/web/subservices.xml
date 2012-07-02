@@ -1,0 +1,10 @@
+<e2:screen name="SubServiceWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2servicelist><e2:element source="SubServices" ><e2:convert type="web:ListFiller" >
+	&lt;e2service>
+		&lt;e2servicereference><e2:item name="ServiceReference"  filter="xml"/>&lt;/e2servicereference>
+		&lt;e2servicename><e2:item name="Name"  filter="xml"/>&lt;/e2servicename>
+	&lt;/e2service>
+	</e2:convert>
+	<e2:convert type="web:TextToHTML" /></e2:element>
+</e2servicelist>
+</e2:screen>

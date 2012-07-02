@@ -1,0 +1,174 @@
+# translation of SimpleRSS.po to gerrit
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# gerrit <gerrit@nedlinux.nl>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: SimpleRSS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"PO-Revision-Date: 2011-12-05 16:10+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Rob van der Does\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+#, python-format
+msgid "%d Feed(s) were added to configuration."
+msgstr "%d Feed(s) zijn toegevoegd aan de configuratie."
+
+msgid "A simple to use RSS reader"
+msgstr "Een simpel te gebruiken RSS reader"
+
+msgid "Autoupdate"
+msgstr "Autoupdate"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "Delete"
+msgstr "Verwijderen"
+
+msgid "Enclosures"
+msgstr "Bijlages"
+
+msgid "Entries"
+msgstr "Ingaves"
+
+#, python-format
+msgid "Entry %s/%s"
+msgstr "Ingave %s%s"
+
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
+msgstr "Fout tijdens verwerken feed, dit betekent meestal dat er iets fout is."
+
+msgid "Failed to get subscriptions from Google Reader."
+msgstr "Verkrijgen van inschrijving bij Google Reader mislukt."
+
+msgid "Failed to login to Google Reader."
+msgstr "Login Google Reader mislukt."
+
+msgid "Feed"
+msgstr "Feed"
+
+#, python-format
+msgid "Feed %s/%s"
+msgstr "Feed %s/%s"
+
+msgid "Feed URI"
+msgstr "Feed url"
+
+msgid "Feed is empty."
+msgstr "Feed is leeg."
+
+msgid "Fetch feeds from Google Reader?"
+msgstr "Verkrijg feeds van Google Reader?"
+
+msgid "Found no Enclosure we can display."
+msgstr "Geen bijlage gevonden die we kunnen laten zien."
+
+msgid "Google Password"
+msgstr "Google Wachtwoord"
+
+msgid "Google Username"
+msgstr "Google Gebruikersnaam"
+
+msgid "Keep running in background"
+msgstr "Op de achtergrond uitvoeren"
+
+msgid "New"
+msgstr "Nieuw"
+
+msgid "New Items"
+msgstr "Nieuwe items"
+
+msgid "New Items since last Auto-Update"
+msgstr "Nieuwe items sinds laatste auto-update"
+
+msgid "No such Item."
+msgstr "Geen beschikbaar item/"
+
+msgid "Notification"
+msgstr "Bericht"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Preview"
+msgstr "Vooruitblik"
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Deze entry echt verwijderen?\n"
+"Dit kan niet worden hersteld!"
+
+#, python-format
+msgid "Received %d new news item(s)."
+msgstr "%d nieuwe nieuws item(s) ontvangen."
+
+msgid "Setup"
+msgstr "Instellingen"
+
+msgid "Show new Messages as"
+msgstr "Laat nieuwe berichten zien als"
+
+msgid "Simple RSS Reader"
+msgstr "Simple RSS Reader"
+
+msgid "Simple RSS Reader Setup"
+msgstr "Simple RSS Reader instellingen"
+
+#, python-format
+msgid "Simple RSS Reader: %s"
+msgstr "Simple RSS Reader: %s"
+
+#, python-format
+msgid ""
+"Sorry, this type of feed is unsupported:\n"
+"%s"
+msgstr ""
+"Sorry, dit type feed wordt niet ondersteund:\n"
+"%s"
+
+msgid "Start automatically with Enigma2"
+msgstr "Start automatisch met Enigma2"
+
+msgid "Subscribe Newsfeed..."
+msgstr "Inschrijven op Newsfeed..."
+
+msgid "Ticker"
+msgstr "Ponsband"
+
+msgid "Update Feed"
+msgstr "Feed "
+
+msgid "Update Interval (min)"
+msgstr "Update interval (min)"
+
+msgid ""
+"Update is being done in Background.\n"
+"Contents will automatically be updated when it's done."
+msgstr ""
+"Update wordt op de achtergrond uitgevoerd.\n"
+"De inhoud wordt automatisch ververst als het gereed is."
+
+msgid "View RSS..."
+msgstr "Bekijk RSS..."
+
+msgid "What to do?"
+msgstr "Wat te doen?"
+
+msgid "none"
+msgstr "geen"
+

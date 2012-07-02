@@ -1,0 +1,108 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 Elektro Power Save Plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-04-26 11:35+0100\n"
+"PO-Revision-Date: 2009-09-22 14:05+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: plugin.py:110
+msgid "Monday"
+msgstr "Pazartesi"
+
+#: plugin.py:111
+msgid "Tuesday"
+msgstr "Salı"
+
+#: plugin.py:112
+msgid "Wednesday"
+msgstr "Çarşamba"
+
+#: plugin.py:113
+msgid "Thursday"
+msgstr "Perşembe"
+
+#: plugin.py:114
+msgid "Friday"
+msgstr "Cuma"
+
+#: plugin.py:115
+msgid "Saturday"
+msgstr "Cumartesi"
+
+#: plugin.py:116
+msgid "Sunday"
+msgstr "Pazar"
+
+#: plugin.py:195
+msgid "Enable Elektro Power Save"
+msgstr "Elektro enerji tasarrufçusunu etkinleştir"
+
+#: plugin.py:196
+#: plugin.py:300
+msgid "Standby on boot"
+msgstr "Açılışta hazırda beklet"
+
+#: plugin.py:197
+msgid "Standby on manual boot"
+msgstr "Elle açılırken hazırda beklet"
+
+#: plugin.py:198
+msgid "Standby on boot screen timeout"
+msgstr "Açılış ekranı zaman aşımı süresi"
+
+#: plugin.py:199
+msgid "Force sleep (even when not in standby)"
+msgstr "Hazırda beklemeye zorla (hazırda beklemede değilken)"
+
+#: plugin.py:200
+msgid "Dont wake up"
+msgstr "Uyanma"
+
+#: plugin.py:201
+msgid "Holiday mode (experimental)"
+msgstr "Tatil modu (deneme)"
+
+#: plugin.py:203
+msgid "Next day starts at"
+msgstr "Sonraki gün başlangıcı"
+
+#: plugin.py:206
+msgid "Wakeup"
+msgstr "Uyan"
+
+#: plugin.py:207
+msgid "Sleep"
+msgstr "Hazırda beklet"
+
+#: plugin.py:211
+msgid "Cancel"
+msgstr "Vazgeç"
+
+#: plugin.py:212
+msgid "Ok"
+msgstr "Tamam"
+
+#: plugin.py:213
+msgid "Help"
+msgstr "Yardım"
+
+#: plugin.py:237
+msgid "Showing Elektro readme.txt"
+msgstr "Elektro benioku.txt gösteriliyor"
+
+#: plugin.py:323
+msgid "Go to Standby now?"
+msgstr "Hazırda bekletme kipine şimdi geçilsin mi?"
+
+#: plugin.py:465
+msgid "Go to sleep now?"
+msgstr "Uyku kipine şimdi geçilsin mi?"
+

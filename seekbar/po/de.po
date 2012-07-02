@@ -1,0 +1,33 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Seekbar\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: aliabdul <aliabdul1978@hotmail.de>\n"
+"Language-Team: Nabil Hanna <nabil1978@web.de>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Go to position:"
+msgstr "Springe zu Position:"
+
+msgid "Jump x minutes back:"
+msgstr "Springe x Minuten zurück:"
+
+msgid "Jump x minutes forward:"
+msgstr "Springe x Minuten vorwärts:"
+
+msgid "Overwrite left and right buttons:"
+msgstr "Überschreibe Links- und Rechts-Tasten:"
+
+msgid "Seek"
+msgstr "Suche"
+
+msgid "Sensibility:"
+msgstr "Sensibilität:"

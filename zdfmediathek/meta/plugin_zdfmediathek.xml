@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>AliAbdul</author>
+                    <name>ZDFMediathek</name>
+                    <packagename>enigma2-plugin-extensions-zdfmediathek</packagename>
+                    <shortdescription>Watch streams from ZDF Mediathek</shortdescription>
+                    <description>ZDFMediathek allows you to watch streams from ZDF Mediathek.</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-zdfmediathek" />
+	  </files>
+</default>

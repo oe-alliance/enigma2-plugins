@@ -1,0 +1,13 @@
+#!/bin/sh
+rm /usr/lib/enigma2/python/Plugins/Extensions/FanControl/*.pyc > /dev/null 2>&1
+rm /usr/lib/enigma2/python/Plugins/Extensions/FanControl/*.pyo > /dev/null 2>&1
+rm /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/WebChilds/External/FC2web.pyc > /dev/null 2>&1
+rm /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/WebChilds/External/FC2web.pyo > /dev/null 2>&1
+rm /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/fc2/diagram.class > /dev/null 2>&1
+echo "*                               *"
+echo "* E2 restart is required        *"
+echo "*                               *"
+echo "* E2 muss neu gestartet werden  *"
+echo "*                               *"
+
+exit 0

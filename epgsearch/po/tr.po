@@ -1,0 +1,109 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 EPGSearch plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: 2009-09-24 20:39+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Add AutoTimer"
+msgstr ""
+
+msgid "Add timer"
+msgstr "Zamanlayıcı eke"
+
+msgid "Cancel"
+msgstr "Vazgeç"
+
+msgid "Channel Selection"
+msgstr "Kanal Seçimi"
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "AutoTimer zamanlayıcı listesi okunamıyor : %s"
+
+msgid "EPG Search"
+msgstr "EPG Arama"
+
+msgid "EPGSearch"
+msgstr ""
+
+msgid "EPGSearch Setup"
+msgstr ""
+
+msgid ""
+"Enable this to be able to access the EPG-Search from within the plugin "
+"browser."
+msgstr ""
+
+msgid "Enter text to search for"
+msgstr "Arama metnini girin"
+
+msgid ""
+"How many entries to keep in the search history at most. 0 disables history "
+"entirely!"
+msgstr ""
+
+msgid "IMDb Search"
+msgstr ""
+
+msgid "Import from AutoTimer"
+msgstr "Otomatik zamanlayıcıdan içeri al"
+
+msgid "Import from EPG"
+msgstr "EPG'den içeri al"
+
+msgid "Import from Timer"
+msgstr "Zamanlayıcıdan içeri al"
+
+msgid "Length of History"
+msgstr ""
+
+msgid "New Search"
+msgstr "Yeni Arama"
+
+msgid "No history"
+msgstr "Geçmiş kaydı yok"
+
+msgid "OK"
+msgstr "Tamam"
+
+msgid "Save search as AutoTimer"
+msgstr "Aramayı AutoTimer olarak kaydet"
+
+msgid "Search"
+msgstr "Ara"
+
+msgid "Search EPG"
+msgstr "EPG'de ara"
+
+msgid "Select a timer to search"
+msgstr "Arama zamanını seçin"
+
+msgid "Select text to search for"
+msgstr "Arama metnini seçin"
+
+msgid "Setup"
+msgstr ""
+
+msgid "Show in plugin browser"
+msgstr ""
+
+msgid "Show search history"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+msgid "search EPG"
+msgstr "EPG'de ara"
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
+msgid "search EPG..."
+msgstr "EPG'de ara..."

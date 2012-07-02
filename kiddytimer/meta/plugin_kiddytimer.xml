@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Tode</author>
+                    <name>KiddyTimer</name>
+                    <packagename>enigma2-plugin-extensions-kiddytimer</packagename>
+                    <shortdescription>Control your kids's tv usage</shortdescription>
+                    <description>KiddyTimer allows to control your kids's daily tv usage.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_kiddytimer_en.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-kiddytimer" />
+	  </files>
+</default>

@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="EPG" />
+	  </prerequisites>
+          <info>
+                    <author>Vali</author>
+                    <name>Merlin Programm Guide</name>
+                    <packagename>enigma2-plugin-extensions-merlinepg</packagename>
+                    <shortdescription>A graphical EPG interface</shortdescription>
+                    <description>A graphical EPG interface.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_merlinepg.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-merlinepg" />
+	  </files>
+</default>

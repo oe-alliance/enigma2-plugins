@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+	<Document>
+		<name>Rennstrecken.kmz</name>
+		<Folder>
+			<name>Rennstrecken</name>
+			<LookAt id="khLookAt542">
+				<longitude>6.929877072239468</longitude>
+				<latitude>50.32417204519953</latitude>
+			</LookAt>
+			<Folder>
+				<name>F1</name>
+				<Placemark>
+					<name>Bahrain International Circuit</name>
+					<LookAt>
+						<longitude>50.5159378129532</longitude>
+						<latitude>26.03093828168916</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Albert Park</name>
+					<LookAt>
+						<longitude>144.9715352947365</longitude>
+						<latitude>-37.84521648935841</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Sepang International Circuit</name>
+					<LookAt>
+						<longitude>101.7409446248163</longitude>
+						<latitude>2.764768574918148</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Autodromo Enzo e Dino Ferrari</name>
+					<LookAt>
+						<longitude>11.71462614473162</longitude>
+						<latitude>44.34481140631318</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Circuit de Catalunya</name>
+					<LookAt>
+						<longitude>2.257452207043378</longitude>
+						<latitude>41.56737738690407</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Circuit de Monaco</name>
+					<LookAt>
+						<longitude>7.422053181921657</longitude>
+						<latitude>43.73726313916431</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark id="khPlacemark570">
+					<name>Nürburgring</name>
+					<LookAt id="khLookAt571">
+						<longitude>7.334510988886211</longitude>
+						<latitude>49.94551673542702</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Gilles Villeneuve Circuit</name>
+					<LookAt>
+						<longitude>-73.52283623934387</longitude>
+						<latitude>45.50553627093121</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Indianapolis Motor Speedway</name>
+					<LookAt>
+						<longitude>-86.2362501146151</longitude>
+						<latitude>39.78823846100529</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Circuit de Nevers Magny Cours</name>
+					<LookAt>
+						<longitude>3.164362080205438</longitude>
+						<latitude>46.86192004355246</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Silverstone Circuit</name>
+					<LookAt>
+						<longitude>-1.017369648189376</longitude>
+						<latitude>52.07109668847959</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark id="khPlacemark576">
+					<name>Hockenheimring</name>
+					<LookAt id="khLookAt577">
+						<longitude>8.572361618019089</longitude>
+						<latitude>49.33636224642903</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Hungaroring</name>
+					<LookAt>
+						<longitude>19.25105448200226</longitude>
+						<latitude>47.58192955176471</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Autodromo Nazionale di Monza</name>
+					<LookAt>
+						<longitude>9.280119913989184</longitude>
+						<latitude>45.62789672197946</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark id="khPlacemark582">
+					<name>Spa-Francorchamps</name>
+					<LookAt id="khLookAt583">
+						<longitude>5.977347315065888</longitude>
+						<latitude>50.44233228871123</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Suzuka International Racing Course</name>
+					<LookAt>
+						<longitude>136.5406420907146</longitude>
+						<latitude>34.85060200750952</latitude>
+					</LookAt>
+				</Placemark>
+			</Folder>
+			<Folder>
+				<name>DTM</name>
+				<Placemark>
+					<name>Hockenheimring</name>
+					<LookAt>
+						<longitude>8.572361618019089</longitude>
+						<latitude>49.33636224642903</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Eurospeedway Lausitz</name>
+					<LookAt>
+						<longitude>13.91807812966808</longitude>
+						<latitude>51.53402323167359</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Spa-Francorchamps</name>
+					<LookAt>
+						<longitude>5.977347315065888</longitude>
+						<latitude>50.44233228871123</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>MOTOPARK Oschersleben</name>
+					<LookAt>
+						<longitude>11.27812960444814</longitude>
+						<latitude>52.03096083063715</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark id="khPlacemark559">
+					<name>Norisring, Nürnberg</name>
+					<LookAt id="khLookAt560">
+						<longitude>11.12471555353767</longitude>
+						<latitude>49.43081462347325</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Nürburgring</name>
+					<LookAt>
+						<longitude>6.949310568838253</longitude>
+						<latitude>50.33584418617244</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Circuit Park Zandvoort</name>
+					<LookAt>
+						<longitude>4.545550844066787</longitude>
+						<latitude>52.39075015985516</latitude>
+					</LookAt>
+				</Placemark>
+			</Folder>
+			<Folder>
+				<name>US Motorsport</name>
+				<Folder>
+					<name>Champcar</name>
+					<Folder>
+						<name>Toronto</name>
+						<Placemark>
+							<name>Toronto</name>
+							<LookAt>
+								<longitude>-79.41769175346289</longitude>
+								<latitude>43.63422231656372</latitude>
+							</LookAt>
+						</Placemark>
+					</Folder>
+					<Folder>
+						<name>Cleveland</name>
+						<Placemark>
+							<name>Cleveland</name>
+							<LookAt>
+								<longitude>-81.6796840786287</longitude>
+								<latitude>41.52051267648185</latitude>
+							</LookAt>
+						</Placemark>
+					</Folder>
+					<Folder>
+						<name>Long Beach</name>
+						<Placemark>
+							<name>Lon Beach</name>
+							<LookAt>
+								<longitude>-118.1908658946714</longitude>
+								<latitude>33.76449296786325</latitude>
+							</LookAt>
+						</Placemark>
+					</Folder>
+					<Placemark>
+						<name>Milwaukee</name>
+						<LookAt>
+							<longitude>-88.01004825224374</longitude>
+							<latitude>43.0209967618935</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Elkhart LAke/ Road America</name>
+						<LookAt>
+							<longitude>-87.99150919796183</longitude>
+							<latitude>43.80346097444006</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Gilles Villeneuve Circuit</name>
+						<LookAt>
+							<longitude>-73.52283623934387</longitude>
+							<latitude>45.50553627093121</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Surfers Paradise</name>
+						<LookAt>
+							<longitude>153.428094790144</longitude>
+							<latitude>-27.98541288223582</latitude>
+						</LookAt>
+					</Placemark>
+				</Folder>
+				<Folder>
+					<name>IRL</name>
+					<Placemark>
+						<name>Watkins Glen</name>
+						<LookAt>
+							<longitude>-76.92166099999996</longitude>
+							<latitude>42.33637900000002</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Homestead</name>
+						<LookAt>
+							<longitude>-80.4061733383281</longitude>
+							<latitude>25.45297806426108</latitude>
+						</LookAt>
+					</Placemark>
+					<Folder>
+						<name>St. Petersburg</name>
+						<Placemark>
+							<name>St. Petersburg</name>
+							<LookAt>
+								<longitude>-82.63261590428058</longitude>
+								<latitude>27.76798744075829</latitude>
+							</LookAt>
+						</Placemark>
+					</Folder>
+					<Placemark>
+						<name>Indianapolis Motor Speedway</name>
+						<LookAt>
+							<longitude>-86.2362501146151</longitude>
+							<latitude>39.78823846100529</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Motegi</name>
+						<LookAt>
+							<longitude>140.232014680432</longitude>
+							<latitude>36.53540338659351</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Texas Motor Speedway/ Fort Worth</name>
+						<LookAt>
+							<longitude>-97.27550294207562</longitude>
+							<latitude>33.03678639400341</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Kansas Speedway</name>
+						<LookAt>
+							<longitude>-94.82484477610788</longitude>
+							<latitude>39.11783961403013</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Richmond</name>
+						<LookAt>
+							<longitude>-77.41662262634702</longitude>
+							<latitude>37.5935680196662</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Milwaukee Mile</name>
+						<LookAt>
+							<longitude>-88.0098350887677</longitude>
+							<latitude>43.01999925128768</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Infineon Raceway/ Sears Point</name>
+						<LookAt>
+							<longitude>-122.4558002882116</longitude>
+							<latitude>38.16028154427657</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Michigan International Speedway</name>
+						<LookAt>
+							<longitude>-84.23577187579066</longitude>
+							<latitude>42.07005792982215</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Kentucky Speedway ????</name>
+						<LookAt>
+							<longitude>-84.90830080997644</longitude>
+							<latitude>38.71367651733355</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Chicagoland Speedway</name>
+						<LookAt>
+							<longitude>-88.05597050150595</longitude>
+							<latitude>41.47748099267035</latitude>
+						</LookAt>
+					</Placemark>
+				</Folder>
+				<Folder>
+					<name>NASCAR</name>
+					<Placemark>
+						<name>Daytona International Speedway</name>
+						<LookAt>
+							<longitude>-81.06831999999999</longitude>
+							<latitude>29.18544600000001</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Atlanta Motor Speedway</name>
+						<LookAt>
+							<longitude>-84.3136623599664</longitude>
+							<latitude>33.38460422804864</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Texas Motor Speedway/ Fort Worth</name>
+						<LookAt>
+							<longitude>-97.27550294207562</longitude>
+							<latitude>33.03678639400341</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Richmond</name>
+						<LookAt>
+							<longitude>-77.41662262634702</longitude>
+							<latitude>37.5935680196662</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Phoenix International -raceway</name>
+						<LookAt>
+							<longitude>-112.3091491344432</longitude>
+							<latitude>33.37530074796366</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Darlington Raceway</name>
+						<LookAt>
+							<longitude>-79.90363594690994</longitude>
+							<latitude>34.29921695793798</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Lowe´s Motor Speedway</name>
+						<LookAt>
+							<longitude>-80.67008655449148</longitude>
+							<latitude>35.36829159744103</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Dover International Speedway</name>
+						<LookAt>
+							<longitude>-75.52972156781868</longitude>
+							<latitude>39.19199056029645</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Michigan International Speedway</name>
+						<LookAt>
+							<longitude>-84.23577187579066</longitude>
+							<latitude>42.07005792982215</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Poccono Raceway</name>
+						<LookAt>
+							<longitude>-75.50245592993286</longitude>
+							<latitude>41.05779435922389</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Chicagoland Speedway</name>
+						<LookAt>
+							<longitude>-88.05597050150595</longitude>
+							<latitude>41.47748099267035</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Infineon Raceway/ Sears Point</name>
+						<LookAt>
+							<longitude>-122.4558002882116</longitude>
+							<latitude>38.16028154427657</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>New Hampshire Internatioal Speedway</name>
+						<LookAt>
+							<longitude>-71.46127156805834</longitude>
+							<latitude>43.36406290091922</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Indianapolis Motor Speedway</name>
+						<LookAt>
+							<longitude>-86.2362501146151</longitude>
+							<latitude>39.78823846100529</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Watkins Glen</name>
+						<LookAt>
+							<longitude>-76.92166099999996</longitude>
+							<latitude>42.33637900000002</latitude>
+						</LookAt>
+					</Placemark>
+					<Placemark>
+						<name>Homestead</name>
+						<LookAt>
+							<longitude>-80.4061733383281</longitude>
+							<latitude>25.45297806426108</latitude>
+						</LookAt>
+					</Placemark>
+				</Folder>
+			</Folder>
+			<Folder>
+				<name>Sonstige</name>
+				<Placemark>
+					<name>Auto Motodrom Brno</name>
+					<LookAt>
+						<longitude>16.45454428748549</longitude>
+						<latitude>49.20875429788457</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Truxton</name>
+					<LookAt>
+						<longitude>-1.597021973231723</longitude>
+						<latitude>51.21399910556353</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Singen</name>
+					<LookAt id="khLookAt691">
+						<longitude>8.875566759827366</longitude>
+						<latitude>47.7562905823079</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Avus</name>
+					<LookAt>
+						<longitude>13.27670532820685</longitude>
+						<latitude>52.50034570652288</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Estoril</name>
+					<LookAt>
+						<longitude>-9.391760237383039</longitude>
+						<latitude>38.75166059845908</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Valencia</name>
+					<LookAt>
+						<longitude>-0.6278296500164047</longitude>
+						<latitude>39.48646449983395</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Donnington</name>
+					<LookAt>
+						<longitude>-1.371583547425225</longitude>
+						<latitude>52.83180797680389</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Laguna Seca</name>
+					<LookAt>
+						<longitude>-121.7556610183761</longitude>
+						<latitude>36.59349433156462</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Fiorano</name>
+					<LookAt>
+						<longitude>10.85920782049148</longitude>
+						<latitude>44.53549492036529</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Mugello</name>
+					<LookAt>
+						<longitude>11.37120997751637</longitude>
+						<latitude>43.99844221241774</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Jerez</name>
+					<LookAt>
+						<longitude>-6.031852920691954</longitude>
+						<latitude>36.70980360887362</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>MotoGP Katar</name>
+					<LookAt>
+						<longitude>51.48282806639534</longitude>
+						<latitude>25.41545046468327</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Philip Island</name>
+					<LookAt>
+						<longitude>145.2374310713819</longitude>
+						<latitude>-38.50279471457448</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Sandown</name>
+					<LookAt>
+						<longitude>145.17092878827</longitude>
+						<latitude>-37.94997021698191</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Circuit Paul Ricard, Le Castelet</name>
+					<LookAt>
+						<longitude>5.79061054160506</longitude>
+						<latitude>43.24989074500129</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Zolder</name>
+					<LookAt>
+						<longitude>5.25576438347351</longitude>
+						<latitude>50.99091733010614</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Sachsenring</name>
+					<LookAt>
+						<longitude>12.69070956521054</longitude>
+						<latitude>50.79245262382773</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Rockingham</name>
+					<LookAt>
+						<longitude>-0.6559556270247314</longitude>
+						<latitude>52.51963769868555</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Adria International Raceway</name>
+					<LookAt>
+						<longitude>12.15437112029783</longitude>
+						<latitude>45.04506800936013</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Brands Hatch</name>
+					<LookAt>
+						<longitude>0.264311236154689</longitude>
+						<latitude>51.35808807072547</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Le Mans</name>
+					<LookAt>
+						<longitude>0.2147281803668639</longitude>
+						<latitude>47.95591199147226</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>A1 Ring</name>
+					<LookAt>
+						<longitude>14.76599309439062</longitude>
+						<latitude>47.22567493827706</latitude>
+					</LookAt>
+				</Placemark>
+			</Folder>
+			<Folder>
+				<name>Test Tracks</name>
+				<Placemark>
+					<name>Michelin Test-Center</name>
+					<LookAt>
+						<longitude>13.53603771864872</longitude>
+						<latitude>53.02450785494383</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Bosch TestTrack</name>
+					<LookAt>
+						<longitude>9.639937733529266</longitude>
+						<latitude>49.44881553243841</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>VW Test Center</name>
+					<LookAt>
+						<longitude>10.7671041989884</longitude>
+						<latitude>52.64178133413746</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>Opel Test Center</name>
+					<LookAt>
+						<longitude>8.924521595490715</longitude>
+						<latitude>49.99360058193022</latitude>
+					</LookAt>
+				</Placemark>
+				<Placemark>
+					<name>ATP Papenburg</name>
+					<LookAt>
+						<longitude>7.502614663982489</longitude>
+						<latitude>53.05391475731348</latitude>
+					</LookAt>
+				</Placemark>
+			</Folder>
+		</Folder>
+	</Document>
+</kml>

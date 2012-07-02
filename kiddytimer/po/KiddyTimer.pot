@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "01:00"
+msgstr ""
+
+msgid "??:??"
+msgstr ""
+
+msgid "Allows to controls your kids' daily TV usage"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Center screen at the lower border"
+msgstr ""
+
+msgid "Center screen at the upper border"
+msgstr ""
+
+msgid ""
+"Cheat attempt detected. \n"
+"Box has not been shudown correctly. \n"
+"Remaining time was set to 0."
+msgstr ""
+
+msgid "Clock"
+msgstr ""
+
+msgid "Decrease remaining time"
+msgstr ""
+
+msgid "Disable KiddyTimer"
+msgstr ""
+
+msgid "Discard changes and close screen"
+msgstr ""
+
+msgid "Do you want to start the kiddytimer- plugin now."
+msgstr ""
+
+msgid "Don't monitor TV started after"
+msgstr ""
+
+msgid "Don't monitor TV started before"
+msgstr ""
+
+msgid "Enable KiddyTimer"
+msgstr ""
+
+msgid "Enable KiddyTimer for x minutes"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Enter pin code"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Increase remaining time"
+msgstr ""
+
+msgid "Invalid selection"
+msgstr ""
+
+msgid "KiddyTimer"
+msgstr ""
+
+#, python-format
+msgid "Last day started: %s"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "Move clock"
+msgstr ""
+
+msgid "Move screen down"
+msgstr ""
+
+msgid "Move screen to the center of your TV"
+msgstr ""
+
+msgid "Move screen to the left"
+msgstr ""
+
+msgid "Move screen to the lower left corner"
+msgstr ""
+
+msgid "Move screen to the lower right corner"
+msgstr ""
+
+msgid "Move screen to the middle of the left border"
+msgstr ""
+
+msgid "Move screen to the middle of the right border"
+msgstr ""
+
+msgid "Move screen to the right"
+msgstr ""
+
+msgid "Move screen to the upper left corner"
+msgstr ""
+
+msgid "Move screen to the upper right corner"
+msgstr ""
+
+msgid "Move screen up"
+msgstr ""
+
+msgid "PIN"
+msgstr ""
+
+msgid "Please enter the correct pin code"
+msgstr ""
+
+msgid "Please select your KiddyTimer- option"
+msgstr ""
+
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr ""
+
+#, python-format
+msgid "Remaining time: %s"
+msgstr ""
+
+msgid "Reset clock"
+msgstr ""
+
+msgid "Reset saved position"
+msgstr ""
+
+msgid "Reset todays remaining time"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Save values and close screen"
+msgstr ""
+
+msgid "Set remaining time"
+msgstr ""
+
+msgid "Smiley"
+msgstr ""
+
+msgid "Start KiddyTimer"
+msgstr ""
+
+msgid "Stop KiddyTimer (this session only)"
+msgstr ""
+
+msgid "Style of timer"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "The pin code you entered is wrong."
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Timeout for activation dialog"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""

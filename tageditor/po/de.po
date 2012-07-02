@@ -1,0 +1,82 @@
+# German translations for enigma package.
+# Copyright (C) 2009 THE enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma 2 TagEditor Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-07-06 09:59+0100\n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
+"Language-Team: none\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+msgid "Add new tag..."
+msgstr "Neuen Tag hinzufügen..."
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Delete all tags..."
+msgstr "Alle Tags entfernen..."
+
+msgid "Delete this tag..."
+msgstr "Ausgewählten Tag entfernen..."
+
+msgid "Delete unused tags"
+msgstr "Ungenutzte Tags entfernen"
+
+msgid ""
+"Do you really want to delete all tags everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Wirklich ALLE gesetzten Tags entfernen?\n"
+"('Abbrechen' kann dies nicht rückgängig machen!)"
+
+#, python-format
+msgid ""
+"Do you really want to delete tag \"%s\" everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Wirklich den Tag \"%s\" überall entfernen?\n"
+"('Abbrechen' kann dies nicht rückgängig machen!)"
+
+#. TRANSLATORS: This is the title of the TagEditor main screen
+msgid "Edit Tags"
+msgstr "Tags bearbeiten"
+
+msgid "Load"
+msgstr "Laden"
+
+msgid "New"
+msgstr "Neu"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Please enter the new tag"
+msgstr "Bitte gib den neuen Tag an"
+
+msgid "Rename this tag..."
+msgstr "Ausgewählten Tag umbenennen..."
+
+#, python-format
+msgid ""
+"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
+"this!)"
+msgstr ""
+"Den Tag \"%s\" überall ersetzen durch:   ('Abbrechen' kann dies nicht "
+"rückgängig machen!)"
+
+#. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+#, fuzzy
+msgid "edit tags"
+msgstr "Tags bearbeiten"

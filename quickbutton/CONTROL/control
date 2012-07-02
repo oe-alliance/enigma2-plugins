@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-quickbutton
+Version: 1.0
+Description: Quickbutton: assign long key-press (red/green/yellow/blue) to plugins or E2 functions
+Maintainer: Dr. Best <dr.best@dreambox-tools.info>
+Homepage: http://www.dreambox-tools.info
+Depends: enigma2 (>> 2.6git20090518)

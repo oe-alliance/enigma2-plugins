@@ -1,0 +1,120 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins-extensions-webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-10-12 10:59+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Rob van der Does\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-plugins\\webinterface\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SearchPath-0: src\n"
+
+msgid "Allow zapping via Webinterface"
+msgstr "Zappen via Webinterface toestaan"
+
+msgid "Autowrite timer"
+msgstr "Automatisch timers schrijven"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Configuration for the Webinterface"
+msgstr "Configuratie van de Webinterface"
+
+msgid "Enable /media"
+msgstr "Activeer harde schijf"
+
+msgid "Enable HTTP Access"
+msgstr "HTTP toegang inschakelen"
+
+msgid "Enable HTTP Authentication"
+msgstr "HTTP Authenticatie inschakelen"
+
+msgid "Enable HTTPS Access"
+msgstr "HTTPS toegang inschakelen"
+
+msgid "Enable HTTPS Authentication"
+msgstr "HTTPS Authenticatie inschakelen"
+
+msgid "Enable Streaming Authentication"
+msgstr "Streaming Authenticatie inschakelen"
+
+msgid "HTTP Port"
+msgstr "HTTP Port"
+
+msgid "HTTPS Port"
+msgstr "HTTPS Port"
+
+msgid "Load movie-length"
+msgstr "Laad filmlengte"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Start Webinterface"
+msgstr "Start Webinterface"
+
+msgid "Webinterface"
+msgstr "Webinterface"
+
+msgid "Webinterface: Main Setup"
+msgstr "Webinterface: Hoofdinstellingen"
+
+#~ msgid "Add"
+#~ msgstr "Toevoegen"
+
+#~ msgid "Address"
+#~ msgstr "Adres"
+
+#~ msgid "Authorization"
+#~ msgstr "Autorisatie"
+
+#~ msgid "Change"
+#~ msgstr "Wijzigen"
+
+#~ msgid "Delete"
+#~ msgstr "Verwijderen"
+
+#~ msgid "Disabled"
+#~ msgstr "Gedeactiveerd"
+
+#~ msgid "Interfaces"
+#~ msgstr "Interfaces"
+
+#~ msgid "N/A"
+#~ msgstr "Niet beschikbaar"
+
+#~ msgid "Port"
+#~ msgstr "Poort"
+
+#~ msgid "Really delete this Interface?"
+#~ msgstr "Werkelijk deze interface verwijderen?"
+
+#~ msgid "Require Authorization"
+#~ msgstr "Autorisatie vereist"
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "SSL Encryption"
+#~ msgstr "SSL Codering"
+
+#~ msgid "Webinterface: Edit Interface"
+#~ msgstr "Webinterface: Bewerk Interface"
+
+#~ msgid "Webinterface: List of configured Interfaces"
+#~ msgstr "Webinterface: Lijst van geconfigureerde Interfaces"
+
+#~ msgid "no"
+#~ msgstr "nee"
+
+#~ msgid "yes"
+#~ msgstr "ja"

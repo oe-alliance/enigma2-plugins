@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-multirc
+Version: 1.0-20080811
+Description: Use multiple Dreamboxes with different RCs
+Maintainer: Georg Lukas <georg@op-co.de>
+Depends: enigma2 (>> 2.5git20080628)

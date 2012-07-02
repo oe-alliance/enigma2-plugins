@@ -1,0 +1,121 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins-extension-WebInterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-06-22 16:41+0100\n"
+"Last-Translator: Sebastian <zbigzbig2@op.pl>\n"
+"Language-Team: none\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Poland\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-"
+"plugins\\WebInterface\n"
+"X-Poedit-SearchPath-0: src\n"
+
+msgid "Allow zapping via Webinterface"
+msgstr "Zezwól na przełącznie z poziomu Web"
+
+msgid "Autowrite timer"
+msgstr "Zapisz automatycznie Timer"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Configuration for the Webinterface"
+msgstr "Konfigracja Webinterfejsu"
+
+msgid "Enable /media"
+msgstr "Włącz katalog /media"
+
+msgid "Enable HTTP Access"
+msgstr ""
+
+msgid "Enable HTTP Authentication"
+msgstr ""
+
+msgid "Enable HTTPS Access"
+msgstr ""
+
+msgid "Enable HTTPS Authentication"
+msgstr ""
+
+msgid "Enable Streaming Authentication"
+msgstr ""
+
+msgid "HTTP Port"
+msgstr ""
+
+msgid "HTTPS Port"
+msgstr ""
+
+msgid "Load movie-length"
+msgstr "Pokaż dlugość filmu"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Start Webinterface"
+msgstr "Uruchom Webinterfejs"
+
+msgid "Webinterface"
+msgstr "Webinterfejs"
+
+msgid "Webinterface: Main Setup"
+msgstr "Webinterfejs: Główne ustawienia"
+
+#~ msgid "Add"
+#~ msgstr "Dodaj"
+
+#~ msgid "Address"
+#~ msgstr "Adres"
+
+#~ msgid "Authorization"
+#~ msgstr "Auoryzacja"
+
+#~ msgid "Change"
+#~ msgstr "Zmień"
+
+#~ msgid "Delete"
+#~ msgstr "Usuń"
+
+#~ msgid "Disabled"
+#~ msgstr "Wyłączony"
+
+#~ msgid "Enable /hdd"
+#~ msgstr "Włącz katalog /hdd"
+
+#~ msgid "Interfaces"
+#~ msgstr "Interfejs"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "Really delete this Interface?"
+#~ msgstr "Usunąć ten Interfejs?"
+
+#~ msgid "Require Authorization"
+#~ msgstr "Wymagana autoryzacja"
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "SSL Encryption"
+#~ msgstr "SSL Kodowanie"
+
+#~ msgid "Webinterface: Edit Interface"
+#~ msgstr "Webinterfejs: Edycja"
+
+#~ msgid "Webinterface: List of configured Interfaces"
+#~ msgstr "Webinterfejs: Lista skonfigurowanych interfejsów"
+
+#~ msgid "no"
+#~ msgstr "Nie"
+
+#~ msgid "yes"
+#~ msgstr "Tak"

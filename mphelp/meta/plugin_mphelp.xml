@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+		     <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>MPHelp</name>
+                    <packagename>enigma2-plugin-systemplugins-mphelp</packagename>
+		    <shortdescription>Reusable Help-component for other plugins.</shortdescription>
+		    <description>Reusable Help-component for other plugins.</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-mphelp" />
+	  </files>
+</default>

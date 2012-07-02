@@ -1,0 +1,117 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 Webinterface locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-09-22 14:11+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Allow zapping via Webinterface"
+msgstr "Web arayüzünden kanal değişimine izin ver"
+
+msgid "Autowrite timer"
+msgstr "Zamanlayıcı otomatik yazma"
+
+msgid "Cancel"
+msgstr "Vazgeç"
+
+msgid "Configuration for the Webinterface"
+msgstr "Web arayüzünü yapılandırın"
+
+msgid "Enable /media"
+msgstr "/media yönetimine izin ver"
+
+msgid "Enable HTTP Access"
+msgstr ""
+
+msgid "Enable HTTP Authentication"
+msgstr ""
+
+msgid "Enable HTTPS Access"
+msgstr ""
+
+msgid "Enable HTTPS Authentication"
+msgstr ""
+
+msgid "Enable Streaming Authentication"
+msgstr ""
+
+msgid "HTTP Port"
+msgstr ""
+
+msgid "HTTPS Port"
+msgstr ""
+
+msgid "Load movie-length"
+msgstr "Kaydedilmiş dosyalarda süreyi göster"
+
+msgid "OK"
+msgstr "Tamam"
+
+msgid "Start Webinterface"
+msgstr "Web arayüzünü başlat"
+
+msgid "Webinterface"
+msgstr "Web arayüzü"
+
+msgid "Webinterface: Main Setup"
+msgstr "Web arayüzü: Ana kurulum"
+
+#~ msgid "Add"
+#~ msgstr "Ekle"
+
+#~ msgid "Address"
+#~ msgstr "Adres"
+
+#~ msgid "Authorization"
+#~ msgstr "Oturum izni"
+
+#~ msgid "Change"
+#~ msgstr "Değiştir"
+
+#~ msgid "Delete"
+#~ msgstr "Sil"
+
+#~ msgid "Disabled"
+#~ msgstr "Devre dışı"
+
+#~ msgid "Interfaces"
+#~ msgstr "Arayüzler"
+
+#~ msgid "N/A"
+#~ msgstr "Kullanılamaz"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "Really delete this Interface?"
+#~ msgstr "Bu arayüzü silmek istiyor musunuz?"
+
+#~ msgid "Require Authorization"
+#~ msgstr "Oturum izni gerekli mi?"
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "SSL Encryption"
+#~ msgstr "SSL şifrelemesi"
+
+#~ msgid "Webinterface: Edit Interface"
+#~ msgstr "Web arayüzü: Arayüzleri düzenle"
+
+#~ msgid "Webinterface: List of configured Interfaces"
+#~ msgstr "Web arayüzü: Yapılandırılmış arayüz listesi"
+
+#~ msgid "no"
+#~ msgstr "hayır"
+
+#~ msgid "yes"
+#~ msgstr "evet"

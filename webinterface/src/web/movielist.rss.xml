@@ -1,0 +1,26 @@
+<e2:screen name="MovieWebScreen"><e2:element source="localip" macro="ipadress" />&lt;?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" >
+	<channel>
+		<title>Enigma2 Movielist</title>
+		<link>http://<e2:element source="localip" filter="xml" /></link>
+		<description>A list of all recordings </description>
+		<generator>Enigma2 WebInterface</generator>
+		<e2:element source="MovieList" id="dirname,tag"><e2:convert type="web:ListFiller" >
+		&lt;item>
+			&lt;title><e2:item name="Title" filter="xml"/>&lt;/title>
+			&lt;description>Service: <e2:item name="ServiceName" filter="xml"/>\n
+				<e2:item name="Description" filter="xml"/>\n
+				<e2:item name="DescriptionExtended" filter="xml"/>\n
+				<e2:item name="Filename"  filter="xml"/>
+				Tags: <e2:item name="Tags" filter="xml"/>
+				ServiceReference: <e2:item name="ServiceReference" filter="xml"/>
+			&lt;/description>
+			&lt;link>http://<e2:item macro="ipadress" filter="xml" /><e2:item name="Filename" filter="urlencode"/>&lt;/link>
+			&lt;enclosure type="video/mpeg" url="http://<e2:item macro="ipadress" filter="xml" /><e2:item name="Filename" filter="urlencode"/>"/>
+			&lt;pubDate><e2:item name="TimeString" filter="xml" />&lt;/pubDate>
+			&lt;category><e2:item name="ServiceName" filter="xml" />&lt;/category>
+			&lt;author>Enigma2&lt;/author>
+		&lt;/item></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+	</channel>
+</rss>
+</e2:screen>

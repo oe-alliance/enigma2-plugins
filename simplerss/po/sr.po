@@ -1,0 +1,175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 SimpleRSS Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"PO-Revision-Date: 2009-09-27 18:13+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#, python-format
+msgid "%d Feed(s) were added to configuration."
+msgstr "%d Fid(ova) su dodati u konfiguraciju."
+
+msgid "A simple to use RSS reader"
+msgstr "Jednostavan RSS čitač"
+
+msgid "Autoupdate"
+msgstr "Autoažuriranje"
+
+msgid "Cancel"
+msgstr "Otkaži"
+
+msgid "Close"
+msgstr "Zatvori"
+
+msgid "Delete"
+msgstr "Obriši"
+
+msgid "Enclosures"
+msgstr "Prilozi"
+
+msgid "Entries"
+msgstr "Unosi"
+
+#, python-format
+msgid "Entry %s/%s"
+msgstr "Unos %s/%s"
+
+msgid ""
+"Error while parsing Feed, this usually means there is something wrong with "
+"it."
+msgstr ""
+"Greška kod analiziranja fida.ovo obično znači da nešto s njim nije u redu."
+
+msgid "Failed to get subscriptions from Google Reader."
+msgstr "Neuspešno dobijanje odobrenja od Gugl Čitača."
+
+msgid "Failed to login to Google Reader."
+msgstr "Neuspelo registrovanje u Gugl Čitač."
+
+msgid "Feed"
+msgstr "Fid"
+
+#, python-format
+msgid "Feed %s/%s"
+msgstr "Fidl %s/%s"
+
+msgid "Feed URI"
+msgstr "Fid URI"
+
+msgid "Feed is empty."
+msgstr "Fid je prazan."
+
+msgid "Fetch feeds from Google Reader?"
+msgstr "Dobavljati fidove sa Gugl Čitača?"
+
+msgid "Found no Enclosure we can display."
+msgstr "Nije nađen nijedan prilog koji se može prikazati."
+
+msgid "Google Password"
+msgstr "Gugl lozinka"
+
+msgid "Google Username"
+msgstr "Gugl korisničko ime"
+
+msgid "Keep running in background"
+msgstr "Nastavi rad u pozadini"
+
+msgid "New"
+msgstr "Novi"
+
+msgid "New Items"
+msgstr "Novi artikli"
+
+msgid "New Items since last Auto-Update"
+msgstr "Novi artikli od zadnjeg autoažuriranja"
+
+msgid "No such Item."
+msgstr "Nema takvog artikla."
+
+msgid "Notification"
+msgstr "Obaveštenje"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Preview"
+msgstr "Pregled"
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Stvarno obrisati ovaj unos?\n"
+"On ne može biti obnovljen!"
+
+#, python-format
+msgid "Received %d new news item(s)."
+msgstr "Primljeno %d novih artikala vest(i)."
+
+msgid "Setup"
+msgstr "podešavanje"
+
+msgid "Show new Messages as"
+msgstr "Pokaži nove poruke kao"
+
+msgid "Simple RSS Reader"
+msgstr "Jednostavni RSS Čitač"
+
+msgid "Simple RSS Reader Setup"
+msgstr "Podešavanje jednostavnog RSS Čitača"
+
+#, python-format
+msgid "Simple RSS Reader: %s"
+msgstr "Jednostavni RSS Čitač: %s"
+
+#, python-format
+msgid ""
+"Sorry, this type of feed is unsupported:\n"
+"%s"
+msgstr ""
+"Žao mi je, ovaj tip fida nije podržant:\n"
+"%s"
+
+msgid "Start automatically with Enigma2"
+msgstr "Pokreni automatski sa Enigmom2 "
+
+msgid "Subscribe Newsfeed..."
+msgstr "Pretplati se na fid vesti..."
+
+msgid "Ticker"
+msgstr ""
+
+msgid "Update Feed"
+msgstr "Ažuriraj fid"
+
+msgid "Update Interval (min)"
+msgstr "Ažuriraj interval (min)"
+
+msgid ""
+"Update is being done in Background.\n"
+"Contents will automatically be updated when it's done."
+msgstr ""
+"Ažuriranje se obavlja u pozadini.\n"
+"Sadržaj će automatski biti ažuriran kad se završi."
+
+msgid "View RSS..."
+msgstr "Vidi RSS ..."
+
+msgid "What to do?"
+msgstr "Šta činiti?"
+
+msgid "none"
+msgstr "nijedan"

@@ -1,0 +1,295 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 Plugin - Partnerbox\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "%d.%B %Y"
+msgstr "%d.%B %Y"
+
+msgid "(ZAP)"
+msgstr "(ZAP)"
+
+msgid "<unknown>"
+msgstr "<nepoznato>"
+
+msgid "Add"
+msgstr "Dodaj"
+
+msgid "Add timer"
+msgstr "Dodaj tajmer"
+
+msgid "After event"
+msgstr "Posle događaja"
+
+msgid "Cancel"
+msgstr "Otkaži"
+
+msgid "Channel"
+msgstr "Kanal"
+
+msgid "Clean up"
+msgstr "Očisti"
+
+msgid "Cleaning up finished timer entries..."
+msgstr "Čišćenje završenih unosa tajmera..."
+
+msgid "DVR"
+msgstr "DVR"
+
+msgid "Date"
+msgstr "Datum "
+
+msgid "Delete"
+msgstr "Obriši"
+
+msgid "Description"
+msgstr "Opis"
+
+#, python-format
+msgid ""
+"Do you really want to delete the timer \n"
+"%s ?"
+msgstr ""
+"Da li stvarno želite da obrišete tajmer \n"
+"%s ?"
+
+msgid "EPG Selection"
+msgstr "EPG Izbor"
+
+msgid "Edit"
+msgstr "Uredi"
+
+msgid "Enable Partnerbox-Function in EPGList"
+msgstr "Omogući funkciju partnerboks u EPG listi"
+
+msgid "Enable Partnerbox-Function in TimerEvent"
+msgstr "Omogući funkciju partnerboks u Tajmeru"
+
+msgid "EndTime"
+msgstr "Vreme kraja"
+
+msgid "Enigma 1"
+msgstr "Enigma 1"
+
+msgid "Enigma 2"
+msgstr "Enigma 2"
+
+msgid "Enigma Type"
+msgstr "Tip enigme"
+
+msgid "Error: No space left"
+msgstr "Greška: Nema prostora"
+
+msgid "Error: Outdated"
+msgstr "Greška: Zastareo"
+
+msgid "Error: User aborted"
+msgstr "Greška: Prekinuto od korisn."
+
+msgid "Error: Zap failed"
+msgstr "Greška: Prebacivanje neuspelo"
+
+msgid "Fri"
+msgstr "Pet"
+
+msgid "Friday"
+msgstr "Petak"
+
+msgid "Getting Channel Information..."
+msgstr "Dobijam informacije o kanalu..."
+
+msgid "Getting EPG Information..."
+msgstr "Dobijam EPG Informacije..."
+
+msgid "Getting Partnerbox Bouquet Information..."
+msgstr "Dobijam partnerboks informacije o buketu..."
+
+msgid "Getting Partnerbox Information..."
+msgstr "Dobijam partnerboks infomacije..."
+
+msgid "IP"
+msgstr "IP"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Location"
+msgstr "Lokacija"
+
+msgid "Manage timer for other dreamboxes in network"
+msgstr "Upravljaj tajmer za druge drimboksove u mreži"
+
+msgid "Mon"
+msgstr "Pon"
+
+msgid "Monday"
+msgstr "Ponedeljak"
+
+msgid "NGRAB"
+msgstr "NGRAB"
+
+msgid "Name"
+msgstr "Ime"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "OK"
+msgstr "OK"
+
+#, python-format
+msgid ""
+"Partnerbox Answer: \n"
+"%s"
+msgstr ""
+"Odgovor partnerboksa: \n"
+"%s"
+
+msgid "Partnerbox Entries"
+msgstr "Partnerboks unos"
+
+msgid "Partnerbox: Edit Entry"
+msgstr "Partnerboks: Uredi unos"
+
+msgid "Partnerbox: List of Entries"
+msgstr "Partnerboks: Lista unosa"
+
+msgid "Password"
+msgstr "Lozinka"
+
+msgid "Port"
+msgstr "Port"
+
+msgid "Really delete this Partnerbox Entry?"
+msgstr "Stvarno obrisati ovaj partnerboks unos?"
+
+msgid "Remote Timer"
+msgstr "daljinski tajmer"
+
+msgid "Remove timer"
+msgstr "Ukloni tajmer"
+
+msgid "Sat"
+msgstr "Sub"
+
+msgid "Saturday"
+msgstr "Subota"
+
+msgid "Servicelists/EPG"
+msgstr "Liste kanala/EPG"
+
+msgid "Show 'RemoteTV Player' in E-Menu"
+msgstr "Prikaži  'Daljinski TV plejer' u  E meniu"
+
+msgid "Show 'RemoteTimer' in E-Menu"
+msgstr "Prikaži  'Daljinski tajmer' u  E meniu"
+
+msgid "Show 'Stream current Service' in E-Menu"
+msgstr "Prikaži 'strim trenutnog kanala' u E meniu "
+
+msgid "StartTime"
+msgstr "Početno vreme"
+
+msgid "Stream TV from your Partnerbox"
+msgstr "Strimuj TV sa vašeg partnerboksa"
+
+msgid "Stream current service from partnerbox"
+msgstr "Aktuelles TV-Bild der Partnerbox anzeigen"
+
+msgid "Sun"
+msgstr "Ned"
+
+msgid "Sunday"
+msgstr "Nedelja"
+
+msgid "Thu"
+msgstr "Čet"
+
+msgid "Thursday"
+msgstr "Četvrtak"
+
+msgid "Timer Type"
+msgstr "Tip tajmera"
+
+msgid "Tue"
+msgstr "Uto"
+
+msgid "Tuesday"
+msgstr "Utorak"
+
+msgid "Wed"
+msgstr "Sre"
+
+msgid "Wednesday"
+msgstr "Sreda"
+
+msgid "You have to restart Enigma2 to activate your new preferences!"
+msgstr "Morate restartovati enigmu2 da aktivirate vaše nove karakteristike!"
+
+msgid "Zap"
+msgstr "Zap"
+
+msgid "Zap to service when streaming"
+msgstr ""
+
+msgid "about to start"
+msgstr "na početku"
+
+msgid "auto"
+msgstr "autom."
+
+msgid "disabled"
+msgstr "isključen"
+
+msgid "do nothing"
+msgstr "Ništa ne čini"
+
+msgid "done!"
+msgstr "učinjeno!"
+
+msgid "go to deep standby"
+msgstr "idi u duboku pripravnost"
+
+msgid "go to standby"
+msgstr "idi u pripravnost"
+
+msgid "mins"
+msgstr "minuti"
+
+msgid "record"
+msgstr "snimi "
+
+msgid "recording..."
+msgstr "snimanje..."
+
+msgid "setup for partnerbox"
+msgstr "Podešavanje partnerboksa"
+
+msgid "unknown service"
+msgstr "Nepoznat kanal"
+
+msgid "use external"
+msgstr "Koristi spoljni"
+
+msgid "use internal"
+msgstr "Koristi unutrašnji"
+
+msgid "waiting"
+msgstr "Čekanje"
+
+msgid "zap"
+msgstr "zap"
+
+msgid "zapped"
+msgstr "prebačen"

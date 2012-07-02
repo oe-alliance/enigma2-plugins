@@ -1,0 +1,1 @@
+SUBDIRS = src logodir_hdd meta

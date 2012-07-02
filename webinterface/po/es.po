@@ -1,0 +1,120 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins-extensions-webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-01-09 14:43+0100\n"
+"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
+"Language-Team: none\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-"
+"plugins\\webinterface\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: src\n"
+
+msgid "Allow zapping via Webinterface"
+msgstr "Permitir zapear via interface web"
+
+msgid "Autowrite timer"
+msgstr "Auto escribir la programación"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Configuration for the Webinterface"
+msgstr "Configuración del interface web"
+
+msgid "Enable /media"
+msgstr ""
+
+msgid "Enable HTTP Access"
+msgstr ""
+
+msgid "Enable HTTP Authentication"
+msgstr ""
+
+msgid "Enable HTTPS Access"
+msgstr ""
+
+msgid "Enable HTTPS Authentication"
+msgstr ""
+
+msgid "Enable Streaming Authentication"
+msgstr ""
+
+msgid "HTTP Port"
+msgstr ""
+
+msgid "HTTPS Port"
+msgstr ""
+
+msgid "Load movie-length"
+msgstr "Cargar la longitud de las películas"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Start Webinterface"
+msgstr "Comenzar el interface web"
+
+msgid "Webinterface"
+msgstr "Interface Web"
+
+msgid "Webinterface: Main Setup"
+msgstr "Interface web: Configuración principal"
+
+#~ msgid "Add"
+#~ msgstr "Añadir"
+
+#~ msgid "Address"
+#~ msgstr "Dirección"
+
+#~ msgid "Authorization"
+#~ msgstr "Autorización"
+
+#~ msgid "Change"
+#~ msgstr "Cambiar"
+
+#~ msgid "Delete"
+#~ msgstr "Borrar"
+
+#~ msgid "Disabled"
+#~ msgstr "Desabilitado"
+
+#~ msgid "Enable /hdd"
+#~ msgstr "Activar /hdd"
+
+#~ msgid "Interfaces"
+#~ msgstr "Interfaces"
+
+#~ msgid "Port"
+#~ msgstr "Puerto"
+
+#~ msgid "Really delete this Interface?"
+#~ msgstr "¿Seguro que queire borrar esta Interface?"
+
+#~ msgid "Require Authorization"
+#~ msgstr "Requiere Autorización"
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "SSL Encryption"
+#~ msgstr "Encriptación SSL"
+
+#~ msgid "Webinterface: Edit Interface"
+#~ msgstr "Interface web: Editar Interface"
+
+#~ msgid "Webinterface: List of configured Interfaces"
+#~ msgstr "Interface web: Lista de Interfaces configurados"
+
+#~ msgid "no"
+#~ msgstr "no"
+
+#~ msgid "yes"
+#~ msgstr "si"

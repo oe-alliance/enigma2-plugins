@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WeatherPlugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-06-12 19:06+0100\n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
+"Language-Team: Björn Freise <mcfreis@gmx.net>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+msgid "Add"
+msgstr "Hinzufügen"
+
+msgid "Back"
+msgstr "Zurück"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "City"
+msgstr "Ort"
+
+msgid "City or Postal Code"
+msgstr "Ort oder Postleitzahl"
+
+#, python-format
+msgid "Current: %s"
+msgstr "Aktuell: %s"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Getting weather information..."
+msgstr "Laden der Wetterinformationen..."
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid ""
+"No locations defined...\n"
+"Press 'Menu' to do that."
+msgstr ""
+"Keine Einträge vorhanden.\n"
+"Bitte 'Menu' drücken, um einen Eintrag anzulegen."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "Soll der Eintrag wirklich gelöscht werden?"
+
+msgid "Show Weather Forecast"
+msgstr "Zeigt die Wettervorhersage"
+
+msgid "Weather Plugin"
+msgstr "Wetterinformationen"
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr "Wetterinformationen: Eintrag bearbeiten"
+
+msgid "WeatherPlugin: List of Entries"
+msgstr "Wetterinformationen: Liste der Einträge"

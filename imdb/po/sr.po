@@ -1,0 +1,140 @@
+# German translations for enigma package.
+# Copyright (C) 2009 THE enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma 2 IMDb Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: 2009-09-10 20:30+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+
+msgid " as "
+msgstr "kao "
+
+msgid "Ambiguous results"
+msgstr "Dvosmisleni rezultati"
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cast: "
+msgstr "Uloge: "
+
+msgid "Channel Selection"
+msgstr "Izbor kanala"
+
+msgid "Could't get Eventname"
+msgstr "Nema naziva dešavanja"
+
+msgid "Details"
+msgstr "Detalji"
+
+#, python-format
+msgid "Downloading Movie Poster: %s..."
+msgstr "Skidam poster filma: %s..."
+
+msgid ""
+"Enable this to be able to access the IMDb from within the plugin browser."
+msgstr ""
+
+msgid "Enter search"
+msgstr ""
+
+msgid "Enter text to search for"
+msgstr ""
+
+msgid "Exit"
+msgstr "Izlaz"
+
+msgid "Extra Info"
+msgstr "Dodatni info"
+
+msgid "IMDb Details"
+msgstr ""
+
+msgid "IMDb Details parsed"
+msgstr "IMDb detalji analizirani"
+
+msgid "IMDb Download completed"
+msgstr "Skidanje sa IMDb završeno"
+
+msgid "IMDb Download failed"
+msgstr "Skidanje sa IMDb neuspešno"
+
+msgid "IMDb Plugin"
+msgstr "IMDb dodatak"
+
+msgid "IMDb Re-Download completed"
+msgstr "Ponovno skidanje sa IMDb završeno"
+
+msgid "IMDb Setup"
+msgstr ""
+
+msgid "IMDb query failed!"
+msgstr "IMDb upit neuspešan!"
+
+msgid "Lookup"
+msgstr "Pregledanje"
+
+msgid "No IMDb match."
+msgstr "Nema IMDb pogodaka."
+
+msgid "No cast list found in the database."
+msgstr "Nije nađena lista uloga u bazi podataka."
+
+msgid "No details found."
+msgstr "Nisu nađeni detalji."
+
+msgid "OK"
+msgstr ""
+
+msgid "Play Trailer"
+msgstr ""
+
+msgid "Please select the matching entry"
+msgstr "Molim,izaberite odgovarajući unos"
+
+#, python-format
+msgid "Query IMDb: %s..."
+msgstr "Upit IMDb: %s..."
+
+msgid "Query details from the Internet Movie Database"
+msgstr "Upit za detalje sa Internet filmske baze podataka"
+
+#, python-format
+msgid "Re-Query IMDb: %s..."
+msgstr "Ponovni upit IMDb: %s..."
+
+msgid "Search Trailer"
+msgstr ""
+
+msgid "Select from EPG"
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Show in plugin browser"
+msgstr ""
+
+msgid "The Internet Movie Database"
+msgstr "Internet filmska baza podataka"
+
+msgid "Title Menu"
+msgstr "Meni naslova"
+
+msgid "User Rating"
+msgstr ""
+
+msgid "no user rating yet"
+msgstr "Još nema korisn. ocena"

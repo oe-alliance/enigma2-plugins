@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2- zapstatistic\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/zapstatistic\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/zapstatistic\n"
+
+msgid "Close plugin"
+msgstr "Chiudere il plugin"
+
+msgid "Delete"
+msgstr "Cancellare"
+
+msgid "Delete all entries"
+msgstr "Cancellare tutte le voci"
+
+msgid "Delete entry"
+msgstr "Cancellare Voce"
+
+msgid "Durations"
+msgstr "Durate"
+
+msgid "Play entry"
+msgstr "Riprodurre la voce"
+
+msgid "Please choose a function..."
+msgstr "Selezionare una funzione..."
+
+msgid "Show combined duration window"
+msgstr "Mostrare la finestra combinata durata"
+
+msgid "Show duration window"
+msgstr "Mostrare la finestra durata"
+
+msgid "Shows the watched services with some statistic"
+msgstr "Mostrare alcune statistiche circa i canali sintonizzati "
+
+msgid "Sort (date+)"
+msgstr "Ordinare (data+)"
+
+msgid "Sort (date-)"
+msgstr "Ordinare (data-)"
+
+msgid "Sort (duration+)"
+msgstr "Ordinare (durata+)"
+
+msgid "Sort (duration-)"
+msgstr "Ordinare (durata-)"
+
+msgid "Sort (name+)"
+msgstr "Ordinare (nome+)"
+
+msgid "Sort (name-)"
+msgstr "Ordinare (nome-)"
+
+msgid "Sort by date (ascending)"
+msgstr "Ordinare per data (crescente)"
+
+msgid "Sort by date (descending)"
+msgstr "Ordinare per data (decrescente)"
+
+msgid "Sort by name (ascending)"
+msgstr "Ordinare per nome (crescente)"
+
+msgid "Sort by name (descending)"
+msgstr "Ordinare per nome (decrescente)"
+
+msgid "Zap Statistic"
+msgstr "disabled"

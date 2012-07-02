@@ -1,0 +1,26 @@
+<mphelp skin="PipzapHelp" caption="pipzap Help">
+	<page title="pipzap in four pages">
+		<text value="This guide is supposed to give you a quick look at what pipzap can do.
+\n\nFirst: You either just activated pipzap or opened the help manually. If the former is the case, don't worry: this screen shows only once ;-)
+\n\nYou can abort this help at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by pressing the BLUE button in the pizap setup inside the &quot;System&quot; settings.
+\n\n\nBut you should really consider to take the few minutes it takes to read these help pages now instead of spending more on trying to find it out how to use this plugin afterwards." />
+	</page>
+	<page title="Stop stalling! Tell me what to do already.">
+		<text value="When pipzap is activated, instead of the main picture you change the channel displayed as picture in picture.
+\nTo do so just select another (playable) service from the ChannelSelection and watch magic happen. Channels under parental control are currently not selectable as picture in picture, this might change in a future version but for now you have been warned.
+\n\nInside the context menu of the ChannelSelection (press MENU key while browsing) you can switch the service displayed as main picture without disabling pipzap.
+\nPlease not that now only the ChannelSelection changes what is displayed inside the picture in picture, but also the LEFT / RIGHT keys on your remote control."/>
+	</page>
+	<page title="This sounds surprisingly easy, what's the catch?">
+		<text value="That's the good part: besides not being able to select services under parental control, there is none.
+\n\nYou might find helpful that by default the STOP key on your remote control can be used to quickly toggle pipzap when watching Live TV, but if you find this irritating you may disable this in the pipzap Setup.
+Among other things, you can also disable the &quot;indicator&quot; shown in the opposite corner of you picture in picture if pipzap is active.
+\n\nJust take a look, it won't take long and might help you to change he behavior of this plugin more to your liking."/>
+	</page>
+	<page title="Congratulations">
+		<text value="You have reached the end of this short guide and should know by now how to use pipzap and change it's settings.
+\nIf you do not, you can bring these pages up at any later point by entering the &quot;pipzap&quot; setup which can be found inside the &quot;System&quot; settings.
+\n\n\nBefore sending you off to try out the plugin first hand, I need to tell you that the plugin currently is not fully compatible with &quot;Permanent Timeshift&quot;, which means that you are unable to toggle pipzap from within the PluginBrowser (ca be enabled from the plugin settings) or when watching a recording.
+\nThis is supposed to change in the future, but for now this is unfortunately how things are."/>
+	</page>
+</mphelp>

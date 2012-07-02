@@ -1,0 +1,224 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 - Plugin FTPBROWSER\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-09-27 18:03+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <JOVANOVIC@GMX.CH>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#, python-format
+msgid "%d kb/s"
+msgstr "%d kb/s"
+
+msgid "A basic FTP client"
+msgstr "Osnovni FTP-klijent"
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists locally.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Datoteka ovog imena %s već postoji lokalno.\n"
+"Želite li da preko nje prepišete?"
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists on the remote host.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Datoteka ovog imena %s već postoji na udaljenom hostu.\n"
+"Želite li da preko nje prepišete?"
+
+msgid ""
+"A transfer is currently in progress.\n"
+"What do you want to do?"
+msgstr ""
+"Transfer je trenutno u toku.\n"
+"Šta želite da uradite?"
+
+msgid "Abort transfer"
+msgstr "Prekini transfer"
+
+msgid "Add"
+msgstr "Dodaj"
+
+msgid "Address:"
+msgstr "Adresa:"
+
+#, python-format
+msgid "Are you sure you want to delete %s?"
+msgstr "Da li želite da obrišete %s ?"
+
+msgid "Cancel"
+msgstr "Otkaži"
+
+msgid "Configuration saved."
+msgstr "Konfiguracija sačuvana."
+
+msgid "Connect to FTP..."
+msgstr "Poveži na FTP..."
+
+msgid "Could not connect to ftp server!"
+msgstr "Ne mogu se spojiti na FTP server!"
+
+#, python-format
+msgid "Could not delete %s."
+msgstr "Ne mogu obrisati %s ."
+
+msgid "Could not obtain list of files."
+msgstr "Ne mogu dobiti listu datoteka."
+
+#, python-format
+msgid "Could not rename %s."
+msgstr "Ne mogu preimenovati %s."
+
+msgid "Delete"
+msgstr "Obriši"
+
+msgid "Download"
+msgstr "Preuzimanje"
+
+msgid "Download finished."
+msgstr "Preuzimanje završeno."
+
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr "ETA %d:%02d min"
+
+msgid "Edit"
+msgstr "Uredi"
+
+msgid "Enter URI"
+msgstr "Unesi URI "
+
+msgid "Enter URI of FTP Server:"
+msgstr "Unesi URI ili FTP server:"
+
+msgid "Enter new filename:"
+msgstr "Unesi novo ime datoteke:"
+
+msgid "Error"
+msgstr "Greška"
+
+msgid "Error during download."
+msgstr "Greška pri preuzimanju."
+
+msgid "Exit"
+msgstr "Izlaz"
+
+msgid "FTP Queue Manager"
+msgstr "FTP menadžer redosleda"
+
+msgid "FTP Server Editor"
+msgstr "Urednik FTP servera "
+
+msgid "FTP Server Manager"
+msgstr "Menadžer FTP servera"
+
+msgid "Local"
+msgstr "Lokalno"
+
+msgid "Name:"
+msgstr "Ime:"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Parent Directory"
+msgstr "Polazni direktorijum"
+
+msgid "Passive:"
+msgstr ""
+
+msgid "Password:"
+msgstr "Lozinka:"
+
+msgid "Port:"
+msgstr "Port:"
+
+msgid "Queue Manager"
+msgstr "Menadžer redosleda"
+
+msgid "Queue processed."
+msgstr "Obrađen redosled."
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Stvarno obrisati ovaj unos?\n"
+"On ne može biti obnovljen!"
+
+msgid "Remote"
+msgstr "Udaljen"
+
+msgid "Remote (not connected)"
+msgstr "Udaljen (nije spojen)"
+
+#, python-format
+msgid "Removed %s."
+msgstr "Uklonjen %s ."
+
+msgid "Removing directories is not supported."
+msgstr "Uklanjanje direktorijuma nije podržano."
+
+msgid "Rename"
+msgstr "Preimenuj"
+
+#, python-format
+msgid "Renamed %s to %s."
+msgstr "Preimenovano %s u %s ."
+
+msgid "Run in Background"
+msgstr "Radi u pozadini"
+
+msgid "Save"
+msgstr "Sačuvaj"
+
+msgid "Select local file list"
+msgstr "Izaberi listu lokalnih dat."
+
+msgid "Select remote file list"
+msgstr "Izaberi listu udaljenih dat."
+
+msgid "Server Manager"
+msgstr "Server menadžer"
+
+msgid ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+msgstr ""
+"Već postoji aktivna veza.\n"
+"Želite li da je prekinete?"
+
+msgid "There already is an active transfer."
+msgstr "Postoji aktivan transfer."
+
+msgid "Upload"
+msgstr "Podizanje"
+
+msgid "Upload finished."
+msgstr "Podizanje završeno."
+
+msgid "Username:"
+msgstr "Korisn. ime:"
+
+msgid "Which server do you want to connect to?"
+msgstr "Na koji server želite da se povežete ?"
+
+msgid "close"
+msgstr "Zatvori"
+
+msgid "enter directory/get file/put file"
+msgstr "Unesi direktorijum/uzmi dat./stavi dat."
+
+msgid "open menu"
+msgstr "Otvori meni"

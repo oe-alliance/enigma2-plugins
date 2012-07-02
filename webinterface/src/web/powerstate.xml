@@ -1,0 +1,5 @@
+<e2:screen name="PowerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2powerstate>
+	<e2instandby><e2:element source="PowerState" id="newstate"><e2:convert type="web:TextToXML" /></e2:element></e2instandby>
+</e2powerstate>
+</e2:screen>

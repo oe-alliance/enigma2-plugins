@@ -1,0 +1,175 @@
+# Spanish translations for enigma package.
+# Copyright (C) 2009 THE enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma 2-plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"PO-Revision-Date: 2009-01-09 13:40+0100\n"
+"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
+"Language-Team: none\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%d Feed(s) were added to configuration."
+msgstr "%d Fuente(s) fueron añadidas a la configuración."
+
+msgid "A simple to use RSS reader"
+msgstr "Un lector simple de RSS"
+
+msgid "Autoupdate"
+msgstr "Autoactualizar"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "Enclosures"
+msgstr "Anexos"
+
+msgid "Entries"
+msgstr "Entradas"
+
+#, python-format
+msgid "Entry %s/%s"
+msgstr "Entrada %s/%s"
+
+msgid ""
+"Error while parsing Feed, this usually means there is something wrong with "
+"it."
+msgstr ""
+"Error mientras analizaba la Fuente, esto significa normalmente que hay algo "
+"erróneo con él."
+
+msgid "Failed to get subscriptions from Google Reader."
+msgstr ""
+
+msgid "Failed to login to Google Reader."
+msgstr ""
+
+msgid "Feed"
+msgstr "Fuente"
+
+#, python-format
+msgid "Feed %s/%s"
+msgstr "Fuente %s/%s"
+
+msgid "Feed URI"
+msgstr "URI de la Fuente"
+
+msgid "Feed is empty."
+msgstr "La Fuente está vacía."
+
+msgid "Fetch feeds from Google Reader?"
+msgstr ""
+
+msgid "Found no Enclosure we can display."
+msgstr "No he encontrado Anexos que pueda visualizar."
+
+msgid "Google Password"
+msgstr ""
+
+msgid "Google Username"
+msgstr ""
+
+msgid "Keep running in background"
+msgstr "Sigue ejecutándolo en segundo plano"
+
+msgid "New"
+msgstr "Nuevo"
+
+msgid "New Items"
+msgstr "Nuevos Elementos"
+
+msgid "New Items since last Auto-Update"
+msgstr "Nuevos Elementos desde la última actualización"
+
+msgid "No such Item."
+msgstr "No hay ningún elemento."
+
+msgid "Notification"
+msgstr "Notificación"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Preview"
+msgstr "Previsualizar"
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"¿Seguro que quiere borrar esta entrada?\n"
+"¡No podrá ser recuperada!"
+
+#, python-format
+msgid "Received %d new news item(s)."
+msgstr "Recibí %d nuevos elementos de noticias."
+
+msgid "Setup"
+msgstr "Configurar"
+
+msgid "Show new Messages as"
+msgstr "Muestra nuevos Mensajes como"
+
+msgid "Simple RSS Reader"
+msgstr ""
+
+msgid "Simple RSS Reader Setup"
+msgstr ""
+
+#, python-format
+msgid "Simple RSS Reader: %s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Sorry, this type of feed is unsupported:\n"
+"%s"
+msgstr ""
+"Lo siento, este tipo de fuente no está soportada:\n"
+"%s"
+
+msgid "Start automatically with Enigma2"
+msgstr "Comenzar automáticamente con Enigma2"
+
+msgid "Subscribe Newsfeed..."
+msgstr ""
+
+msgid "Ticker"
+msgstr ""
+
+msgid "Update Feed"
+msgstr "Actualizar Fuente"
+
+msgid "Update Interval (min)"
+msgstr "Intervalo de Actualización (min)"
+
+msgid ""
+"Update is being done in Background.\n"
+"Contents will automatically be updated when it's done."
+msgstr ""
+"La Actualización se está ejecutando en segundo plano.\n"
+"Los contenidos se actualizarán automáticamente cuando termine."
+
+msgid "View RSS..."
+msgstr ""
+
+msgid "What to do?"
+msgstr "¿Que hago?"
+
+msgid "none"
+msgstr "ninguno"

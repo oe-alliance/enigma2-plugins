@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>3c5x9</author>
+                    <name>AntiScrollbar</name>
+                    <packagename>enigma2-plugin-extensions-antiscrollbar</packagename>
+                    <shortdescription>Overlay for scrolling bars</shortdescription>
+                    <description>With AntiScrollbar you can cover up annoying ticker lines (e.g. in news channels).</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_antiscrollbar.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-antiscrollbar" />
+	  </files>
+</default>

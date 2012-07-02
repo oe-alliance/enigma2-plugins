@@ -1,0 +1,271 @@
+	<!--  ##### Colors ##### -->
+	<colors>
+		<color name="background" value="#16151724"/>
+		<color name="foreground" value="#00f0f0f0"/>
+		<color name="secondBG" value="#16192034"/>
+		<color name="secondFG" value="#00fcc000"/>
+		<color name="selectedBG" value="#08303240"/>
+		<color name="selectedFG" value="#00fcc000"/>
+		<color name="noTransBG" value="#00141415"/>
+		<color name="white" value="#f0f0f0"/>
+		<color name="black" value="#0f0f0f"/>
+		<color name="yellow" value="#f3ca09"/>
+		<color name="orange" value="#FCC000"/>
+		<color name="blue" value="#879cc1"/>
+		<color name="green" value="#56C856"/>
+		<color name="red" value="#ff4A3C"/>
+		<color name="grey" value="#999999"/>
+		<color name="dark" value="#292931"/>
+		<color name="darkgrey" value="#44444a"/>
+		<color name="grey81" value="#cfcfcf"/>
+		<color name="grey90" value="#e5e5e5"/>
+		<color name="redtransparent" value="#084C0000"/>
+		<color name="greentransparent" value="#08004C00"/>
+		<color name="bluetransparent" value="#08001E4B"/>
+		<color name="yellowtransparent" value="#084B4B00"/>
+		<color name="transparent" value="#ff000000"/>
+		<color name="transpBlack" value="#65000000"/>
+		<color name="transpWhite" value="#80ffffff"/>
+		<color name="movieRecording" value="#ff4A3C"/>
+		<color name="movieWatching" value="#a0b0e9"/>
+		<color name="movieFinished" value="#56C856"/>
+	</colors>
+	
+	<!--  ##### Window ##### -->
+	<windowstyle id="0" type="skinned">
+		<title font="Replacement;19" offset="20,13"/>
+		<color color="background" name="Background"/>
+		<color color="foreground" name="LabelForeground"/>
+		<color color="background" name="ListboxBackground"/>
+		<color color="foreground" name="ListboxForeground"/>
+		<color color="selectedBG" name="ListboxSelectedBackground"/>
+		<color color="selectedFG" name="ListboxSelectedForeground"/>
+		<color color="#040a0aa0" name="ListboxMarkedBackground"/>
+		<color color="foreground" name="ListboxMarkedForeground"/>
+		<color color="#04a00a0a" name="ListboxMarkedAndSelectedBackground"/>
+		<color color="foreground" name="ListboxMarkedAndSelectedForeground"/>
+		<color color="#00d8d8d8" name="WindowTitleForeground"/>
+		<color color="#040f0f0f" name="WindowTitleBackground"/>
+		<borderset name="bsWindow">
+			<pixmap filename="Vali-XD/Vision/oben_links.png" pos="bpTopLeft"/>
+			<pixmap filename="Vali-XD/Vision/oben.png" pos="bpTop"/>
+			<pixmap filename="Vali-XD/Vision/oben_rechts.png" pos="bpTopRight"/>
+			<pixmap filename="Vali-XD/Validator/links.png" pos="bpLeft"/>
+			<pixmap filename="Vali-XD/Validator/rechts.png" pos="bpRight"/>
+			<pixmap filename="Vali-XD/Validator/unten_links.png" pos="bpBottomLeft"/>
+			<pixmap filename="Vali-XD/Validator/unten.png" pos="bpBottom"/>
+			<pixmap filename="Vali-XD/Validator/unten_rechts.png" pos="bpBottomRight"/>
+		</borderset>
+		<borderset name="bsListboxEntry">
+			<pixmap filename="Vali-XD/border/line.png" pos="bpTop"/>
+			<pixmap filename="Vali-XD/border/line.png" pos="bpBottom"/>
+		</borderset>
+	</windowstyle>
+
+
+
+	<!--  ##### InfoBars ##### -->
+	<screen backgroundColor="background" flags="wfNoBorder" name="InfoBar" position="0,429" size="1024,176" title="InfoBar">
+		<ePixmap alphatest="off" pixmap="Vali-XD/Vision/v2.png" position="0,0" size="1024,176" zPosition="0"/>
+		<widget backgroundColor="secondBG" font="Regular;18" foregroundColor="foreground" halign="left" position="890,24" render="vRendVideoSize" size="102,20" source="session.CurrentService" transparent="1" zPosition="3"/>
+		<widget backgroundColor="secondBG" font="Regular;24" foregroundColor="foreground" halign="left" position="165,22" render="vRendChNumber" size="65,28" source="session.CurrentService" transparent="1" zPosition="3"/>
+		<widget alphatest="blend" position="45,19" render="Picon" size="100,60" source="session.CurrentService" transparent="1" zPosition="4">
+			<convert type="ServiceName">Reference</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;22" foregroundColor="secondFG" halign="right" position="15,83" render="Label" size="90,24" source="global.CurrentTime" transparent="1" zPosition="3">	
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;22" foregroundColor="secondFG" halign="left" position="105,83" render="Label" size="42,24" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="ClockToText">Format::%S</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="35,106" render="Label" size="120,27" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="230,22" render="Label" size="411,28" source="session.CurrentService" transparent="1" zPosition="3">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget font="Regular;22" position="165,68" render="Label" size="60,28" source="session.Event_Now" transparent="1" zPosition="3">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget font="Regular;22" position="230,68" render="Label" size="540,28" source="session.Event_Now" transparent="1" zPosition="3">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget font="Regular;22" halign="right" position="770,68" render="Label" size="90,28" source="session.Event_Now" transparent="1" zPosition="3">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText">NoSeconds</convert>
+		</widget>
+		<widget font="Regular;22" position="165,96" render="Label" size="60,28" source="session.Event_Next" transparent="1" zPosition="3">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget font="Regular;22" position="230,96" render="Label" size="540,28" source="session.Event_Next" transparent="1" zPosition="3">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget font="Regular;22" halign="right" position="770,96" render="Label" size="90,28" source="session.Event_Next" transparent="1" zPosition="3">
+			<convert type="EventTime">Duration</convert>
+			<convert type="vConvClockToText">InStunden</convert>
+		</widget>
+		<widget backgroundColor="#04404043" pixmap="Vali-XD/infobar/p_bar.png" position="165,57" render="Progress" size="695,5" source="session.Event_Now" transparent="1" zPosition="3">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_crypt_on.png" position="710,25" render="Pixmap" size="24,20" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">IsCrypted</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_txt_on.png" position="830,25" render="Pixmap" size="30,20" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">HasTelext</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_dolby_on.png" position="741,25" render="Pixmap" size="46,20" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">IsMultichannel</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_format_on.png" position="795,25" render="Pixmap" size="27,20" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">IsWidescreen</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_sub_on.png" position="690,28" render="Pixmap" size="14,14" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">SubservicesAvailable</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/rec.png" position="690,28" render="Pixmap" size="14,14" source="session.RecordState" zPosition="4">
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_hd_on.png" position="795,25" render="Pixmap" size="27,20" source="session.CurrentService" zPosition="4">
+			<convert type="ServiceInfo">VideoWidth</convert>
+			<convert type="ValueRange">800,2000</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" halign="left" position="890,70" render="Label" size="71,20" source="session.FrontendStatus" transparent="1" zPosition="5">
+			<convert type="FrontendInfo">SNRdB</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" position="890,96" render="vRendMaxTemp" size="121,20" source="global.CurrentTime" transparent="1" zPosition="5"/>
+		<eLabel backgroundColor="darkgrey" position="890,57" size="14,5" zPosition="1"/>
+		<eLabel backgroundColor="darkgrey" position="906,57" size="14,5" zPosition="1"/>
+		<eLabel backgroundColor="darkgrey" position="922,57" size="14,5" zPosition="1"/>
+		<eLabel backgroundColor="darkgrey" position="938,57" size="14,5" zPosition="1"/>
+		<widget backgroundColor="orange" position="890,57" render="FixedLabel" size="14,5" source="session.TunerInfo" zPosition="2">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">1</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget backgroundColor="orange" position="906,57" render="FixedLabel" size="14,5" source="session.TunerInfo" zPosition="2">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">2</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget backgroundColor="orange" position="922,57" render="FixedLabel" size="14,5" source="session.TunerInfo" zPosition="2">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">4</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget backgroundColor="orange" position="938,57" render="FixedLabel" size="14,5" source="session.TunerInfo" zPosition="2">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">8</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget backgroundColor="green" position="890,57" render="FixedLabel" size="14,5" source="session.FrontendInfo" zPosition="3">
+			<convert type="FrontendInfo">NUMBER</convert>
+			<convert type="ValueRange">0,0</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget backgroundColor="green" position="906,57" render="FixedLabel" size="14,5" source="session.FrontendInfo" zPosition="3">
+			<convert type="FrontendInfo">NUMBER</convert>
+			<convert type="ValueRange">1,1</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget backgroundColor="green" position="922,57" render="FixedLabel" size="14,5" source="session.FrontendInfo" zPosition="3">
+			<convert type="FrontendInfo">NUMBER</convert>
+			<convert type="ValueRange">2,2</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget backgroundColor="green" position="938,57" render="FixedLabel" size="14,5" source="session.FrontendInfo" zPosition="3">
+			<convert type="FrontendInfo">NUMBER</convert>
+			<convert type="ValueRange">3,3</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+	</screen>
+
+	<screen backgroundColor="background" flags="wfNoBorder" name="MoviePlayer" position="0,429" size="1024,176" title="MoviePlayer">
+		<ePixmap alphatest="off" pixmap="Vali-XD/Vision/v2.png" position="0,0" size="1024,176" zPosition="0"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/dvr/dvr_klein.png" position="460,60" size="103,26" transparent="1" zPosition="2"/>
+		<widget backgroundColor="secondBG" font="Regular;18" foregroundColor="foreground" halign="left" position="875,85" render="vRendVideoSize" size="120,21" source="session.CurrentService" transparent="1" zPosition="3"/>
+		<widget backgroundColor="secondBG" font="Regular;28" foregroundColor="secondFG" halign="right" position="20,35" render="Label" size="90,32" source="global.CurrentTime" transparent="1" zPosition="3">	
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;18" foregroundColor="secondFG" halign="left" position="115,35" render="Label" size="42,24" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="ClockToText">Format:%S</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="25,90" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/dvr/mpslider.png" position="302,89" size="420,12" zPosition="5"/>
+		<widget backgroundColor="background" pointer="Vali-XD/dvr/position_pointer_mp.png:6,1" position="312,89" render="PositionGauge" size="400,12" source="session.CurrentService" transparent="1" zPosition="4">
+			<convert type="ServicePosition">Gauge</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="right" position="175,80" render="Label" size="117,22" source="session.CurrentService" transparent="1" zPosition="2">
+			<convert type="ServicePosition">Length,ShowHours</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" position="732,80" render="Label" size="117,22" source="session.CurrentService" transparent="1" zPosition="2">
+			<convert type="ServicePosition">Remaining,ShowHours</convert>
+		</widget>
+		<widget font="Regular;22" foregroundColor="foreground" halign="left" position="185,22" render="Label" size="831,27" source="session.CurrentService" transparent="1" valign="center" zPosition="2">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_dolby_on.png" position="875,60" render="Pixmap" size="46,20" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">IsMultichannel</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_format_on.png" position="925,60" render="Pixmap" size="27,20" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">IsWidescreen</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/rec.png" position="845,60" render="Pixmap" size="14,14" source="session.RecordState" zPosition="4">
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_hd_on.png" position="925,60" render="Pixmap" size="27,20" source="session.CurrentService" zPosition="4">
+			<convert type="ServiceInfo">VideoWidth</convert>
+			<convert type="ValueRange">800,2000</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+	</screen>
+
+	<screen backgroundColor="background" flags="wfNoBorder" name="DVDPlayer" position="0,429" size="1024,176" title="DVDPlayer">
+		<ePixmap alphatest="off" pixmap="Vali-XD/Vision/v2.png" position="0,0" size="1024,176" zPosition="0"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/dvr/dvr_klein.png" position="460,60" size="103,26" transparent="1" zPosition="2"/>
+		<widget backgroundColor="secondBG" font="Regular;18" foregroundColor="foreground" halign="left" position="875,85" render="vRendVideoSize" size="120,21" source="session.CurrentService" transparent="1" zPosition="3"/>
+		<widget backgroundColor="secondBG" font="Regular;28" foregroundColor="secondFG" halign="right" position="20,35" render="Label" size="90,32" source="global.CurrentTime" transparent="1" zPosition="3">	
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;18" foregroundColor="secondFG" halign="left" position="115,35" render="Label" size="42,24" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="ClockToText">Format:%S</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="25,90" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/dvr/mpslider.png" position="302,89" size="420,12" zPosition="5"/>
+		<widget backgroundColor="background" pointer="Vali-XD/dvr/position_pointer_mp.png:6,1" position="312,89" render="PositionGauge" size="400,12" source="session.CurrentService" transparent="1" zPosition="4">
+			<convert type="ServicePosition">Gauge</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="right" position="175,80" render="Label" size="117,22" source="session.CurrentService" transparent="1" zPosition="2">
+			<convert type="ServicePosition">Length,ShowHours</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" position="732,80" render="Label" size="117,22" source="session.CurrentService" transparent="1" zPosition="2">
+			<convert type="ServicePosition">Remaining,ShowHours</convert>
+		</widget>
+		<widget font="Regular;22" foregroundColor="foreground" halign="left" position="185,22" render="Label" size="831,27" source="session.CurrentService" transparent="1" valign="center" zPosition="2">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_dolby_on.png" position="875,60" render="Pixmap" size="46,20" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">IsMultichannel</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_format_on.png" position="925,60" render="Pixmap" size="27,20" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">IsWidescreen</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/Avalon/rec.png" position="845,60" render="Pixmap" size="14,14" source="session.RecordState" zPosition="4">
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+	</screen>

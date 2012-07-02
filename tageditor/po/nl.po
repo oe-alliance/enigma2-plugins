@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TagEditor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-10-12 10:57+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Rob van der Does\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Add new tag..."
+msgstr "Nieuwe tag toevoegen..."
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Delete all tags..."
+msgstr "Verwijder alle tags..."
+
+msgid "Delete this tag..."
+msgstr "Verwijder deze tag..."
+
+msgid "Delete unused tags"
+msgstr "Verwijder niet gebruikte tags"
+
+msgid ""
+"Do you really want to delete all tags everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Wilt u overal alle tags verwijderen?\n"
+"(Merk op dat 'Annulleer' dit niet ongedaan kan maken!)"
+
+#, python-format
+msgid ""
+"Do you really want to delete tag \"%s\" everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Wilt u overal tag \"%s\" verwijderen?\n"
+"(Merk op dat 'Annulleer' dit niet ongedaan kan maken!)"
+
+#. TRANSLATORS: This is the title of the TagEditor main screen
+msgid "Edit Tags"
+msgstr "Tags bewerken"
+
+msgid "Load"
+msgstr "Laad"
+
+msgid "New"
+msgstr "Nieuw"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Please enter the new tag"
+msgstr "Geef de nieuwe tag in"
+
+msgid "Rename this tag..."
+msgstr "Hernoem deze tag..."
+
+#, python-format
+msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
+msgstr "Vervang tag \"%s\" overal met:   (Merk op dat 'Annulleer' dit niet ongedaan kan maken!)"
+
+#. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+msgid "edit tags"
+msgstr "Bewerk tags"
+

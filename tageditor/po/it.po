@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - tageditor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"PO-Revision-Date: 2011-10-03 22:39+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: .../enigma2-plugins/tageditor\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/tageditor\n"
+
+msgid "Add new tag..."
+msgstr "Aggiungere nuova etichetta..."
+
+msgid "Cancel"
+msgstr "Annull."
+
+msgid "Delete all tags..."
+msgstr "Cancellare tutte le etichette"
+
+msgid "Delete this tag..."
+msgstr "Cancellare etichetta..."
+
+msgid "Delete unused tags"
+msgstr "Cancellare le etichette inutilizzate"
+
+msgid ""
+"Do you really want to delete all tags everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Cancellare ovunque tutte le etichetta?\n"
+"(Nota: \"Annull.\" non potrà annullare!)"
+
+#, python-format
+msgid ""
+"Do you really want to delete tag \"%s\" everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Cancellare ovunque l'etichetta \"%s\" ?\n"
+"(Nota: \"Annull.\" non potrà annullare!)"
+
+#. TRANSLATORS: This is the title of the TagEditor main screen
+msgid "Edit Tags"
+msgstr "Mod. etich."
+
+msgid "Load"
+msgstr "Caricare"
+
+msgid "New"
+msgstr "Nuovo"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Please enter the new tag"
+msgstr "Inserire la nuova etichetta"
+
+msgid "Rename this tag..."
+msgstr "Rinominare etichetta..."
+
+#, python-format
+msgid ""
+"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
+"this!)"
+msgstr ""
+"Sostituire ovunque l'etichetta \"%s\" con:   (Nota: \"Annull.\" non potrà "
+"annullare!)"
+
+#. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+msgid "edit tags"
+msgstr "Mod. etich."

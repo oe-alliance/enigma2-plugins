@@ -1,0 +1,18 @@
+<e2:screen name="EpgWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2eventlist><e2:element source="EpgServiceNext" id="sRef">
+	<e2:convert type="web:ListFiller" >
+	&lt;e2event>
+		&lt;e2eventid><e2:item name="EventID"/>&lt;/e2eventid>
+		&lt;e2eventstart><e2:item name="TimeStart"/>&lt;/e2eventstart>
+		&lt;e2eventduration><e2:item name="Duration"/>&lt;/e2eventduration>
+		&lt;e2eventcurrenttime><e2:item name="CurrentTime"/>&lt;/e2eventcurrenttime>
+		&lt;e2eventtitle><e2:item name="Title" filter="xml"/>&lt;/e2eventtitle>
+		&lt;e2eventdescription><e2:item name="Description" filter="xml"/>&lt;/e2eventdescription>
+		&lt;e2eventdescriptionextended><e2:item name="DescriptionExtended" filter="xml"/>&lt;/e2eventdescriptionextended>
+		&lt;e2eventservicereference><e2:item name="ServiceReference" filter="xml"/>&lt;/e2eventservicereference>
+		&lt;e2eventservicename><e2:item name="ServiceName" filter="xml"/>&lt;/e2eventservicename>
+	&lt;/e2event>
+	</e2:convert>
+	<e2:convert type="web:TextToHTML" /></e2:element>
+</e2eventlist>
+</e2:screen>

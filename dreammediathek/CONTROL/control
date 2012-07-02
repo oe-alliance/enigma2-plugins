@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-dreammediathek
+Version: 20110131
+Description: Play rtp Stream on your Dreambox 
+Maintainer: nixkoenner@newnigma2.to
+Homepage: http://www.newnigma2.to
+Depends: twisted-web

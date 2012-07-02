@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 Plugin - ZapHistoryBrowser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-09-27 18:19+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/"
+"zaphistorybrowser/src\n"
+
+msgid "Clear"
+msgstr "Očisti"
+
+msgid "Config"
+msgstr "Konfig."
+
+msgid "Delete"
+msgstr "Obriši"
+
+msgid "Enable zap history:"
+msgstr "Aktiviraj Zap istoriju:"
+
+msgid "Enigma1-like history:"
+msgstr ""
+
+msgid "Maximum zap history entries:"
+msgstr "Maksimum unosa Zap istorije:"
+
+msgid "Zap & Close"
+msgstr "Prebaci & Zatvori"
+
+msgid "Zap-History Browser"
+msgstr "Pretraživač Zap istorije"
+
+msgid "Zap-History Configurator"
+msgstr "Konfigurator Zap istorije "
+
+msgid "disabled"
+msgstr "isključen"
+
+msgid "disabled at parental lock"
+msgstr "isključen u roditeljskoj zaštiti"
+
+msgid "enabled"
+msgstr "uključen"

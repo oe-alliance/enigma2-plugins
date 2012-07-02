@@ -1,0 +1,54 @@
+# Spanish translations for enigma2-plugins package.
+# Copyright (C) 2009 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-02-10 14:36+0100\n"
+"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
+"Language-Team: none\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%d kb/s"
+msgstr "%d kb/s"
+
+msgid "?? kb/s"
+msgstr "?? kb/s"
+
+msgid "Do you want to try to open the downloaded file?"
+msgstr "¿Quiere intentar abrir el fichero descargado?"
+
+msgid "Download..."
+msgstr "Descargar..."
+
+msgid "Downloading..."
+msgstr "Descargando..."
+
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr "Falta %d:%02d min"
+
+msgid "ETA ??:?? h"
+msgstr "Falta ??:?? h"
+
+#, python-format
+msgid "Error while downloading file %s"
+msgstr "Error descargando el fichero %s"
+
+msgid "No suitable Viewer found!"
+msgstr "¡No hay Visor apropiado!"
+
+msgid "Where to save?"
+msgstr "¿Dónde guardar?"
+
+msgid "Which file do you want to download?"
+msgstr "¿Qué fichero quiere descargar?"

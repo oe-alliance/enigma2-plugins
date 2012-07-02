@@ -1,0 +1,138 @@
+
+
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  ++++++++++++++++++++++++++++++++++++++ MENU AND PLUGIN BROWSER +++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+	<!--  ##### Menus ##### -->
+	<screen backgroundColor="background" flags="wfNoBorder" name="menu_mainmenu" position="524,0" size="500,576" title="Main menu">
+		<eLabel backgroundColor="secondBG" position="0,0" size="500,152" zPosition="0"/>
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/left-shadow.png" position="0,0" size="8,720" zPosition="1"/>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/menu/merlin_on.png" position="35,35" size="100,100" zPosition="1"/>
+		<widget font="OLED;18" foregroundColor="secondFG" position="150,78" render="Label" size="300,62" source="title" transparent="1" zPosition="3"/>
+		<widget enableWrapAround="True" position="30,155" render="Listbox" scrollbarMode="showOnDemand" size="420,380" source="menu" transparent="1" zPosition="3">
+			<convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (5, 4), size = (422, 30), flags = RT_HALIGN_LEFT, text = 0) ],
+				"fonts": [gFont("Regular", 20)],
+				"itemHeight": 34}
+			</convert>
+		</widget>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="menu_information" position="524,0" size="500,576" title="Main menu">
+		<eLabel backgroundColor="secondBG" position="0,0" size="500,152" zPosition="0"/>
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/left-shadow.png" position="0,0" size="8,720" zPosition="1"/>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/menu/info_on.png" position="35,35" size="100,100" zPosition="1"/>
+		<widget font="OLED;18" foregroundColor="secondFG" position="150,78" render="Label" size="300,62" source="title" transparent="1" zPosition="3"/>
+		<widget enableWrapAround="True" position="30,155" render="Listbox" scrollbarMode="showOnDemand" size="420,380" source="menu" transparent="1" zPosition="3">
+			<convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (5, 4), size = (422, 30), flags = RT_HALIGN_LEFT, text = 0) ],
+				"fonts": [gFont("Regular", 20)],
+				"itemHeight": 34}
+			</convert>
+		</widget>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="menu_shutdown" position="524,0" size="500,576" title="Main menu">
+		<eLabel backgroundColor="secondBG" position="0,0" size="500,152" zPosition="0"/>
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/left-shadow.png" position="0,0" size="8,720" zPosition="1"/>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/menu/shutdown_on.png" position="35,35" size="100,100" zPosition="1"/>
+		<widget font="OLED;18" foregroundColor="secondFG" position="150,78" render="Label" size="300,62" source="title" transparent="1" zPosition="3"/>
+		<widget enableWrapAround="True" position="30,155" render="Listbox" scrollbarMode="showOnDemand" size="420,380" source="menu" transparent="1" zPosition="3">
+			<convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (5, 4), size = (422, 30), flags = RT_HALIGN_LEFT, text = 0) ],
+				"fonts": [gFont("Regular", 20)],
+				"itemHeight": 34}
+			</convert>
+		</widget>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="menu_harddisk" position="524,0" size="500,576" title="Main menu">
+		<eLabel backgroundColor="secondBG" position="0,0" size="500,152" zPosition="0"/>
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/left-shadow.png" position="0,0" size="8,720" zPosition="1"/>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/menu/hdd_on.png" position="35,35" size="100,100" zPosition="1"/>
+		<widget font="OLED;18" foregroundColor="secondFG" position="150,78" render="Label" size="300,62" source="title" transparent="1" zPosition="3"/>
+		<widget enableWrapAround="True" position="30,155" render="Listbox" scrollbarMode="showOnDemand" size="420,380" source="menu" transparent="1" zPosition="3">
+			<convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (5, 4), size = (422, 30), flags = RT_HALIGN_LEFT, text = 0) ],
+				"fonts": [gFont("Regular", 20)],
+				"itemHeight": 34}
+			</convert>
+		</widget>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="menu_network" position="524,0" size="500,576" title="Main menu">
+		<eLabel backgroundColor="secondBG" position="0,0" size="500,152" zPosition="0"/>
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/left-shadow.png" position="0,0" size="8,720" zPosition="1"/>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/menu/network_on.png" position="35,35" size="100,100" zPosition="1"/>
+		<widget font="OLED;18" foregroundColor="secondFG" position="150,78" render="Label" size="300,62" source="title" transparent="1" zPosition="3"/>
+		<widget enableWrapAround="True" position="30,155" render="Listbox" scrollbarMode="showOnDemand" size="420,380" source="menu" transparent="1" zPosition="3">
+			<convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (5, 4), size = (422, 30), flags = RT_HALIGN_LEFT, text = 0) ],
+				"fonts": [gFont("Regular", 20)],
+				"itemHeight": 34}
+			</convert>
+		</widget>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="menu_setup" position="524,0" size="500,576" title="Main menu">
+		<eLabel backgroundColor="secondBG" position="0,0" size="500,152" zPosition="0"/>
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/left-shadow.png" position="0,0" size="8,720" zPosition="1"/>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/menu/setup_on.png" position="35,35" size="100,100" zPosition="1"/>
+		<widget font="OLED;18" foregroundColor="secondFG" position="150,78" render="Label" size="300,62" source="title" transparent="1" zPosition="3"/>
+		<widget enableWrapAround="True" position="30,155" render="Listbox" scrollbarMode="showOnDemand" size="420,380" source="menu" transparent="1" zPosition="3">
+			<convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (5, 4), size = (422, 30), flags = RT_HALIGN_LEFT, text = 0) ],
+				"fonts": [gFont("Regular", 20)],
+				"itemHeight": 34}
+			</convert>
+		</widget>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="menu_scan" position="524,0" size="500,576" title="Main menu">
+		<eLabel backgroundColor="secondBG" position="0,0" size="500,152" zPosition="0"/>
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/left-shadow.png" position="0,0" size="8,720" zPosition="1"/>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/menu/scan_on.png" position="35,35" size="100,100" zPosition="1"/>
+		<widget font="OLED;18" foregroundColor="secondFG" position="150,78" render="Label" size="300,62" source="title" transparent="1" zPosition="3"/>
+		<widget enableWrapAround="True" position="30,155" render="Listbox" scrollbarMode="showOnDemand" size="420,380" source="menu" transparent="1" zPosition="3">
+			<convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (5, 4), size = (422, 30), flags = RT_HALIGN_LEFT, text = 0) ],
+				"fonts": [gFont("Regular", 20)],
+				"itemHeight": 34}
+			</convert>
+		</widget>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="menu_system" position="524,0" size="500,576" title="Main menu">
+		<eLabel backgroundColor="secondBG" position="0,0" size="500,152" zPosition="0"/>
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/left-shadow.png" position="0,0" size="8,720" zPosition="1"/>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/menu/system_on.png" position="35,35" size="100,100" zPosition="1"/>
+		<widget font="OLED;18" foregroundColor="secondFG" position="150,78" render="Label" size="300,62" source="title" transparent="1" zPosition="3"/>
+		<widget enableWrapAround="True" position="30,155" render="Listbox" scrollbarMode="showOnDemand" size="420,380" source="menu" transparent="1" zPosition="3">
+			<convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (5, 4), size = (422, 30), flags = RT_HALIGN_LEFT, text = 0) ],
+				"fonts": [gFont("Regular", 20)],
+				"itemHeight": 34}
+			</convert>
+		</widget>
+	</screen>
+	
+	<!--  ##### PluginBrowser ##### -->
+	<screen backgroundColor="background" flags="wfNoBorder" name="PluginBrowser" position="524,0" size="500,576" title="Plugin browser">
+		<eLabel backgroundColor="secondBG" position="0,0" size="500,77" zPosition="0"/>
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/left-shadow.png" position="0,0" size="8,720" zPosition="1"/>
+		<eLabel backgroundColor="secondBG" font="Regular;22" foregroundColor="secondFG" halign="left" position="20,30" size="430,47" text="Plugin browser" transparent="1" valign="center" zPosition="3"/>
+		<widget name="list" position="20,85" scrollbarMode="showNever" size="430,400"/>
+		<ePixmap alphatest="on" name="bg_red" pixmap="Vali-XD/buttons/red.png" position="15,500" size="35,25" transparent="1" zPosition="2"/>
+		<ePixmap alphatest="on" name="bg_green" pixmap="Vali-XD/buttons/green.png" position="15,524" size="35,25" transparent="1" zPosition="2"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="left" name="red" position="55,500" size="300,22" transparent="1" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="left" name="green" position="55,524" size="300,24" transparent="1" zPosition="2"/>
+	</screen>
+	
+	<!--  ##### Shooter-II ##### -->
+	<screen flags="wfNoBorder" name="Shooter_II" position="524,0" size="500,576" title="Shooter-II">
+		<eLabel backgroundColor="secondBG" position="0,0" size="500,77" zPosition="0"/>
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/left-shadow.png" position="0,0" size="8,720" zPosition="1"/>
+		<eLabel backgroundColor="secondBG" font="Regular;22" foregroundColor="secondFG" halign="left" position="20,30" size="430,47" text="Shooter-II" transparent="1" valign="center" zPosition="3"/>
+		<widget name="list" position="20,85" scrollbarMode="showNever" size="430,450"/>
+	</screen>

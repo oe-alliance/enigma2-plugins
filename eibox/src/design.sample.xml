@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<settings host="yourlinknxhost" port="1028" refresh="2000" debug="true"/>
+	<zones>
+		<zone id="front" name="Aussen Strassenseite" img="aussen-strasse.png">
+			<control type="goto" label="Gartenseite" target="rear" img="upper" x="318" y="26"/>
+			<control type="goto" label="Dachgeschoss" target="dg" img="upper" x="317" y="79"/>
+			<control type="goto" label="Obergeschoss" target="og" img="upper" x="316" y="132"/>
+			<control type="goto" label="Erdgeschoss" target="eg" img="upper" x="315" y="187"/>
+			<control type="goto" label="Keller" target="kg" img="upper" x="314" y="244"/>
+			<control type="switch" label="Holzlege aussen" object="beleuchtung:aussenbereich:holzlege_aussen" img="light" x="374" y="213"/>
+			<control type="switch" label="Holzlege Innen" object="beleuchtung:aussenbereich:holzlege_innen" img="light" x="449" y="200"/>
+			<control type="switch" label="Carport Aussen" object="beleuchtung:aussenbereich:carport_aussen" img="light" x="415" y="292"/>
+			<control type="switch" label="Carport Innen" object="beleuchtung:aussenbereich:carport_innen" img="light" x="478" y="254"/>
+			<control type="switch" label="Elternhaustür" object="beleuchtung:aussenbereich:wintergarten_elternhaustuer" img="light" x="73" y="142"/>
+			<control type="switch" label="Vorplatz Treppe" object="beleuchtung:aussenbereich:vorplatz_treppe" img="light" x="135" y="234"/>
+			<control type="switch" label="Alle Rollläden Südfassade" object="rolllaeden:fassaden:fenster_sued_komplett_(lang)" img="blinds" x="251" y="193"/>
+			<control type="switch" label="Alle Rollläden Westfassade" object="rolllaeden:fassaden:fenster_west_komplett_(lang)" img="blinds" x="113" y="106"/>
+			<control type="switch" label="Kellertür Reedkontakt" object="sensorik:reedkontakte:keller-eingangstuer" img="custom" on="door_open.png" off="door_closed.png" readonly="true" x="173" y="255"/>
+			<control type="switch" label="Haustür öffnen" object="sonstige:tuer:tueroeffner_timer" img="custom" on="door_open.png" off="door_closed.png" x="103" y="221"/>
+			<control type="text" label="Beleuchtungsstärke" style="" format="$1 Lux" object="sensorik:helligkeit:laubengang_helligkeit" x="419" y="40"/>
+			<control type="text" label="Aussentemperatur" style="" format="$1°C" object="sensorik:wetter:aussen" x="419" y="65"/>
+			<control type="text" label="Relative Luftfeuchtigkeit" style="" format="$1% rel.hum." object="sensorik:wetter:luftfeuchtigkeit" x="419" y="90"/>
+			<control type="text" label="Aenometer" style="" format="$1 km/h" object="sensorik:wetter:windgeschwindigkeit" x="419" y="115"/>
+			<control type="text" label="Regenmesser" style="" format="$1 mm" object="sensorik:wetter:regenmesser" x="419" y="140"/>
+			<control type="text" label="Regenmelder" style="" format="$1" object="sensorik:wetter:regenmeldung" x="480" y="140"/>
+		</zone>
+		<zone id="rear" name="Aussen Gartenseite" img="aussen-garten.png">
+			<control type="switch" label="Elternhaustür" object="beleuchtung:aussenbereich:wintergarten_elternhaustuer" img="light" x="419" y="180"/>
+			<control type="switch" label="Wintergarten Südwand" object="beleuchtung:aussenbereich:wintergarten_sued" img="light" x="379" y="223"/>
+			<control type="switch" label="Wintergarten Tisch" object="beleuchtung:aussenbereich:wintergarten_tisch" img="light" x="433" y="263"/>
+			<control type="switch" label="Kellertreppe" object="beleuchtung:aussenbereich:wintergarten_kellertreppe" img="light" x="298" y="268"/>
+			<control type="switch" label="Terasse" object="beleuchtung:aussenbereich:terasse_ost" img="light" x="232" y="293"/>
+			<control type="switch" label="Holzlege Aussen" object="beleuchtung:aussenbereich:holzlege_aussen" img="light" x="29" y="285"/>
+			<control type="switch" label="Alle Rollläden Ostfassade" object="rolllaeden:fassaden:fenster_ost_komplett_(lang)" img="blinds" x="118" y="217"/>
+			<control type="switch" label="Alle Rollläden Nordfassade" object="rolllaeden:fassaden:fenster_nord_komplett_(lang)" img="blinds" x="283" y="121"/>
+			<control type="goto" label="Dachgeschoss" target="dg" img="upper" x="345" y="76"/>
+			<control type="goto" label="Obergeschoss" target="og" img="upper" x="345" y="146"/>
+			<control type="goto" label="Erdgeschoss" target="eg" img="upper" x="342" y="206"/>
+			<control type="goto" label="Keller" target="kg" img="upper" x="341" y="275"/>
+			<control type="goto" label="Strassenseite" target="front" img="lower" x="49" y="213"/>
+		</zone>
+		<zone id="dg" name="Dachgeschoss" img="dg.png">
+			<control type="switch" label="Gäste West" object="beleuchtung:obergeschoss:gaeste_west" img="light" x="106" y="198"/>
+			<control type="switch" label="First Mitte" object="beleuchtung:obergeschoss:first_mitte" img="light" x="246" y="200"/>
+			<control type="switch" label="Justin" object="beleuchtung:obergeschoss:arbeit_justin" img="light" x="122" y="291"/>
+			<control type="switch" label="Gaube" object="beleuchtung:obergeschoss:arbeit_gaube" img="light" x="245" y="351"/>
+			<control type="switch" label="Dachflächenfenster" object="rolllaeden:og_lang:dachflaechenfenster" img="blinds" x="137" y="123"/>
+			<control type="switch" label="Fenster West" object="rolllaeden:og_lang:gaeste_fenster_west" img="blinds" x="67" y="177"/>
+			<control type="switch" label="Fenster Ost" object="rolllaeden:og_lang:gaeste_fenster_ost" img="blinds" x="463" y="175"/>
+			<control type="goto" label="Obergeschoss" target="og" img="lower" x="280" y="190"/>
+			<control type="goto" label="Gartenseite" target="rear" img="right" x="497" y="31"/>
+			<control type="goto" label="Strassenseite" target="front" img="lower" x="41" y="368"/>
+			<control type="thermostat" label="Loft" mode="raumtemperaturregelung:betriebsmodi:loft" setpoint="raumtemperaturregelung:soll-temperaturen:loft" temp="sensorik:ist-temperaturen:loft" x="216" y="111"/>
+		</zone>
+		<zone id="og" name="Obergeschoss" img="og.png">
+			<control type="switch" label="Treppe" object="beleuchtung:erdgeschoss:treppe" img="light" x="282" y="117"/>
+			<control type="switch" label="Badewanne" object="beleuchtung:obergeschoss:bad_og" img="light" x="138" y="185"/>
+			<control type="switch" label="Justin" object="beleuchtung:obergeschoss:arbeit_justin" img="light" x="136" y="296"/>
+			<control type="switch" label="OG komplett" object="beleuchtung:obergeschoss:og_komplett" img="light" x="206" y="285"/>
+			<control type="switch" label="Gaube" object="beleuchtung:obergeschoss:arbeit_gaube" img="light" x="258" y="320"/>
+			<control type="dimmer" label="Schlafzimmer Decke" dim="beleuchtung:dimmer:schlafen_decke" switch="beleuchtung:obergeschoss:schlafen_decke" value="beleuchtung:helligkeitswerte:schlafen_decke" x="382" y="67"/>
+			<control type="switch" label="Schlafzimmer Schrank" object="beleuchtung:obergeschoss:schlafen_schrank" img="light" x="376" y="293"/>
+			<control type="switch" label="Fenster Treppe Nord" object="rolllaeden:og_lang:treppe_oben_nord" img="blinds" x="242" y="64"/>
+			<control type="switch" label="Badfenster OG" object="rolllaeden:og_lang:bad_og_fenster" img="blinds" x="71" y="111"/>
+			<control type="switch" label="Arbeit Fenster West" object="rolllaeden:og_lang:arbeit_fenster_west" img="blinds" x="71" y="252"/>
+			<control type="switch" label="Arbeit Fenster Süd rechts" object="rolllaeden:og_lang:arbeit_fenster_sued_rechts" img="blinds" x="232" y="366"/>
+			<control type="switch" label="Arbeit Fenster Süd links" object="rolllaeden:og_lang:arbeit_fenster_sued_links" img="blinds" x="284" y="367"/>
+			<control type="switch" label="Schlafzimmer Fenstertür" object="rolllaeden:og_lang:schlafen_fenstertuer" img="blinds" x="472" y="258"/>
+			<control type="switch" label="Schlafzimmerfenster" object="rolllaeden:og_lang:schlafen_fenster_ost" img="blinds" x="474" y="121"/>
+			<control type="goto" label="Gartenseite" target="rear" img="right" x="281" y="23"/>
+			<control type="goto" label="Erdgeschoss" target="eg" img="lower" x="279" y="192"/>
+			<control type="goto" label="Dachgeschoss" target="dg" img="upper" x="197" y="231"/>
+			<control type="goto" label="Strassenseite" target="front" img="lower" x="29" y="377"/>
+			<control type="thermostat" label="Schlafzimmer" mode="raumtemperaturregelung:betriebsmodi:schlafen" setpoint="raumtemperaturregelung:soll-temperaturen:schlafen" temp="sensorik:ist-temperaturen:schlafen" x="361" y="183"/>
+			<control type="thermostat" label="Badezimmer OG" mode="raumtemperaturregelung:betriebsmodi:bad_og" setpoint="raumtemperaturregelung:soll-temperaturen:bad_og" temp="sensorik:ist-temperaturen:bad_og" x="120" y="99"/>
+		</zone>
+		<zone id="eg" name="Erdgeschoss" img="eg.png">
+			<control type="switch" label="Garderobe" object="beleuchtung:erdgeschoss:garderobe" img="light" x="178" y="136"/>
+			<control type="switch" label="Treppe" object="beleuchtung:erdgeschoss:treppe" img="light" x="269" y="111"/>
+			<control type="dimmer" label="Esstisch" dim="beleuchtung:dimmer:esstisch" switch="beleuchtung:erdgeschoss:esstisch" value="beleuchtung:helligkeitswerte:esstisch" x="223" y="170"/>
+			<control type="switch" label="Küche" object="beleuchtung:erdgeschoss:kueche_arbeitsflaeche" img="light" x="131" y="298"/>
+			<control type="dimmer" label="Wohnzimmer Hinten" dim="beleuchtung:dimmer:wohnzimmer_decke_1" switch="beleuchtung:erdgeschoss:wohnzimmer_decke_1" value="beleuchtung:helligkeitswerte:wohnzimmer_decke_1" x="381" y="55"/>
+			<control type="switch" label="Bad Dusche" object="beleuchtung:erdgeschoss:bad_eg" img="light" x="103" y="56"/>
+			<control type="switch" label="Wintergarten Süd" object="beleuchtung:aussenbereich:wintergarten_sued" img="light" x="93" y="11"/>
+			<control type="switch" label="Wintergarten Tisch" object="beleuchtung:aussenbereich:wintergarten_tisch" img="light" x="166" y="10"/>
+			<control type="switch" label="Wintergarten Kellertreppe" object="beleuchtung:aussenbereich:wintergarten_kellertreppe" img="light" x="212" y="47"/>
+			<control type="switch" label="Vorplatz Treppe" object="beleuchtung:aussenbereich:vorplatz_treppe" img="light" x="42" y="330"/>
+			<control type="goto" label="Keller" target="kg" img="lower" x="247" y="47"/>
+			<control type="goto" label="Obergeschoss" target="og" img="upper" x="269" y="186"/>
+			<control type="goto" label="Strassenseite" target="front" img="lower" x="42" y="375"/>
+			<control type="switch" label="Küchenfenster Süd links" object="rolllaeden:eg_lang:kueche_fenster_sued_links" img="blinds" x="164" y="368"/>
+			<control type="switch" label="Küchenfenster Süd rechts" object="rolllaeden:eg_lang:kueche_fenster_sued_rechts" img="blinds" x="220" y="367"/>
+			<control type="switch" label="Küchenfenster West" object="rolllaeden:eg_lang:kueche_fenster_west" img="blinds" x="77" y="297"/>
+			<control type="switch" label="Wohnzimmerfenster Ost" object="rolllaeden:eg_lang:wohnen_fenster_ost" img="blinds" x="457" y="129"/>
+			<control type="switch" label="Wohnzimmer Fenstertür" object="rolllaeden:eg_lang:wohnen_fenstertuer" img="blinds" x="455" y="264"/>
+			<control type="switch" label="Wohnzimmerfenster Süd" object="rolllaeden:eg_lang:wohnen_fenster_sued" img="blinds" x="374" y="367"/>
+			<control type="switch" label="EG alle Rollläden" object="rolllaeden:eg_lang:fenster_eg_komplett" img="blinds" x="496" y="220"/>
+			<control type="switch" label="EG alle Rollläden (kurz)" object="rolllaeden:eg_kurz:fenster_eg_komplett" img="blinds" x="496" y="172"/>
+			<control type="thermostat" label="Bad EG" mode="raumtemperaturregelung:betriebsmodi:bad_eg" setpoint="raumtemperaturregelung:soll-temperaturen:bad_eg" temp="sensorik:ist-temperaturen:bad_eg" x="79" y="104"/>
+			<control type="thermostat" label="Küche" mode="raumtemperaturregelung:betriebsmodi:kueche" setpoint="raumtemperaturregelung:soll-temperaturen:kueche" temp="sensorik:ist-temperaturen:kueche" x="72" y="201"/>
+			<control type="thermostat" label="Wohnzimmer" mode="raumtemperaturregelung:betriebsmodi:wohnzimmer" setpoint="raumtemperaturregelung:soll-temperaturen:wohnzimmer" temp="sensorik:ist-temperaturen:wohnzimmer" x="352" y="169"/>
+		</zone>
+		<zone id="kg" name="Keller" img="kg.png">
+			<control type="goto" label="Gartenseite" target="rear" img="right" x="508" y="30"/>
+			<control type="goto" label="Erdgeschoss" target="eg" img="upper" x="212" y="34"/>
+			<control type="switch" label="Kellertreppe" object="beleuchtung:aussenbereich:wintergarten_kellertreppe" img="light" x="250" y="50"/>
+			<control type="switch" label="Weinkeller" object="beleuchtung:aussenbereich:weinkeller" img="light" x="358" y="76"/>
+			<control type="switch" label="Lagerkeller" object="beleuchtung:aussenbereich:lagerkeller" img="light" x="366" y="178"/>
+			<control type="switch" label="Waschküche" object="beleuchtung:aussenbereich:waschkueche" img="light" x="255" y="175"/>
+			<control type="switch" label="Heizungskeller" object="beleuchtung:aussenbereich:heizungskeller" img="light" x="139" y="176"/>
+			<control type="switch" label="Vorplatz Treppe" object="beleuchtung:aussenbereich:vorplatz_treppe" img="light" x="15" y="265"/>
+			<control type="switch" label="Laubengang" object="beleuchtung:aussenbereich:laubengang" img="light" x="257" y="337"/>
+			<control type="switch" label="Kellertür Reedkontakt" object="sensorik:reedkontakte:keller-eingangstuer" img="custom" on="door_open.png" off="door_closed.png" readonly="true" x="126" y="298"/>
+			<control type="goto" label="Strassenseite" target="front" img="lower" x="48" y="378"/>
+			<control type="text" label="Temperatur Weinkeller" style="" format="$1 °C" object="sensorik:ist-temperaturen:weinkeller" x="415" y="69"/>
+			<control type="text" label="Luftfeuchtigkeit Weinkeller" style="" format="$1 %rel.hum." object="sensorik:wetter:luftfeuchtigkeit_weinkeller" x="416" y="110"/>
+		</zone>
+	</zones>
+</config>

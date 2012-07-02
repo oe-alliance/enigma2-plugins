@@ -1,0 +1,59 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2011 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-11 13:30+0000\n"
+"PO-Revision-Date: 2012-03-14 12:08+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid "1080p"
+msgstr "1080p"
+
+msgid "720p"
+msgstr "720p"
+
+msgid "Best resolution"
+msgstr "Beste resolutie"
+
+msgid "Cancel"
+msgstr "Annulee"
+
+msgid "Close Player with exit-key"
+msgstr "Sluit speler met exit-key"
+
+msgid "Extended search filter"
+msgstr "Uitgebreid zoekfilter"
+
+msgid "Max. results in list-mode"
+msgstr "Max. resultaten in list-modus"
+
+msgid "No HD streaming"
+msgstr "Geen HD streaming"
+
+msgid "Save"
+msgstr "Sla op"
+
+msgid "Show Setup in Extensions menu"
+msgstr "Show instellingen in extensies menu"
+
+msgid "YouTube-Trailer Setup"
+msgstr "YouTube-Trailer instellingen"
+
+msgid "leave movie player..."
+msgstr "verlaat movieplayer...."
+
+#~ msgid "YT-Trailer Setup"
+#~ msgstr "YT-Trailer instellingen"

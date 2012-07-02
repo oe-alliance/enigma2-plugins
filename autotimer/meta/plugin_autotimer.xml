@@ -1,0 +1,18 @@
+<default>
+	  <prerequisites>
+                    <tag type="Recording" />
+                    <tag type="EPG" />
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>AutoTimer</name>
+                    <packagename>enigma2-plugin-extensions-autotimer</packagename>
+                    <shortdescription>Automatically create timer events based on keywords</shortdescription>
+                    <description>AutoTimer scans the EPG and creates Timers depending on user-defined search  criteria.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_autotimer_en.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-autotimer" />
+	  </files>
+</default>

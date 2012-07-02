@@ -1,0 +1,255 @@
+# translation of RSDownloader_fy.po to gerrit
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# gerrit <gerrit@nedlinux.nl>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: RSDownloader_fy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: 2011-09-28 13:27+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Andy Blackburn/Rob van der Does\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid "Abort all downloads"
+msgstr "Annuleer alle downloads"
+
+msgid "Add"
+msgstr "Voeg toe"
+
+msgid "Add downloads from txt files"
+msgstr "Voeg downloads toe van tekst bestanden"
+
+msgid "Add files from container"
+msgstr "Voeg bestanden toe van container"
+
+#, python-format
+msgid "Added %s to the download-list."
+msgstr "%s toegevoegd aan de download-lijst."
+
+msgid "Allow downloading on friday:"
+msgstr "Downloaden toestaan op vrijdag:"
+
+msgid "Allow downloading on monday:"
+msgstr "Downloaden toestaan op maandag:"
+
+msgid "Allow downloading on saturday:"
+msgstr "Downloaden toestaan op zaterdag:"
+
+msgid "Allow downloading on sunday:"
+msgstr "Downloaden toestaan op zondag:"
+
+msgid "Allow downloading on thursday:"
+msgstr "Downloaden toestaan op donderdag:"
+
+msgid "Allow downloading on tuesday:"
+msgstr "Downloaden toestaan op dinsdag:"
+
+msgid "Allow downloading on wednesday:"
+msgstr "Downloaden toestaan op woensdag:"
+
+msgid "Checking"
+msgstr "Checking"
+
+msgid "Choose reconnect script:"
+msgstr "Kies herverbindings script:"
+
+msgid "Clear finished downloads"
+msgstr "Verwijder downloads die gereed zijn"
+
+msgid "Close plugin"
+msgstr "Sluit plugin"
+
+msgid "Config"
+msgstr "Configuratie"
+
+msgid "Delete"
+msgstr "Verwijderen"
+
+#, python-format
+msgid "Delete %s?"
+msgstr "Verwijder %s?"
+
+msgid "Delete download"
+msgstr "Verwijder download"
+
+msgid "Delete failed downloads"
+msgstr "Verwijder mislukte downloads"
+
+msgid "Delete log"
+msgstr "Verwijder log"
+
+msgid "Don't download after:"
+msgstr "Niet downloaden na:"
+
+msgid "Don't download before:"
+msgstr "Niet downloaden voor:"
+
+msgid "Don't reconnect after:"
+msgstr "Niet herverbinden na:"
+
+msgid "Don't reconnect before:"
+msgstr "Niet herverbinden voor:"
+
+msgid "Download files from rapidshare"
+msgstr "Gedownloade bestanden van rapidshare"
+
+msgid "Download in the background:"
+msgstr "Download in de achtergrond"
+
+msgid "Downloading"
+msgstr "Downloaden"
+
+msgid "Downloads directory:"
+msgstr "Download directrory:"
+
+msgid "Enter unrar password:"
+msgstr "Voer unrar wachtwoord in:"
+
+#, python-format
+msgid "Error while adding %s to the download-list!"
+msgstr "Fout bij het toevoegen van %s aan de lijst!"
+
+#, python-format
+msgid "Error while decrypting %s!"
+msgstr "Fout tijdens ontcijferen %s!"
+
+#, python-format
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Fout bij zoeken op http://rapidshare-search-engine.com!\n"
+"\n"
+"Fout: %s"
+
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: Nothing found, sorry."
+msgstr ""
+"Fout bij zoeken op http://rapidshare-search-engine.com!\n"
+"\n"
+"Fout: Niets gevonden, sorry."
+
+msgid "Failed"
+msgstr "Mislukt"
+
+msgid "Finished"
+msgstr "Klaar"
+
+msgid "Ignore download times:"
+msgstr "Downloadtijden negeren:"
+
+msgid "Install unrar"
+msgstr "Installeert unrar"
+
+msgid "Installing unrar..."
+msgstr "Installeert unrar..."
+
+msgid "Lists directory:"
+msgstr "Lijst directory:"
+
+msgid "Loading next page... please wait!"
+msgstr "Volgende pagina laden... een moment!"
+
+msgid "Loading previous page... please wait!"
+msgstr "Vorige pagina laden...een moment!"
+
+msgid "Mark files < 1 MB as failed:"
+msgstr "Markeer bestanden < 1 MB als mislukt:"
+
+msgid "Maximal downloads:"
+msgstr "Maximale downloads:"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "No reconnect"
+msgstr "Geen herverbinding"
+
+msgid "Nothing found, sorry."
+msgstr "Niets gevonden, sorry."
+
+msgid "Open unrar Manager"
+msgstr "Open unrar Manager"
+
+#, python-format
+msgid "Page %d / %d. Push < > to switch the page..."
+msgstr "Pagina %d / %d. Druk < > om van pagina te wisselen..."
+
+msgid "Password (netload.in):"
+msgstr "Wachtwoord (netload.in):"
+
+msgid "Password (uploaded.to):"
+msgstr "Wachtwoord (uploaded.to):"
+
+msgid "Password:"
+msgstr "Wachtwoord:"
+
+msgid "Please choose a function..."
+msgstr "Kies een functie..."
+
+msgid "RS Downloader"
+msgstr "RS downloader"
+
+msgid "Reconnect type:"
+msgstr "Herverbindings type:"
+
+msgid "Restart failed after 10 minutes:"
+msgstr "Herstart mislukt na 10 minutes:"
+
+msgid "Restart failed downloads"
+msgstr "Herstart mislukte downloads"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Script"
+msgstr "Script"
+
+msgid "Search"
+msgstr "Zoek"
+
+msgid "Search http://rapidshare-search-engine.com for:"
+msgstr "Zoek op http://rapidshare-search-engine.com naar:"
+
+msgid "Show log"
+msgstr "Toon log"
+
+msgid "Take x downloads to list:"
+msgstr "Neem x downloads van lijst:"
+
+msgid "Unrar is already working!"
+msgstr "Unrar is al bezig!"
+
+msgid "Use search engine"
+msgstr "Gebruik zoekmachine"
+
+msgid "Username (netload.in):"
+msgstr "Gebruikersnaam (netload.in):"
+
+msgid "Username (uploaded.to):"
+msgstr "Gebruikersnaam (uploaded.to):"
+
+msgid "Username:"
+msgstr "Gebruikersnaam:"
+
+msgid "Waiting"
+msgstr "Aan het wachten"
+
+msgid "Write log:"
+msgstr "Schrijf log:"
+
+msgid "fritz.Box"
+msgstr "fritz.Box"
+

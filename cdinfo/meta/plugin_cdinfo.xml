@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>Fraxinas</author>
+                    <name>CDInfo</name>
+                    <packagename>enigma2-plugin-extensions-cdinfo</packagename>
+                    <shortdescription>Get AudioCD info from CDDB and CD-Text</shortdescription>
+                    <description>CDInfo enables gathering album and track details from CDDB and CD-Text when playing Audio CDs in Mediaplayer.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_cdinfo.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-cdinfo" />
+	  </files>
+</default>

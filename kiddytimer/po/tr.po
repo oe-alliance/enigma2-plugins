@@ -1,0 +1,195 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 KiddyTimer plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 14:32+0100\n"
+"PO-Revision-Date: 2009-09-22 13:12+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "01:00"
+msgstr "01:00"
+
+msgid "??:??"
+msgstr "??:??"
+
+msgid "Allows to controls your kids' daily TV usage"
+msgstr "Çocuğunuzun TV kullanımını kontrol edin"
+
+msgid "Cancel"
+msgstr "Vazgeç"
+
+msgid "Center screen at the lower border"
+msgstr ""
+
+msgid "Center screen at the upper border"
+msgstr ""
+
+msgid ""
+"Cheat attempt detected. \n"
+"Box has not been shudown correctly. \n"
+"Remaining time was set to 0."
+msgstr ""
+
+msgid "Clock"
+msgstr "Saat"
+
+msgid "Decrease remaining time"
+msgstr ""
+
+msgid "Disable KiddyTimer"
+msgstr ""
+
+msgid "Discard changes and close screen"
+msgstr ""
+
+msgid "Do you want to start the kiddytimer- plugin now."
+msgstr "Çocuk saati eklentisini şimdi çalıştırmak istiyor musunuz?"
+
+msgid "Don't monitor TV started after"
+msgstr "TV izlemeye başladıktan sonra gösterme"
+
+msgid "Don't monitor TV started before"
+msgstr ""
+
+msgid "Enable KiddyTimer"
+msgstr ""
+
+msgid "Enable KiddyTimer for x minutes"
+msgstr ""
+
+msgid "Enabled"
+msgstr "Etkin"
+
+msgid "Enter pin code"
+msgstr "Şifreyi girin"
+
+msgid "Friday"
+msgstr "Cuma"
+
+msgid "Increase remaining time"
+msgstr ""
+
+msgid "Invalid selection"
+msgstr ""
+
+msgid "KiddyTimer"
+msgstr "Çocuk saati"
+
+#, python-format
+msgid "Last day started: %s"
+msgstr "En son başlangıç zamanı: %s"
+
+msgid "Monday"
+msgstr "Pazartesi"
+
+msgid "Move clock"
+msgstr "Saati taşı"
+
+msgid "Move screen down"
+msgstr ""
+
+msgid "Move screen to the center of your TV"
+msgstr ""
+
+msgid "Move screen to the left"
+msgstr ""
+
+msgid "Move screen to the lower left corner"
+msgstr ""
+
+msgid "Move screen to the lower right corner"
+msgstr ""
+
+msgid "Move screen to the middle of the left border"
+msgstr ""
+
+msgid "Move screen to the middle of the right border"
+msgstr ""
+
+msgid "Move screen to the right"
+msgstr ""
+
+msgid "Move screen to the upper left corner"
+msgstr ""
+
+msgid "Move screen to the upper right corner"
+msgstr ""
+
+msgid "Move screen up"
+msgstr ""
+
+msgid "PIN"
+msgstr "Şifre"
+
+msgid "Please enter the correct pin code"
+msgstr "Lütfen geçerli şifreyi girin"
+
+msgid "Please select your KiddyTimer- option"
+msgstr ""
+
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr "Eklenti: %(plugin)s , Sürüm: %(version)s"
+
+#, python-format
+msgid "Remaining time: %s"
+msgstr "Kalan süre: %s"
+
+msgid "Reset clock"
+msgstr "Saati sıfırla"
+
+msgid "Reset saved position"
+msgstr ""
+
+msgid "Reset todays remaining time"
+msgstr ""
+
+msgid "Saturday"
+msgstr "Cumartesi"
+
+msgid "Save"
+msgstr "Kaydet"
+
+msgid "Save values and close screen"
+msgstr ""
+
+msgid "Set remaining time"
+msgstr ""
+
+msgid "Smiley"
+msgstr "Animasyon"
+
+msgid "Start KiddyTimer"
+msgstr ""
+
+msgid "Stop KiddyTimer (this session only)"
+msgstr ""
+
+msgid "Style of timer"
+msgstr "Zamanlayıcı şekli"
+
+msgid "Sunday"
+msgstr "Pazar"
+
+msgid "The pin code you entered is wrong."
+msgstr ""
+
+msgid "Thursday"
+msgstr "Perşembe"
+
+msgid "Timeout for activation dialog"
+msgstr ""
+
+msgid "Tuesday"
+msgstr "Salı"
+
+msgid "Wednesday"
+msgstr "Çarşamba"

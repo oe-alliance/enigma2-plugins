@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-mosaic
+Version: 0.1-r0
+Description: Shows you screenshots of the services in a selected bouquet
+Maintainer: Nabil Hanna <nabil1978@web.de>
+Homepage: http://www.lt-forums.org/ali
+Depends: enigma2 (>= 2.6git20090724), aio-grab (>= 0.8cvs20081209)

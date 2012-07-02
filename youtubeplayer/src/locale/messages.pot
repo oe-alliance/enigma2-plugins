@@ -1,0 +1,282 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-09 16:00+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../plugin.py:103 ../plugin.py:123 ../YouTubeList.py:442
+#: ../YouTubeList.py:464 ../YouTubeList.py:486 ../YouTubeList.py:512
+msgid "Login not successful"
+msgstr ""
+
+#: ../plugin.py:146
+msgid "Search and play YouTube movies"
+msgstr ""
+
+#: ../YouTubeAddPlayList.py:36
+msgid "Name"
+msgstr ""
+
+#: ../YouTubeAddPlayList.py:37
+msgid "Description"
+msgstr ""
+
+#: ../YouTubeAddPlayList.py:53 ../YouTubeUserConfig.py:119
+msgid "Cancel"
+msgstr ""
+
+#: ../YouTubeAddPlayList.py:54 ../YouTubeUserConfig.py:120
+msgid "Save"
+msgstr ""
+
+#: ../YouTubeAddPlayList.py:59
+msgid "Playlist Name"
+msgstr ""
+
+#: ../YouTubeAddPlayList.py:60
+msgid "Playlist Description"
+msgstr ""
+
+#: ../YouTubeAddPlayList.py:61
+msgid "private"
+msgstr ""
+
+#: ../YouTubeList.py:83
+msgid "Duration"
+msgstr ""
+
+#: ../YouTubeList.py:86
+msgid "Rate"
+msgstr ""
+
+#: ../YouTubeList.py:90
+msgid "Ratings"
+msgstr ""
+
+#: ../YouTubeList.py:93
+msgid "Favorited"
+msgstr ""
+
+#: ../YouTubeList.py:96
+msgid "Views"
+msgstr ""
+
+#: ../YouTubeList.py:99
+msgid "Author:"
+msgstr ""
+
+#: ../YouTubeList.py:102
+msgid "Added"
+msgstr ""
+
+#: ../YouTubeList.py:105
+msgid "Category"
+msgstr ""
+
+#: ../YouTubeList.py:107
+msgid "Tags"
+msgstr ""
+
+#: ../YouTubeList.py:211
+msgid "Select a VLC-Server"
+msgstr ""
+
+#: ../YouTubeList.py:212
+msgid "New YouTube search"
+msgstr ""
+
+#: ../YouTubeList.py:217
+msgid "Total results"
+msgstr ""
+
+#: ../YouTubeList.py:220
+msgid "Shown"
+msgstr ""
+
+#: ../YouTubeList.py:253 ../YouTubeList.py:264
+msgid "Load further entries of current Feed?"
+msgstr ""
+
+#: ../YouTubeList.py:312
+msgid "Searching, be patient ..."
+msgstr ""
+
+#: ../YouTubeList.py:324
+msgid "Loading playlist, be patient ..."
+msgstr ""
+
+#: ../YouTubeList.py:335
+msgid "Loading favorits, be patient ..."
+msgstr ""
+
+#: ../YouTubeList.py:341
+msgid "Loading standard feed, be patient ..."
+msgstr ""
+
+#: ../YouTubeList.py:362 ../YouTubeList.py:370
+msgid "Loading additional videos, be patient ..."
+msgstr ""
+
+#: ../YouTubeList.py:374
+msgid "Loading related videos, be patient ..."
+msgstr ""
+
+#: ../YouTubeList.py:379
+msgid "Loading response videos, be patient ..."
+msgstr ""
+
+#: ../YouTubeList.py:386
+msgid "Back in history, be patient ..."
+msgstr ""
+
+#: ../YouTubeList.py:392
+msgid "Forward in history, be patient ..."
+msgstr ""
+
+#: ../YouTubeList.py:546 ../YouTubeList.py:585
+msgid "Show video detail info"
+msgstr ""
+
+#: ../YouTubeList.py:548 ../YouTubeList.py:587
+msgid "Remove from favorites"
+msgstr ""
+
+#: ../YouTubeList.py:550 ../YouTubeList.py:589
+msgid "Add to favorites"
+msgstr ""
+
+#: ../YouTubeList.py:553 ../YouTubeList.py:591
+msgid "Remove from playlist"
+msgstr ""
+
+#: ../YouTubeList.py:555 ../YouTubeList.py:593
+msgid "Add to playlist"
+msgstr ""
+
+#: ../YouTubeList.py:556 ../YouTubeList.py:594
+msgid "Get related videos"
+msgstr ""
+
+#: ../YouTubeList.py:557 ../YouTubeList.py:595
+msgid "Get video responses"
+msgstr ""
+
+#: ../YouTubePlayList.py:57
+msgid "Delete Playlist"
+msgstr ""
+
+#: ../YouTubePlayList.py:58
+msgid "Add new Playlist"
+msgstr ""
+
+#: ../YouTubePlayList.py:86
+#, python-format
+msgid "Really delete %(playlist)s?"
+msgstr ""
+
+#: ../YouTubeSearchDialog.py:67
+msgid "Std.Feeds"
+msgstr ""
+
+#: ../YouTubeSearchDialog.py:68
+msgid "Search"
+msgstr ""
+
+#: ../YouTubeSearchDialog.py:69
+msgid "Playlists"
+msgstr ""
+
+#: ../YouTubeSearchDialog.py:70
+msgid "Favorites"
+msgstr ""
+
+#: ../YouTubeSearchDialog.py:73
+msgid "Search Term(s)"
+msgstr ""
+
+#: ../YouTubeStdFeedSelection.py:40
+msgid "Most Viewed"
+msgstr ""
+
+#: ../YouTubeStdFeedSelection.py:41
+msgid "Top Rated"
+msgstr ""
+
+#: ../YouTubeStdFeedSelection.py:42
+msgid "Recently Featured"
+msgstr ""
+
+#: ../YouTubeStdFeedSelection.py:43
+msgid "Watch On Mobile"
+msgstr ""
+
+#: ../YouTubeStdFeedSelection.py:44
+msgid "Most Discussed"
+msgstr ""
+
+#: ../YouTubeStdFeedSelection.py:45
+msgid "Top Favorites"
+msgstr ""
+
+#: ../YouTubeStdFeedSelection.py:46
+msgid "Most Linked"
+msgstr ""
+
+#: ../YouTubeStdFeedSelection.py:47
+msgid "Most Responded"
+msgstr ""
+
+#: ../YouTubeStdFeedSelection.py:48
+msgid "Most Recent"
+msgstr ""
+
+#: ../YouTubeUserConfig.py:125
+msgid "User Profile Name"
+msgstr ""
+
+#: ../YouTubeUserConfig.py:126
+msgid "E-Mail Address"
+msgstr ""
+
+#: ../YouTubeUserConfig.py:127
+msgid "Password"
+msgstr ""
+
+#: ../YouTubeUserList.py:79
+msgid ""
+"To use the selected feature you have to login to YouTube. Select a user-"
+"profile to login!"
+msgstr ""
+
+#: ../YouTubeUserList.py:81
+msgid "delete user"
+msgstr ""
+
+#: ../YouTubeUserList.py:82
+msgid "add user"
+msgstr ""
+
+#: ../YouTubeUserList.py:83
+msgid "edit user"
+msgstr ""
+
+#: ../YouTubeUserList.py:84
+msgid "set default"
+msgstr ""
+
+#: ../YouTubeUserList.py:122
+#, python-format
+msgid "Really delete %(user)s?"
+msgstr ""

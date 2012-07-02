@@ -1,0 +1,143 @@
+# German translations for enigma package.
+# Copyright (C) 2009 THE enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma 2 IMDb Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: 2011-10-12 10:39+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Rob van der Does\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+msgid " as "
+msgstr " als "
+
+msgid "Ambiguous results"
+msgstr "Geen eenduidige resultaten"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Cast: "
+msgstr "Cast: "
+
+msgid "Channel Selection"
+msgstr "Kanaallijst"
+
+msgid "Could't get Eventname"
+msgstr "Kon de naam van het event niet bepalen"
+
+msgid "Details"
+msgstr "Details"
+
+#, python-format
+msgid "Downloading Movie Poster: %s..."
+msgstr "Movie poster wordt gedownload: %s..."
+
+msgid "Enable this to be able to access the IMDb from within the plugin browser."
+msgstr "Schakel dit in om de IMDb vanuit de plugin browser te kunnen benaderen."
+
+msgid "Enter search"
+msgstr "Zoeken"
+
+msgid "Enter text to search for"
+msgstr "Zoek naar (tekst)"
+
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "Extra Info"
+msgstr "Extra Info"
+
+msgid "IMDb Details"
+msgstr "IMDb Details"
+
+msgid "IMDb Details parsed"
+msgstr "IMDB details ingelezen"
+
+msgid "IMDb Download completed"
+msgstr "Download van IMDb voltooid"
+
+msgid "IMDb Download failed"
+msgstr "Download van IMDb mislukt"
+
+msgid "IMDb Plugin"
+msgstr "IMDb Plugin"
+
+msgid "IMDb Re-Download completed"
+msgstr "IMDB-Download nogmaals uitgevoerd"
+
+msgid "IMDb Setup"
+msgstr "IMDb instellingen"
+
+msgid "IMDb query failed!"
+msgstr "Zoeken in de IMDb mislukt!"
+
+msgid "Lookup"
+msgstr "Zoeken"
+
+msgid "No IMDb match."
+msgstr "Geen passende titel in de IMDB gevonden."
+
+msgid "No cast list found in the database."
+msgstr "Geen cast in de database gevonden."
+
+msgid "No details found."
+msgstr "Geen details gevonden."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Play Trailer"
+msgstr "Speel Trailer"
+
+msgid "Please select the matching entry"
+msgstr "Maak de juiste keuze"
+
+#, python-format
+msgid "Query IMDb: %s..."
+msgstr "Zoekt in de IMDb: %s..."
+
+msgid "Query details from the Internet Movie Database"
+msgstr "Filminformatie van de Internet Movie Database"
+
+#, python-format
+msgid "Re-Query IMDb: %s..."
+msgstr "Nieuwe zoekslag in de IMDb: %s..."
+
+msgid "Search Trailer"
+msgstr "Zoek Trailer"
+
+msgid "Select from EPG"
+msgstr "Kies vanuit de EPG"
+
+msgid "Setup"
+msgstr "Instellingen"
+
+msgid "Show in plugin browser"
+msgstr "Toon in plugin browser"
+
+msgid "The Internet Movie Database"
+msgstr "De Internet Movie Database"
+
+msgid "Title Menu"
+msgstr "Titel menu"
+
+msgid "User Rating"
+msgstr "Gebruikers waardering"
+
+msgid "no user rating yet"
+msgstr "nog geen gebruikers waardering"
+

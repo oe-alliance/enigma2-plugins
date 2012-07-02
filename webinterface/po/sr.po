@@ -1,0 +1,198 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins-extension-webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-"
+"plugins\\webinterface\n"
+"X-Poedit-SearchPath-0: src\n"
+
+msgid "Allow zapping via Webinterface"
+msgstr "Dozvoli promenu kanala preko vebinterfejsa"
+
+msgid "Autowrite timer"
+msgstr "Automatski tajmer"
+
+msgid "Cancel"
+msgstr "Otkaži"
+
+msgid "Configuration for the Webinterface"
+msgstr "Konfigurisanje vebinterfejsa"
+
+msgid "Enable /media"
+msgstr "Aktiviraj /media"
+
+msgid "Enable HTTP Access"
+msgstr ""
+
+msgid "Enable HTTP Authentication"
+msgstr ""
+
+msgid "Enable HTTPS Access"
+msgstr ""
+
+msgid "Enable HTTPS Authentication"
+msgstr ""
+
+msgid "Enable Streaming Authentication"
+msgstr ""
+
+msgid "HTTP Port"
+msgstr ""
+
+msgid "HTTPS Port"
+msgstr ""
+
+msgid "Load movie-length"
+msgstr "Učitaj dužinu filma"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Start Webinterface"
+msgstr "Pokreni vebinterfejs"
+
+msgid "Webinterface"
+msgstr "Vebinterfejs"
+
+msgid "Webinterface: Main Setup"
+msgstr "Vebinterfejs: Glavna podešavanja"
+
+#~ msgid "Add"
+#~ msgstr "Dodaj"
+
+#~ msgid "Address"
+#~ msgstr "Adresa"
+
+#~ msgid "Authorization"
+#~ msgstr "Odobrenje"
+
+#~ msgid "Change"
+#~ msgstr "Promeni"
+
+#~ msgid "Changing the timer for '%s' failed!"
+#~ msgstr "Timer '%s' konnte nich geändert werden!"
+
+#~ msgid "Could not add timer '%s'!"
+#~ msgstr "Timer '%s' konnte nicht hinzugefügt werden!"
+
+#~ msgid "Could not find timer '%s' with given start and end time!"
+#~ msgstr ""
+#~ "Timer '%s' mit der angegebenen Start- und Endzeit konnte nicht gefunden "
+#~ "werden!"
+
+#~ msgid "Delete"
+#~ msgstr "Izbriši"
+
+#~ msgid "Disabled"
+#~ msgstr "Isključeno"
+
+#~ msgid "EventId not found"
+#~ msgstr "EventId nicht gefunden"
+
+#~ msgid "Illegal Parameter value for Parameter begin : '%s'"
+#~ msgstr "Unerlabter Parameterwert für Parameter begin: '%s'"
+
+#~ msgid "Instant recording started"
+#~ msgstr "Sofortaufnahme gestartet"
+
+#~ msgid "Interfaces"
+#~ msgstr "Interfejsi"
+
+#~ msgid "Missing Parameter: begin"
+#~ msgstr "Fehlender Parameter: begin"
+
+#~ msgid "Missing Parameter: beginOld"
+#~ msgstr "Fehlender Parameter: beginOld"
+
+#~ msgid "Missing Parameter: description"
+#~ msgstr "Fehlender Parameter: description"
+
+#~ msgid "Missing Parameter: end"
+#~ msgstr "Fehlender Parameter: end"
+
+#~ msgid "Missing Parameter: endOld"
+#~ msgstr "Fehlender Parameter: endOld"
+
+#~ msgid "Missing Parameter: eventid"
+#~ msgstr "Fehlender Parameter: eventid"
+
+#~ msgid "Missing Parameter: name"
+#~ msgstr "Fehelnder Parameter: name"
+
+#~ msgid "Missing Parameter: sRef"
+#~ msgstr "Fehlender Parameter: sRef"
+
+#~ msgid "N/A"
+#~ msgstr "N/A"
+
+#~ msgid "No event found, started infinite recording"
+#~ msgstr "Kein Event gefunden, endlosaufnahme gestartet"
+
+#~ msgid "No matching Timer not found"
+#~ msgstr "Kein zutreffender Timer gefunden"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "Really delete this Interface?"
+#~ msgstr "Stvarno izbrisati ovaj interfejs?"
+
+#~ msgid "Require Authorization"
+#~ msgstr "Potrebno odobrenje"
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "SSL Encryption"
+#~ msgstr "SSL enkripcija"
+
+#~ msgid "The timer '%s' has been deleted successfully"
+#~ msgstr "Der Timer %s wurde erfolgreich gelöscht"
+
+#~ msgid "The timer has NOT been deleted"
+#~ msgstr "Der Timer wurde NICHT gelöscht"
+
+#~ msgid "Timer %s has been changed!"
+#~ msgstr "Timer %s wurde geändert!"
+
+#~ msgid "Timer added"
+#~ msgstr "Timer hinzugefügt"
+
+#~ msgid "Timer added successfully!"
+#~ msgstr "Timer erfolgreich hinzugefügt!"
+
+#~ msgid "Unexpected Error"
+#~ msgstr "Unerwarteter Fehler"
+
+#~ msgid "Unknown command: '%s'"
+#~ msgstr "Unbekannter Befehl: '%s'"
+
+#~ msgid "Unknown function: '%s'"
+#~ msgstr "Unbekannte Funktion: '%s'"
+
+#~ msgid "Webinterface: Edit Interface"
+#~ msgstr "Vebinterfejs: Uredi interfejs"
+
+#~ msgid "Webinterface: List of configured Interfaces"
+#~ msgstr "Vebinterfejs: Lista konfigurisanih interfejsa"
+
+#~ msgid "no"
+#~ msgstr "ne"
+
+#~ msgid "yes"
+#~ msgstr "da"

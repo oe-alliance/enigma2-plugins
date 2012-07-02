@@ -1,0 +1,231 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2011 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-09-28 12:40+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: AndyBlac/Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+#. TRANSLATORS: this is a window title.
+msgid "Add entry to phonebook"
+msgstr "Voeg toe aan telefoonboek"
+
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr "Voeg netnummer toe (indien noodzakelij)"
+
+msgid "Austria"
+msgstr "Oostenrijk"
+
+msgid "Automatically add new Caller to PhoneBook"
+msgstr "Voeg nieuwe bellers automatisch toe aan telefoonboek"
+
+msgid "Call monitoring"
+msgstr "Monitor oproepen"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Compact Flash"
+msgstr "Compact Flash"
+
+msgid "Connected to NCID Server"
+msgstr "Verbonden met NCID Server"
+
+#, python-format
+msgid ""
+"Connecting to NCID Server failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Verbinden met NCID Server mislukt\n"
+" (%s)\n"
+"Probeer opnieuw..."
+
+msgid "Connecting to NCID Server..."
+msgstr "Verbinden met NCID Server..."
+
+#, python-format
+msgid ""
+"Connection to NCID Server lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Verbinding met NCID Server kwijt\n"
+" (%s)\n"
+"probeer opnieuw..."
+
+msgid "Country"
+msgstr "Land"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Delete"
+msgstr "Verwijder"
+
+msgid "Display Fon calls on screen"
+msgstr "Toon Fon-oproepen"
+
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+"Wilt u echt de entry verwijderen voor\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Edit"
+msgstr "Bewerk"
+
+msgid "Enter Search Terms"
+msgstr "Geef zoek term in"
+
+msgid "Entry incomplete."
+msgstr "Ingave incompleet."
+
+msgid "Flash"
+msgstr "Flash"
+
+msgid "France"
+msgstr "Frankrijk"
+
+msgid "Germany"
+msgstr "Duitsland"
+
+#, python-format
+msgid ""
+"Incoming Call on %s from\n"
+"---------------------------------------------\n"
+"%s\n"
+"%s\n"
+"---------------------------------------------"
+msgstr ""
+"Inkomende oproep op %s van\n"
+"---------------------------------------------\n"
+"%s\n"
+"%s\n"
+"---------------------------------------------"
+
+msgid "Italy"
+msgstr "Italië"
+
+msgid "Last 10 calls:\n"
+msgstr "Laatste 10 oproepen:\n"
+
+msgid "Media directory"
+msgstr "Media map"
+
+#. TRANSLATORS: this is a window title.
+msgid "NCID Client - Setup"
+msgstr "NCID Client - Instellingen"
+
+msgid "NCID server (Name or IP)"
+msgstr "NCID server (Naam of IP)"
+
+msgid "NCID server listening port (1-65535)"
+msgstr "NCID server listening port (1-65535)"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Network mount"
+msgstr "Network mount"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "New"
+msgstr "Nieuw"
+
+msgid "No entry selected"
+msgstr "Niets geselecteerd"
+
+msgid "No phonebook"
+msgstr "Geen telefoonboek"
+
+msgid "Number"
+msgstr "Nummer"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "OK"
+msgstr "OK"
+
+msgid "PhoneBook Location"
+msgstr "Plaats telefoonboek"
+
+#. TRANSLATORS: this is a window title.
+msgid "Phonebook"
+msgstr "Telefoonboek"
+
+msgid "Plugin not active"
+msgstr "Plugin niet aktief"
+
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr "Reverse Lookup Caller ID (selecteer land hieronder)"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Search"
+msgstr "Zoek"
+
+msgid "Search phonebook"
+msgstr "Zoek telefoonboek"
+
+msgid "Show after Standby"
+msgstr "Toon na Standby"
+
+msgid "Show connection information popups"
+msgstr "Toon verbindings-informatie popups"
+
+msgid "Strip Leading 0"
+msgstr "Strip Leading 0"
+
+msgid "Switzerland"
+msgstr "Zwitzerland"
+
+msgid "The Netherlands"
+msgstr "Nederland"
+
+msgid "Timeout for Call Notifications (seconds)"
+msgstr "Timeout voor oproep meldingen (seconds)"
+
+msgid "UNKNOWN"
+msgstr "Onbekend"
+
+msgid "USB Device"
+msgstr "USB-apparaat"
+
+msgid "Use internal PhoneBook"
+msgstr "Gebruik intern telefoonboek"
+
+msgid "no calls"
+msgstr "geen oproepen"
+
+msgid "number suppressed"
+msgstr "nummer onderdrukt"
+
+msgid "show as list"
+msgstr "toon als lijst"
+
+msgid "show each call"
+msgstr "toon elke oproep"
+
+msgid "show nothing"
+msgstr "yoon niets"
+

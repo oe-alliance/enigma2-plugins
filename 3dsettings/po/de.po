@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 3D Settings\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-23 18:35+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dr.Best <dr.best@dreambox-tools.info>\n"
+"Language-Team: Dr. Best <dr.best@dreambox-tools.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: Germany\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "off"
+msgstr "Aus"
+
+msgid "on with side by side"
+msgstr "an mit Nebeneinander-Anzeige"
+
+msgid "on with top/bottom"
+msgstr "an mit Oben/Unten-Anzeige"
+
+msgid "Side by side"
+msgstr "Nebeneinander"
+
+msgid "Top/Bottom"
+msgstr "Oben/Unten"
+
+msgid "2D mode"
+msgstr "2D Modus"
+
+msgid "Show side by side option in extension menu"
+msgstr "Aktiviere Nebeneinander Option in Extension-Menü"
+
+msgid "Show top/bottom option in extension menu"
+msgstr "Aktiviere Oben/Unten Option in Extension-Menü"
+
+msgid "Switch OSD automatically"
+msgstr "Automatisch umstellen"
+
+msgid "Offset"
+msgstr "Offset"
+
+msgid "3D settings"
+msgstr "3D Einstellungen"
+
+msgid "3D: Enable side by side menu"
+msgstr "3D: Nebeneinander-Anzeige einschalten"
+
+msgid "3D: Enable top/bottom menu"
+msgstr "3D Oben/Unten-Anzeige einschalten"
+
+msgid "3D: disable 3D menu"
+msgstr "3D: 3D Anzeige deaktivieren"
+
+msgid "Change 3D settings"
+msgstr "3D Einstellungen bearbeiten"
+

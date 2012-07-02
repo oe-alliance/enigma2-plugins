@@ -1,0 +1,39 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"PO-Revision-Date: 2012-03-05 22:58+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/plugin.py:175 ../src/plugin.py:183
+msgid "Activate permanent clock"
+msgstr "Activate permanent clock"
+
+#: ../src/plugin.py:176
+msgid "Change permanent clock position"
+msgstr "Change permanent clock position"
+
+#: ../src/plugin.py:173 ../src/plugin.py:183
+msgid "Deactivate permanent clock"
+msgstr "Deactivate permanent clock"
+
+#: ../src/plugin.py:48 ../src/plugin.py:161 ../src/plugin.py:205
+#: ../src/plugin.py:212
+msgid "Permanent Clock"
+msgstr "Permanent Clock"
+
+#: ../src/plugin.py:212
+msgid "Shows the clock permanent on the screen"
+msgstr "Shows the clock permanent on the screen"

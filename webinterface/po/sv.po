@@ -1,0 +1,188 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins-extension-webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: WeeGull <weegull@hotmail.com>\n"
+"Language-Team:  <stephan@reichholf.net>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Allow zapping via Webinterface"
+msgstr "Tillåt zappning via Webgränssnittet"
+
+msgid "Autowrite timer"
+msgstr "Automatskapa timer"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Configuration for the Webinterface"
+msgstr "Konfiguration för Webgränssnitt"
+
+msgid "Enable /media"
+msgstr "Aktivera /media"
+
+msgid "Enable HTTP Access"
+msgstr "Aktivera HTTP tillgång"
+
+msgid "Enable HTTP Authentication"
+msgstr "Aktivera HTTP autentisering"
+
+msgid "Enable HTTPS Access"
+msgstr "Aktivera HTTPS tillgång"
+
+msgid "Enable HTTPS Authentication"
+msgstr "Aktivera HTTPS autentisering"
+
+msgid "Enable Streaming Authentication"
+msgstr "Aktivera Streaming autentisering"
+
+msgid "HTTP Port"
+msgstr "HTTP Port"
+
+msgid "HTTPS Port"
+msgstr "HTTPS Port"
+
+msgid "Load movie-length"
+msgstr "Ladda filmlängd"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Start Webinterface"
+msgstr "Starta Webgränssnitt"
+
+msgid "Webinterface"
+msgstr "Webgränssnitt"
+
+msgid "Webinterface: Main Setup"
+msgstr "Webgränssnitt: Huvudinstallation"
+
+#~ msgid "Add"
+#~ msgstr "Lägg till"
+
+#~ msgid "Address"
+#~ msgstr "Adress"
+
+#~ msgid "Authorization"
+#~ msgstr "Tillstånd"
+
+#~ msgid "Change"
+#~ msgstr "Ändra"
+
+#~ msgid "Changing the timer for '%s' failed!"
+#~ msgstr "Timer '%s' konnte nich geändert werden!"
+
+#~ msgid "Could not add timer '%s'!"
+#~ msgstr "Timer '%s' konnte nicht hinzugefügt werden!"
+
+#~ msgid "Could not find timer '%s' with given start and end time!"
+#~ msgstr ""
+#~ "Timer '%s' mit der angegebenen Start- und Endzeit konnte nicht gefunden "
+#~ "werden!"
+
+#~ msgid "Delete"
+#~ msgstr "Ta bort"
+
+#~ msgid "Disabled"
+#~ msgstr "Avaktiverat"
+
+#~ msgid "EventId not found"
+#~ msgstr "EventId nicht gefunden"
+
+#~ msgid "Illegal Parameter value for Parameter begin : '%s'"
+#~ msgstr "Unerlabter Parameterwert für Parameter begin: '%s'"
+
+#~ msgid "Instant recording started"
+#~ msgstr "Sofortaufnahme gestartet"
+
+#~ msgid "Interfaces"
+#~ msgstr "Gränssnitt"
+
+#~ msgid "Missing Parameter: begin"
+#~ msgstr "Fehlender Parameter: begin"
+
+#~ msgid "Missing Parameter: beginOld"
+#~ msgstr "Fehlender Parameter: beginOld"
+
+#~ msgid "Missing Parameter: description"
+#~ msgstr "Fehlender Parameter: description"
+
+#~ msgid "Missing Parameter: end"
+#~ msgstr "Fehlender Parameter: end"
+
+#~ msgid "Missing Parameter: endOld"
+#~ msgstr "Fehlender Parameter: endOld"
+
+#~ msgid "Missing Parameter: eventid"
+#~ msgstr "Fehlender Parameter: eventid"
+
+#~ msgid "Missing Parameter: name"
+#~ msgstr "Fehelnder Parameter: name"
+
+#~ msgid "Missing Parameter: sRef"
+#~ msgstr "Fehlender Parameter: sRef"
+
+#~ msgid "N/A"
+#~ msgstr "N/A"
+
+#~ msgid "No event found, started infinite recording"
+#~ msgstr "Kein Event gefunden, endlosaufnahme gestartet"
+
+#~ msgid "No matching Timer not found"
+#~ msgstr "Kein zutreffender Timer gefunden"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid "Really delete this Interface?"
+#~ msgstr "Verkligen ta bort detta Gränssnitt?"
+
+#~ msgid "Require Authorization"
+#~ msgstr "Kräv tillstånd"
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "SSL Encryption"
+#~ msgstr "SSL Kryptering"
+
+#~ msgid "The timer '%s' has been deleted successfully"
+#~ msgstr "Der Timer %s wurde erfolgreich gelöscht"
+
+#~ msgid "The timer has NOT been deleted"
+#~ msgstr "Der Timer wurde NICHT gelöscht"
+
+#~ msgid "Timer %s has been changed!"
+#~ msgstr "Timer %s wurde geändert!"
+
+#~ msgid "Timer added"
+#~ msgstr "Timer hinzugefügt"
+
+#~ msgid "Timer added successfully!"
+#~ msgstr "Timer erfolgreich hinzugefügt!"
+
+#~ msgid "Unexpected Error"
+#~ msgstr "Unerwarteter Fehler"
+
+#~ msgid "Unknown command: '%s'"
+#~ msgstr "Unbekannter Befehl: '%s'"
+
+#~ msgid "Unknown function: '%s'"
+#~ msgstr "Unbekannte Funktion: '%s'"
+
+#~ msgid "Webinterface: Edit Interface"
+#~ msgstr "Webgränssnitt: Ändra Gränssnitt"
+
+#~ msgid "Webinterface: List of configured Interfaces"
+#~ msgstr "Webgränssnitt: Lista konfigurerade Gränssnitt"
+
+#~ msgid "no"
+#~ msgstr "nej"
+
+#~ msgid "yes"
+#~ msgstr "ja"

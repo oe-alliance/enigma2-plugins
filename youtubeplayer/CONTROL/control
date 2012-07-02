@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-youtubeplayer
+Version: 0.2.1
+Description: Enigma2 Plugin to search and play YouTube Movies
+Maintainer: Volker Christian <volker.christian@fh-hagenberg.at>
+Homepage: http://www.i-have-a-dreambox.com/wbb2/board.php?boardid=240
+Depends: enigma2, enigma2-plugin-extensions-vlcplayer, python-twisted-web, python-gdata, python-misc, python-textutils

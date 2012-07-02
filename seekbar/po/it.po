@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - seekbar\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: /home/dario/Plugins/seekbar\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/seekbar\n"
+
+msgid "Go to position:"
+msgstr "Andare a posizione:"
+
+msgid "Jump x minutes back:"
+msgstr "Arretrare di x minuti:"
+
+msgid "Jump x minutes forward:"
+msgstr "Avanzare di x minuti:"
+
+msgid "Overwrite left and right buttons:"
+msgstr "Sovrascrivere i tasti destra - sinistra:"
+
+msgid "Seek"
+msgstr "Ricerca"
+
+msgid "Sensibility:"
+msgstr "Sensibilità:"

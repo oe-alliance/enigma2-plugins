@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-01-22 19:22+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /media/TREKSTOR/git/enigma2-plugins/webinterface\n"
+"X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/webinterface\n"
+
+msgid "Allow zapping via Webinterface"
+msgstr "Consentire zapping via webif"
+
+msgid "Autowrite timer"
+msgstr "Scrittura automatica timer"
+
+msgid "Cancel"
+msgstr "Annull."
+
+msgid "Configuration for the Webinterface"
+msgstr "Configurazione Interfaccia web"
+
+msgid "Enable /media"
+msgstr "Abilitare /media"
+
+msgid "Enable HTTP Access"
+msgstr "Abilitare accesso HTTP"
+
+msgid "Enable HTTP Authentication"
+msgstr "Abilitare autenticazione HTTP"
+
+msgid "Enable HTTPS Access"
+msgstr "Abilitare accesso HTTPS"
+
+msgid "Enable HTTPS Authentication"
+msgstr "Abilitare autenticazione HTTPS"
+
+msgid "Enable Streaming Authentication"
+msgstr "Abilitare autenticazione streaming"
+
+msgid "HTTP Port"
+msgstr "Porta HTTP"
+
+msgid "HTTPS Port"
+msgstr "Porta HTTPS"
+
+msgid "Load movie-length"
+msgstr "Caricare durata registrazioni"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Start Webinterface"
+msgstr "Avviare Interfaccia web"
+
+msgid "Webinterface"
+msgstr "Webinterface"
+
+msgid "Webinterface: Main Setup"
+msgstr "Interfaccia web - Configurazione"
+
+#~ msgid "N/A"
+#~ msgstr "N/A"
+
+#~ msgid "The sleep timer has been activated for %s minutes."
+#~ msgstr "Sleep timer è stato attivato per %s minuti.."
+
+#~ msgid "The sleep timer has been disabled."
+#~ msgstr "Sleep timer disattivato."

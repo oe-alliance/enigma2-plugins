@@ -1,0 +1,114 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"PO-Revision-Date: 2012-03-16 16:35+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: none\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Automatically zaps back to current service after given Time"
+msgstr "Automatically zaps back to current service after given Time"
+
+msgid "Custom"
+msgstr "Custom"
+
+msgid "How many minutes to wait until zapping back?"
+msgstr "How many minutes to wait until zapping back?"
+
+#, python-format
+msgid "Monitoring: %s (%d:%02d Min)"
+msgstr "Monitoring: %s (%d:%02d Min)"
+
+msgid "Rezap"
+msgstr "Rezap"
+
+msgid "Start / Stop monitoring instantly"
+msgstr "Start / Stop monitoring instantly"
+
+msgid "Start monitoring"
+msgstr "Start monitoring"
+
+msgid "Stop monitoring"
+msgstr "Stop monitoring"
+
+msgid "Stop timer"
+msgstr "Stop timer"
+
+#, python-format
+msgid ""
+"WerbeZapper\n"
+"Monitoring ends\n"
+"%s"
+msgstr ""
+"WerbeZapper\n"
+"Monitoring ends\n"
+"%s"
+
+#, python-format
+msgid ""
+"WerbeZapper\n"
+"Monitoring started\n"
+"%s"
+msgstr ""
+"WerbeZapper\n"
+"Monitoring started\n"
+"%s"
+
+msgid ""
+"WerbeZapper\n"
+"Monitoring started unlimited\n"
+"Has to be deactivated manually"
+msgstr ""
+"WerbeZapper\n"
+"Monitoring started unlimited\n"
+"Has to be deactivated manually"
+
+msgid "When to Zap back?"
+msgstr "When to Zap back?"
+
+msgid "Zapping back"
+msgstr "Zapping back"
+
+#, python-format
+msgid "Zapping back in %d Minute(s)"
+msgstr "Zapping back in %d Minute(s)"
+
+#, python-format
+msgid "Zapping back in %d:%02d Min"
+msgstr "Zapping back in %d:%02d Min"
+
+msgid "minute"
+msgstr "minute"
+
+msgid "minutes"
+msgstr "minutes"
+
+#~ msgid ""
+#~ "Monitoring:\n"
+#~ "%s (%d:%02d Min)"
+#~ msgstr ""
+#~ "Monitoring:\n"
+#~ "%s (%d:%02d Min)"
+
+#~ msgid "Start monitoring..."
+#~ msgstr "Start monitoring..."
+
+#~ msgid "Stop monitoring: %s"
+#~ msgstr "Stop monitoring: %s"
+
+#~ msgid "Stop timer (%s Min)"
+#~ msgstr "Stop timer (%s Min)"
+
+#~ msgid "Zapping back in (%s Min)"
+#~ msgstr "Zapping back in (%s Min)"

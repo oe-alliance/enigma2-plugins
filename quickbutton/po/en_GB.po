@@ -1,0 +1,108 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"PO-Revision-Date: 2012-03-16 16:31+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: none\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Assign plugin to long blue key pressed"
+msgstr "Assign plugin to long blue key pressed"
+
+msgid "Assign plugin to long green key pressed"
+msgstr "Assign plugin to long green key pressed"
+
+msgid "Assign plugin to long red key pressed"
+msgstr "Assign plugin to long red key pressed"
+
+msgid "Assign plugin to long yellow key pressed"
+msgstr "Assign plugin to long yellow key pressed"
+
+msgid "Assign plugin to red key pressed"
+msgstr "Assign plugin to red key pressed"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Display 4:3 content as"
+msgstr "Display 4:3 content as"
+
+#, python-format
+msgid ""
+"Error!\n"
+"Error Text: %s"
+msgstr ""
+"Error!\n"
+"Error Text: %s"
+
+msgid "Just Scale"
+msgstr "Just Scale"
+
+msgid "MediaPlayer"
+msgstr "MediaPlayer"
+
+msgid "Multi EPG"
+msgstr "Multi EPG"
+
+msgid "No plugin assigned!"
+msgstr "No plugin assigned!"
+
+msgid "Nothing"
+msgstr "Nothing"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Pan&Scan"
+msgstr "Pan&Scan"
+
+msgid "Pillarbox"
+msgstr "Pillarbox"
+
+msgid "Plugin browser"
+msgstr "Plugin browser"
+
+msgid "Plugin not found!"
+msgstr "Plugin not found!"
+
+msgid "Single EPG"
+msgstr "Single EPG"
+
+msgid "Timer"
+msgstr "Timer"
+
+msgid "Unknown Error"
+msgstr "Unknown Error"
+
+msgid "assigned to long blue"
+msgstr "assigned to long blue"
+
+msgid "assigned to long green"
+msgstr "assigned to long green"
+
+msgid "assigned to long red"
+msgstr "assigned to long red"
+
+msgid "assigned to long yellow"
+msgstr "assigned to long yellow"
+
+msgid "assigned to red"
+msgstr "assigned to red"
+
+msgid "setup for Quickbutton"
+msgstr "setup for Quickbutton"
+
+msgid "switch 4:3 content display"
+msgstr "switch 4:3 content display"
+

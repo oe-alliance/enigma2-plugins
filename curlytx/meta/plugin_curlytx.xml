@@ -1,0 +1,19 @@
+<default>
+ <prerequisites>
+  <tag type="Multimedia" />
+  <tag type="Network" />
+ </prerequisites>
+ <info>
+  <author>Christian Weiske</author>
+  <name>CurlyTx</name>
+  <packagename>enigma2-plugin-extensions-curlytx</packagename>
+  <shortdescription>Remote file display</shortdescription>
+  <description>Fetch and display remote text files via HTTP</description>
+  <!-- FIXME -->
+  <!--<screenshot src="http://www.dreamboxupdate.com/preview/plugin_simplerss.jpg" />-->
+ </info>
+
+ <files type="package"> <!-- without version, without .ipk -->
+  <file type="package" name="enigma2-plugin-extensions-curlytx" />
+ </files>
+</default>

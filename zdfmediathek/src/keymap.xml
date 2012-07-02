@@ -1,0 +1,17 @@
+<keymap>
+	<map context="ZDFMediathekActions">
+		<key id="KEY_LEFT" mapto="left" flags="mr" />
+		<key id="KEY_RIGHT" mapto="right" flags="mr" />
+		<key id="KEY_UP" mapto="up" flags="mr" />
+		<key id="KEY_DOWN" mapto="down" flags="mr" />
+		<key id="KEY_OK" mapto="ok" flags="m" />
+		<key id="KEY_ENTER" mapto="ok" flags="m" />
+		<key id="KEY_EXIT" mapto="back" flags="m" />
+		<key id="KEY_ESC" mapto="back" flags="m" />
+		<key id="KEY_PREVIOUS" mapto="previousList" flags="m" />
+		<key id="KEY_NEXT" mapto="nextList" flags="m" />
+		<key id="KEY_MENU" mapto="menu" flags="m" />
+		<key id="KEY_CHANNELUP" mapto="search" flags="m" />
+		<key id="KEY_CHANNELDOWN" mapto="previousPage" flags="m" />
+	</map>
+</keymap>

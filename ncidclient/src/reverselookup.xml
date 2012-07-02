@@ -1,0 +1,1544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- reverselookup.xml revision 1.03 from 20, Jun 2008
+
+	 The syntax of this file is fairly self-explanatory
+     However, a few things need to be said. First and foremost
+     everything in here needs to be xml compliant, that means all
+     quotes, pound signs etc need to be properly escaped!!!
+     Otherwise jfritz will refuse too load due to of SAX errors.
+     
+     Websites and pattern entries are processed in the order they
+     are placed. This is important when determining what web site should
+     be used first and what pattern should be used for that web site first.
+   	 As soon as one matching name is found, jfritz will stop trying other
+   	 patterns / entries.
+   	 +46
+   	 Make sure that each url entry contains the string $NUMBER at the
+   	 appropriate spot or else the algorithm won't work! The attributes prefix
+   	 and areacode are optional. The attribute prefix is used to determine if 
+   	 the number needs the area code prefix or not. if the attribute area code
+   	 is set make sure to include string $AREACODE, or $PFXAREACODE at the
+   	 appropriate spot in the url. For more info see http://www.jfritz.org
+   	    	 
+-->
+
+<reverselookup version="1.01">
+	<country code="+1">
+		<website name="whitepages.com" url="http://www.whitepages.com/search/ReversePhone?phone=$NUMBER" prefix="1">
+			<entry firstOccurance="firstname">
+				<firstname>'FIRST'\s*:\s*&quot;([^&quot;]*)&quot;,</firstname>
+				<lastname>'LAST'\s*:\s*&quot;([^&quot;]*)&quot;,</lastname>
+				<street>'ADDRESS'\s*:\s*&quot;([^&quot;]*)&quot;,</street>
+				<city>'CITY'\s*:\s*&quot;([^&quot;]*)&quot;,</city>
+				<zipcode>'ZIP'\s*:\s*&quot;([^&quot;]*)&quot;,</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+1x">
+		<website name="caribbeanyellowpages.com" url="http://www.caribbeanyellowpages.com/yellowsearch.html?heading=$AREACODE$NUMBER&amp;submit2=Search&amp;ListingAgentFormat=eSYPE" prefix="" hidden="@HiddenXDoc&quot;\s*?value=&quot;([^&quot;]*)&quot;" nexturl="http://www.caribbeanyellowpages.com/ListBossPage.html?eRequestedPageType=ListingsByPhone&amp;ListingAgentFormat=eSUPE&amp;ClassID=&amp;ProductID=&amp;Tab=&amp;DoSetCookie=off&amp;Alphabet=&amp;DisableViewSwitch=false&amp;PageBossPageNumber=-1&amp;ListBossPageNumber=-1&amp;HiddenXDoc=$HIDDEN&amp;IProdItemID=&amp;originalquery=$AREACODE$NUMBER">
+			<entry>
+				<name>SUPEfindingLine[^&gt;]*&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;td\sstyle=&quot;padding-right:\s*4px;\s*padding-left:\s*4px;&quot;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+1345">
+		<website name="caymanislandsyp.com" url="http://www.caymanislandsyp.com/ListBossPage.html?heading=$PART1-$PART2&amp;submit2=Search&amp;ListingAgentFormat=eSYPE" prefix="" hidden="@HiddenXDoc&quot;\s*?value=&quot;([^&quot;]*)&quot;" nexturl="http://www.caymanislandsyp.com/ListBossPage.html?eRequestedPageType=ListingsByPhone&amp;ListingAgentFormat=eSUPE&amp;ClassID=&amp;ProductID=&amp;Tab=&amp;DoSetCookie=off&amp;Alphabet=&amp;DisableViewSwitch=false&amp;PageBossPageNumber=-1&amp;ListBossPageNumber=-1&amp;HiddenXDoc=$HIDDEN&amp;IProdItemID=&amp;originalquery=$NUMBER">
+			<entry>
+				<name>SUPEfindingLine&quot;?&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;td\sstyle=&quot;padding-right:\s*4px;\s*padding-left:\s*4px;&quot;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+1441">
+		<website name="bermudayp.com" url="http://www.informationpages.com/sys/pageserver.dll?b=43&amp;p=0&amp;s=-6&amp;f=&amp;gp=0&amp;go=$NUMBER" prefix="">
+			<entry>
+				<name>class.NameLink&quot;?&gt;([^&lt;]*)&lt;</name>
+				<street>ltext0&quot;?&gt;(?:&lt;t[^&lt;]*&lt;[^&lt;]*&lt;[^&lt;]*&lt;[^&lt;]*&lt;[^&lt;]*&lt;[^&lt;]*&lt;td&gt;)?([^,]*),</street>
+				<city>ltext0&quot;?&gt;(?:&lt;t[^&lt;]*&lt;[^&lt;]*&lt;[^&lt;]*&lt;[^&lt;]*&lt;[^&lt;]*&lt;[^&lt;]*&lt;td&gt;)?[^,]*,([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+1670">
+		<website name="cnmiphonebook.com" url="http://www.informationpages.com/sys/pageserver.dll?b=390&amp;p=1&amp;s=-4&amp;f=&amp;gp=&amp;go=$NUMBER" prefix="">
+			<entry>
+				<name>SPAN\sCLASS=WN\sSTYLE=&quot;(?:[^B]*)BACKGROUND-COLOR:#ccddff&quot;&gt;([^&lt;]*)&lt;</name>
+				<street>()</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+1671">
+		<website name="cnmiphonebook.com" url="http://www.informationpages.com/sys/pageserver.dll?b=388&amp;p=1&amp;s=-4&amp;f=&amp;gp=&amp;go=$NUMBER" prefix="">
+			<entry>
+				<name>SPAN\sCLASS=WN\sSTYLE=&quot;BACKGROUND-COLOR:#ccddff&quot;&gt;([^&lt;]*)&lt;</name>
+				<street>()</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+20">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Egypt" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$AREACODE$NUMBER&amp;substring=0&amp;Country=Egypt" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+221">
+		<website name="senegalphonebook.com" url="http://www.senegalphonebook.com/en/whitepages/?start=1&amp;q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+222">
+		<website name="mauritaniaphonebook.com" url="http://www.mauritaniaphonebook.com/en/whitepages/?start=1&amp;q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+223">
+		<website name="maliphonebook.com" url="http://www.maliphonebook.com/en/whitepages/?&amp;q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+224">
+		<website name="guineaphonebook.com" url="http://www.guineaphonebook.com/en/whitepages/?q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+225">
+		<website name="abc.ci" url="http://www.abc.ci/index.php?page=4&amp;numero=$NUMBER&amp;Submit=Rechercher" prefix="">
+			<entry>
+				<name>td\swidth=&quot;49%&quot;(?:[^&gt;]*?&gt;){3}([^&lt;]*?)&lt;</name>
+				<street>&lt;i&gt;\s*([^\s]*\s*[^\s]*\s*[^\s]*)\s</street>
+				<city>&lt;i&gt;\s*[^\s]*\s*[^\s]*\s*[^\s]*\s*([^&lt;]*?)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+226">
+		<website name="burkinaphonebook.com" url="http://www.burkinaphonebook.com/en/whitepages/?q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+227">
+		<website name="nigerphonebook.com" url="http://www.nigerphonebook.com/en/whitepages/?start=1&amp;q=$PART1-$PART2-$PART3-$PART4" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+228">
+		<website name="togophonebook.com" url="http://www.togophonebook.com/en/whitepages/?q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+229">
+		<website name="beninphonebook.com" url="http://www.beninphonebook.com/en/whitepages/?q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+230">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s$PART1-$PART2">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*(?:&lt;br&gt;[^&lt;]*))&lt;|Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+		<website name="mauritius-yellow-pages.info" url="http://www.mauritius-yellow-pages.info/visitors_advanced_search_result_mauritius_yellow_pages.php?xcbocategory=0&amp;txtxoxphone=$NUMBER" nexturl="http://www.mauritius-yellow-pages.info/visitors_display_company_details_mauritius_yellow_pages.php?advertiserid=$HIDDEN" prefix="" hidden="visitors_display_company_details_mauritius_yellow_pages\.php\?advertiserid=(\d*)'">
+			<entry>
+				<name>&lt;title&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;b&gt;City:(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</street>
+				<city>&lt;b&gt;City:(?:[^&gt;]*?&gt;){11}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+236">
+		<website name="centralafricaphonebook.com" url="http://www.centralafricaphonebook.com/en/whitepages/?start=1&amp;q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+237">
+		<website name="cameroonphonebook.com" url="http://www.cameroonphonebook.com/en/whitepages/?start=1&amp;q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+238">
+		<website name="paginasamarelas.cv" url="http://www.paginasamarelas.cv/resultados_pesquisa.aspx?tipoMeio=1&amp;txtMeio=$NUMBER&amp;tipoPesq=a&amp;procura=s&amp;lang=pt" nexturl="http://www.paginasamarelas.cv/detalhe_pesquisa.aspx?id=$HIDDEN" prefix="" hidden="aspx\?id=(\d{5})">
+			<entry>
+				<name>&lt;b&gt;Nome:&lt;/b&gt;\s?([^&lt;]*)&lt;</name>
+				<street>()</street>
+				<city>&lt;b&gt;Morada:&lt;/b&gt;\s?([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+239">
+		<website name="paginasamarelas.st" url="http://213.13.158.108/saotome/resultados_pesquisa.aspx?tipoMeio=1&amp;txtMeio=$NUMBER&amp;tipoPesq=a&amp;procura=s&amp;lang=pt" nexturl="http://213.13.158.108/saotome/detalhe_pesquisa.aspx?id=$HIDDEN" prefix="" hidden="aspx\?id=(\d{5})">
+			<entry>
+				<name>&lt;b&gt;Nome:&lt;/b&gt;\s?([^&lt;]*)&lt;</name>
+				<street>()</street>
+				<city>&lt;b&gt;Morada:&lt;/b&gt;\s?([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+240">
+		<website name="malabophonebook.com" url="http://www.malabophonebook.com/pagesblanches/?q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+241">
+		<website name="gabonphonebook.com" url="http://www.gabonphonebook.com/en/whitepages/?q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+242">
+		<website name="congophonebook.com" url="http://www.congophonebook.com/en/whitepages/?q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+244">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s$PART1-$PART2">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*(?:&lt;br&gt;[^&lt;]*))&lt;|Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+248">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s$PART1-$PART2">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*(?:&lt;br&gt;[^&lt;]*))&lt;|Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+250">
+		<website name="rwandaphonebook.com" url="http://www.rwandaphonebook.com/en/whitepages/?&amp;q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+251">
+		<website name="ethiopiabook.com" url="http://www.ethiopiabook.com/whitepages/?start=1&amp;q=$NUMBER" prefix="0">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+253">
+		<website name="djiboutiphonebook.com" url="http://www.djiboutiphonebook.com/pagesblanches/?q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+254">
+		<website name="yellowpageskenya.com" url="http://www.yellowpageskenya.com/index.php?yp=1&amp;srchppltxt=$NUMBER&amp;search=search+for+people" prefix="">
+			<entry>
+				<name>div\sclass=.pagination(?:[^&gt;]*?&gt;){8}([^&lt;]*)&lt;</name>
+				<street>(P.\sO.\sBox\s\d{5})</street>
+				<city>P.\sO.\sBox\s\d{5}\s-\s([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+255">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s\(0$AREACODE\)\s$PART1-$PART2">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*(?:&lt;br&gt;[^&lt;]*))&lt;|Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+257">
+		<website name="burundiphonebook.com" url="http://www.burundiphonebook.com/en/whitepages/?start=1&amp;q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;h4&gt;([^&lt;]*)&lt;</name>
+				<street>(?:&lt;address&gt;([^,^&lt;]*?,[^,^&lt;]*?),[^&lt;]*?&lt;)|(?:&lt;address&gt;([^,^&lt;]*?),[^&lt;]*?&lt;)</street>
+				<city>(?:&lt;address&gt;(?:[^,^&lt;]*?,){0,2}([^&lt;]*?)&lt;/address&gt;)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+258">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s(?:\(\d*?\)\s)$PART1-$PART2">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*(?:&lt;br&gt;[^&lt;]*))&lt;|Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+260">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s\(0$AREACODE\)\s$PART1-$PART2">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*(?:&lt;br&gt;[^&lt;]*))&lt;|Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+262">
+		<website name="infobel.com" url="http://infobel.com/en/france/Inverse.aspx?qPhone=0262$NUMBER&amp;qSelLang3=&amp;SubmitREV=Search&amp;inphCoordType=EPSG" prefix="">
+			<entry>
+				<name>div\sclass=.result-head.&gt;&lt;h3&gt;1\.\s*([^&lt;]*)&lt;</name>
+				<street>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;([^,]*),</street>
+				<city>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;[^,]*,[^\d]*\d{5}\s*([^&lt;]*)&lt;</city>
+				<zipcode>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;[^,]*,[^\d]*(\d{5})</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+263">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s\(0$AREACODE\)\s$PART1-$PART2">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*(?:&lt;br&gt;[^&lt;]*))&lt;|Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+		<website name="telone.co.zw" url="http://www.telone.co.zw/cgi-bin/searchdir.pl" prefix="" post="searchtxt=$NUMBER&amp;city=0$AREACODE&amp;I1.x=26&amp;I1.y=8&amp;searchcol=number&amp;searchcol1=resbus">
+			<entry>
+				<name>Address(?:[^&gt;]*?&gt;){8}([^&lt;]*)&lt;</name>
+				<street>Address(?:[^&gt;]*?&gt;){16}([^&lt;]*)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+264">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s\(0$AREACODE\)\s$PART1-$PART2">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*(?:&lt;br&gt;[^&lt;]*))&lt;|Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+265">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s(?:\(09265\)\s)?$PART1-$PART2">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>()</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+266">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s$PART1-$PART2">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*(?:&lt;br&gt;[^&lt;]*))&lt;|Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+267">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$AREACODE$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s$AREACODE-$NUMBER">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*(?:&lt;br&gt;[^&lt;]*))&lt;|Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+268">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$AREACODE$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s$AREACODE-$NUMBER">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*(?:&lt;br&gt;[^&lt;]*))&lt;|Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+269">
+		<website name="infobel.com" url="http://infobel.com/en/france/Inverse.aspx?qPhone=0269$NUMBER&amp;qSelLang3=&amp;SubmitREV=Search&amp;inphCoordType=EPSG" prefix="">
+			<entry>
+				<name>div\sclass=.result-head.&gt;&lt;h3&gt;1\.\s*([^&lt;]*)&lt;</name>
+				<street>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;([^,]*),</street>
+				<city>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;[^,]*,[^\d]*\d{5}\s*([^&lt;]*)&lt;</city>
+				<zipcode>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;[^,]*,[^\d]*(\d{5})</zipcode>
+			</entry>
+		</website>
+		<website name="comorestelecom.km" url="http://www.comorestelecom.km/annu_inverse.php?passage=1&amp;phone=$NUMBER&amp;Submit=Rechercher" prefix="">
+			<entry>
+				<name>Votre\srequ&amp;ecirc;te[^\d]*$NUMBER(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</name>
+				<street>Votre\srequ&amp;ecirc;te[^\d]*$NUMBER(?:[^&gt;]*&gt;){9}([^&amp;]*&amp;[^&amp;]*)</street>
+				<city>Votre\srequ&amp;ecirc;te[^\d]*$NUMBER(?:[^&gt;]*&gt;){9}(?:[^&amp;]*&amp;nbsp;){2}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+27">
+		<website name="brabys.co.za" url="http://www.brabys.co.za/search-Results.asp?region=-1&amp;town=-1&amp;numnum=$NUMBER" nexturl="http://www.brabys.co.za/$HIDDEN" prefix="" hidden="&lt;a\shref=&quot;([^&quot;]*)&quot;(?:[^&gt;]*&gt;){6}\s\(0$AREACODE\)">
+			<entry>
+				<name>font-size:\ssmaller;"(?:[^;]*;){3}([^&lt;]*)&lt;</name>
+				<street>Physical\sAddress(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>Physical\sAddress(?:[^&gt;]*?&gt;){6}([^&lt;]*&lt;br&gt;[^&lt;]*)&lt;</city>
+				<zipcode>Physical\sAddress(?:[^&gt;]*?&gt;){8}\s?([^&lt;]*)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+297">
+		<website name="arubian.net" url="http://arubian.net/cgi-bin/data.cgi" prefix="" post="pass=ok&amp;user=phonebook&amp;searchtype=any&amp;field=&amp;searchtext=$PART1-$PART2&amp;find=GO">
+			<entry>
+				<name>Address(?:[^&gt;]*?&gt;){3}&quot;([^&quot;]*)&quot;&lt;</name>
+				<street>Address(?:[^&gt;]*?&gt;){5}&quot;([^&quot;]*)&quot;&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+298">
+		<website name="nummar.fo" url="http://www.nummar.fo/urslit.php?leita=vidka&amp;nummar=$NUMBER" prefix="">
+			<entry>
+				<name>AutoNumber1(?:[^&gt;]*&gt;){10}([^,^&lt;]*),</name>
+				<street>AutoNumber1(?:[^&gt;]*&gt;){10}(?:[^,^&lt;]*),([^,^&lt;]*),[^&lt;]*&lt;</street>
+				<city>AutoNumber1(?:[^&gt;]*&gt;){10}(?:[^,^&lt;]*,[^,^&lt;]*,)([^&lt;]*)&lt;|AutoNumber1(?:[^&gt;]*&gt;){10}(?:[^,^&lt;]*,)([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+30">
+		<website name="whitepages.gr" url="http://www.whitepages.gr/en/results.aspx" prefix="" post="x_tel=$NUMBER">
+			<entry>
+				<name>&lt;td\sclass=&quot;text-black&quot;\sheight=&quot;46&quot;\svalign=&quot;top&quot;\salign=&quot;left&quot;\s?&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>reslist_ctl01_straddr[^&gt;]*&gt;([^&lt;]*)&lt;</street>
+				<city>reslist_ctl01_district[^&gt;]*&gt;([^&lt;]*)&lt;</city>
+				<zipcode>reslist_ctl01_postal[^&gt;]*&gt;([^&lt;]*)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+31">
+		<website name="www.nummerzoeker.com" url="http://www.nummerzoeker.com/?phone=$NUMBER&amp;maxrows=10&amp;page=0&amp;export=excel" prefix="0">
+			<entry firstOccurance="lastname">
+				<firstname>^[^,]*,[^,]*,([^,]*),[^,]*,[^,]*,[^,]*$</firstname>
+				<lastname>^[^,]*,([^,]*),[^,]*,[^,]*,[^,]*,[^,]*$</lastname>
+				<name>^[^,]*,([^,]*,[^,]*),[^,]*,[^,]*,[^,]*$</name>
+				<street>^[^,]*,[^,]*,[^,]*,([^,]*),[^,]*,[^,]*$</street>
+				<city>^[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,([^,]*)$</city>
+				<zipcode>^[^,]*,[^,]*,[^,]*,[^,]*,([^,]*),[^,]*$</zipcode>
+			</entry>
+		</website>
+		<website name="www.gebeld.nl" url="http://www.gebeld.nl/content.asp?zapp=zapp&amp;land=Nederland&amp;zoek=numm&amp;searchfield1=fullnumber&amp;searchfield2=&amp;queryfield1=$NUMBER" prefix="0">
+			<entry>
+				<firstname>&lt;td &gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot; &gt;\s*(.*?)(?: |&amp;nbsp;)[^ &lt;\r]*\s*&lt;/font&gt;</firstname>
+				<lastname>&lt;td &gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot; &gt;\s*.*?(?: |&amp;nbsp;)([^ &lt;\r]*)\s*&lt;/font&gt;</lastname>
+				<street>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&lt;]*)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</street>
+				<city>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;([^&lt;]*)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</city>
+				<zipcode>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&amp;]*)&amp;nbsp;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+32">
+		<website name="gebeld.nl" url="http://www.gebeld.nl/content.asp?zapp=zapp&amp;land=Belgie&amp;zoek=numm&amp;searchfield1=fullnumber&amp;searchfield2=&amp;queryfield1=$NUMBER" prefix="0">
+			<entry>
+				<name>/font(?:[^&gt;]*?&gt;){4}([^&lt;]*?)&lt;</name>
+				<street>/font(?:[^&gt;]*?&gt;){12}([^&lt;]*?)&lt;</street>
+				<city>/font(?:[^&gt;]*?&gt;){19}([^&amp;]*?)&amp;nbsp;</city>
+				<zipcode>/font(?:[^&gt;]*?&gt;){19}[^&amp;]*?&amp;nbsp;([^&lt;]*?)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+33">
+		<!-- does apparently not exist anymore; perhaps http://www.pagesjaunes.fr ? --> 
+		<website name="www.annuaireinverse.com" url="http://www.annuaireinverse.com/reponses.asp?LANGUE=FRFR-XXXXX&amp;RECHERCHE=EXACTE&amp;image=RechercheV4&amp;RN=$NUMBER" prefix="0">
+			<entry firstOccurance="lastname">
+				<number>tblAdresses\[0\]\[5\] = "&lt;[^&gt;]*&gt;&lt;b&gt;[^&lt;]*&lt;/b&gt;&lt;br&gt;[^&lt;]*&lt;br&gt;[^&lt;]*&lt;br&gt;([^&lt;]*)&lt;/font&gt;&quot;</number>
+				<lastname>tblAdresses\[0\]\[0\] = &quot;([^&quot;]+)&quot;;</lastname>
+				<firstname>tblAdresses\[0\]\[1\] = &quot;([^&quot;]+)&quot;;</firstname>
+				<name>tblAdresses\[0\]\[5\] = "&lt;[^&gt;]*&gt;&lt;b&gt;([^&lt;]*)&lt;/b&gt;&lt;br&gt;[^&lt;]*&lt;br&gt;[^&lt;]*&lt;br&gt;[^&lt;]*&lt;/font&gt;&quot;</name>
+				<street>tblAdresses\[0\]\[2\] = &quot;([^&quot;]+)&quot;;</street>
+				<zipcode>tblAdresses\[0\]\[3\] = &quot;([^&quot;]+)&quot;;</zipcode>
+				<city>tblAdresses\[0\]\[4\] = &quot;([^&quot;]+)&quot;;</city>
+			</entry>
+		</website>
+	</country>
+	<country code="+350">
+		<website name="gibyellow.gi" url="http://www.gibyellow.gi/number_results.asp?Number=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;strong&gt;([^&lt;]*?)&lt;/strong&gt;(?:[^&gt;]*?&gt;){7}$NUMBER&lt;</name>
+				<street>&lt;td class=&quot;name&quot;&gt;$NUMBER&lt;/td&gt;(?:[^v]+(?!a).){2}[^&gt;]*?&gt;([^&lt;]*?)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+351">
+		<website name="pai.pt" url="http://www.pai.pt/search/$NUMBER.html" prefix="">
+			<entry>
+				<name>bppost.&gt;([^&lt;]*?)&lt;</name>
+				<street>addrBlock\saddressTab\sact(?:[^&gt;]*?&gt;){2}\s*([^&lt;]*?)&lt;</street>
+				<city>addrBlock\saddressTab\sact(?:[^&gt;]*?&gt;){4}[^\s]*?\s([^&lt;]*?)&lt;</city>
+				<zipcode>addrBlock\saddressTab\sact(?:[^&gt;]*?&gt;){4}([^\s]*?)\s</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+352">
+		<website name="infobel.com" url="http://infobel.com/en/luxembourg/Inverse.aspx?qPhone=$NUMBER&amp;qSelLang3=&amp;SubmitREV=Search&amp;inphCoordType=EPSG" prefix="">
+			<entry>
+				<name>&lt;div class=\"result-item\"&gt;&lt;h2&gt;[^&lt;]*&lt;a [^&gt;]*&gt;([^&lt;]*)&lt;/a&gt;</name>
+				<street>&lt;div class=\"result-box-col\"&gt;&lt;div&gt;&lt;strong&gt;([^,]*),\s*\d{4}\s*[^lt;]*&lt;/strong&gt;</street>
+				<city>&lt;div class=\"result-box-col\"&gt;&lt;div&gt;&lt;strong&gt;[^,]*,\s*\d{4}\s*([^lt;]*)&lt;/strong&gt;</city>
+				<zipcode>&lt;div class=\"result-box-col\"&gt;&lt;div&gt;&lt;strong&gt;[^,]*,\s*(\d{4})\s*[^lt;]*&lt;/strong&gt;</zipcode>
+			</entry>
+		</website>
+		<website name="editustel.lu" url="http://www.editustel.lu/luxweb/neosearchAT.do?input=$NUMBER" prefix="">
+			<entry>
+				<name>raisSoc[^&gt;]*&gt;([^&lt;]*?)&lt;</name>
+				<street>raisSoc(?:[^&gt;]*?&gt;){5}([^&lt;]*?)&lt;</street>
+				<city>raisSoc(?:[^&gt;]*?&gt;){6}L-\d{4}&amp;nbsp;([^&lt;^\(]*)</city>
+				<zipcode>raisSoc(?:[^&gt;]*?&gt;){6}L-(\d{4})&amp;nbsp;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+354">
+		<website name="simaskra.is" url="http://ja.is/gular?q=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;strong\sclass=&quot;name\sblack&quot;&gt;([^&lt;]*?)&lt;</name>
+				<street>&lt;em\sclass=&quot;home&quot;&gt;[^&gt;]*?&gt;([^&lt;]*?)&lt;</street>
+				<city>&lt;em\sclass=&quot;zone&quot;>[^\s]*?\s([^&lt;]*?)&lt;</city>
+				<zipcode>&lt;em\sclass=&quot;zone&quot;>([^\s]*?)\s[^&lt;]*?&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+355">
+		<website name="albanianyellowpages.com" url="http://www.albanianyellowpages.com/cgi-bin/yb/advanced2.pl?address1=Doesn%27t+Matter&amp;address2=Doesn%27t+Matter&amp;companyemailaddress=Doesn%27t+Matter&amp;dateadd=Doesn%27t+Matter&amp;datemod=Doesn%27t+Matter&amp;emailaddr=Doesn%27t+Matter&amp;homepage=Doesn%27t+Matter&amp;host=Doesn%27t+Matter&amp;id=Doesn%27t+Matter&amp;ip=Doesn%27t+Matter&amp;category=&amp;name=&amp;establish=&amp;city=&amp;state=&amp;zipcode=&amp;country=Doesn%27t+Matter&amp;phone=355+$AREACODE+$NUMBER&amp;fax=&amp;I1.x=0&amp;I1.y=0" prefix="" hidden="http://www.albanianyellowpages.com/cgi-bin/yb/org.pl\?id=([^&amp;]*)&amp;" nexturl="http://www.albanianyellowpages.com/cgi-bin/yb/org.pl?id=$HIDDEN&amp;formlist=advanced2&amp;formid=$HIDDEN&amp;begin=1&amp;end=1">
+			<entry>
+				<name>file\.gif(?:[^&gt;]*&gt;){9}([^&lt;]*?)&lt;</name>
+				<street>Address:(?:[^&gt;]*&gt;){6}([^&lt;]*?)&lt;</street>
+				<city>City:(?:[^&gt;]*&gt;){6}([^&lt;]*?)&lt;</city>
+				<zipcode>Zip\s*Code:(?:[^&gt;]*&gt;){6}([^&lt;]*?)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+356">
+		<website name="maltacom.com" url="http://www.maltacom.com/edirnew/modules/edir_checkquery.asp?g_telephone=$NUMBER" prefix="">
+			<entry>
+				<name>(?:&lt;td class=ln&gt;&lt;font class=fcbd&gt;)([^&lt;]*?)&lt;</name>
+				<street>PhoneNo(?:[^&gt;]*&gt;){30}([^&lt;]*)&lt;</street>
+				<city>PhoneNo(?:[^&gt;]*&gt;){34}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+358">
+		<website name="yritystele.fi" url="http://www.yritystele.fi/query?what=adv&amp;form=adv&amp;phone=$NUMBER" prefix="0">
+			<entry>
+				<name>toggleIPText(?:[^&gt;]*?&gt;){2}([^&lt;]*?)&lt;</name>
+				<street>toggleIPText(?:[^&gt;]*?&gt;){4}\s*?\|\s*?([^,]*?),</street>
+				<city>toggleIPText(?:[^&gt;]*?&gt;){4}(?:[^,]*?,){1,2}\s*\d{5}\s([^&lt;]*?)&lt;</city>
+				<zipcode>toggleIPText(?:[^&gt;]*?&gt;){4}(?:[^,]*?,){1,2}\s*(\d{5})\s[^&lt;]*?&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+36">
+		<website name="tudakozo.t-com.hu" url="http://www.tudakozo.t-com.hu/main?rand=6037541983298298990&amp;session_name=&amp;session_isFonetic=&amp;session_searchType=2&amp;session_custType=0&amp;session_location=&amp;session_zipcode=&amp;session_street=&amp;session_houseNo=&amp;session_areaCode=$AREACODE&amp;session_phoneNumber=$NUMBER&amp;session_queryType=2&amp;func0=firstQuery%28session_queryType%2Csession_custType%2Csession_searchType%2Csession_name%2Csession_location%2Csession_street%2Csession_zipcode%2Csession_houseNo%2Csession_isFonetic%2Csession_areaCode%2Csession_phoneNumber%29&amp;xsl=result&amp;xml=result&amp;func_newsess=&amp;OnError=xml%3Dmain%26xsl%3Dmain" prefix="">
+			<entry>
+				<name>onclick=&quot;getDatasheet[^&gt;]*?&gt;\(?([^&lt;^\(]*?)\(?&lt;</name>
+				<street>KiFindMet(?:[^&gt;]*?&gt;){3}:\s(?:[^,]*?,)(?:&amp;nbsp;)?([^&lt;]*?)&lt;</street>
+				<city>KiFindMet(?:[^&gt;]*?&gt;){3}:\s([^\d]*?)\d\d\d\d,</city>
+				<zipcode>KiFindMet(?:[^&gt;]*?&gt;){3}:\s(?:[^\d]*?)(\d\d\d\d),</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+370">
+		<website name="imones.lt" url="http://www.imones.lt/en/?submit=yes&amp;search=full&amp;page=full&amp;action=search&amp;qphone=$AREACODE$NUMBER" prefix="">
+			<entry>
+				<name>rowname(?:[^&gt;]*&gt;){2}([^&lt;]*)&lt;</name>
+				<street>rowadr&quot;&gt;\d{5}[^,]*,\s([^&lt;]*)&lt;|rowadr&quot;&gt;([^,]*),</street>
+				<city>rowadr&quot;&gt;\d{5}([^,]*),|rowadr&quot;&gt;[^,]*?,\s\d{5}\s([^&lt;]*)&lt;</city>
+				<zipcode>rowadr&quot;&gt;(\d{5})|rowadr&quot;&gt;[^,]*,\s(\d{5})\s[^&lt;]*&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+371">
+		<website name="zl.lv" url="http://www.zl.lv/portal/detail-search.php?comp=&amp;phone=$NUMBER&amp;meklet_detail=Suchen" prefix="">
+			<entry>
+				<name>tooltip[^&gt;]*?&gt;([^&lt;]*?)&lt;</name>
+				<street>tooltip(?:[^&gt;]*?&gt;){4}([^,]*?),</street>
+				<city>tooltip(?:[^&gt;]*?&gt;){4}[^,]*?,([^,]*?),</city>
+				<zipcode>tooltip(?:[^&gt;]*?&gt;){4}(?:[^,]*?,){2}([^&lt;]*?)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+372">
+		<website name="telemedia.ee" url="http://www.telemedia.ee/telemedia.php?lang=et&amp;tab=num&amp;list=on&amp;po=&amp;kw=$NUMBER&amp;pohi=on" prefix="">
+			<entry>
+				<name>favorlink3.&gt;([^&lt;]*?)&lt;</name>
+				<street>favorlink3.(?:[^&gt;]*?&gt;){10}(?:&amp;nbsp;)?(([^\s\d]+\s)+\d+?)</street>
+				<city>favorlink3.(?:[^&gt;]*?&gt;){10}(?: )?(?:[^\s\d]+\s)+\d+\s(([^\s]+\s)+)\d{5}</city>
+				<zipcode>favorlink3.(?:[^&gt;]*?&gt;){10}.+(\d{5})&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+375">
+		<website name="b2b.by" url="http://www.b2b.by/en/advanced.php?region=0&amp;tel=$NUMBER" prefix="">
+			<entry>
+				<name>a\shref=.infopage\.php[^&gt;]*&gt;([^&lt;]*)&lt;(?:[^&gt;]*&gt;){5}0$AREACODE</name>
+				<street>a\shref=.infopage\.php(?:[^&gt;]*?&gt;){4}(.+)\s[^&amp;]*&amp;....;\s\d{6}&lt;(?:[^&gt;]*&gt;){2}0$AREACODE</street>
+				<city>a\shref=.infopage\.php(?:[^&gt;]*?&gt;){4}.+\s([^&amp;]*)&amp;....;\s\d{6}&lt;(?:[^&gt;]*&gt;){2}0$AREACODE</city>
+				<zipcode>a\shref=.infopage\.php(?:[^&gt;]*?&gt;){4}.+(\d{6})&lt;(?:[^&gt;]*&gt;){2}0$AREACODE</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+378">
+		<website name="paginebianche.it" url="http://www.paginebianche.it/execute.cgi?btt=1&amp;tl=2&amp;tr=106&amp;tc=&amp;cb=&amp;qs=0549+$NUMBER" prefix="">
+			<entry>
+				<name>class=&quot;dati&quot;&gt;[^&gt;]*?&gt;([^&lt;]*)&lt;</name>
+				<street>class=&quot;dati&quot;&gt;(?:[^&gt;]*?&gt;){3}\d{5}&amp;nbsp;[^&amp;]*?[^-]*?-([^&lt;]*?)&lt;</street>
+				<city>class=&quot;dati&quot;&gt;(?:[^&gt;]*?&gt;){3}\d{5}&amp;nbsp;([^&amp;]*)[^-]*-[^&lt;]*&lt;</city>
+				<zipcode>class=&quot;dati&quot;&gt;(?:[^&gt;]*?&gt;){3}(\d{5})&amp;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+380">
+		<website name="business-ua.com" url="http://business-ua.com/advsearch.phtml?aphone=$NUMBER&amp;adv_sr=10" prefix="">
+			<entry>
+				<name>&lt;p\sclass=pt1>&lt;b&gt;([^&lt;]*)&lt;/b&gt;[^\(]*\(0$AREACODE\)\s$NUMBER&lt;/p&gt;</name>
+				<street>&lt;p class=small&gt;\d*,\s[^,]*,([^&lt;]*)&lt;/p&gt;&lt;/td&gt;&lt;td colspan=5\swidth=90\salign=left\svalign=center&gt;&lt;p\sclass=small&gt;\(0$AREACODE\)\s$NUMBER&lt;/p&gt;</street>
+				<city>&lt;p class=small&gt;\d*,\s([^,]*),[^&lt;]*&lt;/p&gt;&lt;/td&gt;&lt;td colspan=5\swidth=90\salign=left\svalign=center&gt;&lt;p\sclass=small&gt;\(0$AREACODE\)\s$NUMBER&lt;/p&gt;</city>
+				<zipcode>&lt;p class=small&gt;(\d*),[^&lt;]*&lt;/p&gt;&lt;/td&gt;&lt;td colspan=5\swidth=90\salign=left\svalign=center&gt;&lt;p\sclass=small&gt;\(0$AREACODE\)\s$NUMBER&lt;/p&gt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+381">
+		<website name="telekom.yu" url="http://www.telekom.yu/WhitePages/SearchPage.asp" prefix="" nexturl="http://www.telekom.yu/WhitePages/ResultPage.asp" post="Telefon=3444169&amp;Ulica=&amp;MG=011&amp;Ime=&amp;Broj=&amp;Mesto=&amp;Prezime=&amp;submit.x=38&amp;submit.y=12" hidden="(wrzlgrmpf)" cookie="\[([^;]*);">
+			<entry>
+				<name>&lt;p\sclass=pt1>&lt;b&gt;([^&lt;]*)&lt;/b&gt;[^\(]*\(0$AREACODE\)\s$NUMBER&lt;/p&gt;</name>
+				<street>&lt;p class=small&gt;\d*,\s[^,]*,([^&lt;]*)&lt;/p&gt;&lt;/td&gt;&lt;td colspan=5\swidth=90\salign=left\svalign=center&gt;&lt;p\sclass=small&gt;\(0$AREACODE\)\s$NUMBER&lt;/p&gt;</street>
+				<city>&lt;p class=small&gt;\d*,\s([^,]*),[^&lt;]*&lt;/p&gt;&lt;/td&gt;&lt;td colspan=5\swidth=90\salign=left\svalign=center&gt;&lt;p\sclass=small&gt;\(0$AREACODE\)\s$NUMBER&lt;/p&gt;</city>
+				<zipcode>&lt;p class=small&gt;(\d*),[^&lt;]*&lt;/p&gt;&lt;/td&gt;&lt;td colspan=5\swidth=90\salign=left\svalign=center&gt;&lt;p\sclass=small&gt;\(0$AREACODE\)\s$NUMBER&lt;/p&gt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+385">
+		<website name="tportal.hr" url="http://www.tportal.hr/imenik/bijele.aspx?u=$NUMBER" prefix="0" hidden="@__VIEWSTATE&quot;\svalue=&quot;([^&quot;]*)&quot;" post="__VIEWSTATE=$HIDDEN&amp;tUpit=$NUMBER&amp;dizbor=0&amp;dzup=0&amp;tMjesto=&amp;tUlica=&amp;imbSearch.x=38&amp;imbSearch.y=14">
+			<entry>
+				<name>images/det.gif(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</name>
+				<street>prozor.focus\(\)&quot;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>prozor.focus\(\)&quot;&gt;([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+386">
+		<website name="rumenestrani.com" url="http://www.rumenestrani.com/Php3/show.php3?koren=checkbox&amp;naziv2=&amp;priimek2=&amp;x=0&amp;y=0&amp;telefonska2=$NUMBER&amp;regija2=All+regions&amp;obcina2=All+municipalities&amp;naselje2=&amp;ulica2=&amp;hisna2=&amp;posta2=&amp;eposta2=&amp;internet2=&amp;davcna2=&amp;dejavnost2=&amp;storitve2=&amp;omrezna%5B1%5D=61&amp;omrezna%5B7%5D=64&amp;omrezna%5B2%5D=62&amp;omrezna%5B8%5D=65&amp;omrezna%5B3%5D=602&amp;omrezna%5B9%5D=66&amp;omrezna%5B4%5D=69&amp;omrezna%5B10%5D=67&amp;omrezna%5B5%5D=63&amp;omrezna%5B11%5D=68&amp;omrezna%5B6%5D=601&amp;omrezna%5B12%5D=608&amp;iskanje=napredno" prefix="">
+			<entry>
+				<name>href=/Php3/show.php3.un_id[^&gt;]*?&gt;([^&lt;]*)&lt;</name>
+				<street>href=/Php3/show.php3.un_id(?:[^&gt;]*?&gt;){5}([^&lt;]*)&lt;</street>
+				<city>href=/Php3/show.php3.un_id(?:[^&gt;]*?&gt;){6}\d*.([^&lt;]*)&lt;</city>
+				<zipcode>href=/Php3/show.php3.un_id(?:[^&gt;]*?&gt;){6}(\d*)\s</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+387">
+		<website name="bhtelecom.ba" url="http://www.bhtelecom.ba/telefon_imenik.html" prefix="" hidden="id=&quot;_uqid&quot;\svalue=&quot;([^&quot;]*)&quot;$id=&quot;_cdt&quot;\svalue=&quot;([^&quot;]*)&quot;$" post="di=033&amp;br=215277&amp;btnSearch=Trazi&amp;_uqid=$HIDDEN1&amp;_cdt=$HIDDEN2&amp;_hsh=%23%23%23HSH%23%23%23" nexturl="http://www.bhtelecom.ba/index.php?id=536&amp;a=search" cookie="\[([^]]*)\]">
+			<entry>
+				<name>&lt;p\sclass=pt1>&lt;b&gt;([^&lt;]*)&lt;/b&gt;[^\(]*\($AREACODE\)\s$NUMBER&lt;/p&gt;</name>
+				<street>&lt;p class=small&gt;\d*,\s[^,]*,([^&lt;]*)&lt;/p&gt;&lt;/td&gt;&lt;td colspan=5\swidth=90\salign=left\svalign=center&gt;&lt;p\sclass=small&gt;\($AREACODE\)\s$NUMBER&lt;/p&gt;</street>
+				<city>&lt;p class=small&gt;\d*,\s([^,]*),[^&lt;]*&lt;/p&gt;&lt;/td&gt;&lt;td colspan=5\swidth=90\salign=left\svalign=center&gt;&lt;p\sclass=small&gt;\($AREACODE\)\s$NUMBER&lt;/p&gt;</city>
+				<zipcode>&lt;p class=small&gt;(\d*),[^&lt;]*&lt;/p&gt;&lt;/td&gt;&lt;td colspan=5\swidth=90\salign=left\svalign=center&gt;&lt;p\sclass=small&gt;\($AREACODE\)\s$NUMBER&lt;/p&gt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+39">
+		<website name="paginebianche.it" url="http://www.paginebianche.it/execute.cgi?btt=1&amp;ts=106&amp;cb=8&amp;mr=10&amp;rk=&amp;om=&amp;qs=$NUMBER" prefix="0">
+			<entry>
+				<name>class=&quot;org&quot;&gt;([^&lt;]*)&lt;</name>
+				<street>class=&quot;street-address&quot;>([^&lt;]*)&lt;</street>
+				<city>class=&quot;locality&quot;>([^&lt;]*)&lt;</city>
+				<zipcode>class=&quot;postal-code&quot;>([^&lt;]*)&lt;</zipcode>
+			</entry>
+			<entry>
+				<name>&lt;a [^&gt;]*&gt;&lt;img [^&gt;]*&gt;&lt;/a&gt;&lt;a [^&gt;]*&gt;([^&lt;]*)</name>
+				<street>&lt;font [^&gt;]*&gt;[0-9]*&amp;nbsp;[^&amp;]*[^-]*-([^&lt;]*)&lt;</street>
+				<city>&lt;font [^&gt;]*&gt;[0-9]*&amp;nbsp;([^&amp;]*)[^-]*-[^&lt;]*&lt;</city>
+				<zipcode>&lt;font [^&gt;]*&gt;([0-9]*)&amp;nbsp;[^&amp;]*[^-]*-[^&lt;]*&lt;</zipcode>
+			</entry>
+			<entry>
+				<name>&lt;td class=&quot;dati&quot;&gt;&lt;span [^&gt;]*&gt;([^&lt;]*)&lt;/span&gt;&lt;br&gt;[0-9]*&amp;nbsp;[^&amp;]*[^-]*-[^&lt;]*&lt;</name>
+				<street>&lt;td class=&quot;dati&quot;&gt;&lt;span [^&gt;]*&gt;[^&lt;]*&lt;/span&gt;&lt;br&gt;[0-9]*&amp;nbsp;[^&amp;]*[^-]*-([^&lt;]*)&lt;</street>
+				<city>&lt;td class=&quot;dati&quot;&gt;&lt;span [^&gt;]*&gt;[^&lt;]*&lt;/span>&lt;br&gt;[0-9]*&amp;nbsp;([^&amp;]*)[^-]*-[^&lt;]*&lt;</city>
+				<zipcode>&lt;td class=&quot;dati&quot;&gt;&lt;span [^&gt;]*&gt;[^&lt;]*&lt;/span&gt;&lt;br&gt;([0-9]*)&amp;nbsp;[^&amp;]*[^-]*-[^&lt;]*&lt;</zipcode>
+			</entry>
+		</website>
+		<website name="pronto.it" url="http://www.pronto.it/?q=$NUMBER" prefix="0">
+			<entry>
+				<name swapFirstAndLastName="true">&lt;span class="cognome "&gt;([^&gt;]*)&lt;/span&gt;</name>
+				<street>&lt;span class="via" title="([^"]*)"&gt;</street>
+				<city>&lt;span class="via" title="[^"]*">[^-]*- \d* ([^-&lt;]*)(?:- [^&lt;]*)?&lt;/span&gt;</city>
+				<zipcode>&lt;span class="via" title="[^"]*">[^-]*- (\d*) [^-&lt;]*&lt;/span&gt;</zipcode>
+			</entry>
+		</website>
+		<website name="infobel.com" url="http://www.infobel.com/it/Italy/Inverse.aspx?qPhone=$NUMBER" prefix="0">
+			<entry>
+				<name>&lt;div class="result-item"&gt;&lt;h[1-9]&gt;1. (?:&lt;a href=&quot;[^&quot;]*&quot;&gt;)?([^&lt;]*)(?:&lt;/a&gt;)?&lt;!--[^&lt;]*&lt;/h[1-9]&gt;</name>
+				<street>&lt;div class=&quot;result-box-col&quot;&gt;&lt;div&gt;&lt;strong&gt;([^,]*),.[0-9]+\s*[^&lt;]*&lt;/strong&gt;&lt;/div&gt;</street>
+				<city>&lt;div class=&quot;result-box-col&quot;&gt;&lt;div&gt;&lt;strong&gt;[^,]*,.[0-9]+\s*([^&lt;]*)&lt;/strong&gt;&lt;/div&gt;</city>
+				<zipcode>&lt;div class=&quot;result-box-col&quot;&gt;&lt;div&gt;&lt;strong&gt;[^,]*,.([0-9]+)\s*[^&lt;]*&lt;/strong&gt;&lt;/div&gt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+41">
+		<website name ="tel.local.ch" url="http://tel.local.ch/de/q/?ext=1&amp;phone=$NUMBER" prefix="0">
+			<entry>
+				<name>&lt;h[1-9](?:&gt;&lt;a)?\sclass=&quot;fn&quot;[^&gt;]*&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span class=&quot;street-address&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
+				<city>&lt;span class=&quot;locality&quot;&gt;(?:&lt;a href=[^&gt;]*&gt;)?([^&lt;]*)(?:&lt;/a&gt;)?&lt;/span&gt;</city>
+				<zipcode>&lt;span class=&quot;postal-code&quot;>([^&lt;]*)&lt;/span&gt;</zipcode>
+			</entry>
+		</website>		
+		<website name="tel.search.ch" url="http://tel.search.ch/result.html?tel=$NUMBER" prefix="0">
+			<entry>
+				<name>&lt;div class=&quot;rname&quot;&gt;&lt;h[1-9]*&gt;&lt;a[^&gt;]*&gt;([^&lt;]*)&lt;/a&gt;</name>
+				<street>&lt;div class=&quot;raddr&quot;&gt;([^,]*),\s*&lt;span class=&quot;tel_addrpart&quot;&gt;\s*[0-9]*[^&lt;]*&lt;/span&gt;&lt;/div&gt;</street>
+				<city>&lt;div class=&quot;raddr&quot;&gt;[^,]*,\s*&lt;span class=&quot;tel_addrpart&quot;&gt;\s*[0-9]*([^&lt;/]*)(?:/[^&lt;]*)?&lt;/span&gt;&lt;/div&gt;</city>
+				<zipcode>&lt;div class=&quot;raddr&quot;&gt;[^,]*,\s*&lt;span class=&quot;tel_addrpart&quot;&gt;\s*([0-9]*)[^&lt;]*&lt;/span&gt;&lt;/div&gt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+423">
+		<website name="tel.search.ch" url="http://tel.search.ch/result.html?tel=00423$NUMBER" prefix="">
+			<entry>
+				<name>&lt;div class=&quot;rname&quot;&gt;&lt;h[1-9]&gt;&lt;a[^&gt;]*&gt;([^&lt;]*)&lt;/a&gt;</name>
+				<street>&lt;div class=&quot;raddr&quot;&gt;([^&lt;,]*),\s*[0-9]*[^&lt;]*&lt;/div&gt;</street>
+				<city>&lt;div class=&quot;raddr&quot;&gt;[^&lt;,]*,\s*[0-9]*([^&lt;^/]*)(?:/FL)?&lt;/div&gt;</city>
+				<zipcode>&lt;div class=&quot;raddr&quot;&gt;[^&lt;,]*,\s*([0-9]*)[^&lt;]*&lt;/div&gt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+43">
+		<website name="herold.at (Privat)" url="http://www.herold.at/servlet/at.herold.sp.servlet.SPWPSearchServlet?searchmask=2&amp;phone=$NUMBER" prefix="0">
+			<entry>
+				<name>&lt;td class=&quot;last&quot;&gt;&lt;h[1-9]&gt;&lt;a href=&quot;[^&quot;]*&quot;(?:\s*class=&quot;bold&quot;)?&gt;([^&lt;]*)&lt;/a&gt;&lt;/h[1-9]&gt;</name>
+				<street>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?[^,]*,\s*([^&lt;]*)&lt;br /&gt;&lt;/p&gt;</street>
+				<city>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?\d+ ([^,]*),\s*[^&lt;]*&lt;br /&gt;&lt;/p&gt;</city>
+				<zipcode>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?(\d+) [^,]*,\s*[^&lt;]*&lt;br /&gt;&lt;/p&gt;</zipcode>
+			</entry>
+		</website>
+		<website name="herold.at (Firma)" url="http://www.herold.at/servlet/at.herold.sp.servlet.SPYPSearchServlet?searchmask=2&amp;phone=$NUMBER" prefix="0">
+			<entry>
+				<name>&lt;h[1-9]&gt;&lt;a href=&quot;[^&quot;]*&quot;\s*class=&quot;bold&quot;&gt;([^&lt;]*)&lt;/a&gt;&lt;/h[1-9]&gt;</name>
+				<street>&lt;div class=&quot;addrF&quot;&gt;&lt;p class=&quot;bold&quot;&gt;\s*[^,]*,\s*([^&lt;]*)&lt;br/&gt;&lt;/p&gt;</street>
+				<city>&lt;div class=&quot;addrF&quot;&gt;&lt;p class=&quot;bold&quot;&gt;\s*[^\s]*([^,]*),\s[^&lt;]*&lt;br/&gt;&lt;/p&gt;</city>
+				<zipcode>&lt;div class=&quot;addrF&quot;&gt;&lt;p class=&quot;bold&quot;&gt;\s*([^\s]*)\s[^,]*,\s*[^&lt;]*&lt;br/&gt;&lt;/p&gt;</zipcode>
+			</entry>
+		</website>
+		<website name="tb-online.at" url="http://www.tb-online.at/index.php?pc=in&amp;telnummer=$NUMBER&amp;aktion=suchein" prefix="0">
+			<entry>
+				<!-- 
+				zipcode hidden as image...
+				-->
+				<name>&lt;p\s*class=&quot;name&quot;&gt;\s*([^&lt;]*)&lt;/p&gt;</name>
+				<street>&lt;p&gt;([^&lt;]*)&lt;/p&gt;\s*&lt;p&gt;&lt;img class=&quot;img&quot; src=&quot;grafikpng.php?[^&gt;]*&gt;&amp;nbsp;[^&lt;]*&lt;/p&gt;</street>
+				<city>&lt;p&gt;[^&lt;]*&lt;/p&gt;\s*&lt;p&gt;&lt;img class=&quot;img&quot; src=&quot;grafikpng.php?[^&gt;]*&gt;&amp;nbsp;([^&lt;]*)&lt;/p&gt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>				
+	</country>	
+	<country code="+45">
+		<website name="degulesider.dk" url="http://www.degulesider.dk/vbw/super/resultat.do?twoFieldName=$NUMBER&amp;twoFieldAddr=&amp;Image52.x=0&amp;Image52.y=0" prefix="0">
+			<entry>
+				<name>&lt;!--\sCompany Name\s--&gt;[^&gt;]*&gt;\s*([^&lt;]*)&lt;</name>
+				<street>&lt;!--\sCompany Address\s--&gt;\s*([^&lt;]*)&lt;</street>
+				<city>&lt;!--\sCompany Address\s--&gt;[^&gt;]*&gt;\s*?\d\d\d\d\s?([^&lt;]*)&lt;</city>
+				<zipcode>&lt;!--\sCompany Address\s--&gt;[^&gt;]*&gt;\s*?(\d\d\d\d)[^&lt;]*&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+46">
+		<website name="privatpersoner.eniro.se" url="http://privatpersoner.eniro.se/query?what=wp&amp;search_word=$NUMBER&amp;geo_area=" prefix="0">
+			<entry>
+				<firstname>&lt;span class=&quot;given-name&quot;&gt;([^&lt;]*)&lt;/span&gt;\s*&lt;span class=&quot;given-name&quot;&gt;</firstname>
+				<lastname>&lt;/span&gt;\s*&lt;span class=&quot;given-name&quot;&gt;([^&lt;]*)&lt;/span&gt;</lastname>
+				<street>&lt;span class=&quot;street-address&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
+				<city>&lt;span class=&quot;locality&quot;&gt;([^&lt;]*)&lt;/span&gt;</city>
+				<zipcode>&lt;span class=&quot;postal-code&quot;&gt;([^&lt;]*)&lt;/span&gt;</zipcode>
+			</entry>
+			<entry firstOccurance="firstname">
+				<firstname>&lt;span class=&quot;given-name&quot;&gt;([^&lt;]*)&lt;/span&gt;</firstname>
+				<lastname>&lt;span class=&quot;family-name&quot;&gt;([^&lt;]*)&lt;/span&gt;</lastname>
+				<street>&lt;span class=&quot;street-address&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
+				<city>&lt;span class=&quot;locality&quot;&gt;([^&lt;]*)&lt;/span&gt;</city>
+				<zipcode>&lt;span class=&quot;postal-code&quot;&gt;([^&lt;]*)&lt;/span&gt;</zipcode>
+			</entry>
+			<entry firstOccurance="firstname">
+				<firstname>&lt;span class=&quot;given-name&quot;&gt;([^&lt;]*)&lt;/span&gt;</firstname>
+				<lastname>&lt;span class=&quot;given-name&quot;&gt;([^&lt;]*)&lt;/span&gt;&lt;/a&gt;</lastname>
+				<street>&lt;span class=&quot;street-address&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
+				<city>&lt;span class=&quot;locality&quot;&gt;([^&lt;]*)&lt;/span&gt;</city>
+				<zipcode>&lt;span class=&quot;postal-code&quot;&gt;([^&lt;]*)&lt;/span&gt;</zipcode>
+			</entry>
+			<entry>
+				<name>fn expand(?:(?:.*owner-of-cell)|[^&gt;]*&gt;)[^&gt;]*&gt;([^&lt;]*)&lt;</name>
+				<street>street-address&quot;?&gt;([^&lt;]*)&lt;</street>
+				<city>locality&quot;?&gt;([^&lt;]*)&lt;</city>
+				<zipcode>postal-code&quot;?&gt;([^&lt;]*)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+47">
+		<website name="gulesider.no" url="http://www.gulesider.no/gs/categoryList.c?q=$NUMBER" prefix="">
+			<entry>
+				<name swapFirstAndLastName="true">&lt;h2 class=&quot;name&quot;&gt;\s*&lt;a href=&quot;[^&quot;]*&quot;\s*title=&quot;[^&quot;]*&quot;&gt;\s*([- \w]*)\s*?&lt;span&gt;</name>
+				<street>&lt;div class=&quot;address&quot;&gt;\s*&lt;p&gt;([ \w]*),\s*\d+ \w+\s*&lt;/p&gt;</street>
+				<city>&lt;div class=&quot;address&quot;&gt;\s*&lt;p&gt;[ \w]*,\s*\d+ (\w+)\s*&lt;/p&gt;</city>
+				<zipcode>&lt;div class=&quot;address&quot;&gt;\s*&lt;p&gt;[ \w]*,\s*(\d+) \w+\s*&lt;/p&gt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+48">
+		<website name="teleadreson.pl" url="http://www.teleadreson.pl/" prefix="" post="searchtext=&amp;english=yes&amp;database=TADRES%2FADDR.&amp;menuitem=searchname&amp;obrotrange_min=0&amp;obrotrange_max=1000000000&amp;rokrange_min=0&amp;rokrange_max=9999&amp;liczbarange_min=0&amp;liczbarange_max=1000000000&amp;listreportstat=report&amp;listlimit=20&amp;vindexfirst=0&amp;recordnumberlast=1&amp;vindex=0&amp;recordnumber=1&amp;currenthtmlpage=HomePage&amp;flagset=&amp;database=TADRES%2FADDR.&amp;listlimit=20&amp;flagset=&amp;searchtext=%28$AREACODE%29$NUMBER&amp;searchsubmit=Search&amp;nacetext=&amp;sictext=&amp;pnatext=&amp;obrotrange_min=0&amp;obrotrange_max=1000000000&amp;rokrange_min=0&amp;rokrange_max=9999&amp;liczbarange_min=0&amp;liczbarange_max=1000000000&amp;listreportstat=report">
+			<entry>
+				<name>Company\sname(?:[^&gt;]*&gt;){3}([^&lt;]*?)&lt;</name>
+				<street>Address(?:[^&gt;]*&gt;){3}([^&lt;]*?)&lt;</street>
+				<city>City(?:[^&gt;]*&gt;){3}([^&lt;]*?)&lt;</city>
+				<zipcode>Zip\scode(?:[^&gt;]*&gt;){3}([^&lt;]*?)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+49">
+		<website name="www.dasoertliche.de" url="http://dasoertliche.de/Controller?form_name=search_inv&amp;ph=$NUMBER" prefix="0">
+			<entry firstOccurance="zipcode">
+				<name>\sna: &quot;([^&quot;]*)&quot;,</name>
+				<street>\sst: &quot;([^&quot;]*)&quot;,</street>
+				<city>\sci: &quot;([^&quot;]*)&quot;,</city>
+				<zipcode>\spc: &quot;([^&quot;]*)&quot;,</zipcode>
+			</entry>
+	        <entry>
+	        	<name>class=&quot;preview&quot;&gt;([^&lt;]*)&lt;span class="preview_box"&gt;</name>
+	        	<street>^\s*([^,&gt;]+),&amp;nbsp;\d{5}&amp;nbsp;[^&lt;]*&lt;/div&gt;</street>
+	        	<city>^[^,]*,&amp;nbsp;\d{5}&amp;nbsp;([^&lt;]*)&lt;/div&gt;</city>
+	        	<zipcode>^[^,]*,&amp;nbsp;(\d{5})&amp;nbsp;[^&lt;]*&lt;/div&gt;</zipcode>
+	        </entry>
+	        <entry>
+	        	<name>class=&quot;entry&quot;\s*(?:onmouseover=&quot;&quot;)?\s*&gt;([^&lt;]*)&lt;/a&gt;</name>
+	        	<street>^\s*([^,&gt;]+),&amp;nbsp;\d{5}&amp;nbsp;[^&lt;]*&lt;/div&gt;</street>
+	        	<city>^[^,]*,&amp;nbsp;\d{5}&amp;nbsp;([^&lt;]*)&lt;/div&gt;</city>
+	        	<zipcode>^[^,]*,&amp;nbsp;(\d{5})&amp;nbsp;[^&lt;]*&lt;/div&gt;</zipcode>
+	        </entry>
+		</website>
+		<website name="www.dastelefonbuch.de" url="http://www3.dastelefonbuch.de/?la=de&amp;kw=$NUMBER&amp;cmd=detail&amp;recSelected=0" prefix="0">
+			<entry>
+				<name>&lt;div id=&quot;detail-hl&quot;&gt;&lt;h2&gt;([^&lt;]*)&lt;/h2&gt;</name>
+				<street>&lt;div class=&quot;addr&quot; title=&quot;Adresse&quot;&gt;\s*?&lt;div&gt;.*?&lt;/div&gt;\s*?&lt;div&gt;\s*?([^&lt;]*)&lt;br /&gt;\d{5}&amp;nbsp;[^&lt;]*&lt;br /&gt;&lt;/div&gt;\s*?&lt;/div&gt;</street>
+				<city>&lt;div class=&quot;addr&quot; title=&quot;Adresse&quot;&gt;\s*?&lt;div&gt;.*?&lt;/div&gt;\s*?&lt;div&gt;\s*?[^&lt;]*&lt;br /&gt;\d{5}&amp;nbsp;([^&lt;]*)&lt;br /&gt;&lt;/div&gt;\s*?&lt;/div&gt;</city>
+				<zipcode>&lt;div class=&quot;addr&quot; title=&quot;Adresse&quot;&gt;\s*?&lt;div&gt;.*?&lt;/div&gt;\s*?&lt;div&gt;\s*?[^&lt;]*&lt;br /&gt;(\d{5})&amp;nbsp;[^&lt;]*&lt;br /&gt;&lt;/div&gt;\s*?&lt;/div&gt;</zipcode>
+			</entry>
+		</website>
+		<website name="www.dastelefonbuch.de" url="http://www.dastelefonbuch.de/?sourceid=Mozilla-search&amp;cmd=search&amp;kw=$NUMBER" prefix="0">
+			<entry>
+				<name>&lt;div class=&quot;(?:short|long)&quot;&gt;(?:&lt;b&gt;)?&lt;a href=[^&gt;]*&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;td\sclass=&quot;col2&quot;(?: onclick=&quot;[^&quot;]*&quot;)?&gt;([^&lt;]*)&lt;</street>
+				<city>&lt;td class=&quot;col3&quot;(?: onclick=&quot;[^&quot;]*&quot;)?&gt;\d{5}&amp;nbsp;([^&lt;]*)&lt;</city>
+				<zipcode>&lt;td class=&quot;col3&quot;(?: onclick=&quot;[^&quot;]*&quot;)?&gt;(\d{5})</zipcode>
+			</entry>
+		</website>
+		<website name="www.goyellow.de" url="http://www.goyellow.de/inverssuche/?TEL=$NUMBER" prefix="0">
+	        <entry>
+	        	<name>&lt;a onClick=&quot;[^&quot;]*&quot; title=&quot;[^&quot;]*&quot; href=&quot;[^&quot;]*&quot;&gt;\s*&lt;span class=&quot;normal&quot;&gt;([^&lt;]*)&lt;/span&gt;</name>
+		  		<street>&lt;span class=&quot;street&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
+	        	<city>&lt;span class=&quot;city&quot;&gt;([^&lt;]*)&lt;/span&gt;</city>
+	        	<zipcode>&lt;span class=&quot;postcode&quot;&gt;([^&lt;]*)&lt;/span&gt;</zipcode>
+	        </entry>
+		</website>
+		<website name="www.11880.com" url="http://www.11880.com/Suche/index.cfm?&amp;fuseaction=Suche.rueckwaertssucheresult&amp;init=true&amp;tel=$NUMBER" prefix="0">
+	        <entry>
+	        	<name>&lt;a style=&quot;text-decoration: underline;&quot; href=&quot;[^&quot;]*?&quot;\s+onclick=&quot;[^&quot;]*?&quot;\s+class=&quot;popup&quot;[^&gt;]*?&gt;([^&lt;]*?)&lt;/a&gt;</name>
+	        	<street>^\t*?([^,\t]*?), [\d]{5} [^&lt;]*?&lt;br /&gt;</street>
+	        	<city>^\t*?[^,\t]*?, [\d]{5} ([^&lt;]*?)&lt;br /&gt;</city>
+	        	<zipcode>^\t*?[^,\t]*?, ([\d]{5}) [^&lt;]*?&lt;br /&gt;</zipcode>
+	        </entry>
+		</website>
+	</country>
+	<country code="+501">
+		<website name="belizeweb.com" url="http://www.belizeweb.com:8080/directory/index-new.jsp" cookie="(JSESSIONID=[^;]*);" nexturl="http://www.belizeweb.com:8080/directory/index-new.jsp?dirlist=$PART1-$PART2&amp;imageField.x=0&amp;imageField.y=0&amp;maxrecords=5" post="" hidden="(wrzlgrmpf)" prefix="">
+			<entry>
+				<name>Phone\sNumber(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</name>
+				<street>()</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+502">
+		<website name="paginasamarillas.com" url="http://www.paginasamarillas.com/pagamanet/web/companyCategory.aspx?ipa=3&amp;npa=Guatemala&amp;ies=*&amp;idi=2&amp;txb=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=.txtTitleBlack.&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){5}Guatemala\s-\s([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+503">
+		<website name="paginasamarillas.com" url="http://www.paginasamarillas.com/pagamanet/web/companyCategory.aspx?ipa=2&amp;npa=El+Salvador&amp;ies=*&amp;idi=2&amp;txb=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=.txtTitleBlack.&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){5}El Salvador\s-\s([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+504">
+		<website name="paginasamarillas.com" url="http://www.paginasamarillas.com/pagamanet/web/companyCategory.aspx?ipa=7&amp;npa=Honduras&amp;ies=*&amp;idi=2&amp;txb=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=.txtTitleBlack.&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){5}Honduras\s-\s([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+505">
+		<website name="paginasamarillas.com" url="http://www.paginasamarillas.com/pagamanet/web/companyCategory.aspx?ipa=5&amp;npa=Nicaragua&amp;ies=*&amp;idi=2&amp;txb=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=.txtTitleBlack.&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){5}Nicaragua\s-\s([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+506">
+		<website name="paginasamarillas.com" url="http://www.paginasamarillas.com/pagamanet/web/companyCategory.aspx?ipa=8&amp;npa=Costa+Rica&amp;ies=*&amp;idi=2&amp;txb=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=.txtTitleBlack.&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){5}Costa Rica\s-\s([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+507">
+		<website name="paginasamarillas.com" url="http://www.paginasamarillas.com/pagamanet/web/companyCategory.aspx?ipa=4&amp;npa=Panam%e1&amp;ies=*&amp;idi=2&amp;txb=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=.txtTitleBlack.&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){5}Panam%e1\s-\s([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+508">
+		<website name="cheznoo.net" url="http://www.cheznoo.net/portaildata/annuaire/resultats.php" prefix="" post="nom=&amp;num=$NUMBER&amp;Recherche.x=27&amp;Recherche.y=11&amp;search_info=r1">
+			<entry>
+				<name>pour\s&lt;b&gt;(?:[^&gt;]*&gt;){12}(?:&amp;nbsp;)?([^&lt;]*)&lt;</name>
+				<street>pour\s&lt;b&gt;(?:[^&gt;]*&gt;){22}(?:&amp;nbsp;)?([^&lt;^:]*)::</street>
+				<city>pour\s&lt;b&gt;(?:[^&gt;]*&gt;){22}[^&lt;^:]*::([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+51">
+		<website name="paginasblancas.com.pe" url="http://paginasblancas.com.pe/resultados.asp?t=$NUMBER&amp;d=$CODE" prefix="">
+			<entry>
+				<name>Table12(?:[^&gt;]*?&gt;){6}([^&lt;]*)&lt;</name>
+				<street>cel05[^&gt;]*?&gt;([^&lt;]*)&lt;</street>
+				<city>cel05(?:[^&gt;]*?&gt;){2}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+52">
+		<website name="paginasamarillas.com" url="http://www.paginasamarillas.com/pagamanet/web/companyCategory.aspx?ipa=9&amp;npa=M%e9xico&amp;ies=*&amp;idi=2&amp;txb=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=.txtTitleBlack.&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){5}M%e9xico\s-\s([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+54">
+		<website name="paginasdoradas.com" url="http://www.paginasdoradas.com/BuscarTelefonica.action?apellido=&amp;provinciasId=0&amp;localidad.descripcion=&amp;telefono.area=0$AREACODE&amp;telefono.prefijo=$PART1&amp;telefono.sufijo=$PART2" prefix="">
+			<entry>
+				<name>titu1[^&gt;]*&gt;([^&lt;]*)&lt;</name>
+				<street>textgris[^&gt;]*&gt;&lt;strong&gt;([^&lt;]*)&lt;</street>
+				<city>textgris[^&gt;]*&gt;&lt;strong&gt;[^&gt;]*&gt;\s-\s([^-]*)-</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+55">
+		<website name="listaonline.com.br" url="http://www.listaonline.com.br/pagamanet/web/companyCategory.aspx?ipa=16&amp;npa=Brasil&amp;ies=$CODE&amp;idi=3&amp;sp=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=.txtTitleBlack.&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+56">
+		<website name="chilnet.cl" url="http://www.chilnet.cl/SE/results.asp?keywords=$NUMBER&amp;wordstype=ALL&amp;notkeyword=&amp;optcategory=companies&amp;optSearchBy=phonphone&amp;Countrychk=1&amp;optArea=ALL&amp;chkCompBranchs=branchs" prefix="" hidden="&lt;a\shref=&quot;/rc/company/results_company_mbr\.asp\?meco_code=([^&quot;]*)&quot;&gt;" nexturl="http://www.chilnet.cl/rc/company/results_company_mbr.asp?meco_code=$HIDDEN">
+			<entry>
+				<name>tradename&quot;&gt;([^&lt;]*)&lt;</name>
+				<street>taxid(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>taxid(?:[^&gt;]*&gt;){8}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+58">
+		<website name="paginasamarillas.com" url="http://www.paginasamarillas.com/pagamanet/web/companyCategory.aspx?ipa=15&amp;npa=Venezuela&amp;ies=*&amp;idi=2&amp;txb=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=.txtTitleBlack.&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){5}Venezuela\s-\s([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+590">
+		<website name="infobel.com" url="http://infobel.com/en/france/Inverse.aspx?qPhone=0590$NUMBER&amp;qSelLang3=&amp;SubmitREV=Search&amp;inphCoordType=EPSG" prefix="">
+			<entry>
+				<name>div\sclass=.result-head.&gt;&lt;h3&gt;1\.\s*([^&lt;]*)&lt;</name>
+				<street>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;([^,]*),</street>
+				<city>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;[^,]*,[^\d]*\d{5}\s*([^&lt;]*)&lt;</city>
+				<zipcode>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;[^,]*,[^\d]*(\d{5})</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+591">
+		<website name="paginasamarillas.com" url="http://www.paginasamarillas.com/pagamanet/web/companyCategory.aspx?ipa=22&amp;npa=Bolivia&amp;ies=$CODE&amp;idi=2&amp;txb=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=.txtTitleBlack.&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){5}Costa Rica\s-\s([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+593">
+		<website name="paginasamarillas.com" url="http://www.paginasamarillas.com/pagamanet/web/companyCategory.aspx?ipa=6&amp;npa=Ecuador&amp;ies=*&amp;idi=2&amp;txb=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=.txtTitleBlack.&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){3}([^&lt;]*)&lt;</street>
+				<city>&lt;span\sclass=.txtTitleBlack.&gt;(?:[^&gt;]*&gt;){5}Ecuador\s-\s([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+594">
+		<website name="infobel.com" url="http://infobel.com/en/france/Inverse.aspx?qPhone=0594$NUMBER&amp;qSelLang3=&amp;SubmitREV=Search&amp;inphCoordType=EPSG" prefix="">
+			<entry>
+				<name>div\sclass=.result-head.&gt;&lt;h3&gt;1\.\s*([^&lt;]*)&lt;</name>
+				<street>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;([^,]*),</street>
+				<city>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;[^,]*,[^\d]*\d{5}\s*([^&lt;]*)&lt;</city>
+				<zipcode>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;[^,]*,[^\d]*(\d{5})</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+595">
+		<website name="guiaslatinas.com.py" url="http://www.guiaslatinas.com.py/apag.php?mod=2&amp;ciu=0&amp;tel=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;span\sclass=resul&gt;([^&lt;]*)&lt;(?:[^&gt;]*?&gt;){10}[^\(]*\(0$AREACODE\)</name>
+				<street>&lt;b&gt;Direcci%f3n\s?:&lt;/b&gt;&lt;br&gt;([^&lt;]*)&lt;br&gt;[^\(]*\(0$AREACODE\)</street>
+				<city>&lt;b&gt;Direcci%f3n\s?:&lt;/b&gt;&lt;br&gt;[^&lt;]*&lt;br&gt;([^\(]*)\(0$AREACODE\)</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+596">
+		<website name="infobel.com" url="http://infobel.com/en/france/Inverse.aspx?qPhone=0596$NUMBER&amp;qSelLang3=&amp;SubmitREV=Search&amp;inphCoordType=EPSG" prefix="">
+			<entry>
+				<name>div\sclass=.result-head.&gt;&lt;h3&gt;1\.\s*([^&lt;]*)&lt;</name>
+				<street>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;([^,]*),</street>
+				<city>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;[^,]*,[^\d]*\d{5}\s*([^&lt;]*)&lt;</city>
+				<zipcode>div\sclass=.result-box-col.&gt;&lt;div&gt;&lt;strong&gt;[^,]*,[^\d]*(\d{5})</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+63">
+		<website name="pinoysearch.com" url="http://www.pinoysearch.com/index.php?view=r&amp;telno=$NUMBER&amp;Submit=Search" prefix="" nexturl="http://www.pinoysearch.com/$HIDDEN" hidden="sresult&quot;&gt;&lt;a\shref=&quot;([^&quot;]*)&quot;">
+			<entry>
+				<name>class=&quot;sresult2&quot;&gt;(?:&lt;br/&gt;)?&lt;b&gt;([^&lt;]*(?:&lt;/b&gt;[^&lt;]*)?)&lt;</name>
+				<street>Address\s:&lt;/td&gt;&lt;td&gt;([^&lt;]*)&lt;</street>
+				<city>Town/City\s:&lt;/td&gt;&lt;td&gt;([^&lt;]*)&lt;</city>
+				<zipcode>ZIP\sCode\s:&lt;/td&gt;&lt;td&gt;([^&lt;]*)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+65">
+		<website name="yellowpages.com.sg" url="http://www.yellowpages.com.sg/newiyp/wp/newwpsearch2008.do?searchCriteria=Company+Name+%2F+Residential&amp;phoneCriteria=$NUMBER&amp;locTerm=00&amp;stype=7&amp;applicationInd=wp&amp;searchType=4&amp;accessType=1&amp;productType=EIB&amp;searchTab=phoneTab&amp;areaCode=00" prefix="">
+			<entry>
+				<name>advertiserName=(.*?)&amp;amp;url</name>
+				<street>()</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+678">
+		<website name="vatu.com" url="http://www.vatu.com/index.php?p=an&amp;t=pb&amp;request=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;b&gt;name\sand\saddress(?:[^&gt;]*?&gt;){7}([^&lt;]*)&lt;</name>
+				<street>()</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+689">
+		<website name="annuaireopt.pf" url="http://www.annuaireopt.pf/list_inv.jsp?nom=$NUMBER&amp;submit=Search" prefix="">
+			<entry>
+				<name>pginvtitre(?:[^&gt;]*?&gt;){2}([^&lt;]*)&lt;</name>
+				<street>pginvdesc(?:[^&gt;]*?&gt;){2}([^&lt;]*)&lt;br&gt;[^&lt;]*&lt;</street>
+				<city>pginvdesc(?:[^&gt;]*?&gt;){2}[^&lt;]*&lt;br&gt;[^&lt;]*&lt;br&gt;([^&lt;]*)&lt;</city>
+				<zipcode>pginvdesc(?:[^&gt;]*?&gt;){2}[^&lt;]*&lt;br&gt;([^&lt;]*)&lt;br&gt;[^&lt;]*&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+691">
+		<website name="telecom.fm" url="http://telecom.fm/cgi/phonebook.exe" prefix="" post="exchange=$AREACODE&amp;line=$NUMBER">
+			<entry>
+				<name>class=&quot;ph_na&quot;&gt;([^&lt;]*)&lt;</name>
+				<street>()</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+7">
+		<website name="yellowpages.ru" url="http://www.yellowpages.ru/eng/nd$CODE/qu7/sq30/wophone%3A$NUMBER" hidden="&lt;a\shref\=&quot;([^&quot;]*)&quot;\sclass\=&quot;comp_header" nexturl="http://www.yellowpages.ru$HIDDEN" prefix="">
+			<entry>
+				<name>Postal\saddress\s([^:]*):</name>
+				<street>target=&quot;_blank&quot;&gt;\d{6}&lt;/a&gt;,\s*[^,]*,([^&lt;]*)&lt;</street>
+				<city>target=&quot;_blank&quot;&gt;\d{6}&lt;/a&gt;,\s*([^,]*),</city>
+				<zipcode>target=&quot;_blank&quot;&gt;(\d{6})&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+731">
+		<website name="yellow-pages.kz" url="http://www.yellow-pages.kz/kz/en/phone_search/0/1/$NUMBER" prefix="">
+			<entry>
+				<name>&lt;/noindex&gt;&lt;div\sstyle=&quot;padding-left:10px;&quot;&gt;&lt;b&gt;([^&lt;]*?)&lt;</name>
+				<street>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(?:\d*?,)?([^&lt;]*?)&lt;</street>
+				<city>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;([^,]*?),</city>
+				<zipcode>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(\d*?),</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+81">
+		<website name="yellowpage-jp.com" url="http://yellowpage-jp.com/search.php?mids%5B%5D=6&amp;query=%280$AREACODE%29$PART1-$PART2&amp;andor=AND&amp;submit=Search&amp;action=results" hidden="&lt;a\shref\=.modules/mxdirectory/singlelink.php\?([^'^\&quot;]+).&gt;" nexturl="http://yellowpage-jp.com/modules/mxdirectory/singlelink.php?$HIDDEN" prefix="">
+			<entry>
+				<name>&lt;td\sstyle=.color:#ff6633;text-align:center.&gt;[^&gt;]*&gt;([^&lt;]*?)&lt;</name>
+				<street>http://yellowpage-jp.com/modules/mxdirectory/viewrating.php(?:[^&gt;]*&gt;){7}([^,]*,[^,]*),</street>
+				<city>http://yellowpage-jp.com/modules/mxdirectory/viewrating.php(?:[^&gt;]*&gt;){7}(?:[^,]*,){2}([^&lt;]*)&lt;</city>
+				<zipcode>&lt;b&gt;ZIP[^&gt;]*&gt;\s?([^&lt;]*)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+84">
+		<website name="yp.com.vn" url="http://www.yp.com.vn/eYP_VWhitePage.asp" cookie="\[([^;]*);" nexturl="http://www.yp.com.vn/YP_EListSubPhone.asp" post="Phone=$NUMBER&amp;Province=$CODE&amp;submit=Search" hidden="(wrzlgrmpf)" prefix="">
+			<entry>
+				<name>&lt;td\scolspan=.3.\sbgcolor=.#FFFF99.&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>td\sclass=.gensmall.&gt;Address(?:[^&gt;]*&gt;){2}([^&lt;]*)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+853">
+		<website name="yellowpages.com.mo" url="http://www.yellowpages.com.mo/en/searchresult.asp?telid=$NUMBER&amp;lang=e" prefix="">
+			<entry>
+				<name>class=.(?:nm00e|nm220e).&gt;([^&lt;]*)&lt;</name>
+				<street>(?:iaddrt|icon_address)\.gif[^&gt;]*&gt;([^&lt;]*)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+855">
+		<website name="yellowpages-cambodia.com" url="http://www.yellowpages-cambodia.com/search/?q=0$AREACODE+$PART1+$PART2" prefix="">
+			<entry>
+				<name>fn\sorg&quot;[^&gt;]*&gt;([^&lt;]*)&lt;</name>
+				<street>street-address&quot;&gt;([^&lt;]*)&lt;</street>
+				<city>region&quot;&gt;([^&lt;]*)&lt;</city>
+				<zipcode>postal-code&quot;&gt;([^&lt;]*)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+8621">
+		<website name="yellowpage.com.cn" url="http://en.yellowpage.com.cn:8080/search.php?&amp;telephone=$NUMBER&amp;search=&amp;go=START+SEARCH" nexturl="http://en.yellowpage.com.cn:8080/search.php?search=&amp;page=0&amp;telephone=$NUMBER&amp;detail=$HIDDEN" hidden="detail=([^&quot;]*)&quot;" prefix="">
+			<entry>
+				<name>text_headline_14&quot;&gt;([^&lt;]*)&lt;</name>
+				<street>/data/company/(?:[^&gt;]*&gt;){18}([^,]*(?:,[^,]*)?),\s?\d{6}\s?&lt;/td&gt;</street>
+				<city>(Shanghai)</city>
+				<zipcode>/data/company/(?:[^&gt;]*&gt;){18}[^,]*(?:,[^,]*)?,\s?(\d{6})\s?&lt;/td&gt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+90">
+		<website name="ttrehber.tr.gov" url="http://www.ttrehber.gov.tr/trk-wp/IDA2?REQ=20&amp;IDAERROR=&amp;QRY=bus&amp;CTRY=trk&amp;LANG=tu&amp;PAGE=complexSearch&amp;LIP=complexSearch&amp;ACTION=search&amp;STP=C&amp;ACD=$AREACODE&amp;TEL=$NUMBER&amp;sorgula=Ki%FEi+%2F+Kurum+Sorgula" prefix="0" areacode="3">
+			<entry>
+				<name>&lt;td class=&quot;level0&quot;&gt;([^&lt;]*)&lt;/td&gt;&lt;td align=&quot;left&quot;&gt;</name>
+				<street>&lt;td align=&quot;left&quot;&gt;([^,]*),[^&lt;]*&lt;/td&gt;</street>
+				<city>&lt;td align=&quot;left&quot;&gt;[^,]*,(?:[^,]*,\s*[0-9]*([^,]*,[^&lt;]*)|\s*[0-9]*([^,]*,[^&lt;]*)|([^&lt;]*))&lt;/td&gt;</city>
+				<zipcode>&lt;td align=&quot;left&quot;&gt;[^,]*, ([0-9]*)[^&lt;]*&lt;/td&gt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+9111">
+		<website name="phonebook.bol.net.in" url="http://phonebook.bol.net.in/indvtel1.jsp?TELEPHONE_NO=$NUMBER" prefix="">
+			<entry>
+				<name>TelephoneNo(?:[^&gt;]*?&gt;){7}([^&lt;]*?)&lt;</name>
+				<street>TelephoneNo(?:[^&gt;]*?&gt;){10}([^&lt;]*?)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+9133">
+		<website name="calcutta.bsnl.co.in" url="http://www.calcutta.bsnl.co.in/directory/telno.php?telno=$NUMBER&amp;search=Search" prefix="">
+			<entry>
+				<name>&gt;Address&lt;(?:[^&gt;]*?&gt;){11}([^&lt;]*)&lt;</name>
+				<street>&gt;Address&lt;(?:[^&gt;]*?&gt;){15}([^&lt;]*)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+9144">
+		<website name="chennai.bsnl.co.in" url="http://chennai.bsnl.co.in/newdq/telno.asp" cookie="\[([^;]*);" nexturl="http://chennai.bsnl.co.in/newdq/telno.asp" post="telno=$NUMBER&amp;B1=SEARCH" prefix="">
+			<entry>
+				<name>&gt;Address&lt;(?:[^&gt;]*?&gt;){11}([^&lt;]*)&lt;</name>
+				<street>&gt;Address&lt;(?:[^&gt;]*?&gt;){15}([^&lt;]*)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+92">
+		<website name="pakdatabase.com" url="http://www.pakdatabase.com/directory/dirrespwd.asp" post="selection=0&amp;city=$CODE&amp;searchtype=P&amp;enter=$NUMBER&amp;hidefied=1" prefix="">
+			<entry>
+				<name>Draw\sthe\smore\sinfo(?:[^&gt;]*&gt;){10}([^\.]*)\.</name>
+				<street>Draw\sthe\smore\sinfo(?:[^&gt;]*&gt;){10}(?:[^\.]*)\.([^\&lt;]*)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+961">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Lebanon" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+962">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Jordan" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+963">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Syria" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+964">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Iraq" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+965">
+		<website name="ekyp.com" url="http://www.ekyp.com/search-3.php?firmname=&amp;phone=$NUMBER&amp;category=ANY&amp;submit=Search" prefix="">
+			<entry>
+				<name>nt\.gif(?:[^&gt;]*&gt;){5}([^&lt;]*?)&lt;</name>
+				<street>()</street>
+				<city>Area(?:[^&gt;]*&gt;){6}([^&lt;]*?)&lt;</city>
+				<zipcode>ZIP\sCode(?:[^&gt;]*&gt;){6}([^&lt;]*?)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+966">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Saudi%20Arabia" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+967">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Yemen" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+968">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Oman" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+971">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=United+Arab+Emirates" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+972">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Palestine" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+		<website name="441il.com" url="http://441il.com/en/looktra.php?area=0$AREACODE&amp;phone=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;TR&gt;&lt;TD&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;TR&gt;&lt;TD&gt;(?:[^&gt;]*&gt;){2}([^&lt;]*)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+973">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Bahrain" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+974">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Qatar" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+977">
+		<website name="ypofnepal.com" url="http://www.ypofnepal.com/search/?start=1&amp;q=$NUMBER" nexturl="http://www.ypofnepal.com$HIDDEN" prefix="" hidden="var\slst=[^']*'([^']*)'">
+			<entry>
+				<name>&lt;h2\sid=.name.&gt;([^&lt;]*)&lt;</name>
+				<street>street-address.&gt;([^&lt;]*)&lt;</street>
+				<city>locality&quot;&gt;([^&lt;]*)&lt;</city>
+				<zipcode>postal-code&quot;&gt;([^&lt;]*)&lt;</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+98">
+		<website name="ameinfo.com" url="http://www.ameinfo.com/cgi-bin/db/search.cgi?query=$NUMBER&amp;substring=0&amp;Country=Iran" prefix="">
+			<entry>
+				<name>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</street>
+				<city>style=&quot;font-size:10pt;&quot;&gt;&lt;b&gt;(?:[^&gt;]*&gt;){5}([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+992">
+		<website name="yellow-pages.kz" url="http://www.yellow-pages.kz/tj/en/phone_search/0/1/$NUMBER" prefix="">
+			<entry>
+				<name>&lt;/noindex&gt;&lt;div\sstyle=&quot;padding-left:10px;&quot;&gt;&lt;b&gt;([^&lt;]*?)&lt;</name>
+				<street>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(?:\d*?,)?([^&lt;]*?)&lt;</street>
+				<city>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;([^,]*?),</city>
+				<zipcode>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(\d*?),</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+993">
+		<website name="yellow-pages.kz" url="http://www.yellow-pages.kz/tr/en/phone_search/0/1/$NUMBER" prefix="">
+			<entry>
+				<name>&lt;/noindex&gt;&lt;div\sstyle=&quot;padding-left:10px;&quot;&gt;&lt;b&gt;([^&lt;]*?)&lt;</name>
+				<street>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(?:\d*?,)?([^&lt;]*?)&lt;</street>
+				<city>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;([^,]*?),</city>
+				<zipcode>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(\d*?),</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+994">
+		<website name="yellow-pages.kz" url="http://www.yellow-pages.kz/az/en/phone_search/0/1/$NUMBER" prefix="">
+			<entry>
+				<name>&lt;/noindex&gt;&lt;div\sstyle=&quot;padding-left:10px;&quot;&gt;&lt;b&gt;([^&lt;]*?)&lt;</name>
+				<street>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(?:\d*?,)?([^&lt;]*?)&lt;</street>
+				<city>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;([^,]*?),</city>
+				<zipcode>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(\d*?),</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+995">
+		<website name="yellowpages.ge" url="http://www.yellowpages.ge/csearch.php?lan=2&amp;phone=$NUMBER" prefix="">
+			<entry>
+				<name>&lt;font\sface=&quot;&quot;\ssize=2&gt;&amp;nbsp;&lt;b&gt;([^&lt;]*)&lt;</name>
+				<street>i/r-e.gif(?:[^&gt;]*&gt;){8}([^&lt;]*?)&lt;</street>
+				<city>()</city>
+				<zipcode>()</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+996">
+		<website name="yellow-pages.kz" url="http://www.yellow-pages.kz/kg/en/phone_search/0/1/$NUMBER" prefix="">
+			<entry>
+				<name>&lt;/noindex&gt;&lt;div\sstyle=&quot;padding-left:10px;&quot;&gt;&lt;b&gt;([^&lt;]*?)&lt;</name>
+				<street>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(?:\d*?,)?([^&lt;]*?)&lt;</street>
+				<city>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;([^,]*?),</city>
+				<zipcode>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(\d*?),</zipcode>
+			</entry>
+		</website>
+	</country>
+	<country code="+998">
+		<website name="yellow-pages.kz" url="http://www.yellow-pages.kz/uz/en/phone_search/0/1/$NUMBER" prefix="">
+			<entry>
+				<name>&lt;/noindex&gt;&lt;div\sstyle=&quot;padding-left:10px;&quot;&gt;&lt;b&gt;([^&lt;]*?)&lt;</name>
+				<street>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(?:\d*?,)?([^&lt;]*?)&lt;</street>
+				<city>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;([^,]*?),</city>
+				<zipcode>\.\.\.&lt;/a>&lt;br&gt;&lt;br&gt;[^,]*?,\s(\d*?),</zipcode>
+			</entry>
+		</website>
+	</country>
+</reverselookup>
+	
+
+	

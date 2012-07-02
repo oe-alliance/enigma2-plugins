@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-dyndnsclient
+Version: 1.0-20070123-r0
+Description: a client for www.dyndns.org
+Maintainer: 3c5x9 <3c5x9@gmx.net>
+Depends: enigma2 (>> 1.0git20061201)

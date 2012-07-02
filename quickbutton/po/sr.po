@@ -1,0 +1,107 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quickbutton\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Assign plugin to long blue key pressed"
+msgstr "Dodeli dodatak dugom stisku plave tipke"
+
+msgid "Assign plugin to long green key pressed"
+msgstr "Dodeli dodatak dugom stisku zelene tipke"
+
+msgid "Assign plugin to long red key pressed"
+msgstr "Dodeli dodatak dugom stisku crvene tipke"
+
+msgid "Assign plugin to long yellow key pressed"
+msgstr "Dodeli dodatak dugom stisku žute tipke"
+
+msgid "Assign plugin to red key pressed"
+msgstr "Dodeli dodatak stisku crvene tipke"
+
+msgid "Cancel"
+msgstr "Otkaži"
+
+msgid "Display 4:3 content as"
+msgstr "Prikaži 4:3 sadržaj kao"
+
+#, python-format
+msgid ""
+"Error!\n"
+"Error Text: %s"
+msgstr ""
+"Greška!\n"
+"Tekst greške: %s"
+
+msgid "Just Scale"
+msgstr "Samo razmeri"
+
+msgid "MediaPlayer"
+msgstr "Media plejer"
+
+msgid "Multi EPG"
+msgstr ""
+
+msgid "No plugin assigned!"
+msgstr "Nijedan dodatak nije dodeljen"
+
+msgid "Nothing"
+msgstr "Ništa"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Pan&Scan"
+msgstr "Pan&Scan"
+
+msgid "Pillarbox"
+msgstr "Pillarbox"
+
+msgid "Plugin browser"
+msgstr "Pretraživač dodataka"
+
+msgid "Plugin not found!"
+msgstr "Dodatak nije pronađen!"
+
+msgid "Single EPG"
+msgstr ""
+
+msgid "Timer"
+msgstr "Tajmer"
+
+msgid "Unknown Error"
+msgstr "Nepoznata greška"
+
+msgid "assigned to long blue"
+msgstr "Dodeljen dugom plavom"
+
+msgid "assigned to long green"
+msgstr "Dodeljen dugom zelenom"
+
+msgid "assigned to long red"
+msgstr "Dodeljen dugom crvenom "
+
+msgid "assigned to long yellow"
+msgstr "Dodeljen dugom žutom"
+
+msgid "assigned to red"
+msgstr "Dodeljen crvenom"
+
+msgid "setup for Quickbutton"
+msgstr "Podešavanje za Brzu tipku"
+
+msgid "switch 4:3 content display"
+msgstr "Zameni sadržaj 4:3 prikaza"
+
+#~ msgid "EPG List"
+#~ msgstr "EPG lista"

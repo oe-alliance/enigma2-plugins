@@ -1,0 +1,16 @@
+<e2:screen external_module="Plugins.Extensions.WebBouquetEditor.WebScreens.AdditionalWebScreens" name="AdditionalWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2servicelist>
+<e2:element source="ServiceList" id="sRef">				
+	<e2:convert type="web:ListFiller">
+	&lt;e2service>
+		&lt;e2servicereference><e2:item name="Reference" filter="xml" />&lt;/e2servicereference>
+		&lt;e2servicename><e2:item name="Name" filter="xml" />&lt;/e2servicename>
+		&lt;e2serviceisgroup><e2:item name="isGroup" filter="xml" />&lt;/e2serviceisgroup>
+		&lt;e2serviceismarker><e2:item name="isMarker" filter="xml" />&lt;/e2serviceismarker>
+		&lt;e2serviceisprotected><e2:item name="isProtected" filter="xml" />&lt;/e2serviceisprotected>
+	&lt;/e2service>
+	</e2:convert>
+	<e2:convert type="web:TextToHTML" />			
+</e2:element>
+</e2servicelist>	
+</e2:screen>

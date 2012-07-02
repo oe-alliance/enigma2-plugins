@@ -1,0 +1,20 @@
+#!/bin/sh
+if [ `grep 'if current > -1 and wakeup < current:' /usr/lib/enigma2/python/Components/PluginComponent.py | wc -l` -eq 1 ]; then
+   echo "PluginComponent.py must be patched"
+   echo "Creating backup"
+   
+   cp /usr/lib/enigma2/python/Components/PluginComponent.py /usr/lib/enigma2/python/Components/PluginComponent.py.backup
+   ls -ll /usr/lib/enigma2/python/Components/PluginComponent.py*
+   
+   echo "Patching"
+   patch -p0 < /usr/lib/enigma2/python/Plugins/Extensions/Elektro/PluginComponent.py.patch
+   ls /usr/lib/enigma2/python/Components/PluginComponent.py*
+else
+   echo "PluginComponent.py already patched"
+fi
+
+echo "########################################"
+echo "#                                      #"  
+echo "#   Restart Enigma2 to start Elektro   #"  
+echo "#                                      #"  
+echo "########################################"

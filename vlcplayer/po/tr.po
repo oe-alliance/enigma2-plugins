@@ -1,0 +1,188 @@
+# FIRST AUTHOR Zulfikar VEYISOGLU <zveyis@gmail.com>, 2008.11.24
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 plugin vlcPlayer Turkish locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
+"Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "A video streaming solution based on VLC"
+msgstr "VLC bazlı video stream çözümü"
+
+msgid "Audio Bitrate"
+msgstr "Ses bit oranı"
+
+msgid "Audio Channels"
+msgstr "Ses Kanalları"
+
+msgid "Audio Codec"
+msgstr "Ses Kodeği"
+
+msgid "Audio Samplerate"
+msgstr "Ses Örnekleme Oranı"
+
+msgid "Cancel"
+msgstr "Vazgeç"
+
+msgid "DVD Device (leave empty for default)"
+msgstr "DVD Aygıtı (varsayılan için boş bırakın)"
+
+msgid "Enter VLC-Server as FQDN or IP-Address"
+msgstr "VLC sunucu adını veya IP adresini girin"
+
+#, python-format
+msgid ""
+"Error loading filelist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Dosya listesi %(server)s sunucusuna yüklenirken\n"
+"%(error)s hatası oluştu"
+
+#, python-format
+msgid ""
+"Error loading playlist %(media)s into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"%(media)s oynatma listesi %(server)s sunucusuna yüklenirken\n"
+"%(error)s hatası oluştu"
+
+#, python-format
+msgid ""
+"Error loading playlist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Oynatma listesi %(server)s sunucusuna yüklenirken\n"
+"%(error)s hatası oluştu"
+
+#, python-format
+msgid ""
+"Error updating filelist from server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Dosya listesi %(server)s sunucusuna güncellenirken\n"
+"%(error)s hatası oluştu"
+
+#, python-format
+msgid ""
+"Error with VLC server:\n"
+"%s"
+msgstr ""
+"VLC sunucuda hata oluştu:\n"
+"%s"
+
+msgid "Filelist"
+msgstr "Dosya Listesi"
+
+msgid "HTTP Port"
+msgstr "HTTP Port"
+
+msgid "List of known VLC-Server Profiles"
+msgstr "Bilinen VLC Sunucu Profilleri"
+
+msgid "Movie Directory"
+msgstr "Film Klasörü"
+
+msgid "No more files in this directory"
+msgstr "Bu klasörde başka dosya yok"
+
+msgid "No previous file in this directory"
+msgstr "Önceki dosya bu klasörde yok"
+
+msgid ""
+"No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+msgstr ""
+"VLC stream oynatım becerisi olan, bilinen bir enigma servisi bulunamadı\n"
+"Ayarlarınızı kontrol edin ve tekrar deneyin!"
+
+msgid "OK"
+msgstr "Tamam"
+
+#, python-format
+msgid "Overscan Correction [in %(percentsign)s of Video width]"
+msgstr "Overscan Doğrulama [Video genişliğinin %(percentsign)s 'i]"
+
+msgid "Playlist"
+msgstr "Oynatma Listesi"
+
+msgid "Really delete this Server?"
+msgstr "Bu sunucu silinsin mi?"
+
+msgid "Server Address"
+msgstr "Sunucu Adresi"
+
+msgid "Server Profile Name"
+msgstr "Sunucu Profil Adı"
+
+msgid "Serverlist"
+msgstr "Sunucular"
+
+msgid "Subtitle overlay"
+msgstr "Altyazı kaplaması"
+
+msgid "Transcode MPEG/DVD Audio"
+msgstr "MPEG/DVD Ses transkodla"
+
+msgid "Transcode MPEG/DVD Video"
+msgstr "MPEG/DVD Video transkodla"
+
+msgid "Video Bitrate"
+msgstr "Video bit oranı"
+
+msgid "Video Codec"
+msgstr "Video Kodek"
+
+msgid "Video Norm"
+msgstr "Video Standartı"
+
+msgid "add server"
+msgstr "sunucu ekle"
+
+msgid "delete server"
+msgstr "sunucu sil"
+
+msgid "edit server"
+msgstr "sunucu düzenle"
+
+msgid "filter off"
+msgstr "filtre kapalı"
+
+msgid "filter on"
+msgstr "filtre açık"
+
+msgid "play DVD"
+msgstr "DVD oynat"
+
+msgid "refresh"
+msgstr "yenile"
+
+msgid "set default"
+msgstr "varsayılana ata"
+
+#~ msgid "Correct aspect ratio to"
+#~ msgstr "En-boy oranına uyarla :"
+
+#~ msgid "Symbolic Servername"
+#~ msgstr "Sembolik Sunucu adı"
+
+#~ msgid "Video Height"
+#~ msgstr "Video Boy"
+
+#~ msgid "Video Width"
+#~ msgstr "Video En"
+
+#~ msgid "show filelist"
+#~ msgstr "dosya listesini göster"
+
+#~ msgid "show playlist"
+#~ msgstr "oynatma listesini göster"

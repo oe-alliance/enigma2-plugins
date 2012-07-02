@@ -1,0 +1,10 @@
+<keymap>
+	<map context="myShowHideActions">
+		<key id="KEY_OK" mapto="toggleShow" flags="b" />
+		<key id="KEY_ENTER" mapto="toggleShow" flags="b" />
+		<key id="KEY_OK" mapto="longOK" flags="l" />
+		<key id="KEY_ENTER" mapto="longOK" flags="l" />
+		<key id="KEY_EXIT" mapto="hide" flags="m" />
+		<key id="KEY_ESC" mapto="hide" flags="m" />
+	</map>
+</keymap>

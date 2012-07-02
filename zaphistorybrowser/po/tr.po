@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 ZapHistoryBrowser Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-09-22 13:20+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Clear"
+msgstr "Temizle"
+
+msgid "Config"
+msgstr "Ayarlar"
+
+msgid "Delete"
+msgstr "Sil"
+
+msgid "Enable zap history:"
+msgstr "Zap geçmişi:"
+
+msgid "Enigma1-like history:"
+msgstr ""
+
+msgid "Maximum zap history entries:"
+msgstr "Tutulacak maksimum geçmiş kaydı:"
+
+msgid "Zap & Close"
+msgstr "Zapla&Kapat"
+
+msgid "Zap-History Browser"
+msgstr "Zap geçmişi gösterici"
+
+msgid "Zap-History Configurator"
+msgstr "Zap geçmişi yapılandırıcı"
+
+msgid "disabled"
+msgstr "devre dışı"
+
+msgid "disabled at parental lock"
+msgstr "ebeveyn kontrolü etkinse, devre dışı"
+
+msgid "enabled"
+msgstr "etkin"

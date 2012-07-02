@@ -1,0 +1,76 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 TagEditor plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2009-09-24 20:41+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Add new tag..."
+msgstr "Etiket ekle..."
+
+msgid "Cancel"
+msgstr "Vazgeç"
+
+msgid "Delete all tags..."
+msgstr "Tüm etiketleri sil..."
+
+msgid "Delete this tag..."
+msgstr "Bu etiketi sil..."
+
+msgid "Delete unused tags"
+msgstr "Kullanılmayan etiketleri sil"
+
+msgid ""
+"Do you really want to delete all tags everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Bütün etiketleri silmek istediğinizden emin misiniz?\n"
+"(Onaylarsanız, bir sonraki ekrandaki 'Vazgeç' seçimiyle iptal edemezsiniz!)"
+
+#, python-format
+msgid ""
+"Do you really want to delete tag \"%s\" everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Bütün \"%s\" etiketlerini silmek istediğinizden emin misiniz?\n"
+"(Onaylarsanız, bir sonraki ekrandaki 'Vazgeç' seçimiyle iptal edemezsiniz!)"
+
+#. TRANSLATORS: This is the title of the TagEditor main screen
+msgid "Edit Tags"
+msgstr ""
+
+msgid "Load"
+msgstr "Yükle"
+
+msgid "New"
+msgstr "Yeni"
+
+msgid "OK"
+msgstr "Tamam"
+
+msgid "Please enter the new tag"
+msgstr "Lütfen yeni etiket girin"
+
+msgid "Rename this tag..."
+msgstr "Bu etiketin adını değiştir..."
+
+#, python-format
+msgid ""
+"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
+"this!)"
+msgstr ""
+"Tüm \"%s\" etiketlerinin adını aşağıdaki şekilde değiştir:\n"
+"(Onaylarsanız, bir sonraki ekrandaki 'Vazgeç' seçimiyle iptal edemezsiniz!)"
+
+#. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+msgid "edit tags"
+msgstr "etiket düzenle"

@@ -1,0 +1,252 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - rsdownloader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: 2009-12-14 21:06+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/rsdownloader\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/rsdownloader\n"
+
+msgid "Abort all downloads"
+msgstr "Annullare tutti i download"
+
+msgid "Add"
+msgstr "Aggiungere"
+
+msgid "Add downloads from txt files"
+msgstr "Aggiungere download da file .txt"
+
+msgid "Add files from container"
+msgstr "Aggiungere file da contenitore"
+
+#, python-format
+msgid "Added %s to the download-list."
+msgstr "%s aggiunto alla lista download."
+
+msgid "Allow downloading on friday:"
+msgstr "Consentire download di Venerdì:"
+
+msgid "Allow downloading on monday:"
+msgstr "Consentire download di Lunedì:"
+
+msgid "Allow downloading on saturday:"
+msgstr "Consentire download di Sabato:"
+
+msgid "Allow downloading on sunday:"
+msgstr "Consentire download di Domenica:"
+
+msgid "Allow downloading on thursday:"
+msgstr "Consentire download di Giovedì:"
+
+msgid "Allow downloading on tuesday:"
+msgstr "Consentire download di Martedì:"
+
+msgid "Allow downloading on wednesday:"
+msgstr "Consentire download di Mercoledì:"
+
+msgid "Checking"
+msgstr "Verifica in corso"
+
+msgid "Choose reconnect script:"
+msgstr "Selezionare script di riconnessione:"
+
+msgid "Clear finished downloads"
+msgstr "Eliminare i download terminati"
+
+msgid "Close plugin"
+msgstr "Chiudere il plugin"
+
+msgid "Config"
+msgstr "Config."
+
+msgid "Delete"
+msgstr "Cancellare"
+
+#, python-format
+msgid "Delete %s?"
+msgstr "Cancellare %s?"
+
+msgid "Delete download"
+msgstr "Cancellare download"
+
+msgid "Delete failed downloads"
+msgstr "Cancellare download falliti"
+
+msgid "Delete log"
+msgstr "Cancellare log"
+
+msgid "Don't download after:"
+msgstr "Non scaricare dopo le: "
+
+msgid "Don't download before:"
+msgstr "Non scaricare prima delle: "
+
+msgid "Don't reconnect after:"
+msgstr "Non riconnettersi dopo le: "
+
+msgid "Don't reconnect before:"
+msgstr "Non riconnettersi prima delle: "
+
+msgid "Download files from rapidshare"
+msgstr "Scaricare file da rapidshare"
+
+msgid "Download in the background:"
+msgstr "Scaricare in background:"
+
+msgid "Downloading"
+msgstr "Scaricamento in corso"
+
+msgid "Downloads directory:"
+msgstr "Cartella download: "
+
+msgid "Enter unrar password:"
+msgstr "Inserire la passwd unrar:"
+
+#, python-format
+msgid "Error while adding %s to the download-list!"
+msgstr "Aggiunta di %s alla lista download fallita!"
+
+#, python-format
+msgid "Error while decrypting %s!"
+msgstr "Errore in decrittazione %s!"
+
+#, python-format
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Errore nel corso della ricerca su http://rapidshare-search-engine.com!\n"
+"\n"
+"Errore: %s!"
+
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: Nothing found, sorry."
+msgstr ""
+"Errore nel corso della ricerca su http://rapidshare-search-engine.com!\n"
+"\n"
+"Nessuna corrispondenza trovata!"
+
+msgid "Failed"
+msgstr "Fallito"
+
+msgid "Finished"
+msgstr "Terminato"
+
+msgid "Ignore download times:"
+msgstr "Ignorare orari download:"
+
+msgid "Install unrar"
+msgstr "Installare unrar"
+
+msgid "Installing unrar..."
+msgstr "Installazione unrar in corso..."
+
+msgid "Lists directory:"
+msgstr "Elenco cartelle: "
+
+msgid "Loading next page... please wait!"
+msgstr "Caricamento pagina seguente in corso. Attendere..."
+
+msgid "Loading previous page... please wait!"
+msgstr "Caricamento pagina precedente in corso. Attendere..."
+
+msgid "Mark files < 1 MB as failed:"
+msgstr "Marcare i file < 1MB come falliti:"
+
+msgid "Maximal downloads:"
+msgstr "Limite download: "
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "No reconnect"
+msgstr "Non riconnettere"
+
+msgid "Nothing found, sorry."
+msgstr "Nessuna corrispondenza trovata!"
+
+msgid "Open unrar Manager"
+msgstr "Aprire il gestore unrar"
+
+#, python-format
+msgid "Page %d / %d. Push < > to switch the page..."
+msgstr "Pagina %d di %d. Premere  <> per cambiare pagina..."
+
+msgid "Password (netload.in):"
+msgstr "Password (netload.in):"
+
+msgid "Password (uploaded.to):"
+msgstr "Password (uploaded.to):"
+
+msgid "Password:"
+msgstr "Password: "
+
+msgid "Please choose a function..."
+msgstr "Selezionare una funzione..."
+
+msgid "RS Downloader"
+msgstr "RS Downloader"
+
+msgid "Reconnect type:"
+msgstr "Tipo riconnessione:"
+
+msgid "Restart failed after 10 minutes:"
+msgstr "Riavviare i download falliti dopo 10 minuti: "
+
+msgid "Restart failed downloads"
+msgstr "Riavviare download falliti"
+
+msgid "Save"
+msgstr "Salvare"
+
+msgid "Script"
+msgstr "Script"
+
+msgid "Search"
+msgstr "Ricercare"
+
+msgid "Search http://rapidshare-search-engine.com for:"
+msgstr "Ricerca su http://rapidshare-search-engine.com per: "
+
+msgid "Show log"
+msgstr "Mostrare log"
+
+msgid "Take x downloads to list:"
+msgstr "Numero download in elenco (max):"
+
+msgid "Unrar is already working!"
+msgstr "Unrar già avviato!"
+
+msgid "Use search engine"
+msgstr "Usare motore di ricerca..."
+
+msgid "Username (netload.in):"
+msgstr "Nome user (netload.in):"
+
+msgid "Username (uploaded.to):"
+msgstr "Nome user (uploaded.to):"
+
+msgid "Username:"
+msgstr "Nome User: "
+
+msgid "Waiting"
+msgstr "In attesa"
+
+msgid "Write log:"
+msgstr "Creare log: "
+
+msgid "fritz.Box"
+msgstr "fritz.Box"

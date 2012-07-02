@@ -1,0 +1,147 @@
+
+<!-- tplTimerEdit -->
+						<table id="contentTable">
+							<tr>
+								<td>
+									<form id='timerEditForm' onSubmit="return false;">
+										<table>
+											<tr>
+												<td>Action:</td>
+												<td>
+													<select name="justplay" id="justplay" size="1">
+														{for a in action}
+														<option value="${a.value}" ${a.selected}>${a.txt}</option>
+														{/for}
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td style="font-size: 12px;">Note: For recurring events dates are not mandatory.</td>
+											</tr>
+											<tr>
+												<td>Start:</td>
+												<td>
+													<input type="text" id="sdate" name="sdate" value="${timer.beginDate}" size="10" maxlength="10">
+													<select name="shour" id="shour" size="1">
+														{for hour in shour}
+														<option value="${hour.value}" ${hour.selected}>${hour.txt}</option>
+														{/for}
+													</select>
+													:
+													<select name="smin" id="smin" size="1">
+														{for min in smin}
+														<option value="${min.value}" ${min.selected}>${min.txt}</option>
+														{/for}
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>End:</td>
+												<td>
+													<input type="text" id="edate" name="edate" value="${timer.endDate}" size="10" maxlength="10">
+													<select name="ehour" id="ehour" size="1">
+														{for hour in ehour}
+														<option value="${hour.value}" ${hour.selected}>${hour.txt}</option>
+														{/for}
+													</select>
+													:
+													<select name="emin" id="emin" size="1">
+														{for min in emin}
+														<option value="${min.value}" ${min.selected}>${min.txt}</option>
+														{/for}
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td style="font-size: 12px;">Note: For one-time events the days don't have to be specified.</td>
+											</tr>
+											<tr>
+												<td>Days:</td>
+												<td>{for r in repeated}
+													<input 
+														class="tEditRepeated" 
+														type="checkbox" 
+														id="${r.id}" 
+														name="${r.name}" 
+														value="${r.value}" 
+														title="${r.long}" 
+														${r.checked}>&nbsp;${r.txt}&nbsp;&nbsp;</input>{/for}
+												</td>
+											</tr>
+											<tr>
+												<td>Channel:</td>
+												<td>
+													<select class="tEditBouquet" name="bouquet" id="bouquet" size="1">
+														{for b in bouquets}
+														<option value="${b.servicereference}">${b.servicename}</option>
+														{/for}	
+													</select>
+													<select name="service" id="service" size="1">
+														{for s in services}
+														<option value="${s.servicereference}" ${s.selected}>${s.servicename}</option>
+														{/for}	
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>Name:</td>
+												<td>
+													<input name="name" id="name" type="text" size="70" maxlength="255" value="${timer.name.e()}">
+												</td>
+											</tr>
+											<tr>
+												<td>Description:</td>
+												<td>
+													<input name="description" id="description" type="text" size="70" maxlength="255" value="${timer.description.e()}">
+												</td>
+											</tr>
+											<tr>
+												<td>Location:</td>
+												<td>
+													<select id="dirname" name="dirname" size="1">
+														{for d in dirname}
+														<option value="${d.value}" ${d.selected}>${d.txt}</option>
+														{/for}
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>Tags:</td>
+												<td>
+													<div>
+														{for t in tags}
+														<a href="#" class="tEditTag ${t.selected}" data-value="${t.value}" data-selected="${t.selected}">&nbsp;${t.txt}&nbsp;</a>
+														{/for}
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>After event:</td>
+												<td>
+													<select id="afterevent" name="afterevent" size="1">
+														{for event in afterEvent}
+														<option value="${event.value}" ${event.selected}>${event.txt}</option>
+														{/for}
+													</select>
+												</td>
+											</tr>
+											<tr><td>&nbsp;&nbsp;</td></tr>
+											<tr>
+												<td>&nbsp;</td><td>
+													<input name="disabled" id="disabled" type="hidden" value="${timer.disabled}">
+													<input name="eventId" id="eventId" type="hidden" value="${timer.eventId}">
+													<input name="deleteOldOnSave" id="deleteOldOnSave" type="hidden" value="${timer.deleteOldOnSave}">
+													<input name="servicereferenceOld" id="servicereferenceOld" type="hidden" value="${encodeURIComponent(timer.servicereferenceOld)}">
+													<input name="beginOld" id="beginOld" type="hidden" value="${timer.beginOld}">
+													<input name="endOld" id="endOld" type="hidden" value="${timer.endOld}">
+													<button class="tEditSave">Save Timer</button>
+												</td>
+											</tr>
+										</table>
+									</form>
+								</td>
+							</tr>
+						</table>
+<!-- /tplTimerEdit -->

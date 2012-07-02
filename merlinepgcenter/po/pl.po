@@ -1,0 +1,331 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MerlinEPGCenter\n"
+"POT-Creation-Date: 2011-12-18 21:20+CET\n"
+"PO-Revision-Date: \n"
+"Last-Translator: kosmacz <anteneczka@gmail.com>\n"
+"Language-Team: Shaderman <shaderman@dreambox-tools.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "<unknown>"
+msgstr "<nieznany>"
+
+msgid ""
+"A finished record timer wants to set your\n"
+"Dreambox to standby. Do that now?"
+msgstr ""
+"Timer zakończył nagranie i chce przełączyć\n"
+"Dreamboxa do trybu czuwania. Zrobić to ? "
+
+msgid ""
+"A finished record timer wants to shut down\n"
+"your Dreambox. Shutdown now?"
+msgstr ""
+"Timer zakończył nagranie i chce wyłączyć\n"
+"Dreamboxa. Zrobić to ?"
+
+msgid ""
+"A timer failed to record!\n"
+"Disable TV and try again?\n"
+msgstr ""
+"Nagrywanie z Timera nie powiodło się!\n"
+"Wyłączyć TV i spróbować ponownie?\n"
+
+msgid "Add"
+msgstr "Dodaj"
+
+msgid "Add timer"
+msgstr "Dodaj Timer"
+
+msgid "Adjust font size:"
+msgstr "Dopasuj rozmiar czcionki:"
+
+msgid "Amount of recordings left:"
+msgstr "Pozostała ilość nagrań:"
+
+msgid "AutoTimer timer"
+msgstr "AutoTimer Timer"
+
+msgid "Bouquets:"
+msgstr "Bukiety:"
+
+msgid "Don't stop current event but disable coming events"
+msgstr "Nie zatrzymuj aktualnego wydarzenia ,ale wyłącz nadchodzące"
+
+msgid "Edit Off"
+msgstr "Edycja Wył."
+
+msgid "Edit On"
+msgstr "Edycja Wł."
+
+msgid "Embed volume slider:"
+msgstr "Osadzić suwak głośności:"
+
+msgid "Event Info"
+msgstr "Wydarz. Info"
+
+msgid "Excluded days:"
+msgstr "Wykluczone dni:"
+
+msgid "Exit on TV <-> Radio switch:"
+msgstr "Wyjście na TV <--> Radio przełącznik:"
+
+msgid "Friday"
+msgstr "Piątek"
+
+msgid "General"
+msgstr "Ogólne"
+
+msgid "IMDb"
+msgstr "IMDb"
+
+msgid "In order to record a timer, the TV was switched to the recording service!\n"
+msgstr "W celu nagrania z timera, TV został przełączony do usługi nagrywania!\n"
+
+msgid "Included days:"
+msgstr "Dołączone dni:"
+
+msgid "Increase list item height:"
+msgstr "Zwiększenie wysokości elementu listy:"
+
+msgid "Keys"
+msgstr "Klawisze"
+
+msgid "Limit search results to bouquet services:"
+msgstr "Ogranicz wyniki wyszukiwania do kanałów bukietu:"
+
+msgid "List style:"
+msgstr "Styl listy:"
+
+msgid "Lists"
+msgstr "Listy"
+
+msgid "Location:"
+msgstr "Położenie:"
+
+msgid "Match title:"
+msgstr "Dopasuj tytuł:"
+
+msgid "Monday"
+msgstr "Poniedziałek"
+
+msgid "More than just an EPG..."
+msgstr "Więcej niż tylko EPG..."
+
+msgid "New Search"
+msgstr "Nowe Szukanie"
+
+msgid "Now"
+msgstr "Trwające"
+
+msgid "Number of upcoming events to show:"
+msgstr "Pokaż ilość zbliżających się wydarzeń:"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Outdated off"
+msgstr "Stare Wył."
+
+msgid "Outdated on"
+msgstr "Stare Wł."
+
+msgid "Please select a timer type to add:"
+msgstr "Wybierz typ Timera do dodania:"
+
+msgid "Prime Time"
+msgstr "Prime Time"
+
+msgid "Prime time:"
+msgstr "Prime time:"
+
+msgid "Progress bar style:"
+msgstr "Styl paska postępu:"
+
+msgid "Record a maximum of x times:"
+msgstr "Nagrywanie maksymalnie x razy:"
+
+msgid "Record or zap timer"
+msgstr "Nagrywaj lub przełącz Timer"
+
+msgid "Remember last tab:"
+msgstr "Zapamiętaj ostatnią kartę:"
+
+msgid "Remove"
+msgstr "Usuń"
+
+msgid "Remove timer"
+msgstr "Usuń Timer:"
+
+msgid "Repeating event currently recording... What do you want to do?"
+msgstr ""
+"Powtarzające się wydarzenie w trakcie nagrania ...\n"
+"Co chcesz zrobić?"
+
+msgid "Replace ChannelSelection key down to start with tab:"
+msgstr "Zamień klawisz wyboru kanału (w dół) ,aby rozpocząć z karty:"
+
+msgid "Replace ChannelSelection key up to start with tab:"
+msgstr "Zamień klawisz wyboru kanału (w górę) ,aby rozpocząć z karty:"
+
+msgid "Replace EventView key to start with tab:"
+msgstr "Zamień klawisz Widok Wydarzeń ,aby rozpocząć z karty:"
+
+msgid "Replace InfoBar single and multi EPG:"
+msgstr "Zamień InfoBar pojedyńczy i multi EPG:"
+
+msgid "Return to main tab with exit:"
+msgstr "Po wyjściu powrót do głównej karty:"
+
+msgid "Saturday"
+msgstr "Sobota"
+
+msgid "Search"
+msgstr "Szukaj"
+
+msgid "Search for:"
+msgstr "Szukaj dla:"
+
+msgid "Search type:"
+msgstr "Typ wyszukiwania:"
+
+msgid "Select running service on start:"
+msgstr "Wybierz uruchomione usługi na początku:"
+
+msgid "Services:"
+msgstr "Nadawca:"
+
+msgid "Set search term"
+msgstr "Ustaw szukany termin"
+
+msgid "Show MiniTV:"
+msgstr "Pokaż MiniTV:"
+
+msgid "Show begin/remain times:"
+msgstr "Pokaż rozpoczęty i pozostały czas:"
+
+msgid "Show blinking picon for running timers:"
+msgstr "Pokaż mrugającą Pikonę dla uruchomionych Timerów:"
+
+msgid "Show duration:"
+msgstr "Pokaż czas trwania:"
+
+msgid "Show event information:"
+msgstr "Pokaż informacje o wydarzeniu:"
+
+msgid "Show list numbers:"
+msgstr "Pokaż numery list:"
+
+msgid "Show multi colored begin/remain times:"
+msgstr "Pokaż w wielu kolorach rozpoczęte/pozostałe czasy:"
+
+msgid "Show picons:"
+msgstr "Pokaż Pikony:"
+
+msgid "Show service name:"
+msgstr "Pokaż nazwę kanału:"
+
+msgid "Show short description:"
+msgstr "Pokaż krótki opis:"
+
+msgid "Show text input help for epg search:"
+msgstr "Pokaż pomoc wprowadzania tekstu dla wyszukiwania EPG:"
+
+msgid "Show timer messages:"
+msgstr "Pokaż wiadomości z timera:"
+
+msgid "Show video picture:"
+msgstr "Pokaż obraz wideo w oknie:"
+
+msgid "Similar"
+msgstr "Podobny"
+
+msgid "Single"
+msgstr "Pojedyńczy"
+
+msgid "Space between columns:"
+msgstr "Odstęp między kolumnami:"
+
+msgid "Stop current event and disable coming events"
+msgstr "Zatrzymaj bieżące wydarzenie i wyłącz nadchodzące"
+
+msgid "Stop current event but not coming events"
+msgstr "Zatrzymaj bieżące wydarzenie ,ale nie wyłączaj nadchodzących"
+
+msgid "Sunday"
+msgstr "Niedziela"
+
+msgid "Thursday"
+msgstr "Czwartek"
+
+msgid "Timer"
+msgstr "Timer"
+
+msgid "Today"
+msgstr "Dzisiaj"
+
+msgid "Tomorrow"
+msgstr "Jutro"
+
+msgid "Tuesday"
+msgstr "Wtorek"
+
+msgid "Unknown date"
+msgstr "Nieznana data"
+
+msgid "Upcoming"
+msgstr "Nadchodzące"
+
+msgid "Use picons (50x30) from:"
+msgstr "Użyj Pikon (50x30) ze ścieżki:"
+
+msgid "Use skin:"
+msgstr "Użyj skórki:"
+
+msgid "Wednesday"
+msgstr "Środa"
+
+msgid "about to start"
+msgstr "do rozpoczęcia się"
+
+msgid "disabled"
+msgstr "wyłączony"
+
+msgid "done!"
+msgstr "zrobione!"
+
+msgid "four parts"
+msgstr "z czterech części"
+
+msgid "gradient"
+msgstr "gradacja"
+
+msgid "percent (text)"
+msgstr "procenty (tekst)"
+
+msgid "recording..."
+msgstr "nagrywanie..."
+
+msgid "return"
+msgstr "powrót"
+
+msgid "simple"
+msgstr "prosty"
+
+msgid "single line style"
+msgstr "pojedyńczy styl lini"
+
+msgid "waiting"
+msgstr "czeka"
+
+msgid "with short description"
+msgstr "z krótkim opisem"
+
+msgid "zapped"
+msgstr "Przełączony (ZAP)"
+

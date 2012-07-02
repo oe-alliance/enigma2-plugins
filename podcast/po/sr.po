@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 Plugin - Podcast\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/"
+"enigma2/python/Plugins/Extensions/Podcast\n"
+
+msgid " (Audio)"
+msgstr " (Audio) "
+
+msgid " (Video)"
+msgstr " (Video) "
+
+msgid "Buffer device:"
+msgstr "Bafer uređaj:"
+
+msgid "Buffer file handling:"
+msgstr "Rukovanje bafer datot.:"
+
+msgid "Buffer:"
+msgstr "Bafer:"
+
+msgid "Delete this movie?"
+msgstr "Obriši ovaj film?"
+
+#, python-format
+msgid "Downloading movie: %s"
+msgstr "Preuzimanje filma: %s"
+
+msgid "Error getting categories"
+msgstr "Greška u dobijanju kategorija"
+
+msgid "Error getting episodes"
+msgstr "Greška u dobijanju epizoda"
+
+msgid "Error getting genres"
+msgstr "Greška u dobijanju žanrova"
+
+msgid "Error getting movies"
+msgstr "Greška u dobijanju filmova"
+
+msgid "Error getting podcast url"
+msgstr "Greška u dobijanju podkast url-a"
+
+msgid "Error getting podcasts"
+msgstr "Greška u dobijanju podkasta"
+
+msgid "Error getting rss feed"
+msgstr "Greška u dobijanju RSS fida"
+
+msgid "Length"
+msgstr "Dužina"
+
+msgid "Podcast"
+msgstr "Podkast"
+
+msgid "Save"
+msgstr "Sačuvaj"
+
+msgid "Select"
+msgstr "Izaberi"
+
+msgid "Stop playing this movie?"
+msgstr ""
+
+msgid "Type"
+msgstr "Tip"
+
+msgid "ask me"
+msgstr "pitaj me"
+
+msgid "configuration"
+msgstr "Konfiguracija"
+
+msgid "delete"
+msgstr "obriši"
+
+msgid "from xml"
+msgstr "iz xml"
+
+msgid "keep on device"
+msgstr "zadrži na uređaju"
+
+msgid "podcast.com"
+msgstr "podcast.com "
+
+msgid "podcast.de"
+msgstr "podcast.de "
+
+#~ msgid "Date"
+#~ msgstr "Datum "

@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+                    <tag type="Recording" />
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>MovieSearch</name>
+                    <packagename>enigma2-plugin-extensions-moviesearch</packagename>
+                    <shortdescription>Allow to search recordings</shortdescription>
+                    <description>Adds 'search...' to the context menu of the movie list to allow searches.</description>
+          </info>
+	  <files type="package">
+		<file type="package" name="enigma2-plugin-extensions-moviesearch" />
+	  </files>
+</default>

@@ -1,0 +1,76 @@
+<e2:screen name="UpdateWebScreen">
+<e2:element source="CurrentTime" streaming="yes">
+	<e2:convert type="ClockToText"></e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.CurrentService" id="CurrentService" streaming="yes">
+<e2:convert type="ServiceName">Name</e2:convert>
+<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.Event_Now" id="Event_Now_Name" streaming="yes">
+	<e2:convert type="EventName">Name</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.Event_Now" id="Event_Now_Extended_Description" streaming="yes">
+	<e2:convert type="EventName">ExtendedDescription</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.Event_Now" id="Event_Now_Begin" streaming="yes">
+	<e2:convert type="EventTime">StartTime</e2:convert>
+	<e2:convert type="ClockToText">Default</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.Event_Now" id="Event_Now_Remaining" streaming="yes">
+	<e2:convert type="EventTime">Remaining</e2:convert>
+	<e2:convert type="RemainingToText">InMinutes</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.Event_Next" id="Event_Next_Name" streaming="yes">
+	<e2:convert type="EventName">Name</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.Event_Next" id="Event_Next_Begin" streaming="yes">
+	<e2:convert type="EventTime">StartTime</e2:convert>
+	<e2:convert type="ClockToText">Default</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.Event_Next" id="Event_Next_Remaining" streaming="yes">
+	<e2:convert type="EventTime">Remaining</e2:convert>
+	<e2:convert type="RemainingToText">InMinutes</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.Event_Next" id="Event_Next_Extended_Description" streaming="yes">
+	<e2:convert type="EventName">ExtendedDescription</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.FrontendStatus"  id="SNRdB" streaming="yes">
+	<e2:convert type="FrontendInfo">SNRdB</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.FrontendStatus"  id="SNR" streaming="yes">
+	<e2:convert type="FrontendInfo">SNR</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.FrontendStatus"  id="BER" streaming="yes">
+	<e2:convert type="FrontendInfo">BER</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+<e2:element source="session.FrontendStatus"  id="AGC" streaming="yes">
+	<e2:convert type="FrontendInfo">AGC</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
+</e2:screen>

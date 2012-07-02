@@ -1,0 +1,304 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - AC3lipsync\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: L:\\Receiver\\Eclipse\\ac3lipsync\\po\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: Serbia\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ..\\src\n"
+
+msgid " "
+msgstr " "
+
+#, python-format
+msgid "%i ms"
+msgstr "%i ms"
+
+msgid "Audio Sync"
+msgstr ""
+
+msgid "Audio Sync Setup"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Otkaži"
+
+msgid "Center screen at the lower border"
+msgstr ""
+
+msgid "Center screen at the upper border"
+msgstr ""
+
+msgid "Change active delay"
+msgstr ""
+
+msgid "Channel audio:"
+msgstr "Audio kanal: "
+
+msgid "Decrease delay"
+msgstr ""
+
+#, python-format
+msgid "Decrease delay by %i ms (can be set)"
+msgstr ""
+
+msgid "Discard changes and close plugin"
+msgstr ""
+
+msgid "Discard changes and close screen"
+msgstr ""
+
+msgid "Global delay"
+msgstr ""
+
+msgid "Increase delay"
+msgstr ""
+
+#, python-format
+msgid "Increase delay by %i ms (can be set)"
+msgstr ""
+
+msgid "Invalid selection"
+msgstr "Izbor nije validan"
+
+#, python-format
+msgid "Key %(Key)s successfully set to %(delay)i ms"
+msgstr "Tipka %(Key)s uspešno podešena na %(delay)i ms "
+
+#, python-format
+msgid "Key %(key)s (current value: %(value)i ms)"
+msgstr "Tipka %(key)s (sad.vrednost: %(value)i ms)"
+
+msgid "Menu"
+msgstr "Meni"
+
+msgid "Move plugin screen"
+msgstr ""
+
+msgid "Move screen down"
+msgstr ""
+
+msgid "Move screen to the center of your TV"
+msgstr ""
+
+msgid "Move screen to the left"
+msgstr ""
+
+msgid "Move screen to the lower left corner"
+msgstr ""
+
+msgid "Move screen to the lower right corner"
+msgstr ""
+
+msgid "Move screen to the middle of the left border"
+msgstr ""
+
+msgid "Move screen to the middle of the right border"
+msgstr ""
+
+msgid "Move screen to the right"
+msgstr ""
+
+msgid "Move screen to the upper left corner"
+msgstr ""
+
+msgid "Move screen to the upper right corner"
+msgstr ""
+
+msgid "Move screen up"
+msgstr ""
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open plugin menu"
+msgstr ""
+
+msgid "Outer Bound (+/-)"
+msgstr "Krajnje ograničen (+/-)"
+
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr ""
+
+msgid "Reset saved position"
+msgstr ""
+
+msgid "Save"
+msgstr "Sačuvaj"
+
+msgid "Save current delay to key"
+msgstr ""
+
+msgid "Save to key"
+msgstr ""
+
+msgid "Save values and close plugin"
+msgstr ""
+
+msgid "Save values and close screen"
+msgstr ""
+
+#, python-format
+msgid "Select the key you want to set to %i ms"
+msgstr "Izaberite tipku koju želite podesiti u %i ms "
+
+msgid "Service delay"
+msgstr ""
+
+#, python-format
+msgid "Set delay to %i ms (can be set)"
+msgstr ""
+
+msgid "Setting key canceled"
+msgstr "Podešavanje tipke otkazano"
+
+msgid "Setup for the Audio Sync Plugin"
+msgstr ""
+
+msgid "Step in ms for arrow keys"
+msgstr "Korak u ms za tipke strelice"
+
+#, python-format
+msgid "Step in ms for key %i"
+msgstr "Korak u ms za tipku %i"
+
+#, python-format
+msgid "Step in ms for keys '%s'"
+msgstr "Korak u ms za tipke  '%s'"
+
+msgid "Wait time in ms before activation:"
+msgstr "Vreme čekanja u ms pre aktiviranja: "
+
+msgid "sets the Audio Delay (LipSync)"
+msgstr ""
+
+#~ msgid "%s delay:"
+#~ msgstr "%s kašnjenje:"
+
+#~ msgid "%s:"
+#~ msgstr "%s:"
+
+#~ msgid "AC3 Delay: "
+#~ msgstr "AC3 Verzögerung: "
+
+#~ msgid "AC3 Lip Sync"
+#~ msgstr "AC3 Lip Sync"
+
+#~ msgid "AC3 Lip Sync Setup"
+#~ msgstr "AC3 Lip Sync podešavanje"
+
+#~ msgid "Backup lamedb"
+#~ msgstr "lamedb sichern"
+
+#~ msgid "Bitstream delay:"
+#~ msgstr "Bitstream Verzögerung:"
+
+#~ msgid "Do you really want to remove the lamedb- backup?"
+#~ msgstr "Wollen Sie die Sicherung der lamedb wirklich löschen?"
+
+#~ msgid "Do you really want to restore the lamedb?"
+#~ msgstr "Wollen Sie die lamedb wirklich wiederherstellen?"
+
+#~ msgid "Key"
+#~ msgstr "Taste"
+
+#~ msgid "Maximum delay"
+#~ msgstr "Maximale Verzögerung"
+
+#~ msgid "Minimum delay"
+#~ msgstr "Minimale Verzögerung"
+
+#~ msgid "PCM Delay: "
+#~ msgstr "PCM Verzögerung: "
+
+#~ msgid "Recalculate..."
+#~ msgstr "Neuberechnen"
+
+#~ msgid "Remove lamedb backup"
+#~ msgstr "lamedb- Sicherung löschen"
+
+#~ msgid "Restore lamedb"
+#~ msgstr "lamedb wiederherstellen"
+
+#~ msgid "Save %s delay"
+#~ msgstr "Sačuvaj %s kašnjenje"
+
+#~ msgid "Save Bitstream delay"
+#~ msgstr "Bitstream Delay speichern"
+
+#~ msgid "Save both delays"
+#~ msgstr "Sačuvaj oba kašnjenja"
+
+#~ msgid "Save current %(audio)s delay of %(delay)i ms to key"
+#~ msgstr "Sačuvaj sadašnje %(audio)s kašnjenje (%(delay)i ms na tipku"
+
+#~ msgid "Saved %(audio)s value: %(delay)i ms"
+#~ msgstr "Sačuvana %(audio)s vrednost: %(delay)i ms"
+
+#~ msgid "Saved Bitstream value: "
+#~ msgstr "Gespeicherter Bitstream Wert:"
+
+#~ msgid "Set delay"
+#~ msgstr "Verzögerung setzen"
+
+#~ msgid "Setup for the AC3 Lip Sync Plugin"
+#~ msgstr "Podešavanje AC3 Lip Sync dodatka"
+
+#~ msgid "Switch audio"
+#~ msgstr "Zameni audio"
+
+#~ msgid "Switch to calculated key- delays"
+#~ msgstr "Verwende berechnete Werte für Zahlentasten"
+
+#~ msgid "Switch to user key- delays"
+#~ msgstr "Verwende benutzerdefinierte Werte für Zahlentasten"
+
+#~ msgid ""
+#~ "There is already a backup of the lamedb\n"
+#~ "Do you want to overwrite it?"
+#~ msgstr ""
+#~ "Es gibt bereits eine Sicherung der lamedb\n"
+#~ "Wollen Sie diese überschreiben?"
+
+#~ msgid "There is no backup of the lamedb. Action canceled"
+#~ msgstr "Es gibt keine Sicherung der lamedb. Aktion abgebrochen"
+
+#~ msgid "Use calc. delays"
+#~ msgstr "autom. Verz."
+
+#~ msgid "Use user delays"
+#~ msgstr "Benutzer Verz."
+
+#~ msgid "What you want to do with your lamedb"
+#~ msgstr "Welche Aktion wollen Sie durchführen"
+
+#~ msgid "Which delays do you want to set"
+#~ msgstr "Koja kašnjenja želite podesiti"
+
+#~ msgid "lamedb backup successful"
+#~ msgstr "Sicherung der lamedb erfolgreich"
+
+#~ msgid "lamedb backup successfully removed"
+#~ msgstr "Sicherung der lamedb erfolgreich gelöscht"
+
+#~ msgid "lamedb backup successfully restored"
+#~ msgstr "lamedb wurde erfolgreich wiederhergestellt"
+
+#~ msgid "lamedb..."
+#~ msgstr "lamedb..."
+
+#~ msgid "ms"
+#~ msgstr "ms"
+
+#~ msgid "sets the AC3 audio Delay (LipSync)"
+#~ msgstr "podešava  AC3 audio kašnjenje (LipSync)"

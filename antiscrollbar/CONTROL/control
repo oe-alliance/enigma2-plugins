@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-antiscrollbar
+Version: 1.0-20061204-r0
+Description: overlay for scrollbars on your tvscreen
+Maintainer: 3c5x9 <3c5x9@gmx.de>
+Depends: enigma2 (>> 1.0git20061101)

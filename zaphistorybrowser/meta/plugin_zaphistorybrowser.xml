@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>AliAbdul</author>
+                    <name>ZapHistoryBrowser</name>
+                    <packagename>enigma2-plugin-extensions-zaphistorybrowser</packagename>
+                    <shortdescription>Shows a list of recent zap entries</shortdescription>
+                    <description>Shows a list containing the zapping-history and allows user to zap to the entries or to modify them.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_zaphistorybrowser_en.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-zaphistorybrowser" />
+	  </files>
+</default>

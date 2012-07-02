@@ -1,0 +1,248 @@
+# translation of networkwizard_nl.po to gerrit
+# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tuxbox-enigma package.
+#
+# Automatically generated, 2005.
+# gerrit <gerrit@nedlinux.nl>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: networkwizard_nl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-04-24 13:22+0200\n"
+"PO-Revision-Date: 2011-09-28 12:38+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: AndyBlac/Rob van der Does\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Nederlands\n"
+"X-Poedit-Country: NEDERLAND\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Generator: KBabel 1.11.4\n"
+
+msgid " Results"
+msgstr "Resultaten"
+
+msgid "All"
+msgstr "Alle"
+
+msgid "All Time"
+msgstr "Alle tijden"
+
+msgid "Ascanding"
+msgstr "Oplopend"
+
+msgid "Australia"
+msgstr "Australië"
+
+msgid "Autos & Vehicles"
+msgstr "Auto's & voertuigen"
+
+msgid "Brazil"
+msgstr "Brazilië"
+
+msgid "Canada"
+msgstr "Canada"
+
+msgid "Category"
+msgstr "Categorie"
+
+msgid "Close"
+msgstr "sluit"
+
+msgid "Comedy"
+msgstr "Komedie"
+
+msgid "Czech Republic"
+msgstr "Tsjechië"
+
+msgid "Descending"
+msgstr "Aflopend"
+
+msgid "Do you want to see more entries?"
+msgstr "Wilt u meer entries zien?"
+
+msgid "Education"
+msgstr "Opvoeding"
+
+msgid "Entertainment"
+msgstr "Amusement"
+
+msgid "Fetching feed entries"
+msgstr "Haalt entries van de feed binnen"
+
+msgid "Fetching search entries"
+msgstr "Haalt zoek-entries binnen"
+
+msgid "Film & Animation"
+msgstr "Film & animatie"
+
+msgid "France"
+msgstr "Frankrijk"
+
+msgid "From Region"
+msgstr "Van regio"
+
+msgid "Gaming"
+msgstr "Gaming"
+
+msgid "Germany"
+msgstr "Duitsland"
+
+msgid "Great Britain"
+msgstr "Groot Brittannië"
+
+msgid "Holland"
+msgstr "Holland"
+
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+msgid "Howto & Style"
+msgstr "Howto & Stijl"
+
+msgid "India"
+msgstr "India"
+
+msgid "Ireland"
+msgstr "Ierland"
+
+msgid "Israel"
+msgstr "Israel"
+
+msgid "Italy"
+msgstr "Italië"
+
+msgid "Japan"
+msgstr "Japan"
+
+msgid "Mexico"
+msgstr "Mexico"
+
+msgid "More video entries."
+msgstr "Meer video entries."
+
+msgid "Music"
+msgstr "Muziek"
+
+msgid "My TubePlayer"
+msgstr "My TubePlayer"
+
+msgid "MyTubePlayer"
+msgstr "MyTubePlayer"
+
+msgid "MyTubeVideoInfoScreen"
+msgstr "MyTubeVideoInfoScreen"
+
+msgid "New Zealand"
+msgstr "Nieuw Zeeland"
+
+msgid "News & Politics"
+msgstr "Nieuws & Politiek"
+
+msgid "No"
+msgstr "Nee"
+
+msgid "No playable video found! Stop playing this movie?"
+msgstr "Geen afspeelbare video gevonden! Stoppen met afspelen?"
+
+msgid "No, but play next video"
+msgstr "Nee, speel de volgende video af"
+
+msgid "No, but play previous video"
+msgstr "Nee, speel de vorige video af"
+
+msgid "Nonprofits & Activism"
+msgstr "Nonprofit & activisme"
+
+msgid "Order by"
+msgstr "Sorteer op"
+
+msgid "People & Blogs"
+msgstr "Mensen & blogs"
+
+msgid "Pets & Animals"
+msgstr "(huis)dieren"
+
+msgid "Play YouTube movies"
+msgstr "Speel YouTube filmpjes af"
+
+msgid "Poland"
+msgstr "Polen"
+
+msgid "Published"
+msgstr "Gepubliceerd"
+
+msgid "Rating"
+msgstr "Waarderingscijfer"
+
+msgid "Relevance"
+msgstr "Relevantie"
+
+msgid "Restricted Content"
+msgstr "Vertrouwelijke inhoud"
+
+msgid "Russia"
+msgstr "Rusland"
+
+msgid "Science & Technology"
+msgstr "Wetenschap & technologie"
+
+msgid "Search"
+msgstr "Zoek"
+
+msgid "Search Term(s)"
+msgstr "Zoekterm(en)"
+
+msgid "Short Movies"
+msgstr "Korte filmpjes"
+
+msgid "Sorry, video is not available!"
+msgstr "Sorry, video is niet beschikbaar!"
+
+msgid "South Korea"
+msgstr "Zuid Korea"
+
+msgid "Spain"
+msgstr "Spanje"
+
+msgid "Sports"
+msgstr "Sport"
+
+msgid "Stop playing this movie?"
+msgstr "Stoppen met afspelen?"
+
+msgid "Sweden"
+msgstr "Zweden"
+
+msgid "Taiwan"
+msgstr "Taiwan"
+
+msgid "This Month"
+msgstr "Deze maand"
+
+msgid "This Week"
+msgstr "Deze week"
+
+msgid "Today"
+msgstr "Vandaag"
+
+msgid "Travel & Events"
+msgstr "Reizen & gebeurtenssen"
+
+msgid "Trying to download the Youtube feed entries. Please wait..."
+msgstr "Probeer de Youtube feed entries binnen te halen. Even wachten..."
+
+msgid "Trying to download the Youtube search results. Please wait..."
+msgstr "Probeer de Youtube zoekresultatenbinnen te halen. Even wachten..."
+
+msgid "United States"
+msgstr "Verenigde Staten"
+
+msgid "View Count"
+msgstr "Aantal malen bekeken"
+
+msgid "Yes"
+msgstr "Ja"
+

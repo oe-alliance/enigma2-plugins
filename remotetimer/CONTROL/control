@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-remoteTimer
+Version: 20090408
+Description: add Timer remote on a another Dreambox whit Enigma2
+Maintainer: nixkoenner@newnigma2.to
+Homepage: http://www.newnigma2.to
+Depends: enigma2 (>> 2.6git20090409), python-twisted-web

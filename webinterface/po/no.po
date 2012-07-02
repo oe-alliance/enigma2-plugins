@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins-extensions-webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Stephan Reichholf <stephan@reichholf.net>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: V:\\eclipse\\workspaces\\pydev\\enigma2-plugins\\enigma2-"
+"plugins\\webinterface\n"
+"X-Poedit-Language: Norwegian Nynorsk\n"
+"X-Poedit-SearchPath-0: src\n"
+
+msgid "Allow zapping via Webinterface"
+msgstr "Tillat zapping via WebInterface"
+
+msgid "Autowrite timer"
+msgstr "Skrive timer automatisk"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Configuration for the Webinterface"
+msgstr "Konfigurasjon av WebInterface"
+
+msgid "Enable /media"
+msgstr "Aktiver /media"
+
+msgid "Enable HTTP Access"
+msgstr "Aktiver HTTP tilgang"
+
+msgid "Enable HTTP Authentication"
+msgstr "Aktiver HTTP godkjenning"
+
+msgid "Enable HTTPS Access"
+msgstr "Aktiver HTTPS tilgang"
+
+msgid "Enable HTTPS Authentication"
+msgstr "Aktiver HTTPS godkjenning"
+
+msgid "Enable Streaming Authentication"
+msgstr "Aktiver godkjenning av Streaming"
+
+msgid "HTTP Port"
+msgstr "HTTP Port"
+
+msgid "HTTPS Port"
+msgstr "HTTPS Port"
+
+msgid "Load movie-length"
+msgstr "Se filmlengde"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Start Webinterface"
+msgstr "Start WebInterface"
+
+msgid "Webinterface"
+msgstr "WebInterface"
+
+msgid "Webinterface: Main Setup"
+msgstr "WebInterface: Hoved konfigurasjon."
+
+#~ msgid "N/A"
+#~ msgstr "N/A"

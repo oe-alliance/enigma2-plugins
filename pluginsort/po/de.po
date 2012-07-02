@@ -1,0 +1,78 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PluginSort\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-07-20 09:03+0100\n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
+"Language-Team: SiennaRoot <fk-912737@versanet.de>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: /Users/fk/Desktop/PluginSort/locale/de/LC_MESSAGES\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+#. TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+msgid "Download Plugins"
+msgstr "Plugins herunter laden"
+
+msgid "End Sort"
+msgstr "Sortieren beenden"
+
+msgid "Help"
+msgstr "Hilfe"
+
+#. TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+msgid "Manage extensions"
+msgstr "Erweiterungen verwalten"
+
+#. TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+msgid "Remove Plugins"
+msgstr "Plugins entfernen"
+
+msgid "Sort"
+msgstr "Sortieren"
+
+msgid "Sort EventInfo Extensions"
+msgstr "Sortiere Event Info Erweiterungen"
+
+msgid "Sort Extensions"
+msgstr "Sortiere Erweiterungen"
+
+msgid "Sort MovieList Extensions"
+msgstr "Sortiere Movielist Erweiterungen"
+
+msgid "Unable to load PluginHider"
+msgstr "PluginHider konnte nicht geladen werden!"
+
+#. TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
+msgid "disable move mode"
+msgstr "Verschiebemodus aus"
+
+#. TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
+msgid "enable move mode"
+msgstr "Verschiebemodus ein"
+
+msgid "hide selected plugin"
+msgstr "Selektiertes Plugin ausblenden"
+
+msgid "move event extensions"
+msgstr "Event Info Erweiterungen verschieben"
+
+msgid "move extensions"
+msgstr "Erweiterungen verschieben "
+
+msgid "move movie extensions"
+msgstr "Movielist Erweiterungen verschieben"

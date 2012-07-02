@@ -1,0 +1,5 @@
+<e2:screen external_module="Plugins.Extensions.WebBouquetEditor.WebScreens.AdditionalWebScreens" name="AdditionalWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2servicelist>
+<e2:element source="SatellitesList" id="mode"><e2:convert type="web:TextToHTML" /></e2:element>
+</e2servicelist>
+</e2:screen>

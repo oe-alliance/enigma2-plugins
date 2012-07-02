@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+		    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>PluginSort</name>
+                    <packagename>enigma2-plugin-extensions-pluginsort</packagename>
+                    <shortdescription>Sort Plugins in the PluginBrowser.</shortdescription>
+		    <description>This Plugin modifies the original PluginBrowser so you can move Plugins around.</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-pluginsort" />
+	  </files>
+</default>

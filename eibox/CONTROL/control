@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-eibox
+Version: 0.1-20101005-r0
+Description: graphical European Installation Bus visualization
+Maintainer: Fraxinas <andreas.frisch@multimedia-labs.de>
+Depends: enigma2 (>= 2.8git20100728)

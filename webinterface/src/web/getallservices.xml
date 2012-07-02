@@ -1,0 +1,5 @@
+<e2:screen name="ServiceListRecursiveWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2servicelistrecursive>
+<e2:element source="ServiceListRecursive" id="sRef"><e2:convert type="web:TextToHTML" /></e2:element>
+</e2servicelistrecursive>
+</e2:screen>
