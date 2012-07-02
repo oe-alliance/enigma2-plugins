@@ -140,7 +140,7 @@ msgid "Channels"
 msgstr "Kanäle"
 
 msgid "Check for uniqueness in"
-msgstr "Überprüfung auf Eindeutigkeit in"
+msgstr "Auf Einzigartigkeit prüfen in"
 
 msgid "Choose target folder"
 msgstr "Zielverzeichnis wählen"
@@ -164,7 +164,7 @@ msgid "Control recording completely by service"
 msgstr "Aufnahme vollständig durch den Sender steuern lassen"
 
 msgid "Create a new AutoTimer."
-msgstr "Einen neuen AutoTimer erstellen."
+msgstr "Erzeuge einen neuen Auto Timer."
 
 msgid "Create a new timer using the classic editor"
 msgstr "Neuen Timer mit dem klassichen Editor erstellen"
@@ -230,7 +230,7 @@ msgid "Enable Service Restriction"
 msgstr "Sender-Beschränkungen"
 
 msgid "Enable this to be able to access the AutoTimer Overview from within the extension menu."
-msgstr "Diesen Punkt aktivieren wenn Autotimer in Erweiterungsliste aufgeführt werden soll."
+msgstr "Diese Einstellung aktivieren, um die Übersicht aus dem Plugin-Browser zugänglich zu machen."
 
 msgid "Enable this to be able to access the AutoTimer Overview from within the plugin browser."
 msgstr "Diesen Punkt aktivieren wenn Autotimer in Erweiterungen aufgeführt werden soll."
@@ -422,7 +422,7 @@ msgid "Only on Weekday: %s"
 msgstr "Nur an Wochentag: %s"
 
 msgid "Only poll while in standby"
-msgstr "Nur prüfen wenn in StandBy"
+msgstr "Abfrage nur in standby"
 
 msgid "Open Context Menu"
 msgstr "Öffne Kontext-Menü"
@@ -434,7 +434,7 @@ msgid "Please provide a Text to match"
 msgstr "Bitte zu findenden Text eingeben"
 
 msgid "Poll Interval (in mins)"
-msgstr "Prüfintervall"
+msgstr "Abfrageintervall (in Miunten)"
 
 msgid "Poll automatically"
 msgstr "Automatisch suchen"
@@ -539,7 +539,7 @@ msgid "Show in extension menu"
 msgstr "In Erweiterungsmenü anzeigen"
 
 msgid "Show in plugin browser"
-msgstr "Zeige in Erweiterungen"
+msgstr "Im Plugin Browser anzeigen"
 
 msgid "Show notification on conflicts"
 msgstr "Benachrichtigung bei Konflikten anzeigen"
@@ -611,7 +611,7 @@ msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced
 msgstr "Das ist Geschmackssache./nDer Assistent bietet nur die nötigsten Einstellungen und präsentiert sie in kleinen Häppchen. Diese Methode ist eher für den nicht so geübten Benutzer gedacht./n/nDu kannst den 'klassischen' Editor ausprobieren indem Du aus der Übersicht einen Eintrag wählst und OK drückst. Wenn dir der Editor besser als der Assistent gefällt kannst Du ihn in den Einstellungen zum Standard machen."
 
 msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
-msgstr "Das ist die Zeitspanne in Minuetn  die AutoTimer nach einer Suche wartet bevor das EPG erneut durchsucht wird."
+msgstr "Dies ist die Verzögerung in Minuten, die der AutoTimer wartet, bis nach einer erfolgten Suche eine neue gestartet wird."
 
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Hiernach wird im Sendungstitel gesucht. Die Suche z.B. nach Umlauten ist etwas komplizierter, da man dazu den Zeichensatz des Sender-EPGs wissen muss."

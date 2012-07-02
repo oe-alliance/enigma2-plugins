@@ -170,7 +170,10 @@ class ConfigTextWithSuggestions(ConfigText):
 	def onSelect(self, session):
 		if self.threaded:
 			self.suggestionsThread = ConfigTextWithSuggestions.SuggestionsThread(self.suggestions)
-			self.suggestionsThread.start()
+			try:
+				self.suggestionsThread.start()
+			except:
+				pass
 		else:
 			self.suggestionsThread = None
 		ConfigText.onSelect(self, session)
