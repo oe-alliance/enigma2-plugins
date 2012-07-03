@@ -84,7 +84,7 @@ SUBDIRS = \
 	yttrailer \
 	zaphistorybrowser \
 	zapstatistic \
-	zdfmediathek
+	zdfmediathek \
 	mytube \
 	yttrailer \
 	oscaminfo \
@@ -93,7 +93,8 @@ SUBDIRS = \
 	sudoku \
 	vierg \
 	bmediacenter \
-	advancedmovieselection
+	advancedmovieselection \
+	webinterface
 
 if DREAMBOX
 SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview genuinedreambox
@@ -105,8 +106,6 @@ endif
 if VUULTIMO
 SUBDIRS +=  fancontrol2
 endif
-
-SUBDIRS += 	webinterface
 
 metadir = $(datadir)/meta
 meta_DATA = index-enigma2-plugins.xml
