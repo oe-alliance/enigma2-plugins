@@ -1,4 +1,4 @@
-#import shutil
+import subprocess
 import os
 try:
 	is_libmediainfo = True
@@ -20,6 +20,7 @@ from Plugins.Extensions.SubsDownloader2.SourceCode.chardet_OutpuyTranslation imp
 from Plugins.Extensions.SubsDownloader2.SourceCode.myFileList import EXTENSIONS, FileList #*
 from Plugins.Extensions.SubsDownloader2.pluginOnlineContent import IsNewVersionCheck, zlib_link, libmediainfo_link, Subtitle_Downloader_temp_dir, PluginIpkUpdate, InstallDownloadableContent, CommertialBannerDownload #flagcounetr,
 from Screens.VirtualKeyBoard import VirtualKeyBoard
+from os import system as os_system
 from os import stat as os_stat
 from os import walk as os_walk
 from Screens.Screen import Screen
@@ -35,6 +36,7 @@ from Components.AVSwitch import AVSwitch
 from Components.ActionMap import ActionMap
 from Plugins.Plugin import PluginDescriptor
 from Tools.HardwareInfo import HardwareInfo
+from Tools.Directories import fileExists, pathExists
 from time import strftime as time_strftime
 from time import localtime as time_localtime
 from re import compile as re_compile
@@ -52,7 +54,7 @@ if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/DVDPlayer/plugin.p
 	DVDPlayerAviable = True
 else:
 	DVDPlayerAviable = False
-if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/plugin.pyo") or os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/plugin.pyc"):
+if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/plugin.pyo") or fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/plugin.pyc"):
 	from Plugins.Extensions.MerlinMusicPlayer.plugin import MerlinMusicPlayerScreen, Item
 	MMPavaiable = True
 else:
@@ -146,9 +148,7 @@ class SubsDownloaderApplication(Screen):
 		
 		os.system('mkdir /tmp/SubsDownloader_cache')
 		self.subsListDownloaded=0
-		#self.movie_fps=0
 		self.localConvertion = False
-		#self.subtitleExtention = "srt|txt|sub|nfo" #add other if someone gives remark
 		self.MyBox = HardwareInfo().get_device_name()
 		self.textEXTENSIONS = {
 		        "srt": "text",
@@ -159,14 +159,8 @@ class SubsDownloaderApplication(Screen):
 		        "zip": "package",
 		        "rar": "package"
 		        }
-		#self.mediaPatern = "^.*\.(jpe|)"
 		#TODO OBSLUGA PLIKOW BZIP, ZIP, RAR
-		#TODO Auto plugin update
 		#TODO File manager (delete, copy, move, rename
-		#TODO COMERTIAL for sponsor
-		#TODO OTHER SUBTITLE FEEDERS
-		#TODO VERSION CHANGE
-		#TODO Think about automatic media patern make based on FileList module
 		self["key_menu"] = StaticText("Config menu")
 		self["key_help"] = StaticText("About...")
 		self["key_text"] = StaticText("Subtitle download")
@@ -192,12 +186,42 @@ class SubsDownloaderApplication(Screen):
 			self["fileList"] = FileList(fileListPath, matchingPattern = self.mediaPatern)
 		self.selectedList = self["fileList"]
 		self["subsList"] = MenuList(list)
-		self.clearSubList()
+		self.fileManagerEnabled = False
+		self.showFilemanagerScreen_command = None
+		self.clearSubList()		
 		self.set_listFile_enabled()
 		
 		self.isVisible = True
-			
-		self["myActionMap"] = self.key_bind()
+		#self.fileManager_orders = []
+		
+		self["myActionMap_showned"] = ActionMap(["ChannelSelectBaseActions","WizardActions", "DirectionActions","MenuActions","NumberActions","ColorActions","SubsDownloaderApplication_actions"],                            
+	        {
+	                "ok": self.ok,
+	                "back": self.closeApplication,
+	                "about": self.showAboutScreen,
+	                "subSelect": self.downloadSubtitle,
+	                "menu": self.showConfigScreen,
+	                "nextMarker": self.set_listSubs_enabled,
+	                "prevMarker": self.set_listFile_enabled,
+	                "up": self.goUp,
+	                "down": self.goDown,
+	                "left": self.goLeft,
+	                "right": self.goRight,
+	                "info": self.showFilemanagerScreen_file_info_on_screen_title, #self.FM_file_Info, 
+	                "localConv": self.localConvertionSublist,
+	                "0": self.skinVisibility,
+	                #"red": self.goRed,
+	                #"green": self.goGreen,
+	                #"yellow": self.goYellow,
+	                "blue": self.showFilemanagerScreen_without_callback,		        
+	        }, -1)
+		
+		self["myActionMap_hidded"] = ActionMap(["ChannelSelectBaseActions","WizardActions", "DirectionActions","MenuActions","NumberActions","ColorActions","SubsDownloaderApplication_actions"],                            
+		{
+		        "0": self.skinVisibility,
+		}, -1)		
+		self["myActionMap_showned"].setEnabled(True)
+		self["myActionMap_hidded"].setEnabled(False)
 		
 		#PICTURE INITIALIZATION
 		self.EXscale = (AVSwitch().getFramebufferScale())
@@ -245,48 +269,17 @@ class SubsDownloaderApplication(Screen):
 			else:
 				self.CommertialBannerTimer.start(7500, False)
 		
-	def key_bind(self):			
-		primary_bind = ActionMap(["ChannelSelectBaseActions","WizardActions", "DirectionActions","MenuActions","NumberActions","ColorActions","SubsDownloaderApplication_actions"],                            
-	        {
-	                "ok": self.ok,
-	                "back": self.closeApplication,
-	                "about": self.showAboutScreen,
-	                "subSelect": self.downloadSubtitle,
-	                "menu": self.showConfigScreen,
-	                "nextMarker": self.set_listSubs_enabled,
-	                "prevMarker": self.set_listFile_enabled,
-	                "up": self.goUp,
-	                "down": self.goDown,
-	                "left": self.goLeft,
-	                "right": self.goRight,
-	                "info": self.FM_file_Info, 
-	                "localConv": self.localConvertionSublist,
-	                "0": self.visibility,
-	                #"red": self.goRed,
-	                #"green": self.goGreen,
-	                #"yellow": self.goYellow,
-	                "blue": self.showFilemanagerScreen,		        
-	        }, -2)		
-		return primary_bind		
-		
-	def visibility(self):
+
+	def skinVisibility(self):
 		if self.isVisible == True:
 			self.isVisible = False
-			def key_bind_for_hidden():
-				secondary_bind = ActionMap(["ChannelSelectBaseActions","WizardActions", "DirectionActions","MenuActions","NumberActions","ColorActions","SubsDownloaderApplication_actions"],                            
-				{
-					"0": self.visibility,
-				}, -2)
-				return secondary_bind
-			self["myActionMap"].doUnbind()
-			self["myActionMap"] = key_bind_for_hidden()
-			self["myActionMap"].doBind()			
+			self["myActionMap_showned"].setEnabled(False)
+			self["myActionMap_hidded"].setEnabled(True)			
 			self.hide()
 		else:
 			self.isVisible = True
-			self["myActionMap"].doUnbind()
-			self["myActionMap"] = self.key_bind()
-			self["myActionMap"].doBind()
+			self["myActionMap_showned"].setEnabled(True)
+			self["myActionMap_hidded"].setEnabled(False)
 			self.show()
 		             
 	
@@ -295,44 +288,133 @@ class SubsDownloaderApplication(Screen):
 			self.setTitle("Subtitle downloader (without libmediainfo)")
 		elif is_libmediainfo == True:
 			self.setTitle("Subtitle downloader (with libmediainfo)")
-
-	def showFilemanagerScreen(self):
-		self.session.open(MessageBox,_('Support soon...'), MessageBox.TYPE_INFO, timeout = 5)
+			
+	def showFilemanagerScreen_file_info_on_screen_title(self):
+		self.showFilemanagerScreen(("file_info_on_screen_title"))
+		
+	def showFilemanagerScreen_without_callback(self):		
+		if type(self.showFilemanagerScreen_command) == type(None):
+			self.showFilemanagerScreen(("None"))
+		else:
+			order = None
+			if self.showFilemanagerScreen_command[0] == "Do_nothing":
+				order = None
+			elif self.showFilemanagerScreen_command[0] == "delete":
+				#order = 'rm -f \"' + self.showFilemanagerScreen_command[1] + '\" &'
+				if os.path.isfile(self.showFilemanagerScreen_command[1]):
+					order = 'rm -f \"' + self.showFilemanagerScreen_command[1] + '\"'
+				elif os.path.isdir(self.showFilemanagerScreen_command[1]):
+					order = 'rm -r \"' + self.showFilemanagerScreen_command[1] + '\"'
+			elif self.showFilemanagerScreen_command[0] == "copy":			
+				dest = self["subsList"].getCurrent()[1]
+				if self.showFilemanagerScreen_command[1][len(self.showFilemanagerScreen_command[1])-1] == '/':
+					order = 'cp -af \"' + self.showFilemanagerScreen_command[1] + '\" \"' + dest + '\"'
+				else:
+					order = 'cp \"' + self.showFilemanagerScreen_command[1] + '\" \"' + dest + '\"'
+			elif self.showFilemanagerScreen_command[0] == "move":
+				dest = self["subsList"].getCurrent()[1]
+				if self.showFilemanagerScreen_command[1][len(self.showFilemanagerScreen_command[1])-1] == '/':
+					order = 'mv \"' + self.showFilemanagerScreen_command[1] + '\" \"' + dest + '\"'
+				else:
+					order = 'mv \"' + self.showFilemanagerScreen_command[1] + '\" \"' + dest + '\"'
+			elif self.showFilemanagerScreen_command[0] == "rename":
+				dest = self.showFilemanagerScreen_command[2]
+				if self.showFilemanagerScreen_command[1][len(self.showFilemanagerScreen_command[1])-1] == '/':
+					order = 'mv \"' + self.showFilemanagerScreen_command[1] + '\" \"' + dest + '\"'
+				else:
+					order = 'mv \"' + self.showFilemanagerScreen_command[1] + '\" \"' + dest + '\"'
+				
+				#order = "ls"
+				#self.session.open(MessageBox,_("%s \n %s \n %s!" % (self.showFilemanagerScreen_command[0],self.showFilemanagerScreen_command[1],self.showFilemanagerScreen_command[2])), MessageBox.TYPE_ERROR)
+				
+			if order != None:
+				try:
+					os.system(order)
+				except:
+					self.session.open(MessageBox,_("%s \nFAILED!" % order), MessageBox.TYPE_ERROR)
+			self.set_FileManager_disabled()
+			self["fileList"].refresh()
 	
-#!!!!!!!!!!!! file manager functions!!!!!!#
-	def FM_file_Info(self):
-		if self["fileList"].canDescent():
-			if self["fileList"].getSelectionIndex()!=0:
-				curSelDir = self["fileList"].getSelection()[0]
-				dir_stats = os_stat(curSelDir)
-				dir_infos = "DIR:    size "+str(self.FM_Humanizer(dir_stats.st_size))+"    "
-				#dir_infos = dir_infos+"last-mod "+time_strftime("%d.%m.%Y %H:%M:%S",time_localtime(dir_stats.st_mtime))+"    "
-				#dir_infos = dir_infos+"mode "+str(dir_stats.st_mode)
-				self.setTitle(_(dir_infos))
+	def showFilemanagerScreen(self, callback):
+		self.showFilemanagerScreen_command = callback	
+		
+		def FM_file_Info(self):
+			if self["fileList"].canDescent():
+				if self["fileList"].getSelectionIndex()!=0:
+					curSelDir = self["fileList"].getSelection()[0]
+					dir_stats = os_stat(curSelDir)
+					dir_infos = "DIR:    size "+str(FM_Humanizer(dir_stats.st_size))+"    "
+					self.setTitle(_(dir_infos))
+				else:
+					dei = self.session.open(MessageBox, _("Dreambox: " + self.MyBox + "\n\n"), MessageBox.TYPE_INFO)
+					dei.setTitle(_("Device"))				
+									
 			else:
-				dei = self.session.open(MessageBox, _("Dreambox: " + self.MyBox + "\n\n"), MessageBox.TYPE_INFO)
-				dei.setTitle(_("Device"))				
-								
-		else:
-			curSelFile = self["fileList"].getCurrentDirectory() + self["fileList"].getFilename()
-			file_stats = os_stat(curSelFile)
-			file_infos = self.return_media_kind(self.return_extention(curSelFile)).upper() + ":    "
-			file_infos = file_infos + "size "+str(self.FM_Humanizer(file_stats.st_size))#+"    "
-			#file_infos = file_infos+"last-mod "+time_strftime("%d.%m.%Y %H:%M:%S",time_localtime(file_stats.st_mtime))+"    "
-			#file_infos = file_infos+"mode "+str(file_stats.st_mode)
-			self.setTitle(_(file_infos))
+				curSelFile = self["fileList"].getCurrentDirectory() + self["fileList"].getFilename()
+				file_stats = os_stat(curSelFile)
+				file_infos = self.return_media_kind(self.return_extention(curSelFile)).upper() + ":    "
+				file_infos = file_infos + "size "+str(FM_Humanizer(file_stats.st_size))
+				self.setTitle(_(file_infos))
+	
+		def FM_Humanizer(size):
+			if (size < 1024):
+				humansize = str(size)+" B"
+			elif (size < 1048576):
+				humansize = str(size/1024)+" KB"
+			else:
+				humansize = str(size/1048576)+" MB"
+			return humansize
+		
+		def VirtualKeyboart_dir_rename_Callback(callback):
+			if callback ==None or callback == "":
+				self.showFilemanagerScreen_command = ("Do_nothing", self.showFilemanagerScreen_command[1])
+				self.showFilemanagerScreen_without_callback()
+			else:
+				self.showFilemanagerScreen_command = ("rename", self.showFilemanagerScreen_command[1], "/".join(self.showFilemanagerScreen_command[1].split("/")[0:-2])+"/"+callback+"/")
+				self.showFilemanagerScreen_without_callback()
+		
+		def VirtualKeyboart_file_rename_Callback(callback):
+			if callback ==None or callback == "":
+				self.showFilemanagerScreen_command = ("Do_nothing", self.showFilemanagerScreen_command[1])
+				self.showFilemanagerScreen_without_callback()
+			else:
+				self.showFilemanagerScreen_command = ("rename", self.showFilemanagerScreen_command[1], "/".join(self.showFilemanagerScreen_command[1].split("/")[0:-1])+"/"+callback)
+				self.showFilemanagerScreen_without_callback()
+			
+		def get_FileManagerCommands_callback(callback):
+			self.showFilemanagerScreen_command = callback
+			
+			if self.fileManagerEnabled == True:
+				if self.showFilemanagerScreen_command[0] == "copy" or self.showFilemanagerScreen_command[0] == "move":
+					pass #do nothing execute command during blue button press
+				elif self.showFilemanagerScreen_command[0] == "rename":
+					if os.path.isdir(self.showFilemanagerScreen_command[1]):
+						self.session.openWithCallback(VirtualKeyboart_dir_rename_Callback, VirtualKeyBoard, title = _("Oryginal dir name: %s" % self.showFilemanagerScreen_command[1].split("/")[-2]), text = self.showFilemanagerScreen_command[1].split("/")[-2])
+					elif os.path.isfile(self.showFilemanagerScreen_command[1]):
+						self.session.openWithCallback(VirtualKeyboart_file_rename_Callback, VirtualKeyBoard, title = _("Oryginal file name: %s" % self.showFilemanagerScreen_command[1].split("/")[-1]), text = self.showFilemanagerScreen_command[1].split("/")[-1])
+				elif self.showFilemanagerScreen_command[0] == "Do_nothing":
+					self.set_FileManager_disabled()
+				else:
+					#for Do_nothing and delete
+					self.showFilemanagerScreen_without_callback()
+				
+		if self.fileManagerEnabled == False and callback != "file_info_on_screen_title":
+			if self["fileList"].canDescent():
+				current_dir = self["fileList"].getCurrentDirectory()
+				current_selection = self["fileList"].getSelection()[0]
+			else:
+				current_dir = self["fileList"].getCurrentDirectory()
+				current_selection = self["fileList"].getCurrentDirectory()+self["fileList"].getSelection()[0]# ('/hdd/Net_HDD/Filmy/Seriale/Boardwalk Empire Season 2/', True)
 
-	def FM_Humanizer(self, size):
-		if (size < 1024):
-			humansize = str(size)+" B"
-		elif (size < 1048576):
-			humansize = str(size/1024)+" KB"
-		else:
-			humansize = str(size/1048576)+" MB"
-		return humansize	
+			if os.path.exists(str(current_selection)) and "/".join(str(current_dir).split("/")[:-2])+"/"!=current_selection and type(current_dir)!= type(None):	
+				self.set_FileManager_enabled()
+				self.setServerAvailableSubtitles_for_dirList(current_dir)
+				self.session.openWithCallback(get_FileManagerCommands_callback, FileManagerCommands, current_selection)
 
-
-#!!!!!!!!!!!! file manager functionS!!!!!!#
+		if self.showFilemanagerScreen_command == "file_info_on_screen_title":
+			FM_file_Info(self)
+			self.set_listFile_enabled()
+			
 
 
 # !!!!!!!!!!!! PICTURE FUNCTIONS !!!!!!!!!!!!!!	
@@ -391,7 +473,7 @@ class SubsDownloaderApplication(Screen):
 		self.serverAvailableSubtitles=[]
 		self["subsList"].setList(self.serverAvailableSubtitles)
 		self.subsListDownloaded=0
-		self.set_listFile_enabled()
+		#self.set_listFile_enabled()
 		
 	def setServerAvailableSubtitles_for_PERISCOPE(self,serverList):
 		"""Function preper (appends) serverAvailableSubtitles which is seted by
@@ -422,6 +504,20 @@ class SubsDownloaderApplication(Screen):
 		self["subsList"].setList(self.serverAvailableSubtitles)
 		self.set_listSubs_enabled()
 		
+	def setServerAvailableSubtitles_for_dirList(self,current_dir):		
+		if os.path.exists(str(current_dir)):			
+			a = os.listdir(current_dir)
+			a.sort()
+			self.serverAvailableSubtitles = []
+			self.serverAvailableSubtitles.append(("/..","/".join(current_dir.split("/")[0:-2])+"/"))
+			for x in a:
+				if os.path.isdir(os.path.join(current_dir,x)):
+					self.serverAvailableSubtitles.append(("/"+x+"/",os.path.join(current_dir,x)+"/"))
+			self.subsListDownloaded=1		
+			self["subsList"].setList(self.serverAvailableSubtitles)
+			self["subsList"].moveToIndex(0)
+			self.set_listSubs_enabled()
+	
 	def setServerAvailableSubtitles_for_Napisy24(self,serverList):
 		"""Function preper (appends) serverAvailableSubtitles which is seted by 
 		comend self["subsList"].setList(self.serverAvailableSubtitles)"""
@@ -436,26 +532,13 @@ class SubsDownloaderApplication(Screen):
 		self.subsListDownloaded=1
 		self["subsList"].setList(self.serverAvailableSubtitles)
 		self.set_listSubs_enabled()
-	
-	def setsubsList_for_FileManager(self,serverList):
-		"""Funstion display dirs structure in subsList widget"""
-		pass
-		def dir_list(root_dir):
-			temp_dir_list = os.listdir(root_dir)
-			final_dir_list = []
-			final_dir_list.append(("..", root_dir))
-			for x in temp_dir_list:
-				final_dir_list.append((x, root_dir+"/"+x))
-			self["subsList"].setList(final_dir_list)
 		
 	def saveSubtitleasSRT(self, subtitleFile, fps, subtitleCodePage):
 		"""Function converts and saves downloaded subtitle in suitable ditectory"""
-		#codePageDecoded= self.chardetOutputTranslation(subtitleCodePage)
-		subtitle_codepade = codePageDecoded= chardetOutputTranslation(subtitleCodePage)
-		convertedSubtitle = SubConv(subtitleFile, codePageDecoded)
-		#convertedSubtitle.subs_file = convertedSubtitle.to_utf_8(convertedSubtitle.subs_file,codePageDecoded)
-		#convertedSubtitle.subs_file = convertedSubtitle.to_utf_8(convertedSubtitle.subs_file)
-		subtitleFormat = convertedSubtitle.detect_format(convertedSubtitle.subs_file)
+		subtitle_codepade = codePageDecoded = chardetOutputTranslation(subtitleCodePage)
+		if codePageDecoded != "None":
+			convertedSubtitle = SubConv(subtitleFile, codePageDecoded)
+			subtitleFormat = convertedSubtitle.detect_format(convertedSubtitle.subs_file)
 		#TODO IN TERMINAF SHOW PROGRESS
 		if subtitleFile != "None" and fps != "None" and codePageDecoded != "None" and subtitleFormat != "None":
 			progress_message="Saved subtitle file: %s \nDetected oryginal subtitle format:  %s \nDetected subtitle CodePage: %s (%s) with probability %s \nDetected movie FPS: %s \n   PRES OK KEY TO CONTINUE..." % (subtitleFile, subtitleFormat, subtitleCodePage['encoding'],codePageDecoded, subtitleCodePage['confidence'],fps)
@@ -469,7 +552,6 @@ class SubsDownloaderApplication(Screen):
 			elif subtitleFormat == "srt":
 				convertedSubtitle.subs_file = convertedSubtitle.read_srt(convertedSubtitle.subs_file)
 			elif subtitleFormat == "mpl2":
-				#convertedSubtitle.subs_file = convertedSubtitle.read_mpl2(convertedSubtitle.subs_file, fps)
 				convertedSubtitle.subs_file = convertedSubtitle.read_mpl2(convertedSubtitle.subs_file)
 			convertedSubtitle.subs_file = convertedSubtitle.check_subs_long(convertedSubtitle.subs_file, fps)
 			#convertedSubtitle.save_subtitle(subtitleFile, convertedSubtitle.subs_file)
@@ -554,8 +636,10 @@ class SubsDownloaderApplication(Screen):
 			subtitle_filename_type = self.saveSubtitleasSRT(subtitle_filename, movie_fps, subtitle_codepade)
 			self["fileList"].refresh()
 		except:
-			self.failed_to_download_subtitle_nfo(subtitle_filename,subtitle_codepade,subtitle_filename_type,movie_fps)			
-				
+			try:
+				self.failed_to_download_subtitle_nfo(subtitle_filename,subtitle_codepade,subtitle_filename_type,movie_fps)			
+			except:
+				self.failed_to_download_subtitle_nfo(subtitle_filename,subtitle_codepade,"unsupported",movie_fps)
 			
 	def downloadSubtitle(self):
 		"""Download Subtitle for movie variable self.textEXTENSIONS has defived all supported files and their king.
@@ -737,16 +821,39 @@ class SubsDownloaderApplication(Screen):
 		
 	def set_listFile_enabled(self):
 		"""Function makes self["fileList"] as active"""
-		self["fileList"].selectionEnabled(1)
-		self["subsList"].selectionEnabled(0)
-		self.selectedList = self["fileList"]
+		if self.fileManagerEnabled == False:
+			self["fileList"].selectionEnabled(1)
+			self["subsList"].selectionEnabled(0)
+			self.selectedList = self["fileList"]
+		elif self.fileManagerEnabled == True:
+			self.set_FileManager_disabled()
+			self.clearSubList()
+	
+	def set_FileManager_enabled(self):
+		self["fileList"].selectionEnabled(0)
+		self["subsList"].selectionEnabled(1)
+		self.localConvertion = False
+		self.fileManagerEnabled = True
+		self["key_last"].setText("Disable FileManager")
+		self["key_info"].setText("Disable FileManager")
+		self["key_blue"].setText("Execute command")
+		
+	def set_FileManager_disabled(self):
+		self.fileManagerEnabled = False		
+		self["key_last"].setText("FileList enable")
+		self["key_info"].setText("File size")
+		self["key_blue"].setText("Enable FileManager")	
+		self.set_listFile_enabled()
+		self.showFilemanagerScreen_command = None		
+		self.clearSubList()
+		
 		
 	def set_listSubs_enabled(self):
 		"""If subtitle was found and list was generated function makes self["subsList"] as active.
 		The condition is that self.subsListDownloaded is "1". Condition is seted in downloadSubtitle function.
 		Not alvays seting of self["subsList"] is required."""
 		if self.subsListDownloaded ==1:
-			self.localConvertion == True
+			#self.localConvertion = True
 			self["fileList"].selectionEnabled(0)
 			self["subsList"].selectionEnabled(1)
 			self.selectedList = self["subsList"]
@@ -756,7 +863,7 @@ class SubsDownloaderApplication(Screen):
 	
 	def ok(self):
 		global DVDPlayerAviable
-		if self.selectedList == self["fileList"]:
+		if self.selectedList == self["fileList"] and self.fileManagerEnabled == False:
 			if self["fileList"].canDescent():
 				"""If dir makes cd"""
 				self["fileList"].descent()
@@ -776,7 +883,7 @@ class SubsDownloaderApplication(Screen):
 							try:
 								self.session.open(MerlinMusicPlayerScreen, SongList, SongIndex, False, self.altservice, None)
 							except:
-								self.session.open(MessageBox, _("Incompatible MerlinMusicPlayer version!"), MessageBox.TYPE_INFO, timeout = 5)
+								self.session.open(MessageBox, _("Incompatible MerlinMusicPlayer version!"), MessageBox.TYPE_INFO)
 						else:
 							fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + filename)
 							m_dir = self["fileList"].getCurrentDirectory()
@@ -823,7 +930,7 @@ class SubsDownloaderApplication(Screen):
 							self.session.open(vEditor, filename)
 						else:
 							self.session.open(MessageBox, _("File size is bigger than 61440.\n\n Subs Downloader can't manage it with vEditor."), MessageBox.TYPE_INFO, timeout = 5)
-		if self.selectedList == self["subsList"]:
+		if self.selectedList == self["subsList"] and self.fileManagerEnabled == False:
 			whichSubtitleDownload="None"
 			subtitle_filename = []
 			if self.localConvertion == False:
@@ -873,6 +980,14 @@ class SubsDownloaderApplication(Screen):
 				subtitle_filename.append(whichSubtitleDownload)				
 				self.convert_subtitle_to_movie(self.movie_filename, subtitle_filename[0])
 			#TODO OTHER SUBTITLE SERVERS HANDLE
+		if self.selectedList == self["subsList"] and self.fileManagerEnabled == True:
+			a = os.listdir(self["subsList"].getCurrent()[1])
+			dir_count = 0
+			for x in a:
+				if os.path.isdir(os.path.join(self["subsList"].getCurrent()[1],x)+"/"):
+					dir_count = dir_count +1
+			if dir_count >0:
+				self.setServerAvailableSubtitles_for_dirList(self["subsList"].getCurrent()[1])
 				
 	def closeApplication(self):
 		os.system('rm -r %s' % Subtitle_Downloader_temp_dir)
@@ -908,6 +1023,58 @@ class SubsDownloaderApplication(Screen):
 					foundIndex = index
 				index = index + 1
 		return slist,foundIndex		
+
+class FileManagerCommands(Screen):	
+	def __init__(self, session, file_to_manage):
+		self.file_to_manage = file_to_manage
+		self.skin = "<screen position=\"center,80\" size=\""+str(int(0.644*Skin_width))+","+str(int(0.644*Skin_height))+"\" title=\"What to do with file:\" > \
+		<widget name=\"myCommands\" position=\"10,10\" size=\""+str(int(0.625*Skin_width))+","+str(int(0.385*Skin_height))+"\" scrollbarMode=\"showOnDemand\" /> \
+		</screen>"
+		self.session = session
+		Screen.__init__(self, session)
+		self.list = []
+		self["myCommands"] = MenuList(self.list)
+		self["setupActions"] = ActionMap(["SetupActions","DirectionActions","WizardActions","SubsDownloaderConfig_actions"],
+		{
+		        "ok": self.ExitWithDoingSomething,
+			"cancel": self.ExitWithoutDoingNothing
+		}, -1)
+		self.createCommandsMenu()
+		
+	def createCommandsMenu(self):
+		self.list.append((_("Exit"), "exit"))
+		self.list.append((_("Delete"), "delete"))
+		self.list.append((_("Copy"), "copy"))
+		self.list.append((_("Move"), "move"))
+		self.list.append((_("Rename"), "rename"))
+		#self.list.append((_(str(self.file_to_manage)), "exit"))
+		self["myCommands"].setList(self.list)
+		
+	def ExitWithoutDoingNothing(self):
+		self.close(["Do_nothing", self.file_to_manage])
+	
+	def ExitWithDoingSomething(self):
+		def delete_command_notification(callback):
+			if callback == True:
+				self.close (("delete", self.file_to_manage))
+			
+			else:
+				self.ExitWithoutDoingNothing()
+			
+		
+		returnValue = self["myCommands"].l.getCurrentSelection()[1]
+		if returnValue == "exit":
+			self.ExitWithoutDoingNothing()
+		elif returnValue == "delete":
+			self.session.openWithCallback(delete_command_notification, MessageBox,_("Do You realy want to delete: /n %s" % self.file_to_manage), MessageBox.TYPE_YESNO, default = False)
+		elif returnValue == "copy":
+			self.close (("copy", self.file_to_manage))
+		elif returnValue == "move":
+			self.close (("move", self.file_to_manage))
+		elif returnValue == "rename":
+			self.close (("rename", self.file_to_manage))
+	
+	
 	
 class SubsDownloaderConfig(ConfigListScreen, Screen):	
 	def __init__(self, session):
@@ -1092,7 +1259,7 @@ class MviExplorer(Screen):
 		}, -1)
 		self.onLayoutFinish.append(self.showMvi)
 	def showMvi(self):
-		os_system("/usr/bin/showiframe " + self.file_name)
+		os.system("/usr/bin/showiframe " + self.file_name)
 
 
 
@@ -1183,7 +1350,6 @@ class PictureExplorerII(Screen):
 class MoviePlayer(MP_parent):
 	def __init__(self, session, filename):
 		self.moviename = filename
-
 		if self.moviename.endswith(".ts"):
 			fileRef = eServiceReference("1:0:0:0:0:0:0:0:0:0:" + self.moviename)
 		elif (self.moviename.endswith(".mpg")) or (self.moviename.endswith(".mpeg")) or (self.moviename.endswith(".mkv")) or (self.moviename.endswith(".m2ts")) or (self.moviename.endswith(".vob")) or (self.moviename.endswith(".mod")):
@@ -1276,30 +1442,40 @@ class MoviePlayer(MP_parent):
 		if not(self.WithoutStopClose):
 			self.session.nav.playService(self.lastservice)
 
-class FileManager(Screen):
-	def __init__(self,session):
+class MoviePlayer_4_MusicExploret(MP_parent):
+	def __init__(self, session, service):
 		self.session = session
-		
+		self.WithoutStopClose = False
+		MP_parent.__init__(self, self.session, service)
 
-class MusicExplorer(MoviePlayer):
+	def leavePlayer(self):
+		self.is_closing = True
+		self.close()
+
+	def leavePlayerConfirmed(self, answer):
+		pass
+	
+class MusicExplorer(MoviePlayer_4_MusicExploret):
+	skin = """
+	<screen backgroundColor="#50070810" flags="wfNoBorder" name="MusicExplorer" position="center,center" size="720,30">
+		<widget font="Regular;24" halign="right" position="50,0" render="Label" size="100,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+			<convert type="ServicePosition">Remaining</convert>
+		</widget>
+		<widget font="Regular;24" position="170,0" render="Label" size="650,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+	</screen>"""
 	def __init__(self, session, service, MusicDir, theFile):
-		self.skin = '<screen backgroundColor="#50070810" flags="wfNoBorder" name="MusicExplorer" position="center,center" size="720,30"> \
-		<widget font="Regular;24" halign="right" position="50,0" render="Label" size="100,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1"> \
-		<convert type="ServicePosition">Remaining</convert> \
-		</widget> \
-		<widget font="Regular;24" position="170,0" render="Label" size="650,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1"> \
-		<convert type="ServiceName">Name</convert> \
-		</widget> \
-		</screen>'
 		self.session = session
-		MoviePlayer.__init__(self, session, service)
+		MoviePlayer_4_MusicExploret.__init__(self, session, service)
 		self.MusicDir = MusicDir
 		self.musicList = []
 		self.Mindex = 0
 		self.curFile = theFile
 		self.searchMusic()
 		self.onLayoutFinish.append(self.showMMI)
-		MoviePlayer.WithoutStopClose = False
+		MoviePlayer_4_MusicExploret.WithoutStopClose = False
+
 
 	def showMMI(self):
 		try:
