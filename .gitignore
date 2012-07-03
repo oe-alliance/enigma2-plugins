@@ -28,6 +28,5 @@ stamp-h1
 .settings/
 *.la
 *.lo
-*.mo
 *.o
 
