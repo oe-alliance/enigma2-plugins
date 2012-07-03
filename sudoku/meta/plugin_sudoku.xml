@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Software" />
+	  </prerequisites>
+          <info>
+                    <author>DarkVolli</author>
+                    <name>sudoku</name>
+                    <packagename>enigma2-plugin-extensions-sudoku</packagename>
+                    <shortdescription>Sudoku</shortdescription>
+                    <description>Sudoku game for enigma2</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-sudoku" />
+	  </files>
+</default>

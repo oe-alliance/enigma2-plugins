@@ -1,6 +1,6 @@
 Package: enigma2-plugin-extensions-vierg
 Version: 0.2-r1
-Description: Vier gewinnt Game
+Description: Four wins game
 Section: extra
 Priority: optional
 Maintainer: DarkVolli

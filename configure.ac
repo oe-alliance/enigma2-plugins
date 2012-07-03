@@ -47,7 +47,7 @@ AM_CONDITIONAL(GB800SE, test "$BOXTYPE" == gb800se)
 AM_CONDITIONAL(GB800SOLO, test "$BOXTYPE" == gb800solo)
 AM_CONDITIONAL(GB800UE, test "$BOXTYPE" == gb800ue)
 AM_CONDITIONAL(GBQUAD, test "$BOXTYPE" == gbquad)
-AM_CONDITIONAL(VENTONHDX, test "$BOXTYPE" == venton-hdx)
+AM_CONDITIONAL(VENTONHDX, test "$BOXTYPE" == ventonhdx)
 AM_CONDITIONAL(ODINM9, test "$BOXTYPE" == odinm9)
 
 PKG_CHECK_MODULES(ENIGMA2, enigma2)
@@ -89,6 +89,7 @@ AC_CONFIG_FILES([
 Makefile
 
 advancedmovieselection/Makefile
+advancedmovieselection/meta/Makefile
 advancedmovieselection/po/Makefile
 advancedmovieselection/src/Makefile
 advancedmovieselection/src/buttons/Makefile
@@ -149,6 +150,7 @@ bitrateviewer/src/Makefile
 bitrateviewer/src/bitratecalc/Makefile
 
 bmediacenter/Makefile
+bmediacenter/meta/Makefile
 bmediacenter/po/Makefile
 bmediacenter/src/Makefile
 bmediacenter/src/icons/Makefile
@@ -223,6 +225,7 @@ epgrefresh/src/Makefile
 epgrefresh/src/webinterface/Makefile
 
 esame/Makefile
+esame/meta/Makefile
 esame/src/Makefile
 esame/src/data/Makefile
 
@@ -418,6 +421,7 @@ orfteletext/meta/Makefile
 orfteletext/src/Makefile
 
 oscaminfo/Makefile
+oscaminfo/meta/Makefile
 oscaminfo/src/Makefile
 oscaminfo/src/po/Makefile
 
@@ -470,6 +474,7 @@ rsdownloader/src/Makefile
 rsdownloader/src/container/Makefile
 
 schiffe/Makefile
+schiffe/meta/Makefile
 schiffe/src/Makefile
 
 setpasswd/Makefile
@@ -512,6 +517,7 @@ subsdownloader2/src/SourceCode/xbmc_subtitles/services/Napisyme/Makefile
 subsdownloader2/src/SourceCode/xbmc_subtitles/services/Itasa/Makefile
 
 sudoku/Makefile
+sudoku/meta/Makefile
 sudoku/src/Makefile
 
 svdrp/Makefile
@@ -545,6 +551,7 @@ valixdcontrol/src/comp/Makefile
 valixdcontrol/src/data/Makefile
 
 vierg/Makefile
+vierg/meta/Makefile
 vierg/src/Makefile
 
 vlcplayer/Makefile

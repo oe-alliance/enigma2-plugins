@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Software" />
+	  </prerequisites>
+          <info>
+                    <author>DarkVolli</author>
+                    <name>schiffe</name>
+                    <packagename>enigma2-plugin-extensions-schiffe</packagename>
+                    <shortdescription>Battleship Game</shortdescription>
+                    <description>Battleship Game</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-schiffe" />
+	  </files>
+</default>

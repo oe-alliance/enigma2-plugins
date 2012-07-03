@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Software" />
+	  </prerequisites>
+          <info>
+                    <author>JackDaniel</author>
+                    <name>AdvancedMovieselection</name>
+                    <packagename>enigma2-plugin-extensions-advancedmovieselection</packagename>
+                    <shortdescription>Advanced Movieselection</shortdescription>
+                    <description>Advanced Movieselection</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-advancedmovieselection" />
+	  </files>
+</default>
