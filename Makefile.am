@@ -85,16 +85,14 @@ SUBDIRS = \
 	zaphistorybrowser \
 	zapstatistic \
 	zdfmediathek \
-	mytube \
-	yttrailer \
 	oscaminfo \
 	esame \
 	schiffe \
 	sudoku \
 	vierg \
 	bmediacenter \
-	advancedmovieselection \
-	webinterface
+	advancedmovieselection
+
 
 if DREAMBOX
 SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview genuinedreambox
@@ -105,6 +103,13 @@ SUBDIRS +=  fancontrol2
 endif
 if VUULTIMO
 SUBDIRS +=  fancontrol2
+endif
+
+if TPM
+SUBDIRS += \
+	mytube \
+	yttrailer \
+	webinterface
 endif
 
 metadir = $(datadir)/meta
