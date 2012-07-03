@@ -1437,10 +1437,10 @@ def mainText(session, **kwargs):
   if ttx_screen.txtpid != -1:
     session.execDialog(ttx_screen)
   else:
-    if ttx_screen.showMessages():
-      session.open(MessageBox, _("No teletext available."), MessageBox.TYPE_INFO, timeout = 3)
-    else:
+    if len(ttx_screen.pid_list) > 0:
       session.openWithCallback(selectText, TeleTextTransponderMenu, ttx_screen.pid_list, ttx_screen.pid_index)
+    elif ttx_screen.showMessages():
+      session.open(MessageBox, _("No teletext available."), MessageBox.TYPE_INFO, timeout = 3)
 
 def selectText(result):
   global my_session
