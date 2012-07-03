@@ -87,7 +87,6 @@ SUBDIRS = \
 	zdfmediathek
 	mytube \
 	yttrailer \
-	webinterface \
 	oscaminfo \
 	esame \
 	schiffe \
@@ -106,6 +105,8 @@ endif
 if VUULTIMO
 SUBDIRS +=  fancontrol2
 endif
+
+SUBDIRS += 	webinterface
 
 metadir = $(datadir)/meta
 meta_DATA = index-enigma2-plugins.xml
