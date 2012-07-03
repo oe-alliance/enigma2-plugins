@@ -422,8 +422,8 @@ orfteletext/src/Makefile
 
 oscaminfo/Makefile
 oscaminfo/meta/Makefile
+oscaminfo/po/Makefile
 oscaminfo/src/Makefile
-oscaminfo/src/po/Makefile
 
 partnerbox/Makefile
 partnerbox/meta/Makefile
