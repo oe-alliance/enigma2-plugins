@@ -69,7 +69,6 @@ HELP_TEXT_BRIGHTNESS   = _("Select brightness.")
 HELP_TEXT_CONTRAST     = _("Select contrast.")
 HELP_TEXT_TRANSPARENCY = _("Select transparency.")
 HELP_TEXT_EDGE_CUT     = _("Display first and last row.")
-HELP_TEXT_MESSAGES     = _("Show message if no teletext available or exit silently.")
 HELP_TEXT_DEBUG        = _("Print debug messages to /tmp/dbttcp.log.")
 HELP_TEXT_TEXTLEVEL    = _("Select teletext version to use.")
 HELP_TEXT_REGION       = _("Select your region to use the proper font.")
@@ -93,7 +92,6 @@ config.plugins.TeleText.scale_filter_zoom = ConfigSelection(filterList, default=
 config.plugins.TeleText.brightness   = ConfigSlider(default=8,  increment=1, limits=(0,15))
 config.plugins.TeleText.contrast     = ConfigSlider(default=12, increment=1, limits=(0,15))
 config.plugins.TeleText.transparency = ConfigSlider(default=8,  increment=1, limits=(0,15))
-config.plugins.TeleText.messages = ConfigEnableDisable(default=True)
 config.plugins.TeleText.edge_cut = ConfigEnableDisable(default=False)
 config.plugins.TeleText.splitting_mode = ConfigSelection(splittingModeList, default=SPLIT_MODE_PAT)
 config.plugins.TeleText.textlevel      = ConfigSelection(textlevelModeList, default="2")
@@ -903,9 +901,6 @@ class TeleText(Screen):
       x = array.array('B', (CMD_CTL_CACHE, (self.txtpid & 0xFF00) >> 8, (self.txtpid & 0xFF), self.demux))
       self.socketSend(x)
 
-  def showMessages(self):
-    return config.plugins.TeleText.messages.value
-
   # ---- for summary (lcd) ----
 
   def createSummary(self):
@@ -1219,8 +1214,6 @@ class TeleTextMenu(ConfigListScreen, Screen):
       self["label"].setText(HELP_TEXT_SPLITTING)
     elif configele == config.plugins.TeleText.tip_pos:
       self["label"].setText(HELP_TEXT_TIP_POS)
-    elif configele == config.plugins.TeleText.messages:
-      self["label"].setText(HELP_TEXT_MESSAGES)
     elif configele == config.plugins.TeleText.debug:
       self["label"].setText(HELP_TEXT_DEBUG)
     elif configele == config.plugins.TeleText.edge_cut:
@@ -1263,7 +1256,6 @@ class TeleTextMenu(ConfigListScreen, Screen):
     if config.plugins.TeleText.splitting_mode.value == SPLIT_MODE_TIP:
       self.list.append(getConfigListEntry("... %s" % _("Position and size"),   config.plugins.TeleText.tip_pos))
     self.list.append(getConfigListEntry(_("Background caching"),config.plugins.TeleText.background_caching))
-    self.list.append(getConfigListEntry(_("Message"), config.plugins.TeleText.messages))
     self.list.append(getConfigListEntry(_("Debug"),   config.plugins.TeleText.debug))
 
     self["config"].list = self.list
@@ -1283,7 +1275,6 @@ class TeleTextMenu(ConfigListScreen, Screen):
     config.plugins.TeleText.brightness.setValue(8)
     config.plugins.TeleText.contrast.setValue(12)
     config.plugins.TeleText.transparency.setValue(8)
-    config.plugins.TeleText.messages.setValue(True)
     config.plugins.TeleText.edge_cut.setValue(False)
     config.plugins.TeleText.splitting_mode.setValue(SPLIT_MODE_PAT)
     config.plugins.TeleText.textlevel.setValue("2")
@@ -1439,7 +1430,7 @@ def mainText(session, **kwargs):
   else:
     if len(ttx_screen.pid_list) > 0:
       session.openWithCallback(selectText, TeleTextTransponderMenu, ttx_screen.pid_list, ttx_screen.pid_index)
-    elif ttx_screen.showMessages():
+    else:
       session.open(MessageBox, _("No teletext available."), MessageBox.TYPE_INFO, timeout = 3)
 
 def selectText(result):
