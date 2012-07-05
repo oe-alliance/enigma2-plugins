@@ -28,6 +28,8 @@ from select import POLLIN, POLLPRI, POLLHUP, POLLERR
 from enigma import Teletext as TeletextInterface
 from enigma import DISABLED, BILINEAR, ANISOTROPIC, SHARP, SHARPER, BLURRY, ANTI_FLUTTER, ANTI_FLUTTER_BLURRY, ANTI_FLUTTER_SHARP
 
+PLUGIN_VERSION="20120705"
+
 CMD_CTL_CACHE=1
 CMD_SHOW_PAGE=2
 CMD_PAGE_NEXT=3
@@ -1151,21 +1153,21 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
   def __init__(self, session, parent):
     width = 492
-    height = 480
+    height = 460
     left = (dsk_width - width)>>1
     top = (dsk_height - height)>>1
     log("[menu] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
-        <widget name="config" position="0,0"   size="492,355" scrollbarMode="showOnDemand" zPosition="1"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,358" zPosition="1" size="492,2" />
-        <widget name="label"  position="0,360" size="492,70" font="Regular;16" zPosition="1" halign="left" valign="top"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,435" zPosition="1" size="492,2" />
-        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,440"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/green.png"  position="176,440" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/yellow.png" position="352,440" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <widget name="key_r" position="0,440"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget name="key_g" position="176,440" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget name="key_y" position="352,440" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="config" position="0,0"   size="492,335" scrollbarMode="showOnDemand" zPosition="1"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,338" zPosition="1" size="492,2" />
+        <widget name="label"  position="0,340" size="492,70" font="Regular;16" zPosition="1" halign="left" valign="top"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,415" zPosition="1" size="492,2" />
+        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,420"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/green.png"  position="176,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/yellow.png" position="352,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <widget name="key_r" position="0,420"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_g" position="176,420" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_y" position="352,420" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
       </screen>""" % (left, top, width, height, _("TeleText settings"))
 
     Screen.__init__(self, session, parent)
@@ -1287,7 +1289,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
   def infoPressed(self):
     log("[menu] info pressed")
-    self.session.open(MessageBox, "Daemon Version: %s" % self.parent.daemonVersion, MessageBox.TYPE_INFO, timeout = 15)
+    self.session.open(TeleTextAboutScreen, self.parent.daemonVersion)
 
   def textPressed(self):
     log("[menu] text pressed")
@@ -1404,6 +1406,80 @@ class TeleTextMenuSummary(Screen):
   def selectionChanged(self):
     self["SetupEntry"].text = self.parent.getCurrentEntry()
     self["SetupValue"].text = self.parent.getCurrentValue()
+
+# ----------------------------------------
+
+class TeleTextAboutScreen(Screen):
+
+  daemonVersion = "0.1"
+
+  def __init__(self, session, dVersion):
+    self.daemonVersion = dVersion
+    
+    width = 360
+    height = 240
+    left = (dsk_width - width)>>1
+    top = (dsk_height - height)>>1
+    log("[about] screen rect %s %s %s %s" % (left, top, width, height))
+    TeleTextAboutScreen.skin = """<screen position="%d,%d" size="%d,%d" flags="wfNoBorder">
+        <widget name="pic"    position="0,0"    size="360,240" zPosition="1" pixmap="%s" alphatest="on"/>
+        <widget name="text"   position="12,16"  size="336,36"  zPosition="2" font="Console;36" halign="center" backgroundColor="blue"  foregroundColor="white" />
+        <widget name="daemon" position="12,64"  size="336,24"  zPosition="2" font="Console;20" halign="left"   backgroundColor="white" foregroundColor="black" />
+        <widget name="plugin" position="12,200" size="336,24"  zPosition="2" font="Console;20" halign="right"  backgroundColor="white" foregroundColor="black" />
+      </screen>""" % (left, top, width, height, resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/teletext.png"))
+
+    Screen.__init__(self, session)
+
+    self["actions"] = ActionMap(["OkCancelActions"],
+    {
+      "ok"     : self.okPressed,
+      "cancel" : self.cancelPressed
+    }, -2)
+    self["actions"].setEnabled(True)
+
+    self["pic"] = Pixmap()
+    self["text"] = Label("TeleText")
+    self["daemon"] = Label("Daemon v%s" % self.daemonVersion)
+    self["plugin"] = Label("Plugin v%s" % PLUGIN_VERSION)
+
+  def okPressed(self):
+    log("[about] ok pressed")
+    self.close(None)
+
+  def cancelPressed(self):
+    log("[about] cancel pressed")
+    self.close(None)
+
+  # ---- for summary (lcd) ----
+
+  def getDaemonVersion(self):
+    return self.daemonVersion
+
+  def getPluginVersion(self):
+    return self.pluginVersion
+
+  def createSummary(self):
+    return TeleTextAboutSummary
+
+# ----------------------------------------
+
+class TeleTextAboutSummary(Screen):
+  skin = ("""<screen name="TeleTextAboutSummary" position="0,0" size="132,64" id="1">
+      <widget name="SetupTitle" position="6,4"  size="120,20" font="Regular;20" halign="center"/>
+      <widget name="SetupEntry" position="6,30" size="120,12" font="Regular;12" halign="left"/>
+      <widget name="SetupValue" position="6,48" size="120,12" font="Regular;12" halign="left"/>
+    </screen>""",
+    """<screen name="TeleTextAboutSummary" position="0,0" size="96,64" id="2">
+      <widget name="SetupTitle" position="3,4"  size="90,20" font="Regular;20" halign="center"/>
+      <widget name="SetupEntry" position="3,30" size="90,12" font="Regular;12" halign="left"/>
+      <widget name="SetupValue" position="3,48" size="90,12" font="Regular;12" halign="left"/>
+    </screen>""")
+
+  def __init__(self, session, parent):
+    Screen.__init__(self, session, parent = parent)
+    self["SetupTitle"] = Label(_("TeleText settings"))
+    self["SetupEntry"] = Label("Daemon %s" % parent.getDaemonVersion)
+    self["SetupValue"] = Label("Plugin %s" % parent.getPluginVersion)
 
 # ----------------------------------------
 
