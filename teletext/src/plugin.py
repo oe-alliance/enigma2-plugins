@@ -1455,9 +1455,6 @@ class TeleTextAboutScreen(Screen):
   def getDaemonVersion(self):
     return self.daemonVersion
 
-  def getPluginVersion(self):
-    return self.pluginVersion
-
   def createSummary(self):
     return TeleTextAboutSummary
 
@@ -1478,8 +1475,8 @@ class TeleTextAboutSummary(Screen):
   def __init__(self, session, parent):
     Screen.__init__(self, session, parent = parent)
     self["SetupTitle"] = Label(_("TeleText settings"))
-    self["SetupEntry"] = Label("Daemon %s" % parent.getDaemonVersion)
-    self["SetupValue"] = Label("Plugin %s" % parent.getPluginVersion)
+    self["SetupEntry"] = Label("Daemon v%s" % parent.getDaemonVersion)
+    self["SetupValue"] = Label("Plugin v%s" % PLUGIN_VERSIOn)
 
 # ----------------------------------------
 
