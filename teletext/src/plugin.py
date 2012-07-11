@@ -88,6 +88,13 @@ NAV_MODE_TEXT          = 0
 NAV_MODE_SIZE_TEXT     = 1
 NAV_MODE_SIZE_TIP_TEXT = 2
 
+# i.d.R. bezeichnet man 90% der vollen Aufloesung als "Title-Safe-Area" --> Default
+
+DEF_TOP    = dsk_height / 20
+DEF_LEFT   = dsk_width / 20
+DEF_RIGHT  = dsk_width - DEF_LEFT
+DEF_BOTTOM = dsk_height - DEF_TOP
+
 config.plugins.TeleText = ConfigSubsection()
 config.plugins.TeleText.scale_filter = ConfigSelection(filterList, default="%d"%BILINEAR)
 config.plugins.TeleText.scale_filter_zoom = ConfigSelection(filterList, default="%d"%BILINEAR)
@@ -99,7 +106,7 @@ config.plugins.TeleText.splitting_mode = ConfigSelection(splittingModeList, defa
 config.plugins.TeleText.textlevel      = ConfigSelection(textlevelModeList, default="2")
 config.plugins.TeleText.region   = ConfigSelection(regionList, default="16")
 config.plugins.TeleText.debug    = ConfigEnableDisable(default=False)
-config.plugins.TeleText.pos      = ConfigSequence(default=[0, 0, dsk_width, dsk_height], seperator = ",", limits = [(0,dsk_width>>3),(0,dsk_height>>3),(dsk_width-(dsk_width>>3),dsk_width),(dsk_height-(dsk_height>>3),dsk_height)])
+config.plugins.TeleText.pos      = ConfigSequence(default=[DEF_LEFT, DEF_TOP, DEF_RIGHT, DEF_BOTTOM], seperator = ",", limits = [(0,dsk_width>>3),(0,dsk_height>>3),(dsk_width-(dsk_width>>3),dsk_width),(dsk_height-(dsk_height>>3),dsk_height)])
 config.plugins.TeleText.tip_pos  = ConfigSequence(default=[(dsk_width>>1)+(dsk_width>>2), (dsk_height>>1)+(dsk_height>>2), dsk_width, dsk_height], seperator = ",", limits = [(0,dsk_width-MIN_W),(0,dsk_height-MIN_H),(MIN_W,dsk_width),(MIN_H,dsk_height)])
 # state
 config.plugins.TeleText.textOnly = ConfigEnableDisable(default=True)
@@ -312,7 +319,7 @@ class TeleText(Screen):
     log("framebuffer offset is %08x stride is %08x" % (renderOffset, stride))
     x = array.array('B', (CMD_RQ_UPDATE, 1, (renderOffset&0xFF000000)>>24, (renderOffset&0xFF0000)>>16, (renderOffset&0xFF00)>>8, renderOffset&0xFF, (stride&0xFF00) >> 8, stride&0xFF))
     self.socketSend(x)
-    
+
     # get daemon version
     self.getDaemonVersion()
 
@@ -1282,7 +1289,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
     config.plugins.TeleText.textlevel.setValue("2")
     config.plugins.TeleText.region.setValue("16")
     config.plugins.TeleText.debug.setValue(False)
-    config.plugins.TeleText.pos.setValue([0, 0, dsk_width, dsk_height])
+    config.plugins.TeleText.pos.setValue([DEF_LEFT, DEF_TOP, DEF_RIGHT, DEF_BOTTOM])
     config.plugins.TeleText.tip_pos.setValue([(dsk_width>>1)+(dsk_width>>2), (dsk_height>>1)+(dsk_height>>2), dsk_width, dsk_height])
     config.plugins.TeleText.background_caching.setValue(True)
     self["config"].selectionChanged()
@@ -1415,7 +1422,7 @@ class TeleTextAboutScreen(Screen):
 
   def __init__(self, session, dVersion):
     self.daemonVersion = dVersion
-    
+
     width = 360
     height = 240
     left = (dsk_width - width)>>1
@@ -1462,21 +1469,21 @@ class TeleTextAboutScreen(Screen):
 
 class TeleTextAboutSummary(Screen):
   skin = ("""<screen name="TeleTextAboutSummary" position="0,0" size="132,64" id="1">
-      <widget name="SetupTitle" position="6,4"  size="120,20" font="Regular;20" halign="center"/>
-      <widget name="SetupEntry" position="6,30" size="120,12" font="Regular;12" halign="left"/>
-      <widget name="SetupValue" position="6,48" size="120,12" font="Regular;12" halign="left"/>
+      <widget name="title"  position="6,4"  size="120,24" font="Regular;20" halign="center"/>
+      <widget name="daemon" position="6,30" size="120,16" font="Regular;12" halign="left"/>
+      <widget name="plugin" position="6,48" size="120,16" font="Regular;12" halign="left"/>
     </screen>""",
     """<screen name="TeleTextAboutSummary" position="0,0" size="96,64" id="2">
-      <widget name="SetupTitle" position="3,4"  size="90,20" font="Regular;20" halign="center"/>
-      <widget name="SetupEntry" position="3,30" size="90,12" font="Regular;12" halign="left"/>
-      <widget name="SetupValue" position="3,48" size="90,12" font="Regular;12" halign="left"/>
+      <widget name="title"  position="3,4"  size="90,20" font="Regular;20" halign="center"/>
+      <widget name="daemon" position="3,30" size="90,16" font="Regular;12" halign="left"/>
+      <widget name="plugin" position="3,48" size="90,16" font="Regular;12" halign="left"/>
     </screen>""")
 
   def __init__(self, session, parent):
     Screen.__init__(self, session, parent = parent)
-    self["SetupTitle"] = Label(_("TeleText settings"))
-    self["SetupEntry"] = Label("Daemon v%s" % parent.getDaemonVersion)
-    self["SetupValue"] = Label("Plugin v%s" % PLUGIN_VERSION)
+    self["title"] = Label("TeleText")
+    self["daemon"] = Label("Daemon v%s" % parent.getDaemonVersion())
+    self["plugin"] = Label("Plugin v%s" % PLUGIN_VERSION)
 
 # ----------------------------------------
 
