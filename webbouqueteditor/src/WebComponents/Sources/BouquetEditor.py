@@ -608,7 +608,7 @@ class BouquetEditor(Source):
 				for bouquetfiles in files:
 					if path.exists(bouquetfiles):
 						remove(bouquetfiles)
-				lines = popen('tar xvf %s -C / --exclude tmp/.webouquetedit' % backupFilename).readlines()
+				lines = popen('tar xvf %s -C /' % backupFilename).readlines()
 				nimmanager.readTransponders()
 				eDVBDB.getInstance().reloadServicelist()
 				eDVBDB.getInstance().reloadBouquets()

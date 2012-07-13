@@ -1,4 +1,4 @@
-Subtitle Downloader v. 0.28.7 2012-01-29
+Subtitle Downloader v. 0.33.40 2012-07-03
 
 Enigma2 plugin which downloads subtitle to Your movie.
 
@@ -28,6 +28,25 @@ HELP - show about info
 < - change widget to FileList
 TEXT - download subtitle or avaliable on server subtitle list
 OK - on FileList play media/ on SubsList download subtitle
+0 - Shows/ Hide skin
+BLUE - FileManager
+
+ver 0.33.4:
+
+- FileManager (delete, copy, move, rename files),
+- support for UTF-16LE subtitle codepage,
+- fix in saveSubtitleasSRT - don't make greenscreen if chardetOutputTranslation doesn't recognice subtitle codepage,
+- fix in convert_subtitle_to_movie - don't make greenscreen if subtitle format isn't detected,
+- fix for Portuguese(Brazil) language for OpenSubtile,
+- fix in MusicExplorer class audioplayer should work again.
+
+ver 0.31.0
+- fixed threading - now plugin starts faster.
+
+ver 0.30.8
+- "0" key skin show/hide,
+- movie resume time support (cuts file support),
+- animated commertial banner.
 
 ver 0.28.7 
 - git repository corrections (Subtitulos bringed back to git IPK).

@@ -59,6 +59,13 @@ except ImportError as ie:
 else:
 	hasVps = True
 
+try:
+	from Plugins.Extensions.SeriesPlugin.plugin import Plugins
+except ImportError as ie:
+	hasSeriesPlugin = False
+else:
+	hasSeriesPlugin = True
+
 class SimpleBouquetSelection(SimpleChannelSelection):
 	def __init__(self, session, title):
 		SimpleChannelSelection.__init__(self, session, title)
@@ -339,6 +346,9 @@ class AutoTimerEditorBase:
 		self.vps_enabled = NoSave(ConfigYesNo(default = timer.vps_enabled))
 		self.vps_overwrite = NoSave(ConfigYesNo(default = timer.vps_overwrite))
 
+		# SeriesPlugin
+		self.series_labeling = NoSave(ConfigYesNo(default = timer.series_labeling))
+
 	def pathSelected(self, res):
 		if res is not None:
 			# I'm pretty sure this will always fail
@@ -515,6 +525,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.useDestination: _("Should timers created by this AutoTimer be recorded to a custom location?"),
 			self.destination: _("Select the location to save the recording to."),
 			self.tags: _("Tags the Timer/Recording will have."),
+			self.series_labeling: _("Label Timers with season, episode and title, according to the SeriesPlugin settings."),
 		}
 
 	def refresh(self):
@@ -608,6 +619,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			list.append(getConfigListEntry(_("Activate VPS"), self.vps_enabled))
 			if self.vps_enabled.value:
 				list.append(getConfigListEntry(_("Control recording completely by service"), self.vps_overwrite))
+
+		if hasSeriesPlugin:
+			list.append(getConfigListEntry(_("Label series"), self.series_labeling))
 
 		self.list = list
 
@@ -831,6 +845,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		self.timer.vps_enabled = self.vps_enabled.value
 		self.timer.vps_overwrite = self.vps_overwrite.value
+
+		self.timer.series_labeling = self.series_labeling.value
 
 		# Close
 		self.close(self.timer)

@@ -5,19 +5,19 @@
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
 	<title>Dreambox WebTV</title>
-	
+
 	<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>
-	
+
 	<!-- userprefs Object -->
-	<script type="text/javascript" src="/web-data/userprefs.js"></script>	
-	
+	<script type="text/javascript" src="/web-data/userprefs.js"></script>
+
 	<!-- our stuff //-->
 	<script type="text/javascript" src="/web-data/statics.js" ></script>
 	<script type="text/javascript" src="/web-data/helpers.js" ></script>
 	<script type="text/javascript" src="/web-data/provider.js" ></script>
 	<script type="text/javascript" src="/web-data/handler.js" ></script>
 	<script type="text/javascript" src="/web-data/vlcplayer.js" ></script>
-	
+
 	<link href="/web-data/tpl/default/streaminterface/style.css" type="text/css" rel="stylesheet">
 	<link rel="shortcut icon" type="/web-data/image/x-icon" href="/web-data/img/favicon.ico">
 </head>
@@ -31,7 +31,7 @@
 				</div>
 				<div id="current">
 				</div>
-			</div>			
+			</div>
 			<div id="bannerRight">
 				<table id="volumeTable">
 					<tr>
@@ -53,9 +53,9 @@
 			<div id="contentMain">
 				<center>
 					<div id="vlcPlayer">
-						<embed 
-							type="application/x-vlc-plugin" 
-							pluginspage="http://www.videolan.org" 
+						<embed
+							type="application/x-vlc-plugin"
+							pluginspage="http://www.videolan.org"
 							version="VideoLAN.VLCPlugin.2"
 							width="768"
 							height="576"
@@ -88,20 +88,31 @@
 							<img src="/web-data/img/sound_add.png" alt="Vol+" />
 						</button>
 						<input type="checkbox" id="vlcZap" title="Also zap on TV (for Subservices)">Zap</input>
+						&nbsp; Deinterlace <select id="deinterlace">
+							<option value="off">Off</option>
+							<option value="blend">Blend</option>
+							<option value="bob">Bob</option>
+							<option value="discard">Discard</option>
+							<option value="linear">Linear</option>
+							<option value="mean">Mean</option>
+							<option value="x">X</option>
+							<option value="yadif">Yadif</option>
+							<option value="yadif2x">Yadif2x</option>
+						</select>
 						<br>
 						<span id="bouquetList"></span>
 						<span id="serviceList"></span>
 					</div>
 				</center>
-			</div>				
-		</div>	
+			</div>
+		</div>
 	</div>
-	
+
 	<script language="JavaScript" type="Text/Javascript">
-		function addtoFavorites(){ 
-			var url = location.href.replace("#", ""); 
-			var title = "Dreambox WebTV"; 
-			
+		function addtoFavorites(){
+			var url = location.href.replace("#", "");
+			var title = "Dreambox WebTV";
+
 			if (window.sidebar){
 				// firefox
 				window.sidebar.addPanel(title, url, "");

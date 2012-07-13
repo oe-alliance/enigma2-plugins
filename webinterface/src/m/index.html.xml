@@ -1,0 +1,245 @@
+<e2:screen name="ServiceListWebScreen">&lt;!DOCTYPE html><html>
+<head>
+	<title>WebControl Mobile</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
+	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.0.min.css" />
+
+	<script src="/web-data/lib/jquery-1.7.1.min.js" />
+	<script language="javascript" type="text/javascript">
+		$(document).bind("mobileinit", function(){
+			$.extend(  $.mobile , {
+				defaultPageTransition: 'none',
+				defaultDialogTransition: 'none'
+			});
+		});
+	</script>
+	<script src="/web-data/m/script/jquery.mobile-1.1.0.min.js" />
+</head>
+<body>
+
+<div data-role="page" id="main" data-title="WebControl Mobile" data-theme="a">
+	<div data-role="header">
+		<h1>WebControl Mobile</h1>
+	</div><!-- /header -->
+	<div data-role="content">
+		<ul data-role="listview">
+			<li>
+				<a href="#services">
+					<h3>Services</h3>
+					<p>... including TV and Radio Bouquets, Providers and Services with their EPG</p>
+				</a>
+			</li>
+			<li>
+				<a href="movies.html?dirname=">
+					<h3>Movies</h3>
+					<p>... you have recorded</p>
+				</a>
+			</li>
+			<li>
+				<a href="timers.html">
+					<h3>Timers</h3>
+					<p>... that have been set</p>
+				</a>
+			</li>
+			<li>
+				<a href="#control">
+					<h3>Control</h3>
+					<p>... the powerstate or send messages to your Dreambox.</p>
+				</a>
+			</li>
+			<li>
+				<a href="#about" data-rel="dialog">
+					<h3>About</h3>
+					<p>... Dreambox WebControl Mobile</p>
+				</a>
+			</li>
+		</ul>
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div><!-- /main -->
+
+<div data-role="page" id="services" data-title="Services" data-theme="a">
+	<div data-role="header">
+		<h1>Services</h1>
+		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home">Home</a>
+	</div><!-- /header -->
+	<div data-role="content">
+		<ul data-role="listview" data-dividertheme="a" data-inset="true">
+			<li data-role="list-divider">
+				<div><h3>TV</h3></div>
+			</li>
+			<li>
+				<a href="bouquets.html?sRef=1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET %22bouquets.tv%22 ORDER BY bouquet">Bouquets</a>
+			</li>
+			<li>
+				<a href="bouquets.html?sRef=1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name">Provider</a>
+			</li>
+			<li>
+				<a href="services.html?bRef=1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) ORDER BY name">All</a>
+			</li>
+			<li data-role="list-divider">
+				<div><h3>Radio</h3></div>
+			</li>
+			<li>
+				<a href="bouquets.html?sRef=1:7:2:0:0:0:0:0:0:0:(type == 2) FROM BOUQUET %22bouquets.radio%22 ORDER BY bouquet">Bouquets</a>
+			</li>
+			<li>
+				<a href="bouquets.html?sRef=1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name">Provider</a>
+			</li>
+			<li>
+				<a href="services.html?bRef=1:7:2:0:0:0:0:0:0:0:(type == 2) ORDER BY name">All</a>
+			</li>
+		</ul>
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div><!-- /services -->
+
+<div data-role="page" id="timeredit" data-title="Edit Timer" data-theme="a">
+	<div data-role="header">
+		<h1>Edit Timer</h1>
+		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home">Home</a>
+	</div><!-- /header -->
+	<div data-role="content">
+		<form action="index.html" method="get" data-inset="true">
+			<div data-role="fieldcontain">
+				<label for="action">Action: </label>
+				<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" id="action">
+					<label for="radio-action-record">Record</label>
+					<input type="radio" name="action" id="radio-action-record" value="record" checked="checked"/>
+
+					<label for="radio-action-zap">Zap</label>
+					<input type="radio" name="action" id="radio-action-zap" value="zap"/>
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="name">Name:</label>
+				<input type="text" name="name" id="name" placeholder="Name"/>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="description">Description:</label>
+				<input type="text" name="description" id="description" placeholder="Description"/>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="select-service">Service:</label>
+				<select id="select-service" name="select-service">
+					<option value="ARD">ARD</option>
+					<option value="ZDF">ZDF</option>
+				</select>
+				<label for="select-bouquet">Bouquet:</label>
+				<select id="select-bouquet" name="select-bouquet">
+					<option value="favorites">Favorites (TV)</option>
+				</select>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="select-location">Location:</label>
+				<select id="select-location" name="select-location">
+					<option value="ARD">/hdd/movie</option>
+					<option value="ZDF">/media/ST394839</option>
+				</select>
+			</div>
+			<fieldset>
+				<button type="submit" name="save" value="submit-save" data-inline="true">Save</button>
+				<button type="cancel" name="cancel" value="submit-cancel" data-inline="true">Cancel</button>
+			</fieldset>
+		</form>
+	</div>
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div>
+
+<div data-role="page" id="control" data-title="Control" data-theme="a"  data-content-theme="a">
+	<div data-role="header">
+		<h1>Control</h1>
+		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home">Home</a>
+	</div><!-- /header -->
+	<div data-role="content">
+		<div data-role="collapsible-set">
+			<div data-role="collapsible" data-content-theme="a">
+				<h3>Power Control</h3>
+				<p>
+					<ul data-role="listview">
+						<li>
+							<a href="power.html?newstate=0" data-rel="dialog">Toggle Standby</a>
+						</li>
+						<li>
+							<a href="power.html?newstate=1" data-rel="dialog">Deep Standby</a>
+						</li>
+						<li>
+							<a href="power.html?newstate=2" data-rel="dialog">Reboot</a>
+						</li>
+						<li>
+							<a href="power.html?newstate=3" data-rel="dialog">Restart enigma2</a>
+						</li>
+					</ul>
+				</p>
+			</div>
+			<div data-role="collapsible" data-content-theme="a">
+				<h3>Message</h3>
+				<span>
+					<form action="message.html" method="get">
+						<div data-role="fieldcontain">
+							<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"  data-theme="a">
+								<input type="radio" name="type" id="radio-info" value="2" checked="checked"/>
+								<label for="radio-info">Info</label>
+
+								<input type="radio" name="type" id="radio-warning" value="1"/>
+								<label for="radio-warning">Warning</label>
+
+								<input type="radio" name="type" id="radio-error" value="3"/>
+								<label for="radio-error">Error</label>
+							</fieldset>
+							<fieldset>
+								<textarea name="text" id="textarea-a"></textarea>
+							</fieldset>
+						</div>
+						<div data-role="fieldcontain">
+							<label for="slider-timeout">Timeout:</label>
+							<input type="range" name="timeout" id="slider-timeout" value="15" min="15" max="120" step="5" data-disabled="false"/>
+						</div>
+						<div data-role="fieldcontain">
+							<button type="submit" name="submit" value="submit-message" data-corners="false">Send Message</button>
+						</div>
+					</form>
+
+				</span>
+			</div>
+			<!--
+			<div data-role="collapsible" data-content-theme="a">
+				<h3>Screenshot</h3>
+				<p>
+					:)
+				</p>
+			</div>
+			-->
+		</div><!-- /collapsible-set -->
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div><!-- /control -->
+
+<div data-role="page" id="about" data-title="About" data-theme="a"  data-content-theme="a">
+	<div data-role="header">
+		<h1>About</h1>
+	</div><!-- /header -->
+	<div data-role="content">
+		<p>Dreambox WebControl Mobile - v2.0 alpha 1 - r2<br />
+		powered by <a href="http://www.jquerymobile.com" target="_blank">jquerymobile.com</a><br />
+		All rights reserved</p>
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div><!-- /about -->
+
+</body>
+</html>
+</e2:screen>

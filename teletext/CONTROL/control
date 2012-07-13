@@ -1,0 +1,4 @@
+Description: TeleText with precaching pages.
+Depends: enigma2, dbttcd
+Replaces: tuxbox-tuxtxt-32bpp
+Conflicts: tuxbox-tuxtxt-32bpp

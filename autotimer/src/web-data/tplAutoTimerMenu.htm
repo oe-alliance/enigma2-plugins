@@ -1,26 +1,28 @@
 <!-- tplAutoTimerMenu -->
-				<table id="menuTable">
-					<tr>
-						<td id="menuBack">
-							<button id="back">Back</button>
-						</td>
-						<td id="menuLeft">
-							<button id="reload">Reload</button>
-							<button id="preview">Preview</button>
-							<button id="parse">Parse</button>
-							<button id="timer">Timer</button>
-							<!--TODO MAYBE button id="settings">Settings</button -->
-						</td>
-						<td id="menuRight">
-							<button id="backup">Backup Settings</button>
-							<form id="backupform" class="inline">
-								<input id="restore" type="button" value="Restore Settings"/>
+				<div id="mainMenu">
+					<ul id="mainMenuLeft">
+						<li class="roundedNav"><a class="roundedNav" href="#"><span id="back">Back</span></a></li>
+					</ul>
+					<ul id="mainMenuLeft">
+						<li class="roundedNav"><a class="roundedNav" href="#"><span id="reload">Reload</span></a></li>
+						<li class="roundedNav"><a class="roundedNav" href="#"><span id="preview">Preview</span></a></li>
+						<li class="roundedNav"><a class="roundedNav" href="#"><span id="parse">Parse</span></a></li>
+						<li class="roundedNav"><a class="roundedNav" href="#"><span id="timer">Timer</span></a></li>
+						<!--TODO MAYBE LATER span id="settings">Settings</span -->
+					</ul>
+					
+					<!-- The order is switched because of the float right behaviour -->
+					<ul id="mainMenuRight">
+						<li class="roundedNav"><a class="roundedNav" href="#"><span id="about">About</span></a></li>
+					</ul>
+					<ul id="mainMenuRight">
+						<li class="roundedNav"><a class="roundedNav" href="#"><span id="backup">Backup</span></a></li>
+						<li class="roundedNav">
+							<form id="restoreform" class="inline">
+								<a class="roundedNav" href="#"><span id="restore">Restore</span></a>
 								<input id="file" type="file" name="file"/>
 							</form>
-						</td>
-						<td id="menuAbout">
-							<button id="about">About</button>
-						</td>
-					</tr>	
-				</table>
+						</li>
+					</ul>
+				</div>
 <!-- /tplAutoTimerMenu -->

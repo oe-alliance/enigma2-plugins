@@ -1,0 +1,12 @@
+<e2:screen external_module="Plugins.Extensions.WebAdmin.WebScreens.WebAdminScreen" name="WebAdminScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2pkglist><e2:element source="PkgList" id="filter" ><e2:convert type="web:ListFiller" >
+	&lt;e2pkg>
+		&lt;e2name><e2:item name="Packagename" filter="xml"/>&lt;/e2name>
+		&lt;e2release><e2:item name="Release" filter="xml"/>&lt;/e2release>
+		&lt;e2info><e2:item name="Info" filter="xml"/>&lt;/e2info>
+		&lt;e2state><e2:item name="State" filter="xml"/>&lt;/e2state>
+		&lt;e2update><e2:item name="Update" filter="xml"/>&lt;/e2update>
+	&lt;/e2pkg>
+	</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+</e2pkglist>
+</e2:screen>

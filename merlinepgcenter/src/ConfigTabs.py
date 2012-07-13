@@ -106,7 +106,6 @@ config.plugins.merlinEpgCenter.listProgressStyle = ConfigSelection(default = STY
 				(STYLE_MULTI_PIXMAP, _("four parts")),
 				(STYLE_PERCENT_TEXT, _("percent (text)")),
 				])
-config.plugins.merlinEpgCenter.showTimerMessages = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.blinkingPicon = ConfigYesNo(False)
 config.plugins.merlinEpgCenter.showShortDescInEventInfo = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.adjustFontSize = ConfigSelectionNumber(min = -5, max = 5, stepwidth = 1, default = 0)
@@ -180,7 +179,6 @@ class ConfigGeneral(ConfigBaseTab):
 		cfgList.append(getConfigListEntry(_("Use skin:"), config.plugins.merlinEpgCenter.skinSelection))
 		cfgList.append(getConfigListEntry(_("Limit search results to bouquet services:"), config.plugins.merlinEpgCenter.limitSearchToBouquetServices))
 		cfgList.append(getConfigListEntry(_("Exit on TV <-> Radio switch:"), config.plugins.merlinEpgCenter.exitOnTvRadioSwitch))
-		cfgList.append(getConfigListEntry(_("Show timer messages:"), config.plugins.merlinEpgCenter.showTimerMessages))
 		cfgList.append(getConfigListEntry(_("Adjust font size:"), config.plugins.merlinEpgCenter.adjustFontSize))
 		cfgList.append(getConfigListEntry(_("Embed volume slider:"), config.plugins.merlinEpgCenter.embeddedVolume))
 		self.configList = cfgList

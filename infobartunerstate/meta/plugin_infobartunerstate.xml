@@ -1,13 +1,14 @@
 <default>
 	  <prerequisites>
                     <tag type="Recording" />
+                    <tag type="System" />
 	  </prerequisites>
           <info>
                     <author>betonme</author>
                     <name>InfoBarTunerState</name>
                     <packagename>enigma2-plugin-extensions-infobartunerstate</packagename>
                     <shortdescription>Show the tuner state as infobar popup</shortdescription>
-                    <description>InfoBarTunerState will show all used tuner and it's allocation as infobar popup.</description>
+                    <description>InfoBarTunerState will show all used tuner and it's allocation as infobar popup</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_infobartunerstate.jpg" />
           </info>
 

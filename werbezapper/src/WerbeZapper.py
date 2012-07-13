@@ -27,7 +27,6 @@ from Components.config import *
 
 
 class WerbeZapperChoiceBox(ChoiceBox):
-	# 
 	def __init__(self, session, title="", list=[], keys=None, selection=0, zap_time=0, zap_service=None, monitored_event=None, monitored_service=None, skin_name=[]):
 		ChoiceBox.__init__(self, session, title, list, keys, selection, skin_name)
 		

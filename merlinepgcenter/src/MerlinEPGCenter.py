@@ -81,7 +81,7 @@ from ConfigTabs import KEEP_OUTDATED_TIME, ConfigBaseTab, ConfigGeneral, ConfigL
 from EpgActions import MerlinEPGActions
 from EpgCenterList import EpgCenterList, EpgCenterTimerlist, MODE_HD, MODE_XD, MODE_SD, MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_PRIMETIME, TIMERLIST, EPGSEARCH_HISTORY, EPGSEARCH_RESULT, EPGSEARCH_MANUAL, UPCOMING
 from EpgTabs import EpgBaseTab, EpgNowTab, EpgNextTab, EpgSingleTab, EpgPrimeTimeTab, EpgTimerListTab, EpgSearchHistoryTab, EpgSearchManualTab, EpgSearchResultTab
-from HelperFunctions import PiconLoader, findDefaultPicon, ResizeScrollLabel, BlinkTimer, LIST_TYPE_EPG, LIST_TYPE_UPCOMING, RecTimerEntry, TimerListObject, EmbeddedVolumeControl
+from HelperFunctions import PiconLoader, findDefaultPicon, ResizeScrollLabel, BlinkTimer, LIST_TYPE_EPG, LIST_TYPE_UPCOMING, TimerListObject, EmbeddedVolumeControl
 from SkinFinder import SkinFinder
 
 # check for Autotimer support
@@ -276,10 +276,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		# get notifications from the global timer every second to refresh lists on time change
 		self.clockTimer = self.global_screen["CurrentTime"].clock_timer
 		self.clockTimer.callback.append(self.checkTimeChange)
-		
-		# Don't show RecordTimer messages when recording starts
-		self.showRecordingMessage = config.usage.show_message_when_recording_starts.value
-		config.usage.show_message_when_recording_starts.value = False
 		
 		# Initialise the blink timer if there's already a recording running
 		self.blinkTimer.gotRecordEvent(None, None)
@@ -806,7 +802,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		end += config.recording.margin_after.value * 60
 		data = (begin, end, name, description, eit)
 		# TimerEditList method
-		self.addTimer(RecTimerEntry(self.session, serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data))
+		self.addTimer(RecordTimerEntry(serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data))
 		
 	def timerChoice(self):
 		choices = []
@@ -1806,7 +1802,6 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		self.blinkTimer.timer.callback.remove(self.setEventPiconBlinkState)
 		self.blinkTimer.timer.callback.remove(self.setRecordingBlinkState)
 		self.releaseEpgBaseTab()
-		config.usage.show_message_when_recording_starts.value = self.showRecordingMessage
 		self.blinkTimer.suspend()
 		self.close(None)
 		
@@ -2029,6 +2024,14 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				if cur:
 					self.session.open(YTTrailerList, cur.name)
 					
+	def keyText(self):
+		if self.currentMode == SINGLE_EPG:
+			if self.epgTabObjectList[self.currentMode].sortMode == EpgSingleTab.SORT_MODE_TIME:
+				self.epgTabObjectList[self.currentMode].sortMode = EpgSingleTab.SORT_MODE_NAME
+			else:
+				self.epgTabObjectList[self.currentMode].sortMode = EpgSingleTab.SORT_MODE_TIME
+			self.epgTabObjectList[self.currentMode].sort()
+			
 	############################################################################################
 	# TAB TOGGLING
 	
@@ -2048,7 +2051,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			else:
 				self["tab_text_%d" % NUM_EPG_TABS].instance.setForegroundColor(parseColor(config.plugins.merlinEpgCenter.tabTextColorSelected.value)) # active
 				self["tabbar"].setPixmapNum(NUM_EPG_TABS)
-			
+				
 			if self.currentMode == EPGSEARCH_MANUAL:
 				self.setMode(manualSearch = True)
 			elif self.currentMode == EPGSEARCH_RESULT:

@@ -11,8 +11,8 @@ from os import path as os_path
 AppTextHeaderFiles = frozenset(('stream.m3u.xml', 'ts.m3u.xml', 'streamcurrent.m3u.xml', 'movielist.m3u.xml', 'services.m3u.xml', ))
 
 """
- Actualy, the TextHtmlHeaderFiles should contain the updates.html.xml, but the IE then
- has problems with unicode-characters
+Actualy, the TextHtmlHeaderFiles should contain the updates.html.xml, but the IE then
+has problems with unicode-characters
 """
 TextHtmlHeaderFiles = frozenset(('wapremote.xml', 'stream.xml', ))
 
@@ -49,7 +49,9 @@ class ScreenPage(resource.Resource):
 			webif.renderPage(request, path, self.session) # login?
 
 		elif os_path.isdir(path) and self.addSlash is True:
-			return self.getChild("/", request).render(request)
+			uri = "%s/" % (request.path)
+			request.redirect(uri)
+			request.finish()
 
 		else:
 			request.setResponseCode(http.NOT_FOUND)

@@ -4,6 +4,39 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 from os import environ as os_environ
 import gettext
 
+# Config
+from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
+	ConfigNumber, ConfigSelection, ConfigYesNo
+
+config.plugins.autotimer = ConfigSubsection()
+config.plugins.autotimer.autopoll = ConfigEnableDisable(default=True)
+config.plugins.autotimer.onlyinstandby = ConfigEnableDisable(default=False)
+config.plugins.autotimer.interval = ConfigNumber(default=30)
+config.plugins.autotimer.refresh = ConfigSelection(choices=[
+		("none", _("None")),
+		("auto", _("Only AutoTimers created during this session")),
+		("all", _("All non-repeating timers"))
+	], default = "all"
+)
+config.plugins.autotimer.try_guessing = ConfigEnableDisable(default=True)
+config.plugins.autotimer.editor = ConfigSelection(choices=[
+		("plain", _("Classic")),
+		("wizard", _("Wizard"))
+	], default = "plain"
+)
+config.plugins.autotimer.addsimilar_on_conflict = ConfigEnableDisable(default=False)
+config.plugins.autotimer.add_autotimer_to_tags = ConfigYesNo(default=False)
+config.plugins.autotimer.add_name_to_tags = ConfigYesNo(default=False)
+config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default=False)
+config.plugins.autotimer.show_in_plugins = ConfigYesNo(default=False)
+config.plugins.autotimer.show_in_extensionsmenu = ConfigYesNo(default=False)
+config.plugins.autotimer.fastscan = ConfigYesNo(default=False)
+config.plugins.autotimer.notifconflict = ConfigYesNo(default=True)
+config.plugins.autotimer.notifsimilar = ConfigYesNo(default=True)
+config.plugins.autotimer.maxdaysinfuture = ConfigNumber(default=0)
+config.plugins.autotimer.show_help = ConfigYesNo(default=True)
+
+
 def localeInit():
 	lang = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
 	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
@@ -27,3 +60,4 @@ except NameError:
 	iteritems = lambda d: d.items()
 	itervalues = lambda d: d.values()
 
+__all__ = ['_', 'config', 'iteritems', 'itervalues', 'xrange']

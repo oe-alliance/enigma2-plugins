@@ -1,6 +1,6 @@
 <e2:screen name="ServiceListWebScreen">&lt;html>
 <head>
-  <link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" />
+<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 
@@ -17,7 +17,7 @@
 			&lt;a href='/mobile/services.html?sRef=<e2:item name="Reference" filter="uri"/>'>
 				&lt;img src="/web-data/img/epg.png" title="Channellist" border="0">
 			&lt;/a>
-		&lt;/td> 
+		&lt;/td>
 	&lt;/tr>
 	</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
 </table>

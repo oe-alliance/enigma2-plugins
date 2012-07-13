@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>LeSpuck</author>
+                    <name>TeleText</name>
+                    <packagename>enigma2-plugin-extensions-teletext</packagename>
+                    <shortdescription>Teletext with caching pages.</shortdescription>
+                    <description>Teletext with caching pages in the background.</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-teletext" />
+	  </files>
+</default>

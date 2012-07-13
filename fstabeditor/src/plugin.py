@@ -216,14 +216,14 @@ class fstabEditorScreen(Screen,ConfigListScreen,HelpableScreen):
 		if 	self.addEntry:
 			self.devicename = NoSave(ConfigText(default = ""))
 			self.mountpoint = NoSave(ConfigText(default = ""))
-			self.fstype = NoSave(ConfigSelection([("auto","auto"),("ext2","ext2"),("ext3","ext3"),("ext4","ext4"),("swap","swap"),("tmpfs","tmpfs"),("proc","proc"),("cifs","cifs"),("nfs","nfs"),("jffs2","jffs2"),("usbfs","usbfs"),("devpts","devpts"),("vfat","vfat"),("fat","fat"),("ntfs","ntfs")], default = "auto"))
+			self.fstype = NoSave(ConfigSelection([("auto","auto"),("ext2","ext2"),("ext3","ext3"),("ext4","ext4"),("swap","swap"),("tmpfs","tmpfs"),("proc","proc"),("cifs","cifs"),("nfs","nfs"),("jffs2","jffs2"),("usbfs","usbfs"),("devpts","devpts"),("vfat","vfat"),("fat","fat"),("ntfs","ntfs"),("noauto", "no auto"), ("xfs", "xfs")], default = "auto"))
 			self.options = NoSave(ConfigText(default = "defaults"))
 			self.dumpfreq = NoSave(ConfigNumber(default = 0))
 			self.passnum = NoSave(ConfigSelection([("0","0"),("1","1"),("2","2")], default = "0"))			
 		else:
 			self.devicename = NoSave(ConfigText(default = entryList[self.selectedEntry][0]))
 			self.mountpoint = NoSave(ConfigText(default = entryList[self.selectedEntry][1]))
-			self.fstype = NoSave(ConfigSelection([("auto","auto"),("ext2","ext2"),("ext3","ext3"),("ext4","ext4"),("swap","swap"),("tmpfs","tmpfs"),("proc","proc"),("cifs","cifs"),("nfs","nfs"),("jffs2","jffs2"),("usbfs","usbfs"),("devpts","devpts"),("vfat","vfat"),("fat","fat"),("ntfs","ntfs")], default = entryList[self.selectedEntry][2]))
+			self.fstype = NoSave(ConfigSelection([("auto","auto"),("ext2","ext2"),("ext3","ext3"),("ext4","ext4"),("swap","swap"),("tmpfs","tmpfs"),("proc","proc"),("cifs","cifs"),("nfs","nfs"),("jffs2","jffs2"),("usbfs","usbfs"),("devpts","devpts"),("vfat","vfat"),("fat","fat"),("ntfs","ntfs"),("noauto", "no auto"), ("xfs", "xfs")], default = entryList[self.selectedEntry][2]))
 			self.options = NoSave(ConfigText(default = entryList[self.selectedEntry][3]))
 			self.dumpfreq = NoSave(ConfigNumber(default = int(entryList[self.selectedEntry][4])))
 			self.passnum = NoSave(ConfigSelection([("0","0"),("1","1"),("2","2")], default = entryList[self.selectedEntry][5]))

@@ -66,6 +66,10 @@ msgstr "Gespreksmonitoring"
 msgid "Call redirection"
 msgstr "Oproep doorgeleiding"
 
+#, python-format
+msgid "Calling %s"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
 msgstr "Annuleren"
@@ -248,6 +252,9 @@ msgstr "FRITZ!Box adres (Naam of IP)"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Status"
+
+msgid "FRITZ!Box not available for calling"
+msgstr ""
 
 msgid "Filter also list of calls"
 msgstr "Filter ook de lijst met oproepen"

@@ -90,6 +90,12 @@ antiscrollbar/Makefile
 antiscrollbar/meta/Makefile
 antiscrollbar/src/Makefile
 
+audiorestart/Makefile
+audiorestart/img/Makefile
+audiorestart/meta/Makefile
+audiorestart/po/Makefile
+audiorestart/src/Makefile
+
 audiosync/Makefile
 audiosync/img/Makefile
 audiosync/meta/Makefile
@@ -127,6 +133,11 @@ babelzapper/etc/Makefile
 babelzapper/Makefile
 babelzapper/meta/Makefile
 babelzapper/src/Makefile
+
+birthdayreminder/Makefile
+birthdayreminder/meta/Makefile
+birthdayreminder/po/Makefile
+birthdayreminder/src/Makefile
 
 bitrateviewer/Makefile
 bitrateviewer/meta/Makefile
@@ -255,6 +266,19 @@ infobartunerstate/Makefile
 infobartunerstate/meta/Makefile
 infobartunerstate/po/Makefile
 infobartunerstate/src/Makefile
+
+internetradio/Makefile
+internetradio/meta/Makefile
+internetradio/po/Makefile
+internetradio/src/Makefile
+internetradio/src/images/Makefile
+internetradio/src/WebComponents/Makefile
+internetradio/src/WebComponents/Sources/Makefile
+internetradio/src/WebScreens/Makefile
+internetradio/src/web/Makefile
+internetradio/src/web-data/Makefile
+internetradio/src/web-data/img/Makefile
+internetradio/src/web-data/tpl/Makefile
 
 kiddytimer/Makefile
 kiddytimer/img/Makefile
@@ -413,6 +437,15 @@ porncenter/po/Makefile
 porncenter/src/Makefile
 porncenter/src/Additions/Makefile
 
+pushservice/Makefile
+pushservice/meta/Makefile
+pushservice/po/Makefile
+pushservice/src/Makefile
+pushservice/src/Controller/Makefile
+pushservice/src/Services/Makefile
+pushservice/src/Services/gntp/Makefile
+pushservice/src/Services/mail/Makefile
+
 quickbutton/Makefile
 quickbutton/meta/Makefile
 quickbutton/po/Makefile
@@ -481,6 +514,11 @@ tageditor/meta/Makefile
 tageditor/po/Makefile
 tageditor/src/Makefile
 
+teletext/Makefile
+teletext/meta/Makefile
+teletext/po/Makefile
+teletext/src/Makefile
+
 toolkit/Makefile
 toolkit/src/Makefile
 
@@ -524,6 +562,19 @@ weatherplugin/po/Makefile
 weatherplugin/src/Makefile
 weatherplugin/src/icons/Makefile
 
+webadmin/Makefile
+webadmin/meta/Makefile
+webadmin/src/Makefile
+webadmin/src/mobile/Makefile
+webadmin/src/web/Makefile
+webadmin/src/WebChilds/Makefile
+webadmin/src/WebComponents/Makefile
+webadmin/src/WebComponents/Sources/Makefile
+webadmin/src/web-data/Makefile
+webadmin/src/web-data/tpl/Makefile
+webadmin/src/web-data/img/Makefile
+webadmin/src/WebScreens/Makefile
+
 webbouqueteditor/Makefile
 webbouqueteditor/meta/Makefile
 webbouqueteditor/src/Makefile
@@ -542,6 +593,7 @@ webinterface/Makefile
 webinterface/meta/Makefile
 webinterface/po/Makefile
 webinterface/src/Makefile
+webinterface/src/m/Makefile
 webinterface/src/mobile/Makefile
 webinterface/src/web/Makefile
 webinterface/src/web-data/Makefile
@@ -551,6 +603,11 @@ webinterface/src/web-data/lib/Makefile
 webinterface/src/web-data/lib/lang/Makefile
 webinterface/src/web-data/lib/datepicker/Makefile
 webinterface/src/web-data/lib/datepicker/media/Makefile
+webinterface/src/web-data/m/Makefile
+webinterface/src/web-data/m/css/Makefile
+webinterface/src/web-data/m/css/themes/Makefile
+webinterface/src/web-data/m/css/themes/images/Makefile
+webinterface/src/web-data/m/script/Makefile
 webinterface/src/web-data/tpl/Makefile
 webinterface/src/web-data/tpl/default/Makefile
 webinterface/src/web-data/tpl/default/streaminterface/Makefile

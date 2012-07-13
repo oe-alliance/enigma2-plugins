@@ -1,0 +1,42 @@
+<keymap>
+	<map context="TeleTextActions">
+		<key id="KEY_UP"     mapto="up"     flags="mr"/>
+		<key id="KEY_DOWN"   mapto="down"   flags="mr"/>
+		<key id="KEY_LEFT"   mapto="left"   flags="mr"/>
+		<key id="KEY_RIGHT"  mapto="right"  flags="mr"/> 
+
+		<key id="KEY_VOLUMEUP"    mapto="volUp"       flags="mr"/>
+		<key id="KEY_VOLUMEDOWN"  mapto="volDown"     flags="mr"/> 
+		<key id="KEY_CHANNELUP"   mapto="nextBouquet" flags="mr"/>
+		<key id="KEY_CHANNELDOWN" mapto="prevBouquet" flags="mr"/> 
+				
+		<key id="KEY_RED"    mapto="red"    flags="m"/>
+		<key id="KEY_GREEN"  mapto="green"  flags="m"/>
+		<key id="KEY_YELLOW" mapto="yellow" flags="m"/>
+		<key id="KEY_BLUE"   mapto="blue"   flags="m"/>
+
+		<key id="KEY_MENU"   mapto="menu"   flags="m"/>
+		<key id="KEY_HELP"   mapto="help"   flags="m"/>
+		<key id="KEY_INFO"   mapto="info"   flags="m"/>
+		<key id="KEY_VIDEO"  mapto="video"  flags="m"/>
+		<key id="KEY_TV"     mapto="tv"     flags="m"/>
+		<key id="KEY_RADIO"  mapto="radio"  flags="m"/>
+		<key id="KEY_TEXT"   mapto="text"   flags="m"/>
+
+		<key id="KEY_1"      mapto="1"      flags="m"/>
+		<key id="KEY_2"      mapto="2"      flags="m"/>
+		<key id="KEY_3"      mapto="3"      flags="m"/>
+		<key id="KEY_4"      mapto="4"      flags="m"/>
+		<key id="KEY_5"      mapto="5"      flags="m"/>
+		<key id="KEY_6"      mapto="6"      flags="m"/>
+		<key id="KEY_7"      mapto="7"      flags="m"/>
+		<key id="KEY_8"      mapto="8"      flags="m"/>
+		<key id="KEY_9"      mapto="9"      flags="m"/>
+		<key id="KEY_0"      mapto="0"      flags="m"/>
+
+		<key id="KEY_PREVIOUS" mapto="prev"      flags="b"/>
+		<key id="KEY_PREVIOUS" mapto="prev_long" flags="l"/> 
+		<key id="KEY_NEXT"     mapto="next"      flags="b"/>
+		<key id="KEY_NEXT"     mapto="next_long" flags="l"/> 
+	</map>
+</keymap>

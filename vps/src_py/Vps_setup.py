@@ -8,6 +8,8 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry
 
+VERSION = "1.1"
+
 class VPS_Setup(Screen, ConfigListScreen):
 
 	skin = """<screen name="vpsConfiguration" title="VPS-Plugin" position="center,center" size="600,370">
@@ -25,25 +27,24 @@ class VPS_Setup(Screen, ConfigListScreen):
 	
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		
-		self.setup_title = "VPS-Plugin Einstellungen"
-		
+
+		#Summary
+		self.setup_title = _("VPS Setup Version %s") %VERSION
+
 		self.vps_enabled = getConfigListEntry(_("Enable VPS-Plugin"), config.plugins.vps.enabled)
 		self.vps_initial_time = getConfigListEntry(_("Starting time"), config.plugins.vps.initial_time)
-		self.vps_allow_overwrite = getConfigListEntry(_("Recordings can be controlled by channel"), config.plugins.vps.allow_overwrite)
 		self.vps_allow_wakeup = getConfigListEntry(_("Wakeup from Deep-Standby is allowed"), config.plugins.vps.allow_wakeup)
 		self.vps_allow_seeking_multiple_pdc = getConfigListEntry(_("Seeking connected events"), config.plugins.vps.allow_seeking_multiple_pdc)
-		self.vps_default = getConfigListEntry(_("VPS enabled by default"), config.plugins.vps.default_vps)
-		self.vps_default_overwrite = getConfigListEntry(_("Recordings are controlled by channel by default"), config.plugins.vps.default_overwrite)
+		self.vps_default = getConfigListEntry(_("VPS enabled by default"), config.plugins.vps.vps_default)
+		self.vps_instanttimer = getConfigListEntry(_("Enable VPS on instant records"), config.plugins.vps.instanttimer)
 		
 		self.list = []
 		self.list.append(self.vps_enabled)
 		self.list.append(self.vps_initial_time)
-		self.list.append(self.vps_allow_overwrite)
 		self.list.append(self.vps_allow_wakeup)
 		self.list.append(self.vps_allow_seeking_multiple_pdc)
 		self.list.append(self.vps_default)
-		self.list.append(self.vps_default_overwrite)
+		self.list.append(self.vps_instanttimer)
 
 		ConfigListScreen.__init__(self, self.list, session = session)
 		self["config"].onSelectionChanged.append(self.updateHelp)
@@ -63,6 +64,11 @@ class VPS_Setup(Screen, ConfigListScreen):
 				"blue": self.show_info,
 			}
 		)
+		
+		self.onLayoutFinish.append(self.setCustomTitle)
+		
+	def setCustomTitle(self):
+		self.setTitle(self.setup_title)
 	
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
@@ -70,16 +76,14 @@ class VPS_Setup(Screen, ConfigListScreen):
 			self["help"].text = _("This plugin can determine whether a programme begins earlier or lasts longer. The channel has to provide reliable data.")
 		elif cur == self.vps_initial_time:
 			self["help"].text = _("If possible, x minutes before a timer starts VPS-Plugin will control whether the programme begins earlier. (0 disables feature)")
-		elif cur == self.vps_allow_overwrite:
-			self["help"].text = _("If enabled, you can decide whether a timer should be controlled by channel (Running-Status). Programmed start and end time will be ignored.")
 		elif cur == self.vps_default:
 			self["help"].text = _("Enable VPS by default (new timers)")
-		elif cur == self.vps_default_overwrite:
-			self["help"].text = _("Enable \"Recording controlled by channel\" by default (new timers)")
 		elif cur == self.vps_allow_wakeup:
 			self["help"].text = _("If enabled and necessary, the plugin will wake up the Receiver from Deep-Standby for the defined starting time to control whether the programme begins earlier.")
 		elif cur == self.vps_allow_seeking_multiple_pdc:
 			self["help"].text = _("If a programme is interrupted and divided into separate events, the plugin will search for the connected events.")
+		elif cur == self.vps_instanttimer:
+			self["help"].text = _("When yes, VPS will be enabled on instant records (stop after current event), if the channel supports VPS.")
 
 	def show_info(self):
 		VPS_show_info(self.session)
@@ -121,7 +125,10 @@ class VPS_Screen_Info(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		
-		self["text"] = ScrollLabel(_("The VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n\nIf you enable VPS, the recording is definitely starting at the latest at the startTime. The recording may start earlier or lasts longer.\n\nIf you also enable \"Recording controlled by channel\", the recording will only start, when the channel flags the programme as running.\n\n\nSupported channels\n\nGermany:\n ARD, ZDF, Sky and DMAX\n\nAustria:\n ORF and Servus TV\n\nSwitzerland:\n SF\n\nCzech Republic:\n CT\n\nIf a timer is programmed manually (not via EPG), it is necessary to set a VPS-Time to enable VPS. VPS-Time (also known as PDC) is the first published start time, e.g. given in magazines. If you set a VPS-Time, you have to leave timer name empty."))
+		#Summary
+		self.info_title = _("VPS-Plugin Information")
+		
+		self["text"] = ScrollLabel(_("VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n\nIf you enable VPS, the recording will only start, when the channel flags the programme as running.\n\nIf you select \"yes (safe mode)\", the recording is definitely starting at the latest at the startTime you defined. The recording may start earlier or last longer.\n\n\nSupported channels\n\nGermany:\n ARD and ZDF\n\nAustria:\n ORF\n\nSwitzerland:\n SF\n\nCzech Republic:\n CT\n\nIf a timer is programmed manually (not via EPG), it is necessary to set a VPS-Time to enable VPS. VPS-Time (also known as PDC) is the first published start time, e.g. given in magazines. If you set a VPS-Time, you have to leave timer name empty."))
 		
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"], 
 			{
@@ -130,6 +137,11 @@ class VPS_Screen_Info(Screen):
 				"up": self["text"].pageUp,
 				"down": self["text"].pageDown,
 			}, -1)
+		
+		self.onLayoutFinish.append(self.setCustomTitle)
+		
+	def setCustomTitle(self):
+		self.setTitle(self.info_title)
 		
 	
 def VPS_show_info(session):

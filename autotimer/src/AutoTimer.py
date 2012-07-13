@@ -28,9 +28,6 @@ from datetime import timedelta, date
 # EPGCache & Event
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
 
-# Enigma2 Config
-from Components.config import config
-
 # AutoTimer Component
 from AutoTimerComponent import preferredAutoTimerComponent
 
@@ -41,7 +38,12 @@ from operator import itemgetter
 
 # from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
 
-from . import xrange, itervalues
+try:
+	from Plugins.Extensions.SeriesPlugin.plugin import renameTimer
+except ImportError as ie:
+	renameTimer = None
+
+from . import config, xrange, itervalues
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
@@ -172,11 +174,11 @@ class AutoTimer:
 			idx += 1
 		self.timers.append(timer)
 
-# 	def parseEPGAsync(self, simulateOnly=False):
-# 	   t = SimpleThread(lambda: self.parseEPG(simulateOnly=simulateOnly))
-# 	   t.start()
-# 	   return t.deferred
- 	
+#	def parseEPGAsync(self, simulateOnly=False):
+#		t = SimpleThread(lambda: self.parseEPG(simulateOnly=simulateOnly))
+#		t.start()
+#		return t.deferred
+
 	# Main function
 	def parseEPG(self, autoPoll = False, simulateOnly = False):
 		self.autoPoll = autoPoll
@@ -473,14 +475,9 @@ class AutoTimer:
 		
 							newEntry = rtimer
 							self.modified += 1
-		
-							# Modify values saved in timer
-							newEntry.name = name
-							newEntry.description = shortdesc
-							newEntry.begin = int(begin)
-							newEntry.end = int(end)
-							newEntry.service_ref = ServiceReference(serviceref)
-		
+
+							self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref)
+
 							break
 						elif timer.avoidDuplicateDescription >= 1 \
 							and not rtimer.disabled:
@@ -529,13 +526,24 @@ class AutoTimer:
 		
 					newEntry.dirname = timer.destination
 					newEntry.justplay = timer.justplay
-					newEntry.tags = timer.tags
 					newEntry.vpsplugin_enabled = timer.vps_enabled
 					newEntry.vpsplugin_overwrite = timer.vps_overwrite
-		
+
+					tags = timer.tags[:]
+					if config.plugins.autotimer.add_autotimer_to_tags.value:
+						tags.append('AutoTimer')
+					if config.plugins.autotimer.add_name_to_tags.value:
+						name = timer.name.strip()
+						if name:
+							name = name[0].upper() + name[1:].replace(" ", "_")
+							tags.append(name)
+					newEntry.tags = tags
+
 					if oldExists:
 						# XXX: this won't perform a sanity check, but do we actually want to do so?
 						self.recordHandler.timeChanged(newEntry)
+						if renameTimer is not None and timer.series_labeling:
+							renameTimer(newEntry, name, evtBegin, evtEnd)
 					else:
 						conflictString = ""
 						if similarTimer:
@@ -546,6 +554,7 @@ class AutoTimer:
 						conflicts = self.recordHandler.record(newEntry)
 		
 						if conflicts:
+							# Maybe use newEntry.log
 							conflictString += ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
 							print("[AutoTimer] conflict with %s detected" % (conflictString))
 		
@@ -555,11 +564,7 @@ class AutoTimer:
 							lepgm = len(epgmatches)
 							for i in xrange(lepgm):
 								servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[ (i+idx+1)%lepgm ]
-								if shortdesc == shortdescS:
-									# Some channels indicate replays in the extended descriptions
-									# If the similarity percent is higher then 0.8 it is a very close match
-									if ( len(extdesc) == len(extdescS) and extdesc == extdescS ) \
-										or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, extdescS).ratio() ):
+									if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS, force=True ):
 										# Check if the similar is already known
 										if eitS not in self.similar:
 											print("[AutoTimer] Found similar Timer: " + name)
@@ -583,7 +588,9 @@ class AutoTimer:
 							self.new += 1
 							newEntry.extdesc = extdesc
 							self.recorddict[serviceref].append(newEntry)
-		
+
+							if renameTimer is not None and timer.series_labeling:
+								renameTimer(newEntry, name, evtBegin, evtEnd)
 							# Similar timers are in new timers list and additionally in similar timers list
 							if similarTimer:
 								self.similars.append((name, begin, end, serviceref, timer.name))
@@ -630,6 +637,13 @@ class AutoTimer:
 
 # Supporting functions
 
+	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref):
+		timer.name = name
+		timer.description = shortdesc
+		timer.begin = int(begin)
+		timer.end = int(end)
+		timer.service_ref = ServiceReference(serviceref)
+
 	def addDirectoryToMovieDict(self, moviedict, dest, serviceHandler):
 		movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
 		if movielist is None:
@@ -654,16 +668,15 @@ class AutoTimer:
 					"extdesc": event.getExtendedDescription() or '' # XXX: does event.getExtendedDescription() actually return None on no description or an empty string?
 				})
 
-	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2):
-		foundTitle = (name1 == name2)
-		foundShort = (shortdesc1 == shortdesc2) if timer.searchForDuplicateDescription > 0 else True
+	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2, force=False):
+		foundTitle = name1 == name2
+		foundShort = shortdesc1 == shortdesc2 if (timer.searchForDuplicateDescription > 0 or force) else True
 		foundExt = True
 		# NOTE: only check extended if short description already is a match because otherwise
 		# it won't evaluate to True anyway
-		if timer.searchForDuplicateDescription == 2 and foundShort:
+		if (timer.searchForDuplicateDescription > 0 or force) and foundShort:
 			# Some channels indicate replays in the extended descriptions
 			# If the similarity percent is higher then 0.8 it is a very close match
-			foundExt = ( len(extdesc1) == len(extdesc2) and extdesc1 == extdesc2 ) \
-			 or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+			foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
 
 		return foundTitle and foundShort and foundExt

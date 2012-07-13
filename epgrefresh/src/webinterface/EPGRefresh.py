@@ -5,6 +5,7 @@ from Plugins.Extensions.EPGRefresh.EPGRefreshResource import \
 		EPGRefreshListServicesResource, \
 		EPGRefreshChangeSettingsResource, \
 		EPGRefreshSettingsResource, \
+		EPGRefreshPreviewServicesResource, \
 		API_VERSION
 
 root = EPGRefreshListServicesResource()
@@ -13,5 +14,6 @@ root.putChild("add", EPGRefreshAddRemoveServiceResource(EPGRefreshAddRemoveServi
 root.putChild("del", EPGRefreshAddRemoveServiceResource(EPGRefreshAddRemoveServiceResource.TYPE_DEL))
 root.putChild("set", EPGRefreshChangeSettingsResource())
 root.putChild("get", EPGRefreshSettingsResource())
+root.putChild("preview", EPGRefreshPreviewServicesResource())
 addExternalChild( ("epgrefresh", root, "EPGRefresh-Plugin", API_VERSION) )
 

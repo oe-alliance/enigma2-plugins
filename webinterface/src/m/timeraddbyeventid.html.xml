@@ -1,0 +1,41 @@
+<e2:screen name="TimerWebScreen">&lt;!DOCTYPE html>
+<e2:element source="TimerAddEventID" id="sRef,eventid,justplay,dirname,tags">
+	<e2:convert type="web:Null" />
+</e2:element>
+<html>
+<head>
+	<title>Add Timer</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+	<link rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
+	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.0.min.css" />
+
+	<script src="/web-data/lib/jquery-1.7.1.min.js" />
+	<script language="javascript" type="text/javascript">
+		$(document).bind("mobileinit", function(){
+			$.extend(  $.mobile , {
+				defaultPageTransition: 'none',
+				defaultDialogTransition: 'none'
+			});
+		});
+	</script>
+	<script src="/web-data/m/script/jquery.mobile-1.1.0.min.js" />
+</head>
+<body>
+
+<div data-role="page" id="main" data-title="Add Timer" data-theme="a">
+	<div data-role="header">
+		<h1>Add Timer</h1>
+	</div><!-- /header -->
+	<div data-role="content">
+		<p><e2:element source="TimerAddEventID"><e2:convert type="SimpleResult">ResultText</e2:convert><e2:convert type="web:TextToXML" /></e2:element></p>
+		<a href="timers.html" data-role="button" data-ajax="false">Show timers</a>
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div><!-- /main -->
+</body>
+</html>
+</e2:screen>

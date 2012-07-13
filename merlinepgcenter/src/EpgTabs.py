@@ -122,10 +122,15 @@ class EpgNextTab(EpgBaseTab):
 		
 # epg single tab
 class EpgSingleTab(EpgBaseTab):
+
+	SORT_MODE_TIME = 0
+	SORT_MODE_NAME = 1
+	
 	def __init__(self, tabList):
 		self.tabList = tabList
 		EpgBaseTab.__init__(self)
 		self.__shown = False
+		self.sortMode = self.SORT_MODE_TIME
 		
 	def getFirstServiceRef(self, bouquet):
 		servicelist = eServiceCenter.getInstance().list(bouquet[1])
@@ -166,6 +171,8 @@ class EpgSingleTab(EpgBaseTab):
 		self.__currentMode = currentMode
 		self.__showOutdated = showOutdated
 		
+		self.sortMode = self.SORT_MODE_TIME
+		
 		if timerListMode == LIST_MODE_AUTOTIMER: # we don't have a service ref from autotimers, let's get the first one in bouquets
 			self.__sRef = self.getFirstServiceRef(firstBouquet)
 		elif sRef == None:
@@ -190,10 +197,26 @@ class EpgSingleTab(EpgBaseTab):
 	def refresh(self):
 		if not self.__shown:
 			return
+			
+		if self.sortMode == self.SORT_MODE_NAME:
+			cur = self.tabList.getCurrent()
+			if cur:
+				eventId = cur[1]
+			else:
+				eventId = None
+		else:
+			eventId = None
+			
 		self.tabList.fillSingleEPG(self.__currentBouquet, self.__currentBouquetIndex, self.__currentMode, self.__sRef, self.__showOutdated)
-		self.tabList.l.invalidate()
 		
+		if eventId != None:
+			self.sort(eventId)
+		else:
+			self.tabList.l.invalidate()
+			
 	def changeService(self, direction): # +1 = next service, -1 = previous service
+		self.sortMode = self.SORT_MODE_TIME # reset sorting
+		
 		numChannels = len(EpgCenterList.bouquetServices[self.__currentBouquetIndex])
 		
 		self.serviceIndex += direction
@@ -230,6 +253,26 @@ class EpgSingleTab(EpgBaseTab):
 		self.parentInstance.currentBouquet = self.parentInstance.bouquetList[self.__currentBouquetIndex][1]
 		self.parentInstance.currentBouquetIndex = self.__currentBouquetIndex
 		self.parentInstance.lastMultiEpgIndex = self.serviceIndex
+		
+	def sort(self, eventId = None):
+		if eventId == None:
+			cur = self.tabList.getCurrent()
+			eventId = cur[1]
+			
+		if self.sortMode == self.SORT_MODE_TIME: # sort by time (default)
+			self.tabList.list.sort(key=lambda x: x[3])
+		elif self.sortMode == self.SORT_MODE_NAME: # sort by name and time
+			self.tabList.list.sort(key=lambda x: (x[5] and x[5].lower(), x[3]))
+			
+		self.tabList.setList(self.tabList.list)
+		self.tabList.l.invalidate()
+		
+		index = 0
+		for x in self.tabList.list:
+			if x[1] == eventId:
+				self.tabList.moveToIndex(index)
+				break
+			index += 1
 			
 # epg prime time tab
 class EpgPrimeTimeTab(EpgBaseTab):

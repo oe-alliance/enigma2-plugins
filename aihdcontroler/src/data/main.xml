@@ -596,13 +596,13 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget itemHeight="28" name="config" position="20,47" scrollbarMode="showOnDemand" size="860,420"/>
 	</screen>
 	
-	<screen name="PluginBrowser" position="center,center" size="720,492" title="Plugin browser">
++<!--	<screen name="PluginBrowser" position="center,center" size="720,492" title="Plugin browser">
 		<widget name="list" position="10,5" scrollbarMode="showOnDemand" size="700,450"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="10,462" size="30,30"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/green.png" position="410,462" size="30,30"/>
 		<widget font="Regular;22" foregroundColor="foreground" halign="left" name="red" position="45,464" size="367,30"/>
 		<widget font="Regular;22" foregroundColor="foreground" halign="left" name="green" position="445,464" size="260,30"/>
-	</screen>
++       </screen>-->
 	
 	<screen name="DirectoryBrowser" position="center,87" size="600,560" title="Directory browser">
 		<widget itemHeight="28" name="filelist" position="10,12" scrollbarMode="showOnDemand" size="580,476"/>

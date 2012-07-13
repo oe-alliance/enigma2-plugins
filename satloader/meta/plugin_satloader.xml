@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>ismail</author>
+                    <name>Satloader Plugin</name>
+                    <packagename>enigma2-plugin-extensions-satloader</packagename>
+                    <shortdescription>updates transponder file (satellites.xml)</shortdescription>
+                    <description>get latest satellites.xml</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_satloader.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-satloader" />
+	  </files>
+</default>

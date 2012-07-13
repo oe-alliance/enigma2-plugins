@@ -323,6 +323,5 @@ def Plugins(path,**kwargs):
 		global plugin_path
 		plugin_path = path
 		return [
-				PluginDescriptor(name="Genuine Dreambox", description="Genuine Dreambox",where = PluginDescriptor.WHERE_PLUGINMENU, icon="genuine.png", fnc=main),
-				PluginDescriptor(name="Genuine Dreambox", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
+				PluginDescriptor(name="Genuine Dreambox", description=_("Genuine Dreambox verification"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="genuine.png", fnc=main)
 				]
