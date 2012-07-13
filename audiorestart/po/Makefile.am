@@ -1,4 +1,4 @@
 PLUGIN = AudioRestart
 LANGS = de
 
-include $(top_srcdir)/Rules_noxml-po
+include $(top_srcdir)/Rules_noxml-po.mak
