@@ -1,0 +1,50 @@
+<e2:screen name="MovieWebScreen">&lt;!DOCTYPE html>
+<html>
+<head>
+	<title>Movies</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+	<link rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
+	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.0.min.css" />
+
+	<script src="/web-data/lib/jquery-1.7.1.min.js" />
+	<script language="javascript" type="text/javascript">
+		$(document).bind("mobileinit", function(){
+			$.extend(  $.mobile , {
+				defaultPageTransition: 'none',
+				defaultDialogTransition: 'none'
+			});
+		});
+	</script>
+	<script src="/web-data/m/script/jquery.mobile-1.1.0.min.js" />
+</head>
+<body>
+
+<div data-role="page" id="main" data-title="Movies" data-theme="a">
+	<div data-role="header">
+		<h1>Movies</h1>
+		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home" data-ajax="false">Home</a>
+	</div><!-- /header -->
+	<div data-role="content">
+		<div data-role="collapsible-set">
+			<e2:element source="MovieList" id="dirname,tag"><e2:convert type="web:ListFiller" >
+			&lt;div data-role="collapsible" data-content-theme="a">
+				&lt;h3><e2:item name="Title" filter="html"/> (<e2:item name="Length"/> min.)&lt;/h3>
+				&lt;p><e2:item name="Description" filter="html"/>&lt;br />
+				<e2:item name="DescriptionExtended" filter="html"/>&lt;/p>
+				&lt;div data-role="controlgroup" data-type="horizontal">
+					&lt;a href="zap.html?sRef=<e2:item name="ServiceReference" filter="uriAttribute"/>" data-rel="dialog" data-role="button" data-theme="d">Watch now&lt;/a>
+					&lt;a href="/web/ts.m3u?file=<e2:item name="Filename" filter="uriAttribute"/>" target="_blank" data-role="button" data-theme="d">Stream now&lt;/a>
+				&lt;/div>
+			&lt;/div>
+			</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+		</div>
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div><!-- /main -->
+</body>
+</html>
+</e2:screen>

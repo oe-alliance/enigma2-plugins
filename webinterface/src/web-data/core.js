@@ -520,9 +520,9 @@ var Messages = Class.create({
 });
 
 var Movies = Class.create(Controller, {
-	initialize: function($super, listTarget, navTarget){
+	initialize: function($super, listTarget, navTarget, locTarget){
 		$super(new MovieListHandler(listTarget));
-		this.navHandler = new MovieNavHandler(navTarget);
+		this.navHandler = new MovieNavHandler(navTarget, locTarget);
 	},
 
 	load: function(location, tags){
@@ -1041,7 +1041,7 @@ var E2WebCore = Class.create({
 		this.lt = new LocationsAndTags();
 		this.mediaplayer = new MediaPlayer('contentMain');
 		this.messages = new Messages();
-		this.movies = new Movies('contentMain', 'navContent');
+		this.movies = new Movies('contentMain', 'navContent', 'contentHdExt');
 		this.multiepg = new MultiEpg();
 		this.power = new Power();
 		this.remote = new RemoteControl();
@@ -1158,6 +1158,11 @@ var E2WebCore = Class.create({
 		}
 	},
 
+	delayedUpdateItems: function(){
+		var _this = this;
+		setTimeout(_this.updateItems.bind(this), 2000);
+	},
+
 	updateItems: function(){
 		debug("[E2WebCore].updateItems");
 		this.current.load();
@@ -1201,6 +1206,19 @@ var E2WebCore = Class.create({
 		clearInterval(this.updateBouquetItemsPoller);
 	},
 
+	setNavHighlight: function(){
+		var navitems = $$(".navmenu");
+		navitems.each(function(element){
+			var mode = element.readAttribute("data-mode");
+			var navselected = "navselected";
+			if(mode == this.mode){
+				element.addClassName(navselected);
+			} else {
+				element.removeClassName(navselected);
+			}
+		}.bind(this));
+	},
+
 	onHashChanged: function(isReload){
 		var hash = hashListener.getHash();
 		var parts = hash.split("/");
@@ -1213,6 +1231,9 @@ var E2WebCore = Class.create({
 				this.subMode = '';
 			}
 			this.mode = mode;
+
+			this.setNavHighlight();
+
 			if(len > 2){
 				var subMode = parts[2];
 				if(subMode != this.subMode || isReload){
@@ -1240,7 +1261,8 @@ var E2WebCore = Class.create({
 							function(){
 								this.movies.load(location, tag);
 							}.bind(this),
-							'Movies'
+							'Movies',
+							true
 						);
 
 						break;
@@ -1424,6 +1446,19 @@ var E2WebCore = Class.create({
 					hashListener.setHash(hash);
 			}.bind(this)
 		);
+		$('contentHdExt').on(
+			changeevt,
+			'.mNavLocTag',
+			function(event, element){
+				var l = $('locations');
+				var t = $('tags');
+				var location = l.options[l.selectedIndex].value;
+				var tag = t.options[t.selectedIndex].value;
+				var hash = [this.getBaseHash(), "filter", encodeURIComponent(location), encodeURIComponent(tag)].join("/");
+				if(hash != '#'+hashListener.getHash() || !Prototype.Browser.IE)
+					hashListener.setHash(hash);
+			}.bind(this)
+		);
 		//RemoteControl
 		nav.on(
 			'click',
@@ -1516,14 +1551,37 @@ var E2WebCore = Class.create({
 			'click',
 			'.powerState',
 			function(event, element){
+				var newState = element.readAttribute("data-state");
 				var cb = function(isStandby){
 					var text = "Device is now Running";
-					if(isStandby)
-						text = "Device is now in Standby";
+					switch(this.power.STATES[newState]){
+					case this.power.STATES.toggle:
+						if(isStandby)
+							text = "Device is now in Soft-Standby";
+						break;
+					case this.power.STATES.deep:
+						if(isStandby)
+							text = "Device will go into deep standby (if possible, check OSD for messages)";
+						else
+							text = "Cannot shutdown!";
+						break;
+					case this.power.STATES.reboot:
+						if(isStandby)
+							text = "Device will reboot now (if possible, check OSD for messages)";
+						else
+							text = "Cannot reboot!";
+						break;
+					case this.power.STATES.gui:
+						if(isStandby)
+							text = "GUI will restart now (if possible, check OSD for messages)";
+						else
+							text = "Cannot restart GUI!";
+						break;
+					}
 					this.notify(text, true);
 					this.onPowerStateAvailable(isStandby);
 				}.bind(this);
-				this.power.set(element.readAttribute("data-state"), cb);
+				this.power.set(newState, cb);
 			}.bind(this)
 		);
 		//Settings
@@ -1558,7 +1616,7 @@ var E2WebCore = Class.create({
 			'a.sListSLink',
 			function(event, element){
 				var ref = decodeURIComponent( element.id );
-				this.services.zap(ref, this.updateItems.bind(this));
+				this.services.zap(ref, this.delayedUpdateItems.bind(this));
 				event.stop();
 			}.bind(this)
 		);
@@ -1779,8 +1837,8 @@ var E2WebCore = Class.create({
 	 * @param fnc - The function used to load the content
 	 * @param title - The Title to set on the contentpanel
 	 */
-	loadContentDynamic: function(fnc, title){
-		setContentHd(title);
+	loadContentDynamic: function(fnc, title, keepHdExt){
+		setContentHd(title, keepHdExt);
 		this.stopUpdateBouquetItemsPoller();
 		fnc();
 	},

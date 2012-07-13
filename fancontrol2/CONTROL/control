@@ -1,6 +1,2 @@
-Package: enigma2-plugin-extensions-fancontrol2
-Version: 2.6
 Description: Temperature dependent fan control
-Maintainer: IHAD joergm6 <joergm6@www.i-have-a-dreambox.com>
-Homepage: http://www.i-have-a-dreambox.com
-Depends: enigma2 (>> 2.6)
+Depends: enigma2, hdparm, smartmontools

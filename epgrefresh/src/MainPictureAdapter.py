@@ -9,6 +9,8 @@ from Tools import Notifications
 # Config
 from Components.config import config
 
+from . import _, NOTIFICATIONID
+
 class MainPictureAdapter:
 	backgroundCapable = True
 	def __init__(self, session):
@@ -16,7 +18,7 @@ class MainPictureAdapter:
 
 	def prepare(self):
 		if config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddNotification(MessageBox, _("EPG refresh starts scanning channels."), type=MessageBox.TYPE_INFO, timeout=4)
+			Notifications.AddPopup(_("EPG refresh starts scanning channels."), MessageBox.TYPE_INFO, 4, NOTIFICATIONID)
 		self.previousService = self.navcore.getCurrentlyPlayingServiceReference()
 		return True
 

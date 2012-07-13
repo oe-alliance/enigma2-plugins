@@ -45,7 +45,7 @@ def cleanup():
 		zapperInstance = None
 
 def Plugins(**kwargs):
- 	return [
+	return [
 		PluginDescriptor(
 			name = "Werbezapper",
 			description = _("Automatically zaps back to current service after given Time"),

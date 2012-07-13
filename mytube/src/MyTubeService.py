@@ -50,46 +50,42 @@ std_headers = {
 
 
 class GoogleSuggestions():
-	def __init__(self, callback, ds = None, json = None, hl = None):
-		self.gotFeed = callback
+	def __init__(self):
+		self.hl = "en"
 		self.conn = HTTPConnection("google.com")
-		#GET /complete/search?output=toolbar&ds=yt&hl=en&jsonp=self.gotSuggestions&q=s
-		self.prepQuerry = "/complete/search?output=toolbar&"
-		if ds is not None:
-			self.prepQuerry = self.prepQuerry + "ds=" + ds + "&"
-		if json is not None:
-			self.prepQuerry = self.prepQuerry + "json=" + json + "&"
-		if hl is not None:
-			self.prepQuerry = self.prepQuerry + "hl=" + hl + "&"
-		self.prepQuerry = self.prepQuerry + "jsonp=self.gotSuggestions&q="
 
-	def gotSuggestions(self, suggestslist):
-		self.gotFeed(suggestslist)
+	def prepareQuery(self):
+		#GET /complete/search?output=toolbar&client=youtube-psuggest&xml=true&ds=yt&hl=en&jsonp=self.gotSuggestions&q=s
+		self.prepQuerry = "/complete/search?output=toolbar&client=youtube&xml=true&ds=yt&"
+		if self.hl is not None:
+			self.prepQuerry = self.prepQuerry + "hl=" + self.hl + "&"
+		self.prepQuerry = self.prepQuerry + "jsonp=self.gotSuggestions&q="
+		print "[MyTube - GoogleSuggestions] prepareQuery:",self.prepQuerry
 
 	def getSuggestions(self, querryString):
+		self.prepareQuery()
 		if querryString is not "":
 			querry = self.prepQuerry + quote(querryString)
 			try:
 				self.conn.request("GET", querry)
 			except (CannotSendRequest, gaierror, error):
-				print "[MyTube]  Can not send request for suggestions"
-				self.gotFeed(None)
+				print "[MyTube - GoogleSuggestions] Can not send request for suggestions"
+				return None
 			else:
 				try:
 					response = self.conn.getresponse()
 				except BadStatusLine:
-					print "[MyTube]  Can not get a response from google"
-					self.gotFeed(None)
+					print "[MyTube - GoogleSuggestions] Can not get a response from google"
+					return None
 				else:
 					if response.status == 200:
 						data = response.read()
-						self.gotSuggestions(data)
+						return data
 					else:
-						self.gotFeed(None)
+						return None
 			self.conn.close()
 		else:
-			self.gotFeed(None)
-
+			return None
 
 class MyTubeFeedEntry():
 	def __init__(self, feed, entry, favoritesFeed = False):
@@ -284,6 +280,13 @@ class MyTubeFeedEntry():
 				print "Found Responses: ", link.href
 				return link.href
 
+	def getUserVideos(self):
+		print "[MyTubeFeedEntry] getUserVideos()"
+		username = self.getAuthor()
+		myuri = 'http://gdata.youtube.com/feeds/api/users/%s/uploads' % username
+		print "Found Uservideos: ", myuri
+		return myuri
+
 class MyTubePlayerService():
 #	Do not change the client_id and developer_key in the login-section!
 #	ClientId: ytapi-dream-MyTubePlayer-i0kqrebg-0
@@ -310,15 +313,44 @@ class MyTubePlayerService():
 		print "[MyTube] MyTubePlayerService - stopService"
 		del self.ytService
 
-	def getFeed(self, url, callback = None, errorback = None):
-		print "[MyTube] MyTubePlayerService - getFeed:",url
+	def getFeedService(self, feedname):
+		if feedname == "top_rated":
+			return self.yt_service.GetTopRatedVideoFeed
+		elif feedname == "most_viewed":
+			return self.yt_service.GetMostViewedVideoFeed
+		elif feedname == "recently_featured":
+			return self.yt_service.GetRecentlyFeaturedVideoFeed
+		elif feedname == "top_favorites":
+			return self.yt_service.GetTopFavoritesVideoFeed
+		elif feedname == "most_recent":
+			return self.yt_service.GetMostRecentVideoFeed
+		elif feedname == "most_discussed":
+			return self.yt_service.GetMostDiscussedVideoFeed
+		elif feedname == "most_linked":
+			return self.yt_service.GetMostLinkedVideoFeed
+		elif feedname == "most_responded":
+			return self.yt_service.GetMostRespondedVideoFeed
+		return self.yt_service.GetYouTubeVideoFeed
+
+	def getFeed(self, url, feedname = "", callback = None, errorback = None):
+		print "[MyTube] MyTubePlayerService - getFeed:",url, feedname
 		self.feedentries = []
-		queryThread = YoutubeQueryThread(self.yt_service.GetYouTubeVideoFeed, url, self.gotFeed, self.gotFeedError, callback, errorback)
+		ytservice = self.yt_service.GetYouTubeVideoFeed
+		if feedname in ("hd", "most_popular", "most_shared", "on_the_web"):
+			if feedname == "hd":
+				url = "http://gdata.youtube.com/feeds/api/videos/-/HD"
+			else:
+				url = url + feedname
+		elif feedname in ("top_rated","most_viewed","recently_featured","top_favorites","most_recent","most_discussed","most_linked","most_responded"):
+			url = None
+			ytservice = self.getFeedService(feedname)
+				
+		queryThread = YoutubeQueryThread(ytservice, url, self.gotFeed, self.gotFeedError, callback, errorback)	
 		queryThread.start()
 		return queryThread		
 
 	def search(self, searchTerms, startIndex = 1, maxResults = 25,
-					orderby = "relevance", racy = "include", 
+					orderby = "relevance", time = 'all_time', racy = "include", 
 					author = "", lr = "", categories = "", sortOrder = "ascending", 
 					callback = None, errorback = None):
 		print "[MyTube] MyTubePlayerService - search()"
@@ -326,6 +358,7 @@ class MyTubePlayerService():
 		query = gdata.youtube.service.YouTubeVideoQuery()
 		query.vq = searchTerms
 		query.orderby = orderby
+		query.time = time
 		query.racy = racy
 		query.sortorder = sortOrder
 		if lr is not None:
@@ -389,7 +422,10 @@ class YoutubeQueryThread(Thread):
 	
 	def run(self):
 		try:
-			feed = self.query(self.param)
+			if self.param is None:
+				feed = self.query()
+			else:
+				feed = self.query(self.param)
 			self.messages.push((True, feed, self.callback))
 			self.messagePump.send(0)
 		except Exception, ex:

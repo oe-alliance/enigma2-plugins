@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Tode</author>
+                    <name>AudioRestart</name>
+                    <packagename>enigma2-plugin-extensions-audiorestart</packagename>
+                    <shortdescription>Restart audio after reboot/standby</shortdescription>
+                    <description>AudoRestart allows the restart of digital audio after standby to fix missing audio due to handshake problems with some avr brands.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_audiorestart_en.jpg" />
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-audiorestart" />
+	  </files>
+</default>

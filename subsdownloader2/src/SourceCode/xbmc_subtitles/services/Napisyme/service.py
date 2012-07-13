@@ -10,6 +10,7 @@ import urllib2, re, string, sys, os
 #, xbmc
 from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import log, twotofull
 from Plugins.Extensions.SubsDownloader2.SourceCode.archives_extractor import zip_extractor
+from Screens.MessageBox import MessageBox
 
 #_ = sys.modules[ "__main__" ].__language__
 

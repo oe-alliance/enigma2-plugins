@@ -8,4 +8,5 @@ plugin_PYTHON = \
 
 plugin_DATA = \
 	MerlinMusicPlayer.png \
-	iDream.png
+	iDream.png \
+	maintainer.info

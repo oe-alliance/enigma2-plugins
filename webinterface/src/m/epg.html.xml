@@ -1,0 +1,66 @@
+<e2:screen name="EpgWebScreen">&lt;!DOCTYPE html><html>
+<head>
+	<title>EPG</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+	<link rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
+	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.0.min.css" />
+
+	<script src="/web-data/lib/jquery-1.7.1.min.js" />
+	<script language="javascript" type="text/javascript">
+		$(document).bind("mobileinit", function(){
+			$.extend(  $.mobile , {
+				defaultPageTransition: 'none',
+				defaultDialogTransition: 'none'
+			});
+		});
+	</script>
+	<script src="/web-data/m/script/jquery.mobile-1.1.0.min.js" />
+</head>
+<body>
+
+<div data-role="page" id="epg" data-title="EPG" data-theme="a">
+	<div data-role="header">
+		<h1>EPG</h1>
+		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home" data-ajax="false">Home</a>
+	</div><!-- /header -->
+	<div data-role="content">
+		<ul data-role="listview" data-content-theme="b">
+			<e2:element source="EpgService" id="sRef,time,endTime"><e2:convert type="web:ListFiller">
+			&lt;li>
+				&lt;a href="#event<e2:item name="EventID"/>" data-rel="dialog">
+					&lt;p><e2:item name="TimeStart" filter="date"/> - <e2:item name="TimeStart" filter="time"/>&lt;/p>
+					&lt;h3><e2:item name="Title" filter="html"/> (<e2:item name="Duration" filter="minutes"/>)&lt;/h3>
+				&lt;/a>
+			&lt;/li>
+			</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+		</ul>
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>© 2012 Dream Multimedia GmbH</h1>
+	</div><!-- /footer -->
+</div><!-- /main -->
+
+<e2:element source="EpgService" id="sRef,time,endTime"><e2:convert type="web:ListFiller">
+<!-- EPG Details -->
+&lt;div data-role="page" id="event<e2:item name="EventID"/>" data-title="<e2:item name="Title" filter="html"/>" data-theme="a">
+	&lt;div data-role="header">
+		&lt;h1><e2:item name="Title" filter="html"/>&lt;/h1>
+	&lt;/div>&lt;!-- /header -->
+	&lt;div data-role="content">
+		&lt;h4><e2:item name="Title" filter="html"/>&lt;/h4>
+		&lt;p><e2:item name="TimeStart" filter="date"/> - <e2:item name="TimeStart" filter="time"/>&lt;br />
+		<e2:item name="Description" filter="html"/>&lt;/p>
+		&lt;p><e2:item name="DescriptionExtended" filter="html"/>&lt;/p>
+		&lt;div data-role="controlgroup" data-type="horizontal">
+			&lt;a href="timeraddbyeventid.html?sRef=<e2:item name="ServiceReference" filter="uriAttribute"/>&amp;eventid=<e2:item name="EventID"/>&amp;justplay=0" data-role="button" data-rel="dialog">Record&lt;/a>
+			&lt;a href="timeraddbyeventid.html?sRef=<e2:item name="ServiceReference" filter="uriAttribute"/>&amp;eventid=<e2:item name="EventID"/>&amp;justplay=1" data-role="button" data-rel="dialog">Watch&lt;/a>
+		&lt;/div>
+	&lt;/div>
+&lt;/div>
+<!-- /EPG Details --></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+
+</body>
+</html>
+</e2:screen>

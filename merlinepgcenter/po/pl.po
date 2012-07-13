@@ -236,9 +236,6 @@ msgstr "Pokaż krótki opis:"
 msgid "Show text input help for epg search:"
 msgstr "Pokaż pomoc wprowadzania tekstu dla wyszukiwania EPG:"
 
-msgid "Show timer messages:"
-msgstr "Pokaż wiadomości z timera:"
-
 msgid "Show video picture:"
 msgstr "Pokaż obraz wideo w oknie:"
 

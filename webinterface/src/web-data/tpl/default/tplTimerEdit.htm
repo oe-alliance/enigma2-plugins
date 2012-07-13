@@ -60,13 +60,13 @@
 											<tr>
 												<td>Days:</td>
 												<td>{for r in repeated}
-													<input 
-														class="tEditRepeated" 
-														type="checkbox" 
-														id="${r.id}" 
-														name="${r.name}" 
-														value="${r.value}" 
-														title="${r.long}" 
+													<input
+														class="tEditRepeated"
+														type="checkbox"
+														id="${r.id}"
+														name="${r.name}"
+														value="${r.value}"
+														title="${r.long}"
 														${r.checked}>&nbsp;${r.txt}&nbsp;&nbsp;</input>{/for}
 												</td>
 											</tr>
@@ -76,12 +76,12 @@
 													<select class="tEditBouquet" name="bouquet" id="bouquet" size="1">
 														{for b in bouquets}
 														<option value="${b.servicereference}">${b.servicename}</option>
-														{/for}	
+														{/for}
 													</select>
 													<select name="service" id="service" size="1">
 														{for s in services}
 														<option value="${s.servicereference}" ${s.selected}>${s.servicename}</option>
-														{/for}	
+														{/for}
 													</select>
 												</td>
 											</tr>
@@ -131,7 +131,7 @@
 											<tr>
 												<td>&nbsp;</td><td>
 													<input name="disabled" id="disabled" type="hidden" value="${timer.disabled}">
-													<input name="eventId" id="eventId" type="hidden" value="${timer.eventId}">
+													<input name="eventid" id="eventid" type="hidden" value="${timer.eventid}">
 													<input name="deleteOldOnSave" id="deleteOldOnSave" type="hidden" value="${timer.deleteOldOnSave}">
 													<input name="servicereferenceOld" id="servicereferenceOld" type="hidden" value="${encodeURIComponent(timer.servicereferenceOld)}">
 													<input name="beginOld" id="beginOld" type="hidden" value="${timer.beginOld}">

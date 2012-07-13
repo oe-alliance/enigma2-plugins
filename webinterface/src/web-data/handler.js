@@ -498,13 +498,20 @@ var MovieListHandler  = Class.create(AbstractContentHandler, {
 });
 
 var MovieNavHandler = Class.create(AbstractContentHandler,{
-	initialize: function($super, target){
-		$super('tplNavMovies', target);
+	initialize: function($super, tagTarget, locTarget){
+		$super('tplMovieTags', tagTarget);
+		this.targetLocations = locTarget;
+		this.tplLocations = 'tplMovieLocations';
 	},
 
 	load: function(locations, tags){
 		data = { 'locations' : locations, 'tags' : tags};
 		this.show(data);
+		this.showLocations(data);
+	},
+
+	showLocations: function(data){
+		templateEngine.process(this.tplLocations, data, this.targetLocations);
 	}
 });
 
@@ -580,12 +587,12 @@ var TimerListHandler  = Class.create(AbstractContentHandler, {
 
 var TimerHandler = Class.create(AbstractContentHandler, {
 	ACTIONS: [{value : 0, txt : 'Record'},
-	          {value : 1, txt : 'Zap'}],
+			{value : 1, txt : 'Zap'}],
 
 	AFTEREVENTS: [{value : 0, txt : 'Nothing'},
-	              {value : 1, txt : 'Standby'},
-	              {value : 2, txt : 'Deepstandby/Shutdown'},
-	              {value : 3, txt : 'Auto'}],
+				{value : 1, txt : 'Standby'},
+				{value : 2, txt : 'Deepstandby/Shutdown'},
+				{value : 3, txt : 'Auto'}],
 
 	SELECTED : "selected",
 	CHECKED: "checked",
@@ -671,7 +678,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				servicename : unescape(parent.readAttribute('data-servicename')),
 				description : unescape(parent.readAttribute('data-description')),
 				name : unescape(parent.readAttribute('data-name')),
-				eventId : unescape(parent.readAttribute('data-eventid')),
+				eventid : unescape(parent.readAttribute('data-eventid')),
 				begin : begin,
 				beginDate : this.toReadableDate(beginD),
 				end : end,
@@ -710,7 +717,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				servicename : unescape(parent.readAttribute('data-servicename')),
 				description : unescape(parent.readAttribute('data-description')),
 				name : unescape(parent.readAttribute('data-title')),
-				eventId : unescape(parent.readAttribute('data-eventid')),
+				eventid : unescape(parent.readAttribute('data-eventid')),
 				begin : begin,
 				beginDate : this.toReadableDate(beginD),
 				end : end,
@@ -749,7 +756,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				servicename : "",
 				description : "",
 				name : "",
-				eventId : "0",
+				eventid : "0",
 				begin : "0",
 				beginDate : this.toReadableDate(begin),
 				end : "0",
@@ -802,7 +809,10 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	},
 
 	onLocationsAndTagsReady: function(data, currentLocation, locations, tags, initial){
-		var l = toOptionList(locations, currentLocation);
+		var dirname = data.timer.dirname;
+		if(dirname == "")
+			dirname = currentLocation;
+		var l = toOptionList(locations, dirname);
 		var t = toOptionList(tags, data.timer.tags, " ");
 		t.shift();
 		l.shift();
@@ -880,12 +890,11 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 			'begin' : t.begin,
 			'end' : t.end,
 			'name' : t.name,
-			'eventID' : t.eventId,
 			'description' : t.description,
 			'dirname' : t.dirname,
 			'tags' : t.tags,
 			'afterevent' : t.afterevent,
-			'eit' : '0',
+			'eit' : t.eventid,
 			'disabled' : t.disabled,
 			'justplay' : t.justplay,
 			'repeated' : t.repeated
@@ -1071,7 +1080,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 			'begin' : begin,
 			'end' : end,
 			'name' : values.name,
-			'eventId' : values.eventId,
+			'eventid' : values.eventid,
 			'description' : values.description,
 			'dirname' : values.dirname,
 			'tags' : tags.join(" "),

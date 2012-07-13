@@ -15,7 +15,6 @@
 	a, a:visited, a:active, .remark{
 		color: #485052;
 		text-decoration: none;
-		margin-top: 15px;
 	}
 	
 	img{
@@ -169,44 +168,83 @@
 		-moz-border-radius: 5px; 	
 	}
 	
-	#menuTable{
+	#mainMenu{
 		width: 100%;
 		height: auto;
-		vertical-align: middle;
 		margin: 0px;
-		padding: 3px;
-	}
-
-	#menuBack{
-		overflow:hidden;
-		width: auto;
-		height: auto;
-		text-align: left;
+		padding: 0px;
+		text-align: center;
+		overflow: hidden;
 	}
 	
-	#menuLeft{
-		overflow:hidden;
-		width: auto;
+	#mainMenu ul{
+		margin: 0px;
+		padding: 0px;
 		height: auto;
-		text-align: left;
+		text-align: center;
+		overflow: hidden;
 	}
-
-	#menuRight{
-		overflow:hidden;
-		width: auto;
-		height: auto;
-		text-align: right;
+	
+	#mainMenu #mainMenuLeft{
+		float: left;
+		margin-left: 5px;
 	}
-
-	#menuAbout{
-		overflow:hidden;
-		width: auto;
-		height: auto;
-		text-align: right;
+	
+	#mainMenu #mainMenuRight{
+		float: right;
+		margin-right: 5px;
 	}
-
-	.inline{
-		display: inline;
+	
+	#mainMenu li {
+		list-style: none;
+		float: left;
+		height: 21px;
+		margin-left: 2px;
+		background: #485052;
+		margin-top: 6px;
+		margin-bottom: 0;
+		padding: 0;
+		position: relative;
+		z-index: 2;
+	}
+	
+	#mainMenu li:hover {
+		background: #AAA;
+	}
+	
+	#mainMenu a {
+		display: inline-block;
+		color: white;
+		text-decoration: none;
+		height: 100%;
+		padding: 2px 6px;
+	}
+	
+	.roundedNav {
+		display: block;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+	}
+	
+	#mainMenu form {
+		padding: 0;
+		margin: 0;
+	}
+	
+	input[type=file] {
+		-webkit-appearance: textfield;
+		position: relative;
+		-webkit-box-sizing: border-box;
+		padding-right: 6px;
+	}
+	
+	input[type=file]::-webkit-file-upload-button {
+		width: 0;
+		padding: 0;
+		margin: 0;
+		-webkit-appearance: none;
+		border: none;
 	}
 
 /***************

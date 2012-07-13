@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-03 12:59+0100\n"
+"POT-Creation-Date: 2012-03-18 15:13+0100\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -60,6 +60,10 @@ msgstr "Çağrı görüntüleme"
 
 msgid "Call redirection"
 msgstr "Çağrı yönlendirme"
+
+#, python-format
+msgid "Calling %s"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -239,6 +243,9 @@ msgstr "FRITZ!Box adresi (isim yada IP)"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box durumu"
+
+msgid "FRITZ!Box not available for calling"
+msgstr ""
 
 msgid "Filter also list of calls"
 msgstr ""

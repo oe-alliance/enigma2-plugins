@@ -3,18 +3,18 @@ from os import stat
 from Vps import vps_timers
 from Vps_setup import VPS_Setup
 from Modifications import register_vps
+from . import _
 
 # Config
-from Components.config import config, ConfigYesNo, ConfigSubsection, ConfigInteger
+from Components.config import config, ConfigYesNo, ConfigSubsection, ConfigInteger, ConfigSelection
 
 config.plugins.vps = ConfigSubsection()
 config.plugins.vps.enabled = ConfigYesNo(default = True)
 config.plugins.vps.initial_time = ConfigInteger(default=10, limits=(0, 120))
-config.plugins.vps.allow_overwrite = ConfigYesNo(default = True)
 config.plugins.vps.allow_wakeup = ConfigYesNo(default = False)
 config.plugins.vps.allow_seeking_multiple_pdc = ConfigYesNo(default = True)
-config.plugins.vps.default_vps = ConfigYesNo(default = False)
-config.plugins.vps.default_overwrite = ConfigYesNo(default = False)
+config.plugins.vps.vps_default = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default = "no") 
+config.plugins.vps.instanttimer = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes")), ("ask", _("always ask"))], default = "ask")
 config.plugins.vps.infotext = ConfigInteger(default=0)
 
 
@@ -60,7 +60,7 @@ def doneConfig(session, **kwargs):
 def startSetup(menuid):
 	if menuid != "system":
 		return []
-	return [("VPS-Plugin", setup, "vps", 50)]
+	return [(_("VPS Settings"), setup, "vps", 50)]
 
 def getNextWakeup():
 	return vps_timers.NextWakeup()
@@ -76,11 +76,13 @@ def Plugins(**kwargs):
 				PluginDescriptor.WHERE_SESSIONSTART
 			],
 			fnc = autostart,
-			wakeupfnc = getNextWakeup
+			wakeupfnc = getNextWakeup,
+			needsRestart = True
 		),
 		PluginDescriptor(
-			name = "VPS-Plugin",
+			name = _("VPS Settings"),
 			where = PluginDescriptor.WHERE_MENU,
-			fnc = startSetup
+			fnc = startSetup,
+			needsRestart = True
 		),
 	]

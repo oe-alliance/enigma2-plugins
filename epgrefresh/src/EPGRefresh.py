@@ -34,6 +34,7 @@ from Screens.MessageBox import MessageBox
 from Tools import Notifications
 
 # ... II
+from . import _, NOTIFICATIONID
 from MainPictureAdapter import MainPictureAdapter
 from PipAdapter import PipAdapter
 from RecordAdapter import RecordAdapter
@@ -186,15 +187,7 @@ class EPGRefresh:
 				toList.append(scanservice)
 				channelIds.append(channelID)
 
-	def prepareRefresh(self):
-		print("[EPGRefresh] About to start refreshing EPG")
-
-		# Maybe read in configuration
-		try:
-			self.readConfiguration()
-		except Exception as e:
-			print("[EPGRefresh] Error occured while reading in configuration:", e)
-
+	def generateServicelist(self, services, bouquets):
 		# This will hold services which are not explicitely in our list
 		additionalServices = []
 		additionalBouquets = []
@@ -228,10 +221,10 @@ class EPGRefresh:
 
 		scanServices = []
 		channelIdList = []
-		self.addServices(self.services[0], scanServices, channelIdList)
+		self.addServices(services, scanServices, channelIdList)
 
 		serviceHandler = eServiceCenter.getInstance()
-		for bouquet in self.services[1].union(additionalBouquets):
+		for bouquet in bouquets.union(additionalBouquets):
 			myref = eServiceReference(bouquet.sref)
 			list = serviceHandler.list(myref)
 			if list is not None:
@@ -247,8 +240,21 @@ class EPGRefresh:
 		self.addServices(additionalServices, scanServices, channelIdList)
 		del additionalServices[:]
 
+		return scanServices
+
+	def prepareRefresh(self):
+		print("[EPGRefresh] About to start refreshing EPG")
+
+		# Maybe read in configuration
+		try:
+			self.readConfiguration()
+		except Exception as e:
+			print("[EPGRefresh] Error occured while reading in configuration:", e)
+
+		self.scanServices = self.generateServicelist(self.services[0], self.services[1])
+
 		# Debug
-		print("[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in scanServices]))
+		print("[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in self.scanServices]))
 
 		self.maybeStopAdapter()
 		# NOTE: start notification is handled in adapter initializer
@@ -266,7 +272,6 @@ class EPGRefresh:
 			refreshAdapter.prepare()
 		self.refreshAdapter = refreshAdapter
 
-		self.scanServices = scanServices
 		self.refresh()
 
 	def cleanUp(self):
@@ -305,7 +310,7 @@ class EPGRefresh:
 			)
 
 		if not Screens.Standby.inStandby and not config.plugins.epgrefresh.background and config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddNotification(MessageBox, _("EPG refresh finished."), type=MessageBox.TYPE_INFO, timeout=4)
+			Notifications.AddPopup(_("EPG refresh finished."), MessageBox.TYPE_INFO, 4, NOTIFICATIONID)
 		self.forcedScan = False
 		epgrefreshtimer.cleanup()
 		self.maybeStopAdapter()
@@ -360,6 +365,14 @@ class EPGRefresh:
 			# Clean up
 			self.cleanUp()
 		else:
+			# If the current adapter is unable to run in background and we are in fact in background now,
+			# fall back to main picture
+			if (not self.refreshAdapter.backgroundCapable and Screens.Standby.inStandby):
+				print("[EPGRefresh] Adapter is not able to run in background or not available, falling back to MainPictureAdapter")
+				self.maybeStopAdapter()
+				self.refreshAdapter = MainPictureAdapter(self.session)
+				self.refreshAdapter.prepare()
+
 			# Play next service
 			# XXX: we might want to check the return value
 			self.refreshAdapter.play(eServiceReference(service.sref))

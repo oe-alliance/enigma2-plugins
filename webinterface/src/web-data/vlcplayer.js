@@ -6,13 +6,13 @@ var VlcBouquetListHandler = Class.create(AbstractContentHandler, {
 });
 
 var VlcServiceListHandler = Class.create(AbstractContentHandler, {
-	initialize: function($super, target){
+	initialize: function($super, target, zapCallback){
 		$super('streaminterface/tplServiceList', target, [this.getSubservices.bind(this)]);
-
+		this.zapCallback = zapCallback;
 		this.provider = new ServiceListProvider(this.show.bind(this));
 //		this.subServiceHandler = new ServiceListSubserviceHandler();
 	},
-	
+
 	/**
 	 * getSubservices
 	 * calls this.subServiceHandler.load() to show Now/Next epg information
@@ -20,7 +20,7 @@ var VlcServiceListHandler = Class.create(AbstractContentHandler, {
 	getSubservices: function(){
 //		this.subServiceHandler.load({});
 	},
-	
+
 	/**
 	 * call this to switch to a service
 	 * Parameters:
@@ -29,9 +29,11 @@ var VlcServiceListHandler = Class.create(AbstractContentHandler, {
 	zap: function(parms){
 		this.provider.simpleResultQuery(URL.zap, parms, this.simpleResultCallback.bind(this));
 	},
-	
+
 	showSimpleResult: function($super, result){
 		if(result.getState()){
+			if(this.zapCallback)
+				this.zapCallback();
 			core.updateItemsLazy();
 		}
 		$super(result);
@@ -43,10 +45,10 @@ var WebTv = Class.create({
 		this.target = vlcObjectTarget;
 		this.instance = null;
 		this.bouquetHandler = new VlcBouquetListHandler('bouquetList');
-		this.serviceHandler = new VlcServiceListHandler('serviceList');
+		this.serviceHandler = new VlcServiceListHandler('serviceList', this.setStreamTarget.bind(this));
 		this.bouquetHandler.onFinished.push(this.onLoadBouquetFinished.bind(this));
 	},
-	
+
 	run: function(){
 		this.instance = $(this.target);
 
@@ -58,13 +60,12 @@ var WebTv = Class.create({
 		this.registerEvents();
 		this.bouquetHandler.load({'bRef' : bouquetsTv});
 	},
-	
+
 	onLoadBouquetFinished: function(){
 		var bref = decodeURIComponent( this.bouquetHandler.data.services[0].servicereference );
 		this.serviceHandler.load({'bRef' : bref});
 	},
-	
-	
+
 	registerEvents: function(){
 		$('bouquetList').on(
 			'change',
@@ -74,7 +75,14 @@ var WebTv = Class.create({
 				this.serviceHandler.load({ 'bRef' : bref });
 			}.bind(this)
 		);
-		
+
+		$('deinterlace').on(
+			'change',
+			function(event, element){
+				this.setDeinterlace(element);
+			}.bind(this)
+		);
+
 		$('serviceList').on(
 			'change',
 			'.services',
@@ -82,7 +90,7 @@ var WebTv = Class.create({
 				this.onServiceChanged();
 			}.bind(this)
 		);
-		
+
 		var buttons = $('vlcButtons');
 		buttons.on(
 			'click',
@@ -148,12 +156,27 @@ var WebTv = Class.create({
 			}.bind(this)
 		);
 	},
-	
+
 	onServiceChanged: function(){
-		var sref = decodeURIComponent (  $('services').options[$('services').selectedIndex].id );
-		this.setStreamTarget(sref);
+		if($('vlcZap').checked){
+			var sref = decodeURIComponent ( $('services').options[$('services').selectedIndex].id );
+			this.serviceHandler.zap({'sRef': sref});
+		} else {
+			this.setStreamTarget();
+		}
+		this.setDeinterlace($('deinterlace'));
 	},
-	
+
+	setDeinterlace: function(element){
+		var modes = ["blend", "bob", "discard", "linear", "mean", "x", "yadif", "yadif2x"];
+		var value = element.value;
+		if(value != "off" && modes.indexOf(value) >= 0){
+			this.instance.video.deinterlace.enable(value);
+		} else {
+			this.instance.video.deinterlace.disable();
+		}
+	},
+
 	play: function() {
 		try {
 			this.onServiceChanged();
@@ -248,15 +271,16 @@ var WebTv = Class.create({
 		$('vlcVolume').update(this.instance.audio.volume);
 	},
 
-	setStreamTarget: function(servicereference) {
+	setStreamTarget: function() {
+		var sref = decodeURIComponent (  $('services').options[$('services').selectedIndex].id );
 		host = top.location.host;
-		url = 'http://' + host + ':8001/' + decodeURIComponent(servicereference);
+		url = 'http://' + host + ':8001/' + decodeURIComponent(sref);
 
 		debug("setStreamTarget " + url);
 		this.instance.playlist.clear();
 		this.playUrl(url);
 	},
-	
+
 	notify: function(text, state){
 		debug("[E2WebCore].notify");
 		notif = $('notification');
@@ -268,7 +292,7 @@ var WebTv = Class.create({
 				notif.style.background = "#C00";
 			} else {
 				notif.style.background = "#85C247";
-			}				
+			}
 
 			this.set('notification', "<div>"+text+"</div>");
 			notif.fadeIn({'delay' : 500, 'to' : 90});
@@ -276,7 +300,7 @@ var WebTv = Class.create({
 			this.hideNotifierTimeout = setTimeout(_this.hideNotifier.bind(this), 5000);
 		}
 	},
-	
+
 	getBaseHash: function(){
 		return '#';
 	}

@@ -1,0 +1,68 @@
+
+<!-- tplPkgList -->
+						<table id="contentTable">
+							${CSS=""}
+							{for pkg in pkgs}
+							<tr>
+								<td class="{if CSS == '' | CSS == 'even'}${CSS='odd'}{else}${CSS='even'}{/if}" >
+									<table>
+										<tr>
+											<td style="font-size: 12px; width: 400px;">
+												<div>
+													{if pkg.update == "0" && pkg.state == "0"}
+													<a class="sPkgInstallSLink" href="#" data-pkgname="${pkg.name}" title="install ${pkg.name}">
+														${pkg.name}
+													</a>
+													{elseif pkg.update == "1"}
+													<a class="sPkgInstallSLink" href="#" data-pkgname="${pkg.name}" title="update ${pkg.name}">
+														${pkg.name}
+													</a>
+													{else}
+														${pkg.name}
+													{/if}
+												</div>
+											</td>
+											<td style="font-size: 10px; width: 300px;">
+												${pkg.release}
+											</td>
+											<td style="width: 40px;">
+												{if pkg.update == "1"}
+												<a class="sPkgInstallSLink" href="#" data-pkgname="${pkg.name}" title="update ${pkg.name}" >
+													<img src="/webadmin/img/update.png" alt="update" border="0">
+												</a>
+												{/if}
+											</td>
+											<td style="width: 10px;">
+												{if pkg.state == "1"}
+												<a class="sPkgRemoveSLink" href="#" data-pkgname="${pkg.name}" title="remove ${pkg.name}">
+													<img src="/web-data/img/minus.png" alt="remove" border="0">
+												</a>
+												{else}
+												<a class="sPkgInstallSLink" href="#" data-pkgname="${pkg.name}" title="install ${pkg.name}">
+													<img src="/web-data/img/plus.png" alt="install" border="0">
+												</a>
+											</td>
+												{/if}
+											</td>
+										</tr>
+										<tr>
+											<tr>
+												<td style="font-size: 10px;">${pkg.description}</td>
+											</tr>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{forelse}
+							<tr>
+								<td>
+									<table>
+										<tr>
+											<td>No Packages to Display</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{/for}
+						</table>
+<!-- /tplPkgList -->
