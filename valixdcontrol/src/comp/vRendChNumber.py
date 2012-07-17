@@ -40,7 +40,7 @@ class vRendChNumber(Renderer, VariableText):
 			markersOffset = 0
 			myRoot = MYCHANSEL.getRoot()
 			mySrv = MYCHANSEL.servicelist.getCurrent()
-			chx = MYCHANSEL.servicelist.l.lookupService(mySrv)
+			chx = MYCHANSEL.servicelist.getCurrentIndex()
 			if not MYCHANSEL.inBouquet():
 				pass
 			else:
