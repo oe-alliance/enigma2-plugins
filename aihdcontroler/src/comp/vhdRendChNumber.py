@@ -40,7 +40,7 @@ class vhdRendChNumber(Renderer, VariableText):
 			markersOffset = 0
 			myRoot = MYCHANSEL.getRoot()
 			mySrv = MYCHANSEL.servicelist.getCurrent()
-			chx = MYCHANSEL.servicelist.getCurrentIndex()
+			chx = MYCHANSEL.servicelist.l.lookupService(mySrv)
 			if not MYCHANSEL.inBouquet():
 				pass
 			else:
