@@ -97,3 +97,6 @@ msgstr "Quickbutton Setup"
 msgid "switch 4:3 content display"
 msgstr "4:3 Bildumschaltung"
 
+msgid "Overwrite HBBTV-red-button"
+msgstr "HBBTV-Red-Button überschreiben"
+
