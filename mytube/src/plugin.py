@@ -456,30 +456,30 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 	def setState(self,status = None):
 		if status:
-			self.currList = "status"
-			self["videoactions"].setEnabled(False)
-			self["searchactions"].setEnabled(False)
-			self["config_actions"].setEnabled(False)
-			self["historyactions"].setEnabled(False)
-			self["statusactions"].setEnabled(True)
-			self["ButtonBlue"].hide()
-			self["VKeyIcon"].hide()	
-			self.statuslist = []
-			self.hideSuggestions()
-			result = None
-			if self.l3key is not None:
-				rnd = get_rnd()
-				if rnd is None:
-					return
-				val = etpm.challenge(rnd)
-				result = decrypt_block(val, self.l3key)
-			if not result or result[80:88] != rnd:
-				self["key_green"].show()
-				self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
-				self["feedlist"].style = "state"
-				self['feedlist'].setList(self.statuslist)
-			else:
-				print "Genuine Dreambox validation passed"
+				self.currList = "status"
+				self["videoactions"].setEnabled(False)
+				self["searchactions"].setEnabled(False)
+				self["config_actions"].setEnabled(False)
+				self["historyactions"].setEnabled(False)
+				self["statusactions"].setEnabled(True)
+				self["ButtonBlue"].hide()
+				self["VKeyIcon"].hide()	
+				self.statuslist = []
+				self.hideSuggestions()
+				result = None
+			#if self.l3key is not None:
+			#	rnd = get_rnd()
+			#	if rnd is None:
+			#		return
+			#	val = etpm.challenge(rnd)
+			#	result = decrypt_block(val, self.l3key)
+			#if not result or result[80:88] != rnd:
+			#	self["key_green"].show()
+			#	self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+			#	self["feedlist"].style = "state"
+			#	self['feedlist'].setList(self.statuslist)
+			#else:
+			#	print "Genuine Dreambox validation passed"
 				if self.FirstRun == True:
 					self.appendEntries = False
 					myTubeService.startService()
