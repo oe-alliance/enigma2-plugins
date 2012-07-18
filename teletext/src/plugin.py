@@ -9,11 +9,13 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
+from Components.MenuList import MenuList 
 from Components.Pixmap import Pixmap
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigEnableDisable, ConfigSlider, ConfigSelection, ConfigSequence
 from GlobalActions import globalActionMap
 from Plugins.Plugin import PluginDescriptor
+from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 import array
@@ -28,7 +30,9 @@ from select import POLLIN, POLLPRI, POLLHUP, POLLERR
 from enigma import Teletext as TeletextInterface
 from enigma import DISABLED, BILINEAR, ANISOTROPIC, SHARP, SHARPER, BLURRY, ANTI_FLUTTER, ANTI_FLUTTER_BLURRY, ANTI_FLUTTER_SHARP
 
-PLUGIN_VERSION="20120705"
+from ConfigParser import ConfigParser, DuplicateSectionError 
+
+PLUGIN_VERSION="20120718"
 
 CMD_CTL_CACHE=1
 CMD_SHOW_PAGE=2
@@ -120,6 +124,8 @@ def log(message):
   if config.plugins.TeleText.debug.value:
     _debug(message)
 
+# ----------------------------------------
+
 class TeleText(Screen):
 
   pageInput   = 0
@@ -139,6 +145,7 @@ class TeleText(Screen):
   txtpid_origin = -1
   cur_page = "100-00/00"
   daemonVersion = "0.0"
+  favorites = None
 
   onChangedEntry = [ ]
 
@@ -208,7 +215,7 @@ class TeleText(Screen):
 #    self.helpList.append((self["actions"], "TeleTextActions", [("volUp",_("increase width"))]))
 #    self.helpList.append((self["actions"], "TeleTextActions", [("volDown",_("decrease width"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("nextBouquet",_("zoom / increase height"))]))
-    self.helpList.append((self["actions"], "TeleTextActions", [("prevBouquet",_("decrease height"))]))
+    self.helpList.append((self["actions"], "TeleTextActions", [("prevBouquet",_("favorites / decrease height"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("info", _("toggle info"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("menu", _("teletext settings"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("up", _("next page / catch page / move"))]))
@@ -227,6 +234,8 @@ class TeleText(Screen):
 
     self.inMenu = False
     self.connected = False
+
+    self.favorites = TeleTextFavorites()
 
     self.ttx = TeletextInterface()
 
@@ -459,15 +468,21 @@ class TeleText(Screen):
     self.updateLayout()
 
   def prevBouquetPressed(self):
+    log("bouqet- pressed")
     if self.nav_mode == NAV_MODE_TEXT:
-      return
-    log("bouquet- pressed")
-    if self.nav_pos[3] > (self.nav_pos[1] + MIN_H):
-      if self.nav_pos[3] > self.nav_config.limits[3][0]:
-        self.nav_pos[3] = self.nav_pos[3] - 1
-      elif self.nav_pos[1] < self.nav_config.limits[1][1]:
-        self.nav_pos[1] = self.nav_pos[1] + 1
-      self.updateLayout()
+      if self.catchPage or self.pageInput != 0:
+        return
+      # open favorites
+      self.inMenu = True
+      self.session.openWithCallback(self.favoritesResult, TeleTextFavoritesMenu, parent = self, service = self.pid_list[self.pid_index], page = self.cur_page.split("-",1)[0], favorites = self.favorites)
+    else:
+      # position setup
+      if self.nav_pos[3] > (self.nav_pos[1] + MIN_H):
+        if self.nav_pos[3] > self.nav_config.limits[3][0]:
+          self.nav_pos[3] = self.nav_pos[3] - 1
+        elif self.nav_pos[1] < self.nav_config.limits[1][1]:
+          self.nav_pos[1] = self.nav_pos[1] + 1
+        self.updateLayout()
 
   def volumeUpPressed(self):
     if self.nav_mode == NAV_MODE_TEXT:
@@ -619,6 +634,17 @@ class TeleText(Screen):
       config.plugins.TeleText.textOnly.value = False
       config.plugins.TeleText.textOnly.value = SPLIT_MODE_TIP
     self.updateLayout()
+
+  def favoritesResult(self, result):
+    self.inMenu = False
+    self.updateLayout()
+    if result is None:
+      return
+
+    # open favorite page
+    x = array.array('B')
+    x.fromlist([CMD_SHOW_PAGE, result/100, (((result%100)/10)<<4) + (result%10), 0])
+    self.socketSend(x)
 
   def updateLayout(self):
     if self.nav_mode == NAV_MODE_TEXT:
@@ -1382,6 +1408,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
 # ----------------------------------------
 
 class TeleTextMenuSummary(Screen):
+
   skin = ("""<screen name="TeleTextMenuSummary" position="0,0" size="132,64" id="1">
       <widget name="SetupTitle" position="6,4"  size="120,20" font="Regular;20" halign="center"/>
       <widget name="SetupEntry" position="6,30" size="120,12" font="Regular;12" halign="left"/>
@@ -1468,6 +1495,7 @@ class TeleTextAboutScreen(Screen):
 # ----------------------------------------
 
 class TeleTextAboutSummary(Screen):
+
   skin = ("""<screen name="TeleTextAboutSummary" position="0,0" size="132,64" id="1">
       <widget name="title"  position="6,4"  size="120,24" font="Regular;20" halign="center"/>
       <widget name="daemon" position="6,30" size="120,16" font="Regular;12" halign="left"/>
@@ -1484,6 +1512,275 @@ class TeleTextAboutSummary(Screen):
     self["title"] = Label("TeleText")
     self["daemon"] = Label("Daemon v%s" % parent.getDaemonVersion())
     self["plugin"] = Label("Plugin v%s" % PLUGIN_VERSION)
+
+# ----------------------------------------
+
+class TeleTextFavorites():
+
+  configFile = "/etc/enigma2/teletext.fav"
+
+  def __init__(self):
+    log("[favorites] reading")
+    self.parser = ConfigParser()
+    self.parser.read(self.configFile)
+
+  def write(self):
+    log("[favorites] writing")
+    fp = open(self.configFile,"w")
+    self.parser.write(fp)
+    fp.close()   
+
+  def getFavorite(self, service, index):
+    log("[favorites] get favorite")
+    index = str(index)
+    if self.parser.has_option(service, index) is False:
+      return None
+    return self.parser.get(service, index).split(";",1)
+
+  def getFavorites(self, service):
+    log("[favorites] get favorites")
+    result = []
+    if self.parser.has_section(service) is True:
+      for x in self.parser.options(service):
+        result.append(self.getFavorite(service, x))
+    return result
+
+  def setFavorite(self, service, index, page, text):
+    log("[favorites] set favorite")
+    index = str(index)
+    page = str(page)
+    if self.parser.has_section(service) is False:
+      self.parser.add_section(service)
+    self.parser.set(service, index, "%s;%s" % (page, text))
+
+  def removeFavorite(self, service, index):
+    log("[favorites] remove favorite")
+    index = str(index)
+    self.parser.remove_option(service, index)
+
+  def removeService(self, service):
+    log("[favorites] remove service")
+    self.parser.remove_section(service)
+
+# ----------------------------------------
+
+class TeleTextFavoritesMenu(Screen):
+
+  onChangedEntry = [ ]
+
+  def __init__(self, session, parent, service, page, favorites):
+    width = 590
+    height = 300
+    left = (dsk_width - width)>>1
+    top = (dsk_height - height)>>1
+    log("[fav-menu] screen rect %s %s %s %s" % (left, top, width, height))
+    TeleTextFavoritesMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s [%s]">
+        <ePixmap pixmap="skin_default/buttons/key_1.png" position="0,0"   zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_2.png" position="0,25"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_3.png" position="0,50"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_4.png" position="0,75"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_5.png" position="0,100" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_6.png" position="0,125" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_7.png" position="0,150" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_8.png" position="0,175" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_9.png" position="0,200" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_0.png" position="0,225" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <widget name="fav_list" position="40,0"   size="550,250" zPosition="1"/>
+
+        <ePixmap pixmap="skin_default/div-h.png" position="0,255" zPosition="1" size="590,2"/>
+
+        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,260"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/green.png"  position="150,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/yellow.png" position="300,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/blue.png"   position="450,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <widget name="key_r" position="0,260"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_g" position="150,260" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_y" position="300,260" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_b" position="450,260" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+      </screen>""" % (left, top, width, height, _("TeleText favorites"), service[1])
+
+    self.service = service[0]
+    self.page = page
+    self.favorites = favorites
+
+    Screen.__init__(self, session, parent)
+    self["fav_list"] = MenuList([], enableWrapAround = True)
+    self["fav_list"].onSelectionChanged.append(self.updateLayout)
+
+    self["actions"] = NumberActionMap(["OkCancelActions", "TeleTextActions"],
+    {
+      "1"      : self.keyNumberGlobal,
+      "2"      : self.keyNumberGlobal,
+      "3"      : self.keyNumberGlobal,
+      "4"      : self.keyNumberGlobal,
+      "5"      : self.keyNumberGlobal,
+      "6"      : self.keyNumberGlobal,
+      "7"      : self.keyNumberGlobal,
+      "8"      : self.keyNumberGlobal,
+      "9"      : self.keyNumberGlobal,
+      "0"      : self.keyNumberGlobal,
+      "ok"     : self.okPressed,
+      "cancel" : self.cancelPressed,
+      "red"    : self.redPressed,
+      "green"  : self.okPressed,
+      "yellow" : self.yellowPressed,
+      "blue"   : self.bluePressed
+    }, -2)
+    self["actions"].setEnabled(True)
+
+    self["key_r"] = Label("")
+    self["key_g"] = Label("")
+    self["key_y"] = Label("")
+    self["key_b"] = Label(_("Clear all"))
+
+    self.updateList()
+    self.updateLayout()
+
+  def keyNumberGlobal(self, number):
+    log("[favorites] %s pressed" % number)
+    if number == 0:
+      index = 9
+    else:
+      index = number - 1
+
+    if self.pages[index] != -1:
+      self.close(self.pages[index])
+
+  def updateList(self):
+    list = []
+    self.pages = []
+
+    while len(list) < 10:
+      text = self.favorites.getFavorite(self.service, len(list))
+      if text is None:
+        self.pages.append(-1)
+        list.append(_("<empty>"))
+      else:
+        self.pages.append(int(text[0]))
+        list.append("[%s] %s" % (text[0], text[1]))
+    self["fav_list"].setList(list)
+
+  def updateLayout(self):
+    value = self["fav_list"].getCurrent()
+    self.sel_page = self.pages[self["fav_list"].getSelectedIndex()]
+    if value == _("<empty>"):
+      self["key_r"].setText("")
+      self["key_g"].setText("")
+      self["key_y"].setText(_("Add"))
+    else:
+      self["key_r"].setText(_("Delete"))
+      self["key_g"].setText(_("Select"))
+      self["key_y"].setText(_("Edit"))
+
+    for i in self.onChangedEntry:
+      i()
+
+  def okPressed(self):
+    if self.sel_page != -1:
+      log("[favorites] ok pressed")
+      self.close(self.sel_page)
+
+  def cancelPressed(self):
+    log("[fav-menu] cancel pressed")
+    self.close(None)
+
+  def yellowPressed(self):
+    log("[fav-menu] yellow pressed")
+    page = self.sel_page
+    if page == -1:
+      page = self.page
+    value = self["fav_list"].getCurrent()
+    if value == _("<empty>"):
+      value = "..."
+    else:
+      value = value.split(None,1)[1]
+    self.session.openWithCallback(
+      self.addFavorite,
+      NTIVirtualKeyBoard,
+      title = _("Enter text for page %s")%page,
+      text = value
+    )     
+
+  def addFavorite(self, text):
+    if text:
+      page = self.sel_page
+      if page == -1:
+        page = self.page
+      self.favorites.setFavorite(self.service, self["fav_list"].getSelectedIndex(), page, text)
+      self.favorites.write()
+    self.updateList()
+    self.updateLayout()
+
+  def redPressed(self):
+    log("[fav-menu] red pressed")
+    self.session.openWithCallback(self.deleteFavorite, MessageBox, _("Delete favorite?"))
+
+  def deleteFavorite(self, result):
+    if result:
+			self.favorites.removeFavorite(self.service, self["fav_list"].getSelectedIndex())
+			self.favorites.write()
+			self.updateList()
+			self.updateLayout()
+
+  def bluePressed(self):
+    log("[fav-menu] blue pressed")
+    self.session.openWithCallback(self.cleanupService, MessageBox, _("Delete all favorites?"))
+
+  def cleanupService(self, result):
+    if result:    
+			self.favorites.removeService(self.service)
+			self.favorites.write()
+			self.updateList()
+			self.updateLayout()
+
+  # ---- for summary (lcd) ----
+
+  def getCurrentPage(self):
+    page = self.sel_page
+    if page == -1:
+      page = ""
+    return str(page)
+
+  def getCurrentValue(self):
+    return self["fav_list"].getCurrent()
+
+  def createSummary(self):
+    return TeleTextFavoritesSummary
+
+# ----------------------------------------
+
+class TeleTextFavoritesSummary(Screen):
+
+  skin = ("""<screen name="TeleTextFavoritesSummary" position="0,0" size="132,64" id="1">
+      <widget name="title"  position="6,4"  size="120,24" font="Regular;20" halign="center"/>
+      <widget name="page"   position="6,30" size="120,16" font="Regular;12" halign="left"/>
+      <widget name="text"   position="6,48" size="120,16" font="Regular;12" halign="left"/>
+    </screen>""",
+    """<screen name="TeleTextFavoritesSummary" position="0,0" size="96,64" id="2">
+      <widget name="title"  position="3,4"  size="90,20" font="Regular;20" halign="center"/>
+      <widget name="page"   position="3,30" size="90,16" font="Regular;12" halign="left"/>
+      <widget name="text"   position="3,48" size="90,16" font="Regular;12" halign="left"/>
+    </screen>""")
+
+  def __init__(self, session, parent):
+    Screen.__init__(self, session, parent = parent)
+    self["title"] = Label(_("TeleText favorites"))
+    self["page"]  = Label()
+    self["text"]  = Label()
+
+    self.onShow.append(self.addWatcher)
+    self.onHide.append(self.removeWatcher)
+
+  def addWatcher(self):
+    self.parent.onChangedEntry.append(self.selectionChanged)
+    self.selectionChanged()
+
+  def removeWatcher(self):
+    self.parent.onChangedEntry.remove(self.selectionChanged)
+
+  def selectionChanged(self):
+    self["page"].setText(self.parent.getCurrentPage())
+    self["text"].setText(self.parent.getCurrentValue())
 
 # ----------------------------------------
 
