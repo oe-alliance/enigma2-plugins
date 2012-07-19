@@ -5,13 +5,13 @@ from os import environ as os_environ
 import gettext
 
 # Config
-from Components.config import config, ConfigSet, ConfigSubsection, ConfigText, ConfigNumber, ConfigYesNo
+from Components.config import config, ConfigSet, ConfigSubsection, ConfigSelection, ConfigNumber, ConfigYesNo
 
 config.plugins.epgsearch = ConfigSubsection()
 config.plugins.epgsearch.showinplugins = ConfigYesNo(default = False)
 config.plugins.epgsearch.history = ConfigSet(choices = [])
 # XXX: configtext is more flexible but we cannot use this for a (not yet created) gui config
-config.plugins.epgsearch.encoding = ConfigText(default = 'ISO8859-15', fixed_size = False)
+config.plugins.epgsearch.encoding = ConfigSelection(choices = ['UTF-8', 'ISO8859-15'], default = 'ISO8859-15')
 config.plugins.epgsearch.history_length = ConfigNumber(default = 10)
 config.plugins.epgsearch.add_search_to_epg = ConfigYesNo(default = True)
 

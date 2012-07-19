@@ -53,6 +53,7 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 			[
 				getConfigListEntry(_("Show in plugin browser"), config.plugins.epgsearch.showinplugins, _("Enable this to be able to access the EPG-Search from within the plugin browser.")),
 				getConfigListEntry(_("Length of History"), config.plugins.epgsearch.history_length, _("How many entries to keep in the search history at most. 0 disables history entirely!")),
+				getConfigListEntry(_("Search Encoding"), config.plugins.epgsearch.encoding, _("Choose the encode type for search, helpful for foreign languages.")),
 # 				getConfigListEntry(_("Add \"Search\" Button to EPG"), config.plugins.epgsearch.add_search_to_epg , _("If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG.")),
 			],
 			session = session,
