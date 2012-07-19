@@ -153,9 +153,20 @@ def startPlugin(self,pname):
 			from Screens.TimerEdit import TimerEditList
 			self.session.open(TimerEditList)
 			no_plugin = False
+		elif pname == _("HbbTV Applications"):
+			try:
+				from Plugins.Extensions.Browser.Hbbtv import Hbbtv
+				no_plugin = False
+			except ImportError:
+				no_plugin = True
+			finally:
+				if not no_plugin:
+					hbbtv_instance = Hbbtv.instance
+					if hbbtv_instance:
+						hbbtv_instance._showApplicationList()
 		else:
 			plugin = None
-			for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_HBBTV]):
+			for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
 				if pname == str(p.name):
 					plugin = p
 			if plugin is not None:
@@ -196,6 +207,7 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			"right": self.keyRight,
 		}, -2)
 		ConfigListScreen.__init__(self, [], session = session)
+		self.hbbtvinstalled = getHBBTVInstalled()
 		self.overwriteHBBTVButton = config.plugins.Quickbutton.overwritehbbtvredbutton
 		self.createSetup("config")
 
@@ -214,9 +226,13 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		self.entryguilist.append(("4",_("Plugin browser")))
 		self.entryguilist.append(("5",_("switch 4:3 content display")))
 		self.entryguilist.append(("6",_("Timer")))
-		# Vorgaben aus EXTENSIONSMENU, PLUGINMENU, HBBTV
-		index = 7
-		for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_HBBTV]):
+		if self.hbbtvinstalled:
+			self.entryguilist.append(("7",_("HbbTV Applications")))
+			index = 8
+		else:
+			index = 7
+		# Vorgaben aus EXTENSIONSMENU, PLUGINMENU
+		for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
 			self.entryguilist.append((str(index),str(p.name)))
 			if config.plugins.Quickbutton.red.value == str(p.name):
 				red_selectedindex = str(index)
@@ -229,13 +245,10 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			if config.plugins.Quickbutton.blue.value == str(p.name):
 				blue_selectedindex = str(index)
 			index = index + 1
-
 		self.overwriteHBBTVButtonEntry = None
-		hbbtvinstalled = getHBBTVInstalled()
-		if hbbtvinstalled and ENABLE_RED_BUTTON:
+		if self.hbbtvinstalled and ENABLE_RED_BUTTON:
 			self.overwriteHBBTVButtonEntry = getConfigListEntry(_("Overwrite HBBTV-red-button"), self.overwriteHBBTVButton)
 			cfglist.append(self.overwriteHBBTVButtonEntry)
-
 		self.redchoice = ConfigSelection(default = red_selectedindex, choices = self.entryguilist)
 		self.greenchoice = ConfigSelection(default = green_selectedindex, choices = self.entryguilist)
 		self.yellowchoice = ConfigSelection(default = yellow_selectedindex, choices = self.entryguilist)
@@ -244,7 +257,7 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		cfglist.append(getConfigListEntry(_("assigned to long green"), self.greenchoice))
 		cfglist.append(getConfigListEntry(_("assigned to long yellow"), self.yellowchoice))
 		cfglist.append(getConfigListEntry(_("assigned to long blue"), self.bluechoice))
-		if ENABLE_RED_BUTTON and (self.overwriteHBBTVButton.value or not hbbtvinstalled):
+		if ENABLE_RED_BUTTON and (self.overwriteHBBTVButton.value or not self.hbbtvinstalled):
 			self.red_b_choice = ConfigSelection(default = red_b_selectedindex, choices = self.entryguilist)
 			cfglist.append(getConfigListEntry(_("assigned to red"), self.red_b_choice))
 		self[widget].list = cfglist
@@ -261,8 +274,10 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			return "4"
 		elif value == _("switch 4:3 content display"):
 			return "5"
-		if value == _("Timer"):
+		elif value == _("Timer"):
 			return "6"
+		elif value == _("HbbTV Applications"):
+			return "7"
 		else:
 			return "0"
 
@@ -284,7 +299,7 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		config.plugins.Quickbutton.green.value = self.entryguilist[int(self.greenchoice.value)][1]
 		config.plugins.Quickbutton.yellow.value = self.entryguilist[int(self.yellowchoice.value)][1]
 		config.plugins.Quickbutton.blue.value = self.entryguilist[int(self.bluechoice.value)][1]
-		if ENABLE_RED_BUTTON:
+		if ENABLE_RED_BUTTON and (self.overwriteHBBTVButton.value or not self.hbbtvinstalled):
 			config.plugins.Quickbutton.red_b.value = self.entryguilist[int(self.red_b_choice.value)][1]
 		self.overwriteHBBTVButton.save()
 		config.plugins.Quickbutton.save()
