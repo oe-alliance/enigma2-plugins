@@ -32,7 +32,7 @@ from enigma import DISABLED, BILINEAR, ANISOTROPIC, SHARP, SHARPER, BLURRY, ANTI
 
 from ConfigParser import ConfigParser, DuplicateSectionError 
 
-PLUGIN_VERSION="20120718"
+PLUGIN_VERSION="20120719"
 
 CMD_CTL_CACHE=1
 CMD_SHOW_PAGE=2
@@ -473,8 +473,9 @@ class TeleText(Screen):
       if self.catchPage or self.pageInput != 0:
         return
       # open favorites
-      self.inMenu = True
-      self.session.openWithCallback(self.favoritesResult, TeleTextFavoritesMenu, parent = self, service = self.pid_list[self.pid_index], page = self.cur_page.split("-",1)[0], favorites = self.favorites)
+      if len(self.pid_list) > 0:
+        self.inMenu = True
+        self.session.openWithCallback(self.favoritesResult, TeleTextFavoritesMenu, parent = self, service = self.pid_list[self.pid_index], page = self.cur_page.split("-",1)[0], favorites = self.favorites)
     else:
       # position setup
       if self.nav_pos[3] > (self.nav_pos[1] + MIN_H):
@@ -1531,14 +1532,12 @@ class TeleTextFavorites():
     fp.close()   
 
   def getFavorite(self, service, index):
-    log("[favorites] get favorite")
     index = str(index)
     if self.parser.has_option(service, index) is False:
       return None
     return self.parser.get(service, index).split(";",1)
 
   def getFavorites(self, service):
-    log("[favorites] get favorites")
     result = []
     if self.parser.has_section(service) is True:
       for x in self.parser.options(service):
@@ -1546,7 +1545,6 @@ class TeleTextFavorites():
     return result
 
   def setFavorite(self, service, index, page, text):
-    log("[favorites] set favorite")
     index = str(index)
     page = str(page)
     if self.parser.has_section(service) is False:
@@ -1554,12 +1552,12 @@ class TeleTextFavorites():
     self.parser.set(service, index, "%s;%s" % (page, text))
 
   def removeFavorite(self, service, index):
-    log("[favorites] remove favorite")
     index = str(index)
     self.parser.remove_option(service, index)
+    if len(self.parser.options(service)) == 0:
+      self.parser.remove_section(service)
 
   def removeService(self, service):
-    log("[favorites] remove service")
     self.parser.remove_section(service)
 
 # ----------------------------------------
@@ -1713,14 +1711,15 @@ class TeleTextFavoritesMenu(Screen):
 
   def redPressed(self):
     log("[fav-menu] red pressed")
-    self.session.openWithCallback(self.deleteFavorite, MessageBox, _("Delete favorite?"))
+    if self.sel_page != -1:
+      self.session.openWithCallback(self.deleteFavorite, MessageBox, _("Delete favorite?"))
 
   def deleteFavorite(self, result):
     if result:
-			self.favorites.removeFavorite(self.service, self["fav_list"].getSelectedIndex())
-			self.favorites.write()
-			self.updateList()
-			self.updateLayout()
+      self.favorites.removeFavorite(self.service, self["fav_list"].getSelectedIndex())
+      self.favorites.write()
+      self.updateList()
+      self.updateLayout()
 
   def bluePressed(self):
     log("[fav-menu] blue pressed")
@@ -1728,10 +1727,10 @@ class TeleTextFavoritesMenu(Screen):
 
   def cleanupService(self, result):
     if result:    
-			self.favorites.removeService(self.service)
-			self.favorites.write()
-			self.updateList()
-			self.updateLayout()
+      self.favorites.removeService(self.service)
+      self.favorites.write()
+      self.updateList()
+      self.updateLayout()
 
   # ---- for summary (lcd) ----
 
