@@ -85,7 +85,7 @@ def InfoBarPlugins__init__(self):
 		if ENABLE_RED_BUTTON:
 			x["red_b"] = (self.red, _("Assign plugin to red key pressed"))
 			hbbtvinstalled = getHBBTVInstalled()
-			if config.plugins.Quickbutton.overwritehbbtvredbutton.value or not hbbtvinstalled:
+			if config.plugins.Quickbutton.overwritehbbtvredbutton.value and hbbtvinstalled:
 				self["HbbtvActions"].setEnabled(False)
 		self["QuickbuttonActions"] = HelpableActionMap(self, "QuickbuttonActions",x)
 
