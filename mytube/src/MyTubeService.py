@@ -12,13 +12,19 @@ from twisted.internet import reactor
 from urllib2 import Request, URLError, urlopen as urlopen2
 from socket import gaierror, error
 import os, socket
-from urllib import quote, unquote_plus, unquote
+from urllib import quote, unquote_plus, unquote, urlencode
 from httplib import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
 
 from urlparse import parse_qs
 from threading import Thread
 
 HTTPConnection.debuglevel = 1
+
+# python on enimga2 has no https socket support
+gdata.youtube.service.YOUTUBE_USER_FEED_URI = 'http://gdata.youtube.com/feeds/api/users'
+
+# StartService will fired on every feed search; so cache token
+auth_token = None
 
 def validate_cert(cert, key):
 	buf = decrypt_block(cert[8:], key)
@@ -330,8 +336,6 @@ class MyTubePlayerService():
 #	ClientId: ytapi-dream-MyTubePlayer-i0kqrebg-0
 #	DeveloperKey: AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw
 
-	is_auth = False
-	
 	def __init__(self):
 		print "[MyTube] MyTubePlayerService - init"
 		self.feedentries = []
@@ -357,14 +361,58 @@ class MyTubePlayerService():
 		print "[MyTube] MyTubePlayerService - stopService"
 		del self.ytService
 
-	def auth_user(self, username, password):
+	def getLoginTokenOnCurl(self, email, pw):
+
+		opts = {
+		  'service':'youtube',
+		  'accountType': 'HOSTED_OR_GOOGLE',
+		  'Email': email,
+		  'Passwd': pw,
+		  'source': self.yt_service.client_id,
+		}
+		
+		print "[MyTube] MyTubePlayerService - Starting auth request"
+		result = os.popen('curl -s -k -X POST "%s" -d "%s"' % (gdata.youtube.service.YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL , urlencode(opts))).read()
+		
+		return result  
+
+	def auth_user(self, username, password, use_curl_fallback = True):
 		print "[MyTube] MyTubePlayerService - auth_use - " + str(username)
 		
-		self.yt_service.email = username
-		self.yt_service.password  = password
-				
-		self.yt_service.ProgrammaticLogin()
-		self.is_auth = True
+		global auth_token
+		if auth_token is not None:
+			print "[MyTube] MyTubePlayerService - auth_cached"
+			self.yt_service.SetClientLoginToken(auth_token)
+			return
+		
+		if use_curl_fallback is True:
+			token_request = self.getLoginTokenOnCurl(username, password)
+			self.yt_service.SetClientLoginToken(gdata.auth.get_client_login_token(token_request))
+		else:
+			self.yt_service.email = username
+			self.yt_service.password  = password
+			self.yt_service.ProgrammaticLogin()
+			
+		# reset any wrong token on wrong logins
+		if self.is_auth() is False:
+			print "[MyTube] MyTubePlayerService - auth_use - auth not possible resetting"
+			self.yt_service.current_token = None
+			self.yt_service.token_store.remove_all_tokens()
+		else:
+			auth_token = self.auth_token()
+
+	def is_auth(self):
+		global auth_token		
+		if auth_token is not None:
+			return True		
+		
+		if self.yt_service.current_token is None:
+			return False
+		
+		return self.yt_service.current_token.get_token_string() != 'None'
+
+	def auth_token(self):
+		return self.yt_service.current_token.get_token_string()
 
 	def getFeedService(self, feedname):
 		if feedname == "top_rated":
@@ -389,7 +437,12 @@ class MyTubePlayerService():
 		print "[MyTube] MyTubePlayerService - getFeed:",url, feedname
 		self.feedentries = []
 		ytservice = self.yt_service.GetYouTubeVideoFeed
-		if feedname in ("hd", "most_popular", "most_shared", "on_the_web"):
+		
+		if feedname == "my_subscriptions":
+			url = "http://gdata.youtube.com/feeds/api/users/default/newsubscriptionvideos"
+		elif feedname == "my_favorites":
+			url = "http://gdata.youtube.com/feeds/api/users/default/favorites"		
+		elif feedname in ("hd", "most_popular", "most_shared", "on_the_web"):
 			if feedname == "hd":
 				url = "http://gdata.youtube.com/feeds/api/videos/-/HD"
 			else:

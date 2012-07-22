@@ -129,7 +129,9 @@ config.plugins.mytube.general.startFeed = ConfigSelection(
 				 ("most_recent", _("Most recent")),
 				 ("most_popular", _("Most popular")),
 				 ("most_shared", _("Most shared")),
-				 ("on_the_web", _("Trending videos"))
+				 ("on_the_web", _("Trending videos")),
+				 ("my_subscriptions", _("My Subscriptions")),
+				 ("my_favorites", _("My Favorites")),				 
 				], "top_rated")
 config.plugins.mytube.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
 	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
@@ -474,7 +476,14 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					# auth user
 					if not config.plugins.mytube.general.username.value is "" and not config.plugins.mytube.general.password.value is "":
 						try:
-							myTubeService.auth_user(config.plugins.mytube.general.username.value, config.plugins.mytube.general.password.value)
+							myTubeService.auth_user(config.plugins.mytube.general.username.value, config.plugins.mytube.general.password.value)	
+							if myTubeService.is_auth() is True:
+								self.session.open(MessageBox, 'Login-OK: ' + str(config.plugins.mytube.general.username.value), MessageBox.TYPE_INFO)
+							else:
+								self.session.open(MessageBox, 'Error-Login', MessageBox.TYPE_INFO)
+						except IOError as e:
+								#@TODO: check startService is running twice!?
+								pass
 						except Exception as e:
 							self.session.open(MessageBox, 'Login-Error: ' + str(e), MessageBox.TYPE_INFO)
 											
@@ -539,7 +548,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					(_("View response videos"), "response"),
 				))
 			
-			if myTubeService.is_auth is True:
+			if myTubeService.is_auth() is True:
 				menulist.extend((
 						(_("Subscribe to user"), "subscribe"),
 						(_("Add to favorites"), "favorite"),
@@ -811,8 +820,16 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					self.HistoryWindow.pageDown()
 	def keyStdFeed(self):
 		self.hideSuggestions()
-		menulist = [(_("HD videos"), "hd")]
+		menulist = []
+		
+		if myTubeService.is_auth() is True:
+			menulist.extend((
+				(_("My Subscriptions"), "my_subscriptions"),
+				(_("My Favorites"), "my_favorites"),
+			))
+
 		menulist.extend((
+			(_("HD videos"), "hd"),
 			(_("Top rated"), "top_rated"),
 			(_("Top favorites"), "top_favorites"),
 			(_("Most viewed"), "most_viewed"),
