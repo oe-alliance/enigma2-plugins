@@ -10,7 +10,7 @@ from Components.ScrollLabel import ScrollLabel
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.List import List
 from Components.Task import Task, Job, job_manager
-from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
+from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry, ConfigPassword
 #, ConfigIP, ConfigNumber, ConfigLocations
 from MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, MyTubeTasksScreen, MyTubeHistoryScreen
 from MyTubeService import validate_cert, get_rnd, myTubeService
@@ -148,7 +148,7 @@ config.plugins.mytube.general.history = ConfigText(default="")
 config.plugins.mytube.general.clearHistoryOnClose = ConfigYesNo(default = False)
 config.plugins.mytube.general.AutoLoadFeeds = ConfigYesNo(default = True)
 config.plugins.mytube.general.username = ConfigText(default="")
-config.plugins.mytube.general.password = ConfigText(default="")
+config.plugins.mytube.general.password = ConfigPassword(default="")
 #config.plugins.mytube.general.useHTTPProxy = ConfigYesNo(default = False)
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
 #config.plugins.mytube.general.ProxyPort = ConfigNumber(default=8080)
@@ -417,6 +417,24 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 		self.statuslist = []
 		if result[80:88] == rnd:
+			
+			if not config.plugins.mytube.general.username.value is "" and not config.plugins.mytube.general.password.value is "":
+				myTubeService.startService()
+				try:
+					myTubeService.auth_user(config.plugins.mytube.general.username.value, config.plugins.mytube.general.password.value)	
+					if myTubeService.is_auth() is True:
+						pass
+						#self.session.open(MessageBox, 'Login-OK: ' + str(config.plugins.mytube.general.username.value), MessageBox.TYPE_INFO)
+					else:
+						print 'Error-Login'
+						#self.session.open(MessageBox, 'Error-Login', MessageBox.TYPE_INFO)
+				except IOError as e:
+						#@TODO: check startService is running twice!?
+						pass			
+				except Exception as e:
+					print 'Login-Error: ' + str(e)
+					#self.session.open(MessageBox, 'Login-Error: ' + str(e), MessageBox.TYPE_INFO)		 			
+			
 			self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
 			self["feedlist"].style = "state"
 			self['feedlist'].setList(self.statuslist)
@@ -472,21 +490,6 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				if self.FirstRun == True:
 					self.appendEntries = False
 					myTubeService.startService()
-					
-					# auth user
-					if not config.plugins.mytube.general.username.value is "" and not config.plugins.mytube.general.password.value is "":
-						try:
-							myTubeService.auth_user(config.plugins.mytube.general.username.value, config.plugins.mytube.general.password.value)	
-							if myTubeService.is_auth() is True:
-								self.session.open(MessageBox, 'Login-OK: ' + str(config.plugins.mytube.general.username.value), MessageBox.TYPE_INFO)
-							else:
-								self.session.open(MessageBox, 'Error-Login', MessageBox.TYPE_INFO)
-						except IOError as e:
-								#@TODO: check startService is running twice!?
-								pass
-						except Exception as e:
-							self.session.open(MessageBox, 'Login-Error: ' + str(e), MessageBox.TYPE_INFO)
-											
 				if self.HistoryWindow is not None:
 					self.HistoryWindow.deactivate()
 					self.HistoryWindow.instance.hide()

@@ -15,7 +15,7 @@ import os, socket
 from urllib import quote, unquote_plus, unquote, urlencode
 from httplib import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
 
-from urlparse import parse_qs
+from urlparse import parse_qs, parse_qsl
 from threading import Thread
 
 HTTPConnection.debuglevel = 1
@@ -336,6 +336,8 @@ class MyTubePlayerService():
 #	ClientId: ytapi-dream-MyTubePlayer-i0kqrebg-0
 #	DeveloperKey: AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw
 
+	cached_auth_request = {}
+
 	def __init__(self):
 		print "[MyTube] MyTubePlayerService - init"
 		self.feedentries = []
@@ -348,7 +350,13 @@ class MyTubePlayerService():
 		
 		# dont use it on class init; error on post and auth
 		self.yt_service.developer_key = 'AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw'
-		self.yt_service.client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0' 	
+		self.yt_service.client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0'
+		
+		# Youtube Client resets!
+		global auth_token
+		if auth_token is not None:
+			print "[MyTube] MyTubePlayerService - auth_cached"
+			self.yt_service.SetClientLoginToken(auth_token)
 		
 #		self.loggedIn = False
 		#os.environ['http_proxy'] = 'http://169.229.50.12:3128'
@@ -374,7 +382,13 @@ class MyTubePlayerService():
 		print "[MyTube] MyTubePlayerService - Starting auth request"
 		result = os.popen('curl -s -k -X POST "%s" -d "%s"' % (gdata.youtube.service.YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL , urlencode(opts))).read()
 		
-		return result  
+		return result
+	
+	def getFormattedTokenRequest(self, email, pw):
+		return dict(parse_qsl(self.getLoginTokenOnCurl(email, pw).strip().replace('\n', '&')))
+	
+	def getAuthedUsername(self):
+		return self.cached_auth_request.get('YouTubeUser')
 
 	def auth_user(self, username, password, use_curl_fallback = True):
 		print "[MyTube] MyTubePlayerService - auth_use - " + str(username)
@@ -386,8 +400,11 @@ class MyTubePlayerService():
 			return
 		
 		if use_curl_fallback is True:
-			token_request = self.getLoginTokenOnCurl(username, password)
-			self.yt_service.SetClientLoginToken(gdata.auth.get_client_login_token(token_request))
+			self.cached_auth_request = self.getFormattedTokenRequest(username, password)
+			if self.cached_auth_request.get('Auth') is None:
+				raise('Got no auth token from curl; you need curl and valid youtube login data')
+			
+			self.yt_service.SetClientLoginToken(self.cached_auth_request.get('Auth'))
 		else:
 			self.yt_service.email = username
 			self.yt_service.password  = password
