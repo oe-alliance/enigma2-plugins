@@ -32,7 +32,7 @@ from enigma import DISABLED, BILINEAR, ANISOTROPIC, SHARP, SHARPER, BLURRY, ANTI
 
 from ConfigParser import ConfigParser, DuplicateSectionError 
 
-PLUGIN_VERSION="20120719"
+PLUGIN_VERSION="20120724"
 
 CMD_CTL_CACHE=1
 CMD_SHOW_PAGE=2
@@ -357,7 +357,15 @@ class TeleText(Screen):
           self.zoom = TeletextInterface.MODE_UPPER_HALF
         x.append(CMD_RZAP_PAGE)
       elif number == 9:
-        x.fromlist([CMD_SHOW_PAGE, 1, 0, 0])
+        if len(self.fav_list) == 0:
+          x.fromlist([CMD_SHOW_PAGE, 1, 0, 0])
+        else:
+          page = int(self.fav_list[self.fav_index])
+          if self.fav_index == len(self.fav_list)-1:
+            self.fav_index = 0
+          else:
+            self.fav_index = self.fav_index + 1
+          x.fromlist([CMD_SHOW_PAGE, page/100, (((page%100)/10)<<4) + (page%10), 0])
       else:
         x.fromlist([CMD_PAGEINPUT, number])
         self.pageInput = (self.pageInput + 1) % 3
@@ -936,6 +944,14 @@ class TeleText(Screen):
     if self.demux > -1 and self.txtpid > -1 and do_send:
       x = array.array('B', (CMD_CTL_CACHE, (self.txtpid & 0xFF00) >> 8, (self.txtpid & 0xFF), self.demux))
       self.socketSend(x)
+
+    # read favorites
+    self.fav_index = 0
+    self.fav_list = []
+    if len(self.pid_list) > 0:
+      for x in self.favorites.getFavorites(self.pid_list[self.pid_index][0]):
+        self.fav_list.append(x[0])
+    log("favorites: %s" % self.fav_list)
 
   # ---- for summary (lcd) ----
 
