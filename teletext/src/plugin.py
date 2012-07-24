@@ -1705,7 +1705,7 @@ class TeleTextFavoritesMenu(Screen):
       page = self.page
     value = self["fav_list"].getCurrent()
     if value == _("<empty>"):
-      value = "..."
+      value = ""
     else:
       value = value.split(None,1)[1]
     self.session.openWithCallback(
