@@ -357,15 +357,12 @@ class TeleText(Screen):
           self.zoom = TeletextInterface.MODE_UPPER_HALF
         x.append(CMD_RZAP_PAGE)
       elif number == 9:
-        if len(self.fav_list) == 0:
-          x.fromlist([CMD_SHOW_PAGE, 1, 0, 0])
+        page = self.fav_list[self.fav_index]
+        if self.fav_index == len(self.fav_list)-1:
+          self.fav_index = 0
         else:
-          page = int(self.fav_list[self.fav_index])
-          if self.fav_index == len(self.fav_list)-1:
-            self.fav_index = 0
-          else:
-            self.fav_index = self.fav_index + 1
-          x.fromlist([CMD_SHOW_PAGE, page/100, (((page%100)/10)<<4) + (page%10), 0])
+          self.fav_index = self.fav_index + 1
+        x.fromlist([CMD_SHOW_PAGE, page/100, (((page%100)/10)<<4) + (page%10), 0])
       else:
         x.fromlist([CMD_PAGEINPUT, number])
         self.pageInput = (self.pageInput + 1) % 3
@@ -645,6 +642,9 @@ class TeleText(Screen):
     self.updateLayout()
 
   def favoritesResult(self, result):
+    # read favorites
+    self.readFavorites()
+
     self.inMenu = False
     self.updateLayout()
     if result is None:
@@ -944,15 +944,26 @@ class TeleText(Screen):
     if self.demux > -1 and self.txtpid > -1 and do_send:
       x = array.array('B', (CMD_CTL_CACHE, (self.txtpid & 0xFF00) >> 8, (self.txtpid & 0xFF), self.demux))
       self.socketSend(x)
-
+      
     # read favorites
+    self.readFavorites()
+
+  def readFavorites(self):
     self.fav_index = 0
     self.fav_list = []
+    hasStart = False
     if len(self.pid_list) > 0:
-      for x in self.favorites.getFavorites(self.pid_list[self.pid_index][0]):
-        self.fav_list.append(x[0])
+      for i in range(10):
+        text = self.favorites.getFavorite(self.pid_list[self.pid_index][0], i)
+        if text is not None:
+          page = int(text[0])
+          self.fav_list.append(page)
+          if page == 100:
+            hasStart = True
+    if hasStart == False:
+      self.fav_list.append(100)
     log("favorites: %s" % self.fav_list)
-
+  
   # ---- for summary (lcd) ----
 
   def createSummary(self):
