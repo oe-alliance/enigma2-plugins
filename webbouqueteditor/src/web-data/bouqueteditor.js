@@ -1039,7 +1039,7 @@ function renameService(selectObj) {
 			}
 			else
 				currentServicelistIndex = null;
-			doRequest('/bouqueteditor/web/renameservice?sBouquetRef='+ bouqueref + '&sRef=' + ref +'&sRefBefore=' + refServicelist + '&newName=' + newServicename, serviceListUpdated, false);
+			doRequest('/bouqueteditor/web/renameservice?sBouquetRef='+ bouqueref + '&sRef=' + ref +'&sRefBefore=' + refServicelist + '&newName=' + encodeURIComponent(newServicename), serviceListUpdated, false);
 		}
 	}
 	else
@@ -1053,7 +1053,7 @@ function renameBouquet(selectObj) {
 	var newServicename=prompt('Please enter new servicename for selected bouquet:', selectList.options[idx].text);
 	if (newServicename){
 		currentBouquetlistIndex =  idx;
-		doRequest('/bouqueteditor/web/renameservice?sRef=' + bouqueref +'&mode=' + currentMode + '&newName=' + newServicename, bouquetListUpdated,false);
+		doRequest('/bouqueteditor/web/renameservice?sRef=' + bouqueref +'&mode=' + currentMode + '&newName=' + encodeURIComponent(newServicename), bouquetListUpdated,false);
 	}
 }
 
@@ -1076,7 +1076,7 @@ function addMarkerToBouquet(selectObj) {
 		}
 		else
 			currentServicelistIndex = null;
-		doRequest('/bouqueteditor/web/addmarkertobouquet?sBouquetRef='+ bouqueref + '&Name=' + markername +'&sRefBefore=' + refServicelist, serviceListUpdated, false);
+		doRequest('/bouqueteditor/web/addmarkertobouquet?sBouquetRef='+ bouqueref + '&Name=' + encodeURIComponent(markername) +'&sRefBefore=' + refServicelist, serviceListUpdated, false);
 	}
 }
 
