@@ -423,14 +423,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				try:
 					myTubeService.auth_user(config.plugins.mytube.general.username.value, config.plugins.mytube.general.password.value)	
 					if myTubeService.is_auth() is True:
-						pass
-						#self.session.open(MessageBox, 'Login-OK: ' + str(config.plugins.mytube.general.username.value), MessageBox.TYPE_INFO)
-					else:
-						print 'Error-Login'
-						#self.session.open(MessageBox, 'Error-Login', MessageBox.TYPE_INFO)
-				except IOError as e:
-						#@TODO: check startService is running twice!?
-						pass			
+						print "[MyTube] Login successful"
 				except Exception as e:
 					print 'Login-Error: ' + str(e)
 					#self.session.open(MessageBox, 'Login-Error: ' + str(e), MessageBox.TYPE_INFO)		 			

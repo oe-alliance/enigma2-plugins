@@ -23,9 +23,6 @@ HTTPConnection.debuglevel = 1
 # python on enimga2 has no https socket support
 gdata.youtube.service.YOUTUBE_USER_FEED_URI = 'http://gdata.youtube.com/feeds/api/users'
 
-# StartService will fired on every feed search; so cache token
-auth_token = None
-
 def validate_cert(cert, key):
 	buf = decrypt_block(cert[8:], key)
 	if buf is None:
@@ -337,6 +334,7 @@ class MyTubePlayerService():
 #	DeveloperKey: AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw
 
 	cached_auth_request = {}
+	current_auth_token = None
 
 	def __init__(self):
 		print "[MyTube] MyTubePlayerService - init"
@@ -351,12 +349,10 @@ class MyTubePlayerService():
 		# dont use it on class init; error on post and auth
 		self.yt_service.developer_key = 'AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw'
 		self.yt_service.client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0'
-		
-		# Youtube Client resets!
-		global auth_token
-		if auth_token is not None:
+
+		if self.current_auth_token is not None:
 			print "[MyTube] MyTubePlayerService - auth_cached"
-			self.yt_service.SetClientLoginToken(auth_token)
+			self.yt_service.SetClientLoginToken(self.current_auth_token)
 		
 #		self.loggedIn = False
 		#os.environ['http_proxy'] = 'http://169.229.50.12:3128'
@@ -393,10 +389,9 @@ class MyTubePlayerService():
 	def auth_user(self, username, password, use_curl_fallback = True):
 		print "[MyTube] MyTubePlayerService - auth_use - " + str(username)
 		
-		global auth_token
-		if auth_token is not None:
+		if self.current_auth_token is not None:
 			print "[MyTube] MyTubePlayerService - auth_cached"
-			self.yt_service.SetClientLoginToken(auth_token)
+			self.yt_service.SetClientLoginToken(self.current_auth_token)
 			return
 		
 		if use_curl_fallback is True:
@@ -416,11 +411,10 @@ class MyTubePlayerService():
 			self.yt_service.current_token = None
 			self.yt_service.token_store.remove_all_tokens()
 		else:
-			auth_token = self.auth_token()
+			self.current_auth_token = self.auth_token()
 
 	def is_auth(self):
-		global auth_token		
-		if auth_token is not None:
+		if self.current_auth_token is not None:
 			return True		
 		
 		if self.yt_service.current_token is None:
@@ -458,7 +452,7 @@ class MyTubePlayerService():
 		if feedname == "my_subscriptions":
 			url = "http://gdata.youtube.com/feeds/api/users/default/newsubscriptionvideos"
 		elif feedname == "my_favorites":
-			url = "http://gdata.youtube.com/feeds/api/users/default/favorites"		
+			url = "http://gdata.youtube.com/feeds/api/users/default/favorites"
 		elif feedname in ("hd", "most_popular", "most_shared", "on_the_web"):
 			if feedname == "hd":
 				url = "http://gdata.youtube.com/feeds/api/videos/-/HD"
