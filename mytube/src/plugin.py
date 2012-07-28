@@ -201,6 +201,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		<screen name="MyTubePlayerMainScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Browser" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="config" zPosition="2" position="60,60" size="600,50" scrollbarMode="showNever" transparent="1" />
+			<widget name="result" position="300,60" zPosition="3" size="350,50" font="Regular;21" transparent="1" backgroundColor="transparent" halign="right"/>
 			<widget source="feedlist" render="Listbox" position="49,110" size="628,385" zPosition="1" scrollbarMode="showOnDemand" transparent="1" backgroundPixmap="~/list_bg.png" selectionPixmap="~/list_sel.png" >
 				<convert type="TemplatedMultiContent">
 				{"templates":
@@ -287,6 +288,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["VKeyIcon"] = Pixmap()
 		self["ButtonBlue"].hide()
 		self["VKeyIcon"].hide()
+		self["result"] = Label("")
+
 
 		self["searchactions"] = ActionMap(["ShortcutActions", "WizardActions", "HelpActions", "MediaPlayerActions"],
 		{
@@ -1072,6 +1075,13 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if feed is not None:
 			self.ytfeed = feed
 		self.buildEntryList()
+		text = _("Results: %s - Page: %s " % (str(myTubeService.getTotalResults()), str(myTubeService.getCurrentPage())))
+		
+		auth_username = myTubeService.getAuthedUsername()
+		if auth_username:
+			text = auth_username + ' - ' + text
+		
+		self["result"].setText(text)
 
 	def gotFeedError(self, exception):
 		print "[MyTubePlayer] gotFeedError"
