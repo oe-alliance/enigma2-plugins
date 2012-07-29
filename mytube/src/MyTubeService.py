@@ -453,6 +453,12 @@ class MyTubePlayerService():
 			url = "http://gdata.youtube.com/feeds/api/users/default/newsubscriptionvideos"
 		elif feedname == "my_favorites":
 			url = "http://gdata.youtube.com/feeds/api/users/default/favorites"
+		elif feedname == "my_history":
+			url = "http://gdata.youtube.com/feeds/api/users/default/watch_history?v=2"
+		elif feedname == "my_recommendations":
+			url = "http://gdata.youtube.com/feeds/api/users/default/recommendations?v=2"							
+		elif feedname == "my_watch_later":
+			url = "http://gdata.youtube.com/feeds/api/users/default/watch_later?v=2"
 		elif feedname in ("hd", "most_popular", "most_shared", "on_the_web"):
 			if feedname == "hd":
 				url = "http://gdata.youtube.com/feeds/api/videos/-/HD"
@@ -541,6 +547,9 @@ class MyTubePlayerService():
 		return self.feed.items_per_page.text
 
 	def getTotalResults(self):
+		if self.feed.total_results is None:
+			return 0
+				
 		return self.feed.total_results.text
 
 	def getNextFeedEntriesURL(self):
@@ -550,6 +559,9 @@ class MyTubePlayerService():
 		return None
 
 	def getCurrentPage(self):
+		if self.feed.start_index is None:
+			return 1
+		
 		return int(int(self.feed.start_index.text) / int(self.itemCount())) + 1
 
 class YoutubeQueryThread(Thread):
