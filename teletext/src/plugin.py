@@ -916,7 +916,7 @@ class TeleText(Screen):
     # read all txtpids and channels from transponder
     cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
     if cur_ref is None:
-      self.channel_and_txt_pid = []
+      self.pid_list = []
       self.pid_index = 0
     else:
       pos = service_types_tv.rfind(':')
@@ -953,8 +953,10 @@ class TeleText(Screen):
     self.fav_list = []
     hasStart = False
     if len(self.pid_list) > 0:
+      service = self.pid_list[self.pid_index]
+      log("get favorites of service %s [%s]"%(service[1], service[0]))
       for i in range(10):
-        text = self.favorites.getFavorite(self.pid_list[self.pid_index][0], i)
+        text = self.favorites.getFavorite(service[0], i)
         if text is not None:
           page = int(text[0])
           self.fav_list.append(page)
