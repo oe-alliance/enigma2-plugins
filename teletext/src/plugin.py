@@ -32,7 +32,7 @@ from enigma import DISABLED, BILINEAR, ANISOTROPIC, SHARP, SHARPER, BLURRY, ANTI
 
 from ConfigParser import ConfigParser, DuplicateSectionError 
 
-PLUGIN_VERSION="20120724"
+PLUGIN_VERSION="20120730"
 
 CMD_CTL_CACHE=1
 CMD_SHOW_PAGE=2
@@ -909,15 +909,13 @@ class TeleText(Screen):
     stream = service and service.stream()
     demux = stream and stream.getStreamingData()
     self.demux = demux and demux.get("demux", -1)
-
     log("TXT PID %s DEMUX %s" % (self.txtpid, self.demux))
-    self.switchChannel(do_send)
 
     # read all txtpids and channels from transponder
     cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+    self.pid_index = 0
     if cur_ref is None:
       self.pid_list = []
-      self.pid_index = 0
     else:
       pos = service_types_tv.rfind(':')
       refstr = '%s (channelID == %08x%04x%04x) && %s ORDER BY name' % (service_types_tv[:pos+1],
@@ -927,6 +925,7 @@ class TeleText(Screen):
           service_types_tv[pos+1:])
       ref = eServiceReference(refstr)
       self.pid_list = self.ttx.getTextPidsAndName(ref)
+    log("transponder: %s" % self.pid_list)
 
     i = 0
     available = 0
@@ -938,7 +937,7 @@ class TeleText(Screen):
       i = i + 1
     self.pid_count = available
 
-    log("transponder: %s" % self.pid_list)
+    self.switchChannel(do_send)
 
   def switchChannel(self, do_send = True):
     if self.demux > -1 and self.txtpid > -1 and do_send:
@@ -952,6 +951,8 @@ class TeleText(Screen):
     self.fav_index = 0
     self.fav_list = []
     hasStart = False
+    log("pid_list: %s" % self.pid_list)
+    log("pid_index: %s" % self.pid_index)
     if len(self.pid_list) > 0:
       service = self.pid_list[self.pid_index]
       log("get favorites of service %s [%s]"%(service[1], service[0]))
