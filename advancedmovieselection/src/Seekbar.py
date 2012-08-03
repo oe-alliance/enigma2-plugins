@@ -29,23 +29,14 @@ from enigma import eTimer, getDesktop, ePoint
 from keyids import KEYIDS
 from Screens.InfoBar import MoviePlayer
 from Screens.Screen import Screen
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
 from Tools.KeyBindings import addKeyBinding
 import keymapparser
+from Globals import SkinTools
 
 class Seekbar(ConfigListScreen, Screen):
     def __init__(self, session, instance, fwd):
         Screen.__init__(self, session)
-        try:
-            sz_w = getDesktop(0).size().width()
-        except:
-            sz_w = 720
-        if sz_w == 1280:
-            self.skinName = ["AdvancedMovieSelectionSeekbarHD"]
-        elif sz_w == 1024:
-            self.skinName = ["AdvancedMovieSelectionSeekbarXD"]
-        else:
-            self.skinName = ["AdvancedMovieSelectionSeekbarSD"]
+        self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionSeekbar")
         self.session = session
         self.infobarInstance = instance
         self.fwd = fwd
@@ -182,8 +173,8 @@ def seekbarBack(instance):
 MoviePlayer.seekFwdManual = seekbar
 MoviePlayer.seekBackManual = seekbarBack
 
-dvdPlayer = "%s%s"%(resolveFilename(SCOPE_PLUGINS), "Extensions/DVDPlayer/plugin.py")
-if fileExists(dvdPlayer) or fileExists("%sc"%dvdPlayer):
+from Globals import pluginPresent
+if pluginPresent.DVDPlayer:
     from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
     DVDPlayer.seekFwdManual = seekbar
     DVDPlayer.seekBackManual = seekbarBack

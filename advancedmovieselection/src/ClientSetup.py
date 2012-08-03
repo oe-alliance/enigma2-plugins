@@ -30,10 +30,11 @@ from Components.ConfigList import ConfigListScreen
 from Components.MultiContent import MultiContentEntryText
 from Components.GUIComponent import GUIComponent
 from Components.Sources.StaticText import StaticText
-from enigma import getDesktop, eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT
+from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT
 from MessageServer import serverInstance, getIpAddress
 from Client import getClients
 from time import localtime, strftime
+from Globals import SkinTools
 
 staticIP = None
 
@@ -151,16 +152,7 @@ class ClientSetupList(GUIComponent):
 class ClientSetup(ConfigListScreen, Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
-        try:
-            sz_w = getDesktop(0).size().width()
-        except:
-            sz_w = 720
-        if sz_w == 1280:
-            self.skinName = ["AdvancedMovieSelection_ClientSetup_HD"]
-        elif sz_w == 1024:
-            self.skinName = ["AdvancedMovieSelection_ClientSetup_XD"]
-        else:
-            self.skinName = ["AdvancedMovieSelection_ClientSetup_SD"]
+        self.skinName = SkinTools.appendResolution("AdvancedMovieSelection_ClientSetup_")
         self.staticIP = getIpAddress('eth0')
         self.session = session
         self["key_red"] = Button(_("Close"))

@@ -53,7 +53,7 @@ version: 1.0
 * new: nl translation (thx @ Bschaar)
 * changed: blue sel.png instead of grey for the standard skin (thx @ Joachim_Ernst)
 * fix: sort the button assignment
-Skinners ATTENTION , the screens AdvancedMovieSelectionButtonSetupSD, AdvancedMovieSelectionButtonSetupXD, AdvancedMovieSelectionButtonSetupHD have changed
+Skinners ATTENTION,  the screens AdvancedMovieSelectionButtonSetupSD, AdvancedMovieSelectionButtonSetupXD, AdvancedMovieSelectionButtonSetupHD have changed
 
 version: 1.1
 * new: channel name on/off in the advanced oneliner list
@@ -70,7 +70,7 @@ version: 1.2
 * fix: meta files were created wrong with dvd file structure
 * fix: eit file creation when titel <= 2 characters
 * fix: delete complete dvd, cover and movie info with dvd file structure
-Skinners ATTENTION , new screens added
+Skinners ATTENTION,  new screens added
 
 version: 1.3
 * new: directory name instead of folder.jpg for the display of covers with directories (can be set on/off in the settings)
@@ -103,7 +103,7 @@ version: 1.6
 * fix: save movie info/cover with tmdb search
 * fix: help texts
 * fix: some internal stuff :)
-Skinners ATTENTION , the screens AdvancedMovieSelectionEventViewSD, AdvancedMovieSelectionEventViewXD, AdvancedMovieSelectionEventViewHD have changed
+Skinners ATTENTION,  the screens AdvancedMovieSelectionEventViewSD, AdvancedMovieSelectionEventViewXD, AdvancedMovieSelectionEventViewHD have changed
 
 version: 1.7
 * new: bookmarks can be displayed in the movie list
@@ -128,7 +128,7 @@ version. 1.8
 * fix: save bookmarks on/off when changed over color button
 * fix: delete bookmarks over the delete function in the movie list
 * fix: improved search movie info/cover with '-' im movie title
-Skinners ATTENTION , all screens fot the movie list have extra entries (4 ex./resolution), AdvancedMovieSelectionTrashHD, AdvancedMovieSelectionTrashXD and AdvancedMovieSelectionTrashSD are new
+Skinners ATTENTION,  all screens fot the movie list have extra entries (4 ex./resolution), AdvancedMovieSelectionTrashHD, AdvancedMovieSelectionTrashXD and AdvancedMovieSelectionTrashSD are new
 
 version. 1.9
 * new: usb devices can be displayed in the movie list
@@ -138,7 +138,7 @@ version. 1.9
 * new: back icon instead og directory
 * new: hide files/directories (with gp3 over the gemini_DateiBrowser.conf and with cvs images over the AdvancedMovieSelection.conf in /etc/enigma2)
 * changed: dasplay channel logo function (now without own renderer)
-Skinners ATTENTION , AdvancedMovieSelectionCoverHD,AdvancedMovieSelectionCoverCD,AdvancedMovieSelectionCoverSD removed (therefor changes in AdvancedMovieSelectionHD,AdvancedMovieSelectionXD or AdvancedMovieSelectionSD)
+Skinners ATTENTION,  AdvancedMovieSelectionCoverHD,AdvancedMovieSelectionCoverCD,AdvancedMovieSelectionCoverSD removed (therefor changes in AdvancedMovieSelectionHD,AdvancedMovieSelectionXD or AdvancedMovieSelectionSD)
 
 version 2.0
 * new: multi-selection (with radio button)
@@ -152,7 +152,7 @@ version 2.0
 * changed: the function for starting in the last active directory (only when opening the movie list, no longer when stopping the movie)
 * changed: nl translation
 * changed: display cover in the movie info (if no cover availiable and the movie is a dreambox recording, the channel logo will be used)
-Skinners ATTENTION , AdvancedMovieSelectionInfoCoverHD,AdvancedMovieSelectionInfoCoverXD,AdvancedMovieSelectionInfoCoverSD removed (therefor changes in AdvancedMovieSelectionEventViewHD,AdvancedMovieSelectionEventViewXD or AdvancedMovieSelectionEventViewSD)
+Skinners ATTENTION,  AdvancedMovieSelectionInfoCoverHD,AdvancedMovieSelectionInfoCoverXD,AdvancedMovieSelectionInfoCoverSD removed (therefor changes in AdvancedMovieSelectionEventViewHD,AdvancedMovieSelectionEventViewXD or AdvancedMovieSelectionEventViewSD)
  
 version 2.1
 * fix: lcd/oled display when movie title and short description are the same
@@ -170,7 +170,7 @@ version 2.2
 * new: ask if movie should be deleted and return to movie list
 * new: with long info the merlinepgcenter can be started while playing
 * new: with missing short description the oled/lcd display can display the date of the recording, the time of the recording or the actual date
-Skinners ATTENTION , the screens AdvancedMovieSelection_summary and MoviePlayerExtended_summary can use <widget source="Seperator" (separator line which ist displayed automatically)
+Skinners ATTENTION,  the screens AdvancedMovieSelection_summary and MoviePlayerExtended_summary can use <widget source="Seperator" (separator line which ist displayed automatically)
 AdvancedMovieSelection_Rename_HD, AdvancedMovieSelection_Rename_XD and AdvancedMovieSelection_Rename_SD are new
 
 version 2.2.1
@@ -185,7 +185,7 @@ version 2.3
 * changed: confirmation before deleting only asked when info messages are enabled
 * changed: short description only displayed if not equal as movie title (in the onliner list)
 * fix: wakeup hdd´s from standby 
-Skinners ATTENTION , AdvancedMovieSelection_ClientSetup_HD, AdvancedMovieSelection_ClientSetup_XD and AdvancedMovieSelection_ClientSetup_SD are new, and in AdvancedMovieSelectionSetupHD,XD and SD the <widget name="MenuIcon" has been added
+Skinners ATTENTION,  AdvancedMovieSelection_ClientSetup_HD, AdvancedMovieSelection_ClientSetup_XD and AdvancedMovieSelection_ClientSetup_SD are new, and in AdvancedMovieSelectionSetupHD,XD and SD the <widget name="MenuIcon" has been added
 
 version 2.4
 * new: percent or progressbar in the movie list
@@ -209,7 +209,7 @@ version 2.4
 * changed: advanced info for tmdb search & d/l expanded
 * changed: bookmark text if bookmark on/off is assigned to color button
 * changed: no cover image (in German and English)
-Skinners ATTENTION , the screens AdvancedMovieSelectionTrashHD, AdvancedMovieSelectionTrashXD, AdvancedMovieSelectionTrashSD, TMDbMainHD, TMDbMainXD and TMDbMainSD have changed
+Skinners ATTENTION,  the screens AdvancedMovieSelectionTrashHD, AdvancedMovieSelectionTrashXD, AdvancedMovieSelectionTrashSD, TMDbMainHD, TMDbMainXD and TMDbMainSD have changed
 
 version 2.4.1
 * fix: crash with dvd´s in the movie list (thx @ b_lisa for reporting)
@@ -223,7 +223,7 @@ version 2.5
 * fix: remaining cuts after deleting
 * fix: rename ts movies without meta file
 * fix: crash with enigma2-plugin-systemplugins-eventnavigator plugin
-Skinners ATTENTION ,TMDbMainHD, TMDbMainXD,TMDbMainSD have changed, the screens TheTVDBMainHD, TheTVDBMainXD,and TheTVDBMainSD are new
+Skinners ATTENTION,  TMDbMainHD, TMDbMainXD,TMDbMainSD have changed, the screens TheTVDBMainHD, TheTVDBMainXD,and TheTVDBMainSD are new
 
 version 2.5.1
 * new: in the info overview of the movie the previous/next movie can be selected with left/right
@@ -238,9 +238,32 @@ version 2.6
 * new: check if bookmarks/mounts are online
 * new: display changelog for the versions
 * new: changelog in German, English and Dutch
-* new: marker is displayed for non-ts movies
 * fix: playing dvd from *.img files
 * fix: resume for dvd´s
 * fix: crash with directory settings if not skinned
 * fix: delete movie info and covers for non-ts files
-Skinners ATTENTION ,AdvancedMovieSelectionAboutDetails_HD, AdvancedMovieSelectionAboutDetails_XD are AdvancedMovieSelectionAboutDetails_SD are new
+Skinners ATTENTION, AdvancedMovieSelectionAboutDetails_HD, AdvancedMovieSelectionAboutDetails_XD are AdvancedMovieSelectionAboutDetails_SD are new
+
+version: 2.6.1
+* fix: crash while emptying trashcan
+* fix: deleting dvd´s 
+
+version: 2.6.2
+* fix: DVDPlayer crash (opendreambox-2.0.0)
+
+version: 2.6.3
+* fix: movies are not always displayed
+
+version: 2.7
+* fix: display and save descriptions (eit) in Cyrillic
+* new: playing blu-ray disc formats (iso and structures)
+* new: movie preview in fullscreen
+* new: voluntary self regulation with sync from tmdb
+* new: recorded movies are marked in the EPG (configurable in the settings)
+* new: movies can be filtered according to the description
+* new: choice if info from tmbd and tvdb should be overwritten
+* new: backup and restore movie list settings
+* new: automatically cover download from tmdb after timer record
+Skinners ATTENTION,  AdvancedMovieSelection_Preview_HD, AdvancedMovieSelection_Preview_noDescription_HD, AdvancedMovieSelection_Preview_noCover_HD, AdvancedMovieSelection_Preview_noDescription_noCover_HD,
+AdvancedMovieSelection_Preview_XD, AdvancedMovieSelection_Preview_noDescription_XD, AdvancedMovieSelection_Preview_noCover_XD, AdvancedMovieSelection_Preview_noDescription_noCover_XD (SD makes no sense)
+AdvancedKeyBoardHD, AdvancedKeyBoardXD, AdvancedKeyBoardSD, AdvancedTextInputHelpDialogHD, AdvancedTextInputHelpDialogXD und AdvancedTextInputHelpDialogSD are new

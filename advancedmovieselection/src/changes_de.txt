@@ -245,3 +245,26 @@ version: 2.6
 * fix: löschen von filminfo und cover's für nicht ts dateien
 ACHTUNG an die skinner, AdvancedMovieSelectionAboutDetails_HD, AdvancedMovieSelectionAboutDetails_XD und AdvancedMovieSelectionAboutDetails_SD sind neu
  
+version: 2.6.1
+* fix: crash beim leeren des papierkorbes
+* fix: löschen von dvd´s
+
+version: 2.6.2
+* fix: DVDPlayer crash (opendreambox-2.0.0)
+
+version: 2.6.3
+* fix: filme werden nicht immer angezeigt
+
+version: 2.7
+* fix: anzeigen und speichern von beschreibungen (eit) in kyrillisch
+* neu: abspielen von Blu-Ray Disc formaten (iso und strukturen)
+* neu: filmvorschau als vollbild
+* neu: freiwillige selbstkontrolle mit aktualisierung von tmdb
+* neu: filme können nach der kurzbeschreibung gefiltert werden
+* neu: auswahl, ob daten von tmdb und tvdb überschrieben werden
+* neu: aufgenommene filme werden im EPG gekennzeichnet (einstellbar)
+* neu: einstellungen können gesichert werden
+* neu: automatisches herunterladen der cover von tmdb nach einer timeraufnahme
+ACHTUNG an die skinner, AdvancedMovieSelection_Preview_HD, AdvancedMovieSelection_Preview_noDescription_HD, AdvancedMovieSelection_Preview_noCover_HD, AdvancedMovieSelection_Preview_noDescription_noCover_HD,
+AdvancedMovieSelection_Preview_XD, AdvancedMovieSelection_Preview_noDescription_XD, AdvancedMovieSelection_Preview_noCover_XD, AdvancedMovieSelection_Preview_noDescription_noCover_XD (SD macht keinen sinn),
+AdvancedKeyBoardHD, AdvancedKeyBoardXD, AdvancedKeyBoardSD, AdvancedTextInputHelpDialogHD, AdvancedTextInputHelpDialogXD und AdvancedTextInputHelpDialogSD sind dazugekommen

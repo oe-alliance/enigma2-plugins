@@ -23,10 +23,11 @@ from __init__ import _
 from Components.config import config
 from Components.ActionMap import HelpableActionMap
 from Components.Button import Button
-from MovieList import MovieList
+from MovieList import MovieList, accessRestriction
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from MoveCopy import MovieMove
+from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Rename import MovieRetitle
 from Wastebasket import Wastebasket
@@ -46,6 +47,8 @@ def getPluginCaption(pname):
                 return _("Show folders")
             else:
                 return _("Hide folders")
+        if pname == "Show up to VSR-X":
+            return (_("Show up to VSR-%d") % accessRestriction.getAccess())
         if pname == "Toggle seen":
             return _("Mark as seen")
         elif pname == "Bookmark(s) on/off":
@@ -182,6 +185,8 @@ class QuickButton:
                 self.setSortType(newType)
                 self.reloadList()
                 key_number.setText(getPluginCaption(pname))
+            elif pname == "Filter by description":
+                self.openFilterByDescriptionChoice()
             elif pname == "Show Timer":
                 from Screens.TimerEdit import TimerEditList
                 self.session.open(TimerEditList)
@@ -247,6 +252,19 @@ class QuickButton:
                         else:
                             self.setMovieStatus(1)
                             key_number.setText(_("Mark as unseen"))
+                elif pname == "Show up to VSR-X":
+                    from AccessRestriction import VSR
+                    access = "VSR-%d"%(self.list.getAccess()) 
+                    for index, item in enumerate(VSR):
+                        if item == access:
+                            if len(VSR)-1 == index:
+                                access = VSR[0]
+                            else:
+                                access = VSR[index + 1]
+                            break
+                    self.list.setAccess(int(access[4:]))
+                    self.reloadList()
+                    key_number.setText(_("Show up to") + ' ' + _("VSR") + '-%d' % (self.list.getAccess()))
                 elif pname == "Mark as seen":
                     if not (service.flags):
                         self.setMovieStatus(status=1)
@@ -275,3 +293,60 @@ class QuickButton:
             errorText = _("No plugin assigned!")
         if errorText:
             self.session.open(MessageBox, errorText, MessageBox.TYPE_INFO)
+
+    def openAccessChoice(self):
+        vsr = []
+        vsr.append((_("Clear"), None))        
+        vsr.append((_("VSR-0 (General Audience)"), "VSR-0"))        
+        vsr.append((_("VSR-6 (Parental Guidance Suggested)"), "VSR-6"))        
+        vsr.append((_("VSR-12 (Parents Strongly Cautioned)"), "VSR-12"))        
+        vsr.append((_("VSR-16 (Restricted)"), "VSR-16"))        
+        vsr.append((_("VSR-18 (No One 17 And Under Admitted)"), "VSR-18"))        
+        self.session.openWithCallback(self.setAccessChoice, ChoiceBox, title=_("Please select the VSR here:"), list=vsr)
+        
+    def setAccessChoice(self, answer):
+        if answer:
+            answer = answer[1] 
+            self.list.setAccessRestriction(answer)
+            self.reloadList()
+
+    def openFilterByDescriptionChoice(self):
+        from ServiceProvider import ServiceCenter
+        from enigma import eServiceReference, iServiceInformation
+        from MovieSelection import SHOW_ALL_MOVIES
+        serviceHandler = ServiceCenter.getInstance()
+        descr = []
+        l = serviceHandler.list(self.list.root)
+        while 1:
+            serviceref = l.getNext()
+            if not serviceref.valid():
+                break
+            if serviceref.flags & eServiceReference.mustDescent:
+                continue
+            info = serviceHandler.info(serviceref)
+            if not info:
+                continue
+            description = (info.getInfoString(serviceref, iServiceInformation.sDescription),)
+            if description[0] != "" and not description in descr: 
+                descr.append(description)
+        descr = sorted(descr)
+        descr.insert(0, (_(SHOW_ALL_MOVIES), ))
+        
+        current = self.list.filter_description
+        selection = 0
+        for index, item in enumerate(descr):
+            if item[0] == current:
+                selection = index
+                break
+        
+        self.session.openWithCallback(self.filterByDescription, ChoiceBox, title=_("Select movie by description:"), list=descr, selection=selection)
+
+    def filterByDescription(self, answer):
+        from MovieSelection import SHOW_ALL_MOVIES
+        if not answer:
+            return
+        if answer[0] == _(SHOW_ALL_MOVIES):
+            self.list.filter_description = None
+        else:
+            self.list.filter_description = answer[0] 
+        self.reloadList()

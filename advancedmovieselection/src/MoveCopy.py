@@ -28,10 +28,6 @@ from Components.config import config
 from Components.UsageConfig import defaultMoviePath
 from Tools.Directories import createDir
 import os
-#Topfi start
-from threading import Timer
-from Tools import Notifications
-#Topfi end
 
 class MovieMove(ChoiceBox):
     def __init__(self, session, csel, service):
@@ -76,10 +72,7 @@ class MovieMove(ChoiceBox):
         self.session.openWithCallback(self.gotFilename, MovieLocationBox, (_("Move/Copy %s") % self.name) + ' ' + _("to:"), config.movielist.last_videodir.value)
 
     def showActive(self, arg):
-#Topfi start
-        #tmp_out = os.popen("ps -ef | grep -e \"   [c]p /\" -e \"   [m]v /\"").readlines()
-        tmp_out = os.popen("ps | grep -e \"   [c]p /\" -e \"   [m]v /\"").readlines()
-#Topfi end
+        tmp_out = os.popen("ps -ef | grep -e \"   [c]p /\" -e \"   [m]v /\"").readlines()
         tmpline = ""
         tmpcount = 0
         for line in tmp_out:
@@ -118,29 +111,37 @@ class MovieMove(ChoiceBox):
                     if os.path.exists(self.destinationpath + "/%s" % self.getMovieFileName(service)) is True:
                         self.skipMoveFile(_("File already exists"))
                         return
-                    
+                
+                cmd = ["mv"]
+                for service in self.service_list:
+                    cmd.append("\"%s/%s.\"*" % (self.sourcepath, self.getMovieFileName(service)))
+                cmd.append("\"%s\"" % (self.destinationpath))
+                #print " ".join(cmd)
+                
                 if confirmed[1] == "VS":
-                    for service in self.service_list:
-                        os.system("mv \"%s/%s.\"* \"%s\"" % (self.sourcepath, self.getMovieFileName(service), self.destinationpath))
+                    #for service in self.service_list:
+                    #    os.system("mv \"%s/%s.\"* \"%s\"" % (self.sourcepath, self.getMovieFileName(service), self.destinationpath))
+                    os.system(" ".join(cmd))
                     self.session.openWithCallback(self.__doClose, MessageBox, _("The move was successful."), MessageBox.TYPE_INFO, timeout=3)
                 elif confirmed[1] == "VH":
-                    for service in self.service_list:
-                        os.system("mv \"%s/%s.\"* \"%s\" &" % (self.sourcepath, self.getMovieFileName(service), self.destinationpath))
-                    self.session.openWithCallback(self.__doClose, MessageBox, _("Moving in the background.\n\nThe movie list appears updated after full completion."), MessageBox.TYPE_INFO, timeout=6)
-#Topfi start
-                    MovieMove.checkAndReportStatus()
-#Topfi end
+                    #for service in self.service_list:
+                    #    os.system("mv \"%s/%s.\"* \"%s\" &" % (self.sourcepath, self.getMovieFileName(service), self.destinationpath))
+                    cmd.append("&")
+                    os.system(" ".join(cmd))
+                    self.session.openWithCallback(self.__doClose, MessageBox, _("Moving in the background.\n\nThe movie list appears updated after full completion."), MessageBox.TYPE_INFO, timeout=12)
                 elif confirmed[1] == "KS":
-                    for service in self.service_list:
-                        os.system("cp \"%s/%s.\"* \"%s\"" % (self.sourcepath, self.getMovieFileName(service), self.destinationpath))
+                    #for service in self.service_list:
+                    #    os.system("cp \"%s/%s.\"* \"%s\"" % (self.sourcepath, self.getMovieFileName(service), self.destinationpath))
+                    cmd[0] = "cp"
+                    os.system(" ".join(cmd))
                     self.session.openWithCallback(self.__doClose, MessageBox, _("The copying was successful."), MessageBox.TYPE_INFO, timeout=3)
                 elif confirmed[1] == "KH":
-                    for service in self.service_list:
-                        os.system("cp \"%s/%s.\"* \"%s\" &" % (self.sourcepath, self.getMovieFileName(service), self.destinationpath))
-                    self.session.openWithCallback(self.__doClose, MessageBox, _("Copying in the background.\n\nThe movie list appears updated after full completion."), MessageBox.TYPE_INFO, timeout=6)
-#Topfi start
-                    MovieMove.checkAndReportStatus()
-#Topfi end
+                    #for service in self.service_list:
+                    #    os.system("cp \"%s/%s.\"* \"%s\" &" % (self.sourcepath, self.getMovieFileName(service), self.destinationpath))
+                    cmd[0] = "cp"
+                    cmd.append("&")
+                    os.system(" ".join(cmd))
+                    self.session.openWithCallback(self.__doClose, MessageBox, _("Copying in the background.\n\nThe movie list appears updated after full completion."), MessageBox.TYPE_INFO, timeout=12)
             else:
                 MovieMove(session=self.session, csel=self.csel, service=self.service_list[0])
 
@@ -150,16 +151,3 @@ class MovieMove(ChoiceBox):
 
     def skipMoveFile(self, reason):
         self.session.open(MessageBox, (_("Move/Copy aborted due to:\n%s") % reason), MessageBox.TYPE_INFO)
-
-#Topfi start
-    @staticmethod
-    def checkAndReportStatus():
-        try:
-            cpCount = os.popen("ps | grep -e \"   [c]p /\" -e \"   [m]v /\" | wc -l").readline()
-            if int(cpCount) == 0:
-                Notifications.AddPopup(text = _("All background move/copy operations completed.\n"), type = MessageBox.TYPE_INFO, timeout = 6)
-            else:
-                Timer(5, MovieMove.checkAndReportStatus).start()
-        except:
-            pass
-#Topfi end		

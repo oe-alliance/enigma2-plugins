@@ -29,25 +29,18 @@ from Components.config import config
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.SelectionList import SelectionList
-from enigma import eServiceReference, iServiceInformation, getDesktop
+from enigma import eServiceReference, iServiceInformation
 from os import path as os_path
 from Screens.Console import eConsoleAppContainer
 from Screens.TimerEntry import TimerEntry
 from ServiceProvider import ServiceCenter
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_CONFIG
+from Globals import SkinTools
 
 class TagEditor(Screen):
     def __init__(self, session, tags, txt = None, parent = None):
         Screen.__init__(self, session, parent = parent)
-        try:
-            sz_w = getDesktop(0).size().width()
-        except:
-            sz_w = 720
-        if sz_w == 1280:
-            self.skinName = ["AdvancedMovieSelectionTagEditorHD"]
-        elif sz_w == 1024:
-            self.skinName = ["AdvancedMovieSelectionTagEditorXD"]
-        else:
-            self.skinName = ["AdvancedMovieSelectionTagEditorSD"]
+        self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionTagEditor")
         self["key_red"] = StaticText(_("Cancel"))
         self["key_green"] = StaticText(_("Save/Close"))
         self["key_yellow"] = StaticText(_("Create new Tag"))
@@ -81,16 +74,15 @@ class TagEditor(Screen):
             self.setTitle(_("Add Tag(s) for Recordings/Timer or AutoTimer"))
         else:
             try:
-                from ServiceProvider import ServiceCenter
                 Title = ServiceCenter.getInstance().info(self.service).getName(self.service)
                 self.setTitle(_("Edit Tag(s) for: %s") % (Title))
             except:
                 self.setTitle(_("Edit Tag(s)"))
 
     def defaulttaglist(self, tags):
-        if not fileExists("/etc/enigma2/movietags"):
-            sourceDir = "/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/movietags"
-            targetDir = "/etc/enigma2/"
+        if not fileExists(resolveFilename(SCOPE_CONFIG, "movietags")):
+            sourceDir = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/AdvancedMovieSelection/movietags")
+            targetDir = resolveFilename(SCOPE_CONFIG)
             eConsoleAppContainer().execute("cp \""+sourceDir+"\" \""+targetDir+"\"")
             self.loadTagsFile()
             self.updateMenuList(tags)
@@ -110,7 +102,7 @@ class TagEditor(Screen):
 
     def loadTagsFile(self):
         try:
-            file = open("/etc/enigma2/movietags")
+            file = open(resolveFilename(SCOPE_CONFIG, "movietags"))
             tags = [x.rstrip() for x in file]
             #tags = [x.rstrip() for x in file.readlines()]
             while "" in tags:
@@ -122,7 +114,7 @@ class TagEditor(Screen):
 
     def saveTagsFile(self, tags):
         try:
-            file = open("/etc/enigma2/movietags", "w")
+            file = open(resolveFilename(SCOPE_CONFIG, "movietags"), "w")
             file.write("\n".join(tags)+"\n")
             file.close()
         except IOError: #, ioe:
@@ -189,12 +181,18 @@ class TagEditor(Screen):
                         continue
                     func(serviceref, tags)
 
+    def getTagDescription(self, tag):
+        from AccessRestriction import VSR
+        if tag in VSR:
+            return _(tag)
+        return tag
+
     def updateMenuList(self, tags, extrasel = []):
         seltags = [x[1] for x in self["list"].getSelectionsList()] + extrasel
         tags.sort()
         self["list"].setList([])
         for tag in tags:
-            self["list"].addSelection(tag, tag, 0, tag in seltags)
+            self["list"].addSelection(self.getTagDescription(tag), tag, 0, tag in seltags)
 
     def loadFromHdd(self):
         tags = self.tags[:]

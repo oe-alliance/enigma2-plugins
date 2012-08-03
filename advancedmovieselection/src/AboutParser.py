@@ -20,6 +20,7 @@
 #
 
 import os
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 CHANGES = None
 
@@ -37,35 +38,36 @@ class VersionInfo():
     def __repr__(self):
         return self.version + "\n" + self.info 
 
-def setLocale(lng, path="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/"):
-    global CHANGES
-    print "[AdvancedMovieSelection] Set changes locale to", lng
-    CHANGES = {}
-    CHANGES['locale'] = lng
-    CHANGES['path'] = (path + "changes_%s.txt") % (lng)
-    if not os.path.exists(CHANGES['path']):
-        lng = "en"
+class AboutParser:
+    @classmethod
+    def setLocale(self, lng, path=resolveFilename(SCOPE_PLUGINS)+"Extensions/AdvancedMovieSelection/"):
+        global CHANGES
+        print "[AdvancedMovieSelection] Set changes locale to", lng
+        CHANGES = {}
         CHANGES['locale'] = lng
         CHANGES['path'] = (path + "changes_%s.txt") % (lng)
-        
-
-def parseChanges():
-    versions = []
-    if not CHANGES:
-        setLocale("en")
-    if os.path.exists(CHANGES['path']):
-        version = None
-        version_text = None
-        for line in open(CHANGES['path'], 'r').readlines():
-            if not version_text:
-                version_text = line.split(' ')[0].strip().replace(':', '').lower()
-            if not line:
-                break
-            if line.lower().startswith(version_text):
-                version = VersionInfo(line)
-                versions.append(version)
-            else:
-                if not line.startswith(' ') and not line.startswith('\n') and version:
-                    version.info += line
-    return versions
-
+        if not os.path.exists(CHANGES['path']):
+            lng = "en"
+            CHANGES['locale'] = lng
+            CHANGES['path'] = (path + "changes_%s.txt") % (lng)
+    
+    @classmethod
+    def parseChanges(self):
+        versions = []
+        if not CHANGES:
+            AboutParser.setLocale("en")
+        if os.path.exists(CHANGES['path']):
+            version = None
+            version_text = None
+            for line in open(CHANGES['path'], 'r').readlines():
+                if not version_text:
+                    version_text = line.split(' ')[0].strip().replace(':', '').lower()
+                if not line:
+                    break
+                if line.lower().startswith(version_text):
+                    version = VersionInfo(line)
+                    versions.append(version)
+                else:
+                    if not line.startswith(' ') and not line.startswith('\n') and version:
+                        version.info += line
+        return versions

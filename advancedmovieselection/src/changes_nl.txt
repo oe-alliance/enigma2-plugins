@@ -238,9 +238,30 @@ versie 2.6
 * nieuw: controle of bookmarks/mounts werkelijk online zijn
 * nieuw: weergave van de wijzigingen per versie
 * nieuw: lijst met wijzigingen vertaald in Duits, Engels en Nederlands
-* nieuw: marker wordt weergegeven voor niet-ts movies
+* nieuw: markeerpunten weergeven voor niet-ts filmen
 * fix: dvd-weergave van *.img-bestanden
 * fix: afspelen hervatten bij dvd´s
 * fix: crash bij mapinstellingen indien niet geskint
 * fix: verwijderen van filminfo en covers voor niet-ts bestanden
 OPGELET voor de skinners, AdvancedMovieSelectionAboutDetails_HD, AdvancedMovieSelectionAboutDetails_XD en AdvancedMovieSelectionAboutDetails_SD toegevoegd
+
+versie: 2.6.1
+* fix: crash bij ledigen prullemand
+* fix: verwijderen van dvd´s
+
+version: 2.6.2
+* fix: DVDPlayer crash (opendreambox-2.0.0)
+
+versie: 2.7
+* fix: weergeven en bewaren van beschrijvingen (eit) in Cyrillisch
+* nieuw: afspelen Blu-Ray Disc formaten (iso en structuren)
+* nieuw: filmpreview als volledig beeld
+* nieuw: Vrijwillige ZelfRegulering Self Regulation met actualisering via tmdb
+* nieuw: opgenomen filmen worden in de EPG gemarkeerd (instelbaar)
+* nieuw: filmen kunnen gefilterd worden volgens de korte beschrijving
+* nieuw: keuze of info van tmdb en tvdb overschreven wordt
+* nieuw: backup en herstellen van de instellingen
+* nieuw: automatisch cover downloaden van tmdb na timeropname
+OPGELET voor de skinners, AdvancedMovieSelection_Preview_HD, AdvancedMovieSelection_Preview_noDescription_HD, AdvancedMovieSelection_Preview_noCover_HD, AdvancedMovieSelection_Preview_noDescription_noCover_HD,
+AdvancedMovieSelection_Preview_XD, AdvancedMovieSelection_Preview_noDescription_XD, AdvancedMovieSelection_Preview_noCover_XD, AdvancedMovieSelection_Preview_noDescription_noCover_XD (SD is niet zinvol)
+AdvancedKeyBoardHD, AdvancedKeyBoardXD, AdvancedKeyBoardSD, AdvancedTextInputHelpDialogHD, AdvancedTextInputHelpDialogXD und AdvancedTextInputHelpDialogSD toegevoegd

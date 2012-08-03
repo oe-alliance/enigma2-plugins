@@ -27,7 +27,6 @@ from Components.MenuList import MenuList
 from Components.Sources.StaticText import StaticText
 from Screens.HelpMenu import HelpableScreen
 from MovieList import MovieList, eServiceReferenceHotplug, eServiceReferenceBackDir
-from MovieSearch import MovieSearchScreen
 from Components.DiskInfo import DiskInfo
 from Components.Pixmap import Pixmap
 from Components.Label import Label
@@ -61,31 +60,16 @@ from ClientSetup import ClientSetup
 from time import localtime, strftime
 from datetime import datetime
 from Tools.FuzzyDate import FuzzyTime
+from Globals import pluginPresent, SkinTools
 
-if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/IMDb/plugin.pyo"):
+if pluginPresent.IMDb:
     from Plugins.Extensions.IMDb.plugin import IMDB
-    IMDbPresent = True
-else:
-    IMDbPresent = False
-if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/OFDb/plugin.pyo"):
+if pluginPresent.OFDb:
     from Plugins.Extensions.OFDb.plugin import OFDB
-    OFDbPresent = True
-else:
-    OFDbPresent = False
-if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/TMDb/plugin.pyo"):
+if pluginPresent.TMDb:
     from Plugins.Extensions.TMDb.plugin import TMDbMain
-    TMDbPresent = True
-else:
-    TMDbPresent = False
-if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/YTTrailer/plugin.pyo"):
+if pluginPresent.YTTrailer:
     from Plugins.Extensions.YTTrailer.plugin import YTTrailerList
-    YTTrailerPresent = True
-else:
-    YTTrailerPresent = False
-if fileExists("/usr/lib/enigma2/python/Plugins/Bp/geminimain/plugin.pyo"):
-    GP3Present = True
-else:
-    GP3Present = False
 
 #config.movielist = ConfigSubsection()
 config.movielist.moviesort = ConfigInteger(default=MovieList.SORT_ALPHANUMERIC)
@@ -156,6 +140,12 @@ class MovieContextMenu(Screen):
                 "cancel": self.cancelClick
             })
         menu = []
+        if config.AdvancedMovieSelection.use_wastebasket.value and config.AdvancedMovieSelection.show_wastebasket.value:
+            menu.append((_("Wastebasket"), self.waste))
+        if config.AdvancedMovieSelection.show_filter_by_description.value:
+            menu.append((_("Filter by description"), boundFunction(self.openFilterByDescriptionChoice)))
+        if config.AdvancedMovieSelection.show_set_vsr.value and not (self.service.flags & eServiceReference.mustDescent):
+            menu.append((_("Set VSR"), boundFunction(self.openAccessChoice)))
         if config.AdvancedMovieSelection.hotplug.value and isinstance(service, eServiceReferenceHotplug):
             menu.append((_("Unmount") + " " + service.getName(), boundFunction(self.unmount)))
         if config.AdvancedMovieSelection.showtmdb.value:
@@ -167,8 +157,6 @@ class MovieContextMenu(Screen):
         if config.AdvancedMovieSelection.showdelete.value:
             if not (self.service.flags & eServiceReference.mustDescent):
                 menu.append((_("Delete"), self.delete))
-        if config.AdvancedMovieSelection.use_wastebasket.value and config.AdvancedMovieSelection.show_wastebasket.value:
-            menu.append((_("Wastebasket"), self.waste))
         if config.AdvancedMovieSelection.showmove.value and not (self.service.flags & eServiceReference.mustDescent):
             menu.append((_("Move/Copy"), self.movecopy))
         if not (isinstance(service, eServiceReferenceBackDir) or isinstance(service, eServiceReferenceHotplug)):
@@ -198,7 +186,7 @@ class MovieContextMenu(Screen):
                 (_("List style compact"), boundFunction(self.listType, MovieList.LISTTYPE_COMPACT)),
                 (_("List style compact with description"), boundFunction(self.listType, MovieList.LISTTYPE_COMPACT_DESCRIPTION)),
                 (_("List style single line"), boundFunction(self.listType, MovieList.LISTTYPE_MINIMAL)),
-                (_("List style Advanced Movie Selection single line"), boundFunction(self.listType, MovieList.LISTTYPE_MINIMAL_AdvancedMovieSelection))
+                (_("List style Advanced Movie Selection single line"), boundFunction(self.listType, MovieList.LISTTYPE_MINIMAL_AdvancedMovieSelection)),
             ))
         if config.AdvancedMovieSelection.showliststyle.value and config.movielist.listtype.value == MovieList.LISTTYPE_MINIMAL_AdvancedMovieSelection:
             if config.movielist.showservice.value == MovieList.SHOW_SERVICE:
@@ -272,10 +260,12 @@ class MovieContextMenu(Screen):
             menu.append((_("Filter by Tags"), boundFunction(self.filterbytags)))
         if config.AdvancedMovieSelection.showmenu.value and config.AdvancedMovieSelection.show_infobar_position.value:
             menu.append((_("Setup Moviebar position"), self.moviebarsetup))
-        if YTTrailerPresent == True and config.AdvancedMovieSelection.showtrailer.value and not (self.service.flags & eServiceReference.mustDescent): 
+        if pluginPresent.YTTrailer == True and config.AdvancedMovieSelection.showtrailer.value and not (self.service.flags & eServiceReference.mustDescent): 
             menu.append((_("Search Trailer on web"), boundFunction(self.showTrailer)))
         if config.AdvancedMovieSelection.show_remote_setup.value:
             menu.append((_("Clientbox setup"), boundFunction(self.serversetup)))
+        if config.AdvancedMovieSelection.show_backup_restore.value:
+            menu.append((_("Backup/Restore"), boundFunction(self.openBackupRestore)))
         if config.AdvancedMovieSelection.showmenu.value:
             menu.append((_("Setup"), boundFunction(self.menusetup)))
         self["menu"] = MenuList(menu)
@@ -283,6 +273,19 @@ class MovieContextMenu(Screen):
 
     def setWindowTitle(self):
         self.setTitle(_("Advanced Movie Selection Menu"))
+
+    def openBackupRestore(self):
+        from AdvancedMovieSelectionSetup import BackupRestore
+        self.session.open(BackupRestore)
+        self.close()
+
+    def openAccessChoice(self):
+        self.csel.openAccessChoice()
+        self.close()
+
+    def openFilterByDescriptionChoice(self):
+        self.csel.openFilterByDescriptionChoice()
+        self.close()
 
     def thetvdbsearch(self):
         from SearchTVDb import TheTVDBMain
@@ -310,7 +313,7 @@ class MovieContextMenu(Screen):
         self.session.openWithCallback(self.closeafterfinish, Wastebasket)
 
     def showTrailer(self):
-        if YTTrailerPresent == True:
+        if pluginPresent.YTTrailer == True:
             eventname = ServiceCenter.getInstance().info(self.service).getName(self.service)
             self.session.open(YTTrailerList, eventname)
         else:
@@ -383,7 +386,28 @@ class MovieContextMenu(Screen):
         self.close()
 
     def searchmovie(self):
-        MovieSearchScreen(session=self.session)
+        from AdvancedKeyboard import AdvancedKeyBoard
+        self.session.openWithCallback(self.searchCallback, AdvancedKeyBoard, _("Enter text to search for"))
+        
+    def searchCallback(self, retval):
+        searchString = retval
+        print searchString
+        if not searchString:
+            return self.csel.reloadList()
+    
+        movieList = self.csel["list"].list
+        newList = []
+        for movie in movieList:
+            # we have no idea what this input could be, just add it back
+            if len(movie) < 2: newList.append(movie)
+            else:
+                if not (movie[0].flags & eServiceReference.mustDescent and not isinstance(movie[0], eServiceReferenceDvd)):
+                    name = movie[1].getName(movie[0])
+                    if searchString.lower() in name.lower(): # force case-insensitive for now
+                        newList.append(movie)
+        self.csel["list"].list = newList
+        self.csel["list"].l.setList(newList)
+        self.closeafterfinish()
 
     def setMovieStatus(self, status):
         self.csel.setMovieStatus(status)
@@ -585,7 +609,7 @@ class SelectionEventInfo:
         self.onShown.append(self.__selectionChanged)
 
     def __selectionChanged(self):
-        if self.execing and config.movielist.description.value == MovieList.SHOW_DESCRIPTION or config.AdvancedMovieSelection.showpreview.value:
+        if self.execing and config.movielist.description.value == MovieList.SHOW_DESCRIPTION or config.AdvancedMovieSelection.showpreview.value or config.AdvancedMovieSelection.video_preview.value:
             self.timer.start(100, True)
 
     def updateEventInfo(self):
@@ -601,6 +625,8 @@ class SelectionEventInfo:
             self.loadPreview(serviceref)
         if config.AdvancedMovieSelection.video_preview_autostart.value:
             self.preparePlayMovie(serviceref, evt)
+        if not config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.video_preview.value:
+            self.loadPreview(serviceref)        
         
 class AdvancedMovieSelection_summary(Screen):
     def __init__(self, session, parent):
@@ -624,38 +650,23 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         HelpableScreen.__init__(self)
         MoviePreview.__init__(self, session)
         VideoPreview.__init__(self)
-        try:
-            sz_w = getDesktop(0).size().width()
-        except:
-            sz_w = 720
+        self.skinName = ["AdvancedMovieSelection"]
         if config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.minitv.value:
-            if sz_w == 1280:
-                self.skinName = ["AdvancedMovieSelectionHD", "AdvancedMovieSelection"]
-            elif sz_w == 1024:
-                self.skinName = ["AdvancedMovieSelectionXD", "AdvancedMovieSelection"]
-            else:
-                self.skinName = ["AdvancedMovieSelectionSD", "AdvancedMovieSelection"]
+            self.skinName.insert(0, SkinTools.appendResolution("AdvancedMovieSelection"))
         if not config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.minitv.value:
-            if sz_w == 1280:
-                self.skinName = ["AdvancedMovieSelection1HD", "AdvancedMovieSelection"]
-            elif sz_w == 1024:
-                self.skinName = ["AdvancedMovieSelection1XD", "AdvancedMovieSelection"]
-            else:
-                self.skinName = ["AdvancedMovieSelection1SD", "AdvancedMovieSelection"]            
+            self.skinName.insert(0, SkinTools.appendResolution("AdvancedMovieSelection1"))
         if config.AdvancedMovieSelection.showpreview.value and not config.AdvancedMovieSelection.minitv.value:
-            if sz_w == 1280:
-                self.skinName = ["AdvancedMovieSelection_noMiniTV_HD", "AdvancedMovieSelection"]
-            elif sz_w == 1024:
-                self.skinName = ["AdvancedMovieSelection_noMiniTV_XD", "AdvancedMovieSelection"]
-            else:
-                self.skinName = ["AdvancedMovieSelection_noMiniTV_SD", "AdvancedMovieSelection"]
+            self.skinName.insert(0, SkinTools.appendResolution("AdvancedMovieSelection_noMiniTV_"))
         if not config.AdvancedMovieSelection.showpreview.value and not config.AdvancedMovieSelection.minitv.value:
-            if sz_w == 1280:
-                self.skinName = ["AdvancedMovieSelection1_noMiniTV_HD", "AdvancedMovieSelection"]
-            elif sz_w == 1024:
-                self.skinName = ["AdvancedMovieSelection1_noMiniTV_XD", "AdvancedMovieSelection"]
-            else:
-                self.skinName = ["AdvancedMovieSelection1_noMiniTV_SD", "AdvancedMovieSelection"]
+            self.skinName.insert(0, SkinTools.appendResolution("AdvancedMovieSelection1_noMiniTV_"))
+        if config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.video_preview.value and config.AdvancedMovieSelection.video_preview_fullscreen.value and config.movielist.description.value == MovieList.SHOW_DESCRIPTION:
+            self.skinName.insert(0, SkinTools.appendResolution("AdvancedMovieSelection_Preview_"))
+        if config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.video_preview.value and config.AdvancedMovieSelection.video_preview_fullscreen.value and config.movielist.description.value == MovieList.HIDE_DESCRIPTION:
+            self.skinName.insert(0, SkinTools.appendResolution("AdvancedMovieSelection_Preview_noDescription_"))
+        if not config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.video_preview.value and config.AdvancedMovieSelection.video_preview_fullscreen.value and config.movielist.description.value == MovieList.SHOW_DESCRIPTION:
+            self.skinName.insert(0, SkinTools.appendResolution("AdvancedMovieSelection_Preview_noCover_"))
+        if not config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.video_preview.value and config.AdvancedMovieSelection.video_preview_fullscreen.value and config.movielist.description.value == MovieList.HIDE_DESCRIPTION:
+            self.skinName.insert(0, SkinTools.appendResolution("AdvancedMovieSelection_Preview_noDescription_noCover_"))
         self.tags = [ ]
         if selectedmovie:
             self.selected_tags = config.movielist.last_selected_tags.value
@@ -792,7 +803,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
             self.to_delete = [self.service]
         
         serviceHandler = ServiceCenter.getInstance()
-        offline = serviceHandler.offlineOperations(self.service)
         info = serviceHandler.info(self.service)
         name = info and info.getName(self.service) or _("this recording")
 
@@ -809,24 +819,11 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
                             recording = True
                             continue
   
-        result = False
-        if self.service.flags & eServiceReference.mustDescent:
-            if self.service.getName() != "..":
-                result = True
-                name = self.service.getPath()
+        if not config.AdvancedMovieSelection.askdelete.value:
+            self.deleteConfirmed(True)
         else:
-            if offline is not None:
-                if not offline.deleteFromDisk(1):
-                    result = True
-
-        if result == True:
-            if not config.AdvancedMovieSelection.askdelete.value:
-                self.deleteConfirmed(True)
-            else:
-                text = self.getTrashMessage(len(self.to_delete), config.AdvancedMovieSelection.use_wastebasket.value, recording, name)
-                self.session.openWithCallback(self.deleteConfirmed, MessageBox, text)
-        else:
-            self.session.open(MessageBox, _("You cannot delete this!"), MessageBox.TYPE_ERROR)
+            text = self.getTrashMessage(len(self.to_delete), config.AdvancedMovieSelection.use_wastebasket.value, recording, name)
+            self.session.openWithCallback(self.deleteConfirmed, MessageBox, text)
 
     def stopRemoveTimer(self, file_path):
         if NavigationInstance.instance.getRecordings():
@@ -914,6 +911,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
             self["Service"].newService(None)
             self["DescriptionBorder"].hide()
             self["list"].instance.resize(eSize(self.listWidth, self.listHeight))
+        if config.AdvancedMovieSelection.video_preview_fullscreen.value and config.movielist.description.isChanged():
+            self.session.open(MessageBox, _("Some settings changes require close/reopen the movielist to take effect."), type=MessageBox.TYPE_INFO)
 
     def updateSettings(self):
         self.updateVideoPreviewSettings()
@@ -928,49 +927,49 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         self.togglePreviewStatus(self.getCurrent())
     
     def showEventInformation(self):
-        if IMDbPresent and OFDbPresent and TMDbPresent and config.AdvancedMovieSelection.Eventinfotyp.value == "Ei":
+        if pluginPresent.IMDb and pluginPresent.OFDb and pluginPresent.TMDb and config.AdvancedMovieSelection.Eventinfotyp.value == "Ei":
             self.showConfirmedInfo([None, "Ei"])
-        elif IMDbPresent and OFDbPresent and TMDbPresent and config.AdvancedMovieSelection.Eventinfotyp.value == "Ti":
+        elif pluginPresent.IMDb and pluginPresent.OFDb and pluginPresent.TMDb and config.AdvancedMovieSelection.Eventinfotyp.value == "Ti":
             self.showConfirmedInfo([None, "Ti"])
-        elif IMDbPresent and OFDbPresent and TMDbPresent and config.AdvancedMovieSelection.Eventinfotyp.value == "Ii":
+        elif pluginPresent.IMDb and pluginPresent.OFDb and pluginPresent.TMDb and config.AdvancedMovieSelection.Eventinfotyp.value == "Ii":
             self.showConfirmedInfo([None, "Ii"])
-        elif IMDbPresent and OFDbPresent and TMDbPresent and config.AdvancedMovieSelection.Eventinfotyp.value == "Oi":
+        elif pluginPresent.IMDb and pluginPresent.OFDb and pluginPresent.TMDb and config.AdvancedMovieSelection.Eventinfotyp.value == "Oi":
             self.showConfirmedInfo([None, "Oi"])
         else:
-            if IMDbPresent and not OFDbPresent and not TMDbPresent and config.AdvancedMovieSelection.Eventinfotyp2.value == "Ei":
+            if pluginPresent.IMDb and not pluginPresent.OFDb and not pluginPresent.TMDb and config.AdvancedMovieSelection.Eventinfotyp2.value == "Ei":
                 self.showConfirmedInfo([None, "Ei"])
-            elif IMDbPresent and not OFDbPresent and not TMDbPresent and config.AdvancedMovieSelection.Eventinfotyp2.value == "Ii":
+            elif pluginPresent.IMDb and not pluginPresent.OFDb and not pluginPresent.TMDb and config.AdvancedMovieSelection.Eventinfotyp2.value == "Ii":
                 self.showConfirmedInfo([None, "Ii"])
             else:
-                if OFDbPresent and not IMDbPresent and not TMDbPresent and config.AdvancedMovieSelection.Eventinfotyp3.value == "Ei":
+                if pluginPresent.OFDb and not pluginPresent.IMDb and not pluginPresent.TMDb and config.AdvancedMovieSelection.Eventinfotyp3.value == "Ei":
                     self.showConfirmedInfo([None, "Ei"])
-                elif OFDbPresent and not IMDbPresent and not TMDbPresent and config.AdvancedMovieSelection.Eventinfotyp3.value == "Oi":
+                elif pluginPresent.OFDb and not pluginPresent.IMDb and not pluginPresent.TMDb and config.AdvancedMovieSelection.Eventinfotyp3.value == "Oi":
                     self.showConfirmedInfo([None, "Oi"])
                 else:
-                    if TMDbPresent and not OFDbPresent and not IMDbPresent and config.AdvancedMovieSelection.Eventinfotyp4.value == "Ei":
+                    if pluginPresent.TMDb and not pluginPresent.OFDb and not pluginPresent.IMDb and config.AdvancedMovieSelection.Eventinfotyp4.value == "Ei":
                         self.showConfirmedInfo([None, "Ei"])
-                    elif TMDbPresent and not OFDbPresent and not IMDbPresent and config.AdvancedMovieSelection.Eventinfotyp4.value == "Ti":
+                    elif pluginPresent.TMDb and not pluginPresent.OFDb and not pluginPresent.IMDb and config.AdvancedMovieSelection.Eventinfotyp4.value == "Ti":
                         self.showConfirmedInfo([None, "Ti"])
                     else:
-                        if TMDbPresent and not OFDbPresent and IMDbPresent and config.AdvancedMovieSelection.Eventinfotyp5.value == "Ei":
+                        if pluginPresent.TMDb and not pluginPresent.OFDb and pluginPresent.IMDb and config.AdvancedMovieSelection.Eventinfotyp5.value == "Ei":
                             self.showConfirmedInfo([None, "Ei"])
-                        elif TMDbPresent and not OFDbPresent and IMDbPresent and config.AdvancedMovieSelection.Eventinfotyp5.value == "Ti":
+                        elif pluginPresent.TMDb and not pluginPresent.OFDb and pluginPresent.IMDb and config.AdvancedMovieSelection.Eventinfotyp5.value == "Ti":
                             self.showConfirmedInfo([None, "Ti"])
-                        elif TMDbPresent and not OFDbPresent and IMDbPresent and config.AdvancedMovieSelection.Eventinfotyp5.value == "Ii":
+                        elif pluginPresent.TMDb and not pluginPresent.OFDb and pluginPresent.IMDb and config.AdvancedMovieSelection.Eventinfotyp5.value == "Ii":
                             self.showConfirmedInfo([None, "Ii"])
                         else:
-                            if TMDbPresent and OFDbPresent and not IMDbPresent and config.AdvancedMovieSelection.Eventinfotyp6.value == "Ei":
+                            if pluginPresent.TMDb and pluginPresent.OFDb and not pluginPresent.IMDb and config.AdvancedMovieSelection.Eventinfotyp6.value == "Ei":
                                 self.showConfirmedInfo([None, "Ei"])
-                            elif TMDbPresent and OFDbPresent and not IMDbPresent and config.AdvancedMovieSelection.Eventinfotyp6.value == "Ti":
+                            elif pluginPresent.TMDb and pluginPresent.OFDb and not pluginPresent.IMDb and config.AdvancedMovieSelection.Eventinfotyp6.value == "Ti":
                                 self.showConfirmedInfo([None, "Ti"])
-                            elif TMDbPresent and OFDbPresent and not IMDbPresent and config.AdvancedMovieSelection.Eventinfotyp6.value == "Oi":
+                            elif pluginPresent.TMDb and pluginPresent.OFDb and not pluginPresent.IMDb and config.AdvancedMovieSelection.Eventinfotyp6.value == "Oi":
                                 self.showConfirmedInfo([None, "Oi"])
                             else:
-                                if not TMDbPresent and OFDbPresent and IMDbPresent and config.AdvancedMovieSelection.Eventinfotyp7.value == "Ei":
+                                if not pluginPresent.TMDb and pluginPresent.OFDb and pluginPresent.IMDb and config.AdvancedMovieSelection.Eventinfotyp7.value == "Ei":
                                     self.showConfirmedInfo([None, "Ei"])
-                                elif not TMDbPresent and OFDbPresent and IMDbPresent and config.AdvancedMovieSelection.Eventinfotyp7.value == "Ii":
+                                elif not pluginPresent.TMDb and pluginPresent.OFDb and pluginPresent.IMDb and config.AdvancedMovieSelection.Eventinfotyp7.value == "Ii":
                                     self.showConfirmedInfo([None, "Ii"])
-                                elif not TMDbPresent and OFDbPresent and IMDbPresent and config.AdvancedMovieSelection.Eventinfotyp7.value == "Oi":
+                                elif not pluginPresent.TMDb and pluginPresent.OFDb and pluginPresent.IMDb and config.AdvancedMovieSelection.Eventinfotyp7.value == "Oi":
                                     self.showConfirmedInfo([None, "Oi"])
                                 else:
                                     self.showConfirmedInfo([None, "Ei"])
@@ -1057,9 +1056,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
                 self.gotFilename(current.getPath())
             else:
                 self.saveconfig()
-                from plugin import PlayerInstance
+                from MoviePlayer import PlayerInstance
                 if isinstance(current, eServiceReferenceDvd):
-                    from plugin import movieSelected
+                    from MoviePlayer import movieSelected
                     movieSelected(self, current)
                     current = None
                 elif PlayerInstance is not None:
@@ -1097,7 +1096,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         config.AdvancedMovieSelection.show_bookmarks.save()
 
     def showTrailer(self):
-        if YTTrailerPresent == True:
+        if pluginPresent.YTTrailer == True:
             event = self["list"].getCurrentEvent()
             if event is not None:
                 eventname = event.getEventName()
@@ -1108,8 +1107,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
             pass
 
     def getTagDescription(self, tag):
+        from AccessRestriction import accessRestriction
+        if tag.startswith("VSR"):
+            vsr = _("VSR") + "-%d" % (accessRestriction.decodeAccess(tag))
+            return vsr, tag
         # TODO: access the tag database
-        return tag
+        return tag, tag
 
     def updateTags(self):
         # get a list of tags available in this list
@@ -1261,16 +1264,22 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
             self.showAll()
             return
         if tag is not None:
-            self.selected_tags = set([tag[0]])
+            self.selected_tags = set([tag[1]])
             if self.selected_tags_ele:
-                self.selected_tags_ele.value = tag[0]
+                self.selected_tags_ele.value = tag[1]
                 self.selected_tags_ele.save()
             self.reloadList(home=True)
 
     def showTagsMenu(self, tagele):
         self.selected_tags_ele = tagele
-        list = [(tag, self.getTagDescription(tag)) for tag in self.tags ]
-        self.session.openWithCallback(self.tagChosen, ChoiceBox, title=_("Please select tag to filter..."), list=list)
+        list = [(self.getTagDescription(tag)) for tag in self.tags ]
+        selection = 0
+        current = self.selected_tags and "".join(self.selected_tags)
+        for index, item in enumerate(list):
+            if item[1] == current:
+                selection = index
+                break
+        self.session.openWithCallback(self.tagChosen, ChoiceBox, title=_("Please select tag to filter..."), list=list, selection=selection)
 
     def showTagWarning(self):
         self.session.open(MessageBox, _("No tags are set on these movies."), MessageBox.TYPE_ERROR)
@@ -1282,16 +1291,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
 class MoviebarPositionSetupText(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
-        try:
-            sz_w = getDesktop(0).size().width()
-        except:
-            sz_w = 720
-        if sz_w == 1280:
-            self.skinName = ["AdvancedMovieSelectionMoviebarPositionSetupHD"]
-        elif sz_w == 1024:
-            self.skinName = ["AdvancedMovieSelectionMoviebarPositionSetupXD"]
-        else:
-            self.skinName = ["AdvancedMovieSelectionMoviebarPositionSetupSD"] 
+        self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionMoviebarPositionSetup")
         self["howtotext"] = StaticText(_("Use direction keys to move the Moviebar.\nPress OK button for save or the EXIT button to cancel.\nUse the red button for reset to the original position."))
 
 class MoviebarPositionSetup(Screen):

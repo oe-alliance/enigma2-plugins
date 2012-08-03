@@ -23,11 +23,11 @@ from __init__ import _
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
-from enigma import getDesktop
 from Components.config import config
 from ServiceProvider import ServiceEvent
 from Components.ScrollLabel import ScrollLabel
 from MoviePreview import MoviePreview
+from Globals import SkinTools
 
 class EventViewBase:    
     def __init__(self, event, ref, callback=None, similarEPGCB=None):
@@ -106,15 +106,6 @@ class EventViewBase:
 class EventViewSimple(Screen, EventViewBase, MoviePreview):
     def __init__(self, session, event, ref, callback=None, similarEPGCB=None):
         Screen.__init__(self, session)
-        try:
-            sz_w = getDesktop(0).size().width()
-        except:
-            sz_w = 720
-        if sz_w == 1280:
-            self.skinName = ["AdvancedMovieSelectionEventViewHD"]
-        elif sz_w == 1024:
-            self.skinName = ["AdvancedMovieSelectionEventViewXD"]
-        else:
-            self.skinName = ["AdvancedMovieSelectionEventViewSD"]
+        self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionEventView")
         EventViewBase.__init__(self, event, ref, callback, similarEPGCB)
         MoviePreview.__init__(self, session)

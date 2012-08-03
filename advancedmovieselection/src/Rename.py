@@ -26,27 +26,19 @@ from Components.config import ConfigText, getConfigListEntry
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
-from enigma import eServiceReference, iServiceInformation, getDesktop, ePoint
+from enigma import eServiceReference, iServiceInformation, ePoint
 from ServiceProvider import ServiceCenter
 import os
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from MovieList import eServiceReferenceVDir
 from ServiceProvider import MovieConfig
+from Globals import SkinTools
 
 class MovieRetitle(Screen, ConfigListScreen):
     def __init__(self, session, service):
         Screen.__init__(self, session)
-        try:
-            sz_w = getDesktop(0).size().width()
-        except:
-            sz_w = 720
-        if sz_w == 1280:
-            self.skinName = ["AdvancedMovieSelection_Rename_HD"]
-        elif sz_w == 1024:
-            self.skinName = ["AdvancedMovieSelection_Rename_XD"]
-        else:
-            self.skinName = ["AdvancedMovieSelection_Rename_SD"]
+        self.skinName = SkinTools.appendResolution("AdvancedMovieSelection_Rename_")
         self.service = service
         self.movieConfig = MovieConfig()
         self.is_vdir = isinstance(service, eServiceReferenceVDir)
