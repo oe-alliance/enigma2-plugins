@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 #  AutomaticCleanup E2
 #
@@ -63,7 +63,7 @@ from Screens.Setup import SetupSummary
 
 
 ###############################################################################        
-VERSION = "0.1.8"
+VERSION = "0.1.9"
 # History:
 # 0.1.2 First public version
 # 0.1.3 Prevention of timerlist cleanup if duplicated with EMC plugin
@@ -79,6 +79,8 @@ VERSION = "0.1.8"
 # 0.1.6 Fix crash if settings backup file date ends with "2"
 # 0.1.7 Cleanup of orphaned movie files modified to support EMC v3
 # 0.1.8 Performance improvement: avoid duplicate cleanup of orphaned movie files if EMC movie_homepath is same as E2 moviePath
+# 0.1.9	Remove orphaned files in movie path marked for E2 smooth deletion (during session start only, to avoid conflicting E2)
+#		Simplify translation code: Setting the os LANGUAGE variable isn't needed anymore
 ###############################################################################  
 pluginPrintname = "[AutomaticCleanup Ver. %s]" %VERSION
 DEBUG = False # If set True, plugin won't remove any file physically, instead prints file names in log for verification purposes
@@ -219,14 +221,20 @@ class AutomaticCleanupSetup(Screen, ConfigListScreen): # config
 
 
 class AutomaticCleanup:
-        checkInterval = 60 * 60 * 24 # check timerlist every 24 hours
+	if DEBUG:
+		checkInterval = 60 * 3 # check timerlist every 3 minutes
+	else:
+		checkInterval = 60 * 60 * 24 # check timerlist every 24 hours
+
 	def __init__(self, session):
 		self.session = session
 		if DEBUG: print pluginPrintname, "Starting in debugging mode..."
 		else: print pluginPrintname, "Starting AutomaticCleanup..."
 		self.timer = eTimer() # check timer
 		self.timer.callback.append(self.doCleanup)
+		self.initialState = True
 		self.doCleanup() # always check immediately after starting plugin
+		self.initialState = False
 		config.plugins.AutomaticCleanup.deleteSettingsOlderThan.addNotifier(self.configChange, initial_call = False)
 		config.plugins.AutomaticCleanup.keepSettings.addNotifier(self.configChange, initial_call = False)
 		config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.addNotifier(self.configChange, initial_call = False)
@@ -414,7 +422,11 @@ class AutomaticCleanup:
 		if scanPath.startswith("/hdd"): scanPath = "/media" + scanPath
 		if not path.exists(scanPath) or scanPath in exclude: return
 		if DEBUG: print pluginPrintname, "Checking moviepath:", scanPath
-		extensions = [".ts.ap", ".ts.cuts", ".ts.cutsr", ".ts.gm", ".ts.meta", ".ts.sc", ".eit", ".png", ".ts_mp.jpg"]
+
+		if self.initialState: 
+			extensions =[".ts.ap", ".ts.cuts", ".ts.cutsr", ".ts.gm", ".ts.meta", ".ts.sc", ".eit", ".png", ".ts_mp.jpg", ".ts.del", ".ts.ap.del", ".ts.cuts.del", ".ts.cutsr.del", ".ts.gm.del", ".ts.meta.del", ".ts.sc.del", ".eit.del"] # include orphaned files marked for E2 smooth deletion
+		else:
+			extensions = [".ts.ap", ".ts.cuts", ".ts.cutsr", ".ts.gm", ".ts.meta", ".ts.sc", ".eit", ".png", ".ts_mp.jpg"]
 
 		for p in listdir(scanPath):
 			if path.isdir(scanPath + p):
@@ -424,11 +436,11 @@ class AutomaticCleanup:
 				for ext in extensions:
 					if p.endswith(ext):
 						if not path.exists(scanPath + p.replace(ext, ".ts")):							
-							if not DEBUG:
+							if DEBUG:
+								print pluginPrintname, "Deletable orphaned movie file:", scanPath + p
+							else:
 								remove(scanPath + p)
 								print pluginPrintname, "Orphaned movie file deleted:", scanPath + p
-							else:
-								print pluginPrintname, "Deletable orphaned movie file:", scanPath + p
 						break
 
 	def cleanupEnabled(self):
