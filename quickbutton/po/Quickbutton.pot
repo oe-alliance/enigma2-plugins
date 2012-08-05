@@ -103,3 +103,6 @@ msgstr ""
 
 msgid "switch 4:3 content display"
 msgstr ""
+
+msgid "Overwrite HBBTV-red-button"
+msgstr ""

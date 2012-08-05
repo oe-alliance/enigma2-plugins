@@ -61,11 +61,11 @@ from Screens.Setup import SetupSummary
 
 
 ###############################################################################        
-VERSION = "0.5"
+VERSION = "0.6"
 # History:
 # 0.4 First public version
 # 0.5 Minor code optimization
-
+# 0.6 Simplify translation code: Setting the os LANGUAGE variable isn't needed anymore
 pluginPrintname = "[ShowClock Ver. %s]" %VERSION
 debug = False # If set True, plugin will print some additional status info to track logic flow
 ###############################################################################
