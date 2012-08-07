@@ -128,3 +128,6 @@ msgstr ""
 #: ../src/plugin.py:136 ../src/plugin.py:193 ../src/plugin.py:240
 msgid "switch 4:3 content display"
 msgstr ""
+
+msgid "Overwrite HBBTV-red-button"
+msgstr ""

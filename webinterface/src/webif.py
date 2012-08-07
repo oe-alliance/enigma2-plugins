@@ -528,22 +528,23 @@ def renderPage(request, path, session):
 		requestFinish(handler, request)
 
 	else:
-		def requestFinishDeferred(nothing, handler, request):
+		def _requestFinishDeferred(nothing, handler, request):
 			from twisted.internet import reactor
-			reactor.callLater(0, requestFinish, handler, request)
+			reactor.callLater(0, requestFinish, handler, request, requestAlreadyFinished=True)
 
 		d = request.notifyFinish()
 
-		d.addBoth( requestFinishDeferred, handler, request )
+		d.addBoth( _requestFinishDeferred, handler, request )
 
 #===============================================================================
 # requestFinish
 #
 # This has to be/is called at the end of every ScreenPage-based Request
 #===============================================================================
-def requestFinish(handler, request):
+def requestFinish(handler, request, requestAlreadyFinished = False):
 	handler.cleanup()
-	request.finish()
+	if not requestAlreadyFinished:
+		request.finish()
 
 	del handler
 

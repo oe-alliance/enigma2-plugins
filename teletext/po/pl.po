@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: TeleText\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-29 20:14+0100\n"
-"PO-Revision-Date: 2012-06-11 19:21+0100\n"
+"PO-Revision-Date: 2012-07-19 12:23+0100\n"
 "Last-Translator: Sebastian <zbigzbig2@wp.pl>\n"
 "Language-Team: Andreas Laux <lespuck@web.de>\n"
 "Language: \n"
@@ -65,6 +65,9 @@ msgstr "Wpisz wartości (lewo, góra, prawo, dół) lub wciśnij TEXT aby przesu
 msgid "Hebrew / Arabic"
 msgstr "Hebrajski / Arabski"
 
+msgid "If caching is disabled, each teletext page will searched when you entered its number."
+msgstr "Gdy cache jest wyłączony, każda strona będzie otwierana gdy wpiszesz jej numer"
+
 msgid "Message"
 msgstr "Wiadomość"
 
@@ -97,6 +100,9 @@ msgstr "Wybierz kontrast"
 
 msgid "Select splitting mode."
 msgstr "Wybierz tryb podzielony"
+
+msgid "Select teletext"
+msgstr "Wybierz teletekst"
 
 msgid "Select teletext version to use."
 msgstr "Wybierz wersję teletekstu do użycia"
@@ -173,6 +179,9 @@ msgstr "Wyjdź"
 msgid "green teletext link"
 msgstr "Zielony link teletekstu"
 
+msgid "next channel / channel list"
+msgstr "nast. serwis / lista serwisów"
+
 msgid "next page / catch page / move"
 msgstr "Następna strona / przechwycona / przesuń"
 
@@ -181,6 +190,9 @@ msgstr "Następna podstrona / przesuń"
 
 msgid "picture and teletext"
 msgstr "Obraz i teletekst"
+
+msgid "prev channel / channel list"
+msgstr "poprz. serwis / lista serwisów"
 
 msgid "prev page / catch page / move"
 msgstr "Poprzednia strona / przechwycona / przesuń"

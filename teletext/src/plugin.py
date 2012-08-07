@@ -9,11 +9,13 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
+from Components.MenuList import MenuList 
 from Components.Pixmap import Pixmap
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigEnableDisable, ConfigSlider, ConfigSelection, ConfigSequence
 from GlobalActions import globalActionMap
 from Plugins.Plugin import PluginDescriptor
+from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 import array
@@ -27,6 +29,10 @@ from select import POLLIN, POLLPRI, POLLHUP, POLLERR
 
 from enigma import Teletext as TeletextInterface
 from enigma import DISABLED, BILINEAR, ANISOTROPIC, SHARP, SHARPER, BLURRY, ANTI_FLUTTER, ANTI_FLUTTER_BLURRY, ANTI_FLUTTER_SHARP
+
+from ConfigParser import ConfigParser, DuplicateSectionError 
+
+PLUGIN_VERSION="20120730"
 
 CMD_CTL_CACHE=1
 CMD_SHOW_PAGE=2
@@ -69,7 +75,6 @@ HELP_TEXT_BRIGHTNESS   = _("Select brightness.")
 HELP_TEXT_CONTRAST     = _("Select contrast.")
 HELP_TEXT_TRANSPARENCY = _("Select transparency.")
 HELP_TEXT_EDGE_CUT     = _("Display first and last row.")
-HELP_TEXT_MESSAGES     = _("Show message if no teletext available or exit silently.")
 HELP_TEXT_DEBUG        = _("Print debug messages to /tmp/dbttcp.log.")
 HELP_TEXT_TEXTLEVEL    = _("Select teletext version to use.")
 HELP_TEXT_REGION       = _("Select your region to use the proper font.")
@@ -87,19 +92,25 @@ NAV_MODE_TEXT          = 0
 NAV_MODE_SIZE_TEXT     = 1
 NAV_MODE_SIZE_TIP_TEXT = 2
 
+# i.d.R. bezeichnet man 90% der vollen Aufloesung als "Title-Safe-Area" --> Default
+
+DEF_TOP    = dsk_height / 20
+DEF_LEFT   = dsk_width / 20
+DEF_RIGHT  = dsk_width - DEF_LEFT
+DEF_BOTTOM = dsk_height - DEF_TOP
+
 config.plugins.TeleText = ConfigSubsection()
 config.plugins.TeleText.scale_filter = ConfigSelection(filterList, default="%d"%BILINEAR)
 config.plugins.TeleText.scale_filter_zoom = ConfigSelection(filterList, default="%d"%BILINEAR)
 config.plugins.TeleText.brightness   = ConfigSlider(default=8,  increment=1, limits=(0,15))
 config.plugins.TeleText.contrast     = ConfigSlider(default=12, increment=1, limits=(0,15))
 config.plugins.TeleText.transparency = ConfigSlider(default=8,  increment=1, limits=(0,15))
-config.plugins.TeleText.messages = ConfigEnableDisable(default=True)
 config.plugins.TeleText.edge_cut = ConfigEnableDisable(default=False)
 config.plugins.TeleText.splitting_mode = ConfigSelection(splittingModeList, default=SPLIT_MODE_PAT)
 config.plugins.TeleText.textlevel      = ConfigSelection(textlevelModeList, default="2")
 config.plugins.TeleText.region   = ConfigSelection(regionList, default="16")
 config.plugins.TeleText.debug    = ConfigEnableDisable(default=False)
-config.plugins.TeleText.pos      = ConfigSequence(default=[0, 0, dsk_width, dsk_height], seperator = ",", limits = [(0,dsk_width>>3),(0,dsk_height>>3),(dsk_width-(dsk_width>>3),dsk_width),(dsk_height-(dsk_height>>3),dsk_height)])
+config.plugins.TeleText.pos      = ConfigSequence(default=[DEF_LEFT, DEF_TOP, DEF_RIGHT, DEF_BOTTOM], seperator = ",", limits = [(0,dsk_width>>3),(0,dsk_height>>3),(dsk_width-(dsk_width>>3),dsk_width),(dsk_height-(dsk_height>>3),dsk_height)])
 config.plugins.TeleText.tip_pos  = ConfigSequence(default=[(dsk_width>>1)+(dsk_width>>2), (dsk_height>>1)+(dsk_height>>2), dsk_width, dsk_height], seperator = ",", limits = [(0,dsk_width-MIN_W),(0,dsk_height-MIN_H),(MIN_W,dsk_width),(MIN_H,dsk_height)])
 # state
 config.plugins.TeleText.textOnly = ConfigEnableDisable(default=True)
@@ -112,6 +123,8 @@ def log(message):
   _log(message)
   if config.plugins.TeleText.debug.value:
     _debug(message)
+
+# ----------------------------------------
 
 class TeleText(Screen):
 
@@ -132,6 +145,7 @@ class TeleText(Screen):
   txtpid_origin = -1
   cur_page = "100-00/00"
   daemonVersion = "0.0"
+  favorites = None
 
   onChangedEntry = [ ]
 
@@ -201,7 +215,7 @@ class TeleText(Screen):
 #    self.helpList.append((self["actions"], "TeleTextActions", [("volUp",_("increase width"))]))
 #    self.helpList.append((self["actions"], "TeleTextActions", [("volDown",_("decrease width"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("nextBouquet",_("zoom / increase height"))]))
-    self.helpList.append((self["actions"], "TeleTextActions", [("prevBouquet",_("decrease height"))]))
+    self.helpList.append((self["actions"], "TeleTextActions", [("prevBouquet",_("favorites / decrease height"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("info", _("toggle info"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("menu", _("teletext settings"))]))
     self.helpList.append((self["actions"], "TeleTextActions", [("up", _("next page / catch page / move"))]))
@@ -220,6 +234,8 @@ class TeleText(Screen):
 
     self.inMenu = False
     self.connected = False
+
+    self.favorites = TeleTextFavorites()
 
     self.ttx = TeletextInterface()
 
@@ -312,7 +328,7 @@ class TeleText(Screen):
     log("framebuffer offset is %08x stride is %08x" % (renderOffset, stride))
     x = array.array('B', (CMD_RQ_UPDATE, 1, (renderOffset&0xFF000000)>>24, (renderOffset&0xFF0000)>>16, (renderOffset&0xFF00)>>8, renderOffset&0xFF, (stride&0xFF00) >> 8, stride&0xFF))
     self.socketSend(x)
-    
+
     # get daemon version
     self.getDaemonVersion()
 
@@ -341,7 +357,12 @@ class TeleText(Screen):
           self.zoom = TeletextInterface.MODE_UPPER_HALF
         x.append(CMD_RZAP_PAGE)
       elif number == 9:
-        x.fromlist([CMD_SHOW_PAGE, 1, 0, 0])
+        page = self.fav_list[self.fav_index]
+        if self.fav_index == len(self.fav_list)-1:
+          self.fav_index = 0
+        else:
+          self.fav_index = self.fav_index + 1
+        x.fromlist([CMD_SHOW_PAGE, page/100, (((page%100)/10)<<4) + (page%10), 0])
       else:
         x.fromlist([CMD_PAGEINPUT, number])
         self.pageInput = (self.pageInput + 1) % 3
@@ -452,15 +473,22 @@ class TeleText(Screen):
     self.updateLayout()
 
   def prevBouquetPressed(self):
+    log("bouqet- pressed")
     if self.nav_mode == NAV_MODE_TEXT:
-      return
-    log("bouquet- pressed")
-    if self.nav_pos[3] > (self.nav_pos[1] + MIN_H):
-      if self.nav_pos[3] > self.nav_config.limits[3][0]:
-        self.nav_pos[3] = self.nav_pos[3] - 1
-      elif self.nav_pos[1] < self.nav_config.limits[1][1]:
-        self.nav_pos[1] = self.nav_pos[1] + 1
-      self.updateLayout()
+      if self.catchPage or self.pageInput != 0:
+        return
+      # open favorites
+      if len(self.pid_list) > 0:
+        self.inMenu = True
+        self.session.openWithCallback(self.favoritesResult, TeleTextFavoritesMenu, parent = self, service = self.pid_list[self.pid_index], page = self.cur_page.split("-",1)[0], favorites = self.favorites)
+    else:
+      # position setup
+      if self.nav_pos[3] > (self.nav_pos[1] + MIN_H):
+        if self.nav_pos[3] > self.nav_config.limits[3][0]:
+          self.nav_pos[3] = self.nav_pos[3] - 1
+        elif self.nav_pos[1] < self.nav_config.limits[1][1]:
+          self.nav_pos[1] = self.nav_pos[1] + 1
+        self.updateLayout()
 
   def volumeUpPressed(self):
     if self.nav_mode == NAV_MODE_TEXT:
@@ -612,6 +640,20 @@ class TeleText(Screen):
       config.plugins.TeleText.textOnly.value = False
       config.plugins.TeleText.textOnly.value = SPLIT_MODE_TIP
     self.updateLayout()
+
+  def favoritesResult(self, result):
+    # read favorites
+    self.readFavorites()
+
+    self.inMenu = False
+    self.updateLayout()
+    if result is None:
+      return
+
+    # open favorite page
+    x = array.array('B')
+    x.fromlist([CMD_SHOW_PAGE, result/100, (((result%100)/10)<<4) + (result%10), 0])
+    self.socketSend(x)
 
   def updateLayout(self):
     if self.nav_mode == NAV_MODE_TEXT:
@@ -867,15 +909,13 @@ class TeleText(Screen):
     stream = service and service.stream()
     demux = stream and stream.getStreamingData()
     self.demux = demux and demux.get("demux", -1)
-
     log("TXT PID %s DEMUX %s" % (self.txtpid, self.demux))
-    self.switchChannel(do_send)
 
     # read all txtpids and channels from transponder
     cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+    self.pid_index = 0
     if cur_ref is None:
-      self.channel_and_txt_pid = []
-      self.pid_index = 0
+      self.pid_list = []
     else:
       pos = service_types_tv.rfind(':')
       refstr = '%s (channelID == %08x%04x%04x) && %s ORDER BY name' % (service_types_tv[:pos+1],
@@ -885,6 +925,7 @@ class TeleText(Screen):
           service_types_tv[pos+1:])
       ref = eServiceReference(refstr)
       self.pid_list = self.ttx.getTextPidsAndName(ref)
+    log("transponder: %s" % self.pid_list)
 
     i = 0
     available = 0
@@ -896,16 +937,36 @@ class TeleText(Screen):
       i = i + 1
     self.pid_count = available
 
-    log("transponder: %s" % self.pid_list)
+    self.switchChannel(do_send)
 
   def switchChannel(self, do_send = True):
     if self.demux > -1 and self.txtpid > -1 and do_send:
       x = array.array('B', (CMD_CTL_CACHE, (self.txtpid & 0xFF00) >> 8, (self.txtpid & 0xFF), self.demux))
       self.socketSend(x)
+      
+    # read favorites
+    self.readFavorites()
 
-  def showMessages(self):
-    return config.plugins.TeleText.messages.value
-
+  def readFavorites(self):
+    self.fav_index = 0
+    self.fav_list = []
+    hasStart = False
+    log("pid_list: %s" % self.pid_list)
+    log("pid_index: %s" % self.pid_index)
+    if len(self.pid_list) > 0:
+      service = self.pid_list[self.pid_index]
+      log("get favorites of service %s [%s]"%(service[1], service[0]))
+      for i in range(10):
+        text = self.favorites.getFavorite(service[0], i)
+        if text is not None:
+          page = int(text[0])
+          self.fav_list.append(page)
+          if page == 100:
+            hasStart = True
+    if hasStart == False:
+      self.fav_list.append(100)
+    log("favorites: %s" % self.fav_list)
+  
   # ---- for summary (lcd) ----
 
   def createSummary(self):
@@ -1156,21 +1217,21 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
   def __init__(self, session, parent):
     width = 492
-    height = 480
+    height = 460
     left = (dsk_width - width)>>1
     top = (dsk_height - height)>>1
     log("[menu] screen rect %s %s %s %s" % (left, top, width, height))
     TeleTextMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s">
-        <widget name="config" position="0,0"   size="492,355" scrollbarMode="showOnDemand" zPosition="1"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,358" zPosition="1" size="492,2" />
-        <widget name="label"  position="0,360" size="492,70" font="Regular;16" zPosition="1" halign="left" valign="top"/>
-        <ePixmap pixmap="skin_default/div-h.png" position="0,435" zPosition="1" size="492,2" />
-        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,440"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/green.png"  position="176,440" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <ePixmap pixmap="skin_default/buttons/yellow.png" position="352,440" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-        <widget name="key_r" position="0,440"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget name="key_g" position="176,440" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <widget name="key_y" position="352,440" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="config" position="0,0"   size="492,335" scrollbarMode="showOnDemand" zPosition="1"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,338" zPosition="1" size="492,2" />
+        <widget name="label"  position="0,340" size="492,70" font="Regular;16" zPosition="1" halign="left" valign="top"/>
+        <ePixmap pixmap="skin_default/div-h.png" position="0,415" zPosition="1" size="492,2" />
+        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,420"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/green.png"  position="176,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/yellow.png" position="352,420" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <widget name="key_r" position="0,420"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_g" position="176,420" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_y" position="352,420" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
       </screen>""" % (left, top, width, height, _("TeleText settings"))
 
     Screen.__init__(self, session, parent)
@@ -1219,8 +1280,6 @@ class TeleTextMenu(ConfigListScreen, Screen):
       self["label"].setText(HELP_TEXT_SPLITTING)
     elif configele == config.plugins.TeleText.tip_pos:
       self["label"].setText(HELP_TEXT_TIP_POS)
-    elif configele == config.plugins.TeleText.messages:
-      self["label"].setText(HELP_TEXT_MESSAGES)
     elif configele == config.plugins.TeleText.debug:
       self["label"].setText(HELP_TEXT_DEBUG)
     elif configele == config.plugins.TeleText.edge_cut:
@@ -1263,7 +1322,6 @@ class TeleTextMenu(ConfigListScreen, Screen):
     if config.plugins.TeleText.splitting_mode.value == SPLIT_MODE_TIP:
       self.list.append(getConfigListEntry("... %s" % _("Position and size"),   config.plugins.TeleText.tip_pos))
     self.list.append(getConfigListEntry(_("Background caching"),config.plugins.TeleText.background_caching))
-    self.list.append(getConfigListEntry(_("Message"), config.plugins.TeleText.messages))
     self.list.append(getConfigListEntry(_("Debug"),   config.plugins.TeleText.debug))
 
     self["config"].list = self.list
@@ -1283,20 +1341,19 @@ class TeleTextMenu(ConfigListScreen, Screen):
     config.plugins.TeleText.brightness.setValue(8)
     config.plugins.TeleText.contrast.setValue(12)
     config.plugins.TeleText.transparency.setValue(8)
-    config.plugins.TeleText.messages.setValue(True)
     config.plugins.TeleText.edge_cut.setValue(False)
     config.plugins.TeleText.splitting_mode.setValue(SPLIT_MODE_PAT)
     config.plugins.TeleText.textlevel.setValue("2")
     config.plugins.TeleText.region.setValue("16")
     config.plugins.TeleText.debug.setValue(False)
-    config.plugins.TeleText.pos.setValue([0, 0, dsk_width, dsk_height])
+    config.plugins.TeleText.pos.setValue([DEF_LEFT, DEF_TOP, DEF_RIGHT, DEF_BOTTOM])
     config.plugins.TeleText.tip_pos.setValue([(dsk_width>>1)+(dsk_width>>2), (dsk_height>>1)+(dsk_height>>2), dsk_width, dsk_height])
     config.plugins.TeleText.background_caching.setValue(True)
     self["config"].selectionChanged()
 
   def infoPressed(self):
     log("[menu] info pressed")
-    self.session.open(MessageBox, "Daemon Version: %s" % self.parent.daemonVersion, MessageBox.TYPE_INFO, timeout = 15)
+    self.session.open(TeleTextAboutScreen, self.parent.daemonVersion)
 
   def textPressed(self):
     log("[menu] text pressed")
@@ -1382,6 +1439,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
 # ----------------------------------------
 
 class TeleTextMenuSummary(Screen):
+
   skin = ("""<screen name="TeleTextMenuSummary" position="0,0" size="132,64" id="1">
       <widget name="SetupTitle" position="6,4"  size="120,20" font="Regular;20" halign="center"/>
       <widget name="SetupEntry" position="6,30" size="120,12" font="Regular;12" halign="left"/>
@@ -1416,6 +1474,345 @@ class TeleTextMenuSummary(Screen):
 
 # ----------------------------------------
 
+class TeleTextAboutScreen(Screen):
+
+  daemonVersion = "0.1"
+
+  def __init__(self, session, dVersion):
+    self.daemonVersion = dVersion
+
+    width = 360
+    height = 240
+    left = (dsk_width - width)>>1
+    top = (dsk_height - height)>>1
+    log("[about] screen rect %s %s %s %s" % (left, top, width, height))
+    TeleTextAboutScreen.skin = """<screen position="%d,%d" size="%d,%d" flags="wfNoBorder">
+        <widget name="pic"    position="0,0"    size="360,240" zPosition="1" pixmap="%s" alphatest="on"/>
+        <widget name="text"   position="12,16"  size="336,36"  zPosition="2" font="Console;36" halign="center" backgroundColor="blue"  foregroundColor="white" />
+        <widget name="daemon" position="12,64"  size="336,24"  zPosition="2" font="Console;20" halign="left"   backgroundColor="white" foregroundColor="black" />
+        <widget name="plugin" position="12,200" size="336,24"  zPosition="2" font="Console;20" halign="right"  backgroundColor="white" foregroundColor="black" />
+      </screen>""" % (left, top, width, height, resolveFilename(SCOPE_PLUGINS, "Extensions/TeleText/teletext.png"))
+
+    Screen.__init__(self, session)
+
+    self["actions"] = ActionMap(["OkCancelActions"],
+    {
+      "ok"     : self.okPressed,
+      "cancel" : self.cancelPressed
+    }, -2)
+    self["actions"].setEnabled(True)
+
+    self["pic"] = Pixmap()
+    self["text"] = Label("TeleText")
+    self["daemon"] = Label("Daemon v%s" % self.daemonVersion)
+    self["plugin"] = Label("Plugin v%s" % PLUGIN_VERSION)
+
+  def okPressed(self):
+    log("[about] ok pressed")
+    self.close(None)
+
+  def cancelPressed(self):
+    log("[about] cancel pressed")
+    self.close(None)
+
+  # ---- for summary (lcd) ----
+
+  def getDaemonVersion(self):
+    return self.daemonVersion
+
+  def createSummary(self):
+    return TeleTextAboutSummary
+
+# ----------------------------------------
+
+class TeleTextAboutSummary(Screen):
+
+  skin = ("""<screen name="TeleTextAboutSummary" position="0,0" size="132,64" id="1">
+      <widget name="title"  position="6,4"  size="120,24" font="Regular;20" halign="center"/>
+      <widget name="daemon" position="6,30" size="120,16" font="Regular;12" halign="left"/>
+      <widget name="plugin" position="6,48" size="120,16" font="Regular;12" halign="left"/>
+    </screen>""",
+    """<screen name="TeleTextAboutSummary" position="0,0" size="96,64" id="2">
+      <widget name="title"  position="3,4"  size="90,20" font="Regular;20" halign="center"/>
+      <widget name="daemon" position="3,30" size="90,16" font="Regular;12" halign="left"/>
+      <widget name="plugin" position="3,48" size="90,16" font="Regular;12" halign="left"/>
+    </screen>""")
+
+  def __init__(self, session, parent):
+    Screen.__init__(self, session, parent = parent)
+    self["title"] = Label("TeleText")
+    self["daemon"] = Label("Daemon v%s" % parent.getDaemonVersion())
+    self["plugin"] = Label("Plugin v%s" % PLUGIN_VERSION)
+
+# ----------------------------------------
+
+class TeleTextFavorites():
+
+  configFile = "/etc/enigma2/teletext.fav"
+
+  def __init__(self):
+    log("[favorites] reading")
+    self.parser = ConfigParser()
+    self.parser.read(self.configFile)
+
+  def write(self):
+    log("[favorites] writing")
+    fp = open(self.configFile,"w")
+    self.parser.write(fp)
+    fp.close()   
+
+  def getFavorite(self, service, index):
+    index = str(index)
+    if self.parser.has_option(service, index) is False:
+      return None
+    return self.parser.get(service, index).split(";",1)
+
+  def getFavorites(self, service):
+    result = []
+    if self.parser.has_section(service) is True:
+      for x in self.parser.options(service):
+        result.append(self.getFavorite(service, x))
+    return result
+
+  def setFavorite(self, service, index, page, text):
+    index = str(index)
+    page = str(page)
+    if self.parser.has_section(service) is False:
+      self.parser.add_section(service)
+    self.parser.set(service, index, "%s;%s" % (page, text))
+
+  def removeFavorite(self, service, index):
+    index = str(index)
+    self.parser.remove_option(service, index)
+    if len(self.parser.options(service)) == 0:
+      self.parser.remove_section(service)
+
+  def removeService(self, service):
+    self.parser.remove_section(service)
+
+# ----------------------------------------
+
+class TeleTextFavoritesMenu(Screen):
+
+  onChangedEntry = [ ]
+
+  def __init__(self, session, parent, service, page, favorites):
+    width = 590
+    height = 300
+    left = (dsk_width - width)>>1
+    top = (dsk_height - height)>>1
+    log("[fav-menu] screen rect %s %s %s %s" % (left, top, width, height))
+    TeleTextFavoritesMenu.skin = """<screen position="%d,%d" size="%d,%d" title="%s [%s]">
+        <ePixmap pixmap="skin_default/buttons/key_1.png" position="0,0"   zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_2.png" position="0,25"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_3.png" position="0,50"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_4.png" position="0,75"  zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_5.png" position="0,100" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_6.png" position="0,125" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_7.png" position="0,150" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_8.png" position="0,175" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_9.png" position="0,200" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <ePixmap pixmap="skin_default/buttons/key_0.png" position="0,225" zPosition="1" size="35,25" transparent="1" alphatest="on"/>
+        <widget name="fav_list" position="40,0"   size="550,250" zPosition="1"/>
+
+        <ePixmap pixmap="skin_default/div-h.png" position="0,255" zPosition="1" size="590,2"/>
+
+        <ePixmap pixmap="skin_default/buttons/red.png"    position="0,260"   zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/green.png"  position="150,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/yellow.png" position="300,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <ePixmap pixmap="skin_default/buttons/blue.png"   position="450,260" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+        <widget name="key_r" position="0,260"   size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_g" position="150,260" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_y" position="300,260" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <widget name="key_b" position="450,260" size="140,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+      </screen>""" % (left, top, width, height, _("TeleText favorites"), service[1])
+
+    self.service = service[0]
+    self.page = page
+    self.favorites = favorites
+
+    Screen.__init__(self, session, parent)
+    self["fav_list"] = MenuList([], enableWrapAround = True)
+    self["fav_list"].onSelectionChanged.append(self.updateLayout)
+
+    self["actions"] = NumberActionMap(["OkCancelActions", "TeleTextActions"],
+    {
+      "1"      : self.keyNumberGlobal,
+      "2"      : self.keyNumberGlobal,
+      "3"      : self.keyNumberGlobal,
+      "4"      : self.keyNumberGlobal,
+      "5"      : self.keyNumberGlobal,
+      "6"      : self.keyNumberGlobal,
+      "7"      : self.keyNumberGlobal,
+      "8"      : self.keyNumberGlobal,
+      "9"      : self.keyNumberGlobal,
+      "0"      : self.keyNumberGlobal,
+      "ok"     : self.okPressed,
+      "cancel" : self.cancelPressed,
+      "red"    : self.redPressed,
+      "green"  : self.okPressed,
+      "yellow" : self.yellowPressed,
+      "blue"   : self.bluePressed
+    }, -2)
+    self["actions"].setEnabled(True)
+
+    self["key_r"] = Label("")
+    self["key_g"] = Label("")
+    self["key_y"] = Label("")
+    self["key_b"] = Label(_("Clear all"))
+
+    self.updateList()
+    self.updateLayout()
+
+  def keyNumberGlobal(self, number):
+    log("[favorites] %s pressed" % number)
+    if number == 0:
+      index = 9
+    else:
+      index = number - 1
+
+    if self.pages[index] != -1:
+      self.close(self.pages[index])
+
+  def updateList(self):
+    list = []
+    self.pages = []
+
+    while len(list) < 10:
+      text = self.favorites.getFavorite(self.service, len(list))
+      if text is None:
+        self.pages.append(-1)
+        list.append(_("<empty>"))
+      else:
+        self.pages.append(int(text[0]))
+        list.append("[%s] %s" % (text[0], text[1]))
+    self["fav_list"].setList(list)
+
+  def updateLayout(self):
+    value = self["fav_list"].getCurrent()
+    self.sel_page = self.pages[self["fav_list"].getSelectedIndex()]
+    if value == _("<empty>"):
+      self["key_r"].setText("")
+      self["key_g"].setText("")
+      self["key_y"].setText(_("Add"))
+    else:
+      self["key_r"].setText(_("Delete"))
+      self["key_g"].setText(_("Select"))
+      self["key_y"].setText(_("Edit"))
+
+    for i in self.onChangedEntry:
+      i()
+
+  def okPressed(self):
+    if self.sel_page != -1:
+      log("[favorites] ok pressed")
+      self.close(self.sel_page)
+
+  def cancelPressed(self):
+    log("[fav-menu] cancel pressed")
+    self.close(None)
+
+  def yellowPressed(self):
+    log("[fav-menu] yellow pressed")
+    page = self.sel_page
+    if page == -1:
+      page = self.page
+    value = self["fav_list"].getCurrent()
+    if value == _("<empty>"):
+      value = ""
+    else:
+      value = value.split(None,1)[1]
+    self.session.openWithCallback(
+      self.addFavorite,
+      NTIVirtualKeyBoard,
+      title = _("Enter text for page %s")%page,
+      text = value
+    )     
+
+  def addFavorite(self, text):
+    if text:
+      page = self.sel_page
+      if page == -1:
+        page = self.page
+      self.favorites.setFavorite(self.service, self["fav_list"].getSelectedIndex(), page, text)
+      self.favorites.write()
+    self.updateList()
+    self.updateLayout()
+
+  def redPressed(self):
+    log("[fav-menu] red pressed")
+    if self.sel_page != -1:
+      self.session.openWithCallback(self.deleteFavorite, MessageBox, _("Delete favorite?"))
+
+  def deleteFavorite(self, result):
+    if result:
+      self.favorites.removeFavorite(self.service, self["fav_list"].getSelectedIndex())
+      self.favorites.write()
+      self.updateList()
+      self.updateLayout()
+
+  def bluePressed(self):
+    log("[fav-menu] blue pressed")
+    self.session.openWithCallback(self.cleanupService, MessageBox, _("Delete all favorites?"))
+
+  def cleanupService(self, result):
+    if result:    
+      self.favorites.removeService(self.service)
+      self.favorites.write()
+      self.updateList()
+      self.updateLayout()
+
+  # ---- for summary (lcd) ----
+
+  def getCurrentPage(self):
+    page = self.sel_page
+    if page == -1:
+      page = ""
+    return str(page)
+
+  def getCurrentValue(self):
+    return self["fav_list"].getCurrent()
+
+  def createSummary(self):
+    return TeleTextFavoritesSummary
+
+# ----------------------------------------
+
+class TeleTextFavoritesSummary(Screen):
+
+  skin = ("""<screen name="TeleTextFavoritesSummary" position="0,0" size="132,64" id="1">
+      <widget name="title"  position="6,4"  size="120,24" font="Regular;20" halign="center"/>
+      <widget name="page"   position="6,30" size="120,16" font="Regular;12" halign="left"/>
+      <widget name="text"   position="6,48" size="120,16" font="Regular;12" halign="left"/>
+    </screen>""",
+    """<screen name="TeleTextFavoritesSummary" position="0,0" size="96,64" id="2">
+      <widget name="title"  position="3,4"  size="90,20" font="Regular;20" halign="center"/>
+      <widget name="page"   position="3,30" size="90,16" font="Regular;12" halign="left"/>
+      <widget name="text"   position="3,48" size="90,16" font="Regular;12" halign="left"/>
+    </screen>""")
+
+  def __init__(self, session, parent):
+    Screen.__init__(self, session, parent = parent)
+    self["title"] = Label(_("TeleText favorites"))
+    self["page"]  = Label()
+    self["text"]  = Label()
+
+    self.onShow.append(self.addWatcher)
+    self.onHide.append(self.removeWatcher)
+
+  def addWatcher(self):
+    self.parent.onChangedEntry.append(self.selectionChanged)
+    self.selectionChanged()
+
+  def removeWatcher(self):
+    self.parent.onChangedEntry.remove(self.selectionChanged)
+
+  def selectionChanged(self):
+    self["page"].setText(self.parent.getCurrentPage())
+    self["text"].setText(self.parent.getCurrentValue())
+
+# ----------------------------------------
+
 def sessionstart(reason, session):
   log("----- sessionstart(%s) -----" % session)
   # Plugin initialisieren
@@ -1439,7 +1836,7 @@ def mainText(session, **kwargs):
   else:
     if len(ttx_screen.pid_list) > 0:
       session.openWithCallback(selectText, TeleTextTransponderMenu, ttx_screen.pid_list, ttx_screen.pid_index)
-    elif ttx_screen.showMessages():
+    else:
       session.open(MessageBox, _("No teletext available."), MessageBox.TYPE_INFO, timeout = 3)
 
 def selectText(result):

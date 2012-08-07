@@ -1,4 +1,3 @@
-
 #  Quickbutton
 #
 #  $Id$
@@ -24,7 +23,7 @@ from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import ConfigSubsection, ConfigText, configfile, ConfigSelection, getConfigListEntry
+from Components.config import ConfigSubsection, ConfigText, configfile, ConfigSelection, getConfigListEntry, ConfigYesNo
 from Components.config import config
 from Components.Button import Button
 from Screens.MessageBox import MessageBox
@@ -33,6 +32,7 @@ from Tools.HardwareInfo import HardwareInfo
 from . import _
 
 config.plugins.Quickbutton = ConfigSubsection()
+config.plugins.Quickbutton.overwritehbbtvredbutton = ConfigYesNo(default = False)
 config.plugins.Quickbutton.red = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 config.plugins.Quickbutton.red_b = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 config.plugins.Quickbutton.green = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
@@ -43,6 +43,13 @@ config.plugins.Quickbutton.blue = ConfigText(default = _("Nothing"), visible_wid
 from  Screens.InfoBarGenerics import InfoBarPlugins
 baseInfoBarPlugins__init__ = None
 ENABLE_RED_BUTTON = False
+
+def getHBBTVInstalled():
+	try:
+		from Plugins.Extensions.Browser.Hbbtv import Hbbtv
+		return True
+	except ImportError:
+		return False
 
 def autostart(reason, **kwargs):
 	global baseInfoBarPlugins__init__,ENABLE_RED_BUTTON
@@ -77,7 +84,12 @@ def InfoBarPlugins__init__(self):
 			"blue_l": (self.bluelong, _("Assign plugin to long blue key pressed"))}
 		if ENABLE_RED_BUTTON:
 			x["red_b"] = (self.red, _("Assign plugin to red key pressed"))
+			hbbtvinstalled = getHBBTVInstalled()
+			if config.plugins.Quickbutton.overwritehbbtvredbutton.value and hbbtvinstalled:
+				self["HbbtvActions"].setEnabled(False)
 		self["QuickbuttonActions"] = HelpableActionMap(self, "QuickbuttonActions",x)
+
+			
 	else:
 		InfoBarPlugins.__init__ = InfoBarPlugins.__init__
 		InfoBarPlugins.greenlong = None
@@ -141,6 +153,17 @@ def startPlugin(self,pname):
 			from Screens.TimerEdit import TimerEditList
 			self.session.open(TimerEditList)
 			no_plugin = False
+		elif pname == _("HbbTV Applications"):
+			try:
+				from Plugins.Extensions.Browser.Hbbtv import Hbbtv
+				no_plugin = False
+			except ImportError:
+				no_plugin = True
+			finally:
+				if not no_plugin:
+					hbbtv_instance = Hbbtv.instance
+					if hbbtv_instance:
+						hbbtv_instance._showApplicationList()
 		else:
 			plugin = None
 			for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
@@ -175,6 +198,21 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
 		self.entryguilist = []
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+		{
+			"green": self.keySave,
+			"cancel": self.keyClose,
+			"ok": self.keySave,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+		}, -2)
+		ConfigListScreen.__init__(self, [], session = session)
+		self.hbbtvinstalled = getHBBTVInstalled()
+		self.overwriteHBBTVButton = config.plugins.Quickbutton.overwritehbbtvredbutton
+		self.createSetup("config")
+
+	def createSetup(self, widget):
+		cfglist = []
 		red_b_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.red_b.value)
 		red_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.red.value)
 		green_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.green.value)
@@ -188,8 +226,12 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		self.entryguilist.append(("4",_("Plugin browser")))
 		self.entryguilist.append(("5",_("switch 4:3 content display")))
 		self.entryguilist.append(("6",_("Timer")))
+		if self.hbbtvinstalled:
+			self.entryguilist.append(("7",_("HbbTV Applications")))
+			index = 8
+		else:
+			index = 7
 		# Vorgaben aus EXTENSIONSMENU, PLUGINMENU
-		index = 7
 		for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
 			self.entryguilist.append((str(index),str(p.name)))
 			if config.plugins.Quickbutton.red.value == str(p.name):
@@ -203,28 +245,23 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			if config.plugins.Quickbutton.blue.value == str(p.name):
 				blue_selectedindex = str(index)
 			index = index + 1
-
+		self.overwriteHBBTVButtonEntry = None
+		if self.hbbtvinstalled and ENABLE_RED_BUTTON:
+			self.overwriteHBBTVButtonEntry = getConfigListEntry(_("Overwrite HBBTV-red-button"), self.overwriteHBBTVButton)
+			cfglist.append(self.overwriteHBBTVButtonEntry)
 		self.redchoice = ConfigSelection(default = red_selectedindex, choices = self.entryguilist)
 		self.greenchoice = ConfigSelection(default = green_selectedindex, choices = self.entryguilist)
 		self.yellowchoice = ConfigSelection(default = yellow_selectedindex, choices = self.entryguilist)
 		self.bluechoice = ConfigSelection(default = blue_selectedindex, choices = self.entryguilist)
-		cfglist = [
-			getConfigListEntry(_("assigned to long red"), self.redchoice),
-			getConfigListEntry(_("assigned to long green"), self.greenchoice),
-			getConfigListEntry(_("assigned to long yellow"), self.yellowchoice),
-			getConfigListEntry(_("assigned to long blue"), self.bluechoice)
-
-			]
-		if ENABLE_RED_BUTTON:
+		cfglist.append(getConfigListEntry(_("assigned to long red"), self.redchoice))
+		cfglist.append(getConfigListEntry(_("assigned to long green"), self.greenchoice))
+		cfglist.append(getConfigListEntry(_("assigned to long yellow"), self.yellowchoice))
+		cfglist.append(getConfigListEntry(_("assigned to long blue"), self.bluechoice))
+		if ENABLE_RED_BUTTON and (self.overwriteHBBTVButton.value or not self.hbbtvinstalled):
 			self.red_b_choice = ConfigSelection(default = red_b_selectedindex, choices = self.entryguilist)
 			cfglist.append(getConfigListEntry(_("assigned to red"), self.red_b_choice))
-		ConfigListScreen.__init__(self, cfglist, session)
-		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
-		{
-			"green": self.keySave,
-			"cancel": self.keyClose,
-			"ok": self.keySave,
-		}, -2)
+		self[widget].list = cfglist
+		self[widget].l.setList(cfglist)
 
 	def getStaticPluginName(self,value):
 		if value == _("Single EPG"):
@@ -237,18 +274,34 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			return "4"
 		elif value == _("switch 4:3 content display"):
 			return "5"
-		if value == _("Timer"):
+		elif value == _("Timer"):
 			return "6"
+		elif value == _("HbbTV Applications"):
+			return "7"
 		else:
 			return "0"
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.newConfig()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.newConfig()
+
+	def newConfig(self):
+		cur = self["config"].getCurrent()
+		if cur and (cur == self.overwriteHBBTVButtonEntry):
+			self.createSetup("config")
 
 	def keySave(self):
 		config.plugins.Quickbutton.red.value = self.entryguilist[int(self.redchoice.value)][1]
 		config.plugins.Quickbutton.green.value = self.entryguilist[int(self.greenchoice.value)][1]
 		config.plugins.Quickbutton.yellow.value = self.entryguilist[int(self.yellowchoice.value)][1]
 		config.plugins.Quickbutton.blue.value = self.entryguilist[int(self.bluechoice.value)][1]
-		if ENABLE_RED_BUTTON:
+		if ENABLE_RED_BUTTON and (self.overwriteHBBTVButton.value or not self.hbbtvinstalled):
 			config.plugins.Quickbutton.red_b.value = self.entryguilist[int(self.red_b_choice.value)][1]
+		self.overwriteHBBTVButton.save()
 		config.plugins.Quickbutton.save()
 		configfile.save()
 		self.close()
