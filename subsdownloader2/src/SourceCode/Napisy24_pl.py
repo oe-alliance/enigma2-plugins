@@ -234,7 +234,9 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 	
     def download_subtitle_zip(self, dict_entry_to_download):
 	"""Napisy 24 GET request for subtitle zip downloading. Data is stored in self.zip_string."""
-	request_subtitle_list = "http://napisy24.pl/download/%s/" % str(self.return_xml_dict_entry_value(dict_entry_to_download,'id'))
+	#request_subtitle_list = "http://napisy24.pl/download/%s/" % str(self.return_xml_dict_entry_value(dict_entry_to_download,'id'))
+	request_subtitle_list = "http://napisy.me/download/sr/%s/" % str(self.return_xml_dict_entry_value(dict_entry_to_download,'id'))
+	
 	repeat = 3
 	while repeat > 0:  
             repeat = repeat - 1
@@ -260,7 +262,7 @@ class Napisy24_pl(XML_to_Dict,zip_extractor):
 	    print "Success to download subtitle zip."
             return True
         else:
-	    print "Reild to download subtitle zip."
+	    print "Feild to download subtitle zip."
             return False
 
 class GuessFileData_from_FileName(SubtitleDatabase.SubtitleDB):
