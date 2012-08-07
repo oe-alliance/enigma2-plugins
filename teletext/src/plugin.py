@@ -958,6 +958,9 @@ class TeleText(Screen):
       
     self.read_data = False
 
+    # read favorites
+    self.readFavorites()
+
   def readFavorites(self):
     self.fav_index = 0
     self.fav_list = []
