@@ -129,7 +129,7 @@ class EPGSearch(EPGSelection):
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
 		self["list"] = EPGSearchList(type = self.type, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
-		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions", "MenuActions", 'ColorActions'],
+		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions", "MenuActions", 'ColorActions', 'InfobarInstantRecord'],
 			{
 				"menu": self.menu,
 				"cancel": self.closeScreen,
@@ -144,6 +144,8 @@ class EPGSearch(EPGSelection):
 				"prevBouquet": self.prevBouquet, # just used in multi epg yet
 				"nextService": self.nextService, # just used in single epg yet
 				"prevService": self.prevService, # just used in single epg yet
+				"ShortRecord": self.doRecordTimer,
+				"LongRecord": self.doZapTimer,
 			})
 
 		self["actions"].csel = self
