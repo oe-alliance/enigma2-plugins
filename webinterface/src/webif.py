@@ -311,6 +311,8 @@ def appendListItem(item, filternum, append):
 			append("n/a")
 		else:
 			append(item.replace("\n", "<br />"))
+	elif filternum == 11:
+		append( item.replace("\"", "&quot;"))
 	else:
 		append(item)
 
@@ -401,7 +403,7 @@ class webifHandler(ContentHandler):
 
 	def parse_item(self, attrs):
 		if "name" in attrs:
-			filter = {"": 1, "javascript_escape": 2, "xml": 3, "uri": 4, "urlencode": 5, "date": 6, "time": 7, "minutes": 8, "uriAttribute": 9, "html": 10}[attrs.get("filter", "")]
+			filter = {"": 1, "javascript_escape": 2, "xml": 3, "uri": 4, "urlencode": 5, "date": 6, "time": 7, "minutes": 8, "uriAttribute": 9, "html": 10, "attribute" : 11}[attrs.get("filter", "")]
 			self.sub.append(ListItem(attrs["name"], filter))
 		else:
 			assert "macro" in attrs, "e2:item must have a name= or macro= attribute!"

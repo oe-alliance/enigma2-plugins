@@ -4,8 +4,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico" />
 	<link rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
-	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.0.min.css" />
+	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.1.min.css" />
 
 	<script src="/web-data/lib/jquery-1.7.1.min.js" />
 	<script language="javascript" type="text/javascript">
@@ -16,7 +17,7 @@
 			});
 		});
 	</script>
-	<script src="/web-data/m/script/jquery.mobile-1.1.0.min.js" />
+	<script src="/web-data/m/script/jquery.mobile-1.1.1.min.js" />
 </head>
 <body>
 
@@ -100,60 +101,6 @@
 		<h1>© 2012 Dream Multimedia GmbH</h1>
 	</div><!-- /footer -->
 </div><!-- /services -->
-
-<div data-role="page" id="timeredit" data-title="Edit Timer" data-theme="a">
-	<div data-role="header">
-		<h1>Edit Timer</h1>
-		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home">Home</a>
-	</div><!-- /header -->
-	<div data-role="content">
-		<form action="index.html" method="get" data-inset="true">
-			<div data-role="fieldcontain">
-				<label for="action">Action: </label>
-				<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" id="action">
-					<label for="radio-action-record">Record</label>
-					<input type="radio" name="action" id="radio-action-record" value="record" checked="checked"/>
-
-					<label for="radio-action-zap">Zap</label>
-					<input type="radio" name="action" id="radio-action-zap" value="zap"/>
-				</fieldset>
-			</div>
-			<div data-role="fieldcontain">
-				<label for="name">Name:</label>
-				<input type="text" name="name" id="name" placeholder="Name"/>
-			</div>
-			<div data-role="fieldcontain">
-				<label for="description">Description:</label>
-				<input type="text" name="description" id="description" placeholder="Description"/>
-			</div>
-			<div data-role="fieldcontain">
-				<label for="select-service">Service:</label>
-				<select id="select-service" name="select-service">
-					<option value="ARD">ARD</option>
-					<option value="ZDF">ZDF</option>
-				</select>
-				<label for="select-bouquet">Bouquet:</label>
-				<select id="select-bouquet" name="select-bouquet">
-					<option value="favorites">Favorites (TV)</option>
-				</select>
-			</div>
-			<div data-role="fieldcontain">
-				<label for="select-location">Location:</label>
-				<select id="select-location" name="select-location">
-					<option value="ARD">/hdd/movie</option>
-					<option value="ZDF">/media/ST394839</option>
-				</select>
-			</div>
-			<fieldset>
-				<button type="submit" name="save" value="submit-save" data-inline="true">Save</button>
-				<button type="cancel" name="cancel" value="submit-cancel" data-inline="true">Cancel</button>
-			</fieldset>
-		</form>
-	</div>
-	<div data-role="footer">
-		<h1>© 2012 Dream Multimedia GmbH</h1>
-	</div><!-- /footer -->
-</div>
 
 <div data-role="page" id="control" data-title="Control" data-theme="a"  data-content-theme="a">
 	<div data-role="header">

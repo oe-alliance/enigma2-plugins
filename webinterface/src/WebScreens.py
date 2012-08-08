@@ -219,6 +219,23 @@ class TimerWebScreen(WebScreen):
 		self["RecordNow"] = Timer(session, func=Timer.RECNOW)
 		self["TimerCleanup"] = Timer(session, func=Timer.CLEANUP)
 
+class TimerEditWebScreen(ServiceListWebScreen, LocationsAndTagsWebScreen):
+	def __init__(self, session, request):
+		ServiceListWebScreen.__init__(self, session, request)
+		LocationsAndTagsWebScreen.__init__(self, session, request)
+
+		from Components.Sources.ServiceList import ServiceList
+		from Screens.ChannelSelection import service_types_tv
+		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
+		self["BouquetList"] = ServiceList(fav, command_func=self.getBouquetList, validate_commands=False)
+		#get the first bouquet and set it
+		favlist = self["BouquetList"].getServicesAsList(format = "S")
+		if len(favlist) > 0:
+			self["ServiceList"].root = eServiceReference(favlist[0])
+
+	def getBouquetList(self, ref):
+		pass
+
 class RemoteWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)

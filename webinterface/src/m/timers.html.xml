@@ -4,8 +4,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 
+	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico" />
 	<link rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
-	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.0.min.css" />
+	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.1.min.css" />
 
 	<script src="/web-data/lib/jquery-1.7.1.min.js" />
 	<script language="javascript" type="text/javascript">
@@ -16,7 +17,7 @@
 			});
 		});
 	</script>
-	<script src="/web-data/m/script/jquery.mobile-1.1.0.min.js" />
+	<script src="/web-data/m/script/jquery.mobile-1.1.1.min.js" />
 </head>
 <body>
 
@@ -29,7 +30,22 @@
 		<ul data-role="listview" data-split-icon="forward" data-split-theme="a">
 			<e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
 			&lt;li data-icon="">
-				&lt;a href="#">
+				&lt;a
+					href="/m/timeredit.html?
+						name=<e2:item name="Name" filter="uriAttribute"/>
+						&amp;description=<e2:item name="Description" filter="uriAttribute"/>
+						&amp;disabled=<e2:item name="Disabled"/>
+						&amp;begin=<e2:item name="TimeBegin" filter="date"/><e2:item name="TimeBegin" filter="time"/>
+						&amp;end=<e2:item name="TimeEnd" filter="date"/><e2:item name="TimeEnd" filter="time"/>
+						&amp;duration=<e2:item name="Duration" />
+						&amp;justplay=<e2:item name="justPlay" />
+						&amp;afterevent=<e2:item name="afterEvent" />
+						&amp;location=<e2:item name="Location" filter="uriAttribute"/>
+						&amp;tags=<e2:item name="Tags" filter="uriAttribute"/>
+						&amp;repeated=<e2:item name="Repeated" filter="uriAttribute"/>
+						&amp;eit=<e2:item name="EIT"/>
+						&amp;sRef=<e2:item name="ServiceReference" filter="uriAttribute"/>"
+					data-ajax="false">
 					&lt;h3><e2:item name="Name" filter="html"/> (<e2:item name="Duration" filter="minutes"/>)&lt;/h3>
 					&lt;h4><e2:item name="ServiceName" filter="html"/>&lt;/h4>
 					&lt;p><e2:item name="TimeBegin" filter="date"/> <e2:item name="TimeBegin" filter="time"/>&lt;br /><e2:item name="TimeEnd" filter="date"/> <e2:item name="TimeEnd" filter="time"/>&lt;/p>
