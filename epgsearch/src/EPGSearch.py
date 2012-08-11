@@ -189,7 +189,7 @@ class EPGSearch(EPGSelection):
 	def closeScreen(self):
 		# Save our history
 		config.plugins.epgsearch.save()
-		EPGSelection.closeScreen(self)
+		EPGSelection.close(self)
 
 	def yellowButtonPressed(self):
 		self.session.openWithCallback(
