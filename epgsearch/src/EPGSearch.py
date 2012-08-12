@@ -1,7 +1,7 @@
 # for localized messages
 from . import _
 
-from enigma import eEPGCache, eServiceReference, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent
+from enigma import eEPGCache, eTimer, eServiceReference, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent
 
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
@@ -133,7 +133,10 @@ class EPGSearch(EPGSelection):
 			{
 				"menu": self.menu,
 				"cancel": self.closeScreen,
-				"ok": self.eventSelected,
+				"OK": self.epgsearchOK,
+				"OKLong": self.epgsearchOKLong,
+				"epg": self.Info,
+				"info": self.Info,
 				"timerAdd": self.timerAdd,
 				"yellow": self.yellowButtonPressed,
 				"yellowlong": self.showHistory,
@@ -155,6 +158,9 @@ class EPGSearch(EPGSelection):
 		# Partnerbox
 		if PartnerBoxIconsEnabled:
 			EPGSelection.PartnerboxInit(self, False)
+
+		self.refreshTimer = eTimer()
+		self.refreshTimer.timeout.get().append(self.refreshData)
 
 		# Hook up actions for yttrailer if installed
 		try:
@@ -190,6 +196,26 @@ class EPGSearch(EPGSelection):
 		# Save our history
 		config.plugins.epgsearch.save()
 		EPGSelection.close(self)
+
+	def epgsearchOK(self):
+		cur = self["list"].getCurrent()
+		self.currentService = cur[1]
+		if config.epgselection.OK_enhanced.value == "Zap":
+			self.ZapTo()
+		elif config.epgselection.OK_enhanced.value == "Zap + Exit":
+			self.zap()
+		else:
+			self.eventSelected()
+
+	def epgsearchOKLong(self):
+		cur = self["list"].getCurrent()
+		self.currentService = cur[1]
+		if config.epgselection.OKLong_enhanced.value == "Zap":
+			self.ZapTo()
+		elif config.epgselection.OKLong_enhanced.value == "Zap + Exit":
+			self.zap()
+		else:
+			self.eventSelected()
 
 	def yellowButtonPressed(self):
 		self.session.openWithCallback(
