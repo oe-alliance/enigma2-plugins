@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 15:59+0100\n"
-"PO-Revision-Date: 2012-05-08 18:41+0100\n"
+"POT-Creation-Date: 2012-08-06 19:12+0100\n"
+"PO-Revision-Date: 2012-08-08 17:25+0100\n"
 "Last-Translator: Ralf Biedermann <ralf.biedermann@rbsoft.de>\n"
 "Language-Team: none\n"
 "Language: \n"
@@ -29,6 +29,9 @@ msgstr "Abbrechen"
 msgid "Channel Selection"
 msgstr "Kanalliste"
 
+msgid "Choose the encode type for search, helpful for foreign languages."
+msgstr "Wähle die Text-Kodierung. Das ist hilfreich für fremde Sprachen."
+
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Liste der AutoTimer konnte nicht abgerufen werden: %s"
@@ -43,7 +46,7 @@ msgid "EPGSearch Setup"
 msgstr "EPGSearch Einrichtung"
 
 msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
-msgstr "Diesen Punkt aktivieren wenn EPGSuche in Erweiterungen aufgeführt werden soll."
+msgstr "EPGSuche in Erweiterungen aufführen"
 
 msgid "Enter text to search for"
 msgstr "Zu suchenden Text eingeben"
@@ -86,6 +89,9 @@ msgstr "Suche"
 
 msgid "Search EPG"
 msgstr "Durchsuche EPG"
+
+msgid "Search Encoding"
+msgstr "Such-Kodierung"
 
 msgid "Select a timer to search"
 msgstr "Einen Timer auswählen"
