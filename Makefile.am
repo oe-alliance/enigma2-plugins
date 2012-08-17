@@ -33,6 +33,7 @@ SUBDIRS = \
 	eurotictv \
 	fancontrol2 \
 	filebrowser \
+	flashexpander \
 	fritzcall \
 	fstabeditor \
 	ftpbrowser \

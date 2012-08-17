@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: flashexpander 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-11 10:44+0000\n"
+"PO-Revision-Date: 2012-08-13 18:45+0100\n"
+"Last-Translator: bschaar\n"
+"Language-Team: mechatron\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.2\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Country: GERMANY\n"
+
+msgid "extend your flash memory"
+msgstr "Flash-geheugen uitbreiden"
+
+msgid "... is used, %dMB free"
+msgstr "... in gebruik, %dMB vrij"
+
+msgid "FlashExpander is not installed, create? Press Key OK."
+msgstr "FlashExpander is niet actief, activeren? Druk OK."
+
+msgid "No HDD-, SSD- or USB-Device found. Please first initialized."
+msgstr "Geen HDD-, SSD- of USB-medium gevonden. Gelieve eerst te initialiseren."
+
+msgid ""
+"Are you sure want to create FlashExpander on\n"
+"%s\n"
+"Partition %d"
+msgstr ""
+"FlashExpander activeren op\n"
+"%s\n"
+"Partitie %d"
+
+msgid "read UUID"
+msgstr "UUID lezen"
+
+msgid "Mount failed (%s)"
+msgstr "Mount mislukt (%s)"
+
+msgid "Too little free space < 180MB or wrong Filesystem!"
+msgstr "Te weinig vrije ruimte < 180MB of foutief bestandssysteem!"
+
+msgid "Please wait, Flash memory will be copied."
+msgstr "Even geduld. Flashgeheugen wordt gekopiëerd."
+
+msgid "Do you want to reboot your Dreambox?"
+msgstr "Dreambox herstarten?"
+
+msgid "error adding fstab entry for: %s"
+msgstr "Fout bij het toevoegen van %s in de fstab"
+
+msgid "error copy flash memory"
+msgstr "Fout bij het kopiëren van het flash-geheugen"
+
+msgid "choose device to FlashExpander"
+msgstr "Kies een medium voor FlashExpander"
+
+msgid "unknown"
+msgstr "onbekend"
+
+msgid ""
+"Are you sure want to create FlashExpander on \n"
+"Server: %s\n"
+"Path: %s"
+msgstr ""
+"FlashExpander activeren op\n"
+"Server: %s\n"
+"Pad: %s"
+

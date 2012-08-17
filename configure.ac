@@ -213,6 +213,11 @@ filebrowser/Makefile
 filebrowser/meta/Makefile
 filebrowser/src/Makefile
 
+flashexpander/Makefile
+flashexpander/meta/Makefile
+flashexpander/po/Makefile
+flashexpander/src/Makefile
+
 fritzcall/Makefile
 fritzcall/meta/Makefile
 fritzcall/po/Makefile
