@@ -177,7 +177,7 @@ class AutoTimerEditorBase:
 		self.encoding = NoSave(ConfigSelection(choices = selection, default = default))
 
 		# ...
-		self.searchType = NoSave(ConfigSelection(choices = [("partial", _("partial match")), ("exact", _("exact match")), ("description", _("description match"))], default = timer.searchType))
+		self.searchType = NoSave(ConfigSelection(choices = [("partial", _("partial match")), ("exact", _("exact match")), ("start", _("title starts with")), ("description", _("description match"))], default = timer.searchType))
 		self.searchCase = NoSave(ConfigSelection(choices = [("sensitive", _("case-sensitive search")), ("insensitive", _("case-insensitive search"))], default = timer.searchCase))
 
 		# Alternatives override
@@ -1271,7 +1271,7 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 		autotimer.readXml()
 	else:
 		autotimer.readXml()
-	
+
 	match = evt and evt.getEventName() or ""
 	name = match or "New AutoTimer"
 	sref = None
