@@ -351,7 +351,7 @@ class vps_timer:
 		demux = "/dev/dvb/adapter0/demux" + str(self.demux)
 		
 		# PDC-Zeit?
-		if self.timer.name == "" and self.timer.vpsplugin_time is not None and not self.found_pdc:
+		if (self.timer.name == "" or self.timer.eit is None) and self.timer.vpsplugin_time is not None and not self.found_pdc:
 			mode_program += 2
 			day = strftime("%d", localtime(self.timer.vpsplugin_time))
 			month = strftime("%m", localtime(self.timer.vpsplugin_time))
