@@ -1,0 +1,164 @@
+# Estonian translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"PO-Revision-Date: 2012-07-31 19:06+0300\n"
+"Last-Translator: Raivo, Henkka, eesatfan, rimas <Raivo, Henkka, eesatfan, rimas>\n"
+"Language-Team: rimas\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/plugin.py:370
+msgid "Autoresolution"
+msgstr "Autoresolutsioon"
+
+#: ../src/plugin.py:237
+#, python-format
+msgid ""
+"Autoresolution Plugin Testmode:\n"
+"Is %s OK?"
+msgstr ""
+"Autoresolutsioon testrežiimis:\n"
+"Kas %s sobib?"
+
+#: ../src/plugin.py:378
+msgid "Autoresolution Switch"
+msgstr "Autoresolutsiooni vahetus"
+
+#: ../src/plugin.py:326
+msgid "Autoresolution is not working in Scart/DVI-PC Mode"
+msgstr "Autoresolutsioon ei tööta Scart/DVI-PC režiimis"
+
+#: ../src/plugin.py:308
+msgid "Autoresolution settings"
+msgstr "Autoresolutsiooni sätted"
+
+#: ../src/plugin.py:286
+msgid "Autoresolution videomode setup"
+msgstr "Autoresolutsiooni videorežiimi seadistus"
+
+#: ../src/plugin.py:302
+msgid "Cancel"
+msgstr "Tühista"
+
+#: ../src/plugin.py:322
+msgid "Deinterlacer mode for interlaced content"
+msgstr "Ülerealaotuse režiim 'interlaced' sisu jaoks"
+
+#: ../src/plugin.py:323
+msgid "Deinterlacer mode for progressive content"
+msgstr "Ülerealaotuse režiim 'progressive' sisu jaoks"
+
+#: ../src/plugin.py:320
+msgid "Delay x seconds after service started"
+msgstr "Viide x sekundit pärast kanalivahetust"
+
+#: ../src/plugin.py:31
+msgid "Enable 1080p24 Mode"
+msgstr "Luba 1080p24"
+
+#: ../src/plugin.py:32
+msgid "Enable 1080p25 Mode"
+msgstr "Luba 1080p25"
+
+#: ../src/plugin.py:32
+msgid "Enable 1080p30 Mode"
+msgstr "Luba 1080p30"
+
+#: ../src/plugin.py:31
+msgid "Enable 720p24 Mode"
+msgstr "Luba 720p24"
+
+#: ../src/plugin.py:311
+msgid "Enable Autoresolution"
+msgstr "Luba autoresolutsioon"
+
+#: ../src/plugin.py:30
+msgid "HD Interlace Mode"
+msgstr "HD Interlace"
+
+#: ../src/plugin.py:30
+msgid "HD Progressive Mode"
+msgstr "HD Progressive"
+
+#: ../src/plugin.py:301
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:317
+#: ../src/plugin.py:318
+msgid "Refresh Rate"
+msgstr "Värskendussagedus"
+
+#: ../src/plugin.py:321
+msgid "Running in testmode"
+msgstr "Töö testrežiimis"
+
+#: ../src/plugin.py:28
+msgid "SD 24HZ Progressive mode"
+msgstr "SD 24HZ Progressive"
+
+#: ../src/plugin.py:27
+msgid "SD 25/50HZ Interlace Mode"
+msgstr "SD 25/50HZ Interlace"
+
+#: ../src/plugin.py:29
+msgid "SD 25/50HZ Progressive Mode"
+msgstr "SD 25/50HZ Progressive"
+
+#: ../src/plugin.py:27
+msgid "SD 30/60HZ Interlace Mode"
+msgstr "SD 30/60HZ Interlace"
+
+#: ../src/plugin.py:29
+msgid "SD 30/60HZ Progressive Mode"
+msgstr "SD 30/60HZ Progressive"
+
+#: ../src/plugin.py:319
+msgid "Show info screen"
+msgstr "Näita infoakent"
+
+#: ../src/plugin.py:39
+#: ../src/plugin.py:41
+msgid "auto"
+msgstr ""
+
+#: ../src/plugin.py:39
+#: ../src/plugin.py:41
+msgid "bob"
+msgstr ""
+
+#: ../src/plugin.py:130
+msgid "default"
+msgstr "vaikimisi"
+
+#: ../src/plugin.py:39
+#: ../src/plugin.py:41
+msgid "off"
+msgstr "väljas"
+
+#: ../src/plugin.py:39
+#: ../src/plugin.py:41
+msgid "on"
+msgstr "sees"
+
+#: ../src/plugin.py:44
+msgid "second"
+msgstr "sekund"
+
+#: ../src/plugin.py:43
+#: ../src/plugin.py:44
+#: ../src/plugin.py:45
+#: ../src/plugin.py:46
+msgid "seconds"
+msgstr "sekundit"
+
