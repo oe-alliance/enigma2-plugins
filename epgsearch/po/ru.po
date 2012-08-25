@@ -1,0 +1,115 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-14 08:42+0100\n"
+"PO-Revision-Date: 2012-08-25 15:18+0200\n"
+"Last-Translator: WadimArt <WadimArt@GiClub.tv>\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Add AutoTimer"
+msgstr "Добавить AutoTimer"
+
+msgid "Add timer"
+msgstr "Добавить таймер"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Channel Selection"
+msgstr "Выбор канала"
+
+msgid "Choose the encode type for search, helpful for foreign languages."
+msgstr "Выберите тип кодирования для поиска, понятный для иностранных языков."
+
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Не удалось прочитать список АвтоТаймеров: %s"
+
+msgid "EPG Search"
+msgstr "Поиск в EPG"
+
+msgid "EPGSearch"
+msgstr "Поиск EPG"
+
+msgid "EPGSearch Setup"
+msgstr "Настройка EPG поиска"
+
+msgid ""
+"Enable this to be able to access the EPG-Search from within the plugin "
+"browser."
+msgstr "Включить это, чтобы получить доступ к EPG Search из меню плагинов."
+
+msgid "Enter text to search for"
+msgstr "Введите текст для поиска"
+
+msgid ""
+"How many entries to keep in the search history at most. 0 disables history "
+"entirely!"
+msgstr ""
+"Количество записей для хранения в истории поиска. 0 отключает историю "
+"целиком!"
+
+msgid "IMDb Search"
+msgstr "Поиск в IMDb"
+
+msgid "Import from AutoTimer"
+msgstr "Импорт из АвтоТаймера"
+
+msgid "Import from EPG"
+msgstr "Импорт из EPG"
+
+msgid "Import from Timer"
+msgstr "Импорт из Таймера"
+
+msgid "Length of History"
+msgstr "Количество записей истории"
+
+msgid "New Search"
+msgstr "Новый поиск"
+
+msgid "No history"
+msgstr "История пуста"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open selected in IMDb"
+msgstr "Открыть выбранное в IMDb"
+
+msgid "Save search as AutoTimer"
+msgstr "Сохранить результаты поиска в AutoTimer"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Search EPG"
+msgstr "Поиск EPG"
+
+msgid "Search Encoding"
+msgstr "Кодировка текста поиска"
+
+msgid "Select a timer to search"
+msgstr "Выберите Таймер для поиска"
+
+msgid "Select text to search for"
+msgstr "Выбрать текст для поиска"
+
+msgid "Setup"
+msgstr "Настройка"
+
+msgid "Show in plugin browser"
+msgstr "Показывать в меню плагинов"
+
+msgid "Show search history"
+msgstr "Показать историю поиска"
+
+msgid "search EPG"
+msgstr "поиск EPG"
+
+msgid "search EPG..."
+msgstr "поиск в EPG..."

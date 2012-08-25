@@ -1,0 +1,131 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-14 08:42+0100\n"
+"PO-Revision-Date: 2012-08-25 15:22+0200\n"
+"Last-Translator: WadimArt <WadimArt@GiClub.tv>\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid " as "
+msgstr " как"
+
+msgid "Ambiguous results"
+msgstr "Результаты поиска"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Cast: "
+msgstr "Состав: "
+
+msgid "Channel Selection"
+msgstr "Выбор канала"
+
+msgid "Could't get Eventname"
+msgstr "Не удалось получить описание события"
+
+msgid "Details"
+msgstr "Подробнее"
+
+msgid "Downloading Movie Poster: %s..."
+msgstr "Загрузка постера: %s..."
+
+msgid ""
+"Enable this to be able to access the IMDb from within the plugin browser."
+msgstr "Включить это, чтобы получить доступ к IMDb из меню плагинов."
+
+msgid "Enter search"
+msgstr "Введите условия поиска"
+
+msgid "Enter text to search for"
+msgstr "Введите текст для поиска"
+
+msgid "Exit"
+msgstr "Выход"
+
+msgid "Extra Info"
+msgstr "Дополнительно"
+
+msgid "IMDb Details"
+msgstr "Данные IMDb"
+
+msgid "IMDb Details parsed"
+msgstr "Подробное описание из IMDb"
+
+msgid "IMDb Download completed"
+msgstr "Загрузка данных IMDb выполнена"
+
+msgid "IMDb Download failed"
+msgstr "Загрузка данных IMDb неудачна"
+
+msgid "IMDb Plugin"
+msgstr "Плагин IMDb"
+
+msgid "IMDb Re-Download completed"
+msgstr "Повторная загрузка данных IMDb выполнена"
+
+msgid "IMDb Setup"
+msgstr "Настройка IMDb"
+
+msgid "IMDb query failed!"
+msgstr "Запрос в IMDb не удался!"
+
+msgid "Lookup"
+msgstr "Искать"
+
+msgid "No IMDb match."
+msgstr "Описание не найдено в IMDb!"
+
+msgid "No cast list found in the database."
+msgstr "Список исполнителей не найден."
+
+msgid "No details found."
+msgstr "Подробностей не найдено."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Play Trailer"
+msgstr "Воспроизвести трейлер"
+
+msgid "Please select the matching entry"
+msgstr "Пожалуйста, выберите соответствующую запись"
+
+msgid "Query IMDb: %s..."
+msgstr "Запрос в IMDb: %s..."
+
+msgid "Query details from the Internet Movie Database"
+msgstr "Запрос подробностей в IMDb"
+
+msgid "Re-Query IMDb: %s..."
+msgstr "Повторный запрос в IMDb: %s..."
+
+msgid "Search Trailer"
+msgstr "Поиск трейлера"
+
+msgid "Select from EPG"
+msgstr "Выбор из EPG"
+
+msgid "Setup"
+msgstr "Настройка"
+
+msgid "Show in plugin browser"
+msgstr "Показать в меню плагинов"
+
+msgid "The Internet Movie Database"
+msgstr "База данных фильмов в Интернете"
+
+msgid "Title Menu"
+msgstr "Основное меню"
+
+msgid "User Rating"
+msgstr "Рейтинг пользователей"
+
+msgid "no user rating yet"
+msgstr "рейтинг отсутствует"

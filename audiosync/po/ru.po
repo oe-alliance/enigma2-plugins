@@ -1,0 +1,163 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-14 08:42+0100\n"
+"PO-Revision-Date: 2012-08-25 11:11+0200\n"
+"Last-Translator: WadimArt <WadimArt@GiClub.tv>\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%i ms"
+msgstr "%i мс"
+
+msgid "Audio Sync"
+msgstr "Синхронизация аудио"
+
+msgid "Audio Sync Setup"
+msgstr "Настройки аудио синхронизации"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Center screen at the lower border"
+msgstr "Нижняя граница центра экрана"
+
+msgid "Center screen at the upper border"
+msgstr "Верхняя граница центра экрана"
+
+msgid "Change active delay"
+msgstr "Изменение активной задержки"
+
+msgid "Channel audio:"
+msgstr "Аудио канал:"
+
+msgid "Decrease delay"
+msgstr "Уменьшение задержки"
+
+msgid "Decrease delay by %i ms (can be set)"
+msgstr "Уменьшение задержки на %i мс (может быть установлено)"
+
+msgid "Discard changes and close plugin"
+msgstr "Отменить изменения и закрыть плагин"
+
+msgid "Discard changes and close screen"
+msgstr "Отменить изменения и закрыть экран"
+
+msgid "Global delay"
+msgstr "Общая задержка"
+
+msgid "Increase delay"
+msgstr "Увеличение задержки"
+
+msgid "Increase delay by %i ms (can be set)"
+msgstr "Увеличение задержки на %i мс (может быть установлено)"
+
+msgid "Invalid selection"
+msgstr "Неправильный выбор"
+
+msgid "Key %(Key)s successfully set to %(delay)i ms"
+msgstr "Кнопка %(кнопка)и успешно назначена %(задержку)i мс"
+
+msgid "Key %(key)s (current value: %(value)i ms)"
+msgstr "Кнопка %(кнопка)и (выбранное значение: %(значение)i мс)"
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "Move plugin screen"
+msgstr "Переместить экран плагина"
+
+msgid "Move screen down"
+msgstr "Переместить экран вниз"
+
+msgid "Move screen to the center of your TV"
+msgstr "Переместить экран на центр ТВ"
+
+msgid "Move screen to the left"
+msgstr "Переместить экран влево"
+
+msgid "Move screen to the lower left corner"
+msgstr "Переместить экран в левый нижний угол"
+
+msgid "Move screen to the lower right corner"
+msgstr "Переместить экран в правый нижний угол"
+
+msgid "Move screen to the middle of the left border"
+msgstr "Переместить экран к середине левой границы"
+
+msgid "Move screen to the middle of the right border"
+msgstr "Переместить экран к середине правой границы"
+
+msgid "Move screen to the right"
+msgstr "Переместить экран вправо"
+
+msgid "Move screen to the upper left corner"
+msgstr "Переместить экран в левый верхний угол"
+
+msgid "Move screen to the upper right corner"
+msgstr "Переместить экран в правый верхний угол"
+
+msgid "Move screen up"
+msgstr "Переместить экран вверх"
+
+msgid "OK"
+msgstr "ОК"
+
+msgid "Open plugin menu"
+msgstr "Открыть меню плагина"
+
+msgid "Outer Bound (+/-)"
+msgstr "Внешняя граница (+/-)"
+
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr "Плагин: %(плагин)ы, Версия: %(версия)и"
+
+msgid "Reset saved position"
+msgstr "Сбросить сохранённую позицию"
+
+msgid "Save current delay to key"
+msgstr "Сохранить выбранную задержку на кнопку"
+
+msgid "Save to key"
+msgstr "Сохранить на кнопку"
+
+msgid "Save values and close plugin"
+msgstr "Сохранить значения и закрыть плагин"
+
+msgid "Save values and close screen"
+msgstr "Сохранить значения и закрыть экран"
+
+msgid "Select the key you want to set to %i ms"
+msgstr "Выберите кнопку для установки %i мс"
+
+msgid "Service delay"
+msgstr "Задержка сервиса"
+
+msgid "Set delay to %i ms (can be set)"
+msgstr "Установить задержку %i мс (может быть установлено)"
+
+msgid "Setting key canceled"
+msgstr "Отменить установку на кнопки"
+
+msgid "Setup for the Audio Sync Plugin"
+msgstr "Настройка плагина аудиосинхронизации"
+
+msgid "Step in ms for arrow keys"
+msgstr "Шаг в мс для влево/вправо"
+
+msgid "Step in ms for key %i"
+msgstr "Шаг в мс для кнопки %i"
+
+msgid "Step in ms for keys '%s'"
+msgstr "Шаг в мс для кнопок '%s'"
+
+msgid "Wait time in ms before activation:"
+msgstr "Время ожидания в мс перед активацией:"
+
+msgid "sets the Audio Delay (LipSync)"
+msgstr "установки задержки Аудио (фонограмма)"
