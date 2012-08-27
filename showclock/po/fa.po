@@ -1,0 +1,115 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: show clock Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-17 10:28+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Language: Persian\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+#: ../src/plugin.py:73
+msgid "Show Clock setup"
+msgstr "نمایش تنظیم ساعت"
+
+#: ../src/plugin.py:74
+msgid "Push \"Exit\" long to show/hide clock"
+msgstr ""
+
+#: ../src/plugin.py:75
+msgid "Plugin menu"
+msgstr "منوی پلاگین"
+
+#: ../src/plugin.py:75
+msgid "Extensions menu"
+msgstr "منوی افزوده ها"
+
+#: ../src/plugin.py:111 ../src/plugin.py:166
+msgid "Show Clock Setup"
+msgstr "نمایش تنظیم ساعت"
+
+#: ../src/plugin.py:116
+msgid "Clock show timeout"
+msgstr "نمایش مدت زمان ساعت"
+
+#: ../src/plugin.py:117
+msgid ""
+"Specify how long (seconds) the clock shall be shown before it disappears. "
+"Set to \"0\" to show clock until hidden manually."
+msgstr ""
+
+#: ../src/plugin.py:118
+msgid "Show in"
+msgstr "نمایش در"
+
+#: ../src/plugin.py:119
+msgid ""
+"Specify whether plugin shall show up in plugin menu or extensions menu "
+"(needs GUI restart)"
+msgstr ""
+
+#: ../src/plugin.py:120
+msgid "Name"
+msgstr "نام"
+
+#: ../src/plugin.py:121
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr "از یک نام مشخص برای پلاگین در منو باید استفاده شود و بعدش ریستارت کنید"
+
+#: ../src/plugin.py:122
+msgid "Description"
+msgstr "توضیحات"
+
+#: ../src/plugin.py:123
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr ""
+"از یک توضیحات مشخص برای پلاگین در منو باید استفاده شود و بعدش ریستارت کنید"
+
+#: ../src/plugin.py:141
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: ../src/plugin.py:142
+msgid "OK"
+msgstr "اوکی"
+
+#: ../src/plugin.py:143
+msgid "Help"
+msgstr "راهنمایی"
+
+#: ../src/plugin.py:144
+msgid "Move clock"
+msgstr "تنظیم ساعت"
+
+#: ../src/plugin.py:166 ../src/plugin.py:392 ../src/plugin.py:400
+msgid "Ver."
+msgstr "ورژن."
+
+#: ../src/plugin.py:203
+msgid ""
+"Modify the settings to match your preferences. To change the clock position, "
+"select \"Move clock\" and relocate using the direction keys. Press OK to "
+"store current position and return to the setup menu or EXIT to cancel the "
+"moving.\n"
+"\n"
+"Push key \"Exit long\" to show the clock while watching TV. Clock will "
+"disappear after the specified timeout or by pushing key \"Exit long\" "
+"again.\n"
+"\n"
+"If GP3 is installed, weekday shows up in selected language, otherwise always "
+"in english."
+msgstr ""
+
+#: ../src/plugin.py:210
+msgid ""
+"Please use direction keys to move the clock.\n"
+"\n"
+"Press OK to store current position and return to the setup menu or EXIT to "
+"cancel the moving."
+msgstr ""

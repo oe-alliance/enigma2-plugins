@@ -1,0 +1,95 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: movie tagger\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-08 16:55+0100\n"
+"PO-Revision-Date: 2012-08-27 01:05+0330\n"
+"Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: /Users/fk/Desktop/PluginSort/locale/de/LC_MESSAGES\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Language: Persian\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+#: ../src/plugin.py:172
+msgid "Can't write movietags, because no meta-file found!"
+msgstr "ناتوان در برچسب زدن به فیلم ها به دلیل نبود هیچ متا فیلمی"
+
+#: ../src/plugin.py:250
+msgid "Whitepace will be replaced by \"_\""
+msgstr ""
+
+#: ../src/plugin.py:250
+msgid "Enter the new Tag"
+msgstr "افزودن یک برچسب جدید "
+
+#: ../src/plugin.py:254
+msgid ""
+"Clear all Tags?\n"
+"\n"
+"This will delete ALL tags in ALL recodings!\n"
+"Are you sure?"
+msgstr ""
+
+#: ../src/plugin.py:257
+msgid "Movie Tagger"
+msgstr "برچسب زننده فیلم"
+
+#: ../src/plugin.py:257
+msgid "Ver."
+msgstr "ورژن."
+
+#: ../src/plugin.py:258
+msgid "Assigned Tags"
+msgstr "برچسب اختصاص داد ه شد"
+
+#: ../src/plugin.py:259
+msgid "Specified Tags"
+msgstr "برچسب مشخص شد"
+
+#: ../src/plugin.py:260
+msgid "Used Tag"
+msgstr "برچسب استفاده شده"
+
+#: ../src/plugin.py:261
+msgid "User-specific Tag"
+msgstr "برچسب کاربر مشخص"
+
+#: ../src/plugin.py:262
+msgid "Predefined Tag"
+msgstr "برچسب از پیش تعریف شده"
+
+#: ../src/plugin.py:266
+msgid "Remove Tag"
+msgstr "حذف برچسب"
+
+#: ../src/plugin.py:267
+msgid "Add new Tag"
+msgstr "افزودن برچسب جدید"
+
+#: ../src/plugin.py:269 ../src/plugin.py:277
+msgid "Toggle List"
+msgstr "لیست تغییر حالت"
+
+#: ../src/plugin.py:274
+msgid "Add Tag"
+msgstr "افزودن برچسب"
+
+#: ../src/plugin.py:276
+msgid "Clear all Tags"
+msgstr "حذف همه برچسب ها"
+
+#: ../src/plugin.py:313
+msgid "Movie Tagger..."
+msgstr "در حال برچسب زنی بروی فیلم ..."

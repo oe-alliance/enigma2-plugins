@@ -4,12 +4,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PluginHider\n"
-"POT-Creation-Date: 2011-06-16 22:14+0000\n"
-"PO-Revision-Date: 2011-06-17 14:56+0100\n"
-"Last-Translator: Friedhelm Kuklinski <fk-912737@versanet.de>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-09 14:30+0100\n"
+"PO-Revision-Date: 2011-09-09 14:31+0100\n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: SiennaRoot <fk-912737@versanet.de>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 "Language-Code: en\n"
@@ -18,40 +19,76 @@ msgstr ""
 "Domain: /Users/fk/Desktop/PluginHiderpath\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ../src\n"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:46
-msgid "Cancel"
-msgstr "Abbruch"
-
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:51
-msgid "Eventinfo"
-msgstr "Event Info"
-
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:50
-msgid "Extensions"
-msgstr "Erweiterungen"
-
-#: /Users/fk/Desktop/PluginHider/plugin.py:52
+#: ../src/plugin.py:79
 msgid "Hide Plugins"
 msgstr "Plugins ausblenden"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:48
-msgid "Next"
-msgstr "Vor"
-
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:45
+#: ../src/PluginHiderSetup.py:52
 msgid "OK"
 msgstr "OK"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:96
+#: ../src/PluginHiderSetup.py:53
+msgid "Cancel"
+msgstr "Abbruch"
+
+#: ../src/PluginHiderSetup.py:55
+msgid "Run"
+msgstr "Starten"
+
+#: ../src/PluginHiderSetup.py:56
+msgid "Plugin/s"
+msgstr "Plugin/s"
+
+#: ../src/PluginHiderSetup.py:57
+msgid "Extension/s"
+msgstr "Erweiterng."
+
+#: ../src/PluginHiderSetup.py:58
+msgid "Eventinfo"
+msgstr "Event Info"
+
+#: ../src/PluginHiderSetup.py:67
+msgid "toggle selection"
+msgstr "Einstellung umkehren"
+
+#: ../src/PluginHiderSetup.py:68
+msgid "end editing"
+msgstr "Bearbeitung beenden"
+
+#: ../src/PluginHiderSetup.py:69
+msgid "save"
+msgstr "speichern"
+
+#: ../src/PluginHiderSetup.py:70
+msgid "run selected plugin"
+msgstr "Ausgewähltes Plugin starten"
+
+#: ../src/PluginHiderSetup.py:71
+msgid "select next tab"
+msgstr "nächsten Tab wählen"
+
+#: ../src/PluginHiderSetup.py:72
+msgid "select previous tab"
+msgstr "vorherigen Tab wählen"
+
+#: ../src/PluginHiderSetup.py:95
+msgid "Could not start Plugin:"
+msgstr "Kann Plugin nicht starten:"
+
+#: ../src/PluginHiderSetup.py:95
+msgid "Unable to access InfoBar."
+msgstr "Kann nicht auf InfoBar zugreifen."
+
+#: ../src/PluginHiderSetup.py:122
 msgid "PluginHider Setup"
 msgstr "PluginHider Setup"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:49
-msgid "Plugins"
-msgstr "Plugins"
+#~ msgid "Next"
+#~ msgstr "Vor"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:47
-msgid "Previous"
-msgstr "Zurück"
-
+#~ msgid "Previous"
+#~ msgstr "Zurück"

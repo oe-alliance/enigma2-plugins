@@ -1,0 +1,319 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: name zap Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-06-18 17:53+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _(\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Language: Persian\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+#: ../src/NamezapSetup.py:30 ../src/NamezapSetup.py:71 ../src/plugin.py:100
+msgid "NameZAP Setup"
+msgstr " ZAP تنظیم نام"
+
+#: ../src/NamezapSetup.py:36
+msgid "Zapper Style"
+msgstr "Zapper استایل"
+
+#: ../src/NamezapSetup.py:36
+msgid "Controls the visual appearance of the number zap dialog."
+msgstr "کنترل برخی از محاوره های برنامه های بصری"
+
+#: ../src/NamezapSetup.py:53
+msgid "OK"
+msgstr "اوکی"
+
+#: ../src/NamezapSetup.py:54
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: ../src/plugin.py:14
+msgid "Only Number"
+msgstr "فقط اعداد"
+
+#: ../src/plugin.py:15
+msgid "Service Name"
+msgstr "نام سرویس"
+
+#: ../src/plugin.py:16
+msgid "Number and Name"
+msgstr "تعداد و نام"
+
+#: ../src/plugin.py:84
+msgid "Unknown Service"
+msgstr "سرویس های ناشناس"
+
+#~ msgid "Station changed"
+#~ msgstr "Station gewechselt"
+
+#~ msgid "Server returned"
+#~ msgstr "Server meldet"
+
+#~ msgid "Last.FM"
+#~ msgstr "Last.FM"
+
+#~ msgid "Setup"
+#~ msgstr "Einstellungen"
+
+#~ msgid "Show in (needs GUI restart)"
+#~ msgstr "Zeigen in (erfordert GUI Neustart)"
+
+#~ msgid "Name (needs GUI restart)"
+#~ msgstr "Name (erfordert GUI Neustart)"
+
+#~ msgid "Description"
+#~ msgstr "Beschreibung"
+
+#~ msgid "Last.FM Username"
+#~ msgstr "Last.FM Benutzername"
+
+#~ msgid "Password"
+#~ msgstr "Passwort"
+
+#~ msgid "Send now playing Audio Tracks"
+#~ msgstr "Momentan gespielte Titel zeigen"
+
+#~ msgid "Use LastFM Proxy"
+#~ msgstr "LastFM Proxy benutzen"
+
+#~ msgid "LastFM Proxy port"
+#~ msgstr "LastFM Proxy port"
+
+#~ msgid "Recommendation level"
+#~ msgstr "Empfehlungsstufe"
+
+#~ msgid "Show Coverart"
+#~ msgstr "Coverart zeigen"
+
+#~ msgid "Timeout Statustext (seconds)"
+#~ msgstr "Anzeigedauer für Statustext (Sekunden)"
+
+#~ msgid "Timeout to select a Tab (seconds)"
+#~ msgstr "Verzögerung bei Tabwechsel (Sekunden)"
+
+#~ msgid "Interval to refresh Metadata (seconds)"
+#~ msgstr "Aktualisierungsintervall Metadaten (Sekunden)"
+
+#~ msgid "Use Screensaver"
+#~ msgstr "Bildschirmschoner verwenden"
+
+#~ msgid "Wait before Screensaver (seconds)"
+#~ msgstr "Wartezeit für Bildschirmschoner "
+
+#~ msgid "Show Coverart in Screensaver"
+#~ msgstr "Coverart im Bildschirmschoner zeigen"
+
+#~ msgid "Show Coverart Animation in Screensaver"
+#~ msgstr "Animierte Coverart im Bildschirmschoner zeigen"
+
+#~ msgid "Speed for Coverart Animation"
+#~ msgstr "Tempo der Coverart Animation"
+
+#~ msgid "Interval for Coverart Animation"
+#~ msgstr "Intervall der Coverart Animation"
+
+#~ msgid "Plugin menu"
+#~ msgstr "Plugin Menü"
+
+#~ msgid "Extensions menu"
+#~ msgstr "Erweiterungs-Menü"
+
+#~ msgid "Listen to Last.FM Internet Radio"
+#~ msgstr "Last.FM Internet Radio hören"
+
+#~ msgid "Ver."
+#~ msgstr "Ver."
+
+#~ msgid "Personal Stations"
+#~ msgstr "Eigene Stationen"
+
+#~ msgid "Global Tags"
+#~ msgstr "Allgemeine Auswahl"
+
+#~ msgid "Top Tracks"
+#~ msgstr "Top Titel"
+
+#~ msgid "Recent Tracks"
+#~ msgstr "Neueste Titel"
+
+#~ msgid "Loved Tracks"
+#~ msgstr "Bevorzugte Titel"
+
+#~ msgid "Banned Tracks"
+#~ msgstr "Unerwünschte Titel"
+
+#~ msgid "Friends"
+#~ msgstr "Freunde"
+
+#~ msgid "Neighbours"
+#~ msgstr "Nachbarn"
+
+#~ msgid "Artist"
+#~ msgstr "Interpret"
+
+#~ msgid "Album"
+#~ msgstr "Album"
+
+#~ msgid "Track"
+#~ msgstr "Titel"
+
+#~ msgid "Play"
+#~ msgstr "Start"
+
+#~ msgid "Skip"
+#~ msgstr "Überspringen"
+
+#~ msgid "Love"
+#~ msgstr "Gefällt mir"
+
+#~ msgid "Ban"
+#~ msgstr "Missfällt mir"
+
+#~ msgid "Switch to selected Station"
+#~ msgstr "Zur gewählten Station schalten"
+
+#~ msgid "Select next Tab"
+#~ msgstr "Nächsten Tab auswählen"
+
+#~ msgid "Select prev Tab"
+#~ msgstr "Vorherigen Tab auswählen"
+
+#~ msgid "Next Selection"
+#~ msgstr "Nächste Auswahl"
+
+#~ msgid "Previous Selection"
+#~ msgstr "Vorherige Auswahl"
+
+#~ msgid "Page forward Selections"
+#~ msgstr "Auswahl vorblättern"
+
+#~ msgid "Page backward Selections"
+#~ msgstr "Auswahl zurückblättern"
+
+#~ msgid "Start/stop streaming"
+#~ msgstr "Übertragung starten/stoppen"
+
+#~ msgid "Skip current Track"
+#~ msgstr "Laufenden Titel überspringen"
+
+#~ msgid "Mark Track as loved"
+#~ msgstr "Titel als \"bevorzugt\"' markieren"
+
+#~ msgid "Ban Track, never play"
+#~ msgstr "Unerwünschter Titel, nie spielen"
+
+#~ msgid "Open"
+#~ msgstr "Öffne"
+
+#~ msgid "Quit"
+#~ msgstr "Beende"
+
+#~ msgid "logging into last.FM"
+#~ msgstr "in last.FM einloggen"
+
+#~ msgid "login successful"
+#~ msgstr "Login erfolgreich"
+
+#~ msgid "login failed! "
+#~ msgstr "Login gescheitert"
+
+#~ msgid "Track skipped"
+#~ msgstr "Titel übersprungen"
+
+#~ msgid "Track loved"
+#~ msgstr "Titel als 'bevorzugt' markiert"
+
+#~ msgid "Track banned"
+#~ msgstr "Titel als 'unerwünscht' markiert"
+
+#~ msgid "Global Tags loaded"
+#~ msgstr "Allgemeine Auswahl geladen"
+
+#~ msgid "Top Tracks loaded"
+#~ msgstr "Top Titel geladen"
+
+#~ msgid "Recent Tracks loaded"
+#~ msgstr "Neueste Titel geladen"
+
+#~ msgid "Banned Tracks loaded"
+#~ msgstr "Unerwünschte Titel geladen"
+
+#~ msgid "Loved Tracks loaded"
+#~ msgstr "Bevorzugte Titel geladen"
+
+#~ msgid "Neighbours loaded"
+#~ msgstr "Nachbarn geladen"
+
+#~ msgid "Friends loaded"
+#~ msgstr "Freunde galaden"
+
+#~ msgid "please enter an %s name to listen to"
+#~ msgstr "bitte einen %s Namen eingeben"
+
+#~ msgid "%s name"
+#~ msgstr "%s Name"
+
+#~ msgid "Stream stopped"
+#~ msgstr "Übertragung gestoppt"
+
+#~ msgid "Starting stream"
+#~ msgstr "Übertragung gestartet"
+
+#~ msgid "Stop"
+#~ msgstr "Stop"
+
+#~ msgid "Personal Recommendations"
+#~ msgstr "Persönliche Empfehlungen"
+
+#~ msgid "Neighbours Tracks"
+#~ msgstr "Titel der Nachbarn"
+
+#~ msgid "Play Artist Radio..."
+#~ msgstr "Interpreten spielen..."
+
+#~ msgid "Play Group Radio..."
+#~ msgstr "Gruppe spielen..."
+
+#~ msgid "Play Tag Radio..."
+#~ msgstr "Genre spielen..."
+
+#~ msgid "Tracks similar to"
+#~ msgstr "Ähnliche Titel"
+
+#~ msgid "Tracks liked by Fans of"
+#~ msgstr "Titel beliebt bei Fans von"
+
+#~ msgid "Group of"
+#~ msgstr "Gruppe"
+
+#~ msgid "Loading Global Tags"
+#~ msgstr "Allgemeine Auswahl wird geladen"
+
+#~ msgid "Loading Top Tacks"
+#~ msgstr "Top Titel werden geladen"
+
+#~ msgid "Loading Recent Tracks"
+#~ msgstr "Neueste Titel werden geladen"
+
+#~ msgid "Loading Loved Tracks"
+#~ msgstr "Bevorzugte Titel werden geladen"
+
+#~ msgid "Loading Neighbours"
+#~ msgstr "Nachbarn werden geladen"
+
+#~ msgid "Loading Friends"
+#~ msgstr "Freunde werden geladen"
+
+#~ msgid "playing:"
+#~ msgstr "spielt:"
+
+#~ msgid " V."
+#~ msgstr " V."
