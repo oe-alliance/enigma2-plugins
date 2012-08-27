@@ -49,7 +49,7 @@ def getFreeSize(mp):
 #-----------------------------------------------------------------------------
 
 class FlashExpander(Screen):
-	skin = """<screen position="center,center" size="580,50" title="FlashExpander v0.32">
+	skin = """<screen position="center,center" size="580,50" title="FlashExpander v0.33">
 			<widget name="list" position="5,5" size="570,40" />
 		</screen>"""
 	def __init__(self, session):
@@ -109,6 +109,8 @@ class FEconf(Screen):
 				devices = Harddisk(x)
 				for y in range(devices.numPartitions()):
 					fstype = self.__getPartitionType(devices.partitionPath(str(y+1)))
+					if fstype==False:
+						fstype = self.__getPartitionType(devices.partitionPath(str(y+1)))
 					try:
 						bustype = devices.bus_type()
 					except:
@@ -151,23 +153,20 @@ class FEconf(Screen):
 				val = os_popen("/lib/udev/vol_id --type " + device)
 				fstype = val.read().strip()
 			elif path.exists("/sbin/blkid"):
-				for line in os_popen("blkid " + device).read().split('\n'):
+				for line in os_popen("/sbin/blkid " + device).read().split('\n'):
 					if not line.startswith(device):
 						continue
 					fstobj = re.search(r' TYPE="((?:[^"\\]|\\.)*)"', line)
 					if fstobj:
 						fstype = fstobj.group(1)
+
 		except:
 			print "[FlashExpander] <error get fstype>"
+			return False
 		return fstype
 		
 	def __getPartitionUUID(self,device):
 		try:
-			#if path.exists("/lib/udev/vol_id"):
-			#	val = os_popen("/lib/udev/vol_id --uuid " + device)
-			#	uuid = "/dev/disk/by-uuid/" + val.read().strip()
-			#	if path.exists(uuid):
-			#		return uuid
 			if path.exists("/dev/disk/by-uuid"):
 				for uuid in listdir("/dev/disk/by-uuid/"):
 					if not path.exists("/dev/disk/by-uuid/" + uuid):
