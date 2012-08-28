@@ -703,10 +703,5 @@ zdfmediathek/Makefile
 zdfmediathek/meta/Makefile
 zdfmediathek/src/Makefile
 
-3gmodemmanager/Makefile
-3gmodemmanager/meta/Makefile
-3gmodemmanager/script/Makefile
-
-
 ])
 AC_OUTPUT

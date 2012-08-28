@@ -97,9 +97,7 @@ SUBDIRS = \
 	sudoku \
 	vierg \
 	bmediacenter \
-	advancedmovieselection \
-	3gmodemmanager
-
+	advancedmovieselection
 
 if DREAMBOX
 SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview genuinedreambox
