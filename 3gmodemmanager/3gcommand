@@ -1,0 +1,30 @@
+#!/bin/sh
+
+
+case "$1" in
+    0)
+	kill -INT `ps | grep wvdial | grep -v grep | awk '{print $1}'` & /etc/ppp/ppp-stop
+	;;
+    1)
+	modprobe -r usbserial
+	;;
+    2)
+	modprobe usbserial $2 $3
+	;;
+    3)
+	usb_modeswitch -c /usr/share/usb_modeswitch/$2
+	;;
+    4)
+	rm -f /etc/wvdial.conf
+	wvdialconf
+	;;
+    5)
+	wvdial &
+	;;
+    *)
+	echo "Usage: $0 {0|1|2|3|4|5}"
+	exit 1
+	;;
+esac
+
+exit 0
