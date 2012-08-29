@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: virtual zap Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-02-05 19:05+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+#: ../src/plugin.py:48
+msgid "as plugin in extended bar"
+msgstr "به عنوان یک پلاگین در قسمت توسعه"
+
+#: ../src/plugin.py:48
+msgid "with long OK press"
+msgstr "با فشردن طولانی ماندن اوکی"
+
+#: ../src/plugin.py:48
+msgid "with exit button"
+msgstr "با استفاده از دکمه خروج"
+
+#: ../src/plugin.py:106
+msgid "Virtual Zap Setup"
+msgstr "راه اندازی جابه جایی مجازی "
+
+#: ../src/plugin.py:108
+#: ../src/plugin.py:112
+msgid "Virtual (PiP) Zap"
+msgstr "جابه جایی مجازی تصویر در تصویر"
+
+#: ../src/plugin.py:413
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: ../src/plugin.py:414
+msgid "OK"
+msgstr "مورد تایید است"
+
+#: ../src/plugin.py:416
+msgid "Usage"
+msgstr "میزان مصرف"
+
+#: ../src/plugin.py:598
+msgid "Use PiP"
+msgstr "استفاده از قابلیت تصویر در تصویر"
+
+#: ../src/plugin.py:599
+msgid "Show PiP in Infobar"
+msgstr "نمایش نوار اطلاعات تصویر در تصویر"
+
+#: ../src/plugin.py:622
+msgid "Start standard PiP after x secs (0 = disabled)"
+msgstr ""
+
+#: ../src/plugin.py:623
+msgid "Remember last service"
+msgstr "به یاد آوری آخرین سرویس"
+
+#: ../src/plugin.py:430
+msgid ""
+"GUI needs a restart to apply the new settings.\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+
+#: ../src/plugin.py:431
+msgid "Restart GUI now?"
+msgstr "GUI راه اندازی مجدد کردن   "
+

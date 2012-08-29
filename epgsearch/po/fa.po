@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: epg search Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-24 16:16+0200\n"
+"PO-Revision-Date: 2012-07-25 22:08+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+#: ../src/EPGSearch.py:150
+msgid "Add timer"
+msgstr "اضافه کردن تایمر"
+
+#: ../src/EPGSearch.py:349
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: ../src/EPGSearch.py:387
+msgid "Channel Selection"
+msgstr "انتخاب کانال"
+
+#: ../src/EPGSearch.py:257
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "%s نمی توانست لیست تایمر پلاگین تایمر خودکار را بخواند"
+
+#: ../src/EPGSearch.py:69
+#: ../src/EPGSearch.py:179
+msgid "EPG Search"
+msgstr "جستجو برنامه راهنمای الکترونیک"
+
+#: ../src/EPGSearch.py:203
+msgid "Enter text to search for"
+msgstr "وارد کردن یک متن به منظور جستجو برای "
+
+#: ../src/EPGSearch.py:216
+msgid "Export selected as AutoTimer"
+msgstr "صادر کردن منتخب به عنوان یک تایمر خودکار "
+
+#: ../src/EPGSearch.py:135
+msgid "History"
+msgstr "پیشینه"
+
+#: ../src/EPGSearch.py:214
+msgid "Import from AutoTimer"
+msgstr "وارد کردن از تایمر خودکار"
+
+#: ../src/EPGSearch.py:209
+msgid "Import from EPG"
+msgstr "وارد کردن از برنامه راهنمای الکترونیک"
+
+#: ../src/EPGSearch.py:208
+msgid "Import from Timer"
+msgstr "وارد کردن از تایمر"
+
+#: ../src/EPGSearch.py:134
+msgid "New Search"
+msgstr "جستجوی جدید"
+
+#: ../src/EPGSearch.py:298
+msgid "No history"
+msgstr "بدون پیشینه"
+
+#: ../src/EPGSearch.py:350
+msgid "OK"
+msgstr "موزد تایید است"
+
+#: ../src/EPGSearch.py:215
+msgid "Save search as AutoTimer"
+msgstr "ذخیره سازی جستجو به عنوان یک تایمر خودکار"
+
+#: ../src/EPGSearch.py:415
+msgid "Search"
+msgstr "جستجو"
+
+#: ../src/plugin.py:58
+msgid "Search EPG"
+msgstr "جستجوی یک برنامه راهنمای الکترونیک"
+
+#: ../src/EPGSearch.py:364
+msgid "Select a timer to search"
+msgstr "انتخاب یک تایمر برای جستجو "
+
+#: ../src/EPGSearch.py:268
+#: ../src/EPGSearch.py:292
+msgid "Select text to search for"
+msgstr "انتخاب یک متن برای جستجوی"
+
+#: ../src/plugin.py:63
+#: ../src/plugin.py:69
+msgid "search EPG..."
+msgstr "جستجوی برنامه راهنمای الکترونیک"
+

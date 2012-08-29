@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tag editor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-24 16:19+0200\n"
+"PO-Revision-Date: 2012-07-25 22:22+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+#: ../src/plugin.py:251
+msgid "Add new tag..."
+msgstr "افزودن یک برچسپ جدید"
+
+#: ../src/plugin.py:45
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: ../src/plugin.py:255
+msgid "Delete all tags..."
+msgstr "حذف کردن همه برچسپ ها"
+
+#: ../src/plugin.py:253
+msgid "Delete this tag..."
+msgstr "حذف این برچسب"
+
+#: ../src/plugin.py:254
+msgid "Delete unused tags"
+msgstr "حذف برچسب های بی مصرف"
+
+#: ../src/plugin.py:237
+msgid ""
+"Do you really want to delete all tags everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+
+#: ../src/plugin.py:220
+#, python-format
+msgid ""
+"Do you really want to delete tag \"%s\" everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+
+#: ../src/plugin.py:48
+msgid "Load"
+msgstr "بارگذاری کردن"
+
+#: ../src/plugin.py:47
+msgid "New"
+msgstr "جدید"
+
+#: ../src/plugin.py:46
+msgid "OK"
+msgstr "مورد تایید است"
+
+#: ../src/plugin.py:77
+msgid "Please enter the new tag"
+msgstr "لطفا برچسب جدید را وارد نمایید "
+
+#: ../src/plugin.py:252
+msgid "Rename this tag..."
+msgstr "تغییر نام دادن برچسب... در حال"
+
+#: ../src/plugin.py:200
+#, python-format
+msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
+msgstr ""
+
+#: ../src/plugin.py:25
+msgid "edit tags..."
+msgstr "در حال ویرایش کردن برچسب..."
+

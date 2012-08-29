@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: movie retitle Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-14 18:35+0200\n"
+"PO-Revision-Date: 2012-07-25 23:18+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+#: ../src/plugin.py:44
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: ../src/plugin.py:89
+msgid "Choose target folder"
+msgstr "انتخاب پوشه مورد نظر"
+
+#: ../src/plugin.py:65
+msgid "Description"
+msgstr "توضیحات"
+
+#: ../src/plugin.py:279
+#, python-format
+msgid "Failed to move the movie %s to %s in the background"
+msgstr ""
+
+#: ../src/plugin.py:63
+msgid "Filename"
+msgstr "نام پوشه"
+
+#: ../src/plugin.py:61
+msgid "Location"
+msgstr "مکان"
+
+#: ../src/plugin.py:74
+msgid "Name and Description Input"
+msgstr "نام و توضیحات وارد شده"
+
+#: ../src/plugin.py:43
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:286
+#, python-format
+msgid "Successfully moved the movie %s"
+msgstr " %s فیلم های که با موفقیت منتقل شده اند :"
+
+#: ../src/plugin.py:126
+#, python-format
+msgid ""
+"Target file %s.ts already exist.\n"
+"Do you want to replace it?"
+msgstr ""
+
+#: ../src/plugin.py:238
+#, python-format
+msgid "The movie is moved in the background from %s to %s."
+msgstr ""
+
+#: ../src/plugin.py:130
+msgid "The target directory is not found. The file is not renamed."
+msgstr "پوشه مورد نظز پیدا نشد و فایل تغییر نام نیافته است"
+
+#: ../src/plugin.py:64
+msgid "Title"
+msgstr "عنوان"
+
+#: ../src/plugin.py:20
+msgid "change name..."
+msgstr "تغییر نام"
+

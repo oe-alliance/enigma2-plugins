@@ -1,0 +1,111 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: zap statistic Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-13 17:39+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src\n"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:220
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:317
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:422
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:598
+msgid "Zap Statistic"
+msgstr "آمار جابجایی"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:227
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:325
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:451
+msgid "Sort (name+)"
+msgstr "مرتب سازی نام با استفاده از +"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:228
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:326
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:454
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:524
+msgid "Sort (name-)"
+msgstr "مرتب سازی نام با استفاده از -"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:229
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:327
+msgid "Sort (duration+)"
+msgstr "مرتب سازی مدت با استفاده از +"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:230
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:328
+msgid "Sort (duration-)"
+msgstr "مرتب سازی مدت با استفاده از _"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:431
+msgid "Delete"
+msgstr "حذف کردن "
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:434
+msgid "Durations"
+msgstr "مدت زمان"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:452
+msgid "Sort (date+)"
+msgstr "مرتب سازی تاریخ با استفاده از + "
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:456
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:539
+msgid "Sort (date-)"
+msgstr "مرتب سازی تاریخ با استفاده از - "
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:561
+msgid "Play entry"
+msgstr "نمایش ورودی ها"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:562
+msgid "Delete entry"
+msgstr "حذف ورودی ها"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:563
+msgid "Delete all entries"
+msgstr "حذف همه ورودی ها"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:564
+msgid "Sort by name (ascending)"
+msgstr "مرتب کردن صعودی بر اساس نام "
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:565
+msgid "Sort by name (descending)"
+msgstr "مرتب کردن نزولی بر اساس نام "
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:566
+msgid "Sort by date (ascending)"
+msgstr "مرتب کردن صعودی بر اساس تاریخ "
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:567
+msgid "Sort by date (descending)"
+msgstr "مرتب کردن نزولی بر اساس تاریخ "
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:568
+msgid "Show duration window"
+msgstr "نمایش پتجره مدت زمان"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:569
+msgid "Show combined duration window"
+msgstr "نمایش پتجره طول زمان ترکیب شده"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:570
+msgid "Close plugin"
+msgstr "بستن پلاگین"
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:571
+msgid "Please choose a function..."
+msgstr "لطفا یک کارکرد را انتخاب کنید "
+
+#: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src/plugin.py:598
+msgid "Shows the watched services with some statistic"
+msgstr "نمایش سرویس های دیده شده با برخی از اطلاعات آماری"
+

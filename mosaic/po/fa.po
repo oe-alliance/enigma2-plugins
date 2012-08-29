@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: mosaic Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-03 13:51-0000\n"
+"PO-Revision-Date: 2012-07-25 23:07+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/mosaic/src\n"
+
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:171
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:283
+msgid "Channel: "
+msgstr "کانال :"
+
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:177
+#, python-format
+msgid "%s does not exist!"
+msgstr "%s موجود نیست :"
+
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:298
+msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
+msgstr "خطا در حال ایجاد تصویر . شما نیازمند به ورژن 0.8 یا بالاتر هستید  "
+
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:311
+msgid "Countdown:"
+msgstr "شمارش معکوس :"
+
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:368
+msgid "Mosaic"
+msgstr "مانند موزائیک بهم پیوستن"
+

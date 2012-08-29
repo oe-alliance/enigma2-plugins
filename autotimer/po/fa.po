@@ -1,0 +1,881 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: auto timer Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-22 20:03+0100\n"
+"PO-Revision-Date: 2012-07-24 13:08+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+"X-Poedit-SearchPath-0: D:\\Dreambox\\Plugins\\enigma2-plugins\\autotimer\\src\n"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoPoller.py:49
+#, python-format
+msgid ""
+"%d conflict(s) encountered when trying to add new timers:\n"
+"%s"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoPoller.py:49
+#, python-format
+msgid "%s: %s at %s"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:44
+msgid "Monday"
+msgstr "دوشنبه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:45
+msgid "Tuesday"
+msgstr "سه شنبه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:46
+msgid "Wednesday"
+msgstr "چهارشنبه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:47
+msgid "Thursday"
+msgstr "پنج شنبه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:48
+msgid "Friday"
+msgstr "جمعه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:49
+msgid "Saturday"
+msgstr "شنبه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:50
+msgid "Sunday"
+msgstr "یک شنبه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:51
+msgid "Weekend"
+msgstr "آخر هفته"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:52
+msgid "Weekday"
+msgstr "روزهای هفتگی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:85
+msgid "Channel Selection"
+msgstr "انتخاب کانال"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:180
+msgid "partial match"
+msgstr "مطابقت نسبی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:180
+msgid "exact match"
+msgstr "مطابقت کامل"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:181
+msgid "case-sensitive search"
+msgstr "جعبه جستجوی حساس"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:181
+msgid "case-insensitive search"
+msgstr "جعبه جستجوی غیر حساس"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:187
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:182
+msgid "zap"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:187
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:182
+msgid "record"
+msgstr "ضبط کردن"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:224
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:225
+msgid "%d.%B %Y"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:254
+msgid "standard"
+msgstr "استاندارد"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:254
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:26
+msgid "do nothing"
+msgstr "انجام ندادن هیچ کاری"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:255
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:28
+msgid "go to standby"
+msgstr "رفتن به حالت استندبای"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:256
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:27
+msgid "go to deep standby"
+msgstr "رفتن به حالت استندبای عمیق"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:257
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:29
+msgid "auto"
+msgstr "خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:301
+msgid "Never"
+msgstr "هرگز"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:301
+msgid "Monthly"
+msgstr "ماهانه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:301
+msgid "Weekly (Sunday)"
+msgstr "هفتگی هر یک شنبه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:301
+msgid "Weekly (Monday)"
+msgstr "هفتگی هر دو شنبه "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:303
+#, python-format
+msgid "Custom (%s)"
+msgstr " (%s) بر حسب عادت"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:308
+msgid "No"
+msgstr "نه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:309
+msgid "On same service"
+msgstr "سرویس همسان"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:310
+msgid "On any service"
+msgstr "روی هر سرویس"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:311
+msgid "Any service/recording"
+msgstr "هر سرویس / ضبط کردن"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:333
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:356
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:20
+msgid "None"
+msgstr "هیچ کدام"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:348
+msgid "Choose target folder"
+msgstr "انتخاب پوشه مورد نظر"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:390
+msgid "AutoTimer Editor"
+msgstr "ویرایشگر تایمر خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:411
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:849
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1052
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:44
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:118
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerPreview.py:59
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:66
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:412
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1053
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:45
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:119
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:65
+msgid "OK"
+msgstr "مورد تایید است"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:439
+msgid "Edit AutoTimer"
+msgstr "ویرایش تایمر خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:443
+msgid "edit filters"
+msgstr "ویرایش کردن فیلترها"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:445
+msgid "add filters"
+msgstr "اضافه کردن یک فیلتر"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:449
+msgid "edit services"
+msgstr "ویرایش کردن سرویس"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:451
+msgid "add services"
+msgstr "اضافه کردن یک سرویس"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:476
+msgid "Set this NO to disable this AutoTimer."
+msgstr "نه کردن غیر فعال کردن تایمر خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:477
+msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
+msgstr "این نامی است که شما می توانید به تایمر خودکار بدهید .آن به منظور بازبینی و پیش نمایش به نمایش در خواهد آمد "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:478
+msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
+msgstr "این آن چیزی است که به ازای هر رویدادی دیده خواهد شد .   "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:479
+msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
+msgstr "رمز گذاری کانال ها به منظور استفاده در برنامه راهنمای الکترونیک . شما تنها احتیاج به تغییر این دارید اگر در حال جستجو کردن کارکترهای مخصوصی نظیر یومالتس آلمانی هستنید "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:480
+msgid "Select \"exact match\" to enforce \"Match title\" to match exactly or \"partial match\" if you only want to search for a part of the event title."
+msgstr "انتخاب / کاملا سازگار/ اجرا گذاشتن / کاملا سازگار یا / سازگار نسبی / اگر شما قصد جستجو بخشی از عنوان رخدادها را دارید  "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:481
+msgid "Select whether or not you want to enforce case correctness."
+msgstr "انتخاب آب و هوا یا نه شما می خواهید مورد به درستی انجام شود"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:482
+msgid "Add zap timer instead of record timer?"
+msgstr "افزودن یک زپ تایمر در عوض تایمر ضبط "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:483
+msgid "With this option enabled the channel to record on can be changed to a alternative service it is restricted to."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:484
+msgid "Should this AutoTimer be restricted to a timespan?"
+msgstr "بایستی تایمر خودکار به یک بازه زمانی محدود شود ؟"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:485
+msgid "Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"
+msgstr "پایین ترین حد محدوده زمانی . هیچ چیزی قبل از این زمان سازگار نخواهد شد . آفست در نظر گرفته نشده است   "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:486
+msgid "Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"
+msgstr "بالا ترین حد محدوده زمانی . هیچ چیزی قبل از این زمان سازگار نخواهد شد . آفست در نظر گرفته نشده است   "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:487
+msgid "By enabling this events will not be matched if they don't occur on certain dates."
+msgstr "با فعال سازی این رویداد سازگار نخواهد شد اگر آنها را در یک بازه زمانی خاصی قرار ندهید"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:488
+msgid "First day to match events. No event that begins before this date will be matched."
+msgstr "اولین روز سازگاری با رویدادها . هیچ رویدادی قبل از سازگار نخواهد شد"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:489
+msgid "Last day to match events. Events have to begin before this date to be matched."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:490
+msgid "Change default recording offset?"
+msgstr "تغییر بده پیش فرض آفست ضبط شده ها"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:491
+msgid "Time in minutes to prepend to recording."
+msgstr " چند دقیقه به اول ضبط اضافه گردد"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:492
+msgid "Time in minutes to append to recording."
+msgstr " چند دقیقه به آخر ضبط اضافه گردد"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:493
+msgid "Should this AutoTimer only match up to a certain event duration?"
+msgstr "باید تایمر خودکار در بازه رویداد خاصی سازگار شود ؟"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:494
+msgid "Maximum event duration to match. If an event is longer than this ammount of time (without offset) it won't be matched."
+msgstr "بیشترین بازه رویدادها برای سازگار شدن . اگر یک رویداد بیشتر از زمان تعیین شده باشد ( بدون آفست ) آن سازگار نحواهد شد."
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:495
+msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
+msgstr "تغییر وضعیت توان بعد از ضبط کردن . انتخاب شده / استاندارد / غیر قابل تغییر به خاطر پیش فرض های انیگما 2 و یا اینکه مقادیر توسط شما تغییر کرده است"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:496
+msgid "Restrict \"after event\" to a certain timespan?"
+msgstr "محدود شده / بعد از رویدادها / در یک بازه زمانی خاص "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:497
+msgid "Lower bound of timespan."
+msgstr "پایین ترین مرز محدوده زمانی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:498
+msgid "Upper bound of timespan."
+msgstr "بالا ترین مرز محدوده زمانی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:499
+msgid "With this option you can restrict the AutoTimer to a certain ammount of scheduled recordings. Set this to 0 to disable this functionality."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:500
+msgid "Number of scheduled recordings left."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:501
+msgid "The counter can automatically be reset to the limit at certain intervals."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:502
+msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:503
+msgid "Should timers created by this AutoTimer be recorded to a custom location?"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:504
+msgid "Select the location to save the recording to."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:505
+msgid "Tags the Timer/Recording will have."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:513
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:128
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerWizard.py:85
+msgid "Enabled"
+msgstr "فعال شده"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:514
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerWizard.py:86
+msgid "Description"
+msgstr "توضیحات"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:515
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerWizard.py:87
+msgid "Match title"
+msgstr "عنوان سازگار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:519
+msgid "EPG encoding"
+msgstr "کدگزاری برنامه راهنمای الکترونیک"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:520
+msgid "Search type"
+msgstr "نوع جستجو"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:521
+msgid "Search strictness"
+msgstr "جستجوی بهتر "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:522
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:182
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerWizard.py:88
+msgid "Timer type"
+msgstr "نوع تایمر "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:523
+msgid "Override found with alternative service"
+msgstr "در حالت سرویس جایگزین هیچ چیزی در بر نداشت"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:524
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerWizard.py:72
+msgid "Only match during timespan"
+msgstr "فقط سازگار با بازه زمانی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:530
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerWizard.py:78
+msgid "Begin of timespan"
+msgstr "شروع بازه زمانی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:531
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerWizard.py:79
+msgid "End of timespan"
+msgstr "انتهای بازه زمانی "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:534
+msgid "Restrict to events on certain dates"
+msgstr "محدود سازی یک رویداد در یک زمان خاص"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:539
+msgid "Not before"
+msgstr "هیچی قبل از این"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:540
+msgid "Not after"
+msgstr "هیچی بعد از این"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:543
+msgid "Custom offset"
+msgstr "آفست سفارشی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:548
+msgid "Offset before recording (in m)"
+msgstr "آفست قبل از ضبط  بر حسب دقیقه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:549
+msgid "Offset after recording (in m)"
+msgstr "آفست بعد از ضبط  بر حسب دقیقه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:552
+msgid "Set maximum duration"
+msgstr "تنظیم بازه نهایی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:556
+msgid "Maximum duration (in m)"
+msgstr "بالاترین بازه بر حسب دقیقه"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:558
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:173
+msgid "After event"
+msgstr "بعد از یک رویداد"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:562
+msgid "Execute \"after event\" during timespan"
+msgstr "اجرا / بعد از یک رویداد / در طول یک بازه زمانی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:567
+msgid "Begin of \"after event\" timespan"
+msgstr "شروع / بعد از یک رویداد / بازه زمانی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:568
+msgid "End of \"after event\" timespan"
+msgstr "در انتهای / بعد از یک رویداد / بازه زمانی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:571
+msgid "Record a maximum of x times"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:576
+msgid "Ammount of recordings left"
+msgstr "چه میزانی از ضبط باقی مانده است"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:577
+msgid "Reset count"
+msgstr "تنظیم مجدد تعداد دفعات "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:579
+msgid "Require description to be unique"
+msgstr "نیاز به توضیحات منحصر به فرد"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:582
+msgid "Use a custom location"
+msgstr "استفاده از یک مکان سفارشی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:584
+msgid "Custom location"
+msgstr "مکان سفارشی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:586
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:200
+msgid "Tags"
+msgstr "برچسب ها"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:657
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:995
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1165
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:226
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:194
+msgid "Really close without saving settings?"
+msgstr "آیا واقعا بدون ذخیره سازی تنظیمات قصد بستن دارید ؟"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:674
+msgid "The match attribute is mandatory."
+msgstr "مطابقت ویژگی ها ضروری است"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:683
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:241
+#, python-format
+msgid ""
+"You entered \"%s\" as Text to match.\n"
+"Do you want to remove trailing whitespaces?"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:828
+msgid "AutoTimer Filters"
+msgstr "فیلتر تایمر خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:832
+msgid "in Title"
+msgstr "عنوان"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:833
+msgid "in Shortdescription"
+msgstr "شرحی کوتاه و مختصر"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:834
+msgid "in Description"
+msgstr "در حال توضیح"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:835
+msgid "on Weekday"
+msgstr "در روزهای هفته"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:850
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:71
+msgid "Save"
+msgstr "ذخیره سازی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:851
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1054
+msgid "delete"
+msgstr "حذف کردن"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:852
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1055
+msgid "New"
+msgstr "جدید"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:870
+msgid "Edit AutoTimer filters"
+msgstr "ویرایش فیلتر تایمر خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:914
+msgid "Enable Filtering"
+msgstr "فعال سازی فیلترها"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:915
+msgid "Filter"
+msgstr "فیلتر"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:923
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:940
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:965
+msgid "Exclude"
+msgstr "حذف و رد"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:928
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:945
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:966
+msgid "Include"
+msgstr "شامل بودن"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:963
+msgid "Select type of Filter"
+msgstr "انتخاب نوع فیلتر"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1032
+msgid "AutoTimer Services"
+msgstr "سرویس تایمر خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1042
+msgid "Channels"
+msgstr "کانال ها"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1043
+msgid "Bouquets"
+msgstr "دسته ها"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1073
+msgid "Edit AutoTimer services"
+msgstr "ویرایش سرویس تایمر خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1094
+msgid "Enable Service Restriction"
+msgstr "ویرایش محدودیت سرویس"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1095
+msgid "Editing"
+msgstr "ویرایش"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1104
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1157
+msgid "Record on"
+msgstr "ضبط بروی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1135
+msgid "Select channel to record on"
+msgstr "انتخاب کانال برای ضبط کردن بروی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:1141
+msgid "Select bouquet to record on"
+msgstr "انتخاب دسته برای ضبط کردن بروی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:59
+msgid "Select a timer to import"
+msgstr "انتخاب یک تایمر برای وارد کردن "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:128
+msgid "disable"
+msgstr "غیر فعال کردن"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:128
+msgid "enable"
+msgstr "فعال کردن"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:137
+#, python-format
+msgid "Match title: %s"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:143
+msgid "Exact match"
+msgstr "سازگاری دقیق"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:155
+#, python-format
+msgid "Match Timespan: %02d:%02d - %02d:%02d"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:164
+#, python-format
+msgid "Only on Service: %s"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:191
+msgid "Location"
+msgstr "مکان"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:220
+msgid "Import AutoTimer"
+msgstr "وارد کردن تایمر خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerImporter.py:299
+msgid "Please provide a Text to match"
+msgstr "لطفا یک متن سازگار وارد نمایید "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:72
+msgid "Delete"
+msgstr "حذف کردن"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:73
+msgid "Add"
+msgstr "افزودن"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:85
+msgid "Edit selected AutoTimer"
+msgstr "ویرایش تایمر خودکار انتخاب شده "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:86
+msgid "Close and forget changes"
+msgstr "بستن و فراموش کردن تغییرات"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:92
+msgid "Open Context Menu"
+msgstr "باز کردن محتوا و متن منو"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:98
+msgid "Close and save changes"
+msgstr "بستن و ذخیره سازی تغییرات"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:99
+msgid "Remove selected AutoTimer"
+msgstr "حذف تایمر خودکار انتخاب شده "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:100
+msgid "Add new AutoTimer"
+msgstr "افزودن یک تایمر خودکار جدید"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:107
+msgid "AutoTimer overview"
+msgstr "بازنگری یک تایمر خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:180
+#, python-format
+msgid "Do you really want to delete %s?"
+msgstr "%s? آیا واقعا قصد حذف دارید"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:209
+msgid "Preview"
+msgstr "پیش نمایش"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:210
+msgid "Import existing Timer"
+msgstr "وارد کردن تایمرهای موجود"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:211
+msgid "Import from EPG"
+msgstr "وارد کردن از برنامه راهنمای الکترونیک"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:212
+msgid "Setup"
+msgstr "راه اندازی"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:213
+msgid "Edit new timer defaults"
+msgstr "ویرایش یک پیش فرض جدید برای تایمر"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:217
+msgid "Create a new timer using the classic editor"
+msgstr "ساخت یک تایمر جدید برای یک ویرایشگر کلاسیک"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerOverview.py:219
+msgid "Create a new timer using the wizard"
+msgstr "ساخت یک تایمر جدید برای مصرف ویزارد"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerPreview.py:52
+msgid "mins"
+msgstr "دقیقه ها"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerPreview.py:76
+msgid "Preview AutoTimer"
+msgstr "پیش نمایش تایمر خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerPreview.py:80
+msgid "Sort Time"
+msgstr "دسته بندی زمان"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerPreview.py:82
+msgid "Sort AutoTimer"
+msgstr "دسته بندی تایمر خودکار"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerResource.py:34
+#, python-format
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and %d modified."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerResource.py:60
+msgid "AutoTimer was removed"
+msgstr "تایمر خودکار حذف گردید"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerResource.py:62
+msgid "missing parameter \"id\""
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerResource.py:88
+#, python-format
+msgid "unable to find timer with id %i"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerResource.py:94
+msgid "autotimers need a match attribute"
+msgstr "تایمر خودکار نیازمند نشان های سازگار است "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerResource.py:261
+msgid "AutoTimer was added successfully"
+msgstr "تایمر خودکار بصورت موفقیت آمیز اضافه گردید "
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerResource.py:263
+msgid "AutoTimer was changed successfully"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerResource.py:306
+msgid "config changed."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:33
+msgid "AutoTimer Settings"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:39
+msgid "Poll automatically"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:39
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:40
+msgid "Poll Interval (in h)"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:40
+msgid "This is the delay in hours that the AutoTimer will wait after a search to search the EPG again."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:41
+msgid "Only add timer for next x days"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:41
+msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:42
+msgid "Show in extension menu"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:42
+msgid "Enable this to be able to access the AutoTimer Overview from within the extension menu."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:43
+msgid "Modify existing timers"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:43
+msgid "This setting controls the behavior when a timer matches a found event."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:44
+msgid "Guess existing timer based on begin/end"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:44
+#, python-format
+msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80%% of the it."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:45
+msgid "Add timer as disabled on conflict"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:45
+msgid "This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:46
+msgid "Show notification on conflicts"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:46
+msgid "By enabling this you will be notified about timer conflicts found during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:47
+msgid "Editor for new AutoTimers"
+msgstr "ویرایشگر برای تایمر خودکار جدید"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:47
+msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:48
+msgid "Support \"Fast Scan\"?"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:48
+msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerSettings.py:83
+msgid "Configure AutoTimer behavior"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:21
+msgid "Only AutoTimers created during this session"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:22
+msgid "All non-repeating timers"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:27
+msgid "Classic"
+msgstr "کلاسیک"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:28
+msgid "Wizard"
+msgstr "ویزارد"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:90
+#, python-format
+msgid ""
+"Your config file is not well-formed:\n"
+"%s"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:119
+#, python-format
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and %d modified, %d conflicts encountered."
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:161
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:166
+msgid "Edit Timers and scan for new Events"
+msgstr ""
+
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:167
+#: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/plugin.py:168
+msgid "add AutoTimer..."
+msgstr "اضافه کردن تایمر خودکار "
+

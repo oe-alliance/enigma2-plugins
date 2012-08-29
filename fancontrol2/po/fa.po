@@ -1,0 +1,381 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fan control Persian Translation\n"
+"POT-Creation-Date: 2010-10-02 17:47+Westeuropäische Sommerzeit\n"
+"PO-Revision-Date: 2012-07-25 23:46+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+#: FC2.txt:88
+msgid "."
+msgstr "."
+
+#: FC2.txt:157
+msgid "below Tunerslot 4"
+msgstr "زیر تیونر اسلات شماره 4"
+
+#: FC2.txt:158
+msgid "near XILINX Spartan"
+msgstr ""
+
+#: FC2.txt:159
+msgid "under the WLAN"
+msgstr "زیر پوشش لن بی سیم"
+
+#: FC2.txt:160
+msgid "left of the Battery"
+msgstr "میزان باقی مانده از باطری"
+
+#: FC2.txt:161
+msgid "left near Front-CI"
+msgstr "CI در سمت چپ و جلوی"
+
+#: FC2.txt:162
+msgid "left near Card-Slot"
+msgstr "چپ و نزدیک اسلات کارت"
+
+#: FC2.txt:163
+msgid "over Security Card"
+msgstr "بالای کارت امنیتی"
+
+#: FC2.txt:164
+msgid "under the Fan"
+msgstr "زیر فن"
+
+#: FC2.txt:169
+msgid "3Pin"
+msgstr "سه پینه"
+
+#: FC2.txt:169
+msgid "4Pin"
+msgstr "4 پینه"
+
+#: FC2.txt:169
+msgid "Control disabled"
+msgstr "کنترل غیر فعال گردید"
+
+#: FC2.txt:169
+msgid "disabled"
+msgstr "غیر فعال گردید"
+
+#: FC2.txt:170
+msgid "yes, Except for Recording or HDD"
+msgstr "بله به جز برای ضبط کردن یا هارد دیسک "
+
+#: FC2.txt:170
+#: FC2.txt:183
+#: FC2.txt:186
+msgid "no"
+msgstr "نه"
+
+#: FC2.txt:170
+#: FC2.txt:186
+msgid "yes"
+msgstr "بله"
+
+#: FC2.txt:177
+msgid "Box Shutdown"
+msgstr "جعبه خاموش سازی"
+
+#: FC2.txt:177
+msgid "display Info"
+msgstr "نمایش اطلاعات"
+
+#: FC2.txt:177
+msgid "do nothing"
+msgstr "انجام ندادن هیچ کاری"
+
+#: FC2.txt:186
+msgid "auto"
+msgstr "خودکار"
+
+#: FC2.txt:186
+msgid "never"
+msgstr "هرگز"
+
+#: FC2.txt:269
+msgid "please wait (until 3min)..."
+msgstr "تا 3 دقیقه صبر کنید ..."
+
+#: FC2.txt:307
+msgid "Min Fan Start %d rpm at PWM=%d"
+msgstr ""
+
+#: FC2.txt:313
+msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
+msgstr ""
+
+#: FC2.txt:319
+msgid "Max Fan %d rpm at PWM=255 (%s)"
+msgstr ""
+
+#: FC2.txt:321
+msgid "Extended Control Range"
+msgstr "رنج کنترلی گسترش یافته"
+
+#: FC2.txt:331
+msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
+msgstr ""
+
+#: FC2.txt:334
+msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
+msgstr ""
+
+#: FC2.txt:341
+msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
+msgstr ""
+
+#: FC2.txt:349
+msgid "Min Fan Start %d rpm at VLT=%d"
+msgstr ""
+
+#: FC2.txt:352
+msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
+msgstr ""
+
+#: FC2.txt:357
+msgid "Max Fan %d rpm at VLT=255 (%s)"
+msgstr ""
+
+#: FC2.txt:429
+#: FC2.txt:431
+#: FC2.txt:434
+msgid "%s   %02d C"
+msgstr ""
+
+#: FC2.txt:436
+msgid "press Info for HDD-Temp"
+msgstr "دکمه اینفو را به منظور نمایش دمای هارد فشار بده"
+
+#: FC2.txt:437
+#: FC2.txt:678
+msgid "Current rpm  %4d"
+msgstr "%4d   تعداد دور موتور "
+
+#: FC2.txt:467
+msgid "Action in case of Fan failure"
+msgstr "اقدام لازم در برابر خرابی فن"
+
+#: FC2.txt:468
+msgid "Box shutdown at Temperature (C)"
+msgstr ""
+
+#: FC2.txt:469
+msgid "increases overheating protection to (C)"
+msgstr "افزایش محافظت در برابر گرمای بیش از حد بر حسب سانتی گراد"
+
+#: FC2.txt:470
+msgid "read HDD-Temperature in HDD-Standby-Mode"
+msgstr "خواندن هارد دیسک - دمای داخل هارد دیسک - مد استندبای - مد"
+
+#: FC2.txt:471
+msgid "disable DMM-FanControl"
+msgstr ""
+
+#: FC2.txt:472
+msgid "Number of WebIF-Log-Entries"
+msgstr ""
+
+#: FC2.txt:473
+msgid "Logging path"
+msgstr "مسیر ورود"
+
+#: FC2.txt:474
+msgid "Auto-Delete Data older than (Days)"
+msgstr "اطلاعات قدیمی که بصورت خودکار حذف شده اند بر حسب روز"
+
+#: FC2.txt:475
+msgid "Enable Data Logging"
+msgstr "فعال سازی ورودی اطلاعات"
+
+#: FC2.txt:476
+msgid "Enable Event Logging"
+msgstr "فعال سازی رویدادهای ورودی"
+
+#: FC2.txt:477
+msgid "Show Monitor in Extension-Menu"
+msgstr "نمایش آگاهی دهنده در منوی گسترش"
+
+#: FC2.txt:492
+msgid "Choose path"
+msgstr "انتخاب مسیر"
+
+#: FC2.txt:524
+msgid ""
+"GUI needs a restart to apply the changes.\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+
+#: FC2.txt:525
+msgid "Restart GUI now?"
+msgstr ""
+
+#: FC2.txt:591
+msgid "Fan type"
+msgstr "نوع فن"
+
+#: FC2.txt:592
+msgid "Fan off in Standby"
+msgstr "فن خاموش است یا در حالت استندبای است"
+
+#: FC2.txt:593
+msgid "min Speed rpm"
+msgstr "کمترین دور موتور فن"
+
+#: FC2.txt:594
+msgid "max Speed rpm"
+msgstr "بیشترین دور موتور فن"
+
+#: FC2.txt:595
+msgid "Static temp C"
+msgstr "دمای ایستاتیک بر حسب سانتی گراد"
+
+#: FC2.txt:596
+msgid "End temperature C"
+msgstr "دمای نهایی بر حسب سانتی گراد"
+
+#: FC2.txt:597
+msgid "Initial Voltage"
+msgstr "ولتاژ اولیه"
+
+#: FC2.txt:598
+msgid "Initial PWM"
+msgstr ""
+
+#: FC2.txt:603
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: FC2.txt:604
+msgid "Save"
+msgstr "ذخیره کردن"
+
+#: FC2.txt:605
+msgid "Check"
+msgstr "چک کردن"
+
+#: FC2.txt:606
+msgid "Help"
+msgstr "کمک"
+
+#: FC2.txt:643
+msgid "Current value: %s"
+msgstr ""
+
+#: FC2.txt:676
+msgid "Temperature C  %4.1f"
+msgstr ""
+
+#: FC2.txt:677
+msgid "Target rpm  %4d"
+msgstr ""
+
+#: FC2.txt:679
+msgid "Voltage  %03d"
+msgstr ""
+
+#: FC2.txt:680
+msgid "PWM  %03d"
+msgstr ""
+
+#: FC2.txt:705
+msgid "Information"
+msgstr "اطلاعات"
+
+#: FC2.txt:705
+msgid "readme.txt"
+msgstr ""
+
+#: FC2.txt:819
+msgid "FanControl2 emergency, Box Shutdown now?"
+msgstr ""
+
+#: FC2.txt:962
+msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
+msgstr ""
+
+#: FC2.txt:969
+msgid "Fan is not working!"
+msgstr "فن کار نمی کند !"
+
+#: FC2.txt:1085
+msgid "Temperature"
+msgstr "دما"
+
+#: FC2.txt:1086
+msgid "Speed"
+msgstr "سرعت"
+
+#: FC2.txt:1087
+msgid "Voltage"
+msgstr "ولتاژ"
+
+#: FC2.txt:1094
+msgid "Sensors"
+msgstr "سنسورها"
+
+#: FC2.txt:1172
+#: FC2.txt:1209
+msgid "active"
+msgstr "فعال"
+
+#: FC2.txt:1175
+#: FC2.txt:1212
+msgid "turn off"
+msgstr "خاموش "
+
+#: FC2.txt:1178
+#: FC2.txt:1215
+msgid "not active"
+msgstr "فعال نبودن"
+
+#: FC2.txt:1181
+#: FC2.txt:1218
+msgid "turn on"
+msgstr "روشن کردن"
+
+#: FC2.txt:1186
+#: FC2.txt:1188
+#: FC2.txt:1223
+#: FC2.txt:1225
+msgid "Filesize : %d %sByte"
+msgstr ""
+
+#: FC2.txt:1190
+#: FC2.txt:1227
+msgid "Disk free : %d MByte"
+msgstr ""
+
+#: FC2.txt:1193
+#: FC2.txt:1230
+msgid "Download"
+msgstr "بارگذاری کردن"
+
+#: FC2.txt:1197
+#: FC2.txt:1234
+msgid "Delete"
+msgstr "حذف کردن"
+
+#: FC2.txt:1201
+msgid "Delete older 48h"
+msgstr "حذف کردن 48 ساعت قبلی"
+
+#: FC2.txt:1205
+#: FC2.txt:1242
+msgid "File %s does not exists"
+msgstr ""
+
+#: FC2.txt:1244
+msgid "Logging-Path: %s"
+msgstr ""
+
