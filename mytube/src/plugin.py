@@ -408,28 +408,28 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["feedlist"].style = "state"
 		self['feedlist'].setList(self.statuslist)
 
-# 		self.l3key = validate_cert(l3cert, self.l2key)
-# 		if self.l3key is None:
-# 			print "l3cert invalid"
-# 			return
-# 		rnd = get_rnd()
-# 		if rnd is None:
-# 			print "random error"
-# 			return
+		self.l3key = validate_cert(l3cert, self.l2key)
+		if self.l3key is None:
+			print "l3cert invalid"
+			return
+		rnd = get_rnd()
+		if rnd is None:
+			print "random error"
+			return
 
-# 		val = etpm.challenge(rnd)
-# 		result = decrypt_block(val, self.l3key)
+		val = etpm.challenge(rnd)
+		result = decrypt_block(val, self.l3key)
 
-# 		self.statuslist = []
-# 		if result[80:88] == rnd:
-# 			self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
-# 			self["feedlist"].style = "state"
-# 			self['feedlist'].setList(self.statuslist)
-# 			self.Timer.start(200)
-# 		else:
-# 			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
-# 			self["feedlist"].style = "state"
-# 			self['feedlist'].setList(self.statuslist)
+		self.statuslist = []
+		if result[80:88] == rnd:
+			self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+			self["feedlist"].style = "state"
+			self['feedlist'].setList(self.statuslist)
+			self.Timer.start(200)
+		else:
+			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+			self["feedlist"].style = "state"
+			self['feedlist'].setList(self.statuslist)
 
 		self.statuslist = []
 		self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
@@ -466,45 +466,45 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self["VKeyIcon"].hide()
 			self.statuslist = []
 			self.hideSuggestions()
-# 			result = None
-# 			if self.l3key is not None:
-# 				rnd = get_rnd()
-# 				if rnd is None:
-# 					return
-# 				val = etpm.challenge(rnd)
-# 				result = decrypt_block(val, self.l3key)
-# 			if not result or result[80:88] != rnd:
-# 				self["key_green"].show()
-# 				self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
-# 				self["feedlist"].style = "state"
-# 				self['feedlist'].setList(self.statuslist)
-# 			else:
-# 				print "Genuine Dreambox validation passed"
-# 				if self.FirstRun == True:
-# 					self.appendEntries = False
-# 					myTubeService.startService()
-# 				if self.HistoryWindow is not None:
-# 					self.HistoryWindow.deactivate()
-# 					self.HistoryWindow.instance.hide()
-# 				if status == 'getFeed':
-# 					self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
-# 				elif status == 'getSearchFeed':
-# 					self.statuslist.append(( _("Fetching search entries"), _("Trying to download the Youtube search results. Please wait..." ) ))
-# 				elif status == 'Error':
-# 					self.statuslist.append(( _("An error occured."), _("There was an error getting the feed entries. Please try again." ) ))
-# 				elif status == 'noVideos':
-# 					self["key_green"].show()
-# 					self.statuslist.append(( _("No videos to display"), _("Please select a standard feed or try searching for videos." ) ))
-# 				elif status == 'byPass':
-# 					self.statuslist.append(( _("Not fetching feed entries"), _("Please enter your search term." ) ))
-# 					self["feedlist"].style = "state"
-# 					self['feedlist'].setList(self.statuslist)
-# 					self.switchToConfigList()
-# 				self["feedlist"].style = "state"
-# 				self['feedlist'].setList(self.statuslist)
-# 				if self.FirstRun == True:
-# 					if config.plugins.mytube.general.loadFeedOnOpen.value:
-# 						self.getFeed(self.BASE_STD_FEEDURL, str(config.plugins.mytube.general.startFeed.value))
+			result = None
+			if self.l3key is not None:
+				rnd = get_rnd()
+				if rnd is None:
+					return
+				val = etpm.challenge(rnd)
+				result = decrypt_block(val, self.l3key)
+			if not result or result[80:88] != rnd:
+				self["key_green"].show()
+				self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+				self["feedlist"].style = "state"
+				self['feedlist'].setList(self.statuslist)
+			else:
+				print "Genuine Dreambox validation passed"
+				if self.FirstRun == True:
+					self.appendEntries = False
+					myTubeService.startService()
+				if self.HistoryWindow is not None:
+					self.HistoryWindow.deactivate()
+					self.HistoryWindow.instance.hide()
+				if status == 'getFeed':
+					self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+				elif status == 'getSearchFeed':
+					self.statuslist.append(( _("Fetching search entries"), _("Trying to download the Youtube search results. Please wait..." ) ))
+				elif status == 'Error':
+					self.statuslist.append(( _("An error occured."), _("There was an error getting the feed entries. Please try again." ) ))
+				elif status == 'noVideos':
+					self["key_green"].show()
+					self.statuslist.append(( _("No videos to display"), _("Please select a standard feed or try searching for videos." ) ))
+				elif status == 'byPass':
+					self.statuslist.append(( _("Not fetching feed entries"), _("Please enter your search term." ) ))
+					self["feedlist"].style = "state"
+					self['feedlist'].setList(self.statuslist)
+					self.switchToConfigList()
+				self["feedlist"].style = "state"
+				self['feedlist'].setList(self.statuslist)
+				if self.FirstRun == True:
+					if config.plugins.mytube.general.loadFeedOnOpen.value:
+						self.getFeed(self.BASE_STD_FEEDURL, str(config.plugins.mytube.general.startFeed.value))
 
 	def handleHelpWindow(self):
 		print "[handleHelpWindow]"
