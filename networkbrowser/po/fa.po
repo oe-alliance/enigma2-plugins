@@ -1,0 +1,295 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: network browser Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-14 12:43+0100\n"
+"PO-Revision-Date: 2012-07-26 00:20+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+#: ../src/MountEdit.py:265
+msgid ""
+"A mount entry with this name already exists!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+
+#: ../src/MountEdit.py:172
+msgid "Active"
+msgstr "فعال کردن"
+
+#: ../src/MountView.py:91
+msgid ""
+"Active/\n"
+"Inactive"
+msgstr ""
+
+#: ../src/MountManager.py:86
+msgid "Add a new NFS or CIFS mount point to your Dreambox."
+msgstr ""
+
+#: ../src/MountManager.py:86
+msgid "Add new network mount point"
+msgstr ""
+
+#: ../src/MountEdit.py:267
+msgid ""
+"Are you sure you want to save this network mount?\n"
+"\n"
+msgstr ""
+
+#: ../src/NetworkBrowser.py:129
+msgid "Browse network neighbourhood"
+msgstr "نگاهی به شبکه همسایه"
+
+#: ../src/MountEdit.py:103
+msgid "CIFS share"
+msgstr ""
+
+#: ../src/MountManager.py:92
+msgid "Change hostname"
+msgstr "تغییر نام میزبان"
+
+#: ../src/MountManager.py:92
+msgid "Change the hostname of your Dreambox."
+msgstr "تغییر نام میزبان در دستگاه شما"
+
+#: ../src/MountEdit.py:68
+#: ../src/MountManager.py:67
+#: ../src/MountView.py:93
+#: ../src/NetworkBrowser.py:87
+#: ../src/UserDialog.py:95
+#: ../src/UserManager.py:58
+msgid "Close"
+msgstr "بستن"
+
+#: ../src/UserManager.py:60
+msgid "Delete"
+msgstr "حذف کردن"
+
+#: ../src/MountView.py:94
+msgid "Delete selected mount"
+msgstr ""
+
+#: ../src/MountView.py:34
+msgid "Dir:"
+msgstr ""
+
+#: ../src/NetworkBrowser.py:286
+#: ../src/NetworkBrowser.py:288
+msgid "Do you want to enter a username and password for this host?\n"
+msgstr ""
+
+#: ../src/MountManager.py:125
+msgid "Enter new hostname for your Dreambox"
+msgstr "وارد کردن نام جدید میزبان در دستگاه شما"
+
+#: ../src/MountEdit.py:209
+msgid "Enter options:"
+msgstr "وارد کردن گزینه ها"
+
+#: ../src/MountEdit.py:213
+#: ../src/UserDialog.py:154
+msgid "Enter password:"
+msgstr "وارد کردن رمز ورود"
+
+#: ../src/MountEdit.py:207
+msgid "Enter share directory:"
+msgstr "وارد کردن دایرکتوری اشتراک گذاشته شده"
+
+#: ../src/MountEdit.py:205
+msgid "Enter share name:"
+msgstr "وارد کردن نام به اشتراک گذاشته شده "
+
+#: ../src/UserDialog.py:101
+msgid "Enter user and password for host: "
+msgstr "وارد کردن نام کاربری و رمز ورود برای میزبان"
+
+#: ../src/MountEdit.py:211
+#: ../src/UserDialog.py:152
+msgid "Enter username:"
+msgstr "وارد نمودن نام کاربری"
+
+#: ../src/MountManager.py:149
+msgid "Finished restarting your network"
+msgstr "اتمام راه اندازی شبکه شما"
+
+#: ../src/MountView.py:31
+msgid "IP:"
+msgstr ""
+
+#: ../src/MountEdit.py:174
+msgid "Local share name"
+msgstr ""
+
+#: ../src/plugin.py:34
+msgid "Manage network shares"
+msgstr ""
+
+#: ../src/plugin.py:34
+msgid "Manage your network shares..."
+msgstr ""
+
+#: ../src/MountView.py:90
+msgid "Mount informations"
+msgstr "اطلاعات مونت"
+
+#: ../src/MountEdit.py:186
+msgid "Mount options"
+msgstr "گزینه های مونت"
+
+#: ../src/MountEdit.py:176
+msgid "Mount type"
+msgstr "نوع مونت"
+
+#: ../src/MountManager.py:77
+#: ../src/plugin.py:34
+msgid "MountManager"
+msgstr "مدیر مونت"
+
+#: ../src/MountView.py:89
+msgid ""
+"Mounted/\n"
+"Unmounted"
+msgstr ""
+
+#: ../src/MountManager.py:88
+msgid "Mountpoints management"
+msgstr ""
+
+#: ../src/MountEdit.py:72
+msgid "Mounts editor"
+msgstr "ویرایشگر مونت"
+
+#: ../src/NetworkBrowser.py:88
+msgid "Mounts management"
+msgstr "مدیریت مونت"
+
+#: ../src/MountEdit.py:102
+msgid "NFS share"
+msgstr ""
+
+#: ../src/plugin.py:33
+msgid "NetworkBrowser"
+msgstr "مرورگر شبکه"
+
+#: ../src/NetworkBrowser.py:141
+#: ../src/NetworkBrowser.py:160
+msgid "No network devices found!"
+msgstr "هیچ دستگاهی در شبکه یافت نشد "
+
+#: ../src/MountEdit.py:191
+#: ../src/UserDialog.py:142
+msgid "Password"
+msgstr "رمز ورود"
+
+#: ../src/MountEdit.py:320
+msgid "Please wait for activation of your network mount..."
+msgstr "لطفا به منظور فعال سازی مونت شبکه تان صبر کنید ..."
+
+#: ../src/MountView.py:130
+msgid "Please wait while removing your network mount..."
+msgstr "لطفا تا هنگامی که مونت شبکه در حال پاک شدن است صبر کنید ..."
+
+#: ../src/MountEdit.py:282
+msgid "Please wait while updating your network mount..."
+msgstr "لطفا تا بروزرسانی مونت شبکه تان صبر کنید ..."
+
+#: ../src/MountManager.py:136
+msgid "Please wait while your network is restarting..."
+msgstr "لطفا در تا زمانی که شبکه تان در حال ریستارت است صبر کنید ..."
+
+#: ../src/MountEdit.py:66
+msgid "Press OK to activate the settings."
+msgstr "دکمه اوکی را جهت فعال سازی تنظیمات فشار دهید"
+
+#: ../src/UserManager.py:59
+msgid "Press OK to edit selected settings."
+msgstr "دکمه اوکی را جهت ویرایش تنظیمات انتخاب شده فشار دهید"
+
+#: ../src/MountView.py:92
+msgid "Press OK to edit the settings."
+msgstr "دکمه اوکی را جهت ویرایش تنظیمات فشار دهید"
+
+#: ../src/NetworkBrowser.py:90
+msgid "Press OK to mount!"
+msgstr "به منظور مونت کردن دکمه اوکی را فشار دهید"
+
+#: ../src/UserDialog.py:93
+msgid "Press OK to save settings."
+msgstr "دکمه اوکی را جهت ذخیره سازی تنظیماتفشار دهید"
+
+#: ../src/MountManager.py:68
+msgid "Press OK to select."
+msgstr "جهت انتخاب دکمه را فشار دهید"
+
+#: ../src/NetworkBrowser.py:89
+msgid "Rescan network"
+msgstr "اسکن مجدد شبکه "
+
+#: ../src/NetworkBrowser.py:92
+msgid "Retrieving network information. Please wait..."
+msgstr "بازیابی مجدد اطلاعات شبکه لطفا صبر کنید ..."
+
+#: ../src/plugin.py:33
+msgid "Search for network shares"
+msgstr "جستجو برای یافتن یک شبکه به اشتراک گذاشته شده"
+
+#: ../src/plugin.py:33
+msgid "Search for network shares..."
+msgstr "در حال جستجو برای یافتن یک شبکه به اشتراک گذاشته شده..."
+
+#: ../src/MountEdit.py:178
+msgid "Server IP"
+msgstr ""
+
+#: ../src/MountEdit.py:180
+msgid "Server share"
+msgstr ""
+
+#: ../src/UserDialog.py:96
+msgid "Use domain/username for windows domains as username!"
+msgstr ""
+
+#: ../src/MountManager.py:90
+msgid "User management"
+msgstr "مدیریت کاربری"
+
+#: ../src/UserManager.py:68
+msgid "Usermanager"
+msgstr "مدیر کاربر"
+
+#: ../src/MountEdit.py:189
+#: ../src/UserDialog.py:140
+msgid "Username"
+msgstr "نام کاربری"
+
+#: ../src/MountManager.py:88
+msgid "View, edit or delete mountpoints on your Dreambox."
+msgstr "نمایش - ویرایش یا پاک کردن مونت پوینت دستگاه رسیور شما"
+
+#: ../src/MountManager.py:90
+msgid "View, edit or delete usernames and passwords for your network."
+msgstr "نمایش - ویرایش یا پاک کردن نام کاربری و رمز ورود برای شبکه شما"
+
+#: ../src/MountEdit.py:336
+msgid "Your network mount has been activated."
+msgstr "مونت شبکه شما فعال گردید"
+
+#: ../src/MountView.py:147
+msgid "Your network mount has been removed."
+msgstr "مونت شبکه شما پاک گردید"
+
+#: ../src/MountEdit.py:298
+msgid "Your network mount has been updated."
+msgstr "مونت شبکه شما به روز رسانی گردید"
+

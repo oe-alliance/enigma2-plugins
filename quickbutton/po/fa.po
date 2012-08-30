@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: quick button Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-14 14:29+0200\n"
+"PO-Revision-Date: 2012-07-26 01:06+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+#: ../src/plugin.py:84
+msgid "Assign plugin to long blue key pressed"
+msgstr "ارجاع دادن پلاگین به فشردن طولانی کلید آبی "
+
+#: ../src/plugin.py:81
+msgid "Assign plugin to long green key pressed"
+msgstr "ارجاع دادن پلاگین به فشردن طولانی کلید سبز "
+
+#: ../src/plugin.py:83
+msgid "Assign plugin to long red key pressed"
+msgstr "ارجاع دادن پلاگین به فشردن طولانی کلید قرمز "
+
+#: ../src/plugin.py:82
+msgid "Assign plugin to long yellow key pressed"
+msgstr "ارجاع دادن پلاگین به فشردن طولانی کلید زرد "
+
+#: ../src/plugin.py:86
+msgid "Assign plugin to red key pressed"
+msgstr "ارجاع دادن پلاگین به فشردن کلید قرمز "
+
+#: ../src/plugin.py:180
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: ../src/plugin.py:143
+msgid "Display 4:3 content as"
+msgstr ""
+
+#: ../src/plugin.py:121
+#: ../src/plugin.py:190
+#: ../src/plugin.py:234
+msgid "EPG List"
+msgstr ""
+
+#: ../src/plugin.py:131
+#: ../src/plugin.py:159
+#, python-format
+msgid ""
+"Error!\n"
+"Error Text: %s"
+msgstr ""
+
+#: ../src/plugin.py:139
+msgid "Just Scale"
+msgstr "فقط قیاس"
+
+#: ../src/plugin.py:125
+#: ../src/plugin.py:191
+#: ../src/plugin.py:236
+msgid "MediaPlayer"
+msgstr "مدیاپلیر"
+
+#: ../src/plugin.py:163
+msgid "No plugin assigned!"
+msgstr "هیچ پلاگینی اختصاص داده نشده است"
+
+#: ../src/plugin.py:36
+#: ../src/plugin.py:37
+#: ../src/plugin.py:38
+#: ../src/plugin.py:39
+#: ../src/plugin.py:40
+#: ../src/plugin.py:120
+#: ../src/plugin.py:189
+msgid "Nothing"
+msgstr "هیچ چی"
+
+#: ../src/plugin.py:181
+msgid "OK"
+msgstr "مورد تایید است "
+
+#: ../src/plugin.py:138
+msgid "Pan&Scan"
+msgstr "پن اسکن"
+
+#: ../src/plugin.py:137
+msgid "Pillarbox"
+msgstr "صندوق پستی ستونی"
+
+#: ../src/plugin.py:132
+#: ../src/plugin.py:192
+#: ../src/plugin.py:238
+msgid "Plugin browser"
+msgstr "پلاگین مرورگر"
+
+#: ../src/plugin.py:161
+msgid "Plugin not found!"
+msgstr "پلاگین مورد نظر یافت نشد !"
+
+#: ../src/plugin.py:145
+#: ../src/plugin.py:194
+#: ../src/plugin.py:242
+msgid "Timer"
+msgstr "تایمر"
+
+#: ../src/plugin.py:118
+msgid "Unknown Error"
+msgstr "رخداد یک خطای ناشناس"
+
+#: ../src/plugin.py:219
+msgid "assigned to long blue"
+msgstr "ارجاع دادن طولانی به دکمه آبی"
+
+#: ../src/plugin.py:217
+msgid "assigned to long green"
+msgstr "ارجاع دادن طولانی به دکمه سبز"
+
+#: ../src/plugin.py:216
+msgid "assigned to long red"
+msgstr "ارجاع دادن طولانی به دکمه قرمز"
+
+#: ../src/plugin.py:218
+msgid "assigned to long yellow"
+msgstr "ارجاع دادن طولانی به دکمه زرد"
+
+#: ../src/plugin.py:224
+msgid "assigned to red"
+msgstr "ارجاع دادن به دکمه قرمز"
+
+#: ../src/plugin.py:74
+msgid "setup for Quickbutton"
+msgstr "تنظیمات برای دکمه های میانبر"
+
+#: ../src/plugin.py:136
+#: ../src/plugin.py:193
+#: ../src/plugin.py:240
+msgid "switch 4:3 content display"
+msgstr "تغییر 3:4 محتویات صفحه نمایش"
+

@@ -1,0 +1,40 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: permanent clock Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-26 18:22-0000\n"
+"PO-Revision-Date: 2012-07-26 00:31+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/permanentclock/src\n"
+
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:54
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:210
+msgid "Permanent Clock"
+msgstr "ساعت دائمی "
+
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:178
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:186
+msgid "Deactivate permanent clock"
+msgstr "غیر فعال کردن ساعت دائمی"
+
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:180
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:186
+msgid "Activate permanent clock"
+msgstr "فعال کردن ساعت دائمی"
+
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:181
+msgid "Change permanent clock position"
+msgstr "تغییر مکان ساعت دائمی"
+
+#: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:210
+msgid "Shows the clock permanent on the screen"
+msgstr "نمایش ساعت دائمی بروی صفحه نمایش"
+

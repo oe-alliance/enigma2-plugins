@@ -1,0 +1,56 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin hider Persian Translation\n"
+"POT-Creation-Date: 2011-06-16 22:14+0000\n"
+"PO-Revision-Date: 2012-08-27 01:11+0330\n"
+"Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: /Users/fk/Desktop/PluginHiderpath\n"
+"Language: Persian\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:46
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:51
+msgid "Eventinfo"
+msgstr "اطلاعات رخدادها"
+
+#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:50
+msgid "Extensions"
+msgstr "توسعه"
+
+#: /Users/fk/Desktop/PluginHider/plugin.py:52
+msgid "Hide Plugins"
+msgstr "مخفی سازی پلاگین"
+
+#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:48
+msgid "Next"
+msgstr "بعدی"
+
+#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:45
+msgid "OK"
+msgstr "اوکی"
+
+#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:96
+msgid "PluginHider Setup"
+msgstr "تنظیم پلاگین مخفی سازی"
+
+#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:49
+msgid "Plugins"
+msgstr "پلالگین ها"
+
+#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:47
+msgid "Previous"
+msgstr "قبلی"

@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: imdb Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-17 18:30+0100\n"
+"PO-Revision-Date: 2012-07-25 22:59+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+#: ../src/plugin.py:442
+msgid " as "
+msgstr "به عنوان"
+
+#: ../src/plugin.py:248
+msgid "Ambiguous results"
+msgstr "نتایج مبهم"
+
+#: ../src/plugin.py:444
+msgid "Cast: "
+msgstr "پخش کردن :"
+
+#: ../src/plugin.py:41
+msgid "Channel Selection"
+msgstr "انتخاب کانال"
+
+#: ../src/plugin.py:321
+msgid "Could't get Eventname"
+msgstr "تهیه کردن نام رویداد ها ممکن نیست"
+
+#: ../src/plugin.py:253
+#: ../src/plugin.py:399
+msgid "Details"
+msgstr "جزئیات"
+
+#: ../src/plugin.py:452
+#, python-format
+msgid "Downloading Movie Poster: %s..."
+msgstr "%s... در حال بارگذاری پوستر فیلم "
+
+#: ../src/plugin.py:145
+msgid "Exit"
+msgstr "خارج شدن"
+
+#: ../src/plugin.py:471
+msgid "Extra Info"
+msgstr "اطلاعات اضافی"
+
+#: ../src/plugin.py:400
+#: ../src/plugin.py:476
+msgid "IMDb Details parsed"
+msgstr "IMDb تجزیه و تحلیل دقیق"
+
+#: ../src/plugin.py:352
+msgid "IMDb Download completed"
+msgstr "IMDb بصورت کامل بارگذاری گردید"
+
+#: ../src/plugin.py:325
+msgid "IMDb Download failed"
+msgstr "ناموفق بود IMDb  بارگذاری"
+
+#: ../src/plugin.py:505
+msgid "IMDb Plugin"
+msgstr "IMDb پلاگین"
+
+#: ../src/plugin.py:389
+msgid "IMDb Re-Download completed"
+msgstr "کامل گردید IMDb بارگذاری مجدد"
+
+#: ../src/plugin.py:386
+msgid "IMDb query failed!"
+msgstr "ناموفق گردید IMDb پرس و جوی"
+
+#: ../src/plugin.py:70
+msgid "Lookup"
+msgstr "مراجعه"
+
+#: ../src/plugin.py:373
+#: ../src/plugin.py:374
+msgid "No IMDb match."
+msgstr "IMDb سازگار نیست"
+
+#: ../src/plugin.py:446
+msgid "No cast list found in the database."
+msgstr "هیچ لیست توزیعی در بانک اطلاعاتی پیدا نشد"
+
+#: ../src/plugin.py:397
+msgid "No details found."
+msgstr "هیچ جزئیاتی یافت نشد"
+
+#: ../src/plugin.py:249
+msgid "Please select the matching entry"
+msgstr "لطفا ورودی های سازگار را انتخاب کنید"
+
+#: ../src/plugin.py:314
+#, python-format
+msgid "Query IMDb: %s..."
+msgstr ""
+
+#: ../src/plugin.py:517
+#: ../src/plugin.py:522
+#: ../src/plugin.py:529
+msgid "Query details from the Internet Movie Database"
+msgstr "پرس و جو از بانک اطلاعاتی فیلم های اینترنتی "
+
+#: ../src/plugin.py:264
+#: ../src/plugin.py:379
+#, python-format
+msgid "Re-Query IMDb: %s..."
+msgstr ""
+
+#: ../src/plugin.py:135
+msgid "The Internet Movie Database"
+msgstr "بانک اطلاعاتی فیلم های اینترنتی"
+
+#: ../src/plugin.py:252
+msgid "Title Menu"
+msgstr "عنوان منو"
+
+#: ../src/plugin.py:427
+msgid "no user rating yet"
+msgstr "هیچ کاربری هنوز رتبه بندی نشده است"
+

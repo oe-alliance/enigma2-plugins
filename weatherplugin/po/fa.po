@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: weather plugin Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-15 23:35+0200\n"
+"PO-Revision-Date: 2012-07-25 22:42+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+#: ../src/setup.py:66
+msgid "Add"
+msgstr "افزودن"
+
+#: ../src/setup.py:171
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: ../src/setup.py:64
+msgid "City"
+msgstr "شهر"
+
+#: ../src/setup.py:183
+msgid "City or Postal Code"
+msgstr "شهر یا کد پستی"
+
+#: ../src/plugin.py:203
+#, python-format
+msgid "Current: %s"
+msgstr "وضعیت موجود %s"
+
+#: ../src/setup.py:68
+#: ../src/setup.py:173
+msgid "Delete"
+msgstr "حذف کردن"
+
+#: ../src/setup.py:67
+msgid "Edit"
+msgstr "ویرایش کردن"
+
+#: ../src/plugin.py:130
+msgid "Getting weather information..."
+msgstr "در حال دریافت کردن اطلاعات آب و هوایی ..."
+
+#: ../src/setup.py:65
+#: ../src/setup.py:184
+msgid "Language"
+msgstr "زبان "
+
+#: ../src/plugin.py:134
+msgid ""
+"No locations defined...\n"
+"Press 'Menu' to do that."
+msgstr ""
+
+#: ../src/setup.py:172
+msgid "OK"
+msgstr "مورد تایید است"
+
+#: ../src/setup.py:106
+#: ../src/setup.py:207
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "آیا واقعا ورودی های پلاگین آب و هوا را می خواهید حذف کنید "
+
+#: ../src/plugin.py:61
+msgid "Weather Plugin"
+msgstr "پلاگین آب و هوا"
+
+#: ../src/setup.py:161
+msgid "WeatherPlugin: Edit Entry"
+msgstr "پلاگین آب و هوا : ویرایش ورودی ها"
+
+#: ../src/setup.py:59
+msgid "WeatherPlugin: List of Entries"
+msgstr "پلاگین آب و هوا : لیست ورودی ها "
+

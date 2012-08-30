@@ -1,0 +1,171 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: movie cut Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-08 20:54+0200\n"
+"PO-Revision-Date: 2012-08-27 01:06+0330\n"
+"Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: Persian\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: plugin.py:23
+msgid "Execute cuts..."
+msgstr "اجراسازی برش ها ..."
+
+#: plugin.py:37
+msgid "Don't cut"
+msgstr "برش نده"
+
+#: plugin.py:38
+msgid "Replace the original movie with the cut movie"
+msgstr "جایگزینی فیلم اصلی با فیلم برش خورده"
+
+#: plugin.py:39
+msgid "Place the cut movie in a new file ending with \" cut\""
+msgstr ""
+
+#: plugin.py:40
+msgid "Advanced cut specification..."
+msgstr "مشخصات برش پیشرفته ..."
+
+#: plugin.py:42
+#, python-format
+msgid "How would you like to cut \"%s\"?"
+msgstr ""
+
+#: plugin.py:86
+msgid "OK"
+msgstr "درست است"
+
+#: plugin.py:87
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#: plugin.py:95
+msgid "No"
+msgstr "نه"
+
+#: plugin.py:95
+msgid "Yes"
+msgstr "بله"
+
+#: plugin.py:103
+msgid "Cutlist"
+msgstr "لیست برش"
+
+#: plugin.py:103
+msgid "Manual specification"
+msgstr "مشخصات دستی"
+
+#: plugin.py:117
+msgid "Replace original:"
+msgstr "جایگزینی نسخه اصلی :"
+
+#: plugin.py:118
+msgid "New filename:"
+msgstr "نام فیلم جدید"
+
+#: plugin.py:119
+msgid "New title:"
+msgstr "عنوان جدید :"
+
+#: plugin.py:120
+msgid "New description:"
+msgstr "ت.ضیحات جدید :"
+
+#: plugin.py:121
+msgid "New location:"
+msgstr "مکان جدید :"
+
+#: plugin.py:122
+msgid "Cut source:"
+msgstr "برش مبدا "
+
+#: plugin.py:123
+msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
+msgstr ""
+
+#: plugin.py:130
+msgid "Cut Parameter Input"
+msgstr "برش پارامترهای ورودی"
+
+#: plugin.py:178
+msgid "Choose target folder"
+msgstr "انتخاب پوشه مورد نظر"
+
+#: plugin.py:245
+#, python-format
+msgid "The movie \"%s\" is successfully cut"
+msgstr ""
+
+#: plugin.py:246 plugin.py:247 plugin.py:248 plugin.py:249 plugin.py:250
+#: plugin.py:251 plugin.py:252 plugin.py:253 plugin.py:254 plugin.py:255
+#, python-format
+msgid "Cutting failed for movie \"%s\""
+msgstr ""
+
+#: plugin.py:246
+msgid "Bad arguments"
+msgstr "استدلال بد"
+
+#: plugin.py:247
+msgid "Couldn't open input .ts file"
+msgstr ".TS ناتوان در باز کردن فایل های ورودی"
+
+#: plugin.py:248
+msgid "Couldn't open input .cuts file"
+msgstr ".cuts ناتوان در باز کردن فایل های ورودی"
+
+#: plugin.py:249
+msgid "Couldn't open input .ap file"
+msgstr ".ap ناتوان در باز کردن فایل های ورودی"
+
+#: plugin.py:250
+msgid "Couldn't open output .ts file"
+msgstr ".TS ناتوان در باز کردن فایل های خروجی"
+
+#: plugin.py:251
+msgid "Couldn't open output .cuts file"
+msgstr ".cuts ناتوان در باز کردن فایل های خروجی"
+
+#: plugin.py:252
+msgid "Couldn't open output .ap file"
+msgstr ".ap ناتوان در باز کردن فایل های خروجی"
+
+#: plugin.py:253
+msgid "Empty .ap file"
+msgstr ""
+
+#: plugin.py:254
+msgid "No cuts specified"
+msgstr "هیچ برش مشخصی وجود ندارد"
+
+#: plugin.py:255
+msgid "Read/write error (disk full?)"
+msgstr "خطا خواندن و نشتن ( دیسک پر است )"
+
+#: plugin.py:256
+#, python-format
+msgid "Cutting was aborted for movie \"%s\""
+msgstr ""
+
+#: plugin.py:275
+#, python-format
+msgid "The movie \"%s\" is cut in the background."
+msgstr ""
+
+#: plugin.py:277
+#, python-format
+msgid ""
+"Another movie is currently cut.\n"
+"The movie \"%s\" will be cut in the background after it."
+msgstr ""

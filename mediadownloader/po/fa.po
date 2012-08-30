@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: media downloader Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-07 00:43+0100\n"
+"PO-Revision-Date: 2012-07-25 23:04+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+#: ../src/MediaDownloader.py:215
+#, python-format
+msgid "%d kb/s"
+msgstr ""
+
+#: ../src/MediaDownloader.py:148
+msgid "?? kb/s"
+msgstr ""
+
+#: ../src/MediaDownloader.py:245
+msgid "Do you want to try to open the downloaded file?"
+msgstr "ایا می خواهید سعی در باز کردن فایل های دانلودی کنید ؟"
+
+#: ../src/plugin.py:83
+msgid "Download..."
+msgstr "بارگذاری کردن ..."
+
+#: ../src/MediaDownloader.py:145
+msgid "Downloading..."
+msgstr "در حال بارگذاری کردن ..."
+
+#: ../src/MediaDownloader.py:214
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr ""
+
+#: ../src/MediaDownloader.py:147
+msgid "ETA ??:?? h"
+msgstr ""
+
+#: ../src/MediaDownloader.py:262
+#, python-format
+msgid "Error while downloading file %s"
+msgstr " : خطا در حین بارگذاری%s"
+
+#: ../src/MediaDownloader.py:228
+msgid "No suitable Viewer found!"
+msgstr "هیچ ناظز مناسبی یافت نشد"
+
+#: ../src/MediaDownloader.py:172
+msgid "Where to save?"
+msgstr "کجا ذخیره شود ؟"
+
+#: ../src/plugin.py:58
+msgid "Which file do you want to download?"
+msgstr "کدام فایل را می خواهید بارگذاری کنید ؟"
+
