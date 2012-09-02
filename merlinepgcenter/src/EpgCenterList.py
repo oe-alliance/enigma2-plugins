@@ -363,6 +363,8 @@ class EpgCenterList(GUIComponent):
 			
 		if self.mode == MULTI_EPG_NOW and not self.similarShown:
 			extraWidth = int(config.plugins.merlinEpgCenter.adjustFontSize.value)
+			if extraWidth < 0:
+				extraWidth = 0
 			if self.videoMode == MODE_SD:
 				width = self.maxWidth * (18 + extraWidth) / 100
 			else:
@@ -397,10 +399,13 @@ class EpgCenterList(GUIComponent):
 				
 			offsetLeft = offsetLeft + width + columnSpace
 		else:
+			extraWidth = int(config.plugins.merlinEpgCenter.adjustFontSize.value)
+			if extraWidth < 0:
+				extraWidth = 0
 			if self.videoMode == MODE_SD:
-				width = self.maxWidth * 18 / 100
+				width = self.maxWidth * (18 + extraWidth) / 100
 			else:
-				width = self.maxWidth * 14 / 100
+				width = self.maxWidth * (14 + extraWidth) / 100
 			if self.mode == SINGLE_EPG or self.mode == EPGSEARCH_RESULT or self.similarShown:
 				fd = getFuzzyDay(begin)
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, width, self.halfItemHeight - border, 1, RT_HALIGN_CENTER|RT_VALIGN_TOP, timeString, textColor))
@@ -1005,10 +1010,13 @@ class EpgCenterTimerlist(TimerList):
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "AutoTimer"))
 			offsetLeft = offsetLeft + width + columnSpace
 			
+		extraWidth = int(config.plugins.merlinEpgCenter.adjustFontSize.value)
+		if extraWidth < 0:
+			extraWidth = 0
 		if self.videoMode == MODE_SD:
-			width = self.maxWidth * 18 / 100
+			width = self.maxWidth * (18 + extraWidth) / 100
 		else:
-			width = self.maxWidth * 14 / 100
+			width = self.maxWidth * (14 + extraWidth) / 100
 			
 		if isinstance(timer, RecordTimerEntry):
 			fd = getFuzzyDay(timer.begin)
