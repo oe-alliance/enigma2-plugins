@@ -21,7 +21,7 @@ from threading import Thread
 HTTPConnection.debuglevel = 1
 
 def validate_cert(cert, key):
-	buf = decrypt_block(cert[8:], key) 
+	buf = decrypt_block(cert[8:], key)
 	if buf is None:
 		return None
 	return buf[36:107] + cert[139:196]
@@ -62,12 +62,12 @@ class GoogleSuggestions():
 		self.prepQuerry = self.prepQuerry + "jsonp=self.gotSuggestions&q="
 		print "[MyTube - GoogleSuggestions] prepareQuery:",self.prepQuerry
 
-	def getSuggestions(self, querryString):
+	def getSuggestions(self, queryString):
 		self.prepareQuery()
-		if querryString is not "":
-			querry = self.prepQuerry + quote(querryString)
+		if queryString is not "":
+			query = self.prepQuerry + quote(queryString)
 			try:
-				self.conn.request("GET", querry)
+				self.conn.request("GET", query, "", {"Accept-Encoding": "UTF-8"})
 			except (CannotSendRequest, gaierror, error):
 				print "[MyTube - GoogleSuggestions] Can not send request for suggestions"
 				return None
@@ -80,6 +80,15 @@ class GoogleSuggestions():
 				else:
 					if response.status == 200:
 						data = response.read()
+						header = response.getheader("Content-Type", "text/xml; charset=ISO-8859-1")
+						charset = "ISO-8859-1"
+						try:
+							charset = header.split(";")[1].split("=")[1]
+							print "[MyTube - GoogleSuggestions] Got charset %s" %charset
+						except:
+							print "[MyTube - GoogleSuggestions] No charset in Header, falling back to %s" %charset
+
+						data = data.decode(charset).encode("utf-8")
 						return data
 					else:
 						return None
@@ -102,7 +111,7 @@ class MyTubeFeedEntry():
 		else:
 			self.myopener = MyOpener()
 			urllib.urlopen = MyOpener().open"""
-		
+
 	def isPlaylistEntry(self):
 		return False
 
@@ -144,7 +153,7 @@ class MyTubeFeedEntry():
 		if self.entry.statistics is not None:
 			return self.entry.statistics.view_count
 		return "not available"
-	
+
 	def getDuration(self):
 		if self.entry.media is not None and self.entry.media.duration is not None:
 			return self.entry.media.duration.seconds
@@ -160,7 +169,7 @@ class MyTubeFeedEntry():
 	def getNumRaters(self):
 		if self.entry.rating is not None:
 			return self.entry.rating.num_raters
-		return ""	
+		return ""
 
 	def getAuthor(self):
 		authors = []
@@ -259,9 +268,9 @@ class MyTubeFeedEntry():
 			print "[MyTube] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
 			video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
 			print "[MyTube] found best available video url:",video_url
-		
+
 		return video_url
-	
+
 	def getRelatedVideos(self):
 		print "[MyTubeFeedEntry] getRelatedVideos()"
 		for link in self.entry.link:
@@ -293,12 +302,12 @@ class MyTubePlayerService():
 		print "[MyTube] MyTubePlayerService - init"
 		self.feedentries = []
 		self.feed = None
-				
+
 	def startService(self):
 		print "[MyTube] MyTubePlayerService - startService"
-		self.yt_service = gdata.youtube.service.YouTubeService( 
+		self.yt_service = gdata.youtube.service.YouTubeService(
 			developer_key = 'AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw',
-			client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0' 
+			client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0'
 		)
 #		self.loggedIn = False
 		#os.environ['http_proxy'] = 'http://169.229.50.12:3128'
@@ -342,14 +351,14 @@ class MyTubePlayerService():
 		elif feedname in ("top_rated","most_viewed","recently_featured","top_favorites","most_recent","most_discussed","most_linked","most_responded"):
 			url = None
 			ytservice = self.getFeedService(feedname)
-				
-		queryThread = YoutubeQueryThread(ytservice, url, self.gotFeed, self.gotFeedError, callback, errorback)	
+
+		queryThread = YoutubeQueryThread(ytservice, url, self.gotFeed, self.gotFeedError, callback, errorback)
 		queryThread.start()
-		return queryThread		
+		return queryThread
 
 	def search(self, searchTerms, startIndex = 1, maxResults = 25,
-					orderby = "relevance", time = 'all_time', racy = "include", 
-					author = "", lr = "", categories = "", sortOrder = "ascending", 
+					orderby = "relevance", time = 'all_time', racy = "include",
+					author = "", lr = "", categories = "", sortOrder = "ascending",
 					callback = None, errorback = None):
 		print "[MyTube] MyTubePlayerService - search()"
 		self.feedentries = []
@@ -367,8 +376,8 @@ class MyTubePlayerService():
 		query.max_results = maxResults
 		queryThread = YoutubeQueryThread(self.yt_service.YouTubeQuery, query, self.gotFeed, self.gotFeedError, callback, errorback)
 		queryThread.start()
-		return queryThread	
-	
+		return queryThread
+
 	def gotFeed(self, feed, callback):
 		if feed is not None:
 			self.feed = feed
@@ -377,12 +386,12 @@ class MyTubePlayerService():
 				self.feedentries.append(MyFeedEntry)
 		if callback is not None:
 			callback(self.feed)
-			
+
 	def gotFeedError(self, exception, errorback):
 		if errorback is not None:
 			errorback(exception)
-	
-	
+
+
 	def getTitle(self):
 		return self.feed.title.text
 
@@ -394,7 +403,7 @@ class MyTubePlayerService():
 
 	def getTotalResults(self):
 		return self.feed.total_results.text
-	
+
 	def getNextFeedEntriesURL(self):
 		for link in self.feed.link:
 			if link.rel == "next":
@@ -414,10 +423,10 @@ class YoutubeQueryThread(Thread):
 		self.param = param
 		self.canceled = False
 		self.messagePump.recv_msg.get().append(self.finished)
-	
+
 	def cancel(self):
 		self.canceled = True
-	
+
 	def run(self):
 		try:
 			if self.param is None:
@@ -428,14 +437,14 @@ class YoutubeQueryThread(Thread):
 			self.messagePump.send(0)
 		except Exception, ex:
 			self.messages.push((False, ex, self.errorback))
-			self.messagePump.send(0)			
-	
-	def finished(self, val):		
+			self.messagePump.send(0)
+
+	def finished(self, val):
 		if not self.canceled:
 			message = self.messages.pop()
-			if message[0]:		
+			if message[0]:
 				self.gotFeed(message[1], message[2])
 			else:
 				self.gotFeedError(message[1], message[2])
-		
+
 myTubeService = MyTubePlayerService()
