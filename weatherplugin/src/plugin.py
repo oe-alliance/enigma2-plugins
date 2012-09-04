@@ -100,7 +100,8 @@ class MSNWeatherPlugin(Screen):
 			"back": self.close,
 			"input_date_time": self.config,
 			"right": self.nextItem,
-			"left": self.previousItem
+			"left": self.previousItem,
+			"info": self.showWebsite
 		}, -1)
 
 		self["statustext"] = StaticText()
@@ -138,6 +139,7 @@ class MSNWeatherPlugin(Screen):
 		self.language = config.osd.language.value.replace("_","-")
 		if self.language == "en-EN": # hack
 			self.language = "en-US"
+		self.webSite = ""		
 		self.onLayoutFinish.append(self.startRun)
 
 	def startRun(self):
@@ -179,6 +181,7 @@ class MSNWeatherPlugin(Screen):
 		self["observationpoint"].text = ""
 		self["feelsliketemp"].text = ""
 		self["currenticon"].hide()
+		self.webSite = ""
 		i = 1
 		while i <= 5:
 			self["weekday%s" % i].text = ""
@@ -218,6 +221,7 @@ class MSNWeatherPlugin(Screen):
 				self["caption"].text = self.weatherPluginEntry.city.value #childs.attrib.get("weatherlocationname").encode("utf-8", 'ignore')
 				degreetype = childs.attrib.get("degreetype").encode("utf-8", 'ignore')
 				imagerelativeurl = "%slaw/" % childs.attrib.get("imagerelativeurl").encode("utf-8", 'ignore')
+				self.webSite = childs.attrib.get("url").encode("utf-8", 'ignore')
 			for items in childs:
 				if items.tag == "current":
 					self["currentTemp"].text = "%s°%s" % (items.attrib.get("temperature").encode("utf-8", 'ignore') , degreetype)
@@ -277,6 +281,13 @@ class MSNWeatherPlugin(Screen):
 		if error is not None:
 			self.clearFields()
 			self["statustext"].text = str(error.getErrorMessage())
+
+	def showWebsite(self):
+		try:
+			from Plugins.Extensions.Browser.Browser import Browser
+			if self.webSite:
+				self.session.open(Browser, config.plugins.WebBrowser.fullscreen.value, self.webSite, False)
+		except: pass # I dont care if browser is installed or not...
 
 class WeatherIcon(Pixmap):
 	def __init__(self):
