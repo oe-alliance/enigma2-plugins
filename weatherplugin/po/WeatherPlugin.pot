@@ -78,3 +78,43 @@ msgstr ""
 #: ../src/setup.py:59
 msgid "WeatherPlugin: List of Entries"
 msgstr ""
+
+msgid "Location code"
+msgstr ""
+
+msgid "System"
+msgstr ""
+
+msgid "Search Code"
+msgstr ""
+
+msgid "metric system"
+msgstr ""
+
+msgid "imperial system"
+msgstr ""
+
+msgid "Observation time: %s"
+msgstr ""
+
+msgid "Observation point: %s"
+msgstr ""
+
+msgid "Feels like %s"
+msgstr ""
+
+msgid "Humidity: %s %%"
+msgstr ""
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr ""
+
+msgid "Please enter a valid city name."
+msgstr ""
+
+msgid "Please enter a valid location code for the city."
+msgstr ""
+
+msgid "MSN location search result"
+msgstr ""
+
