@@ -577,10 +577,6 @@ teletext/src/Makefile
 toolkit/Makefile
 toolkit/src/Makefile
 
-trafficinfo/Makefile
-trafficinfo/meta/Makefile
-trafficinfo/src/Makefile
-
 tvcharts/Makefile
 tvcharts/meta/Makefile
 tvcharts/src/Makefile

@@ -100,7 +100,6 @@ SUBDIRS = \
 	tageditor \
 	teletext \
 	toolkit \
-	trafficinfo \
 	tvcharts \
 	unwetterinfo \
 	valixdcontrol \
