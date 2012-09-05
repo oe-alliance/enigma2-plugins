@@ -14,7 +14,7 @@ from Components.config import *
 from Tools.Directories import resolveFilename, fileExists, pathExists, createDir, SCOPE_MEDIA
 from Components.FileList import FileList
 from Components.AVSwitch import AVSwitch
-from Screens.InfoBarGenerics import InfoBarSeek, InfoBarAudioSelection, InfoBarCueSheetSupport, InfoBarNotifications, InfoBarShowHide, InfoBarServiceErrorPopupSupport, InfoBarPVRState, InfoBarSimpleEventView, InfoBarServiceNotifications, InfoBarMoviePlayerSummarySupport, InfoBarSubtitleSupport, InfoBarTeletextPlugin
+from Screens.InfoBarGenerics import InfoBarSeek, InfoBarAudioSelection, InfoBarCueSheetSupport, InfoBarNotifications, InfoBarShowHide, InfoBarServiceErrorPopupSupport, InfoBarPVRState, InfoBarSimpleEventView, InfoBarServiceNotifications, InfoBarMoviePlayerSummarySupport, InfoBarSubtitleSupport, InfoBarTeletextPlugin, InfoBarEPG
 from GlobalFunctions import MC_FolderOptions, MC_FavoriteFolders, MC_FavoriteFolderAdd, MC_FavoriteFolderEdit, MC_VideoInfoView
 import os
 from os import path as os_path
@@ -154,7 +154,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 			config.plugins.mc_vp.lastDir.value = self.filelist.getCurrentDirectory()
 		config.plugins.mc_vp.save()
 		self.close()
-class BonkelPlayer(InfoBarShowHide, InfoBarSeek, InfoBarAudioSelection, HelpableScreen, InfoBarNotifications, InfoBarServiceNotifications, InfoBarPVRState, InfoBarCueSheetSupport, InfoBarSimpleEventView, InfoBarMoviePlayerSummarySupport, InfoBarSubtitleSupport, Screen, InfoBarTeletextPlugin, InfoBarServiceErrorPopupSupport):
+class BonkelPlayer(InfoBarShowHide, InfoBarSeek, InfoBarAudioSelection, HelpableScreen, InfoBarNotifications, InfoBarServiceNotifications, InfoBarPVRState, InfoBarCueSheetSupport, InfoBarSimpleEventView, InfoBarMoviePlayerSummarySupport, InfoBarSubtitleSupport, Screen, InfoBarTeletextPlugin, InfoBarServiceErrorPopupSupport, InfoBarEPG):
 	ENABLE_RESUME_SUPPORT = True
 	ALLOW_SUSPEND = True
 	def __init__(self, session, service, slist = None, lastservice = None):
@@ -181,7 +181,7 @@ class BonkelPlayer(InfoBarShowHide, InfoBarSeek, InfoBarAudioSelection, Helpable
 			{
 				"yellow": (self.audioSelection, "Audio Menu"),				
 			})
-		for x in HelpableScreen, InfoBarShowHide, InfoBarSeek, InfoBarAudioSelection, InfoBarNotifications, InfoBarSimpleEventView, InfoBarServiceNotifications, InfoBarPVRState, InfoBarCueSheetSupport, InfoBarMoviePlayerSummarySupport, InfoBarSubtitleSupport, InfoBarTeletextPlugin, InfoBarServiceErrorPopupSupport:
+		for x in HelpableScreen, InfoBarShowHide, InfoBarSeek, InfoBarAudioSelection, InfoBarNotifications, InfoBarSimpleEventView, InfoBarServiceNotifications, InfoBarPVRState, InfoBarCueSheetSupport, InfoBarMoviePlayerSummarySupport, InfoBarSubtitleSupport, InfoBarTeletextPlugin, InfoBarServiceErrorPopupSupport, InfoBarEPG:
 			x.__init__(self)
 		self.session.nav.playService(service)
 		self.returning = False
