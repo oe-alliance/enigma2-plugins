@@ -86,10 +86,13 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 #			(  _("Pop-Up time in seconds")                            , config.infobartunerstate.popup_time ),
 			(  _("Show and hide with InfoBar")                        , config.infobartunerstate.show_infobar ),
 			(  _("Show on events")                                    , config.infobartunerstate.show_events ),
+#			(  _("Show on events")                                    , config.infobartunerstate.show_on_events ),
 			(  _("Show streams")                                      , config.infobartunerstate.show_streams ),
 			
 			(  _("MoviePlayer integration")                           , config.infobartunerstate.show_overwrite ),
-			(  _("Time format")                                       , config.infobartunerstate.time_format ),
+			(  _("Time format begin")                                 , config.infobartunerstate.time_format_begin ),
+			(  _("Time format end")                                   , config.infobartunerstate.time_format_end ),
+			(  _("Number of pending records in list")                 , config.infobartunerstate.number_pending_records ),
 			(  _("Number of finished records in list")                , config.infobartunerstate.number_finished_records ),
 			(  _("Number of seconds for displaying finished records") , config.infobartunerstate.timeout_finished_records ),
 			(  separator                                              , config.infobartunerstate.about ),
@@ -99,13 +102,21 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			self.config.append(
 			(  _("Field %d content") % (i)                            , configinfobartunerstatefield )
 			)
-		
+		for i, configinfobartunerstatefieldwidth in enumerate( config.infobartunerstate.fieldswidth.dict().itervalues() ):
+			self.config.append(
+			(  _("Field %d width") % (i)                            , configinfobartunerstatefieldwidth )
+			)
+
 		self.config.extend( [
 			(  separator                                              , config.infobartunerstate.about ),
-			(  _("Horizontal offset in pixel")                        , config.infobartunerstate.offset_horizontal ),
+			(  _("Horizontal offset left in pixel")                   , config.infobartunerstate.offset_horizontal ),
+			(  _("Horizontal offset right in pixel")                  , config.infobartunerstate.offset_rightside ),
 			(  _("Vertical offset in pixel")                          , config.infobartunerstate.offset_vertical ),
 			(  _("Text padding offset in pixel")                      , config.infobartunerstate.offset_padding ),
 			(  _("Text spacing offset in pixel")                      , config.infobartunerstate.offset_spacing ),
+			(  _("Variable field width")                              , config.infobartunerstate.variable_field_width ),
+			(  _("Placeholder for Progressbar")                       , config.infobartunerstate.placeholder_pogressbar ),
+			(  _("List goes up")                       				  , config.infobartunerstate.list_goesup ),
 			(  _("Background transparency")                           , config.infobartunerstate.background_transparency ),
 		] )
 		
@@ -134,19 +145,39 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			x()
 		self.createConfig()
 
+	# Overwrite ConfigListScreen keyCancel function
+	def keyCancel(self):
+		if self["config"].isChanged():
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
+		else:
+			self.close()
+
+	# Overwrite ConfigListScreen cancelConfirm function
+	def cancelConfirm(self, result):
+		if not result:
+			return
+		for x in self["config"].list:
+			x[1].cancel()
+		self.close()
+
 	# Overwrite ConfigListScreen keySave function
 	def keySave(self):
-		self.saveAll()
-
 		# Check field configuration
+		fieldname = []
 		fieldicon = []
 		fieldprogress = []
 		text = ""
 		for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
+			if c.value == "Name":
+				fieldname.append( i )
 			if c.value == "TypeIcon":
 				fieldicon.append( i )
 			if c.value == "TimerProgressGraphical":
 				fieldprogress.append( i )
+		
+		if len(fieldname) > 1:
+			text += _("Only one Name field allowed:") + "\n" \
+							+ "\n".join(["Field " + (str(f)) for f in fieldname])
 		
 		if len(fieldicon) > 1:
 			text += _("Only one Icon field allowed:") + "\n" \
@@ -161,6 +192,9 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			self.session.open(MessageBox, text, MessageBox.TYPE_ERROR, 3)
 			return
 		
+		# Now save all
+		self.saveAll()
+		
 		# Overwrite Screen close function to handle new config
 		
 		# We need assign / "write" access import the plugin module
@@ -169,9 +203,12 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 		if config.infobartunerstate.enabled.value:
 			# Plugin should be enabled
 			#TODO use a separate init function similar to the close
-			if not plugin.gInfoBarTunerState:
-				# Plugin is not active - enable it
-				plugin.gInfoBarTunerState = InfoBarTunerState(self.session)
+			if plugin.gInfoBarTunerState:
+				# Plugin is active - close it
+				plugin.gInfoBarTunerState.close()
+			
+			# Force new instance
+			plugin.gInfoBarTunerState = InfoBarTunerState(self.session)
 			
 			if plugin.gInfoBarTunerState:
 				

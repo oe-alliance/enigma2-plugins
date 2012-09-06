@@ -51,7 +51,8 @@ from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 from ServiceReference import ServiceReference
-from time import time, localtime, strftime
+from time import strftime, time, localtime, mktime
+from datetime import datetime, timedelta
 
 from enigma import iServiceInformation, ePoint, eSize, getDesktop, iFrontendInformation
 from enigma import eTimer
@@ -77,7 +78,7 @@ InfoBarHide = None
 
 
 # Type Enum
-Record, Stream, Finished, INFO = range( 4 )
+INFO, RECORD, STREAM, FINISHED = range( 4 )
 
 
 # Constants
@@ -186,6 +187,9 @@ class InfoBarTunerState(object):
 		self.hideTimer = eTimer()
 		self.hideTimer.callback.append(self.tunerHide)
 		
+		self.updateTimer = eTimer()
+		self.updateTimer.callback.append(self.update)
+		
 		self.forceBindInfoBarTimer = eTimer()
 		self.forceBindInfoBarTimer.callback.append(self.bindInfoBar)
 		
@@ -197,6 +201,11 @@ class InfoBarTunerState(object):
 		self.positiony = win.instance.position().y()
 		self.height = win.instance.size().height()
 		self.spacing = win.spacing
+		self.padding = win.padding
+		
+		desktopSize = getDesktop(0).size()
+		self.desktopwidth = desktopSize.width()
+		
 		#TODO is it possible to create copies of a screen to avoid recreation
 		win.close()
 		
@@ -297,11 +306,17 @@ class InfoBarTunerState(object):
 
 	def __onRecordingEvent(self, timer):
 		if not timer.justplay:
+			print "IBTS Timer Event "+ str(timer.state) + ' ' + str(timer.repeated)
+#TODO
+# w.processRepeated()
+# w.state = TimerEntry.StateWaiting
 			if timer.state == timer.StatePrepared:
+				print "IBTS StatePrepared"
 				pass
 			
 			elif timer.state == timer.StateRunning:
-				id = str( timer )
+				id = getTimerID( timer )
+				print "IBTS Timer running ID", id, id in self.entries
 				if id not in self.entries:
 					#channel = timer.service_ref.getServiceName()
 					tuner, tunertype = getTuner(timer.record_service)
@@ -323,14 +338,18 @@ class InfoBarTunerState(object):
 					number = service_ref and getNumber(service_ref.ref)
 					channel = service_ref and service_ref.getServiceName()
 					
-					win = self.session.instantiateDialog(TunerState, Record, tuner, tunertype, name, number, channel, filename)
+					win = self.session.instantiateDialog(TunerState, RECORD, tuner, tunertype, name, number, channel, filename)
 					self.entries[id] = win
 					if config.infobartunerstate.show_events.value:
 						self.show(True)
 			
 			# Finished repeating timer will report the state StateEnded+1 or StateWaiting
 			else:
-				id = str( timer )
+				id = getTimerID( timer )
+				# The id of a finished repeated timer can be changed
+				#RecordTimerEntry(name=How I Met Your Mother, begin=Wed Jul 18 11:37:00 2012, serviceref=1:0:19:EF75:3F9:1:C00000:0:0:0:, justplay=False)
+				#RecordTimerEntry(name=How I Met Your Mother, begin=Thu Jul 19 11:37:00 2012, serviceref=1:0:19:EF75:3F9:1:C00000:0:0:0:, justplay=False)
+				#print "IBTS Timer finished ID", id, id in self.entries
 				if id in self.entries:
 					win = self.entries[id]
 					
@@ -339,15 +358,16 @@ class InfoBarTunerState(object):
 					endless = timer.autoincrease
 					del timer
 					
-					win.updateType( Finished )
+					win.updateType( FINISHED )
 					win.updateTimes( begin, end, endless )
-					
-					if config.infobartunerstate.show_events.value:
-						self.show(True)
+				
+				# Show also if no matching id is found
+				if config.infobartunerstate.show_events.value:
+					self.show(True)
 
 	def __onStreamingEvent(self, event, stream):
 		if StreamingWebScreen and stream:
-			
+			print "IBTS Stream Event"
 			if event == StreamingWebScreen.EVENT_START:
 				
 				try:
@@ -359,10 +379,7 @@ class InfoBarTunerState(object):
 				tuner, tunertype = getTuner( stream.getRecordService() ) 
 				ref = stream.getRecordServiceRef()
 				ip = stream.clientIP
-				#TEST_MULTIPLESTREAMS 
-				id = str(stream.screenIndex) + str(ip)
-				#id = str(ref) + str(ip)
-				##id = str(ref.toString()) + str(ip)
+				id = getStreamID(stream)
 				
 				# Delete references to avoid blocking tuners
 				del stream
@@ -404,8 +421,9 @@ class InfoBarTunerState(object):
 				
 				number = service_ref and getNumber(service_ref.ref)
 				channel = service_ref and service_ref.getServiceName()
+				channel = channel.replace('\xc2\x86', '').replace('\xc2\x87', '')
 				
-				win = self.session.instantiateDialog(TunerState, Stream, tuner, tunertype, name, number, channel, filename, client, ip, port)
+				win = self.session.instantiateDialog(TunerState, STREAM, tuner, tunertype, name, number, channel, filename, client, ip, port)
 				self.entries[id] = win
 				if config.infobartunerstate.show_events.value:
 					self.show(True)
@@ -413,10 +431,7 @@ class InfoBarTunerState(object):
 			elif event == StreamingWebScreen.EVENT_END:
 				
 				# Remove Finished Stream
-				#TEST_MULTIPLESTREAMS 
-				id = str(stream.screenIndex) + str(stream.clientIP)
-				#id = str(stream.getRecordServiceRef()) + str(stream.clientIP)
-				##id = str(stream.getRecordServiceRef().toString()) + str(stream.clientIP)
+				id = getStreamID(stream)
 				
 				# Delete references to avoid blocking tuners
 				del stream
@@ -428,7 +443,7 @@ class InfoBarTunerState(object):
 					end = time()
 					endless = False
 					
-					win.updateType( Finished )
+					win.updateType( FINISHED )
 					win.updateTimes( begin, end, endless )
 					
 					if config.infobartunerstate.show_events.value:
@@ -456,25 +471,92 @@ class InfoBarTunerState(object):
 			if stream and stream.request and 'file' not in stream.request.args:
 				self.__onStreamingEvent(StreamingWebScreen.EVENT_START, stream)
 
+	def updateNextTimer(self):
+		number_pending_records = int( config.infobartunerstate.number_pending_records.value )
+		print "IBTS updateNextTimer", number_pending_records
+		
+		nextwins = [ id for id in self.entries.keys() if id.startswith('next')]
+		
+		if number_pending_records:
+			timer_list = getNextPendingRecordTimers()[:number_pending_records]
+			
+			if timer_list:
+				#if config.infobartunerstate.list_goesup.value:
+				#	timer_list.reverse()
+				
+				timer_list.reverse()
+				
+				for i, (timer, begin, end) in enumerate(timer_list):
+					id = 'next'+str(i)
+					if timer:
+						name = timer.name
+						service_ref = timer.service_ref
+						
+						# Is this really necessary?
+						try: timer.Filename
+						except: timer.calculateFilename()
+						filename = timer.Filename
+						
+						# Delete references to avoid blocking tuners
+						del timer
+						
+						number = service_ref and getNumber(service_ref.ref)
+						channel = service_ref and service_ref.getServiceName()
+						
+						# Only add timer if not recording
+						#if not self.entries.has_key(str( timer ):
+						if self.entries.has_key(id):
+							nextwins.remove(id)
+							win = self.entries[id]
+							win.updateName(name)
+							win.updateNumberChannel(number, channel)
+							win.updateFilename(filename)
+						else:
+							win = self.session.instantiateDialog(TunerState, INFO, '', '', name, number, channel, filename)
+						win.updateTimes( begin, end, win.endless )
+						self.entries[id] = win
+					else:
+						if self.entries.has_key(id):
+							del self.entries[id]
+			
+			# Close all not touched next windows
+			if nextwins:
+				for id in nextwins:
+					if self.entries.has_key(id):
+						del self.entries[id]
+
 	def show(self, autohide=False, forceshow=False):
 		print "IBTS show"
+		allowclosing = True
+		if self.updateTimer.isActive() and autohide:
+			# Avoid closing if the update timer is active
+			allowclosing = False
 		if self.showTimer.isActive():
 			self.showTimer.stop()
 		if forceshow:
 			self.tunerShow(forceshow=forceshow)
 		else:
-			self.showTimer.start( 1, True )
-		if autohide or self.session.current_dialog is None or not issubclass(self.session.current_dialog.__class__, InfoBarShowHide):
-			# Start timer to avoid permanent displaying
-			# Do not start timer if no timeout is configured
-			idx = int(config.usage.infobar_timeout.index)
-			if idx > 0:
-				if self.hideTimer.isActive():
-					self.hideTimer.stop()
-				self.hideTimer.startLongTimer( int(idx) )
-
+			self.showTimer.start( 10, True )
+			self.updateTimer.start( 60 * 1000 )
+		if allowclosing:
+			if autohide or self.session.current_dialog is None or not issubclass(self.session.current_dialog.__class__, InfoBarShowHide):
+				# Start timer to avoid permanent displaying
+				# Do not start timer if no timeout is configured
+				idx = int(config.usage.infobar_timeout.index)
+				if idx > 0:
+					if self.hideTimer.isActive():
+						self.hideTimer.stop()
+					self.hideTimer.startLongTimer( int(idx) )
+				if self.updateTimer.isActive():
+					self.updateTimer.stop()
+		else:
+			if self.hideTimer.isActive():
+				self.hideTimer.stop()
+				
 	def tunerShow(self, forceshow=False):
 		print "IBTS tunerShow"
+		
+		self.updateNextTimer()
 		
 		if self.entries:
 			# There are active entries
@@ -499,10 +581,10 @@ class InfoBarTunerState(object):
 			#  if number of entries is reached
 			numberfinished = 0
 			for id, win in sorted( self.entries.items(), key=lambda x: (x[1].end), reverse=True ):
-				if win.type == Finished:
+				if win.type == FINISHED:
 					numberfinished += 1
 				if win.toberemoved == True \
-					or win.type == Finished and numberfinished > int( config.infobartunerstate.number_finished_records.value ):
+					or win.type == FINISHED and numberfinished > int( config.infobartunerstate.number_finished_records.value ):
 					# Delete Stopped Timers
 					self.session.deleteDialog(win)
 					del self.entries[id]
@@ -511,7 +593,7 @@ class InfoBarTunerState(object):
 			# Dynamic column resizing and repositioning
 			widths = []
 			for id, win in self.entries.items():
-				if win.type == Record:
+				if win.type == RECORD:
 					#TODO Avolid blocking - avoid using getTimer to update the timer times use timer.time_changed if possible
 					timer = getTimer( id )
 					if timer:
@@ -530,18 +612,21 @@ class InfoBarTunerState(object):
 						if service_ref:
 							win.number = win.number or service_ref and getNumber(service_ref.ref)
 							win.channel = win.channel or service_ref and service_ref.getServiceName()
+							win.channel = win.channel.replace('\xc2\x86', '').replace('\xc2\x87', '')
 						
 						win.updateTimes( begin, end, endless )
 						win.update()
 					else:
 						# Should never happen delete
 						begin = win.begin
-						end = time()
+						end = win.end
+						if end < begin or end > time():
+							end = time()
 						endless = False
-						win.updateType( Finished )
+						win.updateType( FINISHED )
 						win.updateTimes( begin, end, endless )
 						win.update()
-				elif win.type == Stream:
+				elif win.type == STREAM:
 					if config.infobartunerstate.show_streams.value:
 						#TODO Avolid blocking - avoid using getStream to update the current name
 						stream = getStream( id )
@@ -575,36 +660,54 @@ class InfoBarTunerState(object):
 							win.updateTimes( begin, end, endless )
 							win.update()
 						else:
-							win.toberemoved == True
+							win.toberemoved = True
 					else:
 						# Should never happen delete
 						begin = win.begin
 						end = time()
 						endless = False
-						win.updateType( Finished )
+						win.updateType( FINISHED )
 						win.updateTimes( begin, end, endless )
 						win.update()
 				else:
-					# Type Finished
+					# Type INFO / FINISHED
 					win.update()
 				
 				# Calculate field width
 				widths = map( lambda (w1, w2): max( w1, w2 ), zip_longest( widths, win.widths ) )
+		
+		#if self.entries:
+			# Get initial padding / offset position and apply user offset
+			padding = self.padding + int(config.infobartunerstate.offset_padding.value)
+			#print "IBTS px, self.padding, config.padding", px, self.padding, int(config.infobartunerstate.offset_padding.value)
 			
 			# Calculate field spacing
 			spacing = self.spacing + int(config.infobartunerstate.offset_spacing.value)
-			widths = [ width+spacing if width>0 else 0 for width in widths ]
+			#print "IBTS spacing, self.spaceing, config.spacing", spacing, self.spacing, int(config.infobartunerstate.offset_spacing.value)
+			#widths = [ width+spacing if width>0 else 0 for width in widths ]
 			
 			# Apply user offsets
-			posx = self.positionx + int(config.infobartunerstate.offset_horizontal.value) 
+			posx = self.positionx + int(config.infobartunerstate.offset_horizontal.value)
+			#print "IBTS posx, self.positionx, config.offset_horizontal", posx, self.positionx, int(config.infobartunerstate.offset_horizontal.value)
 			posy = self.positiony + int(config.infobartunerstate.offset_vertical.value)
 			height = self.height
+			#print "IBTS widths", widths
+			
+			# Handle maximum width
+			overwidth = posx + sum(widths) + len([w for w in widths if w]) * spacing + padding - self.desktopwidth + int(config.infobartunerstate.offset_rightside.value)
+			#print "IBTS overwidth", overwidth
+			
+			if config.infobartunerstate.list_goesup.value:
+				#TODO is the start position correct if goesup = True
+				#posy = posy + ( len(self.entries) * height)
+				height = -height
 			
 			# Resize, move and show windows
-			for win in sorted( self.entries.itervalues(), key=lambda x: (x.type, x.timeleft) ):
-			#for pos, win in enumerate( sorted( self.entries.itervalues(), key=lambda x: (x.type, x.timeleft) ) ):
-				win.reorder( widths )
+			for win in sorted( self.entries.itervalues(), key=lambda x: (x.type, x.endless, x.timeleft), reverse=False ):
+			#for win in sorted( self.entries.itervalues(), key=lambda x: (x.type, x.timeleft, x.begin) ):
+			##for pos, win in enumerate( sorted( self.entries.itervalues(), key=lambda x: (x.type, x.timeleft) ) ):
 				win.move( posx, posy )
+				win.reorder( widths, overwidth )
 				posy += height
 				# Show windows
 				win.show()
@@ -614,21 +717,34 @@ class InfoBarTunerState(object):
 				if not self.info:
 					self.info = self.session.instantiateDialog( TunerStateInfo, _("Nothing running") )
 				self.info.show()
+				print "IBTS self.info.type", self.info.type
 			except Exception, e:
 				print "InfoBarTunerState show exception " + str(e)
 
+	def update(self):
+		print "IBTS updating"
+		#for win in self.entries.itervalues():
+		#	#TODO Update also names, width, order, type ...
+		#	win.update()
+		self.tunerShow()
+
 	def hide(self):
+		print "IBTS hide"
+		if self.updateTimer.isActive():
+			self.updateTimer.stop()
 		if self.hideTimer.isActive():
 			self.hideTimer.stop()
 		self.hideTimer.start( 10, True )
 
 	def tunerHide(self):
+		print "IBTS tunerHide"
 		for win in self.entries.itervalues():
 			win.hide()
 		if self.info:
 			self.info.hide()
 
 	def close(self):
+		print "IBTS close"
 		recoverInfoBar()
 		removeExtension()
 		self.unbindInfoBar()
@@ -646,9 +762,9 @@ class InfoBarTunerState(object):
 # Base screen class, contains all skin relevant parts
 class TunerStateBase(Screen):
 	# Skin will only be read once
-	skinfile = skinfile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/InfoBarTunerState/skin.xml" )
+	skinfile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/InfoBarTunerState/skin.xml" )
 	skin = open(skinfile).read()
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = "TunerState"
@@ -658,13 +774,17 @@ class TunerStateBase(Screen):
 		self["Progress"] = ProgressBar()
 		
 		for i in xrange( len( config.infobartunerstate.fields.dict() ) ):
-			self[ "Field" + str(i) ] = Label()
+			self[ "Field"+str(i) ] = Label()
 		
 		self.padding = 0
 		self.spacing = 0
 		
-		self.fields = []
 		self.widths = []
+		
+		self.typewidth = 0
+		self.progresswidth = 0
+		
+		self.onLayoutFinish.append(self.layoutFinished)
 
 	def applySkin(self):
 		attribs = [ ] 
@@ -679,20 +799,73 @@ class TunerStateBase(Screen):
 		self.skinAttributes = attribs
 		return Screen.applySkin(self)
 
-	def reorder(self, widths):
-		# Get initial offset position and apply user offset
-		px = self.padding + int(config.infobartunerstate.offset_padding.value)
+	def layoutFinished(self):
+		#TODO Possible to read in applySkin
+		self.typewidth = self["Type"].instance.size().width()
+		self.progresswidth = self["Progress"].instance.size().width()
+
+	def reorder(self, widths, overwidth=0):
+		# Get initial padding / offset position and apply user offset
+		padding = self.padding + int(config.infobartunerstate.offset_padding.value)
+		#print "IBTS px, self.padding, config.padding", px, self.padding, int(config.infobartunerstate.offset_padding.value)
+		
+		# Calculate field spacing
+		spacing = self.spacing + int(config.infobartunerstate.offset_spacing.value)
+		#print "IBTS spacing, self.spaceing, config.spacing", spacing, self.spacing, int(config.infobartunerstate.offset_spacing.value)
+		
+		px = padding
 		py = 0
 		sh = self.instance.size().height()
-		for field, width in zip( self.fields, widths):
-			if field == "Progress":
-				# Center the progress field vertically 
-				y = int( ( sh - self[field].instance.size().height() ) / 2 )
-				self[field].instance.move( ePoint(px, y) )
-			else:
-				self[field].instance.move( ePoint(px, py) )
-			px += width
+		#print self.widths
 		
+		fieldwidths = config.infobartunerstate.fieldswidth.dict().values()
+		
+		for i, (c, width) in enumerate( zip( config.infobartunerstate.fields.dict().values(), widths ) ):
+			fieldid = "Field"+str(i)
+			field = c.value
+			if field == "TypeIcon":
+				self["Type"].instance.move( ePoint(px, py) )
+			
+			elif field == "TimerProgressGraphical":
+				#self[field].instance.resize( eSize(width, sh) )
+				# Center the progress field vertically
+				y = int( ( sh - self["Progress"].instance.size().height() ) / 2 )
+				self["Progress"].instance.move( ePoint(px, y) )
+			
+			elif field == "Name":
+				if config.infobartunerstate.variable_field_width.value:
+					width -= max(0, overwidth)
+				else:
+					width -= overwidth
+				self[fieldid].instance.resize( eSize(width, sh) )
+				self[fieldid].instance.move( ePoint(px, py) )
+			
+			#elif field == "None":
+			#	pass
+			
+			else:
+				self[fieldid].instance.resize( eSize(width, sh) )
+				self[fieldid].instance.move( ePoint(px, py) )
+			
+			#TODO I think we could simplify this
+			# Avoid unnecesarry resize and move operations
+			#for j, fieldwidth in enumerate( config.infobartunerstate.fieldswidth.dict().values() ):
+			#	if i == j and int(fieldwidth.value) > 0 and not (field == "TimerProgressGraphical" or field == "TypeIcon" or field == "None"):
+			if fieldwidths:
+				fieldwidth = int( fieldwidths[i].value )
+				if fieldwidth > 0 and not (field == "TimerProgressGraphical" or field == "TypeIcon" or field == "None"):
+					# Handle new maximum width
+					if width > 0:
+						overwidth +=  fieldwidth - width
+					else:		
+						overwidth +=  fieldwidth - width + spacing
+					width = fieldwidth
+					self[fieldid].instance.resize( eSize(width, sh) )
+					self[fieldid].instance.move( ePoint(px, py) )
+					
+			if width:
+				px += width + spacing
+			
 		# Set background
 		bw = self["Background"].instance.size().width()
 		# Avoid background start position is within our window
@@ -719,62 +892,60 @@ class TunerStateInfo(TunerStateBase):
 		else:
 			self["Background"].hide()
 		
-		self["Type"].setPixmapNum(3)
 		self["Progress"].hide()
 		
 		for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
-			field = "Field"+str(i)
+			fieldid = "Field"+str(i)
 			
-			if field == "Field0":
-				self[field].setText( str(self.name) )
+			if fieldid == "Field0":
+				#self[field].setText( str(self.name).encode("utf-8") )
+				self[fieldid].setText( str(self.name) )
 		
 		self.onLayoutFinish.append(self.popup)
 
 	def popup(self):
 		print "IBTS popup"
 		
-		fields = []
-		fields.append( "Type" )
+		self["Type"].setPixmapNum(3)
 		
 		widths = []
-		widths.append( self["Type"].instance.size().width() )
+		widths.append( self.typewidth )
 		
 		height = self.instance.size().height()
 		
 		for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
-			field = "Field"+str(i)
+			fieldid = "Field"+str(i)
 			
-			#Workaround#1
-			self[field].instance.resize( eSize(1000, height) )
+			#Workaround#1 Set default size
+			self[fieldid].instance.resize( eSize(1000, height) )
 			
-			width = self[field].instance.calculateSize().width()
-			print width
+			width = max(self[fieldid].instance.calculateSize().width(), 0)
+			#print width
 			
-			#Workaround#2
+			#Workaround#2 Expand the calculate size
 			width = int( width * 1.10 )
 			
-			self[field].instance.resize( eSize(width, height) )
+			#self[field].instance.resize( eSize(width, height) )
 			
-			fields.append(field)
 			widths.append( width )
 		
-		spacing = self.spacing + int(config.infobartunerstate.offset_spacing.value)
-		widths = [ width+spacing if width>0 else 0 for width in widths ]
-		
-		self.fields = fields
 		self.widths = widths
+		
+		#spacing = self.spacing + int(config.infobartunerstate.offset_spacing.value)
+		#widths = [ width+spacing if width>0 else 0 for width in widths ]
 		
 		posx = self.instance.position().x() + int(config.infobartunerstate.offset_horizontal.value) 
 		posy = self.instance.position().y() + int(config.infobartunerstate.offset_vertical.value)
 		
-		self.reorder( widths )
 		self.move( posx, posy )
+		self.reorder(widths)
 
 
 #######################################################
 # Displaying screen class, every entry is an instance of this class
 class TunerState(TunerStateBase):
 	def __init__(self, session, type, tuner, tunertype, name="", number="", channel="", filename="", client="", ip="", port=""):
+		#TODO use parameter ref instead of number and channel
 		TunerStateBase.__init__(self, session)
 		
 		self.toberemoved = False
@@ -811,18 +982,26 @@ class TunerState(TunerStateBase):
 	def updateName(self, name):
 		self.name = name
 
+	def updateNumberChannel(self, number, channel):
+		self.number = number
+		self.channel = channel
+
+	def updateFilename(self, filename):
+		self.filename = filename + ".ts"
+
 	def updateType(self, type):
 		if self.type != type:
 			self.type = type
-			if self.type == Finished:
-				self.tuner = _("-")
-				self.tunertype = _("-")
-				# Check if timer is already started
-				if not self.removeTimer.isActive():
-					# Check if timeout is configured
-					timeout = int(config.infobartunerstate.timeout_finished_records.value)
-					if timeout > 0:
-						self.removeTimer.startLongTimer( timeout )
+		if self.type == FINISHED:
+			print "IBTS updateType FINISHED"
+			self.tuner = _("-")
+			self.tunertype = _("-")
+			# Check if timer is already started
+			if not self.removeTimer.isActive():
+				# Check if timeout is configured
+				timeout = int(config.infobartunerstate.timeout_finished_records.value)
+				if timeout > 0:
+					self.removeTimer.startLongTimer( timeout )
 
 	def updateTimes(self, begin, end, endless):
 		self.begin = begin
@@ -830,22 +1009,43 @@ class TunerState(TunerStateBase):
 		self.endless = endless
 
 	def updateDynamicContent(self):
+		#TODO cleanup this function
+		
 		# Time and progress
 		now = time()
 		begin = self.begin
+		end = self.end
 		
-		timeelapsed = now - begin
-		self.timeelapsed = math.ceil( ( timeelapsed ) / 60.0 )
+		duration = None
+		timeleft = None
+		timeelapsed = None
+		progress = None
+		
+		duration = begin and end and end - begin
+		if duration and duration < 0:
+			duration = None
+		
+		if self.type == FINISHED:
+			# Finished events
+			timeelapsed = None #duration
+		elif begin and end and begin < now:
+			timeelapsed = min(now - begin, duration)
+		else:
+			# Future event
+			timeelapsed = None
 		
 		if not self.endless and self.end:
-			end = self.end
 			
-			timeleft = end - now
-			if timeleft < 0:
+			if self.type == FINISHED:
+				# Finished events
+				timeleft = None #0
+			elif begin and end and begin < now:
+				timeleft = max(end - now, 0)
+			else:
+				# Future event
 				timeleft = None
-				
-			duration = end - begin
-			if duration > 0:
+			
+			if timeelapsed and duration:
 				# Adjust the watched movie length (98% of movie length) 
 				# else we will never see the 100%
 				# Alternative using math.ceil but then we won't see 0
@@ -856,13 +1056,13 @@ class TunerState(TunerStateBase):
 				if progress < 0: progress = 0
 				elif progress > 100: progress = 100
 			else:
-				duration = None
 				progress = None
 			
-			self.duration = duration and math.ceil( ( duration ) / 60.0 )
-			
-			self.timeleft = timeleft and math.ceil( ( timeleft ) / 60.0 )
-			self.progress = int( progress )
+		self.duration = duration and duration is not None and math.ceil( ( duration ) / 60.0 )
+		self.timeleft = timeleft and timeleft is not None and math.ceil( ( timeleft ) / 60.0 )
+		self.timeelapsed = timeelapsed and timeelapsed is not None and math.ceil( ( timeelapsed ) / 60.0 )
+		self.progress = progress and progress is not None and int( progress )
+		print "IBTS duration, timeleft, timeelapsed, progress", self.duration, self.timeleft, self.timeelapsed, self.progress
 		
 		# File site and free disk space
 		filename = self.filename
@@ -881,7 +1081,6 @@ class TunerState(TunerStateBase):
 		#TODO Handle Live / Stream Entries - Update several Labels
 		self.updateDynamicContent()
 		height = self.instance.size().height()
-		fields = []
 		widths = []
 		
 		# Set background transparency
@@ -894,51 +1093,55 @@ class TunerState(TunerStateBase):
 		self["Progress"].hide()
 		
 		for i, c in enumerate( config.infobartunerstate.fields.dict().itervalues() ):
-			field = "Field"+str(i)
-			content = c.value
+			fieldid = "Field"+str(i)
+			field = c.value
 			text = ""
 			
-			if content == "TypeIcon":
+			if field == "TypeIcon":
 				self["Type"].show()
-				if self.type == Record:
+				if self.type == RECORD:
 					self["Type"].setPixmapNum(0)
-				elif self.type == Stream:
+				elif self.type == STREAM:
 					self["Type"].setPixmapNum(1)
-				elif self.type == Finished:
+				elif self.type == FINISHED:
 					self["Type"].setPixmapNum(2)
-				
+				elif self.type == INFO:
+					self["Type"].setPixmapNum(3)
+				else:
+					widths.append( 0 )
+					continue
 				# No resize necessary
-				fields.append( "Type" )
-				widths.append( self["Type"].instance.size().width() )
+				widths.append( self.typewidth )
+				continue
 			
-			elif content == "TypeText":
-				if self.type == Record:
+			elif field == "TypeText":
+				if self.type == RECORD:
 					text = _("Record")
-				elif self.type == Stream:
+				elif self.type == STREAM:
 					text = _("Stream")
-				elif self.type == Finished:
+				elif self.type == FINISHED:
 					text = _("Finished")
 			
-			elif content == "Tuner":
+			elif field == "Tuner":
 				if self.tuner:
 					text = self.tuner
 			
-			elif content == "TunerType":
+			elif field == "TunerType":
 				if self.tunertype:
 					text = self.tunertype
 			
-			elif content == "Number":
+			elif field == "Number":
 				if self.number is not None:
 					text = _("%d") % ( self.number )
 			
-			elif content == "Channel":
+			elif field == "Channel":
 				text = self.channel
 			
-			elif content == "Name":
+			elif field == "Name":
 				text = self.name
 				#TODO update name for streams
 			
-			elif content == "TimeLeft":
+			elif field == "TimeLeft":
 				if not self.endless:
 					if self.timeleft is not None:
 						# Show timeleft recording time
@@ -947,93 +1150,95 @@ class TunerState(TunerStateBase):
 					# Add infinity symbol for indefinitely recordings
 					text = INFINITY
 			
-			elif content == "TimeElapsed":
+			elif field == "TimeElapsed":
 				if self.timeelapsed is not None:
 					text = _("%d Min") % ( self.timeelapsed )
 			
-			elif content == "TimeLeftDuration":
+			elif field == "TimeLeftDuration":
 				# Calculate timeleft minutes
 				if not self.endless:
-					if self.type == Finished:
-						if self.duration is not None:
-							# Show recording length
-							text = _("%d Min") % ( self.duration )
-					elif self.timeleft is not None:
+					if self.type is not FINISHED and self.timeleft is not None:
+					#if self.timeleft is not None:
 						# Show timeleft recording time
 						text = _("%d Min") % ( self.timeleft )
+					elif self.duration is not None:
+						# Fallback show recording length
+						text = _("%d Min") % ( self.duration )
 				else: 
 					# Add infinity symbol for indefinitely recordings
 					text = INFINITY
 			
-			elif content == "Begin":
+			elif field == "Begin":
 				lbegin = self.begin and localtime( self.begin )
-				text = lbegin and strftime( config.infobartunerstate.time_format.value, lbegin )
+				text = lbegin and strftime( config.infobartunerstate.time_format_begin.value, lbegin )
 			
-			elif content == "End":
+			elif field == "End":
 				lend = self.end and localtime( self.end )
-				text = lend and strftime( config.infobartunerstate.time_format.value, lend )
+				text = lend and strftime( config.infobartunerstate.time_format_end.value, lend )
 			
-			elif content == "Duration":
+			elif field == "Duration":
 				if self.duration is not None:
 					text = _("%d Min") % ( self.duration )
 			
-			elif content == "TimerProgressText":
+			elif field == "TimerProgressText":
 				if self.progress is not None:
 					text = _("%d %%") % ( self.progress )
 			
-			elif content == "TimerProgressGraphical":
+			elif field == "TimerProgressGraphical":
 				if self.progress is not None:
 					self["Progress"].setValue( self.progress )
 					self["Progress"].show()
-				
-				# No resize necessary
-				fields.append( "Progress" )
-				widths.append( self["Progress"].instance.size().width() )
+					# No resize necessary
+					widths.append( self.progresswidth )
+				else:
+					if not config.infobartunerstate.placeholder_pogressbar.value:
+						widths.append( 0 )
+					else:	
+						widths.append( self.progresswidth )
+				continue
 			
-			elif content == "TimerDestination":
+			elif field == "TimerDestination":
 				text = self.destination
 			
-			elif content == "StreamClient":
+			elif field == "StreamClient":
 				text = self.client or self.ip
 			
-			elif content == "StreamClientPort":
+			elif field == "StreamClientPort":
 				if self.port:
 					text = self.client or self.ip
 					text += ":" + str(self.port)
 			
-			elif content == "DestinationStreamClient":
+			elif field == "DestinationStreamClient":
 				text = self.destination or self.client or self.ip
 			
-			elif content == "FileSize":
+			elif field == "FileSize":
 				if self.filesize  is not None:
 					text = _("%d MB") % ( self.filesize )
 			
-			elif content == "FreeSpace":
+			elif field == "FreeSpace":
 				if self.freespace is not None:
 					text = _("%d GB") % ( self.freespace )
 			
-			elif content == "None":
+			elif field == "None":
 				# text is already initialized with ""
 				pass
 			
 			# Set text, append field, resize field and append width
-			self[field].setText( text )
-			fields.append( field )
+			self[fieldid].setText( text )
 			
 			#Workaround#1
-			self[field].instance.resize( eSize(1000, height) )
+			self[fieldid].instance.resize( eSize(1000, height) )
 			
-			width = self[field].instance.calculateSize().width()
-			print width
+			width = max(self[fieldid].instance.calculateSize().width(), 0)
+			#print width
 			
 			#Workaround#2
 			width = int( width * 1.10 )
 			
-			self[field].instance.resize( eSize(width, height) )
+			#self[fieldid].instance.resize( eSize(width, height) )
 			
 			widths.append( width )
-			
-		self.fields = fields
+		
 		self.widths = widths
 
 	def remove(self):
@@ -1042,12 +1247,22 @@ class TunerState(TunerStateBase):
 
 #######################################################
 # Global helper functions
-def getTimer(strtimer):
+def getTimerID(timer):
+	#return str( timer.name ) + str( timer.repeatedbegindate ) + str( timer.service_ref ) + str( timer.justplay )
+	return str( timer )
+
+def getTimer(id):
 	#for timer in self.session.nav.RecordTimer.timer_list + self.session.nav.RecordTimer.processed_timers:
 	for timer in NavigationInstance.instance.RecordTimer.timer_list + NavigationInstance.instance.RecordTimer.processed_timers:
-		if str(timer) == strtimer:
+		if getTimerID( timer ) == id:
 			return timer
 	return None
+
+def getStreamID(stream):
+	#TEST_MULTIPLESTREAMS
+	#if id == str(stream.getRecordServiceRef()) + str(stream.clientIP):
+	##if(id == str(stream.getRecordServiceRef().toString()) + str(stream.clientIP)):
+	return str(stream.screenIndex) + str(stream.clientIP)
 
 def getStream(id):
 	try:
@@ -1057,10 +1272,7 @@ def getStream(id):
 	
 	for stream in streamingScreens:
 		if stream:
-			#TEST_MULTIPLESTREAMS 
-			if id == str(stream.screenIndex) + str(stream.clientIP):
-			#if id == str(stream.getRecordServiceRef()) + str(stream.clientIP):
-			##if(id == str(stream.getRecordServiceRef().toString()) + str(stream.clientIP)):
+			if getStreamID(stream) == id:
 				return stream
 	return None
 
@@ -1118,3 +1330,79 @@ def getNumber(actservice):
 							if actservice == service:
 								return number
 	return None
+
+def getNextPendingRecordTimers():
+	timer_list = []
+	now = time()
+	for timer in NavigationInstance.instance.RecordTimer.timer_list:
+		next_act = timer.getNextActivation()
+		if timer.justplay or (timer.isRunning() and not timer.repeated) or next_act < now:
+			continue
+		if timer.begin:
+			if not timer.isRunning():
+				begin = timer.begin
+				end = timer.end
+			else:
+				begin, end = processRepeated(timer)
+			timer_list.append( (timer, begin, end) )
+	return sorted( timer_list, key=lambda x: (x[1]) )
+
+
+# Adapted from TimerEntry
+def processRepeated(timer, findRunningEvent = False):
+	print "ProcessRepeated"
+	
+	def addOneDay(timedatestruct):
+		oldHour = timedatestruct.tm_hour
+		newdate =  (datetime(timedatestruct.tm_year, timedatestruct.tm_mon, timedatestruct.tm_mday, timedatestruct.tm_hour, timedatestruct.tm_min, timedatestruct.tm_sec) + timedelta(days=1)).timetuple()
+		if localtime(mktime(newdate)).tm_hour != oldHour:
+			return (datetime(timedatestruct.tm_year, timedatestruct.tm_mon, timedatestruct.tm_mday, timedatestruct.tm_hour, timedatestruct.tm_min, timedatestruct.tm_sec) + timedelta(days=2)).timetuple()
+		return newdate
+	
+	begin = timer.begin
+	end = timer.end
+		
+	if (timer.repeated != 0):
+		now = int(time()) + 1
+
+		#to avoid problems with daylight saving, we need to calculate with localtime, in struct_time representation
+		localrepeatedbegindate = localtime(timer.repeatedbegindate)
+		localbegin = localtime(begin)
+		localend = localtime(end)
+		localnow = localtime(now)
+
+		print "localrepeatedbegindate:", strftime("%c", localrepeatedbegindate)
+		print "localbegin:", strftime("%c", localbegin)
+		print "localend:", strftime("%c", localend)
+		print "localnow:", strftime("%c", localnow)
+
+		day = []
+		flags = timer.repeated
+		for x in (0, 1, 2, 3, 4, 5, 6):
+			if (flags & 1 == 1):
+				day.append(0)
+				print "Day: " + str(x)
+			else:
+				day.append(1)
+			flags = flags >> 1
+
+		# if day is NOT in the list of repeated days
+		# OR if the day IS in the list of the repeated days, check, if event is currently running... then if findRunningEvent is false, go to the next event
+		while ((day[localbegin.tm_wday] != 0) or (mktime(localrepeatedbegindate) > mktime(localbegin))  or
+			((day[localbegin.tm_wday] == 0) and ((findRunningEvent and localend < localnow) or ((not findRunningEvent) and localbegin < localnow)))):
+			localbegin = addOneDay(localbegin)
+			localend = addOneDay(localend)
+			print "localbegin after addOneDay:", strftime("%c", localbegin)
+			print "localend after addOneDay:", strftime("%c", localend)
+			
+		#we now have a struct_time representation of begin and end in localtime, but we have to calculate back to (gmt) seconds since epoch
+		begin = int(mktime(localbegin))
+		end = int(mktime(localend))
+		if begin == end:
+			end += 1
+		
+		print "ProcessRepeated result"
+		print strftime("%c", localtime(begin))
+		print strftime("%c", localtime(end))
+	
+	return begin, end
