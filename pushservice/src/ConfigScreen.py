@@ -178,8 +178,8 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 				self["key_blue"].setText(_("Controllers"))
 				self["main_actions_enabled"].setEnabled(True)
 			else:
-				self["key_yellow"].setText(_(""))
-				self["key_blue"].setText(_(""))
+				self["key_yellow"].setText("")
+				self["key_blue"].setText("")
 				self["main_actions_enabled"].setEnabled(False)
 			
 			self.list.append( getConfigListEntry( _("Enable PushService"), config.pushservice.enable, 0 ) )
@@ -448,7 +448,8 @@ class TestConsole(Screen):
 		text = ""
 		for arg in args:
 			if isinstance(arg, Exception):
-				text += _("Test failed:\n\n%s\n\n%s") % (arg.type, arg.value) + "\n"
+				text += _("Test failed:\n\n%s") % (arg.type) + "\n"
+				text += str(arg.value) + "\n"
 			elif arg:
 				text += _("Test failed\n\n%s") % str(arg) + "\n"
 			else:

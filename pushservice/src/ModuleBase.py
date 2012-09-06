@@ -90,7 +90,8 @@ class ModuleBase(object):
 				elif type(default) is int:
 					self.setValue(key, int(value))
 			except:
-				print _("[PushService] Module %s: Skipping config option: %s %s") % ( self.getName(), str(key), str(value) )
+				print _("[PushService] Module %s:\n") % ( self.getName() )
+				print _("Skipping config option:") + str(key) + " " + str(value)
 				continue
 
 	def getUniqueID(self):
