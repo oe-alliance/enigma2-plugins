@@ -20,6 +20,7 @@ from Screens.Screen import Screen
 
 from Components.ActionMap import ActionMap
 from Components.Button import Button
+from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.TimerList import TimerList
 
@@ -222,7 +223,10 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		self["SetupActions"] = ActionMap(["SetupActions", "ColorActions"],
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
+
+ 		self["SetupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.Exit,
