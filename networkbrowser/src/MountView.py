@@ -156,6 +156,7 @@ class AutoMountView(Screen):
 			self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, _("Your network mount has been removed."), type = MessageBox.TYPE_INFO, timeout = 10)
 
 	def ConfigfinishedCB(self,data):
+		print '!!!!!!remove mount test3',data
 		if data is not None:
 			if data is True:
 				self.showMountsList()
