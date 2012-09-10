@@ -417,7 +417,7 @@ def autostart(reason, **kwargs):
 
 def timermenu(menuid, **kwargs):
 	if menuid == "timermenu":
-		return [("Remote Timers", crossepg_main.setup, "remotetimer", None)]
+		return [("Remote Timers", main, "remotetimer", None)]
 	else:
 		return []
 
@@ -425,11 +425,11 @@ def main(session, **kwargs):
 	session.open(RemoteTimerScreen)
 
 def Plugins(**kwargs):
- 	return [
-		if getDistro() == "ViX" or getDistro() == "AAF" or getDistro() == "openMips":
-			PluginDescriptor(name=_("Remote Timer"), description = _("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu),
-		else:
-			PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main),
-		PluginDescriptor(name="Remote Timer", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
-		PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)
-	]
+	plugin = []
+	if getDistro() == "ViX" or getDistro() == "AAF" or getDistro() == "openMips":
+		plugin.append(PluginDescriptor(name=_("Remote Timer"), description = _("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu))
+	else:
+		plugin.append(PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main))
+	plugin.append(PluginDescriptor(name="Remote Timer", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main))
+	plugin.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart))
+	return plugin
