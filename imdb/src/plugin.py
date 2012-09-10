@@ -456,6 +456,15 @@ class IMDB(Screen):
 			event = info and info.getEvent(0) # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
+			else:
+				self.eventName = self.session.nav.getCurrentlyPlayingServiceReference().toString()
+				self.eventName = self.eventName.split('/')
+				self.eventName = self.eventName[-1]
+				self.eventName = self.eventName.replace('.',' ')
+				self.eventName = self.eventName.split('-')
+				self.eventName = self.eventName[0]
+				if self.eventName.endswith(' '):
+					self.eventName = self.eventName[:-1]
 		if self.eventName:
 			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
 			event_quoted = quoteEventName(self.eventName)
@@ -528,7 +537,7 @@ class IMDB(Screen):
 					self.showMenu()
 				else:
 					self["detailslabel"].setText(_("No IMDb match."))
-					self["statusbar"].setText(_("No IMDb match."))
+					self["statusbar"].setText(_("No IMDb match.") + ' ' + self.eventName)
 			else:
 				splitpos = self.eventName.find('(')
 				if splitpos > 0 and self.eventName.endswith(')'):
