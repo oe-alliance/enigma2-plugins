@@ -42,6 +42,20 @@ from xml.etree.cElementTree import fromstring as cElementTree_fromstring
 from base64 import encodestring
 
 import urllib
+
+def getDistro():
+	try:
+		file = open('/etc/image-version', 'r')
+		lines = file.readlines()
+		file.close()
+		for x in lines:
+			splitted = x.split('=')
+			if splitted[0] == "comment":
+				result =  splitted[1].replace('\n','')
+	except:
+		result = None
+	return result
+
 #------------------------------------------------------------------------------------------
 
 config.plugins.remoteTimer = ConfigSubsection()
@@ -400,12 +414,22 @@ def autostart(reason, **kwargs):
 		except:
 			print "[RemoteTimer] NO remoteTimer.httpip.value"
 
+
+def timermenu(menuid, **kwargs):
+	if menuid == "timermenu":
+		return [("Remote Timers", crossepg_main.setup, "remotetimer", None)]
+	else:
+		return []
+
 def main(session, **kwargs):
 	session.open(RemoteTimerScreen)
 
 def Plugins(**kwargs):
  	return [
-		PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main),
+		if getDistro() == "ViX" or getDistro() == "AAF" or getDistro() == "openMips":
+			PluginDescriptor(name=_("Remote Timer"), description = _("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu),
+		else:
+			PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main),
 		PluginDescriptor(name="Remote Timer", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
 		PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)
 	]
