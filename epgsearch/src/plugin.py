@@ -26,7 +26,7 @@ def main(session, *args, **kwargs):
 		name = name.replace('.',' ')
 		name = name.split('-')
 		name = name[0]
-		if s.endswith(' '):
+		if name.endswith(' '):
 			name = name[:-1]
 	if name:
 		session.open(EPGSearch, name, False)
