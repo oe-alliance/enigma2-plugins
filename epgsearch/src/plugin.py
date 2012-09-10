@@ -1,4 +1,4 @@
-# for localized messages  	 
+# for localized messages
 from . import _
 
 from enigma import eServiceCenter
@@ -19,6 +19,16 @@ def main(session, *args, **kwargs):
 		info = s.info()
 		event = info.getEvent(0) # 0 = now, 1 = next
 		name = event and event.getEventName() or ''
+	else:
+		name = self.session.nav.getCurrentlyPlayingServiceReference().toString()
+		name = name.split('/')
+		name = name[-1]
+		name = name.replace('.',' ')
+		name = name.split('-')
+		name = name[0]
+		if s.endswith(' '):
+			name = name[:-1]
+	if name:
 		session.open(EPGSearch, name, False)
 	else:
 		session.open(EPGSearch)
