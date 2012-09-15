@@ -1,0 +1,9 @@
+#!/bin/sh
+rm -rf /usr/lib/enigma2/python/Plugins/SystemPlugins/AspectRatioSwitch
+echo "###################################################"
+echo "#                                                 #"
+echo "#     AspectRatioSwitch successfully removed.     #"
+echo "#     Please restart enigma2 now!                 #"
+echo "#                                                 #"
+echo "###################################################"
+exit 0

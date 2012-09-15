@@ -1,0 +1,9 @@
+#!/bin/sh
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/AspectRatioSwitch
+echo "###################################################"
+echo "#                                                 #"
+echo "#  AspectRatioSwitch successfully installed.      #"
+echo "#  Please restart enigma2 to activate the plugin! #"
+echo "#                                                 #"
+echo "###################################################"
+exit 0

@@ -1,0 +1,6 @@
+<keymap>
+	<map context="GlobalActions">
+		<key id="KEY_CHANNELUP" mapto="switchAspectUp" flags="l" />
+		<key id="KEY_CHANNELDOWN" mapto="switchAspectDown" flags="l" />
+	</map>
+</keymap>

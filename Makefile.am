@@ -4,6 +4,7 @@ SUBDIRS = \
 	3dsettings \
 	aihdcontroler \
 	antiscrollbar \
+	aspectratioswitch \
 	audiorestart \
 	audiosync \
 	automaticcleanup \

@@ -67,6 +67,11 @@ antiscrollbar/Makefile
 antiscrollbar/meta/Makefile
 antiscrollbar/src/Makefile
 
+aspectratioswitch/Makefile
+aspectratioswitch/meta/Makefile
+aspectratioswitch/po/Makefile
+aspectratioswitch/src/Makefile
+
 audiorestart/Makefile
 audiorestart/img/Makefile
 audiorestart/meta/Makefile

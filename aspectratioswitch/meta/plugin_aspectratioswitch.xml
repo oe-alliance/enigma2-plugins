@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+					<tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>schaumkeks</author>
+                    <name>AspectRatioSwitch</name>
+                    <packagename>enigma2-plugin-systemplugins-aspectratioswitch</packagename>
+                    <shortdescription>Quick switching of aspect ratio setting</shortdescription>
+                    <description>Setup Quickbuttons on your remote control to switch aspect ratio modes.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/aspectratioswitch.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-aspectratioswitch" />
+	  </files>
+</default>
