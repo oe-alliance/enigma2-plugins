@@ -577,7 +577,7 @@ var RemoteControl = Class.create({
 
 			templateEngine.fetch(tpl, function(template){
 				this.eventsregistered = false;
-				this.window = core.popup('WebRemote', template, 250, 600);
+				this.window = core.popup('WebRemote', template, 250, 650);
 				this.registerEvents();
 			}.bind(this));
 		}
@@ -586,18 +586,20 @@ var RemoteControl = Class.create({
 	sendKey: function(cmd, type, shotType){
 		debug("[RemoteControl].sendKey: " + cmd);
 		this.handler.sendKey({'command' : cmd, 'type': type});
+		this.screenShot(shotType);
+	},
 
+	screenShot: function(shotType){
 		var hash = '!/control'; //FIXME
 		switch(shotType){
-		case undefined:
-		case '':
-			return;
 		case 'osd':
 			hash = [hash, 'osdshot'].join("/");
 			break;
 		case 'all':
 			hash = [hash, 'screenshot'].join("/");
 			break;
+		default:
+			return;
 		}
 		//the box needs at least a little bit of time to actually draw the window
 		//wait 250ms before fetching a new screenshot
@@ -629,13 +631,24 @@ var RemoteControl = Class.create({
 					if(long){
 						type = 'long';
 					}
-					var shotType = 'none';
+					var shotType = '';
 					if(screenshot && video){
 						shotType = 'all';
 					} else if (screenshot && !video) {
 						shotType = 'osd';
 					}
 					_this.sendKey(id, type, shotType);
+				}
+			);
+			elem.on(
+				'click',
+				'.screenshot',
+				function(event, element){
+					var video = _this.window.document.getElementById('video').checked;
+					var shotType = 'osd';
+					if(video)
+						shotType = 'all';
+					_this.screenShot(shotType);
 				}
 			);
 		};
