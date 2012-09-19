@@ -1732,7 +1732,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.state = self.STATE_PLAYING
 		self.__seekableStatusChanged()
 
-	def setSeekState(self, wantstate, onlyGUI = False):):
+	def setSeekState(self, wantstate, onlyGUI = False):
 		print "setSeekState"
 		if wantstate == self.STATE_PAUSED:
 			print "trying to switch to Pause- state:",self.STATE_PAUSED
