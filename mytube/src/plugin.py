@@ -16,7 +16,7 @@ from MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, 
 from MyTubeService import validate_cert, get_rnd, myTubeService
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
-from Screens.InfoBarGenerics import InfoBarNotifications
+from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarSeek
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
@@ -1529,7 +1529,7 @@ class MyTubeVideoHelpScreen(Screen):
 		self["detailtext"].pageDown()
 
 
-class MyTubePlayer(Screen, InfoBarNotifications):
+class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	STATE_IDLE = 0
 	STATE_PLAYING = 1
 	STATE_PAUSED = 2
@@ -1561,6 +1561,7 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 	def __init__(self, session, service, lastservice, infoCallback = None, nextCallback = None, prevCallback = None):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
+		InfoBarSeek.__init__(self)
 		self.session = session
 		self.service = service
 		self.infoCallback = infoCallback
@@ -1721,15 +1722,17 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 	def __seekableStatusChanged(self):
 		print "seekable status changed!"
 		if not self.isSeekable():
+			self["SeekActions"].setEnabled(False)
 			self.setSeekState(self.STATE_PLAYING)
 		else:
+			self["SeekActions"].setEnabled(True)
 			print "seekable"
 
 	def __serviceStarted(self):
 		self.state = self.STATE_PLAYING
 		self.__seekableStatusChanged()
 
-	def setSeekState(self, wantstate):
+	def setSeekState(self, wantstate, onlyGUI = False):):
 		print "setSeekState"
 		if wantstate == self.STATE_PAUSED:
 			print "trying to switch to Pause- state:",self.STATE_PAUSED

@@ -256,15 +256,16 @@ class MyTubeFeedEntry():
 		else:
 			tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
 		for fmtstring in tmp_fmtUrlDATA:
+			fmturl = fmtid = ""
 			if videoinfo.has_key('url_encoded_fmt_stream_map'):
 				try:
 					(fmturl, fmtid) = fmtstring.split('&itag=')
+					if len(fmtid) >= 3:
+						fmtid = fmtid[:2]
+					if fmturl.find("url=") !=-1:
+						fmturl = fmturl.replace("url=","")
 				except:
 					print "error splitting fmtstring:",fmtstring
-				if len(fmtid) >= 3:
-					fmtid = fmtid[:2]
-				if fmturl.find("url=") !=-1:
-					fmturl = fmturl.replace("url=","")
 			else:
 				(fmtid,fmturl) = fmtstring.split('|')
 			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
