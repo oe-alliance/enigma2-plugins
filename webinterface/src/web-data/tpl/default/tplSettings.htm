@@ -2,38 +2,32 @@
 <!-- tplSettings -->
 						<table id="contentTable">
 							<tr>
-								<td>									
+								<td>
 									<table style="width: 100%;">
 										<tr>
-											<td colspan="2">WARNING: This functionality requires Cookies to store its settings!</td>
+											<td colspan="2">${strings.settings_cookies_required}</td>
 										</tr>
+										<tr><td colspan=2">&nbsp;</td></tr>
 										<tr>
-											<td>
-												Enable Debug												
-											</td>
+											<td>${strings.enable_debug}</td>
 											<td>
 												<form><input type="checkbox" id="enableDebug" ${debug}/></form>
-											</td>										
+											</td>
 										</tr>
 										<tr>
+											<td>${strings.update_interval_current_service}</td>
 											<td>
-												Update-Interval for current service (min. 10 sec)
+												<form><input type="text" id="updateCurrentInterval" value="${updateCurrentInterval}">${strings.seconds_short}</form>
 											</td>
-											<td>
-												<form><input type="text" id="updateCurrentInterval" value="${updateCurrentInterval}">sec</form>
-											</td>										
 										</tr>
 										<tr>
+											<td>${strings.update_interval_current_bouquet_epg}</td>
 											<td>
-												Update-Interval for current bouquets EPG (min. 60 sec)
+												<form><input type="text" id="updateBouquetInterval" value="${updateBouquetInterval}" />${strings.seconds_short}</form>
 											</td>
-											<td colspan="2">
-												<form><input type="text" id="updateBouquetInterval" value="${updateBouquetInterval}" />sec</form>
-											</td>										
-										</tr>																				
-										<tr><td><button class="saveSettings">Save</button></td></tr>
+										</tr>
+										<tr><td colspan="2"><button class="saveSettings">${strings.save}</button></td></tr>
 									</table>
-									
 								</td>
 							</tr>
 						</table>

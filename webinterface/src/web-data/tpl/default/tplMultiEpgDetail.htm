@@ -8,32 +8,32 @@
 				data-end=${e.end}
 				data-title="${e.title}"
 				data-description="${e.description}">
-		
+
 				<tr>
 					<td class="mEpgDate">${e.date}</td>
 					<td>${e.servicename}</td>
 					<td>${e.title}</td>
 					<td class="center closeContainer"><a href='#' class="close">close</a></td>
 				</tr>
-		
+
 				<tr>
 					<td>${e.starttime}</td>
 					<td>${e.duration} min.</td>
 					<td colspan="2">${e.description}</td>
 				</tr>
-		
+
 				<tr>
 					<td valign="top">${e.endtime}</td>
 					<td colspan="3"rowspan="2">${e.extdescription}</td>
 				</tr>
-		
+
 				<tr>
 					<td>
-						<a href="#" class="eListAddTimer"><img src="/web-data/img/clock.png" title="Add Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-						<a href="#" class="eListZapTimer"><img src="/web-data/img/clock_play.png" title="Add zap Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-						<a href="#" class="eListEditTimer"><img src="/web-data/img/clock_edit.png" title="Edit and add timer" onClick="return false;" border="0"></a><br/><br/>
-						<a target="_blank" href="/web/epgsearch.rss?search=${e.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed for this Title" border="0"></a>&nbsp;
-						<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${e.titleESC}" ><img src="/web-data/img/imdb.png" title="Search IMDb" border="0"></a><br/>
+						<a href="#" class="eListAddTimer"><img src="/web-data/img/clock.png" title="${strings.add_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+						<a href="#" class="eListZapTimer"><img src="/web-data/img/clock_play.png" title="${strings.add_zap_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+						<a href="#" class="eListEditTimer"><img src="/web-data/img/clock_edit.png" title="${strings.edit_timer}" onClick="return false;" border="0"></a><br/><br/>
+						<a target="_blank" href="/web/epgsearch.rss?search=${e.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed" border="0"></a>&nbsp;
+						<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${e.titleESC}" ><img src="/web-data/img/imdb.png" title="${strings.imdb_lookup}" border="0"></a><br/>
 					</td>
 				</tr>
 			</table>

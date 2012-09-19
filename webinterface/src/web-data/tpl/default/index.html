@@ -80,6 +80,7 @@
 	</script>
 
 	<!-- Webinterface Stuff -->
+	<script type="text/javascript" src="/web/strings.js"></script>
 	<script type="text/javascript" src="/web-data/userprefs.js"></script>
 	<script type="text/javascript" src="/web-data/statics.js" ></script>
 	<script type="text/javascript" src="/web-data/helpers.js" ></script>
@@ -99,13 +100,13 @@
 					<img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web">
 				</div>
 				<ul id="mainMenu">
-					<li class="roundedNav navmenu" data-mode="tv"><a class="roundedNav" href="#!/tv"><span>TeleVision</span></a></li>
-					<li class="roundedNav navmenu" data-mode="radio"><a class="roundedNav" href="#!/radio"><span>Radio</span></a></li>
-					<li class="roundedNav navmenu" data-mode="movies"><a class="roundedNav" href="#!/movies/list/filter//"><span>Movies</span></a></li>
-					<li class="roundedNav navmenu" data-mode="timer"><a class="roundedNav" href="#!/timer/list"><span>Timer</span></a></li>
-					<li class="roundedNav navmenu" data-mode="control"><a class="roundedNav" href="#!/control"><span>BoxControl</span></a></li>
-					<li class="roundedNav navmenu" data-mode="extras"><a class="roundedNav" href="#!/extras"><span>Extras</span></a></li>
-					<li class="roundedNav navmenu"><a class="roundedNav" href="#" id="webTv"><span>WebTV</span></a></li>
+					<li class="roundedNav navmenu" data-mode="tv"><a class="roundedNav" href="#!/tv"><span id="mainMenuItemTv" >TeleVision</span></a></li>
+					<li class="roundedNav navmenu" data-mode="radio"><a class="roundedNav" href="#!/radio"><span id="mainMenuItemRadio">Radio</span></a></li>
+					<li class="roundedNav navmenu" data-mode="movies"><a class="roundedNav" href="#!/movies/list/filter//"><span id="mainMenuItemMovies">Movies</span></a></li>
+					<li class="roundedNav navmenu" data-mode="timer"><a class="roundedNav" href="#!/timer/list"><span id="mainMenuItemTimer">Timer</span></a></li>
+					<li class="roundedNav navmenu" data-mode="control"><a class="roundedNav" href="#!/control"><span id="mainMenuItemBoxControl">BoxControl</span></a></li>
+					<li class="roundedNav navmenu" data-mode="extras"><a class="roundedNav" href="#!/extras"><span id="mainMenuItemExtras">Extras</span></a></li>
+					<li class="roundedNav navmenu"><a class="roundedNav" href="#" id="webTv"><span id="mainMenuItemWebTV">WebTV</span></a></li>
 				</ul>
 			</div>
 			<div id="bannerRight">
@@ -126,10 +127,10 @@
 				<div id="instantRecordMenu" class="rounded" style="display: none;">
 					<table>
 						<tr>
-							<th>Instant record</th>
+							<th id="instantRecordHd">Instant record</th>
 						</tr>
 						<tr>
-							<td colspan="2"><button class="doInstantRecord" data-type="current">Record current event</button></td>
+							<td colspan="2"><button id="instantRecordCurrentEvent" class="doInstantRecord" data-type="current">Record current event</button></td>
 						</tr>
 						<!--
 						<tr>
@@ -138,7 +139,7 @@
 						</tr>
 						-->
 						<tr>
-							<td colspan="2"><button class="doInstantRecord" data-type="infinite">Start infinite recording</button></td>
+							<td colspan="2"><button id="instantRecordInfinite" class="doInstantRecord" data-type="infinite">Start infinite recording</button></td>
 						</tr>
 					</table>
 
@@ -187,6 +188,25 @@
 	</div>
 	<script language="javascript" type="text/javascript">
 		setMaxHeight('contentMain');
+
+		//Localization
+		$('mainMenuItemTv').update(strings.television);
+		$('mainMenuItemRadio').update(strings.radio);
+		$('mainMenuItemMovies').update(strings.movies);
+		$('mainMenuItemTimer').update(strings.timers);
+		$('mainMenuItemBoxControl').update(strings.boxcontrol);
+		$('mainMenuItemExtras').update(strings.extras);
+		$('mainMenuItemWebTV').update(strings.webtv);
+		$('instantRecordCurrentEvent').update(strings.record_current_event);
+		$('instantRecordInfinite').update(strings.start_record_infinite);
+		$('instantRecordHd').update(strings.instant_record);
+		$('volHd').update(strings.volume);
+		$('searchHd').update(strings.epgsearch);
+		$('epgSearch').value = strings.epgsearch_hint;
+		$('epgSearchClear').title = strings.clear_serach;
+		$('openSignalPanelImg').title = strings.open_signal_panel;
+		$('instantRecordImg').title = strings.instant_record;
+
 		core.run();
 	</script>
 

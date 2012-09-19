@@ -4,33 +4,33 @@
 							<tr>
 								<td><div class="mpListHeader">MediaPlayer ${mp.root}</div></td>
 								<td style="text-align: right;">
-									<button class="mpCmd" data-command="prev" title="Previous">
+									<button class="mpCmd" data-command="prev" title="${strings.previous}">
 										<img src="/web-data/img/control_start_blue.png" alt="&lt;&lt;" />
 									</button>
-									<button class="mpCmd" data-command="play" title="Play">
+									<button class="mpCmd" data-command="play" title="${strings.play}">
 										<img src="/web-data/img/control_play_blue.png" alt="&gt;" />
 									</button>
-									<button class="mpCmd" data-command="next" title="Next">
+									<button class="mpCmd" data-command="next" title="${strings.next}">
 										<img src="/web-data/img/control_end_blue.png" alt="&lt;&lt;" />
 									</button>
-									<button class="mpCmd" data-command="stop" title="Stop">
+									<button class="mpCmd" data-command="stop" title="${strings.stop}">
 										<img src="/web-data/img/control_stop_blue.png" alt="[]" />
 									</button>
 									<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 									<a href="#!/extras/mediaplayer/filesystems">
-										<button class="mpFilelist" title="Filebrowser">
-											<img src="/web-data/img/text_columns.png" alt="Browse" />
+										<button class="mpFilelist" title="${strings.filebrowser}">
+											<img src="/web-data/img/text_columns.png" alt="${strings.filebrowser}" />
 										</button>
 									</a>
 									<a href="#!/extras/mediaplayer/playlist">
-										<button class="mpPlaylist" title="Playlist">
-											<img src="/web-data/img/edit.png" alt="Playlist" />
+										<button class="mpPlaylist" title="${strings.playlist}">
+											<img src="/web-data/img/edit.png" alt="${strings.playlist}" />
 										</button>
 									</a>
-									<button class="mpSavePlaylist" title="Save Playlist">
-										<img src="/web-data/img/save.png" alt="Save">
+									<button class="mpSavePlaylist" title="${strings.save_playlist}">
+										<img src="/web-data/img/save.png" alt="${strings.save}">
 									</button><br />
-									<button class="mpCmd" data-command="exit" title="Close MediaPlayer" >
+									<button class="mpCmd" data-command="exit" title="${strings.close_mediaplayer}" >
 										<img src="/web-data/img/cross.png" alt="X">
 									</button>
 								</td>
@@ -56,18 +56,18 @@
 													{if item.isdir}
 													<a href="#!/extras/mediaplayer/${item.servicereference}" style="color: #000; display:block;" class="mpListSLink" title="Change to ${item.name}"><img style="vertical-align: bottom;" src="/web-data/img/folder.png" alt="|" /> ${item.name}</a>
 													{else}
-													<a href="#" class="mpListFile mpListSLink" title="Play '${item.name}'"><img style="vertical-align: bottom;" src="/web-data/img/page.png" alt="-" /> ${item.name}</a>
+													<a href="#" class="mpListFile mpListSLink" title="${strings.play} '${item.name}'"><img style="vertical-align: bottom;" src="/web-data/img/page.png" alt="-" /> ${item.name}</a>
 													{/if}
 												</div>
 											</td>
 											<td style="width: 80px;">
 												<div style="text-align: right;">
 												{if item.root == "playlist"}
-													<a href="#" style="color: #000;" class="mpPlayFile" title="Play '${item.name}'"><img src="/web-data/img/control_play_blue.png"></a>
+													<a href="#" style="color: #000;" class="mpPlayFile" title="${strings.play} '${item.name}'"><img src="/web-data/img/control_play_blue.png"></a>
 													<a href="#" style="color: #000;" class="mpRemoveFile" title="Remove '${item.name}' from playlist"><img src="/web-data/img/nok.png" border="0" /></a>
 													<a target="_blank" href="/file?file=${item.name}"><img src="/web-data/img/save.png" title="Download '${item.name}'" border="0"></a>
 												{elseif !item.isdir}
-													<a href="#" class="mpPlayFile" title="Play '${item.name}'"><img src="/web-data/img/control_play_blue.png" border="0" alt="&gt;" /></a>
+													<a href="#" class="mpPlayFile" title="${strings.play} '${item.name}'"><img src="/web-data/img/control_play_blue.png" border="0" alt="&gt;" /></a>
 													<a href="#" class="mpAddFile" title="Add '${item.name}' to Playlist"><img src="/web-data/img/page_add.png" border="0" alt="+" /></a>
 													<a target="_blank" href="/file?file=${item.name}&root=${item.root}"><img src="/web-data/img/save.png" title="Download '${item.name}'" border="0" alt="Download"/></a>
 												{else}
@@ -80,7 +80,7 @@
 										</tr>
 										{forelse}
 										<tr>
-											<td colspan="2">No Items To Display</td>
+											<td colspan="2">${strings.no_items}</td>
 										</tr>
 										{/for}
 										<tr><td colspan="2">&nbsp;</td></tr>

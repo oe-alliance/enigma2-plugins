@@ -22,6 +22,11 @@ TextHtmlHeaderFiles = frozenset(('wapremote.xml', 'stream.xml', ))
 """
 NoExplicitHeaderFiles = frozenset(('getpid.xml', 'tvbrowser.xml', ))
 
+"""
+	define all files in /web with a text/javascript header
+"""
+TextJavascriptHeaderFiles = frozenset(('strings.js.xml', ))
+
 class ScreenPage(resource.Resource):
 	def __init__(self, session, path, addSlash = False):
 		resource.Resource.__init__(self)
@@ -41,9 +46,10 @@ class ScreenPage(resource.Resource):
 				request.setHeader('Content-Type', 'application/text')
 			elif lastComponent in TextHtmlHeaderFiles or (path.endswith(".html.xml") and lastComponent != "updates.html.xml"):
 				request.setHeader('Content-Type', 'text/html; charset=UTF-8')
+			elif lastComponent in TextJavascriptHeaderFiles:
+				request.setHeader('Content-Type', 'text/javascript; charset=UTF-8')
 			elif lastComponent not in NoExplicitHeaderFiles:
 				request.setHeader('Content-Type', 'application/xhtml+xml; charset=UTF-8')
-
 			# now go and write the Output
 			# request.finish() is called inside webif.py (requestFinish() which is called via renderPage())
 			webif.renderPage(request, path, self.session) # login?

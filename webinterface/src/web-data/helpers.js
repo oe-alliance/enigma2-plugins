@@ -261,7 +261,7 @@ var TemplateEngine = Class.create(AjaxThing, {
 
 	fetch: function(tplName, callback){
 		if(this.templates[tplName] === undefined) {
-			var url = URL.tpl+tplName+".htm";
+			var url = URL.tpl + tplName + ".htm";
 
 			this.getUrl(
 					url,
@@ -280,28 +280,39 @@ var TemplateEngine = Class.create(AjaxThing, {
 		}
 	},
 
-	render: function(tpl, data, domElement) {
+	render: function(tpl, data, target) {
+		if(data == null || data == undefined)
+			data = {};
+		data.strings = strings;
 		var result = tpl.process(data);
-
-		try{
-			$(domElement).update( result );
-		}catch(ex){
-			debug("[TemplateEngine].render catched an exception!");
-			throw ex;
+		if(typeof(target) == 'function'){
+			try{
+				target(result);
+				return;
+			} catch(exc){
+				debug("[TemplateEngine].render callback failed!");
+			}
+		} else {
+			try{
+				$(target).update( result );
+			}catch(ex){
+				debug("[TemplateEngine].render catched an exception!");
+				throw ex;
+			}
 		}
 	},
 
-	onTemplateReady: function(tpl, data, domElement, callback){
-		this.render(tpl, data, domElement);
+	onTemplateReady: function(tpl, data, target, callback){
+		this.render(tpl, data, target);
 		if(typeof(callback) == 'function') {
 			callback();
 		}
 	},
 
-	process: function(tplName, data, domElement, callback){
+	process: function(tplName, data, target, callback){
 		this.fetch( tplName,
 				function(tpl){
-					this.onTemplateReady(tpl, data, domElement, callback);
+					this.onTemplateReady(tpl, data, target, callback);
 				}.bind(this) );
 	}
 });
@@ -851,7 +862,7 @@ function Timer(xml, cssclass){
 	};
 
 	this.getToggleDisabledText = function(){
-		var retVal = this.toggledisabled == "0" ? "Enable" : "Disable";
+		var retVal = this.toggledisabled == "0" ? strings.activate : strings.deactivate;
 		return retVal;
 	};
 
@@ -958,8 +969,8 @@ function Timer(xml, cssclass){
 	this.beginDate = new Date(Number(this.getTimeBegin()) * 1000);
 	this.endDate = new Date(Number(this.getTimeEnd()) * 1000);
 
-	this.aftereventReadable = [ 'Nothing', 'Standby',
-								'Deepstandby/Shutdown', 'Auto' ];
+	this.aftereventReadable = [ strings.do_nothing, strings.standby,
+								strings.shutdown, strings.auto ];
 
 	this.justplayReadable = [ 'record', 'zap' ];
 

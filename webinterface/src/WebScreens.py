@@ -421,3 +421,10 @@ class ExternalWebScreen(WebScreen):
 
 		from WebComponents.Sources.External import External
 		self["External"] = External()
+
+class StringsWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+
+		from WebComponents.Sources.Strings import Strings
+		self["Strings"] = Strings()

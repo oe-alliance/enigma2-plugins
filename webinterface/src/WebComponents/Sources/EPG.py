@@ -4,7 +4,7 @@ from enigma import eServiceCenter, eServiceReference, eEPGCache
 
 class EPG(Source):
 	BOUQUETNOW = 0
-	BOUQUETNEXT = 1	
+	BOUQUETNEXT = 1
 	SERVICENOW = 2
 	SERVICENEXT = 3
 	SERVICE = 4
@@ -13,7 +13,7 @@ class EPG(Source):
 	MULTI = 7
 	SEARCHSIMILAR = 8
 	BOUQUETNOWNEXT = 9
-	
+
 	def __init__(self, navcore, func=BOUQUETNOW, endtm=False):
 		self.func = func
 		Source.__init__(self)
@@ -67,10 +67,10 @@ class EPG(Source):
 
 	def getServiceEPGNext(self, ref):
 		return self.getEPGNowNext(ref, 1, True)
-	
+
 	def getBouquetEPGMulti(self, ref):
 		return self.getEPGofBouquet(ref,  True)
-	
+
 	def getEPGNowNext(self, ref, type, service=False):
 		print "[WebComponents.EPG] getting EPG NOW/NEXT", ref
 
@@ -96,29 +96,29 @@ class EPG(Source):
 
 	def getEPGofService(self, param, options='IBDCTSERN'):
 		print "[WebComponents.EPG] getEPGofService param: ", param
-		
+
 		if "sRef" in param:
 			service = param["sRef"]
 		else:
 			return ()
-		
-		time = -1		
+
+		time = -1
 		endtime = -1
-				
+
 		if "time" in param:
 			if not param["time"] is None:
 				time = int(float(param["time"]))
 				if time < 0:
 					time = -1
-		
+
 		if "endTime" in param:
 			if not param["endTime"] is None:
 				endtime = int( float(param["endTime"]) )
 				if endtime < 0:
 					endtime = -1
-				
+
 		events = self.epgcache.lookupEvent([options , (service, 0, time, endtime)]);
-		
+
 		if events:
 			if self.endtime:
 				list = self.insertEndTime(events)
@@ -150,7 +150,7 @@ class EPG(Source):
 
 		if 'bRef' not in param:
 			return ()
-		
+
 		time = -1
 		endtime = -1
 		if "time" in param:
@@ -158,26 +158,26 @@ class EPG(Source):
 				time = int(float(param["time"]))
 				if time < 0:
 					time = -1
-		
+
 		if "endTime" in param:
 			if not param["endTime"] is None:
 				endtime = int( float(param["endTime"]) )
 				if endtime < 0:
 					endtime = -1
-				
+
 		bRef = param['bRef']
 		if bRef is None:
 			return ()
-		
+
 		serviceHandler = eServiceCenter.getInstance()
 		sl = serviceHandler.list(eServiceReference(bRef))
 		services = sl and sl.getContent('S')
 
 		search = ['IBDCTSERN']
-		
+
 		if multi:
 			search.extend([(service, 0, time, endtime) for service in services])
-		else: 
+		else:
 			search.extend([(service, 0, time) for service in services])
 		events = self.epgcache.lookupEvent(search)
 
@@ -229,9 +229,9 @@ class EPG(Source):
 					"DescriptionExtended": 5,
 					"ServiceReference": 6,
 					"ServiceName": 7
-				}			
+				}
 		else:
-		
+
 			if self.endtime:
 				lut = {
 						"EventID": 0,

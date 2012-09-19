@@ -586,13 +586,13 @@ var TimerListHandler  = Class.create(AbstractContentHandler, {
 });
 
 var TimerHandler = Class.create(AbstractContentHandler, {
-	ACTIONS: [{value : 0, txt : 'Record'},
-			{value : 1, txt : 'Zap'}],
+	ACTIONS: [{value : 0, txt : strings.record},
+			{value : 1, txt : strings.zap}],
 
-	AFTEREVENTS: [{value : 0, txt : 'Nothing'},
-				{value : 1, txt : 'Standby'},
-				{value : 2, txt : 'Deepstandby/Shutdown'},
-				{value : 3, txt : 'Auto'}],
+	AFTEREVENTS: [{value : 0, txt : strings.do_nothing},
+				{value : 1, txt : strings.standby},
+				{value : 2, txt : strings.shutdown},
+				{value : 3, txt : strings.auto}],
 
 	SELECTED : "selected",
 	CHECKED: "checked",

@@ -5,27 +5,27 @@
 					<td class="fullwidth">
 						<table cellspacing="0" class="about">
 							<tr>
-								<th colspan="2" class="aboutHeader">Device &amp; Versions</th>
+								<th colspan="2" class="aboutHeader">${strings.device_and_versions}</th>
 							</tr>
 							<tr>
-								<td class="aboutElementLeft">Devicename:</td>
+								<td class="aboutElementLeft">${strings.device_name}:</td>
 								<td class="aboutElementRight">${info.devicename}</td>
 							</tr>
 							<tr>
-								<td class="aboutElementLeft">Enigma Version:</td>
+								<td class="aboutElementLeft">${strings.engima2_version}:</td>
 								<td class="aboutElementRight">${info.enigmaVersion}</td>
 							</tr>
 							<tr>
-								<td class="aboutElementLeft">Image Version:</td>
+								<td class="aboutElementLeft">${strings.image_version}:</td>
 								<td class="aboutElementRight">${info.imageVersion}</td>
 							</tr>
 
 							<tr>
-								<td class="aboutElementLeft">Frontprozessor Version:</td>
+								<td class="aboutElementLeft">${strings.frontprocessor_version}:</td>
 								<td class="aboutElementRight">${info.fpVersion}</td>
 							</tr>
 							<tr>
-								<td class="aboutElementLeft">Webinterface Version:</td>
+								<td class="aboutElementLeft">${strings.webinterface_version}:</td>
 								<td class="aboutElementRight">${info.webifversion}</td>
 							</tr>
 						</table>
@@ -35,7 +35,7 @@
 					<td class="fullwidth">
 						<table cellspacing="0" class="about">
 							<tr>
-								<th colspan="2" class="aboutHeader">Tuners</th>
+								<th colspan="2" class="aboutHeader">${strings.tuners}</th>
 							</tr>
 							{for nim in nims}
 							<tr>
@@ -51,14 +51,14 @@
 					<td class="fullwidth">
 						<table cellspacing="0" class="about">
 							<tr>
-								<th colspan="2" class="aboutHeader">Harddisk (${hdd.model})</th>
+								<th colspan="2" class="aboutHeader">${strings.harddisk} (${hdd.model})</th>
 							</tr>
 							<tr>
-								<td class="aboutElementLeft">Capacity:</td>
+								<td class="aboutElementLeft">${strings.capacity}:</td>
 								<td class="aboutElementRight">${hdd.capacity}</td>
 							</tr>
 							<tr>
-								<td class="aboutElementLeft">Free:</td>
+								<td class="aboutElementLeft">${strings.free_space}:</td>
 								<td class="aboutElementRight">${hdd.free}</td>
 							</tr>
 						</table>
@@ -70,26 +70,26 @@
 					<td class="fullwidth">
 						<table cellspacing="0" class="about">
 							<tr>
-								<th colspan="2" class="aboutHeader">Network Interface (${nic.name})</th>
+								<th colspan="2" class="aboutHeader">${strings.network_interface} (${nic.name})</th>
 							</tr>
 							<tr>
-								<td class="aboutElementLeft">Mac Address:</td>
+								<td class="aboutElementLeft">${strings.mac_address}:</td>
 								<td class="aboutElementRight">${nic.mac}</td>
 							</tr>
 							<tr>
-								<td class="aboutElementLeft">DHCP enabled:</td>
+								<td class="aboutElementLeft">${strings.dhcp_enabled}:</td>
 								<td class="aboutElementRight">${nic.dhcp}</td>
 							</tr>
 							<tr>
-								<td class="aboutElementLeft">IP:</td>
+								<td class="aboutElementLeft">${strings.ip_address}:</td>
 								<td class="aboutElementRight">${nic.ip}</td>
 							</tr>
 							<tr>
-								<td class="aboutElementLeft">Netmask:</td>
+								<td class="aboutElementLeft">${strings.netmask}:</td>
 								<td class="aboutElementRight">${nic.netmask}</td>
 							</tr>
 							<tr>
-								<td class="aboutElementLeft">Gateway:</td>
+								<td class="aboutElementLeft">${strings.gateway}:</td>
 								<td class="aboutElementRight">${nic.gateway}</td>
 							</tr>
 						</table>

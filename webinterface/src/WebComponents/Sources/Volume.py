@@ -14,16 +14,16 @@ class Volume(Source):
 	def handleCommand(self, cmd):
 		l = []
 		if cmd == "state":
-			l.extend((True, "State"))
+			l.extend((True, _("State")))
 		elif cmd == "up":
 			self.actionmap.actions["volumeUp"]()
-			l.extend((True, "Volume changed"))
+			l.extend((True, _("Volume changed")))
 		elif cmd == "down":
 			self.actionmap.actions["volumeDown"]()
-			l.extend((True, "Volume changed"))
+			l.extend((True, _("Volume changed")))
 		elif cmd == "mute":
 			self.actionmap.actions["volumeMute"]()
-			l.extend((True, "Mute toggled"))
+			l.extend((True, _("Mute toggled")))
 		elif cmd.startswith("set"):
 			try:
 				targetvol = int(cmd[3:])
@@ -34,11 +34,11 @@ class Volume(Source):
 
 				self.volctrl.setVolume(targetvol, targetvol)
 
-				l.extend((True, "Volume set to %i" % targetvol))
+				l.extend((True, _("Volume set to %i") % targetvol))
 			except ValueError: # if cmd was set12NotInt
-				l.extend((False, "Wrong parameter format 'set=%s'. Use set=set15 " % cmd))
+				l.extend((False, _("Wrong parameter format 'set=%s'. Use set=set15") % cmd))
 		else:
-			l.extend((False, "Unknown Volume command %s" % cmd))
+			l.extend((False, _("Unknown Volume command %s") % cmd))
 
 		l.extend((self.volctrl.getVolume(), self.volctrl.isMuted()))
 

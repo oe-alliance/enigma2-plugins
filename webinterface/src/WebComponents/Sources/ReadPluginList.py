@@ -11,6 +11,6 @@ class ReadPluginList(Source):
 		print "[WebComponents.ReadPluginList] readPluginList"
 
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
-		return ( True, "List of Plugins has been read" )
+		return ( True, _("List of Plugins has been read" ))
 
 	result = property(command)

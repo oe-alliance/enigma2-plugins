@@ -8,7 +8,7 @@ class AudioTracks(Source):
 	SET = 1
 	DOWNMIX = 2
 
-	text = "False"
+	text = _("False")
 
 	def __init__(self, session, func=GET):
 		self.cmd = None
@@ -34,11 +34,11 @@ class AudioTracks(Source):
 			print "COMMAND is %s" % self.cmd
 			if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > cmd and cmd >= 0:
 				audio.selectTrack(cmd)
-				return "Success"
+				return _("Success")
 			else:
-				return "Error"
+				return _("Error")
 		else:
-			return "Error"
+			return _("Error")
 
 	def handleDownmix(self):
 		if SystemInfo["CanDownmixAC3"]:
@@ -47,10 +47,10 @@ class AudioTracks(Source):
 			elif self.cmd == "False":
 				config.av.downmix_ac3.value = False
 
-			text = "AC3 Downmix enabled" if config.av.downmix_ac3.value else "AC3 Downmix disabled"
+			text = _("AC3 Downmix enabled") if config.av.downmix_ac3.value else _("AC3 Downmix disabled")
 			return config.av.downmix_ac3.value, text
 
-		return False, "This device does not support AC3 Downmix"
+		return False, _("This device does not support AC3 Downmix")
 
 	def getAudioTracks(self):
 		service = self.session.nav.getCurrentService()

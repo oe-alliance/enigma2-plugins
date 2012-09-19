@@ -1,11 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional"
-       "http://www.w3.org/TR/html4/loose.dtd">  
+       "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- tplEpgList -->
 	<head>
 		<meta content="text/html; charset=UTF-8" http-equiv="content-type">
 		<title>Enigma2 WebControl - EPG</title>
-				
+
 		<link href="/web-data/tpl/default/style.min.css" type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
 	</head>
@@ -22,7 +22,7 @@
 							data-end=${e.end}
 							data-title="${e.title}"
 							data-description="${e.description}">
-						
+
 						<tr style="background-color: #DDDDDD;">
 							<td width="10%">${e.date}</td>
 							<td width="30%">${e.servicename}</td>
@@ -42,11 +42,11 @@
 
 						<tr style="background-color: #DDDDDD;">
 							<td>
-								<a href="#" class="eListAddTimer"><img src="/web-data/img/clock.png" title="Add Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-								<a href="#" class="eListZapTimer"><img src="/web-data/img/clock_play.png" title="Add zap Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-								<a href="#" class="eListEditTimer"><img src="/web-data/img/clock_edit.png" title="Edit and add timer" onClick="return false;" border="0"></a><br/><br/>
-								<a target="_blank" href="/web/epgsearch.rss?search=${e.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed for this Title" border="0"></a>&nbsp;
-								<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${e.titleESC}" ><img src="/web-data/img/imdb.png" title="Search IMDb" border="0"></a><br/>
+								<a href="#" class="eListAddTimer"><img src="/web-data/img/clock.png" title="${strings.add_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+								<a href="#" class="eListZapTimer"><img src="/web-data/img/clock_play.png" title="${strings.add_zap_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+								<a href="#" class="eListEditTimer"><img src="/web-data/img/clock_edit.png" title="${strings.edit_timer}" onClick="return false;" border="0"></a><br/><br/>
+								<a target="_blank" href="/web/epgsearch.rss?search=${e.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed" border="0"></a>&nbsp;
+								<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${e.titleESC}" ><img src="/web-data/img/imdb.png" title="${strings.imdb_lookup}" border="0"></a><br/>
 							</td>
 						</tr>
 						<tr>
@@ -54,7 +54,7 @@
 						</tr>
 					</table>
 					{forelse}
-						<h1 style="color: white;">Nothing found...</h1>
+						<h1 style="color: white;">${strings.nothing_found}</h1>
 					{/for}
 				</td>
 			</tr>

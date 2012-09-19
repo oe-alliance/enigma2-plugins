@@ -4,13 +4,13 @@
 							{for movie in movies}
 							<tr>
 								<td class="${movie.cssclass}" >
-									<table 
+									<table
 										class="mListItem"
 										data-servicereference="${movie.servicereference}"
 										data-servicename="${movie.servicename}"
 										data-title="${movie.title}"
 										data-description="${movie.description}">
-										
+
 										<tr>
 											<td style="width: 640px;">
 												<div class="sListSName">
@@ -20,13 +20,13 @@
 												</div>
 											</td>
 											<td style="text-align: right;">
-												<a target="_blank" class="small" href="/web/ts.m3u?file=${movie.filename}" title="Stream ${movie.title}" >
-													<img src="/web-data/img/screen.png" alt="stream" border="0">
+												<a target="_blank" class="small" href="/web/ts.m3u?file=${movie.filename}" title="${strings.do_stream} ${movie.title}" >
+													<img src="/web-data/img/screen.png" alt="${strings.do_stream}" border="0">
 												</a>
-												<a target="_blank" class="small" href="/file?file=${movie.filename}" title="Download ${movie.title}">
-													<img src="/web-data/img/film_save.png" alt="download" border="0">
+												<a target="_blank" class="small" href="/file?file=${movie.filename}" title="${strings.download}">
+													<img src="/web-data/img/film_save.png" alt="Download" border="0">
 												</a>
-												<a href="#" class="mListDelete" title="Delete ${movie.title}">
+												<a href="#" class="mListDelete" title="${strings.delete}">
 													<img src="/web-data/img/delete.png" border="0">
 												</a>
 											</td>
@@ -39,7 +39,7 @@
 														<td rowspan="3" class="mTitle">${movie.descriptionextended}</td>
 														<td rowspan="2">${movie.tags}</a></td>
 													</tr>
-													<tr></tr>					
+													<tr></tr>
 													<tr>
 														<td class="mLength bottom">${movie.length}<br>${movie.filesize}</td>
 													</tr>
@@ -54,7 +54,7 @@
 								<td>
 									<table>
 										<tr>
-											<td>No Movies to Display</td>
+											<td>${strings.no_movies}</td>
 										</tr>
 									</table>
 								</td>

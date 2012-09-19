@@ -1,0 +1,4 @@
+<e2:screen name="StringsWebScreen">var strings = {};<e2:element source="Strings"><e2:convert type="web:ListFiller">
+strings["<e2:item name="id" filter="attribute" />"] = "<e2:item name="value" filter="xml" />";</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+
+</e2:screen>
