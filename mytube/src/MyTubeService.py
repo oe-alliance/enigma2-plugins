@@ -52,7 +52,7 @@ std_headers = {
 class GoogleSuggestions():
 	def __init__(self):
 		self.hl = "en"
-		self.conn = HTTPConnection("google.com")
+		self.conn = None
 
 	def prepareQuery(self):
 		#GET /complete/search?output=toolbar&client=youtube-psuggest&xml=true&ds=yt&hl=en&jsonp=self.gotSuggestions&q=s
@@ -66,15 +66,19 @@ class GoogleSuggestions():
 		self.prepareQuery()
 		if queryString is not "":
 			query = self.prepQuerry + quote(queryString)
+			self.conn = HTTPConnection("google.com")
 			try:
+				self.conn = HTTPConnection("google.com")
 				self.conn.request("GET", query, "", {"Accept-Encoding": "UTF-8"})
 			except (CannotSendRequest, gaierror, error):
+				self.conn.close()
 				print "[MyTube - GoogleSuggestions] Can not send request for suggestions"
 				return None
 			else:
 				try:
 					response = self.conn.getresponse()
 				except BadStatusLine:
+					self.conn.close()
 					print "[MyTube - GoogleSuggestions] Can not get a response from google"
 					return None
 				else:
@@ -87,12 +91,12 @@ class GoogleSuggestions():
 							print "[MyTube - GoogleSuggestions] Got charset %s" %charset
 						except:
 							print "[MyTube - GoogleSuggestions] No charset in Header, falling back to %s" %charset
-
 						data = data.decode(charset).encode("utf-8")
+						self.conn.close()
 						return data
 					else:
+						self.conn.close()
 						return None
-			self.conn.close()
 		else:
 			return None
 
@@ -253,7 +257,10 @@ class MyTubeFeedEntry():
 			tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
 		for fmtstring in tmp_fmtUrlDATA:
 			if videoinfo.has_key('url_encoded_fmt_stream_map'):
-				(fmturl, fmtid) = fmtstring.split('&itag=')
+				try:
+					(fmturl, fmtid) = fmtstring.split('&itag=')
+				except:
+					print "error splitting fmtstring:",fmtstring
 				if len(fmtid) >= 3:
 					fmtid = fmtid[:2]
 				if fmturl.find("url=") !=-1:
