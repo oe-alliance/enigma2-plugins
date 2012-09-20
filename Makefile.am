@@ -50,7 +50,6 @@ SUBDIRS = \
 	movietagger \
 	mphelp \
 	multirc \
-	mytube \
 	ncidclient \
 	netcaster \
 	networkbrowser \
@@ -69,7 +68,7 @@ SUBDIRS = \
 	rsdownloader \
 	setpasswd \
 	shoutcast \
-    showclock \
+	showclock \
 	simplerss \
 	subsdownloader2 \
 	svdrp \
@@ -87,7 +86,6 @@ SUBDIRS = \
 	webbouqueteditor \
 	webcamviewer \
 	werbezapper \
-	yttrailer \
 	zaphistorybrowser \
 	zapstatistic \
 	zdfmediathek \

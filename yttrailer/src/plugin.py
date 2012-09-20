@@ -3,8 +3,8 @@
 #  Coded by Dr.Best (c) 2011
 #  Support: www.dreambox-tools.info
 #
-#  All Files of this Software are licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  All Files of this Software are licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License if not stated otherwise in a Files Head. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -13,7 +13,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #  This applies to the source code as a whole as well as to parts of it, unless
 #  explicitely stated otherwise.
@@ -57,29 +57,29 @@ baseEventViewBase__init__ = None
 
 from Screens.EpgSelection import EPGSelection
 baseEPGSelection__init__ = None
-# etpm = eTPM()
+etpm = eTPM()
 
 
 def autostart(reason, **kwargs):
-# 	global l2key
-# 	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
-# 	if l2cert:
-# 		l2key = validate_cert(l2cert, rootkey)
-# 		if l2key:
-# 			global baseEventViewBase__init__, baseEPGSelection__init__
-# 			if baseEventViewBase__init__ is None:
-# 				baseEventViewBase__init__ = EventViewBase.__init__
-# 			EventViewBase.__init__ = EventViewBase__init__
-# 			EventViewBase.showTrailer = showTrailer
-# 			EventViewBase.showTrailerList = showTrailerList
-# 			EventViewBase.showConfig = showConfig
-# 
-# 			if baseEPGSelection__init__ is None:
-# 				baseEPGSelection__init__ = EPGSelection.__init__
-# 			EPGSelection.__init__ = EPGSelection__init__
-# 			EPGSelection.showTrailer = showTrailer
-# 			EPGSelection.showConfig = showConfig
-# 			EPGSelection.showTrailerList = showTrailerList
+	global l2key
+	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+	if l2cert:
+		l2key = validate_cert(l2cert, rootkey)
+		if l2key:
+			global baseEventViewBase__init__, baseEPGSelection__init__
+			if baseEventViewBase__init__ is None:
+				baseEventViewBase__init__ = EventViewBase.__init__
+			EventViewBase.__init__ = EventViewBase__init__
+			EventViewBase.showTrailer = showTrailer
+			EventViewBase.showTrailerList = showTrailerList
+			EventViewBase.showConfig = showConfig
+
+			if baseEPGSelection__init__ is None:
+				baseEPGSelection__init__ = EPGSelection.__init__
+			EPGSelection.__init__ = EPGSelection__init__
+			EPGSelection.showTrailer = showTrailer
+			EPGSelection.showConfig = showConfig
+			EPGSelection.showTrailerList = showTrailerList
 	global baseEventViewBase__init__, baseEPGSelection__init__
 	if baseEventViewBase__init__ is None:
 		baseEventViewBase__init__ = EventViewBase.__init__
@@ -101,9 +101,9 @@ def setup(session,**kwargs):
 
 def Plugins(**kwargs):
 
-	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]	
+	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]
 	list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, icon="YTtrailer.png"))
-	if config.plugins.yttrailer.show_in_extensionsmenu.value:	
+	if config.plugins.yttrailer.show_in_extensionsmenu.value:
 		list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=setup, icon="YTtrailer.png"))
 	return list
 
@@ -115,7 +115,7 @@ def EventViewBase__init__(self, Event, Ref, callback=None, similarEPGCB=None):
 		"showRadio": self.showTrailerList,
 		"startTeletext": self.showConfig
 	})
-	
+
 
 def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, EPGtype = None,  bouquetname=""):
 	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, EPGtype,  bouquetname)
@@ -159,7 +159,7 @@ def showTrailerList(self):
 class YTTrailer:
 	def __init__(self, session):
 		self.session = session
-# 		self.l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+		self.l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
 
 	def showTrailer(self, eventname):
 		if eventname:
@@ -284,16 +284,16 @@ class YTTrailer:
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print "[YTTrailer] got",sorted(fmt_infomap.iterkeys())
 		if video_fmt_map and len(video_fmt_map):
-# 			if self.l3cert:
-# 				l3key = validate_cert(self.l3cert, l2key)
-# 				if l3key:
-# 					rnd = read_random()
-# 					val = etpm.challenge(rnd)
-# 					result = decrypt_block(val, l3key)
-# 					if result[80:88] == rnd:
-# 						print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
-# 						video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
-# 						print "[YTTrailer] found best available video url:",video_url
+			if self.l3cert:
+				l3key = validate_cert(self.l3cert, l2key)
+				if l3key:
+					rnd = read_random()
+					val = etpm.challenge(rnd)
+					result = decrypt_block(val, l3key)
+					if result[80:88] == rnd:
+						print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+						video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
+						print "[YTTrailer] found best available video url:",video_url
 			print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
 			video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
 			print "[YTTrailer] found best available video url:",video_url
@@ -373,7 +373,7 @@ class TrailerPlayer(InfoBarBase, InfoBarShowHide, InfoBarSeek, InfoBarAudioSelec
 
 	ENABLE_RESUME_SUPPORT = True
 	ALLOW_SUSPEND = True
-		
+
 	def __init__(self, session, ref):
 		Screen.__init__(self, session)
 		self.session = session
@@ -399,7 +399,7 @@ class TrailerPlayer(InfoBarBase, InfoBarShowHide, InfoBarSeek, InfoBarAudioSelec
 		self.returning = False
 		self.skinName = "MoviePlayer"
 		self.lastservice = session.nav.getCurrentlyPlayingServiceReference()
-		self.session.nav.playService(ref)		
+		self.session.nav.playService(ref)
 		self.onClose.append(self.__onClose)
 
 	def leavePlayer(self):
