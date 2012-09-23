@@ -8,8 +8,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 
+	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico" />
 	<link rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
-	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.0.min.css" />
+	<link rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.1.min.css" />
 
 	<script src="/web-data/lib/jquery-1.7.1.min.js" />
 	<script language="javascript" type="text/javascript">
@@ -20,14 +21,13 @@
 			});
 		});
 	</script>
-	<script src="/web-data/m/script/jquery.mobile-1.1.0.min.js" />
+	<script src="/web-data/m/script/jquery.mobile-1.1.1.min.js" />
 </head>
 <body>
 
 <div data-role="page" id="main" data-title="Message" data-theme="a">
 	<div data-role="header">
 		<h1>Message</h1>
-		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home">Home</a>
 	</div><!-- /header -->
 	<div data-role="content">
 		<p><e2:element source="Message"><e2:convert type="SimpleResult">ResultText</e2:convert><e2:convert type="web:TextToXML" /></e2:element></p>

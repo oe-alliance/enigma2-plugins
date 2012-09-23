@@ -33,6 +33,10 @@ STYLE_SIMPLE_BAR = "0"
 STYLE_PIXMAP_BAR = "1"
 STYLE_MULTI_PIXMAP = "2"
 STYLE_PERCENT_TEXT = "3"
+STYLE_SIMPLE_BAR_LIST_OFF = "4"
+STYLE_PIXMAP_BAR_LIST_OFF = "5"
+STYLE_MULTI_PIXMAP_LIST_OFF = "6"
+STYLE_PERCENT_TEXT_LIST_OFF = "7"
 
 SKINDIR = "Extensions/MerlinEPGCenter/skins/"
 
@@ -70,6 +74,7 @@ config.plugins.merlinEpgCenter.primeTime = ConfigClock(default = 69300)
 config.plugins.merlinEpgCenter.showListNumbers = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.showPicons = ConfigYesNo(False)
 config.plugins.merlinEpgCenter.showServiceName = ConfigYesNo(True)
+config.plugins.merlinEpgCenter.serviceNameWidth = ConfigSelectionNumber(min = -10, max = 20, stepwidth = 1, default = 0)
 config.plugins.merlinEpgCenter.lastUsedTab = ConfigInteger(0)
 config.plugins.merlinEpgCenter.showEventInfo = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.showVideoPicture = ConfigYesNo(True)
@@ -101,10 +106,14 @@ config.plugins.merlinEpgCenter.numNextEvents = ConfigSelectionNumber(min = 0, ma
 config.plugins.merlinEpgCenter.showDuration = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.showBeginRemainTime = ConfigYesNo(True)
 config.plugins.merlinEpgCenter.listProgressStyle = ConfigSelection(default = STYLE_PIXMAP_BAR, choices = [
-				(STYLE_SIMPLE_BAR, _("simple")),
-				(STYLE_PIXMAP_BAR, _("gradient")),
-				(STYLE_MULTI_PIXMAP, _("four parts")),
-				(STYLE_PERCENT_TEXT, _("percent (text)")),
+				(STYLE_SIMPLE_BAR, _("list and event info: simple")),
+				(STYLE_PIXMAP_BAR, _("list and event info: gradient")),
+				(STYLE_MULTI_PIXMAP, _("list and event info: four parts")),
+				(STYLE_PERCENT_TEXT, _("list and event info: percent (text)")),
+				(STYLE_SIMPLE_BAR_LIST_OFF, _("list: off, event info: simple")),
+				(STYLE_PIXMAP_BAR_LIST_OFF, _("list: off, event info: gradient")),
+				(STYLE_MULTI_PIXMAP_LIST_OFF, _("list: off, event info: four parts")),
+				(STYLE_PERCENT_TEXT_LIST_OFF, _("list: off, event info: percent (text)")),
 				])
 config.plugins.merlinEpgCenter.blinkingPicon = ConfigYesNo(False)
 config.plugins.merlinEpgCenter.showShortDescInEventInfo = ConfigYesNo(True)
@@ -137,6 +146,9 @@ config.plugins.merlinEpgCenter.showBouquetText = NoSave(ConfigYesNo(True))
 # Allows changing the color of the event title in lists
 config.plugins.merlinEpgCenter.titleColor = NoSave(ConfigInteger(default = 0x00ffffff))
 config.plugins.merlinEpgCenter.titleColorSelected = NoSave(ConfigInteger(default = 0x00ffffff))
+
+# Show the primetime value on tab 4 instead of the text "Prime Time"
+config.plugins.merlinEpgCenter.showPrimeTimeValue = NoSave(ConfigYesNo(False))
 
 
 ############################################################################################
@@ -198,6 +210,8 @@ class ConfigListSettings(ConfigBaseTab):
 		if config.plugins.merlinEpgCenter.showPicons.value:
 			cfgList.append(getConfigListEntry(_("Use picons (50x30) from:"), config.plugins.merlinEpgCenter.epgPaths))
 		cfgList.append(getConfigListEntry(_("Show service name:"), config.plugins.merlinEpgCenter.showServiceName))
+		if config.plugins.merlinEpgCenter.showServiceName.value:
+			cfgList.append(getConfigListEntry(_("Adjust service name column width:"), config.plugins.merlinEpgCenter.serviceNameWidth))
 		cfgList.append(getConfigListEntry(_("Show duration:"), config.plugins.merlinEpgCenter.showDuration))
 		cfgList.append(getConfigListEntry(_("Show begin/remain times:"), config.plugins.merlinEpgCenter.showBeginRemainTime))
 		if config.plugins.merlinEpgCenter.showBeginRemainTime.value:
@@ -213,11 +227,13 @@ class ConfigListSettings(ConfigBaseTab):
 		config.plugins.merlinEpgCenter.showPicons.addNotifier(self.expandableSettingChanged, initial_call = False)
 		config.plugins.merlinEpgCenter.epgPaths.addNotifier(self.piconPathChanged, initial_call = False)
 		config.plugins.merlinEpgCenter.showBeginRemainTime.addNotifier(self.expandableSettingChanged, initial_call = False)
+		config.plugins.merlinEpgCenter.showServiceName.addNotifier(self.expandableSettingChanged, initial_call = False)
 		
 	def removeNotifier(self):
 		config.plugins.merlinEpgCenter.showPicons.removeNotifier(self.expandableSettingChanged)
 		config.plugins.merlinEpgCenter.epgPaths.removeNotifier(self.piconPathChanged)
 		config.plugins.merlinEpgCenter.showBeginRemainTime.removeNotifier(self.expandableSettingChanged)
+		config.plugins.merlinEpgCenter.showServiceName.removeNotifier(self.expandableSettingChanged)
 		
 	def piconPathChanged(self, configElement = None):
 		config.plugins.merlinEpgCenter.epgPaths.save()

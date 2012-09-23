@@ -181,7 +181,7 @@ def Plugins(**kwargs):
 		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart, weight=100),
 		PluginDescriptor(where = [PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkconfigread, weight=100),
 		PluginDescriptor(name = "Merlin EPG Center", description = _("More than just an EPG..."), where = [PluginDescriptor.WHERE_EXTENSIONSMENU,
-		PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EVENTINFO], fnc = openMerlinEPGCenter)
+		PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EVENTINFO], fnc = openMerlinEPGCenter, icon = "plugin.png")
 		]
 	return list
 	

@@ -9,6 +9,7 @@
                     <shortdescription>Push key \"Exit long\" to show the clock while watching TV.</shortdescription>
                     <description>Push key \"Exit long\" to show the clock while watching TV. Clock will disappear after the specified timeout or by pushing key \"Exit long\" again.\n
 		    Modify the settings to match your preferences. To change the clock position, select \"Move clock\" and relocate.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/showclock.jpg" />	    
          </info>
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-showclock" />

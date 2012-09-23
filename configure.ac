@@ -106,6 +106,11 @@ antiscrollbar/Makefile
 antiscrollbar/meta/Makefile
 antiscrollbar/src/Makefile
 
+aspectratioswitch/Makefile
+aspectratioswitch/meta/Makefile
+aspectratioswitch/po/Makefile
+aspectratioswitch/src/Makefile
+
 audiorestart/Makefile
 audiorestart/img/Makefile
 audiorestart/meta/Makefile
@@ -259,6 +264,11 @@ fancontrol2/src/data/Makefile
 filebrowser/Makefile
 filebrowser/meta/Makefile
 filebrowser/src/Makefile
+
+flashexpander/Makefile
+flashexpander/meta/Makefile
+flashexpander/po/Makefile
+flashexpander/src/Makefile
 
 fritzcall/Makefile
 fritzcall/meta/Makefile
@@ -574,10 +584,6 @@ teletext/src/Makefile
 
 toolkit/Makefile
 toolkit/src/Makefile
-
-trafficinfo/Makefile
-trafficinfo/meta/Makefile
-trafficinfo/src/Makefile
 
 tvcharts/Makefile
 tvcharts/meta/Makefile

@@ -3,6 +3,7 @@ ACLOCAL_AMFLAGS = -I m4
 SUBDIRS = \
 	aihdcontroler \
 	antiscrollbar \
+	aspectratioswitch \
 	audiorestart \
 	audiosync \
 	automaticcleanup \
@@ -26,6 +27,7 @@ SUBDIRS = \
 	epgsearch \
 	eurotictv \
 	filebrowser \
+	flashexpander \
 	fritzcall \
 	fstabeditor \
 	ftpbrowser \
@@ -75,7 +77,6 @@ SUBDIRS = \
 	tageditor \
 	teletext \
 	toolkit \
-	trafficinfo \
 	tvcharts \
 	unwetterinfo \
 	valixdcontrol \

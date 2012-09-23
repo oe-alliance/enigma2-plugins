@@ -74,5 +74,49 @@ msgstr "Wetterinformationen"
 msgid "WeatherPlugin: Edit Entry"
 msgstr "Wetterinformationen: Eintrag bearbeiten"
 
-msgid "WeatherPlugin: List of Entries"
-msgstr "Wetterinformationen: Liste der Einträge"
+#: ../src/setup.py:178
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: ../src/setup.py:179
+msgid "OK"
+msgstr "OK"
+
+msgid "Location code"
+msgstr "Location-Code"
+
+msgid "System"
+msgstr "System"
+
+msgid "Search Code"
+msgstr "Code suchen"
+
+msgid "metric system"
+msgstr "Metrisches System"
+
+msgid "imperial system"
+msgstr "Englisches Maßsystem"
+
+msgid "Observation time: %s"
+msgstr "Stand: %s"
+
+msgid "Observation point: %s"
+msgstr "Messstation: %s"
+
+msgid "Humidity: %s %%"
+msgstr "Luftfeuchtigkeit: %s %%"
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr "Es muss ein Stadtnamen eingeben werden bevor man nach dem Location-Code suchen kann."
+
+msgid "Please enter a valid city name."
+msgstr "Bitte einen gültigen Stadtnamen eingeben."
+
+msgid "Please enter a valid location code for the city."
+msgstr "Bitte einen gültigen Location-Code für die Stadt eingeben."
+
+msgid "MSN location search result"
+msgstr "Suchresultat MSN Location-Code"
+
+msgid "Feels like %s"
+msgstr "Gefühlte Temp. %s"

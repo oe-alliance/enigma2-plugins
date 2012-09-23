@@ -5,7 +5,7 @@
 																	<tr>
 																		<td class="epgStart">${item.starttime}</td>
 																		<td class="epgTitle">
-																			<a href="#" class="sListExtEpg" title="Click to show/hide extended Description">
+																			<a href="#" class="sListExtEpg" title="${strings.show_hide_extended_desc}">
 																				<img
 																					class="sListBulletToggle"
 																					{if isVisible}src="/web-data/img/toggle_collapse_small.png" alt="-"
@@ -28,13 +28,13 @@
 																			data-title="${item.title}"
 																			data-description="${item.description}">${item.extdescription}<br>
 																			<div class="leftCol">
-																				<a target="_blank" href="/web/epgsearch.rss?search=${item.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed for ${item.title.e()}" border="0"></a>&nbsp;&nbsp;
-																				<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${item.titleESC}" ><img src="/web-data/img/imdb.png" title="Search IMDb" border="0"></a>
+																				<a target="_blank" href="/web/epgsearch.rss?search=${item.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed (${item.title.e()})" border="0"></a>&nbsp;&nbsp;
+																				<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${item.titleESC}" ><img src="/web-data/img/imdb.png" title="${strings.imdb_lookup}" border="0"></a>
 																			</div>
 																			<div class="right rightCol">
-																				<a href="#" class="sListAddTimer"><img src="/web-data/img/clock.png" title="Add Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-																				<a href="#" class="sListZapTimer"><img src="/web-data/img/clock_play.png" title="Add zap Timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
-																				<a href="#" class="sListEditTimer"><img src="/web-data/img/clock_edit.png" title="Edit and add timer" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																				<a href="#" class="sListAddTimer"><img src="/web-data/img/clock.png" title="${strings.add_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																				<a href="#" class="sListZapTimer"><img src="/web-data/img/clock_play.png" title="${strings.add_zap_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
+																				<a href="#" class="sListEditTimer"><img src="/web-data/img/clock_edit.png" title="${strings.edit_timer}" onClick="return false;" border="0"></a>&nbsp;&nbsp;
 																			</div>
 																	</tr>
 																</table>

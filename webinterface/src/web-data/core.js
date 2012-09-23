@@ -25,37 +25,37 @@ var Bouquets = Class.create(Controller, {
 		this.handler.load( {'sRef' : sRef} );
 		var services = $('contentServices');
 		if(services){
-			services.update('Please select a bouquet');
+			services.update(strings.select_bouquet);
 		}
 	},
 
 	loadBouquetsTv: function(){
-		setContentHd('Bouquets (TV)');
+		setContentHd(strings.bouquets + ' (' + strings.tv + ')');
 		this.load(bouquetsTv);
 	},
 
 	loadProviderTv: function(){
-		setContentHd('Providers (TV)');
+		setContentHd(strings.providers + ' (' + strings.tv + ')');
 		this.load(providerTv);
 	},
 
 	loadSatellitesTv: function(){
-		setContentHd('Satellites (TV)');
+		setContentHd(strings.satellites + ' (' + strings.tv + ')');
 		this.load(satellitesTv);
 	},
 
 	loadBouquetsRadio: function(){
-		setContentHd('Bouquets (Radio)');
+		setContentHd(strings.bouquets + ' (' + strings.radio + ')');
 		this.load(bouquetsRadio);
 	},
 
 	loadProviderRadio: function(){
-		setContentHd('Providers (Radio)');
+		setContentHd(strings.providers + ' (' + strings.radio + ')');
 		this.load(providerRadio);
 	},
 
 	loadSatellitesRadio: function(){
-		setContentHd('Satellites (Radio)');
+		setContentHd(strings.satellites + ' (' + strings.radio + ')');
 		this.load(satellitesRadio);
 	},
 
@@ -575,9 +575,9 @@ var RemoteControl = Class.create({
 				tpl = 'tplWebRemoteOld';
 			}
 
-			templateEngine.fetch(tpl, function(template){
+			templateEngine.process(tpl, null, function(html){
 				this.eventsregistered = false;
-				this.window = core.popup('WebRemote', template, 250, 600);
+				this.window = core.popup('WebRemote', html, 250, 650);
 				this.registerEvents();
 			}.bind(this));
 		}
@@ -586,18 +586,20 @@ var RemoteControl = Class.create({
 	sendKey: function(cmd, type, shotType){
 		debug("[RemoteControl].sendKey: " + cmd);
 		this.handler.sendKey({'command' : cmd, 'type': type});
+		this.screenShot(shotType);
+	},
 
+	screenShot: function(shotType){
 		var hash = '!/control'; //FIXME
 		switch(shotType){
-		case undefined:
-		case '':
-			return;
 		case 'osd':
 			hash = [hash, 'osdshot'].join("/");
 			break;
 		case 'all':
 			hash = [hash, 'screenshot'].join("/");
 			break;
+		default:
+			return;
 		}
 		//the box needs at least a little bit of time to actually draw the window
 		//wait 250ms before fetching a new screenshot
@@ -629,13 +631,24 @@ var RemoteControl = Class.create({
 					if(long){
 						type = 'long';
 					}
-					var shotType = 'none';
+					var shotType = '';
 					if(screenshot && video){
 						shotType = 'all';
 					} else if (screenshot && !video) {
 						shotType = 'osd';
 					}
 					_this.sendKey(id, type, shotType);
+				}
+			);
+			elem.on(
+				'click',
+				'.screenshot',
+				function(event, element){
+					var video = _this.window.document.getElementById('video').checked;
+					var shotType = 'osd';
+					if(video)
+						shotType = 'all';
+					_this.screenShot(shotType);
 				}
 			);
 		};
@@ -676,17 +689,17 @@ var Screenshots = Class.create(Controller, {
 	},
 
 	shootOsd: function(){
-		setContentHd('Screenshot (OSD)');
+		setContentHd(strings.screenshot_osd);
 		this.load(this.TYPE_OSD);
 	},
 
 	shootVideo: function(){
-		setContentHd('Screenshot (Video)');
+		setContentHd(strings.screenshot_video);
 		this.load(this.TYPE_VIDEO);
 	},
 
 	shootAll: function(){
-		setContentHd('Screenshot (All)');
+		setContentHd(strings.screenshot_all);
 		this.load(this.TYPE_ALL);
 	}
 });
@@ -717,7 +730,7 @@ var Services = Class.create(Controller, {
 	loadAll: function(ref){
 		var tpl = 'tplBouquetsAndServices';
 		var fnc = function(){
-			$('contentBouquets').update('All Services');
+			$('contentBouquets').update(strings.all);
 			this.load(ref);
 		}.bind(this);
 
@@ -735,12 +748,12 @@ var Services = Class.create(Controller, {
 
 	loadAllTv: function(){
 		this.loadAll(allTv);
-		setContentHd("All (Tv)");
+		setContentHd(strings.all + " (" + strings.tv + ")");
 	},
 
 	loadAllRadio: function(){
 		this.loadAll(allRadio);
-		setContentHd("All (Radio)");
+		setContentHd(strings.all + " (" + strings.radio + ")");
 	},
 
 	onFilterFocus: function(event){
@@ -778,7 +791,7 @@ var Services = Class.create(Controller, {
 	addFilterInput: function(){
 		var input = new Element('input');
 		input.id = 'serviceFilter';
-		input.value = 'Filter Services';
+		input.value = strings.filter_services;
 		$('contentHdExt').update(input);
 		input.on('focus', this.onFilterFocus.bind(this));
 		input.on('keyup', this.filter.bind(this));
@@ -852,22 +865,22 @@ var SimplePages = Class.create({
 	},
 
 	loadAbout: function(){
-		setContentHd('About');
+		setContentHd(strings.about);
 		this.show(this.PAGE_ABOUT);
 	},
 
 	loadMessage: function(){
-		setContentHd('Message');
+		setContentHd(strings.send_message);
 		this.show(this.PAGE_MESSAGE);
 	},
 
 	loadPower: function(){
-		setContentHd('PowerControl');
+		setContentHd(strings.powercontrol);
 		this.show(this.PAGE_POWER);
 	},
 
 	loadSettings: function(){
-		setContentHd('Settings');
+		setContentHd(strings.settings);
 		var debug = userprefs.data.debug;
 		var debugChecked = "";
 		if(debug){
@@ -885,12 +898,12 @@ var SimplePages = Class.create({
 	},
 
 	loadTools: function(){
-		setContentHd('Tools');
+		setContentHd(strings.tools);
 		this.show(this.PAGE_TOOLS);
 	},
 
 	loadDeviceInfo: function(){
-		setContentHd('Device Info');
+		setContentHd(strings.deviceinfo);
 		this.deviceInfoHandler.load({});
 	},
 
@@ -1074,7 +1087,7 @@ var E2WebCore = Class.create({
 			'timer': {
 				'create' : this.timers.create.bind(this.timers),
 				'edit' : false,
-				'list' : function() { this.loadContentDynamic(this.timers.loadList.bind(this.timers), 'Timer'); }.bind(this)
+				'list' : function() { this.loadContentDynamic(this.timers.loadList.bind(this.timers), strings.timers); }.bind(this)
 			},
 			'control': {
 				'message' : this.simplepages.loadMessage.bind(this.simplepages),
@@ -1086,7 +1099,7 @@ var E2WebCore = Class.create({
 			'extras': {
 				'about' : this.simplepages.loadAbout.bind(this.simplepages),
 				'deviceinfo' : this.simplepages.loadDeviceInfo.bind(this.simplepages),
-				'mediaplayer' : function() { this.loadContentDynamic(this.mediaplayer.load.bind(this.mediaplayer), 'MediaPlayer'); }.bind(this),
+				'mediaplayer' : function() { this.loadContentDynamic(this.mediaplayer.load.bind(this.mediaplayer), strings.mediaplayer); }.bind(this),
 				'settings' : this.simplepages.loadSettings.bind(this.simplepages),
 				'tools' : this.simplepages.loadTools.bind(this.simplepages)
 			}
@@ -1261,7 +1274,7 @@ var E2WebCore = Class.create({
 							function(){
 								this.movies.load(location, tag);
 							}.bind(this),
-							'Movies',
+							strings.movies,
 							true
 						);
 
@@ -1861,7 +1874,7 @@ var E2WebCore = Class.create({
 
 	switchMode: function(mode, initContent){
 		if(initContent){
-			this.setEmptyContent('contentMain', 'please select a submenu on the left...');
+			this.setEmptyContent('contentMain', strings.select_submenu);
 			setContentHd('...');
 		}
 
@@ -1870,30 +1883,30 @@ var E2WebCore = Class.create({
 			if(this.mode != 'tv' && this.mode != 'radio'){
 				this.services.registerEvents();
 			}
-			this.reloadNav('tplNavTv', 'TeleVision');
+			this.reloadNav('tplNavTv', strings.television);
 			break;
 
 		case "radio":
-			if(this.mode != 'TV' && this.mode != 'Radio'){
+			if(this.mode != 'tv' && this.mode != 'radio'){
 				this.services.registerEvents();
 			}
-			this.reloadNav('tplNavRadio', 'Radio');
+			this.reloadNav('tplNavRadio', strings.radio);
 			break;
 
 		case "movies":
-			this.reloadNavDynamic(this.movies.loadNav.bind(this.movies), 'Movies');
+			this.reloadNavDynamic(this.movies.loadNav.bind(this.movies), strings.movies);
 			break;
 
 		case "timer":
-			this.reloadNav('tplNavTimer', 'Timer');
+			this.reloadNav('tplNavTimer', strings.timers);
 			break;
 
 		case "control":
-			this.reloadNav('tplNavBoxControl', 'BoxControl');
+			this.reloadNav('tplNavBoxControl', strings.boxcontrol);
 			break;
 
 		case "extras":
-			this.reloadNav('tplNavExtras', 'Extras', this.externals.load.bind(this.externals));
+			this.reloadNav('tplNavExtras', strings.extras, this.externals.load.bind(this.externals));
 			break;
 
 		default:

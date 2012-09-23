@@ -1,12 +1,14 @@
-<e2:screen name="ServiceListWebScreen">&lt;!DOCTYPE html><html>
+<?xml version="1.0" encoding="UTF-8"?>
+<e2:screen name="TimerEditWebScreen">&lt;!DOCTYPE html><html>
 <head>
 	<title>Edit Timer</title>
 	<meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
+	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico" />
 	<link type="text/css" rel="stylesheet" href="/web-data/m/css/themes/dream.min.css" />
-	<link type="text/css" rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.0.min.css" />
-	<link type="text/css" rel="stylesheet" href="/web-data/m/css/mobiscroll-2.0.full.min.css" />
+	<link type="text/css" rel="stylesheet" href="/web-data/m/css/jquery.mobile.structure-1.1.1.min.css" />
+	<link type="text/css" rel="stylesheet" href="/web-data/m/css/mobiscroll-2.0.1.custom.min.css" />
 
 	<script src="/web-data/lib/jquery-1.7.1.min.js" />
 	<script language="javascript" type="text/javascript">
@@ -17,63 +19,25 @@
 			});
 		});
 	</script>
-	<script src="/web-data/m/script/jquery.mobile-1.1.0.min.js" />
-	<script src="/web-data/m/script/mobiscroll-2.0.full.min.js" />
-	<script>
-		$(document).ready(
-			function(){
-				$.scroller.themes.jqm.defaults = {
-					jqmBody:"a",
-					jqmHeader:"a",
-					jqmWheel:"a",
-					jqmClickPick:"d",
-					jqmSet:"d",
-					jqmCancel:"a"
-				};
-				var now = new Date();
-				$('#begin').scroller({
-					preset: 'datetime',
-					minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
-					dateFormat: 'yyyy-mm-dd ',
-					dateOrder: 'yyyymmdd',
-					timeFormat: 'HH:ii',
-					timeWheels: 'HH:ii',
-					theme: 'jqm',
-					display: 'modal',
-					mode: 'mixed'
-				});
-				$('#end').scroller({
-					preset: 'datetime',
-					minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
-					dateFormat: 'yyyy-mm-dd ',
-					dateOrder: 'yyyymmdd',
-					timeFormat: 'HH:ii',
-					timeWheels: 'HH:ii',
-					theme: 'jqm',
-					display: 'modal',
-					mode: 'mixed'
-				});
-			}
-		);
-	</script>
+	<script src="/web-data/m/script/jquery.mobile-1.1.1.min.js" />
+	<script src="/web-data/m/script/mobiscroll-2.0.1.custom.min.js" />
 </head>
 <body>
 
 <div data-role="page" id="timeredit" data-title="Edit Timer" data-theme="a">
 	<div data-role="header">
 		<h1>Edit Timer</h1>
-		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home">Home</a>
+		<a href="/m/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home" data-ajax="false">Home</a>
 	</div><!-- /header -->
 	<div data-role="content">
-		<form action="index.html" method="get" data-inset="true">
+		<form id="timerform" action="timersave.html" method="get" data-inset="true" data-ajax="true">
 			<div data-role="fieldcontain">
-				<label for="action">Action: </label>
-				<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" id="action">
-					<label for="radio-action-record">Record</label>
-					<input type="radio" name="action" id="radio-action-record" value="record" checked="checked"/>
+				<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" id="fs-disabled">
+					<label for="action-enabled">Enabled</label>
+					<input type="radio" name="disabled" id="action-enabled" value="0" checked="checked"/>
 
-					<label for="radio-action-zap">Zap</label>
-					<input type="radio" name="action" id="radio-action-zap" value="zap"/>
+					<label for="action-disabled">Disabled</label>
+					<input type="radio" name="disabled" id="action-disabled" value="1"/>
 				</fieldset>
 			</div>
 			<div data-role="fieldcontain">
@@ -93,34 +57,195 @@
 				<input placeholder="End date and time" name="end" id="end" type="text"/>
 			</div>
 			<div data-role="fieldcontain">
-				<label for="select-service">Service:</label>
-				<select id="select-service" name="select-service">
-					<option value="ARD">ARD</option>
-					<option value="ZDF">ZDF</option>
+				<label for="bRef">Bouquet:</label>
+				<select id="bRef" name="bRef">
+					<e2:element source="BouquetList"><e2:convert type="web:ListFiller" >
+					&lt;option value="<e2:item name="Reference" filter="attribute"/>">
+						<e2:item name="Name" filter="html"/>
+					&lt;/option>
+					</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
 				</select>
-				<label for="select-bouquet">Bouquet:</label>
-				<select id="select-bouquet" name="select-bouquet">
-					<option value="favorites">Favorites (TV)</option>
+				<label for="sRef">Service:</label>
+				<select id="sRef" name="sRef">
+					<e2:element source="ServiceList" id="bRef"><e2:convert type="web:ListFiller" >
+					&lt;option value="<e2:item name="Reference" filter="attribute"/>">
+						<e2:item name="Name" filter="html"/>
+					&lt;/option>
+					</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
 				</select>
 			</div>
 			<div data-role="fieldcontain">
-				<label for="select-location">Location:</label>
-				<select id="select-location" name="select-location">
-					<option value="ARD">/hdd/movie</option>
-					<option value="ZDF">/media/ST394839</option>
+				<label for="location">Location:</label>
+				<select id="location" name="location">
+					<e2:element source="Locations"><e2:convert type="web:SimpleListFiller">
+						&lt;option><e2:item name="" filter="xml" />&lt;/option>
+						</e2:convert><e2:convert type="web:TextToHTML" />	
+					</e2:element>
 				</select>
 			</div>
+			<div data-role="fieldcontain">
+				<label for="tags">Tags:</label>
+				<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" id="tags">
+					<e2:element source="Tags"><e2:convert type="web:SimpleListFiller">
+							&lt;label for="tag-<e2:item name="" filter="xml" />"><e2:item name="" filter="xml" />&lt;/label>
+							&lt;input class="tags" id="tag-<e2:item name="" filter="xml" />" type="checkbox" value="<e2:item name="" filter="xml" />">&lt;/input>
+					</e2:convert><e2:convert type="web:TextToHTML" />
+					</e2:element>
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="afterevent">Afterevent:</label>
+				<select id="afterevent" name="afterevent">
+						<option value="0">Nothing</option>
+						<option value="1">Standby</option>
+						<option value="2">Deepstandby</option>
+						<option value="3">Auto</option>
+				</select>
+			</div>
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" id="action">
+					<label for="action-record">Record</label>
+					<input type="radio" name="justplay" id="action-record" value="0" checked="checked"></input>
+
+					<label for="action-zap">Zap</label>
+					<input type="radio" name="justplay" id="action-zap" value="1" ></input>
+				</fieldset>
+			</div>
 			<fieldset>
-				<button type="submit" name="save" value="submit-save" data-inline="true">Save</button>
-				<button type="cancel" name="cancel" value="submit-cancel" data-inline="true">Cancel</button>
+				<button type="submit" name="save" value="1" data-inline="true">Save</button>
+				<button type="cancel" name="cancel" value="0" data-inline="true">Cancel</button>
 			</fieldset>
+			<input type="hidden" id="eit" name="eit" value="0"></input>
 		</form>
 	</div>
 	<div data-role="footer">
 		<h1>© 2012 Dream Multimedia GmbH</h1>
 	</div><!-- /footer -->
 </div>
+<script>
+	$(document).ready(
+		function(){
+			$.scroller.themes.jqm.defaults = {
+				jqmBody:"a",
+				jqmHeader:"a",
+				jqmWheel:"a",
+				jqmClickPick:"d",
+				jqmSet:"d",
+				jqmCancel:"a"
+			};
+			// scroller defaults
+			var now = new Date();
+			$.scroller.setDefaults({
+				preset: 'datetime',
+				minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
+				maxDate: new Date(now.getFullYear()+10, now.getMonth(), now.getDate()),
+				dateFormat: 'yy-mm-dd',
+				dateOrder: 'yymmdd',
+				timeFormat: 'HH:ii',
+				timeWheels: 'HH:ii',
+				theme: 'jqm',
+				display: 'modal',
+				mode: 'mixed'
+			});
+			$('#begin').scroller();
+			$('#end').scroller();
 
+			//set the default values pass via url-parameters
+			var bouquet = $('#bRef');
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&amp;');
+			var beginDate = null;
+			var endDate = null;
+			for(var i = 0; i &lt; hashes.length; i++){
+				hash = hashes[i].split('=');
+
+				var key = hash[0];
+				var value = hash[1];
+				var elem = $('#' + key);
+				if(elem){
+					switch(key){
+					case "begin":
+						$('#begin').scroller(
+							'setDate',
+							$.scroller.parseDate("yy-mm-ddHH:ii", value),
+							true
+						);
+						break;
+					case "end":
+						$('#end').scroller(
+							'setDate',
+							$.scroller.parseDate("yy-mm-ddHH:ii", value),
+							true
+						);
+						break;
+					case "justplay":
+						if(value == "1"){
+							$("#action-record").attr("checked",false).checkboxradio("refresh");
+							$("#action-zap").attr("checked",true).checkboxradio("refresh");
+						} else {
+							$("#action-zap").attr("checked",false).checkboxradio("refresh");
+							$("#action-record").attr("checked",true).checkboxradio("refresh");
+						}
+						break;
+					case "disabled":
+						if(value == "1"){
+							$("#action-enabled").attr("checked",false).checkboxradio("refresh");
+							$("#action-disabled").attr("checked",true).checkboxradio("refresh");
+						} else {
+							$("#action-disabled").attr("checked",false).checkboxradio("refresh");
+							$("#action-enabled").attr("checked",true).checkboxradio("refresh");
+						}
+						break;
+					case "tags":
+						var tags = decodeURIComponent(value).split(" ");
+						$.each(tags, function(index, value){
+							var elem = $("#tag-" + value);
+							if(elem.length > 0){
+								elem.attr("checked", true).checkboxradio("refresh");
+							} else {
+								console.log("Unknown Tag: " + value);
+							/*
+								$('#tags').append(
+									$(document.createElement("input")).attr({
+										type: "checkbox",
+										id: "tag-" + value,
+										name: value,
+										value: value,
+										checked: true
+									})
+								).trigger('create');
+								$('#tags').append(
+									$(document.createElement("label")).attr({
+										for: "tag-" + value,
+									}).html(value)
+								).trigger('create');;
+							*/
+							}
+						});
+
+						break;
+					default:
+						value = decodeURIComponent(value);
+						elem.val(value);
+					}
+				}
+			}
+			$('#afterevent').selectmenu('refresh', true);
+			$('#location').selectmenu('refresh', true)
+			$('#sRef').selectmenu('refresh', true);
+
+			//reload on bouquet change
+			bouquet.change(function(){
+				var serviceList = $('#sRef')
+				var bouquet = encodeURIComponent( $("#bRef").val() );
+				var current = $("#sRef").val();
+				serviceList.load("/m/timerservices.html?bRef=" + bouquet, function(){
+					serviceList.val(0).selectmenu('refresh', true);
+				});
+			});
+		}
+	);
+
+</script>
 </body>
 </html>
 </e2:screen>

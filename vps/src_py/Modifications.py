@@ -216,7 +216,7 @@ def new_TimerEntry_keyGo(self):
 			from Plugins.SystemPlugins.vps.Vps import vps_timers
 			vps_timers.checksoon()
 			
-			if self.timer.name == "":
+			if self.timer.name == "" or self.timer.eit is None:
 				self.timer.vpsplugin_time = self.getTimestamp(self.timerentry_vpsplugin_time_date.value, self.timerentry_vpsplugin_time_clock.value)
 				if self.timer.vpsplugin_overwrite:
 					timerbegin, timerend = self.getBeginEnd()

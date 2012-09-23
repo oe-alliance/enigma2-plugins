@@ -1,0 +1,4 @@
+Description: Quick switching of aspect ratio setting
+Depends: enigma2
+Replaces: enigma2-plugin-extensions-aspectratioswitch
+Conflicts: enigma2-plugin-extensions-aspectratioswitch

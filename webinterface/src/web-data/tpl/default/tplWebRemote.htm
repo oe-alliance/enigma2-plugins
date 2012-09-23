@@ -5,16 +5,17 @@
 	<head>
 		<meta content="text/html; charset=UTF-8" http-equiv="content-type">
 		<title>Enigma2 Webremote</title>
-		
+
 		<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
 	</head>
 	<body>
 		<center>
-			Get a Screenshoot&nbsp;<input type="checkbox" id="screenshot" name="screenshot" checked><br>
-			Grab Picture & OSD&nbsp;<input type="checkbox" id="video" name="video"><br>
-			Send "long" Keypress&nbsp;<input type="checkbox" id="long" name="long"><br>
+			${strings.get_screenshot}&nbsp;<input type="checkbox" id="screenshot" name="screenshot" checked><br>
+			${strings.grab_video_and_osd}&nbsp;<input type="checkbox" id="video" name="video"><br>
+			${strings.send_long_keypress}&nbsp;<input type="checkbox" id="long" name="long"><br>
 		</center>
 		<br>
+		<!-- DM8000 Remote -->
 		<map name="rc">
 			<area class="remoteKey" shape="circle" coords="92,23,10" nohref data-keyid="116" alt="Power">
 			<area class="remoteKey" shape="circle" coords="37,82,10" nohref data-keyid="2" alt="1">
@@ -57,9 +58,10 @@
 			<area class="remoteKey" shape="circle" coords="90,399,10" nohref data-keyid="388" alt="text">
 			<area class="remoteKey" shape="circle" coords="113,398,10" nohref data-keyid="167" alt="record">
 		</map>
-	
+
 		<center>
-			<img src="/web-data/img/rc.png" height="500" width="154" border="0" alt="Remote Control" usemap="#rc">
+			<img src="/web-data/img/rc.png" height="500" width="154" border="0" alt="Remote Control" usemap="#rc"><br>
+			<input type="button" class="screenshot" value="${strings.refresh_screenshot}"><br>
 		</center>
 
 	</body>

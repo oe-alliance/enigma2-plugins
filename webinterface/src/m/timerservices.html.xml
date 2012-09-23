@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<e2:screen name="ServiceListWebScreen">
+<e2:element source="ServiceList" id="bRef"><e2:convert type="web:ListFiller" >
+&lt;option value="<e2:item name="Reference" filter="attribute"/>">
+	<e2:item name="Name" filter="html"/>
+&lt;/option>
+</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+</e2:screen>

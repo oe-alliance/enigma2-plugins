@@ -46,8 +46,8 @@ ENABLE_RED_BUTTON = False
 
 def getHBBTVInstalled():
 	try:
-		from Plugins.Extensions.Browser.Hbbtv import Hbbtv
-		return True
+		from Plugins.Extensions.HbbTV.HbbTV import HbbTV
+		return config.plugins.hbbtv.enabled.value
 	except ImportError:
 		return False
 
@@ -155,13 +155,13 @@ def startPlugin(self,pname):
 			no_plugin = False
 		elif pname == _("HbbTV Applications"):
 			try:
-				from Plugins.Extensions.Browser.Hbbtv import Hbbtv
-				no_plugin = False
+				from Plugins.Extensions.HbbTV.HbbTV import HbbTV
+				no_plugin = not config.plugins.hbbtv.enabled.value
 			except ImportError:
 				no_plugin = True
 			finally:
 				if not no_plugin:
-					hbbtv_instance = Hbbtv.instance
+					hbbtv_instance = HbbTV.instance
 					if hbbtv_instance:
 						hbbtv_instance._showApplicationList()
 		else:

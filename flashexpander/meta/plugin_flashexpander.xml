@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>GP</author>
+                    <name>Flashexpander</name>
+                    <packagename>enigma2-plugin-extensions-flashexpander</packagename>
+                    <shortdescription>Expand your Flash using an USB stick or an NFS share.</shortdescription>
+                    <description>Expand your Flash using an USB stick or an NFS share.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_flashexpander_en.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-flashexpander" />
+	  </files>
+</default>

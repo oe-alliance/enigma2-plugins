@@ -8,14 +8,16 @@
                     <name>Automatic System Cleanup</name>
                     <packagename>enigma2-plugin-systemplugins-automaticcleanup</packagename>
                     <shortdescription>Cleanup timerlist, orphaned movie files and setting backups automatically.</shortdescription>
-                    <description>Cleanup timerlist, orphaned movie files and setting backups automatically according to specfied rules.</description>	    
+                    <description>Cleanup timerlist, orphaned movie files and setting backups automatically according to specfied rules.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/automaticcleanup.jpg" />	    
           </info>
           <info language="de">
                     <author>JuSt611</author>
                     <name>Automatische Systembereinigung</name>
                     <packagename>enigma2-plugin-systemplugins-automaticcleanup</packagename>
                     <shortdescription>Timerliste, verwaiste Film-Dateien und Einstellungs-Sicherungen automatisch bereinigen.</shortdescription>
-                    <description>Timerliste, verwaiste Film-Dateien und Einstellungs-Sicherungen nach einstellbaren Regeln automatisch bereinigen.</description>	    
+                    <description>Timerliste, verwaiste Film-Dateien und Einstellungs-Sicherungen nach einstellbaren Regeln automatisch bereinigen.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/automaticcleanup.jpg" />	    
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-systemplugins-automaticcleanup" />

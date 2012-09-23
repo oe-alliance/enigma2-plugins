@@ -43,7 +43,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
 from Tools.LoadPixmap import LoadPixmap
 
 # OWN IMPORTS
-from ConfigTabs import KEEP_OUTDATED_TIME, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP, STYLE_PERCENT_TEXT
+from ConfigTabs import KEEP_OUTDATED_TIME, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP, STYLE_PERCENT_TEXT, STYLE_SIMPLE_BAR_LIST_OFF, STYLE_PIXMAP_BAR_LIST_OFF, STYLE_MULTI_PIXMAP_LIST_OFF, STYLE_PERCENT_TEXT_LIST_OFF
 from HelperFunctions import getFuzzyDay, LIST_TYPE_EPG, LIST_TYPE_UPCOMING, TimerListObject
 from MerlinEPGCenter import STYLE_SINGLE_LINE, STYLE_SHORT_DESCRIPTION
 
@@ -344,12 +344,13 @@ class EpgCenterList(GUIComponent):
 			offsetLeft = offsetLeft + width + columnSpace
 			
 		if config.plugins.merlinEpgCenter.showServiceName.value:
+			extraWidth = int(config.plugins.merlinEpgCenter.serviceNameWidth.value)
 			if self.videoMode == MODE_SD:
-				width = self.maxWidth * 12 / 100
+				width = self.maxWidth * (12 + extraWidth) / 100
 			elif self.videoMode == MODE_XD:
-				width = self.maxWidth * 14 / 100
+				width = self.maxWidth * (14 + extraWidth) / 100
 			elif self.videoMode == MODE_HD:
-				width = self.maxWidth * 16 / 100
+				width = self.maxWidth * (16 + extraWidth) / 100
 				
 			if not (((self.mode == SINGLE_EPG and not self.similarShown) or self.mode == UPCOMING) and self.instance.getCurrentIndex() != 0):
 				if sRef in EpgCenterList.allServicesNameDict:
@@ -361,13 +362,20 @@ class EpgCenterList(GUIComponent):
 			offsetLeft = offsetLeft + width + columnSpace
 			
 		if self.mode == MULTI_EPG_NOW and not self.similarShown:
+			extraWidth = int(config.plugins.merlinEpgCenter.adjustFontSize.value)
+			if extraWidth < 0:
+				extraWidth = 0
 			if self.videoMode == MODE_SD:
-				width = self.maxWidth * 18 / 100
+				width = self.maxWidth * (18 + extraWidth) / 100
 			else:
-				width = self.maxWidth * 14 / 100
+				width = self.maxWidth * (14 + extraWidth) / 100
 			progressHeight = 6
 			
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, width, self.halfItemHeight - border + (self.singleLineBorder * 2), 1, RT_HALIGN_CENTER|RT_VALIGN_TOP, timeString))
+			if config.plugins.merlinEpgCenter.listProgressStyle.value < STYLE_SIMPLE_BAR_LIST_OFF: # show progress in lists
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, width, self.halfItemHeight - border + (self.singleLineBorder * 2), 1, RT_HALIGN_CENTER|RT_VALIGN_TOP, timeString))
+			else: # don't show progress in lists
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_CENTER|RT_VALIGN_CENTER, timeString))
+				
 			if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP and progressPixmap is not None:
 				if width > self.progressPixmapWidth:
 					progressOffset = int((width - self.progressPixmapWidth) / 2)
@@ -388,12 +396,16 @@ class EpgCenterList(GUIComponent):
 				else:
 					font = 3
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, self.halfItemHeight, width, self.halfItemHeight - border, font, RT_HALIGN_CENTER|RT_VALIGN_TOP, str(percent) + "%", secondLineColor))
+				
 			offsetLeft = offsetLeft + width + columnSpace
 		else:
+			extraWidth = int(config.plugins.merlinEpgCenter.adjustFontSize.value)
+			if extraWidth < 0:
+				extraWidth = 0
 			if self.videoMode == MODE_SD:
-				width = self.maxWidth * 18 / 100
+				width = self.maxWidth * (18 + extraWidth) / 100
 			else:
-				width = self.maxWidth * 14 / 100
+				width = self.maxWidth * (14 + extraWidth) / 100
 			if self.mode == SINGLE_EPG or self.mode == EPGSEARCH_RESULT or self.similarShown:
 				fd = getFuzzyDay(begin)
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, border, width, self.halfItemHeight - border, 1, RT_HALIGN_CENTER|RT_VALIGN_TOP, timeString, textColor))
@@ -984,12 +996,13 @@ class EpgCenterTimerlist(TimerList):
 			offsetLeft = offsetLeft + width + columnSpace
 			
 		if config.plugins.merlinEpgCenter.showServiceName.value:
+			extraWidth = int(config.plugins.merlinEpgCenter.serviceNameWidth.value)
 			if self.videoMode == MODE_SD:
-				width = self.maxWidth * 12 / 100
+				width = self.maxWidth * (12 + extraWidth) / 100
 			elif self.videoMode == MODE_XD:
-				width = self.maxWidth * 14 / 100
+				width = self.maxWidth * (14 + extraWidth) / 100
 			elif self.videoMode == MODE_HD:
-				width = self.maxWidth * 16 / 100
+				width = self.maxWidth * (16 + extraWidth) / 100
 				
 			if isinstance(timer, RecordTimerEntry):
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.service_ref.getServiceName()))
@@ -997,10 +1010,13 @@ class EpgCenterTimerlist(TimerList):
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "AutoTimer"))
 			offsetLeft = offsetLeft + width + columnSpace
 			
+		extraWidth = int(config.plugins.merlinEpgCenter.adjustFontSize.value)
+		if extraWidth < 0:
+			extraWidth = 0
 		if self.videoMode == MODE_SD:
-			width = self.maxWidth * 18 / 100
+			width = self.maxWidth * (18 + extraWidth) / 100
 		else:
-			width = self.maxWidth * 14 / 100
+			width = self.maxWidth * (14 + extraWidth) / 100
 			
 		if isinstance(timer, RecordTimerEntry):
 			fd = getFuzzyDay(timer.begin)

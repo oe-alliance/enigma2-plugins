@@ -77,7 +77,7 @@ from Tools.LoadPixmap import LoadPixmap
 
 # OWN IMPORTS
 from Components.VolumeControl import VolumeControl
-from ConfigTabs import KEEP_OUTDATED_TIME, ConfigBaseTab, ConfigGeneral, ConfigListSettings, ConfigEventInfo, ConfigKeys, SKINDIR, SKINLIST, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP, STYLE_PERCENT_TEXT
+from ConfigTabs import KEEP_OUTDATED_TIME, ConfigBaseTab, ConfigGeneral, ConfigListSettings, ConfigEventInfo, ConfigKeys, SKINDIR, SKINLIST, STYLE_SIMPLE_BAR, STYLE_PIXMAP_BAR, STYLE_MULTI_PIXMAP, STYLE_PERCENT_TEXT, STYLE_SIMPLE_BAR_LIST_OFF, STYLE_PIXMAP_BAR_LIST_OFF, STYLE_MULTI_PIXMAP_LIST_OFF, STYLE_PERCENT_TEXT_LIST_OFF
 from EpgActions import MerlinEPGActions
 from EpgCenterList import EpgCenterList, EpgCenterTimerlist, MODE_HD, MODE_XD, MODE_SD, MULTI_EPG_NOW, MULTI_EPG_NEXT, SINGLE_EPG, MULTI_EPG_PRIMETIME, TIMERLIST, EPGSEARCH_HISTORY, EPGSEARCH_RESULT, EPGSEARCH_MANUAL, UPCOMING
 from EpgTabs import EpgBaseTab, EpgNowTab, EpgNextTab, EpgSingleTab, EpgPrimeTimeTab, EpgTimerListTab, EpgSearchHistoryTab, EpgSearchManualTab, EpgSearchResultTab
@@ -416,7 +416,13 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 	def initTabLabels(self, tabList):
 		i = 0
 		while i <= NUM_EPG_TABS:
-			self["tab_text_%d" % i] = Label(tabList[i])
+			if (i == MULTI_EPG_PRIMETIME) and config.plugins.merlinEpgCenter.showPrimeTimeValue.value:
+				hours = str(config.plugins.merlinEpgCenter.primeTime.value[0])
+				minutes = str(config.plugins.merlinEpgCenter.primeTime.value[1])
+				timeString = hours + ":" + minutes
+				self["tab_text_%d" % MULTI_EPG_PRIMETIME] = Label(timeString)
+			else:
+				self["tab_text_%d" % i] = Label(tabList[i])
 			i += 1
 			
 	def setTabText(self, tabList):
@@ -427,7 +433,13 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			
 		i = 0
 		while i <= numTabs:
-			self["tab_text_%d" % i].setText(tabList[i])
+			if (not self.configTabsShown) and (i == MULTI_EPG_PRIMETIME) and config.plugins.merlinEpgCenter.showPrimeTimeValue.value:
+				hours = str(config.plugins.merlinEpgCenter.primeTime.value[0])
+				minutes = str(config.plugins.merlinEpgCenter.primeTime.value[1])
+				timeString = hours + ":" + minutes
+				self["tab_text_%d" % MULTI_EPG_PRIMETIME].setText(timeString)
+			else:
+				self["tab_text_%d" % i].setText(tabList[i])
 			i += 1
 			
 	def setTabs(self):
@@ -489,12 +501,12 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		if not config.plugins.merlinEpgCenter.showEventInfo.value:
 			return
 			
-		if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_SIMPLE_BAR:
+		if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_SIMPLE_BAR or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_SIMPLE_BAR_LIST_OFF:
 			self["eventProgressImage"].hide()
 			self["eventProgress"].instance.setPixmap(None)
 			self["eventProgressText"].hide()
 			self["eventProgress"].show()
-		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PIXMAP_BAR:
+		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PIXMAP_BAR or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PIXMAP_BAR_LIST_OFF:
 			self["eventProgressImage"].hide()
 			self["eventProgressText"].hide()
 			if self.progressPixmap == None:
@@ -502,11 +514,11 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				self.progressPixmap = LoadPixmap(cached = False, path = pixmapPath)
 			self["eventProgress"].instance.setPixmap(self.progressPixmap)
 			self["eventProgress"].show()
-		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP:
+		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP_LIST_OFF:
 			self["eventProgress"].hide()
 			self["eventProgressText"].hide()
 			self["eventProgressImage"].show()
-		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT:
+		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT_LIST_OFF:
 			self["eventProgressImage"].hide()
 			self["eventProgress"].instance.setPixmap(None)
 			self["eventProgress"].hide()
@@ -1167,9 +1179,9 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				except:
 					textColor = parseColor("#777777")
 					
-				if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP:
+				if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP_LIST_OFF:
 					self["eventProgressImage"].setPixmapNum(4)
-				elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT:
+				elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT_LIST_OFF:
 					self["eventProgressText"].setText("100%")
 				else:
 					self["eventProgress"].setValue(100)
@@ -1179,7 +1191,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				except:
 					textColor = parseColor("#ffffff")
 					
-				if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP:
+				if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP_LIST_OFF:
 					if percent > 0:
 						part = int(round(percent / 25)) + 1
 						if part < 0:
@@ -1189,7 +1201,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 					else:
 						part = 0
 					self["eventProgressImage"].setPixmapNum(part)
-				elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT:
+				elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT_LIST_OFF:
 					self["eventProgressText"].setText(str(percent) + "%")
 				else:
 					self["eventProgress"].setValue(percent)
@@ -2078,10 +2090,10 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self.savedCurrentMode = self.currentMode
 			self.savedOldMode = self.oldMode
 			self.currentMode = 0 # first config tab
-			self.setTabText(TAB_TEXT_CONFIGLIST)
 			self["tab_text_%d" % self.currentMode].instance.setForegroundColor(parseColor(config.plugins.merlinEpgCenter.tabTextColorSelected.value)) # active
 			self["tabbar"].setPixmapNum(self.currentMode)
 			self.configTabsShown = True
+			self.setTabText(TAB_TEXT_CONFIGLIST)
 			self.configEditMode = True
 			self.keyEditMode()
 			self["settings"].show()

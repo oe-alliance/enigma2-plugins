@@ -17,7 +17,7 @@
 									data-tags="${t.tags}"
 									data-afterevent="${t.afterevent}"
 									data-disabled="${t.disabled}">
-									<a href="#" class="tListEdit" title="Edit timer ${t.name}">
+									<a href="#" class="tListEdit" title="${strings.edit_timer} ${t.name}">
 										<table class="tListItemTable">
 											<tr class="tListHead">
 												<td colspan="4" rowspan="1" class="tListSName" title="${t.description.escapeHTML()}, ${t.descriptionextended.escapeHTML()}">
@@ -29,7 +29,7 @@
 												<td class="tListBegin">${t.beginDate}</td>
 												<td class="tListType">${t.justplayReadable}</td>
 												<td rowspan="2" class="tListOption">
-												<!-- 
+												<!--
 													<button class="tListDelete" title="Delete timer ${t.name}">
 														<img src="/web-data/img/delete.png" border="0" />
 													</button>
@@ -47,33 +47,33 @@
 										</table>
 									</a>
 									<span class="timerState${t.state} timerState">&nbsp;</span>
-									<a href="#" class="tListDelete" title="Delete timer ${t.name}">
-										<button class="tListButton"><img src="/web-data/img/delete.png" border="0" />Delete</button>
+									<a href="#" class="tListDelete" title="${strings.delete_timer} ${t.name}">
+										<button class="tListButton"><img src="/web-data/img/delete.png" border="0" />${strings.delete}</button>
 									</a>
-									<a href="#" class="tListToggleDisabled" title="${t.enDis} timer ${t.name}">
+									<a href="#" class="tListToggleDisabled" title="${t.enDis} ${strings.timer} ${t.name}">
 										<button class="tListButton"><img src="/web-data/img/${t.onOff}.png" border="0">${t.enDis}</button>
 									</a>
 								</td>
 							</tr>
 							{forelse}
 							<tr style="width:100%;">
-								<td>No Timers Available!</td>
+								<td>${strings.no_timer}</td>
 							</tr>
 							{/for}
 							<tr>
 								<td>
 									<div class="legendRow">
-										<div class="legendCol">Legend:</div>
-										<div class="legendCol timerState0">Waiting</div>
-										<div class="legendCol timerState1">Error</div>
-										<div class="legendCol timerState2">Running</div>
-										<div class="legendCol timerState3">Finished</div>
+										<div class="legendCol">${strings.legend}:</div>
+										<div class="legendCol timerState0">${strings.waiting}</div>
+										<div class="legendCol timerState1">${strings.error}</div>
+										<div class="legendCol timerState2">${strings.running}</div>
+										<div class="legendCol timerState3">${strings.finished}</div>
 									</div>
 								</td>
 							</tr>
 							<tr style="width:100%;">
 								<td>
-									<button class="tListCleanup" title="Cleans up the list of timers by removing e.g. finished timers">Timer list cleanup</button>
+									<button class="tListCleanup" title="${strings.note_timerlist_cleanup}">${strings.cleanup}</button>
 								</td>
 							</tr>
 						</table>

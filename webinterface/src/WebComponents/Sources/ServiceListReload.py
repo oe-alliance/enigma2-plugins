@@ -18,13 +18,13 @@ class ServiceListReload(Source):
 			if self.cmd is self.BOTH:
 				self.reloadLameDB()
 				self.reloadUserBouquets()
-				self.res = ( True, 'reloaded both' )
+				self.res = ( True, _('reloaded both') )
 			elif self.cmd is self.LAMEDB:
 				self.res = self.reloadLameDB()
-				self.res = ( True, 'reloaded lamedb' )
+				self.res = ( True, _('reloaded lamedb') )
 			elif self.cmd is self.USERBOUQUETS:
 				self.res = self.reloadUserBouquets()
-				self.res = ( True, 'reloaded bouquets' )
+				self.res = ( True, _('reloaded bouquets') )
 		except Exception, e:
 			pass
 
@@ -41,6 +41,6 @@ class ServiceListReload(Source):
 		if self.res:
 			return self.res
 		else:
-			return ( False, "missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets only]" % (self.BOTH, self.LAMEDB, self.USERBOUQUETS) )
+			return ( False, _("missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets only]") % (self.BOTH, self.LAMEDB, self.USERBOUQUETS) )
 
 	result = property(getResult)

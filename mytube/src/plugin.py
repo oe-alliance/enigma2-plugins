@@ -16,7 +16,7 @@ from MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, 
 from MyTubeService import validate_cert, get_rnd, myTubeService
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
-from Screens.InfoBarGenerics import InfoBarNotifications
+from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarSeek
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
@@ -30,8 +30,10 @@ from enigma import eTPM, eTimer, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, gFont
 from os import path as os_path, remove as os_remove
 from twisted.web import client
 
-# etpm = eTPM()
-# rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
+
+
+etpm = eTPM()
+rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
 
 config.plugins.mytube = ConfigSubsection()
 config.plugins.mytube.search = ConfigSubsection()
@@ -117,7 +119,7 @@ config.plugins.mytube.general.loadFeedOnOpen = ConfigYesNo(default = True)
 config.plugins.mytube.general.startFeed = ConfigSelection(
 				[
 				 ("hd", _("HD videos")),
-#				 ("most_viewed", _("Most viewed")),
+				 ("most_viewed", _("Most viewed")),
 				 ("top_rated", _("Top rated")),
 				 ("recently_featured", _("Recently featured")),
 				 ("most_discussed", _("Most discussed")),
@@ -232,12 +234,11 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			<widget name="HelpWindow" position="160,255" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 		</screen>"""
 
-# 	def __init__(self, session, l2key):
-	def __init__(self, session):
+	def __init__(self, session, l2key):
 		Screen.__init__(self, session)
 		self.session = session
-# 		self.l2key = l2key
-# 		self.l3key = None
+		self.l2key = l2key
+		self.l3key = None
 		self.skin_path = plugin_path
 		self.FeedURL = None
 		self.ytfeed = None
@@ -384,29 +385,19 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if current[1].help_window.instance is not None:
 			current[1].help_window.instance.hide()
 
-# 		l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
-# 		if l3cert is None or l3cert is "":
-# 			self["videoactions"].setEnabled(False)
-# 			self["searchactions"].setEnabled(False)
-# 			self["config_actions"].setEnabled(False)
-# 			self["historyactions"].setEnabled(False)
-# 			self["statusactions"].setEnabled(True)
-# 			self.hideSuggestions()
-# 			self.statuslist = []
-# 			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
-# 			self["feedlist"].style = "state"
-# 			self['feedlist'].setList(self.statuslist)
-# 			return
-		self["videoactions"].setEnabled(False)
-		self["searchactions"].setEnabled(False)
-		self["config_actions"].setEnabled(False)
-		self["historyactions"].setEnabled(False)
-		self["statusactions"].setEnabled(True)
-		self.hideSuggestions()
-		self.statuslist = []
-		self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
-		self["feedlist"].style = "state"
-		self['feedlist'].setList(self.statuslist)
+		l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+		if l3cert is None or l3cert is "":
+			self["videoactions"].setEnabled(False)
+			self["searchactions"].setEnabled(False)
+			self["config_actions"].setEnabled(False)
+			self["historyactions"].setEnabled(False)
+			self["statusactions"].setEnabled(True)
+			self.hideSuggestions()
+			self.statuslist = []
+			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+			self["feedlist"].style = "state"
+			self['feedlist'].setList(self.statuslist)
+			return
 
 		self.l3key = validate_cert(l3cert, self.l2key)
 		if self.l3key is None:
@@ -430,12 +421,6 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
 			self["feedlist"].style = "state"
 			self['feedlist'].setList(self.statuslist)
-
-		self.statuslist = []
-		self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
-		self["feedlist"].style = "state"
-		self['feedlist'].setList(self.statuslist)
-		self.Timer.start(200)
 
 	def TimerFire(self):
 		self.Timer.stop()
@@ -1544,7 +1529,7 @@ class MyTubeVideoHelpScreen(Screen):
 		self["detailtext"].pageDown()
 
 
-class MyTubePlayer(Screen, InfoBarNotifications):
+class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	STATE_IDLE = 0
 	STATE_PLAYING = 1
 	STATE_PAUSED = 2
@@ -1576,6 +1561,7 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 	def __init__(self, session, service, lastservice, infoCallback = None, nextCallback = None, prevCallback = None):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
+		InfoBarSeek.__init__(self)
 		self.session = session
 		self.service = service
 		self.infoCallback = infoCallback
@@ -1625,7 +1611,6 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 	def __evEOF(self):
 		print "evEOF=%d" % iPlayableService.evEOF
 		print "Event EOF"
-		self.pauseService()
 		self.handleLeave(config.plugins.mytube.general.on_movie_stop.value)
 
 	def __setHideTimer(self):
@@ -1737,15 +1722,17 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 	def __seekableStatusChanged(self):
 		print "seekable status changed!"
 		if not self.isSeekable():
+			self["SeekActions"].setEnabled(False)
 			self.setSeekState(self.STATE_PLAYING)
 		else:
+			self["SeekActions"].setEnabled(True)
 			print "seekable"
 
 	def __serviceStarted(self):
 		self.state = self.STATE_PLAYING
 		self.__seekableStatusChanged()
 
-	def setSeekState(self, wantstate):
+	def setSeekState(self, wantstate, onlyGUI = False):
 		print "setSeekState"
 		if wantstate == self.STATE_PAUSED:
 			print "trying to switch to Pause- state:",self.STATE_PAUSED
@@ -1820,20 +1807,19 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 
 
 def MyTubeMain(session, **kwargs):
-# 	l2 = False
-# 	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
-# 	if l2cert is None:
-# 		print "l2cert not found"
-# 		return
-#
-# 	l2key = validate_cert(l2cert, rootkey)
-# 	if l2key is None:
-# 		print "l2cert invalid"
-# 		return
-# 	l2 = True
-# 	if l2:
-# 		session.open(MyTubePlayerMainScreen,l2key)
-	session.open(MyTubePlayerMainScreen)
+	l2 = False
+	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+	if l2cert is None:
+		print "l2cert not found"
+		return
+
+	l2key = validate_cert(l2cert, rootkey)
+	if l2key is None:
+		print "l2cert invalid"
+		return
+	l2 = True
+	if l2:
+		session.open(MyTubePlayerMainScreen,l2key)
 
 
 def Plugins(path, **kwargs):

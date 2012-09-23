@@ -32,7 +32,7 @@ from enigma import DISABLED, BILINEAR, ANISOTROPIC, SHARP, SHARPER, BLURRY, ANTI
 
 from ConfigParser import ConfigParser, DuplicateSectionError 
 
-PLUGIN_VERSION="20120730"
+PLUGIN_VERSION="20120807"
 
 CMD_CTL_CACHE=1
 CMD_SHOW_PAGE=2
@@ -146,6 +146,7 @@ class TeleText(Screen):
   cur_page = "100-00/00"
   daemonVersion = "0.0"
   favorites = None
+  read_data = False
 
   onChangedEntry = [ ]
 
@@ -608,6 +609,7 @@ class TeleText(Screen):
     if self.txtpid != self.txtpid_origin:
       self.txtpid = self.txtpid_origin
       self.switchChannel(True)
+      self.readFavorites()
     self.close()
 
   def menuPressed(self):
@@ -778,6 +780,7 @@ class TeleText(Screen):
       self.txtpid = new_pid
       log("new txtpid: %s" % new_pid)
       self.switchChannel(True)
+      self.readFavorites()
 
   def nextPressed(self):
     if self.nav_mode == NAV_MODE_TEXT:
@@ -797,6 +800,7 @@ class TeleText(Screen):
       self.txtpid = new_pid
       log("new txtpid: %s" % new_pid)
       self.switchChannel(True)
+      self.readFavorites()
 
   def prevLongPressed(self):
     if self.nav_mode == NAV_MODE_TEXT:
@@ -817,6 +821,7 @@ class TeleText(Screen):
       self.txtpid = result
       log("new txtpid: %s" % result)
       self.switchChannel(True)
+      self.readFavorites()
     self.updateLayout()
 
   def helpPressed(self):
@@ -871,6 +876,7 @@ class TeleText(Screen):
         if self.txtpid != self.txtpid_origin:
           self.txtpid = self.txtpid_origin
           self.switchChannel(True)
+          self.readFavorites()
         self.close()
     else:
       if self.nav_mode == NAV_MODE_SIZE_TEXT:
@@ -911,6 +917,19 @@ class TeleText(Screen):
     self.demux = demux and demux.get("demux", -1)
     log("TXT PID %s DEMUX %s" % (self.txtpid, self.demux))
 
+    self.read_data = True
+    self.switchChannel(do_send)
+
+  def switchChannel(self, do_send = True):
+    if self.demux > -1 and self.txtpid > -1 and do_send:
+      x = array.array('B', (CMD_CTL_CACHE, (self.txtpid & 0xFF00) >> 8, (self.txtpid & 0xFF), self.demux))
+      self.socketSend(x)
+
+  def readTxtPids(self):
+    log("reading data(%s)" % self.read_data)
+    if self.read_data == False:
+      return
+      
     # read all txtpids and channels from transponder
     cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
     self.pid_index = 0
@@ -936,14 +955,9 @@ class TeleText(Screen):
         self.pid_index = i
       i = i + 1
     self.pid_count = available
-
-    self.switchChannel(do_send)
-
-  def switchChannel(self, do_send = True):
-    if self.demux > -1 and self.txtpid > -1 and do_send:
-      x = array.array('B', (CMD_CTL_CACHE, (self.txtpid & 0xFF00) >> 8, (self.txtpid & 0xFF), self.demux))
-      self.socketSend(x)
       
+    self.read_data = False
+
     # read favorites
     self.readFavorites()
 
@@ -1831,6 +1845,7 @@ def autostart(reason, **kwargs):
 def mainText(session, **kwargs):
   global ttx_screen
   log("mainText")
+  ttx_screen.readTxtPids()
   if ttx_screen.txtpid != -1:
     session.execDialog(ttx_screen)
   else:
@@ -1846,6 +1861,7 @@ def selectText(result):
     ttx_screen.txtpid = result
     ttx_screen.txtpid_origin = result
     ttx_screen.switchChannel(True)
+    ttx_screen.readFavorites()
     my_session.execDialog(ttx_screen)
 
 def mainMenu(session, **kwargs):

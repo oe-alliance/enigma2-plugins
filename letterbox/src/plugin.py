@@ -1,25 +1,19 @@
 from Plugins.Plugin import PluginDescriptor
 from Components.ServiceEventTracker import ServiceEventTracker
+from Components.config import config
+from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from enigma import iPlayableService
-
-# config file to read/write state
-POLICY = "/proc/stb/video/policy"
+from enigma import iPlayableService, eAVSwitch
 
 # list of mode choices to cycle through
-MODE_CHOICES = ["letterbox", "panscan"]
+MODE_CHOICES = ["pillarbox", "panscan"]
 
 def get_mode():
-	f = open(POLICY, "r")
-	mode = f.read().strip("\n")
-	f.close()
-	return mode
+	return config.av.policy_43.value
 
 def set_mode(mode):
-	f = open(POLICY, "w")
-	f.write(mode + "\n")
-	f.close()
-
+	config.av.policy_43.value = mode
+	config.av.policy_43.save()
 
 class LetterBox(Screen):
 	def __init__(self, session):
@@ -43,6 +37,8 @@ class LetterBox(Screen):
 		modeidx = MODE_CHOICES.index(mode)
 		modeidx = (modeidx + 1) % len(MODE_CHOICES)
 		set_mode(MODE_CHOICES[modeidx])
+		aspectratio = {"panscan": _("Pan&Scan"), "pillarbox": _("Pillarbox")}
+		self.session.open(MessageBox, _("Display 4:3 content as") + "\n" + aspectratio[config.av.policy_43.value], MessageBox.TYPE_INFO, 3)
 		self.used = True
 
 letterbox = None
@@ -56,11 +52,9 @@ def zoom_toggle(session, **kwargs):
 	letterbox.toggle()
 
 def Plugins(**kwargs):
-	plname = "LetterBox Zoom"
-	return [PluginDescriptor(name=plname,
+	return [PluginDescriptor(name="LetterBox Zoom",
 			description="Zoom into letterboxed movies",
 			where=PluginDescriptor.WHERE_EXTENSIONSMENU,
 			fnc=zoom_toggle),
 		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART,
 			fnc=zoom_init)]
-
