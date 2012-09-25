@@ -40,6 +40,16 @@ String.prototype.e = function(){
 	return this.replace("\"","&quot;");
 };
 
+String.prototype.format = function(){
+	
+	var data = this;
+	console.log(arguments);
+	for(var i = 0; i < arguments.length; i++){
+		data = data.replace('%s', arguments[i]);
+	}
+	return data;
+};
+
 //General Helpers
 function toOptionList(lst, selected, split) {
 	var retList = Array();
