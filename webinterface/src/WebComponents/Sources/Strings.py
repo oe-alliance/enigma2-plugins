@@ -1,4 +1,5 @@
 from Components.Sources.Source import Source
+from Plugins.Extensions.WebInterface import _
 
 class Strings(Source):
 	def __init__(self):
@@ -165,6 +166,7 @@ class Strings(Source):
 			["add_item_to_playlist", _("Add %s to playlist")],
 			["remove_item_from_playlist", _("Remove %s from playlist")],
 			["download_item", _("Downlad %s")],
+			["delete_item", _("Delete %s")],
 			["change_to_item", _("Change to %s")],
 			["next", _("Next")],
 			["stop", _("Stop")],
@@ -173,6 +175,7 @@ class Strings(Source):
 			["save_playlist", _("Save Playlist")],
 			["close_mediaplayer", _("Close MediaPlayer")],
 			["no_items", _("No items to show...")],
+			["remaining_minutes", _("%s of %s min")],
 		]
 
 	list = property(getList)

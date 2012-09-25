@@ -7,16 +7,16 @@
 							<div class="sListSProgress" title="${current.progress}%"><div class="sListSProgressBar" style="width: ${current.progress}%"></div></div>
 						</td>
 						<td id="currentName">
-							<a href="#" class="currentExtShowHide" title="Click to show/hide extended Description"><img class="currentBulletToggle" src="/web-data/img/toggle_expand.png" alt="+">${current.servicename} - ${current.title}</a>
+							<a href="#" class="currentExtShowHide" title="${strings.show_hide_extended_desc}"><img class="currentBulletToggle" src="/web-data/img/toggle_expand.png" alt="+">${current.servicename} - ${current.title}</a>
 						</td>
 						<td id="currentDuration">
 							<a href="#" class="currentEpg" data-servicereference="${current.servicereference}">
-								<img src="/web-data/img/epg.png" border="0" title="${strings.show_epg_for} ${current.servicename}"/>
+								<img src="/web-data/img/epg.png" border="0" title="${strings.show_epg_for.format(current.servicename)}"/>
 							</a>
 							<a target="_blank" onclick="return parentPin( '${current.servicereference}' );" href="/web/stream.m3u?ref=${current.servicereference}">
-								<img src="/web-data/img/screen.png" title="${strings.stream_channel} ${current.servicename}" border="0">
+								<img src="/web-data/img/screen.png" title="${strings.stream_channel.format(current.servicename)}" border="0">
 							</a>
-							+${current.remaining} ${strings.of} ${current.duration} min
+							+${strings.remaining_minutes.format(current.remaining, current.duration)}
 						</td>
 					</tr>
 					<tr id="trExtCurrent" style="display: none">
