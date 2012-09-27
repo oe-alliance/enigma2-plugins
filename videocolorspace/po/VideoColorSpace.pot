@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VideoColorSpace(POT)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-26 18:01+0100\n"
-"PO-Revision-Date: 2012-09-27 09:14+0100\n"
-"Last-Translator: cmikula <christian.mikula@telering.at>\n"
+"POT-Creation-Date: 2012-09-27 14:13+0100\n"
+"PO-Revision-Date: 2012-09-27 14:13+0100\n"
+"Last-Translator: cmikula <christian.mikula@live.at>\n"
 "Language-Team: - <cmikula>\n"
 "Language: de_AT\n"
 "MIME-Version: 1.0\n"
@@ -14,28 +14,28 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.5.3\n"
-"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-0: ../src\n"
 
-#: ../plugin.py:37
+#: ../src/plugin.py:37
 msgid "A/V-Color space settings"
 msgstr ""
 
-#: ../plugin.py:42 ../plugin.py:43 ../VideoColorSpace.py:86
+#: ../src/plugin.py:42 ../src/plugin.py:43 ../src/VideoColorSpace.py:86
 msgid "Color space setup"
 msgstr ""
 
-#: ../plugin.py:42 ../plugin.py:43
+#: ../src/plugin.py:42 ../src/plugin.py:43
 msgid "Setup color space for video"
 msgstr ""
 
-#: ../VideoColorSpace.py:71
+#: ../src/VideoColorSpace.py:71
 msgid "Mode:"
 msgstr ""
 
-#: ../VideoColorSpace.py:80
+#: ../src/VideoColorSpace.py:80
 msgid "Cancel"
 msgstr ""
 
-#: ../VideoColorSpace.py:81
+#: ../src/VideoColorSpace.py:81
 msgid "OK"
 msgstr ""
