@@ -304,14 +304,17 @@ class WeatherIcon(Pixmap):
 	def paintIconPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr is not None:
-			pic_scale_size = ptr.scaleSize()
-			if pic_scale_size.isValid():
-				pic_scale_width = pic_scale_size.width()
-				pic_scale_height = pic_scale_size.height()
-				dest_rect = eRect(0, 0, pic_scale_width, pic_scale_height)
-				self.instance.setScale(1)
-				self.instance.setScaleDest(dest_rect)
-			else:
+			try:
+				pic_scale_size = ptr.scaleSize()
+				if pic_scale_size.isValid():
+					pic_scale_width = pic_scale_size.width()
+					pic_scale_height = pic_scale_size.height()
+					dest_rect = eRect(0, 0, pic_scale_width, pic_scale_height)
+					self.instance.setScale(1)
+					self.instance.setScaleDest(dest_rect)
+				else:
+					self.instance.setScale(0)
+			except:
 				self.instance.setScale(0)
 			self.instance.setPixmap(ptr.__deref__())
 		else:
