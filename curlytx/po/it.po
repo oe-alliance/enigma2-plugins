@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - curlytx\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-07 20:20+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2011-12-08 10:05+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -18,151 +18,81 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/curlytx\n"
 
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:50
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:38
-msgid "Settings"
-msgstr "Conf."
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:51
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:118
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:122
-msgid "Reload"
-msgstr "Ricaricare"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:52
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:123
-msgid "Prev"
-msgstr "Prec."
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:53
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:124
-msgid "Next"
-msgstr "Succ."
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:82
-msgid "Scroll page contents up"
-msgstr "Scorrere la pagina sù"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:85
-msgid "Scroll page contents down"
-msgstr "Scorrere la pagina giù"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:88
-msgid "Show HTTP response headers"
-msgstr "Mostrare la risposta header HTTP"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:91
-msgid "Show program settings"
-msgstr "Mostrare le configurazioni del programma"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:94
-msgid "Reload current page URL"
-msgstr "Ricaricare la pagina corrente"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:97
-msgid "Switch to next configured page URL"
-msgstr "Passare alla URL della pagina successiva"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:100
-msgid "Switch to previous configured page URL"
-msgstr "Passare alla URL della pagina precedente"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:103
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:106
-msgid "Close window"
-msgstr "Chiudere la finestra"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:109
-msgid "Show this help screen"
-msgstr "Mostrare una schermata d'aiuto"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:168
-msgid "Invalid page"
-msgstr "Pagina non valida"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:183
-msgid "Loading ..."
-msgstr "Caricamento..."
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:196
-msgid "Error fetching URL:"
-msgstr "Errore mel recupero URL:"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:201
-msgid "Go and add a page in the settings"
-msgstr "Aggiungere una pagina alla configurazione"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTx.py:209
-msgid "HTTP response headers for"
-msgstr "Risposta header HTTP per"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:49
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:209
-msgid "Cancel"
-msgstr "Annull."
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:50
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:210
-msgid "OK"
-msgstr "Ok"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:51
-msgid "New"
-msgstr "Nuova"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:52
-msgid "Delete"
-msgstr "Rimuov."
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:64
-msgid "Page:"
-msgstr "Pagina:"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:68
-msgid "Default page"
-msgstr "Pagina predefinita"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:69
-msgid "Show in main menu"
-msgstr "Mostrare nel menu principale"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:70
-msgid "Show in extensions menu"
-msgstr "Mostrare nel menu estensioni"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:71
-msgid "Menu title"
-msgstr "Voce nel menu"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:72
-msgid "Page feed URL"
-msgstr "URL feed pagina"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:78
-msgid "Dismiss all setting changes"
-msgstr "Annullare tutte le modifiche"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:81
-msgid "Save settings and close screen"
-msgstr "Salvare e chiudere la finestra"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:84
-msgid "Edit selected page"
-msgstr "Modificare la pagina selezionata"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:87
-msgid "Load pages from feed"
-msgstr "Caricare pagine dal feed"
-
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:90
 msgid "Add new page"
 msgstr "Aggiungere una nuova pagina"
 
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:93
+msgid "Cancel"
+msgstr "Annull."
+
+msgid "Close window"
+msgstr "Chiudere la finestra"
+
+msgid "Default page"
+msgstr "Pagina predefinita"
+
+msgid "Delete"
+msgstr "Rimuov."
+
 msgid "Delete selected page"
 msgstr "Cancellare la pagina selezionata"
 
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:110
+msgid "Dismiss all setting changes"
+msgstr "Annullare tutte le modifiche"
+
+msgid "Edit selected page"
+msgstr "Modificare la pagina selezionata"
+
+msgid "Error fetching URL:"
+msgstr "Errore mel recupero URL:"
+
+msgid "Error loading page feed:"
+msgstr "Errore nel caricamento feed pagina:"
+
+msgid "Font size"
+msgstr "Dimensione carattere"
+
+msgid "Go and add a page in the settings"
+msgstr "Aggiungere una pagina alla configurazione"
+
+msgid "HTTP response headers for"
+msgstr "Risposta header HTTP per"
+
+msgid "Invalid page"
+msgstr "Pagina non valida"
+
+msgid "Load pages from feed"
+msgstr "Caricare pagine dal feed"
+
+msgid "Loading ..."
+msgstr "Caricamento..."
+
+msgid "Menu title"
+msgstr "Voce nel menu"
+
+msgid "New"
+msgstr "Nuova"
+
+msgid "Next"
+msgstr "Succ."
+
+msgid "No page feed URL defined"
+msgstr "Nessuna URL feed pagina definita"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Page URL"
+msgstr "URL pagina"
+
+msgid "Page feed URL"
+msgstr "URL feed pagina"
+
+msgid "Page:"
+msgstr "Pagina:"
+
+msgid "Prev"
+msgstr "Prec."
+
 msgid ""
 "Really delete this page?\n"
 "It cannot be recovered!"
@@ -170,28 +100,47 @@ msgstr ""
 "Cancellare la pagina?\n"
 "Non potrà essere recuperata!"
 
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:143
-msgid "No page feed URL defined"
-msgstr "Nessuna URL feed pagina definita"
+msgid "Reload"
+msgstr "Ricaricare"
 
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:173
-msgid "Error loading page feed:"
-msgstr "Errore nel caricamento feed pagina:"
+msgid "Reload current page URL"
+msgstr "Ricaricare la pagina corrente"
 
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:221
-msgid "Page URL"
-msgstr "URL pagina"
+msgid "Save settings and close screen"
+msgstr "Salvare e chiudere la finestra"
 
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:222
+msgid "Scroll page contents down"
+msgstr "Scorrere la pagina giù"
+
+msgid "Scroll page contents up"
+msgstr "Scorrere la pagina sù"
+
+msgid "Settings"
+msgstr "Conf."
+
+msgid "Show HTTP response headers"
+msgstr "Mostrare la risposta header HTTP"
+
+msgid "Show in extensions menu"
+msgstr "Mostrare nel menu estensioni"
+
+msgid "Show in main menu"
+msgstr "Mostrare nel menu principale"
+
+msgid "Show program settings"
+msgstr "Mostrare le configurazioni del programma"
+
+msgid "Show this help screen"
+msgstr "Mostrare una schermata d'aiuto"
+
+msgid "Switch to next configured page URL"
+msgstr "Passare alla URL della pagina successiva"
+
+msgid "Switch to previous configured page URL"
+msgstr "Passare alla URL della pagina precedente"
+
 msgid "Title"
 msgstr "Nome"
 
-#: .../enigma2-plugins/curlytx/src/CurlyTxSettings.py:223
-msgid "Font size"
-msgstr "Dimensione carattere"
-
-#: .../enigma2-plugins/curlytx/src/plugin.py:36
-#: .../enigma2-plugins/curlytx/src/plugin.py:43
 msgid "View remote text files"
 msgstr "Visualizzate file di testo remoti"
-

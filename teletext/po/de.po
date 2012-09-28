@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TeleText\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-18 22:22+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-07-18 22:24+0100\n"
 "Last-Translator: Andreas Laux <lespuck@web.de>\n"
 "Language-Team: Andreas Laux <lespuck@web.de>\n"
@@ -17,365 +17,260 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:66
-msgid "picture and teletext"
-msgstr "Bild und TeleText"
-
-#: ../src/plugin.py:66
-msgid "teletext and picture"
-msgstr "TeleText und Bild"
-
-#: ../src/plugin.py:66
-msgid "teletext in picture"
-msgstr "TeleText in Bild"
-
-#: ../src/plugin.py:68
-msgid "Western and Central Europe"
-msgstr "West- und Zentraleuropa"
-
-#: ../src/plugin.py:68
-msgid "Eastern Europe"
-msgstr "Osteuropa"
-
-#: ../src/plugin.py:68
-msgid "Western Europe and Turkey"
-msgstr "Westeuropa und Türkei"
-
-#: ../src/plugin.py:68
-msgid "Central and Southeast Europe"
-msgstr "Zentral- und Südosteuropa"
-
-#: ../src/plugin.py:68
-msgid "Cyrillic"
-msgstr "Kyrillisch"
-
-#: ../src/plugin.py:68
-msgid "Turkish / Greek"
-msgstr "Türkisch / Griechisch"
-
-#: ../src/plugin.py:68
-msgid "Arabic"
-msgstr "Arabisch"
-
-#: ../src/plugin.py:68
-msgid "Hebrew / Arabic"
-msgstr "Hebräisch / Arabisch"
-
-#: ../src/plugin.py:69
-msgid "Disabled"
-msgstr "deaktiviert"
-
-#: ../src/plugin.py:69
-msgid "bilinear"
-msgstr "bilinear"
-
-#: ../src/plugin.py:69
-msgid "anisotropic"
-msgstr "anisotropisch"
-
-#: ../src/plugin.py:69
-msgid "sharp"
-msgstr "scharf"
-
-#: ../src/plugin.py:69
-msgid "sharper"
-msgstr "schärfer"
-
-#: ../src/plugin.py:71
-#: ../src/plugin.py:72
-msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
-msgstr "Geben Sie Werte ein (links, oben, rechts, unten) oder drücken Sie TEXT, um den TeleText grafisch zu verschieben und zu vergrößern."
-
-#: ../src/plugin.py:73
-msgid "Select splitting mode."
-msgstr "Wählen Sie den Modus für den geteilten Bildschirm aus."
-
-#: ../src/plugin.py:74
-msgid "Select brightness."
-msgstr "Stellen Sie die Helligkeit ein."
-
-#: ../src/plugin.py:75
-msgid "Select contrast."
-msgstr "Stellen Sie den Kontrast ein."
-
-#: ../src/plugin.py:76
-msgid "Select transparency."
-msgstr "Stellen Sie die Transparenz ein."
-
-#: ../src/plugin.py:77
-msgid "Display first and last row."
-msgstr "Erste und letzte Spalte anzeigen."
-
-#: ../src/plugin.py:78
-msgid "Print debug messages to /tmp/dbttcp.log."
-msgstr "Debug-Messages in die Datei /tmp/dbttcp.log schreiben."
-
-#: ../src/plugin.py:79
-msgid "Select teletext version to use."
-msgstr "Wählen Sie die zu benutzende TeleText-Version."
-
-#: ../src/plugin.py:80
-msgid "Select your region to use the proper font."
-msgstr "Wählen Sie Ihre Region, um den passenden Zeichensatz zu verwenden."
-
-#: ../src/plugin.py:81
-msgid "Select your favourite scale filter."
-msgstr "Wählen Sie den Filter für die Skalierung aus."
-
-#: ../src/plugin.py:82
-msgid "If caching is disabled, each teletext page will searched when you entered its number."
-msgstr "Wenn das Puffern abgeschaltet ist, wird jede Seite erst nach Eingabe der Seitenzahl gesucht."
-
-#: ../src/plugin.py:202
-#: ../src/plugin.py:203
-#: ../src/plugin.py:204
-#: ../src/plugin.py:205
-#: ../src/plugin.py:206
-#: ../src/plugin.py:207
-#: ../src/plugin.py:208
-#: ../src/plugin.py:209
-msgid "enter page number"
-msgstr "Seitenzahl eingeben"
-
-#: ../src/plugin.py:210
-msgid "enter page number / page 100"
-msgstr "Seitenzahl eingeben / Seite 100"
-
-#: ../src/plugin.py:211
-msgid "prev channel / channel list"
-msgstr "v. Sender / Senderliste"
-
-#: ../src/plugin.py:212
-msgid "enter page number / rezap"
-msgstr "Seitenzahl eingeben / Rezap"
-
-#: ../src/plugin.py:213
-msgid "next channel / channel list"
-msgstr "n. Sender / Senderliste"
-
-#: ../src/plugin.py:214
-#: ../src/plugin.py:233
-msgid "exit"
-msgstr "Schliessen"
-
-#: ../src/plugin.py:217
-msgid "zoom / increase height"
-msgstr "Zoom / Höhe vergrößern"
-
-#: ../src/plugin.py:218
-msgid "favorites / decrease height"
-msgstr "Favoriten / Höhe verringern"
-
-#: ../src/plugin.py:219
-msgid "toggle info"
-msgstr "versteckte Informationen"
-
-#: ../src/plugin.py:220
-msgid "teletext settings"
-msgstr "TeleText Einstellungen"
-
-#: ../src/plugin.py:221
-msgid "next page / catch page / move"
-msgstr "n. Seite / n. Link / positionieren"
-
-#: ../src/plugin.py:222
-msgid "prev sub page / move"
-msgstr "v. Unterseite / positionieren"
-
-#: ../src/plugin.py:223
-msgid "start page catching / select page"
-msgstr "Seitenlink auswählen"
-
-#: ../src/plugin.py:224
-msgid "next sub page / move"
-msgstr "n. Unterseite / positionieren"
-
-#: ../src/plugin.py:225
-msgid "prev page / catch page / move"
-msgstr "v. Seite / v. Link / positionieren"
-
-#: ../src/plugin.py:226
-msgid "toggle flof/top"
-msgstr "FLOF/TOP umschalten"
-
-#: ../src/plugin.py:227
-msgid "red teletext link"
-msgstr "roter Textlink"
-
-#: ../src/plugin.py:228
-msgid "green teletext link"
-msgstr "grüner Textlink"
-
-#: ../src/plugin.py:229
-msgid "yellow teletext link"
-msgstr "gelber Textlink"
-
-#: ../src/plugin.py:230
-msgid "blue teletext link"
-msgstr "blauer Textlink"
-
-#: ../src/plugin.py:231
-msgid "split screen"
-msgstr "geteilter Bildschirm"
-
-#: ../src/plugin.py:232
-msgid "toggle transparency"
-msgstr "Transparenz umschalten"
-
-#: ../src/plugin.py:1064
-msgid "Select teletext"
-msgstr "TeleText auswählen"
-
-#: ../src/plugin.py:1082
-#: ../src/plugin.py:1227
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: ../src/plugin.py:1083
-#: ../src/plugin.py:1104
-#: ../src/plugin.py:1229
-msgid "OK"
-msgstr "OK"
-
-#: ../src/plugin.py:1204
-#: ../src/plugin.py:1425
-msgid "TeleText settings"
-msgstr "TeleText Einstellungen"
-
-#: ../src/plugin.py:1228
-msgid "Default"
-msgstr "Standard"
-
-#: ../src/plugin.py:1280
-msgid "Scale filter"
-msgstr "Skalierung"
-
-#: ../src/plugin.py:1281
-msgid "Scale filter zoom"
-msgstr "Skalierung (Zoom)"
-
-#: ../src/plugin.py:1282
-msgid "Brightness"
-msgstr "Helligkeit"
-
-#: ../src/plugin.py:1283
-msgid "Contrast"
-msgstr "Kontrast"
-
-#: ../src/plugin.py:1284
-msgid "Transparency"
-msgstr "Transparenz"
-
-#: ../src/plugin.py:1285
-msgid "Text level"
-msgstr "TeleText Version"
-
-#: ../src/plugin.py:1286
-msgid "Region"
-msgstr "Region"
-
-#: ../src/plugin.py:1287
-#: ../src/plugin.py:1292
-msgid "Position and size"
-msgstr "Position und Größe"
-
-#: ../src/plugin.py:1288
-msgid "Display edges"
-msgstr "Ränder anzeigen"
-
-#: ../src/plugin.py:1289
-msgid "Splitting mode"
-msgstr "Geteilter Bildschirm"
-
-#: ../src/plugin.py:1293
-msgid "Background caching"
-msgstr "Puffern im Hintergrund"
-
-#: ../src/plugin.py:1294
-msgid "Debug"
-msgstr "Debug"
-
-#: ../src/plugin.py:1382
-msgid "Discard changes?"
-msgstr "Änderungen verwerfen?"
-
-#: ../src/plugin.py:1600
-#: ../src/plugin.py:1767
-msgid "TeleText favorites"
-msgstr "TeleText Favoriten"
-
-#: ../src/plugin.py:1634
-msgid "Clear all"
-msgstr "Alle löschen"
-
-#: ../src/plugin.py:1657
-#: ../src/plugin.py:1666
-#: ../src/plugin.py:1693
 msgid "<empty>"
 msgstr "<leer>"
 
-#: ../src/plugin.py:1669
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: ../src/plugin.py:1671
+msgid "Arabic"
+msgstr "Arabisch"
+
+msgid "Background caching"
+msgstr "Puffern im Hintergrund"
+
+msgid "Brightness"
+msgstr "Helligkeit"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Central and Southeast Europe"
+msgstr "Zentral- und Südosteuropa"
+
+msgid "Clear all"
+msgstr "Alle löschen"
+
+msgid "Contrast"
+msgstr "Kontrast"
+
+msgid "Cyrillic"
+msgstr "Kyrillisch"
+
+msgid "Debug"
+msgstr "Debug"
+
+msgid "Default"
+msgstr "Standard"
+
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../src/plugin.py:1672
-msgid "Select"
-msgstr "Auswählen"
+msgid "Delete all favorites?"
+msgstr "Alle Favoriten löschen?"
 
-#: ../src/plugin.py:1673
+msgid "Delete favorite?"
+msgstr "Favoriten löschen?"
+
+msgid "Disabled"
+msgstr "deaktiviert"
+
+msgid "Discard changes?"
+msgstr "Änderungen verwerfen?"
+
+msgid "Display edges"
+msgstr "Ränder anzeigen"
+
+msgid "Display first and last row."
+msgstr "Erste und letzte Spalte anzeigen."
+
+msgid "Eastern Europe"
+msgstr "Osteuropa"
+
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: ../src/plugin.py:1700
 #, python-format
 msgid "Enter text for page %s"
 msgstr "Text für Seite %s eingeben"
 
-#: ../src/plugin.py:1716
-msgid "Delete favorite?"
-msgstr "Favoriten löschen?"
+msgid ""
+"Enter values (left, top, right, bottom) or press TEXT to move and resize the "
+"teletext graphically."
+msgstr ""
+"Geben Sie Werte ein (links, oben, rechts, unten) oder drücken Sie TEXT, um "
+"den TeleText grafisch zu verschieben und zu vergrößern."
 
-#: ../src/plugin.py:1727
-msgid "Delete all favorites?"
-msgstr "Alle Favoriten löschen?"
+msgid "Hebrew / Arabic"
+msgstr "Hebräisch / Arabisch"
 
-#: ../src/plugin.py:1811
+msgid ""
+"If caching is disabled, each teletext page will searched when you entered "
+"its number."
+msgstr ""
+"Wenn das Puffern abgeschaltet ist, wird jede Seite erst nach Eingabe der "
+"Seitenzahl gesucht."
+
 msgid "No teletext available."
 msgstr "Kein TeleText verfügbar."
 
-#~ msgid "Show message if no teletext available or exit silently."
-#~ msgstr "Nachricht anzeigen, wenn kein TeleText verfügbar ist."
+msgid "OK"
+msgstr "OK"
 
-#~ msgid "Message"
-#~ msgstr "Nachricht"
+msgid "Position and size"
+msgstr "Position und Größe"
 
-#~ msgid "blurry"
-#~ msgstr "verschwommen"
+msgid "Print debug messages to /tmp/dbttcp.log."
+msgstr "Debug-Messages in die Datei /tmp/dbttcp.log schreiben."
 
-#~ msgid "anti flutter"
-#~ msgstr "flimmerfrei"
+msgid "Region"
+msgstr "Region"
 
-#~ msgid "anti flutter blurry"
-#~ msgstr "flimmerfrei verschwommen"
+msgid "Scale filter"
+msgstr "Skalierung"
 
-#~ msgid "anti flutter sharp"
-#~ msgstr "flimmerfrei scharf"
+msgid "Scale filter zoom"
+msgstr "Skalierung (Zoom)"
+
+msgid "Select"
+msgstr "Auswählen"
+
+msgid "Select brightness."
+msgstr "Stellen Sie die Helligkeit ein."
+
+msgid "Select contrast."
+msgstr "Stellen Sie den Kontrast ein."
+
+msgid "Select splitting mode."
+msgstr "Wählen Sie den Modus für den geteilten Bildschirm aus."
+
+msgid "Select teletext"
+msgstr "TeleText auswählen"
+
+msgid "Select teletext version to use."
+msgstr "Wählen Sie die zu benutzende TeleText-Version."
+
+msgid "Select transparency."
+msgstr "Stellen Sie die Transparenz ein."
+
+msgid "Select your favourite scale filter."
+msgstr "Wählen Sie den Filter für die Skalierung aus."
+
+msgid "Select your region to use the proper font."
+msgstr "Wählen Sie Ihre Region, um den passenden Zeichensatz zu verwenden."
+
+msgid "Splitting mode"
+msgstr "Geteilter Bildschirm"
+
+msgid "TeleText favorites"
+msgstr "TeleText Favoriten"
+
+msgid "TeleText settings"
+msgstr "TeleText Einstellungen"
+
+msgid "Text level"
+msgstr "TeleText Version"
+
+msgid "Transparency"
+msgstr "Transparenz"
+
+msgid "Turkish / Greek"
+msgstr "Türkisch / Griechisch"
+
+msgid "Western Europe and Turkey"
+msgstr "Westeuropa und Türkei"
+
+msgid "Western and Central Europe"
+msgstr "West- und Zentraleuropa"
+
+msgid "anisotropic"
+msgstr "anisotropisch"
+
+msgid "bilinear"
+msgstr "bilinear"
+
+msgid "blue teletext link"
+msgstr "blauer Textlink"
+
+msgid "enter page number"
+msgstr "Seitenzahl eingeben"
+
+msgid "enter page number / page 100"
+msgstr "Seitenzahl eingeben / Seite 100"
+
+msgid "enter page number / rezap"
+msgstr "Seitenzahl eingeben / Rezap"
+
+msgid "exit"
+msgstr "Schliessen"
+
+msgid "favorites / decrease height"
+msgstr "Favoriten / Höhe verringern"
+
+msgid "green teletext link"
+msgstr "grüner Textlink"
+
+msgid "next channel / channel list"
+msgstr "n. Sender / Senderliste"
+
+msgid "next page / catch page / move"
+msgstr "n. Seite / n. Link / positionieren"
+
+msgid "next sub page / move"
+msgstr "n. Unterseite / positionieren"
+
+msgid "picture and teletext"
+msgstr "Bild und TeleText"
+
+msgid "prev channel / channel list"
+msgstr "v. Sender / Senderliste"
+
+msgid "prev page / catch page / move"
+msgstr "v. Seite / v. Link / positionieren"
+
+msgid "prev sub page / move"
+msgstr "v. Unterseite / positionieren"
+
+msgid "red teletext link"
+msgstr "roter Textlink"
+
+msgid "sharp"
+msgstr "scharf"
+
+msgid "sharper"
+msgstr "schärfer"
+
+msgid "split screen"
+msgstr "geteilter Bildschirm"
+
+msgid "start page catching / select page"
+msgstr "Seitenlink auswählen"
+
+msgid "teletext and picture"
+msgstr "TeleText und Bild"
+
+msgid "teletext in picture"
+msgstr "TeleText in Bild"
+
+msgid "teletext settings"
+msgstr "TeleText Einstellungen"
+
+msgid "toggle flof/top"
+msgstr "FLOF/TOP umschalten"
+
+msgid "toggle info"
+msgstr "versteckte Informationen"
+
+msgid "toggle transparency"
+msgstr "Transparenz umschalten"
+
+msgid "yellow teletext link"
+msgstr "gelber Textlink"
+
+msgid "zoom / increase height"
+msgstr "Zoom / Höhe vergrößern"
 
 #~ msgid "..."
 #~ msgstr "..."
 
-#~ msgid "increase width"
-#~ msgstr "Breite vergrößern"
-
-#~ msgid "decrease width"
-#~ msgstr "Breite verringern"
-
 #~ msgid "Daemon not running."
 #~ msgstr "Dienst läuft nicht."
+
+#~ msgid "Message"
+#~ msgstr "Nachricht"
+
+#~ msgid "Show message if no teletext available or exit silently."
+#~ msgstr "Nachricht anzeigen, wenn kein TeleText verfügbar ist."
 
 #~ msgid ""
 #~ "Use cursor keys to move teletext. Press MENU to resize teletext. Press OK "
@@ -395,3 +290,21 @@ msgstr "Kein TeleText verfügbar."
 #~ "untere Ecke zu bewegen). Drücken Sie MENU um den TeleText zu verschieben. "
 #~ "Drücken Sie OK, um die neue Position und Größe anzuwenden. Drücken Sie "
 #~ "EXIT, um zur vorherigen Position und Größe zurückzukehren."
+
+#~ msgid "anti flutter"
+#~ msgstr "flimmerfrei"
+
+#~ msgid "anti flutter blurry"
+#~ msgstr "flimmerfrei verschwommen"
+
+#~ msgid "anti flutter sharp"
+#~ msgstr "flimmerfrei scharf"
+
+#~ msgid "blurry"
+#~ msgstr "verschwommen"
+
+#~ msgid "decrease width"
+#~ msgstr "Breite verringern"
+
+#~ msgid "increase width"
+#~ msgstr "Breite vergrößern"

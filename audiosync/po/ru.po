@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-14 08:42+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-08-25 11:11+0200\n"
 "Last-Translator: WadimArt <WadimArt@GiClub.tv>\n"
 "Language-Team: none\n"
@@ -12,6 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#, python-format
 msgid "%i ms"
 msgstr "%i мс"
 
@@ -39,6 +40,7 @@ msgstr "Аудио канал:"
 msgid "Decrease delay"
 msgstr "Уменьшение задержки"
 
+#, python-format
 msgid "Decrease delay by %i ms (can be set)"
 msgstr "Уменьшение задержки на %i мс (может быть установлено)"
 
@@ -54,15 +56,18 @@ msgstr "Общая задержка"
 msgid "Increase delay"
 msgstr "Увеличение задержки"
 
+#, python-format
 msgid "Increase delay by %i ms (can be set)"
 msgstr "Увеличение задержки на %i мс (может быть установлено)"
 
 msgid "Invalid selection"
 msgstr "Неправильный выбор"
 
+#, fuzzy, python-format
 msgid "Key %(Key)s successfully set to %(delay)i ms"
 msgstr "Кнопка %(кнопка)и успешно назначена %(задержку)i мс"
 
+#, fuzzy, python-format
 msgid "Key %(key)s (current value: %(value)i ms)"
 msgstr "Кнопка %(кнопка)и (выбранное значение: %(значение)i мс)"
 
@@ -114,6 +119,7 @@ msgstr "Открыть меню плагина"
 msgid "Outer Bound (+/-)"
 msgstr "Внешняя граница (+/-)"
 
+#, fuzzy, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Плагин: %(плагин)ы, Версия: %(версия)и"
 
@@ -132,12 +138,14 @@ msgstr "Сохранить значения и закрыть плагин"
 msgid "Save values and close screen"
 msgstr "Сохранить значения и закрыть экран"
 
+#, python-format
 msgid "Select the key you want to set to %i ms"
 msgstr "Выберите кнопку для установки %i мс"
 
 msgid "Service delay"
 msgstr "Задержка сервиса"
 
+#, python-format
 msgid "Set delay to %i ms (can be set)"
 msgstr "Установить задержку %i мс (может быть установлено)"
 
@@ -150,9 +158,11 @@ msgstr "Настройка плагина аудиосинхронизации"
 msgid "Step in ms for arrow keys"
 msgstr "Шаг в мс для влево/вправо"
 
+#, python-format
 msgid "Step in ms for key %i"
 msgstr "Шаг в мс для кнопки %i"
 
+#, python-format
 msgid "Step in ms for keys '%s'"
 msgstr "Шаг в мс для кнопок '%s'"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeatherPlugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2011-06-12 19:06+0100\n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: Björn Freise <mcfreis@gmx.net>\n"
@@ -33,24 +33,28 @@ msgstr "Abbrechen"
 msgid "City"
 msgstr "Ort"
 
-msgid "City or Postal Code"
-msgstr "Ort oder Postleitzahl"
-
-#, python-format
-msgid "Current: %s"
-msgstr "Aktuell: %s"
-
 msgid "Delete"
 msgstr "Löschen"
 
 msgid "Edit"
 msgstr "Bearbeiten"
 
+#, python-format
+msgid "Feels like %s"
+msgstr "Gefühlte Temp. %s"
+
 msgid "Getting weather information..."
 msgstr "Laden der Wetterinformationen..."
 
-msgid "Language"
-msgstr "Sprache"
+#, python-format
+msgid "Humidity: %s %%"
+msgstr "Luftfeuchtigkeit: %s %%"
+
+msgid "Location code"
+msgstr "Location-Code"
+
+msgid "MSN location search result"
+msgstr "Suchresultat MSN Location-Code"
 
 msgid ""
 "No locations defined...\n"
@@ -62,44 +66,13 @@ msgstr ""
 msgid "OK"
 msgstr "OK"
 
-msgid "Really delete this WeatherPlugin Entry?"
-msgstr "Soll der Eintrag wirklich gelöscht werden?"
-
-msgid "Show Weather Forecast"
-msgstr "Zeigt die Wettervorhersage"
-
-msgid "Weather Plugin"
-msgstr "Wetterinformationen"
-
-msgid "WeatherPlugin: Edit Entry"
-msgstr "Wetterinformationen: Eintrag bearbeiten"
-
-msgid "Location code"
-msgstr "Location-Code"
-
-msgid "System"
-msgstr "System"
-
-msgid "Search Code"
-msgstr "Code suchen"
-
-msgid "metric system"
-msgstr "Metrisches System"
-
-msgid "imperial system"
-msgstr "Englisches Maßsystem"
-
-msgid "Observation time: %s"
-msgstr "Stand: %s"
-
+#, python-format
 msgid "Observation point: %s"
 msgstr "Messstation: %s"
 
-msgid "Humidity: %s %%"
-msgstr "Luftfeuchtigkeit: %s %%"
-
-msgid "You need to enter a valid city name before you can search for the location code."
-msgstr "Es muss ein Stadtnamen eingeben werden bevor man nach dem Location-Code suchen kann."
+#, python-format
+msgid "Observation time: %s"
+msgstr "Stand: %s"
 
 msgid "Please enter a valid city name."
 msgstr "Bitte einen gültigen Stadtnamen eingeben."
@@ -107,8 +80,45 @@ msgstr "Bitte einen gültigen Stadtnamen eingeben."
 msgid "Please enter a valid location code for the city."
 msgstr "Bitte einen gültigen Location-Code für die Stadt eingeben."
 
-msgid "MSN location search result"
-msgstr "Suchresultat MSN Location-Code"
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "Soll der Eintrag wirklich gelöscht werden?"
 
-msgid "Feels like %s"
-msgstr "Gefühlte Temp. %s"
+msgid "Search Code"
+msgstr "Code suchen"
+
+msgid "Show Weather Forecast"
+msgstr "Zeigt die Wettervorhersage"
+
+msgid "System"
+msgstr "System"
+
+msgid "Weather Plugin"
+msgstr "Wetterinformationen"
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr "Wetterinformationen: Eintrag bearbeiten"
+
+msgid "WeatherPlugin: List of Entries"
+msgstr ""
+
+msgid ""
+"You need to enter a valid city name before you can search for the location "
+"code."
+msgstr ""
+"Es muss ein Stadtnamen eingeben werden bevor man nach dem Location-Code "
+"suchen kann."
+
+msgid "imperial system"
+msgstr "Englisches Maßsystem"
+
+msgid "metric system"
+msgstr "Metrisches System"
+
+#~ msgid "City or Postal Code"
+#~ msgstr "Ort oder Postleitzahl"
+
+#~ msgid "Current: %s"
+#~ msgstr "Aktuell: %s"
+
+#~ msgid "Language"
+#~ msgstr "Sprache"

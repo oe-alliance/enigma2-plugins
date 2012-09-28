@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: InternetRadio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-05 00:17+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dr.Best <dr.best@dreambox-tools.info>\n"
 "Language-Team: Dr.Best <dr.best@dreambox-tools.info>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,165 +16,100 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/InternetRadioSetup.py:46
-#: ../src/InternetRadioSetup.py:121
-msgid "Cancel"
-msgstr "Abbruch"
+#, python-format
+msgid "%s ..."
+msgstr "%s..."
 
-#: ../src/InternetRadioSetup.py:47
-#: ../src/InternetRadioSetup.py:122
-msgid "OK"
-msgstr "OK"
+#, python-format
+msgid "%s..."
+msgstr "%s..."
 
-#: ../src/InternetRadioSetup.py:50
-msgid "Show in extension menu:"
-msgstr "Im Erweiterungmenü anzeigen"
-
-#: ../src/InternetRadioSetup.py:51
-msgid "Visualization"
-msgstr "Visualisierung"
-
-#: ../src/InternetRadioSetup.py:52
-msgid "Fullscreen Layout"
-msgstr "Vollbild Layout"
-
-#: ../src/InternetRadioSetup.py:53
-msgid "Fullscreen auto activation"
-msgstr "Automatische Vollbild-Aktivierung"
-
-#: ../src/InternetRadioSetup.py:54
-msgid "Show cover arts"
-msgstr "Covers anzeigen"
-
-#: ../src/InternetRadioSetup.py:55
-msgid "Rip to single file, name is timestamped"
-msgstr "In eine einzelne Datei speichern"
-
-#: ../src/InternetRadioSetup.py:56
-msgid "Create a directory for each stream"
-msgstr "Verzeichnis für jeden Stream generieren"
-
-#: ../src/InternetRadioSetup.py:57
-msgid "Add sequence number to output file"
-msgstr "Dateien mit fortlaufender Nummerierung generieren"
-
-#: ../src/InternetRadioSetup.py:59
-msgid "Recording location:"
-msgstr "Aufnahmepfad"
-
-#: ../src/InternetRadioSetup.py:156
-msgid "Invalid Location"
-msgstr "Ungültiger Aufnahmepfad"
-
-#: ../src/plugin.py:34
-#: ../src/InternetRadioList.py:50
-#: ../src/InternetRadioScreen.py:312
-#: ../src/InternetRadioScreen.py:570
-#: ../src/InternetRadioScreen.py:605
-#: ../src/InternetRadioScreen.py:678
-#: ../src/InternetRadioScreen.py:783
-#: ../src/InternetRadioScreen.py:855
-msgid "Countries"
-msgstr "Länder"
-
-#: ../src/plugin.py:36
-msgid "On"
-msgstr "An"
-
-#: ../src/plugin.py:36
-#: ../src/plugin.py:38
-#: ../src/plugin.py:42
-msgid "Off"
-msgstr "Aus"
-
-#: ../src/plugin.py:38
-msgid "Screen and OLED"
-msgstr "Bildschirm und LCD"
-
-#: ../src/plugin.py:38
-msgid "OLED only"
-msgstr "Nur LCD"
-
-#: ../src/plugin.py:38
-msgid "Screen only"
-msgstr "Nur Bildschirm"
-
-#: ../src/plugin.py:42
-msgid "30 seconds"
-msgstr "30 Sekunden"
-
-#: ../src/plugin.py:42
 msgid "1 minutes"
 msgstr "1 Minute"
 
-#: ../src/plugin.py:42
 msgid "3 minutes"
 msgstr "3 Minuten"
 
-#: ../src/plugin.py:43
-msgid "Visualization and Text"
-msgstr "Visualisierung und Text"
+msgid "30 seconds"
+msgstr "30 Sekunden"
 
-#: ../src/plugin.py:43
-msgid "Text only"
-msgstr "Nur Text"
+msgid "Add current playing stream to favorite"
+msgstr "Laufender Sender zur Favoritenliste hinzufügen"
 
-#: ../src/plugin.py:43
+msgid "Add current selected genre to favorite"
+msgstr "Markiertes Genre zur Favoritenliste hinzufügen"
+
+msgid "Add current selected station to favorite"
+msgstr "Markierte Station zur Favoritenliste hinzufügen"
+
+msgid "Add sequence number to output file"
+msgstr "Dateien mit fortlaufender Nummerierung generieren"
+
+msgid "All Countries"
+msgstr "Alle Länder"
+
+msgid "All Genres"
+msgstr "Alle Genre"
+
 msgid "Blank"
 msgstr "Leer"
 
-#: ../src/plugin.py:70
-#: ../src/plugin.py:72
-msgid "listen to internet-radio"
-msgstr "Internetradio hören"
+msgid "Cancel"
+msgstr "Abbruch"
 
-#: ../src/InternetRadioList.py:48
-#: ../src/InternetRadioScreen.py:312
-#: ../src/InternetRadioScreen.py:676
-msgid "Genres"
-msgstr "Genre"
-
-#: ../src/InternetRadioList.py:51
-msgid "Filter:"
-msgstr "Filter:"
-
-#: ../src/InternetRadioInformationScreen.py:69
 msgid "Close"
 msgstr "Schließen"
 
-#: ../src/InternetRadioInformationScreen.py:70
-msgid "Streaming Information"
-msgstr "Streaming Information"
+msgid "Config"
+msgstr "Konfiguration"
 
-#: ../src/InternetRadioScreen.py:251
-#: ../src/InternetRadioScreen.py:504
-msgid "Record"
-msgstr "Aufnahme"
+msgid "Countries"
+msgstr "Länder"
 
-#: ../src/InternetRadioScreen.py:253
-msgid "Stations"
-msgstr "Stationen"
+msgid "Create a directory for each stream"
+msgstr "Verzeichnis für jeden Stream generieren"
 
-#: ../src/InternetRadioScreen.py:254
+msgid "Do you really want to stop the recording?"
+msgstr "Soll die Aufnahme wirklich beendet werden?"
+
+msgid "Enter in minutes (0 means unlimited)"
+msgstr "Eingabe in Minuten (0 = unbegrenzt)"
+
+msgid "Enter new name for favorite item"
+msgstr "Neuen Namen für Favoriten eingeben"
+
+msgid "Enter text to search for"
+msgstr "Suchtext eingeben"
+
+msgid "Favorite list"
+msgstr "Favoritenliste"
+
 msgid "Favorites"
 msgstr "Favoriten"
 
-#: ../src/InternetRadioScreen.py:339
-#: ../src/InternetRadioScreen.py:533
-msgid "Stop record"
-msgstr "Beende Aufnahme"
+msgid "Filter:"
+msgstr "Filter:"
 
-#: ../src/InternetRadioScreen.py:341
-msgid "Recording stream station"
-msgstr "Aktuell laufende Aufnahme-Station"
+msgid "Fullscreen"
+msgstr "Vollbild"
 
-#: ../src/InternetRadioScreen.py:405
-#: ../src/InternetRadioScreen.py:696
+msgid "Fullscreen Layout"
+msgstr "Vollbild Layout"
+
+msgid "Fullscreen auto activation"
+msgstr "Automatische Vollbild-Aktivierung"
+
+msgid "Genres"
+msgstr "Genre"
+
 #, python-format
-msgid "Getting streaming data from %s"
-msgstr "Erhalte Streaming-Data von %s"
+msgid "Getting %s"
+msgstr "Erhalte %s"
 
-#: ../src/InternetRadioScreen.py:474
+#, python-format
+msgid "Getting InternetRadio %s list..."
+msgstr "Erhalte InternetRadio %s Liste..."
+
 #, python-format
 msgid ""
 "Getting streaming data from\n"
@@ -182,146 +118,120 @@ msgstr ""
 "Erhalte Streaming-Data von\n"
 "%s"
 
-#: ../src/InternetRadioScreen.py:541
-msgid "Do you really want to stop the recording?"
-msgstr "Soll die Aufnahme wirklich beendet werden?"
+#, python-format
+msgid "Getting streaming data from %s"
+msgstr "Erhalte Streaming-Data von %s"
 
-#: ../src/InternetRadioScreen.py:544
-msgid "Recording length"
-msgstr "Aufnahme-Länge"
+msgid "Internet Radio"
+msgstr "Internet Radio"
 
-#: ../src/InternetRadioScreen.py:544
-msgid "Enter in minutes (0 means unlimited)"
-msgstr "Eingabe in Minuten (0 = unbegrenzt)"
+#, python-format
+msgid "InternetRadio filter list (%s)"
+msgstr "InternetRadio Filter LIste (%s)"
 
-#: ../src/InternetRadioScreen.py:546
+#, python-format
+msgid "InternetRadio station list for filter: %s"
+msgstr "Internetradio Stationsliste für Filter: %s"
+
+#, python-format
+msgid "InternetRadio station list for search-criteria: %s"
+msgstr "InternetRadio Stationsliste für Suchkriterium: %s"
+
+msgid "Invalid Location"
+msgstr "Ungültiger Aufnahmepfad"
+
+msgid "No streaming data found..."
+msgstr "Keine Streaming-Daten gefunden..."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "OLED only"
+msgstr "Nur LCD"
+
+msgid "Off"
+msgstr "Aus"
+
+msgid "On"
+msgstr "An"
+
 msgid "Only running streamings can be recorded!"
 msgstr ""
 "Zur Zeit wird kein Radiosender abgespielt.\n"
 "Aufnahme wird nicht gestartet."
 
-#: ../src/InternetRadioScreen.py:552
-#: ../src/InternetRadioScreen.py:601
-#, python-format
-msgid "InternetRadio filter list (%s)"
-msgstr "InternetRadio Filter LIste (%s)"
+msgid "Record"
+msgstr "Aufnahme"
 
-#: ../src/InternetRadioScreen.py:571
-#: ../src/InternetRadioScreen.py:641
-#: ../src/InternetRadioScreen.py:782
-msgid "All Countries"
-msgstr "Alle Länder"
+msgid "Recording length"
+msgstr "Aufnahme-Länge"
 
-#: ../src/InternetRadioScreen.py:573
-#: ../src/InternetRadioScreen.py:629
-#: ../src/InternetRadioScreen.py:782
-msgid "All Genres"
-msgstr "Alle Genre"
+msgid "Recording location:"
+msgstr "Aufnahmepfad"
 
-#: ../src/InternetRadioScreen.py:581
-msgid "Favorite list"
-msgstr "Favoritenliste"
+msgid "Recording stream station"
+msgstr "Aktuell laufende Aufnahme-Station"
 
-#: ../src/InternetRadioScreen.py:589
-#, python-format
-msgid "Getting InternetRadio %s list..."
-msgstr "Erhalte InternetRadio %s Liste..."
+msgid "Rip to single file, name is timestamped"
+msgstr "In eine einzelne Datei speichern"
 
-#: ../src/InternetRadioScreen.py:616
-#, python-format
-msgid "%s..."
-msgstr "%s..."
+msgid "Screen and OLED"
+msgstr "Bildschirm und LCD"
 
-#: ../src/InternetRadioScreen.py:749
-msgid "No streaming data found..."
-msgstr "Keine Streaming-Daten gefunden..."
+msgid "Screen only"
+msgstr "Nur Bildschirm"
 
-#: ../src/InternetRadioScreen.py:752
-#, python-format
-msgid "InternetRadio station list for filter: %s"
-msgstr "Internetradio Stationsliste für Filter: %s"
-
-#: ../src/InternetRadioScreen.py:754
-#, python-format
-msgid "Getting %s"
-msgstr "Erhalte %s"
-
-#: ../src/InternetRadioScreen.py:804
-msgid "Config"
-msgstr "Konfiguration"
-
-#: ../src/InternetRadioScreen.py:804
 msgid "Search"
 msgstr "Suche"
 
-#: ../src/InternetRadioScreen.py:806
-msgid "rename current selected favorite"
-msgstr "Umbenennen"
-
-#: ../src/InternetRadioScreen.py:807
-msgid "remove current selected favorite"
-msgstr "Löschen"
-
-#: ../src/InternetRadioScreen.py:809
-msgid "do not play a service on startup"
-msgstr "Keine Station beim Starten abspielen"
-
-#: ../src/InternetRadioScreen.py:811
-msgid "play current selected favorite on startup"
-msgstr "Aktuelle Markierung beim Starten abspielen"
-
-#: ../src/InternetRadioScreen.py:813
-msgid "Add current selected genre to favorite"
-msgstr "Markiertes Genre zur Favoritenliste hinzufügen"
-
-#: ../src/InternetRadioScreen.py:815
-msgid "Add current selected station to favorite"
-msgstr "Markierte Station zur Favoritenliste hinzufügen"
-
-#: ../src/InternetRadioScreen.py:817
-msgid "Add current playing stream to favorite"
-msgstr "Laufender Sender zur Favoritenliste hinzufügen"
-
-#: ../src/InternetRadioScreen.py:818
-msgid "Fullscreen"
-msgstr "Vollbild"
-
-#: ../src/InternetRadioScreen.py:820
-msgid "Show TV"
-msgstr "TV-Bild anzeigen"
-
-#: ../src/InternetRadioScreen.py:872
-msgid "Enter new name for favorite item"
-msgstr "Neuen Namen für Favoriten eingeben"
-
-#: ../src/InternetRadioScreen.py:890
-msgid "Enter text to search for"
-msgstr "Suchtext eingeben"
-
-#: ../src/InternetRadioScreen.py:894
-#, python-format
-msgid "InternetRadio station list for search-criteria: %s"
-msgstr "InternetRadio Stationsliste für Suchkriterium: %s"
-
-#: ../src/InternetRadioScreen.py:896
 #, python-format
 msgid "Searching InternetRadio for %s..."
 msgstr "Durchsuche InternetRadio nach %s..."
 
-#: ../src/InternetRadioScreen.py:913
-#, python-format
-msgid "%s ..."
-msgstr "%s..."
+msgid "Show TV"
+msgstr "TV-Bild anzeigen"
 
-#: ../src/InternetRadioScreen.py:964
+msgid "Show cover arts"
+msgstr "Covers anzeigen"
+
+msgid "Show in extension menu:"
+msgstr "Im Erweiterungmenü anzeigen"
+
+msgid "Stations"
+msgstr "Stationen"
+
+msgid "Stop record"
+msgstr "Beende Aufnahme"
+
+msgid "Streaming Information"
+msgstr "Streaming Information"
+
+msgid "Text only"
+msgstr "Nur Text"
+
 msgid "Title: n/a"
 msgstr "Titel: n/a"
 
-#: ../src/InternetRadioScreen.py:999
+msgid "Visualization"
+msgstr "Visualisierung"
+
+msgid "Visualization and Text"
+msgstr "Visualisierung und Text"
+
+msgid "do not play a service on startup"
+msgstr "Keine Station beim Starten abspielen"
+
+msgid "listen to internet-radio"
+msgstr "Internetradio hören"
+
 msgid "nothing playing..."
 msgstr "Es wird nichts abgespielt..."
 
-#: ../src/InternetRadioOledDisplay.py:123
-msgid "Internet Radio"
-msgstr "Internet Radio"
+msgid "play current selected favorite on startup"
+msgstr "Aktuelle Markierung beim Starten abspielen"
 
+msgid "remove current selected favorite"
+msgstr "Löschen"
+
+msgid "rename current selected favorite"
+msgstr "Umbenennen"

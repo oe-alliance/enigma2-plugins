@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - Plugin epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2009-09-27 17:51+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -30,6 +30,9 @@ msgstr "Otkaži"
 
 msgid "Channel Selection"
 msgstr "Izbor kanala"
+
+msgid "Choose the encode type for search, helpful for foreign languages."
+msgstr ""
 
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
@@ -81,6 +84,9 @@ msgstr "Bez istorije"
 msgid "OK"
 msgstr "OK"
 
+msgid "Open selected in IMDb"
+msgstr ""
+
 msgid "Save search as AutoTimer"
 msgstr "Sačuvaj pretragu kao autotajmer"
 
@@ -89,6 +95,9 @@ msgstr "Traženje"
 
 msgid "Search EPG"
 msgstr "Pretraga EPG"
+
+msgid "Search Encoding"
+msgstr ""
 
 msgid "Select a timer to search"
 msgstr "Izaberi tajmer za pretragu"

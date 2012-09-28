@@ -2,61 +2,81 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flashexpander 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-11 10:44+0000\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2010-04-13 10:19+0200\n"
 "Last-Translator: mechatron\n"
 "Language-Team: mechatron\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.2\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Country: GERMANY\n"
 
-msgid "extend your flash memory"
-msgstr "erweitere deinen Flash Speicher"
-
+#, python-format
 msgid "... is used, %dMB free"
 msgstr "... wird benutzt, %dMB frei"
 
-msgid "FlashExpander is not installed, create? Press Key OK."
-msgstr "FlashExpander ist nicht installiert, erstellen? Drücke OK."
+#, python-format
+msgid ""
+"Are you sure want to create FlashExpander on\n"
+"%s\n"
+"Partition %d"
+msgstr ""
+"Willst du wirklich FlashExpander in\n"
+"%s\n"
+"Partition %d erstellen"
 
-msgid "No HDD-, SSD- or USB-Device found. Please first initialized."
-msgstr "Kein HDD-, SSD- oder USB-Gerät gefunden. Bitte initialisieren."
-
-msgid "Are you sure want to create FlashExpander on\n%s\nPartition %d"
-msgstr "Willst du wirklich FlashExpander in\n%s\nPartition %d erstellen"
-
-msgid "read UUID"
-msgstr "UUID lesen"
-
-msgid "Mount failed (%s)"
-msgstr "Fehler beim Einbinden (%s)"
-
-msgid "Too little free space < 180MB or wrong Filesystem!"
-msgstr "Zu wenig freier Speicher < 180MB oder falsches Dateisystem"
-
-msgid "Please wait, Flash memory will be copied."
-msgstr "Bitte warten. Flash Speicher wird kopiert."
+#, python-format
+msgid ""
+"Are you sure want to create FlashExpander on \n"
+"Server: %s\n"
+"Path: %s"
+msgstr ""
+"Willst du wirklich FlashExpander in\n"
+"Server: %s\n"
+"Pfad: %s erstellen"
 
 msgid "Do you want to reboot your Dreambox?"
 msgstr "Soll die Dreambox neu gestartet werden?"
 
+msgid "FlashExpander"
+msgstr ""
+
+msgid "FlashExpander is not installed, create? Press Key OK."
+msgstr "FlashExpander ist nicht installiert, erstellen? Drücke OK."
+
+#, python-format
+msgid "Mount failed (%s)"
+msgstr "Fehler beim Einbinden (%s)"
+
+msgid "No HDD-, SSD- or USB-Device found. Please first initialized."
+msgstr "Kein HDD-, SSD- oder USB-Gerät gefunden. Bitte initialisieren."
+
+msgid "Please wait, Flash memory will be copied."
+msgstr "Bitte warten. Flash Speicher wird kopiert."
+
+msgid "Too little free space < 180MB or wrong Filesystem!"
+msgstr "Zu wenig freier Speicher < 180MB oder falsches Dateisystem"
+
+msgid "choose device to FlashExpander"
+msgstr "wähle ein Gerät für den FlashExpander"
+
+#, python-format
 msgid "error adding fstab entry for: %s"
 msgstr "Fehler beim Hinzufügen von %s in die fstab"
 
 msgid "error copy flash memory"
 msgstr "Fehler beim Kopieren des Flash-Speichers"
 
-msgid "choose device to FlashExpander"
-msgstr "wähle ein Gerät für den FlashExpander"
+msgid "extend your flash memory"
+msgstr "erweitere deinen Flash Speicher"
+
+msgid "read UUID"
+msgstr "UUID lesen"
 
 msgid "unknown"
 msgstr "unbekannt"
-
-msgid "Are you sure want to create FlashExpander on \nServer: %s\nPath: %s"
-msgstr "Willst du wirklich FlashExpander in\nServer: %s\nPfad: %s erstellen"

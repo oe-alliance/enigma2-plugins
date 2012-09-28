@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - AC3lipsync\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -15,9 +15,6 @@ msgstr ""
 "X-Poedit-Country: Serbia\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ..\\src\n"
-
-msgid " "
-msgstr " "
 
 #, python-format
 msgid "%i ms"
@@ -133,9 +130,6 @@ msgstr ""
 msgid "Reset saved position"
 msgstr ""
 
-msgid "Save"
-msgstr "Sačuvaj"
-
 msgid "Save current delay to key"
 msgstr ""
 
@@ -181,6 +175,9 @@ msgstr "Vreme čekanja u ms pre aktiviranja: "
 
 msgid "sets the Audio Delay (LipSync)"
 msgstr ""
+
+#~ msgid " "
+#~ msgstr " "
 
 #~ msgid "%s delay:"
 #~ msgstr "%s kašnjenje:"
@@ -229,6 +226,9 @@ msgstr ""
 
 #~ msgid "Restore lamedb"
 #~ msgstr "lamedb wiederherstellen"
+
+#~ msgid "Save"
+#~ msgstr "Sačuvaj"
 
 #~ msgid "Save %s delay"
 #~ msgstr "Sačuvaj %s kašnjenje"

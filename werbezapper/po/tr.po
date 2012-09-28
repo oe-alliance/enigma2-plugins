@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 WerbeZapper plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2012-09-27 21:29+0100\n"
 "PO-Revision-Date: 2009-02-08 12:03+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
@@ -23,22 +23,71 @@ msgstr "Özelleştir"
 msgid "How many minutes to wait until zapping back?"
 msgstr "Kanal değiştirmek için kaç dakika beklensin?"
 
-msgid ""
-"Timer already running.\n"
-"Stop it?"
+#, python-format
+msgid "Monitoring: %s (%d:%02d Min)"
 msgstr ""
-"Zamanlayıcı şu an çalışıyor.\n"
-"Durdurulsun mu?"
+
+msgid "Rezap"
+msgstr ""
+
+msgid "Start / Stop monitoring instantly"
+msgstr ""
+
+msgid "Start monitoring"
+msgstr ""
+
+msgid "Stop monitoring"
+msgstr ""
+
+msgid "Stop timer"
+msgstr ""
+
+#, python-format
+msgid ""
+"WerbeZapper\n"
+"Monitoring ends\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"WerbeZapper\n"
+"Monitoring started\n"
+"%s"
+msgstr ""
+
+msgid ""
+"WerbeZapper\n"
+"Monitoring started unlimited\n"
+"Has to be deactivated manually"
+msgstr ""
 
 msgid "When to Zap back?"
 msgstr "Kanal ne zaman değiştirilsin?"
 
+msgid "Zapping back"
+msgstr ""
+
 #, python-format
-msgid "Zapping back in %d Minutes"
-msgstr "%d dakika içinde kanal değiştirilecek"
+msgid "Zapping back in %d Minute(s)"
+msgstr ""
+
+#, python-format
+msgid "Zapping back in %d:%02d Min"
+msgstr ""
 
 msgid "minute"
 msgstr ""
 
 msgid "minutes"
 msgstr "dakika"
+
+#~ msgid ""
+#~ "Timer already running.\n"
+#~ "Stop it?"
+#~ msgstr ""
+#~ "Zamanlayıcı şu an çalışıyor.\n"
+#~ "Durdurulsun mu?"
+
+#~ msgid "Zapping back in %d Minutes"
+#~ msgstr "%d dakika içinde kanal değiştirilecek"

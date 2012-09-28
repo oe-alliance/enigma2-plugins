@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-14 08:42+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-08-25 15:18+0200\n"
 "Last-Translator: WadimArt <WadimArt@GiClub.tv>\n"
 "Language-Team: none\n"
@@ -27,6 +27,7 @@ msgstr "Выбор канала"
 msgid "Choose the encode type for search, helpful for foreign languages."
 msgstr "Выберите тип кодирования для поиска, понятный для иностранных языков."
 
+#, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Не удалось прочитать список АвтоТаймеров: %s"
 
@@ -108,8 +109,10 @@ msgstr "Показывать в меню плагинов"
 msgid "Show search history"
 msgstr "Показать историю поиска"
 
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
 msgstr "поиск EPG"
 
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 msgid "search EPG..."
 msgstr "поиск в EPG..."

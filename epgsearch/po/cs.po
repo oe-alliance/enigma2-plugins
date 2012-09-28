@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-05-17 14:10+0000\n"
 "Last-Translator: jerry\n"
 "Language-Team: jerry\n"
@@ -17,132 +17,106 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: ../src/EPGSearch.py:112
 msgid "Add AutoTimer"
 msgstr "+ AutoČasovač"
 
-#: ../src/EPGSearch.py:127
 msgid "Add timer"
 msgstr "+ Časovač"
 
-#: ../src/EPGSearch.py:361 ../src/EPGSearchSetup.py:64
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ../src/EPGSearch.py:399
 msgid "Channel Selection"
 msgstr "Výběr stanice"
 
-#: ../src/EPGSearch.py:254
+msgid "Choose the encode type for search, helpful for foreign languages."
+msgstr ""
+
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Nelze načíst seznam AutoČasovače:% s"
 
-#: ../src/EPGSearch.py:171
 msgid "EPG Search"
 msgstr "Hledat v EPG"
 
-#: ../src/EPGSearchSetup.py:102 ../src/plugin.py:39
 msgid "EPGSearch"
 msgstr ""
 
-#: ../src/EPGSearchSetup.py:38 ../src/EPGSearchSetup.py:81
 msgid "EPGSearch Setup"
 msgstr "Nastavení EPGSearch"
 
-#: ../src/EPGSearchSetup.py:44
 msgid ""
 "Enable this to be able to access the EPG-Search from within the plugin "
 "browser."
-msgstr ""
-"Povolit = budete mít přístup k Hledání v EPG na v Prohlížeči "
-"pluginů."
+msgstr "Povolit = budete mít přístup k Hledání v EPG na v Prohlížeči pluginů."
 
-#: ../src/EPGSearch.py:195
 msgid "Enter text to search for"
 msgstr "Vložte text k vyhledání"
 
-#: ../src/EPGSearchSetup.py:45
 msgid ""
 "How many entries to keep in the search history at most. 0 disables history "
 "entirely!"
 msgstr ""
 "Kolik položek udržovat v historii vyhledávání. 0 kompletně historii vypne!"
 
-#: ../src/EPGSearch.py:126
 msgid "IMDb Search"
 msgstr "Prohledat IMDb"
 
-#: ../src/EPGSearch.py:207
 msgid "Import from AutoTimer"
 msgstr "Import z AutoČasovače"
 
-#: ../src/EPGSearch.py:201
 msgid "Import from EPG"
 msgstr "Import z EPG"
 
-#: ../src/EPGSearch.py:200
 msgid "Import from Timer"
 msgstr "Import z časovače"
 
-#: ../src/EPGSearchSetup.py:45
 msgid "Length of History"
 msgstr "Délka historie"
 
-#: ../src/EPGSearch.py:111
 msgid "New Search"
 msgstr "Nové hledání"
 
-#: ../src/EPGSearch.py:308
 msgid "No history"
 msgstr "Bez historie"
 
-#: ../src/EPGSearch.py:362 ../src/EPGSearchSetup.py:63
 msgid "OK"
 msgstr ""
 
-#: ../src/EPGSearch.py:211
 msgid "Open selected in IMDb"
 msgstr "Otevřít v IMDb"
 
-#: ../src/EPGSearch.py:208
 msgid "Save search as AutoTimer"
 msgstr "Uložit jako AutoČasovač"
 
-#: ../src/EPGSearch.py:427
 msgid "Search"
 msgstr "Hledat"
 
-#: ../src/plugin.py:39
 msgid "Search EPG"
 msgstr "Hledat v EPG"
 
-#: ../src/EPGSearch.py:376
+msgid "Search Encoding"
+msgstr ""
+
 msgid "Select a timer to search"
 msgstr "Vyberte časovač pro vyhledávání"
 
-#: ../src/EPGSearch.py:265 ../src/EPGSearch.py:302
 msgid "Select text to search for"
 msgstr "Vyberte text, který chcete hledat"
 
-#: ../src/EPGSearch.py:213
 msgid "Setup"
 msgstr "Nastavit"
 
-#: ../src/EPGSearchSetup.py:44
 msgid "Show in plugin browser"
 msgstr "Zobrazit v Prohlížeči pluginů"
 
-#: ../src/EPGSearch.py:202
 msgid "Show search history"
 msgstr "Historie hledání"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
-#: ../src/plugin.py:52
 msgid "search EPG"
 msgstr "hledat v EPG"
 
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
-#: ../src/plugin.py:45
 msgid "search EPG..."
 msgstr "hledat v EPG..."

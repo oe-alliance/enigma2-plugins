@@ -5,10 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Movie Tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-09 14:29+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2011-09-09 14:30+0100\n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: JuSt611 <Software@Strasdas.de>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,19 +24,21 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:174
+msgid "Add Tag"
+msgstr "Tag hinzufügen"
+
+msgid "Add new Tag"
+msgstr "Neuen Tag hinzufügen"
+
+msgid "Assigned Tags"
+msgstr "Zugeordnete Tags"
+
 msgid "Can't write movietags, because no meta-file found!"
 msgstr "Keine Metadaten vorhanden, Filmtags können nicht gespeichert werden!"
 
-#: ../src/plugin.py:252
-msgid "Whitepace will be replaced by \"_\""
-msgstr "Leerstellen werden durch \"_\" ersetzt"
+msgid "Clear all Tags"
+msgstr "Alle Tags löschen"
 
-#: ../src/plugin.py:252
-msgid "Enter the new Tag"
-msgstr "Geben Sie den neuen Tag an"
-
-#: ../src/plugin.py:256
 msgid ""
 "Clear all Tags?\n"
 "\n"
@@ -47,56 +50,35 @@ msgstr ""
 "Damit werden ALLE Tags in ALLEN Aufnahmen gelöscht!\n"
 "Sind Sie sicher?"
 
-#: ../src/plugin.py:259
+msgid "Enter the new Tag"
+msgstr "Geben Sie den neuen Tag an"
+
 msgid "Movie Tagger"
 msgstr "Movie Tagger"
 
-#: ../src/plugin.py:259
-msgid "Ver."
-msgstr "Ver."
-
-#: ../src/plugin.py:260
-msgid "Assigned Tags"
-msgstr "Zugeordnete Tags"
-
-#: ../src/plugin.py:261
-msgid "Specified Tags"
-msgstr "Vorhandene Tags"
-
-#: ../src/plugin.py:262
-msgid "Used Tag"
-msgstr "Verwendeter Tag"
-
-#: ../src/plugin.py:263
-msgid "User-specific Tag"
-msgstr "Benutzereigener Tag"
-
-#: ../src/plugin.py:264
-msgid "Predefined Tag"
-msgstr "Vorgegebener Tag"
-
-#: ../src/plugin.py:268
-msgid "Remove Tag"
-msgstr "Tag entfernen"
-
-#: ../src/plugin.py:269
-msgid "Add new Tag"
-msgstr "Neuen Tag hinzufügen"
-
-#: ../src/plugin.py:271
-#: ../src/plugin.py:279
-msgid "Toggle List"
-msgstr "Liste wechseln"
-
-#: ../src/plugin.py:276
-msgid "Add Tag"
-msgstr "Tag hinzufügen"
-
-#: ../src/plugin.py:278
-msgid "Clear all Tags"
-msgstr "Alle Tags löschen"
-
-#: ../src/plugin.py:315
 msgid "Movie Tagger..."
 msgstr "Movie Tagger..."
 
+msgid "Predefined Tag"
+msgstr "Vorgegebener Tag"
+
+msgid "Remove Tag"
+msgstr "Tag entfernen"
+
+msgid "Specified Tags"
+msgstr "Vorhandene Tags"
+
+msgid "Toggle List"
+msgstr "Liste wechseln"
+
+msgid "Used Tag"
+msgstr "Verwendeter Tag"
+
+msgid "User-specific Tag"
+msgstr "Benutzereigener Tag"
+
+msgid "Ver."
+msgstr "Ver."
+
+msgid "Whitepace will be replaced by \"_\""
+msgstr "Leerstellen werden durch \"_\" ersetzt"

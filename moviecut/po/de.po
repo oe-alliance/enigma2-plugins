@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moviecut\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-15 16:04+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-02-15 21:20+0100\n"
 "Last-Translator: James Blond <lblond@aol.com>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,161 +18,9 @@ msgstr ""
 "X-Poedit-SearchPath-0: /200\n"
 "X-Poedit-SearchPath-1: /200/bin\n"
 
-#: /200/plugin.py:23
-msgid "Execute cuts..."
-msgstr "Schnitt ausführen..."
-
-#: /200/plugin.py:37
-msgid "Don't cut"
-msgstr "nicht schneiden"
-
-#: /200/plugin.py:38
-msgid "Replace the original movie with the cut movie"
-msgstr "Ersetzte Original Film durch geschnittenen Film"
-
-#: /200/plugin.py:39
-msgid "Place the cut movie in a new file ending with \" cut\""
-msgstr "Anlegen einer neuen Filmdatei mit der Endung \"cut\""
-
-#: /200/plugin.py:40
 msgid "Advanced cut specification..."
 msgstr "Erweiterte Schnitteinstellungen"
 
-#: /200/plugin.py:42
-#, python-format
-msgid "How would you like to cut \"%s\"?"
-msgstr "Wie möchtest Du schneiden \"%s\"?"
-
-#: /200/plugin.py:86
-msgid "OK"
-msgstr "OK"
-
-#: /200/plugin.py:87
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: /200/plugin.py:95
-msgid "No"
-msgstr "Nein"
-
-#: /200/plugin.py:95
-msgid "Yes"
-msgstr "Ja"
-
-#: /200/plugin.py:103
-msgid "Cutlist"
-msgstr "Schnittliste"
-
-#: /200/plugin.py:103
-msgid "Manual specification"
-msgstr "manuelle Einstellungen"
-
-#: /200/plugin.py:117
-msgid "Replace original:"
-msgstr "Ersetze Original:"
-
-#: /200/plugin.py:118
-msgid "New filename:"
-msgstr "Neuer Dateiname:"
-
-#: /200/plugin.py:119
-msgid "New title:"
-msgstr "Neuer Titel:"
-
-#: /200/plugin.py:120
-msgid "New description:"
-msgstr "Neue Beschreibung:"
-
-#: /200/plugin.py:121
-msgid "New location:"
-msgstr "Neues Verzeichnis:"
-
-#: /200/plugin.py:122
-msgid "Cut source:"
-msgstr "Schnitt Quelle:"
-
-#: /200/plugin.py:123
-msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
-msgstr "Schnitte (an IN OUT IN OUT ... Reihenfolge in Stunde:Minute:Sekunde)"
-
-#: /200/plugin.py:130
-msgid "Cut Parameter Input"
-msgstr "Schnitt Parameter Eingabe"
-
-#: /200/plugin.py:178
-msgid "Choose target folder"
-msgstr "Wähle Zielverzeichnis"
-
-#: /200/plugin.py:245
-#, python-format
-msgid "The movie \"%s\" is successfully cut"
-msgstr "Der Film \"%s\" wurde erfolgreich geschnitten"
-
-#: /200/plugin.py:246
-#: /200/plugin.py:247
-#: /200/plugin.py:248
-#: /200/plugin.py:249
-#: /200/plugin.py:250
-#: /200/plugin.py:251
-#: /200/plugin.py:252
-#: /200/plugin.py:253
-#: /200/plugin.py:254
-#: /200/plugin.py:255
-#, python-format
-msgid "Cutting failed for movie \"%s\""
-msgstr "Schnitt fehlgeschlagen für Film \"%s\""
-
-#: /200/plugin.py:246
-msgid "Bad arguments"
-msgstr "ungültige Parameter"
-
-#: /200/plugin.py:247
-msgid "Couldn't open input .ts file"
-msgstr "konnte Eingangs .ts Datei nicht öffnen"
-
-#: /200/plugin.py:248
-msgid "Couldn't open input .cuts file"
-msgstr "konnte Eingangs .cuts Datei nicht öffnen"
-
-#: /200/plugin.py:249
-msgid "Couldn't open input .ap file"
-msgstr "konnte Eingangs .ap Datei nicht öffnen"
-
-#: /200/plugin.py:250
-msgid "Couldn't open output .ts file"
-msgstr "konnte Ausgabe .ts Datei nicht öffnen"
-
-#: /200/plugin.py:251
-msgid "Couldn't open output .cuts file"
-msgstr "konnte Ausgabe .cuts Datei nicht öffnen"
-
-#: /200/plugin.py:252
-msgid "Couldn't open output .ap file"
-msgstr "konnte Ausgabe .ap Datei nicht öffnen"
-
-#: /200/plugin.py:253
-msgid "Empty .ap file"
-msgstr "Leere .ap Datei"
-
-#: /200/plugin.py:254
-msgid "No cuts specified"
-msgstr "Keine Schnitte angegeben"
-
-#: /200/plugin.py:255
-msgid "Read/write error (disk full?)"
-msgstr "lese/schreib Fehler (Festplatte voll?)"
-
-#: /200/plugin.py:256
-#, python-format
-msgid "Cutting was aborted for movie \"%s\""
-msgstr "Schnitt wurde abgebrochen für den Film \"%s\""
-
-#: /200/plugin.py:275
-#, python-format
-msgid "The movie \"%s\" is cut in the background."
-msgstr "Der Film \"%s\" wird im Hintergrund geschnitten."
-
-#: /200/plugin.py:277
 #, python-format
 msgid ""
 "Another movie is currently cut.\n"
@@ -180,3 +29,109 @@ msgstr ""
 "Ein anderer Film wird gerade geschnitten.\n"
 "Der Film \"%s\" wird danach im Hintergrund geschnitten."
 
+msgid "Bad arguments"
+msgstr "ungültige Parameter"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Choose target folder"
+msgstr "Wähle Zielverzeichnis"
+
+msgid "Couldn't open input .ap file"
+msgstr "konnte Eingangs .ap Datei nicht öffnen"
+
+msgid "Couldn't open input .cuts file"
+msgstr "konnte Eingangs .cuts Datei nicht öffnen"
+
+msgid "Couldn't open input .ts file"
+msgstr "konnte Eingangs .ts Datei nicht öffnen"
+
+msgid "Couldn't open output .ap file"
+msgstr "konnte Ausgabe .ap Datei nicht öffnen"
+
+msgid "Couldn't open output .cuts file"
+msgstr "konnte Ausgabe .cuts Datei nicht öffnen"
+
+msgid "Couldn't open output .ts file"
+msgstr "konnte Ausgabe .ts Datei nicht öffnen"
+
+msgid "Cut Parameter Input"
+msgstr "Schnitt Parameter Eingabe"
+
+msgid "Cut source:"
+msgstr "Schnitt Quelle:"
+
+msgid "Cutlist"
+msgstr "Schnittliste"
+
+msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
+msgstr "Schnitte (an IN OUT IN OUT ... Reihenfolge in Stunde:Minute:Sekunde)"
+
+#, python-format
+msgid "Cutting failed for movie \"%s\""
+msgstr "Schnitt fehlgeschlagen für Film \"%s\""
+
+#, python-format
+msgid "Cutting was aborted for movie \"%s\""
+msgstr "Schnitt wurde abgebrochen für den Film \"%s\""
+
+msgid "Don't cut"
+msgstr "nicht schneiden"
+
+msgid "Empty .ap file"
+msgstr "Leere .ap Datei"
+
+msgid "Execute cuts..."
+msgstr "Schnitt ausführen..."
+
+#, python-format
+msgid "How would you like to cut \"%s\"?"
+msgstr "Wie möchtest Du schneiden \"%s\"?"
+
+msgid "Manual specification"
+msgstr "manuelle Einstellungen"
+
+msgid "New description:"
+msgstr "Neue Beschreibung:"
+
+msgid "New filename:"
+msgstr "Neuer Dateiname:"
+
+msgid "New location:"
+msgstr "Neues Verzeichnis:"
+
+msgid "New title:"
+msgstr "Neuer Titel:"
+
+msgid "No"
+msgstr "Nein"
+
+msgid "No cuts specified"
+msgstr "Keine Schnitte angegeben"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Place the cut movie in a new file ending with \" cut\""
+msgstr "Anlegen einer neuen Filmdatei mit der Endung \"cut\""
+
+msgid "Read/write error (disk full?)"
+msgstr "lese/schreib Fehler (Festplatte voll?)"
+
+msgid "Replace original:"
+msgstr "Ersetze Original:"
+
+msgid "Replace the original movie with the cut movie"
+msgstr "Ersetzte Original Film durch geschnittenen Film"
+
+#, python-format
+msgid "The movie \"%s\" is cut in the background."
+msgstr "Der Film \"%s\" wird im Hintergrund geschnitten."
+
+#, python-format
+msgid "The movie \"%s\" is successfully cut"
+msgstr "Der Film \"%s\" wurde erfolgreich geschnitten"
+
+msgid "Yes"
+msgstr "Ja"

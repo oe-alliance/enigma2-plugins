@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - moviecut\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-29 22:46+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-02-29 22:46+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -19,161 +19,9 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/moviecut\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/moviecut\n"
 
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:24
-msgid "Execute cuts..."
-msgstr "Eseguire tagli"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:38
-msgid "Don't cut"
-msgstr "Non tagliare"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:39
-msgid "Replace the original movie with the cut movie"
-msgstr "Sostituire la registrazione originale con quella tagliata"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:40
-msgid "Place the cut movie in a new file ending with \" cut\""
-msgstr "Salvare la registrazione tagliata in nuovo file con estensione \"cut\""
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:41
 msgid "Advanced cut specification..."
 msgstr "Specifiche di taglio avanzate..."
 
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:43
-#, python-format
-msgid "How would you like to cut \"%s\"?"
-msgstr "Come tagliare \"%s\"?"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:87
-msgid "OK"
-msgstr "Ok"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:88
-msgid "Cancel"
-msgstr "Annull."
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:96
-msgid "No"
-msgstr "No"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:96
-msgid "Yes"
-msgstr "Sì"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:104
-msgid "Cutlist"
-msgstr "Elenco tagli"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:104
-msgid "Manual specification"
-msgstr "Specifiche manuali"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:118
-msgid "Replace original:"
-msgstr "Sostituire l'originale:"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:119
-msgid "New filename:"
-msgstr "Nuovo nome file:"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:120
-msgid "New title:"
-msgstr "Nuovo titolo:"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:121
-msgid "New description:"
-msgstr "Nuova descrizione:"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:122
-msgid "New location:"
-msgstr "Nuova destinazione:"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:123
-msgid "Cut source:"
-msgstr "Sorgente tagli:"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:124
-msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
-msgstr "Tagli (una sequenza di IN OUT IN OUT ... in ore:min:sec)"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:131
-msgid "Cut Parameter Input"
-msgstr "Inserimento parametri di taglio"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:179
-msgid "Choose target folder"
-msgstr "Cartella destinazione"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:246
-#, python-format
-msgid "The movie \"%s\" is successfully cut"
-msgstr "Taglio della registrazione \"%s terminato con successo"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:247
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:248
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:249
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:250
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:251
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:252
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:253
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:254
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:255
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:256
-#, python-format
-msgid "Cutting failed for movie \"%s\""
-msgstr "Taglio della registrazione \"%s\" fallito!"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:247
-msgid "Bad arguments"
-msgstr "Argomento errato!"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:248
-msgid "Couldn't open input .ts file"
-msgstr "Impossibile aprire file .ts di input!"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:249
-msgid "Couldn't open input .cuts file"
-msgstr "Impossibile aprire file .cuts di input!"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:250
-msgid "Couldn't open input .ap file"
-msgstr "Impossibile aprire file .ap di input!"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:251
-msgid "Couldn't open output .ts file"
-msgstr "Impossibile aprire file .ts di output!"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:252
-msgid "Couldn't open output .cuts file"
-msgstr "Impossibile aprire file .cuts di output!"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:253
-msgid "Couldn't open output .ap file"
-msgstr "Impossibile aprire file .ap di output!"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:254
-msgid "Empty .ap file"
-msgstr "File .ap vuoto!"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:255
-msgid "No cuts specified"
-msgstr "Nessun taglio specificato!"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:256
-msgid "Read/write error (disk full?)"
-msgstr "Errore Lettura/Scrittura! (disco pieno?)"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:257
-#, python-format
-msgid "Cutting was aborted for movie \"%s\""
-msgstr "Taglio della registrazione \"%s\" annullato"
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:276
-#, python-format
-msgid "The movie \"%s\" is cut in the background."
-msgstr "Il taglio di \"%s\" verrà eseguito in background."
-
-#: .../enigma2-plugins/moviecut/src_py/plugin.py:278
 #, python-format
 msgid ""
 "Another movie is currently cut.\n"
@@ -182,3 +30,109 @@ msgstr ""
 "E' già in corso il taglio di una registrazione.\n"
 "Il taglio di \"%s\" sarà effettuato in background successivamente."
 
+msgid "Bad arguments"
+msgstr "Argomento errato!"
+
+msgid "Cancel"
+msgstr "Annull."
+
+msgid "Choose target folder"
+msgstr "Cartella destinazione"
+
+msgid "Couldn't open input .ap file"
+msgstr "Impossibile aprire file .ap di input!"
+
+msgid "Couldn't open input .cuts file"
+msgstr "Impossibile aprire file .cuts di input!"
+
+msgid "Couldn't open input .ts file"
+msgstr "Impossibile aprire file .ts di input!"
+
+msgid "Couldn't open output .ap file"
+msgstr "Impossibile aprire file .ap di output!"
+
+msgid "Couldn't open output .cuts file"
+msgstr "Impossibile aprire file .cuts di output!"
+
+msgid "Couldn't open output .ts file"
+msgstr "Impossibile aprire file .ts di output!"
+
+msgid "Cut Parameter Input"
+msgstr "Inserimento parametri di taglio"
+
+msgid "Cut source:"
+msgstr "Sorgente tagli:"
+
+msgid "Cutlist"
+msgstr "Elenco tagli"
+
+msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
+msgstr "Tagli (una sequenza di IN OUT IN OUT ... in ore:min:sec)"
+
+#, python-format
+msgid "Cutting failed for movie \"%s\""
+msgstr "Taglio della registrazione \"%s\" fallito!"
+
+#, python-format
+msgid "Cutting was aborted for movie \"%s\""
+msgstr "Taglio della registrazione \"%s\" annullato"
+
+msgid "Don't cut"
+msgstr "Non tagliare"
+
+msgid "Empty .ap file"
+msgstr "File .ap vuoto!"
+
+msgid "Execute cuts..."
+msgstr "Eseguire tagli"
+
+#, python-format
+msgid "How would you like to cut \"%s\"?"
+msgstr "Come tagliare \"%s\"?"
+
+msgid "Manual specification"
+msgstr "Specifiche manuali"
+
+msgid "New description:"
+msgstr "Nuova descrizione:"
+
+msgid "New filename:"
+msgstr "Nuovo nome file:"
+
+msgid "New location:"
+msgstr "Nuova destinazione:"
+
+msgid "New title:"
+msgstr "Nuovo titolo:"
+
+msgid "No"
+msgstr "No"
+
+msgid "No cuts specified"
+msgstr "Nessun taglio specificato!"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Place the cut movie in a new file ending with \" cut\""
+msgstr "Salvare la registrazione tagliata in nuovo file con estensione \"cut\""
+
+msgid "Read/write error (disk full?)"
+msgstr "Errore Lettura/Scrittura! (disco pieno?)"
+
+msgid "Replace original:"
+msgstr "Sostituire l'originale:"
+
+msgid "Replace the original movie with the cut movie"
+msgstr "Sostituire la registrazione originale con quella tagliata"
+
+#, python-format
+msgid "The movie \"%s\" is cut in the background."
+msgstr "Il taglio di \"%s\" verrà eseguito in background."
+
+#, python-format
+msgid "The movie \"%s\" is successfully cut"
+msgstr "Taglio della registrazione \"%s terminato con successo"
+
+msgid "Yes"
+msgstr "Sì"

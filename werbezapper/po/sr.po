@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - werbezapper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2012-09-27 21:29+0100\n"
 "PO-Revision-Date: 2009-09-27 18:18+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -25,22 +25,71 @@ msgstr "Personalizovan"
 msgid "How many minutes to wait until zapping back?"
 msgstr "Koliko vremena čekati pre prebacivanja nazad?"
 
-msgid ""
-"Timer already running.\n"
-"Stop it?"
+#, python-format
+msgid "Monitoring: %s (%d:%02d Min)"
 msgstr ""
-"Tajmer još radi.\n"
-"Zaustaviti?"
+
+msgid "Rezap"
+msgstr ""
+
+msgid "Start / Stop monitoring instantly"
+msgstr ""
+
+msgid "Start monitoring"
+msgstr ""
+
+msgid "Stop monitoring"
+msgstr ""
+
+msgid "Stop timer"
+msgstr ""
+
+#, python-format
+msgid ""
+"WerbeZapper\n"
+"Monitoring ends\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"WerbeZapper\n"
+"Monitoring started\n"
+"%s"
+msgstr ""
+
+msgid ""
+"WerbeZapper\n"
+"Monitoring started unlimited\n"
+"Has to be deactivated manually"
+msgstr ""
 
 msgid "When to Zap back?"
 msgstr "Kada prebaciti nazad?"
 
+msgid "Zapping back"
+msgstr ""
+
 #, python-format
-msgid "Zapping back in %d Minutes"
-msgstr "Prebacivanje nazad %d minuta"
+msgid "Zapping back in %d Minute(s)"
+msgstr ""
+
+#, python-format
+msgid "Zapping back in %d:%02d Min"
+msgstr ""
 
 msgid "minute"
 msgstr "Minuta"
 
 msgid "minutes"
 msgstr "Minuti"
+
+#~ msgid ""
+#~ "Timer already running.\n"
+#~ "Stop it?"
+#~ msgstr ""
+#~ "Tajmer još radi.\n"
+#~ "Zaustaviti?"
+
+#~ msgid "Zapping back in %d Minutes"
+#~ msgstr "Prebacivanje nazad %d minuta"

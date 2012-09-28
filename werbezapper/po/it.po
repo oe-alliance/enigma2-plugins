@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - werbezapper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 22:59+0100\n"
+"POT-Creation-Date: 2012-09-27 21:29+0100\n"
 "PO-Revision-Date: 2012-05-06 23:05+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -19,81 +19,34 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/werbezapper\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/werbezapper\n"
 
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:53
+msgid "Automatically zaps back to current service after given Time"
+msgstr "Tornare automaticamente al canale corrente dopo intervallo prefissato "
+
+msgid "Custom"
+msgstr "Personalizzato"
+
+msgid "How many minutes to wait until zapping back?"
+msgstr "Quanti minuti attendere prima dello Zap indietro?"
+
 #, python-format
 msgid "Monitoring: %s (%d:%02d Min)"
 msgstr "Monitor in corso: %s (%d:%02d Min)"
 
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:58
-#, python-format
-msgid "Zapping back in %d:%02d Min"
-msgstr "Ritorno tra %d:%02d min"
-
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:107
-msgid "When to Zap back?"
-msgstr "Quando eseguire lo Zap?"
-
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:113
-msgid "Custom"
-msgstr "Personalizzato"
-
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:114
-msgid "minute"
-msgstr "Minuto"
-
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:115
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:116
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:117
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:118
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:119
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:120
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:121
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:122
-msgid "minutes"
-msgstr "Minuti"
-
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:132
-msgid "Stop monitoring"
-msgstr "Arrestare monitor"
-
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:134
-msgid "Start monitoring"
-msgstr "Avviare monitor"
-
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:144
-msgid "Stop timer"
-msgstr "Arrestare timer"
-
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:152
 msgid "Rezap"
 msgstr "Rizap"
 
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:183
-msgid "How many minutes to wait until zapping back?"
-msgstr "Quanti minuti attendere prima dello Zap indietro?"
+msgid "Start / Stop monitoring instantly"
+msgstr "Avviare/Arrestare il monitor immediatamente"
 
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:254
-#, python-format
-msgid ""
-"WerbeZapper\n"
-"Monitoring started\n"
-"%s"
-msgstr ""
-"WerbeZapper\n"
-"Inizio monitor\n"
-"%s"
+msgid "Start monitoring"
+msgstr "Avviare monitor"
 
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:265
-msgid ""
-"WerbeZapper\n"
-"Monitoring started unlimited\n"
-"Has to be deactivated manually"
-msgstr ""
-"WerbeZapper\n"
-"Avviato monitor illimitato\n"
-"Disattivazione manuale"
+msgid "Stop monitoring"
+msgstr "Arrestare monitor"
 
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:282
+msgid "Stop timer"
+msgstr "Arrestare timer"
+
 #, python-format
 msgid ""
 "WerbeZapper\n"
@@ -104,20 +57,41 @@ msgstr ""
 "Termine monitor\n"
 "%s"
 
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:334
+#, python-format
+msgid ""
+"WerbeZapper\n"
+"Monitoring started\n"
+"%s"
+msgstr ""
+"WerbeZapper\n"
+"Inizio monitor\n"
+"%s"
+
+msgid ""
+"WerbeZapper\n"
+"Monitoring started unlimited\n"
+"Has to be deactivated manually"
+msgstr ""
+"WerbeZapper\n"
+"Avviato monitor illimitato\n"
+"Disattivazione manuale"
+
+msgid "When to Zap back?"
+msgstr "Quando eseguire lo Zap?"
+
+msgid "Zapping back"
+msgstr "Ritorno..."
+
 #, python-format
 msgid "Zapping back in %d Minute(s)"
 msgstr "Zap indietro tra minuti: %d"
 
-#: .../enigma2-plugins/werbezapper/src/WerbeZapper.py:368
-msgid "Zapping back"
-msgstr "Ritorno..."
+#, python-format
+msgid "Zapping back in %d:%02d Min"
+msgstr "Ritorno tra %d:%02d min"
 
-#: .../enigma2-plugins/werbezapper/src/plugin.py:51
-msgid "Automatically zaps back to current service after given Time"
-msgstr "Tornare automaticamente al canale corrente dopo intervallo prefissato "
+msgid "minute"
+msgstr "Minuto"
 
-#: .../enigma2-plugins/werbezapper/src/plugin.py:58
-msgid "Start / Stop monitoring instantly"
-msgstr "Avviare/Arrestare il monitor immediatamente"
-
+msgid "minutes"
+msgstr "Minuti"

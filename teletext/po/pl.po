@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TeleText\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-29 20:14+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-07-19 12:23+0100\n"
 "Last-Translator: Sebastian <zbigzbig2@wp.pl>\n"
 "Language-Team: Andreas Laux <lespuck@web.de>\n"
@@ -16,6 +16,12 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
+
+msgid "<empty>"
+msgstr ""
+
+msgid "Add"
+msgstr ""
 
 msgid "Arabic"
 msgstr "Arabski"
@@ -32,6 +38,9 @@ msgstr "Anuluj"
 msgid "Central and Southeast Europe"
 msgstr "Centralna i Południowa Europa"
 
+msgid "Clear all"
+msgstr ""
+
 msgid "Contrast"
 msgstr "Kontrast"
 
@@ -43,6 +52,15 @@ msgstr "Debuguj"
 
 msgid "Default"
 msgstr "Domyślnie"
+
+msgid "Delete"
+msgstr ""
+
+msgid "Delete all favorites?"
+msgstr ""
+
+msgid "Delete favorite?"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Wyłączony"
@@ -59,17 +77,29 @@ msgstr "Wyświetl pierwszy i ostatni rząd"
 msgid "Eastern Europe"
 msgstr "Wschodnia Europa"
 
-msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
-msgstr "Wpisz wartości (lewo, góra, prawo, dół) lub wciśnij TEXT aby przesunąć lub zmienić rozmiar teletekstu graficznie"
+msgid "Edit"
+msgstr ""
+
+#, python-format
+msgid "Enter text for page %s"
+msgstr ""
+
+msgid ""
+"Enter values (left, top, right, bottom) or press TEXT to move and resize the "
+"teletext graphically."
+msgstr ""
+"Wpisz wartości (lewo, góra, prawo, dół) lub wciśnij TEXT aby przesunąć lub "
+"zmienić rozmiar teletekstu graficznie"
 
 msgid "Hebrew / Arabic"
 msgstr "Hebrajski / Arabski"
 
-msgid "If caching is disabled, each teletext page will searched when you entered its number."
-msgstr "Gdy cache jest wyłączony, każda strona będzie otwierana gdy wpiszesz jej numer"
-
-msgid "Message"
-msgstr "Wiadomość"
+msgid ""
+"If caching is disabled, each teletext page will searched when you entered "
+"its number."
+msgstr ""
+"Gdy cache jest wyłączony, każda strona będzie otwierana gdy wpiszesz jej "
+"numer"
 
 msgid "No teletext available."
 msgstr "Brak teletekstu"
@@ -91,6 +121,9 @@ msgstr "Filtr skalowania"
 
 msgid "Scale filter zoom"
 msgstr "Powiększony filtr skalowania"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select brightness."
 msgstr "Wybierz jasność"
@@ -116,11 +149,11 @@ msgstr "Wybierz ulubiony tryb skalowania"
 msgid "Select your region to use the proper font."
 msgstr "Wybierz swój region aby użyć odpowiedniej czcionki"
 
-msgid "Show message if no teletext available or exit silently."
-msgstr "Pokaż wiadomość gdy brak teletekstu lub wyjdź po cichu"
-
 msgid "Splitting mode"
 msgstr "Tryb podziału"
+
+msgid "TeleText favorites"
+msgstr ""
 
 msgid "TeleText settings"
 msgstr "Ustawienia teletekstu"
@@ -143,26 +176,11 @@ msgstr "Zachodnia i Centralna Europa"
 msgid "anisotropic"
 msgstr "Anizotropowy"
 
-msgid "anti flutter"
-msgstr "Bez migotania"
-
-msgid "anti flutter blurry"
-msgstr "Bez migotania rozmyte"
-
-msgid "anti flutter sharp"
-msgstr "Bez migotania ostre"
-
 msgid "bilinear"
 msgstr "Bilinearny"
 
 msgid "blue teletext link"
 msgstr "Niebieski link teletekstu"
-
-msgid "blurry"
-msgstr "Rozmyte"
-
-msgid "decrease height"
-msgstr "Zmniejsz wysokość"
 
 msgid "enter page number"
 msgstr "Wpisz numer strony"
@@ -175,6 +193,9 @@ msgstr "Wpisz numer strony / wróć"
 
 msgid "exit"
 msgstr "Wyjdź"
+
+msgid "favorites / decrease height"
+msgstr ""
 
 msgid "green teletext link"
 msgstr "Zielony link teletekstu"
@@ -224,8 +245,8 @@ msgstr "Teletekst w obrazie"
 msgid "teletext settings"
 msgstr "Ustawienia teletekstu"
 
-msgid "toggle flof"
-msgstr "Przełącz flof"
+msgid "toggle flof/top"
+msgstr ""
 
 msgid "toggle info"
 msgstr "Przełącz info"
@@ -239,3 +260,26 @@ msgstr "Żółty link teletekstu"
 msgid "zoom / increase height"
 msgstr "Powiększ / zwiększ wysokość"
 
+#~ msgid "Message"
+#~ msgstr "Wiadomość"
+
+#~ msgid "Show message if no teletext available or exit silently."
+#~ msgstr "Pokaż wiadomość gdy brak teletekstu lub wyjdź po cichu"
+
+#~ msgid "anti flutter"
+#~ msgstr "Bez migotania"
+
+#~ msgid "anti flutter blurry"
+#~ msgstr "Bez migotania rozmyte"
+
+#~ msgid "anti flutter sharp"
+#~ msgstr "Bez migotania ostre"
+
+#~ msgid "blurry"
+#~ msgstr "Rozmyte"
+
+#~ msgid "decrease height"
+#~ msgstr "Zmniejsz wysokość"
+
+#~ msgid "toggle flof"
+#~ msgstr "Przełącz flof"

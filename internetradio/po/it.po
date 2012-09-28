@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - 3dsettings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-05 11:08+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-05-05 11:50+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -20,68 +20,100 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/3dsettings\n"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioInformationScreen.py:69
+#, python-format
+msgid "%s ..."
+msgstr "%s ..."
+
+#, python-format
+msgid "%s..."
+msgstr "%s..."
+
+msgid "1 minutes"
+msgstr "1 minuti"
+
+msgid "3 minutes"
+msgstr "3 minuti"
+
+msgid "30 seconds"
+msgstr "30 secondi"
+
+msgid "Add current playing stream to favorite"
+msgstr "Aggiungere lo stream in riproduzione ai preferiti"
+
+msgid "Add current selected genre to favorite"
+msgstr "Aggiungere il genere selezionato ai preferiti"
+
+msgid "Add current selected station to favorite"
+msgstr "Aggiungere la stazione selezionata ai preferiti"
+
+msgid "Add sequence number to output file"
+msgstr "Aggiungere un numero sequenziale al file di output"
+
+msgid "All Countries"
+msgstr "Tutti i Paesi"
+
+msgid "All Genres"
+msgstr "Tutti i generi"
+
+msgid "Blank"
+msgstr "Vuoto"
+
+msgid "Cancel"
+msgstr "Annull."
+
 msgid "Close"
 msgstr "Chiudere"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioInformationScreen.py:70
-msgid "Streaming Information"
-msgstr "Informazioni streaming"
+msgid "Config"
+msgstr "Configurazione"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioList.py:48
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:312
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:676
-msgid "Genres"
-msgstr "Generi"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioList.py:50
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:312
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:570
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:605
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:678
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:783
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:855
-#: .../enigma2-plugins/internetradio/src/plugin.py:37
 msgid "Countries"
 msgstr "Paesi"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioList.py:51
-msgid "Filter:"
-msgstr "Filtro:"
+msgid "Create a directory for each stream"
+msgstr "Creare una directory per ogni stream"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioOledDisplay.py:123
-msgid "Internet Radio"
-msgstr "Internet Radio"
+msgid "Do you really want to stop the recording?"
+msgstr "Arrestare la registrazione?"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:251
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:504
-msgid "Record"
-msgstr "Registrare"
+msgid "Enter in minutes (0 means unlimited)"
+msgstr "In minuti (0 >> illimitata)"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:253
-msgid "Stations"
-msgstr "Stazioni"
+msgid "Enter new name for favorite item"
+msgstr "Inserire il nuovo nome per il preferito"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:254
+msgid "Enter text to search for"
+msgstr "Inserire il testo da cercare"
+
+msgid "Favorite list"
+msgstr "Elenco preferiti"
+
 msgid "Favorites"
 msgstr "Preferiti"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:339
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:533
-msgid "Stop record"
-msgstr "Stop reg."
+msgid "Filter:"
+msgstr "Filtro:"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:341
-msgid "Recording stream station"
-msgstr "Registrazione stream in corso"
+msgid "Fullscreen"
+msgstr "A tutto schermo"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:405
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:696
+msgid "Fullscreen Layout"
+msgstr "Visualizzazione a schermo intero"
+
+msgid "Fullscreen auto activation"
+msgstr "Attivazione a tutto schermo automatica"
+
+msgid "Genres"
+msgstr "Generi"
+
 #, python-format
-msgid "Getting streaming data from %s"
-msgstr "Download dati stream da %s"
+msgid "Getting %s"
+msgstr "Caricamento %s"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:474
+#, python-format
+msgid "Getting InternetRadio %s list..."
+msgstr "Caricamento elenco InternetRadio %s in corso..."
+
 #, python-format
 msgid ""
 "Getting streaming data from\n"
@@ -90,241 +122,118 @@ msgstr ""
 "Download dati stream da\n"
 "%s in corso"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:541
-msgid "Do you really want to stop the recording?"
-msgstr "Arrestare la registrazione?"
+#, python-format
+msgid "Getting streaming data from %s"
+msgstr "Download dati stream da %s"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:544
-msgid "Recording length"
-msgstr "Durata registrazione"
+msgid "Internet Radio"
+msgstr "Internet Radio"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:544
-msgid "Enter in minutes (0 means unlimited)"
-msgstr "In minuti (0 >> illimitata)"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:546
-msgid "Only running streamings can be recorded!"
-msgstr "E' possibile registrare solo gli stream in corso!"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:552
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:601
 #, python-format
 msgid "InternetRadio filter list (%s)"
 msgstr "Elenco filtri InternetRadio (%s)"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:571
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:641
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:782
-msgid "All Countries"
-msgstr "Tutti i Paesi"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:573
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:629
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:782
-msgid "All Genres"
-msgstr "Tutti i generi"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:581
-msgid "Favorite list"
-msgstr "Elenco preferiti"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:589
-#, python-format
-msgid "Getting InternetRadio %s list..."
-msgstr "Caricamento elenco InternetRadio %s in corso..."
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:616
-#, python-format
-msgid "%s..."
-msgstr "%s..."
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:749
-msgid "No streaming data found..."
-msgstr "Nessuno dato stream trovato..."
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:752
 #, python-format
 msgid "InternetRadio station list for filter: %s"
 msgstr "Elenco stazioni InternetRadio filtrate per: %s"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:754
-#, python-format
-msgid "Getting %s"
-msgstr "Caricamento %s"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:804
-msgid "Config"
-msgstr "Configurazione"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:804
-msgid "Search"
-msgstr "Cercare"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:806
-msgid "rename current selected favorite"
-msgstr "Rinominare il preferito selezionato"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:807
-msgid "remove current selected favorite"
-msgstr "Rimuovere il preferito selezionato"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:809
-msgid "do not play a service on startup"
-msgstr "Non riprodurre nulla all'avvio"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:811
-msgid "play current selected favorite on startup"
-msgstr "Riprodurre la stazione preferita all'avvio"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:813
-msgid "Add current selected genre to favorite"
-msgstr "Aggiungere il genere selezionato ai preferiti"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:815
-msgid "Add current selected station to favorite"
-msgstr "Aggiungere la stazione selezionata ai preferiti"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:817
-msgid "Add current playing stream to favorite"
-msgstr "Aggiungere lo stream in riproduzione ai preferiti"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:818
-msgid "Fullscreen"
-msgstr "A tutto schermo"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:820
-msgid "Show TV"
-msgstr "TV..."
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:872
-msgid "Enter new name for favorite item"
-msgstr "Inserire il nuovo nome per il preferito"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:890
-msgid "Enter text to search for"
-msgstr "Inserire il testo da cercare"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:894
 #, python-format
 msgid "InternetRadio station list for search-criteria: %s"
 msgstr "Elenco stazioni InternetRadio filtrate per criterio %s"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:896
+msgid "Invalid Location"
+msgstr "Posizione non valida"
+
+msgid "No streaming data found..."
+msgstr "Nessuno dato stream trovato..."
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "OLED only"
+msgstr "Solo OLED"
+
+msgid "Off"
+msgstr "Off"
+
+msgid "On"
+msgstr "On"
+
+msgid "Only running streamings can be recorded!"
+msgstr "E' possibile registrare solo gli stream in corso!"
+
+msgid "Record"
+msgstr "Registrare"
+
+msgid "Recording length"
+msgstr "Durata registrazione"
+
+msgid "Recording location:"
+msgstr "Destinazione registrazioni:"
+
+msgid "Recording stream station"
+msgstr "Registrazione stream in corso"
+
+msgid "Rip to single file, name is timestamped"
+msgstr "Salvare in un unico file. Nome = timestamp"
+
+msgid "Screen and OLED"
+msgstr "Schermo e OLED"
+
+msgid "Screen only"
+msgstr "Solo schermo"
+
+msgid "Search"
+msgstr "Cercare"
+
 #, python-format
 msgid "Searching InternetRadio for %s..."
 msgstr "Ricerca InternetRadio per %s in corso..."
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:913
-#, python-format
-msgid "%s ..."
-msgstr "%s ..."
+msgid "Show TV"
+msgstr "TV..."
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:964
-msgid "Title: n/a"
-msgstr "Titolo: n/a"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioScreen.py:999
-msgid "nothing playing..."
-msgstr "Nulla in riproduzione..."
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:49
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:124
-msgid "Cancel"
-msgstr "Annull."
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:50
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:125
-msgid "OK"
-msgstr "Ok"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:53
-msgid "Show in extension menu:"
-msgstr "Mostrare nel menu estensioni"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:54
-msgid "Visualization"
-msgstr "Visualizzazione"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:55
-msgid "Fullscreen Layout"
-msgstr "Visualizzazione a schermo intero"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:56
-msgid "Fullscreen auto activation"
-msgstr "Attivazione a tutto schermo automatica"
-
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:57
 msgid "Show cover arts"
 msgstr "Mostrare le copertine"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:58
-msgid "Rip to single file, name is timestamped"
-msgstr "Salvare in un unico file. Nome = timestamp"
+msgid "Show in extension menu:"
+msgstr "Mostrare nel menu estensioni"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:59
-msgid "Create a directory for each stream"
-msgstr "Creare una directory per ogni stream"
+msgid "Stations"
+msgstr "Stazioni"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:60
-msgid "Add sequence number to output file"
-msgstr "Aggiungere un numero sequenziale al file di output"
+msgid "Stop record"
+msgstr "Stop reg."
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:62
-msgid "Recording location:"
-msgstr "Destinazione registrazioni:"
+msgid "Streaming Information"
+msgstr "Informazioni streaming"
 
-#: .../enigma2-plugins/internetradio/src/InternetRadioSetup.py:159
-msgid "Invalid Location"
-msgstr "Posizione non valida"
-
-#: .../enigma2-plugins/internetradio/src/plugin.py:39
-msgid "On"
-msgstr "On"
-
-#: .../enigma2-plugins/internetradio/src/plugin.py:39
-#: .../enigma2-plugins/internetradio/src/plugin.py:41
-#: .../enigma2-plugins/internetradio/src/plugin.py:45
-msgid "Off"
-msgstr "Off"
-
-#: .../enigma2-plugins/internetradio/src/plugin.py:41
-msgid "Screen and OLED"
-msgstr "Schermo e OLED"
-
-#: .../enigma2-plugins/internetradio/src/plugin.py:41
-msgid "OLED only"
-msgstr "Solo OLED"
-
-#: .../enigma2-plugins/internetradio/src/plugin.py:41
-msgid "Screen only"
-msgstr "Solo schermo"
-
-#: .../enigma2-plugins/internetradio/src/plugin.py:45
-msgid "30 seconds"
-msgstr "30 secondi"
-
-#: .../enigma2-plugins/internetradio/src/plugin.py:45
-msgid "1 minutes"
-msgstr "1 minuti"
-
-#: .../enigma2-plugins/internetradio/src/plugin.py:45
-msgid "3 minutes"
-msgstr "3 minuti"
-
-#: .../enigma2-plugins/internetradio/src/plugin.py:46
-msgid "Visualization and Text"
-msgstr "Visualizzazione e testo"
-
-#: .../enigma2-plugins/internetradio/src/plugin.py:46
 msgid "Text only"
 msgstr "Solo testo"
 
-#: .../enigma2-plugins/internetradio/src/plugin.py:46
-msgid "Blank"
-msgstr "Vuoto"
+msgid "Title: n/a"
+msgstr "Titolo: n/a"
 
-#: .../enigma2-plugins/internetradio/src/plugin.py:73
-#: .../enigma2-plugins/internetradio/src/plugin.py:75
+msgid "Visualization"
+msgstr "Visualizzazione"
+
+msgid "Visualization and Text"
+msgstr "Visualizzazione e testo"
+
+msgid "do not play a service on startup"
+msgstr "Non riprodurre nulla all'avvio"
+
 msgid "listen to internet-radio"
 msgstr "Ascoltare radio su internet"
 
+msgid "nothing playing..."
+msgstr "Nulla in riproduzione..."
+
+msgid "play current selected favorite on startup"
+msgstr "Riprodurre la stazione preferita all'avvio"
+
+msgid "remove current selected favorite"
+msgstr "Rimuovere il preferito selezionato"
+
+msgid "rename current selected favorite"
+msgstr "Rinominare il preferito selezionato"

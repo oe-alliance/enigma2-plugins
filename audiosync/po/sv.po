@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioSync\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: \n"
@@ -13,9 +13,6 @@ msgstr ""
 "X-Poedit-Basepath: D:\\Receiver\\Eclipse\\ac3lipsync\\po\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-SearchPath-0: ..\\src\n"
-
-msgid " "
-msgstr " "
 
 #, python-format
 msgid "%i ms"
@@ -131,9 +128,6 @@ msgstr "Plugin: %(plugin)s , Version: %(version)s"
 msgid "Reset saved position"
 msgstr "Återställ sparad position"
 
-msgid "Save"
-msgstr "Spara"
-
 msgid "Save current delay to key"
 msgstr "Spara nuvarande fördröjning till knapp"
 
@@ -180,6 +174,9 @@ msgstr "Väntetid i mS före aktivering:"
 msgid "sets the Audio Delay (LipSync)"
 msgstr "sätter ljudfrödröjning (LipSync)"
 
+#~ msgid " "
+#~ msgstr " "
+
 #~ msgid "%s:"
 #~ msgstr "%s:"
 
@@ -194,6 +191,9 @@ msgstr "sätter ljudfrödröjning (LipSync)"
 
 #~ msgid "Passthrough"
 #~ msgstr "Passthrough"
+
+#~ msgid "Save"
+#~ msgstr "Spara"
 
 #~ msgid "Select channel audio"
 #~ msgstr "Välj kanal ljud"

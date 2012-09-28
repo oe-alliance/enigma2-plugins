@@ -2,63 +2,50 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioRestart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-15 00:37+0100\n"
+"POT-Creation-Date: 2012-09-27 21:27+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tode <sagichnet@gmx.net>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: D:\\Dreambox\\Sources\\enigma2-plugins\\audiorestart\n"
 "X-Poedit-SearchPath-0: src\n"
 
-#: src/plugin.py:15
-msgid "disabled"
-msgstr "deaktiviert"
+msgid " "
+msgstr " "
 
-#: src/plugin.py:15
-msgid "after restart"
-msgstr "nach Neustart"
+msgid "Audio restart Setup"
+msgstr "Audio restart Setup"
 
-#: src/plugin.py:15
-msgid "after standby"
-msgstr "nach Standby"
+msgid "Cancel"
+msgstr "Abbrechen"
 
-#: src/plugin.py:15
-msgid "after restart/standby"
-msgstr "nach Neustart/Standby"
-
-#: src/plugin.py:93
-#: src/plugin.py:144
-msgid "Restart audio"
-msgstr "Audio neu starten"
-
-#: src/plugin.py:94
-msgid "Restart audio delay (in sec)"
-msgstr "Verzögerung (in sek)"
-
-#: src/plugin.py:104
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Version: %(version)s"
 
-#: src/plugin.py:107
-msgid "Cancel"
-msgstr "Abbrechen"
+msgid "Restart audio"
+msgstr "Audio neu starten"
 
-#: src/plugin.py:108
+msgid "Restart audio delay (in sec)"
+msgstr "Verzögerung (in sek)"
+
 msgid "Save"
 msgstr "Speichern"
 
-#: src/plugin.py:109
-msgid " "
-msgstr " "
-
-#: src/plugin.py:142
-msgid "Audio restart Setup"
-msgstr "Audio restart Setup"
-
-#: src/plugin.py:142
 msgid "Setup for the AudioRestart Plugin"
 msgstr "Setup für das AudioRestart Plugin"
 
+msgid "after restart"
+msgstr "nach Neustart"
+
+msgid "after restart/standby"
+msgstr "nach Neustart/Standby"
+
+msgid "after standby"
+msgstr "nach Standby"
+
+msgid "disabled"
+msgstr "deaktiviert"

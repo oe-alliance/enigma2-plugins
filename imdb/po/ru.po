@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-14 08:42+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-08-25 15:22+0200\n"
 "Last-Translator: WadimArt <WadimArt@GiClub.tv>\n"
 "Language-Team: none\n"
@@ -33,6 +33,7 @@ msgstr "Не удалось получить описание события"
 msgid "Details"
 msgstr "Подробнее"
 
+#, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "Загрузка постера: %s..."
 
@@ -97,12 +98,14 @@ msgstr "Воспроизвести трейлер"
 msgid "Please select the matching entry"
 msgstr "Пожалуйста, выберите соответствующую запись"
 
+#, python-format
 msgid "Query IMDb: %s..."
 msgstr "Запрос в IMDb: %s..."
 
 msgid "Query details from the Internet Movie Database"
 msgstr "Запрос подробностей в IMDb"
 
+#, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "Повторный запрос в IMDb: %s..."
 

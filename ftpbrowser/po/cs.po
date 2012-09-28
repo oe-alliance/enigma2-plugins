@@ -2,25 +2,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-22 23:36+0200\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2009-09-23 23:40+0200\n"
 "Last-Translator: jerry00 <jerry00@quick.cz>\n"
 "Language-Team: none\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/FTPBrowser.py:682
 #, python-format
 msgid "%d kb/s"
 msgstr "%d kbs"
 
-#: ../src/plugin.py:112
 msgid "A basic FTP client"
 msgstr "Základní FTP klient"
 
-#: ../src/FTPBrowser.py:488
 #, python-format
 msgid ""
 "A file with this name (%s) already exists locally.\n"
@@ -29,7 +27,6 @@ msgstr ""
 "Soubor s názvem (%s) již lokálně existuje.\n"
 "Chcete ho přepsat?"
 
-#: ../src/FTPBrowser.py:518
 #, python-format
 msgid ""
 "A file with this name (%s) already exists on the remote host.\n"
@@ -38,7 +35,6 @@ msgstr ""
 "Soubor s názvem (%s) již vzdáleně existuje.\n"
 "Chcete ho přepsat?"
 
-#: ../src/FTPBrowser.py:716
 msgid ""
 "A transfer is currently in progress.\n"
 "What do you want to do?"
@@ -46,195 +42,152 @@ msgstr ""
 "Právě probíhá přenos.\n"
 "Co chcete udělat?"
 
-#: ../src/FTPBrowser.py:719
 msgid "Abort transfer"
 msgstr "Přerušit přenos"
 
-#: ../src/FTPServerManager.py:214
 msgid "Add"
 msgstr "Přidat"
 
-#: ../src/FTPServerManager.py:150
 msgid "Address:"
 msgstr "Adresa:"
 
-#: ../src/FTPBrowser.py:407
 #, python-format
 msgid "Are you sure you want to delete %s?"
 msgstr "Opravdu chcete %s smazat?"
 
-#: ../src/FTPBrowser.py:720
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ../src/FTPServerManager.py:313
 msgid "Configuration saved."
 msgstr "Konfigurace uložena"
 
-#: ../src/plugin.py:101
 msgid "Connect to FTP..."
 msgstr "Připojení k FTP..."
 
-#: ../src/FTPBrowser.py:792
 msgid "Could not connect to ftp server!"
 msgstr "S FTP serverem se nelze spojit!"
 
-#: ../src/FTPBrowser.py:358 ../src/FTPBrowser.py:370
 #, python-format
 msgid "Could not delete %s."
 msgstr ""
 
-#: ../src/FTPBrowser.py:439
 msgid "Could not obtain list of files."
 msgstr "Nelze smazat %s."
 
-#: ../src/FTPBrowser.py:306 ../src/FTPBrowser.py:321
 #, python-format
 msgid "Could not rename %s."
 msgstr "Nelze přejmenovat %s."
 
-#: ../src/FTPBrowser.py:171 ../src/FTPServerManager.py:213
 msgid "Delete"
 msgstr "Smazat"
 
-#: ../src/FTPBrowser.py:251
 msgid "Download"
 msgstr "Stáhnout"
 
-#: ../src/FTPBrowser.py:646
 msgid "Download finished."
 msgstr "Stažení dokončeno."
 
-#: ../src/FTPBrowser.py:681
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr ""
 
-#: ../src/FTPServerManager.py:215
 msgid "Edit"
 msgstr "Upravit"
 
-#: ../src/FTPServerManager.py:146
 msgid "Enter URI"
 msgstr "Vložte URL"
 
-#: ../src/FTPServerManager.py:186
 msgid "Enter URI of FTP Server:"
 msgstr "Vložte URL FTP serveru:"
 
-#: ../src/FTPBrowser.py:342
 msgid "Enter new filename:"
 msgstr "Vložte nový název:"
 
-#: ../src/FTPBrowser.py:116 ../src/FTPBrowser.py:120
 msgid "Error"
 msgstr "Chyba"
 
-#: ../src/FTPBrowser.py:631 ../src/FTPBrowser.py:655
 msgid "Error during download."
 msgstr "Chyba během stahování"
 
-#: ../src/FTPBrowser.py:169 ../src/FTPServerManager.py:143
 msgid "Exit"
 msgstr "Konec"
 
-#: ../src/FTPQueueManager.py:67
 msgid "FTP Queue Manager"
 msgstr "Správce fronty FTP"
 
-#: ../src/FTPServerManager.py:166
 msgid "FTP Server Editor"
 msgstr "Editor FTP serveru"
 
-#: ../src/FTPServerManager.py:235
 msgid "FTP Server Manager"
 msgstr "Správce FTP serveru"
 
-#: ../src/FTPBrowser.py:162
 msgid "Local"
 msgstr "Místní"
 
-#: ../src/FTPServerManager.py:149
 msgid "Name:"
 msgstr "Název:"
 
-#: ../src/FTPServerManager.py:144
 msgid "OK"
 msgstr ""
 
-#: ../src/FTPBrowser.py:93 ../src/FTPBrowser.py:115
 msgid "Parent Directory"
 msgstr "Roď. složka"
 
-#: ../src/FTPServerManager.py:152
+msgid "Passive:"
+msgstr ""
+
 msgid "Password:"
 msgstr "Heslo:"
 
-#: ../src/FTPServerManager.py:153
 msgid "Port:"
 msgstr ""
 
-#: ../src/FTPBrowser.py:241
 msgid "Queue Manager"
 msgstr "Správce fronty"
 
-#: ../src/FTPBrowser.py:432
 msgid "Queue processed."
 msgstr "Fronta dokončena."
 
-#: ../src/FTPServerManager.py:259
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
 msgstr "A nelze to vrátit!"
 
-#: ../src/FTPBrowser.py:781
 msgid "Remote"
 msgstr "Vzdálené"
 
-#: ../src/FTPBrowser.py:164 ../src/FTPBrowser.py:746 ../src/FTPBrowser.py:789
 msgid "Remote (not connected)"
 msgstr "Vzdálené (nepřipojeno)"
 
-#: ../src/FTPBrowser.py:356 ../src/FTPBrowser.py:372
 #, python-format
 msgid "Removed %s."
 msgstr "Odebráno %s."
 
-#: ../src/FTPBrowser.py:382 ../src/FTPBrowser.py:395
 msgid "Removing directories is not supported."
 msgstr "Odstranění adresářů není podporováno."
 
-#: ../src/FTPBrowser.py:170
 msgid "Rename"
 msgstr "Přejmenovat"
 
-#: ../src/FTPBrowser.py:304 ../src/FTPBrowser.py:323
 #, python-format
 msgid "Renamed %s to %s."
 msgstr "Přejmenováno %s na %s."
 
-#: ../src/FTPBrowser.py:718
 msgid "Run in Background"
 msgstr "Spustit na pozadí"
 
-#: ../src/FTPServerManager.py:216
 msgid "Save"
 msgstr "Uložit"
 
-#: ../src/FTPBrowser.py:185
 msgid "Select local file list"
 msgstr "Vyberte seznam lokálních"
 
-#: ../src/FTPBrowser.py:186
 msgid "Select remote file list"
 msgstr "Vyberte seznam vzdálených"
 
-#: ../src/FTPBrowser.py:240
 msgid "Server Manager"
 msgstr "Správce serveru"
 
-#: ../src/plugin.py:66
 msgid ""
 "There already is an active connection.\n"
 "Do you want to abort it?"
@@ -242,40 +195,32 @@ msgstr ""
 "Nějaké spojení je již aktivní.\n"
 "Chcete ho přerušit?"
 
-#: ../src/FTPBrowser.py:556 ../src/FTPBrowser.py:580
 msgid "There already is an active transfer."
 msgstr "Nějaký přenos je již aktivní."
 
-#: ../src/FTPBrowser.py:172 ../src/FTPBrowser.py:247
 msgid "Upload"
 msgstr "Odeslat"
 
-#: ../src/FTPBrowser.py:622
 msgid "Upload finished."
 msgstr "Odeslání dokončeno."
 
-#: ../src/FTPServerManager.py:151
 msgid "Username:"
 msgstr "Uživatel:"
 
-#: ../src/plugin.py:79
 msgid "Which server do you want to connect to?"
 msgstr "Který server chcete připojit?"
 
-#: ../src/FTPBrowser.py:179
 msgid "close"
 msgstr "zavřít"
 
-#: ../src/FTPBrowser.py:178
 msgid "enter directory/get file/put file"
 msgstr "vložit adresář/načíst soubor/vložit soubor"
 
-#: ../src/FTPBrowser.py:180
 msgid "open menu"
 msgstr "otevřít menu"
 
-msgid "Pasive:"
-msgstr "Pasivní:"
+#~ msgid "Name"
+#~ msgstr "Název"
 
-msgid "Name"
-msgstr "Název"
+#~ msgid "Pasive:"
+#~ msgstr "Pasivní:"

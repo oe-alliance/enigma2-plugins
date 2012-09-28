@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - teletext\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-05 18:44+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-06-05 18:58+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleusòcroci.org>\n"
@@ -20,273 +20,256 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/teletext\n"
 
-#: .../enigma2-plugins/teletext/src/plugin.py:57
-msgid "picture and teletext"
-msgstr "Immagine e teletext"
+msgid "<empty>"
+msgstr ""
 
-#: .../enigma2-plugins/teletext/src/plugin.py:57
-msgid "teletext and picture"
-msgstr "Teletext e immagine"
+msgid "Add"
+msgstr ""
 
-#: .../enigma2-plugins/teletext/src/plugin.py:57
-msgid "teletext in picture"
-msgstr "Teletext nell'immagine"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:59
-msgid "Western and Central Europe"
-msgstr "Europa Centrale e Occidentale"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:59
-msgid "Eastern Europe"
-msgstr "Europa Orientale"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:59
-msgid "Western Europe and Turkey"
-msgstr "Europa Occodentale e Turchia"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:59
-msgid "Central and Southeast Europe"
-msgstr "Europa Centrale e SudOrientale"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:59
-msgid "Cyrillic"
-msgstr "Cirillico"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:59
-msgid "Turkish / Greek"
-msgstr "Turco / Greco"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:59
 msgid "Arabic"
 msgstr "Arabo"
 
-#: .../enigma2-plugins/teletext/src/plugin.py:59
-msgid "Hebrew / Arabic"
-msgstr "Ebraico / Arabo"
+msgid "Background caching"
+msgstr ""
 
-#: .../enigma2-plugins/teletext/src/plugin.py:60
-msgid "Disabled"
-msgstr "Disabilitato"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:60
-msgid "bilinear"
-msgstr "Bilineare"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:60
-msgid "anisotropic"
-msgstr "Anisotropico"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:60
-msgid "sharp"
-msgstr "Nitido"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:60
-msgid "sharper"
-msgstr "Più nitido"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:62
-#: .../enigma2-plugins/teletext/src/plugin.py:63
-msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
-msgstr "Inserire i valori (Sx, Alto, Dx, Basso) o premere EXIT per muovere e ridimensionare il teletext graficamente."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:64
-msgid "Select splitting mode."
-msgstr "Selezionare modalità divisa."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:65
-msgid "Select brightness."
-msgstr "Regolare la luminosità."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:66
-msgid "Select contrast."
-msgstr "Regolare il contrasto."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:67
-msgid "Select transparency."
-msgstr "Regolare la trasparenza."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:68
-msgid "Display first and last row."
-msgstr "Visualizzare la prima e l'ultima riga."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:69
-msgid "Show message if no teletext available or exit silently."
-msgstr "Mostrare un messaggio su teletext non disponibile."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:70
-msgid "Print debug messages to /tmp/dbttcp.log."
-msgstr "Salvare i messaggi di debug in /tmp/dbttcp.log."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:71
-msgid "Select teletext version to use."
-msgstr "Selezionare la versione teletext da utilizzare."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:72
-msgid "Select your region to use the proper font."
-msgstr "Selezionare la propria Regione per l'utilizzo dei caratteri appropriati."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:73
-msgid "Select your favourite scale filter."
-msgstr "Selezionare il filtro scaling desiderato."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:172
-#: .../enigma2-plugins/teletext/src/plugin.py:173
-#: .../enigma2-plugins/teletext/src/plugin.py:174
-#: .../enigma2-plugins/teletext/src/plugin.py:175
-#: .../enigma2-plugins/teletext/src/plugin.py:176
-#: .../enigma2-plugins/teletext/src/plugin.py:177
-#: .../enigma2-plugins/teletext/src/plugin.py:178
-#: .../enigma2-plugins/teletext/src/plugin.py:179
-msgid "enter page number"
-msgstr "Inserire numero pagina"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:180
-msgid "enter page number / page 100"
-msgstr "Inserire il numero pagina / Pagina 100"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:181
-msgid "enter page number / rezap"
-msgstr "Inserire numero pagina / Rezap"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:182
-#: .../enigma2-plugins/teletext/src/plugin.py:201
-msgid "exit"
-msgstr "Uscire"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:183
-msgid "start page catching / select page"
-msgstr "Selezionare la pagina"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:186
-msgid "zoom / increase height"
-msgstr "Zoom / Aumentare altezza"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:187
-msgid "decrease height"
-msgstr "Diminuire altezza"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:188
-msgid "toggle info"
-msgstr "Nascondere l'informazione"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:189
-msgid "teletext settings"
-msgstr "Configurazione teletext"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:190
-msgid "next page / catch page / move"
-msgstr "Pagina successiva / Spostare"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:191
-msgid "prev sub page / move"
-msgstr "Sottopagina prec. / Spostare"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:192
-msgid "next sub page / move"
-msgstr "Sottopagina succ. / Spostare"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:193
-msgid "prev page / catch page / move"
-msgstr "Pagina precedente / Spostare"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:194
-msgid "toggle flof"
-msgstr "Commutare FLOF"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:195
-msgid "red teletext link"
-msgstr "Link teletext Rosso"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:196
-msgid "green teletext link"
-msgstr "Link teletext Verde"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:197
-msgid "yellow teletext link"
-msgstr "Link teletext Giallo"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:198
-msgid "blue teletext link"
-msgstr "Link teletext Blu"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:199
-msgid "split screen"
-msgstr "Dividere lo schermo"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:200
-msgid "toggle transparency"
-msgstr "Commutare trasparenza."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:840
-msgid "TeleText settings"
-msgstr "Configurazione TeleText"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:862
-msgid "Cancel"
-msgstr "Annull."
-
-#: .../enigma2-plugins/teletext/src/plugin.py:863
-msgid "Default"
-msgstr "Predefinito"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:864
-msgid "OK"
-msgstr "Ok"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:915
-msgid "Scale filter"
-msgstr "Filtro scaling"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:916
-msgid "Scale filter zoom"
-msgstr "Zoom filtro scaling"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:917
 msgid "Brightness"
 msgstr "Luminosità"
 
-#: .../enigma2-plugins/teletext/src/plugin.py:918
+msgid "Cancel"
+msgstr "Annull."
+
+msgid "Central and Southeast Europe"
+msgstr "Europa Centrale e SudOrientale"
+
+msgid "Clear all"
+msgstr ""
+
 msgid "Contrast"
 msgstr "Contrasto"
 
-#: .../enigma2-plugins/teletext/src/plugin.py:919
-msgid "Transparency"
-msgstr "Trasparenza"
+msgid "Cyrillic"
+msgstr "Cirillico"
 
-#: .../enigma2-plugins/teletext/src/plugin.py:920
-msgid "Text level"
-msgstr "Livello testo"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:921
-msgid "Region"
-msgstr "Regione"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:922
-#: .../enigma2-plugins/teletext/src/plugin.py:927
-msgid "Position and size"
-msgstr "Posizione e dimensioni"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:923
-msgid "Display edges"
-msgstr "Mostrare i margini"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:924
-msgid "Splitting mode"
-msgstr "Schermo diviso"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:928
-msgid "Message"
-msgstr "Messaggio"
-
-#: .../enigma2-plugins/teletext/src/plugin.py:929
 msgid "Debug"
 msgstr "Debug"
 
-#: .../enigma2-plugins/teletext/src/plugin.py:1012
+msgid "Default"
+msgstr "Predefinito"
+
+msgid "Delete"
+msgstr ""
+
+msgid "Delete all favorites?"
+msgstr ""
+
+msgid "Delete favorite?"
+msgstr ""
+
+msgid "Disabled"
+msgstr "Disabilitato"
+
 msgid "Discard changes?"
 msgstr "Annullare le modifiche?"
 
-#: .../enigma2-plugins/teletext/src/plugin.py:1090
+msgid "Display edges"
+msgstr "Mostrare i margini"
+
+msgid "Display first and last row."
+msgstr "Visualizzare la prima e l'ultima riga."
+
+msgid "Eastern Europe"
+msgstr "Europa Orientale"
+
+msgid "Edit"
+msgstr ""
+
+#, python-format
+msgid "Enter text for page %s"
+msgstr ""
+
+msgid ""
+"Enter values (left, top, right, bottom) or press TEXT to move and resize the "
+"teletext graphically."
+msgstr ""
+"Inserire i valori (Sx, Alto, Dx, Basso) o premere EXIT per muovere e "
+"ridimensionare il teletext graficamente."
+
+msgid "Hebrew / Arabic"
+msgstr "Ebraico / Arabo"
+
+msgid ""
+"If caching is disabled, each teletext page will searched when you entered "
+"its number."
+msgstr ""
+
 msgid "No teletext available."
 msgstr "Teletext non disponibile."
 
+msgid "OK"
+msgstr "Ok"
+
+msgid "Position and size"
+msgstr "Posizione e dimensioni"
+
+msgid "Print debug messages to /tmp/dbttcp.log."
+msgstr "Salvare i messaggi di debug in /tmp/dbttcp.log."
+
+msgid "Region"
+msgstr "Regione"
+
+msgid "Scale filter"
+msgstr "Filtro scaling"
+
+msgid "Scale filter zoom"
+msgstr "Zoom filtro scaling"
+
+msgid "Select"
+msgstr ""
+
+msgid "Select brightness."
+msgstr "Regolare la luminosità."
+
+msgid "Select contrast."
+msgstr "Regolare il contrasto."
+
+msgid "Select splitting mode."
+msgstr "Selezionare modalità divisa."
+
+msgid "Select teletext"
+msgstr ""
+
+msgid "Select teletext version to use."
+msgstr "Selezionare la versione teletext da utilizzare."
+
+msgid "Select transparency."
+msgstr "Regolare la trasparenza."
+
+msgid "Select your favourite scale filter."
+msgstr "Selezionare il filtro scaling desiderato."
+
+msgid "Select your region to use the proper font."
+msgstr ""
+"Selezionare la propria Regione per l'utilizzo dei caratteri appropriati."
+
+msgid "Splitting mode"
+msgstr "Schermo diviso"
+
+msgid "TeleText favorites"
+msgstr ""
+
+msgid "TeleText settings"
+msgstr "Configurazione TeleText"
+
+msgid "Text level"
+msgstr "Livello testo"
+
+msgid "Transparency"
+msgstr "Trasparenza"
+
+msgid "Turkish / Greek"
+msgstr "Turco / Greco"
+
+msgid "Western Europe and Turkey"
+msgstr "Europa Occodentale e Turchia"
+
+msgid "Western and Central Europe"
+msgstr "Europa Centrale e Occidentale"
+
+msgid "anisotropic"
+msgstr "Anisotropico"
+
+msgid "bilinear"
+msgstr "Bilineare"
+
+msgid "blue teletext link"
+msgstr "Link teletext Blu"
+
+msgid "enter page number"
+msgstr "Inserire numero pagina"
+
+msgid "enter page number / page 100"
+msgstr "Inserire il numero pagina / Pagina 100"
+
+msgid "enter page number / rezap"
+msgstr "Inserire numero pagina / Rezap"
+
+msgid "exit"
+msgstr "Uscire"
+
+msgid "favorites / decrease height"
+msgstr ""
+
+msgid "green teletext link"
+msgstr "Link teletext Verde"
+
+msgid "next channel / channel list"
+msgstr ""
+
+msgid "next page / catch page / move"
+msgstr "Pagina successiva / Spostare"
+
+msgid "next sub page / move"
+msgstr "Sottopagina succ. / Spostare"
+
+msgid "picture and teletext"
+msgstr "Immagine e teletext"
+
+msgid "prev channel / channel list"
+msgstr ""
+
+msgid "prev page / catch page / move"
+msgstr "Pagina precedente / Spostare"
+
+msgid "prev sub page / move"
+msgstr "Sottopagina prec. / Spostare"
+
+msgid "red teletext link"
+msgstr "Link teletext Rosso"
+
+msgid "sharp"
+msgstr "Nitido"
+
+msgid "sharper"
+msgstr "Più nitido"
+
+msgid "split screen"
+msgstr "Dividere lo schermo"
+
+msgid "start page catching / select page"
+msgstr "Selezionare la pagina"
+
+msgid "teletext and picture"
+msgstr "Teletext e immagine"
+
+msgid "teletext in picture"
+msgstr "Teletext nell'immagine"
+
+msgid "teletext settings"
+msgstr "Configurazione teletext"
+
+msgid "toggle flof/top"
+msgstr ""
+
+msgid "toggle info"
+msgstr "Nascondere l'informazione"
+
+msgid "toggle transparency"
+msgstr "Commutare trasparenza."
+
+msgid "yellow teletext link"
+msgstr "Link teletext Giallo"
+
+msgid "zoom / increase height"
+msgstr "Zoom / Aumentare altezza"
+
+#~ msgid "Message"
+#~ msgstr "Messaggio"
+
+#~ msgid "Show message if no teletext available or exit silently."
+#~ msgstr "Mostrare un messaggio su teletext non disponibile."
+
+#~ msgid "decrease height"
+#~ msgstr "Diminuire altezza"
+
+#~ msgid "toggle flof"
+#~ msgstr "Commutare FLOF"

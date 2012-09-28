@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-03-16 13:22+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,90 +17,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/plugin.py:250
 msgid "Abort"
 msgstr "Abort"
 
-#: ../src/plugin.py:323
 msgid "Backup"
 msgstr "Backup"
 
-#: ../src/plugin.py:201
 msgid "Backup of DVD finished."
 msgstr "Backup of DVD finished."
 
-#: ../src/plugin.py:439
 msgid "Backup your Video-DVD to your harddisk"
 msgstr "Backup your Video-DVD to your hard disk"
 
-#: ../src/plugin.py:143
 msgid "Could not find any file to backup!"
 msgstr "Could not find any file to backup!"
 
-#: ../src/plugin.py:146
 msgid "Could not read the DVD informations!"
 msgstr "Could not read the DVD informations!"
 
-#: ../src/plugin.py:335
 msgid "Create iso:"
 msgstr "Create iso:"
 
-#: ../src/plugin.py:436
-#: ../src/plugin.py:439
 msgid "DVD Backup"
 msgstr "DVD Backup"
 
-#: ../src/plugin.py:331
 msgid "Device:"
 msgstr "Device:"
 
-#: ../src/plugin.py:332
 msgid "Directory:"
 msgstr "Directory:"
 
-#: ../src/plugin.py:201
 msgid "Duration:"
 msgstr "Duration:"
 
-#: ../src/plugin.py:201
 msgid "Eject DVD?"
 msgstr "Eject DVD?"
 
-#: ../src/plugin.py:152
-#: ../src/plugin.py:181
 msgid "Error while backup of DVD!"
 msgstr "Error while backup of DVD!"
 
-#: ../src/plugin.py:324
 msgid "Keyboard"
 msgstr "Keyboard"
 
-#: ../src/plugin.py:325
 msgid "Location"
 msgstr "Location"
 
-#: ../src/plugin.py:334
 msgid "Log:"
 msgstr "Log:"
 
-#: ../src/plugin.py:50
-#: ../src/plugin.py:401
 msgid "Name of DVD"
 msgstr "Name of DVD"
 
-#: ../src/plugin.py:333
 msgid "Name:"
 msgstr "Name:"
 
-#: ../src/plugin.py:322
 msgid "Progress"
 msgstr "Progress"
 
-#: ../src/plugin.py:186
 msgid ""
-"mkisofs job done.\n"
+"genisoimage job done.\n"
 "Delete DVD directory?"
 msgstr ""
-"mkisofs job done.\n"
-"Delete DVD directory?"
 
+#~ msgid ""
+#~ "mkisofs job done.\n"
+#~ "Delete DVD directory?"
+#~ msgstr ""
+#~ "mkisofs job done.\n"
+#~ "Delete DVD directory?"

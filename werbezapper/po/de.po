@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 Plugin WerbeZapper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2012-09-27 21:29+0100\n"
 "PO-Revision-Date: 2009-02-07 12:47+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: none\n"
@@ -26,22 +26,71 @@ msgstr "Angepasst"
 msgid "How many minutes to wait until zapping back?"
 msgstr "Wie viele Minuten vor Zurückschalten warten?"
 
-msgid ""
-"Timer already running.\n"
-"Stop it?"
+#, python-format
+msgid "Monitoring: %s (%d:%02d Min)"
 msgstr ""
-"WerbeZapper bereits aktiv.\n"
-"Jetzt anhalten?"
+
+msgid "Rezap"
+msgstr ""
+
+msgid "Start / Stop monitoring instantly"
+msgstr ""
+
+msgid "Start monitoring"
+msgstr ""
+
+msgid "Stop monitoring"
+msgstr ""
+
+msgid "Stop timer"
+msgstr ""
+
+#, python-format
+msgid ""
+"WerbeZapper\n"
+"Monitoring ends\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"WerbeZapper\n"
+"Monitoring started\n"
+"%s"
+msgstr ""
+
+msgid ""
+"WerbeZapper\n"
+"Monitoring started unlimited\n"
+"Has to be deactivated manually"
+msgstr ""
 
 msgid "When to Zap back?"
 msgstr "Wann zurückschalten?"
 
+msgid "Zapping back"
+msgstr ""
+
 #, python-format
-msgid "Zapping back in %d Minutes"
-msgstr "Schalte zurück in %d Minuten"
+msgid "Zapping back in %d Minute(s)"
+msgstr ""
+
+#, python-format
+msgid "Zapping back in %d:%02d Min"
+msgstr ""
 
 msgid "minute"
 msgstr ""
 
 msgid "minutes"
 msgstr "Minuten"
+
+#~ msgid ""
+#~ "Timer already running.\n"
+#~ "Stop it?"
+#~ msgstr ""
+#~ "WerbeZapper bereits aktiv.\n"
+#~ "Jetzt anhalten?"
+
+#~ msgid "Zapping back in %d Minutes"
+#~ msgstr "Schalte zurück in %d Minuten"

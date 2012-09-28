@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-11 13:30+0000\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-03-14 12:00+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -31,6 +31,9 @@ msgstr "Annuleren"
 msgid "Channel Selection"
 msgstr "Zenderkeuze"
 
+msgid "Choose the encode type for search, helpful for foreign languages."
+msgstr ""
+
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Kan AutoTimer timer lijst niet lezen : %s"
@@ -44,14 +47,20 @@ msgstr "EPGSearch"
 msgid "EPGSearch Setup"
 msgstr "EPGSearch instellingen"
 
-msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
+msgid ""
+"Enable this to be able to access the EPG-Search from within the plugin "
+"browser."
 msgstr "Toon EPG-Search in plugin browser."
 
 msgid "Enter text to search for"
 msgstr "Voer te zoeken tekst in:"
 
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-msgstr "Hoeveel entries mogen er in de zoekhistory bewaard worden? \"0\" schakelt history geheel uit!"
+msgid ""
+"How many entries to keep in the search history at most. 0 disables history "
+"entirely!"
+msgstr ""
+"Hoeveel entries mogen er in de zoekhistory bewaard worden? \"0\" schakelt "
+"history geheel uit!"
 
 msgid "IMDb Search"
 msgstr "IMDb zoeken"
@@ -89,6 +98,9 @@ msgstr "Zoeken"
 msgid "Search EPG"
 msgstr "EPG doorzoeken"
 
+msgid "Search Encoding"
+msgstr ""
+
 msgid "Select a timer to search"
 msgstr "Selecteer te zoeken timer..."
 
@@ -111,4 +123,3 @@ msgstr "EPG doorzoeken"
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 msgid "search EPG..."
 msgstr "EPG doorzoeken..."
-

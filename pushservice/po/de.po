@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 PushService Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-11 11:40+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2011-09-11 11:43+0100\n"
 "Last-Translator: betonme <glaserfrank(at)gmail.com>\n"
 "Language-Team: none\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,3 +15,254 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
+
+msgid ""
+"  (C) 2012 by betonme @ IHAD \n"
+"\n"
+msgstr ""
+
+msgid "  If You like this plugin and want to support it,\n"
+msgstr ""
+
+msgid "  Support: "
+msgstr ""
+
+msgid ""
+"  Thanks a lot ! \n"
+"  PayPal: "
+msgstr ""
+
+msgid ""
+"  feel free to donate via PayPal. \n"
+"\n"
+msgstr ""
+
+msgid "  or if just want to say ''thanks'',\n"
+msgstr ""
+
+msgid "%d.%m.%Y %H:%M"
+msgstr ""
+
+msgid "Add Controller"
+msgstr ""
+
+msgid "Add Service"
+msgstr ""
+
+msgid "Add controller"
+msgstr ""
+
+msgid "Add service"
+msgstr ""
+
+msgid "Back to main screen"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Config file"
+msgstr ""
+
+msgid "Configuration"
+msgstr ""
+
+msgid "Controllers"
+msgstr ""
+
+msgid "Don't edit this manually unless you really know what you are doing"
+msgstr ""
+
+msgid "Dreambox name"
+msgstr ""
+
+msgid "Enable PushService"
+msgstr ""
+
+msgid "Exit without saving"
+msgstr ""
+
+msgid "If You can see this, Your configuration is correct."
+msgstr ""
+
+msgid "Main"
+msgstr ""
+
+msgid "Nothing to push"
+msgstr ""
+
+msgid "Nothing to test"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Page down"
+msgstr ""
+
+msgid "Page up"
+msgstr ""
+
+msgid "Period in hours (0=disabled)"
+msgstr ""
+
+msgid "Push test"
+msgstr ""
+
+msgid "PushService Config"
+msgstr ""
+
+msgid "PushService Service push() exception"
+msgstr ""
+
+msgid "PushService Test exception:"
+msgstr ""
+
+msgid "PushService autostart exception "
+msgstr ""
+
+msgid "PushService controller run() exception"
+msgstr ""
+
+msgid "PushService running: "
+msgstr ""
+
+msgid "PushService setup exception "
+msgstr ""
+
+msgid "PushService started: "
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
+msgid "Remove Controller"
+msgstr ""
+
+msgid "Remove Service"
+msgstr ""
+
+msgid "Remove controller"
+msgstr ""
+
+msgid "Remove service"
+msgstr ""
+
+msgid "Run on boot"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+#, python-format
+msgid "Service %s returned error(s)"
+msgstr ""
+
+msgid "Services"
+msgstr ""
+
+msgid "Show Controllers"
+msgstr ""
+
+msgid "Show Services"
+msgstr ""
+
+msgid "Skipping config option:"
+msgstr ""
+
+msgid "Start time (HH:MM)"
+msgstr ""
+
+msgid "Test"
+msgstr ""
+
+msgid "Test failed"
+msgstr ""
+
+#, python-format
+msgid ""
+"Test failed\n"
+"\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Test failed:\n"
+"\n"
+"%s"
+msgstr ""
+
+msgid "Test has been finished successfully"
+msgstr ""
+
+msgid "Test selected Controller"
+msgstr ""
+
+msgid "Test selected Service"
+msgstr ""
+
+msgid "Testing"
+msgstr ""
+
+msgid "Testing Controller"
+msgstr ""
+
+msgid "Testing Service"
+msgstr ""
+
+msgid ""
+"Testing...\n"
+"\n"
+"Cancel?"
+msgstr ""
+
+msgid "Unexpected error: "
+msgstr ""
+
+msgid "[PushService] Exception in readXML: "
+msgstr ""
+
+msgid "[PushService] Exception in writeXML: "
+msgstr ""
+
+msgid "[PushService] Find module exception: "
+msgstr ""
+
+msgid "[PushService] Instantiate exception: "
+msgstr ""
+
+msgid "[PushService] Load exception: "
+msgstr ""
+
+#, python-format
+msgid "[PushService] Module %s:\n"
+msgstr ""
+
+msgid "[PushService] Module is not callable"
+msgstr ""
+
+msgid "[PushService] No configuration file present"
+msgstr ""
+
+msgid "[PushService] No module available: "
+msgstr ""
+
+msgid "[PushService] No module found: "
+msgstr ""
+
+msgid "[PushService] Warning attribute not available: "
+msgstr ""
+
+msgid "[PushService] Warning no class definition: "
+msgstr ""
+
+msgid "[PushService] Warning no subclass of base: "
+msgstr ""
+
+msgid "configuration"
+msgstr ""
+
+#, python-format
+msgid "controller %s returned error(s)"
+msgstr ""

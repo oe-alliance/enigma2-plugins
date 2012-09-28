@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 Plugin - Partnerbox\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -23,6 +23,9 @@ msgstr "(ZAP)"
 msgid "<unknown>"
 msgstr "<nepoznato>"
 
+msgid "Abort"
+msgstr ""
+
 msgid "Add"
 msgstr "Dodaj"
 
@@ -32,8 +35,14 @@ msgstr "Dodaj tajmer"
 msgid "After event"
 msgstr "Posle događaja"
 
+msgid "Apply"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Otkaži"
+
+msgid "Change pin code"
+msgstr ""
 
 msgid "Channel"
 msgstr "Kanal"
@@ -76,6 +85,9 @@ msgstr "Omogući funkciju partnerboks u EPG listi"
 msgid "Enable Partnerbox-Function in TimerEvent"
 msgstr "Omogući funkciju partnerboks u Tajmeru"
 
+msgid "Enable first Partnerbox-entry in Timeredit as default"
+msgstr ""
+
 msgid "EndTime"
 msgstr "Vreme kraja"
 
@@ -87,6 +99,9 @@ msgstr "Enigma 2"
 
 msgid "Enigma Type"
 msgstr "Tip enigme"
+
+msgid "Enter the service pin"
+msgstr ""
 
 msgid "Error: No space left"
 msgstr "Greška: Nema prostora"
@@ -127,8 +142,8 @@ msgstr "Info"
 msgid "Location"
 msgstr "Lokacija"
 
-msgid "Manage timer for other dreamboxes in network"
-msgstr "Upravljaj tajmer za druge drimboksove u mreži"
+msgid "Manage timer for other receiveres in network"
+msgstr ""
 
 msgid "Mon"
 msgstr "Pon"
@@ -213,6 +228,9 @@ msgstr "Ned"
 msgid "Sunday"
 msgstr "Nedelja"
 
+msgid "The pin code you entered is wrong."
+msgstr ""
+
 msgid "Thu"
 msgstr "Čet"
 
@@ -234,6 +252,11 @@ msgstr "Sre"
 msgid "Wednesday"
 msgstr "Sreda"
 
+msgid ""
+"You can not add services or bouquets from Enigma1-receivers into the "
+"channellist..."
+msgstr ""
+
 msgid "You have to restart Enigma2 to activate your new preferences!"
 msgstr "Morate restartovati enigmu2 da aktivirate vaše nove karakteristike!"
 
@@ -245,6 +268,12 @@ msgstr ""
 
 msgid "about to start"
 msgstr "na početku"
+
+msgid "add Partnerbox bouquet"
+msgstr ""
+
+msgid "add Partnerbox service"
+msgstr ""
 
 msgid "auto"
 msgstr "autom."
@@ -293,3 +322,6 @@ msgstr "zap"
 
 msgid "zapped"
 msgstr "prebačen"
+
+#~ msgid "Manage timer for other dreamboxes in network"
+#~ msgstr "Upravljaj tajmer za druge drimboksove u mreži"

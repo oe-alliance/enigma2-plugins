@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - infobartunerstate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 22:30+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-05-06 22:36+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -20,166 +20,6 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/infobartunerstate\n"
 
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:45
-msgid "Configuration"
-msgstr "Configurazione"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:49
-msgid "Cancel"
-msgstr "Annull."
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:50
-msgid "OK"
-msgstr "Ok"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:76
-msgid "Usage"
-msgstr "Utilizzo"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:82
-msgid "Enable InfoBarTunerState"
-msgstr "Abilitare InfoBarTunerState"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:84
-msgid "Add Show to extension menu"
-msgstr "Aggiungere visualizzazione al menu estensioni"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:85
-msgid "Add Setup to extension menu"
-msgstr "Aggiungere configurazione al menu estensioni"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:87
-msgid "Show and hide with InfoBar"
-msgstr "Mostrare/Nascondere con la barra informazioni"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:88
-msgid "Show on events"
-msgstr "Mostrare su eventi"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:89
-msgid "Show streams"
-msgstr "Mostrare stream"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:91
-msgid "MoviePlayer integration"
-msgstr "Integrazione con MoviePlayer"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:92
-msgid "Time format"
-msgstr "Formato ora"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:93
-msgid "Number of finished records in list"
-msgstr "Numero delle registrazioni terminate in elenco"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:94
-msgid "Number of seconds for displaying finished records"
-msgstr "Persistenza messaggio registrazione terminata (secondi)"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:100
-#, python-format
-msgid "Field %d content"
-msgstr "Contenuto campo %d"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:105
-msgid "Horizontal offset in pixel"
-msgstr "Offset orizzontale (pixel)"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:106
-msgid "Vertical offset in pixel"
-msgstr "Offset verticale (pixel)"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:107
-msgid "Text padding offset in pixel"
-msgstr "Offset testo dal bordo (pixel)"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:108
-msgid "Text spacing offset in pixel"
-msgstr "Offset spaziatura testo (pixel)"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:109
-msgid "Background transparency"
-msgstr "Trasparenza sfondo"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:114
-msgid "Infobar timeout"
-msgstr "Persistenza barra informazioni"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:115
-msgid "Show Message when Recording starts"
-msgstr "Mostrare messaggio su avvio registrazione"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:152
-msgid "Only one Icon field allowed:"
-msgstr "Consentire un solo campo icona:"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:157
-msgid "Only one Graphical Progress field allowed:"
-msgstr "Consentire un solo campo di progresso grafico:"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:615
-msgid "Nothing running"
-msgstr "Nulla è attivo"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:818
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:819
-msgid "-"
-msgstr "-"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:916
-msgid "Record"
-msgstr "Registrazione"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:918
-msgid "Stream"
-msgstr "Stream"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:920
-msgid "Finished"
-msgstr "Terminato"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:932
-#, python-format
-msgid "%d"
-msgstr "%d"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:945
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:952
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:960
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:963
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:978
-#, python-format
-msgid "%d Min"
-msgstr "%d min"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:982
-#, python-format
-msgid "%d %%"
-msgstr "%d %%"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:1009
-#, python-format
-msgid "%d MB"
-msgstr "%d MB"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:1013
-#, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:37
-msgid "InfoBarTunerState"
-msgstr "InfoBarTunerState"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:38
-msgid "Show InfoBarTunerState"
-msgstr "Mostrare InfoBar Tuner State"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:39
-msgid "InfoBarTunerState Setup"
-msgstr "Configurazione InfoBar TunerState"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:44
 msgid ""
 "  (C) 2012 by betonme @ IHAD \n"
 "\n"
@@ -187,23 +27,12 @@ msgstr ""
 "  (C) 2012 by betonme @ IHAD \n"
 "\n"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:45
 msgid "  If You like this plugin and want to support it,\n"
 msgstr "  Se questo plugin piace e si desiderasse supportarlo,\n"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:46
-msgid "  or if just want to say ''thanks'',\n"
-msgstr "  o semplicemente si volesse ringraziare,\n"
+msgid "  SUPPORT: "
+msgstr "SUPPORTO: "
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:47
-msgid ""
-"  feel free to donate via PayPal. \n"
-"\n"
-msgstr ""
-"  è possibile contribuire con PayPal.\n"
-"\n"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:48
 msgid ""
 "  Thanks a lot ! \n"
 "  PayPal: "
@@ -212,139 +41,292 @@ msgstr ""
 "\n"
 "  PayPal: "
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:49
-msgid "  SUPPORT: "
-msgstr "SUPPORTO: "
+msgid ""
+"  feel free to donate via PayPal. \n"
+"\n"
+msgstr ""
+"  è possibile contribuire con PayPal.\n"
+"\n"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:57
-msgid "Type (Icon)"
-msgstr "Tipo (icona)"
+msgid "  or if just want to say ''thanks'',\n"
+msgstr "  o semplicemente si volesse ringraziare,\n"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:58
-msgid "Type (Text)"
-msgstr "Tipo (testo)"
+#, python-format
+msgid "%d"
+msgstr "%d"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:59
-msgid "Tuner"
-msgstr "Tuner"
+#, python-format
+msgid "%d %%"
+msgstr "%d %%"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:60
-msgid "Tuner Type"
-msgstr "Tipo tuner"
+#, python-format
+msgid "%d GB"
+msgstr "%d GB"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:61
-msgid "Channel Number"
-msgstr "Numero canale"
+#, python-format
+msgid "%d MB"
+msgstr "%d MB"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:62
-msgid "Channel Name"
-msgstr "Nome canale"
+#, python-format
+msgid "%d Min"
+msgstr "%d min"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:63
-msgid "Name"
-msgstr "Nome"
+msgid "-"
+msgstr "-"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:64
-msgid "Time Left / Duration"
-msgstr "Tempo residuo / Durata"
+msgid "-    HH:MM"
+msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:65
-msgid "Time Left"
-msgstr "Tempo residuo"
+msgid "Add Setup to extension menu"
+msgstr "Aggiungere configurazione al menu estensioni"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:66
-msgid "Time Elapsed"
-msgstr "Tempo trascorso"
+msgid "Add Show to extension menu"
+msgstr "Aggiungere visualizzazione al menu estensioni"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:67
+msgid "Background transparency"
+msgstr "Trasparenza sfondo"
+
 msgid "Begin"
 msgstr "Inizio"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:68
-msgid "End"
-msgstr "Fine"
+msgid "Cancel"
+msgstr "Annull."
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:69
-msgid "Duration"
-msgstr "Durata"
+msgid "Channel Name"
+msgstr "Nome canale"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:70
-msgid "Timer Progress (Graphical)"
-msgstr "Progresso timer (grafico)"
+msgid "Channel Number"
+msgstr "Numero canale"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:71
-msgid "Timer Progress (Text)"
-msgstr "Progresso timer (testo)"
+msgid "Configuration"
+msgstr "Configurazione"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:72
-msgid "Destination"
-msgstr "Destinazione"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:73
-msgid "Stream Client"
-msgstr "Client stream"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:74
-msgid "Stream Client with Port"
-msgstr "Client stream con porta"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:75
-msgid "Destination / Client"
-msgstr "Destinazione / Client"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:78
-msgid "File Size"
-msgstr "Dimensioni file"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:79
-msgid "Free Space"
-msgstr "Spazio libero"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:80
-msgid "None"
-msgstr "Nulla"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:84
-msgid "HH:MM"
-msgstr "HH:MM"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:85
 msgid "DD.MM HH:MM"
 msgstr "GG.MM HH:MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:86
-msgid "MM/DD HH:MM"
-msgstr "MM/GG HH:MM"
+msgid "DD.MM. HH:MM"
+msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:87
 msgid "DD.MM.YYYY HH:MM"
 msgstr "GG.MM.YYYY HH:MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:88
-msgid "YYYY/MM/DD HH:MM"
-msgstr "YYYY/MM/GG HH:MM"
+msgid "Destination"
+msgstr "Destinazione"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:89
+msgid "Destination / Client"
+msgstr "Destinazione / Client"
+
+msgid "Duration"
+msgstr "Durata"
+
+msgid "Enable InfoBarTunerState"
+msgstr "Abilitare InfoBarTunerState"
+
+msgid "End"
+msgstr "Fine"
+
+msgid "End record"
+msgstr ""
+
+#, python-format
+msgid "Field %d content"
+msgstr "Contenuto campo %d"
+
+#, python-format
+msgid "Field %d width"
+msgstr ""
+
+msgid "File Size"
+msgstr "Dimensioni file"
+
+msgid "Finished"
+msgstr "Terminato"
+
+msgid "Free Space"
+msgstr "Spazio libero"
+
+msgid "HH:MM"
+msgstr "HH:MM"
+
 msgid "HH:MM DD.MM"
 msgstr "HH:MM GG.MM"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:90
-msgid "HH:MM MM/DD"
-msgstr "HH:MM MM/GG"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:91
 msgid "HH:MM DD.MM.YYYY"
 msgstr "HH:MM GG.MM.YYYY"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:92
+msgid "HH:MM MM/DD"
+msgstr "HH:MM MM/GG"
+
 msgid "HH:MM YYYY/MM/DD"
 msgstr "HH:MM YYYY/MM/GG"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:147
-msgid "configuration"
-msgstr "Configurazione"
+msgid "Horizontal offset left in pixel"
+msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:202
+msgid "Horizontal offset right in pixel"
+msgstr ""
+
+msgid "InfoBarTunerState"
+msgstr "InfoBarTunerState"
+
+msgid "InfoBarTunerState Setup"
+msgstr "Configurazione InfoBar TunerState"
+
 msgid "InfoBarTunerState is disabled"
 msgstr "InfoBarTunerState è disabilitato"
 
+msgid "Infobar timeout"
+msgstr "Persistenza barra informazioni"
+
+msgid "List goes up"
+msgstr ""
+
+msgid "MM/DD HH:MM"
+msgstr "MM/GG HH:MM"
+
+msgid "MoviePlayer integration"
+msgstr "Integrazione con MoviePlayer"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "None"
+msgstr "Nulla"
+
+msgid "Nothing running"
+msgstr "Nulla è attivo"
+
+msgid "Number of finished records in list"
+msgstr "Numero delle registrazioni terminate in elenco"
+
+msgid "Number of pending records in list"
+msgstr ""
+
+msgid "Number of seconds for displaying finished records"
+msgstr "Persistenza messaggio registrazione terminata (secondi)"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Only one Graphical Progress field allowed:"
+msgstr "Consentire un solo campo di progresso grafico:"
+
+msgid "Only one Icon field allowed:"
+msgstr "Consentire un solo campo icona:"
+
+msgid "Only one Name field allowed:"
+msgstr ""
+
+msgid "Placeholder for Progressbar"
+msgstr ""
+
+msgid "Prepare / Start / End record"
+msgstr ""
+
+msgid "Prepare record"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
+msgid "Record"
+msgstr "Registrazione"
+
+msgid "Show InfoBarTunerState"
+msgstr "Mostrare InfoBar Tuner State"
+
+msgid "Show Message when Recording starts"
+msgstr "Mostrare messaggio su avvio registrazione"
+
+msgid "Show and hide with InfoBar"
+msgstr "Mostrare/Nascondere con la barra informazioni"
+
+msgid "Show on events"
+msgstr "Mostrare su eventi"
+
+msgid "Show streams"
+msgstr "Mostrare stream"
+
+msgid "Start / End record"
+msgstr ""
+
+msgid "Start record"
+msgstr ""
+
+msgid "Stream"
+msgstr "Stream"
+
+msgid "Stream Client"
+msgstr "Client stream"
+
+msgid "Stream Client with Port"
+msgstr "Client stream con porta"
+
+msgid "Text padding offset in pixel"
+msgstr "Offset testo dal bordo (pixel)"
+
+msgid "Text spacing offset in pixel"
+msgstr "Offset spaziatura testo (pixel)"
+
+msgid "Time Elapsed"
+msgstr "Tempo trascorso"
+
+msgid "Time Left"
+msgstr "Tempo residuo"
+
+msgid "Time Left / Duration"
+msgstr "Tempo residuo / Durata"
+
+msgid "Time format begin"
+msgstr ""
+
+msgid "Time format end"
+msgstr ""
+
+msgid "Timer Progress (Graphical)"
+msgstr "Progresso timer (grafico)"
+
+msgid "Timer Progress (Text)"
+msgstr "Progresso timer (testo)"
+
+msgid "Tuner"
+msgstr "Tuner"
+
+msgid "Tuner State"
+msgstr ""
+
+msgid "Tuner Type"
+msgstr "Tipo tuner"
+
+msgid "Type (Icon)"
+msgstr "Tipo (icona)"
+
+msgid "Type (Text)"
+msgstr "Tipo (testo)"
+
+msgid "Usage"
+msgstr "Utilizzo"
+
+msgid "Variable field width"
+msgstr ""
+
+msgid "Vertical offset in pixel"
+msgstr "Offset verticale (pixel)"
+
+msgid "WD DD.MM. HH:MM"
+msgstr ""
+
+msgid "WD, DD.MM. HH:MM"
+msgstr ""
+
+msgid "YYYY/MM/DD HH:MM"
+msgstr "YYYY/MM/GG HH:MM"
+
+msgid "configuration"
+msgstr "Configurazione"
+
+#~ msgid "Horizontal offset in pixel"
+#~ msgstr "Offset orizzontale (pixel)"
+
+#~ msgid "Time format"
+#~ msgstr "Formato ora"

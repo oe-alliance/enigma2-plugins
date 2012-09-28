@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - movietagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-29 22:56+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-02-29 22:56+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -19,19 +19,21 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/movietagger\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/movietagger\n"
 
-#: .../enigma2-plugins/movietagger/src/plugin.py:174
+msgid "Add Tag"
+msgstr "Agg. etich."
+
+msgid "Add new Tag"
+msgstr "Nuova etich."
+
+msgid "Assigned Tags"
+msgstr "Etich. assegnate"
+
 msgid "Can't write movietags, because no meta-file found!"
 msgstr "Scrittura etichette impossibile: meta-file non trovato!"
 
-#: .../enigma2-plugins/movietagger/src/plugin.py:252
-msgid "Whitepace will be replaced by \"_\""
-msgstr "Gli spazi saranno sostituiti da \"_\""
+msgid "Clear all Tags"
+msgstr "Rimuovere tutto"
 
-#: .../enigma2-plugins/movietagger/src/plugin.py:252
-msgid "Enter the new Tag"
-msgstr "Inserire la nuova etichetta"
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:256
 msgid ""
 "Clear all Tags?\n"
 "\n"
@@ -43,67 +45,47 @@ msgstr ""
 "Verranno cancellati TUTTE le etichette di TUTTE le registrazioni!\n"
 "Proseguire comunque?"
 
-#: .../enigma2-plugins/movietagger/src/plugin.py:259
+msgid "Enter the new Tag"
+msgstr "Inserire la nuova etichetta"
+
 msgid "Movie Tagger"
 msgstr "Movie Tagger"
 
-#: .../enigma2-plugins/movietagger/src/plugin.py:259
-msgid "Ver."
-msgstr "Ver."
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:260
-msgid "Assigned Tags"
-msgstr "Etich. assegnate"
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:261
-msgid "Specified Tags"
-msgstr "Etich specifica"
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:262
-msgid "Used Tag"
-msgstr "Etich. usata"
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:263
-msgid "User-specific Tag"
-msgstr "Etich. personalizzata"
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:264
-msgid "Predefined Tag"
-msgstr "Etich predefinita"
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:268
-msgid "Remove Tag"
-msgstr "Canc. etich."
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:269
-msgid "Add new Tag"
-msgstr "Nuova etich."
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:271
-#: .../enigma2-plugins/movietagger/src/plugin.py:279
-msgid "Toggle List"
-msgstr "Elenco On/Off"
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:276
-msgid "Add Tag"
-msgstr "Agg. etich."
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:278
-msgid "Clear all Tags"
-msgstr "Rimuovere tutto"
-
-#: .../enigma2-plugins/movietagger/src/plugin.py:315
 msgid "Movie Tagger..."
 msgstr "Etichettare video..."
 
-#~ msgid "red"
-#~ msgstr "Rosso"
+msgid "Predefined Tag"
+msgstr "Etich predefinita"
+
+msgid "Remove Tag"
+msgstr "Canc. etich."
+
+msgid "Specified Tags"
+msgstr "Etich specifica"
+
+msgid "Toggle List"
+msgstr "Elenco On/Off"
+
+msgid "Used Tag"
+msgstr "Etich. usata"
+
+msgid "User-specific Tag"
+msgstr "Etich. personalizzata"
+
+msgid "Ver."
+msgstr "Ver."
+
+msgid "Whitepace will be replaced by \"_\""
+msgstr "Gli spazi saranno sostituiti da \"_\""
+
+#~ msgid "blue"
+#~ msgstr "Blu"
 
 #~ msgid "green"
 #~ msgstr "Verde"
 
+#~ msgid "red"
+#~ msgstr "Rosso"
+
 #~ msgid "yellow"
 #~ msgstr "Giallo"
-
-#~ msgid "blue"
-#~ msgstr "Blu"

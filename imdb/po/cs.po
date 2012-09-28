@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
-"Report-Msgid-Bugs-To: jerry\n"
-"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-03-15 14:10+0000\n"
 "Last-Translator: jerry\n"
 "Language-Team: jerry\n"
@@ -17,166 +17,127 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: ../src/plugin.py:598
 msgid " as "
 msgstr " jako"
 
-#: ../src/plugin.py:335
 msgid "Ambiguous results"
 msgstr "Nejednoznačné výsledky"
 
-#: ../src/plugin.py:707
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ../src/plugin.py:602
 msgid "Cast: "
 msgstr ""
 
-#: ../src/plugin.py:68
 msgid "Channel Selection"
 msgstr "Výběr stanice"
 
-#: ../src/plugin.py:470
 msgid "Could't get Eventname"
 msgstr "Nelze načíst název události"
 
-#: ../src/plugin.py:340 ../src/plugin.py:555
 msgid "Details"
 msgstr "Detaily"
 
-#: ../src/plugin.py:610
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "Stahuji plakát filmu: %s..."
 
-#: ../src/plugin.py:689
 msgid ""
 "Enable this to be able to access the IMDb from within the plugin browser."
 msgstr "Povolit = mít přístup na IMDB v rámci Prohlížeče pluginů."
 
-#: ../src/plugin.py:383
 msgid "Enter search"
 msgstr "Vložte hledané"
 
-#: ../src/plugin.py:428
 msgid "Enter text to search for"
 msgstr "Vložte hledaný text"
 
-#: ../src/plugin.py:182
 msgid "Exit"
 msgstr "Konec"
 
-#: ../src/plugin.py:630
 msgid "Extra Info"
 msgstr ""
 
-#: ../src/plugin.py:745 ../src/plugin.py:765
 msgid "IMDb Details"
 msgstr "Detaily z IMDb"
 
-#: ../src/plugin.py:556 ../src/plugin.py:636
 msgid "IMDb Details parsed"
 msgstr "Analýza z IMDb"
 
-#: ../src/plugin.py:503
 msgid "IMDb Download completed"
 msgstr "Stažení z IMDb dokončeno"
 
-#: ../src/plugin.py:474
 msgid "IMDb Download failed"
 msgstr "Stažení z IMDb selhalo"
 
-#: ../src/plugin.py:666
 msgid "IMDb Plugin"
 msgstr "Plugin IMDb"
 
-#: ../src/plugin.py:545
 msgid "IMDb Re-Download completed"
 msgstr "Re-Stažení z IMDb dokončeno"
 
-#: ../src/plugin.py:683 ../src/plugin.py:724
 msgid "IMDb Setup"
 msgstr "Nastavení IMDb"
 
-#: ../src/plugin.py:542
 msgid "IMDb query failed!"
 msgstr "IMDb dotaz selhal!"
 
-#: ../src/plugin.py:97
 msgid "Lookup"
 msgstr "Vyhledat"
 
-#: ../src/plugin.py:529 ../src/plugin.py:530
 msgid "No IMDb match."
 msgstr "IMDb-Žádná shoda"
 
-#: ../src/plugin.py:604
 msgid "No cast list found in the database."
 msgstr "Žádné seznam obsazení v databázi nenalezen."
 
-#: ../src/plugin.py:553
 msgid "No details found."
 msgstr "Nenalezeny detaily."
 
-#: ../src/plugin.py:706
 msgid "OK"
 msgstr ""
 
-#: ../src/plugin.py:390
 msgid "Play Trailer"
 msgstr "Přehrát upoutávku"
 
-#: ../src/plugin.py:336
 msgid "Please select the matching entry"
 msgstr "Prosím, zvolte odpovídající položku"
 
-#: ../src/plugin.py:460
 #, python-format
 msgid "Query IMDb: %s..."
 msgstr "Dotaz na IMDb: %s..."
 
-#: ../src/plugin.py:765 ../src/plugin.py:769
 msgid "Query details from the Internet Movie Database"
 msgstr "Dotaz na podrobnosti z internetové filmové databáze"
 
-#: ../src/plugin.py:351 ../src/plugin.py:519 ../src/plugin.py:535
 #, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "Re-Dotaz na IMDb: %s..."
 
-#: ../src/plugin.py:391
 msgid "Search Trailer"
 msgstr "Najít upoutávku"
 
-#: ../src/plugin.py:384
 msgid "Select from EPG"
 msgstr "Vybrat z EPG"
 
-#: ../src/plugin.py:385
 msgid "Setup"
 msgstr "Nastavit"
 
-#: ../src/plugin.py:689
 msgid "Show in plugin browser"
 msgstr "Zobrazit v Prohlížeči pluginů"
 
-#: ../src/plugin.py:166
 msgid "The Internet Movie Database"
 msgstr "Internetová filmová databáze"
 
-#: ../src/plugin.py:339
 msgid "Title Menu"
 msgstr "Tituly"
 
-#: ../src/plugin.py:585
 msgid "User Rating"
 msgstr "Hodnocení"
 
-#: ../src/plugin.py:581
 msgid "no user rating yet"
 msgstr "bez hodnocení"
 
 #
-msgid "Internet Movie Database Details Plugin"
-msgstr "Plugin detailů z Internetové filmové databáze"
+#~ msgid "Internet Movie Database Details Plugin"
+#~ msgstr "Plugin detailů z Internetové filmové databáze"

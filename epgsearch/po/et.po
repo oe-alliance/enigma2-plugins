@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-22 13:28+0100\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-07-23 17:37+0300\n"
 "Last-Translator: rimas\n"
 "Language-Team: \n"
@@ -19,130 +19,105 @@ msgstr ""
 "X-Poedit-Country: ESTONIA\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/EPGSearch.py:112
 msgid "Add AutoTimer"
 msgstr "Lisa autotaimer"
 
-#: ../src/EPGSearch.py:127
 msgid "Add timer"
 msgstr "Lisa taimer"
 
-#: ../src/EPGSearch.py:361
-#: ../src/EPGSearchSetup.py:72
 msgid "Cancel"
 msgstr "Tühista"
 
-#: ../src/EPGSearch.py:399
 msgid "Channel Selection"
 msgstr "Kanalite valik"
 
-#: ../src/EPGSearch.py:254
+msgid "Choose the encode type for search, helpful for foreign languages."
+msgstr ""
+
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Autotaimeri nimekirja lugemine nurjus: %s"
 
-#: ../src/EPGSearch.py:171
 msgid "EPG Search"
 msgstr "EPG otsing"
 
-#: ../src/EPGSearchSetup.py:97
-#: ../src/plugin.py:39
 msgid "EPGSearch"
 msgstr "EPG otsing"
 
-#: ../src/EPGSearchSetup.py:47
 msgid "EPGSearch Setup"
 msgstr "EPGSearch seadistused"
 
-#: ../src/EPGSearchSetup.py:54
-msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
+msgid ""
+"Enable this to be able to access the EPG-Search from within the plugin "
+"browser."
 msgstr "Luba see, et pääseda EPG otsingusse laienduste nimekirjas."
 
-#: ../src/EPGSearch.py:195
 msgid "Enter text to search for"
 msgstr "Sisesta tekst otsinguks:"
 
-#: ../src/EPGSearchSetup.py:55
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgid ""
+"How many entries to keep in the search history at most. 0 disables history "
+"entirely!"
 msgstr "Suurim kirjete arv otsinguajaloos. 0 keelab ajaloo täielikult"
 
-#: ../src/EPGSearch.py:126
 msgid "IMDb Search"
 msgstr "IMDb otsing"
 
-#: ../src/EPGSearch.py:207
 msgid "Import from AutoTimer"
 msgstr "Impordi autotaimerist"
 
-#: ../src/EPGSearch.py:201
 msgid "Import from EPG"
 msgstr "Impordi EPG-st"
 
-#: ../src/EPGSearch.py:200
 msgid "Import from Timer"
 msgstr "Impordi taimerist"
 
-#: ../src/EPGSearchSetup.py:55
 msgid "Length of History"
 msgstr "Varasemate otsingute kestus"
 
-#: ../src/EPGSearch.py:111
 msgid "New Search"
 msgstr "Uus otsing"
 
-#: ../src/EPGSearch.py:308
 msgid "No history"
 msgstr "Ilma ajaloota"
 
-#: ../src/EPGSearch.py:362
-#: ../src/EPGSearchSetup.py:73
 msgid "OK"
 msgstr "OK"
 
-#: ../src/EPGSearch.py:211
 msgid "Open selected in IMDb"
 msgstr "Ava valitud IMDb-s"
 
-#: ../src/EPGSearch.py:208
 msgid "Save search as AutoTimer"
 msgstr "Salvesta otsing autotaimerina"
 
-#: ../src/EPGSearch.py:427
 msgid "Search"
 msgstr "Otsi"
 
-#: ../src/plugin.py:39
 msgid "Search EPG"
 msgstr "EPG otsing"
 
-#: ../src/EPGSearch.py:376
+msgid "Search Encoding"
+msgstr ""
+
 msgid "Select a timer to search"
 msgstr "Vali taimer, mida otsida"
 
-#: ../src/EPGSearch.py:265
-#: ../src/EPGSearch.py:302
 msgid "Select text to search for"
 msgstr "Vali taimer, mida otsida"
 
-#: ../src/EPGSearch.py:213
 msgid "Setup"
 msgstr "Seadistamine"
 
-#: ../src/EPGSearchSetup.py:54
 msgid "Show in plugin browser"
 msgstr "Näita laienduste nimekirjas"
 
-#: ../src/EPGSearch.py:202
 msgid "Show search history"
 msgstr "Näita varasemaid otsinguid"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
-#: ../src/plugin.py:52
 msgid "search EPG"
 msgstr "EPG otsing"
 
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
-#: ../src/plugin.py:45
 msgid "search EPG..."
 msgstr "EPG otsing..."
-

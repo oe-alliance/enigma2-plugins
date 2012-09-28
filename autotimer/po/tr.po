@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 AutoTimer Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-21 11:57+0000\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2009-09-24 20:30+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -100,9 +100,6 @@ msgid "AutoTimer was changed successfully"
 msgstr ""
 
 msgid "AutoTimer was removed"
-msgstr ""
-
-msgid "AutoTimerTask"
 msgstr ""
 
 msgid "AutoTimers"
@@ -332,6 +329,16 @@ msgid ""
 "event if it records at least 80%% of the it."
 msgstr ""
 
+msgid ""
+"If this is selected, the name of the respective AutoTimer will be added as a "
+"tag to timers created by this plugin."
+msgstr ""
+
+msgid ""
+"If this is selected, the tag \"AutoTimer\" will be given to timers created "
+"by this plugin."
+msgstr ""
+
 msgid "Import AutoTimer"
 msgstr "Otomatik zamanlayıcıyı içeri al"
 
@@ -343,6 +350,12 @@ msgstr "EPG'den içeri al"
 
 msgid "Include"
 msgstr "İçer"
+
+msgid "Include \"AutoTimer\" in tags"
+msgstr ""
+
+msgid "Include AutoTimer name in tags"
+msgstr ""
 
 msgid ""
 "It's possible to restrict an AutoTimer to certain Services or Bouquets or to "
@@ -357,6 +370,14 @@ msgstr ""
 "buketlerdeki EPG olaylarında aranabilir.\n"
 "Sınırlama eklemek için MAVİ tuşu, kaldırmak için istediğinizi seçtikten "
 "sonra da SARI tuşu kullanabilirsiniz."
+
+msgid ""
+"Label Timers with season, episode and title, according to the SeriesPlugin "
+"settings."
+msgstr ""
+
+msgid "Label series"
+msgstr ""
 
 msgid ""
 "Last day to match events. Events have to begin before this date to be "
@@ -1019,6 +1040,9 @@ msgstr "kaydet"
 
 msgid "standard"
 msgstr "standart"
+
+msgid "title starts with"
+msgstr ""
 
 #, python-format
 msgid "unable to find timer with id %i"

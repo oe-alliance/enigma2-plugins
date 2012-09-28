@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
 "PO-Revision-Date: 2012-03-16 14:20+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -62,6 +62,10 @@ msgstr "Call monitoring"
 
 msgid "Call redirection"
 msgstr "Call redirection"
+
+#, python-format
+msgid "Calling %s"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -245,6 +249,9 @@ msgstr "FRITZ!Box FON address (Name or IP)"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Fon Status"
+
+msgid "FRITZ!Box not available for calling"
+msgstr ""
 
 msgid "Filter also list of calls"
 msgstr "Filter also list of calls"
@@ -561,7 +568,8 @@ msgid "Vanity"
 msgstr "Vanity"
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr "You need to enable the monitoring on your FRITZ!Box by dialling #96*5*!"
+msgstr ""
+"You need to enable the monitoring on your FRITZ!Box by dialling #96*5*!"
 
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
@@ -658,4 +666,3 @@ msgstr "show nothing"
 
 msgid "work"
 msgstr "work"
-

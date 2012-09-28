@@ -2,87 +2,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BMediaCenter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-23 18:24+0100\n"
+"POT-Creation-Date: 2012-09-27 21:29+0100\n"
 "PO-Revision-Date: 2012-01-23 18:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: OpenAAF (bonkel)\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: C:\\Users\\Benny\\Documents\\aaf\\mips git aaf\\git\\pluginsnew\\bmediacenter\\src\n"
+"X-Poedit-Basepath: C:\\Users\\Benny\\Documents\\aaf\\mips git aaf\\git"
+"\\pluginsnew\\bmediacenter\\src\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: C:\\Users\\Benny\\Documents\\aaf\\mips git aaf\\git\\pluginsnew\\bmediacenter\\src\n"
+"X-Poedit-SearchPath-0: C:\\Users\\Benny\\Documents\\aaf\\mips git aaf\\git"
+"\\pluginsnew\\bmediacenter\\src\n"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/GlobalFunctions.py:151
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:545
-msgid "Really delete this favorite?"
-msgstr "Willst du diesen Favoriten wirklich löschen?"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/GlobalFunctions.py:226
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:628
-msgid "Name:"
+msgid ""
+"\n"
+"Album: "
 msgstr ""
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/GlobalFunctions.py:227
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:629
-msgid "Directory:"
-msgstr "Ordner:"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/GlobalFunctions.py:263
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:665
-msgid "Name"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/GlobalFunctions.py:264
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:666
-msgid "Directory"
-msgstr "Ordner"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:152
-msgid "Go to Playlist"
-msgstr "Zur Wiedergabeliste"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:153
-msgid "Add to Playlist"
-msgstr "Zur Wiedergabeliste hinzufügen"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:154
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:63
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:237
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VideoPlayer.py:48
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:40
-#: aaf\git\pluginsnew\bmediacenter\src/plugin.py:45
-msgid "Settings"
-msgstr "Einstellungen"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:400
-msgid "Title: "
-msgstr "Titel:"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:400
 msgid ""
 "\n"
 "Artist: "
@@ -90,35 +31,6 @@ msgstr ""
 "\n"
 "Interpret"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:400
-msgid ""
-"\n"
-"Album: "
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:400
-msgid ""
-"\n"
-"Year: "
-msgstr ""
-"\n"
-"Jahr:"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:400
-msgid ""
-"\n"
-"Genre: "
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:400
 msgid ""
 "\n"
 "Comment: "
@@ -126,450 +38,92 @@ msgstr ""
 "\n"
 "Kommentar"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:438
-msgid "Do you really want to delete this file ?"
-msgstr "Willst du die Datei wirklich löschen?"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:444
-msgid "Do you really want to delete this directory and it's content ?"
-msgstr "Willst du diesen Ordner samt den Inhalt wirklich löschen?"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:495
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VideoPlayer.py:246
-#, python-format
-msgid "This Dreambox can't decode %s video streams!"
-msgstr "Diese OpenAFF Box kann diese  Videostreams nicht wiedergeben! (%s)"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:509
-msgid "add directory to playlist"
-msgstr "Ordner zur WIedergabeliste hinzufügen"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:510
-msgid "delete directory"
-msgstr "Ordner löschen"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:512
-msgid "add file to playlist"
-msgstr "Datei zur Wiedergabeliste hinzufügen"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:513
-msgid "add file to playlist and play"
-msgstr "Datei zur Wiedergabeliste hinzufügen und abspielen"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:514
-msgid "add all files in directory to playlist"
-msgstr "Alle Dateien im Ordner zur Wiedergabeliste hinzufügen"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:515
-msgid "delete file"
-msgstr "Datei löschen"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:576
-msgid "File Browser"
+msgid ""
+"\n"
+"Genre: "
 msgstr ""
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:687
-msgid "You have to close playlist before you can go to the next song while playing from file browser."
-msgstr "Du musst die Wiedergabeliste schließen, bevor du den nächsten Song aus dem Filebrowser abspielen kannst."
+msgid ""
+"\n"
+"Year: "
+msgstr ""
+"\n"
+"Jahr:"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:699
-msgid "You have to close playlist before you can go to the previous song while playing from file browser."
-msgstr "Du musst die Wiedergabeliste schließen, bevor du den vorhergehenden Song aus dem Filebrowser abspielen kannst."
+msgid "70-80er"
+msgstr ""
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:762
-msgid "Please enter filename (empty = use current date)"
-msgstr "Bitte gib den Dateinamen ein (leer= benutz aktuelles Datum)"
+msgid "Add to Playlist"
+msgstr "Zur Wiedergabeliste hinzufügen"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:762
-msgid "Save Playlist"
-msgstr "Wiedergabeliste speichern"
+msgid "Autoplay Delay"
+msgstr "Automatische Wiedergabe deaktivieren"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:781
-msgid "Please select a playlist..."
-msgstr "Bitte wählen Sie eine Wiedergabeliste..."
+msgid "Autoplay Enable"
+msgstr "Automatische Wiedergabe aktivieren"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:800
-msgid "Please select a playlist to delete..."
-msgstr "Bitte wähle eine Wiedergabeliste die gelöscht werden soll..."
+msgid "Cache Thumbnails"
+msgstr "Vorschau cachen"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:804
+msgid "Celsius"
+msgstr ""
+
+msgid "City"
+msgstr "Stadt"
+
+msgid "City 2"
+msgstr "Stadt 2"
+
+msgid "City 3"
+msgstr "Stadt 3"
+
+msgid "City 4"
+msgstr "Stadt 4"
+
+msgid "City 5"
+msgstr "Stadt 5"
+
+#, fuzzy
+msgid "City2"
+msgstr "Stadt 2"
+
+#, fuzzy
+msgid "City3"
+msgstr "Stadt 3"
+
+#, fuzzy
+msgid "City4"
+msgstr "Stadt 4"
+
+#, fuzzy
+msgid "City5"
+msgstr "Stadt 5"
+
+msgid "Classic"
+msgstr ""
+
+msgid "Delete failed!"
+msgstr "Löschen fehlgeschlagen"
+
+msgid "Directory"
+msgstr "Ordner"
+
+msgid "Directory:"
+msgstr "Ordner:"
+
 #, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Möchtest du wirklich %s löschen?"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:811
-msgid "Delete failed!"
-msgstr "Löschen fehlgeschlagen"
+msgid "Do you really want to delete this directory and it's content ?"
+msgstr "Willst du diesen Ordner samt den Inhalt wirklich löschen?"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:816
-msgid "delete from playlist"
-msgstr "Von Wiedergabeliste löschen"
+msgid "Do you really want to delete this file ?"
+msgstr "Willst du die Datei wirklich löschen?"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:817
-msgid "clear playlist"
-msgstr "Wiedergabeliste leeren"
+msgid "English"
+msgstr "Englisch"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:818
-msgid "load playlist"
-msgstr "Wiedergabeliste laden"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:819
-msgid "save playlist"
-msgstr "Wiedergabeliste speichern"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:820
-msgid "delete saved playlist"
-msgstr "Gespeicherte Wiedergabeliste löschen"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:878
-msgid "Lyrics"
-msgstr "Songtexte"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:947
-#, python-format
-msgid "Response -> lyrics for: %s (%s)"
-msgstr "Rückmeldung -> Songtexte für %s (%s)"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:950
-msgid "No lyrics found"
-msgstr "Keine Songtexte gefunden"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:1042
-msgid "Screensaver Enable"
-msgstr "Bildschirmschoner aktivieren"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:1043
-msgid "Screensaver Interval"
-msgstr "Bildschirmschoner Intervall"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_AudioPlayer.py:1044
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VideoPlayer.py:290
-msgid "Autoplay Enable"
-msgstr "Automatische Wiedergabe aktivieren"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_Filelist.py:187
-msgid "nothing connected"
-msgstr "Keine Verbindung"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_Filelist.py:365
-msgid "List of Storage Devices"
-msgstr "Liste der Speichergeräte"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_Filelist.py:367
-msgid "Parent Directory"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:29
-msgid "simple"
-msgstr "Einfach"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:29
-msgid "better"
-msgstr "Besser"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:32
-msgid "none"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:32
-msgid "manual"
-msgstr "manuell"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:32
-msgid "by Exif"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:35
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:36
-msgid "black"
-msgstr "schwarz"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:35
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:36
-msgid "blue"
-msgstr "blau"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:35
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:36
-msgid "red"
-msgstr "rot"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:35
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:36
-msgid "yellow"
-msgstr "gelb"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:35
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:36
-msgid "green"
-msgstr "grÃ¼n"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:487
-msgid "please wait, loading picture..."
-msgstr "Bitte warten während das Bild geladen wird..."
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:627
-msgid "filename"
-msgstr "Dateiname"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:667
-msgid "Slideshow Interval (sec.)"
-msgstr "Slideshow Intervall (sek.)"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:668
-msgid "Scaling Mode"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:669
-msgid "Cache Thumbnails"
-msgstr "Vorschau cachen"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:670
-msgid "Thumbnail Width"
-msgstr "Vorschau Breite"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:671
-msgid "Thumbnail Height"
-msgstr "Vorschau Höhe"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:672
-msgid "show Infoline"
-msgstr "Information anzeigen"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:673
-msgid "Frame size in full view"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:674
-msgid "slide picture in loop"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:675
-msgid "backgroundcolor"
-msgstr "Hintergrundfarbe"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_PictureViewer.py:676
-msgid "textcolor"
-msgstr "Textfarbe"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_Settings.py:104
-msgid "Show MC in Main-Menu"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_Settings.py:105
-msgid "Show MC in Extension-Menu"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_Settings.py:208
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to Restart the GUI now?"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_Settings.py:209
-msgid "Restart GUI now?"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VideoPlayer.py:45
-msgid "Favorites"
-msgstr "Favoriten"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VideoPlayer.py:46
-msgid "Preview"
-msgstr "Vorschau"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VideoPlayer.py:291
-msgid "Autoplay Delay"
-msgstr "Automatische Wiedergabe deaktivieren"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:108
-msgid "Really delete this Server?"
-msgstr "Willst du diesen Server wirklich löschen?"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:251
-#, python-format
-msgid ""
-"Error updating file- and playlist from server %s:\n"
-"%s"
-msgstr ""
-"Fehler beim Aktualisieren der Datei- und Wiedergabeliste vom Server %s:\n"
-"%s"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:274
-#, python-format
-msgid ""
-"Error updating filelist from server %s:\n"
-"%s"
-msgstr ""
-"Fehler beim Aktualisieren der Dateiliste vom Server %s:\n"
-"%s"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:327
-#, python-format
-msgid ""
-"Error loading playlist %s into server %s:\n"
-"%s"
-msgstr ""
-"Fehler beim Aktualisieren %s der Wiedergabeliste vom Server %s:\n"
-"%s"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:353
-#, python-format
-msgid ""
-"Error with VLC server:\n"
-"%s"
-msgstr ""
-"Fehler mit dem VLC Server :\n"
-"%s"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:375
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:391
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:396
-#, python-format
-msgid ""
-"Error loading playlist into server %s:\n"
-"%s"
-msgstr ""
-"Fehler beim Laden der Wiedergabeliste in den Server %s:\n"
-"%s"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:381
 #, python-format
 msgid ""
 "Error loading filelist into server %s:\n"
@@ -578,77 +132,81 @@ msgstr ""
 "Fehler beim Laden der Dateiliste in den Server %s:\n"
 "%s"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_VLCPlayer.py:466
+#, python-format
+msgid ""
+"Error loading playlist %s into server %s:\n"
+"%s"
+msgstr ""
+"Fehler beim Aktualisieren %s der Wiedergabeliste vom Server %s:\n"
+"%s"
+
+#, python-format
+msgid ""
+"Error loading playlist into server %s:\n"
+"%s"
+msgstr ""
+"Fehler beim Laden der Wiedergabeliste in den Server %s:\n"
+"%s"
+
 #, python-format
 msgid ""
 "Error switching directory:\n"
 "%s"
 msgstr ""
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:33
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:174
-msgid "City"
-msgstr "Stadt"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:33
-#, fuzzy
-msgid "City2"
-msgstr "Stadt 2"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:33
-#, fuzzy
-msgid "City3"
-msgstr "Stadt 3"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:33
-#, fuzzy
-msgid "City4"
-msgstr "Stadt 4"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:33
-#, fuzzy
-msgid "City5"
-msgstr "Stadt 5"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:34
-msgid "Celsius"
+#, python-format
+msgid ""
+"Error updating file- and playlist from server %s:\n"
+"%s"
 msgstr ""
+"Fehler beim Aktualisieren der Datei- und Wiedergabeliste vom Server %s:\n"
+"%s"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:34
+#, python-format
+msgid ""
+"Error updating filelist from server %s:\n"
+"%s"
+msgstr ""
+"Fehler beim Aktualisieren der Dateiliste vom Server %s:\n"
+"%s"
+
+#, python-format
+msgid ""
+"Error with VLC server:\n"
+"%s"
+msgstr ""
+"Fehler mit dem VLC Server :\n"
+"%s"
+
 msgid "Farenheit"
 msgstr ""
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:35
+msgid "Favorites"
+msgstr "Favoriten"
+
+msgid "File Browser"
+msgstr ""
+
+msgid "Frame size in full view"
+msgstr ""
+
+msgid ""
+"GUI needs a restart to apply a new skin\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+
 msgid "German"
 msgstr "Deutsch"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:35
-msgid "English"
-msgstr "Englisch"
+msgid "Global Settings"
+msgstr ""
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:48
+msgid "Go to Playlist"
+msgstr "Zur Wiedergabeliste"
+
+msgid "Hip Hop"
+msgstr ""
+
 msgid ""
 "Humidity :\n"
 "Wind :"
@@ -656,87 +214,224 @@ msgstr ""
 "Luftfeuchtigkeit :\n"
 "Wind :"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:119
-msgid "Updating Weather Info ..."
-msgstr "Wetterinformationen aktualisieren"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:121
-msgid "Updating Weather Info failed (Twisted Web not installed)"
-msgstr "Fehler beim Aktualisieren der Wetterinformation ( Twisted Web nicht installiert)"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:175
-msgid "City 2"
-msgstr "Stadt 2"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:176
-msgid "City 3"
-msgstr "Stadt 3"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:177
-msgid "City 4"
-msgstr "Stadt 4"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:178
-msgid "City 5"
-msgstr "Stadt 5"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:179
-msgid "Metric"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/MC_WeatherInfo.py:180
 msgid "Language"
 msgstr "Sprache"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/plugin.py:39
-msgid "My Music"
-msgstr "Meine Musik"
+msgid "List of Storage Devices"
+msgstr "Liste der Speichergeräte"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/plugin.py:40
-msgid "My Videos"
-msgstr "Meine Videos"
+msgid "Lyrics"
+msgstr "Songtexte"
 
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/plugin.py:41
-msgid "My Pictures"
-msgstr "Meine Bilder"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/plugin.py:43
-msgid "VLC Player"
-msgstr ""
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/plugin.py:44
-msgid "Weather Info"
-msgstr "Wetter Infos"
-
-#: C:\Users\Benny\Documents\aaf\mips
-#: git
-#: aaf\git\pluginsnew\bmediacenter\src/plugin.py:112
 msgid "Media Center"
 msgstr ""
 
+msgid "Metric"
+msgstr ""
+
+msgid "My Music"
+msgstr "Meine Musik"
+
+msgid "My Pictures"
+msgstr "Meine Bilder"
+
+msgid "My Videos"
+msgstr "Meine Videos"
+
+msgid "Name"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "No lyrics found"
+msgstr "Keine Songtexte gefunden"
+
+msgid "Parent Directory"
+msgstr ""
+
+msgid "Please enter filename (empty = use current date)"
+msgstr "Bitte gib den Dateinamen ein (leer= benutz aktuelles Datum)"
+
+msgid "Please select a playlist to delete..."
+msgstr "Bitte wähle eine Wiedergabeliste die gelöscht werden soll..."
+
+msgid "Please select a playlist..."
+msgstr "Bitte wählen Sie eine Wiedergabeliste..."
+
+msgid "Really delete this Server?"
+msgstr "Willst du diesen Server wirklich löschen?"
+
+msgid "Really delete this favorite?"
+msgstr "Willst du diesen Favoriten wirklich löschen?"
+
+#, python-format
+msgid "Response -> lyrics for: %s (%s)"
+msgstr "Rückmeldung -> Songtexte für %s (%s)"
+
+msgid "Restart GUI now?"
+msgstr ""
+
+msgid "Rock"
+msgstr ""
+
+msgid "Save Playlist"
+msgstr "Wiedergabeliste speichern"
+
+msgid "Scaling Mode"
+msgstr ""
+
+msgid "Screen Adjustment"
+msgstr ""
+
+msgid "Screensaver Enable"
+msgstr "Bildschirmschoner aktivieren"
+
+msgid "Screensaver Interval"
+msgstr "Bildschirmschoner Intervall"
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "Show MC in Extension-Menu"
+msgstr ""
+
+msgid "Show MC in Main-Menu"
+msgstr ""
+
+msgid "Skin Selector"
+msgstr ""
+
+msgid "Slideshow Interval (sec.)"
+msgstr "Slideshow Intervall (sek.)"
+
+msgid "Techno/House"
+msgstr ""
+
+#, python-format
+msgid "This Dreambox can't decode %s video streams!"
+msgstr "Diese OpenAFF Box kann diese  Videostreams nicht wiedergeben! (%s)"
+
+msgid "Thumbnail Height"
+msgstr "Vorschau Höhe"
+
+msgid "Thumbnail Width"
+msgstr "Vorschau Breite"
+
+msgid "Title: "
+msgstr "Titel:"
+
+msgid "Updating Weather Info ..."
+msgstr "Wetterinformationen aktualisieren"
+
+msgid "Updating Weather Info failed (Twisted Web not installed)"
+msgstr ""
+"Fehler beim Aktualisieren der Wetterinformation ( Twisted Web nicht "
+"installiert)"
+
+msgid "Weather Info"
+msgstr "Wetter Infos"
+
+msgid "Webradio"
+msgstr ""
+
+msgid ""
+"You have to close playlist before you can go to the next song while playing "
+"from file browser."
+msgstr ""
+"Du musst die Wiedergabeliste schließen, bevor du den nächsten Song aus dem "
+"Filebrowser abspielen kannst."
+
+msgid ""
+"You have to close playlist before you can go to the previous song while "
+"playing from file browser."
+msgstr ""
+"Du musst die Wiedergabeliste schließen, bevor du den vorhergehenden Song aus "
+"dem Filebrowser abspielen kannst."
+
+msgid "add all files in directory to playlist"
+msgstr "Alle Dateien im Ordner zur Wiedergabeliste hinzufügen"
+
+msgid "add directory to playlist"
+msgstr "Ordner zur WIedergabeliste hinzufügen"
+
+msgid "add file to playlist"
+msgstr "Datei zur Wiedergabeliste hinzufügen"
+
+msgid "add file to playlist and play"
+msgstr "Datei zur Wiedergabeliste hinzufügen und abspielen"
+
+msgid "backgroundcolor"
+msgstr "Hintergrundfarbe"
+
+msgid "better"
+msgstr "Besser"
+
+msgid "black"
+msgstr "schwarz"
+
+msgid "blue"
+msgstr "blau"
+
+msgid "by Exif"
+msgstr ""
+
+msgid "clear playlist"
+msgstr "Wiedergabeliste leeren"
+
+msgid "delete directory"
+msgstr "Ordner löschen"
+
+msgid "delete file"
+msgstr "Datei löschen"
+
+msgid "delete from playlist"
+msgstr "Von Wiedergabeliste löschen"
+
+msgid "delete saved playlist"
+msgstr "Gespeicherte Wiedergabeliste löschen"
+
+msgid "filename"
+msgstr "Dateiname"
+
+msgid "green"
+msgstr "grÃ¼n"
+
+msgid "load playlist"
+msgstr "Wiedergabeliste laden"
+
+msgid "manual"
+msgstr "manuell"
+
+msgid "none"
+msgstr ""
+
+msgid "nothing connected"
+msgstr "Keine Verbindung"
+
+msgid "please wait, loading picture..."
+msgstr "Bitte warten während das Bild geladen wird..."
+
+msgid "red"
+msgstr "rot"
+
+msgid "save playlist"
+msgstr "Wiedergabeliste speichern"
+
+msgid "show Infoline"
+msgstr "Information anzeigen"
+
+msgid "simple"
+msgstr "Einfach"
+
+msgid "slide picture in loop"
+msgstr ""
+
+msgid "textcolor"
+msgstr "Textfarbe"
+
+msgid "yellow"
+msgstr "gelb"
+
+#~ msgid "Preview"
+#~ msgstr "Vorschau"
