@@ -2,27 +2,20 @@ from enigma import eTimer, eWidget, eRect, eServiceReference, iServiceInformatio
 from Screens.Screen import Screen
 from Screens.ServiceInfo import ServiceInfoList, ServiceInfoListEntry
 from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Pixmap import Pixmap, MovingPixmap
+from Components.Pixmap import Pixmap
 from Components.Label import Label
+from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
-
 from Components.Sources.List import List
 from Screens.MessageBox import MessageBox
-
 from Components.ServicePosition import ServicePositionGauge
 from Components.ServiceEventTracker import ServiceEventTracker
-
 from Components.Sources.StaticText import StaticText
-
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import *
-
 from Tools.Directories import resolveFilename, fileExists, pathExists, createDir, SCOPE_MEDIA, SCOPE_SKIN_IMAGE
 from Components.FileList import FileList
 from Components.AVSwitch import AVSwitch
-from Screens.InfoBar import MoviePlayer
-from Plugins.Plugin import PluginDescriptor
-
 import os
 from os import path as os_path
 #------------------------------------------------------------------------------------------

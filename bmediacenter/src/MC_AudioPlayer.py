@@ -29,13 +29,18 @@ from urllib import quote
 import os
 from os import path as os_path, remove as os_remove, listdir as os_listdir
 from __init__ import _
+
 config.plugins.mc_ap = ConfigSubsection()
 config.plugins.mc_ap.showJpg = ConfigYesNo(default=True)
 config.plugins.mc_ap.jpg_delay = ConfigInteger(default=10, limits=(5, 999))
 config.plugins.mc_ap.repeat = ConfigSelection(default="off", choices = [("off", "off"),("single", "single"),("all", "all")])
 config.plugins.mc_ap.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
 playlist = []
-radirl = "http://mipsel-ipk-update.aaf-board.com/Ampel/radio/"
+try:
+	from enigma import evfd
+except Exception, e:
+	print "Media Center: Import evfd failed"
+radirl = "http://ipkserver.hdmedia-universe.com/bmcradio/"
 #for lyrics
 def getEncodedString(value):
 	returnValue = ""
@@ -139,10 +144,8 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.isVisible = True
 		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.coverArtFileName = ""
-		self["key_red"] = Button(_("Go to Playlist"))
-		self["key_yellow"] = Button(_("Add to Playlist"))
-		self["key_blue"] = Button(_("Settings"))
 		self["fileinfo"] = Label()
+		self["text"] = Label(_("Lyrics"))
 		self["coverArt"] = MediaPixmap()
 		self["currentfolder"] = Label()
 		self["currentfavname"] = Label()
@@ -152,6 +155,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			config.av.downmix_ac3.save()
 			os.system("touch /tmp/.ac3on")
 		self["play"] = Pixmap()
+		self["green"] = Pixmap()
 		self["screensaver"] = MediaPixmap()
 		self.PlaySingle = 0
 		MC_AudioPlayer.STATE = "NONE"
@@ -188,6 +192,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 				"next": (self.KeyNext, "Next song"),
 				"previous": (self.KeyPrevious, "Previous song"),
 			}, -2)
+
 		self.playlistparsers = {}
 		self.addPlaylistParser(PlaylistIOM3U, "m3u")
 		self.addPlaylistParser(PlaylistIOPLS, "pls")
@@ -196,39 +201,59 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		if not pathExists(currDir):
 			currDir = "/"
 		self["currentfolder"].setText(str(currDir))
-		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(mp3|ogg|wav|wave|flac|m4a|m3u|pls|e2pls)", additionalExtensions = "4098:m3u 4098:e2pls 4098:pls")
+		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib" , "/proc", "/ram", "/root" , "/sbin", "/sys", "/tmp", "/usr", "/var"]
+		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(mp3|ogg|wav|wave|flac|m4a|m3u|pls|e2pls)", inhibitDirs = inhibitDirs, additionalExtensions = "4098:m3u 4098:e2pls 4098:pls")
 		self["filelist"] = self.filelist
 		self.JpgTimer = eTimer()
 		self.JpgTimer.callback.append(self.showBackgroundJPG)
 		self.getJPG()
 		self.FileInfoTimer = eTimer()
 		self.FileInfoTimer.callback.append(self.updateFileInfo)
+		self.onLayoutFinish.append(self.updategreen)
 	def Repeat(self):
 		if config.plugins.mc_ap.repeat.getValue() == "off":
 			config.plugins.mc_ap.repeat.value = "single"
+			self["green"].instance.setPixmapFromFile(mcpath +"icons/repeatonegreen.png")
 		elif config.plugins.mc_ap.repeat.getValue() == "single":
 			config.plugins.mc_ap.repeat.value = "all"
+			self["green"].instance.setPixmapFromFile(mcpath +"icons/repeatallgreen.png")
 		else:
 			config.plugins.mc_ap.repeat.value = "off"
+			self["green"].instance.setPixmapFromFile(mcpath +"icons/repeatoffgreen.png")
 		config.plugins.mc_ap.save()
+	def updategreen(self):
+		if config.plugins.mc_ap.repeat.getValue() == "all":
+			self["green"].instance.setPixmapFromFile(mcpath +"icons/repeatallgreen.png")
+		elif config.plugins.mc_ap.repeat.getValue() == "single":
+			self["green"].instance.setPixmapFromFile(mcpath +"icons/repeatonegreen.png")
+		else:
+			return
 	def unlockShow(self):
 		return
 	def lockShow(self):
 		return
 	def up(self):
 		self["filelist"].up()
+		if config.plugins.mc_global.vfd.value == "on":
+			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 	def down(self):
 		self["filelist"].down()
+		if config.plugins.mc_global.vfd.value == "on":
+			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 	def leftUp(self):
 		self["filelist"].pageUp()
+		if config.plugins.mc_global.vfd.value == "on":
+			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 	def rightDown(self):
 		self["filelist"].pageDown()
+		if config.plugins.mc_global.vfd.value == "on":
+			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 	def KeyOK(self):
@@ -535,6 +560,8 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		config.plugins.mc_ap.save()
 		self.session.nav.stopService()
 		MC_AudioPlayer.STATE = "NONE"
+		if config.plugins.mc_global.vfd.value == "on":
+			evfd.getInstance().vfd_write_string(_("My Music"))
 		self.close()
 	def screensavercheckup(self):
 		self.JpgTimer.stop()
@@ -548,7 +575,6 @@ class MC_WebRadio(Screen, HelpableScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		os.system("touch /tmp/.wradio")
 		self.jpgList = []
 		self.jpgIndex = 0
 		self.jpgLastIndex = -1
@@ -590,6 +616,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 				"red": (self.deleteFile, "Delete"),
 				"blue": (self.Settings, "Settings"),
 			}, -2)
+
 		self.playlistparsers = {}
 		self.addPlaylistParser(PlaylistIOM3U, "m3u")
 		self.addPlaylistParser(PlaylistIOPLS, "pls")
@@ -716,6 +743,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 			if sTitle == "":
 				sTitle = currPlay.info().getName().split('/')[-1]
 			self["fileinfo"].setText(_("Title: ") + sTitle + _("\nArtist: ") +  sArtist + _("\nAlbum: ") + sAlbum + _("\nYear: ") + sYear + _("\nGenre: ") + sGenre + _("\nComment: ") + sComment)
+		self.FileInfoTimer.start(10000, True)
 	def deleteFile(self):
 		self.service = self.filelist.getServiceRef()
 		if self.service.type != 4098 and self.session.nav.getCurrentlyPlayingServiceReference() is not None:
@@ -775,7 +803,6 @@ class MC_WebRadio(Screen, HelpableScreen):
 			config.av.downmix_ac3.value = False
 			config.av.downmix_ac3.save()
 			os.remove("/tmp/.ac3on")
-		os.remove("/tmp/.wradio")
 		self.session.nav.stopService()
 		MC_AudioPlayer.STATE = "NONE"
 		self.close()
@@ -789,15 +816,30 @@ class MC_WebRadio(Screen, HelpableScreen):
 			os.remove("/tmp/index.html")
 		menu = []
 		menu.append((_("70-80er"), "70-80er/"))
+		menu.append((_("Blues"), "Blues/"))
+		menu.append((_("Chillout"), "Chillout/"))
 		menu.append((_("Classic"), "classical/"))
+		menu.append((_("Countrymusic"), "Countrymusik/"))
 		menu.append((_("Hip Hop"), "HipHop/"))
+		menu.append((_("Hits"), "Hits/"))
+		menu.append((_("Moviemusic"), "Moviemusik/"))
+		menu.append((_("Oldies"), "Oldies/"))
+		menu.append((_("Party"), "Party/"))
+		menu.append((_("Reggae"), "Reggae/"))
 		menu.append((_("Rock"), "Rock/"))
-		menu.append((_("Techno/House"), "Techno/"))
+		menu.append((_("Rundfunk"), "Rundfunk/"))
+		menu.append((_("Smooth"), "Smooth/"))
+		menu.append((_("Soul"), "Soul/"))
+		menu.append((_("Techno/House"), "Techno/"))		
+		menu.append((_("Worldmusic"), "Worldmusik/"))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title="", list=menu)
 	def menuCallback(self, choice):
 		if choice is None:
 			return
-		os.system("echo "+ choice[1] +" > /tmp/.webselect | wget -O /tmp/index.html "+ radirl +""+ choice[1])
+		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/Aafpanel"):
+			os.system("echo "+ choice[1] +" > /tmp/.webselect | wget -O /tmp/index.html "+ radirl +"/not/")
+		else:
+			os.system("echo "+ choice[1] +" > /tmp/.webselect | wget -O /tmp/index.html "+ radirl +""+ choice[1])
 		self.session.openWithCallback(self.updd, MC_WebDown)
 class MC_WebDown(Screen):
 	def __init__(self, session):

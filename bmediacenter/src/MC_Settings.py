@@ -10,20 +10,23 @@ from Components.Sources.StaticText import StaticText
 from Components.MenuList import MenuList
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import *
-from os import path, walk
+from os import path as os_path, system, walk
 import os
 from __init__ import _
 mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/"
-#-------------------------------------------------------#
+try:
+	from enigma import evfd
+except Exception, e:
+	print "Media Center: Import evfd failed"
 class MC_Settings(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		list = []
 		#list.append(("Titel", "nothing", "entryID", "weight"))
-		list.append(("Global Settings", "MCS_GlobalSettings", "menu_globalsettings", "50"))
-		list.append(("Global Settings", "MCS_GlobalSettings", "menu_globalsettings", "50"))
-		list.append(("Skin Selector", "MCS_SkinSelector", "menu_skinselector", "50"))
-		list.append(("Screen Adjustment", "MCS_ScreenAdjustment", "menu_screenadjustment", "50"))
+		list.append((_("Global Settings"), "MCS_GlobalSettings", "menu_globalsettings", "50"))
+		list.append((_("Global Settings"), "MCS_GlobalSettings", "menu_globalsettings", "50"))
+		list.append((_("Skin Selector"), "MCS_SkinSelector", "menu_skinselector", "50"))
+		list.append((_("Screen Adjustment"), "MCS_ScreenAdjustment", "menu_screenadjustment", "50"))
 		list.append(("Exit", "MCS_Exit", "menu_exit", "50"))
 		self["menu"] = List(list)
 		self["left"] = Pixmap()
@@ -39,6 +42,9 @@ class MC_Settings(Screen):
 			"up": self.prev,
 			"left": self.prev
 		}, -1)
+
+		if config.plugins.mc_global.vfd.value == "on":
+			evfd.getInstance().vfd_write_string(_("Global Settings"))
 	def next(self):
 		self["menu"].selectNext()
 		if self["menu"].getIndex() == 1:
@@ -53,20 +59,20 @@ class MC_Settings(Screen):
 		self.update()
 	def update(self):
 		if self["menu"].getIndex() == 1:
-			self["text"].setText(_("Global Settings"))
 			self["left"].instance.setPixmapFromFile(mcpath +"Screen_Adjustmentsw.png")
 			self["middle"].instance.setPixmapFromFile(mcpath +"Global_Settings.png")
 			self["right"].instance.setPixmapFromFile(mcpath +"Skin_Selectorsw.png")
 		elif self["menu"].getIndex() == 2:
-			self["text"].setText(_("Skin Selector"))
 			self["left"].instance.setPixmapFromFile(mcpath +"Global_Settingssw.png")
 			self["middle"].instance.setPixmapFromFile(mcpath +"Skin_Selector.png")
 			self["right"].instance.setPixmapFromFile(mcpath +"Screen_Adjustmentsw.png")
 		elif self["menu"].getIndex() == 3:
-			self["text"].setText(_("Screen Adjustment"))
 			self["left"].instance.setPixmapFromFile(mcpath +"Skin_Selectorsw.png")
 			self["middle"].instance.setPixmapFromFile(mcpath +"Screen_Adjustment.png")
-			self["right"].instance.setPixmapFromFile(mcpath +"Global_Settingssw.png")	
+			self["right"].instance.setPixmapFromFile(mcpath +"Global_Settingssw.png")
+		if config.plugins.mc_global.vfd.value == "on":
+			evfd.getInstance().vfd_write_string(self["menu"].getCurrent()[0])
+		self["text"].setText(self["menu"].getCurrent()[0])
 	def okbuttonClick(self):
 		print "okbuttonClick"
 		selection = self["menu"].getCurrent()
@@ -80,6 +86,8 @@ class MC_Settings(Screen):
 			else:
 				self.session.open(MessageBox,("Error: Could not find plugin %s\ncoming soon ... :)") % (selection[1]),  MessageBox.TYPE_INFO)
 	def Exit(self):
+		if config.plugins.mc_global.vfd.value == "on":
+			evfd.getInstance().vfd_write_string(_("Settings"))
 		self.close(0)
 #-------------------------------------------------------#
 class MCS_GlobalSettings(Screen):
@@ -140,7 +148,7 @@ class MCS_SkinSelector(Screen):
 		self.skinlist = []
 		self.previewPath = ""
 
-		path.walk(self.root, self.find, "")
+		os_path.walk(self.root, self.find, "")
 
 		self.skinlist.sort()
 		self["SkinList"] = MenuList(self.skinlist)
@@ -216,7 +224,7 @@ class MCS_SkinSelector(Screen):
 		else:
 			pngpath = self.root+self["SkinList"].getCurrent()+"/preview.png"
 
-		if not path.exists(pngpath):
+		if not os_path.exists(pngpath):
 			# FIXME: don't use hardcoded path
 			pngpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/no_coverArt.png"
 
@@ -404,7 +412,7 @@ class MCS_ScreenAdjustment(Screen):
 		config.plugins.mc_globalsettings.dst_height.value = self.curposh
 		config.plugins.mc_globalsettings.save()
 		configfile.save()
-
+		os.system("killall showiframe")
 		self.session.nav.stopService()
 		self.session.nav.playService(self.oldService)
 		self.close()
@@ -412,6 +420,7 @@ class MCS_ScreenAdjustment(Screen):
 	def Exit(self):
 		self.session.nav.stopService()
 		self.session.nav.playService(self.oldService)
+		os.system("killall showiframe")
 		os.system("echo " + hex(config.plugins.mc_globalsettings.dst_top.value)[2:] + " > /proc/stb/vmpeg/0/dst_top")
 		os.system("echo " + hex(config.plugins.mc_globalsettings.dst_left.value)[2:] + " > /proc/stb/vmpeg/0/dst_left")
 		os.system("echo " + hex(config.plugins.mc_globalsettings.dst_width.value)[2:] + " > /proc/stb/vmpeg/0/dst_width")
