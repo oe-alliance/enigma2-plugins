@@ -42,7 +42,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.mounts = iAutoMount.getMountsList()
 		self.createConfig()
 
-		self["actions"] = NumberActionMap(["SetupActions"],
+		self["actions"] = NumberActionMap(["SetupActions", "ColorActions"],
 		{
 			"ok": self.ok,
 			"back": self.close,
