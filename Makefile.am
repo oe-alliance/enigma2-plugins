@@ -104,6 +104,7 @@ SUBDIRS = \
 	tvcharts \
 	unwetterinfo \
 	valixdcontrol \
+	videocolorspace \
 	virtualzap \
 	vlcplayer \
 	vps \

@@ -372,6 +372,14 @@ var WebAdminCore = Class.create(E2WebCore, {
 				
 			}.bind(this)
 		);
+		//WebTv
+		$('webTv').on(
+			'click',
+			function(event, element){
+				window.open('/web-data/tpl/default/streaminterface/index.html', 'WebTV', 'scrollbars=no, width=800, height=740');
+				event.stop();
+			}.bind(this)
+		);
 		//Content
 		var content = $('contentMain');
 		//Pkglist
