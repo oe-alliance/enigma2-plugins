@@ -252,29 +252,44 @@ class MyTubeFeedEntry():
 		video_fmt_map = {}
 		fmt_infomap = {}
 		if videoinfo.has_key('url_encoded_fmt_stream_map'):
-			tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',url=')
+			tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',')
 		else:
 			tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
 		for fmtstring in tmp_fmtUrlDATA:
-			fmturl = fmtid = ""
+			fmturl = fmtid = fmtsig = ""
 			if videoinfo.has_key('url_encoded_fmt_stream_map'):
 				try:
-					(fmturl, fmtid) = fmtstring.split('&itag=')
-					if len(fmtid) >= 3:
-						fmtid = fmtid[:2]
-					if fmturl.find("url=") !=-1:
-						fmturl = fmturl.replace("url=","")
+					for arg in fmtstring.split('&'):
+						if arg.find('=') >= 0:
+							print arg.split('=')
+							key, value = arg.split('=')
+							if key == 'itag':
+								if len(value) > 3:
+									value = value[:2]
+								fmtid = value
+							elif key == 'url':
+								fmturl = value
+							elif key == 'sig':
+								fmtsig = value
+								
+					if fmtid != "" and fmturl != "" and fmtsig != ""  and VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl), 'fmtsig': fmtsig }
+						fmt_infomap[int(fmtid)] = "%s&signature=%s" %(unquote_plus(fmturl), fmtsig)
+					fmturl = fmtid = fmtsig = ""
+
 				except:
-					print "error splitting fmtstring:",fmtstring
+					print "error parsing fmtstring:",fmtstring
+					
 			else:
 				(fmtid,fmturl) = fmtstring.split('|')
-			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid) and fmtid != "":
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print "[MyTube] got",sorted(fmt_infomap.iterkeys())
 		if video_fmt_map and len(video_fmt_map):
 			print "[MyTube] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
-			video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
+			best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
+			video_url = "%s&signature=%s" %(best_video['fmturl'].split(';')[0], best_video['fmtsig'])
 			print "[MyTube] found best available video url:",video_url
 
 		return video_url
