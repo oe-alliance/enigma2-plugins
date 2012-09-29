@@ -473,7 +473,7 @@ class IMDB(Screen):
 #				fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + self.event_quoted + "&s=tt&site=aka"
 #			else:
 #				fetchurl = "http://akas.imdb.com/find?s=tt;mx=20;q=" + self.event_quoted
-			fetchurl = "http://imdb.com/find?q=" + self.event_quoted + "&s=tt&site=aka"
+			fetchurl = "http://imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 			print("[IMDB] Downloading Query " + fetchurl + " to " + localfile)
 			downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
 		else:
