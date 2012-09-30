@@ -25,7 +25,7 @@ def getMountP():
 		mounts = open("/proc/mounts")
 	except IOError:
 		return []
-		
+
 	lines = mounts.readlines()
 	mounts.close()
 	return lines
@@ -38,7 +38,7 @@ def ismounted(dev,mp):
 			if parts[0] == dev or parts[1] == mp:
 				return parts[1]
 	return False
-	
+
 def getFreeSize(mp):
 	try:
 		stat = statvfs(mp)
@@ -60,27 +60,27 @@ class FlashExpander(Screen):
 			"cancel": self.Exit,
 			"ok": self.Ok
 		}, -1)
-		
+
 		if ismounted("","/usr"):
 			self.__foundFE=True
 			list = [(_("... is used, %dMB free") % getFreeSize("/usr"))]
 		else:
 			self.__foundFE=False
 			list = [(_("FlashExpander is not installed, create? Press Key OK."))]
-		
+
 		self["list"] = MenuList(list=list)
-		
+
 	def Ok(self):
 		if self.__foundFE==False:
 			self.session.openWithCallback(self.__confCallback,FEconf)
-			
+
 	def __confCallback(self,data):
 		if data==False:
 			self.Exit()
 		else:
 			self.close()
 			quitMainloop(2)
-		
+
 	def Exit(self):
 		self.close()
 		#cleanexit(__name__)
@@ -115,9 +115,9 @@ class FEconf(Screen):
 						bustype = devices.bus_type()
 					except:
 						bustype = _("unknown")
-					if fstype in ("ext2","ext3","ext4","xfs"): 
+					if fstype in ("ext2","ext3","ext4","xfs"):
 						list.append(("%s (%s) - Partition %d (%s)" %(devices.model(), bustype, y+1, fstype),(devices, y+1, fstype)))
-		
+
 		#Netzlaufwerke
 		try:
 			for x in getMountP():
@@ -129,13 +129,13 @@ class FEconf(Screen):
 						list.append(("Server (%s) - Path (%s)" %(server[0], server[1]),server))
 		except:
 			print "[FlashExpander] <getMountPoints>"
-			
+
 		if len(list)==0:
 			list.append((_("No HDD-, SSD- or USB-Device found. Please first initialized."),None))
 
 		self["list"] = MenuList(list=list)
 		self.Console = Console()
-	
+
 	def Ok(self):
 		sel = self["list"].getCurrent()
 		if sel and sel[1]:
@@ -145,7 +145,7 @@ class FEconf(Screen):
 			if len(sel[1])==2:#Server
 				tstr = _("Are you sure want to create FlashExpander on \nServer: %s\nPath: %s") % (sel[1][0], sel[1][1])
 				self.session.openWithCallback(boundFunction(self.__startFE_server,sel[1]), MessageBox, tstr)
-			
+
 	def __getPartitionType(self,device):
 		fstype = None
 		try:
@@ -164,7 +164,7 @@ class FEconf(Screen):
 			print "[FlashExpander] <error get fstype>"
 			return False
 		return fstype
-		
+
 	def __getPartitionUUID(self,device):
 		try:
 			if path.exists("/dev/disk/by-uuid"):
@@ -202,26 +202,26 @@ class FEconf(Screen):
 			#	cmd = "rm -rf %s/* && cp -a /usr/* %s/" % (mountpoint, mountpoint)
 			#	self.Console.ePopen(cmd, self.__CopyFinished)
 			#	self.__message = self.session.openWithCallback(boundFunction(self.__EndCB,(partitionPath,uuidPath,fstype)), MessageBox, _("Please wait, Flash memory will be copied."), MessageBox.TYPE_INFO,enable_input=False)
-			
+
 	def __startFE_server(self, val, result):
 		if result:
 			server = val[0]
 			path = val[1]
 			print "[FlashExpander]",server,path
-			
+
 			mountpoint = ismounted("%s:%s" %(server,path),"")
 			self.__copyFlash(mountpoint,("%s:%s" %(server,path),None,"nfs"))
 			#if self.__checkMountPoint(mountpoint):
 			#	cmd = "rm -rf %s/* && cp -a /usr/* %s/" % (mountpoint, mountpoint)
 			#	self.Console.ePopen(cmd, self.__CopyFinished)
 			#	self.__message = self.session.openWithCallback(boundFunction(self.__EndCB,("%s:%s" %(server,path),None,"nfs")), MessageBox, _("Please wait, Flash memory will be copied."), MessageBox.TYPE_INFO,enable_input=False)
-				
+
 	def __copyFlash(self,mp,data):
 		if self.__checkMountPoint(mp):
-			cmd = "rm -rf %s/* && cp -a /usr/* %s/" % (mp,mp)
+			cmd = "cp -af /usr/* %s/" % (mp,mp)
 			self.Console.ePopen(cmd, self.__CopyFinished)
 			self.__message = self.session.openWithCallback(boundFunction(self.__EndCB,data), MessageBox, _("Please wait, Flash memory will be copied."), MessageBox.TYPE_INFO,enable_input=False)
-	
+
 	def __mount(self,dev,mp):
 		if path.exists(mp)==False:
 			createDir(mp,True)
@@ -229,7 +229,7 @@ class FEconf(Screen):
 		#print "[FlashExpander]",cmd
 		res = system(cmd)
 		return (res >> 8)
-		
+
 	def __checkMountPoint(self,mp):
 		if mp == False:
 			self.session.open(MessageBox, _("Mount failed (%s)") %fstype, MessageBox.TYPE_ERROR, timeout=5)
@@ -238,7 +238,7 @@ class FEconf(Screen):
 			self.session.open(MessageBox, _("Too little free space < 180MB or wrong Filesystem!"), MessageBox.TYPE_ERROR, timeout=5)
 			return False
 		return True
-		
+
 	def __CopyFinished(self, result, retval, extra_args = None):
 		if retval==0:
 			self.__message.close(True)
@@ -262,12 +262,11 @@ class FEconf(Screen):
 						continue
 					if len(x)>1 and x[0]!='#':
 						newlines.append(x)
-				
+
 				if fstype=="nfs":
 					newlines.append("%s\t/usr\t%s\trw,nolock,timeo=14,intr\t0 0" %(devPath, fstype))
 				else:
-					newlines.append("%s\t/usr\t%s\tdefaults\t0 0" %(uuidPath, fstype))
-				
+					newlines.append("%s\t/usr\tauto\tdefaults\t0 0" %(uuidPath))
 				fp = file("/etc/fstab", 'w')
 				fp.write("#automatically edited by FlashExpander\n")
 				for x in newlines:
@@ -275,7 +274,7 @@ class FEconf(Screen):
 				fp.close()
 
 				print "[FlashExpander] write new /etc/fstab"
-				self.session.openWithCallback(self.Exit, MessageBox, _("Do you want to reboot your Dreambox?"))
+				self.session.openWithCallback(self.Exit, MessageBox, _("Do you want to reboot your STB_BOX?"))
 			except:
 				self.session.open(MessageBox, _("error adding fstab entry for: %s") % (devPath), MessageBox.TYPE_ERROR, timeout=5)
 				return
