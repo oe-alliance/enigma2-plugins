@@ -96,6 +96,8 @@ class GrabStream:
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.cmdFinished)
 		self.container.dataAvail.append(self.dataAvail)
+		
+		self.__finished = False
 
 		print '[Screengrab.py] starting AiO grab with cmdline:', cmd
 		self.container.execute(*cmd)
@@ -119,9 +121,11 @@ class GrabStream:
 			self.request.write(self.output)
 		else:
 			self.request.write('Internal error')
-
-		self.request.finish()
+		if not self.__finished:
+			self.request.finish()
 
 	def dataAvail(self, data):
-		print '[Screengrab.py] data Available ', data
-
+		self.__finished = True
+	
+	def requestFinished(self, val):
+		pass

@@ -39,10 +39,10 @@
 								<td colspan="2">
 									<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;" id="mpContent">
 										{if mp.hasparent}
-										<tr class="mpListItem" data-servicereference="${mp.servicereference}">
+										<tr class="mpListItem" data-servicereference="${mp.servicereference.e()}">
 											<td>
 												<div class="sListSName">
-													<a href="#!/extras/mediaplayer/${mp.servicereference}" style="color: #000; display:block;" class="mpListSLink" title="Change to ${mp.name}"><img style="vertical-align: bottom;" src="/web-data/img/folder.png" alt="|" />${mp.name}</a>
+													<a href="#!/extras/mediaplayer/${mp.servicereference}" style="color: #000; display:block;" class="mpListSLink" title="${strings.change_to_item.format(mp.name)}"><img style="vertical-align: bottom;" src="/web-data/img/folder.png" alt="|" /> ${mp.name}</a>
 												</div>
 											</td>
 											<td>&nbsp;</td>
@@ -54,22 +54,22 @@
 											<td>
 												<div class="sListSName">
 													{if item.isdir}
-													<a href="#!/extras/mediaplayer/${item.servicereference}" style="color: #000; display:block;" class="mpListSLink" title="Change to ${item.name}"><img style="vertical-align: bottom;" src="/web-data/img/folder.png" alt="|" /> ${item.name}</a>
+													<a href="#!/extras/mediaplayer/${item.servicereference}" style="color: #000; display:block;" class="mpListSLink" title="${strings.change_to_item.format(item.name)}"><img style="vertical-align: bottom;" src="/web-data/img/folder.png" alt="|" /> ${item.name}</a>
 													{else}
-													<a href="#" class="mpListFile mpListSLink" title="${strings.play} '${item.name}'"><img style="vertical-align: bottom;" src="/web-data/img/page.png" alt="-" /> ${item.name}</a>
+													<a href="#" class="mpListFile mpListSLink" title="${strings.play_item.format(item.name)}"><img style="vertical-align: bottom;" src="/web-data/img/page.png" alt="-" /> ${item.name}</a>
 													{/if}
 												</div>
 											</td>
 											<td style="width: 80px;">
 												<div style="text-align: right;">
 												{if item.root == "playlist"}
-													<a href="#" style="color: #000;" class="mpPlayFile" title="${strings.play} '${item.name}'"><img src="/web-data/img/control_play_blue.png"></a>
-													<a href="#" style="color: #000;" class="mpRemoveFile" title="Remove '${item.name}' from playlist"><img src="/web-data/img/nok.png" border="0" /></a>
-													<a target="_blank" href="/file?file=${item.name}"><img src="/web-data/img/save.png" title="Download '${item.name}'" border="0"></a>
+													<a href="#" style="color: #000;" class="mpPlayFile" title="${strings.play_item.format(item.name)}"><img src="/web-data/img/control_play_blue.png"></a>
+													<a href="#" style="color: #000;" class="mpRemoveFile" title="${strings.remove_item_from_playlist.format(item.name)}"><img src="/web-data/img/nok.png" border="0" /></a>
+													<a target="_blank" href="/file?file=${item.name}"><img src="/web-data/img/save.png" title="${strings.download_item.format(item.name)}" border="0"></a>
 												{elseif !item.isdir}
-													<a href="#" class="mpPlayFile" title="${strings.play} '${item.name}'"><img src="/web-data/img/control_play_blue.png" border="0" alt="&gt;" /></a>
-													<a href="#" class="mpAddFile" title="Add '${item.name}' to Playlist"><img src="/web-data/img/page_add.png" border="0" alt="+" /></a>
-													<a target="_blank" href="/file?file=${item.name}&root=${item.root}"><img src="/web-data/img/save.png" title="Download '${item.name}'" border="0" alt="Download"/></a>
+													<a href="#" class="mpPlayFile" title="${strings.play_item.format(item.name)}"><img src="/web-data/img/control_play_blue.png" border="0" alt="&gt;" /></a>
+													<a href="#" class="mpAddFile" title="${strings.add_item_to_playlist.format(item.name)}"><img src="/web-data/img/page_add.png" border="0" alt="+" /></a>
+													<a target="_blank" href="/file?file=${item.name}&root=${item.root}"><img src="/web-data/img/save.png" title="${strings.download_item.format(item.name)}" border="0" alt="${strings.download}"/></a>
 												{else}
 													<!--
 													<a href="#" class="mpAddFolder" title="Add folder '${item.name}' to playlist"><img src="/web-data/img/folder_add.png" border="0" alt="Add" /></a>

@@ -17,17 +17,17 @@
 														<td style="width: 460px;">
 															<div class="sListSName">
 
-																<a href="#" id="${item.now.servicereference}" class="sListSLink" title="Zap to ${item.now.servicename}">${item.now.servicename}</a>
+																<a href="#" id="${item.now.servicereference}" class="sListSLink" title="${strings.zap_to_channel.format(item.now.servicename)}">${item.now.servicename}</a>
 															</div>
 														</td>
 														<td>
 															<a href="#" class="sListServiceEpg right block" data-servicereference="${item.now.servicereference}">
-																<img src="/web-data/img/epg.png" border="0" title="${strings.show_epg_for} ${item.now.servicename}"/>
+																<img src="/web-data/img/epg.png" border="0" title="${strings.show_epg_for.format(item.now.servicename)}"/>
 															</a>
 														</td>
 														<td>
 															<a class="right block" target="_blank" href="/web/stream.m3u?ref=${item.now.servicereference}">
-																<img src="/web-data/img/screen.png" title="${strings.stream_channel} ${item.now.servicename}" border="0" />
+																<img src="/web-data/img/screen.png" title="${strings.stream_channel.format(item.now.servicename)}" border="0" />
 															</a>
 														</td>
 													</tr>

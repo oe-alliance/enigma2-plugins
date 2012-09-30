@@ -1,4 +1,5 @@
 from Components.Sources.Source import Source
+from Plugins.Extensions.WebInterface import _
 
 class Strings(Source):
 	def __init__(self):
@@ -91,17 +92,17 @@ class Strings(Source):
 			["tools" , _("Tools")],
 			["about" , _("About")],
 			["show_hide_extended_desc" , _("Click to show/hide extended description")],
-			["show_epg_for" , _("Show EPG for")],
-			["stream_channel" , _("Stream Channel")],
+			["show_epg_for" , _("Show EPG for %s")],
+			["stream_channel" , _("Stream %s")],
 			["do_stream", _("Stream")],
 			["instant_record" , _("Instant Record")],
 			["record_current_event" , _("Record current event")],
 			["start_record_infinite" , _("Start infinite recording")],
 			["open_signal_panel" , _("Open Signal Panel")],
-			["zap_to_channel" , _("Zap to")],
-			["open_multi_epg_for" , _("Open Multi-EPG for")],
+			["zap_to_channel" , _("Zap to %s")],
+			["open_multi_epg_for" , _("Open Multi-EPG for %s")],
 			["load_bouquet", _("Load Bouquet")],
-			["playlist_for", _("Playlist for")],
+			["playlist_for", _("Playlist for %s")],
 			["imdb_lookup", _("Lookup on IMDb.com")],
 			["add_timer", _("Add Timer")],
 			["add_zap_timer", _("Add Zap Timer")],
@@ -161,6 +162,12 @@ class Strings(Source):
 			["seconds_short", _("sec")],
 			["previous", _("Previous")],
 			["play", _("Play")],
+			["play_item", _("Play %s")],
+			["add_item_to_playlist", _("Add %s to playlist")],
+			["remove_item_from_playlist", _("Remove %s from playlist")],
+			["download_item", _("Downlad %s")],
+			["delete_item", _("Delete %s")],
+			["change_to_item", _("Change to %s")],
 			["next", _("Next")],
 			["stop", _("Stop")],
 			["filebrowser", _("Filebrowser")],
@@ -168,6 +175,7 @@ class Strings(Source):
 			["save_playlist", _("Save Playlist")],
 			["close_mediaplayer", _("Close MediaPlayer")],
 			["no_items", _("No items to show...")],
+			["remaining_minutes", _("%s of %s min")],
 		]
 
 	list = property(getList)

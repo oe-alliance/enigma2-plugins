@@ -5,10 +5,10 @@
 										<li>
 											<div class="bouquetIcons">
 												<a target="_blank" href="/web/services.m3u?bRef=${bouquet.servicereference}">
-													<img src="/web-data/img/screen.png" title="${strings.playlist_for} ${bouquet.servicename}" border="0" alt="${strings.playlist}">
+													<img src="/web-data/img/screen.png" title="${strings.playlist_for.format(bouquet.servicename)}" border="0" alt="${strings.playlist}">
 												</a>
 												<a href="#" class="bListEpg" data-servicereference="${bouquet.servicereference}">
-													<img src="/web-data/img/epg.png" title="${strings.open_multi_epg_for} ${bouquet.servicename}" border="0" alt="Multi EPG">
+													<img src="/web-data/img/epg.png" title="${strings.open_multi_epg_for.format(bouquet.servicename)}" border="0" alt="Multi EPG">
 												</a>
 											</div>
 											<div class="bouquetName">

@@ -10,6 +10,7 @@ from os import access, chmod, X_OK
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT
 from ServiceReference import ServiceReference
 from Components.TimerSanityCheck import TimerSanityCheck
+import Screens.Standby
 import NavigationInstance
 
 vps_exe = eEnv.resolve("${libdir}/enigma2/python/Plugins/SystemPlugins/vps/vps")
@@ -521,6 +522,14 @@ class vps_timer:
 				self.program_abort()
 				self.stop_simulation()
 				self.timer.log(0, "[VPS] stop recording, too much autoincrease")
+			
+			try:
+				if self.timer.vpsplugin_wasTimerWakeup:
+					self.timer.vpsplugin_wasTimerWakeup = False
+					if not Screens.Standby.inTryQuitMainloop:
+						RecordTimerEntry.TryQuitMainloop(False)
+			except:
+				pass
 		
 		return self.nextExecution
 
@@ -580,17 +589,20 @@ class vps:
 			o_timer.program_abort()
 			o_timer.stop_simulation()
 	
+	def checkNextAfterEventAuto(self):
+		if NavigationInstance.instance.wasTimerWakeup() and config.plugins.vps.allow_wakeup.value and len(self.session.nav.RecordTimer.timer_list) > 0:
+			next_timer = self.session.nav.RecordTimer.timer_list[0]
+			if next_timer.vpsplugin_enabled and next_timer.afterEvent == AFTEREVENT.AUTO and (next_timer.begin - (config.plugins.vps.initial_time.value * 60) - 300) < time():
+				next_timer.vpsplugin_wasTimerWakeup = True
+	
 	def NextWakeup(self):
 		if config.plugins.vps.enabled.value == False or config.plugins.vps.allow_wakeup.value == False:
 			return -1
 		
 		try:
 			for timer in self.session.nav.RecordTimer.timer_list:
-				if timer.vpsplugin_enabled == True and timer.state == TimerEntry.StateWaiting and not timer.justplay and not timer.repeated and not timer.disabled:
-					if config.plugins.vps.initial_time.value < 2 and timer.vpsplugin_overwrite:
-						return (timer.begin - 180)
-					
-					return (timer.begin - (config.plugins.vps.initial_time.value * 60) - 60)
+				if timer.vpsplugin_enabled and timer.state == TimerEntry.StateWaiting and not timer.justplay and not timer.repeated and not timer.disabled:
+					return (timer.begin - (config.plugins.vps.initial_time.value * 60))
 		except:
 			pass
 		

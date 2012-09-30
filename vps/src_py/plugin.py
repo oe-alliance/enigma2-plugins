@@ -23,6 +23,7 @@ def autostart(reason, **kwargs):
 		if kwargs.has_key("session"):
 			session = kwargs["session"]
 			vps_timers.session = session
+			vps_timers.checkNextAfterEventAuto()
 			vps_timers.checkTimer()
 
 			try:
