@@ -1,3 +1,4 @@
+#Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/plugin.py
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Label import Label
@@ -284,7 +285,7 @@ class msnWetterDateMain(Screen):
             self['text7'].setText('')
             self['text8'].setText('')
             self['text9'].setText('')
-        pic = re.findall('<img src="http://est.msn.com/as/wea3/i/de/law/(.*?)[.]gif" height', bereich)
+        pic = re.findall('<img src="http://.*?msn.com/as/wea3/i/de/law/(.*?)[.]gif" height', bereich)
         pic1 = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/wetter/' + pic[0] + '.png'
         if fileExists(pic1):
             self.showPic1(pic1)
@@ -809,7 +810,7 @@ class msnWetterMain(Screen):
             self['text7'].setText('')
             self['text8'].setText('')
             self['text9'].setText('')
-        pic = re.findall('<img src="http://est.msn.com/as/wea3/i/de/law/(.*?)[.]gif" height', bereich)
+        pic = re.findall('<img src="http://.*?msn.com/as/wea3/i/de/law/(.*?)[.]gif" height', bereich)
         pic1 = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/wetter/' + pic[0] + '.png'
         if fileExists(pic1):
             self.showPic1(pic1)
@@ -1165,7 +1166,7 @@ class msnCity(Screen):
         title = sub(' [(]weatherlocation[)] - Aktuelle Wetterlage, Wettervorhersage, Niederschlagsvorhersage und Temperaturen bei MSN Wetter.', '', title[0])
         title = transHTML(title)
         self.setTitle(title)
-        pic = re.findall('<img src="http://est.msn.com/as/wea3/i/de/law/(.*?)[.]gif" height', bereich)
+        pic = re.findall('<img src="http://.*?msn.com/as/wea3/i/de/law/(.*?)[.]gif" height', bereich)
         pic = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/wetter/' + pic[0] + '.png'
         if fileExists(pic):
             self.showPic(pic)
@@ -1572,7 +1573,7 @@ class msnCities(Screen):
 
 
 class infoMSNWetter(Screen):
-    skin = '\n\t\t\t\t<screen position="center,center" size="229,196" title="msn Wetter 0.3" >\n\t\t\t\t\t<ePixmap position="0,0" size="229,196" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/wetter/msnlogo.png" zPosition="1"/>\n\t\t\t\t\t<widget name="label" position="22,174" size="200,20" font="Regular;16" foregroundColor="#FCFCFC" backgroundColor="#14547C" halign="right" valign="center" transparent="1" zPosition="2" />\n\t\t\t\t</screen>'
+    skin = '\n\t\t\t\t<screen position="center,center" size="229,196" title="msn Wetter 0.4" >\n\t\t\t\t\t<ePixmap position="0,0" size="229,196" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/icons/wetter/msnlogo.png" zPosition="1"/>\n\t\t\t\t\t<widget name="label" position="22,174" size="200,20" font="Regular;16" foregroundColor="#FCFCFC" backgroundColor="#14547C" halign="right" valign="center" transparent="1" zPosition="2" />\n\t\t\t\t</screen>'
 
     def __init__(self, session):
         self.skin = infoMSNWetter.skin
@@ -1580,3 +1581,23 @@ class infoMSNWetter(Screen):
         self['label'] = Label('2012 by kashmir')
         self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.close,
          'cancel': self.close}, -1)
+
+
+def main(session, **kwargs):
+    colorfile = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/color'
+    if fileExists(colorfile):
+        f = open(colorfile, 'r')
+        data = f.readline()
+        f.close()
+        if 'bluedate' in data:
+            session.open(msnWetterDateMain)
+        elif 'blackdate' in data:
+            session.open(msnWetterDateMain)
+        elif 'bluenodate' in data:
+            session.open(msnWetterMain)
+        elif 'blacknodate' in data:
+            session.open(msnWetterMain)
+
+
+def Plugins(**kwargs):
+    return [PluginDescriptor(name='msn Wetter', description='msn Wettervorhersage', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=main), PluginDescriptor(name='msn Wetter', description='msn Wettervorhersage', where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main)]
