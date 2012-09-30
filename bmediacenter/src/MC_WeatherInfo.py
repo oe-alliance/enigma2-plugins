@@ -1581,23 +1581,3 @@ class infoMSNWetter(Screen):
         self['label'] = Label('2012 by kashmir')
         self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.close,
          'cancel': self.close}, -1)
-
-
-def main(session, **kwargs):
-    colorfile = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/color'
-    if fileExists(colorfile):
-        f = open(colorfile, 'r')
-        data = f.readline()
-        f.close()
-        if 'bluedate' in data:
-            session.open(msnWetterDateMain)
-        elif 'blackdate' in data:
-            session.open(msnWetterDateMain)
-        elif 'bluenodate' in data:
-            session.open(msnWetterMain)
-        elif 'blacknodate' in data:
-            session.open(msnWetterMain)
-
-
-def Plugins(**kwargs):
-    return [PluginDescriptor(name='msn Wetter', description='msn Wettervorhersage', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=main), PluginDescriptor(name='msn Wetter', description='msn Wettervorhersage', where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main)]
