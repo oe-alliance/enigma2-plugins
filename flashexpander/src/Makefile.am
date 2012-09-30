@@ -5,7 +5,7 @@ install_PYTHON = \
 	flashexpander.py \
 	__init__.py \
 	locale.py \
-	plugin.py \
+	plugin.py
 
 install_DATA = \
 	flashexpander.png \
