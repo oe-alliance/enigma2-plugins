@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 683 $
-$Date: 2012-09-30 13:04:26 +0200 (Sun, 30 Sep 2012) $
-$Id: plugin.py 683 2012-09-30 11:04:26Z michael $
+$Revision: 685 $
+$Date: 2012-09-30 13:37:48 +0200 (Sun, 30 Sep 2012) $
+$Id: plugin.py 685 2012-09-30 11:37:48Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -293,8 +293,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 683 $"[1:-2] + "\n" + 
-							"$Date: 2012-09-30 13:04:26 +0200 (Sun, 30 Sep 2012) $"[1:23] + "\n"
+							"$Revision: 685 $"[1:-2] + "\n" + 
+							"$Date: 2012-09-30 13:37:48 +0200 (Sun, 30 Sep 2012) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -2340,6 +2340,9 @@ class FritzCallPhonebook:
 		if not config.plugins.FritzCall.enable.value:
 			return
 
+		if fritzbox and config.plugins.FritzCall.fritzphonebook.value:
+			fritzbox.loadFritzBoxPhonebook()
+
 		phonebookFilename = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.txt")
 		if config.plugins.FritzCall.phonebook.value and os.path.exists(phonebookFilename):
 			debug("[FritzCallPhonebook] reload: read " + phonebookFilename)
@@ -2427,9 +2430,6 @@ class FritzCallPhonebook:
 #			except ImportError:
 #				debug("[FritzCallPhonebook] LDIF import failed" %line)
 #===============================================================================
-		
-		if fritzbox and config.plugins.FritzCall.fritzphonebook.value:
-			fritzbox.loadFritzBoxPhonebook()
 
 	def search(self, number):
 		# debug("[FritzCallPhonebook] Searching for %s" %number)
@@ -2921,7 +2921,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 683 $"[1: - 1] + "$Date: 2012-09-30 13:04:26 +0200 (Sun, 30 Sep 2012) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 685 $"[1: - 1] + "$Date: 2012-09-30 13:37:48 +0200 (Sun, 30 Sep 2012) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -3153,7 +3153,17 @@ def findFace(number, name):
 	elif name and os.path.exists(nameFile + ".PNG"):
 		facesFile = nameFile + ".PNG"
 	else:
-		facesFile = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
+		sep = name.find(' (')
+		if sep != -1:
+			name = name[:sep]
+		nameFile = os.path.join(facesDir, name)
+		facesFile = ""
+		if name and os.path.exists(nameFile + ".png"):
+			facesFile = nameFile + ".png"
+		elif name and os.path.exists(nameFile + ".PNG"):
+			facesFile = nameFile + ".PNG"
+		else:
+			facesFile = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
 
 	debug("[FritzCall] findFace result: %s" % (facesFile))
 	return facesFile
@@ -3390,7 +3400,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 683 $"[1:-1]	+ "$Date: 2012-09-30 13:04:26 +0200 (Sun, 30 Sep 2012) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 685 $"[1:-1]	+ "$Date: 2012-09-30 13:37:48 +0200 (Sun, 30 Sep 2012) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
