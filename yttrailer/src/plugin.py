@@ -4,8 +4,8 @@
 #  Coded by Dr.Best (c) 2011
 #  Support: www.dreambox-tools.info
 #
-#  All Files of this Software are licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  All Files of this Software are licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License if not stated otherwise in a Files Head. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -14,7 +14,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #  This applies to the source code as a whole as well as to parts of it, unless
 #  explicitely stated otherwise.
@@ -88,9 +88,9 @@ def setup(session,**kwargs):
 
 def Plugins(**kwargs):
 
-	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]	
+	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]
 	list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup, icon="YTtrailer.png"))
-	if config.plugins.yttrailer.show_in_extensionsmenu.value:	
+	if config.plugins.yttrailer.show_in_extensionsmenu.value:
 		list.append(PluginDescriptor(name="YTTrailer Setup", description=_("YouTube-Trailer Setup"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=setup, icon="YTtrailer.png"))
 	return list
 
@@ -102,7 +102,7 @@ def EventViewBase__init__(self, Event, Ref, callback=None, similarEPGCB=None):
 		"showRadio": self.showTrailerList,
 		"startTeletext": self.showConfig
 	})
-	
+
 
 def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None):
 	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)
@@ -254,20 +254,40 @@ class YTTrailer:
 
 		video_fmt_map = {}
 		fmt_infomap = {}
+
 		if videoinfo.has_key('url_encoded_fmt_stream_map'):
-			tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',url=')
+			tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',')
 		else:
 			tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
 		for fmtstring in tmp_fmtUrlDATA:
+			fmturl = fmtid = fmtsig = ""
 			if videoinfo.has_key('url_encoded_fmt_stream_map'):
-				(fmturl, fmtid) = fmtstring.split('&itag=')
-				if fmturl.find("url=") !=-1:
-					fmturl = fmturl.replace("url=","")
+				try:
+					for arg in fmtstring.split('&'):
+						if arg.find('=') >= 0:
+							print arg.split('=')
+							key, value = arg.split('=')
+							if key == 'itag':
+								if len(value) > 3:
+									value = value[:2]
+								fmtid = value
+							elif key == 'url':
+								fmturl = value
+							elif key == 'sig':
+								fmtsig = value
+
+					if fmtid != "" and fmturl != "" and fmtsig != ""  and VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl), 'fmtsig': fmtsig }
+						fmt_infomap[int(fmtid)] = "%s&signature=%s" %(unquote_plus(fmturl), fmtsig)
+					fmturl = fmtid = fmtsig = ""
+
+				except:
+					print "error parsing fmtstring:",fmtstring
+
 			else:
 				(fmtid,fmturl) = fmtstring.split('|')
-			if fmtid.isdigit(): # sometimes youtube is sending stupid things, or I do not know how to handle that crap... anyway, do not let crash the plugin because of that ;)
-				if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
-					video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
+			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid) and fmtid != "":
+				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print "[YTTrailer] got",sorted(fmt_infomap.iterkeys())
 		if video_fmt_map and len(video_fmt_map):
@@ -279,8 +299,10 @@ class YTTrailer:
 					result = decrypt_block(val, l3key)
 					if result[80:88] == rnd:
 						print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
-						video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
+						best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
+						video_url = "%s&signature=%s" %(best_video['fmturl'].split(';')[0], best_video['fmtsig'])
 						print "[YTTrailer] found best available video url:",video_url
+
 		return video_url
 
 class YTTrailerList(Screen, YTTrailer):
@@ -357,7 +379,7 @@ class TrailerPlayer(InfoBarBase, InfoBarShowHide, InfoBarSeek, InfoBarAudioSelec
 
 	ENABLE_RESUME_SUPPORT = True
 	ALLOW_SUSPEND = True
-		
+
 	def __init__(self, session, ref):
 		Screen.__init__(self, session)
 		self.session = session
@@ -383,7 +405,7 @@ class TrailerPlayer(InfoBarBase, InfoBarShowHide, InfoBarSeek, InfoBarAudioSelec
 		self.returning = False
 		self.skinName = "MoviePlayer"
 		self.lastservice = session.nav.getCurrentlyPlayingServiceReference()
-		self.session.nav.playService(ref)		
+		self.session.nav.playService(ref)
 		self.onClose.append(self.__onClose)
 
 	def leavePlayer(self):
