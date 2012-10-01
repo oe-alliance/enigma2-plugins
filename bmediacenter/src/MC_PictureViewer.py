@@ -29,7 +29,7 @@ config.plugins.mc_pp.textcolor = ConfigSelection(default="#0038FF48", choices = 
 config.plugins.mc_pp.framesize = ConfigInteger(default=30, limits=(5, 99))
 config.plugins.mc_pp.infoline = ConfigEnableDisable(default=True)
 config.plugins.mc_pp.loop = ConfigEnableDisable(default=True)
-config.plugins.mc_pp.music =  ConfigInteger(default=1, limits=(1, 2))
+config.plugins.mc_pp.music = ConfigText(default=resolveFilename(SCOPE_MEDIA))
 config.plugins.mc_pp.musicenable = ConfigEnableDisable(default=False)
 mcpath="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/"
 def getAspect():
