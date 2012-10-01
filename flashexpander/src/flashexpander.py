@@ -218,7 +218,7 @@ class FEconf(Screen):
 
 	def __copyFlash(self,mp,data):
 		if self.__checkMountPoint(mp):
-			cmd = "cp -af /usr/* %s/" % (mp,mp)
+			cmd = "cp -af /usr/* %s/" % (mp)
 			self.Console.ePopen(cmd, self.__CopyFinished)
 			self.__message = self.session.openWithCallback(boundFunction(self.__EndCB,data), MessageBox, _("Please wait, Flash memory will be copied."), MessageBox.TYPE_INFO,enable_input=False)
 
