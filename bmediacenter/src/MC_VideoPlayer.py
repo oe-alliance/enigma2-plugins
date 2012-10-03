@@ -193,8 +193,8 @@ class BonkelPlayer(InfoBarBase, InfoBarShowHide, \
 		self.returning = False
 		self.onClose.append(self.__onClose)
 	def __onClose(self):
-		from Screens.MovieSelection import Playlist
-		Playlist.clearPlayList()
+		from Screens.MovieSelection import playlist
+		del playlist[:]
 		self.session.nav.playService(self.lastservice)
 	def handleLeave(self, how):
 		self.is_closing = True
@@ -322,8 +322,7 @@ class BonkelPlayer(InfoBarBase, InfoBarShowHide, \
 	def swapPiP(self):
 		pass
 	def nextPlaylistService(self, service):
-		from MovieSelection import Playlist
-		playlist = Playlist.getPlayList()
+		from MovieSelection import playlist
 		for i, item in enumerate(playlist):
 			if item == service:
 				i += 1
