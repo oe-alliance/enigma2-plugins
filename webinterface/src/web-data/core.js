@@ -232,16 +232,6 @@ var MultiEpg = Class.create(Controller, {
 		var elem = win.document;
 		var _this = this;
 		var onload = function(event){
-//			elem.on(
-//				'resize',
-//				function(event, element){
-//					var tbody = $('mEpgTBody');
-//					var top = tbody.cumulativeOffset().top;
-//					var height = elem.viewport.height - top;
-//					tbody.style.height = height;
-//					console.log(offset);
-//				}
-//			);
 			elem.on(
 				'click',
 				'.mEpgItem',

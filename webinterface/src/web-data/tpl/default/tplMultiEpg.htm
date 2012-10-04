@@ -1,12 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional"
-       "http://www.w3.org/TR/html4/loose.dtd">  
+	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- tplMultiEpg -->
 	<head>
 		<meta content="text/html; charset=UTF-8" http-equiv="content-type">
 		<title>Enigma2 WebControl - MultiEPG</title>
 		<link href="/web-data/tpl/default/multiepg.css" type="text/css" rel="stylesheet">
-		<script type="text/javascript" src="/web-data/lib/libs.packed.js"></script>
+		<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>
 		<script type="text/javascript" src="/web-data/helpers.js"></script>
 	</head>
 	<body>
@@ -27,11 +27,11 @@
 							{for e in epg}
 							<a 	class="mEpgItem"
 								style="height:${e.size}px;"
-								
+
 								name="${e.eventid}"
 								href="#${e.eventid}"
 								title="${e.title.e()}"
-								
+
 								data-servicereference="${e.servicereference.e()}"
 								data-servicename="${e.servicename.e()}"
 								data-eventid="${e.eventid}"
@@ -44,7 +44,7 @@
 								data-title="${e.title.e()}"
 								data-description="${e.description.e()}"
 								data-extdescription="${e.extdescription.e()}">
-								
+
 								<p class="mEpgCell cBlack">${e.starttime} - ${e.endtime}</p>
 								<p class="mEpgCell">${e.title} (${e.remaining} min.)</p>
 								<p class="mEpgCell">${e.description}&nbsp;</p>
@@ -56,7 +56,7 @@
 				</tbody>
 			</table>
 		</div>
-		
+
 		<script type="text/javascript" language="javscript">
 			fxheaderInit('mEpgT',530,1,0);
 			fxheader();

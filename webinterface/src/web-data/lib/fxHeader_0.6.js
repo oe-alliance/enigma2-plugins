@@ -4,10 +4,14 @@
  */
 (function() {
 	var flag = false;
-	var tbl = new Array();
-	this.ge$ = function(d) {
-		return document.getElementById(d);
+	var tbl = [];
+
+	function getFullHeight(tid) {
+		var h = document.viewport.getHeight();
+		h -= $(tid).viewportOffset().top * 2;
+		return h;
 	};
+
 	this.scrollHeader = function(evt) {
 		if (flag) {
 			return;
@@ -18,10 +22,10 @@
 			t = t.parentNode;
 		}
 		var tid = t.id.replace(':scroller', '');
-		var fh = ge$(tid + ':scroller:fx');
-		var sd = ge$(tid + ':scroller');
+		var fh = $(tid + ':scroller:fx');
+		var sd = $(tid + ':scroller');
 		fh.style.left = (0 - sd.scrollLeft) + 'px';
-		var cf = ge$(tid + '_CFB');
+		var cf = $(tid + '_CFB');
 		if (cf) {
 			var dmt = parseInt(cf.getAttribute('dmt'));
 			cf.style.marginTop = (0 - (sd.scrollTop + dmt)) + 'px';
@@ -32,10 +36,10 @@
 				: window.innerWidth;
 	}
 	function addScrollerDivs(tid, noOfCols) {
-		if (ge$(tid + ':scroller')) {
+		if ($(tid + ':scroller')) {
 			return;
 		}
-		var tb = ge$(tid);
+		var tb = $(tid);
 		var tb2 = tb.parentNode;
 		var ns = tb.nextSibling;
 		var sd = document.createElement("div");
@@ -61,8 +65,9 @@
 					+ ":scroller:fxCB' style='width:100%;overflow:hidden;'>&nbsp;</div>";
 		}
 		if (ns) {
-			if (fc)
+			if (fc) {
 				tb2.insertBefore(fc, ns);
+			}
 			tb2.insertBefore(sd2, ns);
 			tb2.insertBefore(sd, ns);
 		} else {
@@ -79,10 +84,10 @@
 		}
 		flag = true;
 		for ( var i = 0; i < tbl.length; i++) {
-			var tbDiv = ge$(tbl[i].tid);
+			var tbDiv = $(tbl[i].tid);
 			var w = tbl[i].swidth + '';
 			if (w.indexOf('%') >= 0) {
-				var ttt = ge$(tbl[i].tid + ':scroller:fx');
+				var ttt = $(tbl[i].tid + ':scroller:fx');
 				ttt.style.width = '0px';
 				var twi = parseInt(w);
 				w = (gbw() * twi / 100);
@@ -90,7 +95,7 @@
 			}
 			// if ie6/7 then allow for 18px scrollbar area
 			tbDiv.style.width = (parseInt(w - 18)) + 'px';
-			var fh = ge$(tbl[i].tid + ':scroller:fx');
+			var fh = $(tbl[i].tid + ':scroller:fx');
 			fh.style.marginLeft = '0px';
 			fh.style.display = '';
 			var cn = fh.childNodes;
@@ -124,7 +129,7 @@
 			// adjusting widths
 			var tHeight = 0;
 			for (j = 0; j < tbl[i].noOfRows; j++) {
-				// var c=ge$(tbl[i].tid+'__cN').rows[j].cells;
+				// var c=$(tbl[i].tid+'__cN').rows[j].cells;
 				var c = t.rows[j].cells;
 				var c2;
 				var oc = tbDiv.rows[j].cells;
@@ -143,7 +148,8 @@
 				tHeight += tbDiv.rows[j].offsetHeight;
 			}
 			tbDiv.style.marginTop = "-" + tHeight + "px";
-			var h = tbl[i].sheight;
+			var h = getFullHeight(tbl[i].tid);
+
 			if (tbDiv.offsetHeight < h) {
 				h = tbDiv.offsetHeight + 18;
 			}
@@ -157,10 +163,10 @@
 				tbDiv.style.marginLeft = "-" + cw + "px";
 				tbDiv.style.display = 'block';
 				fh.style.marginLeft = "-" + cw + "px";
-				var fxcol = ge$(tbl[i].tid + ':scroller:fxcol').style;
+				var fxcol = $(tbl[i].tid + ':scroller:fxcol').style;
 				fxcol.width = (cw) + 'px';
-				var fxCH = ge$(tbl[i].tid + ':scroller:fxCH');
-				var fxCB = ge$(tbl[i].tid + ':scroller:fxCB');
+				var fxCH = $(tbl[i].tid + ':scroller:fxCH');
+				var fxCB = $(tbl[i].tid + ':scroller:fxCB');
 				fxCH.innerHTML = '';
 				fxCB.innerHTML = '';
 				fxCH.appendChild(t2);
@@ -173,20 +179,18 @@
 				fxCB.appendChild(t3);
 			}
 			w = (parseInt(w) - cw) + 'px';
-			ge$(tbl[i].tid + ':scroller').style.height = (h - tHeight) + 'px';
-			ge$(tbl[i].tid + ':scroller').style.width = w;
-			ge$(tbl[i].tid + ':scroller:fx:OuterDiv').style.height = tHeight
-					+ 'px';
-			ge$(tbl[i].tid + ':scroller:fx:OuterDiv').style.width = w;
+			$(tbl[i].tid + ':scroller').style.height = (h - tHeight) + 'px';
+			$(tbl[i].tid + ':scroller').style.width = w;
+			$(tbl[i].tid + ':scroller:fx:OuterDiv').style.height = tHeight + 'px';
+			$(tbl[i].tid + ':scroller:fx:OuterDiv').style.width = w;
 		}
 		window.onresize = fxheader;
 		flag = false;
 	};
 	this.fxheaderInit = function(_tid, _sheight, _noOfRows, _noOfCols) {
-		var tb = new Object();
-		var td = ge$(_tid);
+		var tb = {};
+		var td = $(_tid);
 		tb.tid = _tid;
-		tb.sheight = _sheight;
 		tb.swidth = td.width;
 		if (!tb.swidth || tb.swidth.length == 0) {
 			tb.swidth = td.style.width;
