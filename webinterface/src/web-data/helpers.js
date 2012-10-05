@@ -260,23 +260,21 @@ var AjaxThing = Class.create({
 								} catch(e) {
 									debug('ERROR in callback!');
 									debug(e);
-								} finally {
-									RequestCounter.change(-1);
 								}
 							}
 						}.bind(this),
 						onFailure: function(transport){
-							RequestCounter.change(-1);
 							if(errorback !== undefined){
 								try {
 									errorback(transport);
 								} catch(e) {
 									debug('ERROR in errorback!');
 									debug(e);
-								} finally {
-									RequestCounter.change(-1);
 								}
 							}
+						}.bind(this),
+						onComplete: function(transport){
+							RequestCounter.change(-1);
 						}.bind(this)
 					});
 		} catch(e) {

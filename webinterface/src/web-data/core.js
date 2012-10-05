@@ -548,6 +548,9 @@ var Movies = Class.create(Controller, {
 var RemoteControl = Class.create({
 	initialize: function(){
 		this.handler = new RemoteControlHandler();
+		var _this = this;
+		this.handler.onFinished.push(_this.onKeySent.bind(_this));
+		this.shotType = '';
 		this.window = '';
 	},
 
@@ -575,8 +578,13 @@ var RemoteControl = Class.create({
 
 	sendKey: function(cmd, type, shotType){
 		debug("[RemoteControl].sendKey: " + cmd);
+		this.shotType = shotType;
 		this.handler.sendKey({'command' : cmd, 'type': type});
-		this.screenShot(shotType);
+
+	},
+
+	onKeySent: function(){
+		this.screenShot(this.shotType);
 	},
 
 	screenShot: function(shotType){
@@ -595,15 +603,16 @@ var RemoteControl = Class.create({
 		//wait 250ms before fetching a new screenshot
 		setTimeout(
 			function(){
+				var forceReload = hash == hashListener.getHash();
 				hashListener.setHash(hash);
-				if(hash == hashListener.getHash()){
+				if(forceReload){
 					core.onHashChanged(true);
 				}
 			},
 			250);
 	},
 
-	registerEvents:function(){
+	registerEvents: function(){
 		var _this = this;
 		var win = this.window;
 		var elem = win.document;

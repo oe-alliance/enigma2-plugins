@@ -544,7 +544,8 @@ var ScreenshotHandler = Class.create(AbstractContentHandler, {
 });
 
 var SimpleRequestHandler = Class.create(AbstractContentHandler,{
-	initialize: function(){
+	initialize: function($super){
+		$super();
 		this.provider = new SimpleRequestProvider();
 	},
 
@@ -563,6 +564,7 @@ var RemoteControlHandler = Class.create(SimpleRequestHandler,{
 	},
 
 	showSimpleResult: function(result){
+		this.finished();
 		if(!result.getState())
 			this.notify(result.getStateText(), result.getState());
 	}

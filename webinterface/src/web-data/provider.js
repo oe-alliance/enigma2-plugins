@@ -580,12 +580,12 @@ var ScreenshotProvider = Class.create(AbstractContentProvider, {
 		if(fnc !== undefined){
 			this.callback = fnc;
 		}
-		this.src = this.url + '?' + $H(parms).toQueryString();
-		this.callback(null);
+		var src = this.url + '?' + $H(parms).toQueryString()
+		this.callback(src);
 	},
 
-	callback: function(transport){
-		var data = { img : { src : this.src } };
+	callback: function(src){
+		var data = { img : { 'src' : src } };
 		this.show(data);
 	}
 });

@@ -4,7 +4,7 @@ from twisted.web import resource, http, http_headers, server
 
 from os import path as os_path, remove as os_remove
 from os.path import getsize as os_path_getsize
-				
+
 class GrabResource(resource.Resource):
 	'''
 		this is a interface to Seddis AiO Dreambox Screengrabber
@@ -71,7 +71,7 @@ class GrabResource(resource.Resource):
 			mimetype = imageformat
 			if mimetype == 'jpg':
 				mimetype = 'jpeg'
-				
+
 			request.setHeader('Content-Type','image/%s' %mimetype)
 
 			filename = "%s.%s" %(filename,imageformat)
@@ -95,37 +95,34 @@ class GrabStream:
 
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.cmdFinished)
-		self.container.dataAvail.append(self.dataAvail)
-		
-		self.__finished = False
 
 		print '[Screengrab.py] starting AiO grab with cmdline:', cmd
 		self.container.execute(*cmd)
 
 	def cmdFinished(self, data):
 		print '[Screengrab.py] cmdFinished'
+		self.request.setResponseCode(http.OK)
 		if int(data) is 0 and self.target is not None:
 			try:
 				self.request.setHeader('Content-Length', '%i' %os_path_getsize(self.target))
-				fp = open(self.target)
-				self.request.write(fp.read())
-				fp.close()
+				with open(self.target) as fp:
+					self.request.write(fp.read())
 				if self.save is False:
 					os_remove(self.target)
 					print '[Screengrab.py] %s removed' %self.target
 			except Exception,e:
 				self.request.write('Internal error while reading target file')
+				self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
+
 		elif int(data) is 0 and self.target is None:
 			self.request.write(self.output)
 		elif int(data) is 1:
 			self.request.write(self.output)
 		else:
-			self.request.write('Internal error')
-		if not self.__finished:
-			self.request.finish()
+			self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
 
-	def dataAvail(self, data):
-		self.__finished = True
-	
+		self.request.finish()
+
 	def requestFinished(self, val):
 		pass
+
