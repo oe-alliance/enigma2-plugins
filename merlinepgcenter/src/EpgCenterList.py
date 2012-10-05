@@ -829,8 +829,8 @@ class EpgCenterList(GUIComponent):
 					
 					timerBegin = datetime.fromtimestamp(timer.begin).time()
 					timerEnd = datetime.fromtimestamp(timer.end).time()
-					netTimerBegin = datetime.fromtimestamp(int(timer.begin) + 60 * config.recording.margin_before.value).time()
-					netTimerEnd = datetime.fromtimestamp(int(timer.end) - 60 * config.recording.margin_after.value).time()
+					netTimerBegin = datetime.fromtimestamp(int(timer.begin) + 60 * config.recording.margin_before.getValue()).time()
+					netTimerEnd = datetime.fromtimestamp(int(timer.end) - 60 * config.recording.margin_after.getValue()).time()
 					eventBegin = datetime.fromtimestamp(begin).time()
 					eventEnd = datetime.fromtimestamp(end).time()
 					

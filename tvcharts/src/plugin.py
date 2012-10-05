@@ -525,7 +525,7 @@ class DBUpdateStatus(Screen):
 
 		if event is not None:
 			curEvent = parseEvent(event)
-			event_begin = int(curEvent[0])+(config.recording.margin_before.value*60)
+			event_begin = int(curEvent[0])+(config.recording.margin_before.getValue()*60)
 			event_description = event.getExtendedDescription()
 
 		# Get Box Info
@@ -541,7 +541,7 @@ class DBUpdateStatus(Screen):
 			try:
 				for timer in self.recordtimer.timer_list:
 					if timer.disabled == 0 and timer.justplay == 0:
-						self.timerlist += "%s|%s|%s|%s|%s|%s|%s\n" % (timer.eit,str(int(timer.begin)+(config.recording.margin_before.value*60)), str(int(timer.end)-(config.recording.margin_after.value*60)), str(timer.service_ref), timer.name, timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8"), timer.repeated)
+						self.timerlist += "%s|%s|%s|%s|%s|%s|%s\n" % (timer.eit,str(int(timer.begin)+(config.recording.margin_before.getValue()*60)), str(int(timer.end)-(config.recording.margin_after.getValue()*60)), str(timer.service_ref), timer.name, timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8"), timer.repeated)
 			except Exception:
 				print "[TVCharts] Error loading timers!"
 

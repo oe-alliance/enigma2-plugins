@@ -312,8 +312,8 @@ class vps_timer:
 	
 	
 	def copyTimer(self, start, duration):
-		starttime = start - config.recording.margin_before.value * 60
-		endtime = start + duration + config.recording.margin_after.value * 60
+		starttime = start - config.recording.margin_before.getValue() * 60
+		endtime = start + duration + config.recording.margin_after.getValue() * 60
 		self.new_timer_copy = RecordTimerEntry(ServiceReference(self.rec_ref), starttime, endtime, self.timer.name, self.timer.description, self.timer.eit, False, False, AFTEREVENT.AUTO, False, self.timer.dirname, self.timer.tags)
 		self.new_timer_copy.vpsplugin_enabled = True
 		self.new_timer_copy.vpsplugin_overwrite = self.timer.vpsplugin_overwrite

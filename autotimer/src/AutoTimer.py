@@ -416,8 +416,8 @@ class AutoTimer:
 						begin, end = timer.applyOffset(begin, end)
 					else:
 						# Apply E2 Offset
-						begin -= config.recording.margin_before.value * 60
-						end += config.recording.margin_after.value * 60
+						begin -= config.recording.margin_before.getValue() * 60
+						end += config.recording.margin_after.getValue() * 60
 
 					# Overwrite endtime if requested
 					if timer.justplay and not timer.setEndtime:

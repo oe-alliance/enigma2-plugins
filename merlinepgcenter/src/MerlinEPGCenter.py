@@ -811,8 +811,8 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		end = cur[3] + cur[4]
 		name = cur[5]
 		description = cur[6]
-		begin -= config.recording.margin_before.value * 60
-		end += config.recording.margin_after.value * 60
+		begin -= config.recording.margin_before.getValue() * 60
+		end += config.recording.margin_after.getValue() * 60
 		data = (begin, end, name, description, eit)
 		# TimerEditList method
 		self.addTimer(RecordTimerEntry(serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data))
