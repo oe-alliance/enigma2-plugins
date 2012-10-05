@@ -297,6 +297,8 @@ var MultiEpg = Class.create(Controller, {
 			);
 		};
 		if(elem.on){
+			if(elem.onload)
+				elem.onload();
 			onload();
 		} else {
 			win.onload = onload;

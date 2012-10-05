@@ -9,7 +9,10 @@
 		<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>
 		<script type="text/javascript" src="/web-data/helpers.js"></script>
 		<script type="text/javascript" language="javscript">
+			var onWindowLoad = window.onload;
 			function init(){
+				if(onWindowLoad)
+					onWindowLoad();
 				fxheaderInit('mEpgT',1,0);
 				fxheader();
 			}
