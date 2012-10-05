@@ -23,8 +23,7 @@
 				<tbody>
 					<tr style="vertical-align: top">
 					{for epg in items.epg}
-						<td>
-							{for e in epg}
+						<td  class="{if epg_index%2 == 0}mEpgColEven{else}mEpgColOdd{/if}">{for e in epg}
 							<a 	class="mEpgItem"
 								style="height:${e.size}px;"
 
@@ -48,8 +47,7 @@
 								<p class="mEpgCell cBlack">${e.starttime} - ${e.endtime}</p>
 								<p class="mEpgCell">${e.title} (${e.remaining} min.)</p>
 								<p class="mEpgCell">${e.description}&nbsp;</p>
-							</a>
-							{/for}
+							</a>{/for}
 						</td>
 					{/for}
 					</tr>
@@ -58,7 +56,7 @@
 		</div>
 
 		<script type="text/javascript" language="javscript">
-			fxheaderInit('mEpgT',530,1,0);
+			fxheaderInit('mEpgT',1,0);
 			fxheader();
 		</script>
 	</body>

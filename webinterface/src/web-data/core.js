@@ -264,7 +264,7 @@ var MultiEpg = Class.create(Controller, {
 				function(event, element){
 					var detail = elem.getElementById('mEpgDetail');
 					if(detail)
-						detail.fadeOut({'delay' : 300});
+						detail.hide();
 					event.stop();
 				}
 			);

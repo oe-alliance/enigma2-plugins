@@ -108,7 +108,7 @@
 			if (document.all) {
 				t.style.width = tbDiv.offsetWidth + 'px';
 			} else {
-				t.style.width = 'auto';
+				t.style.width = w + 'px';
 			}
 			t.style.marginTop = '0px';
 			t.style.marginLeft = '0px';
@@ -187,7 +187,7 @@
 		window.onresize = fxheader;
 		flag = false;
 	};
-	this.fxheaderInit = function(_tid, _sheight, _noOfRows, _noOfCols) {
+	this.fxheaderInit = function(_tid, _noOfRows, _noOfCols) {
 		var tb = {};
 		var td = $(_tid);
 		tb.tid = _tid;
