@@ -1161,7 +1161,7 @@ var E2WebCore = Class.create({
 
 	popup: function(title, html, width, height, x, y){
 		try {
-			var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height);
+			var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height+',resizable=yes');
 			this.setWindowContent(popup, html);
 			return popup;
 		} catch(e){

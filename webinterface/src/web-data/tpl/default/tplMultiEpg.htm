@@ -8,8 +8,14 @@
 		<link href="/web-data/tpl/default/multiepg.css" type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>
 		<script type="text/javascript" src="/web-data/helpers.js"></script>
+		<script type="text/javascript" language="javscript">
+			function init(){
+				fxheaderInit('mEpgT',1,0);
+				fxheader();
+			}
+		</script>
 	</head>
-	<body>
+	<body onLoad="init()">
 		<div id="mEpgDetail" style="display:none"></div>
 		<div id="mEpg">
 			<table  id="mEpgT" cellpadding="0" cellspacing="0">
@@ -54,11 +60,6 @@
 				</tbody>
 			</table>
 		</div>
-
-		<script type="text/javascript" language="javscript">
-			fxheaderInit('mEpgT',1,0);
-			fxheader();
-		</script>
 	</body>
 <!-- /tplMultiEpg -->
 </html>
