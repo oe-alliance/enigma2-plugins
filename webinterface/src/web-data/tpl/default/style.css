@@ -160,6 +160,13 @@ a.underline {
 	float: left
 }
 
+#ajaxLoad {
+	position: absolute;
+	top: 2px;
+	right: 78px;
+	z-index: 10;
+}
+
 #powerState {
 	border: 0;
 	margin-left: 93px;
@@ -389,6 +396,14 @@ a.underline {
 	color: #485052
 }
 
+#contentHdExt li div {
+	padding: 1px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+	border: 0;
+	color: #485052
+}
+
 #epgSearch {
 	width: 120px
 }
@@ -566,7 +581,7 @@ a.underline {
 }
 
 .mpListItem {mListItem
-	
+
 }
 
 .epgStart {

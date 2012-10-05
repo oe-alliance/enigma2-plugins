@@ -214,7 +214,20 @@ function dateToString(date){
 	return dateString;
 }
 
-// store all objects here
+
+var RequestCounter = {
+	count : 0,
+	callbacks : [],
+	addChangedCallback : function(callback){
+		RequestCounter.callbacks[RequestCounter.callbacks.length] = callback
+	},
+	change: function(count){
+		RequestCounter.count += count;
+		RequestCounter.callbacks.each(function(callback){
+			callback(RequestCounter.count);
+		})
+	}
+};
 
 var AjaxThing = Class.create({
 	/**
@@ -229,25 +242,40 @@ var AjaxThing = Class.create({
 	getUrl: function(url, parms, callback, errorback){
 		debug("[AjaxThing].getUrl :: url=" + url + " :: parms=" + Object.toJSON(parms));
 		try{
-			new Ajax.Request(url,
-					{
+			RequestCounter.change(1);
+			new Ajax.Request(url, {
 						parameters: parms,
 						asynchronous: true,
 						method: 'POST',
 						requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
 						onException: function(o,e){
-								console.log(o);
-								console.log(e);
-								throw(e);
-							}.bind(this),
+							RequestCounter.change(-1);
+							console.log(o);
+							console.log(e);
+						}.bind(this),
 						onSuccess: function (transport, json) {
 							if(callback !== undefined){
-								callback(transport);
+								try{
+									callback(transport);
+								} catch(e) {
+									debug('ERROR in callback!');
+									debug(e);
+								} finally {
+									RequestCounter.change(-1);
+								}
 							}
 						}.bind(this),
 						onFailure: function(transport){
+							RequestCounter.change(-1);
 							if(errorback !== undefined){
-								errorback(transport);
+								try {
+									errorback(transport);
+								} catch(e) {
+									debug('ERROR in errorback!');
+									debug(e);
+								} finally {
+									RequestCounter.change(-1);
+								}
 							}
 						}.bind(this)
 					});

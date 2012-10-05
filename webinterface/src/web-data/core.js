@@ -223,7 +223,7 @@ var MultiEpg = Class.create(Controller, {
 		this.handler.load({'bRef' : bRef});
 	},
 
-	show:function(html){
+	show: function(html){
 		var win = core.popup("MultiEpg" + new Date().getTime(), html, 900, 570);
 		this.doRegisterEvents(win);
 	},
@@ -1321,6 +1321,7 @@ var E2WebCore = Class.create({
 
 		this.setAjaxLoad('navContent');
 		this.setAjaxLoad('contentMain');
+		RequestCounter.addChangedCallback(this.onAjaxRequestCountChanged.bind(this));
 
 		templateEngine.fetch('tplServiceListEPGItem');
 		templateEngine.fetch('tplBouquetsAndServices');
@@ -1330,6 +1331,14 @@ var E2WebCore = Class.create({
 		}
 		this.updateItems();
 		this.startUpdateCurrentPoller();
+	},
+
+	onAjaxRequestCountChanged: function(count){
+		debug("Active Request count: " + RequestCounter.count);
+		if(count > 0)
+			$('ajaxLoad').show();
+		else
+			$('ajaxLoad').hide();
 	},
 
 	registerEvents: function(){

@@ -27,6 +27,7 @@ a.underline{text-decoration:underline}
 #banner a,#banner a:visited,#banner a:active{color:#FFF;text-decoration:none}
 #bannerText{padding-left:2px}
 #bannerLeft{width:940px;float:left}
+#ajaxLoad{position: absolute; top:2px; right:78px; z-index: 10;}
 #powerState{border:0;margin-left:93px;text-align:right}
 #bannerRight{width:50px;text-align:right;height:60px;float:left}
 #bannerRight img{padding-top:5px}
