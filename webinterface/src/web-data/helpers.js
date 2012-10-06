@@ -37,7 +37,7 @@ Element.addMethods({
 });
 
 String.prototype.e = function(){
-	return this.replace("\"","&quot;");
+	return this.gsub("\"","&quot;");
 };
 
 String.prototype.format = function(){
@@ -665,7 +665,7 @@ function Service(xml, cssclass){
 	};
 
 	this.getServiceName = function(){
-		return this.servicename.replace('&quot;', '"');
+		return this.servicename.gsub('&quot;', '"');
 	};
 
 	this.setServiceReference = function(sref){
@@ -673,7 +673,7 @@ function Service(xml, cssclass){
 	};
 
 	this.setServiceName = function(sname){
-		this.servicename = sname.replace('&quot;', '"');
+		this.servicename = sname.gsub('&quot;', '"');
 	};
 
 	if( typeof( cssclass ) == undefined ){
@@ -777,7 +777,7 @@ function Movie(xml, cssclass){
 		return encodeURIComponent(this.servicereference);
 	};
 	this.getServiceName = function(){
-		return this.servicename.replace('&quot;', '"');
+		return this.servicename.gsub('&quot;', '"');
 	};
 
 	this.getTitle = function(){
@@ -906,7 +906,7 @@ function Timer(xml, cssclass){
 	};
 
 	this.getServiceName = function(){
-		return this.servicename.replace('&quot;', '"');
+		return this.servicename.gsub('&quot;', '"');
 	};
 
 	this.getEventID = function(){
