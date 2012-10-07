@@ -22,7 +22,7 @@ msgid "Audio Sync"
 msgstr "Audio Sync"
 
 msgid "Audio Sync Setup"
-msgstr "Audio Sync Setup"
+msgstr "Audio Sync Einstellungen"
 
 msgid "Cancel"
 msgstr "Abbrechen"
