@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 686 $
-$Date: 2012-09-30 18:00:50 +0200 (Sun, 30 Sep 2012) $
-$Id: plugin.py 686 2012-09-30 16:00:50Z michael $
+$Revision: 690 $
+$Date: 2012-10-06 17:52:40 +0200 (Sat, 06 Oct 2012) $
+$Id: plugin.py 690 2012-10-06 15:52:40Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -108,8 +108,6 @@ config.plugins.FritzCall.prefix.setUseableChars('0123456789')
 config.plugins.FritzCall.connectionVerbose = ConfigEnableDisable(default=True)
 config.plugins.FritzCall.ignoreUnknown = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.reloadPhonebookTime = ConfigInteger(default=8, limits=(0, 99))
-config.plugins.FritzCall.setupMenu = ConfigSelection(default = 'plugin', choices = [('plugin', _('Plugin menu')), ('extensions', _('Extensions menu'))])
-config.plugins.FritzCall.callsMenu = ConfigSelection(default = 'extensions', choices = [('plugin', _('Plugin menu')), ('extensions', _('Extensions menu'))])
 
 
 def getMountedDevs():
@@ -297,8 +295,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 686 $"[1:-2] + "\n" + 
-							"$Date: 2012-09-30 18:00:50 +0200 (Sun, 30 Sep 2012) $"[1:23] + "\n"
+							"$Revision: 690 $"[1:-2] + "\n" + 
+							"$Date: 2012-10-06 17:52:40 +0200 (Sat, 06 Oct 2012) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -746,7 +744,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
 				<widget name="statusbar" position="%d,%d" size="%d,%d" font="Regular;%d" backgroundColor="#aaaaaa" transparent="1" />
 				<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
-				<widget source="entries" render="Listbox" position="%d,%d" size="%d,%d" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1">
+				<widget source="entries" render="Listbox" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" transparent="1">
 					<convert type="TemplatedMultiContent">
 						{"template": [
 								MultiContentEntryText(pos = (%d,%d), size = (%d,%d), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1), # index 0 is the number, index 1 is date
@@ -1136,6 +1134,7 @@ class FritzCallPhonebook:
 				elems = line.split('#')
 				if len(elems) == 2:
 					try:
+						debug("[FritzCallPhonebook] reload: Adding '''%s''' with '''%s''' from internal phonebook!" % (elems[1].strip(), elems[0]))
 						self.phonebook[elems[0]] = elems[1]
 					except ValueError: # how could this possibly happen?!?!
 						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
@@ -1296,7 +1295,7 @@ class FritzCallPhonebook:
 			self.skin = """
 				<screen name="FritzDisplayPhonebook" position="center,center" size="%d,%d" title="Phonebook" >
 					<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
-					<widget source="entries" render="Listbox" position="%d,%d" size="%d,%d" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1">
+					<widget source="entries" render="Listbox" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" transparent="1">
 						<convert type="TemplatedMultiContent">
 							{"template": [
 									MultiContentEntryText(pos = (%d,%d), size = (%d,%d), font=0, flags = RT_HALIGN_LEFT, text = 1), # index 0 is the name, index 1 is shortname
@@ -1602,7 +1601,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
 			<widget name="consideration" position="%d,%d" halign="center" size="%d,%d" font="Regular;%d" backgroundColor="#20040404" transparent="1" />
 			<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
-			<widget name="config" position="%d,%d" size="%d,%d" enableWrapAround="1" scrollbarMode="showOnDemand" backgroundColor="#20040404" transparent="1" />
+			<widget name="config" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="#20040404" transparent="1" />
 			<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
 			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="%s" transparent="1" alphatest="on" />
 			<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="%s" transparent="1" alphatest="on" />
@@ -1698,7 +1697,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 686 $"[1: - 1] + "$Date: 2012-09-30 18:00:50 +0200 (Sun, 30 Sep 2012) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 690 $"[1: - 1] + "$Date: 2012-10-06 17:52:40 +0200 (Sat, 06 Oct 2012) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1766,8 +1765,6 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			# self.list.append(getConfigListEntry(_("Default display mode for FRITZ!Box calls"), config.plugins.FritzCall.fbfCalls))
 			self.list.append(getConfigListEntry(_("Display connection infos"), config.plugins.FritzCall.connectionVerbose))
 			self.list.append(getConfigListEntry(_("Ignore callers with no phone number"), config.plugins.FritzCall.ignoreUnknown))
-			self.list.append(getConfigListEntry(_('Show Setup and FRITZ!Box Status in'), config.plugins.FritzCall.setupMenu))
-			self.list.append(getConfigListEntry(_('Show Calls and Phonebook in'), config.plugins.FritzCall.callsMenu))
 			self.list.append(getConfigListEntry(_("Debug"), config.plugins.FritzCall.debug))
 
 		self["config"].list = self.list
@@ -2179,7 +2176,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 686 $"[1:-1]	+ "$Date: 2012-09-30 18:00:50 +0200 (Sun, 30 Sep 2012) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 690 $"[1:-1]	+ "$Date: 2012-10-06 17:52:40 +0200 (Sat, 06 Oct 2012) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2300,9 +2297,8 @@ class FritzProtocol(LineReceiver):
 				self.notifyAndReset()
 
 class FritzClientFactory(ReconnectingClientFactory):
-	initialDelay = 200
+	initialDelay = 20
 	maxDelay = 30
-	firstConnect = True
 
 	def __init__(self):
 		self.hangup_ok = False
@@ -2335,13 +2331,10 @@ class FritzClientFactory(ReconnectingClientFactory):
 
 	def clientConnectionFailed(self, connector, reason):
 		global fritzbox
-		if self.firstConnect:
-			self.firstConnect = False
-		else:
-			if not self.hangup_ok and config.plugins.FritzCall.connectionVerbose.value:
-				debug("[FRITZ!FritzClientFactory] - clientConnectionFailed")
-				Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box failed\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
-			ReconnectingClientFactory.clientConnectionFailed(self, connector, reason)
+		if config.plugins.FritzCall.connectionVerbose.value:
+			Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box failed\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
+		ReconnectingClientFactory.clientConnectionFailed(self, connector, reason)
+		# config.plugins.FritzCall.enable.value = False
 		fritzbox = None
 		
 class FritzCall:
@@ -2420,22 +2413,8 @@ def Plugins(**kwargs): #@UnusedVariable # pylint: disable=W0613,C0103
 	what_calls = _("Phone calls")
 	what_phonebook = _("Phonebook")
 	what_status = _("FRITZ!Box Fon Status")
-	list = [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
-	if config.plugins.FritzCall.setupMenu.value == "plugin":
-		list.extend ([PluginDescriptor(name="FritzCall", description=what, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main),
-		PluginDescriptor(name=what_status, description=what_status, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=displayFBFStatus),
-	])
-	else:
-		list.extend ([PluginDescriptor(name="FritzCall", description=what, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
-		PluginDescriptor(name=what_status, description=what_status, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayFBFStatus),
-	])
-	if config.plugins.FritzCall.callsMenu.value == "plugin":
-		list.extend ([PluginDescriptor(name=what_calls, description=what_calls, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=displayCalls),
-		PluginDescriptor(name=what_phonebook, description=what_phonebook, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=displayPhonebook),
-	])
-	else:
-		list.extend ([PluginDescriptor(name=what_calls, description=what_calls, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayCalls),
+	return [ PluginDescriptor(name="FritzCall", description=what, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main),
+		PluginDescriptor(name=what_calls, description=what_calls, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayCalls),
 		PluginDescriptor(name=what_phonebook, description=what_phonebook, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayPhonebook),
-	])
-
-	return list
+		PluginDescriptor(name=what_status, description=what_status, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayFBFStatus),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart) ]

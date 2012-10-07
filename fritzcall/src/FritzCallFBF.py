@@ -517,7 +517,9 @@ class FritzCallFBF:
 			number = stripCbCPrefix(number, config.plugins.FritzCall.country.value)
 			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
 				number = config.plugins.FritzCall.prefix.value + number
-			name = self.phonebook.search(number)
+			name = None
+			if self.phonebook:
+				name = self.phonebook.search(number)
 			if name:
 				#===========================================================
 				# found = re.match('(.*?)\n.*', name)
