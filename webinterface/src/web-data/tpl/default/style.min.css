@@ -82,7 +82,7 @@ td.screenShot img{border:1px solid #555;background:#DDD;}
 .sListExtEpg{display: block;padding:1px}
 .header{padding-top:2px;padding-left:4px;padding-right:4px;display:block;height:22px}
 #container{margin:0 auto;text-align:left;width:1005px}
-#contentTable{scrollbar:auto;width:785px}
+#contentTable{scrollbar:auto;width:785px;margin:0 auto 0 auto;}
 #contentServices{vertical-align:top;width:575px}
 #contentServices table{scrollbar:auto}
 #bouquetTable{width:100%;margin:0;padding:0}
