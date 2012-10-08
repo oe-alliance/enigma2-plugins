@@ -526,6 +526,14 @@ def renderPage(request, path, session):
 	# i.e. on host-originated changes.
 	# in this case, don't finish yet, don't cleanup yet,
 	# but instead do that when the client disconnects.
+
+# This is some debug code, i'll leave it for possible later use
+#	def requestFinishedTest(nothing, handler, request):
+#		print "Request has been cleaned: %s" %request
+#		print nothing
+#
+#	d2 = request.notifyFinish()
+#	d2.addBoth(requestFinishedTest, handler, request)
 	if finish:
 		requestFinish(handler, request)
 
@@ -535,7 +543,6 @@ def renderPage(request, path, session):
 			reactor.callLater(0, requestFinish, handler, request, requestAlreadyFinished=True)
 
 		d = request.notifyFinish()
-
 		d.addBoth( _requestFinishDeferred, handler, request )
 
 #===============================================================================
@@ -546,7 +553,10 @@ def renderPage(request, path, session):
 def requestFinish(handler, request, requestAlreadyFinished = False):
 	handler.cleanup()
 	if not requestAlreadyFinished:
-		request.finish()
+		try:
+			request.finish()
+		except:
+			pass
 
 	del handler
 

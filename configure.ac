@@ -601,6 +601,11 @@ valixdcontrol/src/Makefile
 valixdcontrol/src/comp/Makefile
 valixdcontrol/src/data/Makefile
 
+videocolorspace/Makefile
+videocolorspace/meta/Makefile
+videocolorspace/po/Makefile
+videocolorspace/src/Makefile
+
 vierg/Makefile
 vierg/meta/Makefile
 vierg/src/Makefile

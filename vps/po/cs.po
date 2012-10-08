@@ -243,3 +243,12 @@ msgstr "Aby bylo možno zaznamenat časovač, TV bude přepnuta na nahrávaný p
 #~ msgid "Enable \"Recording controlled by channel\" by default (new timers)"
 #~ msgstr ""
 #~ "Povolí \"Nahrávání řízené vysíláním\" jako standardní (pro nové časovače)"
+
+msgid "VPS Setup Version %s"
+msgstr "Nastavení VPS - verze %s"
+
+msgid "VPS Settings"
+msgstr "Nastavení VPS"
+
+msgid "VPS-Plugin Information"
+msgstr "Informace VPS-Pluginu"

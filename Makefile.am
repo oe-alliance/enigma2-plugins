@@ -80,6 +80,7 @@ SUBDIRS = \
 	tvcharts \
 	unwetterinfo \
 	valixdcontrol \
+	videocolorspace \
 	vlcplayer \
 	vps \
 	weatherplugin \

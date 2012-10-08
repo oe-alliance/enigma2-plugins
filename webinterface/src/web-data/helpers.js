@@ -37,7 +37,7 @@ Element.addMethods({
 });
 
 String.prototype.e = function(){
-	return this.replace("\"","&quot;");
+	return this.gsub("\"","&quot;");
 };
 
 String.prototype.format = function(){
@@ -214,7 +214,20 @@ function dateToString(date){
 	return dateString;
 }
 
-// store all objects here
+
+var RequestCounter = {
+	count : 0,
+	callbacks : [],
+	addChangedCallback : function(callback){
+		RequestCounter.callbacks[RequestCounter.callbacks.length] = callback
+	},
+	change: function(count){
+		RequestCounter.count += count;
+		RequestCounter.callbacks.each(function(callback){
+			callback(RequestCounter.count);
+		})
+	}
+};
 
 var AjaxThing = Class.create({
 	/**
@@ -229,26 +242,39 @@ var AjaxThing = Class.create({
 	getUrl: function(url, parms, callback, errorback){
 		debug("[AjaxThing].getUrl :: url=" + url + " :: parms=" + Object.toJSON(parms));
 		try{
-			new Ajax.Request(url,
-					{
+			RequestCounter.change(1);
+			new Ajax.Request(url, {
 						parameters: parms,
 						asynchronous: true,
 						method: 'POST',
 						requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
 						onException: function(o,e){
-								console.log(o);
-								console.log(e);
-								throw(e);
-							}.bind(this),
+							RequestCounter.change(-1);
+							console.log(o);
+							console.log(e);
+						}.bind(this),
 						onSuccess: function (transport, json) {
 							if(callback !== undefined){
-								callback(transport);
+								try{
+									callback(transport);
+								} catch(e) {
+									debug('ERROR in callback!');
+									debug(e);
+								}
 							}
 						}.bind(this),
 						onFailure: function(transport){
 							if(errorback !== undefined){
-								errorback(transport);
+								try {
+									errorback(transport);
+								} catch(e) {
+									debug('ERROR in errorback!');
+									debug(e);
+								}
 							}
+						}.bind(this),
+						onComplete: function(transport){
+							RequestCounter.change(-1);
 						}.bind(this)
 					});
 		} catch(e) {
@@ -639,7 +665,7 @@ function Service(xml, cssclass){
 	};
 
 	this.getServiceName = function(){
-		return this.servicename.replace('&quot;', '"');
+		return this.servicename.gsub('&quot;', '"');
 	};
 
 	this.setServiceReference = function(sref){
@@ -647,7 +673,7 @@ function Service(xml, cssclass){
 	};
 
 	this.setServiceName = function(sname){
-		this.servicename = sname.replace('&quot;', '"');
+		this.servicename = sname.gsub('&quot;', '"');
 	};
 
 	if( typeof( cssclass ) == undefined ){
@@ -751,7 +777,7 @@ function Movie(xml, cssclass){
 		return encodeURIComponent(this.servicereference);
 	};
 	this.getServiceName = function(){
-		return this.servicename.replace('&quot;', '"');
+		return this.servicename.gsub('&quot;', '"');
 	};
 
 	this.getTitle = function(){
@@ -880,7 +906,7 @@ function Timer(xml, cssclass){
 	};
 
 	this.getServiceName = function(){
-		return this.servicename.replace('&quot;', '"');
+		return this.servicename.gsub('&quot;', '"');
 	};
 
 	this.getEventID = function(){

@@ -223,7 +223,7 @@ var MultiEpg = Class.create(Controller, {
 		this.handler.load({'bRef' : bRef});
 	},
 
-	show:function(html){
+	show: function(html){
 		var win = core.popup("MultiEpg" + new Date().getTime(), html, 900, 570);
 		this.doRegisterEvents(win);
 	},
@@ -232,16 +232,6 @@ var MultiEpg = Class.create(Controller, {
 		var elem = win.document;
 		var _this = this;
 		var onload = function(event){
-//			elem.on(
-//				'resize',
-//				function(event, element){
-//					var tbody = $('mEpgTBody');
-//					var top = tbody.cumulativeOffset().top;
-//					var height = elem.viewport.height - top;
-//					tbody.style.height = height;
-//					console.log(offset);
-//				}
-//			);
 			elem.on(
 				'click',
 				'.mEpgItem',
@@ -274,7 +264,7 @@ var MultiEpg = Class.create(Controller, {
 				function(event, element){
 					var detail = elem.getElementById('mEpgDetail');
 					if(detail)
-						detail.fadeOut({'delay' : 300});
+						detail.hide();
 					event.stop();
 				}
 			);
@@ -307,6 +297,8 @@ var MultiEpg = Class.create(Controller, {
 			);
 		};
 		if(elem.on){
+			if(elem.onload)
+				elem.onload();
 			onload();
 		} else {
 			win.onload = onload;
@@ -558,6 +550,9 @@ var Movies = Class.create(Controller, {
 var RemoteControl = Class.create({
 	initialize: function(){
 		this.handler = new RemoteControlHandler();
+		var _this = this;
+		this.handler.onFinished.push(_this.onKeySent.bind(_this));
+		this.shotType = '';
 		this.window = '';
 	},
 
@@ -585,8 +580,13 @@ var RemoteControl = Class.create({
 
 	sendKey: function(cmd, type, shotType){
 		debug("[RemoteControl].sendKey: " + cmd);
+		this.shotType = shotType;
 		this.handler.sendKey({'command' : cmd, 'type': type});
-		this.screenShot(shotType);
+
+	},
+
+	onKeySent: function(){
+		this.screenShot(this.shotType);
 	},
 
 	screenShot: function(shotType){
@@ -605,15 +605,16 @@ var RemoteControl = Class.create({
 		//wait 250ms before fetching a new screenshot
 		setTimeout(
 			function(){
+				var forceReload = hash == hashListener.getHash();
 				hashListener.setHash(hash);
-				if(hash == hashListener.getHash()){
+				if(forceReload){
 					core.onHashChanged(true);
 				}
 			},
 			250);
 	},
 
-	registerEvents:function(){
+	registerEvents: function(){
 		var _this = this;
 		var win = this.window;
 		var elem = win.document;
@@ -1162,7 +1163,7 @@ var E2WebCore = Class.create({
 
 	popup: function(title, html, width, height, x, y){
 		try {
-			var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height);
+			var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height+',resizable=yes');
 			this.setWindowContent(popup, html);
 			return popup;
 		} catch(e){
@@ -1331,6 +1332,7 @@ var E2WebCore = Class.create({
 
 		this.setAjaxLoad('navContent');
 		this.setAjaxLoad('contentMain');
+		RequestCounter.addChangedCallback(this.onAjaxRequestCountChanged.bind(this));
 
 		templateEngine.fetch('tplServiceListEPGItem');
 		templateEngine.fetch('tplBouquetsAndServices');
@@ -1340,6 +1342,14 @@ var E2WebCore = Class.create({
 		}
 		this.updateItems();
 		this.startUpdateCurrentPoller();
+	},
+
+	onAjaxRequestCountChanged: function(count){
+		debug("Active Request count: " + RequestCounter.count);
+		if(count > 0)
+			$('ajaxLoad').show();
+		else
+			$('ajaxLoad').hide();
 	},
 
 	registerEvents: function(){

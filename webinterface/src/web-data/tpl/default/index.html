@@ -97,6 +97,7 @@
 		<div id="banner" class="rounded">
 			<span id="notification"><div></div></span>
 			<div id="bannerLeft">
+				<div id="ajaxLoad" style="display:none;"><img src="/web-data/gfx/ajaxload_banner.gif" alt="loading..."></div>
 				<div id="bannerText" style="font-size: 24px;">
 					<img src="/web-data/img/dreamboxweb.png" alt="Receiver Web">
 				</div>
@@ -189,7 +190,7 @@
 	</div>
 	<script language="javascript" type="text/javascript">
 		setMaxHeight('contentMain');
-
+		$('ajaxLoad').hide();
 		//Localization
 		$('mainMenuItemTv').update(strings.television);
 		$('mainMenuItemRadio').update(strings.radio);

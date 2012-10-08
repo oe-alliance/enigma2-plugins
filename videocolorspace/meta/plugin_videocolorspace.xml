@@ -1,0 +1,16 @@
+<default>
+	<prerequisites>
+		<tag type="System" />
+	</prerequisites>
+	<info>
+		<author>cmikula</author>
+		<name>VideoColorSpace</name>
+		<packagename>enigma2-plugin-systemplugins-videocolorspace</packagename>
+		<shortdescription>Setup color space</shortdescription>
+		<description>Setup color space for hdmi video output</description>
+		<screenshot />
+	</info>
+	<files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-videocolorspace" />
+	</files>
+</default>
