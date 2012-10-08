@@ -80,21 +80,6 @@ def autostart(reason, **kwargs):
 			EPGSelection.showTrailer = showTrailer
 			EPGSelection.showConfig = showConfig
 			EPGSelection.showTrailerList = showTrailerList
-	global baseEventViewBase__init__, baseEPGSelection__init__
-	if baseEventViewBase__init__ is None:
-		baseEventViewBase__init__ = EventViewBase.__init__
-	EventViewBase.__init__ = EventViewBase__init__
-	EventViewBase.showTrailer = showTrailer
-	EventViewBase.showTrailerList = showTrailerList
-	EventViewBase.showConfig = showConfig
-
-	if baseEPGSelection__init__ is None:
-		baseEPGSelection__init__ = EPGSelection.__init__
-	EPGSelection.__init__ = EPGSelection__init__
-	EPGSelection.showTrailer = showTrailer
-	EPGSelection.showConfig = showConfig
-	EPGSelection.showTrailerList = showTrailerList
-
 
 def setup(session,**kwargs):
 	session.open(YTTrailerSetup)
@@ -294,9 +279,6 @@ class YTTrailer:
 						print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
 						video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
 						print "[YTTrailer] found best available video url:",video_url
-			print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
-			video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
-			print "[YTTrailer] found best available video url:",video_url
 		return video_url
 
 class YTTrailerList(Screen, YTTrailer):
