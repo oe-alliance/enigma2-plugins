@@ -23,6 +23,8 @@ a.underline{text-decoration:underline}
 .rightCol{float:right;width:50%}
 .right{text-align:right}
 .liHeader{border-top:#000;border-bottom:#000}
+td.screenShot{text-align:center;}
+td.screenShot img{border:1px solid #555;background:#DDD;}
 #banner{width:1000px;height:67px;background:#000;padding-left:5px;margin-bottom:8px;position:relative}
 #banner a,#banner a:visited,#banner a:active{color:#FFF;text-decoration:none}
 #bannerText{padding-left:2px}
