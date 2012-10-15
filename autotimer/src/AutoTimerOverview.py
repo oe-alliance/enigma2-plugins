@@ -186,6 +186,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				self.removeCallback,
 				MessageBox,
 				_("Do you really want to delete %s?") % (cur.name),
+				default = False,
 			)
 
 	def removeCallback(self, ret):
