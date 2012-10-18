@@ -219,7 +219,7 @@ class AutoRes(Screen):
 	def changeVideomode(self):
 		if usable:
 			mode = self.lastmode
-			if mode.find("1080p") != -1 or mode.find("720p24") != -1:
+			if mode.find("p24") != -1 or mode.find("p25") != -1 or mode.find("p30") != -1:
 				print "[AutoRes] switching to", mode
 				v = open('/proc/stb/video/videomode' , "w")
 				v.write("%s\n" % mode)
