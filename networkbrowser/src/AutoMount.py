@@ -233,10 +233,10 @@ class AutoMount():
 			path = os.path.join('/media/net', data['sharename'])
 			sharepath = ""
 		if os.path.ismount(path):
-			print '[NetworkBowser] Unmounting:',path
+# 			print '[NetworkBowser] Unmounting:',path
 			self.unmountcommand = 'umount -fl '+ path
 		if os.path.ismount(sharepath):
-			print '[NetworkBowser] Unmounting:',sharepath
+# 			print '[NetworkBowser] Unmounting:',sharepath
 			self.unmountcommand = self.unmountcommand + ' && umount -fl '+ sharepath
 		if self.activeMountsCounter != 0:
 			if data['active'] == 'True' or data['active'] is True:
@@ -246,7 +246,6 @@ class AutoMount():
 						tmpcmd = 'mount ' + data['ip'] + ':/' + data['sharedir']
 					elif data['mounttype'] == 'cifs':
 						tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
-					print 'MOUNT CMD',tmpcmd
 					self.mountcommand = tmpcmd.encode("UTF-8")
 				elif data['mountusing'] == 'enigma2' or data['mountusing'] == 'old_enigma2':
 					tmpsharedir = data['sharedir'].replace(" ", "\\ ")
@@ -313,13 +312,13 @@ class AutoMount():
 					self.timer.startLongTimer(1)
 
 	def mountTimeout(self):
-		print 'MountTimeOut'
 		self.timer.stop()
-		print 'self.MountConsole', self.MountConsole
 		if self.MountConsole:
-			print 'len(self.MountConsole.appContainers)',len(self.MountConsole.appContainers)
 			if len(self.MountConsole.appContainers) == 0:
-				print 'self.callback ',self.callback
+				if self.callback is not None:
+					self.callback(True)
+		elif self.removeConsole:
+			if len(self.removeConsole.appContainers) == 0:
 				if self.callback is not None:
 					self.callback(True)
 
@@ -347,7 +346,8 @@ class AutoMount():
 				path = os.path.join('/media/net', sharedata['sharename'])
 				sharepath = ""
 			if sharedata['mountusing'] == 'fstab':
-				open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharedata['sharedir'] not in l])
+				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir'] + ' '
+				open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharetemp not in l])
 				os.rename('/etc/fstab.tmp','/etc/fstab')
 				mtype = sharedata['mounttype']
 				list.append('<fstab>\n')
@@ -389,7 +389,6 @@ class AutoMount():
 				list.append('  </mount>\n')
 				list.append(' </' + mtype + '>\n')
 				list.append('</enigma2>\n')
-
 			elif sharedata['mountusing'] == 'old_enigma2':
 				mtype = sharedata['mounttype']
 				list.append(' <' + mtype + '>\n')
@@ -432,7 +431,7 @@ class AutoMount():
 				sharepath = ""
 			if sharename is not mountpoint.strip():
 				self.newautomounts[sharename] = sharedata
-			if sharedata['mountusing'] == 'fstab' or sharedata['mountusing'] == 'old_enigma2':
+			if sharedata['mountusing'] == 'fstab':
 				open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharedata['sharedir'] not in l])
 				os.rename('/etc/fstab.tmp','/etc/fstab')
 		self.automounts.clear()
@@ -444,7 +443,6 @@ class AutoMount():
 		self.removeConsole.ePopen(umountcmd, self.removeMountPointFinished, [path, callback])
 
 	def removeMountPointFinished(self, result, retval, extra_args):
-# 		print "[NetworkBrowser] removeMountPointFinished result", result, "retval", retval
 		(path, callback ) = extra_args
 		if os.path.exists(path):
 			if not os.path.ismount(path):
@@ -453,15 +451,10 @@ class AutoMount():
 					harddiskmanager.removeMountedPartition(path)
 				except Exception, ex:
 					print "Failed to remove", path, "Error:", ex
-		print 'self.removeConsole',self.removeConsole
 		if self.removeConsole:
-			print 'TEST A'
-			print 'self.removeConsole.appContainers',self.removeConsole.appContainers
 			if len(self.removeConsole.appContainers) == 0:
-				print 'callback',callback
 				if callback is not None:
 					self.callback = callback
 					self.timer.startLongTimer(1)
-
 
 iAutoMount = AutoMount()
