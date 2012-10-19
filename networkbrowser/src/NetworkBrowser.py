@@ -88,7 +88,7 @@ class NetworkBrowser(Screen):
 					}
 				</convert>
 			</widget>
-			<ePixmap pixmap="skin_default/div-h.png" position="0,410" zPosition="1" size="560,2" />		
+			<ePixmap pixmap="skin_default/div-h.png" position="0,410" zPosition="1" size="560,2" />
 			<widget source="infotext" render="Label" position="0,420" size="560,30" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
 		</screen>"""
 
@@ -113,7 +113,7 @@ class NetworkBrowser(Screen):
 		self["key_yellow"] = StaticText(_("Rescan"))
 		self["key_blue"] = StaticText(_("Expert"))
 		self["infotext"] = StaticText(_("Press OK to mount!"))
-		
+
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"ok": self.go,
@@ -299,12 +299,12 @@ class NetworkBrowser(Screen):
 			if not self.network.has_key(x[2]):
 				self.network[x[2]] = []
 			self.network[x[2]].append((NetworkDescriptor(name = x[1], description = x[2]), x))
-		
+
 		for x in self.network.keys():
 			hostentry = self.network[x][0][1]
 			name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
 			expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-			self.list.append(( hostentry, expandableIcon, name, None, None, None, None ))
+			self.list.append(( hostentry, expandableIcon, name, None, None, None, None, None ))
 
 		if len(self.list):
 			for entry in self.list:
@@ -334,14 +334,14 @@ class NetworkBrowser(Screen):
 				hostentry = self.network[x][0][1]
 				name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
 				expandedIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-				self.list.append(( hostentry, expandedIcon, name, None, None, None, None ))
+				self.list.append(( hostentry, expandedIcon, name, None, None, None, None, None ))
 				for share in networkshares:
 					self.list.append(self.BuildNetworkShareEntry(share))
 			else: # HOSTLIST - VIEW
 				hostentry = self.network[x][0][1]
 				name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
 				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-				self.list.append(( hostentry, expandableIcon, name, None, None, None, None ))
+				self.list.append(( hostentry, expandableIcon, name, None, None, None, None, None ))
 		if len(self.list):
 			for entry in self.list:
 				entry[0][2]= "%3s.%3s.%3s.%3s" % tuple(entry[0][2].split("."))
@@ -373,11 +373,11 @@ class NetworkBrowser(Screen):
 		for sharename, sharedata in self.mounts.items():
 			if sharedata['ip'] == sharehost:
 				if sharetype == 'nfsShare' and sharedata['mounttype'] == 'nfs':
-					if sharedir == sharedata['sharedir']:
+					if sharedir.endswith(sharedata['sharedir']):
 						if sharedata["isMounted"] is True:
 							self.isMounted = True
 				if sharetype == 'smbShare' and sharedata['mounttype'] == 'cifs':
-					if sharedir == sharedata['sharedir']:
+					if sharedir.endswith(sharedata['sharedir']):
 						if sharedata["isMounted"] is True:
 							self.isMounted = True
 		if self.isMounted is True:
@@ -385,7 +385,7 @@ class NetworkBrowser(Screen):
 		else:
 			isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/cancel.png"))
 
-		return((share, verticallineIcon, None, sharedir, sharedescription, newpng, isMountedpng))
+		return((share, verticallineIcon, None, sharedir, sharedescription, newpng, isMountedpng, self.isMounted))
 
 	def createSummary(self):
 		from Screens.PluginBrowser import PluginBrowserSummary
@@ -428,39 +428,46 @@ class NetworkBrowser(Screen):
 			return
 		if len(sel[0]) <= 1:
 			return
+
 		selectedhost = sel[0][2]
 		selectedhostname = sel[0][1]
 
-		self.hostcache_file = None
-		if sel[0][0] == 'host': # host entry selected
-			if selectedhost in self.expanded:
-				self.expanded.remove(selectedhost)
-				self.updateNetworkList()
-			else:
-				self.hostcache_file = None
-				self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
-				if os_path.exists(self.hostcache_file):
-					print '[Networkbrowser] Loading userinfo cache from ',self.hostcache_file
-					try:
-						self.hostdata = load_cache(self.hostcache_file)
-						self.passwordQuestion(False)
-					except:
-						self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
-				else:
-					self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
-
 		if sel[0][0] == 'nfsShare': # share entry selected
-			print '[Networkbrowser] sel nfsShare'
 			self.openMountEdit(sel[0])
-		if sel[0][0] == 'smbShare': # share entry selected
-			print '[Networkbrowser] sel cifsShare'
+		elif sel[0][0] == 'smbShare': # share entry selected
 			self.hostcache_file = None
-			self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
+			if sel[0][0] == 'host': # host entry selected
+				if selectedhost in self.expanded:
+					self.expanded.remove(selectedhost)
+					self.updateNetworkList()
+				else:
+					self.hostcache_file = None
+					self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
+					if os_path.exists(self.hostcache_file):
+						print '[Networkbrowser] Loading userinfo cache from ',self.hostcache_file
+						try:
+							self.hostdata = load_cache(self.hostcache_file)
+							self.passwordQuestion(False)
+						except:
+							self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
+					else:
+						self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
 			if os_path.exists(self.hostcache_file):
 				print '[Networkbrowser] userinfo found from ',self.sharecache_file
 				self.openMountEdit(sel[0])
 			else:
 				self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
+		else:
+			sel = self["list"].getCurrent()
+			selectedhost = sel[0][2]
+			selectedhostname = sel[0][1]
+			if sel[0][0] == 'host': # host entry selected
+				if selectedhost in self.expanded:
+					self.expanded.remove(selectedhost)
+				else:
+					self.expanded.append(selectedhost)
+				self.updateNetworkList()
+			self.openMountEdit(sel[0])
 
 	def passwordQuestion(self, ret = False):
 		sel = self["list"].getCurrent()
@@ -475,10 +482,7 @@ class NetworkBrowser(Screen):
 				else:
 					self.expanded.append(selectedhost)
 				self.updateNetworkList()
-			if sel[0][0] == 'nfsShare': # share entry selected
-				self.openMountEdit(sel[0])
-			if sel[0][0] == 'smbShare': # share entry selected
-				self.openMountEdit(sel[0])
+			self.openMountEdit(sel[0])
 
 	def UserDialogClosed(self, *ret):
 		if ret is not None and len(ret):
@@ -486,7 +490,9 @@ class NetworkBrowser(Screen):
 
 	def openMountEdit(self, selection):
 		if selection is not None and len(selection):
+			print 'selection',selection
 			mounts = iAutoMount.getMountsList()
+			print 'Current Monuts:',mounts
 			if selection[0] == 'nfsShare': # share entry selected
 				#Initialize blank mount enty
 				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
@@ -494,6 +500,7 @@ class NetworkBrowser(Screen):
 				data['mounttype'] = 'nfs'
 				data['active'] = True
 				data['ip'] = selection[2]
+
 				data['sharename'] = selection[1]
 				data['sharedir'] = selection[4]
 				data['options'] = "rw,nolock,tcp"
@@ -564,9 +571,9 @@ class ScanIP(Screen, ConfigListScreen):
 			"green": self.goNfs,
 			"yellow": self.goAddress,
 		}, -1)
-		
+
 		self.ipAddress = ConfigIP(default=[0,0,0,0])
-		
+
 		ConfigListScreen.__init__(self, [
 			getConfigListEntry(_("IP Address"), self.ipAddress),
 		], self.session)

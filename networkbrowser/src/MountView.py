@@ -134,30 +134,47 @@ class AutoMountView(Screen):
 	def delete(self, returnValue = None):
 		cur = self["config"].getCurrent()
 		if cur:
+			self.session.openWithCallback(self.deleteCB, MessageBox, _("Are you sure you want to remove your network mount ?"), type = MessageBox.TYPE_YESNO, default = False)
+
+	def deleteCB(self, answer):
+		if answer:
+			self.doDelete()
+
+	def doDelete(self, returnValue = None):
+		cur = self["config"].getCurrent()
+		if cur:
 			returnValue = cur[1]
+			print 'returnValue',returnValue
 			self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait while removing your network mount..."), type = MessageBox.TYPE_INFO, enable_input = False)
 			iAutoMount.removeMount(returnValue,self.removeDataAvail)
 
 	def removeDataAvail(self, data):
 		print '!!!!!!remove mount test1',data
-		if data is True:
+		if data:
 			iAutoMount.writeMountsConfig()
 			iAutoMount.getAutoMountPoints(self.deleteDataAvail)
 
 	def deleteDataAvail(self, data):
 		print '!!!!!!remove mount test2',data
-		if data is True:
+		if data:
+			print 'applyConfigRef',self.applyConfigRef
+			print 'applyConfigRef',self.applyConfigRef.execing
+			print 'applyConfigRef',self.applyConfigRef.shown
 			if self.applyConfigRef.execing:
+				print 'self.applyConfigRef is exeing, close messgae'
 				self.applyConfigRef.close(True)
+				print 'applyConfigRef',self.applyConfigRef.shown
 
 	def applyConfigfinishedCB(self,data):
 		print '!!!!!!remove mount test3',data
-		if data is True:
+		if data:
+			print '!!!!!! show removed popup'
 			self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, _("Your network mount has been removed."), type = MessageBox.TYPE_INFO, timeout = 10)
 
 	def ConfigfinishedCB(self,data):
-		print '!!!!!!remove mount test3',data
+		print '!!!!!!remove mount test4',data
 		if data is not None:
-			if data is True:
+			if data:
+				print 'finihed showlist'
 				self.showMountsList()
 

@@ -151,8 +151,9 @@ class AutoMountEdit(Screen, ConfigListScreen):
 				ip = self.convertIP(self.mountinfo['ip'])
 		else:
 			ip = [192, 168, 0, 0]
+
 		if self.mountinfo.has_key('sharename'):
-			sharename = self.mountinfo['sharename']
+			sharename = re_sub("\W", "", self.mountinfo['sharename'])
 		else:
 			sharename = "Sharename"
 		if self.mountinfo.has_key('sharedir'):
@@ -298,12 +299,26 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if current == self.sharenameEntry or current == self.sharedirEntry or current == self.sharedirEntry or current == self.optionsEntry or current == self.usernameEntry or current == self.passwordEntry:
 			if current[1].help_window.instance is not None:
 				current[1].help_window.instance.hide()
-		sharename = self.sharenameConfigEntry.value
 
-		if self.mounts.has_key(sharename) is True:
-			self.session.openWithCallback(self.updateConfig, MessageBox, (_("A mount entry with this name already exists!\nUpdate existing entry and continue?\n") ) )
+		sharename = re_sub("\W", "", self.sharenameConfigEntry.value)
+		if self.sharedirConfigEntry.value.startswith("/"):
+			sharedir = self.sharedirConfigEntry.value[1:]
 		else:
-			self.session.openWithCallback(self.applyConfig, MessageBox, (_("Are you sure you want to save this network mount?\n\n") ) )
+			sharedir = self.sharedirConfigEntry.value
+
+		sharexists = False
+		for data in self.mounts:
+			if self.mounts[data]['sharename'] == sharename:
+				if self.mounts[data]['sharedir'] != sharedir:
+					sharexists = True
+					break
+
+		if sharexists:
+			self.session.open(MessageBox, _("A mount entry with this name already exists!\nand is not this share folder, please use a different name.\n"), type = MessageBox.TYPE_INFO )
+		elif self.mounts.has_key(sharename) is True:
+			self.session.openWithCallback(self.updateConfig, MessageBox, _("A mount entry with this name already exists!\nUpdate existing entry and continue?\n"), default=False )
+		else:
+			self.session.openWithCallback(self.applyConfig, MessageBox, _("Are you sure you want to save this network mount?\n\n") )
 
 	def updateConfig(self, ret = False):
 		if (ret == True):
