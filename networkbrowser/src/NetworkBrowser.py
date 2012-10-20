@@ -432,42 +432,27 @@ class NetworkBrowser(Screen):
 		selectedhost = sel[0][2]
 		selectedhostname = sel[0][1]
 
-		if sel[0][0] == 'nfsShare': # share entry selected
+		self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
+		if os_path.exists(self.hostcache_file):
+			try:
+				self.hostdata = load_cache(self.hostcache_file)
+			except:
+				print 'load cache failed'
+				pass
+
+		if sel[0][0] == 'host': # host entry selected
+			if selectedhost in self.expanded:
+				self.expanded.remove(selectedhost)
+			else:
+				self.expanded.append(selectedhost)
+			self.updateNetworkList()
+		elif sel[0][0] == 'nfsShare': # share entry selected
 			self.openMountEdit(sel[0])
 		elif sel[0][0] == 'smbShare': # share entry selected
-			self.hostcache_file = None
-			if sel[0][0] == 'host': # host entry selected
-				if selectedhost in self.expanded:
-					self.expanded.remove(selectedhost)
-					self.updateNetworkList()
-				else:
-					self.hostcache_file = None
-					self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
-					if os_path.exists(self.hostcache_file):
-						print '[Networkbrowser] Loading userinfo cache from ',self.hostcache_file
-						try:
-							self.hostdata = load_cache(self.hostcache_file)
-							self.passwordQuestion(False)
-						except:
-							self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
-					else:
-						self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
 			if os_path.exists(self.hostcache_file):
-				print '[Networkbrowser] userinfo found from ',self.sharecache_file
 				self.openMountEdit(sel[0])
 			else:
 				self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
-		else:
-			sel = self["list"].getCurrent()
-			selectedhost = sel[0][2]
-			selectedhostname = sel[0][1]
-			if sel[0][0] == 'host': # host entry selected
-				if selectedhost in self.expanded:
-					self.expanded.remove(selectedhost)
-				else:
-					self.expanded.append(selectedhost)
-				self.updateNetworkList()
-			self.openMountEdit(sel[0])
 
 	def passwordQuestion(self, ret = False):
 		sel = self["list"].getCurrent()
@@ -476,12 +461,6 @@ class NetworkBrowser(Screen):
 		if (ret == True):
 			self.session.openWithCallback(self.UserDialogClosed, UserDialog, self.skin_path, selectedhostname.strip())
 		else:
-			if sel[0][0] == 'host': # host entry selected
-				if selectedhost in self.expanded:
-					self.expanded.remove(selectedhost)
-				else:
-					self.expanded.append(selectedhost)
-				self.updateNetworkList()
 			self.openMountEdit(sel[0])
 
 	def UserDialogClosed(self, *ret):
@@ -490,9 +469,7 @@ class NetworkBrowser(Screen):
 
 	def openMountEdit(self, selection):
 		if selection is not None and len(selection):
-			print 'selection',selection
 			mounts = iAutoMount.getMountsList()
-			print 'Current Monuts:',mounts
 			if selection[0] == 'nfsShare': # share entry selected
 				#Initialize blank mount enty
 				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
