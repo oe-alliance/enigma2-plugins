@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-18 15:13+0100\n"
+"POT-Creation-Date: 2012-10-21 11:13+0200\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -111,8 +111,14 @@ msgstr ""
 " (%s)\n"
 "pokušavam ponovo..."
 
+msgid "Could not get call list; wrong version?"
+msgstr ""
+
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "Ne mogu tumačiti unos FRITZ!Box imenika"
+
+msgid "Could not read FRITZ!Box phonebook; wrong version?"
+msgstr ""
 
 msgid "Country"
 msgstr "Država"
@@ -242,11 +248,19 @@ msgstr "FRITZ!Box -Nije uspela promena WLAN-a: %s"
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box FON Adresse (Name oder IP-Adresse)"
 
+msgid "FRITZ!Box FON firmware version"
+msgstr ""
+
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Stanje telefona"
+
+msgid ""
+"FRITZ!Box firmware version not configured! Please set it in the "
+"configuration."
+msgstr ""
 
 msgid "FRITZ!Box not available for calling"
 msgstr ""
@@ -591,6 +605,9 @@ msgstr "završavam"
 msgid "home"
 msgstr "Kuđni"
 
+msgid "legacy"
+msgstr ""
+
 msgid "login"
 msgstr "Upis"
 
@@ -612,8 +629,14 @@ msgstr ""
 msgid "no device active"
 msgstr "Nijedan urećaj nije aktivan"
 
+msgid "not configured"
+msgstr ""
+
 msgid "not encrypted"
 msgstr "Nije kodirano"
+
+msgid "not yet implemented"
+msgstr ""
 
 msgid "number suppressed"
 msgstr ""

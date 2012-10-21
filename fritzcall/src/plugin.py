@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 690 $
-$Date: 2012-10-06 17:52:40 +0200 (Sat, 06 Oct 2012) $
-$Id: plugin.py 690 2012-10-06 15:52:40Z michael $
+$Revision: 695 $
+$Date: 2012-10-21 11:31:25 +0200 (So, 21. Okt 2012) $
+$Id: plugin.py 695 2012-10-21 09:31:25Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -13,8 +13,7 @@ from Screens import Standby
 from Screens.HelpMenu import HelpableScreen
 
 from enigma import eTimer, eSize, ePoint #@UnresolvedImport # pylint: disable=E0611
-from enigma import eDVBVolumecontrol
-from enigma import eBackgroundFileEraser
+from enigma import eDVBVolumecontrol, eConsoleAppContainer, eBackgroundFileEraser
 #BgFileEraser = eBackgroundFileEraser.getInstance()
 #BgFileEraser.erase("blabla.txt")
 
@@ -41,12 +40,10 @@ from GlobalActions import globalActionMap # for muting
 from twisted.internet import reactor #@UnresolvedImport
 from twisted.internet.protocol import ReconnectingClientFactory #@UnresolvedImport
 from twisted.protocols.basic import LineReceiver #@UnresolvedImport
-from twisted.web.client import getPage #@UnresolvedImport
 
-from urllib import urlencode 
-import re, time, os, hashlib, traceback
+import re, time, os, traceback
 
-from nrzuname import ReverseLookupAndNotifier, html2unicode
+from nrzuname import ReverseLookupAndNotifier
 import FritzOutlookCSV, FritzLDIF
 from . import _, initDebug, debug #@UnresolvedImport # pylint: disable=E0611,F0401
 
@@ -79,6 +76,7 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("legacy")), "05.27"])
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
@@ -295,8 +293,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 690 $"[1:-2] + "\n" + 
-							"$Date: 2012-10-06 17:52:40 +0200 (Sat, 06 Oct 2012) $"[1:23] + "\n"
+							"$Revision: 695 $"[1:-2] + "\n" + 
+							"$Date: 2012-10-21 11:31:25 +0200 (So, 21. Okt 2012) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1697,7 +1695,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 690 $"[1: - 1] + "$Date: 2012-10-06 17:52:40 +0200 (Sat, 06 Oct 2012) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 695 $"[1: - 1] + "$Date: 2012-10-21 11:31:25 +0200 (So, 21. Okt 2012) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1712,6 +1710,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		self.list.append(getConfigListEntry(_("Call monitoring"), config.plugins.FritzCall.enable))
 		if config.plugins.FritzCall.enable.value:
 			self.list.append(getConfigListEntry(_("FRITZ!Box FON address (Name or IP)"), config.plugins.FritzCall.hostname))
+			self.list.append(getConfigListEntry(_("FRITZ!Box FON firmware version"), config.plugins.FritzCall.fwVersion))
 
 			self.list.append(getConfigListEntry(_("Show after Standby"), config.plugins.FritzCall.afterStandby))
 
@@ -2099,7 +2098,7 @@ def notifyCall(event, date, number, caller, phone, connID):
 	if os.path.exists(userActionScript) and os.access(userActionScript, os.X_OK):
 		cmd = userActionScript + ' "' + event + '" "' + date + '" "' + number + '" "' + caller + '" "' + phone + '"'
 		debug("[FritzCall] notifyCall: calling: %s" % cmd)
-		os.system(cmd)
+		eConsoleAppContainer().execute(cmd)
 
 
 #===============================================================================
@@ -2176,7 +2175,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 690 $"[1:-1]	+ "$Date: 2012-10-06 17:52:40 +0200 (Sat, 06 Oct 2012) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 695 $"[1:-1]	+ "$Date: 2012-10-21 11:31:25 +0200 (So, 21. Okt 2012) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2303,6 +2302,9 @@ class FritzClientFactory(ReconnectingClientFactory):
 	def __init__(self):
 		self.hangup_ok = False
 	def startedConnecting(self, connector): #@UnusedVariable # pylint: disable=W0613
+		if not config.plugins.FritzCall.fwVersion.value:
+			Notifications.AddNotification(MessageBox, _("FRITZ!Box firmware version not configured! Please set it in the configuration."), type=MessageBox.TYPE_INFO, timeout=0)
+			return
 		if config.plugins.FritzCall.connectionVerbose.value:
 			debug("[FRITZ!FritzClientFactory] - startedConnecting")
 			Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box..."), type=MessageBox.TYPE_INFO, timeout=2)
@@ -2316,7 +2318,13 @@ class FritzClientFactory(ReconnectingClientFactory):
 		initDebug()
 		initCbC()
 		initAvon()
-		fritzbox = FritzCallFBF.FritzCallFBF()
+		# TODO: swithc between FBF FW versions...
+		if config.plugins.FritzCall.fwVersion.value == "old":
+			fritzbox = FritzCallFBF.FritzCallFBF()
+		elif config.plugins.FritzCall.fwVersion.value == "05.27":
+			fritzbox = FritzCallFBF.FritzCallFBF_05_27()
+		else:
+			Notifications.AddNotification(MessageBox, _("FRITZ!Box firmware version not configured! Please set it in the configuration."), type=MessageBox.TYPE_INFO, timeout=0)
 		phonebook = FritzCallPhonebook()
 		return FritzProtocol()
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-18 15:13+0100\n"
+"POT-Creation-Date: 2012-10-21 11:13+0200\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -110,8 +110,14 @@ msgstr ""
 " (%s)\n"
 "probeert opnieuw"
 
+msgid "Could not get call list; wrong version?"
+msgstr ""
+
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "Fout bij het verwerken van een FRITZ!Box telefoonboek regel"
+
+msgid "Could not read FRITZ!Box phonebook; wrong version?"
+msgstr ""
 
 msgid "Country"
 msgstr "Land"
@@ -241,11 +247,19 @@ msgstr ""
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box adres (Naam of IP)"
 
+msgid "FRITZ!Box FON firmware version"
+msgstr ""
+
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Status"
+
+msgid ""
+"FRITZ!Box firmware version not configured! Please set it in the "
+"configuration."
+msgstr ""
 
 msgid "FRITZ!Box not available for calling"
 msgstr ""
@@ -597,6 +611,9 @@ msgstr "wordt beëindigd"
 msgid "home"
 msgstr "home"
 
+msgid "legacy"
+msgstr ""
+
 msgid "login"
 msgstr "login"
 
@@ -619,8 +636,14 @@ msgstr ""
 msgid "no device active"
 msgstr "Eén mailbox actief"
 
+msgid "not configured"
+msgstr ""
+
 msgid "not encrypted"
 msgstr "ongecodeerd "
+
+msgid "not yet implemented"
+msgstr ""
 
 msgid "number suppressed"
 msgstr ""
