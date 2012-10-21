@@ -1359,39 +1359,6 @@ class FritzCallFBF_05_27:
 		# linkP.write(html)
 		# linkP.close()
 		#=======================================================================
-
-		#===============================================================================
-		# <td class="call_in" title="ankommender Anruf"></td>
-		# <td>28.09.12 17:24</td>
-		# <td title="Thomas (privat) = 03602181904">(<a href=" " onclick="return onDial('03602181904');">)?Thomas (privat)(</a>)?</td>
-		# <td>fritz!phone 2</td>
-		# <td title="81567 (Internet)">81567</td>
-		# <td>0:05</td>
-		#===============================================================================
-		#===============================================================================
-		# <td class="call_in" title="ankommender Anruf"></td>
-		# <td>19.09.12 15:32</td>
-		# <td>unbekannt</td>
-		# <td>ISDN Gerät</td>
-		# <td title="950435 (Festnetz)">950435</td>
-		# <td>0:03</td>
-		#===============================================================================
-		#===============================================================================
-		# <td class="call_in_fail" title="eingehender Anruf in Abwesenheit"></td>
-		# <td>08.10.12 19:23</td>
-		# <td>unbekannt</td>
-		# <td></td>
-		# <td title="950434 (Festnetz)">950434</td>
-		# <td>0:00</td>
-		#===============================================================================
-		#===============================================================================
-		# <td class="call_in_fail" title="eingehender Anruf in Abwesenheit"></td>
-		# <td>14.09.12 20:43</td>
-		# <td title="Jardín del Rey (privat) = 0034971556777"><a href=" " onclick="return onDial('0034971556777');">Jardín del Rey (privat)</a></td>
-		# <td></td>
-		# <td title="950130 (Festnetz)">950130</td>
-		# <td>0:00</td>
-		#===============================================================================
 		# 1: direct; 2: date; 3: Rufnummer; 4: Name; 5: Nebenstelle; 6: Eigene Rufnumme lang; 7: Eigene Rufnummer; 8: Dauer
 		entrymask = re.compile('<td class="([^"]*)" title="[^"]*"></td>\s*<td>([^<]*)</td>\s*<td(?: title="[^\d]*)?([\d]*)(?:[">]+)?(?:<a href=[^>]*>)?([^<]*)(?:</a>)?</td>\s*<td>([^<]*)</td>\s*<td title="([^"]*)">([\d]*)</td>\s*<td>([^<]*)</td>', re.S)
 		entries = entrymask.finditer(html)
