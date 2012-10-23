@@ -1377,8 +1377,8 @@ class FritzCallFBF_05_27:
 			# debug("[FritzCallFBF_05_27] _gotPageCallsNew: date: " + date)
 			length = found.group(8)
 			# debug("[FritzCallFBF_05_27] _gotPageCallsNew: len: " + length)
+			remote = found.group(4)
 			if config.plugins.FritzCall.phonebook.value:
-				remote = found.group(4)
 				if remote and not remote.isdigit():
 					remote = resolveNumber(found.group(3), remote + " (FBF)", self.phonebook)
 				else:
