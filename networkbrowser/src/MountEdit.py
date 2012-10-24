@@ -84,8 +84,8 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		return SetupSummary
 
 	def layoutFinished(self):
- 		self.setup_title = _("Mounts editor")
- 		Screen.setTitle(self, _(self.setup_title))
+		self.setup_title = _("Mounts editor")
+		Screen.setTitle(self, _(self.setup_title))
 		self["VKeyIcon"].hide()
 		self["VirtualKB"].setEnabled(False)
 		self["HelpWindow"].hide()
@@ -152,7 +152,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		else:
 			ip = [192, 168, 0, 0]
 
-		if self.mountinfo.has_key('sharename'):
+		if self.mountinfo['sharename'] and self.mountinfo.has_key('sharename'):
 			sharename = re_sub("\W", "", self.mountinfo['sharename'])
 		else:
 			sharename = "Sharename"
