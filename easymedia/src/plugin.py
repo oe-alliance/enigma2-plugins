@@ -526,8 +526,8 @@ def MPcallbackFunc(answer):
 			EMsession.open(MessageBox, text = _('No File-Manager installed!'), type = MessageBox.TYPE_ERROR)
 	elif answer == "WEATHER":
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/plugin.pyo"):
-			from Plugins.Extensions.WeatherPlugin.plugin import WeatherPlugin
-			EMsession.open(WeatherPlugin)
+			from Plugins.Extensions.WeatherPlugin.plugin import MSNWeatherPlugin
+			EMsession.open(MSNWeatherPlugin)
 		else:
 			EMsession.open(MessageBox, text = _('Weather Plugin is not installed!'), type = MessageBox.TYPE_ERROR)
 	elif answer == "DVD":
