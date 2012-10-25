@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - pushservice\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 22:43+0100\n"
-"PO-Revision-Date: 2012-05-06 22:45+0100\n"
+"POT-Creation-Date: 2012-10-25 14:57+0100\n"
+"PO-Revision-Date: 2012-10-25 14:58+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
@@ -219,17 +219,13 @@ msgstr "Nulla da segnalare"
 msgid ""
 "Test failed:\n"
 "\n"
-"%s\n"
-"\n"
 "%s"
 msgstr ""
 "Test fallito:\n"
 "\n"
-"%s\n"
-"\n"
 "%s"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:453
+#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:454
 #, python-format
 msgid ""
 "Test failed\n"
@@ -240,14 +236,18 @@ msgstr ""
 "\n"
 "%s"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:455
+#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:456
 msgid "Test failed"
 msgstr "Test fallito"
 
 #: .../enigma2-plugins/pushservice/src/ModuleBase.py:93
 #, python-format
-msgid "[PushService] Module %s: Skipping config option: %s %s"
-msgstr "[PushService] Modulo %s: Skip opzione di configurazione: %s %s"
+msgid "[PushService] Module %s:\n"
+msgstr "[PushService] Modulo %s:\n"
+
+#: .../enigma2-plugins/pushservice/src/ModuleBase.py:94
+msgid "Skipping config option:"
+msgstr "Tralasciare opzioni di configurazione:"
 
 #: .../enigma2-plugins/pushservice/src/Modules.py:60
 msgid "[PushService] Find module exception: "
@@ -524,6 +524,23 @@ msgstr "Timer terminati"
 #: .../enigma2-plugins/pushservice/src/Controller/RecordSummary.py:47
 msgid "Remove finished timer(s)"
 msgstr "Rimuovere i timer conclusi"
+
+#: .../enigma2-plugins/pushservice/src/Controller/ActiveTimers.py:32
+msgid "Found active timer(s)"
+msgstr "Rilevati timer attivi"
+
+#: .../enigma2-plugins/pushservice/src/Controller/ActiveTimers.py:33
+#, python-format
+msgid ""
+"Active timer list:\n"
+"%s"
+msgstr ""
+"Elenco timer attivi:\n"
+"%s"
+
+#: .../enigma2-plugins/pushservice/src/Controller/ActiveTimers.py:34
+msgid "ActiveTimerPushed"
+msgstr "ActiveTimerPushed"
 
 #: .../enigma2-plugins/pushservice/src/Services/GNTP.py:31
 msgid "{box:s} {name:s}"
