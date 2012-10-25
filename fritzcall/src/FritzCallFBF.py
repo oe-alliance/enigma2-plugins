@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1 $
-$Date: 2012-09-30 13:37:48 +0200 (Sun, 30 Sep 2012) $
-$Id: plugin.py 685 2012-09-30 11:37:48Z michael $
+$Revision: 699 $
+$Date: 2012-10-25 19:04:03 +0200 (Thu, 25 Oct 2012) $
+$Id: FritzCallFBF.py 699 2012-10-25 17:04:03Z michael $
 '''
 
 from . import _, debug #@UnresolvedImport # pylint: disable=E0611,F0401
@@ -1359,6 +1359,7 @@ class FritzCallFBF_05_27:
 		# linkP.write(html)
 		# linkP.close()
 		#=======================================================================
+
 		# 1: direct; 2: date; 3: Rufnummer; 4: Name; 5: Nebenstelle; 6: Eigene Rufnumme lang; 7: Eigene Rufnummer; 8: Dauer
 		entrymask = re.compile('<td class="([^"]*)" title="[^"]*"></td>\s*<td>([^<]*)</td>\s*<td(?: title="[^\d]*)?([\d]*)(?:[">]+)?(?:<a href=[^>]*>)?([^<]*)(?:</a>)?</td>\s*<td>([^<]*)</td>\s*<td title="([^"]*)">([\d]*)</td>\s*<td>([^<]*)</td>', re.S)
 		entries = entrymask.finditer(html)
@@ -1377,8 +1378,8 @@ class FritzCallFBF_05_27:
 			# debug("[FritzCallFBF_05_27] _gotPageCallsNew: date: " + date)
 			length = found.group(8)
 			# debug("[FritzCallFBF_05_27] _gotPageCallsNew: len: " + length)
-			remote = found.group(4)
 			if config.plugins.FritzCall.phonebook.value:
+				remote = found.group(4)
 				if remote and not remote.isdigit():
 					remote = resolveNumber(found.group(3), remote + " (FBF)", self.phonebook)
 				else:
