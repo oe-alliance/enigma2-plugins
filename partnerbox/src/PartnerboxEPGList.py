@@ -59,7 +59,8 @@ def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer = None, ti
 	self.remote_clock_prepost_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock_prepost.png')
 
 def Partnerbox_SingleEntry(self, service, eventId, beginTime, duration, EventName):
-	rec1=beginTime and (self.timer.isInTimer(eventId, beginTime, duration, service))
+	clock_pic = self.getPixmapForEntry(service, eventId, beginTime, duration)
+	clock_pic_partnerbox = None
 	rec2=beginTime and (isInRemoteTimer(self,beginTime, duration, service))
 	r1=self.weekday_rect
 	r2=self.datetime_rect
@@ -67,34 +68,38 @@ def Partnerbox_SingleEntry(self, service, eventId, beginTime, duration, EventNam
 	t = localtime(beginTime)
 	res = [
 		None, # no private data needed
-		(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, _(strftime("%a", t))),
-		(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_RIGHT, strftime("%e/%m, %-H:%M", t))
+		(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _(strftime("%a", t))),
+		(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, strftime("%e/%m, %-H:%M", t))
 	]
-	if rec1 or rec2:
-		if rec1:
-			clock_pic = self.getClockPixmap(service, beginTime, duration, eventId)
-			#eventuell auch in der Partnerbox
-			if rec2:
-				clock_pic_partnerbox = getRemoteClockPixmap(self,service, beginTime, duration, eventId)
-		else:
-			clock_pic = getRemoteClockPixmap(self,service, beginTime, duration, eventId)
-		if rec1 and rec2:
+	if rec2:
+		clock_pic_partnerbox = getRemoteClockPixmap(self,service, beginTime, duration, eventId)
+	if clock_pic or clock_pic_partnerbox:
+		if clock_pic and clock_pic_partnerbox:
 			# wenn sowohl lokal als auch auf Partnerbox
 			res.extend((
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top(), 21, 21, clock_pic),
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left() + 25, r3.top(), 21, 21, clock_pic_partnerbox),
-				(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + 50, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, EventName)))
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x, r3.y, 21, 21, clock_pic),
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x + 25, r3.y, 21, 21, clock_pic_partnerbox),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x + 50, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, EventName)
+			))
+		elif clock_pic_partnerbox:
+			# wenn sowohl lokal als auch auf Partnerbox
+			res.extend((
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x, r3.y, 21, 21, clock_pic_partnerbox),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x + 25, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, EventName)
+			))
 		else:
 			res.extend((
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top(), 21, 21, clock_pic),
-				(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + 25, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, EventName)))
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x, r3.y, 21, 21, clock_pic),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x + 25, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, EventName)
+			))
 	else:
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, EventName))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, EventName))
 	return res
 
 
 def Partnerbox_SimilarEntry(self, service, eventId, beginTime, service_name, duration):
-	rec1=beginTime and (self.timer.isInTimer(eventId, beginTime, duration, service))
+	clock_pic = self.getPixmapForEntry(service, eventId, beginTime, duration)
+	clock_pic_partnerbox = None
 	rec2=beginTime and (isInRemoteTimer(self,beginTime, duration, service))
 	r1=self.weekday_rect
 	r2=self.datetime_rect
@@ -105,53 +110,56 @@ def Partnerbox_SimilarEntry(self, service, eventId, beginTime, service_name, dur
 		(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, _(strftime("%a", t))),
 		(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_RIGHT, strftime("%e/%m, %-H:%M", t))
 	]
-	if rec1 or rec2:
-		if rec1:
-			clock_pic = self.getClockPixmap(service, beginTime, duration, eventId)
-			#eventuell auch in der Partnerbox
-			if rec2:
-				clock_pic_partnerbox = getRemoteClockPixmap(self,service, beginTime, duration, eventId)
-		else:
-			clock_pic = getRemoteClockPixmap(self,service, beginTime, duration, eventId)
-		if rec1 and rec2:
+	if rec2:
+		clock_pic_partnerbox = getRemoteClockPixmap(self,service, beginTime, duration, eventId)
+	if clock_pic or clock_pic_partnerbox:
+		if clock_pic and clock_pic_partnerbox:
 			# wenn sowohl lokal als auch auf Partnerbox
 			res.extend((
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top(), 21, 21, clock_pic),
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left() + 25, r3.top(), 21, 21, clock_pic_partnerbox),
-				(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + 50, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, service_name)
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x, r3.y, 21, 21, clock_pic),
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x + 25, r3.y, 21, 21, clock_pic_partnerbox),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x + 50, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, service_name)
+			))
+		elif clock_pic_partnerbox:
+			# wenn sowohl lokal als auch auf Partnerbox
+			res.extend((
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x, r3.y, 21, 21, clock_pic_partnerbox),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x + 50, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, service_name)
 			))
 		else:
 			res.extend((
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top(), 21, 21, clock_pic),
-				(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + 25, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, service_name)
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x, r3.y, 21, 21, clock_pic),
+				(eListboxPythonMultiContent.TYPE_TEXT, r3.x + 25, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, service_name)
 			))
 	else:
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, service_name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, service_name))
 	return res
 
 def Partnerbox_MultiEntry(self, changecount, service, eventId, begTime, duration, EventName, nowTime, service_name):
 	# so wie es aussieht wird der MultiEPG ueber ein Plugin angefahren...lasse den Code dennoch mal drinnen...
-	rec1=begTime and (self.timer.isInTimer(eventId, begTime, duration, service))
+	clock_pic = self.getPixmapForEntry(service, eventId, beginTime, duration)
+	clock_pic_partnerbox = None
 	rec2=begTime and (isInRemoteTimer(self,begTime, duration, service))
 	r1=self.service_rect
 	r2=self.progress_rect
 	r3=self.descr_rect
 	r4=self.start_end_rect
 	res = [ None ] # no private data needed
-	if rec1 or rec2:
-		if rec1:
-			clock_pic = self.getClockPixmap(service, begTime, duration, eventId)
-			#eventuell auch in der Partnerbox
-			if rec2:
-				clock_pic_partnerbox = getRemoteClockPixmap(self,service, begTime, duration, eventId)
-		else:
-			clock_pic = getRemoteClockPixmap(self,service, begTime, duration, eventId)
-		if rec1 and rec2:
+	if rec2:
+		clock_pic_partnerbox = getRemoteClockPixmap(self,service, beginTime, duration, eventId)
+	if clock_pic or clock_pic_partnerbox:
+		if clock_pic and clock_pic_partnerbox:
 			# wenn sowohl lokal als auch auf Partnerbox
 			res.extend((
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width()-41, r1.height(), 0, RT_HALIGN_LEFT, service_name),
 				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r1.left()+r1.width()-32, r1.top(), 21, 21, clock_pic),
 				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r1.left()+r1.width()-16, r1.top(), 21, 21, clock_pic_partnerbox)
+			))
+		elif clock_pic_partnerbox:
+			# wenn sowohl lokal als auch auf Partnerbox
+			res.extend((
+				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width()-41, r1.height(), 0, RT_HALIGN_LEFT, service_name),
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r1.left()+r1.width()-32, r1.top(), 21, 21, clock_pic_partnerbox),
 			))
 		else:
 			res.extend((

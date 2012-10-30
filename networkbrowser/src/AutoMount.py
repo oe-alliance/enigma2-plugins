@@ -19,7 +19,7 @@ def rm_rf(d): # only for removing the ipkg stuff from /media/hdd subdirs
 				os.unlink(path)
 		os.rmdir(d)
 	except Exception, ex:
-	        print "AutoMount failed to remove", d, "Error:", ex
+		print "AutoMount failed to remove", d, "Error:", ex
 
 class AutoMount():
 	"""Manages Mounts declared in a XML-Document."""
@@ -71,7 +71,6 @@ class AutoMount():
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
 						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
-						print "NFSMOUNT",data
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
@@ -180,70 +179,83 @@ class AutoMount():
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
 
-
 		self.checkList = self.automounts.keys()
 		if not self.checkList:
-			print "[AutoMount.py] self.automounts without mounts",self.automounts
+			print "[NetworkBrowser] self.automounts without mounts",self.automounts
 			if callback is not None:
 				callback(True)
 		else:
 			self.CheckMountPoint(self.checkList.pop(), callback)
 
-	def sanitizeOptions(self, origOptions, cifs=False):
+	def sanitizeOptions(self, origOptions, cifs=False, fstab=False):
 		options = origOptions.strip()
-		if not options:
-			options = 'rsize=8192,wsize=8192'
-			if not cifs:
-				options += ',tcp'
+		if not fstab:
+			if not options:
+				options = 'rsize=32768,wsize=32768'
+				if not cifs:
+					options += ',tcp'
+			else:
+				if 'rsize' not in options:
+					options += ',rsize=32768'
+				if 'wsize' not in options:
+					options += ',wsize=32768'
+				if not cifs and 'tcp' not in options and 'udp' not in options:
+					options += ',tcp'
 		else:
-			if 'rsize' not in options:
-				options += ',rsize=8192'
-			if 'wsize' not in options:
-				options += ',wsize=8192'
-			if not cifs and 'tcp' not in options and 'udp' not in options:
-				options += ',tcp'
+			if not options:
+				options = 'nfsvers=3,rsize=32768,wsize=32768'
+				if not cifs:
+					options += ',proto=tcp'
+			else:
+				options = 'nfsvers=3,' + options
+				if 'rsize' not in options:
+					options += ',rsize=32768'
+				if 'wsize' not in options:
+					options += ',wsize=32768'
+				if not cifs and 'tcp' not in options and 'udp' not in options:
+					options += ',proto=tcp'
+				else:
+					options = options.replace('tcp','proto=tcp')
+				options = options + ',timeo=14,fg,soft,intr'
 		return options
 
 	def CheckMountPoint(self, item, callback):
 		data = self.automounts[item]
 		if not self.MountConsole:
 			self.MountConsole = Console()
-		self.command = None
-		path = os.path.join('/media/net', data['sharename'])
 		self.command = []
 		self.mountcommand = None
 		self.unmountcommand = None
-		if self.activeMountsCounter == 0:
-			print "self.automounts without active mounts",self.automounts
-			if data['active'] == 'False' or data['active'] is False:
-				self.unmountcommand = 'umount -fl '+ path
+		if data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True:
+			path = os.path.join('/media/hdd')
+			sharepath = os.path.join('/media/net', data['sharename'])
 		else:
-			if data['active'] == 'False' or data['active'] is False:
-				self.unmountcommand = 'umount -fl '+ path
-
-			elif data['active'] == 'True' or data['active'] is True:
-				self.unmountcommand = 'umount -fl '+ path
+			path = os.path.join('/media/net', data['sharename'])
+			sharepath = ""
+		if os.path.ismount(path):
+# 			print '[NetworkBowser] Unmounting:',path
+			self.unmountcommand = 'umount -fl '+ path
+		if os.path.ismount(sharepath):
+# 			print '[NetworkBowser] Unmounting:',sharepath
+			self.unmountcommand = self.unmountcommand + ' && umount -fl '+ sharepath
+		if self.activeMountsCounter != 0:
+			if data['active'] == 'True' or data['active'] is True:
 # 				try:
-				if data['mountusing'] == 'fstab' or data['mountusing'] == 'old_enigma2':
+				if data['mountusing'] == 'fstab':
 					if data['mounttype'] == 'nfs':
 						tmpcmd = 'mount ' + data['ip'] + ':/' + data['sharedir']
-						self.mountcommand = tmpcmd.encode("UTF-8")
 					elif data['mounttype'] == 'cifs':
 						tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
-						self.mountcommand = tmpcmd.encode("UTF-8")
-
-				elif data['mountusing'] == 'enigma2':
+					self.mountcommand = tmpcmd.encode("UTF-8")
+				elif data['mountusing'] == 'enigma2' or data['mountusing'] == 'old_enigma2':
 					tmpsharedir = data['sharedir'].replace(" ", "\\ ")
 					if tmpsharedir[-1:] == "$":
 						tmpdir = tmpsharedir.replace("$", "\\$")
 						tmpsharedir = tmpdir
 					if data['mounttype'] == 'nfs':
 						if not os.path.ismount(path):
-							if data['options']:
-								options = "tcp,noatime," + data['options']
-							else:
-								options = "tcp,noatime"
 							tmpcmd = 'mount -t nfs -o ' + self.sanitizeOptions(data['options']) + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
+							print 'MOUNT CMD',tmpcmd
 							self.mountcommand = tmpcmd.encode("UTF-8")
 					elif data['mounttype'] == 'cifs':
 						if not os.path.ismount(path):
@@ -251,7 +263,7 @@ class AutoMount():
 							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',noatime,noserverino,iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
 							self.mountcommand = tmpcmd.encode("UTF-8")
 # 				except Exception, ex:
-# 					print "[AutoMount.py] Failed to create", path, "Error:", ex
+# 					print "[NetworkBrowser] Failed to create", path, "Error:", ex
 # 					self.command = None
 
 		if self.unmountcommand is not None or self.mountcommand is not None:
@@ -261,21 +273,24 @@ class AutoMount():
 				if not os.path.exists(path):
 					self.command.append('mkdir -p ' + path)
 				self.command.append(self.mountcommand)
-			self.MountConsole.eBatch(self.command, self.CheckMountPointFinished, [data, callback])
+			self.MountConsole.eBatch(self.command, self.CheckMountPointFinished, [data, callback],debug=True)
 		else:
 			self.CheckMountPointFinished([data, callback])
 
 	def CheckMountPointFinished(self, extra_args):
-# 		print "[AutoMount.py] CheckMountPointFinished"
+# 		print "[NetworkBrowser] CheckMountPointFinished"
 		(data, callback ) = extra_args
-		path = os.path.join('/media/net', data['sharename'])
+		if data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True:
+			path = os.path.join('/media/hdd')
+			sharepath = os.path.join('/media/net', data['sharename'])
+		else:
+			path = os.path.join('/media/net', data['sharename'])
+			sharepath = ""
 		if os.path.exists(path):
 			if os.path.ismount(path):
 				if self.automounts.has_key(data['sharename']):
 					self.automounts[data['sharename']]['isMounted'] = True
 					desc = data['sharename']
-					if self.automounts[data['sharename']]['hdd_replacement'] == 'True': #hdd replacement hack
-						self.makeHDDlink(path)
 					harddiskmanager.addMountedPartition(path, desc)
 			else:
 				if self.automounts.has_key(data['sharename']):
@@ -286,7 +301,7 @@ class AutoMount():
 							os.rmdir(path)
 							harddiskmanager.removeMountedPartition(path)
 						except Exception, ex:
-						        print "Failed to remove", path, "Error:", ex
+							print "Failed to remove", path, "Error:", ex
 		if self.checkList:
 			# Go to next item in list...
 			self.CheckMountPoint(self.checkList.pop(), callback)
@@ -296,32 +311,14 @@ class AutoMount():
 					self.callback = callback
 					self.timer.startLongTimer(1)
 
-	def makeHDDlink(self, path):
-		hdd_dir = '/media/hdd'
-# 		print "[AutoMount.py] symlink %s %s" % (path, hdd_dir)
-		if os.path.islink(hdd_dir):
-			if os.readlink(hdd_dir) != path:
-				os.remove(hdd_dir)
-				os.symlink(path, hdd_dir)
-		elif os.path.ismount(hdd_dir) is False:
-			if os.path.isdir(hdd_dir):
-				rm_rf(hdd_dir)
-		try:
-			os.symlink(path, hdd_dir)
-		except OSError, ex:
-			print "[AutoMount.py] add symlink fails!", ex
-		movie = os.path.join(hdd_dir, 'movie')
-		if not os.path.exists(movie):
-			try:
-				os.mkdir(movie)
-			except Exception, ex:
-				print "[AutoMount.py] Failed to create ", movie, "Error:", ex
-
 	def mountTimeout(self):
 		self.timer.stop()
 		if self.MountConsole:
 			if len(self.MountConsole.appContainers) == 0:
-				print "self.automounts after mounting",self.automounts
+				if self.callback is not None:
+					self.callback(True)
+		elif self.removeConsole:
+			if len(self.removeConsole.appContainers) == 0:
 				if self.callback is not None:
 					self.callback(True)
 
@@ -342,19 +339,26 @@ class AutoMount():
 		# Generate List in RAM
 		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
 		for sharename, sharedata in self.automounts.items():
+			if sharedata['hdd_replacement'] == 'True' or sharedata['hdd_replacement'] is True: #hdd replacement hack
+				path = os.path.join('/media/hdd')
+				sharepath = os.path.join('/media/net', sharedata['sharename'])
+			else:
+				path = os.path.join('/media/net', sharedata['sharename'])
+				sharepath = ""
 			if sharedata['mountusing'] == 'fstab':
-				open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharedata['sharename'] not in l])
+				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir'] + ' '
+				open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharetemp not in l])
 				os.rename('/etc/fstab.tmp','/etc/fstab')
 				mtype = sharedata['mounttype']
 				list.append('<fstab>\n')
 				list.append(' <' + mtype + '>\n')
 				list.append('  <mount>\n')
-				list.append("   <active>" + str(sharedata['active']) + "</active>\n")
-				list.append("   <hdd_replacement>" + str(sharedata['hdd_replacement']) + "</hdd_replacement>\n")
-				list.append("   <ip>" + sharedata['ip'] + "</ip>\n")
-				list.append("   <sharename>" + sharedata['sharename'] + "</sharename>\n")
-				list.append("   <sharedir>" + sharedata['sharedir'] + "</sharedir>\n")
-				list.append("   <options>" + sharedata['options'] + "</options>\n")
+				list.append('   <active>' + str(sharedata['active']) + '</active>\n')
+				list.append('   <hdd_replacement>' + str(sharedata['hdd_replacement']) + '</hdd_replacement>\n')
+				list.append('   <ip>' + sharedata['ip'] + '</ip>\n')
+				list.append('   <sharename>' + sharedata['sharename'] + '</sharename>\n')
+				list.append('   <sharedir>' + sharedata['sharedir'] + '</sharedir>\n')
+				list.append('   <options>' + sharedata['options'] + '</options>\n')
 				if sharedata['mounttype'] == 'cifs':
 					list.append("   <username>" + sharedata['username'] + "</username>\n")
 					list.append("   <password>" + sharedata['password'] + "</password>\n")
@@ -363,9 +367,9 @@ class AutoMount():
 				list.append('</fstab>\n')
 				out = open('/etc/fstab', 'a')
 				if sharedata['mounttype'] == 'nfs':
-					line = sharedata['ip'] + ":/" + sharedata['sharedir'] + " /media/net/" + sharedata['sharename'] + "\tnfs\tnfsvers=3,proto=tcp,rsize=32768,wsize=32768,timeo=14,fg,soft,intr     0 0\n"
+					line = sharedata['ip'] + ':/' + sharedata['sharedir'] + ' ' + path + '\tnfs\t' + self.sanitizeOptions(sharedata['options'], fstab=True) + '\t0 0\n'
 				elif sharedata['mounttype'] == 'cifs':
-					line = "//" + sharedata['ip'] + "/" + sharedata['sharedir'] + " /media/net/" + sharedata['sharename'] + "\tcifs\tusername=" + sharedata['username'] + ",password=" + sharedata['password'] + ",_netdev\t0 0\n"
+					line = '//' + sharedata['ip'] + '/' + sharedata['sharedir'] + ' ' + path + '\tcifs\tusername=' + sharedata['username'] + ',password=' + sharedata['password'] + ',_netdev\t0 0\n'
 				out.write(line)
 				out.close()
 			elif sharedata['mountusing'] == 'enigma2':
@@ -373,57 +377,33 @@ class AutoMount():
 				list.append('<enigma2>\n')
 				list.append(' <' + mtype + '>\n')
 				list.append('  <mount>\n')
-				list.append("   <active>" + str(sharedata['active']) + "</active>\n")
-				list.append("   <hdd_replacement>" + str(sharedata['hdd_replacement']) + "</hdd_replacement>\n")
-				list.append("   <ip>" + sharedata['ip'] + "</ip>\n")
-				list.append("   <sharename>" + sharedata['sharename'] + "</sharename>\n")
-				list.append("   <sharedir>" + sharedata['sharedir'] + "</sharedir>\n")
-				list.append("   <options>" + sharedata['options'] + "</options>\n")
+				list.append('   <active>' + str(sharedata['active']) + '</active>\n')
+				list.append('   <hdd_replacement>' + str(sharedata['hdd_replacement']) + '</hdd_replacement>\n')
+				list.append('   <ip>' + sharedata['ip'] + '</ip>\n')
+				list.append('   <sharename>' + sharedata['sharename'] + '</sharename>\n')
+				list.append('   <sharedir>' + sharedata['sharedir'] + '</sharedir>\n')
+				list.append('   <options>' + sharedata['options'] + '</options>\n')
 				if sharedata['mounttype'] == 'cifs':
 					list.append("   <username>" + sharedata['username'] + "</username>\n")
 					list.append("   <password>" + sharedata['password'] + "</password>\n")
 				list.append('  </mount>\n')
 				list.append(' </' + mtype + '>\n')
 				list.append('</enigma2>\n')
-
 			elif sharedata['mountusing'] == 'old_enigma2':
-				if sharedata['mounttype'] == 'nfs':
-					open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharedata['sharename'] not in l])
-					os.rename('/etc/fstab.tmp','/etc/fstab')
-					list.append(' <nfs>\n')
-					list.append('  <mount>\n')
-					list.append(''.join(["   <active>", str(sharedata['active']), "</active>\n"]))
-					list.append(''.join(["   <hdd_replacement>", str(sharedata['hdd_replacement']), "</hdd_replacement>\n"]))
-					list.append(''.join(["   <ip>", sharedata['ip'], "</ip>\n"]))
-					list.append(''.join(["   <sharename>", sharedata['sharename'], "</sharename>\n"]))
-					list.append(''.join(["   <sharedir>", sharedata['sharedir'], "</sharedir>\n"]))
-					list.append(''.join(["   <options>", sharedata['options'], "</options>\n"]))
-					list.append('  </mount>\n')
-					list.append(' </nfs>\n')
-					out = open('/etc/fstab', 'a')
-					line = sharedata['ip'] + ":/" + sharedata['sharedir'] + " /media/net/" + sharedata['sharename'] + "    nfs        nfsvers=3,proto=tcp,rsize=32768,wsize=32768,timeo=14,bg,soft,intr     0 0\n"
-					out.write(line)
-					out.close()
-
-				elif sharedata['mounttype'] == 'cifs':
-					open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharedata['sharename'] not in l])
-					os.rename('/etc/fstab.tmp','/etc/fstab')
-					list.append(' <cifs>\n')
-					list.append('  <mount>\n')
-					list.append(''.join(["   <active>", str(sharedata['active']), "</active>\n"]))
-					list.append(''.join(["   <hdd_replacement>", str(sharedata['hdd_replacement']), "</hdd_replacement>\n"]))
-					list.append(''.join(["   <ip>", sharedata['ip'], "</ip>\n"]))
-					list.append(''.join(["   <sharename>", sharedata['sharename'], "</sharename>\n"]))
-					list.append(''.join(["   <sharedir>", sharedata['sharedir'], "</sharedir>\n"]))
-					list.append(''.join(["   <options>", sharedata['options'], "</options>\n"]))
-					list.append(''.join(["   <username>", sharedata['username'], "</username>\n"]))
-					list.append(''.join(["   <password>", sharedata['password'], "</password>\n"]))
-					list.append('  </mount>\n')
-					list.append(' </cifs>\n')
-					out = open('/etc/fstab', 'a')
-					line = "//" + sharedata['ip'] + "/" + sharedata['sharedir'] + " /media/net/" + sharedata['sharename'] + "    cifs   username=" + sharedata['username'] + ",password=" + sharedata['password'] + ",_netdev   0 0\n"
-					out.write(line)
-					out.close()
+				mtype = sharedata['mounttype']
+				list.append(' <' + mtype + '>\n')
+				list.append('  <mount>\n')
+				list.append('   <active>' + str(sharedata['active']) + '</active>\n')
+				list.append('   <hdd_replacement>' + str(sharedata['hdd_replacement']) + '</hdd_replacement>\n')
+				list.append('   <ip>' + sharedata['ip'] + '</ip>\n')
+				list.append('   <sharename>' + sharedata['sharename'] + '</sharename>\n')
+				list.append('   <sharedir>' + sharedata['sharedir'] + '</sharedir>\n')
+				list.append('   <options>' + sharedata['options'] + '</options>\n')
+				if sharedata['mounttype'] == 'cifs':
+					list.append("   <username>" + sharedata['username'] + "</username>\n")
+					list.append("   <password>" + sharedata['password'] + "</password>\n")
+				list.append('  </mount>\n')
+				list.append(' </' + mtype + '>\n')
 
 		# Close Mountmanager Tag
 		list.append('</mountmanager>\n')
@@ -432,33 +412,37 @@ class AutoMount():
 		try:
 			open(XML_FSTAB, "w").writelines(list)
 		except Exception, e:
-			print "[AutoMount.py] Error Saving Mounts List:", e
+			print "[NetworkBrowser] Error Saving Mounts List:", e
 
 	def stopMountConsole(self):
 		if self.MountConsole is not None:
 			self.MountConsole = None
 
 	def removeMount(self, mountpoint, callback = None):
-# 		print "[AutoMount.py] removing mount: ",mountpoint
+# 		print "[NetworkBrowser] removing mount: ",mountpoint
 		self.newautomounts = {}
-
+		path = ''
 		for sharename, sharedata in self.automounts.items():
+			if sharedata['hdd_replacement'] == 'True' or sharedata['hdd_replacement'] is True: #hdd replacement hack
+				path = os.path.join('/media/hdd')
+				sharepath = os.path.join('/media/net', sharedata['sharename'])
+			else:
+				path = os.path.join('/media/net', sharedata['sharename'])
+				sharepath = ""
 			if sharename is not mountpoint.strip():
 				self.newautomounts[sharename] = sharedata
-			if sharedata['mountusing'] == 'fstab' or sharedata['mountusing'] == 'old_enigma2':
-				open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharedata['sharename'] not in l])
+			if sharedata['mountusing'] == 'fstab':
+				open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharedata['sharedir'] not in l])
 				os.rename('/etc/fstab.tmp','/etc/fstab')
 		self.automounts.clear()
 		self.automounts = self.newautomounts
 		if not self.removeConsole:
 			self.removeConsole = Console()
-		path = '/media/net/'+ mountpoint
 		umountcmd = 'umount -fl '+ path
-# 		print "[AutoMount.py] UMOUNT-CMD--->",umountcmd
+# 		print "[NetworkBrowser] UMOUNT-CMD--->",umountcmd
 		self.removeConsole.ePopen(umountcmd, self.removeMountPointFinished, [path, callback])
 
 	def removeMountPointFinished(self, result, retval, extra_args):
-# 		print "[AutoMount.py] removeMountPointFinished result", result, "retval", retval
 		(path, callback ) = extra_args
 		if os.path.exists(path):
 			if not os.path.ismount(path):
@@ -466,12 +450,11 @@ class AutoMount():
 					os.rmdir(path)
 					harddiskmanager.removeMountedPartition(path)
 				except Exception, ex:
-				        print "Failed to remove", path, "Error:", ex
+					print "Failed to remove", path, "Error:", ex
 		if self.removeConsole:
 			if len(self.removeConsole.appContainers) == 0:
 				if callback is not None:
 					self.callback = callback
 					self.timer.startLongTimer(1)
-
 
 iAutoMount = AutoMount()
