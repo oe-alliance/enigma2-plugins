@@ -1,0 +1,16 @@
+﻿<default>
+	<prerequisites>
+		<tag type="System" />
+	</prerequisites>
+	<info>
+		<author>rossi2000</author>
+		<name>VideoColorSpace</name>
+		<packagename>enigma2-plugin-extensions-tunerserver</packagename>
+		<shortdescription>Tuner server</shortdescription>
+		<description>Builds a virtual channels list</description>
+		<screenshot />
+	</info>
+	<files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-tunerserver" />
+	</files>
+</default>

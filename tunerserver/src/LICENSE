@@ -1,0 +1,11 @@
+                          <<< Bh_Tuner-Server >>>                           
+This plugin implement the Tuner Server feature included in Black Hole image.
+It builds a virtual channels list of .m3u files in the folder /media/hdd/tuner
+Clients can stream channels from server simply accessing via Lan or UPnP
+Note: To stream .m3u files via Dlna you need a compatible UPnP server.
+
+                                                                            
+  This file is open source software; you can redistribute it and/or modify  
+     it under the terms of the GNU General Public License version 2 as      
+               published by the Free Software Foundation.                   
+                                                                            
