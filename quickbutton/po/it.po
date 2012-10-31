@@ -1,11 +1,14 @@
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - quickbutton\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-10 17:50+0100\n"
+"Report-Msgid-Bugs-To: Spaeleus <spaeleus@croci.org>\n"
+"POT-Creation-Date: 2012-10-24 20:03+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,67 +16,67 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: /home/dario/Plugins/quickbutton\n"
-"X-Poedit-SearchPath-0: /home/dario/Plugins/quickbutton\n"
+"X-Poedit-Basepath: .../enigma2-plugins/quickbutton\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/quickbutton\n"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:36
-#: /home/dario/Plugins/quickbutton/src/plugin.py:37
-#: /home/dario/Plugins/quickbutton/src/plugin.py:38
-#: /home/dario/Plugins/quickbutton/src/plugin.py:39
-#: /home/dario/Plugins/quickbutton/src/plugin.py:40
-#: /home/dario/Plugins/quickbutton/src/plugin.py:120
-#: /home/dario/Plugins/quickbutton/src/plugin.py:195
+#: .../enigma2-plugins/quickbutton/src/plugin.py:36
+#: .../enigma2-plugins/quickbutton/src/plugin.py:37
+#: .../enigma2-plugins/quickbutton/src/plugin.py:38
+#: .../enigma2-plugins/quickbutton/src/plugin.py:39
+#: .../enigma2-plugins/quickbutton/src/plugin.py:40
+#: .../enigma2-plugins/quickbutton/src/plugin.py:121
+#: .../enigma2-plugins/quickbutton/src/plugin.py:222
 msgid "Nothing"
 msgstr "Nulla"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:74
+#: .../enigma2-plugins/quickbutton/src/plugin.py:75
 msgid "setup for Quickbutton"
 msgstr "Configurazione per Quickbutton"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:81
+#: .../enigma2-plugins/quickbutton/src/plugin.py:81
 msgid "Assign plugin to long green key pressed"
 msgstr "Assegnare il plugin al tasto verde (lungo)"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:82
+#: .../enigma2-plugins/quickbutton/src/plugin.py:82
 msgid "Assign plugin to long yellow key pressed"
 msgstr "Assegnare il plugin al tasto giallo (lungo)"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:83
+#: .../enigma2-plugins/quickbutton/src/plugin.py:83
 msgid "Assign plugin to long red key pressed"
 msgstr "Assegnare il plugin al tasto rosso (lungo)"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:84
+#: .../enigma2-plugins/quickbutton/src/plugin.py:84
 msgid "Assign plugin to long blue key pressed"
 msgstr "Assegnare il plugin al tasto blu (lungo)"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:86
+#: .../enigma2-plugins/quickbutton/src/plugin.py:86
 msgid "Assign plugin to red key pressed"
 msgstr "Assegnare il plugin al tasto rosso (breve)"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:118
+#: .../enigma2-plugins/quickbutton/src/plugin.py:119
 msgid "Unknown Error"
 msgstr "Errore Sconosciuto: "
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:121
-#: /home/dario/Plugins/quickbutton/src/plugin.py:196
-#: /home/dario/Plugins/quickbutton/src/plugin.py:241
+#: .../enigma2-plugins/quickbutton/src/plugin.py:122
+#: .../enigma2-plugins/quickbutton/src/plugin.py:223
+#: .../enigma2-plugins/quickbutton/src/plugin.py:267
 msgid "Single EPG"
 msgstr "EPG singolo"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:126
-#: /home/dario/Plugins/quickbutton/src/plugin.py:197
-#: /home/dario/Plugins/quickbutton/src/plugin.py:243
+#: .../enigma2-plugins/quickbutton/src/plugin.py:127
+#: .../enigma2-plugins/quickbutton/src/plugin.py:224
+#: .../enigma2-plugins/quickbutton/src/plugin.py:269
 msgid "Multi EPG"
 msgstr "Multi EPG"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:131
-#: /home/dario/Plugins/quickbutton/src/plugin.py:198
-#: /home/dario/Plugins/quickbutton/src/plugin.py:245
+#: .../enigma2-plugins/quickbutton/src/plugin.py:132
+#: .../enigma2-plugins/quickbutton/src/plugin.py:225
+#: .../enigma2-plugins/quickbutton/src/plugin.py:271
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:137
-#: /home/dario/Plugins/quickbutton/src/plugin.py:165
+#: .../enigma2-plugins/quickbutton/src/plugin.py:138
+#: .../enigma2-plugins/quickbutton/src/plugin.py:177
 #, python-format
 msgid ""
 "Error!\n"
@@ -82,73 +85,83 @@ msgstr ""
 "Errore!\n"
 "Tipo errore: %s"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:138
-#: /home/dario/Plugins/quickbutton/src/plugin.py:199
-#: /home/dario/Plugins/quickbutton/src/plugin.py:247
+#: .../enigma2-plugins/quickbutton/src/plugin.py:139
+#: .../enigma2-plugins/quickbutton/src/plugin.py:226
+#: .../enigma2-plugins/quickbutton/src/plugin.py:273
 msgid "Plugin browser"
 msgstr "Browser plugin"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:142
-#: /home/dario/Plugins/quickbutton/src/plugin.py:200
-#: /home/dario/Plugins/quickbutton/src/plugin.py:249
+#: .../enigma2-plugins/quickbutton/src/plugin.py:143
+#: .../enigma2-plugins/quickbutton/src/plugin.py:227
+#: .../enigma2-plugins/quickbutton/src/plugin.py:275
 msgid "switch 4:3 content display"
 msgstr "Commutare visual. contenuti in 4:3"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:143
+#: .../enigma2-plugins/quickbutton/src/plugin.py:144
 msgid "Pillarbox"
 msgstr "Pillarbox"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:144
+#: .../enigma2-plugins/quickbutton/src/plugin.py:145
 msgid "Pan&Scan"
 msgstr "Pan&Scan"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:145
+#: .../enigma2-plugins/quickbutton/src/plugin.py:146
 msgid "Just Scale"
 msgstr "Scalare solamente"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:149
+#: .../enigma2-plugins/quickbutton/src/plugin.py:150
 msgid "Display 4:3 content as"
 msgstr "Mostrare contenuti in 4:3 come"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:151
-#: /home/dario/Plugins/quickbutton/src/plugin.py:201
-#: /home/dario/Plugins/quickbutton/src/plugin.py:251
+#: .../enigma2-plugins/quickbutton/src/plugin.py:152
+#: .../enigma2-plugins/quickbutton/src/plugin.py:228
+#: .../enigma2-plugins/quickbutton/src/plugin.py:277
 msgid "Timer"
 msgstr "Timer"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:167
+#: .../enigma2-plugins/quickbutton/src/plugin.py:156
+#: .../enigma2-plugins/quickbutton/src/plugin.py:230
+#: .../enigma2-plugins/quickbutton/src/plugin.py:279
+msgid "HbbTV Applications"
+msgstr "Applicazioni HbbTV"
+
+#: .../enigma2-plugins/quickbutton/src/plugin.py:179
 msgid "Plugin not found!"
 msgstr "Plugin non trovato!"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:169
+#: .../enigma2-plugins/quickbutton/src/plugin.py:181
 msgid "No plugin assigned!"
 msgstr "Nessun plugin assegnato"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:186
+#: .../enigma2-plugins/quickbutton/src/plugin.py:198
 msgid "Cancel"
 msgstr "Annull."
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:187
+#: .../enigma2-plugins/quickbutton/src/plugin.py:199
 msgid "OK"
 msgstr "Ok"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:223
+#: .../enigma2-plugins/quickbutton/src/plugin.py:250
+msgid "Overwrite HBBTV-red-button"
+msgstr "Sovrascrivere il pulsante rosso HBBTV"
+
+#: .../enigma2-plugins/quickbutton/src/plugin.py:256
 msgid "assigned to long red"
 msgstr "Assegnato al tasto rosso (lungo)"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:224
+#: .../enigma2-plugins/quickbutton/src/plugin.py:257
 msgid "assigned to long green"
 msgstr "Assegnato al tasto verde (lungo)"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:225
+#: .../enigma2-plugins/quickbutton/src/plugin.py:258
 msgid "assigned to long yellow"
 msgstr "Assegnato al tasto giallo (lungo)"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:226
+#: .../enigma2-plugins/quickbutton/src/plugin.py:259
 msgid "assigned to long blue"
 msgstr "Assegnato al tasto blu (lungo)"
 
-#: /home/dario/Plugins/quickbutton/src/plugin.py:231
+#: .../enigma2-plugins/quickbutton/src/plugin.py:262
 msgid "assigned to red"
 msgstr "Assegnato al tasto rosso (breve)"
 

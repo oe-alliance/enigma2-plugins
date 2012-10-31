@@ -20,6 +20,8 @@ from datetime import timedelta, date
 # EPGCache & Event
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
 
+from twisted.internet import reactor, threads
+
 # AutoTimer Component
 from AutoTimerComponent import preferredAutoTimerComponent
 
@@ -172,7 +174,7 @@ class AutoTimer:
 		timers = []
 		conflicting = []
 		similar = defaultdict(list)			# Contains the the marked similar eits and the conflicting strings
-		similars = []										# Contains the added similar timers
+		similars = []						# Contains the added similar timers
 
 		# NOTE: the config option specifies "the next X days" which means today (== 1) + X
 		delta = timedelta(days = config.plugins.autotimer.maxdaysinfuture.value + 1)
@@ -195,21 +197,22 @@ class AutoTimer:
 		#Question: Move to a separate function getTimerDict()
 		#Note: It is also possible to use RecordTimer isInTimer(), but we won't get the timer itself on a match
 		recorddict = defaultdict(list)
-		for timer in chain(recordHandler.timer_list, recordHandler.processed_timers):
-			if timer and timer.service_ref:
-				if timer.eit is not None:
-					event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
-					extdesc = event and event.getExtendedDescription() or ''
-					timer.extdesc = extdesc
-				elif not hasattr(timer, 'extdesc'):
-					timer.extdesc = ''
-				recorddict[str(timer.service_ref)].append(timer)
+		def getRecordDict(recorddict):
+			for timer in chain(recordHandler.timer_list, recordHandler.processed_timers):
+				if timer and timer.service_ref:
+					if timer.eit is not None:
+						event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
+						extdesc = event and event.getExtendedDescription() or ''
+						timer.extdesc = extdesc
+					elif not hasattr(timer, 'extdesc'):
+						timer.extdesc = ''
+					recorddict[str(timer.service_ref)].append(timer)
+		threads.blockingCallFromThread(reactor, getRecordDict, recorddict)
 
 		# Create dict of all movies in all folders used by an autotimer to compare with recordings
 		# The moviedict will be filled only if one AutoTimer is configured to avoid duplicate description for any recordings
 		#Question: It might be better to name it recorddict
 		moviedict = defaultdict(list)
-
 		# Iterate Timer
 		for timer in self.getEnabledTimerList():
 			# Precompute timer destination dir
@@ -237,6 +240,7 @@ class AutoTimer:
 				for service in timer.services:
 					test.append( (service, 0, -1, -1 ) )
 				mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
+
 				for bouquet in timer.bouquets:
 					services = serviceHandler.list(eServiceReference(bouquet))
 					if not services is None:
@@ -292,7 +296,7 @@ class AutoTimer:
 					# Get all events
 					#  eEPGCache.lookupEvent( [ format of the returned tuples, ( service, 0 = event intersects given start_time, start_time -1 for now_time), ] )
 					test.insert(0, 'RITBDSE')
-					allevents = epgcache.lookupEvent( test ) or []
+					allevents = threads.blockingCallFromThread(reactor, epgcache.lookupEvent, test) or []
 
 					# Filter events
 					for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
@@ -302,7 +306,7 @@ class AutoTimer:
 
 			else:
 				# Search EPG, default to empty list
-				epgmatches = epgcache.search( ('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
+				epgmatches = threads.blockingCallFromThread(reactor, epgcache.search, ('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
 
 			# Sort list of tuples by begin time 'B'
 			epgmatches.sort(key=itemgetter(3))
@@ -314,7 +318,7 @@ class AutoTimer:
 			for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
 
 				eserviceref = eServiceReference(serviceref)
-				evt = epgcache.lookupEventId(eserviceref, eit)
+				evt = threads.blockingCallFromThread(reactor, epgcache.lookupEventId, eserviceref, eit)
 				if not evt:
 					print("[AutoTimer] Could not create Event!")
 					continue
@@ -490,7 +494,7 @@ class AutoTimer:
 
 				if oldExists:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?
-					recordHandler.timeChanged(newEntry)
+					threads.blockingCallFromThread(reactor, recordHandler.timeChanged, newEntry)
 
 					if renameTimer is not None and timer.series_labeling:
 						renameTimer(newEntry, name, evtBegin, evtEnd)
@@ -502,7 +506,7 @@ class AutoTimer:
 						newEntry.log(504, "[AutoTimer] Try to add similar Timer because of conflicts with %s." % (conflictString))
 
 					# Try to add timer
-					conflicts = recordHandler.record(newEntry)
+					conflicts = threads.blockingCallFromThread(reactor, recordHandler.record, newEntry)
 
 					if conflicts:
 						# Maybe use newEntry.log
@@ -556,7 +560,7 @@ class AutoTimer:
 							newEntry.log(503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString))
 							newEntry.disabled = True
 							# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
-							conflicts = recordHandler.record(newEntry)
+							conflicts = threads.blockingCallFromThread(reactor, recordHandler.record, newEntry)
 
 		return (total, new, modified, timers, conflicting, similars)
 
