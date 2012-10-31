@@ -56,23 +56,34 @@ class FreeSpace(ControllerBase):
 		limit = self.getValue('limit')
 		
 		if not self.getValue('wakehdd'):
+			#Adapted from: from Components.Harddisk import findMountPoint
 			def mountpoint(path):
 				path = os.path.realpath(path)
 				if os.path.ismount(path) or len(path)==0: return path
 				return mountpoint(os.path.dirname(path))
+						
+			def getDevicebyMountpoint(hdm, mountpoint):
+				for x in hdm.partitions[:]:
+					if x.mountpoint == mountpoint:
+						return x.device
+				return None
+			
+			def getHDD(hdm, part):
+				for hdd in hdm.hdd:
+					if hdd.device == part[:3]:
+						return hdd
+				return None
 			
 			# User specified to avoid HDD wakeup if it is sleeping
 			from Components.Harddisk import harddiskmanager
-			p = harddiskmanager.getPartitionbyMountpoint( mountpoint(path) )
-			if p is not None and p.uuid is not None:
-				dev = harddiskmanager.getDeviceNamebyUUID(p.uuid)
-				if dev is not None:
-					hdd = harddiskmanager.getHDD(dev)
-					if hdd is not None:
-						if hdd.isSleeping():
-							# Don't wake up HDD
-							print _("[FreeSpace] HDD is idle: ") + str(path)
-							callback()
+			dev = getDevicebyMountpoint( harddiskmanager, mountpoint(path) )
+			if dev is not None:
+				hdd = getHDD( harddiskmanager, dev )
+				if hdd is not None:
+					if hdd.isSleeping():
+						# Don't wake up HDD
+						print _("[FreeSpace] HDD is idle: ") + str(path)
+						callback()
 		
 		# Check free space on path
 		if os.path.exists( path ):

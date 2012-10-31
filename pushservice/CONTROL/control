@@ -1,2 +1,2 @@
 Description: A flexible event notification service. Never miss any free space warning, update or timer conflict.
-Depends: enigma2, python-xml, python-email, python-twisted-core, python-twisted-mail, python-twisted-names, python-twisted-protocols, python-twisted-web, python-pyopenssl, python-io
+Depends: enigma2, python-xml, python-email, python-twisted-core, python-twisted-mail, python-twisted-names, python-twisted-protocols, python-twisted-web, python-pyopenssl, openssl, python-io
