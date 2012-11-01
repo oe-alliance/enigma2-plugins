@@ -150,7 +150,7 @@ config.plugins.mytube.general.videodir = ConfigSelection(default = default, choi
 config.plugins.mytube.general.history = ConfigText(default="")
 config.plugins.mytube.general.clearHistoryOnClose = ConfigYesNo(default = False)
 config.plugins.mytube.general.AutoLoadFeeds = ConfigYesNo(default = True)
-config.plugins.mytube.general.username = ConfigText(default="")
+config.plugins.mytube.general.username = ConfigText(default="", fixed_size = False)
 config.plugins.mytube.general.password = ConfigPassword(default="")
 #config.plugins.mytube.general.useHTTPProxy = ConfigYesNo(default = False)
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
@@ -383,6 +383,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.Timer.callback.append(self.TimerFire)
 
 	def __onClose(self):
+		myTubeService.resetAuthState()
 		del self.Timer
 		del self.timer_startDownload
 		del self.timer_thumbnails
@@ -423,17 +424,10 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 		self.statuslist = []
 		if result[80:88] == rnd:
-			
-			if not config.plugins.mytube.general.username.value is "" and not config.plugins.mytube.general.password.value is "":
-				myTubeService.startService()
-				try:
-					myTubeService.auth_user(config.plugins.mytube.general.username.value, config.plugins.mytube.general.password.value)	
-					if myTubeService.is_auth() is True:
-						print "[MyTube] Login successful"
-				except Exception as e:
-					print 'Login-Error: ' + str(e)
-					#self.session.open(MessageBox, 'Login-Error: ' + str(e), MessageBox.TYPE_INFO)		 			
-			
+
+			# we need to login here; startService() is fired too often for external curl
+			self.tryUserLogin()
+
 			self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
 			self["feedlist"].style = "state"
 			self['feedlist'].setList(self.statuslist)
@@ -459,6 +453,18 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.searchContextEntries.append(self.SearchConfigEntry)
 		self["config"].list = self.searchContextEntries
 		self["config"].l.setList(self.searchContextEntries)
+
+
+	def tryUserLogin(self):
+		if config.plugins.mytube.general.username.value is "" or config.plugins.mytube.general.password.value is "":
+			return
+
+		try:
+			myTubeService.auth_user(config.plugins.mytube.general.username.value, config.plugins.mytube.general.password.value)
+			self.statuslist.append(( _("Login OK"), _('Hello') + ' ' + str(config.plugins.mytube.general.username.value)))
+		except Exception as e:
+			print 'Login-Error: ' + str(e)
+			self.statuslist.append(( _("Login failed"), str(e)))
 
 	def setState(self,status = None):
 		if status:

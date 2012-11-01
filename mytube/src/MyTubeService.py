@@ -11,7 +11,7 @@ from twisted.web import client
 from twisted.internet import reactor
 from urllib2 import Request, URLError, urlopen as urlopen2
 from socket import gaierror, error
-import os, socket
+import os, socket, httplib
 from urllib import quote, unquote_plus, unquote, urlencode
 from httplib import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
 
@@ -20,8 +20,9 @@ from threading import Thread
 
 HTTPConnection.debuglevel = 1
 
-# python on enimga2 has no https socket support
-gdata.youtube.service.YOUTUBE_USER_FEED_URI = 'http://gdata.youtube.com/feeds/api/users'
+if 'HTTPSConnection' not in dir(httplib):
+	# python on enimga2 has no https socket support
+	gdata.youtube.service.YOUTUBE_USER_FEED_URI = 'http://gdata.youtube.com/feeds/api/users'
 
 def validate_cert(cert, key):
 	buf = decrypt_block(cert[8:], key)
@@ -344,6 +345,7 @@ class MyTubePlayerService():
 
 	cached_auth_request = {}
 	current_auth_token = None
+	yt_service = None
 
 	def __init__(self):
 		print "[MyTube] MyTubePlayerService - init"
@@ -354,12 +356,15 @@ class MyTubePlayerService():
 		print "[MyTube] MyTubePlayerService - startService"
 
 		self.yt_service = gdata.youtube.service.YouTubeService()
-		self.yt_service.ssl = False
+
+		# missing ssl support? youtube will help us on some feed urls
+		self.yt_service.ssl = self.supportsSSL()
 
 		# dont use it on class init; error on post and auth
 		self.yt_service.developer_key = 'AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw'
 		self.yt_service.client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0'
 
+		# yt_service is reinit on every feed build; cache here to not reauth. remove init every time?
 		if self.current_auth_token is not None:
 			print "[MyTube] MyTubePlayerService - auth_cached"
 			self.yt_service.SetClientLoginToken(self.current_auth_token)
@@ -385,43 +390,68 @@ class MyTubePlayerService():
 		  'source': self.yt_service.client_id,
 		}
 		
-		print "[MyTube] MyTubePlayerService - Starting auth request"
+		print "[MyTube] MyTubePlayerService - Starting external curl auth request"
 		result = os.popen('curl -s -k -X POST "%s" -d "%s"' % (gdata.youtube.service.YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL , urlencode(opts))).read()
 		
 		return result
-	
+
+	def supportsSSL(self):
+		return 'HTTPSConnection' in dir(httplib)
+
 	def getFormattedTokenRequest(self, email, pw):
 		return dict(parse_qsl(self.getLoginTokenOnCurl(email, pw).strip().replace('\n', '&')))
 	
 	def getAuthedUsername(self):
-		return self.cached_auth_request.get('YouTubeUser')
+		# on external curl we can get real username
+		if self.cached_auth_request.get('YouTubeUser') is not None:
+			return self.cached_auth_request.get('YouTubeUser')
 
-	def auth_user(self, username, password, use_curl_fallback = True):
+		# current gdata auth class save doesnt save realuser
+		return 'Logged In'
+
+	def auth_user(self, username, password):
 		print "[MyTube] MyTubePlayerService - auth_use - " + str(username)
+
+		if self.yt_service is None:
+			self.startService()
 		
 		if self.current_auth_token is not None:
 			print "[MyTube] MyTubePlayerService - auth_cached"
 			self.yt_service.SetClientLoginToken(self.current_auth_token)
 			return
-		
-		if use_curl_fallback is True:
+
+		if self.supportsSSL() is False:
+			print "[MyTube] MyTubePlayerService - HTTPSConnection not found trying external curl"
 			self.cached_auth_request = self.getFormattedTokenRequest(username, password)
 			if self.cached_auth_request.get('Auth') is None:
-				raise('Got no auth token from curl; you need curl and valid youtube login data')
+				raise Exception('Got no auth token from curl; you need curl and valid youtube login data')
 			
 			self.yt_service.SetClientLoginToken(self.cached_auth_request.get('Auth'))
 		else:
+			print "[MyTube] MyTubePlayerService - Using regularly ProgrammaticLogin for login"
 			self.yt_service.email = username
 			self.yt_service.password  = password
 			self.yt_service.ProgrammaticLogin()
 			
-		# reset any wrong token on wrong logins
+		# double check login: reset any token on wrong logins
 		if self.is_auth() is False:
 			print "[MyTube] MyTubePlayerService - auth_use - auth not possible resetting"
-			self.yt_service.current_token = None
-			self.yt_service.token_store.remove_all_tokens()
-		else:
-			self.current_auth_token = self.auth_token()
+			self.resetAuthState()
+			return
+
+		print "[MyTube] MyTubePlayerService - Got successful login"
+		self.current_auth_token = self.auth_token()
+
+	def resetAuthState(self):
+		print "[MyTube] MyTubePlayerService - resetting auth"
+		self.cached_auth_request = {}
+		self.current_auth_token = None
+
+		if self.yt_service is None:
+			return
+
+		self.yt_service.current_token = None
+		self.yt_service.token_store.remove_all_tokens()
 
 	def is_auth(self):
 		if self.current_auth_token is not None:

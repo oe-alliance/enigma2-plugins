@@ -336,9 +336,9 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		if config.usage.setup_level.index >= 2: # expert+
 			self.searchContextEntries.append(self.VideoDirname)
 		self.searchContextEntries.append(getConfigListEntry(_("Clear history on Exit:"), config.plugins.mytube.general.clearHistoryOnClose))
-		self.searchContextEntries.append(getConfigListEntry(_("Ask to load new entries"), config.plugins.mytube.general.AutoLoadFeeds))
-		self.searchContextEntries.append(getConfigListEntry(_("Youtube Username"), config.plugins.mytube.general.username))
-		self.searchContextEntries.append(getConfigListEntry(_("Youtube Password"), config.plugins.mytube.general.password))
+		self.searchContextEntries.append(getConfigListEntry(_("Auto paginate on last entry:"), config.plugins.mytube.general.AutoLoadFeeds))
+		self.searchContextEntries.append(getConfigListEntry(_("Youtube Username (reopen plugin on change):"), config.plugins.mytube.general.username))
+		self.searchContextEntries.append(getConfigListEntry(_("Youtube Password (reopen plugin on change):"), config.plugins.mytube.general.password))
 
 		self["config"].list = self.searchContextEntries
 		self["config"].l.setList(self.searchContextEntries)
