@@ -185,8 +185,17 @@ class MyTubeFeedEntry():
 		author = ", ".join(authors)
 		return author
 
+	def getUserFeedsUrl(self):
+		for author in self.entry.author:
+			return author.uri.text
+
+		return False
+
+	def getUserId(self):
+		return self.getUserFeedsUrl().split('/')[-1]
+
 	def subscribeToUser(self):
-		username = self.getAuthor()
+		username = self.getUserId()
 		return myTubeService.SubscribeToUser(username)
 		
 	def addToFavorites(self):
@@ -323,7 +332,7 @@ class MyTubeFeedEntry():
 
 	def getUserVideos(self):
 		print "[MyTubeFeedEntry] getUserVideos()"
-		username = self.getAuthor()
+		username = self.getUserId()
 		myuri = 'http://gdata.youtube.com/feeds/api/users/%s/uploads' % username
 		print "Found Uservideos: ", myuri
 		return myuri
@@ -345,7 +354,8 @@ class MyTubePlayerService():
 		print "[MyTube] MyTubePlayerService - startService"
 
 		self.yt_service = gdata.youtube.service.YouTubeService()
-		
+		self.yt_service.ssl = False
+
 		# dont use it on class init; error on post and auth
 		self.yt_service.developer_key = 'AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw'
 		self.yt_service.client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0'

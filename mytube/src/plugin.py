@@ -545,8 +545,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		elif self.currList == "feedlist":
 			menulist = [(_("MyTube Settings"), "settings")]
 			menulist.extend((
+					(_("View user videos"), "user_videos"),
 					(_("View related videos"), "related"),
-					(_("View Users Video"), "user_videos"),
 					(_("View response videos"), "response"),
 				))
 			
