@@ -80,7 +80,11 @@ class RecordNotification(ControllerBase):
 
 	def onRecordEvent(self, timer):
 		text = ""
-		if timer.state == timer.StatePrepared:
+		
+		if timer.justplay:
+			pass
+		
+		elif timer.state == timer.StatePrepared:
 			pass
 		
 		elif timer.state == timer.StateRunning:
