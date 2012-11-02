@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-24 14:59+0100\n"
+"POT-Creation-Date: 2012-11-02 09:06+0100\n"
 "PO-Revision-Date: 2012-10-24 15:03+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -19,427 +19,150 @@ msgstr ""
 "X-Poedit-Basepath: /media/TREKSTOR/git/enigma2-plugins/fritzcall\n"
 "X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/fritzcall\n"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzLDIF.py:70
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzLDIF.py:148
-msgid "business"
-msgstr "Affari"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzLDIF.py:100
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzLDIF.py:173
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:121
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:202
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:330
-msgid "mobile"
-msgstr "Cellulare"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzLDIF.py:102
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzLDIF.py:175
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:123
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:204
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:332
-msgid "home"
-msgstr "Casa"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:93
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:176
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:334
-msgid "work"
-msgstr "Ufficio"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:79
-msgid "not configured"
-msgstr "non configurato"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:79
-msgid "legacy"
-msgstr "legacy"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:85
-msgid "show nothing"
-msgstr "Nulla"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:85
-msgid "show as list"
-msgstr "Come elenco"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:85
-msgid "show each call"
-msgstr "Tutte"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:130
-msgid "Flash"
-msgstr "Flash"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:131
-msgid "Compact Flash"
-msgstr "work"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:132
-msgid "USB Device"
-msgstr "Dispositivo USB"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:137
-msgid "Media directory"
-msgstr "Directory media"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:143
-msgid "Network mount"
-msgstr "Mount di rete"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:149
-msgid "Germany"
-msgstr "Germania"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:150
-msgid "The Netherlands"
-msgstr "Olanda"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:151
-msgid "France"
-msgstr "Francia"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:152
-msgid "Italy"
-msgstr "Italia"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:153
-msgid "Switzerland"
-msgstr "Svizzera"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:154
-msgid "Austria"
-msgstr "Austria"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:162
-msgid "All calls"
-msgstr "Tutte le chiamate"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:163
-msgid "Incoming calls"
-msgstr "Chiamate in entrata"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:164
-msgid "Missed calls"
-msgstr "Chiamate perse"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:165
-msgid "Outgoing calls"
-msgstr "Chiamate in uscita"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:304
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1656
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1687
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
 msgid "About FritzCall"
 msgstr "Info su FritzCall"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:471
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:525
-msgid "Reset"
-msgstr "Reset"
+#. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
+msgid "Add entry to phonebook"
+msgstr "Aggiungere voce in rubrica"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:473
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:523
-msgid "Toggle WLAN"
-msgstr "Commutare WLAN"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:477
-msgid "Toggle Mailbox"
-msgstr "Comm. casella"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:493
-msgid "Toggle all mailboxes"
-msgstr "Comm. tutte le caselle"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:495
-msgid "Toggle 1. mailbox"
-msgstr "Comm. casella 1."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:497
-msgid "Toggle 2. mailbox"
-msgstr "Comm. casella 2."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:499
-msgid "Toggle 3. mailbox"
-msgstr "Comm. casella 3."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:501
-msgid "Toggle 4. mailbox"
-msgstr "Comm. casella 4."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:503
-msgid "Toggle 5. mailbox"
-msgstr "Comm. casella 5."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:504
-msgid "Mailbox"
-msgstr "Casella di posta"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:519
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:521
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:822
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1364
-msgid "Quit"
-msgstr "Uscire"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:527
-msgid "Refresh status"
-msgstr "Aggiornare lo stato"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:529
-msgid "Getting status from FRITZ!Box Fon..."
-msgstr "Recupero stato dalla FRITZ!Box Fon in corso..."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:562
-msgid "Call redirection"
-msgstr "Deviazione chiamate"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:576
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1658
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1685
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2423
-msgid "FRITZ!Box Fon Status"
-msgstr "FRITZ!Box Fon - Stato"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:594
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:617
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:643
-msgid "Status not available"
-msgstr "Stato non disponibile"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:598
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:600
-msgid "IP Address:"
-msgstr "Indirizzo IP:"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:598
-msgid "Connected since"
-msgstr "Connesso da"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:627
-msgid "not encrypted"
-msgstr "non codificato"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:629
-msgid "encrypted"
-msgstr "codificato"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:632
-msgid "no device active"
-msgstr "Nessun dispositivo attivo"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:634
-msgid "one device active"
-msgstr "Un dispositivo attivo"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:636
-msgid "devices active"
-msgstr "Dispositivi attivi"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:652
-msgid "No mailbox active"
-msgstr "Nessuna casella di posta attiva"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:663
-msgid "One mailbox active"
-msgstr "Una casella di posta attiva"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:665
-msgid "mailboxes active"
-msgstr "caselle di posta attive"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:671
-msgid "No DECT phone registered"
-msgstr "Nessun telefono DECT registrato"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:674
-msgid "One DECT phone registered"
-msgstr "Un telefono DECT registrato"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:676
-msgid "DECT phones registered"
-msgstr "Telefoni DECT registrati"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:681
-msgid "Software fax active"
-msgstr "Fax software attivo"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:687
-msgid "No call redirection active"
-msgstr "Nessuna deviazione chiamate attiva"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:692
-msgid "One call redirection active"
-msgstr "Una deviazione chiamate attiva"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:694
-msgid "call redirections active"
-msgstr "deviazione chiamate attiva"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:802
+#. TRANSLATORS: keep it short, this is a button
 msgid "All"
 msgstr "Tutte"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:804
-msgid "Missed"
-msgstr "Ch. perse"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:806
-msgid "Incoming"
-msgstr "In Entr."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:808
-msgid "Outgoing"
-msgstr "In uscita"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:820
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1362
-msgid "Show details of entry"
-msgstr "Mostrare dettagli voce"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:824
-msgid "Display all calls"
+msgid "All calls"
 msgstr "Tutte le chiamate"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:826
-msgid "Display missed calls"
-msgstr "Chiamate perse"
+msgid "Append shortcut number"
+msgstr "Aggiungere numero breve"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:828
-msgid "Display incoming calls"
-msgstr "Chiamate in ingresso"
+msgid "Append type of number"
+msgstr "Agg. il tipo di numero (casa,cell.,uff.)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:830
-msgid "Display outgoing calls"
-msgstr "Chiamate in uscita"
+msgid "Append vanity name"
+msgstr "Aggiungere nome \"Vanity\""
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:832
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:882
-msgid "Getting calls from FRITZ!Box..."
-msgstr "Recupero chiamate dalla FRITZ!Box in corso"
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr "Pref. locale per le chiamate che ne sono prive (se necessario)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:847
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1652
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2421
-msgid "Phone calls"
-msgstr "Ch. telef."
+msgid "Austria"
+msgstr "Austria"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:910
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1870
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1873
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1914
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2170
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2266
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2271
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2294
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:58
-msgid "UNKNOWN"
-msgstr "SCONOSCIUTO"
+msgid "Automatically add new Caller to PhoneBook"
+msgstr "Ins. autom. nuovo chiamante in rubrica"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:940
-msgid "Lookup"
-msgstr "Lookup"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:942
+#. TRANSLATORS: keep it short, this is a button
 msgid "Call"
 msgstr "Chiam."
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:944
-msgid "Save"
-msgstr "Salvare"
+msgid "Call monitoring"
+msgstr "Monitoraggio chiamate"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:973
-msgid "Do what?"
-msgstr "Che fare?"
+msgid "Call redirection"
+msgstr "Deviazione chiamate"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:982
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1985
-#, python-format
-msgid ""
-"Found picture\n"
-"\n"
-"%s\n"
-"\n"
-"But did not load. Probably not PNG, 8-bit"
-msgstr ""
-"Trovata immagine\n"
-"\n"
-"%s\n"
-"\n"
-"Impossibile caricarla. Il formato deve esserecpng, 8 bit."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1038
-msgid "Reverse searching..."
-msgstr "Ricerca identificativo chiamante..."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1042
-msgid "Searching in Outlook export..."
-msgstr "Ricerca in Outlook  export..."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1049
-msgid "Searching in LDIF..."
-msgstr "Ricerca in LDIF..."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1061
-msgid "No result from reverse lookup"
-msgstr "Ricerca identificativo chiamante: nessun risultato!"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1063
-msgid "No result from Outlook export"
-msgstr "Ricerca in Outlook  export: nessun risultato!"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1065
-msgid "No result from LDIF"
-msgstr "Ricerca in LDIF: nessun risultato!"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1074
 #, python-format
 msgid "Calling %s"
 msgstr "Chiamata per %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1078
-msgid "FRITZ!Box not available for calling"
-msgstr "FRITZ!Box non disponibile per le chiamate"
+#. TRANSLATORS: keep it short, this is a button
+msgid "Cancel"
+msgstr "Annull."
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1344
+msgid "Cannot get calls from FRITZ!Box"
+msgstr "Recupero chiamate dalla FRITZ!Box impossibile"
+
+msgid "Cannot get infos from FRITZ!Box"
+msgstr "Recupero informazioni dalla FRITZ!Box impossibile"
+
+msgid "Compact Flash"
+msgstr "work"
+
+msgid "Connected since"
+msgstr "Connesso da"
+
+msgid "Connected to FRITZ!Box!"
+msgstr "Connesso alla FRITZ!Box!"
+
+#, python-format
+msgid ""
+"Connecting to FRITZ!Box failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Connessione alla FRITZ!Box fallita!\n"
+"(%s)\n"
+"Nuovo tentativo in corso..."
+
+msgid "Connecting to FRITZ!Box..."
+msgstr "Connessione alla FRITZ!Box in corso..."
+
+#, python-format
+msgid ""
+"Connection to FRITZ!Box! lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Connessione alla FRITZ!Box persa!\n"
+"(%s)\n"
+"Nuovo tentativo in corso..."
+
+msgid "Could not get call list; wrong version?"
+msgstr "Impossibile ottenere elenco chiamate: versione errata?"
+
+msgid "Could not parse FRITZ!Box Phonebook entry"
+msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
+
+msgid "Could not read FRITZ!Box phonebook; wrong version?"
+msgstr "Impossibile leggere Rubrica della FRITZ!Box: versione errata?"
+
+msgid "Country"
+msgstr "Nazione"
+
+msgid "DECT phones registered"
+msgstr "Telefoni DECT registrati"
+
+msgid "Debug"
+msgstr "Debug"
+
+#. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
 msgstr "Cancell."
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1346
-msgid "New"
-msgstr "Nuovo"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1348
-msgid "Edit"
-msgstr "Mod."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1350
-msgid "Search"
-msgstr "Ricerca"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1366
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Delete entry"
 msgstr "Cancellare voce"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1368
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1517
-msgid "Add entry to phonebook"
-msgstr "Aggiungere voce in rubrica"
+msgid "Display FRITZ!box-Fon calls on screen"
+msgstr "Visualizzare chiamate telef. sulla TV"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1370
-msgid "Edit selected entry"
-msgstr "Mod. voce selezionata"
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display all calls"
+msgstr "Tutte le chiamate"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1372
-msgid "Search (case insensitive)"
-msgstr "Ricerca (non distingue Maiusc-minusc)"
+msgid "Display connection infos"
+msgstr "Mostrare informazioni connessione"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1383
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1654
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2422
-msgid "Phonebook"
-msgstr "Rubrica"
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display incoming calls"
+msgstr "Chiamate in ingresso"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1437
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display missed calls"
+msgstr "Chiamate perse"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Display outgoing calls"
+msgstr "Chiamate in uscita"
+
+#. TRANSLATORS: this is a window title.
+msgid "Do what?"
+msgstr "Che fare?"
+
 #, python-format
 msgid ""
 "Do you really want to delete entry for\n"
@@ -454,213 +177,145 @@ msgstr ""
 "\n"
 "%(name)s?"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1441
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1458
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1564
-msgid "No entry selected"
-msgstr "Nessuna voce selezionata"
+#. TRANSLATORS: keep it short, this is a button
+msgid "Edit"
+msgstr "Mod."
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1492
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1648
-msgid "Cancel"
-msgstr "Annull."
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Edit selected entry"
+msgstr "Mod. voce selezionata"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1494
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1650
-msgid "OK"
-msgstr "Ok"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1509
-msgid "Name"
-msgstr "Nome"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1510
-msgid "Number"
-msgstr "Numero"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1525
-msgid "Entry incomplete."
-msgstr "Voce incompleta."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1573
 msgid "Enter Search Terms"
 msgstr "Inserire criteri di ricerca"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1573
-msgid "Search phonebook"
-msgstr "Ricerca su rubrica"
+msgid "Entry incomplete."
+msgstr "Voce incompleta."
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1643
-msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr "Per abilitare il monitoraggio sulla FRITZ!Box comporre #96*5*!"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1673
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1683
-msgid "quit"
-msgstr "Uscire"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1675
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1681
-msgid "save and quit"
-msgstr "Salvare e uscire"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1677
-msgid "display calls"
-msgstr "Tutte le chiamate"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1679
-msgid "display phonebook"
-msgstr "Mostrare rubrica"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1698
-msgid "FritzCall Setup"
-msgstr "Configurazione FritzCall"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1710
-msgid "Call monitoring"
-msgstr "Monitoraggio chiamate"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1712
-msgid "FRITZ!Box FON address (Name or IP)"
-msgstr "FRITZ!Box FON - Indirizzo (nome o IP)"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1713
-msgid "FRITZ!Box FON firmware version"
-msgstr "FRITZ!Box FON - Versione firmware"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1715
-msgid "Show after Standby"
-msgstr "Mostrare chiamate dopo lo standby"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1717
-msgid "Show only calls for specific MSN"
-msgstr "Mostrare solo le chiamate per MSN specifico"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1719
-msgid "MSN to show (separated by ,)"
-msgstr "MSN da mostrare (separare con ,)"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1720
-msgid "Filter also list of calls"
-msgstr "Filtrare anche gli elenchi chiamate"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1721
-msgid "Mute on call"
-msgstr "Mute su Chiamata"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1723
-msgid "Show Outgoing Calls"
-msgstr "Mostrare le chiamate in uscita"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1725
-msgid "Areacode to add to calls without one (if necessary)"
-msgstr "Pref. locale per le chiamate che ne sono prive (se necessario)"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1726
-msgid "Timeout for Call Notifications (seconds)"
-msgstr "Ritardo notifica chiamate (secondi)"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1727
-msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Identificativo chiamante (selezionare il Paese!)"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1729
-msgid "Country"
-msgstr "Nazione"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1732
-msgid "Password Accessing FRITZ!Box"
-msgstr "Password di accesso alla FRITZ!Box"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1733
 msgid "Extension number to initiate call on"
 msgstr "Numero apparecchio su cui indirizzare la chiamata"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1734
-msgid "Read PhoneBook from FRITZ!Box"
-msgstr "Caricare la rubrica dalla FRITZ!Box"
+#, python-format
+msgid "FRITZ!Box - Could not load calls: %s"
+msgstr "FRITZ!Box - Impossibile caricare le chiamate: %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1736
-msgid "Append type of number"
-msgstr "Agg. il tipo di numero (casa,cell.,uff.)"
+#, python-format
+msgid "FRITZ!Box - Could not load phonebook: %s"
+msgstr "FRITZ!Box - Impossibile caricare la rubrica: %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1737
-msgid "Append shortcut number"
-msgstr "Aggiungere numero breve"
+#, python-format
+msgid "FRITZ!Box - Dialling failed: %s"
+msgstr "FRITZ!Box - Composizione fallita: %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1738
-msgid "Append vanity name"
-msgstr "Aggiungere nome \"Vanity\""
+#, python-format
+msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr "FRITZ!Box - Errore in recupero blacklist: %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1740
-msgid "Use internal PhoneBook"
-msgstr "Usare la rubrica interna"
+#, python-format
+msgid "FRITZ!Box - Error getting status: %s"
+msgstr "FRITZ!Box - Errore in recupero stato: %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1756
-msgid "PhoneBook Location"
-msgstr "Posizione rubrica"
+msgid ""
+"FRITZ!Box - Error logging in\n"
+"\n"
+msgstr ""
+"FRITZ!Box - Errore log in\n"
+"\n"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1758
-msgid "Automatically add new Caller to PhoneBook"
-msgstr "Ins. autom. nuovo chiamante in rubrica"
+#, python-format
+msgid "FRITZ!Box - Error logging in: %s"
+msgstr "FRITZ!Box - Errore in esecuzione log: %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1761
-msgid "Reload interval for phonebooks (hours)"
-msgstr "Intervallo aggiornamento rubriche (ore)"
+#, python-format
+msgid ""
+"FRITZ!Box - Error logging in: %s\n"
+"Disabling plugin."
+msgstr ""
+"FRITZ!Box - Errore in esecuzione log: %s\n"
+"Il plugin verrà disabilitato."
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1763
-msgid "Strip Leading 0"
-msgstr "Sopprimere \"0\" iniziali"
+#, python-format
+msgid "FRITZ!Box - Error logging out: %s"
+msgstr "FRITZ!Box - Errore in esecuzione log: %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1765
-msgid "Display connection infos"
-msgstr "Mostrare informazioni connessione"
+#, python-format
+msgid "FRITZ!Box - Error resetting: %s"
+msgstr "FRITZ!Box - Errore in reset: %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1766
+#, python-format
+msgid "FRITZ!Box - Failed changing Mailbox: %s"
+msgstr "FRITZ!Box - Cambiamento casella di posta fallito: %s"
+
+#, python-format
+msgid "FRITZ!Box - Failed changing WLAN: %s"
+msgstr "FRITZ!Box - Cambiamento WLAN fallito: %s"
+
+msgid "FRITZ!Box FON address (Name or IP)"
+msgstr "FRITZ!Box FON - Indirizzo (nome o IP)"
+
+msgid "FRITZ!Box FON firmware version"
+msgstr "FRITZ!Box FON - Versione firmware"
+
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+msgid "FRITZ!Box Fon Status"
+msgstr "FRITZ!Box Fon - Stato"
+
+msgid ""
+"FRITZ!Box firmware version not configured! Please set it in the "
+"configuration."
+msgstr ""
+"Versione firmware FRITZ!Box non inserita. Aggiornare la configurazione."
+
+msgid "FRITZ!Box not available for calling"
+msgstr "FRITZ!Box non disponibile per le chiamate"
+
+msgid "Filter also list of calls"
+msgstr "Filtrare anche gli elenchi chiamate"
+
+msgid "Flash"
+msgstr "Flash"
+
+#, python-format
+msgid ""
+"Found picture\n"
+"\n"
+"%s\n"
+"\n"
+"But did not load. Probably not PNG, 8-bit"
+msgstr ""
+"Trovata immagine\n"
+"\n"
+"%s\n"
+"\n"
+"Impossibile caricarla. Il formato deve esserecpng, 8 bit."
+
+msgid "France"
+msgstr "Francia"
+
+#. TRANSLATORS: this is a window title.
+msgid "FritzCall Setup"
+msgstr "Configurazione FritzCall"
+
+msgid "Germany"
+msgstr "Germania"
+
+msgid "Getting calls from FRITZ!Box..."
+msgstr "Recupero chiamate dalla FRITZ!Box in corso"
+
+msgid "Getting status from FRITZ!Box Fon..."
+msgstr "Recupero stato dalla FRITZ!Box Fon in corso..."
+
+msgid "IP Address:"
+msgstr "Indirizzo IP:"
+
 msgid "Ignore callers with no phone number"
 msgstr "Ignorare i chiamanti con numero mascherato"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1767
-msgid "Debug"
-msgstr "Debug"
+#. TRANSLATORS: keep it short, this is a button
+msgid "Incoming"
+msgstr "In Entr."
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1797
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2376
-msgid "Cannot get calls from FRITZ!Box"
-msgstr "Recupero chiamate dalla FRITZ!Box impossibile"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1799
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1806
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1820
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2378
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2385
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2396
-msgid "Plugin not active"
-msgstr "Plugin non attivo"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1808
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2387
-msgid "No phonebook"
-msgstr "Nessuna rubrica"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1818
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2394
-msgid "Cannot get infos from FRITZ!Box"
-msgstr "Recupero informazioni dalla FRITZ!Box impossibile"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1846
-msgid "no calls"
-msgstr "Nessuna"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1849
-msgid "Last 10 calls:\n"
-msgstr "Ultime 10 chiamate:\n"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:1980
-msgid "New call"
-msgstr "Nuova chiamata"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2071
 #, python-format
 msgid ""
 "Incoming Call on %(date)s at %(time)s from\n"
@@ -677,7 +332,95 @@ msgstr ""
 "---------------------------------------------\n"
 "a: %(phone)s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2073
+msgid "Incoming calls"
+msgstr "Chiamate in entrata"
+
+msgid "Italy"
+msgstr "Italia"
+
+msgid "Last 10 calls:\n"
+msgstr "Ultime 10 chiamate:\n"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Lookup"
+msgstr "Lookup"
+
+msgid "MSN to show (separated by ,)"
+msgstr "MSN da mostrare (separare con ,)"
+
+msgid "Mailbox"
+msgstr "Casella di posta"
+
+msgid "Media directory"
+msgstr "Directory media"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Missed"
+msgstr "Ch. perse"
+
+msgid "Missed calls"
+msgstr "Chiamate perse"
+
+msgid "Mute on call"
+msgstr "Mute su Chiamata"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Network mount"
+msgstr "Mount di rete"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "New"
+msgstr "Nuovo"
+
+msgid "New call"
+msgstr "Nuova chiamata"
+
+msgid "No DECT phone registered"
+msgstr "Nessun telefono DECT registrato"
+
+msgid "No call redirection active"
+msgstr "Nessuna deviazione chiamate attiva"
+
+msgid "No entry selected"
+msgstr "Nessuna voce selezionata"
+
+msgid "No mailbox active"
+msgstr "Nessuna casella di posta attiva"
+
+msgid "No phonebook"
+msgstr "Nessuna rubrica"
+
+msgid "No result from LDIF"
+msgstr "Ricerca in LDIF: nessun risultato!"
+
+msgid "No result from Outlook export"
+msgstr "Ricerca in Outlook  export: nessun risultato!"
+
+msgid "No result from reverse lookup"
+msgstr "Ricerca identificativo chiamante: nessun risultato!"
+
+msgid "Number"
+msgstr "Numero"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "OK"
+msgstr "Ok"
+
+msgid "One DECT phone registered"
+msgstr "Un telefono DECT registrato"
+
+msgid "One call redirection active"
+msgstr "Una deviazione chiamate attiva"
+
+msgid "One mailbox active"
+msgstr "Una casella di posta attiva"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Outgoing"
+msgstr "In uscita"
+
 #, python-format
 msgid ""
 "Outgoing Call on %(date)s at %(time)s to\n"
@@ -694,131 +437,156 @@ msgstr ""
 "---------------------------------------------\n"
 "da: %(phone)s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2270
-msgid "number suppressed"
-msgstr "numero mascherato"
+msgid "Outgoing calls"
+msgstr "Chiamate in uscita"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2306
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2327
-msgid "FRITZ!Box firmware version not configured! Please set it in the configuration."
-msgstr "Versione firmware FRITZ!Box non inserita. Aggiornare la configurazione."
+msgid "Password Accessing FRITZ!Box"
+msgstr "Password di accesso alla FRITZ!Box"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2310
-msgid "Connecting to FRITZ!Box..."
-msgstr "Connessione alla FRITZ!Box in corso..."
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+msgid "Phone calls"
+msgstr "Ch. telef."
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2316
-msgid "Connected to FRITZ!Box!"
-msgstr "Connesso alla FRITZ!Box!"
+msgid "PhoneBook Location"
+msgstr "Posizione rubrica"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2335
-#, python-format
-msgid ""
-"Connection to FRITZ!Box! lost\n"
-" (%s)\n"
-"retrying..."
-msgstr ""
-"Connessione alla FRITZ!Box persa!\n"
-"(%s)\n"
-"Nuovo tentativo in corso..."
+#. TRANSLATORS: this is a window title.
+#. TRANSLATORS: keep it short, this is a button
+msgid "Phonebook"
+msgstr "Rubrica"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2343
-#, python-format
-msgid ""
-"Connecting to FRITZ!Box failed\n"
-" (%s)\n"
-"retrying..."
-msgstr ""
-"Connessione alla FRITZ!Box fallita!\n"
-"(%s)\n"
-"Nuovo tentativo in corso..."
+msgid "Plugin not active"
+msgstr "Plugin non attivo"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/plugin.py:2420
-msgid "Display FRITZ!box-Fon calls on screen"
-msgstr "Visualizzare chiamate telef. sulla TV"
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Quit"
+msgstr "Uscire"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:98
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1119
-msgid "login"
-msgstr "Login"
+msgid "Read PhoneBook from FRITZ!Box"
+msgstr "Caricare la rubrica dalla FRITZ!Box"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:180
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1185
-msgid "login verification"
-msgstr "Verifica login"
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Refresh status"
+msgstr "Aggiornare lo stato"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:185
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1190
-msgid ""
-"FRITZ!Box - Error logging in\n"
-"\n"
-msgstr ""
-"FRITZ!Box - Errore log in\n"
-"\n"
+msgid "Reload interval for phonebooks (hours)"
+msgstr "Intervallo aggiornamento rubriche (ore)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:189
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1194
-msgid "login ok"
-msgstr "Login Ok"
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Reset"
+msgstr "Reset"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:199
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1204
-#, python-format
-msgid ""
-"FRITZ!Box - Error logging in: %s\n"
-"Disabling plugin."
-msgstr ""
-"FRITZ!Box - Errore in esecuzione log: %s\n"
-"Il plugin verrà disabilitato."
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr "Identificativo chiamante (selezionare il Paese!)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:221
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1226
-#, python-format
-msgid "FRITZ!Box - Error logging out: %s"
-msgstr "FRITZ!Box - Errore in esecuzione log: %s"
+msgid "Reverse searching..."
+msgstr "Ricerca identificativo chiamante..."
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:337
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:363
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1317
+#. TRANSLATORS: keep it short, this is a button
+msgid "Save"
+msgstr "Salvare"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Search"
+msgstr "Ricerca"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Search (case insensitive)"
+msgstr "Ricerca (non distingue Maiusc-minusc)"
+
+msgid "Search phonebook"
+msgstr "Ricerca su rubrica"
+
+msgid "Searching in LDIF..."
+msgstr "Ricerca in LDIF..."
+
+msgid "Searching in Outlook export..."
+msgstr "Ricerca in Outlook  export..."
+
 msgid "Shortcut"
 msgstr "Numero breve"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:339
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:365
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1319
+msgid "Show Outgoing Calls"
+msgstr "Mostrare le chiamate in uscita"
+
+msgid "Show after Standby"
+msgstr "Mostrare chiamate dopo lo standby"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Show details of entry"
+msgstr "Mostrare dettagli voce"
+
+msgid "Show only calls for specific MSN"
+msgstr "Mostrare solo le chiamate per MSN specifico"
+
+msgid "Software fax active"
+msgstr "Fax software attivo"
+
+msgid "Status not available"
+msgstr "Stato non disponibile"
+
+msgid "Strip Leading 0"
+msgstr "Sopprimere \"0\" iniziali"
+
+msgid "Switzerland"
+msgstr "Svizzera"
+
+msgid "The Netherlands"
+msgstr "Olanda"
+
+msgid "Timeout for Call Notifications (seconds)"
+msgstr "Ritardo notifica chiamate (secondi)"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 1. mailbox"
+msgstr "Comm. casella 1."
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 2. mailbox"
+msgstr "Comm. casella 2."
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 3. mailbox"
+msgstr "Comm. casella 3."
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 4. mailbox"
+msgstr "Comm. casella 4."
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 5. mailbox"
+msgstr "Comm. casella 5."
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle Mailbox"
+msgstr "Comm. casella"
+
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle WLAN"
+msgstr "Commutare WLAN"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle all mailboxes"
+msgstr "Comm. tutte le caselle"
+
+msgid "UNKNOWN"
+msgstr "SCONOSCIUTO"
+
+msgid "USB Device"
+msgstr "Dispositivo USB"
+
+msgid "Use internal PhoneBook"
+msgstr "Usare la rubrica interna"
+
 msgid "Vanity"
 msgstr "\"Vanity\""
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:382
-msgid "Could not read FRITZ!Box phonebook; wrong version?"
-msgstr "Impossibile leggere Rubrica della FRITZ!Box: versione errata?"
+msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
+msgstr "Per abilitare il monitoraggio sulla FRITZ!Box comporre #96*5*!"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:386
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1329
-#, python-format
-msgid "FRITZ!Box - Could not load phonebook: %s"
-msgstr "FRITZ!Box - Impossibile caricare la rubrica: %s"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:439
-#, python-format
-msgid "FRITZ!Box - Error logging in: %s"
-msgstr "FRITZ!Box - Errore in esecuzione log: %s"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:443
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1350
-msgid "preparing"
-msgstr "Preparazione in corso"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:454
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1340
-msgid "finishing"
-msgstr "Quasi terminato..."
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:464
-msgid "done"
-msgstr "Fatto"
-
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:466
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
 "in the configuration dialog to display calls\n"
@@ -830,62 +598,99 @@ msgstr ""
 "\n"
 "Potrebbe trattarsi di un problema di comunicazione, riprovare."
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:477
+msgid "before 05.27"
+msgstr ""
+
+msgid "call redirections active"
+msgstr "deviazione chiamate attiva"
+
+msgid "devices active"
+msgstr "Dispositivi attivi"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "display calls"
+msgstr "Tutte le chiamate"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "display phonebook"
+msgstr "Mostrare rubrica"
+
+msgid "done"
+msgstr "Fatto"
+
 msgid "done, using last list"
 msgstr "Fatto, sarà usata l'ultimo elenco"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:481
-msgid "Could not get call list; wrong version?"
-msgstr "Impossibile ottenere elenco chiamate: versione errata?"
+msgid "encrypted"
+msgstr "codificato"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:529
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1418
-#, python-format
-msgid "FRITZ!Box - Could not load calls: %s"
-msgstr "FRITZ!Box - Impossibile caricare le chiamate: %s"
+msgid "finishing"
+msgstr "Quasi terminato..."
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:573
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1462
-#, python-format
-msgid "FRITZ!Box - Dialling failed: %s"
-msgstr "FRITZ!Box - Composizione fallita: %s"
+msgid "home"
+msgstr "Casa"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:619
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1478
-#, python-format
-msgid "FRITZ!Box - Failed changing WLAN: %s"
-msgstr "FRITZ!Box - Cambiamento WLAN fallito: %s"
+msgid "login"
+msgstr "Login"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:685
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1494
-#, python-format
-msgid "FRITZ!Box - Failed changing Mailbox: %s"
-msgstr "FRITZ!Box - Cambiamento casella di posta fallito: %s"
+msgid "login ok"
+msgstr "Login Ok"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:968
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1522
-#, python-format
-msgid "FRITZ!Box - Error getting status: %s"
-msgstr "FRITZ!Box - Errore in recupero stato: %s"
+msgid "login verification"
+msgstr "Verifica login"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1016
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1568
-#, python-format
-msgid "FRITZ!Box - Error resetting: %s"
-msgstr "FRITZ!Box - Errore in reset: %s"
+msgid "mailboxes active"
+msgstr "caselle di posta attive"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1066
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1618
-#, python-format
-msgid "FRITZ!Box - Error getting blacklist: %s"
-msgstr "FRITZ!Box - Errore in recupero blacklist: %s"
+msgid "mobile"
+msgstr "Cellulare"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1325
-msgid "Could not parse FRITZ!Box Phonebook entry"
-msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
+msgid "no calls"
+msgstr "Nessuna"
 
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1468
-#: /media/TREKSTOR/git/enigma2-plugins/fritzcall/src/FritzCallFBF.py:1484
+msgid "no device active"
+msgstr "Nessun dispositivo attivo"
+
+msgid "not configured"
+msgstr "non configurato"
+
+msgid "not encrypted"
+msgstr "non codificato"
+
 msgid "not yet implemented"
 msgstr "Funzione non ancora implementata"
 
+msgid "number suppressed"
+msgstr "numero mascherato"
+
+msgid "one device active"
+msgstr "Un dispositivo attivo"
+
+msgid "preparing"
+msgstr "Preparazione in corso"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "quit"
+msgstr "Uscire"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "save and quit"
+msgstr "Salvare e uscire"
+
+msgid "show as list"
+msgstr "Come elenco"
+
+msgid "show each call"
+msgstr "Tutte"
+
+msgid "show nothing"
+msgstr "Nulla"
+
+msgid "work"
+msgstr "Ufficio"
+
+#~ msgid "business"
+#~ msgstr "Affari"
+
+#~ msgid "legacy"
+#~ msgstr "legacy"

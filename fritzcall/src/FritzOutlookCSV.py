@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
-$Author$
-$Revision$
-$Date$
-$Id$
+$Author: michael $
+$Revision: 699 $
+$Date: 2012-10-25 19:04:03 +0200 (Thu, 25 Oct 2012) $
+$Id: FritzOutlookCSV.py 699 2012-10-25 17:04:03Z michael $
 '''
 #
 # needs python-textutils for csv

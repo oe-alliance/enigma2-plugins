@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 699 $
-$Date: 2012-10-25 19:04:03 +0200 (Thu, 25 Oct 2012) $
-$Id: plugin.py 699 2012-10-25 17:04:03Z michael $
+$Revision: 703 $
+$Date: 2012-11-02 09:05:24 +0100 (Fri, 02 Nov 2012) $
+$Id: plugin.py 703 2012-11-02 08:05:24Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -76,7 +76,7 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("legacy")), "05.27"])
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), "05.27"])
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
@@ -293,8 +293,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 699 $"[1:-2] + "\n" + 
-							"$Date: 2012-10-25 19:04:03 +0200 (Thu, 25 Oct 2012) $"[1:23] + "\n"
+							"$Revision: 703 $"[1:-2] + "\n" + 
+							"$Date: 2012-11-02 09:05:24 +0100 (Fri, 02 Nov 2012) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1695,7 +1695,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 699 $"[1: - 1] + "$Date: 2012-10-25 19:04:03 +0200 (Thu, 25 Oct 2012) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 703 $"[1: - 1] + "$Date: 2012-11-02 09:05:24 +0100 (Fri, 02 Nov 2012) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2057,6 +2057,24 @@ class MessageBoxPixmap(Screen):
 	def _exit(self):
 		self.close()
 
+def runUserActionScript(event, date, number, caller, phone):
+	# user exit
+	# call FritzCallserAction.sh in the same dir as Phonebook.txt with the following parameters:
+	# event: "RING" (incomning) or "CALL" (outgoing)
+	# date of event, format: "dd.mm.yy hh.mm.ss"
+	# telephone number which is calling/is called
+	# caller's name and address, format Name\n Street\n ZIP City
+	# line/number which is called/which is used for calling
+	userActionScript = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallUserAction.sh")
+	if os.path.exists(userActionScript) and os.access(userActionScript, os.X_OK):
+		cmd = userActionScript + ' "' + event + '" "' + date + '" "' + number + '" "' + caller + '" "' + phone + '"'
+		debug("[FritzCall] notifyCall: calling: %s" % cmd)
+		eConsoleAppContainer().execute(cmd)
+
+userActionList = [runUserActionScript]
+def registerUserAction(fun):
+	userActionList.append(fun)
+			
 mutedOnConnID = None
 def notifyCall(event, date, number, caller, phone, connID):
 	if Standby.inStandby is None or config.plugins.FritzCall.afterStandby.value == "each":
@@ -2087,18 +2105,8 @@ def notifyCall(event, date, number, caller, phone, connID):
 	else: # this is the "None" case
 		debug("[FritzCall] notifyCall: standby and no show")
 
-	# user exit
-	# call FritzCallserAction.sh in the same dir as Phonebook.txt with the following parameters:
-	# event: "RING" (incomning) or "CALL" (outgoing)
-	# date of event, format: "dd.mm.yy hh.mm.ss"
-	# telephone number which is calling/is called
-	# caller's name and address, format Name\n Street\n ZIP City
-	# line/number which is called/which is used for calling
-	userActionScript = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallUserAction.sh")
-	if os.path.exists(userActionScript) and os.access(userActionScript, os.X_OK):
-		cmd = userActionScript + ' "' + event + '" "' + date + '" "' + number + '" "' + caller + '" "' + phone + '"'
-		debug("[FritzCall] notifyCall: calling: %s" % cmd)
-		eConsoleAppContainer().execute(cmd)
+	for fun in userActionList:
+		fun(event, date, number, caller, phone)
 
 
 #===============================================================================
@@ -2175,7 +2183,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 699 $"[1:-1]	+ "$Date: 2012-10-25 19:04:03 +0200 (Thu, 25 Oct 2012) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 703 $"[1:-1]	+ "$Date: 2012-11-02 09:05:24 +0100 (Fri, 02 Nov 2012) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
