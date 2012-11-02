@@ -491,7 +491,7 @@ class AutoTimerComponent(object):
 	def checkTimeframe(self, begin):
 		if self.timeframe is not None:
 			start, end = self.timeframe
-			if begin > start and begin < (end + 24*60*60):
+			if begin > start and begin < end:
 				return False
 			return True
 		return False
