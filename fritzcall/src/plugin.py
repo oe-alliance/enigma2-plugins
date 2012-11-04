@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 703 $
-$Date: 2012-11-02 09:05:24 +0100 (Fri, 02 Nov 2012) $
-$Id: plugin.py 703 2012-11-02 08:05:24Z michael $
+$Revision: 714 $
+$Date: 2012-11-04 13:58:12 +0100 (Sun, 04 Nov 2012) $
+$Id: plugin.py 714 2012-11-04 12:58:12Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -13,7 +13,7 @@ from Screens import Standby
 from Screens.HelpMenu import HelpableScreen
 
 from enigma import eTimer, eSize, ePoint #@UnresolvedImport # pylint: disable=E0611
-from enigma import eDVBVolumecontrol, eConsoleAppContainer, eBackgroundFileEraser
+from enigma import eDVBVolumecontrol, eConsoleAppContainer, eBackgroundFileEraser #@UnresolvedImport # pylint: disable=E0611
 #BgFileEraser = eBackgroundFileEraser.getInstance()
 #BgFileEraser.erase("blabla.txt")
 
@@ -293,8 +293,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 703 $"[1:-2] + "\n" + 
-							"$Date: 2012-11-02 09:05:24 +0100 (Fri, 02 Nov 2012) $"[1:23] + "\n"
+							"$Revision: 714 $"[1:-2] + "\n" + 
+							"$Date: 2012-11-04 13:58:12 +0100 (Sun, 04 Nov 2012) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -652,11 +652,12 @@ class FritzMenu(Screen, HelpableScreen):
 					self["FBFMailbox"].setText(_('No mailbox active'))
 				else:
 					self._mailboxActive = True
-					message = '('
-					for i in range(5):
+					message = ''
+					for i in range(min(len(tamActive)-1, 5)):
 						if tamActive[i+1]:
 							message = message + str(i) + ','
-					message = message[:-1] + ')'
+					if message:
+						message = '(' + message[:-1] + ')'
 					self["mailbox_inactive"].hide()
 					self["mailbox_active"].show()
 					if tamActive[0] == 1:
@@ -839,7 +840,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		# self["entries"].l.setItemHeight(fontHeight)
 		#=======================================================================
 		debug("[FritzDisplayCalls] init: '''%s'''" % config.plugins.FritzCall.fbfCalls.value)
-		self.display()
+		self.display(config.plugins.FritzCall.fbfCalls.value)
 		self.onLayoutFinish.append(self.setWindowTitle)
 
 	def setWindowTitle(self):
@@ -849,7 +850,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 	def ok(self):
 		self.close()
 
-	def display(self, which=config.plugins.FritzCall.fbfCalls.value):
+	def display(self, which):
 		debug("[FritzDisplayCalls] display")
 		config.plugins.FritzCall.fbfCalls.value = which
 		config.plugins.FritzCall.fbfCalls.save()
@@ -1695,7 +1696,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 703 $"[1: - 1] + "$Date: 2012-11-02 09:05:24 +0100 (Fri, 02 Nov 2012) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 714 $"[1: - 1] + "$Date: 2012-11-04 13:58:12 +0100 (Sun, 04 Nov 2012) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2068,11 +2069,26 @@ def runUserActionScript(event, date, number, caller, phone):
 	userActionScript = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallUserAction.sh")
 	if os.path.exists(userActionScript) and os.access(userActionScript, os.X_OK):
 		cmd = userActionScript + ' "' + event + '" "' + date + '" "' + number + '" "' + caller + '" "' + phone + '"'
-		debug("[FritzCall] notifyCall: calling: %s" % cmd)
+		debug("[FritzCall] runUserActionScript: calling: %s" % cmd)
 		eConsoleAppContainer().execute(cmd)
 
 userActionList = [runUserActionScript]
 def registerUserAction(fun):
+	#===========================================================================
+	# other plugins can register a function, which is then called for each displayed call
+	# it must take the arguments event,date,number,caller,phone
+	#
+	#example:
+	# def FritzCallEvent(event,date,number,caller,phone):
+	# ......
+	# 
+	# try:
+	#	from Plugins.Extensions.FritzCall.plugin import registerUserAction as FritzCallRegisterUserAction
+	#	FritzCallRegisterUserAction(FritzCallEvent)
+	# except:
+	#	print "import of FritzCall failed"
+	#===========================================================================
+	debug("[FritzCall] registerUserAction: register: %s" % fun.__name__)
 	userActionList.append(fun)
 			
 mutedOnConnID = None
@@ -2106,6 +2122,7 @@ def notifyCall(event, date, number, caller, phone, connID):
 		debug("[FritzCall] notifyCall: standby and no show")
 
 	for fun in userActionList:
+		debug("[FritzCall] notifyCall: call user action: %s" % fun.__name__)
 		fun(event, date, number, caller, phone)
 
 
@@ -2183,7 +2200,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 703 $"[1:-1]	+ "$Date: 2012-11-02 09:05:24 +0100 (Fri, 02 Nov 2012) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 714 $"[1:-1]	+ "$Date: 2012-11-04 13:58:12 +0100 (Sun, 04 Nov 2012) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2249,16 +2266,17 @@ class FritzProtocol(LineReceiver):
 		#=======================================================================
 		elif self.event == "RING" or (self.event == "CALL" and config.plugins.FritzCall.showOutgoing.value):
 			phone = anEvent[4]
-			if self.event == "RING":
-				number = anEvent[3] 
-				if fritzbox and number in fritzbox.blacklist[0]:
-					debug("[FritzProtocol] lineReceived phone: '''%s''' blacklisted number: '''%s'''" % (phone, number))
-					return 
-			else:
-				number = anEvent[5]
-				if number in fritzbox.blacklist[1]:
-					debug("[FritzProtocol] lineReceived phone: '''%s''' blacklisted number: '''%s'''" % (phone, number))
-					return 
+			if fritzbox and fritzbox.blacklist:
+				if self.event == "RING":
+					number = anEvent[3] 
+					if number in fritzbox.blacklist[0]:
+						debug("[FritzProtocol] lineReceived phone: '''%s''' blacklisted number: '''%s'''" % (phone, number))
+						return 
+				else:
+					number = anEvent[5]
+					if number in fritzbox.blacklist[1]:
+						debug("[FritzProtocol] lineReceived phone: '''%s''' blacklisted number: '''%s'''" % (phone, number))
+						return 
 
 			debug("[FritzProtocol] lineReceived phone: '''%s''' number: '''%s'''" % (phone, number))
 
