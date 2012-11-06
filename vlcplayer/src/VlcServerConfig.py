@@ -117,7 +117,9 @@ class ConfigSelectionExtended(ConfigSelection):
 		ConfigSelection.__init__(self, choices, default)
 
 	def deleteNotifier(self, notifier):
-		self.removeNotifier(notifier)
+		pass
+		### TODO Some kind of bug, no idea what - HACK solusion
+		#self.removeNotifier(notifier)
 
 
 class __VlcServerConfig():
