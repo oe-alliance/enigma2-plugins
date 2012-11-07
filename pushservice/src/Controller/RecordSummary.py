@@ -53,7 +53,7 @@ class RecordSummary(ControllerBase):
 		self.timers = []
 		text = ""
 		for timer in NavigationInstance.instance.RecordTimer.processed_timers:
-			if not timer.disabled and TAG not in timer.tags:
+			if not timer.disabled and not timer.justplay and TAG not in timer.tags:
 				text += str(timer.name) + "\t" \
 							+ strftime(_("%Y.%m.%d %H:%M"), localtime(timer.begin)) + " - " \
 							+ strftime(_("%H:%M"), localtime(timer.end)) + "\t" \

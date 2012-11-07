@@ -58,7 +58,7 @@ config.pushservice.about                     = ConfigNothing()
 
 config.pushservice.enable                    = ConfigEnableDisable(default = True)
 
-config.pushservice.boxname                   = ConfigText(default = "Dreambox", fixed_size = False)
+config.pushservice.boxname                   = ConfigText(default = "Enigma2", fixed_size = False)
 config.pushservice.xmlpath                   = ConfigText(default = "/etc/enigma2/pushservice.xml", fixed_size = False)
 
 config.pushservice.runonboot                 = ConfigEnableDisable(default = True)

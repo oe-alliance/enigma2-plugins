@@ -23,17 +23,18 @@ a,a:visited,a:active {
 }
 
 .mEpgColEven{
+	border-right: 1px solid #000;
 	background: #FFF;
 }
 
 .mEpgColOdd{
+	border-right: 1px solid #000;
 	background: #DEF;
 }
 
 .mEpgItem {
 	padding: 0px;
 	border-top: 1px solid #485052;
-	border-right: 1px solid #485052;
 	display: block;
 	overflow: hidden;
 	margin-bottom: -1px;

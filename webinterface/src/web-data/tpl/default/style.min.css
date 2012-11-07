@@ -23,6 +23,8 @@ a.underline{text-decoration:underline}
 .rightCol{float:right;width:50%}
 .right{text-align:right}
 .liHeader{border-top:#000;border-bottom:#000}
+td.screenShot{text-align:center;}
+td.screenShot img{border:1px solid #555;background:#DDD;}
 #banner{width:1000px;height:67px;background:#000;padding-left:5px;margin-bottom:8px;position:relative}
 #banner a,#banner a:visited,#banner a:active{color:#FFF;text-decoration:none}
 #bannerText{padding-left:2px}
@@ -80,7 +82,7 @@ a.underline{text-decoration:underline}
 .sListExtEpg{display: block;padding:1px}
 .header{padding-top:2px;padding-left:4px;padding-right:4px;display:block;height:22px}
 #container{margin:0 auto;text-align:left;width:1005px}
-#contentTable{scrollbar:auto;width:785px}
+#contentTable{scrollbar:auto;width:785px;margin:0 auto 0 auto;}
 #contentServices{vertical-align:top;width:575px}
 #contentServices table{scrollbar:auto}
 #bouquetTable{width:100%;margin:0;padding:0}

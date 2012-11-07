@@ -28,6 +28,8 @@ from datetime import timedelta, date
 # EPGCache & Event
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
 
+# from twisted.internet import reactor, threads
+
 # AutoTimer Component
 from AutoTimerComponent import preferredAutoTimerComponent
 

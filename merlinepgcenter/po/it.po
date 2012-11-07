@@ -8,395 +8,413 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
-"Language: \n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: .../enigma2-plugins/merlinepgcenter\n"
-"X-Poedit-SearchPath-0: .../enigma2-plugins/merlinepgcenter\n"
+"X-Poedit-Basepath: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter\n"
+"X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter\n"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:59
-#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:959
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:63
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:971
 msgid "disabled"
 msgstr "Disabilitato"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:93
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:98
 msgid "single line style"
 msgstr "Linea singola"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:94
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:99
 msgid "with short description"
 msgstr "Descrizione breve"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:104
-msgid "simple"
-msgstr "Semplice"
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:109
+msgid "list and event info: simple"
+msgstr "Info elenco ed eventi: semplice"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:105
-msgid "gradient"
-msgstr "Gradiente"
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:110
+msgid "list and event info: gradient"
+msgstr "Info elenco ed eventi: gradienti"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:106
-msgid "four parts"
-msgstr "Quattro parti"
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:111
+msgid "list and event info: four parts"
+msgstr "Info elenco ed eventi: 4 parti"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:107
-msgid "percent (text)"
-msgstr "Percentuale (testo)"
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:112
+msgid "list and event info: percent (text)"
+msgstr "Info elenco ed eventi: percentuale (testo)"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:175
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:113
+msgid "list: off, event info: simple"
+msgstr "Elenco: off - Info evento: semplice"
+
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:114
+msgid "list: off, event info: gradient"
+msgstr "Elenco: off - Info evento: gradienti"
+
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:115
+msgid "list: off, event info: four parts"
+msgstr "Elenco: off - Info evento: 4 parti"
+
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:116
+msgid "list: off, event info: percent (text)"
+msgstr "Elenco: off - Info evento: percentuale (testo)"
+
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:187
 msgid "Prime time:"
 msgstr "Primetime:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:176
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:188
 msgid "Remember last tab:"
 msgstr "Ricordare l'ultimo tab:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:177
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:189
 msgid "Select running service on start:"
 msgstr "Selezionare il canale attivo all'avvio:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:178
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:190
 msgid "Show text input help for epg search:"
 msgstr "Mostrare aiuto input su ricerca epg:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:179
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:191
 msgid "Use skin:"
 msgstr "Usare la skin:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:180
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:192
 msgid "Limit search results to bouquet services:"
 msgstr "Limitare i risultati ai canali nei bouquet:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:181
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:193
 msgid "Exit on TV <-> Radio switch:"
 msgstr "Uscire al passaggio TV <<>> Radio"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:182
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:194
 msgid "Adjust font size:"
 msgstr "Regolare dim. carattere:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:183
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:195
 msgid "Embed volume slider:"
 msgstr "Cursore volume integrato:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:196
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:208
 msgid "Show list numbers:"
 msgstr "Mostrare numeri elenco:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:197
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:209
 msgid "Show picons:"
 msgstr "Mostrare picon"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:199
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:211
 msgid "Use picons (50x30) from:"
 msgstr "Usare picon (50x30) da:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:200
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:212
 msgid "Show service name:"
 msgstr "Mostrare il nome del canale:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:201
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:214
+msgid "Adjust service name column width:"
+msgstr "Regolare larghezza colonna nome canale:"
+
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:215
 msgid "Show duration:"
 msgstr "Mostrare la durata:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:202
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:216
 msgid "Show begin/remain times:"
 msgstr "Mostrare il tempo trascorso/restante:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:204
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:218
 msgid "Show multi colored begin/remain times:"
 msgstr "Diversificare i colori del tempo trascorso/restante:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:205
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:219
 msgid "Increase list item height:"
 msgstr "Aumento dell'altezza voci in elenco:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:206
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:220
 msgid "Space between columns:"
 msgstr "Spazio tra le colonne:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:207
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:221
 msgid "List style:"
 msgstr "Stile elenco:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:208
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:222
 msgid "Progress bar style:"
 msgstr "Stile barra avanzamento:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:209
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:223
 msgid "Number of upcoming events to show:"
 msgstr "Numero prossimi eventi da visualizzare:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:235
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:251
 msgid "Show event information:"
 msgstr "Mostrare informazioni evento:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:237
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:253
 msgid "Show video picture:"
 msgstr "Mostrare la finestra video:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:238
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:254
 msgid "Show blinking picon for running timers:"
 msgstr "Picon intermittente su timer attivi:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:239
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:255
 msgid "Show short description:"
 msgstr "Mostrare la descrizione breve:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:257
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:273
 msgid "Return to main tab with exit:"
 msgstr "Ritornare al tab principale con EXIT:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:258
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:274
 msgid "Replace InfoBar single and multi EPG:"
 msgstr "Sostituire InfoBar singola e MultiEPG:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:259
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:275
 msgid "Replace ChannelSelection key up to start with tab:"
 msgstr "Utilizzare il tasto freccia sù per avviare il plugin sul tab:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:260
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:276
 msgid "Replace ChannelSelection key down to start with tab:"
 msgstr "Utilizzare il tasto freccia giù per avviare il plugin sul tab:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:261
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/ConfigTabs.py:277
 msgid "Replace EventView key to start with tab:"
 msgstr "Utilizzare il tasto info per avviare il plugin sul tab:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:937
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:949
 msgid "waiting"
 msgstr "In attesa"
 
-#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:940
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:952
 msgid "about to start"
 msgstr "Avvio in corso"
 
-#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:944
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:956
 msgid "zapped"
 msgstr "Zap eseguito"
 
-#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:946
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:958
 msgid "recording..."
 msgstr "Registrazione..."
 
-#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:949
-#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:955
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:961
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:967
 msgid "done!"
 msgstr "Fatto!"
 
-#: .../enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:952
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/EpgCenterList.py:964
 msgid "<unknown>"
 msgstr "<sconosciuto>"
 
-#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
 msgid "Monday"
 msgstr "Lunedì"
 
-#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
 msgid "Friday"
 msgstr "Venerdì"
 
-#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
 msgid "Saturday"
 msgstr "Sabato"
 
-#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:47
 msgid "Sunday"
 msgstr "Domenica"
 
-#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:188
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:188
 msgid "Today"
 msgstr "Oggi"
 
-#: .../enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:191
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/HelperFunctions.py:191
 msgid "Tomorrow"
 msgstr "Domani"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
 msgid "Now"
 msgstr "In onda"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
 msgid "Upcoming"
 msgstr "Prossimi"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
 msgid "Single"
 msgstr "Singolo"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
 msgid "Prime Time"
 msgstr "Primetime"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:325
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1898
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:325
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1910
 msgid "Timer"
 msgstr "Timer"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:43
 msgid "Search"
 msgstr "Ricercare"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:44
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:44
 msgid "General"
 msgstr "Generale"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:44
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:44
 msgid "Lists"
 msgstr "Elenchi"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:44
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:44
 msgid "Event Info"
 msgstr "Info evento"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:44
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:44
 msgid "Keys"
 msgstr "Tasti"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:222
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:222
 msgid "Search for:"
 msgstr "Ricerca per:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:538
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:550
 msgid "Similar"
 msgstr "Simile"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:809
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:821
 msgid "Record or zap timer"
 msgstr "Timer: registrazione o zap"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:810
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:822
 msgid "AutoTimer timer"
 msgstr "Timer Autotimer:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:811
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:823
 msgid "Please select a timer type to add:"
 msgstr "Selezionare il tipo di timer da aggiungere:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:952
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:964
 msgid "Stop current event but not coming events"
 msgstr "Arrestare l'evento corrente ma non i futuri"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:953
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:965
 msgid "Stop current event and disable coming events"
 msgstr "Arrestare l'evento corrente e disabilitare i futuri"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:954
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:966
 msgid "Don't stop current event but disable coming events"
 msgstr "Non interrompere l'evento corrente ma annullare i futuri"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:956
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:968
 msgid "Repeating event currently recording... What do you want to do?"
 msgstr "Registrazione in corso di evento ricorrente. Cosa si desidera fare?"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1049
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1061
 msgid "Match title:"
 msgstr "Confronto titolo:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1055
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1067
 msgid "Services:"
 msgstr "Canali:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1061
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1073
 msgid "Bouquets:"
 msgstr "Bouquet:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1067
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1079
 msgid "Included days:"
 msgstr "Giorni compresi:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1073
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1085
 msgid "Excluded days:"
 msgstr "Giorni esclusi:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1074
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1086
 msgid "Record a maximum of x times:"
 msgstr "Registrare per un massimo di \"x\" volte:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1075
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1087
 msgid "Amount of recordings left:"
 msgstr "Numero di registrazioni residue:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1076
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1088
 msgid "Search type:"
 msgstr "Tipo ricerca:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1077
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1089
 msgid "Location:"
 msgstr "Destinazione:"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1279
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1291
 msgid "Outdated on"
 msgstr "Terminati On"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1281
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1293
 msgid "Outdated off"
 msgstr "Terminati Off"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1286
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1298
 msgid "IMDb"
 msgstr "IMDb"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1292
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1304
 msgid "Add"
 msgstr "Agg."
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1294
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1306
 msgid "Remove"
 msgstr "Rim."
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1295
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1307
 msgid "OK"
 msgstr "Ok"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1296
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1308
 msgid "New Search"
 msgstr "Nuova ricerca"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1306
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1318
 msgid "Remove timer"
 msgstr "Rim. timer"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1309
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1317
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1321
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1329
 msgid "Add timer"
 msgstr "Agg. timer"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1650
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1662
 msgid "Edit Off"
 msgstr "Mod. Off"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1654
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1666
 msgid "Edit On"
 msgstr "Mod. On"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1675
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1687
 msgid "return"
 msgstr "Uscire"
 
-#: .../enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1887
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/MerlinEPGCenter.py:1899
 msgid "Set search term"
 msgstr "Ricercare"
 
-#: .../enigma2-plugins/merlinepgcenter/src/plugin.py:183
+#: /media/TREKSTOR/git/enigma2-plugins/merlinepgcenter/src/plugin.py:183
 msgid "More than just an EPG..."
 msgstr "Più di un semplice EPG..."
 

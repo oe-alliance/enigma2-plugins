@@ -137,6 +137,15 @@ a.underline {
 	border-bottom: #000
 }
 
+td.screenShot {
+	text-align: center;
+}
+
+td.screenShot img {
+	border: 1px solid #555;
+	background: #DDD;
+}
+
 #banner {
 	width: 1000px;
 	height: 67px;
