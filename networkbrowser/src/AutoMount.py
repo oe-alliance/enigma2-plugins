@@ -235,7 +235,7 @@ class AutoMount():
 		if os.path.ismount(path):
 # 			print '[NetworkBowser] Unmounting:',path
 			self.unmountcommand = 'umount -fl '+ path
-		if os.path.ismount(sharepath):
+		if sharepath and os.path.ismount(sharepath):
 # 			print '[NetworkBowser] Unmounting:',sharepath
 			self.unmountcommand = self.unmountcommand + ' && umount -fl '+ sharepath
 		if self.activeMountsCounter != 0:
