@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 '''
+Update rev
 $Author: michael $
-$Revision: 714 $
-$Date: 2012-11-04 13:58:12 +0100 (Sun, 04 Nov 2012) $
-$Id: plugin.py 714 2012-11-04 12:58:12Z michael $
+$Revision: 719 $
+$Date: 2012-11-09 16:13:35 +0100 (Fri, 09 Nov 2012) $
+$Id: plugin.py 719 2012-11-09 15:13:35Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -293,8 +294,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 714 $"[1:-2] + "\n" + 
-							"$Date: 2012-11-04 13:58:12 +0100 (Sun, 04 Nov 2012) $"[1:23] + "\n"
+							"$Revision: 719 $"[1:-2] + "\n" + 
+							"$Date: 2012-11-09 16:13:35 +0100 (Fri, 09 Nov 2012) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1696,7 +1697,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 714 $"[1: - 1] + "$Date: 2012-11-04 13:58:12 +0100 (Sun, 04 Nov 2012) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 719 $"[1: - 1] + "$Date: 2012-11-09 16:13:35 +0100 (Fri, 09 Nov 2012) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2200,7 +2201,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 714 $"[1:-1]	+ "$Date: 2012-11-04 13:58:12 +0100 (Sun, 04 Nov 2012) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 719 $"[1:-1]	+ "$Date: 2012-11-09 16:13:35 +0100 (Fri, 09 Nov 2012) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

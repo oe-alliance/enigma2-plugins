@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 713 $
-$Date: 2012-11-04 13:48:12 +0100 (Sun, 04 Nov 2012) $
-$Id: FritzCallFBF.py 713 2012-11-04 12:48:12Z michael $
+$Revision: 718 $
+$Date: 2012-11-09 15:33:16 +0100 (Fri, 09 Nov 2012) $
+$Id: FritzCallFBF.py 718 2012-11-09 14:33:16Z michael $
 '''
 
 from . import _, debug #@UnresolvedImport # pylint: disable=E0611,F0401
@@ -340,10 +340,11 @@ class FritzCallFBF:
 						thisnumber = cleanNumber(thisnumber)
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						if not self.phonebook.phonebook.has_key(thisnumber):
-							debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
+							# debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
 							self.phonebook.phonebook[thisnumber] = thisname
 						else:
-							debug("[FritzCallFBF] Ignoring '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
+							pass
+							# debug("[FritzCallFBF] Ignoring '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
 
 		# elif re.search('document.write\(TrFon\(', html):
 		elif html.find('document.write(TrFon(') != -1:
@@ -1097,11 +1098,12 @@ class FritzCallFBF_05_27:
 		self._callList = []
 		self._callType = config.plugins.FritzCall.fbfCalls.value
 		self._phoneBookID = '0'
-		self.info = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive)
-		self.getInfo(None)
+		self._loginCallbacks = []
 		self.blacklist = ([], [])
-		self.readBlacklist()
+		self.info = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive)
 		self.phonebook = None
+		self.getInfo(None)
+		# self.readBlacklist() now in getInfo
 
 	def _notify(self, text):
 		debug("[FritzCallFBF_05_27] notify: " + text)
@@ -1113,13 +1115,26 @@ class FritzCallFBF_05_27:
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 			
 	def _login(self, callback=None):
-		debug("[FritzCallFBF_05_27] _login")
+		debug("[FritzCallFBF_05_27] _login: " + time.ctime())
+		if callback:
+			debug("[FritzCallFBF_05_27] _login: add callback " + callback.__name__)
+			if self._loginCallbacks:
+				# if login in process just add callback to _loginCallbacks
+				self._loginCallbacks.append(callback)
+				debug("[FritzCallFBF_05_27] _login: login in progress: leave")
+				return
+			else:
+				self._loginCallbacks.append(callback)
+
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login"))
 		if self._md5LoginTimestamp and ((time.time() - self._md5LoginTimestamp) < float(9.5*60)) and self._md5Sid != '0000000000000000': # new login after 9.5 minutes inactivity 
 			debug("[FritzCallFBF_05_27] _login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
 			self._md5LoginTimestamp = time.time()
-			callback(None)
+			for callback in self._loginCallbacks:
+				debug("[FritzCallFBF_05_27] _login: calling " + callback.__name__)
+				callback(None)
+			self._loginCallbacks = []
 		else:
 			debug("[FritzCallFBF_05_27] _login: not logged in or outdated login")
 			# http://fritz.box/cgi-bin/webcm?getpage=../html/login_sid.xml
@@ -1129,9 +1144,9 @@ class FritzCallFBF_05_27:
 			getPage(url,
 				method="POST",
 				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
-						}, postdata=parms).addCallback(lambda x: self._md5Login(callback,x)).addErrback(self._errorLogin)
+						}, postdata=parms).addCallback(self._md5Login).addErrback(self._errorLogin)
 
-	def _md5Login(self, callback, sidXml):
+	def _md5Login(self, sidXml):
 		def buildResponse(challenge, text):
 			debug("[FritzCallFBF_05_27] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + text)
 			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
@@ -1174,10 +1189,12 @@ class FritzCallFBF_05_27:
 				method="POST",
 				agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
 				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
-						}, postdata=parms).addCallback(self._gotPageLogin).addCallback(callback).addErrback(self._errorLogin)
-		elif callback: # we assume value 1 here, no login necessary
-			debug("[FritzCallFBF_05_27] _md5Login: no login necessary")
-			callback(None)
+						}, postdata=parms).addCallback(self._gotPageLogin).addErrback(self._errorLogin)
+		else:
+			for callback in self._loginCallbacks:
+				debug("[FritzCallFBF_05_27] _md5Login: calling " + callback.__name__)
+				callback(None)
+			self._loginCallbacks = []
 
 	def _gotPageLogin(self, html):
 		if self._callScreen:
@@ -1196,6 +1213,11 @@ class FritzCallFBF_05_27:
 		if found:
 			self._md5Sid = found.group(1)
 			debug("[FritzCallFBF_05_27] _gotPageLogin: found sid: " + self._md5Sid)
+
+		for callback in self._loginCallbacks:
+			debug("[FritzCallFBF_05_27] _gotPageLogin: calling " + callback.__name__)
+			callback(None)
+		self._loginCallbacks = []
 
 	def _errorLogin(self, error):
 		global fritzbox
@@ -1566,6 +1588,8 @@ class FritzCallFBF_05_27:
 				self._errorGetInfo('Login: ' + html[start, html.find('</p>', start)])
 				return
 
+		self._readBlacklist()
+
 		url = "http://%s/home/home.lua" % config.plugins.FritzCall.hostname.value
 		parms = urlencode({
 			'sid':self._md5Sid
@@ -1725,22 +1749,7 @@ class FritzCallFBF_05_27:
 		text = _("FRITZ!Box - Error resetting: %s") % error.getErrorMessage()
 		self._notify(text)
 
-	def readBlacklist(self):
-		self._login(self._readBlacklist)
-		
-	def _readBlacklist(self, html):
-		if html:
-			#===================================================================
-			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-			# if found:
-			#	self._errorBlacklist('Login: ' + found.group(1))
-			#	return
-			#===================================================================
-			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
-			if start != -1:
-				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
-				self._errorBlacklist('Login: ' + html[start, html.find('</p>', start)])
-				return
+	def _readBlacklist(self):
 		# http://fritz.box/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:menu=fon&var:pagename=sperre
 		url = "http://%s/fon_num/sperre.lua" % config.plugins.FritzCall.hostname.value
 		parms = urlencode({
