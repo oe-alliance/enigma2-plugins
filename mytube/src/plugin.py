@@ -135,6 +135,7 @@ config.plugins.mytube.general.startFeed = ConfigSelection(
 				 ("my_history", _("My History")),
 				 ("my_watch_later", _("My Watch Later")),
 				 ("my_recommendations", _("My Recommendations")),
+				 ("my_uploads", _("My Uploads")),
 				], "top_rated")
 config.plugins.mytube.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
 	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
@@ -837,6 +838,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				(_("My History"), "my_history"),
 				(_("My Watch Later"), "my_watch_later"),
 				(_("My Recommendations"), "my_recommendations"),
+				(_("My Uploads"), "my_uploads"),
 			))
 
 		menulist.extend((

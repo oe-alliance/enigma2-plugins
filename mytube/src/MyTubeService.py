@@ -496,9 +496,11 @@ class MyTubePlayerService():
 		elif feedname == "my_history":
 			url = "http://gdata.youtube.com/feeds/api/users/default/watch_history?v=2"
 		elif feedname == "my_recommendations":
-			url = "http://gdata.youtube.com/feeds/api/users/default/recommendations?v=2"							
+			url = "http://gdata.youtube.com/feeds/api/users/default/recommendations?v=2"
 		elif feedname == "my_watch_later":
 			url = "http://gdata.youtube.com/feeds/api/users/default/watch_later?v=2"
+		elif feedname == "my_uploads":
+			url = "http://gdata.youtube.com/feeds/api/users/default/uploads"
 		elif feedname in ("hd", "most_popular", "most_shared", "on_the_web"):
 			if feedname == "hd":
 				url = "http://gdata.youtube.com/feeds/api/videos/-/HD"
