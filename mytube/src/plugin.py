@@ -1043,7 +1043,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			print "[MyTubePlayer] searchDialogClosed: ", searchContext
 			self.searchFeed(searchContext)
 
-	def searchFeed(self, searchContext, vals = {}):
+	def searchFeed(self, searchContext, vals = None):
 		print "[MyTubePlayer] searchFeed"		
 		
 		defaults = {
@@ -1053,7 +1053,9 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			'maxResults': 25,
 		}
 
-		defaults.update(vals)
+		# vals can overwrite default values; so search parameter are overwritable on function call
+		if vals is not None:
+			defaults.update(vals)
 
 		self.queryStarted()
 		self.appendEntries = False
