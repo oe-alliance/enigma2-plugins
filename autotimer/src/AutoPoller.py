@@ -17,6 +17,8 @@ SIMILARNOTIFICATIONID = 'AutoTimerSimilarUsedNotification'
 from threading import Thread, Semaphore
 from collections import deque
 
+from twisted.internet import reactor
+
 class AutoPollerThread(Thread):
 	"""Background thread where the EPG is parsed (unless initiated by the user)."""
 	def __init__(self):
@@ -92,8 +94,8 @@ class AutoPollerThread(Thread):
 				# Dump error to stdout
 				import traceback, sys
 				traceback.print_exc(file=sys.stdout)
-
-			timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
+			#Keep that eTimer in the mainThread
+			reactor.callFromThread(timer.startLongTimer, config.plugins.autotimer.interval.value*3600)
 
 class AutoPoller:
 	"""Manages actual thread which does the polling. Used for convenience."""
@@ -109,6 +111,6 @@ class AutoPoller:
 
 	def stop(self):
 		self.thread.stop()
-		# NOTE: while we don't need to join the thread, we should do so in case it's currently parsining
+		# NOTE: while we don't need to join the thread, we should do so in case it's currently parsing
 		self.thread.join()
 		self.thread = None

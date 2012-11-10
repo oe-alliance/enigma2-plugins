@@ -32,6 +32,7 @@ from Components.config import config
 # MessageBox
 from Screens.MessageBox import MessageBox
 from Tools import Notifications
+from Tools.BoundFunction import boundFunction
 
 # ... II
 from . import _, NOTIFICATIONID
@@ -292,14 +293,29 @@ class EPGRefresh:
 					autotimer = AutoTimer()
 
 				# Parse EPG
-				autotimer.parseEPGAsync()
+				autotimer.parseEPGAsync(simulateOnly=False).addCallback( boundFunction(self.finish, removeInstance=removeInstance) )
+				return
 			except Exception as e:
 				print("[EPGRefresh] Could not start AutoTimer:", e)
-			finally:
-				# Remove instance if there wasn't one before
-				if removeInstance:
-					autotimer = None
 
+		self.finish()
+
+	def finish(self, *args, **kwargs):
+		removeInstance=kwargs.get("removeInstance")
+		if not Screens.Standby.inStandby and not config.plugins.epgrefresh.background and config.plugins.epgrefresh.enablemessage.value:
+			Notifications.AddPopup(_("EPG refresh finished."), MessageBox.TYPE_INFO, 4, NOTIFICATIONID)
+		self.forcedScan = False
+		epgrefreshtimer.cleanup()
+		self.maybeStopAdapter()
+
+		# Remove instance if there wasn't one before
+		if removeInstance:
+			try:
+				# Import Instance
+				from Plugins.Extensions.AutoTimer.plugin import autotimer
+				autotimer = None
+			except:
+				pass
 		# shutdown if we're supposed to go to deepstandby and not recording
 		if not self.forcedScan and config.plugins.epgrefresh.afterevent.value \
 			and not Screens.Standby.inTryQuitMainloop:
@@ -308,12 +324,6 @@ class EPGRefresh:
 				Screens.Standby.TryQuitMainloop,
 				1
 			)
-
-		if not Screens.Standby.inStandby and not config.plugins.epgrefresh.background and config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddPopup(_("EPG refresh finished."), MessageBox.TYPE_INFO, 4, NOTIFICATIONID)
-		self.forcedScan = False
-		epgrefreshtimer.cleanup()
-		self.maybeStopAdapter()
 
 	def refresh(self):
 		if self.forcedScan:

@@ -156,7 +156,7 @@ class AutoTimer:
 			idx += 1
 		self.timers.append(timer)
 
-	def parseEPGAsync(self, simulateOnly=False):
+	def parseEPGAsync(self, simulateOnly = False):
 		t = SimpleThread(lambda: self.parseEPG(simulateOnly=simulateOnly))
 		t.start()
 		return t.deferred
