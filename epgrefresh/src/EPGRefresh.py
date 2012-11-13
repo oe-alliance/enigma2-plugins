@@ -292,7 +292,7 @@ class EPGRefresh:
 					autotimer = AutoTimer()
 
 				# Parse EPG
-				autotimer.parseEPG()
+				autotimer.parseEPGAsync()
 			except Exception as e:
 				print("[EPGRefresh] Could not start AutoTimer:", e)
 			finally:

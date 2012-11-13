@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-08-20 18:11+Mitteleuropäische Sommerzeit\n"
+"POT-Creation-Date: 2012-11-04 15:20+Mitteleuropäische Zeit\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,365 +15,377 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: FC2.txt:31
+#: FC2.txt:34
 msgid "below Tunerslot 4"
 msgstr ""
 
-#: FC2.txt:32
+#: FC2.txt:35
 msgid "near XILINX Spartan"
 msgstr ""
 
-#: FC2.txt:33
+#: FC2.txt:36
 msgid "under the WLAN"
 msgstr ""
 
-#: FC2.txt:34
+#: FC2.txt:37
 msgid "left of the Battery"
 msgstr ""
 
-#: FC2.txt:35
+#: FC2.txt:38
 msgid "left near Front-CI"
 msgstr ""
 
-#: FC2.txt:36
+#: FC2.txt:39
 msgid "left near Card-Slot"
 msgstr ""
 
-#: FC2.txt:37
+#: FC2.txt:40
 msgid "over Security Card"
 msgstr ""
 
-#: FC2.txt:38
+#: FC2.txt:41
 msgid "under the Fan"
 msgstr ""
 
-#: FC2.txt:128
+#: FC2.txt:142
 msgid "."
 msgstr ""
 
-#: FC2.txt:173
+#: FC2.txt:187
 msgid "3Pin"
 msgstr ""
 
-#: FC2.txt:173
+#: FC2.txt:187
 msgid "4Pin"
 msgstr ""
 
-#: FC2.txt:173
+#: FC2.txt:187
+msgid "4Pin (PID)"
+msgstr ""
+
+#: FC2.txt:187
 msgid "Control disabled"
 msgstr ""
 
-#: FC2.txt:173
+#: FC2.txt:187
 msgid "disabled"
 msgstr ""
 
-#: FC2.txt:174
+#: FC2.txt:188
 msgid "yes, Except for Recording or HDD"
 msgstr ""
 
-#: FC2.txt:174 FC2.txt:187 FC2.txt:190
+#: FC2.txt:188 FC2.txt:201 FC2.txt:204
 msgid "no"
 msgstr ""
 
-#: FC2.txt:174 FC2.txt:190
+#: FC2.txt:188 FC2.txt:204
 msgid "yes"
 msgstr ""
 
-#: FC2.txt:181
+#: FC2.txt:195
 msgid "Box Shutdown"
 msgstr ""
 
-#: FC2.txt:181
+#: FC2.txt:195
 msgid "display Info"
 msgstr ""
 
-#: FC2.txt:181
+#: FC2.txt:195
 msgid "do nothing"
 msgstr ""
 
-#: FC2.txt:190
+#: FC2.txt:204
 msgid "auto"
 msgstr ""
 
-#: FC2.txt:190
+#: FC2.txt:204
 msgid "never"
 msgstr ""
 
-#: FC2.txt:275
+#: FC2.txt:366
 msgid "please wait (until 3min)..."
 msgstr ""
 
-#: FC2.txt:313
+#: FC2.txt:404
 msgid "Min Fan Start %d rpm at PWM=%d"
 msgstr ""
 
-#: FC2.txt:319
+#: FC2.txt:410
 msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
 msgstr ""
 
-#: FC2.txt:325
+#: FC2.txt:416
 msgid "Max Fan %d rpm at PWM=255 (%s)"
 msgstr ""
 
-#: FC2.txt:327
+#: FC2.txt:418
 msgid "Extended Control Range"
 msgstr ""
 
-#: FC2.txt:337
+#: FC2.txt:428
 msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
 msgstr ""
 
-#: FC2.txt:340
+#: FC2.txt:431
 msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
 msgstr ""
 
-#: FC2.txt:347
+#: FC2.txt:438
 msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
 msgstr ""
 
-#: FC2.txt:355
+#: FC2.txt:446
 msgid "Min Fan Start %d rpm at VLT=%d"
 msgstr ""
 
-#: FC2.txt:358
+#: FC2.txt:449
 msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
 msgstr ""
 
-#: FC2.txt:363
+#: FC2.txt:454
 msgid "Max Fan %d rpm at VLT=255 (%s)"
 msgstr ""
 
-#: FC2.txt:435 FC2.txt:437 FC2.txt:441
+#: FC2.txt:457
+msgid "please set fan type (3Pin or 4Pin)"
+msgstr ""
+
+#: FC2.txt:529 FC2.txt:531 FC2.txt:535
 msgid "%s   %02d C"
 msgstr ""
 
-#: FC2.txt:443
+#: FC2.txt:537
 msgid "press Info for HDD-Temp"
 msgstr ""
 
-#: FC2.txt:444 FC2.txt:690
+#: FC2.txt:538 FC2.txt:791
 msgid "Current rpm  %4d"
 msgstr ""
 
-#: FC2.txt:475
+#: FC2.txt:570
 msgid "Action in case of Fan failure"
 msgstr ""
 
-#: FC2.txt:476
+#: FC2.txt:571
 msgid "Box shutdown at Temperature (C)"
 msgstr ""
 
-#: FC2.txt:477
+#: FC2.txt:572
 msgid "increases overheating protection to (C)"
 msgstr ""
 
-#: FC2.txt:478
+#: FC2.txt:573
 msgid "read HDD-Temperature in HDD-Standby-Mode"
 msgstr ""
 
-#: FC2.txt:479
+#: FC2.txt:574
 msgid "disable DMM-FanControl"
 msgstr ""
 
-#: FC2.txt:480
+#: FC2.txt:575
 msgid "Show Fan Speed as"
 msgstr ""
 
-#: FC2.txt:481
+#: FC2.txt:576
 msgid "Show Plugin in Extension-Menu"
 msgstr ""
 
-#: FC2.txt:482
+#: FC2.txt:577
 msgid "Show Monitor in Extension-Menu"
 msgstr ""
 
-#: FC2.txt:483
+#: FC2.txt:578
 msgid "Number of WebIF-Log-Entries"
 msgstr ""
 
-#: FC2.txt:484
+#: FC2.txt:579
 msgid "Logging path"
 msgstr ""
 
-#: FC2.txt:485
+#: FC2.txt:580
 msgid "Enable Data Logging"
 msgstr ""
 
-#: FC2.txt:486
+#: FC2.txt:581
 msgid "Auto-Delete Data older than (Days)"
 msgstr ""
 
-#: FC2.txt:487
+#: FC2.txt:582
 msgid "Enable Event Logging"
 msgstr ""
 
-#: FC2.txt:502
+#: FC2.txt:597
 msgid "Choose path"
 msgstr ""
 
-#: FC2.txt:536
+#: FC2.txt:631
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
 msgstr ""
 
-#: FC2.txt:537
+#: FC2.txt:632
 msgid "Restart GUI now?"
 msgstr ""
 
-#: FC2.txt:603
+#: FC2.txt:701
 msgid "Fan type"
 msgstr ""
 
-#: FC2.txt:604
+#: FC2.txt:702
 msgid "Fan off in Standby"
 msgstr ""
 
-#: FC2.txt:605
+#: FC2.txt:703
 msgid "min Speed rpm"
 msgstr ""
 
-#: FC2.txt:606
+#: FC2.txt:704
 msgid "max Speed rpm"
 msgstr ""
 
-#: FC2.txt:607
+#: FC2.txt:705
 msgid "Static temp C"
 msgstr ""
 
-#: FC2.txt:608
+#: FC2.txt:706
 msgid "End temperature C"
 msgstr ""
 
-#: FC2.txt:609
+#: FC2.txt:707
 msgid "Initial Voltage"
 msgstr ""
 
-#: FC2.txt:610
+#: FC2.txt:708
 msgid "Initial PWM"
 msgstr ""
 
-#: FC2.txt:615
+#: FC2.txt:713
 msgid "Cancel"
 msgstr ""
 
-#: FC2.txt:616
+#: FC2.txt:714
 msgid "Save"
 msgstr ""
 
-#: FC2.txt:617
+#: FC2.txt:715
 msgid "Check"
 msgstr ""
 
-#: FC2.txt:618
+#: FC2.txt:716
 msgid "Help"
 msgstr ""
 
-#: FC2.txt:655
+#: FC2.txt:756
 msgid "Current value: %s"
 msgstr ""
 
-#: FC2.txt:688
+#: FC2.txt:789
 msgid "Temperature C  %4.1f"
 msgstr ""
 
-#: FC2.txt:689
+#: FC2.txt:790
 msgid "Target rpm  %4d"
 msgstr ""
 
-#: FC2.txt:691
+#: FC2.txt:792
 msgid "Voltage  %03d"
 msgstr ""
 
-#: FC2.txt:692
+#: FC2.txt:793
 msgid "PWM  %03d"
 msgstr ""
 
-#: FC2.txt:717
+#: FC2.txt:806
+msgid "PID Ctl Err %03.2f %%"
+msgstr ""
+
+#: FC2.txt:828
 msgid "Information"
 msgstr ""
 
-#: FC2.txt:717
+#: FC2.txt:828
 msgid "readme.txt"
 msgstr ""
 
-#: FC2.txt:867
+#: FC2.txt:1011
 msgid "FanControl2 emergency, Box Shutdown now?"
 msgstr ""
 
-#: FC2.txt:1038
+#: FC2.txt:1197
 msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
 msgstr ""
 
-#: FC2.txt:1045
+#: FC2.txt:1204
 msgid "Fan is not working!"
 msgstr ""
 
-#: FC2.txt:1100
+#: FC2.txt:1282
 msgid "Box has no fancontrol hardware -> FC2 deactivated"
 msgstr ""
 
-#: FC2.txt:1180
+#: FC2.txt:1362
 msgid "Temperature"
 msgstr ""
 
-#: FC2.txt:1181
+#: FC2.txt:1363
 msgid "Speed"
 msgstr ""
 
-#: FC2.txt:1182
+#: FC2.txt:1364
 msgid "Voltage"
 msgstr ""
 
-#: FC2.txt:1189
+#: FC2.txt:1371
 msgid "Sensors"
 msgstr ""
 
-#: FC2.txt:1284 FC2.txt:1320
+#: FC2.txt:1466 FC2.txt:1502
 msgid "active"
 msgstr ""
 
-#: FC2.txt:1287 FC2.txt:1323
+#: FC2.txt:1469 FC2.txt:1505
 msgid "turn off"
 msgstr ""
 
-#: FC2.txt:1290 FC2.txt:1326
+#: FC2.txt:1472 FC2.txt:1508
 msgid "not active"
 msgstr ""
 
-#: FC2.txt:1293 FC2.txt:1329
+#: FC2.txt:1475 FC2.txt:1511
 msgid "turn on"
 msgstr ""
 
-#: FC2.txt:1298 FC2.txt:1300 FC2.txt:1334 FC2.txt:1336
+#: FC2.txt:1480 FC2.txt:1482 FC2.txt:1516 FC2.txt:1518
 msgid "Filesize : %d %sByte"
 msgstr ""
 
-#: FC2.txt:1302 FC2.txt:1338
+#: FC2.txt:1484 FC2.txt:1520
 msgid "Disk free : %d MByte"
 msgstr ""
 
-#: FC2.txt:1305 FC2.txt:1341
+#: FC2.txt:1487 FC2.txt:1523
 msgid "Download"
 msgstr ""
 
-#: FC2.txt:1309 FC2.txt:1345
+#: FC2.txt:1491 FC2.txt:1527
 msgid "Delete"
 msgstr ""
 
-#: FC2.txt:1313
+#: FC2.txt:1495
 msgid "Delete older 48h"
 msgstr ""
 
-#: FC2.txt:1316 FC2.txt:1353
+#: FC2.txt:1498 FC2.txt:1535
 msgid "File %s does not exists"
 msgstr ""
 
-#: FC2.txt:1355
+#: FC2.txt:1537
 msgid "Logging-Path: %s"
 msgstr ""
 
-#: FC2.txt:1356
+#: FC2.txt:1538
 msgid "Auto-Delete older %s Days"
 msgstr ""
 

@@ -1,5 +1,7 @@
 # FanControl2
 # joergm6 IHAD
+# PID-controller by Lukasz S.
+
 import time
 import os
 from __init__ import _
@@ -36,6 +38,12 @@ from Screens.Standby import TryQuitMainloop
 from Components.ActionMap import ActionMap
 from Components.ActionMap import NumberActionMap
 from Components.Harddisk import harddiskmanager
+
+from threading import Thread, Lock
+import Queue
+Briefkasten = Queue.Queue()
+
+FC2doThread = True
 
 def main(session,**kwargs):
 	try:
@@ -74,6 +82,10 @@ def FClog(wert):
 					f.close()
 			except IOError:
 				FC2Log.append(strftime("%H:%M:%S ") + "Event-Log-Error")
+				
+def FClogE(wert):
+	if config.plugins.FanControl.EnableEventLog.value:
+		FClog(wert)
 
 def FCdata():
 	global DataMinute
@@ -130,7 +142,7 @@ def setPWM(fanid, value):
 
 #Configuration
 config.plugins.FanControl = ConfigSubsection()
-config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin"))], default = "disabled")
+config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default = "disabled")
 config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="false")
 config.plugins.FanControl.minRPM = ConfigSlider(default = 600, increment = 50, limits = (0, 1500))
 config.plugins.FanControl.maxRPM = ConfigSlider(default = 3000, increment = 50, limits = (500, 6000))
@@ -151,6 +163,10 @@ config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices = [("false", _(
 config.plugins.FanControl.MonitorInExtension = ConfigYesNo(default = True)
 config.plugins.FanControl.FanControlInExtension = ConfigYesNo(default = True)
 config.plugins.FanControl.Multi = ConfigSelection(choices = [("1", "RPM"), ("2", "RPM/2")], default = "2")
+config.plugins.FanControl.KiPWMsld = ConfigSlider(default = 10, increment = 1, limits = (0,100))
+config.plugins.FanControl.KiVLTsld = ConfigSlider(default = 10, increment = 1, limits = (0,100))
+config.plugins.FanControl.KpPWMsld = ConfigSlider(default = 50, increment = 1, limits = (0,100))
+config.plugins.FanControl.KpVLTsld = ConfigSlider(default = 50, increment = 1, limits = (0,100))
 
 def GetFanRPM():
 	global RPMread
@@ -202,6 +218,79 @@ def enableDMM():
 		text=text.replace("#Disabled by FC2 config.misc.standbyCounter.addNotifier","config.misc.standbyCounter.addNotifier")
 		text=FCfile.write(text)
 		FCfile.close()
+
+# the PI controller class
+class ControllerPI:
+	name = "PI Controller"
+	looptime = 0.0
+	dt = 0.0
+	timer_delay = 0.0
+	inputMax = 0.0
+	inputError = 0.0
+	inputDeadband = 0.0
+	integratorOutput = 0.0
+	controlSignal = 0.0
+	coeffKp = 0.0
+	coeffKi = 0.0
+ 
+	def __init__(self, givenName = "PI Controller"):
+		self.name = givenName
+		FClogE("%s : creating object" % self.name)
+
+	def ReturnInputError(self):
+		return self.inputError
+      
+	def ResetIntegrator(self):
+		FClogE("%s : integrator output %3.2f" % (self.name, self.integratorOutput))
+		self.integratorOutput = 0.0
+#		FClog("%s : integrator output now 0" % self.name)
+
+
+	def ScaleCtlError(self,errval,inputMax):
+		if errval == 0:
+			return 0
+		return skal(abs(errval), 0, inputMax , 0, 100) * (errval/abs(errval))
+
+	def DeadBand(self,errval):
+		if abs(errval) < self.inputDeadband:
+			FClogE("%s : error within bounds %3.2f %% < %3.2f %%, WON'T control" % (self.name, abs(errval), self.inputDeadband))
+			return 0.0
+		else:
+			FClogE("%s : error EXCEEDS bounds %3.2f %% > %3.2f %%, will control" % (self.name, abs(errval), self.inputDeadband))
+			return errval
+
+	def Integrate(self,errval):
+		self.integratorOutput += errval*self.dt
+		return self.integratorOutput
+
+	def ControlProcess(self,InputError, integratorOutput):
+		return self.coeffKp*InputError + self.coeffKi*integratorOutput
+
+	def ControlLoop(self, ctlInput, ctlFeedback):
+		if self.dt < self.timer_delay:
+			FClogE("%s : WRONG SETTINGS! dt must be >= timer_delay! Adjusted to be same for now.")
+			self.dt = self.timer_delay
+
+		self.looptime += self.timer_delay
+		if self.looptime < self.dt:
+			FClogE("%s : NOT calling control, looptime %d < %d dt" % (self.name, self.looptime, self.dt))
+			return Self.ControlSignal
+		else:
+			FClogE("%s : calling control, looptime %d = %d dt" % (self.name, self.looptime, self.dt))
+			self.looptime = 0
+
+		self.inputError = ctlInput - ctlFeedback
+		FClogE("%s : made up Input Error %3.2f" % (self.name, self.inputError))
+		self.inputError = self.ScaleCtlError(self.inputError, self.inputMax)
+		FClogE("%s : after scale: Input Error %3.2f %%" % (self.name, self.inputError))
+		self.inputError = self.DeadBand(self.inputError)
+		FClogE("%s : after deadband: Input Error %3.2f %%" % (self.name, self.inputError))
+		self.IntegratorOutput = self.Integrate(self.inputError)
+		FClogE("%s : Integrator output %3.2f %%" % (self.name, self.IntegratorOutput))
+		self.ControlSignal = self.ControlProcess(self.inputError,self.IntegratorOutput)
+		FClogE("%s : Control Signal %3.2f %%" % (self.name, self.ControlSignal))
+		return self.ControlSignal
+# the PI controller class -end
 
 class FanControl2Test(ConfigListScreen,Screen):
 	skin = """
@@ -261,7 +350,7 @@ class FanControl2Test(ConfigListScreen,Screen):
 		SaveAktPWM = AktPWM
 		SaveFan = config.plugins.FanControl.Fan.value
 		config.plugins.FanControl.Fan.value = "aus"
-		if SaveFan == "4pin":
+		if SaveFan in ["4pin","4pinREG"]:
 			setPWM(self.id,0)
 			time.sleep(10)
 			while GetFanRPM() < 100 and self.i < 255:
@@ -525,7 +614,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 
 class FanControl2Plugin(ConfigListScreen,Screen):
 	skin = """
-		<screen position="center,center" size="600,440" title="Fan Control 2">
+		<screen position="center,center" size="600,450" title="Fan Control 2">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
@@ -536,22 +625,25 @@ class FanControl2Plugin(ConfigListScreen,Screen):
 			<widget source="green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget source="yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
 			<widget source="blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
-			<widget source="Version" render="Label" position="5,420" size="60,20" zPosition="1" font="Regular;11" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
+			<widget source="Version" render="Label" position="5,430" size="60,20" zPosition="1" font="Regular;11" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
 
 			<widget name="config" position="10,50" size="580,200" scrollbarMode="showOnDemand" />
 			<ePixmap position="20,260" size="560,3" pixmap="skin_default/div-h.png" transparent="1" alphatest="on" />
 			<widget source="introduction" render="Label" position="5,262" size="580,30" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
 			<ePixmap position="20,290" size="560,3" pixmap="skin_default/div-h.png" transparent="1" alphatest="on" />
-			<widget source="TxtTemp" render="Label" position="5,330" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
-			<widget source="TxtZielRPM" render="Label" position="5,350" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
-			<widget source="TxtRPM" render="Label" position="5,370" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
-			<widget source="TxtVLT" render="Label" position="5,390" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
-			<widget source="TxtPWM" render="Label" position="5,410" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
-			<widget source="PixTemp" render="Progress" position="210,340" size="375,5" borderWidth="1" />
-			<widget source="PixZielRPM" render="Progress" position="210,360" size="375,5" borderWidth="1" />
-			<widget source="PixRPM" render="Progress" position="210,380" size="375,5" borderWidth="1" />
-			<widget source="PixVLT" render="Progress" position="210,400" size="375,5" borderWidth="1" />
-			<widget source="PixPWM" render="Progress" position="210,420" size="375,5" borderWidth="1" />
+			<widget source="TxtTemp" render="Label" position="5,310" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
+			<widget source="TxtZielRPM" render="Label" position="5,330" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
+			<widget source="TxtRPM" render="Label" position="5,350" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
+			<widget source="TxtVLT" render="Label" position="5,370" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
+			<widget source="TxtPWM" render="Label" position="5,390" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
+			<widget source="PixTemp" render="Progress" position="210,320" size="375,5" borderWidth="1" />
+			<widget source="PixZielRPM" render="Progress" position="210,340" size="375,5" borderWidth="1" />
+			<widget source="PixRPM" render="Progress" position="210,360" size="375,5" borderWidth="1" />
+			<widget source="PixVLT" render="Progress" position="210,380" size="375,5" borderWidth="1" />
+			<widget source="PixPWM" render="Progress" position="210,400" size="375,5" borderWidth="1" />
+			<widget source="TxtERR" render="Label" position="5,410" size="200,25" zPosition="1" font="Regular;17" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
+			<widget source="PixERR" render="Progress" position="210,420" size="375,5" borderWidth="1" />
+			<widget source="T10ERR" render="Label" position="570,422" size="40,20" zPosition="1" font="Regular;11" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session, args = 0):
@@ -592,7 +684,10 @@ class FanControl2Plugin(ConfigListScreen,Screen):
 		self["PixRPM"] = Progress()
 		self["PixVLT"] = Progress()
 		self["PixPWM"] = Progress()
-
+		self["PixERR"] = Progress()
+		self["TxtERR"] = StaticText()
+		self["T10ERR"] = StaticText()
+		
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MenuActions", "EPGSelectActions"], 
 		{
 			"ok": self.save,
@@ -659,8 +754,18 @@ class FanControl2Plugin(ConfigListScreen,Screen):
 		self["PixRPM"].value = int((AktRPM-config.plugins.FanControl.minRPM.value)*100/Test0(config.plugins.FanControl.maxRPM.value-config.plugins.FanControl.minRPM.value))
 		self["PixVLT"].value = int(AktVLT/2.55)
 		self["PixPWM"].value = int(AktPWM/2.55)
+		if config.plugins.FanControl.Fan.value == "4pinREG":
+			if int(abs(ErrRPM)) <= 10 and ErrRPM != 0:
+				self["PixERR"].value = int(abs(ErrRPM)*10)
+				self["T10ERR"].setText("10%")
+			else:	
+				self["PixERR"].value = int(abs(ErrRPM))
+				self["T10ERR"].setText("")
+			self["TxtERR"].setText(_("PID Ctl Err %03.2f %%") % ErrRPM)
+		else:
+			self["TxtERR"].setText("")
 		self.fan_timer.start(2000, True)
-       
+
 	def save(self):
 		for x in self["config"].list:
 			x[1].save()
@@ -799,8 +904,27 @@ def FC2systemStatus():
 		R += " REC"
 	return R
 
+class FC2Worker(Thread): 
+	def __init__(self,index,s,session):
+		Thread.__init__(self)
+		self.index = index
+		self.session = session
+		self.s = s
+ 
+	def run(self): 
+		global FritzTime
+		while True:
+#			print "worker a", self.index
+			zahl = Briefkasten.get()
+			if zahl == 1:
+				self.s.queryRun()
+ 
+			Briefkasten.task_done() 
+
 class FanControl2(Screen):
 	skin = """ <screen position="100,100" size="300,300" title="FanControl2" > </screen>"""
+
+	RPMController = ControllerPI("RPMController")
 
 	def __init__(self,session):
 		global Box
@@ -813,6 +937,13 @@ class FanControl2(Screen):
 		self.Range      = 5
 		self.Fan        = "aus"
 		self.dontshutdown = False
+		# RPM PI controller initialization - later
+		self.RPMController.timer_delay = 10.0
+		self.RPMController.dt = 10.0
+		self.RPMController.inputMax = 4000.0
+		self.RPMController.inputDeadband = 1.0
+		self.RPMController.coeffKp = 0.1
+		self.RPMController.coeffKi = 0.25
 		FClog("Starting up")
 		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class.org"):
 			os.rename("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class.org","/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class")
@@ -822,6 +953,10 @@ class FanControl2(Screen):
 		HDDtestTemp()
 		GetHDDtemp(False)
 		DeleteData()
+		FC2threads = [FC2Worker(i,self,session) for i in range(3)] 
+		for thread in FC2threads: 
+			thread.setDaemon(True) 
+			thread.start() 
 		self.timer = eTimer()
 		if self.query not in self.timer.callback:
 			self.timer.callback.append(self.query)
@@ -872,8 +1007,20 @@ class FanControl2(Screen):
 	def standbyQuery(self, configElement):
 		Standby.inStandby.onClose.append(self.query)
 		self.query()
-                
+
 	def query(self):
+		self.timer.stop()
+		if config.plugins.FanControl.Fan.value != "disabled":
+			if FC2doThread == True:
+				if Briefkasten.qsize()<=3:
+					Briefkasten.put(1) 
+				else:
+					FClog("Queue full, Thread hanging?")
+			else:
+				self.queryRun()
+		self.timer.startLongTimer(10)
+		
+	def queryRun(self):
 		global FirstStart
 		global istStandbySave
 		global Overheat
@@ -887,12 +1034,15 @@ class FanControl2(Screen):
 		global AktTemp
 		global AktVLT
 		global AktPWM
+	
+		global AktPWMCTL
+		global IntegralRPM      
+		global ErrRPM
 		global Recording
-#		tt = time.time()
+		tt = time.time()
 		try:
-			if config.plugins.FanControl.Fan.value == "disabled":
-				self.timer.startLongTimer(10)
-				return
+			if self.targetTemp != config.plugins.FanControl.temp.value:
+				self.RPMController.ResetIntegrator() 
 			self.targetTemp = config.plugins.FanControl.temp.value
 			self.maxTemp    = config.plugins.FanControl.tempmax.value
 			self.Fan        = config.plugins.FanControl.Fan.value
@@ -986,7 +1136,7 @@ class FanControl2(Screen):
 				AktPWM = getPWM(id)
 				if AktVLT > 255:
 					AktVLT = 255
-				FClog("Vlt:%d Pwm:%d Fan:%s  %s" % (AktVLT,AktPWM,self.Fan,FC2systemStatus()))
+				FClog("Vlt:%d Pwm:%d Fan:%s Pid:%.2f%%  %s" % (AktVLT,AktPWM,self.Fan,ErrRPM,FC2systemStatus()))
 				FC2werte[0] = AktTemp
 				FC2werte[1] = AktRPM
 				FC2werte[2] = AktVLT
@@ -1035,6 +1185,23 @@ class FanControl2(Screen):
 						AktPWM = 256
 					if AktPWM < 0:
 						AktPWM = 0
+				elif self.Fan == "4pinREG":
+					AktPWM = self.RPMController.ControlLoop(ZielRPM, AktRPM)
+					ErrRPM = self.RPMController.inputError
+					if AktPWM > 255.0:
+						AktVLT = 0.12*(AktPWM - 255.0) + int(config.plugins.FanControl.vlt.value)
+					else:
+						AktVLT = int(config.plugins.FanControl.vlt.value)       # this will set voltage to initial value
+					if AktVLT > 255:
+						AktVLT = 255
+					if AktVLT < 0:
+						AktVLT = 0
+					if AktPWM > 255:
+						AktPWM = 255
+					if AktPWM < 0:
+						AktPWM = 0
+					setVoltage(id,int(AktVLT))
+					setPWM(id,int(AktPWM))
 				elif self.Fan == "3pin":
 					if AktRPM+29 < ZielRPM:
 						AktVLT = (AktVLT+5 if ZielRPM-AktRPM > 100 else AktVLT+1)
@@ -1044,11 +1211,14 @@ class FanControl2(Screen):
 						setVoltage(id,AktVLT)
 
 		except Exception:
-			FClog("Control Error")
-			import traceback, sys
-			traceback.print_exc(file=sys.stdout)
-#		FClog(str(time.time() - tt ))
-		self.timer.startLongTimer(10)
+#			FClog("Control Error")
+#			import traceback, sys
+#			traceback.print_exc(file=sys.stdout)
+			from traceback import format_exc
+			FClog("Control Error:\n" + format_exc )
+##			import traceback, sys
+##			traceback.print_exc(file=sys.stdout)
+		FClogE("Runtime: %.3f" % (time.time() - tt) )
 
 def autostart(reason, **kwargs):
 	global session
