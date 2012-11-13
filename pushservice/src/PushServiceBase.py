@@ -316,13 +316,13 @@ class PushServiceBase(Modules, ConfigFile):
 		services = self.services
 		if not services:
 			# Fallback to PopUp
-			module = self.controllermodules.get("PopUp", None)
+			module = self.servicemodules.get("PopUp", None)
 			popup = self.instantiateModule(module)
 			# Missing but not necessary: popup.begin() -> popup.push(...) -> popup.end()
 			services = [popup]
 		if services:
 			for service in services:
-				if service.getEnable():
+				if service and service.getEnable():
 					try:
 						service.push(
 								boundFunction(self.pushcallback, service, controller),
