@@ -4,8 +4,14 @@ from . import _
 
 # GUI (Components)
 from Components.MenuList import MenuList
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT
+from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
+from Tools.LoadPixmap import LoadPixmap
+from ServiceReference import ServiceReference
 
+from Tools.FuzzyDate import FuzzyTime
+from time import localtime, time, strftime, mktime
+
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, SCOPE_SKIN_IMAGE
 from skin import parseColor, parseFont
 
 class AutoTimerList(MenuList):
@@ -13,41 +19,60 @@ class AutoTimerList(MenuList):
 
 	def __init__(self, entries):
 		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
-
-		self.l.setFont(0, gFont("Regular", 22))
 		self.l.setBuildFunc(self.buildListboxEntry)
-		self.l.setItemHeight(25)
+		self.l.setFont(0, gFont("Regular", 20))
+		self.l.setFont(1, gFont("Regular", 17))
+		self.l.setItemHeight(70)
+		self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/lock_off.png"))
+		self.iconEnabled = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/lock_on.png"))
+		self.iconRecording = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_rec.png"))
+		self.iconZapped = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_zap.png"))
+
 		self.colorDisabled = 12368828
 
 	def applySkin(self, desktop, parent):
-		attribs = [ ] 
-		if self.skinAttributes is not None:
-			for (attrib, value) in self.skinAttributes:
-				if attrib == "font":
-					self.l.setFont(0, parseFont(value, ((1,1),(1,1))))
-				elif attrib == "itemHeight":
-					self.l.setItemHeight(int(value))
-				elif attrib == "colorDisabled":
-					self.colorDisabled = parseColor(value).argb()
-				else:
-					attribs.append((attrib, value))
-		self.skinAttributes = attribs
 		return MenuList.applySkin(self, desktop, parent)
 
 	#
-	#  | <Name of AutoTimer> |
-	#
 	def buildListboxEntry(self, timer):
-		size = self.l.getItemSize()
-
-		color = None
 		if not timer.enabled:
-			color = self.colorDisabled
+			icon = self.iconDisabled
+		else:
+			icon = self.iconEnabled
+		if timer.justplay:
+			rectypeicon = self.iconZapped
+		else:
+			rectypeicon = self.iconRecording
 
-		return [
-			None,
-			(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, size.width() - 5, size.height(), 0, RT_HALIGN_LEFT, timer.name, color, color)
-		]
+		channel = []
+		for t in timer.services:
+			channel.append(ServiceReference(t).getServiceName())
+		if len(channel) >0 :
+			channel = ", ".join(channel)
+		width = self.l.getItemSize().width()
+		res = [ None ]
+		x = (2*width) // 3
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 52, 2, x-26, 25, 0, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 47, width-4, 25, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, channel))
+
+		if timer.hasTimespan():
+			nowt = time()
+			now = localtime(nowt)
+			begintime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, timer.timespan[0][0], timer.timespan[0][1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+			endtime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, timer.timespan[1][0], timer.timespan[1][1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+			timespan = ((" %s ... %s") % (FuzzyTime(begintime)[1], FuzzyTime(endtime)[1]))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-150-4, 0, 150, 25, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
+
+		if timer.hasTimeframe():
+			begin = strftime("%a, %d %b", localtime(timer.getTimeframeBegin()))
+			end = strftime("%a, %d %b", localtime(timer.getTimeframeEnd()))
+			timespan = (("%s ... %s") % (begin, end))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-200-4, 25, 200, 25, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
+
+		if icon:
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 2, 24, 25, icon))
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 28, 5, 24, 25, rectypeicon))
+		return res
 
 	def getCurrent(self):
 		cur = self.l.getCurrentSelection()
