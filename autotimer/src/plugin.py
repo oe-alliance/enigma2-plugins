@@ -10,8 +10,6 @@ from Tools.Notifications import AddPopup
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
-from twisted.internet import reactor
-
 autotimer = None
 autopoller = None
 
@@ -161,8 +159,7 @@ def editCallback(session):
 		handleAutoPoller()
 
 def parseEPGCallback(ret):
-	reactor.callFromThread(
-		AddPopup,
+	AddPopup(
 		_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
 		MessageBox.TYPE_INFO,
 		10,
