@@ -39,6 +39,10 @@ def autostart(reason, **kwargs):
 		from AutoPoller import AutoPoller
 		autopoller = AutoPoller()
 		autopoller.start()
+
+		# Install NPB, main is too late because the Browser is already running
+		from Plugins.SystemPlugins.Toolkit import NotifiablePluginBrowser
+		NotifiablePluginBrowser.install()
 	# Shutdown
 	elif reason == 1:
 		# Stop Poller
@@ -121,9 +125,6 @@ def main(session, **kwargs):
 			timeout = 10
 		)
 		return
-
-	from Plugins.SystemPlugins.Toolkit import NotifiablePluginBrowser
-	NotifiablePluginBrowser.install()
 
 	# Do not run in background while editing, this might screw things up
 	if autopoller is not None:
