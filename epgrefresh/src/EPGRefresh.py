@@ -195,13 +195,11 @@ class EPGRefresh:
 
 		# See if we are supposed to read in autotimer services
 		if config.plugins.epgrefresh.inherit_autotimer.value:
-			removeInstance = False
 			try:
 				# Import Instance
 				from Plugins.Extensions.AutoTimer.plugin import autotimer
 
 				if autotimer is None:
-					removeInstance = True
 					# Create an instance
 					from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
 					autotimer = AutoTimer()
@@ -215,10 +213,6 @@ class EPGRefresh:
 				for timer in autotimer.getEnabledTimerList():
 					additionalServices.extend([EPGRefreshService(x, None) for x in timer.services])
 					additionalBouquets.extend([EPGRefreshService(x, None) for x in timer.bouquets])
-			finally:
-				# Remove instance if there wasn't one before
-				if removeInstance:
-					autotimer = None
 
 		scanServices = []
 		channelIdList = []
@@ -281,19 +275,17 @@ class EPGRefresh:
 
 		# Eventually force autotimer to parse epg
 		if config.plugins.epgrefresh.parse_autotimer.value:
-			removeInstance = False
 			try:
 				# Import Instance
 				from Plugins.Extensions.AutoTimer.plugin import autotimer
 
 				if autotimer is None:
-					removeInstance = True
 					# Create an instance
 					from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
 					autotimer = AutoTimer()
 
 				# Parse EPG
-				autotimer.parseEPGAsync(simulateOnly=False).addCallback( boundFunction(self.finish, removeInstance=removeInstance) )
+				autotimer.parseEPGAsync(simulateOnly=False).addBoth(self.finish)
 				return
 			except Exception as e:
 				print("[EPGRefresh] Could not start AutoTimer:", e)
@@ -301,21 +293,12 @@ class EPGRefresh:
 		self.finish()
 
 	def finish(self, *args, **kwargs):
-		removeInstance=kwargs.get("removeInstance")
 		if not Screens.Standby.inStandby and not config.plugins.epgrefresh.background and config.plugins.epgrefresh.enablemessage.value:
 			Notifications.AddPopup(_("EPG refresh finished."), MessageBox.TYPE_INFO, 4, NOTIFICATIONID)
 		self.forcedScan = False
 		epgrefreshtimer.cleanup()
 		self.maybeStopAdapter()
 
-		# Remove instance if there wasn't one before
-		if removeInstance:
-			try:
-				# Import Instance
-				from Plugins.Extensions.AutoTimer.plugin import autotimer
-				autotimer = None
-			except:
-				pass
 		# shutdown if we're supposed to go to deepstandby and not recording
 		if not self.forcedScan and config.plugins.epgrefresh.afterevent.value \
 			and not Screens.Standby.inTryQuitMainloop:
