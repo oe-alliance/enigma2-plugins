@@ -596,6 +596,7 @@ class InfoBarTunerState(object):
 				if win.type == RECORD:
 					#TODO Avolid blocking - avoid using getTimer to update the timer times use timer.time_changed if possible
 					timer = getTimer( id )
+					#print id, timer
 					if timer:
 						begin = timer.begin
 						end = timer.end
@@ -617,7 +618,7 @@ class InfoBarTunerState(object):
 						win.updateTimes( begin, end, endless )
 						win.update()
 					else:
-						# Should never happen delete
+						# This can happen, if the time has been changed or if the timer does not exist anymore
 						begin = win.begin
 						end = win.end
 						if end < begin or end > time():
@@ -626,6 +627,9 @@ class InfoBarTunerState(object):
 						win.updateType( FINISHED )
 						win.updateTimes( begin, end, endless )
 						win.update()
+						#TEST
+						del self.entries[id]
+						self.updateRecordTimer()
 				elif win.type == STREAM:
 					if config.infobartunerstate.show_streams.value:
 						#TODO Avolid blocking - avoid using getStream to update the current name
@@ -1254,6 +1258,7 @@ def getTimerID(timer):
 def getTimer(id):
 	#for timer in self.session.nav.RecordTimer.timer_list + self.session.nav.RecordTimer.processed_timers:
 	for timer in NavigationInstance.instance.RecordTimer.timer_list + NavigationInstance.instance.RecordTimer.processed_timers:
+		#print "timerlist:", getTimerID( timer )
 		if getTimerID( timer ) == id:
 			return timer
 	return None
