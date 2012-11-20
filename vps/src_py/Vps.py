@@ -37,15 +37,15 @@ class vps_timer:
 		self.max_extending_timer = 4*3600
 		self.next_events = [ ]
 		self.new_timer_copy = None
-	
-	
+
+
 	def program_closed(self, retval):
 		self.timer.log(0, "[VPS] stop monitoring (process terminated)")
 		if self.program_running or self.program_try_search_running:
 			self.program_running = False
 			self.program_try_search_running = False
 			self.stop_simulation()
-	
+
 	def program_dataAvail(self, str):
 		if self.timer is None or self.timer.state == TimerEntry.StateEnded or self.timer.cancelled:
 			self.program_abort()
@@ -57,22 +57,22 @@ class vps_timer:
 			self.program_abort()
 			self.stop_simulation()
 			return
-		
+
 		lines = str.split("\n")
 		for line in lines:
 			data = line.split()
 			if len(data) == 0:
 				continue
-			
+
 			self.timer.log(0, "[VPS] " + line)
-			
+
 			if data[0] == "RUNNING_STATUS":
 				if data[1] == "0": # undefined
 					if data[2] == "FOLLOWING":
 						data[1] = "1"
 					else:
 						data[1] = "4"
-				
+
 				if data[1] == "1": # not running
 					# Wenn der Eintrag im Following (Section_Number = 1) ist,
 					# dann nicht beenden (Sendung begann noch gar nicht)
@@ -82,25 +82,25 @@ class vps_timer:
 						if self.timer.state == TimerEntry.StateRunning and not self.set_next_event():
 							self.activated_auto_increase = False
 							self.timer.autoincrease = False
-							
+
 							if self.timer.vpsplugin_overwrite:
 								# sofortiger Stopp
 								self.timer.abort()
 								self.session.nav.RecordTimer.doActivate(self.timer)
 								self.stop_simulation()
-							
+
 							self.dont_restart_program = True
 							self.program_abort()
-				
+
 				elif data[1] == "2": # starts in a few seconds
 					self.activate_autoincrease()
 					if self.timer.state == TimerEntry.StateWaiting:
 						self.session.nav.RecordTimer.doActivate(self.timer)
-				
+
 				elif data[1] == "3": # pausing
 					if self.timer.state == TimerEntry.StateRunning:
 						self.activate_autoincrease()
-				
+
 				elif data[1] == "4": # running
 					if self.timer.state == TimerEntry.StateRunning:
 						self.activate_autoincrease()
@@ -108,46 +108,46 @@ class vps_timer:
 						# setze Startzeit auf jetzt
 						self.timer.begin = int(time())
 						self.session.nav.RecordTimer.timeChanged(self.timer)
-						
+
 						self.activate_autoincrease()
 						self.program_abort()
 						self.stop_simulation()
 						vps_timers.checksoon(2000) # Programm neu starten
-				
+
 				elif data[1] == "5": # service off-air
 					self.timer.vpsplugin_overwrite = False
 					if self.activated_auto_increase:
 						self.timer.autoincrease = False
 						self.activated_auto_increase = False
-			
-			
+
+
 			elif data[0] == "EVENT_ENDED":
 				if not self.set_next_event():
 					if self.timer.state == TimerEntry.StateRunning:
 						self.activated_auto_increase = False
 						self.timer.autoincrease = False
-						
+
 						if self.timer.vpsplugin_overwrite:
 							# sofortiger Stopp
 							self.timer.abort()
 							self.session.nav.RecordTimer.doActivate(self.timer)
 							self.stop_simulation()
-	
-							
+
+
 					self.program_abort()
 					self.stop_simulation()
-			
-			
+
+
 			elif data[0] == "OTHER_TS_RUNNING_STATUS":
 				if self.timer.state == TimerEntry.StateWaiting:
 					self.timer.start_prepare = int(time())
 					self.session.nav.RecordTimer.doActivate(self.timer)
-				
+
 				self.program_abort()
 				self.stop_simulation()
 				vps_timers.checksoon(2000)
-			
-			
+
+
 			# PDC
 			elif data[0] == "PDC_FOUND_EVENT_ID":
 				self.found_pdc = True
@@ -159,8 +159,8 @@ class vps_timer:
 					self.timer.description = evt.getShortDescription()
 				self.program_abort()
 				vps_timers.checksoon(500)
-			
-			
+
+
 			elif data[0] == "FOUND_EVENT_ON_SCHEDULE":
 				starttime = int(data[1])
 				duration = int(data[2])
@@ -172,22 +172,22 @@ class vps_timer:
 							self.activated_auto_increase = False
 						self.copyTimer(starttime, duration)
 						self.timer.log(0, "[VPS] copied this timer, since the event may start later than this timer ends")
-				
+
 				elif not self.activated_auto_increase:
 					self.activate_autoincrease()
-			
-			
+
+
 			elif data[0] == "EVENT_OVER" or data[0] == "CANNOT_FIND_EVENT":
 				self.max_extending_timer = 2*3600
 				if self.activated_auto_increase:
 					self.timer.autoincrease = False
 					self.activated_auto_increase = False
-			
-			
+
+
 			elif data[0] == "PDC_MULTIPLE_FOUND_EVENT":
 				self.check_and_add_event(int(data[1]))
-			
-			
+
+
 			# Programm meldet, dass die EIT (present/following) des Senders offenbar
 			# momentan fehlerhaft ist
 			elif data[0] == "EIT_APPARENTLY_UNRELIABLE":
@@ -196,30 +196,30 @@ class vps_timer:
 					self.timer.log(0, "[VPS] can't trust EPG currently, go to safe mode")
 
 
-	
+
 	def activate_autoincrease(self):
 		if not self.activated_auto_increase:
 			self.activated_auto_increase = True
 			self.timer.autoincrease = True
 			self.timer.autoincreasetime = 60
-			
+
 			if self.org_timer_end == 0:
 				self.org_timer_end = self.timer.end
 			self.timer.log(0, "[VPS] enable autoincrease")
-			
+
 			if self.new_timer_copy is not None and (self.new_timer_copy in self.session.nav.RecordTimer.timer_list):
 				self.new_timer_copy.afterEvent = AFTEREVENT.NONE
 				self.new_timer_copy.dontSave = True
 				NavigationInstance.instance.RecordTimer.removeEntry(self.new_timer_copy)
 				self.new_timer_copy = None
 				self.timer.log(0, "[VPS] delete timer copy")
-	
+
 	# Noch ein Event aufnehmen?
 	def set_next_event(self):
 		if not self.timer.vpsplugin_overwrite and len(self.next_events) > 0:
 			if not self.activated_auto_increase:
 				self.activate_autoincrease()
-			
+
 			(starttime, neweventid) = self.next_events.pop(0)
 			self.timer.eit = neweventid
 			self.dont_restart_program = False
@@ -229,7 +229,7 @@ class vps_timer:
 			return True
 		else:
 			return False
-	
+
 	def program_abort(self):
 		if self.program_running or self.program_try_search_running:
 			#self.program.sendCtrlC()
@@ -237,43 +237,43 @@ class vps_timer:
 			self.program_running = False
 			self.program_try_search_running = False
 			self.timer.log(0, "[VPS] stop monitoring")
-	
+
 	def stop_simulation(self):
 		if self.simulate_recordService:
 			NavigationInstance.instance.stopRecordService(self.simulate_recordService)
 			self.simulate_recordService = None
 			self.timer.log(0, "[VPS] stop RecordService (simulation)")
-	
-	
+
+
 	def check_and_add_event(self, neweventid):
 		if not config.plugins.vps.allow_seeking_multiple_pdc.value:
 			return
-		
+
 		epgcache = eEPGCache.getInstance()
 		evt = epgcache.lookupEventId(self.rec_ref, neweventid)
-		
+
 		if evt:
 			evt_begin = evt.getBeginTime() + 60
 			evt_end = evt.getBeginTime() + evt.getDuration() - 60
-			
+
 			if evt_begin < self.timer.begin:
 				return
-			
+
 			for checktimer in self.session.nav.RecordTimer.timer_list:
 				if checktimer == self.timer:
 					continue
 				if (checktimer.begin - evt_begin) > 3600*2:
 					break
-				
+
 				compareString = checktimer.service_ref.ref.toCompareString()
-				if compareString == self.timer.service_ref.ref.toCompareString() or compareString == self.rec_ref.toCompareString():	
+				if compareString == self.timer.service_ref.ref.toCompareString() or compareString == self.rec_ref.toCompareString():
 					if checktimer.eit == neweventid:
 						return
-					
+
 					if checktimer.begin <= evt_begin and checktimer.end >= evt_end:
 						if checktimer.vpsplugin_enabled is None or not checktimer.vpsplugin_enabled:
 							return
-						
+
 						# manuell angelegter Timer mit VPS
 						if checktimer.name == "" and checktimer.vpsplugin_time is not None:
 							checktimer.eit = neweventid
@@ -282,7 +282,7 @@ class vps_timer:
 							checktimer.vpsplugin_time = None
 							checktimer.log(0, "[VPS] changed timer (found same PDC-Time as in other VPS-recording)")
 							return
-			
+
 			# eigenen Timer überprüfen, wenn Zeiten nicht überschrieben werden dürfen
 			if not self.timer.vpsplugin_overwrite and evt_begin <= self.timer.end:
 				check_already_existing = [x for (x,y) in self.next_events if y == neweventid]
@@ -293,11 +293,11 @@ class vps_timer:
 					else:
 						self.next_events.remove( (start, neweventid) )
 						self.timer.log(0, "[VPS] delete event_id "+ str(neweventid) +" because of delay "+ str(evt_begin - start))
-					
+
 				self.next_events.append( (evt_begin, neweventid) )
 				self.next_events = sorted(self.next_events)
 				self.timer.log(0, "[VPS] add event_id "+ str(neweventid))
-				
+
 			else:
 				newevent_data = parseEvent(evt)
 				newEntry = RecordTimerEntry(ServiceReference(self.rec_ref), *newevent_data)
@@ -305,12 +305,12 @@ class vps_timer:
 				newEntry.vpsplugin_overwrite = True
 				newEntry.dirname = self.timer.dirname
 				newEntry.log(0, "[VPS] added this timer (found same PDC-Time as in other VPS-recording)")
-				
+
 				# Wenn kein Timer-Konflikt auftritt, wird der Timer angelegt.
 				res = NavigationInstance.instance.RecordTimer.record(newEntry)
 				self.timer.log(0, "[VPS] added another timer, res "+ str(res))
-	
-	
+
+
 	def copyTimer(self, start, duration):
 		starttime = start - config.recording.margin_before.getValue() * 60
 		endtime = start + duration + config.recording.margin_after.getValue() * 60
@@ -319,13 +319,13 @@ class vps_timer:
 		self.new_timer_copy.vpsplugin_overwrite = self.timer.vpsplugin_overwrite
 		self.new_timer_copy.log(0, "[VPS] added this timer")
 		NavigationInstance.instance.RecordTimer.record(self.new_timer_copy)
-		
-	
+
+
 	# startet den Hintergrundprozess
 	def program_do_start(self, mode):
 		if self.program_running or self.program_try_search_running:
 			self.program_abort()
-		
+
 		if mode == 1:
 			self.demux = -1
 			current_service = NavigationInstance.instance.getCurrentService()
@@ -337,7 +337,7 @@ class vps_timer:
 						self.demux = streamdata['demux']
 			if self.demux == -1:
 				return;
-			
+
 			self.program_try_search_running = True
 			self.program_running = False
 			mode_program = 1
@@ -345,12 +345,12 @@ class vps_timer:
 			self.program_try_search_running = False
 			self.program_running = True
 			mode_program = 0
-		
+
 		sid = self.rec_ref.getData(1)
 		tsid = self.rec_ref.getData(2)
 		onid = self.rec_ref.getData(3)
 		demux = "/dev/dvb/adapter0/demux" + str(self.demux)
-		
+
 		# PDC-Zeit?
 		if (self.timer.name == "" or self.timer.eit is None) and self.timer.vpsplugin_time is not None and not self.found_pdc:
 			mode_program += 2
@@ -362,22 +362,22 @@ class vps_timer:
 			self.timer.log(0, "[VPS] seek PDC-Time")
 			self.program.execute(cmd)
 			return
-		
+
 		cmd = vps_exe + " "+ demux +" "+ str(mode_program) +" "+ str(onid) +" "+ str(tsid) +" "+ str(sid) +" "+ str(self.timer.eit)
 		self.timer.log(0, "[VPS] start monitoring running-status")
 		self.program.execute(cmd)
-	
-	
+
+
 	def program_start(self):
 		self.demux = -1
-		
+
 		if self.dont_restart_program:
 			return
-		
+
 		self.rec_ref = self.timer.service_ref and self.timer.service_ref.ref
 		if self.rec_ref and self.rec_ref.flags & eServiceReference.isGroup:
 			self.rec_ref = getBestPlayableServiceReference(self.rec_ref, eServiceReference())
-		
+
 		# recordService (Simulation) ggf. starten
 		if self.timer.state == TimerEntry.StateWaiting:
 			if self.simulate_recordService is None:
@@ -390,11 +390,11 @@ class vps_timer:
 							# Fehler aufgetreten (kein Tuner frei?)
 							NavigationInstance.instance.stopRecordService(self.simulate_recordService)
 							self.simulate_recordService = None
-							
+
 							# in einer Minute ggf. nochmal versuchen
 							if 60 < self.nextExecution:
 								self.nextExecution = 60
-							
+
 							# Bei Overwrite versuchen ohne Fragen auf Sender zu schalten
 							if self.timer.vpsplugin_overwrite == True:
 								cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
@@ -418,15 +418,15 @@ class vps_timer:
 					streamdata = stream.getStreamingData()
 					if (streamdata and ('demux' in streamdata)):
 						self.demux = streamdata['demux']
-				
+
 				if self.demux == -1:
 					# ist noch nicht soweit(?), in einer Sekunde erneut versuchen
 					if 1 < self.nextExecution:
 						self.nextExecution = 1
 				else:
 					self.program_do_start(0)
-					
-		
+
+
 		elif self.timer.state == TimerEntry.StatePrepared or self.timer.state == TimerEntry.StateRunning:
 			stream = self.timer.record_service.stream()
 			if stream:
@@ -435,8 +435,8 @@ class vps_timer:
 					self.demux = streamdata['demux']
 			if self.demux != -1:
 				self.program_do_start(0)
-	
-	
+
+
 	# überprüft, ob etwas zu tun ist und gibt die Sekunden zurück, bis die Funktion
 	# spätestens wieder aufgerufen werden sollte
 	# oder -1, um vps_timer löschen zu lassen
@@ -444,27 +444,27 @@ class vps_timer:
 		# Simulation ggf. stoppen
 		if self.timer.state > TimerEntry.StateWaiting and self.simulate_recordService:
 			self.stop_simulation()
-		
+
 		# VPS wurde wieder deaktiviert oder Timer wurde beendet
 		if self.timer is None or self.timer.state == TimerEntry.StateEnded or self.timer.cancelled:
 			self.program_abort()
 			self.stop_simulation()
 			return -1
-		
+
 		if self.timer.vpsplugin_enabled == False or config.plugins.vps.enabled.value == False:
 			if self.activated_auto_increase:
 				self.timer.autoincrease = False
 			self.program_abort()
 			self.stop_simulation()
 			return -1
-		
+
 		self.nextExecution = 180
-		
+
 		if config.plugins.vps.initial_time.value < 2 and self.timer.vpsplugin_overwrite:
 			initial_time = 120
 		else:
 			initial_time = config.plugins.vps.initial_time.value * 60
-		
+
 		if self.timer.vpsplugin_overwrite == True:
 			if self.timer.state == TimerEntry.StateWaiting or self.timer.state == TimerEntry.StatePrepared:
 				# Startzeit verschieben
@@ -479,7 +479,7 @@ class vps_timer:
 						self.stop_simulation()
 						self.timer.log(0, "[VPS] abort timer, waited enough to find Event-ID")
 						return -1
-					
+
 					self.timer.begin += 60
 					if (self.timer.end - self.timer.begin) < 300:
 						self.timer.end += 180
@@ -492,18 +492,18 @@ class vps_timer:
 							self.stop_simulation()
 							self.timer.log(0, "[VPS] abort timer due to TimerSanityCheck")
 							return -1
-						
+
 					self.session.nav.RecordTimer.timeChanged(self.timer)
-				
+
 				if 30 < self.nextExecution:
 					self.nextExecution = 30
-		
-		
+
+
 		# Programm starten
 		if not self.program_running:
 			if self.timer.state == TimerEntry.StateRunning:
 				self.program_start()
-			
+
 			elif initial_time > 0:
 				if (self.timer.begin - initial_time) <= time():
 					self.program_start()
@@ -511,8 +511,8 @@ class vps_timer:
 					n = self.timer.begin - initial_time - time()
 					if n < self.nextExecution:
 						self.nextExecution = n
-		
-		
+
+
 		if self.timer.state == TimerEntry.StateRunning:
 			if self.activated_auto_increase and self.org_timer_end != 0 and (self.org_timer_end + (4*3600)) < time():
 				# Aufnahme läuft seit 4 Stunden im Autoincrease -> abbrechen
@@ -522,7 +522,7 @@ class vps_timer:
 				self.program_abort()
 				self.stop_simulation()
 				self.timer.log(0, "[VPS] stop recording, too much autoincrease")
-			
+
 			try:
 				if self.timer.vpsplugin_wasTimerWakeup:
 					self.timer.vpsplugin_wasTimerWakeup = False
@@ -530,7 +530,7 @@ class vps_timer:
 						RecordTimerEntry.TryQuitMainloop(False)
 			except:
 				pass
-		
+
 		return self.nextExecution
 
 class vps:
@@ -541,10 +541,10 @@ class vps:
 		self.vpstimers = [ ]
 		self.current_timers_list = [ ]
 		self.max_activation = 900
-	
+
 	def checkTimer(self):
 		nextExecution = self.max_activation
-		
+
 		# nach den Timern schauen und ggf. zur Liste hinzufügen
 		if config.plugins.vps.enabled.value == True:
 			now = time()
@@ -561,7 +561,7 @@ class vps:
 				return
 		else:
 			nextExecution = 14400
-		
+
 		# eigene Timer-Liste durchgehen
 		for o_timer in self.vpstimers[:]:
 			newtime = int(o_timer.check())
@@ -570,42 +570,42 @@ class vps:
 				self.vpstimers.remove(o_timer)
 			elif newtime < nextExecution:
 				nextExecution = newtime
-		
+
 		if nextExecution <= 0:
 			nextExecution = 1
-		
+
 		self.timer.startLongTimer(nextExecution)
-		print "[VPS-Plugin] next execution in "+ str(nextExecution) +" sec" 
-	
+		print "[VPS-Plugin] next execution in "+ str(nextExecution) +" sec"
+
 	def addTimerToList(self, timer):
 		self.vpstimers.append(vps_timer(timer, self.session))
 		self.current_timers_list.append(timer)
-	
+
 	def checksoon(self, newstart = 3000):
 		self.timer.start(newstart, True)
-	
+
 	def shutdown(self):
 		for o_timer in self.vpstimers:
 			o_timer.program_abort()
 			o_timer.stop_simulation()
-	
+
 	def checkNextAfterEventAuto(self):
-		if NavigationInstance.instance.wasTimerWakeup() and config.plugins.vps.allow_wakeup.value and len(self.session.nav.RecordTimer.timer_list) > 0:
+		if NavigationInstance.instance.getFPWasTimerWakeup() and config.plugins.vps.allow_wakeup.value and len(self.session.nav.RecordTimer.timer_list) > 0:
 			next_timer = self.session.nav.RecordTimer.timer_list[0]
 			if next_timer.vpsplugin_enabled and next_timer.afterEvent == AFTEREVENT.AUTO and (next_timer.begin - (config.plugins.vps.initial_time.value * 60) - 300) < time():
 				next_timer.vpsplugin_wasTimerWakeup = True
-	
+
 	def NextWakeup(self):
 		if config.plugins.vps.enabled.value == False or config.plugins.vps.allow_wakeup.value == False:
 			return -1
-		
+
 		try:
 			for timer in self.session.nav.RecordTimer.timer_list:
 				if timer.vpsplugin_enabled and timer.state == TimerEntry.StateWaiting and not timer.justplay and not timer.repeated and not timer.disabled:
 					return (timer.begin - (config.plugins.vps.initial_time.value * 60))
 		except:
 			pass
-		
+
 		return -1
 
 vps_timers = vps()
