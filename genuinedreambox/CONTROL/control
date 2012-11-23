@@ -1,2 +1,2 @@
 Description: Dreambox Authenticity test
-Depends: enigma2, python-twisted-web
+Depends: enigma2, python-twisted-web, python-zlib
