@@ -20,7 +20,9 @@ from datetime import timedelta, date
 # EPGCache & Event
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
 
-from twisted.internet import reactor, threads
+from twisted.internet import reactor, defer
+from twisted.python import failure
+import Queue
 
 # AutoTimer Component
 from AutoTimerComponent import preferredAutoTimerComponent
@@ -47,6 +49,35 @@ def getTimeDiff(timer, begin, end):
 	elif timer.begin <= begin <= timer.end:
 		return timer.end - begin
 	return 0
+
+def blockingCallFromThread(f, *a, **kw):
+	"""
+	  Modified version of twisted.internet.threads.blockingCallFromThread
+	  which waits 30s for results and otherwise assumes the system to be shut down.
+	  This is an ugly workaround for a twisted-internal deadlock.
+	  Please keep the look intact in case someone comes up with a way
+	  to reliably detect from the outside if twisted is currently shutting
+	  down.
+	"""
+	queue = Queue.Queue()
+	def _callFromThread():
+		result = defer.maybeDeferred(f, *a, **kw)
+		result.addBoth(queue.put)
+	reactor.callFromThread(_callFromThread)
+
+	result = None
+	while True:
+		try:
+			result = queue.get(True, 30)
+		except Queue.Empty as qe:
+			if True: #not reactor.running: # reactor.running is only False AFTER shutdown, we are during.
+				raise ValueError("Reactor no longer active, aborting.")
+		else:
+			break
+
+	if isinstance(result, failure.Failure):
+		result.raiseException()
+	return result
 
 typeMap = {
 	"exact": eEPGCache.EXAKT_TITLE_SEARCH,
@@ -207,7 +238,7 @@ class AutoTimer:
 					elif not hasattr(timer, 'extdesc'):
 						timer.extdesc = ''
 					recorddict[str(timer.service_ref)].append(timer)
-		threads.blockingCallFromThread(reactor, getRecordDict, recorddict)
+		blockingCallFromThread(getRecordDict, recorddict)
 
 		# Create dict of all movies in all folders used by an autotimer to compare with recordings
 		# The moviedict will be filled only if one AutoTimer is configured to avoid duplicate description for any recordings
@@ -296,7 +327,7 @@ class AutoTimer:
 					# Get all events
 					#  eEPGCache.lookupEvent( [ format of the returned tuples, ( service, 0 = event intersects given start_time, start_time -1 for now_time), ] )
 					test.insert(0, 'RITBDSE')
-					allevents = threads.blockingCallFromThread(reactor, epgcache.lookupEvent, test) or []
+					allevents = blockingCallFromThread(epgcache.lookupEvent, test) or []
 
 					# Filter events
 					for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
@@ -306,7 +337,7 @@ class AutoTimer:
 
 			else:
 				# Search EPG, default to empty list
-				epgmatches = threads.blockingCallFromThread(reactor, epgcache.search, ('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
+				epgmatches = blockingCallFromThread(epgcache.search, ('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
 
 			# Sort list of tuples by begin time 'B'
 			epgmatches.sort(key=itemgetter(3))
@@ -318,7 +349,7 @@ class AutoTimer:
 			for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
 
 				eserviceref = eServiceReference(serviceref)
-				evt = threads.blockingCallFromThread(reactor, epgcache.lookupEventId, eserviceref, eit)
+				evt = blockingCallFromThread(epgcache.lookupEventId, eserviceref, eit)
 				if not evt:
 					print("[AutoTimer] Could not create Event!")
 					continue
@@ -494,7 +525,7 @@ class AutoTimer:
 
 				if oldExists:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?
-					threads.blockingCallFromThread(reactor, recordHandler.timeChanged, newEntry)
+					blockingCallFromThread(recordHandler.timeChanged, newEntry)
 
 					if renameTimer is not None and timer.series_labeling:
 						renameTimer(newEntry, name, evtBegin, evtEnd)
@@ -506,7 +537,7 @@ class AutoTimer:
 						newEntry.log(504, "[AutoTimer] Try to add similar Timer because of conflicts with %s." % (conflictString))
 
 					# Try to add timer
-					conflicts = threads.blockingCallFromThread(reactor, recordHandler.record, newEntry)
+					conflicts = blockingCallFromThread(recordHandler.record, newEntry)
 
 					if conflicts:
 						# Maybe use newEntry.log
@@ -560,7 +591,7 @@ class AutoTimer:
 							newEntry.log(503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString))
 							newEntry.disabled = True
 							# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
-							conflicts = threads.blockingCallFromThread(reactor, recordHandler.record, newEntry)
+							conflicts = blockingCallFromThread(recordHandler.record, newEntry)
 
 		return (total, new, modified, timers, conflicting, similars)
 
