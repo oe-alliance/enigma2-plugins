@@ -406,6 +406,9 @@ class MyTubePlayerService():
 		if self.cached_auth_request.get('YouTubeUser') is not None:
 			return self.cached_auth_request.get('YouTubeUser')
 
+		if self.is_auth() is False:
+			return ''
+
 		# current gdata auth class save doesnt save realuser
 		return 'Logged In'
 
