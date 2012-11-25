@@ -151,6 +151,7 @@ config.plugins.mytube.general.videodir = ConfigSelection(default = default, choi
 config.plugins.mytube.general.history = ConfigText(default="")
 config.plugins.mytube.general.clearHistoryOnClose = ConfigYesNo(default = False)
 config.plugins.mytube.general.AutoLoadFeeds = ConfigYesNo(default = True)
+config.plugins.mytube.general.resetPlayService = ConfigYesNo(default = False)
 config.plugins.mytube.general.username = ConfigText(default="", fixed_size = False)
 config.plugins.mytube.general.password = ConfigPassword(default="")
 #config.plugins.mytube.general.useHTTPProxy = ConfigYesNo(default = False)
@@ -552,8 +553,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		elif self.currList == "feedlist":
 			menulist = [(_("MyTube Settings"), "settings")]
 			menulist.extend((
-					(_("View user videos"), "user_videos"),
 					(_("View related videos"), "related"),
+					(_("View user videos"), "user_videos"),
 					(_("View response videos"), "response"),
 				))
 			
@@ -755,7 +756,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					if myurl is not None:
 						myreference = eServiceReference(4097,0,myurl)
 						myreference.setName(myentry.getTitle())
-						self.session.open(MyTubePlayer, myreference, self.lastservice, infoCallback = self.showVideoInfo, nextCallback = self.getNextEntry, prevCallback = self.getPrevEntry )
+						self.session.openWithCallback(self.onPlayerClosed, MyTubePlayer, myreference, self.lastservice, infoCallback = self.showVideoInfo, nextCallback = self.getNextEntry, prevCallback = self.getPrevEntry )
 					else:
 						self.session.open(MessageBox, _("Sorry, video is not available!"), MessageBox.TYPE_INFO)
 		elif self.currList == "historylist":
@@ -767,6 +768,10 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				print "Search searchcontext",searchContext
 				self.setState('getSearchFeed')
 				self.runSearch(searchContext)
+
+	def onPlayerClosed(self):
+		if config.plugins.mytube.general.resetPlayService.value is True:
+			self.session.nav.playService(self.lastservice)
 
 	def keyUp(self):
 		print "self.currList im KeyUp",self.currList
@@ -1864,6 +1869,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def leavePlayerConfirmed(self, answer):
 		answer = answer and answer[1]
 		if answer == "quit":
+			print 'quited'
 			self.close()
 		elif answer == "playnext":
 			self.playNextFile()
