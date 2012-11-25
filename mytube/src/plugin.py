@@ -313,7 +313,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"menu" : self.handleMenu,
 		}, -2)
 
-		self["suggestionactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "HelpActions"],
+		self["suggestionactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "HelpActions", "NumberActions"],
 		{
 			"ok": self.keyOK,
 			"back": self.switchToConfigList,
@@ -324,6 +324,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"down": self.keyDown,
 			"left": self.keyLeft,
 			"right": self.keyRight,
+			"0": self.toggleScreenVisibility
 		}, -2)
 
 
@@ -772,6 +773,12 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def onPlayerClosed(self):
 		if config.plugins.mytube.general.resetPlayService.value is True:
 			self.session.nav.playService(self.lastservice)
+
+	def toggleScreenVisibility(self):
+		if self.shown is True:
+			self.hide()
+		else:
+			self.show()
 
 	def keyUp(self):
 		print "self.currList im KeyUp",self.currList
