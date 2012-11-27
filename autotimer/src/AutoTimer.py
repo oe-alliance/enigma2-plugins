@@ -22,6 +22,7 @@ from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInforma
 
 from twisted.internet import reactor, defer
 from twisted.python import failure
+from threading import currentThread
 import Queue
 
 # AutoTimer Component
@@ -50,7 +51,7 @@ def getTimeDiff(timer, begin, end):
 		return timer.end - begin
 	return 0
 
-def blockingCallFromThread(f, *a, **kw):
+def blockingCallFromMainThread(f, *a, **kw):
 	"""
 	  Modified version of twisted.internet.threads.blockingCallFromThread
 	  which waits 30s for results and otherwise assumes the system to be shut down.
@@ -207,6 +208,12 @@ class AutoTimer:
 		similar = defaultdict(list)			# Contains the the marked similar eits and the conflicting strings
 		similars = []						# Contains the added similar timers
 
+		if currentThread().getName() == 'MainThread':
+			doBlockingCallFromMainThread = lambda f, *a, **kw: f(*a, **kw)
+		else:
+			doBlockingCallFromMainThread = blockingCallFromMainThread
+
+
 		# NOTE: the config option specifies "the next X days" which means today (== 1) + X
 		delta = timedelta(days = config.plugins.autotimer.maxdaysinfuture.value + 1)
 		evtLimit = mktime((date.today() + delta).timetuple())
@@ -238,7 +245,7 @@ class AutoTimer:
 					elif not hasattr(timer, 'extdesc'):
 						timer.extdesc = ''
 					recorddict[str(timer.service_ref)].append(timer)
-		blockingCallFromThread(getRecordDict, recorddict)
+		doBlockingCallFromMainThread(getRecordDict, recorddict)
 
 		# Create dict of all movies in all folders used by an autotimer to compare with recordings
 		# The moviedict will be filled only if one AutoTimer is configured to avoid duplicate description for any recordings
@@ -327,7 +334,7 @@ class AutoTimer:
 					# Get all events
 					#  eEPGCache.lookupEvent( [ format of the returned tuples, ( service, 0 = event intersects given start_time, start_time -1 for now_time), ] )
 					test.insert(0, 'RITBDSE')
-					allevents = blockingCallFromThread(epgcache.lookupEvent, test) or []
+					allevents = doBlockingCallFromMainThread(epgcache.lookupEvent, test) or []
 
 					# Filter events
 					for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
@@ -337,7 +344,7 @@ class AutoTimer:
 
 			else:
 				# Search EPG, default to empty list
-				epgmatches = blockingCallFromThread(epgcache.search, ('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
+				epgmatches = doBlockingCallFromMainThread(epgcache.search, ('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
 
 			# Sort list of tuples by begin time 'B'
 			epgmatches.sort(key=itemgetter(3))
@@ -349,7 +356,7 @@ class AutoTimer:
 			for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
 
 				eserviceref = eServiceReference(serviceref)
-				evt = blockingCallFromThread(epgcache.lookupEventId, eserviceref, eit)
+				evt = doBlockingCallFromMainThread(epgcache.lookupEventId, eserviceref, eit)
 				if not evt:
 					print("[AutoTimer] Could not create Event!")
 					continue
@@ -525,7 +532,7 @@ class AutoTimer:
 
 				if oldExists:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?
-					blockingCallFromThread(recordHandler.timeChanged, newEntry)
+					doBlockingCallFromMainThread(recordHandler.timeChanged, newEntry)
 
 					if renameTimer is not None and timer.series_labeling:
 						renameTimer(newEntry, name, evtBegin, evtEnd)
@@ -537,7 +544,7 @@ class AutoTimer:
 						newEntry.log(504, "[AutoTimer] Try to add similar Timer because of conflicts with %s." % (conflictString))
 
 					# Try to add timer
-					conflicts = blockingCallFromThread(recordHandler.record, newEntry)
+					conflicts = doBlockingCallFromMainThread(recordHandler.record, newEntry)
 
 					if conflicts:
 						# Maybe use newEntry.log
@@ -591,7 +598,7 @@ class AutoTimer:
 							newEntry.log(503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString))
 							newEntry.disabled = True
 							# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
-							conflicts = blockingCallFromThread(recordHandler.record, newEntry)
+							conflicts = doBlockingCallFromMainThread(recordHandler.record, newEntry)
 
 		return (total, new, modified, timers, conflicting, similars)
 
