@@ -7,11 +7,14 @@ PluginLanguageDomain = "TeleText"
 PluginLanguagePath = "Extensions/TeleText/locale"
 
 def localeInit():
-	lang = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
 	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-	print "[%s] set language to [%s]" % (PluginLanguageDomain, lang)
+# 	print "[%s] set language to [%s]" % (PluginLanguageDomain, lang)
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
- 
+
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
@@ -21,7 +24,7 @@ def _(txt):
 
 def _log(message):
   print "[TeleText]", message
-  
+
 def _debug(message):
   d=open("/tmp/dbttcp.log","a")
   d.write("[TeleText] %s\n" % message)
