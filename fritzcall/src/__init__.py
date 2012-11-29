@@ -8,17 +8,26 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS #@UnresolvedImport
 import gettext, os
 from enigma import eBackgroundFileEraser
 
+PluginLanguageDomain = "FritzCall"
+PluginLanguagePath = "Extensions/FritzCall/locale/"
+
 def localeInit():
-	gettext.bindtextdomain("FritzCall", resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/locale/"))
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
+def _(txt):
+	t = gettext.dgettext(PluginLanguageDomain, txt)
+	if t == txt:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
+		t = gettext.gettext(txt)
+	return t
 
 localeInit()
 language.addCallback(localeInit)
-
-def _(txt): # pylint: disable-msg=C0103
-	td = gettext.dgettext("FritzCall", txt)
-	if td == txt:
-		td = gettext.gettext(txt)
-	return td
 
 def initDebug():
 	try:

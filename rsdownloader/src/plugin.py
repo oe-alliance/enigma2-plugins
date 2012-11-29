@@ -16,7 +16,7 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from Components.ScrollLabel import ScrollLabel
 from container.decrypt import decrypt
 from enigma import eListboxPythonMultiContent, eTimer, gFont, RT_HALIGN_CENTER, RT_HALIGN_RIGHT
-from os import environ, listdir, remove, system
+from os import listdir, remove, system
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Console import Console as ConsoleScreen
@@ -72,19 +72,21 @@ config.plugins.Uploaded.password = ConfigText(default="", fixed_size=False)
 
 ##############################################################################
 
+PluginLanguageDomain = "RSDownloader"
+PluginLanguagePath = "Extensions/RSDownloader/locale/"
+
 def localeInit():
 	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
 		lang = language.getLanguage()
 	else:
 		lang = language.getLanguage()[:2]
-	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-	gettext.textdomain("enigma2")
-	gettext.bindtextdomain("RSDownloader", "%s%s"%(resolveFilename(SCOPE_PLUGINS), "Extensions/RSDownloader/locale/"))
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
-	t = gettext.dgettext("RSDownloader", txt)
+	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
 
@@ -158,7 +160,7 @@ def get(url):
 		return data.read()
 	except:
 		return ""
-
+   
 def post(url, data):
 	try:
 		return urllib2.urlopen(url, data).read()
@@ -650,7 +652,7 @@ class RS:
 		except:
 			file_list = []
 			writeLog("Error while searching for lists: " + str(sys.exc_info()))
-
+		
 		finished_downloads = []
 		for download in self.downloads:
 			if download.status == _("Finished"):
@@ -812,9 +814,9 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 
 	def __init__(self, session):
 		ChangedScreen.__init__(self, session)
-
+		
 		self["key_green"] = Label(_("Save"))
-
+		
 		ConfigListScreen.__init__(self, [
 			getConfigListEntry(_("Download in the background:"), config.plugins.RSDownloader.onoff),
 			getConfigListEntry(_("Username:"), config.plugins.RSDownloader.username),
@@ -844,7 +846,7 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 			getConfigListEntry(_("Don't reconnect after:"), config.plugins.RSDownloader.reconnect_end_time),
 			getConfigListEntry(_("Restart failed after 10 minutes:"), config.plugins.RSDownloader.autorestart_failed),
 			getConfigListEntry(_("Mark files < 1 MB as failed:"), config.plugins.RSDownloader.mark_small_as_failed)])
-
+		
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {"green": self.save, "cancel": self.exit}, -1)
 
 	def save(self):
@@ -890,14 +892,14 @@ class RSSearch(Screen):
 	def __init__(self, session, searchFor):
 		Screen.__init__(self, session)
 		self.session = session
-
+		
 		self.searchFor = searchFor.replace(" ", "%2B")
 		self.maxPage = 1
 		self.curPage = 1
 		self.files = []
-
+		
 		self["list"] = MenuList([])
-
+		
 		self["actions"] = ActionMap(["OkCancelActions", "InfobarChannelSelection"],
 			{
 				"historyBack": self.previousPage,
@@ -905,7 +907,7 @@ class RSSearch(Screen):
 				"ok": self.okClicked,
 				"cancel": self.close
 			}, -1)
-
+		
 		self.onLayoutFinish.append(self.search)
 
 	def okClicked(self):
@@ -926,7 +928,7 @@ class RSSearch(Screen):
 	def searchCallback(self, html=""):
 		list = []
 		files = []
-
+		
 		if html.__contains__("Nothing found, sorry."):
 			self.session.open(MessageBox, (_("Error while searching http://rapidshare-search-engine.com!\n\nError: Nothing found, sorry.")), MessageBox.TYPE_ERROR)
 			self.instance.setTitle(_("Nothing found, sorry."))
@@ -937,16 +939,16 @@ class RSSearch(Screen):
 				tmp = tmp[idx+6:]
 				idx = tmp.index("'")
 				pageNumber = tmp[:idx]
-
+				
 				try:
 					pageNumber = int(pageNumber)
 					if pageNumber > self.maxPage:
 						self.maxPage = pageNumber
 				except:
 					pass
-
+				
 				self.instance.setTitle(_("Page %d / %d. Push < > to switch the page...")%(self.curPage, self.maxPage))
-
+			
 			while html.__contains__('title="Download"'):
 				idx = html.index('title="Download"')
 				html = html[idx:]
@@ -958,8 +960,8 @@ class RSSearch(Screen):
 				html = html[idx:]
 				idx = html.index('"')
 				url = html[:idx]
-
-				files.append(url)
+				
+				files.append(url) 
 				try:
 					urllist = url.split("/")
 					idx = len(urllist) - 1
@@ -967,7 +969,7 @@ class RSSearch(Screen):
 					list.append("%s - %s"%(size, name))
 				except:
 					list.append("%s - %s"%(size, url))
-
+		
 		self.files = files
 		self["list"].setList(list)
 
@@ -996,7 +998,7 @@ class RSLogScreen(ChangedScreen):
 
 	def __init__(self, session):
 		ChangedScreen.__init__(self, session)
-
+		
 		try:
 			f = open("/tmp/rapidshare.log")
 			log = f.read()
@@ -1004,7 +1006,7 @@ class RSLogScreen(ChangedScreen):
 		except:
 			log = ""
 		self["label"] = ScrollLabel(log)
-
+		
 		self["actions"] = ActionMap(["WizardActions"],
 			{
 				"ok": self.close,
@@ -1106,7 +1108,7 @@ class Unrar:
 		self.timer.callback.append(self.checkUnrar)
 		self.timer.start(30000, 1)
 		self.xmlFile = ("%s/unrar.xml"%config.plugins.RSDownloader.lists_directory.value).replace("//", "/")
-
+		
 	def addToList(self, name, password, package=None):
 		entry = UnrarEntry(name, password, package)
 		self.list.append(entry)
@@ -1212,15 +1214,15 @@ class UnrarPackageSelector(ChangedScreen):
 
 	def __init__(self, session):
 		ChangedScreen.__init__(self, session)
-
+		
 		self["list"] = MenuList([])
-
+		
 		self["actions"] = ActionMap(["OkCancelActions"],
 			{
 				"ok": self.okClicked,
 				"cancel": self.close
 			}, -1)
-
+		
 		self.onLayoutFinish.append(self.updateList)
 
 	def updateList(self):
@@ -1270,18 +1272,18 @@ class UnrarManager(ChangedScreen):
 	def __init__(self, session):
 		ChangedScreen.__init__(self, session)
 		self.session = session
-
+		
 		self["key_red"] = Label(_("Delete"))
 		self["key_green"] = Label(_("Add"))
 		self["list"] = MenuList([])
-
+		
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
 			{
 				"red": self.delete,
 				"green": self.add,
 				"cancel": self.close
 			}, prio=-1)
-
+		
 		self.onLayoutFinish.append(self.updateList)
 
 	def updateList(self):
@@ -1349,17 +1351,17 @@ class RSMain(ChangedScreen):
 	def __init__(self, session):
 		ChangedScreen.__init__(self, session)
 		self.session = session
-
+		
 		self["key_red"] = Label(_("Delete"))
 		self["key_green"] = Label(_("Search"))
 		self["key_yellow"] = Label(_("Add"))
 		self["key_blue"] = Label(_("Config"))
 		self["key_menu"] = Label(_("Menu"))
 		self["list"] = RSList([])
-
+		
 		self.refreshTimer = eTimer()
 		self.refreshTimer.callback.append(self.updateList)
-
+		
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "InfobarMenuActions"],
 			{
 				"mainMenu": self.menu,
@@ -1369,7 +1371,7 @@ class RSMain(ChangedScreen):
 				"yellow": self.add,
 				"blue": self.config
 			}, prio=-1)
-
+		
 		self.onLayoutFinish.append(self.updateList)
 
 	def menu(self):

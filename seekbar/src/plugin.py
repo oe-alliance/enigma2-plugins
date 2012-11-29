@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ##
 ## Seekbar
 ## by AliAbdul
@@ -10,7 +11,6 @@ from Components.Language import language
 from Components.Pixmap import MovingPixmap
 from enigma import eTimer
 from keyids import KEYIDS
-from os import environ
 from Screens.InfoBar import MoviePlayer
 from Screens.Screen import Screen
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
@@ -25,20 +25,26 @@ config.plugins.Seekbar.sensibility = ConfigInteger(default=10, limits=(1, 10))
 
 ##############################################
 
-if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
-	lang = language.getLanguage()
-else:
-	lang = language.getLanguage()[:2]
-os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-gettext.textdomain("enigma2")
-gettext.bindtextdomain("Seekbar", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/Seekbar/locale/"))
+PluginLanguageDomain = "Seekbar"
+PluginLanguagePath = "Extensions/Seekbar/locale/"
+
+def localeInit():
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
-	t = gettext.dgettext("Seekbar", txt)
+	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
+
+localeInit()
+language.addCallback(localeInit)
 
 ##############################################
 
@@ -47,6 +53,7 @@ class Seekbar(ConfigListScreen, Screen):
 	<screen position="center,center" size="560,160" title="%s">
 		<widget name="config" position="10,10" size="540,100" scrollbarMode="showOnDemand" />
 		<widget name="cursor" position="0,125" size="8,18" pixmap="skin_default/position_arrow.png" alphatest="on" />
+
 		<widget source="session.CurrentService" render="PositionGauge" position="145,140" size="270,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
 			<convert type="ServicePosition">Gauge</convert>
 		</widget>
@@ -108,6 +115,7 @@ class Seekbar(ConfigListScreen, Screen):
 		if self.length:
 			x = 145 + int(2.7 * self.percent)
 			self["cursor"].moveTo(x, 125, 1)
+
 			self["cursor"].startMoving()
 			pts = int(float(self.length[1]) / 100.0 * self.percent)
 			self["time"].setText("%d:%02d" % ((pts/60/90000), ((pts/90000)%60)))

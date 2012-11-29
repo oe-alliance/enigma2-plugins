@@ -18,7 +18,6 @@ from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
-from os import environ as os_environ
 from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 import re
 try:
@@ -42,18 +41,21 @@ config.plugins.imdb = ConfigSubsection()
 config.plugins.imdb.showinplugins = ConfigYesNo(default = False)
 config.plugins.imdb.force_english = ConfigYesNo(default=False)
 
+PluginLanguageDomain = "IMDb"
+PluginLanguagePath = "Extensions/IMDb/locale"
+
 def localeInit():
 	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
 		lang = language.getLanguage()
 	else:
 		lang = language.getLanguage()[:2]
-	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-	gettext.bindtextdomain("IMDb", resolveFilename(SCOPE_PLUGINS, "Extensions/IMDb/locale"))
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
-	t = gettext.dgettext("IMDb", txt)
+	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
-		print("[IMDb] fallback to default translation for", txt)
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
 

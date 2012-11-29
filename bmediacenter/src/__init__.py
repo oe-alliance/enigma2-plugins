@@ -33,20 +33,28 @@ try:
 	loadSkin("/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/" + config.plugins.mc_globalsettings.currentskin.path.value)
 except Exception, e:
 	loadSkin("/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/default/skin.xml")
+
 PluginLanguageDomain = "BMediaCenter"
 PluginLanguagePath = "Extensions/BMediaCenter/locale"
-# Load Language
+
 def localeInit():
-	lang = language.getLanguage()[:2] 
-	os.environ["LANGUAGE"] = lang
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
+
 localeInit()
 language.addCallback(localeInit)
+
 # Favorite Folders
 def addFavoriteFolders():
 	i = len(config.plugins.mc_favorites.folders)

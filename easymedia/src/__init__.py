@@ -1,20 +1,25 @@
 # -*- coding: utf-8 -*-
 from Components.Language import language
-from os import environ as os_environ
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext
 
-myPlugin = "EasyMedia"
+PluginLanguageDomain = "EasyMedia"
+PluginLanguagePath = "Extensions/EasyMedia/locale"
 
 def localeInit():
-	os_environ["LANGUAGE"] = language.getLanguage()[:2]
-	gettext.bindtextdomain(myPlugin, ("/usr/lib/enigma2/python/Plugins/Extensions/"+myPlugin+"/locale"))
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
-	t = gettext.dgettext(myPlugin, txt)
+	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
 
 localeInit()
 language.addCallback(localeInit)
-

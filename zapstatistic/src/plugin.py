@@ -7,7 +7,6 @@ from Components.Language import language
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
 from enigma import eListboxPythonMultiContent, eServiceReference, gFont
-from os import environ
 from Plugins.Plugin import PluginDescriptor
 
 from Screens.ChoiceBox import ChoiceBox
@@ -21,24 +20,25 @@ import os, gettext
 
 ###########################################################
 
+PluginLanguageDomain = "ZapStatistic"
+PluginLanguagePath = "Extensions/ZapStatistic/locale/"
+
 def localeInit():
 	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
 		lang = language.getLanguage()
 	else:
 		lang = language.getLanguage()[:2]
-	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-	gettext.textdomain("enigma2")
-	gettext.bindtextdomain("ZapStatistic", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/ZapStatistic/locale/"))
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
-	t = gettext.dgettext("ZapStatistic", txt)
+	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
 
 localeInit()
-
 language.addCallback(localeInit)
 
 ###########################################################
@@ -447,6 +447,7 @@ class ZapStatisticScreen(Screen, ProtectedScreen):
 				"green": self.sortByName,
 				"yellow": self.sortByDate,
 				"blue": self.duration,
+
 				"mainMenu": self.menu
 			}, prio=-1)
 		
@@ -563,20 +564,33 @@ class ZapStatisticScreen(Screen, ProtectedScreen):
 
 	def menu(self):
 		list = []
+
 		list.append((_("Play entry"), self.play))
+
 		list.append((_("Delete entry"), self.delete))
+
 		list.append((_("Delete all entries"), self.deleteAll))
+
 		list.append((_("Sort by name (ascending)"), self.sortByNameAscending))
+
 		list.append((_("Sort by name (descending)"), self.sortByNameDescending))
+
 		list.append((_("Sort by date (ascending)"), self.sortByDateAscending))
+
 		list.append((_("Sort by date (descending)"), self.sortByDateDescending))
+
 		list.append((_("Show duration window"), self.duration))
+
 		list.append((_("Show combined duration window"), self.combined))
+
 		list.append((_("Close plugin"), self.close))
+
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Please choose a function..."), list=list)
 
 	def menuCallback(self, callback=None):
+
 		if callback is not None:
+
 			callback[1]()
 
 ###########################################################

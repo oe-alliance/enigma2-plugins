@@ -8,13 +8,23 @@
 # Software Foundation; either version 2, or (at your option) any later
 # version.
 #===============================================================================
-from . import _
+
 
 from Plugins.Plugin import PluginDescriptor
 
 from VlcServerList import VlcServerListScreen
 from VlcMediaList import VlcMediaListScreen
 from VlcServerConfig import vlcServerConfig
+
+import os, gettext
+
+def _(txt):
+	t = gettext.dgettext("VlcPlayer", txt)
+	if t == txt:
+		print "[VLC] fallback to default translation for", txt
+		t = gettext.gettext(txt)
+	return t
+	
 
 class __VlcManager():
 	def __init__(self, session):
@@ -27,7 +37,7 @@ class __VlcManager():
 			self.openServerlist()
 		else:
 			self.openMedialist(defaultServer)
-
+		
 	def openServerlist(self):
 		print "[VLC] openServerlist"
 		defaultServer = vlcServerConfig.getDefaultServer()
@@ -36,7 +46,7 @@ class __VlcManager():
 	def serverlistClosed(self, selectedServer, defaultServer):
 		vlcServerConfig.setAsDefault(defaultServer)
 		self.openMedialist(selectedServer)
-
+		
 	def openMedialist(self, selectedServer):
 		print "[VLC] openMedialist"
 		if selectedServer is not None:

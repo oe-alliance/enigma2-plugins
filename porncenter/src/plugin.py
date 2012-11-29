@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
 # Porn Center by AliAbdul
 from Additions.Plugin import cache, getPlugins
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
-from Components.ConfigList import ConfigListScreen
+from Components.ConfigList import ConfigListScree# -*- coding: utf-8 -*-
+from Components.Language import language
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
+import os, gettextn
 from Components.FileList import FileList
 from Components.Label import Label
 from Components.Language import language
@@ -11,7 +15,7 @@ from Components.MultiContent import MultiContentEntryPixmapAlphaBlend, MultiCont
 from Components.PluginComponent import plugins
 from Components.ProgressBar import ProgressBar
 from enigma import eListboxPythonMultiContent, eServiceReference, eTimer, getDesktop, gFont
-from os import environ, remove
+from os import remove
 from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import MoviePlayer
 from Screens.MessageBox import MessageBox
@@ -32,19 +36,21 @@ HEIGHT = size.height()
 
 ##################################################
 
+PluginLanguageDomain = "PornCenter"
+PluginLanguagePath = "Extensions/PornCenter/locale/"
+
 def localeInit():
 	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
 		lang = language.getLanguage()
 	else:
 		lang = language.getLanguage()[:2]
-	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-	gettext.textdomain("enigma2")
-	gettext.bindtextdomain("PornCenter", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PornCenter/locale/"))
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
-	t = gettext.dgettext("PornCenter", txt)
+	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
 

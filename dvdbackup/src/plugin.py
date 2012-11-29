@@ -26,16 +26,21 @@ import gettext, os, stat
 
 #################################################
 
+PluginLanguageDomain = "DVDBackup"
+PluginLanguagePath = "Extensions/DVDBackup/locale/"
+ 
 def localeInit():
-	lang = language.getLanguage()
-	os.environ["LANGUAGE"] = lang[:2]
-	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-	gettext.textdomain("enigma2")
-	gettext.bindtextdomain("DVDBackup", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/DVDBackup/locale/"))
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
-	t = gettext.dgettext("DVDBackup", txt)
+	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
 

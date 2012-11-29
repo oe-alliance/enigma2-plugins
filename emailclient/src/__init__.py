@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Common functions for EmailClient
 '''
@@ -6,18 +7,26 @@ from Components.Language import language
 from Components.config import config
 import os, gettext, time
 
-lang = language.getLanguage()
-os.environ["LANGUAGE"] = lang[:2]
-gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-gettext.textdomain("enigma2")
-gettext.bindtextdomain("EmailClient", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/EmailClient/locale/"))
+PluginLanguageDomain = "EmailClient"
+PluginLanguagePath = "Extensions/EmailClient/locale/"
+
+def localeInit():
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
-	# pylint: disable-msg=C0103
-	t = gettext.dgettext("EmailClient", txt)
+	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
+
+localeInit()
+language.addCallback(localeInit)
 
 def initLog():
 	try:

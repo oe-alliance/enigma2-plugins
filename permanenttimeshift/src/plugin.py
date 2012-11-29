@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #####################################################
 # Permanent Timeshift Plugin for Enigma2 Dreamboxes
 # Coded by Homey (c) 2012
@@ -34,7 +35,7 @@ from RecordTimer import RecordTimer, RecordTimerEntry, parseEvent
 
 from random import randint
 from enigma import eTimer, eServiceCenter, eBackgroundFileEraser, iPlayableService, iRecordableService, iServiceInformation
-from os import environ, stat as os_stat, listdir as os_listdir, link as os_link, path as os_path, system as os_system, statvfs
+from os import stat as os_stat, listdir as os_listdir, link as os_link, path as os_path, system as os_system, statvfs
 from time import localtime, time, gmtime, strftime
 from timer import TimerEntry
 
@@ -46,19 +47,21 @@ import Screens.Standby
 ###   Multilanguage Init   ###
 ##############################
 
+PluginLanguageDomain = "PermanentTimeshift"
+PluginLanguagePath = "Extensions/PermanentTimeshift/locale/"
+
 def localeInit():
 	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
 		lang = language.getLanguage()
 	else:
 		lang = language.getLanguage()[:2]
-	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-	gettext.textdomain("enigma2")
-	gettext.bindtextdomain("PermanentTimeshift", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PermanentTimeshift/locale/"))
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
-	t = gettext.dgettext("PermanentTimeshift", txt)
+	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ##
 ## Podcast
 ## by AliAbdul
@@ -5,14 +6,17 @@
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
+
 from Components.FileList import FileList
 from Components.Label import Label
 from Components.Language import language
+
 from Components.MenuList import MenuList
 from Components.PluginComponent import plugins
 from Components.ProgressBar import ProgressBar
+
 from enigma import eServiceReference, eTimer
-from os import environ, system
+from os import system
 from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import MoviePlayer
 from Screens.MessageBox import MessageBox
@@ -26,19 +30,21 @@ import os, gettext, re
 
 ###################################################
 
+PluginLanguageDomain = "Podcast"
+PluginLanguagePath = "Extensions/Podcast/locale/"
+
 def localeInit():
 	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
 		lang = language.getLanguage()
 	else:
 		lang = language.getLanguage()[:2]
-	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-	gettext.textdomain("enigma2")
-	gettext.bindtextdomain("Podcast", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/Podcast/locale/"))
+	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
-	t = gettext.dgettext("Podcast", txt)
+	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
 
@@ -144,9 +150,12 @@ bufferThread = BufferThread()
 class PodcastBuffer(Screen):
 	skin = """
 		<screen position="center,center" size="520,80" title="%s" >
+
 			<widget name="info" position="5,5" size="510,40" font="Regular;18" halign="center" valign="center" />
 			<widget name="progress" position="100,50" size="320,14" pixmap="skin_default/progress_big.png" borderWidth="2" borderColor="#cccccc" />
+
 		</screen>""" % _("Podcast")
+
 
 	def __init__(self, session, url, file):
 		self.session = session
@@ -194,10 +203,15 @@ class PodcastBuffer(Screen):
 class PodcastMovies(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
+
 			<widget name="list" position="5,5" size="410,250" scrollbarMode="showOnDemand" />
+
 			<eLabel position="5,260" size="420,2" backgroundColor="#ffffff" />
+
 			<widget name="info" position="5,265" size="420,90" font="Regular;18" />
+
 		</screen>""" % _("Podcast")
+
 
 	def __init__(self, session, url):
 		self.session = session
@@ -219,7 +233,9 @@ class PodcastMovies(Screen):
 	def ok(self):
 		if self.working == False:
 			if len(self.list) > 0:
+
 				idx = self["list"].getSelectionIndex()
+
 				(url, length, type) = self.splitExtraInfo(self.movies[idx][1])
 				if config.plugins.Podcast.buffer.value:
 					file = url
@@ -265,12 +281,15 @@ class PodcastMovies(Screen):
 		for item in items:
 			if '<description></description>' in item:
 				reonecat2 = re.compile(r'<title>(.+?)</title>.+?<enclosure(.+?)/>.+?', re.DOTALL)
+
 				for title, extra in reonecat2.findall(item):
 					if title.startswith("<![CDATA["):
 						title = title[9:]
 					if title.endswith("]]>"):
 						title = title[:-3]
+
 					self.list.append(encodeUrl(title))
+
 					self.movies.append(["", extra])
 			else:
 				reonecat2 = re.compile(r'<title>(.+?)</title>.+?<description>(.+?)</description>.+?<enclosure(.+?)/>.+?', re.DOTALL)
@@ -284,9 +303,13 @@ class PodcastMovies(Screen):
 						description = description[idx+10:]
 					if description.endswith("]]>"):
 						description = description[:-3]
+
 					self.list.append(encodeUrl(title))
+
 					self.movies.append([description, extra])
+
 		self["list"].setList(self.list)
+
 		self.showInfo()
 		self.working = False
 
@@ -295,39 +318,73 @@ class PodcastMovies(Screen):
 		self.instance.setTitle(_("Error getting movies"))
 		self.working = False
 
+
+
 	def showInfo(self):
+
 		if len(self.list) > 0:
+
 			idx = self["list"].getSelectionIndex()
+
 			description = self.movies[idx][0]
+
 			(url, length, type) = self.splitExtraInfo(self.movies[idx][1])
+
 			self["info"].setText("%s: %s   %s: %s\n%s" % (_("Length"), length, _("Type"), type, encodeUrl(description)))
 
+
+
 	def splitExtraInfo(self, info):
+
 		if info.__contains__('url="'):
+
 			idx = info.index('url="')
+
 			url = info[idx+5:]
+
 			idx = url.index('"')
+
 			url = url[:idx]
+
 		else:
+
 			url = "N/A"
+
 		
+
 		length = "N/A"
+
 		if info.__contains__('length="'):
+
 			idx = info.index('length="')
+
 			length = info[idx+8:]
+
 			idx = length.index('"')
+
 			length = length[:idx]
 			if length:
+
 				length = str((int(length) / 1024) / 1024) + " MB"
+
 		
+
 		if info.__contains__('type="'):
+
 			idx = info.index('type="')
+
 			type = info[idx+6:]
+
 			idx = type.index('"')
+
 			type = type[:idx]
+
 		else:
+
 			type = "N/A"
+
 		
+
 		return (url, length, type)
 
 ###################################################
@@ -335,8 +392,11 @@ class PodcastMovies(Screen):
 class PodcastPodcasts(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
+
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+
 		</screen>""" % _("Podcast")
+
 
 	def __init__(self, session, provider):
 		self.session = session
@@ -366,7 +426,9 @@ class PodcastProvider(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+
 		</screen>""" % _("Podcast")
+
 
 	def __init__(self, session, language):
 		self.session = session
@@ -394,8 +456,11 @@ class PodcastProvider(Screen):
 class PodcastXML(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
+
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+
 		</screen>""" % _("Podcast")
+
 
 	def __init__(self, session):
 		self.session = session
@@ -426,8 +491,11 @@ class PodcastXML(Screen):
 class PodcastComGenre2(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
+
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+
 		</screen>""" % _("Podcast")
+
 
 	def __init__(self, session, url):
 		self.session = session
@@ -468,9 +536,13 @@ class PodcastComGenre2(Screen):
 	def getGenres(self, page):
 		list = []
 		reonecat = re.compile(r'height="19"><a href="(.+?)">(.+?)</a>', re.DOTALL)
+
 		for url, title in reonecat.findall(page):
+
 			list.append(encodeUrl(title))
+
 			self.urls.append(url)
+
 		self["list"].setList(list)
 		self.working = False
 
@@ -490,7 +562,9 @@ class PodcastComGenre(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+
 		</screen>""" % _("Podcast")
+
 
 	def __init__(self, session, url):
 		self.session = session
@@ -529,9 +603,13 @@ class PodcastComGenre(Screen):
 	def getGenres(self, page):
 		list = []
 		reonecat = re.compile(r'height="17"><a title="(.+?)" href="(.+?)">(.+?)</a>', re.DOTALL)
+
 		for title2, url, title in reonecat.findall(page):
+
 			list.append(encodeUrl(title))
+
 			self.urls.append(url)
+
 		self["list"].setList(list)
 		self.working = False
 
@@ -546,7 +624,9 @@ class PodcastCom(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+
 		</screen>""" % _("Podcast")
+
 
 	def __init__(self, session):
 		self.session = session
@@ -577,10 +657,14 @@ class PodcastCom(Screen):
 	def showGenres(self, page):
 		list = []
 		reonecat = re.compile(r'<li><a href="(.+?)" title="(.+?)">(.+?)</a></li>', re.DOTALL)
+
 		for url, title2, title in reonecat.findall(page):
 			if not title.startswith("<"):
+
 				list.append(encodeUrl(title))
+
 				self.urls.append(url)
+
 		self["list"].setList(list)
 		self.working = False
 
@@ -602,38 +686,71 @@ class LocationSelection(Screen):
 		<widget name="filelist" position="10,45" size="550,255" scrollbarMode="showOnDemand" />
 	</screen>""" % _("Podcast")
 
+
+
 	def __init__(self, session, dir="/"):
+
 		Screen.__init__(self, session)
+
 		
+
 		self["key_green"] = Label(_("Select"))
+
 		
+
 		try: self["filelist"] = FileList(dir, showDirectories=True, showFiles=False)
+
 		except: self["filelist"] = FileList("/", showDirectories, showFiles)
+
 		
+
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
+
 			{
+
 				"ok": self.okClicked,
+
 				"cancel": self.exit,
+
 				"green": self.select
+
 			}, -1)
 		
 		self.onLayoutFinish.append(self.updateDirectoryName)
+
 		
+
 	def okClicked(self):
+
 		if self["filelist"].canDescent():
+
 			self["filelist"].descent()
+
 			self["filelist"].instance.moveSelectionTo(0)
+
 			self.updateDirectoryName()
 
+
+
 	def exit(self):
+
 		self.close(None)
 
+
+
 	def select(self):
+
 		dir = self["filelist"].getCurrentDirectory()
+
 		if dir is not None:
+
 			self.close(dir)
+
 		else:
+
 			self.close(None)
+
+
 
 	def updateDirectoryName(self):
 		try:
@@ -709,6 +826,7 @@ class PodcastDeEpisodes(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+
 		</screen>""" % _("Podcast")
 
 	def __init__(self, session, url):
@@ -787,11 +905,15 @@ class PodcastDeEpisodes(Screen):
 		idx = page.index('</div></div>')
 		page = page[:idx]
 		reonecat = re.compile(r'<a href="(.+?)" title="(.+?)">', re.DOTALL)
+
 		for url, title in reonecat.findall(page):
 			if title.startswith("Episode: "):
 				title = title[9:]
+
 			list.append(encodeUrl(title))
+
 			self.urls.append(url)
+
 		self["list"].setList(list)
 		self.working = False
 
@@ -811,6 +933,7 @@ class PodcastDePodcasts(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+
 		</screen>""" % _("Podcast")
 
 	def __init__(self, session, url):
@@ -853,8 +976,11 @@ class PodcastDePodcasts(Screen):
 				text = _(" (Audio)")
 			else:
 				text = _(" (Video)")
+
 			list.append(encodeUrl(title+text))
+
 			self.urls.append(url)
+
 		self["list"].setList(list)
 		self.working = False
 
@@ -869,6 +995,7 @@ class PodcastDeCategories(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+
 		</screen>""" % _("Podcast")
 
 	def __init__(self, session, url):
@@ -905,9 +1032,13 @@ class PodcastDeCategories(Screen):
 		idx = page.index('</div>')
 		page = page[:idx]
 		reonecat = re.compile(r'<a href="(.+?)" title="(.+?)">', re.DOTALL)
+
 		for url, title in reonecat.findall(page):
+
 			list.append(encodeUrl(title))
+
 			self.urls.append(url)
+
 		self["list"].setList(list)
 		self.working = False
 
@@ -922,6 +1053,7 @@ class PodcastDe(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+
 		</screen>""" % _("Podcast")
 
 	def __init__(self, session):
@@ -957,9 +1089,13 @@ class PodcastDe(Screen):
 		idx = page.index('</div>')
 		page = page[:idx]
 		reonecat = re.compile(r'<a href="(.+?)" title="(.+?)">', re.DOTALL)
+
 		for url, title in reonecat.findall(page):
+
 			list.append(encodeUrl(title))
+
 			self.urls.append(url)
+
 		self["list"].setList(list)
 		self.working = False
 
@@ -974,7 +1110,9 @@ class Podcast(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+
 		</screen>""" % _("Podcast")
+
 
 	def __init__(self, session):
 		self.session = session
