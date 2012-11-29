@@ -30,7 +30,7 @@ from YouTubeInterface import interface, YouTubeInterface
 from SkinLoader import loadPluginSkin
 from Screens.MessageBox import MessageBox
 
-import gettext
+import os, gettext
 
 
 def _(txt):

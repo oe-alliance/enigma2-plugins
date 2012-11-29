@@ -15,7 +15,7 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
-import gettext
+import os, gettext
 
 ################################################
 
@@ -32,8 +32,11 @@ pausedIcon = loadPNG(resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/icons/ico_m
 
 ################################################
 
-lang = language.getLanguage()
-environ["LANGUAGE"] = lang[:2]
+if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+	lang = language.getLanguage()
+else:
+	lang = language.getLanguage()[:2]
+os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
 gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain("enigma2")
 gettext.bindtextdomain("Mosaic", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/Mosaic/locale/"))

@@ -38,7 +38,7 @@ from os import environ, stat as os_stat, listdir as os_listdir, link as os_link,
 from time import localtime, time, gmtime, strftime
 from timer import TimerEntry
 
-import gettext
+import os, gettext
 import Screens.InfoBar
 import Screens.Standby
 
@@ -47,8 +47,11 @@ import Screens.Standby
 ##############################
 
 def localeInit():
-	lang = language.getLanguage()
-	environ["LANGUAGE"] = lang[:2]
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
+	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
 	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 	gettext.textdomain("enigma2")
 	gettext.bindtextdomain("PermanentTimeshift", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PermanentTimeshift/locale/"))

@@ -30,7 +30,7 @@ except ImportError as ie:
 	from urllib.parse import quote_plus
 	iteritems = lambda d: d.items()
 	unichr = chr
-import gettext
+import os, gettext
 
 # Configuration
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo

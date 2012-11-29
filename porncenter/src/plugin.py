@@ -21,7 +21,7 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.Downloader import downloadWithProgress
 from Tools.LoadPixmap import LoadPixmap
-import gettext
+import os, gettext
 
 ##################################################
 
@@ -33,8 +33,11 @@ HEIGHT = size.height()
 ##################################################
 
 def localeInit():
-	lang = language.getLanguage()
-	environ["LANGUAGE"] = lang[:2]
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
+	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
 	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 	gettext.textdomain("enigma2")
 	gettext.bindtextdomain("PornCenter", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PornCenter/locale/"))

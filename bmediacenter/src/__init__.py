@@ -3,7 +3,7 @@ from Components.config import config, ConfigSubsection, ConfigSelection, ConfigI
 from skin import loadSkin
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
-import os,gettext
+import os, gettext
 
 currentmcversion = "093"
 currentmcplatform = "mipsel"

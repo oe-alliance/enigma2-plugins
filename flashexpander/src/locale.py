@@ -2,7 +2,7 @@
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from os import environ as os_environ
-import gettext
+import os, gettext
 
 PluginLanguageDomain = "Flashexpander"
 PluginLanguagePath = "Extensions/Flashexpander/locale"

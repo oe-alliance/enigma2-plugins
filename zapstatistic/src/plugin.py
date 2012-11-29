@@ -9,6 +9,7 @@ from Components.MultiContent import MultiContentEntryText
 from enigma import eListboxPythonMultiContent, eServiceReference, gFont
 from os import environ
 from Plugins.Plugin import PluginDescriptor
+
 from Screens.ChoiceBox import ChoiceBox
 from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
@@ -16,13 +17,16 @@ from ServiceReference import ServiceReference
 from time import gmtime, localtime, strftime, time
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from xml.etree.cElementTree import parse
-import gettext
+import os, gettext
 
 ###########################################################
 
 def localeInit():
-	lang = language.getLanguage()
-	environ["LANGUAGE"] = lang[:2]
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
+	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
 	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 	gettext.textdomain("enigma2")
 	gettext.bindtextdomain("ZapStatistic", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/ZapStatistic/locale/"))
@@ -34,6 +38,7 @@ def _(txt):
 	return t
 
 localeInit()
+
 language.addCallback(localeInit)
 
 ###########################################################

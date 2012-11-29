@@ -5,6 +5,7 @@
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.config import config, ConfigInteger, ConfigSelection, ConfigSubsection, ConfigYesNo, getConfigListEntry
+
 from Components.ConfigList import ConfigListScreen
 from Components.Console import Console
 from Components.Label import Label
@@ -22,7 +23,7 @@ from Screens.MessageBox import MessageBox
 from Screens.MovieSelection import MovieSelection
 from Screens.Screen import Screen
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
-import gettext, random
+import os, gettext, random
 
 ##############################################################################
 
@@ -35,8 +36,11 @@ config.plugins.MovielistPreview.size = ConfigSelection(choices=["250x200", "200x
 ##############################################################################
 
 def localeInit():
-	lang = language.getLanguage()
-	environ["LANGUAGE"] = lang[:2]
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
+	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
 	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 	gettext.textdomain("enigma2")
 	gettext.bindtextdomain("MovielistPreview", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/MovielistPreview/locale/"))

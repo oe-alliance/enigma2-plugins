@@ -2,7 +2,7 @@
 
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-import gettext
+import os, gettext
  
 PluginLanguageDomain = "AspectRatioSwitch"
 PluginLanguagePath = "SystemPlugins/AspectRatioSwitch/locale"

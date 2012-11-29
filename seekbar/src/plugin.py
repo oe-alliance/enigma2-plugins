@@ -15,7 +15,7 @@ from Screens.InfoBar import MoviePlayer
 from Screens.Screen import Screen
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.KeyBindings import addKeyBinding
-import gettext, keymapparser
+import os, gettext, keymapparser
 
 ##############################################
 
@@ -25,8 +25,11 @@ config.plugins.Seekbar.sensibility = ConfigInteger(default=10, limits=(1, 10))
 
 ##############################################
 
-lang = language.getLanguage()
-environ["LANGUAGE"] = lang[:2]
+if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+	lang = language.getLanguage()
+else:
+	lang = language.getLanguage()[:2]
+os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
 gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain("enigma2")
 gettext.bindtextdomain("Seekbar", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/Seekbar/locale/"))

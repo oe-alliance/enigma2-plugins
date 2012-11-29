@@ -22,7 +22,7 @@ import xml.dom.minidom
 
 from Components.Language import language
 from os import environ as os_environ
-import gettext
+import os, gettext
 
 def localeInit():
 	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):

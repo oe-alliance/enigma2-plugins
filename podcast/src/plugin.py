@@ -22,13 +22,16 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE
 from Tools.Downloader import downloadWithProgress
 from twisted.web.client import getPage
 from xml.etree.cElementTree import parse
-import gettext, re
+import os, gettext, re
 
 ###################################################
 
 def localeInit():
-	lang = language.getLanguage()
-	environ["LANGUAGE"] = lang[:2]
+	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
+		lang = language.getLanguage()
+	else:
+		lang = language.getLanguage()[:2]
+	os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
 	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 	gettext.textdomain("enigma2")
 	gettext.bindtextdomain("Podcast", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/Podcast/locale/"))
@@ -844,6 +847,7 @@ class PodcastDePodcasts(Screen):
 		idx = page.index('</div>')
 		page = page[:idx]
 		reonecat = re.compile(r'alt="(.+?)" class="(.+?)<a href="(.+?)" title="(.+?)">(.+?)<span class="(.+?)"></span>', re.DOTALL)
+
 		for title, x, url, x2, x3, type in reonecat.findall(page):
 			if type.__contains__("content_type_1_icon"):
 				text = _(" (Audio)")
