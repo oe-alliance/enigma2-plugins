@@ -992,8 +992,13 @@ class NcidLineReceiver(LineReceiver):
 
                 if not self.myName:
                         self.myName = _("UNKNOWN")
-			 
-		date = datetime.strptime("%s - %s" % (self.date, self.time), "%d%m%Y - %H%M")				
+
+                date = None
+                try:
+                        date = datetime.strptime("%s - %s" % (self.date, self.time), "%d%m%Y - %H%M")
+                except:
+                        date = datetime.strptime("%s - %s" % (self.date, self.time), "%m%d%Y - %H%M")		 
+					
 		self.date = date.strftime("%d.%m.%Y - %H:%M")
 
 		if not self.number:
