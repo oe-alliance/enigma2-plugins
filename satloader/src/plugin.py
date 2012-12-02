@@ -51,9 +51,9 @@ class Satloader(Screen):
 		self["list"] = self.list
 		self["info"] = Label()
 		self["key_red"] = Label(_("Cancel"))
-		self["key_green"] = Label()
+		self["key_green"] = Label(_("Install"))
 		self["key_yellow"] = Label(_("Satellites"))
-		self["key_blue"] = Label(_("Transponder"))
+		self["key_blue"] = Label(_("Multi Sat"))
 		self["myActionMap"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
 			"ok": self.btnOK,
@@ -96,7 +96,7 @@ class Satloader(Screen):
 					restart = self.session.openWithCallback(self.restart,MessageBox,_("satellites.xml building finished!")+"\n\n"+_("GUI needs a restart to apply changes.")+"\n"+_("Do you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
 					restart.setTitle(_("Restart GUI now?"))
 				else:
-					self["info"].setText("Please select a Transponder")
+					self["info"].setText(_("Please select at least one satellite"))
 
 	def btnYellow(self):
 		self.list.clearList()
@@ -104,22 +104,22 @@ class Satloader(Screen):
 		self.list.addSelection("Kingofsat satellites.xml (feed)", "http://satellites.satloader.net/feeds.xml", 1, None)
 		self.list.addSelection("Satbeams satellites.xml", "http://satellites.satloader.net/satbeam.xml", 2, None)
 		self["key_green"].setText(_("Install"))
-		self["info"].setText("Press ok or green button to install satellites.xml")
+		self["info"].setText(_("Press ok or green button to install satellites.xml"))
 
 	def btnBlue(self):
-		self["info"].setText("Downloading transponders from server ...")
+		self["info"].setText(_("Downloading satellites from server ..."))
 		downloadPage("http://satellites.satloader.net/transponder.tar.gz", "/tmp/transponder.tar.gz").addCallback(self.downloadListTPCallback).addErrback(self.downloadListError)
 
 	def downloadListError(self, ret):
-		self.session.open(MessageBox, text = _("Getting transponders failed!"), type = MessageBox.TYPE_ERROR)
-		self["info"].setText("Getting transponders failed!!")
+		self.session.open(MessageBox, text = _("Downloading satellites failed!"), type = MessageBox.TYPE_ERROR)
+		self["info"].setText(_("Downloading satellites failed!"))
 
 	def downloadListSATCallback(self, ret):
 		restart = self.session.openWithCallback(self.restart, MessageBox, _("satellites.xml is up-to-date")+"\n\n"+_("GUI needs a restart to apply changes.")+"\n"+_("Do you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
 		restart.setTitle(_("Restart GUI now?"))
 
 	def downloadListTPCallback(self, ret):
-		self["info"].setText("Downloading succesfull! Parsing ...")
+		self["info"].setText(_("Downloading succesfull! Parsing ..."))
 
 		try:
 			if not os.path.exists('/tmp/transponder'):
@@ -137,12 +137,11 @@ class Satloader(Screen):
 			f.close()
 
 			if self.list is not None:
-				self["key_green"].setText("Build")
-				self["info"].setText("Press ok button to select transponders")
+				self["info"].setText(_("Press ok button to select satellite"))
 
 		except Exception, e:
 			print "Error:", e
-			self["info"].setText("Parsing failed!:\n"+str(e))
+			self["info"].setText(_("Parsing failed!")+"\n"+str(e))
 
 	def restart(self, ret):
 		if ret is True:
