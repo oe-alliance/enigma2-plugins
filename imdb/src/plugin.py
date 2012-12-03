@@ -461,6 +461,10 @@ class IMDB(Screen):
 		self["statusbar"].setText(_("IMDb Download failed"))
 
 	def html2utf8(self,in_html):
+		if re.search("charset=utf-8", in_html):
+			self.inhtml = in_html
+			return
+			
 		entitydict = {}
 
 		entities = re.finditer('&([^#][A-Za-z]{1,5}?);', in_html)
@@ -496,8 +500,8 @@ class IMDB(Screen):
 		if self.generalinfos:
 			self.IMDBparse()
 		else:
-			if re.search("<title>(?:IMDb.{0,9}Search|IMDb Titelsuche)</title>", self.inhtml):
-				searchresultmask = re.compile("<tr> <td.*?img src.*?>.*?<a href=\".*?/title/(tt\d{7,7})/\".*?>(.*?)</td>", re.DOTALL)
+			if re.search("<title>Find - IMDb</title>", self.inhtml):
+				searchresultmask = re.compile('<tr class=\"findResult (?:odd|even)\">.*?<td class=\"result_text\"> <a href=\"/title/(tt\d{7,7})/.*?\" >(.*?)</a>.*?</td>', re.DOTALL)
 				searchresults = searchresultmask.finditer(self.inhtml)
 				self.resultlist = [(self.htmltags.sub('',x.group(2)), x.group(1)) for x in searchresults]
 				Len = len(self.resultlist)
@@ -648,12 +652,12 @@ class IMDbLCDScreen(Screen):
 		Screen.__init__(self, session, parent)
 		self["headline"] = Label(_("IMDb Plugin"))
 
-def eventinfo(session, servicelist, **kwargs):
-	ref = session.nav.getCurrentlyPlayingServiceReference()
-	session.open(IMDBEPGSelection, ref)
+def eventinfo(session, eventName="", **kwargs):
+	session.open(IMDB, eventName)
 
 def main(session, eventName="", **kwargs):
-	session.open(IMDB, eventName)
+	ref = session.nav.getCurrentlyPlayingServiceReference()
+	session.open(IMDBEPGSelection, ref)
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="IMDb Details",
