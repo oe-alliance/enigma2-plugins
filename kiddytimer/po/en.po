@@ -1,0 +1,201 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 15:01+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "01:00"
+msgstr "01:00"
+
+msgid "??:??"
+msgstr "??:??"
+
+msgid "Allows to controls your kids' daily TV usage"
+msgstr "Allows to controls your kids' daily TV usage"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Center screen at the lower border"
+msgstr "Center screen at the lower border"
+
+msgid "Center screen at the upper border"
+msgstr "Center screen at the upper border"
+
+msgid ""
+"Cheat attempt detected. \n"
+"Box has not been shudown correctly. \n"
+"Remaining time was set to 0."
+msgstr ""
+"Cheat attempt detected. \n"
+"Box has not been shudown correctly. \n"
+"Remaining time was set to 0."
+
+msgid "Clock"
+msgstr "Clock"
+
+msgid "Decrease remaining time"
+msgstr "Decrease remaining time"
+
+msgid "Disable KiddyTimer"
+msgstr "Disable KiddyTimer"
+
+msgid "Discard changes and close screen"
+msgstr "Discard changes and close screen"
+
+msgid "Do you want to start the kiddytimer- plugin now."
+msgstr "Do you want to start the kiddytimer- plugin now."
+
+msgid "Don't monitor TV started after"
+msgstr "Don't monitor TV started after"
+
+msgid "Don't monitor TV started before"
+msgstr "Don't monitor TV started before"
+
+msgid "Enable KiddyTimer"
+msgstr "Enable KiddyTimer"
+
+msgid "Enable KiddyTimer for x minutes"
+msgstr "Enable KiddyTimer for x minutes"
+
+msgid "Enabled"
+msgstr "Enabled"
+
+msgid "Enter pin code"
+msgstr "Enter pin code"
+
+msgid "Friday"
+msgstr "Friday"
+
+msgid "Increase remaining time"
+msgstr "Increase remaining time"
+
+msgid "Invalid selection"
+msgstr "Invalid selection"
+
+msgid "KiddyTimer"
+msgstr "KiddyTimer"
+
+#, python-format
+msgid "Last day started: %s"
+msgstr "Last day started: %s"
+
+msgid "Monday"
+msgstr "Monday"
+
+msgid "Move clock"
+msgstr "Move clock"
+
+msgid "Move screen down"
+msgstr "Move screen down"
+
+msgid "Move screen to the center of your TV"
+msgstr "Move screen to the center of your TV"
+
+msgid "Move screen to the left"
+msgstr "Move screen to the left"
+
+msgid "Move screen to the lower left corner"
+msgstr "Move screen to the lower left corner"
+
+msgid "Move screen to the lower right corner"
+msgstr "Move screen to the lower right corner"
+
+msgid "Move screen to the middle of the left border"
+msgstr "Move screen to the middle of the left border"
+
+msgid "Move screen to the middle of the right border"
+msgstr "Move screen to the middle of the right border"
+
+msgid "Move screen to the right"
+msgstr "Move screen to the right"
+
+msgid "Move screen to the upper left corner"
+msgstr "Move screen to the upper left corner"
+
+msgid "Move screen to the upper right corner"
+msgstr "Move screen to the upper right corner"
+
+msgid "Move screen up"
+msgstr "Move screen up"
+
+msgid "PIN"
+msgstr "PIN"
+
+msgid "Please enter the correct pin code"
+msgstr "Please enter the correct pin code"
+
+msgid "Please select your KiddyTimer- option"
+msgstr "Please select your KiddyTimer- option"
+
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr "Plugin: %(plugin)s , Version: %(version)s"
+
+#, python-format
+msgid "Remaining time: %s"
+msgstr "Remaining time: %s"
+
+msgid "Reset clock"
+msgstr "Reset clock"
+
+msgid "Reset saved position"
+msgstr "Reset saved position"
+
+msgid "Reset todays remaining time"
+msgstr "Reset todays remaining time"
+
+msgid "Saturday"
+msgstr "Saturday"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Save values and close screen"
+msgstr "Save values and close screen"
+
+msgid "Set remaining time"
+msgstr "Set remaining time"
+
+msgid "Smiley"
+msgstr "Smiley"
+
+msgid "Start KiddyTimer"
+msgstr "Start KiddyTimer"
+
+msgid "Stop KiddyTimer (this session only)"
+msgstr "Stop KiddyTimer (this session only)"
+
+msgid "Style of timer"
+msgstr "Style of timer"
+
+msgid "Sunday"
+msgstr "Sunday"
+
+msgid "The pin code you entered is wrong."
+msgstr "The pin code you entered is wrong."
+
+msgid "Thursday"
+msgstr "Thursday"
+
+msgid "Timeout for activation dialog"
+msgstr "Timeout for activation dialog"
+
+msgid "Tuesday"
+msgstr "Tuesday"
+
+msgid "Wednesday"
+msgstr "Wednesday"

@@ -1,0 +1,122 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 15:01+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Autoresolution"
+msgstr "Autoresolution"
+
+#, python-format
+msgid ""
+"Autoresolution Plugin Testmode:\n"
+"Is %s OK?"
+msgstr ""
+"Autoresolution Plugin Testmode:\n"
+"Is %s OK?"
+
+msgid "Autoresolution Switch"
+msgstr "Autoresolution Switch"
+
+msgid "Autoresolution is not working in Scart/DVI-PC Mode"
+msgstr "Autoresolution is not working in Scart/DVI-PC Mode"
+
+msgid "Autoresolution settings"
+msgstr "Autoresolution settings"
+
+msgid "Autoresolution videomode setup"
+msgstr "Autoresolution videomode setup"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Deinterlacer mode for interlaced content"
+msgstr "Deinterlacer mode for interlaced content"
+
+msgid "Deinterlacer mode for progressive content"
+msgstr "Deinterlacer mode for progressive content"
+
+msgid "Delay x seconds after service started"
+msgstr "Delay x seconds after service started"
+
+msgid "Enable 1080p24 Mode"
+msgstr "Enable 1080p24 Mode"
+
+msgid "Enable 1080p25 Mode"
+msgstr "Enable 1080p25 Mode"
+
+msgid "Enable 1080p30 Mode"
+msgstr "Enable 1080p30 Mode"
+
+msgid "Enable 720p24 Mode"
+msgstr "Enable 720p24 Mode"
+
+msgid "Enable Autoresolution"
+msgstr "Enable Autoresolution"
+
+msgid "HD Interlace Mode"
+msgstr "HD Interlace Mode"
+
+msgid "HD Progressive Mode"
+msgstr "HD Progressive Mode"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Refresh Rate"
+msgstr "Refresh Rate"
+
+msgid "Running in testmode"
+msgstr "Running in testmode"
+
+msgid "SD 24HZ Progressive mode"
+msgstr "SD 24HZ Progressive mode"
+
+msgid "SD 25/50HZ Interlace Mode"
+msgstr "SD 25/50HZ Interlace Mode"
+
+msgid "SD 25/50HZ Progressive Mode"
+msgstr "SD 25/50HZ Progressive Mode"
+
+msgid "SD 30/60HZ Interlace Mode"
+msgstr "SD 30/60HZ Interlace Mode"
+
+msgid "SD 30/60HZ Progressive Mode"
+msgstr "SD 30/60HZ Progressive Mode"
+
+msgid "Show info screen"
+msgstr "Show info screen"
+
+msgid "auto"
+msgstr "auto"
+
+msgid "bob"
+msgstr "bob"
+
+msgid "default"
+msgstr "default"
+
+msgid "off"
+msgstr "off"
+
+msgid "on"
+msgstr "on"
+
+msgid "second"
+msgstr "second"
+
+msgid "seconds"
+msgstr "seconds"

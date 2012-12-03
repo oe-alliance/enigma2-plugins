@@ -1,0 +1,79 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 15:01+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Add new tag..."
+msgstr "Add new tag..."
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Delete all tags..."
+msgstr "Delete all tags..."
+
+msgid "Delete this tag..."
+msgstr "Delete this tag..."
+
+msgid "Delete unused tags"
+msgstr "Delete unused tags"
+
+msgid ""
+"Do you really want to delete all tags everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Do you really want to delete all tags everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+
+#, python-format
+msgid ""
+"Do you really want to delete tag \"%s\" everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Do you really want to delete tag \"%s\" everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+
+#. TRANSLATORS: This is the title of the TagEditor main screen
+msgid "Edit Tags"
+msgstr "Edit Tags"
+
+msgid "Load"
+msgstr "Load"
+
+msgid "New"
+msgstr "New"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Please enter the new tag"
+msgstr "Please enter the new tag"
+
+msgid "Rename this tag..."
+msgstr "Rename this tag..."
+
+#, python-format
+msgid ""
+"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
+"this!)"
+msgstr ""
+"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
+"this!)"
+
+#. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+msgid "edit tags"
+msgstr "edit tags"

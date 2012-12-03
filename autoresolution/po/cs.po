@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Automatic Screen Resolution V. 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-10 16:57+0100\n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: jerry00 <jerry00@quick.cz>\n"
 "Language-Team: jerry00\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,132 +17,140 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:36
-msgid "disabled"
-msgstr "vypnuto"
-
-#: ../src/plugin.py:36
-msgid "immediately after recording"
-msgstr "okamžitě po záznamu"
-
-#: ../src/plugin.py:36
-msgid "older than 1 day"
-msgstr "starší jak 1 den"
-
-#: ../src/plugin.py:36
-msgid "older than 3 days"
-msgstr "starší jak 3 dny"
-
-#: ../src/plugin.py:36
-msgid "older than 1 week"
-msgstr "starší jak 1 týden"
-
-#: ../src/plugin.py:36
-msgid "older than 2 weeks"
-msgstr "starší jak 2 týdny"
-
-#: ../src/plugin.py:36
-msgid "older than 4 weeks"
-msgstr "starší jak 4 týdny"
-
-#: ../src/plugin.py:36
-msgid "older than 6 weeks"
-msgstr "starší jak 6 týdnů"
-
-#: ../src/plugin.py:49
-#: ../src/plugin.py:125
-msgid "Automatic Timerlist Cleanup Setup"
-msgstr "Automatické nastavení Vyčištění časovače"
-
-#: ../src/plugin.py:122
-#: ../src/plugin.py:125
-msgid "Timerlist Cleanup Setup"
-msgstr "Nastavení Vyčištění časovače"
-
-#: ../src/plugin.py:53
-msgid "Cancel"
-msgstr "Zrušit"
-
-#: ../src/plugin.py:54
-msgid "OK"
-msgstr ""
-
-#: ../src/plugin.py:56
-msgid "Cleanup timerlist-entries"
-msgstr "Vyčištění položek časovače"
-
-#: ../src/plugin.py:57
-msgid "SD 25/50HZ Interlace Mode"
-msgstr "SD 25/50HZ prokládaný režim"
-
-#: ../src/plugin.py:58
-msgid "SD 30/60HZ Interlace Mode"
-msgstr "SD 30/60HZ prokládaný režim"
-
-#: ../src/plugin.py:59
-msgid "SD 24HZ Progressive mode"
-msgstr "SD 24HZ prograsivní režim"
-
-#: ../src/plugin.py:60
-msgid "SD 25/50HZ Progressive mode"
-msgstr "SD 25/50HZ prograsivní režim"
-
-#: ../src/plugin.py:61
-msgid "SD 30/60HZ Progressive Mode"
-msgstr "SD 30/60HZ progresivní režim"
-
-#: ../src/plugin.py:61
-msgid "HD Interlace Mode"
-msgstr "HD prokládaný režim"
-
-#: ../src/plugin.py:62
-msgid "HD Progressive Mode"
-msgstr "HD progresivní režim"
-
-#: ../src/plugin.py:63
-msgid "Enable 720p24 Mode"
-msgstr "Zapnout režim 720p24"
-
-#: ../src/plugin.py:64
-msgid "Enable 1080p24 Mode"
-msgstr "Zapnout režim 1080p24"
-
-#: ../src/plugin.py:65
-msgid "Enable 1080p25 Mode"
-msgstr "Zapnout režim 1080p25"
-
-#: ../src/plugin.py:66
-msgid "Enable 1080p30 Mode"
-msgstr "Zapnout režim 1080p30"
-
-#: ../src/plugin.py:67
-msgid "Show info screen"
-msgstr "Zobrazit panel informací"
-
-#: ../src/plugin.py:68
-msgid "Delay x seconds after service started"
-msgstr "Prodleva x sek po spuštění programu"
-
-#: ../src/plugin.py:69
-msgid "Running in testmode"
-msgstr "Spustit v testovacím režimu"
-
-#: ../src/plugin.py:70
-msgid "Deinterlacer mode for interlaced content"
-msgstr "Neprokládat prokládaný obsah"
-
-#: ../src/plugin.py:71
-msgid "Deinterlacer mode for progressive content"
-msgstr "Neprokládat progresivní obsah"
-
-#: ../src/plugin.py:72
-msgid "Enable Autoresolution"
-msgstr "Zapnout Auto-rozlišení"
-
-#: ../src/plugin.py:73
 msgid "Autoresolution"
 msgstr "Auto-rozlišení"
 
-#: ../src/plugin.py:74
+#, python-format
+msgid ""
+"Autoresolution Plugin Testmode:\n"
+"Is %s OK?"
+msgstr ""
+
+msgid "Autoresolution Switch"
+msgstr ""
+
+msgid "Autoresolution is not working in Scart/DVI-PC Mode"
+msgstr ""
+
+msgid "Autoresolution settings"
+msgstr ""
+
+msgid "Autoresolution videomode setup"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Deinterlacer mode for interlaced content"
+msgstr "Neprokládat prokládaný obsah"
+
+msgid "Deinterlacer mode for progressive content"
+msgstr "Neprokládat progresivní obsah"
+
+msgid "Delay x seconds after service started"
+msgstr "Prodleva x sek po spuštění programu"
+
+msgid "Enable 1080p24 Mode"
+msgstr "Zapnout režim 1080p24"
+
+msgid "Enable 1080p25 Mode"
+msgstr "Zapnout režim 1080p25"
+
+msgid "Enable 1080p30 Mode"
+msgstr "Zapnout režim 1080p30"
+
+msgid "Enable 720p24 Mode"
+msgstr "Zapnout režim 720p24"
+
+msgid "Enable Autoresolution"
+msgstr "Zapnout Auto-rozlišení"
+
+msgid "HD Interlace Mode"
+msgstr "HD prokládaný režim"
+
+msgid "HD Progressive Mode"
+msgstr "HD progresivní režim"
+
+msgid "OK"
+msgstr ""
+
+msgid "Refresh Rate"
+msgstr ""
+
+msgid "Running in testmode"
+msgstr "Spustit v testovacím režimu"
+
+msgid "SD 24HZ Progressive mode"
+msgstr "SD 24HZ prograsivní režim"
+
+msgid "SD 25/50HZ Interlace Mode"
+msgstr "SD 25/50HZ prokládaný režim"
+
+msgid "SD 25/50HZ Progressive Mode"
+msgstr ""
+
+msgid "SD 30/60HZ Interlace Mode"
+msgstr "SD 30/60HZ prokládaný režim"
+
+msgid "SD 30/60HZ Progressive Mode"
+msgstr "SD 30/60HZ progresivní režim"
+
+msgid "Show info screen"
+msgstr "Zobrazit panel informací"
+
+msgid "auto"
+msgstr ""
+
+msgid "bob"
+msgstr ""
+
 msgid "default"
 msgstr "výchozí"
+
+msgid "off"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
+msgid "second"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#~ msgid "Automatic Timerlist Cleanup Setup"
+#~ msgstr "Automatické nastavení Vyčištění časovače"
+
+#~ msgid "Cleanup timerlist-entries"
+#~ msgstr "Vyčištění položek časovače"
+
+#~ msgid "SD 25/50HZ Progressive mode"
+#~ msgstr "SD 25/50HZ prograsivní režim"
+
+#~ msgid "Timerlist Cleanup Setup"
+#~ msgstr "Nastavení Vyčištění časovače"
+
+#~ msgid "disabled"
+#~ msgstr "vypnuto"
+
+#~ msgid "immediately after recording"
+#~ msgstr "okamžitě po záznamu"
+
+#~ msgid "older than 1 day"
+#~ msgstr "starší jak 1 den"
+
+#~ msgid "older than 1 week"
+#~ msgstr "starší jak 1 týden"
+
+#~ msgid "older than 2 weeks"
+#~ msgstr "starší jak 2 týdny"
+
+#~ msgid "older than 3 days"
+#~ msgstr "starší jak 3 dny"
+
+#~ msgid "older than 4 weeks"
+#~ msgstr "starší jak 4 týdny"
+
+#~ msgid "older than 6 weeks"
+#~ msgstr "starší jak 6 týdnů"

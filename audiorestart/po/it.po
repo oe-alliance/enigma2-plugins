@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - audiorestart\n"
-"Report-Msgid-Bugs-To: Spaeleus <spaeleus@croci.org>\n"
-"POT-Creation-Date: 2012-10-25 12:35+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
 "PO-Revision-Date: 2012-10-25 12:38+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -20,53 +20,39 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/audiorestart\n"
 
-#: .../enigma2-plugins/audiorestart/src/plugin.py:15
-msgid "disabled"
-msgstr "Disabilitato"
+msgid " "
+msgstr " "
 
-#: .../enigma2-plugins/audiorestart/src/plugin.py:15
-msgid "after restart"
-msgstr "Dopo il riavvio"
+msgid "Audio restart Setup"
+msgstr "Configurazione riavvio audio"
 
-#: .../enigma2-plugins/audiorestart/src/plugin.py:15
-msgid "after standby"
-msgstr "Dopo lo standby"
+msgid "Cancel"
+msgstr "Annull."
 
-#: .../enigma2-plugins/audiorestart/src/plugin.py:15
-msgid "after restart/standby"
-msgstr "Dopo riavvio/standby"
-
-#: .../enigma2-plugins/audiorestart/src/plugin.py:93
-#: .../enigma2-plugins/audiorestart/src/plugin.py:144
-msgid "Restart audio"
-msgstr "Riavviare audio"
-
-#: .../enigma2-plugins/audiorestart/src/plugin.py:94
-msgid "Restart audio delay (in sec)"
-msgstr "Ritardo riavvio audio (sec)"
-
-#: .../enigma2-plugins/audiorestart/src/plugin.py:104
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Versione: %(version)s"
 
-#: .../enigma2-plugins/audiorestart/src/plugin.py:107
-msgid "Cancel"
-msgstr "Annull."
+msgid "Restart audio"
+msgstr "Riavviare audio"
 
-#: .../enigma2-plugins/audiorestart/src/plugin.py:108
+msgid "Restart audio delay (in sec)"
+msgstr "Ritardo riavvio audio (sec)"
+
 msgid "Save"
 msgstr "Salvare"
 
-#: .../enigma2-plugins/audiorestart/src/plugin.py:109
-msgid " "
-msgstr " "
-
-#: .../enigma2-plugins/audiorestart/src/plugin.py:142
-msgid "Audio restart Setup"
-msgstr "Configurazione riavvio audio"
-
-#: .../enigma2-plugins/audiorestart/src/plugin.py:142
 msgid "Setup for the AudioRestart Plugin"
 msgstr "Configurazione plugin AudioRestart"
 
+msgid "after restart"
+msgstr "Dopo il riavvio"
+
+msgid "after restart/standby"
+msgstr "Dopo riavvio/standby"
+
+msgid "after standby"
+msgstr "Dopo lo standby"
+
+msgid "disabled"
+msgstr "Disabilitato"

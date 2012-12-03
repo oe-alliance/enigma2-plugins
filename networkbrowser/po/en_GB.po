@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
-"PO-Revision-Date: 2012-03-16 13:07+0100\n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 17:33-0000\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
-#: ../src/MountEdit.py:294
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -25,11 +25,16 @@ msgstr ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
 
-#: ../src/MountEdit.py:202
+msgid ""
+"A mount entry with this name already exists!\n"
+"and is not this share folder, please use a different name.\n"
+msgstr ""
+"A mount entry with this name already exists!\n"
+"and is not this share folder, please use a different name.\n"
+
 msgid "Active"
 msgstr "Active"
 
-#: ../src/MountView.py:62
 msgid ""
 "Active/\n"
 "Inactive"
@@ -37,19 +42,18 @@ msgstr ""
 "Active/\n"
 "Inactive"
 
-#: ../src/MountManager.py:96
 msgid "Add a new NFS or CIFS mount point to your Receiver."
 msgstr "Add a new NFS or CIFS mount point to your Receiver."
 
-#: ../src/MountManager.py:96
 msgid "Add new network mount point"
 msgstr "Add new network mount point"
 
-#: ../src/plugin.py:51
 msgid "Adding schedule..."
 msgstr "Adding schedule..."
 
-#: ../src/MountEdit.py:296
+msgid "Are you sure you want to remove your network mount ?"
+msgstr "Are you sure you want to remove your network mount ?"
+
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
@@ -57,166 +61,120 @@ msgstr ""
 "Are you sure you want to save this network mount?\n"
 "\n"
 
-#: ../src/plugin.py:102
 msgid "Attempt to mount shares again"
 msgstr "Attempt to mount shares again"
 
-#: ../src/plugin.py:102
 msgid "Attempt to recover lost mounts (in background)"
 msgstr "Attempt to recover lost mounts (in background)"
 
-#: ../src/NetworkBrowser.py:162
 msgid "Browse network neighbourhood"
 msgstr "Browse network neighbourhood"
 
-#: ../src/MountEdit.py:120
 msgid "CIFS share"
 msgstr "CIFS share"
 
-#: ../src/MountEdit.py:66
-#: ../src/MountManager.py:183
-#: ../src/NetworkBrowser.py:555
 msgid "Cancel"
 msgstr "Cancel"
 
-#: ../src/MountManager.py:99
 msgid "Change hostname"
 msgstr "Change hostname"
 
-#: ../src/MountManager.py:99
 msgid "Change the hostname of your Receiver."
 msgstr "Change the hostname of your Receiver."
 
-#: ../src/MountManager.py:58
-#: ../src/MountView.py:64
-#: ../src/NetworkBrowser.py:111
-#: ../src/UserDialog.py:91
-#: ../src/UserManager.py:50
 msgid "Close"
 msgstr "Close"
 
-#: ../src/UserManager.py:52
 msgid "Delete"
 msgstr "Delete"
 
-#: ../src/MountView.py:65
 msgid "Delete mount"
 msgstr "Delete mount"
 
-#: ../src/MountView.py:110
 msgid "Dir:"
 msgstr "Dir:"
 
-#: ../src/NetworkBrowser.py:448
-#: ../src/NetworkBrowser.py:450
-#: ../src/NetworkBrowser.py:463
 msgid "Do you want to enter a username and password for this host?"
 msgstr "Do you want to enter a username and password for this host?"
 
-#: ../src/MountEdit.py:116
-msgid "Enigma2 (mount using enigma2"
-msgstr "Enigma2 (mount using enigma2"
+msgid "Enigma2 (mount using enigma2)"
+msgstr "Enigma2 (mount using enigma2)"
 
-#: ../src/NetworkBrowser.py:583
+msgid "Enigma2 old format (mount using linux)"
+msgstr "Enigma2 old format (mount using linux)"
+
 msgid "Enter IP to scan..."
 msgstr "Enter IP to scan..."
 
-#: ../src/MountManager.py:136
 msgid "Enter new hostname for your Receiver"
 msgstr "Enter new hostname for your Receiver"
 
-#: ../src/MountEdit.py:242
 msgid "Enter options:"
 msgstr "Enter options:"
 
-#: ../src/MountEdit.py:246
-#: ../src/UserDialog.py:141
 msgid "Enter password:"
 msgstr "Enter password:"
 
-#: ../src/MountEdit.py:240
 msgid "Enter share directory:"
 msgstr "Enter share directory:"
 
-#: ../src/MountEdit.py:238
 msgid "Enter share name:"
 msgstr "Enter share name:"
 
-#: ../src/UserDialog.py:94
 msgid "Enter user and password for host: "
 msgstr "Enter user and password for host: "
 
-#: ../src/MountEdit.py:244
-#: ../src/UserDialog.py:139
 msgid "Enter username:"
 msgstr "Enter username:"
 
-#: ../src/NetworkBrowser.py:114
 msgid "Expert"
 msgstr "Expert"
 
-#: ../src/MountEdit.py:115
 msgid "FSTAB (mount using linux)"
 msgstr "FSTAB (mount using linux)"
 
-#: ../src/MountManager.py:160
 msgid "Finished restarting your network"
 msgstr "Finished restarting your network"
 
-#: ../src/NetworkBrowser.py:571
 msgid "IP Address"
 msgstr "IP Address"
 
-#: ../src/MountView.py:109
 msgid "IP:"
 msgstr "IP:"
 
-#: ../src/MountEdit.py:204
 msgid "Local share name"
 msgstr "Local share name"
 
-#: ../src/plugin.py:101
 msgid "Manage network shares"
 msgstr "Manage network shares"
 
-#: ../src/plugin.py:101
 msgid "Manage your network shares..."
 msgstr "Manage your network shares..."
 
-#: ../src/plugin.py:102
 msgid "Mount Again"
 msgstr "Mount Again"
 
-#: ../src/MountManager.py:87
-#: ../src/plugin.py:101
 msgid "Mount Manager"
 msgstr "Mount Manager"
 
-#: ../src/MountView.py:49
 msgid "Mount Viewer"
 msgstr "Mount Viewer"
 
-#: ../src/plugin.py:102
 msgid "Mount again"
 msgstr "Mount again"
 
-#: ../src/MountView.py:61
 msgid "Mount informations"
 msgstr "Mount informations"
 
-#: ../src/MountEdit.py:219
 msgid "Mount options"
 msgstr "Mount options"
 
-#: ../src/MountEdit.py:206
 msgid "Mount type"
 msgstr "Mount type"
 
-#: ../src/MountEdit.py:200
 msgid "Mount using"
 msgstr "Mount using"
 
-#: ../src/MountView.py:60
 msgid ""
 "Mounted/\n"
 "Unmounted"
@@ -224,184 +182,137 @@ msgstr ""
 "Mounted/\n"
 "Unmounted"
 
-#: ../src/plugin.py:42
 msgid "Mounting network shares..."
 msgstr "Mounting network shares..."
 
-#: ../src/MountManager.py:97
 msgid "Mountpoints management"
 msgstr "Mount points management"
 
-#: ../src/MountEdit.py:85
 msgid "Mounts editor"
 msgstr "Mounts editor"
 
-#: ../src/NetworkBrowser.py:112
 msgid "Mounts management"
 msgstr "Mounts management"
 
-#: ../src/MountEdit.py:119
 msgid "NFS share"
 msgstr "NFS share"
 
-#: ../src/plugin.py:35
-#: ../src/plugin.py:100
 msgid "Network Browser"
 msgstr "Network Browser"
 
-#: ../src/NetworkBrowser.py:198
 msgid "No network devices found!"
 msgstr "No network devices found!"
 
-#: ../src/MountEdit.py:224
-#: ../src/UserDialog.py:130
 msgid "Password"
 msgstr "Password"
 
-#: ../src/MountEdit.py:355
 msgid "Please wait for activation of your network mount..."
 msgstr "Please wait for activation of your network mount..."
 
-#: ../src/MountView.py:138
 msgid "Please wait while removing your network mount..."
 msgstr "Please wait while removing your network mount..."
 
-#: ../src/MountEdit.py:317
 msgid "Please wait while updating your network mount..."
 msgstr "Please wait while updating your network mount..."
 
-#: ../src/MountManager.py:147
 msgid "Please wait while your network is restarting..."
 msgstr "Please wait while your network is restarting..."
 
-#: ../src/MountEdit.py:65
 msgid "Press OK to activate the settings."
 msgstr "Press OK to activate the settings."
 
-#: ../src/NetworkBrowser.py:407
 msgid "Press OK to collapse this host"
 msgstr "Press OK to collapse this host"
 
-#: ../src/UserManager.py:51
 msgid "Press OK to edit selected settings."
 msgstr "Press OK to edit selected settings."
 
-#: ../src/MountView.py:63
 msgid "Press OK to edit the settings."
 msgstr "Press OK to edit the settings."
 
-#: ../src/NetworkBrowser.py:409
 msgid "Press OK to expand this host"
 msgstr "Press OK to expand this host"
 
-#: ../src/NetworkBrowser.py:401
 msgid "Press OK to mount this share!"
 msgstr "Press OK to mount this share!"
 
-#: ../src/NetworkBrowser.py:115
 msgid "Press OK to mount!"
 msgstr "Press OK to mount!"
 
-#: ../src/UserDialog.py:90
 msgid "Press OK to save settings."
 msgstr "Press OK to save settings."
 
-#: ../src/MountManager.py:59
 msgid "Press OK to select."
 msgstr "Press OK to select."
 
-#: ../src/MountManager.py:203
 msgid "Re-mount network shares every (in hours)"
 msgstr "Re-mount network shares every (in hours)"
 
-#: ../src/MountManager.py:240
 msgid "Really close without saving settings?"
 msgstr "Really close without saving settings?"
 
-#: ../src/NetworkBrowser.py:113
 msgid "Rescan"
 msgstr "Rescan"
 
-#: ../src/MountManager.py:184
 msgid "Save"
 msgstr "Save"
 
-#: ../src/NetworkBrowser.py:556
 msgid "Scan NFS share"
 msgstr "Scan NFS share"
 
-#: ../src/NetworkBrowser.py:557
 msgid "Scan range"
 msgstr "Scan range"
 
-#: ../src/MountManager.py:201
-#: ../src/MountManager.py:209
 msgid "Schedule MountAgain"
 msgstr "Schedule MountAgain"
 
-#: ../src/MountManager.py:100
 msgid "Schedule a auto remount of your network shares."
 msgstr "Schedule a auto remount of your network shares."
 
-#: ../src/plugin.py:100
 msgid "Search for network shares"
 msgstr "Search for network shares"
 
-#: ../src/plugin.py:100
 msgid "Search for network shares..."
 msgstr "Search for network shares..."
 
-#: ../src/NetworkBrowser.py:194
 msgid "Searching your network. Please wait..."
 msgstr "Searching your network. Please wait..."
 
-#: ../src/MountEdit.py:208
 msgid "Server IP"
 msgstr "Server IP"
 
-#: ../src/MountEdit.py:210
 msgid "Server share"
 msgstr "Server share"
 
-#: ../src/MountManager.py:100
-#: ../src/MountManager.py:177
 msgid "Setup Mount Again"
 msgstr "Setup Mount Again"
 
-#: ../src/MountManager.py:98
 msgid "User management"
 msgstr "User management"
 
-#: ../src/UserManager.py:60
 msgid "Usermanager"
 msgstr "User manager"
 
-#: ../src/MountEdit.py:222
-#: ../src/UserDialog.py:128
 msgid "Username"
 msgstr "Username"
 
-#: ../src/MountManager.py:97
 msgid "View, edit or delete mountpoints on your Receiver."
 msgstr "View, edit or delete mount points on your Receiver."
 
-#: ../src/MountManager.py:98
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "View, edit or delete usernames and passwords for your network."
 
-#: ../src/MountEdit.py:368
 msgid "Your network mount has been activated."
 msgstr "Your network mount has been activated."
 
-#: ../src/MountView.py:153
 msgid "Your network mount has been removed."
 msgstr "Your network mount has been removed."
 
-#: ../src/MountEdit.py:329
 msgid "Your network mount has been updated."
 msgstr "Your network mount has been updated."
 
-#: ../src/MountEdit.py:212
 msgid "use as HDD replacement"
 msgstr "use as HDD replacement"
 
+#~ msgid "Enigma2 (mount using enigma2"
+#~ msgstr "Enigma2 (mount using enigma2"

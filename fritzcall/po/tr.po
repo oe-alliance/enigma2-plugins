@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -107,8 +107,14 @@ msgstr ""
 " (%s)\n"
 "yeniden deneniyor..."
 
+msgid "Could not get call list; wrong version?"
+msgstr ""
+
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "FRITZ!Box rehber kaydı ayrıştırılamıyor"
+
+msgid "Could not read FRITZ!Box phonebook; wrong version?"
+msgstr ""
 
 msgid "Country"
 msgstr "Ülke"
@@ -238,11 +244,17 @@ msgstr "FRITZ!Box WLAN durumu değiştirilemedi: %s"
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box adresi (isim yada IP)"
 
+msgid "FRITZ!Box FON firmware version"
+msgstr ""
+
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box durumu"
+
+msgid "FRITZ!Box firmware version not configured! Please set it in the configuration."
+msgstr ""
 
 msgid "FRITZ!Box not available for calling"
 msgstr ""
@@ -546,8 +558,7 @@ msgid "Vanity"
 msgstr "Vanity"
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr ""
-"FRITZ!Box'ta çağrı görüntülemeyi etkinleştirmek için #96*5* 'ı aramalısınız!"
+msgstr "FRITZ!Box'ta çağrı görüntülemeyi etkinleştirmek için #96*5* 'ı aramalısınız!"
 
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
@@ -559,6 +570,9 @@ msgstr ""
 "FRITZ!Box parolanızı girmeniz gerekiyor\n"
 "\n"
 "Bağlantı sorunu yaşarsanız, tekrar deneyin."
+
+msgid "before 05.27"
+msgstr ""
 
 msgid "business"
 msgstr ""
@@ -613,8 +627,14 @@ msgstr ""
 msgid "no device active"
 msgstr "etkin cihaz yok"
 
+msgid "not configured"
+msgstr ""
+
 msgid "not encrypted"
 msgstr "şifrelenmemiş"
+
+msgid "not yet implemented"
+msgstr ""
 
 msgid "number suppressed"
 msgstr ""

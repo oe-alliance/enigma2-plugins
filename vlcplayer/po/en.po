@@ -1,0 +1,171 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:02+0000\n"
+"PO-Revision-Date: 2012-12-03 15:02+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "A video streaming solution based on VLC"
+msgstr "A video streaming solution based on VLC"
+
+msgid "Audio Bitrate"
+msgstr "Audio Bitrate"
+
+msgid "Audio Channels"
+msgstr "Audio Channels"
+
+msgid "Audio Codec"
+msgstr "Audio Codec"
+
+msgid "Audio Samplerate"
+msgstr "Audio Samplerate"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "DVD Device (leave empty for default)"
+msgstr "DVD Device (leave empty for default)"
+
+msgid "Enter VLC-Server as FQDN or IP-Address"
+msgstr "Enter VLC-Server as FQDN or IP-Address"
+
+#, python-format
+msgid ""
+"Error loading filelist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Error loading filelist into server %(server)s:\n"
+"%(error)s"
+
+#, python-format
+msgid ""
+"Error loading playlist %(media)s into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Error loading playlist %(media)s into server %(server)s:\n"
+"%(error)s"
+
+#, python-format
+msgid ""
+"Error loading playlist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Error loading playlist into server %(server)s:\n"
+"%(error)s"
+
+#, python-format
+msgid ""
+"Error updating filelist from server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Error updating filelist from server %(server)s:\n"
+"%(error)s"
+
+#, python-format
+msgid ""
+"Error with VLC server:\n"
+"%s"
+msgstr ""
+"Error with VLC server:\n"
+"%s"
+
+msgid "Filelist"
+msgstr "Filelist"
+
+msgid "HTTP Port"
+msgstr "HTTP Port"
+
+msgid "List of known VLC-Server Profiles"
+msgstr "List of known VLC-Server Profiles"
+
+msgid "Movie Directory"
+msgstr "Movie Directory"
+
+msgid "No more files in this directory"
+msgstr "No more files in this directory"
+
+msgid "No previous file in this directory"
+msgstr "No previous file in this directory"
+
+msgid ""
+"No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+msgstr ""
+"No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+
+msgid "OK"
+msgstr "OK"
+
+#, python-format
+msgid "Overscan Correction [in %(percentsign)s of Video width]"
+msgstr "Overscan Correction [in %(percentsign)s of Video width]"
+
+msgid "Playlist"
+msgstr "Playlist"
+
+msgid "Really delete this Server?"
+msgstr "Really delete this Server?"
+
+msgid "Server Address"
+msgstr "Server Address"
+
+msgid "Server Profile Name"
+msgstr "Server Profile Name"
+
+msgid "Serverlist"
+msgstr "Serverlist"
+
+msgid "Subtitle overlay"
+msgstr "Subtitle overlay"
+
+msgid "Transcode MPEG/DVD Audio"
+msgstr "Transcode MPEG/DVD Audio"
+
+msgid "Transcode MPEG/DVD Video"
+msgstr "Transcode MPEG/DVD Video"
+
+msgid "Video Bitrate"
+msgstr "Video Bitrate"
+
+msgid "Video Codec"
+msgstr "Video Codec"
+
+msgid "Video Norm"
+msgstr "Video Norm"
+
+msgid "add server"
+msgstr "add server"
+
+msgid "delete server"
+msgstr "delete server"
+
+msgid "edit server"
+msgstr "edit server"
+
+msgid "filter off"
+msgstr "filter off"
+
+msgid "filter on"
+msgstr "filter on"
+
+msgid "play DVD"
+msgstr "play DVD"
+
+msgid "refresh"
+msgstr "refresh"
+
+msgid "set default"
+msgstr "set default"

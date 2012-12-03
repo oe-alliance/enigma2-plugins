@@ -1,0 +1,234 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 15:01+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%s ..."
+msgstr ""
+
+#, python-format
+msgid "%s..."
+msgstr ""
+
+msgid "1 minutes"
+msgstr ""
+
+msgid "3 minutes"
+msgstr ""
+
+msgid "30 seconds"
+msgstr ""
+
+msgid "Add current playing stream to favorite"
+msgstr ""
+
+msgid "Add current selected genre to favorite"
+msgstr ""
+
+msgid "Add current selected station to favorite"
+msgstr ""
+
+msgid "Add sequence number to output file"
+msgstr ""
+
+msgid "All Countries"
+msgstr ""
+
+msgid "All Genres"
+msgstr ""
+
+msgid "Blank"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Config"
+msgstr ""
+
+msgid "Countries"
+msgstr ""
+
+msgid "Create a directory for each stream"
+msgstr ""
+
+msgid "Do you really want to stop the recording?"
+msgstr ""
+
+msgid "Enter in minutes (0 means unlimited)"
+msgstr ""
+
+msgid "Enter new name for favorite item"
+msgstr ""
+
+msgid "Enter text to search for"
+msgstr ""
+
+msgid "Favorite list"
+msgstr ""
+
+msgid "Favorites"
+msgstr ""
+
+msgid "Filter:"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Fullscreen Layout"
+msgstr ""
+
+msgid "Fullscreen auto activation"
+msgstr ""
+
+msgid "Genres"
+msgstr ""
+
+#, python-format
+msgid "Getting %s"
+msgstr ""
+
+#, python-format
+msgid "Getting InternetRadio %s list..."
+msgstr ""
+
+#, python-format
+msgid ""
+"Getting streaming data from\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid "Getting streaming data from %s"
+msgstr ""
+
+msgid "Internet Radio"
+msgstr ""
+
+#, python-format
+msgid "InternetRadio filter list (%s)"
+msgstr ""
+
+#, python-format
+msgid "InternetRadio station list for filter: %s"
+msgstr ""
+
+#, python-format
+msgid "InternetRadio station list for search-criteria: %s"
+msgstr ""
+
+msgid "Invalid Location"
+msgstr ""
+
+msgid "No streaming data found..."
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "OLED only"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Only running streamings can be recorded!"
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Recording length"
+msgstr ""
+
+msgid "Recording location:"
+msgstr ""
+
+msgid "Recording stream station"
+msgstr ""
+
+msgid "Rip to single file, name is timestamped"
+msgstr ""
+
+msgid "Screen and OLED"
+msgstr ""
+
+msgid "Screen only"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+#, python-format
+msgid "Searching InternetRadio for %s..."
+msgstr ""
+
+msgid "Show TV"
+msgstr ""
+
+msgid "Show cover arts"
+msgstr ""
+
+msgid "Show in extension menu:"
+msgstr ""
+
+msgid "Stations"
+msgstr ""
+
+msgid "Stop record"
+msgstr ""
+
+msgid "Streaming Information"
+msgstr ""
+
+msgid "Text only"
+msgstr ""
+
+msgid "Title: n/a"
+msgstr ""
+
+msgid "Visualization"
+msgstr ""
+
+msgid "Visualization and Text"
+msgstr ""
+
+msgid "do not play a service on startup"
+msgstr ""
+
+msgid "listen to internet-radio"
+msgstr ""
+
+msgid "nothing playing..."
+msgstr ""
+
+msgid "play current selected favorite on startup"
+msgstr ""
+
+msgid "remove current selected favorite"
+msgstr ""
+
+msgid "rename current selected favorite"
+msgstr ""

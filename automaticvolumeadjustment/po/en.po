@@ -1,0 +1,87 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 15:01+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Adjustment value"
+msgstr "Adjustment value"
+
+msgid "Automatic Volume Adjustment"
+msgstr "Automatic Volume Adjustment"
+
+msgid "Automatic Volume Adjustment - Config"
+msgstr "Automatic Volume Adjustment - Config"
+
+msgid "Automatic Volume Adjustment - Entry Config"
+msgstr "Automatic Volume Adjustment - Entry Config"
+
+msgid "Automatic Volume Adjustment - Service Config"
+msgstr "Automatic Volume Adjustment - Service Config"
+
+msgid "Automatic volume adjust"
+msgstr "Automatic volume adjust"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Channel Selection"
+msgstr "Channel Selection"
+
+msgid "Default volume adjustment value for AC3/DTS"
+msgstr "Default volume adjustment value for AC3/DTS"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Do you really want to delete this entry?"
+msgstr "Do you really want to delete this entry?"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Enable"
+msgstr "Enable"
+
+msgid "Max. volume for mpeg audio"
+msgstr "Max. volume for mpeg audio"
+
+msgid "Modus"
+msgstr "Modus"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Press OK to select a service"
+msgstr "Press OK to select a service"
+
+msgid "Remember service volume value"
+msgstr "Remember service volume value"
+
+msgid "Servicename"
+msgstr "Servicename"
+
+msgid "Services"
+msgstr "Services"
+
+msgid "Show volumebar when volume-value was changed"
+msgstr "Show volumebar when volume-value was changed"
+
+msgid "You must select a valid service!"
+msgstr "You must select a valid service!"

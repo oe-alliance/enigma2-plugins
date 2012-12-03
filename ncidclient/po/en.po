@@ -1,0 +1,228 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 15:01+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: this is a window title.
+msgid "Add entry to phonebook"
+msgstr "Add entry to phonebook"
+
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr "Areacode to add to calls without one (if necessary)"
+
+msgid "Austria"
+msgstr "Austria"
+
+msgid "Automatically add new Caller to PhoneBook"
+msgstr "Automatically add new Caller to PhoneBook"
+
+msgid "Call monitoring"
+msgstr "Call monitoring"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Compact Flash"
+msgstr "Compact Flash"
+
+msgid "Connected to NCID Server"
+msgstr "Connected to NCID Server"
+
+#, python-format
+msgid ""
+"Connecting to NCID Server failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Connecting to NCID Server failed\n"
+" (%s)\n"
+"retrying..."
+
+msgid "Connecting to NCID Server..."
+msgstr "Connecting to NCID Server..."
+
+#, python-format
+msgid ""
+"Connection to NCID Server lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Connection to NCID Server lost\n"
+" (%s)\n"
+"retrying..."
+
+msgid "Country"
+msgstr "Country"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Display Fon calls on screen"
+msgstr "Display Fon calls on screen"
+
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Enter Search Terms"
+msgstr "Enter Search Terms"
+
+msgid "Entry incomplete."
+msgstr "Entry incomplete."
+
+msgid "Flash"
+msgstr "Flash"
+
+msgid "France"
+msgstr "France"
+
+msgid "Germany"
+msgstr "Germany"
+
+#, python-format
+msgid ""
+"Incoming Call on %s from\n"
+"---------------------------------------------\n"
+"%s\n"
+"%s\n"
+"---------------------------------------------"
+msgstr ""
+"Incoming Call on %s from\n"
+"---------------------------------------------\n"
+"%s\n"
+"%s\n"
+"---------------------------------------------"
+
+msgid "Italy"
+msgstr "Italy"
+
+msgid "Last 10 calls:\n"
+msgstr "Last 10 calls:\n"
+
+msgid "Media directory"
+msgstr "Media directory"
+
+#. TRANSLATORS: this is a window title.
+msgid "NCID Client - Setup"
+msgstr "NCID Client - Setup"
+
+msgid "NCID server (Name or IP)"
+msgstr "NCID server (Name or IP)"
+
+msgid "NCID server listening port (1-65535)"
+msgstr "NCID server listening port (1-65535)"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Network mount"
+msgstr "Network mount"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "New"
+msgstr "New"
+
+msgid "No entry selected"
+msgstr "No entry selected"
+
+msgid "No phonebook"
+msgstr "No phonebook"
+
+msgid "Number"
+msgstr "Number"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "OK"
+msgstr "OK"
+
+msgid "PhoneBook Location"
+msgstr "PhoneBook Location"
+
+#. TRANSLATORS: this is a window title.
+msgid "Phonebook"
+msgstr "Phonebook"
+
+msgid "Plugin not active"
+msgstr "Plugin not active"
+
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr "Reverse Lookup Caller ID (select country below)"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Search"
+msgstr "Search"
+
+msgid "Search phonebook"
+msgstr "Search phonebook"
+
+msgid "Show after Standby"
+msgstr "Show after Standby"
+
+msgid "Show connection information popups"
+msgstr "Show connection information popups"
+
+msgid "Strip Leading 0"
+msgstr "Strip Leading 0"
+
+msgid "Switzerland"
+msgstr "Switzerland"
+
+msgid "The Netherlands"
+msgstr "The Netherlands"
+
+msgid "Timeout for Call Notifications (seconds)"
+msgstr "Timeout for Call Notifications (seconds)"
+
+msgid "UNKNOWN"
+msgstr "UNKNOWN"
+
+msgid "USB Device"
+msgstr "USB Device"
+
+msgid "Use internal PhoneBook"
+msgstr "Use internal PhoneBook"
+
+msgid "no calls"
+msgstr "no calls"
+
+msgid "number suppressed"
+msgstr "number suppressed"
+
+msgid "show as list"
+msgstr "show as list"
+
+msgid "show each call"
+msgstr "show each call"
+
+msgid "show nothing"
+msgstr "show nothing"

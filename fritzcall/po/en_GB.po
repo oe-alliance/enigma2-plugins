@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
-"PO-Revision-Date: 2012-03-16 14:20+0100\n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 17:32-0000\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -65,7 +66,7 @@ msgstr "Call redirection"
 
 #, python-format
 msgid "Calling %s"
-msgstr ""
+msgstr "Calling %s"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -109,8 +110,14 @@ msgstr ""
 " (%s)\n"
 "retrying..."
 
+msgid "Could not get call list; wrong version?"
+msgstr "Could not get call list; wrong version?"
+
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "Could not parse FRITZ!Box Phonebook entry"
+
+msgid "Could not read FRITZ!Box phonebook; wrong version?"
+msgstr "Could not read FRITZ!Box phonebook; wrong version?"
 
 msgid "Country"
 msgstr "Country"
@@ -244,14 +251,24 @@ msgstr "FRITZ!Box - Failed changing WLAN: %s"
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box FON address (Name or IP)"
 
+msgid "FRITZ!Box FON firmware version"
+msgstr "FRITZ!Box FON firmware version"
+
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Fon Status"
 
-msgid "FRITZ!Box not available for calling"
+msgid ""
+"FRITZ!Box firmware version not configured! Please set it in the "
+"configuration."
 msgstr ""
+"FRITZ!Box firmware version not configured! Please set it in the "
+"configuration."
+
+msgid "FRITZ!Box not available for calling"
+msgstr "FRITZ!Box not available for calling"
 
 msgid "Filter also list of calls"
 msgstr "Filter also list of calls"
@@ -582,6 +599,9 @@ msgstr ""
 "\n"
 "It could be a communication issue, just try again."
 
+msgid "before 05.27"
+msgstr "before 05.27"
+
 msgid "business"
 msgstr "business"
 
@@ -635,8 +655,14 @@ msgstr "no calls"
 msgid "no device active"
 msgstr "no device active"
 
+msgid "not configured"
+msgstr "not configured"
+
 msgid "not encrypted"
 msgstr "not encrypted"
+
+msgid "not yet implemented"
+msgstr "not yet implemented"
 
 msgid "number suppressed"
 msgstr "number suppressed"

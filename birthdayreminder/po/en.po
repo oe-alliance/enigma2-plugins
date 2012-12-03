@@ -1,0 +1,226 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 15:01+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%s will turn %s in %s!"
+msgstr "%s will turn %s in %s!"
+
+msgid "1 day"
+msgstr "1 day"
+
+msgid "1 week"
+msgstr "1 week"
+
+msgid "3 days"
+msgstr "3 days"
+
+msgid "Accept changes"
+msgstr "Accept changes"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Add a birthday"
+msgstr "Add a birthday"
+
+msgid "Add birthday"
+msgstr "Add birthday"
+
+msgid "Age"
+msgstr "Age"
+
+msgid "Birthday"
+msgstr "Birthday"
+
+msgid "Birthday Reminder"
+msgstr "Birthday Reminder"
+
+msgid "Birthday Reminder Settings"
+msgstr "Birthday Reminder Settings"
+
+#, python-format
+msgid "Birthday Reminder received %s birthdays from %s."
+msgstr "Birthday Reminder received %s birthdays from %s."
+
+msgid "Birthday filename:"
+msgstr "Birthday filename:"
+
+msgid "Birthdays"
+msgstr "Birthdays"
+
+msgid "CSV import successful!"
+msgstr "CSV import successful!"
+
+#, python-format
+msgid "Can't find CSV file %s!"
+msgstr "Can't find CSV file %s!"
+
+#, python-format
+msgid "Can't import CSV data from file %s."
+msgstr "Can't import CSV data from file %s."
+
+#, python-format
+msgid "Can't write CSV file %s."
+msgstr "Can't write CSV file %s."
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Change path"
+msgstr "Change path"
+
+msgid "Date format:"
+msgstr "Date format:"
+
+msgid "Day:"
+msgstr "Day:"
+
+msgid "Disabled"
+msgstr "Disabled"
+
+msgid "Distribute birthdays to other Dreamboxes"
+msgstr "Distribute birthdays to other Dreamboxes"
+
+#, python-format
+msgid "Do you really want to delete the entry for %s?"
+msgstr "Do you really want to delete the entry for %s?"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Edit birthday"
+msgstr "Edit birthday"
+
+msgid "Edit birthdays"
+msgstr "Edit birthdays"
+
+msgid "Edit the selected entry"
+msgstr "Edit the selected entry"
+
+#, python-format
+msgid ""
+"Error reading file %s.\n"
+"\n"
+"Error: %s, %s"
+msgstr ""
+"Error reading file %s.\n"
+"\n"
+"Error: %s, %s"
+
+#, python-format
+msgid ""
+"Error writing file %s.\n"
+"\n"
+"Error: %s, %s"
+msgstr ""
+"Error writing file %s.\n"
+"\n"
+"Error: %s, %s"
+
+msgid "Exit the plugin"
+msgstr "Exit the plugin"
+
+msgid "Export CSV file"
+msgstr "Export CSV file"
+
+msgid "Extras"
+msgstr "Extras"
+
+msgid "Helps to remind of birthdays"
+msgstr "Helps to remind of birthdays"
+
+msgid "Import CSV file"
+msgstr "Import CSV file"
+
+msgid "Invalid Location"
+msgstr "Invalid Location"
+
+msgid "Invalid date!"
+msgstr "Invalid date!"
+
+msgid "Month:"
+msgstr "Month:"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Name:"
+msgstr "Name:"
+
+msgid "Networking port (default: 7374):"
+msgstr "Networking port (default: 7374):"
+
+msgid "Next birthday"
+msgstr "Next birthday"
+
+msgid "Notification time:"
+msgstr "Notification time:"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open the extras menu"
+msgstr "Open the extras menu"
+
+msgid "Path to birthday file:"
+msgstr "Path to birthday file:"
+
+msgid "Remind before birthday:"
+msgstr "Remind before birthday:"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Remove the selected entry"
+msgstr "Remove the selected entry"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Show plugin in extensions menu:"
+msgstr "Show plugin in extensions menu:"
+
+msgid "Sort birthdays by:"
+msgstr "Sort birthdays by:"
+
+msgid "Sorting next"
+msgstr "Sorting next"
+
+msgid "Sorting previous"
+msgstr "Sorting previous"
+
+#, python-format
+msgid ""
+"Today is %s's birthday!\n"
+"\n"
+"She/he was born on %s and is now %s year(s) old."
+msgstr ""
+"Today is %s's birthday!\n"
+"\n"
+"She/he was born on %s and is now %s year(s) old."
+
+msgid "What do you want to do?"
+msgstr "What do you want to do?"
+
+#, python-format
+msgid "Wrote CSV file %s."
+msgstr "Wrote CSV file %s."
+
+msgid "Year:"
+msgstr "Year:"

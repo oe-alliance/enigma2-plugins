@@ -1,0 +1,227 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 15:01+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%d kb/s"
+msgstr "%d kb/s"
+
+msgid "A basic FTP client"
+msgstr "A basic FTP client"
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists locally.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"A file with this name (%s) already exists locally.\n"
+"Do you want to overwrite it?"
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists on the remote host.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"A file with this name (%s) already exists on the remote host.\n"
+"Do you want to overwrite it?"
+
+msgid ""
+"A transfer is currently in progress.\n"
+"What do you want to do?"
+msgstr ""
+"A transfer is currently in progress.\n"
+"What do you want to do?"
+
+msgid "Abort transfer"
+msgstr "Abort transfer"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Address:"
+msgstr "Address:"
+
+#, python-format
+msgid "Are you sure you want to delete %s?"
+msgstr "Are you sure you want to delete %s?"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Configuration saved."
+msgstr "Configuration saved."
+
+msgid "Connect to FTP..."
+msgstr "Connect to FTP..."
+
+msgid "Could not connect to ftp server!"
+msgstr "Could not connect to ftp server!"
+
+#, python-format
+msgid "Could not delete %s."
+msgstr "Could not delete %s."
+
+msgid "Could not obtain list of files."
+msgstr "Could not obtain list of files."
+
+#, python-format
+msgid "Could not rename %s."
+msgstr "Could not rename %s."
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Download finished."
+msgstr "Download finished."
+
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr "ETA %d:%02d min"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Enter URI"
+msgstr "Enter URI"
+
+msgid "Enter URI of FTP Server:"
+msgstr "Enter URI of FTP Server:"
+
+msgid "Enter new filename:"
+msgstr "Enter new filename:"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Error during download."
+msgstr "Error during download."
+
+msgid "Exit"
+msgstr "Exit"
+
+msgid "FTP Queue Manager"
+msgstr "FTP Queue Manager"
+
+msgid "FTP Server Editor"
+msgstr "FTP Server Editor"
+
+msgid "FTP Server Manager"
+msgstr "FTP Server Manager"
+
+msgid "Local"
+msgstr "Local"
+
+msgid "Name:"
+msgstr "Name:"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Parent Directory"
+msgstr "Parent Directory"
+
+msgid "Passive:"
+msgstr "Passive:"
+
+msgid "Password:"
+msgstr "Password:"
+
+msgid "Port:"
+msgstr "Port:"
+
+msgid "Queue Manager"
+msgstr "Queue Manager"
+
+msgid "Queue processed."
+msgstr "Queue processed."
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+
+msgid "Remote"
+msgstr "Remote"
+
+msgid "Remote (not connected)"
+msgstr "Remote (not connected)"
+
+#, python-format
+msgid "Removed %s."
+msgstr "Removed %s."
+
+msgid "Removing directories is not supported."
+msgstr "Removing directories is not supported."
+
+msgid "Rename"
+msgstr "Rename"
+
+#, python-format
+msgid "Renamed %s to %s."
+msgstr "Renamed %s to %s."
+
+msgid "Run in Background"
+msgstr "Run in Background"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Select local file list"
+msgstr "Select local file list"
+
+msgid "Select remote file list"
+msgstr "Select remote file list"
+
+msgid "Server Manager"
+msgstr "Server Manager"
+
+msgid ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+msgstr ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+
+msgid "There already is an active transfer."
+msgstr "There already is an active transfer."
+
+msgid "Upload"
+msgstr "Upload"
+
+msgid "Upload finished."
+msgstr "Upload finished."
+
+msgid "Username:"
+msgstr "Username:"
+
+msgid "Which server do you want to connect to?"
+msgstr "Which server do you want to connect to?"
+
+msgid "close"
+msgstr "close"
+
+msgid "enter directory/get file/put file"
+msgstr "enter directory/get file/put file"
+
+msgid "open menu"
+msgstr "open menu"

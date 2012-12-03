@@ -1,0 +1,290 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 15:01+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%s name"
+msgstr "%s name"
+
+msgid "Album"
+msgstr "Album"
+
+msgid "Artist"
+msgstr "Artist"
+
+msgid "Ban"
+msgstr "Ban"
+
+msgid "Ban Track, never play"
+msgstr "Ban Track, never play"
+
+msgid "Banned Tracks"
+msgstr "Banned Tracks"
+
+msgid "Banned Tracks loaded"
+msgstr "Banned Tracks loaded"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Extensions menu"
+msgstr "Extensions menu"
+
+msgid "Friends"
+msgstr "Friends"
+
+msgid "Friends loaded"
+msgstr "Friends loaded"
+
+msgid "Global Tags"
+msgstr "Global Tags"
+
+msgid "Global Tags loaded"
+msgstr "Global Tags loaded"
+
+msgid "Group of"
+msgstr "Group of"
+
+msgid "Interval for Coverart Animation"
+msgstr "Interval for Coverart Animation"
+
+msgid "Interval to refresh Metadata (seconds)"
+msgstr "Interval to refresh Metadata (seconds)"
+
+msgid "Last.FM"
+msgstr "Last.FM"
+
+msgid "Last.FM Username"
+msgstr "Last.FM Username"
+
+msgid "LastFM Proxy port"
+msgstr "LastFM Proxy port"
+
+msgid "Listen to Last.FM Internet Radio"
+msgstr "Listen to Last.FM Internet Radio"
+
+msgid "Loading Friends"
+msgstr "Loading Friends"
+
+msgid "Loading Global Tags"
+msgstr "Loading Global Tags"
+
+msgid "Loading Loved Tracks"
+msgstr "Loading Loved Tracks"
+
+msgid "Loading Neighbours"
+msgstr "Loading Neighbours"
+
+msgid "Loading Recent Tracks"
+msgstr "Loading Recent Tracks"
+
+msgid "Loading Top Tacks"
+msgstr "Loading Top Tacks"
+
+msgid "Love"
+msgstr "Love"
+
+msgid "Loved Tracks"
+msgstr "Loved Tracks"
+
+msgid "Loved Tracks loaded"
+msgstr "Loved Tracks loaded"
+
+msgid "Mark Track as loved"
+msgstr "Mark Track as loved"
+
+msgid "Name (needs GUI restart)"
+msgstr "Name (needs GUI restart)"
+
+msgid "Neighbours"
+msgstr "Neighbours"
+
+msgid "Neighbours Tracks"
+msgstr "Neighbours Tracks"
+
+msgid "Neighbours loaded"
+msgstr "Neighbours loaded"
+
+msgid "Next Selection"
+msgstr "Next Selection"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open"
+msgstr "Open"
+
+msgid "Page backward Selections"
+msgstr "Page backward Selections"
+
+msgid "Page forward Selections"
+msgstr "Page forward Selections"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Personal Recommendations"
+msgstr "Personal Recommendations"
+
+msgid "Personal Stations"
+msgstr "Personal Stations"
+
+msgid "Play"
+msgstr "Play"
+
+msgid "Play Artist Radio..."
+msgstr "Play Artist Radio..."
+
+msgid "Play Group Radio..."
+msgstr "Play Group Radio..."
+
+msgid "Play Tag Radio..."
+msgstr "Play Tag Radio..."
+
+msgid "Plugin menu"
+msgstr "Plugin menu"
+
+msgid "Previous Selection"
+msgstr "Previous Selection"
+
+msgid "Quit"
+msgstr "Quit"
+
+msgid "Recent Tracks"
+msgstr "Recent Tracks"
+
+msgid "Recent Tracks loaded"
+msgstr "Recent Tracks loaded"
+
+msgid "Recommendation level"
+msgstr "Recommendation level"
+
+msgid "Select next Tab"
+msgstr "Select next Tab"
+
+msgid "Select prev Tab"
+msgstr "Select prev Tab"
+
+msgid "Send now playing Audio Tracks"
+msgstr "Send now playing Audio Tracks"
+
+msgid "Server returned"
+msgstr "Server returned"
+
+msgid "Setup"
+msgstr "Setup"
+
+msgid "Show Coverart"
+msgstr "Show Coverart"
+
+msgid "Show Coverart Animation in Screensaver"
+msgstr "Show Coverart Animation in Screensaver"
+
+msgid "Show Coverart in Screensaver"
+msgstr "Show Coverart in Screensaver"
+
+msgid "Show in (needs GUI restart)"
+msgstr "Show in (needs GUI restart)"
+
+msgid "Skip"
+msgstr "Skip"
+
+msgid "Skip current Track"
+msgstr "Skip current Track"
+
+msgid "Speed for Coverart Animation"
+msgstr "Speed for Coverart Animation"
+
+msgid "Start/stop streaming"
+msgstr "Start/stop streaming"
+
+msgid "Starting stream"
+msgstr "Starting stream"
+
+msgid "Station changed"
+msgstr "Station changed"
+
+msgid "Stop"
+msgstr "Stop"
+
+msgid "Stream stopped"
+msgstr "Stream stopped"
+
+msgid "Switch to selected Station"
+msgstr "Switch to selected Station"
+
+msgid "Timeout Statustext (seconds)"
+msgstr "Timeout Statustext (seconds)"
+
+msgid "Timeout to select a Tab (seconds)"
+msgstr "Timeout to select a Tab (seconds)"
+
+msgid "Top Tracks"
+msgstr "Top Tracks"
+
+msgid "Top Tracks loaded"
+msgstr "Top Tracks loaded"
+
+msgid "Track"
+msgstr "Track"
+
+msgid "Track banned"
+msgstr "Track banned"
+
+msgid "Track loved"
+msgstr "Track loved"
+
+msgid "Track skipped"
+msgstr "Track skipped"
+
+msgid "Tracks liked by Fans of"
+msgstr "Tracks liked by Fans of"
+
+msgid "Tracks similar to"
+msgstr "Tracks similar to"
+
+msgid "Use LastFM Proxy"
+msgstr "Use LastFM Proxy"
+
+msgid "Use Screensaver"
+msgstr "Use Screensaver"
+
+msgid "Ver."
+msgstr "Ver."
+
+msgid "Wait before Screensaver (seconds)"
+msgstr "Wait before Screensaver (seconds)"
+
+msgid "logging into last.FM"
+msgstr "logging into last.FM"
+
+msgid "login failed! "
+msgstr "login failed! "
+
+msgid "login successful"
+msgstr "login successful"
+
+msgid "playing:"
+msgstr "playing:"
+
+#, python-format
+msgid "please enter an %s name to listen to"
+msgstr "please enter an %s name to listen to"

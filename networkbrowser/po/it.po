@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - networkbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
 "PO-Revision-Date: 2009-10-29 14:01+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: WWW.Linsat.net <spaeleus@croci.org>\n"
@@ -26,6 +26,11 @@ msgstr ""
 "Voce di mount già esistente!\n"
 "Aggiornarla con la configurazione corrente e continuare?\n"
 
+msgid ""
+"A mount entry with this name already exists!\n"
+"and is not this share folder, please use a different name.\n"
+msgstr ""
+
 msgid "Active"
 msgstr "Attivo"
 
@@ -36,13 +41,16 @@ msgstr ""
 "Attivo\n"
 "Inattivo"
 
-msgid "Add a new NFS or CIFS mount point to your Dreambox."
+msgid "Add a new NFS or CIFS mount point to your Receiver."
 msgstr ""
 
 msgid "Add new network mount point"
 msgstr "Aggiungere nuovo mount point di rete"
 
 msgid "Adding schedule..."
+msgstr ""
+
+msgid "Are you sure you want to remove your network mount ?"
 msgstr ""
 
 msgid ""
@@ -70,7 +78,7 @@ msgstr "Annull."
 msgid "Change hostname"
 msgstr "Cambiare nome Host"
 
-msgid "Change the hostname of your Dreambox."
+msgid "Change the hostname of your Receiver."
 msgstr ""
 
 msgid "Close"
@@ -88,13 +96,16 @@ msgstr "Dir: "
 msgid "Do you want to enter a username and password for this host?"
 msgstr "Utilizzare nome User e Password per questo Host?"
 
-msgid "Enigma2 (mount using enigma2"
+msgid "Enigma2 (mount using enigma2)"
+msgstr ""
+
+msgid "Enigma2 old format (mount using linux)"
 msgstr ""
 
 msgid "Enter IP to scan..."
 msgstr "Inserire IP da ricercare..."
 
-msgid "Enter new hostname for your Dreambox"
+msgid "Enter new hostname for your Receiver"
 msgstr ""
 
 msgid "Enter options:"
@@ -139,6 +150,15 @@ msgstr "Gestire condivisioni di rete"
 msgid "Manage your network shares..."
 msgstr "Gestire condivisioni di rete..."
 
+msgid "Mount Again"
+msgstr ""
+
+msgid "Mount Manager"
+msgstr ""
+
+msgid "Mount Viewer"
+msgstr ""
+
 msgid "Mount again"
 msgstr ""
 
@@ -153,9 +173,6 @@ msgstr "Tipo mount"
 
 msgid "Mount using"
 msgstr ""
-
-msgid "MountManager"
-msgstr "MountManager"
 
 msgid ""
 "Mounted/\n"
@@ -181,9 +198,6 @@ msgstr "Condivisione NFS"
 
 msgid "Network Browser"
 msgstr ""
-
-msgid "NetworkBrowser"
-msgstr "NetworkBrowser"
 
 msgid "No network devices found!"
 msgstr "Nessun apparato di rete trovato!"
@@ -281,7 +295,7 @@ msgstr "Gestione User"
 msgid "Username"
 msgstr "Nome User"
 
-msgid "View, edit or delete mountpoints on your Dreambox."
+msgid "View, edit or delete mountpoints on your Receiver."
 msgstr ""
 
 msgid "View, edit or delete usernames and passwords for your network."
@@ -298,3 +312,9 @@ msgstr "Mount di rete aggiornato."
 
 msgid "use as HDD replacement"
 msgstr "Usare in sostituzione HDD"
+
+#~ msgid "MountManager"
+#~ msgstr "MountManager"
+
+#~ msgid "NetworkBrowser"
+#~ msgstr "NetworkBrowser"

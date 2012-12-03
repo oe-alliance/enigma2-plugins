@@ -1,0 +1,175 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 15:01+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src_py/plugin.py:41
+msgid "Advanced cut specification..."
+msgstr "Advanced cut specification..."
+
+#: ../src_py/plugin.py:278
+#, python-format
+msgid ""
+"Another movie is currently cut.\n"
+"The movie \"%s\" will be cut in the background after it."
+msgstr ""
+"Another movie is currently cut.\n"
+"The movie \"%s\" will be cut in the background after it."
+
+#: ../src_py/plugin.py:247
+msgid "Bad arguments"
+msgstr "Bad arguments"
+
+#: ../src_py/plugin.py:88
+msgid "Cancel"
+msgstr "Cancel"
+
+#: ../src_py/plugin.py:179
+msgid "Choose target folder"
+msgstr "Choose target folder"
+
+#: ../src_py/plugin.py:250
+msgid "Couldn't open input .ap file"
+msgstr "Couldn't open input .ap file"
+
+#: ../src_py/plugin.py:249
+msgid "Couldn't open input .cuts file"
+msgstr "Couldn't open input .cuts file"
+
+#: ../src_py/plugin.py:248
+msgid "Couldn't open input .ts file"
+msgstr "Couldn't open input .ts file"
+
+#: ../src_py/plugin.py:253
+msgid "Couldn't open output .ap file"
+msgstr "Couldn't open output .ap file"
+
+#: ../src_py/plugin.py:252
+msgid "Couldn't open output .cuts file"
+msgstr "Couldn't open output .cuts file"
+
+#: ../src_py/plugin.py:251
+msgid "Couldn't open output .ts file"
+msgstr "Couldn't open output .ts file"
+
+#: ../src_py/plugin.py:131
+msgid "Cut Parameter Input"
+msgstr "Cut Parameter Input"
+
+#: ../src_py/plugin.py:123
+msgid "Cut source:"
+msgstr "Cut source:"
+
+#: ../src_py/plugin.py:104
+msgid "Cutlist"
+msgstr "Cutlist"
+
+#: ../src_py/plugin.py:124
+msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
+msgstr "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
+
+#: ../src_py/plugin.py:247 ../src_py/plugin.py:248 ../src_py/plugin.py:249
+#: ../src_py/plugin.py:250 ../src_py/plugin.py:251 ../src_py/plugin.py:252
+#: ../src_py/plugin.py:253 ../src_py/plugin.py:254 ../src_py/plugin.py:255
+#: ../src_py/plugin.py:256
+#, python-format
+msgid "Cutting failed for movie \"%s\""
+msgstr "Cutting failed for movie \"%s\""
+
+#: ../src_py/plugin.py:257
+#, python-format
+msgid "Cutting was aborted for movie \"%s\""
+msgstr "Cutting was aborted for movie \"%s\""
+
+#: ../src_py/plugin.py:38
+msgid "Don't cut"
+msgstr "Don't cut"
+
+#: ../src_py/plugin.py:254
+msgid "Empty .ap file"
+msgstr "Empty .ap file"
+
+#: ../src_py/plugin.py:24
+msgid "Execute cuts..."
+msgstr "Execute cuts..."
+
+#: ../src_py/plugin.py:43
+#, python-format
+msgid "How would you like to cut \"%s\"?"
+msgstr "How would you like to cut \"%s\"?"
+
+#: ../src_py/plugin.py:104
+msgid "Manual specification"
+msgstr "Manual specification"
+
+#: ../src_py/plugin.py:121
+msgid "New description:"
+msgstr "New description:"
+
+#: ../src_py/plugin.py:119
+msgid "New filename:"
+msgstr "New filename:"
+
+#: ../src_py/plugin.py:122
+msgid "New location:"
+msgstr "New location:"
+
+#: ../src_py/plugin.py:120
+msgid "New title:"
+msgstr "New title:"
+
+#: ../src_py/plugin.py:96
+msgid "No"
+msgstr "No"
+
+#: ../src_py/plugin.py:255
+msgid "No cuts specified"
+msgstr "No cuts specified"
+
+#: ../src_py/plugin.py:87
+msgid "OK"
+msgstr "OK"
+
+#: ../src_py/plugin.py:40
+msgid "Place the cut movie in a new file ending with \" cut\""
+msgstr "Place the cut movie in a new file ending with \" cut\""
+
+#: ../src_py/plugin.py:256
+msgid "Read/write error (disk full?)"
+msgstr "Read/write error (disk full?)"
+
+#: ../src_py/plugin.py:118
+msgid "Replace original:"
+msgstr "Replace original:"
+
+#: ../src_py/plugin.py:39
+msgid "Replace the original movie with the cut movie"
+msgstr "Replace the original movie with the cut movie"
+
+#: ../src_py/plugin.py:276
+#, python-format
+msgid "The movie \"%s\" is cut in the background."
+msgstr "The movie \"%s\" is cut in the background."
+
+#: ../src_py/plugin.py:246
+#, python-format
+msgid "The movie \"%s\" is successfully cut"
+msgstr "The movie \"%s\" is successfully cut"
+
+#: ../src_py/plugin.py:96
+msgid "Yes"
+msgstr "Yes"
