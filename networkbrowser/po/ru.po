@@ -35,7 +35,7 @@ msgstr ""
 "Вкл./\n"
 "Выкл."
 
-msgid "Add a new NFS or CIFS mount point to your STB."
+msgid "Add a new NFS or CIFS mount point to your Receiver."
 msgstr "Добавьте NFS или CIFS точку монтирования. "
 
 msgid "Add new network mount point"
@@ -66,7 +66,7 @@ msgstr "Отменить"
 msgid "Change hostname"
 msgstr "Сменить имя хоста"
 
-msgid "Change the hostname of your STB."
+msgid "Change the hostname of your Receiver."
 msgstr "Сменить имя хоста ресивера."
 
 msgid "Close"
@@ -244,7 +244,7 @@ msgstr "Менеджер пользователя"
 msgid "Username"
 msgstr "Логин"
 
-msgid "View, edit or delete mountpoints on your STB."
+msgid "View, edit or delete mountpoints on your Receiver."
 msgstr "Просмотреть, редактировать или удалить точки подключения"
 
 msgid "View, edit or delete usernames and passwords for your network."
