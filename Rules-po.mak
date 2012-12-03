@@ -9,7 +9,7 @@ LANGPO = $(LANGS:=.po)
 if UPDATE_PO
 # the TRANSLATORS: allows putting translation comments before the to-be-translated line.
 $(PLUGIN)-py.pot: $(srcdir)/../src/*.py
-	$(XGETTEXT) -L python --from-code=UTF-8 --add-comments="TRANSLATORS:" -d $(PLUGIN) -s -o $@ $^
+	$(XGETTEXT) --no-wrap -L python --from-code=UTF-8 --add-comments="TRANSLATORS:" -d $(PLUGIN) -s -o $@ $^
 
 $(PLUGIN)-xml.pot: $(top_srcdir)/xml2po.py $(srcdir)/../src/*.xml
 	$(PYTHON) $^ > $@
@@ -17,11 +17,11 @@ $(PLUGIN)-xml.pot: $(top_srcdir)/xml2po.py $(srcdir)/../src/*.xml
 $(PLUGIN).pot: $(PLUGIN)-py.pot $(PLUGIN)-xml.pot
 	sed --in-place $(PLUGIN)-py.pot --expression=s/CHARSET/UTF-8/
 	sed --in-place $(PLUGIN)-xml.pot --expression=s/CHARSET/UTF-8/
-	cat $^ | $(MSGUNIQ) --no-location -o $@
+	cat $^ | $(MSGUNIQ) --no-wrap --no-location -o $@
 
 %.po: $(PLUGIN).pot
 	if [ -f $@ ]; then \
-		$(MSGMERGE) --backup=none --no-location -s -N -U $@ $< && touch $@; \
+		$(MSGMERGE) --backup=none --no-wrap --no-location -s -N -U $@ $< && touch $@; \
 	else \
 		$(MSGINIT) -l $@ -o $@ -i $< --no-translator; \
 	fi
