@@ -510,6 +510,7 @@ rsdownloader/src/container/Makefile
 satloader/Makefile
 satloader/meta/Makefile
 satloader/src/Makefile
+satloader/po/Makefile
 
 seekbar/Makefile
 seekbar/meta/Makefile
