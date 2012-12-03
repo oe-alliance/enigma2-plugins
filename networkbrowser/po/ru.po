@@ -87,7 +87,7 @@ msgstr "Хотите ввести имя и пароль для этого хо�
 msgid "Enter IP to scan..."
 msgstr "Введите IP для скана..."
 
-msgid "Enter new hostname for your Dreambox"
+msgid "Enter new hostname for your Receiver"
 msgstr "Введите новое имя хоста"
 
 msgid "Enter options:"
