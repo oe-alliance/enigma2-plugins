@@ -17,11 +17,9 @@ def localeInit():
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
-		print ("[" + PluginLanguageDomain + "] fallback to default translation for", txt)
+		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
 		t = gettext.gettext(txt)
 	return t
 
 localeInit()
 language.addCallback(localeInit)
-
-NOTIFICATIONID = 'EpgRefreshNotificationId'
