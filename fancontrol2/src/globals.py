@@ -1,5 +1,5 @@
 from __init__ import _
-Version = "V2.6r3"
+Version = "V2.7r0"
 # globale Variablen        
 ZielRPM = 0
 AktVLT = 0
@@ -9,6 +9,9 @@ AktTemp = 0
 AktHDD = []
 LastVLT = 0
 LastPWM = 0
+IntegralRPM = 0
+AktERR = 0
+ErrRPM = 0
 FanFehler = 0
 OverheatTimer = 0
 Overheat = False

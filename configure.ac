@@ -535,6 +535,11 @@ rsdownloader/po/Makefile
 rsdownloader/src/Makefile
 rsdownloader/src/container/Makefile
 
+satloader/Makefile
+satloader/meta/Makefile
+satloader/src/Makefile
+satloader/po/Makefile
+
 schiffe/Makefile
 schiffe/meta/Makefile
 schiffe/src/Makefile

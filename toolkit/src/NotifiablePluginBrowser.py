@@ -1,21 +1,22 @@
-from Screens import PluginBrowser
+from Screens import PluginBrowser as PBBase
 from Screens.InfoBarGenerics import InfoBarNotifications
 
-OriginalPluginBrowser = PluginBrowser.PluginBrowser
+OriginalPluginBrowser = PBBase.PluginBrowser
 if not issubclass(OriginalPluginBrowser, InfoBarNotifications):
-	class NotifiablePluginBrowser(OriginalPluginBrowser, InfoBarNotifications):
+	class PluginBrowser(OriginalPluginBrowser, InfoBarNotifications):
 		def __init__(self, *args, **kwargs):
 			OriginalPluginBrowser.__init__(self, *args, **kwargs)
-			if self.skinName == "NotifiablePluginBrowser":
-				self.skinName = "PluginBrowser"
+			#if self.skinName in ("NotifiablePluginBrowser", "OriginalPluginBrowser"):
+			#	self.skinName = "PluginBrowser"
 			InfoBarNotifications.__init__(self)
+	NotifiablePluginBrowser = PluginBrowser
 else:
 	NotifiablePluginBrowser = OriginalPluginBrowser
 
 def install():
-	PluginBrowser.PluginBrowser = NotifiablePluginBrowser
+	PBBase.PluginBrowser = NotifiablePluginBrowser
 
 def uninstall():
-	PluginBrowser.PluginBrowser = OriginalPluginBrowser
+	PBBase.PluginBrowser = OriginalPluginBrowser
 
 __all__ = ['OriginalPluginBrowser', 'NotifiablePluginBrowser', 'install', 'uninstall']
