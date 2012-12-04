@@ -153,13 +153,8 @@ def handleAutoPoller():
 		autotimer = None
 
 def editCallback(session):
-	global autotimer
-
 	# Don't parse EPG if editing was canceled
 	if session is not None:
-		if autotimer is None:
-			from AutoTimer import AutoTimer
-			autotimer = AutoTimer()
 		autotimer.parseEPGAsync().addCallback(parseEPGCallback)
 	else:
 		handleAutoPoller()
