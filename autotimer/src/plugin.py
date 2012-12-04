@@ -137,7 +137,7 @@ def main(session, **kwargs):
 		autotimer
 	)
 
-def handleAutoPoller():
+def handleAutoPoller(session):
 	global autotimer
 	global autopoller
 
@@ -149,17 +149,32 @@ def handleAutoPoller():
 		autopoller.start(initial = False)
 	# Remove instance if not running in background
 	else:
+		# majorly bad juju beans here, do NOT look
+		if session is not None:
+			from AutoTimerOverview import AutoTimerOverview
+			for dlg in session.dialog_stack:
+				if isinstance(dlg, AutoTimerOverview):
+					return
 		autopoller = None
 		autotimer = None
 
 def editCallback(session):
 	# Don't parse EPG if editing was canceled
 	if session is not None:
-		autotimer.parseEPGAsync().addCallback(parseEPGCallback)
+		autotimer.parseEPGAsync().addCallback(parseEPGCallback, autotimer, session)#.addErrback(parseEPGErrback, autotimer, session)
 	else:
 		handleAutoPoller()
 
-def parseEPGCallback(ret):
+#def parseEPGErrback(failure, autotimer, session):
+#	AddPopup(
+#		_("AutoTimer failed with error %s" (str(failure),)),
+#	)
+#
+#	# Save xml
+#	autotimer.writeXml()
+#	handleAutoPoller(session)
+
+def parseEPGCallback(ret, autotimer, session):
 	AddPopup(
 		_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
 		MessageBox.TYPE_INFO,
@@ -169,7 +184,7 @@ def parseEPGCallback(ret):
 
 	# Save xml
 	autotimer.writeXml()
-	handleAutoPoller()
+	handleAutoPoller(session)
 
 # Movielist
 def movielist(session, service, **kwargs):
