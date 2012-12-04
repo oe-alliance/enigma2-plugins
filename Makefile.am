@@ -103,6 +103,12 @@ if DREAMBOX
 SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview genuinedreambox
 endif
 
+if VUSOLO2
+SUBDIRS +=  fancontrol2
+endif
+if VUDUO2
+SUBDIRS +=  fancontrol2
+endif
 if VUUNO
 SUBDIRS +=  fancontrol2
 endif
