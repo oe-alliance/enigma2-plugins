@@ -1,5 +1,7 @@
 # -*- coding: UTF-8 -*-
-from __future__ import print_function
+# for localized messages
+from . import _
+
 from Plugins.Plugin import PluginDescriptor
 from twisted.web.client import downloadPage
 from enigma import ePicLoad, eServiceReference
@@ -40,22 +42,6 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 config.plugins.imdb = ConfigSubsection()
 config.plugins.imdb.showinplugins = ConfigYesNo(default = False)
 config.plugins.imdb.force_english = ConfigYesNo(default=False)
-
-PluginLanguageDomain = "IMDb"
-PluginLanguagePath = "Extensions/IMDb/locale"
-
-def localeInit():
-	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
-
-def _(txt):
-	t = gettext.dgettext(PluginLanguageDomain, txt)
-	if t == txt:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
-		t = gettext.gettext(txt)
-	return t
-
-localeInit()
-language.addCallback(localeInit)
 
 def quoteEventName(eventName, safe="/()" + ''.join(map(chr,range(192,255)))):
 	# BBC uses '\x86' markers in program names, remove them
