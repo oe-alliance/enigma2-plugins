@@ -10,7 +10,8 @@ from Tools.Notifications import AddPopup
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
-autotimer = None
+from AutoTimer import AutoTimer
+autotimer = AutoTimer()
 autopoller = None
 
 #pragma mark - Help
@@ -26,15 +27,10 @@ except Exception as e:
 
 # Autostart
 def autostart(reason, **kwargs):
-	global autotimer
 	global autopoller
 
 	# Startup
 	if reason == 0 and config.plugins.autotimer.autopoll.value:
-		# Initialize AutoTimer
-		from AutoTimer import AutoTimer
-		autotimer = AutoTimer()
-
 		# Start Poller
 		from AutoPoller import AutoPoller
 		autopoller = AutoPoller()
@@ -50,19 +46,14 @@ def autostart(reason, **kwargs):
 			autopoller.stop()
 			autopoller = None
 
-		if autotimer is not None:
-			# We re-read the config so we won't save wrong information
-			try:
-				autotimer.readXml()
-			except Exception:
-				# XXX: we should at least dump the error
-				pass
-
-			# Save xml
+		# We re-read the config so we won't save wrong information
+		try:
+			autotimer.readXml()
+		except Exception:
+			# XXX: we should at least dump the error
+			pass
+		else:
 			autotimer.writeXml()
-
-			# Remove AutoTimer
-			autotimer = None
 
 # Webgui
 def sessionstart(reason, **kwargs):
@@ -108,12 +99,7 @@ def sessionstart(reason, **kwargs):
 
 # Mainfunction
 def main(session, **kwargs):
-	global autotimer
 	global autopoller
-
-	if autotimer is None:
-		from AutoTimer import AutoTimer
-		autotimer = AutoTimer()
 
 	try:
 		autotimer.readXml()
@@ -137,8 +123,7 @@ def main(session, **kwargs):
 		autotimer
 	)
 
-def handleAutoPoller(session):
-	global autotimer
+def handleAutoPoller():
 	global autopoller
 
 	# Start autopoller again if wanted
@@ -149,32 +134,25 @@ def handleAutoPoller(session):
 		autopoller.start(initial = False)
 	# Remove instance if not running in background
 	else:
-		# majorly bad juju beans here, do NOT look
-		if session is not None:
-			from AutoTimerOverview import AutoTimerOverview
-			for dlg in session.dialog_stack:
-				if isinstance(dlg, AutoTimerOverview):
-					return
 		autopoller = None
-		autotimer = None
 
 def editCallback(session):
 	# Don't parse EPG if editing was canceled
 	if session is not None:
-		autotimer.parseEPGAsync().addCallback(parseEPGCallback, autotimer, session)#.addErrback(parseEPGErrback, autotimer, session)
+		autotimer.parseEPGAsync().addCallback(parseEPGCallback)#.addErrback(parseEPGErrback)
 	else:
 		handleAutoPoller()
 
-#def parseEPGErrback(failure, autotimer, session):
+#def parseEPGErrback(failure):
 #	AddPopup(
 #		_("AutoTimer failed with error %s" (str(failure),)),
 #	)
 #
 #	# Save xml
 #	autotimer.writeXml()
-#	handleAutoPoller(session)
+#	handleAutoPoller()
 
-def parseEPGCallback(ret, autotimer, session):
+def parseEPGCallback(ret):
 	AddPopup(
 		_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
 		MessageBox.TYPE_INFO,
@@ -184,7 +162,7 @@ def parseEPGCallback(ret, autotimer, session):
 
 	# Save xml
 	autotimer.writeXml()
-	handleAutoPoller(session)
+	handleAutoPoller()
 
 # Movielist
 def movielist(session, service, **kwargs):
