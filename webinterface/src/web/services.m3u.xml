@@ -1,5 +1,5 @@
-<e2:screen name="ServiceListWebScreen"><e2:element source="localip" macro="ipadress" />#EXTM3U 
-#EXTVLCOPT--http-reconnect=true 
+<e2:screen name="ServiceListWebScreen"><e2:element source="localip" macro="ipadress" />#EXTM3U
+#EXTVLCOPT--http-reconnect=true
 <e2:element source="ServiceList" id="bRef"><e2:convert type="web:ListFiller">#EXTINF:-1,<e2:item name="Name" filter="xml" />
 http://<e2:item macro="ipadress" filter="xml" />:8001/<e2:item name="Reference" filter="xml" />
 </e2:convert><e2:convert type="web:TextToHTML" />

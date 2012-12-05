@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Enigma2 Movielist</title>
-		<link href="/webdata/style.css" type="text/css" rel="stylesheet" />	
+		<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
 	</head>
 <body>
 	<table width="100%">
@@ -17,13 +17,13 @@
 				&lt;br/>&lt;b>Recording Time: &lt;/b><e2:item name="TimeString" filter="xml"/>
 				&lt;br/>&lt;b>Tags: &lt;/b><e2:item name="Tags" filter="xml"/>
 				&lt;br/>&lt;b>Channel: &lt;/b><e2:item name="ServiceName" filter="xml"/>
-				
-			&lt;/td>		
+
+			&lt;/td>
 		&lt;/tr>
 		&lt;tr height='20'>
 			&lt;td> &lt;/td>
 		&lt;/tr>
-				
+
 		</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
 	</table>
 

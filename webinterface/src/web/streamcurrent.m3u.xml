@@ -1,4 +1,4 @@
-<e2:screen name="M3uStreamingCurrentServiceWebScreen">#EXTM3U 
-#EXTVLCOPT--http-reconnect=true 
+<e2:screen name="M3uStreamingCurrentServiceWebScreen">#EXTM3U
+#EXTVLCOPT--http-reconnect=true
 http://<e2:element source="localip" />:8001/<e2:element source="CurrentService"><e2:convert type="web:TextToHTML" /></e2:element>
 </e2:screen>

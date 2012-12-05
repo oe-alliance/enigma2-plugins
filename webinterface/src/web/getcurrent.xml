@@ -15,14 +15,14 @@
 		<e2txtpid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">TxtPid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2txtpid>
 		<e2tsid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">TsId</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2tsid>
 		<e2onid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">OnId</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2onid>
-		<e2sid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">Sid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2sid>		
+		<e2sid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">Sid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2sid>
 	</e2service>
 	<e2eventlist>
 		<e2event>
 			<e2eventservicereference><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Reference</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventservicereference>
 			<e2eventservicename><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventservicename>
 			<e2eventprovidername><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Provider</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventprovidername>
-			<e2eventid><e2:element source="session.Event_Now"><e2:convert type="EventName">ID</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventid>	
+			<e2eventid><e2:element source="session.Event_Now"><e2:convert type="EventName">ID</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventid>
 			<e2eventname><e2:element source="session.Event_Now"><e2:convert type="EventName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventname>
 			<e2eventtitle><e2:element source="session.Event_Now"><e2:convert type="EventName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventtitle>
 			<e2eventdescription><e2:element source="session.Event_Now"><e2:convert type="EventName">Description</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescription>
@@ -30,11 +30,11 @@
 			<e2eventduration><e2:element source="session.Event_Now"><e2:convert type="EventTime">Duration</e2:convert><e2:convert type="ClockToText">Timestamp</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventduration>
 			<e2eventremaining><e2:element source="session.Event_Now"><e2:convert type="EventTime">Remaining</e2:convert><e2:convert type="RemainingToText">InSeconds</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventremaining>
 			<e2eventcurrenttime><e2:element source="CurrentTime"><e2:convert type="ClockToText">Timestamp</e2:convert><e2:convert type="web:TextToHTML" /></e2:element></e2eventcurrenttime>
-			<e2eventdescriptionextended><e2:element source="session.Event_Now"><e2:convert type="EventName">ExtendedDescription</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescriptionextended>			
+			<e2eventdescriptionextended><e2:element source="session.Event_Now"><e2:convert type="EventName">ExtendedDescription</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescriptionextended>
 		</e2event>
 		<e2event>
 			<e2eventservicereference><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Reference</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventservicereference>
-			<e2eventservicename><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventservicename>		
+			<e2eventservicename><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventservicename>
 			<e2eventprovidername><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Provider</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventprovidername>
 			<e2eventid><e2:element source="session.Event_Next"><e2:convert type="EventName">ID</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventid>
 			<e2eventname><e2:element source="session.Event_Next"><e2:convert type="EventName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventname>
