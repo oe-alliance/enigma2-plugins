@@ -196,7 +196,6 @@ class AutoTimer:
 # Main function
 
 	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, timerdict, moviedict, simulateOnly=False):
-		total = 0
 		new = 0
 		modified = 0
 
@@ -212,19 +211,16 @@ class AutoTimer:
 				pass
 
 		if timer.searchType == "description":
-			test = []
 			epgmatches = []
+			mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
 
 			casesensitive = timer.searchCase == "sensitive"
 			if not casesensitive:
 				match = match.lower()
 
-			#if timer.services or timer.bouquets:
 			# Service filter defined
 			# Search only using the specified services
-			for service in timer.services:
-				test.append( (service, 0, -1, -1 ) )
-			mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
+			test = [(service, 0, -1, -1) for service in timer.services]
 
 			for bouquet in timer.bouquets:
 				services = serviceHandler.list(eServiceReference(bouquet))
@@ -237,7 +233,6 @@ class AutoTimer:
 							test.append( (service.toString(), 0, -1, -1 ) )
 
 			if not test:
-			#else:
 				# No service filter defined
 				# Search within all services - could be very slow
 
@@ -544,14 +539,13 @@ class AutoTimer:
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = recordHandler.record(newEntry)
-		return (total, new, modified)
+		return (new, modified)
 
 	def parseEPG(self, simulateOnly = False):
 		if NavigationInstance.instance is None:
 			print("[AutoTimer] Navigation is not available, can't parse EPG")
 			return (0, 0, 0, [], [], [])
 
-		total = 0
 		new = 0
 		modified = 0
 		timers = []
@@ -590,11 +584,10 @@ class AutoTimer:
 		# Iterate Timer
 		for timer in self.getEnabledTimerList():
 			tup = doBlockingCallFromMainThread(self.parseTimer, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, timerdict, moviedict, simulateOnly=simulateOnly)
-			total += tup[0]
-			new += tup[1]
-			modified += tup[2]
+			new += tup[0]
+			modified += tup[1]
 
-		return (total, new, modified, timers, conflicting, similars)
+		return (len(timers), new, modified, timers, conflicting, similars)
 
 # Supporting functions
 
