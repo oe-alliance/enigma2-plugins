@@ -173,30 +173,3 @@ msgstr "Wartezeit vor Aktivierung in ms"
 
 msgid "sets the Audio Delay (LipSync)"
 msgstr "Setzt die verschiedenen Audio- Verzögerungen (LipSync)"
-
-#~ msgid "%s:"
-#~ msgstr "%s:"
-
-#~ msgid "Delay:"
-#~ msgstr "Verzögerung:"
-
-#~ msgid "Global Passthr."
-#~ msgstr "Passthr. Global"
-
-#~ msgid "PCM"
-#~ msgstr "PCM"
-
-#~ msgid "Passthrough"
-#~ msgstr "Passthrough"
-
-#~ msgid "Save"
-#~ msgstr "Speichern"
-
-#~ msgid "Select channel audio"
-#~ msgstr "Kanal- Tonspur wählen"
-
-#~ msgid "Switch audio"
-#~ msgstr "Tonspur..."
-
-#~ msgid "sets the audio Delay (LipSync)"
-#~ msgstr "Setzt die verschiedenen Audio- Verzögerungen (LipSync)"
