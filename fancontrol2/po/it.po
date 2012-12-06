@@ -153,7 +153,7 @@ msgstr "4Pin"
 
 #: .../enigma2-plugins/fancontrol2/src/plugin.py:145
 msgid "4Pin (PID)"
-msgstr "Temperature"
+msgstr "4Pin (PID)"
 
 #: .../enigma2-plugins/fancontrol2/src/plugin.py:146
 #: .../enigma2-plugins/fancontrol2/src/plugin.py:159

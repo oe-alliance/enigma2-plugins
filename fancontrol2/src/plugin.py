@@ -1215,7 +1215,7 @@ class FanControl2(Screen):
 #			import traceback, sys
 #			traceback.print_exc(file=sys.stdout)
 			from traceback import format_exc
-			FClog("Control Error:\n" + format_exc )
+			FClog("Control Error:\n" + format_exc() )
 ##			import traceback, sys
 ##			traceback.print_exc(file=sys.stdout)
 		FClogE("Runtime: %.3f" % (time.time() - tt) )
@@ -1232,10 +1232,19 @@ def autostart(reason, **kwargs):
 			root.putChild("", FC2web())
 			root.putChild("log", FC2webLog())
 			root.putChild("chart", FC2webChart())
-			if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web/external.xml") or os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/OpenWebif/__init__.py"):
-				addExternalChild( ("fancontrol", root, "Fan Control 2", Version, True) )
-			else:
-				addExternalChild( ("fancontrol", root) )
+			if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web/external.xml"):
+				try:
+					addExternalChild( ("fancontrol", root, "Fan Control 2", Version, True) )
+					FClog("use new WebIF")
+				except:
+					addExternalChild( ("fancontrol", root) )
+					FClog("use old WebIF")
+			if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/OpenWebif/pluginshook.src"):
+				try:
+					addExternalChild( ("fancontrol", root, "Fan Control 2", Version) )
+					FClog("use OpenWebIF")
+				except:
+					pass
 		if not os.path.exists("/proc/stb/fp/fan_vlt"):
 			Notifications.AddNotification(MessageBox, _("Box has no fancontrol hardware -> FC2 deactivated"), type=MessageBox.TYPE_INFO, timeout=10)
 			FClog("not supported, exit")

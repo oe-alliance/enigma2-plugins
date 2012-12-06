@@ -1,5 +1,5 @@
 from __init__ import _
-Version = "V2.7r0"
+Version = "V2.7r1"
 # globale Variablen        
 ZielRPM = 0
 AktVLT = 0
