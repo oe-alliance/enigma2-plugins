@@ -1,5 +1,5 @@
-<e2:screen name="MovieWebScreen"><e2:element source="localip" macro="ipadress" />#EXTM3U 
-#EXTVLCOPT--http-reconnect=true 
+<e2:screen name="MovieWebScreen"><e2:element source="localip" macro="ipadress" />#EXTM3U
+#EXTVLCOPT--http-reconnect=true
 <e2:element source="MovieList" id="dirname,tag">
 <e2:convert type="web:ListFiller" >#EXTINF:-1,<e2:item name="ServiceName"/>: <e2:item name="Title" filter="xml"/>
 http://<e2:item macro="ipadress" filter="xml" /><e2:item name="Filename" filter="urlencode"/>

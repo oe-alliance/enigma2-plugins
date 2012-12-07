@@ -1230,13 +1230,7 @@ def addAutotimerFromSearchString(session, match):
 	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
 
-	# Create instance if needed
-	if autotimer is None:
-		from AutoTimer import AutoTimer
-		autotimer = AutoTimer()
-		autotimer.readXml()
-	else:
-		autotimer.readXml()
+	autotimer.readXml()
 
 	newTimer = autotimer.defaultTimer.clone()
 	newTimer.id = autotimer.getUniqueId()
@@ -1264,13 +1258,7 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
 
-	# Create instance if needed
-	if autotimer is None:
-		from AutoTimer import AutoTimer
-		autotimer = AutoTimer()
-		autotimer.readXml()
-	else:
-		autotimer.readXml()
+	autotimer.readXml()
 
 	match = evt and evt.getEventName() or ""
 	name = match or "New AutoTimer"
@@ -1322,13 +1310,7 @@ def addAutotimerFromService(session, service = None):
 	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
 
-	# Create instance if needed
-	if autotimer is None:
-		from AutoTimer import AutoTimer
-		autotimer = AutoTimer()
-		autotimer.readXml()
-	else:
-		autotimer.readXml()
+	autotimer.readXml()
 
 	serviceHandler = eServiceCenter.getInstance()
 	info = serviceHandler.info(service)
@@ -1396,12 +1378,7 @@ def editorCallback(ret):
 	if ret:
 		from plugin import autotimer
 
-		if autotimer is None:
-			from AutoTimer import AutoTimer
-			autotimer = AutoTimer()
-			autotimer.readXml()
-		else:
-			autotimer.readXml()
+		autotimer.readXml()
 
 		autotimer.add(ret)
 

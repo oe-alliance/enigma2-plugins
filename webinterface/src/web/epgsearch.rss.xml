@@ -4,7 +4,7 @@
 		<title>EPG Search</title>
 		<link>http://<e2:element source="localip" filter="xml" /></link>
 		<description>Automatic search for EPG Content</description>
-		<generator>Enigma2 WebInterface</generator>		
+		<generator>Enigma2 WebInterface</generator>
 		<e2:element source="EpgSearch" id="search"><e2:convert type="web:ListFiller" >
 		&lt;item>
 			&lt;title><e2:item name="Title" filter="xml"/>&lt;/title>
@@ -12,7 +12,7 @@
 				&lt;br/>Start Time: <e2:item name="TimeStart"/>
 				&lt;br/>Duration: <e2:item name="Duration"/> Seconds
 				&lt;br/><e2:item name="Description" filter="xml"/>
-				&lt;br/><e2:item name="DescriptionExtended" filter="xml"/> 
+				&lt;br/><e2:item name="DescriptionExtended" filter="xml"/>
 				&lt;br/><e2:item name="ServiceReference" filter="xml"/>&lt;/description>
 			&lt;author><e2:item name="ServiceReference" filter="xml"/>&lt;/author>
 			&lt;category><e2:item name="ServiceName" filter="xml"/>&lt;/category>

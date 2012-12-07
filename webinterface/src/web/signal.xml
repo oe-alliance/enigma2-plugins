@@ -1,5 +1,5 @@
 <e2:screen name="DummyWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-<e2frontendstatus>	
+<e2frontendstatus>
 	<e2snrdb>
 		<e2:element source="session.FrontendStatus"  id="SNRdB">
 			<e2:convert type="FrontendInfo">SNRdB</e2:convert>

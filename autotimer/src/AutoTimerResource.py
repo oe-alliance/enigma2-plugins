@@ -12,24 +12,12 @@ except ImportError as ie:
 from ServiceReference import ServiceReference
 from Tools.XMLTools import stringToXML
 from enigma import eServiceReference
-from . import _, config, iteritems, plugin
+from . import _, config, iteritems
+from plugin import autotimer
 
 API_VERSION = "1.3"
 
 class AutoTimerBaseResource(resource.Resource):
-	_remove = False
-	def getAutoTimerInstance(self):
-		if plugin.autotimer is None:
-			self._remove = True
-			autotimer = AutoTimer()
-			try:
-				autotimer.readXml()
-			except Exception:
-				# TODO: proper error handling
-				pass
-			return autotimer
-		self._remove = False
-		return plugin.autotimer
 	def returnResult(self, req, state, statetext):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
@@ -73,20 +61,13 @@ class AutoTimerBackgroundingResource(AutoTimerBaseResource, threading.Thread):
 
 class AutoTimerDoParseResource(AutoTimerBackgroundingResource):
 	def renderBackground(self, req):
-		autotimer = self.getAutoTimerInstance()
-
 		ret = autotimer.parseEPG()
 		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5]))
-
-		if self._remove:
-			autotimer.writeXml()
 
 		return self.returnResult(req, True, output)
 
 class AutoTimerSimulateResource(AutoTimerBackgroundingResource):
 	def renderBackground(self, req):
-		autotimer = self.getAutoTimerInstance()
-
 		ret = autotimer.parseEPG(simulateOnly=True)
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
@@ -113,8 +94,6 @@ class AutoTimerSimulateResource(AutoTimerBackgroundingResource):
 
 class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
-		autotimer = self.getAutoTimerInstance()
-
 		# show xml
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
@@ -123,13 +102,9 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 
 class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
-		autotimer = self.getAutoTimerInstance()
-
 		id = req.args.get("id")
 		if id:
 			autotimer.remove(int(id[0]))
-			if self._remove:
-				autotimer.writeXml()
 			return self.returnResult(req, True, _("AutoTimer was removed"))
 		else:
 			return self.returnResult(req, False, _("missing parameter \"id\""))
@@ -138,7 +113,6 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 	# TODO: recheck if we can modify regular config parser to work on this
 	# TODO: allow to edit defaults?
 	def render(self, req):
-		autotimer = self.getAutoTimerInstance()
 		def get(name, default=None):
 			ret = req.args.get(name)
 			return ret[0] if ret else default
@@ -362,10 +336,6 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		else:
 			message = _("AutoTimer was changed successfully")
 
-		# eventually save config
-		if self._remove:
-			autotimer.writeXml()
-
 		return self.returnResult(req, True, message)
 
 class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
@@ -405,18 +375,11 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 			if plugin.autopoller is None:
 				from AutoPoller import AutoPoller
 				plugin.autopoller = AutoPoller()
-			if plugin.autotimer is None:
-				plugin.autotimer = AutoTimer()
 			plugin.autopoller.start(initial = False)
 		else:
 			if plugin.autopoller is not None:
 				plugin.autopoller.stop()
 				plugin.autopoller = None
-			if plugin.autotimer is not None:
-				try: plugin.autotimer.readXml()
-				except Exception: pass
-				else: plugin.autotimer.writeXml()
-				plugin.autotimer = None
 
 		return self.returnResult(req, True, _("config changed."))
 

@@ -8,7 +8,8 @@ from Screens.MessageBox import MessageBox
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
-autotimer = None
+from AutoTimer import AutoTimer
+autotimer = AutoTimer()
 autopoller = None
 
 #pragma mark - Help
@@ -24,18 +25,18 @@ except Exception as e:
 
 # Autostart
 def autostart(reason, **kwargs):
-	global autotimer
 	global autopoller
 
 	# Startup
 	if reason == 0 and config.plugins.autotimer.autopoll.value:
-		# Initialize AutoTimer
-		from AutoTimer import AutoTimer
-		autotimer = AutoTimer()
 		# Start Poller
 		from AutoPoller import AutoPoller
 		autopoller = AutoPoller()
 		autopoller.start()
+
+		# Install NPB, main is too late because the Browser is already running
+		from Plugins.SystemPlugins.Toolkit import NotifiablePluginBrowser
+		NotifiablePluginBrowser.install()
 	# Shutdown
 	elif reason == 1:
 		# Stop Poller
@@ -43,19 +44,14 @@ def autostart(reason, **kwargs):
 			autopoller.stop()
 			autopoller = None
 
-		if autotimer is not None:
-			# We re-read the config so we won't save wrong information
-			try:
-				autotimer.readXml()
-			except Exception:
-				# XXX: we should at least dump the error
-				pass
-
-			# Save xml
+		# We re-read the config so we won't save wrong information
+		try:
+			autotimer.readXml()
+		except Exception:
+			# XXX: we should at least dump the error
+			pass
+		else:
 			autotimer.writeXml()
-
-			# Remove AutoTimer
-			autotimer = None
 
 # Webgui
 def sessionstart(reason, **kwargs):
@@ -101,12 +97,7 @@ def sessionstart(reason, **kwargs):
 
 # Mainfunction
 def main(session, **kwargs):
-	global autotimer
 	global autopoller
-
-	if autotimer is None:
-		from AutoTimer import AutoTimer
-		autotimer = AutoTimer()
 
 	try:
 		autotimer.readXml()
@@ -118,9 +109,6 @@ def main(session, **kwargs):
 			timeout = 10
 		)
 		return
-
-	from Plugins.SystemPlugins.Toolkit import NotifiablePluginBrowser
-	NotifiablePluginBrowser.install()
 
 	# Do not run in background while editing, this might screw things up
 	if autopoller is not None:
@@ -134,7 +122,6 @@ def main(session, **kwargs):
 	)
 
 def editCallback(session):
-	global autotimer
 	global autopoller
 
 	# XXX: canceling of GUI (Overview) won't affect config values which might have been changed - is this intended?
@@ -155,7 +142,6 @@ def editCallback(session):
 	# Remove instance if not running in background
 	else:
 		autopoller = None
-		autotimer = None
 
 # Movielist
 def movielist(session, service, **kwargs):

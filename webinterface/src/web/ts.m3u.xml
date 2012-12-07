@@ -1,3 +1,3 @@
-<e2:screen name="TsM3uWebScreen">#EXTM3U 
-http://<e2:element source="localip" />:<e2:element source="localport" />/file?file=<e2:element source="file"><e2:convert type="web:TextToURL" /></e2:element>
+<e2:screen name="TsM3uWebScreen">#EXTM3U
+<e2:element source="protocol" />://<e2:element source="localip" />:<e2:element source="localport" />/file?file=<e2:element source="file"><e2:convert type="web:TextToURL" /></e2:element>
 </e2:screen>

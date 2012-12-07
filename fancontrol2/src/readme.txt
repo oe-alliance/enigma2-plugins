@@ -1,7 +1,7 @@
 ===========================================================
-FanControl2 by joergm6                           Help V.2.4
+FanControl2 by joergm6                           Help V.2.7
 Support forum: IHAD
-Acknowledgments: diddsen, _marv_, DreamKK
+Acknowledgments: diddsen, _marv_, DreamKK, Lukasz S.
                  Spaeleus(it), mimi74(fr), Bschaar(nl)
 ===========================================================
 Apologies if the english translation is not always correct.
@@ -76,6 +76,72 @@ Reduce the voltage here, until the desired min Speed (including 0 is
 possible) is achieved. Have also the max speed in mind.
 PWM provides a value that corresponds to the speed, initially run
 the fan at the start of the Box. From this speed is regulated.
+
+   for 4pin (PID) Fan type -- by Lukasz S.
+Voltage and PWM is controlled automatically by a PI controller, that
+tries to follow the Target RPM calculated by the built-in algorithm,
+and minimize the difference between target RPM and current.
+
+Control theory explanation en.wikipedia.org/wiki/PID_controller;
+In this implementation, only Proportional and Integral section is used 
+(no Derivative).
+
+   Features: 
+Built-in input deadband will ensure controller won't act unless the
+Target RPM differs from Current RPM by more than 1% either way, to
+filter out spikes and fluctuations in actual fan speed measurements.
+
+In this mode PID Ctl Err (its percentage) is showing why the controller
+thinks it should speed fan up (or slow down).
+
+Fan is controlled by means of PWM first (keeping voltage at minimum setting),
+only progressing to change voltage if PWM would be larger than 255;
+If calculated PWM would go below 255 again, voltage is set back to min.
+(in effect, voltage is treated as overspill for PWM, with different coefficient
+to prevent too large changes in voltage)
+
+   Setup:
+
+Initial Voltage and Initial PWM shall be set so that fan has exactly min 
+speed that you require, and that shall be set as 'min speed RPM' setting.
+(to avoid 'battling' with the PI controller over the pwm and voltage settings, 
+change to the traditional 4pin to determine this - or use the Check feature)
+
+(On Authors' box, setting Initial Voltage and PWM to zero didn't stop the fan
+my minimum fan speed on 0 volt and 0 PWM was about 850 RPM)
+
+'max speed RPM' should be set to maximum fan speed you ever want the fan to 
+achieve AND is achievable by available setting of voltage and PWM. 
+Setting this to an unreachable value may lead to improper behavior.
+
+   Known Problems: 
+   * crossing the PWM - VLT control boundary, can look like it's unstable,
+because of different reaction of the fan to controlling it with voltage, 
+vs what it does on PWM solely. Workaround: set your Static Temp so that 
+PWM won't reach 255 in normal conditions, or so that Voltage won't need 
+to fall below minimum setting in normal conditions. 
+(Example procedure : launch the FanControl2 interface when your box is 
+in what you think is its normal working temperature, and if the PWM displayed 
+is close to 255, but on the PWM side, set the static temperature to a degree 
+or two higher than current setting; if the voltage is being controlled already 
+and is near the min vlt setting, set the static temp to a degree or two MORE 
+than current static temp setting - to ensure controller output is considerably 
+under 255 for PWM, and considerably more than min Volt for Voltage). 
+Unfortunately there is not much that can be done here unless some automation 
+is employed to tune this as it can differ from fan to fan, and even from box 
+to box, and also fan response to controlling will get worse as it ages, due to
+bearings getting old. Plan is to work on recognizing failing fan bearings situation.
+   
+   * If static temp setting is changed, controllers' integrator is reset, starts from 0,
+to prevent long-time of unwinding, but it has the effect of setting minimum PWM and Voltage,
+slowing the fan down to minimum first. This is actually a feature, not a problem, 
+but it probably should be made configurable.
+   
+   * PID Ctl Err displaying the error, can be misleading when displaying negative value;
+This is being explored to find a widget which can handle showing 0 in the middle and then the 
+signed value either way.
+
+-- by Lukasz S.
 
    for Fan type Control disabled
 The regulation is disabled. The fan runs with the last parameters

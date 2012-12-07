@@ -11,6 +11,10 @@ class WebScreen(Screen):
 		self.request = request
 		self.instance = None
 
+		self["localip"] = RequestData(request, what=RequestData.HOST)
+		self["localport"] = RequestData(request, what=RequestData.PORT)
+		self["protocol"] = RequestData(request, what=RequestData.PROTOCOL)
+
 class DummyWebScreen(WebScreen):
 	#use it, if you dont need any source, just to can do a static file with an xml-file
 	def __init__(self, session, request):
@@ -114,7 +118,6 @@ class ServiceListWebScreen(WebScreen):
 
 		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		self["ServiceList"] = ServiceList(fav, command_func=self.getServiceList, validate_commands=False)
-		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 	def getServiceList(self, sRef):
 		self["ServiceList"].root = sRef
@@ -165,7 +168,6 @@ class EpgWebScreen(WebScreen):
 		self["EpgServiceNext"] = EPG(session, func=EPG.SERVICENEXT)
 		self["EpgBouquet"] = EPG(session, func=EPG.BOUQUET)
 		self["EpgMulti"] = EPG(session, func=EPG.MULTI)
-		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 		self["EpgServiceWap"] = EPG(session, func=EPG.SERVICE, endtm=True)
 
@@ -183,7 +185,6 @@ class MovieWebScreen(WebScreen):
 		self["MovieList"] = Movie(session, movielist, func=Movie.LIST)
 		self["MovieFileDel"] = Movie(session, movielist, func=Movie.DEL)
 		self["MovieFileMove"] = Movie(session, movielist, func=Movie.MOVE)
-		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 class MediaPlayerWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -324,15 +325,12 @@ class M3uStreamingWebScreen(WebScreen):
 		from Components.Sources.Config import Config
 		from Components.config import config
 		self["ref"] = StaticText()
-		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 class M3uStreamingCurrentServiceWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from WebComponents.Sources.CurrentService import CurrentService
-
 		self["CurrentService"] = CurrentService(session)
-		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 class TsM3uWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -341,8 +339,6 @@ class TsM3uWebScreen(WebScreen):
 		from Components.Sources.Config import Config
 		from Components.config import config
 		self["file"] = StaticText()
-		self["localip"] = RequestData(request, what=RequestData.HOST)
-		self["localport"] = RequestData(request, what=RequestData.PORT)
 
 class RestartWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -364,8 +360,6 @@ class GetPidWebScreen(WebScreen):
 			self["pids"] = StaticText("%s,%s,%s" % (PPID.lstrip("0x"), VPID.lstrip("0x"), APID.lstrip("0x")))
 		 else:
 			self["pids"] = StaticText("0x,0x,0x")
-
-		 self["localip"] = RequestData(request, what=RequestData.HOST)
 
 class DeviceInfoWebScreen(WebScreen):
 	def __init__(self, session, request):
