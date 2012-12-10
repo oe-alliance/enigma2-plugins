@@ -271,6 +271,7 @@ class AutoTimer:
 		self.timer_count = 0
 		self.completed = []
 		job = Components.Task.Job(_("AutoTimer"))
+		timer = None
 
 		# Iterate Timer
 		for timer in self.getEnabledTimerList():
