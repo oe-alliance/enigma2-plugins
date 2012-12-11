@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-02 23:01+0100\n"
-"PO-Revision-Date: 2012-12-02 23:02+0100\n"
+"POT-Creation-Date: 2012-12-11 22:26+0100\n"
+"PO-Revision-Date: 2012-12-11 22:26+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language: \n"
@@ -16,72 +16,94 @@ msgstr ""
 "X-Poedit-Country: AUSTRIA\n"
 "X-Poedit-SearchPath-0: /home/ismail/enigma2-plugins/satloader/src\n"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:53
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:55
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:195
 msgid "Cancel"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:54
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:106
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:56
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:109
 msgid "Install"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:55
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:57
 msgid "Satellites"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:56
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:58
 msgid "Multi Sat"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:96
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:99
 msgid "satellites.xml building finished!"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:96
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:118
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:99
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:130
 msgid "GUI needs a restart to apply changes."
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:96
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:118
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:99
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:130
 msgid "Do you want to restart the GUI now?"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:97
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:119
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:100
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:131
 msgid "Restart GUI now?"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:99
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:102
 msgid "Please select at least one satellite"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:107
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:110
 msgid "Press ok or green button to install satellites.xml"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:110
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:113
 msgid "Downloading satellites from server ..."
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:114
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:115
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:123
+msgid "Only for Multi Sat"
+msgstr ""
+
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:126
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:127
 msgid "Downloading satellites failed!"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:118
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:130
 msgid "satellites.xml is up-to-date"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:122
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:134
 msgid "Downloading succesfull! Parsing ..."
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:140
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:152
 msgid "Press ok button to select satellite"
 msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:144
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:156
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:229
 msgid "Parsing failed!"
+msgstr ""
+
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:196
+msgid "Save"
+msgstr ""
+
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:222
+msgid "Frequency:"
+msgstr ""
+
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:222
+msgid "Symbol Rate:"
+msgstr ""
+
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:243
+msgid "Not yet implemented"
 msgstr ""
 
