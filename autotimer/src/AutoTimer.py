@@ -464,10 +464,10 @@ class AutoTimer:
 			if config.plugins.autotimer.add_autotimer_to_tags.value:
 				tags.append('AutoTimer')
 			if config.plugins.autotimer.add_name_to_tags.value:
-				name = timer.name.strip()
-				if name:
-					name = name[0].upper() + name[1:].replace(" ", "_")
-					tags.append(name)
+				tagname = timer.name.strip()
+				if tagname:
+					tagname = tagname[0].upper() + tagname[1:].replace(" ", "_")
+					tags.append(tagname)
 			newEntry.tags = tags
 
 			if oldExists:
