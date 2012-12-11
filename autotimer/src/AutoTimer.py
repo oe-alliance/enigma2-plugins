@@ -417,6 +417,10 @@ class AutoTimer:
 				print("[AutoTimer] Skipping an event because it starts in less than 60 seconds")
 				continue
 
+			# Set short description to equal extended description if it is empty.
+			if not shortdesc:
+				shortdesc = extdesc
+
 			# Convert begin time
 			timestamp = localtime(begin)
 			# Update timer
