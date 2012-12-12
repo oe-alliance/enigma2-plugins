@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-11 22:26+0100\n"
-"PO-Revision-Date: 2012-12-11 22:35+0100\n"
+"POT-Creation-Date: 2012-12-13 00:27+0100\n"
+"PO-Revision-Date: 2012-12-13 00:29+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
@@ -20,82 +20,82 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/satloader\n"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:55
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:195
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:53
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:194
 msgid "Cancel"
 msgstr "Annull."
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:56
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:109
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:54
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:107
 msgid "Install"
 msgstr "Installare"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:57
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:55
 msgid "Satellites"
 msgstr "Satelliti"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:58
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:56
 msgid "Multi Sat"
 msgstr "Multi Sat"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:99
-msgid "satellites.xml building finished!"
-msgstr "Compilazione di satellites.xml terminata."
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:97
+msgid "satellites.xml has been built."
+msgstr ""
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:99
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:130
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:97
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:128
 msgid "GUI needs a restart to apply changes."
 msgstr "L'attivazione delle modifiche richiede il riavvio della GUI."
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:99
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:130
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:97
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:128
 msgid "Do you want to restart the GUI now?"
 msgstr "Riavviare la GUI?"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:100
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:131
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:98
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:129
 msgid "Restart GUI now?"
 msgstr "Riavviare la GUI?"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:102
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:100
 msgid "Please select at least one satellite"
 msgstr "Selezionare almeno un satellite"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:110
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:108
 msgid "Press ok or green button to install satellites.xml"
 msgstr "Verde o Ok >> Installare satellite.xml"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:113
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:111
 msgid "Downloading satellites from server ..."
 msgstr "Download dei satelliti dal server in corso..."
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:123
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:121
 msgid "Only for Multi Sat"
 msgstr "Solo per Multi Sat"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:126
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:127
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:124
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:125
 msgid "Downloading satellites failed!"
 msgstr "Download satelliti fallito."
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:130
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:128
 msgid "satellites.xml is up-to-date"
 msgstr "satellites.xml è aggiornato"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:134
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:132
 msgid "Downloading succesfull! Parsing ..."
 msgstr "Download terminato. Analisi in corso..."
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:152
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:150
 msgid "Press ok button to select satellite"
 msgstr "Ok >> Selezionare un satellite"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:156
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:154
 #: /home/ismail/enigma2-plugins/satloader/src/plugin.py:229
 msgid "Parsing failed!"
 msgstr "Analisi fallita."
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:196
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:195
 msgid "Save"
 msgstr "Salvo"
 
@@ -107,7 +107,16 @@ msgstr "Frequenza:"
 msgid "Symbol Rate:"
 msgstr "Symbol Rate:"
 
-#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:243
-msgid "Not yet implemented"
-msgstr "Non ancora implementato"
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:252
+msgid "has been saved."
+msgstr ""
 
+#: /home/ismail/enigma2-plugins/satloader/src/plugin.py:255
+msgid "Please select at least one transponder"
+msgstr "Selezionare almeno un transponder"
+
+#~ msgid "satellites.xml building finished!"
+#~ msgstr "Compilazione di satellites.xml terminata."
+
+#~ msgid "Not yet implemented"
+#~ msgstr "Non ancora implementato"
