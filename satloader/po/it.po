@@ -4,114 +4,114 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-13 21:36+0100\n"
-"PO-Revision-Date: 2012-12-13 21:36+0100\n"
-"Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
+"POT-Creation-Date: 2012-12-13 22:11+0100\n"
+"PO-Revision-Date: 2012-12-13 22:18+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: /home/ismail/enigma2-plugins/satloader/src\n"
+"X-Poedit-Basepath: .../enigma2-plugins/satloader\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: Italy\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/satloader\n"
 
-#: plugin.py:54
-#: plugin.py:195
+#: .../enigma2-plugins/satloader/src/plugin.py:54
+#: .../enigma2-plugins/satloader/src/plugin.py:195
 msgid "Cancel"
 msgstr "Annull."
 
-#: plugin.py:55
-#: plugin.py:108
+#: .../enigma2-plugins/satloader/src/plugin.py:55
+#: .../enigma2-plugins/satloader/src/plugin.py:108
 msgid "Install"
 msgstr "Installare"
 
-#: plugin.py:56
+#: .../enigma2-plugins/satloader/src/plugin.py:56
 msgid "Satellites"
 msgstr "Satelliti"
 
-#: plugin.py:57
+#: .../enigma2-plugins/satloader/src/plugin.py:57
 msgid "Multi Sat"
 msgstr "Multi Sat"
 
-#: plugin.py:98
+#: .../enigma2-plugins/satloader/src/plugin.py:98
 msgid "satellites.xml has been built."
-msgstr ""
+msgstr "satellites.xml è stato compilato."
 
-#: plugin.py:98
-#: plugin.py:129
+#: .../enigma2-plugins/satloader/src/plugin.py:98
+#: .../enigma2-plugins/satloader/src/plugin.py:129
 msgid "GUI needs a restart to apply changes."
 msgstr "L'attivazione delle modifiche richiede il riavvio della GUI."
 
-#: plugin.py:98
-#: plugin.py:129
+#: .../enigma2-plugins/satloader/src/plugin.py:98
+#: .../enigma2-plugins/satloader/src/plugin.py:129
 msgid "Do you want to restart the GUI now?"
 msgstr "Riavviare la GUI?"
 
-#: plugin.py:99
-#: plugin.py:130
+#: .../enigma2-plugins/satloader/src/plugin.py:99
+#: .../enigma2-plugins/satloader/src/plugin.py:130
 msgid "Restart GUI now?"
 msgstr "Riavviare la GUI?"
 
-#: plugin.py:101
+#: .../enigma2-plugins/satloader/src/plugin.py:101
 msgid "Please select at least one satellite"
 msgstr "Selezionare almeno un satellite"
 
-#: plugin.py:109
+#: .../enigma2-plugins/satloader/src/plugin.py:109
 msgid "Press ok or green button to install satellites.xml"
 msgstr "Verde o Ok >> Installare satellite.xml"
 
-#: plugin.py:112
+#: .../enigma2-plugins/satloader/src/plugin.py:112
 msgid "Downloading satellites from server ..."
 msgstr "Download dei satelliti dal server in corso..."
 
-#: plugin.py:122
+#: .../enigma2-plugins/satloader/src/plugin.py:122
 msgid "Only for Multi Sat"
 msgstr "Solo per Multi Sat"
 
-#: plugin.py:125
-#: plugin.py:126
+#: .../enigma2-plugins/satloader/src/plugin.py:125
+#: .../enigma2-plugins/satloader/src/plugin.py:126
 msgid "Downloading satellites failed!"
 msgstr "Download satelliti fallito."
 
-#: plugin.py:129
+#: .../enigma2-plugins/satloader/src/plugin.py:129
 msgid "satellites.xml is up-to-date"
 msgstr "satellites.xml è aggiornato"
 
-#: plugin.py:133
+#: .../enigma2-plugins/satloader/src/plugin.py:133
 msgid "Downloading succesfull! Parsing ..."
 msgstr "Download terminato. Analisi in corso..."
 
-#: plugin.py:151
+#: .../enigma2-plugins/satloader/src/plugin.py:151
 msgid "Press ok button to select satellite"
 msgstr "Ok >> Selezionare un satellite"
 
-#: plugin.py:155
-#: plugin.py:230
+#: .../enigma2-plugins/satloader/src/plugin.py:155
+#: .../enigma2-plugins/satloader/src/plugin.py:230
 msgid "Parsing failed!"
 msgstr "Analisi fallita."
 
-#: plugin.py:196
+#: .../enigma2-plugins/satloader/src/plugin.py:196
 msgid "Save"
-msgstr "Salvo"
+msgstr "Salvare"
 
-#: plugin.py:223
+#: .../enigma2-plugins/satloader/src/plugin.py:223
 msgid "Frequency:"
 msgstr "Frequenza:"
 
-#: plugin.py:223
+#: .../enigma2-plugins/satloader/src/plugin.py:223
 msgid "Symbol Rate:"
 msgstr "Symbol Rate:"
 
-#: plugin.py:253
+#: .../enigma2-plugins/satloader/src/plugin.py:253
 msgid "has been saved."
-msgstr ""
+msgstr ": salvataggio eseguito."
 
-#: plugin.py:256
+#: .../enigma2-plugins/satloader/src/plugin.py:256
 msgid "Please select at least one transponder"
 msgstr "Selezionare almeno un transponder"
 
