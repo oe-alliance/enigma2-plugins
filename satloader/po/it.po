@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-13 22:11+0100\n"
-"PO-Revision-Date: 2012-12-13 22:18+0100\n"
+"POT-Creation-Date: 2012-12-13 22:25+0100\n"
+"PO-Revision-Date: 2012-12-13 22:27+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
@@ -94,6 +94,11 @@ msgstr "Ok >> Selezionare un satellite"
 #: .../enigma2-plugins/satloader/src/plugin.py:230
 msgid "Parsing failed!"
 msgstr "Analisi fallita."
+
+#: .../enigma2-plugins/satloader/src/plugin.py:175
+#: .../enigma2-plugins/satloader/src/plugin.py:187
+msgid "Transponder Selection"
+msgstr "Selezione transponder"
 
 #: .../enigma2-plugins/satloader/src/plugin.py:196
 msgid "Save"
