@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-13 21:36+0100\n"
-"PO-Revision-Date: 2012-12-13 21:38+0100\n"
+"POT-Creation-Date: 2012-12-13 22:11+0100\n"
+"PO-Revision-Date: 2012-12-13 22:11+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language: \n"
@@ -92,6 +92,11 @@ msgstr "Drücke OK-Taste um einen Satelliten auszuwählen"
 #: plugin.py:230
 msgid "Parsing failed!"
 msgstr "Analyse fehlgeschlagen!"
+
+#: plugin.py:175
+#: plugin.py:187
+msgid "Transponder Selection"
+msgstr "Transponder Auswahl"
 
 #: plugin.py:196
 msgid "Save"

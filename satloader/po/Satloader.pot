@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-13 21:12+0100\n"
-"PO-Revision-Date: 2012-12-13 21:12+0100\n"
+"POT-Creation-Date: 2012-12-13 22:09+0100\n"
+"PO-Revision-Date: 2012-12-13 22:09+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language: \n"
@@ -16,98 +16,103 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: plugin.py:53
-#: plugin.py:194
+#: plugin.py:54
+#: plugin.py:195
 msgid "Cancel"
 msgstr ""
 
-#: plugin.py:54
-#: plugin.py:107
+#: plugin.py:55
+#: plugin.py:108
 msgid "Install"
 msgstr ""
 
-#: plugin.py:55
+#: plugin.py:56
 msgid "Satellites"
 msgstr ""
 
-#: plugin.py:56
+#: plugin.py:57
 msgid "Multi Sat"
 msgstr ""
 
-#: plugin.py:97
+#: plugin.py:98
 msgid "satellites.xml has been built."
-msgstr ""
-
-#: plugin.py:97
-#: plugin.py:128
-msgid "GUI needs a restart to apply changes."
-msgstr ""
-
-#: plugin.py:97
-#: plugin.py:128
-msgid "Do you want to restart the GUI now?"
 msgstr ""
 
 #: plugin.py:98
 #: plugin.py:129
+msgid "GUI needs a restart to apply changes."
+msgstr ""
+
+#: plugin.py:98
+#: plugin.py:129
+msgid "Do you want to restart the GUI now?"
+msgstr ""
+
+#: plugin.py:99
+#: plugin.py:130
 msgid "Restart GUI now?"
 msgstr ""
 
-#: plugin.py:100
+#: plugin.py:101
 msgid "Please select at least one satellite"
 msgstr ""
 
-#: plugin.py:108
+#: plugin.py:109
 msgid "Press ok or green button to install satellites.xml"
 msgstr ""
 
-#: plugin.py:111
+#: plugin.py:112
 msgid "Downloading satellites from server ..."
 msgstr ""
 
-#: plugin.py:121
+#: plugin.py:122
 msgid "Only for Multi Sat"
 msgstr ""
 
-#: plugin.py:124
 #: plugin.py:125
+#: plugin.py:126
 msgid "Downloading satellites failed!"
 msgstr ""
 
-#: plugin.py:128
+#: plugin.py:129
 msgid "satellites.xml is up-to-date"
 msgstr ""
 
-#: plugin.py:132
+#: plugin.py:133
 msgid "Downloading succesfull! Parsing ..."
 msgstr ""
 
-#: plugin.py:150
+#: plugin.py:151
 msgid "Press ok button to select satellite"
 msgstr ""
 
-#: plugin.py:154
-#: plugin.py:229
+#: plugin.py:155
+#: plugin.py:230
 msgid "Parsing failed!"
 msgstr ""
 
-#: plugin.py:195
+#: plugin.py:175
+#: plugin.py:187
+msgid "Transponder Selection"
+msgstr ""
+
+#: plugin.py:196
 msgid "Save"
 msgstr ""
 
-#: plugin.py:222
+#: plugin.py:223
 msgid "Frequency:"
 msgstr ""
 
-#: plugin.py:222
+#: plugin.py:223
 msgid "Symbol Rate:"
 msgstr ""
 
-#: plugin.py:252
+#: plugin.py:253
 msgid "has been saved."
 msgstr ""
 
-#: plugin.py:255
+#: plugin.py:256
 msgid "Please select at least one transponder"
 msgstr ""
 
