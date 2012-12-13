@@ -1,3 +1,4 @@
+from __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
@@ -116,9 +117,9 @@ class Satloader(Screen):
 			if self["list"].l.getCurrentSelection()[0][3] is not None:
 				satname = self["list"].l.getCurrentSelection()[0][0]
 				filename = "/tmp/multisat/"+self["list"].l.getCurrentSelection()[0][1]
-				self.session.open(SatloaderConfig, satname, filename)
+				self.session.open(TransponderSelection, satname, filename)
 			else:
-				self.session.open(MessageBox, _("Only for Multi Sat"), MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _("Only for Multi Sat"), MessageBox.TYPE_INFO, timeout=3)
 
 	def downloadListError(self, ret):
 		self.session.open(MessageBox, text = _("Downloading satellites failed!"), type = MessageBox.TYPE_ERROR)
@@ -158,11 +159,11 @@ class Satloader(Screen):
 			self.session.open(TryQuitMainloop, 3)
 
 
-class SatloaderConfig(Screen):
+class TransponderSelection(Screen):
 	framewidth = getDesktop(0).size().width()
 	if framewidth == 1280:
 		skin = """
-			<screen position="240,130" size="800,510" title="Satloader Config" >
+			<screen position="240,130" size="800,510" title="Transponder Selection" >
 				<ePixmap position="8,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_red_sm.png" alphatest="on" />
 				<ePixmap position="206,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_green_sm.png" alphatest="on" />
 				<ePixmap position="404,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_yellow_sm.png" alphatest="on" />
@@ -174,7 +175,7 @@ class SatloaderConfig(Screen):
 			</screen>"""
 	elif framewidth == 720:
 		skin = """
-			<screen position="center,center" size="560,460" title="Satloader Config" >
+			<screen position="center,center" size="560,460" title="Transponder Selection" >
 				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
@@ -231,7 +232,7 @@ class SatloaderConfig(Screen):
 		self["info"].setText(satname)
 
 	def btnRed(self):
-		print "\n[SatloaderConfig] cancel\n"
+		print "\n[TransponderSelection] cancel\n"
 		self.close(None)
 
 	def btnOK(self):
@@ -249,7 +250,7 @@ class SatloaderConfig(Screen):
 			f.write("\t</sat>\n")
 			f.close()
 			
-			self.session.open(MessageBox, "\"" + self.filename + "\" " + _("has been saved."), MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, "\"" + self.filename + "\" " + _("has been saved."), MessageBox.TYPE_INFO, timeout=3)
 			self.close(None)
 		else:
 			self["info"].setText(_("Please select at least one transponder"))
