@@ -163,7 +163,7 @@ class TransponderSelection(Screen):
 	framewidth = getDesktop(0).size().width()
 	if framewidth == 1280:
 		skin = """
-			<screen position="240,130" size="800,510" title="Transponder Selection" >
+			<screen position="240,130" size="800,510" title="%s" >
 				<ePixmap position="8,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_red_sm.png" alphatest="on" />
 				<ePixmap position="206,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_green_sm.png" alphatest="on" />
 				<ePixmap position="404,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_yellow_sm.png" alphatest="on" />
@@ -172,10 +172,10 @@ class TransponderSelection(Screen):
 				<widget name="key_green" position="206,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="list" position="10,40" size="780,400" scrollbarMode="showOnDemand" />
 				<widget name="info" position="10,450" size="780,50" zPosition="10" font="Regular;22" valign="center" halign="center" />
-			</screen>"""
+			</screen>""" %(_("Transponder Selection"))
 	elif framewidth == 720:
 		skin = """
-			<screen position="center,center" size="560,460" title="Transponder Selection" >
+			<screen position="center,center" size="560,460" title="%s" >
 				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
@@ -184,7 +184,7 @@ class TransponderSelection(Screen):
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="list" position="10,50" size="540,350" scrollbarMode="showOnDemand" />
 				<widget name="info" position="10,410" size="540,40" zPosition="10" font="Regular;20" valign="center" halign="center" />
-			</screen>"""
+			</screen>""" %(_("Transponder Selection"))
 
 	def __init__(self, session, satname, filename):
 		Screen.__init__(self, session)
