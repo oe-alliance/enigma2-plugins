@@ -1,2 +1,0 @@
-Description: A client to listen and record SHOUTcast internet radio
-Depends: enigma2, python-twisted-web, streamripper
