@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugin-extensions-satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-25 03:11+0100\n"
-"PO-Revision-Date: \n"
+"POT-Creation-Date: 2012-12-16 10:06+0100\n"
+"PO-Revision-Date: 2012-12-16 10:13+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language: de_DE\n"
@@ -15,14 +15,12 @@ msgstr ""
 "X-Poedit-Basepath: /home/ismail/enigma2-plugins/satloader/src\n"
 "X-Poedit-SearchPath-0: .\n"
 
-
 #: plugin.py:54
-#: plugin.py:195
+#: plugin.py:194
 msgid "Cancel"
 msgstr "Abbrechen"
 
 #: plugin.py:55
-#: plugin.py:108
 msgid "Install"
 msgstr "Installiere"
 
@@ -39,17 +37,17 @@ msgid "satellites.xml has been built."
 msgstr "satellites.xml wurde erstellt."
 
 #: plugin.py:98
-#: plugin.py:129
+#: plugin.py:128
 msgid "GUI needs a restart to apply changes."
 msgstr "Das System muss neu gestartet werden,um die Änderungen übernehmen zu können."
 
 #: plugin.py:98
-#: plugin.py:129
+#: plugin.py:128
 msgid "Do you want to restart the GUI now?"
 msgstr "Wollen Sie jetzt wirklich neu starten?"
 
 #: plugin.py:99
-#: plugin.py:130
+#: plugin.py:129
 msgid "Restart GUI now?"
 msgstr "Benutzeroberfläche jetzt neu starten?"
 
@@ -57,62 +55,62 @@ msgstr "Benutzeroberfläche jetzt neu starten?"
 msgid "Please select at least one satellite"
 msgstr "Bitte wählen Sie mindestens ein Satellit"
 
-#: plugin.py:109
+#: plugin.py:108
 msgid "Press ok or green button to install satellites.xml"
 msgstr "Drücken Sie OK oder grüne Taste, um satellites.xml installieren"
 
-#: plugin.py:112
+#: plugin.py:111
 msgid "Downloading satellites from server ..."
 msgstr "Satelliten werden vom Server heruntergeladen ..."
 
-#: plugin.py:122
+#: plugin.py:121
 msgid "Only for Multi Sat"
 msgstr "Nur für Multi Sat"
 
+#: plugin.py:124
 #: plugin.py:125
-#: plugin.py:126
 msgid "Downloading satellites failed!"
 msgstr "Herunterladen der Satelliten fehlgeschlagen!"
 
-#: plugin.py:129
+#: plugin.py:128
 msgid "satellites.xml is up-to-date"
 msgstr "satellites.xml wurde aktualisiert"
 
-#: plugin.py:133
+#: plugin.py:132
 msgid "Downloading succesfull! Parsing ..."
 msgstr "Herunterladen erfolgreich! Analysiere"
 
-#: plugin.py:151
+#: plugin.py:150
 msgid "Press ok button to select satellite"
 msgstr "Drücke OK-Taste um einen Satelliten auszuwählen"
 
-#: plugin.py:155
-#: plugin.py:230
+#: plugin.py:154
+#: plugin.py:231
 msgid "Parsing failed!"
 msgstr "Analyse fehlgeschlagen!"
 
-#: plugin.py:175
-#: plugin.py:187
-msgid "Transponder Selection"
+#: plugin.py:174
+#: plugin.py:186
+msgid "Transponder selection"
 msgstr "Transponder Auswahl"
 
-#: plugin.py:196
+#: plugin.py:195
 msgid "Save"
 msgstr "Speichern"
 
-#: plugin.py:223
+#: plugin.py:224
 msgid "Frequency:"
 msgstr "Frequenz:"
 
-#: plugin.py:223
+#: plugin.py:224
 msgid "Symbol Rate:"
 msgstr "Symbol Rate:"
 
-#: plugin.py:253
+#: plugin.py:252
 msgid "has been saved."
 msgstr "wurde gespeichert."
 
-#: plugin.py:256
+#: plugin.py:255
 msgid "Please select at least one transponder"
 msgstr "Bitte wählen Sie mindestens ein Transponder"
 
