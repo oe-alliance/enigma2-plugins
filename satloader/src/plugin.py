@@ -17,7 +17,7 @@ class Satloader(Screen):
 	framewidth = getDesktop(0).size().width()
 	if framewidth == 1280:
 		skin = """
-			<screen position="240,130" size="800,510" title="Satloader" >
+			<screen position="240,130" size="800,510" title="Satloader Plugin" >
 				<ePixmap position="8,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_red_sm.png" alphatest="on" />
 				<ePixmap position="206,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_green_sm.png" alphatest="on" />
 				<ePixmap position="404,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_yellow_sm.png" alphatest="on" />
@@ -32,7 +32,7 @@ class Satloader(Screen):
 			</screen>"""
 	elif framewidth == 720:
 		skin = """
-			<screen position="center,center" size="560,460" title="Satloader" >
+			<screen position="center,center" size="560,460" title="Satloader Plugin" >
 				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
@@ -308,6 +308,6 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return [
-		PluginDescriptor(name="Satloader", description="updates satellites.xml", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
-		PluginDescriptor(name="Satloader", description="updates satellites.xml", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
+		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
 		]
