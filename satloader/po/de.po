@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugin-extensions-satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-16 10:06+0100\n"
-"PO-Revision-Date: 2012-12-16 10:13+0100\n"
+"POT-Creation-Date: 2012-12-17 22:22+0100\n"
+"PO-Revision-Date: 2012-12-17 22:23+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language: de_DE\n"
@@ -39,7 +39,9 @@ msgstr "satellites.xml wurde erstellt."
 #: plugin.py:98
 #: plugin.py:128
 msgid "GUI needs a restart to apply changes."
-msgstr "Das System muss neu gestartet werden,um die Änderungen übernehmen zu können."
+msgstr ""
+"Das System muss neu gestartet werden,\n"
+"um die Änderungen übernehmen zu können."
 
 #: plugin.py:98
 #: plugin.py:128
@@ -57,7 +59,7 @@ msgstr "Bitte wählen Sie mindestens ein Satellit"
 
 #: plugin.py:108
 msgid "Press ok or green button to install satellites.xml"
-msgstr "Drücken Sie OK oder grüne Taste, um satellites.xml installieren"
+msgstr "Drücken Sie OK- oder grüne Taste, um die satellites.xml zu installieren"
 
 #: plugin.py:111
 msgid "Downloading satellites from server ..."
@@ -82,7 +84,7 @@ msgstr "Herunterladen erfolgreich! Analysiere"
 
 #: plugin.py:150
 msgid "Press ok button to select satellite"
-msgstr "Drücke OK-Taste um einen Satelliten auszuwählen"
+msgstr "Drücken Sie OK-Taste um einen Satelliten auszuwählen"
 
 #: plugin.py:154
 #: plugin.py:231
@@ -92,7 +94,7 @@ msgstr "Analyse fehlgeschlagen!"
 #: plugin.py:174
 #: plugin.py:186
 msgid "Transponder selection"
-msgstr "Transponder Auswahl"
+msgstr "Transponderauswahl"
 
 #: plugin.py:195
 msgid "Save"
@@ -112,5 +114,5 @@ msgstr "wurde gespeichert."
 
 #: plugin.py:255
 msgid "Please select at least one transponder"
-msgstr "Bitte wählen Sie mindestens ein Transponder"
+msgstr "Bitte wählen Sie mindestens einen Transponder aus"
 
