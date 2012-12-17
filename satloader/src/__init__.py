@@ -16,7 +16,8 @@ def _(txt):
 	if t == txt:
 		print "[%s] fallback to default translation for %s" %(PluginLanguageDomain, txt)
 		t = gettext.gettext(txt)
-		return t
+	return t
  
 localeInit()
 language.addCallback(localeInit)
+
