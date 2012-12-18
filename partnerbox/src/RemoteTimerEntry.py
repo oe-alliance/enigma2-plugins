@@ -137,7 +137,11 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 		self.timerentry_endtime = ConfigClock(default = end)
 		if self.timer.type == 0:
 			default = self.timer.dirname
-			if default == "None": default = "/hdd/movie/"
+			if default == "None":
+				if self.Locations:
+					default = self.Locations[0]
+				else:
+					default = "N/A"
 			if default not in self.Locations:
 				self.Locations.append(default)
 			self.timerentry_dirname = ConfigSelection(default = default, choices = self.Locations)
@@ -311,15 +315,29 @@ def RemoteTimerConfig(self):
 #def getLocationsError(self, error):
 #	RemoteTimercreateConfig(self)
 #	RemoteTimerCreateSetup(self,"config")
+
+def getLocations(self, url, check):
+	try:
+		f = urllib.urlopen(url)
+		sxml = f.read()
+		getLocationsCallback(self,sxml, check)
+	except: pass
 	
-def getLocationsCallback(self, xmlstring):
-	self.Locations = []
+def getLocationsCallback(self, xmlstring, check = False):
 	try: root = xml.etree.cElementTree.fromstring(xmlstring)
 	except: return 
 	for location in root.findall("e2location"):
-		self.Locations.append(location.text.encode("utf-8", 'ignore'))
+		add = True
+		if check:
+			add = location.text.encode("utf-8", 'ignore') not in self.Locations
+		if add:
+			self.Locations.append(location.text.encode("utf-8", 'ignore'))
 	for location in root.findall("e2simplexmlitem"):  # vorerst Kompatibilitaet zum alten Webinterface-Api aufrecht erhalten (e2simplexmlitem)
-		self.Locations.append(location.text.encode("utf-8", 'ignore'))
+		add = True
+		if check:
+			add = location.text.encode("utf-8", 'ignore') not in self.Locations
+		if add:
+			self.Locations.append(location.text.encode("utf-8", 'ignore'))
 		
 def createRemoteTimerSetup(self, widget):
 	baseTimerEntrySetup(self, widget)
@@ -359,15 +377,10 @@ def RemoteTimernewConfig(self):
 				ip = "%d.%d.%d.%d" % tuple(self.entryguilist[int(self.timerentry_remote.value)][2].ip.value)
 				port = self.entryguilist[int(self.timerentry_remote.value)][2].port.value
 				http_ = "%s:%d" % (ip,port)
-				sCommand = "http://root:" + self.entryguilist[int(self.timerentry_remote.value)][2].password.value + "@" + http_ + "/web/getlocations"
-				#sCommand = self.http + "/web/getlocations"
-				#sendPartnerBoxWebCommand(sCommand, None,3, self.username, self.password).addCallback(boundFunction(getLocationsCallback,self)).addErrback(boundFunction(getLocationsError,self))
-				# ich mach das besser synchron, falls die Partnerbox aus ist ( dann koennte man hier schon abbrechen und eine Meldung bringen...)
-				try:
-					f = urllib.urlopen(sCommand)
-					sxml = f.read()
-					getLocationsCallback(self,sxml)
-				except: pass
+				self.Locations = []
+				getLocations(self, "http://root:" + self.entryguilist[int(self.timerentry_remote.value)][2].password.value + "@" + http_ + "/web/getlocations", False)
+				if len(self.Locations) == 0:
+					getLocations(self, "http://root:" + self.entryguilist[int(self.timerentry_remote.value)][2].password.value + "@" + http_ + "/web/getcurrlocation", True)
 			RemoteTimercreateConfig(self)
 			RemoteTimerCreateSetup(self,"config")
 		else:
@@ -429,7 +442,10 @@ def  RemoteTimercreateConfig(self):
 	self.timerentry_starttime = ConfigClock(default = begin)
 	self.timerentry_endtime = ConfigClock(default = end)
 	if int(self.entryguilist[int(self.timerentry_remote.value)][2].enigma.value) == 0:
-		default = "/hdd/movie/"
+		if self.Locations:
+			default = self.Locations[0]
+		else:
+			default = "N/A"
 		if default not in self.Locations:
 			self.Locations.append(default)
 		self.timerentry_dirname = ConfigSelection(default = default, choices = self.Locations)
@@ -519,12 +535,15 @@ def RemoteTimerGo(self):
 			else:
 				justplay = 0
 				dirname = urllib.quote(self.timerentry_dirname.value)
-			afterevent = {
-			"deepstandby": AFTEREVENT.DEEPSTANDBY,
-			"standby": AFTEREVENT.STANDBY,
-			}.get(self.timerentry_afterevent.value, AFTEREVENT.NONE)
-			sCommand = "%s/web/timeradd?sRef=%s&begin=%d&end=%d&name=%s&description=%s&dirname=%s&eit=0&justplay=%d&afterevent=%s" % (http, service_ref,begin,end,name,descr,dirname,justplay,afterevent)
-			sendPartnerBoxWebCommand(sCommand, None,3, "root", str(self.entryguilist[int(self.timerentry_remote.value)][2].password.value)).addCallback(boundFunction(AddTimerE2Callback,self, self.session)).addErrback(boundFunction(AddTimerError,self,self.session))
+			if dirname == "N/A":
+				self.session.open(MessageBox,_("Timer can not be added...no locations on partnerbox available."),MessageBox.TYPE_INFO)
+			else:
+				afterevent = {
+				"deepstandby": AFTEREVENT.DEEPSTANDBY,
+				"standby": AFTEREVENT.STANDBY,
+				}.get(self.timerentry_afterevent.value, AFTEREVENT.NONE)
+				sCommand = "%s/web/timeradd?sRef=%s&begin=%d&end=%d&name=%s&description=%s&dirname=%s&eit=0&justplay=%d&afterevent=%s" % (http, service_ref,begin,end,name,descr,dirname,justplay,afterevent)
+				sendPartnerBoxWebCommand(sCommand, None,3, "root", str(self.entryguilist[int(self.timerentry_remote.value)][2].password.value)).addCallback(boundFunction(AddTimerE2Callback,self, self.session)).addErrback(boundFunction(AddTimerError,self,self.session))
 
 def AddTimerE2Callback(self, session, answer):
 	text = ""

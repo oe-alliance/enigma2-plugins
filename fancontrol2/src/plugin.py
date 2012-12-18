@@ -487,7 +487,7 @@ class FanControl2Monitor(Screen, ConfigListScreen):
 				self["TxtTemp%d" % count].setText(_("%s   %02d C") % (TempName[count], tt))
 			else:
 				self["TxtTemp%d" % count].setText(_("%s   %02d C") % (sensors.getSensorName(count), tt))
-		if harddiskmanager.HDDCount() > 0:
+		if harddiskmanager.HDDCount() > 0 and len(AktHDD) > 0:
 			if max(AktHDD) > 0:
 				self["ProHDD"].value = int((max(AktHDD)-30)*100/(55-30))
 				self["TxtHDD"].setText(_("%s   %02d C") % ("HDD", max(AktHDD)))
@@ -1242,7 +1242,7 @@ def autostart(reason, **kwargs):
 			if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/OpenWebif/pluginshook.src"):
 				try:
 					addExternalChild( ("fancontrol", root, "Fan Control 2", Version) )
-					FClog("use OpenWebIF")
+					FClog("use new OpenWebIF")
 				except:
 					pass
 		if not os.path.exists("/proc/stb/fp/fan_vlt"):
