@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-02 09:06+0100\n"
+"POT-Creation-Date: 2012-12-19 20:14+0100\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -559,6 +559,9 @@ msgstr ""
 msgid "Use internal PhoneBook"
 msgstr "Koristi interni tel. imenik"
 
+msgid "User name Accessing FRITZ!Box"
+msgstr ""
+
 msgid "Vanity"
 msgstr "Ništavnost"
 
@@ -622,6 +625,9 @@ msgstr "Sandučići aktivni"
 
 msgid "mobile"
 msgstr "Mobilni"
+
+msgid "no SID"
+msgstr ""
 
 msgid "no calls"
 msgstr ""

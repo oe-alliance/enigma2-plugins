@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-02 09:06+0100\n"
+"POT-Creation-Date: 2012-12-19 20:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -546,6 +546,9 @@ msgstr ""
 msgid "Use internal PhoneBook"
 msgstr ""
 
+msgid "User name Accessing FRITZ!Box"
+msgstr ""
+
 msgid "Vanity"
 msgstr ""
 
@@ -604,6 +607,9 @@ msgid "mailboxes active"
 msgstr ""
 
 msgid "mobile"
+msgstr ""
+
+msgid "no SID"
 msgstr ""
 
 msgid "no calls"
