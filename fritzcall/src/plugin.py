@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 719 $
-$Date: 2012-11-09 16:13:35 +0100 (Fri, 09 Nov 2012) $
-$Id: plugin.py 719 2012-11-09 15:13:35Z michael $
+$Revision: 724 $
+$Date: 2012-12-18 23:50:51 +0100 (Tue, 18 Dec 2012) $
+$Id: plugin.py 724 2012-12-18 22:50:51Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -77,7 +77,7 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), "05.27"])
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), "05.50"])
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
@@ -96,6 +96,7 @@ config.plugins.FritzCall.fritzphonebook = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.phonebook = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.addcallers = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.enable = ConfigEnableDisable(default=False)
+config.plugins.FritzCall.username = ConfigText(default='BoxAdmin', fixed_size=False)
 config.plugins.FritzCall.password = ConfigPassword(default="", fixed_size=False)
 config.plugins.FritzCall.extension = ConfigText(default='1', fixed_size=False)
 config.plugins.FritzCall.extension.setUseableChars('0123456789')
@@ -294,8 +295,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 719 $"[1:-2] + "\n" + 
-							"$Date: 2012-11-09 16:13:35 +0100 (Fri, 09 Nov 2012) $"[1:23] + "\n"
+							"$Revision: 724 $"[1:-2] + "\n" + 
+							"$Date: 2012-12-18 23:50:51 +0100 (Tue, 18 Dec 2012) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1697,7 +1698,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 719 $"[1: - 1] + "$Date: 2012-11-09 16:13:35 +0100 (Fri, 09 Nov 2012) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 724 $"[1: - 1] + "$Date: 2012-12-18 23:50:51 +0100 (Tue, 18 Dec 2012) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1730,6 +1731,8 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			if config.plugins.FritzCall.lookup.value:
 				self.list.append(getConfigListEntry(_("Country"), config.plugins.FritzCall.country))
 
+			if config.plugins.FritzCall.fwVersion.value == "05.50":
+				self.list.append(getConfigListEntry(_("User name Accessing FRITZ!Box"), config.plugins.FritzCall.username))
 			# TODO: make password unreadable?
 			self.list.append(getConfigListEntry(_("Password Accessing FRITZ!Box"), config.plugins.FritzCall.password))
 			self.list.append(getConfigListEntry(_("Extension number to initiate call on"), config.plugins.FritzCall.extension))
@@ -2201,7 +2204,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 719 $"[1:-1]	+ "$Date: 2012-11-09 16:13:35 +0100 (Fri, 09 Nov 2012) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 724 $"[1:-1]	+ "$Date: 2012-12-18 23:50:51 +0100 (Tue, 18 Dec 2012) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2348,8 +2351,8 @@ class FritzClientFactory(ReconnectingClientFactory):
 		# TODO: swithc between FBF FW versions...
 		if config.plugins.FritzCall.fwVersion.value == "old":
 			fritzbox = FritzCallFBF.FritzCallFBF()
-		elif config.plugins.FritzCall.fwVersion.value == "05.27":
-			fritzbox = FritzCallFBF.FritzCallFBF_05_27()
+		elif config.plugins.FritzCall.fwVersion.value == "05.50":
+			fritzbox = FritzCallFBF.FritzCallFBF_05_50()
 		else:
 			Notifications.AddNotification(MessageBox, _("FRITZ!Box firmware version not configured! Please set it in the configuration."), type=MessageBox.TYPE_INFO, timeout=0)
 		phonebook = FritzCallPhonebook()

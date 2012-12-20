@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - partnerbox\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-20 14:19+0100\n"
-"PO-Revision-Date: 2012-05-20 14:41+0100\n"
+"POT-Creation-Date: 2012-12-18 22:49+0100\n"
+"PO-Revision-Date: 2012-12-18 22:51+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
@@ -97,8 +97,8 @@ msgstr "Partnerbox: elenco voci"
 
 #: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:125
 #: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:248
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:154
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:454
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:158
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:470
 msgid "Name"
 msgstr "Nome"
 
@@ -154,146 +154,150 @@ msgstr "Sintonizzarsi sul canale di streaming"
 
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:128
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:132
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:420
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:425
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:433
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:438
 msgid "zap"
 msgstr "Zap"
 
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:128
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:420
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:433
 msgid "record"
 msgstr "Registrare"
 
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:129
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:133
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:421
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:426
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:434
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:439
 msgid "do nothing"
 msgstr "Non fare nulla"
 
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:129
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:133
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:421
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:426
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:434
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:439
 msgid "go to standby"
 msgstr "Standby"
 
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:129
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:133
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:421
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:426
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:434
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:439
 msgid "go to deep standby"
 msgstr "Spegnimento (Deep standby)"
 
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:129
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:421
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:434
 msgid "auto"
 msgstr "Auto"
 
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:132
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:425
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:438
 msgid "NGRAB"
 msgstr "NGRAB"
 
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:132
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:425
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:438
 msgid "DVR"
 msgstr "DVR"
 
 #: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:135
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:428
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:441
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:144
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:436
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
 msgid "Monday"
 msgstr "Lunedì"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:144
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:436
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:144
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:436
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:144
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:436
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:144
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:436
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
 msgid "Friday"
 msgstr "Venerdì"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:144
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:436
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
 msgid "Saturday"
 msgstr "Sabato"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:144
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:436
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
 msgid "Sunday"
 msgstr "Domenica"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:155
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:455
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:159
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:471
 msgid "Description"
 msgstr "Descrizione"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:156
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:456
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:160
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:472
 msgid "Timer Type"
 msgstr "Tipo timer"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:158
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:458
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:162
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:474
 msgid "Date"
 msgstr "Data"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:160
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:460
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:164
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:476
 msgid "StartTime"
 msgstr "Ora avvio"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:164
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:169
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:464
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:469
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:168
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:173
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:480
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:485
 msgid "EndTime"
 msgstr "Ora fine"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:171
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:471
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:175
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:487
 msgid "Channel"
 msgstr "Canale"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:174
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:474
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:178
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:490
 msgid "Location"
 msgstr "Destinazione"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:177
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:179
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:477
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:479
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:181
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:183
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:493
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:495
 msgid "After event"
 msgstr "Dopo l'evento"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:299
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:303
 msgid "No"
 msgstr "No"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:326
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:344
 msgid "Remote Timer"
 msgstr "Timer remoto"
 
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:538
-#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:548
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:539
+msgid "Timer can not be added...no locations on partnerbox available."
+msgstr "Impossibile aggiungere timer: nessuna destinazione disponibile sul box partner."
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:557
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:567
 #, python-format
 msgid ""
 "Partnerbox Answer: \n"

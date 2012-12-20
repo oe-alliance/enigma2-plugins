@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-02 09:06+0100\n"
-"PO-Revision-Date: 2012-11-02 09:07+0100\n"
+"POT-Creation-Date: 2012-12-19 20:14+0100\n"
+"PO-Revision-Date: 2012-12-19 20:15+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: \n"
@@ -581,6 +581,9 @@ msgstr "USB Gerät"
 msgid "Use internal PhoneBook"
 msgstr "Benutze internes Telefonbuch"
 
+msgid "User name Accessing FRITZ!Box"
+msgstr "Benutzername für FRITZ!Box"
+
 msgid "Vanity"
 msgstr "Vanity"
 
@@ -647,6 +650,9 @@ msgstr "Anrufbeantworter aktiv"
 
 msgid "mobile"
 msgstr "Handy"
+
+msgid "no SID"
+msgstr "keine SID"
 
 msgid "no calls"
 msgstr "keine Anrufe"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-02 09:06+0100\n"
+"POT-Creation-Date: 2012-12-19 20:14+0100\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -562,6 +562,9 @@ msgstr "Lápiz USB"
 msgid "Use internal PhoneBook"
 msgstr "Usar Agenda interna"
 
+msgid "User name Accessing FRITZ!Box"
+msgstr ""
+
 msgid "Vanity"
 msgstr "Vanidad"
 
@@ -626,6 +629,9 @@ msgstr "cuentas activas"
 
 msgid "mobile"
 msgstr "móvil"
+
+msgid "no SID"
+msgstr ""
 
 msgid "no calls"
 msgstr ""
