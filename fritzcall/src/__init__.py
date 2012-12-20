@@ -4,24 +4,21 @@ general functions for FritzCall plugin
 '''
 from Components.config import config #@UnresolvedImport
 from Components.Language import language
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS #@UnresolvedImport
+from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
 import gettext, os
 from enigma import eBackgroundFileEraser
 
-PluginLanguageDomain = "FritzCall"
-PluginLanguagePath = "Extensions/FritzCall/locale/"
+lang = language.getLanguage()
+os.environ["LANGUAGE"] = lang[:2]
+gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
+gettext.textdomain("enigma2")
+gettext.bindtextdomain("FritzCall", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/FritzCall/locale/"))
 
-def localeInit():
-	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
-
-def _(txt):
-	if gettext.dgettext(PluginLanguageDomain, txt):
-		return gettext.dgettext(PluginLanguageDomain, txt)
-	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
-		return gettext.gettext(txt)
-
-language.addCallback(localeInit())
+def _(txt): # pylint: disable-msg=C0103
+	td = gettext.dgettext("FritzCall", txt)
+	if td == txt:
+		td = gettext.gettext(txt)
+	return td
 
 def initDebug():
 	try:

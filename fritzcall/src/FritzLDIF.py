@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
-$Author$
-$Revision$
-$Date$
-$Id$
+$Author: michael $
+$Revision: 699 $
+$Date: 2012-10-25 19:04:03 +0200 (Do, 25. Okt 2012) $
+$Id: FritzLDIF.py 699 2012-10-25 17:04:03Z michael $
 '''
 #
 # needs python-ldap for ldif

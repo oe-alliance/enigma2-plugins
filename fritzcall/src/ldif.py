@@ -6,7 +6,7 @@ ldif - generate and parse LDIF data (see RFC 2849)
 
 See http://python-ldap.sourceforge.net for details.
 
-$Id$
+$Id: ldif.py 699 2012-10-25 17:04:03Z michael $
 
 Python compability note:
 Tested with Python 2.0+, but should work with Python 1.5.2+.

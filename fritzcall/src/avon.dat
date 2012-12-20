@@ -9440,38 +9440,167 @@
 
 +235:Tschad
 
+
 +420:[CZ]Tschechische Republik
-+420-601 2-mobile
-+420-602 2-mobile
-+420-606 2-mobile
-+420-607 2-mobile
-+420-72 2-mobile
-+420-603:T-Mobile
-+420-604:T-Mobile
-+420-605:T-Mobile
-+420-73:T-Mobile
-+420-608:Vodafone-mobile
-+420-77:Vodafone-mobile
-+420-2 raha
-+420-31:Stredocesky kraj
-+420-32:Stredocesky kraj
-+420-35:Karlovarsky kraj
-+420-37 lzensky kraj
-+420-38:Jihocesky kraj
-+420-39:Jihocesky kraj
-+420-41:Ustecky kraj
-+420-46 ardubicky kraj
-+420-47:Ustecky kraj
-+420-48:Liberecky kraj
-+420-49:Kralovehradecky kraj
-+420-51:Jihomoravsky kraj
-+420-53:Jihomoravsky kraj
-+420-54:Jihomoravsky kraj
-+420-55:Moravskoslezsky kraj
-+420-56:Kraj Vysocina
-+420-57:Zlinsky kraj
-+420-58 lomoucky kraj
-+420-59:Moravskoslezsky kraj
++420-301:Benesov u Prahy
++420-311:Beroun
++420-655:Bilovec
++420-506:Blansko
++420-344:Blatna
++420-185:Blovice
++420-6992:Bohumin
++420-501:Boskovice
++420-202:Brandys n. L.
++420-627:Breclav
++420-5:Brno
++420-447:Broumov
++420-505:Bystrice n. Per.
++420-322:Caslav
++420-4205:Ceska Lipa
++420-38:Ceske Budejovice
++420-203:Cesky Brod
++420-337:Cesky Krumlov
++420-453:Chotebor
++420-455:Chrudim
++420-332:Dacice
++420-412:Decin
++420-305:Dobris
++420-443:Dobruska
++420-189:Domazlice
++420-437:Dvur Kralove n. L.
++420-166:Frantiskovy Lazne
++420-658:Frydek-Mistek
++420-427:Frydlant v Cechach
++420-6994:Havirov
++420-451:Havlickuv Brod
++420-454:Hlinsko v Cechach
++420-628:Hodonin
++420-635:Holesov
++420-456:Holice v Cechach
++420-396:Hora Svatého Sebastiána
++420-435:Horice v Podkrkonosi
++420-316:Horovice
++420-188:Horsovsky Tyn
++420-6420:Hranice
++420-367:Humpolec
++420-626:Hustopece u Brna
++420-428:Jablonec n. Nisou
++420-442:Jaromer
++420-433:Jicin
++420-66:Jihlava
++420-432:Jilemnice
++420-331:Jindrichuv Hradec
++420-398:Kadan
++420-364:Kamenice nad Lipou
++420-336:Kaplice
++420-17:Karlovy Vary
++420-6993:Karvina
++420-312:Kladno
++420-321:Kolin
++420-444:Kostelec nad Orlici
++420-205:Kralupy nad Vltavou
++420-652:Krnov
++420-634:Kromeriz
++420-327:Kutna Hora
++420-629:Kyjov
++420-467:Lanskroun
++420-452:Ledec nad Sazavou
++420-48:Liberec
++420-416:Litomerice
++420-464:Litomysl
++420-395:Louny
++420-419:Lovosice
++420-165:Marianske Lazne
++420-206:Melnik
++420-625:Mikulov na Morave
++420-368:Milevsko
++420-326:Mlada Boleslav
++420-329:Mnichovo Hradiste
++420-462:Moravska Trebova
++420-617:Moravske Budejovice
++420-621:Moravsky Krumlov
++420-35:Most
++420-441:Nachod
++420-509:Namest n. Osl.
++420-434:Nova Paka
++420-424:Novy Bor
++420-448:Novy Bydzov
++420-656:Novy Jicin
++420-325:Nymburk
++420-68:Olomouc
++420-653:Opava
++420-6995:Orlova
++420-69:Ostrava
++420-164:Ostrov n. Ohri
++420-365:Pacov
++420-40:Pardubice
++420-366:Pelhrimov
++420-362:Pisek
++420-182:Plasy
++420-19:Plzen
++420-399:Podborany
++420-324:Podebrady
++420-463:Policka
++420-338:Prachatice
++420-2:Praha
++420-457:Prelouc
++420-641:Prerov
++420-306:Pribram
++420-508:Prostejov
++420-313:Rakovnik
++420-204:Ricany u Prahy
++420-181:Rokycany
++420-502:Rosice u Brna
++420-411:Roudnice n. L.
++420-445:Rychnov n. Kneznou
++420-304:Sedlcany
++420-431:Semily
++420-314:Slany
++420-363:Sobeslav
++420-168:Sokolov
++420-342:Strakonice
++420-183:Stribro
++420-649:Sumperk
++420-187:Susice
++420-461:Svitavy
++420-361:Tabor
++420-184:Tachov
++420-417:Teplice
++420-504:Tisnov
++420-169:Touzim
++420-618:Trebic
++420-333:Trebon
++420-335:Trhove Sviny
++420-659:Trinec
++420-439:Trutnov
++420-436:Turnov
++420-334:Tyn n. Vltavou
++420-632:Uherske Hradiste
++420-633:Uhersky Brod
++420-328:Uhlirske Janovice
++420-47:Usti nad Labem
++420-465:Usti nad Orlici
++420-636:Valasske Klobouky
++420-651:Valasske Mezirici
++420-413:Varnsdorf
++420-619:Velke Mezirici
++420-631:Veseli n. Moravou
++420-339:Vimperk
++420-654:Vitkov
++420-303:Vlasim
++420-302:Votice
++420-438:Vrchlabi
++420-657:Vsetin
++420-507:Vyskov
++420-468:Vysoke Myto
++420-648:Zabreh
++420-446:Zamberk
++420-397:Zatec
++420-616:Zdar n. Sazavou
++420-186:Zelezná Ruda
++420-67:Zlin
++420-624:Znojmo
+
 
 +216:[TN]Tunesien
 +216-7:Kasserine

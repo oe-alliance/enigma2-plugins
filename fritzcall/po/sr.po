@@ -7,13 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2012-12-18 22:47+0100\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Serbian\n"
 "X-Poedit-Country: SERBIA\n"
@@ -257,7 +257,9 @@ msgstr ""
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Stanje telefona"
 
-msgid "FRITZ!Box firmware version not configured! Please set it in the configuration."
+msgid ""
+"FRITZ!Box firmware version not configured! Please set it in the "
+"configuration."
 msgstr ""
 
 msgid "FRITZ!Box not available for calling"
@@ -557,6 +559,9 @@ msgstr ""
 msgid "Use internal PhoneBook"
 msgstr "Koristi interni tel. imenik"
 
+msgid "User name Accessing FRITZ!Box"
+msgstr ""
+
 msgid "Vanity"
 msgstr "Ništavnost"
 
@@ -576,9 +581,6 @@ msgstr ""
 
 msgid "before 05.27"
 msgstr ""
-
-msgid "business"
-msgstr "posao"
 
 msgid "call redirections active"
 msgstr "Preusmerenje poziva aktivno"
@@ -623,6 +625,9 @@ msgstr "Sandučići aktivni"
 
 msgid "mobile"
 msgstr "Mobilni"
+
+msgid "no SID"
+msgstr ""
 
 msgid "no calls"
 msgstr ""
@@ -715,3 +720,6 @@ msgstr "Posao"
 
 #~ msgid "USB Stick"
 #~ msgstr "USB Stick"
+
+#~ msgid "business"
+#~ msgstr "posao"

@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 '''
-$Id: nrzuname.py 655 2011-08-06 11:11:07Z michael $
+$Id: nrzuname.py 699 2012-10-25 17:04:03Z michael $
 $Author: michael $
-$Revision: 655 $
-$Date: 2011-08-06 13:11:07 +0200 (Sa, 06 Aug 2011) $
+$Revision: 699 $
+$Date: 2012-10-25 19:04:03 +0200 (Do, 25. Okt 2012) $
 '''
 
 import re, sys, os

@@ -7,13 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-02-03 12:59+0100\n"
+"POT-Creation-Date: 2012-12-18 22:47+0100\n"
+"PO-Revision-Date: 2012-12-18 22:48+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. TRANSLATORS: this is a window title.
@@ -64,7 +64,7 @@ msgstr "Rufumleitung"
 
 #, python-format
 msgid "Calling %s"
-msgstr ""
+msgstr "Rufe %s an"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -109,13 +109,14 @@ msgstr ""
 "neuer Versuch..."
 
 msgid "Could not get call list; wrong version?"
-msgstr ""
+msgstr "Konnte Anrufliste nicht bekommen; falsche Firmware-Version?"
 
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "Konnte Eintrag in FRITZ!Box-Telefonbuch nicht lesen"
 
 msgid "Could not read FRITZ!Box phonebook; wrong version?"
 msgstr ""
+"Konnte Telefonbuch der FRITZ!Box nicht lesen; falsche Firmware-Version?"
 
 msgid "Country"
 msgstr "Land"
@@ -250,7 +251,7 @@ msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box FON Adresse (Name oder IP-Adresse)"
 
 msgid "FRITZ!Box FON firmware version"
-msgstr ""
+msgstr "FRITZ!Box FON Firmware-Version"
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -258,11 +259,15 @@ msgstr ""
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Fon Status"
 
-msgid "FRITZ!Box firmware version not configured! Please set it in the configuration."
+msgid ""
+"FRITZ!Box firmware version not configured! Please set it in the "
+"configuration."
 msgstr ""
+"FRITZ!Box Firmware-Version nicht konfiguriert! Bitte in der Konfiguration "
+"setzen."
 
 msgid "FRITZ!Box not available for calling"
-msgstr ""
+msgstr "FRITZ!Box für Anrufe nicht verfügbar"
 
 msgid "Filter also list of calls"
 msgstr "Filter auch auf Anrufliste anwenden"
@@ -576,11 +581,16 @@ msgstr "USB Gerät"
 msgid "Use internal PhoneBook"
 msgstr "Benutze internes Telefonbuch"
 
+msgid "User name Accessing FRITZ!Box"
+msgstr "Benutzername der FRITZ!Box"
+
 msgid "Vanity"
 msgstr "Vanity"
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr "Monitoring auf der FRITZ!Box muss durch Wählen von #96*5* eingeschaltet werden!"
+msgstr ""
+"Monitoring auf der FRITZ!Box muss durch Wählen von #96*5* eingeschaltet "
+"werden!"
 
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
@@ -595,10 +605,7 @@ msgstr ""
 "Versuchen Sie es nochmal."
 
 msgid "before 05.27"
-msgstr ""
-
-msgid "business"
-msgstr ""
+msgstr "vor 05.27"
 
 msgid "call redirections active"
 msgstr "Rufumleitungen aktiv"
@@ -644,6 +651,9 @@ msgstr "Anrufbeantworter aktiv"
 msgid "mobile"
 msgstr "Handy"
 
+msgid "no SID"
+msgstr "keine SID"
+
 msgid "no calls"
 msgstr "keine Anrufe"
 
@@ -651,13 +661,13 @@ msgid "no device active"
 msgstr "keine WLAN-Station aktiv"
 
 msgid "not configured"
-msgstr ""
+msgstr "nicht konfiguriert"
 
 msgid "not encrypted"
 msgstr "nicht verschlüsselt"
 
 msgid "not yet implemented"
-msgstr ""
+msgstr "noch nicht eingebaut"
 
 msgid "number suppressed"
 msgstr "Nummer unterdrückt"

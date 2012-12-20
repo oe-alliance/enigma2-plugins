@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-03-23 18:02+0100\n"
+"POT-Creation-Date: 2012-12-18 22:47+0100\n"
+"PO-Revision-Date: 2012-10-24 15:03+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
@@ -16,8 +16,8 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: .../enigma2-plugins/fritzcall\n"
-"X-Poedit-SearchPath-0: .../enigma2-plugins/fritzcall\n"
+"X-Poedit-Basepath: /media/TREKSTOR/git/enigma2-plugins/fritzcall\n"
+"X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/fritzcall\n"
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -112,13 +112,13 @@ msgstr ""
 "Nuovo tentativo in corso..."
 
 msgid "Could not get call list; wrong version?"
-msgstr ""
+msgstr "Impossibile ottenere elenco chiamate: versione errata?"
 
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
 
 msgid "Could not read FRITZ!Box phonebook; wrong version?"
-msgstr ""
+msgstr "Impossibile leggere Rubrica della FRITZ!Box: versione errata?"
 
 msgid "Country"
 msgstr "Nazione"
@@ -253,7 +253,7 @@ msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box FON - Indirizzo (nome o IP)"
 
 msgid "FRITZ!Box FON firmware version"
-msgstr ""
+msgstr "FRITZ!Box FON - Versione firmware"
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -261,8 +261,11 @@ msgstr ""
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Fon - Stato"
 
-msgid "FRITZ!Box firmware version not configured! Please set it in the configuration."
+msgid ""
+"FRITZ!Box firmware version not configured! Please set it in the "
+"configuration."
 msgstr ""
+"Versione firmware FRITZ!Box non inserita. Aggiornare la configurazione."
 
 msgid "FRITZ!Box not available for calling"
 msgstr "FRITZ!Box non disponibile per le chiamate"
@@ -578,6 +581,9 @@ msgstr "Dispositivo USB"
 msgid "Use internal PhoneBook"
 msgstr "Usare la rubrica interna"
 
+msgid "User name Accessing FRITZ!Box"
+msgstr ""
+
 msgid "Vanity"
 msgstr "\"Vanity\""
 
@@ -597,9 +603,6 @@ msgstr ""
 
 msgid "before 05.27"
 msgstr ""
-
-msgid "business"
-msgstr "Affari"
 
 msgid "call redirections active"
 msgstr "deviazione chiamate attiva"
@@ -645,6 +648,9 @@ msgstr "caselle di posta attive"
 msgid "mobile"
 msgstr "Cellulare"
 
+msgid "no SID"
+msgstr ""
+
 msgid "no calls"
 msgstr "Nessuna"
 
@@ -652,13 +658,13 @@ msgid "no device active"
 msgstr "Nessun dispositivo attivo"
 
 msgid "not configured"
-msgstr ""
+msgstr "non configurato"
 
 msgid "not encrypted"
 msgstr "non codificato"
 
 msgid "not yet implemented"
-msgstr ""
+msgstr "Funzione non ancora implementata"
 
 msgid "number suppressed"
 msgstr "numero mascherato"
@@ -688,3 +694,9 @@ msgstr "Nulla"
 
 msgid "work"
 msgstr "Ufficio"
+
+#~ msgid "business"
+#~ msgstr "Affari"
+
+#~ msgid "legacy"
+#~ msgstr "legacy"
