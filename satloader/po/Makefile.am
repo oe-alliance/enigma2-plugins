@@ -1,3 +1,3 @@
 PLUGIN = Satloader
-LANGS = de it
+LANGS = de it tr
 include $(top_srcdir)/Rules-po.mak
