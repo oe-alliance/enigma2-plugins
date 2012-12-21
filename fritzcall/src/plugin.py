@@ -2,10 +2,11 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 724 $
-$Date: 2012-12-18 23:50:51 +0100 (Tue, 18 Dec 2012) $
-$Id: plugin.py 724 2012-12-18 22:50:51Z michael $
+$Revision: 734 $
+$Date: 2012-12-21 16:54:18 +0100 (Fr, 21 Dez 2012) $
+$Id: plugin.py 734 2012-12-21 15:54:18Z michael $
 '''
+
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog
@@ -77,7 +78,7 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), "05.50"])
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27,05.28"), "05.50"])
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
@@ -295,8 +296,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 724 $"[1:-2] + "\n" + 
-							"$Date: 2012-12-18 23:50:51 +0100 (Tue, 18 Dec 2012) $"[1:23] + "\n"
+							"$Revision: 734 $"[1:-2] + "\n" + 
+							"$Date: 2012-12-21 16:54:18 +0100 (Fr, 21 Dez 2012) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -852,10 +853,13 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 	def ok(self):
 		self.close()
 
-	def display(self, which):
+	def display(self, which=None):
 		debug("[FritzDisplayCalls] display")
-		config.plugins.FritzCall.fbfCalls.value = which
-		config.plugins.FritzCall.fbfCalls.save()
+		if which:
+			config.plugins.FritzCall.fbfCalls.value = which
+			config.plugins.FritzCall.fbfCalls.save()
+		else:
+			which = config.plugins.FritzCall.fbfCalls.value
 		fritzbox.getCalls(self, lambda x: self.gotCalls(x, which), which)
 
 	def gotCalls(self, listOfCalls, which):
@@ -877,8 +881,10 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		# debug("[FritzDisplayCalls] gotCalls: %s" %repr(listOfCalls))
 		self.list = [(number, date[:6] + ' ' + date[9:14], pixDir(direct), remote, length, here) for (number, date, direct, remote, length, here) in listOfCalls]
 		self["entries"].setList(self.list)
-		if len(self.list) > 1:
-			self["entries"].setIndex(1)
+		#=======================================================================
+		# if len(self.list) > 1:
+		#	self["entries"].setIndex(1)
+		#=======================================================================
 
 	def updateStatus(self, text):
 		if self.has_key("statusbar"):
@@ -1698,7 +1704,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 724 $"[1: - 1] + "$Date: 2012-12-18 23:50:51 +0100 (Tue, 18 Dec 2012) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 734 $"[1: - 1] + "$Date: 2012-12-21 16:54:18 +0100 (Fr, 21 Dez 2012) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2204,7 +2210,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 724 $"[1:-1]	+ "$Date: 2012-12-18 23:50:51 +0100 (Tue, 18 Dec 2012) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 734 $"[1:-1]	+ "$Date: 2012-12-21 16:54:18 +0100 (Fr, 21 Dez 2012) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2351,6 +2357,8 @@ class FritzClientFactory(ReconnectingClientFactory):
 		# TODO: swithc between FBF FW versions...
 		if config.plugins.FritzCall.fwVersion.value == "old":
 			fritzbox = FritzCallFBF.FritzCallFBF()
+		elif config.plugins.FritzCall.fwVersion.value == "05.27":
+			fritzbox = FritzCallFBF.FritzCallFBF_05_27()
 		elif config.plugins.FritzCall.fwVersion.value == "05.50":
 			fritzbox = FritzCallFBF.FritzCallFBF_05_50()
 		else:
