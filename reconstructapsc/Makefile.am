@@ -1,3 +1,3 @@
-SUBDIRS = src_cc src_py meta
+SUBDIRS = src_py meta
 
 EXTRA_DIST = Readme-ReconstructApSc.txt
