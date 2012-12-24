@@ -3,7 +3,7 @@
 Created on 30.09.2012
 $Author: michael $
 $Revision: 733 $
-$Date: 2012-12-21 16:43:32 +0100 (Fr, 21 Dez 2012) $
+$Date: 2012-12-21 16:43:32 +0100 (Fri, 21 Dec 2012) $
 $Id: FritzCallFBF.py 733 2012-12-21 15:43:32Z michael $
 '''
 
