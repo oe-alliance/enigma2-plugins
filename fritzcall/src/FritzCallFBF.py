@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 738 $
-$Date: 2012-12-29 16:39:58 +0100 (Sa, 29 Dez 2012) $
-$Id: FritzCallFBF.py 738 2012-12-29 15:39:58Z michael $
+$Revision: 739 $
+$Date: 2012-12-29 17:01:50 +0100 (Sa, 29 Dez 2012) $
+$Id: FritzCallFBF.py 739 2012-12-29 16:01:50Z michael $
 '''
 
 from . import _, debug #@UnresolvedImport # pylint: disable=E0611,F0401
@@ -1141,7 +1141,7 @@ class FritzCallFBF_05_50:
 
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login"))
-		if self._md5LoginTimestamp and ((time.time() - self._md5LoginTimestamp) < float(9.5)) and self._md5Sid != '0000000000000000': # new login after 9.5 minutes inactivity 
+		if self._md5LoginTimestamp and ((time.time() - self._md5LoginTimestamp) < float(9.5*60)) and self._md5Sid != '0000000000000000': # new login after 9.5 minutes inactivity 
 			debug("[FritzCallFBF_05_50] _login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
 			self._md5LoginTimestamp = time.time()
 			for callback in self._loginCallbacks:
