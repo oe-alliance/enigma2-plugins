@@ -532,7 +532,9 @@ def autostart(reason, *args, **kwargs):
 #pragma mark - Help
 try:
 	from Plugins.SystemPlugins.MPHelp import registerHelp, showHelp, XMLHelpReader
-	reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginSort/mphelp.xml"))
+	file = open(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginSort/mphelp.xml"), 'r')
+	reader = XMLHelpReader(file)
+	file.close()
 	pluginSortHelp = registerHelp(*reader)
 except Exception as e:
 	print("[PluginSort] Unable to initialize MPHelp:", e,"- Help not available!")

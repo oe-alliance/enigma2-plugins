@@ -402,7 +402,9 @@ try:
 	if SystemInfo.get("NumVideoDecoders", 1) > 1:
 		from Plugins.SystemPlugins.MPHelp import registerHelp, XMLHelpReader
 		from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-		reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/pipzap/mphelp.xml"))
+		file = open(resolveFilename(SCOPE_PLUGINS, "Extensions/pipzap/mphelp.xml"), 'r')
+		reader = XMLHelpReader(file)
+		file.close()
 		pipzapHelp = registerHelp(*reader)
 except Exception as e:
 	print("[pipzap] Unable to initialize MPHelp:", e,"- Help not available!")

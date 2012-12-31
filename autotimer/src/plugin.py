@@ -16,7 +16,9 @@ autopoller = None
 try:
 	from Plugins.SystemPlugins.MPHelp import registerHelp, XMLHelpReader
 	from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-	reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/mphelp.xml"))
+	file = open(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/mphelp.xml"), 'r')
+	reader = XMLHelpReader(file)
+	file.close()
 	autotimerHelp = registerHelp(*reader)
 except Exception as e:
 	print("[AutoTimer] Unable to initialize MPHelp:", e,"- Help not available!")

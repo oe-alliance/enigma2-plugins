@@ -43,7 +43,9 @@ class AutoMount():
 		self.activeMountsCounter = 0
 		if not os.path.exists(XML_FSTAB):
 			return
-		tree = cet_parse(XML_FSTAB).getroot()
+		file = open(XML_FSTAB, 'r')
+		tree = cet_parse(file).getroot()
+		file.close()
 
 		def getValue(definitions, default):
 			# Initialize Output
@@ -410,7 +412,7 @@ class AutoMount():
 
 		# Try Saving to Flash
 		try:
-			open(XML_FSTAB, "w").writelines(list)
+			open(XML_FSTAB, "w").writelines(list).close()
 		except Exception, e:
 			print "[NetworkBrowser] Error Saving Mounts List:", e
 
