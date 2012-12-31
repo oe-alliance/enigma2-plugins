@@ -2,81 +2,79 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugin-extensions-satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-28 18:19+0100\n"
-"PO-Revision-Date: 2012-12-28 18:20+0100\n"
+"POT-Creation-Date: 2012-12-28 18:23+0100\n"
+"PO-Revision-Date: 2012-12-28 18:23+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
-"Language: de_DE\n"
+"Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: /home/ismail/enigma2-plugins/satloader/src/\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: _\n"
-"X-Poedit-Basepath: /home/ismail/enigma2-plugins/satloader/src\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: plugin.py:52
 #: plugin.py:164
 #: plugin.py:286
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "iptal"
 
 #: plugin.py:53
 msgid "Install"
-msgstr "Installiere"
+msgstr "Kurmak"
 
 #: plugin.py:54
 msgid "Multi Sat"
-msgstr "Multi Sat"
+msgstr "Çoklu uydu"
 
 #: plugin.py:73
 msgid "Press ok or green button to install satellites.xml"
-msgstr "Drücken Sie OK- oder grüne Taste, um die satellites.xml zu installieren"
+msgstr "satellites.xml yüklemek için OK veya yeşil düğmeye basın"
 
 #: plugin.py:80
 msgid "Please wait..."
-msgstr "Bitte warten..."
+msgstr "Lütfen bekleyiniz..."
 
 #: plugin.py:93
 #: plugin.py:94
 #: plugin.py:215
 #: plugin.py:216
 msgid "Downloading satellites failed!"
-msgstr "Herunterladen der Satelliten fehlgeschlagen!"
+msgstr "uydular indirilmesi başarısız!"
 
 #: plugin.py:97
 msgid "satellites.xml is updated"
-msgstr "satellites.xml wurde aktualisiert"
+msgstr "satellites.xml güncellendi"
 
 #: plugin.py:97
 #: plugin.py:203
 msgid "GUI needs a restart to apply changes."
-msgstr ""
-"Das System muss neu gestartet werden,\n"
-"um die Änderungen übernehmen zu können."
+msgstr "GUI değişiklikleri uygulaması için yeniden başlatmak gerekir."
 
 #: plugin.py:97
 #: plugin.py:203
 msgid "Do you want to restart the GUI now?"
-msgstr "Wollen Sie jetzt wirklich neu starten?"
+msgstr "Şimdi GUI yeniden başlatmak istiyor musunuz?"
 
 #: plugin.py:98
 #: plugin.py:204
 msgid "Restart GUI now?"
-msgstr "Benutzeroberfläche jetzt neu starten?"
+msgstr "Şimdi GUI yeniden başlatılsın mı?"
 
 #: plugin.py:104
 #: plugin.py:248
 msgid "GUI needs a restart."
-msgstr "Das System muss neu gestartet werden."
+msgstr "GUI yeniden başlamasi gerekir."
 
 #: plugin.py:112
 msgid "About"
-msgstr "Über"
+msgstr "Hakkında"
 
 #: plugin.py:163
 msgid "Source:"
-msgstr "Quelle:"
+msgstr "Kaynak:"
 
 #: plugin.py:165
 msgid "OK"
@@ -88,51 +86,51 @@ msgstr "Transponder"
 
 #: plugin.py:179
 msgid "Downloading satellites from server ..."
-msgstr "Satelliten werden vom Server heruntergeladen ..."
+msgstr "Server den uydular indiriliyor ..."
 
 #: plugin.py:203
 msgid "satellites.xml has been built."
-msgstr "satellites.xml wurde erstellt."
+msgstr "satellites.xml inşa edilmiştir."
 
 #: plugin.py:206
 msgid "Please select at least one satellite"
-msgstr "Bitte wählen Sie mindestens einen Satelliten aus"
+msgstr "En az bir uydu seçiniz"
 
 #: plugin.py:219
 msgid "Downloading succesfull! Parsing ..."
-msgstr "Herunterladen erfolgreich! Analysiere"
+msgstr "indirme başarılı! Ayrıştırmada ..."
 
 #: plugin.py:238
 msgid "Press ok button to select satellite"
-msgstr "Drücken Sie OK-Taste um einen Satelliten auszuwählen"
+msgstr "Uydu seçmek için OK düğmesine basın"
 
 #: plugin.py:242
 #: plugin.py:325
 msgid "Parsing failed!"
-msgstr "Analyse fehlgeschlagen!"
+msgstr "Ayrıştırmada başarısız!"
 
 #: plugin.py:265
 #: plugin.py:277
 msgid "Transponder selection"
-msgstr "Transponderauswahl"
+msgstr "Transponder seçimi"
 
 #: plugin.py:287
 msgid "Save"
-msgstr "Speichern"
+msgstr "Kayıt"
 
 #: plugin.py:317
 msgid "Frequency:"
-msgstr "Frequenz:"
+msgstr "Frekans:"
 
 #: plugin.py:317
 msgid "Symbol Rate:"
-msgstr "Symbol Rate:"
+msgstr "Sembol Oranı:"
 
 #: plugin.py:345
 msgid "has been saved."
-msgstr "wurde gespeichert."
+msgstr "kaydedildi."
 
 #: plugin.py:348
 msgid "Please select at least one transponder"
-msgstr "Bitte wählen Sie mindestens einen Transponder aus"
+msgstr "En az bir transponder seçiniz"
 

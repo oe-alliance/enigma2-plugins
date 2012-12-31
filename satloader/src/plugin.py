@@ -24,11 +24,10 @@ class Satloader(Screen):
 				<ePixmap position="602,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_blue_sm.png" alphatest="on" />
 				<widget name="key_red" position="8,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_green" position="206,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_yellow" position="404,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_blue" position="602,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="list" position="10,40" size="780,400" scrollbarMode="showOnDemand" />
-				<widget name="info" position="10,450" size="780,50" zPosition="1" font="Regular;22" valign="center" halign="center" />
-				<ePixmap position="730,458" size="50,35" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/key_info.png" alphatest="on" />
+				<widget name="info" position="10,450" size="710,50" zPosition="1" font="Regular;22" valign="center" halign="center" />
+				<ePixmap position="730,457" size="50,35" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/key_info.png" alphatest="on" />
 			</screen>"""
 	elif framewidth == 720:
 		skin = """
@@ -39,10 +38,9 @@ class Satloader(Screen):
 				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-				<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 				<widget name="list" position="10,50" size="540,350" scrollbarMode="showOnDemand" />
-				<widget name="info" position="10,410" size="540,40" zPosition="1" font="Regular;20" valign="center" halign="center" />
+				<widget name="info" position="10,410" size="485,40" zPosition="1" font="Regular;20" valign="center" halign="center" />
 				<ePixmap position="505,418" size="35,25" zPosition="2" pixmap="/usr/share/enigma2/skin_default/buttons/key_info.png" alphatest="on" />
 			</screen>"""
 
@@ -53,92 +51,182 @@ class Satloader(Screen):
 		self["info"] = Label()
 		self["key_red"] = Label(_("Cancel"))
 		self["key_green"] = Label(_("Install"))
-		self["key_yellow"] = Label(_("Satellites"))
 		self["key_blue"] = Label(_("Multi Sat"))
 		self["myActionMap"] = ActionMap(["OkCancelActions", "ColorActions", "EPGSelectActions"],
 		{
 			"ok": self.btnOK,
 			"cancel": self.btnRed,
 			"red": self.btnRed,
-			"green": self.btnGreen,
-			"yellow": self.btnYellow,
+			"green": self.btnOK,
 			"blue": self.btnBlue,
 			"info": self.btnInfo
 		}, -1)
 
-		self.onLayoutFinish.append(self.btnYellow)
+		self.onLayoutFinish.append(self.onLayoutFinished)
+
+	def onLayoutFinished(self):
+		self.list.clearList()
+		self.list.addSelection("Lyngsat", "http://satellites.satloader.net/lyngsat", 0, None)
+		self.list.addSelection("Satbeams", "http://satellites.satloader.net/satbeams", 1, None)
+		self.list.addSelection("Kingofsat", "http://satellites.satloader.net/kingofsat", 2, None)
+		self.list.addSelection("Kingofsat (feeds)", "http://satellites.satloader.net/kingofsat/feeds", 3, None)
+		self["info"].setText("%s" %(_("Press ok or green button to install satellites.xml")))
 
 	def btnRed(self):
 		print "\n[Satloader] cancel\n"
 		self.close(None)
 
 	def btnOK(self):
+		self["info"].setText("%s" %(_("Please wait...")))
+		saturl = self["list"].l.getCurrentSelection()[0][1]+"/satellites.xml"
+		downloadPage(saturl, "/etc/tuxbox/satellites.xml").addCallback(self.downloadListSATCallback).addErrback(self.downloadListError)
+
+	def btnBlue(self):
+		satname = self["list"].l.getCurrentSelection()[0][0]
+		saturl = self["list"].l.getCurrentSelection()[0][1]+"/multisat.tar.gz"
+		self.session.open(SatloaderMultiSat, satname, saturl)
+
+	def btnInfo(self):
+		self.session.open(SatloaderAbout)
+
+	def downloadListError(self, ret):
+		self["info"].setText("%s" %(_("Downloading satellites failed!")))
+		self.session.open(MessageBox, "%s" %(_("Downloading satellites failed!")), MessageBox.TYPE_ERROR)
+
+	def downloadListSATCallback(self, ret):
+		restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n%s\n\n%s\n%s" %(_("satellites.xml is updated"), str(self["list"].l.getCurrentSelection()[0][0]), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
+		restart.setTitle("%s" %(_("Restart GUI now?")))
+
+	def restart(self, ret):
+		if ret is True:
+			self.session.open(TryQuitMainloop, 3)
+		else:
+			self["info"].setText("%s" %(_("GUI needs a restart.")))
+
+#######################
+
+class SatloaderAbout(Screen):
+	skin = """
+		<screen position="center,center" size="360,280" title="%s">
+			<widget name="info" position="10,10" size="340,260" zPosition="10" font="Regular;22" valign="center" halign="center" />
+		</screen>""" %(_("About"))
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self["info"] = Label("Satloader Plugin\nAutor: Ismail Demir\nwww.satloader.net")
+		self["actions"] = ActionMap(["OkCancelActions"],
+		{
+			"ok": self.close,
+			"cancel": self.close
+		}, -1)
+
+#######################
+
+class SatloaderMultiSat(Screen):
+	framewidth = getDesktop(0).size().width()
+	if framewidth == 1280:
+		skin = """
+			<screen position="240,130" size="800,510" title="Satloader MultiSat">
+				<ePixmap position="8,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_red_sm.png" alphatest="on" />
+				<ePixmap position="206,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_green_sm.png" alphatest="on" />
+				<ePixmap position="404,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_yellow_sm.png" alphatest="on" />
+				<ePixmap position="602,4" size="190,32" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/button_blue_sm.png" alphatest="on" />
+				<widget name="key_red" position="8,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_green" position="206,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_yellow" position="404,4" size="190,32" valign="center" halign="center" zPosition="1" font="Regular;22" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="list" position="10,40" size="780,400" scrollbarMode="showOnDemand" />
+				<widget name="info" position="10,450" size="780,25" zPosition="10" font="Regular;22" valign="center" halign="center" />
+				<widget name="desc" position="10,475" size="780,25" zPosition="10" font="Regular;22" valign="center" halign="center" />
+			</screen>"""
+	elif framewidth == 720:
+		skin = """
+			<screen position="center,center" size="560,460" title="Satloader MultiSat">
+				<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+				<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+				<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+				<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+				<widget name="list" position="10,50" size="540,350" scrollbarMode="showOnDemand" />
+				<widget name="info" position="10,410" size="540,20" zPosition="10" font="Regular;20" valign="center" halign="center" />
+				<widget name="desc" position="10,430" size="540,20" zPosition="10" font="Regular;20" valign="center" halign="center" />
+			</screen>"""
+
+	def __init__(self, session, satname=None, saturl=None):
+		Screen.__init__(self, session)
+		self.satname = satname
+		self.saturl = saturl
+		self.list = SatloaderList([])
+		self["list"] = self.list
+		self["info"] = Label()
+		self["desc"] = Label("%s %s" %(_("Source:"), self.satname))
+		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("OK"))
+		self["key_yellow"] = Label(_("Transponder"))
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+		{
+			"ok": self.btnOK,
+			"cancel": self.btnRed,
+			"red": self.btnRed,
+			"green": self.btnGreen,
+			"yellow": self.btnYellow
+		}, -1)
+
+		self.onLayoutFinish.append(self.onLayoutFinished)
+
+	def onLayoutFinished(self):
+		self["info"].setText("%s" %(_("Downloading satellites from server ...")))
+		downloadPage(self.saturl, "/tmp/multisat.tar.gz").addCallback(self.downloadListMultiSatCallback).addErrback(self.downloadListError)
+
+	def btnRed(self):
+		print "\n[SatloaderMultiSat] cancel\n"
+		self.close(None)
+
+	def btnOK(self):
 		if self["list"].l.getCurrentSelection() is not None:
-			if self["list"].l.getCurrentSelection()[0][3] == None:
-				downloadPage(self["list"].l.getCurrentSelection()[0][1], "/etc/tuxbox/satellites.xml").addCallback(self.downloadListSATCallback).addErrback(self.downloadListError)
-			else:
-				self.list.toggleSelection()
+			self.list.toggleSelection()
 
 	def btnGreen(self):
 		if self["list"].l.getCurrentSelection() is not None:
-			if self["list"].l.getCurrentSelection()[0][3] == None:
-				downloadPage(self["list"].l.getCurrentSelection()[0][1], "/etc/tuxbox/satellites.xml").addCallback(self.downloadListSATCallback).addErrback(self.downloadListError)
+			list = self.list.getSelectionsList()
+			if len(list) is not 0:
+				f = open('/etc/tuxbox/satellites.xml', 'w+')
+				f.write('<?xml version="1.0" ?>\n<!--\nsatellites.xml generated by Satloader Plugin\n(c)2009-2012 Ismail Demir www.satloader.net\n-->\n\n<satellites>\n')
+				for item in list:
+					myfile = open(item[1], 'r')
+					f.write(myfile.read())
+					myfile.close()
+				f.write('</satellites>')
+				f.close()
+				
+				restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n%s\n\n%s\n%s" %(_("satellites.xml has been built."), str(self.satname), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
+				restart.setTitle("%s" %(_("Restart GUI now?")))
 			else:
-				list = self.list.getSelectionsList()
-				if len(list) is not 0:
-					f = open('/etc/tuxbox/satellites.xml', 'w+')
-					f.write('<?xml version="1.0" ?>\n<!--\nsatellites.xml generated by Satloader Plugin\n(c)2009-2012 Ismail Demir www.satloader.net\n-->\n\n<satellites>\n')
-					for item in list:
-						myfile = open(item[1], 'r')
-						f.write(myfile.read())
-						myfile.close()
-					f.write('</satellites>')
-					f.close()
-					
-					restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n\n%s\n%s" %(_("satellites.xml has been built."), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
-					restart.setTitle("%s" %(_("Restart GUI now?")))
-				else:
-					self["info"].setText("%s" %(_("Please select at least one satellite")))
+				self["info"].setText("%s" %(_("Please select at least one satellite")))
 
 	def btnYellow(self):
-		self.list.clearList()
-		self.list.addSelection("Kingofsat satellites.xml", "http://satellites.satloader.net/satellites.xml", 0, None)
-		self.list.addSelection("Kingofsat satellites.xml (feed)", "http://satellites.satloader.net/feeds.xml", 1, None)
-		self.list.addSelection("Satbeams satellites.xml", "http://satellites.satloader.net/satbeam.xml", 2, None)
-		self["info"].setText("%s" %(_("Press ok or green button to install satellites.xml")))
-
-	def btnBlue(self):
-		self["info"].setText("%s" %(_("Downloading satellites from server ...")))
-		downloadPage("http://satellites.satloader.net/multisat.tar.gz", "/tmp/multisat.tar.gz").addCallback(self.downloadListMultiSatCallback).addErrback(self.downloadListError)
-
-	def btnInfo(self):
 		if self["list"].l.getCurrentSelection() is not None:
-			if self["list"].l.getCurrentSelection()[0][3] is not None:
-				satname = self["list"].l.getCurrentSelection()[0][0]
-				filename = self["list"].l.getCurrentSelection()[0][1]
-				self.session.open(TransponderSelection, satname, filename)
-			else:
-				self.session.open(MessageBox, "%s" %(_("Only for Multi Sat")), MessageBox.TYPE_INFO, timeout=3)
+			satname = self["list"].l.getCurrentSelection()[0][0]
+			satfile = self["list"].l.getCurrentSelection()[0][1]
+			self.session.open(TransponderSelection, satname, satfile)
 
 	def downloadListError(self, ret):
-		self.session.open(MessageBox, "%s" %(_("Downloading satellites failed!")), MessageBox.TYPE_ERROR)
 		self["info"].setText("%s" %(_("Downloading satellites failed!")))
-
-	def downloadListSATCallback(self, ret):
-		restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n\n%s\n%s" %(_("satellites.xml is up-to-date"), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
-		restart.setTitle("%s" %(_("Restart GUI now?")))
+		self.session.open(MessageBox, "%s" %(_("Downloading satellites failed!")), MessageBox.TYPE_ERROR)
 
 	def downloadListMultiSatCallback(self, ret):
 		self["info"].setText("%s" %(_("Downloading succesfull! Parsing ...")))
 
 		try:
-			if not os.path.exists('/tmp/multisat'):
-				os.mkdir('/tmp/multisat', 644)
-
+			if os.path.exists('/tmp/multisat'):
+				os.system("rm -rf /tmp/multisat")
+			os.mkdir('/tmp/multisat', 644)
 			os.system("tar -xzf /tmp/multisat.tar.gz -C/tmp/multisat")
 			os.system("rm -f /tmp/multisat.tar.gz")
-			self.list.clearList()
+
 			idx = 0
+			self.list.clearList()
 			f = open("/tmp/multisat/satlist.lst", "r")
 			for line in f:
 				m = line.split(";")
@@ -156,7 +244,10 @@ class Satloader(Screen):
 	def restart(self, ret):
 		if ret is True:
 			self.session.open(TryQuitMainloop, 3)
+		else:
+			self["info"].setText("%s" %(_("GUI needs a restart.")))
 
+#######################
 
 class TransponderSelection(Screen):
 	framewidth = getDesktop(0).size().width()
@@ -185,9 +276,10 @@ class TransponderSelection(Screen):
 				<widget name="info" position="10,410" size="540,40" zPosition="10" font="Regular;20" valign="center" halign="center" />
 			</screen>""" %(_("Transponder selection"))
 
-	def __init__(self, session, satname, filename):
+	def __init__(self, session, satname, satfile):
 		Screen.__init__(self, session)
-		self.filename = filename
+		self.satname = satname
+		self.satfile = satfile
 		self.list = SatloaderList([])
 		self["list"] = self.list
 		self["info"] = Label()
@@ -201,12 +293,13 @@ class TransponderSelection(Screen):
 			"green": self.btnGreen
 		}, -1)
 
-		self["info"].setText("%s" %(satname))
+		self.onLayoutFinish.append(self.onLayoutFinished)
 
+	def onLayoutFinished(self):
 		try:
-			f = open(filename, "r")
-			self.satheader = f.readline()
 			self.list.clearList()
+			f = open(self.satfile, "r")
+			self.satheader = f.readline()
 			idx = 0
 			for line in f:
 				if "transponder" in line:
@@ -225,6 +318,7 @@ class TransponderSelection(Screen):
 					self.list.addSelection(text, line, idx, True)
 					idx += 1
 			f.close()
+			self["info"].setText("%s" %(self.satname))
 
 		except Exception, e:
 			print "Error:", e
@@ -236,24 +330,24 @@ class TransponderSelection(Screen):
 
 	def btnOK(self):
 		if self["list"].l.getCurrentSelection() is not None:
-			if self["list"].l.getCurrentSelection()[0][3] is not None:
-				self.list.toggleSelection()
+			self.list.toggleSelection()
 
 	def btnGreen(self):
 		list = self.list.getSelectionsList()
 		if len(list) is not 0:
-			f = open(self.filename, 'w+')
+			f = open(self.satfile, 'w+')
 			f.write(self.satheader)
 			for item in list:
 				f.write(item[1])
 			f.write("\t</sat>\n")
 			f.close()
 			
-			self.session.open(MessageBox, "\"%s\" %s" %(str(self.filename), _("has been saved.")), MessageBox.TYPE_INFO, timeout=3)
+			self.session.open(MessageBox, "\"%s\" %s" %(str(self.satfile), _("has been saved.")), MessageBox.TYPE_INFO, timeout=3)
 			self.close(None)
 		else:
 			self["info"].setText("%s" %(_("Please select at least one transponder")))
 
+#######################
 
 class SatloaderList(MenuList):
 	def __init__(self, list):
@@ -278,6 +372,7 @@ class SatloaderList(MenuList):
 	def getSelectionsList(self):
 		return [ (item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3] ]
 
+#######################
 
 def SatListEntry(description, value, index, selected):
 	if selected == None:
@@ -297,11 +392,10 @@ def SatListEntry(description, value, index, selected):
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, 25, 24,  LoadPixmap(cached=True, path="/usr/share/enigma2/skin_default/icons/lock_off.png")))
 		return res
 
-
 #######################
 
 def main(session, **kwargs):
-	print "\n[Satloader] start\n"	
+	print "\n[Satloader] start\n"
 	session.open(Satloader)
 
 #######################

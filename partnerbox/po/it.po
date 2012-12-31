@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - partnerbox\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
-"PO-Revision-Date: 2012-05-20 14:41+0100\n"
+"POT-Creation-Date: 2012-12-18 22:49+0100\n"
+"PO-Revision-Date: 2012-12-18 22:51+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
@@ -19,57 +19,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/partnerbox\n"
 
-msgid "%d.%B %Y"
-msgstr "%d.%B %Y"
-
-msgid "(ZAP)"
-msgstr "(ZAP)"
-
-msgid "<unknown>"
-msgstr "<sconosciuto>"
-
-msgid "Abort"
-msgstr "Arrestare"
-
-msgid "Add"
-msgstr "Agg."
-
-msgid "Add timer"
-msgstr "Agg. timer"
-
-msgid "After event"
-msgstr "Dopo l'evento"
-
-msgid "Apply"
-msgstr "Applicare"
-
-msgid "Cancel"
-msgstr "Annull."
-
-msgid "Change pin code"
-msgstr "Cambiare codice PIN"
-
-msgid "Channel"
-msgstr "Canale"
-
-msgid "Clean up"
-msgstr "Ripulire"
-
-msgid "Cleaning up finished timer entries..."
-msgstr "Rimozione delle voci di timer conclusi..."
-
-msgid "DVR"
-msgstr "DVR"
-
-msgid "Date"
-msgstr "Data"
-
-msgid "Delete"
-msgstr "Canc."
-
-msgid "Description"
-msgstr "Descrizione"
-
+#: .../enigma2-plugins/partnerbox/src/PartnerboxEPGSelection.py:123
+#: .../enigma2-plugins/partnerbox/src/plugin.py:351
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1194
 #, python-format
 msgid ""
 "Do you really want to delete the timer \n"
@@ -78,96 +30,274 @@ msgstr ""
 "Rimuovere il timer \n"
 "%s?"
 
-msgid "EPG Selection"
-msgstr "Selezione EPG"
+#: .../enigma2-plugins/partnerbox/src/PartnerboxEPGSelection.py:174
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1049
+msgid "Remove timer"
+msgstr "Rim. timer"
 
-msgid "Edit"
-msgstr "Modif."
-
-msgid "Enable Partnerbox-Function in EPGList"
-msgstr "Abilitare la funzione Partnerbox in elenco EPG"
-
-msgid "Enable Partnerbox-Function in TimerEvent"
-msgstr "Abilitare la funzione Partnerbox nell'evento timer"
-
-msgid "Enable first Partnerbox-entry in Timeredit as default"
-msgstr "Abilitare la prima voce in Partnerbox come predefinita in Timeredit."
-
-msgid "EndTime"
-msgstr "Ora fine"
-
-msgid "Enigma 1"
-msgstr "Enigma 1"
-
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:40
 msgid "Enigma 2"
 msgstr "Enigma 2"
 
-msgid "Enigma Type"
-msgstr "Tipo enigma"
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:40
+msgid "Enigma 1"
+msgstr "Enigma 1"
 
-msgid "Enter the service pin"
-msgstr "Inserire il codice PIN canale"
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:42
+msgid "use external"
+msgstr "Usare il remoto"
 
-msgid "Error: No space left"
-msgstr "Errore: spazio insufficiente"
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:42
+msgid "use internal"
+msgstr "Usare il locale"
 
-msgid "Error: Outdated"
-msgstr "Errore: sorpassato"
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:69
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:236
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:73
+msgid "Cancel"
+msgstr "Annull."
 
-msgid "Error: User aborted"
-msgstr "Errore: annullato dall'utente"
-
-msgid "Error: Zap failed"
-msgstr "Errore : zap fallito"
-
-msgid "Fri"
-msgstr "Ven"
-
-msgid "Friday"
-msgstr "Venerdì"
-
-msgid "Getting Channel Information..."
-msgstr "Recupero informazioni canale in corso..."
-
-msgid "Getting EPG Information..."
-msgstr "Recupero informazioni EPG in corso..."
-
-msgid "Getting Partnerbox Bouquet Information..."
-msgstr "Recupero informazioni bouquet Partnerbox in corso..."
-
-msgid "Getting Partnerbox Information..."
-msgstr "Recupero informazioni Partnerbox in corso..."
-
-msgid "IP"
-msgstr "IP"
-
-msgid "Info"
-msgstr "Informazioni"
-
-msgid "Location"
-msgstr "Destinazione"
-
-msgid "Manage timer for other receiveres in network"
-msgstr ""
-
-msgid "Mon"
-msgstr "Lun"
-
-msgid "Monday"
-msgstr "Lunedì"
-
-msgid "NGRAB"
-msgstr "NGRAB"
-
-msgid "Name"
-msgstr "Nome"
-
-msgid "No"
-msgstr "No"
-
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:70
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:237
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:72
 msgid "OK"
 msgstr "Ok"
 
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:71
+msgid "Partnerbox Entries"
+msgstr "Voci Partnerbox"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:75
+msgid "Show 'RemoteTimer' in E-Menu"
+msgstr "Mostrare \"RemoteTimer\" nel E-menu:"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:76
+msgid "Show 'RemoteTV Player' in E-Menu"
+msgstr "Mostrare \"RemoteTV Player\" nel E-menu:"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:77
+msgid "Show 'Stream current Service' in E-Menu"
+msgstr "Mostrare \"Stream del canale corrente\" nel E-menu:"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:78
+msgid "Enable Partnerbox-Function in TimerEvent"
+msgstr "Abilitare la funzione Partnerbox nell'evento timer"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:79
+msgid "Enable Partnerbox-Function in EPGList"
+msgstr "Abilitare la funzione Partnerbox in elenco EPG"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:80
+msgid "Enable first Partnerbox-entry in Timeredit as default"
+msgstr "Abilitare la prima voce in Partnerbox come predefinita in Timeredit."
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:120
+msgid "Partnerbox: List of Entries"
+msgstr "Partnerbox: elenco voci"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:125
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:248
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:158
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:470
+msgid "Name"
+msgstr "Nome"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:126
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:249
+msgid "IP"
+msgstr "IP"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:127
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:250
+msgid "Port"
+msgstr "Porta"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:128
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:251
+msgid "Enigma Type"
+msgstr "Tipo enigma"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:129
+msgid "Add"
+msgstr "Agg."
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:130
+msgid "Edit"
+msgstr "Modif."
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:131
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:238
+#: .../enigma2-plugins/partnerbox/src/plugin.py:244
+msgid "Delete"
+msgstr "Canc."
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:170
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:277
+msgid "Really delete this Partnerbox Entry?"
+msgstr "Cancellare la voce?"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:222
+msgid "Partnerbox: Edit Entry"
+msgstr "Partnerbox: modificare voce"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:252
+msgid "Password"
+msgstr "Password"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:253
+msgid "Servicelists/EPG"
+msgstr "Elenco canali/EPG:"
+
+#: .../enigma2-plugins/partnerbox/src/PartnerboxSetup.py:254
+msgid "Zap to service when streaming"
+msgstr "Sintonizzarsi sul canale di streaming"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:128
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:132
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:433
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:438
+msgid "zap"
+msgstr "Zap"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:128
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:433
+msgid "record"
+msgstr "Registrare"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:129
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:133
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:434
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:439
+msgid "do nothing"
+msgstr "Non fare nulla"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:129
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:133
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:434
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:439
+msgid "go to standby"
+msgstr "Standby"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:129
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:133
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:434
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:439
+msgid "go to deep standby"
+msgstr "Spegnimento (Deep standby)"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:129
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:434
+msgid "auto"
+msgstr "Auto"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:132
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:438
+msgid "NGRAB"
+msgstr "NGRAB"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:132
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:438
+msgid "DVR"
+msgstr "DVR"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:135
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:441
+msgid "%d.%B %Y"
+msgstr "%d.%B %Y"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
+msgid "Monday"
+msgstr "Lunedì"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
+msgid "Tuesday"
+msgstr "Martedì"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
+msgid "Wednesday"
+msgstr "Mercoledì"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
+msgid "Thursday"
+msgstr "Giovedì"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
+msgid "Friday"
+msgstr "Venerdì"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
+msgid "Saturday"
+msgstr "Sabato"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:148
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:452
+msgid "Sunday"
+msgstr "Domenica"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:159
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:471
+msgid "Description"
+msgstr "Descrizione"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:160
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:472
+msgid "Timer Type"
+msgstr "Tipo timer"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:162
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:474
+msgid "Date"
+msgstr "Data"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:164
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:476
+msgid "StartTime"
+msgstr "Ora avvio"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:168
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:173
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:480
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:485
+msgid "EndTime"
+msgstr "Ora fine"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:175
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:487
+msgid "Channel"
+msgstr "Canale"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:178
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:490
+msgid "Location"
+msgstr "Destinazione"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:181
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:183
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:493
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:495
+msgid "After event"
+msgstr "Dopo l'evento"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:303
+msgid "No"
+msgstr "No"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:344
+msgid "Remote Timer"
+msgstr "Timer remoto"
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:539
+msgid "Timer can not be added...no locations on partnerbox available."
+msgstr "Impossibile aggiungere timer: nessuna destinazione disponibile sul box partner."
+
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:557
+#: .../enigma2-plugins/partnerbox/src/RemoteTimerEntry.py:567
 #, python-format
 msgid ""
 "Partnerbox Answer: \n"
@@ -176,158 +306,217 @@ msgstr ""
 "Risposta Partnerbox: \n"
 "%s"
 
-msgid "Partnerbox Entries"
-msgstr "Voci Partnerbox"
-
-msgid "Partnerbox: Edit Entry"
-msgstr "Partnerbox: modificare voce"
-
-msgid "Partnerbox: List of Entries"
-msgstr "Partnerbox: elenco voci"
-
-msgid "Password"
-msgstr "Password"
-
-msgid "Port"
-msgstr "Porta"
-
-msgid "Really delete this Partnerbox Entry?"
-msgstr "Cancellare la voce?"
-
-msgid "Remote Timer"
-msgstr "Timer remoto"
-
-msgid "Remove timer"
-msgstr "Rim. timer"
-
-msgid "Sat"
-msgstr "Sab"
-
-msgid "Saturday"
-msgstr "Sabato"
-
-msgid "Servicelists/EPG"
-msgstr "Elenco canali/EPG:"
-
-msgid "Show 'RemoteTV Player' in E-Menu"
-msgstr "Mostrare \"RemoteTV Player\" nel E-menu:"
-
-msgid "Show 'RemoteTimer' in E-Menu"
-msgstr "Mostrare \"RemoteTimer\" nel E-menu:"
-
-msgid "Show 'Stream current Service' in E-Menu"
-msgstr "Mostrare \"Stream del canale corrente\" nel E-menu:"
-
-msgid "StartTime"
-msgstr "Ora avvio"
-
-msgid "Stream TV from your Partnerbox"
-msgstr "Stream TV dal Partnerbox"
-
-msgid "Stream current service from partnerbox"
-msgstr "Stream canale corrente da Partnerbox"
-
-msgid "Sun"
-msgstr "Dom"
-
-msgid "Sunday"
-msgstr "Domenica"
-
-msgid "The pin code you entered is wrong."
-msgstr "E' stato inserito un codice PIN errato."
-
-msgid "Thu"
-msgstr "Gio"
-
-msgid "Thursday"
-msgstr "Giovedì"
-
-msgid "Timer Type"
-msgstr "Tipo timer"
-
-msgid "Tue"
-msgstr "Mar"
-
-msgid "Tuesday"
-msgstr "Martedì"
-
-msgid "Wed"
-msgstr "Mer"
-
-msgid "Wednesday"
-msgstr "Mercoledì"
-
-msgid ""
-"You can not add services or bouquets from Enigma1-receivers into the "
-"channellist..."
-msgstr ""
-"Impossibile aggiungere all'elenco canali o bouquet da ricevitori enigma1..."
-
+#: .../enigma2-plugins/partnerbox/src/plugin.py:118
 msgid "You have to restart Enigma2 to activate your new preferences!"
 msgstr "Riavvaire enigma2 per attivare la nuova configurazione!"
 
-msgid "Zap"
-msgstr "Zap"
+#: .../enigma2-plugins/partnerbox/src/plugin.py:134
+#: .../enigma2-plugins/partnerbox/src/plugin.py:147
+msgid "Manage timer for other dreamboxes in network"
+msgstr "Gestire timer su altri Dreambox in rete"
 
-msgid "Zap to service when streaming"
-msgstr "Sintonizzarsi sul canale di streaming"
-
-msgid "about to start"
-msgstr "Avvio in corso"
-
-msgid "add Partnerbox bouquet"
-msgstr "Aggiungere bouquet Partnerbox"
-
-msgid "add Partnerbox service"
-msgstr "Aggiungere canale Partnerbox"
-
-msgid "auto"
-msgstr "Auto"
-
-msgid "disabled"
-msgstr "Disabilitato"
-
-msgid "do nothing"
-msgstr "Non fare nulla"
-
-msgid "done!"
-msgstr "Fatto!"
-
-msgid "go to deep standby"
-msgstr "Spegnimento (Deep standby)"
-
-msgid "go to standby"
-msgstr "Standby"
-
-msgid "mins"
-msgstr "Min"
-
-msgid "record"
-msgstr "Registrare"
-
-msgid "recording..."
-msgstr "Registrazione..."
-
+#: .../enigma2-plugins/partnerbox/src/plugin.py:145
 msgid "setup for partnerbox"
 msgstr "Configurazione Partnerbox"
 
-msgid "unknown service"
-msgstr "Canale sconosciuto"
+#: .../enigma2-plugins/partnerbox/src/plugin.py:150
+msgid "Stream TV from your Partnerbox"
+msgstr "Stream TV dal Partnerbox"
 
-msgid "use external"
-msgstr "Usare il remoto"
+#: .../enigma2-plugins/partnerbox/src/plugin.py:152
+msgid "Stream current service from partnerbox"
+msgstr "Stream canale corrente da Partnerbox"
 
-msgid "use internal"
-msgstr "Usare il locale"
+#: .../enigma2-plugins/partnerbox/src/plugin.py:246
+#: .../enigma2-plugins/partnerbox/src/plugin.py:521
+#: .../enigma2-plugins/partnerbox/src/plugin.py:680
+msgid "EPG Selection"
+msgstr "Selezione EPG"
 
+#: .../enigma2-plugins/partnerbox/src/plugin.py:247
+msgid "Clean up"
+msgstr "Ripulire"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:248
+msgid "Getting Partnerbox Information..."
+msgstr "Recupero informazioni Partnerbox in corso..."
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:332
+msgid "Cleaning up finished timer entries..."
+msgstr "Rimozione delle voci di timer conclusi..."
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:413
+msgid "Getting Partnerbox Bouquet Information..."
+msgstr "Recupero informazioni bouquet Partnerbox in corso..."
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:518
+msgid "Zap"
+msgstr "Zap"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:524
+#: .../enigma2-plugins/partnerbox/src/plugin.py:681
+#: .../enigma2-plugins/partnerbox/src/plugin.py:989
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1040
+msgid "Info"
+msgstr "Informazioni"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:526
+msgid "Getting Channel Information..."
+msgstr "Recupero informazioni canale in corso..."
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:835
+#: .../enigma2-plugins/partnerbox/src/plugin.py:921
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1279
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1284
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1332
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1335
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1337
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1445
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1642
+msgid "mins"
+msgstr "Min"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:986
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1045
+msgid "Add timer"
+msgstr "Agg. timer"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:990
+msgid "Getting EPG Information..."
+msgstr "Recupero informazioni EPG in corso..."
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1265
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1318
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1458
+msgid "Mon"
+msgstr "Lun"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1265
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1318
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1458
+msgid "Tue"
+msgstr "Mar"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1265
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1318
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1458
+msgid "Wed"
+msgstr "Mer"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1265
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1318
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1458
+msgid "Thu"
+msgstr "Gio"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1265
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1318
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1458
+msgid "Fri"
+msgstr "Ven"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1265
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1318
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1458
+msgid "Sat"
+msgstr "Sab"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1265
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1318
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1458
+msgid "Sun"
+msgstr "Dom"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1277
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1282
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1330
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1335
+msgid "(ZAP)"
+msgstr "(ZAP)"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1287
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1340
 msgid "waiting"
 msgstr "In attesa"
 
-msgid "zap"
-msgstr "Zap"
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1289
+msgid "about to start"
+msgstr "Avvio in corso"
 
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1292
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1343
 msgid "zapped"
 msgstr "Zap eseguito"
 
-#~ msgid "Manage timer for other dreamboxes in network"
-#~ msgstr "Gestire timer su altri Dreambox in rete"
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1294
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1345
+msgid "recording..."
+msgstr "Registrazione..."
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1296
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1347
+msgid "done!"
+msgstr "Fatto!"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1298
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1358
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1360
+msgid "<unknown>"
+msgstr "<sconosciuto>"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1301
+msgid "disabled"
+msgstr "Disabilitato"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1350
+msgid "Error: No space left"
+msgstr "Errore: spazio insufficiente"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1352
+msgid "Error: User aborted"
+msgstr "Errore: annullato dall'utente"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1354
+msgid "Error: Zap failed"
+msgstr "Errore : zap fallito"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1356
+msgid "Error: Outdated"
+msgstr "Errore: sorpassato"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1627
+msgid "unknown service"
+msgstr "Canale sconosciuto"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1691
+msgid "add Partnerbox service"
+msgstr "Aggiungere canale Partnerbox"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1698
+msgid "add Partnerbox bouquet"
+msgstr "Aggiungere bouquet Partnerbox"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1714
+msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
+msgstr "Impossibile aggiungere all'elenco canali o bouquet da ricevitori enigma1..."
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1717
+msgid "Enter the service pin"
+msgstr "Inserire il codice PIN canale"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1717
+msgid "Change pin code"
+msgstr "Cambiare codice PIN"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1723
+msgid "The pin code you entered is wrong."
+msgstr "E' stato inserito un codice PIN errato."
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1830
+msgid "Apply"
+msgstr "Applicare"
+
+#: .../enigma2-plugins/partnerbox/src/plugin.py:1834
+msgid "Abort"
+msgstr "Arrestare"
+

@@ -29,9 +29,8 @@ class SwitchService(Source):
 					if cmd["title"] is not None:
 						eref.setName(cmd["title"])
 
-					isRec = False
-					if cmd["sRef"].startswith("1:0:0:0:0:0:0:0:0:0:"): # lame check for recordings
-						isRec = True
+					isRec = eref.getPath()
+					isRec = isRec and isRec.startswith("/")
 					if not isRec:
 						# if this is not a recording and the movie player is open, close it
 						if isinstance(self.session.current_dialog, MoviePlayer):

@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 733 $
-$Date: 2012-12-21 16:43:32 +0100 (Fri, 21 Dec 2012) $
-$Id: FritzCallFBF.py 733 2012-12-21 15:43:32Z michael $
+$Revision: 739 $
+$Date: 2012-12-29 17:01:50 +0100 (Sa, 29 Dez 2012) $
+$Id: FritzCallFBF.py 739 2012-12-29 16:01:50Z michael $
 '''
 
 from . import _, debug #@UnresolvedImport # pylint: disable=E0611,F0401
@@ -1385,13 +1385,16 @@ class FritzCallFBF_05_50:
 		#
 		# FW 05.27 onwards
 		#
+		debug("[FritzCallFBF] getCalls")
 		self._callScreen = callScreen
 		self._callType = callType
-		debug("[FritzCallFBF_05_50] _getCalls1New")
+		self._login(lambda x:self._getCalls(callback, x))
+
+	def _getCalls(self, callback, html):
+		debug("[FritzCallFBF_05_50] _getCalls")
 		if self._callScreen:
-			self._callScreen.updateStatus(_("finishing"))
-		# http://192.168.178.1/fon_num/foncalls_list.lua?sid=da78ab0797197dc7
-		# TODO: besser csv mit: https://fritz.box/fon_num/foncalls_list.lua?sid=dea373c2d0257a41&csv=
+			self._callScreen.updateStatus(_("preparing"))
+		# besser csv mit: https://fritz.box/fon_num/foncalls_list.lua?sid=dea373c2d0257a41&csv=
 		parms = urlencode({'sid':self._md5Sid, 'csv':''})
 		url = "http://%s/fon_num/foncalls_list.lua?%s" % (config.plugins.FritzCall.hostname.value, parms)
 		getPage(url).addCallback(lambda x:self._gotPageCalls(callback, x)).addErrback(self._errorCalls)
@@ -1400,7 +1403,7 @@ class FritzCallFBF_05_50:
 
 		debug("[FritzCallFBF_05_50] _gotPageCalls")
 		if self._callScreen:
-			self._callScreen.updateStatus(_("preparing"))
+			self._callScreen.updateStatus(_("finishing"))
 
 		callListL = []
 		if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
