@@ -52,7 +52,9 @@ class MenuWeights:
 			return
 
 		try:
-			config = cet_parse(XML_CONFIG).getroot()
+			file = open(XML_CONFIG, 'r')
+			config = cet_parse(file).getroot()
+			file.close()
 		except ParseError as pe:
 			from time import time
 			print("[MenuSort] Parse Error occured in configuration, backing it up and starting from scratch!")
