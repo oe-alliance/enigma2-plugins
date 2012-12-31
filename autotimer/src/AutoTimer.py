@@ -146,7 +146,9 @@ class AutoTimer:
 		self.configMtime = mtime
 
 		# Parse Config
-		configuration = cet_parse(XML_CONFIG).getroot()
+		file = open(XML_CONFIG, 'r')
+		configuration = cet_parse(file).getroot()
+		file.close()
 
 		# Empty out timers and reset Ids
 		del self.timers[:]
