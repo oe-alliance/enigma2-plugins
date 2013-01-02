@@ -115,7 +115,8 @@ class Satloader(Screen):
 class SatloaderAbout(Screen):
 	skin = """
 		<screen position="center,center" size="360,280" title="%s">
-			<widget name="info" position="10,10" size="340,260" zPosition="10" font="Regular;22" valign="center" halign="center" />
+			<ePixmap position="120,40" size="100,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Satloader/satloader.png" alphatest="on" />
+			<widget name="info" position="10,100" size="340,120" zPosition="10" font="Regular;22" valign="center" halign="center" />
 		</screen>""" %(_("About"))
 
 	def __init__(self, session):
@@ -515,6 +516,6 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return [
-		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", icon="satloader.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
 		PluginDescriptor(name="Satloader Plugin", description="updates satellites.xml", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
 		]
