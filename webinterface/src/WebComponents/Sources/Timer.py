@@ -243,6 +243,11 @@ class Timer(Source):
 		elif repeated == 0:
 			return ( False, _("Illegal Parameter value for Parameter begin : '%s'") % begin )
 
+		if 'applyMargin' in param:
+			if param['applyMargin'] == "1":
+				begin -= config.recording.margin_before.value * 60
+				end += config.recording.margin_after.value * 60
+
 		if 'name' not in param:
 			return ( False, _("Missing Parameter: name") )
 		name = param['name']
