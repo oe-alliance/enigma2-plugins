@@ -355,7 +355,11 @@ class AutoMount():
 				sharepath = ""
 			if sharedata['mountusing'] == 'fstab':
 				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir'] + ' '
-				open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharetemp not in l])
+				tmpfile = open('/etc/fstab.tmp', 'w')
+				file = open('/etc/fstab')
+				tmpfile.writelines([l for l in file.readlines() if sharetemp not in l])
+				tmpfile.close()
+				file.close()
 				os.rename('/etc/fstab.tmp','/etc/fstab')
 				mtype = sharedata['mounttype']
 				list.append('<fstab>\n')
@@ -442,7 +446,11 @@ class AutoMount():
 			if sharename is not mountpoint.strip():
 				self.newautomounts[sharename] = sharedata
 			if sharedata['mountusing'] == 'fstab':
-				open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharedata['sharedir'] not in l])
+				tmpfile = open('/etc/fstab.tmp', 'w')
+				file = open('/etc/fstab')
+				tmpfile.writelines([l for l in file.readlines() if sharedata['sharedir'] not in l])
+				tmpfile.close()
+				file.close()
 				os.rename('/etc/fstab.tmp','/etc/fstab')
 		self.automounts.clear()
 		self.automounts = self.newautomounts
