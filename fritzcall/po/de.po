@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-19 20:14+0100\n"
-"PO-Revision-Date: 2012-12-19 20:15+0100\n"
+"POT-Creation-Date: 2013-01-03 12:40+0100\n"
+"PO-Revision-Date: 2013-01-03 12:41+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: \n"
@@ -416,6 +416,9 @@ msgstr "Eine Rufumleitung aktiv"
 
 msgid "One mailbox active"
 msgstr "Ein Anrufbeantworter aktiv"
+
+msgid "Others"
+msgstr "Andere"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Outgoing"

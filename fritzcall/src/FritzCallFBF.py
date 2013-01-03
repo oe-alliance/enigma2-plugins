@@ -2,12 +2,12 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 739 $
-$Date: 2012-12-29 17:01:50 +0100 (Sa, 29 Dez 2012) $
-$Id: FritzCallFBF.py 739 2012-12-29 16:01:50Z michael $
+$Revision: 740 $
+$Date: 2013-01-03 12:38:15 +0100 (Do, 03 Jan 2013) $
+$Id: FritzCallFBF.py 740 2013-01-03 11:38:15Z michael $
 '''
 
-from . import _, debug #@UnresolvedImport # pylint: disable=E0611,F0401
+from . import _, x, debug #@UnresolvedImport # pylint: disable=E0611,F0401
 from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
@@ -26,16 +26,6 @@ FBF_tamActive = 5
 FBF_dectActive = 6
 FBF_faxActive = 7
 FBF_rufumlActive = 8
-
-# scramble text
-def x(text, front=True):
-	if len(text) > 5:
-		if front:
-			return '.....' + text[5:]
-		else:
-			return text[:-5] + '.....'
-	else:
-		return '.....' 
 
 def resolveNumber(number, default=None, phonebook=None):
 	if number.isdigit():
@@ -138,7 +128,7 @@ class FritzCallFBF:
 
 	def _md5Login(self, callback, sidXml):
 		def buildResponse(challenge, text):
-			debug("[FritzCallFBF] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + text)
+			debug("[FritzCallFBF] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + x(text))
 			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
 			for i in range(len(text)):
 				if ord(text[i]) > 255:
@@ -329,7 +319,7 @@ class FritzCallFBF:
 				for found in details:
 					thisnumber = found.group(2).strip()
 					if not thisnumber:
-						debug("[FritzCallFBF] Ignoring entry with empty number for '''%s'''" % (name))
+						debug("[FritzCallFBF] Ignoring entry with empty number for '''%s'''" % (x(name)))
 						continue
 					else:
 						thisname = name
@@ -350,7 +340,7 @@ class FritzCallFBF:
 						thisnumber = cleanNumber(thisnumber)
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						if not self.phonebook.phonebook.has_key(thisnumber):
-							# debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (thisname.strip(), thisnumber))
+							debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (x(thisname.strip()), x(thisnumber, False)))
 							self.phonebook.phonebook[thisnumber] = thisname
 						else:
 							pass
@@ -530,7 +520,7 @@ class FritzCallFBF:
 			callListL.append((number, date, direct, remote, length, here))
 
 		if callback:
-			# debug("[FritzCallFBF] _gotPageCalls call callback with\n" + text
+			# debug("[FritzCallFBF] _gotPageCalls call callback with\n" + repr(callListL))
 			callback(callListL)
 		self._callScreen = None
 
@@ -1160,7 +1150,7 @@ class FritzCallFBF_05_50:
 
 	def _md5Login(self, sidXml):
 		def buildResponse(challenge, text):
-			debug("[FritzCallFBF_05_50] _md5Login7buildResponse: challenge: " + challenge)
+			debug("[FritzCallFBF_05_50] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + x(text))
 			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
 			for i in range(len(text)):
 				if ord(text[i]) > 255:
@@ -1843,7 +1833,7 @@ class FritzCallFBF_05_27:
 
 	def _md5Login(self, sidXml):
 		def buildResponse(challenge, text):
-			debug("[FritzCallFBF_05_27] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + text)
+			debug("[FritzCallFBF_05_27] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + x(text))
 			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
 			for i in range(len(text)):
 				if ord(text[i]) > 255:

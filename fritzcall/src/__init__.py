@@ -20,6 +20,22 @@ def _(txt): # pylint: disable-msg=C0103
 		td = gettext.gettext(txt)
 	return td
 
+# scramble text
+def x(text, front=True):
+	#===========================================================================
+	# if len(text) > 5:
+	#	if front:
+	#		return '.....' + text[5:]
+	#	else:
+	#		return text[:-5] + '.....'
+	# else:
+	#	return '.....' 
+	#===========================================================================
+	out =""
+	for i in range(len(text)/2):
+		out = out + text[i*2] + '.'
+	return out
+
 def initDebug():
 	try:
 		# os.remove("/tmp/FritzDebug.log")
