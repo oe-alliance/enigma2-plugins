@@ -480,7 +480,7 @@ class NetworkBrowser(Screen):
 
 				data['sharename'] = selection[1]
 				data['sharedir'] = selection[4]
-				data['options'] = "rw,nolock,tcp"
+				data['options'] = "rw,nolock,tcp,utf8"
 
 				for sharename, sharedata in mounts.items():
 					if sharedata['ip'] == selection[2] and sharedata['sharedir'] == selection[4]:
@@ -495,7 +495,7 @@ class NetworkBrowser(Screen):
 				data['ip'] = selection[2]
 				data['sharename'] = selection[3] + "@" + selection[1]
 				data['sharedir'] = selection[3]
-				data['options'] = "rw"
+				data['options'] = "rw,utf8"
 				self.sharecache_file = None
 				self.sharecache_file = '/etc/enigma2/' + selection[1].strip() + '.cache' #Path to cache directory
 				if os_path.exists(self.sharecache_file):

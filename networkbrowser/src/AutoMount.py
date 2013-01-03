@@ -72,7 +72,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
@@ -90,7 +90,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,utf8").encode("UTF-8")
 						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
 						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 						self.automounts[data['sharename']] = data
@@ -113,7 +113,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
 						print "NFSMOUNT",data
 						self.automounts[data['sharename']] = data
 					except Exception, e:
@@ -133,7 +133,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,utf8").encode("UTF-8")
 						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
 						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 						self.automounts[data['sharename']] = data
@@ -155,7 +155,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
 						print "NFSMOUNT",data
 						self.automounts[data['sharename']] = data
 					except Exception, e:
@@ -174,7 +174,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,utf8").encode("UTF-8")
 						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
 						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 						self.automounts[data['sharename']] = data
@@ -195,7 +195,7 @@ class AutoMount():
 			if not options:
 				options = 'rsize=32768,wsize=32768'
 				if not cifs:
-					options += ',tcp'
+					options += ',proto=tcp'
 			else:
 				if 'rsize' not in options:
 					options += ',rsize=32768'
@@ -203,6 +203,9 @@ class AutoMount():
 					options += ',wsize=32768'
 				if not cifs and 'tcp' not in options and 'udp' not in options:
 					options += ',tcp'
+				options = options.replace('tcp','proto=tcp')
+				options = options.replace('udp','proto=udp')
+				options = options.replace('utf8','iocharset=utf8')
 		else:
 			if not options:
 				options = 'nfsvers=3,rsize=32768,wsize=32768'
@@ -214,11 +217,14 @@ class AutoMount():
 					options += ',rsize=32768'
 				if 'wsize' not in options:
 					options += ',wsize=32768'
+				if 'utf8' not in options:
+					options += ',iocharset=utf8'
 				if not cifs and 'tcp' not in options and 'udp' not in options:
-					options += ',proto=tcp'
-				else:
-					options = options.replace('tcp','proto=tcp')
+					options += ',tcp'
 				options = options + ',timeo=14,fg,soft,intr'
+				options = options.replace('tcp','proto=tcp')
+				options = options.replace('udp','proto=udp')
+				options = options.replace('utf8','iocharset=utf8')
 		return options
 
 	def CheckMountPoint(self, item, callback):
@@ -262,7 +268,7 @@ class AutoMount():
 					elif data['mounttype'] == 'cifs':
 						if not os.path.ismount(path):
 							tmpusername = data['username'].replace(" ", "\\ ")
-							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',noatime,noserverino,iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
+							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',noatime,noserverino,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
 							self.mountcommand = tmpcmd.encode("UTF-8")
 # 				except Exception, ex:
 # 					print "[NetworkBrowser] Failed to create", path, "Error:", ex
@@ -412,7 +418,9 @@ class AutoMount():
 
 		# Try Saving to Flash
 		try:
-			open(XML_FSTAB, "w").writelines(list).close()
+			f = open(XML_FSTAB, "w")
+			f.writelines(list)
+			f.close()
 		except Exception, e:
 			print "[NetworkBrowser] Error Saving Mounts List:", e
 

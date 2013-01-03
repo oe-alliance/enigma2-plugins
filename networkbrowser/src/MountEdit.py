@@ -152,6 +152,10 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		else:
 			ip = [192, 168, 0, 0]
 
+		if mounttype == "nfs":
+			defaultOptions = "rw,nolock,tcp,utf8"
+		else:
+			defaultOptions = "rw,utf8"
 		if self.mountinfo['sharename'] and self.mountinfo.has_key('sharename'):
 			sharename = re_sub("\W", "", self.mountinfo['sharename'])
 		else:
@@ -163,7 +167,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if self.mountinfo.has_key('options'):
 			options = self.mountinfo['options']
 		else:
-			options = "rw,nolock,tcp"
+			options = defaultOptions
 		if self.mountinfo.has_key('username'):
 			username = self.mountinfo['username']
 		else:
@@ -184,10 +188,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			sharename = "Sharename"
 		if sharedir is False:
 			sharedir = "/export/hdd"
-		if mounttype == "nfs":
-			defaultOptions = "rw,nolock,tcp"
-		else:
-			defaultOptions = "rw"
 		if username is False:
 			username = ""
 		if password is False:
@@ -222,11 +222,6 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.list.append(self.sharedirEntry)
 		self.hdd_replacementEntry = getConfigListEntry(_("use as HDD replacement"), self.hdd_replacementConfigEntry)
 		self.list.append(self.hdd_replacementEntry)
-		if self.optionsConfigEntry.value == self.optionsConfigEntry.default:
-			if self.mounttypeConfigEntry.value == "cifs":
-				self.optionsConfigEntry = NoSave(ConfigText(default = "rw", visible_width = 50, fixed_size = False))
-			else:
-				self.optionsConfigEntry = NoSave(ConfigText(default = "rw,nolock,tcp", visible_width = 50, fixed_size = False))
 		self.optionsEntry = getConfigListEntry(_("Mount options"), self.optionsConfigEntry)
 		self.list.append(self.optionsEntry)
 		if self.mounttypeConfigEntry.value == "cifs":
@@ -241,6 +236,17 @@ class AutoMountEdit(Screen, ConfigListScreen):
 
 	def newConfig(self):
 		if self["config"].getCurrent() == self.mounttypeEntry:
+			if self.mounttypeConfigEntry.value == "nfs":
+				defaultOptions = "rw,nolock,tcp,utf8"
+			else:
+				defaultOptions = "rw,utf8"
+			if self.mountinfo.has_key('options'):
+				options = self.mountinfo['options']
+			else:
+				options = defaultOptions
+			self.optionsConfigEntry = NoSave(ConfigText(default = defaultOptions, visible_width = 50, fixed_size = False))
+			if options is not False:
+				self.optionsConfigEntry.value = options
 			self.createSetup()
 
 	def KeyText(self):
