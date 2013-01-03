@@ -114,7 +114,6 @@ class AutoMount():
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
 						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
-						print "NFSMOUNT",data
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
@@ -156,7 +155,6 @@ class AutoMount():
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
 						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
-						print "NFSMOUNT",data
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
@@ -193,38 +191,35 @@ class AutoMount():
 		options = origOptions.strip()
 		if not fstab:
 			if not options:
-				options = 'rsize=32768,wsize=32768'
+				options = 'rw,rsize=32768,wsize=32768'
 				if not cifs:
 					options += ',proto=tcp'
 			else:
-				if 'rsize' not in options:
-					options += ',rsize=32768'
-				if 'wsize' not in options:
-					options += ',wsize=32768'
-				if not cifs and 'tcp' not in options and 'udp' not in options:
-					options += ',tcp'
-				options = options.replace('tcp','proto=tcp')
-				options = options.replace('udp','proto=udp')
-				options = options.replace('utf8','iocharset=utf8')
+				if not cifs:
+					if 'rsize' not in options:
+						options += ',rsize=32768'
+					if 'wsize' not in options:
+						options += ',wsize=32768'
+					if not cifs and 'tcp' not in options and 'udp' not in options:
+						options += ',tcp'
 		else:
 			if not options:
-				options = 'nfsvers=3,rsize=32768,wsize=32768'
+				options = 'rw'
 				if not cifs:
-					options += ',proto=tcp'
+					options += ',nfsvers=3,rsize=32768,wsize=32768,proto=tcp'
 			else:
-				options = 'nfsvers=3,' + options
-				if 'rsize' not in options:
-					options += ',rsize=32768'
-				if 'wsize' not in options:
-					options += ',wsize=32768'
-				if 'utf8' not in options:
-					options += ',iocharset=utf8'
-				if not cifs and 'tcp' not in options and 'udp' not in options:
-					options += ',tcp'
-				options = options + ',timeo=14,fg,soft,intr'
-				options = options.replace('tcp','proto=tcp')
-				options = options.replace('udp','proto=udp')
-				options = options.replace('utf8','iocharset=utf8')
+				if not cifs:
+					options += ',nfsvers=3'
+					if 'rsize' not in options:
+						options += ',rsize=32768'
+					if 'wsize' not in options:
+						options += ',wsize=32768'
+					if 'tcp' not in options and 'udp' not in options:
+						options += ',tcp'
+					options = options + ',timeo=14,fg,soft,intr'
+		options = options.replace('tcp','proto=tcp')
+		options = options.replace('udp','proto=udp')
+		options = options.replace('utf8','iocharset=utf8')
 		return options
 
 	def CheckMountPoint(self, item, callback):
@@ -379,9 +374,9 @@ class AutoMount():
 				list.append('</fstab>\n')
 				out = open('/etc/fstab', 'a')
 				if sharedata['mounttype'] == 'nfs':
-					line = sharedata['ip'] + ':/' + sharedata['sharedir'] + ' ' + path + '\tnfs\t' + self.sanitizeOptions(sharedata['options'], fstab=True) + '\t0 0\n'
+					line = sharedata['ip'] + ':/' + sharedata['sharedir'] + ' ' + path + '\tnfs\t_netdev,' + self.sanitizeOptions(sharedata['options'], fstab=True) + '\t0 0\n'
 				elif sharedata['mounttype'] == 'cifs':
-					line = '//' + sharedata['ip'] + '/' + sharedata['sharedir'] + ' ' + path + '\tcifs\tusername=' + sharedata['username'] + ',password=' + sharedata['password'] + ',_netdev\t0 0\n'
+					line = '//' + sharedata['ip'] + '/' + sharedata['sharedir'] + ' ' + path + '\tcifs\tusername=' + sharedata['username'] + ',password=' + sharedata['password'] + ',_netdev,' + self.sanitizeOptions(sharedata['options'], cifs=True, fstab=True) + '\t0 0\n'
 				out.write(line)
 				out.close()
 			elif sharedata['mountusing'] == 'enigma2':

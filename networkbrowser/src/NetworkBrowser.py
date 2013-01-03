@@ -480,7 +480,7 @@ class NetworkBrowser(Screen):
 
 				data['sharename'] = selection[1]
 				data['sharedir'] = selection[4]
-				data['options'] = "rw,nolock,tcp,utf8"
+				data['options'] = "rw,nolock,tcp"
 
 				for sharename, sharedata in mounts.items():
 					if sharedata['ip'] == selection[2] and sharedata['sharedir'] == selection[4]:

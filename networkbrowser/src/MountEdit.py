@@ -153,7 +153,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			ip = [192, 168, 0, 0]
 
 		if mounttype == "nfs":
-			defaultOptions = "rw,nolock,tcp,utf8"
+			defaultOptions = "rw,nolock,tcp"
 		else:
 			defaultOptions = "rw,utf8"
 		if self.mountinfo['sharename'] and self.mountinfo.has_key('sharename'):
@@ -237,7 +237,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 	def newConfig(self):
 		if self["config"].getCurrent() == self.mounttypeEntry:
 			if self.mounttypeConfigEntry.value == "nfs":
-				defaultOptions = "rw,nolock,tcp,utf8"
+				defaultOptions = "rw,nolock,tcp"
 			else:
 				defaultOptions = "rw,utf8"
 			if self.mountinfo.has_key('options'):
