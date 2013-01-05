@@ -150,7 +150,7 @@ class VlcServer:
 
 	def __xmlRequest(self, request, params):
 		uri = "/requests/" + request + ".xml"
-		if params is not None: uri = uri + "?" + urlencode(params).replace('+', '%20')
+		if params is not None: uri = uri + "?" + urlencode(params, True).replace('+', '%20')
 		location = "%s:%d" % (self.getHost(), self.getHttpPort())
 		resp = urlopen("http://" + location + uri)
 		if resp is None:
@@ -236,17 +236,31 @@ class VlcServer:
 			filename = filename.replace("/", "\\")
 
 		filename = filename.replace("\\", "\\\\").replace("'", "\\'")
-		input = filename + " :sout=#"
+		param = {
+			"command": "in_play",
+			"input": filename,
+			"option": []
+		}
+
+		input = ":sout=#"
 
 		if len(transcode) > 0:
 			input += "transcode{%s}:" % (",".join(transcode))
 
-		mux="ts{pid-video=%d,pid-audio=%d}" % (videoPid, audioPid)
-		input += "std{access=http,mux=%s,dst=/%s.ts} :sout-all :sout-keep" % (mux, streamName)
+		mux = "ts{pid-video=%d,pid-audio=%d}" % (videoPid, audioPid)
+		input += "std{access=http,mux=%s,dst=/%s.ts}" % (mux, streamName)
+		param["option"].append(input)
 
-		print "[VLC] playfile", input
+		param["option"].append(":sout-all")
+		param["option"].append(":sout-keep")
 
-		xml = self.__xmlRequest("status", {"command": "in_play", "input": input})
+		if self.apiversion() <= 2:
+			param["input"] = param["input"] + ' ' + ' '.join(param["option"])
+			del param["option"]
+
+		print "[VLC] playfile", param
+
+		xml = self.__xmlRequest("status", param)
 		error = xml.getElementsByTagName("error")
 		if error is not None and len(error) > 0:
 			self.lastError = getText(error[0].childNodes).strip()
@@ -300,6 +314,10 @@ examples:
 				else:
 					stats[e.nodeName.encode("latin_1", "replace")] = e.firstChild.nodeValue.encode("latin_1", "replace")
 		return stats
+
+	def apiversion(self):
+		status = self.status()
+		return int(status.get("apiversion", 2)) if status else 2
 
 	def loadPlaylist(self, playlist):
 		self.__xmlRequest("status", {"command": "in_play", "input": playlist})
