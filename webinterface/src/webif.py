@@ -7,14 +7,16 @@ Version = '$Header$';
 
 from Tools.Import import my_import
 
-from Components.Sources.Source import ObsoleteSource
+from Components.config import config
 from Components.Converter.Converter import Converter
 from Components.Element import Element
+from Components.Sources.Source import ObsoleteSource
 
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler, feature_namespaces
 from xml.sax.saxutils import escape as escape_xml
 from twisted.python import util
+from twisted.web import http, resource
 from urllib2 import quote
 from time import time
 
@@ -501,6 +503,17 @@ def renderPage(request, path, session):
 
 	# by default, we have non-streaming pages
 	finish = True
+
+	if config.plugins.Webinterface.anti_hijack.value:
+		for screen in handler.screens:
+			method = request.method
+			if not screen.allow_GET and method == 'GET' and len(request.args) > 0:
+				request.setHeader("Allow", "POST")
+				request.write(
+					resource.ErrorPage(http.NOT_ALLOWED, "Invalid method: GET!", "GET is not allowed here, please use POST").render(request)
+				)
+				request.finish()
+				return
 
 	# first, apply "commands" (aka. URL argument)
 	for x in handler.res:

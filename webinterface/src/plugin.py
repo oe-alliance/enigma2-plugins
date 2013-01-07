@@ -3,7 +3,7 @@ Version = '$Header$';
 from enigma import eConsoleAppContainer, eTPM
 from Plugins.Plugin import PluginDescriptor
 
-from Components.config import config, ConfigBoolean, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
+from Components.config import config, ConfigBoolean, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigEnableDisable
 from Components.Network import iNetwork
 from Screens.MessageBox import MessageBox
 from WebIfConfig import WebIfConfigScreen
@@ -25,7 +25,7 @@ from os.path import isfile as os_isfile, exists as os_exists
 from __init__ import _, __version__, decrypt_block
 from webif import get_random, validate_certificate
 
-import random
+import random, uuid
 
 tpm = eTPM()
 rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
@@ -53,6 +53,9 @@ config.plugins.Webinterface.https.port = ConfigInteger(default = 443, limits=(1,
 config.plugins.Webinterface.https.auth = ConfigYesNo(default=True)
 
 config.plugins.Webinterface.streamauth = ConfigYesNo(default=False)
+
+config.plugins.Webinterface.anti_hijack = ConfigEnableDisable(default=False)
+config.plugins.Webinterface.extended_security = ConfigEnableDisable(default=False)
 
 global running_defered, waiting_shutdown, toplevel
 
@@ -260,7 +263,8 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 		root = HTTPAuthResource(toplevel, "Enigma2 WebInterface")
 		site = server.Site(root)
 	else:
-		site = server.Site(toplevel)
+		root = HTTPSessionResource(toplevel)
+		site = server.Site(root)
 
 	if usessl:
 		ctx = ChainedOpenSSLContextFactory(KEY_FILE, CERT_FILE)
@@ -297,23 +301,50 @@ class ChainedOpenSSLContextFactory(ssl.DefaultOpenSSLContextFactory):
 		ctx.use_privatekey_file(self.privateKeyFileName)
 		self._context = ctx
 
+class HTTPSessionResource(resource.Resource):
+	def __init__(self, res):
+		resource.Resource.__init__(self)
+		self.resource = res
+		self.sessionInvalidResource = resource.ErrorPage(http.UNAUTHORIZED, "Access denied", "Session is invalid!")
+
+	def isSessionValid(self, request):
+		if config.plugins.Webinterface.extended_security.value: #TODO config option here, something for clients to get the session
+			http_session = request.getSession().sessionNamespaces
+			sid = http_session.get('sessionid', None)
+			if sid is None:
+				http_session['sessionid'] = uuid.uuid4()
+			return sid and sid == request.args.get('sessionid', None)
+		else:
+			return True
+
+	def render(self, request):
+		if self.isSessionValid(request):
+			request.setResponseCode(http.FORBIDDEN)
+			return self.sessionInvalidResource
+		else:
+			return self.resource.render(request)
+
+	def getChildWithDefault(self, path, request):
+		if self.isSessionValid(request):
+			return self.resource.getChildWithDefault(path, request)
+		else:
+			print "[Webinterface.HTTPSessionResource.render] !!! session invalid !!!"
+			return self.sessionInvalidResource
+
 #===============================================================================
 # HTTPAuthResource
 # Handles HTTP Authorization for a given Resource
 #===============================================================================
-class HTTPAuthResource(resource.Resource):
+class HTTPAuthResource(HTTPSessionResource):
 	def __init__(self, res, realm):
-		resource.Resource.__init__(self)
-		self.resource = res
+		HTTPSessionResource.__init__(self, res)
 		self.realm = realm
 		self.authorized = False
-		self.tries = 0
-		self.unauthorizedResource = UnauthorizedResource(self.realm)
+		self.unauthorizedResource = resource.ErrorPage(http.UNAUTHORIZED, "Access denied", "Authentication credentials invalid!")
 
-	def unautorized(self, request):
-		request.setResponseCode(http.UNAUTHORIZED)
+	def unauthorized(self, request):
 		request.setHeader('WWW-authenticate', 'basic realm="%s"' % self.realm)
-
+		request.setResponseCode(http.UNAUTHORIZED)
 		return self.unauthorizedResource
 
 	def isAuthenticated(self, request):
@@ -325,62 +356,42 @@ class HTTPAuthResource(resource.Resource):
 				return True
 
 		# get the Session from the Request
-		sessionNs = request.getSession().sessionNamespaces
+		http_session = request.getSession().sessionNamespaces
 
-		# if the auth-information has not yet been stored to the session
-		if not sessionNs.has_key('authenticated'):
+		# if the auth-information has not yet been stored to the http_session
+		if not http_session.has_key('authenticated'):
 			if request.getUser() != '':
-				sessionNs['authenticated'] = check_passwd(request.getUser(), request.getPassword())
+				http_session['authenticated'] = check_passwd(request.getUser(), request.getPassword())
 			else:
-				sessionNs['authenticated'] = False
+				http_session['authenticated'] = False
 
-		#if the auth-information already is in the session
+		#if the auth-information already is in the http_session
 		else:
-			if sessionNs['authenticated'] is False:
-				sessionNs['authenticated'] = check_passwd(request.getUser(), request.getPassword() )
+			if http_session['authenticated'] is False:
+				http_session['authenticated'] = check_passwd(request.getUser(), request.getPassword() )
 
 		#return the current authentication status
-		return sessionNs['authenticated']
+		return http_session['authenticated']
 
 #===============================================================================
 # Call render of self.resource (if authenticated)
 #===============================================================================
 	def render(self, request):
 		if self.isAuthenticated(request) is True:
-			return self.resource.render(request)
-
+			return HTTPSessionResource.render(self, request)
 		else:
 			print "[Webinterface.HTTPAuthResource.render] !!! unauthorized !!!"
-			return self.unautorized(request).render(request)
+			return self.unauthorized(request).render(request)
 
 #===============================================================================
 # Override to call getChildWithDefault of self.resource (if authenticated)
 #===============================================================================
 	def getChildWithDefault(self, path, request):
 		if self.isAuthenticated(request) is True:
-			return self.resource.getChildWithDefault(path, request)
-
+			return HTTPSessionResource.getChildWithDefault(self, path, request)
 		else:
-			print "[Webinterface.HTTPAuthResource.render] !!! unauthorized !!!"
-			return self.unautorized(request)
-
-#===============================================================================
-# UnauthorizedResource
-# Returns a simple html-ified "Access Denied"
-#===============================================================================
-class UnauthorizedResource(resource.Resource):
-	def __init__(self, realm):
-		resource.Resource.__init__(self)
-		self.realm = realm
-		self.errorpage = static.Data('<html><body>Access Denied.</body></html>', 'text/html')
-
-	def getChild(self, path, request):
-		return self.errorpage
-
-	def render(self, request):
-		return self.errorpage.render(request)
-
-
+			print "[Webinterface.HTTPAuthResource.getChildWithDefault] !!! unauthorized !!!"
+			return self.unauthorized(request)
 
 # Password verfication stuff
 from crypt import crypt
