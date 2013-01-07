@@ -457,7 +457,7 @@ function EPGEvent(xml, number){
 		return this.serviceName;
 	};
 	this.isMarker = function(){
-		return this.serviceRef.startsWith("1:64:0:0:0:0:0:0:0:0");
+		return this.serviceRef.startsWith("1:64:");
 	};
 
 	this.json = {
@@ -681,7 +681,7 @@ function Service(xml, cssclass){
 	}
 
 	this.isMarker = function(){
-		return this.getClearServiceReference().startsWith("1:64:0:0:0:0:0:0:0:0");
+		return this.getClearServiceReference().startsWith("1:64:");
 	};
 
 	this.json = {
