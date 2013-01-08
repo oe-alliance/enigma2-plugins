@@ -7,7 +7,7 @@ class ServiceplayerResource(resource.Resource):
 		resource.Resource.__init__(self)
 		self.session = session
 		self.oldservice = None
-	
+
 	def render(self, request):
 		if 'file' in request.args:
 			output = self.playFile(request.args['file'][0])
@@ -17,12 +17,9 @@ class ServiceplayerResource(resource.Resource):
 			output = self.stopServicePlay()
 		else:
 			output = True, "unknown command"
-			
+
 		request.setResponseCode(http.OK)
-		request.write(output[1])
-		request.finish()
-					
-		return server.NOT_DONE_YET
+		return output[1]
 
 	def playFile(self, path):
 		print "[ServiceplayerResource] playing file", path

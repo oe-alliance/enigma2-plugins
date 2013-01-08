@@ -512,7 +512,10 @@ def renderPage(request, path, session):
 				request.write(
 					resource.ErrorPage(http.NOT_ALLOWED, "Invalid method: GET!", "GET is not allowed here, please use POST").render(request)
 				)
-				request.finish()
+				if not request._disconnected:
+					request.finish()
+				else:
+					print "[renderPage] request already finished!"
 				return
 
 	# first, apply "commands" (aka. URL argument)
@@ -567,7 +570,10 @@ def requestFinish(handler, request, requestAlreadyFinished = False):
 	handler.cleanup()
 	if not requestAlreadyFinished:
 		try:
-			request.finish()
+			if not request._disconnected:
+				request.finish()
+			else:
+				print "[requestFinish] request already finished!"
 		except:
 			pass
 

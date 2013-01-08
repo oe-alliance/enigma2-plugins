@@ -77,17 +77,12 @@ class IPKGResource(resource.Resource):
 		html += "</body></html>"
 
 		request.setResponseCode(http.OK)
-		request.write(html)
-		request.finish()
 
-		return server.NOT_DONE_YET
+		return html
 
 	def doErrorPage(self, request, errormsg):
 		request.setResponseCode(http.OK)
-		request.write(errormsg)
-		request.finish()
-
-		return server.NOT_DONE_YET
+		return errormsg
 
 	def getArg(self, key):
 		if key in self.args:
@@ -99,14 +94,15 @@ class IPKGConsoleStream:
 	def __init__(self, request, cmd):
 		self.request = request
 		self.request.write("<html><body>\n")
-		if hasattr(self.request, 'notifyFinish'):
-			self.request.notifyFinish().addErrback(self.connectionLost)
 		self.container = eConsoleAppContainer()
 		self.lastdata = None
 		self.stillAlive = True
 
 		self.container.dataAvail.append(self.dataAvail)
 		self.container.appClosed.append(self.cmdFinished)
+
+		if hasattr(self.request, 'notifyFinish'):
+			self.request.notifyFinish().addErrback(self.connectionLost)
 
 		self.container.execute(*cmd)
 

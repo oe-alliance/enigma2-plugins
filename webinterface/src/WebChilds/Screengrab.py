@@ -63,8 +63,7 @@ class GrabResource(resource.Resource):
 
 		if not os_path.exists(self.GRAB_BIN):
 			request.setResponseCode(http.OK)
-			request.write('Grab is not installed at %s. Please install package aio-grab.' %self.GRAB_BIN)
-			request.finish()
+			return 'Grab is not installed at %s. Please install package aio-grab.' %self.GRAB_BIN
 
 		else:
 			request.setHeader('Content-Disposition', 'inline; filename=screenshot.%s;' %imageformat)
@@ -96,32 +95,42 @@ class GrabStream:
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.cmdFinished)
 
+		self.stillAlive = True
+		if hasattr(self.request, 'notifyFinish'):
+			self.request.notifyFinish().addErrback(self.connectionLost)
+
 		print '[Screengrab.py] starting AiO grab with cmdline:', cmd
 		self.container.execute(*cmd)
 
+	def connectionLost(self, err):
+		self.stillAlive = False
+
 	def cmdFinished(self, data):
 		print '[Screengrab.py] cmdFinished'
-		self.request.setResponseCode(http.OK)
-		if int(data) is 0 and self.target is not None:
-			try:
-				self.request.setHeader('Content-Length', '%i' %os_path_getsize(self.target))
-				with open(self.target) as fp:
-					self.request.write(fp.read())
-				if self.save is False:
-					os_remove(self.target)
-					print '[Screengrab.py] %s removed' %self.target
-			except Exception,e:
-				self.request.write('Internal error while reading target file')
+		if self.stillAlive:
+			self.request.setResponseCode(http.OK)
+			if int(data) is 0 and self.target is not None:
+				try:
+					self.request.setHeader('Content-Length', '%i' %os_path_getsize(self.target))
+					with open(self.target) as fp:
+						self.request.write(fp.read())
+					if self.save is False:
+						os_remove(self.target)
+						print '[Screengrab.py] %s removed' %self.target
+				except Exception,e:
+					self.request.write('Internal error while reading target file')
+					self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
+
+			elif int(data) is 0 and self.target is None:
+				self.request.write(self.output)
+			elif int(data) is 1:
+				self.request.write(self.output)
+			else:
 				self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
 
-		elif int(data) is 0 and self.target is None:
-			self.request.write(self.output)
-		elif int(data) is 1:
-			self.request.write(self.output)
+			self.request.finish()
 		else:
-			self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
-
-		self.request.finish()
+			print '[Screengrab.py] already disconnected!'
 
 	def requestFinished(self, val):
 		pass

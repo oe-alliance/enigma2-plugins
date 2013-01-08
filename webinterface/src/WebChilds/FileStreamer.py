@@ -14,19 +14,19 @@ class FileStreamer(resource.Resource):
 		else:
 			dir = ''
 
-		if 'file' in request.args:			
+		if 'file' in request.args:
 			filename = unquote(request.args["file"][0])
 			path = dir + filename
 
 			#dirty backwards compatibility hack
 			if not os_path.exists(path):
 				path = resolveFilename(SCOPE_HDD, filename)
-			
+
 			print "[WebChilds.FileStreamer] path is %s" %path
-			
+
 			if os_path.exists(path):
 				basename = filename.decode('utf-8', 'ignore').encode('ascii', 'ignore')
-				
+
 				if '/' in basename:
 					basename = basename.split('/')[-1]
 
@@ -36,12 +36,10 @@ class FileStreamer(resource.Resource):
 
 			else:
 				request.setResponseCode(http.OK)
-				request.write("file '%s' was not found" %(dir + filename) )
-				request.finish()
+				return "file '%s' was not found" %(dir + filename)
 		else:
 			request.setResponseCode(http.OK)
-			request.write("no file given with file=???")
-			request.finish()
+			return "no file given with file=???"
 
 		return server.NOT_DONE_YET
 
