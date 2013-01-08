@@ -1,0 +1,3 @@
+<e2:screen name="SessionWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2sessionid><e2:element source="Session"><e2:convert type="web:TextToHTML" /></e2:element></e2sessionid>
+</e2:screen>
