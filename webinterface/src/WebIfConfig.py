@@ -54,38 +54,35 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 		self.createSetup()
 
 	def createSetup(self):
-		list = [
-			getConfigListEntry(_("Start Webinterface"), config.plugins.Webinterface.enabled),
-			getConfigListEntry(_("Show Setup in Extensions menu"), config.plugins.Webinterface.show_in_extensionsmenu),
-			getConfigListEntry(_("Enable /media"), config.plugins.Webinterface.includemedia),
-			getConfigListEntry(_("Allow zapping via Webinterface"), config.plugins.Webinterface.allowzapping),
-			getConfigListEntry(_("Autowrite timer"), config.plugins.Webinterface.autowritetimer),
-			getConfigListEntry(_("Load movie-length"), config.plugins.Webinterface.loadmovielength),
-			getConfigListEntry(_("Enable HTTP Access"), config.plugins.Webinterface.http.enabled)
-		]
+		list = [ getConfigListEntry(_("Start Webinterface"), config.plugins.Webinterface.enabled), ]
 
-		if config.plugins.Webinterface.http.enabled.value == True:
-			sublist = [
-				getConfigListEntry(_("HTTP Port"), config.plugins.Webinterface.http.port),
-				getConfigListEntry(_("Enable HTTP Authentication"), config.plugins.Webinterface.http.auth)
-			]
+		if config.plugins.Webinterface.enabled.value:
+			list.extend( [
+				getConfigListEntry(_("Show Setup in Extensions menu"), config.plugins.Webinterface.show_in_extensionsmenu),
+				getConfigListEntry(_("Enable /media"), config.plugins.Webinterface.includemedia),
+				getConfigListEntry(_("Allow zapping via Webinterface"), config.plugins.Webinterface.allowzapping),
+				getConfigListEntry(_("Autowrite timer"), config.plugins.Webinterface.autowritetimer),
+				getConfigListEntry(_("Load movie-length"), config.plugins.Webinterface.loadmovielength),
+				getConfigListEntry(_("Enable HTTP Access"), config.plugins.Webinterface.http.enabled)
+			])
 
-			list.extend(sublist)
+			if config.plugins.Webinterface.http.enabled.value == True:
+				list.extend([
+					getConfigListEntry(_("HTTP Port"), config.plugins.Webinterface.http.port),
+					getConfigListEntry(_("Enable HTTP Authentication"), config.plugins.Webinterface.http.auth)
+				])
 
-		list.append( getConfigListEntry(_("Enable HTTPS Access"), config.plugins.Webinterface.https.enabled) )
+			list.append( getConfigListEntry(_("Enable HTTPS Access"), config.plugins.Webinterface.https.enabled) )
+			if config.plugins.Webinterface.https.enabled.value == True:
+				list.extend([
+					getConfigListEntry(_("HTTPS Port"), config.plugins.Webinterface.https.port),
+					getConfigListEntry(_("Enable HTTPS Authentication"), config.plugins.Webinterface.https.auth)
+				])
 
-		if config.plugins.Webinterface.https.enabled.value == True:
-			sublist = [
-				getConfigListEntry(_("HTTPS Port"), config.plugins.Webinterface.https.port),
-				getConfigListEntry(_("Enable HTTPS Authentication"), config.plugins.Webinterface.https.auth)
-			]
-
-			list.extend(sublist)
-
-		#Auth for Streaming (127.0.0.1 Listener)
-		list.append(getConfigListEntry(_("Enable Streaming Authentication"), config.plugins.Webinterface.streamauth))
-		list.append(getConfigListEntry(_("Simple Anti-Hijack Measures (may break clients)"), config.plugins.Webinterface.anti_hijack))
-		#list.append(getConfigListEntry(_("Enable extended session-based security (may break clients)"), config.plugins.Webinterface.extended_security))
+			#Auth for Streaming (127.0.0.1 Listener)
+			list.append(getConfigListEntry(_("Enable Streaming Authentication"), config.plugins.Webinterface.streamauth))
+			list.append(getConfigListEntry(_("Simple Anti-Hijack Measures (may break clients)"), config.plugins.Webinterface.anti_hijack))
+			list.append(getConfigListEntry(_("Token-based security (may break clients)"), config.plugins.Webinterface.extended_security))
 		self["config"].list = list
 		self["config"].l.setList(list)
 

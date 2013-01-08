@@ -646,3 +646,14 @@ var VolumeProvider = Class.create(AbstractContentProvider, {
 		return data;
 	}
 });
+
+var SessionProvider = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.session, showFnc);
+	},
+
+	renderXML: function(xml){
+		var session = new WebSession(xml).get();
+		return session;
+	}
+});

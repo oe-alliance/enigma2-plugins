@@ -423,3 +423,10 @@ class StringsWebScreen(WebScreen):
 
 		from WebComponents.Sources.Strings import Strings
 		self["Strings"] = Strings()
+
+class SessionWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+
+		from WebComponents.Sources.WebSession import WebSession
+		self["Session"] = WebSession(request)
