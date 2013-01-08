@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 737 $
-$Date: 2012-12-29 16:21:51 +0100 (Sa, 29 Dez 2012) $
-$Id: plugin.py 737 2012-12-29 15:21:51Z michael $
+$Revision: 742 $
+$Date: 2013-01-08 17:00:08 +0100 (Di, 08. Jan 2013) $
+$Id: plugin.py 742 2013-01-08 16:00:08Z michael $
 '''
 
 from Screens.Screen import Screen
@@ -47,7 +47,7 @@ import re, time, os, traceback
 
 from nrzuname import ReverseLookupAndNotifier
 import FritzOutlookCSV, FritzLDIF
-from . import _, initDebug, debug #@UnresolvedImport # pylint: disable=E0611,F0401
+from . import _, __, initDebug, debug #@UnresolvedImport # pylint: disable=E0611,F0401
 
 from enigma import getDesktop
 DESKTOP_WIDTH = getDesktop(0).size().width()
@@ -154,7 +154,8 @@ countryCodes = [
 	("0033", _("France")),
 	("0039", _("Italy")),
 	("0041", _("Switzerland")),
-	("0043", _("Austria"))
+	("0043", _("Austria")),
+	("", _("Others"))
 	]
 config.plugins.FritzCall.country = ConfigSelection(choices=countryCodes)
 
@@ -296,8 +297,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 737 $"[1:-2] + "\n" + 
-							"$Date: 2012-12-29 16:21:51 +0100 (Sa, 29 Dez 2012) $"[1:23] + "\n"
+							"$Revision: 742 $"[1:-2] + "\n" + 
+							"$Date: 2013-01-08 17:00:08 +0100 (Di, 08. Jan 2013) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1141,7 +1142,7 @@ class FritzCallPhonebook:
 				elems = line.split('#')
 				if len(elems) == 2:
 					try:
-						debug("[FritzCallPhonebook] reload: Adding '''%s''' with '''%s''' from internal phonebook!" % (elems[1].strip(), elems[0]))
+						debug("[FritzCallPhonebook] reload: Adding '''%s''' with '''%s''' from internal phonebook!" % (__(elems[1].strip()), __(elems[0], False)))
 						self.phonebook[elems[0]] = elems[1]
 					except ValueError: # how could this possibly happen?!?!
 						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
@@ -1704,7 +1705,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 737 $"[1: - 1] + "$Date: 2012-12-29 16:21:51 +0100 (Sa, 29 Dez 2012) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 742 $"[1: - 1] + "$Date: 2013-01-08 17:00:08 +0100 (Di, 08. Jan 2013) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2210,7 +2211,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 737 $"[1:-1]	+ "$Date: 2012-12-29 16:21:51 +0100 (Sa, 29 Dez 2012) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 742 $"[1:-1]	+ "$Date: 2013-01-08 17:00:08 +0100 (Di, 08. Jan 2013) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
