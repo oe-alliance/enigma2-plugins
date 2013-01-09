@@ -313,7 +313,9 @@ class SimpleSession(object):
 #Any "global" checks should be done here
 class HTTPRootResource(resource.Resource):
 	SESSION_PROTECTED_PATHS = ['/web/', '/opkg', '/ipkg']
-	SESSION_EXCEPTIONS = ['/web/session', '/web/strings.js']
+	SESSION_EXCEPTIONS = [
+		'/web/epgsearch.rss', '/web/movielist.m3u', '/web/movielist.rss', '/web/services.m3u', '/web/session',
+		'/web/stream.m3u', '/web/stream', '/web/streamcurrent.m3u', '/web/strings.js', '/web/ts.m3u']
 
 	def __init__(self, res):
 		resource.Resource.__init__(self)
@@ -329,8 +331,12 @@ class HTTPRootResource(resource.Resource):
 	def isSessionValid(self, request):
 		session = self._sessions.get( self.getClientToken(request), None )
 		if session is None or session.expired():
-			session = SimpleSession( str( uuid.uuid4() ))
+			if config.plugins.Webinterface.extended_security.value: #sessionid will be 0 if sessions are disabled
+				session = SimpleSession( str( uuid.uuid4() ))
+			else:
+				session = SimpleSession( "0" )
 			key = self.getClientToken(request)
+			print "[HTTPRootResource].isSessionValid :: created session with id '%s' for client with token '%s'" %(session.id, key)
 			self._sessions[ key ] = session
 
 		request.enigma2_session = session
