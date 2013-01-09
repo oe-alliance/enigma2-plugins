@@ -302,12 +302,31 @@ class ChainedOpenSSLContextFactory(ssl.DefaultOpenSSLContextFactory):
 		self._context = ctx
 
 class SimpleSession(object):
-	def __init__(self, id, expires=0):
-		self.id = id
+	def __init__(self, expires=0):
+		self._id = "0"
 		self._expires = time.time() + expires if expires > 0 else 0
 
+	def _generateId(self):
+		if config.plugins.Webinterface.extended_security.value:
+			self._id = str ( uuid.uuid4() )
+		else:
+			self._id = "0"
+
+	def _getId(self):
+		if self.expired():
+			self._generateId()
+		return self._id
+
 	def expired(self):
-		return self._expires > 0 and self._expires < time.time()
+		expired = False
+		if config.plugins.Webinterface.extended_security.value:
+			expired = self._expires > 0 and self._expires < time.time()
+			expired = expired or self._id == "0"
+		else:
+			expired = self._id != "0"
+		return expired
+
+	id = property(_getId)
 
 #Every request made will pass this Resource (as it is the root resource)
 #Any "global" checks should be done here
@@ -318,6 +337,7 @@ class HTTPRootResource(resource.Resource):
 		'/web/stream.m3u', '/web/stream', '/web/streamcurrent.m3u', '/web/strings.js', '/web/ts.m3u']
 
 	def __init__(self, res):
+		print "[HTTPRootResource}.__init__"
 		resource.Resource.__init__(self)
 		self.resource = res
 		self.sessionInvalidResource = resource.ErrorPage(http.PRECONDITION_FAILED, "Precondition failed!", "sessionid is missing, invalid or expired!")
@@ -331,10 +351,7 @@ class HTTPRootResource(resource.Resource):
 	def isSessionValid(self, request):
 		session = self._sessions.get( self.getClientToken(request), None )
 		if session is None or session.expired():
-			if config.plugins.Webinterface.extended_security.value: #sessionid will be 0 if sessions are disabled
-				session = SimpleSession( str( uuid.uuid4() ))
-			else:
-				session = SimpleSession( "0" )
+			session = SimpleSession()
 			key = self.getClientToken(request)
 			print "[HTTPRootResource].isSessionValid :: created session with id '%s' for client with token '%s'" %(session.id, key)
 			self._sessions[ key ] = session
