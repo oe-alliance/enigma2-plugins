@@ -254,7 +254,7 @@ class AutoTimer:
 		# We include processed timers as we might search for duplicate descriptions
 		# NOTE: It is also possible to use RecordTimer isInTimer(), but we won't get the timer itself on a match
 		self.timerdict = defaultdict(list)
-		self.populateTimerdict, self.epgcache, self.recordHandler, self.timerdict
+		self.populateTimerdict(self.epgcache, self.recordHandler, self.timerdict)
 
 		# Create dict of all movies in all folders used by an autotimer to compare with recordings
 		# The moviedict will be filled only if one AutoTimer is configured to avoid duplicate description for any recordings
@@ -295,12 +295,12 @@ class AutoTimer:
 				self.parseTimer(timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.timerdict, self.moviedict, self.simulateOnly)
 				self.new += self.result[0]
 				self.modified += self.result[1]
-				self.total = self.result[2]
 				break
 
 	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, timerdict, moviedict, simulateOnly=False):
 		new = 0
 		modified = 0
+		skipped = 0
 
 		# Precompute timer destination dir
 		dest = timer.destination or config.usage.default_path.getValue()
@@ -389,7 +389,7 @@ class AutoTimer:
 
 		else:
 			# Search EPG, default to empty list
-			epgmatches = epgcache.search( ('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
+			epgmatches = epgcache.search( ('RITBDSE', 3000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
 
 		# Sort list of tuples by begin time 'B'
 		epgmatches.sort(key=itemgetter(3))
@@ -398,6 +398,7 @@ class AutoTimer:
 		similardict = defaultdict(list)		
 
 		# Loop over all EPG matches
+		preveit = False
 		for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
 
 			eserviceref = eServiceReference(serviceref)
@@ -417,6 +418,7 @@ class AutoTimer:
 			# If event starts in less than 60 seconds skip it
 			if begin < time() + 60:
 				print("[AutoTimer] Skipping an event because it starts in less than 60 seconds")
+				skipped += 1
 				continue
 
 			# Set short description to equal extended description if it is empty.
@@ -496,7 +498,7 @@ class AutoTimer:
 			# We first check eit and if user wants us to guess event based on time
 			# we try this as backup. The allowed diff should be configurable though.
 			for rtimer in timerdict.get(serviceref, ()):
-				if rtimer.eit == eit or config.plugins.autotimer.try_guessing.getValue() and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
+				if (rtimer.eit == eit or config.plugins.autotimer.try_guessing.getValue()) and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
 					oldExists = True
 
 					# Abort if we don't want to modify timers or timer is repeated
@@ -504,25 +506,23 @@ class AutoTimer:
 						print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
 						break
 
-					if hasattr(rtimer, "isAutoTimer"):
+					if eit == preveit:
+						break
+					elif hasattr(rtimer, "isAutoTimer") and  eit == rtimer.eit:
 						rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
+						preveit = eit
 					else:
 						if config.plugins.autotimer.refresh.getValue() != "all":
 							print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
 							break
-
 						rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name))
-
 					newEntry = rtimer
 					modified += 1
-
 					self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref)
 					break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
 					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
-						# if searchForDuplicateDescription > 1 then check short description
 						oldExists = True
-						print("[AutoTimer] We found a timer (similar service) with same description, skipping event")
 						break
 
 			# We found no timer we want to edit
@@ -532,15 +532,19 @@ class AutoTimer:
 					continue
 
 				# We want to search for possible doubles
-				if timer.avoidDuplicateDescription >= 2:
-					for rtimer in chain.from_iterable( itervalues(timerdict) ):
-						if not rtimer.disabled:
+				for rtimer in chain.from_iterable( itervalues(timerdict) ):
+					if not rtimer.disabled:
+						if self.checkDoubleTimers(timer, name, rtimer.name, begin, rtimer.begin, end, rtimer.end ):
+							oldExists = True
+							# print("[AutoTimer] We found a timer with same StartTime, skipping event")
+							break
+						if timer.avoidDuplicateDescription >= 2:
 							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
 								oldExists = True
 								print("[AutoTimer] We found a timer (any service) with same description, skipping event")
 								break
-					if oldExists:
-						continue
+				if oldExists:
+					continue
 
 				if timer.checkCounter(timestamp):
 					print("[AutoTimer] Not adding new timer because counter is depleted.")
@@ -550,8 +554,6 @@ class AutoTimer:
 				newEntry.log(500, "[AutoTimer] Try to add new timer based on AutoTimer %s." % (timer.name))
 
 				# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
-				# It is only temporarily, after a restart it will be lost,
-				# because it won't be stored in the timer xml file
 				newEntry.isAutoTimer = True
 
 			# Apply afterEvent
@@ -645,7 +647,7 @@ class AutoTimer:
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = recordHandler.record(newEntry)
-		self.result=(new, modified, len(timers))
+		self.result=(new, modified)
 		self.completed.append(timer.name)
 		sleep(0.5)
 		# return (new, modified)
@@ -668,7 +670,7 @@ class AutoTimer:
 				)
 		else:
 			AddPopup(
-				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (self.total, self.new, self.modified, len(self.conflicting), len(self.similars)),
+				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+len(self.similars)), self.new, self.modified, len(self.conflicting), len(self.similars)),
 				MessageBox.TYPE_INFO,
 				15,
 				NOTIFICATIONID
@@ -729,3 +731,9 @@ class AutoTimer:
 			foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
 
 		return foundTitle and foundShort and foundExt
+
+	def checkDoubleTimers(self, timer, name1, name2, starttime1, starttime2, endtime1, endtime2):
+		foundTitle = name1 == name2
+		foundstart = starttime1 == starttime2
+		foundend = endtime1 == endtime2
+		return foundTitle and foundstart and foundend

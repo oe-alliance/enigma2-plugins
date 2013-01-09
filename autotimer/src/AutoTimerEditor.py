@@ -501,7 +501,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.searchCase: _("Select whether or not you want to enforce case correctness."),
 			self.justplay: _("Add zap timer instead of record timer?"),
 			self.setEndtime: _("Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."),
-			self.overrideAlternatives: _("With this option enabled the channel to record on can be changed to a alternative service it is restricted to."),
+			self.overrideAlternatives: _("With this option enabled the channel to record will be selected automaticliy using your list of alternates."),
 			self.timespan: _("Should this AutoTimer be restricted to a timespan?"),
 			self.timespanbegin: _("Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"),
 			self.timespanend: _("Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"),
@@ -547,7 +547,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		if self.justplay.value == "zap":
 			list.append(getConfigListEntry(_("Set End Time"), self.setEndtime))
 		list.extend((
-			getConfigListEntry(_("Override found with alternative service"), self.overrideAlternatives),
+			getConfigListEntry(_("Use automatic selection of alternates."), self.overrideAlternatives),
 			getConfigListEntry(_("Only match during timespan"), self.timespan)
 		))
 

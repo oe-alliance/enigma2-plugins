@@ -67,6 +67,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self.changed = False
 
 		# Button Labels
+		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Save"))
 		self["key_yellow"] = StaticText(_("Delete"))
 		self["key_blue"] = StaticText(_("Add"))
