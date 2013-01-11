@@ -422,6 +422,16 @@ def overwriteFunctions():
 		print("[pipzap] already initialized, aborting.")
 		return
 
+	global ChannelContextMenu, ChannelSelection, ChannelSelectionBase
+	try:
+		from Plugins.Extensions.AdvancedChannelSelection import plugin
+	except ImportError as ie:
+		pass
+	else:
+		if config.plugins.AdvancedChannelSelection.enabled.value:
+			print("[pipzap] ACS is installed and activated, ugly just invited scary to the party xD")
+			from Plugins.Extensions.AdvancedChannelSelection.ChannelSelection import ChannelContextMenu, ChannelSelection, ChannelSelectionBase
+
 	baseMethods.ChannelContextMenu__init__ = ChannelContextMenu.__init__
 	ChannelContextMenu.__init__ = ChannelContextMenu___init__
 

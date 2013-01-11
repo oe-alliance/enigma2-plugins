@@ -57,15 +57,10 @@ class ScreenPage(resource.Resource):
 		elif os_path.isdir(path) and self.addSlash is True:
 			uri = "%s/" % (request.path)
 			request.redirect(uri)
-			request.finish()
 			return "";
 
 		else:
-			request.setResponseCode(http.NOT_FOUND)
-			request.write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n')
-			request.write("<html><head><title>Enigma2 WebControl</title></head><body><h1>404 - Page not found</h1></body></html>")
-			request.finish()
-			return "";
+			return resource.ErrorPage(http.NOT_FOUND, "Error 404 - Page not found", "The requested resource is not available").render(request);
 
 		return server.NOT_DONE_YET
 

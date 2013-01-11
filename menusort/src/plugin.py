@@ -77,18 +77,17 @@ class MenuWeights:
 			self.weights[text] = (weight, hidden)
 
 	def save(self):
-		list = ['<?xml version="1.0" ?>\n<menusort>\n\n']
-		append = list.append
-		extend = list.extend
+		lst = ['<?xml version="1.0" ?>\n<menusort>\n\n']
+		append = lst.append
+		extend = lst.extend
 
 		for text, values in iteritems(self.weights):
 			weight, hidden = values
 			extend((' <entry text="', stringToXML(str(text)), '" weight="', str(weight), '" hidden="', "yes" if hidden else "no", '"/>\n'))
 		append('\n</menusort>\n')
 
-		file = open(XML_CONFIG, 'w')
-		file.writelines(list)
-		file.close()
+		with open(XML_CONFIG, 'w') as config:
+			config.writelines(lst)
 
 	def isHidden(self, tuple):
 		weight, hidden = self.weights.get(tuple[0], (tuple[3], False))

@@ -229,6 +229,7 @@ var RequestCounter = {
 	}
 };
 
+var global_sessionid = "0";
 var AjaxThing = Class.create({
 	/**
 	 * getUrl
@@ -240,6 +241,10 @@ var AjaxThing = Class.create({
 	 * @errorback - function to call @ onError;
 	 */
 	getUrl: function(url, parms, callback, errorback){
+		if(parms == undefined)
+			parms = {}
+		parms['sessionid'] = global_sessionid;
+
 		debug("[AjaxThing].getUrl :: url=" + url + " :: parms=" + Object.toJSON(parms));
 		try{
 			RequestCounter.change(1);
@@ -282,7 +287,6 @@ var AjaxThing = Class.create({
 		}
 	}
 });
-
 
 var TemplateEngine = Class.create(AjaxThing, {
 	initialize: function(){
@@ -457,7 +461,7 @@ function EPGEvent(xml, number){
 		return this.serviceName;
 	};
 	this.isMarker = function(){
-		return this.serviceRef.startsWith("1:64:0:0:0:0:0:0:0:0");
+		return this.serviceRef.startsWith("1:64:");
 	};
 
 	this.json = {
@@ -681,7 +685,7 @@ function Service(xml, cssclass){
 	}
 
 	this.isMarker = function(){
-		return this.getClearServiceReference().startsWith("1:64:0:0:0:0:0:0:0:0");
+		return this.getClearServiceReference().startsWith("1:64:");
 	};
 
 	this.json = {
@@ -1414,6 +1418,21 @@ var ExternalList = Class.create({
 
 	getArray: function(){
 		return this.list;
+	}
+});
+
+var WebSession = Class.create({
+	initialize: function(xml){
+		this.session = this.parse(xml);
+	},
+
+	parse: function(xml){
+		var session = getNodeContent(xml, "e2sessionid");
+		return session;
+	},
+
+	get: function(){
+		return this.session;
 	}
 });
 //END class Volume

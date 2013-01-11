@@ -1048,6 +1048,8 @@ var E2WebCore = Class.create({
 		this.subMode = "";
 
 		//create required Instances
+		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
+
 		this.bouquets = new Bouquets('contentBouquets', 'contentMain');
 		this.current = new Current('currentContent', 'volContent');
 		this.externals = new Externals('navExternalsContainer');
@@ -1067,9 +1069,9 @@ var E2WebCore = Class.create({
 		this.volume = new Volume('volContent');
 
 		this.currentData = {};
-		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
+		this.currentLocation = "";
 		this.currentTag = "";
-		this.deviceInfo = this.simplepages.getDeviceInfo(function(info){this.deviceInfo = info;}.bind(this));
+		this.deviceInfo = "";
 
 		this.navlut = {
 			'tv': {
@@ -1311,6 +1313,16 @@ var E2WebCore = Class.create({
 
 	run: function(){
 		debug("[E2WebCore].run");
+		this.sessionProvider.load({});
+	},
+
+	onSessionAvailable: function(sid){
+		debug("[E2WebCore].onSessionAvailable, " + sid)
+		global_sessionid = sid;
+
+		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
+		this.deviceInfo = this.simplepages.getDeviceInfo(function(info){this.deviceInfo = info;}.bind(this));
+
 		if( parseNr(userprefs.data.updateCurrentInterval) < 10000){
 			userprefs.data.updateCurrentInterval = 120000;
 			userprefs.save();
@@ -1342,6 +1354,10 @@ var E2WebCore = Class.create({
 		}
 		this.updateItems();
 		this.startUpdateCurrentPoller();
+	},
+
+	onSessionFailed: function(transport){
+		this.notify("FATAL ERROR! NO SESSION!", true)
 	},
 
 	onAjaxRequestCountChanged: function(count){

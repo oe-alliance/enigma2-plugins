@@ -787,9 +787,15 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		var eMinutes = this.numericalOptionList(0, 59, end.getMinutes());
 
 		var actions = this.ACTIONS;
+		for (var i = 0; i < actions.length; i++) {
+			delete actions[i].selected;
+		}
 		actions[t.justplay].selected = this.SELECTED;
 
 		var afterevents = this.AFTEREVENTS;
+		for (var i = 0; i < afterevents.length; i++) {
+			delete afterevents[i].selected;
+		}
 		afterevents[t.afterevent].selected = this.SELECTED;
 
 		var repeated = this.repeatedDaysList(t.repeated);

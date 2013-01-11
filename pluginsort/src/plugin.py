@@ -135,9 +135,9 @@ class PluginWeights:
 					self.plugins.setdefault(whereid, {})[name] = weight
 
 	def save(self):
-		list = ['<?xml version="1.0" ?>\n<pluginsort>\n\n']
-		append = list.append
-		extend = list.extend
+		lst = ['<?xml version="1.0" ?>\n<pluginsort>\n\n']
+		append = lst.append
+		extend = lst.extend
 
 		idmap = reverse(WHEREMAP)
 		for key in self.plugins.keys():
@@ -152,9 +152,8 @@ class PluginWeights:
 			append((' </where>\n'))
 		append('\n</pluginsort>\n')
 		
-		file = open(XML_CONFIG, 'w')
-		file.writelines(list)
-		file.close()
+		with open(XML_CONFIG, 'w') as config:
+			config.writelines(lst)
 
 	def get(self, plugin):
 		for x in plugin.where:
