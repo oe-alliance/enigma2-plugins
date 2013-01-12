@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 742 $
-$Date: 2013-01-08 17:00:08 +0100 (Di, 08. Jan 2013) $
-$Id: plugin.py 742 2013-01-08 16:00:08Z michael $
+$Revision: 745 $
+$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $
+$Id: plugin.py 745 2013-01-12 16:04:44Z michael $
 '''
 
 from Screens.Screen import Screen
@@ -94,6 +94,7 @@ config.plugins.FritzCall.timeout = ConfigInteger(default=15, limits=(0, 60))
 config.plugins.FritzCall.lookup = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.internal = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.fritzphonebook = ConfigEnableDisable(default=False)
+config.plugins.FritzCall.fritzphonebookName = ConfigText(default='Dreambox', fixed_size=False)
 config.plugins.FritzCall.phonebook = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.addcallers = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.enable = ConfigEnableDisable(default=False)
@@ -297,8 +298,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 742 $"[1:-2] + "\n" + 
-							"$Date: 2013-01-08 17:00:08 +0100 (Di, 08. Jan 2013) $"[1:23] + "\n"
+							"$Revision: 745 $"[1:-2] + "\n" + 
+							"$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -309,8 +310,6 @@ class FritzAbout(Screen):
 
 	def exit(self):
 		self.close()
-
-fritzbox = None
 
 from FritzCallFBF import FBF_dectActive, FBF_faxActive, FBF_rufumlActive, FBF_tamActive
 
@@ -1705,7 +1704,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 742 $"[1: - 1] + "$Date: 2013-01-08 17:00:08 +0100 (Di, 08. Jan 2013) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 745 $"[1: - 1] + "$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1745,6 +1744,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			self.list.append(getConfigListEntry(_("Extension number to initiate call on"), config.plugins.FritzCall.extension))
 			self.list.append(getConfigListEntry(_("Read PhoneBook from FRITZ!Box"), config.plugins.FritzCall.fritzphonebook))
 			if config.plugins.FritzCall.fritzphonebook.value:
+				self.list.append(getConfigListEntry(_("FRITZ!Box PhoneBook to read"), config.plugins.FritzCall.fritzphonebookName))
 				self.list.append(getConfigListEntry(_("Append type of number"), config.plugins.FritzCall.showType))
 				self.list.append(getConfigListEntry(_("Append shortcut number"), config.plugins.FritzCall.showShortcut))
 				self.list.append(getConfigListEntry(_("Append vanity name"), config.plugins.FritzCall.showVanity))
@@ -2211,7 +2211,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 742 $"[1:-1]	+ "$Date: 2013-01-08 17:00:08 +0100 (Di, 08. Jan 2013) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 745 $"[1:-1]	+ "$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

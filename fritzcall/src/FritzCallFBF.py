@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 742 $
-$Date: 2013-01-08 17:00:08 +0100 (Di, 08. Jan 2013) $
-$Id: FritzCallFBF.py 742 2013-01-08 16:00:08Z michael $
+$Revision: 745 $
+$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $
+$Id: FritzCallFBF.py 745 2013-01-12 16:04:44Z michael $
 '''
 
 from . import _, __, debug #@UnresolvedImport # pylint: disable=E0611,F0401
@@ -82,6 +82,7 @@ class FritzCallFBF:
 		self.readBlacklist()
 		self.phonebook = None
 		self._phoneBookID = 0
+		self.phonebooksFBF = []
 
 	def _notify(self, text):
 		debug("[FritzCallFBF] notify: " + text)
@@ -292,7 +293,7 @@ class FritzCallFBF:
 			#  Photo could be fetched with http://192.168.0.1/lua/photo.lua?photo=<Path to picture[7:]&sid=????
 			#===============================================================================
 			debug("[FritzCallFBF] _parseFritzBoxPhonebook: discovered newer firmware")
-			found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name\d+" value="(?:[dD]reambox|FritzCall)" id="uiPostPhonebookName\d+" disabled>\s*<input type="hidden" name="telcfg:settings/Phonebook/Books/Id\d+" value="(\d+)" id="uiPostPhonebookId\d+" disabled>', html, re.S)
+			found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name\d+" value="(?:' + config.plugins.FritzCall.fritzphonebookName.value +')" id="uiPostPhonebookName\d+" disabled>\s*<input type="hidden" name="telcfg:settings/Phonebook/Books/Id\d+" value="(\d+)" id="uiPostPhonebookId\d+" disabled>', html, re.S)
 			if found:
 				phoneBookID = found.group(1)
 				debug("[FritzCallFBF] _parseFritzBoxPhonebook: found dreambox phonebook with id: " + phoneBookID)
@@ -1108,6 +1109,7 @@ class FritzCallFBF_05_50:
 		self.phonebook = None
 		self.getInfo(None)
 		# self.readBlacklist() now in getInfo
+		self.phonebooksFBF = []
 
 	def _notify(self, text):
 		debug("[FritzCallFBF_05_50] notify: " + text)
@@ -1284,7 +1286,7 @@ class FritzCallFBF_05_50:
 	def _loadFritzBoxPhonebook(self, html):
 		# Firmware 05.27 onwards
 		# look for phonebook called [dD]reambox and get bookid
-		found = re.match('.*<label for="uiBookid:([\d]+)">([dD]reambox|FritzCall)', html, re.S)
+		found = re.match('.*<label for="uiBookid:([\d]+)">' + config.plugins.FritzCall.fritzphonebookName.value, html, re.S)
 		if found:
 			bookid = found.group(1)
 		else:
@@ -1793,6 +1795,7 @@ class FritzCallFBF_05_27:
 		self.phonebook = None
 		self.getInfo(None)
 		# self.readBlacklist() now in getInfo
+		self.phonebooksFBF = []
 
 	def _notify(self, text):
 		debug("[FritzCallFBF_05_27] notify: " + text)
@@ -1965,7 +1968,7 @@ class FritzCallFBF_05_27:
 	def _loadFritzBoxPhonebook(self, html):
 		# Firmware 05.27 onwards
 		# look for phonebook called [dD]reambox and get bookid
-		found = re.match('.*<label for="uiBookid:([\d]+)">([dD]reambox|FritzCall)', html, re.S)
+		found = re.match('.*<label for="uiBookid:([\d]+)">' + config.plugins.FritzCall.fritzphonebookName.value, html, re.S)
 		if found:
 			bookid = found.group(1)
 			debug("[FritzCallFBF_05_27] _loadFritzBoxPhonebook: found dreambox phonebook %s" % (bookid))
@@ -1986,7 +1989,7 @@ class FritzCallFBF_05_27:
 
 	def _parseFritzBoxPhonebook(self, html):
 		debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew")
-		found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name\d+" value="([dD]reambox|FritzCall)" id="uiPostPhonebookName\d+" disabled>\s*<input type="hidden" name="telcfg:settings/Phonebook/Books/Id\d+" value="(\d+)" id="uiPostPhonebookId\d+" disabled>', html, re.S)
+		found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name\d+" value="' + config.plugins.FritzCall.fritzphonebookName.value +'" id="uiPostPhonebookName\d+" disabled>\s*<input type="hidden" name="telcfg:settings/Phonebook/Books/Id\d+" value="(\d+)" id="uiPostPhonebookId\d+" disabled>', html, re.S)
 		if found:
 			phoneBookID = found.group(1)
 			debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: found dreambox phonebook with id: " + phoneBookID)
