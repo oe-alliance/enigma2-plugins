@@ -45,7 +45,7 @@ config.plugins.imdb.force_english = ConfigYesNo(default=False)
 
 def quoteEventName(eventName, safe="/()" + ''.join(map(chr,range(192,255)))):
 	# BBC uses '\x86' markers in program names, remove them
-	text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('latin-1','ignore')
+	text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('utf8')
 	# IMDb doesn't seem to like urlencoded characters at all, hence the big "safe" list
 	return quote_plus(text, safe=safe)
 
@@ -197,7 +197,6 @@ class IMDB(Screen):
 		else:
 			self.close()
 
-	event_quoted = property(lambda self: quote_plus(self.eventName,"äöüÄÖÜß()"))
 
 	def dictionary_init(self):
 		syslang = language.getLanguage()
@@ -413,9 +412,8 @@ class IMDB(Screen):
 					self.eventName = self.eventName[:-1]
 		if self.eventName:
 			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
-			event_quoted = quoteEventName(self.eventName)
 			localfile = "/tmp/imdbquery.html"
-			fetchurl = "http://imdb.com/find?q=" + self.event_quoted + "&s=tt&site=aka"
+			fetchurl = "http://imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
 			print("[IMDB] getIMDB() Downloading Query " + fetchurl + " to " + localfile)
 			download = downloadWithProgress(fetchurl,localfile)
 			download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
@@ -477,7 +475,7 @@ class IMDB(Screen):
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.resultlist[0][0],))
 					self.eventName = self.resultlist[0][1]
 					localfile = "/tmp/imdbquery.html"
-					fetchurl = "http://imdb.com/find?q=" + self.event_quoted + "&s=tt&site=aka"
+					fetchurl = "http://imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
 					download = downloadWithProgress(fetchurl,localfile)
 					download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
 				elif Len > 1:
@@ -491,9 +489,9 @@ class IMDB(Screen):
 				if splitpos > 0 and self.eventName.endswith(')'):
 					self.eventName = self.eventName[splitpos+1:-1]
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.eventName))
-					event_quoted = quoteEventName(self.eventName)
+					# event_quoted = quoteEventName(self.eventName)
 					localfile = "/tmp/imdbquery.html"
-					fetchurl = "http://imdb.com/find?q=" + self.event_quoted + "&s=tt&site=aka"
+					fetchurl = "http://imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
 					download = downloadWithProgress(fetchurl,localfile)
 					download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
 				else:
