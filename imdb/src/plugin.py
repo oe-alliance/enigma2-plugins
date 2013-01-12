@@ -413,7 +413,7 @@ class IMDB(Screen):
 					self.eventName = self.eventName[:-1]
 		if self.eventName:
 			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
-			self.event_quoted = quoteEventName(self.eventName)
+			event_quoted = quoteEventName(self.eventName)
 			localfile = "/tmp/imdbquery.html"
 			fetchurl = "http://imdb.com/find?q=" + self.event_quoted + "&s=tt&site=aka"
 			print("[IMDB] getIMDB() Downloading Query " + fetchurl + " to " + localfile)
