@@ -7,12 +7,12 @@ from enigma import RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent,
 	eServiceReference, eServiceCenter, gFont
 from Tools.LoadPixmap import LoadPixmap
 EXTENSIONS = {
-"m4a": "music",
 		"m4a": "music",
 		"mp2": "music",
 		"mp3": "music",
 		"wav": "music",
 		"ogg": "music",
+		"wma": "music",		
 		"flac": "music",
 		"m3u": "music",
 		"pls": "music",

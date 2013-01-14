@@ -62,7 +62,7 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 			currDir = "/"
 		self["currentfolder"].setText(str(currDir))
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib" , "/proc", "/ram", "/root" , "/sbin", "/sys", "/tmp", "/usr", "/var"]
-		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(ts|vob|mpg|mpeg|avi|mkv|dat|iso|mp4|flv|divx|mov|wmv|m2ts)", inhibitDirs = inhibitDirs,)
+		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(ts|vob|mpg|mpeg|avi|mkv|dat|iso|mp4|flv|divx|mov|wmv|m2ts|m4v)", inhibitDirs = inhibitDirs,)
 		self["filelist"] = self.filelist
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 			{
