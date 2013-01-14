@@ -19,6 +19,7 @@ from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
+from Components.Sources.Boolean import Boolean
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 import re
@@ -34,7 +35,7 @@ except ImportError as ie:
 import os, gettext
 
 # Configuration
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigText
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -42,6 +43,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 config.plugins.imdb = ConfigSubsection()
 config.plugins.imdb.showinplugins = ConfigYesNo(default = False)
 config.plugins.imdb.force_english = ConfigYesNo(default=False)
+config.plugins.imdb.ignore_tags = ConfigText(default='')
 
 def quoteEventName(eventName, safe="/()" + ''.join(map(chr,range(192,255)))):
 	# BBC uses '\x86' markers in program names, remove them
@@ -130,6 +132,9 @@ class IMDB(Screen):
 
 	def __init__(self, session, eventName, callbackNeeded=False):
 		Screen.__init__(self, session)
+
+		for tag in config.plugins.imdb.ignore_tags.getValue().split(','):
+			eventName = eventName.replace(tag,'')
 
 		self.eventName = eventName
 
@@ -411,7 +416,7 @@ class IMDB(Screen):
 				if self.eventName.endswith(' '):
 					self.eventName = self.eventName[:-1]
 		if self.eventName:
-			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
+			self["statusbar"].setText(_("Query IMDb: %s") % (self.eventName))
 			localfile = "/tmp/imdbquery.html"
 			fetchurl = "http://imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt&site=aka"
 			print("[IMDB] getIMDB() Downloading Query " + fetchurl + " to " + localfile)
@@ -643,67 +648,124 @@ class IMDbSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.skinName = ["Setup" ]
+
+		self['footnote'] = Label(_("* = Restart Required"))
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
+		self["VKeyIcon"] = Boolean(False)
 
 		# Summary
 		self.setup_title = _("IMDb Setup")
 		self.onChangedEntry = []
 
-		ConfigListScreen.__init__(
-			self,
-			[
-				getConfigListEntry(_("Show in plugin browser"), config.plugins.imdb.showinplugins, _("Enable this to be able to access the IMDb from within the plugin browser.")),
-			],
-			session = session,
-			on_change = self.changed
-		)
-		def selectionChanged():
-			if self["config"].current:
-				self["config"].current[1].onDeselect(self.session)
-			self["config"].current = self["config"].getCurrent()
-			if self["config"].current:
-				self["config"].current[1].onSelect(self.session)
-			for x in self["config"].onSelectionChanged:
-				x()
-		self["config"].selectionChanged = selectionChanged
-		self["config"].onSelectionChanged.append(self.updateHelp)
-
 		# Initialize widgets
 		self["key_green"] = StaticText(_("OK"))
 		self["key_red"] = StaticText(_("Cancel"))
-		self["help"] = StaticText()
+		self["description"] = Label("")
 
 		# Define Actions
 		self["actions"] = ActionMap(["SetupActions"],
 			{
 				"cancel": self.keyCancel,
-				"save": self.Save,
-			}
-		)
+				"save": self.keySave,
+			}, -2)
 
-		# Trigger change
-		self.changed()
+		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
+		{
+			"showVirtualKeyboard": self.KeyText,
+		}, -2)
+		self["VirtualKB"].setEnabled(False)
 
-		self.onLayoutFinish.append(self.setCustomTitle)
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		self.createSetup()
+		if not self.handleInputHelpers in self["config"].onSelectionChanged:
+			self["config"].onSelectionChanged.append(self.handleInputHelpers)
+		self.changedEntry()
+		self.onLayoutFinish.append(self.layoutFinished)
 
-	def setCustomTitle(self):
-		self.setTitle(_("IMDb Setup"))
+	def createSetup(self):
+		self.list = []
+		self.list.append(getConfigListEntry(_("Show in plugin browser"), config.plugins.imdb.showinplugins, _("Enable this to be able to access the IMDb from within the plugin browser.")))
+		self.list.append(getConfigListEntry(_("Words/pharse's to ingore"), config.plugins.imdb.ignore_tags, _("This option allows you add words/phrases for IMDb to ignore when searching. please seperaate with a comma")))
+		self["config"].list = self.list
+		self["config"].l.setList(self.list)
 
-	def updateHelp(self):
-		cur = self["config"].getCurrent()
-		if cur:
-			self["help"].text = cur[2]
+	def handleInputHelpers(self):
+		if self["config"].getCurrent() is not None:
+			try:
+				if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+					if self.has_key("VKeyIcon"):
+						self["VirtualKB"].setEnabled(True)
+						self["VKeyIcon"].boolean = True
+					if self.has_key("HelpWindow"):
+						if self["config"].getCurrent()[1].help_window.instance is not None:
+							helpwindowpos = self["HelpWindow"].getPosition()
+							from enigma import ePoint
+							self["config"].getCurrent()[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
+				else:
+					if self.has_key("VKeyIcon"):
+						self["VirtualKB"].setEnabled(False)
+						self["VKeyIcon"].boolean = False
+			except:
+				if self.has_key("VKeyIcon"):
+					self["VirtualKB"].setEnabled(False)
+					self["VKeyIcon"].boolean = False
+		else:
+			if self.has_key("VKeyIcon"):
+				self["VirtualKB"].setEnabled(False)
+				self["VKeyIcon"].boolean = False
 
-	def changed(self):
+	def HideHelp(self):
+		try:
+			if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+				if self["config"].getCurrent()[1].help_window.instance is not None:
+					self["config"].getCurrent()[1].help_window.hide()
+		except:
+			pass
+
+	def KeyText(self):
+		if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+			if self["config"].getCurrent()[1].help_window.instance is not None:
+				self["config"].getCurrent()[1].help_window.hide()
+		from Screens.VirtualKeyBoard import VirtualKeyBoard
+		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
+
+	def VirtualKeyBoardCallback(self, callback = None):
+		if callback is not None and len(callback):
+			self["config"].getCurrent()[1].setValue(callback)
+			self["config"].invalidate(self["config"].getCurrent())
+
+	def layoutFinished(self):
+		self.setTitle(_(self.setup_title))
+
+	# for summary:
+	def changedEntry(self):
+		self.item = self["config"].getCurrent()
 		for x in self.onChangedEntry:
 			x()
+		try:
+			if isinstance(self["config"].getCurrent()[1], ConfigYesNo) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
+				self.createSetup()
+		except:
+			pass
 
 	def getCurrentEntry(self):
-		return self["config"].getCurrent()[0]
+		return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
 
 	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[0])
+		return self["config"].getCurrent() and str(self["config"].getCurrent()[1].getText()) or ""
 
-	def Save(self):
+	def getCurrentDescription(self):
+		return self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or ""
+
+	def createSummary(self):
+		from Screens.Setup import SetupSummary
+		return SetupSummary
+
+
+	def keySave(self):
 		self.saveAll()
 		if not config.plugins.imdb.showinplugins.value:
 			for plugin in plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU):
