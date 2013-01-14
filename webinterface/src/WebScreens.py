@@ -430,3 +430,11 @@ class SessionWebScreen(WebScreen):
 
 		from WebComponents.Sources.WebSession import WebSession
 		self["Session"] = WebSession(request)
+
+class BackupWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session. request, allow_GET = False)
+
+		from WebComponents.Sources.Backup import Backup
+		self["Backup"] = Backup(Backup.BACKUP)
+		self["Restore"] = Backup(Backup.RESTORE)
