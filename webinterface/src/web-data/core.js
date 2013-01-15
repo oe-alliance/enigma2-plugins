@@ -564,6 +564,8 @@ var RemoteControl = Class.create({
 			switch(core.deviceInfo.info.devicename){
 			case 'dm8000':
 			case 'dm7020hd':
+			case 'dm800sev2':
+			case 'dm500hdv2':
 				tpl = 'tplWebRemote';
 				break;
 			default:
