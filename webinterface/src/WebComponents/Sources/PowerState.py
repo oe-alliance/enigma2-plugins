@@ -27,6 +27,7 @@ class PowerState(Source):
 		# 3: rebootenigma
 		# 4: wakeup (if not already awake)
 		# 5: standby
+		# 6: kill enigma2
 		try:
 			from Screens.Standby import inStandby
 			from Screens.Standby import Standby
@@ -57,6 +58,12 @@ class PowerState(Source):
 					return "true"
 				else:
 					return "false"
+			elif type == 6:
+				print "[PowerState.py] Standby 6"
+				from twisted.internet import reactor
+				import os
+				reactor.callLater(1, os.popen, 'killall -9 enigma2')
+				return "true"
 
 			elif 0 < type < 4:
 				print "[PowerState.py] TryQuitMainloop"
