@@ -1,9 +1,9 @@
 from enigma import eServiceReference, iServiceInformation, eServiceCenter
 from Components.Sources.Source import Source
+from Components.config import config, ConfigLocations
 try:
 	from Plugins.SystemPlugins.SoftwareManager import BackupRestore
 except ImportError as ie:
-	from Components.config import config
 	from enigma import eEnv
 	# defaults from BackupRestore
 	backupdirs = ConfigLocations(default=[eEnv.resolve('${sysconfdir}/enigma2/'), '/etc/network/interfaces', '/etc/wpa_supplicant.conf', '/etc/wpa_supplicant.ath0.conf', '/etc/wpa_supplicant.wlan0.conf', '/etc/resolv.conf', '/etc/default_gw', '/etc/hostname'])
@@ -28,7 +28,7 @@ class Backup(Source):
 		Source.__init__(self)
 		self.func = func
 		self.command = None
-		self.res = ( False, _("Missing or Wrong Argument") )
+		self.result = ( False, _("Missing or Wrong Argument") )
 
 	def handleCommand(self, cmd):
 		if self.func is self.BACKUP:
@@ -43,8 +43,8 @@ class Backup(Source):
 		  This basically guesses which compression to use.
 		  No real intelligence here, just keeps some ugliness out of sight.
 		"""
-		isGz = filename.endswith((".tar.gz", ".tgz"))
-		isBz2 = filename.endswith((".tar.bz2", ".tbz2"))
+		isGz = tarname.endswith((".tar.gz", ".tgz"))
+		isBz2 = tarname.endswith((".tar.bz2", ".tbz2"))
 		if tarfile:
 			return 'gz' if isGz else 'bz2' if isBz2 else ''
 		else:
@@ -69,7 +69,7 @@ class Backup(Source):
 	def backupFiles(self, filename):
 		if not filename:
 			filename = self.BACKUP_FILENAME
-		invalidCharacters = re_compile(r'[^A-Za-z0-9_. ]+|^\.|\.$|^ | $|^$')
+		invalidCharacters = re_compile(r'[^A-Za-z0-9_\. ]+|^\.|\.$|^ | $|^$')
 		tarFilename = "%s.tar" % invalidCharacters.sub('_', filename)
 		backupFilename = path.join(self.BACKUP_PATH, tarFilename)
 		if path.exists(backupFilename):
@@ -97,5 +97,4 @@ class Backup(Source):
 		ret = self.unpackTarFile(filename)
 		if ret[0]:
 			remove(filename)
-		# XXX: we should force-reboot here
 		return ret
