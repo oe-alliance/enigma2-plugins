@@ -32,7 +32,7 @@ class FileStreamer(resource.Resource):
 
 				request.setHeader("content-disposition", "attachment;filename=\"%s\"" % (basename))
 				file = static.File(path, defaultType = "application/octet-stream")
-				return file.render(request)
+				return file.render_GET(request)
 
 			else:
 				request.setResponseCode(http.OK)
