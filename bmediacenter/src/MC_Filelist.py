@@ -259,10 +259,10 @@ def MultiFileSelectEntryComponent(name, absolute = None, isDir = False, selected
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 30, 2, 20, 20, png))
 	if not name.startswith('<'):
 		if selected is False:
-			icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_off.png"))
+			icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_off.png"))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 0, 25, 25, icon))
 		else:
-			icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_on.png"))
+			icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_on.png"))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 0, 25, 25, icon))
 	return res
 class MultiFileSelectList(FileList):
