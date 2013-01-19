@@ -35,7 +35,7 @@ class FileStreamer(resource.Resource):
 				return file.render_GET(request)
 
 			else:
-				request.setResponseCode(http.OK)
+				request.setResponseCode(http.NOT_FOUND)
 				return "file '%s' was not found" %(dir + filename)
 		else:
 			request.setResponseCode(http.OK)
