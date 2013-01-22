@@ -58,7 +58,7 @@ def main(session,**kwargs):
 	session.open(MSNWeatherPlugin)
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name=_("Weather Plugin"), description=_("Show Weather Forecast"), where = [PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main)]
+	list = [PluginDescriptor(name=_("Weather Plugin"), description=_("Show Weather Forecast"), where = [PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU], icon = "weather.png", fnc=main)]
 	return list
 
 class MSNWeatherPlugin(Screen):
