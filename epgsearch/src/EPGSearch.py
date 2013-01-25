@@ -124,6 +124,7 @@ class EPGSearch(EPGSelection):
 		self.type = EPG_TYPE_SINGLE
 		self.currentService=None
 		self.zapFunc = None
+		self.currch = None
 		self.sort_type = 0
 		self["key_red"] = Button(_("IMDb Search"))
 		self["key_green"] = Button(_("Add timer"))
@@ -212,7 +213,7 @@ class EPGSearch(EPGSelection):
 		cur = self["list"].getCurrent()
 		self.currentService = cur[1]
 		if config.epgselection.OKLong_enhanced.value == "Zap":
-			self.ZapTo()
+			self.zapTo()
 		elif config.epgselection.OKLong_enhanced.value == "Zap + Exit":
 			self.zap()
 		else:
