@@ -62,7 +62,7 @@ class Seekbar(ConfigListScreen, Screen):
 		if isinstance(session.current_dialog, MoviePlayer):
 			self.dvd = False
 			self.vdb = False
-		elif isinstance(session.current_dialog, DVDPlayer):
+		elif DVDPlayer is not None and isinstance(session.current_dialog, DVDPlayer):
 			self.dvd = True
 			self.vdb = False
 		else:
@@ -189,6 +189,8 @@ if fileExists(dvdPlayer) or fileExists("%sc"%dvdPlayer):
 	from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
 	DVDPlayer.seekFwdManual = seekbar
 	DVDPlayer.seekBackManual = seekbarBack
+else:
+	DVDPlayer = None
 
 videodb = "%s%s"%(resolveFilename(SCOPE_PLUGINS), "Extensions/VideoDB/plugin.py")
 if fileExists(videodb):
