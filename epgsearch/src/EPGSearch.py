@@ -202,7 +202,7 @@ class EPGSearch(EPGSelection):
 		cur = self["list"].getCurrent()
 		self.currentService = cur[1]
 		if config.epgselection.OK_enhanced.value == "Zap":
-			self.ZapTo()
+			self.zapTo()
 		elif config.epgselection.OK_enhanced.value == "Zap + Exit":
 			self.zap()
 		else:
