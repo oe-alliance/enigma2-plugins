@@ -847,11 +847,14 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 			if(decodeURIComponent(service.servicereference) == timer.servicereference){
 				service['selected'] = 'selected';
 				serviceFound = true;
-			}else{
+			} else if (decodeURIComponent(service.servicereference)
+				   .startsWith("1:64:")) {
+				service['selected'] = 'disabled';
+			} else {
 				service['selected'] = '';
 			}
 		}.bind(this));
-		if(!serviceFound){
+		if ((timer.servicereference != "") && !serviceFound) {
 			services.push( {'servicereference' : timer.servicereference, 'servicename' : timer.servicename, 'selected' : 'selected'});
 		}
 
