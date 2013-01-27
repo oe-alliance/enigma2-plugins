@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 #   This file is part of periscope.
 #
@@ -22,7 +22,7 @@ import logging
 import os
 import pickle
 from xml.dom import minidom
-from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import toOpenSubtitles_two
+from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import languageTranslate#, toOpenSubtitles_two
 
 from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
 
@@ -80,7 +80,8 @@ class BierDopje(SubtitleDatabase.SubtitleDB):
             elif x == "None":
                 pass
             else:
-                temp_lang.append(toOpenSubtitles_two(str(x)))
+                #temp_lang.append(toOpenSubtitles_two(str(x)))
+                temp_lang.append(languageTranslate(x, 0, 2))
         langs = temp_lang    
          #Convert subtitle language to plugin requirements
          

@@ -19,7 +19,7 @@
 import zipfile, os, urllib2, urllib, logging, traceback, httplib, re
 from Plugins.Extensions.SubsDownloader2.SourceCode.BeautifulSoup import BeautifulSoup
 from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
-from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import toOpenSubtitles_two
+from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import languageTranslate #toOpenSubtitles_two
 
 log = logging.getLogger(__name__)
 
@@ -71,7 +71,8 @@ class Subtitulos(SubtitleDatabase.SubtitleDB):
             elif x == "None":
                 pass
             else:
-                temp_lang.append(toOpenSubtitles_two(str(x)))
+                #temp_lang.append(toOpenSubtitles_two(str(x)))
+                temp_lang.append(languageTranslate(x, 0, 2))                
         langs = temp_lang
         #Convert subtitle language to plugin requirements
         

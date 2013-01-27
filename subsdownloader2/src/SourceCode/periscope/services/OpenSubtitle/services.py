@@ -20,7 +20,7 @@
 import socket # For timeout purposes
 from Plugins.Extensions.SubsDownloader2.SourceCode import xmlrpclib
 import os, struct, commands, traceback, logging
-from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import toOpenSubtitles_two
+
 #from Screens.MessageBox import MessageBox
 #from Screens.Screen import Screen
 
@@ -31,8 +31,10 @@ from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities impo
 import gzip
 from Plugins.Extensions.SubsDownloader2.SourceCode.periscope import SubtitleDatabase
 
+#from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import toOpenSubtitles_two
+from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import LANGUAGES, languageTranslate
 
-OS_LANGS ={ "en": "eng", 
+"""OS_LANGS ={ "en": "eng", 
             "fr" : "fre", 
             "hu": "hun", 
             "cs": "cze", 
@@ -84,7 +86,13 @@ OS_LANGS ={ "en": "eng",
             "th":"tha",
             "tr":"tur",
             "uk":"ukr",
-            "vi":"vie"}
+            "vi":"vie"}"""
+
+OS_LANGS ={}   
+for x in LANGUAGES:
+  #languageTranslate(x[0], 0, 2)
+  #languageTranslate(x[0], 0, 3)
+  OS_LANGS.update({languageTranslate(x[0], 0, 2):languageTranslate(x[0], 0, 3)})
 
 class OpenSubtitle(SubtitleDatabase.SubtitleDB):
     url = "http://www.opensubtitles.org/"
@@ -108,7 +116,8 @@ class OpenSubtitle(SubtitleDatabase.SubtitleDB):
             elif x == "None":
                 pass
             else:
-                temp_lang.append(toOpenSubtitles_two(str(x)))
+                #temp_lang.append(toOpenSubtitles_two(str(x)))
+                temp_lang.append(languageTranslate(x, 0, 2))
         langs = temp_lang
         #Convert subtitle language to plugin requirements
         

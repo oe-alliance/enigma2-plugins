@@ -10,8 +10,10 @@ from Screens.MessageBox import MessageBox
 from Screens.Ipkg import Ipkg
 from Components.Ipkg import IpkgComponent
 
-zlib_link = "http://subs-downloader.googlecode.com/files/libzen_0.4.22-0.0_mipsel.ipk"
-libmediainfo_link = "http://subs-downloader.googlecode.com/files/libmediainfo_0.7.50-0.0_mipsel.ipk"
+zlib_link = "http://subs-downloader.googlecode.com/files/libzen_0.4.22-0.0_all.ipk"
+libmediainfo_link = "http://subs-downloader.googlecode.com/files/libmediainfo_0.7.50-0.0_all.ipk"
+unrar_link = "http://subs-downloader.googlecode.com/files/unrar_1.0.1_all.ipk"
+
 #flag_counter_url = "http://s10.flagcounter.com/count/gEB/bg_FFFFFF/txt_000000/border_CCCCCC/columns_9/maxflags_50/viewers_Plugin+Users/labels_1/pageviews_1/flags_0/"
 URL_text_file = "http://subs-downloader.googlecode.com/svn/commertial_banners.txt"
 Subtitle_Downloader_temp_dir = '/tmp/SubsDownloader_cache/'
