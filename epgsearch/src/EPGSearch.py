@@ -202,9 +202,9 @@ class EPGSearch(EPGSelection):
 	def epgsearchOK(self):
 		cur = self["list"].getCurrent()
 		self.currentService = cur[1]
-		if config.epgselection.OK_enhanced.value == "Zap":
+		if config.epgselection.enhanced_ok.getValue() == "Zap":
 			self.zapTo()
-		elif config.epgselection.OK_enhanced.value == "Zap + Exit":
+		elif config.epgselection.enhanced_ok.getValue() == "Zap + Exit":
 			self.zap()
 		else:
 			self.eventSelected()
@@ -212,9 +212,9 @@ class EPGSearch(EPGSelection):
 	def epgsearchOKLong(self):
 		cur = self["list"].getCurrent()
 		self.currentService = cur[1]
-		if config.epgselection.OKLong_enhanced.value == "Zap":
+		if config.epgselection.enhanced_oklong.getValue() == "Zap":
 			self.zapTo()
-		elif config.epgselection.OKLong_enhanced.value == "Zap + Exit":
+		elif config.epgselection.enhanced_oklong.getValue() == "Zap + Exit":
 			self.zap()
 		else:
 			self.eventSelected()
