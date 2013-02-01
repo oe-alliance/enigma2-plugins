@@ -237,7 +237,7 @@ class IMDB(Screen):
 			, re.DOTALL)
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genre:</h4>\s<div class="info-content">\s+?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
-			self.ratingmask = re.compile('="ratingValue">(?P<rating>.*?)</', re.DOTALL)
+			self.ratingmask = re.compile('="ratingValue">(?P<rating>\d.*?)</', re.DOTALL)
 			self.castmask = re.compile('<td class="name">\s*<a.*?>(?P<actor>.*?)</a>(?:.*?<td class="character">\s*<div>\s*(?:<a.*?>)?(?P<character>.*?)(?:</a>)?\s*(?P<additional>\(.*?\))?(?:</a>)?\s*</div>)?', re.DOTALL)
 			self.postermask = re.compile('<td .*?id="img_primary">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 
@@ -539,7 +539,8 @@ class IMDB(Screen):
 				rating = rating.group("rating")
 				if rating != '<span id="voteuser"></span>':
 					Ratingtext = _("User Rating") + ": " + rating + " / 10"
-					self.ratingstars = int(10*round(float(rating.replace(',','.')),1))
+					try: self.ratingstars = int(10*round(float(rating.replace(',','.')),1))
+					except ValueError: self.ratingstars = 0
 					self["stars"].show()
 					self["stars"].setValue(self.ratingstars)
 					self["starsbg"].show()
