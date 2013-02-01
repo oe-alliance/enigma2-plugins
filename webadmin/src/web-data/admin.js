@@ -138,6 +138,7 @@ var WebAdminCore = Class.create(E2WebCore, {
 		this.switchfeed = new SwitchFeedHandler();
 		this.memory = new MemoryHandler();
 		this.simples = new SimpleWebAdminPages('contentMain');
+		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
 
 		//create required Instances
 		this.navlut = {
@@ -152,7 +153,7 @@ var WebAdminCore = Class.create(E2WebCore, {
 			}
 		};
 	},
-						
+
 	searchPkg: function(){
 		var needle = hashListener.getHash().replace(/.+filter\=/,'');
 		if(needle != '')
@@ -162,8 +163,7 @@ var WebAdminCore = Class.create(E2WebCore, {
 	getMem: function(){
 		this.memory.getMem();
 	},
-	
-								
+
 	switchFeed: function(file){
 		this.switchfeed.load('/webadmin/web/feedonline', {'file' : file});
 	},
@@ -222,9 +222,16 @@ var WebAdminCore = Class.create(E2WebCore, {
 		debug("[WebAdminCore].loadDefault");
 		window.location.href='/webadmin/#!/ipk/installed';
 	},
-								
+
 	run: function(){
 		debug("[WebAdminCore].run");
+		this.sessionProvider.load({});
+	},
+
+	onSessionAvailable: function(sid){
+		debug("[WebAdminCore].onSessionAvailable, " + sid)
+		global_sessionid = sid;
+
 		if( parseNr(userprefs.data.updateCurrentInterval) < 10000){
 			userprefs.data.updateCurrentInterval = 120000;
 			userprefs.save();

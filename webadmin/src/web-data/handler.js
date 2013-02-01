@@ -1,7 +1,14 @@
+var AbstractAdminContentHandler = Class.create(AbstractContentHandler,  {
+	show: function(data){
+		this.data = data;
+		adminTemplateEngine.process(this.tpl, data, this.target, this.finished.bind(this));
+	}
+});
+
 /**
  * PkgNavHandler
  */
-var ScriptListHandler  = Class.create(AbstractContentHandler, {
+var ScriptListHandler  = Class.create(AbstractAdminContentHandler, {
 	initialize: function($super, target){
 		$super('tplScriptList', target);
 		this.provider = new ScriptListProvider(this.show.bind(this));
@@ -12,7 +19,7 @@ var ScriptListHandler  = Class.create(AbstractContentHandler, {
 /**
  * PkgNavHandler
  */
-var PkgConfListHandler  = Class.create(AbstractContentHandler, {
+var PkgConfListHandler  = Class.create(AbstractAdminContentHandler, {
 	initialize: function($super, target){
 		$super('tplPkgSettings', target);
 		this.provider = new PkgConfListProvider(this.show.bind(this));
@@ -23,7 +30,7 @@ var PkgConfListHandler  = Class.create(AbstractContentHandler, {
 /**
  * PkgListHandler
  */
-var PkgListHandler  = Class.create(AbstractContentHandler, {
+var PkgListHandler  = Class.create(AbstractAdminContentHandler, {
 	initialize: function($super, target){
 		$super('tplPkgList', target);
 		this.provider = new PkgListProvider(this.show.bind(this));
@@ -63,7 +70,7 @@ var PkgListHandler  = Class.create(AbstractContentHandler, {
 /**
  * PkgNavHandler
  */
-var PkgNavHandler = Class.create(AbstractContentHandler,{
+var PkgNavHandler = Class.create(AbstractAdminContentHandler,{
 	initialize: function($super, target){
 		$super('tplNavPkgs', target);
 	},
@@ -79,7 +86,7 @@ var PkgNavHandler = Class.create(AbstractContentHandler,{
  * SwitchFeedHandler
  * 
  */
-var SwitchFeedHandler  = Class.create(AbstractContentHandler, {
+var SwitchFeedHandler  = Class.create(AbstractAdminContentHandler, {
 	initialize: function(){
 		this.provider = new SimpleRequestProvider();
 	},
@@ -123,7 +130,7 @@ var SwitchFeedHandler  = Class.create(AbstractContentHandler, {
  * 
  */
 
-var MemoryHandler  = Class.create(AbstractContentHandler, {
+var MemoryHandler  = Class.create(AbstractAdminContentHandler, {
 	initialize: function(){
 		this.provider = new MemoryProvider(this.show.bind(this));
 	},

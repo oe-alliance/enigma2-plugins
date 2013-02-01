@@ -289,8 +289,9 @@ var AjaxThing = Class.create({
 });
 
 var TemplateEngine = Class.create(AjaxThing, {
-	initialize: function(){
+	initialize: function(tplUrl){
 		this.templates = {};
+		this.tplUrl = tplUrl;
 	},
 
 	cache: function(request, tplName){
@@ -300,7 +301,7 @@ var TemplateEngine = Class.create(AjaxThing, {
 
 	fetch: function(tplName, callback){
 		if(this.templates[tplName] === undefined) {
-			var url = URL.tpl + tplName + ".htm";
+			var url = this.tplUrl + tplName + ".htm";
 
 			this.getUrl(
 					url,
@@ -355,7 +356,7 @@ var TemplateEngine = Class.create(AjaxThing, {
 				}.bind(this) );
 	}
 });
-templateEngine = new TemplateEngine();
+var templateEngine = new TemplateEngine(URL.tpl);
 
 //START class EPGEvent
 function EPGEvent(xml, number){
