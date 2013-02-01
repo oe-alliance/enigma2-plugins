@@ -1,7 +1,8 @@
 # for localized messages
 from . import _
 
-from enigma import eEPGCache, eTimer, eServiceReference, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent
+from enigma import eEPGCache, eTimer, eServiceReference, eServiceCenter, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent
+import NavigationInstance
 
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
@@ -44,6 +45,7 @@ try:
 except ImportError:
 	autoTimerAvailable = False
 
+service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
 
 # Modified EPGSearchList with support for PartnerBox
 class EPGSearchList(EPGList):
@@ -203,22 +205,47 @@ class EPGSearch(EPGSelection):
 	def epgsearchOK(self):
 		cur = self["list"].getCurrent()
 		self.currentService = cur[1]
-		if config.epgselection.enhanced_ok.getValue() == "Zap":
-			self.zapTo()
-		elif config.epgselection.enhanced_ok.getValue() == "Zap + Exit":
-			self.zap()
-		else:
-			self.eventSelected()
+		self.zap()
 
 	def epgsearchOKLong(self):
-		cur = self["list"].getCurrent()
-		self.currentService = cur[1]
-		if config.epgselection.enhanced_oklong.getValue() == "Zap":
-			self.zapTo()
-		elif config.epgselection.enhanced_oklong.getValue() == "Zap + Exit":
-			self.zap()
-		else:
-			self.eventSelected()
+		self.eventSelected()
+
+	def zap(self):
+		from Screens.ChannelSelection import ChannelSelection
+		ChannelSelectionInstance = ChannelSelection.instance
+		self.service_types = service_types_tv
+		if ChannelSelectionInstance:
+			if config.usage.multibouquet.getValue():
+				bqrootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
+			else:
+				bqrootstr = '%s FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'%(self.service_types)
+			rootstr = ''
+			serviceHandler = eServiceCenter.getInstance()
+			rootbouquet = eServiceReference(bqrootstr)
+			bouquet = eServiceReference(bqrootstr)
+			bouquetlist = serviceHandler.list(bouquet)
+			if not bouquetlist is None:
+				while True:
+					bouquet = bouquetlist.getNext()
+					if bouquet.flags & eServiceReference.isDirectory:
+						ChannelSelectionInstance.clearPath()
+						ChannelSelectionInstance.setRoot(bouquet)
+						servicelist = serviceHandler.list(bouquet)
+						if not servicelist is None:
+							serviceIterator = servicelist.getNext()
+							while serviceIterator.valid():
+								if self.currentService.ref == serviceIterator:
+									break
+								serviceIterator = servicelist.getNext()
+							if self.currentService.ref == serviceIterator:
+								break
+				ChannelSelectionInstance.enterPath(rootbouquet)
+				ChannelSelectionInstance.enterPath(bouquet)
+				ChannelSelectionInstance.saveRoot()
+				ChannelSelectionInstance.saveChannel(self.currentService.ref)
+			ChannelSelectionInstance.addToHistory(self.currentService.ref)
+		NavigationInstance.instance.playService(self.currentService.ref)
+		self.close()
 
 	def yellowButtonPressed(self):
 		self.session.openWithCallback(
