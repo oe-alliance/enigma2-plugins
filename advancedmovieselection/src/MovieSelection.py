@@ -40,6 +40,10 @@ from AdvancedMovieSelectionSetup import AdvancedMovieSelectionSetup, AdvancedMov
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, fileExists, SCOPE_HDD, SCOPE_CURRENT_SKIN
 from enigma import eServiceReference, eSize, ePoint, eTimer, getDesktop, iServiceInformation
+try:
+	from Tools.Directories import SCOPE_ACTIVE_SKIN
+except:
+	pass	
 from Screens.Console import eConsoleAppContainer
 from ServiceProvider import ServiceEvent, ServiceCenter, Network
 from MoveCopy import MovieMove
@@ -639,7 +643,10 @@ class AdvancedMovieSelection_summary(Screen):
         self["ShortDesc"].setText(desc)
 
     def showSeperator(self):
-        self["Seperator"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "images/sep_lcd_oled.png"))
+        try:
+            self["Seperator"].setText(resolveFilename(SCOPE_ACTIVE_SKIN, "images/sep_lcd_oled.png"))
+        except:
+            self["Seperator"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/images/sep_lcd_oled.png"))
     
     def hideSeperator(self):
         self["Seperator"].setText("")    

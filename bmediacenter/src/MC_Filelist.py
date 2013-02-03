@@ -3,6 +3,10 @@ from os import path as os_path, listdir
 from Components.MenuList import MenuList
 from Components.Harddisk import harddiskmanager
 from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename, fileExists
+try:
+	from Tools.Directories import SCOPE_ACTIVE_SKIN
+except:
+	pass	
 from enigma import RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, \
 	eServiceReference, eServiceCenter, gFont
 from Tools.LoadPixmap import LoadPixmap
@@ -259,10 +263,16 @@ def MultiFileSelectEntryComponent(name, absolute = None, isDir = False, selected
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 30, 2, 20, 20, png))
 	if not name.startswith('<'):
 		if selected is False:
-			icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_off.png"))
+			try:
+				icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_off.png"))
+			except:
+				icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_off.png"))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 0, 25, 25, icon))
 		else:
-			icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_on.png"))
+			try:
+				icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "skin_default/icons/lock_on.png"))
+			except:
+				icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_on.png"))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 0, 25, 25, icon))
 	return res
 class MultiFileSelectList(FileList):

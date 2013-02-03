@@ -30,6 +30,10 @@ from ServiceProvider import DVDCutListSupport, CutListSupport, ServiceCenter, eS
 from Screens.MessageBox import MessageBox
 from Screens.InfoBar import MoviePlayer
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+try:
+	from Tools.Directories import SCOPE_ACTIVE_SKIN
+except:
+	pass	
 from enigma import ePoint, eTimer, iPlayableService
 from Tools import Notifications
 from Components.Sources.ServiceEvent import ServiceEvent
@@ -75,7 +79,10 @@ class MoviePlayerExtended_summary(Screen):
         self["Title"].setText(title)
 
     def showSeperator(self):
-        self["Seperator"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "images/sep_lcd_oled.png"))
+        try:
+            self["Seperator"].setText(resolveFilename(SCOPE_ACTIVE_SKIN, "images/sep_lcd_oled.png"))
+        except:
+            self["Seperator"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/images/sep_lcd_oled.png"))
     
     def hideSeperator(self):
         self["Seperator"].setText("")   

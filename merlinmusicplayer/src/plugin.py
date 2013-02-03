@@ -44,6 +44,10 @@ from urllib import quote
 from Components.ScrollLabel import ScrollLabel
 from Components.AVSwitch import AVSwitch
 from Tools.Directories import fileExists, resolveFilename, SCOPE_CURRENT_SKIN
+try:
+	from Tools.Directories import SCOPE_ACTIVE_SKIN
+except:
+	pass	
 from Tools.LoadPixmap import LoadPixmap
 from Components.Pixmap import Pixmap, MultiPixmap
 from Components.ServicePosition import ServicePositionGauge
@@ -2693,7 +2697,10 @@ class MerlinMediaPixmap(Pixmap):
 					noCoverFile = value
 					break
 		if noCoverFile is None:
-			noCoverFile = resolveFilename(SCOPE_CURRENT_SKIN, "no_coverArt.png")
+			try:
+				noCoverFile = resolveFilename(SCOPE_ACTIVE_SKIN, "no_coverArt.png")
+			except:
+				noCoverFile = resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/no_coverArt.png")
 		self.noCoverPixmap = LoadPixmap(noCoverFile)
 		return Pixmap.applySkin(self, desktop, screen)
 
