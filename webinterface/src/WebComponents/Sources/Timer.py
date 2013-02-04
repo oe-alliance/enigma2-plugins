@@ -235,11 +235,11 @@ class Timer(Source):
 			return ( False, _("Missing Parameter: end") )
 		end = int(float(param['end']))
 
-		tm = time()
+		tm = int( time() )
 		if tm <= begin:
 			pass
 		elif tm > begin and tm < end and repeated == 0:
-			begin = time()
+			pass
 		elif repeated == 0:
 			return ( False, _("Illegal Parameter value for Parameter begin : '%s'") % begin )
 
@@ -261,16 +261,18 @@ class Timer(Source):
 			eit = 0
 		else:
 			try: eit = int(eit)
-			except ValueError: return ( False, _("Illegal Parameter value for Parameter edit : '%s'") % eit )
+			except ValueError: return ( False, _("Illegal Parameter value for Parameter eit : '%s'") % eit )
 
 		print "[WebComponents.Sources.Timer]: eit=%d" %eit
 		if eit != 0:
-			#check if the given event exists, if it doesn't return an error
+			#check if the given event exists, if it doesn't the timer may be already running
 			epgcache = eEPGCache.getInstance()
 			event = epgcache.lookupEventId(eServiceReference(param['sRef']), eit)
-			if event is None:
-				return ( False, _("Event with id %d not found") %eit)
-			eit = event.getEventId()
+			if event:
+				eit = event.getEventId()
+				#TODO add some subservice handling
+			else:
+				print "[WebComponents.Sources.Timer] event not found, will be ignored"
 
 		disabled = False #Default to: Enabled
 		if 'disabled' in param:
@@ -366,7 +368,8 @@ class Timer(Source):
 
 			except Exception as e:
 				#obviously some value was not good, return an error
-				print e
+				import traceback
+				print traceback.format_exc()
 				return ( False, _("Changing the timer for '%s' failed!") % name )
 
 
