@@ -231,16 +231,16 @@ class IMDB(Screen):
 			'(?:.*?<h4 class="inline">(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h4>\s*(?P<aspect>.+?)(?:Mehr|See more</a>|</div>))*'
 			'(?:.*?<h4 class="inline">(?P<g_cert>Altersfreigabe|Certification):</h4>\s*(?P<cert>.+?)</div>)*'
 			'(?:.*?<h4 class="inline">(?P<g_company>Firma|Company):</h4>\s*(?P<company>.+?)(?:Mehr|See more</a>|</div>))*'
-			'(?:.*?<h4>(?P<g_trivia>Dies und das|Trivia)</h4>\s*(?P<trivia>.+?)(?:<span))*'
-			'(?:.*?<h4>(?P<g_goofs>Pannen|Goofs)</h4>\s*(?P<goofs>.+?)(?:<span))*'
-			'(?:.*?<h4>(?P<g_quotes>Dialogzitate|Quotes)</h4>\s*(?P<quotes>.+?)(?:<span))*'
-			'(?:.*?<h4>(?P<g_connections>Bez\S*?ge zu anderen Titeln|Movie Connections)</h4>\s*(?P<connections>.+?)(?:<span))*'
+			'(?:.*?<h4>(?P<g_trivia>Dies und das|Trivia)</h4>\s*(?P<trivia>.+?)(?:Mehr|See more</a>|</div>))*'
+			'(?:.*?<h4>(?P<g_goofs>Pannen|Goofs)</h4>\s*(?P<goofs>.+?)(?:Mehr|See more</a>|</div>))*'
+			'(?:.*?<h4>(?P<g_quotes>Dialogzitate|Quotes)</h4>\s*(?P<quotes>.+?)(?:Mehr|See more</a>|</div>))*'
+			'(?:.*?<h4>(?P<g_connections>Bez\S*?ge zu anderen Titeln|Connections)</h4>\s*(?P<connections>.+?)(?:Mehr|See more</a>|</div>))*'
 			'(?:.*?<h2>(?P<g_comments>Nutzerkommentare|User Reviews)</h2>.*?<a href="/user/ur\d{7,7}/comments">(?P<commenter>.+?)</a>.*?<p>(?P<comment>.+?)</p>)*'
 			, re.DOTALL)
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genre:</h4>\s<div class="info-content">\s+?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
-			self.ratingmask = re.compile('="ratingValue">(?P<rating>.*?)</', re.DOTALL)
-			self.castmask = re.compile('<td class="name">\s*<a.*?>(?P<actor>.*?)</a>(?:.*?<td class="character">\s*<div>\s*(?:<a.*?>)?(?P<character>.*?)(?:</a>)?\s*(?P<additional>\(.*?\))?(?:</a>)?\s*</div>)?', re.DOTALL)
+			self.ratingmask = re.compile('="ratingValue">(?P<rating>\d.*?)</', re.DOTALL)
+			self.castmask = re.compile('<td class="name".*?>\s*<a.*?>(?P<actor>.*?)\s*</a>(?:.*?<td class="character".*?>\s*<div>\s*(?:<a.*?>)?(?P<character>.*?)(?:</a>)?\s*(?P<additional>\(.*?\))?(?:</a>)?\s*</div>)?', re.DOTALL)
 			self.postermask = re.compile('<td .*?id="img_primary">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 
 		self.htmltags = re.compile('<.*?>')
@@ -552,7 +552,8 @@ class IMDB(Screen):
 				rating = rating.group("rating")
 				if rating != '<span id="voteuser"></span>':
 					Ratingtext = _("User Rating") + ": " + rating + " / 10"
-					self.ratingstars = int(10*round(float(rating.replace(',','.')),1))
+					try: self.ratingstars = int(10*round(float(rating.replace(',','.')),1))
+					except ValueError: self.ratingstars = 0
 					self["stars"].show()
 					self["stars"].setValue(self.ratingstars)
 					self["starsbg"].show()

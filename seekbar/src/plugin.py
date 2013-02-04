@@ -65,8 +65,13 @@ class Seekbar(ConfigListScreen, Screen):
 		self.fwd = fwd
 		if isinstance(session.current_dialog, MoviePlayer):
 			self.dvd = False
-		else:
+			self.vdb = False
+		elif DVDPlayer is not None and isinstance(session.current_dialog, DVDPlayer):
 			self.dvd = True
+			self.vdb = False
+		else:
+			self.dvd = False
+			self.vdb = True
 		self.percent = 0.0
 		self.length = None
 		service = session.nav.getCurrentService()
@@ -140,6 +145,8 @@ class Seekbar(ConfigListScreen, Screen):
 				pts = -1*pts
 			if self.dvd:
 				DVDPlayer.doSeekRelative(self.infobarInstance, pts)
+			elif self.vdb:
+				VideoDBPlayer.doSeekRelative(self.infobarInstance, pts)
 			else:
 				MoviePlayer.doSeekRelative(self.infobarInstance, pts)
 			self.exit()
@@ -170,7 +177,7 @@ class Seekbar(ConfigListScreen, Screen):
 			ConfigListScreen.keyNumberGlobal(self, number)
 
 ##############################################
-# This hack overwrites the functions seekFwdManual and seekBackManual of the InfoBarSeek class (MoviePlayer and DVDPlayer)
+# This hack overwrites the functions seekFwdManual and seekBackManual of the InfoBarSeek class (MoviePlayer, DVDPlayer, VideoDB)
 
 def seekbar(instance, fwd=True):
 	if instance and instance.session:
@@ -187,6 +194,15 @@ if fileExists(dvdPlayer) or fileExists("%sc"%dvdPlayer):
 	from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
 	DVDPlayer.seekFwdManual = seekbar
 	DVDPlayer.seekBackManual = seekbarBack
+else:
+	DVDPlayer = None
+
+videodb = "%s%s"%(resolveFilename(SCOPE_PLUGINS), "Extensions/VideoDB/plugin.py")
+if fileExists(videodb):
+	from Plugins.Extensions.VideoDB.Player import VideoDBPlayer
+	VideoDBPlayer.seekFwdManual = seekbar
+	VideoDBPlayer.seekBackManual = seekbarBack
+
 
 ##############################################
 # This hack puts the functions seekFwdManual and seekBackManual to the maped keys to seekbarRight and seekbarLeft

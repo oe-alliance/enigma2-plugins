@@ -1,3 +1,4 @@
+var adminTemplateEngine = new TemplateEngine('/webadmin/tpl/');
 
 /**
  * closeIf(el, sel)

@@ -5,11 +5,12 @@ from WebComponents.Sources.RequestData import RequestData
 
 
 class WebScreen(Screen):
-	def __init__(self, session, request):
+	def __init__(self, session, request, allow_GET = True):
 		Screen.__init__(self, session)
 		self.stand_alone = True
 		self.request = request
 		self.instance = None
+		self.allow_GET = allow_GET
 
 		self["localip"] = RequestData(request, what=RequestData.HOST)
 		self["localport"] = RequestData(request, what=RequestData.PORT)
@@ -31,7 +32,7 @@ class UpdateWebScreen(WebScreen):
 
 class MessageWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 		from WebComponents.Sources.Message import Message
 
 		self["Message"] = Message(session, func=Message.PRINT)
@@ -39,14 +40,14 @@ class MessageWebScreen(WebScreen):
 
 class ServiceListReloadWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 		from WebComponents.Sources.ServiceListReload import ServiceListReload
 
 		self["ServiceListReload"] = ServiceListReload(session)
 
 class AudioWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 		from WebComponents.Sources.AudioTracks import AudioTracks
 
 		self["AudioTracks"] = AudioTracks(session, func=AudioTracks.GET)
@@ -84,7 +85,7 @@ class AboutWebScreen(WebScreen):
 
 class VolumeWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 		from WebComponents.Sources.Volume import Volume
 		self["Volume"] = Volume(session)
 
@@ -131,7 +132,7 @@ class ServiceListRecursiveWebScreen(WebScreen):
 
 class SwitchServiceWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 
 		from WebComponents.Sources.SwitchService import SwitchService
 		self["SwitchService"] = SwitchService(session)
@@ -188,7 +189,7 @@ class MovieWebScreen(WebScreen):
 
 class MediaPlayerWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 		from WebComponents.Sources.MP import MP
 
 		self["FileList"] = MP(session, func=MP.LIST)
@@ -202,7 +203,7 @@ class MediaPlayerWebScreen(WebScreen):
 
 class AutoTimerWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 		from WebComponents.Sources.AT import AT
 
 		self["AutoTimerList"] = AT(session, func=AT.LIST)
@@ -210,7 +211,7 @@ class AutoTimerWebScreen(WebScreen):
 
 class TimerWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 		from WebComponents.Sources.Timer import Timer
 
 		self["TimerList"] = Timer(session, func=Timer.LIST)
@@ -242,21 +243,21 @@ class TimerEditWebScreen(ServiceListWebScreen, LocationsAndTagsWebScreen):
 
 class RemoteWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 		from WebComponents.Sources.RemoteControl import RemoteControl
 
 		self["RemoteControl"] = RemoteControl(session)
 
 class PowerWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 		from WebComponents.Sources.PowerState import PowerState
 
 		self["PowerState"] = PowerState(session)
 
 class ParentControlWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 		from WebComponents.Sources.ParentControl import ParentControl
 
 		self["ParentControlList"] = ParentControl(session)
@@ -403,7 +404,7 @@ class ServiceListPlayableWebScreen(WebScreen):
 
 class SleepTimerWebScreen(WebScreen):
 	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
+		WebScreen.__init__(self, session, request, allow_GET = False)
 
 		from WebComponents.Sources.SleepTimer import SleepTimer
 		self["SleepTimer"] = SleepTimer(session)
@@ -428,3 +429,18 @@ class StringsWebScreen(WebScreen):
 
 		from WebComponents.Sources.Strings import Strings
 		self["Strings"] = Strings()
+
+class SessionWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+
+		from WebComponents.Sources.WebSession import WebSession
+		self["Session"] = WebSession(request)
+
+class BackupWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request, allow_GET = False)
+
+		from WebComponents.Sources.Backup import Backup
+		self["Backup"] = Backup(Backup.BACKUP)
+		self["Restore"] = Backup(Backup.RESTORE)

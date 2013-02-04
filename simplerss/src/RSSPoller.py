@@ -212,16 +212,26 @@ class RSSPoller:
 			# Assume we're cleaning history if current feed is 0
 			clearHistory = self.current_feed == 0
 			if config.plugins.simpleRSS.update_notification.value != "none":
-				from Tools.Notifications import current_notifications, notifications
+				from Tools import Notifications
+				if hasattr(Notifications, 'notificationQueue'):
+					notifications = Notifications.notificationQueue.queue
+					current_notifications = Notifications.notificationQueue.current
+					handler = lambda note: (note.fnc, note.screen, note.args, note.kwargs, note.id)
+					handler_current = lambda note_tup: (note[0].id,)
+				else:
+					notifications = Notifications.notifications
+					current_notifications = Notifications.current_notifications
+					handler_current = handler = lambda note: note
+
 				for x in current_notifications:
-					if x[0] == NOTIFICATIONID:
+					if handler_current(x)[0] == NOTIFICATIONID:
 						print("[SimpleRSS] timer triggered while preview on screen, rescheduling")
 						self.poll_timer.start(10000, 1)
 						return
 
 				if clearHistory:
 					for x in notifications:
-						if x[4] and x[4] == NOTIFICATIONID:
+						if handler(x)[4] == NOTIFICATIONID:
 							print("[SimpleRSS] wont wipe history because it was never read")
 							clearHistory = False
 							break

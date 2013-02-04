@@ -57,6 +57,7 @@ function url() {
 	this.powerstate = "/web/powerstate"; // plus new powerstate
 	this.remotecontrol = "/web/remotecontrol"; // plus command
 	this.grab = "/grab";
+	this.session = "/web/session";
 };
 
 var URL = new url();

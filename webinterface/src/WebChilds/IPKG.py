@@ -1,4 +1,5 @@
 from enigma import eConsoleAppContainer
+from Components.config import config
 
 from twisted.web import server, resource, http
 
@@ -12,6 +13,10 @@ class IPKGResource(resource.Resource):
 	def render(self, request):
 		self.args = request.args
 		self.command = self.getArg("command")
+
+		if config.plugins.Webinterface.anti_hijack.value and len(request.args) > 0 and request.method == 'GET':
+			request.setHeader("Allow", "POST")
+			return resource.ErrorPage(http.NOT_ALLOWED, "Invalid method: GET!", "GET is not allowed here, please use POST").render(request)
 
 		if self.command is not None:
 			if self.command in IPKGResource.SIMPLECMDS:
@@ -72,17 +77,12 @@ class IPKGResource(resource.Resource):
 		html += "</body></html>"
 
 		request.setResponseCode(http.OK)
-		request.write(html)
-		request.finish()
 
-		return server.NOT_DONE_YET
+		return html
 
 	def doErrorPage(self, request, errormsg):
 		request.setResponseCode(http.OK)
-		request.write(errormsg)
-		request.finish()
-
-		return server.NOT_DONE_YET
+		return errormsg
 
 	def getArg(self, key):
 		if key in self.args:
@@ -93,15 +93,16 @@ class IPKGResource(resource.Resource):
 class IPKGConsoleStream:
 	def __init__(self, request, cmd):
 		self.request = request
-		self.request.write("<html><body>\n")		
-		if hasattr(self.request, 'notifyFinish'):
-			self.request.notifyFinish().addErrback(self.connectionLost)
+		self.request.write("<html><body>\n")
 		self.container = eConsoleAppContainer()
 		self.lastdata = None
 		self.stillAlive = True
 
 		self.container.dataAvail.append(self.dataAvail)
 		self.container.appClosed.append(self.cmdFinished)
+
+		if hasattr(self.request, 'notifyFinish'):
+			self.request.notifyFinish().addErrback(self.connectionLost)
 
 		self.container.execute(*cmd)
 

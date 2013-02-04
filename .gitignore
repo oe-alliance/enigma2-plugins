@@ -32,3 +32,6 @@ stamp-h1
 *.mo
 *.o
 *.bak
+*.*~
+.kdev4/
+*.kdev4

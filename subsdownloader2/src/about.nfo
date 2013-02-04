@@ -1,4 +1,4 @@
-Subtitle Downloader v. 0.34.0 2012-08-07
+Subtitle Downloader v. 0.34.3 2013-01-27
 
 Enigma2 plugin which downloads subtitle to Your movie.
 
@@ -30,6 +30,11 @@ TEXT - download subtitle or avaliable on server subtitle list
 OK - on FileList play media/ on SubsList download subtitle
 0 - Shows/ Hide skin
 BLUE - FileManager
+
+ver 0.34.3:
+- support for DMnapi v. 1.28.0,
+- more languages supported,
+- install unrar, libmediainfo, libzen for ONLY for mipsel.
 
 ver 0.34.0:
 - Napisy24pl works after changes on server,

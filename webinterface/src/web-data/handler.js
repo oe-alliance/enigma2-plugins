@@ -787,9 +787,15 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		var eMinutes = this.numericalOptionList(0, 59, end.getMinutes());
 
 		var actions = this.ACTIONS;
+		for (var i = 0; i < actions.length; i++) {
+			delete actions[i].selected;
+		}
 		actions[t.justplay].selected = this.SELECTED;
 
 		var afterevents = this.AFTEREVENTS;
+		for (var i = 0; i < afterevents.length; i++) {
+			delete afterevents[i].selected;
+		}
 		afterevents[t.afterevent].selected = this.SELECTED;
 
 		var repeated = this.repeatedDaysList(t.repeated);
@@ -841,11 +847,14 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 			if(decodeURIComponent(service.servicereference) == timer.servicereference){
 				service['selected'] = 'selected';
 				serviceFound = true;
-			}else{
+			} else if (decodeURIComponent(service.servicereference)
+				   .startsWith("1:64:")) {
+				service['selected'] = 'disabled';
+			} else {
 				service['selected'] = '';
 			}
 		}.bind(this));
-		if(!serviceFound){
+		if ((timer.servicereference != "") && !serviceFound) {
 			services.push( {'servicereference' : timer.servicereference, 'servicename' : timer.servicename, 'selected' : 'selected'});
 		}
 

@@ -18,7 +18,7 @@ from Plugins.Extensions.SubsDownloader2.SourceCode.NapiProjekt import NapiProjek
 from Plugins.Extensions.SubsDownloader2.SourceCode.Napisy24_pl import Napisy24_pl, GuessFileData_from_FileName, CompareMovie_and_Subtite_FileData
 from Plugins.Extensions.SubsDownloader2.SourceCode.chardet_OutpuyTranslation import chardetOutputTranslation
 from Plugins.Extensions.SubsDownloader2.SourceCode.myFileList import EXTENSIONS, FileList #*
-from Plugins.Extensions.SubsDownloader2.pluginOnlineContent import IsNewVersionCheck, zlib_link, libmediainfo_link, Subtitle_Downloader_temp_dir, PluginIpkUpdate, InstallDownloadableContent, CommertialBannerDownload #flagcounetr,
+from Plugins.Extensions.SubsDownloader2.pluginOnlineContent import IsNewVersionCheck, zlib_link, libmediainfo_link, unrar_link, Subtitle_Downloader_temp_dir, PluginIpkUpdate, InstallDownloadableContent, CommertialBannerDownload #flagcounetr,
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from os import system as os_system
 from os import stat as os_stat
@@ -85,12 +85,22 @@ XBMC_PLUGINS = list_XBMC_Periscope_plugins('/usr/lib/enigma2/python/Plugins/Exte
 for server in XBMC_PLUGINS:
 	SUBTITLE_SERVER_LIST.append((server,server))
 config.plugins.subsdownloader.subtitleserver = ConfigSelection(default = "OpenSubtitle", choices = SUBTITLE_SERVER_LIST)
+if os.path.exists('/usr/lib/enigma2/python/Plugins/Extensions/DMnapi/DMnapi.py'):
+	try:
+		from Plugins.Extensions.DMnapi.DMnapi import DMnapi, dmnapi_version
+		SUBTITLE_SERVER_LIST.append(('DMnapi','DMnapi'))
+		global supported_DMnapi_versions
+		supported_DMnapi_versions ={"12.8.8"}
+	except:
+		pass
 
-from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import toScriptLang
+
+from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.utilities import LANGUAGES #, languageTranslate #toScriptLang
 SubsDownloaderLangs = []
 SubsDownloaderLangs.append(getConfigListEntry("None","None"))
-for x in range(0,43):
-	SubsDownloaderLangs.append(getConfigListEntry(toScriptLang(str(x)),toScriptLang(str(x))))
+for x in LANGUAGES:
+	#SubsDownloaderLangs.append(getConfigListEntry(toScriptLang(str(x)),toScriptLang(str(x))))
+	SubsDownloaderLangs.append(getConfigListEntry(x[0],x[0]))
 SubsDownloaderLangs.append(getConfigListEntry("All","All"))
 config.plugins.subsdownloader.SubsDownloader1stLang = ConfigSelection(default ="English", choices = SubsDownloaderLangs)
 config.plugins.subsdownloader.SubsDownloader2ndLang = ConfigSelection(default ="Polish", choices = SubsDownloaderLangs)
@@ -463,8 +473,17 @@ class SubsDownloaderApplication(Screen):
 		self.CommertialPicturePath = picture_path
 		self.CommertialPicture.startDecode(self.CommertialPicturePath)
 		
-		
+	def executeDMnapi(self, media_file_path):
+		try:
+			#self.session.openWithCallback(self.__movie_Callback, DMnapi, sel[B_FULL]) #oryginal Gemini File Browser execution line
+			self.session.openWithCallback(self.__executeDMnapi_callback, DMnapi, media_file_path)
+			
+		except:
+			self.session.open(MessageBox, _("There is problem with DMnapi execution.\nCheck if Your SubsDownloader supports DMnapi %s version.", dmnapi_version), MessageBox.TYPE_INFO, timeout = 10)
 	
+	def __executeDMnapi_callback(self, callback=None):
+		self["fileList"].refresh()
+
 # !!!!!!!!!!!! PICTURE FUNCTIONS !!!!!!!!!!!!!!	
 		
 		
@@ -716,6 +735,15 @@ class SubsDownloaderApplication(Screen):
 						self.failed_to_download_subtitle_nfo(self.subtitle_filename,self.subtitle_codepade,self.subtitle_filename_type,self.movie_fps)"""
 					#self["fileList"].refresh()
 					#TODO SUBTITLE SELECTION AND DOWNLOAD OTHER SERVERS
+				elif config.plugins.subsdownloader.subtitleserver.value == "DMnapi":
+					#self.isSubtitleDowloaded=0
+					#self.whichSubtitleDownload="None"
+					subtitle_filename = []
+					#self.movie_fps = "None"
+					#self.subtitle_codepade = "None"
+					#self.subtitle_filename_type = "None"
+					self.movie_filename = self["fileList"].getCurrentDirectory() + self["fileList"].getFilename()
+					self.executeDMnapi(self.movie_filename)
 				elif config.plugins.subsdownloader.subtitleserver.value == "Napisy24":
 					N24_movie_name = None
 					N24_imdb_search = None
@@ -939,7 +967,9 @@ class SubsDownloaderApplication(Screen):
 					whichSubtitleDownload = self["subsList"].getCurrent()[1]
 					subtitle_filename = self.subtitles.createFile(self.subtitle_database[int(whichSubtitleDownload)],self.movie_filename)
 				if config.plugins.subsdownloader.subtitleserver.value == "NapiProjekt":
-					pass #PASS BECAUDE NAPI PROJECT DOWNLOAD ONLY PL FILE AND IT'S DIRECTLY IN DOWNLOAD SUBTITLE FUNCTION.
+					pass #PASS BECAUSE NAPI PROJECT DOWNLOAD ONLY PL FILE AND IT'S DIRECTLY IN DOWNLOAD SUBTITLE FUNCTION.
+				if config.plugins.subsdownloader.subtitleserver.value == "DMnapi":
+					pass #PASS BECAUSE DMnapi DOWNLOAD ONLY PL FILE AND IT'S DIRECTLY IN DOWNLOAD SUBTITLE FUNCTION.
 				if config.plugins.subsdownloader.subtitleserver.value in  XBMC_PLUGINS:
 					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import *' % config.plugins.subsdownloader.subtitleserver.value)
 					exec ('from Plugins.Extensions.SubsDownloader2.SourceCode.xbmc_subtitles.services.%s import service as SERVICE' % config.plugins.subsdownloader.subtitleserver.value) 
@@ -1053,6 +1083,7 @@ class FileManagerCommands(Screen):
 	def ExitWithoutDoingNothing(self):
 		self.close(["Do_nothing", self.file_to_manage])
 	
+		
 	def ExitWithDoingSomething(self):
 		def delete_command_notification(callback):
 			if callback == True:
@@ -1085,8 +1116,12 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		self["extendLibMediaInfo"] = Label()
-		if is_libmediainfo == False:
+		if is_libmediainfo == False and os.popen("unrar").readlines() !=[]:
 			self["extendLibMediaInfo"].setText("Press YELLOW button to install libmediainfo.")
+		elif is_libmediainfo == False and os.popen("unrar").readlines() ==[]:
+			self["extendLibMediaInfo"].setText("Press YELLOW button to install libmediainfo and unrar.")
+		elif os.popen("unrar").readlines() ==[]:
+			self["extendLibMediaInfo"].setText("Press YELLOW button to install unrar.")
 		else:
 			self["extendLibMediaInfo"].setText("")
 		self.list = []
@@ -1102,9 +1137,20 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 		self.createConfigMenu()
 		
 	def installLibMediaInfo(self):
-		if is_libmediainfo == False:
-			self.libmediaInfoInstallation = InstallDownloadableContent(self.session, [zlib_link,libmediainfo_link])
+		file = open("/proc/cpuinfo",'r')
+		cpu_info = file.read()
+		file.close()	
+		if (is_libmediainfo == False or os.popen("unrar").readlines() ==[]) and "mips" in cpu_info:
+			content_to_download =[]
+			if is_libmediainfo == False:
+				content_to_download.append(zlib_link)
+				content_to_download.append(libmediainfo_link)
+			if os.popen("unrar").readlines() ==[]:
+				content_to_download.append(unrar_link)
+			self.libmediaInfoInstallation = InstallDownloadableContent(self.session,content_to_download)
 			self.libmediaInfoInstallation.__install__()
+		else:
+			self.session.open(MessageBox,_("Mipsel architecture not detected.\n\nPlease supplie requires binaries by Yourself."), MessageBox.TYPE_ERROR)
 
 	def keyLeft(self): #ABY DZIALALA AUTOMATYCZNA ZMIANA LIST WYSWIETLANEJ TA FUNKCJA MUSI SIE TAK NAZYWAC
 		ConfigListScreen.keyLeft(self)

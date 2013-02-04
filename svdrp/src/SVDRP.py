@@ -453,6 +453,8 @@ class SimpleVDRProtocol(LineReceiver):
 		else:
 			params = (service, type, time, endtime)
 		events = epgcache.lookupEvent([options , params])
+		if not events:
+			return self.sendLine("550 No schedule found")
 
 		# process data
 		def sendEventLine(eit, begin, duration, title, description, extended, sref, sname):

@@ -2,12 +2,12 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 740 $
-$Date: 2013-01-03 12:38:15 +0100 (Do, 03 Jan 2013) $
-$Id: FritzCallFBF.py 740 2013-01-03 11:38:15Z michael $
+$Revision: 745 $
+$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $
+$Id: FritzCallFBF.py 745 2013-01-12 16:04:44Z michael $
 '''
 
-from . import _, x, debug #@UnresolvedImport # pylint: disable=E0611,F0401
+from . import _, __, debug #@UnresolvedImport # pylint: disable=E0611,F0401
 from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
@@ -81,6 +81,8 @@ class FritzCallFBF:
 		self.blacklist = ([], [])
 		self.readBlacklist()
 		self.phonebook = None
+		self._phoneBookID = 0
+		self.phonebooksFBF = []
 
 	def _notify(self, text):
 		debug("[FritzCallFBF] notify: " + text)
@@ -128,7 +130,7 @@ class FritzCallFBF:
 
 	def _md5Login(self, callback, sidXml):
 		def buildResponse(challenge, text):
-			debug("[FritzCallFBF] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + x(text))
+			debug("[FritzCallFBF] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + __(text))
 			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
 			for i in range(len(text)):
 				if ord(text[i]) > 255:
@@ -291,7 +293,7 @@ class FritzCallFBF:
 			#  Photo could be fetched with http://192.168.0.1/lua/photo.lua?photo=<Path to picture[7:]&sid=????
 			#===============================================================================
 			debug("[FritzCallFBF] _parseFritzBoxPhonebook: discovered newer firmware")
-			found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name\d+" value="[Dd]reambox" id="uiPostPhonebookName\d+" disabled>\s*<input type="hidden" name="telcfg:settings/Phonebook/Books/Id\d+" value="(\d+)" id="uiPostPhonebookId\d+" disabled>', html, re.S)
+			found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name\d+" value="(?:' + config.plugins.FritzCall.fritzphonebookName.value +')" id="uiPostPhonebookName\d+" disabled>\s*<input type="hidden" name="telcfg:settings/Phonebook/Books/Id\d+" value="(\d+)" id="uiPostPhonebookId\d+" disabled>', html, re.S)
 			if found:
 				phoneBookID = found.group(1)
 				debug("[FritzCallFBF] _parseFritzBoxPhonebook: found dreambox phonebook with id: " + phoneBookID)
@@ -319,7 +321,7 @@ class FritzCallFBF:
 				for found in details:
 					thisnumber = found.group(2).strip()
 					if not thisnumber:
-						debug("[FritzCallFBF] Ignoring entry with empty number for '''%s'''" % (x(name)))
+						debug("[FritzCallFBF] Ignoring entry with empty number for '''%s'''" % (__(name)))
 						continue
 					else:
 						thisname = name
@@ -340,7 +342,7 @@ class FritzCallFBF:
 						thisnumber = cleanNumber(thisnumber)
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						if not self.phonebook.phonebook.has_key(thisnumber):
-							debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (x(thisname.strip()), x(thisnumber, False)))
+							debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
 							self.phonebook.phonebook[thisnumber] = thisname
 						else:
 							pass
@@ -1107,6 +1109,7 @@ class FritzCallFBF_05_50:
 		self.phonebook = None
 		self.getInfo(None)
 		# self.readBlacklist() now in getInfo
+		self.phonebooksFBF = []
 
 	def _notify(self, text):
 		debug("[FritzCallFBF_05_50] notify: " + text)
@@ -1150,7 +1153,7 @@ class FritzCallFBF_05_50:
 
 	def _md5Login(self, sidXml):
 		def buildResponse(challenge, text):
-			debug("[FritzCallFBF_05_50] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + x(text))
+			debug("[FritzCallFBF_05_50] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + __(text))
 			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
 			for i in range(len(text)):
 				if ord(text[i]) > 255:
@@ -1283,7 +1286,7 @@ class FritzCallFBF_05_50:
 	def _loadFritzBoxPhonebook(self, html):
 		# Firmware 05.27 onwards
 		# look for phonebook called [dD]reambox and get bookid
-		found = re.match('.*<label for="uiBookid:([\d]+)">([dD]reambox|FritzCall)', html, re.S)
+		found = re.match('.*<label for="uiBookid:([\d]+)">' + config.plugins.FritzCall.fritzphonebookName.value, html, re.S)
 		if found:
 			bookid = found.group(1)
 		else:
@@ -1349,7 +1352,7 @@ class FritzCallFBF_05_50:
 						continue
 
 					if not thisnumbers[i]:
-						debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Ignoring entry with empty number for '''%s'''" % (x(name)))
+						debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Ignoring entry with empty number for '''%s'''" % (__(name)))
 						continue
 					else:
 						thisname = name
@@ -1360,7 +1363,7 @@ class FritzCallFBF_05_50:
 						if config.plugins.FritzCall.showVanity.value and thisvanitys[i]:
 							thisname = thisname + ", " + _("Vanity") + ": " + thisvanitys[i]
 	
-						debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Adding '''%s''' with '''%s'''" % (x(thisname.strip()), x(thisnumber, False)))
+						debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						self.phonebook.phonebook[thisnumber] = thisname
 		else:
@@ -1420,6 +1423,9 @@ class FritzCallFBF_05_50:
 				direct = FBF_OUT_CALLS
 			elif direct == '2':
 				direct = FBF_MISSED_CALLS
+			if self._callType != '.' and self._callType != direct:
+				continue
+
 			date = call[1]
 			length = call[6]
 			number = stripCbCPrefix(call[3], config.plugins.FritzCall.country.value)
@@ -1438,7 +1444,7 @@ class FritzCallFBF_05_50:
 			here = resolveNumber(here, call[4], self.phonebook)
 			# debug("[FritzCallFBF_05_50] _gotPageCalls: here: " + here)
 
-			debug("[FritzCallFBF_05_50] _gotPageCalls: append: %s" % repr((x(number, False), date, direct, x(remote), length, x(here))))
+			debug("[FritzCallFBF_05_50] _gotPageCalls: append: %s" % repr((__(number, False), date, direct, __(remote), length, __(here))))
 			callListL.append((number, date, direct, remote, length, here))
 
 		if callback:
@@ -1789,6 +1795,7 @@ class FritzCallFBF_05_27:
 		self.phonebook = None
 		self.getInfo(None)
 		# self.readBlacklist() now in getInfo
+		self.phonebooksFBF = []
 
 	def _notify(self, text):
 		debug("[FritzCallFBF_05_27] notify: " + text)
@@ -1833,7 +1840,7 @@ class FritzCallFBF_05_27:
 
 	def _md5Login(self, sidXml):
 		def buildResponse(challenge, text):
-			debug("[FritzCallFBF_05_27] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + x(text))
+			debug("[FritzCallFBF_05_27] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + __(text))
 			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
 			for i in range(len(text)):
 				if ord(text[i]) > 255:
@@ -1961,7 +1968,7 @@ class FritzCallFBF_05_27:
 	def _loadFritzBoxPhonebook(self, html):
 		# Firmware 05.27 onwards
 		# look for phonebook called [dD]reambox and get bookid
-		found = re.match('.*<label for="uiBookid:([\d]+)">[dD]reambox', html, re.S)
+		found = re.match('.*<label for="uiBookid:([\d]+)">' + config.plugins.FritzCall.fritzphonebookName.value, html, re.S)
 		if found:
 			bookid = found.group(1)
 			debug("[FritzCallFBF_05_27] _loadFritzBoxPhonebook: found dreambox phonebook %s" % (bookid))
@@ -1982,17 +1989,15 @@ class FritzCallFBF_05_27:
 
 	def _parseFritzBoxPhonebook(self, html):
 		debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew")
-		#=======================================================================
-		# found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name\d+" value="[Dd]reambox" id="uiPostPhonebookName\d+" disabled>\s*<input type="hidden" name="telcfg:settings/Phonebook/Books/Id\d+" value="(\d+)" id="uiPostPhonebookId\d+" disabled>', html, re.S)
-		# if found:
-		#	phoneBookID = found.group(1)
-		#	debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: found dreambox phonebook with id: " + phoneBookID)
-		#	if self._phoneBookID != phoneBookID:
-		#		self._phoneBookID = phoneBookID
-		#		debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: reload phonebook")
-		#		self._loadFritzBoxPhonebook(None) # reload with dreambox phonebook
-		#		return
-		#=======================================================================
+		found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name\d+" value="' + config.plugins.FritzCall.fritzphonebookName.value +'" id="uiPostPhonebookName\d+" disabled>\s*<input type="hidden" name="telcfg:settings/Phonebook/Books/Id\d+" value="(\d+)" id="uiPostPhonebookId\d+" disabled>', html, re.S)
+		if found:
+			phoneBookID = found.group(1)
+			debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: found dreambox phonebook with id: " + phoneBookID)
+			if self._phoneBookID != phoneBookID:
+				self._phoneBookID = phoneBookID
+				debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: reload phonebook")
+				self._loadFritzBoxPhonebook(None) # reload with dreambox phonebook
+				return
 
 		# first, let us get the charset
 		found = re.match('.*<meta http-equiv=content-type content="text/html; charset=([^"]*)">', html, re.S)

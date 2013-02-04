@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 740 $
-$Date: 2013-01-03 12:38:15 +0100 (Do, 03 Jan 2013) $
-$Id: plugin.py 740 2013-01-03 11:38:15Z michael $
+$Revision: 745 $
+$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $
+$Id: plugin.py 745 2013-01-12 16:04:44Z michael $
 '''
 
 from Screens.Screen import Screen
@@ -47,7 +47,7 @@ import re, time, os, traceback
 
 from nrzuname import ReverseLookupAndNotifier
 import FritzOutlookCSV, FritzLDIF
-from . import _, x, initDebug, debug #@UnresolvedImport # pylint: disable=E0611,F0401
+from . import _, __, initDebug, debug #@UnresolvedImport # pylint: disable=E0611,F0401
 
 from enigma import getDesktop
 DESKTOP_WIDTH = getDesktop(0).size().width()
@@ -94,6 +94,7 @@ config.plugins.FritzCall.timeout = ConfigInteger(default=15, limits=(0, 60))
 config.plugins.FritzCall.lookup = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.internal = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.fritzphonebook = ConfigEnableDisable(default=False)
+config.plugins.FritzCall.fritzphonebookName = ConfigText(default='Dreambox', fixed_size=False)
 config.plugins.FritzCall.phonebook = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.addcallers = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.enable = ConfigEnableDisable(default=False)
@@ -297,8 +298,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 740 $"[1:-2] + "\n" + 
-							"$Date: 2013-01-03 12:38:15 +0100 (Do, 03 Jan 2013) $"[1:23] + "\n"
+							"$Revision: 745 $"[1:-2] + "\n" + 
+							"$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -309,8 +310,6 @@ class FritzAbout(Screen):
 
 	def exit(self):
 		self.close()
-
-fritzbox = None
 
 from FritzCallFBF import FBF_dectActive, FBF_faxActive, FBF_rufumlActive, FBF_tamActive
 
@@ -1142,7 +1141,7 @@ class FritzCallPhonebook:
 				elems = line.split('#')
 				if len(elems) == 2:
 					try:
-						debug("[FritzCallPhonebook] reload: Adding '''%s''' with '''%s''' from internal phonebook!" % (x(elems[1].strip()), x(elems[0], False)))
+						debug("[FritzCallPhonebook] reload: Adding '''%s''' with '''%s''' from internal phonebook!" % (__(elems[1].strip()), __(elems[0], False)))
 						self.phonebook[elems[0]] = elems[1]
 					except ValueError: # how could this possibly happen?!?!
 						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
@@ -1705,7 +1704,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 740 $"[1: - 1] + "$Date: 2013-01-03 12:38:15 +0100 (Do, 03 Jan 2013) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 745 $"[1: - 1] + "$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1745,6 +1744,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			self.list.append(getConfigListEntry(_("Extension number to initiate call on"), config.plugins.FritzCall.extension))
 			self.list.append(getConfigListEntry(_("Read PhoneBook from FRITZ!Box"), config.plugins.FritzCall.fritzphonebook))
 			if config.plugins.FritzCall.fritzphonebook.value:
+				self.list.append(getConfigListEntry(_("FRITZ!Box PhoneBook to read"), config.plugins.FritzCall.fritzphonebookName))
 				self.list.append(getConfigListEntry(_("Append type of number"), config.plugins.FritzCall.showType))
 				self.list.append(getConfigListEntry(_("Append shortcut number"), config.plugins.FritzCall.showShortcut))
 				self.list.append(getConfigListEntry(_("Append vanity name"), config.plugins.FritzCall.showVanity))
@@ -2211,7 +2211,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 740 $"[1:-1]	+ "$Date: 2013-01-03 12:38:15 +0100 (Do, 03 Jan 2013) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 745 $"[1:-1]	+ "$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

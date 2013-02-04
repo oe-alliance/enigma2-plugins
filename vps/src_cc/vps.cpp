@@ -27,6 +27,7 @@
 #include <errno.h>
 #include <iostream>
 #include <cstdlib>
+#include <unistd.h>
 
 using std::cout;
 using std::endl;

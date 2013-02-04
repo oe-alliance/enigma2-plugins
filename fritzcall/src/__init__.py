@@ -21,7 +21,7 @@ def _(txt): # pylint: disable-msg=C0103
 	return td
 
 # scramble text
-def x(text, front=True):
+def __(text, front=True):
 	#===========================================================================
 	# if len(text) > 5:
 	#	if front:

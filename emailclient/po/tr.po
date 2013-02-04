@@ -1,0 +1,240 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 EmailClient plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-28 18:29+0100\n"
+"PO-Revision-Date: 2013-01-08 20:52+0200\n"
+"Last-Translator: Zulfikar Veyisoglu <zveyis@gmail.com>\n"
+"Language-Team: Zulfikar Veyisoglu <zveyis@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: tr\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#, python-format
+msgid "%(name)s (%(user)s@%(server)s)"
+msgstr "%(name)s (%(user)s@%(server)s)"
+
+msgid "Accounts list"
+msgstr "Hesaplar"
+
+msgid "Attachments"
+msgstr "Ekler"
+
+msgid "Bodys"
+msgstr "Mesaj"
+
+msgid "Date"
+msgstr "Tarih"
+
+msgid "Email Client"
+msgstr "Eposta istemcisi"
+
+msgid "Email setup"
+msgstr "Eposta ayarları"
+
+#, python-format
+msgid ""
+"EmailClient for %(account)s:\n"
+"\n"
+"%(error)s"
+msgstr ""
+"%(account)s hesabı için eposta istemcisi:\n"
+"\n"
+"%(error)s"
+
+msgid "From"
+msgstr "Kimden"
+
+msgid "IMAP Port"
+msgstr "IMAP portu"
+
+msgid "IMAP Server"
+msgstr "IMAP sunucusu"
+
+#, python-format
+msgid ""
+"New mail arrived for account %s:\n"
+"\n"
+msgstr ""
+"%s hesabına yeni ileti geldi:\n"
+"\n"
+
+#, python-format
+msgid "Really delete account %s?"
+msgstr "%s hesabını silmek istiyor musunuz?"
+
+msgid "Subject"
+msgstr "Konu"
+
+#, python-format
+msgid ""
+"[EmailAccount] %(name)s: _cbCapabilities:\n"
+"####################################################################################################\n"
+"# If you have problems to log into your imap-server, please send me the "
+"output of the following line\n"
+"# cbCapabilities: %(capa)s\n"
+"####################################################################################################\n"
+msgstr ""
+"[EmailAccount] %(name)s: _cbCapabilities:\n"
+"####################################################################################################\n"
+"# imap-sunucusuna bağlanmakta sorun yaşarsanız, lütfen çizginin altındaki "
+"mesajı bana gönderin\n"
+"# cbCapabilities: %(capa)s\n"
+"####################################################################################################\n"
+
+#, python-format
+msgid "account %s is not connected"
+msgstr "%s hesabı bağlı değil"
+
+msgid "account name"
+msgstr "hesap adı"
+
+msgid "account not connected"
+msgstr "hesap bağlı değil"
+
+msgid "add"
+msgstr "ekle"
+
+msgid "cancel"
+msgstr "vazgeç"
+
+msgid "cannot access inbox"
+msgstr "gelen kutusuna ulaşılamıyor"
+
+msgid "cannot get headers of new messages"
+msgstr "yeni mesajların başlıkları alınamıyor"
+
+msgid "cannot get list of new messages"
+msgstr "yeni mesajlar alınamıyor"
+
+msgid "connection failed - retrying"
+msgstr "bağlantı kurulamadı - yeniden deneniyor"
+
+msgid "debug"
+msgstr "hata yakalama"
+
+msgid "delete"
+msgstr "sil"
+
+msgid "display connection errors"
+msgstr "bağlantı hatalarını göster"
+
+msgid "display timeout (seconds)"
+msgstr "zaman aşımı göster (saniye)"
+
+msgid "edit"
+msgstr "düzenle"
+
+msgid "empty values - retry"
+msgstr "boş değer geçilemez - yeniden deneyin"
+
+#, python-format
+msgid ""
+"error logging %(who)s in:\n"
+"%(failure)s"
+msgstr ""
+"hata günlüğü %(who)s in:\n"
+"%(failure)s"
+
+msgid "failed to load message"
+msgstr "ileti yüklenirken hata oluştu"
+
+msgid "getting message ..."
+msgstr "ileti alınıyor ..."
+
+#, python-format
+msgid "have %d messages"
+msgstr "%d ileti var"
+
+msgid "have no messages"
+msgstr "ileti yok"
+
+msgid "headers loaded, now parsing ..."
+msgstr "başlıklar alındı, şimdi ayrıştırılıyor ..."
+
+#, python-format
+msgid "importing configurations from %s"
+msgstr "ayarlar %s 'den içeri alınıyor"
+
+msgid "leave unread"
+msgstr "okunmadı olarak işaretle"
+
+msgid "list all mailboxes"
+msgstr "tüm posta kutularını listele"
+
+msgid "loading headers ..."
+msgstr "başlıklar yükleniyor ..."
+
+msgid "mail check interval (minutes)"
+msgstr "eposta kontrol sıklığı (dakika)"
+
+msgid "maximum mail size to fetch"
+msgstr "indirilecek maksimum eposta boyutu"
+
+msgid "message too large"
+msgstr "ileti çok büyük"
+
+msgid "no account selected"
+msgstr "hesap seçilmedi"
+
+msgid "no date"
+msgstr "tarih yok"
+
+msgid "no filename"
+msgstr "dosya adı yok"
+
+msgid "no from"
+msgstr "kimden bilgisi yok"
+
+msgid "no mailbox?!?!"
+msgstr "posta kutusu yok?!?!"
+
+msgid "no sender"
+msgstr "kime bilgisi yok"
+
+msgid "no subject"
+msgstr "konu yok"
+
+msgid "ok"
+msgstr "tamam"
+
+msgid "parsing message ..."
+msgstr "mesaj ayrıştırılıyor ..."
+
+msgid "password"
+msgstr "parola"
+
+msgid "really delete mail?"
+msgstr "ileti silinsin mi?"
+
+msgid "really undelete mail?"
+msgstr "silinen ileti geri alınsın mı?"
+
+msgid "remove"
+msgstr "kaldır"
+
+msgid "select Attachment"
+msgstr "Dosya eki ekle"
+
+msgid "select Body"
+msgstr "Mesajı seç"
+
+msgid "show deleted entries"
+msgstr "silinen kayıtları göster"
+
+msgid "undelete"
+msgstr "silineni geri al"
+
+msgid "user name"
+msgstr "kullanıcı adı"
+
+msgid "view Emails via IMAP4"
+msgstr "Epostaları IMAP4 üzerinden görüntüleyin"
