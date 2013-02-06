@@ -44,7 +44,7 @@ function url() {
 	this.gettags           = "/web/gettags";
 	this.getservices       = '/web/getservices';
 };
-var URL = new url();
+Object.extend(URL, new url());
 
 var types = {};
 types['include'] = 'Include';
@@ -196,7 +196,6 @@ function getAttribute(xml, key, defaults){
 	return value;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 // AutoTimerEditorCore
 var AutoTimerEditorCore = Class.create({
@@ -204,41 +203,45 @@ var AutoTimerEditorCore = Class.create({
 		// Check WebIf Version
 		if (typeof core == "undefined"){
 			alert("Old WebInterface found!\nPlease update the WebInterface Plugin first.");
-		
-		} else {
-			// Start AutoTimer WebIf
-			this.newautotimer = {
-				'enabled' : 'yes',
-				'name' : name,
-				'match' : name,
-				'from' : from,
-				'to' : to,
-				'e2servicename' : servicename,
-				'e2servicereference' : servicereference,
-			}
-			
-			// Instantiate all elements
-			this.services = new AutoTimerServiceController();
-			this.settings = new AutoTimerSettingsController();
-			
-			this.menu = new AutoTimerMenuController('contentAutoTimerMenu');
-			this.list = new AutoTimerListController('contentAutoTimerList');
-			this.edit = new AutoTimerEditController('contentAutoTimerContent');
-			this.preview = new AutoTimerPreviewController('contentAutoTimerContent');
-			this.parse = new AutoTimerParseController('contentAutoTimerContent');
-			this.timers = new TimerController('contentAutoTimerContent');
-			this.about = new AboutPage('contentAutoTimerContent');
-			
-			// Display menu
-			this.menu.load();
-			
-			// Load locations and tags
-			core.lt.getLocationsAndTags(this.loadLocationsAndTagsCallback.bind(this));
-			// Load bouquet list
-			this.services.loadBouquetsTv(this.loadBouquetsCallback.bind(this));
-			// Load autotimer settings
-			this.settings.load(this.loadSettingsCallback.bind(this));
+			return;
 		}
+		// Start AutoTimer WebIf
+		this.newautotimer = {
+			'enabled' : 'yes',
+			'name' : name,
+			'match' : name,
+			'from' : from,
+			'to' : to,
+			'e2servicename' : servicename,
+			'e2servicereference' : servicereference,
+		};
+
+		// Instantiate all elements
+		this.services = new AutoTimerServiceController();
+		this.settings = new AutoTimerSettingsController();
+		this.menu = new AutoTimerMenuController('contentAutoTimerMenu');
+		this.list = new AutoTimerListController('contentAutoTimerList');
+		this.edit = new AutoTimerEditController('contentAutoTimerContent');
+		this.preview = new AutoTimerPreviewController('contentAutoTimerContent');
+		this.parse = new AutoTimerParseController('contentAutoTimerContent');
+		this.timers = new TimerController('contentAutoTimerContent');
+		this.about = new AboutPage('contentAutoTimerContent');
+		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
+		this.sessionProvider.load({});
+	},
+
+	onSessionAvailable: function(sid){
+		debug("[AutoTimerEditorCore].onSessionAvailable, " + sid)
+		global_sessionid = sid;
+		// Display menu
+		this.menu.load();
+
+		// Load locations and tags
+		core.lt.getLocationsAndTags(this.loadLocationsAndTagsCallback.bind(this));
+		// Load bouquet list
+		this.services.loadBouquetsTv(this.loadBouquetsCallback.bind(this));
+		// Load autotimer settings
+		this.settings.load(this.loadSettingsCallback.bind(this));
 	},
 	
 	loadLocationsAndTagsCallback: function(currentLocation, locations, tags){
@@ -1313,7 +1316,14 @@ var AboutPage = Class.create({
 
 ///////////////////////////////////////////////////////////////////////////////
 // Handler
-var AutoTimerServiceListHandler = Class.create(AbstractContentHandler, {
+var AbstractATContentHandler = Class.create(AbstractContentHandler,  {
+	show: function(data){
+		this.data = data;
+		atTemplateEngine.process(this.tpl, data, this.target, this.finished.bind(this));
+	}
+});
+
+var AutoTimerServiceListHandler = Class.create(AbstractATContentHandler, {
 	initialize: function($super){
 		$super(null, null);
 		this.provider = new SimpleServiceListProvider (this.onReady.bind(this));
@@ -1337,7 +1347,7 @@ var AutoTimerServiceListHandler = Class.create(AbstractContentHandler, {
 	}
 });
 
-var AutoTimerSettingsHandler = Class.create(AbstractContentHandler, {
+var AutoTimerSettingsHandler = Class.create(AbstractATContentHandler, {
 	initialize: function($super){
 		$super(null, null);
 		this.provider = new AutoTimerSettingsProvider(this.onReady.bind(this));
@@ -1356,7 +1366,7 @@ var AutoTimerSettingsHandler = Class.create(AbstractContentHandler, {
 	}
 });
 
-var AutoTimerMenuHandler = Class.create(AbstractContentHandler,{
+var AutoTimerMenuHandler = Class.create(AbstractATContentHandler,{
 	initialize: function($super, target){
 		$super('tplAutoTimerMenu', target);
 		this.provider = new SimpleRequestProvider();
@@ -1398,7 +1408,7 @@ var AutoTimerMenuHandler = Class.create(AbstractContentHandler,{
 	},
 });
 
-var AutoTimerListHandler  = Class.create(AbstractContentHandler, {
+var AutoTimerListHandler  = Class.create(AbstractATContentHandler, {
 	initialize: function($super, target){
 		$super('tplAutoTimerList', target);
 		this.provider = new AutoTimerListProvider(this.show.bind(this));
@@ -1430,7 +1440,7 @@ var AutoTimerListHandler  = Class.create(AbstractContentHandler, {
 	},
 });
 
-var AutoTimerEditHandler = Class.create(AbstractContentHandler, {
+var AutoTimerEditHandler = Class.create(AbstractATContentHandler, {
 	initialize: function($super, target){
 		$super('tplAutoTimerEdit', target);
 		this.provider = new AutoTimerEditProvider(this.show.bind(this));
@@ -1456,7 +1466,7 @@ var AutoTimerEditHandler = Class.create(AbstractContentHandler, {
 	},
 });
 
-var AutoTimerPreviewHandler = Class.create(AbstractContentHandler, {
+var AutoTimerPreviewHandler = Class.create(AbstractATContentHandler, {
 	initialize: function($super, target){
 		$super('tplAutoTimerPreview', target);
 		this.provider = new AutoTimerPreviewProvider(this.show.bind(this));
@@ -1464,7 +1474,7 @@ var AutoTimerPreviewHandler = Class.create(AbstractContentHandler, {
 	},
 });
 
-var AutoTimerParseHandler = Class.create(AbstractContentHandler, {
+var AutoTimerParseHandler = Class.create(AbstractATContentHandler, {
 	initialize: function($super, target){
 		$super(null, target);
 		this.provider = new SimpleRequestProvider();
