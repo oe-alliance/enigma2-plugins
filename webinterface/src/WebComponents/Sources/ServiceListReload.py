@@ -5,6 +5,7 @@ class ServiceListReload(Source):
 	BOTH = 0
 	LAMEDB = 1
 	USERBOUQUETS = 2
+	TRANSPONDERS = 3
 
 	def __init__(self, session):
 		Source.__init__(self)
@@ -25,6 +26,9 @@ class ServiceListReload(Source):
 			elif self.cmd is self.USERBOUQUETS:
 				self.res = self.reloadUserBouquets()
 				self.res = ( True, _('reloaded bouquets') )
+			elif self.cmd is self.TRANSPONDERS:
+				self.res = self.reloadTransponders()
+				self.res = ( True, 'reloaded transponders' )
 		except Exception, e:
 			pass
 
@@ -37,10 +41,14 @@ class ServiceListReload(Source):
 		print "[ServiceListReload] reloading userbouquets"
 		self.eDVBDB.reloadBouquets()
 
+	def reloadTransponders(self):
+		print "[ServiceListReload] reloading transponders"
+		nimmanager.readTransponders()
+
 	def getResult(self):
 		if self.res:
 			return self.res
 		else:
-			return ( False, _("missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets only]") % (self.BOTH, self.LAMEDB, self.USERBOUQUETS) )
+			return ( False, _("missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets only, %i=transponders]") % (self.BOTH, self.LAMEDB, self.USERBOUQUETS, self.TRANSPONDERS) )
 
 	result = property(getResult)
