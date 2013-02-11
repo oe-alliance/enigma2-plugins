@@ -892,11 +892,12 @@ var SimplePages = Class.create({
 
 		var updateCurrentInterval = userprefs.data.updateCurrentInterval / 1000;
 		var updateBouquetInterval = userprefs.data.updateBouquetInterval / 1000;
-
+		var style = userprefs.data.style;
 		data = {'debug' : debugChecked,
 				'updateCurrentInterval' : updateCurrentInterval,
-				'updateBouquetInterval' : updateBouquetInterval
-		};
+				'updateBouquetInterval' : updateBouquetInterval,
+				'style' : style
+			};
 		this.show(this.PAGE_SETTINGS, data);
 	},
 
@@ -1109,6 +1110,11 @@ var E2WebCore = Class.create({
 				'tools' : this.simplepages.loadTools.bind(this.simplepages)
 			}
 		};
+		if(userprefs.data.style != "dark" && userprefs.data.style != "light"){
+			userprefs.data.style = "dark";
+			userprefs.save();
+		}
+		//this.styleChanged();
 	},
 
 	hideNotifier: function(){
@@ -1324,7 +1330,7 @@ var E2WebCore = Class.create({
 
 		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
 		this.deviceInfo = this.simplepages.getDeviceInfo(function(info){this.deviceInfo = info;}.bind(this));
-
+		
 		if( parseNr(userprefs.data.updateCurrentInterval) < 10000){
 			userprefs.data.updateCurrentInterval = 120000;
 			userprefs.save();
@@ -1941,12 +1947,30 @@ var E2WebCore = Class.create({
 			break;
 		}
 	},
+	
+	styleChanged: function(){
+		if(userprefs.data.style == 'light'){
+			$('style_light').disabled = false;
+			$('style_dark').disabled = true;
+		} else {
+			$('style_dark').disabled = false;
+			$('style_light').disabled = true;
+		}
+	},
 
 	saveSettings: function(){
 		userprefs.load();
-
-		var debug = $('enableDebug').checked;
 		var changed = false;
+
+		var l = $('interfaceStyle');
+		var style = l.options[l.selectedIndex].value;
+		if(style != userprefs.data.style){
+			userprefs.data.style = style;
+			changed = true;
+			this.styleChanged();
+		}
+		
+		var debug = $('enableDebug').checked;
 		if(debug != undefined){
 			if( userprefs.data.debug != debug ){
 				userprefs.data.debug = debug;

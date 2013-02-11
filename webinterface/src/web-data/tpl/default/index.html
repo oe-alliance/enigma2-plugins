@@ -6,7 +6,8 @@
 	<title>Dreambox WebControl</title>
 
 	<!-- <link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet"> -->
-	<link href="/web-data/tpl/default/style.min.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" id="style_dark" title="dark" href="/web-data/tpl/default/style.min.css">
+	<link rel="alternate stylesheet" type="text/css" id="style_light" title="light" href="/web-data/tpl/default/style_light.min.css" disabled>
 	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico">
 	<!--
 	<script type="text/javascript" src="/web-data/lib/prototype.js"></script>
@@ -62,12 +63,11 @@
 			}
 		}
 		function setNavHd(content){
-			$('navHd').update('<div style="background-color: #000">'+content+'</div>');
+			$('navHd').update('<div>'+content+'</div>');
 		}
 
 		function setContentHd(content, keepHdExt){
 			var div = new Element('div');
-			div.setStyle({background: 'black'});
 			div.update(content);
 			$('contentHd').update(div);
 			if(!keepHdExt)
@@ -96,9 +96,9 @@
 		<div id="banner" class="rounded">
 			<span id="notification"><div></div></span>
 			<div id="bannerLeft">
-				<div id="ajaxLoad" style="display:none;"><img src="/web-data/gfx/ajaxload_banner.gif" alt="loading..."></div>
+				<div id="ajaxLoad" style="display:none;"></div>
 				<div id="bannerText" style="font-size: 24px;">
-					<img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web">
+					<div class="bannerHeader"></div>
 				</div>
 				<ul id="mainMenu">
 					<li class="roundedNav navmenu" data-mode="tv"><a class="roundedNav" href="#!/tv"><span id="mainMenuItemTv" >TeleVision</span></a></li>
@@ -133,12 +133,6 @@
 						<tr>
 							<td colspan="2"><button id="instantRecordCurrentEvent" class="doInstantRecord" data-type="current">Record current event</button></td>
 						</tr>
-						<!--
-						<tr>
-							<td><button class="doInstantRecord" data-type="minutes" style="width: 140px">Record for (min.)</button>
-							<td style="text-align: right"><input type="text" size="2" maxlength="3" value="60"></input></td></td>
-						</tr>
-						-->
 						<tr>
 							<td colspan="2"><button id="instantRecordInfinite" class="doInstantRecord" data-type="infinite">Start infinite recording</button></td>
 						</tr>
@@ -177,7 +171,7 @@
 				</div>
 			</div>
 			<div id="content" class="rounded">
-				<table style="margin:0px; padding:0px; background:#000;width:100%" cellpadding="0" cellspacing="0">
+				<table class="contentHd" cellpadding="0" cellspacing="0">
 					<tr>
 						<td><div id="contentHd" class="header"><div>Content</div></div></td>
 						<td style="text-align: right"><div id="contentHdExt"></div></td>
@@ -188,6 +182,7 @@
 		</div>
 	</div>
 	<script language="javascript" type="text/javascript">
+		core.styleChanged();
 		setMaxHeight('contentMain');
 		$('ajaxLoad').hide();
 		//Localization
@@ -207,7 +202,7 @@
 		$('epgSearchClear').title = strings.clear_serach;
 		$('openSignalPanelImg').title = strings.open_signal_panel;
 		$('instantRecordImg').title = strings.instant_record;
-
+		
 		core.run();
 	</script>
 

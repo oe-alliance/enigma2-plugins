@@ -3,11 +3,21 @@
 						<table id="contentTable">
 							<tr>
 								<td>
-									<table style="width: 100%;">
+									<table class="settings" style="width: 100%;">
 										<tr>
 											<td colspan="2">${strings.settings_cookies_required}</td>
 										</tr>
 										<tr><td colspan=2">&nbsp;</td></tr>
+										<tr>
+											<td>Style</td>
+											<td>
+												<form>
+													<select id="interfaceStyle">
+														<option value="dark" {if style=='dark'}selected{/if}>Dark</option>
+														<option value="light" {if style=='light'}selected{/if}>Light</option>
+												</form>
+											</td>
+										</tr>
 										<tr>
 											<td>${strings.enable_debug}</td>
 											<td>
@@ -26,7 +36,7 @@
 												<form><input type="text" id="updateBouquetInterval" value="${updateBouquetInterval}" />${strings.seconds_short}</form>
 											</td>
 										</tr>
-										<tr><td colspan="2"><button class="saveSettings">${strings.save}</button></td></tr>
+										<tr><td colspan="2"><button class="saveSettings">${strings.save}</button></td></tr>										
 									</table>
 								</td>
 							</tr>
