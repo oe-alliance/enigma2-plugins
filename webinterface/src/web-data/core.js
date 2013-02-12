@@ -1024,25 +1024,132 @@ var Volume = Class.create(Controller, {
 	}
 });
 
-var E2WebCore = Class.create({
+var BaseCore = Class.create({
 	initialize: function(){
-		this.mediaPlayerStarted = false;
 		this.popUpBlockerHinted = false;
+		this.hideNotifierTimeout = '';
+		
+		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
+		if(userprefs.data.style != "dark" && userprefs.data.style != "light"){
+			userprefs.data.style = "dark";
+			userprefs.save();
+		}
+	},
+
+	run: function(){
+		debug("[BaseCore].run");
+		this.sessionProvider.load({});
+	},
+
+	onSessionAvailable: function(sid){
+		debug("[BaseCore].onSessionAvailable, " + sid)
+		global_sessionid = sid;
+		RequestCounter.addChangedCallback(this.onAjaxRequestCountChanged.bind(this));
+	},
+
+	onSessionFailed: function(transport){
+		this.notify("FATAL ERROR! NO SESSION!", true)
+	},
+
+	onAjaxRequestCountChanged: function(count){
+		debug("Active Request count: " + RequestCounter.count);
+		var ajaxload = $('ajaxLoad');
+		if(ajaxload){
+			if(count > 0)
+				$('ajaxLoad').show();
+			else
+				$('ajaxLoad').hide();
+		}
+	},
+
+	hideNotifier: function(){
+		debug("[BaseCore].hideNotifier");
+		$('notification').fadeOut(500);
+	},
+
+	notify: function(text, state){
+		debug("[BaseCore].notify");
+		var notif = $('notification');
+		if(notif !== null){
+			//clear possibly existing hideNotifier timeout of a previous notfication
+			clearTimeout(this.hideNotifierTimeout);
+			if(state === false){
+				notif.style.background = "#C00";
+			} else {
+				notif.style.background = "#85C247";
+			}
+			this.set('notification', "<div>"+text+"</div>");
+			notif.fadeIn({'delay' : 500, 'to' : 90});
+			var _this = this;
+			this.hideNotifierTimeout = setTimeout(_this.hideNotifier.bind(this), 5000);
+		}
+	},
+
+	set: function(element, value){
+		element = parent.$(element);
+		if (element){
+			element.update(value);
+		}
+	},
+
+	setAjaxLoad: function(targetElement){
+		target = $(targetElement);
+		if(target != null){
+			target.update( getAjaxLoad() );
+		}
+	},
+	
+	messageBox: function(message){
+		alert(message);
+	},
+
+	popUpBlockerHint: function(){
+		if(!this.popUpBlockerHinted){
+			this.popUpBlockerHinted = true;
+			this.messageBox("Please disable your Popup-Blocker for enigma2 WebControl to work flawlessly!");
+
+		}
+	},
+
+	setWindowContent: function(window, html){
+		window.document.write(html);
+		window.document.close();
+	},
+
+	popup: function(title, html, width, height, x, y){
+		try {
+			var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height+',resizable=yes');
+			this.setWindowContent(popup, html);
+			return popup;
+		} catch(e){
+			this.popUpBlockerHint();
+			return "";
+		}
+	},
+	
+	styleChanged: function(){
+		if(userprefs.data.style == 'light'){
+			$('style_light').disabled = false;
+			$('style_dark').disabled = true;
+		} else {
+			$('style_dark').disabled = false;
+			$('style_light').disabled = true;
+		}
+	}
+});
+
+var E2WebCore = Class.create(BaseCore, {
+	initialize: function($super){
+		$super();
+		this.mediaPlayerStarted = false;
 		this.settings = null;
 		this.parentControlList = null;
-
-		this.debugWin = '';
-		this.signalWin = '';
-		this.webRemoteWin = '';
-		this.EPGListWin = '';
 
 		this.currentBouquet = bouquetsTv;
 
 		this.updateBouquetItemsPoller = '';
 		this.updateCurrentPoller = '';
 		this.signalPanelUpdatePoller = '';
-
-		this.hideNotifierTimeout = '';
 
 		this.isActive = {};
 		this.isActive.getCurrent = false;
@@ -1051,8 +1158,6 @@ var E2WebCore = Class.create({
 		this.subMode = "";
 
 		//create required Instances
-		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
-
 		this.bouquets = new Bouquets('contentBouquets', 'contentMain');
 		this.current = new Current('currentContent', 'volContent');
 		this.externals = new Externals('navExternalsContainer');
@@ -1110,76 +1215,6 @@ var E2WebCore = Class.create({
 				'tools' : this.simplepages.loadTools.bind(this.simplepages)
 			}
 		};
-		if(userprefs.data.style != "dark" && userprefs.data.style != "light"){
-			userprefs.data.style = "dark";
-			userprefs.save();
-		}
-		//this.styleChanged();
-	},
-
-	hideNotifier: function(){
-		debug("[E2WebCore].hideNotifier");
-		$('notification').fadeOut(500);
-	},
-
-	notify: function(text, state){
-		debug("[E2WebCore].notify");
-		notif = $('notification');
-		if(notif !== null){
-			//clear possibly existing hideNotifier timeout of a previous notfication
-			clearTimeout(this.hideNotifierTimeout);
-			if(state === false){
-				notif.style.background = "#C00";
-			} else {
-				notif.style.background = "#85C247";
-			}
-			this.set('notification', "<div>"+text+"</div>");
-			notif.fadeIn({'delay' : 500, 'to' : 90});
-			var _this = this;
-			this.hideNotifierTimeout = setTimeout(_this.hideNotifier.bind(this), 5000);
-		}
-	},
-
-	set: function(element, value){
-		element = parent.$(element);
-		if (element){
-			element.update(value);
-		}
-	},
-
-	setAjaxLoad: function(targetElement){
-		target = $(targetElement);
-		if(target != null){
-			target.update( getAjaxLoad() );
-		}
-	},
-
-	messageBox: function(message){
-		alert(message);
-	},
-
-	popUpBlockerHint: function(){
-		if(!this.popUpBlockerHinted){
-			this.popUpBlockerHinted = true;
-			this.messageBox("Please disable your Popup-Blocker for enigma2 WebControl to work flawlessly!");
-
-		}
-	},
-
-	setWindowContent: function(window, html){
-		window.document.write(html);
-		window.document.close();
-	},
-
-	popup: function(title, html, width, height, x, y){
-		try {
-			var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height+',resizable=yes');
-			this.setWindowContent(popup, html);
-			return popup;
-		} catch(e){
-			this.popUpBlockerHint();
-			return "";
-		}
 	},
 
 	delayedUpdateItems: function(){
@@ -1319,14 +1354,9 @@ var E2WebCore = Class.create({
 		this.bouquets.load(bouquetsTv, true);
 	},
 
-	run: function(){
-		debug("[E2WebCore].run");
-		this.sessionProvider.load({});
-	},
-
-	onSessionAvailable: function(sid){
+	onSessionAvailable: function($super, sid){
 		debug("[E2WebCore].onSessionAvailable, " + sid)
-		global_sessionid = sid;
+		$super(sid);
 
 		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
 		this.deviceInfo = this.simplepages.getDeviceInfo(function(info){this.deviceInfo = info;}.bind(this));
@@ -1352,8 +1382,7 @@ var E2WebCore = Class.create({
 
 		this.setAjaxLoad('navContent');
 		this.setAjaxLoad('contentMain');
-		RequestCounter.addChangedCallback(this.onAjaxRequestCountChanged.bind(this));
-
+		
 		templateEngine.fetch('tplServiceListEPGItem');
 		templateEngine.fetch('tplBouquetsAndServices');
 		templateEngine.fetch('tplCurrent');
@@ -1362,18 +1391,6 @@ var E2WebCore = Class.create({
 		}
 		this.updateItems();
 		this.startUpdateCurrentPoller();
-	},
-
-	onSessionFailed: function(transport){
-		this.notify("FATAL ERROR! NO SESSION!", true)
-	},
-
-	onAjaxRequestCountChanged: function(count){
-		debug("Active Request count: " + RequestCounter.count);
-		if(count > 0)
-			$('ajaxLoad').show();
-		else
-			$('ajaxLoad').hide();
 	},
 
 	registerEvents: function(){
@@ -1945,16 +1962,6 @@ var E2WebCore = Class.create({
 
 		default:
 			break;
-		}
-	},
-	
-	styleChanged: function(){
-		if(userprefs.data.style == 'light'){
-			$('style_light').disabled = false;
-			$('style_dark').disabled = true;
-		} else {
-			$('style_dark').disabled = false;
-			$('style_light').disabled = true;
 		}
 	},
 

@@ -64,7 +64,8 @@ td.screenShot img{border:1px solid #555;background:#DDD;}
 #searchHd{background-color:#F2F2F2;text-align:center;width:150px;border-bottom:1px solid #DDD}
 #navVolume{width:100%;height:75px;background-color:#F2F2F2;margin-top:8px;border:1px solid #AAA;position:relative;border:1px solid #DDD}
 #volHd{background-color:#F2F2F2;text-align:center;width:150px;border-bottom:1px solid #DDD}
-#content{float:left;background-color:#F2F2F2;width:835px;min-height:360dpx;margin-left:8px;border:1px solid #DDD;position:relative}
+#main{overflow:hidden;margin:0;padding:0}
+#content{float:left;background-color:#F2F2F2;width:837px;min-height:360dpx;margin-left:8px;border:1px solid #DDD;position:relative}
 #contentHd{background-color:#F2F2F2;width:527px}
 table.contentHd{background-color: #F2F2F2;width:100%;margin:0px; padding:0px;border-bottom:1px solid #DDD;}
 #contentHd div{background:#F2F2F2;}
@@ -86,7 +87,7 @@ table.contentHd{background-color: #F2F2F2;width:100%;margin:0px; padding:0px;bor
 .sListSProgressBar{margin:0;background-color:#60aef2;width:0;height:100%}
 .sListExtEpg{display: block;padding:1px}
 .header{padding-top:2px;padding-left:4px;padding-right:4px;display:block;height:22px}
-#container{margin:0 auto;text-align:left;width:1005px}
+#container{margin:0 auto;text-align:left;width:1007px}
 #contentTable{scrollbar:auto;width:785px;margin:0 auto 0 auto;}
 #contentServices{vertical-align:top;width:575px}
 #contentServices table{scrollbar:auto}
@@ -158,7 +159,7 @@ a.tEditTag{margin:3px 0 3px 0;padding:3px;display:inline-block;border:1px solid 
 a.selected{background:#D2D2D2}
 .epgListItem{font-size:12px;font-weight:bold}
 .externals{border-top:1px solid #DDD;border-bottom:1px solid #DDD;}
-* html #banner{width:1005px;height:78px}
+* html #banner{width:1007px;height:78px}
 * html #bannerRight{width:120px;height:60px}
 * html #nav{width:99%;height:250px;background-color:#F2F2F2;padding-left:5px}
 * html .navTable{width:95%}
