@@ -781,12 +781,13 @@ class IMDbSetup(Screen, ConfigListScreen):
 		return SetupSummary
 
 def eventinfo(session, eventName="", **kwargs):
-	s = session.nav.getCurrentService()
-	if s:
-		info = s.info()
-		event = info.getEvent(0) # 0 = now, 1 = next
-		name = event and event.getEventName() or ''
-		session.open(IMDB, name)
+	if not eventName:
+		s = session.nav.getCurrentService()
+		if s:
+			info = s.info()
+			event = info.getEvent(0) # 0 = now, 1 = next
+			eventName = event and event.getEventName() or ''
+	session.open(IMDB, eventName)
 
 def main(session, eventName="", **kwargs):
 	session.open(IMDB, eventName)
