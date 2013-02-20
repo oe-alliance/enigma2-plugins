@@ -64,7 +64,7 @@ class NetworkDescriptor:
 
 class NetworkBrowser(Screen):
 	skin = """
-		<screen name="NetworkBrowser" position="90,80" size="560,450" title="Network Neighbourhood">
+		<screen name="NetworkBrowser" position="center,center" size="560,450" title="Network Neighbourhood">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
