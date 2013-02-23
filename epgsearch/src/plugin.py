@@ -58,7 +58,7 @@ def Plugins(**kwargs):
 			# TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 			name = _("search EPG..."),
 			where = PluginDescriptor.WHERE_EVENTINFO,
-			fnc = main,
+			fnc = eventinfo,
 			needsRestart = False,
 		),
 		PluginDescriptor(
