@@ -482,9 +482,14 @@ class OFDbLCDScreen(Screen):
 		Screen.__init__(self, session)
 		self["headline"] = Label(_("OFDb Plugin"))
 
-def eventinfo(session, servicelist, **kwargs):
-	ref = session.nav.getCurrentlyPlayingServiceReference()
-	session.open(OFDBEPGSelection, ref)
+def eventinfo(session, eventName="", **kwargs):
+	if not eventName:
+		s = session.nav.getCurrentService()
+		if s:
+			info = s.info()
+			event = info.getEvent(0) # 0 = now, 1 = next
+			eventName = event and event.getEventName() or ''
+	session.open(OFDB, eventName)
 
 def main(session, eventName="", **kwargs):
 	session.open(OFDB, eventName)
