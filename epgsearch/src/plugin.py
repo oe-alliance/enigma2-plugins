@@ -34,16 +34,20 @@ def main(session, *args, **kwargs):
 		session.open(EPGSearch)
 
 # Event Info
-def eventinfo(session, *args, **kwargs):
-	ref = session.nav.getCurrentlyPlayingServiceReference()
-	session.open(EPGSearchEPGSelection, ref, True)
+def eventinfo(session, eventName="", **kwargs):
+	if not eventName:
+		s = session.nav.getCurrentService()
+		if s:
+			info = s.info()
+			event = info.getEvent(0) # 0 = now, 1 = next
+			eventName = event and event.getEventName() or ''
+	session.open(EPGSearch, eventName)
 
 # Movielist
 def movielist(session, service, **kwargs):
 	serviceHandler = eServiceCenter.getInstance()
 	info = serviceHandler.info(service)
 	name = info and info.getName(service) or ''
-
 	session.open(EPGSearch, name)
 
 pluginlist = PluginDescriptor(name = _("EPGSearch"), description = _("Search EPG"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main, needsRestart = False)
