@@ -505,15 +505,6 @@ class MerlinMusicPlayerScreenSaver(Screen):
 	        self.coverMoveTimer.timeout.get().append(self.moveCoverArt)
 	        self.coverMoveTimer.start(1)
 		self["display"] = Label()
-		self.onClose.append(self.__onClose)
-		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
-	
-	def sleepTimerEntryOnStateChange(self, timer):
-		if timer.state == TimerEntry.StateEnded:
-			self.close()
-
-	def __onClose(self):
-		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 
 	def updateDisplayText(self, text):
 		self["display"].setText(text)
@@ -613,11 +604,6 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 		if self.idx:
 		        self.showHideTimer.start(self.idx * 1000)
 		self.displayShown = True
-		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
-	
-	def sleepTimerEntryOnStateChange(self, timer):
-		if timer.state == TimerEntry.StateEnded:
-			self.close()
 
 	def showHide(self):
 		if self.displayShown:
@@ -802,7 +788,6 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 			self.pipservice.start()
 
 	def __onClose(self):
-		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 		self.pipservice = None
 		if self.showHideTimer.isActive():
 			self.showHideTimer.stop()
@@ -961,12 +946,6 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.currentService = currentservice
 		self.serviceList = servicelist
 
-		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
-	
-	def sleepTimerEntryOnStateChange(self, timer):
-		if timer.state == TimerEntry.StateEnded:
-			self.closePlayer()
-
 	def embeddedCoverArt(self):		
 		self["coverArt"].embeddedCoverArt()
 		if self.screenSaverScreen:
@@ -1009,7 +988,6 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.resetScreenSaverTimer()
 		
 	def __onClose(self):
-		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 		del self["coverArt"].picload
 		self.seek = None
 
@@ -1757,12 +1735,6 @@ class iDreamMerlin(Screen):
 
 		self.startMerlinPlayerScreenTimer = eTimer()
 		self.startMerlinPlayerScreenTimer.timeout.get().append(self.info_pressed)
-
-		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
-	
-	def sleepTimerEntryOnStateChange(self, timer):
-		if timer.state == TimerEntry.StateEnded:
-			self.close()
 
 	def getPlayList(self):
 		connection = OpenDatabase()
@@ -2543,7 +2515,6 @@ class iDreamMerlin(Screen):
 		self.close()
 		
 	def __onClose(self):
-		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 		self.startMerlinPlayerScreenTimer.stop()
 		if self.player is not None:
 			self.player.closePlayer()
@@ -3031,12 +3002,6 @@ class MerlinMusicPlayerFileList(Screen):
 		self.startMerlinPlayerScreenTimer = eTimer()
 		self.startMerlinPlayerScreenTimer.timeout.get().append(self.info_pressed)
 
-		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
-	
-	def sleepTimerEntryOnStateChange(self, timer):
-		if timer.state == TimerEntry.StateEnded:
-			self.close()
-
 	def startRun(self):
 		if config.plugins.merlinmusicplayer.startlastsonglist.value:
 			self.startPlayerTimer = eTimer()
@@ -3346,7 +3311,6 @@ class MerlinMusicPlayerFileList(Screen):
 		self.summaries.setText(text,4)
 
 	def __onClose(self):
-		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 		self.startMerlinPlayerScreenTimer.stop()
 		if self.player is not None:
 			self.player.closePlayer()
