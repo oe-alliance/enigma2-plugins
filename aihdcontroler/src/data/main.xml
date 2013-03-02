@@ -315,24 +315,6 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		</widget>
 	</screen>
 	
-	<screen name="SleepTimerEdit" position="center,center" size="500,240" title="Sleep Timer">
-		<widget font="Regular;20" name="current_status" position="40,40" size="400,30" valign="center"/>
-		<widget alphatest="on" name="red" pixmap="Ai.HD/red.png" position="10,80" size="30,30"/>
-		<widget alphatest="on" name="green" pixmap="Ai.HD/green.png" position="10,120" size="30,30"/>
-		<widget alphatest="on" name="yellow" pixmap="Ai.HD/yellow.png" position="10,160" size="30,30"/>
-		<widget alphatest="on" name="blue" pixmap="Ai.HD/blue.png" position="10,200" size="30,30"/>
-		<widget font="Regular;20" name="red_text" position="45,80" size="400,30" valign="center"/>
-		<widget font="Regular;20" name="green_text" position="45,120" size="400,30" valign="center"/>
-		<widget font="Regular;20" name="yellow_text" position="45,160" size="400,30" valign="center"/>
-		<widget font="Regular;20" name="blue_text" position="45,200" size="450,30" valign="center"/>
-		<widget font="Regular;19" name="pretext" position="15,10" size="235,25"/>
-		<widget font="Regular;19" name="input" position="260,10" size="40,25"/>
-		<widget font="Regular;19" name="aftertext" position="305,10" size="100,25"/>
-		<ePixmap alphatest="on" pixmap="skin_default/sleeptimer.png" position="390,17" size="90,125"/>
-	</screen>
-	
-	
-	
 	<!-- ########## Service Selectors ########## -->
 	<screen name="ChannelSelectionRadio" position="center,97" size="1116,360" title="Channel Selection">		
 		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="30,325" size="30,30"/>

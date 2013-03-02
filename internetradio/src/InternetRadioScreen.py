@@ -340,12 +340,7 @@ class InternetRadioScreen(Screen, InternetRadioVisualization, InternetRadioPiPTV
 			# just to hear to recording music when starting the plugin...
 			self.currentPlayingStation = InternetRadioStation(name = _("Recording stream station"))
 			self.playServiceStream("http://localhost:9191")
-		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
 	
-	def sleepTimerEntryOnStateChange(self, timer):
-		if timer.state == TimerEntry.StateEnded:
-			self.closePlayer()
-
 	def onBeginExec(self):
 		if config.plugins.internetradio.visualization.value in ("2", "3"):
 			self.summaries.setLabelVisibility(True)			
@@ -923,7 +918,6 @@ class InternetRadioScreen(Screen, InternetRadioVisualization, InternetRadioPiPTV
 		self.session.deleteDialog(self.fullScreen)
 		self.fullScreen = None
 		eActionMap.getInstance().unbindAction('', self.autoActivationKeyPressed)
-		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 		self.session.nav.playService(self.currentService)
 		containerStreamripper.dataAvail.remove(self.streamripperDataAvail)
 		containerStreamripper.appClosed.remove(self.streamripperClosed)

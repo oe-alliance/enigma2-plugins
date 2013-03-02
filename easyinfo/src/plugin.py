@@ -78,7 +78,6 @@ CHOICELIST=[("no", _("Disabled")),
 			("imdbinfo", _("IMDB info")),
 			("primetime", _("Prime Time Manager")),
 			("epgrefresh", _("EPG refresh")),
-			("sleep", _("Sleep timer")),
 			("sysinfo", _("Sherlock"))
 			]
 config.plugins.EasyInfo  = ConfigSubsection()
@@ -660,9 +659,6 @@ def EINcallbackFunc(answer):
 			EINsession.open(SherlockII)
 		else:
 			EINsession.open(MessageBox, text = _('Sherlock is not installed!'), type = MessageBox.TYPE_INFO)
-	elif answer == "sleep":
-		from Screens.SleepTimerEdit import SleepTimerEdit
-		EINsession.open(SleepTimerEdit)
 	else:
 		EINsession.open(MessageBox, text = _('This function is yet not available!'), type = MessageBox.TYPE_INFO)
 

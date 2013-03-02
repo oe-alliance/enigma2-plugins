@@ -337,9 +337,6 @@ class BonkelPlayer(InfoBarBase, InfoBarShowHide, \
 	def ref2HumanName(self, ref):
 		from enigma import eServiceCenter
 		return eServiceCenter.getInstance().info(ref).getName(ref)
-	def sleepTimer(self):
-		from Screens.SleepTimerEdit import SleepTimerEdit
-		self.session.open(SleepTimerEdit)
 #-------------------------------------------------------#
 class VideoPlayerSettings(Screen, ConfigListScreen):
 	skin = """
