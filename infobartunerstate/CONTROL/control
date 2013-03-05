@@ -1,2 +1,2 @@
 Description: Show the tuner state as infobar popup
-Depends: enigma2, enigma2-plugin-extensions-webinterface, enigma2-streamproxy, python-shell, python-re
+Depends: enigma2, python-shell, python-re
