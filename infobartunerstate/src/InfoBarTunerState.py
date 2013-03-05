@@ -329,7 +329,10 @@ class InfoBarTunerState(object):
 					
 					# Is this really necessary?
 					try: timer.Filename
-					except: timer.calculateFilename()
+					except:
+						try: timer.freespace()
+						except: pass
+						timer.calculateFilename()
 					filename = timer.Filename
 					
 					# Delete references to avoid blocking tuners
@@ -494,7 +497,10 @@ class InfoBarTunerState(object):
 						
 						# Is this really necessary?
 						try: timer.Filename
-						except: timer.calculateFilename()
+						except:
+							try: timer.freespace()
+							except: pass
+							timer.calculateFilename()
 						filename = timer.Filename
 						
 						# Delete references to avoid blocking tuners
