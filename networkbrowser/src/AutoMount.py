@@ -191,29 +191,29 @@ class AutoMount():
 		options = origOptions.strip()
 		if not fstab:
 			if not options:
-				options = 'rw,rsize=32768,wsize=32768'
+				options = 'rw,rsize=8192,wsize=8192'
 				if not cifs:
 					options += ',proto=tcp'
 			else:
 				if not cifs:
 					if 'rsize' not in options:
-						options += ',rsize=32768'
+						options += ',rsize=8192'
 					if 'wsize' not in options:
-						options += ',wsize=32768'
+						options += ',wsize=8192'
 					if not cifs and 'tcp' not in options and 'udp' not in options:
 						options += ',tcp'
 		else:
 			if not options:
 				options = 'rw'
 				if not cifs:
-					options += ',nfsvers=3,rsize=32768,wsize=32768,proto=tcp'
+					options += ',nfsvers=3,rsize=8192,wsize=8192,proto=tcp'
 			else:
 				if not cifs:
 					options += ',nfsvers=3'
 					if 'rsize' not in options:
-						options += ',rsize=32768'
+						options += ',rsize=8192'
 					if 'wsize' not in options:
-						options += ',wsize=32768'
+						options += ',wsize=8192'
 					if 'tcp' not in options and 'udp' not in options:
 						options += ',tcp'
 					options = options + ',timeo=14,fg,soft,intr'
