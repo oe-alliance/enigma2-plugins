@@ -1,0 +1,296 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FanControl2\n"
+"POT-Creation-Date: 2012-11-04 15:20+Mitteleuropäische Zeit\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
+"Language-Team: Mariusz1970 <Mariusz1970@onet.eu>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+
+msgid "%s   %02d C"
+msgstr "%s   %02d C"
+
+msgid "."
+msgstr ","
+
+msgid "3Pin"
+msgstr "3Pin"
+
+msgid "4Pin"
+msgstr "4Pin"
+
+msgid "4Pin (PID)"
+msgstr "4Pin (PID)"
+
+msgid "Action in case of Fan failure"
+msgstr "Działanie w przypadku awarii wentylatora"
+
+msgid "Auto-Delete Data older than (Days)"
+msgstr "Usuwanie plików starszych niż(Dni)"
+
+msgid "Auto-Delete older %s Days"
+msgstr "Automatycznie - usuń starszy % s Dni"
+
+msgid "Box Shutdown"
+msgstr "Wyłączyć DM "
+
+msgid "Box has no fancontrol hardware -> FC2 deactivated"
+msgstr "w DM nie ma wentylatora -> FC2 wyłączone"
+
+msgid "Box shutdown at Temperature (C)"
+msgstr "Zamknij DM w temperaturze (C)"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Check"
+msgstr "Kontrola"
+
+msgid "Choose path"
+msgstr "Wybierz ścieżkę"
+
+msgid "Control disabled"
+msgstr "Wyłączyć kontrolę"
+
+msgid "Current rpm  %4d"
+msgstr "Aktualny rpm  % 4d"
+
+msgid "Current value: %s"
+msgstr "Aktualna wartość: % s"
+
+msgid "Delete"
+msgstr "Usuń"
+
+msgid "Delete older 48h"
+msgstr "Usuń starszy 48h"
+
+msgid "Disk free : %d MByte"
+msgstr "Dysk wolny : % d MByte"
+
+msgid "Download"
+msgstr "Pobieranie"
+
+msgid "Enable Data Logging"
+msgstr "Włączanie rejestrowania danych "
+
+msgid "Enable Event Logging"
+msgstr "Włącz rejestrowanie zdarzeń"
+
+msgid "End temperature C"
+msgstr "Końcowa-temp.C"
+
+msgid "Extended Control Range"
+msgstr "Wzbogacona oferta sterowania"
+
+msgid "Fan is not working!"
+msgstr "Wentylator nie pracuje!"
+
+msgid "Fan off in Idle Mode"
+msgstr "Wentylator w trybie czuwania"
+
+msgid "Fan type"
+msgstr "Typ wentylatora"
+
+msgid "FanControl2 emergency, Box Shutdown now?"
+msgstr "FanControl2 awarja, wyłaczyć DM teraz?"
+
+msgid "File %s does not exists"
+msgstr "Plik %s nie istnieje"
+
+msgid "Filesize : %d %sByte"
+msgstr "Rozmiar pliku : %d %sBajtów"
+
+msgid ""
+"GUI needs a restart to apply the changes.\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+"GUI musi być uruchomione aby zastosować zmiany.\n"
+"czy chcesz uruchomić GUI teraz ?"
+
+msgid "Help"
+msgstr "Pomoc"
+
+msgid "Information"
+msgstr "Informacja"
+
+msgid "Initial PWM"
+msgstr "Pocz. PWM"
+
+msgid "Initial Voltage"
+msgstr "Pocz. Napięcie"
+
+msgid "Logging path"
+msgstr "Rejestrowanie ścieżki"
+
+msgid "Logging-Path: %s"
+msgstr "Ścieżka wpisania: %s"
+
+msgid "Max Fan %d rpm at PWM=255 (%s)"
+msgstr "Max Fan %d rpm w PWM=255 (%s)"
+
+msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
+msgstr "Max Fan %d rpm w PWM=255 i VLT=255 (%s)"
+
+msgid "Max Fan %d rpm at VLT=255 (%s)"
+msgstr "Max Fan %d rpm w VLT=255 (%s)"
+
+msgid "Min Fan Start %d rpm at PWM=%d"
+msgstr "Min Fan Start %d rpm w PWM=%d"
+
+msgid "Min Fan Start %d rpm at VLT=%d"
+msgstr "Min Fan Start %d rpm w VLT=%d"
+
+msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
+msgstr "Min Fan Start %d rpm w VLT=%d i PWM=0"
+
+msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
+msgstr "Min Fan Stop %d rpm w PWM=%d (%s)"
+
+msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
+msgstr "Min Fan Stop %d rpm w VLT=%d (%s)"
+
+msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
+msgstr "Min Fan Stop %d rpm w VLT=%d i PWM=0 (%s)"
+
+msgid "Number of WebIF-Log-Entries"
+msgstr "Liczba WebIF-Logi-Wejście"
+
+msgid "PID Ctl Err %03.2f %%"
+msgstr "PID Ctl Err %03.2f %%"
+
+msgid "PWM  %03d"
+msgstr "PWM  %03d"
+
+msgid "Restart GUI now?"
+msgstr "Wznowić GUI teraz?"
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Sensors"
+msgstr "Czujniki"
+
+msgid "Show Fan Speed as"
+msgstr "Prędkość obrotowa wentylatora"
+
+msgid "Show Monitor in Extension-Menu"
+msgstr "Pokaz Monitor w Rozszerzeniu - Menu "
+
+msgid "Show Plugin in Extension-Menu"
+msgstr "Pokazu Plugin w Rozszerzeniu - Menu"
+
+msgid "Speed"
+msgstr "Szybkość "
+
+msgid "Static temp C"
+msgstr "Temp. statyczna C"
+
+msgid "Target rpm  %4d"
+msgstr "Docelowo rpm  %4d"
+
+msgid "Temperature"
+msgstr "Temperatura"
+
+msgid "Temperature C  %4.1f"
+msgstr "Temperatura C  %4.1f"
+
+msgid "Voltage"
+msgstr "Napięcie "
+
+msgid "Voltage  %03d"
+msgstr "Napięcie   %03d"
+
+msgid "active"
+msgstr "aktywny "
+
+msgid "auto"
+msgstr "auto"
+
+msgid "below Tunerslot 4"
+msgstr "poniżej  Tunerslot 4"
+
+msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
+msgstr "prądRPM:%d docelowoRPM:%d Temp:%4.1f"
+
+msgid "disable DMM-FanControl"
+msgstr "DMM-Fancontrol wyłączyć"
+
+msgid "disabled"
+msgstr "wyłączony"
+
+msgid "display Info"
+msgstr "pokaż informację"
+
+msgid "do nothing"
+msgstr "nie rób nic"
+
+msgid "increases overheating protection to (C)"
+msgstr "ochrona przed wzrostem przegrzania (C)"
+
+msgid "left near Card-Slot"
+msgstr "lewa strona niedaleko gniazda karty"
+
+msgid "left near Front-CI"
+msgstr "lewa strona blisko-przodu CI"
+
+msgid "left of the Battery"
+msgstr "lewa strona koło baterii"
+
+msgid "max Speed rpm"
+msgstr "Max szybkość  rpm"
+
+msgid "min Speed rpm"
+msgstr "Min szybkość  rpm"
+
+msgid "near XILINX Spartan"
+msgstr "blisko XILINX Spartan"
+
+msgid "never"
+msgstr "nigdy"
+
+msgid "no"
+msgstr "nie"
+
+msgid "not active"
+msgstr "nie aktywne"
+
+msgid "over Security Card"
+msgstr "ponad Security Card"
+
+msgid "please set fan type (3Pin or 4Pin)"
+msgstr "Proszę ustawić typ wentylatora (3Pin albo 4Pin)"
+
+msgid "please wait (until 3min)..."
+msgstr "Proszę czekać (do 3min)..."
+
+msgid "press Info for HDD-Temp"
+msgstr " Info o HDD-temp"
+
+msgid "read HDD-Temperature in HDD-Standby-Mode"
+msgstr "czytaj temperaturę HDD-tryb gotowości"
+
+msgid "readme.txt"
+msgstr "readme.txt"
+
+msgid "turn off"
+msgstr "wyłączyć"
+
+msgid "turn on"
+msgstr "włączyć"
+
+msgid "under the Fan"
+msgstr "pod wentylatorem"
+
+msgid "under the WLAN"
+msgstr "pod WLAN "
+
+msgid "yes"
+msgstr "tak"
+
+msgid "yes, Except for Recording or HDD"
+msgstr "tak, z wyjątkiem nagrywania na HDD"
+
