@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 745 $
-$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $
-$Id: plugin.py 745 2013-01-12 16:04:44Z michael $
+$Revision: 760 $
+$Date: 2013-03-09 12:45:03 +0100 (Sat, 09 Mar 2013) $
+$Id: plugin.py 760 2013-03-09 11:45:03Z michael $
 '''
 
 from Screens.Screen import Screen
@@ -78,7 +78,7 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27,05.28"), ("05.50", "05.29,05.50")])
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", "05.29,05.50")])
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
@@ -298,8 +298,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 745 $"[1:-2] + "\n" + 
-							"$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $"[1:23] + "\n"
+							"$Revision: 760 $"[1:-2] + "\n" + 
+							"$Date: 2013-03-09 12:45:03 +0100 (Sat, 09 Mar 2013) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -315,262 +315,397 @@ from FritzCallFBF import FBF_dectActive, FBF_faxActive, FBF_rufumlActive, FBF_ta
 
 class FritzMenu(Screen, HelpableScreen):
 	def __init__(self, session):
-		fontSize = scaleV(24, 21) # indeed this is font size +2
-		noButtons = 2 # reset, wlan
-
 		if not fritzbox or not fritzbox.info:
 			return
 
-		if fritzbox.info[FBF_tamActive]:
-			noButtons += 1 # toggle mailboxes
-		width = max(DESKTOP_WIDTH - scaleH(500, 250), noButtons*140+(noButtons+1)*10)
-		# boxInfo 2 lines, gap, internet 2 lines, gap, dsl/wlan each 1 line, gap, buttons
-		height = 5 + 2*fontSize + 10 + 2*fontSize + 10 + 2*fontSize + 10 + 40 + 5
-		if fritzbox.info[FBF_tamActive] is not None:
-			height += fontSize
-		if fritzbox.info[FBF_dectActive] is not None:
-			height += fontSize
-		if fritzbox.info[FBF_faxActive] is not None:
-			height += fontSize
-		if fritzbox.info[FBF_rufumlActive] is not None:
-			height += fontSize
-		buttonsGap = (width-noButtons*140)/(noButtons+1)
-		buttonsVPos = height-40-5
-
-		varLinePos = 4
-		if fritzbox.info[FBF_tamActive] is not None:
-			mailboxLine = """
-				<widget name="FBFMailbox" position="%d,%d" size="%d,%d" font="Regular;%d" />
-				<widget name="mailbox_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				<widget name="mailbox_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-				<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				""" % (
-						40, 5+2*fontSize+10+varLinePos*fontSize+10, # position mailbox
-						width-40-20, fontSize, # size mailbox
-						fontSize-2,
-						"skin_default/buttons/button_green_off.png",
-						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button mailbox
-						"skin_default/buttons/button_green.png",
-						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button mailbox
-						noButtons*buttonsGap+(noButtons-1)*140, buttonsVPos,
-						noButtons*buttonsGap+(noButtons-1)*140, buttonsVPos,
-				)
-			varLinePos += 1
-		else:
-			mailboxLine = ""
-
-		if fritzbox.info[FBF_dectActive] is not None:
-			dectLine = """
-				<widget name="FBFDect" position="%d,%d" size="%d,%d" font="Regular;%d" />
-				<widget name="dect_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				<widget name="dect_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				""" % (
-						40, 5+2*fontSize+10+varLinePos*fontSize+10, # position dect
-						width-40-20, fontSize, # size dect
-						fontSize-2,
-						"skin_default/buttons/button_green_off.png",
-						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
-						"skin_default/buttons/button_green.png",
-						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
-				)
-			varLinePos += 1
-		else:
-			dectLine = ""
-
-		if fritzbox.info[FBF_faxActive] is not None:
-			faxLine = """
-				<widget name="FBFFax" position="%d,%d" size="%d,%d" font="Regular;%d" />
-				<widget name="fax_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				<widget name="fax_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				""" % (
-						40, 5+2*fontSize+10+varLinePos*fontSize+10, # position dect
-						width-40-20, fontSize, # size dect
-						fontSize-2,
-						"skin_default/buttons/button_green_off.png",
-						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
-						"skin_default/buttons/button_green.png",
-						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
-				)
-			varLinePos += 1
-		else:
-			faxLine = ""
-
-		if fritzbox.info[FBF_rufumlActive] is not None:
-			rufumlLine = """
-				<widget name="FBFRufuml" position="%d,%d" size="%d,%d" font="Regular;%d" />
-				<widget name="rufuml_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				<widget name="rufuml_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				""" % (
-						40, 5+2*fontSize+10+varLinePos*fontSize+10, # position dect
-						width-40-20, fontSize, # size dect
-						fontSize-2,
-						"skin_default/buttons/button_green_off.png",
-						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
-						"skin_default/buttons/button_green.png",
-						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
-				)
-			varLinePos += 1
-		else:
-			rufumlLine = ""
+		if config.plugins.FritzCall.fwVersion.value == "old" or config.plugins.FritzCall.fwVersion.value == "05.27":
+			fontSize = scaleV(24, 21) # indeed this is font size +2
+			noButtons = 2 # reset, wlan
 	
-		self.skin = """
-			<screen name="FritzMenu" position="center,center" size="%d,%d" title="FRITZ!Box Fon Status" >
-				<widget name="FBFInfo" position="%d,%d" size="%d,%d" font="Regular;%d" />
-				<widget name="FBFInternet" position="%d,%d" size="%d,%d" font="Regular;%d" />
-				<widget name="internet_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				<widget name="internet_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				<widget name="FBFDsl" position="%d,%d" size="%d,%d" font="Regular;%d" />
-				<widget name="dsl_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				<widget name="dsl_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				<widget name="FBFWlan" position="%d,%d" size="%d,%d" font="Regular;%d" />
-				<widget name="wlan_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				<widget name="wlan_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
-				%s
-				%s
-				%s
-				%s
-				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="%s" transparent="1" alphatest="on" />
-				<widget name="key_red" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="%s" transparent="1" alphatest="on" />
-				<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			</screen>""" % (
-						width, height, # size
-						40, 5, # position info
-						width-2*40, 2*fontSize, # size info
-						fontSize-2,
-						40, 5+2*fontSize+10, # position internet
-						width-40, 2*fontSize, # size internet
-						fontSize-2,
-						"skin_default/buttons/button_green_off.png",
-						20, 5+2*fontSize+10+(fontSize-16)/2, # position button internet
-						"skin_default/buttons/button_green.png",
-						20, 5+2*fontSize+10+(fontSize-16)/2, # position button internet
-						40, 5+2*fontSize+10+2*fontSize+10, # position dsl
-						width-40-20, fontSize, # size dsl
-						fontSize-2,
-						"skin_default/buttons/button_green_off.png",
-						20, 5+2*fontSize+10+2*fontSize+10+(fontSize-16)/2, # position button dsl
-						"skin_default/buttons/button_green.png",
-						20, 5+2*fontSize+10+2*fontSize+10+(fontSize-16)/2, # position button dsl
-						40, 5+2*fontSize+10+3*fontSize+10, # position wlan
-						width-40-20, fontSize, # size wlan
-						fontSize-2,
-						"skin_default/buttons/button_green_off.png",
-						20, 5+2*fontSize+10+3*fontSize+10+(fontSize-16)/2, # position button wlan
-						"skin_default/buttons/button_green.png",
-						20, 5+2*fontSize+10+3*fontSize+10+(fontSize-16)/2, # position button wlan
-						mailboxLine,
-						dectLine,
-						faxLine,
-						rufumlLine,
-						buttonsGap, buttonsVPos, "skin_default/buttons/red.png", buttonsGap, buttonsVPos,
-						buttonsGap+140+buttonsGap, buttonsVPos, "skin_default/buttons/green.png", buttonsGap+140+buttonsGap, buttonsVPos,
-						)
-
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
-		# TRANSLATORS: keep it short, this is a button
-		self["key_red"] = Button(_("Reset"))
-		# TRANSLATORS: keep it short, this is a button
-		self["key_green"] = Button(_("Toggle WLAN"))
-		self._mailboxActive = False
-		if fritzbox.info[FBF_tamActive] is not None:
+			if fritzbox.info[FBF_tamActive]:
+				noButtons += 1 # toggle mailboxes
+			width = max(DESKTOP_WIDTH - scaleH(500, 250), noButtons*140+(noButtons+1)*10)
+			# boxInfo 2 lines, gap, internet 2 lines, gap, dsl/wlan each 1 line, gap, buttons
+			height = 5 + 2*fontSize + 10 + 2*fontSize + 10 + 2*fontSize + 10 + 40 + 5
+			if fritzbox.info[FBF_tamActive] is not None:
+				height += fontSize
+			if fritzbox.info[FBF_dectActive] is not None:
+				height += fontSize
+			if fritzbox.info[FBF_faxActive] is not None:
+				height += fontSize
+			if fritzbox.info[FBF_rufumlActive] is not None:
+				height += fontSize
+			buttonsGap = (width-noButtons*140)/(noButtons+1)
+			buttonsVPos = height-40-5
+	
+			varLinePos = 4
+			if fritzbox.info[FBF_tamActive] is not None:
+				mailboxLine = """
+					<widget name="FBFMailbox" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="mailbox_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="mailbox_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+					<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+					""" % (
+							40, 5+2*fontSize+10+varLinePos*fontSize+10, # position mailbox
+							width-40-20, fontSize, # size mailbox
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button mailbox
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button mailbox
+							noButtons*buttonsGap+(noButtons-1)*140, buttonsVPos,
+							noButtons*buttonsGap+(noButtons-1)*140, buttonsVPos,
+					)
+				varLinePos += 1
+			else:
+				mailboxLine = ""
+	
+			if fritzbox.info[FBF_dectActive] is not None:
+				dectLine = """
+					<widget name="FBFDect" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="dect_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="dect_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					""" % (
+							40, 5+2*fontSize+10+varLinePos*fontSize+10, # position dect
+							width-40-20, fontSize, # size dect
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
+					)
+				varLinePos += 1
+			else:
+				dectLine = ""
+	
+			if fritzbox.info[FBF_faxActive] is not None:
+				faxLine = """
+					<widget name="FBFFax" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="fax_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="fax_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					""" % (
+							40, 5+2*fontSize+10+varLinePos*fontSize+10, # position dect
+							width-40-20, fontSize, # size dect
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
+					)
+				varLinePos += 1
+			else:
+				faxLine = ""
+	
+			if fritzbox.info[FBF_rufumlActive] is not None:
+				rufumlLine = """
+					<widget name="FBFRufuml" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="rufuml_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="rufuml_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					""" % (
+							40, 5+2*fontSize+10+varLinePos*fontSize+10, # position dect
+							width-40-20, fontSize, # size dect
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
+					)
+				varLinePos += 1
+			else:
+				rufumlLine = ""
+		
+			self.skin = """
+				<screen name="FritzMenu" position="center,center" size="%d,%d" title="FRITZ!Box Fon Status" >
+					<widget name="FBFInfo" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="FBFInternet" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="internet_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="internet_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="FBFDsl" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="dsl_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="dsl_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="FBFWlan" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="wlan_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="wlan_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					%s
+					%s
+					%s
+					%s
+					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="%s" transparent="1" alphatest="on" />
+					<widget name="key_red" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="%s" transparent="1" alphatest="on" />
+					<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				</screen>""" % (
+							width, height, # size
+							40, 5, # position info
+							width-2*40, 2*fontSize, # size info
+							fontSize-2,
+							40, 5+2*fontSize+10, # position internet
+							width-40, 2*fontSize, # size internet
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+(fontSize-16)/2, # position button internet
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+(fontSize-16)/2, # position button internet
+							40, 5+2*fontSize+10+2*fontSize+10, # position dsl
+							width-40-20, fontSize, # size dsl
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+2*fontSize+10+(fontSize-16)/2, # position button dsl
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+2*fontSize+10+(fontSize-16)/2, # position button dsl
+							40, 5+2*fontSize+10+3*fontSize+10, # position wlan
+							width-40-20, fontSize, # size wlan
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+3*fontSize+10+(fontSize-16)/2, # position button wlan
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+3*fontSize+10+(fontSize-16)/2, # position button wlan
+							mailboxLine,
+							dectLine,
+							faxLine,
+							rufumlLine,
+							buttonsGap, buttonsVPos, "skin_default/buttons/red.png", buttonsGap, buttonsVPos,
+							buttonsGap+140+buttonsGap, buttonsVPos, "skin_default/buttons/green.png", buttonsGap+140+buttonsGap, buttonsVPos,
+							)
+	
+			Screen.__init__(self, session)
+			HelpableScreen.__init__(self)
 			# TRANSLATORS: keep it short, this is a button
-			self["key_yellow"] = Button(_("Toggle Mailbox"))
-			self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions", "NumberActions", "EPGSelectActions"],
-											{
-											"cancel": self._exit,
-											"ok": self._exit,
-											"red": self._reset,
-											"green": self._toggleWlan,
-											"yellow": (lambda: self._toggleMailbox(-1)),
-											"0": (lambda: self._toggleMailbox(0)),
-											"1": (lambda: self._toggleMailbox(1)),
-											"2": (lambda: self._toggleMailbox(2)),
-											"3": (lambda: self._toggleMailbox(3)),
-											"4": (lambda: self._toggleMailbox(4)),
-											"info": self._getInfo,
-											}, -2)
+			self["key_red"] = Button(_("Reset"))
+			# TRANSLATORS: keep it short, this is a button
+			self["key_green"] = Button(_("Toggle WLAN"))
+			self._mailboxActive = False
+			if fritzbox.info[FBF_tamActive] is not None:
+				# TRANSLATORS: keep it short, this is a button
+				self["key_yellow"] = Button(_("Toggle Mailbox"))
+				self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions", "NumberActions", "EPGSelectActions"],
+												{
+												"cancel": self._exit,
+												"ok": self._exit,
+												"red": self._reset,
+												"green": self._toggleWlan,
+												"yellow": (lambda: self._toggleMailbox(-1)),
+												"0": (lambda: self._toggleMailbox(0)),
+												"1": (lambda: self._toggleMailbox(1)),
+												"2": (lambda: self._toggleMailbox(2)),
+												"3": (lambda: self._toggleMailbox(3)),
+												"4": (lambda: self._toggleMailbox(4)),
+												"info": self._getInfo,
+												}, -2)
+				# TRANSLATORS: keep it short, this is a help text
+				self.helpList.append((self["menuActions"], "ColorActions", [("yellow", _("Toggle all mailboxes"))]))
+				# TRANSLATORS: keep it short, this is a help text
+				self.helpList.append((self["menuActions"], "NumberActions", [("0", _("Toggle 1. mailbox"))]))
+				# TRANSLATORS: keep it short, this is a help text
+				self.helpList.append((self["menuActions"], "NumberActions", [("1", _("Toggle 2. mailbox"))]))
+				# TRANSLATORS: keep it short, this is a help text
+				self.helpList.append((self["menuActions"], "NumberActions", [("2", _("Toggle 3. mailbox"))]))
+				# TRANSLATORS: keep it short, this is a help text
+				self.helpList.append((self["menuActions"], "NumberActions", [("3", _("Toggle 4. mailbox"))]))
+				# TRANSLATORS: keep it short, this is a help text
+				self.helpList.append((self["menuActions"], "NumberActions", [("4", _("Toggle 5. mailbox"))]))
+				self["FBFMailbox"] = Label(_('Mailbox'))
+				self["mailbox_inactive"] = Pixmap()
+				self["mailbox_active"] = Pixmap()
+				self["mailbox_active"].hide()
+			else:
+				self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions", "EPGSelectActions"],
+												{
+												"cancel": self._exit,
+												"ok": self._exit,
+												"green": self._toggleWlan,
+												"red": self._reset,
+												"info": self._getInfo,
+												}, -2)
+	
 			# TRANSLATORS: keep it short, this is a help text
-			self.helpList.append((self["menuActions"], "ColorActions", [("yellow", _("Toggle all mailboxes"))]))
+			self.helpList.append((self["menuActions"], "OkCancelActions", [("cancel", _("Quit"))]))
 			# TRANSLATORS: keep it short, this is a help text
-			self.helpList.append((self["menuActions"], "NumberActions", [("0", _("Toggle 1. mailbox"))]))
+			self.helpList.append((self["menuActions"], "OkCancelActions", [("ok", _("Quit"))]))
 			# TRANSLATORS: keep it short, this is a help text
-			self.helpList.append((self["menuActions"], "NumberActions", [("1", _("Toggle 2. mailbox"))]))
+			self.helpList.append((self["menuActions"], "ColorActions", [("green", _("Toggle WLAN"))]))
 			# TRANSLATORS: keep it short, this is a help text
-			self.helpList.append((self["menuActions"], "NumberActions", [("2", _("Toggle 3. mailbox"))]))
+			self.helpList.append((self["menuActions"], "ColorActions", [("red", _("Reset"))]))
 			# TRANSLATORS: keep it short, this is a help text
-			self.helpList.append((self["menuActions"], "NumberActions", [("3", _("Toggle 4. mailbox"))]))
-			# TRANSLATORS: keep it short, this is a help text
-			self.helpList.append((self["menuActions"], "NumberActions", [("4", _("Toggle 5. mailbox"))]))
-			self["FBFMailbox"] = Label(_('Mailbox'))
-			self["mailbox_inactive"] = Pixmap()
-			self["mailbox_active"] = Pixmap()
-			self["mailbox_active"].hide()
+			self.helpList.append((self["menuActions"], "EPGSelectActions", [("info", _("Refresh status"))]))
+	
+			self["FBFInfo"] = Label(_('Getting status from FRITZ!Box Fon...'))
+	
+			self["FBFInternet"] = Label('Internet')
+			self["internet_inactive"] = Pixmap()
+			self["internet_active"] = Pixmap()
+			self["internet_active"].hide()
+	
+			self["FBFDsl"] = Label('DSL')
+			self["dsl_inactive"] = Pixmap()
+			self["dsl_inactive"].hide()
+			self["dsl_active"] = Pixmap()
+			self["dsl_active"].hide()
+	
+			self["FBFWlan"] = Label('WLAN ')
+			self["wlan_inactive"] = Pixmap()
+			self["wlan_inactive"].hide()
+			self["wlan_active"] = Pixmap()
+			self["wlan_active"].hide()
+			self._wlanActive = False
+	
+			if fritzbox.info[FBF_dectActive] is not None: 
+				self["FBFDect"] = Label('DECT')
+				self["dect_inactive"] = Pixmap()
+				self["dect_active"] = Pixmap()
+				self["dect_active"].hide()
+	
+			if fritzbox.info[FBF_faxActive] is not None: 
+				self["FBFFax"] = Label('Fax')
+				self["fax_inactive"] = Pixmap()
+				self["fax_active"] = Pixmap()
+				self["fax_active"].hide()
+	
+			if fritzbox.info[FBF_rufumlActive] is not None: 
+				self["FBFRufuml"] = Label(_('Call redirection'))
+				self["rufuml_inactive"] = Pixmap()
+				self["rufuml_active"] = Pixmap()
+				self["rufuml_active"].hide()
 		else:
+			fontSize = scaleV(24, 21) # indeed this is font size +2
+	
+			width = DESKTOP_WIDTH - scaleH(500, 250)
+			# boxInfo 2 lines, gap, internet 2 lines, gap, dsl/wlan/dect/fax/rufuml each 1 line, gap
+			height = 5 + 2*fontSize + 10 + 2*fontSize + 10 + 5*fontSize + 5
+	
+			self.skin = """
+				<screen name="FritzMenuNew" position="center,center" size="%d,%d" title="FRITZ!Box Fon Status" >
+					<widget name="FBFInfo" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="FBFInternet" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="internet_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="internet_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="FBFDsl" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="dsl_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="dsl_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="FBFWlan" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="wlan_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="wlan_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="FBFDect" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="dect_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="dect_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="FBFFax" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="fax_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="fax_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="FBFRufuml" position="%d,%d" size="%d,%d" font="Regular;%d" />
+					<widget name="rufuml_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<widget name="rufuml_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				</screen>""" % (
+							width, height, # size
+							40, 5, # position info
+							width-2*40, 2*fontSize, # size info
+							fontSize-2,
+							40, 5+2*fontSize+10, # position internet
+							width-40, 2*fontSize, # size internet
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+(fontSize-16)/2, # position button internet
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+(fontSize-16)/2, # position button internet
+							40, 5+2*fontSize+10+2*fontSize+10, # position dsl
+							width-40-20, fontSize, # size dsl
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+2*fontSize+10+(fontSize-16)/2, # position button dsl
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+2*fontSize+10+(fontSize-16)/2, # position button dsl
+							40, 5+2*fontSize+10+3*fontSize+10, # position wlan
+							width-40-20, fontSize, # size wlan
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+3*fontSize+10+(fontSize-16)/2, # position button wlan
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+3*fontSize+10+(fontSize-16)/2, # position button wlan
+							40, 5+2*fontSize+10+4*fontSize+10, # position dect
+							width-40-20, fontSize, # size dect
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+4*fontSize+10+(fontSize-16)/2, # position button dect
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+4*fontSize+10+(fontSize-16)/2, # position button dect
+							40, 5+2*fontSize+10+5*fontSize+10, # position dect
+							width-40-20, fontSize, # size fax
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+5*fontSize+10+(fontSize-16)/2, # position button fax
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+5*fontSize+10+(fontSize-16)/2, # position button fax
+							40, 5+2*fontSize+10+6*fontSize+10, # position dect
+							width-40-20, fontSize, # size rufuml
+							fontSize-2,
+							"skin_default/buttons/button_green_off.png",
+							20, 5+2*fontSize+10+6*fontSize+10+(fontSize-16)/2, # position button rufuml
+							"skin_default/buttons/button_green.png",
+							20, 5+2*fontSize+10+6*fontSize+10+(fontSize-16)/2, # position button rufuml
+							)
+	
+			Screen.__init__(self, session)
+			HelpableScreen.__init__(self)
+			# TRANSLATORS: keep it short, this is a button
 			self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions", "EPGSelectActions"],
 											{
 											"cancel": self._exit,
 											"ok": self._exit,
-											"green": self._toggleWlan,
-											"red": self._reset,
 											"info": self._getInfo,
 											}, -2)
-
-		# TRANSLATORS: keep it short, this is a help text
-		self.helpList.append((self["menuActions"], "OkCancelActions", [("cancel", _("Quit"))]))
-		# TRANSLATORS: keep it short, this is a help text
-		self.helpList.append((self["menuActions"], "OkCancelActions", [("ok", _("Quit"))]))
-		# TRANSLATORS: keep it short, this is a help text
-		self.helpList.append((self["menuActions"], "ColorActions", [("green", _("Toggle WLAN"))]))
-		# TRANSLATORS: keep it short, this is a help text
-		self.helpList.append((self["menuActions"], "ColorActions", [("red", _("Reset"))]))
-		# TRANSLATORS: keep it short, this is a help text
-		self.helpList.append((self["menuActions"], "EPGSelectActions", [("info", _("Refresh status"))]))
-
-		self["FBFInfo"] = Label(_('Getting status from FRITZ!Box Fon...'))
-
-		self["FBFInternet"] = Label('Internet')
-		self["internet_inactive"] = Pixmap()
-		self["internet_active"] = Pixmap()
-		self["internet_active"].hide()
-
-		self["FBFDsl"] = Label('DSL')
-		self["dsl_inactive"] = Pixmap()
-		self["dsl_inactive"].hide()
-		self["dsl_active"] = Pixmap()
-		self["dsl_active"].hide()
-
-		self["FBFWlan"] = Label('WLAN ')
-		self["wlan_inactive"] = Pixmap()
-		self["wlan_inactive"].hide()
-		self["wlan_active"] = Pixmap()
-		self["wlan_active"].hide()
-		self._wlanActive = False
-
-		if fritzbox.info[FBF_dectActive] is not None: 
+	
+			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "OkCancelActions", [("cancel", _("Quit"))]))
+			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "OkCancelActions", [("ok", _("Quit"))]))
+			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "EPGSelectActions", [("info", _("Refresh status"))]))
+	
+			self["FBFInfo"] = Label(_('Getting status from FRITZ!Box Fon...'))
+	
+			self["FBFInternet"] = Label('Internet')
+			self["internet_inactive"] = Pixmap()
+			self["internet_inactive"].hide()
+			self["internet_active"] = Pixmap()
+			self["internet_active"].hide()
+	
+			self["FBFDsl"] = Label('DSL')
+			self["dsl_inactive"] = Pixmap()
+			self["dsl_inactive"].hide()
+			self["dsl_active"] = Pixmap()
+			self["dsl_active"].hide()
+	
+			self["FBFWlan"] = Label('WLAN ')
+			self["wlan_inactive"] = Pixmap()
+			self["wlan_inactive"].hide()
+			self["wlan_active"] = Pixmap()
+			self["wlan_active"].hide()
+			self._wlanActive = False
+	
 			self["FBFDect"] = Label('DECT')
 			self["dect_inactive"] = Pixmap()
+			self["dect_inactive"].hide()
 			self["dect_active"] = Pixmap()
 			self["dect_active"].hide()
-
-		if fritzbox.info[FBF_faxActive] is not None: 
+	
 			self["FBFFax"] = Label('Fax')
 			self["fax_inactive"] = Pixmap()
+			self["fax_inactive"].hide()
 			self["fax_active"] = Pixmap()
 			self["fax_active"].hide()
-
-		if fritzbox.info[FBF_rufumlActive] is not None: 
+	
 			self["FBFRufuml"] = Label(_('Call redirection'))
 			self["rufuml_inactive"] = Pixmap()
+			self["rufuml_inactive"].hide()
 			self["rufuml_active"] = Pixmap()
 			self["rufuml_active"].hide()
-
-		self._timer = eTimer()
-		self._timer.callback.append(self._getInfo)
-		self.onShown.append(lambda: self._timer.start(5000))
-		self.onHide.append(self._timer.stop)
+			
+		#=======================================================================
+		# self._timer = eTimer()
+		# self._timer.callback.append(self._getInfo)
+		# self.onShown.append(lambda: self._timer.start(5000))
+		# self.onHide.append(self._timer.stop)
+		#=======================================================================
 		self._getInfo()
 		self.onLayoutFinish.append(self.setWindowTitle)
 
@@ -581,8 +716,9 @@ class FritzMenu(Screen, HelpableScreen):
 	def _getInfo(self):
 		if fritzbox:
 			fritzbox.getInfo(self._fillMenu)
+			self._fillMenu(fritzbox.info, True)
 
-	def _fillMenu(self, status):
+	def _fillMenu(self, status, refreshing=False):
 		(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive) = status
 		if wlanState:
 			self._wlanActive = (wlanState[0] == '1')
@@ -591,10 +727,13 @@ class FritzMenu(Screen, HelpableScreen):
 			if not self.has_key("FBFInfo"): # screen is closed already
 				return
 
-			if boxInfo:
-				self["FBFInfo"].setText(boxInfo.replace(', ', '\n'))
+			if refreshing:
+				self["FBFInfo"].setText(_("Refreshing..."))
 			else:
-				self["FBFInfo"].setText('BoxInfo ' + _('Status not available'))
+				if boxInfo:
+					self["FBFInfo"].setText(boxInfo.replace(', ', '\n'))
+				else:
+					self["FBFInfo"].setText('BoxInfo ' + _('Status not available'))
 
 			if ipAddress:
 				if upTime:
@@ -668,7 +807,7 @@ class FritzMenu(Screen, HelpableScreen):
 					else:
 						self["FBFMailbox"].setText(str(tamActive[0]) + ' ' + _('mailboxes active') + ' ' + message)
 	
-			if fritzbox.info[FBF_dectActive] and dectActive and self.has_key("dect_inactive"):
+			if dectActive and self.has_key("dect_inactive"):
 				self["dect_inactive"].hide()
 				self["dect_active"].show()
 				if dectActive == 0:
@@ -678,24 +817,33 @@ class FritzMenu(Screen, HelpableScreen):
 						self["FBFDect"].setText(_('One DECT phone registered'))
 					else:
 						self["FBFDect"].setText(str(dectActive) + ' ' + _('DECT phones registered'))
+			else:
+				self["dect_active"].hide()
+				self["dect_inactive"].show()
+				self["FBFFax"].setText(_('DECT inactive'))
 
-			if fritzbox.info[FBF_faxActive] and faxActive:
+			if faxActive:
 				self["fax_inactive"].hide()
 				self["fax_active"].show()
 				self["FBFFax"].setText(_('Software fax active'))
+			else:
+				self["fax_active"].hide()
+				self["fax_inactive"].show()
+				self["FBFFax"].setText(_('Software fax inactive'))
 
-			if fritzbox.info[FBF_rufumlActive] is not None and rufumlActive is not None:
-				if rufumlActive == 0:
-					self["rufuml_active"].hide()
-					self["rufuml_inactive"].show()
-					self["FBFRufuml"].setText(_('No call redirection active'))
+			if rufumlActive:
+				self["rufuml_inactive"].hide()
+				self["rufuml_active"].show()
+				if rufumlActive == -1: # means no number available
+					self["FBFRufuml"].setText(_('Call redirection active'))
+				elif rufumlActive == 1:
+					self["FBFRufuml"].setText(_('One call redirection active'))
 				else:
-					self["rufuml_inactive"].hide()
-					self["rufuml_active"].show()
-					if rufumlActive == 1:
-						self["FBFRufuml"].setText(_('One call redirection active'))
-					else:
-						self["FBFRufuml"].setText(str(rufumlActive) + ' ' + _('call redirections active'))
+					self["FBFRufuml"].setText(str(rufumlActive) + ' ' + _('call redirections active'))
+			else:
+				self["rufuml_active"].hide()
+				self["rufuml_inactive"].show()
+				self["FBFRufuml"].setText(_('No call redirection active'))
 
 		except KeyError:
 			debug("[FritzCallFBF] _fillMenu: " + traceback.format_exc())
@@ -719,7 +867,9 @@ class FritzMenu(Screen, HelpableScreen):
 		self._exit()
 
 	def _exit(self):
-		self._timer.stop()
+		#=======================================================================
+		# self._timer.stop()
+		#=======================================================================
 		self.close()
 
 
@@ -1704,7 +1854,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 745 $"[1: - 1] + "$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 760 $"[1: - 1] + "$Date: 2013-03-09 12:45:03 +0100 (Sat, 09 Mar 2013) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1827,7 +1977,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			if fritzbox and fritzbox.info:
 				self.session.open(FritzMenu)
 			else:
-				self.session.open(MessageBox, _("Cannot get infos from FRITZ!Box"), type=MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _("Cannot get infos from FRITZ!Box yet; try later"), type=MessageBox.TYPE_INFO)
 		else:
 			self.session.open(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
@@ -2211,7 +2361,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 745 $"[1:-1]	+ "$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 760 $"[1:-1]	+ "$Date: 2013-03-09 12:45:03 +0100 (Sat, 09 Mar 2013) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2430,7 +2580,7 @@ def displayFBFStatus(session, servicelist=None): #@UnusedVariable # pylint: disa
 		if fritzbox and fritzbox.info:
 			session.open(FritzMenu)
 		else:
-			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box"), type=MessageBox.TYPE_INFO)
+			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet; try later"), type=MessageBox.TYPE_INFO)
 	else:
 		Notifications.AddNotification(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
