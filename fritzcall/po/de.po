@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-09 12:49+0100\n"
-"PO-Revision-Date: 2013-03-09 12:51+0100\n"
+"POT-Creation-Date: 2013-03-09 15:09+0100\n"
+"PO-Revision-Date: 2013-03-09 15:09+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: \n"
@@ -77,7 +77,9 @@ msgid "Cannot get calls from FRITZ!Box"
 msgstr "Kann Anrufe nicht von der FRITZ!Box bekommen"
 
 msgid "Cannot get infos from FRITZ!Box yet; try later"
-msgstr "Kann Informationen von der FRITZ!Box noch nciht bekommen; versuche es später nochmal"
+msgstr ""
+"Kann Informationen von der FRITZ!Box noch nciht bekommen; versuche es später "
+"nochmal"
 
 msgid "Compact Flash"
 msgstr "Compact Flash"
@@ -669,9 +671,6 @@ msgstr "Anrufbeantworter aktiv"
 msgid "mobile"
 msgstr "Handy"
 
-msgid "no SID"
-msgstr "keine SID"
-
 msgid "no calls"
 msgstr "keine Anrufe"
 
@@ -715,3 +714,6 @@ msgstr "keine Anzeige"
 
 msgid "work"
 msgstr "Büro"
+
+msgid "wrong user or password?"
+msgstr "falscher Benutzer oder falsches Passwort?"

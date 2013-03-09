@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 759 $
-$Date: 2013-03-09 11:45:06 +0100 (Sat, 09 Mar 2013) $
-$Id: FritzCallFBF.py 759 2013-03-09 10:45:06Z michael $
+$Revision: 761 $
+$Date: 2013-03-09 15:07:53 +0100 (Sa, 09 Mrz 2013) $
+$Id: FritzCallFBF.py 761 2013-03-09 14:07:53Z michael $
 '''
 
 from . import _, __, debug #@UnresolvedImport # pylint: disable=E0611,F0401
@@ -1163,29 +1163,33 @@ class FritzCallFBF_05_50:
 			debug("[FritzCallFBF_05_50] md5Login/buildResponse: " + md5.hexdigest())
 			return challenge + '-' + md5.hexdigest()
 
-		linkP = open("/tmp/FritzDebug_sid.xml", "w")
-		linkP.write(sidXml)
-		linkP.close()
+		#=======================================================================
+		# linkP = open("/tmp/FritzDebug_sid.xml", "w")
+		# linkP.write(sidXml)
+		# linkP.close()
+		#=======================================================================
 
 		debug("[FritzCallFBF_05_50] _md5Login")
 		sidX = ET.fromstring(sidXml)
-		self._md5Sid = sidX.find("SID").text
-		debug("[FritzCallFBF_05_50] _md5Login: SID "+ repr(self._md5Sid))
-		if self._md5Sid:
-			debug("[FritzCallFBF_05_50] _md5Login: SID "+ self._md5Sid)
-		else:
-			debug("[FritzCallFBF_05_50] _md5Login: no sid! That must be an old firmware.")
-			self._errorLogin('No sid?!?')
-			return
-
-		debug("[FritzCallFBF_05_50] _md5Login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
-		self._md5LoginTimestamp = time.time()
-		if self._md5Sid != "0000000000000000":
-			for callback in self._loginCallbacks:
-				debug("[FritzCallFBF_05_50] _md5Login: calling " + callback.__name__)
-				callback(None)
-			self._loginCallbacks = []
-			return
+	#===========================================================================
+	#	self._md5Sid = sidX.find("SID").text
+	#	if self._md5Sid:
+	#		debug("[FritzCallFBF_05_50] _md5Login: SID "+ self._md5Sid)
+	#	else:
+	#		debug("[FritzCallFBF_05_50] _md5Login: no sid! That must be an old firmware.")
+	#		self._notify(_("FRITZ!Box - Error logging in\n\n") + _("wrong firmware version?"))
+	#		return
+ # 
+	#	debug("[FritzCallFBF_05_50] _md5Login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
+	#	self._md5LoginTimestamp = time.time()
+	#	if self._md5Sid != "0000000000000000":
+	#		debug("[FritzCallFBF_05_50] _md5Login: SID "+ self._md5Sid)
+	#		for callback in self._loginCallbacks:
+	#			debug("[FritzCallFBF_05_50] _md5Login: calling " + callback.__name__)
+	#			callback(None)
+	#		self._loginCallbacks = []
+	#		return
+	#===========================================================================
 
 		challenge = sidX.find("Challenge").text
 		if challenge:
@@ -1209,24 +1213,23 @@ class FritzCallFBF_05_50:
 	def _gotPageLogin(self, sidXml):
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login verification"))
-		debug("[FritzCallFBF_05_50] _gotPageLogin: verify login")
-		start = sidXml.find('<p class="errorMessage">FEHLER:&nbsp;')
-		if start != -1:
-			start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
-			text = _("FRITZ!Box - Error logging in\n\n") + sidXml[start : sidXml.find('</p>', start)]
-			self._notify(text)
-			return
-		else:
-			if self._callScreen:
-				self._callScreen.updateStatus(_("login ok"))
+
+		#=======================================================================
+		# linkP = open("/tmp/sid.xml", "w")
+		# linkP.write(sidXml)
+		# linkP.close()
+		#=======================================================================
 
 		sidX = ET.fromstring(sidXml)
 		self._md5Sid = sidX.find("SID").text
 		if self._md5Sid and self._md5Sid != "0000000000000000":
 			debug("[FritzCallFBF_05_50] _gotPageLogin: found sid: " + self._md5Sid)
 		else:
-			self._notify(_("FRITZ!Box - Error logging in\n\n") + _("no SID"))
+			self._notify(_("FRITZ!Box - Error logging in\n\n") + _("wrong user or password?"))
 			return
+
+		if self._callScreen:
+			self._callScreen.updateStatus(_("login ok"))
 
 		for callback in self._loginCallbacks:
 			debug("[FritzCallFBF_05_50] _gotPageLogin: calling " + callback.__name__)

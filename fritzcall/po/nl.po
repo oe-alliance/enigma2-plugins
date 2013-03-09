@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-09 12:49+0100\n"
+"POT-Creation-Date: 2013-03-09 15:09+0100\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -650,9 +650,6 @@ msgstr "mailboxen actief"
 msgid "mobile"
 msgstr "mobiel"
 
-msgid "no SID"
-msgstr ""
-
 msgid "no calls"
 msgstr ""
 
@@ -698,6 +695,9 @@ msgstr "niets weergeven"
 
 msgid "work"
 msgstr "werk"
+
+msgid "wrong user or password?"
+msgstr ""
 
 #~ msgid "Areacode to add to Outgoing Calls (if necessary)"
 #~ msgstr "Netnummer bij uitgaande gesprekken  (indien nodig)"

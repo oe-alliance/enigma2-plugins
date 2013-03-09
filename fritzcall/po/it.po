@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-09 12:49+0100\n"
+"POT-Creation-Date: 2013-03-09 15:09+0100\n"
 "PO-Revision-Date: 2013-01-20 15:17+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -666,9 +666,6 @@ msgstr "caselle di posta attive"
 msgid "mobile"
 msgstr "Cellulare"
 
-msgid "no SID"
-msgstr "Nessun SID"
-
 msgid "no calls"
 msgstr "Nessuna"
 
@@ -713,8 +710,14 @@ msgstr "Nulla"
 msgid "work"
 msgstr "Ufficio"
 
+msgid "wrong user or password?"
+msgstr ""
+
 #~ msgid "Cannot get infos from FRITZ!Box"
 #~ msgstr "Recupero informazioni dalla FRITZ!Box impossibile"
 
 #~ msgid "business"
 #~ msgstr "Affari"
+
+#~ msgid "no SID"
+#~ msgstr "Nessun SID"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-09 12:49+0100\n"
+"POT-Creation-Date: 2013-03-09 15:09+0100\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -644,9 +644,6 @@ msgstr "Sandučići aktivni"
 msgid "mobile"
 msgstr "Mobilni"
 
-msgid "no SID"
-msgstr ""
-
 msgid "no calls"
 msgstr ""
 
@@ -690,6 +687,9 @@ msgstr "Ništa ne pokazuj"
 
 msgid "work"
 msgstr "Posao"
+
+msgid "wrong user or password?"
+msgstr ""
 
 #~ msgid "Areacode to add to Outgoing Calls (if necessary)"
 #~ msgstr "Pozivni broj za dodati izlaznim pozivima (ako je potrebno)"

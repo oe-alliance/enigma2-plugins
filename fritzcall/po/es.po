@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-09 12:49+0100\n"
+"POT-Creation-Date: 2013-03-09 15:09+0100\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -648,9 +648,6 @@ msgstr "cuentas activas"
 msgid "mobile"
 msgstr "móvil"
 
-msgid "no SID"
-msgstr ""
-
 msgid "no calls"
 msgstr ""
 
@@ -696,6 +693,9 @@ msgstr "no mostrar nada"
 
 msgid "work"
 msgstr "trabajo"
+
+msgid "wrong user or password?"
+msgstr ""
 
 #~ msgid "Areacode to add to Outgoing Calls (if necessary)"
 #~ msgstr "Añadir código de área a las llamadas salientes (si es necesario)"
