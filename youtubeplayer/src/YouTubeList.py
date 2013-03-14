@@ -151,7 +151,7 @@ class YouTubeVideoDetailsScreen(Screen):
 
 
 	def setPixmap(self):
-		self["video_thumbnail_1"].instance.setPixmap(self.entry.thumbnail["0"].__deref__())
+		self["video_thumbnail_1"].instance.setPixmap(self.entry.thumbnail["0"])
 		self.entry.loadThumbnail(1, self.setThumbnail_2)
 		self.entry.loadThumbnail(2, self.setThumbnail_3)
 		self["video_thumbnail_2"].hide()
@@ -159,12 +159,12 @@ class YouTubeVideoDetailsScreen(Screen):
 
 
 	def setThumbnail_2(self, entry):
-		self["video_thumbnail_2"].instance.setPixmap(self.entry.thumbnail["1"].__deref__())
+		self["video_thumbnail_2"].instance.setPixmap(self.entry.thumbnail["1"])
 		self["video_thumbnail_2"].show()
 
 
 	def setThumbnail_3(self, entry):
-		self["video_thumbnail_3"].instance.setPixmap(self.entry.thumbnail["2"].__deref__())
+		self["video_thumbnail_3"].instance.setPixmap(self.entry.thumbnail["2"])
 		self["video_thumbnail_3"].show()
 
 

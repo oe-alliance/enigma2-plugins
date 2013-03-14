@@ -313,7 +313,7 @@ class WeatherIcon(Pixmap):
 				self.instance.setScaleDest(dest_rect)
 			else:
 				self.instance.setScale(0)
-			self.instance.setPixmap(ptr.__deref__())
+			self.instance.setPixmap(ptr)
 		else:
 			self.instance.setPixmap(None)
 		

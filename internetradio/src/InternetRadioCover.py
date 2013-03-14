@@ -39,7 +39,7 @@ class InternetRadioCover(Pixmap):
 	def paintIconPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if self.showPic and ptr != None:
-			self.instance.setPixmap(ptr.__deref__())
+			self.instance.setPixmap(ptr)
 			self.picloaded = True
 		if self.callback is not None:
 			self.callback()

@@ -2705,7 +2705,7 @@ class MerlinMediaPixmap(Pixmap):
 	def paintCoverArtPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr != None:
-			self.instance.setPixmap(ptr.__deref__())
+			self.instance.setPixmap(ptr)
 
 	def updateCoverArt(self, path):
 		back = False
