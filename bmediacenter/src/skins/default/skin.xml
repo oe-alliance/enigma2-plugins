@@ -7,7 +7,7 @@
 		<widget name="left" position="50,240" zPosition="2" size="200,200" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/MenuIconSettingssw.png" transparent="1" alphatest="blend"/>
 		<widget name="middle" position="center,120" zPosition="2" size="290,290" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/MenuIconMusic.png" transparent="1" alphatest="blend"/>
 		<widget name="right" position="470,240" zPosition="2" size="200,200" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/MenuIconVideosw.png" transparent="1" alphatest="blend"/>
-		<widget name="text" zPosition="1" transparent="1" halign="center" valign="center" position="center,400" size="250,40" foregroundColor="#ffffff" font="BMCTime;28"/>
+		<widget name="text" zPosition="1" transparent="1" halign="center" valign="center" position="center,400" size="250,40" foregroundColor="#ffffff" font="Regular;28"/>
 		<widget source="menu" render="Listbox" zPosition="-9" transparent="1" position="0,0" size="0,0">
 			<convert type="StringList"/>
 		</widget>
