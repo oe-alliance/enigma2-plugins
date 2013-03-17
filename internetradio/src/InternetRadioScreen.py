@@ -418,9 +418,15 @@ class InternetRadioScreen(Screen, InternetRadioVisualization, InternetRadioPiPTV
 			if config.plugins.internetradio.fullscreenlayout.value in ("0","1"):
 				self.fullScreen.setStation(self["station"].getText())
 				self.fullScreen.setText(self["title"].getText())
+				if config.plugins.internetradio.googlecover.value:
+					if self["cover"].getPicloaded():
+						self.fullScreen.updateCover()
+					else:
+						self.fullScreen.setVisibilityCover(False)
 			else:
 				self.fullScreen.setStation("")
 				self.fullScreen.setText("")
+				self.fullScreen.setVisibilityCover(False)
 			eActionMap.getInstance().bindAction('', -0x7FFFFFFF, self.fullScreenKeyPressed)
 			
 	def fullScreenKeyPressed(self, key = None, flag = None):
@@ -462,6 +468,7 @@ class InternetRadioScreen(Screen, InternetRadioVisualization, InternetRadioPiPTV
 					sendUrlCommand(url, None,10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 			else:
 				sTitle = "n/a"
+				self.hideCover()
 			self["title"].setText(sTitle)
 			self.summaries.setText(sTitle)
 			if self.fullScreen.isVisible() and config.plugins.internetradio.fullscreenlayout.value in ("0", "1"):
@@ -939,6 +946,7 @@ class InternetRadioScreen(Screen, InternetRadioVisualization, InternetRadioPiPTV
 			config.plugins.internetradio.fullscreenlayout.notifiers.remove(self.fullscreenlayoutConfigOnChange)
 
 	def GoogleImageCallback(self, result):
+		self.hideCover()
 		foundPos = result.find("imgres?imgurl=")
 		foundPos2 = result.find("&amp;imgrefurl=")
 		if foundPos != -1 and foundPos2 != -1:
@@ -946,8 +954,14 @@ class InternetRadioScreen(Screen, InternetRadioVisualization, InternetRadioPiPTV
 			downloadPage(result[foundPos+14:foundPos2] ,"/tmp/.cover").addCallback(self.coverDownloadFinished).addErrback(self.coverDownloadFailed)
 
 	def coverDownloadFailed(self,result):
-        	print "[InternetRadio] cover download failed: %s " % result
+		print "[InternetRadio] cover download failed: %s " % result
+		self.hideCover()
+		
+	def hideCover(self):
 		self["cover"].hide()
+		self["cover"].setPicloaded(False)
+		if self.fullScreen.isVisible() and config.plugins.internetradio.fullscreenlayout.value in ("0","1"):
+			self.fullScreen.setVisibilityCover(False)
 
 	def coverDownloadFinished(self,result):
 		print "[InternetRadio] cover download finished"
@@ -955,6 +969,8 @@ class InternetRadioScreen(Screen, InternetRadioVisualization, InternetRadioPiPTV
 
 	def coverLoaded(self):
 		self["cover"].show()
+		if self.fullScreen.isVisible() and config.plugins.internetradio.fullscreenlayout.value in ("0","1"):
+			self.fullScreen.updateCover()
 		
 	def playServiceStream(self, url):
 		self.musicPlayer.play(url)
@@ -1143,6 +1159,7 @@ class InternetRadioFullScreen(Screen, InternetRadioVisualization):
 		InternetRadioVisualization.__init__(self)
 		self["title"] =  Label("")
 		self["station"] = Label("")
+		self["cover"] = InternetRadioCover(self.coverLoaded)
 		self.onLayoutFinish.append(self.startRun)
 		self.visible = False
 
@@ -1168,3 +1185,15 @@ class InternetRadioFullScreen(Screen, InternetRadioVisualization):
 
 	def isVisible(self):
 		return self.visible
+
+	def setVisibilityCover(self, visible):
+		if visible and config.plugins.internetradio.googlecover.value:
+			self["cover"].show()
+		else:
+			self["cover"].hide()
+			
+	def updateCover(self):
+		self["cover"].updateIcon("/tmp/.cover")
+		
+	def coverLoaded(self):
+		self.setVisibilityCover(True)

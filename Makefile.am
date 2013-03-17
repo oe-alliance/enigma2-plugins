@@ -32,6 +32,7 @@ SUBDIRS = \
 	epgrefresh \
 	epgsearch \
 	eurotictv \
+	eventlist \
 	fancontrol2 \
 	filebrowser \
 	flashexpander \

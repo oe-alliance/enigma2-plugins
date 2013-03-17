@@ -11,14 +11,18 @@ from twisted.web import client
 from twisted.internet import reactor
 from urllib2 import Request, URLError, urlopen as urlopen2
 from socket import gaierror, error
-import os, socket
-from urllib import quote, unquote_plus, unquote
+import os, socket, httplib
+from urllib import quote, unquote_plus, unquote, urlencode
 from httplib import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
 
-from urlparse import parse_qs
+from urlparse import parse_qs, parse_qsl
 from threading import Thread
 
 HTTPConnection.debuglevel = 1
+
+if 'HTTPSConnection' not in dir(httplib):
+	# python on enimga2 has no https socket support
+	gdata.youtube.service.YOUTUBE_USER_FEED_URI = 'http://gdata.youtube.com/feeds/api/users'
 
 def validate_cert(cert, key):
 	buf = decrypt_block(cert[8:], key)
@@ -182,6 +186,23 @@ class MyTubeFeedEntry():
 		author = ", ".join(authors)
 		return author
 
+	def getUserFeedsUrl(self):
+		for author in self.entry.author:
+			return author.uri.text
+
+		return False
+
+	def getUserId(self):
+		return self.getUserFeedsUrl().split('/')[-1]
+
+	def subscribeToUser(self):
+		username = self.getUserId()
+		return myTubeService.SubscribeToUser(username)
+		
+	def addToFavorites(self):
+		video_id = self.getTubeId()
+		return myTubeService.addToFavorites(video_id)
+
 	def PrintEntryDetails(self):
 		EntryDetails = { 'Title': None, 'TubeID': None, 'Published': None, 'Published': None, 'Description': None, 'Category': None, 'Tags': None, 'Duration': None, 'Views': None, 'Rating': None, 'Thumbnails': None}
 		EntryDetails['Title'] = self.entry.media.title.text
@@ -312,7 +333,7 @@ class MyTubeFeedEntry():
 
 	def getUserVideos(self):
 		print "[MyTubeFeedEntry] getUserVideos()"
-		username = self.getAuthor()
+		username = self.getUserId()
 		myuri = 'http://gdata.youtube.com/feeds/api/users/%s/uploads' % username
 		print "Found Uservideos: ", myuri
 		return myuri
@@ -321,6 +342,11 @@ class MyTubePlayerService():
 #	Do not change the client_id and developer_key in the login-section!
 #	ClientId: ytapi-dream-MyTubePlayer-i0kqrebg-0
 #	DeveloperKey: AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw
+
+	cached_auth_request = {}
+	current_auth_token = None
+	yt_service = None
+
 	def __init__(self):
 		print "[MyTube] MyTubePlayerService - init"
 		self.feedentries = []
@@ -328,10 +354,21 @@ class MyTubePlayerService():
 
 	def startService(self):
 		print "[MyTube] MyTubePlayerService - startService"
-		self.yt_service = gdata.youtube.service.YouTubeService(
-			developer_key = 'AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw',
-			client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0'
-		)
+
+		self.yt_service = gdata.youtube.service.YouTubeService()
+
+		# missing ssl support? youtube will help us on some feed urls
+		self.yt_service.ssl = self.supportsSSL()
+
+		# dont use it on class init; error on post and auth
+		self.yt_service.developer_key = 'AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw'
+		self.yt_service.client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0'
+
+		# yt_service is reinit on every feed build; cache here to not reauth. remove init every time?
+		if self.current_auth_token is not None:
+			print "[MyTube] MyTubePlayerService - auth_cached"
+			self.yt_service.SetClientLoginToken(self.current_auth_token)
+		
 #		self.loggedIn = False
 		#os.environ['http_proxy'] = 'http://169.229.50.12:3128'
 		#proxy = os.environ.get('http_proxy')
@@ -342,6 +379,94 @@ class MyTubePlayerService():
 	def stopService(self):
 		print "[MyTube] MyTubePlayerService - stopService"
 		del self.ytService
+
+	def getLoginTokenOnCurl(self, email, pw):
+
+		opts = {
+		  'service':'youtube',
+		  'accountType': 'HOSTED_OR_GOOGLE',
+		  'Email': email,
+		  'Passwd': pw,
+		  'source': self.yt_service.client_id,
+		}
+		
+		print "[MyTube] MyTubePlayerService - Starting external curl auth request"
+		result = os.popen('curl -s -k -X POST "%s" -d "%s"' % (gdata.youtube.service.YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL , urlencode(opts))).read()
+		
+		return result
+
+	def supportsSSL(self):
+		return 'HTTPSConnection' in dir(httplib)
+
+	def getFormattedTokenRequest(self, email, pw):
+		return dict(parse_qsl(self.getLoginTokenOnCurl(email, pw).strip().replace('\n', '&')))
+	
+	def getAuthedUsername(self):
+		# on external curl we can get real username
+		if self.cached_auth_request.get('YouTubeUser') is not None:
+			return self.cached_auth_request.get('YouTubeUser')
+
+		if self.is_auth() is False:
+			return ''
+
+		# current gdata auth class save doesnt save realuser
+		return 'Logged In'
+
+	def auth_user(self, username, password):
+		print "[MyTube] MyTubePlayerService - auth_use - " + str(username)
+
+		if self.yt_service is None:
+			self.startService()
+		
+		if self.current_auth_token is not None:
+			print "[MyTube] MyTubePlayerService - auth_cached"
+			self.yt_service.SetClientLoginToken(self.current_auth_token)
+			return
+
+		if self.supportsSSL() is False:
+			print "[MyTube] MyTubePlayerService - HTTPSConnection not found trying external curl"
+			self.cached_auth_request = self.getFormattedTokenRequest(username, password)
+			if self.cached_auth_request.get('Auth') is None:
+				raise Exception('Got no auth token from curl; you need curl and valid youtube login data')
+			
+			self.yt_service.SetClientLoginToken(self.cached_auth_request.get('Auth'))
+		else:
+			print "[MyTube] MyTubePlayerService - Using regularly ProgrammaticLogin for login"
+			self.yt_service.email = username
+			self.yt_service.password  = password
+			self.yt_service.ProgrammaticLogin()
+			
+		# double check login: reset any token on wrong logins
+		if self.is_auth() is False:
+			print "[MyTube] MyTubePlayerService - auth_use - auth not possible resetting"
+			self.resetAuthState()
+			return
+
+		print "[MyTube] MyTubePlayerService - Got successful login"
+		self.current_auth_token = self.auth_token()
+
+	def resetAuthState(self):
+		print "[MyTube] MyTubePlayerService - resetting auth"
+		self.cached_auth_request = {}
+		self.current_auth_token = None
+
+		if self.yt_service is None:
+			return
+
+		self.yt_service.current_token = None
+		self.yt_service.token_store.remove_all_tokens()
+
+	def is_auth(self):
+		if self.current_auth_token is not None:
+			return True		
+		
+		if self.yt_service.current_token is None:
+			return False
+		
+		return self.yt_service.current_token.get_token_string() != 'None'
+
+	def auth_token(self):
+		return self.yt_service.current_token.get_token_string()
 
 	def getFeedService(self, feedname):
 		if feedname == "top_rated":
@@ -366,7 +491,20 @@ class MyTubePlayerService():
 		print "[MyTube] MyTubePlayerService - getFeed:",url, feedname
 		self.feedentries = []
 		ytservice = self.yt_service.GetYouTubeVideoFeed
-		if feedname in ("hd", "most_popular", "most_shared", "on_the_web"):
+		
+		if feedname == "my_subscriptions":
+			url = "http://gdata.youtube.com/feeds/api/users/default/newsubscriptionvideos"
+		elif feedname == "my_favorites":
+			url = "http://gdata.youtube.com/feeds/api/users/default/favorites"
+		elif feedname == "my_history":
+			url = "http://gdata.youtube.com/feeds/api/users/default/watch_history?v=2"
+		elif feedname == "my_recommendations":
+			url = "http://gdata.youtube.com/feeds/api/users/default/recommendations?v=2"
+		elif feedname == "my_watch_later":
+			url = "http://gdata.youtube.com/feeds/api/users/default/watch_later?v=2"
+		elif feedname == "my_uploads":
+			url = "http://gdata.youtube.com/feeds/api/users/default/uploads"
+		elif feedname in ("hd", "most_popular", "most_shared", "on_the_web"):
 			if feedname == "hd":
 				url = "http://gdata.youtube.com/feeds/api/videos/-/HD"
 			else:
@@ -414,7 +552,36 @@ class MyTubePlayerService():
 		if errorback is not None:
 			errorback(exception)
 
-
+	def SubscribeToUser(self, username):
+		try:
+			new_subscription = self.yt_service.AddSubscriptionToChannel(username_to_subscribe_to=username)
+	
+			if isinstance(new_subscription, gdata.youtube.YouTubeSubscriptionEntry):
+				print '[MyTube] MyTubePlayerService: New subscription added'
+				return _('New subscription added')
+			
+			return _('Unknown error')
+		except gdata.service.RequestError as req:
+			return str('Error: ' + str(req[0]["body"]))
+		except Exception as e:
+			return str('Error: ' + e)
+	
+	def addToFavorites(self, video_id):
+		try:
+			video_entry = self.yt_service.GetYouTubeVideoEntry(video_id=video_id)
+			response = self.yt_service.AddVideoEntryToFavorites(video_entry)
+			
+			# The response, if succesfully posted is a YouTubeVideoEntry
+			if isinstance(response, gdata.youtube.YouTubeVideoEntry):
+				print '[MyTube] MyTubePlayerService: Video successfully added to favorites'
+				return _('Video successfully added to favorites')	
+	
+			return _('Unknown error')
+		except gdata.service.RequestError as req:
+			return str('Error: ' + str(req[0]["body"]))
+		except Exception as e:
+			return str('Error: ' + e)
+	
 	def getTitle(self):
 		return self.feed.title.text
 
@@ -425,6 +592,9 @@ class MyTubePlayerService():
 		return self.feed.items_per_page.text
 
 	def getTotalResults(self):
+		if self.feed.total_results is None:
+			return 0
+				
 		return self.feed.total_results.text
 
 	def getNextFeedEntriesURL(self):
@@ -432,6 +602,12 @@ class MyTubePlayerService():
 			if link.rel == "next":
 				return link.href
 		return None
+
+	def getCurrentPage(self):
+		if self.feed.start_index is None:
+			return 1
+		
+		return int(int(self.feed.start_index.text) / int(self.itemCount())) + 1
 
 class YoutubeQueryThread(Thread):
 	def __init__(self, query, param, gotFeed, gotFeedError, callback, errorback):
@@ -471,3 +647,4 @@ class YoutubeQueryThread(Thread):
 				self.gotFeedError(message[1], message[2])
 
 myTubeService = MyTubePlayerService()
+

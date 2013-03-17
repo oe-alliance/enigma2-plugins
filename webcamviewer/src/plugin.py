@@ -441,7 +441,7 @@ class PictureViewer(Screen):
 	def updateInfoPanelCB(self, picInfo = None):
 		ptr = self.picload.getData()
 		if ptr is not None:
-			self["pixmap"].instance.setPixmap(ptr.__deref__())
+			self["pixmap"].instance.setPixmap(ptr)
 		else:
 			pass
 

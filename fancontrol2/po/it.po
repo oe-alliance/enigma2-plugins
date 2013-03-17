@@ -337,8 +337,8 @@ msgid "Fan type"
 msgstr "Tipo ventola"
 
 #: .../enigma2-plugins/fancontrol2/src/plugin.py:660
-msgid "Fan off in Standby"
-msgstr "Ventola off in standby"
+msgid "Fan off in Idle Mode"
+msgstr "Ventola off in Idle Mode"
 
 #: .../enigma2-plugins/fancontrol2/src/plugin.py:661
 msgid "min Speed rpm"

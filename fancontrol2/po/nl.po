@@ -232,8 +232,8 @@ msgid "Fan type"
 msgstr "Fan type"
 
 #: FC2.txt:600
-msgid "Fan off in Standby"
-msgstr "Fan uit in Standby"
+msgid "Fan off in Idle Mode"
+msgstr "Fan uit in Idle Mode"
 
 #: FC2.txt:601
 msgid "min Speed rpm"

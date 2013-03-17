@@ -229,8 +229,8 @@ msgid "Fan type"
 msgstr "Type ventilateur"
 
 #: FC2.txt:600
-msgid "Fan off in Standby"
-msgstr "Ventilateur stoppé en veille"
+msgid "Fan off in Idle Mode"
+msgstr "Ventilateur stoppé en Idle Mode"
 
 #: FC2.txt:601
 msgid "min Speed rpm"

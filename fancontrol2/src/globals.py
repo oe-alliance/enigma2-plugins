@@ -1,5 +1,5 @@
 from __init__ import _
-Version = "V2.7r2"
+Version = "V2.8r0"
 # globale Variablen        
 ZielRPM = 0
 AktVLT = 0
@@ -29,6 +29,7 @@ DataMinute = ""
 FC2Log = []
 FC2werte = [0.1,0,0,0,0,0]
 FC2stunde = ["-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"]
+FC2HDDignore = []
 HeadLine = "Time;Temp;RPM;VLT;PWM;HDD;Status;Temp1;Temp2;Temp3;Temp4;Temp5;Temp6;Temp7;Temp8\r\n"
 TempName = [
 	_("below Tunerslot 4"),

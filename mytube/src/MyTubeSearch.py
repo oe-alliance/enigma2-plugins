@@ -336,7 +336,10 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		if config.usage.setup_level.index >= 2: # expert+
 			self.searchContextEntries.append(self.VideoDirname)
 		self.searchContextEntries.append(getConfigListEntry(_("Clear history on Exit:"), config.plugins.mytube.general.clearHistoryOnClose))
-		self.searchContextEntries.append(getConfigListEntry(_("Ask to load new entries"), config.plugins.mytube.general.AutoLoadFeeds))
+		self.searchContextEntries.append(getConfigListEntry(_("Auto paginate on last entry:"), config.plugins.mytube.general.AutoLoadFeeds))
+		self.searchContextEntries.append(getConfigListEntry(_("Reset tv-screen after playback:"), config.plugins.mytube.general.resetPlayService))
+		self.searchContextEntries.append(getConfigListEntry(_("Youtube Username (reopen plugin on change):"), config.plugins.mytube.general.username))
+		self.searchContextEntries.append(getConfigListEntry(_("Youtube Password (reopen plugin on change):"), config.plugins.mytube.general.password))
 
 		self["config"].list = self.searchContextEntries
 		self["config"].l.setList(self.searchContextEntries)
@@ -403,6 +406,8 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		config.plugins.mytube.general.videodir.save()
 		config.plugins.mytube.general.clearHistoryOnClose.save()
 		config.plugins.mytube.general.AutoLoadFeeds.save()
+		config.plugins.mytube.general.username.save()
+		config.plugins.mytube.general.password.save()
 		if config.plugins.mytube.general.clearHistoryOnClose.value:
 			config.plugins.mytube.general.history.value = ""
 			config.plugins.mytube.general.history.save()

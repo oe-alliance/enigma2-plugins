@@ -163,10 +163,6 @@ config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices = [("false", _(
 config.plugins.FanControl.MonitorInExtension = ConfigYesNo(default = True)
 config.plugins.FanControl.FanControlInExtension = ConfigYesNo(default = True)
 config.plugins.FanControl.Multi = ConfigSelection(choices = [("1", "RPM"), ("2", "RPM/2")], default = "2")
-config.plugins.FanControl.KiPWMsld = ConfigSlider(default = 10, increment = 1, limits = (0,100))
-config.plugins.FanControl.KiVLTsld = ConfigSlider(default = 10, increment = 1, limits = (0,100))
-config.plugins.FanControl.KpPWMsld = ConfigSlider(default = 50, increment = 1, limits = (0,100))
-config.plugins.FanControl.KpVLTsld = ConfigSlider(default = 50, increment = 1, limits = (0,100))
 
 def GetFanRPM():
 	global RPMread
@@ -235,7 +231,7 @@ class ControllerPI:
  
 	def __init__(self, givenName = "PI Controller"):
 		self.name = givenName
-		FClogE("%s : creating object" % self.name)
+#		FClogE("%s : creating object" % self.name)
 
 	def ReturnInputError(self):
 		return self.inputError
@@ -657,7 +653,7 @@ class FanControl2Plugin(ConfigListScreen,Screen):
 
 		self.list = []
 		self.list.append(getConfigListEntry(_("Fan type"), config.plugins.FanControl.Fan))
-		self.list.append(getConfigListEntry(_("Fan off in Standby"), config.plugins.FanControl.StandbyOff))
+		self.list.append(getConfigListEntry(_("Fan off in Idle Mode"), config.plugins.FanControl.StandbyOff))
 		self.list.append(getConfigListEntry(_("min Speed rpm"), config.plugins.FanControl.minRPM))
 		self.list.append(getConfigListEntry(_("max Speed rpm"), config.plugins.FanControl.maxRPM))
 		self.list.append(getConfigListEntry(_("Static temp C"), config.plugins.FanControl.temp))
@@ -850,7 +846,8 @@ def HDDtestTemp():
 					(stat,wert)=ReadHDDtemp(hdd[1].getDeviceName())
 					if stat != 0:
 						(stat,wert)=getstatusoutput("smartctl --smart=on %s" % hdd[1].getDeviceName())
-						FClog("HDD Temperature not readable")
+						FClog("HDD Temperature not readable -> Ignore")
+						FC2HDDignore.append(hdd[1].getDeviceName())
 					time.sleep(0.5)
 					(stat,wert)=getstatusoutput("hdparm -C %s" % hdd[1].getDeviceName())
 					if wert.find("standby")>0:
@@ -858,8 +855,8 @@ def HDDtestTemp():
 					else:
 						if hdd[1].isSleeping():
 							(stat,wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
-						FClog("HDD not supports Temp reading without Spinup -> Disabled")
-						disableHDDread = True
+						FClog("HDD not supports Temp reading without Spinup -> Ignore")
+						FC2HDDignore.append(hdd[1].getDeviceName())
 
 def ReadHDDtemp(D):
 	return getstatusoutput("smartctl -A %s | grep \"194 Temp\" | grep Always" % D)
@@ -869,7 +866,7 @@ def GetHDDtemp(OneTime):
 	AktHDD = []
 	if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value != "never" or OneTime == True:
 		for hdd in harddiskmanager.HDDList():
-			if hdd[1].model().startswith("ATA"):
+			if hdd[1].model().startswith("ATA") and hdd[1].getDeviceName() not in FC2HDDignore:
 				sleeptime = int((time.time() - hdd[1].last_access))
 #				FClog("HDD Temp reading %s %s %ds %s" % (config.plugins.FanControl.CheckHDDTemp.value, disableHDDread, sleeptime, hdd[1].isSleeping()))
 				if config.plugins.FanControl.CheckHDDTemp.value == "true" or (config.plugins.FanControl.CheckHDDTemp.value == "auto" and not disableHDDread) or ((not hdd[1].isSleeping()) and sleeptime < 120) or OneTime == True:

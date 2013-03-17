@@ -75,5 +75,5 @@ class WebPixmap(Pixmap):
 				os_remove(self.tmpfile)
 		ptr = self.picload.getData()
 		if ptr and self.instance:
-			self.instance.setPixmap(ptr.__deref__())
+			self.instance.setPixmap(ptr)
 
