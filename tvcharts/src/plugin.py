@@ -531,8 +531,13 @@ class DBUpdateStatus(Screen):
 		# Get Box Info
 		self.BoxID = iNetwork.getAdapterAttribute("eth0", "mac")
 		self.DeviceName = HardwareInfo().get_device_name()
-		self.EnigmaVersion = about.getEnigmaVersionString()
-		self.ImageVersion = about.getVersionString()
+		try:
+			from enigma import getImageVersionString, getBuildVersionString, getEnigmaVersionString
+			self.EnigmaVersion = getEnigmaVersionString()
+			self.ImageVersion = getImageVersionString() + '.' + getBuildVersionString()
+		except:
+			self.EnigmaVersion = about.getEnigmaVersionString()
+			self.ImageVersion = about.getVersionString()
 
 		# Get TimerList
 		self.timerlist = ""

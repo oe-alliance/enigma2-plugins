@@ -77,8 +77,13 @@ class AboutWebScreen(WebScreen):
 		self["Network"] = Network()
 		self["Hdd"] = Hdd()
 		self["Frontends"] = Frontend()
-		self["EnigmaVersion"] = StaticText(about.getEnigmaVersionString())
-		self["ImageVersion"] = StaticText(about.getVersionString())
+		try:
+			from enigma import getImageVersionString, getBuildVersionString, getEnigmaVersionString
+			self["EnigmaVersion"] = StaticText(getEnigmaVersionString())
+			self["ImageVersion"] = StaticText(getVersionString() + '.' + getBuildVersionString())
+		except:
+			self["EnigmaVersion"] = StaticText(about.getEnigmaVersionString())
+			self["ImageVersion"] = StaticText(about.getVersionString())
 		self["WebIfVersion"] = StaticText(config.plugins.Webinterface.version.value)
 		self["FpVersion"] = StaticText(str(getFPVersion()))
 		self["DeviceName"] = StaticText(hw.get_device_name())
