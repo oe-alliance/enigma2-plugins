@@ -43,7 +43,6 @@ SUBDIRS = \
 	genuinedreambox \
 	googlemaps \
 	growlee \
-	httpproxy \
 	imdb \
 	infobartunerstate \
 	internetradio \
