@@ -353,8 +353,6 @@
 		color: #485052;
 	}
 	.editor{
-		margin-top: 5px;
-		margin-bottom: 5px;
 		width: 100%;
 	}
 	
@@ -497,84 +495,166 @@
 /**************
  AutoTimer Timers
  **************/
-	#timerlist{
-		width: 100%;
+	#contentAutoTimerContent{
+		padding: 8px;
 	}
-	#timerlist tr{
-		margin-bottom: 3px;
-	}
-	#timerlist td{
-		vertical-align: text-top;
-		padding-top: 3px;
-	}
-	
+		
 	.tListItemTable {
-		width: 100%
+		position: relative;
+		top: 0;
+		left: 0;
+		margin-left: 22px;
+		width: 585px !important
 	}
-	
+
 	.tListSName {
 		text-align: left
 	}
-	
+
 	.tListItem {
 		font-weight: bold;
 		font-size: 13px
 	}
-	
+
 	.tListTitle {
 		width: 150px;
 		text-align: left
 	}
-	
+
 	.tListDescr {
 		width: 150px;
 		text-align: left
 	}
-	
+
 	.tListRepeat {
-		width: 70px;
+		width: 120px;
 		text-align: left
 	}
-	
+
 	.tListDuration {
-		width: 70px;
+		width: 120px;
 		text-align: left
 	}
-	
+
 	.tListBegin {
-		width: 100px;
+		width: 170px;
 		text-align: left
 	}
-	
+
 	.tListEnd {
-		width: 100px;
+		width: 170px;
 		text-align: left
 	}
-	
+
 	.tListAfter {
 		width: 85px;
 		text-align: left
 	}
-	
+
+	.tListType {
+		width: 85px;
+		text-align: left
+	}
+
 	.tListOption {
-		width: 80px;
-		text-align: center
+		text-align: right;
+		vertical-align: bottom;
+		z-index: 9999
 	}
-	
+
+	.tListDelete {
+		position: absolute;
+		bottom: 2px;
+		right: 1px;
+		height: 26px;
+		width: 100px;
+		margin: 0px;
+		padding: 0
+	}
+
+	.tListToggleDisabled {
+		position: absolute;
+		bottom: 2px;
+		right: 105px;
+		height: 26px;
+		width: 100px;
+		margin: 0;
+		padding: 0
+	}
+
+	.tListButton {
+		margin: 0;
+		height: 100%;
+		width: 100px;
+		font-size: 11px;
+		vertical-align: middle
+	}
+
+	div.legendRow {
+		height: auto;
+		overflow: auto
+	}
+
+	div.legendCol {
+		float: left;
+		width: 100px;
+		padding-left: 2px
+	}
+
+	.timerState {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 10px;
+		display: block;
+		padding: 0
+	}
+
 	.timerState0 {
-		color: #485052
+		background: #485052;
+		color: #FFFFFF
 	}
-	
+
 	.timerState1 {
-		color: #900
+		background: #BD282D;
+		color: #FFFFFF
 	}
-	
+
 	.timerState2 {
-		color: #090
+		background: #2DBD28;
+		color: #FFFFFF
 	}
-	
+
 	.timerState3 {
-		color: #009
+		background: #282DBD;
+		color: #FFFFFF
+	}
+
+	td.timerList {
+		width: 100%;
+		position: relative;
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid #AAA;
+		display: block;
+		padding-bottom: 30px;
+	}
+
+	a.tListEdit {
+		display: block;
+		margin: 0;
+		padding: 1px
+	}
+
+	a.tListEdit:hover {
+		display: block;
+		margin: 0;
+		background: #DDD
+	}
+
+	#timerEditForm table {
+		cell-spacing: 1px
 	}
 
 

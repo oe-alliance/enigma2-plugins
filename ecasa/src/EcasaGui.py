@@ -170,7 +170,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		idx = self.pictures.index(self.currentphoto)
 		realIdx = (idx - self.offset) % self.PICS_PER_PAGE
 		if ptr is not None:
-			self['image%d' % realIdx].instance.setPixmap(ptr.__deref__())
+			self['image%d' % realIdx].instance.setPixmap(ptr)
 		else:
 			our_print("gotPicture got invalid results for idx", idx, "("+str(realIdx)+")")
 			# NOTE: we could use a different picture here that indicates a failure
@@ -654,7 +654,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		our_print("picture decoded")
 		ptr = self.picload.getData()
 		if ptr is not None:
-			self['pixmap'].instance.setPixmap(ptr.__deref__())
+			self['pixmap'].instance.setPixmap(ptr)
 			if self.nextPhoto is not None:
 				self.timer.start(config.plugins.ecasa.slideshow_interval.value*1000, True)
 

@@ -6,8 +6,6 @@ URL.internetradioStatus= "/internetradio/web/status";
 URL.internetradioPlay = "/internetradio/web/play?";
 URL.internetradioStop = "/internetradio/web/stopplaying";
 
-URL.tpl = "/internetradio/tpl/"
-
 var InternetRadioFavorite = Class.create({
 	initialize: function(xml){
 		this.name = getNodeContent(xml, 'e2favoritename', "");
@@ -77,7 +75,15 @@ var InternetRadioFavoritesProvider = Class.create(AbstractContentProvider, {
 	}
 });
 
-var InternetRadioFavoritesHandler  = Class.create(AbstractContentHandler, {
+var radioTemplateEngine = new TemplateEngine('/internetradio/tpl/')
+var AbstractRadioContentHandler = Class.create(AbstractContentHandler,  {
+	show: function(data){
+		this.data = data;
+		radioTemplateEngine.process(this.tpl, data, this.target, this.finished.bind(this));
+	}
+});
+
+var InternetRadioFavoritesHandler  = Class.create(AbstractRadioContentHandler, {
 	initialize: function($super, target, statusTarget, stopTarget){
 		$super('tplFavorites', target);
 		this.provider = new InternetRadioFavoritesProvider(this.show.bind(this));
@@ -264,10 +270,19 @@ var InternetRadio = Class.create(Controller, {
 var Radio = Class.create({
 	initialize: function(){
 		this.internetRadio = new InternetRadio('contentMain', 'currentText', 'stop');
+		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
 		this.poller = null;
 	},
 	
 	run: function(){
+		debug("[Radio].run");
+		this.sessionProvider.load({});
+	},
+
+	onSessionAvailable: function(sid){
+		debug("[Radio].onSessionAvailable, " + sid)
+		global_sessionid = sid;
+
 		this.internetRadio.load();
 		this.registerListeners();
 		this.pollStatus();

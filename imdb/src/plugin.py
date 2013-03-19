@@ -616,7 +616,7 @@ class IMDB(Screen):
 	def paintPosterPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr != None:
-			self["poster"].instance.setPixmap(ptr.__deref__())
+			self["poster"].instance.setPixmap(ptr)
 			self["poster"].show()
 
 	def setup(self):

@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 745 $
-$Date: 2013-01-12 17:04:44 +0100 (Sa, 12. Jan 2013) $
-$Id: FritzCallFBF.py 745 2013-01-12 16:04:44Z michael $
+$Revision: 761 $
+$Date: 2013-03-09 15:07:53 +0100 (Sa, 09 Mrz 2013) $
+$Id: FritzCallFBF.py 761 2013-03-09 14:07:53Z michael $
 '''
 
 from . import _, __, debug #@UnresolvedImport # pylint: disable=E0611,F0401
@@ -1163,29 +1163,33 @@ class FritzCallFBF_05_50:
 			debug("[FritzCallFBF_05_50] md5Login/buildResponse: " + md5.hexdigest())
 			return challenge + '-' + md5.hexdigest()
 
-		linkP = open("/tmp/FritzDebug_sid.xml", "w")
-		linkP.write(sidXml)
-		linkP.close()
+		#=======================================================================
+		# linkP = open("/tmp/FritzDebug_sid.xml", "w")
+		# linkP.write(sidXml)
+		# linkP.close()
+		#=======================================================================
 
 		debug("[FritzCallFBF_05_50] _md5Login")
 		sidX = ET.fromstring(sidXml)
-		self._md5Sid = sidX.find("SID").text
-		debug("[FritzCallFBF_05_50] _md5Login: SID "+ repr(self._md5Sid))
-		if self._md5Sid:
-			debug("[FritzCallFBF_05_50] _md5Login: SID "+ self._md5Sid)
-		else:
-			debug("[FritzCallFBF_05_50] _md5Login: no sid! That must be an old firmware.")
-			self._errorLogin('No sid?!?')
-			return
-
-		debug("[FritzCallFBF_05_50] _md5Login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
-		self._md5LoginTimestamp = time.time()
-		if self._md5Sid != "0000000000000000":
-			for callback in self._loginCallbacks:
-				debug("[FritzCallFBF_05_50] _md5Login: calling " + callback.__name__)
-				callback(None)
-			self._loginCallbacks = []
-			return
+	#===========================================================================
+	#	self._md5Sid = sidX.find("SID").text
+	#	if self._md5Sid:
+	#		debug("[FritzCallFBF_05_50] _md5Login: SID "+ self._md5Sid)
+	#	else:
+	#		debug("[FritzCallFBF_05_50] _md5Login: no sid! That must be an old firmware.")
+	#		self._notify(_("FRITZ!Box - Error logging in\n\n") + _("wrong firmware version?"))
+	#		return
+ # 
+	#	debug("[FritzCallFBF_05_50] _md5Login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
+	#	self._md5LoginTimestamp = time.time()
+	#	if self._md5Sid != "0000000000000000":
+	#		debug("[FritzCallFBF_05_50] _md5Login: SID "+ self._md5Sid)
+	#		for callback in self._loginCallbacks:
+	#			debug("[FritzCallFBF_05_50] _md5Login: calling " + callback.__name__)
+	#			callback(None)
+	#		self._loginCallbacks = []
+	#		return
+	#===========================================================================
 
 		challenge = sidX.find("Challenge").text
 		if challenge:
@@ -1209,24 +1213,23 @@ class FritzCallFBF_05_50:
 	def _gotPageLogin(self, sidXml):
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login verification"))
-		debug("[FritzCallFBF_05_50] _gotPageLogin: verify login")
-		start = sidXml.find('<p class="errorMessage">FEHLER:&nbsp;')
-		if start != -1:
-			start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
-			text = _("FRITZ!Box - Error logging in\n\n") + sidXml[start : sidXml.find('</p>', start)]
-			self._notify(text)
-			return
-		else:
-			if self._callScreen:
-				self._callScreen.updateStatus(_("login ok"))
+
+		#=======================================================================
+		# linkP = open("/tmp/sid.xml", "w")
+		# linkP.write(sidXml)
+		# linkP.close()
+		#=======================================================================
 
 		sidX = ET.fromstring(sidXml)
 		self._md5Sid = sidX.find("SID").text
 		if self._md5Sid and self._md5Sid != "0000000000000000":
 			debug("[FritzCallFBF_05_50] _gotPageLogin: found sid: " + self._md5Sid)
 		else:
-			self._notify(_("FRITZ!Box - Error logging in\n\n") + _("no SID"))
+			self._notify(_("FRITZ!Box - Error logging in\n\n") + _("wrong user or password?"))
 			return
+
+		if self._callScreen:
+			self._callScreen.updateStatus(_("login ok"))
 
 		for callback in self._loginCallbacks:
 			debug("[FritzCallFBF_05_50] _gotPageLogin: calling " + callback.__name__)
@@ -1432,7 +1435,12 @@ class FritzCallFBF_05_50:
 			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
 				number = config.plugins.FritzCall.prefix.value + number
 			# debug("[FritzCallFBF_05_50] _gotPageCalls: number: " + number)
-			remote = resolveNumber(number, call[2], self.phonebook)
+
+			found = re.match("\d+ \((\d+)\)", call[2])
+			if found:
+				remote = resolveNumber(number, resolveNumber(found.group(1), None, self.phonebook), self.phonebook)
+			else:
+				remote = resolveNumber(number, call[2], self.phonebook)
 			# debug("[FritzCallFBF_05_50] _gotPageCalls: remote. " + remote)
 
 			here = call[5]
@@ -1607,10 +1615,7 @@ class FritzCallFBF_05_50:
 		# linkP.close()
 		#=======================================================================
 
-		if self.info:
-			(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive) = self.info
-		else:
-			(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive) = (None, None, None, None, None, None, None, None, None)
+		(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive) = (None, None, None, None, None, None, None, None, None)
 
 		found = re.match('.*<table id="tProdukt" class="tborder"> <tr> <td style="[^"]*" >([^<]*)</td> <td style="[^"]*" class="td_right">([^<]*)<a target="[^"]*" onclick="[^"]*" href="[^"]*">([^<]*)</a></td> ', html, re.S)
 		if found:
@@ -1628,11 +1633,22 @@ class FritzCallFBF_05_50:
 			ipAddress = found.group(1)
 			debug("[FritzCallFBF_05_50] _okGetInfo ipAddress: " + ipAddress)
 
+		found = re.match('.*<tr id="uiTrDsl"><td class="(led_gray|led_green|led_red)">', html, re.S)
+		if found:
+			if found.group(1) == "led_green":
+				dslState = ['5', None, None]
+				found = re.match('.*<a href="[^"]*">DSL</a></td><td >bereit, ([^<]*)<img src=\'[^\']*\' height=\'[^\']*\'>&nbsp;([^<]*)<img src=\'[^\']*\' height=\'[^\']*\'></td></tr>', html, re.S)
+				if found:
+					dslState[1] = found.group(1) + " / " + found.group(2)
+			else:
+				dslState = ['0', None, None]
+		debug("[FritzCallFBF_05_50] _okGetInfo dslState: " + repr(dslState))
+
 		# wlanstate = [ active, encrypted, no of devices ]
 		found = re.match('.*<tr id="uiTrWlan"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">WLAN</a></td><td>(aus|an)(|, gesichert)</td>', html, re.S)
 		if found:
 			if found.group(1) == "led_green":
-				if found.group(2):
+				if found.group(3):
 					wlanState = [ '1', '1', '' ]
 				else:
 					wlanState = [ '1', '0', '' ]
@@ -1640,39 +1656,30 @@ class FritzCallFBF_05_50:
 				wlanState = [ '0', '0', '0' ]
 			debug("[FritzCallFBF_05_50] _okGetInfo wlanState: " + repr(wlanState))
 
-		found = re.match('.*<tr id="uiTrDsl"><td class="(led_gray|led_green|led_red)">', html, re.S)
+		#=======================================================================
+		# found = re.match('.*<tr id="trTam" style=""><td><a href="[^"]*">Anrufbeantworter</a></td><td title=\'[^\']*\'>([\d]+) aktiv([^<]*)</td></tr>', html, re.S)
+		# if found:
+		#	# found.group(2) could be ', neue Nachrichten vorhanden'; ignore for now
+		#	tamActive = [ found.group(1), False, False, False, False, False]
+		# debug("[FritzCallFBF_05_50] _okGetInfo tamActive: " + repr(tamActive))
+		#=======================================================================
+
+		found = re.match('.*<tr id="uiTrDect"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">DECT</a></td><td>(?:aus|an, (ein|\d*) Schnurlostelefon)', html, re.S)
 		if found:
+			debug("[FritzCallFBF_05_50] _okGetInfo dectActive: " + repr(found.groups()))
 			if found.group(1) == "led_green":
-				dslState = ['5', None, None]
-				found = re.match('.*<a href="[^"]*">DSL</a></td><td >bereit, ([^<]*)<img src=\'[^\']*\' height=\'[^\']*\'>&nbsp;([^<]*)<img src=\'[^\']*\' height=\'[^\']*\'></td></tr>', html, re.S)
-				if found:
-					dslState[1] = found.group(1) + "/" + found.group(2)
-			else:
-				dslState = ['0', None, None]
-		debug("[FritzCallFBF_05_50] _okGetInfo dslState: " + repr(dslState))
-
-		found = re.match('.*<tr id="trTam" style=""><td><a href="[^"]*">Anrufbeantworter</a></td><td title=\'[^\']*\'>([\d]+) aktiv([^<]*)</td></tr>', html, re.S)
-		if found:
-			# found.group(2) could be ', neue Nachrichten vorhanden'; ignore for now
-			tamActive = [ found.group(1), False, False, False, False, False]
-		debug("[FritzCallFBF_05_50] _okGetInfo tamActive: " + repr(tamActive))
-
-		found = re.match('.*<tr id="uiTrDect"><td class="led_green"></td><td><a href="[^"]*">DECT</a></td><td>an, (ein|\d*) Schnurlostelefon', html, re.S)
-		if found:
-			dectActive = found.group(1)
-		debug("[FritzCallFBF_05_50] _okGetInfo dectActive: " + repr(dectActive))
+				dectActive = found.group(2)
+				debug("[FritzCallFBF_05_50] _okGetInfo dectActive: " + repr(dectActive))
 
 		found = re.match('.*<td>Integriertes Fax aktiv</td>', html, re.S)
 		if found:
 			faxActive = True
-		debug("[FritzCallFBF_05_50] _okGetInfo faxActive: " + repr(faxActive))
+			debug("[FritzCallFBF_05_50] _okGetInfo faxActive: " + repr(faxActive))
 
-		found = re.match('.* <tr style=""><td><a href="[^"]*">Rufumleitung</a></td><td>deaktiviert</td></tr>', html, re.S)
+		found = re.match('.*Rufumleitung</a></td><td>aktiv</td>', html, re.S)
 		if found:
-			rufumlActive = False
-		else:
-			rufumlActive = True
-		debug("[FritzCallFBF_05_50] _okGetInfo rufumlActive: " + repr(rufumlActive))
+			rufumlActive = -1 # means no number available
+			debug("[FritzCallFBF_05_50] _okGetInfo rufumlActive: " + repr(rufumlActive))
 
 		info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive)
 		debug("[FritzCallFBF_05_50] _okGetInfo info: " + str(info))

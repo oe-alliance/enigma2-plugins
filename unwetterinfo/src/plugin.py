@@ -58,7 +58,7 @@ class PictureView(Screen):
 	def gotPic(self, picInfo = None):
 		ptr = self.picload.getData()
 		if ptr:
-			self["picture"].instance.setPixmap(ptr.__deref__())
+			self["picture"].instance.setPixmap(ptr)
 
 	def HelpView(self):
 		self.session.openWithCallback(self.getPic, HelpPictureView)
@@ -111,7 +111,7 @@ class HelpPictureView(Screen):
 	def gotPic(self, picInfo = None):
 		ptr = self.picload.getData()
 		if ptr:
-			self["picture"].instance.setPixmap(ptr.__deref__())
+			self["picture"].instance.setPixmap(ptr)
 
 	def nextPic(self):
 		self.index += 1
@@ -268,7 +268,7 @@ class UnwetterMain(Screen):
 	def gotThumbLand(self, picInfo = None):
 		ptr = self.picload.getData()
 		if ptr:
-			self["thumbland"].instance.setPixmap(ptr.__deref__())
+			self["thumbland"].instance.setPixmap(ptr)
 
 	def showThumb(self):
 		picture = ""
@@ -300,7 +300,7 @@ class UnwetterMain(Screen):
 		if ptr:
 			self["statuslabel"].setText("")
 			self["thumbnail"].show()
-			self["thumbnail"].instance.setPixmap(ptr.__deref__())
+			self["thumbnail"].instance.setPixmap(ptr)
 		else:
 			self["thumbnail"].hide()
 

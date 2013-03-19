@@ -196,7 +196,7 @@ class PictureScreen(Screen):
 	def setPictureCB(self, picInfo = None):
 		ptr = self.picload.getData()
 		if ptr is not None:
-			self["pixmap"].instance.setPixmap(ptr.__deref__())
+			self["pixmap"].instance.setPixmap(ptr)
 		self.processing = False
 
 		if self.autoreload is True:

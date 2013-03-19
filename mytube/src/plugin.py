@@ -12,7 +12,7 @@ from Components.ScrollLabel import ScrollLabel
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.List import List
 from Components.Task import Task, Job, job_manager
-from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
+from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry, ConfigPassword
 #, ConfigIP, ConfigNumber, ConfigLocations
 from MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, MyTubeTasksScreen, MyTubeHistoryScreen
 from MyTubeService import validate_cert, get_rnd, myTubeService
@@ -129,7 +129,13 @@ config.plugins.mytube.general.startFeed = ConfigSelection(
 				 ("most_recent", _("Most recent")),
 				 ("most_popular", _("Most popular")),
 				 ("most_shared", _("Most shared")),
-				 ("on_the_web", _("Trending videos"))
+				 ("on_the_web", _("Trending videos")),
+				 ("my_subscriptions", _("My Subscriptions")),
+				 ("my_favorites", _("My Favorites")),
+				 ("my_history", _("My History")),
+				 ("my_watch_later", _("My Watch Later")),
+				 ("my_recommendations", _("My Recommendations")),
+				 ("my_uploads", _("My Uploads")),
 				], "top_rated")
 config.plugins.mytube.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
 	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
@@ -145,6 +151,9 @@ config.plugins.mytube.general.videodir = ConfigSelection(default = default, choi
 config.plugins.mytube.general.history = ConfigText(default="")
 config.plugins.mytube.general.clearHistoryOnClose = ConfigYesNo(default = False)
 config.plugins.mytube.general.AutoLoadFeeds = ConfigYesNo(default = True)
+config.plugins.mytube.general.resetPlayService = ConfigYesNo(default = False)
+config.plugins.mytube.general.username = ConfigText(default="", fixed_size = False)
+config.plugins.mytube.general.password = ConfigPassword(default="")
 #config.plugins.mytube.general.useHTTPProxy = ConfigYesNo(default = False)
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
 #config.plugins.mytube.general.ProxyPort = ConfigNumber(default=8080)
@@ -197,6 +206,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		<screen name="MyTubePlayerMainScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Browser" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="config" zPosition="2" position="60,60" size="600,50" scrollbarMode="showNever" transparent="1" />
+			<widget name="result" position="300,60" zPosition="3" size="350,50" font="Regular;21" transparent="1" backgroundColor="transparent" halign="right"/>
 			<widget source="feedlist" render="Listbox" position="49,110" size="628,385" zPosition="1" scrollbarMode="showOnDemand" transparent="1" backgroundPixmap="~/list_bg.png" selectionPixmap="~/list_sel.png" >
 				<convert type="TemplatedMultiContent">
 				{"templates":
@@ -283,6 +293,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["VKeyIcon"] = Pixmap()
 		self["ButtonBlue"].hide()
 		self["VKeyIcon"].hide()
+		self["result"] = Label("")
+
 
 		self["searchactions"] = ActionMap(["ShortcutActions", "WizardActions", "HelpActions", "MediaPlayerActions", "DirectionActions"],
 		{
@@ -301,7 +313,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"menu" : self.handleMenu,
 		}, -2)
 
-		self["suggestionactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "HelpActions", "DirectionActions"],
+		self["suggestionactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "HelpActions", "DirectionActions", "NumberActions"],
 		{
 			"ok": self.keyOK,
 			"back": self.switchToConfigList,
@@ -312,6 +324,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"down": self.keyDown,
 			"left": self.keyLeft,
 			"right": self.keyRight,
+			"0": self.toggleScreenVisibility
 		}, -2)
 
 
@@ -373,6 +386,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.Timer.callback.append(self.TimerFire)
 
 	def __onClose(self):
+		myTubeService.resetAuthState()
 		del self.Timer
 		del self.timer_startDownload
 		del self.timer_thumbnails
@@ -413,6 +427,10 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 		self.statuslist = []
 		if result[80:88] == rnd:
+
+			# we need to login here; startService() is fired too often for external curl
+			self.tryUserLogin()
+
 			self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
 			self["feedlist"].style = "state"
 			self['feedlist'].setList(self.statuslist)
@@ -438,6 +456,18 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.searchContextEntries.append(self.SearchConfigEntry)
 		self["config"].list = self.searchContextEntries
 		self["config"].l.setList(self.searchContextEntries)
+
+
+	def tryUserLogin(self):
+		if config.plugins.mytube.general.username.value is "" or config.plugins.mytube.general.password.value is "":
+			return
+
+		try:
+			myTubeService.auth_user(config.plugins.mytube.general.username.value, config.plugins.mytube.general.password.value)
+			self.statuslist.append(( _("Login OK"), _('Hello') + ' ' + str(config.plugins.mytube.general.username.value)))
+		except Exception as e:
+			print 'Login-Error: ' + str(e)
+			self.statuslist.append(( _("Login failed"), str(e)))
 
 	def setState(self,status = None):
 		if status:
@@ -525,9 +555,16 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			menulist = [(_("MyTube Settings"), "settings")]
 			menulist.extend((
 					(_("View related videos"), "related"),
-					(_("View Users Video"), "user_videos"),
+					(_("View user videos"), "user_videos"),
 					(_("View response videos"), "response"),
 				))
+			
+			if myTubeService.is_auth() is True:
+				menulist.extend((
+						(_("Subscribe to user"), "subscribe"),
+						(_("Add to favorites"), "favorite"),
+					))				
+			
 			if config.usage.setup_level.index >= 2: # expert+
 				menulist.extend((
 					(_("Download Video"), "download"),
@@ -550,6 +587,13 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			current = self["feedlist"].getCurrent()[0]
 			self.setState('getFeed')
 			self.getUserVideos(current)
+		elif answer == "subscribe":
+			current = self["feedlist"].getCurrent()[0]
+			self.session.open(MessageBox, current.subscribeToUser(), MessageBox.TYPE_INFO)
+		elif answer == "favorite":
+			current = self["feedlist"].getCurrent()[0]
+			self.session.open(MessageBox, current.addToFavorites(), MessageBox.TYPE_INFO)
+					
 		elif answer == "response":
 			current = self["feedlist"].getCurrent()[0]
 			self.setState('getFeed')
@@ -713,7 +757,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					if myurl is not None:
 						myreference = eServiceReference(4097,0,myurl)
 						myreference.setName(myentry.getTitle())
-						self.session.open(MyTubePlayer, myreference, self.lastservice, infoCallback = self.showVideoInfo, nextCallback = self.getNextEntry, prevCallback = self.getPrevEntry )
+						self.session.openWithCallback(self.onPlayerClosed, MyTubePlayer, myreference, self.lastservice, infoCallback = self.showVideoInfo, nextCallback = self.getNextEntry, prevCallback = self.getPrevEntry )
 					else:
 						self.session.open(MessageBox, _("Sorry, video is not available!"), MessageBox.TYPE_INFO)
 		elif self.currList == "historylist":
@@ -725,6 +769,16 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				print "Search searchcontext",searchContext
 				self.setState('getSearchFeed')
 				self.runSearch(searchContext)
+
+	def onPlayerClosed(self):
+		if config.plugins.mytube.general.resetPlayService.value is True:
+			self.session.nav.playService(self.lastservice)
+
+	def toggleScreenVisibility(self):
+		if self.shown is True:
+			self.hide()
+		else:
+			self.show()
 
 	def keyUp(self):
 		print "self.currList im KeyUp",self.currList
@@ -787,8 +841,20 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					self.HistoryWindow.pageDown()
 	def keyStdFeed(self):
 		self.hideSuggestions()
-		menulist = [(_("HD videos"), "hd")]
+		menulist = []
+		
+		if myTubeService.is_auth() is True:
+			menulist.extend((
+				(_("My Subscriptions"), "my_subscriptions"),
+				(_("My Favorites"), "my_favorites"),
+				(_("My History"), "my_history"),
+				(_("My Watch Later"), "my_watch_later"),
+				(_("My Recommendations"), "my_recommendations"),
+				(_("My Uploads"), "my_uploads"),
+			))
+
 		menulist.extend((
+			(_("HD videos"), "hd"),
 			(_("Top rated"), "top_rated"),
 			(_("Top favorites"), "top_favorites"),
 			(_("Most viewed"), "most_viewed"),
@@ -991,14 +1057,27 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			print "[MyTubePlayer] searchDialogClosed: ", searchContext
 			self.searchFeed(searchContext)
 
-	def searchFeed(self, searchContext):
-		print "[MyTubePlayer] searchFeed"
+	def searchFeed(self, searchContext, vals = None):
+		print "[MyTubePlayer] searchFeed"		
+		
+		defaults = {
+			'time': config.plugins.mytube.search.time.value,
+			'orderby': config.plugins.mytube.search.orderBy.value,
+			'startIndex': 1,
+			'maxResults': 25,
+		}
+
+		# vals can overwrite default values; so search parameter are overwritable on function call
+		if vals is not None:
+			defaults.update(vals)
+
 		self.queryStarted()
 		self.appendEntries = False
-		self.queryThread = myTubeService.search(searchContext,
-					orderby = config.plugins.mytube.search.orderBy.value,
-					time = config.plugins.mytube.search.time.value,
-					racy = config.plugins.mytube.search.racy.value,
+		self.queryThread = myTubeService.search(searchContext, 
+					orderby = defaults['orderby'],
+					time = defaults['time'],
+					maxResults = defaults['maxResults'],
+					startIndex = defaults['startIndex'],
 					lr = config.plugins.mytube.search.lr.value,
 					categories = [ config.plugins.mytube.search.categories.value ],
 					sortOrder = config.plugins.mytube.search.sortOrder.value,
@@ -1024,6 +1103,13 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if feed is not None:
 			self.ytfeed = feed
 		self.buildEntryList()
+		text = _("Results: %s - Page: %s " % (str(myTubeService.getTotalResults()), str(myTubeService.getCurrentPage())))
+		
+		auth_username = myTubeService.getAuthedUsername()
+		if auth_username:
+			text = auth_username + ' - ' + text
+		
+		self["result"].setText(text)
 
 	def gotFeedError(self, exception):
 		print "[MyTubePlayer] gotFeedError"
@@ -1790,6 +1876,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def leavePlayerConfirmed(self, answer):
 		answer = answer and answer[1]
 		if answer == "quit":
+			print 'quited'
 			self.close()
 		elif answer == "playnext":
 			self.playNextFile()

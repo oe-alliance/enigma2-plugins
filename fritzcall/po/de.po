@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-03 12:40+0100\n"
-"PO-Revision-Date: 2013-01-03 12:41+0100\n"
+"POT-Creation-Date: 2013-03-09 15:09+0100\n"
+"PO-Revision-Date: 2013-03-09 15:09+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: \n"
@@ -62,6 +62,9 @@ msgstr "Anrufanzeige"
 msgid "Call redirection"
 msgstr "Rufumleitung"
 
+msgid "Call redirection active"
+msgstr "Rufumleitung aktiv"
+
 #, python-format
 msgid "Calling %s"
 msgstr "Rufe %s an"
@@ -73,8 +76,10 @@ msgstr "Abbruch"
 msgid "Cannot get calls from FRITZ!Box"
 msgstr "Kann Anrufe nicht von der FRITZ!Box bekommen"
 
-msgid "Cannot get infos from FRITZ!Box"
-msgstr "Kann Status nicht von der FRITZ!Box bekommen"
+msgid "Cannot get infos from FRITZ!Box yet; try later"
+msgstr ""
+"Kann Informationen von der FRITZ!Box noch nciht bekommen; versuche es später "
+"nochmal"
 
 msgid "Compact Flash"
 msgstr "Compact Flash"
@@ -120,6 +125,9 @@ msgstr ""
 
 msgid "Country"
 msgstr "Land"
+
+msgid "DECT inactive"
+msgstr "DECT inaktiv"
 
 msgid "DECT phones registered"
 msgstr "Schnurlostelefone angemeldet"
@@ -258,6 +266,9 @@ msgstr "FRITZ!Box FON Firmware-Version"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Fon Status"
+
+msgid "FRITZ!Box PhoneBook to read"
+msgstr "Einzulesendes FRITZ!Box Telefonbuch"
 
 msgid ""
 "FRITZ!Box firmware version not configured! Please set it in the "
@@ -473,6 +484,9 @@ msgstr "Telefonbuch der FRITZ!Box auslesen"
 msgid "Refresh status"
 msgstr "Status neu holen"
 
+msgid "Refreshing..."
+msgstr "Lade neu..."
+
 msgid "Reload interval for phonebooks (hours)"
 msgstr "Lade Telefonbücher neu nach soviel Stunden"
 
@@ -526,6 +540,9 @@ msgstr "Zeige nur Anrufe bestimmter Nummern"
 
 msgid "Software fax active"
 msgstr "Software Fax aktiv"
+
+msgid "Software fax inactive"
+msgstr "Software Fax inaktiv"
 
 msgid "Status not available"
 msgstr "Status nicht verfügbar"
@@ -654,9 +671,6 @@ msgstr "Anrufbeantworter aktiv"
 msgid "mobile"
 msgstr "Handy"
 
-msgid "no SID"
-msgstr "keine SID"
-
 msgid "no calls"
 msgstr "keine Anrufe"
 
@@ -700,3 +714,6 @@ msgstr "keine Anzeige"
 
 msgid "work"
 msgstr "Büro"
+
+msgid "wrong user or password?"
+msgstr "falscher Benutzer oder falsches Passwort?"

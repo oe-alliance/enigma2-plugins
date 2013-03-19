@@ -438,7 +438,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         if pixmap is None:
             self["info_cover"].instance.setPixmapFromFile(self.noCoverArtPNG)            
         else:
-            self["info_cover"].instance.setPixmap(pixmap.__deref__())
+            self["info_cover"].instance.setPixmap(pixmap)
     
 
     def loadPersonalStations(self):
@@ -583,7 +583,7 @@ class LastFMSaveScreen(Screen):
         if pixmap is None:
             self["cover"].instance.setPixmapFromFile(self.noCoverArtPNG)            
         else:
-            self["cover"].instance.setPixmap(pixmap.__deref__())        
+            self["cover"].instance.setPixmap(pixmap)        
     
     def update(self):
         if self.streamplayer.getMetadata("creator") == self.lastcreator:

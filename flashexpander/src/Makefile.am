@@ -1,13 +1,11 @@
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/Flashexpander
 
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/Flashexpander
+install_DATA = \
+	flashexpander.png \
+	maintainer.info
 
 install_PYTHON = \
 	flashexpander.py \
 	__init__.py \
 	locale.py \
 	plugin.py
-
-install_DATA = \
-	flashexpander.png \
-	maintainer.info
-

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-03 12:40+0100\n"
+"POT-Creation-Date: 2013-03-09 15:09+0100\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -64,6 +64,9 @@ msgstr "Gespreksmonitoring"
 msgid "Call redirection"
 msgstr ""
 
+msgid "Call redirection active"
+msgstr ""
+
 #, python-format
 msgid "Calling %s"
 msgstr ""
@@ -75,7 +78,7 @@ msgstr "Annuleren"
 msgid "Cannot get calls from FRITZ!Box"
 msgstr ""
 
-msgid "Cannot get infos from FRITZ!Box"
+msgid "Cannot get infos from FRITZ!Box yet; try later"
 msgstr ""
 
 msgid "Compact Flash"
@@ -121,6 +124,9 @@ msgstr ""
 
 msgid "Country"
 msgstr "Land"
+
+msgid "DECT inactive"
+msgstr ""
 
 msgid "DECT phones registered"
 msgstr "geregistreerde DECT telefoons"
@@ -255,6 +261,9 @@ msgstr ""
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Status"
+
+msgid "FRITZ!Box PhoneBook to read"
+msgstr ""
 
 msgid ""
 "FRITZ!Box firmware version not configured! Please set it in the "
@@ -452,6 +461,9 @@ msgstr "Lees telefoonboek van FRITZ!Box"
 msgid "Refresh status"
 msgstr ""
 
+msgid "Refreshing..."
+msgstr ""
+
 msgid "Reload interval for phonebooks (hours)"
 msgstr ""
 
@@ -506,6 +518,9 @@ msgstr ""
 #, fuzzy
 msgid "Software fax active"
 msgstr "Geen mailbox actief"
+
+msgid "Software fax inactive"
+msgstr ""
 
 msgid "Status not available"
 msgstr ""
@@ -635,9 +650,6 @@ msgstr "mailboxen actief"
 msgid "mobile"
 msgstr "mobiel"
 
-msgid "no SID"
-msgstr ""
-
 msgid "no calls"
 msgstr ""
 
@@ -683,6 +695,9 @@ msgstr "niets weergeven"
 
 msgid "work"
 msgstr "werk"
+
+msgid "wrong user or password?"
+msgstr ""
 
 #~ msgid "Areacode to add to Outgoing Calls (if necessary)"
 #~ msgstr "Netnummer bij uitgaande gesprekken  (indien nodig)"

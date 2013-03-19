@@ -275,6 +275,9 @@ eurotictv/meta/Makefile
 eurotictv/po/Makefile
 eurotictv/src/Makefile
 
+eventlist/Makefile
+eventlist/src/Makefile
+
 fancontrol2/Makefile
 fancontrol2/meta/Makefile
 fancontrol2/po/Makefile

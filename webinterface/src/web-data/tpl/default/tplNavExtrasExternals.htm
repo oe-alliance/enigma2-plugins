@@ -1,8 +1,8 @@
 
 <!-- tplNavExtrasExternals -->
 	{if anyGui}
-	<div class="center black">WebPlugins</div>
-	<ul id="navExternals" class="navTable" style="height: 88px; overflow: auto">
+	<div class="center black externals">WebPlugins</div>
+	<ul id="navExternals" class="navTable" style="height: 86px; overflow: auto">
 		{for e in externals}{if e.hasGui}<li><a href="${e.path}" target="${e.target}"><div>${e.name}</div></a></li>{/if}{/for}
 	</ul>
 	{/if}

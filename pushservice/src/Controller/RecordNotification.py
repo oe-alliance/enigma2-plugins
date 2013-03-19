@@ -97,7 +97,7 @@ class RecordNotification(ControllerBase):
 				del timer
 			
 		# Finished repeating timer will report the state StateEnded+1 or StateWaiting
-		else:
+		elif timer.state == timer.StateEnded or timer.repeated and timer.state == timer.StateWaiting:
 			if self.getValue('send_on_end'):
 				text += _("Record finished:\n  ") \
 							+ str(timer.name) + "\t" \

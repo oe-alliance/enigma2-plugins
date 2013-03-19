@@ -94,6 +94,11 @@ class AutoTimerSimulateResource(AutoTimerBackgroundingResource):
 
 class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
+		# We re-read the config so we won't display empty or wrong information
+		try:
+			autotimer.readXml()
+		except Exception:
+			return self.returnResult(req, False, _("Couldn't load config file!"))
 		# show xml
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')

@@ -26,6 +26,7 @@ SUBDIRS = \
 	epgrefresh \
 	epgsearch \
 	eurotictv \
+	eventlist \
 	filebrowser \
 	flashexpander \
 	fritzcall \

@@ -225,7 +225,7 @@ msgid "Fan type"
 msgstr "نوع فن"
 
 #: FC2.txt:592
-msgid "Fan off in Standby"
+msgid "Fan off in Idle Mode"
 msgstr "فن خاموش است یا در حالت استندبای است"
 
 #: FC2.txt:593
