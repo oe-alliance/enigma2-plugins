@@ -68,8 +68,8 @@ def Partnerbox_EPGSelectionInit():
 	EPGSelection.GetPartnerboxTimerlist = GetPartnerboxTimerlist
 	EPGSelection.PartnerboxInit = PartnerboxInit
 
-def Partnerbox_EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, EPGtype = None,  bouquetname=""):
-	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, EPGtype,  bouquetname)
+def Partnerbox_EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, EPGtype = None):
+	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, EPGtype)
 	self.PartnerboxInit(True)
 
 def PartnerboxInit(self, filterRef):

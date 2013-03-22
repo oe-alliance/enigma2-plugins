@@ -103,8 +103,8 @@ def EventViewBase__init__(self, Event, Ref, callback=None, similarEPGCB=None):
 	})
 
 
-def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, EPGtype = None,  bouquetname=""):
-	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, EPGtype,  bouquetname)
+def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, EPGtype=None):
+	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, EPGtype)
 	self["trailerActions"] = ActionMap(["InfobarActions", "InfobarTeletextActions"],
 	{
 		"showTv": self.showTrailer,
