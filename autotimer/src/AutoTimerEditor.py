@@ -851,6 +851,135 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		# Close
 		self.close(self.timer)
 
+class AutoTimerEditorSilent(AutoTimerEditor):
+	def __init__(self, session, timer, editingDefaults = False):
+		AutoTimerEditor.__init__(self, session, timer, editingDefaults)
+		self.skinName = "AutoTimerEditor"
+		self.onLayoutFinish.append(self.save)
+
+	def save(self):
+		# Match
+		self.timer.match = self.match.value
+
+		# Name
+		self.timer.name = self.name.value.strip() or self.timer.match
+
+		# Encoding
+		self.timer.encoding = self.encoding.value
+
+		# ...
+		self.timer.searchType = self.searchType.value
+		self.timer.searchCase = self.searchCase.value
+
+		# Alternatives
+		self.timer.overrideAlternatives = self.overrideAlternatives.value
+
+		# Enabled
+		self.timer.enabled = self.enabled.value
+
+		# Justplay
+		self.timer.justplay = self.justplay.value == "zap"
+		self.timer.setEndtime = self.setEndtime.value
+
+		# Timespan
+		if self.timespan.value:
+			start = self.timespanbegin.value
+			end = self.timespanend.value
+			self.timer.timespan = (start, end)
+		else:
+			self.timer.timespan = None
+
+		# Timeframe
+		if self.timeframe.value:
+			start = self.timeframebegin.value
+			end = self.timeframeend.value
+			self.timer.timeframe = (start, end)
+		else:
+			self.timer.timeframe = None
+
+		# Services
+		if self.serviceRestriction:
+			self.timer.services = self.services
+			self.timer.bouquets = self.bouquets
+		else:
+			self.timer.services = None
+			self.timer.bouquets = None
+
+		# Offset
+		if self.offset.value:
+			self.timer.offset = (self.offsetbegin.value*60, self.offsetend.value*60)
+		else:
+			self.timer.offset = None
+
+		# AfterEvent
+		if self.afterevent.value == "default":
+			self.timer.afterevent = []
+		else:
+			afterevent = {
+				"nothing": AFTEREVENT.NONE,
+				"deepstandby": AFTEREVENT.DEEPSTANDBY,
+				"standby": AFTEREVENT.STANDBY,
+				"auto": AFTEREVENT.AUTO
+			}[self.afterevent.value]
+			# AfterEvent Timespan
+			if self.afterevent_timespan.value:
+				start = self.afterevent_timespanbegin.value
+				end = self.afterevent_timespanend.value
+				self.timer.afterevent = [(afterevent, (start, end))]
+			else:
+				self.timer.afterevent = [(afterevent, None)]
+
+		# Maxduration
+		if self.duration.value:
+			self.timer.maxduration = self.durationlength.value*60
+		else:
+			self.timer.maxduration = None
+
+		# Ex-&Includes
+		if self.filterSet:
+			self.timer.exclude = self.excludes
+			self.timer.include = self.includes
+		else:
+			self.timer.exclude = None
+			self.timer.include = None
+
+		# Counter
+		if self.counter.value:
+			self.timer.matchCount = self.counter.value
+			if self.counterLeft.value <= self.counter.value:
+				self.timer.matchLeft = self.counterLeft.value
+			else:
+				self.timer.matchLeft = self.counter.value
+			if self.counterFormatString.value:
+				self.timer.matchFormatString = self.counterFormatString.value
+			else:
+				self.timer.matchFormatString = ''
+		else:
+			self.timer.matchCount = 0
+			self.timer.matchLeft = 0
+			self.timer.matchFormatString = ''
+
+		self.timer.avoidDuplicateDescription = int(self.avoidDuplicateDescription.value)
+		self.timer.searchForDuplicateDescription = int(self.searchForDuplicateDescription.value)
+
+		if self.useDestination.value:
+			self.timer.destination = self.destination.value
+		else:
+			self.timer.destination = None
+
+		self.timer.tags = self.timerentry_tags
+
+		self.timer.vps_enabled = self.vps_enabled.value
+		self.timer.vps_overwrite = self.vps_overwrite.value
+
+		self.timer.series_labeling = self.series_labeling.value
+
+		# Close
+		self.returnVal = self.timer
+
+	def retval(self):
+		return self.returnVal
+
 class AutoTimerFilterEditor(Screen, ConfigListScreen):
 	"""Edit AutoTimer Filter"""
 
@@ -1373,6 +1502,66 @@ def importerCallback(ret):
 			AutoTimerEditor,
 			ret
 		)
+
+def addAutotimerFromEventSilent(session, evt = None, service = None):
+	from AutoTimerComponent import preferredAutoTimerComponent
+	from AutoTimerImporter import AutoTimerImporterSilent
+	from plugin import autotimer
+
+	autotimer.readXml()
+
+	match = evt and evt.getEventName() or ""
+	name = match or "New AutoTimer"
+	sref = None
+	if service is not None:
+		service = str(service)
+		myref = eServiceReference(service)
+		if not (myref.flags & eServiceReference.isGroup):
+			# strip all after last :
+			pos = service.rfind(':')
+			if pos != -1:
+				if service[pos-1] == ':':
+					pos -= 1
+				service = service[:pos+1]
+
+		sref = ServiceReference(myref)
+	if evt:
+		# timespan defaults to +- 1h
+		begin = evt.getBeginTime()-3600
+		end = begin + evt.getDuration()+7200
+	else:
+		begin = end = 0
+
+	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
+
+	newTimer = autotimer.defaultTimer.clone()
+	newTimer.id = autotimer.getUniqueId()
+	newTimer.name = name
+	newTimer.match = ''
+	newTimer.enabled = True
+
+	AutoTimerImporterSilentDialog = session.instantiateDialog(
+		AutoTimerImporterSilent,
+		newTimer,
+		match,		# Proposed Match
+		begin,		# Proposed Begin
+		end,		# Proposed End
+		None,		# Proposed Disabled
+		sref,		# Proposed ServiceReference
+		None,		# Proposed afterEvent
+		None,		# Proposed justplay
+		None,		# Proposed dirname, can we get anything useful here?
+		[]			# Proposed tags
+	)
+	retval = AutoTimerImporterSilentDialog.retval()
+	session.deleteDialogWithCallback(importerCallbackSilent, AutoTimerImporterSilentDialog, retval)
+
+def importerCallbackSilent(ret):
+	if ret:
+		ret, session = ret
+		AutoTimerEditorSilentDialog = session.instantiateDialog(AutoTimerEditorSilent, ret)
+		retval = AutoTimerEditorSilentDialog.retval()
+		session.deleteDialogWithCallback(editorCallback, AutoTimerEditorSilentDialog, retval)
 
 def editorCallback(ret):
 	if ret:
