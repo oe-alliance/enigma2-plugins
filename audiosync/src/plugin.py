@@ -20,25 +20,28 @@ config.plugins.AC3LipSync.absoluteStep8 = ConfigInteger(default = 0, limits = (-
 config.plugins.AC3LipSync.position_x = ConfigInteger(default=0)
 config.plugins.AC3LipSync.position_y = ConfigInteger(default=0)
 
-def getDistro():
-	try:
-		file = open('/etc/image-version', 'r')
-		lines = file.readlines()
-		file.close()
-		for x in lines:
-			splitted = x.split('=')
-			if splitted[0] == "comment":
-				result =  splitted[1].replace('\n','')
-	except:
-		result = None
-	return result
-
 def main(session, **kwargs):
 #	 reload(AC3main)
 	session.open(AC3main.AC3LipSync, plugin_path)
 
 def startSetup(menuid, **kwargs):
-	if getDistro() == "Venton":
+	distro = None
+	try:
+		from enigma import getDistro
+		distro = getDistro()
+	except:
+		try:
+			file = open('/etc/image-version', 'r')
+			lines = file.readlines()
+			file.close()
+			for x in lines:
+				splitted = x.split('=')
+				if splitted[0] == "comment":
+					distro = splitted[1].replace('\n','')
+		except:
+			distro = None
+
+	if distro == "ventonsupport":
 		if menuid == "expert":
 			return [(_("Audio Sync Setup"), setup, "audiosync_setup", 41)]
 		else:

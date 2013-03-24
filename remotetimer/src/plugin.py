@@ -43,19 +43,6 @@ from base64 import encodestring
 
 import urllib
 
-def getDistro():
-	try:
-		file = open('/etc/image-version', 'r')
-		lines = file.readlines()
-		file.close()
-		for x in lines:
-			splitted = x.split('=')
-			if splitted[0] == "comment":
-				result =  splitted[1].replace('\n','')
-	except:
-		result = None
-	return result
-
 #------------------------------------------------------------------------------------------
 
 config.plugins.remoteTimer = ConfigSubsection()
@@ -425,8 +412,15 @@ def main(session, **kwargs):
 	session.open(RemoteTimerScreen)
 
 def Plugins(**kwargs):
+	distro = None
+	try:
+		from enigma import getDistro
+		distro = getDistro()
+	except:
+		distro = None
+
 	plugin = []
-	if getDistro() == "ViX" or getDistro() == "AAF" or getDistro() == "openMips":
+	if distro in ("openvix", "openaaf", "openmips"):
 		plugin.append(PluginDescriptor(name=_("Remote Timer"), description = _("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu))
 	else:
 		plugin.append(PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main))
