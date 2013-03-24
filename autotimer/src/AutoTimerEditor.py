@@ -1504,15 +1504,12 @@ def importerCallback(ret):
 		)
 
 def addAutotimerFromEventSilent(session, evt = None, service = None):
-	from AutoTimerComponent import preferredAutoTimerComponent
-	from AutoTimerImporter import AutoTimerImporterSilent
 	from plugin import autotimer
 
 	autotimer.readXml()
 
 	match = evt and evt.getEventName() or ""
 	name = match or "New AutoTimer"
-	sref = None
 	if service is not None:
 		service = str(service)
 		myref = eServiceReference(service)
@@ -1524,7 +1521,6 @@ def addAutotimerFromEventSilent(session, evt = None, service = None):
 					pos -= 1
 				service = service[:pos+1]
 
-		sref = ServiceReference(myref)
 	if evt:
 		# timespan defaults to +- 1h
 		begin = evt.getBeginTime()-3600
@@ -1532,36 +1528,16 @@ def addAutotimerFromEventSilent(session, evt = None, service = None):
 	else:
 		begin = end = 0
 
-	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
-
 	newTimer = autotimer.defaultTimer.clone()
 	newTimer.id = autotimer.getUniqueId()
 	newTimer.name = name
-	newTimer.match = ''
+	newTimer.match = name
+	newTimer.services = [service]
 	newTimer.enabled = True
 
-	AutoTimerImporterSilentDialog = session.instantiateDialog(
-		AutoTimerImporterSilent,
-		newTimer,
-		match,		# Proposed Match
-		begin,		# Proposed Begin
-		end,		# Proposed End
-		None,		# Proposed Disabled
-		sref,		# Proposed ServiceReference
-		None,		# Proposed afterEvent
-		None,		# Proposed justplay
-		None,		# Proposed dirname, can we get anything useful here?
-		[]			# Proposed tags
-	)
-	retval = AutoTimerImporterSilentDialog.retval()
-	session.deleteDialogWithCallback(importerCallbackSilent, AutoTimerImporterSilentDialog, retval)
-
-def importerCallbackSilent(ret):
-	if ret:
-		ret, session = ret
-		AutoTimerEditorSilentDialog = session.instantiateDialog(AutoTimerEditorSilent, ret)
-		retval = AutoTimerEditorSilentDialog.retval()
-		session.deleteDialogWithCallback(editorCallback, AutoTimerEditorSilentDialog, retval)
+	AutoTimerEditorSilentDialog = session.instantiateDialog(AutoTimerEditorSilent, newTimer)
+	retval = AutoTimerEditorSilentDialog.retval()
+	session.deleteDialogWithCallback(editorCallback, AutoTimerEditorSilentDialog, retval)
 
 def editorCallback(ret):
 	if ret:
