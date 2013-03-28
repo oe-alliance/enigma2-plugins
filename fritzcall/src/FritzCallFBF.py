@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 761 $
-$Date: 2013-03-09 15:07:53 +0100 (Sa, 09 Mrz 2013) $
-$Id: FritzCallFBF.py 761 2013-03-09 14:07:53Z michael $
+$Revision: 763 $
+$Date: 2013-03-28 14:42:38 +0100 (Do, 28 Mrz 2013) $
+$Id: FritzCallFBF.py 763 2013-03-28 13:42:38Z michael $
 '''
 
 from . import _, __, debug #@UnresolvedImport # pylint: disable=E0611,F0401
@@ -486,6 +486,7 @@ class FritzCallFBF:
 		callListL = []
 		if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
 			filtermsns = map(lambda x: x.strip(), config.plugins.FritzCall.filtermsn.value.split(","))
+			# TODO: scramble filtermsns
 			debug("[FritzCallFBF] _gotPageCalls: filtermsns %s" % (repr(filtermsns)))
 
 		# Typ;Datum;Name;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
@@ -1179,9 +1180,7 @@ class FritzCallFBF_05_50:
 	#		debug("[FritzCallFBF_05_50] _md5Login: no sid! That must be an old firmware.")
 	#		self._notify(_("FRITZ!Box - Error logging in\n\n") + _("wrong firmware version?"))
 	#		return
- # 
-	#	debug("[FritzCallFBF_05_50] _md5Login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
-	#	self._md5LoginTimestamp = time.time()
+	# 
 	#	if self._md5Sid != "0000000000000000":
 	#		debug("[FritzCallFBF_05_50] _md5Login: SID "+ self._md5Sid)
 	#		for callback in self._loginCallbacks:
@@ -1230,6 +1229,9 @@ class FritzCallFBF_05_50:
 
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login ok"))
+
+		debug("[FritzCallFBF_05_50] _gotPageLogin: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
+		self._md5LoginTimestamp = time.time()
 
 		for callback in self._loginCallbacks:
 			debug("[FritzCallFBF_05_50] _gotPageLogin: calling " + callback.__name__)
@@ -1404,7 +1406,10 @@ class FritzCallFBF_05_50:
 		callListL = []
 		if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
 			filtermsns = map(lambda x: x.strip(), config.plugins.FritzCall.filtermsn.value.split(","))
-			debug("[FritzCallFBF_05_50] _gotPageCalls: filtermsns %s" % (repr(filtermsns)))
+			# TODO: scramble filtermsns
+			debug("[FritzCallFBF_05_50] _gotPageCalls: filtermsns %s" % (repr(map(__, filtermsns))))
+		else:
+			filtermsns = None
 
 		#=======================================================================
 		# linkP = open("/tmp/FritzCalls.csv", "w")
@@ -1444,15 +1449,20 @@ class FritzCallFBF_05_50:
 			# debug("[FritzCallFBF_05_50] _gotPageCalls: remote. " + remote)
 
 			here = call[5]
-			if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
-				# debug("[FritzCallFBF_05_50] _gotPageCalls: check %s" % (here))
-				if here not in filtermsns:
-					# debug("[FritzCallFBF_05_50] _gotPageCalls: skip %s" % (here))
-					continue
+			start = here.find('Internet: ')
+			if start != -1:
+				start += len('Internet: ')
+				here = here[start:]
+
+			if filtermsns and here not in filtermsns:
+				# debug("[FritzCallFBF_05_50] _gotPageCalls: skip %s" % (here))
+				continue
+
 			here = resolveNumber(here, call[4], self.phonebook)
 			# debug("[FritzCallFBF_05_50] _gotPageCalls: here: " + here)
 
 			debug("[FritzCallFBF_05_50] _gotPageCalls: append: %s" % repr((__(number, False), date, direct, __(remote), length, __(here))))
+			# debug("[FritzCallFBF_05_50] _gotPageCalls: append: %s" % repr((number, date, direct, remote, length, here)))
 			callListL.append((number, date, direct, remote, length, here))
 
 		if callback:
@@ -2095,6 +2105,7 @@ class FritzCallFBF_05_27:
 		callListL = []
 		if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
 			filtermsns = map(lambda x: x.strip(), config.plugins.FritzCall.filtermsn.value.split(","))
+			# TODO: scramble filtermsns
 			debug("[FritzCallFBF_05_27] _gotPageCalls: filtermsns %s" % (repr(filtermsns)))
 
 		#=======================================================================
