@@ -1528,10 +1528,15 @@ def addAutotimerFromEventSilent(session, evt = None, service = None):
 	else:
 		begin = end = 0
 
+	begin = localtime(begin)
+	end = localtime(end)
+
 	newTimer = autotimer.defaultTimer.clone()
 	newTimer.id = autotimer.getUniqueId()
 	newTimer.name = name
 	newTimer.match = name
+	if newTimer.timespan[0]:
+		newTimer.timespan = ((begin[3], begin[4]), (end[3], end[4]),False)
 	newTimer.services = [service]
 	newTimer.enabled = True
 
