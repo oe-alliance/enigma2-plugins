@@ -2,10 +2,11 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 760 $
-$Date: 2013-03-09 12:45:03 +0100 (Sa, 09 Mrz 2013) $
-$Id: plugin.py 760 2013-03-09 11:45:03Z michael $
+$Revision: 768 $
+$Date: 2013-03-30 11:49:20 +0100 (Sa, 30 Mrz 2013) $
+$Id: plugin.py 768 2013-03-30 10:49:20Z michael $
 '''
+
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -298,8 +299,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 760 $"[1:-2] + "\n" + 
-							"$Date: 2013-03-09 12:45:03 +0100 (Sa, 09 Mrz 2013) $"[1:23] + "\n"
+							"$Revision: 768 $"[1:-2] + "\n" + 
+							"$Date: 2013-03-30 11:49:20 +0100 (Sa, 30 Mrz 2013) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -570,9 +571,12 @@ class FritzMenu(Screen, HelpableScreen):
 		else:
 			fontSize = scaleV(24, 21) # indeed this is font size +2
 	
-			width = DESKTOP_WIDTH - scaleH(500, 250)
+			noButtons = 2
+			width = max(DESKTOP_WIDTH - scaleH(500, 250), noButtons*140+(noButtons+1)*10)
 			# boxInfo 2 lines, gap, internet 2 lines, gap, dsl/wlan/dect/fax/rufuml each 1 line, gap
-			height = 5 + 2*fontSize + 10 + 2*fontSize + 10 + 5*fontSize + 5
+			height = 5 + 2*fontSize + 10 + 2*fontSize + 10 + 5*fontSize + 10 + 40 + 5
+			buttonsGap = (width-noButtons*140)/(noButtons+1)
+			buttonsVPos = height-40-5
 	
 			self.skin = """
 				<screen name="FritzMenuNew" position="center,center" size="%d,%d" title="FRITZ!Box Fon Status" >
@@ -595,6 +599,8 @@ class FritzMenu(Screen, HelpableScreen):
 					<widget name="FBFRufuml" position="%d,%d" size="%d,%d" font="Regular;%d" />
 					<widget name="rufuml_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
 					<widget name="rufuml_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="%s" transparent="1" alphatest="on" />
+					<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				</screen>""" % (
 							width, height, # size
 							40, 5, # position info
@@ -642,6 +648,8 @@ class FritzMenu(Screen, HelpableScreen):
 							20, 5+2*fontSize+10+6*fontSize+10+(fontSize-16)/2, # position button rufuml
 							"skin_default/buttons/button_green.png",
 							20, 5+2*fontSize+10+6*fontSize+10+(fontSize-16)/2, # position button rufuml
+							# buttonsGap, buttonsVPos, "skin_default/buttons/red.png", buttonsGap, buttonsVPos,
+							buttonsGap+140+buttonsGap, buttonsVPos, "skin_default/buttons/green.png", buttonsGap+140+buttonsGap, buttonsVPos,
 							)
 	
 			Screen.__init__(self, session)
@@ -651,6 +659,8 @@ class FritzMenu(Screen, HelpableScreen):
 											{
 											"cancel": self._exit,
 											"ok": self._exit,
+											"green": self._toggleWlan,
+											"red": self._reset,
 											"info": self._getInfo,
 											}, -2)
 	
@@ -659,8 +669,17 @@ class FritzMenu(Screen, HelpableScreen):
 			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["menuActions"], "OkCancelActions", [("ok", _("Quit"))]))
 			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "ColorActions", [("green", _("Toggle WLAN"))]))
+			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "ColorActions", [("red", _("Reset"))]))
+			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["menuActions"], "EPGSelectActions", [("info", _("Refresh status"))]))
 	
+			# TRANSLATORS: keep it short, this is a button
+			self["key_red"] = Button(_("Reset"))
+			# TRANSLATORS: keep it short, this is a button
+			self["key_green"] = Button(_("Toggle WLAN"))
+
 			self["FBFInfo"] = Label(_('Getting status from FRITZ!Box Fon...'))
 	
 			self["FBFInternet"] = Label('Internet')
@@ -853,8 +872,9 @@ class FritzMenu(Screen, HelpableScreen):
 			debug("[FritzMenu] toggleWlan off")
 			fritzbox.changeWLAN('0')
 		else:
-			debug("[FritzMenu] toggleWlan off")
+			debug("[FritzMenu] toggleWlan on")
 			fritzbox.changeWLAN('1')
+		self._getInfo()
 
 	def _toggleMailbox(self, which):
 		debug("[FritzMenu] toggleMailbox")
@@ -1854,7 +1874,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 760 $"[1: - 1] + "$Date: 2013-03-09 12:45:03 +0100 (Sa, 09 Mrz 2013) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 768 $"[1: - 1] + "$Date: 2013-03-30 11:49:20 +0100 (Sa, 30 Mrz 2013) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2361,7 +2381,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 760 $"[1:-1]	+ "$Date: 2013-03-09 12:45:03 +0100 (Sa, 09 Mrz 2013) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 768 $"[1:-1]	+ "$Date: 2013-03-30 11:49:20 +0100 (Sa, 30 Mrz 2013) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
