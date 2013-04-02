@@ -16,7 +16,7 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Button import Button
 from Components.config import config
 from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_MULTI
@@ -85,18 +85,18 @@ class EPGSearchList(EPGList):
 			if clock_pic and clock_pic_partnerbox:
 				# Partnerbox and local
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x, r3.y, 21, 21, clock_pic),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x + 25, r3.y, 21, 21, clock_pic_partnerbox),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x + 50, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-43, (r3.h/2-11), 21, 21, clock_pic),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, clock_pic_partnerbox),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-44, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			elif clock_pic_partnerbox:
 				# Partnerbox and local
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x, r3.y, 21, 21, clock_pic_partnerbox),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x + 25, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, clock_pic_partnerbox),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-21, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			else:
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.x, r3.y, 21, 21, clock_pic),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x + 25, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, clock_pic),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-21, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 		else:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
 		return res
@@ -115,7 +115,7 @@ class EPGSearch(EPGSelection):
 		self["key_yellow"] = Button(_("New Search"))
 		self["key_blue"] = Button(_("Add AutoTimer"))
 
-# begin stripped copy of EPGSelection.__init__
+		# begin stripped copy of EPGSelection.__init__
 		self.bouquetChangeCB = None
 		self.serviceChangeCB = None
 		self.ask_time = -1 #now
@@ -134,31 +134,63 @@ class EPGSearch(EPGSelection):
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
 		self["list"] = EPGSearchList(type = self.type, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
-		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions", "MenuActions", 'ColorActions', 'InfobarInstantRecord'],
-			{
-				"menu": self.menu,
-				"cancel": self.closeScreen,
-				"OK": self.epgsearchOK,
-				"OKLong": self.epgsearchOKLong,
-				"epg": self.Info,
-				"info": self.Info,
-				"timerAdd": self.timerAdd,
-				"yellow": self.yellowButtonPressed,
-				"yellowlong": self.showHistory,
-				"blue": self.exportAutoTimer,
-				"info": self.infoKeyPressed,
-				"red": self.redButtonPressed,
-				"nextBouquet": self.nextBouquet, # just used in multi epg yet
-				"prevBouquet": self.prevBouquet, # just used in multi epg yet
-				"nextService": self.nextService, # just used in single epg yet
-				"prevService": self.prevService, # just used in single epg yet
-				"ShortRecord": self.doRecordTimer,
-				"LongRecord": self.doZapTimer,
-			})
 
-		self["actions"].csel = self
+		self['dialogactions'] = HelpableActionMap(self, 'WizardActions',
+			{
+				'back': (self.closeChoiceBoxDialog, _('Close dialog')),
+			}, -1)
+		self['dialogactions'].csel = self
+		self["dialogactions"].setEnabled(False)
+
+		self['okactions'] = HelpableActionMap(self, 'OkCancelActions',
+			{
+				'cancel': (self.closeScreen, _('Exit EPG')),
+				'OK': (self.epgsearchOK, _('Zap to channel (setup in menu)')),
+				'OKLong': (self.epgsearchOKLong, _('Zap to channel and close (setup in menu)'))
+			}, -1)
+		self['okactions'].csel = self
+
+		self['colouractions'] = HelpableActionMap(self, 'ColorActions', 
+			{
+				'red': (self.redButtonPressed, _('IMDB search for current event')),
+				'green': (self.timerAdd, _('Add/Remove timer for current event')),
+				'yellow': (self.yellowButtonPressed, _('Search for similar events')),
+				'blue': (self.exportAutoTimer, _('Add a auto timer for current event')),
+				'bluelong': (self.bluelongButtonPressed, _('Show AutoTimer List'))
+			}, -1)
+		self['colouractions'].csel = self
+
+		self['recordingactions'] = HelpableActionMap(self, 'InfobarInstantRecord', 
+			{
+				'ShortRecord': (self.doRecordTimer, _('Add a record timer for current event')),
+				'LongRecord': (self.doZapTimer, _('Add a zap timer for current event'))
+			}, -1)
+		self['recordingactions'].csel = self
+
+		self['epgactions'] = HelpableActionMap(self, 'EPGSelectActions', 
+			{
+				'nextBouquet': (self.nextBouquet, _('Goto next bouquet')),
+				'prevBouquet': (self.prevBouquet, _('Goto previous bouquet')),
+				'nextService': (self.nextService, _('Move down a page')),
+				'prevService': (self.prevService, _('Move up a page')),
+				'epg': (self.Info, _('Show detailed event info')),
+				'info': (self.Info, _('Show detailed event info')),
+				'infolong': (self.infoKeyPressed, _('Show single epg for current channel')),
+				'menu': (self.menu, _('Setup menu'))
+			}, -1)
+		self['epgactions'].csel = self
+
+		self['epgcursoractions'] = HelpableActionMap(self, 'DirectionActions', 
+			{
+				'left': (self.prevPage, _('Move up a page')),
+				'right': (self.nextPage, _('Move down a page')),
+				'up': (self.moveUp, _('Goto previous channel')),
+				'down': (self.moveDown, _('Goto next channel'))
+			}, -1)
+		self['epgcursoractions'].csel = self
+
 		self.onLayoutFinish.append(self.onCreate)
-# end stripped copy of EPGSelection.__init__
+		# end stripped copy of EPGSelection.__init__
 
 		# Partnerbox
 		if PartnerBoxIconsEnabled:
@@ -196,6 +228,15 @@ class EPGSearch(EPGSelection):
 		# Partnerbox
 		if PartnerBoxIconsEnabled:
 			EPGSelection.GetPartnerboxTimerlist(self)
+
+	def refreshlist(self):
+		if self.currSearch:
+			self.searchEPG(self.currSearch)
+		else:
+			l = self["list"]
+			l.recalcEntrySize()
+			l.list = []
+			l.l.setList(l.list)
 
 	def closeScreen(self):
 		# Save our history
