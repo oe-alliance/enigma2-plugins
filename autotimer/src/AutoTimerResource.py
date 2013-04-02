@@ -12,7 +12,7 @@ except ImportError as ie:
 from ServiceReference import ServiceReference
 from Tools.XMLTools import stringToXML
 from enigma import eServiceReference
-from . import _, config, iteritems
+from . import _, config, iteritems, plugin
 from plugin import autotimer
 
 API_VERSION = "1.3"
