@@ -84,6 +84,15 @@ class AutoPollerThread(Thread):
 			sem.acquire()
 			# NOTE: we have to check this here and not using the while to prevent the parser to be started on shutdown
 			if not self.running: break
+			
+			if config.plugins.autotimer.skip_during_records.value:
+				try:
+					import NavigationInstance
+					if NavigationInstance.instance.RecordTimer.isRecording():
+						print("[AutoTimer]: Skip check during running records")
+						continue
+				except:
+					pass
 
 			from plugin import autotimer
 			# Ignore any program errors
