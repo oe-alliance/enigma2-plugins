@@ -243,6 +243,12 @@ class EPGSearch(EPGSelection):
 		config.plugins.epgsearch.save()
 		EPGSelection.close(self)
 
+	def closeChoiceBoxDialog(self):
+		self['dialogactions'].execEnd()
+		if self.ChoiceBoxDialog:
+			self.ChoiceBoxDialog['actions'].execEnd()
+			self.session.deleteDialog(self.ChoiceBoxDialog)
+
 	def epgsearchOK(self):
 		cur = self["list"].getCurrent()
 		self.currentService = cur[1]
