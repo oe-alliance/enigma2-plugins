@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 763 $
-$Date: 2013-03-28 14:42:38 +0100 (Do, 28 Mrz 2013) $
-$Id: plugin.py 763 2013-03-28 13:42:38Z michael $
+$Revision: 773 $
+$Date: 2013-04-07 10:03:55 +0200 (Sun, 07 Apr 2013) $
+$Id: plugin.py 773 2013-04-07 08:03:55Z michael $
 '''
 
 
@@ -79,7 +79,7 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", "05.29,05.50")])
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", "05.29, 05.50")])
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
@@ -111,6 +111,8 @@ config.plugins.FritzCall.prefix.setUseableChars('0123456789')
 config.plugins.FritzCall.connectionVerbose = ConfigEnableDisable(default=True)
 config.plugins.FritzCall.ignoreUnknown = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.reloadPhonebookTime = ConfigInteger(default=8, limits=(0, 99))
+config.plugins.FritzCall.FritzExtendedSearchFaces = ConfigEnableDisable(default=False)
+config.plugins.FritzCall.FritzExtendedSearchNames = ConfigEnableDisable(default=False)
 
 
 def getMountedDevs():
@@ -299,8 +301,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 763 $"[1:-2] + "\n" + 
-							"$Date: 2013-03-28 14:42:38 +0100 (Do, 28 Mrz 2013) $"[1:23] + "\n"
+							"$Revision: 773 $"[1:-2] + "\n" + 
+							"$Date: 2013-04-07 10:03:55 +0200 (Sun, 07 Apr 2013) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -571,9 +573,12 @@ class FritzMenu(Screen, HelpableScreen):
 		else:
 			fontSize = scaleV(24, 21) # indeed this is font size +2
 	
-			width = DESKTOP_WIDTH - scaleH(500, 250)
+			noButtons = 1
+			width = max(DESKTOP_WIDTH - scaleH(500, 250), noButtons*140+(noButtons+1)*10)
 			# boxInfo 2 lines, gap, internet 2 lines, gap, dsl/wlan/dect/fax/rufuml each 1 line, gap
-			height = 5 + 2*fontSize + 10 + 2*fontSize + 10 + 5*fontSize + 5
+			height = 5 + 2*fontSize + 10 + 2*fontSize + 10 + 5*fontSize + 10 + 40 + 5
+			buttonsGap = (width-noButtons*140)/(noButtons+1)
+			buttonsVPos = height-40-5
 	
 			self.skin = """
 				<screen name="FritzMenuNew" position="center,center" size="%d,%d" title="FRITZ!Box Fon Status" >
@@ -596,6 +601,8 @@ class FritzMenu(Screen, HelpableScreen):
 					<widget name="FBFRufuml" position="%d,%d" size="%d,%d" font="Regular;%d" />
 					<widget name="rufuml_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
 					<widget name="rufuml_active" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="%s" transparent="1" alphatest="on" />
+					<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				</screen>""" % (
 							width, height, # size
 							40, 5, # position info
@@ -643,6 +650,9 @@ class FritzMenu(Screen, HelpableScreen):
 							20, 5+2*fontSize+10+6*fontSize+10+(fontSize-16)/2, # position button rufuml
 							"skin_default/buttons/button_green.png",
 							20, 5+2*fontSize+10+6*fontSize+10+(fontSize-16)/2, # position button rufuml
+							# buttonsGap, buttonsVPos, "skin_default/buttons/red.png", buttonsGap, buttonsVPos,
+							buttonsGap, buttonsVPos, "skin_default/buttons/green.png", buttonsGap, buttonsVPos,
+							# buttonsGap+140+buttonsGap, buttonsVPos, "skin_default/buttons/green.png", buttonsGap+140+buttonsGap, buttonsVPos,
 							)
 	
 			Screen.__init__(self, session)
@@ -652,6 +662,8 @@ class FritzMenu(Screen, HelpableScreen):
 											{
 											"cancel": self._exit,
 											"ok": self._exit,
+											"green": self._toggleWlan,
+											"red": self._reset,
 											"info": self._getInfo,
 											}, -2)
 	
@@ -660,8 +672,17 @@ class FritzMenu(Screen, HelpableScreen):
 			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["menuActions"], "OkCancelActions", [("ok", _("Quit"))]))
 			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "ColorActions", [("green", _("Toggle WLAN"))]))
+			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "ColorActions", [("red", _("Reset"))]))
+			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["menuActions"], "EPGSelectActions", [("info", _("Refresh status"))]))
 	
+			# TRANSLATORS: keep it short, this is a button
+			self["key_red"] = Button(_("Reset"))
+			# TRANSLATORS: keep it short, this is a button
+			self["key_green"] = Button(_("Toggle WLAN"))
+
 			self["FBFInfo"] = Label(_('Getting status from FRITZ!Box Fon...'))
 	
 			self["FBFInternet"] = Label('Internet')
@@ -854,8 +875,9 @@ class FritzMenu(Screen, HelpableScreen):
 			debug("[FritzMenu] toggleWlan off")
 			fritzbox.changeWLAN('0')
 		else:
-			debug("[FritzMenu] toggleWlan off")
+			debug("[FritzMenu] toggleWlan on")
 			fritzbox.changeWLAN('1')
+		self._getInfo()
 
 	def _toggleMailbox(self, which):
 		debug("[FritzMenu] toggleMailbox")
@@ -1383,7 +1405,14 @@ class FritzCallPhonebook:
 				
 		if not name and self.phonebook.has_key(number):
 			name = self.phonebook[number]
-				
+
+		if not name and config.plugins.FritzCall.FritzExtendedSearchNames.value:
+			for k in range(len(number)-1, 0, -1):
+				name = self.search(number[:k])
+				if name:
+					debug("[FritzCallPhonebook] search result for shortened number: %s" % name)
+					break
+
 		return name.replace(", ", "\n").strip()
 
 	def add(self, number, name):
@@ -1855,7 +1884,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 763 $"[1: - 1] + "$Date: 2013-03-28 14:42:38 +0100 (Do, 28 Mrz 2013) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 773 $"[1: - 1] + "$Date: 2013-04-07 10:03:55 +0200 (Sun, 07 Apr 2013) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1922,6 +1951,10 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 			if config.plugins.FritzCall.phonebook.value or config.plugins.FritzCall.fritzphonebook.value:
 				self.list.append(getConfigListEntry(_("Reload interval for phonebooks (hours)"), config.plugins.FritzCall.reloadPhonebookTime))
+
+			if config.plugins.FritzCall.phonebook.value or config.plugins.FritzCall.fritzphonebook.value:
+				self.list.append(getConfigListEntry(_("Extended Search for names"), config.plugins.FritzCall.FritzExtendedSearchNames))
+			self.list.append(getConfigListEntry(_("Extended Search for faces"), config.plugins.FritzCall.FritzExtendedSearchFaces))
 
 			self.list.append(getConfigListEntry(_("Strip Leading 0"), config.plugins.FritzCall.internal))
 			# self.list.append(getConfigListEntry(_("Default display mode for FRITZ!Box calls"), config.plugins.FritzCall.fbfCalls))
@@ -2095,13 +2128,25 @@ def findFace(number, name):
 		if sep != -1:
 			name = name[:sep]
 		nameFile = os.path.join(facesDir, name)
-		facesFile = ""
 		if name and os.path.exists(nameFile + ".png"):
 			facesFile = nameFile + ".png"
 		elif name and os.path.exists(nameFile + ".PNG"):
 			facesFile = nameFile + ".PNG"
-		else:
-			facesFile = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
+
+	if not facesFile and config.plugins.FritzCall.FritzExtendedSearchFaces.value:
+		for k in range(len(number)-1, 0, -1):
+			if os.path.exists(os.path.join(facesDir, number[:k])):
+				facesFile = os.path.join(facesDir, number[:k])
+				break
+			elif os.path.exists(os.path.join(facesDir, number[:k]) + ".png"):
+				facesFile = os.path.join(facesDir, number[:k]) + ".png"
+				break
+			elif os.path.exists(os.path.join(facesDir, number[:k]) + ".PNG"):
+				facesFile = os.path.join(facesDir, number[:k]) + ".PNG"
+				break
+
+	if not facesFile:
+		facesFile = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
 
 	debug("[FritzCall] findFace result: %s" % (facesFile))
 	return facesFile
@@ -2362,7 +2407,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 763 $"[1:-1]	+ "$Date: 2013-03-28 14:42:38 +0100 (Do, 28 Mrz 2013) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 773 $"[1:-1]	+ "$Date: 2013-04-07 10:03:55 +0200 (Sun, 07 Apr 2013) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2473,7 +2518,8 @@ class FritzProtocol(LineReceiver):
 	
 					debug("[FritzProtocol] lineReceived phonebook.search: %s" % self.number)
 					self.caller = phonebook.search(self.number)
-					debug("[FritzProtocol] lineReceived phonebook.search reault: %s" % self.caller)
+					debug("[FritzProtocol] lineReceived phonebook.search result: %s" % self.caller)
+						
 					if not self.caller:
 						if config.plugins.FritzCall.lookup.value:
 							FritzReverseLookupAndNotifier(self.event, self.number, self.caller, self.phone, self.date, self.connID)

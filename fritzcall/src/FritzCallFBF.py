@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 763 $
-$Date: 2013-03-28 14:42:38 +0100 (Do, 28 Mrz 2013) $
-$Id: FritzCallFBF.py 763 2013-03-28 13:42:38Z michael $
+$Revision: 771 $
+$Date: 2013-04-06 12:08:41 +0200 (Sat, 06 Apr 2013) $
+$Id: FritzCallFBF.py 771 2013-04-06 10:08:41Z michael $
 '''
 
 from . import _, __, debug #@UnresolvedImport # pylint: disable=E0611,F0401
@@ -369,10 +369,10 @@ class FritzCallFBF:
 					# name = name.encode('utf-8')
 					# Beware: strings in phonebook.phonebook have to be in utf-8!
 					if not self.phonebook.phonebook.has_key(thisnumber):
-						debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (name, thisnumber))
+						debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (name, __(thisnumber)))
 						self.phonebook.phonebook[thisnumber] = name
 					else:
-						debug("[FritzCallFBF] Ignoring '''%s''' with '''%s'''" % (name, thisnumber))
+						debug("[FritzCallFBF] Ignoring '''%s''' with '''%s'''" % (name, __(thisnumber)))
 				else:
 					debug("[FritzCallFBF] ignoring empty number for %s" % name)
 				continue
@@ -1353,7 +1353,7 @@ class FritzCallFBF_05_50:
 				for i in range(len(thisnumbers)):
 					thisnumber = cleanNumber(thisnumbers[i])
 					if self.phonebook.phonebook.has_key(thisnumber):
-						debug("[FritzCallFBF_05_50] Ignoring '''%s''' with '''%s'''" % (name, thisnumber))
+						debug("[FritzCallFBF_05_50] Ignoring '''%s''' with '''%s'''" % (name, __(thisnumber)))
 						continue
 
 					if not thisnumbers[i]:
@@ -1513,6 +1513,11 @@ class FritzCallFBF_05_50:
 
 	def _okDial(self, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF_05_50] okDial")
+		if html:
+			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
+			if found:
+				self._notify(found.group(1))
+				return
 
 	def _errorDial(self, error):
 		debug("[FritzCallFBF_05_50] errorDial: $s" % error)
@@ -1522,8 +1527,10 @@ class FritzCallFBF_05_50:
 	def changeWLAN(self, statusWLAN):
 		''' get status info from FBF '''
 		debug("[FritzCallFBF_05_50] changeWLAN start")
-		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
-		return
+		#=======================================================================
+		# Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
+		# return
+		#=======================================================================
 
 		if not statusWLAN or (statusWLAN != '1' and statusWLAN != '0'):
 			return
@@ -1544,29 +1551,43 @@ class FritzCallFBF_05_50:
 				return
 
 		if statusWLAN == '0':
-			statusWLAN = 'off'
+			parms = urlencode({
+				'sid':self._md5Sid,
+				'apply':'',
+				'cancel':'',
+				'btn_refresh':''
+				})
 		else:
-			statusWLAN = 'off'
+			parms = urlencode({
+				'sid':self._md5Sid,
+				'active':'on',
+				'active_24':'on',
+				'active_5':'on',
+				'hidden_ssid':'on',
+				'apply':'',
+				'cancel':'',
+				'btn_refresh':''
+				})
 
 		url = "http://%s//wlan/wlan_settings.lua" % config.plugins.FritzCall.hostname.value
-		parms = urlencode({
-			'active':str(statusWLAN),
-			'sid':self._md5Sid
-			})
-		debug("[FritzCallFBF] changeWLAN url: " + url + "?" + parms)
+		debug("[FritzCallFBF_05_50] changeWLAN url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
 			headers={
-					'Content-Type': "application/x-www-form-urlencoded",
-					'Content-Length': str(len(parms))},
+					'Content-Type': "application/x-www-form-urlencoded"},
 			postdata=parms).addCallback(self._okChangeWLAN).addErrback(self._errorChangeWLAN)
 
 	def _okChangeWLAN(self, html): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF] _okChangeWLAN")
+		debug("[FritzCallFBF_05_50] _okChangeWLAN")
+		if html:
+			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
+			if found:
+				self._notify(found.group(1))
+				return
 
 	def _errorChangeWLAN(self, error):
-		debug("[FritzCallFBF] _errorChangeWLAN: $s" % error)
+		debug("[FritzCallFBF_05_50] _errorChangeWLAN: $s" % error)
 		text = _("FRITZ!Box - Failed changing WLAN: %s") % error.getErrorMessage()
 		self._notify(text)
 
@@ -1574,17 +1595,6 @@ class FritzCallFBF_05_50:
 		''' switch mailbox on/off '''
 		debug("[FritzCallFBF_05_50] changeMailbox start: " + str(whichMailbox))
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
-
-	def _changeMailbox(self, whichMailbox, html):
-		return
-
-	def _okChangeMailbox(self, html): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF_05_50] _okChangeMailbox")
-
-	def _errorChangeMailbox(self, error):
-		debug("[FritzCallFBF_05_50] _errorChangeMailbox: $s" % error)
-		text = _("FRITZ!Box - Failed changing Mailbox: %s") % error.getErrorMessage()
-		self._notify(text)
 
 	def getInfo(self, callback):
 		''' get status info from FBF '''
@@ -1697,18 +1707,6 @@ class FritzCallFBF_05_50:
 		if callback:
 			callback(info)
 
-	def _okSetDect(self, callback, html):
-		return
-	
-	def _okSetConInfo(self, callback, html):
-		return
-
-	def _okSetWlanState(self, callback, html):
-		return
-
-	def _okSetDslState(self, callback, html):
-		return
-
 	def _errorGetInfo(self, error):
 		debug("[FritzCallFBF_05_50] _errorGetInfo: %s" % (error))
 		text = _("FRITZ!Box - Error getting status: %s") % error.getErrorMessage()
@@ -1719,7 +1717,6 @@ class FritzCallFBF_05_50:
 		self._login(self._reset)
 
 	def _reset(self, html):
-		# POSTDATA=getpage=../html/reboot.html&errorpage=../html/de/menus/menu2.html&var:lang=de&var:pagename=home&var:errorpagename=home&var:menu=home&var:pagemaster=&time:settings/time=1242207340%2C-120&var:tabReset=0&logic:command/reboot=../gateway/commands/saveconfig.html
 		if html:
 			#===================================================================
 			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
@@ -1732,15 +1729,13 @@ class FritzCallFBF_05_50:
 				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
 				self._errorReset('Login: ' + html[start, html.find('</p>', start)])
 				return
+
 		if self._callScreen:
 			self._callScreen.close()
-		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+
+		url = "http://%s/system/reboot.lua" % config.plugins.FritzCall.hostname.value
 		parms = urlencode({
-			'getpage':'../html/reboot.html',
-			'var:lang':'de',
-			'var:pagename':'reset',
-			'var:menu':'system',
-			'logic:command/reboot':'../gateway/commands/saveconfig.html',
+			'reboot':'',
 			'sid':self._md5Sid
 			})
 		debug("[FritzCallFBF_05_50] _reset url: " + url + "?" + parms)
@@ -1748,12 +1743,23 @@ class FritzCallFBF_05_50:
 			method="POST",
 			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
 			headers={
-					'Content-Type': "application/x-www-form-urlencoded",
-					'Content-Length': str(len(parms))},
-			postdata=parms)
+					'Content-Type': "application/x-www-form-urlencoded"},
+			postdata=parms).addCallback(self._okReset).addErrback(self._errorReset)
+
+		self._md5LoginTimestamp = None
 
 	def _okReset(self, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF_05_50] _okReset")
+		#=======================================================================
+		# linkP = open("/tmp/_okReset.htm", "w")
+		# linkP.write(html)
+		# linkP.close()
+		#=======================================================================
+		if html:
+			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
+			if found:
+				self._notify(found.group(1))
+				return
 
 	def _errorReset(self, error):
 		debug("[FritzCallFBF_05_50] _errorReset: %s" % (error))
@@ -2056,7 +2062,7 @@ class FritzCallFBF_05_27:
 				for i in range(len(thisnumbers)):
 					thisnumber = cleanNumber(thisnumbers[i])
 					if self.phonebook.phonebook.has_key(thisnumber):
-						debug("[FritzCallFBF_05_27] Ignoring '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (name, thisnumber))
+						debug("[FritzCallFBF_05_27] Ignoring '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (name, __(thisnumber)))
 						continue
 
 					if not thisnumbers[i]:

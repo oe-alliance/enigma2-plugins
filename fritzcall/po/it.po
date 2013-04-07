@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-09 15:09+0100\n"
+"POT-Creation-Date: 2013-04-07 13:11+0200\n"
 "PO-Revision-Date: 2013-01-20 15:17+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -196,6 +196,12 @@ msgstr "Inserire criteri di ricerca"
 
 msgid "Entry incomplete."
 msgstr "Voce incompleta."
+
+msgid "Extended Search for faces"
+msgstr ""
+
+msgid "Extended Search for names"
+msgstr ""
 
 msgid "Extension number to initiate call on"
 msgstr "Numero apparecchio su cui indirizzare la chiamata"
@@ -490,6 +496,7 @@ msgstr "Intervallo aggiornamento rubriche (ore)"
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: keep it short, this is a button
 msgid "Reset"
 msgstr "Reset"
 
@@ -583,6 +590,7 @@ msgstr "Comm. casella"
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: keep it short, this is a button
 msgid "Toggle WLAN"
 msgstr "Commutare WLAN"
 
