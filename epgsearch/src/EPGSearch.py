@@ -116,6 +116,7 @@ class EPGSearch(EPGSelection):
 		self["key_blue"] = Button(_("Add AutoTimer"))
 
 		# begin stripped copy of EPGSelection.__init__
+		self.ChoiceBoxDialog = None
 		self.bouquetChangeCB = None
 		self.serviceChangeCB = None
 		self.ask_time = -1 #now
@@ -244,10 +245,23 @@ class EPGSearch(EPGSelection):
 		EPGSelection.close(self)
 
 	def closeChoiceBoxDialog(self):
-		self['dialogactions'].execEnd()
+		if self.has_key('dialogactions'):
+			self["dialogactions"].setEnabled(False)
 		if self.ChoiceBoxDialog:
 			self.ChoiceBoxDialog['actions'].execEnd()
 			self.session.deleteDialog(self.ChoiceBoxDialog)
+		if self.has_key('okactions'):
+			self['okactions'].setEnabled(True)
+		if self.has_key('epgcursoractions'):
+			self['epgcursoractions'].setEnabled(True)
+		if self.has_key('colouractions'):
+			self['colouractions'].setEnabled(True)
+		if self.has_key('recordingactions'):
+			self['recordingactions'].setEnabled(True)
+		if self.has_key('epgactions'):
+			self['epgactions'].setEnabled(True)
+		if self.has_key('input_actions'):
+			self['input_actions'].setEnabled(True)
 
 	def epgsearchOK(self):
 		cur = self["list"].getCurrent()
