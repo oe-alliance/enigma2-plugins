@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 768 $
-$Date: 2013-03-30 11:49:20 +0100 (Sa, 30 Mrz 2013) $
-$Id: FritzCallFBF.py 768 2013-03-30 10:49:20Z michael $
+$Revision: 771 $
+$Date: 2013-04-06 12:08:41 +0200 (Sat, 06 Apr 2013) $
+$Id: FritzCallFBF.py 771 2013-04-06 10:08:41Z michael $
 '''
 
 from . import _, __, debug #@UnresolvedImport # pylint: disable=E0611,F0401
@@ -1513,6 +1513,11 @@ class FritzCallFBF_05_50:
 
 	def _okDial(self, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF_05_50] okDial")
+		if html:
+			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
+			if found:
+				self._notify(found.group(1))
+				return
 
 	def _errorDial(self, error):
 		debug("[FritzCallFBF_05_50] errorDial: $s" % error)
@@ -1556,6 +1561,9 @@ class FritzCallFBF_05_50:
 			parms = urlencode({
 				'sid':self._md5Sid,
 				'active':'on',
+				'active_24':'on',
+				'active_5':'on',
+				'hidden_ssid':'on',
 				'apply':'',
 				'cancel':'',
 				'btn_refresh':''
@@ -1572,6 +1580,11 @@ class FritzCallFBF_05_50:
 
 	def _okChangeWLAN(self, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF_05_50] _okChangeWLAN")
+		if html:
+			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
+			if found:
+				self._notify(found.group(1))
+				return
 
 	def _errorChangeWLAN(self, error):
 		debug("[FritzCallFBF_05_50] _errorChangeWLAN: $s" % error)
@@ -1731,12 +1744,22 @@ class FritzCallFBF_05_50:
 			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
 			headers={
 					'Content-Type': "application/x-www-form-urlencoded"},
-			postdata=parms)
+			postdata=parms).addCallback(self._okReset).addErrback(self._errorReset)
 
 		self._md5LoginTimestamp = None
 
 	def _okReset(self, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF_05_50] _okReset")
+		#=======================================================================
+		# linkP = open("/tmp/_okReset.htm", "w")
+		# linkP.write(html)
+		# linkP.close()
+		#=======================================================================
+		if html:
+			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
+			if found:
+				self._notify(found.group(1))
+				return
 
 	def _errorReset(self, error):
 		debug("[FritzCallFBF_05_50] _errorReset: %s" % (error))
