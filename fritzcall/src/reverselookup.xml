@@ -2,8 +2,8 @@
 
 <!-- reverselookup.xml
 
-$Revision: 674 $
-$Date: 2012-07-28 12:29:57 +0200 (Sat, 28 Jul 2012) $
+$Revision: 774 $
+$Date: 2013-04-21 12:23:24 +0200 (Sun, 21 Apr 2013) $
 
 	 The syntax of this file is fairly self-explanatory
      However, a few things need to be said. First and foremost
@@ -571,7 +571,7 @@ $Date: 2012-07-28 12:29:57 +0200 (Sat, 28 Jul 2012) $
 	<country code="+33">
 		<website name="www.infobel.com" url="http://www.infobel.com/en/france/Inverse.aspx?inphCoordType=EPSG&amp;qPhone=$NUMBER" prefix="">
 			<entry firstOccurance="name">
-				<name>&lt;span\s+class=&quot;fn org&quot;&gt;([^&lt;]*)&lt;/span&gt;</name>
+				<name>1.\s*&lt;span\s+class=&quot;fn org&quot;&gt;([^&lt;]*)&lt;/span&gt;</name>
 				<street>&lt;span\s+class=&quot;street-address&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
 				<zipcode>&lt;span\s+class=&quot;postal-code&quot;>([^&lt;]*)&lt;/span&gt;</zipcode>
 				<city>&lt;span\s+class=&quot;locality&quot;>([^&lt;]*)&lt;/span&gt;</city>
@@ -759,21 +759,13 @@ $Date: 2012-07-28 12:29:57 +0200 (Sat, 28 Jul 2012) $
 		</website>
 	</country>
 	<country code="+39">
-		<website name="pronto.it" url="http://www.pronto.it/?q=$NUMBER" prefix="0">
-			<entry>
-				<name swapFirstAndLastName="true">&lt;span class="cognome "&gt;([^&gt;]*)&lt;/span&gt;</name>
-				<street>&lt;span class="via" title="([^"]*)"&gt;</street>
-				<city>&lt;span class="via" title="[^"]*">[^-]*- \d* ([^-&lt;]*)(?:- [^&lt;]*)?&lt;/span&gt;</city>
-				<zipcode>&lt;span class="via" title="[^"]*">[^-]*- (\d*) [^-&lt;]*&lt;/span&gt;</zipcode>
-			</entry>
-		</website>
 		<website name="paginebianche.it" url="http://www.paginebianche.it/ricerca-da-numero?qs=$NUMBER" prefix="0">
 			<entry>
 			    <company>&lt;span\s+class=&quot;insegna&quot;&gt;([^&lt;]*)&lt;/span&gt;</company>
 				<name>class=&quot;org fn&quot;&gt;&lt;h2 class=&quot;rgs&quot;&gt;&lt;a href=&quot;[^&quot;]+&quot; title=&quot;[^&quot;]+&quot; rel=&quot;nofollow&quot;&gt;([^&lt;]*)&lt;</name>
 				<street>class=&quot;street-address&quot;>([^&lt;]*)&lt;</street>
 				<city>class=&quot;locality&quot;>([^&lt;]*)&lt;</city>
-				<zipcode>-  ([\d]+) &lt;span class=&quot;locality&quot;</zipcode>
+				<zipcode>([\d]+) &lt;span class=&quot;locality&quot;</zipcode>
 			</entry>
 		</website>
 		<website name="infobel.com" url="http://www.infobel.com/it/Italy/Inverse.aspx?qPhone=$NUMBER" prefix="0">
@@ -782,6 +774,15 @@ $Date: 2012-07-28 12:29:57 +0200 (Sat, 28 Jul 2012) $
 				<street>&lt;div class=&quot;result-box-col&quot;&gt;&lt;div&gt;&lt;strong&gt;([^,]*),.[0-9]+\s*[^&lt;]*&lt;/strong&gt;&lt;/div&gt;</street>
 				<city>&lt;div class=&quot;result-box-col&quot;&gt;&lt;div&gt;&lt;strong&gt;[^,]*,.[0-9]+\s*([^&lt;]*)&lt;/strong&gt;&lt;/div&gt;</city>
 				<zipcode>&lt;div class=&quot;result-box-col&quot;&gt;&lt;div&gt;&lt;strong&gt;[^,]*,.([0-9]+)\s*[^&lt;]*&lt;/strong&gt;&lt;/div&gt;</zipcode>
+			</entry>
+		</website>
+		<!-- does not work -->
+		<website name="pronto.it" url="http://www.pronto.it/?q=$NUMBER" prefix="0">
+			<entry>
+				<name swapFirstAndLastName="true">&lt;span class="cognome "&gt;([^&gt;]*)&lt;/span&gt;</name>
+				<street>&lt;span class="via" title="([^"]*)"&gt;</street>
+				<city>&lt;span class="via" title="[^"]*">[^-]*- \d* ([^-&lt;]*)(?:- [^&lt;]*)?&lt;/span&gt;</city>
+				<zipcode>&lt;span class="via" title="[^"]*">[^-]*- (\d*) [^-&lt;]*&lt;/span&gt;</zipcode>
 			</entry>
 		</website>
 	</country>
@@ -970,7 +971,7 @@ $Date: 2012-07-28 12:29:57 +0200 (Sat, 28 Jul 2012) $
 	        <entry>
 				<name>var data = getItemData\('[^']+', '[^']+', '[^']+', '[^']+', '[^']+', '([^']+)', '[^']+', '[^']+', '[^']+'\);</name>
 				<city>var data = getItemData\('[^']+', '[^']+', '[^']+', '[^']+', '([^']+)', '[^']+', '[^']+', '[^']+', '[^']+'\);</city>
-				<street>&lt;div class=&quot;strasse&quot;&gt;\s*([^&amp;]+&amp;nbsp;[^,]+),&amp;nbsp;</street>
+				<street>&lt;div class=&quot;strasse&quot;&gt;\s*([^,]+),&amp;nbsp;</street>
 				<zipcode>var data = getItemData\('[^']+', '[^']+', '[^']+', '([^']+)', '[^']+', '[^']+', '[^']+', '[^']+', '[^']+'\);</zipcode>
 			</entry>
 			<entry firstOccurance="zipcode">
@@ -1010,7 +1011,7 @@ $Date: 2012-07-28 12:29:57 +0200 (Sat, 28 Jul 2012) $
 	        	<zipcode>&lt;span class=&quot;postcode&quot;&gt;([^&lt;]*)&lt;/span&gt;</zipcode>
 	        </entry>
 		</website>
-		<website name="www.11880.com" url="http://www.11880.com/Suche/index.cfm?&amp;fuseaction=Suche.rueckwaertssucheresult&amp;init=true&amp;tel=$NUMBER" prefix="0">
+		<website name="www.11880.com" url="http://www.11880.com/inverssuche/index/search?method=searchSimple&quot;_dvform_posted=1&quot;phoneNumber=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>&lt;a style=&quot;text-decoration: underline;&quot; href=&quot;[^&quot;]*?&quot;\s+onclick=&quot;[^&quot;]*?&quot;\s+class=&quot;popup&quot;[^&gt;]*?&gt;([^&lt;]*?)&lt;/a&gt;</name>
 	        	<street>^\t*?([^,\t]*?), [\d]{5} [^&lt;]*?&lt;br /&gt;</street>
