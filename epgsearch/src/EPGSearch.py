@@ -198,7 +198,7 @@ class EPGSearch(EPGSelection):
 			EPGSelection.PartnerboxInit(self, False)
 
 		self.refreshTimer = eTimer()
-		self.refreshTimer.timeout.get().append(self.refreshData)
+		self.refreshTimer.timeout.get().append(self.refreshlist)
 
 		# Hook up actions for yttrailer if installed
 		try:
@@ -231,6 +231,7 @@ class EPGSearch(EPGSelection):
 			EPGSelection.GetPartnerboxTimerlist(self)
 
 	def refreshlist(self):
+		self.refreshTimer.stop()
 		if self.currSearch:
 			self.searchEPG(self.currSearch)
 		else:
