@@ -258,9 +258,9 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 					return 1
 				elif action[:8] == "seekdef:":
 					key = int(action[8:])
-					time = [-config.seek.selfdefined_13.value, False, config.seek.selfdefined_13.value,
-							-config.seek.selfdefined_46.value, False, config.seek.selfdefined_46.value,
-							-config.seek.selfdefined_79.value, False, config.seek.selfdefined_79.value][key-1]
+					time = [-config.seek.selfdefined_13.getValue(), False, config.seek.selfdefined_13.getValue(),
+							-config.seek.selfdefined_46.getValue(), False, config.seek.selfdefined_46.getValue(),
+							-config.seek.selfdefined_79.getValue(), False, config.seek.selfdefined_79.getValue()][key-1]
 					self.player.seekRelative(time)
 					return 1
 				else:
