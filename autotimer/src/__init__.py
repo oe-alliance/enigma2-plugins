@@ -34,6 +34,7 @@ config.plugins.autotimer.notifconflict = ConfigYesNo(default=True)
 config.plugins.autotimer.notifsimilar = ConfigYesNo(default=True)
 config.plugins.autotimer.maxdaysinfuture = ConfigNumber(default=0)
 config.plugins.autotimer.show_help = ConfigYesNo(default=True)
+config.plugins.autotimer.skip_during_records = ConfigYesNo(default=False)
 
 PluginLanguageDomain = "AutoTimer"
 PluginLanguagePath = "Extensions/AutoTimer/locale"

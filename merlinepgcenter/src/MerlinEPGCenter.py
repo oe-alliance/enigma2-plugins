@@ -60,7 +60,7 @@ from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath
 from Components.VideoWindow import VideoWindow
 from Components.VolumeBar import VolumeBar
-from enigma import eServiceReference, eServiceCenter, eEPGCache, getDesktop, eSize, eTimer, fontRenderClass, ePoint, gFont
+from enigma import eServiceReference, eServiceCenter, eEPGCache, getDesktop, eSize, eTimer, fontRenderClass, ePoint, gFont, gPixmapPtr
 from GlobalActions import globalActionMap
 from math import fabs
 import NavigationInstance
@@ -503,7 +503,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			
 		if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_SIMPLE_BAR or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_SIMPLE_BAR_LIST_OFF:
 			self["eventProgressImage"].hide()
-			self["eventProgress"].instance.setPixmap(None)
+			self["eventProgress"].instance.setPixmap(gPixmapPtr())
 			self["eventProgressText"].hide()
 			self["eventProgress"].show()
 		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PIXMAP_BAR or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PIXMAP_BAR_LIST_OFF:
@@ -520,7 +520,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self["eventProgressImage"].show()
 		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PERCENT_TEXT_LIST_OFF:
 			self["eventProgressImage"].hide()
-			self["eventProgress"].instance.setPixmap(None)
+			self["eventProgress"].instance.setPixmap(gPixmapPtr())
 			self["eventProgress"].hide()
 			self["eventProgressText"].show()
 			
@@ -1356,7 +1356,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		else:
 			idx = self["list"].instance.getCurrentIndex()
 			if config.plugins.merlinEpgCenter.blinkingPicon.value and self.blinkTimer.getIsInList(idx) and not self.blinkTimer.getBlinkState():
-				self["picon"].instance.setPixmap(None)
+				self["picon"].instance.setPixmap(gPixmapPtr())
 			elif cur is not None:
 				sRef = cur[2]
 				if self["picon"].instance is not None:

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-09 15:09+0100\n"
-"PO-Revision-Date: 2013-03-09 15:09+0100\n"
+"POT-Creation-Date: 2013-04-07 13:11+0200\n"
+"PO-Revision-Date: 2013-04-07 13:12+0200\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: \n"
@@ -196,6 +196,12 @@ msgstr "Suchbegriffe"
 
 msgid "Entry incomplete."
 msgstr "Eintrag unvollständig."
+
+msgid "Extended Search for faces"
+msgstr "Erweiterte Suche für Anruferbilder"
+
+msgid "Extended Search for names"
+msgstr "Erweiterte Suche für Anrufernamen"
 
 msgid "Extension number to initiate call on"
 msgstr "Nebenstelle für Anrufe"
@@ -492,6 +498,7 @@ msgstr "Lade Telefonbücher neu nach soviel Stunden"
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: keep it short, this is a button
 msgid "Reset"
 msgstr "Reset"
 
@@ -585,6 +592,7 @@ msgstr "Toggle AB"
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: keep it short, this is a button
 msgid "Toggle WLAN"
 msgstr "Toggle WLAN"
 

@@ -9,6 +9,7 @@ from plugin import autotimer
 from Tools.FuzzyDate import FuzzyTime
 from Tools.Notifications import AddPopup
 from Screens.MessageBox import MessageBox
+import NavigationInstance
 
 class AutoPoller:
 	"""Automatically Poll AutoTimer"""
@@ -32,22 +33,25 @@ class AutoPoller:
 		self.timer.stop()
 		from Screens.Standby import inStandby
 		print "[AutoTimer] Auto Poll"
-		if config.plugins.autotimer.onlyinstandby.value and inStandby:
-			print "[AutoTimer] Auto Poll Started"
-			# Ignore any program errors
-			try:
-				ret = autotimer.parseEPG(autoPoll = True)
-			except Exception:
-				# Dump error to stdout
-				import traceback, sys
-				traceback.print_exc(file=sys.stdout)
-		elif not config.plugins.autotimer.onlyinstandby.value:
-			print "[AutoTimer] Auto Poll Started"
-			# Ignore any program errors
-			try:
-				ret = autotimer.parseEPG(autoPoll = True)
-			except Exception:
-				# Dump error to stdout
-				import traceback, sys
-				traceback.print_exc(file=sys.stdout)
+		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
+			print("[AutoTimer] Skip check during running records")
+		else:
+			if config.plugins.autotimer.onlyinstandby.value and inStandby:
+				print "[AutoTimer] Auto Poll Started"
+				# Ignore any program errors
+				try:
+					ret = autotimer.parseEPG(autoPoll = True)
+				except Exception:
+					# Dump error to stdout
+					import traceback, sys
+					traceback.print_exc(file=sys.stdout)
+			elif not config.plugins.autotimer.onlyinstandby.value:
+				print "[AutoTimer] Auto Poll Started"
+				# Ignore any program errors
+				try:
+					ret = autotimer.parseEPG(autoPoll = True)
+				except Exception:
+					# Dump error to stdout
+					import traceback, sys
+					traceback.print_exc(file=sys.stdout)
 		self.timer.startLongTimer(config.plugins.autotimer.interval.value*60)

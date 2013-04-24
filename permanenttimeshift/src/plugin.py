@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #####################################################
 # Permanent Timeshift Plugin for Enigma2 Dreamboxes
-# Coded by Homey (c) 2012
+# Coded by Homey (c) 2013
 #
-# Version: 1.2
+# Version: 1.3
 # Support: www.dreambox-plugins.de
 #####################################################
 from Components.ActionMap import ActionMap
@@ -66,7 +66,7 @@ language.addCallback(localeInit())
 #####  CONFIG SETTINGS   #####
 ##############################
 
-VERSION = "1.2"
+VERSION = "1.3"
 config.plugins.pts = ConfigSubsection()
 config.plugins.pts.enabled = ConfigYesNo(default = True)
 config.plugins.pts.maxevents = ConfigInteger(default=5, limits=(1, 99))
@@ -324,16 +324,11 @@ class InfoBar(InfoBarOrg):
 		else:
 			preptsfile = self.pts_currplaying-1
 
-		# Switch to previous TS file by seeking forward to next one
+		# Switch to previous TS file by jumping to next one
 		if fileExists("%s/pts_livebuffer.%s" % (config.usage.timeshift_path.value, preptsfile), 'r') and preptsfile != self.pts_eventcount:
 			self.pts_seektoprevfile = True
 			self.ptsSetNextPlaybackFile("pts_livebuffer.%s" % (preptsfile))
-
-			self.setSeekState(self.SEEK_STATE_PAUSE)
-			if self.seekstate != self.SEEK_STATE_PLAY:
-				self.setSeekState(self.SEEK_STATE_PLAY)
-			self.doSeek(-1)
-			self.seekFwd()
+			self.doSeek(3600 * 24 * 90000)
 
 	def __evInfoChanged(self):
 		if self.service_changed:
@@ -476,16 +471,10 @@ class InfoBar(InfoBarOrg):
 		# Jump Back to Live TV
 		if config.plugins.pts.enabled.value and self.timeshift_enabled:
 			if self.isSeekable():
-				self.pts_switchtolive = True
 				self.ptsSetNextPlaybackFile("")
-				#IF NEW OE 2.0:
-				#self.doSeekRelative(3600 * 24 * 60 * 90000)
-				#ELSE:
-				self.setSeekState(self.SEEK_STATE_PAUSE)
 				if self.seekstate != self.SEEK_STATE_PLAY:
 					self.setSeekState(self.SEEK_STATE_PLAY)
-				self.doSeek(-1) # seek 1 gop before end
-				self.seekFwd() # seekFwd to switch to live TV
+				self.doSeek(3600 * 24 * 90000)
 				return 1
 			return 0
 		InfoBarOrg.stopTimeshift(self)
@@ -1561,7 +1550,8 @@ def _mayShow(self):
 
 		self.pvrstate_hide_timer = eTimer()
 		self.pvrstate_hide_timer.callback.append(self.pvrStateDialog.hide)
-
+		self.pvrstate_hide_timer.stop()
+		
 		if self.seekstate == self.SEEK_STATE_PLAY:
 			idx = config.usage.infobar_timeout.index
 			if not idx:
@@ -1584,6 +1574,17 @@ def seekBack(self):
 	self.pts_lastseekspeed = self.seekstate[1]
 
 InfoBarSeek.seekBack = seekBack
+
+########################
+# doSeekRelative Hack  #
+########################
+InfoBarSeek_doSeekRelative = InfoBarSeek.doSeekRelative
+
+def doSeekRelative(self, pts):
+	InfoBarSeek_doSeekRelative(self, pts)
+	self.showAfterSeek()
+
+InfoBarSeek.doSeekRelative = doSeekRelative
 
 ####################
 #instantRecord Hack#
@@ -1676,7 +1677,6 @@ class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = [ "PTSSetup", "Setup" ]
-		#Summary
 		self.setup_title = _("Permanent Timeshift Settings Version %s") %VERSION
 
 		self.onChangedEntry = [ ]

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-09 15:09+0100\n"
+"POT-Creation-Date: 2013-04-07 13:11+0200\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -195,6 +195,12 @@ msgstr "Geef de zoekterm in"
 
 msgid "Entry incomplete."
 msgstr "Regel incompleet"
+
+msgid "Extended Search for faces"
+msgstr ""
+
+msgid "Extended Search for names"
+msgstr ""
 
 msgid "Extension number to initiate call on"
 msgstr "Voorkies nummer voor een telefoonoproep"
@@ -469,6 +475,7 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: keep it short, this is a button
 msgid "Reset"
 msgstr "Reset"
 
@@ -563,6 +570,7 @@ msgstr "Mailbox Aan/Uit"
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: keep it short, this is a button
 msgid "Toggle WLAN"
 msgstr "WLAN Aan/Uit"
 

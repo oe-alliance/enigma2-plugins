@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-09 15:09+0100\n"
+"POT-Creation-Date: 2013-04-07 13:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,6 +182,12 @@ msgid "Enter Search Terms"
 msgstr ""
 
 msgid "Entry incomplete."
+msgstr ""
+
+msgid "Extended Search for faces"
+msgstr ""
+
+msgid "Extended Search for names"
 msgstr ""
 
 msgid "Extension number to initiate call on"
@@ -455,6 +461,7 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: keep it short, this is a button
 msgid "Reset"
 msgstr ""
 
@@ -548,6 +555,7 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: keep it short, this is a button
 msgid "Toggle WLAN"
 msgstr ""
 

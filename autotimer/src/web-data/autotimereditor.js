@@ -447,7 +447,7 @@ var AutoTimerMenuController  = Class.create(Controller, {
 		$('timer').on(
 			'click',
 			function(event, element){
-				autotimereditorcore.timers.load();
+				autotimereditorcore.timers.loadList();
 			}.bind(this)
 		);
 		$('timer').title = "Open timer list";
@@ -1246,7 +1246,7 @@ var AutoTimerParseController = Class.create(Controller, {
 			{},
 			function(){
 				// Maybe if autotimereditorcore.hasSeriesPlugin == "True" then wait a little
-				autotimereditorcore.timers.load();
+				autotimereditorcore.timers.loadList();
 			}.bind(this));
 	},
 	
@@ -1255,41 +1255,42 @@ var AutoTimerParseController = Class.create(Controller, {
 	registerEvents: function(){}
 });
 
-var TimerController = Class.create(Controller, {
-	initialize: function($super, target){
-		$super(new TimerListHandler(target));
-		this.timerHandler = new TimerHandler(target, this.load.bind(this), []);
+var TimerController = Class.create({
+	initialize: function(target){
+		this.listHandler = new TimerListHandler(target);
+		this.timerHandler = new TimerHandler(target, this.loadList.bind(this), []);
+		this.registerEvents();
 	},
 
-	load: function(){
+	loadList: function(){
 		$('list').selectedIndex = -1;
 		$('headerautotimercontent').innerHTML = "Timer:";
-		this.handler.load({});
+		this.listHandler.load({});
 	},
 
-	toggleDisabled: function(element){
-		this.timerHandler.toggleDisabled(element);
-	},
-
-	del: function(element){
-		this.timerHandler.del(element);
-	},
-	
 	registerEvents: function(){
-		$('timerlist').on(
+		$('contentAutoTimerContent').on(
 			'click',
 			'.tListDelete',
 			function(event, element){
-				this.del(element);
+				this.timerHandler.del(element);
 				event.stop();
 			}.bind(this)
 		);
-		$('timerlist').on(
+		$('contentAutoTimerContent').on(
 			'click',
 			'.tListToggleDisabled',
 			function(event, element){
-				this.toggleDisabled(element);
+				this.timerHandler.toggleDisabled(element);
 				event.stop();
+			}.bind(this)
+		);
+		$('contentAutoTimerContent').on(
+			'click',
+			'.tListCleanup',
+			function(event, element){
+				this.listHandler.cleanup();
+				return false;
 			}.bind(this)
 		);
 	}

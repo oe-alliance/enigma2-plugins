@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-09 15:09+0100\n"
+"POT-Creation-Date: 2013-04-07 13:11+0200\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -194,6 +194,12 @@ msgstr "Introduzca Términos de Búsqueda"
 
 msgid "Entry incomplete."
 msgstr "Entrada incompleta."
+
+msgid "Extended Search for faces"
+msgstr ""
+
+msgid "Extended Search for names"
+msgstr ""
 
 msgid "Extension number to initiate call on"
 msgstr "Número de extensión para iniciar la llamada"
@@ -468,6 +474,7 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: keep it short, this is a button
 msgid "Reset"
 msgstr "Resetear"
 
@@ -562,6 +569,7 @@ msgstr "Marcar Cuenta de Correo"
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: keep it short, this is a button
 msgid "Toggle WLAN"
 msgstr "Marcar WLAN"
 
