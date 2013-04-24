@@ -226,6 +226,7 @@ class AutoTimer:
 
 		self.new = 0
 		self.modified = 0
+		self.skipped = 0
 		self.total = 0
 		self.autotimers = []
 		self.conflicting = []
@@ -295,6 +296,7 @@ class AutoTimer:
 				self.parseTimer(timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.timerdict, self.moviedict, self.simulateOnly)
 				self.new += self.result[0]
 				self.modified += self.result[1]
+				self.skipped += self.result[2]
 				break
 
 	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, timerdict, moviedict, simulateOnly=False):
@@ -416,10 +418,10 @@ class AutoTimer:
 			evtEnd = end = begin + duration
 
 			# If event starts in less than 60 seconds skip it
-			if begin < time() + 60:
-				print("[AutoTimer] Skipping an event because it starts in less than 60 seconds")
-				skipped += 1
-				continue
+			# if begin < time() + 60:
+			# 	print ("[AutoTimer] Skipping " + name + " because it starts in less than 60 seconds")
+			# 	skipped += 1
+			# 	continue
 
 			# Set short description to equal extended description if it is empty.
 			if not shortdesc:
@@ -500,7 +502,7 @@ class AutoTimer:
 			for rtimer in timerdict.get(serviceref, ()):
 				if (rtimer.eit == eit or config.plugins.autotimer.try_guessing.getValue()) and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
 					oldExists = True
-
+					
 					# Abort if we don't want to modify timers or timer is repeated
 					if config.plugins.autotimer.refresh.getValue() == "none" or rtimer.repeated:
 						print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
@@ -508,18 +510,25 @@ class AutoTimer:
 
 					if eit == preveit:
 						break
-					elif hasattr(rtimer, "isAutoTimer") and  eit == rtimer.eit:
-						rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
-						preveit = eit
+					
+					if (evtBegin - (config.recording.margin_before.getValue() * 60) != rtimer.begin) or (evtEnd + (config.recording.margin_after.getValue() * 60) != rtimer.end):
+						if rtimer.isAutoTimer and eit == rtimer.eit:
+							print ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
+							rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
+							preveit = eit
+						else:
+							if config.plugins.autotimer.refresh.getValue() != "all":
+								print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
+								break
+							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name))
+						newEntry = rtimer
+						modified += 1
+						self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref)
+						break
 					else:
-						if config.plugins.autotimer.refresh.getValue() != "all":
-							print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
-							break
-						rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name))
-					newEntry = rtimer
-					modified += 1
-					self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref)
-					break
+						print ("[AutoTimer] Skipping timer because it has not changed.")
+						skipped += 1
+						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
 					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
 						oldExists = True
@@ -647,7 +656,7 @@ class AutoTimer:
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = recordHandler.record(newEntry)
-		self.result=(new, modified)
+		self.result=(new, modified, skipped)
 		self.completed.append(timer.name)
 		sleep(0.5)
 		# return (new, modified)
@@ -670,7 +679,7 @@ class AutoTimer:
 				)
 		else:
 			AddPopup(
-				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+len(self.similars)), self.new, self.modified, len(self.conflicting), len(self.similars)),
+				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+self.skipped+len(self.similars)), self.new, self.modified, len(self.conflicting), self.skipped, len(self.similars)),
 				MessageBox.TYPE_INFO,
 				15,
 				NOTIFICATIONID
