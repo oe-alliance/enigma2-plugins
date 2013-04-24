@@ -124,6 +124,8 @@ class EPGSearch(EPGSelection):
 		self.saved_title = None
 		self["Service"] = ServiceEvent()
 		self["Event"] = Event()
+		self["number"] = Label()
+		self["number"].hide()
 		self.type = EPG_TYPE_SINGLE
 		self.currentService=None
 		self.zapFunc = None
