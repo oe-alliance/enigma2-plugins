@@ -1,2 +1,4 @@
 Description: Eventlist Converter and Renderer to display n events and primetime
 Depends: enigma2
+Replaces: enigma2-plugin-components-eventlist
+Conflicts: enigma2-plugin-components-eventlist
