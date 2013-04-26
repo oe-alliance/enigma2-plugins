@@ -18,6 +18,7 @@ from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Button import Button
+from Components.Label import Label
 from Components.config import config
 from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_MULTI
 from Components.TimerList import TimerList
