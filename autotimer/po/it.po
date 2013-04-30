@@ -4,22 +4,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - AutoTimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 22:19+0100\n"
-"PO-Revision-Date: 2012-05-06 22:23+0100\n"
+"POT-Creation-Date: 2013-05-01 00:16+0100\n"
+"PO-Revision-Date: 2013-05-01 00:16+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.yeam <spaeleus@croci.org>\n"
-"Language: \n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Poedit-Basepath: .../enigma2-plugins/autotimer\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/autotimer\n"
 
-#: .../enigma2-plugins/autotimer/src/AutoPoller.py:41
+#: .../enigma2-plugins/autotimer/src/AutoPoller.py:43
 #, python-format
 msgid ""
 "%d conflict(s) encountered when trying to add new timers:\n"
@@ -28,13 +27,13 @@ msgstr ""
 "Il tentativo di aggiungere nuovi timer ha generato %d conflitti.\n"
 "%s"
 
-#: .../enigma2-plugins/autotimer/src/AutoPoller.py:41
-#: .../enigma2-plugins/autotimer/src/AutoPoller.py:49
+#: .../enigma2-plugins/autotimer/src/AutoPoller.py:43
+#: .../enigma2-plugins/autotimer/src/AutoPoller.py:51
 #, python-format
 msgid "%s: %s at %s"
 msgstr "%s: %s alle %s"
 
-#: .../enigma2-plugins/autotimer/src/AutoPoller.py:49
+#: .../enigma2-plugins/autotimer/src/AutoPoller.py:51
 #, python-format
 msgid ""
 "%d conflict(s) solved with similar timer(s):\n"
@@ -211,7 +210,7 @@ msgstr "Editor AutoTimer"
 #: .../enigma2-plugins/autotimer/src/AutoTimerImporter.py:45
 #: .../enigma2-plugins/autotimer/src/AutoTimerImporter.py:119
 #: .../enigma2-plugins/autotimer/src/AutoTimerPreview.py:59
-#: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:70
+#: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:71
 msgid "Cancel"
 msgstr "Annullare"
 
@@ -219,7 +218,7 @@ msgstr "Annullare"
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:1112
 #: .../enigma2-plugins/autotimer/src/AutoTimerImporter.py:46
 #: .../enigma2-plugins/autotimer/src/AutoTimerImporter.py:120
-#: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:69
+#: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:70
 msgid "OK"
 msgstr "Ok"
 
@@ -248,60 +247,113 @@ msgid "Set this NO to disable this AutoTimer."
 msgstr "Selezionare No per disabilitare AutoTimer."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:511
-msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
-msgstr "E' possibile assegnare un nome all'AutoTimer. Sarà mostrato in Panoramica e Anteprima."
+msgid ""
+"This is a name you can give the AutoTimer. It will be shown in the Overview "
+"and the Preview."
+msgstr ""
+"E' possibile assegnare un nome all'AutoTimer. Sarà mostrato in Panoramica e "
+"Anteprima."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:512
-msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
-msgstr "Termini usati nella ricerca nei titoli. Attenzione: caratteri speciali (es. la umlaut tedesca) richiedono di conoscere la codifica caratteri utilizzata dal canale."
+msgid ""
+"This is what will be looked for in event titles. Note that looking for e.g. "
+"german umlauts can be tricky as you have to know the encoding the channel "
+"uses."
+msgstr ""
+"Termini usati nella ricerca nei titoli. Attenzione: caratteri speciali (es. "
+"la umlaut tedesca) richiedono di conoscere la codifica caratteri utilizzata "
+"dal canale."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:513
-msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
-msgstr "Codifica caratteri utilizzata dal canale per i dati EPG. Potrebbe essere necessario modificarla solo per caratteri speciali (es: umlaut tedesca)."
+msgid ""
+"Encoding the channel uses for it's EPG data. You only need to change this if "
+"you're searching for special characters like the german umlauts."
+msgstr ""
+"Codifica caratteri utilizzata dal canale per i dati EPG. Potrebbe essere "
+"necessario modificarla solo per caratteri speciali (es: umlaut tedesca)."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:514
-msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"
-msgstr "Selezionare \"Corrispondenza esatta\" per costringere \"Corrispondenza titolo\" a un confronto letterale, \"Corrispondenza parziale\" per un confronto solo parziale del titolo o \"Corrispondenza descrizione\" per la ricerca di una parte della descrizione evento."
+msgid ""
+"Select \"exact match\" to enforce \"Match title\" to match exactly, "
+"\"partial match\" if you only want to search for a part of the event title "
+"or \"description match\" if you only want to search for a part of the event "
+"description"
+msgstr ""
+"Selezionare \"Corrispondenza esatta\" per costringere \"Corrispondenza titolo"
+"\" a un confronto letterale, \"Corrispondenza parziale\" per un confronto "
+"solo parziale del titolo o \"Corrispondenza descrizione\" per la ricerca di "
+"una parte della descrizione evento."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:515
 msgid "Select whether or not you want to enforce case correctness."
-msgstr "Scegliere se il confronto debba o meno considerare maiuscole/minuscole."
+msgstr ""
+"Scegliere se il confronto debba o meno considerare maiuscole/minuscole."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:516
 msgid "Add zap timer instead of record timer?"
 msgstr "Aggiungere un timer \"zap\" invece di un timer registrazione?"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:517
-msgid "Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."
-msgstr "Introdurre un'ora termine per il timer. Se introdotta, l'intervallo relativo ad un evento potrebbe essere bloccato per le registrazioni."
+msgid ""
+"Set an end time for the timer. If you do, the timespan of the event might be "
+"blocked for recordings."
+msgstr ""
+"Introdurre un'ora termine per il timer. Se introdotta, l'intervallo relativo "
+"ad un evento potrebbe essere bloccato per le registrazioni."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:518
-msgid "With this option enabled the channel to record on can be changed to a alternative service it is restricted to."
-msgstr "Abilitando l'opzione verrà limitato l'uso di un canale di registrazione alternativo predefinito per il canale prescelto."
+msgid ""
+"With this option enabled the channel to record on can be changed to a "
+"alternative service it is restricted to."
+msgstr ""
+"Abilitando l'opzione verrà limitato l'uso di un canale di registrazione "
+"alternativo predefinito per il canale prescelto."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:519
 msgid "Should this AutoTimer be restricted to a timespan?"
-msgstr "Scegliere se l'AutoTimer selezionato debba essere circoscritto a un intervallo."
+msgstr ""
+"Scegliere se l'AutoTimer selezionato debba essere circoscritto a un "
+"intervallo."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:520
-msgid "Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"
-msgstr "Limite inferiore intervallo. Niente dopo questo limite verrà confrontato. I margini registrazione non saranno considerati!"
+msgid ""
+"Lower bound of timespan. Nothing before this time will be matched. Offsets "
+"are not taken into account!"
+msgstr ""
+"Limite inferiore intervallo. Niente dopo questo limite verrà confrontato. I "
+"margini registrazione non saranno considerati!"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:521
-msgid "Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"
-msgstr "Limite superiore intervallo. Niente dopo questo limite verrà confrontato. I margini registrazione non saranno considerati!"
+msgid ""
+"Upper bound of timespan. Nothing after this time will be matched. Offsets "
+"are not taken into account!"
+msgstr ""
+"Limite superiore intervallo. Niente dopo questo limite verrà confrontato. I "
+"margini registrazione non saranno considerati!"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:522
-msgid "By enabling this events will not be matched if they don't occur on certain dates."
-msgstr "Abilitando questa funzione verranno considerati solo gli eventi previsti in date determinate."
+msgid ""
+"By enabling this events will not be matched if they don't occur on certain "
+"dates."
+msgstr ""
+"Abilitando l'opzione verranno considerati solo gli eventi previsti in date "
+"determinate."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:523
-msgid "First day to match events. No event that begins before this date will be matched."
-msgstr "Inizio corrispondenza eventi. Deve essere previsto il loro inizio dopo questa data."
+msgid ""
+"First day to match events. No event that begins before this date will be "
+"matched."
+msgstr ""
+"Inizio corrispondenza eventi. Deve essere previsto il loro inizio dopo "
+"questa data."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:524
-msgid "Last day to match events. Events have to begin before this date to be matched."
-msgstr "Termine corrispondenza eventi. Deve essere previsto il loro inizio prima di questa data."
+msgid ""
+"Last day to match events. Events have to begin before this date to be "
+"matched."
+msgstr ""
+"Termine corrispondenza eventi. Deve essere previsto il loro inizio prima di "
+"questa data."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:525
 msgid "Change default recording offset?"
@@ -317,15 +369,25 @@ msgstr "Margine (in minuti) da applicare a fine registrazione."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:528
 msgid "Should this AutoTimer only match up to a certain event duration?"
-msgstr "Scegliere se l'AutoTimer selezionato debba essere circoscritto a una durata evento specifica."
+msgstr ""
+"Scegliere se l'AutoTimer selezionato debba essere circoscritto a una durata "
+"evento specifica."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:529
-msgid "Maximum event duration to match. If an event is longer than this amount of time (without offset) it won't be matched."
-msgstr "Durata massima di un evento da confrontare. Se la durata di un evento è superiore a quanto indicato (margini esclusi) non sarà confrontato."
+msgid ""
+"Maximum event duration to match. If an event is longer than this amount of "
+"time (without offset) it won't be matched."
+msgstr ""
+"Durata massima di un evento da confrontare. Se la durata di un evento è "
+"superiore a quanto indicato (margini esclusi) non sarà confrontato."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:530
-msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
-msgstr "Stato del decoder al termine di una registrazione. \"Standard\" equivale all'opzione prevista nella configurazione di enigma2."
+msgid ""
+"Power state to change to after recordings. Select \"standard\" to not change "
+"the default behavior of enigma2 or values changed by yourself."
+msgstr ""
+"Stato del decoder al termine di una registrazione. \"Standard\" equivale "
+"all'opzione prevista nella configurazione di enigma2."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:531
 msgid "Restrict \"after event\" to a certain timespan?"
@@ -340,28 +402,45 @@ msgid "Upper bound of timespan."
 msgstr "Limite superiore intervallo"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:534
-msgid "With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. Set this to 0 to disable this functionality."
-msgstr "Tramite l'opzione è possibile restringere AutoTimer ad un certo numero di registrazioni programmate. 0 -> disabilitare la funzione."
+msgid ""
+"With this option you can restrict the AutoTimer to a certain amount of "
+"scheduled recordings. Set this to 0 to disable this functionality."
+msgstr ""
+"Tramite l'opzione è possibile restringere AutoTimer ad un certo numero di "
+"registrazioni programmate. 0 -> disabilitare la funzione."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:535
 msgid "Number of scheduled recordings left."
 msgstr "Registrazioni programmate residue"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:536
-msgid "The counter can automatically be reset to the limit at certain intervals."
-msgstr "Il contatore può essere automaticamente resettato a intervalli prefissati."
+msgid ""
+"The counter can automatically be reset to the limit at certain intervals."
+msgstr ""
+"Il contatore può essere automaticamente resettato a intervalli prefissati."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:537
-msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
-msgstr "Abilitando questa funzione AutoTimer non confronterà eventi per cui esiste già un timer con la medesima descrizione."
+msgid ""
+"When this option is enabled the AutoTimer won't match events where another "
+"timer with the same description already exists in the timer list."
+msgstr ""
+"Abilitando questa funzione AutoTimer non confronterà eventi per cui esiste "
+"già un timer con la medesima descrizione."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:538
-msgid "Defines where to search for duplicates (only title, short description or even extended description)"
-msgstr "Definire gli ambiti di ricerca duplicati (solo titolo, descrizione breve o descrizione estesa)"
+msgid ""
+"Defines where to search for duplicates (only title, short description or "
+"even extended description)"
+msgstr ""
+"Definire gli ambiti di ricerca duplicati (solo titolo, descrizione breve o "
+"descrizione estesa)"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:539
-msgid "Should timers created by this AutoTimer be recorded to a custom location?"
-msgstr "Scegliere se il timer creato con AutoTimer debba essere registrato in una destinazione specifica."
+msgid ""
+"Should timers created by this AutoTimer be recorded to a custom location?"
+msgstr ""
+"Scegliere se il timer creato con AutoTimer debba essere registrato in una "
+"destinazione specifica."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:540
 msgid "Select the location to save the recording to."
@@ -372,8 +451,12 @@ msgid "Tags the Timer/Recording will have."
 msgstr "Etichette da assegnare al timer o alla registrazione."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:542
-msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
-msgstr "Etichettare le serie con stagione, episodio e titolo, secondo la configurazione di SeriesPlugin."
+msgid ""
+"Label Timers with season, episode and title, according to the SeriesPlugin "
+"settings."
+msgstr ""
+"Etichettare le serie con stagione, episodio e titolo, secondo la "
+"configurazione di SeriesPlugin."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerEditor.py:550
 #: .../enigma2-plugins/autotimer/src/AutoTimerImporter.py:130
@@ -789,8 +872,8 @@ msgstr "Ord. per Ora"
 msgid "Sort AutoTimer"
 msgstr "Ord. Autotimer"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:79
-#: .../enigma2-plugins/autotimer/src/plugin.py:161
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:65
+#: .../enigma2-plugins/autotimer/src/plugin.py:157
 #, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
@@ -805,32 +888,36 @@ msgstr ""
 "Conflitti riscontrati: %d\n"
 "Simili aggiunti: %d"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:133
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:101
+msgid "Couldn't load config file!"
+msgstr "Impossibile caricare il file di configurazione."
+
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:113
 msgid "AutoTimer was removed"
 msgstr " AutoTimer rimosso"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:135
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:115
 msgid "missing parameter \"id\""
 msgstr "Parametro \"id\" mancante"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:161
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:140
 #, python-format
 msgid "unable to find timer with id %i"
 msgstr "Impossibile trovare il timer con id %i"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:167
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:146
 msgid "autotimers need a match attribute"
 msgstr "Autotimer richiede una corrispondenza"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:361
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:340
 msgid "AutoTimer was added successfully"
 msgstr "AutoTimer aggiunto correttamente"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:363
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:342
 msgid "AutoTimer was changed successfully"
 msgstr "AutoTimer modificato correttamente"
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:421
+#: .../enigma2-plugins/autotimer/src/AutoTimerResource.py:389
 msgid "config changed."
 msgstr "Comfigurazione modificata."
 
@@ -843,32 +930,49 @@ msgid "Poll automatically"
 msgstr "Ricerca automatica"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:39
-msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
-msgstr "Se non abilitata, AutoTimer NON verificherà automaticamente una corrispondenza eventi. Tale verifica sarà eseguita solo dopo la pressione del tasto verde."
+msgid ""
+"Unless this is enabled AutoTimer will NOT automatically look for events "
+"matching your AutoTimers but only when you leave the GUI with the green "
+"button."
+msgstr ""
+"Se non abilitata, AutoTimer NON verificherà automaticamente una "
+"corrispondenza eventi. Tale verifica sarà eseguita solo dopo la pressione "
+"del tasto verde."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:40
 msgid "Poll Interval (in h)"
 msgstr "Intervallo ricerca (ore)"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:40
-msgid "This is the delay in hours that the AutoTimer will wait after a search to search the EPG again."
-msgstr "Specificare il ritardo in ore da applicare tra ricerche successive nell'EPG."
+msgid ""
+"This is the delay in hours that the AutoTimer will wait after a search to "
+"search the EPG again."
+msgstr ""
+"Specificare il ritardo in ore da applicare tra ricerche successive nell'EPG."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:41
 msgid "Only add timer for next x days"
 msgstr "Aggiungere timer solo per i prossimi x giorni"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:41
-msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
-msgstr "E' possibile controllare per quanti giorni a venire i timer verranno aggiunti. 0 -> disabilitare la funzione."
+msgid ""
+"You can control for how many days in the future timers are added. Set this "
+"to 0 to disable this feature."
+msgstr ""
+"E' possibile controllare per quanti giorni a venire i timer verranno "
+"aggiunti. 0 -> disabilitare la funzione."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:42
 msgid "Show in extension menu"
 msgstr "Mostrare nel menu estensioni"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:42
-msgid "Enable this to be able to access the AutoTimer Overview from within the extension menu."
-msgstr "Abilitando l'opzione, si avrà accesso alla panoramica AutoTimer attraverso il menu estensioni."
+msgid ""
+"Enable this to be able to access the AutoTimer Overview from within the "
+"extension menu."
+msgstr ""
+"Abilitando l'opzione, si avrà accesso alla panoramica AutoTimer attraverso "
+"il menu estensioni."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:43
 msgid "Modify existing timers"
@@ -876,7 +980,9 @@ msgstr "Modificare timer esistenti"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:43
 msgid "This setting controls the behavior when a timer matches a found event."
-msgstr "Indicare il comportamento da adottare nel caso in cui un timer corrisponda a un evento trovato."
+msgstr ""
+"Indicare il comportamento da adottare nel caso in cui un timer corrisponda a "
+"un evento trovato."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:44
 msgid "Guess existing timer based on begin/end"
@@ -884,74 +990,128 @@ msgstr "Calcolare i timer esistenti basati su inizio/fine"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:44
 #, python-format
-msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80%% of the it."
-msgstr "Abilitando l'opzione, un timer esistente verrà considerato in registrazione se la percentuale registrata sarà almeno l'80%% del totale previsto."
+msgid ""
+"If this is enabled an existing timer will also be considered recording an "
+"event if it records at least 80%% of the it."
+msgstr ""
+"Abilitando l'opzione, un timer esistente verrà considerato in registrazione "
+"se la percentuale registrata sarà almeno l'80%% del totale previsto."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:45
 msgid "Add similar timer on conflict"
 msgstr "Agg. timer simile se in conflitto"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:45
-msgid "If a timer conflict occurs, AutoTimer will search outside the timespan for a similar event and add it."
-msgstr "In caso di conflitto timer, AutoTimer cercherà fuori dall'intervallo un evento simile e lo aggiungerà."
+msgid ""
+"If a timer conflict occurs, AutoTimer will search outside the timespan for a "
+"similar event and add it."
+msgstr ""
+"In caso di conflitto timer, AutoTimer cercherà fuori dall'intervallo un "
+"evento simile e lo aggiungerà."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:46
 msgid "Add timer as disabled on conflict"
 msgstr "Agg. timer disabilitato se in conflitto"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:46
-msgid "This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled."
-msgstr "Indicare il comportamento da tenere in caso di conflitto timer. Se una corrispondenza con un evento genera un conflitto di timer, l'evento non viene ignorato ma aggiunto disabilitato. "
+msgid ""
+"This toggles the behavior on timer conflicts. If an AutoTimer matches an "
+"event that conflicts with an existing timer it will not ignore this event "
+"but add it disabled."
+msgstr ""
+"Indicare il comportamento da tenere in caso di conflitto timer. Se una "
+"corrispondenza con un evento genera un conflitto di timer, l'evento non "
+"viene ignorato ma aggiunto disabilitato. "
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:47
 msgid "Include \"AutoTimer\" in tags"
 msgstr "Includere \"AutoTimer\" nelle etichette"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:47
-msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
-msgstr "Abilitando l'opzione, l'etichetta \"AutoTimer\" verrà assegnata ai timer creati con questo plugin."
+msgid ""
+"If this is selected, the tag \"AutoTimer\" will be given to timers created "
+"by this plugin."
+msgstr ""
+"Abilitando l'opzione, l'etichetta \"AutoTimer\" verrà assegnata ai timer "
+"creati con questo plugin."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:48
 msgid "Include AutoTimer name in tags"
 msgstr "Includere la definizione AutoTimer nelle etichette"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:48
-msgid "If this is selected, the name of the respective AutoTimer will be added as a tag to timers created by this plugin."
-msgstr "Abilitando l'opzione, il nome del rispettivo AutoTimer verrà aggiunto come etichetta ai timer creati con questo plugin."
+msgid ""
+"If this is selected, the name of the respective AutoTimer will be added as a "
+"tag to timers created by this plugin."
+msgstr ""
+"Abilitando l'opzione, il nome del rispettivo AutoTimer verrà aggiunto come "
+"etichetta ai timer creati con questo plugin."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:49
 msgid "Show notification on conflicts"
 msgstr "Mostrare avviso in caso di conflitti"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:49
-msgid "By enabling this you will be notified about timer conflicts found during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
-msgstr "Abilitando l'opzione si verrà informati della presenza di conflitti durante il polling automatico. Non viene applicato alcun controllo in proposito, perciò si potrebbero ricevere avvisi circa lo stesso conflitto più e più volte."
+msgid ""
+"By enabling this you will be notified about timer conflicts found during "
+"automated polling. There is no intelligence involved, so it might bother you "
+"about the same conflict over and over."
+msgstr ""
+"Abilitando l'opzione si verrà informati della presenza di conflitti durante "
+"il polling automatico. Non viene applicato alcun controllo in proposito, "
+"perciò si potrebbero ricevere avvisi circa lo stesso conflitto più e più "
+"volte."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:50
 msgid "Show notification on similars"
 msgstr "Mostrare avviso in caso di simili"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:50
-msgid "By enabling this you will be notified about similar timers added during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
-msgstr "Abilitando l'opzione si verrà informati della presenza di timer simili aggiunti durante il polling automatico. Non viene applicato alcun controllo in proposito, perciò si potrebbero ricevere avvisi circa lo stesso conflitto più e più volte."
+msgid ""
+"By enabling this you will be notified about similar timers added during "
+"automated polling. There is no intelligence involved, so it might bother you "
+"about the same conflict over and over."
+msgstr ""
+"Abilitando l'opzione si verrà informati della presenza di timer simili "
+"aggiunti durante il polling automatico. Non viene applicato alcun controllo "
+"in proposito, perciò si potrebbero ricevere avvisi circa lo stesso conflitto "
+"più e più volte."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:51
 msgid "Editor for new AutoTimers"
 msgstr "Editor nuovi AutoTimer"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:51
-msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
-msgstr "Editor utilizzato per aggiungere nuovi AutoTimer. Possono essere usati indifferentemente l'edito classico o la configurazione guidata."
+msgid ""
+"The editor to be used for new AutoTimers. This can either be the Wizard or "
+"the classic editor."
+msgstr ""
+"Editor utilizzato per aggiungere nuovi AutoTimer. Possono essere usati "
+"indifferentemente l'edito classico o la configurazione guidata."
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:52
 msgid "Support \"Fast Scan\"?"
 msgstr " Supportare \"Fast Scan\"?"
 
 #: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:52
-msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
-msgstr "Se \"Fast Scan\" è abilitato, il tipo di canale è ignorato. Non è necessario abilitare il parametro, a meno che l'immagine lo supporti e sia utilizzato.  "
+msgid ""
+"When supporting \"Fast Scan\" the service type is ignored. You don't need to "
+"enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr ""
+"Se \"Fast Scan\" è abilitato, il tipo di canale è ignorato. Non è necessario "
+"abilitare il parametro, a meno che l'immagine lo supporti e sia utilizzato.  "
 
-#: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:87
+#: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:53
+msgid "Skip poll during records"
+msgstr "Evitare la ricerca se in registrazione"
+
+#: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:53
+msgid "If enabled, the polling will be skipped if the Dreambox is recording."
+msgstr ""
+"Abilitando l'opzione, la ricerca non verrà effettuata se ci sono "
+"registrazioni in corso."
+
+#: .../enigma2-plugins/autotimer/src/AutoTimerSettings.py:88
 msgid "Configure AutoTimer behavior"
 msgstr "Configurazione caratteristiche AutoTimer"
 
@@ -971,7 +1131,7 @@ msgstr "Classico"
 msgid "Wizard"
 msgstr "Configurazione Guidata"
 
-#: .../enigma2-plugins/autotimer/src/plugin.py:118
+#: .../enigma2-plugins/autotimer/src/plugin.py:109
 #, python-format
 msgid ""
 "Your config file is not well-formed:\n"
@@ -980,16 +1140,15 @@ msgstr ""
 "File di configurazione errato:\n"
 "%s"
 
-#: .../enigma2-plugins/autotimer/src/plugin.py:196
-#: .../enigma2-plugins/autotimer/src/plugin.py:203
+#: .../enigma2-plugins/autotimer/src/plugin.py:193
+#: .../enigma2-plugins/autotimer/src/plugin.py:200
 msgid "Edit Timers and scan for new Events"
 msgstr "Modificare timer e cercare nuovi eventi"
 
-#: .../enigma2-plugins/autotimer/src/plugin.py:205
+#: .../enigma2-plugins/autotimer/src/plugin.py:202
 msgid "add AutoTimer"
 msgstr "agg. AutoTimer"
 
-#: .../enigma2-plugins/autotimer/src/plugin.py:207
+#: .../enigma2-plugins/autotimer/src/plugin.py:204
 msgid "add AutoTimer..."
 msgstr "agg. AutoTimer"
-
