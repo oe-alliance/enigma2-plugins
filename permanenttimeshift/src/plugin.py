@@ -3,7 +3,7 @@
 # Permanent Timeshift Plugin for Enigma2 Dreamboxes
 # Coded by Homey (c) 2013
 #
-# Version: 1.3
+# Version: 1.4
 # Support: www.dreambox-plugins.de
 #####################################################
 from Components.ActionMap import ActionMap
@@ -66,7 +66,7 @@ language.addCallback(localeInit())
 #####  CONFIG SETTINGS   #####
 ##############################
 
-VERSION = "1.3"
+VERSION = "1.4"
 config.plugins.pts = ConfigSubsection()
 config.plugins.pts.enabled = ConfigYesNo(default = True)
 config.plugins.pts.maxevents = ConfigInteger(default=5, limits=(1, 99))
@@ -1582,7 +1582,8 @@ InfoBarSeek_doSeekRelative = InfoBarSeek.doSeekRelative
 
 def doSeekRelative(self, pts):
 	InfoBarSeek_doSeekRelative(self, pts)
-	self.showAfterSeek()
+	if config.plugins.pts.enabled.value and config.usage.show_infobar_on_skip.value:
+		self.showAfterSeek()
 
 InfoBarSeek.doSeekRelative = doSeekRelative
 
