@@ -66,7 +66,7 @@ class AboutParser:
                     break
                 if line.lower().startswith(version_text):
                     version = VersionInfo(line)
-                    versions.append(version)
+                    versions.insert(0, version)
                 else:
                     if not line.startswith(' ') and not line.startswith('\n') and version:
                         version.info += line

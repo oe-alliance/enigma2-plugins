@@ -31,10 +31,10 @@ from Components.MultiContent import MultiContentEntryText
 from Components.GUIComponent import GUIComponent
 from Components.Sources.StaticText import StaticText
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT
-from MessageServer import serverInstance, getIpAddress
-from Client import getClients
+from Source.Remote.MessageServer import serverInstance, getIpAddress
+from Source.Remote.Client import getClients
 from time import localtime, strftime
-from Globals import SkinTools
+from Source.Globals import SkinTools
 
 staticIP = None
 

@@ -25,7 +25,7 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigText, KEY_0, KEY_TIMEOUT, KEY_NUMBERS
 from Tools.NumericalTextInput import NumericalTextInput
 from enigma import eTimer
-from Globals import SkinResolutionHelper
+from Source.Globals import SkinResolutionHelper
 
 from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog
 class AdvancedTextInputHelpDialog(NumericalTextInputHelpDialog, SkinResolutionHelper):
@@ -88,10 +88,12 @@ class AdvancedKeyBoard(VirtualKeyBoard, NumericalTextInput, SkinResolutionHelper
                 "9": self.keyNumberGlobal,
                 "0": self.keyNumberGlobal
             }, -1) # to prevent left/right overriding the listbox
+            if use & self.KEYBOARD:
+                self.selectedKey = self.getKeyIndex(u"OK") 
             
         self.onLayoutFinish.append(self.__onLayoutFinish)
         self.onClose.append(self.__onClose)
-    
+
     def __onLayoutFinish(self):
         self.setTitle(_("Advanced Movie Selection - Input help"))
         if self.configText:
@@ -103,6 +105,18 @@ class AdvancedKeyBoard(VirtualKeyBoard, NumericalTextInput, SkinResolutionHelper
             self.session.deleteDialog(self.configText.help_window)
             self.configText.help_window = None
     
+    def getKeyIndex(self, key):
+        index = 0
+        for x in self.keys_list:
+            for k in x:
+                if k == key:
+                    return index
+                index += 1
+        return index
+    
+    def buildVirtualKeyBoard(self, selectedKey=0):
+        VirtualKeyBoard.buildVirtualKeyBoard(self, selectedKey=self.selectedKey)
+
     def dummy(self):
         pass
     

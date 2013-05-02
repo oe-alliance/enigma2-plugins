@@ -113,6 +113,9 @@ advancedmovieselection/src/Makefile
 advancedmovieselection/src/buttons/Makefile
 advancedmovieselection/src/images/Makefile
 advancedmovieselection/src/skin/Makefile
+advancedmovieselection/Source/Makefile
+advancedmovieselection/Source/MovieDB/Makefile
+advancedmovieselection/Source/Remote/Makefile
 
 aihdcontroler/Makefile
 aihdcontroler/meta/Makefile

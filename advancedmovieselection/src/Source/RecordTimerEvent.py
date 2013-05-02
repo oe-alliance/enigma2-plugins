@@ -22,6 +22,7 @@ For example, if you distribute copies of such a program, whether gratis or for a
 must pass on to the recipients the same freedoms that you received. You must make sure 
 that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 '''
+from Globals import printStackTrace
 
 class RecordTimerEvent():
     def __init__(self):
@@ -40,10 +41,18 @@ class RecordTimerEvent():
 
     def timerStateChanged(self, timer):
         try:
+            print "[AdvancedMovieSelection] timer state changed event"
+            print str(timer.justplay), str(timer.cancelled), str(timer.state) 
+            if timer.justplay:
+                print "[AdvancedMovieSelection] cancel justplay event"
+                return
+            if not hasattr(timer, 'Filename'):
+                print "[AdvancedMovieSelection] cancel timer state changed, no Filename in timer event"
+                return
             for callback in self.on_state_changed:
                 callback(timer)
-        except Exception, e:
-            print e
+        except:
+            printStackTrace()
 
 recordTimerEvent = RecordTimerEvent()
 
@@ -56,14 +65,16 @@ class CoverLoader():
     def timerStateChanged(self, timer):
         if not config.AdvancedMovieSelection.cover_auto_download.value:
             return
-        from timer import TimerEntry 
-        if timer.state == TimerEntry.StateEnded:
+        from timer import TimerEntry
+        print "[AdvancedMovieSelection] RecordTimerEvent:", str(timer.state), str(timer.cancelled), timer.Filename
+        if timer.state == TimerEntry.StateEnded and not timer.cancelled:
             from thread import start_new_thread
             start_new_thread(self.downloadMovieInfo, (timer.name, timer.Filename + ".ts"))
 
     def downloadMovieInfo(self, name, filename=None):
-        import tmdb
+        from MovieDB import tmdb
         from EventInformationTable import createEIT
+        print "[AdvancedMovieSelection] RecordTimerEvent, loading info from tmdb:", name
         results = tmdb.search(name)
         if results and len(results) > 0:
             searchResult = results[0]

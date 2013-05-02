@@ -33,13 +33,13 @@ from enigma import eServiceReference, iServiceInformation
 from os import path as os_path
 from Screens.Console import eConsoleAppContainer
 from Screens.TimerEntry import TimerEntry
-from ServiceProvider import ServiceCenter
+from Source.ServiceProvider import ServiceCenter
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_CONFIG
-from Globals import SkinTools
+from Source.Globals import SkinTools
 
 class TagEditor(Screen):
-    def __init__(self, session, tags, txt = None, parent = None):
-        Screen.__init__(self, session, parent = parent)
+    def __init__(self, session, tags, txt=None, parent=None):
+        Screen.__init__(self, session, parent=parent)
         self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionTagEditor")
         self["key_red"] = StaticText(_("Cancel"))
         self["key_green"] = StaticText(_("Save/Close"))
@@ -83,16 +83,16 @@ class TagEditor(Screen):
         if not fileExists(resolveFilename(SCOPE_CONFIG, "movietags")):
             sourceDir = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/AdvancedMovieSelection/movietags")
             targetDir = resolveFilename(SCOPE_CONFIG)
-            eConsoleAppContainer().execute("cp \""+sourceDir+"\" \""+targetDir+"\"")
+            eConsoleAppContainer().execute("cp \"" + sourceDir + "\" \"" + targetDir + "\"")
             self.loadTagsFile()
             self.updateMenuList(tags)
 
     def addCustom(self):
-        self.session.openWithCallback(self.addCustomCallback, InputBox, title = _("Please enter here the new tag:"))
+        self.session.openWithCallback(self.addCustomCallback, InputBox, title=_("Please enter here the new tag:"))
 
     def addCustomCallback(self, ret):
         if ret:
-            ret = ret and ret.strip().replace(" ","_").capitalize()
+            ret = ret and ret.strip().replace(" ", "_").capitalize()
             tags = self.tags
             if ret and ret not in tags:
                 tags.append(ret)
@@ -115,7 +115,7 @@ class TagEditor(Screen):
     def saveTagsFile(self, tags):
         try:
             file = open(resolveFilename(SCOPE_CONFIG, "movietags"), "w")
-            file.write("\n".join(tags)+"\n")
+            file.write("\n".join(tags) + "\n")
             file.close()
         except IOError: #, ioe:
             pass
@@ -148,7 +148,7 @@ class TagEditor(Screen):
             tags = " ".join(tags)
             if tags != oldtags:
                 metafile = open(file + ".ts.meta", "w")
-                metafile.write("%s\n%s\n%s\n%s\n%s\n%s" %(sid, title, descr, time, tags, rest))
+                metafile.write("%s\n%s\n%s\n%s\n%s\n%s" % (sid, title, descr, time, tags, rest))
                 metafile.close()
 
     def foreachTimerTags(self, func):
@@ -182,12 +182,12 @@ class TagEditor(Screen):
                     func(serviceref, tags)
 
     def getTagDescription(self, tag):
-        from AccessRestriction import VSR
+        from Source.AccessRestriction import VSR
         if tag in VSR:
             return _(tag)
         return tag
 
-    def updateMenuList(self, tags, extrasel = []):
+    def updateMenuList(self, tags, extrasel=[]):
         seltags = [x[1] for x in self["list"].getSelectionsList()] + extrasel
         tags.sort()
         self["list"].setList([])
@@ -217,7 +217,7 @@ class TagEditor(Screen):
         else:
             pass
 
-    def listReplace(self, lst, fr, to = None):
+    def listReplace(self, lst, fr, to=None):
         if fr in lst:
             lst.remove(fr)
             if to != None and not to in lst:
@@ -228,7 +228,7 @@ class TagEditor(Screen):
     def renameTag(self):
         self.thistag = self["list"].list[self["list"].getSelectedIndex()][0]
         self.session.openWithCallback(
-            self.renameTagCallback, InputBox, title = _("Rename tag \"%s\" in movies and default taglist?\n(Note that 'Cancel' will not undo this!)") % (self.thistag[1]), text = self.thistag[1])
+            self.renameTagCallback, InputBox, title=_("Rename tag \"%s\" in movies and default taglist?\n(Note that 'Cancel' will not undo this!)") % (self.thistag[1]), text=self.thistag[1])
 
     def renameTagCallback(self, res):
         res = res and res.strip().replace(" ", "_").capitalize()
@@ -285,7 +285,7 @@ class TagEditor(Screen):
             (_("Delete unused tags from default taglist"), self.removeUnused),
             (_("Delete all tags"), self.removeAll)
         ]
-        self.session.openWithCallback(self.menuCallback, ChoiceBox, title = "", list = menu)
+        self.session.openWithCallback(self.menuCallback, ChoiceBox, title="", list=menu)
 
     def menuCallback(self, choice):
         if choice:
@@ -318,23 +318,29 @@ class MovieTagEditor(TagEditor):
             tags = tags.split(' ')
         else:
             tags = []
-        TagEditor.__init__(self, session, tags, parent = parent)
+        TagEditor.__init__(self, session, tags, parent=parent)
 
     def saveTags(self, file, tags):
-        if os_path.exists(file + ".ts.meta"):
-            metafile = open(file + ".ts.meta", "r")
-            sid = metafile.readline().strip("\r\n")
-            title = metafile.readline().strip("\r\n")
-            descr = metafile.readline().strip("\r\n")
-            time = metafile.readline().strip("\r\n")
-            oldtags = metafile.readline().rstrip("\r\n")
-            rest = metafile.read()
-            metafile.close()
-            tags = " ".join(tags)
-            if tags != oldtags:
-                metafile = open(file + ".ts.meta", "w")
-                metafile.write("%s\n%s\n%s\n%s\n%s\n%s" %(sid, title, descr, time, tags, rest))
+        try:
+            meta_file = file + ".ts.meta"
+            print "saveTags", meta_file
+            if os_path.exists(meta_file):
+                metafile = open(meta_file, "r")
+                sid = metafile.readline().strip("\r\n")
+                title = metafile.readline().strip("\r\n")
+                descr = metafile.readline().strip("\r\n")
+                time = metafile.readline().strip("\r\n")
+                oldtags = metafile.readline().rstrip("\r\n")
+                rest = metafile.read()
                 metafile.close()
+                tags = " ".join(tags)
+                if tags != oldtags:
+                    metafile = open(meta_file, "w")
+                    metafile.write("%s\n%s\n%s\n%s\n%s\n%s" % (sid, title, descr, time, tags, rest))
+                    metafile.close()
+        except:
+            from Source.Globals import printStackTrace
+            printStackTrace()
 
     def cancel(self):
         if not self.origtags == self.ghosttags:

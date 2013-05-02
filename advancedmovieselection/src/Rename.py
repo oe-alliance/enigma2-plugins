@@ -27,13 +27,12 @@ from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from enigma import eServiceReference, iServiceInformation, ePoint
-from ServiceProvider import ServiceCenter
+from Source.ServiceProvider import ServiceCenter, eServiceReferenceVDir
 import os
 from Components.Label import Label
 from Components.Pixmap import Pixmap
-from MovieList import eServiceReferenceVDir
-from ServiceProvider import MovieConfig
-from Globals import SkinTools
+from Source.MovieConfig import MovieConfig
+from Source.Globals import SkinTools, printStackTrace
 
 class MovieRetitle(Screen, ConfigListScreen):
     def __init__(self, session, service):
@@ -132,47 +131,50 @@ class MovieRetitle(Screen, ConfigListScreen):
         self.close()
 
     def setTitleDescr(self, service, title, descr):
-        if service.getPath().endswith(".ts"):
-            meta_file = service.getPath() + ".meta"
-        else:
-            meta_file = service.getPath() + ".ts.meta"
-        
-        # Create new meta for ts files
-        if not os.path.exists(meta_file):
-            if os.path.isfile(service.getPath()):
-                _title = os.path.basename(os.path.splitext(service.getPath())[0])
+        try:
+            if service.getPath().endswith(".ts"):
+                meta_file = service.getPath() + ".meta"
             else:
-                _title = service.getName()
-            _sid = ""
-            _descr = ""
-            _time = ""
-            _tags = ""
-            metafile = open(meta_file, "w")
-            metafile.write("%s\n%s\n%s\n%s\n%s" % (_sid, _title, _descr, _time, _tags))
-            metafile.close()
-
-        if os.path.exists(meta_file):
-            metafile = open(meta_file, "r")
-            sid = metafile.readline()
-            oldtitle = metafile.readline().rstrip()
-            olddescr = metafile.readline().rstrip()
-            rest = metafile.read()
-            metafile.close()
-            if not title and title != "":
-                title = oldtitle
-            if not descr and descr != "":
-                descr = olddescr
-            metafile = open(meta_file, "w")
-            metafile.write("%s%s\n%s\n%s" % (sid, title, descr, rest))
-            metafile.close()
+                meta_file = service.getPath() + ".ts.meta"
+            
+            # Create new meta for ts files
+            if not os.path.exists(meta_file):
+                if os.path.isfile(service.getPath()):
+                    _title = os.path.basename(os.path.splitext(service.getPath())[0])
+                else:
+                    _title = service.getName()
+                _sid = "0:0:0:0:0:0:0:0:0:0:"
+                _descr = ""
+                _time = ""
+                _tags = ""
+                metafile = open(meta_file, "w")
+                metafile.write("%s\n%s\n%s\n%s\n%s" % (_sid, _title, _descr, _time, _tags))
+                metafile.close()
+    
+            if os.path.exists(meta_file):
+                metafile = open(meta_file, "r")
+                sid = metafile.readline()
+                oldtitle = metafile.readline().rstrip()
+                olddescr = metafile.readline().rstrip()
+                rest = metafile.read()
+                metafile.close()
+                if not title and title != "":
+                    title = oldtitle
+                if not descr and descr != "":
+                    descr = olddescr
+                metafile = open(meta_file, "w")
+                metafile.write("%s%s\n%s\n%s" % (sid, title, descr, rest))
+                metafile.close()
+        except:
+            printStackTrace()
 
     def renameDirectory(self, service, new_name):
         try:
-            dir = os.path.dirname(self.service.getPath()[0:-1])
-            os.rename(self.service.getPath(), os.path.join(dir, self.input_file.getText() + "/"))
+            dir_name = os.path.dirname(self.service.getPath()[0:-1])
+            os.rename(self.service.getPath(), os.path.join(dir_name, self.input_file.getText() + "/"))
             self.original_file = self.input_file.getText()
-        except Exception, e:
-            print e
+        except:
+            printStackTrace()
 
     def renameFile(self, service, new_name):
         try:
@@ -183,24 +185,24 @@ class MovieRetitle(Screen, ConfigListScreen):
             import glob
             for f in glob.glob(os.path.join(path, src + "*")):
                 os.rename(f, f.replace(src, dst))
-        except Exception, e:
-            print e
+        except:
+            printStackTrace()
 
-    def renameVDir(self, dir, name):
+    def renameVDir(self, dir_name, name):
         try:
-            if not dir + "\t" + self.original_name in self.movieConfig.rename:
-                self.movieConfig.rename.append(dir + "\t" + name)
+            if not dir_name + "\t" + self.original_name in self.movieConfig.rename:
+                self.movieConfig.rename.append(dir_name + "\t" + name)
             elif name == "":
                 for index, item in enumerate(self.movieConfig.rename):
                     i = item.split("\t")
-                    if i[0] == dir:
-                        print dir + "\t" + name
+                    if i[0] == dir_name:
+                        print dir_name + "\t" + name
                         del self.movieConfig.rename[index]
             else:
                 for index, item in enumerate(self.movieConfig.rename):
                     i = item.split("\t")
-                    if i[0] == dir:
-                        self.movieConfig.rename[index] = dir + "\t" + name
+                    if i[0] == dir_name:
+                        self.movieConfig.rename[index] = dir_name + "\t" + name
             self.movieConfig.safe()
-        except Exception, e:
-            print e
+        except:
+            printStackTrace()

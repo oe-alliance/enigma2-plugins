@@ -249,7 +249,7 @@ versie: 2.6.1
 * fix: crash bij ledigen prullemand
 * fix: verwijderen van dvd´s
 
-version: 2.6.2
+versie: 2.6.2
 * fix: DVDPlayer crash (opendreambox-2.0.0)
 
 versie: 2.7
@@ -261,7 +261,62 @@ versie: 2.7
 * nieuw: filmen kunnen gefilterd worden volgens de korte beschrijving
 * nieuw: keuze of info van tmdb en tvdb overschreven wordt
 * nieuw: backup en herstellen van de instellingen
-* nieuw: automatisch cover downloaden van tmdb na timeropname
 OPGELET voor de skinners, AdvancedMovieSelection_Preview_HD, AdvancedMovieSelection_Preview_noDescription_HD, AdvancedMovieSelection_Preview_noCover_HD, AdvancedMovieSelection_Preview_noDescription_noCover_HD,
 AdvancedMovieSelection_Preview_XD, AdvancedMovieSelection_Preview_noDescription_XD, AdvancedMovieSelection_Preview_noCover_XD, AdvancedMovieSelection_Preview_noDescription_noCover_XD (SD is niet zinvol)
-AdvancedKeyBoardHD, AdvancedKeyBoardXD, AdvancedKeyBoardSD, AdvancedTextInputHelpDialogHD, AdvancedTextInputHelpDialogXD und AdvancedTextInputHelpDialogSD toegevoegd
+AdvancedKeyBoardHD, AdvancedKeyBoardXD, AdvancedKeyBoardSD, AdvancedTextInputHelpDialogHD, AdvancedTextInputHelpDialogXD en AdvancedTextInputHelpDialogSD toegevoegd
+
+versie: 2.8
+* nieuw: wijzigingen worden na update automatisch weergegeven
+* nieuw: DVDPlayerExtended met CoverPreview en InfoView
+* nieuw: stoppen afspelen dvd met exit zonder vraag
+* nieuw: cover van tmdb kan gekozen worden met rechts/links
+* nieuw: verplaatsen en kopiëren van films met voortgangsbalk
+* nieuw: thetvdb, tmdb, ofdb en imdb plugins kunnen rechtstreeks opgeroepen worden vanuit de filminfo
+* nieuw: de sorteerfunctie wordt per map bewaard en de sorteerwijze wordt voor het pad weergegeven
+OPGELET voor de skinners, MoveCopyProgressHD, MoveCopyProgressXD en MoveCopyProgressSD toegevoegd, AdvancedMovieSelectionEventView(SD, XD, HD) gewijzigd en uit AdvancedMovieSelectionButtonSetup(SD, XD, HD) werd <widget source="important".. verwijderd
+
+versie: 2.9
+* nieuw: sorteerfuncties kunnen worden gekozen voor quickbutton
+* nieuw: back-up pad worden opgeslagen
+* nieuw: gezien/onongezien met meervoudige selectie
+* nieuw: vrije ruimte wordt gecontrolleerd voor kopiëren/verplaatsen
+* nieuw: weergave voortgangmoving kopiëren/verplaatsen kan worden uitgeschakeld
+* nieuw: in het menu aan het einde van de film kan een eindeloze herhaling gestart of gestopt worden
+OPGELET voor de skinners, SelectionListScreen(SD, XD, HD) toegevoegd
+
+versie: 3.0
+* nieuw: functiekeuze voor lang drukken van de kleurknoppen
+* nieuw: nu kunnen er 8 verschillende bookmarks aan de kleurknoppen toegekend worden
+* nieuw: nieuwe zoekfunctie, direct met de nummerknoppen van de afstandsbediening of het toetsenbord
+* nieuw: databank voor geselecteerde locaties
+* nieuw: snel zoeken in databank
+* nieuw: snel weergeven van alle bestanden in databank
+* nieuw: snel sorteren van alle bestanden in databank
+* nieuw: bestandsgrootte wordt enkel voor bestanden in databank weergegeven
+* nieuw: tmdb and tvdb zoeken voor mappen
+* nieuw: info voor mappen
+* fix: fout bij het verwijderen opgelost
+* aanpassing: bookmarks weergeven zonder mappen weergeven
+OPGELET voor de skinners, PopupInputDialog en PopupInputHelpDialog toegevoegd
+
+versie: 3.0.1
+* fix: crash op oe1.6
+
+versie: 3.0.2
+* fix: prullemand activeren/deactiveren
+* fix: cover verbergen bij verwijderen laatste film
+* fix: filmsymbool weergeven/verbergen
+* fix: oplopende sortering
+* fix: filter op beschrijving in database
+* fix: sorteren database als tags geselecteerd
+* aanpassing: filter voor korte beschrijving ook met gedeeltelijke inhoud
+* aanpassing: info weergave uitgebreid met leeftijdsgrens, filter korte beschrijving (indien actief)
+
+versie: 3.0.3
+* fix: instelling voor statussymbool film indien folders niet actief
+* nieuw: wissel database/filmlijst met quickbutton
+
+versie: 3.0.4
+* fix: TVDB Info&D/L
+* fix: performance issue on open movielist
+* nieuw: italiaanse locale (thx @ mikark)

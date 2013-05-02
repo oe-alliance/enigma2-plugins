@@ -20,9 +20,10 @@
 #  distributed other than under the conditions noted above.
 #
 
-from __init__ import _
+from LocaleInit import _
 from Tools.Directories import resolveFilename, SCOPE_HDD
-from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo, ConfigInteger, ConfigSelection, ConfigClock
+from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo, ConfigInteger, ConfigSelection, ConfigClock, ConfigLocations, ConfigBoolean
+from Globals import printStackTrace
 
 config.AdvancedMovieSelection = ConfigSubsection()
 config.AdvancedMovieSelection.wastelist_buildtype = ConfigSelection(default="listMovies" , choices=[("listMovies", _("Only current location")), ("listAllMovies", _("Current location and all subdirectories")), ("listAllMoviesMedia", _("All directorys below '/media'")) ])
@@ -55,24 +56,35 @@ config.AdvancedMovieSelection.about = ConfigSelection(default="1", choices=[("1"
 config.AdvancedMovieSelection.ml_disable = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.showmenu = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.pluginmenu_list = ConfigYesNo(default=False)
-config.AdvancedMovieSelection.red = ConfigText(default=_("Delete"), visible_width=50, fixed_size=False)
-config.AdvancedMovieSelection.green = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
-config.AdvancedMovieSelection.yellow = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
-config.AdvancedMovieSelection.blue = ConfigText(default=_("Nothing"), visible_width=50, fixed_size=False)
-config.AdvancedMovieSelection.bookmark1text = ConfigText(default=_("Bookmark 1"), visible_width=50, fixed_size=False)
-config.AdvancedMovieSelection.bookmark2text = ConfigText(default=_("Bookmark 2"), visible_width=50, fixed_size=False)
-config.AdvancedMovieSelection.bookmark3text = ConfigText(default=_("Bookmark 3"), visible_width=50, fixed_size=False)
-config.AdvancedMovieSelection.hometext = ConfigText(default=_("Home"), visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.red = ConfigText(default="Delete", visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.green = ConfigText(default="Nothing", visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.yellow = ConfigText(default="Nothing", visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.blue = ConfigText(default="Nothing", visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark1text = ConfigText(default="Bookmark 1", visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark2text = ConfigText(default="Bookmark 2", visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark3text = ConfigText(default="Bookmark 3", visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark4text = ConfigText(default="Bookmark 4", visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark5text = ConfigText(default="Bookmark 5", visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark6text = ConfigText(default="Bookmark 6", visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark7text = ConfigText(default="Bookmark 7", visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.hometext = ConfigText(default="Home", visible_width=50, fixed_size=False)
 config.AdvancedMovieSelection.homepath = ConfigText(default="/hdd/movie/")
 config.AdvancedMovieSelection.bookmark1path = ConfigText(default="/hdd/movie/")
 config.AdvancedMovieSelection.bookmark2path = ConfigText(default="/hdd/movie/")
 config.AdvancedMovieSelection.bookmark3path = ConfigText(default="/hdd/movie/")
+config.AdvancedMovieSelection.bookmark4path = ConfigText(default="/hdd/movie/")
+config.AdvancedMovieSelection.bookmark5path = ConfigText(default="/hdd/movie/")
+config.AdvancedMovieSelection.bookmark6path = ConfigText(default="/hdd/movie/")
+config.AdvancedMovieSelection.bookmark7path = ConfigText(default="/hdd/movie/")
 config.AdvancedMovieSelection.buttoncaption = ConfigText(default="Display plugin name")
 config.AdvancedMovieSelection.homeowntext = ConfigText(default=_("Homebutton"), visible_width=50, fixed_size=False)
 config.AdvancedMovieSelection.bookmark1owntext = ConfigText(default=_("Own text 1"), visible_width=50, fixed_size=False)
-config.AdvancedMovieSelection.bookmark1owntext = ConfigText(default=_("Own text 2"), visible_width=50, fixed_size=False)
-config.AdvancedMovieSelection.bookmark2owntext = ConfigText(default=_("Own text 3"), visible_width=50, fixed_size=False)
-config.AdvancedMovieSelection.bookmark3owntext = ConfigText(default=_("Own text 4"), visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark2owntext = ConfigText(default=_("Own text 2"), visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark3owntext = ConfigText(default=_("Own text 3"), visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark4owntext = ConfigText(default=_("Own text 4"), visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark5owntext = ConfigText(default=_("Own text 5"), visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark6owntext = ConfigText(default=_("Own text 6"), visible_width=50, fixed_size=False)
+config.AdvancedMovieSelection.bookmark7owntext = ConfigText(default=_("Own text 7"), visible_width=50, fixed_size=False)
 launch_choices = [    ("None", _("No override")),
                             ("showMovies", _("Video-button")),
                             ("showTv", _("TV-button")),
@@ -139,7 +151,8 @@ config.AdvancedMovieSelection.stop_search_ip = ConfigInteger(default=254, limits
 config.AdvancedMovieSelection.server_port = ConfigInteger(default=20000, limits=(1, 65535))
 config.AdvancedMovieSelection.show_remote_setup = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.show_dirsize = ConfigYesNo(default=False)
-config.AdvancedMovieSelection.show_dirsize_full = ConfigYesNo(default=False)
+# TODO: remove
+# config.AdvancedMovieSelection.show_dirsize_full = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.dirsize_digits = ConfigSelection(default="0", choices=[("0", _("0")), ("1", _("1")), ("2", _("2")), ("3", _("3"))])
 config.AdvancedMovieSelection.showpercentinmovielist = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.filesize_digits = ConfigSelection(default="1", choices=[("0", _("0")), ("1", _("1")), ("2", _("2")), ("3", _("3"))])
@@ -156,6 +169,62 @@ config.AdvancedMovieSelection.keyboard = ConfigSelection(default="virtual_numeri
 config.AdvancedMovieSelection.show_filter_by_description = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.show_backup_restore = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.cover_auto_download = ConfigYesNo(default=True)
+config.AdvancedMovieSelection.version = ConfigText()
+config.AdvancedMovieSelection.backup_path = ConfigText()
+config.AdvancedMovieSelection.sort_functions = ConfigText()
+config.AdvancedMovieSelection.show_move_copy_progress = ConfigYesNo(default=True)
+config.AdvancedMovieSelection.videodirs = ConfigLocations()
+config.AdvancedMovieSelection.show_location_indexing = ConfigYesNo(default=True)
+config.AdvancedMovieSelection.show_videodirslocation = ConfigYesNo(default=True)
+config.AdvancedMovieSelection.show_database = ConfigYesNo(default=True)
+config.AdvancedMovieSelection.db_sort = ConfigInteger(default=1)
+config.AdvancedMovieSelection.db_show = ConfigBoolean()
+config.AdvancedMovieSelection.db_mark = ConfigYesNo(default=True)
+config.AdvancedMovieSelection.db_show_mark_cnt = ConfigInteger(default=2, limits=(1, 10))
+config.AdvancedMovieSelection.qButtons = ConfigText()
+
+class QuickButtons():
+    def __init__(self):
+        self.qlist = [('red', ''), ('red_long', ''), ('green', ''), ('green_long', ''), ('yellow', ''), ('yellow_long', ''), ('blue', ''), ('blue_long', '')]
+        self.load()
+
+    def getFunction(self, key):
+        for button, function in self.qlist:
+            if button == key:
+                return function
+    
+    def setFunction(self, button, function):
+        for index, item in enumerate(self.qlist):
+            if item[0] == button:
+                self.qlist[index] = (button, function)
+    
+    def get(self):
+        return self.qlist
+    
+    def load(self):
+        if config.AdvancedMovieSelection.qButtons.value:
+            l = eval(config.AdvancedMovieSelection.qButtons.value)
+            if isinstance(l, list):
+                self.qlist = l
+        else:
+            self.updateOldVersion()
+    
+    def save(self):
+        config.AdvancedMovieSelection.qButtons.value = str(self.qlist)
+        config.AdvancedMovieSelection.qButtons.save()
+        
+    def updateOldVersion(self):
+        try:
+            print "update older config version"
+            self.setFunction('red', config.AdvancedMovieSelection.red.value)
+            self.setFunction('green', config.AdvancedMovieSelection.green.value)
+            self.setFunction('yellow', config.AdvancedMovieSelection.yellow.value)
+            self.setFunction('blue', config.AdvancedMovieSelection.blue.value)
+            print self.qlist
+        except:
+            printStackTrace()
+    
+qButtons = QuickButtons()
 
 def initializeConfig():
     pass
@@ -191,7 +260,6 @@ def createBackup(path="/media/hdd/"):
     return file_name
 
 def loadBackup(file_name):
-    from ServiceProvider import printStackTrace
     print "load backup", file_name 
     backup = open(file_name, 'rb')
     for line in backup.readlines():

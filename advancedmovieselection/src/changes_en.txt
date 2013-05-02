@@ -267,3 +267,59 @@ version: 2.7
 Skinners ATTENTION,  AdvancedMovieSelection_Preview_HD, AdvancedMovieSelection_Preview_noDescription_HD, AdvancedMovieSelection_Preview_noCover_HD, AdvancedMovieSelection_Preview_noDescription_noCover_HD,
 AdvancedMovieSelection_Preview_XD, AdvancedMovieSelection_Preview_noDescription_XD, AdvancedMovieSelection_Preview_noCover_XD, AdvancedMovieSelection_Preview_noDescription_noCover_XD (SD makes no sense)
 AdvancedKeyBoardHD, AdvancedKeyBoardXD, AdvancedKeyBoardSD, AdvancedTextInputHelpDialogHD, AdvancedTextInputHelpDialogXD und AdvancedTextInputHelpDialogSD are new
+
+version: 2.8
+* new: automatically show changes after update
+* new: DVDPlayerExtended with CoverPreview and InfoView
+* new: leaving dvdplayer with exit button without question
+* new: cover from tmdb can be selected with left/right
+* new: move and copy of movies with progress view
+* new: thetvdb, tmdb, ofdb and imdb plugins can be called directly from the movie info
+* new: the sort function will be stored for each directory and is shown before the movie location path
+Skinners ATTENTION, MoveCopyProgressHD, MoveCopyProgressXD und MoveCopyProgressSD are new, AdvancedMovieSelectionEventView(SD, XD, HD) were changed and from AdvancedMovieSelectionButtonSetup(SD, XD, HD) <widget source="important".. was removed
+
+version: 2.9
+* new: sort functions can be choosen for quickbutton
+* new: backup path will be stored
+* new: seen/unseen with multiple selection
+* new: free space checking for destination before copy/move
+* new: progress of copy/move can be disabled
+* new: endless replay can be started or stopped in the menu at the end of the movie
+Skinners ATTENTION, SelectionListScreen(SD, XD, HD) are new
+
+version: 3.0
+* new: function selection for long presses of the color buttons
+* new: now it's possible to assign 8 different bookmarks to the colored buttons
+* new: new direct search with the number buttons of the remote or keyboard
+* new: database for selected locations
+* new: fast search in database
+* new: fast display of all files in database
+* new: fast sorting of all files in database
+* new: file size only displayed for directories in database
+* new: tmdb and tvdb search for directories
+* new: info for directories
+* change: show bookmarks without show folders
+* fix: solved error with delete
+Skinners ATTENTION, PopupInputDialog and PopupInputHelpDialog are new
+
+version: 3.0.1
+* fix: crash on oe1.6
+
+version: 3.0.2
+* fix: waste enable/disable
+* fix: hide cover on deleting last movie 
+* fix: show/hide movie symbol 
+* fix: sorting ascending
+* fix: filter description in database
+* fix: sorting database if tags selected
+* changed: filter shortdescription with containing text instead of full match
+* changed: info view expanded if active: age rating, filter short description
+
+version: 3.0.3
+* fix: settings for movie status symbol if folders are disabled
+* new: switch database/movielist with quickbutton
+
+version: 3.0.4
+* fix: TVDB Info&D/L
+* fix: performance issue on open movielist
+* new: italian locale (thx @ mikark)

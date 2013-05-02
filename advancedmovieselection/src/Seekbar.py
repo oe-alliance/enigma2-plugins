@@ -31,7 +31,7 @@ from Screens.InfoBar import MoviePlayer
 from Screens.Screen import Screen
 from Tools.KeyBindings import addKeyBinding
 import keymapparser
-from Globals import SkinTools
+from Source.Globals import SkinTools
 
 class Seekbar(ConfigListScreen, Screen):
     def __init__(self, session, instance, fwd):
@@ -173,7 +173,7 @@ def seekbarBack(instance):
 MoviePlayer.seekFwdManual = seekbar
 MoviePlayer.seekBackManual = seekbarBack
 
-from Globals import pluginPresent
+from Source.Globals import pluginPresent
 if pluginPresent.DVDPlayer:
     from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
     DVDPlayer.seekFwdManual = seekbar

@@ -25,7 +25,8 @@ from enigma import ePicLoad, eTimer
 from Tools.Directories import fileExists
 import os
 from Components.config import config
-from ServiceProvider import eServiceReferenceDvd, getServiceInfoValue, ServiceCenter, ISOInfo, eServiceReferenceBludisc
+from Source.ServiceProvider import eServiceReferenceDvd, getServiceInfoValue, ServiceCenter, eServiceReferenceBludisc
+from Source.ISOInfo import ISOInfo
 from enigma import iServiceInformation, eServiceReference
 from os import environ
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
@@ -64,43 +65,48 @@ class MoviePreview():
 
     def loadPreview(self, serviceref):
         self.hideDialog()
-        if serviceref:
-            path = serviceref.getPath()
-            if os.path.isfile(path):
-                path = os.path.splitext(path)[0] + ".jpg"
-            elif isinstance(serviceref, eServiceReferenceDvd):
-                path = path + ".jpg"
+        if serviceref is None:
+            self["CoverPreview"].instance.setPixmap(None)
+            return
+
+        path = serviceref.getPath()
+        if path.endswith("/"):
+            if fileExists(path + ".jpg"):
+                path += ".jpg"
             elif config.AdvancedMovieSelection.usefoldername.value:
-                if path.endswith("/"):
-                    path = path[:-1] + ".jpg"
+                path = path[:-1] + ".jpg"
             else:
                 path = path + "folder.jpg"
-        
-            self.working = True
-            self["CoverPreview"].setPosition(self.cpX, self.cpY)
-            if fileExists(path):
-                self.picload.startDecode(path)
+        elif os.path.isfile(path):
+            path = os.path.splitext(path)[0] + ".jpg"
+        else:
+            path = path + ".jpg"
+    
+        self.working = True
+        self["CoverPreview"].setPosition(self.cpX, self.cpY)
+        if fileExists(path):
+            self.picload.startDecode(path)
+            return
+        series_path = os.path.join(os.path.dirname(path), "series.jpg")
+        if os.path.exists(series_path):
+            self.picload.startDecode(series_path)
+            return
+        if serviceref.getPath().endswith(".ts") and config.AdvancedMovieSelection.show_picon.value:
+            picon = getServiceInfoValue(serviceref, iServiceInformation.sServiceref).rstrip(':').replace(':', '_') + ".png"
+            piconpath = os.path.join(config.AdvancedMovieSelection.piconpath.value, picon)
+            if os.path.exists(piconpath):
+                if config.AdvancedMovieSelection.piconsize.value:
+                    self["CoverPreview"].instance.setPixmapFromFile(piconpath)
+                    self["CoverPreview"].setPosition(self.piconX, self.piconY)
+                else:
+                    self.picload.startDecode(piconpath)
                 return
-            series_path = os.path.join(os.path.dirname(path), "series.jpg")
-            if os.path.exists(series_path):
-                self.picload.startDecode(series_path)
-                return
-            if serviceref.getPath().endswith(".ts") and config.AdvancedMovieSelection.show_picon.value:
-                picon = getServiceInfoValue(serviceref, iServiceInformation.sServiceref).rstrip(':').replace(':', '_') + ".png"
-                piconpath = os.path.join(config.AdvancedMovieSelection.piconpath.value, picon)
-                if os.path.exists(piconpath):
-                    if config.AdvancedMovieSelection.piconsize.value:
-                        self["CoverPreview"].instance.setPixmapFromFile(piconpath)
-                        self["CoverPreview"].setPosition(self.piconX, self.piconY)
-                    else:
-                        self.picload.startDecode(piconpath)
-                    return
-            self.picload.startDecode(nocover)
+        self.picload.startDecode(nocover)
                 
     def showPreviewCallback(self, picInfo=None):
-        if picInfo and self.working:
+        if picInfo:
             ptr = self.picload.getData()
-            if ptr != None:
+            if ptr != None and self.working:
                 self["CoverPreview"].instance.setPixmap(ptr)
         self.working = False
 
@@ -117,7 +123,7 @@ class DVDOverlay(Screen):
 
 from ServiceReference import ServiceReference
 from Screens.InfoBarGenerics import InfoBarCueSheetSupport
-from ServiceProvider import CueSheet
+from Source.ServiceProvider import CueSheet
 class VideoPreview():
     def __init__(self):
         self.fwd_timer = eTimer()
@@ -129,13 +135,7 @@ class VideoPreview():
         self.service = None
         self.currentlyPlayingService = None
         self.cut_list = None
-        from MoviePlayer import PlayerInstance
         self.lastService = self.session.nav.getCurrentlyPlayingServiceReference()
-        if PlayerInstance:
-            if PlayerInstance.isCurrentlyPlaying():
-                self.lastService = None
-            else:
-                self.lastService = PlayerInstance.lastservice
         self.updateVideoPreviewSettings()
         self.onClose.append(self.__playLastService)
         self.dvdScreen = self.session.instantiateDialog(DVDOverlay)
@@ -196,13 +196,13 @@ class VideoPreview():
 
     def playMovie(self):
         if self.service and self.enabled:
-            print "play service"
             if self.service.flags & eServiceReference.mustDescent or isinstance(self.service, eServiceReferenceBludisc):
                 print "Skipping video preview"
                 self.__playLastService()
                 return
-            from MoviePlayer import PlayerInstance
-            if PlayerInstance and PlayerInstance.isCurrentlyPlaying():
+            from MoviePlayer import playerChoice
+            if playerChoice and playerChoice.isPlaying():
+                print "Skipping video preview"
                 return
             cpsr = self.session.nav.getCurrentlyPlayingServiceReference()
             if cpsr and cpsr == self.service:
@@ -217,13 +217,13 @@ class VideoPreview():
                         self.__playLastService()
                         return
                 newref = eServiceReference(4369, 0, self.service.getPath())
-                print "play", newref.toString()
                 self.session.nav.playService(newref)
                 subs = self.getServiceInterface("subtitle")
                 if subs:
                     subs.enableSubtitles(self.dvdScreen.instance, None)
             else:
                 self.session.nav.playService(self.service)
+            print "play", self.service.getPath()
             self.currentlyPlayingService = self.service
             seekable = self.getSeek()
             if seekable:

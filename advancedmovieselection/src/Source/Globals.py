@@ -22,6 +22,12 @@
 from enigma import getDesktop
 from Tools.Directories import fileExists, resolveFilename, SCOPE_HDD, SCOPE_CURRENT_SKIN, SCOPE_CURRENT_PLUGIN
 
+def printStackTrace():
+    import sys, traceback
+    print "--- [AdvancedMovieSelection] STACK TRACE ---"
+    traceback.print_exc(file=sys.stdout)
+    print '-' * 50
+
 class SkinResolutionHelper():
     def __init__(self, alternativeSkinName=None):
         if alternativeSkinName:
@@ -63,6 +69,7 @@ class Installed:
         self.TMDb = self.pluginInstalled("TMDb")
         self.IMDb = self.pluginInstalled("IMDb")
         self.OFDb = self.pluginInstalled("OFDb")
+        self.TheTVDB = self.pluginInstalled("TheTVDB")
         self.AdvancedProgramGuide = self.pluginInstalled("AdvancedProgramGuide")
         self.MerlinEPG = self.pluginInstalled("MerlinEPG")
         self.MerlinEPGCenter = self.pluginInstalled("MerlinEPGCenter")

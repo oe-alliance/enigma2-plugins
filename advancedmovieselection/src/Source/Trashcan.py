@@ -100,7 +100,7 @@ def updateInfo(path):
     if os.path.isfile(path):
         trash_size += os.path.getsize(path)
     else:
-        from ServiceProvider import getFolderSize
+        from ServiceUtils import getFolderSize
         trash_size += getFolderSize(os.path.dirname(path))
 
 def resetInfo():
@@ -156,8 +156,6 @@ class Trashcan:
     
     @staticmethod
     def delete(filename):
-        from EpgListExtension import epgListExtension
-        epgListExtension.removeService(filename)
         movie_ext = ["gm", "sc", "ap", "cuts"]
         print "delete: ", filename
         #path = os.path.split(filename)[0]

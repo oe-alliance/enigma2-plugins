@@ -24,10 +24,13 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.config import config
-from ServiceProvider import ServiceEvent
+from Source.ServiceProvider import ServiceCenter, ServiceEvent
 from Components.ScrollLabel import ScrollLabel
 from MoviePreview import MoviePreview
-from Globals import SkinTools
+from Source.Globals import SkinTools, pluginPresent
+from Components.Sources.StaticText import StaticText
+from Components.Pixmap import Pixmap
+import os
 
 class EventViewBase:    
     def __init__(self, event, ref, callback=None, similarEPGCB=None):
@@ -35,13 +38,25 @@ class EventViewBase:
         self.cbFunc = callback
         self.currentService = ref
         self.event = event
+        self["key_red"] = StaticText("")
+        self["red_button"] = Pixmap()
+        self["key_green"] = StaticText("")
+        self["green_button"] = Pixmap()
+        self["key_yellow"] = StaticText("")
+        self["yellow_button"] = Pixmap()
+        self["key_blue"] = StaticText("")
+        self["blue_button"] = Pixmap()        
         self["Location"] = Label()
         self["epg_description"] = ScrollLabel()
         self["Service"] = ServiceEvent()
-        self["actions"] = ActionMap(["OkCancelActions", "EventViewActions"],
+        self["actions"] = ActionMap(["OkCancelActions", "EventViewActions", "ColorActions"],
             {
                 "cancel": self.close,
                 "ok": self.close,
+                "red": self.red_button,
+                "green": self.green_button,
+                "yellow": self.yellow_button,
+                "blue": self.blue_button,
                 "prevEvent": self.prevEvent,
                 "nextEvent": self.nextEvent,
                 "pageUp": self.pageUp,
@@ -50,6 +65,18 @@ class EventViewBase:
         self.onShown.append(self.onCreate)
 
     def onCreate(self):
+        self["key_red"].setText(_("TheTVDB search"))
+        self["key_green"].setText(_("TMDb search"))
+        if pluginPresent.IMDb:
+            self["key_yellow"].setText(_("IMDB search"))
+        else:
+            self["yellow_button"].hide()
+            self["key_yellow"].setText("")
+        if pluginPresent.OFDb:
+            self["key_blue"].setText(_("OFDb search"))
+        else:
+            self["blue_button"].hide()
+            self["key_blue"].setText("")
         self.setEvent(self.event)
 
     def prevEvent(self):
@@ -70,29 +97,19 @@ class EventViewBase:
             if name is not None:
                 self["channel"].setText(name)
             else:
-                self["channel"].setText(_("unknown service"))
+                self["channel"].setText(_("Unknown service"))
 
     def setEvent(self, event):
         self.event = event
         if event is None:
             return
-        ref = self.currentService
         description = event.getExtendedDescription()
         self["epg_description"].setText(description)
-        from enigma import eServiceCenter
-        serviceHandler = eServiceCenter.getInstance()
-        info = serviceHandler.info(ref)
-        name = info and info.getName(ref) or _("this recording")
-        if name.endswith(".ts"):
-            title = name[:-3]
-        elif name.endswith(".mp4") or name.endswith(".mov") or name.endswith(".mkv") or name.endswith(".iso") or name.endswith(".flv") or name.endswith(".avi") or name.endswith(".ogg"):
-            title = name[:-4]
-        elif name.endswith(".divx") or name.endswith(".m2ts") or name.endswith(".mpeg"):
-            title = name[:-5]
-        else:
-            title = info and info.getName(ref) or _("this recording")
+
+        title = self.getEventName()
         self.setTitle(_("Infos for: %s") % title)
-        self["Location"].setText(_("Movie location: %s") % (config.movielist.last_videodir.value))
+        current_path = os.path.dirname(self.currentService.getPath()) + '/'
+        self["Location"].setText(_("Movie location: %s") % (current_path))
         serviceref = self.currentService
         self["Service"].newService(serviceref)
         self.loadPreview(serviceref)
@@ -102,6 +119,35 @@ class EventViewBase:
 
     def pageDown(self):
         self["epg_description"].pageDown()
+
+    def getEventName(self):
+        ref = self.currentService
+        info = ServiceCenter.getInstance().info(ref)
+        return info and info.getName(ref)
+
+    def red_button(self):
+        name = self.getEventName()
+        if name:
+            from SearchTVDb import TheTVDBMain
+            self.session.open(TheTVDBMain, self.currentService)
+        
+    def green_button(self):
+        name = self.getEventName()
+        if name:
+            from SearchTMDb import TMDbMain
+            self.session.open(TMDbMain, name, self.currentService) 
+        
+    def yellow_button(self):
+        name = self.getEventName()
+        if pluginPresent.IMDb and name:
+            from Plugins.Extensions.IMDb.plugin import IMDB
+            self.session.open(IMDB, name)
+        
+    def blue_button(self):
+        name = self.getEventName()
+        if pluginPresent.OFDb and name:
+            from Plugins.Extensions.OFDb.plugin import OFDB
+            self.session.open(OFDB, name)
 
 class EventViewSimple(Screen, EventViewBase, MoviePreview):
     def __init__(self, session, event, ref, callback=None, similarEPGCB=None):

@@ -31,49 +31,66 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Rename import MovieRetitle
 from Wastebasket import Wastebasket
+from enigma import eServiceReference
+from Source.Config import qButtons
+
 
 def getPluginCaption(pname):
-    if pname != "Nothing":
+    if pname and pname != "Nothing":
         if pname == "Home":
             return _(config.AdvancedMovieSelection.hometext.value)
-        elif pname == "Bookmark 1":
+        if pname == "Bookmark 1":
             return _(config.AdvancedMovieSelection.bookmark1text.value)
-        elif pname == "Bookmark 2":
+        if pname == "Bookmark 2":
             return _(config.AdvancedMovieSelection.bookmark2text.value)
-        elif pname == "Bookmark 3":
+        if pname == "Bookmark 3":
             return _(config.AdvancedMovieSelection.bookmark3text.value)
-        elif pname == "Show/Hide folders":
-            if not config.AdvancedMovieSelection.showfoldersinmovielist.value:
-                return _("Show folders")
-            else:
-                return _("Hide folders")
+        if pname == "Bookmark 4":
+            return _(config.AdvancedMovieSelection.bookmark4text.value)
+        if pname == "Bookmark 5":
+            return _(config.AdvancedMovieSelection.bookmark5text.value)
+        if pname == "Bookmark 6":
+            return _(config.AdvancedMovieSelection.bookmark6text.value)
+        if pname == "Bookmark 7":
+            return _(config.AdvancedMovieSelection.bookmark7text.value)
         if pname == "Show up to VSR-X":
             return (_("Show up to VSR-%d") % accessRestriction.getAccess())
         if pname == "Toggle seen":
             return _("Mark as seen")
-        elif pname == "Bookmark(s) on/off":
+        if pname == "Show/Hide folders":
+            if not config.AdvancedMovieSelection.showfoldersinmovielist.value:
+                return _("Show folders")
+            else:
+                return _("Hide folders")
+        if pname == "Bookmark(s) on/off":
             if not config.AdvancedMovieSelection.show_bookmarks.value:
                 return _("Show bookmarks")
             else:
                 return _("Hide bookmarks")
-        elif pname == "Sort":
-            if config.movielist.moviesort.value == MovieList.SORT_ALPHANUMERIC:
-                return _("Sort by Description")
-            if config.movielist.moviesort.value == MovieList.SORT_DESCRIPTION:
-                return _("Sort by Date (1->9)")
-            if config.movielist.moviesort.value == MovieList.SORT_DATE_DESC:
-                return _("Sort by Date (9->1)")
-            if config.movielist.moviesort.value == MovieList.SORT_DATE_ASC:
-                return _("Sort alphabetically")
-        else:
-            for p in plugins.getPlugins(where=[PluginDescriptor.WHERE_MOVIELIST]):
-                if pname == str(p.name):
-                    if config.AdvancedMovieSelection.buttoncaption.value == "1":
-                        return p.description
-                    else:
-                        return p.name
+        if pname == "Show/Hide database":
+            if not config.AdvancedMovieSelection.show_database.value:
+                return _("Show database")
+            else:
+                return _("Hide database")
+        if pname == "DB marker on/off":
+            if not config.AdvancedMovieSelection.show_videodirslocation.value:
+                return _("Show marker")
+            else:
+                return _("Hide marker")
+        if pname == "Database/Movielist":
+            if config.AdvancedMovieSelection.db_show.value:
+                return _("To movielist")
+            else:
+                return _("To database")
+
+        for p in plugins.getPlugins(where=[PluginDescriptor.WHERE_MOVIELIST]):
+            if pname == str(p.name):
+                if config.AdvancedMovieSelection.buttoncaption.value == config.AdvancedMovieSelection.buttoncaption.default:
+                    return p.name
+                else:
+                    return p.description
         return _(pname)
-    return ""
+    return _("Nothing")
 
 toggleSeenButton = None
 
@@ -83,113 +100,198 @@ class QuickButton:
         self["key_green"] = Button()
         self["key_yellow"] = Button()
         self["key_blue"] = Button()
-        self.updateButtonText()
-        self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+        self["ColorActions"] = HelpableActionMap(self, "ColorActionsLong",
         {
-            "red": (self.redpressed, _("Assigned function for red key")),
-            "green": (self.greenpressed, _("Assigned function for green key")),
-            "yellow": (self.yellowpressed, _("Assigned function for yellow key")),
-            "blue": (self.bluepressed, _("Assigned function for blue key")),
+            "red": (self.redpressed, ""),
+            "green": (self.greenpressed, ""),
+            "yellow": (self.yellowpressed, ""),
+            "blue": (self.bluepressed, ""),
+            "red_long": (self.redpressedlong, ""),
+            "green_long": (self.greenpressedlong, ""),
+            "yellow_long": (self.yellowpressedlong, ""),
+            "blue_long": (self.bluepressedlong, ""),
         })
+        self.updateButtonText()
+        self.updateHelpText()
+ 
+    def updateHelpText(self):
+        for (actionmap, context, actions) in self.helpList:
+            if context == "ColorActionsLong":
+                for index, item in enumerate(actions):
+                    func = qButtons.getFunction(item[0])
+                    text = getPluginCaption(func)
+                    actions[index] = (item[0], text)
 
     def updateButtonText(self):
-        self["key_red"].setText(getPluginCaption(config.AdvancedMovieSelection.red.value))
-        self["key_green"].setText(getPluginCaption(config.AdvancedMovieSelection.green.value))
-        self["key_yellow"].setText(getPluginCaption(config.AdvancedMovieSelection.yellow.value))
-        self["key_blue"].setText(getPluginCaption(config.AdvancedMovieSelection.blue.value))
         global toggleSeenButton
-        if config.AdvancedMovieSelection.red.value == "Toggle seen":
-            toggleSeenButton = self["key_red"] 
-        elif config.AdvancedMovieSelection.green.value == "Toggle seen":
-            toggleSeenButton = self["key_green"] 
-        elif config.AdvancedMovieSelection.yellow.value == "Toggle seen":
-            toggleSeenButton = self["key_yellow"] 
-        elif config.AdvancedMovieSelection.blue.value == "Toggle seen":
-            toggleSeenButton = self["key_blue"]
-        else:
-            toggleSeenButton = None
+        toggleSeenButton = None
+        fn = ('red', 'green', 'yellow', 'blue')
+        for key in fn:
+            key_text = 'key_%s' % (key)
+            function = qButtons.getFunction(key)
+            text = getPluginCaption(function)
+            self[key_text].setText(text)
+            if function == "Toggle seen":
+                toggleSeenButton = self[key_text] 
         
-        if toggleSeenButton is not None:
-            self.list.connectSelChanged(self.__updateGUI)
-        else:
-            self.list.disconnectSelChanged(self.__updateGUI)
+    def getNextFromList(self, items, current):
+        for index, item in enumerate(items):
+            if str(item) == str(current):
+                index += 1
+                return index >= len(items) and items[0] or items[index]
+        return items[0]
 
+    def getNextSortType(self):
+        sort = config.AdvancedMovieSelection.sort_functions.value.split()
+        # TODO: remove printout after beta tests
+        if len(sort) < 1:
+            print "default sort list"
+            sort = [MovieList.SORT_ALPHANUMERIC, MovieList.SORT_DESCRIPTION, MovieList.SORT_DATE_DESC, MovieList.SORT_DATE_ASC]
+        print "sorting:", sort
+        print "current:", str(config.movielist.moviesort.value)
+        newType = int(self.getNextFromList(sort, config.movielist.moviesort.value))
+        print "next:", str(newType)
+        return newType
+
+    def findButton(self, function):
+        fn = ('red', 'green', 'yellow', 'blue')
+        for key in fn:
+            func = qButtons.getFunction(key)
+            if func == function:
+                key_text = 'key_%s' % (key)
+                return self[key_text]
+    
+    def getSortButtonCaption(self, mode):
+        if mode == MovieList.SORT_ALPHANUMERIC:
+            return _("Sort alphabetically")
+        if mode == MovieList.SORT_DESCRIPTION:
+            return _("Sort by Description")
+        if mode == MovieList.SORT_DATE_DESC:
+            return _("Sort by Date (9->1)")
+        if mode == MovieList.SORT_DATE_ASC:
+            return _("Sort by Date (1->9)")
+        return _("Unknown")
+
+    def updateSortButtonText(self):
+        key_number = self.findButton("Sort")
+        if key_number:
+            mode = self.getNextSortType()
+            key_number.setText(self.getSortButtonCaption(mode))
+    
+    def updateDBButtonText(self):
+        key_number = self.findButton("Database/Movielist")
+        if key_number:
+            key_number.setText(getPluginCaption("Database/Movielist"))
+    
     def redpressed(self):
-        self.startPlugin(config.AdvancedMovieSelection.red.value, self["key_red"])
-    
+        self.startPlugin(qButtons.getFunction("red"), self["key_red"])
+     
     def greenpressed(self):
-        self.startPlugin(config.AdvancedMovieSelection.green.value, self["key_green"])
-    
+        self.startPlugin(qButtons.getFunction("green"), self["key_green"])
+     
     def yellowpressed(self):
-        self.startPlugin(config.AdvancedMovieSelection.yellow.value, self["key_yellow"])
-    
+        self.startPlugin(qButtons.getFunction("yellow"), self["key_yellow"])
+     
     def bluepressed(self):
-        self.startPlugin(config.AdvancedMovieSelection.blue.value, self["key_blue"])
+        self.startPlugin(qButtons.getFunction("blue"), self["key_blue"])
+ 
+    def redpressedlong(self):
+        print "red long"
+        self.startPlugin(qButtons.getFunction("red_long"), None)
 
-    def __updateGUI(self):
+    def greenpressedlong(self):
+        print "green long"
+        self.startPlugin(qButtons.getFunction("green_long"), None)
+
+    def yellowpressedlong(self):
+        print "yellow long"
+        self.startPlugin(qButtons.getFunction("yellow_long"), None)
+
+    def bluepressedlong(self):
+        print "blue long"
+        self.startPlugin(qButtons.getFunction("blue_long"), None)
+
+    def updateGUI(self):
         if toggleSeenButton:
             perc = self.list.getMovieStatus()
             if perc > 50:
                 toggleSeenButton.setText(_("Mark as unseen"))
             else:
                 toggleSeenButton.setText(_("Mark as seen"))
+
+    def setButtonText(self, key_number, caption):
+        if key_number:
+            key_number.setText(caption)
     
     def startPlugin(self, pname, key_number):
-        home = config.AdvancedMovieSelection.homepath.value
-        bookmark1 = config.AdvancedMovieSelection.bookmark1path.value
-        bookmark2 = config.AdvancedMovieSelection.bookmark2path.value
-        bookmark3 = config.AdvancedMovieSelection.bookmark3path.value
+        print "qButtonFX:", str(pname)
+        # notify action map
+        self["ColorActions"].execEnd()
+        self["ColorActions"].execBegin()
         errorText = None
-        if pname != "Nothing":
+        if pname and pname != "Nothing":
             # all functions with no service is needed
             if pname == "Wastebasket":
                 if config.AdvancedMovieSelection.use_wastebasket.value:
                     self.session.openWithCallback(self.reloadList, Wastebasket)              
             elif pname == "Home":
-                self.gotFilename(home)
+                self.gotFilename(config.AdvancedMovieSelection.homepath.value)
             elif pname == "Bookmark 1":
-                self.gotFilename(bookmark1)
+                self.gotFilename(config.AdvancedMovieSelection.bookmark1path.value)
             elif pname == "Bookmark 2":
-                self.gotFilename(bookmark2)
+                self.gotFilename(config.AdvancedMovieSelection.bookmark2path.value)
             elif pname == "Bookmark 3":
-                self.gotFilename(bookmark3)
+                self.gotFilename(config.AdvancedMovieSelection.bookmark3path.value)
+            elif pname == "Bookmark 4":
+                self.gotFilename(config.AdvancedMovieSelection.bookmark4path.value)
+            elif pname == "Bookmark 5":
+                self.gotFilename(config.AdvancedMovieSelection.bookmark5path.value)
+            elif pname == "Bookmark 6":
+                self.gotFilename(config.AdvancedMovieSelection.bookmark6path.value)
+            elif pname == "Bookmark 7":
+                self.gotFilename(config.AdvancedMovieSelection.bookmark7path.value)                
             elif pname == "Bookmark(s) on/off":
-                if config.AdvancedMovieSelection.show_bookmarks.value:
-                    newCaption = _("Show bookmarks")
-                else:
-                    newCaption = _("Hide bookmarks")
                 config.AdvancedMovieSelection.show_bookmarks.value = not config.AdvancedMovieSelection.show_bookmarks.value
                 self.saveconfig()
                 self.reloadList()
-                key_number.setText(newCaption)
+                newCaption = getPluginCaption(pname)
+                self.setButtonText(key_number, newCaption)
+            elif pname == "Database/Movielist":
+                config.AdvancedMovieSelection.db_show.value = not config.AdvancedMovieSelection.db_show.value
+                self.saveconfig()
+                self.reloadList()
+                newCaption = getPluginCaption(pname)
+                self.setButtonText(key_number, newCaption)
+            elif pname == "Show/Hide database":
+                config.AdvancedMovieSelection.show_database.value = not config.AdvancedMovieSelection.show_database.value
+                self.saveconfig()
+                self.reloadList()
+                newCaption = getPluginCaption(pname)
+                self.setButtonText(key_number, newCaption)
+            elif pname == "DB marker on/off":
+                config.AdvancedMovieSelection.show_videodirslocation.value = not config.AdvancedMovieSelection.show_videodirslocation.value
+                self.saveconfig()
+                self.reloadList()
+                newCaption = getPluginCaption(pname)
+                self.setButtonText(key_number, newCaption)
             elif pname == "Show/Hide folders":
-                if config.AdvancedMovieSelection.showfoldersinmovielist.value:
-                    newCaption = _("Show folders")
-                else:
-                    newCaption = _("Hide folders")
                 config.AdvancedMovieSelection.showfoldersinmovielist.value = not config.AdvancedMovieSelection.showfoldersinmovielist.value
+                newCaption = getPluginCaption(pname)
                 self.showFolders(config.AdvancedMovieSelection.showfoldersinmovielist.value)
                 config.AdvancedMovieSelection.showfoldersinmovielist.save()
                 self.reloadList()
-                key_number.setText(newCaption)
+                self.setButtonText(key_number, newCaption)
             elif pname == "Sort":
-                if config.movielist.moviesort.value == MovieList.SORT_ALPHANUMERIC:
-                    newType = MovieList.SORT_DESCRIPTION
-                elif config.movielist.moviesort.value == MovieList.SORT_DESCRIPTION:
-                    newType = MovieList.SORT_DATE_DESC
-                elif config.movielist.moviesort.value == MovieList.SORT_DATE_DESC:
-                    newType = MovieList.SORT_DATE_ASC
-                elif config.movielist.moviesort.value == MovieList.SORT_DATE_ASC:
-                    newType = MovieList.SORT_ALPHANUMERIC
-                config.movielist.moviesort.value = newType
+                newType = self.getNextSortType()
                 self.setSortType(newType)
                 self.reloadList()
-                key_number.setText(getPluginCaption(pname))
             elif pname == "Filter by description":
                 self.openFilterByDescriptionChoice()
             elif pname == "Show Timer":
                 from Screens.TimerEdit import TimerEditList
                 self.session.open(TimerEditList)
+            elif pname == "Update database":
+                self.rescan(True)
             else:   
                 # all functions that require a service 
                 service = self.getCurrent()
@@ -200,37 +302,39 @@ class QuickButton:
                 elif pname == "Filter by Tags":
                     self.showTagsSelect()
                 elif pname == "Tag Editor":
-                    if not (service.flags):
+                    if not service.flags & eServiceReference.mustDescent:
                         self.movietags()
                     else:
                         if config.AdvancedMovieSelection.showinfo.value:
                             self.session.open(MessageBox, _("Set tag here not possible, please select a movie for!"), MessageBox.TYPE_INFO)
                 elif pname == "Trailer search":
-                    if not (service.flags):
+                    if not service.flags & eServiceReference.mustDescent:
                         self.showTrailer()
                     else:
                         if config.AdvancedMovieSelection.showinfo.value:
                             self.session.open(MessageBox, _("Trailer search here not possible, please select a movie!"), MessageBox.TYPE_INFO) 
                 elif pname == "Move-Copy":
-                    if not (service.flags):
+                    if not service.flags & eServiceReference.mustDescent:
                         self.session.open(MovieMove, self, service)
                     else:
                         if config.AdvancedMovieSelection.showinfo.value:
                             self.session.open(MessageBox, _("Move/Copy from complete directory/symlink not possible, please select a single movie!"), MessageBox.TYPE_INFO)
                 elif pname == "Rename":
-                    if not (service.flags):
+                    if service.type != eServiceReference.idUser:
                         self.session.openWithCallback(self.reloadList, MovieRetitle, service)
                     else:
                         if config.AdvancedMovieSelection.showinfo.value:
                             self.session.open(MessageBox, _("Rename here not possible, please select a movie!"), MessageBox.TYPE_INFO)        
                 elif pname == "TheTVDB Info & D/L":
-                    if not (service.flags):
+                    # TODO: search?
+                    if True or not service.flags & eServiceReference.mustDescent:
                         from SearchTVDb import TheTVDBMain
                         self.session.open(TheTVDBMain, service)
                 elif pname == "TMDb Info & D/L":
-                    if not (service.flags):
+                    # TODO: search?
+                    if True or not service.flags & eServiceReference.mustDescent:
                         from SearchTMDb import TMDbMain as TMDbMainsave
-                        from ServiceProvider import ServiceCenter
+                        from Source.ServiceProvider import ServiceCenter
                         searchTitle = ServiceCenter.getInstance().info(service).getName(service)
                         if len(self.list.multiSelection) == 0:
                             self.session.openWithCallback(self.updateCurrentSelection, TMDbMainsave, searchTitle, service)
@@ -244,35 +348,35 @@ class QuickButton:
                         if config.AdvancedMovieSelection.showinfo.value:
                             self.session.open(MessageBox, _("TMDb search here not possible, please select a movie!"), MessageBox.TYPE_INFO)               
                 elif pname == "Toggle seen":
-                    if not (service.flags):
+                    if not service.flags & eServiceReference.mustDescent:
                         perc = self.list.getMovieStatus()
                         if perc > 50:
                             self.setMovieStatus(0)
-                            key_number.setText(_("Mark as seen"))
+                            self.setButtonText(key_number, _("Mark as seen"))
                         else:
                             self.setMovieStatus(1)
-                            key_number.setText(_("Mark as unseen"))
+                            self.setButtonText(key_number, _("Mark as unseen"))
                 elif pname == "Show up to VSR-X":
-                    from AccessRestriction import VSR
-                    access = "VSR-%d"%(self.list.getAccess()) 
+                    from Source.AccessRestriction import VSR
+                    access = "VSR-%d" % (self.list.getAccess()) 
                     for index, item in enumerate(VSR):
                         if item == access:
-                            if len(VSR)-1 == index:
+                            if len(VSR) - 1 == index:
                                 access = VSR[0]
                             else:
                                 access = VSR[index + 1]
                             break
                     self.list.setAccess(int(access[4:]))
                     self.reloadList()
-                    key_number.setText(_("Show up to") + ' ' + _("VSR") + '-%d' % (self.list.getAccess()))
+                    self.setButtonText(key_number, _("Show up to") + ' ' + _("VSR") + '-%d' % (self.list.getAccess()))
                 elif pname == "Mark as seen":
-                    if not (service.flags):
+                    if not service.flags & eServiceReference.mustDescent:
                         self.setMovieStatus(status=1)
                     else:
                         if config.AdvancedMovieSelection.showinfo.value:
                             self.session.open(MessageBox, _("This may not be marked as seen!"), MessageBox.TYPE_INFO)
                 elif pname == "Mark as unseen":
-                    if not (service.flags):
+                    if not service.flags & eServiceReference.mustDescent:
                         self.setMovieStatus(status=0) 
                     else:
                         if config.AdvancedMovieSelection.showinfo.value:
@@ -311,26 +415,50 @@ class QuickButton:
             self.reloadList()
 
     def openFilterByDescriptionChoice(self):
-        from ServiceProvider import ServiceCenter
-        from enigma import eServiceReference, iServiceInformation
+        from Source.ServiceProvider import ServiceCenter, detectDVDStructure, detectBludiscStructure, eServiceReferenceDvd, eServiceReferenceBludisc, eServiceReferenceListAll
+        from Source.MovieScanner import movieScanner
+        from enigma import iServiceInformation
         from MovieSelection import SHOW_ALL_MOVIES
         serviceHandler = ServiceCenter.getInstance()
         descr = []
-        l = serviceHandler.list(self.list.root)
-        while 1:
-            serviceref = l.getNext()
-            if not serviceref.valid():
-                break
-            if serviceref.flags & eServiceReference.mustDescent:
-                continue
-            info = serviceHandler.info(serviceref)
-            if not info:
-                continue
-            description = (info.getInfoString(serviceref, iServiceInformation.sDescription),)
-            if description[0] != "" and not description in descr: 
-                descr.append(description)
+        if isinstance(self.list.root, eServiceReferenceListAll):
+            l = movieScanner.database.getMovieList(self.list.sort_type)
+            for movie_tuple in l:
+                movie_info = movie_tuple[0]
+                info = movie_info.info
+                if not info:
+                    continue
+                serviceref = movie_info.serviceref
+                description = (info.getInfoString(serviceref, iServiceInformation.sDescription),)
+                if description[0] != "" and not description in descr:
+                    descr.append(description)
+        else:
+            l = serviceHandler.list(self.list.root)
+            if not l:
+                print "list movies for filter failed"
+                return
+            while 1:
+                serviceref = l.getNext()
+                if not serviceref.valid():
+                    break
+                if serviceref.flags & eServiceReference.mustDescent:
+                    dvd = detectDVDStructure(serviceref.getPath())
+                    if dvd is not None:
+                        serviceref = eServiceReferenceDvd(serviceref, True)
+                    bludisc = detectBludiscStructure(serviceref.getPath())
+                    if bludisc is not None:
+                        serviceref = eServiceReferenceBludisc(serviceref, True)
+                    if not dvd and not bludisc:
+                        continue
+                info = serviceHandler.info(serviceref)
+                if not info:
+                    continue
+                description = (info.getInfoString(serviceref, iServiceInformation.sDescription),)
+                if description[0] != "" and not description in descr:
+                    descr.append(description)
+        
         descr = sorted(descr)
-        descr.insert(0, (_(SHOW_ALL_MOVIES), ))
+        descr.insert(0, (_(SHOW_ALL_MOVIES),))
         
         current = self.list.filter_description
         selection = 0
@@ -338,7 +466,7 @@ class QuickButton:
             if item[0] == current:
                 selection = index
                 break
-        
+        print "open filter choice", str(selection), str(descr)
         self.session.openWithCallback(self.filterByDescription, ChoiceBox, title=_("Select movie by description:"), list=descr, selection=selection)
 
     def filterByDescription(self, answer):
@@ -347,6 +475,8 @@ class QuickButton:
             return
         if answer[0] == _(SHOW_ALL_MOVIES):
             self.list.filter_description = None
+            print "clear filter choice"
         else:
-            self.list.filter_description = answer[0] 
+            self.list.filter_description = answer[0]
+            print "set filter choice", str(answer[0])
         self.reloadList()

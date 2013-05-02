@@ -268,3 +268,59 @@ version: 2.7
 ACHTUNG an die skinner, AdvancedMovieSelection_Preview_HD, AdvancedMovieSelection_Preview_noDescription_HD, AdvancedMovieSelection_Preview_noCover_HD, AdvancedMovieSelection_Preview_noDescription_noCover_HD,
 AdvancedMovieSelection_Preview_XD, AdvancedMovieSelection_Preview_noDescription_XD, AdvancedMovieSelection_Preview_noCover_XD, AdvancedMovieSelection_Preview_noDescription_noCover_XD (SD macht keinen sinn),
 AdvancedKeyBoardHD, AdvancedKeyBoardXD, AdvancedKeyBoardSD, AdvancedTextInputHelpDialogHD, AdvancedTextInputHelpDialogXD und AdvancedTextInputHelpDialogSD sind dazugekommen
+
+version: 2.8
+* neu: changes werden beim ersten start nach einem update automatisch angezeigt
+* neu: DVDPlayerExtended mit coveranzeige und filminfo screen
+* neu: beenden der dvd wiedergabe mit der exit taste ohne nachfrage
+* neu: cover von tmdb können mit rechts/links gewählt werden
+* neu: kopieren und verschieben von filmen mit fortschrittsanzeige
+* neu: aufruf der plugins thetvdb, tmdb, ofdb und imdb direkt aus der filminfo
+* neu: die sortierfunktion wird für jedes verzeichnis gespeichert und vor dem film pfad zum speicherort angezeigt
+ACHTUNG an die skinner, MoveCopyProgressHD, MoveCopyProgressXD und MoveCopyProgressSD sind neu, AdvancedMovieSelectionEventView(SD, XD, HD) wurden geändert und aus AdvancedMovieSelectionButtonSetup(SD, XD, HD) wurde <widget source="important".. entfernt
+
+version: 2.9
+* neu: sortierfunktionen können für die quickbutton ausgewählt werden
+* neu: backup pfad wird gespeichert
+* neu: gesehen/ungesehen mit mehrfachauswahl
+* neu: freier speicherplatz wird vor dem kopieren/verschieben geprüft
+* neu: fortschrittsanzeige für kopieren/verschieben kann ausgeschalten werden
+* neu: endloswiedergabe kann im menü beim beenden des films gestartet/gestoppt werden 
+ACHTUNG an die skinner, SelectionListScreen(SD, XD, HD) sind neu dazugekommen
+
+version: 3.0
+* neu: funktionsauswahl für langes drücken der farbtasten
+* neu: nun können 8 verschiedene lesezeichen den farbtasten zugeordnet werden
+* neu: neue suche direkt über die nummerntasten der fernbedienung oder tastatur
+* neu: datenbankerstellung für ausgewählte speicherorte
+* neu: schnelle suche in der datenbank
+* neu: schnelle anzeige aller filme in der datenbank
+* neu: schnelle sortierung aller filme in der datenbank
+* neu: dateiordnergröße wird nur für verzeichnisse aus der datenbank angezeigt
+* neu: tmdb und tvdb suche für verzeichnisse
+* neu: info für verzeichnisse
+* geändert: anzeige der bookmarks ohne ordner
+* fix: löschen fehler behoben
+ACHTUNG an die skinner, PopupInputDialog und PopupInputHelpDialog sind neu dazugekommen
+
+version: 3.0.1
+* fix: crash on oe1.6
+
+version: 3.0.2
+* fix: papierkorb ein/ausschalten
+* fix: cover anzeige beim löschen des letzten films
+* fix: ein/aus schalten der filmsymbole
+* fix: liste/datenbank aufsteigend sortieren
+* fix: filtern nach beschreibung in der datenbank
+* fix: sortieren in der datenbank wenn tags gewählt sind
+* geändert: filter der kurzbeschreibung nach enthaltenen text und nicht übereinstimmung
+* geändert: info anzeige ergänzt wenn aktiv um: altersfreigabe, filter kurzbeschreibung
+
+version: 3.0.3
+* fix: anzeige der filmstatus icons wenn ordner ansicht abgeschalten ist
+* neu: wechsel datenbank/filmliste über quickbutton
+
+version: 3.0.4
+* fix: TVDB Info&D/L
+* fix: geschwindigkeit beim öffnen der filmliste
+* neu: italienische übersetzung (thx @ mikark)

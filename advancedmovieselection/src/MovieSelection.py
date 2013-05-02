@@ -26,7 +26,7 @@ from Components.ActionMap import HelpableActionMap, ActionMap, NumberActionMap
 from Components.MenuList import MenuList
 from Components.Sources.StaticText import StaticText
 from Screens.HelpMenu import HelpableScreen
-from MovieList import MovieList, eServiceReferenceHotplug, eServiceReferenceBackDir
+from MovieList import MovieList
 from Components.DiskInfo import DiskInfo
 from Components.Pixmap import Pixmap
 from Components.Label import Label
@@ -39,32 +39,34 @@ from Screens.LocationBox import MovieLocationBox
 from AdvancedMovieSelectionSetup import AdvancedMovieSelectionSetup, AdvancedMovieSelectionButtonSetup
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, fileExists, SCOPE_HDD, SCOPE_CURRENT_SKIN
-from enigma import eServiceReference, eSize, ePoint, eTimer, getDesktop, iServiceInformation
-try:
-	from Tools.Directories import SCOPE_ACTIVE_SKIN
-except:
-	pass	
+from enigma import eServiceReference, eSize, ePoint, eTimer, iServiceInformation
 from Screens.Console import eConsoleAppContainer
-from ServiceProvider import ServiceEvent, ServiceCenter, Network
 from MoveCopy import MovieMove
 from Rename import MovieRetitle
 from SearchTMDb import TMDbMain as TMDbMainsave
 from MoviePreview import MoviePreview, VideoPreview
 from DownloadMovies import DownloadMovies
-from ServiceProvider import eServiceReferenceDvd
+from Source.ServiceProvider import eServiceReferenceDvd
 from TagEditor import MovieTagEditor
 from QuickButton import QuickButton
 from os import path
 import os
 import NavigationInstance
 from timer import TimerEntry
-from Trashcan import Trashcan, AsynchTrash
+from Source.Trashcan import Trashcan, AsynchTrash
 from RecordTimer import AFTEREVENT
 from ClientSetup import ClientSetup
 from time import localtime, strftime
 from datetime import datetime
 from Tools.FuzzyDate import FuzzyTime
-from Globals import pluginPresent, SkinTools
+from MovieSearch import MovieSearch
+from Source.Globals import pluginPresent, SkinTools, printStackTrace
+from Source.ServiceProvider import ServiceEvent, ServiceCenter
+from Source.ServiceProvider import eServiceReferenceHotplug, eServiceReferenceBackDir, eServiceReferenceListAll
+from Source.AutoNetwork import autoNetwork 
+from Source.MovieScanner import movieScanner
+from Source.ServiceDescriptor import DirectoryInfo
+from Source.StopWatch import StopWatch, clockit
 
 if pluginPresent.IMDb:
     from Plugins.Extensions.IMDb.plugin import IMDB
@@ -74,8 +76,15 @@ if pluginPresent.TMDb:
     from Plugins.Extensions.TMDb.plugin import TMDbMain
 if pluginPresent.YTTrailer:
     from Plugins.Extensions.YTTrailer.plugin import YTTrailerList
+if fileExists("/etc/grautec/dm8000/tft_dm8000.ko"):
+    TFT_8000_Present = True
+else:
+    TFT_8000_Present = False
 
-#config.movielist = ConfigSubsection()
+if not config.content.items.has_key("movielist"):
+    print "e2 config.movielist not exists"
+    config.movielist = ConfigSubsection()
+# all config.entries from Screens.MovieSelection
 config.movielist.moviesort = ConfigInteger(default=MovieList.SORT_ALPHANUMERIC)
 config.movielist.listtype = ConfigInteger(default=MovieList.LISTTYPE_ORIGINAL)
 config.movielist.description = ConfigInteger(default=MovieList.HIDE_DESCRIPTION)
@@ -85,6 +94,7 @@ config.movielist.videodirs = ConfigLocations(default=[resolveFilename(SCOPE_HDD)
 config.movielist.first_tags = ConfigText(default="")
 config.movielist.second_tags = ConfigText(default="")
 config.movielist.last_selected_tags = ConfigSet([], default=[])
+# extra config.entries
 config.movielist.showtime = ConfigInteger(default=MovieList.SHOW_TIME)
 config.movielist.showdate = ConfigInteger(default=MovieList.SHOW_DATE)
 config.movielist.showservice = ConfigInteger(default=MovieList.SHOW_SERVICE)
@@ -119,6 +129,18 @@ def getDateString():
         desc = strftime("%d.%m.%Y\n%A", t)
     return desc
 
+def getSortDescription():
+    text = _("Sorted:") + " "
+    if config.movielist.moviesort.value == MovieList.SORT_ALPHANUMERIC:
+        return text + _("Alphabetically")
+    if config.movielist.moviesort.value == MovieList.SORT_DESCRIPTION:
+        return text + _("Description")
+    if config.movielist.moviesort.value == MovieList.SORT_DATE_DESC:
+        return text + _("Descending")
+    if config.movielist.moviesort.value == MovieList.SORT_DATE_ASC:
+        return text + _("Ascending")
+    return text + _("Unknown")
+    
 def getBeginTimeString(info, serviceref):
     if not info or not serviceref:
         return ""
@@ -132,6 +154,12 @@ def getBeginTimeString(info, serviceref):
         d = datetime.fromtimestamp(begin)
         desc = d.strftime("%d.%m.%Y - %H:%M")
     return desc
+
+from Screens.LocationBox import LocationBox
+def ScanLocationBox(session, text, dir, minFree = None):
+    inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]
+    config.AdvancedMovieSelection.videodirs.load()
+    return LocationBox(session, text = text, currDir = dir, bookmarks = config.AdvancedMovieSelection.videodirs, autoAdd = False, editDir = False, inhibitDirs = inhibitDirs, minFree = minFree)
 
 class MovieContextMenu(Screen):
     def __init__(self, session, csel, service):
@@ -153,27 +181,22 @@ class MovieContextMenu(Screen):
         if config.AdvancedMovieSelection.hotplug.value and isinstance(service, eServiceReferenceHotplug):
             menu.append((_("Unmount") + " " + service.getName(), boundFunction(self.unmount)))
         if config.AdvancedMovieSelection.showtmdb.value:
-            if not (self.service.flags & eServiceReference.mustDescent):
-                menu.append((_("TMDb Info & D/L"), boundFunction(self.imdbsearch)))
+            menu.append((_("TMDb Info & D/L"), boundFunction(self.imdbsearch)))
         if config.AdvancedMovieSelection.showthetvdb.value:
-            if not (self.service.flags & eServiceReference.mustDescent):
-                menu.append((_("TheTVDB Info & D/L"), boundFunction(self.thetvdbsearch)))
-        if config.AdvancedMovieSelection.showdelete.value:
-            if not (self.service.flags & eServiceReference.mustDescent):
-                menu.append((_("Delete"), self.delete))
-        if config.AdvancedMovieSelection.showmove.value and not (self.service.flags & eServiceReference.mustDescent):
+            menu.append((_("TheTVDB Info & D/L"), boundFunction(self.thetvdbsearch)))
+        if config.AdvancedMovieSelection.showdelete.value and not self.service.flags & eServiceReference.mustDescent:
+            menu.append((_("Delete"), self.delete))
+        if config.AdvancedMovieSelection.showmove.value and not self.service.flags & eServiceReference.mustDescent:
             menu.append((_("Move/Copy"), self.movecopy))
-        if not (isinstance(service, eServiceReferenceBackDir) or isinstance(service, eServiceReferenceHotplug)):
-            if config.AdvancedMovieSelection.showrename.value:
-                menu.append((_("Rename"), boundFunction(self.retitel, session, service)))
+        if config.AdvancedMovieSelection.showrename.value and self.service.type != eServiceReference.idUser:
+            menu.append((_("Rename"), boundFunction(self.retitel, session, service)))
         if config.AdvancedMovieSelection.showsearch.value:
             menu.append((_("Movie search"), boundFunction(self.searchmovie)))
         if config.AdvancedMovieSelection.showmark.value and config.usage.load_length_of_movies_in_moviellist.value and not (self.service.flags & eServiceReference.mustDescent):
             menu.append((_("Mark movie as seen"), boundFunction(self.setMovieStatus, 1)))
             menu.append((_("Mark movie as unseen"), boundFunction(self.setMovieStatus, 0)))
-        if config.AdvancedMovieSelection.pluginmenu_list.value:
-            if not (self.service.flags & eServiceReference.mustDescent):
-                menu.extend([(p.description, boundFunction(self.execPlugin, p)) for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST)])
+        if config.AdvancedMovieSelection.pluginmenu_list.value and not self.service.flags & eServiceReference.mustDescent:
+            menu.extend([(p.description, boundFunction(self.execPlugin, p)) for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST)])
         if config.AdvancedMovieSelection.showsort.value:
             if config.movielist.moviesort.value != MovieList.SORT_ALPHANUMERIC:
                 menu.append((_("Alphabetic sort"), boundFunction(self.sortBy, MovieList.SORT_ALPHANUMERIC)))
@@ -220,44 +243,40 @@ class MovieContextMenu(Screen):
                 menu.append((_("Hide folders in movielist"), boundFunction(self.showFolders, False)))
             else:
                 menu.append((_("Show folders in movielist"), boundFunction(self.showFolders, True)))
-        if config.AdvancedMovieSelection.showextras.value and config.usage.load_length_of_movies_in_moviellist.value and not config.AdvancedMovieSelection.showpercentinmovielist.value:
-            if config.AdvancedMovieSelection.showprogessbarinmovielist.value:
-                menu.append((_("Hide progressbar in movielist"), boundFunction(self.showProgressbar, False)))
-            else:
-                menu.append((_("Show progressbar in movielist"), boundFunction(self.showProgressbar, True)))
-        if config.AdvancedMovieSelection.showextras.value and config.usage.load_length_of_movies_in_moviellist.value and not config.AdvancedMovieSelection.showprogessbarinmovielist.value:
-            if config.AdvancedMovieSelection.showpercentinmovielist.value:
-                menu.append((_("Hide percent in movielist"), boundFunction(self.showPercent, False)))
-            else:
-                menu.append((_("Show percent in movielist"), boundFunction(self.showPercent, True)))
-        if config.AdvancedMovieSelection.showextras.value and config.AdvancedMovieSelection.showfoldersinmovielist.value and config.usage.load_length_of_movies_in_moviellist.value:
-            if config.AdvancedMovieSelection.showiconstatusinmovielist.value:
-                menu.append((_("Hide movie status icon in movielist"), boundFunction(self.showStatusIcon, False)))
-            else:
-                menu.append((_("Show movie status icon in movielist"), boundFunction(self.showStatusIcon, True)))
-        if config.AdvancedMovieSelection.showextras.value and config.usage.load_length_of_movies_in_moviellist.value:
-            if config.AdvancedMovieSelection.showcolorstatusinmovielist.value:
-                menu.append((_("Hide movie color status in movielist"), boundFunction(self.showStatusColor, False)))
-            else:
-                menu.append((_("Show movie color status in movielist"), boundFunction(self.showStatusColor, True)))
+            
+            if config.usage.load_length_of_movies_in_moviellist.value:
+                if not config.AdvancedMovieSelection.showpercentinmovielist.value:
+                    if config.AdvancedMovieSelection.showprogessbarinmovielist.value:
+                        menu.append((_("Hide progressbar in movielist"), boundFunction(self.showProgressbar, False)))
+                    else:
+                        menu.append((_("Show progressbar in movielist"), boundFunction(self.showProgressbar, True)))
+                if not config.AdvancedMovieSelection.showprogessbarinmovielist.value:
+                    if config.AdvancedMovieSelection.showpercentinmovielist.value:
+                        menu.append((_("Hide percent in movielist"), boundFunction(self.showPercent, False)))
+                    else:
+                        menu.append((_("Show percent in movielist"), boundFunction(self.showPercent, True)))
+                if config.AdvancedMovieSelection.showiconstatusinmovielist.value:
+                    menu.append((_("Hide movie status icon in movielist"), boundFunction(self.showStatusIcon, False)))
+                else:
+                    menu.append((_("Show movie status icon in movielist"), boundFunction(self.showStatusIcon, True)))
+                if config.AdvancedMovieSelection.showcolorstatusinmovielist.value:
+                    menu.append((_("Hide movie color status in movielist"), boundFunction(self.showStatusColor, False)))
+                else:
+                    menu.append((_("Show movie color status in movielist"), boundFunction(self.showStatusColor, True)))
         if config.AdvancedMovieSelection.showcolorkey.value:        
             menu.append((_("Color key settings"), self.setupbutton))     
-        if config.AdvancedMovieSelection.showcoveroptions.value and config.AdvancedMovieSelection.showcoveroptions2.value:
+        if config.AdvancedMovieSelection.showcoveroptions2.value:
             menu.append((_("Download and save movie info/cover for all movies"), boundFunction(self.downloadMovieInfoAll)))
-        if config.AdvancedMovieSelection.showcoveroptions.value:
-            if not service.flags & eServiceReference.mustDescent:
-                menu.append((_("Download and save movie info/cover"), self.downloadMovieInfo))              
+        if config.AdvancedMovieSelection.showcoveroptions.value and not self.service.flags & eServiceReference.mustDescent:
+            menu.append((_("Download and save movie info/cover"), self.downloadMovieInfo))              
         if config.AdvancedMovieSelection.show_update_genre.value:
             menu.append((_("Update all genre in meta from eit"), boundFunction(self.updateMetaFromEit)))
         if config.AdvancedMovieSelection.show_cover_del.value:
-            if not service.flags & eServiceReference.mustDescent:
-                menu.append((_("Delete cover"), boundFunction(self.deleteCover)))
+            menu.append((_("Delete cover"), boundFunction(self.deleteCover)))
         if config.AdvancedMovieSelection.show_info_del.value:
-            if not service.flags & eServiceReference.mustDescent:
-                menu.append((_("Delete movie info"), boundFunction(self.deleteInfos)))
+            menu.append((_("Delete movie info"), boundFunction(self.deleteInfos)))
         if config.AdvancedMovieSelection.show_info_cover_del.value:
-            if not service.flags & eServiceReference.mustDescent:
-                menu.append((_("Delete movie info and cover"), boundFunction(self.deleteInfoCover)))   
+            menu.append((_("Delete movie info and cover"), boundFunction(self.deleteInfoCover)))   
         if config.AdvancedMovieSelection.showmovietagsinmenu.value and not service.flags & eServiceReference.mustDescent:
             menu.append((_("Movie tags"), boundFunction(self.movietags)))
         if config.AdvancedMovieSelection.showfiltertags.value:
@@ -270,6 +289,8 @@ class MovieContextMenu(Screen):
             menu.append((_("Clientbox setup"), boundFunction(self.serversetup)))
         if config.AdvancedMovieSelection.show_backup_restore.value:
             menu.append((_("Backup/Restore"), boundFunction(self.openBackupRestore)))
+        if config.AdvancedMovieSelection.show_location_indexing.value:
+            menu.append((_("Select scan locations for movie database"), self.selectScanLocations))
         if config.AdvancedMovieSelection.showmenu.value:
             menu.append((_("Setup"), boundFunction(self.menusetup)))
         self["menu"] = MenuList(menu)
@@ -346,7 +367,7 @@ class MovieContextMenu(Screen):
     def closeafterfinish(self, retval=None):
         self.csel.updateDescription()
         self.csel.reloadList()
-        self.close()        
+        self.close()
 
     def downloadMovieInfoAll(self):
         if self.checkConnection() == False:
@@ -377,7 +398,7 @@ class MovieContextMenu(Screen):
 
     def movecopy(self):
         if not (self.service.flags & eServiceReference.mustDescent):
-            self.session.openWithCallback(self.closeafterfinish, MovieMove, self.csel, self.service)
+            self.session.openWithCallback(self.close, MovieMove, self.csel, self.service)
         else:
             self.session.open(MessageBox, _("Move/Copy not possible here!"), MessageBox.TYPE_INFO)
 
@@ -394,23 +415,19 @@ class MovieContextMenu(Screen):
         self.session.openWithCallback(self.searchCallback, AdvancedKeyBoard, _("Enter text to search for"))
         
     def searchCallback(self, retval):
-        searchString = retval
-        print searchString
-        if not searchString:
-            return self.csel.reloadList()
-    
-        movieList = self.csel["list"].list
+        search = retval
+        print search
+        if search == "" or search is None:
+            self.closeafterfinish()
+            return
         newList = []
-        for movie in movieList:
-            # we have no idea what this input could be, just add it back
-            if len(movie) < 2: newList.append(movie)
-            else:
-                if not (movie[0].flags & eServiceReference.mustDescent and not isinstance(movie[0], eServiceReferenceDvd)):
-                    name = movie[1].getName(movie[0])
-                    if searchString.lower() in name.lower(): # force case-insensitive for now
-                        newList.append(movie)
-        self.csel["list"].list = newList
+        for movie_tuple in self.csel["list"].list:
+            mi = movie_tuple[0]
+            if search.lower() in mi.name.lower():
+                newList.append(movie_tuple)
+
         self.csel["list"].l.setList(newList)
+        self.csel["list"].moveToIndex(0)
         self.closeafterfinish()
 
     def setMovieStatus(self, status):
@@ -426,7 +443,6 @@ class MovieContextMenu(Screen):
         self.close(False)
 
     def sortBy(self, newType):
-        config.movielist.moviesort.value = newType
         self.csel.setSortType(newType)
         self.csel.reloadList()
         self.close()
@@ -508,7 +524,14 @@ class MovieContextMenu(Screen):
 
     def execPlugin(self, plugin):
         if not (self.service.flags & eServiceReference.mustDescent):
-            plugin(session=self.session, service=self.service)
+            print "Starting plugin:", plugin.description
+            import inspect
+            params = inspect.getargspec(plugin.__call__)
+            print "Params:", params
+            if len(self.csel.list.multiSelection) > 0 and len(params[0]) >= 3:
+                plugin(self.session, self.service, self.csel.list.multiSelection)
+            else:
+                plugin(self.session, self.service)
 
     def delete(self):
         self.csel.delete()
@@ -546,7 +569,7 @@ class MovieContextMenu(Screen):
             self.csel["freeDiskSpace"].update()
             self.close()
         except:
-            pass
+            printStackTrace()
 
     def deleteCover(self):
         name = self.checkDeleteable()
@@ -603,7 +626,11 @@ class MovieContextMenu(Screen):
             self.close()
         except:
             pass
-
+    
+    def selectScanLocations(self):
+        self.csel.selectScanLocations()
+        self.close()        
+        
 class SelectionEventInfo:
     def __init__(self):
         self["Service"] = ServiceEvent()
@@ -613,24 +640,27 @@ class SelectionEventInfo:
         self.onShown.append(self.__selectionChanged)
 
     def __selectionChanged(self):
-        if self.execing and config.movielist.description.value == MovieList.SHOW_DESCRIPTION or config.AdvancedMovieSelection.showpreview.value or config.AdvancedMovieSelection.video_preview.value:
-            self.timer.start(100, True)
+        self.timer.start(300, True)
 
     def updateEventInfo(self):
-        evt = self["list"].getCurrentEvent()
-        serviceref = self.getCurrent()
-        if config.movielist.description.value == MovieList.SHOW_DESCRIPTION:
-            if evt:
-                self["Service"].newService(serviceref)
-            else:
-                self["Service"].newService(None)
-            self.updateName(serviceref, evt)
-        if config.AdvancedMovieSelection.showpreview.value:
-            self.loadPreview(serviceref)
-        if config.AdvancedMovieSelection.video_preview_autostart.value:
-            self.preparePlayMovie(serviceref, evt)
-        if not config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.video_preview.value:
-            self.loadPreview(serviceref)        
+        self.updateGUI()
+        if self.execing and config.movielist.description.value == MovieList.SHOW_DESCRIPTION or config.AdvancedMovieSelection.showpreview.value or config.AdvancedMovieSelection.video_preview.value:
+            evt = self["list"].getCurrentEvent()
+            serviceref = self.getCurrent()
+            if serviceref is not None and isinstance(self["list"].root, eServiceReferenceListAll):
+                self.updateTitle(os.path.dirname(serviceref.getPath()))
+            if config.movielist.description.value == MovieList.SHOW_DESCRIPTION:
+                if evt:
+                    self["Service"].newService(serviceref)
+                else:
+                    self["Service"].newService(None)
+                self.updateName(serviceref, evt)
+            if config.AdvancedMovieSelection.showpreview.value:
+                self.loadPreview(serviceref)
+            if config.AdvancedMovieSelection.video_preview_autostart.value:
+                self.preparePlayMovie(serviceref, evt)
+            if not config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.video_preview.value:
+                self.loadPreview(serviceref)        
         
 class AdvancedMovieSelection_summary(Screen):
     def __init__(self, session, parent):
@@ -643,16 +673,19 @@ class AdvancedMovieSelection_summary(Screen):
         self["ShortDesc"].setText(desc)
 
     def showSeperator(self):
-        try:
-            self["Seperator"].setText(resolveFilename(SCOPE_ACTIVE_SKIN, "images/sep_lcd_oled.png"))
-        except:
-            self["Seperator"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/images/sep_lcd_oled.png"))
+        if TFT_8000_Present:
+            self["Seperator"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "images/sep_tft.png"))
+        else:
+            self["Seperator"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "images/sep_lcd_oled.png"))
     
     def hideSeperator(self):
         self["Seperator"].setText("")    
 
-class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, QuickButton, VideoPreview):
+class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, QuickButton, VideoPreview, MovieSearch):
+    DB_UPDATE_INTERVAL = 250
     def __init__(self, session, selectedmovie=None, showLastDir=False):
+        print "enter movieselection"
+        self.stopwatch = StopWatch()
         Screen.__init__(self, session)
         HelpableScreen.__init__(self)
         MoviePreview.__init__(self, session)
@@ -675,6 +708,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         if not config.AdvancedMovieSelection.showpreview.value and config.AdvancedMovieSelection.video_preview.value and config.AdvancedMovieSelection.video_preview_fullscreen.value and config.movielist.description.value == MovieList.HIDE_DESCRIPTION:
             self.skinName.insert(0, SkinTools.appendResolution("AdvancedMovieSelection_Preview_noDescription_noCover_"))
         self.tags = [ ]
+        self.showLastDir = showLastDir
+        if not config.AdvancedMovieSelection.startonfirst.value and not selectedmovie:
+            selectedmovie = Current.selection
         if selectedmovie:
             self.selected_tags = config.movielist.last_selected_tags.value
         else:
@@ -694,20 +730,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         if not config.AdvancedMovieSelection.askdelete.value and config.AdvancedMovieSelection.showinfo.value:
             self["warning"].setText(_("ATTENTION: Ask before delete is disabled!"))
             
-        Network.updateAutoNetwork()
-        if not Network.isMountOnline(config.movielist.last_videodir.value):
-            config.movielist.last_videodir.value = "/media/"
-
-        if not config.AdvancedMovieSelection.startdir.value and not showLastDir:
-            if path.exists(config.movielist.last_videodir.value):
-                config.movielist.last_videodir.value = defaultMoviePath()
-                config.movielist.last_videodir.save()
-        if not path.exists(config.movielist.last_videodir.value):
-            config.movielist.last_videodir.value = "/media/"
-            config.movielist.last_videodir.save()
-
-        self.current_ref = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + config.movielist.last_videodir.value)            
-
         self["list"] = MovieList(None,
             config.movielist.listtype.value,
             config.movielist.moviesort.value,
@@ -727,7 +749,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         self["MovieService"] = ServiceEvent()
         self["MovieSize"] = ServiceEvent()
         self["Movietitle"] = StaticText()
-        self["Movielocation"] = StaticText()
+        # TODO: ???self["Movielocation"] = StaticText()
         self["freeDiskSpace"] = self.diskinfo = DiskInfo(config.movielist.last_videodir.value, DiskInfo.FREE, update=False)
         self["InfobarActions"] = HelpableActionMap(self, "InfobarActions",
             {
@@ -752,23 +774,23 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         
         self["ChannelSelectBaseActions"] = HelpableActionMap(self, "ChannelSelectBaseActions",
             {
-                "nextMarker": (self.nextBouquet, _("Video preview jump forward")),
-                "prevMarker": (self.prevBouquet, _("Video preview jump backward")),
+                "nextMarker": (self.nextMarker, _("Jump to next marker")),
+                "prevMarker": (self.prevMarker, _("Jump to previous marker")),
             })
         self["MediaPlayerActions"] = HelpableActionMap(self, "MediaPlayerActions",
             {
                 "stop": (self.stopButton, _("Start/Stop video preview")),
             })
-        self["NumberActions"] = HelpableActionMap(self, "NumberActions",
-            {
-                "0": (self.stopButton, _("Start/Stop video preview")),
-            })
         
         QuickButton.__init__(self)
-        self.onShown.append(self.go)
+        self.onShow.append(self.go)
         self.onLayoutFinish.append(self.saveListsize)
         self.inited = False
-
+        MovieSearch.__init__(self)
+        self.__dbUpdate = eTimer()
+        self.__dbUpdate.callback.append(self.databaseUpdateTimerEvent)
+        print "end constructor", str(self.stopwatch.elapsed)
+    
     def createSummary(self):
         return AdvancedMovieSelection_summary
         
@@ -799,10 +821,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
 
     def delete(self):
         self.service = self.getCurrent()
-        if self.service.flags & eServiceReference.mustDescent and not isinstance(self.service, eServiceReferenceDvd):
-            if config.AdvancedMovieSelection.showinfo.value:
-                self.session.open(MessageBox, _("This cannot deleted, please select a movie for!"), MessageBox.TYPE_INFO)
-                return
+        if self.service.flags & eServiceReference.mustDescent:
+            self.session.open(MessageBox, _("This cannot deleted, please select a movie for!"), MessageBox.TYPE_INFO)
+            return
 
         if len(self.list.multiSelection) > 0:
             self.to_delete = self.list.multiSelection[:]
@@ -863,6 +884,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         if not confirmed:
             return
 
+        # remove from scanner
+        movieScanner.removeMovie(self.to_delete)
+        self.list.updateDatabaseEntry()
         if config.AdvancedMovieSelection.use_wastebasket.value:
             self.deleteTrashConfirmed(confirmed)
             return
@@ -877,8 +901,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         self.list.updateCurrentSelection()
 
     def updateName(self, serviceref, event):
-        location = (_("Movie location: %s") % config.movielist.last_videodir.value)
-        self["Movielocation"].setText(location)
+        # TODO: ???location = (_("Movie location: %s") % config.movielist.last_videodir.value)
+        # TODO: ???self["Movielocation"].setText(location)
         if event:
             moviename = event.getEventName()
             self["Movietitle"].setText(moviename)
@@ -929,6 +953,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
 
     def prevBouquet(self):
         self.jumpBackward()
+
+    def nextMarker(self):
+        self["list"].moveToNextMarker()
+
+    def prevMarker(self):
+        self["list"].moveToPrevMarker()
 
     def stopButton(self):
         self.togglePreviewStatus(self.getCurrent())
@@ -1025,22 +1055,53 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
     def moveDown(self):
         self.list.moveDown()
 
+    def updateList(self, job):
+        if os.path.normpath(self.current_ref.getPath()) != job.getDestinationPath():
+            return 
+        self["waitingtext"].visible = True
+        self.inited = False
+        self.selectedmovie = self.getCurrent()
+        self.go()
+
+    def getCurrentPath(self):
+        return self.current_ref.getPath()
+
     def go(self):
         if not self.inited:
-        # ouch. this should redraw our "Please wait..."-text.
-        # this is of course not the right way to do this.
-            self.delayTimer.start(10, 1)
+            print "on first show", str(self.stopwatch.elapsed)
+            self.delayTimer.start(10, True)
             self.inited = True
 
     def saveListsize(self):
         listsize = self["list"].instance.size()
         self.listWidth = listsize.width()
         self.listHeight = listsize.height()
-        self.updateDescription()
 
     def updateHDDData(self):
+        print "updateHDDData", str(self.stopwatch.elapsed)
+        autoNetwork.updateAutoNetwork()
+        if not autoNetwork.isMountOnline(config.movielist.last_videodir.value):
+            config.movielist.last_videodir.value = "/media/"
+
+        if not config.AdvancedMovieSelection.startdir.value and not self.showLastDir:
+            if path.exists(config.movielist.last_videodir.value):
+                config.movielist.last_videodir.value = defaultMoviePath()
+        if not path.exists(config.movielist.last_videodir.value):
+            config.movielist.last_videodir.value = "/media/"
+
+        if not config.AdvancedMovieSelection.db_show.value or not config.AdvancedMovieSelection.startdir.value:
+            self.current_ref = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + config.movielist.last_videodir.value)
+        else:            
+            self.current_ref = eServiceReferenceListAll(config.movielist.last_videodir.value)
+        self["list"].onFirstStart()
+        self.updateFolderSortType()
         self.reloadList(self.selectedmovie)
+        self.updateDescription()
+        if movieScanner.isWorking:
+            self.__dbUpdate.start(self.DB_UPDATE_INTERVAL, False)
+        self.stopwatch.stop()
         self["waitingtext"].visible = False
+        print "movielist started in", str(self.stopwatch.elapsed)
 
     def moveTo(self):
         self["list"].moveTo(self.selectedmovie)
@@ -1053,6 +1114,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         current = self.getCurrent()
         if current is not None:
             cut_list = self["list"].setMovieStatus(current, status)
+            if isinstance(cut_list, str):
+                self.session.open(MessageBox, _("Error") + "\n" + cut_list, MessageBox.TYPE_ERROR)
+                return
             if cut_list:
                 self.setNewCutList(cut_list)
 
@@ -1063,20 +1127,13 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
                 self.gotFilename(current.getPath())
             else:
                 self.saveconfig()
-                from MoviePlayer import PlayerInstance
-                if isinstance(current, eServiceReferenceDvd):
-                    from MoviePlayer import movieSelected
-                    movieSelected(self, current)
-                    current = None
-                elif PlayerInstance is not None:
-                    PlayerInstance.playerClosed(current)
                 self.close(current)
 
     def doContext(self, retval=None):
         current = self.getCurrent()
         if not current:
             # create dummy service
-            current = eServiceReferenceBackDir(eServiceReference.idFile, eServiceReference.flagDirectory, "..")
+            current = eServiceReferenceBackDir("..")
         if current is not None:
             if not config.usage.load_length_of_movies_in_moviellist.value:
                 self.session.open(MovieContextMenu, self, current)
@@ -1088,6 +1145,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
             self.session.openWithCallback(self.abort, MessageBox, _("Load Length of Movies in Movielist has been disabled.\nClose and reopen Movielist is required to apply the setting."), MessageBox.TYPE_INFO)
 
     def abort(self, retval=None):
+        if self.clearSearch():
+            return
         self.saveconfig()
         self.close(None)
 
@@ -1100,7 +1159,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         config.movielist.showtime.save()
         config.movielist.showservice.save()
         config.movielist.showtags.save()
+        config.movielist.last_videodir.save()
         config.AdvancedMovieSelection.show_bookmarks.save()
+        config.AdvancedMovieSelection.db_show.save()
+        config.AdvancedMovieSelection.db_sort.save()        
 
     def showTrailer(self):
         if pluginPresent.YTTrailer == True:
@@ -1114,7 +1176,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
             pass
 
     def getTagDescription(self, tag):
-        from AccessRestriction import accessRestriction
+        from Source.AccessRestriction import accessRestriction
         if tag.startswith("VSR"):
             vsr = _("VSR") + "-%d" % (accessRestriction.decodeAccess(tag))
             return vsr, tag
@@ -1159,8 +1221,31 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
     def setDescriptionState(self, val):
         self["list"].setDescriptionState(val)
 
+    def writeSortType(self, sort_type):
+        if isinstance(self.current_ref, eServiceReferenceListAll):
+            config.AdvancedMovieSelection.db_sort.value = sort_type
+        else:
+            movieScanner.database.setSortType(config.movielist.last_videodir.value, sort_type)
+            di = DirectoryInfo(config.movielist.last_videodir.value)
+            di.sort_type = sort_type
+            di.write()
+
+    def updateFolderSortType(self):
+        sort_type = config.AdvancedMovieSelection.db_sort.value
+        if not isinstance(self.current_ref, eServiceReferenceListAll):
+            di = DirectoryInfo(config.movielist.last_videodir.value)
+            sort_type = di.sort_type
+        if sort_type != -1:
+            print "[AdvancedMovieSelection] Set new sort type:", str(sort_type)
+            config.movielist.moviesort.value = sort_type
+            self["list"].setSortType(sort_type)
+            self.updateSortButtonText()
+
     def setSortType(self, type):
+        config.movielist.moviesort.value = type
+        self.writeSortType(type)
         self["list"].setSortType(type)
+        self.updateSortButtonText()
 
     def showFolders(self, val):
         self["list"].showFolders(val)
@@ -1189,22 +1274,46 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
     def showTags(self, value):
         self["list"].showTags(value)
 
+    def updateTitle(self, current_path):
+        if current_path and current_path[-1] != '/':
+            current_path += '/' 
+        #if config.usage.setup_level.index >= 2: # expert+
+        title = getSortDescription()
+        if self.list.getAccess() < 18:
+            title += " [%s-%d]"%(_("VSR"), self.list.getAccess())
+        title += " | "
+        if not isinstance(self.current_ref, eServiceReferenceListAll):
+            title += _("Movie location:") + " "
+        else:
+            title += _("Database") + ": "
+        title += current_path
+        
+        extra_info = []
+        if self.selected_tags is not None:
+            extra_info.append(self["list"].arrangeTags(" ".join(self.selected_tags)))
+        if self.list.filter_description is not None:
+            extra_info.append(self.list.filter_description)
+        
+        if len(extra_info) > 0:
+            #title += " - " + ','.join(self.selected_tags)
+            title += " (" + ", ".join(extra_info) + ")"
+        if not movieScanner.isWorking:
+            self.setTitle(title)
+        else:
+            self.setTitle(title + " " + _("[Database update in progress]"))
+
+    @clockit
     def reloadList(self, sel=None, home=False):
         if not fileExists(config.movielist.last_videodir.value):
             path = defaultMoviePath()
             config.movielist.last_videodir.value = path
-            config.movielist.last_videodir.save()
             self.current_ref = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + path)
             self["freeDiskSpace"].path = path
         if sel is None:
             sel = self.getCurrent()
+            movieScanner.updateServiceInfo(sel)
         self["list"].reload(self.current_ref, self.selected_tags)
-        title = _("Movie location:")
-        #if config.usage.setup_level.index >= 2: # expert+
-        title += "  " + config.movielist.last_videodir.value
-        if self.selected_tags is not None:
-            title += " - " + ','.join(self.selected_tags)
-        self.setTitle(title)
+        self.updateTitle(config.movielist.last_videodir.value)
         if not (sel and self["list"].moveTo(sel)):
             if home:
                 self["list"].moveToIndex(0)
@@ -1220,7 +1329,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         )
 
     def gotFilename(self, res):
-        if res is not None and res is not config.movielist.last_videodir.value:
+        if res is not None:# and res is not config.movielist.last_videodir.value:
             if fileExists(res):           
                 selection = None
                 current = self.getCurrent()
@@ -1228,11 +1337,18 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
                     if current.flags & eServiceReference.mustDescent:                
                         if current.getName() == "..":
                             selection = eServiceReference("2:47:1:0:0:0:0:0:0:0:" + self["list"].root.getPath())
-                            
+                if isinstance(current, eServiceReferenceListAll):
+                    self.current_ref = current
+                    config.AdvancedMovieSelection.db_show.value = True
+                else:
+                    config.AdvancedMovieSelection.db_show.value = False
+                    if isinstance(self.current_ref, eServiceReferenceListAll):
+                        selection = self.current_ref
+                    self.current_ref = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + res)
                 config.movielist.last_videodir.value = res
-                config.movielist.last_videodir.save()
-                self.current_ref = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + res)
                 self["freeDiskSpace"].path = res
+                self.updateFolderSortType()
+                self.updateDBButtonText()
                 self.reloadList(sel=selection, home=True)
             else:
                 self.session.open(
@@ -1294,6 +1410,26 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
     def movietags(self):
         service = self.getCurrent()
         self.session.openWithCallback(self.reloadList, MovieTagEditor, service, parent=self.session.current_dialog)
+
+    def selectScanLocations(self):
+        self.session.openWithCallback(self.rescan, ScanLocationBox, _("Please select the movie path(s) for database..."), config.movielist.last_videodir.value)
+        
+    def rescan(self, retval):
+        if retval:
+            self.__dbUpdate.start(self.DB_UPDATE_INTERVAL, False)
+            movieScanner.reloadMoviesAsync()
+
+    def databaseUpdateTimerEvent(self):
+        print "databaseUpdateTimerEvent"
+        if not movieScanner.isWorking:
+            print "update movie list"
+            self.reloadList()
+            if not movieScanner.isWorking:
+                self.__dbUpdate.stop()
+        else:
+            self.updateTitle("")
+            self.list.updateDatabaseEntry()
+            
         
 class MoviebarPositionSetupText(Screen):
     def __init__(self, session):

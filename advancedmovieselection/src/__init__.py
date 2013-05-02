@@ -1,3 +1,6 @@
+#from Source.LocaleInit import _
+
+# Andy Blackburn: [Translation] begin
 # -*- coding: utf-8 -*-
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
@@ -20,3 +23,4 @@ def _(txt):
 		return gettext.gettext(txt)
 
 language.addCallback(localeInit())
+# Andy Blackburn: [Translation] end
