@@ -4,20 +4,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - fancontrol2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-04 15:30+0100\n"
+"POT-Creation-Date: 2013-05-01 00:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
-"Language: \n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: ITALY\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .../enigma2-plugins/fancontrol2\n"
-"X-Poedit-SearchPath-0: .../enigma2-plugins/fancontrol2\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/"
+"fancontrol2\n"
 
 #: .../enigma2-plugins/fancontrol2/src/FC2webSite.py:48
 msgid "Temperature"
@@ -99,35 +99,35 @@ msgstr "Percorso log: %s"
 msgid "Auto-Delete older %s Days"
 msgstr "Rimuovere autom. dati più vecchi di %s (giorni)"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:34
+#: .../enigma2-plugins/fancontrol2/src/globals.py:35
 msgid "below Tunerslot 4"
 msgstr "Sotto il tuner 4"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:35
+#: .../enigma2-plugins/fancontrol2/src/globals.py:36
 msgid "near XILINX Spartan"
 msgstr "Vicino XILINX Spartan"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:36
+#: .../enigma2-plugins/fancontrol2/src/globals.py:37
 msgid "under the WLAN"
 msgstr "Sotto la WLAN"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:37
+#: .../enigma2-plugins/fancontrol2/src/globals.py:38
 msgid "left of the Battery"
 msgstr "A sx della batteria"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:38
+#: .../enigma2-plugins/fancontrol2/src/globals.py:39
 msgid "left near Front-CI"
 msgstr "A sx della CI frontale"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:39
+#: .../enigma2-plugins/fancontrol2/src/globals.py:40
 msgid "left near Card-Slot"
 msgstr "A sx dello slot card"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:40
+#: .../enigma2-plugins/fancontrol2/src/globals.py:41
 msgid "over Security Card"
 msgstr "Sopra la security card"
 
-#: .../enigma2-plugins/fancontrol2/src/globals.py:41
+#: .../enigma2-plugins/fancontrol2/src/globals.py:42
 msgid "under the Fan"
 msgstr "Sotto la ventola"
 
@@ -190,137 +190,137 @@ msgstr "Automaticamente"
 msgid "never"
 msgstr "Mai"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:324
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:320
 msgid "please wait (until 3min)..."
 msgstr "Attendere... (occorreranno almeno 3 minuti)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:362
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:358
 #, python-format
 msgid "Min Fan Start %d rpm at PWM=%d"
 msgstr "Avvio minimo %d rpm a PWM=%d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:368
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:364
 #, python-format
 msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
 msgstr "Stop minimo %d rpm a PWM=%d (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:374
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:370
 #, python-format
 msgid "Max Fan %d rpm at PWM=255 (%s)"
 msgstr "Vel. max %d rpm a PWM=255 (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:376
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:372
 msgid "Extended Control Range"
 msgstr "Controllo esteso"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:386
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:382
 #, python-format
 msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
 msgstr "Avvio minimo %d rpm a VLT=%d e PWM=0"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:389
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:385
 #, python-format
 msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
 msgstr "Stop minimo %d rpm a VLT=%d e PWM=0 (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:396
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:392
 #, python-format
 msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
 msgstr "Vel. max %d rpm a PWM=255 e VLT=255 (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:404
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:400
 #, python-format
 msgid "Min Fan Start %d rpm at VLT=%d"
 msgstr "Avvio minimo %d rpm a VLT=%d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:407
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:403
 #, python-format
 msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
 msgstr "Stop minimo %d rpm a VLT=%d (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:412
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:408
 #, python-format
 msgid "Max Fan %d rpm at VLT=255 (%s)"
 msgstr "Vel max %d rpm a VLT=255 (%s)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:415
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:411
 msgid "please set fan type (3Pin or 4Pin)"
 msgstr "Specificare il modello di ventola (3pin o 4pin)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:487
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:483
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:485
 #: .../enigma2-plugins/fancontrol2/src/plugin.py:489
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:493
 #, python-format
 msgid "%s   %02d C"
 msgstr "%s   %02d C"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:495
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:491
 msgid "press Info for HDD-Temp"
 msgstr "Info -> Temp. HDD"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:496
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:749
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:492
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:745
 #, python-format
 msgid "Current rpm  %4d"
 msgstr "RPM attuali: %4d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:528
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:524
 msgid "Action in case of Fan failure"
 msgstr "In caso di avaria della ventola:"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:529
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:525
 msgid "Box shutdown at Temperature (C)"
 msgstr "Spegnere il box a temperatura di (C)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:530
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:526
 msgid "increases overheating protection to (C)"
 msgstr "Aumentare la protezione da surriscaldamento di (C)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:531
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:527
 msgid "read HDD-Temperature in HDD-Standby-Mode"
 msgstr "Rilevare la temperatura del disco in standby"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:532
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:528
 msgid "disable DMM-FanControl"
 msgstr "Disabilitare DMM-FanControl"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:533
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:529
 msgid "Show Fan Speed as"
 msgstr "Mostrare velocità ventola come"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:534
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:530
 msgid "Show Plugin in Extension-Menu"
 msgstr "Mostrare il plugin nel menu estensioni"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:535
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:531
 msgid "Show Monitor in Extension-Menu"
 msgstr "Mostrare Monitor nel menu estensioni"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:536
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:532
 msgid "Number of WebIF-Log-Entries"
 msgstr "Numero di voci nel log"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:537
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:533
 msgid "Logging path"
 msgstr "Percorso log"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:538
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:534
 msgid "Enable Data Logging"
 msgstr "Abilitare log dati"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:539
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:535
 msgid "Auto-Delete Data older than (Days)"
 msgstr "Rimuovere automaticamente dati se più vecchi di (giorni)"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:540
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:536
 msgid "Enable Event Logging"
 msgstr "Abilitare log eventi"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:555
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:551
 msgid "Choose path"
 msgstr "Scegliere il percorso"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:589
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:585
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
@@ -328,110 +328,109 @@ msgstr ""
 "L'attivazione delle modifiche richiede\n"
 "il riavvio di enigma2. Riavviare ora?"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:590
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:586
 msgid "Restart GUI now?"
 msgstr "Riavviare la GUI?"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:659
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:655
 msgid "Fan type"
 msgstr "Tipo ventola"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:660
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:656
 msgid "Fan off in Idle Mode"
-msgstr "Ventola off in Idle Mode"
+msgstr "Ventola off in modalità idle"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:661
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:657
 msgid "min Speed rpm"
 msgstr "Velocità min rpm"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:662
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:658
 msgid "max Speed rpm"
 msgstr "Velocità max rpm"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:663
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:659
 msgid "Static temp C"
 msgstr "Temp. \"di riposo\" C"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:664
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:660
 msgid "End temperature C"
 msgstr "Temp. massima C"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:665
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:661
 msgid "Initial Voltage"
 msgstr "Voltaggio iniziale"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:666
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:662
 msgid "Initial PWM"
 msgstr "PWM iniziale"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:671
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:667
 msgid "Cancel"
 msgstr "Annull."
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:672
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:668
 msgid "Save"
 msgstr "Salvare"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:673
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:669
 msgid "Check"
 msgstr "Verif."
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:674
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:670
 msgid "Help"
 msgstr "Aiuto"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:714
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:710
 #, python-format
 msgid "Current value: %s"
 msgstr "Valore attuale: %s"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:747
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:743
 #, python-format
 msgid "Temperature C  %4.1f"
 msgstr "Temperatura C %4.1f"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:748
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:744
 #, python-format
 msgid "Target rpm  %4d"
 msgstr "Obiettivo rpm: %4d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:750
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:746
 #, python-format
 msgid "Voltage  %03d"
 msgstr "Voltaggio %03d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:751
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:747
 #, python-format
 msgid "PWM  %03d"
 msgstr "PWM %03d"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:764
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:760
 #, python-format
 msgid "PID Ctl Err %03.2f %%"
 msgstr "PID Ctl Err %03.2f %%"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:786
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:782
 msgid "Information"
 msgstr "Informazioni"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:786
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:782
 msgid "readme.txt"
 msgstr "readmeit.txt"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:969
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:966
 msgid "FanControl2 emergency, Box Shutdown now?"
 msgstr "FanControl2 in emergenza: spegnere il box?"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:1155
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:1152
 #, python-format
 msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
 msgstr "RPM attuale:%d obiettivo RPM:%d Temp:%4.1f"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:1162
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:1159
 msgid "Fan is not working!"
 msgstr "La ventola non funziona!"
 
-#: .../enigma2-plugins/fancontrol2/src/plugin.py:1240
+#: .../enigma2-plugins/fancontrol2/src/plugin.py:1246
 msgid "Box has no fancontrol hardware -> FC2 deactivated"
 msgstr "Controllo hardware ventola non disponibile >> FC2 disasttivato"
-
