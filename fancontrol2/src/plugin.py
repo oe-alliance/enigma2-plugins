@@ -1122,7 +1122,12 @@ class FanControl2(Screen):
 				AktRPMtmp = GetFanRPM()
 				if RPMread>0 and RPMread<3:
 					FClog("Reread")
-					self.timer.start(400, True)
+					if FC2doThread == True:
+						if Briefkasten.qsize()<=2:
+							time.sleep(0.4)
+							Briefkasten.put(1) 
+					else:
+						self.timer.start(400, True)
 					return
 				RPMread = 0
 				if AktRPMtmp > 6000:
