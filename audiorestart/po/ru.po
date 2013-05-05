@@ -1,0 +1,57 @@
+# Russian translations for enigma2-plugins package.
+# Copyright (C) 2013 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-03 21:51+0100\n"
+"PO-Revision-Date: 2013-05-05 13:48+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: RU locale by Sowa\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.5\n"
+
+msgid " "
+msgstr ""
+
+msgid "Audio restart Setup"
+msgstr "Настройки Рестарт аудио"
+
+msgid "Cancel"
+msgstr "Отменить"
+
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr "Плагин: %(plugin)s , версия: %(version)s"
+
+msgid "Restart audio"
+msgstr "Рестарт аудио"
+
+msgid "Restart audio delay (in sec)"
+msgstr "Задержка перезагрузки аудио (сек)"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Setup for the AudioRestart Plugin"
+msgstr "Настройки плагина Рестарт аудио"
+
+msgid "after restart"
+msgstr "после перезагрузки"
+
+msgid "after restart/standby"
+msgstr "после перезагрузки/ожидания"
+
+msgid "after standby"
+msgstr "после ожидания"
+
+msgid "disabled"
+msgstr "отключен"
+

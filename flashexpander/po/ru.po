@@ -1,0 +1,85 @@
+# Russian translations for enigma2-plugins package.
+# Copyright (C) 2013 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-03 21:51+0100\n"
+"PO-Revision-Date: 2013-05-05 13:49+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: RU locale by Sowa\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#, python-format
+msgid "... is used, %dMB free"
+msgstr "... занято, %dМБ свободно"
+
+#, python-format
+msgid ""
+"Are you sure want to create FlashExpander on\n"
+"%s\n"
+"Partition %d"
+msgstr ""
+"Вы уверены, что хотите создать FlashExpander на\n"
+"%s\n"
+"Раздел %d"
+
+#, python-format
+msgid ""
+"Are you sure want to create FlashExpander on \n"
+"Server: %s\n"
+"Path: %s"
+msgstr ""
+"Вы уверены, что хотите создать FlashExpander на \n"
+"Сервер: %s\n"
+"Путь: %s"
+
+msgid "Do you want to reboot your STB_BOX?"
+msgstr "Вы хотите перезагрузить STB_BOX?"
+
+msgid "FlashExpander"
+msgstr "FlashExpander"
+
+msgid "FlashExpander is not installed, create? Press Key OK."
+msgstr "FlashExpander ещё не создан, создать? Нажмите кнопку ОК."
+
+#, python-format
+msgid "Mount failed (%s)"
+msgstr "Монтирование не удалось (%s)"
+
+msgid "No HDD-, SSD- or USB-Device found. Please first initialized."
+msgstr "Не найдено HDD, SSD или USB-устройств. Пожалуйста, сначала проинициализруйте."
+
+msgid "Please wait, Flash memory will be copied."
+msgstr "Пожалуйста, подождите, идет копирование флэш-памяти ."
+
+msgid "Too little free space < 180MB or wrong Filesystem!"
+msgstr "Слишком мало свободного места < 180МБ или не подходящая файловая систеа!"
+
+msgid "choose device to FlashExpander"
+msgstr "выбор устройства для FlashExpander"
+
+#, python-format
+msgid "error adding fstab entry for: %s"
+msgstr "ошибка при добавлении записи в fstab для: %s"
+
+msgid "error copy flash memory"
+msgstr "ошибка при копировании флэш-памяти"
+
+msgid "extend your flash memory"
+msgstr "расширяет флэш-память"
+
+msgid "read UUID"
+msgstr "читать UUID"
+
+msgid "unknown"
+msgstr "неизвестно"
+
