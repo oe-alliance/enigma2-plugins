@@ -11,7 +11,12 @@ from ServiceReference import ServiceReference
 from Tools.FuzzyDate import FuzzyTime
 from time import localtime, time, strftime, mktime
 
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, SCOPE_SKIN_IMAGE
+from Tools.Directories import resolveFilename, SCOPE_SKIN_IMAGE
+try:
+	from Tools.Directories import SCOPE_ACTIVE_SKIN
+except:
+	from Tools.Directories import SCOPE_CURRENT_SKIN
+	
 from skin import parseColor, parseFont
 
 class AutoTimerList(MenuList):
@@ -49,6 +54,7 @@ class AutoTimerList(MenuList):
 			channel.append(ServiceReference(t).getServiceName())
 		if len(channel) >0 :
 			channel = ", ".join(channel)
+		height = self.l.getItemSize().height()
 		width = self.l.getItemSize().width()
 		res = [ None ]
 		x = (2*width) // 3
@@ -72,6 +78,11 @@ class AutoTimerList(MenuList):
 		if icon:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 2, 24, 25, icon))
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 28, 5, 24, 25, rectypeicon))
+		try:
+			devide = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png"))
+		except:
+			devide = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"))
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, height-2, width, 2, devide))
 		return res
 
 	def getCurrent(self):
