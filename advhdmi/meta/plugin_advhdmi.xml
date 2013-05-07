@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>joe128</author>
+                    <name>AdvancedHDMICec</name>
+                    <packagename>enigma2-plugin-systemplugins-advhdmi</packagename>
+                    <shortdescription>Configure when HDMI-Cec is enabled</shortdescription>
+                    <description>Several setting options when HDMI-Cec is active</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-advhdmi" />
+	  </files>
+</default>

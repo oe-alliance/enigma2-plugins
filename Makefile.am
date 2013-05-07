@@ -2,6 +2,7 @@ ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS = \
 	3dsettings \
+	advhdmi \
 	aihdcontroler \
 	antiscrollbar \
 	aspectratioswitch \

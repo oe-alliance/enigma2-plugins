@@ -1,0 +1,175 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AdvancedHDMICec 1.0\n"
+"POT-Creation-Date: 2013-04-24 02:35+Westeuropäische Sommerzeit\n"
+"PO-Revision-Date: 2013-04-24 03:09+0100\n"
+"Last-Translator: Joe128 <johnny.u@gmx.at>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\"
+"\\AdvHdmi\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: plugin.py:41 plugin.py:50
+msgid "Monday"
+msgstr "Montag"
+
+#: plugin.py:42 plugin.py:51
+msgid "Tuesday"
+msgstr "Dienstag"
+
+#: plugin.py:43 plugin.py:52
+msgid "Wednesday"
+msgstr "Mittwoch"
+
+#: plugin.py:44 plugin.py:53
+msgid "Thursday"
+msgstr "Donnerstag"
+
+#: plugin.py:45 plugin.py:54
+msgid "Friday"
+msgstr "Freitag"
+
+#: plugin.py:46 plugin.py:55
+msgid "Saturday"
+msgstr "Samstag"
+
+#: plugin.py:47 plugin.py:56
+msgid "Sunday"
+msgstr "Sonntag"
+
+#: plugin.py:64
+msgid "systemmenue"
+msgstr "Systemmenü"
+
+#: plugin.py:65
+msgid "pluginmenue"
+msgstr "Pluginmenü"
+
+#: plugin.py:66
+msgid "extensions"
+msgstr "Erweiterungsmenü"
+
+#: plugin.py:83
+msgid "Advanced HDMI-Cec Setup"
+msgstr "Erweiterte HDMI-Cec Einstellungen"
+
+#: plugin.py:89
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: plugin.py:90
+msgid "Save"
+msgstr "Speichern"
+
+#: plugin.py:123
+msgid ""
+"Partially disabel HDMI-Cec?\n"
+"It can be prevented only the signals that are sent from the Dreambox. "
+"Signals received by the Dreambox will not be prevented."
+msgstr ""
+"Soll HDMI-Cec teilweise abgedreht werden?\n"
+"Es werden nur die Signale die von der Dreambox gesendet werden unterbunden. "
+"Signale die die Dreambox erhält werden nicht unterbunden."
+
+#: plugin.py:123
+msgid "partially disabel HdmiCec"
+msgstr "HdmiCec teilweise deaktivieren"
+
+#: plugin.py:125
+msgid "Should HDMI-Cec be disabled when GUI service startup?"
+msgstr ""
+"Soll HDMI-Cec deaktiviert werden, wenn die Befehle vom Webinterface gesendet "
+"werden?"
+
+#: plugin.py:125
+msgid "disable at GUI-start"
+msgstr "deaktivieren bei GUI-Start"
+
+#: plugin.py:126
+msgid ""
+"Should HDMI-Cec be disabled when the commands are sent from the web "
+"interface?"
+msgstr ""
+"Soll HDMI-Cec deaktiviert werden, wenn die Befehle vom Webinterface gesendet "
+"werden?"
+
+#: plugin.py:126
+msgid "disable from webinterface"
+msgstr "deaktivieren von Webinterface"
+
+#: plugin.py:127
+msgid "Should HDMI-Cec be disabled at certain times?"
+msgstr "Soll HDMI-Cec zu gewissen Zeiten deaktiviert werden?"
+
+#: plugin.py:127
+msgid "disable chronologically"
+msgstr "zeitlich deaktivieren"
+
+#: plugin.py:129
+msgid "From which day of the week, HDMI-Cec should be disabled?"
+msgstr "Von welchem Wochentag an, soll HDMI-Cec deaktiviert werden?"
+
+#: plugin.py:129
+msgid "from weekday"
+msgstr "von Wochentag"
+
+#: plugin.py:130
+msgid "To what day of the week, HDMI-Cec should be disabled?"
+msgstr "Bis zu welchem Wochentag, soll HDMI-Cec deaktiviert werden?"
+
+#: plugin.py:130
+msgid "to weekday"
+msgstr "bis Wochentag"
+
+#: plugin.py:131
+msgid "At which time, HDMI-Cec should be disabled?"
+msgstr "Ab welcher Uhrzeit, soll HDMI-Cec deaktiviert werden?"
+
+#: plugin.py:131 plugin.py:135
+msgid "from (HH:MI)"
+msgstr "von (HH:MI)"
+
+#: plugin.py:132
+msgid "Until the time at which, HDMI-Cec should be disabled?"
+msgstr "Bis zu welcher Uhrzeit, soll HDMI-Cec deaktiviert werden?"
+
+#: plugin.py:132 plugin.py:136
+msgid "to (HH:MI)"
+msgstr "bis (HH:MI)"
+
+#: plugin.py:133
+msgid "Do you want a further period of time to be used?"
+msgstr "Soll eine weitere Zeitspanne benutzt werden?"
+
+#: plugin.py:133
+msgid "use second timespan"
+msgstr "Zweite Zeitspanne benutzen"
+
+#: plugin.py:135
+msgid "Second timespan from"
+msgstr "Zweite Zeitspanne ab"
+
+#: plugin.py:136
+msgid "Second timespan to"
+msgstr "Zweite Zeitspanne bis"
+
+#: plugin.py:137
+msgid "Where should this setup be displayed?"
+msgstr "Wo soll dieses Setup angezeigt werden?"
+
+#: plugin.py:137
+msgid "show in"
+msgstr "anzeigen in"
+
+#: plugin.py:196
+msgid "Advanced HDMI Cec Setup"
+msgstr "Erweiterte HDMI-Cec Einstellungen"
+
+#: plugin.py:217 plugin.py:224 plugin.py:232
+msgid "manage when HDMI Cec is enabled"
+msgstr "Verwalte wann HDMI Cec aktiv ist"
