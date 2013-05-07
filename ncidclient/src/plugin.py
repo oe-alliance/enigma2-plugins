@@ -134,18 +134,19 @@ avon = {}
 def initAvon():
 	avonFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/NcidClient/avon.dat")
 	if os.path.exists(avonFileName):
-		for line in open(avonFileName):
-			line = line.decode("iso-8859-1").encode('utf-8')
-			if line[0] == '#':
-				continue
-			parts = line.split(':')
-			if len(parts) == 2:
-				avon[parts[0].replace('-', '').replace('*', '').replace('/', '')] = parts[1]
+		with open(avonFileName) as file:
+			for line in file:
+				line = line.decode("iso-8859-1").encode('utf-8')
+				if line[0] == '#':
+					continue
+				parts = line.split(':')
+				if len(parts) == 2:
+					avon[parts[0].replace('-', '').replace('*', '').replace('/', '')] = parts[1]
 
 def resolveNumberWithAvon(number, countrycode):
 	if not number or number[0] != '0':
 		return ""
-		
+
 	countrycode = countrycode.replace('00', '+')
 	if number[:2] == '00':
 		normNumber = '+' + number[2:]
@@ -153,7 +154,7 @@ def resolveNumberWithAvon(number, countrycode):
 		normNumber = countrycode + number[1:]
 	else: # this should can not happen, but safety first
 		return ""
-	
+
 	# debug('normNumer: ' + normNumber)
 	for i in reversed(range(min(10, len(number)))):
 		if avon.has_key(normNumber[:i]):
@@ -316,15 +317,15 @@ class NcidClientPhonebook:
 				# debug("[NcidClientPhonebook] search: result: %s" %name)
 		else:
 			prefix = ""
-				
+
 		if not name and self.phonebook.has_key(number):
 			name = self.phonebook[number]
-				
+
 		return name.replace(", ", "\n").strip()
 
 	def add(self, number, name):
 		'''
-		
+
 		@param number: number of entry
 		@param name: name of entry, has to be in utf-8
 		'''
@@ -343,7 +344,7 @@ class NcidClientPhonebook:
 					f.close()
 					debug("[NcidClientPhonebook] added %s with %s to Phonebook.txt" % (number, name.strip()))
 					return True
-	
+
 				except IOError:
 					return False
 
@@ -370,13 +371,13 @@ class NcidClientPhonebook:
 					os.rename(phonebookFilename + str(os.getpid()), 	phonebookFilename)
 					debug("[NcidClientPhonebook] removed %s from Phonebook.txt" % number)
 					return True
-	
+
 				except (IOError, OSError):
 					debug("[NcidClientPhonebook] error removing %s from %s" % (number, phonebookFilename))
 		return False
 
 	class NcidDisplayPhonebook(Screen, NumericalTextInput):
-	
+
 		def __init__(self, session):
 			self.entriesWidth = DESKTOP_WIDTH * scaleH(75, 85) / 100
 			self.height = DESKTOP_HEIGHT * 0.75
@@ -410,7 +411,7 @@ class NcidClientPhonebook:
 					<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 					<widget name="key_blue" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				</screen>""" % (
-						# scaleH(90, 75), scaleV(100, 73), # position 
+						# scaleH(90, 75), scaleV(100, 73), # position
 						self.entriesWidth, self.height, # size
 						self.entriesWidth, # eLabel width
 						scaleH(40, 5), scaleV(20, 5), # entries position
@@ -430,12 +431,12 @@ class NcidClientPhonebook:
 						3 * buttonGap + 2 * 140, self.height - 40, scaleV(22, 21), # widget yellow
 						4 * buttonGap + 3 * 140, self.height - 40, scaleV(22, 21), # widget blue
 						)
-	
+
 			# debug("[NcidDisplayCalls] skin: " + self.skin)
 			Screen.__init__(self, session)
 			NumericalTextInput.__init__(self)
 			HelpableScreen.__init__(self)
-		
+
 			# TRANSLATORS: keep it short, this is a button
 			self["key_red"] = Button(_("Delete"))
 			# TRANSLATORS: keep it short, this is a button
@@ -444,7 +445,7 @@ class NcidClientPhonebook:
 			self["key_yellow"] = Button(_("Edit"))
 			# TRANSLATORS: keep it short, this is a button
 			self["key_blue"] = Button(_("Search"))
-	
+
 			self["setupActions"] = ActionMap(["OkCancelActions", "ColorActions"],
 			{
 				"red": self.delete,
@@ -453,7 +454,7 @@ class NcidClientPhonebook:
 				"blue": self.search,
 				"cancel": self.exit,
 				"ok": self.showEntry, }, -2)
-	
+
 			self["entries"] = List([])
 			debug("[NcidClientPhonebook] displayPhonebook init")
 			self.help_window = None
@@ -499,9 +500,9 @@ class NcidClientPhonebook:
 					name = name.encode("utf-8", "replace")
 					shortname = shortname.encode('utf-8', 'replace')
 					self.sortlist.append((name, shortname, number))
-				
+
 			self["entries"].setList(self.sortlist)
-	
+
 		def showEntry(self):
 			cur = self["entries"].getCurrent()
 			if cur:
@@ -509,7 +510,7 @@ class NcidClientPhonebook:
 				number = cur[2]
 				name = cur[0]
 				self.session.open(NcidOfferAction, self, number, name)
-	
+
 		def delete(self):
 			cur = self["entries"].getCurrent()
 			if cur:
@@ -517,12 +518,12 @@ class NcidClientPhonebook:
 				self.session.openWithCallback(
 					self.deleteConfirmed,
 					MessageBox,
-					_("Do you really want to delete entry for\n\n%(number)s\n\n%(name)s?") 
+					_("Do you really want to delete entry for\n\n%(number)s\n\n%(name)s?")
 					% { 'number':str(cur[2]), 'name':str(cur[0]).replace(", ", "\n") }
 								)
 			else:
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
-	
+
 		def deleteConfirmed(self, ret):
 			debug("[NcidClientPhonebook] displayPhonebook/deleteConfirmed")
 			#
@@ -539,15 +540,15 @@ class NcidClientPhonebook:
 					# self.session.open(MessageBox, _("Not deleted."), MessageBox.TYPE_INFO)
 			else:
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
-	
+
 		def add(self, parent=None, number="", name=""):
 			class AddScreen(Screen, ConfigListScreen):
 				'''ConfiglistScreen with two ConfigTexts for Name and Number'''
-	
+
 				def __init__(self, session, parent, number="", name=""):
 					#
 					# setup screen with two ConfigText and OK and ABORT button
-					# 
+					#
 					noButtons = 2
 					width = max(scaleH(-1, 570), noButtons * 140)
 					height = scaleV(-1, 100) # = 5 + 126 + 40 + 5; 6 lines of text possible
@@ -582,7 +583,7 @@ class NcidClientPhonebook:
 						"green": self.add,
 						"ok": self.add,
 					}, -2)
-	
+
 					self.list = [ ]
 					ConfigListScreen.__init__(self, self.list, session=session)
 					self.name = name
@@ -594,7 +595,7 @@ class NcidClientPhonebook:
 					self["config"].list = self.list
 					self["config"].l.setList(self.list)
 					self.onLayoutFinish.append(self.setWindowTitle)
-			
+
 				def setWindowTitle(self):
 					# TRANSLATORS: this is a window title.
 					self.setTitle(_("Add entry to phonebook"))
@@ -611,21 +612,21 @@ class NcidClientPhonebook:
 					phonebook.add(self.number, self.name)
 					self.close()
 					self.parent.display()
-	
+
 				def overwriteConfirmed(self, ret):
 					if ret:
 						phonebook.remove(self.number)
 						phonebook.add(self.number, self.name)
 						self.parent.display()
-	
+
 				def cancel(self):
 					self.close()
-	
+
 			debug("[NcidClientPhonebook] displayPhonebook/add")
 			if not parent:
 				parent = self
 			self.session.open(AddScreen, parent, number, name)
-	
+
 		def edit(self):
 			debug("[NcidClientPhonebook] displayPhonebook/edit")
 			cur = self["entries"].getCurrent()
@@ -633,14 +634,14 @@ class NcidClientPhonebook:
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
 			else:
 				self.add(self, cur[2], cur[0])
-	
+
 		def search(self):
 			debug("[NcidClientPhonebook] displayPhonebook/search")
 			self.help_window = self.session.instantiateDialog(NumericalTextInputHelpDialog, self)
 			self.help_window.show()
 			# VirtualKeyboard instead of InputBox?
 			self.session.openWithCallback(self.doSearch, InputBox, _("Enter Search Terms"), _("Search phonebook"))
-	
+
 		def doSearch(self, searchTerms):
 			if not searchTerms:
 				searchTerms = ""
@@ -649,7 +650,7 @@ class NcidClientPhonebook:
 				self.session.deleteDialog(self.help_window)
 				self.help_window = None
 			self.display(searchTerms)
-	
+
 		def exit(self):
 			self.close()
 
@@ -672,9 +673,9 @@ class NcidClientSetup(Screen, ConfigListScreen):
 			<widget name="key_red" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			</screen>""" % (
-						# (DESKTOP_WIDTH-width)/2, scaleV(100, 73), # position 
+						# (DESKTOP_WIDTH-width)/2, scaleV(100, 73), # position
 						width, scaleV(560, 430), # size
-						width, # eLabel width						
+						width, # eLabel width
 						scaleV(40, 50), # eLabel position vertical
 						width, # eLabel width
 						scaleH(40, 5), scaleV(60, 57), # config position
@@ -802,7 +803,7 @@ standbyMode = False
 class NcidCallList:
 	def __init__(self):
 		self.callList = [ ]
-	
+
 	def add(self, date, number, caller):
 		debug("[NcidCallList] add: %s %s" % (number, caller))
 		if len(self.callList) > 10:
@@ -811,7 +812,7 @@ class NcidCallList:
 			del self.callList[1]
 
 		self.callList.append((number, date, caller))
-	
+
 	def display(self):
 		debug("[NcidCallList] display")
 		global standbyMode
@@ -821,19 +822,19 @@ class NcidCallList:
 		text = "\n"
 
 		if not self.callList:
-			text = _("no calls") 
+			text = _("no calls")
 		else:
 			if self.callList[0] == "Start":
 				text = text + _("Last 10 calls:\n")
 				del self.callList[0]
-	
+
 			for call in self.callList:
 				(number, date, caller) = call
-	
+
 				# should not happen, for safety reasons
 				if not caller:
 					caller = _("UNKNOWN")
-				
+
 				#  if we have an unknown number, show the number
 				if caller == _("UNKNOWN") and number != "":
 					caller = number
@@ -843,15 +844,15 @@ class NcidCallList:
 					if nl != -1:
 						caller = caller[:nl]
 					elif caller[0] == '[' and caller[-1] == ']':
-						# that means, we've got an unknown number with a city added from avon.dat 
+						# that means, we've got an unknown number with a city added from avon.dat
 						if (len(number) + 1 + len(caller)) <= 40:
 							caller = number + ' ' + caller
 						else:
 							caller = number
-	
-				while (len(caller)) > 40:					
+
+				while (len(caller)) > 40:
 					caller = caller[:-1]
-	
+
 				text = text + "%s - %s\n" % (date, caller)
 				debug("[NcidCallList] display: '%s - %s'" % (date, caller))
 
@@ -900,8 +901,8 @@ reverselookupMtime = 0
 class NcidReverseLookupAndNotify:
 	def __init__(self, number, caller, date):
 		'''
-		
-		Initiate a reverse lookup for the given number in the configured country		
+
+		Initiate a reverse lookup for the given number in the configured country
 		@param number: number to be looked up
 		@param caller: caller including name and address
 		@param date: date of call
@@ -919,9 +920,9 @@ class NcidReverseLookupAndNotify:
 
 	def notifyAndReset(self, number, caller):
 		'''
-		
+
 		this gets called with the result of the reverse lookup
-		
+
 		@param number: number
 		@param caller: name and address of remote. it comes in with name, address and city separated by commas
 		'''
@@ -966,19 +967,19 @@ class NcidLineReceiver(LineReceiver):
 #CIDLOG: *DATE*21102010*TIME*1456*LINE**NMBR*089999999999*MESG*NONE*NAME*NO NAME*
 #CID: *DATE*22102010*TIME*1502*LINE**NMBR*089999999999*MESG*NONE*NAME*NO NAME*
 
-#Callog entries begin with CIDLOG, "current" events begin with CID 
+#Callog entries begin with CIDLOG, "current" events begin with CID
 #we don't want to do anything with log-entries
 		if line.startswith("CID:"):
 			line = line[6:]
 			debug("[NcidLineReceiver.lineReceived] filtered Line: %s" % line)
 		else:
 			return
-		
+
 		items = line.split('*')
 
 		for i in range(0, len(items)):
 			item = items[i]
-			
+
 			if item == 'DATE':
 				self.date = items[i + 1]
 			elif item == 'TIME':
@@ -997,14 +998,14 @@ class NcidLineReceiver(LineReceiver):
                 try:
                         date = datetime.strptime("%s - %s" % (self.date, self.time), "%d%m%Y - %H%M")
                 except:
-                        date = datetime.strptime("%s - %s" % (self.date, self.time), "%m%d%Y - %H%M")		 
-					
+                        date = datetime.strptime("%s - %s" % (self.date, self.time), "%m%d%Y - %H%M")
+
 		self.date = date.strftime("%d.%m.%Y - %H:%M")
 
 		if not self.number:
 			debug("[NcidLineReceiver] lineReceived: no number")
 			self.number = _("number suppressed")
-			self.caller = self.myName 
+			self.caller = self.myName
 		else:
 			if config.plugins.NcidClient.internal.value and len(self.number) > 3 and self.number[0] == "0":
 				debug("[NcidLineReceiver] lineReceived: strip leading 0")
@@ -1024,7 +1025,7 @@ class NcidLineReceiver(LineReceiver):
 					NcidReverseLookupAndNotify(self.number, self.caller, self.date)
 					return							# reverselookup is supposed to handle the message itself
 				else:
-					self.caller = self.myName 
+					self.caller = self.myName
 
 		self.notifyAndReset()
 
@@ -1063,7 +1064,7 @@ class NcidClientFactory(ReconnectingClientFactory):
 		ReconnectingClientFactory.clientConnectionFailed(self, connector, reason)
 		# config.plugins.NcidClient.enable.value = False
 		ncidsrv = None
-		
+
 class NcidClient:
 	def __init__(self):
 		self.dialog = None
