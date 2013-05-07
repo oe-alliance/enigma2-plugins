@@ -292,7 +292,7 @@ class EPGSearch(EPGSelection):
 			if not bouquetlist is None:
 				while True:
 					bouquet = bouquetlist.getNext()
-					if bouquet.flags & eServiceReference.isDirectory:
+					if (bouquet.flags and int(bouquet.flags) != 519) & eServiceReference.isDirectory:
 						ChannelSelectionInstance.clearPath()
 						ChannelSelectionInstance.setRoot(bouquet)
 						servicelist = serviceHandler.list(bouquet)
@@ -302,7 +302,7 @@ class EPGSearch(EPGSelection):
 								if self.currentService.ref == serviceIterator:
 									break
 								serviceIterator = servicelist.getNext()
-							if self.currentService.ref == serviceIterator:
+							if self.currentService.ref == serviceIterator or not serviceIterator.valid():
 								break
 				ChannelSelectionInstance.enterPath(rootbouquet)
 				ChannelSelectionInstance.enterPath(bouquet)
