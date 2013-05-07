@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from enigma import eConsoleAppContainer, eTimer
 from xml.etree.cElementTree import parse as cet_parse
+from xml.etree.ElementTree import ParseError
 from os import path, listdir
 from os import remove as os_remove
 
@@ -78,7 +79,10 @@ class Bonjour:
 
 	def __parse(self, file):
 		print "[Bonjour.__parse] parsing %s%s" %(self.AVAHI_SERVICES_DIR, file)
-		config = cet_parse(self.AVAHI_SERVICES_DIR + file).getroot()
+		try:
+			config = cet_parse(self.AVAHI_SERVICES_DIR + file).getroot()
+		except ParseError: #parsing failed, skip the file
+			return
 
 		name = config.find('name').text
 
@@ -90,7 +94,7 @@ class Bonjour:
 		if text != None:
 			for txt in text:
 				textList.append(txt.text)
-		print textList
+
 		service = self.buildServiceFull(file, name, type, port, textList)
 		self.registerService(service)
 
