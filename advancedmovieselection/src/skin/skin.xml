@@ -219,7 +219,7 @@
 		</widget>
 		<widget name="waitingtext" position="450,130" size="770,375" zPosition="3" font="Regular;26" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="warning" position="345,102" size="875,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" backgroundColor="#605F5E" transparent="1" />
-		<widget name="list" position="345,130" size="875,314" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="345,130" size="875,314" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,340" size="30,30" zPosition="3" alphatest="blend" />
 		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,370" size="30,30" zPosition="3" alphatest="blend" />
@@ -250,7 +250,7 @@
 		</widget>
 		<widget name="waitingtext" position="450,130" size="770,375" zPosition="3" font="Regular;26" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="warning" position="345,102" size="875,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" backgroundColor="#605F5E" transparent="1" />
-		<widget name="list" position="345,130" size="875,470" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="345,130" size="875,470" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,340" size="30,30" zPosition="3" alphatest="blend" />
 		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,370" size="30,30" zPosition="3" alphatest="blend" />
@@ -301,7 +301,7 @@
 		</widget>
 		<widget name="waitingtext" position="450,130" size="770,375" zPosition="3" font="Regular;26" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="warning" position="345,102" size="875,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" backgroundColor="#605F5E" transparent="1" />
-		<widget name="list" position="60,130" size="1160,314" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="60,130" size="1160,314" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,640" size="30,30" zPosition="3" alphatest="blend" />
 		<ePixmap pixmap="skin_default/buttons/button_green.png" position="220,640" size="30,30" zPosition="3" alphatest="blend" />
@@ -331,7 +331,7 @@
 		</widget>
 		<widget name="waitingtext" position="450,130" size="770,375" zPosition="3" font="Regular;26" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
 		<widget name="warning" position="345,102" size="875,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" backgroundColor="#605F5E" transparent="1" />
-		<widget name="list" position="60,130" size="1160,470" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="60,130" size="1160,470" zPosition="3" scrollbarMode="showAlways" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,640" size="30,30" zPosition="3" alphatest="blend" />
 		<ePixmap pixmap="skin_default/buttons/button_green.png" position="220,640" size="30,30" zPosition="3" alphatest="blend" />
@@ -381,7 +381,7 @@
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<widget name="waitingtext" position="250,110" size="714,300" zPosition="3" font="Regular;26" halign="center" valign="center" backgroundColor="#605F5E" foregroundColor="#ffffff" transparent="1" />
-		<widget name="list" position="250,98" size="714,312" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="250,98" size="714,312" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,315" size="21,21" zPosition="3" alphatest="blend" />
 		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,340" size="21,21" zPosition="3" alphatest="blend" />
@@ -412,7 +412,7 @@
 			<convert type="ClockToText">Date</convert>
 		</widget>
 		<widget name="waitingtext" position="300,110" size="664,300" zPosition="3" font="Regular;26" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
-		<widget name="list" position="300,115" size="664,390" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="300,115" size="664,390" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,315" size="21,21" zPosition="3" alphatest="blend" />
 		<ePixmap pixmap="skin_default/buttons/button_green.png" position="60,340" size="21,21" zPosition="3" alphatest="blend" />
@@ -459,7 +459,7 @@
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<widget name="waitingtext" position="300,110" size="664,300" zPosition="3" font="Regular;26" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
-		<widget name="list" position="300,115" size="664,390" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="300,115" size="664,390" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,518" size="21,21" zPosition="3" alphatest="blend" />
 		<ePixmap pixmap="skin_default/buttons/button_green.png" position="190,518" size="21,21" zPosition="3" alphatest="blend" />
@@ -489,7 +489,7 @@
 			<convert type="ClockToText">Date</convert>
 		</widget>
 		<widget name="waitingtext" position="300,110" size="664,300" zPosition="3" font="Regular;26" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#605F5E" transparent="1" />
-		<widget name="list" position="60,115" size="904,390" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="60,115" size="904,390" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,518" size="21,21" zPosition="3" alphatest="blend" />
 		<ePixmap pixmap="skin_default/buttons/button_green.png" position="190,518" size="21,21" zPosition="3" alphatest="blend" />
@@ -807,7 +807,7 @@
 		</widget>
 		<eLabel position="332,110" size="2,355" backgroundColor="#ffffff" />
 		<widget name="waitingtext" position="450,130" size="770,375" zPosition="3" font="Regular;26" halign="center" valign="center" transparent="1" />
-		<widget name="list" position="345,129" size="875,312" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="345,129" size="875,312" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<widget name="warning" position="345,100" size="875,28" zPosition="3" font="Regular;22" halign="center" foregroundColor="#ffcc00" transparent="1" />
 		<eLabel position="60,465" size="1160,2" backgroundColor="#ffffff" />
@@ -862,7 +862,7 @@
 		</widget>
 		<eLabel position="240,98" size="2,317" backgroundColor="#ffffff" />
 		<widget name="waitingtext" position="250,110" size="714,300" zPosition="3" font="Regular;26" halign="center" valign="center" transparent="1" />
-		<widget name="list" position="250,98" size="714,312" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="250,98" size="714,312" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,415" size="904,2" backgroundColor="#ffffff" />
 		<eLabel position="60,510" size="904,2" backgroundColor="#ffffff" />
@@ -893,7 +893,7 @@
 		<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
 		<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
 		<widget name="waitingtext" position="0,45" size="560,395" zPosition="4" font="Regular;22" halign="center" valign="center" />
-		<widget name="list" position="130,70" size="430,338" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="130,70" size="430,338" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<widget name="DescriptionBorder" pixmap="skin_default/border_eventinfo.png" position="0,316" zPosition="1" size="560,103" transparent="1" alphatest="on" />
 		<widget source="Service" render="Label" position="5,318" zPosition="1" size="480,35" font="Regular;17" foregroundColor="#cccccc">
@@ -947,7 +947,7 @@
 		<eLabel position="332,110" size="2,517" backgroundColor="#ffffff" />
 		<widget name="waitingtext" position="450,130" size="770,375" zPosition="3" font="Regular;26" halign="center" valign="center" transparent="1" />
 		<widget name="warning" position="345,100" size="875,28" zPosition="3" font="Regular;22" halign="center" foregroundColor="#ffcc00" transparent="1" />
-		<widget name="list" position="345,126" size="875,468" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="345,126" size="875,468" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,627" size="1160,2" backgroundColor="#ffffff" />
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,643" size="21,21" alphatest="blend" />
@@ -994,7 +994,7 @@
 		</widget>
 		<eLabel position="290,110" size="2,400" backgroundColor="#ffffff" />
 		<widget name="waitingtext" position="300,110" size="664,300" zPosition="3" font="Regular;26" halign="center" valign="center" transparent="1" />
-		<widget name="list" position="300,115" size="664,390" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="300,115" size="664,390" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,510" size="904,2" backgroundColor="#ffffff" />
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="60,518" size="21,21" alphatest="blend" />
@@ -1023,7 +1023,7 @@
 		<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
 		<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
 		<widget name="waitingtext" position="0,45" size="560,395" zPosition="4" font="Regular;22" halign="center" valign="center" />
-		<widget name="list" position="130,71" size="430,312" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="130,71" size="430,312" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<widget name="DescriptionBorder" pixmap="skin_default/border_eventinfo.png" position="0,316" zPosition="1" size="560,103" transparent="1" alphatest="on" />
 		<widget source="Service" render="Label" position="5,318" zPosition="1" size="480,35" font="Regular;17" foregroundColor="#cccccc">
@@ -1478,7 +1478,7 @@
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<widget name="waitingtext" position="60,130" size="1160,375" zPosition="3" font="Regular;26" halign="center" valign="center" transparent="1" />
-		<widget name="list" position="60,105" size="1160,312" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="60,105" size="1160,312" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,430" size="1160,2" backgroundColor="#ffffff" />
 		<eLabel position="190,430" size="2,195" backgroundColor="#ffffff" />
@@ -1530,7 +1530,7 @@
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<widget name="waitingtext" position="60,130" size="1160,375" zPosition="3" font="Regular;26" halign="center" valign="center" transparent="1" />
-		<widget name="list" position="60,105" size="1160,312" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="60,105" size="1160,312" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,430" size="1160,2" backgroundColor="#ffffff" />
 		<eLabel position="60,627" size="1160,2" backgroundColor="#ffffff" />
@@ -1580,7 +1580,7 @@
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<widget name="waitingtext" position="60,105" size="904,234" zPosition="3" font="Regular;26" halign="center" valign="center" transparent="1" />
-		<widget name="list" position="60,105" size="904,234" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="60,105" size="904,234" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,348" size="904,2" backgroundColor="#ffffff" />
 		<eLabel position="190,348" size="2,162" backgroundColor="#ffffff" />
@@ -1632,7 +1632,7 @@
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<widget name="waitingtext" position="60,105" size="904,234" zPosition="3" font="Regular;26" halign="center" valign="center" transparent="1" />
-		<widget name="list" position="60,105" size="904,234" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="60,105" size="904,234" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<eLabel position="60,348" size="904,2" backgroundColor="#ffffff" />
 		<eLabel position="60,510" size="904,2" backgroundColor="#ffffff" />
@@ -1662,7 +1662,7 @@
 		<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
 		<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
 		<widget name="waitingtext" position="0,45" size="560,395" zPosition="4" font="Regular;22" halign="center" valign="center" />
-		<widget name="list" position="130,71" size="430,312" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="130,71" size="430,312" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<widget name="DescriptionBorder" pixmap="skin_default/border_eventinfo.png" position="0,316" zPosition="1" size="560,103" transparent="1" alphatest="on" />
 		<widget source="Service" render="Label" position="5,318" zPosition="1" size="480,35" font="Regular;17" foregroundColor="#cccccc">
@@ -1864,7 +1864,7 @@
 		<widget name="waitingtext" position="250,130" size="714,375" zPosition="3" font="Regular;26" halign="center" valign="center" transparent="1" />
 		<widget name="freeDiskSpace" position="0,0" size="0,0" zPosition="3" font="Regular;20" halign="center" transparent="1" />
 		<widget name="wastetxt" position="250,100" size="714,29" zPosition="3" font="Regular;20" halign="center" transparent="1" />
-		<widget name="list" position="250,145" size="714,302" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="250,145" size="714,302" zPosition="3" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<widget name="warning" position="250,440" size="714,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" transparent="1" />
 		<widget name="autoemptylast" position="250,470" size="714,28" zPosition="3" font="Regular;20" halign="center" foregroundColor="#ffcc00" transparent="1" />
@@ -1892,7 +1892,7 @@
 		<widget name="freeDiskSpace" position="0,0" size="0,0" zPosition="3" font="Regular;18" halign="center" />
 		<widget name="wastetxt" position="0,70" size="560,29" zPosition="3" font="Regular;18" halign="center" />
 		<widget name="waitingtext" position="0,100" size="560,300" zPosition="3" font="Regular;26" halign="center" valign="center" transparent="1" />
-		<widget name="list" position="0,115" size="560,227" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" BackColorSel="#00000000" foregroundColorSelected="#ffffff"
+		<widget name="list" position="0,115" size="560,227" zPosition="2" scrollbarMode="showOnDemand" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sel.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/sepmovie.png" backgroundColor="#00000000" DefaultColor="#FFFFFF" backgroundColorSelected="#a0a0a0" foregroundColorSelected="#000000"
 			transparent="1" enableWrapAround="1" />
 		<widget name="warning" position="0,370" size="560,22" zPosition="3" font="Regular;18" halign="center" foregroundColor="#ffcc00" transparent="1" />
 		<widget name="MenuIcon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/buttons/key_menu.png" position="0,365" size="35,25" transparent="1" alphatest="on" />
