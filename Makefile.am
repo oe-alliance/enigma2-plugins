@@ -1,6 +1,7 @@
 ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS = \
+	advhdmi \
 	aihdcontroler \
 	antiscrollbar \
 	aspectratioswitch \
@@ -34,7 +35,6 @@ SUBDIRS = \
 	ftpbrowser \
 	googlemaps \
 	growlee \
-	httpproxy \
 	imdb \
 	infobartunerstate \
 	internetradio \

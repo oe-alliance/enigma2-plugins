@@ -1,0 +1,2 @@
+Description: Configure when HDMI-Cec is enabled
+Depends: enigma2, enigma2-plugin-systemplugins-hdmicec

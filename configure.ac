@@ -117,6 +117,11 @@ advancedmovieselection/src/Source/Makefile
 advancedmovieselection/src/Source/MovieDB/Makefile
 advancedmovieselection/src/Source/Remote/Makefile
 
+advhdmi/Makefile
+advhdmi/meta/Makefile
+advhdmi/po/Makefile
+advhdmi/src/Makefile
+
 aihdcontroler/Makefile
 aihdcontroler/meta/Makefile
 aihdcontroler/src/Makefile
