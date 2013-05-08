@@ -1,2 +1,0 @@
-sed 's/config\.plugins\.AdvHdmiCec\..*//' < /etc/enigma2/settings > /tmp/settings
-mv /tmp/settings /etc/enigma2/
