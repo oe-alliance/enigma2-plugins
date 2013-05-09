@@ -1,4 +1,4 @@
 PLUGIN = AdvHdmi
 CATEGORY = SystemPlugins
-LANGS = de
+LANGS = de it
 include $(top_srcdir)/Rules-po.mak
