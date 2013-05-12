@@ -18,6 +18,10 @@ from enigma import quitMainloop
 from os import system, listdir, path, statvfs, remove, popen as os_popen
 import re
 
+#Topfi begin
+from subprocess import Popen, PIPE
+#Topfi end
+
 #from Plugins.Bp.geminimain.gTools import cleanexit
 
 def getMountP():
@@ -174,7 +178,19 @@ class FEconf(Screen):
 					if path.realpath("/dev/disk/by-uuid/" + uuid) == device:
 						return "/dev/disk/by-uuid/" + uuid
 			else:
+				#Topfi begin (use more reliable UUID mount on boxes without /dev/disk/by-uuid)
+				p = Popen(["blkid", "-o", "udev", device], stdout=PIPE, stderr=PIPE, stdin=PIPE)
+				txtUUID = p.stdout.read()
+				start = txtUUID.find("ID_FS_UUID=")
+				if start > -1:
+					txtUUID=txtUUID[start+11:]
+					end = txtUUID.find("\n")
+					if end > -1:
+						txtUUID=txtUUID[:end]
+					return "UUID="+txtUUID
+				#Topfi end
 				return device
+
 		except:
 			print "[FlashExpander] <error get UUID>"
 		return None
