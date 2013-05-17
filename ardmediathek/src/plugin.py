@@ -397,12 +397,7 @@ class ARDMediathek(Screen):
 
 	def buildEntry(self, picInfo=None):
 		movie = self.movies[0]
-		thumb = None
-		if picInfo:
-			ptr = self.picload.getData()
-			if ptr != None:
-				thumb = ptr
-		self.listMovies.append(ARDMenuListSubEntry(movie, thumb))
+		self.listMovies.append(ARDMenuListSubEntry(movie, self.picload.getData()))
 		del self.movies[0]
 		self.buildList()
 
