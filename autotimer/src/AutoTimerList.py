@@ -19,6 +19,17 @@ except:
 	
 from skin import parseColor, parseFont
 
+class DAYS:
+	MONDAY = 0
+	TUESDAY = 1
+	WEDNESDAY = 2
+	THURSDAY = 3
+	FRIDAY = 4
+	SATURDAY = 5
+	SUNDAY = 6
+	WEEKEND = 'weekend'
+	WEEKDAY = 'weekday'
+
 class AutoTimerList(MenuList):
 	"""Defines a simple Component to show Timer name"""
 
@@ -61,19 +72,45 @@ class AutoTimerList(MenuList):
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 52, 2, x-26, 25, 0, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 47, width-4, 25, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, channel))
 
+		if timer.include[3]:
+			total = len(timer.include[3])
+			count = 0
+			days = []
+			while count+1 <= total:
+				day = timer.include[3][count]
+				day = {
+					'0': _("Mon"),
+					'1': _("Tue"),
+					'2': _("Wed"),
+					'3': _("Thur"),
+					'4': _("Fri"),
+					'5': _("Sat"),
+					'6': _("Sun"),
+					"weekend": _("Weekend"),
+					"weekday": _("Weekday")
+					}[day]
+				days.append(day)
+				count += 1
+			days = ', '.join(days)
+		else:
+			days = _("Everyday")
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width)/10*4.5+1, 25, float(width)/10*5.5-5, 25, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, days))
+
 		if timer.hasTimespan():
 			nowt = time()
 			now = localtime(nowt)
 			begintime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, timer.timespan[0][0], timer.timespan[0][1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 			endtime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, timer.timespan[1][0], timer.timespan[1][1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 			timespan = ((" %s ... %s") % (FuzzyTime(begintime)[1], FuzzyTime(endtime)[1]))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-150-4, 0, 150, 25, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
+		else:
+			timespan = _("Any time")
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, width-150-4, 0, 150, 25, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
 
 		if timer.hasTimeframe():
 			begin = strftime("%a, %d %b", localtime(timer.getTimeframeBegin()))
 			end = strftime("%a, %d %b", localtime(timer.getTimeframeEnd()))
 			timespan = (("%s ... %s") % (begin, end))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-200-4, 25, 200, 25, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 25, float(width)/10*4.5-5, 25, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timespan))
 
 		if icon:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 2, 24, 25, icon))
