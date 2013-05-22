@@ -65,6 +65,8 @@ class AutoTimerList(MenuList):
 			channel.append(ServiceReference(t).getServiceName())
 		if len(channel) >0 :
 			channel = ", ".join(channel)
+		else:
+			channel = _('All channels')
 		height = self.l.getItemSize().height()
 		width = self.l.getItemSize().width()
 		res = [ None ]
