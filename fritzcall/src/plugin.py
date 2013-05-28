@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 773 $
-$Date: 2013-04-07 10:03:55 +0200 (Sun, 07 Apr 2013) $
-$Id: plugin.py 773 2013-04-07 08:03:55Z michael $
+$Revision: 777 $
+$Date: 2013-05-28 18:34:35 +0200 (Tue, 28 May 2013) $
+$Id: plugin.py 777 2013-05-28 16:34:35Z michael $
 '''
 
 
@@ -119,7 +119,7 @@ def getMountedDevs():
 	def handleMountpoint(loc):
 		# debug("[FritzCall] handleMountpoint: %s" %repr(loc))
 		mp = loc[0]
-		while mp[-1] == '/':
+		while len(mp) > 1 and mp[-1] == '/':
 			mp = mp[:-1]
 		#=======================================================================
 		# if os.path.exists(os.path.join(mp, "PhoneBook.txt")):
@@ -301,8 +301,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 773 $"[1:-2] + "\n" + 
-							"$Date: 2013-04-07 10:03:55 +0200 (Sun, 07 Apr 2013) $"[1:23] + "\n"
+							"$Revision: 777 $"[1:-2] + "\n" + 
+							"$Date: 2013-05-28 18:34:35 +0200 (Tue, 28 May 2013) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1884,7 +1884,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 773 $"[1: - 1] + "$Date: 2013-04-07 10:03:55 +0200 (Sun, 07 Apr 2013) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 777 $"[1: - 1] + "$Date: 2013-05-28 18:34:35 +0200 (Tue, 28 May 2013) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2407,7 +2407,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 773 $"[1:-1]	+ "$Date: 2013-04-07 10:03:55 +0200 (Sun, 07 Apr 2013) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 777 $"[1:-1]	+ "$Date: 2013-05-28 18:34:35 +0200 (Tue, 28 May 2013) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

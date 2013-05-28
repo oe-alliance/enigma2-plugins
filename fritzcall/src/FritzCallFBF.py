@@ -2,12 +2,14 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 771 $
-$Date: 2013-04-06 12:08:41 +0200 (Sat, 06 Apr 2013) $
-$Id: FritzCallFBF.py 771 2013-04-06 10:08:41Z michael $
+$Revision: 776 $
+$Date: 2013-05-11 13:15:24 +0200 (Sat, 11 May 2013) $
+$Id: FritzCallFBF.py 776 2013-05-11 11:15:24Z michael $
 '''
 
-from . import _, __, debug #@UnresolvedImport # pylint: disable=E0611,F0401
+# pylint: disable=W1401,E0611,F0401
+
+from . import _, __, debug #@UnresolvedImport
 from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
@@ -1318,7 +1320,8 @@ class FritzCallFBF_05_50:
 		if found:
 			charset = found.group(1)
 			debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: found charset: " + charset)
-			html = html2unicode(html.replace(chr(0xf6),'').decode(charset)).encode('utf-8')
+			if charset != 'utf-8':
+				html = html2unicode(html.replace(chr(0xf6),'').decode(charset)).encode('utf-8')
 		else: # this is kind of emergency conversion...
 			try:
 				debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: try charset utf-8")
