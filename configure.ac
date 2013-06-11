@@ -381,6 +381,10 @@ mediadownloader/meta/Makefile
 mediadownloader/po/Makefile
 mediadownloader/src/Makefile
 
+menusort/Makefile
+menusort/meta/Makefile
+menusort/src/Makefile
+
 merlinepg/Makefile
 merlinepg/meta/Makefile
 merlinepg/src/Makefile
@@ -510,6 +514,16 @@ permanentclock/src/Makefile
 pipservicerelation/Makefile
 pipservicerelation/src/Makefile
 pipservicerelation/meta/Makefile
+
+pluginhider/Makefile
+pluginhider/meta/Makefile
+pluginhider/po/Makefile
+pluginhider/src/Makefile
+
+pluginsort/Makefile
+pluginsort/meta/Makefile
+pluginsort/po/Makefile
+pluginsort/src/Makefile
 
 podcast/Makefile
 podcast/etc/Makefile
