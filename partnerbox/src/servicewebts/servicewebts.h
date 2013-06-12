@@ -131,7 +131,7 @@ public:
 	int getCurrentTrack();
 
 	// iAudioChannelSelection
-	int getCurrentChannel() { return iAudioChannelSelection_ENUMS::STEREO; };
+	int getCurrentChannel() { return iAudioChannelSelection::STEREO; }
 	RESULT selectChannel(int i) { return 0; };
 
 private:

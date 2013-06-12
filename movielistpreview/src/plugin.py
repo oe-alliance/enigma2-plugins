@@ -110,11 +110,10 @@ class MovielistPreview():
 					self.picload.startDecode(png)
 
 	def showPreviewCallback(self, picInfo=None):
-		if picInfo:
-			ptr = self.picload.getData()
-			if ptr != None:
-				self.dialog["preview"].instance.setPixmap(ptr)
-				self.dialog.show()
+		ptr = self.picload.getData()
+		if ptr != None:
+			self.dialog["preview"].instance.setPixmap(ptr)
+			self.dialog.show()
 		self.working = False
 
 	def hideDialog(self):

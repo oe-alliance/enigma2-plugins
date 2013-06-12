@@ -32,7 +32,7 @@ from twisted.internet import defer
 from twisted.web.client import getPage, downloadPage
 from urllib import quote
 from Components.Pixmap import Pixmap
-from enigma import ePicLoad, eEnv
+from enigma import eEnv, ePicLoad, eRect, eSize, gPixmapPtr
 from os import path as os_path, mkdir as os_mkdir
 from Components.AVSwitch import AVSwitch
 from Components.config import ConfigSubsection, ConfigSubList, ConfigInteger, config
@@ -299,22 +299,28 @@ class WeatherIcon(Pixmap):
 	def onShow(self):
 		Pixmap.onShow(self)
 		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((self.instance.size().width(), self.instance.size().height(), sc[0], sc[1], True, 2, '#ff000000'))
+		self._aspectRatio = eSize(sc[0], sc[1])
+		self._scaleSize = self.instance.size()
+		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000'))
 
 	def paintIconPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr is not None:
-			try:
+			pic_scale_size = eSize()
+			# To be added in the future:
+			if 'scale' in eSize.__dict__ and self._scaleSize.isValid() and self._aspectRatio.isValid():
+				pic_scale_size = ptr.size().scale(self._scaleSize, self._aspectRatio)
+			# To be removed in the future:
+			elif 'scaleSize' in gPixmapPtr.__dict__:
 				pic_scale_size = ptr.scaleSize()
-				if pic_scale_size.isValid():
-					pic_scale_width = pic_scale_size.width()
-					pic_scale_height = pic_scale_size.height()
-					dest_rect = eRect(0, 0, pic_scale_width, pic_scale_height)
-					self.instance.setScale(1)
-					self.instance.setScaleDest(dest_rect)
-				else:
-					self.instance.setScale(0)
-			except:
+
+			if pic_scale_size.isValid():
+				pic_scale_width = pic_scale_size.width()
+				pic_scale_height = pic_scale_size.height()
+				dest_rect = eRect(0, 0, pic_scale_width, pic_scale_height)
+				self.instance.setScale(1)
+				self.instance.setScaleDest(dest_rect)
+			else:
 				self.instance.setScale(0)
 			self.instance.setPixmap(ptr)
 		else:
