@@ -460,15 +460,15 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 	def renameFilterButton(self):
 		if self.filterSet:
-			self["key_yellow"].text = _("edit filters")
+			self["key_yellow"].text = _("Edit filters")
 		else:
-			self["key_yellow"].text = _("add filters")
+			self["key_yellow"].text = _("Add filters")
 
 	def renameServiceButton(self):
 		if self.serviceRestriction:
-			self["key_blue"].text = _("edit services")
+			self["key_blue"].text = _("Edit services")
 		else:
-			self["key_blue"].text = _("add services")
+			self["key_blue"].text = _("Add services")
 
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
@@ -1022,7 +1022,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 		# Initialize Buttons
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
-		self["key_yellow"] = StaticText(_("delete"))
+		self["key_yellow"] = StaticText(_("Delete"))
 		self["key_blue"] = StaticText(_("New"))
 
 		# Define Actions
@@ -1225,7 +1225,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		# Initialize Buttons
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
-		self["key_yellow"] = StaticText(_("delete"))
+		self["key_yellow"] = StaticText(_("Delete"))
 		self["key_blue"] = StaticText(_("New"))
 
 		# Define Actions
