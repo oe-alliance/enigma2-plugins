@@ -11,7 +11,7 @@ from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer
-from os import path as os_path, rename as os_rename, unlink as os_unlink
+from os import path as os_path, rename as os_rename, unlink as os_unlink, fsync
 
 def main(session, service, **kwargs):
 	session.open(MovieRetitle, service, session.current_dialog, **kwargs)
@@ -117,6 +117,8 @@ class MovieRetitle(Screen, ConfigListScreen):
 				descr = olddescr
 			metafile = open(file + ".ts.meta", "w")
 			metafile.write("%s%s\n%s\n%s" %(sid, title, descr, rest))
+			metafile.flush()
+			fsync(metafile.fileno())
 			metafile.close()
 
 	def maybeMoveMovieFiles(self, fr, to):
