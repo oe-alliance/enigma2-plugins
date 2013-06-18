@@ -59,14 +59,14 @@
 						<ul id="navInternetRadio" class="irFavs">
 							{for f in favorites}
 							<li class="listItem">
-								<a	class="irListEntry item" 
+								<a	class="irListEntry item"
 									href="#"
 									data-name="${f.name.e()}"
 									data-text="${f.text.e()}"
 									data-type="${f.type.e()}"
 									data-tags="${f.tags.join(' ').e()}"
 									data-country="${f.country.e()}"
-									data-homepage="${f.homepage.e()}" 
+									data-homepage="${f.homepage.e()}"
 									title="${f.text.e()}">
 									<div>${f.name}{if f.type == 0} (${f.country}){/if}<br>
 									{if f.tags.join(' ') == ""}
@@ -94,19 +94,19 @@
 													<td>
 														<input id="name${f.name.e()}${f.text.e()}" name="newname" type="text" value="${f.name}" size="55"></input>
 													</td>
-													<td class="right">
-														<button class="renameFav" data-form-id="form${f.name.e()}${f.text.e()}">Rename</input>
-													</td>
+
 												</tr>
 												<tr>
 													<td>
-														<label for="name${f.name.e()}${f.text.e()}">Url (read-only)</label>
+														<label for="text${f.name.e()}${f.text.e()}">Url</label>
 													</td>
 													<td>
-														<input id="name${f.name.e()}${f.text.e()}" name="newname" type="text" value="${f.text}" size="55" disabled></input>
+														<input id="text${f.name.e()}${f.text.e()}" name="newtext" type="text" value="${f.text}" size="55"></input>
 													</td>
-													<td class="right">
-														<button class="removeFav" data-id="${f.name.e()}${f.text.e()}">Remove</button>
+												</tr>
+												<tr>
+													<td class="right" colspan="2">
+														<button class="renameFav" data-form-id="form${f.name.e()}${f.text.e()}">Save</input>
 													</td>
 												</tr>
 											</table>

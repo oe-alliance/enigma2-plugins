@@ -120,37 +120,39 @@ var InternetRadioFavoritesHandler  = Class.create(AbstractRadioContentHandler, {
 			this.simpleResultCallback.bind(this)
 		);
 	},
-	
+
 	rename: function(form){
 		var values = form.serialize(true);
-		
+
 		this.provider.refresh = false
-		if(values.newname != null && values.newname != ""  && values.newname != values.name){
+		if( (values.newname != null && values.newname != ""  && values.newname != values.name) ||
+				(values.newtext != null && values.newtext != ""  && values.newtext != values.text)){
 			this.provider.refresh = true;
 			this.provider.simpleResultQuery(
-				URL.internetradioRenameFavorite, 
+				URL.internetradioRenameFavorite,
 				{
-					name : values.name, 
-					text: values.text, 
-					favoritetype : values.favoritetype, 
+					name : values.name,
+					text: values.text,
+					newtext: values.newtext,
+					favoritetype : values.favoritetype,
 					newname : values.newname
 				},
 				this.simpleResultCallback.bind(this)
 			);
 		}
 	},
-	
+
 	remove: function(element){
 		favorite = this.getData(element);
 
 		var result = confirm( "Are you sure want to remove the internet Radiostation\n\n" +
-				favorite.name + "\n\n" + 
+				favorite.name + "\n\n" +
 				" from your favorites?");
 
 		this.provider.refresh = result;
 		if(result){
 			this.provider.simpleResultQuery(
-				URL.internetradioRemoveFavorite, 
+				URL.internetradioRemoveFavorite,
 				{
 					name : favorite.name,
 					text: favorite.text,
@@ -160,11 +162,11 @@ var InternetRadioFavoritesHandler  = Class.create(AbstractRadioContentHandler, {
 			);
 		}
 	},
-	
+
 	play: function(element) {
 		favorite = this.getData(element);
 		this.provider.simpleResultQuery(
-			URL.internetradioPlay, 
+			URL.internetradioPlay,
 			{
 				name : favorite.name,
 				url: favorite.text
@@ -172,11 +174,11 @@ var InternetRadioFavoritesHandler  = Class.create(AbstractRadioContentHandler, {
 			this.simpleResultCallback.bind(this)
 		);
 	},
-	
+
 	quickPlay: function(form){
 		var values = form.serialize(true);
 		this.provider.simpleResultQuery(
-			URL.internetradioPlay, 
+			URL.internetradioPlay,
 			{
 				name : values.name,
 				url: values.text
@@ -184,23 +186,23 @@ var InternetRadioFavoritesHandler  = Class.create(AbstractRadioContentHandler, {
 			this.simpleResultCallback.bind(this)
 		);
 	},
-	
+
 	stop: function(){
 		this.provider.simpleResultQuery(
-			URL.internetradioStop, 
+			URL.internetradioStop,
 			{},
 			this.simpleResultCallback.bind(this)
 		);
 	},
-	
+
 	getStatus: function(){
 		this.provider.simpleResultQuery(
-			URL.internetradioStatus, 
+			URL.internetradioStatus,
 			{},
 			this.onStatusReady.bind(this)
 		);
 	},
-	
+
 	onStatusReady: function(transport){
 		var result = this.provider.simpleResultRenderXML(this.provider.getXML(transport));
 		$(this.statusTarget).update(result.getStateText());
@@ -211,7 +213,7 @@ var InternetRadioFavoritesHandler  = Class.create(AbstractRadioContentHandler, {
 			$(this.stopTarget).hide();
 		}
 	}
-	
+
 });
 
 var Controller = Class.create({
@@ -233,7 +235,7 @@ var InternetRadio = Class.create(Controller, {
 	initialize: function($super, target, statusTarget, stopTarget){
 		$super(new InternetRadioFavoritesHandler(target, statusTarget, stopTarget));
 	},
-	
+
 	load: function(){
 		this.handler.load();
 	},
@@ -241,7 +243,7 @@ var InternetRadio = Class.create(Controller, {
 	play: function(element){
 		this.handler.play(element);
 	},
-	
+
 	quickPlay: function(form){
 		this.handler.quickPlay(form);
 	},
@@ -261,7 +263,7 @@ var InternetRadio = Class.create(Controller, {
 	rename: function(element){
 		this.handler.rename(element);
 	},
-	
+
 	getStatus: function(){
 		this.handler.getStatus();
 	}
@@ -273,7 +275,7 @@ var Radio = Class.create({
 		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
 		this.poller = null;
 	},
-	
+
 	run: function(){
 		debug("[Radio].run");
 		this.sessionProvider.load({});
@@ -287,7 +289,7 @@ var Radio = Class.create({
 		this.registerListeners();
 		this.pollStatus();
 	},
-	
+
 	pollStatus: function(){
 		if(this.poller == null){
 			var _this = this;
@@ -340,7 +342,7 @@ var Radio = Class.create({
 				this.internetRadio.remove(entry);
 			}.bind(this)
 		);
-		
+
 		content.on(
 			'click',
 			'.renameFav',
@@ -351,6 +353,7 @@ var Radio = Class.create({
 				this.internetRadio.rename(form);
 			}.bind(this)
 		);
+
 		content.on(
 			'click',
 			'.quickplay',

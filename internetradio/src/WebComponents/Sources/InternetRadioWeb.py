@@ -61,15 +61,15 @@ class InternetRadioWeb(Source):
 				self.result = self.playStation(cmd)
 		else:
 			self.result = ( False, "one two three four unknown command" )
-			
+
 	def addFavorite(self, param):
 		print "[WebComponents.InternetRadioWeb] addFavorite with param = ", param
-		name  = param["name"]
-		if name  is None:
+		name = param["name"]
+		if name is None:
 			return (False, "No favorite name given!")
 		text = param["text"]
 		if text is None:
-			text = name 
+			text = name
 		favoritetype = param["favoritetype"]
 		if favoritetype is None:
 			return (False, "No favorite type given!")
@@ -90,15 +90,15 @@ class InternetRadioWeb(Source):
 		if player is not None:
 			player.updateFavoriteList()
 		return (True, "favorite %s added." % name)
-		
+
 	def removeFavorite(self, param):
 		print "[WebComponents.InternetRadioWeb] removeFavorite with param = ", param
-		name  = param["name"]
-		if name  is None:
+		name = param["name"]
+		if name is None:
 			return (False, "No favorite name given!")
 		text = param["text"]
 		if text is None:
-			text = name 
+			text = name
 		favoritetype = param["favoritetype"]
 		if favoritetype is None:
 			return (False, "No favorite type given!")
@@ -113,37 +113,39 @@ class InternetRadioWeb(Source):
 			return (True, "favorite %s removed." % name)
 		else:
 			return (False, "Could not find favorite %s!" % name)
-			
+
 	def renameFavorite(self, param):
 		print "[WebComponents.InternetRadioWeb] renameFavorite with param = ", param
-		name  = param["name"]
-		if name  is None:
+		name = param["name"]
+		if name is None:
 			return (False, "No favorite name given!")
-		text = param["text"]
-		if text is None:
-			text = name 
+
+		text = param.get("text", name)
+		newtext = param.get("newtext", None)
+
 		favoritetype = param["favoritetype"]
 		if favoritetype is None:
 			return (False, "No favorite type given!")
 		elif favoritetype.isdigit() == False:
 			return (False, "favorite type has to be a number between 0 and 2!")
-		newname  = param["newname"]
-		if newname  is None:
+		newname = param["newname"]
+		if newname is None:
 			return (False, "No favorite newname given!")
 		found = 0
 		favoriteConfig = InternetRadioFavoriteConfig()
-		if favoriteConfig.renameFavoriteHTML(name = name, text = text, favoritetype = int(favoritetype), newname = newname) == 1:
+		if favoriteConfig.renameFavoriteHTML(name = name, text = text, favoritetype = int(favoritetype), newname = newname, newtext = newtext) == 1:
 			player = self.getPlayerInstance()
 			if player is not None:
 				player.updateFavoriteList()
 			return (True, "favorite %s renamed." % name)
 		else:
 			return (False, "Could not find favorite %s!" % name)
-			
+
+
 	def playStation(self, param):
 		print "[WebComponents.InternetRadioWeb] playStation with param = ", param
-		name  = param["name"]
-		if name  is None:
+		name = param["name"]
+		if name is None:
 			name = ""
 		url = param["url"]
 		if url is None:
@@ -161,27 +163,27 @@ class InternetRadioWeb(Source):
 				return (True, "%s opend." % url)
 			else:
 				return (False, "Player can not start because there is another screen already open.")
-		
+
 	def getPlayingStatus(self):
 		player = self.getPlayerInstance()
 		if player is not None:
 			return player.getCurrentPlayingStation()
 		else:
-			return (False, "InternetRadio plugin is not running...") 
-	
+			return (False, "InternetRadio plugin is not running...")
+
 	def getStreamingInfos(self):
 		player = self.getPlayerInstance()
 		if player is not None:
 			return (True, player.getStreamingInfos())
 		else:
-			return (False, "InternetRadio plugin is not running...") 
-	
+			return (False, "InternetRadio plugin is not running...")
+
 	def stopPlaying(self):
 		player = self.getPlayerInstance()
 		if player is not None:
 			player.closePlayer()
-		return (True, "Done...") 
-		
+		return (True, "Done...")
+
 	def getPlayerInstance(self):
 		if isinstance(self.session.current_dialog, InternetRadioScreen):
 			return self.session.current_dialog
