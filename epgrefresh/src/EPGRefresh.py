@@ -299,21 +299,22 @@ class EPGRefresh:
 				# Remove instance if there wasn't one before
 				if removeInstance:
 					autotimer = None
+		self.finish()
 
-		# shutdown if we're supposed to go to deepstandby and not recording
-		if not self.forcedScan and config.plugins.epgrefresh.afterevent.value \
-			and not Screens.Standby.inTryQuitMainloop:
-
-			self.session.open(
-				Screens.Standby.TryQuitMainloop,
-				1
-			)
-
+	def finish(self, *args, **kwargs):
 		if not Screens.Standby.inStandby and not config.plugins.epgrefresh.background and config.plugins.epgrefresh.enablemessage.value:
 			Notifications.AddPopup(_("EPG refresh finished."), MessageBox.TYPE_INFO, 4, NOTIFICATIONID)
 		self.forcedScan = False
 		epgrefreshtimer.cleanup()
 		self.maybeStopAdapter()
+		
+		
+		# shutdown if we're supposed to go to deepstandby and not recording
+		if not self.forcedScan and config.plugins.epgrefresh.afterevent.value and not Screens.Standby.inTryQuitMainloop:
+			self.session.open(
+				Screens.Standby.TryQuitMainloop,
+				1
+			)
 
 	def refresh(self):
 		if self.forcedScan:
