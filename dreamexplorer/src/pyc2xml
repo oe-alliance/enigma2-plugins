@@ -1,0 +1,325 @@
+#!/usr/bin/env python
+"""
+Requires Python 2.5
+
+Converting between python bytecode and XML.
+
+These functions are probably most interesting for users:
+
+* Disassembler:
+  - xml_code()     code object   -->      XML
+  - xml_pyc()       pyc file     -->      XML
+* Assembler:
+  - code_xml()        XML        -->   code object
+  - pyc_xml()         XML        -->    pyc file
+
+The XML file is almost self documenting.  The assembly language is of
+course somewhat redundant.  Therefore, only the column containing the
+name of the opcode and the column containing the optional argument is
+by the assembler.  So for example:
+
+                <co_code><![CDATA[
+ 33           0 LOAD_FAST                0 (x)
+              3 LOAD_CONST               1 (7)
+              6 BINARY_ADD          
+              7 RETURN_VALUE        
+                ]]></co_code>
+and
+                <co_code><![CDATA[
+ 48          73 LOAD_FAST                0 (y22)
+              4 LOAD_CONST               1 (324517)
+#            26 ROT_TWO  
+       ------ 6 BINARY_ADD          
+=========== 217 RETURN_VALUE
+                ]]></co_code>
+
+will be assembled to the same bytecode.  Blank lines and lines starting
+with a '#' will be ignored.
+Only the assembler is implemented in the source code below, because the
+disassembler is already in the 'dis'-module.
+
+When assembling, all XML attributes are ignored, these attributes are only
+inserted by the disassembler to make the XML more readable.
+"""
+__author__  = 'Ilan Schnell <ilanschnell@gmail.com>'
+__version__ = '0.2'
+
+import dis, marshal, new
+import struct, sys, time
+import random, string, cStringIO, re
+
+from types import CodeType
+from xml.etree import ElementTree as ET
+
+XMLindentation = 4 * " "
+
+def indent(elem, level=0):
+    "Adds whitespace to the tree, so that it results in a prettyprinted tree."
+    i = "\n" + level * XMLindentation
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + XMLindentation
+        for e in elem:
+            indent(e, level+1)
+            if not e.tail or not e.tail.strip():
+                e.tail = i + XMLindentation
+        if not e.tail or not e.tail.strip():
+            e.tail = i
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = i
+
+
+magic = "".join(random.choice(string.letters + string.digits)
+                for i in xrange(40))
+
+hex_pat = re.compile(r'0x[0-9a-fA-F]{2,}')
+
+def disassemble(code):
+    """Given a code object, return output from dis.disassemble as a string.
+       (dis.disassemble writes its output to stdout.)"""
+    rem = sys.stdout
+    sys.stdout = cStringIO.StringIO()
+    dis.disassemble(code)
+    ret = sys.stdout.getvalue()
+    ret = ret.replace(']]>', ']]X>')
+    sys.stdout = rem
+    return hex_pat.sub('0x...', ret)
+
+
+def elem_code(obj, n=None):
+    """Given a code object, return the ET.Element which represents
+       the code in a more human readable form."""
+
+    attrib = {'n': str(n)} if n >= 0 else {}
+    
+    if type(obj) == CodeType:
+        elem = ET.Element('code', attrib)
+        elem.attrib.update(name=obj.co_name)
+        
+        tags = [n for n in dir(obj) if n.startswith('co_')]
+        tags.sort()
+        tags.remove('co_consts')
+        for tag in tags + ['co_consts']:
+            name = tag[3:]
+            caelem = ET.Element(tag)
+            ca = getattr(obj, tag)
+            
+            if name in 'filename name'.split():
+                caelem.text = ca
+                
+            elif name in 'argcount firstlineno nlocals stacksize'.split():
+                caelem.text = str(ca)
+                
+            elif name in 'cellvars freevars names varnames consts'.split():
+                for i, item in enumerate(ca):
+                    caelem.append(elem_code(item, i))
+            
+            elif name == 'flags':
+                caelem.text = '0x%04x' % ca
+            
+            elif name == 'lnotab':
+                caelem.text = '0x' + ca.encode('hex')
+            
+            elif name == 'code':
+                caelem.text = ('[%s[\n' % magic) + disassemble(obj) + \
+                              (16*' '+']%s]' % magic)
+            else:
+                raise 'Attribute %r unknown for code object' % tag
+
+            if caelem is not None:
+                elem.append(caelem)
+    else:
+        elem = ET.Element('item', attrib)
+        elem.text = repr(obj)
+    
+    return elem
+
+
+def xmlpostprocess(xml):
+    pat = re.compile(r'\[%s\[.*?\]%s\]' % (magic, magic), re.DOTALL)
+    
+    def repl(match):
+        s = match.group()
+        s = s.replace('&lt;', '<')
+        s = s.replace('&gt;', '>')
+        s = s.replace('&amp;', '&')
+        return s
+    
+    ret = pat.sub(repl, xml)
+    ret = ret.replace('[%s[' % magic, '<![CDATA[')
+    ret = ret.replace(']%s]' % magic, ']]>')
+    
+    return '''\
+<?xml version="1.0" ?>
+<?xml-stylesheet type="text/xsl" href="bytecode.xsl" ?>
+<!DOCTYPE bytecode SYSTEM "bytecode.dtd">
+''' + ret + '\n'
+
+
+def xml_code(code):
+    "Given a code object, return corresponding XML as single string"
+    elem = ET.Element('bytecode')
+    elem.append(elem_code(code))
+    indent(elem)
+    return xmlpostprocess(ET.tostring(elem))
+
+
+def headET(f):
+    "Given file object, return an ET.Element representing the header"
+    head = ET.Element('head')
+    
+    e = ET.Element('magic')
+    e.text = '0x' + f.read(4).encode('hex')
+    head.append(e)
+    
+    e = ET.Element('modtime')
+    e.text = time.asctime(time.localtime(struct.unpack('L', f.read(4))[0]))
+    head.append(e)
+
+    return head
+
+
+def xml_pyc(filename):
+    """Given a filename of a python bytecode file,
+       return corresponding XML as single string"""
+    f = open(filename, 'rb')
+    elem = ET.Element('bytecode')
+    elem.append(headET(f))
+    elem.append(elem_code(marshal.load(f)))
+    f.close()
+    indent(elem)
+    return xmlpostprocess(ET.tostring(elem))
+
+
+# ------------
+
+def assemble(text):
+    lst = [] # list of integers 0..255 representing the bytecode
+    for inst in text.splitlines():
+        if inst.count('\t'):
+            print 'Warning: Found tabs in assembly section.'
+        if (not inst.strip()) or inst.startswith('#'):
+            continue
+        cmd = inst[16:42].split()
+        if not cmd:
+            continue
+        byteName = cmd[0]
+        byteCode = dis.opmap[byteName]
+        lst.append(byteCode)
+        if byteCode >= dis.HAVE_ARGUMENT:
+            if len(cmd) != 2:
+                exit('Error: Opcode %r takes an argument' % byteName)
+            intArg = int(cmd[1])
+            lst.append(intArg % 256)
+            lst.append(intArg / 256)
+
+        elif len(cmd) != 1:
+            exit('Error: Opcode %r takes no argument' % byteName)
+            
+    return ''.join(chr(n) for n in lst)
+
+
+def code_elem(elem):
+    "Given an ET.Element, return the representing code object."
+    
+    if elem.tag == 'code':
+        
+        args = '''argcount nlocals stacksize flags code consts names
+                  varnames filename name firstlineno lnotab'''.split()
+        
+        return new.code(*[code_elem(elem.find('co_'+arg)) for arg in args])
+    
+    elif elem.tag.startswith('co_'):
+        text = elem.text
+        name = elem.tag[3:]
+        if name in 'filename name'.split():
+            return text
+        
+        elif name in 'argcount firstlineno nlocals stacksize'.split():
+            return int(text)
+        
+        elif name in 'cellvars freevars names varnames consts'.split():
+            return tuple(code_elem(e) for e in elem)
+        
+        elif name == 'flags':
+            assert len(text) == 6
+            assert text[:2] == '0x'
+            return int(text[2:], 16)
+        
+        elif name == 'lnotab':
+            assert text[:2] == '0x'
+            return text[2:].decode('hex')
+        
+        elif name == 'code':
+            return assemble(text)
+        
+    else:
+        return eval(elem.text)
+
+
+def code_xml(xml):
+    "Convert a single string containing XML into code object"
+    return code_elem(ET.XML(xml).find('code'))
+
+
+def pyc_xml(xml, filename):
+    """Convert a single string containing XML into python bytecode and
+       write this bytecode to file"""
+    elem = ET.XML(xml)
+    if not elem.find('head'):
+        exit('Error: <head> missing in XML file, cannot convert to pyc file.')
+    
+    f = open(filename, 'wb')
+
+    magic = elem.find('head/magic').text
+    assert magic[:2] == '0x'
+    f.write(magic[2:].decode('hex'))
+    
+    timestr = elem.find('head/modtime').text
+    f.write(struct.pack('L', time.mktime(time.strptime(timestr))))
+    
+    marshal.dump(code_elem(elem.find('code')), f)
+    
+    f.close()
+
+
+def test(filename):
+    import compiler
+    
+    co1 = compile(open(filename).read(), '<input>', 'exec')
+    xml1 = xml_code(co1)
+    
+    co2 = code_xml(xml1)
+    xml2 = xml_code(co2)
+    
+    assert xml1 == xml2
+
+
+def main():
+
+    if (len(sys.argv) == 2):
+        for arg in sys.argv:
+            filein = arg
+    else:
+        filein = "noFile"
+        print 'Command line incorrect !\nUsage: pyc2xml /tmp/YOURFILE.PYC'
+        exit()
+
+    if not((filein.endswith('.pyc')) or (filein.endswith('.pyo'))):
+        filein = "noFile"
+        print 'File-extension incorrect !\nUsage: pyc2xml /tmp/YOURFILE.PYC'
+        exit()
+    else:
+        xml = xml_pyc(filein)
+        fileout = '/tmp/disassembled.xml'
+        print 'Disassembling:', filein, ' --> ', fileout
+        fo = open(fileout, 'w')
+        fo.write(xml)
+        fo.close()
+
+
+if __name__ == "__main__":
+    main()
+
+
