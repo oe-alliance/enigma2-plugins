@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 776 $
-$Date: 2013-05-11 13:15:24 +0200 (Sat, 11 May 2013) $
-$Id: FritzCallFBF.py 776 2013-05-11 11:15:24Z michael $
+$Revision: 778 $
+$Date: 2013-06-21 15:42:22 +0200 (Fri, 21 Jun 2013) $
+$Id: FritzCallFBF.py 778 2013-06-21 13:42:22Z michael $
 '''
 
 # pylint: disable=W1401,E0611,F0401
@@ -344,7 +344,7 @@ class FritzCallFBF:
 						thisnumber = cleanNumber(thisnumber)
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						if not self.phonebook.phonebook.has_key(thisnumber):
-							debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
+							# debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
 							self.phonebook.phonebook[thisnumber] = thisname
 						else:
 							pass
@@ -371,7 +371,7 @@ class FritzCallFBF:
 					# name = name.encode('utf-8')
 					# Beware: strings in phonebook.phonebook have to be in utf-8!
 					if not self.phonebook.phonebook.has_key(thisnumber):
-						debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (name, __(thisnumber)))
+						# debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (name, __(thisnumber)))
 						self.phonebook.phonebook[thisnumber] = name
 					else:
 						debug("[FritzCallFBF] Ignoring '''%s''' with '''%s'''" % (name, __(thisnumber)))
@@ -1371,7 +1371,7 @@ class FritzCallFBF_05_50:
 						if config.plugins.FritzCall.showVanity.value and thisvanitys[i]:
 							thisname = thisname + ", " + _("Vanity") + ": " + thisvanitys[i]
 	
-						debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
+						# debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						self.phonebook.phonebook[thisnumber] = thisname
 		else:
@@ -2080,7 +2080,7 @@ class FritzCallFBF_05_27:
 						if config.plugins.FritzCall.showVanity.value and thisvanitys[i]:
 							thisname = thisname + ", " + _("Vanity") + ": " + thisvanitys[i]
 	
-						debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
+						# debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						self.phonebook.phonebook[thisnumber] = thisname
 		else:
