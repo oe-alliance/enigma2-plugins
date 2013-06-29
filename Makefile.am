@@ -55,7 +55,6 @@ SUBDIRS = \
 	multirc \
 	ncidclient \
 	netcaster \
-	networkbrowser \
 	ofdb \
 	orfat \
 	orfteletext \
@@ -122,6 +121,12 @@ SUBDIRS += \
 	mytube \
 	yttrailer \
 	webinterface
+endif
+
+if PLI
+SUBDIRS += networkbrowserpli
+else
+SUBDIRS += networkbrowser
 endif
 
 metadir = $(datadir)/meta

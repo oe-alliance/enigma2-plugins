@@ -80,6 +80,14 @@ if test "$with_tpm" = "yes"; then
 fi
 AM_CONDITIONAL(TPM, test "$with_tpm" = "yes")
 
+AC_ARG_WITH(pli,
+	AS_HELP_STRING([--with-pli], [enable plugins for image with openpli based e2]),
+	[with_pli="$withval"],[with_pli="no"])
+if test "$with_pli" = "yes"; then
+	AC_DEFINE([HAVE_PLI],[1],[Define to 1 to enable plugins for image with openpli based e2])
+fi
+AM_CONDITIONAL(PLI, test "$with_pli" = "yes")
+
 AC_ARG_WITH(debug,
 	AS_HELP_STRING([--without-debug],[disable debugging code]),
 	[with_debug="$withval"],[with_debug="yes"])
@@ -480,6 +488,13 @@ networkbrowser/src/Makefile
 networkbrowser/src/icons/Makefile
 networkbrowser/src/lib/Makefile
 networkbrowser/po/Makefile
+
+networkbrowserpli/Makefile
+networkbrowserpli/meta/Makefile
+networkbrowserpli/src/Makefile
+networkbrowserpli/src/icons/Makefile
+networkbrowserpli/src/lib/Makefile
+networkbrowserpli/po/Makefile
 
 ofdb/Makefile
 ofdb/meta/Makefile

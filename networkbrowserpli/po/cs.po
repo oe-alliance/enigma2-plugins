@@ -1,0 +1,263 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ims\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-28 16:39+0100\n"
+"PO-Revision-Date: 2012-02-14 09:17+0100\n"
+"Last-Translator: ims\n"
+"Language-Team: PLi <martin@volyne.cz>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+
+msgid ""
+"A mount entry with this name already exists!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"Bod připojení tohoto jména již existuje!\n"
+"Aktualizovat existující údaje a pokračovat?\n"
+
+msgid "Active"
+msgstr "Aktivní"
+
+msgid ""
+"Active/\n"
+"Inactive"
+msgstr ""
+"aktivní/\n"
+"neaktivní"
+
+msgid "Add a new NFS or CIFS mount point to your Dreambox."
+msgstr "Přidat nový NFS nebo CIFS připojovací bod."
+
+msgid "Add new network mount point"
+msgstr "Přidat nový připojovací bod"
+
+msgid ""
+"Are you sure you want to save this network mount?\n"
+"\n"
+msgstr ""
+"Opravdu chcete uložit tento připojovací bod?\n"
+"\n"
+
+msgid "Attempt to mount shares again"
+msgstr "Pokus znovu připojit sdílení"
+
+msgid "Attempt to recover lost mounts (in background)"
+msgstr "Pokus obnovit ztracené připojení (na pozadí)."
+
+msgid "Browse network neighbourhood"
+msgstr "Prohledání síťového okolí"
+
+msgid "CIFS share"
+msgstr "CIFS sdílení"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Change hostname"
+msgstr "Změna názvu v síti"
+
+msgid "Change the hostname of your Dreambox."
+msgstr "Změna názvu přijímače v síti."
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "Delete"
+msgstr "Smazat"
+
+msgid "Delete mount"
+msgstr "Smazat"
+
+msgid "Dir:"
+msgstr "adr:"
+
+msgid "Do you want to enter a username and password for this host?\n"
+msgstr "Chcete zadat uživatelské jméno a heslo pro tento hostitelský počítač?\n"
+
+msgid "Enter IP to scan..."
+msgstr "Zadejte IP pro hledání..."
+
+msgid "Enter new hostname for your Dreambox"
+msgstr "Zadejte síťový název Vašeho přijímače"
+
+msgid "Enter options:"
+msgstr "Zadejte možnosti:"
+
+msgid "Enter password:"
+msgstr "Zadejte heslo:"
+
+msgid "Enter share directory:"
+msgstr "Zadejte sdílený adresář:"
+
+msgid "Enter share name:"
+msgstr "Zadejte název sdílení:"
+
+msgid "Enter user and password for host: "
+msgstr "Zadání uživatele a hesla pro: "
+
+msgid "Enter username:"
+msgstr "Zadejte uživatelské jméno:"
+
+msgid "Expert"
+msgstr "Expert"
+
+msgid "Finished restarting your network"
+msgstr "Dokončen restart sítě"
+
+msgid "IP Address"
+msgstr "IP adresa"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Local share name"
+msgstr "Název pro sdílení"
+
+msgid "Manage network shares"
+msgstr "Správa síťových sdílení"
+
+msgid "Manage your network shares..."
+msgstr "Správa Vašich síťových sdílení..."
+
+msgid "Mount again"
+msgstr "Znovu připojit"
+
+msgid "Mount informations"
+msgstr "informace o připojení"
+
+msgid "Mount options"
+msgstr "Možnosti připojení"
+
+msgid "Mount type"
+msgstr "Typ připojení"
+
+msgid "MountManager"
+msgstr "Síťová připojení"
+
+msgid ""
+"Mounted/\n"
+"Unmounted"
+msgstr ""
+"připojeno/\n"
+"odpojeno"
+
+msgid "Mountpoints management"
+msgstr "Správa připojovacích bodů"
+
+msgid "Mounts editor"
+msgstr "Editor připojení"
+
+msgid "Mounts management"
+msgstr "Správa připojení"
+
+msgid "NFS share"
+msgstr "NFS sdílení"
+
+msgid "NetworkBrowser"
+msgstr "Procházet síť"
+
+msgid "No network devices found!"
+msgstr "Nenalezeno žádné síťové zařízení!"
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "Please wait for activation of your network mount..."
+msgstr "Počkejte na aktivaci Vašeho síťového připojení..."
+
+msgid "Please wait while removing your network mount..."
+msgstr "Čekejte na odstranění Vašeho síťového připojení..."
+
+msgid "Please wait while updating your network mount..."
+msgstr "Čekejte na dokončení aktualizace síťového připojení..."
+
+msgid "Please wait while your network is restarting..."
+msgstr "Čekejte prosím, zatímco se síť restartuje..."
+
+msgid "Press OK to activate the settings."
+msgstr "Stiskněte OK pro aktivaci nastavení."
+
+msgid "Press OK to collapse this host"
+msgstr "Stiskněte OK pro sbalení tohoto hostitele"
+
+msgid "Press OK to edit selected settings."
+msgstr "Stiskněte OK pro úpravu vybraného nastavení."
+
+msgid "Press OK to edit the settings."
+msgstr "Stiskněte OK pro úpravu nastavení."
+
+msgid "Press OK to expand this host"
+msgstr "Stiskněte OK pro rozbalení tohoto hostitele"
+
+msgid "Press OK to mount this share!"
+msgstr "Stiskněte OK pro připojení tohoto sdílení!"
+
+msgid "Press OK to mount!"
+msgstr "Stiskněte OK pro připojení!"
+
+msgid "Press OK to save settings."
+msgstr "Stiskněte OK pro uložení nastavení"
+
+msgid "Press OK to select."
+msgstr "Stiskněte OK pro výběr. "
+
+msgid "Rescan"
+msgstr "Znovu vyhledat"
+
+msgid "Scan NFS share"
+msgstr "Hledat NFS sdílení"
+
+msgid "Scan range"
+msgstr "Rozsah hledání"
+
+msgid "Search for network shares"
+msgstr "Vyhledat sdílení v síti"
+
+msgid "Search for network shares..."
+msgstr "Vyhledat síťová sdílení..."
+
+msgid "Searching your network. Please wait..."
+msgstr "Prohledávám Vaši síť. Čekejte, prosím..."
+
+msgid "Server IP"
+msgstr "IP serveru"
+
+msgid "Server share"
+msgstr "Sdíleno serverem jako"
+
+msgid "User management"
+msgstr "Správa uživatele"
+
+msgid "Usermanager"
+msgstr "Správce uživatele"
+
+msgid "Username"
+msgstr "Uživatel"
+
+msgid "View, edit or delete mountpoints on your Dreambox."
+msgstr "Prohlížet, upravit nebo smazat připojovací body Vašeho přijímače."
+
+msgid "View, edit or delete usernames and passwords for your network."
+msgstr "Prohlížet, upravit nebo smazat uživatele a hesla pro Vaši síť"
+
+msgid "Your network mount has been activated."
+msgstr "Vaše síťové připojení bylo aktivováno."
+
+msgid "Your network mount has been removed."
+msgstr "Vaše síťové připojení bylo odstraněno."
+
+msgid "Your network mount has been updated."
+msgstr "Bod připojení byl zaktualizován."
+
+msgid "use as HDD replacement"
+msgstr "Použít jako náhradu HDD "
+

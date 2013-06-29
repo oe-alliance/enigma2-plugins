@@ -1,0 +1,276 @@
+# Swedish translations for tuxbox-enigma package.
+# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Automatically generated, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-28 16:39+0100\n"
+"PO-Revision-Date: 2012-08-05 15:41+0100\n"
+"Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
+"Language-Team: WeeGull <weegull@hotmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: SWEDEN\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+
+msgid ""
+"A mount entry with this name already exists!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"En monteringspunkt med samma namn finns redan!\n"
+"Uppdatera befintligt monteringspunkt och forsätta?\n"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid ""
+"Active/\n"
+"Inactive"
+msgstr ""
+"Aktiv/\n"
+"Inaktiv"
+
+msgid "Add a new NFS or CIFS mount point to your Dreambox."
+msgstr "Lägg till ny NFS eller CIFS monteringspunkt i din mottagare."
+
+msgid "Add new network mount point"
+msgstr "Lägg till ny nätverks monteringspunkt"
+
+msgid ""
+"Are you sure you want to save this network mount?\n"
+"\n"
+msgstr ""
+"Är du säker på att du vill spara den här nätverksmonteringen?\n"
+"\n"
+
+msgid "Attempt to mount shares again"
+msgstr "Försök att montera delning igen"
+
+msgid "Attempt to recover lost mounts (in background)"
+msgstr "Försök att återställa förlorade monteringar (i bakgrunden)"
+
+msgid "Browse network neighbourhood"
+msgstr "Bläddra i nätverket"
+
+msgid "CIFS share"
+msgstr "CIFS delning"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Change hostname"
+msgstr "Byt hostnamn"
+
+msgid "Change the hostname of your Dreambox."
+msgstr "Byt hostnamn på din mottagare."
+
+msgid "Close"
+msgstr "Stäng"
+
+msgid "Delete"
+msgstr "Ta bort"
+
+msgid "Delete mount"
+msgstr "Ta bort montering"
+
+msgid "Dir:"
+msgstr "Dir:"
+
+msgid "Do you want to enter a username and password for this host?\n"
+msgstr "Vill du ange ett användarnamn och lösenord för den här hosten?\n"
+
+msgid "Enter IP to scan..."
+msgstr "Ange IP för att skanna ..."
+
+msgid "Enter new hostname for your Dreambox"
+msgstr "Ange nytt hostnamn för din mottagare"
+
+msgid "Enter options:"
+msgstr "Ange optioner:"
+
+msgid "Enter password:"
+msgstr "Ange lösenord:"
+
+msgid "Enter share directory:"
+msgstr "Ange delat bibliotek:"
+
+msgid "Enter share name:"
+msgstr "Ange delningsnamn:"
+
+msgid "Enter user and password for host: "
+msgstr "Ange användare och lösenord för host: "
+
+msgid "Enter username:"
+msgstr "Ange användarnamn:"
+
+msgid "Expert"
+msgstr "Expert"
+
+msgid "Finished restarting your network"
+msgstr "Klar med omstart av ditt nätverk"
+
+msgid "IP Address"
+msgstr "IP Adress"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Local share name"
+msgstr "Lokalt delningsnamn"
+
+msgid "Manage network shares"
+msgstr "Hantera nätverksdelningar"
+
+msgid "Manage your network shares..."
+msgstr "Hantera dina nätverksdelningar..."
+
+msgid "Mount again"
+msgstr "Montera på nytt"
+
+msgid "Mount informations"
+msgstr "Monteringsinformation"
+
+msgid "Mount options"
+msgstr "Monteringsoptioner"
+
+msgid "Mount type"
+msgstr "Monteringstyp"
+
+msgid "MountManager"
+msgstr "MonteringsHanterare"
+
+msgid ""
+"Mounted/\n"
+"Unmounted"
+msgstr ""
+"Monterad/\n"
+"Omonterad"
+
+msgid "Mountpoints management"
+msgstr "Monteringspunkts hantering"
+
+msgid "Mounts editor"
+msgstr "Monteringseditor"
+
+msgid "Mounts management"
+msgstr "Monteringshantering"
+
+msgid "NFS share"
+msgstr "NFS delning"
+
+msgid "NetworkBrowser"
+msgstr "Nätverksbläddring"
+
+msgid "No network devices found!"
+msgstr "Inget nätverkskort funnet!"
+
+msgid "Password"
+msgstr "Lösenord"
+
+msgid "Please wait for activation of your network mount..."
+msgstr "Vänligen vänta på aktivering av dina nätverksmontering..."
+
+msgid "Please wait while removing your network mount..."
+msgstr "Vänligen vänta medans dina nätverksmontering tas bort..."
+
+msgid "Please wait while updating your network mount..."
+msgstr "Vänligen vänta medans dina nätverksmontering uppdateras..."
+
+msgid "Please wait while your network is restarting..."
+msgstr "Vänligen vänta medans ditt nätverk omstartas..."
+
+msgid "Press OK to activate the settings."
+msgstr "Tryck OK för att aktivera inställningarna."
+
+msgid "Press OK to collapse this host"
+msgstr "Tryck OK för att stänga denna host."
+
+msgid "Press OK to edit selected settings."
+msgstr "Tryck OK för att ändra vald inställning."
+
+msgid "Press OK to edit the settings."
+msgstr "Tryck OK för att ändra inställning."
+
+msgid "Press OK to expand this host"
+msgstr "Tryck OK för att utvidga denna host."
+
+msgid "Press OK to mount this share!"
+msgstr "Tryck OK för att montera denna delning!"
+
+msgid "Press OK to mount!"
+msgstr "Tryck OK för att montera!"
+
+msgid "Press OK to save settings."
+msgstr "Tryck OK för att spara inställning."
+
+msgid "Press OK to select."
+msgstr "Tryck OK för att välja."
+
+msgid "Rescan"
+msgstr "Ny sökning"
+
+msgid "Scan NFS share"
+msgstr "Skanna NFS delning"
+
+msgid "Scan range"
+msgstr "Skanna området"
+
+msgid "Search for network shares"
+msgstr "Söker efter nätverksutdelningar"
+
+msgid "Search for network shares..."
+msgstr "Söker efter nätverksutdelningar..."
+
+msgid "Searching your network. Please wait..."
+msgstr "Söker ditt nätverk. Var god vänta ..."
+
+msgid "Server IP"
+msgstr "Server IP"
+
+msgid "Server share"
+msgstr "Server delning"
+
+msgid "User management"
+msgstr "Användarhantering"
+
+msgid "Usermanager"
+msgstr "Användarhanterare"
+
+msgid "Username"
+msgstr "Användarnamn"
+
+msgid "View, edit or delete mountpoints on your Dreambox."
+msgstr "Visa, ändra eller ta bort monteringspunkter på din mottagare."
+
+msgid "View, edit or delete usernames and passwords for your network."
+msgstr "Visa, ändra eller ta bort användarnamn och lösenord på ditt nätverk."
+
+msgid "Your network mount has been activated."
+msgstr "Din nätverksmontering har aktiverats."
+
+msgid "Your network mount has been removed."
+msgstr "Din nätverksmontering har tagits bort."
+
+msgid "Your network mount has been updated."
+msgstr "Din nätverksmontering har uppdaterats."
+
+msgid "use as HDD replacement"
+msgstr "Använd som HDD ersättning"
+
+#~ msgid "Delete selected mount"
+#~ msgstr "Ta bort vald montering"
+
+#~ msgid "Rescan network"
+#~ msgstr "Omsök nätverk"
+
+#~ msgid "Retrieving network information. Please wait..."
+#~ msgstr "Hämtar nätinformationssystem. Vänligen vänta..."
+
+#~ msgid "Use domain/username for windows domains as username!"
+#~ msgstr "Använd domän/användarnamn för Windows domän som användarnamn!"

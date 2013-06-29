@@ -1,0 +1,256 @@
+# Norwegian translations for tuxbox-enigma package.
+# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Automatically generated, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-28 16:39+0100\n"
+"PO-Revision-Date: 2008-02-14 11:44+0100\n"
+"Last-Translator: theMMMMMM <theMMMMMM@gmail.com>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Norwegian\n"
+"X-Poedit-Country: NORWAY\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+
+msgid ""
+"A mount entry with this name already exists!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid ""
+"Active/\n"
+"Inactive"
+msgstr ""
+
+msgid "Add a new NFS or CIFS mount point to your Dreambox."
+msgstr ""
+
+msgid "Add new network mount point"
+msgstr ""
+
+msgid ""
+"Are you sure you want to save this network mount?\n"
+"\n"
+msgstr ""
+
+msgid "Attempt to mount shares again"
+msgstr ""
+
+msgid "Attempt to recover lost mounts (in background)"
+msgstr ""
+
+msgid "Browse network neighbourhood"
+msgstr ""
+
+msgid "CIFS share"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Change hostname"
+msgstr ""
+
+msgid "Change the hostname of your Dreambox."
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Delete mount"
+msgstr ""
+
+msgid "Dir:"
+msgstr ""
+
+msgid "Do you want to enter a username and password for this host?\n"
+msgstr ""
+
+msgid "Enter IP to scan..."
+msgstr ""
+
+msgid "Enter new hostname for your Dreambox"
+msgstr ""
+
+msgid "Enter options:"
+msgstr ""
+
+msgid "Enter password:"
+msgstr ""
+
+msgid "Enter share directory:"
+msgstr ""
+
+msgid "Enter share name:"
+msgstr ""
+
+msgid "Enter user and password for host: "
+msgstr ""
+
+msgid "Enter username:"
+msgstr ""
+
+msgid "Expert"
+msgstr ""
+
+msgid "Finished restarting your network"
+msgstr ""
+
+msgid "IP Address"
+msgstr ""
+
+msgid "IP:"
+msgstr ""
+
+msgid "Local share name"
+msgstr ""
+
+msgid "Manage network shares"
+msgstr ""
+
+msgid "Manage your network shares..."
+msgstr ""
+
+msgid "Mount again"
+msgstr ""
+
+msgid "Mount informations"
+msgstr ""
+
+msgid "Mount options"
+msgstr ""
+
+msgid "Mount type"
+msgstr ""
+
+msgid "MountManager"
+msgstr ""
+
+msgid ""
+"Mounted/\n"
+"Unmounted"
+msgstr ""
+
+msgid "Mountpoints management"
+msgstr ""
+
+msgid "Mounts editor"
+msgstr ""
+
+msgid "Mounts management"
+msgstr ""
+
+msgid "NFS share"
+msgstr ""
+
+msgid "NetworkBrowser"
+msgstr ""
+
+msgid "No network devices found!"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Please wait for activation of your network mount..."
+msgstr ""
+
+msgid "Please wait while removing your network mount..."
+msgstr ""
+
+msgid "Please wait while updating your network mount..."
+msgstr ""
+
+msgid "Please wait while your network is restarting..."
+msgstr ""
+
+msgid "Press OK to activate the settings."
+msgstr ""
+
+msgid "Press OK to collapse this host"
+msgstr ""
+
+msgid "Press OK to edit selected settings."
+msgstr ""
+
+msgid "Press OK to edit the settings."
+msgstr ""
+
+msgid "Press OK to expand this host"
+msgstr ""
+
+msgid "Press OK to mount this share!"
+msgstr ""
+
+msgid "Press OK to mount!"
+msgstr ""
+
+msgid "Press OK to save settings."
+msgstr ""
+
+msgid "Press OK to select."
+msgstr ""
+
+msgid "Rescan"
+msgstr ""
+
+msgid "Scan NFS share"
+msgstr ""
+
+msgid "Scan range"
+msgstr ""
+
+msgid "Search for network shares"
+msgstr ""
+
+msgid "Search for network shares..."
+msgstr ""
+
+msgid "Searching your network. Please wait..."
+msgstr ""
+
+msgid "Server IP"
+msgstr ""
+
+msgid "Server share"
+msgstr ""
+
+msgid "User management"
+msgstr ""
+
+msgid "Usermanager"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "View, edit or delete mountpoints on your Dreambox."
+msgstr ""
+
+msgid "View, edit or delete usernames and passwords for your network."
+msgstr ""
+
+msgid "Your network mount has been activated."
+msgstr ""
+
+msgid "Your network mount has been removed."
+msgstr ""
+
+msgid "Your network mount has been updated."
+msgstr ""
+
+msgid "use as HDD replacement"
+msgstr ""

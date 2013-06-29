@@ -1,0 +1,262 @@
+# PL translations for tuxbox-enigma package.
+# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Automatically generated, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-28 16:39+0100\n"
+"PO-Revision-Date: 2012-02-15 21:44+0100\n"
+"Last-Translator: blzr <blzr@o2.pl>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+"A mount entry with this name already exists!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"Udział sieciowy o tej nazwie już istnieje!\n"
+"Zaktualizować istniejący wpis i kontynuować?\n"
+
+msgid "Active"
+msgstr "Aktywny"
+
+msgid ""
+"Active/\n"
+"Inactive"
+msgstr ""
+"Aktywny/\n"
+"Niekatywny"
+
+msgid "Add a new NFS or CIFS mount point to your Dreambox."
+msgstr "Dodaj nowy udział sieciowy NFS lub CIFS"
+
+msgid "Add new network mount point"
+msgstr "Dodawanie udziałów sieciowych"
+
+msgid ""
+"Are you sure you want to save this network mount?\n"
+"\n"
+msgstr ""
+"Czy chcesz zapisać ten udział sieciowy?\n"
+"\n"
+
+msgid "Attempt to mount shares again"
+msgstr "Spróbuj podmontować udziały ponownie"
+
+msgid "Attempt to recover lost mounts (in background)"
+msgstr "Próbuje podmontować ponownie odłączone udziały sieciowe (w tle)."
+
+msgid "Browse network neighbourhood"
+msgstr "Przeglądaj otoczenie sieciowe"
+
+msgid "CIFS share"
+msgstr "Udział CIFS"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Change hostname"
+msgstr "Zmień nazwę hosta"
+
+msgid "Change the hostname of your Dreambox."
+msgstr "Zmień nazwę hosta dla STB."
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Delete"
+msgstr "Usuń"
+
+msgid "Delete mount"
+msgstr "Usuń udział sieciowy"
+
+msgid "Dir:"
+msgstr "Katalog:"
+
+msgid "Do you want to enter a username and password for this host?\n"
+msgstr "Czy chcesz wpisać nazwę użytkownika i hasło dla tego hosta?\n"
+
+msgid "Enter IP to scan..."
+msgstr "Wpisz IP do skanowania..."
+
+msgid "Enter new hostname for your Dreambox"
+msgstr "Wpisz nową nazwę hosta dla STB"
+
+msgid "Enter options:"
+msgstr "Wpisz opcje:"
+
+msgid "Enter password:"
+msgstr "Wpisz hasło:"
+
+msgid "Enter share directory:"
+msgstr "Wpisz katalog udostępniony:"
+
+msgid "Enter share name:"
+msgstr "Wpisz nazwę udziału sieciowego:"
+
+msgid "Enter user and password for host: "
+msgstr "Wpisz nazwę użytkownika i hasło dla hosta: "
+
+msgid "Enter username:"
+msgstr "Wpisz nazwę użytkownika:"
+
+msgid "Expert"
+msgstr "Ekspert"
+
+msgid "Finished restarting your network"
+msgstr "Zakończono restartowanie sieci"
+
+msgid "IP Address"
+msgstr "Adres IP"
+
+msgid "IP:"
+msgstr "IP"
+
+msgid "Local share name"
+msgstr "Lokalna nazwa udziału"
+
+msgid "Manage network shares"
+msgstr "Zarządzaj udziałami sieciowymi"
+
+msgid "Manage your network shares..."
+msgstr "Zarządzaj udziałami sieciowymi..."
+
+msgid "Mount again"
+msgstr "Montuj ponownie"
+
+msgid "Mount informations"
+msgstr "Informacje o udziale sieciowym"
+
+msgid "Mount options"
+msgstr "Opcje montowania"
+
+msgid "Mount type"
+msgstr "Typ udziału sieciowego"
+
+msgid "MountManager"
+msgstr "Menadżer montowania"
+
+msgid ""
+"Mounted/\n"
+"Unmounted"
+msgstr ""
+"Zamontowany/\n"
+"Odmontowany"
+
+msgid "Mountpoints management"
+msgstr "Zarządzanie udziałami sieciowymi"
+
+msgid "Mounts editor"
+msgstr "Edytor montowania"
+
+msgid "Mounts management"
+msgstr "Zarządzanie udziałami sieciowymi"
+
+msgid "NFS share"
+msgstr "Udział NFS"
+
+msgid "NetworkBrowser"
+msgstr "Przeglądarka sieci"
+
+msgid "No network devices found!"
+msgstr "Nie znaleziono urządzeń sieciowych!"
+
+msgid "Password"
+msgstr "Hasło"
+
+msgid "Please wait for activation of your network mount..."
+msgstr "Czekaj na aktywację twojego udziału sieciowego..."
+
+msgid "Please wait while removing your network mount..."
+msgstr "Czekaj, trwa usuwanie udziału sieciowego..."
+
+msgid "Please wait while updating your network mount..."
+msgstr "Czekaj, trwa aktualizacjia udziału sieciowego..."
+
+msgid "Please wait while your network is restarting..."
+msgstr "Czekaj, trwa restart sieci..."
+
+msgid "Press OK to activate the settings."
+msgstr "Wciśnij OK, aby aktywować ustawienia"
+
+msgid "Press OK to collapse this host"
+msgstr "Wciśnij OK, aby 'zwinąć' tego hosta"
+
+msgid "Press OK to edit selected settings."
+msgstr "Wcisnij OK, aby edytować wybrane ustawienia."
+
+msgid "Press OK to edit the settings."
+msgstr "Aby edytować ustawienia, wciśnij OK."
+
+msgid "Press OK to expand this host"
+msgstr "Wciśnij OK, aby 'rozwinąć' tego hosta"
+
+msgid "Press OK to mount this share!"
+msgstr "Wciśnij OK, aby zamontować ten udział!"
+
+msgid "Press OK to mount!"
+msgstr "Wciśnij OK, aby zamontować!"
+
+msgid "Press OK to save settings."
+msgstr "Wciśnij OK, aby zapisać ustawienia."
+
+msgid "Press OK to select."
+msgstr "Wciśnij OK, aby wybrać."
+
+msgid "Rescan"
+msgstr "Skanuj ponownie"
+
+msgid "Scan NFS share"
+msgstr "Przeszukaj udział NFS"
+
+msgid "Scan range"
+msgstr "Zakres skanowania"
+
+msgid "Search for network shares"
+msgstr "Szukaj udziałów sieciowych"
+
+msgid "Search for network shares..."
+msgstr "Szukaj udziałów sieciowych..."
+
+msgid "Searching your network. Please wait..."
+msgstr "Wyszukiwanie sieci. Proszę czekać..."
+
+msgid "Server IP"
+msgstr "IP serwera"
+
+msgid "Server share"
+msgstr "Udostępniony udział serwera"
+
+msgid "User management"
+msgstr "Zarządznie użytkownikami"
+
+msgid "Usermanager"
+msgstr "Menadżer użytkowników"
+
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+msgid "View, edit or delete mountpoints on your Dreambox."
+msgstr "Zobacz, edytuj lub usuń udziały sieciowe."
+
+msgid "View, edit or delete usernames and passwords for your network."
+msgstr "Zobacz, edytuj lub usuń nazwy użytkowników i hasła twojej sieci."
+
+msgid "Your network mount has been activated."
+msgstr "Udział sieciowy został aktywowany."
+
+msgid "Your network mount has been removed."
+msgstr "Udział sieciowy został usunięty."
+
+msgid "Your network mount has been updated."
+msgstr "Udział sieciowy został zaktualizowany."
+
+msgid "use as HDD replacement"
+msgstr "Użyj jako HDD"
+

@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Network" />
+	  </prerequisites>
+          <info>
+                    <author>acid-burn,nixkoenner</author>
+                    <name>NetworkBrowser</name>
+                    <packagename>enigma2-plugin-systemplugins-networkbrowser</packagename>
+                    <shortdescription>Browse for and connect to network shares</shortdescription>
+                    <description>Browse for nfs/cifs shares and connect to them.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_networkbrowser_en.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-networkbrowser" />
+	  </files>
+</default>

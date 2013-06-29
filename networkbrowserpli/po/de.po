@@ -1,0 +1,270 @@
+# German translations for tuxbox-enigma package.
+# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Automatically generated, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-28 16:39+0100\n"
+"PO-Revision-Date: 2012-01-28 17:22+0100\n"
+"Last-Translator: \n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+
+msgid ""
+"A mount entry with this name already exists!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"Eine Netzwerkfreigabe mit diesem Namen existiert bereits!\n"
+"Eintrag aktualisieren und fortfahren?\n"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid ""
+"Active/\n"
+"Inactive"
+msgstr ""
+"Aktiv/\n"
+"Inaktiv"
+
+msgid "Add a new NFS or CIFS mount point to your Dreambox."
+msgstr "Eine neue CIFS oder NFS Freigabe hinzufügen."
+
+msgid "Add new network mount point"
+msgstr "Netzwerkfreigabe hinzufügen"
+
+msgid ""
+"Are you sure you want to save this network mount?\n"
+"\n"
+msgstr ""
+"Wollen Sie diese Netzwerkfreigabe speichern?\n"
+"\n"
+
+msgid "Attempt to mount shares again"
+msgstr "Versuche Netzwerkfreigaben erneut zu verbinden"
+
+msgid "Attempt to recover lost mounts (in background)"
+msgstr "Versuche verlorene Netzwerkfreigaben (im Hintergrund) erneut zu verbinden "
+
+msgid "Browse network neighbourhood"
+msgstr "Netzwerkumgebung durchsuchen"
+
+msgid "CIFS share"
+msgstr "CIFS Freigabe"
+
+msgid "Cancel"
+msgstr "Abbruch"
+
+msgid "Change hostname"
+msgstr "Netzwerkname ändern"
+
+msgid "Change the hostname of your Dreambox."
+msgstr "Ändern Sie den Netzwerknamen Ihrer STB."
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Delete mount"
+msgstr "Lösche Freigabe"
+
+msgid "Dir:"
+msgstr "Verzeichnis:"
+
+msgid "Do you want to enter a username and password for this host?\n"
+msgstr "Wollen Sie einen Benutzernamen und Passwort für diesen Rechner eingeben?\n"
+
+msgid "Enter IP to scan..."
+msgstr "IP zum Scannen eingeben"
+
+msgid "Enter new hostname for your Dreambox"
+msgstr "Neuen Netzwerknamen für Ihre STB eingeben"
+
+msgid "Enter options:"
+msgstr "Optionen eingeben:"
+
+msgid "Enter password:"
+msgstr "Passwort eingeben:"
+
+msgid "Enter share directory:"
+msgstr "Freigabeverzeichnis eingeben:"
+
+msgid "Enter share name:"
+msgstr "Freigabename eingeben:"
+
+msgid "Enter user and password for host: "
+msgstr "Benutzernamen und Passwort eingeben: "
+
+msgid "Enter username:"
+msgstr "Benutzernamen eingeben:"
+
+msgid "Expert"
+msgstr "Experte"
+
+msgid "Finished restarting your network"
+msgstr "Netzwerkneustart abgeschlossen"
+
+msgid "IP Address"
+msgstr "IP Adresse"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Local share name"
+msgstr "Lokaler Freigabename"
+
+msgid "Manage network shares"
+msgstr "Netzwerkfreigaben verwalten"
+
+msgid "Manage your network shares..."
+msgstr "Verwalten Sie Ihre Netzwerkfreigaben..."
+
+msgid "Mount again"
+msgstr "Verbinde erneut"
+
+msgid "Mount informations"
+msgstr "Freigabe Informationen"
+
+msgid "Mount options"
+msgstr "Freigabeoptionen"
+
+msgid "Mount type"
+msgstr "Freigabetyp"
+
+msgid "MountManager"
+msgstr "Freigabe Manager"
+
+msgid ""
+"Mounted/\n"
+"Unmounted"
+msgstr ""
+"Verbunden/\n"
+"nicht Verbunden"
+
+msgid "Mountpoints management"
+msgstr "Freigaben Verwaltung"
+
+msgid "Mounts editor"
+msgstr "Freigaben Editor"
+
+msgid "Mounts management"
+msgstr "Freigaben Verwaltung"
+
+msgid "NFS share"
+msgstr "NFS Freigabe"
+
+msgid "NetworkBrowser"
+msgstr "Netzwerkbrowser"
+
+msgid "No network devices found!"
+msgstr "Keine Netzwerkgeräte gefunden"
+
+msgid "Password"
+msgstr "Passwort"
+
+msgid "Please wait for activation of your network mount..."
+msgstr "Bitte warten während die Netzwerkfreigabe aktiviert wird..."
+
+msgid "Please wait while removing your network mount..."
+msgstr "Bitte warten während die Netzwerkfreigabe entfernt wird..."
+
+msgid "Please wait while updating your network mount..."
+msgstr "Bitte warten während die Freigabe aktualisiert wird..."
+
+msgid "Please wait while your network is restarting..."
+msgstr "Bitte warten während das Netzwerk neu startet..."
+
+msgid "Press OK to activate the settings."
+msgstr "OK drücken zum Aktivieren."
+
+msgid "Press OK to collapse this host"
+msgstr "OK drücken, um diesen Rechner zusammenzuklappen"
+
+msgid "Press OK to edit selected settings."
+msgstr "OK drücken zum Editieren."
+
+msgid "Press OK to edit the settings."
+msgstr "OK drücken zum Editieren."
+
+msgid "Press OK to expand this host"
+msgstr "OK drücken, um diesen Rechner aufzuklappen"
+
+msgid "Press OK to mount this share!"
+msgstr "OK drücken, um diese Freigabe zu verbinden!"
+
+msgid "Press OK to mount!"
+msgstr "OK drücken zum Verbinden."
+
+msgid "Press OK to save settings."
+msgstr "OK drücken zum Speichern."
+
+msgid "Press OK to select."
+msgstr "Ok drücken zum Auswählen."
+
+msgid "Rescan"
+msgstr "Erneute Suche"
+
+msgid "Scan NFS share"
+msgstr "Durchsuche NFS Freigaben"
+
+msgid "Scan range"
+msgstr "Bereichsuche"
+
+msgid "Search for network shares"
+msgstr "Suche nach Netzwerkfreigaben"
+
+msgid "Search for network shares..."
+msgstr "Suche nach Netzwerkfreigaben..."
+
+msgid "Searching your network. Please wait..."
+msgstr "Netzwerk wird durchsucht. Bitte warten..."
+
+msgid "Server IP"
+msgstr "Server IP"
+
+msgid "Server share"
+msgstr "Server Freigabe"
+
+msgid "User management"
+msgstr "Benutzerwaltung"
+
+msgid "Usermanager"
+msgstr "Benutzerverwaltung"
+
+msgid "Username"
+msgstr "Benutzername"
+
+msgid "View, edit or delete mountpoints on your Dreambox."
+msgstr "Verwalten, bearbeiten oder löschen Sie Ihre Netzwerkfreigaben."
+
+msgid "View, edit or delete usernames and passwords for your network."
+msgstr "Verwalten, bearbeiten oder löschen Sie Benutzernamen und Passwörter"
+
+msgid "Your network mount has been activated."
+msgstr "Ihre Netzwerkfreigabe wurde aktiviert."
+
+msgid "Your network mount has been removed."
+msgstr "Ihre Netzwerkfreigabe wurde entfernt."
+
+msgid "Your network mount has been updated."
+msgstr "Ihre Netzwerkfreigabe wurde aktualisiert."
+
+msgid "use as HDD replacement"
+msgstr "Als Festplattenersatz nutzen"
+
+#~ msgid "Delete selected mount"
+#~ msgstr "Ausgewählte Freigabe löschen"
+
+#~ msgid "Rescan network"
+#~ msgstr "Netzwerk erneut durchsuchen"
