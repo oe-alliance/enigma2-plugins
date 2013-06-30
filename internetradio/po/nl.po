@@ -8,227 +8,232 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-12-03 15:01+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2013-06-30 06:59+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: Andy Blackburn/Rob van der DOes\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #, python-format
 msgid "%s ..."
-msgstr ""
+msgstr "%s ..."
 
 #, python-format
 msgid "%s..."
-msgstr ""
+msgstr "%s..."
 
 msgid "1 minutes"
-msgstr ""
+msgstr "1 minuut"
 
 msgid "3 minutes"
-msgstr ""
+msgstr "3 minuten"
 
 msgid "30 seconds"
-msgstr ""
+msgstr "30 seconden"
 
 msgid "Add current playing stream to favorite"
-msgstr ""
+msgstr "Voeg actuele stream toe aan favoriet"
 
 msgid "Add current selected genre to favorite"
-msgstr ""
+msgstr "Voeg geselecteerde stream toe aan favoriet"
 
 msgid "Add current selected station to favorite"
-msgstr ""
+msgstr "Voeg geselecteerd station toe aan favoriet"
 
 msgid "Add sequence number to output file"
-msgstr ""
+msgstr "Voeg volgnummer toe aan output bestand"
 
 msgid "All Countries"
-msgstr ""
+msgstr "Alle landen"
 
 msgid "All Genres"
-msgstr ""
+msgstr "Alle Genres"
 
 msgid "Blank"
-msgstr ""
+msgstr "Blank"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 msgid "Close"
-msgstr ""
+msgstr "Sluit"
 
 msgid "Config"
-msgstr ""
+msgstr "Config"
 
 msgid "Countries"
-msgstr ""
+msgstr "Landen"
 
 msgid "Create a directory for each stream"
-msgstr ""
+msgstr "Maak een map voor elke stream"
 
 msgid "Do you really want to stop the recording?"
-msgstr ""
+msgstr "Wilt u de opname echt stoppen?"
 
 msgid "Enter in minutes (0 means unlimited)"
-msgstr ""
+msgstr "Geef in minuten (0 betekent onbeperkt)"
 
 msgid "Enter new name for favorite item"
-msgstr ""
+msgstr "Geef nieuwe naam voor favoriet"
 
 msgid "Enter text to search for"
-msgstr ""
+msgstr "Geef zoektekst in"
 
 msgid "Favorite list"
-msgstr ""
+msgstr "Favorietenlijst"
 
 msgid "Favorites"
-msgstr ""
+msgstr "Favorieten"
 
 msgid "Filter:"
-msgstr ""
+msgstr "Filter:"
 
 msgid "Fullscreen"
-msgstr ""
+msgstr "Fullscreen"
 
 msgid "Fullscreen Layout"
-msgstr ""
+msgstr "Fullscreen Layout"
 
 msgid "Fullscreen auto activation"
-msgstr ""
+msgstr "Fullscreen automatisch activeren"
 
 msgid "Genres"
-msgstr ""
+msgstr "Genres"
 
 #, python-format
 msgid "Getting %s"
-msgstr ""
+msgstr "Verkrijg %s"
 
 #, python-format
 msgid "Getting InternetRadio %s list..."
-msgstr ""
+msgstr "Haalt InternetRadio %s lijst binnen..."
 
 #, python-format
 msgid ""
 "Getting streaming data from\n"
 "%s"
 msgstr ""
+"Krijgt stream-data van\n"
+"%s"
 
 #, python-format
 msgid "Getting streaming data from %s"
-msgstr ""
+msgstr "Krijgt stream-data van %s"
 
 msgid "Internet Radio"
-msgstr ""
+msgstr "Internet Radio"
 
 #, python-format
 msgid "InternetRadio filter list (%s)"
-msgstr ""
+msgstr "InternetRadio filterlijst (%s)"
 
 #, python-format
 msgid "InternetRadio station list for filter: %s"
-msgstr ""
+msgstr "InternetRadio stationslijst voor filter: %s"
 
 #, python-format
 msgid "InternetRadio station list for search-criteria: %s"
-msgstr ""
+msgstr "InternetRadio stationslijst voor zoek-criteria: %s"
 
 msgid "Invalid Location"
-msgstr ""
+msgstr "Ongeldige lokatie"
 
 msgid "No streaming data found..."
-msgstr ""
+msgstr "Geen streaming-data gevonden..."
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "OLED only"
-msgstr ""
+msgstr "Alleen OLED"
 
 msgid "Off"
-msgstr ""
+msgstr "Uit"
 
 msgid "On"
-msgstr ""
+msgstr "Aan"
 
 msgid "Only running streamings can be recorded!"
-msgstr ""
+msgstr "Alleen lopende streams kunnen worden opgenomen!"
 
 msgid "Record"
-msgstr ""
+msgstr "Opname"
 
 msgid "Recording length"
-msgstr ""
+msgstr "Opma,e lemgte"
 
 msgid "Recording location:"
-msgstr ""
+msgstr "Opname lokatie:"
 
 msgid "Recording stream station"
-msgstr ""
+msgstr "Neemt streamende station op"
 
 msgid "Rip to single file, name is timestamped"
-msgstr ""
+msgstr "Rip naar enkel bestand; naam krijgt tijdstempel"
 
 msgid "Screen and OLED"
-msgstr ""
+msgstr "Scherm en OLED"
 
 msgid "Screen only"
-msgstr ""
+msgstr "Alleen scherm"
 
 msgid "Search"
-msgstr ""
+msgstr "Zoek"
 
 #, python-format
 msgid "Searching InternetRadio for %s..."
-msgstr ""
+msgstr "Zoekt InternetRadio %s..."
 
 msgid "Show TV"
-msgstr ""
+msgstr "Toon TV"
 
 msgid "Show cover arts"
-msgstr ""
+msgstr "Toon cover arts"
 
 msgid "Show in extension menu:"
-msgstr ""
+msgstr "Toon in extensies:"
 
 msgid "Stations"
-msgstr ""
+msgstr "Stations"
 
 msgid "Stop record"
-msgstr ""
+msgstr "Stop opname"
 
 msgid "Streaming Information"
-msgstr ""
+msgstr "Stream informatie"
 
 msgid "Text only"
-msgstr ""
+msgstr "Alleen tekst"
 
 msgid "Title: n/a"
-msgstr ""
+msgstr "Title: n.v.t."
 
 msgid "Visualization"
-msgstr ""
+msgstr "Visualisatie"
 
 msgid "Visualization and Text"
-msgstr ""
+msgstr "Visualisatie en tekst "
 
 msgid "do not play a service on startup"
-msgstr ""
+msgstr "Speel geen kanaal tijdens opstarten"
 
 msgid "listen to internet-radio"
-msgstr ""
+msgstr "Luister naar internet radio"
 
 msgid "nothing playing..."
-msgstr ""
+msgstr "Er speelt niets..."
 
 msgid "play current selected favorite on startup"
-msgstr ""
+msgstr "Speel geselecteerde favoriet tijdens het starten"
 
 msgid "remove current selected favorite"
-msgstr ""
+msgstr "Verwijder geselecteerde favoriet"
 
 msgid "rename current selected favorite"
-msgstr ""
+msgstr "Hernoem geselecteerde favoriet"
+
