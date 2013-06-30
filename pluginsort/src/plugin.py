@@ -235,7 +235,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 
 		self["pluginlist"] = MyPluginList(self.list)
 
-		self["yellow"] = Label()
+		self["key_yellow"] = Label()
 
 		self["ColorActions"] = ActionMap(["ColorActions"],
 			{
@@ -317,15 +317,15 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		self["pluginlist"].list = self.list
 		if self.where == PluginDescriptor.WHERE_PLUGINMENU:
 			# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
-			self["red"].setText(_("Remove Plugins"))
-			self["green"].setText(_("Download Plugins"))
-			self["yellow"].setText(_("Sort") if not self.movemode else _("End Sort"))
+			self["key_red"].setText(_("Remove Plugins"))
+			self["key_green"].setText(_("Download Plugins"))
+			self["key_yellow"].setText(_("Sort") if not self.movemode else _("End Sort"))
 			self["PluginDownloadActions"].setEnabled(True)
 			self["ColorActions"].setEnabled(True)
 		else:
-			self["red"].setText("")
-			self["green"].setText("")
-			self["yellow"].setText(_("Sort") if not self.movemode else _("End Sort"))
+			self["key_red"].setText("")
+			self["key_green"].setText("")
+			self["key_yellow"].setText(_("Sort") if not self.movemode else _("End Sort"))
 			self["PluginDownloadActions"].setEnabled(False)
 			self["ColorActions"].setEnabled(True)
 
