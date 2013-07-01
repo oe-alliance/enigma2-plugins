@@ -10,6 +10,7 @@ from os import access, chmod, X_OK
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT
 from ServiceReference import ServiceReference
 from Components.TimerSanityCheck import TimerSanityCheck
+from Tools.StbHardware import getFPWasTimerWakeup
 import Screens.Standby
 import NavigationInstance
 
@@ -590,7 +591,7 @@ class vps:
 			o_timer.stop_simulation()
 
 	def checkNextAfterEventAuto(self):
-		if NavigationInstance.instance.getFPWasTimerWakeup() and config.plugins.vps.allow_wakeup.value and len(self.session.nav.RecordTimer.timer_list) > 0:
+		if getFPWasTimerWakeup() and config.plugins.vps.allow_wakeup.value and len(self.session.nav.RecordTimer.timer_list) > 0:
 			next_timer = self.session.nav.RecordTimer.timer_list[0]
 			if next_timer.vpsplugin_enabled and next_timer.afterEvent == AFTEREVENT.AUTO and (next_timer.begin - (config.plugins.vps.initial_time.value * 60) - 300) < time():
 				next_timer.vpsplugin_wasTimerWakeup = True
