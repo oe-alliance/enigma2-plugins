@@ -1006,6 +1006,7 @@ class FanControl2(Screen):
 		self.query()
 
 	def query(self):
+		global FanFehler
 		self.timer.stop()
 		if config.plugins.FanControl.Fan.value != "disabled":
 			if FC2doThread == True:
@@ -1015,6 +1016,20 @@ class FanControl2(Screen):
 					FClog("Queue full, Thread hanging?")
 			else:
 				self.queryRun()
+		if ZielRPM > 0 and AktRPM == 0:
+			FanFehler += 1
+			if FanFehler > 90:
+				FanFehler -= 18
+				FClog("Fan Error")
+				if config.plugins.FanControl.ShowError.value == "true" and not Standby.inStandby:
+					Notifications.AddNotification(MessageBox, _("Fan is not working!"), type=MessageBox.TYPE_INFO, timeout=5)
+				if config.plugins.FanControl.ShowError.value == "shutdown":
+					self.FC2AskShutdown()
+		else:
+			FanFehler = 0
+		if AktTemp >= config.plugins.FanControl.ShutdownTemp.value:
+			FClog("Emergency Shutdown %dC" % AktTemp)
+			self.FC2AskShutdown()
 		self.timer.startLongTimer(10)
 		
 	def queryRun(self):
@@ -1050,9 +1065,6 @@ class FanControl2(Screen):
 			sleeptime = 0
 			AktTemp = self.CurrTemp()
 			Recording = self.session.nav.RecordTimer.isRecording()
-			if AktTemp >= config.plugins.FanControl.ShutdownTemp.value:
-				FClog("Emergency Shutdown")
-				self.FC2AskShutdown()
 			if harddiskmanager.HDDCount() > 0:
 				self.HDDidle = HDDsSleeping()
 				if int(strftime("%S")) < 10 and strftime("%M")[-1:] == "0":
@@ -1155,17 +1167,6 @@ class FanControl2(Screen):
 				else:
 					FanOffWait = False
 				FClog(_("currentRPM:%d targetRPM:%d Temp:%4.1f") % (AktRPM,ZielRPM,AktTemp))
-				if ZielRPM > 0 and AktRPM == 0:
-					FanFehler += 1
-					if FanFehler > 90:
-						FanFehler -= 18
-						FClog("Fan Error")
-						if config.plugins.FanControl.ShowError.value == "true" and not Standby.inStandby:
-							Notifications.AddNotification(MessageBox, _("Fan is not working!"), type=MessageBox.TYPE_INFO, timeout=5)
-						if config.plugins.FanControl.ShowError.value == "shutdown":
-							self.FC2AskShutdown()
-				else:
-					FanFehler = 0
 				if self.Fan == "4pin":
 					if AktPWM < 255 and AktPWM > 0 and AktVLT != self.Vlt:
 						AktVLT = (AktVLT-1 if AktVLT > self.Vlt else AktVLT+1)
