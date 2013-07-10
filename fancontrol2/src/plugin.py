@@ -901,6 +901,11 @@ def FC2systemStatus():
 		R += " REC"
 	return R
 
+def FC2fanReset():
+	setVoltage(id,AktVLT)
+	setPWM(id,AktPWM)
+	FClog("Fan Reset")
+
 class FC2Worker(Thread): 
 	def __init__(self,index,s,session):
 		Thread.__init__(self)
@@ -1104,6 +1109,7 @@ class FanControl2(Screen):
 				if (Overheat and AktTemp < self.maxTemp-3) or not Standby.inStandby:
 					Overheat = False
 				AktVLTtmp = getVoltage(id)
+				AktPWMtmp = getPWM(id)
 				if Standby.inStandby and Standby.inStandby == istStandbySave and RPMdiff == 1 and not Recording:
 					tmp = GetFanRPM()
 					RPMdiff = AktRPM-tmp
@@ -1117,13 +1123,18 @@ class FanControl2(Screen):
 					RPMdiff = 0
 				self.FanMin = config.plugins.FanControl.minRPM.value - RPMdiff
 				self.FanMax = config.plugins.FanControl.maxRPM.value - RPMdiff
-				if Standby.inStandby != istStandbySave or AktVLT != AktVLTtmp:
+				if Standby.inStandby != istStandbySave or AktVLT != AktVLTtmp or AktPWM != AktPWMtmp:
 					istStandbySave = Standby.inStandby
+					if istStandbySave == True:
+						Standby.inStandby.onClose.append(FC2fanReset)
+					FC2fanReset()
 					AktVLTtmp = AktVLT
-					setVoltage(id,AktVLT)
-					setPWM(id,AktPWM)
 					RPMdiff = 1
-					FClog("Fan Reset")
+					AktVLTtmp = getVoltage(id)
+					AktPWMtmp = getPWM(id)
+					if AktVLT != AktVLTtmp or AktPWM != AktPWMtmp:
+						time.sleep(2)
+						FC2fanReset()
 				if (AktVLT + AktPWM) == 0:
 					FirstStart = True
 				if FirstStart == True:
