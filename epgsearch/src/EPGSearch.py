@@ -270,7 +270,8 @@ class EPGSearch(EPGSelection):
 	def epgsearchOK(self):
 		cur = self["list"].getCurrent()
 		self.currentService = cur[1]
-		self.zap()
+		if self.currentService:
+			self.zap()
 
 	def epgsearchOKLong(self):
 		self.eventSelected()
