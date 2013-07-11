@@ -14,7 +14,7 @@ from Components.Sources.Boolean import Boolean
 from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
-from os import path as os_path
+from os import path as os_path, fsync
 
 from MountView import AutoMountView
 from MountEdit import AutoMountEdit
@@ -139,6 +139,8 @@ class AutoMountManager(Screen):
 		if callback is not None and len(callback):
 			fp = open('/etc/hostname', 'w+')
 			fp.write(callback)
+			fp.flush()
+			fsync(fp.fileno())
 			fp.close()
 			self.restartLan()
 

@@ -195,6 +195,8 @@ class SatloaderBouquet(Screen):
 						os.system("cp /tmp/bouquet/"+item[1]+" /etc/enigma2/"+item[1])
 						f = open("/etc/enigma2/bouquets.tv", 'a')
 						f.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \""+item[1]+"\" ORDER BY bouquet\n")
+						f.flush()
+						os.fsync(f.fileno())
 						f.close()
 
 				restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n\n%s\n%s" %(_("selected bouquets are installed"), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
@@ -317,6 +319,8 @@ class SatloaderMultiSat(Screen):
 					f.write(myfile.read())
 					myfile.close()
 				f.write('</satellites>')
+				f.flush()
+				os.fsync(f.fileno())
 				f.close()
 				
 				restart = self.session.openWithCallback(self.restart, MessageBox, "%s\n%s\n\n%s\n%s" %(_("satellites.xml has been built."), str(self.satname), _("GUI needs a restart to apply changes."), _("Do you want to restart the GUI now?")), MessageBox.TYPE_YESNO)
@@ -454,6 +458,8 @@ class TransponderSelection(Screen):
 			for item in list:
 				f.write(item[1])
 			f.write("\t</sat>\n")
+			f.flush()
+			os.fsync(f.fileno())
 			f.close()
 			
 			self.session.open(MessageBox, "\"%s\" %s" %(str(self.satfile), _("has been saved.")), MessageBox.TYPE_INFO, timeout=3)

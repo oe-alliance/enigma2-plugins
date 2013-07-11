@@ -11,6 +11,7 @@ from WebChilds.Toplevel import getToplevel
 from Tools.HardwareInfo import HardwareInfo
 
 from Tools.Directories import copyfile, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG
+from Tools.IO import saveFile
 
 from twisted.internet import reactor, ssl
 from twisted.internet.error import CannotListenError
@@ -130,10 +131,8 @@ def installCertificates(session):
 
 		try:
 			print "[Webinterface].installCertificates ::  Installing newly generated certificate and key pair"
-			open(CERT_FILE, "wt").write(
-				crypto.dump_certificate(crypto.FILETYPE_PEM, cert))
-			open(KEY_FILE, "wt").write(
-				crypto.dump_privatekey(crypto.FILETYPE_PEM, k))
+			saveFile(CERT_FILE, crypto.dump_certificate(crypto.FILETYPE_PEM, cert))
+			saveFile(KEY_FILE, crypto.dump_privatekey(crypto.FILETYPE_PEM, k))
 		except IOError, e:
 			#Disable https
 			config.plugins.Webinterface.https.enabled.value = False

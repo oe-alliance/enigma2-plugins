@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 777 $
-$Date: 2013-05-28 18:34:35 +0200 (Tue, 28 May 2013) $
-$Id: plugin.py 777 2013-05-28 16:34:35Z michael $
+$Revision: 778 $
+$Date: 2013-06-21 15:42:22 +0200 (Fri, 21 Jun 2013) $
+$Id: plugin.py 778 2013-06-21 13:42:22Z michael $
 '''
 
 
@@ -79,7 +79,7 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", "05.29, 05.50")])
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", "05.29, 05.50, 05.51, 05.52")])
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
@@ -301,8 +301,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 777 $"[1:-2] + "\n" + 
-							"$Date: 2013-05-28 18:34:35 +0200 (Tue, 28 May 2013) $"[1:23] + "\n"
+							"$Revision: 778 $"[1:-2] + "\n" + 
+							"$Date: 2013-06-21 15:42:22 +0200 (Fri, 21 Jun 2013) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1314,7 +1314,7 @@ class FritzCallPhonebook:
 				elems = line.split('#')
 				if len(elems) == 2:
 					try:
-						debug("[FritzCallPhonebook] reload: Adding '''%s''' with '''%s''' from internal phonebook!" % (__(elems[1].strip()), __(elems[0], False)))
+						# debug("[FritzCallPhonebook] reload: Adding '''%s''' with '''%s''' from internal phonebook!" % (__(elems[1].strip()), __(elems[0], False)))
 						self.phonebook[elems[0]] = elems[1]
 					except ValueError: # how could this possibly happen?!?!
 						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
@@ -1884,7 +1884,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 777 $"[1: - 1] + "$Date: 2013-05-28 18:34:35 +0200 (Tue, 28 May 2013) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 778 $"[1: - 1] + "$Date: 2013-06-21 15:42:22 +0200 (Fri, 21 Jun 2013) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2407,7 +2407,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 777 $"[1:-1]	+ "$Date: 2013-05-28 18:34:35 +0200 (Tue, 28 May 2013) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 778 $"[1:-1]	+ "$Date: 2013-06-21 15:42:22 +0200 (Fri, 21 Jun 2013) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

@@ -42,7 +42,7 @@ class InternetRadioFavoriteConfig(object):
 		self.favoriteConfig.entriescount =  ConfigInteger(0)
 		self.favoriteConfig.Entries = ConfigSubList()
 		self.initFavouriteConfig()
-		
+
 	def initFavouriteEntryConfig(self):
 		self.favoriteConfig.Entries.append(ConfigSubsection())
 		i = len(self.favoriteConfig.Entries) -1
@@ -61,7 +61,7 @@ class InternetRadioFavoriteConfig(object):
 			while i < count:
 				self.initFavouriteEntryConfig()
 				i += 1
-				
+
 	def addFavorite(self, name = "", text = "", favoritetype = "", tags = "", country = "", homepage = ""):
 		self.favoriteConfig.entriescount.value = self.favoriteConfig.entriescount.value + 1
 		self.favoriteConfig.entriescount.save()
@@ -74,12 +74,14 @@ class InternetRadioFavoriteConfig(object):
 		newFavorite.homepage.value = homepage
 		newFavorite.save()
 		self.favoriteConfig.saveToFile(self.FAVORITE_FILE)
-		
-	def renameFavorite(self, configItem, text):
-			configItem.name.value = text
+
+	def renameFavorite(self, configItem, name, text=None):
+			configItem.name.value = name
+			if text is not None:
+				configItem.text.value = text
 			configItem.save()
 			self.favoriteConfig.saveToFile(self.FAVORITE_FILE)
-			
+
 	def removeFavorite(self, configItem):
 		if configItem is not None:
 			self.favoriteConfig.entriescount.value = self.favoriteConfig.entriescount.value - 1
@@ -87,7 +89,7 @@ class InternetRadioFavoriteConfig(object):
 			self.favoriteConfig.Entries.remove(configItem)
 			self.favoriteConfig.Entries.save()
 			self.favoriteConfig.saveToFile(self.FAVORITE_FILE)
-			
+
 	def removeFavoriteHTML(self, name, text, favoritetype):
 		result = 0
 		for item in self.favoriteConfig.Entries:
@@ -96,16 +98,16 @@ class InternetRadioFavoriteConfig(object):
 				self.removeFavorite(item)
 				break
 		return result
-		
-	def renameFavoriteHTML(self, name, text, favoritetype, newname):
+
+	def renameFavoriteHTML(self, name, text, favoritetype, newname, newtext=None):
 		result = 0
 		for item in self.favoriteConfig.Entries:
 			if item.name.value == name and item.text.value == text and item.type.value == favoritetype:
 				result = 1
-				self.renameFavorite(item, newname)
+				self.renameFavorite(item, newname, newtext)
 				break
 		return result
-			
+
 	def getFavoriteList(self, html = False):
 		favoriteList = []
 		for item in self.favoriteConfig.Entries:

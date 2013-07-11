@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+					<tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Vali</author>
+                    <name>Dream-Explorer</name>
+                    <packagename>enigma2-plugin-extensions-dreamexplorer</packagename>
+                    <shortdescription>Manage files on your Dreambox</shortdescription>
+                    <description>Copy, rename, delete, move, show, play, install files.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/dreamexplorer.jpg" />	    
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-dreamexplorer" />
+	  </files>
+</default>
