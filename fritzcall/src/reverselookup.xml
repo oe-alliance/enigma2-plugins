@@ -2,8 +2,8 @@
 
 <!-- reverselookup.xml
 
-$Revision: 774 $
-$Date: 2013-04-21 12:23:24 +0200 (Sun, 21 Apr 2013) $
+$Revision: 800 $
+$Date: 2013-07-21 14:34:08 +0200 (Sun, 21 Jul 2013) $
 
 	 The syntax of this file is fairly self-explanatory
      However, a few things need to be said. First and foremost
@@ -530,28 +530,9 @@ $Date: 2013-04-21 12:23:24 +0200 (Sun, 21 Apr 2013) $
 				<city>&lt;td\s+class=&quot;nowrap&quot;&gt;[\d]*-[\d]*&lt;/td&gt;\s*&lt;td&gt;[^&lt;]*&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;[^&lt;]*&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;[^&lt;]*&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;([^&lt;]*)&lt;/td&gt;</city>
 			</entry>
 		</website>
-		<website name="www.gebeld.nl" url="http://www.gebeld.nl/content.asp?zapp=zapp&amp;land=Nederland&amp;zoek=numm&amp;searchfield1=fullnumber&amp;searchfield2=&amp;queryfield1=$NUMBER" prefix="0">
+		<website name="www.gebeld.nl" url="http://www.gebeld.nl/content.asp?action=zapp&amp;what=Nummer&amp;searchfield1=fullnumber&amp;queryfield1=$NUMBER" prefix="0">
 			<entry>
-				<firstname>&lt;td &gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot; &gt;\s*(.*?)(?: |&amp;nbsp;)[^ &lt;\r]*\s*&lt;/font&gt;</firstname>
-				<lastname>&lt;td &gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot; &gt;\s*.*?(?: |&amp;nbsp;)([^ &lt;\r]*)\s*&lt;/font&gt;</lastname>
-				<street>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&lt;]*)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</street>
-				<city>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;([^&lt;]*)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</city>
-				<zipcode>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&amp;]*)&amp;nbsp;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</zipcode>
-			</entry>
-		</website>
-		<website name="www.nummerzoeker.com" url="http://www.nummerzoeker.com/?phone=$NUMBER&amp;page=0&amp;export=excel" prefix="0">
-			<entry firstOccurance="lastname">
-				<firstname>^[^,]*,[^,]*,([^,]*),[^,]*,[^,]*,[^,]*$</firstname>
-				<lastname>^[^,]*,([^,]*),[^,]*,[^,]*,[^,]*,[^,]*$</lastname>
-				<street>^[^,]*,[^,]*,[^,]*,([^,]*),[^,]*,[^,]*$</street>
-				<city>^[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,([^,]*)$</city>
-				<zipcode>^[^,]*,[^,]*,[^,]*,[^,]*,([^,]*),[^,]*$</zipcode>
-			</entry>
-		</website>
-		<website name="www.gebeld.nl" url="http://www.gebeld.nl/content.asp?zapp=zapp&amp;land=Nederland&amp;zoek=numm&amp;searchfield1=fullnumber&amp;searchfield2=&amp;queryfield1=$NUMBER" prefix="0">
-			<entry>
-				<firstname>&lt;td &gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot; &gt;\s*(.*?)(?: |&amp;nbsp;)[^ &lt;\r]*\s*&lt;/font&gt;</firstname>
-				<lastname>&lt;td &gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot; &gt;\s*.*?(?: |&amp;nbsp;)([^ &lt;\r]*)\s*&lt;/font&gt;</lastname>
+				<name>&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;([^&lt;]*)&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+</name>
 				<street>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&lt;]*)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</street>
 				<city>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;([^&lt;]*)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</city>
 				<zipcode>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&amp;]*)&amp;nbsp;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</zipcode>
