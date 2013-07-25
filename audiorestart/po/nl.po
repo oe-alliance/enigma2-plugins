@@ -1,0 +1,58 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2013 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-25 10:00+0200\n"
+"PO-Revision-Date: 2013-07-25 16:20+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: Andy Blackburn/Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: The Netherlands\n"
+
+msgid " "
+msgstr " "
+
+msgid "Audio restart Setup"
+msgstr "Audio herstart instellingen"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr "Plugin: %(plugin)s , Versie: %(version)s"
+
+msgid "Restart audio"
+msgstr "Herstart audio"
+
+msgid "Restart audio delay (in sec)"
+msgstr "Herstart audio vertraging (in sec)"
+
+msgid "Save"
+msgstr "Sla op"
+
+msgid "Setup for the AudioRestart Plugin"
+msgstr "Instellingen voor de audio herstart plugin"
+
+msgid "after restart"
+msgstr "na herstart"
+
+msgid "after restart/standby"
+msgstr "na herstart/standby"
+
+msgid "after standby"
+msgstr "na standby"
+
+msgid "disabled"
+msgstr "uitgeschakeld"
+
