@@ -8,110 +8,112 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-12-03 15:01+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2013-07-25 16:38+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: The Netherlands\n"
 
 #, python-format
 msgid "%s will turn %s in %s!"
-msgstr ""
+msgstr "%s zal worden gewijzigd in %s!"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 dag"
 
 msgid "1 week"
-msgstr ""
+msgstr "1 week"
 
 msgid "3 days"
-msgstr ""
+msgstr "3 dagen"
 
 msgid "Accept changes"
-msgstr ""
+msgstr "Accepteer veranderingen"
 
 msgid "Add"
-msgstr ""
+msgstr "Voeg toe"
 
 msgid "Add a birthday"
-msgstr ""
+msgstr "Voeg een verjaardag toe"
 
 msgid "Add birthday"
-msgstr ""
+msgstr "Voeg verjaardag toe"
 
 msgid "Age"
-msgstr ""
+msgstr "Leeftijd"
 
 msgid "Birthday"
-msgstr ""
+msgstr "Verjaardag"
 
 msgid "Birthday Reminder"
-msgstr ""
+msgstr "Verjaardagsherinnering"
 
 msgid "Birthday Reminder Settings"
-msgstr ""
+msgstr "Verjaardagsherinnering instellingen"
 
 #, python-format
 msgid "Birthday Reminder received %s birthdays from %s."
-msgstr ""
+msgstr "Verjaardagsherinnering ontvangen %s verjaardagen van %s"
 
 msgid "Birthday filename:"
-msgstr ""
+msgstr "Verjaardagen bestandsnaam:"
 
 msgid "Birthdays"
-msgstr ""
+msgstr "Verjaardagen"
 
 msgid "CSV import successful!"
-msgstr ""
+msgstr "CSV import geslaagd!"
 
 #, python-format
 msgid "Can't find CSV file %s!"
-msgstr ""
+msgstr "Kan CSV bestand %s niet vinden!"
 
 #, python-format
 msgid "Can't import CSV data from file %s."
-msgstr ""
+msgstr "Kan CSV data van bestand %s niet importeren."
 
 #, python-format
 msgid "Can't write CSV file %s."
-msgstr ""
+msgstr "Kan CSV bestand %s niet schrijven."
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 msgid "Change path"
-msgstr ""
+msgstr "Verander pad"
 
 msgid "Date format:"
-msgstr ""
+msgstr "Datum formaat:"
 
 msgid "Day:"
-msgstr ""
+msgstr "Dag:"
 
 msgid "Disabled"
-msgstr ""
+msgstr "Uitgeschakeld"
 
 msgid "Distribute birthdays to other Dreamboxes"
-msgstr ""
+msgstr "Geef verjaardagen door aan andere ontvangers"
 
 #, python-format
 msgid "Do you really want to delete the entry for %s?"
-msgstr ""
+msgstr "Wilt u echt het bestand voor %s verwijderen?"
 
 msgid "Edit"
-msgstr ""
+msgstr "Bewerk"
 
 msgid "Edit birthday"
-msgstr ""
+msgstr "Bewerk verjaardag"
 
 msgid "Edit birthdays"
-msgstr ""
+msgstr "Bewerk verjaardagen"
 
 msgid "Edit the selected entry"
-msgstr ""
+msgstr "Bewerk de geselecteerde waarde"
 
 #, python-format
 msgid ""
@@ -119,6 +121,9 @@ msgid ""
 "\n"
 "Error: %s, %s"
 msgstr ""
+"Fout in lezen bestand %s.\n"
+"\n"
+"Fout: %s, %s"
 
 #, python-format
 msgid ""
@@ -126,78 +131,81 @@ msgid ""
 "\n"
 "Error: %s, %s"
 msgstr ""
+"Fout in schrijven bestand %s.\n"
+"\n"
+"Fout: %s, %s"
 
 msgid "Exit the plugin"
-msgstr ""
+msgstr "Verlaat de plugin"
 
 msgid "Export CSV file"
-msgstr ""
+msgstr "Exporteer CSV bestand"
 
 msgid "Extras"
-msgstr ""
+msgstr "Extras"
 
 msgid "Helps to remind of birthdays"
-msgstr ""
+msgstr "Helpt te herinneren aan verjaardagen"
 
 msgid "Import CSV file"
-msgstr ""
+msgstr "Importeer CSV bestand"
 
 msgid "Invalid Location"
-msgstr ""
+msgstr "Ongeldige lokatie"
 
 msgid "Invalid date!"
-msgstr ""
+msgstr "Ongeldige datum!"
 
 msgid "Month:"
-msgstr ""
+msgstr "Maand:"
 
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 msgid "Name:"
-msgstr ""
+msgstr "Naam:"
 
 msgid "Networking port (default: 7374):"
-msgstr ""
+msgstr "Netwerk poort (default: 7374):"
 
 msgid "Next birthday"
-msgstr ""
+msgstr "Volgende verjaardag"
 
 msgid "Notification time:"
-msgstr ""
+msgstr "Waarschuwingstijd:"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Open the extras menu"
-msgstr ""
+msgstr "Open het extras menu"
 
 msgid "Path to birthday file:"
-msgstr ""
+msgstr "Pad naar verjaardagen bestand:"
 
 msgid "Remind before birthday:"
-msgstr ""
+msgstr "Herinner voor de verjaardag:"
 
 msgid "Remove"
-msgstr ""
+msgstr "Verwijder"
 
 msgid "Remove the selected entry"
-msgstr ""
+msgstr "Verwijder de geselecteerde waarde"
 
 msgid "Save"
-msgstr ""
+msgstr "Sla op"
 
 msgid "Show plugin in extensions menu:"
-msgstr ""
+msgstr "Toon plugin in extensies"
 
 msgid "Sort birthdays by:"
-msgstr ""
+msgstr "Sorteer verjaardagen volgens:"
 
 msgid "Sorting next"
-msgstr ""
+msgstr "Volgende sortering"
 
 msgid "Sorting previous"
-msgstr ""
+msgstr "Vorige sortering"
 
 #, python-format
 msgid ""
@@ -205,13 +213,17 @@ msgid ""
 "\n"
 "She/he was born on %s and is now %s year(s) old."
 msgstr ""
+"Vandaag is %s's verjaardag!\n"
+"\n"
+"Hij/Zij is geboren op %s en is nu %s jaar oud."
 
 msgid "What do you want to do?"
-msgstr ""
+msgstr "Wat wilt u doen?"
 
 #, python-format
 msgid "Wrote CSV file %s."
-msgstr ""
+msgstr "CSV bestand %s geschreven"
 
 msgid "Year:"
-msgstr ""
+msgstr "Jaar:"
+
