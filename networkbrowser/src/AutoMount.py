@@ -7,6 +7,7 @@ from enigma import eTimer
 from Components.Console import Console
 from Components.Harddisk import harddiskmanager #global harddiskmanager
 from xml.etree.cElementTree import parse as cet_parse
+from shutil import rmtree
 
 XML_FSTAB = "/etc/enigma2/automounts.xml"
 
@@ -60,8 +61,7 @@ class AutoMount():
 			mountusing = 1
 			for nfs in fstab.findall("nfs"):
 				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
-								'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 					try:
 						data['mountusing'] = 'fstab'.encode("UTF-8")
 						data['mounttype'] = 'nfs'.encode("UTF-8")
@@ -78,8 +78,7 @@ class AutoMount():
 						print "[MountManager] Error reading Mounts:", e
 			for cifs in fstab.findall("cifs"):
 				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
-								'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 					try:
 						data['mountusing'] = 'fstab'.encode("UTF-8")
 						data['mounttype'] = 'cifs'.encode("UTF-8")
@@ -101,8 +100,7 @@ class AutoMount():
 			mountusing = 2
 			for nfs in enigma2.findall("nfs"):
 				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
-								'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 					try:
 						data['mountusing'] = 'enigma2'.encode("UTF-8")
 						data['mounttype'] = 'nfs'.encode("UTF-8")
@@ -120,8 +118,7 @@ class AutoMount():
 				# Read out CIFS Mounts
 			for cifs in enigma2.findall("cifs"):
 				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
-								'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 					try:
 						data['mountusing'] = 'enigma2'.encode("UTF-8")
 						data['mounttype'] = 'cifs'.encode("UTF-8")
@@ -142,8 +139,7 @@ class AutoMount():
 		if mountusing == 0:
 			for nfs in tree.findall("nfs"):
 				for mount in nfs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
-								'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 					try:
 						data['mountusing'] = 'old_enigma2'.encode("UTF-8")
 						data['mounttype'] = 'nfs'.encode("UTF-8")
@@ -160,8 +156,7 @@ class AutoMount():
 						print "[MountManager] Error reading Mounts:", e
 			for cifs in tree.findall("cifs"):
 				for mount in cifs.findall("mount"):
-					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
-								'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 					try:
 						data['mountusing'] = 'old_enigma2'.encode("UTF-8")
 						data['mounttype'] = 'cifs'.encode("UTF-8")
@@ -301,7 +296,7 @@ class AutoMount():
 				if os.path.exists(path):
 					if not os.path.ismount(path):
 						try:
-							os.rmdir(path)
+							rmtree(path)
 							harddiskmanager.removeMountedPartition(path)
 						except Exception, ex:
 							print "Failed to remove", path, "Error:", ex
@@ -349,10 +344,13 @@ class AutoMount():
 				path = os.path.join('/media/net', sharedata['sharename'])
 				sharepath = ""
 			if sharedata['mountusing'] == 'fstab':
-				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir'] + ' '
+				if sharedata['mounttype'] == 'nfs':
+					sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir']
+				elif sharedata['mounttype'] == 'cifs':
+					sharetemp = '//' + sharedata['ip'] + '/' + sharedata['sharedir']
 				tmpfile = open('/etc/fstab.tmp', 'w')
 				file = open('/etc/fstab')
-				tmpfile.writelines([l for l in file.readlines() if sharetemp not in l])
+				tmpfile.writelines([l for l in file.readlines() if sharetemp not in l.split('\t')])
 				tmpfile.close()
 				file.close()
 				os.rename('/etc/fstab.tmp','/etc/fstab')
@@ -372,13 +370,14 @@ class AutoMount():
 				list.append('  </mount>\n')
 				list.append(' </' + mtype + '>\n')
 				list.append('</fstab>\n')
-				out = open('/etc/fstab', 'a')
-				if sharedata['mounttype'] == 'nfs':
-					line = sharedata['ip'] + ':/' + sharedata['sharedir'] + ' ' + path + '\tnfs\t_netdev,' + self.sanitizeOptions(sharedata['options'], fstab=True) + '\t0 0\n'
-				elif sharedata['mounttype'] == 'cifs':
-					line = '//' + sharedata['ip'] + '/' + sharedata['sharedir'] + ' ' + path + '\tcifs\tusername=' + sharedata['username'] + ',password=' + sharedata['password'] + ',_netdev,' + self.sanitizeOptions(sharedata['options'], cifs=True, fstab=True) + '\t0 0\n'
-				out.write(line)
-				out.close()
+				if sharedata['active']:
+					out = open('/etc/fstab', 'a')
+					if sharedata['mounttype'] == 'nfs':
+						line = sharedata['ip'] + ':/' + sharedata['sharedir'] + '\t' + path + '\tnfs\t_netdev,' + self.sanitizeOptions(sharedata['options'], fstab=True) + '\t0 0\n'
+					elif sharedata['mounttype'] == 'cifs':
+						line = '//' + sharedata['ip'] + '/' + sharedata['sharedir'] + '\t' + path + '\tcifs\tusername=' + sharedata['username'] + ',password=' + sharedata['password'] + ',_netdev,' + self.sanitizeOptions(sharedata['options'], cifs=True, fstab=True) + '\t0 0\n'
+					out.write(line)
+					out.close()
 			elif sharedata['mountusing'] == 'enigma2':
 				mtype = sharedata['mounttype']
 				list.append('<enigma2>\n')
