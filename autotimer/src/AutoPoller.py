@@ -55,8 +55,8 @@ class AutoPollerThread(Thread):
 			)
 
 	def start(self, initial=True):
-		# NOTE: we wait for 10 seconds on initial launch to not delay enigma2 startup time
-		if initial: delay = 10
+		# NOTE: we wait for several minutes on initial launch to not delay enigma2 startup time
+		if initial: delay = config.plugins.autotimer.delay.value*60
 		else: delay = config.plugins.autotimer.interval.value*3600
 
 		self.__timer.startLongTimer(delay)
