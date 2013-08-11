@@ -10,6 +10,7 @@ from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
 config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default=True)
 config.plugins.autotimer.onlyinstandby = ConfigEnableDisable(default=False)
+config.plugins.autotimer.delay = ConfigNumber(default=3)
 config.plugins.autotimer.interval = ConfigNumber(default=30)
 config.plugins.autotimer.refresh = ConfigSelection(choices=[
 		("none", _("None")),

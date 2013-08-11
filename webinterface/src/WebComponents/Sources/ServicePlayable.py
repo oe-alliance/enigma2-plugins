@@ -44,7 +44,7 @@ class ServicePlayable(Source):
 
 		if self.type == self.BOUQUET: #Bouquet
 			slist = self.sci.list(refToPlay)
-			services = slist and slist.getContent('S')
+			services = slist and slist.getContent('S', True)
 
 			if services:
 				list.extend([

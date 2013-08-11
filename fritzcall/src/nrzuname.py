@@ -1,11 +1,14 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 '''
-$Id: nrzuname.py 699 2012-10-25 17:04:03Z michael $
+$Id: nrzuname.py 800 2013-07-21 12:34:08Z michael $
 $Author: michael $
-$Revision: 699 $
-$Date: 2012-10-25 19:04:03 +0200 (Do, 25. Okt 2012) $
+$Revision: 800 $
+$Date: 2013-07-21 14:34:08 +0200 (Sun, 21 Jul 2013) $
 '''
+
+# W0603 (global statement); W0141 (map, filter, etc.)
+# pylint: disable=W0603,W0141
 
 import re, sys, os
 from xml.dom.minidom import parse
@@ -13,8 +16,8 @@ from twisted.web.client import getPage #@UnresolvedImport
 from twisted.internet import reactor #@UnresolvedImport
 
 try:
-	from . import debug #@UnresolvedImport # pylint: disable-msg=W0613,F0401
-	def setDebug(what): # pylint: disable-msg=W0613
+	from . import debug #@UnresolvedImport # pylint: disable=W0613,F0401
+	def setDebug(what): # pylint: disable=W0613
 		pass
 except ValueError:
 	debugVal = True
@@ -117,7 +120,7 @@ def out(number, caller):
 
 	print(name)
 
-def simpleout(number, caller): #@UnusedVariable # pylint: disable-msg=W0613
+def simpleout(number, caller): #@UnusedVariable # pylint: disable=W0613
 	print caller
 
 try:
@@ -260,6 +263,14 @@ class ReverseLookupAndNotifier:
 			return newitem.strip()
 	
 		debug("[ReverseLookupAndNotifier] _gotPage")
+
+		#=======================================================================
+		# userDesktop = os.path.join(os.environ['USERPROFILE'], "Desktop")
+		# linkP =  open(os.path.join(userDesktop, "page.htm"), "w")
+		# linkP.write(page)
+		# linkP.close()
+		#=======================================================================
+
 		found = re.match('.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />', page, re.S)
 		if found:
 			debug("[ReverseLookupAndNotifier] Charset: " + found.group(1))
@@ -422,16 +433,16 @@ class ReverseLookupAndNotifier:
 		else:
 			self.outputFunction(self.number, "")
 		if __name__ == '__main__':
-			reactor.stop() #@UndefinedVariable # pylint: disable-msg=E1101
+			reactor.stop() #@UndefinedVariable # pylint: disable=E1101
 
 if __name__ == '__main__':
 	cwd = os.path.dirname(sys.argv[0])
 	if (len(sys.argv) == 2):
 		# nrzuname.py Nummer
 		ReverseLookupAndNotifier(sys.argv[1], simpleout)
-		reactor.run() #@UndefinedVariable # pylint: disable-msg=E1101
+		reactor.run() #@UndefinedVariable # pylint: disable=E1101
 	elif (len(sys.argv) == 3):
 		# nrzuname.py Nummer Charset
 		setDebug(False)
 		ReverseLookupAndNotifier(sys.argv[1], out, sys.argv[2])
-		reactor.run() #@UndefinedVariable # pylint: disable-msg=E1101
+		reactor.run() #@UndefinedVariable # pylint: disable=E1101

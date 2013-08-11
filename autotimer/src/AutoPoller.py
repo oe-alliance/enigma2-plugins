@@ -22,7 +22,7 @@ class AutoPoller:
 	def start(self):
 		if self.query not in self.timer.callback:
 			self.timer.callback.append(self.query)
-		self.timer.startLongTimer(config.plugins.autotimer.interval.value*60)
+		self.timer.startLongTimer(config.plugins.autotimer.delay.value*60)
 
 	def stop(self):
 		if self.query in self.timer.callback:

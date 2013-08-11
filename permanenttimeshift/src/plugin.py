@@ -3,7 +3,7 @@
 # Permanent Timeshift Plugin for Enigma2 Dreamboxes
 # Coded by Homey (c) 2013
 #
-# Version: 1.4
+# Version: 1.5
 # Support: www.dreambox-plugins.de
 #####################################################
 from Components.ActionMap import ActionMap
@@ -17,7 +17,7 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.StaticText import StaticText
 from Components.SystemInfo import SystemInfo
 from Components.Task import Task, Job, job_manager as JobManager
-from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath
+from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath, defaultStorageDevice
 from Screens.ChoiceBox import ChoiceBox
 from Screens.ChannelSelection import ChannelSelection
 from Screens.InfoBar import InfoBar as InfoBarOrg
@@ -66,7 +66,7 @@ language.addCallback(localeInit())
 #####  CONFIG SETTINGS   #####
 ##############################
 
-VERSION = "1.4"
+VERSION = "1.5"
 config.plugins.pts = ConfigSubsection()
 config.plugins.pts.enabled = ConfigYesNo(default = True)
 config.plugins.pts.maxevents = ConfigInteger(default=5, limits=(1, 99))
@@ -471,6 +471,7 @@ class InfoBar(InfoBarOrg):
 		# Jump Back to Live TV
 		if config.plugins.pts.enabled.value and self.timeshift_enabled:
 			if self.isSeekable():
+				self.pts_switchtolive = True
 				self.ptsSetNextPlaybackFile("")
 				if self.seekstate != self.SEEK_STATE_PLAY:
 					self.setSeekState(self.SEEK_STATE_PLAY)

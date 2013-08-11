@@ -2,14 +2,22 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 778 $
-$Date: 2013-06-21 15:42:22 +0200 (Fri, 21 Jun 2013) $
-$Id: FritzCallFBF.py 778 2013-06-21 13:42:22Z michael $
+$Revision: 798 $
+$Date: 2013-07-21 12:09:26 +0200 (Sun, 21 Jul 2013) $
+$Id: FritzCallFBF.py 798 2013-07-21 10:09:26Z michael $
 '''
 
-# pylint: disable=W1401,E0611,F0401
+# C0111 (Missing docstring)
+# C0103 (Invalid name)
+# C0301 (line too long)
+# W0603 (global statement)
+# W0141 (map, filter, etc.)
+# W0110 lambda with map,filter
+# W0403 Relative import
+# W1401 Anomalous backslash in string
+# pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,W1401,W0110
 
-from . import _, __, debug #@UnresolvedImport
+from . import _, __, debug #@UnresolvedImport # pylint: disable=W0611,F0401
 from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
@@ -39,7 +47,7 @@ def resolveNumber(number, default=None, phonebook=None):
 			number = config.plugins.FritzCall.prefix.value + number
 		name = None
 		if phonebook:
-			name = phonebook.search(number)
+			name = phonebook.search(number, default)
 		if name:
 			#===========================================================
 			# found = re.match('(.*?)\n.*', name)
@@ -138,7 +146,7 @@ class FritzCallFBF:
 				if ord(text[i]) > 255:
 					text[i] = '.'
 			md5 = hashlib.md5()
-			md5.update(text)
+			md5.update(text) # pylint: disable=E1101
 			debug("[FritzCallFBF] md5Login/buildResponse: " + md5.hexdigest())
 			return challenge + '-' + md5.hexdigest()
 
@@ -374,7 +382,7 @@ class FritzCallFBF:
 						# debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (name, __(thisnumber)))
 						self.phonebook.phonebook[thisnumber] = name
 					else:
-						debug("[FritzCallFBF] Ignoring '''%s''' with '''%s'''" % (name, __(thisnumber)))
+						debug("[FritzCallFBF] Ignoring '''%s''' with '''%s'''" % (__(name), __(thisnumber)))
 				else:
 					debug("[FritzCallFBF] ignoring empty number for %s" % name)
 				continue
@@ -460,20 +468,20 @@ class FritzCallFBF:
 		url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
 		getPage(url).addCallback(lambda x:self._gotPageCalls(callback, x)).addErrback(self._errorCalls)
 
-	def _gotPageCalls(self, callback, csv=""):
+	def _gotPageCalls(self, callback, csvIn=""):
 
-		if csv:
+		if csvIn:
 			debug("[FritzCallFBF] _gotPageCalls: got csv, setting callList")
 			if self._callScreen:
 				self._callScreen.updateStatus(_("done"))
-			if csv.find('Melden Sie sich mit dem Kennwort der FRITZ!Box an') != -1:
+			if csvIn.find('Melden Sie sich mit dem Kennwort der FRITZ!Box an') != -1:
 				text = _("You need to set the password of the FRITZ!Box\nin the configuration dialog to display calls\n\nIt could be a communication issue, just try again.")
 				# self.session.open(MessageBox, text, MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 				self._notify(text)
 				return
 
-			csv = csv.decode('iso-8859-1', 'replace').encode('utf-8', 'replace')
-			lines = csv.splitlines()
+			csvIn = csvIn.decode('iso-8859-1', 'replace').encode('utf-8', 'replace')
+			lines = csvIn.splitlines()
 			self._callList = lines
 		elif self._callList:
 			debug("[FritzCallFBF] _gotPageCalls: got no csv, but have callList")
@@ -1162,7 +1170,7 @@ class FritzCallFBF_05_50:
 				if ord(text[i]) > 255:
 					text[i] = '.'
 			md5 = hashlib.md5()
-			md5.update(text)
+			md5.update(text) # pylint: disable=e1101
 			debug("[FritzCallFBF_05_50] md5Login/buildResponse: " + md5.hexdigest())
 			return challenge + '-' + md5.hexdigest()
 
@@ -1276,7 +1284,7 @@ class FritzCallFBF_05_50:
 		self.phonebook = phonebook
 		self._login(self._selectFritzBoxPhonebook)
 
-	def _selectFritzBoxPhonebook(self, html=None):
+	def _selectFritzBoxPhonebook(self, html=None): # pylint: disable=W0613
 		# TODO: error check...
 		# look for phonebook called dreambox or Dreambox
 		parms = urlencode({
@@ -1391,7 +1399,7 @@ class FritzCallFBF_05_50:
 		self._callType = callType
 		self._login(lambda x:self._getCalls(callback, x))
 
-	def _getCalls(self, callback, html):
+	def _getCalls(self, callback, html): # pylint: disable=W0613
 		debug("[FritzCallFBF_05_50] _getCalls")
 		if self._callScreen:
 			self._callScreen.updateStatus(_("preparing"))
@@ -1439,17 +1447,6 @@ class FritzCallFBF_05_50:
 
 			date = call[1]
 			length = call[6]
-			number = stripCbCPrefix(call[3], config.plugins.FritzCall.country.value)
-			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
-				number = config.plugins.FritzCall.prefix.value + number
-			# debug("[FritzCallFBF_05_50] _gotPageCalls: number: " + number)
-
-			found = re.match("\d+ \((\d+)\)", call[2])
-			if found:
-				remote = resolveNumber(number, resolveNumber(found.group(1), None, self.phonebook), self.phonebook)
-			else:
-				remote = resolveNumber(number, call[2], self.phonebook)
-			# debug("[FritzCallFBF_05_50] _gotPageCalls: remote. " + remote)
 
 			here = call[5]
 			start = here.find('Internet: ')
@@ -1461,10 +1458,25 @@ class FritzCallFBF_05_50:
 				# debug("[FritzCallFBF_05_50] _gotPageCalls: skip %s" % (here))
 				continue
 
-			here = resolveNumber(here, call[4], self.phonebook)
+			if call[4]:
+				here = resolveNumber(here, call[4] + " (" + here + ")", self.phonebook)
+			else:
+				here = resolveNumber(here, "", self.phonebook)
 			# debug("[FritzCallFBF_05_50] _gotPageCalls: here: " + here)
 
-			debug("[FritzCallFBF_05_50] _gotPageCalls: append: %s" % repr((__(number, False), date, direct, __(remote), length, __(here))))
+			number = stripCbCPrefix(call[3], config.plugins.FritzCall.country.value)
+			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
+				number = config.plugins.FritzCall.prefix.value + number
+			# debug("[FritzCallFBF_05_50] _gotPageCalls: number: " + number)
+
+			found = re.match("\d+ \((\d+)\)", call[2])
+			if found:
+				remote = resolveNumber(number, resolveNumber(found.group(1), None, self.phonebook), self.phonebook)
+			else:
+				remote = resolveNumber(number, re.sub(",", "", call[2]), self.phonebook)
+			# debug("[FritzCallFBF_05_50] _gotPageCalls: remote. " + remote)
+
+			# debug("[FritzCallFBF_05_50] _gotPageCalls: append: %s" % repr((__(number, False), date, direct, __(remote), length, __(here))))
 			# debug("[FritzCallFBF_05_50] _gotPageCalls: append: %s" % repr((number, date, direct, remote, length, here)))
 			callListL.append((number, date, direct, remote, length, here))
 
@@ -1872,7 +1884,7 @@ class FritzCallFBF_05_27:
 				if ord(text[i]) > 255:
 					text[i] = '.'
 			md5 = hashlib.md5()
-			md5.update(text)
+			md5.update(text) # pylint: disable=e1101
 			debug("[FritzCallFBF_05_27] md5Login/buildResponse: " + md5.hexdigest())
 			return challenge + '-' + md5.hexdigest()
 
@@ -2282,7 +2294,7 @@ class FritzCallFBF_05_27:
 		debug("[FritzCallFBF_05_27] changeMailbox start: " + str(whichMailbox))
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
-	def _changeMailbox(self, whichMailbox, html):
+	def _changeMailbox(self, whichMailbox, html): # pylint: disable=W0613
 		return
 
 	def _okChangeMailbox(self, html): #@UnusedVariable # pylint: disable=W0613
@@ -2405,16 +2417,16 @@ class FritzCallFBF_05_27:
 		if callback:
 			callback(info)
 
-	def _okSetDect(self, callback, html):
+	def _okSetDect(self, callback, html): # pylint: disable=W0613
 		return
 	
-	def _okSetConInfo(self, callback, html):
+	def _okSetConInfo(self, callback, html): # pylint: disable=W0613
 		return
 
-	def _okSetWlanState(self, callback, html):
+	def _okSetWlanState(self, callback, html): # pylint: disable=W0613
 		return
 
-	def _okSetDslState(self, callback, html):
+	def _okSetDslState(self, callback, html): # pylint: disable=W0613
 		return
 
 	def _errorGetInfo(self, error):
