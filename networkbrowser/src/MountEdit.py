@@ -193,6 +193,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if password is False:
 			password = ""
 
+		self.old_sharename = sharename
 		self.mountusingConfigEntry = NoSave(ConfigSelection(self.mountusing, default = mountusing ))
 		self.activeConfigEntry = NoSave(ConfigEnableDisable(default = active))
 		self.ipConfigEntry = NoSave(ConfigIP(default = ip))
@@ -321,6 +322,8 @@ class AutoMountEdit(Screen, ConfigListScreen):
 
 		if sharexists:
 			self.session.open(MessageBox, _("A mount entry with this name already exists!\nand is not this share folder, please use a different name.\n"), type = MessageBox.TYPE_INFO )
+		elif self.old_sharename != self.sharenameConfigEntry.value:
+			self.session.openWithCallback(self.updateConfig, MessageBox, _("You have changed the share name!\nUpdate existing entry and continue?\n"), default=False )
 		elif self.mounts.has_key(sharename) is True:
 			self.session.openWithCallback(self.updateConfig, MessageBox, _("A mount entry with this name already exists!\nUpdate existing entry and continue?\n"), default=False )
 		else:
@@ -329,20 +332,25 @@ class AutoMountEdit(Screen, ConfigListScreen):
 	def updateConfig(self, ret = False):
 		if (ret == True):
 			sharedir = None
+			if self.old_sharename != self.sharenameConfigEntry.value:
+				xml_sharename = self.old_sharename
+			else:
+				xml_sharename = self.sharenameConfigEntry.value
+
 			if self.sharedirConfigEntry.value.startswith("/"):
 				sharedir = self.sharedirConfigEntry.value[1:]
 			else:
 				sharedir = self.sharedirConfigEntry.value
-			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "mountusing", self.mountusingConfigEntry.value)
-			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "sharename", self.sharenameConfigEntry.value)
-			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "active", self.activeConfigEntry.value)
-			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "ip", self.ipConfigEntry.getText())
-			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "sharedir", sharedir)
-			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "mounttype", self.mounttypeConfigEntry.value)
-			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "options", self.optionsConfigEntry.value)
-			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "username", self.usernameConfigEntry.value)
-			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "password", self.passwordConfigEntry.value)
-			iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "hdd_replacement", self.hdd_replacementConfigEntry.value)
+			iAutoMount.setMountsAttribute(xml_sharename, "mountusing", self.mountusingConfigEntry.value)
+			iAutoMount.setMountsAttribute(xml_sharename, "sharename", self.sharenameConfigEntry.value)
+			iAutoMount.setMountsAttribute(xml_sharename, "active", self.activeConfigEntry.value)
+			iAutoMount.setMountsAttribute(xml_sharename, "ip", self.ipConfigEntry.getText())
+			iAutoMount.setMountsAttribute(xml_sharename, "sharedir", sharedir)
+			iAutoMount.setMountsAttribute(xml_sharename, "mounttype", self.mounttypeConfigEntry.value)
+			iAutoMount.setMountsAttribute(xml_sharename, "options", self.optionsConfigEntry.value)
+			iAutoMount.setMountsAttribute(xml_sharename, "username", self.usernameConfigEntry.value)
+			iAutoMount.setMountsAttribute(xml_sharename, "password", self.passwordConfigEntry.value)
+			iAutoMount.setMountsAttribute(xml_sharename, "hdd_replacement", self.hdd_replacementConfigEntry.value)
 
 			self.updateConfigRef = None
 			self.updateConfigRef = self.session.openWithCallback(self.updateConfigfinishedCB, MessageBox, _("Please wait while updating your network mount..."), type = MessageBox.TYPE_INFO, enable_input = False)
