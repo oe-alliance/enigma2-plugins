@@ -1,5 +1,8 @@
 from __future__ import print_function
 
+# for localized messages
+from . import _
+
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse
 from os import path as os_path
