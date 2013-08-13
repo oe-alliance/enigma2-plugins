@@ -7,23 +7,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
-"PO-Revision-Date: 2012-07-23 17:37+0300\n"
-"Last-Translator: rimas\n"
+"POT-Creation-Date: 2013-08-12 21:43+0200\n"
+"PO-Revision-Date: 2013-08-13 19:01+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: et_EE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Estonian\n"
-"X-Poedit-Country: ESTONIA\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 msgid "Add AutoTimer"
 msgstr "Lisa autotaimer"
 
+msgid "Add a auto timer for current event"
+msgstr "Lisa käesolevale saatele autotaimer"
+
+msgid "Add a record timer for current event"
+msgstr "Lisa käesolevale saatele salvestustaimer"
+
+msgid "Add a zap timer for current event"
+msgstr "Lisa käesolevale saatele kanalivahetustaimer"
+
 msgid "Add timer"
 msgstr "Lisa taimer"
+
+msgid "Add/Remove timer for current event"
+msgstr "Lisa või eemalda taimer käesolevale saatele"
 
 msgid "Cancel"
 msgstr "Tühista"
@@ -32,7 +43,10 @@ msgid "Channel Selection"
 msgstr "Kanalite valik"
 
 msgid "Choose the encode type for search, helpful for foreign languages."
-msgstr ""
+msgstr "Vali otsinguks kooditabel."
+
+msgid "Close dialog"
+msgstr "Sulge aken"
 
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
@@ -47,18 +61,32 @@ msgstr "EPG otsing"
 msgid "EPGSearch Setup"
 msgstr "EPGSearch seadistused"
 
-msgid ""
-"Enable this to be able to access the EPG-Search from within the plugin "
-"browser."
+msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
 msgstr "Luba see, et pääseda EPG otsingusse laienduste nimekirjas."
 
 msgid "Enter text to search for"
 msgstr "Sisesta tekst otsinguks:"
 
-msgid ""
-"How many entries to keep in the search history at most. 0 disables history "
-"entirely!"
+msgid "Exit EPG"
+msgstr "Sulge EPG"
+
+msgid "Goto next bouquet"
+msgstr "Järgmine lemmiknimekiri"
+
+msgid "Goto next channel"
+msgstr "Järgmine kanal"
+
+msgid "Goto previous bouquet"
+msgstr "Eelmine lemmiknimekiri"
+
+msgid "Goto previous channel"
+msgstr "Eelmine kanal"
+
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
 msgstr "Suurim kirjete arv otsinguajaloos. 0 keelab ajaloo täielikult"
+
+msgid "IMDB search for current event"
+msgstr "IMDB otsing käesolevale saatele"
 
 msgid "IMDb Search"
 msgstr "IMDb otsing"
@@ -74,6 +102,12 @@ msgstr "Impordi taimerist"
 
 msgid "Length of History"
 msgstr "Varasemate otsingute kestus"
+
+msgid "Move down a page"
+msgstr "Liigu alla"
+
+msgid "Move up a page"
+msgstr "Liigu üles"
 
 msgid "New Search"
 msgstr "Uus otsing"
@@ -91,13 +125,16 @@ msgid "Save search as AutoTimer"
 msgstr "Salvesta otsing autotaimerina"
 
 msgid "Search"
-msgstr "Otsi"
+msgstr "EPG otsing"
 
 msgid "Search EPG"
 msgstr "EPG otsing"
 
 msgid "Search Encoding"
-msgstr ""
+msgstr "Otsi kooditabelit"
+
+msgid "Search for similar events"
+msgstr "Otsi sarnaseid saateid"
 
 msgid "Select a timer to search"
 msgstr "Vali taimer, mida otsida"
@@ -108,11 +145,29 @@ msgstr "Vali taimer, mida otsida"
 msgid "Setup"
 msgstr "Seadistamine"
 
+msgid "Setup menu"
+msgstr "Seadistamine"
+
+msgid "Show AutoTimer List"
+msgstr "Näita autotaimereid"
+
+msgid "Show detailed event info"
+msgstr "Näita täpsemat saateinfot"
+
 msgid "Show in plugin browser"
 msgstr "Näita laienduste nimekirjas"
 
 msgid "Show search history"
 msgstr "Näita varasemaid otsinguid"
+
+msgid "Show single epg for current channel"
+msgstr "Kanali saatekava"
+
+msgid "Zap to channel (setup in menu)"
+msgstr "Mine kanalile (määra menüüs)"
+
+msgid "Zap to channel and close (setup in menu)"
+msgstr "Mine kanalile ja sulge nimekiri (määra menüüs)"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
@@ -121,3 +176,4 @@ msgstr "EPG otsing"
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 msgid "search EPG..."
 msgstr "EPG otsing..."
+
