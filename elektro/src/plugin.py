@@ -14,8 +14,8 @@
 from __init__ import _
 
 from Screens.InfoBarGenerics import *
-# from RecordTimer import *
 
+from RecordTimer import RecordTimerEntry
 
 import calendar 
 #################
@@ -43,7 +43,7 @@ from Components.Sources.StaticText import StaticText
 # Configuration
 from Components.config import configfile, getConfigListEntry, ConfigEnableDisable, \
 	ConfigYesNo, ConfigText, ConfigClock, ConfigNumber, ConfigSelection, \
-	config, ConfigSubsection, ConfigSubList, ConfigSubDict, ConfigIP
+	config, ConfigSubsection, ConfigSubList, ConfigSubDict, ConfigIP, ConfigInteger
 
 # Startup/shutdown notification
 from Tools import Notifications
@@ -62,9 +62,6 @@ from time import localtime, asctime, time, gmtime, sleep
 from enigma import quitMainloop, eTimer
 
 
-# import Wakeup?!
-from Tools.DreamboxHardware import getFPWasTimerWakeup
-
 ###############################################################################
 
 # Globals
@@ -72,7 +69,7 @@ pluginPrintname = "[Elektro]"
 debug = False # If set True, plugin will print some additional status info to track logic flow
 session = None
 ElektroWakeUpTime = -1
-elektro_pluginversion = "3.4.5a"
+elektro_pluginversion = "3.4.5b"
 elektrostarttime = 60 
 elektrosleeptime = 5
 elektroShutdownThreshold = 60 * 20
@@ -113,13 +110,13 @@ config.plugins.elektro.menu = ConfigSelection(default = "plugin", choices = [("p
 config.plugins.elektro.enable = ConfigEnableDisable(default = False)
 config.plugins.elektro.standbyOnBoot = ConfigYesNo(default = False)
 config.plugins.elektro.standbyOnManualBoot = ConfigYesNo(default = True)
-config.plugins.elektro.standbyOnBootTimeout = ConfigNumber(default = 60)
 config.plugins.elektro.nextwakeup = ConfigNumber(default = 0)
 config.plugins.elektro.force = ConfigYesNo(default = False)
 config.plugins.elektro.dontwakeup = ConfigEnableDisable(default = False)
 config.plugins.elektro.holiday =  ConfigEnableDisable(default = False)
 config.plugins.elektro.hddsleep =  ConfigYesNo(default = False)
 config.plugins.elektro.IPenable =  ConfigYesNo(default = False)
+config.plugins.elektro.deepstandby_wakeup_time = ConfigInteger(default = 0)
 
 config.plugins.elektro.NASenable = ConfigSelection(choices = [("false", "no"), ("true", "yes"), ("1", _("yes, Profile 1")), ("2", _("yes, Profile 2"))], default="false")
 config.plugins.elektro.NASname = ConfigText(default = "", fixed_size = False, visible_width = 50)
@@ -185,22 +182,21 @@ def autostart(reason, **kwargs):
 
 def getNextWakeup():
 	global ElektroWakeUpTime
-	
-	#it might happen, that session does not exist. I don't know why. :-(
-	if session is None:
-		return ElektroWakeUpTime;
-	
-	nextTimer = session.nav.RecordTimer.getNextRecordingTime()
-	print pluginPrintname, "Now:", strftime("%a:%H:%M:%S",  gmtime(time()))
-	if (nextTimer < 1) or (nextTimer > ElektroWakeUpTime):
-		print pluginPrintname, "Will wake up", strftime("%a:%H:%M:%S",  gmtime(ElektroWakeUpTime))
-		return ElektroWakeUpTime
-	
-	#We have to make sure, that the Box will wake up because of us
-	# and not because of the timer
-	print pluginPrintname, "Will wake up due to the next timer", strftime("%a:%H:%M:%S",  gmtime(nextTimer))
-	return nextTimer - 1
-	
+
+	wakeuptime = 0
+
+	now = time()
+	print pluginPrintname, "Now:", strftime("%a:%H:%M:%S",  gmtime(now))
+
+	if ElektroWakeUpTime > now:
+		print pluginPrintname, "Will wake up at", strftime("%a:%H:%M:%S", gmtime(ElektroWakeUpTime))
+		wakeuptime = ElektroWakeUpTime
+
+	config.plugins.elektro.deepstandby_wakeup_time.value = wakeuptime
+	config.plugins.elektro.deepstandby_wakeup_time.save()
+
+	return wakeuptime or -1
+
 def Plugins(**kwargs):
 	if debug:
 		print pluginPrintname, "Setting entry points"
@@ -463,8 +459,6 @@ class Elektro(ConfigListScreen,Screen):
 				_("Puts the box in standby mode after boot.")),
 			getConfigListEntry(_("Standby on manual boot"), config.plugins.elektro.standbyOnManualBoot,
 				_("Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too.")),
-			getConfigListEntry(_("Standby on boot screen timeout"), config.plugins.elektro.standbyOnBootTimeout,
-				_("Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode.")),
 			getConfigListEntry(_("Force sleep (even when not in standby)"), config.plugins.elektro.force,
 				_("Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected.")),
 			getConfigListEntry(_("Avoid deep standby when HDD is active, e.g. for FTP"), config.plugins.elektro.hddsleep,
@@ -572,44 +566,29 @@ class DoElektro(Screen):
 		# Unforturnately it is not possible to use getFPWasTimerWakeup()
 		# Therfore we're checking wheter there is a recording starting within
 		# the next five min		
+
+		automatic_wakeup = self.session.nav.wasTimerWakeup() # woken by any timer
+
 		self.dontsleep = False
-		
+
 		#Let's assume we got woken up manually
-		timerWakeup = False
-		
-		#Is a recording already runniong ->woken up by a timer
-		if self.session.nav.RecordTimer.isRecording():
-			timerWakeup = True
-		# Is the next timer within 5 min -> woken up by a timer	
-		if abs(self.session.nav.RecordTimer.getNextRecordingTime() - time()) <= 360:
-			timerWakeup = True
-			
-		# Did we wake up by Elektro?
-		# Let's hope this get's run early enaugh, and this get's run
-		# before the requested wakeup-time (should be the case)
-		#
-		if abs(ElektroWakeUpTime - time()) <= 360:
-			timerWakeup = True	
-			
-		# If the was a manual wakeup: Don't go to sleep	
+		timerWakeup = automatic_wakeup
+
+		# If the was a manual wakeup: Don't go to sleep
 		if timerWakeup == False:
 			self.dontsleep = True
 
-
 		#Check whether we should try to sleep:
 		trysleep = config.plugins.elektro.standbyOnBoot.value
-		
+
 		#Don't go to sleep when this was a manual wakeup and the box shouldn't go to standby
-		if timerWakeup == False and	config.plugins.elektro.standbyOnManualBoot.value == False:
+		if timerWakeup == False and config.plugins.elektro.standbyOnManualBoot.value == False:
 			trysleep = False
-			
-	
+
 		#if waken up by timer and configured ask whether to go to sleep.
 		if trysleep:
-			self.TimerStandby = eTimer()
-			self.TimerStandby.callback.append(self.CheckStandby)
-			self.TimerStandby.startLongTimer(elektrosleeptime)
-			print pluginPrintname, "Set up standby timer"
+			print pluginPrintname, "add standby notification"
+			Notifications.AddNotificationWithID("Standby", Standby.Standby)
 
 		self.TimerSleep = eTimer()
 		self.TimerSleep.callback.append(self.CheckElektro)
@@ -628,7 +607,6 @@ class DoElektro(Screen):
 	def getPrintTime(self, secs):
 		return strftime("%H:%M:%S", gmtime(secs))
 
-	
 	# This function converts the time into the relative Timezone where the day starts at "nextday"
 	# This is done by substracting nextday from the current time. Negative times are corrected using the mod-operator
 	def getReltime(self, time):
@@ -637,25 +615,7 @@ class DoElektro(Screen):
 		else:
 			nextday = self.clkToTime(config.plugins.elektro.nextday2)
 		return (time - nextday) %  (24 * 60 * 60)
-		
-	
-	def CheckStandby(self):
-		print pluginPrintname, "Showing Standby Sceen"
-		try:
-			self.session.openWithCallback(self.DoElektroStandby,MessageBox,_("Go to Standby now?"),type = MessageBox.TYPE_YESNO,
-					timeout = config.plugins.elektro.standbyOnBootTimeout.value)
-		except:
-			# Couldn't be shown. Restart timer.
-			print pluginPrintname, "Failed Showing Standby Sceen "
-			self.TimerStandby.startLongTimer(elektrostarttime)
 
-
-	def DoElektroStandby(self,retval):
-		if (retval):
-			#Yes, go to sleep
-			Notifications.AddNotification(Standby.Standby)
-
-			
 	def setNextWakeuptime(self):
 		# Do not set a wakeup time if
 		#  - Elektro isn't enabled
@@ -837,17 +797,14 @@ class DoElektro(Screen):
 			config.plugins.elektro.profile.save()
 			self.setNextWakeuptime()
 		if (retval):
-			# os.system("wall 'Powermanagent does Deepsleep now'")
-			#  Notifications.AddNotification(TryQuitMainloop,1)
-			# 1 = Deep Standby -> enigma2:/doc/RETURNCODES
-			
-			global inTryQuitMainloop
-			if Standby.inTryQuitMainloop == False:
+			if not Standby.inTryQuitMainloop:
 				if config.plugins.elektro.NASenable.value == "true" or config_NASenable:
 					ret = NASpowerdown(config.plugins.elektro.NASname.value, config.plugins.elektro.NASuser.value, config.plugins.elektro.NASpass.value, config.plugins.elektro.NAScommand.value, config.plugins.elektro.NASport.value)
 				configfile.save()
-				self.session.open(Standby.TryQuitMainloop, 1) # <- This might not work reliably
-				#quitMainloop(1)
+				if Standby.inStandby:
+					RecordTimerEntry.TryQuitMainloop()
+				else:
+					Notifications.AddNotificationWithID("Shutdown", Standby.TryQuitMainloop, 1)
 		else:
 			# Dont try to sleep until next wakeup
 			self.dontsleep = True
