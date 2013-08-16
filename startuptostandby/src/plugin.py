@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigSubsection, ConfigEnableDisable
-import Screens.Standby
+from Screens.Standby import Standby, inStandby
 from StartupToStandbyConfiguration import StartupToStandbyConfiguration
 from Tools import Notifications
 
@@ -15,8 +15,8 @@ def main(session, **kwargs):
 # sessionstart
 def sessionstart(reason, session = None):
 	print "[StartupToStandby] autostart"
-	if config.plugins.startuptostandby.enabled.value and reason == 0 and not Screens.Standby.inStandby:
-		Notifications.AddNotification(Screens.Standby, id="Standby")
+	if config.plugins.startuptostandby.enabled.value and reason == 0 and not inStandby:
+		Notifications.AddNotificationWithID("Standby", Standby)
 
 def Plugins(path, **kwargs):
 	return [PluginDescriptor(name="StartupToStandby", description="Startup To Standby", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main, needsRestart = False),
