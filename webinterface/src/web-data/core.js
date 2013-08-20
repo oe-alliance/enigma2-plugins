@@ -2009,7 +2009,6 @@ var E2WebCore = Class.create(BaseCore, {
 
 		if( userprefs.data.updateCurrentInterval != updateCurrentInterval){
 			userprefs.data.updateCurrentInterval = updateCurrentInterval;
-
 			changed = true;
 			this.startUpdateCurrentPoller();
 		}
