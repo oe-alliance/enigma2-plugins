@@ -501,7 +501,7 @@ var MediaPlayer = Class.create(Controller, {
 	},
 
 	onInstantPlay: function(event, element){
-		var ref = $F('urlinput');
+		var ref = $F('instantPlay').sub(":", "%3a");
 		ref = "4097:0:1:0:0:0:0:0:0:0:" + ref;
 		this.playFile(ref)
 		event.stop();
