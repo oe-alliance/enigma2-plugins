@@ -48,7 +48,6 @@ SUBDIRS = \
 	infobartunerstate \
 	internetradio \
 	kiddytimer \
-	lastfm \
 	letterbox \
 	logomanager \
 	mediadownloader \
