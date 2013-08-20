@@ -164,7 +164,7 @@
 					<div id="searchHd" class="header"><div>EPG-Search</div></div>
 					<div class="boxContent">
 						<form id="epgSearchForm" action="">
-							<input type="text" id="epgSearch" value="Search EPG" />
+							<input type="text" id="epgSearch" />
 							<img id="epgSearchClear" style="vertical-align:middle" src="/web-data/img/cross.png" alt="clear..." title="Clear Search"/>
 						</form>
 					</div>
@@ -198,11 +198,10 @@
 		$('instantRecordHd').update(strings.instant_record);
 		$('volHd').update(strings.volume);
 		$('searchHd').update(strings.epgsearch);
-		$('epgSearch').value = strings.epgsearch_hint;
+		setInputPlaceholder($('epgSearch'), strings.epgsearch_hint);
 		$('epgSearchClear').title = strings.clear_serach;
 		$('openSignalPanelImg').title = strings.open_signal_panel;
 		$('instantRecordImg').title = strings.instant_record;
-		
 		core.run();
 	</script>
 

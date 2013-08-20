@@ -498,6 +498,30 @@ var MediaPlayer = Class.create(Controller, {
 
 	command: function(cmd){
 		this.handler.command(cmd);
+	},
+
+	onInstantPlay: function(event, element){
+		var ref = $F('urlinput');
+		ref = "4097:0:1:0:0:0:0:0:0:0:" + ref;
+		this.playFile(ref)
+		event.stop();
+	},
+
+	addInstantPlayInput: function(){
+		var form = new Element('form');
+		form.id = 'instantPlayForm';
+		var input = new Element('input');
+		input.id = 'instantPlay';
+		setInputPlaceholder(input, strings.play);
+
+		form.insert({top : input});
+		form.on('submit', this.onInstantPlay.bind(this));
+
+		$('contentHdExt').update(form);
+	},
+
+	onFinished: function(){
+		this.addInstantPlayInput();
 	}
 });
 
@@ -794,7 +818,7 @@ var Services = Class.create(Controller, {
 	addFilterInput: function(){
 		var input = new Element('input');
 		input.id = 'serviceFilter';
-		input.value = strings.filter_services;
+		setInputPlaceholder(input, strings.filter_services);
 		$('contentHdExt').update(input);
 		input.on('focus', this.onFilterFocus.bind(this));
 		input.on('keyup', this.filter.bind(this));
@@ -1028,7 +1052,6 @@ var BaseCore = Class.create({
 	initialize: function(){
 		this.popUpBlockerHinted = false;
 		this.hideNotifierTimeout = '';
-		
 		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
 		if(userprefs.data.style != "dark" && userprefs.data.style != "light"){
 			userprefs.data.style = "dark";
@@ -1479,12 +1502,6 @@ var E2WebCore = Class.create(BaseCore, {
 			function(event, element){
 				this.epg.search($F('epgSearch'));
 				event.stop();
-			}.bind(this)
-		);
-		$('epgSearch').on(
-			'focus',
-			function(event, element){
-				element.value = "";
 			}.bind(this)
 		);
 		$('epgSearchClear').on(

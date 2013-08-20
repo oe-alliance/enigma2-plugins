@@ -49,6 +49,20 @@ String.prototype.format = function(){
 	return data;
 };
 
+function setInputPlaceholder(element, value){
+	if('placeholder' in element){
+		element.placeholder = value
+	} else {
+		element.value = value;
+		element.on(
+			'focus',
+			function(event, element){
+				element.value = "";
+			}.bind(this)
+		);
+	}
+}
+
 //General Helpers
 function toOptionList(lst, selected, split) {
 	var retList = Array();
@@ -93,9 +107,13 @@ function toOptionList(lst, selected, split) {
 
 	return retList;
 }
-
-var _consoleDebug = console.log.bind(console);
 var _nullDebug = function(item){};
+try{
+	var _consoleDebug = console.log.bind(console); //on IE devtools have to be open or this won't work!
+} catch(e){
+	var _consoleDebug = _nullDebug;
+}
+
 var debug = userprefs.data.debug ? _consoleDebug : _nullDebug;
 
 function parseNr(num) {
