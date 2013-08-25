@@ -40,7 +40,6 @@ SUBDIRS = \
 	infobartunerstate \
 	internetradio \
 	kiddytimer \
-	lastfm \
 	letterbox \
 	mediadownloader \
 	merlinepg \
