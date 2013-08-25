@@ -1,4 +1,5 @@
 Package: enigma2-plugin-extensions-bmediacenter
-Version: 0.9.4r0
+Version: 1.0.0
 Description: BMediaCenter
 Maintainer: homey mod by bonkel
+Depends: enigma2, libshowiframe0, libav
