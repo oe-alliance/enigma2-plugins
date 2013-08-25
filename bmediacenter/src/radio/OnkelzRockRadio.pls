@@ -1,1 +1,1 @@
-http://webhost110.gtk.hu:9008/
+http://webhost110.gtk.hu:9010/

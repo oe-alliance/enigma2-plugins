@@ -6,7 +6,6 @@ from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Screens.ChoiceBox import ChoiceBox
-from Screens.InputBox import InputBox
 from ServiceReference import ServiceReference
 from Components.Button import Button
 from Components.ScrollLabel import ScrollLabel
@@ -16,25 +15,32 @@ from Screens.HelpMenu import HelpableScreen
 from twisted.internet import reactor, defer
 from twisted.web import client
 from twisted.web.client import HTTPClientFactory, downloadPage
-from xml.etree.cElementTree import fromstring as cet_fromstring
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Playlist import PlaylistIOInternal, PlaylistIOM3U, PlaylistIOPLS
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import *
 from Tools.Directories import resolveFilename, fileExists, pathExists, createDir, SCOPE_MEDIA, SCOPE_PLAYLIST, SCOPE_SKIN_IMAGE
 from MC_Filelist import FileList
-from Components.AVSwitch import AVSwitch
 from Screens.InfoBarGenerics import InfoBarSeek
-from urllib import quote
 import os
 from os import path as os_path, remove as os_remove, listdir as os_listdir
 from __init__ import _
-
 config.plugins.mc_ap = ConfigSubsection()
+sorts = [('default',_("default")),('alpha',_("alphabet")), ('alphareverse',_("alphabet backward")),('date',_("date")),('datereverse',_("date backward")),('size',_("size")),('sizereverse',_("size backward"))]
+config.plugins.mc_ap_sortmode = ConfigSubsection()
+config.plugins.mc_ap_sortmode.enabled = ConfigSelection(sorts)
 config.plugins.mc_ap.showJpg = ConfigYesNo(default=True)
 config.plugins.mc_ap.jpg_delay = ConfigInteger(default=10, limits=(5, 999))
 config.plugins.mc_ap.repeat = ConfigSelection(default="off", choices = [("off", "off"),("single", "single"),("all", "all")])
 config.plugins.mc_ap.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
+screensaverlist = [('default',_("default"))]
+hddpath="/hdd/saver/"
+if pathExists(hddpath):
+	files = os_listdir(hddpath)
+	for x in files:
+		if pathExists(hddpath + x):
+			screensaverlist += [(hddpath +'%s/' % (x),_("%s") % (x))]
+config.plugins.mc_ap.whichjpg = ConfigSelection(screensaverlist)
 playlist = []
 try:
 	from enigma import evfd
@@ -142,7 +148,6 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.jpgIndex = 0
 		self.jpgLastIndex = -1
 		self.isVisible = True
-		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.coverArtFileName = ""
 		self["fileinfo"] = Label()
 		self["text"] = Label(_("Lyrics"))
@@ -150,10 +155,13 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self["currentfolder"] = Label()
 		self["currentfavname"] = Label()
 		self.standardInfoBar = False
-		if config.av.downmix_ac3.value == False:
-			config.av.downmix_ac3.value = True
-			config.av.downmix_ac3.save()
-			os.system("touch /tmp/.ac3on")
+		try:
+			if config.av.downmix_ac3.value == False:
+				config.av.downmix_ac3.value = True
+				config.av.downmix_ac3.save()
+				os.system("touch /tmp/.ac3on")
+		except Exception, e:
+			print "Media Center: no ac3"
 		self["play"] = Pixmap()
 		self["green"] = Pixmap()
 		self["screensaver"] = MediaPixmap()
@@ -200,10 +208,14 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		currDir = config.plugins.mc_ap.lastDir.value
 		if not pathExists(currDir):
 			currDir = "/"
+		sort = config.plugins.mc_ap_sortmode.enabled.value
 		self["currentfolder"].setText(str(currDir))
+		self.filelist = []
+		self["filelist"] = []
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib" , "/proc", "/ram", "/root" , "/sbin", "/sys", "/tmp", "/usr", "/var"]
-		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(mp3|ogg|wav|wave|flac|m4a|m3u|pls|e2pls)", inhibitDirs = inhibitDirs, additionalExtensions = "4098:m3u 4098:e2pls 4098:pls")
+		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(mp2|mp3|wav|wave|wma|m4a|ogg|ra|flac|m3u|pls|e2pls)", inhibitDirs = inhibitDirs, sort = sort)
 		self["filelist"] = self.filelist
+		self["filelist"].show()
 		self.JpgTimer = eTimer()
 		self.JpgTimer.callback.append(self.showBackgroundJPG)
 		self.getJPG()
@@ -336,6 +348,8 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.session.openWithCallback(self.updd, MC_AudioPlaylist)
 	def updd(self):
 		self.updateFileInfo()
+		sort = config.plugins.mc_ap_sortmode.enabled.value
+		self.filelist.refresh(sort)
 		if MC_AudioPlayer.STATE == "PLAY":
 			self["play"].instance.setPixmapFromFile(mcpath +"icons/play_enabled.png")
 			if config.plugins.mc_ap.showJpg.getValue():	
@@ -403,7 +417,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			sYear = currPlay.info().getInfoString(iServiceInformation.sTagDate)
 			if sTitle == "":
 				sTitle = currPlay.info().getName().split('/')[-1]
-			self["fileinfo"].setText(_("Title: ") + sTitle + _("\nArtist: ") +  sArtist + _("\nAlbum: ") + sAlbum + _("\nYear: ") + sYear + _("\nGenre: ") + sGenre + _("\nComment: ") + sComment)
+			self["fileinfo"].setText(_("Title: ") + sTitle + _("\nArtist: ") + sArtist + _("\nAlbum: ") + sAlbum + _("\nYear: ") + sYear + _("\nGenre: ") + sGenre + _("\nComment: ") + sComment)
 	def addFiletoPls(self):
 		if self.filelist.canDescent():
 			x = self.filelist.getName()
@@ -437,15 +451,16 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.playlist.updateList()
 	def deleteFile(self):
 		self.service = self.filelist.getServiceRef()
-		if self.service.type != 4098 and self.session.nav.getCurrentlyPlayingServiceReference() is not None:
-			if self.service == self.session.nav.getCurrentlyPlayingServiceReference():
+		if self.service.type != 4098 and self.session.nav.getCurrentlyPlayingServiceOrGroup() is not None:
+			if self.service == self.session.nav.getCurrentlyPlayingServiceOrGroup():
 				self.StopPlayback()
 		self.session.openWithCallback(self.deleteFileConfirmed, MessageBox, _("Do you really want to delete this file ?"))
 	def deleteFileConfirmed(self, confirmed):
 		if confirmed:
 			delfile = self["filelist"].getFilename()
 			os.remove(delfile)
-			self["filelist"].refresh()
+			sort = config.plugins.mc_ap_sortmode.enabled.value
+			self.filelist.refresh(sort)
 	def deleteDir(self):
 		self.session.openWithCallback(self.deleteDirConfirmed, MessageBox, _("Do you really want to delete this directory and it's content ?"))
 	def deleteDirConfirmed(self, confirmed):
@@ -453,9 +468,13 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			import shutil
 			deldir = self.filelist.getSelection()[0]
 			shutil.rmtree(deldir)
-			self["filelist"].refresh()
+			sort = config.plugins.mc_ap_sortmode.enabled.value
+			self.filelist.refresh(sort)
 	def getJPG(self):
-		path = mcpath +"saver/"
+		if config.plugins.mc_ap.whichjpg.value == "default":
+			path = mcpath +"saver/"
+		else:
+			path = config.plugins.mc_ap.whichjpg.value
 		for root, dirs, files in os.walk(path):
 			for name in files:
 				if name.endswith(".jpg"):
@@ -468,7 +487,10 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 				self.jpgIndex = 0
 			print "MediaCenter: Last JPG Index: " + str(self.jpgLastIndex)
 			if self.jpgLastIndex != self.jpgIndex or self.jpgLastIndex == -1:
-				path = mcpath +"saver/" + self.jpgList[self.jpgIndex]
+				if config.plugins.mc_ap.whichjpg.value == "default":
+					path = mcpath +"saver/" + self.jpgList[self.jpgIndex]
+				else:
+					path = config.plugins.mc_ap.whichjpg.value + self.jpgList[self.jpgIndex]
 				self["screensaver"].screensaver(path)
 				self.jpgLastIndex = self.jpgIndex
 				time = config.plugins.mc_ap.jpg_delay.getValue() * 1000
@@ -509,8 +531,14 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.session.open(MessageBox, message, type = MessageBox.TYPE_INFO,timeout = 20 )
 	def addPlaylistParser(self, parser, extension):
 		self.playlistparsers[extension] = parser
+	def Shuffle(self):
+		if self.currPlaying == 1:
+			return
+		sort = "shuffle"
+		self.filelist.refresh(sort)
 	def showMenu(self):
 		menu = []
+		menu.append((_("shuffle"), "shuffle"))
 		if self.filelist.canDescent():
 			x = self.filelist.getName()
 			if x == "..":
@@ -540,6 +568,8 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			self.addDirtoPls(os_path.dirname(self.filelist.getSelection()[0].getPath()) + "/", recursive = False)
 		elif choice[1] == "deletefile":
 			self.deleteFile()
+		elif choice[1] == "shuffle":
+			self.Shuffle()
 	def Settings(self):
 		self.session.openWithCallback(self.updd, AudioPlayerSettings)
 	def Exit(self):
@@ -547,7 +577,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			self.visibility()
 			return
 		if self.filelist.getCurrentDirectory() is None:
-			config.plugins.mc_ap.lastDir.value = "/"
+			config.plugins.mc_ap.lastDir.value = "devicelist"
 		else:
 			config.plugins.mc_ap.lastDir.value = self.filelist.getCurrentDirectory()
 		self.FileInfoTimer.stop()
@@ -558,7 +588,8 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			config.av.downmix_ac3.save()
 			os.remove("/tmp/.ac3on")
 		config.plugins.mc_ap.save()
-		self.session.nav.stopService()
+		if self.session.nav.getCurrentService() is not None:
+			self.session.nav.stopService()
 		MC_AudioPlayer.STATE = "NONE"
 		if config.plugins.mc_global.vfd.value == "on":
 			evfd.getInstance().vfd_write_string(_("My Music"))
@@ -579,13 +610,15 @@ class MC_WebRadio(Screen, HelpableScreen):
 		self.jpgIndex = 0
 		self.jpgLastIndex = -1
 		self.isVisible = True
-		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self["key_blue"] = Button(_("Settings"))
 		self["fileinfo"] = Label()
-		if config.av.downmix_ac3.value == False:
-			config.av.downmix_ac3.value = True
-			config.av.downmix_ac3.save()
-			os.system("touch /tmp/.ac3on")
+		try:
+			if config.av.downmix_ac3.value == False:
+				config.av.downmix_ac3.value = True
+				config.av.downmix_ac3.save()
+				os.system("touch /tmp/.ac3on")
+		except Exception, e:
+			print "Media Center: no ac3"
 		self["play"] = Pixmap()
 		self["screensaver"] = MediaPixmap()
 		MC_AudioPlayer.STATE = "NONE"
@@ -624,8 +657,13 @@ class MC_WebRadio(Screen, HelpableScreen):
 		currDir = mcpath +"radio/"
 		if not pathExists(currDir):
 			currDir = "/"
+		self.filelist = []
+		self["filelist"] = []
+		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib" , "/proc", "/ram", "/root" , "/sbin", "/sys", "/tmp", "/usr", "/var"]
 		self.filelist = FileList(currDir, useServiceRef = True, showDirectories = False, showFiles = True, matchingPattern = "(?i)^.*\.(m3u|pls|e2pls)", additionalExtensions = "4098:m3u 4098:e2pls 4098:pls")
+
 		self["filelist"] = self.filelist
+		self["filelist"].show()
 		self.JpgTimer = eTimer()
 		self.JpgTimer.callback.append(self.showBackgroundJPG)
 		self.getJPG()
@@ -693,7 +731,8 @@ class MC_WebRadio(Screen, HelpableScreen):
 			self.show()
 	def updd(self):
 		self.updateFileInfo()
-		self["filelist"].refresh()
+		sort = config.plugins.mc_ap_sortmode.enabled.value
+		self.filelist.refresh(sort)
 		if MC_AudioPlayer.STATE == "PLAY":
 			self["play"].instance.setPixmapFromFile(mcpath +"icons/play_enabled.png")
 			if config.plugins.mc_ap.showJpg.getValue():	
@@ -742,21 +781,25 @@ class MC_WebRadio(Screen, HelpableScreen):
 			sYear = currPlay.info().getInfoString(iServiceInformation.sTagDate)
 			if sTitle == "":
 				sTitle = currPlay.info().getName().split('/')[-1]
-			self["fileinfo"].setText(_("Title: ") + sTitle + _("\nArtist: ") +  sArtist + _("\nAlbum: ") + sAlbum + _("\nYear: ") + sYear + _("\nGenre: ") + sGenre + _("\nComment: ") + sComment)
+			self["fileinfo"].setText(_("Title: ") + sTitle + _("\nArtist: ") + sArtist + _("\nAlbum: ") + sAlbum + _("\nYear: ") + sYear + _("\nGenre: ") + sGenre + _("\nComment: ") + sComment)
 		self.FileInfoTimer.start(10000, True)
 	def deleteFile(self):
 		self.service = self.filelist.getServiceRef()
-		if self.service.type != 4098 and self.session.nav.getCurrentlyPlayingServiceReference() is not None:
-			if self.service == self.session.nav.getCurrentlyPlayingServiceReference():
+		if self.service.type != 4098 and self.session.nav.getCurrentlyPlayingServiceOrGroup() is not None:
+			if self.service == self.session.nav.getCurrentlyPlayingServiceOrGroup():
 				self.StopPlayback()
 		self.session.openWithCallback(self.deleteFileConfirmed, MessageBox, _("Do you really want to delete this file ?"))
 	def deleteFileConfirmed(self, confirmed):
 		if confirmed:
 			delfile = self["filelist"].getFilename()
 			os.remove(delfile)
-			self["filelist"].refresh()
+			sort = config.plugins.mc_ap_sortmode.enabled.value
+			self.filelist.refresh(sort)
 	def getJPG(self):
-		path = mcpath +"saver/"
+		if config.plugins.mc_ap.whichjpg.value == "default":
+			path = mcpath +"saver/"
+		else:
+			path = config.plugins.mc_ap.whichjpg.value
 		for root, dirs, files in os.walk(path):
 			for name in files:
 				if name.endswith(".jpg"):
@@ -767,9 +810,11 @@ class MC_WebRadio(Screen, HelpableScreen):
 				self.jpgIndex += 1
 			else:
 				self.jpgIndex = 0
-			print "MediaCenter: Last JPG Index: " + str(self.jpgLastIndex)
 			if self.jpgLastIndex != self.jpgIndex or self.jpgLastIndex == -1:
-				path = mcpath +"saver/" + self.jpgList[self.jpgIndex]
+				if config.plugins.mc_ap.whichjpg.value == "default":
+					path = mcpath +"saver/" + self.jpgList[self.jpgIndex]
+				else:
+					path = config.plugins.mc_ap.whichjpg.value + self.jpgList[self.jpgIndex]
 				self["screensaver"].screensaver(path)
 				self.jpgLastIndex = self.jpgIndex
 				time = config.plugins.mc_ap.jpg_delay.getValue() * 1000
@@ -803,7 +848,8 @@ class MC_WebRadio(Screen, HelpableScreen):
 			config.av.downmix_ac3.value = False
 			config.av.downmix_ac3.save()
 			os.remove("/tmp/.ac3on")
-		self.session.nav.stopService()
+		if self.session.nav.getCurrentService() is not None:
+			self.session.nav.stopService()
 		MC_AudioPlayer.STATE = "NONE"
 		self.close()
 	def screensavercheckup(self):
@@ -816,9 +862,15 @@ class MC_WebRadio(Screen, HelpableScreen):
 			os.remove("/tmp/index.html")
 		menu = []
 		menu.append((_("70-80er"), "70-80er/"))
+		menu.append((_("Alternative"), "Alternative/"))
+		menu.append((_("Ambient"), "Ambient/"))
+		menu.append((_("Artist"), "Artist/"))
+		menu.append((_("Big Band"), "Big%20Band/"))
 		menu.append((_("Blues"), "Blues/"))
+		menu.append((_("Bluegrass"), "Bluegrass/"))
 		menu.append((_("Chillout"), "Chillout/"))
 		menu.append((_("Classic"), "classical/"))
+		menu.append((_("Classic Rock"), "classic%20rock/"))
 		menu.append((_("Countrymusic"), "Countrymusik/"))
 		menu.append((_("Hip Hop"), "HipHop/"))
 		menu.append((_("Hits"), "Hits/"))
@@ -836,10 +888,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 	def menuCallback(self, choice):
 		if choice is None:
 			return
-		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/Aafpanel"):
-			os.system("echo "+ choice[1] +" > /tmp/.webselect | wget -O /tmp/index.html "+ radirl +"/not/")
-		else:
-			os.system("echo "+ choice[1] +" > /tmp/.webselect | wget -O /tmp/index.html "+ radirl +""+ choice[1])
+		os.system("echo "+ choice[1] +" > /tmp/.webselect | wget -O /tmp/index.html "+ radirl +""+ choice[1])
 		self.session.openWithCallback(self.updd, MC_WebDown)
 class MC_WebDown(Screen):
 	def __init__(self, session):
@@ -1052,8 +1101,9 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 			sYear = currPlay.info().getInfoString(iServiceInformation.sTagDate)
 			if sTitle == "":
 				sTitle = currPlay.info().getName().split('/')[-1]
-			self["fileinfo"].setText("Title: " + sTitle + "\nArtist: " +  sArtist + "\nAlbum: " + sAlbum + "\nYear: " + sYear + "\nGenre: " + sGenre + "\nComment: " + sComment)
+			self["fileinfo"].setText("Title: " + sTitle + "\nArtist: " + sArtist + "\nAlbum: " + sAlbum + "\nYear: " + sYear + "\nGenre: " + sGenre + "\nComment: " + sComment)
 	def save_playlist(self):
+		from Screens.InputBox import InputBox
 		self.session.openWithCallback(self.save_pls,InputBox, title=_("Please enter filename (empty = use current date)"),windowTitle = _("Save Playlist"))
 	def save_pls(self, name):
 		if name is not None:
@@ -1128,7 +1178,10 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 		elif choice[1] == "deleteplaylist":
 			self.delete_saved_playlist()
 	def getJPG(self):
-		path = mcpath +"saver/"
+		if config.plugins.mc_ap.whichjpg.value == "default":
+			path = mcpath +"saver/"
+		else:
+			path = config.plugins.mc_ap.whichjpg.value
 		for root, dirs, files in os.walk(path):
 			for name in files:
 				if name.endswith(".jpg"):
@@ -1139,7 +1192,6 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 				self.jpgIndex += 1
 			else:
 				self.jpgIndex = 0
-			print "MediaCenter: Last JPG Index: " + str(self.jpgLastIndex)
 			if self.jpgLastIndex != self.jpgIndex or self.jpgLastIndex == -1:
 				path = mcpath +"saver/" + self.jpgList[self.jpgIndex]
 				self["screensaver"].screensaver(path)
@@ -1220,6 +1272,7 @@ class Lyrics(Screen):
 				titlely = curPlay.info().getName().split('/')[-1]
 			if artistly == "":
 				artistly = titlely
+		from urllib import quote
 		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(artistly), quote(titlely))
 		sendUrlCommand(url, None,10).addCallback(self.gotLyrics).addErrback(self.urlError)
 		return "No lyrics found in id3-tag, trying api.chartlyrics.com..."
@@ -1228,6 +1281,7 @@ class Lyrics(Screen):
 			self["resulttext"].setText(str(error.getErrorMessage()))
 			self["lyric_text"].setText("")
 	def gotLyrics(self, xmlstring):
+		from xml.etree.cElementTree import fromstring as cet_fromstring
 		root = cet_fromstring(xmlstring)
 		lyrictext = ""
 		lyrictext = root.findtext("{http://api.chartlyrics.com/}Lyric").encode("utf-8", 'ignore')
@@ -1276,6 +1330,7 @@ class MediaPixmap(Pixmap):
 		return Pixmap.applySkin(self, desktop, screen)
 	def onShow(self):
 		Pixmap.onShow(self)
+		from Components.AVSwitch import AVSwitch
 		sc = AVSwitch().getFramebufferScale()
 		#0=Width 1=Height 2=Aspect 3=use_cache 4=resize_type 5=Background(#AARRGGBB)
 		self.picload.setPara((self.instance.size().width(), self.instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
@@ -1307,12 +1362,7 @@ class MediaPixmap(Pixmap):
 	def screensaver(self, path):
 		self.picload.startDecode(path)
 class AudioPlayerSettings(Screen):
-	skin = """
-		<screen position="center,center" size="400,120" title="Audioplayer Settings" >
-			<widget name="configlist" position="10,10" size="380,100" />
-		</screen>"""
 	def __init__(self, session):
-		self.skin = AudioPlayerSettings.skin
 		Screen.__init__(self, session)
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
@@ -1331,10 +1381,13 @@ class AudioPlayerSettings(Screen):
 			"8": self.keyNumber,
 			"9": self.keyNumber
 		}, -1)
+		
 		self.list = []
 		self["configlist"] = ConfigList(self.list)
-		self.list.append(getConfigListEntry(_("Screensaver Enable"), config.plugins.mc_ap.showJpg))
+		self.list.append(getConfigListEntry(_("Screensaver Enable:"), config.plugins.mc_ap.showJpg))
 		self.list.append(getConfigListEntry(_("Screensaver Interval"), config.plugins.mc_ap.jpg_delay))
+		self.list.append(getConfigListEntry(_("Screensaver Style:"), config.plugins.mc_ap.whichjpg))
+		self.list.append(getConfigListEntry(_("Filelist Sorting:"), config.plugins.mc_ap_sortmode.enabled))
 	def keyLeft(self):
 		self["configlist"].handleKey(KEY_LEFT)
 	def keyRight(self):

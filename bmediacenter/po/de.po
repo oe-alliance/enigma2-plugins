@@ -2,46 +2,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BMediaCenter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:29+0100\n"
-"PO-Revision-Date: 2012-01-23 18:25+0100\n"
+"POT-Creation-Date: 2013-01-26 22:27+0100\n"
+"PO-Revision-Date: 2013-01-26 22:29+0100\n"
 "Last-Translator: \n"
-"Language-Team: OpenAAF (bonkel)\n"
-"Language: \n"
+"Language-Team: bonkel\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: C:\\Users\\Benny\\Documents\\aaf\\mips git aaf\\git"
-"\\pluginsnew\\bmediacenter\\src\n"
+"X-Poedit-Basepath: C:\\Users\\Benny\\Documents\\HDMU\\git\\plugins"
+"\\Extensions\\BMediaCenter\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: C:\\Users\\Benny\\Documents\\aaf\\mips git aaf\\git"
-"\\pluginsnew\\bmediacenter\\src\n"
-
-msgid ""
-"\n"
-"Album: "
-msgstr ""
+"X-Poedit-SearchPath-0: C:\\Users\\Benny\\Documents\\HDMU\\git\\plugins"
+"\\Extensions\\BMediaCenter\n"
 
 msgid ""
 "\n"
 "Artist: "
 msgstr ""
 "\n"
-"Interpret"
+"Interpret: "
 
 msgid ""
 "\n"
 "Comment: "
 msgstr ""
 "\n"
-"Kommentar"
-
-msgid ""
-"\n"
-"Genre: "
-msgstr ""
+"Kommentar: "
 
 msgid ""
 "\n"
@@ -50,57 +39,11 @@ msgstr ""
 "\n"
 "Jahr:"
 
-msgid "70-80er"
-msgstr ""
-
-msgid "Add to Playlist"
-msgstr "Zur Wiedergabeliste hinzufügen"
-
-msgid "Autoplay Delay"
-msgstr "Automatische Wiedergabe deaktivieren"
-
-msgid "Autoplay Enable"
-msgstr "Automatische Wiedergabe aktivieren"
-
 msgid "Cache Thumbnails"
 msgstr "Vorschau cachen"
 
-msgid "Celsius"
-msgstr ""
-
 msgid "City"
 msgstr "Stadt"
-
-msgid "City 2"
-msgstr "Stadt 2"
-
-msgid "City 3"
-msgstr "Stadt 3"
-
-msgid "City 4"
-msgstr "Stadt 4"
-
-msgid "City 5"
-msgstr "Stadt 5"
-
-#, fuzzy
-msgid "City2"
-msgstr "Stadt 2"
-
-#, fuzzy
-msgid "City3"
-msgstr "Stadt 3"
-
-#, fuzzy
-msgid "City4"
-msgstr "Stadt 4"
-
-#, fuzzy
-msgid "City5"
-msgstr "Stadt 5"
-
-msgid "Classic"
-msgstr ""
 
 msgid "Delete failed!"
 msgstr "Löschen fehlgeschlagen"
@@ -111,7 +54,6 @@ msgstr "Ordner"
 msgid "Directory:"
 msgstr "Ordner:"
 
-#, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Möchtest du wirklich %s löschen?"
 
@@ -121,10 +63,6 @@ msgstr "Willst du diesen Ordner samt den Inhalt wirklich löschen?"
 msgid "Do you really want to delete this file ?"
 msgstr "Willst du die Datei wirklich löschen?"
 
-msgid "English"
-msgstr "Englisch"
-
-#, python-format
 msgid ""
 "Error loading filelist into server %s:\n"
 "%s"
@@ -132,7 +70,6 @@ msgstr ""
 "Fehler beim Laden der Dateiliste in den Server %s:\n"
 "%s"
 
-#, python-format
 msgid ""
 "Error loading playlist %s into server %s:\n"
 "%s"
@@ -140,7 +77,6 @@ msgstr ""
 "Fehler beim Aktualisieren %s der Wiedergabeliste vom Server %s:\n"
 "%s"
 
-#, python-format
 msgid ""
 "Error loading playlist into server %s:\n"
 "%s"
@@ -148,13 +84,6 @@ msgstr ""
 "Fehler beim Laden der Wiedergabeliste in den Server %s:\n"
 "%s"
 
-#, python-format
-msgid ""
-"Error switching directory:\n"
-"%s"
-msgstr ""
-
-#, python-format
 msgid ""
 "Error updating file- and playlist from server %s:\n"
 "%s"
@@ -162,7 +91,6 @@ msgstr ""
 "Fehler beim Aktualisieren der Datei- und Wiedergabeliste vom Server %s:\n"
 "%s"
 
-#, python-format
 msgid ""
 "Error updating filelist from server %s:\n"
 "%s"
@@ -170,7 +98,6 @@ msgstr ""
 "Fehler beim Aktualisieren der Dateiliste vom Server %s:\n"
 "%s"
 
-#, python-format
 msgid ""
 "Error with VLC server:\n"
 "%s"
@@ -178,56 +105,14 @@ msgstr ""
 "Fehler mit dem VLC Server :\n"
 "%s"
 
-msgid "Farenheit"
-msgstr ""
-
 msgid "Favorites"
 msgstr "Favoriten"
-
-msgid "File Browser"
-msgstr ""
-
-msgid "Frame size in full view"
-msgstr ""
-
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to Restart the GUI now?"
-msgstr ""
-
-msgid "German"
-msgstr "Deutsch"
-
-msgid "Global Settings"
-msgstr ""
-
-msgid "Go to Playlist"
-msgstr "Zur Wiedergabeliste"
-
-msgid "Hip Hop"
-msgstr ""
-
-msgid ""
-"Humidity :\n"
-"Wind :"
-msgstr ""
-"Luftfeuchtigkeit :\n"
-"Wind :"
-
-msgid "Language"
-msgstr "Sprache"
 
 msgid "List of Storage Devices"
 msgstr "Liste der Speichergeräte"
 
 msgid "Lyrics"
 msgstr "Songtexte"
-
-msgid "Media Center"
-msgstr ""
-
-msgid "Metric"
-msgstr ""
 
 msgid "My Music"
 msgstr "Meine Musik"
@@ -238,17 +123,8 @@ msgstr "Meine Bilder"
 msgid "My Videos"
 msgstr "Meine Videos"
 
-msgid "Name"
-msgstr ""
-
-msgid "Name:"
-msgstr ""
-
 msgid "No lyrics found"
 msgstr "Keine Songtexte gefunden"
-
-msgid "Parent Directory"
-msgstr ""
 
 msgid "Please enter filename (empty = use current date)"
 msgstr "Bitte gib den Dateinamen ein (leer= benutz aktuelles Datum)"
@@ -265,27 +141,11 @@ msgstr "Willst du diesen Server wirklich löschen?"
 msgid "Really delete this favorite?"
 msgstr "Willst du diesen Favoriten wirklich löschen?"
 
-#, python-format
 msgid "Response -> lyrics for: %s (%s)"
 msgstr "Rückmeldung -> Songtexte für %s (%s)"
 
-msgid "Restart GUI now?"
-msgstr ""
-
-msgid "Rock"
-msgstr ""
-
 msgid "Save Playlist"
 msgstr "Wiedergabeliste speichern"
-
-msgid "Scaling Mode"
-msgstr ""
-
-msgid "Screen Adjustment"
-msgstr ""
-
-msgid "Screensaver Enable"
-msgstr "Bildschirmschoner aktivieren"
 
 msgid "Screensaver Interval"
 msgstr "Bildschirmschoner Intervall"
@@ -293,22 +153,9 @@ msgstr "Bildschirmschoner Intervall"
 msgid "Settings"
 msgstr "Einstellungen"
 
-msgid "Show MC in Extension-Menu"
-msgstr ""
-
-msgid "Show MC in Main-Menu"
-msgstr ""
-
-msgid "Skin Selector"
-msgstr ""
-
 msgid "Slideshow Interval (sec.)"
 msgstr "Slideshow Intervall (sek.)"
 
-msgid "Techno/House"
-msgstr ""
-
-#, python-format
 msgid "This Dreambox can't decode %s video streams!"
 msgstr "Diese OpenAFF Box kann diese  Videostreams nicht wiedergeben! (%s)"
 
@@ -321,19 +168,8 @@ msgstr "Vorschau Breite"
 msgid "Title: "
 msgstr "Titel:"
 
-msgid "Updating Weather Info ..."
-msgstr "Wetterinformationen aktualisieren"
-
-msgid "Updating Weather Info failed (Twisted Web not installed)"
-msgstr ""
-"Fehler beim Aktualisieren der Wetterinformation ( Twisted Web nicht "
-"installiert)"
-
 msgid "Weather Info"
 msgstr "Wetter Infos"
-
-msgid "Webradio"
-msgstr ""
 
 msgid ""
 "You have to close playlist before you can go to the next song while playing "
@@ -373,9 +209,6 @@ msgstr "schwarz"
 msgid "blue"
 msgstr "blau"
 
-msgid "by Exif"
-msgstr ""
-
 msgid "clear playlist"
 msgstr "Wiedergabeliste leeren"
 
@@ -403,9 +236,6 @@ msgstr "Wiedergabeliste laden"
 msgid "manual"
 msgstr "manuell"
 
-msgid "none"
-msgstr ""
-
 msgid "nothing connected"
 msgstr "Keine Verbindung"
 
@@ -424,14 +254,8 @@ msgstr "Information anzeigen"
 msgid "simple"
 msgstr "Einfach"
 
-msgid "slide picture in loop"
-msgstr ""
-
 msgid "textcolor"
 msgstr "Textfarbe"
 
 msgid "yellow"
 msgstr "gelb"
-
-#~ msgid "Preview"
-#~ msgstr "Vorschau"

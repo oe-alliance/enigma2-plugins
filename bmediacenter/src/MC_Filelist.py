@@ -1,12 +1,9 @@
 from re import compile as re_compile
 from os import path as os_path, listdir
+import os, glob, time, random
 from Components.MenuList import MenuList
 from Components.Harddisk import harddiskmanager
-from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename, fileExists
-try:
-	from Tools.Directories import SCOPE_ACTIVE_SKIN
-except:
-	pass	
+from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename, pathExists, fileExists, crawlDirectory
 from enigma import RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, \
 	eServiceReference, eServiceCenter, gFont
 from Tools.LoadPixmap import LoadPixmap
@@ -14,30 +11,38 @@ EXTENSIONS = {
 		"m4a": "music",
 		"mp2": "music",
 		"mp3": "music",
+		"wma": "music",
 		"wav": "music",
 		"ogg": "music",
-		"wma": "music",		
-		"flac": "music",
 		"m3u": "music",
-		"pls": "music",
+		"flac": "music",
 		"jpg": "picture",
 		"jpeg": "picture",
 		"png": "picture",
 		"bmp": "picture",
+		"mts": "movie",
+		"m2ts": "movie",
+		"pls": "music",
+		"vdr": "movie",
+		"vob": "movie",
+		"ogm": "movie",
+		"wmv": "movie",
 		"ts": "movie",
 		"avi": "movie",
 		"divx": "movie",
-		"m4v": "movie",
 		"mpg": "movie",
 		"mpeg": "movie",
 		"mkv": "movie",
-		"flv": "movie",
-		"trp": "movie",
 		"mp4": "movie",
 		"mov": "movie",
-		"iso": "movie"
+		"trp": "movie",
+		"m4v": "movie",
+		"flv": "movie",
+		"rar": "rar",
+		"iso": "iso",
+		"img": "img"
 	}
-def FileEntryComponent(name, absolute = None, isDir = False):
+def FileEntryComponent(name, absolute = None, isDir = False, directory = "/", size = 0, timestamp = 0):
 	res = [ (absolute, isDir, name) ]
 	if name == "..":
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 1000, 20, 0, RT_HALIGN_LEFT, name))
@@ -57,7 +62,7 @@ def FileEntryComponent(name, absolute = None, isDir = False):
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 2, 20, 20, png))
 	return res
 class FileList(MenuList):
-	def __init__(self, directory, showDirectories = True, showFiles = True, showMountpoints = True, matchingPattern = None, useServiceRef = False, inhibitDirs = False, inhibitMounts = False, isTop = False, enableWrapAround = False, additionalExtensions = None):
+	def __init__(self, directory, showDirectories = True, showFiles = True, showMountpoints = True, matchingPattern = None, useServiceRef = False, inhibitDirs = False, inhibitMounts = False, isTop = False, enableWrapAround = False, additionalExtensions = None, sort = "default"):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.additional_extensions = additionalExtensions
 		self.mountpoints = []
@@ -70,10 +75,11 @@ class FileList(MenuList):
 		self.isTop = isTop
 		# example: matching .nfi and .ts files: "^.*\.(nfi|ts)"
 		self.matchingPattern = matchingPattern
+		self.sort = sort
 		self.inhibitDirs = inhibitDirs or []
 		self.inhibitMounts = inhibitMounts or []
 		self.refreshMountpoints()
-		self.changeDir(directory)
+		self.changeDir(directory, sort = sort)
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setItemHeight(21)
 		self.serviceHandler = eServiceCenter.getInstance()
@@ -117,9 +123,14 @@ class FileList(MenuList):
 			if dir.startswith(p):
 				return True
 		return False
-	def changeDir(self, directory, select = None):
+	def changeDir(self, directory, sort = "default", select = None):
+		isDir = False
+		if sort == "shuffle":
+			sort = "default"
+			shuffle = True
+		else:
+			shuffle = False
 		self.list = []
-		# if we are just entering from the list of mount points:
 		if self.current_directory is None:
 			if directory and self.showMountpoints:
 				self.current_mountpoint = self.getMountpointLink(directory)
@@ -128,18 +139,18 @@ class FileList(MenuList):
 		self.current_directory = directory
 		directories = []
 		files = []
-		if directory is None and self.showMountpoints: # present available mountpoints
+		if directory is None and self.showMountpoints:
 			for p in harddiskmanager.getMountedPartitions():
 				path = os_path.join(p.mountpoint, "")
 				if path not in self.inhibitMounts and not self.inParentDirs(path, self.inhibitDirs):
-					self.list.append(FileEntryComponent(name = p.description, absolute = path, isDir = True))
+					self.list.append(FileEntryComponent(name = p.description, absolute = path, isDir = True, directory = directory))
 			files = [ ]
 			directories = [ ]
 		elif directory is None:
 			files = [ ]
 			directories = [ ]
 		elif self.useServiceRef:
-			root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + directory)
+			root = eServiceReference(2, 0, directory)
 			if self.additional_extensions:
 				root.setName(self.additional_extensions)
 			serviceHandler = eServiceCenter.getInstance()
@@ -169,26 +180,96 @@ class FileList(MenuList):
 						files.remove(x)
 		if directory is not None and self.showDirectories and not self.isTop:
 			if directory == self.current_mountpoint and self.showMountpoints:
-				#self.list.append(FileEntryComponent(name = "<" +_("List of Storage Devices") + ">", absolute = None, isDir = True))
-				self.list.append(FileEntryComponent(name = "..", absolute = None, isDir = True))
+				self.list.append(FileEntryComponent(name = "<" +_("List of storage Devices") + ">", absolute = None, isDir = True, directory = directory))
 			elif (directory != "/") and not (self.inhibitMounts and self.getMountpoint(directory) in self.inhibitMounts):
-				#self.list.append(FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(directory.split('/')[:-2]) + '/', isDir = True))
-				self.list.append(FileEntryComponent(name = "..", absolute = '/'.join(directory.split('/')[:-2]) + '/', isDir = True))
+				self.list.append(FileEntryComponent(name = "<" +_("Parent directory") + ">", absolute = '/'.join(directory.split('/')[:-2]) + '/', isDir = True, directory = directory))
+		date_file_list = []
 		if self.showDirectories:
 			for x in directories:
 				if not (self.inhibitMounts and self.getMountpoint(x) in self.inhibitMounts) and not self.inParentDirs(x, self.inhibitDirs):
 					name = x.split('/')[-2]
-					self.list.append(FileEntryComponent(name = name, absolute = x, isDir = True))
+					file = x
+					path = x
+					if pathExists(path):
+						stats = os.stat(path)
+						size = stats[6]
+						lastmod_date = time.localtime(stats[8])
+					else:
+						size = 0
+						lastmod_date = 0
+					isDir = True
+					if sort == "size" or sort == "sizereverse":
+						date_file_tuple = size, name, path, file, lastmod_date, isDir
+					elif sort == "date" or sort == "datereverse" or sort == "default":
+						date_file_tuple = lastmod_date, name, path, file, size, isDir
+					elif sort == "alpha" or sort == "alphareverse":
+						date_file_tuple = name, lastmod_date, path, file, size, isDir
+					date_file_list.append(date_file_tuple)
 		if self.showFiles:
 			for x in files:
 				if self.useServiceRef:
 					path = x.getPath()
 					name = path.split('/')[-1]
+					file = x
+					if pathExists(path):
+						stats = os.stat(path)
+						size = stats[6]
+						lastmod_date = time.localtime(stats[8])
+					else:
+						size = 0
+						lastmod_date = 0
+					isDir = False
+					if sort == "size" or sort == "sizereverse":
+						date_file_tuple = size, name, path, file, lastmod_date, isDir
+					elif sort == "date" or sort == "datereverse" or sort == "default":
+						date_file_tuple = lastmod_date, name, path, file, size, isDir
+					elif sort == "alpha" or sort == "alphareverse":
+						date_file_tuple = name, lastmod_date, path, file, size, isDir
+					date_file_list.append(date_file_tuple)	
 				else:
 					path = directory + x
 					name = x
+					if sort == "size" or sort == "sizereverse":
+						date_file_tuple = size, name, path, file, lastmod_date, isDir
+					elif sort == "date" or sort == "datereverse" or sort == "default":
+						date_file_tuple = lastmod_date, name, path, file, size, isDir
+					elif sort == "alpha" or sort == "alphareverse":
+						date_file_tuple = name, lastmod_date, path, file, size, isDir
+					date_file_list.append(date_file_tuple)
+		if sort == "datereverse" or sort == "alpha" or sort == "sizereverse" or sort == "date" or sort == "alphareverse" or sort == "size":
+			date_file_list.sort()
+		if sort == "date" or sort == "alphareverse" or sort == "size":
+			date_file_list.reverse()
+		if shuffle == True:
+			random.shuffle(date_file_list)
+		for x in date_file_list:
+			if sort == "size" or sort == "sizereverse":
+				size = x[0]				
+				name = x[1]
+				path = x[2]
+				file = x[3] 
+				timestamp = x[4]				
+				isDir = x[5]
+			elif sort == "date" or sort == "datereverse" or sort == "default":		
+				timestamp = x[0]					
+				name = x[1]
+				path = x[2]
+				file = x[3] 
+				size = x[4]
+				isDir = x[5]			
+			elif sort == "alpha" or sort == "alphareverse":
+				name = x[0]
+				timestamp = x[1]					
+				path = x[2]
+				file = x[3] 
+				size = x[4]
+				isDir = x[5]
+			if isDir == True:
+				if not (self.inhibitMounts and self.getMountpoint(file) in self.inhibitMounts) and not self.inParentDirs(file, self.inhibitDirs):
+					self.list.append(FileEntryComponent(name = name, absolute = file, isDir = isDir, directory = directory, size = size, timestamp = timestamp))
+			else:
 				if (self.matchingPattern is None) or re_compile(self.matchingPattern).search(path):
-					self.list.append(FileEntryComponent(name = name, absolute = x , isDir = False))
+					self.list.append(FileEntryComponent(name = name, absolute = file , isDir = isDir, directory = directory, size = size, timestamp = timestamp))
 		if self.showMountpoints and len(self.list) == 0:
 			self.list.append(FileEntryComponent(name = _("nothing connected"), absolute = None, isDir = False))
 		self.l.setList(self.list)
@@ -241,8 +322,9 @@ class FileList(MenuList):
 		harddiskmanager.on_partition_list_change.append(self.partitionListChanged)
 	def execEnd(self):
 		harddiskmanager.on_partition_list_change.remove(self.partitionListChanged)
-	def refresh(self):
-		self.changeDir(self.current_directory, self.getFilename())
+	def refresh(self, sort = "default"):
+		self.sort = sort
+		self.changeDir(self.current_directory, self.sort, self.getFilename())
 	def partitionListChanged(self, action, device):
 		self.refreshMountpoints()
 		if self.current_directory is None:
@@ -263,16 +345,10 @@ def MultiFileSelectEntryComponent(name, absolute = None, isDir = False, selected
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 30, 2, 20, 20, png))
 	if not name.startswith('<'):
 		if selected is False:
-			try:
-				icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_off.png"))
-			except:
-				icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_off.png"))
+			icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_off.png"))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 0, 25, 25, icon))
 		else:
-			try:
-				icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "skin_default/icons/lock_on.png"))
-			except:
-				icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_on.png"))
+			icon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_on.png"))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 0, 25, 25, icon))
 	return res
 class MultiFileSelectList(FileList):

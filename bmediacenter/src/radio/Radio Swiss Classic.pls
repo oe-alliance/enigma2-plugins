@@ -1,0 +1,1 @@
+http://stream-3.ssatr.ch:80/rsc/mp3

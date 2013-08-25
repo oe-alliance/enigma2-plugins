@@ -303,12 +303,6 @@ class MC_VLCMedialist(Screen):
 		#dlg.playfile(media, name)
 		self.server.play(self.session, media, name, self.currentList)
 
-		# screen adjustment
-		os.system("echo " + hex(config.plugins.mc_globalsettings.dst_top.value)[2:] + " > /proc/stb/vmpeg/0/dst_top")
-		os.system("echo " + hex(config.plugins.mc_globalsettings.dst_left.value)[2:] + " > /proc/stb/vmpeg/0/dst_left")
-		os.system("echo " + hex(config.plugins.mc_globalsettings.dst_width.value)[2:] + " > /proc/stb/vmpeg/0/dst_width")
-		os.system("echo " + hex(config.plugins.mc_globalsettings.dst_height.value)[2:] + " > /proc/stb/vmpeg/0/dst_height")
-
 	def ok(self):
 		media, name = self.currentList.activate()
 		if media is not None:

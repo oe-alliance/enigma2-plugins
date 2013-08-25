@@ -1,12 +1,11 @@
 import Plugins.Plugin
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigInteger, ConfigSubList, ConfigSubDict, ConfigText, configfile, ConfigYesNo
-from skin import loadSkin
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import os, gettext
 
-currentmcversion = "093"
-currentmcplatform = "mipsel"
+currentmcversion = "099"
+currentmcplatform = "sh4"
 
 config.plugins.mc_favorites = ConfigSubsection()
 config.plugins.mc_favorites.foldercount = ConfigInteger(0)
@@ -18,37 +17,23 @@ config.plugins.mc_globalsettings.showinextmenu = ConfigYesNo(default=False)
 config.plugins.mc_globalsettings.currentversion = ConfigInteger(0, (0, 999))
 config.plugins.mc_globalsettings.currentplatform = ConfigText(default = currentmcplatform)
 
-config.plugins.mc_globalsettings.dst_top = ConfigInteger(0, (0, 999))
-config.plugins.mc_globalsettings.dst_left = ConfigInteger(0, (0, 999))
-config.plugins.mc_globalsettings.dst_width = ConfigInteger(720, (1, 720))
-config.plugins.mc_globalsettings.dst_height = ConfigInteger(576, (1, 576))
-
-config.plugins.mc_globalsettings.currentskin = ConfigSubsection()
-config.plugins.mc_globalsettings.currentskin.path = ConfigText(default = "defaultHD/skin.xml")
-
 config.plugins.mc_globalsettings.currentversion.value = currentmcversion
 config.plugins.mc_globalsettings.currentplatform.value = currentmcplatform
-# Load Skin
-try:
-	loadSkin("/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/" + config.plugins.mc_globalsettings.currentskin.path.value)
-except Exception, e:
-	loadSkin("/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/default/skin.xml")
 
-PluginLanguageDomain = "BMediaCenter"
+PluginLanguageDomain = "HDMUMediaCenter"
 PluginLanguagePath = "Extensions/BMediaCenter/locale"
-
+# Load Language
 def localeInit():
+	lang = language.getLanguage()[:2] 
+	os.environ["LANGUAGE"] = lang
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
-
 def _(txt):
-	if gettext.dgettext(PluginLanguageDomain, txt):
-		return gettext.dgettext(PluginLanguageDomain, txt)
-	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
-		return gettext.gettext(txt)
-
-language.addCallback(localeInit())
-
+	t = gettext.dgettext(PluginLanguageDomain, txt)
+	if t == txt:
+		t = gettext.gettext(txt)
+	return t
+localeInit()
+language.addCallback(localeInit)
 # Favorite Folders
 def addFavoriteFolders():
 	i = len(config.plugins.mc_favorites.folders)

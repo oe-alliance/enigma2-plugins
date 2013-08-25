@@ -1,40 +1,35 @@
-import os
-import commands
 from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Components.ConfigList import ConfigList
 from Components.config import *
+from skin import loadSkin
 from Components.Label import Label
 from Screens.Screen import Screen
 from Components.Pixmap import Pixmap
-from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
-from MC_AudioPlayer import MC_AudioPlayer, MC_WebRadio
-from MC_VideoPlayer import MC_VideoPlayer
-from MC_VLCPlayer import MC_VLCServerlist
-from MC_PictureViewer import MC_PictureViewer
-from MC_WeatherInfo import msnWetterDateMain, msnWetterMain
-from MC_Settings import MC_Settings
+from Tools.Directories import pathExists, fileExists
 from __init__ import _
-from os import system
+import os
+import commands
+
 config.plugins.mc_global = ConfigSubsection()
-config.plugins.mc_global.vfd = ConfigSelection(default="off", choices = [("off", "off"),("on", "on")])
-try:
-	from enigma import evfd
-	config.plugins.mc_global.vfd.value = "on"
-	config.plugins.mc_global.save()
-except Exception, e:
-	print "Media Center: Import evfd failed"
+config.plugins.mc_global.vfd = ConfigSelection(default='off', choices=[('off', 'off'), ('on', 'on')])
+loadSkin("/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/skin.xml")
+#try:
+#	from enigma import evfd
+#	config.plugins.mc_global.vfd.value = 'on'
+#	config.plugins.mc_global.save()
+#except Exception as e:
+#	print 'Media Center: Import evfd failed'
 try:
 	from Plugins.Extensions.DVDPlayer.plugin import *
 	dvdplayer = True
 except:
 	print "Media Center: Import DVDPlayer failed"
 	dvdplayer = False
-	
-mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/"
 
+mcpath = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/'
 class DMC_MainMenu(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -42,7 +37,7 @@ class DMC_MainMenu(Screen):
 		self["left"] = Pixmap()
 		self["middle"] = Pixmap()
 		self["right"] = Pixmap()
-		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.oldbmcService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
 		# Disable OSD Transparency
 		try:
@@ -77,10 +72,11 @@ class DMC_MainMenu(Screen):
 			"up": self.prev,
 			"left": self.prev
 		}, -1)
-
 		if config.plugins.mc_global.vfd.value == "on":
 			evfd.getInstance().vfd_write_string(_("My Music"))
-		#command('djmount /media/upnp')
+		if fileExists("/media/upnp") is False:
+			os.mkdir("/media/upnp")
+		os.system('djmount /media/upnp &')
 	def next(self):
 		self["menu"].selectNext()
 		if self["menu"].getIndex() == 1:
@@ -130,9 +126,11 @@ class DMC_MainMenu(Screen):
 			evfd.getInstance().vfd_write_string(self["menu"].getCurrent()[0])
 		self["text"].setText(self["menu"].getCurrent()[0])
 	def okbuttonClick(self):
+		from Screens.MessageBox import MessageBox
 		selection = self["menu"].getCurrent()
 		if selection is not None:
 			if selection[1] == "MC_VideoPlayer":
+				from MC_VideoPlayer import MC_VideoPlayer
 				self.session.open(MC_VideoPlayer)
 			elif selection[1] == "MC_DVDPlayer":
 				if dvdplayer:
@@ -140,45 +138,34 @@ class DMC_MainMenu(Screen):
 				else:
 					self.session.open(MessageBox,"Error: DVD-Player Plugin not installed ...",  MessageBox.TYPE_INFO)
 			elif selection[1] == "MC_PictureViewer":
+				from MC_PictureViewer import MC_PictureViewer
 				self.session.open(MC_PictureViewer)
 			elif selection[1] == "MC_AudioPlayer":
+				from MC_AudioPlayer import MC_AudioPlayer
 				self.session.open(MC_AudioPlayer)
 			elif selection[1] == "MC_WebRadio":
+				from MC_AudioPlayer import MC_WebRadio
 				self.session.open(MC_WebRadio)
 			elif selection[1] == "MC_VLCPlayer":
-				if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/VlcPlayer/") == True:
+				if pathExists("/usr/lib/enigma2/python/Plugins/Extensions/VlcPlayer/") == True:
+					from MC_VLCPlayer import MC_VLCServerlist
 					self.session.open(MC_VLCServerlist)
 				else:
 					self.session.open(MessageBox,"Error: VLC-Player Plugin not installed ...",  MessageBox.TYPE_INFO)
 			elif selection[1] == "MC_WeatherInfo":
-				colorfile = '/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/color'
-				if fileExists(colorfile):
-					f = open(colorfile, 'r')
-					data = f.readline()
-					f.close()
-					if 'bluedate' in data:
-						self.session.open(msnWetterDateMain)
-					elif 'blackdate' in data:
-						self.session.open(msnWetterDateMain)
-					elif 'bluenodate' in data:
-						self.session.open(msnWetterMain)
-					elif 'blacknodate' in data:
-						self.session.open(msnWetterMain)
+				from MC_WeatherInfo import MC_WeatherInfo
+				self.session.open(MC_WeatherInfo)
 			elif selection[1] == "MC_Settings":
+				from MC_Settings import MC_Settings
 				self.session.open(MC_Settings)
 			else:
 				self.session.open(MessageBox,("Error: Could not find plugin %s\ncoming soon ... :)") % (selection[1]),  MessageBox.TYPE_INFO)
 	def error(self, error):
+		from Screens.MessageBox import MessageBox
 		self.session.open(MessageBox,("UNEXPECTED ERROR:\n%s") % (error),  MessageBox.TYPE_INFO)
 	def Exit(self):
-		# Restart old service
-		self.session.nav.stopService()
-		self.session.nav.playService(self.oldService)
-		## Restore OSD Transparency Settings
-		os.system("echo " + hex(0)[2:] + " > /proc/stb/vmpeg/0/dst_top")
-		os.system("echo " + hex(0)[2:] + " > /proc/stb/vmpeg/0/dst_left")
-		os.system("echo " + hex(720)[2:] + " > /proc/stb/vmpeg/0/dst_width")
-		os.system("echo " + hex(576)[2:] + " > /proc/stb/vmpeg/0/dst_height")
+#		self.session.nav.stopService()
+		# Restore OSD Transparency Settings
 		open("/proc/sys/vm/drop_caches", "w").write(str("3"))
 		if self.can_osd_alpha:
 			try:
@@ -191,10 +178,10 @@ class DMC_MainMenu(Screen):
 				print "Set OSD Transparacy failed"
 		if config.plugins.mc_global.vfd.value == "on":
 			evfd.getInstance().vfd_write_string(_("Media Center"))
-		#configfile.save()
-		#command('umount /media/upnp')
+		os.system('umount /media/upnp')
+		self.session.nav.playService(self.oldbmcService)
 		self.close()
-#-------------------------------------------------------#
+
 def main(session, **kwargs):
 	session.open(DMC_MainMenu)
 def menu(menuid, **kwargs):

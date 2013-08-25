@@ -212,14 +212,12 @@ bmediacenter/meta/Makefile
 bmediacenter/po/Makefile
 bmediacenter/src/Makefile
 bmediacenter/src/icons/Makefile
-bmediacenter/src/icons/wetter/Makefile
+bmediacenter/src/icons/70x70/Makefile
 bmediacenter/src/converter/Makefile
 bmediacenter/src/renderer/Makefile
 bmediacenter/src/radio/Makefile
 bmediacenter/src/saver/Makefile
 bmediacenter/src/skins/Makefile
-bmediacenter/src/skins/default/Makefile
-bmediacenter/src/skins/default/images/Makefile
 bmediacenter/src/skins/defaultHD/Makefile
 bmediacenter/src/skins/defaultHD/images/Makefile
 
