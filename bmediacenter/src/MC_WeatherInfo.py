@@ -112,22 +112,15 @@ class MC_WeatherInfo(Screen):
 		stadd = stadt
 		if fileExists(downname):
 			os.system("rm -rf "+ downname)
-		print downlink
-		print downname
 		downloadPage(downlink, downname).addCallback(self.jpgdown, stadd).addErrback(self.error)
 	def jpgdown(self, value, stadd):
-		print "jpgdown"
 		downlink = commands.getoutput("cat /tmp/.stadtindex | grep \"background-image:url('http://mytown.de/\" | cut -d \"'\" -f2")
 		stadt = stadd
 		downname = "/tmp/"+ stadt +".jpg"
 		downloadPage(downlink, downname).addCallback(self.makemvi, stadt).addErrback(self.error)
 	def makemvi(self, value, stadt):
-		print "########## makemvi ############################################################################"
 		mviname = "/tmp/"+ stadt +".m1v"
-		print mviname
-		
 		if fileExists(mviname) is False:
-			print "CREATE"
 			import subprocess
 			if fileExists("/sbin/ffmpeg"):
 				ffmpeg="/sbin/ffmpeg"
@@ -136,7 +129,6 @@ class MC_WeatherInfo(Screen):
 			cmd = [ffmpeg, "-f", "image2", "-i", "/tmp/"+ stadt +".jpg", mviname]
 			subprocess.Popen(cmd).wait()
 		if fileExists(mviname):
-			print "SHOW"
 			self.showiframe.showStillpicture(mviname)
 	def nextItem(self):
 		if self.weatherPluginEntryCount != 0:
@@ -199,7 +191,6 @@ class MC_WeatherInfo(Screen):
 		imagerelativeurl = ""
 		errormessage = ""
 		for childs in root:
-			print childs
 			if childs.tag == "weather":
 				
 				errormessage = childs.attrib.get("errormessage")
@@ -211,7 +202,6 @@ class MC_WeatherInfo(Screen):
 				imagerelativeurl = "%slaw/" % childs.attrib.get("imagerelativeurl").encode("utf-8", 'ignore')
 				self.webSite = childs.attrib.get("url").encode("utf-8", 'ignore')
 			for items in childs:
-				print items
 				if items.tag == "current":
 					self["currentTemp"].text = "%s°%s" % (items.attrib.get("temperature").encode("utf-8", 'ignore') , degreetype)
 					self["condition"].text = items.attrib.get("skytext").encode("utf-8", 'ignore')
@@ -254,8 +244,6 @@ class MC_WeatherInfo(Screen):
 			downloads = [ds.run(download,item ).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload,item) for item in IconDownloadList]
 			finished = defer.DeferredList(downloads).addErrback(self.error)
 		stadt = config.plugins.mc_wi.Entry[self.weatherPluginEntryIndex - 1].city.value
-		print "#################################################################################################################"
-		print stadt
 		stadt = stadt.split(",")[0]
 		stadt = stadt.replace('Ä', 'Ae')
 		stadt = stadt.replace('ä', 'ae')
@@ -265,17 +253,13 @@ class MC_WeatherInfo(Screen):
 		stadt = stadt.replace('ü', 'ue')
 		stadt = stadt.replace('ß', 'ss')
 		stadt = stadt.lower()
-		print "##########" , stadt
 		if self.mvion == True:
-			print"mvion"
 			self.showiframe.finishStillPicture()
 		bild = "/tmp/"+ stadt +".m1v"
 		if fileExists(bild):
-			print"bild"
 			self.showiframe.showStillpicture(bild)
 			self.mvion = True
 		else:
-			print"stadt"
 			self.mvidown(stadt)
 	def config(self):
 		self.session.openWithCallback(self.setupFinished, WeatherSetup)
