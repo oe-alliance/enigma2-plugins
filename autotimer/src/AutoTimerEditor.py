@@ -104,7 +104,8 @@ class AutoTimerChannelSelection(SimpleChannelSelection):
 
 class AutoTimerEPGSelection(EPGSelection):
 	def __init__(self, *args):
-		EPGSelection.__init__(self, *args)
+		try: EPGSelection.__init__(self, *args, EPGtype='single')
+		except:  EPGSelection.__init__(self, *args)
 		self.skinName = "EPGSelection"
 
 	def infoKeyPressed(self):
