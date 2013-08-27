@@ -431,7 +431,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText()
- 		self["key_blue"] = StaticText()
+		self["key_blue"] = StaticText()
 
 		self["help"] = StaticText()
 
@@ -1010,10 +1010,14 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 		))
 		self.typeSelection.addNotifier(self.refresh, initial_call = False)
 
-		self.enabled = NoSave(ConfigEnableDisable(default = filterset))
+		self.enabled = NoSave(ConfigYesNo(default = filterset))
+		self.enabled.addNotifier(self.refresh, initial_call = False)
 
 		self.excludes = excludes
 		self.includes = includes
+		self.oldexcludes = excludes
+		self.oldincludes = includes
+		self.idx = 0
 
 		self.reloadList()
 
@@ -1084,10 +1088,14 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 		self["config"].setList(self.list)
 
 	def reloadList(self):
-		self.list = [
-			getConfigListEntry(_("Enable Filtering"), self.enabled),
-			getConfigListEntry(_("Filter"), self.typeSelection)
-		]
+		self.list = [getConfigListEntry(_("Enable Filtering"), self.enabled)]
+		if self.enabled.value:
+			self.list.append(getConfigListEntry(_("Filter"), self.typeSelection))
+			self.excludes = self.oldexcludes
+			self.includes = self.oldincludes
+		else:
+			self.excludes = ([], [], [], [])
+			self.includes = ([], [], [], [])
 
 		if self.typeSelection.value == "day":
 			self.idx = 3
