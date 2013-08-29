@@ -42,10 +42,10 @@ if pathExists(hddpath):
 			screensaverlist += [(hddpath +'%s/' % (x),_("%s") % (x))]
 config.plugins.mc_ap.whichjpg = ConfigSelection(screensaverlist)
 playlist = []
-try:
-	from enigma import evfd
-except Exception, e:
-	print "Media Center: Import evfd failed"
+#try:
+#	from enigma import evfd
+#except Exception, e:
+#	print "Media Center: Import evfd failed"
 radirl = "http://ipkserver.hdmedia-universe.com/bmcradio/"
 #for lyrics
 def getEncodedString(value):
@@ -246,26 +246,26 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		return
 	def up(self):
 		self["filelist"].up()
-		if config.plugins.mc_global.vfd.value == "on":
-			evfd.getInstance().vfd_write_string(self["filelist"].getName())
+#		if config.plugins.mc_global.vfd.value == "on":
+#			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 	def down(self):
 		self["filelist"].down()
-		if config.plugins.mc_global.vfd.value == "on":
-			evfd.getInstance().vfd_write_string(self["filelist"].getName())
+#		if config.plugins.mc_global.vfd.value == "on":
+#			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 	def leftUp(self):
 		self["filelist"].pageUp()
-		if config.plugins.mc_global.vfd.value == "on":
-			evfd.getInstance().vfd_write_string(self["filelist"].getName())
+#		if config.plugins.mc_global.vfd.value == "on":
+#			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 	def rightDown(self):
 		self["filelist"].pageDown()
-		if config.plugins.mc_global.vfd.value == "on":
-			evfd.getInstance().vfd_write_string(self["filelist"].getName())
+#		if config.plugins.mc_global.vfd.value == "on":
+#			evfd.getInstance().vfd_write_string(self["filelist"].getName())
 		if MC_AudioPlayer.STATE != "NONE" and config.plugins.mc_ap.showJpg.getValue():
 			self.screensavercheckup()
 	def KeyOK(self):
@@ -591,8 +591,8 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		if self.session.nav.getCurrentService() is not None:
 			self.session.nav.stopService()
 		MC_AudioPlayer.STATE = "NONE"
-		if config.plugins.mc_global.vfd.value == "on":
-			evfd.getInstance().vfd_write_string(_("My Music"))
+#		if config.plugins.mc_global.vfd.value == "on":
+#			evfd.getInstance().vfd_write_string(_("My Music"))
 		self.close()
 	def screensavercheckup(self):
 		self.JpgTimer.stop()

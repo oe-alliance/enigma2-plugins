@@ -8,10 +8,10 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import *
 from __init__ import _
 mcpath = "/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/images/"
-try:
-	from enigma import evfd
-except Exception, e:
-	print "Media Center: Import evfd failed"
+#try:
+#	from enigma import evfd
+#except Exception, e:
+#	print "Media Center: Import evfd failed"
 class MC_Settings(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -44,6 +44,6 @@ class MC_Settings(Screen):
 		self["configlist"].handleKey(KEY_0 + number)
 	def keyOK(self):
 		config.plugins.mc_globalsettings.save()
-		if config.plugins.mc_global.vfd.value == "on":
-			evfd.getInstance().vfd_write_string(_("Settings"))
+#		if config.plugins.mc_global.vfd.value == "on":
+#			evfd.getInstance().vfd_write_string(_("Settings"))
 		self.close()

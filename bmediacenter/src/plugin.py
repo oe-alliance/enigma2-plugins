@@ -72,8 +72,8 @@ class DMC_MainMenu(Screen):
 			"up": self.prev,
 			"left": self.prev
 		}, -1)
-		if config.plugins.mc_global.vfd.value == "on":
-			evfd.getInstance().vfd_write_string(_("My Music"))
+#		if config.plugins.mc_global.vfd.value == "on":
+#			evfd.getInstance().vfd_write_string(_("My Music"))
 		if fileExists("/media/upnp") is False:
 			os.mkdir("/media/upnp")
 		os.system('djmount /media/upnp &')
@@ -122,8 +122,8 @@ class DMC_MainMenu(Screen):
 			self["left"].instance.setPixmapFromFile(mcpath +"MenuIconWeathersw.png")
 			self["middle"].instance.setPixmapFromFile(mcpath +"MenuIconSettings.png")
 			self["right"].instance.setPixmapFromFile(mcpath +"MenuIconMusicsw.png")
-		if config.plugins.mc_global.vfd.value == "on":
-			evfd.getInstance().vfd_write_string(self["menu"].getCurrent()[0])
+#		if config.plugins.mc_global.vfd.value == "on":
+#			evfd.getInstance().vfd_write_string(self["menu"].getCurrent()[0])
 		self["text"].setText(self["menu"].getCurrent()[0])
 	def okbuttonClick(self):
 		from Screens.MessageBox import MessageBox
@@ -176,8 +176,8 @@ class DMC_MainMenu(Screen):
 				open("/proc/stb/video/alpha", "w").write(str(trans))
 			except:
 				print "Set OSD Transparacy failed"
-		if config.plugins.mc_global.vfd.value == "on":
-			evfd.getInstance().vfd_write_string(_("Media Center"))
+#		if config.plugins.mc_global.vfd.value == "on":
+#			evfd.getInstance().vfd_write_string(_("Media Center"))
 		os.system('umount /media/upnp')
 		self.session.nav.playService(self.oldbmcService)
 		self.close()
