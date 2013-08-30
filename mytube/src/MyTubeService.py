@@ -11,7 +11,7 @@ from twisted.web import client
 from twisted.internet import reactor
 from urllib2 import Request, URLError, urlopen as urlopen2
 from socket import gaierror, error
-import os, socket, httplib
+import os, socket, httplib,urllib,urllib2,re,json
 from urllib import quote, unquote_plus, unquote, urlencode
 from httplib import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
 
@@ -52,6 +52,166 @@ std_headers = {
 #class MyOpener(FancyURLopener):
 #	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
 
+
+
+def printDBG(s):
+    print(s)
+
+# source from https://github.com/rg3/youtube-dl/issues/1208
+class CVevoSignAlgoExtractor:
+    # MAX RECURSION Depth for security
+    MAX_REC_DEPTH = 5
+
+    def __init__(self):
+        self.algoCache = {}
+        self._cleanTmpVariables()
+
+    def _cleanTmpVariables(self):
+        self.fullAlgoCode = ''
+        self.allLocalFunNamesTab = []
+        self.playerData = ''
+
+    def _jsToPy(self, jsFunBody):
+        pythonFunBody = jsFunBody.replace('function', 'def').replace('{', ':\n\t').replace('}', '').replace(';', '\n\t').replace('var ', '')
+        pythonFunBody = pythonFunBody.replace('.reverse()', '[::-1]')
+
+        lines = pythonFunBody.split('\n')
+        for i in range(len(lines)):
+            # a.split("") -> list(a)
+            match = re.search('(\w+?)\.split\(""\)', lines[i])
+            if match:
+                lines[i] = lines[i].replace( match.group(0), 'list(' + match.group(1)  + ')')
+            # a.length -> len(a)
+            match = re.search('(\w+?)\.length', lines[i])
+            if match:
+                lines[i] = lines[i].replace( match.group(0), 'len(' + match.group(1)  + ')')
+            # a.slice(3) -> a[3:]
+            match = re.search('(\w+?)\.slice\(([0-9]+?)\)', lines[i])
+            if match:
+                lines[i] = lines[i].replace( match.group(0), match.group(1) + ('[%s:]' % match.group(2)) )
+            # a.join("") -> "".join(a)
+            match = re.search('(\w+?)\.join\(("[^"]*?")\)', lines[i])
+            if match:
+                lines[i] = lines[i].replace( match.group(0), match.group(2) + '.join(' + match.group(1) + ')' )
+        return "\n".join(lines)
+
+    def _getLocalFunBody(self, funName):
+        # get function body
+        match = re.search('(function %s\([^)]+?\){[^}]+?})' % funName, self.playerData)
+        if match:
+            # return jsFunBody
+            return match.group(1)
+        return ''
+
+    def _getAllLocalSubFunNames(self, mainFunBody):
+        match = re.compile('[ =(,](\w+?)\([^)]*?\)').findall( mainFunBody )
+        if len(match):
+            # first item is name of main function, so omit it
+            funNameTab = set( match[1:] )
+            return funNameTab
+        return set()
+
+    def decryptSignature(self, s, playerUrl):
+        printDBG("decrypt_signature sign_len[%d] playerUrl[%s]" % (len(s), playerUrl) )
+
+        # clear local data
+        self._cleanTmpVariables()
+
+        # use algoCache
+        if playerUrl not in self.algoCache:
+            # get player HTML 5 sript
+            request = urllib2.Request(playerUrl)
+            try:
+                self.playerData = urllib2.urlopen(request).read()
+                self.playerData = self.playerData.decode('utf-8', 'ignore')
+            except:
+                printDBG('Unable to download playerUrl webpage')
+                return ''
+
+            # get main function name 
+            match = re.search("signature=(\w+?)\([^)]\)", self.playerData)
+            if match:
+                mainFunName = match.group(1)
+                printDBG('Main signature function name = "%s"' % mainFunName)
+            else: 
+                printDBG('Can not get main signature function name')
+                return ''
+
+            self._getfullAlgoCode( mainFunName )
+
+            # wrap all local algo function into one function extractedSignatureAlgo()
+            algoLines = self.fullAlgoCode.split('\n')
+            for i in range(len(algoLines)):
+                algoLines[i] = '\t' + algoLines[i]
+            self.fullAlgoCode  = 'def extractedSignatureAlgo(param):'
+            self.fullAlgoCode += '\n'.join(algoLines)
+            self.fullAlgoCode += '\n\treturn %s(param)' % mainFunName
+            self.fullAlgoCode += '\noutSignature = extractedSignatureAlgo( inSignature )\n'
+
+            # after this function we should have all needed code in self.fullAlgoCode
+
+            printDBG( "---------------------------------------" )
+            printDBG( "|    ALGO FOR SIGNATURE DECRYPTION    |" )
+            printDBG( "---------------------------------------" )
+            printDBG( self.fullAlgoCode                         )
+            printDBG( "---------------------------------------" )
+
+            try:
+                algoCodeObj = compile(self.fullAlgoCode, '', 'exec')
+            except:
+                printDBG('decryptSignature compile algo code EXCEPTION')
+                return ''
+        else:
+            # get algoCodeObj from algoCache
+            printDBG('Algo taken from cache')
+            algoCodeObj = self.algoCache[playerUrl]
+
+        # for security alow only flew python global function in algo code
+        vGlobals = {"__builtins__": None, 'len': len, 'list': list}
+
+        # local variable to pass encrypted sign and get decrypted sign
+        vLocals = { 'inSignature': s, 'outSignature': '' }
+
+        # execute prepared code
+        try:
+            exec( algoCodeObj, vGlobals, vLocals )
+        except:
+            printDBG('decryptSignature exec code EXCEPTION')
+            return ''
+
+        printDBG('Decrypted signature = [%s]' % vLocals['outSignature'])
+        # if algo seems ok and not in cache, add it to cache
+        if playerUrl not in self.algoCache and '' != vLocals['outSignature']:
+            printDBG('Algo from player [%s] added to cache' % playerUrl)
+            self.algoCache[playerUrl] = algoCodeObj
+
+        # free not needed data
+        self._cleanTmpVariables()
+
+        return vLocals['outSignature']
+
+    # Note, this method is using a recursion
+    def _getfullAlgoCode( self, mainFunName, recDepth = 0 ):
+        if self.MAX_REC_DEPTH <= recDepth:
+            printDBG('_getfullAlgoCode: Maximum recursion depth exceeded')
+            return 
+
+        funBody = self._getLocalFunBody( mainFunName )
+        if '' != funBody:
+            funNames = self._getAllLocalSubFunNames(funBody)
+            if len(funNames):
+                for funName in funNames:
+                    if funName not in self.allLocalFunNamesTab:
+                        self.allLocalFunNamesTab.append(funName)
+                        printDBG("Add local function %s to known functions" % mainFunName)
+                        self._getfullAlgoCode( funName, recDepth + 1 )
+
+            # conver code from javascript to python 
+            funBody = self._jsToPy(funBody)
+            self.fullAlgoCode += '\n' + funBody + '\n'
+        return
+       
+decryptor = CVevoSignAlgoExtractor()
 
 class GoogleSuggestions():
 	def __init__(self):
@@ -224,7 +384,37 @@ class MyTubeFeedEntry():
 		EntryDetails['Thumbnails'] = list
 		#print EntryDetails
 		return EntryDetails
+	
+	def removeAdditionalEndingDelimiter(self, data):
+		pos = data.find("};")
+		if pos != -1:
+			data = data[:pos + 1]
+		return data
+	
+	def extractFlashVars(self, data, assets):
+		flashvars = {}
+		found = False
+		
+		for line in data.split("\n"):
+			if line.strip().find(";ytplayer.config = ") > 0:
+				found = True
+				p1 = line.find(";ytplayer.config = ") + len(";ytplayer.config = ") - 1
+				p2 = line.rfind(";")
+				if p1 <= 0 or p2 <= 0:
+					continue
+				data = line[p1 + 1:p2]
+				break
+		data = self.removeAdditionalEndingDelimiter(data)
+		
+		if found:
+			data = json.loads(data)
+			if assets:
+				flashvars = data["assets"]
+			else:
+				flashvars = data["args"]
+		return flashvars
 
+	# link resolving from xbmc youtube plugin
 	def getVideoUrl(self):
 		VIDEO_FMT_PRIORITY_MAP = {
 			'38' : 1, #MP4 Original (HD)
@@ -237,83 +427,56 @@ class MyTubeFeedEntry():
 		video_url = None
 		video_id = str(self.getTubeId())
 
-		# Getting video webpage
-		#URLs for YouTube video pages will change from the format http://www.youtube.com/watch?v=ylLzyHk54Z0 to http://www.youtube.com/watch#!v=ylLzyHk54Z0.
-		watch_url = 'http://www.youtube.com/watch?v=%s&gl=US&hl=en' % video_id
+		links = {}
+		watch_url = 'http://www.youtube.com/watch?v=%s&safeSearch=none'%video_id
 		watchrequest = Request(watch_url, None, std_headers)
+		
 		try:
 			print "[MyTube] trying to find out if a HD Stream is available",watch_url
-			watchvideopage = urlopen2(watchrequest).read()
+			result = urlopen2(watchrequest).read()
 		except (URLError, HTTPException, socket.error), err:
 			print "[MyTube] Error: Unable to retrieve watchpage - Error code: ", str(err)
 			return video_url
-
-		# Get video info
-		for el in ['&el=embedded', '&el=detailpage', '&el=vevo', '']:
-			info_url = ('http://www.youtube.com/get_video_info?&video_id=%s%s&ps=default&eurl=&gl=US&hl=en' % (video_id, el))
-			request = Request(info_url, None, std_headers)
-			try:
-				infopage = urlopen2(request).read()
-				videoinfo = parse_qs(infopage)
-				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
-					break
-			except (URLError, HTTPException, socket.error), err:
-				print "[MyTube] Error: unable to download video infopage",str(err)
-				return video_url
-
-		if ('url_encoded_fmt_stream_map' or 'fmt_url_map') not in videoinfo:
-			# Attempt to see if YouTube has issued an error message
-			if 'reason' not in videoinfo:
-				print '[MyTube] Error: unable to extract "fmt_url_map" or "url_encoded_fmt_stream_map" parameter for unknown reason'
-			else:
-				reason = unquote_plus(videoinfo['reason'][0])
-				print '[MyTube] Error: YouTube said: %s' % reason.decode('utf-8')
+		
+		flashvars = self.extractFlashVars(result, 0)
+		if not flashvars.has_key(u"url_encoded_fmt_stream_map"):
 			return video_url
-
-		video_fmt_map = {}
-		fmt_infomap = {}
-		if videoinfo.has_key('url_encoded_fmt_stream_map'):
-			tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',')
-		else:
-			tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
-		for fmtstring in tmp_fmtUrlDATA:
-			fmturl = fmtid = fmtsig = ""
-			if videoinfo.has_key('url_encoded_fmt_stream_map'):
-				try:
-					for arg in fmtstring.split('&'):
-						if arg.find('=') >= 0:
-							print arg.split('=')
-							key, value = arg.split('=')
-							if key == 'itag':
-								if len(value) > 3:
-									value = value[:2]
-								fmtid = value
-							elif key == 'url':
-								fmturl = value
-							elif key == 'sig':
-								fmtsig = value
-								
-					if fmtid != "" and fmturl != "" and fmtsig != ""  and VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
-						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl), 'fmtsig': fmtsig }
-						fmt_infomap[int(fmtid)] = "%s&signature=%s" %(unquote_plus(fmturl), fmtsig)
-					fmturl = fmtid = fmtsig = ""
-
-				except:
-					print "error parsing fmtstring:",fmtstring
-					
-			else:
-				(fmtid,fmturl) = fmtstring.split('|')
-			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid) and fmtid != "":
-				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
-				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
-		print "[MyTube] got",sorted(fmt_infomap.iterkeys())
-		if video_fmt_map and len(video_fmt_map):
-			print "[MyTube] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
-			best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
-			video_url = "%s&signature=%s" %(best_video['fmturl'].split(';')[0], best_video['fmtsig'])
-			print "[MyTube] found best available video url:",video_url
-
-		return video_url
+		
+		for url_desc in flashvars[u"url_encoded_fmt_stream_map"].split(u","):
+			url_desc_map = parse_qs(url_desc)
+			if not (url_desc_map.has_key(u"url") or url_desc_map.has_key(u"stream")):
+				continue
+			
+			key = int(url_desc_map[u"itag"][0])
+			url = u""
+			
+			if url_desc_map.has_key(u"url"):
+				url = urllib.unquote(url_desc_map[u"url"][0])
+			elif url_desc_map.has_key(u"conn") and url_desc_map.has_key(u"stream"):
+				url = urllib.unquote(url_desc_map[u"conn"][0])
+				if url.rfind("/") < len(url) -1:
+					url = url + "/"
+				url = url + urllib.unquote(url_desc_map[u"stream"][0])
+			elif url_desc_map.has_key(u"stream") and not url_desc_map.has_key(u"conn"):
+				url = urllib.unquote(url_desc_map[u"stream"][0])
+			
+			if url_desc_map.has_key(u"sig"):
+				url = url + u"&signature=" + url_desc_map[u"sig"][0]
+			elif url_desc_map.has_key(u"s"):
+				sig = url_desc_map[u"s"][0]
+				flashvars = self.extractFlashVars(result, 1)
+				js = flashvars[u"js"]
+				url = url + u"&signature=" + decryptor.decryptSignature(sig, js)
+			
+			try:
+				links[VIDEO_FMT_PRIORITY_MAP[str(key)]] = url
+			except KeyError:
+				print 'skipping',key,'fmt not in priority videos'
+				continue
+		try:
+			return links[sorted(links.iterkeys())[0]].encode('utf-8')
+		except (KeyError,IndexError):
+			return None
 
 	def getRelatedVideos(self):
 		print "[MyTubeFeedEntry] getRelatedVideos()"
