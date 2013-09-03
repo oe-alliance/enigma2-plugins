@@ -5,7 +5,7 @@ from . import _
 
 # Config
 from Components.config import config, ConfigYesNo, ConfigNumber, \
-	ConfigSelection, ConfigSubsection, ConfigClock, ConfigYesNo
+	ConfigSelection, ConfigSubsection, ConfigClock, ConfigYesNo, ConfigInteger
 
 # Calculate default begin/end
 from time import time, localtime, mktime
@@ -42,6 +42,8 @@ config.plugins.epgrefresh.adapter = ConfigSelection(choices = [
 )
 config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.epgrefresh.show_help = ConfigYesNo(default = True)
+config.plugins.epgrefresh.wakeup_time = ConfigInteger(default=-1)
+
 
 # convert previous parameters
 config.plugins.epgrefresh.background = ConfigYesNo(default = False)
@@ -54,45 +56,6 @@ if config.plugins.epgrefresh.interval.value != 2:
 	config.plugins.epgrefresh.interval_seconds.value = config.plugins.epgrefresh.interval.value * 60
 	config.plugins.epgrefresh.interval.value = 2
 	config.plugins.epgrefresh.save()
-
-del now, begin, end
-
-#pragma mark - Workaround for unset clock
-
-from enigma import eDVBLocalTimeHandler
-
-def timeCallback(isCallback=True):
-	"""Time Callback/Autostart management."""
-	thInstance = eDVBLocalTimeHandler.getInstance()
-	if isCallback:
-		# NOTE: this assumes the clock is actually ready when called back
-		# this may not be true, but we prefer silently dying to waiting forever
-		thInstance.m_timeUpdated.get().remove(timeCallback)
-	elif not thInstance.ready():
-		thInstance.m_timeUpdated.get().append(timeCallback)
-		return
-
-	if config.plugins.epgrefresh.wakeup.value:
-		now = localtime()
-		begin = int(mktime(
-			(now.tm_year, now.tm_mon, now.tm_mday,
-			config.plugins.epgrefresh.begin.value[0],
-			config.plugins.epgrefresh.begin.value[1],
-			0, now.tm_wday, now.tm_yday, now.tm_isdst)
-		))
-		# booted +- 10min from begin of timespan
-		if abs(time() - begin) < 600:
-			from Screens.MessageBox import MessageBox
-			from Tools.Notifications import AddNotificationWithCallback
-			from Tools.BoundFunction import boundFunction
-			# XXX: we use a notification because this will be suppressed otherwise
-			AddNotificationWithCallback(
-				boundFunction(standbyQuestionCallback, epgrefresh.session),
-				MessageBox,
-				_("This might have been an automated bootup to refresh the EPG. For this to happen it is recommended to put the receiver to Standby.\nDo you want to do this now?"),
-				timeout = 15
-			)
-	epgrefresh.start()
 
 #pragma mark - Help
 try:
@@ -114,11 +77,6 @@ from EPGRefreshService import EPGRefreshService
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
-def standbyQuestionCallback(session, res = None):
-	if res:
-		from Screens.Standby import Standby
-		session.open(Standby)
-
 # Autostart
 def autostart(reason, **kwargs):
 	if reason == 0 and "session" in kwargs:
@@ -126,7 +84,14 @@ def autostart(reason, **kwargs):
 		epgrefresh.session = session
 
 		if config.plugins.epgrefresh.enabled.value:
-			timeCallback(isCallback=False)
+			# check if box was woken up by a timer, if so, check if epgrefresh set this timer
+			if session.nav.wasTimerWakeup() and config.misc.prev_wakeup_time.value == config.plugins.epgrefresh.wakeup_time.value:
+				# if box is not in idle mode, do that
+				from Screens.Standby import Standby, inStandby
+				if not inStandby:
+					from Tools import Notifications
+					Notifications.AddNotificationWithID("Standby", Standby)
+			epgrefresh.start()
 
 	elif reason == 1:
 		epgrefresh.stop()
@@ -136,6 +101,7 @@ def getNextWakeup():
 	if not config.plugins.epgrefresh.enabled.value or \
 		not config.plugins.epgrefresh.wakeup.value:
 
+		setConfigWakeupTime(-1)	
 		return -1
 
 	now = localtime()
@@ -145,11 +111,19 @@ def getNextWakeup():
 		config.plugins.epgrefresh.begin.value[1],
 		0, now.tm_wday, now.tm_yday, now.tm_isdst)
 	))
+
 	# todays timespan has not yet begun
 	if begin > time():
+		setConfigWakeupTime(begin)
 		return begin
+
 	# otherwise add 1 day
+	setConfigWakeupTime(begin+86400)
 	return begin+86400
+
+def setConfigWakeupTime(value):
+	config.plugins.epgrefresh.wakeup_time.value = value
+	config.plugins.epgrefresh.save()
 
 # Mainfunction
 def main(session, **kwargs):

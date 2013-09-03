@@ -49,6 +49,20 @@ String.prototype.format = function(){
 	return data;
 };
 
+function setInputPlaceholder(element, value){
+	if('placeholder' in element){
+		element.placeholder = value
+	} else {
+		element.value = value;
+		element.on(
+			'focus',
+			function(event, element){
+				element.value = "";
+			}.bind(this)
+		);
+	}
+}
+
 //General Helpers
 function toOptionList(lst, selected, split) {
 	var retList = Array();
@@ -93,11 +107,14 @@ function toOptionList(lst, selected, split) {
 
 	return retList;
 }
-
-function debug(item) {
-	if (userprefs.data.debug)
-		console.log(item);
+var _nullDebug = function(item){};
+try{
+	var _consoleDebug = console.log.bind(console); //on IE devtools have to be open or this won't work!
+} catch(e){
+	var _consoleDebug = _nullDebug;
 }
+
+var debug = userprefs.data.debug ? _consoleDebug : _nullDebug;
 
 function parseNr(num) {
 	if (isNaN(num)) {
@@ -245,7 +262,7 @@ var AjaxThing = Class.create({
 			parms = {}
 		parms['sessionid'] = global_sessionid;
 
-		debug("[AjaxThing].getUrl :: url=" + url + " :: parms=" + Object.toJSON(parms));
+		debug("[AjaxThing.getUrl] :: url=" + url + " :: parms=" + Object.toJSON(parms));
 		try{
 			RequestCounter.change(1);
 			new Ajax.Request(url, {
@@ -263,7 +280,7 @@ var AjaxThing = Class.create({
 								try{
 									callback(transport);
 								} catch(e) {
-									debug('ERROR in callback!');
+									debug('[AjaxThing.getUrl] ERROR in callback!');
 									debug(e);
 								}
 							}
@@ -273,7 +290,7 @@ var AjaxThing = Class.create({
 								try {
 									errorback(transport);
 								} catch(e) {
-									debug('ERROR in errorback!');
+									debug('[AjaxThing.getUrl] ERROR in errorback!');
 									debug(e);
 								}
 							}
@@ -295,8 +312,8 @@ var TemplateEngine = Class.create(AjaxThing, {
 	},
 
 	cache: function(request, tplName){
-		debug("[TemplateEngine].cache caching template: " + tplName);
-		this.templates[tplName] = request.responseText;
+		debug("[TemplateEngine.cache] caching template: " + tplName);
+		this.templates[tplName] = TrimPath.parseTemplate(request.responseText, tplName);
 	},
 
 	fetch: function(tplName, callback){
@@ -330,13 +347,13 @@ var TemplateEngine = Class.create(AjaxThing, {
 				target(result);
 				return;
 			} catch(exc){
-				debug("[TemplateEngine].render callback failed!");
+				debug("[TemplateEngine.render] callback failed!");
 			}
 		} else {
 			try{
 				$(target).update( result );
 			}catch(ex){
-				debug("[TemplateEngine].render catched an exception!");
+				debug("[TemplateEngine.render] catched an exception!");
 				throw ex;
 			}
 		}
@@ -505,7 +522,7 @@ function EPGList(xml){
 		var len = this.xmlitems.length;
 
 		if (sortbytime === true){
-			debug("[EPGList].getArray :: Sort by time!");
+			debug("[EPGList.getArray] Sort by time!");
 			var sortList = [];
 
 			for(var i=0; i<len; i++){

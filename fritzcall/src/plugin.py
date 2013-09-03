@@ -2,11 +2,21 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 778 $
-$Date: 2013-06-21 15:42:22 +0200 (Fri, 21 Jun 2013) $
-$Id: plugin.py 778 2013-06-21 13:42:22Z michael $
+$Revision: 799 $
+$Date: 2013-07-21 12:49:43 +0200 (Sun, 21 Jul 2013) $
+$Id: plugin.py 799 2013-07-21 10:49:43Z michael $
 '''
 
+# C0111 (Missing docstring)
+# C0103 (Invalid name)
+# C0301 (line too long)
+# W0603 (global statement)
+# W0141 (map, filter, etc.)
+# W0110 lambda with map,filter
+# W0403 Relative import
+# W1401 Anomalous backslash in string
+# W0110 
+# pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,W1401,W0110
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -48,7 +58,7 @@ import re, time, os, traceback
 
 from nrzuname import ReverseLookupAndNotifier
 import FritzOutlookCSV, FritzLDIF
-from . import _, __, initDebug, debug #@UnresolvedImport # pylint: disable=E0611,F0401
+from . import _, __, initDebug, debug #@UnresolvedImport # pylint: disable=W0611,F0401
 
 from enigma import getDesktop
 DESKTOP_WIDTH = getDesktop(0).size().width()
@@ -301,8 +311,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 778 $"[1:-2] + "\n" + 
-							"$Date: 2013-06-21 15:42:22 +0200 (Fri, 21 Jun 2013) $"[1:23] + "\n"
+							"$Revision: 799 $"[1:-2] + "\n" + 
+							"$Date: 2013-07-21 12:49:43 +0200 (Sun, 21 Jul 2013) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1068,7 +1078,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		cur = self["entries"].getCurrent()
 		if cur:
 			if cur[0]:
-				debug("[FritzDisplayCalls] showEntry %s" % (cur[0]))
+				# debug("[FritzDisplayCalls] showEntry %s" % (cur[0]))
 				number = cur[0]
 				fullname = phonebook.search(cur[0])
 				if fullname:
@@ -1115,7 +1125,7 @@ class FritzOfferAction(Screen):
 							"skin_default/buttons/green.png",
 							"skin_default/buttons/yellow.png",
 							) 
-		debug("[FritzOfferAction] init: %s, %s" %(number, name))
+		debug("[FritzOfferAction] init: %s, %s" %(__(number), __(name)))
 		Screen.__init__(self, session)
 	
 		# TRANSLATORS: keep it short, this is a button
@@ -1156,7 +1166,7 @@ class FritzOfferAction(Screen):
 
 	def _finishLayout(self):
 		# pylint: disable=W0142
-		debug("[FritzCall] FritzOfferAction/finishLayout number: %s/%s" % (self._number, self._name))
+		debug("[FritzCall] FritzOfferAction/finishLayout number: %s/%s" % (__(self._number), __(self._name)))
 
 		faceFile = findFace(self._number, self._name)
 		picPixmap = LoadPixmap(faceFile)
@@ -1385,11 +1395,11 @@ class FritzCallPhonebook:
 #				debug("[FritzCallPhonebook] LDIF import failed" %line)
 #===============================================================================
 
-	def search(self, number):
+	def search(self, number, default=None, extended=True):
 		# debug("[FritzCallPhonebook] Searching for %s" %number)
 		name = ""
 		if not self.phonebook or not number:
-			return
+			return name
 
 		if config.plugins.FritzCall.prefix.value:
 			prefix = config.plugins.FritzCall.prefix.value
@@ -1406,11 +1416,15 @@ class FritzCallPhonebook:
 		if not name and self.phonebook.has_key(number):
 			name = self.phonebook[number]
 
-		if not name and config.plugins.FritzCall.FritzExtendedSearchNames.value:
+		if not name and default:
+			name = default
+
+		if not name and extended and config.plugins.FritzCall.FritzExtendedSearchNames.value:
 			for k in range(len(number)-1, 0, -1):
-				name = self.search(number[:k])
+				# debug("[FritzCallPhonebook] extended search: check: %s" %number[:k])
+				name = self.search(number[:k], default, False)
 				if name:
-					debug("[FritzCallPhonebook] search result for shortened number: %s" % name)
+					# debug("[FritzCallPhonebook] search result for shortened number: %s" % name)
 					break
 
 		return name.replace(", ", "\n").strip()
@@ -1884,7 +1898,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 778 $"[1: - 1] + "$Date: 2013-06-21 15:42:22 +0200 (Fri, 21 Jun 2013) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 799 $"[1: - 1] + "$Date: 2013-07-21 12:49:43 +0200 (Sun, 21 Jul 2013) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2098,7 +2112,7 @@ class FritzCallList:
 callList = FritzCallList()
 
 def findFace(number, name):
-	debug("[FritzCall] findFace number/name: %s/%s" % (number, name))
+	# debug("[FritzCall] findFace number/name: %s/%s" % (number, name))
 	if name:
 		sep = name.find(',')
 		if sep != -1:
@@ -2108,47 +2122,43 @@ def findFace(number, name):
 			name = name[:sep]
 	else:
 		name = _("UNKNOWN")
+	# debug("[FritzCall] findFace looking for: %s" %name)
 
 	facesDir = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces")
-	numberFile = os.path.join(facesDir, number)
-	nameFile = os.path.join(facesDir, name)
-	facesFile = ""
-	if number and os.path.exists(numberFile):
-		facesFile = numberFile
-	elif number and os.path.exists(numberFile + ".png"):
-		facesFile = numberFile + ".png"
-	elif number and os.path.exists(numberFile + ".PNG"):
-		facesFile = numberFile + ".PNG"
-	elif name and os.path.exists(nameFile + ".png"):
-		facesFile = nameFile + ".png"
-	elif name and os.path.exists(nameFile + ".PNG"):
-		facesFile = nameFile + ".PNG"
-	else:
-		sep = name.find(' (')
-		if sep != -1:
-			name = name[:sep]
-		nameFile = os.path.join(facesDir, name)
-		if name and os.path.exists(nameFile + ".png"):
-			facesFile = nameFile + ".png"
-		elif name and os.path.exists(nameFile + ".PNG"):
-			facesFile = nameFile + ".PNG"
+	# debug("[FritzCall] findFace looking in: %s" %facesDir)
+	facesFile = None
 
-	if not facesFile and config.plugins.FritzCall.FritzExtendedSearchFaces.value:
-		for k in range(len(number)-1, 0, -1):
-			if os.path.exists(os.path.join(facesDir, number[:k])):
-				facesFile = os.path.join(facesDir, number[:k])
-				break
-			elif os.path.exists(os.path.join(facesDir, number[:k]) + ".png"):
-				facesFile = os.path.join(facesDir, number[:k]) + ".png"
-				break
-			elif os.path.exists(os.path.join(facesDir, number[:k]) + ".PNG"):
-				facesFile = os.path.join(facesDir, number[:k]) + ".PNG"
-				break
+	if not os.path.isdir(facesDir):
+		debug("[FritzCall] findFace facesdir does not exist: %s" %facesDir)
+	else:
+		files = os.listdir(facesDir)
+		# debug("[FritzCall] findFace listdir: %s" %repr(files))
+		myFiles = [f for f in files if re.match(number + "\.[png|PNG]", f)]
+		if not myFiles:
+			myFiles = [f for f in files if re.match(re.escape(name) + "\.[png|PNG]", f)]
+	
+		if not myFiles:
+			sep = name.find(' (')
+			if sep != -1:
+				name = name[:sep]
+			myFiles = [f for f in files if re.match(re.escape(name) + "\.[png|PNG]", f)]
+	
+		if myFiles:
+			# debug("[FritzCall] findFace found: %s" %repr(myFiles))
+			facesFile = os.path.join(facesDir, myFiles[0])
+	
+		if not facesFile and config.plugins.FritzCall.FritzExtendedSearchFaces.value:
+			for k in range(len(number)-1, 0, -1):
+				# debug("[FritzCall] findFace extended search: %s" %number[:k])
+				myFiles = [f for f in files if re.match(number[:k] + "\.[png|PNG]", f)]
+				if myFiles:
+					facesFile = os.path.join(facesDir, myFiles[0])
+					break
 
 	if not facesFile:
 		facesFile = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
 
-	debug("[FritzCall] findFace result: %s" % (facesFile))
+	debug("[FritzCall] findFace result: %s" % (__(facesFile)))
 	return facesFile
 
 class MessageBoxPixmap(Screen):
@@ -2405,9 +2415,9 @@ class FritzReverseLookupAndNotifier:
 		notifyCall(self.event, self.date, self.number, self.caller, self.phone, self.connID)
 		# kill that object...
 
-class FritzProtocol(LineReceiver):
+class FritzProtocol(LineReceiver): # pylint: disable=W0223
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 778 $"[1:-1]	+ "$Date: 2013-06-21 15:42:22 +0200 (Fri, 21 Jun 2013) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 799 $"[1:-1]	+ "$Date: 2013-07-21 12:49:43 +0200 (Sun, 21 Jul 2013) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2631,7 +2641,7 @@ def displayFBFStatus(session, servicelist=None): #@UnusedVariable # pylint: disa
 	else:
 		Notifications.AddNotification(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
-def main(session, servicelist=None):
+def main(session, servicelist=None): # pylint: disable=W0613
 	session.open(FritzCallSetup)
 
 fritz_call = None

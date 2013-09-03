@@ -10,6 +10,8 @@ from enigma import eServiceReference, eServiceCenter
 # ...
 from ServiceReference import ServiceReference
 
+from RecordTimer import RecordTimerEntry
+
 # Timer
 from EPGRefreshTimer import epgrefreshtimer, EPGRefreshTimerEntry, checkTimespan
 
@@ -303,10 +305,10 @@ class EPGRefresh:
 		if not self.forcedScan and config.plugins.epgrefresh.afterevent.value \
 			and not Screens.Standby.inTryQuitMainloop:
 
-			self.session.open(
-				Screens.Standby.TryQuitMainloop,
-				1
-			)
+			if Screens.Standby.inStandby:
+				RecordTimerEntry.TryQuitMainloop()
+			else:
+				Notifications.AddNotificationWithID("Shutdown", Screens.Standby.TryQuitMainloop, 1)
 
 	def refresh(self):
 		if self.forcedScan:

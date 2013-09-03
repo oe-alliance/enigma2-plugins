@@ -79,7 +79,7 @@ class EPG(Source):
 		else:
 			serviceHandler = eServiceCenter.getInstance()
 			list = serviceHandler.list(eServiceReference(ref))
-			services = list and list.getContent('S')
+			services = list and list.getContent('S', True)
 			search = ['IBDCTSERNX']
 
 			if services: # It's a Bouquet
@@ -171,7 +171,7 @@ class EPG(Source):
 
 		serviceHandler = eServiceCenter.getInstance()
 		sl = serviceHandler.list(eServiceReference(bRef))
-		services = sl and sl.getContent('S')
+		services = sl and sl.getContent('S', True)
 
 		search = ['IBDCTSERN']
 
