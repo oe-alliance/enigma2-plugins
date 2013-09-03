@@ -15,6 +15,7 @@ import commands
 
 config.plugins.mc_global = ConfigSubsection()
 config.plugins.mc_global.vfd = ConfigSelection(default='off', choices=[('off', 'off'), ('on', 'on')])
+config.plugins.mc_globalsettings.upnp_enable = ConfigYesNo(default=False)
 loadSkin("/usr/lib/enigma2/python/Plugins/Extensions/BMediaCenter/skins/defaultHD/skin.xml")
 #try:
 #	from enigma import evfd
@@ -74,9 +75,10 @@ class DMC_MainMenu(Screen):
 		}, -1)
 #		if config.plugins.mc_global.vfd.value == "on":
 #			evfd.getInstance().vfd_write_string(_("My Music"))
-		if fileExists("/media/upnp") is False:
-			os.mkdir("/media/upnp")
-		os.system('djmount /media/upnp &')
+		if config.plugins.mc_globalsettings.upnp_enable.getValue():
+			if fileExists("/media/upnp") is False:
+				os.mkdir("/media/upnp")
+			os.system('djmount /media/upnp &')
 	def next(self):
 		self["menu"].selectNext()
 		if self["menu"].getIndex() == 1:
