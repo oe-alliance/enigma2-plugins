@@ -10,8 +10,6 @@ from enigma import eServiceReference, eServiceCenter
 # ...
 from ServiceReference import ServiceReference
 
-from RecordTimer import RecordTimerEntry
-
 # Timer
 from EPGRefreshTimer import epgrefreshtimer, EPGRefreshTimerEntry, checkTimespan
 
@@ -316,7 +314,7 @@ class EPGRefresh:
 			and not Screens.Standby.inTryQuitMainloop:
 
 			if Screens.Standby.inStandby:
-				RecordTimerEntry.TryQuitMainloop()
+				self.session.open(Screens.Standby.TryQuitMainloop, 1)
 			else:
 				Notifications.AddNotificationWithID("Shutdown", Screens.Standby.TryQuitMainloop, 1)
 
