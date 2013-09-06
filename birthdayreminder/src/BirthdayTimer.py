@@ -105,7 +105,9 @@ class BirthdayTimer(Timer, BirthdayStore):
 		else:
 			self.start()
 			self.startNetworking()
-			
+		self.broadcastPort = None
+		self.transferServerPort = None
+		
 	def startTimer(self):
 		eDVBLocalTimeHandler.getInstance().m_timeUpdated.get().remove(self.startTimer)
 		self.start()
@@ -145,9 +147,8 @@ class BirthdayTimer(Timer, BirthdayStore):
 			
 	def stopNetworking(self):
 		print "[Birthday Reminder] stopping network communication..."
-		
-		self.broadcastPort.stopListening()
-		self.transferServerPort.stopListening()
+		self.broadcastPort and self.broadcastPort.stopListening()
+		self.transferServerPort and self.transferServerPort.stopListening()
 		
 	def requestBirthdayList(self, addr):
 		print "[Birthday Reminder] requesting birthday list from", addr[0]
