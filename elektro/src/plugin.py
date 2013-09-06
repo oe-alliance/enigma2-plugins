@@ -568,11 +568,13 @@ class DoElektro(Screen):
 		# the next five min		
 
 		automatic_wakeup = self.session.nav.wasTimerWakeup() # woken by any timer
+		elektro_wakeup = automatic_wakeup and config.plugins.elektro.deepstandby_wakeup_time.value == config.misc.prev_wakeup_time.value
+		record_wakeup = automatic_wakeup and config.plugins.elektro.deepstandby_wakeup_time.value and config.misc.prev_wakeup_time_type.value == 0
 
 		self.dontsleep = False
 
 		#Let's assume we got woken up manually
-		timerWakeup = automatic_wakeup
+		timerWakeup = elektro_wakeup or record_wakeup
 
 		# If the was a manual wakeup: Don't go to sleep
 		if timerWakeup == False:
