@@ -125,11 +125,12 @@ class MC_WeatherInfo(Screen):
 			if fileExists("/sbin/ffmpeg"):
 				ffmpeg="/sbin/ffmpeg"
 			else:
-				ffmpeg="/usr/bin/ffmpeg" 
-			cmd = [ffmpeg, "-f", "image2", "-i", "/tmp/"+ stadt +".jpg", mviname]
-			subprocess.Popen(cmd).wait()
-		if fileExists(mviname):
-			self.showiframe.showStillpicture(mviname)
+				ffmpeg="/usr/bin/ffmpeg"
+			if fileExists("/sbin/ffmpeg") or fileExists("/sbin/ffmpeg"):	
+				cmd = [ffmpeg, "-f", "image2", "-i", "/tmp/"+ stadt +".jpg", mviname]
+				subprocess.Popen(cmd).wait()
+			if fileExists(mviname):
+				self.showiframe.showStillpicture(mviname)
 	def nextItem(self):
 		if self.weatherPluginEntryCount != 0:
 			if self.weatherPluginEntryIndex < self.weatherPluginEntryCount:
