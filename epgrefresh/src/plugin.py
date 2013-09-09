@@ -87,7 +87,7 @@ def autostart(reason, **kwargs):
 
 		if config.plugins.epgrefresh.enabled.value:
 			# check if box was woken up by a timer, if so, check if epgrefresh set this timer
-			if session.nav.wasTimerWakeup() and config.misc.prev_wakeup_time.value == config.plugins.epgrefresh.wakeup_time.value:
+			if session.nav.wasTimerWakeup() and abs(config.plugins.epgrefresh.wakeup_time.getValue() - time()) <= 360:
 				# if box is not in idle mode, do that
 				from Screens.Standby import Standby, inStandby
 				if not inStandby:
