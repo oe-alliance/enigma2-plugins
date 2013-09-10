@@ -638,9 +638,10 @@ class AutoTimer:
 		foundExt = True
 		# NOTE: only check extended if short description already is a match because otherwise
 		# it won't evaluate to True anyway
-		if (timer.searchForDuplicateDescription > 0 or force) and foundShort:
-			# Some channels indicate replays in the extended descriptions
-			# If the similarity percent is higher then 0.8 it is a very close match
-			foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+		if (timer.searchForDuplicateDescription > 0 or force) and foundShort and extdesc1 != extdesc2:
+			if extdesc1 != extdesc2:
+				# Some channels indicate replays in the extended descriptions
+				# If the similarity percent is higher then 0.8 it is a very close match
+				foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
 
 		return foundTitle and foundShort and foundExt
