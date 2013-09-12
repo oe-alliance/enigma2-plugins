@@ -1,0 +1,139 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - epgsearch\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"PO-Revision-Date: 2012-02-21 19:19+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: .../enigma2-plugins/epgsearch\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/epgsearch\n"
+
+msgid "Add AutoTimer"
+msgstr ""
+
+msgid "Add timer"
+msgstr "Agg. timer"
+
+msgid "Cancel"
+msgstr "Annull."
+
+msgid "Channel Selection"
+msgstr "Selezione canale"
+
+msgid "Choose the encode type for search, helpful for foreign languages."
+msgstr ""
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Impossibile leggere la lista timer AutoTimer: %s"
+
+msgid "EPG Search"
+msgstr "Ricerca EPG"
+
+msgid "EPGSearch"
+msgstr ""
+
+msgid "EPGSearch Setup"
+msgstr "Configurazione EPGSearch"
+
+msgid ""
+"Enable this to be able to access the EPG-Search from within the plugin "
+"browser."
+msgstr ""
+
+msgid "Enter text to search for"
+msgstr "Inserire il testo da cercare"
+
+msgid ""
+"How many entries to keep in the search history at most. 0 disables history "
+"entirely!"
+msgstr ""
+"Numero massimo di voci da conservare nella history. 0 >> disabilitare "
+"l'opzione history."
+
+msgid "IMDb Search"
+msgstr ""
+
+msgid "Import from AutoTimer"
+msgstr "Importare da AutoTimer"
+
+msgid "Import from EPG"
+msgstr "Importare da EPG"
+
+msgid "Import from Timer"
+msgstr "Importare da timer"
+
+msgid "Length of History"
+msgstr "Dimensione History"
+
+msgid "New Search"
+msgstr "Nuova ricerca"
+
+msgid "No history"
+msgstr "Nessuna history"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Open selected in IMDb"
+msgstr "Aprire scheda in IMDb"
+
+msgid "Save search as AutoTimer"
+msgstr "Salvare la ricerca come AutoTimer"
+
+msgid "Search"
+msgstr "Cercare"
+
+msgid "Search EPG"
+msgstr "Cercare EPG"
+
+msgid "Search Encoding"
+msgstr ""
+
+msgid "Select a timer to search"
+msgstr "Selezionare un timer da cercare"
+
+msgid "Select text to search for"
+msgstr "Selezionare il testo da cercare"
+
+msgid "Setup"
+msgstr "Configurazione"
+
+msgid "Show in plugin browser"
+msgstr ""
+
+msgid "Show search history"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+msgid "search EPG"
+msgstr "Ricercare EPG"
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
+msgid "search EPG..."
+msgstr "ricerca EPG..."
+
+#~ msgid "Add \"Search\" Button to EPG"
+#~ msgstr "Aggiungere il pulsante \"Ricerca\" all'EPG"
+
+#~ msgid "Export selected as AutoTimer"
+#~ msgstr "Esportare la selezione come AutoTimer"
+
+#~ msgid "History"
+#~ msgstr "History"
+
+#~ msgid ""
+#~ "If this setting is enabled, the plugin adds a \"Search\" Button to the "
+#~ "regular EPG."
+#~ msgstr ""
+#~ "Abilitando l'opzione, verrà aggiunto un pulsante di ricerca all'EPG "
+#~ "standard."

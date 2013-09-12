@@ -1,0 +1,124 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: epg search Persian Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-07-25 22:08+0330\n"
+"Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+msgid "Add AutoTimer"
+msgstr ""
+
+msgid "Add timer"
+msgstr "اضافه کردن تایمر"
+
+msgid "Cancel"
+msgstr "لغو کردن"
+
+msgid "Channel Selection"
+msgstr "انتخاب کانال"
+
+msgid "Choose the encode type for search, helpful for foreign languages."
+msgstr ""
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "%s نمی توانست لیست تایمر پلاگین تایمر خودکار را بخواند"
+
+msgid "EPG Search"
+msgstr "جستجو برنامه راهنمای الکترونیک"
+
+msgid "EPGSearch"
+msgstr ""
+
+msgid "EPGSearch Setup"
+msgstr ""
+
+msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
+msgstr ""
+
+msgid "Enter text to search for"
+msgstr "وارد کردن یک متن به منظور جستجو برای "
+
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr ""
+
+msgid "IMDb Search"
+msgstr ""
+
+msgid "Import from AutoTimer"
+msgstr "وارد کردن از تایمر خودکار"
+
+msgid "Import from EPG"
+msgstr "وارد کردن از برنامه راهنمای الکترونیک"
+
+msgid "Import from Timer"
+msgstr "وارد کردن از تایمر"
+
+msgid "Length of History"
+msgstr ""
+
+msgid "New Search"
+msgstr "جستجوی جدید"
+
+msgid "No history"
+msgstr "بدون پیشینه"
+
+msgid "OK"
+msgstr "موزد تایید است"
+
+msgid "Open selected in IMDb"
+msgstr ""
+
+msgid "Save search as AutoTimer"
+msgstr "ذخیره سازی جستجو به عنوان یک تایمر خودکار"
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Search EPG"
+msgstr "جستجوی یک برنامه راهنمای الکترونیک"
+
+msgid "Search Encoding"
+msgstr ""
+
+msgid "Select a timer to search"
+msgstr "انتخاب یک تایمر برای جستجو "
+
+msgid "Select text to search for"
+msgstr "انتخاب یک متن برای جستجوی"
+
+msgid "Setup"
+msgstr ""
+
+msgid "Show in plugin browser"
+msgstr ""
+
+msgid "Show search history"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+msgid "search EPG"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
+msgid "search EPG..."
+msgstr "جستجوی برنامه راهنمای الکترونیک"
+
+#~ msgid "Export selected as AutoTimer"
+#~ msgstr "صادر کردن منتخب به عنوان یک تایمر خودکار "
+
+#~ msgid "History"
+#~ msgstr "پیشینه"

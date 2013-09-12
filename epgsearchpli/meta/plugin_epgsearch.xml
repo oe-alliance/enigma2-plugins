@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="EPG" />
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>EPGSearch</name>
+                    <packagename>enigma2-plugin-extensions-epgsearch</packagename>
+                    <shortdescription>Search through the EPG</shortdescription>
+                    <description>With EPGSearch you can search through the EPG and create timers.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_epgsearch_en.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-epgsearch" />
+	  </files>
+</default>

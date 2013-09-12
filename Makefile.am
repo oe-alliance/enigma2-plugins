@@ -26,7 +26,6 @@ SUBDIRS = \
 	eibox \
 	emailclient \
 	epgrefresh \
-	epgsearch \
 	eurotictv \
 	eventlist \
 	filebrowser \
@@ -124,9 +123,9 @@ SUBDIRS += \
 endif
 
 if PLI
-SUBDIRS += networkbrowserpli
+SUBDIRS += networkbrowserpli epgsearchpli
 else
-SUBDIRS += networkbrowser
+SUBDIRS += networkbrowser epgsearch
 endif
 
 metadir = $(datadir)/meta
