@@ -488,7 +488,7 @@ class AutoTimer:
 				if dest and dest not in moviedict:
 					self.addDirectoryToMovieDict(moviedict, dest, serviceHandler)
 				for movieinfo in moviedict.get(dest, ()):
-					if self.checkSimilarity(timer, name, movieinfo.get("name"), shortdesc, movieinfo.get("shortdesc"), extdesc, movieinfo.get("extdesc") ):
+					if self.checkSimilarity(timer, name, movieinfo.get("name"), shortdesc, movieinfo.get("shortdesc"), extdesc, movieinfo.get("extdesc")):
 						print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
 						movieExists = True
 						break
@@ -534,6 +534,7 @@ class AutoTimer:
 						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
 					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
+						print("[AutoTimer] We found a timer with similar description, skipping event")
 						oldExists = True
 						break
 
@@ -733,15 +734,20 @@ class AutoTimer:
 
 	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2, force=False):
 		foundTitle = name1 == name2
-		foundShort = shortdesc1 == shortdesc2 if (timer.searchForDuplicateDescription > 0 or force) else True
-		foundExt = True
-		# NOTE: only check extended if short description already is a match because otherwise
-		# it won't evaluate to True anyway
-		if (timer.searchForDuplicateDescription > 0 or force) and foundShort and extdesc1 != extdesc2:
-			# Some channels indicate replays in the extended descriptions
-			# If the similarity percent is higher then 0.8 it is a very close match
-			foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+		foundShort = False
+		foundExt = False
+		if (timer.searchForDuplicateDescription > 0 or force):
+			if shortdesc1 and shortdesc2:
+				# SkyUK does not use extended description, so try to find a close match to short description.
+				# If the similarity percent is higher then 0.8 it is a very close match
+				foundShort = ( 0.8 < SequenceMatcher(lambda x: x == " ",shortdesc1, shortdesc2).ratio() )
 
+			# NOTE: only check extended if short description already is a match because otherwise
+			# it won't evaluate to True anyway
+			if foundShort and extdesc1 and extdesc2:
+				# Some channels indicate replays in the extended descriptions
+				# If the similarity percent is higher then 0.8 it is a very close match
+				foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
 		return foundTitle and foundShort and foundExt
 
 	def checkDoubleTimers(self, timer, name1, name2, starttime1, starttime2, endtime1, endtime2):
