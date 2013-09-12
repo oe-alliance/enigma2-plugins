@@ -220,7 +220,8 @@ class GoogleSuggestions():
 
 	def prepareQuery(self):
 		#GET /complete/search?output=toolbar&client=youtube-psuggest&xml=true&ds=yt&hl=en&jsonp=self.gotSuggestions&q=s
-		self.prepQuerry = "/complete/search?output=toolbar&client=youtube&xml=true&ds=yt&"
+		#self.prepQuerry = "/complete/search?output=toolbar&client=youtube&xml=true&ds=yt&"
+		self.prepQuerry = "/complete/search?output=chrome&client=chrome&"
 		if self.hl is not None:
 			self.prepQuerry = self.prepQuerry + "hl=" + self.hl + "&"
 		self.prepQuerry = self.prepQuerry + "jsonp=self.gotSuggestions&q="

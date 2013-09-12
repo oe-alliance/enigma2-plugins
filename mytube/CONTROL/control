@@ -1,2 +1,2 @@
 Description: MyTube Player for direct playback of Youtube movies
-Depends: enigma2, python-twisted-web, python-gdata, gst-plugins-good-flv, python-textutils
+Depends: enigma2, python-twisted-web, python-gdata, gst-plugins-good-flv, python-textutils, python-json

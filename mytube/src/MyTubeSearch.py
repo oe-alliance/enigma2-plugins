@@ -19,6 +19,7 @@ from xml.etree.cElementTree import fromstring as cet_fromstring
 from StringIO import StringIO
 #import urllib
 from urllib import FancyURLopener
+import json
 
 class MyOpener(FancyURLopener):
 	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
@@ -193,11 +194,27 @@ class MyTubeSuggestionsListScreen(Screen):
 		if suggestions and len(suggestions) > 0:
 			if not self.shown:
 				self.show()
-			suggestions_tree = cet_fromstring( suggestions )
+			#suggestions_tree = cet_fromstring( suggestions )
+			suggestions_tree = json.loads(str(suggestions[20:-1]))
 			if suggestions_tree:
 				self.list = []
 				self.suggestlist = []
-				for suggestion in suggestions_tree.findall("CompleteSuggestion"):
+				suggested = suggestions_tree[1]
+				suggestrelevance = suggestions_tree[4]["google:suggestrelevance"]
+				suggesttype = suggestions_tree[4]["google:suggesttype"]
+				count = 0
+				for suggest in suggested:
+					name = None
+					numresults = None
+					if suggesttype[count] == u'NAVIGATION':
+						count +=1
+						continue
+					name = str(suggest)
+					numresults = suggestrelevance[count]
+					if name and numresults:
+						self.suggestlist.append((name, numresults ))
+					count +=1
+				"""for suggestion in suggestions_tree.findall("CompleteSuggestion"):
 					name = None
 					numresults = None
 					for subelement in suggestion:
@@ -206,12 +223,12 @@ class MyTubeSuggestionsListScreen(Screen):
 						if subelement.attrib.has_key('int'):
 							numresults = subelement.attrib['int']
 						if name and numresults:
-							self.suggestlist.append((name, numresults ))
+							self.suggestlist.append((name, numresults ))"""
 				if len(self.suggestlist):
 					self.suggestlist.sort(key=lambda x: int(x[1]))
 					self.suggestlist.reverse()
 					for entry in self.suggestlist:
-						self.list.append((entry[0], entry[1] + _(" Results") ))
+						self.list.append((entry[0], str(entry[1]) + _(" Results") ))
 					self["suggestionslist"].setList(self.list)
 					self["suggestionslist"].setIndex(0)
 		else:

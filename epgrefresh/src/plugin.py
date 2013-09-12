@@ -79,6 +79,21 @@ from EPGRefreshService import EPGRefreshService
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
+#pragma mark - Workaround for unset clock
+from enigma import eDVBLocalTimeHandler
+
+def timeCallback(isCallback=True):
+	"""Time Callback/Autostart management."""
+	thInstance = eDVBLocalTimeHandler.getInstance()
+	if isCallback:
+		# NOTE: this assumes the clock is actually ready when called back
+		# this may not be true, but we prefer silently dying to waiting forever
+		thInstance.m_timeUpdated.get().remove(timeCallback)
+	elif not thInstance.ready():
+		thInstance.m_timeUpdated.get().append(timeCallback)
+		return
+	epgrefresh.start()
+
 # Autostart
 def autostart(reason, **kwargs):
 	if reason == 0 and "session" in kwargs:
@@ -93,7 +108,7 @@ def autostart(reason, **kwargs):
 				if not inStandby:
 					from Tools import Notifications
 					Notifications.AddNotificationWithID("Standby", Standby)
-			epgrefresh.start()
+			timeCallback(isCallback=False)
 
 	elif reason == 1:
 		epgrefresh.stop()
