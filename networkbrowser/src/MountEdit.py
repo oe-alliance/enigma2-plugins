@@ -194,6 +194,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			password = ""
 
 		self.old_sharename = sharename
+		self.old_sharedir = sharedir
 		self.mountusingConfigEntry = NoSave(ConfigSelection(self.mountusing, default = mountusing ))
 		self.activeConfigEntry = NoSave(ConfigEnableDisable(default = active))
 		self.ipConfigEntry = NoSave(ConfigIP(default = ip))
@@ -313,18 +314,13 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		else:
 			sharedir = self.sharedirConfigEntry.value
 
-		sharexists = False
-		for data in self.mounts:
-			if self.mounts[data]['sharename'] == sharename:
-				if self.mounts[data]['sharedir'] != sharedir:
-					sharexists = True
-					break
-
-		if sharexists:
-			self.session.open(MessageBox, _("A mount entry with this name already exists!\nand is not this share folder, please use a different name.\n"), type = MessageBox.TYPE_INFO )
-		elif self.old_sharename != self.sharenameConfigEntry.value:
+		print 'self.old_sharename',self.old_sharename
+		print 'self.sharenameConfigEntry.value',self.sharenameConfigEntry.value
+		print 'self.old_sharedir',self.old_sharedir
+		print 'self.sharedirConfigEntry.value',self.sharedirConfigEntry.value
+		if (self.old_sharename != self.sharenameConfigEntry.value):
 			self.session.openWithCallback(self.updateConfig, MessageBox, _("You have changed the share name!\nUpdate existing entry and continue?\n"), default=False )
-		elif self.mounts.has_key(sharename) is True:
+		elif self.mounts.has_key(sharename) is True or (self.old_sharename == self.sharenameConfigEntry.value):
 			self.session.openWithCallback(self.updateConfig, MessageBox, _("A mount entry with this name already exists!\nUpdate existing entry and continue?\n"), default=False )
 		else:
 			self.session.openWithCallback(self.applyConfig, MessageBox, _("Are you sure you want to save this network mount?\n\n") )
