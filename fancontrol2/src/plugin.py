@@ -855,11 +855,11 @@ def HDDtestTemp():
 					else:
 						if hdd[1].isSleeping():
 							(stat,wert)=getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
-						FClog("HDD not supports Temp reading without Spinup -> Ignore")
-						FC2HDDignore.append(hdd[1].getDeviceName())
+							FClog("HDD not supports Temp reading without Spinup -> Ignore")
+							FC2HDDignore.append(hdd[1].getDeviceName())
 
 def ReadHDDtemp(D):
-	return getstatusoutput("smartctl -A %s | grep \"194 Temp\" | grep Always" % D)
+	return getstatusoutput('smartctl -A %s | grep "194 Temp" | grep Always' % D)
 
 def GetHDDtemp(OneTime):
 	global AktHDD
