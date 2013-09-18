@@ -168,7 +168,10 @@ class MC_VideoPlayer(Screen, HelpableScreen):
 		else:
 			config.plugins.mc_vp.lastDir.value = self.filelist.getCurrentDirectory()
 		config.plugins.mc_vp.save()
-		os.remove("/tmp/bmcmovie")
+		try:
+			os.remove("/tmp/bmcmovie")
+		except:
+			pass
 		self.showiframe.finishStillPicture()
 		self.close()
 class VideoPlayerSettings(Screen, ConfigListScreen):
