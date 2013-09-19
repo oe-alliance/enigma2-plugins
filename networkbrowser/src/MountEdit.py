@@ -314,13 +314,15 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		else:
 			sharedir = self.sharedirConfigEntry.value
 
-		print 'self.old_sharename',self.old_sharename
-		print 'self.sharenameConfigEntry.value',self.sharenameConfigEntry.value
-		print 'self.old_sharedir',self.old_sharedir
-		print 'self.sharedirConfigEntry.value',self.sharedirConfigEntry.value
-		if (self.old_sharename != self.sharenameConfigEntry.value):
+		sharexists = False
+		for data in self.mounts:
+			if self.mounts[data]['sharename'] == self.old_sharename:
+					sharexists = True
+					break
+
+		if self.old_sharename != self.sharenameConfigEntry.value:
 			self.session.openWithCallback(self.updateConfig, MessageBox, _("You have changed the share name!\nUpdate existing entry and continue?\n"), default=False )
-		elif self.mounts.has_key(sharename) is True or (self.old_sharename == self.sharenameConfigEntry.value):
+		elif self.old_sharename == self.sharenameConfigEntry.value and sharexists:
 			self.session.openWithCallback(self.updateConfig, MessageBox, _("A mount entry with this name already exists!\nUpdate existing entry and continue?\n"), default=False )
 		else:
 			self.session.openWithCallback(self.applyConfig, MessageBox, _("Are you sure you want to save this network mount?\n\n") )
