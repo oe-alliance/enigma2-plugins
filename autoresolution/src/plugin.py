@@ -2,7 +2,7 @@ from Screens.Screen import Screen
 from Screens.Setup import SetupSummary
 from Screens.MessageBox import MessageBox
 from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import config, getConfigListEntry, ConfigSelection, ConfigSubsection, ConfigYesNo, ConfigSubDict, ConfigNothing
+from Components.config import config, configfile, getConfigListEntry, ConfigSelection, ConfigSubsection, ConfigYesNo, ConfigSubDict, ConfigNothing
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -331,6 +331,7 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 	def apply(self):
 		for x in self["config"].list:
 			x[1].save()
+		configfile.save()
 		self.close()
 
 	def keyLeft(self):
