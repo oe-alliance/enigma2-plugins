@@ -276,7 +276,7 @@ class ResolutionLabel(Screen):
 		self.onShow.append(self.hide_me)
 
 	def hide_me(self):
-		self.hideTimer.start(config.usage.infobar_timeout.index * 1500, True)
+		self.hideTimer.start(config.usage.infobar_timeout.index * 2000, True)
 
 
 class AutoResSetupMenu(Screen, ConfigListScreen):
