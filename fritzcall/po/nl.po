@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-07 13:11+0200\n"
+"POT-Creation-Date: 2013-09-30 10:37+0200\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -79,9 +79,6 @@ msgid "Cannot get calls from FRITZ!Box"
 msgstr ""
 
 msgid "Cannot get infos from FRITZ!Box yet; try later"
-msgstr ""
-
-msgid "Compact Flash"
 msgstr ""
 
 msgid "Connected since"
@@ -282,9 +279,6 @@ msgstr ""
 msgid "Filter also list of calls"
 msgstr ""
 
-msgid "Flash"
-msgstr "Flash"
-
 #, python-format
 msgid ""
 "Found picture\n"
@@ -349,9 +343,6 @@ msgstr "Laat MSN zien (door een komma gescheiden)"
 msgid "Mailbox"
 msgstr "Mailbox"
 
-msgid "Media directory"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Gemist"
@@ -364,9 +355,6 @@ msgstr "Muten bij oproep"
 
 msgid "Name"
 msgstr "Naam"
-
-msgid "Network mount"
-msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -445,8 +433,8 @@ msgstr "Wachtwoord voor toegang FRITZ!Box"
 msgid "Phone calls"
 msgstr "Telefoongesprekken"
 
-msgid "PhoneBook Location"
-msgstr "Telefoonboek locatie"
+msgid "PhoneBook and Faces Location"
+msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -580,10 +568,6 @@ msgstr "Mailbox Aan/Uit"
 
 msgid "UNKNOWN"
 msgstr "ONBEKEND"
-
-#, fuzzy
-msgid "USB Device"
-msgstr "USB Stick"
 
 msgid "Use internal PhoneBook"
 msgstr "Gebruik het interne telefoonboek"
@@ -726,6 +710,9 @@ msgstr ""
 #~ msgid "FRITZ!Box Login failed: "
 #~ msgstr "FRITZ!Box Login mislukt! - Error: %s"
 
+#~ msgid "Flash"
+#~ msgstr "Flash"
+
 #~ msgid "Full screen display"
 #~ msgstr "Volledig scherm"
 
@@ -762,9 +749,16 @@ msgstr ""
 #~ "---------------------------------------------\n"
 #~ "van: %(phone)s"
 
+#~ msgid "PhoneBook Location"
+#~ msgstr "Telefoonboek locatie"
+
 #~ msgid "Show Calls for specific MSN"
 #~ msgstr "Laat gesprekken van een specifieke MSN zien"
 
 #, fuzzy
 #~ msgid "Toggle "
 #~ msgstr "WLAN Aan/Uit"
+
+#, fuzzy
+#~ msgid "USB Device"
+#~ msgstr "USB Stick"

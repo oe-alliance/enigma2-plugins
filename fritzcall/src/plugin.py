@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 799 $
-$Date: 2013-07-21 12:49:43 +0200 (Sun, 21 Jul 2013) $
-$Id: plugin.py 799 2013-07-21 10:49:43Z michael $
+$Revision: 809 $
+$Date: 2013-09-30 10:36:55 +0200 (Mon, 30 Sep 2013) $
+$Id: plugin.py 809 2013-09-30 08:36:55Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -16,7 +16,7 @@ $Id: plugin.py 799 2013-07-21 10:49:43Z michael $
 # W0403 Relative import
 # W1401 Anomalous backslash in string
 # W0110 
-# pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,W1401,W0110
+# pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -24,6 +24,7 @@ from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog
 from Screens.InputBox import InputBox
 from Screens import Standby
 from Screens.HelpMenu import HelpableScreen
+from Screens.LocationBox import LocationBox
 
 from enigma import eTimer, eSize, ePoint #@UnresolvedImport # pylint: disable=E0611
 from enigma import eDVBVolumecontrol, eConsoleAppContainer, eBackgroundFileEraser #@UnresolvedImport # pylint: disable=E0611
@@ -35,9 +36,8 @@ from Components.Label import Label
 from Components.Button import Button
 from Components.Pixmap import Pixmap
 from Components.Sources.List import List
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigDirectory, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger
 from Components.ConfigList import ConfigListScreen
-from Components.Harddisk import harddiskmanager
 try:
 	from Components.config import ConfigPassword
 except ImportError:
@@ -46,7 +46,7 @@ except ImportError:
 from Plugins.Plugin import PluginDescriptor
 from Tools import Notifications
 from Tools.NumericalTextInput import NumericalTextInput
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_CONFIG, SCOPE_MEDIA
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_CONFIG
 from Tools.LoadPixmap import LoadPixmap
 from GlobalActions import globalActionMap # for muting
 
@@ -123,44 +123,8 @@ config.plugins.FritzCall.ignoreUnknown = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.reloadPhonebookTime = ConfigInteger(default=8, limits=(0, 99))
 config.plugins.FritzCall.FritzExtendedSearchFaces = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.FritzExtendedSearchNames = ConfigEnableDisable(default=False)
+config.plugins.FritzCall.phonebookLocation = ConfigDirectory(default = resolveFilename(SCOPE_CONFIG))
 
-
-def getMountedDevs():
-	def handleMountpoint(loc):
-		# debug("[FritzCall] handleMountpoint: %s" %repr(loc))
-		mp = loc[0]
-		while len(mp) > 1 and mp[-1] == '/':
-			mp = mp[:-1]
-		#=======================================================================
-		# if os.path.exists(os.path.join(mp, "PhoneBook.txt")):
-		#	if os.access(os.path.join(mp, "PhoneBook.txt"), os.W_OK):
-		#		desc = ' *'
-		#	else:
-		#		desc = ' -'
-		# else:
-		#	desc = ''
-		# desc = loc[1] + desc
-		#=======================================================================
-		desc = loc[1]
-		return (mp, desc + " (" + mp + ")")
-
-	mountedDevs = [(resolveFilename(SCOPE_CONFIG), _("Flash")),
-				   (resolveFilename(SCOPE_MEDIA, "cf"), _("Compact Flash")),
-				   (resolveFilename(SCOPE_MEDIA, "usb"), _("USB Device"))]
-	mountedDevs += map(lambda p: (p.mountpoint, (_(p.description) if p.description else "")), harddiskmanager.getMountedPartitions(True))
-	mediaDir = resolveFilename(SCOPE_MEDIA)
-	for p in os.listdir(mediaDir):
-		if os.path.join(mediaDir, p) not in [path[0] for path in mountedDevs]:
-			mountedDevs.append((os.path.join(mediaDir, p), _("Media directory")))
-	debug("[FritzCall] getMountedDevs1: %s" %repr(mountedDevs))
-	mountedDevs = filter(lambda path: os.path.isdir(path[0]) and os.access(path[0], os.W_OK|os.X_OK), mountedDevs)
-	# put this after the write/executable check, that is far too slow...
-	netDir = resolveFilename(SCOPE_MEDIA, "net")
-	if os.path.isdir(netDir):
-		mountedDevs += map(lambda p: (os.path.join(netDir, p), _("Network mount")), os.listdir(netDir))
-	mountedDevs = map(handleMountpoint, mountedDevs)
-	return mountedDevs
-config.plugins.FritzCall.phonebookLocation = ConfigSelection(choices=getMountedDevs())
 
 countryCodes = [
 	("0049", _("Germany")),
@@ -311,8 +275,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 799 $"[1:-2] + "\n" + 
-							"$Date: 2013-07-21 12:49:43 +0200 (Sun, 21 Jul 2013) $"[1:23] + "\n"
+							"$Revision: 809 $"[1:-2] + "\n" + 
+							"$Date: 2013-09-30 10:36:55 +0200 (Mon, 30 Sep 2013) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -852,7 +816,7 @@ class FritzMenu(Screen, HelpableScreen):
 			else:
 				self["dect_active"].hide()
 				self["dect_inactive"].show()
-				self["FBFFax"].setText(_('DECT inactive'))
+				self["FBFDect"].setText(_('DECT inactive'))
 
 			if faxActive:
 				self["fax_inactive"].hide()
@@ -1892,13 +1856,12 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		ConfigListScreen.__init__(self, self.list, session=session)
 
 		# get new list of locations for PhoneBook.txt
-		self._mountedDevs = getMountedDevs()
 		self.createSetup()
 		self.onLayoutFinish.append(self.setWindowTitle)
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 799 $"[1: - 1] + "$Date: 2013-07-21 12:49:43 +0200 (Sun, 21 Jul 2013) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 809 $"[1: - 1] + "$Date: 2013-09-30 10:36:55 +0200 (Mon, 30 Sep 2013) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1945,23 +1908,9 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 			self.list.append(getConfigListEntry(_("Use internal PhoneBook"), config.plugins.FritzCall.phonebook))
 			if config.plugins.FritzCall.phonebook.value:
-				if config.plugins.FritzCall.phonebookLocation.value in self._mountedDevs:
-					config.plugins.FritzCall.phonebookLocation.setChoices(self._mountedDevs, config.plugins.FritzCall.phonebookLocation.value)
-				else:
-					config.plugins.FritzCall.phonebookLocation.setChoices(self._mountedDevs)
-				path = config.plugins.FritzCall.phonebookLocation.value
-				# check whether we can write to PhoneBook.txt
-				if os.path.exists(os.path.join(path[0], "PhoneBook.txt")):
-					if not os.access(os.path.join(path[0], "PhoneBook.txt"), os.W_OK):
-						debug("[FritzCallSetup] createSetup: %s/PhoneBook.txt not writable, resetting to default" %(path[0]))
-						config.plugins.FritzCall.phonebookLocation.setChoices(self._mountedDevs)
-				elif not (os.path.isdir(path[0]) and os.access(path[0], os.W_OK|os.X_OK)):
-					debug("[FritzCallSetup] createSetup: directory %s not writable, resetting to default" %(path[0]))
-					config.plugins.FritzCall.phonebookLocation.setChoices(self._mountedDevs)
-
-				self.list.append(getConfigListEntry(_("PhoneBook Location"), config.plugins.FritzCall.phonebookLocation))
 				if config.plugins.FritzCall.lookup.value:
 					self.list.append(getConfigListEntry(_("Automatically add new Caller to PhoneBook"), config.plugins.FritzCall.addcallers))
+			self.list.append(getConfigListEntry(_("PhoneBook and Faces Location"), config.plugins.FritzCall.phonebookLocation))
 
 			if config.plugins.FritzCall.phonebook.value or config.plugins.FritzCall.fritzphonebook.value:
 				self.list.append(getConfigListEntry(_("Reload interval for phonebooks (hours)"), config.plugins.FritzCall.reloadPhonebookTime))
@@ -1981,17 +1930,24 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def save(self):
 #		debug("[FritzCallSetup] save"
-		for x in self["config"].list:
-			x[1].save()
-		if config.plugins.FritzCall.phonebookLocation.isChanged():
-			global phonebook
-			phonebook = FritzCallPhonebook()
-		if fritz_call:
-			if config.plugins.FritzCall.enable.value:
-				fritz_call.connect()
-			else:
-				fritz_call.shutdown()
-		self.close()
+		if self["config"].getCurrent()[1] == config.plugins.FritzCall.phonebookLocation:
+			self.session.openWithCallback(self.LocationBoxClosed, LocationBox, _("PhoneBook and Faces Location"), currDir=config.plugins.FritzCall.phonebookLocation.value)
+		else:
+			for x in self["config"].list:
+				x[1].save()
+			if config.plugins.FritzCall.phonebookLocation.isChanged():
+				global phonebook
+				phonebook = FritzCallPhonebook()
+			if fritz_call:
+				if config.plugins.FritzCall.enable.value:
+					fritz_call.connect()
+				else:
+					fritz_call.shutdown()
+			self.close()
+
+	def LocationBoxClosed(self, path):
+		if path is not None:
+			config.plugins.FritzCall.phonebookLocation.setValue(path)
 
 	def cancel(self):
 #		debug("[FritzCallSetup] cancel"
@@ -2417,7 +2373,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver): # pylint: disable=W0223
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 799 $"[1:-1]	+ "$Date: 2013-07-21 12:49:43 +0200 (Sun, 21 Jul 2013) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 809 $"[1:-1]	+ "$Date: 2013-09-30 10:36:55 +0200 (Mon, 30 Sep 2013) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

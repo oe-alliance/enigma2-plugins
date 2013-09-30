@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-07 13:11+0200\n"
+"POT-Creation-Date: 2013-09-30 10:37+0200\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -78,9 +78,6 @@ msgid "Cannot get calls from FRITZ!Box"
 msgstr ""
 
 msgid "Cannot get infos from FRITZ!Box yet; try later"
-msgstr ""
-
-msgid "Compact Flash"
 msgstr ""
 
 msgid "Connected since"
@@ -281,9 +278,6 @@ msgstr ""
 msgid "Filter also list of calls"
 msgstr ""
 
-msgid "Flash"
-msgstr "Flash"
-
 #, python-format
 msgid ""
 "Found picture\n"
@@ -348,9 +342,6 @@ msgstr "MSN a mostrar (separado por ,)"
 msgid "Mailbox"
 msgstr "Carpeta de correo"
 
-msgid "Media directory"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Perdidas"
@@ -363,9 +354,6 @@ msgstr "Silencio en llamada"
 
 msgid "Name"
 msgstr "Nombre"
-
-msgid "Network mount"
-msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -444,8 +432,8 @@ msgstr "Contraseña accediendo a FRITZ!Box"
 msgid "Phone calls"
 msgstr "Llamadas de teléfono"
 
-msgid "PhoneBook Location"
-msgstr "Ubicación de la Agenda"
+msgid "PhoneBook and Faces Location"
+msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -580,10 +568,6 @@ msgstr "Marcar Cuenta de Correo"
 
 msgid "UNKNOWN"
 msgstr "DESCONOCIDO"
-
-#, fuzzy
-msgid "USB Device"
-msgstr "Lápiz USB"
 
 msgid "Use internal PhoneBook"
 msgstr "Usar Agenda interna"
@@ -754,6 +738,9 @@ msgstr ""
 #~ msgid "FRITZ!Box Login failed: "
 #~ msgstr "Falló la identificación a FRITZ!Box - Error: %s"
 
+#~ msgid "Flash"
+#~ msgstr "Flash"
+
 #~ msgid "Full screen display"
 #~ msgstr "Visualización a pantalla completa"
 
@@ -790,12 +777,19 @@ msgstr ""
 #~ "---------------------------------------------\n"
 #~ "desde: %(phone)s"
 
+#~ msgid "PhoneBook Location"
+#~ msgstr "Ubicación de la Agenda"
+
 #~ msgid "Show Calls for specific MSN"
 #~ msgstr "Mostrar Llamadas para un específico MSN"
 
 #, fuzzy
 #~ msgid "Toggle "
 #~ msgstr "Marcar WLAN"
+
+#, fuzzy
+#~ msgid "USB Device"
+#~ msgstr "Lápiz USB"
 
 #~ msgid "WLAN off"
 #~ msgstr "WLAN apagado"

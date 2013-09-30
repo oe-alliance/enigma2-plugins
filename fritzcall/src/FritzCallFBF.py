@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 798 $
-$Date: 2013-07-21 12:09:26 +0200 (Sun, 21 Jul 2013) $
-$Id: FritzCallFBF.py 798 2013-07-21 10:09:26Z michael $
+$Revision: 808 $
+$Date: 2013-09-29 18:19:57 +0200 (Sun, 29 Sep 2013) $
+$Id: FritzCallFBF.py 808 2013-09-29 16:19:57Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -15,7 +15,7 @@ $Id: FritzCallFBF.py 798 2013-07-21 10:09:26Z michael $
 # W0110 lambda with map,filter
 # W0403 Relative import
 # W1401 Anomalous backslash in string
-# pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,W1401,W0110
+# pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403
 
 from . import _, __, debug #@UnresolvedImport # pylint: disable=W0611,F0401
 from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS
@@ -1706,7 +1706,7 @@ class FritzCallFBF_05_50:
 				dectActive = found.group(2)
 				debug("[FritzCallFBF_05_50] _okGetInfo dectActive: " + repr(dectActive))
 
-		found = re.match('.*<td>Integriertes Fax aktiv</td>', html, re.S)
+		found = re.match('.*<tr (?:style="")?><td><a href="[^"]*">Faxfunktion</a></td><td>Integriertes Fax aktiv</td>', html, re.S)
 		if found:
 			faxActive = True
 			debug("[FritzCallFBF_05_50] _okGetInfo faxActive: " + repr(faxActive))
