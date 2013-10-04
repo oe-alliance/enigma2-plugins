@@ -27,31 +27,24 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
-from xml.etree.cElementTree import fromstring as cet_fromstring
-from twisted.internet import defer
-from twisted.web.client import getPage, downloadPage
-from urllib import quote
 from Components.Pixmap import Pixmap
-from enigma import eEnv, ePicLoad, eRect, eSize, gPixmapPtr
-from os import path as os_path, mkdir as os_mkdir
+from enigma import ePicLoad, eRect, eSize, gPixmapPtr
 from Components.AVSwitch import AVSwitch
 from Components.config import ConfigSubsection, ConfigSubList, ConfigInteger, config
 from setup import initConfig, MSNWeatherPluginEntriesListConfigScreen
+from MSNWeather import MSNWeather
 import time
+
+try:
+	from Components.WeatherMSN import weathermsn
+	WeatherMSNComp = weathermsn
+except:
+	WeatherMSNComp = None
+
 config.plugins.WeatherPlugin = ConfigSubsection()
 config.plugins.WeatherPlugin.entrycount =  ConfigInteger(0)
 config.plugins.WeatherPlugin.Entry = ConfigSubList()
 initConfig()
-
-class WeatherIconItem:
-	def __init__(self, url = "", filename = "", index = -1, error = False):
-		self.url = url
-		self.filename = filename
-		self.index = index
-		self.error = error
-
-def download(item):
-	return downloadPage(item.url, file(item.filename, 'wb'))
 
 
 def main(session,**kwargs):
@@ -75,7 +68,7 @@ class MSNWeatherPlugin(Screen):
 			<widget render="Label" source="wind_condition" position="270,115" zPosition="1" size="300,20" font="Regular;18" transparent="1"/>
 			<widget render="Label" source="humidity" position="270,135" zPosition="1" size="300,20" font="Regular;18" valign="bottom" transparent="1"/>
 			<widget render="Label" source="weekday1" position="35,170" zPosition="1" size="105,40" halign="center" valign="center" font="Regular;18" transparent="1"/>
-			<widget name="weekday1_icon" position="60,215" zPosition="1" size="55,45" alphatest="on"/>
+			<widget name="weekday1_icon" position="60,215" zPosition="1" size="55,45" alphatest="blend"/>
 			<widget render="Label" source="weekday1_temp" position="35,270" zPosition="1" size="105,60" halign="center" valign="bottom" font="Regular;16" transparent="1"/>
 			<widget render="Label" source="weekday2" position="155,170" zPosition="1" size="105,40" halign="center" valign="center" font="Regular;18" transparent="1"/>
 			<widget name="weekday2_icon" position="180,215" zPosition="1" size="55,45" alphatest="blend"/>
@@ -124,10 +117,6 @@ class MSNWeatherPlugin(Screen):
 		del i
 		
 
-		self.appdir = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/WeatherPlugin/icons/")
-		if not os_path.exists(self.appdir):
-			os_mkdir(self.appdir)
-
 		self.weatherPluginEntryIndex = -1
 		self.weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
 		if self.weatherPluginEntryCount >= 1:
@@ -136,17 +125,25 @@ class MSNWeatherPlugin(Screen):
 		else:
 			self.weatherPluginEntry = None
 
-		self.language = config.osd.language.value.replace("_","-")
-		if self.language == "en-EN": # hack
-			self.language = "en-US"
-		self.webSite = ""		
+
+		self.webSite = ""
+		
+		self.weatherData = None
 		self.onLayoutFinish.append(self.startRun)
+		self.onClose.append(self.__onClose)
+		
+	def __onClose(self):
+		if self.weatherData is not None:
+			self.weatherData.cancel()
 
 	def startRun(self):
 		if self.weatherPluginEntry is not None:
 			self["statustext"].text = _("Getting weather information...")
-			url = "http://weather.service.msn.com/data.aspx?weadegreetype=%s&culture=%s&wealocations=%s" % (self.weatherPluginEntry.degreetype.value, self.language, self.weatherPluginEntry.weatherlocationcode.value)
-			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
+			if self.weatherData is not None:
+				self.weatherData.cancel()
+				self.weatherData = None
+			self.weatherData = MSNWeather()
+			self.weatherData.getWeatherData(self.weatherPluginEntry.degreetype.value, self.weatherPluginEntry.weatherlocationcode.value, self.weatherPluginEntry.city.value, self.getWeatherDataCallback, self.showIcon)
 		else:
 			self["statustext"].text = _("No locations defined...\nPress 'Menu' to do that.")
 
@@ -189,13 +186,6 @@ class MSNWeatherPlugin(Screen):
 			self["weekday%s_temp" % i].text = ""
 			i += 1
 
-	def errorIconDownload(self, error = None, item = None):
-		item.error = True
-
-	def finishedIconDownload(self, result, item):
-		if not item.error:
-			self.showIcon(item.index,item.filename)
-
 	def showIcon(self,index, filename):
 		if index <> -1:
 			self["weekday%s_icon" % index].updateIcon(filename)
@@ -204,59 +194,34 @@ class MSNWeatherPlugin(Screen):
 			self["currenticon"].updateIcon(filename)
 			self["currenticon"].show()
 
-	def xmlCallback(self, xmlstring):
+	def getWeatherDataCallback(self, result, errortext):
 		self["statustext"].text = ""
-		IconDownloadList = []
-		root = cet_fromstring(xmlstring)
-		index = 0
-		degreetype = "C"
-		imagerelativeurl = ""
-		errormessage = ""
-		for childs in root:
-			if childs.tag == "weather":
-				errormessage = childs.attrib.get("errormessage")
-				if errormessage:
-					self["statustext"].text = errormessage.encode("utf-8", 'ignore')
-					break
-				self["caption"].text = self.weatherPluginEntry.city.value #childs.attrib.get("weatherlocationname").encode("utf-8", 'ignore')
-				degreetype = childs.attrib.get("degreetype").encode("utf-8", 'ignore')
-				imagerelativeurl = "%slaw/" % childs.attrib.get("imagerelativeurl").encode("utf-8", 'ignore')
-				self.webSite = childs.attrib.get("url").encode("utf-8", 'ignore')
-			for items in childs:
-				if items.tag == "current":
-					self["currentTemp"].text = "%s°%s" % (items.attrib.get("temperature").encode("utf-8", 'ignore') , degreetype)
-					self["condition"].text = items.attrib.get("skytext").encode("utf-8", 'ignore')
-					self["humidity"].text = _("Humidity: %s %%") % items.attrib.get("humidity").encode("utf-8", 'ignore')
-					self["wind_condition"].text = items.attrib.get("winddisplay").encode("utf-8", 'ignore')
-					c =  time.strptime(items.attrib.get("observationtime").encode("utf-8", 'ignore'), "%H:%M:%S")
+		if result == MSNWeather.ERROR:
+			self.error(errortext)
+		else:
+			self["caption"].text = self.weatherData.city
+			self.webSite = self.weatherData.url
+			for weatherData in self.weatherData.weatherItems.items():
+				item = weatherData[1]
+				if weatherData[0] == "-1": # current
+					self["currentTemp"].text = "%s°%s" % (item.temperature, self.weatherData.degreetype)
+					self["condition"].text = item.skytext
+					self["humidity"].text = _("Humidity: %s %%") % item.humidity
+					self["wind_condition"].text = item.winddisplay
+					c =  time.strptime(item.observationtime, "%H:%M:%S")
 					self["observationtime"].text = _("Observation time: %s") %  time.strftime("%H:%M",c)
-					self["observationpoint"].text = _("Observation point: %s") % items.attrib.get("observationpoint").encode("utf-8", 'ignore')
-					self["feelsliketemp"].text = _("Feels like %s") % items.attrib.get("feelslike").encode("utf-8", 'ignore') + "°" +  degreetype
-					skycode = "%s.gif" % items.attrib.get("skycode").encode("utf-8", 'ignore')
-					filename = self.appdir + skycode
-					if not os_path.exists(filename):
-						url = "%s%s" % (imagerelativeurl, skycode)
-						IconDownloadList.append(WeatherIconItem(url = url,filename = filename, index = -1))
-					else:
-						self.showIcon(-1,filename)
-				elif items.tag == "forecast" and index <= 4:
-					index +=1
-					c = time.strptime(items.attrib.get("date").encode("utf-8", 'ignore'),"%Y-%m-%d")
-					self["weekday%s" % index].text = "%s\n%s" % (items.attrib.get("day").encode("utf-8", 'ignore'), time.strftime("%d. %b",c))
-					lowTemp = items.attrib.get("low").encode("utf-8", 'ignore')
-					highTemp = items.attrib.get("high").encode("utf-8", 'ignore')
-					self["weekday%s_temp" % index].text = "%s°%s|%s°%s\n%s" % (highTemp, degreetype, lowTemp, degreetype, items.attrib.get("skytextday").encode("utf-8", 'ignore'))
-					skycodeday = "%s.gif" % items.attrib.get("skycodeday").encode("utf-8", 'ignore')
-					filename = self.appdir + skycodeday
-					if not os_path.exists(filename):
-						url = "%s%s" % (imagerelativeurl, skycodeday)
-						IconDownloadList.append(WeatherIconItem(url = url,filename = filename, index = index))
-					else:
-						self.showIcon(index,filename)
-		if len(IconDownloadList) != 0:
-			ds = defer.DeferredSemaphore(tokens=len(IconDownloadList))
-			downloads = [ds.run(download,item ).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload,item) for item in IconDownloadList]
-			finished = defer.DeferredList(downloads).addErrback(self.error)
+					self["observationpoint"].text = _("Observation point: %s") % item.observationpoint
+					self["feelsliketemp"].text = _("Feels like %s") % item.feelslike + "°" +  self.weatherData.degreetype
+				else:
+					index = weatherData[0]
+					c = time.strptime(item.date,"%Y-%m-%d")
+					self["weekday%s" % index].text = "%s\n%s" % (item.day, time.strftime("%d. %b",c))
+					lowTemp = item.low
+					highTemp = item.high
+					self["weekday%s_temp" % index].text = "%s°%s|%s°%s\n%s" % (highTemp, self.weatherData.degreetype, lowTemp, self.weatherData.degreetype, item.skytextday)
+		
+		if self.weatherPluginEntryIndex == 1 and WeatherMSNComp is not None:
+			WeatherMSNComp.updateWeather(self.weatherData, result, errortext)
 
 	def config(self):
 		self.session.openWithCallback(self.setupFinished, MSNWeatherPluginEntriesListConfigScreen)
@@ -277,10 +242,9 @@ class MSNWeatherPlugin(Screen):
 		self.clearFields()
 		self.startRun()
 
-	def error(self, error = None):
-		if error is not None:
-			self.clearFields()
-			self["statustext"].text = str(error.getErrorMessage())
+	def error(self, errortext):
+		self.clearFields()
+		self["statustext"].text = errortext
 
 	def showWebsite(self):
 		try:
