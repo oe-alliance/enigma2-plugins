@@ -110,6 +110,8 @@ SUBDIRS = \
 	vlcplayer \
 	vps \
 	weatherplugin \
+	weathercomponent \
+	weathercomponenthandler \
 	webadmin \
 	webcamviewer \
 	webbouqueteditor \

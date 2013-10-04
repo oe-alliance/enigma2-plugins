@@ -640,6 +640,13 @@ weatherplugin/meta/Makefile
 weatherplugin/po/Makefile
 weatherplugin/src/Makefile
 
+weathercomponent/Makefile
+weathercomponent/src/Makefile
+
+weathercomponenthandler/Makefile
+weathercomponenthandler/src/Makefile
+
+
 webadmin/Makefile
 webadmin/meta/Makefile
 webadmin/src/Makefile

@@ -1,0 +1,2 @@
+Description: MSNWeather Converter and Renderer to display MSN-Weather in Skin
+Depends: enigma2, enigma2-plugin-extensions-weatherplugin
