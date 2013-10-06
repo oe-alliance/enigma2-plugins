@@ -408,7 +408,7 @@ class AutoTimer:
 					newEntry = rtimer
 					modified += 1
 
-					self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref)
+					self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref, eit)
 					break
 				elif timer.avoidDuplicateDescription >= 1 \
 					and not rtimer.disabled:
@@ -601,12 +601,13 @@ class AutoTimer:
 					timer.extdesc = ''
 				timerdict[str(timer.service_ref)].append(timer)
 
-	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref):
+	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref, eit):
 		timer.name = name
 		timer.description = shortdesc
 		timer.begin = int(begin)
 		timer.end = int(end)
 		timer.service_ref = ServiceReference(serviceref)
+		timer.eit = eit
 
 	def addDirectoryToMovieDict(self, moviedict, dest, serviceHandler):
 		movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
@@ -639,9 +640,8 @@ class AutoTimer:
 		# NOTE: only check extended if short description already is a match because otherwise
 		# it won't evaluate to True anyway
 		if (timer.searchForDuplicateDescription > 0 or force) and foundShort and extdesc1 != extdesc2:
-			if extdesc1 != extdesc2:
-				# Some channels indicate replays in the extended descriptions
-				# If the similarity percent is higher then 0.8 it is a very close match
-				foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+			# Some channels indicate replays in the extended descriptions
+			# If the similarity percent is higher then 0.8 it is a very close match
+			foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
 
 		return foundTitle and foundShort and foundExt
