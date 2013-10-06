@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FanControl2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-28 17:29+0100\n"
-"PO-Revision-Date: 2012-03-30 06:52+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2013-09-26 21:23+0200\n"
+"PO-Revision-Date: 2013-10-06 17:20+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: AndyBlac, Rob van der Does\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -31,6 +31,9 @@ msgstr "3Pin"
 
 msgid "4Pin"
 msgstr "4Pin"
+
+msgid "4Pin (PID)"
+msgstr "4Pin (PID)"
 
 msgid "Action in case of Fan failure"
 msgstr "Actie bij uitval Fan "
@@ -108,8 +111,8 @@ msgstr "Fan Control 2 - Monitor"
 msgid "Fan is not working!"
 msgstr "Fan werkt niet!"
 
-msgid "Fan off in Standby"
-msgstr "Fan uit in Standby"
+msgid "Fan off in Idle Mode"
+msgstr "Fan uit in stand-by"
 
 msgid "Fan type"
 msgstr "Fan type"
@@ -191,6 +194,10 @@ msgstr "Min Fan Stop %d rpm bij VLT=%d en PWM=0 (%s)"
 
 msgid "Number of WebIF-Log-Entries"
 msgstr "Aantal WebIF-Log-Entries"
+
+#, python-format
+msgid "PID Ctl Err %03.2f %%"
+msgstr "PID Ctl Err %03.2f %%"
 
 #, python-format
 msgid "PWM  %03d"
@@ -328,6 +335,9 @@ msgstr "ja"
 
 msgid "yes, Except for Recording or HDD"
 msgstr "ja, behalve voor Opname of HDD"
+
+#~ msgid "Fan off in Standby"
+#~ msgstr "Fan uit in Standby"
 
 #~ msgid "disable System FanControl"
 #~ msgstr "Schakel System ventiliatorcontrole uit"
