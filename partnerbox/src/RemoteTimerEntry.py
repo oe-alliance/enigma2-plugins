@@ -43,7 +43,7 @@ import urllib
 import xml.etree.cElementTree
 from Components.ActionMap import ActionMap
 
-from PartnerboxFunctions import PlaylistEntry, SetPartnerboxTimerlist, sendPartnerBoxWebCommand
+from PartnerboxFunctions import PlaylistEntry, SetPartnerboxTimerlist, sendPartnerBoxWebCommand, getServiceRef
 import PartnerboxFunctions as partnerboxfunctions
 
 # for localized messages
@@ -542,6 +542,8 @@ def RemoteTimerGo(self):
 				"deepstandby": AFTEREVENT.DEEPSTANDBY,
 				"standby": AFTEREVENT.STANDBY,
 				}.get(self.timerentry_afterevent.value, AFTEREVENT.NONE)
+				if service_ref.getPath(): # partnerbox service ?
+					service_ref = getServiceRef(service_ref.ref.toString())
 				sCommand = "%s/web/timeradd?sRef=%s&begin=%d&end=%d&name=%s&description=%s&dirname=%s&eit=0&justplay=%d&afterevent=%s" % (http, service_ref,begin,end,name,descr,dirname,justplay,afterevent)
 				sendPartnerBoxWebCommand(sCommand, None,3, "root", str(self.entryguilist[int(self.timerentry_remote.value)][2].password.value)).addCallback(boundFunction(AddTimerE2Callback,self, self.session)).addErrback(boundFunction(AddTimerError,self,self.session))
 
