@@ -420,7 +420,7 @@ def Plugins(**kwargs):
 		distro = None
 
 	plugin = []
-	if distro in ("openvix", "openaaf", "openmips"):
+	if distro in ("openvix", "openatv"):
 		plugin.append(PluginDescriptor(name=_("Remote Timer"), description = _("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu))
 	else:
 		plugin.append(PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main))
