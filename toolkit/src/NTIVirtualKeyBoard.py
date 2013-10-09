@@ -4,7 +4,7 @@ from Components.ActionMap import NumberActionMap
 
 class NTIVirtualKeyBoard(VirtualKeyBoard, NumericalTextInput):
 	def __init__(self, session, **kwargs):
-		VirtualKeyBoard.__init__(self, session, **kwargs)
+		VirtualKeyBoard.__init__(self, session, text="", **kwargs)
 		NumericalTextInput.__init__(self, nextFunc = self.nextFunc)
 
 		self.skinName = "VirtualKeyBoard"
