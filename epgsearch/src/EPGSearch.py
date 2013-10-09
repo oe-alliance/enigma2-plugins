@@ -64,6 +64,7 @@ class EPGSearchList(EPGList):
 					LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, 'Extensions/EPGSearchicons/epgclock_add.png'))]
 
 	def buildEPGSearchEntry(self, service, eventId, beginTime, duration, EventName):
+		self.wasEntryAutoTimer = None
 		clock_pic = self.getPixmapForEntry(service, eventId, beginTime, duration)
 		clock_pic_partnerbox = None
 		# Partnerbox
@@ -84,7 +85,13 @@ class EPGSearchList(EPGList):
 			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, strftime("%e/%m, %-H:%M", t))
 		]
 		if clock_pic or clock_pic_partnerbox:
-			if clock_pic and clock_pic_partnerbox:
+			if clock_pic and clock_pic_partnerbox and self.wasEntryAutoTimer:
+				res.extend((
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-65, (r3.h/2-11), 21, 21, self.autotimericon),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-43, (r3.h/2-11), 21, 21, self.clocks[clock_pic]),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, self.clocks[clock_pic_partnerbox]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-66, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+			elif clock_pic and clock_pic_partnerbox:
 				# Partnerbox and local
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-43, (r3.h/2-11), 21, 21, self.clocks[clock_pic]),
@@ -95,6 +102,11 @@ class EPGSearchList(EPGList):
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, self.clocks[clock_pic_partnerbox]),
 					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-21, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+			elif self.wasEntryAutoTimer:
+				res.extend((
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-43, (r3.h/2-11), 21, 21, self.autotimericon),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, self.clocks[clock_pic]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-44, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			else:
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, self.clocks[clock_pic]),
