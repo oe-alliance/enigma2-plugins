@@ -46,11 +46,15 @@ class MSNWeather(Converter, object):
 	WINDDISPLAY = 17
 	ICON = 18
 	TEMPERATURE_HEIGH_LOW = 19
+	CODE = 20
+	PATH = 21
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		self.index = None
 		self.mode = None
+		self.path = None
+		self.extension = None
 		if type == "city":
 			self.mode = self.CITY
 		elif type == "observationtime":
@@ -84,8 +88,12 @@ class MSNWeather(Converter, object):
 				self.mode = self.DATE
 			if self.mode is not None:
 				dd = type.split(",")
-				if len(dd) == 2:
+				if len(dd) >= 2:
 					self.index = self.getIndex(dd[1])
+				if self.mode == self.ICON and len(dd) == 4:
+					self.path = dd[2]
+					self.extension = dd[3]
+					
 
 	def getIndex(self, key):
 		if key == "current":
@@ -141,7 +149,10 @@ class MSNWeather(Converter, object):
 	@cached
 	def getIconFilename(self):
 		if self.mode == self.ICON and self.index in (self.CURRENT, self.DAY1, self.DAY2, self.DAY3, self.DAY4, self.DAY5):
-			return self.source.getWeatherIconFilename(self.index)
+			if self.path is not None and self.extension is not None:
+				return self.path + self.source.getCode(self.index) + "." + self.extension
+			else:
+				return self.source.getWeatherIconFilename(self.index)
 		else:
 			return ""
 			

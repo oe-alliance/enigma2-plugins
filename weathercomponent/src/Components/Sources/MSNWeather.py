@@ -162,6 +162,12 @@ class MSNWeather(Source):
 			return weathermsn.weatherData.weatherItems[str(key)].iconFilename
 		else:
 			return ""
+			
+	def getCode(self, key):
+		if weathermsn.weatherData.weatherItems.has_key(str(key)):
+			return weathermsn.weatherData.weatherItems[str(key)].code
+		else:
+			return ""
 
 	def destroy(self):
 		weathermsn.callbacksAllIconsDownloaded.remove(self.callbackAllIconsDownloaded)
