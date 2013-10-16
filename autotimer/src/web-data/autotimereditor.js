@@ -1774,10 +1774,10 @@ function AutoTimer(xml, defaults){
 	} else {
 		after = new Date( after * 1000 )
 	}
-	if (this.before == undefined) {
+	if (before == undefined) {
 		before = new Date();
 	} else {
-		before = new Date( this.before * 1000 )
+		before = new Date( before * 1000 )
 	}
 	this.timeframe = {
 		'usetimeframe' : usetimeframe,
