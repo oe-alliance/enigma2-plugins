@@ -11,7 +11,10 @@ from Components.Pixmap import Pixmap,MultiPixmap
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from enigma import iPlayableService, iServiceInformation, eTimer
 from Plugins.Plugin import PluginDescriptor
-from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
+try:
+	from Components.AVSwitch import iAVSwitch as video_hw
+except:
+	from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
 from Components.Sources.Boolean import Boolean
 
 # for localized messages
