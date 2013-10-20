@@ -1,2 +1,3 @@
 Description: Automatically change resolution 
-Depends: enigma2, enigma2-plugin-systemplugins-videomode
+Depends: enigma2
+Recommends: enigma2-plugin-systemplugins-videomode
