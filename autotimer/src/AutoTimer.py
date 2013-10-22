@@ -69,7 +69,7 @@ def blockingCallFromMainThread(f, *a, **kw):
 	result = None
 	while True:
 		try:
-			result = queue.get(True, 30)
+			result = queue.get(True, config.plugins.autotimer.timeout.value*60)
 		except Queue.Empty as qe:
 			if True: #not reactor.running: # reactor.running is only False AFTER shutdown, we are during.
 				raise ValueError("Reactor no longer active, aborting.")
@@ -403,12 +403,13 @@ class AutoTimer:
 							print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
 							break
 
-						rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name))
+						rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it: %s ." % (timer.name, rtimer.name))
 
 					newEntry = rtimer
 					modified += 1
 
 					self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref, eit)
+					rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
 					break
 				elif timer.avoidDuplicateDescription >= 1 \
 					and not rtimer.disabled:
@@ -602,7 +603,8 @@ class AutoTimer:
 				timerdict[str(timer.service_ref)].append(timer)
 
 	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref, eit):
-		timer.name = name
+		# Don't update the name, it will overwrite the name of the SeriesPlugin
+		#timer.name = name
 		timer.description = shortdesc
 		timer.begin = int(begin)
 		timer.end = int(end)
