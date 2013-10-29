@@ -57,8 +57,47 @@ class AutoMount():
 		mountusing = 0 # 0=old_enigma2, 1 =fstab, 2=enigma2
 		# Config is stored in "mountmanager" element
 		# Read out NFS Mounts
-		for fstab in tree.findall("fstab"):
+		for autofs in tree.findall("autofs"):
 			mountusing = 1
+			for nfs in autofs.findall("nfs"):
+				for mount in nfs.findall("mount"):
+					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					try:
+						data['mountusing'] = 'autofs'.encode("UTF-8")
+						data['mounttype'] = 'nfs'.encode("UTF-8")
+						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
+						if data["active"] == 'True' or data["active"] == True:
+							self.activeMountsCounter +=1
+						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
+						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
+						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
+						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
+						self.automounts[data['sharename']] = data
+					except Exception, e:
+						print "[MountManager] Error reading Mounts:", e
+			for cifs in autofs.findall("cifs"):
+				for mount in cifs.findall("mount"):
+					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
+					try:
+						data['mountusing'] = 'autofs'.encode("UTF-8")
+						data['mounttype'] = 'cifs'.encode("UTF-8")
+						data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
+						if data["active"] == 'True' or data["active"] == True:
+							self.activeMountsCounter +=1
+						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
+						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
+						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
+						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,utf8").encode("UTF-8")
+						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
+						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
+						self.automounts[data['sharename']] = data
+					except Exception, e:
+						print "[MountManager] Error reading Mounts:", e
+
+		for fstab in tree.findall("fstab"):
+			mountusing = 2
 			for nfs in fstab.findall("nfs"):
 				for mount in nfs.findall("mount"):
 					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
@@ -70,7 +109,7 @@ class AutoMount():
 							self.activeMountsCounter +=1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
-						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
+						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
 						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
 						self.automounts[data['sharename']] = data
@@ -87,7 +126,7 @@ class AutoMount():
 							self.activeMountsCounter +=1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
-						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
+						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
 						data['options'] = getValue(mount.findall("options"), "rw,utf8").encode("UTF-8")
 						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
@@ -97,7 +136,7 @@ class AutoMount():
 						print "[MountManager] Error reading Mounts:", e
 
 		for enigma2 in tree.findall("enimga2"):
-			mountusing = 2
+			mountusing = 3
 			for nfs in enigma2.findall("nfs"):
 				for mount in nfs.findall("mount"):
 					data = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
@@ -176,28 +215,16 @@ class AutoMount():
 
 		self.checkList = self.automounts.keys()
 		if not self.checkList:
-			print "[NetworkBrowser] self.automounts without mounts",self.automounts
+			# print "[NetworkBrowser] self.automounts without mounts",self.automounts
 			if callback is not None:
 				callback(True)
 		else:
 			self.CheckMountPoint(self.checkList.pop(), callback)
 
-	def sanitizeOptions(self, origOptions, cifs=False, fstab=False):
+	def sanitizeOptions(self, origOptions, cifs=False, fstab=False, autofs=False):
 		options = origOptions.strip()
-		if not fstab:
-			if not options:
-				options = 'rw,rsize=8192,wsize=8192'
-				if not cifs:
-					options += ',proto=tcp'
-			else:
-				if not cifs:
-					if 'rsize' not in options:
-						options += ',rsize=8192'
-					if 'wsize' not in options:
-						options += ',wsize=8192'
-					if not cifs and 'tcp' not in options and 'udp' not in options:
-						options += ',tcp'
-		else:
+		options = options.replace('utf8','iocharset=utf8')
+		if fstab:
 			if not options:
 				options = 'rw'
 				if not cifs:
@@ -212,39 +239,65 @@ class AutoMount():
 					if 'tcp' not in options and 'udp' not in options:
 						options += ',tcp'
 					options = options + ',timeo=14,fg,soft,intr'
-		options = options.replace('tcp','proto=tcp')
-		options = options.replace('udp','proto=udp')
-		options = options.replace('utf8','iocharset=utf8')
+		elif autofs:
+			if not options:
+				options = 'rw'
+				if not cifs:
+					options += ',rsize=8192,wsize=8192'
+			else:
+				if not cifs:
+					if 'rsize' not in options:
+						options += ',rsize=8192'
+					if 'wsize' not in options:
+						options += ',wsize=8192'
+					if 'tcp' not in options and 'udp' not in options:
+						options += ',tcp'
+					options = options + ',soft,'
+		else:
+			if not options:
+				options = 'rw,rsize=8192,wsize=8192'
+				if not cifs:
+					options += ',proto=tcp'
+			else:
+				if not cifs:
+					if 'rsize' not in options:
+						options += ',rsize=8192'
+					if 'wsize' not in options:
+						options += ',wsize=8192'
+					if not cifs and 'tcp' not in options and 'udp' not in options:
+						options += ',tcp'
 		return options
 
 	def CheckMountPoint(self, item, callback):
 		data = self.automounts[item]
 		if not self.MountConsole:
 			self.MountConsole = Console()
-		self.command = []
-		self.mountcommand = None
-		self.unmountcommand = None
+		command = [ ]
+		mountcommand = None
+		unmountcommand = None
 		if data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True:
 			path = os.path.join('/media/hdd')
 			sharepath = os.path.join('/media/net', data['sharename'])
 		else:
 			path = os.path.join('/media/net', data['sharename'])
 			sharepath = ""
+		autofsstop = None
+		if data['mountusing'] == 'autofs':
+			autofsstop = "/etc/init.d/autofs stop"
 		if os.path.ismount(path):
-# 			print '[NetworkBowser] Unmounting:',path
-			self.unmountcommand = 'umount -fl '+ path
+			unmountcommand = 'umount -fl '+ path
 		if sharepath and os.path.ismount(sharepath):
-# 			print '[NetworkBowser] Unmounting:',sharepath
-			self.unmountcommand = self.unmountcommand + ' && umount -fl '+ sharepath
+			unmountcommand = unmountcommand + ' && umount -fl '+ sharepath
 		if self.activeMountsCounter != 0:
 			if data['active'] == 'True' or data['active'] is True:
-# 				try:
-				if data['mountusing'] == 'fstab':
+				if data['mountusing'] == 'autofs':
+					mountcommand = "/etc/init.d/autofs start"
+				elif data['mountusing'] == 'fstab':
 					if data['mounttype'] == 'nfs':
 						tmpcmd = 'mount ' + data['ip'] + ':/' + data['sharedir']
 					elif data['mounttype'] == 'cifs':
 						tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
-					self.mountcommand = tmpcmd.encode("UTF-8")
+					mountcommand = tmpcmd.encode("UTF-8")
 				elif data['mountusing'] == 'enigma2' or data['mountusing'] == 'old_enigma2':
 					tmpsharedir = data['sharedir'].replace(" ", "\\ ")
 					if tmpsharedir[-1:] == "$":
@@ -253,34 +306,35 @@ class AutoMount():
 					if data['mounttype'] == 'nfs':
 						if not os.path.ismount(path):
 							tmpcmd = 'mount -t nfs -o ' + self.sanitizeOptions(data['options']) + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
-							print 'MOUNT CMD',tmpcmd
-							self.mountcommand = tmpcmd.encode("UTF-8")
+							mountcommand = tmpcmd.encode("UTF-8")
 					elif data['mounttype'] == 'cifs':
 						if not os.path.ismount(path):
 							tmpusername = data['username'].replace(" ", "\\ ")
 							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',noatime,noserverino,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
-							self.mountcommand = tmpcmd.encode("UTF-8")
-# 				except Exception, ex:
-# 					print "[NetworkBrowser] Failed to create", path, "Error:", ex
-# 					self.command = None
+							mountcommand = tmpcmd.encode("UTF-8")
 
-		if self.unmountcommand is not None or self.mountcommand is not None:
-			if self.unmountcommand is not None:
-				self.command.append(self.unmountcommand)
-			if self.mountcommand is not None:
-				if not os.path.exists(path):
-					self.command.append('mkdir -p ' + path)
-				self.command.append(self.mountcommand)
-			self.MountConsole.eBatch(self.command, self.CheckMountPointFinished, [data, callback],debug=True)
+		if unmountcommand is not None or mountcommand is not None:
+			if unmountcommand is not None:
+				command.append(unmountcommand)
+			if autofsstop is not None:
+				command.append(autofsstop)
+			if not os.path.exists(path) and data['mountusing'] != 'autofs':
+				command.append('mkdir -p ' + path)
+			if mountcommand is not None:
+				command.append(mountcommand)
+			self.MountConsole.eBatch(command, self.CheckMountPointFinished, [data, callback], debug=True)
 		else:
 			self.CheckMountPointFinished([data, callback])
 
 	def CheckMountPointFinished(self, extra_args):
 # 		print "[NetworkBrowser] CheckMountPointFinished"
 		(data, callback ) = extra_args
-		if data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True:
-			path = os.path.join('/media/hdd')
+		if data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True and data['mountusing'] != 'autofs':
+			path = '/media/hdd'
 			sharepath = os.path.join('/media/net', data['sharename'])
+		elif data['mountusing'] == 'autofs':
+			path = os.path.join('/media/autofs', data['sharename'])
+			sharepath = ""
 		else:
 			path = os.path.join('/media/net', data['sharename'])
 			sharepath = ""
@@ -290,6 +344,18 @@ class AutoMount():
 					self.automounts[data['sharename']]['isMounted'] = True
 					desc = data['sharename']
 					harddiskmanager.addMountedPartition(path, desc)
+			elif data['mountusing'] == 'autofs':
+				if self.automounts.has_key(data['sharename']):
+					self.automounts[data['sharename']]['isMounted'] = True
+					desc = data['sharename']
+					harddiskmanager.addMountedPartition(path, desc)
+				if data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True:
+					hdd_dir = '/media/hdd'
+					if os.path.islink(hdd_dir):
+						if os.readlink(hdd_dir) != path:
+							os.unlin(hdd_dir)
+							os.symlink(path, hdd_dir)
+
 			else:
 				if self.automounts.has_key(data['sharename']):
 					self.automounts[data['sharename']]['isMounted'] = False
@@ -343,17 +409,52 @@ class AutoMount():
 			else:
 				path = os.path.join('/media/net', sharedata['sharename'])
 				sharepath = ""
-			if sharedata['mountusing'] == 'fstab':
-				if sharedata['mounttype'] == 'nfs':
-					sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir']
-				elif sharedata['mounttype'] == 'cifs':
-					sharetemp = '//' + sharedata['ip'] + '/' + sharedata['sharedir']
-				tmpfile = open('/etc/fstab.tmp', 'w')
+
+			sharetemp = None
+			if sharedata['mounttype'] == 'nfs':
+				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir']
+			elif sharedata['mounttype'] == 'cifs':
+				sharetemp = '//' + sharedata['ip'] + '/' + sharedata['sharedir']
+			if sharetemp:
+				autofstmpfile = open('/etc/auto.network.tmp', 'w')
+				file = open('/etc/auto.network')
+				autofstmpfile.writelines([l for l in file.readlines() if sharetemp+'\n' and sharedata['sharename'] not in l.split(' ')])
+				autofstmpfile.close()
+				file.close()
+				os.rename('/etc/auto.network.tmp','/etc/auto.network')
+				fstabtmpfile = open('/etc/fstab.tmp', 'w')
 				file = open('/etc/fstab')
-				tmpfile.writelines([l for l in file.readlines() if sharetemp not in l.split('\t')])
-				tmpfile.close()
+				fstabtmpfile.writelines([l for l in file.readlines() if sharetemp not in l.split('\t')])
+				fstabtmpfile.close()
 				file.close()
 				os.rename('/etc/fstab.tmp','/etc/fstab')
+
+			if sharedata['mountusing'] == 'autofs':
+				mtype = sharedata['mounttype']
+				list.append('<autofs>\n')
+				list.append(' <' + mtype + '>\n')
+				list.append('  <mount>\n')
+				list.append('   <active>' + str(sharedata['active']) + '</active>\n')
+				list.append('   <hdd_replacement>' + str(sharedata['hdd_replacement']) + '</hdd_replacement>\n')
+				list.append('   <ip>' + sharedata['ip'] + '</ip>\n')
+				list.append('   <sharename>' + sharedata['sharename'] + '</sharename>\n')
+				list.append('   <sharedir>' + sharedata['sharedir'] + '</sharedir>\n')
+				list.append('   <options>' + sharedata['options'] + '</options>\n')
+				if sharedata['mounttype'] == 'cifs':
+					list.append("   <username>" + sharedata['username'] + "</username>\n")
+					list.append("   <password>" + sharedata['password'] + "</password>\n")
+				list.append('  </mount>\n')
+				list.append(' </' + mtype + '>\n')
+				list.append('</autofs>\n')
+				if sharedata['active'] == True or sharedata['active'] == 'True':
+					out = open('/etc/auto.network', 'a')
+					if sharedata['mounttype'] == 'nfs':
+						line = sharedata['sharename'] + ' -fstype=' + sharedata['mounttype'] + ',' + self.sanitizeOptions(sharedata['options'], autofs=True) + ' ' + sharedata['ip'] + ':/' + sharedata['sharedir'] + '\n'
+					elif sharedata['mounttype'] == 'cifs':
+						line = sharedata['sharename'] + ' -fstype=' + sharedata['mounttype'] + ',username=' + sharedata['username'] + ',password=' + sharedata['password'] +','+ self.sanitizeOptions(sharedata['options'], autofs=True) + ' ://' + sharedata['ip'] + '/' + sharedata['sharedir'] + '\n'
+					out.write(line)
+					out.close()
+			elif sharedata['mountusing'] == 'fstab':
 				mtype = sharedata['mounttype']
 				list.append('<fstab>\n')
 				list.append(' <' + mtype + '>\n')
@@ -370,7 +471,7 @@ class AutoMount():
 				list.append('  </mount>\n')
 				list.append(' </' + mtype + '>\n')
 				list.append('</fstab>\n')
-				if sharedata['active']:
+				if sharedata['active'] == True or sharedata['active'] == 'True':
 					out = open('/etc/fstab', 'a')
 					if sharedata['mounttype'] == 'nfs':
 						line = sharedata['ip'] + ':/' + sharedata['sharedir'] + '\t' + path + '\tnfs\t_netdev,' + self.sanitizeOptions(sharedata['options'], fstab=True) + '\t0 0\n'
@@ -419,6 +520,7 @@ class AutoMount():
 			f = open(XML_FSTAB, "w")
 			f.writelines(list)
 			f.close()
+			# print "[NetworkBrowser] Saving Mounts List:"
 		except Exception, e:
 			print "[NetworkBrowser] Error Saving Mounts List:", e
 
@@ -439,11 +541,21 @@ class AutoMount():
 				sharepath = ""
 			if sharename is not mountpoint.strip():
 				self.newautomounts[sharename] = sharedata
-			if sharedata['mountusing'] == 'fstab':
-				tmpfile = open('/etc/fstab.tmp', 'w')
+			if sharedata['mounttype'] == 'nfs':
+				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir']
+			elif sharedata['mounttype'] == 'cifs':
+				sharetemp = '//' + sharedata['ip'] + '/' + sharedata['sharedir']
+			if sharetemp:
+				autofstmpfile = open('/etc/auto.network.tmp', 'w')
+				file = open('/etc/auto.network')
+				autofstmpfile.writelines([l for l in file.readlines() if sharetemp+'\n' and sharedata['sharename'] not in l.split(' ')])
+				autofstmpfile.close()
+				file.close()
+				os.rename('/etc/auto.network.tmp','/etc/auto.network')
+				fstabtmpfile = open('/etc/fstab.tmp', 'w')
 				file = open('/etc/fstab')
-				tmpfile.writelines([l for l in file.readlines() if sharedata['sharedir'] not in l])
-				tmpfile.close()
+				fstabtmpfile.writelines([l for l in file.readlines() if sharetemp not in l.split('\t')])
+				fstabtmpfile.close()
 				file.close()
 				os.rename('/etc/fstab.tmp','/etc/fstab')
 		self.automounts.clear()
