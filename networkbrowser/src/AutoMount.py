@@ -37,7 +37,7 @@ class AutoMount():
 
 		self.getAutoMountPoints()
 
-	def getAutoMountPoints(self, callback = None):
+	def getAutoMountPoints(self, callback = None, restart=False):
 		# Initialize mounts to empty list
 		automounts = []
 		self.automounts = {}
@@ -219,7 +219,7 @@ class AutoMount():
 			if callback is not None:
 				callback(True)
 		else:
-			self.CheckMountPoint(self.checkList.pop(), callback)
+			self.CheckMountPoint(self.checkList.pop(), callback, restart)
 
 	def sanitizeOptions(self, origOptions, cifs=False, fstab=False, autofs=False):
 		options = origOptions.strip()
@@ -268,7 +268,7 @@ class AutoMount():
 						options += ',tcp'
 		return options
 
-	def CheckMountPoint(self, item, callback):
+	def CheckMountPoint(self, item, callback, restart):
 		data = self.automounts[item]
 		if not self.MountConsole:
 			self.MountConsole = Console()
@@ -282,7 +282,7 @@ class AutoMount():
 			path = os.path.join('/media/net', data['sharename'])
 			sharepath = ""
 		autofsstop = None
-		if data['mountusing'] == 'autofs':
+		if data['mountusing'] == 'autofs' and restart:
 			autofsstop = "/etc/init.d/autofs stop"
 		if os.path.ismount(path):
 			unmountcommand = 'umount -fl '+ path
@@ -290,7 +290,7 @@ class AutoMount():
 			unmountcommand = unmountcommand + ' && umount -fl '+ sharepath
 		if self.activeMountsCounter != 0:
 			if data['active'] == 'True' or data['active'] is True:
-				if data['mountusing'] == 'autofs':
+				if data['mountusing'] == 'autofs' and restart:
 					mountcommand = "/etc/init.d/autofs start"
 				elif data['mountusing'] == 'fstab':
 					if data['mounttype'] == 'nfs':
@@ -322,13 +322,13 @@ class AutoMount():
 				command.append('mkdir -p ' + path)
 			if mountcommand is not None:
 				command.append(mountcommand)
-			self.MountConsole.eBatch(command, self.CheckMountPointFinished, [data, callback], debug=True)
+			self.MountConsole.eBatch(command, self.CheckMountPointFinished, [data, callback, restart], debug=True)
 		else:
-			self.CheckMountPointFinished([data, callback])
+			self.CheckMountPointFinished([data, callback, restart])
 
 	def CheckMountPointFinished(self, extra_args):
 # 		print "[NetworkBrowser] CheckMountPointFinished"
-		(data, callback ) = extra_args
+		(data, callback, restart) = extra_args
 		if data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True and data['mountusing'] != 'autofs':
 			path = '/media/hdd'
 			sharepath = os.path.join('/media/net', data['sharename'])
@@ -355,7 +355,6 @@ class AutoMount():
 						if os.readlink(hdd_dir) != path:
 							os.unlin(hdd_dir)
 							os.symlink(path, hdd_dir)
-
 			else:
 				if self.automounts.has_key(data['sharename']):
 					self.automounts[data['sharename']]['isMounted'] = False
@@ -368,7 +367,7 @@ class AutoMount():
 							print "Failed to remove", path, "Error:", ex
 		if self.checkList:
 			# Go to next item in list...
-			self.CheckMountPoint(self.checkList.pop(), callback)
+			self.CheckMountPoint(self.checkList.pop(), callback, restart)
 		if self.MountConsole:
 			if len(self.MountConsole.appContainers) == 0:
 				if callback is not None:

@@ -354,7 +354,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			self.updateConfigRef = None
 			self.updateConfigRef = self.session.openWithCallback(self.updateConfigfinishedCB, MessageBox, _("Please wait while updating your network mount..."), type = MessageBox.TYPE_INFO, enable_input = False)
 			iAutoMount.writeMountsConfig()
-			iAutoMount.getAutoMountPoints(self.updateConfigDataAvail)
+			iAutoMount.getAutoMountPoints(self.updateConfigDataAvail, True)
 		else:
 			self.close()
 
@@ -393,7 +393,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait for activation of your network mount..."), type = MessageBox.TYPE_INFO, enable_input = False)
 			iAutoMount.automounts[self.sharenameConfigEntry.value] = data
 			iAutoMount.writeMountsConfig()
-			iAutoMount.getAutoMountPoints(self.applyConfigDataAvail)
+			iAutoMount.getAutoMountPoints(self.applyConfigDataAvail, True)
 		else:
 			self.close()
 
