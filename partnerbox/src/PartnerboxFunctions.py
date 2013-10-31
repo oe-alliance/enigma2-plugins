@@ -61,8 +61,9 @@ def isInTimerList(begin, duration, service, eventid, timer_list):
 	chktimecmp_end = None
 	end = begin + duration
 	timerentry = None
+	serviceref = getServiceRef(service)
 	for x in timer_list:
-		if x.servicereference.upper() == service.upper():
+		if x.servicereference.upper() == serviceref.upper():
 			if x.repeated != 0:
 				if chktime is None:
 					chktime = localtime(begin)
@@ -86,7 +87,7 @@ def isInTimerList(begin, duration, service, eventid, timer_list):
 					if time_match < diff:
 						time_match = diff
 			if time_match:
-				if getTimerType(service, begin, duration, eventid, timer_list):
+				if getTimerType(serviceref, begin, duration, eventid, timer_list):
 					timerentry = x
 				break
 	return timerentry
@@ -121,6 +122,10 @@ def FillE2TimerList(xmlstring, sreference = None):
 	E2TimerList = []
 	try: root = xml.etree.cElementTree.fromstring(xmlstring)
 	except: return E2TimerList
+	if sreference is None:
+		serviceref = None
+	else:
+		serviceref = getServiceRef(sreference)
 	for timer in root.findall("e2timer"):
 		go = False
 		state = 0
@@ -130,10 +135,10 @@ def FillE2TimerList(xmlstring, sreference = None):
 		try: disabled = int(timer.findtext("e2disabled", 0))
 		except: disabled = 0
 		servicereference = str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore'))
-		if sreference is None:
+		if serviceref is None:
 			go = True
 		else:
-			if sreference.upper() == servicereference.upper() and state != TimerEntry.StateEnded and not disabled:
+			if serviceref.upper() == servicereference.upper() and state != TimerEntry.StateEnded and not disabled:
 				go = True
 		if go:
 			timebegin = 0
@@ -288,3 +293,10 @@ def SetPartnerboxTimerlist(partnerboxentry = None, sreference = None):
 		else:
 			remote_timer_list = FillE1TimerList(sxml, sreference)
 	except: pass
+
+def getServiceRef(sreference):
+	serviceref = sreference
+	hindex = sreference.find("http")
+	if hindex > 0: # partnerbox service ?
+		serviceref =  serviceref[:hindex]
+	return serviceref

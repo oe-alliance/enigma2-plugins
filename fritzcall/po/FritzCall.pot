@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-07 13:11+0200\n"
+"POT-Creation-Date: 2013-09-30 10:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,9 +78,6 @@ msgid "Cannot get calls from FRITZ!Box"
 msgstr ""
 
 msgid "Cannot get infos from FRITZ!Box yet; try later"
-msgstr ""
-
-msgid "Compact Flash"
 msgstr ""
 
 msgid "Connected since"
@@ -270,9 +267,6 @@ msgstr ""
 msgid "Filter also list of calls"
 msgstr ""
 
-msgid "Flash"
-msgstr ""
-
 #, python-format
 msgid ""
 "Found picture\n"
@@ -337,9 +331,6 @@ msgstr ""
 msgid "Mailbox"
 msgstr ""
 
-msgid "Media directory"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr ""
@@ -351,9 +342,6 @@ msgid "Mute on call"
 msgstr ""
 
 msgid "Name"
-msgstr ""
-
-msgid "Network mount"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -431,7 +419,7 @@ msgstr ""
 msgid "Phone calls"
 msgstr ""
 
-msgid "PhoneBook Location"
+msgid "PhoneBook and Faces Location"
 msgstr ""
 
 #. TRANSLATORS: this is a window title.
@@ -564,9 +552,6 @@ msgid "Toggle all mailboxes"
 msgstr ""
 
 msgid "UNKNOWN"
-msgstr ""
-
-msgid "USB Device"
 msgstr ""
 
 msgid "Use internal PhoneBook"

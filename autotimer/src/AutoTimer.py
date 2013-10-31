@@ -523,10 +523,11 @@ class AutoTimer:
 							if config.plugins.autotimer.refresh.getValue() != "all":
 								print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
 								break
-							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name))
+							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it: %s ." % (timer.name, rtimer.name))
 						newEntry = rtimer
 						modified += 1
-						self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref)
+						self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref, eit)
+						rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
 						break
 					else:
 						print ("[AutoTimer] Skipping timer because it has not changed.")
@@ -701,12 +702,14 @@ class AutoTimer:
 					timer.extdesc = ''
 				timerdict[str(timer.service_ref)].append(timer)
 
-	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref):
-		timer.name = name
+	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref, eit):
+		# Don't update the name, it will overwrite the name of the SeriesPlugin
+		#timer.name = name
 		timer.description = shortdesc
 		timer.begin = int(begin)
 		timer.end = int(end)
 		timer.service_ref = ServiceReference(serviceref)
+		timer.eit = eit
 
 	def addDirectoryToMovieDict(self, moviedict, dest, serviceHandler):
 		movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))

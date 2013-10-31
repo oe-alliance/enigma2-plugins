@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-07 13:11+0200\n"
+"POT-Creation-Date: 2013-09-30 10:37+0200\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -80,9 +80,6 @@ msgid "Cannot get calls from FRITZ!Box"
 msgstr ""
 
 msgid "Cannot get infos from FRITZ!Box yet; try later"
-msgstr ""
-
-msgid "Compact Flash"
 msgstr ""
 
 msgid "Connected since"
@@ -283,9 +280,6 @@ msgstr ""
 msgid "Filter also list of calls"
 msgstr ""
 
-msgid "Flash"
-msgstr "Fleš"
-
 #, python-format
 msgid ""
 "Found picture\n"
@@ -350,9 +344,6 @@ msgstr "Pokazati MSN (odvojen sa  ,)"
 msgid "Mailbox"
 msgstr "Poštansko sanduče"
 
-msgid "Media directory"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Propušten"
@@ -365,9 +356,6 @@ msgstr "Priguši kod poziva"
 
 msgid "Name"
 msgstr "Ime"
-
-msgid "Network mount"
-msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -444,8 +432,8 @@ msgstr "Lozinka za pristup FRITZ!Box-u"
 msgid "Phone calls"
 msgstr "Telefonski pozivi"
 
-msgid "PhoneBook Location"
-msgstr "Lokacija tel. imenika"
+msgid "PhoneBook and Faces Location"
+msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -579,9 +567,6 @@ msgstr "Prebaci sve pošt. sand."
 msgid "UNKNOWN"
 msgstr "NEPOZNATO"
 
-msgid "USB Device"
-msgstr ""
-
 msgid "Use internal PhoneBook"
 msgstr "Koristi interni tel. imenik"
 
@@ -705,6 +690,9 @@ msgstr ""
 #~ msgid "CF Drive"
 #~ msgstr "CF Laufwerk"
 
+#~ msgid "Flash"
+#~ msgstr "Fleš"
+
 #~ msgid "Full screen display"
 #~ msgstr "Prikaži ceo ekran"
 
@@ -740,6 +728,9 @@ msgstr ""
 #~ "%(caller)s\n"
 #~ "---------------------------------------------\n"
 #~ "od: %(phone)s"
+
+#~ msgid "PhoneBook Location"
+#~ msgstr "Lokacija tel. imenika"
 
 #~ msgid "Show Calls for specific MSN"
 #~ msgstr "Pokaži pozive za spec. MSN"

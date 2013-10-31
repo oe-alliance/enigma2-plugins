@@ -711,6 +711,13 @@ weatherplugin/po/Makefile
 weatherplugin/src/Makefile
 weatherplugin/src/icons/Makefile
 
+weathercomponent/Makefile
+weathercomponent/src/Makefile
+
+weathercomponenthandler/Makefile
+weathercomponenthandler/src/Makefile
+
+
 webadmin/Makefile
 webadmin/meta/Makefile
 webadmin/src/Makefile

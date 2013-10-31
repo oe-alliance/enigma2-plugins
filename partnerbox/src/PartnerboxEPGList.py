@@ -26,6 +26,7 @@ from time import localtime, strftime
 
 from Tools.LoadPixmap import LoadPixmap
 import PartnerboxFunctions as partnerboxfunctions
+from PartnerboxFunctions import getServiceRef
 
 baseEPGList__init__ = None
 basebuildSingleEntry = None
@@ -192,8 +193,9 @@ def isInRemoteTimer(self, begin, duration, service):
 	chktimecmp = None
 	chktimecmp_end = None
 	end = begin + duration
+	serviceref = getServiceRef(service)
 	for x in partnerboxfunctions.remote_timer_list:
-		if x.servicereference.upper() == service.upper():
+		if x.servicereference.upper() == serviceref.upper():
 			if x.repeated != 0:
 				if chktime is None:
 					chktime = localtime(begin)
@@ -222,12 +224,13 @@ def isInRemoteTimer(self, begin, duration, service):
 
 
 def getRemoteClockPixmap(self, refstr, beginTime, duration, eventId):
+	serviceref = getServiceRef(refstr)
 	pre_clock = 1
 	post_clock = 2
 	clock_type = 0
 	endTime = beginTime + duration
 	for x in partnerboxfunctions.remote_timer_list:
-		if x.servicereference.upper() == refstr.upper():
+		if x.servicereference.upper() == serviceref.upper():
 			if x.eventId == eventId:
 				return self.remote_clock_pixmap
 			beg = x.timebegin

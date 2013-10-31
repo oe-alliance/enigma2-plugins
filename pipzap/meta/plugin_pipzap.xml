@@ -3,6 +3,8 @@
 		  <hardware type="dm8000" />
 		  <hardware type="dm7025" />
 		  <hardware type="dm7020hd" />
+		  <hardware type="dm800sev2" />
+		  <hardware type="dm500hdv2" />
 		  <tag type="System" />
 	  </prerequisites>
           <info>
