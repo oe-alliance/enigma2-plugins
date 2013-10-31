@@ -8,8 +8,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Polish\n"
-"X-Poedit-Country: POLAND\n"
+"Language: pl_PL\n"
+"X-Generator: Poedit 1.5.7\n"
 
 msgid "%s   %02d C"
 msgstr "%s   %02d C"
@@ -39,7 +39,7 @@ msgid "Box Shutdown"
 msgstr "Wyłączyć DM "
 
 msgid "Box has no fancontrol hardware -> FC2 deactivated"
-msgstr "w DM nie ma wentylatora -> FC2 wyłączone"
+msgstr "w DM nie ma wentylatora -> F.C.2 wyłączony"
 
 msgid "Box shutdown at Temperature (C)"
 msgstr "Zamknij DM w temperaturze (C)"
@@ -54,7 +54,7 @@ msgid "Choose path"
 msgstr "Wybierz ścieżkę"
 
 msgid "Control disabled"
-msgstr "Wyłączyć kontrolę"
+msgstr "Wyłączyć kontrolę ? "
 
 msgid "Current rpm  %4d"
 msgstr "Aktualny rpm  % 4d"
@@ -81,16 +81,16 @@ msgid "Enable Event Logging"
 msgstr "Włącz rejestrowanie zdarzeń"
 
 msgid "End temperature C"
-msgstr "Końcowa-temp.C"
+msgstr "Końcowa-Temp.C"
 
 msgid "Extended Control Range"
 msgstr "Wzbogacona oferta sterowania"
 
 msgid "Fan is not working!"
-msgstr "Wentylator nie pracuje!"
+msgstr "Wentyl. nie pracuje!"
 
 msgid "Fan off in Idle Mode"
-msgstr "Wentylator w trybie czuwania"
+msgstr "Wył.wentyl. w trybie czuwania?"
 
 msgid "Fan type"
 msgstr "Typ wentylatora"
@@ -166,7 +166,7 @@ msgid "PWM  %03d"
 msgstr "PWM  %03d"
 
 msgid "Restart GUI now?"
-msgstr "Wznowić GUI teraz?"
+msgstr "Restart GUI teraz?"
 
 msgid "Save"
 msgstr "Zapisz"
@@ -187,7 +187,7 @@ msgid "Speed"
 msgstr "Szybkość "
 
 msgid "Static temp C"
-msgstr "Temp. statyczna C"
+msgstr "Średnia Temp. C"
 
 msgid "Target rpm  %4d"
 msgstr "Docelowo rpm  %4d"
@@ -241,10 +241,10 @@ msgid "left of the Battery"
 msgstr "lewa strona koło baterii"
 
 msgid "max Speed rpm"
-msgstr "Max szybkość  rpm"
+msgstr "Max.Szybkość  rpm"
 
 msgid "min Speed rpm"
-msgstr "Min szybkość  rpm"
+msgstr "Min.Szybkość  rpm"
 
 msgid "near XILINX Spartan"
 msgstr "blisko XILINX Spartan"
@@ -292,5 +292,4 @@ msgid "yes"
 msgstr "tak"
 
 msgid "yes, Except for Recording or HDD"
-msgstr "tak, z wyjątkiem nagrywania na HDD"
-
+msgstr "tak,z wyjątkiem nagrywania na HDD"
