@@ -739,19 +739,19 @@ class AutoTimer:
 		foundTitle = name1 == name2
 		foundShort = False
 		foundExt = False
-		if (timer.searchForDuplicateDescription > 0 or force):
+		if timer.searchForDuplicateDescription > 0 or force:
 			if shortdesc1 and shortdesc2:
 				# SkyUK does not use extended description, so try to find a close match to short description.
 				# If the similarity percent is higher then 0.8 it is a very close match
-				foundShort = ( 0.8 < SequenceMatcher(lambda x: x == " ",shortdesc1, shortdesc2).ratio() )
+				foundShort = ( 0.7 < SequenceMatcher(lambda x: x == " ",shortdesc1, shortdesc2).ratio() )
 
 			# NOTE: only check extended if short description already is a match because otherwise
 			# it won't evaluate to True anyway
-			if foundShort and extdesc1 and extdesc2:
+			if extdesc1 and extdesc2:
 				# Some channels indicate replays in the extended descriptions
 				# If the similarity percent is higher then 0.8 it is a very close match
-				foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
-		return foundTitle and foundShort and foundExt
+				foundExt = ( 0.7 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+		return foundTitle and (foundShort or foundExt)
 
 	def checkDoubleTimers(self, timer, name1, name2, starttime1, starttime2, endtime1, endtime2):
 		foundTitle = name1 == name2
