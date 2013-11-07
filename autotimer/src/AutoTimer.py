@@ -179,7 +179,7 @@ class AutoTimer:
 		self.timers.append(timer)
 
 	def getEnabledTimerList(self):
-		return (x for x in self.timers if x.enabled)
+		return sorted([x for x in self.timers if x.enabled], key=lambda x: x.name)
 
 	def getTimerList(self):
 		return self.timers
@@ -287,7 +287,7 @@ class AutoTimer:
 			self.timer_count += 1
 
 		if timer:
-			task = Components.Task.PythonTask(job, timer.name)
+			task = Components.Task.PythonTask(job, 'Show results')
 			task.work = self.JobMessage
 			task.weighting = 1
 		
