@@ -404,7 +404,7 @@ class HTTPAuthResource(HTTPRootResource):
 		self.unauthorizedResource = resource.ErrorPage(http.UNAUTHORIZED, "Access denied", "Authentication credentials invalid!")
 
 	def unauthorized(self, request):
-		request.setHeader('WWW-authenticate', 'basic realm="%s"' % self.realm)
+		request.setHeader('WWW-authenticate', 'Basic realm="%s"' % self.realm)
 		request.setResponseCode(http.UNAUTHORIZED)
 		return self.unauthorizedResource
 
