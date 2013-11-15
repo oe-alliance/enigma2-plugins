@@ -163,7 +163,7 @@ config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices = [("false", _(
 config.plugins.FanControl.MonitorInExtension = ConfigYesNo(default = True)
 config.plugins.FanControl.FanControlInExtension = ConfigYesNo(default = True)
 config.plugins.FanControl.Multi = ConfigSelection(choices = [("1", "RPM"), ("2", "RPM/2")], default = "2")
-config.plugins.FanControl.EnableThread = ConfigYesNo(default = False)
+config.plugins.FanControl.EnableThread = ConfigYesNo(default = True)
 
 def GetFanRPM():
 	global RPMread
