@@ -944,6 +944,7 @@ class FanControl2(Screen):
 		self.dontshutdown = False
 		self.Recording  = False
 		self.inStandby  = False
+		self.HDDidle    = True
 		# RPM PI controller initialization - later
 		self.RPMController.timer_delay = 10.0
 		self.RPMController.dt = 10.0
