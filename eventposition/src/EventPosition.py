@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# EvenPosition - Converter
+# EventPosition - Converter
 #
 # Coded by Dr.Best (c) 2013
 # Support: www.dreambox-tools.info
