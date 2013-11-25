@@ -50,10 +50,7 @@ class EventPosition(Poll, Converter, object):
 		event = self.source.event
 		if event is None:
 			return None
-		start_time = event.getBeginTime()
-		duration = event.getDuration()
-		end_time = start_time + duration
-		return duration
+		return event.getDuration()
 
 	@cached
 	def getCutlist(self):
