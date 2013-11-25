@@ -35,6 +35,7 @@ SUBDIRS = \
 	epgsearch \
 	eurotictv \
 	eventlist \
+	eventposition \
 	fancontrol2 \
 	filebrowser \
 	flashexpander \
