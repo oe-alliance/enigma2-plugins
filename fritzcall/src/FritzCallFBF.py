@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 808 $
-$Date: 2013-09-29 18:19:57 +0200 (Sun, 29 Sep 2013) $
-$Id: FritzCallFBF.py 808 2013-09-29 16:19:57Z michael $
+$Revision: 821 $
+$Date: 2013-11-28 10:24:55 +0100 (Do, 28 Nov 2013) $
+$Id: FritzCallFBF.py 821 2013-11-28 09:24:55Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -1355,7 +1355,7 @@ class FritzCallFBF_05_50:
 			entrymask = re.compile('<td class="tname" title="([^"]*)">[^<]*</td><td class="tnum">([^<]+(?:<br>[^<]+)*)</td><td class="ttype">([^<]+(?:<br>[^<]+)*)</td><td class="tcode">([^<]*(?:<br>[^<]*)*)</td><td class="tvanity">([^<]*(?:<br>[^<]*)*)</td>', re.S)
 			entries = entrymask.finditer(html)
 			for found in entries:
-				# debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: processing entry for '''%s'''" % repr(found.groups()))
+				debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: processing entry for '''%s'''" % repr(found.groups()))
 				name = html2unicode(re.sub(",", "", found.group(1)))
 				thisnumbers = found.group(2).split("<br>")
 				thistypes = found.group(3).split("<br>")
@@ -1371,9 +1371,9 @@ class FritzCallFBF_05_50:
 						debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Ignoring entry with empty number for '''%s'''" % (__(name)))
 						continue
 					else:
-						thisname = name
+						thisname = name.decode('utf-8')
 						if config.plugins.FritzCall.showType.value and thistypes[i]:
-							thisname = thisname + " (" + thistypes[i] + ")"
+							thisname = thisname + " (" + thistypes[i].decode('utf-8') + ")"
 						if config.plugins.FritzCall.showShortcut.value and thiscodes[i]:
 							thisname = thisname + ", " + _("Shortcut") + ": " + thiscodes[i]
 						if config.plugins.FritzCall.showVanity.value and thisvanitys[i]:
@@ -1381,7 +1381,7 @@ class FritzCallFBF_05_50:
 	
 						# debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
-						self.phonebook.phonebook[thisnumber] = thisname
+						self.phonebook.phonebook[thisnumber] = thisname.encode('utf-8')
 		else:
 			self._notify(_("Could not parse FRITZ!Box Phonebook entry"))
 
