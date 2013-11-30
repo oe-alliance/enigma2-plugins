@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 821 $
-$Date: 2013-11-28 10:24:55 +0100 (Do, 28 Nov 2013) $
-$Id: FritzCallFBF.py 821 2013-11-28 09:24:55Z michael $
+$Revision: 822 $
+$Date: 2013-11-30 16:42:31 +0100 (Sa, 30 Nov 2013) $
+$Id: FritzCallFBF.py 822 2013-11-30 15:42:31Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -73,7 +73,7 @@ def cleanNumber(number):
 	number = number.replace('(','').replace(')','').replace(' ','').replace('-','')
 	if number[0] == '+':
 		number = '00' + number[1:]
-	if number.startswith(config.plugins.FritzCall.country.value):
+	if config.plugins.FritzCall.country.value and number.startswith(config.plugins.FritzCall.country.value):
 		number = '0' + number[len(config.plugins.FritzCall.country.value):]
 	return number
 		
@@ -1355,7 +1355,7 @@ class FritzCallFBF_05_50:
 			entrymask = re.compile('<td class="tname" title="([^"]*)">[^<]*</td><td class="tnum">([^<]+(?:<br>[^<]+)*)</td><td class="ttype">([^<]+(?:<br>[^<]+)*)</td><td class="tcode">([^<]*(?:<br>[^<]*)*)</td><td class="tvanity">([^<]*(?:<br>[^<]*)*)</td>', re.S)
 			entries = entrymask.finditer(html)
 			for found in entries:
-				debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: processing entry for '''%s'''" % repr(found.groups()))
+				# debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: processing entry for '''%s'''" % repr(found.groups()))
 				name = html2unicode(re.sub(",", "", found.group(1)))
 				thisnumbers = found.group(2).split("<br>")
 				thistypes = found.group(3).split("<br>")
@@ -1380,6 +1380,7 @@ class FritzCallFBF_05_50:
 							thisname = thisname + ", " + _("Vanity") + ": " + thisvanitys[i]
 	
 						# debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
+						# debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Adding '''%s''' with '''%s'''" % (thisname.strip(), thisnumber))
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						self.phonebook.phonebook[thisnumber] = thisname.encode('utf-8')
 		else:
