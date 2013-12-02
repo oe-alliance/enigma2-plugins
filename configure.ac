@@ -221,6 +221,9 @@ eurotictv/src/Makefile
 eventlist/Makefile
 eventlist/src/Makefile
 
+eventposition/Makefile
+eventposition/src/Makefile
+
 fancontrol2/Makefile
 fancontrol2/meta/Makefile
 fancontrol2/po/Makefile

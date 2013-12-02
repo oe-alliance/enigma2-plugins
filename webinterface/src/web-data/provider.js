@@ -35,7 +35,7 @@ var AbstractContentProvider = Class.create(AjaxThing, {
 	 *
 	 **/
 	getXML: function(transport){
-		var xmlDoc = "";
+		var xmlDoc = null;
 
 		if(window.ActiveXObject){ // we're on IE
 			xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
@@ -580,7 +580,7 @@ var ScreenshotProvider = Class.create(AbstractContentProvider, {
 		if(fnc !== undefined){
 			this.callback = fnc;
 		}
-		var src = this.url + '?' + $H(parms).toQueryString()
+		var src = this.url + '?' + $H(parms).toQueryString();
 		this.callback(src);
 	},
 

@@ -146,8 +146,13 @@ def Plugins(**kwargs):
 def setup(session,**kwargs):
 	session.open(VirtualZapConfig)
 
+def VirtualZapMainCallback(service = None, servicePath = None):
+	VirtualZapCallback(InfoBar.instance, service, servicePath)
+
 def main(session,**kwargs):
-	session.open(VirtualZap, kwargs["servicelist"])
+	if InfoBar.instance.pipShown():
+		InfoBar.instance.showPiP()
+	session.openWithCallback(VirtualZapMainCallback, VirtualZap, InfoBar.instance.servicelist)
 
 class VirtualZap(Screen):
 	sz_w = getDesktop(0).size().width()
