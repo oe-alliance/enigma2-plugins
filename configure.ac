@@ -142,6 +142,9 @@ cdinfo/Makefile
 cdinfo/meta/Makefile
 cdinfo/src/Makefile
 
+channelselectionshorttitle/Makefile
+channelselectionshorttitle/src/Makefile
+
 curlytx/Makefile
 curlytx/meta/Makefile
 curlytx/po/Makefile
