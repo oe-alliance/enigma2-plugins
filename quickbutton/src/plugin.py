@@ -62,7 +62,9 @@ def autostart(reason, **kwargs):
 		InfoBarPlugins.yellowlong = yellowlong
 		InfoBarPlugins.redlong = redlong
 		InfoBarPlugins.bluelong = bluelong
-		if HardwareInfo().get_device_name() in ("dm8000", "dm7020hd"):
+		box = ""
+		box = HardwareInfo().get_device_name()
+		if  box in ("dm8000", "dm7020hd") or  box == "dm800sev2" or box == "dm500hdv2":
 			ENABLE_RED_BUTTON = True		
 			InfoBarPlugins.red = red
 
