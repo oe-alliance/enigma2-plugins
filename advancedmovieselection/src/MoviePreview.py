@@ -21,7 +21,7 @@
 #
 from Components.AVSwitch import AVSwitch
 from Components.Pixmap import Pixmap
-from enigma import ePicLoad, eTimer
+from enigma import ePicLoad, gPixmapPtr, eTimer
 from Tools.Directories import fileExists
 import os
 from Components.config import config
@@ -55,7 +55,7 @@ class MoviePreview():
     
     def layoutFinish(self):
         sc = AVSwitch().getFramebufferScale()
-        self.picload.setPara((self["CoverPreview"].instance.size().width(), self["CoverPreview"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
+        self.picload.setPara((self["CoverPreview"].instance.size().width(), self["CoverPreview"].instance.size().height(), sc[0], sc[1], False, 1, "#ff000000"))
         self.cpX = self["CoverPreview"].instance.position().x()
         self.cpY = self["CoverPreview"].instance.position().y()
         self.cpW = self["CoverPreview"].instance.size().width()
@@ -66,7 +66,8 @@ class MoviePreview():
     def loadPreview(self, serviceref):
         self.hideDialog()
         if serviceref is None:
-            self["CoverPreview"].instance.setPixmap(None)
+            empty = gPixmapPtr()
+            self["CoverPreview"].instance.setPixmap(empty)
             return
 
         path = serviceref.getPath()

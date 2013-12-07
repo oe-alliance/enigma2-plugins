@@ -324,3 +324,24 @@ version: 3.0.4
 * fix: TVDB Info&D/L
 * fix: geschwindigkeit beim öffnen der filmliste
 * neu: italienische übersetzung (thx @ mikark)
+
+version: 3.1
+* geändert: bibliothek
+* neu: der letzt gewählte film wird nach einem standby/neustart angezeigt
+* neu: einstellbare aufbewahrungszeit für den papierkorb
+* neu: option zum anzeigen der datenträgerverwendung in der beschreibung 
+* fix: crash nach beenden des kopiervorganges
+ACHTUNG an die skinner, AdvancedMovieSelection_summary und MoviePlayerExtended_summary haben sich geändert
+
+version: 3.1.1
+* fix: ausblenden der separator
+* fix: transparenz für bilder
+* fix: speichern der movie player aktionen
+
+version: 3.2
+* geändert: tmdb api v3
+
+version: 3.2.1
+* fix: anzeigen und speichern von beschreibungen (eit) in kyrillisch
+* neu: einstellen der cover größe in tmdb 
+* neu: quickbutton: nur neue filme anzeigen/alle filme anzeigen 

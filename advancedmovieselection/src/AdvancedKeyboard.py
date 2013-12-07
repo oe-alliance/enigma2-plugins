@@ -38,7 +38,8 @@ class AdvancedKeyBoard(VirtualKeyBoard, NumericalTextInput, SkinResolutionHelper
     NUM_KEYB = 0x02
     BOTH = KEYBOARD|NUM_KEYB
     def __init__(self, session, title="", text=""):
-        VirtualKeyBoard.__init__(self, session, title, text)
+        #VirtualKeyBoard.__init__(self, session, title, text) Changed by Topfi, added parameter names
+        VirtualKeyBoard.__init__(self, session, title=title, text=text)
         NumericalTextInput.__init__(self, nextFunc=self.nextFunc)
         SkinResolutionHelper.__init__(self)
         self.configText = None
@@ -115,7 +116,8 @@ class AdvancedKeyBoard(VirtualKeyBoard, NumericalTextInput, SkinResolutionHelper
         return index
     
     def buildVirtualKeyBoard(self, selectedKey=0):
-        VirtualKeyBoard.buildVirtualKeyBoard(self, selectedKey=self.selectedKey)
+        #VirtualKeyBoard.buildVirtualKeyBoard(self, selectedKey=self.selectedKey) changed by Topfi: removed parameter
+        VirtualKeyBoard.buildVirtualKeyBoard(self)
 
     def dummy(self):
         pass
@@ -139,7 +141,7 @@ class AdvancedKeyBoard(VirtualKeyBoard, NumericalTextInput, SkinResolutionHelper
     def keyNumberGlobal(self, number):
         self.handleKey(KEY_0 + number)
         self.getKey(number)
-        self.text = self.configText.getText()
+        #self.text = self.configText.getText() removed by Topfi
         self["text"].setText(self.configText.getText())
         self["text"].setMarkedPos(self.configText.marked_pos)
 
@@ -147,8 +149,10 @@ class AdvancedKeyBoard(VirtualKeyBoard, NumericalTextInput, SkinResolutionHelper
         VirtualKeyBoard.okClicked(self)
         self["text"].setMarkedPos(-1)
         if self.configText:
-            self.configText.text = self.text
-            self.configText.marked_pos = len(self.text)
+            #self.configText.text = self.text # Changed by Topfi (replaced self.text)
+            self.configText.text = self["text"].getText()
+            #self.configText.marked_pos = len(self.text) Changed by Topfi (replaced self.text)
+            self.configText.marked_pos = len(self["text"].getText())
 
     def nextFunc(self):
         self["text"].setMarkedPos(-1)

@@ -1,7 +1,7 @@
 import os, urllib
-from ..StopWatch import clockit
+#from ..StopWatch import clockit
 
-@clockit
+#@clockit
 def downloadCover(url, filename, overwrite=False):
     try:
         if not os.path.exists(filename) or overwrite:

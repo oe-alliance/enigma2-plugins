@@ -24,6 +24,7 @@ from LocaleInit import _
 from ServiceUtils import diskUsage, getDirSize, realSize
 from Globals import printStackTrace
 from enigma import eServiceReference, iServiceInformation
+from Config import config
 
 class MovieInfo():
     idDVB = eServiceReference.idDVB
@@ -185,13 +186,13 @@ class DirectoryInfo():
 class DirectoryEvent(DirectoryInfo):
     def __init__(self, serviceref):
         DirectoryInfo.__init__(self, serviceref.getPath())
-        self.is_database = False
+        self.is_movielibrary = False
         from ServiceProvider import eServiceReferenceListAll
         if isinstance(serviceref, eServiceReferenceListAll):
-            self.is_database = True
+            self.is_movielibrary = True
         elif serviceref is not None:
             from MovieScanner import movieScanner
-            dbinfo = movieScanner.database.getInfo(serviceref.getPath())
+            dbinfo = movieScanner.movielibrary.getInfo(serviceref.getPath())
             if dbinfo is not None:
                 self.mov_count = dbinfo[0]
                 self.dir_count = dbinfo[1]
@@ -205,8 +206,8 @@ class DirectoryEvent(DirectoryInfo):
 
     def getDBDescription(self):
         from MovieScanner import movieScanner
-        self.dir_size = movieScanner.database.getSize()
-        self.dir_count, self.mov_count = movieScanner.database.getFullCount()
+        self.dir_size = movieScanner.movielibrary.getSize()
+        self.dir_count, self.mov_count = movieScanner.movielibrary.getFullCount()
         text1 = []
         
         if self.dir_size > -1:
@@ -238,7 +239,7 @@ class DirectoryEvent(DirectoryInfo):
 
         #mount_path = self.getmount()
         # TODO temporary disabled, performance issue on mass storage devices
-        if False and os.path.exists(self.dir_path):
+        if config.AdvancedMovieSelection.show_diskusage.value and os.path.exists(self.dir_path):
             total, used, free = diskUsage(self.dir_path)
             #text.append(_("Media:") + ' ' + str(mount_path))
             text.append(_("Total:") + ' ' + realSize(total, 3))
@@ -251,7 +252,7 @@ class DirectoryEvent(DirectoryInfo):
         return "\n".join(text)
 
     def getExtendedDescription(self):
-        if not self.is_database:
+        if not self.is_movielibrary:
             return self.getDirDescription()
         else:
             return self.getDBDescription()

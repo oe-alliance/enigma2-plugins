@@ -365,11 +365,12 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
         self.list.append(getConfigListEntry(_("Show bookmarks in movielist:"), config.AdvancedMovieSelection.show_bookmarks, _("When enabled all created bookmarks appear in the movie list.")))
         self.list.append(getConfigListEntry(_("Show hotplug devices:"), config.AdvancedMovieSelection.hotplug, _("Enable this option to use USB-Devices.")))
         self.list.append(getConfigListEntry(_("Show plugin config in extensions menu from movielist:"), config.AdvancedMovieSelection.showmenu, _("Displays the Settings option in the menu at the movie list.")))
-        self.list.append(getConfigListEntry(_("Show path selection for database in extensions menu:"), config.AdvancedMovieSelection.show_location_indexing, _("Here you can select which folders to include in the database creation.")))
-        self.list.append(getConfigListEntry(_("Show database symbol in movielist:"), config.AdvancedMovieSelection.show_database, _("If enabled the database symbol is shown in movielist if movies are in the database.")))
-        self.list.append(getConfigListEntry(_("Show path marker within database movies:"), config.AdvancedMovieSelection.show_videodirslocation, _("If enabled all movies in database will be shown with path marker and will be sorted below them.")))
-        self.list.append(getConfigListEntry(_("Use database path selection as marker within database movies:"), config.AdvancedMovieSelection.db_mark, _("If enabled only the database path selections will be used as marker otherwise each sub directory will be shown as path marker in database view.")))
-        self.list.append(getConfigListEntry(_("Minimum movie count to show path marker in database view:"), config.AdvancedMovieSelection.db_show_mark_cnt, _("The minimum selected number of movies must be in one directory to show the path marker in database view.")))
+        self.list.append(getConfigListEntry(_("Show path selection for movie library in extensions menu:"), config.AdvancedMovieSelection.show_location_indexing, _("Here you can select which folders to include in the movie library creation.")))
+        self.list.append(getConfigListEntry(_("Show movie library symbol in movielist:"), config.AdvancedMovieSelection.show_movielibrary, _("If enabled the movie library symbol is shown in movie list.")))
+        self.list.append(getConfigListEntry(_("Show path marker within movie library movies:"), config.AdvancedMovieSelection.show_videodirslocation, _("If enabled all movies in movie library will be shown with path marker and will be sorted below them.")))
+        self.list.append(getConfigListEntry(_("Use movie library path selection as marker within movies in library:"), config.AdvancedMovieSelection.movielibrary_mark, _("If enabled only the movie library path selections will be used as marker otherwise each sub directory will be shown as path marker in movie library view.")))
+        self.list.append(getConfigListEntry(_("Minimum movie count to show path marker in movie library view:"), config.AdvancedMovieSelection.movielibrary_show_mark_cnt, _("The minimum selected number of movies must be in one directory to show the path marker in movie library view.")))
+        self.list.append(getConfigListEntry(_("Show disk usage in description:"), config.AdvancedMovieSelection.show_diskusage, _("Displays the disk usage in the description. (Leave it disabled if you have performance problems at the start of the movie list)")))
         self.list.append(getConfigListEntry(_("Show directory size in movie list:"), config.AdvancedMovieSelection.show_dirsize, _("Displays the size from directories in movie list.")))
         if config.AdvancedMovieSelection.show_dirsize.value:
             self.list.append(getConfigListEntry(_("Show decimal points:"), config.AdvancedMovieSelection.dirsize_digits, _("Here you can choose how many decimal points for the directory size in the movie list will be displayed.")))
@@ -390,7 +391,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
         self.list.append(getConfigListEntry(_("Show movie search in extensions menu from movielist:"), config.AdvancedMovieSelection.showsearch, _("Displays the movie search function in the menu at the movie list.")))
         self.list.append(getConfigListEntry(_("Show covers in movielist:"), config.AdvancedMovieSelection.showpreview, _("Displays the cover in the movie list."))) 
         if config.AdvancedMovieSelection.showpreview.value:
-            self.list.append(getConfigListEntry(_("Set coversize:"), config.AdvancedMovieSelection.coversize, _("Here you can determine the coverfile size for the download/save.")))
+            self.list.append(getConfigListEntry(_("Set coversize:"), config.AdvancedMovieSelection.tmdb_poster_size, _("Here you can determine the coverfile size for the download/save.")))
             self.list.append(getConfigListEntry(_("Download cover from TMDB after timer is finished:"), config.AdvancedMovieSelection.cover_auto_download, _("If this function is enabled the cover is automatically downloaded from TMDB after timer is finished.")))
             self.list.append(getConfigListEntry(_("Show D/L and store info/cover in movielist extensions menu:"), config.AdvancedMovieSelection.showcoveroptions, _("Displays movie info/cover options in the menu at the movie list.")))
             self.list.append(getConfigListEntry(_("Show D/L and store ALL info/cover in movielist extensions menu:"), config.AdvancedMovieSelection.showcoveroptions2, _("Displays download and save movie info/cover for all movies options in the menu at the movie list.")))
@@ -461,6 +462,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             if not int(config.AdvancedMovieSelection.auto_empty_wastebasket.value) == -1:
                 self.list.append(getConfigListEntry(_("Auto empty wastebasket time:"), config.AdvancedMovieSelection.empty_wastebasket_time, _("Here you can define when to empty the wastebasket.")))
                 self.list.append(getConfigListEntry(_("Check again in x minutes:"), config.AdvancedMovieSelection.next_empty_check, _("If recordings are active again after the set time is trying to empty the wastebasket.")))
+                self.list.append(getConfigListEntry(_("Wastebasket retention period (days):"), config.AdvancedMovieSelection.empty_wastebasket_min_age, _("Defines how long files need to dwell in the wastebasket before auto empty will consider to remove them (0 means no retention).")))
         self.list.append(getConfigListEntry(_("Start at the beginning depends on end (in Minutes):"), config.AdvancedMovieSelection.stop_before_end_time, _("Here you can set off when a movie to play automatically from the beginning when you start again (On settings=0, functions is disabled).")))
         self.list.append(getConfigListEntry(_("Use activ Skin LCD/OLED representation:"), config.AdvancedMovieSelection.use_original_movieplayer_summary, _("If you enable this function, the display summary from aktiv skin will be used.")))
         if config.AdvancedMovieSelection.use_original_movieplayer_summary.value:
@@ -632,6 +634,13 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
     def setCustomTitle(self):
         self.setTitle(_("Movie Quick Button Setup"))
 
+    def checkEntry(self, entry, l):
+        for x in l:
+            if isinstance(x, str) and x == entry:
+                return True
+            elif x[0] == entry:
+                return True
+
     def createConfig(self):
         self.entryguilist = []
         self.entryguilist.append(("Nothing", _("Nothing")))
@@ -640,12 +649,13 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         self.entryguilist.append(("Rename", _("Rename")))
         self.entryguilist.append(("Wastebasket", _("Wastebasket")))
         self.entryguilist.append(("Sort", _("Sort")))
-        self.entryguilist.append(("Database/Movielist", _("Switch database/movielist")))
-        self.entryguilist.append(("Show/Hide database", _("Show/Hide database")))
+        self.entryguilist.append(("Library/Movielist", _("Switch library/movielist")))
+        self.entryguilist.append(("Show/Hide library", _("Show/Hide library")))
         self.entryguilist.append(("Show/Hide folders", _("Show/Hide folders")))
+        self.entryguilist.append(("Show/Hide seen", _("Show/Hide seen movies")))
         self.entryguilist.append(("Bookmark(s) on/off", _("Bookmark(s) on/off")))
-        self.entryguilist.append(("DB marker on/off", _("Database marker on/off")))
-        self.entryguilist.append(("Update database", _("Update database")))
+        self.entryguilist.append(("LIB marker on/off", _("Library marker on/off")))
+        self.entryguilist.append(("Update library", _("Update library")))
         self.entryguilist.append(("Home", _("Home")))
         self.entryguilist.append(("Bookmark 1", _("Bookmark 1")))
         self.entryguilist.append(("Bookmark 2", _("Bookmark 2")))
@@ -689,7 +699,8 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         self.qbutton_choicelist = []
         for button, function in qButtons.get():
             print button, function
-            if function == "":
+            if function == "" or not self.checkEntry(function, self.entryguilist):
+                print "[no config entry]", button, function 
                 function = "Nothing"
             csel = (button, ConfigSelection(default=function, choices=self.entryguilist))
             self.qbutton_choicelist.append(csel)

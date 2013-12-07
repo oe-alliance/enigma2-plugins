@@ -25,7 +25,14 @@ from Tools.Directories import resolveFilename, SCOPE_HDD
 from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo, ConfigInteger, ConfigSelection, ConfigClock, ConfigLocations, ConfigBoolean
 from Globals import printStackTrace
 
+# configurations from enigma2 /Components/UsageConfig.py !!!don't edit default values from source!!!
+config.usage.load_length_of_movies_in_moviellist = ConfigYesNo(default=True)
+config.usage.on_movie_start = ConfigSelection(default="ask", choices=[("ask", _("Ask user")), ("resume", _("Resume from last position")), ("beginning", _("Start from the beginning"))])
+config.usage.on_movie_stop = ConfigSelection(default="ask", choices=[("ask", _("Ask user")), ("movielist", _("Return to movie list")), ("quit", _("Return to previous service"))])
+config.usage.on_movie_eof = ConfigSelection(default="ask", choices=[("ask", _("Ask user")), ("movielist", _("Return to movie list")), ("quit", _("Return to previous service")), ("pause", _("Pause movie at end")), ("standby", _("Standby")), ("shutdown", _("Shutdown"))])
+
 config.AdvancedMovieSelection = ConfigSubsection()
+config.AdvancedMovieSelection.last_selected_service = ConfigText(default = "")
 config.AdvancedMovieSelection.wastelist_buildtype = ConfigSelection(default="listMovies" , choices=[("listMovies", _("Only current location")), ("listAllMovies", _("Current location and all subdirectories")), ("listAllMoviesMedia", _("All directorys below '/media'")) ])
 config.AdvancedMovieSelection.use_wastebasket = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.overwrite_left_right = ConfigYesNo(default=True)
@@ -105,7 +112,6 @@ config.AdvancedMovieSelection.showcolorkey = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.showliststyle = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.showextras = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.showsort = ConfigYesNo(default=True)
-config.usage.load_length_of_movies_in_moviellist = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.showmark = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.startdir = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.showdelete = ConfigYesNo(default=True)
@@ -116,15 +122,21 @@ config.AdvancedMovieSelection.showsearch = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.showcoveroptions = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.showpreview = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.showrename = ConfigYesNo(default=True)
-config.AdvancedMovieSelection.coversize = ConfigSelection(default="cover", choices=[("original", _("Original (1000x1500)")), ("mid", _("Mid (500x750)")), ("cover", _("Cover (185x278)")), ("thumb", _("Thumb (92x138)"))])
 config.AdvancedMovieSelection.description = ConfigYesNo(default=True)
+poster_sizes = (u'w92', u'w154', u'w185', u'w342', u'w500', u'original')
+from MovieDB.tmdb import poster_sizes, setPosterSize
+poster_choices = [
+                  (poster_sizes[0], _("Thumb (92x138)")),
+                  (poster_sizes[2], _("Cover (185x278)")),
+                  (poster_sizes[4], _("Mid (500x750)")),
+                  (poster_sizes[5], _("Original (1400x2100)"))
+                  ]
+config.AdvancedMovieSelection.tmdb_poster_size = ConfigSelection(default=poster_sizes[2], choices=poster_choices)
+config.AdvancedMovieSelection.tmdb_poster_size.addNotifier(setPosterSize)
 config.AdvancedMovieSelection.showtmdb = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.show_info_cover_del = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.show_info_del = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.show_cover_del = ConfigYesNo(default=True)
-config.usage.on_movie_start = ConfigSelection(default="ask", choices=[("ask", _("Ask user")), ("resume", _("Resume from last position")), ("beginning", _("Start from the beginning"))])
-config.usage.on_movie_stop = ConfigSelection(default="movielist", choices=[("ask", _("Ask user")), ("movielist", _("Return to movie list")), ("quit", _("Return to previous service"))])
-config.usage.on_movie_eof = ConfigSelection(default="quit", choices=[("ask", _("Ask user")), ("movielist", _("Return to movie list")), ("quit", _("Return to previous service")), ("pause", _("Pause movie at end")), ("standby", _("Standby")), ("shutdown", _("Shutdown"))])
 config.AdvancedMovieSelection.movieplayer_infobar_position_offset_x = ConfigInteger(default=0)
 config.AdvancedMovieSelection.movieplayer_infobar_position_offset_y = ConfigInteger(default=0)
 config.AdvancedMovieSelection.show_infobar_position = ConfigYesNo(default=True)
@@ -139,6 +151,7 @@ config.AdvancedMovieSelection.show_wastebasket = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.use_original_movieplayer_summary = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.auto_empty_wastebasket = ConfigSelection(default="-1", choices=[("-1", _("Disabled")), ("1", _("Daily")), ("2", _("Every second day")), ("7", _("Weekly")), ("14", _("Every two weeks")), ("30", _("Monthly"))])
 config.AdvancedMovieSelection.empty_wastebasket_time = ConfigClock(default=10800)
+config.AdvancedMovieSelection.empty_wastebasket_min_age = ConfigInteger(default=0, limits=(0, 999))
 config.AdvancedMovieSelection.last_auto_empty_wastebasket = ConfigInteger(default=0)
 config.AdvancedMovieSelection.next_auto_empty_wastebasket = ConfigInteger(default=0)
 config.AdvancedMovieSelection.next_empty_check = ConfigInteger(default=30, limits=(01, 60))
@@ -151,6 +164,7 @@ config.AdvancedMovieSelection.stop_search_ip = ConfigInteger(default=254, limits
 config.AdvancedMovieSelection.server_port = ConfigInteger(default=20000, limits=(1, 65535))
 config.AdvancedMovieSelection.show_remote_setup = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.show_dirsize = ConfigYesNo(default=False)
+config.AdvancedMovieSelection.show_diskusage = ConfigYesNo(default=False)
 # TODO: remove
 # config.AdvancedMovieSelection.show_dirsize_full = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.dirsize_digits = ConfigSelection(default="0", choices=[("0", _("0")), ("1", _("1")), ("2", _("2")), ("3", _("3"))])
@@ -176,11 +190,12 @@ config.AdvancedMovieSelection.show_move_copy_progress = ConfigYesNo(default=True
 config.AdvancedMovieSelection.videodirs = ConfigLocations()
 config.AdvancedMovieSelection.show_location_indexing = ConfigYesNo(default=True)
 config.AdvancedMovieSelection.show_videodirslocation = ConfigYesNo(default=True)
-config.AdvancedMovieSelection.show_database = ConfigYesNo(default=True)
-config.AdvancedMovieSelection.db_sort = ConfigInteger(default=1)
-config.AdvancedMovieSelection.db_show = ConfigBoolean()
-config.AdvancedMovieSelection.db_mark = ConfigYesNo(default=True)
-config.AdvancedMovieSelection.db_show_mark_cnt = ConfigInteger(default=2, limits=(1, 10))
+config.AdvancedMovieSelection.show_movielibrary = ConfigYesNo(default=True)
+config.AdvancedMovieSelection.movielibrary_sort = ConfigInteger(default=1)
+config.AdvancedMovieSelection.movielibrary_show = ConfigBoolean()
+config.AdvancedMovieSelection.movielibrary_mark = ConfigYesNo(default=True)
+config.AdvancedMovieSelection.movielibrary_show_mark_cnt = ConfigInteger(default=2, limits=(1, 10))
+config.AdvancedMovieSelection.hide_seen_movies = ConfigYesNo(default=False)
 config.AdvancedMovieSelection.qButtons = ConfigText()
 
 class QuickButtons():

@@ -36,24 +36,25 @@ trash_size = 0
 async_trash = None
 
 class AsynchTrash(Thread):
-    def __init__(self, items, wait_ms=0):
+    def __init__(self, items, wait_ms=0, min_age=0):
         Thread.__init__(self)
         self.items = items
         self.wait_ms = wait_ms
+        self.min_age = min_age
         global async_trash
         async_trash = self
         self.start()
 
     def run(self):
         self.cancel = False
-        if(self.wait_ms>0):
+        if(self.wait_ms > 0):
             seconds = self.wait_ms / 1000.0
             time.sleep(seconds)
         for service in self.items:
             if self.cancel:
                 return
             try:
-                Trashcan.delete(service.getPath())
+                Trashcan.delete(service.getPath(), self.min_age)
             except Exception, e:
                 print e
         global async_trash
@@ -155,7 +156,18 @@ class Trashcan:
         os.rename(filename, filename.replace(TRASH_NAME, ""))
     
     @staticmethod
-    def delete(filename):
+    def delete(filename, min_age=0):
+        if min_age > 0:
+            # Make sure the file/directory has a ctime that didn't
+            # change for at least the intended removal minimum age
+            print "check retention time", filename
+            nowSec = int(time.time())
+            fCtime = os.path.getctime(filename)
+            print "ctime:", str(fCtime), "now:", str(nowSec)
+            if nowSec < (fCtime + min_age):
+                print "skipped, too young: ", str(nowSec - fCtime), "<", str(min_age)
+                return
+
         movie_ext = ["gm", "sc", "ap", "cuts"]
         print "delete: ", filename
         #path = os.path.split(filename)[0]
@@ -189,15 +201,28 @@ class Trashcan:
 
         if os.path.exists(filename):
             if os.path.isfile(filename):
-                print filename
-                os.remove(filename)
+                os.rename(filename, original_name)
+                filename = original_name
+                from ServiceProvider import ServiceCenter, eServiceReference
+                service = eServiceReference(eServiceReference.idDVB, 0, filename)
+                print "[erase file]", filename
+                serviceHandler = ServiceCenter.getInstance()
+                offline = serviceHandler.offlineOperations(service)
+                result = False
+                if offline is not None:
+                    # really delete!
+                    if not offline.deleteFromDisk(0):
+                        result = True
+                
+                if result == False:
+                    print "Error"
             else:
+                print "[erase dir]", filename
                 shutil.rmtree(filename)
-                print filename
 
     @staticmethod
-    def deleteAsynch(trash):
-        AsynchTrash(trash)
+    def deleteAsynch(trash, min_age=0):
+        AsynchTrash(trash, 0, min_age)
 
     @staticmethod
     def isCurrentlyDeleting():

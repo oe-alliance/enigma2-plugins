@@ -1373,14 +1373,22 @@
 	<!-- LCD screen (AdvancedMovieSelection) -->
 	<screen name="AdvancedMovieSelection_summary" position="0,0" size="132,64" id="1">
 		<widget source="parent.Movietitle" render="Label" position="2,0" size="128,24" font="Display;12" halign="center" valign="top" />
+<!--new -->
+		<widget name="Seperator1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/seperator.png" position="0,25" size="132,1" alphatest="on" />
+<!--
 		<widget source="Seperator" render="Pixmap" position="0,25" size="132,1" backgroundColor="#ffffff">
 			<convert type="ValueToPixmap">Path</convert>
 		</widget>
+-->
 		<widget name="ShortDesc" position="2,27" size="128,24" font="Display;12" halign="center" valign="top" />
 		<!--widget source="parent.MovieService" render="Label" position="2,27" size="128,24" font="Display;12" halign="center" valign="top"> <convert type="MovieInfo">ShortDescription</convert> </widget -->
+<!--new -->
+		<widget name="Seperator2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/seperator.png" position="0,50" size="132,1" alphatest="on" />
+<!--
 		<widget source="Seperator" render="Pixmap" position="0,50" size="132,1" backgroundColor="#ffffff">
 			<convert type="ValueToPixmap">Path</convert>
 		</widget>
+-->
 		<widget source="parent.MovieSize" render="Label" position="2,54" size="64,10" font="Display;10" halign="left" valign="top">
 			<convert type="ServiceTime">Duration</convert>
 			<convert type="ClockToText">InMinutes</convert>
@@ -1405,13 +1413,21 @@
 	<!-- LCD screen (MoviePlayerExtended) -->
 	<screen name="MoviePlayerExtended_summary" position="0,0" size="132,64" id="1">
 		<widget name="Title" position="2,0" size="128,24" font="Display;12" halign="center" valign="top" />
+<!--new -->
+		<widget name="Seperator1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/seperator.png" position="0,50" size="132,1" alphatest="on" />
+<!--
 		<widget source="Seperator" render="Pixmap" position="0,25" size="132,1" backgroundColor="#ffffff">
 			<convert type="ValueToPixmap">Path</convert>
 		</widget>
+-->
 		<widget name="ShortDesc" position="2,27" size="128,24" font="Display;12" halign="center" valign="top" />
+<!--new -->
+		<widget name="Seperator2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/images/seperator.png" position="0,50" size="132,1" alphatest="on" />
+<!--
 		<widget source="Seperator" render="Pixmap" position="0,52" size="132,1" backgroundColor="#ffffff">
 			<convert type="ValueToPixmap">Path</convert>
 		</widget>
+-->
 		<widget source="global.CurrentTime" render="Label" position="2,52" size="40,14" font="Display;14" halign="left" valign="top">
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>

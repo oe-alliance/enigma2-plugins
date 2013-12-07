@@ -45,6 +45,7 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.StaticText import StaticText
 from MoviePreview import MoviePreview
 from Components.Label import Label
+from Components.Pixmap import Pixmap
 from Components.ServiceEventTracker import ServiceEventTracker
 from Source.Globals import pluginPresent
 from Version import __version__
@@ -80,7 +81,9 @@ class MoviePlayerExtended_summary(Screen):
         Screen.__init__(self, session, parent)
         self["Title"] = Label("")
         self["ShortDesc"] = Label("")
-        self["Seperator"] = StaticText("")
+        self["Seperator1"] = Pixmap() #StaticText("")
+        self["Seperator2"] = Pixmap() #StaticText("")
+        self.hideSeperator()
 
     def updateShortDescription(self, desc):
         self["ShortDesc"].setText(desc)
@@ -90,18 +93,22 @@ class MoviePlayerExtended_summary(Screen):
 
     def showSeperator(self):
         if TFT_8000_Present:
-            self["Seperator"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "images/sep_tft.png"))
+            self["Seperator1"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "images/sep_tft.png"))
+            self["Seperator2"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "images/sep_tft.png"))
         else:
             # Andy Blackburn [add support for SCOPE_ACTIVE_SKIN] begin
             #self["Seperator"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "images/sep_lcd_oled.png"))
             try:
-                self["Seperator"].setText(resolveFilename(SCOPE_ACTIVE_SKIN, "images/sep_lcd_oled.png"))
+                self["Seperator1"].setText(resolveFilename(SCOPE_ACTIVE_SKIN, "images/sep_lcd_oled.png"))
+                self["Seperator2"].setText(resolveFilename(SCOPE_ACTIVE_SKIN, "images/sep_lcd_oled.png"))
             except:
-                self["Seperator"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/images/sep_lcd_oled.png"))
+                self["Seperator1"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/images/sep_lcd_oled.png"))
+                self["Seperator2"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/images/sep_lcd_oled.png"))
             # Andy Blackburn [add support for SCOPE_ACTIVE_SKIN] end
 
     def hideSeperator(self):
-        self["Seperator"].setText("")   
+        self["Seperator1"].setText("")   
+        self["Seperator2"].setText("")   
     
 class SelectionEventInfo:
     def __init__(self):

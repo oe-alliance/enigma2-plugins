@@ -318,5 +318,26 @@ versie: 3.0.3
 
 versie: 3.0.4
 * fix: TVDB Info&D/L
-* fix: performance issue on open movielist
-* nieuw: italiaanse locale (thx @ mikark)
+* fix: snelheid bij openen filmlijst
+* nieuw: italiaanse vertaling (thx @ mikark)
+
+versie: 3.1
+* aanpassing: bibliotheek i.p.v. database
+* nieuw: de laatst gekozen film wordt weergegeven na standby/reboot
+* nieuw: bewaartijd voor filmen in de prullemand
+* nieuw: optie om gebruikte ruimte op medium weer te geven in de beschrijving
+* fix: crash na kopiëren
+OPGELET voor de skinners, AdvancedMovieSelection_summary en MoviePlayerExtended_summary zijn gewijzigd
+
+versie: 3.1.1
+* fix: verberg scheidingslijn
+* fix: transparantie picload
+* fix: instellingen filmspeler opslaan
+
+versie: 3.2
+* aanpassing: tmdb api v3
+
+versie: 3.2.1
+* fix: weergeven en bewaren van beschrijvingen (eit) in cyrillisch
+* nieuw: instelbare grootte voor tmdb cover
+* nieuw: quickbutton: nieuwe/alle films weergeven 

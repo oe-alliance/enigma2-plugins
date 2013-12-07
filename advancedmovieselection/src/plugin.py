@@ -81,6 +81,34 @@ def Setup(menuid, **kwargs):
         return [(_("Setup Advanced Movie Selection"), pluginMenu, "SetupAdvancedMovieSelection", None)]
     return []
 
+def tmdbInfo(session, eventName="", **kwargs):
+    try:
+        s = session.nav.getCurrentService()
+        info = s.info()
+        event = info.getEvent(0)
+        if event:
+            eventName = event.getEventName()
+        if eventName:
+            from SearchTMDb import TMDbMain
+            session.open(TMDbMain, eventName)
+    except Exception, e:
+        print e
+        
+def tvdbInfo(session, eventName="", **kwargs):
+    try:
+        s = session.nav.getCurrentService()
+        info = s.info()
+        event = info.getEvent(0)
+        shortdescr = ""
+        if event:
+            eventName = event.getEventName()
+            shortdescr = event.getShortDescription()
+        if eventName:
+            from SearchTVDb import TheTVDBMain
+            session.open(TheTVDBMain, None, eventName, shortdescr) 
+    except Exception, e:
+        print e
+
 def Plugins(**kwargs):
     try:
         if config.AdvancedMovieSelection.debug.value:
@@ -101,4 +129,7 @@ def Plugins(**kwargs):
         descriptors.append(PluginDescriptor(name=_("Move Copy Progress"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, description=_("Show progress of move or copy job"), fnc=openProgress))
     descriptors.append(PluginDescriptor(name=_("Setup Advanced Movie Selection"), where=PluginDescriptor.WHERE_PLUGINMENU, description=_("Alternate Movie Selection"), fnc=pluginMenu, needsRestart=True))
     descriptors.append(PluginDescriptor(where=PluginDescriptor.WHERE_MENU, description=_("Alternate Movie Selection"), fnc=Setup, needsRestart=True))
+    
+    # descriptors.append(PluginDescriptor(name=_("TMDb Info"), where=PluginDescriptor.WHERE_EVENTINFO, description=_("TMDb Info"), fnc=tmdbInfo))
+    # descriptors.append(PluginDescriptor(name=_("TVDb Info"), where=PluginDescriptor.WHERE_EVENTINFO, description=_("TVDb Info"), fnc=tvdbInfo))
     return descriptors

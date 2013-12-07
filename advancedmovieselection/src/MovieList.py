@@ -365,9 +365,9 @@ class MovieList(GUIComponent):
                     png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "bookmark.png"))
                 elif isinstance(serviceref, eServiceReferenceListAll):
                     if movieScanner.isWorking:
-                        png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "database_reload.png"))
+                        png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "movielibrary_reload.png"))
                     else:
-                        png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "database.png"))
+                        png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "movielibrary.png"))
                     can_show_folder_image = False
                 elif isinstance(serviceref, eServiceReferenceHotplug):
                     png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, IMAGE_PATH + "hotplug.png"))
@@ -402,9 +402,9 @@ class MovieList(GUIComponent):
                         dir_size = diskUsage(serviceref.getPath())[1]
                     elif not movieScanner.isWorking: 
                         if isinstance(serviceref, eServiceReferenceListAll):
-                            dir_size = movieScanner.database.getSize()
+                            dir_size = movieScanner.movielibrary.getSize()
                         else:
-                            dir_size = movieScanner.database.getSize(serviceref.getPath())
+                            dir_size = movieScanner.movielibrary.getSize(serviceref.getPath())
                     if dir_size >= 0:
                         dir_size = realSize(dir_size, int(config.AdvancedMovieSelection.dirsize_digits.value))
                         res.append(MultiContentEntryText(pos=(width - 115, 4), size=(110, 30), font=1, flags=RT_HALIGN_RIGHT, text=dir_size))
@@ -807,17 +807,17 @@ class MovieList(GUIComponent):
     def __len__(self):
         return len(self.list)
 
-    def loadDatabase(self, root, filter_tags):
-        print "loadDatabase:", root.getPath()
+    def loadMovieLibrary(self, root, filter_tags):
+        print "loadMovieLibrary:", root.getPath()
         self.list = [ ]
         self.multiSelection = []
 
         self.serviceHandler = ServiceCenter.getInstance()
         sort = self.sort_type
         if config.AdvancedMovieSelection.show_videodirslocation.value:
-            sort = self.sort_type | movieScanner.database.SORT_WITH_DIRECTORIES
-        self.list = movieScanner.database.getMovieList(sort, filter_tags, self.filter_description)
-        self.tags = movieScanner.database.getTags()
+            sort = self.sort_type | movieScanner.movielibrary.SORT_WITH_DIRECTORIES
+        self.list = movieScanner.movielibrary.getMovieList(sort, filter_tags, self.filter_description)
+        self.tags = movieScanner.movielibrary.getTags()
         # self.sortMovieList()
         tmp = self.root.getPath()
         tt = eServiceReferenceBackDir("..")
@@ -829,8 +829,8 @@ class MovieList(GUIComponent):
     def load(self, root, filter_tags):
         self.updateHotplugDevices()
         self.root = root
-        if config.AdvancedMovieSelection.db_show.value:
-            self.loadDatabase(root, filter_tags)
+        if config.AdvancedMovieSelection.movielibrary_show.value:
+            self.loadMovieLibrary(root, filter_tags)
             return
         
         print "load:", root.getPath()
@@ -856,6 +856,7 @@ class MovieList(GUIComponent):
             serviceref = list.getNext()
             if not serviceref.valid():
                 break
+            
             dvd = None
             # dvd structure
             if serviceref.flags & eServiceReference.mustDescent:
@@ -892,6 +893,9 @@ class MovieList(GUIComponent):
             file_name = parts[-1]
             if self.movieConfig.isHidden(file_name):
                 continue
+
+            if config.AdvancedMovieSelection.hide_seen_movies.value and hasLastPosition(serviceref):
+                continue
             
             if serviceUtil.isServiceMoving(serviceref):
                 continue
@@ -901,7 +905,7 @@ class MovieList(GUIComponent):
                 serviceref = eServiceReferenceDvd(serviceref)
 
             info = self.serviceHandler.info(serviceref)
-
+            
             if dvd is not None:
                 begin = long(os.stat(dvd).st_mtime)
             else:
@@ -989,10 +993,10 @@ class MovieList(GUIComponent):
                 self.list.insert(0, (mi,))
                 db_index += 1
 
-        if len(config.AdvancedMovieSelection.videodirs.value) > 0 and config.AdvancedMovieSelection.show_database.value:
-            count = movieScanner.database.getFullCount()[1]
+        if len(config.AdvancedMovieSelection.videodirs.value) > 0 and config.AdvancedMovieSelection.show_movielibrary.value:
+            count = movieScanner.movielibrary.getFullCount()[1]
             tt1 = eServiceReferenceListAll(root_path)
-            tt1.setName(_("Database") + " (%d)" % (count))
+            tt1.setName(_("Movie library") + " (%d)" % (count))
             info = self.serviceHandler.info(tt1)
             mi = MovieInfo(tt1.getName(), tt1, info)
             self.list.insert(db_index, (mi,))
@@ -1070,13 +1074,13 @@ class MovieList(GUIComponent):
         cur_idx = self.instance.getCurrentIndex()
         self.l.invalidateEntry(cur_idx)
 
-    def updateDatabaseEntry(self):
+    def updateMovieLibraryEntry(self):
         cur_idx = 0
-        count = movieScanner.database.getFullCount()[1]
+        count = movieScanner.movielibrary.getFullCount()[1]
         for item in self.list:
             mi = item[0]
             if isinstance(mi.serviceref, eServiceReferenceListAll):
-                mi.serviceref.setName(_("Database") + " (%d)" % (count))
+                mi.serviceref.setName(_("Movie library") + " (%d)" % (count))
                 self.l.invalidateEntry(cur_idx)
                 return
             cur_idx += 1

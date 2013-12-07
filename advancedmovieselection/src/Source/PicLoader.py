@@ -31,7 +31,7 @@ class PicLoader:
         self.picload = ePicLoad()
         if(not sc):
             sc = AVSwitch().getFramebufferScale()
-        self.picload.setPara((width, height, sc[0], sc[1], False, 1, "#00000000"))
+        self.picload.setPara((width, height, sc[0], sc[1], False, 1, "#ff000000"))
 
     def load(self, filename):
         self.picload.startDecode(filename, 0, 0, False)

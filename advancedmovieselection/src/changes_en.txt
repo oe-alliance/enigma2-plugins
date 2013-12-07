@@ -323,3 +323,24 @@ version: 3.0.4
 * fix: TVDB Info&D/L
 * fix: performance issue on open movielist
 * new: italian locale (thx @ mikark)
+
+version: 3.1
+* changed: movie library
+* new: the last selected movie will be shown after standby/reboot
+* new: retention time for movies in wastebasket
+* new: option to show disk usage in description
+* fix: crash after copy
+Skinners ATTENTION, AdvancedMovieSelection_summary and MoviePlayerExtended_summary have changed
+
+version: 3.1.1
+* fix: hide separators
+* fix: picload transparency
+* fix: store movie player actions
+
+version: 3.2
+* changed: tmdb api v3
+
+version: 3.2.1
+* fix: display and save descriptions (eit) in cyrillic
+* new: selectable cover size for tmdb download
+* new: quickbutton: show only new movies/show all movies 

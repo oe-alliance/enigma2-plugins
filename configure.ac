@@ -157,6 +157,7 @@ advancedmovieselection/src/images/Makefile
 advancedmovieselection/src/skin/Makefile
 advancedmovieselection/src/Source/Makefile
 advancedmovieselection/src/Source/MovieDB/Makefile
+advancedmovieselection/src/Source/MovieDB/tmdb3/Makefile
 advancedmovieselection/src/Source/Remote/Makefile
 
 advhdmi/Makefile

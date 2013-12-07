@@ -36,7 +36,7 @@ from Source.EventInformationTable import createEIT
 from Source.MovieDB import tmdb, downloadCover
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ScrollLabel import ScrollLabel
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN
 from Source.Globals import SkinTools, printStackTrace
 import os
 
@@ -49,12 +49,11 @@ movie_title = ""
 tmdb_logodir = resolveFilename(SCOPE_PLUGINS) + "Extensions/AdvancedMovieSelection/images"
 
 class DownloadMovies(Screen):
-    def __init__(self, session, items, coverSize, service=None):
+    def __init__(self, session, items, service=None):
         Screen.__init__(self, session)
         self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionDownload")
         self.onShow.append(self.selectionChanged)
         self.service = service
-        self.coversize = coverSize
         self["logo"] = Pixmap()  
         self["info"] = Label()
         self["title"] = Label()
@@ -92,6 +91,8 @@ class DownloadMovies(Screen):
         self.refreshTimer = eTimer()
         self.refreshTimer.callback.append(self.refresh)
 
+        self.tmdb3 = tmdb.init_tmdb3()
+
         if self.service is not None:
             global movie_title
             movie_title = ServiceCenter.getInstance().info(self.service).getName(self.service).encode("utf-8").split(" - ")[0].strip()
@@ -100,7 +101,7 @@ class DownloadMovies(Screen):
         
         global fetchingMovies, this_session, is_hidden
         if fetchingMovies is None:
-            fetchingMovies = FetchingMovies(items, coverSize)
+            fetchingMovies = FetchingMovies(items)
         else:
             fetchingMovies.cancel = False
         self.progressTimer = eTimer()
@@ -122,7 +123,7 @@ class DownloadMovies(Screen):
     def paintPosterPixmap(self, picInfo=None):
         ptr = self.picload.getData()
         if ptr != None:
-            self["poster"].instance.setPixmap(ptr.__deref__())
+            self["poster"].instance.setPixmap(ptr)
             self["poster"].show()
     
     def __cancel(self):
@@ -159,7 +160,7 @@ class DownloadMovies(Screen):
         self["info"].setText(_("Filename: %s") % os.path.basename(self.service.getPath()))
         self.setTitle(_("Search result(s) for %s") % (movie_title))
         try:
-            results = tmdb.search(movie_title)
+            results = self.tmdb3.searchMovie(movie_title)
         except:
             results = []
         if len(results) == 0:
@@ -169,15 +170,14 @@ class DownloadMovies(Screen):
             return False
 
         self.l = []
-        for searchResult in results:
+        for movie in results:
             try:
                 self["key_green"].setText(_("Save infos/cover"))
-                movie = tmdb.getMovieInfo(searchResult['id'])
-                released = movie['released'][:4]
+                released = str(movie.releasedate.year)
                 if released:
-                    self.l.append((movie['name'].encode("utf-8") + " - " + released, movie))
+                    self.l.append((movie.title.encode("utf-8") + " - " + released, movie))
                 else:
-                    self.l.append((movie['name'].encode("utf-8"), movie))
+                    self.l.append((movie.title.encode("utf-8"), movie))
             except:
                 pass
 
@@ -187,7 +187,7 @@ class DownloadMovies(Screen):
         global movie_title
         current = self["list"].l.getCurrentSelection()
         if self.service is not None and current:
-            createEIT(self.service.getPath(), movie_title, self.coversize, movie=current[1])
+            createEIT(self.service.getPath(), movie_title, movie=current[1])
         self.__hide()        
     
     def selectionChanged(self):
@@ -196,12 +196,15 @@ class DownloadMovies(Screen):
         if current:
             try:
                 movie = current[1]
-                self["description"].setText("%s - %s\n\n%s" % (str(movie['name']), str(movie['released']), str(movie['overview'])))
+                self["description"].setText("%s - %s\n\n%s" % (str(movie.title.encode('utf-8', 'ignore')), str(movie.releasedate), movie.overview.encode('utf-8', 'ignore')))
                 jpg_file = "/tmp/preview.jpg"
-                cover_url = movie['images'][0]['cover']
-                downloadCover(cover_url, jpg_file, True)
+                cover_url = movie.poster_url
+                if cover_url is not None:
+                    downloadCover(cover_url, jpg_file, True)
+                else:
+                    jpg_file = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/AdvancedMovieSelection/images/nocover_de.png")
                 sc = AVSwitch().getFramebufferScale()
-                self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
+                self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), sc[0], sc[1], False, 1, "#ff000000"))
                 self.picload.startDecode(jpg_file)
             except Exception, e:
                 print e
@@ -225,9 +228,8 @@ class DownloadMovies(Screen):
             self.refreshTimer.start(100, True)
 
 class FetchingMovies(Thread):
-    def __init__(self, items, coverSize):
+    def __init__(self, items):
         Thread.__init__(self)
-        self.coversize = coverSize
         self.items = items
         self.start()
 
@@ -251,7 +253,7 @@ class FetchingMovies(Thread):
                         continue
                     current = current + 1 
                     movie_title = ServiceCenter.getInstance().info(service).getName(service).encode("utf-8").split(" - ")[0].strip()
-                    createEIT(service.getPath(), movie_title, self.coversize)
+                    createEIT(service.getPath(), movie_title)
                 except:
                     printStackTrace()
         except:
