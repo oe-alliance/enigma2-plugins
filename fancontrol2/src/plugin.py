@@ -163,7 +163,7 @@ config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices = [("false", _(
 config.plugins.FanControl.MonitorInExtension = ConfigYesNo(default = True)
 config.plugins.FanControl.FanControlInExtension = ConfigYesNo(default = True)
 config.plugins.FanControl.Multi = ConfigSelection(choices = [("1", "RPM"), ("2", "RPM/2")], default = "2")
-config.plugins.FanControl.EnableThread = ConfigYesNo(default = False)
+config.plugins.FanControl.EnableThread = ConfigYesNo(default = True)
 
 def GetFanRPM():
 	global RPMread
@@ -944,6 +944,7 @@ class FanControl2(Screen):
 		self.dontshutdown = False
 		self.Recording  = False
 		self.inStandby  = False
+		self.HDDidle    = True
 		# RPM PI controller initialization - later
 		self.RPMController.timer_delay = 10.0
 		self.RPMController.dt = 10.0

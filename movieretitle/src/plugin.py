@@ -71,7 +71,7 @@ class MovieRetitle(Screen, ConfigListScreen):
 			self.locationEl
 		]
 
-		ConfigListScreen.__init__(self, l)
+		ConfigListScreen.__init__(self, l, session = session)
 
 		self.onLayoutFinish.append(self.setCustomTitle)
 		

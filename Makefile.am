@@ -15,6 +15,7 @@ SUBDIRS = \
 	birthdayreminder \
 	bonjour \
 	cdinfo \
+	channelselectionshorttitle \
 	curlytx \
 	dreamexplorer \
 	dreamirc \
@@ -28,6 +29,7 @@ SUBDIRS = \
 	epgrefresh \
 	eurotictv \
 	eventlist \
+	eventposition \
 	filebrowser \
 	flashexpander \
 	fritzcall \

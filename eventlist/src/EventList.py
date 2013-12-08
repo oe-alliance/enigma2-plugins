@@ -54,23 +54,23 @@ class EventList(Converter, object):
 			return []
 		curEvent = self.source.getCurrentEvent()
 		if curEvent:
-			self.epgcache.startTimeQuery(eServiceReference(ref.toString()), curEvent.getBeginTime() + curEvent.getDuration())
-			i = 1
-			while i <= (self.eventcount):
-				event = self.epgcache.getNextTimeEntry()
-				if event is not None:
-					contentList.append(self.getEventTuple(event),)
-				i +=1
-			if self.primetime == 1:
-				now = localtime(time())
-				dt = datetime(now.tm_year, now.tm_mon, now.tm_mday, 20, 15)
-				if time() > mktime(dt.timetuple()):
-					dt += timedelta(days=1) # skip to next day...
-				primeTime = int(mktime(dt.timetuple()))
-				self.epgcache.startTimeQuery(eServiceReference(ref.toString()), primeTime)
-				event = self.epgcache.getNextTimeEntry()
-				if event and (event.getBeginTime() <= int(mktime(dt.timetuple()))):
-					contentList.append(self.getEventTuple(event),)
+			if not self.epgcache.startTimeQuery(eServiceReference(ref.toString()), curEvent.getBeginTime() + curEvent.getDuration()):
+				i = 1
+				while i <= (self.eventcount):
+					event = self.epgcache.getNextTimeEntry()
+					if event is not None:
+						contentList.append(self.getEventTuple(event),)
+					i +=1
+				if self.primetime == 1:
+					now = localtime(time())
+					dt = datetime(now.tm_year, now.tm_mon, now.tm_mday, 20, 15)
+					if time() > mktime(dt.timetuple()):
+						dt += timedelta(days=1) # skip to next day...
+					primeTime = int(mktime(dt.timetuple()))
+					if not self.epgcache.startTimeQuery(eServiceReference(ref.toString()), primeTime):
+						event = self.epgcache.getNextTimeEntry()
+						if event and (event.getBeginTime() <= int(mktime(dt.timetuple()))):
+							contentList.append(self.getEventTuple(event),)
 		return contentList
 
 	def getEventTuple(self,event):

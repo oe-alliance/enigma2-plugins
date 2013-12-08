@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 811 $
-$Date: 2013-10-01 17:45:55 +0200 (Tue, 01 Oct 2013) $
-$Id: plugin.py 811 2013-10-01 15:45:55Z michael $
+$Revision: 827 $
+$Date: 2013-12-05 10:00:30 +0100 (Thu, 05 Dec 2013) $
+$Id: plugin.py 827 2013-12-05 09:00:30Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -89,7 +89,7 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", "05.29, 05.50, 05.51, 05.52")])
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[("none", _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", "05.29, 05.50, 05.51, 05.52, ...")])
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
@@ -275,8 +275,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 811 $"[1:-2] + "\n" + 
-							"$Date: 2013-10-01 17:45:55 +0200 (Tue, 01 Oct 2013) $"[1:23] + "\n"
+							"$Revision: 827 $"[1:-2] + "\n" + 
+							"$Date: 2013-12-05 10:00:30 +0100 (Thu, 05 Dec 2013) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1861,7 +1861,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 811 $"[1: - 1] + "$Date: 2013-10-01 17:45:55 +0200 (Tue, 01 Oct 2013) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 827 $"[1: - 1] + "$Date: 2013-12-05 10:00:30 +0100 (Thu, 05 Dec 2013) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2373,7 +2373,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver): # pylint: disable=W0223
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 811 $"[1:-1]	+ "$Date: 2013-10-01 17:45:55 +0200 (Tue, 01 Oct 2013) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 827 $"[1:-1]	+ "$Date: 2013-12-05 10:00:30 +0100 (Thu, 05 Dec 2013) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

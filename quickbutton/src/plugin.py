@@ -27,7 +27,6 @@ from Components.config import ConfigSubsection, ConfigText, configfile, ConfigSe
 from Components.config import config
 from Components.Button import Button
 from Screens.MessageBox import MessageBox
-from Tools.HardwareInfo import HardwareInfo
 # for localized messages
 from . import _
 
@@ -62,8 +61,8 @@ def autostart(reason, **kwargs):
 		InfoBarPlugins.yellowlong = yellowlong
 		InfoBarPlugins.redlong = redlong
 		InfoBarPlugins.bluelong = bluelong
-		if HardwareInfo().get_device_name() in ("dm8000", "dm7020hd"):
-			ENABLE_RED_BUTTON = True		
+		if config.misc.rcused.value != 1:
+			ENABLE_RED_BUTTON = True
 			InfoBarPlugins.red = red
 
 def setup(session,**kwargs):
