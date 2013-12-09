@@ -125,7 +125,7 @@ class AutoMountView(Screen):
 		cur = self["config"].getCurrent()
 		if cur:
 			returnValue = cur[1]
-			self.session.openWithCallback(self.MountEditClosed, AutoMountEdit, self.skin_path, iAutoMount.automounts[returnValue])
+			self.session.openWithCallback(self.MountEditClosed, AutoMountEdit, self.skin_path, iAutoMount.automounts[returnValue], False)
 
 	def MountEditClosed(self, returnValue = None):
 		if returnValue == None:

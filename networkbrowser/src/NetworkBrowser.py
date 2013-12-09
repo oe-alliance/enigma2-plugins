@@ -470,6 +470,7 @@ class NetworkBrowser(Screen):
 	def openMountEdit(self, selection):
 		if selection is not None and len(selection):
 			mounts = iAutoMount.getMountsList()
+			newmount = True
 			if selection[0] == 'nfsShare': # share entry selected
 				#Initialize blank mount enty
 				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
@@ -483,10 +484,10 @@ class NetworkBrowser(Screen):
 				data['options'] = "rw,nolock,tcp"
 
 				for sharename, sharedata in mounts.items():
-					if sharedata['ip'] == selection[2] and sharedata['sharedir'] == selection[4]:
+					if sharedata['ip'] == selection[2] and sharedata['sharedir'] in selection[4]:
 						data = sharedata
-				self.session.openWithCallback(self.MountEditClosed,AutoMountEdit, self.skin_path, data)
-			if selection[0] == 'smbShare': # share entry selected
+						newmount = False
+			elif selection[0] == 'smbShare': # share entry selected
 				#Initialize blank mount enty
 				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
 				# add data
@@ -512,9 +513,10 @@ class NetworkBrowser(Screen):
 					data['password'] = "password"
 
 				for sharename, sharedata in mounts.items():
-					if sharedata['ip'] == selection[2].strip() and sharedata['sharedir'] == selection[3].strip():
+					if sharedata['ip'] == selection[2].strip() and sharedata['sharedir'] in selection[3].strip():
 						data = sharedata
-				self.session.openWithCallback(self.MountEditClosed,AutoMountEdit, self.skin_path, data)
+						newmount = False
+			self.session.openWithCallback(self.MountEditClosed,AutoMountEdit, self.skin_path, data, newmount)
 
 	def MountEditClosed(self, returnValue = None):
 		if returnValue == None:

@@ -26,13 +26,14 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 		</screen>"""
 
-	def __init__(self, session, plugin_path, mountinfo = None ):
+	def __init__(self, session, plugin_path, mountinfo = None, newmount = True):
 		self.skin_path = plugin_path
 		self.session = session
 		Screen.__init__(self, self.session)
 
 		self.onChangedEntry = [ ]
 		self.mountinfo = mountinfo
+		self.newmount = newmount
 		if self.mountinfo is None:
 			#Initialize blank mount enty
 			self.mountinfo = { 'isMounted': False, 'mountusing': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
@@ -159,12 +160,16 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			defaultOptions = "rw,utf8"
 		if self.mountinfo['sharename'] and self.mountinfo.has_key('sharename'):
 			sharename = re_sub("\W", "", self.mountinfo['sharename'])
+			self.old_sharename = sharename
 		else:
-			sharename = "Sharename"
+			sharename = ""
+			self.old_sharename = None
 		if self.mountinfo.has_key('sharedir'):
 			sharedir = self.mountinfo['sharedir']
+			self.old_sharedir = sharedir
 		else:
-			sharedir = "/export/hdd"
+			sharedir = ""
+			self.old_sharedir = None
 		if self.mountinfo.has_key('options'):
 			options = self.mountinfo['options']
 		else:
@@ -186,16 +191,14 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		else:
 			hdd_replacement = False
 		if sharename is False:
-			sharename = "Sharename"
+			sharename = ""
 		if sharedir is False:
-			sharedir = "/export/hdd"
+			sharedir = ""
 		if username is False:
 			username = ""
 		if password is False:
 			password = ""
 
-		self.old_sharename = sharename
-		self.old_sharedir = sharedir
 		self.mountusingConfigEntry = NoSave(ConfigSelection(self.mountusing, default = mountusing ))
 		self.activeConfigEntry = NoSave(ConfigEnableDisable(default = active))
 		self.ipConfigEntry = NoSave(ConfigIP(default = ip))
@@ -318,12 +321,12 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		sharexists = False
 		for data in self.mounts:
 			if self.mounts[data]['sharename'] == self.old_sharename:
-					sharexists = True
-					break
+				sharexists = True
+				break
 
-		if self.old_sharename != self.sharenameConfigEntry.value:
+		if not self.newmount and self.old_sharename and self.old_sharename != self.sharenameConfigEntry.value:
 			self.session.openWithCallback(self.updateConfig, MessageBox, _("You have changed the share name!\nUpdate existing entry and continue?\n"), default=False )
-		elif self.old_sharename == self.sharenameConfigEntry.value and sharexists:
+		elif not self.newmount and self.old_sharename and self.old_sharename == self.sharenameConfigEntry.value and sharexists:
 			self.session.openWithCallback(self.updateConfig, MessageBox, _("A mount entry with this name already exists!\nUpdate existing entry and continue?\n"), default=False )
 		else:
 			self.session.openWithCallback(self.applyConfig, MessageBox, _("Are you sure you want to save this network mount?\n\n") )
