@@ -18,6 +18,7 @@ SUBDIRS = \
 	bitrateviewer \
 	bonjour \
 	cdinfo \
+	channelselectionshorttitle \
 	curlytx \
 	dreamexplorer \
 	dreamirc \

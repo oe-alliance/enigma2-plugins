@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 '''
-$Id: nrzuname.py 800 2013-07-21 12:34:08Z michael $
+$Id: nrzuname.py 824 2013-12-02 16:56:32Z michael $
 $Author: michael $
-$Revision: 800 $
-$Date: 2013-07-21 14:34:08 +0200 (Sun, 21 Jul 2013) $
+$Revision: 824 $
+$Date: 2013-12-02 17:56:32 +0100 (Mon, 02 Dec 2013) $
 '''
 
 # W0603 (global statement); W0141 (map, filter, etc.)
@@ -161,10 +161,10 @@ class ReverseLookupAndNotifier:
 
 		self.countrycode = countrycode
 
-		if re.match('^\+', self.number):
+		if re.match(r'^\+', self.number):
 			self.number = '00' + self.number[1:]
 
-		if self.number[:len(countrycode)] == countrycode:
+		if countrycode and self.number[:len(countrycode)] == countrycode:
 			self.number = '0' + self.number[len(countrycode):]
 
 		if number[0] != "0":
@@ -173,6 +173,7 @@ class ReverseLookupAndNotifier:
 			return
 
 		if self.number[:2] == "00":
+			debug("[ReverseLookupAndNotifier] number %s, %s" %(self.number, self.number[:4]))
 			if countries.has_key(self.number[:3]):	 #	e.g. USA
 				self.countrycode = self.number[:3]
 			elif countries.has_key(self.number[:4]):
@@ -185,16 +186,10 @@ class ReverseLookupAndNotifier:
 				self.notifyAndReset()
 				return
 
-		if countries.has_key(self.countrycode):
-			debug("[ReverseLookupAndNotifier] Found website for reverse lookup")
-			self.websites = countries[self.countrycode]
-			self.nextWebsiteNo = 1
-			self.handleWebsite(self.websites[0])
-		else:
-			debug("[ReverseLookupAndNotifier] Country cannot be reverse handled")
-			# self.caller = _("UNKNOWN")
-			self.notifyAndReset()
-			return
+		debug("[ReverseLookupAndNotifier] Found website for reverse lookup")
+		self.websites = countries[self.countrycode]
+		self.nextWebsiteNo = 1
+		self.handleWebsite(self.websites[0])
 
 	def handleWebsite(self, website):
 		debug("[ReverseLookupAndNotifier] handleWebsite: " + website.getAttribute("name"))
