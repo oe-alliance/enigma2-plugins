@@ -1231,16 +1231,16 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 
 	def getGoogleCover(self, artist,album):
 		if artist != "" and album != "":
-			url = "http://images.google.de/images?q=%s+%s&btnG=Bilder-Suche" % (quote(album),quote(artist))
+			url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s+%s" % (quote(album),quote(artist))
 			sendUrlCommand(url, None,10).addCallback(self.googleImageCallback).addErrback(self.coverDownloadFailed)
 		else:
 			self["coverArt"].showDefaultCover()
 
 	def googleImageCallback(self, result):
-		foundPos = result.find("imgres?imgurl=")
-		foundPos2 = result.find("&amp;imgrefurl=")
+		foundPos = result.find("unescapedUrl\":\"")
+		foundPos2 = result.find("\",\"url\":\"")
 		if foundPos != -1 and foundPos2 != -1:
-			url = result[foundPos+14:foundPos2]
+			url = result[foundPos+15:foundPos2]
 			parts = url.split("/")
 			filename = parts[-1]
 			if filename != self.currentGoogleCoverFile:
