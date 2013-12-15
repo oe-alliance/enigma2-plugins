@@ -254,6 +254,10 @@ msgstr "Uhr"
 msgid "Smiley"
 msgstr "Smiley"
 
+#: ..\src/plugin.py:16
+msgid "no Image"
+msgstr "kein Bild"
+
 #: ..\src/plugin.py:54
 #: ..\src/plugin.py:55
 msgid "KiddyTimer"

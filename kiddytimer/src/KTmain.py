@@ -2,6 +2,7 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from KTMultiPixmap import KTmultiPixmap
 from Components.config import config, configfile
+from Components.Pixmap import Pixmap
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InputBox import PinInput
 from Screens.MessageBox import MessageBox
@@ -42,24 +43,38 @@ class KiddyTimerScreen(Screen):
         self["TimerText"] = Label(_("??:??"))
         self["TimerSlider"] = ProgressBar()
         self["TimerSliderText"] = Label(_("??:??"))
-        
+        self["TimerTransparent"] = Pixmap()
+        self["TimerTransparentText"] = Label(_("01:00"))
+
     def renderScreen(self):
         self["TimerSlider"].setValue(int(kiddyTimer.remainingPercentage*100)) 
         self["TimerGraph"].setPixmapNum(kiddyTimer.curImg)
         self.sTimeLeft = KTglob.getTimeFromSeconds( (kiddyTimer.remainingTime + 59) , False ) # Add 59 Seconds to show one minute if less than 1 minute left...
         self["TimerText"].setText(self.sTimeLeft)
         self["TimerSliderText"].setText(self.sTimeLeft)
+        self["TimerTransparentText"].setText(self.sTimeLeft)
 
         if config.plugins.KiddyTimer.timerStyle.value == "clock":
             self["TimerGraph"].show()
             self["TimerText"].show()
             self["TimerSlider"].hide()    
             self["TimerSliderText"].hide()
-        else:
+            self["TimerTransparent"].hide()
+            self["TimerTransparentText"].hide()
+        elif config.plugins.KiddyTimer.timerStyle.value == "smiley":
             self["TimerGraph"].hide()
             self["TimerText"].hide()
             self["TimerSlider"].show()
             self["TimerSliderText"].show()
+            self["TimerTransparent"].hide()
+            self["TimerTransparentText"].hide()
+        else:
+            self["TimerGraph"].hide()
+            self["TimerText"].hide()
+            self["TimerSlider"].hide()
+            self["TimerSliderText"].hide()
+            self["TimerTransparent"].show()
+            self["TimerTransparentText"].show()
 
     def movePosition(self):
         if self.instance:

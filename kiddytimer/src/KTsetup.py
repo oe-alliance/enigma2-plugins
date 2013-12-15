@@ -2,6 +2,7 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
+from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.config import config, configfile, getConfigListEntry
 from KTmain import kiddyTimer
@@ -150,17 +151,30 @@ class KiddyTimerPositioner(Screen, MovableScreen):
         self["TimerText"] = Label(_("01:00"))
         self["TimerSlider"] = ProgressBar()
         self["TimerSliderText"] = Label(_("01:00"))
+        self["TimerTransparent"] = Pixmap()
+        self["TimerTransparentText"] = Label(_("01:00"))
         
         if config.plugins.KiddyTimer.timerStyle.value == "clock":
             self["TimerGraph"].show()
             self["TimerText"].show()
             self["TimerSlider"].hide()    
             self["TimerSliderText"].hide()
-        else:
+            self["TimerTransparent"].hide()
+            self["TimerTransparentText"].hide()
+        elif config.plugins.KiddyTimer.timerStyle.value == "smiley":
             self["TimerGraph"].hide()
             self["TimerText"].hide()
             self["TimerSlider"].show()
             self["TimerSliderText"].show()
+            self["TimerTransparent"].hide()
+            self["TimerTransparentText"].hide()
+        else:
+            self["TimerGraph"].hide()
+            self["TimerText"].hide()
+            self["TimerSlider"].hide()
+            self["TimerSliderText"].hide()
+            self["TimerTransparent"].show()
+            self["TimerTransparentText"].show()
 
         self["actions"] = ActionMap(["OkCancelActions"] , 
         {
