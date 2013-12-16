@@ -9,6 +9,7 @@ from Screens.Screen import Screen
 from Screens.EpgSelection import EPGSelection
 from Screens.ChannelSelection import SimpleChannelSelection
 from Screens.ChoiceBox import ChoiceBox
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
@@ -21,7 +22,6 @@ from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
-from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 import os, re
 try:
 	import htmlentitydefs
@@ -386,7 +386,7 @@ class IMDB(Screen):
 	def openVirtualKeyBoard(self):
 		self.session.openWithCallback(
 			self.gotSearchString,
-			NTIVirtualKeyBoard,
+			VirtualKeyBoard,
 			title = _("Enter text to search for")
 		)
 
@@ -743,7 +743,6 @@ class IMDbSetup(Screen, ConfigListScreen):
 		if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
 			if self["config"].getCurrent()[1].help_window.instance is not None:
 				self["config"].getCurrent()[1].help_window.hide()
-		from Screens.VirtualKeyBoard import VirtualKeyBoard
 		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
 
 	def VirtualKeyBoardCallback(self, callback = None):
