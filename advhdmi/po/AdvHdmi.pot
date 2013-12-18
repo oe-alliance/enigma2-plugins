@@ -1,70 +1,67 @@
-# Signed-off-by: Dario Croci <spaeleus@croci.org>
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 plugin - AdvHdmi\n"
-"POT-Creation-Date: 2013-12-18 08:44+Mitteleuropäische Zeit\n"
-"PO-Revision-Date: 2013-12-18 08:52+0100\n"
-"Last-Translator: Joe128 <johnny.u@gmx.at>\n"
-"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
-"Language: it_IT\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-12-18 08:44+Mitteleurop�ische Zeit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: .../enigma2-plugins/advhdmi\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: .../enigma2-plugins/advhdmi\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
 
 #: src\plugin.py:39
 msgid "Monday"
-msgstr "Lunedì"
+msgstr ""
 
 #: src\plugin.py:40
 msgid "Tuesday"
-msgstr "Martedì"
+msgstr ""
 
 #: src\plugin.py:41
 msgid "Wednesday"
-msgstr "Mercoledì"
+msgstr ""
 
 #: src\plugin.py:42
 msgid "Thursday"
-msgstr "Giovedì"
+msgstr ""
 
 #: src\plugin.py:43
 msgid "Friday"
-msgstr "Venerdì"
+msgstr ""
 
 #: src\plugin.py:44
 msgid "Saturday"
-msgstr "Sabato"
+msgstr ""
 
 #: src\plugin.py:45
 msgid "Sunday"
-msgstr "Domenica"
+msgstr ""
 
 #: src\plugin.py:57
 msgid "systemmenue"
-msgstr "Menu sistema"
+msgstr ""
 
 #: src\plugin.py:58
 msgid "pluginmenue"
-msgstr "Menu plugin"
+msgstr ""
 
 #: src\plugin.py:59
 msgid "extensions"
-msgstr "Estensioni"
+msgstr ""
 
 #: src\plugin.py:83 src\plugin.py:366
 msgid "Cancel"
-msgstr "Annullare"
+msgstr ""
 
 #: src\plugin.py:84
 msgid "Save"
-msgstr "Salvare"
+msgstr ""
 
 #: src\plugin.py:85
 msgid "Timespans"
@@ -72,44 +69,33 @@ msgstr ""
 
 #: src\plugin.py:120 src\plugin.py:434
 msgid "Advanced HDMI-Cec Setup"
-msgstr "Impostazioni Advanced HDMI-Cec"
+msgstr ""
 
 #: src\plugin.py:123
-#, fuzzy
 msgid ""
 "Partially disable HDMI-Cec?\n"
-"It can be prevented only the signals that are sent from the Dreambox. "
-"Signals received by the Dreambox will not be prevented."
+"It can be prevented only the signals that are sent from the Dreambox. Signals received by the Dreambox will not be prevented."
 msgstr ""
-"Determinare se disabilitare parzialmente HDMI-Cec.\n"
-"Possono essere intercettati solo i segnali inviati dal Dreambox. I segnali "
-"ricevuti dal Dreambox non possono essere intercettati."
 
 #: src\plugin.py:123
-#, fuzzy
 msgid "partially disable HdmiCec"
-msgstr "HdmiCec parzialmente disabiliato"
+msgstr ""
 
 #: src\plugin.py:125
 msgid "Should HDMI-Cec be disabled when GUI service startup?"
 msgstr ""
-"Determinare se disabiliatare HDMI-Cec all'avvio dell'interfaccia grafica."
 
 #: src\plugin.py:125
 msgid "disable at GUI-start"
-msgstr "Disabilitare all'avvio GUI"
+msgstr ""
 
 #: src\plugin.py:127
-msgid ""
-"Should HDMI-Cec be disabled when the commands are sent from the web "
-"interface?"
+msgid "Should HDMI-Cec be disabled when the commands are sent from the web interface?"
 msgstr ""
-"determinare se disabilitare HDMI-Cec nei comandi inviati tramite "
-"l'interfaccia web."
 
 #: src\plugin.py:127
 msgid "disable from webinterface"
-msgstr "Disabilitare nella interfaccia web"
+msgstr ""
 
 #: src\plugin.py:128
 msgid "Should HDMI-Cec be send on Power On?"
@@ -137,11 +123,11 @@ msgstr ""
 
 #: src\plugin.py:131
 msgid "Where should this setup be displayed?"
-msgstr "Menu nei quali inserire l'accesso  alle impostazioni."
+msgstr ""
 
 #: src\plugin.py:131
 msgid "show in"
-msgstr "Mostrare nel"
+msgstr ""
 
 #: src\plugin.py:272
 msgid "From WD"
@@ -176,9 +162,8 @@ msgid "Delete"
 msgstr ""
 
 #: src\plugin.py:300
-#, fuzzy
 msgid "Disable HDMI-CEC chronologically"
-msgstr "Disabilitare cronologicamente"
+msgstr ""
 
 #: src\plugin.py:327
 msgid "Really delete this HDMI-Cec-Timespan Entry?"
@@ -190,35 +175,35 @@ msgstr ""
 
 #: src\plugin.py:380
 msgid "From which day of the week, HDMI-Cec should be disabled?"
-msgstr "Giorno della settimana in cui iniziare a disabilitare HDMI-Cec."
+msgstr ""
 
 #: src\plugin.py:380
 msgid "from weekday"
-msgstr "Dal giorno"
+msgstr ""
 
 #: src\plugin.py:381
 msgid "To what day of the week, HDMI-Cec should be disabled?"
-msgstr "Giorno della settimana in cui cessare la disabilitazione di HDMI-Cec."
+msgstr ""
 
 #: src\plugin.py:381
 msgid "to weekday"
-msgstr "Al giorno"
+msgstr ""
 
 #: src\plugin.py:382
 msgid "At which time, HDMI-Cec should be disabled?"
-msgstr "Ora in cui iniziare  a disabilitare HDMI-Cec."
+msgstr ""
 
 #: src\plugin.py:382
 msgid "from (HH:MI)"
-msgstr "Dalle (HH:MM)"
+msgstr ""
 
 #: src\plugin.py:383
 msgid "Until the time at which, HDMI-Cec should be disabled?"
-msgstr "Ora in cui cessare la disabilitazione diHDMI.Cec."
+msgstr ""
 
 #: src\plugin.py:383
 msgid "to (HH:MI)"
-msgstr "Alle (HH:MM)"
+msgstr ""
 
 #: src\plugin.py:396
 msgid "Edit HDMI-Cec-Timespan"
@@ -226,19 +211,5 @@ msgstr ""
 
 #: src\plugin.py:448 src\plugin.py:455 src\plugin.py:463
 msgid "manage when HDMI Cec is enabled"
-msgstr "Gestire quando abilitare HDMI-Cec"
+msgstr ""
 
-#~ msgid "use second timespan"
-#~ msgstr "Usare un secondo intervallo temporale"
-
-#~ msgid "Do you want a further period of time to be used?"
-#~ msgstr "Determinare se impostare un ulteriore intervallo temporale."
-
-#~ msgid "Second timespan from"
-#~ msgstr "Secondo intervallo temporale: dalle"
-
-#~ msgid "Second timespan to"
-#~ msgstr "Secondo intervallo temporale: alle"
-
-#~ msgid "Advanced HDMI Cec Setup"
-#~ msgstr "Impostazioni Advanced HDMI Cec"

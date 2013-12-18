@@ -47,6 +47,8 @@ WEEKDAYS = [
 config.plugins.AdvHdmiCec = ConfigSubsection()
 config.plugins.AdvHdmiCec.enable = ConfigYesNo(default = False)
 config.plugins.AdvHdmiCec.debug = ConfigYesNo(default = False)
+config.plugins.AdvHdmiCec.enable_power_on = ConfigYesNo(default = True)
+config.plugins.AdvHdmiCec.enable_power_off = ConfigYesNo(default = True)
 config.plugins.AdvHdmiCec.disable_after_enigmastart = ConfigYesNo(default = False)
 config.plugins.AdvHdmiCec.disable_from_webif = ConfigYesNo(default = False)
 config.plugins.AdvHdmiCec.entriescount =  ConfigInteger(0)
@@ -118,12 +120,14 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 		self.setTitle(_("Advanced HDMI-Cec Setup"))
 		
 	def getConfig(self):
-		self.list = [ getConfigListEntry(_("partially disabel HdmiCec"), config.plugins.AdvHdmiCec.enable, _("Partially disabel HDMI-Cec?\nIt can be prevented only the signals that are sent from the Dreambox. Signals received by the Dreambox will not be prevented.")) ]
+		self.list = [ getConfigListEntry(_("partially disable HdmiCec"), config.plugins.AdvHdmiCec.enable, _("Partially disable HDMI-Cec?\nIt can be prevented only the signals that are sent from the Dreambox. Signals received by the Dreambox will not be prevented.")) ]
 		if config.plugins.AdvHdmiCec.enable.value:
 			self.list.append(getConfigListEntry(_("disable at GUI-start"), config.plugins.AdvHdmiCec.disable_after_enigmastart, _("Should HDMI-Cec be disabled when GUI service startup?")))
 			if g_AdvHdmi_webif_available:
 				self.list.append(getConfigListEntry(_("disable from webinterface"), config.plugins.AdvHdmiCec.disable_from_webif, _("Should HDMI-Cec be disabled when the commands are sent from the web interface?")))
-		self.list.append(getConfigListEntry(_("enable debug"), config.plugins.AdvHdmiCec.debug, _("Schould debugmessages be printed?")))
+			self.list.append(getConfigListEntry(_("enable Power On"), config.plugins.AdvHdmiCec.enable_power_on, _("Should HDMI-Cec be send on Power On?")))
+			self.list.append(getConfigListEntry(_("enable Power Off"), config.plugins.AdvHdmiCec.enable_power_off, _("Should HDMI-Cec be send on Power Off?")))
+			self.list.append(getConfigListEntry(_("enable debug"), config.plugins.AdvHdmiCec.debug, _("Schould debugmessages be printed?")))
 		self.list.append(getConfigListEntry(_("show in"), config.plugins.AdvHdmiCec.show_in, _("Where should this setup be displayed?")))
 
 		self["config"].list = self.list
@@ -528,14 +532,14 @@ def AdvHdiCecDOIT():
 # Overwrite CEC-Base
 def Cec_powerOn(self):
 	global g_AdvHdmi_initalized
-	if config.plugins.cec.sendpower.value and AdvHdiCecDOIT():
+	if config.plugins.cec.sendpower.value and config.plugins.AdvHdmiCec.enable_power_on.value and AdvHdiCecDOIT():
 		g_AdvHdmi_initalized = True
 		print "[AdvHdmiCec] power on"
 		hdmi_cec.otp_source_enable()
 
 def Cec_powerOff(self):
 	global g_AdvHdmi_initalized
-	if config.plugins.cec.sendpower.value and AdvHdiCecDOIT():
+	if config.plugins.cec.sendpower.value and config.plugins.AdvHdmiCec.enable_power_off.value and AdvHdiCecDOIT():
 		print "[AdvHdmiCec] power off"
 		if not g_AdvHdmi_initalized:
 			print "[AdvHdmiCec] Workaround: enable Hdmi-Cec-Source (^=poweron)"
