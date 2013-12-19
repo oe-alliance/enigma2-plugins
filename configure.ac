@@ -466,10 +466,6 @@ merlinmusicplayer/src/Makefile
 merlinmusicplayer/src/images/Makefile
 merlinmusicplayer/src/merlinmp3player/Makefile
 
-meteoitalia/Makefile
-meteoitalia/meta/Makefile
-meteoitalia/src/Makefile
-
 mosaic/Makefile
 mosaic/meta/Makefile
 mosaic/po/Makefile
