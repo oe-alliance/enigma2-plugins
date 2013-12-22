@@ -32,12 +32,6 @@ from Source.CueSheetSupport import DVDCutListSupport, CutListSupport
 from Screens.MessageBox import MessageBox
 from Screens.InfoBar import MoviePlayer
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists
-# Andy Blackburn [add support for SCOPE_ACTIVE_SKIN] begin
-try:
-	from Tools.Directories import SCOPE_ACTIVE_SKIN
-except:
-	pass	
-# Andy Blackburn [add support for SCOPE_ACTIVE_SKIN] end
 from enigma import ePoint, eTimer, iPlayableService
 from Tools import Notifications
 from Components.Sources.ServiceEvent import ServiceEvent
@@ -92,23 +86,12 @@ class MoviePlayerExtended_summary(Screen):
         self["Title"].setText(title)
 
     def showSeperator(self):
-        if TFT_8000_Present:
-            self["Seperator1"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "images/sep_tft.png"))
-            self["Seperator2"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "images/sep_tft.png"))
-        else:
-            # Andy Blackburn [add support for SCOPE_ACTIVE_SKIN] begin
-            #self["Seperator"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "images/sep_lcd_oled.png"))
-            try:
-                self["Seperator1"].setText(resolveFilename(SCOPE_ACTIVE_SKIN, "images/sep_lcd_oled.png"))
-                self["Seperator2"].setText(resolveFilename(SCOPE_ACTIVE_SKIN, "images/sep_lcd_oled.png"))
-            except:
-                self["Seperator1"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/images/sep_lcd_oled.png"))
-                self["Seperator2"].setText(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/images/sep_lcd_oled.png"))
-            # Andy Blackburn [add support for SCOPE_ACTIVE_SKIN] end
+		self["Seperator1"].show()
+		self["Seperator2"].show()
 
     def hideSeperator(self):
-        self["Seperator1"].setText("")   
-        self["Seperator2"].setText("")   
+		self["Seperator1"].hide()   
+		self["Seperator2"].hide()   
     
 class SelectionEventInfo:
     def __init__(self):
