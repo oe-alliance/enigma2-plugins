@@ -56,7 +56,7 @@ class SMTP(ServiceBase):
 		self.setOption( 'password',   NoSave(ConfigPassword(default="password")),                           _("Password") )
 		
 		self.setOption( 'mailfrom',   NoSave(ConfigText(default = "abc@provider.com", fixed_size = False)), _("Mail from") )
-		self.setOption( 'mailto',     NoSave(ConfigText(fixed_size = False)),                               _("Mail to or leave empty") )
+		self.setOption( 'mailto',     NoSave(ConfigText(fixed_size = False)),                               _("Mail to or leave empty (From will be used)") )
 
 	def push(self, callback, errback, pluginname, subject, body="", attachments=[]):
 		from Plugins.Extensions.PushService.plugin import NAME, VERSION, SUPPORT, DONATE

@@ -35,7 +35,7 @@ from PushService import PushService
 
 # Constants
 NAME = "PushService"
-VERSION = "0.2.7"
+VERSION = "0.2.8"
 SUPPORT = "http://bit.ly/psihad"
 DONATE = "http://bit.ly/pspaypal"
 ABOUT = "\n  " + NAME + " " + VERSION + "\n\n" \
@@ -62,6 +62,7 @@ config.pushservice.boxname                   = ConfigText(default = "Enigma2", f
 config.pushservice.xmlpath                   = ConfigText(default = "/etc/enigma2/pushservice.xml", fixed_size = False)
 
 config.pushservice.runonboot                 = ConfigEnableDisable(default = True)
+config.pushservice.bootdelay                 = ConfigSelectionNumber(5, 1000, 5, default = 10)
 config.pushservice.time                      = ConfigClock(default = 0)
 config.pushservice.period                    = ConfigSelectionNumber(0, 1000, 1, default = 24)
 

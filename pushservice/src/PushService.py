@@ -74,7 +74,7 @@ class PushService(PushServiceBase):
 		print "[PushService] next", self.state
 		
 		if self.state == PSBOOT:
-			self.startTimer( 10, PSBOOTRUN )
+			self.startTimer( int(config.pushservice.bootdelay.value), PSBOOTRUN )
 		
 		elif self.state == PSBOOTRUN \
 			or self.state == PSFIRST:
