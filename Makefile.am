@@ -89,6 +89,7 @@ SUBDIRS = \
 	pushservice \
 	quickbutton \
 	reconstructapsc \
+	reftopiconname \
 	remotetimer \
 	rsdownloader \
 	satloader \
