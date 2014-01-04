@@ -1106,7 +1106,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 				self.screenSaverScreen.updateDisplayText("%s - %s" % (self.songList[self.currentIndex][0].title,self.songList[self.currentIndex][0].album))
 			else:
 				self.screenSaverScreen.updateDisplayText(self.songList[self.currentIndex][0].title)
-		self.updateCover(self.songList[self.currentIndex][0].artist, self.songList[self.currentIndex][0].album)
+		self.updateCover(self.songList[self.currentIndex][0].artist, self.songList[self.currentIndex][0].album, self.songList[self.currentIndex][0].title)
 		self.currentTitle = self.songList[self.currentIndex][0].title
 		self["nextTitle"].setText(self.getNextTitle())
 
@@ -1161,9 +1161,9 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 				self.screenSaverScreen.updateDisplayText("%s - %s" % (title,album))
 			else:
 				self.screenSaverScreen.updateDisplayText(title)
-		self.updateCover(artist, album)
+		self.updateCover(artist, album, title)
 
-	def updateCover(self, artist, album):
+	def updateCover(self, artist, album, title):
 		hasCover = False
 		audio = None
 		audiotype = 0
@@ -1212,7 +1212,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		if not hasCover:
 			if not self["coverArt"].updateCoverArt(self.currentFilename):
 				if config.plugins.merlinmusicplayer.usegoogleimage.value:
-					self.getGoogleCover(artist, album)
+					self.getGoogleCover(artist, album, title)
 				else:
 					self["coverArt"].showDefaultCover()
 					if self.screenSaverScreen:
@@ -1229,12 +1229,18 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			if self[name].getText() != info:
 				self[name].setText(info)
 
-	def getGoogleCover(self, artist,album):
-		if artist != "" and album != "":
+	def getGoogleCover(self, artist, album, title):
+		if (artist == "" or artist == "n/a"):
+			self["coverArt"].showDefaultCover()
+		elif (album == "" or album.startswith("n/a")):
+			if (title == "" or title == "n/a"):
+				self["coverArt"].showDefaultCover()
+			else:
+				url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s+%s" % (quote(artist),quote(title))
+				sendUrlCommand(url, None,10).addCallback(self.googleImageCallback).addErrback(self.coverDownloadFailed)
+		else:
 			url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s+%s" % (quote(album),quote(artist))
 			sendUrlCommand(url, None,10).addCallback(self.googleImageCallback).addErrback(self.coverDownloadFailed)
-		else:
-			self["coverArt"].showDefaultCover()
 
 	def googleImageCallback(self, result):
 		foundPos = result.find("unescapedUrl\":\"")
