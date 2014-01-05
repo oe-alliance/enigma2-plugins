@@ -49,7 +49,7 @@ def transHTML(text):
 config.plugins.imdb = ConfigSubsection()
 config.plugins.imdb.showinplugins = ConfigYesNo(default = False)
 config.plugins.imdb.force_english = ConfigYesNo(default=False)
-config.plugins.imdb.ignore_tags = ConfigText(default='')
+config.plugins.imdb.ignore_tags = ConfigText(visible_width = 50, fixed_size = False)
 
 def quoteEventName(eventName, safe="/()" + ''.join(map(chr,range(192,255)))):
 	# BBC uses '\x86' markers in program names, remove them
@@ -733,14 +733,14 @@ class IMDbSetup(Screen, ConfigListScreen):
 
 	def HideHelp(self):
 		try:
-			if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+			if isinstance(self["config"].getCurrent()[1], ConfigText):
 				if self["config"].getCurrent()[1].help_window.instance is not None:
 					self["config"].getCurrent()[1].help_window.hide()
 		except:
 			pass
 
 	def KeyText(self):
-		if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+		if isinstance(self["config"].getCurrent()[1], ConfigText):
 			if self["config"].getCurrent()[1].help_window.instance is not None:
 				self["config"].getCurrent()[1].help_window.hide()
 		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
