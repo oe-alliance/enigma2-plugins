@@ -1756,9 +1756,14 @@ function AutoTimer(xml, defaults){
 	
 	var from = getAttribute(xml, 'from', defaults);
 	var to = getAttribute(xml, 'to', defaults);
-	var usetimespan = (from || to) ? 'checked' : '';
-	if (to == undefined) to = '23:15';
+	var usetimespan = '';
+	if (xml.getAttribute('from')==undefined || xml.getAttribute('to')==undefined) {
+		usetimespan = '';
+	}else{
+		usetimespan = (from || to) ? 'checked' : '';
+	}
 	if (from == undefined) from = '20:15';
+	if (to == undefined) to = '23:15';
 	this.timespan = {
 		'usetimespan' : usetimespan,
 		'from' : from,
@@ -1767,7 +1772,12 @@ function AutoTimer(xml, defaults){
 	
 	var after = getAttribute(xml, 'after', defaults);
 	var before = getAttribute(xml, 'before', defaults);
-	var usetimeframe = (before || after) ? 'checked' : '';
+	var usetimeframe = '';
+	if (xml.getAttribute('after')==undefined || xml.getAttribute('before')==undefined) {
+		usetimeframe = '';
+	}else{
+		usetimeframe = (before || after) ? 'checked' : '';
+	}
 	if (after == undefined) {
 		after = new Date();
 		after = new Date( after.getUTCFullYear(), after.getUTCMonth(), after.getUTCDate() + 7 );
@@ -2047,7 +2057,7 @@ function AutoTimer(xml, defaults){
 			'timeframe' :             this.timeframe,
 			'offset' :                this.offset,
 			'maxduration' :           this.maxduration,
-						
+			
 			'afterevent' :            this.afterevent,
 			'counter' :               this.counter,
 			
