@@ -2,4 +2,4 @@ installdir = $(libdir)/enigma2/python/Plugins/Extensions/vierg
 
 install_PYTHON = *.py
 
-install_DATA = vierg.png
+install_DATA = *.png
