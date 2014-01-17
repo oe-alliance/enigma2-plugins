@@ -532,9 +532,10 @@ class DBUpdateStatus(Screen):
 		self.BoxID = iNetwork.getAdapterAttribute("eth0", "mac")
 		self.DeviceName = HardwareInfo().get_device_name()
 		try:
-			from enigma import getImageVersionString, getBuildVersionString, getEnigmaVersionString
+			from enigma import getEnigmaVersionString
+			from boxbranding import getImageVersion, getImageBuild
 			self.EnigmaVersion = getEnigmaVersionString()
-			self.ImageVersion = getImageVersionString() + '.' + getBuildVersionString()
+			self.ImageVersion = getImageVersion() + '.' + getImageBuild()
 		except:
 			self.EnigmaVersion = about.getEnigmaVersionString()
 			self.ImageVersion = about.getVersionString()

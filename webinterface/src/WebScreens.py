@@ -78,9 +78,10 @@ class AboutWebScreen(WebScreen):
 		self["Hdd"] = Hdd()
 		self["Frontends"] = Frontend()
 		try:
-			from enigma import getImageVersionString, getBuildVersionString, getEnigmaVersionString
+			from enigma import getEnigmaVersionString
+			from boxbranding import getImageVersion, getImageBuild
 			self["EnigmaVersion"] = StaticText(getEnigmaVersionString())
-			self["ImageVersion"] = StaticText(getVersionString() + '.' + getBuildVersionString())
+			self["ImageVersion"] = StaticText(getImageVersion() + '.' + getImageBuild())
 		except:
 			self["EnigmaVersion"] = StaticText(about.getEnigmaVersionString())
 			self["ImageVersion"] = StaticText(about.getVersionString())
