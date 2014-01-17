@@ -101,6 +101,10 @@ AM_CONDITIONAL(VUDUO2, test "$BOXTYPE" == vuduo2)
 AM_CONDITIONAL(VENTONHDX, test "$BOXTYPE" == ventonhdx)
 AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
 
+PKG_CHECK_MODULES(ENIGMA2, enigma2)
+PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
+PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
+
 AC_ARG_WITH(tpm,
 	AS_HELP_STRING([--with-tpm], [enable plugins that require a TPM]),
 	[with_tpm="$withval"],[with_tpm="no"])
