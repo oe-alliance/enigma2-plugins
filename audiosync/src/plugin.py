@@ -2,6 +2,7 @@
 from . import _
 
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSubList
+from boxbranding import getDistro
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 import AC3main
@@ -25,23 +26,7 @@ def main(session, **kwargs):
 	session.open(AC3main.AC3LipSync, plugin_path)
 
 def startSetup(menuid, **kwargs):
-	distro = None
-	try:
-		from enigma import getDistro
-		distro = getDistro()
-	except:
-		try:
-			file = open('/etc/image-version', 'r')
-			lines = file.readlines()
-			file.close()
-			for x in lines:
-				splitted = x.split('=')
-				if splitted[0] == "comment":
-					distro = splitted[1].replace('\n','')
-		except:
-			distro = None
-
-	if distro == "ventonsupport":
+	if getDistro() == "ventonsupport":
 		if menuid == "expert":
 			return [(_("Audio Sync Setup"), setup, "audiosync_setup", 41)]
 		else:
