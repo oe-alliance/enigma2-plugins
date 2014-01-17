@@ -22,8 +22,6 @@ AM_PATH_PYTHON
 AX_PYTHON_DEVEL
 AX_PTHREAD
 
-TUXBOX_APPS_DVB
-
 AC_ARG_WITH(boxtype,
 	[  --with-boxtype=NAME box type [[none,dm7025,dm800...]]],
 	[BOXTYPE="$withval"],[BOXTYPE="dm800"])
@@ -102,10 +100,6 @@ AM_CONDITIONAL(VUSOLO2, test "$BOXTYPE" == vusolo2)
 AM_CONDITIONAL(VUDUO2, test "$BOXTYPE" == vuduo2)
 AM_CONDITIONAL(VENTONHDX, test "$BOXTYPE" == ventonhdx)
 AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
-
-PKG_CHECK_MODULES(ENIGMA2, enigma2)
-PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
-PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
 
 AC_ARG_WITH(tpm,
 	AS_HELP_STRING([--with-tpm], [enable plugins that require a TPM]),
