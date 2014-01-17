@@ -34,7 +34,7 @@ from Screens.MessageBox import MessageBox
 from RecordTimer import AFTEREVENT
 
 from enigma import eEPGCache
-from boxbranding import getDistro
+from boxbranding import getImageDistro
 
 from Tools.BoundFunction import boundFunction
 
@@ -415,7 +415,7 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	plugin = []
-	if getDistro() in ("openvix", "openatv"):
+	if getImageDistro() in ("openvix", "openatv"):
 		plugin.append(PluginDescriptor(name=_("Remote Timer"), description = _("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu))
 	else:
 		plugin.append(PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main))

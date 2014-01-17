@@ -2,7 +2,7 @@
 from . import _
 
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSubList
-from boxbranding import getDistro
+from boxbranding import getImageDistro
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 import AC3main
@@ -26,7 +26,7 @@ def main(session, **kwargs):
 	session.open(AC3main.AC3LipSync, plugin_path)
 
 def startSetup(menuid, **kwargs):
-	if getDistro() == "ventonsupport":
+	if getImageDistro() == "ventonsupport":
 		if menuid == "expert":
 			return [(_("Audio Sync Setup"), setup, "audiosync_setup", 41)]
 		else:
