@@ -1,7 +1,7 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
-from enigma import getMachineBrand, getMachineName
+from boxbranding import getMachineBrand, getMachineName
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Label import Label
 from Components.Sources.List import List
