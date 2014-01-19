@@ -56,14 +56,14 @@ class PushService(PushServiceBase):
 	######################################
 	# Statemachine and timer
 	def start(self):
-		print "[PushService] start"
+		print "PushService start"
 		self.stopTimer()
 		
 		self.begin()
 		self.next()
 
 	def stop(self):
-		print "[PushService] stop"
+		print "PushService stop"
 		self.stopTimer()
 		
 		self.end()
@@ -71,7 +71,7 @@ class PushService(PushServiceBase):
 
 	def next(self, state = None):
 		if state: self.state = state
-		print "[PushService] next", self.state
+		print "PushService next", self.state
 		
 		if self.state == PSBOOT:
 			self.startTimer( int(config.pushservice.bootdelay.value), PSBOOTRUN )
@@ -87,9 +87,9 @@ class PushService(PushServiceBase):
 		
 		elif self.state == PSFIRSTRUN \
 			or self.state == PSCYCLE:
-			period = config.pushservice.period.value
+			period = int(config.pushservice.period.value)
 			if period > 0:
-				self.startTimer( int(period)*60*60, PSCYCLE )
+				self.startTimer( period*60*60, PSCYCLE )
 
 	def do(self):
 		self.run()

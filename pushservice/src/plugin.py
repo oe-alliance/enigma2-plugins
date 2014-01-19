@@ -35,7 +35,7 @@ from PushService import PushService
 
 # Constants
 NAME = "PushService"
-VERSION = "0.2.8"
+VERSION = "0.2.9"
 SUPPORT = "http://bit.ly/psihad"
 DONATE = "http://bit.ly/pspaypal"
 ABOUT = "\n  " + NAME + " " + VERSION + "\n\n" \
