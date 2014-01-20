@@ -51,7 +51,7 @@ String.prototype.format = function(){
 
 function setInputPlaceholder(element, value){
 	if('placeholder' in element){
-		element.placeholder = value
+		element.placeholder = value;
 	} else {
 		element.value = value;
 		element.on(
@@ -236,13 +236,13 @@ var RequestCounter = {
 	count : 0,
 	callbacks : [],
 	addChangedCallback : function(callback){
-		RequestCounter.callbacks[RequestCounter.callbacks.length] = callback
+		RequestCounter.callbacks[RequestCounter.callbacks.length] = callback;
 	},
 	change: function(count){
 		RequestCounter.count += count;
 		RequestCounter.callbacks.each(function(callback){
 			callback(RequestCounter.count);
-		})
+		});
 	}
 };
 
@@ -259,7 +259,7 @@ var AjaxThing = Class.create({
 	 */
 	getUrl: function(url, parms, callback, errorback){
 		if(parms == undefined)
-			parms = {}
+			parms = {};
 		parms['sessionid'] = global_sessionid;
 
 		debug("[AjaxThing.getUrl] :: url=" + url + " :: parms=" + Object.toJSON(parms));

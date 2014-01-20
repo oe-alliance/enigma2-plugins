@@ -191,6 +191,8 @@ class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
 				self.list.append( getConfigListEntry( _("Start time (HH:MM)"), config.pushservice.time, 0 ) )
 				self.list.append( getConfigListEntry( _("Period in hours (0=disabled)"), config.pushservice.period, 0 ) )
 				self.list.append( getConfigListEntry( _("Run on boot"), config.pushservice.runonboot, 0 ) )
+				if config.pushservice.runonboot.value:
+					self.list.append( getConfigListEntry( _("Boot delay"), config.pushservice.bootdelay, 0 ) )
 			
 		elif self.state == SERVICES:
 			self["key_red"].setText(_("Main"))

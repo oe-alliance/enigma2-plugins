@@ -481,9 +481,6 @@ class InfoBarTunerState(object):
 			timer_list = getNextPendingRecordTimers()[:number_pending_records]
 			
 			if timer_list:
-				#if config.infobartunerstate.list_goesup.value:
-				#	timer_list.reverse()
-				
 				timer_list.reverse()
 				
 				for i, (timer, begin, end) in enumerate(timer_list):
@@ -552,7 +549,7 @@ class InfoBarTunerState(object):
 		else:
 			if self.hideTimer.isActive():
 				self.hideTimer.stop()
-				
+
 	def tunerShow(self, forceshow=False):
 		print "IBTS tunerShow"
 		
@@ -701,20 +698,32 @@ class InfoBarTunerState(object):
 			overwidth = posx + sum(widths) + len([w for w in widths if w]) * spacing + padding - self.desktopwidth + int(config.infobartunerstate.offset_rightside.value)
 			#print "IBTS overwidth", overwidth
 			
-			if config.infobartunerstate.list_goesup.value:
-				#TODO is the start position correct if goesup = True
-				#posy = posy + ( len(self.entries) * height)
-				height = -height
+			# Order windows
+			#wins = sorted( self.entries.itervalues(), key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=False )
+			
+			#TEST 1
+			#wins = sorted( self.entries.itervalues(), key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=config.infobartunerstate.list_goesup.value )
+			
+			#TEST 2
+			#wins = []
+			#wins =       sorted( [ w for w in self.entries.values() if w.type == INFO ],     key=lambda x: (x.type, x.endless, x.begin), reverse=False )
+			#wins.extend( sorted( [ w for w in self.entries.values() if w.type == RECORD ],   key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=False ) )
+			#wins.extend( sorted( [ w for w in self.entries.values() if w.type == FINISHED ], key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=False ) )
+			#wins.extend( sorted( [ w for w in self.entries.values() if w.type == STREAM ],   key=lambda x: (x.type, x.endless, x.timeleft, x.begin), reverse=False ) )
+			#if config.infobartunerstate.list_goesup.value:
+			#	wins.reverse()
+			
+			#TEST 3
+			wins = sorted( self.entries.itervalues(), key=lambda x: (x.type, x.endless, x.begin), reverse=config.infobartunerstate.list_goesup.value )
 			
 			# Resize, move and show windows
-			for win in sorted( self.entries.itervalues(), key=lambda x: (x.type, x.endless, x.timeleft), reverse=False ):
-			#for win in sorted( self.entries.itervalues(), key=lambda x: (x.type, x.timeleft, x.begin) ):
-			##for pos, win in enumerate( sorted( self.entries.itervalues(), key=lambda x: (x.type, x.timeleft) ) ):
+			for win in wins:
 				win.move( posx, posy )
 				win.reorder( widths, overwidth )
 				posy += height
 				# Show windows
 				win.show()
+			
 		elif forceshow:
 			# No entries available
 			try:

@@ -200,20 +200,21 @@ class MyTubeSuggestionsListScreen(Screen):
 				self.list = []
 				self.suggestlist = []
 				suggested = suggestions_tree[1]
-				suggestrelevance = suggestions_tree[4]["google:suggestrelevance"]
-				suggesttype = suggestions_tree[4]["google:suggesttype"]
 				count = 0
-				for suggest in suggested:
-					name = None
-					numresults = None
-					if suggesttype[count] == u'NAVIGATION':
+				if suggested:
+					suggestrelevance = suggestions_tree[4]["google:suggestrelevance"]
+					suggesttype = suggestions_tree[4]["google:suggesttype"]
+					for suggest in suggested:
+						name = None
+						numresults = None
+						if suggesttype[count] == u'NAVIGATION':
+							count +=1
+							continue
+						name = str(suggest)
+						numresults = suggestrelevance[count]
+						if name and numresults:
+							self.suggestlist.append((name, numresults ))
 						count +=1
-						continue
-					name = str(suggest)
-					numresults = suggestrelevance[count]
-					if name and numresults:
-						self.suggestlist.append((name, numresults ))
-					count +=1
 				"""for suggestion in suggestions_tree.findall("CompleteSuggestion"):
 					name = None
 					numresults = None

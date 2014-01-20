@@ -503,7 +503,7 @@ var MediaPlayer = Class.create(Controller, {
 	onInstantPlay: function(event, element){
 		var ref = $F('instantPlay').gsub(":", "%3a");
 		ref = "4097:0:1:0:0:0:0:0:0:0:" + ref;
-		this.playFile(ref)
+		this.playFile(ref);
 		event.stop();
 	},
 
@@ -1065,13 +1065,13 @@ var BaseCore = Class.create({
 	},
 
 	onSessionAvailable: function(sid){
-		debug("[BaseCore].onSessionAvailable, " + sid)
+		debug("[BaseCore].onSessionAvailable, " + sid);
 		global_sessionid = sid;
 		RequestCounter.addChangedCallback(this.onAjaxRequestCountChanged.bind(this));
 	},
 
 	onSessionFailed: function(transport){
-		this.notify("FATAL ERROR! NO SESSION!", true)
+		this.notify("FATAL ERROR! NO SESSION!", true);
 	},
 
 	onAjaxRequestCountChanged: function(count){
@@ -1116,7 +1116,7 @@ var BaseCore = Class.create({
 	},
 
 	setAjaxLoad: function(targetElement){
-		target = $(targetElement);
+		var target = $(targetElement);
 		if(target != null){
 			target.update( getAjaxLoad() );
 		}
@@ -1378,7 +1378,7 @@ var E2WebCore = Class.create(BaseCore, {
 	},
 
 	onSessionAvailable: function($super, sid){
-		debug("[E2WebCore].onSessionAvailable, " + sid)
+		debug("[E2WebCore].onSessionAvailable, " + sid);
 		$super(sid);
 
 		this.currentLocation = this.lt.getCurrentLocation(function(location){this.currentLocation = location;}.bind(this));
@@ -1890,7 +1890,7 @@ var E2WebCore = Class.create(BaseCore, {
 		$('webTv').on(
 			'click',
 			function(event, element){
-				window.open('/web-data/tpl/default/streaminterface/index.html', 'WebTV', 'scrollbars=no, width=800, height=740');
+				window.open('/web-data/tpl/default/streaminterface/index.html', 'WebTV', 'scrollbars=no, width=800, height=740, resizable=yes');
 				event.stop();
 			}.bind(this)
 		);
@@ -2033,4 +2033,4 @@ var E2WebCore = Class.create(BaseCore, {
 		}
 	}
 });
-core = new E2WebCore();
+var core = new E2WebCore();

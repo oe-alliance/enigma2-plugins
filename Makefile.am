@@ -18,6 +18,7 @@ SUBDIRS = \
 	bitrateviewer \
 	bonjour \
 	cdinfo \
+	channelselectionshorttitle \
 	curlytx \
 	dreamexplorer \
 	dreamirc \
@@ -35,6 +36,7 @@ SUBDIRS = \
 	epgsearch \
 	eurotictv \
 	eventlist \
+	eventposition \
 	fancontrol2 \
 	filebrowser \
 	flashexpander \
@@ -87,6 +89,7 @@ SUBDIRS = \
 	pushservice \
 	quickbutton \
 	reconstructapsc \
+	reftopiconname \
 	remotetimer \
 	rsdownloader \
 	satloader \

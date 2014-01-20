@@ -142,6 +142,9 @@ cdinfo/Makefile
 cdinfo/meta/Makefile
 cdinfo/src/Makefile
 
+channelselectionshorttitle/Makefile
+channelselectionshorttitle/src/Makefile
+
 curlytx/Makefile
 curlytx/meta/Makefile
 curlytx/po/Makefile
@@ -220,6 +223,9 @@ eurotictv/src/Makefile
 
 eventlist/Makefile
 eventlist/src/Makefile
+
+eventposition/Makefile
+eventposition/src/Makefile
 
 fancontrol2/Makefile
 fancontrol2/meta/Makefile
@@ -509,6 +515,9 @@ reconstructapsc/Makefile
 reconstructapsc/meta/Makefile
 reconstructapsc/src_cc/Makefile
 reconstructapsc/src_py/Makefile
+
+reftopiconname/Makefile
+reftopiconname/src/Makefile
 
 remotetimer/Makefile
 remotetimer/meta/Makefile
