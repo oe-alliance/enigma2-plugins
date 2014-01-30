@@ -112,6 +112,7 @@ class CVevoSignAlgoExtractor:
         return set()
 
     def decryptSignature(self, s, playerUrl):
+        playerUrl = playerUrl[:4] != 'http' and 'http:'+playerUrl or playerUrl
         printDBG("decrypt_signature sign_len[%d] playerUrl[%s]" % (len(s), playerUrl) )
 
         # clear local data
