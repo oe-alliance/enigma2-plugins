@@ -121,8 +121,8 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.mountusing.append(("old_enigma2", _("Enigma2 old format (mount using linux)")))
 
 		self.sharetypelist = []
-		self.sharetypelist.append(("nfs", _("NFS share")))
 		self.sharetypelist.append(("cifs", _("CIFS share")))
+		self.sharetypelist.append(("nfs", _("NFS share")))
 
 		if self.mountinfo.has_key('mountusing'):
 			mountusing = self.mountinfo['mountusing']

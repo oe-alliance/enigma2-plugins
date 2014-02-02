@@ -109,7 +109,7 @@ class NetworkBrowser(Screen):
 		self.Console = Console()
 
 		self["key_red"] = StaticText(_("Close"))
-		self["key_green"] = StaticText(_("Mounts management"))
+		self["key_green"] = StaticText(_("Mount manager"))
 		self["key_yellow"] = StaticText(_("Rescan"))
 		self["key_blue"] = StaticText(_("Expert"))
 		self["infotext"] = StaticText(_("Press OK to mount!"))
