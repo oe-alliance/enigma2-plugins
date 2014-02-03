@@ -539,11 +539,11 @@ class InfoBarTunerState(object):
 			if autohide or self.session.current_dialog is None or not issubclass(self.session.current_dialog.__class__, InfoBarShowHide):
 				# Start timer to avoid permanent displaying
 				# Do not start timer if no timeout is configured
-				idx = int(config.usage.infobar_timeout.index)
-				if idx > 0:
+				timeout = int(config.infobartunerstate.infobar_timeout.value) or int(config.usage.infobar_timeout.index)
+				if timeout > 0:
 					if self.hideTimer.isActive():
 						self.hideTimer.stop()
-					self.hideTimer.startLongTimer( int(idx) )
+					self.hideTimer.startLongTimer( timeout )
 				if self.updateTimer.isActive():
 					self.updateTimer.stop()
 		else:

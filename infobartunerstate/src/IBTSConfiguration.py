@@ -118,6 +118,7 @@ class InfoBarTunerStateConfiguration(Screen, ConfigListScreen):
 			(  _("Placeholder for Progressbar")                       , config.infobartunerstate.placeholder_pogressbar ),
 			(  _("List goes up")                       				  , config.infobartunerstate.list_goesup ),
 			(  _("Background transparency")                           , config.infobartunerstate.background_transparency ),
+			(  _("Overwrite Infobar timeout")                         , config.infobartunerstate.infobar_timeout ),
 		] )
 		
 		self.config.extend( [
