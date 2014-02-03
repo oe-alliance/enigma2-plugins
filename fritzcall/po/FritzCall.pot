@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-30 10:37+0200\n"
+"POT-Creation-Date: 2014-02-01 12:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,10 @@ msgstr ""
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "About FritzCall"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Activate WLAN guest access"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
@@ -77,7 +81,9 @@ msgstr ""
 msgid "Cannot get calls from FRITZ!Box"
 msgstr ""
 
-msgid "Cannot get infos from FRITZ!Box yet; try later"
+msgid ""
+"Cannot get infos from FRITZ!Box yet\n"
+"Still initialising or wrong firmware version"
 msgstr ""
 
 msgid "Connected since"
@@ -119,6 +125,10 @@ msgid "DECT inactive"
 msgstr ""
 
 msgid "DECT phones registered"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Deactivate WLAN guest access"
 msgstr ""
 
 msgid "Debug"
@@ -234,6 +244,10 @@ msgid "FRITZ!Box - Error resetting: %s"
 msgstr ""
 
 #, python-format
+msgid "FRITZ!Box - Failed changing GuestAccess: %s"
+msgstr ""
+
+#, python-format
 msgid "FRITZ!Box - Failed changing Mailbox: %s"
 msgstr ""
 
@@ -292,6 +306,15 @@ msgstr ""
 msgid "Getting status from FRITZ!Box Fon..."
 msgstr ""
 
+msgid "Guest access"
+msgstr ""
+
+msgid "Guest access not active"
+msgstr ""
+
+msgid "Guest access on "
+msgstr ""
+
 msgid "IP Address:"
 msgstr ""
 
@@ -342,6 +365,9 @@ msgid "Mute on call"
 msgstr ""
 
 msgid "Name"
+msgstr ""
+
+msgid "Name of WLAN guest network"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -414,6 +440,9 @@ msgstr ""
 msgid "Password Accessing FRITZ!Box"
 msgstr ""
 
+msgid "Password of WLAN guest network"
+msgstr ""
+
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
@@ -427,7 +456,7 @@ msgstr ""
 msgid "Phonebook"
 msgstr ""
 
-msgid "Plugin not active"
+msgid "Plugin not enabled"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
@@ -480,6 +509,12 @@ msgstr ""
 msgid "Searching in Outlook export..."
 msgstr ""
 
+msgid "Secure WLAN guest network"
+msgstr ""
+
+msgid "Setting..."
+msgstr ""
+
 msgid "Shortcut"
 msgstr ""
 
@@ -517,6 +552,11 @@ msgstr ""
 msgid "Timeout for Call Notifications (seconds)"
 msgstr ""
 
+msgid ""
+"To enjoy more functionalities of your FRITZ!Box, configure the firmware "
+"version!"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Toggle 1. mailbox"
 msgstr ""
@@ -545,6 +585,10 @@ msgstr ""
 #. TRANSLATORS: keep it short, this is a help text
 #. TRANSLATORS: keep it short, this is a button
 msgid "Toggle WLAN"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle WLAN guest access"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text

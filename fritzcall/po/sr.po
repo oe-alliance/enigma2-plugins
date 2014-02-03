@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-30 10:37+0200\n"
+"POT-Creation-Date: 2014-02-01 12:42+0100\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -24,6 +24,10 @@ msgstr ""
 #. TRANSLATORS: keep it short, this is a help text
 msgid "About FritzCall"
 msgstr "O FritzCall dodatku"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Activate WLAN guest access"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 #. TRANSLATORS: this is a window title.
@@ -79,7 +83,9 @@ msgstr "Otkaži"
 msgid "Cannot get calls from FRITZ!Box"
 msgstr ""
 
-msgid "Cannot get infos from FRITZ!Box yet; try later"
+msgid ""
+"Cannot get infos from FRITZ!Box yet\n"
+"Still initialising or wrong firmware version"
 msgstr ""
 
 msgid "Connected since"
@@ -128,6 +134,10 @@ msgstr ""
 
 msgid "DECT phones registered"
 msgstr "DECT telefoni registrovani"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Deactivate WLAN guest access"
+msgstr ""
 
 msgid "Debug"
 msgstr "Debag"
@@ -247,6 +257,10 @@ msgid "FRITZ!Box - Error resetting: %s"
 msgstr "FRITZ!Box -Greška kod resetovanja: %s"
 
 #, python-format
+msgid "FRITZ!Box - Failed changing GuestAccess: %s"
+msgstr ""
+
+#, python-format
 msgid "FRITZ!Box - Failed changing Mailbox: %s"
 msgstr "FRITZ!Box - Nije uspela promena pošt. sand.: %s"
 
@@ -305,6 +319,15 @@ msgstr "Uzimanje poziva sa FRITZ!Box..."
 msgid "Getting status from FRITZ!Box Fon..."
 msgstr "Dobijanje stanja FRITZ!Box telefona..."
 
+msgid "Guest access"
+msgstr ""
+
+msgid "Guest access not active"
+msgstr ""
+
+msgid "Guest access on "
+msgstr ""
+
 msgid "IP Address:"
 msgstr "IP Adresa:"
 
@@ -356,6 +379,9 @@ msgstr "Priguši kod poziva"
 
 msgid "Name"
 msgstr "Ime"
+
+msgid "Name of WLAN guest network"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -427,6 +453,9 @@ msgstr "Odlazni pozivi"
 msgid "Password Accessing FRITZ!Box"
 msgstr "Lozinka za pristup FRITZ!Box-u"
 
+msgid "Password of WLAN guest network"
+msgstr ""
+
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
@@ -440,7 +469,7 @@ msgstr ""
 msgid "Phonebook"
 msgstr "Telefonski imenik"
 
-msgid "Plugin not active"
+msgid "Plugin not enabled"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
@@ -493,6 +522,12 @@ msgstr "Traži u  LDIF..."
 msgid "Searching in Outlook export..."
 msgstr "Tražim u Outlook-Export..."
 
+msgid "Secure WLAN guest network"
+msgstr ""
+
+msgid "Setting..."
+msgstr ""
+
 msgid "Shortcut"
 msgstr "Prečica"
 
@@ -530,6 +565,11 @@ msgstr "Holandija"
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Prekid za obaveštenja o pozivima (sekundi) "
 
+msgid ""
+"To enjoy more functionalities of your FRITZ!Box, configure the firmware "
+"version!"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Toggle 1. mailbox"
 msgstr "Prebaci 1. pošt.sanduče"
@@ -559,6 +599,10 @@ msgstr "Prebac pošt.sanduče"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Toggle WLAN"
 msgstr "Prebaci WLAN"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle WLAN guest access"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Toggle all mailboxes"
