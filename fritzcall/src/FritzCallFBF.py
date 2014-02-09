@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 844 $
-$Date: 2014-01-31 15:12:12 +0100 (Fr, 31 Jan 2014) $
-$Id: FritzCallFBF.py 844 2014-01-31 14:12:12Z michael $
+$Revision: 845 $
+$Date: 2014-02-09 16:49:44 +0100 (So, 09 Feb 2014) $
+$Id: FritzCallFBF.py 845 2014-02-09 15:49:44Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -1904,13 +1904,13 @@ class FritzCallFBF_05_50:
 		debug("[FritzCallFBF_05_50] _errorLogin: %s" % (error))
 		self._notify(text)
 
-	def _logout(self, md5Sid):
+	def _logout(self, md5Sid, what):
 		parms = urlencode({
 						'sid':md5Sid,
 						'logout':'bye bye Fritz'
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_05_50] _logout: " + url + "?" + parms)
+		debug("[FritzCallFBF_05_50] _logout (" + what + ") " + time.ctime() + ": " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
@@ -2027,13 +2027,13 @@ class FritzCallFBF_05_50:
 						self.phonebook.phonebook[thisnumber] = thisname.encode('utf-8')
 		else:
 			self._notify(_("Could not parse FRITZ!Box Phonebook entry"))
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_parseFritzBoxPhonebook")
 
 	def _errorLoad(self, error, md5Sid):
 		debug("[FritzCallFBF_05_50] _errorLoad: %s" % (error))
 		text = _("FRITZ!Box - Could not load phonebook: %s") % error.getErrorMessage()
 		self._notify(text)
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_errorLoad")
 
 	def getCalls(self, callScreen, callback, callType):
 		#
@@ -2129,13 +2129,13 @@ class FritzCallFBF_05_50:
 			# debug("[FritzCallFBF_05_50] _gotPageCalls call callback with\n" + text
 			callback(callListL)
 		self._callScreen = None
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_gotPageCalls")
 
 	def _errorCalls(self, error, md5Sid):
 		debug("[FritzCallFBF_05_50] _errorCalls: %s" % (error))
 		text = _("FRITZ!Box - Could not load calls: %s") % error.getErrorMessage()
 		self._notify(text)
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_errorCalls")
 
 	def dial(self, number):
 		''' initiate a call to number '''
@@ -2179,13 +2179,13 @@ class FritzCallFBF_05_50:
 			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
 			if found:
 				self._notify(found.group(1))
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_okDial")
 
 	def _errorDial(self, error, md5Sid):
 		debug("[FritzCallFBF_05_50] errorDial: $s" % error)
 		text = _("FRITZ!Box - Dialling failed: %s") % error.getErrorMessage()
 		self._notify(text)
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_errorDial")
 
 	def changeWLAN(self, statusWLAN, callback):
 		''' get status info from FBF '''
@@ -2235,13 +2235,13 @@ class FritzCallFBF_05_50:
 			if found:
 				self._notify(found.group(1))
 		callback()
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_okChangeWLAN")
 
 	def _errorChangeWLAN(self, error, md5Sid):
 		debug("[FritzCallFBF_05_50] _errorChangeWLAN: $s" % error)
 		text = _("FRITZ!Box - Failed changing WLAN: %s") % error.getErrorMessage()
 		self._notify(text)
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_errorChangeWLAN")
 
 	def changeGuestAccess(self, statusGuestAccess, callback):
 		debug("[FritzCallFBF_05_50] changeGuestAccess start")
@@ -2301,13 +2301,13 @@ class FritzCallFBF_05_50:
 			if found:
 				self._notify(found.group(1))
 		callback()
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_okChangeGuestAccess")
 
 	def _errorChangeGuestAccess(self, error, md5Sid):
 		debug("[FritzCallFBF_05_50] _errorChangeGuestAccess: $s" % error)
 		text = _("FRITZ!Box - Failed changing GuestAccess: %s") % error.getErrorMessage()
 		self._notify(text)
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_errorChangeGuestAccess")
 
 	def changeMailbox(self, whichMailbox, callback):
 		''' switch mailbox on/off '''
@@ -2444,13 +2444,13 @@ class FritzCallFBF_05_50:
 		self.info = info
 		if callback:
 			callback(info)
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_okGetInfo")
 
 	def _errorGetInfo(self, error, md5Sid):
 		debug("[FritzCallFBF_05_50] _errorGetInfo: %s" % (error))
 		text = _("FRITZ!Box - Error getting status: %s") % error.getErrorMessage()
 		self._notify(text)
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_errorGetInfo")
 
 	def reset(self):
 		self._login(self._reset)
@@ -2484,13 +2484,13 @@ class FritzCallFBF_05_50:
 			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
 			if found:
 				self._notify(found.group(1))
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_okReset")
 
 	def _errorReset(self, error, md5Sid):
 		debug("[FritzCallFBF_05_50] _errorReset: %s" % (error))
 		text = _("FRITZ!Box - Error resetting: %s") % error.getErrorMessage()
 		self._notify(text)
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_errorReset")
 
 	def _readBlacklist(self, md5Sid):
 		# http://fritz.box/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:menu=fon&var:pagename=sperre
@@ -2522,13 +2522,13 @@ class FritzCallFBF_05_50:
 			else:
 				self.blacklist[1].append(entry.group(2))
 		debug("[FritzCallFBF_05_50] _okBlacklist: %s" % repr(self.blacklist))
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_okBlacklist")
 
 	def _errorBlacklist(self, error, md5Sid):
 		debug("[FritzCallFBF_05_50] _errorBlacklist: %s" % (error))
 		text = _("FRITZ!Box - Error getting blacklist: %s") % error.getErrorMessage()
 		self._notify(text)
-		self._logout(md5Sid)
+		self._logout(md5Sid, "_errorBlacklist")
 
 class FritzCallFBF_dummy:
 	def __init__(self):

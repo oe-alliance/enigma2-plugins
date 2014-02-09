@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 842 $
-$Date: 2014-01-31 14:47:29 +0100 (Fr, 31 Jan 2014) $
-$Id: plugin.py 842 2014-01-31 13:47:29Z michael $
+$Revision: 845 $
+$Date: 2014-02-09 16:49:44 +0100 (So, 09 Feb 2014) $
+$Id: plugin.py 845 2014-02-09 15:49:44Z michael $
 '''
 
 
@@ -278,8 +278,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 842 $"[1:-2] + "\n" + 
-							"$Date: 2014-01-31 14:47:29 +0100 (Fr, 31 Jan 2014) $"[1:23] + "\n"
+							"$Revision: 845 $"[1:-2] + "\n" + 
+							"$Date: 2014-02-09 16:49:44 +0100 (So, 09 Feb 2014) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1281,7 +1281,7 @@ class FritzOfferAction(Screen):
 		self.close()
 
 OneHour = 60*60*1000
-#OneHour = 1000
+# OneHour = 1000
 class FritzCallPhonebook:
 	def __init__(self):
 		debug("[FritzCallPhonebook] init")
@@ -1788,6 +1788,7 @@ class FritzCallPhonebook:
 		def exit(self):
 			self.close()
 
+phonebook = FritzCallPhonebook()
 
 class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
@@ -1895,7 +1896,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 842 $"[1: - 1] + "$Date: 2014-01-31 14:47:29 +0100 (Fr, 31 Jan 2014) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 845 $"[1: - 1] + "$Date: 2014-02-09 16:49:44 +0100 (So, 09 Feb 2014) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1975,9 +1976,9 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		else:
 			for x in self["config"].list:
 				x[1].save()
-			if config.plugins.FritzCall.phonebookLocation.isChanged():
+			if config.plugins.FritzCall.phonebookLocation.isChanged() or config.plugins.FritzCall.reloadPhonebookTime.isChanged():
 				global phonebook
-				phonebook = FritzCallPhonebook()
+				phonebook.reload()
 			if fritz_call:
 				if config.plugins.FritzCall.enable.value:
 					fritz_call.connect()
@@ -2413,7 +2414,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver): # pylint: disable=W0223
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 842 $"[1:-1]	+ "$Date: 2014-01-31 14:47:29 +0100 (Fr, 31 Jan 2014) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 845 $"[1:-1]	+ "$Date: 2014-02-09 16:49:44 +0100 (So, 09 Feb 2014) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2576,7 +2577,7 @@ class FritzClientFactory(ReconnectingClientFactory):
 			fritzbox = FritzCallFBF.FritzCallFBF_05_50()
 		else:
 			Notifications.AddNotification(MessageBox, _("FRITZ!Box firmware version not configured! Please set it in the configuration."), type=MessageBox.TYPE_INFO, timeout=0)
-		phonebook = FritzCallPhonebook()
+		phonebook.reload()
 		return FritzProtocol()
 
 	def clientConnectionLost(self, connector, reason):
