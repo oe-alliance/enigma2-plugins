@@ -174,10 +174,6 @@ msgstr "Smiley"
 msgid "no Image"
 msgstr "kein Bild"
 
-#: ..\src/plugin.py:54
-#: ..\src/plugin.py:55
-msgid "KiddyTimer"
-msgstr "KiddyTimer"
 
 msgid "Stop KiddyTimer (this session only)"
 msgstr "KiddyTimer stoppen (nur diese Session)"
