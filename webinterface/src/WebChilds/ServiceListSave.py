@@ -4,6 +4,8 @@ from Tools.Directories import resolveFilename, SCOPE_CONFIG
 import os
 from xml.dom.minidom import parseString as xml_dom_minidom_parseString
 from urllib import unquote as urllib_unquote
+import Components.ParentalControl
+
 ##########################
 class ServiceList(resource.Resource):
 	def __init__(self, session):
@@ -22,6 +24,8 @@ class ServiceListReload(resource.Resource):
 			db = eDVBDB.getInstance()
 			#db.reloadServicelist() # reloading only lamedb
 			db.reloadBouquets() # reloading *.tv and *.radio
+
+			Components.ParentalControl.parentalControl.open() # reload whitelist and blacklist
 
 			request.setResponseCode(http.OK)
 

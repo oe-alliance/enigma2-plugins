@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-30 10:37+0200\n"
+"POT-Creation-Date: 2014-02-01 12:42+0100\n"
 "PO-Revision-Date: 2013-05-01 18:25+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -23,6 +23,10 @@ msgstr ""
 #. TRANSLATORS: keep it short, this is a help text
 msgid "About FritzCall"
 msgstr "Info su FritzCall"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Activate WLAN guest access"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 #. TRANSLATORS: this is a window title.
@@ -78,8 +82,10 @@ msgstr "Annull."
 msgid "Cannot get calls from FRITZ!Box"
 msgstr "Recupero chiamate dalla FRITZ!Box impossibile"
 
-msgid "Cannot get infos from FRITZ!Box yet; try later"
-msgstr "Recupero informazioni dalla FRITZ!Box impossibile: riprovare più tardi"
+msgid ""
+"Cannot get infos from FRITZ!Box yet\n"
+"Still initialising or wrong firmware version"
+msgstr ""
 
 msgid "Connected since"
 msgstr "Connesso da"
@@ -127,6 +133,10 @@ msgstr "DECT non attivo"
 
 msgid "DECT phones registered"
 msgstr "Telefoni DECT registrati"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Deactivate WLAN guest access"
+msgstr ""
 
 msgid "Debug"
 msgstr "Debug"
@@ -250,6 +260,10 @@ msgid "FRITZ!Box - Error resetting: %s"
 msgstr "FRITZ!Box - Errore in reset: %s"
 
 #, python-format
+msgid "FRITZ!Box - Failed changing GuestAccess: %s"
+msgstr ""
+
+#, python-format
 msgid "FRITZ!Box - Failed changing Mailbox: %s"
 msgstr "FRITZ!Box - Cambiamento casella di posta fallito: %s"
 
@@ -314,6 +328,15 @@ msgstr "Recupero chiamate dalla FRITZ!Box in corso"
 msgid "Getting status from FRITZ!Box Fon..."
 msgstr "Recupero stato dalla FRITZ!Box Fon in corso..."
 
+msgid "Guest access"
+msgstr ""
+
+msgid "Guest access not active"
+msgstr ""
+
+msgid "Guest access on "
+msgstr ""
+
 msgid "IP Address:"
 msgstr "Indirizzo IP:"
 
@@ -371,6 +394,9 @@ msgstr "Mute su Chiamata"
 
 msgid "Name"
 msgstr "Nome"
+
+msgid "Name of WLAN guest network"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -448,6 +474,9 @@ msgstr "Chiamate in uscita"
 msgid "Password Accessing FRITZ!Box"
 msgstr "Password di accesso alla FRITZ!Box"
 
+msgid "Password of WLAN guest network"
+msgstr ""
+
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
@@ -461,8 +490,8 @@ msgstr ""
 msgid "Phonebook"
 msgstr "Rubrica"
 
-msgid "Plugin not active"
-msgstr "Plugin non attivo"
+msgid "Plugin not enabled"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Quit"
@@ -514,6 +543,12 @@ msgstr "Ricerca in LDIF..."
 msgid "Searching in Outlook export..."
 msgstr "Ricerca in Outlook  export..."
 
+msgid "Secure WLAN guest network"
+msgstr ""
+
+msgid "Setting..."
+msgstr ""
+
 msgid "Shortcut"
 msgstr "Numero breve"
 
@@ -551,6 +586,11 @@ msgstr "Olanda"
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Ritardo notifica chiamate (secondi)"
 
+msgid ""
+"To enjoy more functionalities of your FRITZ!Box, configure the firmware "
+"version!"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Toggle 1. mailbox"
 msgstr "Comm. casella 1."
@@ -580,6 +620,10 @@ msgstr "Comm. casella"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Toggle WLAN"
 msgstr "Commutare WLAN"
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle WLAN guest access"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Toggle all mailboxes"
@@ -705,6 +749,10 @@ msgstr "Ufficio"
 msgid "wrong user or password?"
 msgstr "Utente o password errati?"
 
+#~ msgid "Cannot get infos from FRITZ!Box yet; try later"
+#~ msgstr ""
+#~ "Recupero informazioni dalla FRITZ!Box impossibile: riprovare più tardi"
+
 #~ msgid "Compact Flash"
 #~ msgstr "work"
 
@@ -719,6 +767,9 @@ msgstr "Utente o password errati?"
 
 #~ msgid "PhoneBook Location"
 #~ msgstr "Posizione rubrica"
+
+#~ msgid "Plugin not active"
+#~ msgstr "Plugin non attivo"
 
 #~ msgid "USB Device"
 #~ msgstr "Dispositivo USB"

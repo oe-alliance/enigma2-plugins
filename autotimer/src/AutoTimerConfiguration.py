@@ -99,17 +99,17 @@ def parseEntry(element, baseTimer, defaults = False):
 		if before and after:
 			baseTimer.timeframe = (int(after), int(before))
 
-		# VPS-Plugin settings
-		vps_enabled = element.get("vps_enabled", "no")
-		vps_overwrite = element.get("vps_overwrite", "no")
-		baseTimer.vps_enabled = True if vps_enabled == "yes" else False
-		baseTimer.vps_overwrite = True if vps_overwrite == "yes" else False
-		del vps_enabled, vps_overwrite
+	# VPS-Plugin settings
+	vps_enabled = element.get("vps_enabled", "no")
+	vps_overwrite = element.get("vps_overwrite", "no")
+	baseTimer.vps_enabled = True if vps_enabled == "yes" else False
+	baseTimer.vps_overwrite = True if vps_overwrite == "yes" else False
+	del vps_enabled, vps_overwrite
 
-		# SeriesPlugin settings
-		series_labeling = element.get("series_labeling", "no")
-		baseTimer.series_labeling = True if series_labeling == "yes" else False
-		del series_labeling
+	# SeriesPlugin settings
+	series_labeling = element.get("series_labeling", "no")
+	baseTimer.series_labeling = True if series_labeling == "yes" else False
+	del series_labeling
 
 	# Read out encoding (won't change if no value is set)
 	baseTimer.encoding = element.get("encoding")
@@ -565,6 +565,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 		if defaultTimer.getAvoidDuplicateDescription() > 0:
 			if defaultTimer.searchForDuplicateDescription != 2:
 				extend((' searchForDuplicateDescription="', str(defaultTimer.searchForDuplicateDescription), '"'))
+
 	# Only display justplay if true
 	if defaultTimer.justplay:
 		extend((' justplay="', str(defaultTimer.getJustplay()), '"'))
@@ -582,6 +583,16 @@ def buildConfig(defaultTimer, timers, webif = False):
 	# Only display searchCase if sensitive
 	if defaultTimer.searchCase == "sensitive":
 		extend((' searchCase="', str(defaultTimer.searchCase), '"'))
+
+	# Only add vps related entries if true
+	if defaultTimer.vps_enabled:
+		append(' vps_enabled="yes"')
+		if defaultTimer.vps_overwrite:
+			append(' vps_overwrite="yes"')
+
+	# Only add seriesplugin related entry if true
+	if defaultTimer.series_labeling:
+		append(' series_labeling="yes"')
 
 	# Close still opened defaults tag
 	append('>\n')
@@ -731,7 +742,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 			if timer.vps_overwrite:
 				append(' vps_overwrite="yes"')
 
-		# Only add seriesl related entry if true
+		# Only add seriesplugin related entry if true
 		if timer.series_labeling:
 			append(' series_labeling="yes"')
 
