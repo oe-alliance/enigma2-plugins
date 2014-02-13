@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 846 $
-$Date: 2014-02-13 12:13:49 +0100 (Do, 13 Feb 2014) $
-$Id: FritzCallFBF.py 846 2014-02-13 11:13:49Z michael $
+$Revision: 847 $
+$Date: 2014-02-13 15:15:51 +0100 (Thu, 13 Feb 2014) $
+$Id: FritzCallFBF.py 847 2014-02-13 14:15:51Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -15,7 +15,7 @@ $Id: FritzCallFBF.py 846 2014-02-13 11:13:49Z michael $
 # W0110 lambda with map,filter
 # W0403 Relative import
 # W1401 Anomalous backslash in string
-# pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403
+# pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,W1401
 
 from . import _, __, debug #@UnresolvedImport # pylint: disable=W0611,F0401
 from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS
@@ -1505,10 +1505,6 @@ class FritzCallFBF_05_27:
 		debug("[FritzCallFBF_05_27] changeWLAN start")
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 		return
-
-		if not statusWLAN or (statusWLAN != '1' and statusWLAN != '0'):
-			return
-		self._login(lambda x: self._changeWLAN(statusWLAN, x))
 		
 	def _changeWLAN(self, statusWLAN, html):
 		if html:
@@ -1673,7 +1669,7 @@ class FritzCallFBF_05_27:
 			rufumlActive = True
 		debug("[FritzCallFBF_05_27] _okGetInfo rufumlActive: " + repr(rufumlActive))
 
-		info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive)
+		info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
 		debug("[FritzCallFBF_05_27] _okGetInfo info: " + str(info))
 		self.info = info
 		if callback:
