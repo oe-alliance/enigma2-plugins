@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 847 $
-$Date: 2014-02-13 15:15:51 +0100 (Thu, 13 Feb 2014) $
-$Id: FritzCallFBF.py 847 2014-02-13 14:15:51Z michael $
+$Revision: 848 $
+$Date: 2014-02-16 13:39:32 +0100 (Sun, 16 Feb 2014) $
+$Id: FritzCallFBF.py 848 2014-02-16 12:39:32Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -586,14 +586,14 @@ class FritzCallFBF:
 		text = _("FRITZ!Box - Dialling failed: %s") % error.getErrorMessage()
 		self._notify(text)
 
-	def changeWLAN(self, statusWLAN):
+	def changeWLAN(self, statusWLAN, callback):
 		''' get status info from FBF '''
 		debug("[FritzCallFBF] changeWLAN start")
 		if not statusWLAN or (statusWLAN != '1' and statusWLAN != '0'):
 			return
-		self._login(lambda x: self._changeWLAN(statusWLAN, x))
+		self._login(lambda x: self._changeWLAN(statusWLAN, callback, x))
 		
-	def _changeWLAN(self, statusWLAN, html):
+	def _changeWLAN(self, statusWLAN, callback, html):
 		if html:
 			#===================================================================
 			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
@@ -604,7 +604,7 @@ class FritzCallFBF:
 			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
 			if start != -1:
 				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
-				self._errorChangeWLAN('Login: ' + html[start, html.find('</p>', start)])
+				self._errorChangeWLAN(callback, 'Login: ' + html[start, html.find('</p>', start)])
 				return
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
 		parms = urlencode({
@@ -622,22 +622,24 @@ class FritzCallFBF:
 			headers={
 					'Content-Type': "application/x-www-form-urlencoded",
 					'Content-Length': str(len(parms))},
-			postdata=parms).addCallback(self._okChangeWLAN).addErrback(self._errorChangeWLAN)
+			postdata=parms).addCallback(self._okChangeWLAN, callback).addErrback(self._errorChangeWLAN, callback)
 
-	def _okChangeWLAN(self, html): #@UnusedVariable # pylint: disable=W0613
+	def _okChangeWLAN(self, callback, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF] _okChangeWLAN")
+		callback()
 
-	def _errorChangeWLAN(self, error):
+	def _errorChangeWLAN(self, callback, error):
 		debug("[FritzCallFBF] _errorChangeWLAN: $s" % error)
 		text = _("FRITZ!Box - Failed changing WLAN: %s") % error.getErrorMessage()
 		self._notify(text)
+		callback()
 
-	def changeMailbox(self, whichMailbox):
+	def changeMailbox(self, whichMailbox, callback):
 		''' switch mailbox on/off '''
 		debug("[FritzCallFBF] changeMailbox start: " + str(whichMailbox))
-		self._login(lambda x: self._changeMailbox(whichMailbox, x))
+		self._login(lambda x: self._changeMailbox(whichMailbox, callback, x))
 
-	def _changeMailbox(self, whichMailbox, html):
+	def _changeMailbox(self, whichMailbox, callback, html):
 		if html:
 			#===================================================================
 			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
@@ -648,7 +650,7 @@ class FritzCallFBF:
 			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
 			if start != -1:
 				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
-				self._errorChangeMailbox('Login: ' + html[start, html.find('</p>', start)])
+				self._errorChangeMailbox(callback, 'Login: ' + html[start, html.find('</p>', start)])
 				return
 		debug("[FritzCallFBF] _changeMailbox")
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
@@ -669,7 +671,7 @@ class FritzCallFBF:
 					headers={
 							'Content-Type': "application/x-www-form-urlencoded",
 							'Content-Length': str(len(parms))},
-					postdata=parms).addCallback(self._okChangeMailbox).addErrback(self._errorChangeMailbox)
+					postdata=parms).addCallback(self._okChangeMailbox, callback).addErrback(self._errorChangeMailbox, callback)
 		elif whichMailbox > 4:
 			debug("[FritzCallFBF] changeMailbox invalid mailbox number")
 		else:
@@ -688,15 +690,17 @@ class FritzCallFBF:
 				headers={
 						'Content-Type': "application/x-www-form-urlencoded",
 						'Content-Length': str(len(parms))},
-				postdata=parms).addCallback(self._okChangeMailbox).addErrback(self._errorChangeMailbox)
+				postdata=parms).addCallback(self._okChangeMailbox, callback).addErrback(self._errorChangeMailbox, callback)
 
-	def _okChangeMailbox(self, html): #@UnusedVariable # pylint: disable=W0613
+	def _okChangeMailbox(self, callback, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF] _okChangeMailbox")
+		callback()
 
-	def _errorChangeMailbox(self, error):
+	def _errorChangeMailbox(self, callback, error):
 		debug("[FritzCallFBF] _errorChangeMailbox: $s" % error)
 		text = _("FRITZ!Box - Failed changing Mailbox: %s") % error.getErrorMessage()
 		self._notify(text)
+		callback()
 
 	def getInfo(self, callback):
 		''' get status info from FBF '''
@@ -1500,13 +1504,13 @@ class FritzCallFBF_05_27:
 		text = _("FRITZ!Box - Dialling failed: %s") % error.getErrorMessage()
 		self._notify(text)
 
-	def changeWLAN(self, statusWLAN):
+	def changeWLAN(self, statusWLAN, callback):
 		''' get status info from FBF '''
 		debug("[FritzCallFBF_05_27] changeWLAN start")
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 		return
 		
-	def _changeWLAN(self, statusWLAN, html):
+	def _changeWLAN(self, statusWLAN, callback, html):
 		if html:
 			#===================================================================
 			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
@@ -1517,7 +1521,7 @@ class FritzCallFBF_05_27:
 			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
 			if start != -1:
 				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
-				self._errorChangeWLAN('Login: ' + html[start, html.find('</p>', start)])
+				self._errorChangeWLAN(callback, 'Login: ' + html[start, html.find('</p>', start)])
 				return
 
 		if statusWLAN == '0':
@@ -1537,17 +1541,19 @@ class FritzCallFBF_05_27:
 			headers={
 					'Content-Type': "application/x-www-form-urlencoded",
 					'Content-Length': str(len(parms))},
-			postdata=parms).addCallback(self._okChangeWLAN).addErrback(self._errorChangeWLAN)
+			postdata=parms).addCallback(self._okChangeWLAN, callback).addErrback(self._errorChangeWLAN, callback)
 
-	def _okChangeWLAN(self, html): #@UnusedVariable # pylint: disable=W0613
+	def _okChangeWLAN(self, callback, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF] _okChangeWLAN")
+		callback()
 
-	def _errorChangeWLAN(self, error):
+	def _errorChangeWLAN(self, callback, error):
 		debug("[FritzCallFBF] _errorChangeWLAN: $s" % error)
 		text = _("FRITZ!Box - Failed changing WLAN: %s") % error.getErrorMessage()
 		self._notify(text)
+		callback()
 
-	def changeMailbox(self, whichMailbox):
+	def changeMailbox(self, whichMailbox, callback):
 		''' switch mailbox on/off '''
 		debug("[FritzCallFBF_05_27] changeMailbox start: " + str(whichMailbox))
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
