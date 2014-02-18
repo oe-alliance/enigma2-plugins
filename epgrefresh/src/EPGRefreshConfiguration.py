@@ -5,25 +5,68 @@ from . import _
 
 # GUI (Screens)
 from Screens.Screen import Screen
+from Screens.ChoiceBox import ChoiceBox
 from Components.ConfigList import ConfigListScreen
+from Components.config import KEY_OK
+from Screens.LocationBox import LocationBox
 from EPGRefreshChannelEditor import EPGRefreshServiceEditor
 
 # GUI (Summary)
 from Screens.Setup import SetupSummary
 
 # GUI (Components)
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap
+from Screens.HelpMenu import HelpMenu, HelpableScreen
 from Components.Sources.StaticText import StaticText
 
 # Configuration
-from Components.config import config, getConfigListEntry
+from Components.config import config, getConfigListEntry, configfile, NoSave
+from Screens.FixedMenu import FixedMenu
+from Tools.BoundFunction import boundFunction
 
 from EPGRefresh import epgrefresh
 from Components.SystemInfo import SystemInfo
+from Screens.MessageBox import MessageBox
 
-VERSION = "1.1.0"
+# Error-print
+from traceback import print_exc
+from sys import stdout
+import os
 
-class EPGRefreshConfiguration(Screen, ConfigListScreen):
+VERSION = "2.0"
+class EPGHelpContextMenu(FixedMenu):
+	HELP_RETURN_MAINHELP = 0
+	HELP_RETURN_KEYHELP = 1
+
+	def __init__(self, session):
+		menu = [(_("General Help"), boundFunction(self.close, self.HELP_RETURN_MAINHELP)),
+			(_("Key Help"), boundFunction(self.close, self.HELP_RETURN_KEYHELP)),
+			(_("Cancel"), self.close)]
+
+		FixedMenu.__init__(self, session, _("EPGRefresh Configuration Help"), menu)
+		self.skinName = ["EPGRefreshConfigurationHelpContextMenu", "Menu" ]
+
+class EPGFunctionMenu(FixedMenu):
+	FUNCTION_RETURN_FORCEREFRESH = 0
+	FUNCTION_RETURN_BACKUP_DATE = 1
+	FUNCTION_RETURN_BACKUP_SIZE = 2
+	FUNCTION_RETURN_BACKUP_UNINSTALL = 3
+
+	def __init__(self, session, ispatched = False):
+		menu = [(_("Refresh now"), boundFunction(self.close, self.FUNCTION_RETURN_FORCEREFRESH))]
+		if config.plugins.epgrefresh.backup_enabled.value:
+			menu.append((_("Restore EPG-Backups (Date)"), boundFunction(self.close, self.FUNCTION_RETURN_BACKUP_DATE)))
+			menu.append((_("Restore EPG-Backups (Size)"), boundFunction(self.close, self.FUNCTION_RETURN_BACKUP_SIZE)))
+		else:
+			menu.append((_("EPG-Backup is disabled"), self.close))
+		if ispatched:
+			menu.append((_("Uninstall EPG-Backup"), boundFunction(self.close, self.FUNCTION_RETURN_BACKUP_UNINSTALL)))
+		menu.append((_("Cancel"), self.close))
+
+		FixedMenu.__init__(self, session, _("EPGRefresh Functions"), menu)
+		self.skinName = ["EPGRefreshConfigurationFunctionContextMenu", "Menu" ]
+
+class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 	"""Configuration of EPGRefresh"""
         
         skin = """<screen name="EPGRefreshConfiguration" position="center,center" size="600,430">
@@ -45,80 +88,145 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 	
 	def __init__(self, session):
 		Screen.__init__(self, session)
-
+		HelpableScreen.__init__(self)
+		self.list = []
 		# Summary
 		self.setup_title = _("EPGRefresh Configuration")
 		self.onChangedEntry = []
-
+		
+		self.session = session
+		
 		# Although EPGRefresh keeps services in a Set we prefer a list
 		self.services = (
 			[x for x in epgrefresh.services[0]],
 			[x for x in epgrefresh.services[1]]
 		)
 
-		self.list = [
-			getConfigListEntry(_("Refresh EPG automatically"), config.plugins.epgrefresh.enabled, _("Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu.")),
-			getConfigListEntry(_("Show in extension menu"), config.plugins.epgrefresh.show_in_extensionsmenu, _("Enable this to be able to access the EPGRefresh configuration from within the extension menu.")),
-			getConfigListEntry(_("Show popup when refresh starts and ends"), config.plugins.epgrefresh.enablemessage, _("This setting controls whether or not an informational message will be shown at start and completion of refresh.")),
-			getConfigListEntry(_("Wake up from deep standby for EPG refresh"), config.plugins.epgrefresh.wakeup, _("If this is enabled, the plugin will wake up the receiver from deep standby if possible. Otherwise it needs to be switched on already.")),
-			getConfigListEntry(_("Duration to stay on service (seconds)"), config.plugins.epgrefresh.interval_seconds, _("This is the duration each service/channel will stay active during a refresh.")),
-			getConfigListEntry(_("EPG refresh auto-start earliest (hh:mm)"), config.plugins.epgrefresh.begin, _("An automated refresh will start after this time of day, but before the time specified in next setting.")),
-			getConfigListEntry(_("EPG refresh auto-start latest (hh:mm)"), config.plugins.epgrefresh.end, _("An automated refresh will start before this time of day, but after the time specified in previous setting.")),
-			getConfigListEntry(_("Delay if not in standby (minutes)"), config.plugins.epgrefresh.delay_standby, _("If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry.")),
-			getConfigListEntry(_("Force scan even if receiver is in use"), config.plugins.epgrefresh.force, _("This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording).")),
-			getConfigListEntry(_("Shutdown after EPG refresh"), config.plugins.epgrefresh.afterevent, _("This setting controls whether the receiver should be set to deep standby after refresh is completed.")),
-                ]
-		if SystemInfo.get("NumVideoDecoders", 1) > 1:
-			self.list.insert(3, getConfigListEntry(_("Refresh EPG using"), config.plugins.epgrefresh.adapter, _("If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture.")))
-
-		try:
-			# try to import autotimer module to check for its existence
-			from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-
-			self.list.append(getConfigListEntry(_("Inherit Services from AutoTimer"), config.plugins.epgrefresh.inherit_autotimer, _("Extend the list of services to refresh by those your AutoTimers use?")))
-			self.list.append(getConfigListEntry(_("Run AutoTimer after refresh"), config.plugins.epgrefresh.parse_autotimer, _("After a successful refresh the AutoTimer will automatically search for new matches if this is enabled.")))
-		except ImportError as ie:
-			print("[EPGRefresh] AutoTimer Plugin not installed:", ie)
-
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
-		
-		def selectionChanged():
-			if self["config"].current:
-				self["config"].current[1].onDeselect(self.session)
-			self["config"].current = self["config"].getCurrent()
-			if self["config"].current:
-				self["config"].current[1].onSelect(self.session)
-			for x in self["config"].onSelectionChanged:
-				x()
-				
-		self["config"].selectionChanged = selectionChanged
+		self._getConfig()
+
 		self["config"].onSelectionChanged.append(self.updateHelp)
 
 		# Initialize Buttons
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
-		self["key_yellow"] = StaticText(_("Refresh now"))
+		self["key_yellow"] = StaticText(_("Functions"))
 		self["key_blue"] = StaticText(_("Edit Services"))
 
 		self["help"] = StaticText()
 
 		# Define Actions
-		self["actions"] = ActionMap(["SetupActions", "ColorActions", "ChannelSelectEPGActions", "HelpActions"],
+		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 			{
-				"cancel": self.keyCancel,
-				"save": self.keySave,
-				"yellow": self.forceRefresh,
-				"blue": self.editServices,
-				"showEPGList": self.keyInfo,
+				"yellow": (self.showFunctionMenu, _("Show more Functions")),
+				"blue": (self.editServices, _("Edit Services")),
+			}
+		)
+		self["SetupActions"] = HelpableActionMap(self, "SetupActions",
+			{
+				"cancel": (self.keyCancel, _("Close and forget changes")),
+				"save": (self.keySave, _("Close and save changes")),
+			}
+		)
+		self["actions"] = HelpableActionMap(self, "ChannelSelectEPGActions",
+			{
+				"showEPGList": (self.keyInfo, _("Show last EPGRefresh - Time")),
+			}
+		)
+		self["ChannelSelectBaseActions"] = HelpableActionMap(self, "ChannelSelectBaseActions",
+			{
+				"nextBouquet": (self.pageup, _("Move page up")),
+				"prevBouquet": (self.pagedown, _("Move page down")),
+			}
+		)
+		self["actionstmp"] = ActionMap(["HelpActions"],
+			{
 				"displayHelp": self.showHelp,
 			}
 		)
-
+		
 		# Trigger change
 		self.changed()
-
+		self.needsEnigmaRestart = False
+		
 		self.onLayoutFinish.append(self.setCustomTitle)
 		self.onFirstExecBegin.append(self.firstExec)
+
+	def _getConfig(self):
+		# Name, configElement, HelpTxt, reloadConfig
+		self.list = [] 
+		self.list.append(getConfigListEntry(_("Refresh EPG automatically"), config.plugins.epgrefresh.enabled, _("Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."), True))
+		if config.plugins.epgrefresh.enabled.value:
+			self.list.append(getConfigListEntry(_("Duration to stay on service (seconds)"), config.plugins.epgrefresh.interval_seconds, _("This is the duration each service/channel will stay active during a refresh."), False))
+			self.list.append(getConfigListEntry(_("EPG refresh auto-start earliest (hh:mm)"), config.plugins.epgrefresh.begin, _("An automated refresh will start after this time of day, but before the time specified in next setting."), False))
+			self.list.append(getConfigListEntry(_("EPG refresh auto-start latest (hh:mm)"), config.plugins.epgrefresh.end, _("An automated refresh will start before this time of day, but after the time specified in previous setting."), False))
+			self.list.append(getConfigListEntry(_("Delay if not in standby (minutes)"), config.plugins.epgrefresh.delay_standby, _("If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."), False))
+			if SystemInfo.get("NumVideoDecoders", 1) > 1:
+				self.list.insert(3, getConfigListEntry(_("Refresh EPG using"), config.plugins.epgrefresh.adapter, _("If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."), False))
+			self.list.append(getConfigListEntry(_("Enable Backup"), config.plugins.epgrefresh.backup_enabled, _("Should the Backup-Functionality be enabled?\nFor more Information have a look at the Help-Screen."), True))
+			if config.plugins.epgrefresh.backup_enabled.value:
+				self.list.append(getConfigListEntry(_("Valid Filesize"), config.plugins.epgrefresh.backup_filesize_valid, _("EPG-Files with a less size of this value (KB) won't be backuped."), False))
+				self.list.append(getConfigListEntry(_("Valid Age"), config.plugins.epgrefresh.backup_timespan_valid, _("Only keep EPG-Backup-Files younger than this days."), False))
+				self.list.append(getConfigListEntry(_("Show Advanced Options"), NoSave(config.plugins.epgrefresh.showadvancedoptions), _("Display more Options"), True))
+				if config.plugins.epgrefresh.showadvancedoptions.value:
+					self.list.append(getConfigListEntry(_("Backup-Strategy"), config.plugins.epgrefresh.backup_strategy, _("Should the biggest or the youngest File be backuped?\nIf it is smaller than the Real-EPG-File then the other strategy will be the Fallback-Strategy."), False))
+					self.list.append(getConfigListEntry(_("EPG-File-Write Wait"), config.plugins.epgrefresh.backup_epgwrite_wait, _("How many seconds should EPGRefresh be wait to check if the EPG-File-Size didn't change before it starts the Backup."), False))
+					self.list.append(getConfigListEntry(_("Maximum Boot-Count"), config.plugins.epgrefresh.backup_max_boot_count, _("After that times of unsuccesfully boot enigma2, the EPG-File will be deleted."), False))
+					self.list.append(getConfigListEntry(_("Enable Debug"), config.plugins.epgrefresh.backup_enable_debug, _("Should debugmessages be printed in a File?\nThe filename will be added with the current date"), True))
+					if config.plugins.epgrefresh.backup_enable_debug.value:
+						self.list.append(getConfigListEntry(_("Log-directory"), config.plugins.epgrefresh.backup_log_dir, _("Directory for the Logfiles."), False))
+					if os.path.exists("/usr/script"):
+						self.list.append(getConfigListEntry(_("Show in User-Scripts"), config.plugins.epgrefresh.showin_usr_scripts, _("Should the Manage-Script be shown in User-Scripts?"), False))
+			else:
+				self.list.append(getConfigListEntry(_("Show Advanced Options"), NoSave(config.plugins.epgrefresh.showadvancedoptions), _("Display more Options"), True))
+			if config.plugins.epgrefresh.showadvancedoptions.value:
+				self.list.append(getConfigListEntry(_("Show Setup in extension menu"), config.plugins.epgrefresh.show_in_extensionsmenu, _("Enable this to be able to access the EPGRefresh configuration from within the extension menu."), False))
+				self.list.append(getConfigListEntry(_("Show 'EPGRefresh Start now' in extension menu"), config.plugins.epgrefresh.show_run_in_extensionsmenu, _("Enable this to be able to start the EPGRefresh from within the extension menu."), False))
+				if config.plugins.epgrefresh.backup_enabled.value:
+					self.list.append(getConfigListEntry(_("Show 'EPGRefresh Restore Backup' in extension menu"), config.plugins.epgrefresh.show_backuprestore_in_extmenu, _("Enable this to be able to start a restore of a Backup-File from within the extension menu."), False))
+				self.list.append(getConfigListEntry(_("Show popup when refresh starts and ends"), config.plugins.epgrefresh.enablemessage, _("This setting controls whether or not an informational message will be shown at start and completion of refresh."), False))
+				self.list.append(getConfigListEntry(_("Wake up from deep standby for EPG refresh"), config.plugins.epgrefresh.wakeup, _("If this is enabled, the plugin will wake up the receiver from deep standby if possible. Otherwise it needs to be switched on already."), False))
+				self.list.append(getConfigListEntry(_("Force scan even if receiver is in use"), config.plugins.epgrefresh.force, _("This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."), False))
+				self.list.append(getConfigListEntry(_("Shutdown after EPG refresh"), config.plugins.epgrefresh.afterevent, _("This setting controls whether the receiver should be set to deep standby after refresh is completed."), False))
+				try:
+					# try to import autotimer module to check for its existence
+					from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+		
+					self.list.append(getConfigListEntry(_("Inherit Services from AutoTimer"), config.plugins.epgrefresh.inherit_autotimer, _("Extend the list of services to refresh by those your AutoTimers use?"), True))
+					if config.plugins.epgrefresh.inherit_autotimer.value:
+						self.list.append(getConfigListEntry(_("Run AutoTimer after refresh"), config.plugins.epgrefresh.parse_autotimer, _("After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"), False))
+				except ImportError as ie:
+					print("[EPGRefresh] AutoTimer Plugin not installed:", ie)
+			
+		self["config"].list = self.list
+		self["config"].setList(self.list)
+
+	def _maybeNeedsRestart(self):
+		if config.plugins.epgrefresh.backup_enabled.value:
+			# maybe self.needsEnigmaRestart was setted by "uninstall"
+			if not self.needsEnigmaRestart:
+				try:
+					from plugin import epgbackup
+					ispatched = self._isPatched()
+					# only install it, if it was enabled for the first time
+					if config.plugins.epgrefresh.backup_enabled.value and not ispatched:
+						epgbackup.install()
+						self.session.open(MessageBox, _("EPG-Backup has been installed!:"), \
+							MessageBox.TYPE_INFO, timeout = 10)
+						self.needsEnigmaRestart = True
+				except:
+					print("[EPGRefresh] Error importing EPGBackup")
+					print_exc(file=stdout)
+	
+	def _isPatched(self):
+		ispatched = False
+		try:
+			from plugin import epgbackup
+			ispatched = epgbackup.isPatched()
+		except:
+			print("[EPGRefresh] Error importing EPGBackup")
+			print_exc(file=stdout)
+		return ispatched
 
 	def firstExec(self):
 		from plugin import epgrefreshHelp
@@ -130,19 +238,89 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 	def setCustomTitle(self):
 		self.setTitle(' '.join((_("EPGRefresh Configuration"), _("Version"), VERSION)))
 
+	# overwrites / extendends
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self._onKeyChange()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self._onKeyChange()
+	
+	def keyOK(self):
+		self["config"].handleKey(KEY_OK)
+		cur = self["config"].getCurrent()
+		if cur[1] == config.plugins.epgrefresh.backup_log_dir:
+			self.session.openWithCallback(self.directorySelected, LocationBox, \
+				_("Select Logfile-Location"), "", \
+				config.plugins.epgrefresh.backup_log_dir.value)
+
+	def directorySelected(self, res):
+		if res is not None:
+			config.plugins.epgrefresh.backup_log_dir.value = res
+
+	def _onKeyChange(self):
+		cur = self["config"].getCurrent()
+		if cur and cur[3]:
+			self._getConfig()
+
 	def showHelp(self):
+		self.session.openWithCallback(self._HelpMenuCallback, EPGHelpContextMenu)
+
+	def _HelpMenuCallback(self, *result):
+		if not len(result):
+			return
+		result = result[0]
+
+		if result == EPGHelpContextMenu.HELP_RETURN_MAINHELP:
+			self._showMainHelp()
+		else:
+			self._showKeyhelp()
+	
+	def _showMainHelp(self):
 		from plugin import epgrefreshHelp
 		if epgrefreshHelp:
 			epgrefreshHelp.open(self.session)
+	
+	def _showKeyhelp(self):
+		self.session.openWithCallback(self.callHelpAction, HelpMenu, self.helpList)
 
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
 		if cur:
 			self["help"].text = cur[2]
 
+	def showFunctionMenu(self):
+		ispatched = self._isPatched()
+		self.session.openWithCallback(self._FunctionMenuCB, EPGFunctionMenu, ispatched)
+
+	def _FunctionMenuCB(self, *result):
+		if not len(result):
+			return
+		result = result[0]
+
+		try:
+			from plugin import epgbackup
+			if result == EPGFunctionMenu.FUNCTION_RETURN_FORCEREFRESH:
+				self.forceRefresh()
+			elif result == EPGFunctionMenu.FUNCTION_RETURN_BACKUP_SIZE:
+				epgbackup.forceBackupBySize()
+			elif result == EPGFunctionMenu.FUNCTION_RETURN_BACKUP_DATE:
+				epgbackup.forceBackup()
+			elif result == EPGFunctionMenu.FUNCTION_RETURN_BACKUP_UNINSTALL:
+				epgbackup.uninstall()
+				config.plugins.epgrefresh.backup_enabled.setValue(False)
+				self.session.open(MessageBox, _("EPG-Backup has been uninstalled!:"), \
+					MessageBox.TYPE_INFO, timeout = 10)
+				self.needsEnigmaRestart = True
+		except:
+			print("[EPGRefresh] Error in Function - Call")
+			print_exc(file=stdout)
+	
 	def forceRefresh(self):
 		epgrefresh.services = (set(self.services[0]), set(self.services[1]))
 		epgrefresh.forceRefresh(self.session)
+		self.keySave()
 
 	def editServices(self):
 		self.session.openWithCallback(
@@ -155,34 +333,35 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		if ret:
 			self.services = ret
 
+	# for Summary
 	def changed(self):
 		for x in self.onChangedEntry:
 			try:
 				x()
 			except Exception:
 				pass
-
+	
+	# for Summary
 	def getCurrentEntry(self):
-		return self["config"].getCurrent()[0]
+		if self["config"].getCurrent():
+			return self["config"].getCurrent()[0]
 
+	# for Summary
 	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].getText())
+		if self["config"].getCurrent():
+			return str(self["config"].getCurrent()[1].getText())
 
+	# for Summary
 	def createSummary(self):
 		return SetupSummary
 
-	def cancelConfirm(self, result):
-		if not result:
-			return
+	def pageup(self):
+		self["config"].instance.moveSelection(self["config"].instance.pageUp)
 
-		for x in self["config"].list:
-			x[1].cancel()
-
-		self.close(self.session)
+	def pagedown(self):
+		self["config"].instance.moveSelection(self["config"].instance.pageDown)
 
 	def keyInfo(self):
-		from Screens.MessageBox import MessageBox
-
 		lastscan = config.plugins.epgrefresh.lastscan.value
 		if lastscan:
 			from Tools.FuzzyDate import FuzzyTime
@@ -196,23 +375,36 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 				type=MessageBox.TYPE_INFO
 		)
 
+	def cancelConfirm(self, doCancel):
+		if not doCancel:
+			return
+		for x in self["config"].list:
+			x[1].cancel()
+		self.close(self.session, False)
+
 	def keyCancel(self):
 		if self["config"].isChanged():
-			from Screens.MessageBox import MessageBox
-
 			self.session.openWithCallback(
 				self.cancelConfirm,
 				MessageBox,
 				_("Really close without saving settings?")
 			)
 		else:
-			self.close(self.session)
+			self.close(self.session, False)
 
 	def keySave(self):
 		epgrefresh.services = (set(self.services[0]), set(self.services[1]))
 		epgrefresh.saveConfiguration()
 
-		for x in self["config"].list:
-			x[1].save()
+		if not config.plugins.epgrefresh.backup_enabled.value \
+			and config.plugins.epgrefresh.show_backuprestore_in_extmenu.value:
+			config.plugins.epgrefresh.show_backuprestore_in_extmenu.setValue(False)
 
-		self.close(self.session)
+		for x in self["config"].list:
+			x[1].save()		
+		configfile.save()
+		
+		self._maybeNeedsRestart()
+		self.close(self.session, self.needsEnigmaRestart)
+
+

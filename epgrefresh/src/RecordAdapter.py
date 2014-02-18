@@ -9,7 +9,7 @@ from Tools import Notifications
 # Config
 from Components.config import config
 
-from . import _, NOTIFICATIONID
+from . import _, STARTNOTIFICATIONID, NOTIFICATIONDOMAIN
 
 class RecordAdapter:
 	backgroundCapable = True
@@ -26,7 +26,7 @@ class RecordAdapter:
 		if not self.backgroundRefreshAvailable:
 			return False
 		if config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddPopup(_("EPG refresh started in background."), MessageBox.TYPE_INFO, 4, NOTIFICATIONID)
+			Notifications.AddPopup(_("EPG refresh started in background."), MessageBox.TYPE_INFO, 4, STARTNOTIFICATIONID, domain = NOTIFICATIONDOMAIN)
 
 		return True
 

@@ -226,7 +226,8 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 			elif key == "wakeup":
 				config.plugins.epgrefresh.wakeup.value = True if value == "true" else False
 			elif key == "parse_autotimer":
-				config.plugins.epgrefresh.parse_autotimer.value = True if value == "true" else False
+				if value in epgrefresh.parse_autotimer.choices:
+					epgrefresh.parse_autotimer.value = value
 			elif key == "adapter":
 				if value in config.plugins.epgrefresh.adapter.choices:
 					config.plugins.epgrefresh.adapter.value = value
