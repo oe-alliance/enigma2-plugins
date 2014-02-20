@@ -207,6 +207,8 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			language = config.osd.language.value.replace("_","-")
 			if language == "en-EN": # hack
 				language = "en-US"
+			elif language == "no-NO": # hack
+				language = "nn-NO"
 			url = "http://weather.service.msn.com/find.aspx?outputview=search&weasearchstr=%s&culture=%s" % (urllib_quote(self.current.city.value), language)
 			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
 		else:
@@ -252,7 +254,16 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 		
 	def xmlCallback(self, xmlstring):
 		if xmlstring:
-			self.session.openWithCallback(self.searchCallback, MSNWeatherPluginSearch, xmlstring)
+			errormessage = ""
+			root = cet_fromstring(xmlstring)
+			for childs in root:
+				if childs.tag == "weather" and childs.attrib.has_key("errormessage"):
+					errormessage = childs.attrib.get("errormessage").encode("utf-8", 'ignore')
+					break
+			if len(errormessage) !=0:
+				self.session.open(MessageBox, errormessage, MessageBox.TYPE_ERROR)					
+			else:
+				self.session.openWithCallback(self.searchCallback, MSNWeatherPluginSearch, xmlstring)
 			
 	def error(self, error = None):
 		if error is not None:
