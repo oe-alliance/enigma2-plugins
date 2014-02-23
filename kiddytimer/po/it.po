@@ -2,33 +2,63 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - kiddytimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-20 22:53+0100\n"
+"POT-Creation-Date: 2014-02-23 20:09+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: /home/dario/Plugins/kiddytimer\n"
+"X-Poedit-Basepath: ../enigma2-plugins/kiddytimer\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: Italy\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: /home/dario/Plugins/kiddytimer\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: ../enigma2-plugins/kiddytimer\n"
 
-#: /home/dario/Plugins/kiddytimer/KTpositioner.py:19
-#: /home/dario/Plugins/kiddytimer/KTpositioner.py:21
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:147
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:149
-msgid "01:00"
-msgstr "01:00"
+#: ../enigma2-plugins/kiddytimer/src/KTglob.py:8
+msgid "Sunday"
+msgstr "Domenica"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:42
-#: /home/dario/Plugins/kiddytimer/KTmain.py:44
+#: ../enigma2-plugins/kiddytimer/src/KTglob.py:9
+msgid "Monday"
+msgstr "Lunedì"
+
+#: ../enigma2-plugins/kiddytimer/src/KTglob.py:10
+msgid "Tuesday"
+msgstr "Martedì"
+
+#: ../enigma2-plugins/kiddytimer/src/KTglob.py:11
+msgid "Wednesday"
+msgstr "Mercoledì"
+
+#: ../enigma2-plugins/kiddytimer/src/KTglob.py:12
+msgid "Thursday"
+msgstr "Giovedì"
+
+#: ../enigma2-plugins/kiddytimer/src/KTglob.py:13
+msgid "Friday"
+msgstr "Venerdì"
+
+#: ../enigma2-plugins/kiddytimer/src/KTglob.py:14
+msgid "Saturday"
+msgstr "Sabato"
+
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:43
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:45
 msgid "??:??"
 msgstr "??:??"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:185
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:47
+#: ../enigma2-plugins/kiddytimer/src/KTpositioner.py:19
+#: ../enigma2-plugins/kiddytimer/src/KTpositioner.py:21
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:151
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:153
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:155
+msgid "01:00"
+msgstr "01:00"
+
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:232
 msgid ""
 "Cheat attempt detected. \n"
 "Box has not been shudown correctly. \n"
@@ -38,231 +68,206 @@ msgstr ""
 "Il box non è stato spento correttamente.\n"
 "Il tempo residuo è stato azzerato..."
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:198
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:245
 msgid "Do you want to start the kiddytimer- plugin now."
 msgstr "Avviare il plugin kiddytimer ora?"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:208
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:255
 msgid "Please enter the correct pin code"
 msgstr "Inserire correttamente il codice PIN"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:208
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:255
 msgid "Enter pin code"
 msgstr "Inserire il codice PIN"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:340
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:390
 msgid "Stop KiddyTimer (this session only)"
 msgstr "Arrestare KiddyTimer (solo per questa sessione)"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:341
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:391
 msgid "Increase remaining time"
 msgstr "Aumentare il tempo residuo"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:342
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:392
 msgid "Decrease remaining time"
 msgstr "Diminuire il tempo residuo"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:343
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:393
 msgid "Set remaining time"
 msgstr "Regolare il tempo residuo"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:344
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:394
 msgid "Reset todays remaining time"
 msgstr "Reset del tempo residuo odierno"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:346
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:396
 msgid "Start KiddyTimer"
 msgstr "Avviare KiddyTimer"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:347
-#: /home/dario/Plugins/kiddytimer/KTmain.py:351
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:397
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:401
 msgid "Enable KiddyTimer for x minutes"
 msgstr "Abilitare KiddyTimer per x minuti"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:348
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:398
 msgid "Disable KiddyTimer"
 msgstr "Disabilitare KiddyTimer"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:350
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:400
 msgid "Enable KiddyTimer"
 msgstr "Abilitare KiddyTimer"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:352
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:402
 msgid "Please select your KiddyTimer- option"
 msgstr "Selezionare l'opzione KiddyTimer"
 
-#: /home/dario/Plugins/kiddytimer/KTmain.py:368
+#: ../enigma2-plugins/kiddytimer/src/KTmain.py:418
 msgid "Invalid selection"
 msgstr "Selezione non valida"
 
-#: /home/dario/Plugins/kiddytimer/plugin.py:16
-msgid "Clock"
-msgstr "Orologio"
-
-#: /home/dario/Plugins/kiddytimer/plugin.py:16
-msgid "Smiley"
-msgstr "Smiley"
-
-#: /home/dario/Plugins/kiddytimer/plugin.py:54
-#: /home/dario/Plugins/kiddytimer/plugin.py:55
-msgid "KiddyTimer"
-msgstr "KiddyTimer"
-
-#: /home/dario/Plugins/kiddytimer/plugin.py:55
-msgid "Allows to controls your kids' daily TV usage"
-msgstr "Utilizzo giornaliero della TV da parte dei bambini"
-
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:51
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:52
 msgid "Enabled"
 msgstr "Abilitato"
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:52
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:53
 msgid "PIN"
 msgstr "PIN"
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:53
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:54
 msgid "Don't monitor TV started before"
 msgstr "Non monitorare la TV accesa prima delle "
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:54
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:55
 msgid "Don't monitor TV started after"
 msgstr "Non monitorare la TV accesa dopo le "
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:55
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:56
 msgid "Style of timer"
 msgstr "Stile timer"
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:56
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:57
 msgid "Timeout for activation dialog"
 msgstr "Timeout di attivazione finestra di dialogo"
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:77
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:73
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Versione: %(version)s"
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:78
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:116
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:74
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:120
 #, python-format
 msgid "Remaining time: %s"
 msgstr "Tempo residuo: %s"
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:79
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:75
 #, python-format
 msgid "Last day started: %s"
 msgstr "Ultimo avvio: %s"
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:82
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:78
 msgid "Cancel"
 msgstr "Annullare"
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:83
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:79
 msgid "Save"
 msgstr "Salvare"
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:84
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:80
 msgid "Reset clock"
 msgstr "Reset orologio"
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:85
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:81
 msgid "Move clock"
 msgstr "Spost. orologio"
 
-#: /home/dario/Plugins/kiddytimer/KTsetup.py:102
+#: ../enigma2-plugins/kiddytimer/src/KTsetup.py:98
 msgid "The pin code you entered is wrong."
 msgstr "E' stato inserito un codice PIN errato!"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:17
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:24
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:17
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:24
 msgid "Save values and close screen"
 msgstr "Salvare le modifiche e chiudere la finestra"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:18
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:23
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:18
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:23
 msgid "Discard changes and close screen"
 msgstr "Annullare le modifiche e chiudere la finestra"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:19
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:19
 msgid "Move screen to the left"
 msgstr "Spostare la finestra a sx"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:20
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:20
 msgid "Move screen to the right"
 msgstr "Spostare la finestra a dx"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:21
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:21
 msgid "Move screen up"
 msgstr "Spostare la finestra sù"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:22
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:22
 msgid "Move screen down"
 msgstr "Spostare la finestra giù"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:25
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:25
 msgid "Move screen to the upper left corner"
 msgstr "Spostare la finestra nell'angolo in alto a sx"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:26
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:26
 msgid "Center screen at the upper border"
 msgstr "Centrare la finestra sul bordo superiore"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:27
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:27
 msgid "Move screen to the upper right corner"
 msgstr "Spostare la finestra nell'angolo in alto a dx"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:28
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:28
 msgid "Move screen to the middle of the left border"
 msgstr "Spostare la finestra al centro del bordo sx"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:29
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:29
 msgid "Move screen to the center of your TV"
 msgstr "Spostare la finestra al centro dello schermo"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:30
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:30
 msgid "Move screen to the middle of the right border"
 msgstr "Spostare la finestra al centro del bordo dx"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:31
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:31
 msgid "Move screen to the lower left corner"
 msgstr "Spostare la finestra nell'angolo in basso a sx"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:32
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:32
 msgid "Center screen at the lower border"
 msgstr "Centrare la finestra sul bordo inferiore"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:33
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:33
 msgid "Move screen to the lower right corner"
 msgstr "Spostare la finestra nell'angolo in basso a dx"
 
-#: /home/dario/Plugins/kiddytimer/MovableScreen.py:34
+#: ../enigma2-plugins/kiddytimer/src/MovableScreen.py:34
 msgid "Reset saved position"
 msgstr "Reset della posizione salvata"
 
-#: /home/dario/Plugins/kiddytimer/KTglob.py:8
-msgid "Sunday"
-msgstr "Domenica"
+#: ../enigma2-plugins/kiddytimer/src/plugin.py:16
+msgid "Clock"
+msgstr "Orologio"
 
-#: /home/dario/Plugins/kiddytimer/KTglob.py:9
-msgid "Monday"
-msgstr "Lunedì"
+#: ../enigma2-plugins/kiddytimer/src/plugin.py:16
+msgid "Smiley"
+msgstr "Smiley"
 
-#: /home/dario/Plugins/kiddytimer/KTglob.py:10
-msgid "Tuesday"
-msgstr "Martedì"
+#: ../enigma2-plugins/kiddytimer/src/plugin.py:16
+msgid "no Image"
+msgstr "Nessuna"
 
-#: /home/dario/Plugins/kiddytimer/KTglob.py:11
-msgid "Wednesday"
-msgstr "Mercoledì"
+#: ../enigma2-plugins/kiddytimer/src/plugin.py:54
+#: ../enigma2-plugins/kiddytimer/src/plugin.py:55
+msgid "KiddyTimer"
+msgstr "KiddyTimer"
 
-#: /home/dario/Plugins/kiddytimer/KTglob.py:12
-msgid "Thursday"
-msgstr "Giovedì"
-
-#: /home/dario/Plugins/kiddytimer/KTglob.py:13
-msgid "Friday"
-msgstr "Venerdì"
-
-#: /home/dario/Plugins/kiddytimer/KTglob.py:14
-msgid "Saturday"
-msgstr "Sabato"
-
+#: ../enigma2-plugins/kiddytimer/src/plugin.py:55
+msgid "Allows to controls your kids' daily TV usage"
+msgstr "Utilizzo giornaliero della TV da parte dei bambini"
