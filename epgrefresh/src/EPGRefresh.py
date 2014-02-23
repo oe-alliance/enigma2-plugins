@@ -57,6 +57,7 @@ class EPGRefresh:
 		# Initialize
 		self.services = (OrderedSet(), OrderedSet())
 		self.forcedScan = False
+		self.isrunning = False
 		self.doStopRunningRefresh = False
 		self.session = None
 		self.beginOfTimespan = 0
@@ -66,11 +67,14 @@ class EPGRefresh:
 		self.configMtime = -1
 		
 		# Todos after finish
-		self.finishTodos = [self._ToDoCallAutotimer, self._ToDoAutotimerCalled, self.finish]
+		self._initFinishTodos()
 
 		# Read in Configuration
 		self.readConfiguration()
 
+	def _initFinishTodos(self):
+		self.finishTodos = [self._ToDoCallAutotimer, self._ToDoAutotimerCalled, self.finish]
+	
 	def readConfiguration(self):
 		# Check if file exists
 		if not path.exists(CONFIG):
@@ -256,9 +260,30 @@ class EPGRefresh:
 
 		return scanServices
 
+	def isRunning(self):
+		return self.isrunning
+	
+	def isRefreshAllowed(self):
+		if self.isRunning():
+			message = _("There is still a refresh running. The Operation isn't allowed at this moment.")
+			try:
+				if self.session != None:
+					self.session.open(MessageBox, message, \
+						 MessageBox.TYPE_INFO, timeout=10)
+			except:
+				print("[EPGRefresh] Error while opening Messagebox!")
+				print_exc(file=stdout)
+				Notifications.AddPopup(message, MessageBox.TYPE_INFO, 10, domain = NOTIFICATIONDOMAIN)
+			return False
+		return True
+
 	def prepareRefresh(self):
+		if not self.isRefreshAllowed():
+			return
+		self.isrunning = True
 		print("[EPGRefresh] About to start refreshing EPG")
 
+		self._initFinishTodos()
 		# Maybe read in configuration
 		try:
 			self.readConfiguration()
@@ -287,9 +312,10 @@ class EPGRefresh:
 		self.refreshAdapter = refreshAdapter
 
 		try:
-			from plugin import AdjustExtensionsmenu, extStopDescriptor, extPendingServDescriptor
+			from plugin import AdjustExtensionsmenu, extStopDescriptor, extPendingServDescriptor, extRunDescriptor
 			AdjustExtensionsmenu(True, extPendingServDescriptor)
 			AdjustExtensionsmenu(True, extStopDescriptor)
+			AdjustExtensionsmenu(False, extRunDescriptor)
 		except:
 			print("[EPGRefresh] Error while adding 'Stop Running EPG-Refresh' to Extensionmenu")
 			print_exc(file=stdout)
@@ -297,14 +323,16 @@ class EPGRefresh:
 		self.refresh()
 
 	def cleanUp(self):
+		print("[EPGRefresh] Debug: Cleanup")
 		config.plugins.epgrefresh.lastscan.value = int(time())
 		config.plugins.epgrefresh.lastscan.save()
 		self.doStopRunningRefresh = False
 		
 		try:
-			from plugin import AdjustExtensionsmenu, extStopDescriptor, extPendingServDescriptor
+			from plugin import AdjustExtensionsmenu, housekeepingExtensionsmenu, extStopDescriptor, extPendingServDescriptor
 			AdjustExtensionsmenu(False, extPendingServDescriptor)
 			AdjustExtensionsmenu(False, extStopDescriptor)
+			housekeepingExtensionsmenu(config.plugins.epgrefresh.show_run_in_extensionsmenu, force=True)
 		except:
 			print("[EPGRefresh] Error while removing 'Stop Running EPG-Refresh' to Extensionmenu:")
 			print_exc(file=stdout)
@@ -313,8 +341,10 @@ class EPGRefresh:
 		self._nextTodo()
 
 	def _nextTodo(self, *args, **kwargs):
+		print("[EPGRefresh] Debug: Calling nextTodo")
 		if len(self.finishTodos) > 0:
 			finishTodo = self.finishTodos.pop(0)
+			print("[EPGRefresh] Debug: Call " + str(finishTodo))
 			finishTodo(*args, **kwargs)
 		
 
@@ -385,6 +415,7 @@ class EPGRefresh:
 			else:
 				Notifications.AddNotificationWithID("Shutdown", Screens.Standby.TryQuitMainloop, 1, domain = NOTIFICATIONDOMAIN)
 		self.forcedScan = False
+		self.isrunning = False
 		
 	def refresh(self):
 		if self.doStopRunningRefresh:

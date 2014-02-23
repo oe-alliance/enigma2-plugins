@@ -33,7 +33,9 @@ from traceback import print_exc
 from sys import stdout
 import os
 
-VERSION = "2.0"
+from plugin import gUserScriptExists
+
+VERSION = "2.0beta3"
 class EPGHelpContextMenu(FixedMenu):
 	HELP_RETURN_MAINHELP = 0
 	HELP_RETURN_KEYHELP = 1
@@ -51,9 +53,15 @@ class EPGFunctionMenu(FixedMenu):
 	FUNCTION_RETURN_BACKUP_DATE = 1
 	FUNCTION_RETURN_BACKUP_SIZE = 2
 	FUNCTION_RETURN_BACKUP_UNINSTALL = 3
+	FUNCTION_RETURN_STOPREFRESH = 4
+	FUNCTION_RETURN_SHOWPENDING = 5
 
 	def __init__(self, session, ispatched = False):
-		menu = [(_("Refresh now"), boundFunction(self.close, self.FUNCTION_RETURN_FORCEREFRESH))]
+		if epgrefresh.isRunning():
+			menu = [(_("Stop running refresh"), boundFunction(self.close, self.FUNCTION_RETURN_STOPREFRESH)),
+				(_("Pending Services"), boundFunction(self.close, self.FUNCTION_RETURN_SHOWPENDING))]
+		else:
+			menu = [(_("Refresh now"), boundFunction(self.close, self.FUNCTION_RETURN_FORCEREFRESH))]
 		if config.plugins.epgrefresh.backup_enabled.value:
 			menu.append((_("Restore EPG-Backups (Date)"), boundFunction(self.close, self.FUNCTION_RETURN_BACKUP_DATE)))
 			menu.append((_("Restore EPG-Backups (Size)"), boundFunction(self.close, self.FUNCTION_RETURN_BACKUP_SIZE)))
@@ -69,21 +77,21 @@ class EPGFunctionMenu(FixedMenu):
 class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 	"""Configuration of EPGRefresh"""
         
-        skin = """<screen name="EPGRefreshConfiguration" position="center,center" size="600,430">
+        skin = """<screen name="EPGRefreshConfiguration" position="center,center" size="700,450">
 		<ePixmap position="0,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 		<ePixmap position="420,5" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<ePixmap position="562,15" size="35,25" pixmap="skin_default/buttons/key_info.png" alphatest="on" />
+		<ePixmap position="572,15" size="35,25" pixmap="skin_default/buttons/key_info.png" alphatest="on" />
 
 		<widget source="key_red" render="Label" position="0,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="140,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_blue" render="Label" position="420,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 
-		<widget name="config" position="5,50" size="590,275" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="0,335" zPosition="1" size="565,2" />
-		<widget source="help" render="Label" position="5,345" size="590,83" font="Regular;21" />
+		<widget name="config" position="5,50" size="690,275" scrollbarMode="showOnDemand" />
+		<ePixmap pixmap="skin_default/div-h.png" position="5,335" zPosition="1" size="690,2" />
+		<widget source="help" render="Label" position="5,345" size="690,105" font="Regular;21" />
 	</screen>"""
 	
 	def __init__(self, session):
@@ -122,12 +130,6 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 				"blue": (self.editServices, _("Edit Services")),
 			}
 		)
-		self["SetupActions"] = HelpableActionMap(self, "SetupActions",
-			{
-				"cancel": (self.keyCancel, _("Close and forget changes")),
-				"save": (self.keySave, _("Close and save changes")),
-			}
-		)
 		self["actions"] = HelpableActionMap(self, "ChannelSelectEPGActions",
 			{
 				"showEPGList": (self.keyInfo, _("Show last EPGRefresh - Time")),
@@ -144,6 +146,12 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 				"displayHelp": self.showHelp,
 			}
 		)
+		self["SetupActions"] = HelpableActionMap(self, "SetupActions",
+			{
+				"cancel": (self.keyCancel, _("Close and forget changes")),
+				"save": (self.keySave, _("Close and save changes")),
+			}
+		)
 		
 		# Trigger change
 		self.changed()
@@ -151,6 +159,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 		
 		self.onLayoutFinish.append(self.setCustomTitle)
 		self.onFirstExecBegin.append(self.firstExec)
+		self["config"].isChanged = self._ConfigisChanged
 
 	def _getConfig(self):
 		# Name, configElement, HelpTxt, reloadConfig
@@ -175,7 +184,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 					self.list.append(getConfigListEntry(_("Enable Debug"), config.plugins.epgrefresh.backup_enable_debug, _("Should debugmessages be printed in a File?\nThe filename will be added with the current date"), True))
 					if config.plugins.epgrefresh.backup_enable_debug.value:
 						self.list.append(getConfigListEntry(_("Log-directory"), config.plugins.epgrefresh.backup_log_dir, _("Directory for the Logfiles."), False))
-					if os.path.exists("/usr/script"):
+					if gUserScriptExists:
 						self.list.append(getConfigListEntry(_("Show in User-Scripts"), config.plugins.epgrefresh.showin_usr_scripts, _("Should the Manage-Script be shown in User-Scripts?"), False))
 			else:
 				self.list.append(getConfigListEntry(_("Show Advanced Options"), NoSave(config.plugins.epgrefresh.showadvancedoptions), _("Display more Options"), True))
@@ -247,6 +256,14 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 		ConfigListScreen.keyRight(self)
 		self._onKeyChange()
 	
+	# overwrite configlist.isChanged
+	def _ConfigisChanged(self):
+		is_changed = False
+		for x in self["config"].list:
+			if not x[1].save_disabled:
+				is_changed |= x[1].isChanged()
+		return is_changed
+	
 	def keyOK(self):
 		self["config"].handleKey(KEY_OK)
 		cur = self["config"].getCurrent()
@@ -303,6 +320,10 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			from plugin import epgbackup
 			if result == EPGFunctionMenu.FUNCTION_RETURN_FORCEREFRESH:
 				self.forceRefresh()
+			if result == EPGFunctionMenu.FUNCTION_RETURN_STOPREFRESH:
+				self.stopRunningRefresh()
+			if result == EPGFunctionMenu.FUNCTION_RETURN_SHOWPENDING:
+				self.showPendingServices()
 			elif result == EPGFunctionMenu.FUNCTION_RETURN_BACKUP_SIZE:
 				epgbackup.forceBackupBySize()
 			elif result == EPGFunctionMenu.FUNCTION_RETURN_BACKUP_DATE:
@@ -318,9 +339,19 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			print_exc(file=stdout)
 	
 	def forceRefresh(self):
+		if not epgrefresh.isRefreshAllowed():
+			return
+	
+		self._saveConfiguration()
 		epgrefresh.services = (set(self.services[0]), set(self.services[1]))
 		epgrefresh.forceRefresh(self.session)
-		self.keySave()
+		self.keySave(False)
+
+	def showPendingServices(self):
+		epgrefresh.showPendingServices(self.session)
+	
+	def stopRunningRefresh(self):
+		epgrefresh.stopRunningRefresh(self.session)
 
 	def editServices(self):
 		self.session.openWithCallback(
@@ -391,8 +422,8 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			)
 		else:
 			self.close(self.session, False)
-
-	def keySave(self):
+	
+	def _saveConfiguration(self):
 		epgrefresh.services = (set(self.services[0]), set(self.services[1]))
 		epgrefresh.saveConfiguration()
 
@@ -403,6 +434,15 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 		for x in self["config"].list:
 			x[1].save()		
 		configfile.save()
+		
+	def keySave(self, doSaveConfiguration = True):
+		if self["config"].isChanged():
+			if not epgrefresh.isRefreshAllowed():
+				return
+			else:
+				epgrefresh.stop()
+				if doSaveConfiguration:
+					self._saveConfiguration()
 		
 		self._maybeNeedsRestart()
 		self.close(self.session, self.needsEnigmaRestart)

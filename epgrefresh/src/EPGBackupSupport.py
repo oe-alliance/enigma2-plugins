@@ -77,10 +77,11 @@ class EPGBackupSupport:
 				backupfiles = backupStrList.split("\n")
 			if backupfiles:
 				for file in backupfiles:
-					file = file.replace(EPGBACKUP_SHELL_CONSTANTS["STRINGBIGGEST"], _("FILELIST_BIGGEST"))
-					file = file.replace(EPGBACKUP_SHELL_CONSTANTS["STRINGYOUNGEST"], _("FILELIST_YOUNGEST"))
-					file = file.replace(EPGBACKUP_SHELL_CONSTANTS["STRINGFORCED"], _("FILELIST_FORCED"))
-					backupList.append(( file, file.split(" ")[0] ))
+					if file:
+						file = file.replace(EPGBACKUP_SHELL_CONSTANTS["STRINGBIGGEST"], _("FILELIST_BIGGEST"))
+						file = file.replace(EPGBACKUP_SHELL_CONSTANTS["STRINGYOUNGEST"], _("FILELIST_YOUNGEST"))
+						file = file.replace(EPGBACKUP_SHELL_CONSTANTS["STRINGFORCED"], _("FILELIST_FORCED"))
+						backupList.append(( file, file.split(" ")[0] ))
 		except:
 			print("[EPGRefresh] getBackupFiles Error")
 			print_exc(file=stdout)
