@@ -4,171 +4,175 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - pushservice\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-25 14:57+0100\n"
-"PO-Revision-Date: 2012-10-25 14:58+0100\n"
+"POT-Creation-Date: 2014-02-23 20:31+0100\n"
+"PO-Revision-Date: 2014-02-23 20:44+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
-"Language: \n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: .../enigma2-plugins/pushservice\n"
+"X-Poedit-Basepath: ../enigma2-plugins/pushservice\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: Italy\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: .../enigma2-plugins/pushservice\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: ../enigma2-plugins/"
+"pushservice\n"
 
-#: .../enigma2-plugins/pushservice/src/ConfigFile.py:58
-msgid "[PushService] No configuration file present"
-msgstr "[PushSercice] File di configurazione assente"
+#: ../enigma2-plugins/pushservice/src/ConfigFile.py:58
+msgid "PushService No configuration file present"
+msgstr "File di configurazione assente"
 
-#: .../enigma2-plugins/pushservice/src/ConfigFile.py:71
-msgid "[PushService] Exception in readXML: "
-msgstr "[PushService] Eccezione in lettura XML: "
+#: ../enigma2-plugins/pushservice/src/ConfigFile.py:71
+msgid "PushService Exception in readXML: "
+msgstr "Eccezione in lettura XML: "
 
-#: .../enigma2-plugins/pushservice/src/ConfigFile.py:92
-msgid "[PushService] Exception in writeXML: "
-msgstr "[PushService] Eccezione in scrittura XML: "
+#: ../enigma2-plugins/pushservice/src/ConfigFile.py:92
+msgid "PushService Exception in writeXML: "
+msgstr "Eccezione in scrittura XML: "
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:67
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:67
 msgid "Configuration"
 msgstr "Configurazione"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:88
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:88
 msgid "Page up"
 msgstr "Pagina sù"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:89
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:89
 msgid "Page down"
 msgstr "Pagina giù"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:94
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:94
 msgid "Exit without saving"
 msgstr "Uscire senza salvare"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:95
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:95
 msgid "Save and exit"
 msgstr "Salvare e uscire"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:101
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:101
 msgid "Show Services"
 msgstr "Mostr. servizi"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:102
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:102
 msgid "Show Controllers"
 msgstr "Mostr. controlli"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:108
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:117
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:108
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:117
 msgid "Back to main screen"
 msgstr "Tornare al menu principale"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:109
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:109
 msgid "Test selected Service"
 msgstr "Test servizio"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:110
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:251
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:110
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:253
 msgid "Add Service"
 msgstr "Agg. servizio"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:111
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:111
 msgid "Remove Service"
 msgstr "Rim. servizio"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:118
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:118
 msgid "Test selected Controller"
 msgstr "Test controllo"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:119
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:282
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:119
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:284
 msgid "Add Controller"
 msgstr "Agg. controllo"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:120
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:120
 msgid "Remove Controller"
 msgstr "Rim. controllo"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:171
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:171
 msgid "Cancel"
 msgstr "Annull."
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:172
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:172
 msgid "OK"
 msgstr "Ok"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:177
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:177
 msgid "Services"
 msgstr "Servizi"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:178
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:178
 msgid "Controllers"
 msgstr "Controlli"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:185
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:185
 msgid "Enable PushService"
 msgstr "Abilitare PushService"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:188
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:188
 msgid "Dreambox name"
 msgstr "Nome Dreambox"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:189
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:189
 msgid "Config file"
 msgstr "File di configurazione"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:191
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:191
 msgid "Start time (HH:MM)"
 msgstr "Ora di avvio (HH:MM)"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:192
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:192
 msgid "Period in hours (0=disabled)"
 msgstr "Periodo in ore (0 >> disabilitare)"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:193
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:193
 msgid "Run on boot"
 msgstr "Avviare al boot"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:196
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:208
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:195
+msgid "Boot delay"
+msgstr "Ritardo avvio"
+
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:198
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:210
 msgid "Main"
 msgstr "Princip."
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:197
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:209
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:199
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:211
 msgid "Test"
 msgstr "Test"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:198
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:200
 msgid "Add service"
 msgstr "Agg. servizio"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:199
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:201
 msgid "Remove service"
 msgstr "Rim. servizio"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:210
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:212
 msgid "Add controller"
 msgstr "Agg. controllo"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:211
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:267
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:298
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:213
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:269
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:300
 msgid "Remove controller"
 msgstr "Rim. controllo"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:337
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:339
 msgid "Really close without saving settings?"
 msgstr "Uscire senza salvare la configurazione?"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:412
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:414
 msgid "Testing Service"
 msgstr "Test servizio in corso"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:413
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:416
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:415
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:418
 msgid ""
 "Testing...\n"
 "\n"
@@ -178,43 +182,43 @@ msgstr ""
 "\n"
 "Annullare?"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:415
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:417
 msgid "Testing Controller"
 msgstr "Test controllo in corso"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:418
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:420
 msgid "Testing"
 msgstr "Test in corso"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:419
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:421
 msgid "Nothing to test"
 msgstr "Nulla da verificare"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:427
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:429
 msgid "PushService Config"
 msgstr "Configurazione PushService"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:427
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:429
 msgid "Push test"
 msgstr "Test invio"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:427
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:429
 msgid "If You can see this, Your configuration is correct."
 msgstr "Se viene visualizzato questo messaggio la configurazione è corretta."
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:431
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:433
 msgid "PushService Test exception:"
 msgstr "Eccezione test PushService"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:439
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:441
 msgid "Test has been finished successfully"
 msgstr "Il test è stato eseguito correttamente"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:444
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:446
 msgid "Nothing to push"
 msgstr "Nulla da segnalare"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:451
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:453
 #, python-format
 msgid ""
 "Test failed:\n"
@@ -225,7 +229,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:454
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:456
 #, python-format
 msgid ""
 "Test failed\n"
@@ -236,94 +240,96 @@ msgstr ""
 "\n"
 "%s"
 
-#: .../enigma2-plugins/pushservice/src/ConfigScreen.py:456
+#: ../enigma2-plugins/pushservice/src/ConfigScreen.py:458
 msgid "Test failed"
 msgstr "Test fallito"
 
-#: .../enigma2-plugins/pushservice/src/ModuleBase.py:93
+#: ../enigma2-plugins/pushservice/src/ModuleBase.py:93
 #, python-format
-msgid "[PushService] Module %s:\n"
-msgstr "[PushService] Modulo %s:\n"
+msgid "PushService Module %s:\n"
+msgstr "Modulo %s:\n"
 
-#: .../enigma2-plugins/pushservice/src/ModuleBase.py:94
+#: ../enigma2-plugins/pushservice/src/ModuleBase.py:94
 msgid "Skipping config option:"
 msgstr "Tralasciare opzioni di configurazione:"
 
-#: .../enigma2-plugins/pushservice/src/Modules.py:60
-msgid "[PushService] Find module exception: "
-msgstr "[PushService] Rilevata eccezione modulo: "
+#: ../enigma2-plugins/pushservice/src/Modules.py:60
+msgid "PushService Find module exception: "
+msgstr "Rilevata eccezione modulo: "
 
-#: .../enigma2-plugins/pushservice/src/Modules.py:64
-msgid "[PushService] No module found: "
-msgstr "[PushService] Nessun modulo trovato: "
+#: ../enigma2-plugins/pushservice/src/Modules.py:64
+msgid "PushService No module found: "
+msgstr "Nessun modulo trovato: "
 
-#: .../enigma2-plugins/pushservice/src/Modules.py:70
-msgid "[PushService] Load exception: "
-msgstr "[PushService]  Eccezione caricamento: "
+#: ../enigma2-plugins/pushservice/src/Modules.py:70
+msgid "PushService Load exception: "
+msgstr "Eccezione caricamento: "
 
-#: .../enigma2-plugins/pushservice/src/Modules.py:76
-msgid "[PushService] No module available: "
-msgstr "[PushService] Nessun modulo disponibile: "
+#: ../enigma2-plugins/pushservice/src/Modules.py:76
+msgid "PushService No module available: "
+msgstr "Nessun modulo disponibile: "
 
-#: .../enigma2-plugins/pushservice/src/Modules.py:81
-msgid "[PushService] Warning attribute not available: "
-msgstr "[PushService] Attenzione, attributo non disponibile: "
+#: ../enigma2-plugins/pushservice/src/Modules.py:81
+msgid "PushService Warning attribute not available: "
+msgstr "Attenzione, attributo non disponibile: "
 
-#: .../enigma2-plugins/pushservice/src/Modules.py:87
-msgid "[PushService] Warning no class definition: "
-msgstr "[PushService] Attenzione, nessuna definizione classe: "
+#: ../enigma2-plugins/pushservice/src/Modules.py:87
+msgid "PushService Warning no class definition: "
+msgstr "Attenzione, nessuna definizione classe: "
 
-#: .../enigma2-plugins/pushservice/src/Modules.py:92
-msgid "[PushService] Warning no subclass of base: "
-msgstr "[PushService] Warning, nessuna subclass of base: "
+#: ../enigma2-plugins/pushservice/src/Modules.py:92
+msgid "PushService Warning no subclass of base: "
+msgstr "Warning, nessuna subclass di base: "
 
-#: .../enigma2-plugins/pushservice/src/Modules.py:105
-msgid "[PushService] Instantiate exception: "
-msgstr "[PushService] Eccezione inizializzazione: "
+#: ../enigma2-plugins/pushservice/src/Modules.py:105
+msgid "PushService Instantiate exception: "
+msgstr "Eccezione inizializzazione: "
 
-#: .../enigma2-plugins/pushservice/src/Modules.py:107
+#: ../enigma2-plugins/pushservice/src/Modules.py:107
 msgid "Unexpected error: "
 msgstr "Errore imprevisto: "
 
-#: .../enigma2-plugins/pushservice/src/Modules.py:110
-msgid "[PushService] Module is not callable"
-msgstr "[PushService] Modulo non richiamabile"
+#: ../enigma2-plugins/pushservice/src/Modules.py:110
+msgid "PushService Module is not callable"
+msgstr "Modulo non richiamabile"
 
-#: .../enigma2-plugins/pushservice/src/PushServiceBase.py:220
+#: ../enigma2-plugins/pushservice/src/PushServiceBase.py:220
 msgid "Don't edit this manually unless you really know what you are doing"
-msgstr "Non modificare alcun parametro se non si è certi di quello che si sta facendo!"
+msgstr ""
+"Non modificare alcun parametro se non si è certi di quello che si sta "
+"facendo!"
 
-#: .../enigma2-plugins/pushservice/src/PushServiceBase.py:265
+#: ../enigma2-plugins/pushservice/src/PushServiceBase.py:265
 msgid "PushService started: "
 msgstr "PushService avviato: "
 
-#: .../enigma2-plugins/pushservice/src/PushServiceBase.py:265
+#: ../enigma2-plugins/pushservice/src/PushServiceBase.py:265
 msgid "%d.%m.%Y %H:%M"
 msgstr "%d.%m.%Y %H:%M"
 
-#: .../enigma2-plugins/pushservice/src/PushServiceBase.py:275
+#: ../enigma2-plugins/pushservice/src/PushServiceBase.py:275
 msgid "PushService running: "
 msgstr "PushService attivo: "
 
-#: .../enigma2-plugins/pushservice/src/PushServiceBase.py:283
+#: ../enigma2-plugins/pushservice/src/PushServiceBase.py:283
 msgid "PushService controller run() exception"
 msgstr "Eccezione controllo PushService run()"
 
-#: .../enigma2-plugins/pushservice/src/PushServiceBase.py:307
+#: ../enigma2-plugins/pushservice/src/PushServiceBase.py:307
 #, python-format
 msgid "controller %s returned error(s)"
 msgstr "Il controllo %s ha restituito errori"
 
-#: .../enigma2-plugins/pushservice/src/PushServiceBase.py:333
+#: ../enigma2-plugins/pushservice/src/PushServiceBase.py:333
 msgid "PushService Service push() exception"
 msgstr "Eccezione servizio PushService push()"
 
-#: .../enigma2-plugins/pushservice/src/PushServiceBase.py:348
+#: ../enigma2-plugins/pushservice/src/PushServiceBase.py:348
 #, python-format
 msgid "Service %s returned error(s)"
 msgstr "Il servizio %s ha restituito errori"
 
-#: .../enigma2-plugins/pushservice/src/plugin.py:42
+#: ../enigma2-plugins/pushservice/src/plugin.py:42
 msgid ""
 "  (C) 2012 by betonme @ IHAD \n"
 "\n"
@@ -331,15 +337,15 @@ msgstr ""
 "  (C) 2012 by betonme @ IHAD \n"
 "\n"
 
-#: .../enigma2-plugins/pushservice/src/plugin.py:43
+#: ../enigma2-plugins/pushservice/src/plugin.py:43
 msgid "  If You like this plugin and want to support it,\n"
 msgstr "  Se questo plugin piace e si desidera supportarlo,\n"
 
-#: .../enigma2-plugins/pushservice/src/plugin.py:44
+#: ../enigma2-plugins/pushservice/src/plugin.py:44
 msgid "  or if just want to say ''thanks'',\n"
 msgstr "  o semplicemente si vuole ringraziare,\n"
 
-#: .../enigma2-plugins/pushservice/src/plugin.py:45
+#: ../enigma2-plugins/pushservice/src/plugin.py:45
 msgid ""
 "  feel free to donate via PayPal. \n"
 "\n"
@@ -347,7 +353,7 @@ msgstr ""
 "  è possibile contribuire con PayPal.\n"
 "\n"
 
-#: .../enigma2-plugins/pushservice/src/plugin.py:46
+#: ../enigma2-plugins/pushservice/src/plugin.py:46
 msgid ""
 "  Thanks a lot ! \n"
 "  PayPal: "
@@ -355,39 +361,39 @@ msgstr ""
 "  Mille grazie!\n"
 "  PayPal: "
 
-#: .../enigma2-plugins/pushservice/src/plugin.py:47
+#: ../enigma2-plugins/pushservice/src/plugin.py:47
 msgid "  Support: "
 msgstr "Supporto: "
 
-#: .../enigma2-plugins/pushservice/src/plugin.py:79
+#: ../enigma2-plugins/pushservice/src/plugin.py:80
 msgid "PushService setup exception "
 msgstr "Eccezione configurazione PushService"
 
-#: .../enigma2-plugins/pushservice/src/plugin.py:94
+#: ../enigma2-plugins/pushservice/src/plugin.py:95
 msgid "PushService autostart exception "
 msgstr "Eccezione avvio automatico PushService"
 
-#: .../enigma2-plugins/pushservice/src/plugin.py:110
+#: ../enigma2-plugins/pushservice/src/plugin.py:111
 msgid "configuration"
 msgstr "Configurazione"
 
-#: .../enigma2-plugins/pushservice/src/Controller/CrashLog.py:33
+#: ../enigma2-plugins/pushservice/src/Controller/CrashLog.py:33
 msgid "Found CrashLog(s)"
 msgstr "Rilevati CrashLog"
 
-#: .../enigma2-plugins/pushservice/src/Controller/CrashLog.py:34
+#: ../enigma2-plugins/pushservice/src/Controller/CrashLog.py:34
 msgid "Crashlog(s) are attached"
 msgstr "CrashLog allegati"
 
-#: .../enigma2-plugins/pushservice/src/Controller/CrashLog.py:47
+#: ../enigma2-plugins/pushservice/src/Controller/CrashLog.py:47
 msgid "Delete crashlog(s)"
 msgstr "Rimuovere i CrashLog"
 
-#: .../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:32
+#: ../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:32
 msgid "Found deactivated timer(s)"
 msgstr "Rilevati timer disattivati"
 
-#: .../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:33
+#: ../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:33
 #, python-format
 msgid ""
 "Deactivated timer list:\n"
@@ -396,70 +402,74 @@ msgstr ""
 "Elenco tiler disattivati:\n"
 "%s"
 
-#: .../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:34
+#: ../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:34
 msgid "DeactivatedTimerPushed"
 msgstr "Timer disattivati"
 
-#: .../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:47
+#: ../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:47
 msgid "Remove deactivated timer(s)"
 msgstr "Rimuovere i timer disattivati"
 
-#: .../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:58
-#: .../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:90
-#: .../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:100
+#: ../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:58
+#: ../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:94
+#: ../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:104
+#: ../enigma2-plugins/pushservice/src/Controller/RecordSummary.py:58
+#: ../enigma2-plugins/pushservice/src/Controller/ActiveTimers.py:55
 msgid "%Y.%m.%d %H:%M"
 msgstr "%Y.%m.%d %H:%M"
 
-#: .../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:59
-#: .../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:91
-#: .../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:101
+#: ../enigma2-plugins/pushservice/src/Controller/DeactivatedTimers.py:59
+#: ../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:95
+#: ../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:105
+#: ../enigma2-plugins/pushservice/src/Controller/RecordSummary.py:59
+#: ../enigma2-plugins/pushservice/src/Controller/ActiveTimers.py:56
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: .../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:31
+#: ../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:31
 msgid "Free space warning"
 msgstr "Avviso spazio disponibile"
 
-#: .../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:32
+#: ../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:32
 msgid "Free disk space limit has been reached:\n"
 msgstr "Raggiunto il limite per lo spazio disponibile su HDD:\n"
 
-#: .../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:33
+#: ../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:33
 #, python-format
 msgid "Path:  %s\n"
 msgstr "Percorso:  %s\n"
 
-#: .../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:34
+#: ../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:34
 #, python-format
 msgid "Limit: %d GB\n"
 msgstr "Limite: %d GB\n"
 
-#: .../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:35
+#: ../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:35
 #, python-format
 msgid "Left:  %s"
 msgstr "Disponibili:  %s"
 
-#: .../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:47
+#: ../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:47
 msgid "Allow HDD wake up"
 msgstr "Permettere attivazione HDD"
 
-#: .../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:48
+#: ../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:48
 msgid "Where to check free space"
 msgstr "Verificare spazio libero su"
 
-#: .../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:49
+#: ../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:49
 msgid "Free space limit in GB"
 msgstr "Limite spazio libero (GB)"
 
-#: .../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:74
+#: ../enigma2-plugins/pushservice/src/Controller/FreeSpace.py:85
 msgid "[FreeSpace] HDD is idle: "
 msgstr "[FreeSpace] HDD non attivo: "
 
-#: .../enigma2-plugins/pushservice/src/Controller/IPKGUpdateNotification.py:34
+#: ../enigma2-plugins/pushservice/src/Controller/IPKGUpdateNotification.py:34
 msgid "IPKG Update Notification"
 msgstr "Notifiche aggiornamenti IPKG"
 
-#: .../enigma2-plugins/pushservice/src/Controller/IPKGUpdateNotification.py:35
+#: ../enigma2-plugins/pushservice/src/Controller/IPKGUpdateNotification.py:35
 #, python-format
 msgid ""
 "There are updates available:\n"
@@ -468,35 +478,35 @@ msgstr ""
 "Sono disponibili i seguenti aggiornamenti:\n"
 "%s"
 
-#: .../enigma2-plugins/pushservice/src/Controller/IPKGUpdateNotification.py:47
+#: ../enigma2-plugins/pushservice/src/Controller/IPKGUpdateNotification.py:47
 msgid "Start update check if not done yet"
 msgstr "Avviare verifica aggiornamenti (se mai eseguita)"
 
-#: .../enigma2-plugins/pushservice/src/Controller/IPKGUpdateNotification.py:80
+#: ../enigma2-plugins/pushservice/src/Controller/IPKGUpdateNotification.py:80
 msgid "Updatefeed not available."
 msgstr "Fedd aggiornamenti non disponibile."
 
-#: .../enigma2-plugins/pushservice/src/Controller/IPKGUpdateNotification.py:84
+#: ../enigma2-plugins/pushservice/src/Controller/IPKGUpdateNotification.py:84
 msgid "No network connection available."
 msgstr "Nessuna connessione di rete disponibile."
 
-#: .../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:33
+#: ../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:33
 msgid "Record Notification"
 msgstr "Notifica registrazione"
 
-#: .../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:48
+#: ../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:48
 msgid "Send notification on record start"
 msgstr "Notificare avvio registrazione"
 
-#: .../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:49
+#: ../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:49
 msgid "Send notification on record end"
 msgstr "Notificare termine registrazione"
 
-#: .../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:88
+#: ../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:92
 msgid "Record started:\n"
 msgstr "Registrazione iniziata:\n"
 
-#: .../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:98
+#: ../enigma2-plugins/pushservice/src/Controller/RecordNotification.py:102
 msgid ""
 "Record finished:\n"
 "  "
@@ -504,11 +514,11 @@ msgstr ""
 "Registrazione terminata:\n"
 "  "
 
-#: .../enigma2-plugins/pushservice/src/Controller/RecordSummary.py:32
+#: ../enigma2-plugins/pushservice/src/Controller/RecordSummary.py:32
 msgid "Record Summary"
 msgstr "Elenco registrazioni"
 
-#: .../enigma2-plugins/pushservice/src/Controller/RecordSummary.py:33
+#: ../enigma2-plugins/pushservice/src/Controller/RecordSummary.py:33
 #, python-format
 msgid ""
 "Finished record list:\n"
@@ -517,19 +527,19 @@ msgstr ""
 "Elenco registrazioni terminate:\n"
 "%s"
 
-#: .../enigma2-plugins/pushservice/src/Controller/RecordSummary.py:34
+#: ../enigma2-plugins/pushservice/src/Controller/RecordSummary.py:34
 msgid "FinishedTimerPushed"
 msgstr "Timer terminati"
 
-#: .../enigma2-plugins/pushservice/src/Controller/RecordSummary.py:47
+#: ../enigma2-plugins/pushservice/src/Controller/RecordSummary.py:47
 msgid "Remove finished timer(s)"
 msgstr "Rimuovere i timer conclusi"
 
-#: .../enigma2-plugins/pushservice/src/Controller/ActiveTimers.py:32
+#: ../enigma2-plugins/pushservice/src/Controller/ActiveTimers.py:32
 msgid "Found active timer(s)"
 msgstr "Rilevati timer attivi"
 
-#: .../enigma2-plugins/pushservice/src/Controller/ActiveTimers.py:33
+#: ../enigma2-plugins/pushservice/src/Controller/ActiveTimers.py:33
 #, python-format
 msgid ""
 "Active timer list:\n"
@@ -538,24 +548,24 @@ msgstr ""
 "Elenco timer attivi:\n"
 "%s"
 
-#: .../enigma2-plugins/pushservice/src/Controller/ActiveTimers.py:34
+#: ../enigma2-plugins/pushservice/src/Controller/ActiveTimers.py:34
 msgid "ActiveTimerPushed"
 msgstr "ActiveTimerPushed"
 
-#: .../enigma2-plugins/pushservice/src/Services/GNTP.py:31
+#: ../enigma2-plugins/pushservice/src/Services/GNTP.py:31
 msgid "{box:s} {name:s}"
 msgstr "{box:s} {name:s}"
 
-#: .../enigma2-plugins/pushservice/src/Services/GNTP.py:32
+#: ../enigma2-plugins/pushservice/src/Services/GNTP.py:32
 msgid "{name:s}"
 msgstr "{name:s}"
 
-#: .../enigma2-plugins/pushservice/src/Services/GNTP.py:33
+#: ../enigma2-plugins/pushservice/src/Services/GNTP.py:33
 msgid "{box:s}: {subject:s}"
 msgstr "{box:s}: {subject:s}"
 
-#: .../enigma2-plugins/pushservice/src/Services/GNTP.py:34
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:32
+#: ../enigma2-plugins/pushservice/src/Services/GNTP.py:34
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:32
 msgid ""
 "{body:s}\n"
 "\n"
@@ -563,39 +573,39 @@ msgstr ""
 "{body:s}\n"
 "\n"
 
-#: .../enigma2-plugins/pushservice/src/Services/GNTP.py:35
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:36
+#: ../enigma2-plugins/pushservice/src/Services/GNTP.py:35
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:36
 msgid "Donate {donate:s}"
 msgstr "Donare {donate:s}"
 
-#: .../enigma2-plugins/pushservice/src/Services/GNTP.py:48
+#: ../enigma2-plugins/pushservice/src/Services/GNTP.py:48
 msgid "Growl Host name"
 msgstr "Nome host Growl"
 
-#: .../enigma2-plugins/pushservice/src/Services/GNTP.py:49
+#: ../enigma2-plugins/pushservice/src/Services/GNTP.py:49
 msgid "Growl Port"
 msgstr "Porta Growl"
 
-#: .../enigma2-plugins/pushservice/src/Services/GNTP.py:50
-#: .../enigma2-plugins/pushservice/src/Services/PopUp.py:43
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:53
+#: ../enigma2-plugins/pushservice/src/Services/GNTP.py:50
+#: ../enigma2-plugins/pushservice/src/Services/PopUp.py:43
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:53
 msgid "Timeout"
 msgstr "Timeout"
 
-#: .../enigma2-plugins/pushservice/src/Services/GNTP.py:51
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:56
+#: ../enigma2-plugins/pushservice/src/Services/GNTP.py:51
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:56
 msgid "Password"
 msgstr "Password"
 
-#: .../enigma2-plugins/pushservice/src/Services/GNTP.py:52
+#: ../enigma2-plugins/pushservice/src/Services/GNTP.py:52
 msgid "Send as sticky"
 msgstr "Inviare come sticky"
 
-#: .../enigma2-plugins/pushservice/src/Services/GNTP.py:53
+#: ../enigma2-plugins/pushservice/src/Services/GNTP.py:53
 msgid "Send with priority"
 msgstr "Inviare con priorità"
 
-#: .../enigma2-plugins/pushservice/src/Services/PopUp.py:32
+#: ../enigma2-plugins/pushservice/src/Services/PopUp.py:32
 msgid ""
 "{name:s} {plugin:s}\n"
 "{subject:s}\n"
@@ -605,56 +615,55 @@ msgstr ""
 "{subject:s}\n"
 "{body:s}"
 
-#: .../enigma2-plugins/pushservice/src/Services/PopUp.py:55
+#: ../enigma2-plugins/pushservice/src/Services/PopUp.py:55
 msgid "The PopUp will be shown after all dialogs are closed."
 msgstr "Il PopUp sarà visualizzato dopo la chiusura di tutti i messaggi."
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:31
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:31
 msgid "{box:s} {name:s}: {plugin:s}: {subject:s}"
 msgstr "{box:s} {name:s}: {plugin:s}: {subject:s}"
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:33
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:33
 msgid "Provided by Dreambox Plugin {name:s} {version:s} - {plugin:s}\n"
 msgstr "Fornito da Dreambox Plugin {name:s} {version:s} - {plugin:s}\n"
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:34
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:34
 msgid "C 2012 by betonme @ IHAD\n"
 msgstr "C 2012 by betonme @ IHAD\n"
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:35
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:35
 msgid "Support {support:s}\n"
 msgstr "Supporto {support:s}\n"
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:49
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:49
 msgid "SMTP Server"
 msgstr "Server SMTP"
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:50
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:50
 msgid "SMTP Port"
 msgstr "Porta SMTP"
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:51
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:51
 msgid "SMTP SSL"
 msgstr "SSL SMTP"
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:52
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:52
 msgid "SMTP TLS"
 msgstr "TLS SMTP"
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:55
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:55
 msgid "User name"
 msgstr "Nome user"
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:58
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:58
 msgid "Mail from"
 msgstr "Mittente"
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:59
-msgid "Mail to or leave empty"
-msgstr "Destinatario (o lasciare vuoto)"
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:59
+msgid "Mail to or leave empty (From will be used)"
+msgstr "Destinatario (o lasciare vuoto - verrà usato il mittente)"
 
-#: .../enigma2-plugins/pushservice/src/Services/SMTP.py:88
+#: ../enigma2-plugins/pushservice/src/Services/SMTP.py:88
 #, python-format
-msgid "[PushService] PushMail: Sending message: %s"
-msgstr "[PushService] PushMail: Invio messaggio in corso: %s"
-
+msgid "PushService PushMail: Sending message: %s"
+msgstr "PushMail - Invio messaggio in corso: %s"
