@@ -7,4 +7,4 @@ def main(session, **kwargs):
 	session.open(Ceparted)
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name=_("eParted"), description=_("creating and manipulating partition tables"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main,icon="eparted.png"), PluginDescriptor(name=_("eParted"), description=_("creating and manipulating partition tables"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]
+	return [PluginDescriptor(name=_("eParted"), description=_("creating and manipulating partition tables"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="eparted.png"), PluginDescriptor(name=_("eParted"), description=_("creating and manipulating partition tables"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]
