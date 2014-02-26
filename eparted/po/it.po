@@ -1,0 +1,83 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: eParted 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-11 10:44+0000\n"
+"PO-Revision-Date: 2010-04-13 10:19+0200\n"
+"Last-Translator: mechatron\n"
+"Language-Team: mechatron\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.2\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Country: GERMANY\n"
+
+msgid "creating and manipulating partition tables"
+msgstr "compilare e cambiare la tabella della partizione "
+
+msgid "partition(s)"
+msgstr "partizione"
+
+msgid "add partition"
+msgstr "aggiungere partizione"
+
+msgid "size in %s (max %d %s):"
+msgstr "capacità in %s (max %d %s):"
+
+msgid "filesystem:"
+msgstr "sistema di file:"
+
+msgid "cancel"
+msgstr "sospensione"
+
+msgid "ok"
+msgstr "ok"
+
+msgid "add"
+msgstr "aggiungere"
+
+msgid "delete"
+msgstr "cancella"
+
+msgid "free"
+msgstr "libro"
+
+msgid "create partition %s"
+msgstr "compilare partizione %s "
+
+msgid "make filesystem '%s' on partition %s (%d %s)"
+msgstr "compilare sistema di file '%s' nella partizione %s  (%d %s)"
+
+msgid "delete partition %s"
+msgstr "cancellare partizione %s "
+
+msgid "execute"
+msgstr "sviluppare"
+
+msgid "Start"
+msgstr "avvio"
+
+msgid "End"
+msgstr "fine"
+
+msgid "Nr"
+msgstr "numero"
+
+msgid "Size"
+msgstr "capacità"
+
+msgid "Type"
+msgstr "tipo"
+
+msgid "Error command '%s'"
+msgstr "errore al comando '%s'"
+
+msgid "quit"
+msgstr "chiudere"
+
+msgid "Please Wait"
+msgstr "aspetta per piacere"

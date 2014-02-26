@@ -1,0 +1,2 @@
+Description: eParted manipulates partition tables
+Depends: enigma2, parted

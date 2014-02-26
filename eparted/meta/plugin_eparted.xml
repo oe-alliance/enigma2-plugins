@@ -1,0 +1,17 @@
+<default>
+	<prerequisites>
+		<tag type="System" />
+		<tag type="Software" />
+	</prerequisites>
+	<info>
+		<author>mechatron;cmikula</author>
+		<name>eParted</name>
+		<packagename>enigma2-plugin-extensions-eparted</packagename>
+		<shortdescription>Partition tool</shortdescription>
+		<description>eParted manipulates partition tables</description>
+		<screenshot />
+	</info>
+	<files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-eparted" />
+	</files>
+</default>
