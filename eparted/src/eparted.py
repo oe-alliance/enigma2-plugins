@@ -424,7 +424,7 @@ class Cpart(Screen):
 		partnr = val[PA_NR]
 		if mkpart:
 			fs = val[PA_FS]
-			com = "parted -s -a none %s mkpart primary %s %s%s %s%s" % (self.__devpath, fs, val[PA_START], self.__unit, val[PA_END], self.__unit)
+			com = "parted -s -a optimal %s mkpart primary %s %s%s %s%s" % (self.__devpath, fs, val[PA_START], self.__unit, val[PA_END], self.__unit)
 			list.append((com , _("create partition %s") % partnr, None))
 		
 		mountdev = None
