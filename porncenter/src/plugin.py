@@ -6,7 +6,6 @@ from Components.config import config, ConfigSelection, ConfigSubsection, ConfigT
 from Components.ConfigList import ConfigListScreen
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os, gettextn
 from Components.FileList import FileList
 from Components.Label import Label
 from Components.Language import language
