@@ -2,151 +2,102 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Podcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-06 06:40-0000\n"
+"POT-Creation-Date: 2014-03-02 20:30+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Nabil Hanna <nabil1978@web.de>\n"
-"Language-Team: Nabil Hanna <nabil1978@web.de>\n"
+"Last-Translator: Bengt Giger <bengt.giger@id.ethz.ch>\n"
+"Language-Team: Bengt Giger <bengt.giger@id.ethz.ch>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast\n"
+"X-Generator: Poedit 1.6.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/"
+"enigma2/python/Plugins/Extensions/Podcast\n"
+"X-Poedit-SearchPath-1: ..\\src\n"
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:49
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:207
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:716
-msgid "delete"
+#: ..\src/plugin.py:62
+msgid "Stop playing this movie?"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:49
-msgid "keep on device"
-msgstr ""
-
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:49
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:209
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:718
-msgid "ask me"
-msgstr ""
-
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:113
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:164
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:288
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:318
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:347
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:379
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:442
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:498
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:552
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:605
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:661
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:679
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:763
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:820
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:873
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:925
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:956
+#: ..\src/plugin.py:74 ..\src/plugin.py:157 ..\src/plugin.py:208
+#: ..\src/plugin.py:312 ..\src/plugin.py:342 ..\src/plugin.py:371
+#: ..\src/plugin.py:417 ..\src/plugin.py:465 ..\src/plugin.py:518
+#: ..\src/plugin.py:579 ..\src/plugin.py:612
 msgid "Podcast"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:125
+#: ..\src/plugin.py:86
+msgid "delete"
+msgstr ""
+
+#: ..\src/plugin.py:86
+msgid "keep on device"
+msgstr ""
+
+#: ..\src/plugin.py:86
+msgid "ask me"
+msgstr ""
+
+#: ..\src/plugin.py:169
 #, python-format
 msgid "Downloading movie: %s"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:210
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:719
+#: ..\src/plugin.py:254
 msgid "Delete this movie?"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:243
+#: ..\src/plugin.py:296
 msgid "Error getting movies"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:252
-msgid "Date"
-msgstr ""
-
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:252
+#: ..\src/plugin.py:304
 msgid "Length"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:252
+#: ..\src/plugin.py:304
 msgid "Type"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:428
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:489
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:538
-msgid "Error getting genres"
+#: ..\src/plugin.py:430
+msgid "No Feedly configuration"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:433
-msgid "Error getting rss feed"
-msgstr ""
-
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:557
+#: ..\src/plugin.py:470
 msgid "Select"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:610
+#: ..\src/plugin.py:523
 msgid "Save"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:622
+#: ..\src/plugin.py:535
 msgid "Buffer:"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:623
+#: ..\src/plugin.py:536
 msgid "Buffer device:"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:624
+#: ..\src/plugin.py:537
 msgid "Buffer file handling:"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:749
-msgid "Error getting episodes"
+#: ..\src/plugin.py:585
+msgid "Help"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:754
-msgid "Error getting podcast url"
-msgstr ""
-
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:801
-msgid " (Audio)"
-msgstr ""
-
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:803
-msgid " (Video)"
-msgstr ""
-
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:811
-msgid "Error getting podcasts"
-msgstr ""
-
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:864
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:916
-msgid "Error getting categories"
-msgstr ""
-
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:934
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:941
-msgid "podcast.de"
-msgstr ""
-
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:935
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:943
-msgid "podcast.com"
-msgstr ""
-
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:936
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:945
+#: ..\src/plugin.py:590 ..\src/plugin.py:596
 msgid "from xml"
 msgstr ""
 
-#: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast/plugin.py:937
+#: ..\src/plugin.py:591 ..\src/plugin.py:598
+msgid "Feedly OPML"
+msgstr ""
+
+#: ..\src/plugin.py:592
 msgid "configuration"
 msgstr ""
 

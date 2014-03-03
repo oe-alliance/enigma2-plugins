@@ -11,20 +11,24 @@ from Components.Language import language
 from Components.MenuList import MenuList
 from Components.PluginComponent import plugins
 from Components.ProgressBar import ProgressBar
-from enigma import eServiceReference, eTimer
+from enigma import eServiceReference, eTimer, eEnv
 from os import environ, system
 from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import MoviePlayer
 from Screens.MessageBox import MessageBox
+from Screens.TextBox import TextBox
 from Screens.Screen import Screen
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.Downloader import downloadWithProgress
 from twisted.web.client import getPage
 from xml.etree.cElementTree import parse
-import gettext, re
+from xml.dom.minidom import parseString as xmlparseString, parse as xmlparse
+import gettext, re, urllib2
 
 ###################################################
+
+configDir = eEnv.resolve("${sysconfdir}") + "/podcast/"
 
 def localeInit():
 	lang = language.getLanguage()
@@ -95,6 +99,13 @@ def encodeUrl(url):
 	url = url.replace("&#187;", ">>")
 	return url
 
+def getText(nodelist):
+    	rc = []
+	for node in nodelist:
+        	if node.nodeType == node.TEXT_NODE:
+                	rc.append(node.data)
+	return ''.join(rc)
+                                
 ###################################################
 
 class BufferThread():
@@ -140,9 +151,9 @@ bufferThread = BufferThread()
 
 class PodcastBuffer(Screen):
 	skin = """
-		<screen position="center,center" size="520,80" title="%s" >
-			<widget name="info" position="5,5" size="510,40" font="Regular;18" halign="center" valign="center" />
-			<widget name="progress" position="100,50" size="320,14" pixmap="skin_default/progress_big.png" borderWidth="2" borderColor="#cccccc" />
+		<screen position="center,center" size="520,180" title="%s" >
+			<widget name="info" position="5,5" size="510,140" font="Regular;18" halign="center" valign="center" />
+			<widget name="progress" position="100,150" size="320,14" pixmap="skin_default/progress_big.png" borderWidth="2" borderColor="#cccccc" />
 		</screen>""" % _("Podcast")
 
 	def __init__(self, session, url, file):
@@ -190,10 +201,10 @@ class PodcastBuffer(Screen):
 
 class PodcastMovies(Screen):
 	skin = """
-		<screen position="center,center" size="420,360" title="%s" >
-			<widget name="list" position="5,5" size="410,250" scrollbarMode="showOnDemand" />
-			<eLabel position="5,260" size="420,2" backgroundColor="#ffffff" />
-			<widget name="info" position="5,265" size="420,90" font="Regular;18" />
+		<screen position="center,center" size="600,460" title="%s" >
+			<widget name="list" position="5,5" size="590,250" scrollbarMode="showOnDemand" />
+			<eLabel position="5,260" size="600,2" backgroundColor="#ffffff" />
+			<widget name="info" position="5,265" size="600,190" font="Regular;18" />
 		</screen>""" % _("Podcast")
 
 	def __init__(self, session, url):
@@ -217,7 +228,7 @@ class PodcastMovies(Screen):
 		if self.working == False:
 			if len(self.list) > 0:
 				idx = self["list"].getSelectionIndex()
-				(url, length, type) = self.splitExtraInfo(self.movies[idx][1])
+				(url, length, type) = self.movies[idx][1]
 				if config.plugins.Podcast.buffer.value:
 					file = url
 					while file.__contains__("/"):
@@ -255,34 +266,27 @@ class PodcastMovies(Screen):
 
 	def showMovies(self, page):
 		if '<item>' in page:
-			reonecat = re.compile(r'<item>(.+?)</item>', re.DOTALL)
-			items = reonecat.findall(page)
+			dom = xmlparseString(page)
+			items = dom.getElementsByTagName("item")
 		else:
-			items = [page]
+			item = xmlparseString(page)
+			items = [item]	
+		
 		for item in items:
-			if '<description></description>' in item:
-				reonecat2 = re.compile(r'<title>(.+?)</title>.+?<enclosure(.+?)/>.+?', re.DOTALL)
-				for title, extra in reonecat2.findall(item):
-					if title.startswith("<![CDATA["):
-						title = title[9:]
-					if title.endswith("]]>"):
-						title = title[:-3]
-					self.list.append(encodeUrl(title))
-					self.movies.append(["", extra])
-			else:
-				reonecat2 = re.compile(r'<title>(.+?)</title>.+?<description>(.+?)</description>.+?<enclosure(.+?)/>.+?', re.DOTALL)
-				for title, description, extra in reonecat2.findall(item):
-					if title.startswith("<![CDATA["):
-						title = title[9:]
-					if title.endswith("]]>"):
-						title = title[:-3]
-					if description.__contains__("<![CDATA["):
-						idx = description.index("<![CDATA[")
-						description = description[idx+10:]
-					if description.endswith("]]>"):
-						description = description[:-3]
-					self.list.append(encodeUrl(title))
-					self.movies.append([description, extra])
+			title = getText(item.getElementsByTagName("title")[0].childNodes).encode('utf8')
+			description = getText(item.getElementsByTagName("description")[0].childNodes).encode('utf8')
+			url = item.getElementsByTagName("enclosure")[0].getAttribute("url").encode('utf8')
+			if url == "":
+				url = "N/A"
+			length = item.getElementsByTagName("enclosure")[0].getAttribute("length").encode('utf8')
+			if length == "":
+				length = "N/A" 
+			type = item.getElementsByTagName("enclosure")[0].getAttribute("type").encode('utf8')
+			if type == "":
+				type = "N/A"
+			self.list.append(encodeUrl(title))
+			self.movies.append([description, (url, length, type)])
+			
 		self["list"].setList(self.list)
 		self.showInfo()
 		self.working = False
@@ -296,36 +300,8 @@ class PodcastMovies(Screen):
 		if len(self.list) > 0:
 			idx = self["list"].getSelectionIndex()
 			description = self.movies[idx][0]
-			(url, length, type) = self.splitExtraInfo(self.movies[idx][1])
+			(url, length, type) = self.movies[idx][1]
 			self["info"].setText("%s: %s   %s: %s\n%s" % (_("Length"), length, _("Type"), type, encodeUrl(description)))
-
-	def splitExtraInfo(self, info):
-		if info.__contains__('url="'):
-			idx = info.index('url="')
-			url = info[idx+5:]
-			idx = url.index('"')
-			url = url[:idx]
-		else:
-			url = "N/A"
-		
-		length = "N/A"
-		if info.__contains__('length="'):
-			idx = info.index('length="')
-			length = info[idx+8:]
-			idx = length.index('"')
-			length = length[:idx]
-			if length:
-				length = str((int(length) / 1024) / 1024) + " MB"
-		
-		if info.__contains__('type="'):
-			idx = info.index('type="')
-			type = info[idx+6:]
-			idx = type.index('"')
-			type = type[:idx]
-		else:
-			type = "N/A"
-		
-		return (url, length, type)
 
 ###################################################
 
@@ -402,15 +378,29 @@ class PodcastXML(Screen):
 		
 		self.languages = []
 		list = []
-		file = "/etc/podcast/podcasts.xml"
-		if fileExists(file):
-			xml = parse(file).getroot()
+		# file = open("/etc/podcast/podcasts_local.xml")
+		# try user defined list, else fall back to default
+		if fileExists(configDir + "podcasts_user.xml"):
+			file = open(configDir + "podcasts_user.xml")
+		else:
+			if fileExists(configDir + "podcasts.xml"):
+				file = open(configDir + "podcasts.xml")
+		if file:
+			# check if file is just a proxy to an external XML
+			head = file.readline()
+			if head.startswith("http"):
+				source = urllib2.urlopen(head)
+			else:
+				source = file
+				
+			xml = parse(source).getroot()
 			for language in xml.findall("language"):
 				name = language.get("name") or None
 				name = name.encode("UTF-8") or name
 				if name:
 					list.append(name)
 					self.languages.append(language)
+			source.close()
 		self["list"] = MenuList(list)
 
 	def ok(self):
@@ -420,172 +410,47 @@ class PodcastXML(Screen):
 
 ###################################################
 
-class PodcastComGenre2(Screen):
+class PodcastFeedly(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
 			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
 		</screen>""" % _("Podcast")
-
-	def __init__(self, session, url):
-		self.session = session
-		Screen.__init__(self, session)
 		
-		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.ok, "cancel": self.exit}, -1)
-		
-		self.url = url
-		self.urls = []
-		self.working = True
-		self["list"] = MenuList([])
-		
-		self.onLayoutFinish.append(self.downloadGenres)
-
-	def ok(self):
-		if self.working == False:
-			if len(self.urls) > 0:
-				self.working = True
-				cur = self.urls[self["list"].getSelectedIndex()]
-				getPage(cur).addCallback(self.getRssUrl).addErrback(self.error2)
-
-	def getRssUrl(self, page):
-		idx = page.index('">rss feed</a><br>')
-		page = page[:idx]
-		while page.__contains__("http://"):
-			idx = page.index("http://")
-			page = page[idx+1:]
-		self.working = False
-		self.session.open(PodcastMovies, "h%s"%page)
-
-	def exit(self):
-		if self.working == False:
-			self.close()
-
-	def downloadGenres(self):
-		getPage(self.url).addCallback(self.getGenres).addErrback(self.error)
-
-	def getGenres(self, page):
-		list = []
-		reonecat = re.compile(r'height="19"><a href="(.+?)">(.+?)</a>', re.DOTALL)
-		for url, title in reonecat.findall(page):
-			list.append(encodeUrl(title))
-			self.urls.append(url)
-		self["list"].setList(list)
-		self.working = False
-
-	def error(self, error=""):
-		print "[Podcast] Error:", error
-		self.instance.setTitle(_("Error getting genres"))
-		self.working = False
-
-	def error2(self, error=""):
-		print "[Podcast] Error:", error
-		self.instance.setTitle(_("Error getting rss feed"))
-		self.working = False
-
-###################################################
-
-class PodcastComGenre(Screen):
-	skin = """
-		<screen position="center,center" size="420,360" title="%s" >
-			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
-		</screen>""" % _("Podcast")
-
-	def __init__(self, session, url):
-		self.session = session
-		Screen.__init__(self, session)
-		
-		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.ok, "cancel": self.exit}, -1)
-		
-		self.url = url
-		self.urls = []
-		self.working = True
-		self["list"] = MenuList([])
-		
-		self.onLayoutFinish.append(self.downloadSite)
-
-	def ok(self):
-		if self.working == False:
-			if len(self.urls) > 0:
-				cur = self.urls[self["list"].getSelectedIndex()]
-				self.session.open(PodcastComGenre2, cur)
-
-	def exit(self):
-		if self.working == False:
-			self.close()
-
-	def downloadSite(self):
-		getPage(self.url).addCallback(self.getUrl).addErrback(self.error)
-
-	def getUrl(self, page):
-		reonecat = re.compile(r'Get this podcast channel on your mobile phone:</strong><br><a href="(.+?)"', re.DOTALL)
-		list = reonecat.findall(page)
-		if len(list) > 0:
-			getPage(list[0]).addCallback(self.getGenres).addErrback(self.error)
-		else:
-			self.error("Error getting movies-url")
-
-	def getGenres(self, page):
-		list = []
-		reonecat = re.compile(r'height="17"><a title="(.+?)" href="(.+?)">(.+?)</a>', re.DOTALL)
-		for title2, url, title in reonecat.findall(page):
-			list.append(encodeUrl(title))
-			self.urls.append(url)
-		self["list"].setList(list)
-		self.working = False
-
-	def error(self, error=""):
-		print "[Podcast] Error:", error
-		self.instance.setTitle(_("Error getting genres"))
-		self.working = False
-
-###################################################
-
-class PodcastCom(Screen):
-	skin = """
-		<screen position="center,center" size="420,360" title="%s" >
-			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
-		</screen>""" % _("Podcast")
-
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
 		
-		self.working = True
+		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.ok, "cancel": self.close}, -1)
 		self.urls = []
-		
-		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.ok, "cancel": self.exit}, -1)
-		
-		self["list"] = MenuList([])
-		
-		self.onLayoutFinish.append(self.downloadMovies)
-
-	def ok(self):
-		if self.working == False:
-			if len(self.urls) > 0:
-				cur = self.urls[self["list"].getSelectedIndex()]
-				self.session.open(PodcastComGenre, cur)
-
-	def exit(self):
-		if self.working == False:
-			self.close()
-
-	def downloadMovies(self):
-		getPage("http://podcast.com/home.php?subpage=_pages/channels_home.php").addCallback(self.showGenres).addErrback(self.error)
-
-	def showGenres(self, page):
 		list = []
-		reonecat = re.compile(r'<li><a href="(.+?)" title="(.+?)">(.+?)</a></li>', re.DOTALL)
-		for url, title2, title in reonecat.findall(page):
-			if not title.startswith("<"):
-				list.append(encodeUrl(title))
-				self.urls.append(url)
-		self["list"].setList(list)
-		self.working = False
+		
+		if fileExists(configDir + "feedly.opml"):
+			file = open(configDir + "feedly.opml")
+		else:
+			list.append(_("No Feedly configuration"))
 
-	def error(self, error=""):
-		print "[Podcast] Error:", error
-		self.instance.setTitle(_("Error getting genres"))
-		self.working = False
+		if file:
+			# check if file is just a proxy to an external XML
+			head = file.readline()
+			if head.startswith("http"):
+				source = urllib2.urlopen(head)
+			else:
+				source = file
+				
+			dom = xmlparse(source)
+			for item in dom.getElementsByTagName("outline"):
+				if str(item.getAttribute("title")) == "Dreambox":
+					for podcast in item.getElementsByTagName("outline"):
+						list.append(str(podcast.getAttribute("title")))
+						self.urls.append(str(podcast.getAttribute("xmlUrl")))
 
+		self["list"] = MenuList(list)
+
+        def ok(self):
+		if len(self.urls) > 0:
+                	cur = self.urls[self["list"].getSelectedIndex()]
+                        self.session.open(PodcastMovies, cur)
+                                                                        			
 ###################################################
 
 class LocationSelection(Screen):
@@ -702,298 +567,50 @@ class PodcastConfig(ConfigListScreen, Screen):
 
 ###################################################
 
-class PodcastDeEpisodes(Screen):
-	skin = """
-		<screen position="center,center" size="420,360" title="%s" >
-			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
-		</screen>""" % _("Podcast")
-
-	def __init__(self, session, url):
-		self.session = session
-		Screen.__init__(self, session)
-		
-		self.working = True
-		self.url = url
-		self.urls = []
-		
-		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.ok, "cancel": self.exit}, -1)
-		
-		self["list"] = MenuList([])
-		
-		self.onLayoutFinish.append(self.downloadMovies)
-
-	def ok(self):
-		if self.working == False:
-			self.instance.setTitle(_("Podcast"))
-			if len(self.urls) > 0:
-				cur = self.urls[self["list"].getSelectedIndex()]
-				self.working = True
-				getPage(cur).addCallback(self.playPodcast).addErrback(self.error2)
-
-	def playPodcast(self, url):
-		if url.__contains__('" id="control_download"'):
-			self.working = False
-			idx = url.index('" id="control_download"')
-			url = url[:idx]
-			while url.__contains__("http://"):
-				idx = url.index("http://")
-				url = url[idx+1:]
-			url = "h%s"%url
-			
-			if config.plugins.Podcast.buffer.value:
-				file = url
-				while file.__contains__("/"):
-					idx = file.index("/")
-					file = file[idx+1:]
-				self.file = "%s%s" % (config.plugins.Podcast.bufferDevice.value, file)
-				self.session.openWithCallback(self.bufferCallback, PodcastBuffer, url, self.file)
-			else:
-				ref = eServiceReference(4097, 0, url)
-				self.session.open(ChangedMoviePlayer, ref)
-		else:
-			self.error2()
-
-	def bufferCallback(self, callback):
-		if callback is not None:
-			ref = eServiceReference(4097, 0, self.file)
-			self.session.openWithCallback(self.delete, ChangedMoviePlayer, ref)
-
-	def delete(self, callback=None):
-		if bufferThread.downloading: #still downloading?
-			bufferThread.stop()
-		if config.plugins.Podcast.keepStored.value == "delete":
-			remove(self.file)
-		elif config.plugins.Podcast.keepStored.value == "ask":
-			self.session.openWithCallback(self.deleteCallback, MessageBox, _("Delete this movie?"))
-
-	def deleteCallback(self, callback):
-		if callback:
-			remove(self.file)
-
-	def exit(self):
-		if self.working == False:
-			self.close()
-
-	def downloadMovies(self):
-		getPage(self.url).addCallback(self.showEpisodes).addErrback(self.error)
-
-	def showEpisodes(self, page):
-		list = []
-		idx = page.index('<h3>')
-		page = page[idx:]
-		idx = page.index('</div></div>')
-		page = page[:idx]
-		reonecat = re.compile(r'<a href="(.+?)" title="(.+?)">', re.DOTALL)
-		for url, title in reonecat.findall(page):
-			if title.startswith("Episode: "):
-				title = title[9:]
-			list.append(encodeUrl(title))
-			self.urls.append(url)
-		self["list"].setList(list)
-		self.working = False
-
-	def error(self, error=""):
-		print "[Podcast] Error:", error
-		self.instance.setTitle(_("Error getting episodes"))
-		self.working = False
-
-	def error2(self, error=""):
-		print "[Podcast] Error: Error getting podcast url"
-		self.instance.setTitle(_("Error getting podcast url"))
-		self.working = False
-
-###################################################
-
-class PodcastDePodcasts(Screen):
-	skin = """
-		<screen position="center,center" size="420,360" title="%s" >
-			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
-		</screen>""" % _("Podcast")
-
-	def __init__(self, session, url):
-		self.session = session
-		Screen.__init__(self, session)
-		
-		self.working = True
-		self.url = url
-		self.urls = []
-		
-		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.ok, "cancel": self.exit}, -1)
-		
-		self["list"] = MenuList([])
-		
-		self.onLayoutFinish.append(self.downloadMovies)
-
-	def ok(self):
-		if self.working == False:
-			if len(self.urls) > 0:
-				cur = self.urls[self["list"].getSelectedIndex()]
-				self.session.open(PodcastDeEpisodes, cur)
-
-	def exit(self):
-		if self.working == False:
-			self.close()
-
-	def downloadMovies(self):
-		getPage(self.url).addCallback(self.showPodcasts).addErrback(self.error)
-
-	def showPodcasts(self, page):
-		list = []
-		idx = page.index('<h4>Podcasts</h4>')
-		page = page[idx:]
-		idx = page.index('</div>')
-		page = page[:idx]
-		reonecat = re.compile(r'alt="(.+?)" class="(.+?)<a href="(.+?)" title="(.+?)">(.+?)<span class="(.+?)"></span>', re.DOTALL)
-		for title, x, url, x2, x3, type in reonecat.findall(page):
-			if type.__contains__("content_type_1_icon"):
-				text = _(" (Audio)")
-			else:
-				text = _(" (Video)")
-			list.append(encodeUrl(title+text))
-			self.urls.append(url)
-		self["list"].setList(list)
-		self.working = False
-
-	def error(self, error=""):
-		print "[Podcast] Error:", error
-		self.instance.setTitle(_("Error getting podcasts"))
-		self.working = False
-
-###################################################
-
-class PodcastDeCategories(Screen):
-	skin = """
-		<screen position="center,center" size="420,360" title="%s" >
-			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
-		</screen>""" % _("Podcast")
-
-	def __init__(self, session, url):
-		self.session = session
-		Screen.__init__(self, session)
-		
-		self.working = True
-		self.url = url
-		self.urls = []
-		
-		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.ok, "cancel": self.exit}, -1)
-		
-		self["list"] = MenuList([])
-		
-		self.onLayoutFinish.append(self.downloadMovies)
-
-	def ok(self):
-		if self.working == False:
-			if len(self.urls) > 0:
-				cur = self.urls[self["list"].getSelectedIndex()]
-				self.session.open(PodcastDePodcasts, cur)
-
-	def exit(self):
-		if self.working == False:
-			self.close()
-
-	def downloadMovies(self):
-		getPage(self.url).addCallback(self.showCategories).addErrback(self.error)
-
-	def showCategories(self, page):
-		list = []
-		idx = page.index('<h3>')
-		page = page[idx:]
-		idx = page.index('</div>')
-		page = page[:idx]
-		reonecat = re.compile(r'<a href="(.+?)" title="(.+?)">', re.DOTALL)
-		for url, title in reonecat.findall(page):
-			list.append(encodeUrl(title))
-			self.urls.append(url)
-		self["list"].setList(list)
-		self.working = False
-
-	def error(self, error=""):
-		print "[Podcast] Error:", error
-		self.instance.setTitle(_("Error getting categories"))
-		self.working = False
-
-###################################################
-
-class PodcastDe(Screen):
-	skin = """
-		<screen position="center,center" size="420,360" title="%s" >
-			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
-		</screen>""" % _("Podcast")
-
-	def __init__(self, session):
-		self.session = session
-		Screen.__init__(self, session)
-		
-		self.working = True
-		self.urls = []
-		
-		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.ok, "cancel": self.exit}, -1)
-		
-		self["list"] = MenuList([])
-		
-		self.onLayoutFinish.append(self.downloadMovies)
-
-	def ok(self):
-		if self.working == False:
-			if len(self.urls) > 0:
-				cur = self.urls[self["list"].getSelectedIndex()]
-				self.session.open(PodcastDeCategories, cur)
-
-	def exit(self):
-		if self.working == False:
-			self.close()
-
-	def downloadMovies(self):
-		getPage("http://m.podcast.de/kategorien").addCallback(self.showCategories).addErrback(self.error)
-
-	def showCategories(self, page):
-		list = []
-		idx = page.index('<h3>')
-		page = page[idx:]
-		idx = page.index('</div>')
-		page = page[:idx]
-		reonecat = re.compile(r'<a href="(.+?)" title="(.+?)">', re.DOTALL)
-		for url, title in reonecat.findall(page):
-			list.append(encodeUrl(title))
-			self.urls.append(url)
-		self["list"].setList(list)
-		self.working = False
-
-	def error(self, error=""):
-		print "[Podcast] Error:", error
-		self.instance.setTitle(_("Error getting categories"))
-		self.working = False
-
-###################################################
-
 class Podcast(Screen):
 	skin = """
-		<screen position="center,center" size="420,360" title="%s" >
-			<widget name="list" position="0,0" size="420,350" scrollbarMode="showOnDemand" />
+		<screen position="center,center" size="560,360" title="%s" >
+                	<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
+                        <ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
+                        <ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
+                        <ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
+                        <widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="list" position="0,45" size="560,305" scrollbarMode="showOnDemand" />
 		</screen>""" % _("Podcast")
 
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
 		
-		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.ok, "cancel": self.close}, -1)
+		self["key_blue"] = Label(_("Help"))
+		
+		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"], {"ok": self.ok, "cancel": self.close, "blue": self.help}, -1)
 		
 		self["list"] = MenuList([
-			_("podcast.de"),
-			_("podcast.com"),
 			_("from xml"),
+			_("Feedly OPML"),
 			_("configuration")])
 
 	def ok(self):
 		cur = self["list"].getCurrent()
-		if cur == _("podcast.de"):
-			self.session.open(PodcastDe)
-		elif cur == _("podcast.com"):
-			self.session.open(PodcastCom)
-		elif cur == _("from xml"):
+		if cur == _("from xml"):
 			self.session.open(PodcastXML)
+                elif cur == _("Feedly OPML"):
+                        self.session.open(PodcastFeedly)
 		else:
 			self.session.open(PodcastConfig)
+
+	def help(self):
+		localehelpfile = "%s/Extensions/Podcast/help/help_%s" % (resolveFilename(SCOPE_PLUGINS), language.getLanguage()[:2])
+		fallbackhelpfile = "%s/Extensions/Podcast/help/help_en" % resolveFilename(SCOPE_PLUGINS)
+		if fileExists(localehelpfile):
+			helpfile = localehelpfile
+		else:
+			helpfile = fallbackhelpfile
+		h = open(helpfile)
+		helptext = h.read()
+		h.close
+		self.session.open(TextBox, helptext)
 
 ###################################################
 

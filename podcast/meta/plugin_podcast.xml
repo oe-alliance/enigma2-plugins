@@ -3,11 +3,11 @@
                     <tag type="Multimedia" />
 	  </prerequisites>
           <info>
-                    <author>AliAbdul</author>
+                    <author>Bengt Giger</author>
                     <name>Podcast</name>
                     <packagename>enigma2-plugin-extensions-podcast</packagename>
                     <shortdescription>Stream podcasts</shortdescription>
-                    <description>PodCast streams podcasts to your Dreambox.</description>
+                    <description>Podcast streams podcasts to your Dreambox.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_podcast.jpg" />		    
           </info>
 

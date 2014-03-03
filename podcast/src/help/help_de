@@ -1,0 +1,7 @@
+Eine eigene Podcast-Liste kann auf mehrere Arten eingerichtet werden:
+
+Die Datei /etc/podcast/podcast.xml kann kopiert und in podcast_user.xml umbenannt und angepasst werden, diese Datei wird bei Updates nicht überschrieben
+
+Der Inhalt von podcast_user.xml kann auch durch eine URL ersetzt werden, die auf eine Datei zb. auf einem Cloud-Speicher wie Wuala oder Dropbox zeigt. Dadurch kann die Datei bearbeitet werden, ohne dass wieder auf die Dreambox zugegriffen werden muss.
+
+Auch ein Konto bei feedly.com kann verwendet werden: erstellt man eine Sammlung mit Namen "Dreambox" und weist ihr Podcasts zu, die man auf der Dreambox sehen will. Nun geht man auf "Organize", blättert runter zu "Save as OPML" und clickt dort drauf, um zum Export-Link zu gelangen. Entweder man lädt diese Datei herunter und speichert sie auf der Dreambox unter /etc/podcast/feedly.opml, ODER man kopiert sich diese URL, kopiert sie in eine Datei und speichert diese als /etc/podcast/feedly.opml. Als URL hinterlegt wird jede Bearbeitung auf Feedly sofort auf der Dreambox verfügbar.
