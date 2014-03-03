@@ -32,6 +32,7 @@ SUBDIRS = \
 	elektro \
 	emailclient \
 	emission \
+	eparted \
 	epgrefresh \
 	epgsearch \
 	eurotictv \
