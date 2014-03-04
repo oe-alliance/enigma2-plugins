@@ -1,151 +1,112 @@
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - podcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-04 16:01+0100\n"
+"POT-Creation-Date: 2014-03-04 18:33+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@118como.org>\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: ITALY\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: /home/dario/Plugins/podcast\n"
-"X-Poedit-SearchPath-0: /home/dario/Plugins/podcast\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .../enigma2-plugins/podcast\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/podcast\n"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:53
+#: .../enigma2-plugins/podcast/src/plugin.py:62
 msgid "Stop playing this movie?"
 msgstr "Arrestare la riproduzione?"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:65
-#: /home/dario/Plugins/podcast/src/plugin.py:141
-#: /home/dario/Plugins/podcast/src/plugin.py:192
-#: /home/dario/Plugins/podcast/src/plugin.py:332
-#: /home/dario/Plugins/podcast/src/plugin.py:362
-#: /home/dario/Plugins/podcast/src/plugin.py:391
-#: /home/dario/Plugins/podcast/src/plugin.py:423
-#: /home/dario/Plugins/podcast/src/plugin.py:486
-#: /home/dario/Plugins/podcast/src/plugin.py:542
-#: /home/dario/Plugins/podcast/src/plugin.py:596
-#: /home/dario/Plugins/podcast/src/plugin.py:649
-#: /home/dario/Plugins/podcast/src/plugin.py:705
-#: /home/dario/Plugins/podcast/src/plugin.py:723
-#: /home/dario/Plugins/podcast/src/plugin.py:807
-#: /home/dario/Plugins/podcast/src/plugin.py:864
-#: /home/dario/Plugins/podcast/src/plugin.py:917
-#: /home/dario/Plugins/podcast/src/plugin.py:969
-#: /home/dario/Plugins/podcast/src/plugin.py:1000
+#: .../enigma2-plugins/podcast/src/plugin.py:74
+#: .../enigma2-plugins/podcast/src/plugin.py:157
+#: .../enigma2-plugins/podcast/src/plugin.py:208
+#: .../enigma2-plugins/podcast/src/plugin.py:312
+#: .../enigma2-plugins/podcast/src/plugin.py:342
+#: .../enigma2-plugins/podcast/src/plugin.py:371
+#: .../enigma2-plugins/podcast/src/plugin.py:417
+#: .../enigma2-plugins/podcast/src/plugin.py:465
+#: .../enigma2-plugins/podcast/src/plugin.py:518
+#: .../enigma2-plugins/podcast/src/plugin.py:579
+#: .../enigma2-plugins/podcast/src/plugin.py:621
 msgid "Podcast"
 msgstr "Podcast"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:77
+#: .../enigma2-plugins/podcast/src/plugin.py:86
 msgid "delete"
-msgstr "Cancellare"
+msgstr "Rimuovere"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:77
+#: .../enigma2-plugins/podcast/src/plugin.py:86
 msgid "keep on device"
 msgstr "Conservare sul supporto"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:77
+#: .../enigma2-plugins/podcast/src/plugin.py:86
 msgid "ask me"
 msgstr "Chiedere"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:153
+#: .../enigma2-plugins/podcast/src/plugin.py:169
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Download filamto in corso: %s"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:238
-#: /home/dario/Plugins/podcast/src/plugin.py:763
+#: .../enigma2-plugins/podcast/src/plugin.py:254
 msgid "Delete this movie?"
 msgstr "Cancellare il filmato?"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:288
+#: .../enigma2-plugins/podcast/src/plugin.py:296
 msgid "Error getting movies"
 msgstr "Errore in acquisizione filmati"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:296
+#: .../enigma2-plugins/podcast/src/plugin.py:304
 msgid "Length"
 msgstr "Durata"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:296
+#: .../enigma2-plugins/podcast/src/plugin.py:304
 msgid "Type"
 msgstr "Tipo"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:472
-#: /home/dario/Plugins/podcast/src/plugin.py:533
-#: /home/dario/Plugins/podcast/src/plugin.py:582
-msgid "Error getting genres"
-msgstr "Errore in acquisizione generi"
+#: .../enigma2-plugins/podcast/src/plugin.py:430
+msgid "No Feedly configuration"
+msgstr "Nessuna configurazione Feedly"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:477
-msgid "Error getting rss feed"
-msgstr "Errore in acquisizione feed rss"
-
-#: /home/dario/Plugins/podcast/src/plugin.py:601
+#: .../enigma2-plugins/podcast/src/plugin.py:470
 msgid "Select"
 msgstr "Selezionare"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:654
+#: .../enigma2-plugins/podcast/src/plugin.py:523
 msgid "Save"
 msgstr "Salvare"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:666
+#: .../enigma2-plugins/podcast/src/plugin.py:535
 msgid "Buffer:"
 msgstr "Buffer:"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:667
+#: .../enigma2-plugins/podcast/src/plugin.py:536
 msgid "Buffer device:"
 msgstr "Supporto buffer:"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:668
+#: .../enigma2-plugins/podcast/src/plugin.py:537
 msgid "Buffer file handling:"
 msgstr "Gestione buffer file:"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:793
-msgid "Error getting episodes"
-msgstr "Errore in acquisizione episodi"
+#: .../enigma2-plugins/podcast/src/plugin.py:585
+msgid "Help"
+msgstr "Aiuto"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:798
-msgid "Error getting podcast url"
-msgstr "Errore in acquisizione url podcast"
-
-#: /home/dario/Plugins/podcast/src/plugin.py:845
-msgid " (Audio)"
-msgstr " (Audio)"
-
-#: /home/dario/Plugins/podcast/src/plugin.py:847
-msgid " (Video)"
-msgstr " (Video)"
-
-#: /home/dario/Plugins/podcast/src/plugin.py:855
-msgid "Error getting podcasts"
-msgstr "Errore in acquisizione podcast"
-
-#: /home/dario/Plugins/podcast/src/plugin.py:908
-#: /home/dario/Plugins/podcast/src/plugin.py:960
-msgid "Error getting categories"
-msgstr "Errore in acquisizione categorie"
-
-#: /home/dario/Plugins/podcast/src/plugin.py:978
-#: /home/dario/Plugins/podcast/src/plugin.py:985
-msgid "podcast.de"
-msgstr "podcast.de"
-
-#: /home/dario/Plugins/podcast/src/plugin.py:979
-#: /home/dario/Plugins/podcast/src/plugin.py:987
-msgid "podcast.com"
-msgstr "podcast.com"
-
-#: /home/dario/Plugins/podcast/src/plugin.py:980
-#: /home/dario/Plugins/podcast/src/plugin.py:989
+#: .../enigma2-plugins/podcast/src/plugin.py:590
+#: .../enigma2-plugins/podcast/src/plugin.py:596
 msgid "from xml"
 msgstr "da xml"
 
-#: /home/dario/Plugins/podcast/src/plugin.py:981
+#: .../enigma2-plugins/podcast/src/plugin.py:591
+#: .../enigma2-plugins/podcast/src/plugin.py:598
+msgid "Feedly OPML"
+msgstr "Feedly OPML"
+
+#: .../enigma2-plugins/podcast/src/plugin.py:592
 msgid "configuration"
 msgstr "Configurazione"
-
