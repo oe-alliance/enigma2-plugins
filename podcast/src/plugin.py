@@ -439,7 +439,7 @@ class PodcastFeedly(Screen):
 				
 			dom = xmlparse(source)
 			for item in dom.getElementsByTagName("outline"):
-				if str(item.getAttribute("title")) == "Dreambox":
+				if str(item.getAttribute("title")) == "PodcastPlugin":
 					for podcast in item.getElementsByTagName("outline"):
 						list.append(str(podcast.getAttribute("title")))
 						self.urls.append(str(podcast.getAttribute("xmlUrl")))
