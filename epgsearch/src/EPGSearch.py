@@ -173,7 +173,7 @@ class EPGSearch(EPGSelection):
 				'green': (self.timerAdd, _('Add/Remove timer for current event')),
 				'yellow': (self.yellowButtonPressed, _('Search for similar events')),
 				'blue': (self.exportAutoTimer, _('Add a auto timer for current event')),
-				'bluelong': (self.bluelongButtonPressed, _('Show AutoTimer List'))
+				'bluelong': (self.blueButtonPressed, _('Show AutoTimer List'))
 			}, -1)
 		self['colouractions'].csel = self
 
