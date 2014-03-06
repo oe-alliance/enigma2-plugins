@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 848 $
-$Date: 2014-02-16 13:39:32 +0100 (Sun, 16 Feb 2014) $
-$Id: FritzCallFBF.py 848 2014-02-16 12:39:32Z michael $
+$Revision: 857 $
+$Date: 2014-03-06 10:42:17 +0100 (Thu, 06 Mar 2014) $
+$Id: FritzCallFBF.py 857 2014-03-06 09:42:17Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -2143,21 +2143,9 @@ class FritzCallFBF_05_50:
 
 	def dial(self, number):
 		''' initiate a call to number '''
-		self._login(lambda x, md5Sid: self._dial(number, x, md5Sid))
+		self._login(lambda md5Sid: self._dial(number, md5Sid))
 		
-	def _dial(self, number, html, md5Sid):
-		if html:
-			#===================================================================
-			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-			# if found:
-			#	self._errorDial('Login: ' + found.group(1))
-			#	return
-			#===================================================================
-			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
-			if start != -1:
-				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
-				self._errorDial('Login: ' + html[start, html.find('</p>', start)], md5Sid)
-				return
+	def _dial(self, number, md5Sid):
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
 		parms = urlencode({
 			'getpage':'../html/de/menus/menu2.html',
