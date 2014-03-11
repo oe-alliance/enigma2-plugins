@@ -378,29 +378,48 @@ class PodcastXML(Screen):
 		
 		self.languages = []
 		list = []
-		# file = open("/etc/podcast/podcasts_local.xml")
+		file = None
+		source = None
+
 		# try user defined list, else fall back to default
-		if fileExists(configDir + "podcasts_user.xml"):
-			file = open(configDir + "podcasts_user.xml")
+		if fileExists(configDir + "podcasts_local.xml"):
+			fileName = configDir + "podcasts_local.xml"
 		else:
-			if fileExists(configDir + "podcasts.xml"):
-				file = open(configDir + "podcasts.xml")
+			fileName = configDir + "podcasts.xml"
+				
+		try:
+			file = open(fileName)
+		except:
+			pass
+		
 		if file:
 			# check if file is just a proxy to an external XML
 			head = file.readline()
+			print head
 			if head.startswith("http"):
-				source = urllib2.urlopen(head)
+				print "open url"
+				file.close
+				try:
+					source = urllib2.urlopen(head)
+				except:
+					pass
 			else:
-				source = file
-				
-			xml = parse(source).getroot()
-			for language in xml.findall("language"):
-				name = language.get("name") or None
-				name = name.encode("UTF-8") or name
-				if name:
-					list.append(name)
-					self.languages.append(language)
-			source.close()
+				file.close
+				source = open(fileName)
+			
+			if source:
+				try:
+			 		xml = parse(source).getroot()
+					for language in xml.findall("language"):
+						name = language.get("name") or None
+						name = name.encode("UTF-8") or name
+						if name:
+							list.append(name)
+							self.languages.append(language)
+				except:
+					pass
+				source.close()
+			
 		self["list"] = MenuList(list)
 
 	def ok(self):
@@ -410,6 +429,8 @@ class PodcastXML(Screen):
 
 ###################################################
 
+# Sadly Feedly OPML URL is not stable, seems to change after a while :(
+# Deactivated in selection
 class PodcastFeedly(Screen):
 	skin = """
 		<screen position="center,center" size="420,360" title="%s" >
@@ -423,26 +444,39 @@ class PodcastFeedly(Screen):
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.ok, "cancel": self.close}, -1)
 		self.urls = []
 		list = []
+		file = None
 		
-		if fileExists(configDir + "feedly.opml"):
-			file = open(configDir + "feedly.opml")
-		else:
-			list.append(_("No Feedly configuration"))
+		fileName = configDir + "feedly.opml"
+
+		try:
+			if fileExists(fileName):
+				file = open(fileName)
+			else:
+				list.append(_("No Feedly configuration"))
+		except:
+			pass
 
 		if file:
 			# check if file is just a proxy to an external XML
 			head = file.readline()
-			if head.startswith("http"):
-				source = urllib2.urlopen(head)
-			else:
-				source = file
-				
-			dom = xmlparse(source)
-			for item in dom.getElementsByTagName("outline"):
-				if str(item.getAttribute("title")) == "PodcastPlugin":
-					for podcast in item.getElementsByTagName("outline"):
-						list.append(str(podcast.getAttribute("title")))
-						self.urls.append(str(podcast.getAttribute("xmlUrl")))
+
+			try:
+				if head.startswith("http"):
+					file.close
+					source = urllib2.urlopen(head)
+				else:
+					file.close
+					source = open(fileName)
+			except:
+				pass
+			
+			if source:	
+				dom = xmlparse(source)
+				for item in dom.getElementsByTagName("outline"):
+					if str(item.getAttribute("title")) == "PodcastPlugin":
+						for podcast in item.getElementsByTagName("outline"):
+							list.append(str(podcast.getAttribute("title")))
+							self.urls.append(str(podcast.getAttribute("xmlUrl")))
 
 		self["list"] = MenuList(list)
 
@@ -586,9 +620,10 @@ class Podcast(Screen):
 		
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"], {"ok": self.ok, "cancel": self.close, "blue": self.help}, -1)
 		
+
+		# Feedly removed until found a way to get a stable source URL
 		self["list"] = MenuList([
 			_("from xml"),
-			_("Feedly OPML"),
 			_("configuration")])
 
 	def ok(self):
