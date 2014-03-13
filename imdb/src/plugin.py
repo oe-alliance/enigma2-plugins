@@ -702,7 +702,7 @@ class IMDbSetup(Screen, ConfigListScreen):
 	def createSetup(self):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Show in plugin browser"), config.plugins.imdb.showinplugins, _("Enable this to be able to access the IMDb from within the plugin browser.")))
-		self.list.append(getConfigListEntry(_("Words/pharse's to ingore"), config.plugins.imdb.ignore_tags, _("This option allows you add words/phrases for IMDb to ignore when searching. please seperaate with a comma")))
+		self.list.append(getConfigListEntry(_("Words / phrases to ignore "), config.plugins.imdb.ignore_tags, _("This option allows you add words/phrases for IMDb to ignore when searching. please seperaate with a comma")))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
