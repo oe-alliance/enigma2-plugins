@@ -26,6 +26,7 @@ SUBDIRS = \
 	ecasa \
 	eibox \
 	emailclient \
+	emission \
 	epgrefresh \
 	eurotictv \
 	eventlist \

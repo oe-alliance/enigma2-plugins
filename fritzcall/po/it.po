@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-01 12:42+0100\n"
-"PO-Revision-Date: 2013-05-01 18:25+0100\n"
+"POT-Creation-Date: 2014-02-23 18:31+0100\n"
+"PO-Revision-Date: 2014-02-23 18:43+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: it_IT\n"
@@ -14,290 +14,383 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-Basepath: /media/dario/TREKSTOR/git/enigma2-plugins/fritzcall\n"
+"X-Poedit-Basepath: ../enigma2-plugins/fritzcall\n"
 "X-Generator: Poedit 1.5.4\n"
-"X-Poedit-SearchPath-0: /media/dario/TREKSTOR/git/enigma2-plugins/fritzcall\n"
+"X-Poedit-SearchPath-0: ../enigma2-plugins/fritzcall\n"
 
-#. TRANSLATORS: this is a window title.
-#. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: keep it short, this is a help text
-msgid "About FritzCall"
-msgstr "Info su FritzCall"
+#: ../enigma2-plugins/fritzcall/src/FritzLDIF.py:70
+#: ../enigma2-plugins/fritzcall/src/FritzLDIF.py:148
+msgid "business"
+msgstr "Affari"
 
-#. TRANSLATORS: keep it short, this is a button
-msgid "Activate WLAN guest access"
-msgstr ""
+#: ../enigma2-plugins/fritzcall/src/FritzLDIF.py:100
+#: ../enigma2-plugins/fritzcall/src/FritzLDIF.py:173
+#: ../enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:121
+#: ../enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:202
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:341
+msgid "mobile"
+msgstr "Cellulare"
 
-#. TRANSLATORS: keep it short, this is a help text
-#. TRANSLATORS: this is a window title.
-msgid "Add entry to phonebook"
-msgstr "Aggiungere voce in rubrica"
+#: ../enigma2-plugins/fritzcall/src/FritzLDIF.py:102
+#: ../enigma2-plugins/fritzcall/src/FritzLDIF.py:175
+#: ../enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:123
+#: ../enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:204
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:343
+msgid "home"
+msgstr "Casa"
 
-#. TRANSLATORS: keep it short, this is a button
-msgid "All"
+#: ../enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:93
+#: ../enigma2-plugins/fritzcall/src/FritzOutlookCSV.py:176
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:345
+msgid "work"
+msgstr "Ufficio"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:93
+msgid "not configured"
+msgstr "non configurato"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:93
+msgid "before 05.27"
+msgstr "anteriore a 05.27"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:99
+msgid "show nothing"
+msgstr "Nulla"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:99
+msgid "show as list"
+msgstr "Come elenco"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:99
+msgid "show each call"
 msgstr "Tutte"
 
-msgid "All calls"
-msgstr "Tutte le chiamate"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:133
+msgid "Germany"
+msgstr "Germania"
 
-msgid "Append shortcut number"
-msgstr "Aggiungere numero breve"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:134
+msgid "The Netherlands"
+msgstr "Olanda"
 
-msgid "Append type of number"
-msgstr "Agg. il tipo di numero (casa,cell.,uff.)"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:135
+msgid "France"
+msgstr "Francia"
 
-msgid "Append vanity name"
-msgstr "Aggiungere nome \"Vanity\""
+#: ../enigma2-plugins/fritzcall/src/plugin.py:136
+msgid "Italy"
+msgstr "Italia"
 
-msgid "Areacode to add to calls without one (if necessary)"
-msgstr "Pref. locale per le chiamate che ne sono prive (se necessario)"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:137
+msgid "Switzerland"
+msgstr "Svizzera"
 
+#: ../enigma2-plugins/fritzcall/src/plugin.py:138
 msgid "Austria"
 msgstr "Austria"
 
-msgid "Automatically add new Caller to PhoneBook"
-msgstr "Ins. autom. nuovo chiamante in rubrica"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:139
+msgid "Others"
+msgstr "Altri paesi"
 
-#. TRANSLATORS: keep it short, this is a button
-msgid "Call"
-msgstr "Chiam."
+#: ../enigma2-plugins/fritzcall/src/plugin.py:147
+msgid "All calls"
+msgstr "Tutte le chiamate"
 
-msgid "Call monitoring"
-msgstr "Monitoraggio chiamate"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:148
+msgid "Incoming calls"
+msgstr "Chiamate in entrata"
 
+#: ../enigma2-plugins/fritzcall/src/plugin.py:149
+msgid "Missed calls"
+msgstr "Chiamate perse"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:150
+msgid "Outgoing calls"
+msgstr "Chiamate in uscita"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:289
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1858
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1889
+msgid "About FritzCall"
+msgstr "Info su FritzCall"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:455
+#: ../enigma2-plugins/fritzcall/src/plugin.py:509
+#: ../enigma2-plugins/fritzcall/src/plugin.py:668
+#: ../enigma2-plugins/fritzcall/src/plugin.py:673
+msgid "Reset"
+msgstr "Reset"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:457
+#: ../enigma2-plugins/fritzcall/src/plugin.py:507
+#: ../enigma2-plugins/fritzcall/src/plugin.py:664
+#: ../enigma2-plugins/fritzcall/src/plugin.py:675
+msgid "Toggle WLAN"
+msgstr "Commutare WLAN"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:461
+msgid "Toggle Mailbox"
+msgstr "Comm. casella"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:477
+msgid "Toggle all mailboxes"
+msgstr "Comm. tutte le caselle"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:479
+msgid "Toggle 1. mailbox"
+msgstr "Comm. casella 1."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:481
+msgid "Toggle 2. mailbox"
+msgstr "Comm. casella 2."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:483
+msgid "Toggle 3. mailbox"
+msgstr "Comm. casella 3."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:485
+msgid "Toggle 4. mailbox"
+msgstr "Comm. casella 4."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:487
+msgid "Toggle 5. mailbox"
+msgstr "Comm. casella 5."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:488
+msgid "Mailbox"
+msgstr "Casella di posta"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:503
+#: ../enigma2-plugins/fritzcall/src/plugin.py:505
+#: ../enigma2-plugins/fritzcall/src/plugin.py:660
+#: ../enigma2-plugins/fritzcall/src/plugin.py:662
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1012
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1568
+msgid "Quit"
+msgstr "Uscire"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:511
+#: ../enigma2-plugins/fritzcall/src/plugin.py:670
+msgid "Refresh status"
+msgstr "Aggiornare lo stato"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:513
+#: ../enigma2-plugins/fritzcall/src/plugin.py:679
+msgid "Getting status from FRITZ!Box Fon..."
+msgstr "Recupero stato dalla FRITZ!Box Fon in corso..."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:546
+#: ../enigma2-plugins/fritzcall/src/plugin.py:712
 msgid "Call redirection"
 msgstr "Deviazione chiamate"
 
-msgid "Call redirection active"
-msgstr "deviazione chiamate attiva"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:666
+msgid "Toggle WLAN guest access"
+msgstr "Commutare accesso Guest WLAN"
 
-#, python-format
-msgid "Calling %s"
-msgstr "Chiamata per %s"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:677
+#: ../enigma2-plugins/fritzcall/src/plugin.py:879
+msgid "Activate WLAN guest access"
+msgstr "Attivare accesso Guest WLAN"
 
-#. TRANSLATORS: keep it short, this is a button
-msgid "Cancel"
-msgstr "Annull."
+#: ../enigma2-plugins/fritzcall/src/plugin.py:718
+msgid "Guest access"
+msgstr "Accesso Guest"
 
-msgid "Cannot get calls from FRITZ!Box"
-msgstr "Recupero chiamate dalla FRITZ!Box impossibile"
-
-msgid ""
-"Cannot get infos from FRITZ!Box yet\n"
-"Still initialising or wrong firmware version"
-msgstr ""
-
-msgid "Connected since"
-msgstr "Connesso da"
-
-msgid "Connected to FRITZ!Box!"
-msgstr "Connesso alla FRITZ!Box!"
-
-#, python-format
-msgid ""
-"Connecting to FRITZ!Box failed\n"
-" (%s)\n"
-"retrying..."
-msgstr ""
-"Connessione alla FRITZ!Box fallita!\n"
-"(%s)\n"
-"Nuovo tentativo in corso..."
-
-msgid "Connecting to FRITZ!Box..."
-msgstr "Connessione alla FRITZ!Box in corso..."
-
-#, python-format
-msgid ""
-"Connection to FRITZ!Box! lost\n"
-" (%s)\n"
-"retrying..."
-msgstr ""
-"Connessione alla FRITZ!Box persa!\n"
-"(%s)\n"
-"Nuovo tentativo in corso..."
-
-msgid "Could not get call list; wrong version?"
-msgstr "Impossibile ottenere elenco chiamate: versione errata?"
-
-msgid "Could not parse FRITZ!Box Phonebook entry"
-msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
-
-msgid "Could not read FRITZ!Box phonebook; wrong version?"
-msgstr "Impossibile leggere Rubrica della FRITZ!Box: versione errata?"
-
-msgid "Country"
-msgstr "Nazione"
-
-msgid "DECT inactive"
-msgstr "DECT non attivo"
-
-msgid "DECT phones registered"
-msgstr "Telefoni DECT registrati"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Deactivate WLAN guest access"
-msgstr ""
-
-msgid "Debug"
-msgstr "Debug"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Delete"
-msgstr "Cancell."
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Delete entry"
-msgstr "Cancellare voce"
-
-msgid "Display FRITZ!box-Fon calls on screen"
-msgstr "Visualizzare chiamate telef. sulla TV"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Display all calls"
-msgstr "Tutte le chiamate"
-
-msgid "Display connection infos"
-msgstr "Mostrare informazioni connessione"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Display incoming calls"
-msgstr "Chiamate in ingresso"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Display missed calls"
-msgstr "Chiamate perse"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Display outgoing calls"
-msgstr "Chiamate in uscita"
-
-#. TRANSLATORS: this is a window title.
-msgid "Do what?"
-msgstr "Che fare?"
-
-#, python-format
-msgid ""
-"Do you really want to delete entry for\n"
-"\n"
-"%(number)s\n"
-"\n"
-"%(name)s?"
-msgstr ""
-"Cancellare la voce\n"
-"\n"
-"%(number)s\n"
-"\n"
-"%(name)s?"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Edit"
-msgstr "Mod."
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Edit selected entry"
-msgstr "Mod. voce selezionata"
-
-msgid "Enter Search Terms"
-msgstr "Inserire criteri di ricerca"
-
-msgid "Entry incomplete."
-msgstr "Voce incompleta."
-
-msgid "Extended Search for faces"
-msgstr "Ricerca avanzata foto chiamante"
-
-msgid "Extended Search for names"
-msgstr "Ricerca estesa nomi"
-
-msgid "Extension number to initiate call on"
-msgstr "Numero apparecchio su cui indirizzare la chiamata"
-
-#, python-format
-msgid "FRITZ!Box - Could not load calls: %s"
-msgstr "FRITZ!Box - Impossibile caricare le chiamate: %s"
-
-#, python-format
-msgid "FRITZ!Box - Could not load phonebook: %s"
-msgstr "FRITZ!Box - Impossibile caricare la rubrica: %s"
-
-#, python-format
-msgid "FRITZ!Box - Dialling failed: %s"
-msgstr "FRITZ!Box - Composizione fallita: %s"
-
-#, python-format
-msgid "FRITZ!Box - Error getting blacklist: %s"
-msgstr "FRITZ!Box - Errore in recupero blacklist: %s"
-
-#, python-format
-msgid "FRITZ!Box - Error getting status: %s"
-msgstr "FRITZ!Box - Errore in recupero stato: %s"
-
-msgid ""
-"FRITZ!Box - Error logging in\n"
-"\n"
-msgstr ""
-"FRITZ!Box - Errore log in\n"
-"\n"
-
-#, python-format
-msgid "FRITZ!Box - Error logging in: %s"
-msgstr "FRITZ!Box - Errore in esecuzione log: %s"
-
-#, python-format
-msgid ""
-"FRITZ!Box - Error logging in: %s\n"
-"Disabling plugin."
-msgstr ""
-"FRITZ!Box - Errore in esecuzione log: %s\n"
-"Il plugin verrà disabilitato."
-
-#, python-format
-msgid "FRITZ!Box - Error logging out: %s"
-msgstr "FRITZ!Box - Errore in esecuzione log: %s"
-
-#, python-format
-msgid "FRITZ!Box - Error resetting: %s"
-msgstr "FRITZ!Box - Errore in reset: %s"
-
-#, python-format
-msgid "FRITZ!Box - Failed changing GuestAccess: %s"
-msgstr ""
-
-#, python-format
-msgid "FRITZ!Box - Failed changing Mailbox: %s"
-msgstr "FRITZ!Box - Cambiamento casella di posta fallito: %s"
-
-#, python-format
-msgid "FRITZ!Box - Failed changing WLAN: %s"
-msgstr "FRITZ!Box - Cambiamento WLAN fallito: %s"
-
-msgid "FRITZ!Box FON address (Name or IP)"
-msgstr "FRITZ!Box FON - Indirizzo (nome o IP)"
-
-msgid "FRITZ!Box FON firmware version"
-msgstr "FRITZ!Box FON - Versione firmware"
-
-#. TRANSLATORS: this is a window title.
-#. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: keep it short, this is a help text
+#: ../enigma2-plugins/fritzcall/src/plugin.py:730
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1860
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1887
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2675
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Fon - Stato"
 
-msgid "FRITZ!Box PhoneBook to read"
-msgstr "Rubrica FRITZ!Box da caricare"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:748
+msgid "Refreshing..."
+msgstr "Aggiornamento in coso..."
 
-msgid ""
-"FRITZ!Box firmware version not configured! Please set it in the "
-"configuration."
-msgstr ""
-"Versione firmware FRITZ!Box non inserita. Aggiornare la configurazione."
+#: ../enigma2-plugins/fritzcall/src/plugin.py:753
+#: ../enigma2-plugins/fritzcall/src/plugin.py:776
+#: ../enigma2-plugins/fritzcall/src/plugin.py:802
+msgid "Status not available"
+msgstr "Stato non disponibile"
 
-msgid "FRITZ!Box not available for calling"
-msgstr "FRITZ!Box non disponibile per le chiamate"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:757
+#: ../enigma2-plugins/fritzcall/src/plugin.py:759
+msgid "IP Address:"
+msgstr "Indirizzo IP:"
 
-msgid "Filter also list of calls"
-msgstr "Filtrare anche gli elenchi chiamate"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:757
+msgid "Connected since"
+msgstr "Connesso da"
 
+#: ../enigma2-plugins/fritzcall/src/plugin.py:786
+msgid "not encrypted"
+msgstr "non codificato"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:788
+msgid "encrypted"
+msgstr "codificato"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:791
+msgid "no device active"
+msgstr "Nessun dispositivo attivo"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:793
+msgid "one device active"
+msgstr "Un dispositivo attivo"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:795
+msgid "devices active"
+msgstr "Dispositivi attivi"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:811
+msgid "No mailbox active"
+msgstr "Nessuna casella di posta attiva"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:823
+msgid "One mailbox active"
+msgstr "Una casella di posta attiva"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:825
+msgid "mailboxes active"
+msgstr "caselle di posta attive"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:831
+msgid "No DECT phone registered"
+msgstr "Nessun telefono DECT registrato"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:834
+msgid "One DECT phone registered"
+msgstr "Un telefono DECT registrato"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:836
+msgid "DECT phones registered"
+msgstr "Telefoni DECT registrati"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:840
+msgid "DECT inactive"
+msgstr "DECT non attivo"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:845
+msgid "Software fax active"
+msgstr "Fax software attivo"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:849
+msgid "Software fax inactive"
+msgstr "Fax software non attivo"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:855
+msgid "Call redirection active"
+msgstr "deviazione chiamate attiva"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:857
+msgid "One call redirection active"
+msgstr "Una deviazione chiamate attiva"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:859
+msgid "call redirections active"
+msgstr "deviazione chiamate attiva"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:863
+msgid "No call redirection active"
+msgstr "Nessuna deviazione chiamate attiva"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:868
+msgid "Guest access on "
+msgstr "Accesso Guest attivo"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:872
+msgid "Guest access not active"
+msgstr "Accesso Guest non attivo"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:876
+msgid "Deactivate WLAN guest access"
+msgstr "Disattivare accesso Guest WLAN"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:886
+#: ../enigma2-plugins/fritzcall/src/plugin.py:901
+msgid "Setting..."
+msgstr "impostazioni..."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:992
+msgid "All"
+msgstr "Tutte"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:994
+msgid "Missed"
+msgstr "Ch. perse"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:996
+msgid "Incoming"
+msgstr "In Entr."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:998
+msgid "Outgoing"
+msgstr "In uscita"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1010
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1566
+msgid "Show details of entry"
+msgstr "Mostrare dettagli voce"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1014
+msgid "Display all calls"
+msgstr "Tutte le chiamate"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1016
+msgid "Display missed calls"
+msgstr "Chiamate perse"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1018
+msgid "Display incoming calls"
+msgstr "Chiamate in ingresso"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1020
+msgid "Display outgoing calls"
+msgstr "Chiamate in uscita"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1022
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1077
+msgid "Getting calls from FRITZ!Box..."
+msgstr "Recupero chiamate dalla FRITZ!Box in corso"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1037
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1854
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2673
+msgid "Phone calls"
+msgstr "Ch. telef."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1105
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2077
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2080
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2121
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2409
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2509
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2514
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2538
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:68
+msgid "UNKNOWN"
+msgstr "SCONOSCIUTO"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1135
+msgid "Lookup"
+msgstr "Lookup"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1137
+msgid "Call"
+msgstr "Chiam."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1139
+msgid "Save"
+msgstr "Salvare"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1168
+msgid "Do what?"
+msgstr "Che fare?"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1177
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2200
 #, python-format
 msgid ""
 "Found picture\n"
@@ -312,41 +405,333 @@ msgstr ""
 "\n"
 "Impossibile caricarla. Il formato deve esserecpng, 8 bit."
 
-msgid "France"
-msgstr "Francia"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1233
+msgid "Reverse searching..."
+msgstr "Ricerca identificativo chiamante..."
 
-#. TRANSLATORS: this is a window title.
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1237
+msgid "Searching in Outlook export..."
+msgstr "Ricerca in Outlook  export..."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1244
+msgid "Searching in LDIF..."
+msgstr "Ricerca in LDIF..."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1256
+msgid "No result from reverse lookup"
+msgstr "Ricerca identificativo chiamante: nessun risultato!"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1258
+msgid "No result from Outlook export"
+msgstr "Ricerca in Outlook  export: nessun risultato!"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1260
+msgid "No result from LDIF"
+msgstr "Ricerca in LDIF: nessun risultato!"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1269
+#, python-format
+msgid "Calling %s"
+msgstr "Chiamata per %s"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1273
+msgid "FRITZ!Box not available for calling"
+msgstr "FRITZ!Box non disponibile per le chiamate"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1548
+msgid "Delete"
+msgstr "Cancell."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1550
+msgid "New"
+msgstr "Nuovo"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1552
+msgid "Edit"
+msgstr "Mod."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1554
+msgid "Search"
+msgstr "Ricerca"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1570
+msgid "Delete entry"
+msgstr "Cancellare voce"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1572
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1721
+msgid "Add entry to phonebook"
+msgstr "Aggiungere voce in rubrica"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1574
+msgid "Edit selected entry"
+msgstr "Mod. voce selezionata"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1576
+msgid "Search (case insensitive)"
+msgstr "Ricerca (non distingue Maiusc-minusc)"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1587
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1856
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2674
+msgid "Phonebook"
+msgstr "Rubrica"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1641
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+"Cancellare la voce\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1645
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1662
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1768
+msgid "No entry selected"
+msgstr "Nessuna voce selezionata"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1696
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1850
+msgid "Cancel"
+msgstr "Annull."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1698
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1852
+msgid "OK"
+msgstr "Ok"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1713
+msgid "Name"
+msgstr "Nome"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1714
+msgid "Number"
+msgstr "Numero"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1729
+msgid "Entry incomplete."
+msgstr "Voce incompleta."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1777
+msgid "Enter Search Terms"
+msgstr "Inserire criteri di ricerca"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1777
+msgid "Search phonebook"
+msgstr "Ricerca su rubrica"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1845
+msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
+msgstr "Per abilitare il monitoraggio sulla FRITZ!Box comporre #96*5*!"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1875
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1885
+msgid "quit"
+msgstr "Uscire"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1877
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1883
+msgid "save and quit"
+msgstr "Salvare e uscire"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1879
+msgid "display calls"
+msgstr "Tutte le chiamate"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1881
+msgid "display phonebook"
+msgstr "Mostrare rubrica"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1899
 msgid "FritzCall Setup"
 msgstr "Configurazione FritzCall"
 
-msgid "Germany"
-msgstr "Germania"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1911
+msgid "Call monitoring"
+msgstr "Monitoraggio chiamate"
 
-msgid "Getting calls from FRITZ!Box..."
-msgstr "Recupero chiamate dalla FRITZ!Box in corso"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1913
+msgid "FRITZ!Box FON address (Name or IP)"
+msgstr "FRITZ!Box FON - Indirizzo (nome o IP)"
 
-msgid "Getting status from FRITZ!Box Fon..."
-msgstr "Recupero stato dalla FRITZ!Box Fon in corso..."
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1914
+msgid "FRITZ!Box FON firmware version"
+msgstr "FRITZ!Box FON - Versione firmware"
 
-msgid "Guest access"
-msgstr ""
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1916
+msgid "Show after Standby"
+msgstr "Mostrare chiamate dopo lo standby"
 
-msgid "Guest access not active"
-msgstr ""
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1918
+msgid "Show only calls for specific MSN"
+msgstr "Mostrare solo le chiamate per MSN specifico"
 
-msgid "Guest access on "
-msgstr ""
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1920
+msgid "MSN to show (separated by ,)"
+msgstr "MSN da mostrare (separare con ,)"
 
-msgid "IP Address:"
-msgstr "Indirizzo IP:"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1921
+msgid "Filter also list of calls"
+msgstr "Filtrare anche gli elenchi chiamate"
 
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1922
+msgid "Mute on call"
+msgstr "Mute su Chiamata"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1924
+msgid "Show Outgoing Calls"
+msgstr "Mostrare le chiamate in uscita"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1926
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr "Pref. locale per le chiamate che ne sono prive (se necessario)"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1927
+msgid "Timeout for Call Notifications (seconds)"
+msgstr "Ritardo notifica chiamate (secondi)"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1928
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr "Identificativo chiamante (selezionare il Paese!)"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1930
+msgid "Country"
+msgstr "Nazione"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1934
+msgid "Name of WLAN guest network"
+msgstr "Nome della rete WLAN Guest"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1935
+msgid "Secure WLAN guest network"
+msgstr "Sicurezza rete WLAN Guest"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1936
+msgid "Password of WLAN guest network"
+msgstr "Password per la rete WLAN Guest"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1937
+msgid "User name Accessing FRITZ!Box"
+msgstr "User name di accesso alla FRITZ!Box"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1939
+msgid "Password Accessing FRITZ!Box"
+msgstr "Password di accesso alla FRITZ!Box"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1940
+msgid "Extension number to initiate call on"
+msgstr "Numero apparecchio su cui indirizzare la chiamata"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1941
+msgid "Read PhoneBook from FRITZ!Box"
+msgstr "Caricare la rubrica dalla FRITZ!Box"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1943
+msgid "FRITZ!Box PhoneBook to read"
+msgstr "Rubrica FRITZ!Box da caricare"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1944
+msgid "Append type of number"
+msgstr "Agg. il tipo di numero (casa,cell.,uff.)"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1945
+msgid "Append shortcut number"
+msgstr "Aggiungere numero breve"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1946
+msgid "Append vanity name"
+msgstr "Aggiungere nome \"Vanity\""
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1951
+msgid "Reload interval for phonebooks (hours)"
+msgstr "Intervallo aggiornamento rubriche (ore)"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1953
+msgid "Use internal PhoneBook"
+msgstr "Usare la rubrica interna"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1956
+msgid "Automatically add new Caller to PhoneBook"
+msgstr "Ins. autom. nuovo chiamante in rubrica"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1957
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1975
+msgid "PhoneBook and Faces Location"
+msgstr "Posizione rubrica e Faces"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1960
+msgid "Extended Search for names"
+msgstr "Ricerca estesa nomi"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1961
+msgid "Extended Search for faces"
+msgstr "Ricerca avanzata foto chiamante"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1963
+msgid "Strip Leading 0"
+msgstr "Sopprimere \"0\" iniziali"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1965
+msgid "Display connection infos"
+msgstr "Mostrare informazioni connessione"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1966
 msgid "Ignore callers with no phone number"
 msgstr "Ignorare i chiamanti con numero mascherato"
 
-#. TRANSLATORS: keep it short, this is a button
-msgid "Incoming"
-msgstr "In Entr."
+#: ../enigma2-plugins/fritzcall/src/plugin.py:1967
+msgid "Debug"
+msgstr "Debug"
 
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2004
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2628
+msgid "Cannot get calls from FRITZ!Box"
+msgstr "Recupero chiamate dalla FRITZ!Box impossibile"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2006
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2013
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2027
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2630
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2637
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2648
+msgid "Plugin not enabled"
+msgstr "Plugin non abilitato"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2015
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2639
+msgid "No phonebook"
+msgstr "Nessuna rubrica"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2025
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2646
+msgid ""
+"Cannot get infos from FRITZ!Box yet\n"
+"Still initialising or wrong firmware version"
+msgstr ""
+"Recupero informazioni dalla FRITZ!Box impossibile.\n"
+"Avvio ancora in corso o versione firmware errata."
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2053
+msgid "no calls"
+msgstr "Nessuna"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2056
+msgid "Last 10 calls:\n"
+msgstr "Ultime 10 chiamate:\n"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2195
+msgid "New call"
+msgstr "Nuova chiamata"
+
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2319
 #, python-format
 msgid ""
 "Incoming Call on %(date)s at %(time)s from\n"
@@ -363,95 +748,7 @@ msgstr ""
 "---------------------------------------------\n"
 "a: %(phone)s"
 
-msgid "Incoming calls"
-msgstr "Chiamate in entrata"
-
-msgid "Italy"
-msgstr "Italia"
-
-msgid "Last 10 calls:\n"
-msgstr "Ultime 10 chiamate:\n"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Lookup"
-msgstr "Lookup"
-
-msgid "MSN to show (separated by ,)"
-msgstr "MSN da mostrare (separare con ,)"
-
-msgid "Mailbox"
-msgstr "Casella di posta"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Missed"
-msgstr "Ch. perse"
-
-msgid "Missed calls"
-msgstr "Chiamate perse"
-
-msgid "Mute on call"
-msgstr "Mute su Chiamata"
-
-msgid "Name"
-msgstr "Nome"
-
-msgid "Name of WLAN guest network"
-msgstr ""
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "New"
-msgstr "Nuovo"
-
-msgid "New call"
-msgstr "Nuova chiamata"
-
-msgid "No DECT phone registered"
-msgstr "Nessun telefono DECT registrato"
-
-msgid "No call redirection active"
-msgstr "Nessuna deviazione chiamate attiva"
-
-msgid "No entry selected"
-msgstr "Nessuna voce selezionata"
-
-msgid "No mailbox active"
-msgstr "Nessuna casella di posta attiva"
-
-msgid "No phonebook"
-msgstr "Nessuna rubrica"
-
-msgid "No result from LDIF"
-msgstr "Ricerca in LDIF: nessun risultato!"
-
-msgid "No result from Outlook export"
-msgstr "Ricerca in Outlook  export: nessun risultato!"
-
-msgid "No result from reverse lookup"
-msgstr "Ricerca identificativo chiamante: nessun risultato!"
-
-msgid "Number"
-msgstr "Numero"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "OK"
-msgstr "Ok"
-
-msgid "One DECT phone registered"
-msgstr "Un telefono DECT registrato"
-
-msgid "One call redirection active"
-msgstr "Una deviazione chiamate attiva"
-
-msgid "One mailbox active"
-msgstr "Una casella di posta attiva"
-
-msgid "Others"
-msgstr "Altri paesi"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Outgoing"
-msgstr "In uscita"
-
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2321
 #, python-format
 msgid ""
 "Outgoing Call on %(date)s at %(time)s to\n"
@@ -468,182 +765,151 @@ msgstr ""
 "---------------------------------------------\n"
 "da: %(phone)s"
 
-msgid "Outgoing calls"
-msgstr "Chiamate in uscita"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2513
+msgid "number suppressed"
+msgstr "numero mascherato"
 
-msgid "Password Accessing FRITZ!Box"
-msgstr "Password di accesso alla FRITZ!Box"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2556
+msgid "Connecting to FRITZ!Box..."
+msgstr "Connessione alla FRITZ!Box in corso..."
 
-msgid "Password of WLAN guest network"
-msgstr ""
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2562
+msgid "Connected to FRITZ!Box!"
+msgstr "Connesso alla FRITZ!Box!"
 
-#. TRANSLATORS: this is a window title.
-#. TRANSLATORS: keep it short, this is a button
-msgid "Phone calls"
-msgstr "Ch. telef."
-
-msgid "PhoneBook and Faces Location"
-msgstr ""
-
-#. TRANSLATORS: this is a window title.
-#. TRANSLATORS: keep it short, this is a button
-msgid "Phonebook"
-msgstr "Rubrica"
-
-msgid "Plugin not enabled"
-msgstr ""
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Quit"
-msgstr "Uscire"
-
-msgid "Read PhoneBook from FRITZ!Box"
-msgstr "Caricare la rubrica dalla FRITZ!Box"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Refresh status"
-msgstr "Aggiornare lo stato"
-
-msgid "Refreshing..."
-msgstr "Aggiornamento in coso..."
-
-msgid "Reload interval for phonebooks (hours)"
-msgstr "Intervallo aggiornamento rubriche (ore)"
-
-#. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: keep it short, this is a help text
-#. TRANSLATORS: keep it short, this is a button
-msgid "Reset"
-msgstr "Reset"
-
-msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Identificativo chiamante (selezionare il Paese!)"
-
-msgid "Reverse searching..."
-msgstr "Ricerca identificativo chiamante..."
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Save"
-msgstr "Salvare"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Search"
-msgstr "Ricerca"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Search (case insensitive)"
-msgstr "Ricerca (non distingue Maiusc-minusc)"
-
-msgid "Search phonebook"
-msgstr "Ricerca su rubrica"
-
-msgid "Searching in LDIF..."
-msgstr "Ricerca in LDIF..."
-
-msgid "Searching in Outlook export..."
-msgstr "Ricerca in Outlook  export..."
-
-msgid "Secure WLAN guest network"
-msgstr ""
-
-msgid "Setting..."
-msgstr ""
-
-msgid "Shortcut"
-msgstr "Numero breve"
-
-msgid "Show Outgoing Calls"
-msgstr "Mostrare le chiamate in uscita"
-
-msgid "Show after Standby"
-msgstr "Mostrare chiamate dopo lo standby"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Show details of entry"
-msgstr "Mostrare dettagli voce"
-
-msgid "Show only calls for specific MSN"
-msgstr "Mostrare solo le chiamate per MSN specifico"
-
-msgid "Software fax active"
-msgstr "Fax software attivo"
-
-msgid "Software fax inactive"
-msgstr "Fax software non attivo"
-
-msgid "Status not available"
-msgstr "Stato non disponibile"
-
-msgid "Strip Leading 0"
-msgstr "Sopprimere \"0\" iniziali"
-
-msgid "Switzerland"
-msgstr "Svizzera"
-
-msgid "The Netherlands"
-msgstr "Olanda"
-
-msgid "Timeout for Call Notifications (seconds)"
-msgstr "Ritardo notifica chiamate (secondi)"
-
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2569
 msgid ""
 "To enjoy more functionalities of your FRITZ!Box, configure the firmware "
 "version!"
 msgstr ""
+"Per godere appieno delle funzionalità della FRITZ!Box, configurare la "
+"versione firmware."
 
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle 1. mailbox"
-msgstr "Comm. casella 1."
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle 2. mailbox"
-msgstr "Comm. casella 2."
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle 3. mailbox"
-msgstr "Comm. casella 3."
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle 4. mailbox"
-msgstr "Comm. casella 4."
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle 5. mailbox"
-msgstr "Comm. casella 5."
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Toggle Mailbox"
-msgstr "Comm. casella"
-
-#. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: keep it short, this is a help text
-#. TRANSLATORS: keep it short, this is a button
-msgid "Toggle WLAN"
-msgstr "Commutare WLAN"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle WLAN guest access"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2579
+msgid ""
+"FRITZ!Box firmware version not configured! Please set it in the "
+"configuration."
 msgstr ""
+"Versione firmware FRITZ!Box non inserita. Aggiornare la configurazione."
 
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle all mailboxes"
-msgstr "Comm. tutte le caselle"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2587
+#, python-format
+msgid ""
+"Connection to FRITZ!Box! lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Connessione alla FRITZ!Box persa!\n"
+"(%s)\n"
+"Nuovo tentativo in corso..."
 
-msgid "UNKNOWN"
-msgstr "SCONOSCIUTO"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2595
+#, python-format
+msgid ""
+"Connecting to FRITZ!Box failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Connessione alla FRITZ!Box fallita!\n"
+"(%s)\n"
+"Nuovo tentativo in corso..."
 
-msgid "Use internal PhoneBook"
-msgstr "Usare la rubrica interna"
+#: ../enigma2-plugins/fritzcall/src/plugin.py:2672
+msgid "Display FRITZ!box-Fon calls on screen"
+msgstr "Visualizzare chiamate telef. sulla TV"
 
-msgid "User name Accessing FRITZ!Box"
-msgstr "User name di accesso alla FRITZ!Box"
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:109
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1126
+msgid "login"
+msgstr "Login"
 
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:191
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1197
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1874
+msgid "login verification"
+msgstr "Verifica login"
+
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:196
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1202
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1888
+msgid ""
+"FRITZ!Box - Error logging in\n"
+"\n"
+msgstr ""
+"FRITZ!Box - Errore log in\n"
+"\n"
+
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:200
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1206
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1892
+msgid "login ok"
+msgstr "Login Ok"
+
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:210
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1223
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1903
+#, python-format
+msgid ""
+"FRITZ!Box - Error logging in: %s\n"
+"Disabling plugin."
+msgstr ""
+"FRITZ!Box - Errore in esecuzione log: %s\n"
+"Il plugin verrà disabilitato."
+
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:232
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1245
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1924
+#, python-format
+msgid "FRITZ!Box - Error logging out: %s"
+msgstr "FRITZ!Box - Errore in esecuzione log: %s"
+
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:348
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:375
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1357
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2024
+msgid "Shortcut"
+msgstr "Numero breve"
+
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:350
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:377
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1359
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2026
 msgid "Vanity"
 msgstr "\"Vanity\""
 
-msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr "Per abilitare il monitoraggio sulla FRITZ!Box comporre #96*5*!"
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:394
+msgid "Could not read FRITZ!Box phonebook; wrong version?"
+msgstr "Impossibile leggere Rubrica della FRITZ!Box: versione errata?"
 
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:398
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1369
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2038
+#, python-format
+msgid "FRITZ!Box - Could not load phonebook: %s"
+msgstr "FRITZ!Box - Impossibile caricare la rubrica: %s"
+
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:451
+#, python-format
+msgid "FRITZ!Box - Error logging in: %s"
+msgstr "FRITZ!Box - Errore in esecuzione log: %s"
+
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:455
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1390
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2054
+msgid "preparing"
+msgstr "Preparazione in corso"
+
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:466
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1380
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2064
+msgid "finishing"
+msgstr "Quasi terminato..."
+
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:476
+msgid "done"
+msgstr "Fatto"
+
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:478
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
 "in the configuration dialog to display calls\n"
@@ -655,124 +921,86 @@ msgstr ""
 "\n"
 "Potrebbe trattarsi di un problema di comunicazione, riprovare."
 
-msgid "before 05.27"
-msgstr "anteriore a 05.27"
-
-msgid "call redirections active"
-msgstr "deviazione chiamate attiva"
-
-msgid "devices active"
-msgstr "Dispositivi attivi"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "display calls"
-msgstr "Tutte le chiamate"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "display phonebook"
-msgstr "Mostrare rubrica"
-
-msgid "done"
-msgstr "Fatto"
-
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:489
 msgid "done, using last list"
 msgstr "Fatto, sarà usata l'ultimo elenco"
 
-msgid "encrypted"
-msgstr "codificato"
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:493
+msgid "Could not get call list; wrong version?"
+msgstr "Impossibile ottenere elenco chiamate: versione errata?"
 
-msgid "finishing"
-msgstr "Quasi terminato..."
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:542
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1460
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2140
+#, python-format
+msgid "FRITZ!Box - Could not load calls: %s"
+msgstr "FRITZ!Box - Impossibile caricare le chiamate: %s"
 
-msgid "home"
-msgstr "Casa"
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:586
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1504
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2190
+#, python-format
+msgid "FRITZ!Box - Dialling failed: %s"
+msgstr "FRITZ!Box - Composizione fallita: %s"
 
-msgid "login"
-msgstr "Login"
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:633
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1552
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2246
+#, python-format
+msgid "FRITZ!Box - Failed changing WLAN: %s"
+msgstr "FRITZ!Box - Cambiamento WLAN fallito: %s"
 
-msgid "login ok"
-msgstr "Login Ok"
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:701
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1569
+#, python-format
+msgid "FRITZ!Box - Failed changing Mailbox: %s"
+msgstr "FRITZ!Box - Cambiamento casella di posta fallito: %s"
 
-msgid "login verification"
-msgstr "Verifica login"
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:985
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1698
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2455
+#, python-format
+msgid "FRITZ!Box - Error getting status: %s"
+msgstr "FRITZ!Box - Errore in recupero stato: %s"
 
-msgid "mailboxes active"
-msgstr "caselle di posta attive"
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1033
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1744
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2495
+#, python-format
+msgid "FRITZ!Box - Error resetting: %s"
+msgstr "FRITZ!Box - Errore in reset: %s"
 
-msgid "mobile"
-msgstr "Cellulare"
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1083
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1780
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2533
+#, python-format
+msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr "FRITZ!Box - Errore in recupero blacklist: %s"
 
-msgid "no calls"
-msgstr "Nessuna"
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1365
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2033
+msgid "Could not parse FRITZ!Box Phonebook entry"
+msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
 
-msgid "no device active"
-msgstr "Nessun dispositivo attivo"
-
-msgid "not configured"
-msgstr "non configurato"
-
-msgid "not encrypted"
-msgstr "non codificato"
-
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1510
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1559
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2319
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2566
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2573
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2583
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2593
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2603
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2614
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2624
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2631
 msgid "not yet implemented"
 msgstr "Funzione non ancora implementata"
 
-msgid "number suppressed"
-msgstr "numero mascherato"
-
-msgid "one device active"
-msgstr "Un dispositivo attivo"
-
-msgid "preparing"
-msgstr "Preparazione in corso"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "quit"
-msgstr "Uscire"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "save and quit"
-msgstr "Salvare e uscire"
-
-msgid "show as list"
-msgstr "Come elenco"
-
-msgid "show each call"
-msgstr "Tutte"
-
-msgid "show nothing"
-msgstr "Nulla"
-
-msgid "work"
-msgstr "Ufficio"
-
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:1888
 msgid "wrong user or password?"
 msgstr "Utente o password errati?"
 
-#~ msgid "Cannot get infos from FRITZ!Box yet; try later"
-#~ msgstr ""
-#~ "Recupero informazioni dalla FRITZ!Box impossibile: riprovare più tardi"
-
-#~ msgid "Compact Flash"
-#~ msgstr "work"
-
-#~ msgid "Flash"
-#~ msgstr "Flash"
-
-#~ msgid "Media directory"
-#~ msgstr "Directory media"
-
-#~ msgid "Network mount"
-#~ msgstr "Mount di rete"
-
-#~ msgid "PhoneBook Location"
-#~ msgstr "Posizione rubrica"
-
-#~ msgid "Plugin not active"
-#~ msgstr "Plugin non attivo"
-
-#~ msgid "USB Device"
-#~ msgstr "Dispositivo USB"
-
-#~ msgid "business"
-#~ msgstr "Affari"
+#: ../enigma2-plugins/fritzcall/src/FritzCallFBF.py:2312
+#, python-format
+msgid "FRITZ!Box - Failed changing GuestAccess: %s"
+msgstr "FRITZ!Box - Cambiamento accesso Guest fallito: %s"

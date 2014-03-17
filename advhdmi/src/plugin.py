@@ -1,15 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Screens
-from Screens.MessageBox import MessageBox
-from Screens.Screen import Screen
-from Components.Label import Label
-from Components.ActionMap import ActionMap
-from Components.Sources.StaticText import StaticText
-from Screens.Setup import SetupSummary
-from Components.Button import Button
-
-# for localized messages
+from traceback import print_exc
+from sys import stdout, exc_info
 from . import _
 
 # Plugin
@@ -17,13 +9,24 @@ from Plugins.Plugin import PluginDescriptor
 from Components.config import config, configfile, ConfigSelection, ConfigSubsection, getConfigListEntry, ConfigSubList, \
 	ConfigClock, ConfigInteger, ConfigYesNo 
 from Components.ConfigList import ConfigListScreen
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
-from Components.MenuList import MenuList
-from Tools.BoundFunction import boundFunction
 
 # for function
 from time import localtime, mktime
 from Components.HdmiCec import hdmi_cec
+
+def _print(outtxt):
+	ltim = localtime()
+	headerstr = "[AdvHdmiCec] %04d%02d%02d-%02d%02d%02d " %(ltim[0],ltim[1],ltim[2],ltim[3],ltim[4],ltim[5])
+	outtxt = headerstr + outtxt
+	print outtxt
+
+try:
+	from Plugins.SystemPlugins.AdvHdmi.AdvHdmiCecSetup import AdvHdmiCecSetup
+	g_AdvHdmi_setup_available = True
+except ImportError:
+	g_AdvHdmi_setup_available = False
+	_print("error while loading AdvHdmiCecSetup")
+	print_exc(file=stdout) 
 
 # overwrite functions
 from Plugins.SystemPlugins.HdmiCec.plugin import Cec
@@ -32,21 +35,14 @@ try:
 	from Plugins.Extensions.WebInterface.WebComponents.Sources.PowerState import PowerState
 	g_AdvHdmi_webif_available = True
 except ImportError:
-	print "[AdvHdmiCec] No Webinterface-Plugin installed"
+	_print("No Webinterface-Plugin installed")
 	g_AdvHdmi_webif_available = False
-
-WEEKDAYS = [ 
-	_("Monday"),
-	_("Tuesday"),
-	_("Wednesday"),
-	_("Thursday"),
-	_("Friday"),
-	_("Saturday"),
-	_("Sunday")]
 
 config.plugins.AdvHdmiCec = ConfigSubsection()
 config.plugins.AdvHdmiCec.enable = ConfigYesNo(default = False)
 config.plugins.AdvHdmiCec.debug = ConfigYesNo(default = False)
+config.plugins.AdvHdmiCec.enable_power_on = ConfigYesNo(default = True)
+config.plugins.AdvHdmiCec.enable_power_off = ConfigYesNo(default = True)
 config.plugins.AdvHdmiCec.disable_after_enigmastart = ConfigYesNo(default = False)
 config.plugins.AdvHdmiCec.disable_from_webif = ConfigYesNo(default = False)
 config.plugins.AdvHdmiCec.entriescount =  ConfigInteger(0)
@@ -57,150 +53,52 @@ config.plugins.AdvHdmiCec.show_in = ConfigSelection(choices=[
 		("extension", _("extensions")),
 	], default = "system")
 
-class AdvHdmiCecSetup(Screen, ConfigListScreen):
-	skin = """
-		<screen name="adv_hdmi_setup" position="center,center" size="550,480" title="Advanced HDMI-Cec Setup" >
-			<widget name="config" position="10,0" size="530,250" scrollbarMode="showOnDemand" enableWrapAround="1" />
-			<ePixmap pixmap="skin_default/div-h.png" position="0,250" zPosition="1" size="550,2" />
-			<widget source="help" render="Label" position="5,250" size="550,120" font="Regular;21" />
-			<ePixmap pixmap="skin_default/buttons/red.png" position="10,430" size="140,40" transparent="1" alphatest="on" />
-			<widget render="Label" source="key_red" position="10,430" size="140,40" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="180,430" size="140,40" transparent="1" alphatest="on" />
-			<widget render="Label" source="key_green" position="180,430" size="140,40" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="350,430" size="140,40" transparent="1" alphatest="on" />
-			<widget render="Label" source="key_yellow" position="350,430" size="140,40" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-		</screen>"""
+WEEKDAYS = [ 
+	_("Monday"),
+	_("Tuesday"),
+	_("Wednesday"),
+	_("Thursday"),
+	_("Friday"),
+	_("Saturday"),
+	_("Sunday")]
 
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.onChangedEntry = []
-		
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
-		
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Save"))
-		self["key_yellow"] = StaticText(_("Timespans"))
-		self["help"] = StaticText()
-		
-		self.getConfig()
-		
-		def selectionChanged():
-			current = self["config"].getCurrent()
-			if self["config"].current != current:
-				if self["config"].current:
-					self["config"].current[1].onDeselect(self.session)
-				if current:
-					current[1].onSelect(self.session)
-				self["config"].current = current
-			for x in self["config"].onSelectionChanged:
-				x()
+ADVHDMI_VERSION = "1.4.2"
 
-		self["config"].selectionChanged = selectionChanged
-		self["config"].onSelectionChanged.append(self.updateHelp)
-		
-		# Actions
-		self["actions"] = ActionMap(["SetupActions", "AdvHdmiConfigActions"],
-			{
-				"cancel": self.keyCancel,
-				"save": self.keySave,
-				"yellowshort": self.EditTimeSpanEntries,
-				"nextBouquet":self.bouquetPlus,
-				"prevBouquet":self.bouquetMinus,
-			}
-		)
+# HDMI-Hook-Events
+# To implement a hook, just instantiate a AdvHdmiCecIF, 
+# and overwrite the methods before_event and/or after_event
 
-		# Trigger change
-		self.changed()
-		self.onLayoutFinish.append(self._layoutFinished)
-	
-	def _layoutFinished(self):
-		self.setTitle(_("Advanced HDMI-Cec Setup"))
-		
-	def getConfig(self):
-		self.list = [ getConfigListEntry(_("partially disabel HdmiCec"), config.plugins.AdvHdmiCec.enable, _("Partially disabel HDMI-Cec?\nIt can be prevented only the signals that are sent from the Dreambox. Signals received by the Dreambox will not be prevented.")) ]
-		if config.plugins.AdvHdmiCec.enable.value:
-			self.list.append(getConfigListEntry(_("disable at GUI-start"), config.plugins.AdvHdmiCec.disable_after_enigmastart, _("Should HDMI-Cec be disabled when GUI service startup?")))
-			if g_AdvHdmi_webif_available:
-				self.list.append(getConfigListEntry(_("disable from webinterface"), config.plugins.AdvHdmiCec.disable_from_webif, _("Should HDMI-Cec be disabled when the commands are sent from the web interface?")))
-		self.list.append(getConfigListEntry(_("enable debug"), config.plugins.AdvHdmiCec.debug, _("Schould debugmessages be printed?")))
-		self.list.append(getConfigListEntry(_("show in"), config.plugins.AdvHdmiCec.show_in, _("Where should this setup be displayed?")))
+# Events with boolean-return, that means if the CEC-signal has to be send / handled
+ADVHDMI_BEFORE_POWERON = "BEFORE_POWERON"
+ADVHDMI_BEFORE_POWEROFF = "BEFORE_POWEROFF"
+ADVHDMI_BEFORE_RECEIVED_STANDBY = "BEFORE_RECEIVED_STANDBY"
+ADVHDMI_BEFORE_RECEIVED_NOWACTIVE = "BEFORE_RECEIVED_NOWACTIVE"
+# Events without return-value
+ADVHDMI_AFTER_POWERON = "AFTER_POWERON"
+ADVHDMI_AFTER_POWEROFF = "AFTER_POWEROFF"
+ADVHDMI_AFTER_RECEIVED_STANDBY = "AFTER_RECEIVED_STANDBY"
+ADVHDMI_AFTER_RECEIVED_NOWACTIVE = "AFTER_RECEIVED_NOWACTIVE"
 
-		self["config"].list = self.list
-		self["config"].setList(self.list)
+# registered Hooks
+advhdmiHooks = {}
 
-	def keyLeft(self):
-		ConfigListScreen.keyLeft(self)
-		self.getConfig()
-
-	def keyRight(self):
-		ConfigListScreen.keyRight(self)
-		self.getConfig()
-
-	def bouquetPlus(self):
-		self["config"].instance.moveSelection(self["config"].instance.pageUp)
-
-	def bouquetMinus(self):
-		self["config"].instance.moveSelection(self["config"].instance.pageDown)
-
-	def updateHelp(self):
-		cur = self["config"].getCurrent()
-		if cur:
-			self["help"].text = cur[2]
-
-	def keySave(self):
-		for x in self["config"].list:
-			x[1].save()
-
-		self.close(self.session)
-
-	def EditTimeSpanEntries(self):
-		self.session.open(TimeSpanListScreen)
-
-	def changed(self):
-		for x in self.onChangedEntry:
-			try:
-				x()
-			except Exception:
-				pass
-
-# Timespans
-def initTimeSpanEntryList():
-	count = config.plugins.AdvHdmiCec.entriescount.value
-	if count != 0:
-		i = 0
-		while i < count:
-			TimeSpanEntryInit()
-			i += 1
-
-def TimeSpanEntryInit():
-	now = localtime()
-	begin = mktime((now.tm_year, now.tm_mon, now.tm_mday, 8, 00, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
-	end = mktime((now.tm_year, now.tm_mon, now.tm_mday, 16, 00, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
-	
-	config.plugins.AdvHdmiCec.Entries.append(ConfigSubsection())
-	i = len(config.plugins.AdvHdmiCec.Entries) -1
-	config.plugins.AdvHdmiCec.Entries[i].fromWD = ConfigSelection(choices=[
-		("0", WEEKDAYS[0]),
-		("1", WEEKDAYS[1]),
-		("2", WEEKDAYS[2]),
-		("3", WEEKDAYS[3]),
-		("4", WEEKDAYS[4]),
-		("5", WEEKDAYS[5]),
-		("6", WEEKDAYS[6]),
-	], default = "0")
-	config.plugins.AdvHdmiCec.Entries[i].toWD = ConfigSelection(choices=[
-		("0", WEEKDAYS[0]),
-		("1", WEEKDAYS[1]),
-		("2", WEEKDAYS[2]),
-		("3", WEEKDAYS[3]),
-		("4", WEEKDAYS[4]),
-		("5", WEEKDAYS[5]),
-		("6", WEEKDAYS[6]),
-	], default = "6")
-	config.plugins.AdvHdmiCec.Entries[i].begin = ConfigClock(default = int(begin))
-	config.plugins.AdvHdmiCec.Entries[i].end = ConfigClock(default = int(end))
-	return config.plugins.AdvHdmiCec.Entries[i]
+def callHook(advhdmi_event):
+	if config.plugins.AdvHdmiCec.debug.value: _print("Debug: call Hooks for Event '" + str(advhdmi_event) + "'")
+	if advhdmiHooks:
+		for hookKey,hook in advhdmiHooks.iteritems():
+			if config.plugins.AdvHdmiCec.debug.value: _print("Debug: call Hook '" + str(hookKey) + "'")
+			try: 
+				if advhdmi_event in (ADVHDMI_BEFORE_POWERON, ADVHDMI_BEFORE_POWEROFF, ADVHDMI_BEFORE_RECEIVED_STANDBY, ADVHDMI_BEFORE_RECEIVED_NOWACTIVE):
+					if not hook.before_event(advhdmi_event):
+						_print("Hook '" + str(hookKey) + "' prevents sending HDMI-Cec-signal!")
+						return False
+				else:
+					hook.after_event(advhdmi_event)
+			except:
+				_print("Error while calling Hook " + str(hookKey))
+				print_exc(file=stdout)
+	if advhdmi_event in (ADVHDMI_BEFORE_POWERON, ADVHDMI_BEFORE_POWEROFF, ADVHDMI_BEFORE_RECEIVED_STANDBY, ADVHDMI_BEFORE_RECEIVED_NOWACTIVE):
+		return True
 
 def TimeSpanPresenter(confsection):
 	presenter = [
@@ -212,217 +110,16 @@ def TimeSpanPresenter(confsection):
 	presenter.append(str(timestr))
 	return presenter
 
-class TimeSpanEntryList(MenuList):
-	def __init__(self, list, enableWrapAround = True):
-		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", 20))
-
-	def postWidgetCreate(self, instance):
-		MenuList.postWidgetCreate(self, instance)
-		instance.setItemHeight(30)
-		
-	def buildList(self, entryselect=None):
-		self.list=[]
-		if entryselect == None:
-			try:
-				aktidx = self.l.getCurrentSelectionIndex()
-			except:
-				aktidx = 0
-		else:
-			aktidx = entryselect
-		for e in config.plugins.AdvHdmiCec.Entries:
-			entr = [e]
-			presenter = TimeSpanPresenter(e)
-			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 165, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, presenter[0]))
-			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 175, 0, 165, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, presenter[1]))
-			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 345, 0, 80, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, presenter[2]))
-			entr.append((eListboxPythonMultiContent.TYPE_TEXT, 510, 0, 80, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, presenter[3]))
-			self.list.append(entr)
-		self.l.setList(self.list)
-		if aktidx >= config.plugins.AdvHdmiCec.entriescount.value:
-			aktidx = (config.plugins.AdvHdmiCec.entriescount.value - 1)
-		self.moveToIndex(aktidx)
-
-class TimeSpanListScreen(Screen):
-	skin = """
-		<screen name="adv_hdmi_timespan_list" position="center,center" size="645,400" title="disable chronologically" >
-			<widget name="fromwd" position="5,0" size="165,50" halign="left" font="Regular;21"/>
-			<widget name="towd" position="175,0" size="165,50" halign="left" font="Regular;21"/>
-			<widget name="begin" position="345,0" size="80,50" halign="left" font="Regular;21"/>
-			<widget name="end" position="510,0" size="80,50" halign="left" font="Regular;21"/>
-			<widget name="entrylist" position="5,50" size="635,300" scrollbarMode="showOnDemand"/>
-
-			<widget name="key_red" position="5,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="170,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="green" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_yellow" position="335,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="yellow" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="500,350" zPosition="5" size="140,40" valign="center" halign="center" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap name="red" position="5,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="170,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="335,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="500,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		</screen>"""
-
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.session = session
-		self["fromwd"] = Button(_("From WD"))
-		self["towd"] = Button(_("To WD"))
-		self["begin"] = Button(_("From"))
-		self["end"] = Button(_("To"))
-		self["entrylist"] = TimeSpanEntryList([])
-
-		self["key_red"] = Button(_("Add"))
-		self["key_green"] = Button(_("Close"))
-		self["key_yellow"] = Button(_("Edit"))
-		self["key_blue"] = Button(_("Delete"))
-
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
-		{
-			"ok"    : self.keyOK,
-			"back"  : self.keyClose,
-			"red"   : self.keyAdd,
-			"green" : self.keyClose,
-			"yellow": self.keyEdit,
-			"blue"  : self.keyDelete,
-		}, -1)
-		
-		self._updateList()
-		self.onLayoutFinish.append(self._layoutFinished)
-
-	def _updateList(self, entryselect = None):		
-		self["entrylist"].buildList(entryselect)
-
-	def _layoutFinished(self):
-		self.setTitle(_("Disable HDMI-CEC chronologically"))
-
-	def keyClose(self):
-		self.close(self.session)
-
-	def keyOK(self):
-		self.keyEdit()
-
-	def keyAdd(self):
-		self.session.open(TimeSpanConfigScreen,None,self._updateList)
-
-	def keyEdit(self):
-		try:
-			sel = self["entrylist"].l.getCurrentSelection()[0]
-		except:
-			sel = None
-		if sel is None:
-			return
-		self.session.openWithCallback(self._updateList,TimeSpanConfigScreen,sel)
-
-	def keyDelete(self):
-		try:
-			sel = self["entrylist"].l.getCurrentSelection()[0]
-		except:
-			sel = None
-		if sel is None:
-			return
-		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this HDMI-Cec-Timespan Entry?"))
-
-	def deleteConfirm(self, result):
-		if not result:
-			return
-		sel = self["entrylist"].l.getCurrentSelection()[0]
-		config.plugins.AdvHdmiCec.entriescount.value = config.plugins.AdvHdmiCec.entriescount.value - 1
-		config.plugins.AdvHdmiCec.entriescount.save()
-		config.plugins.AdvHdmiCec.Entries.remove(sel)
-		config.plugins.AdvHdmiCec.Entries.save()
-		config.plugins.AdvHdmiCec.save()
-		configfile.save()
-		self._updateList()
-
-class TimeSpanConfigScreen(Screen, ConfigListScreen):
-	skin = """
-		<screen name="adv_hdmi_timespan_config" position="center,center" size="550,430" title="ignoreit" >
-			<widget name="config" position="10,0" size="530,210" scrollbarMode="showOnDemand" enableWrapAround="1" />
-			<ePixmap pixmap="skin_default/div-h.png" position="0,210" zPosition="1" size="550,2" />
-			<widget source="help" render="Label" position="5,220" size="550,120" font="Regular;21" />
-			
-			<widget source="key_red" render="Label" position="10,380" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget source="key_green" render="Label" position="180,380" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="green" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap name="red" position="10,380" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="180,380" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		</screen>"""
-
-	def __init__(self, session, entry, callbackfnc=None):
-		self.session = session
-		Screen.__init__(self, session)
-
-		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
-		{
-			"red"   : self.keyCancel,
-			"ok"    : self.keySave,
-			"green" : self.keySave,
-			"cancel": self.keyCancel
-		}, -2)
-
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("OK"))
-		self["help"] = StaticText()
-
-		if entry is None:
-			self.newmode = 1
-			self.current = TimeSpanEntryInit()
-		else:
-			self.newmode = 0
-			self.current = entry
-		
-		self.callbackfnc = callbackfnc
-			
-		cfglist = [
-			getConfigListEntry(_("from weekday"), self.current.fromWD, _("From which day of the week, HDMI-Cec should be disabled?")),
-			getConfigListEntry(_("to weekday"), self.current.toWD, _("To what day of the week, HDMI-Cec should be disabled?")),
-			getConfigListEntry(_("from (HH:MI)"), self.current.begin, _("At which time, HDMI-Cec should be disabled?")),
-			getConfigListEntry(_("to (HH:MI)"), self.current.end, _("Until the time at which, HDMI-Cec should be disabled?"))
-		]
-
-		ConfigListScreen.__init__(self, cfglist, session)
-		self["config"].onSelectionChanged.append(self._updateHelp)
-		self.onLayoutFinish.append(self._layoutFinished)
-
-	def _updateHelp(self):
-		cur = self["config"].getCurrent()
-		if cur:
-			self["help"].text = cur[2]
-
-	def _layoutFinished(self):
-		self.setTitle(_("Edit HDMI-Cec-Timespan"))
-
-	def keySave(self):
-		entryselect = None
-		if self.newmode == 1:
-			entryselect = int(config.plugins.AdvHdmiCec.entriescount.value)
-			config.plugins.AdvHdmiCec.entriescount.value = config.plugins.AdvHdmiCec.entriescount.value + 1
-			config.plugins.AdvHdmiCec.entriescount.save()
-			entryselect = int(config.plugins.AdvHdmiCec.entriescount.value) - 1
-		ConfigListScreen.keySave(self)
-		config.plugins.AdvHdmiCec.save()
-		configfile.save()		
-		if self.callbackfnc is not None:
-			self.onClose.append(boundFunction(self.callbackfnc, entryselect))
-		self.close(entryselect)
-
-	def keyCancel(self):
-		if self.newmode == 1:
-			config.plugins.AdvHdmiCec.Entries.remove(self.current)
-		ConfigListScreen.cancelConfirm(self, True)
-
 # functionality
-def sessionstart(reason, **kwargs):
-	global g_AdvHdmi_sessionstarted
-	if reason == 0:
-		g_AdvHdmi_sessionstarted = True
-		
 def autostart(reason, **kwargs):
 	global g_AdvHdmi_sessionstarted
 	if reason == 0:
 		g_AdvHdmi_sessionstarted = True
 
 def main(session, **kwargs):
-	session.open(AdvHdmiCecSetup)
+	global g_AdvHdmi_setup_available
+	if g_AdvHdmi_setup_available:
+		session.open(AdvHdmiCecSetup)
 
 def showinSetup(menuid):
 	if menuid != "system":
@@ -431,9 +128,6 @@ def showinSetup(menuid):
 
 def Plugins(**kwargs):
 	list = [
-		PluginDescriptor(
-			where = PluginDescriptor.WHERE_SESSIONSTART,
-			fnc = sessionstart),
 		PluginDescriptor(
 			where = PluginDescriptor.WHERE_AUTOSTART,
 			fnc = autostart)
@@ -487,17 +181,17 @@ def checkTimespan(lt, begin, end):
 			return False
 		return True
 
-def AdvHdiCecDOIT():
+def AdvHdmiCecDOIT():
 	global g_AdvHdmi_sessionstarted
 	global g_AdvHdmi_fromwebif
 	ret_val = True
 	if config.plugins.AdvHdmiCec.enable.value:
 		if g_AdvHdmi_sessionstarted and config.plugins.AdvHdmiCec.disable_after_enigmastart.value:
-			print "[AdvHdmiCec] prevent sending HDMICec, because of enigmastart"
+			_print("prevent sending HDMICec, because of enigmastart")
 			ret_val = False
 
 		if ret_val and g_AdvHdmi_fromwebif and config.plugins.AdvHdmiCec.disable_from_webif.value:
-			print "[AdvHdmiCec] prevent sending HDMICec, because it was from webif"
+			_print("prevent sending HDMICec, because it was from webif")
 			ret_val = False
 		
 		if ret_val and int(config.plugins.AdvHdmiCec.entriescount.value) > 0:
@@ -506,19 +200,19 @@ def AdvHdiCecDOIT():
 				entr = [e]
 				if config.plugins.AdvHdmiCec.debug.value:
 					presenter = TimeSpanPresenter(e)
-					print "[AdvHdmiCec] Debug: Checking timespan '" + ", ".join( str(x) for x in presenter ) + "'"
+					_print("Debug: Checking timespan '" + ", ".join( str(x) for x in presenter ) + "'")
 				if int(e.fromWD.getValue()) <=  int(lt[6]) \
 					and int(e.toWD.getValue()) >= int(lt[6]) :
 					presenter = TimeSpanPresenter(e)
 					if checkTimespan(lt, e.begin.getValue(), e.end.getValue()):
-						print "[AdvHdmiCec] prevent sending HDMICec, because of timespan '" + ", ".join( str(x) for x in presenter ) + "'"
+						_print("prevent sending HDMICec, because of timespan '" + ", ".join( str(x) for x in presenter ) + "'")
 						ret_val = False
 					else:
-						if config.plugins.AdvHdmiCec.debug.value: print "[AdvHdmiCec] Debug: Local Time is not between " + str(presenter[2]) + " and " + str(presenter[3])
+						if config.plugins.AdvHdmiCec.debug.value: _print("Debug: Local Time is not between " + str(presenter[2]) + " and " + str(presenter[3]))
 				else:
-					if config.plugins.AdvHdmiCec.debug.value: print "[AdvHdmiCec] Debug: Local weekday (" + str(lt[6]) + ") is not between " + str(presenter[0]) + " and " + str(presenter[1])
+					if config.plugins.AdvHdmiCec.debug.value: _print("Debug: Local weekday (" + str(lt[6]) + ") is not between " + str(presenter[0]) + " and " + str(presenter[1]))
 				if not ret_val:
-					if config.plugins.AdvHdmiCec.debug.value: print "[AdvHdmiCec] Debug: Found matching Timespan, exit loop!"
+					if config.plugins.AdvHdmiCec.debug.value: _print("Debug: Found matching Timespan, exit loop!")
 					break
 	g_AdvHdmi_sessionstarted = False
 	g_AdvHdmi_fromwebif = False
@@ -526,21 +220,45 @@ def AdvHdiCecDOIT():
 	return ret_val
 
 # Overwrite CEC-Base
+def Cec__receivedStandby(self):
+	if config.plugins.cec.receivepower.value:
+		from Screens.Standby import Standby, inStandby
+		if not inStandby and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND and self.session.in_exec:
+			if callHook(ADVHDMI_BEFORE_RECEIVED_STANDBY):
+				self.session.open(Standby)
+				callHook(ADVHDMI_AFTER_RECEIVED_STANDBY)
+
+def Cec__receivedNowActive(self):
+	if config.plugins.cec.receivepower.value:
+		from Screens.Standby import inStandby
+		if inStandby != None:
+			if callHook(ADVHDMI_BEFORE_RECEIVED_NOWACTIVE):
+				inStandby.Power()
+				callHook(ADVHDMI_AFTER_RECEIVED_NOWACTIVE)
+
 def Cec_powerOn(self):
 	global g_AdvHdmi_initalized
-	if config.plugins.cec.sendpower.value and AdvHdiCecDOIT():
-		g_AdvHdmi_initalized = True
-		print "[AdvHdmiCec] power on"
-		hdmi_cec.otp_source_enable()
+	if config.plugins.cec.sendpower.value:
+		if self.session.shutdown:
+			self.idle_to_standby = True
+		else:
+			if config.plugins.AdvHdmiCec.enable_power_on.value and AdvHdmiCecDOIT():
+				g_AdvHdmi_initalized = True
+				if callHook(ADVHDMI_BEFORE_POWERON):
+					_print("power on")
+					hdmi_cec.otp_source_enable()
+					callHook(ADVHDMI_AFTER_POWERON)
 
 def Cec_powerOff(self):
 	global g_AdvHdmi_initalized
-	if config.plugins.cec.sendpower.value and AdvHdiCecDOIT():
-		print "[AdvHdmiCec] power off"
-		if not g_AdvHdmi_initalized:
-			print "[AdvHdmiCec] Workaround: enable Hdmi-Cec-Source (^=poweron)"
-			hdmi_cec.otp_source_enable()
-		hdmi_cec.ss_standby()
+	if config.plugins.cec.sendpower.value and config.plugins.AdvHdmiCec.enable_power_off.value and AdvHdmiCecDOIT():
+		if callHook(ADVHDMI_BEFORE_POWEROFF):
+			_print("power off")
+			if not g_AdvHdmi_initalized:
+				_print("Workaround: enable Hdmi-Cec-Source (^=poweron)")
+				hdmi_cec.otp_source_enable()
+			hdmi_cec.ss_standby()
+			callHook(ADVHDMI_AFTER_POWEROFF)
 
 # Overwrite WebIf
 def RemoteControl_handleCommand(self, cmd):
@@ -554,13 +272,14 @@ def PowerState_handleCommand(self, cmd):
 	g_AdvHdmi_fromwebif = True
 	self.cmd = cmd
 
-initTimeSpanEntryList()
 g_AdvHdmi_sessionstarted = False
 g_AdvHdmi_fromwebif = False
 g_AdvHdmi_initalized = False
 
 if config.plugins.AdvHdmiCec.enable.value:
-	print "[AdvHdmiCec] enabled"
+	_print("enabled")
+	Cec.__receivedStandby = Cec__receivedStandby
+	Cec.__receivedNowActive = Cec__receivedNowActive
 	Cec.powerOn = Cec_powerOn
 	Cec.powerOff = Cec_powerOff
 	if g_AdvHdmi_webif_available:

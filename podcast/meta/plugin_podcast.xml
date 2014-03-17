@@ -3,7 +3,7 @@
                     <tag type="Multimedia" />
 	  </prerequisites>
           <info>
-                    <author>AliAbdul</author>
+                    <author>Bengt Giger</author>
                     <name>Podcast</name>
                     <packagename>enigma2-plugin-extensions-podcast</packagename>
                     <shortdescription>Stream podcasts</shortdescription>

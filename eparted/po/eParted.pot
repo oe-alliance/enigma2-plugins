@@ -1,0 +1,118 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: eParted(POT)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-26 10:09-0000\n"
+"PO-Revision-Date: 2014-02-26 10:11-0000\n"
+"Last-Translator: cmikula\n"
+"Language-Team: - <cmikula>\n"
+"Language: de_AT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _(;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.3\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+#: ../src/plugin.py:10
+msgid "eParted"
+msgstr ""
+
+#: ../src/plugin.py:10
+msgid "creating and manipulating partition tables"
+msgstr ""
+
+#: ../src/eparted.py:102
+#, python-format
+msgid "Error command '%s'"
+msgstr ""
+
+#: ../src/eparted.py:172
+msgid "partition(s)"
+msgstr ""
+
+#: ../src/eparted.py:190
+msgid "add partition"
+msgstr ""
+
+#: ../src/eparted.py:214
+#, python-format
+msgid "size in %s (max %d %s):"
+msgstr ""
+
+#: ../src/eparted.py:215
+msgid "filesystem:"
+msgstr ""
+
+#: ../src/eparted.py:218
+msgid "cancel"
+msgstr ""
+
+#: ../src/eparted.py:219
+msgid "ok"
+msgstr ""
+
+#: ../src/eparted.py:310
+msgid "Nr"
+msgstr ""
+
+#: ../src/eparted.py:311
+#: ../src/eparted.py:520
+msgid "Start"
+msgstr ""
+
+#: ../src/eparted.py:312
+msgid "End"
+msgstr ""
+
+#: ../src/eparted.py:313
+msgid "Size"
+msgstr ""
+
+#: ../src/eparted.py:314
+msgid "Type"
+msgstr ""
+
+#: ../src/eparted.py:327
+msgid "add"
+msgstr ""
+
+#: ../src/eparted.py:332
+msgid "delete"
+msgstr ""
+
+#: ../src/eparted.py:337
+msgid "free"
+msgstr ""
+
+#: ../src/eparted.py:428
+#, python-format
+msgid "create partition %s"
+msgstr ""
+
+#: ../src/eparted.py:444
+#, python-format
+msgid "make filesystem '%s' on partition %s (%d %s)"
+msgstr ""
+
+#: ../src/eparted.py:453
+#, python-format
+msgid "delete partition %s"
+msgstr ""
+
+#: ../src/eparted.py:486
+#: ../src/eparted.py:518
+msgid "execute"
+msgstr ""
+
+#: ../src/eparted.py:580
+#: ../src/eparted.py:586
+msgid "quit"
+msgstr ""
+
+#: ../src/eparted.py:594
+msgid "Please Wait"
+msgstr ""
+

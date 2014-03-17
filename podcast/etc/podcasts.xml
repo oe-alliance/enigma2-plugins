@@ -8,16 +8,6 @@
 			<podcast name="Bericht aus Berlin" url="http://www.tagesschau.de/export/video-podcast/bab/" />
 			<podcast name="Wochenspiegel" url="http://www.tagesschau.de/export/video-podcast/wochenspiegel/" />
 		</provider>
-		<provider name="Pro 7" >
-			<podcast name="Galileo - 100 Sekunden" url="http://prosieben-galileo-100sek.feedplace.de/rss+all" />
-			<podcast name="Switch reloaded" url="http://prosieben-switch-reloaded.feedplace.de/rss+all" />
-			<podcast name="Galileo" url="http://pro7-galileo.feedplace.de/rss+all" />
-			<podcast name="Blockbuster TV" url="http://pro7-blockbuster-tv.feedplace.de/rss+all" />
-			<podcast name="SevenGames TV" url="http://pro7-sevengames.feedplace.de/rss+all" />
-			<podcast name="taff" url="http://pro7-taff.feedplace.de/rss" />
-			<podcast name="SAM" url="http://pro7-sam.feedplace.de/rss" />
-			<podcast name="POPSTARS - Just 4 Girls!" url="http://pro7-popstars.feedplace.de/rss" />
-		</provider>
 		<provider name="rbb Radio" >
 			<podcast name="Blue Moon" url="http://www.fritz.de/podcasts/sendungen/Blue_Moon.feed.podcast.xml" />
 		</provider>
@@ -38,13 +28,14 @@
 	</language>
 	<language name="Swiss" >
 		<provider name="SF TV" >
-			<podcast name="DOK" url="http://feeds.sf.tv/podcast/dok" />
-			<podcast name="Aeschbacher" url="http://feeds.sf.tv/podcast/aeschbacher" />
-			<podcast name="Giaccobbo / Mueller" url="http://feeds.sf.tv/podcast/giacobbomueller" />
-			<podcast name="Einstein" url="http://feeds.sf.tv/podcast/einstein" />
+			<podcast name="DOK" url="http://www.srf.ch/podcasts/feeds/video/dok-hd.xml" />
+			<podcast name="Aeschbacher" url="http://www.srf.ch/podcasts/feeds/video/aeschbacher-hd.xml" />
+			<podcast name="Giaccobbo / Mueller" url="http://www.srf.ch/podcasts/feeds/video/giacobbomueller-hd.xml" />
+			<podcast name="Einstein" url="http://www.srf.ch/podcasts/feeds/video/einstein-hd.xml" />
 			<podcast name="ECO" url="http://feeds.sf.tv/podcast/eco" />
+			<podcast name="Kassensturz" url="http://www.srf.ch/podcasts/feeds/video/kassensturz-hd.xml" />
 			<podcast name="Rundschau" url="http://feeds.sf.tv/podcast/rundschau" />
-			<podcast name="Reporter" url="http://feeds.sf.tv/podcast/reporter" />
+			<podcast name="Reporter" url="http://www.srf.ch/podcasts/feeds/video/reporter-hd.xml" />
 			<podcast name="SF Unterwegs" url="http://feeds.sf.tv/podcast/sfunterwegs" />
 			<podcast name="SF bi de Luet" url="http://feeds.sf.tv/podcast/sfbideluet" />
 		</provider> 

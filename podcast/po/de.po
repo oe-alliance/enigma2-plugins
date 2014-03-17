@@ -2,101 +2,101 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Podcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2014-03-02 20:47+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Nabil Hanna <nabil1978@web.de>\n"
-"Language-Team: Nabil Hanna <nabil1978@web.de>\n"
-"Language: \n"
+"Last-Translator: Bengt Giger <bengt.giger@id.ethz.ch>\n"
+"Language-Team: Bengt Giger <bengt.giger@id.ethz.ch>\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
 "X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.6.4\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/"
 "enigma2/python/Plugins/Extensions/Podcast\n"
+"X-Poedit-SearchPath-1: ..\\src\n"
 
-msgid " (Audio)"
-msgstr " (Audio)"
+#: ..\src/plugin.py:62
+msgid "Stop playing this movie?"
+msgstr "Abspielen beenden?"
 
-msgid " (Video)"
-msgstr " (Video)"
+#: ..\src/plugin.py:74 ..\src/plugin.py:157 ..\src/plugin.py:208
+#: ..\src/plugin.py:312 ..\src/plugin.py:342 ..\src/plugin.py:371
+#: ..\src/plugin.py:417 ..\src/plugin.py:465 ..\src/plugin.py:518
+#: ..\src/plugin.py:579 ..\src/plugin.py:612
+msgid "Podcast"
+msgstr "Podcast"
 
-msgid "Buffer device:"
-msgstr "Puffergerät:"
+#: ..\src/plugin.py:86
+msgid "delete"
+msgstr "lösche"
 
-msgid "Buffer file handling:"
-msgstr "Behandlung der Pufferdatei:"
+#: ..\src/plugin.py:86
+msgid "keep on device"
+msgstr "behalte auf Gerät"
 
-msgid "Buffer:"
-msgstr "Puffer:"
+#: ..\src/plugin.py:86
+msgid "ask me"
+msgstr "frage mich"
 
-msgid "Delete this movie?"
-msgstr "Diesen Film löschen?"
-
+#: ..\src/plugin.py:169
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Film wird heruntergeladen: %s"
 
-msgid "Error getting categories"
-msgstr "Fehler beim Ermitteln der Kategorien"
+#: ..\src/plugin.py:254
+msgid "Delete this movie?"
+msgstr "Diesen Film löschen?"
 
-msgid "Error getting episodes"
-msgstr "Fehler beim Ermitteln der Episoden"
-
-msgid "Error getting genres"
-msgstr "Fehler beim Ermitteln des Genres"
-
+#: ..\src/plugin.py:296
 msgid "Error getting movies"
 msgstr "Fehler beim Ermitteln der Filme"
 
-msgid "Error getting podcast url"
-msgstr "Fehler beim Ermitteln der podcast url"
-
-msgid "Error getting podcasts"
-msgstr "Fehler beim Ermitteln der Podcasts"
-
-msgid "Error getting rss feed"
-msgstr "Fehler beim Ermitteln des rss-Feeds"
-
+#: ..\src/plugin.py:304
 msgid "Length"
 msgstr "Länge"
 
-msgid "Podcast"
-msgstr "Podcast"
-
-msgid "Save"
-msgstr "Speichern"
-
-msgid "Select"
-msgstr "Selektiere"
-
-msgid "Stop playing this movie?"
-msgstr ""
-
+#: ..\src/plugin.py:304
 msgid "Type"
 msgstr "Typ"
 
-msgid "ask me"
-msgstr "frage mich"
+#: ..\src/plugin.py:430
+msgid "No Feedly configuration"
+msgstr "Keine Konfiguration für Feedly"
 
+#: ..\src/plugin.py:470
+msgid "Select"
+msgstr "Selektiere"
+
+#: ..\src/plugin.py:523
+msgid "Save"
+msgstr "Speichern"
+
+#: ..\src/plugin.py:535
+msgid "Buffer:"
+msgstr "Puffer:"
+
+#: ..\src/plugin.py:536
+msgid "Buffer device:"
+msgstr "Puffergerät:"
+
+#: ..\src/plugin.py:537
+msgid "Buffer file handling:"
+msgstr "Behandlung der Pufferdatei:"
+
+#: ..\src/plugin.py:585
+msgid "Help"
+msgstr "Hilfe"
+
+#: ..\src/plugin.py:590 ..\src/plugin.py:596
+msgid "from xml"
+msgstr "aus XML"
+
+#: ..\src/plugin.py:591 ..\src/plugin.py:598
+msgid "Feedly OPML"
+msgstr ""
+
+#: ..\src/plugin.py:592
 msgid "configuration"
 msgstr "Konfiguration"
 
-msgid "delete"
-msgstr "lösche"
-
-msgid "from xml"
-msgstr "aus xml"
-
-msgid "keep on device"
-msgstr "behalte auf Gerät"
-
-msgid "podcast.com"
-msgstr "podcast.com"
-
-msgid "podcast.de"
-msgstr "podcast.de"
-
-#~ msgid "Date"
-#~ msgstr "Datum"

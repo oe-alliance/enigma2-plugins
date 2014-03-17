@@ -1,0 +1,7 @@
+Risulta possibile definire un elenco podcast personalizzato utilizzando diverse modalità.
+
+Copiare il file /etc/podcast/podcast.xml, rinominarlo podcast_user.xml, così che non venga sovrascritto dagli aggiornamenti. Modificare il file secondo le proprie necessità.
+
+E' inoltre possibile sostituire il contenuto del file podcast_user.xml con una URL che punti a un file remoto (ad es. archiviato su  Wuala, Dropbox o servizi simili). Ciò permetterà di aggiornare il file senza dover ulteriormente intervenire sul decoder.
+
+In alternativa è anche possibile utilizzare un account su feedly.com. Creare una raccolta, denominarla "PodcastPlugin" e assegnare questa etichetta ad ogni podcast che si desideri visualizzare sul proprio ricevitore. Selezionare poi "Organize" e di seguito  "Save as OPML": un click sulla voce farà apparire un link. Eseguire il download del file generato e salvarlo in /etc/podcast/ come "feedly.opml" , oppure copiare la URL, incollarla in un file e salvarlo come etc/podcast/feedly.opml. Utilizzando questa modalità  sarà possibile modificare i feed secondo le proprie preferenze su Feedly.com: tutto ciò che verrà etichettato come "PodcastPlugin" sarà immediatamente disponibile sul proprio dispositivo.

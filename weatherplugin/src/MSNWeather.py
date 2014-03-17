@@ -30,7 +30,7 @@ from enigma import eEnv
 from os import path as os_path, mkdir as os_mkdir, remove as os_remove, listdir as os_listdir
 from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_SKIN
-
+from urllib import quote as urllib_quote
 
 class WeatherIconItem:
 	def __init__(self, url = "", filename = "", index = -1, error = False):
@@ -118,11 +118,13 @@ class MSNWeather:
 		language = config.osd.language.value.replace("_","-")
 		if language == "en-EN": # hack
 			language = "en-US"
+		elif language == "no-NO": # hack
+			language = "nn-NO"
 		self.city = city
 		self.callback = callback
 		self.callbackShowIcon  = callbackShowIcon
 		self.callbackAllIconsDownloaded = callbackAllIconsDownloaded
-		url = "http://weather.service.msn.com/data.aspx?weadegreetype=%s&culture=%s&wealocations=%s" % (degreetype, language, locationcode)
+		url = "http://weather.service.msn.com/data.aspx?weadegreetype=%s&culture=%s&wealocations=%s" % (degreetype, language, urllib_quote(locationcode))
 		getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
 		
 	def getDefaultWeatherData(self, callback = None, callbackAllIconsDownloaded = None):

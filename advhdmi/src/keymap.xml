@@ -1,6 +1,7 @@
 <keymap>
 	<map context="AdvHdmiConfigActions">
 		<key id="KEY_YELLOW" mapto="yellowshort" flags="b" />
+		<key id="KEY_INFO" mapto="infoshort" flags="b" />
 		<key id="KEY_CHANNELUP" mapto="nextBouquet" flags="m" />
 		<key id="KEY_CHANNELDOWN" mapto="prevBouquet" flags="m" />
 	</map>

@@ -259,7 +259,7 @@ class YTTrailer:
 		else:
 			tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
 		for fmtstring in tmp_fmtUrlDATA:
-			fmturl = fmtid = fmtsig = ""
+			fmturl = fmtid = ""
 			if videoinfo.has_key('url_encoded_fmt_stream_map'):
 				try:
 					for arg in fmtstring.split('&'):
@@ -272,13 +272,11 @@ class YTTrailer:
 								fmtid = value
 							elif key == 'url':
 								fmturl = value
-							elif key == 'sig':
-								fmtsig = value
 
-					if fmtid != "" and fmturl != "" and fmtsig != ""  and VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
-						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl), 'fmtsig': fmtsig }
-						fmt_infomap[int(fmtid)] = "%s&signature=%s" %(unquote_plus(fmturl), fmtsig)
-					fmturl = fmtid = fmtsig = ""
+					if fmtid != "" and fmturl != "" and VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
+						fmt_infomap[int(fmtid)] = "%s" %(unquote_plus(fmturl))
+					fmturl = fmtid = ""
 
 				except:
 					print "error parsing fmtstring:",fmtstring
@@ -299,7 +297,7 @@ class YTTrailer:
 					if result[80:88] == rnd:
 						print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
 						best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
-						video_url = "%s&signature=%s" %(best_video['fmturl'].split(';')[0], best_video['fmtsig'])
+						video_url = "%s" %(best_video['fmturl'].split(';')[0])
 						print "[YTTrailer] found best available video url:",video_url
 
 		return video_url

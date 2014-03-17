@@ -438,46 +438,70 @@ class MyTubeFeedEntry():
 		except (URLError, HTTPException, socket.error), err:
 			print "[MyTube] Error: Unable to retrieve watchpage - Error code: ", str(err)
 			return video_url
-		
-		flashvars = self.extractFlashVars(result, 0)
-		if not flashvars.has_key(u"url_encoded_fmt_stream_map"):
-			return video_url
-		
-		for url_desc in flashvars[u"url_encoded_fmt_stream_map"].split(u","):
-			url_desc_map = parse_qs(url_desc)
-			if not (url_desc_map.has_key(u"url") or url_desc_map.has_key(u"stream")):
-				continue
-			
-			key = int(url_desc_map[u"itag"][0])
-			url = u""
-			
-			if url_desc_map.has_key(u"url"):
-				url = urllib.unquote(url_desc_map[u"url"][0])
-			elif url_desc_map.has_key(u"conn") and url_desc_map.has_key(u"stream"):
-				url = urllib.unquote(url_desc_map[u"conn"][0])
-				if url.rfind("/") < len(url) -1:
-					url = url + "/"
-				url = url + urllib.unquote(url_desc_map[u"stream"][0])
-			elif url_desc_map.has_key(u"stream") and not url_desc_map.has_key(u"conn"):
-				url = urllib.unquote(url_desc_map[u"stream"][0])
-			
-			if url_desc_map.has_key(u"sig"):
-				url = url + u"&signature=" + url_desc_map[u"sig"][0]
-			elif url_desc_map.has_key(u"s"):
-				sig = url_desc_map[u"s"][0]
-				flashvars = self.extractFlashVars(result, 1)
-				js = flashvars[u"js"]
-				url = url + u"&signature=" + decryptor.decryptSignature(sig, js)
-			
+
+		# Get video info
+		for el in ['&el=embedded', '&el=detailpage', '&el=vevo', '']:
+			info_url = ('http://www.youtube.com/get_video_info?&video_id=%s%s&ps=default&eurl=&gl=US&hl=en' % (video_id, el))
+			request = Request(info_url, None, std_headers)
 			try:
-				links[VIDEO_FMT_PRIORITY_MAP[str(key)]] = url
-			except KeyError:
-				print 'skipping',key,'fmt not in priority videos'
-				continue
-		try:
-			return links[sorted(links.iterkeys())[0]].encode('utf-8')
-		except (KeyError,IndexError):
-			return None
+				infopage = urlopen2(request).read()
+				videoinfo = parse_qs(infopage)
+				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
+					break
+			except (URLError, HTTPException, socket.error), err:
+				print "[MyTube] Error: unable to download video infopage",str(err)
+				return video_url
+
+		if ('url_encoded_fmt_stream_map' or 'fmt_url_map') not in videoinfo:
+			# Attempt to see if YouTube has issued an error message
+			if 'reason' not in videoinfo:
+				print '[MyTube] Error: unable to extract "fmt_url_map" or "url_encoded_fmt_stream_map" parameter for unknown reason'
+			else:
+				reason = unquote_plus(videoinfo['reason'][0])
+				print '[MyTube] Error: YouTube said: %s' % reason.decode('utf-8')
+			return video_url
+
+		video_fmt_map = {}
+		fmt_infomap = {}
+		if videoinfo.has_key('url_encoded_fmt_stream_map'):
+			tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',')
+		else:
+			tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
+		for fmtstring in tmp_fmtUrlDATA:
+			fmturl = fmtid = ""
+			if videoinfo.has_key('url_encoded_fmt_stream_map'):
+				try:
+					for arg in fmtstring.split('&'):
+						if arg.find('=') >= 0:
+							key, value = arg.split('=')
+							if key == 'itag':
+								if len(value) > 3:
+									value = value[:2]
+								fmtid = value
+							elif key == 'url':
+								fmturl = value
+
+					if fmtid != "" and fmturl != "" and VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+						video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
+						fmt_infomap[int(fmtid)] = "%s" %(unquote_plus(fmturl))
+					fmturl = fmtid = ""
+
+				except:
+					print "error parsing fmtstring:",fmtstring
+
+			else:
+				(fmtid,fmturl) = fmtstring.split('|')
+			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid) and fmtid != "":
+				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
+				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
+		print "[MyTube] got",sorted(fmt_infomap.iterkeys())
+		if video_fmt_map and len(video_fmt_map):
+			print "[MyTube] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+			best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
+			video_url = "%s" %(best_video['fmturl'].split(';')[0])
+			print "[MyTube] found best available video url:",video_url
+
+		return video_url
 
 	def getRelatedVideos(self):
 		print "[MyTubeFeedEntry] getRelatedVideos()"
