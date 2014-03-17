@@ -1,2 +1,2 @@
 Description: read audio CD-Text or query CDDB for album and track info
-Depends: enigma2, cdtextinfo, task-opendreambox-cdplayer
+Depends: enigma2, cdtextinfo
