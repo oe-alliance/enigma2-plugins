@@ -310,6 +310,10 @@ emailclient/meta/Makefile
 emailclient/po/Makefile
 emailclient/src/Makefile
 
+emission/Makefile
+emission/meta/Makefile
+emission/src/Makefile
+
 eparted/Makefile
 eparted/meta/Makefile
 eparted/po/Makefile
