@@ -23,6 +23,7 @@ externalChildren = []
 import mimetypes
 mimetypes.add_type('text/x-component', '.htc')
 mimetypes.add_type('text/cache-manifest', '.appcache')
+mimetypes.add_type('video/MP2T', '.ts')
 static.File.contentTypes = static.loadMimeTypes()
 
 if hasattr(static.File, 'render_GET'):

@@ -35,11 +35,9 @@ class FileStreamer(resource.Resource):
 				return file.render_GET(request)
 
 			else:
-				request.setResponseCode(http.NOT_FOUND)
-				return "file '%s' was not found" %(dir + filename)
+				return resource.NoResource(message="file '%s' was not found" %(dir + filename)).render(request)
 		else:
-			request.setResponseCode(http.OK)
-			return "no file given with file=???"
+			return resource.NoResource(message="no file given with file={filename}").render(request)
 
 		return server.NOT_DONE_YET
 
