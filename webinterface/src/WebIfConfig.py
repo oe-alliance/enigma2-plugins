@@ -1,6 +1,6 @@
 Version = '$Header$';
 
-from __init__ import _
+from __init__ import *
 
 from enigma import eListboxPythonMultiContent, gFont
 from Screens.Screen import Screen
