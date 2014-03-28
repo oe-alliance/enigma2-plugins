@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-23 12:04+0100\n"
-"PO-Revision-Date: 2014-01-10 19:26+0100\n"
-"Last-Translator: koivo <koivo@hdfreaks.cc>\n"
+"POT-Creation-Date: 2014-03-28 15:02+0100\n"
+"PO-Revision-Date: 2014-03-28 20:12+0100\n"
+"Last-Translator: Ralf Biedermann <ralf.biedermann@rbsoft.de>\n"
 "Language-Team: none\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ../src\n"
 "X-Poedit-SearchPath-1: ../src/webinterface\n"
 
@@ -48,8 +48,14 @@ msgstr "VPS aktivieren"
 msgid "Add"
 msgstr "Hinzufügen"
 
+msgid "Add filters"
+msgstr "Neue Filter"
+
 msgid "Add new AutoTimer"
 msgstr "Neuen AutoTimer hinzufügen"
+
+msgid "Add services"
+msgstr "Sender hinzufügen"
 
 msgid "Add similar timer on conflict"
 msgstr "Bei Konflikt alternativen Timer hinzufügen"
@@ -63,6 +69,9 @@ msgstr "Umschalt-Timer anstelle von Aufnahme-Timern erstellen?"
 msgid "After event"
 msgstr "Nach der Aufnahme"
 
+msgid "All channels"
+msgstr "Alle Sender"
+
 msgid "All non-repeating timers"
 msgstr "Alle sich nicht Wiederholenden"
 
@@ -71,6 +80,9 @@ msgstr "Verbleibende Anzahl Aufnahmen"
 
 msgid "Any service/recording"
 msgstr "Jeder Sender / jede Aufnahme"
+
+msgid "Any time"
+msgstr "Jede Zeit"
 
 msgid "Auto Timers"
 msgstr "Auto Timer"
@@ -165,6 +177,9 @@ msgstr "Zielverzeichnis wählen"
 msgid "Classic"
 msgstr "Klassisch"
 
+msgid "Close"
+msgstr "Schließen"
+
 msgid "Close and forget changes"
 msgstr "Schließen ohne Speichern der Änderungen"
 
@@ -179,6 +194,9 @@ msgstr "Gratulation"
 
 msgid "Control recording completely by service"
 msgstr "Aufnahme vollständig durch den Sender steuern lassen"
+
+msgid "Couldn't load config file!"
+msgstr "Konfigurationsdatei kann nicht geladen werden!"
 
 msgid "Create a new AutoTimer."
 msgstr "Erzeuge einen neuen Auto Timer."
@@ -232,11 +250,17 @@ msgstr "AutoTimer Sender bearbeiten"
 msgid "Edit Timers and scan for new Events"
 msgstr "Automatisch Aufnahmen programmieren"
 
+msgid "Edit filters"
+msgstr "Filter bearbeiten"
+
 msgid "Edit new timer defaults"
 msgstr "Voreinstellungen neuer Timer bearbeiten"
 
 msgid "Edit selected AutoTimer"
 msgstr "Markierten AutoTimer bearbeiten"
+
+msgid "Edit services"
+msgstr "Sender bearbeiten"
 
 msgid "Editing"
 msgstr "Bearbeiten"
@@ -279,6 +303,9 @@ msgstr "Ende der Zeitspanne"
 
 msgid "End of timespan"
 msgstr "Ende der Zeitspanne"
+
+msgid "Everyday"
+msgstr "Jeder Tag"
 
 msgid "Exact match"
 msgstr "Exakter Treffer"
@@ -325,11 +352,30 @@ msgstr ""
 "%d Konflikte gefunden,\n"
 "%d alternative Timer hinzugefügt."
 
+#, python-format
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and\n"
+"%d modified,\n"
+"%d conflicts encountered,\n"
+"%d unchanged,\n"
+"%d similars added."
+msgstr ""
+"Insgesamt %d passende Sendungen gefunde.\n"
+"%d Timer wurden hinzugefügt und\n"
+"%d Timer wurden modifiziert,\n"
+"%d Konflikte gefunden,\n"
+"%d unverändert,\n"
+"%d Ähnliche hinzugefügt."
+
 msgid "Frequently asked questions"
 msgstr "Häufig gestellte Fragen"
 
 msgid "Frequently asked questions about the AutoTimer"
 msgstr "Oft gestellte Fragen über AutoTimer"
+
+msgid "Fri"
+msgstr "Frei"
 
 msgid "Friday"
 msgstr "Freitag"
@@ -350,13 +396,16 @@ msgstr ""
 "Falls ein Timer-Konflikt auftritt sucht AutoTimer nach einer gleichen "
 "Sendung zu anderer Zeit und fügt sie hinzu."
 
+msgid "If enabled, the polling will be skipped if a recording is in progress."
+msgstr "Wenn aktiviert wird die Abfrage bei laufenden Aufnahmen übersprungen."
+
 #, python-format
 msgid ""
 "If this is enabled an existing timer will also be considered recording an "
-"event if it records at least 80%% of the it."
+"event if it records at least 80% of the it."
 msgstr ""
-"Ist dies aktiv, so wird ein bestehender Timer ab einer Schwelle von 80%% "
-"übereinstimmender Sendezeit einer Sendung zugeordnet."
+"Wenn aktiviert wird ein vorhandener Timer als übereinstimmend angenommen "
+"wenn mindestens 80% der Zeit stimmen."
 
 msgid ""
 "If this is selected, the name of the respective AutoTimer will be added as a "
@@ -455,6 +504,9 @@ msgstr ""
 msgid "Modify existing timers"
 msgstr "Ändere bestehende Timer"
 
+msgid "Mon"
+msgstr "Mo"
+
 msgid "Monday"
 msgstr "Montag"
 
@@ -522,9 +574,6 @@ msgstr "Abfrage nur in standby"
 
 msgid "Open Context Menu"
 msgstr "Öffne Kontext-Menü"
-
-msgid "Override found with alternative service"
-msgstr "Sendung durch Alternative ersetzen"
 
 msgid "Please provide a Text to match"
 msgstr "Bitte zu findenden Text eingeben"
@@ -626,6 +675,9 @@ msgstr "\"Nach dem Event\" nur in einem bestimmten Zeitraum setzen?"
 msgid "Restrict to events on certain dates"
 msgstr "Auf bestimmtes Datum beschränken"
 
+msgid "Sat"
+msgstr "Sa"
+
 msgid "Saturday"
 msgstr "Samstag"
 
@@ -712,11 +764,20 @@ msgstr "Benachrichtigung bei Konflikten anzeigen"
 msgid "Show notification on similars"
 msgstr "Benachrichtigung über Alternativ-Timer anzeigen"
 
+msgid "Skip poll during records"
+msgstr "Überspringe Prüfung bei laufenden Aufnahmen"
+
 msgid "Sort AutoTimer"
 msgstr "Sortiere AutoTimer"
 
 msgid "Sort Time"
 msgstr "Sortiere nach Zeit"
+
+msgid "Startup delay (in min)"
+msgstr "Einschaltverzögerung (in Minuten)"
+
+msgid "Sun"
+msgstr "Son"
 
 msgid "Sunday"
 msgstr "Sonntag"
@@ -875,6 +936,13 @@ msgstr ""
 "einer erfolgten Suche eine neue gestartet wird."
 
 msgid ""
+"This is the delay in minutes that the AutoTimer will wait on initial launch "
+"to not delay enigma2 startup time."
+msgstr ""
+"Die ist eine Verzögerung die AutoTimer beim ersten Start wartet umd die "
+"Startzeit von Enigma2 nicht zu verzögern."
+
+msgid ""
 "This is what will be looked for in event titles. Note that looking for e.g. "
 "german umlauts can be tricky as you have to know the encoding the channel "
 "uses."
@@ -911,6 +979,9 @@ msgstr ""
 "Sendung mit einem bestehenden Timer kollidiert, kann dieser als inaktiv "
 "hinzugefügt werden."
 
+msgid "Thur"
+msgstr "Do"
+
 msgid "Thursday"
 msgstr "Donnerstag"
 
@@ -933,6 +1004,9 @@ msgstr "Titel und Kurzbeschreibung"
 
 msgid "Title and all descriptions"
 msgstr "Titel und alle Beschreibungen"
+
+msgid "Tue"
+msgstr "Die"
 
 msgid "Tuesday"
 msgstr "Dienstag"
@@ -958,6 +1032,12 @@ msgstr ""
 
 msgid "Use a custom location"
 msgstr "Angepasstes Aufnahmeverzeichnis"
+
+msgid "Use automatic selection of alternates."
+msgstr "Benutze automatische Wahl von Alternativen."
+
+msgid "Wed"
+msgstr "Mi"
 
 msgid "Wednesday"
 msgstr "Mittwoch"
@@ -1011,11 +1091,11 @@ msgstr ""
 "Timer mit gleicher Beschreibung in der Timer-Liste existiert."
 
 msgid ""
-"With this option enabled the channel to record on can be changed to a "
-"alternative service it is restricted to."
+"With this option enabled the channel to record will be selected automaticliy "
+"using your list of alternates."
 msgstr ""
-"Wenn diese Option aktiv ist, kann der Sender auf eine \"Alternative\" "
-"geändert werden, wenn dieser als Beschränkung hinzugefügt wurde."
+"Wenn aktiviert so wird der Sender für eine Aufnahme automatisch aus den "
+"Alternativen gewählt."
 
 msgid ""
 "With this option you can restrict the AutoTimer to a certain amount of "
@@ -1112,12 +1192,6 @@ msgstr "AutoTimer hinzufügen"
 msgid "add AutoTimer..."
 msgstr "AutoTimer hinzufügen..."
 
-msgid "Add filters"
-msgstr "Neue Filter"
-
-msgid "add services"
-msgstr "Neue Sender"
-
 msgid "auto"
 msgstr "automatisch"
 
@@ -1133,9 +1207,6 @@ msgstr "erzwinge Groß- und Kleinschreibung"
 msgid "config changed."
 msgstr "Konfiguration wurde geändert"
 
-msgid "delete"
-msgstr "Löschen"
-
 msgid "description match"
 msgstr "Beschreibung übereinstimmung"
 
@@ -1144,12 +1215,6 @@ msgstr "deaktiviert"
 
 msgid "do nothing"
 msgstr "nichts"
-
-msgid "edit filters"
-msgstr "Filter bearbeiten"
-
-msgid "Edit services"
-msgstr "Sender bearbeiten"
 
 msgid "enable"
 msgstr "aktiviert"
@@ -1203,6 +1268,16 @@ msgstr "umschalten"
 #~ msgid "AutoTimer overview"
 #~ msgstr "AutoTimer Übersicht"
 
+#~ msgid ""
+#~ "If this is enabled an existing timer will also be considered recording an "
+#~ "event if it records at least 80%% of the it."
+#~ msgstr ""
+#~ "Ist dies aktiv, so wird ein bestehender Timer ab einer Schwelle von 80%% "
+#~ "übereinstimmender Sendezeit einer Sendung zugeordnet."
+
+#~ msgid "Override found with alternative service"
+#~ msgstr "Sendung durch Alternative ersetzen"
+
 #~ msgid "Poll Interval (in h)"
 #~ msgstr "Abfrageintervall (in Stunden)"
 
@@ -1215,3 +1290,19 @@ msgstr "umschalten"
 #~ msgstr ""
 #~ "Das ist die Verzögerung in Stunden, die der AutoTimer wartet, bis nach "
 #~ "einer erfolgten Suche eine neue gestartet wird."
+
+#~ msgid ""
+#~ "With this option enabled the channel to record on can be changed to a "
+#~ "alternative service it is restricted to."
+#~ msgstr ""
+#~ "Wenn diese Option aktiv ist, kann der Sender auf eine \"Alternative\" "
+#~ "geändert werden, wenn dieser als Beschränkung hinzugefügt wurde."
+
+#~ msgid "add services"
+#~ msgstr "Neue Sender"
+
+#~ msgid "delete"
+#~ msgstr "Löschen"
+
+#~ msgid "edit filters"
+#~ msgstr "Filter bearbeiten"
