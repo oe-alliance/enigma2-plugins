@@ -28,11 +28,11 @@ msgstr "Arrestare la riproduzione?"
 #: .../enigma2-plugins/podcast/src/plugin.py:312
 #: .../enigma2-plugins/podcast/src/plugin.py:342
 #: .../enigma2-plugins/podcast/src/plugin.py:371
-#: .../enigma2-plugins/podcast/src/plugin.py:417
-#: .../enigma2-plugins/podcast/src/plugin.py:465
-#: .../enigma2-plugins/podcast/src/plugin.py:518
-#: .../enigma2-plugins/podcast/src/plugin.py:579
-#: .../enigma2-plugins/podcast/src/plugin.py:621
+#: .../enigma2-plugins/podcast/src/plugin.py:438
+#: .../enigma2-plugins/podcast/src/plugin.py:499
+#: .../enigma2-plugins/podcast/src/plugin.py:552
+#: .../enigma2-plugins/podcast/src/plugin.py:613
+#: .../enigma2-plugins/podcast/src/plugin.py:656
 msgid "Podcast"
 msgstr "Podcast"
 
@@ -51,7 +51,7 @@ msgstr "Chiedere"
 #: .../enigma2-plugins/podcast/src/plugin.py:169
 #, python-format
 msgid "Downloading movie: %s"
-msgstr "Download filamto in corso: %s"
+msgstr "Download filmato in corso: %s"
 
 #: .../enigma2-plugins/podcast/src/plugin.py:254
 msgid "Delete this movie?"
@@ -69,44 +69,44 @@ msgstr "Durata"
 msgid "Type"
 msgstr "Tipo"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:430
+#: .../enigma2-plugins/podcast/src/plugin.py:455
 msgid "No Feedly configuration"
 msgstr "Nessuna configurazione Feedly"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:470
+#: .../enigma2-plugins/podcast/src/plugin.py:504
 msgid "Select"
 msgstr "Selezionare"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:523
+#: .../enigma2-plugins/podcast/src/plugin.py:557
 msgid "Save"
 msgstr "Salvare"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:535
+#: .../enigma2-plugins/podcast/src/plugin.py:569
 msgid "Buffer:"
 msgstr "Buffer:"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:536
+#: .../enigma2-plugins/podcast/src/plugin.py:570
 msgid "Buffer device:"
 msgstr "Supporto buffer:"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:537
+#: .../enigma2-plugins/podcast/src/plugin.py:571
 msgid "Buffer file handling:"
 msgstr "Gestione buffer file:"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:585
+#: .../enigma2-plugins/podcast/src/plugin.py:619
 msgid "Help"
 msgstr "Aiuto"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:590
-#: .../enigma2-plugins/podcast/src/plugin.py:596
+#: .../enigma2-plugins/podcast/src/plugin.py:626
+#: .../enigma2-plugins/podcast/src/plugin.py:631
 msgid "from xml"
 msgstr "da xml"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:591
-#: .../enigma2-plugins/podcast/src/plugin.py:598
+#: .../enigma2-plugins/podcast/src/plugin.py:627
+msgid "configuration"
+msgstr "Configurazione"
+
+#: .../enigma2-plugins/podcast/src/plugin.py:633
 msgid "Feedly OPML"
 msgstr "Feedly OPML"
 
-#: .../enigma2-plugins/podcast/src/plugin.py:592
-msgid "configuration"
-msgstr "Configurazione"
