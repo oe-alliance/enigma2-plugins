@@ -252,7 +252,7 @@ class AutoMount():
 						options += ',wsize=8192'
 					if 'tcp' not in options and 'udp' not in options:
 						options += ',tcp'
-					options = options + ',soft,'
+					options = options + ',soft'
 		else:
 			if not options:
 				options = 'rw,rsize=8192,wsize=8192'
@@ -264,7 +264,7 @@ class AutoMount():
 						options += ',rsize=8192'
 					if 'wsize' not in options:
 						options += ',wsize=8192'
-					if not cifs and 'tcp' not in options and 'udp' not in options:
+					if 'tcp' not in options and 'udp' not in options:
 						options += ',tcp'
 		return options
 
