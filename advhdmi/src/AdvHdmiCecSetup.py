@@ -21,9 +21,6 @@ from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_
 from Components.MenuList import MenuList
 from Tools.BoundFunction import boundFunction
 
-# for function
-from time import localtime, mktime
-
 class AdvHdmiCecSetup(Screen, ConfigListScreen):
 	skin = """
 		<screen name="adv_hdmi_setup" position="center,center" size="580,480" title="Advanced HDMI-Cec Setup" >
@@ -129,7 +126,6 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 		self.close(self.session)
 
 	def EditTimeSpanEntries(self):
-		initTimeSpanEntryList()
 		self.session.open(TimeSpanListScreen)
 
 	def showInfo(self):
@@ -153,47 +149,6 @@ class AdvHdmiCecSetup(Screen, ConfigListScreen):
 				pass
 
 # Timespans
-def initTimeSpanEntryList():
-	global g_AdvHdmi_TimeSpanEntryInit
-	if not g_AdvHdmi_TimeSpanEntryInit:
-		g_AdvHdmi_TimeSpanEntryInit = True
-		count = config.plugins.AdvHdmiCec.entriescount.value
-		if count != 0:
-			i = 0
-			while i < count:
-				TimeSpanEntryInit()
-				i += 1
-
-def TimeSpanEntryInit():
-	from Plugins.SystemPlugins.AdvHdmi.plugin import WEEKDAYS
-	now = localtime()
-	begin = mktime((now.tm_year, now.tm_mon, now.tm_mday, 8, 00, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
-	end = mktime((now.tm_year, now.tm_mon, now.tm_mday, 16, 00, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
-	
-	config.plugins.AdvHdmiCec.Entries.append(ConfigSubsection())
-	i = len(config.plugins.AdvHdmiCec.Entries) -1
-	config.plugins.AdvHdmiCec.Entries[i].fromWD = ConfigSelection(choices=[
-		("0", WEEKDAYS[0]),
-		("1", WEEKDAYS[1]),
-		("2", WEEKDAYS[2]),
-		("3", WEEKDAYS[3]),
-		("4", WEEKDAYS[4]),
-		("5", WEEKDAYS[5]),
-		("6", WEEKDAYS[6]),
-	], default = "0")
-	config.plugins.AdvHdmiCec.Entries[i].toWD = ConfigSelection(choices=[
-		("0", WEEKDAYS[0]),
-		("1", WEEKDAYS[1]),
-		("2", WEEKDAYS[2]),
-		("3", WEEKDAYS[3]),
-		("4", WEEKDAYS[4]),
-		("5", WEEKDAYS[5]),
-		("6", WEEKDAYS[6]),
-	], default = "6")
-	config.plugins.AdvHdmiCec.Entries[i].begin = ConfigClock(default = int(begin))
-	config.plugins.AdvHdmiCec.Entries[i].end = ConfigClock(default = int(end))
-	return config.plugins.AdvHdmiCec.Entries[i]
-
 class TimeSpanEntryList(MenuList):
 	def __init__(self, list, enableWrapAround = True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
@@ -331,6 +286,7 @@ class TimeSpanConfigScreen(Screen, ConfigListScreen):
 		</screen>"""
 
 	def __init__(self, session, entry, callbackfnc=None):
+		from plugin import TimeSpanEntryInit
 		self.session = session
 		Screen.__init__(self, session)
 
@@ -445,6 +401,5 @@ def Plugins(**kwargs):
 		)
 	
 	return list
-	
-g_AdvHdmi_TimeSpanEntryInit = False
+
 

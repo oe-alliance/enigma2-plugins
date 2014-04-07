@@ -38,6 +38,53 @@ except ImportError:
 	_print("No Webinterface-Plugin installed")
 	g_AdvHdmi_webif_available = False
 
+WEEKDAYS = [ 
+	_("Monday"),
+	_("Tuesday"),
+	_("Wednesday"),
+	_("Thursday"),
+	_("Friday"),
+	_("Saturday"),
+	_("Sunday")]
+
+# Timespans
+def initTimeSpanEntryList():
+	count = config.plugins.AdvHdmiCec.entriescount.value
+	if count != 0:
+		i = 0
+		while i < count:
+			TimeSpanEntryInit()
+			i += 1
+
+def TimeSpanEntryInit():
+	now = localtime()
+	begin = mktime((now.tm_year, now.tm_mon, now.tm_mday, 8, 00, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
+	end = mktime((now.tm_year, now.tm_mon, now.tm_mday, 16, 00, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
+	
+	config.plugins.AdvHdmiCec.Entries.append(ConfigSubsection())
+	i = len(config.plugins.AdvHdmiCec.Entries) -1
+	config.plugins.AdvHdmiCec.Entries[i].fromWD = ConfigSelection(choices=[
+		("0", WEEKDAYS[0]),
+		("1", WEEKDAYS[1]),
+		("2", WEEKDAYS[2]),
+		("3", WEEKDAYS[3]),
+		("4", WEEKDAYS[4]),
+		("5", WEEKDAYS[5]),
+		("6", WEEKDAYS[6]),
+	], default = "0")
+	config.plugins.AdvHdmiCec.Entries[i].toWD = ConfigSelection(choices=[
+		("0", WEEKDAYS[0]),
+		("1", WEEKDAYS[1]),
+		("2", WEEKDAYS[2]),
+		("3", WEEKDAYS[3]),
+		("4", WEEKDAYS[4]),
+		("5", WEEKDAYS[5]),
+		("6", WEEKDAYS[6]),
+	], default = "6")
+	config.plugins.AdvHdmiCec.Entries[i].begin = ConfigClock(default = int(begin))
+	config.plugins.AdvHdmiCec.Entries[i].end = ConfigClock(default = int(end))
+	return config.plugins.AdvHdmiCec.Entries[i]
+
 config.plugins.AdvHdmiCec = ConfigSubsection()
 config.plugins.AdvHdmiCec.enable = ConfigYesNo(default = False)
 config.plugins.AdvHdmiCec.debug = ConfigYesNo(default = False)
@@ -52,17 +99,9 @@ config.plugins.AdvHdmiCec.show_in = ConfigSelection(choices=[
 		("plugin", _("pluginmenue")),
 		("extension", _("extensions")),
 	], default = "system")
+initTimeSpanEntryList()
 
-WEEKDAYS = [ 
-	_("Monday"),
-	_("Tuesday"),
-	_("Wednesday"),
-	_("Thursday"),
-	_("Friday"),
-	_("Saturday"),
-	_("Sunday")]
-
-ADVHDMI_VERSION = "1.4.2"
+ADVHDMI_VERSION = "1.4.3"
 
 # HDMI-Hook-Events
 # To implement a hook, just instantiate a AdvHdmiCecIF, 
