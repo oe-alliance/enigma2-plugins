@@ -14,6 +14,8 @@ from enigma import ePoint
 from AutoMount import iAutoMount, AutoMount
 from re import sub as re_sub
 
+from boxbranding import getImageDistro
+
 class AutoMountEdit(Screen, ConfigListScreen):
 	skin = """
 		<screen name="AutoMountEdit" position="center,center" size="560,450" title="MountEdit">
@@ -127,9 +129,15 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if self.mountinfo.has_key('mountusing'):
 			mountusing = self.mountinfo['mountusing']
 			if mountusing is False:
-				mountusing = "fstab"
+				if getImageDistro() in ("openvix"):
+					mountusing = "autofs"
+				else:
+					mountusing = "fstab"
 		else:
-			mountusing = "fstab"
+			if getImageDistro() in ("openvix"):
+				mountusing = "autofs"
+			else:
+				mountusing = "fstab"
 
 		if self.mountinfo.has_key('mounttype'):
 			mounttype = self.mountinfo['mounttype']
