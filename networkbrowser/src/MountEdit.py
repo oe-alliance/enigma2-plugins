@@ -127,9 +127,9 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if self.mountinfo.has_key('mountusing'):
 			mountusing = self.mountinfo['mountusing']
 			if mountusing is False:
-				mountusing = "autofs"
+				mountusing = "fstab"
 		else:
-			mountusing = "autofs"
+			mountusing = "fstab"
 
 		if self.mountinfo.has_key('mounttype'):
 			mounttype = self.mountinfo['mounttype']
