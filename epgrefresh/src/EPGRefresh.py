@@ -11,6 +11,7 @@ from enigma import eServiceReference, eServiceCenter
 from ServiceReference import ServiceReference
 
 from RecordTimer import RecordTimerEntry
+from Components.ParentalControl import parentalControl
 
 # Timer
 from EPGRefreshTimer import epgrefreshtimer, EPGRefreshTimerEntry, checkTimespan
@@ -457,6 +458,9 @@ class EPGRefresh:
 		# Add wait timer to epgrefreshtimer
 		epgrefreshtimer.add(EPGRefreshTimerEntry(time() + 30, self.prepareRefresh))
 
+	def isServiceProtected(self, service):
+		return parentalControl.getProtectionLevel(str(service)) != -1
+
 	def nextService(self):
 		# Debug
 		print("[EPGRefresh] Maybe zap to next service")
@@ -471,6 +475,12 @@ class EPGRefresh:
 			# Clean up
 			self.cleanUp()
 		else:
+			if self.isServiceProtected(service):
+				if (not self.forcedScan) or config.plugins.epgrefresh.skipProtectedServices.value == "always":
+					print("[EPGRefresh] Service is protected, skipping!")
+					self.refresh()
+					return
+			
 			# If the current adapter is unable to run in background and we are in fact in background now,
 			# fall back to main picture
 			if (not self.refreshAdapter.backgroundCapable and Screens.Standby.inStandby):
@@ -496,7 +506,10 @@ class EPGRefresh:
 		servcounter = 0
 		try:
 			servtxt = ""
-			for service in self.scanServices:				
+			for service in self.scanServices:
+				if self.isServiceProtected(service):
+					if not self.forcedScan or config.plugins.epgrefresh.skipProtectedServices.value == "always":
+						continue
 				if servcounter <= LISTMAX:
 					ref = ServiceReference(service.sref)
 					txt = ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
