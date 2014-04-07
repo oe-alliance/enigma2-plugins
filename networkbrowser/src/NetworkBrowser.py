@@ -262,18 +262,16 @@ class NetworkBrowser(Screen):
 		sharelist = []
 		self.sharecache_file = None
 		self.sharecache_file = '/etc/enigma2/' + hostname.strip() + '.cache' #Path to cache directory
-		if os_path.exists(self.sharecache_file):
-			print '[Networkbrowser] Loading userinfo from ',self.sharecache_file
-			try:
-				self.hostdata = load_cache(self.sharecache_file)
-				username = self.hostdata['username']
-				password = self.hostdata['password']
-			except:
-				username = "username"
-				password = "password"
-		else:
-			username = "username"
-			password = "password"
+		username = ""
+		password = ""
+# 		if os_path.exists(self.sharecache_file):
+# 			print '[Networkbrowser] Loading userinfo from ',self.sharecache_file
+# 			try:
+# 				self.hostdata = load_cache(self.sharecache_file)
+# 				username = self.hostdata['username']
+# 				password = self.hostdata['password']
+# 			except:
+# 				pass
 		if devicetype == 'unix':
 			smblist=netscan.smbShare(hostip,hostname,username,password)
 			for x in smblist:
@@ -499,6 +497,8 @@ class NetworkBrowser(Screen):
 				data['options'] = "rw,utf8"
 				self.sharecache_file = None
 				self.sharecache_file = '/etc/enigma2/' + selection[1].strip() + '.cache' #Path to cache directory
+				data['username'] = ""
+				data['password'] = ""
 				if os_path.exists(self.sharecache_file):
 					print '[Networkbrowser] Loading userinfo from ',self.sharecache_file
 					try:
@@ -506,12 +506,7 @@ class NetworkBrowser(Screen):
 						data['username'] = self.hostdata['username']
 						data['password'] = self.hostdata['password']
 					except:
-						data['username'] = "username"
-						data['password'] = "password"
-				else:
-					data['username'] = "username"
-					data['password'] = "password"
-
+						pass
 				for sharename, sharedata in mounts.items():
 					if sharedata['ip'] == selection[2].strip() and sharedata['sharedir'] in selection[3].strip():
 						data = sharedata

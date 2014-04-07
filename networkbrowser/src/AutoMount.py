@@ -135,7 +135,7 @@ class AutoMount():
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
 
-		for enigma2 in tree.findall("enimga2"):
+		for enigma2 in tree.findall("enigma2"):
 			mountusing = 3
 			for nfs in enigma2.findall("nfs"):
 				for mount in nfs.findall("mount"):
@@ -252,7 +252,7 @@ class AutoMount():
 						options += ',wsize=8192'
 					if 'tcp' not in options and 'udp' not in options:
 						options += ',tcp'
-					options = options + ',soft,'
+					options = options + ',soft'
 		else:
 			if not options:
 				options = 'rw,rsize=8192,wsize=8192'
@@ -264,7 +264,7 @@ class AutoMount():
 						options += ',rsize=8192'
 					if 'wsize' not in options:
 						options += ',wsize=8192'
-					if not cifs and 'tcp' not in options and 'udp' not in options:
+					if 'tcp' not in options and 'udp' not in options:
 						options += ',tcp'
 		return options
 
@@ -399,10 +399,46 @@ class AutoMount():
 		if self.automounts.has_key(mountpoint):
 			self.automounts[mountpoint][attribute] = value
 
+	def removeEntryFromFile(self, entry, filename, separator=None):
+		tmpfile = open(filename + '.tmp', 'w')
+		if os.path.exists(filename):
+			f = open(filename)
+			tmpfile.writelines([line for line in f.readlines() if entry not in line.strip().split(separator)])
+			tmpfile.close()
+			f.close()
+		os.rename(filename + '.tmp', filename)
+		
+	def generateMountXML(self, sharedata):
+		res = []
+		mounttype = sharedata['mounttype']
+		mountusing = sharedata['mountusing']
+		if mountusing != 'old_enigma2':
+			res.append('<' + mountusing + '>\n')
+		res.append(' <' + mounttype + '>\n')
+		res.append('  <mount>\n')
+		res.append('   <active>' + str(sharedata['active']) + '</active>\n')
+		res.append('   <hdd_replacement>' + str(sharedata['hdd_replacement']) + '</hdd_replacement>\n')
+		res.append('   <ip>' + sharedata['ip'] + '</ip>\n')
+		res.append('   <sharename>' + sharedata['sharename'] + '</sharename>\n')
+		res.append('   <sharedir>' + sharedata['sharedir'] + '</sharedir>\n')
+		res.append('   <options>' + sharedata['options'] + '</options>\n')
+		if mounttype == 'cifs':
+			res.append("   <username>" + sharedata['username'] + "</username>\n")
+			res.append("   <password>" + sharedata['password'] + "</password>\n")
+		res.append('  </mount>\n')
+		res.append(' </' + mounttype + '>\n')
+		if mountusing != 'old_enigma2':
+			res.append('</' + mountusing + '>\n')
+		return res
+
+
 	def writeMountsConfig(self):
 		# Generate List in RAM
 		list = ['<?xml version="1.0" ?>\n<mountmanager>\n']
 		for sharename, sharedata in self.automounts.items():
+			mounttype = sharedata['mounttype']
+			mountusing = sharedata['mountusing']
+
 			if sharedata['hdd_replacement'] == 'True' or sharedata['hdd_replacement'] is True: #hdd replacement hack
 				path = os.path.join('/media/hdd')
 				sharepath = os.path.join('/media/net', sharedata['sharename'])
@@ -411,106 +447,34 @@ class AutoMount():
 				sharepath = ""
 
 			sharetemp = None
-			if sharedata['mounttype'] == 'nfs':
+			if mounttype == 'nfs':
 				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir']
-			elif sharedata['mounttype'] == 'cifs':
+				self.removeEntryFromFile(sharetemp, '/etc/auto.network')
+				self.removeEntryFromFile(sharetemp, '/etc/fstab')
+			elif mounttype == 'cifs':
 				sharetemp = '//' + sharedata['ip'] + '/' + sharedata['sharedir']
-			if sharetemp:
-				autofstmpfile = open('/etc/auto.network.tmp', 'w')
-				file = open('/etc/auto.network')
-				autofstmpfile.writelines([l for l in file.readlines() if sharetemp+'\n' not in l.split(' ')])
-				autofstmpfile.close()
-				file.close()
-				os.rename('/etc/auto.network.tmp','/etc/auto.network')
-				fstabtmpfile = open('/etc/fstab.tmp', 'w')
-				file = open('/etc/fstab')
-				fstabtmpfile.writelines([l for l in file.readlines() if sharetemp not in l.split('\t')])
-				fstabtmpfile.close()
-				file.close()
-				os.rename('/etc/fstab.tmp','/etc/fstab')
+				self.removeEntryFromFile(":" + sharetemp, '/etc/auto.network')
+				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 
-			if sharedata['mountusing'] == 'autofs':
-				mtype = sharedata['mounttype']
-				list.append('<autofs>\n')
-				list.append(' <' + mtype + '>\n')
-				list.append('  <mount>\n')
-				list.append('   <active>' + str(sharedata['active']) + '</active>\n')
-				list.append('   <hdd_replacement>' + str(sharedata['hdd_replacement']) + '</hdd_replacement>\n')
-				list.append('   <ip>' + sharedata['ip'] + '</ip>\n')
-				list.append('   <sharename>' + sharedata['sharename'] + '</sharename>\n')
-				list.append('   <sharedir>' + sharedata['sharedir'] + '</sharedir>\n')
-				list.append('   <options>' + sharedata['options'] + '</options>\n')
-				if sharedata['mounttype'] == 'cifs':
-					list.append("   <username>" + sharedata['username'] + "</username>\n")
-					list.append("   <password>" + sharedata['password'] + "</password>\n")
-				list.append('  </mount>\n')
-				list.append(' </' + mtype + '>\n')
-				list.append('</autofs>\n')
+			list += self.generateMountXML(sharedata)
+			if mountusing == 'autofs':
 				if sharedata['active'] == True or sharedata['active'] == 'True':
 					out = open('/etc/auto.network', 'a')
-					if sharedata['mounttype'] == 'nfs':
-						line = sharedata['sharename'] + ' -fstype=' + sharedata['mounttype'] + ',' + self.sanitizeOptions(sharedata['options'], autofs=True) + ' ' + sharedata['ip'] + ':/' + sharedata['sharedir'] + '\n'
+					if mounttype == 'nfs':
+						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',' + self.sanitizeOptions(sharedata['options'], autofs=True) + ' ' + sharedata['ip'] + ':/' + sharedata['sharedir'] + '\n'
 					elif sharedata['mounttype'] == 'cifs':
-						line = sharedata['sharename'] + ' -fstype=' + sharedata['mounttype'] + ',username=' + sharedata['username'] + ',password=' + sharedata['password'] +','+ self.sanitizeOptions(sharedata['options'], autofs=True) + ' ://' + sharedata['ip'] + '/' + sharedata['sharedir'] + '\n'
+						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',user=' + sharedata['username'] + ',pass=' + sharedata['password'] +','+ self.sanitizeOptions(sharedata['options'], autofs=True) + ' ://' + sharedata['ip'] + '/' + sharedata['sharedir'] + '\n'
 					out.write(line)
 					out.close()
-			elif sharedata['mountusing'] == 'fstab':
-				mtype = sharedata['mounttype']
-				list.append('<fstab>\n')
-				list.append(' <' + mtype + '>\n')
-				list.append('  <mount>\n')
-				list.append('   <active>' + str(sharedata['active']) + '</active>\n')
-				list.append('   <hdd_replacement>' + str(sharedata['hdd_replacement']) + '</hdd_replacement>\n')
-				list.append('   <ip>' + sharedata['ip'] + '</ip>\n')
-				list.append('   <sharename>' + sharedata['sharename'] + '</sharename>\n')
-				list.append('   <sharedir>' + sharedata['sharedir'] + '</sharedir>\n')
-				list.append('   <options>' + sharedata['options'] + '</options>\n')
-				if sharedata['mounttype'] == 'cifs':
-					list.append("   <username>" + sharedata['username'] + "</username>\n")
-					list.append("   <password>" + sharedata['password'] + "</password>\n")
-				list.append('  </mount>\n')
-				list.append(' </' + mtype + '>\n')
-				list.append('</fstab>\n')
+			elif mountusing == 'fstab':
 				if sharedata['active'] == True or sharedata['active'] == 'True':
 					out = open('/etc/fstab', 'a')
 					if sharedata['mounttype'] == 'nfs':
 						line = sharedata['ip'] + ':/' + sharedata['sharedir'] + '\t' + path + '\tnfs\t_netdev,' + self.sanitizeOptions(sharedata['options'], fstab=True) + '\t0 0\n'
 					elif sharedata['mounttype'] == 'cifs':
-						line = '//' + sharedata['ip'] + '/' + sharedata['sharedir'] + '\t' + path + '\tcifs\tusername=' + sharedata['username'] + ',password=' + sharedata['password'] + ',_netdev,' + self.sanitizeOptions(sharedata['options'], cifs=True, fstab=True) + '\t0 0\n'
+						line = '//' + sharedata['ip'] + '/' + sharedata['sharedir'] + '\t' + path + '\tcifs\tuser=' + sharedata['username'] + ',pass=' + sharedata['password'] + ',_netdev,' + self.sanitizeOptions(sharedata['options'], cifs=True, fstab=True) + '\t0 0\n'
 					out.write(line)
 					out.close()
-			elif sharedata['mountusing'] == 'enigma2':
-				mtype = sharedata['mounttype']
-				list.append('<enigma2>\n')
-				list.append(' <' + mtype + '>\n')
-				list.append('  <mount>\n')
-				list.append('   <active>' + str(sharedata['active']) + '</active>\n')
-				list.append('   <hdd_replacement>' + str(sharedata['hdd_replacement']) + '</hdd_replacement>\n')
-				list.append('   <ip>' + sharedata['ip'] + '</ip>\n')
-				list.append('   <sharename>' + sharedata['sharename'] + '</sharename>\n')
-				list.append('   <sharedir>' + sharedata['sharedir'] + '</sharedir>\n')
-				list.append('   <options>' + sharedata['options'] + '</options>\n')
-				if sharedata['mounttype'] == 'cifs':
-					list.append("   <username>" + sharedata['username'] + "</username>\n")
-					list.append("   <password>" + sharedata['password'] + "</password>\n")
-				list.append('  </mount>\n')
-				list.append(' </' + mtype + '>\n')
-				list.append('</enigma2>\n')
-			elif sharedata['mountusing'] == 'old_enigma2':
-				mtype = sharedata['mounttype']
-				list.append(' <' + mtype + '>\n')
-				list.append('  <mount>\n')
-				list.append('   <active>' + str(sharedata['active']) + '</active>\n')
-				list.append('   <hdd_replacement>' + str(sharedata['hdd_replacement']) + '</hdd_replacement>\n')
-				list.append('   <ip>' + sharedata['ip'] + '</ip>\n')
-				list.append('   <sharename>' + sharedata['sharename'] + '</sharename>\n')
-				list.append('   <sharedir>' + sharedata['sharedir'] + '</sharedir>\n')
-				list.append('   <options>' + sharedata['options'] + '</options>\n')
-				if sharedata['mounttype'] == 'cifs':
-					list.append("   <username>" + sharedata['username'] + "</username>\n")
-					list.append("   <password>" + sharedata['password'] + "</password>\n")
-				list.append('  </mount>\n')
-				list.append(' </' + mtype + '>\n')
 
 		# Close Mountmanager Tag
 		list.append('</mountmanager>\n')
@@ -551,18 +515,8 @@ class AutoMount():
 			elif sharedata['mounttype'] == 'cifs':
 				sharetemp = '//' + sharedata['ip'] + '/' + sharedata['sharedir']
 			if sharetemp:
-				autofstmpfile = open('/etc/auto.network.tmp', 'w')
-				file = open('/etc/auto.network')
-				autofstmpfile.writelines([l for l in file.readlines() if sharetemp+'\n' not in l.split(' ')])
-				autofstmpfile.close()
-				file.close()
-				os.rename('/etc/auto.network.tmp','/etc/auto.network')
-				fstabtmpfile = open('/etc/fstab.tmp', 'w')
-				file = open('/etc/fstab')
-				fstabtmpfile.writelines([l for l in file.readlines() if sharetemp not in l.split('\t')])
-				fstabtmpfile.close()
-				file.close()
-				os.rename('/etc/fstab.tmp','/etc/fstab')
+				self.removeEntryFromFile(":" +  sharetemp, '/etc/auto.network')
+				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 		self.automounts.clear()
 		self.automounts = self.newautomounts
 		if not self.removeConsole:
