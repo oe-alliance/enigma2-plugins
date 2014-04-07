@@ -35,7 +35,7 @@ import os
 
 from plugin import gUserScriptExists
 
-VERSION = "2.0beta6"
+VERSION = "2.0"
 class EPGHelpContextMenu(FixedMenu):
 	HELP_RETURN_MAINHELP = 0
 	HELP_RETURN_KEYHELP = 1
