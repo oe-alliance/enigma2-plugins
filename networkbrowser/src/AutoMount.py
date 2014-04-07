@@ -316,10 +316,10 @@ class AutoMount():
 					command.append(x)
 			if not os.path.exists(path) and data['mountusing'] != 'autofs':
 				command.append('mkdir -p ' + path)
-			if mountcommand is not None:
-				command.append(mountcommand)
 			if command is not None:
 				command.append('sleep 2')
+			if mountcommand is not None:
+				command.append(mountcommand)
 			print 'command',command
 			self.MountConsole.eBatch(command, self.CheckMountPointFinished, [data, callback, restart], debug=True)
 		else:
@@ -525,7 +525,7 @@ class AutoMount():
 		autofsstop = None
 		if sharedata['mountusing'] == 'autofs':
 			command.append("/etc/init.d/autofs stop")
-			command.append("sleep2")
+			command.append("sleep 2")
 			command.append("/etc/init.d/autofs start")
 		else:
 			command.append('umount -fl '+ path)
