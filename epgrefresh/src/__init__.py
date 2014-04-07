@@ -18,4 +18,6 @@ def _(txt):
 localeInit()
 language.addCallback(localeInit)
 
-NOTIFICATIONID = 'EpgRefreshNotificationId'
+STARTNOTIFICATIONID = 'EpgRefreshStartNotificationId'
+ENDNOTIFICATIONID = 'EpgRefreshEndNotificationId'
+NOTIFICATIONDOMAIN = "EPGRefresh" 

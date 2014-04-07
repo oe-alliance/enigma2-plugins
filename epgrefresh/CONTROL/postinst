@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/usr/lib/enigma2/python/Plugins/Extensions/EPGRefresh/EPGBackup.sh autoinstall
+exit 0
