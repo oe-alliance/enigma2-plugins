@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - networkbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 21:23+0200\n"
-"PO-Revision-Date: 2013-10-06 17:09+0100\n"
+"POT-Creation-Date: 2014-04-06 23:20+0100\n"
+"PO-Revision-Date: 2014-04-07 07:18+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: \n"
@@ -26,6 +26,9 @@ msgid ""
 msgstr ""
 "Deze verbinding bestaat reeds met deze naam!\n"
 "Bestaande item overschrijven en verder gaan ?\n"
+
+msgid "AUTOFS (mount as needed)"
+msgstr "AUTOFS (mount wanneer nodig)"
 
 msgid "Active"
 msgstr "Actief"
@@ -125,8 +128,8 @@ msgstr "Geef gebruikersnaam:"
 msgid "Expert"
 msgstr "Expert"
 
-msgid "FSTAB (mount using linux)"
-msgstr "FSTAB (mount gebruikt linux)"
+msgid "FSTAB (mount at boot)"
+msgstr "FSTAB (mount tijdens booten)"
 
 msgid "Finished restarting your network"
 msgstr "Herstarten van uw netwerk is voltooid"
@@ -161,6 +164,9 @@ msgstr "Mount opnieuw"
 msgid "Mount informations"
 msgstr "Info verbindingen"
 
+msgid "Mount manager"
+msgstr "Mountmanager"
+
 msgid "Mount options"
 msgstr "Verbindings opties"
 
@@ -185,9 +191,6 @@ msgstr "Verbindingsbeheer"
 
 msgid "Mounts editor"
 msgstr "Verbindingseditor"
-
-msgid "Mounts management"
-msgstr "Verbindingsbeheer"
 
 msgid "NFS share"
 msgstr "NFS share"
@@ -325,3 +328,9 @@ msgstr "Gebruik als harde schijf vervanging"
 
 #~ msgid "Enigma2 (mount using enigma2"
 #~ msgstr "Enigma2 (mount gebruikt enigma2"
+
+#~ msgid "FSTAB (mount using linux)"
+#~ msgstr "FSTAB (mount gebruikt linux)"
+
+#~ msgid "Mounts management"
+#~ msgstr "Verbindingsbeheer"
