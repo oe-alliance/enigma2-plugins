@@ -135,7 +135,7 @@ class AutoMount():
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
 
-		for enigma2 in tree.findall("enimga2"):
+		for enigma2 in tree.findall("enigma2"):
 			mountusing = 3
 			for nfs in enigma2.findall("nfs"):
 				for mount in nfs.findall("mount"):
