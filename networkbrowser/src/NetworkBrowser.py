@@ -20,6 +20,8 @@ from os import path as os_path, stat, mkdir, remove
 from time import time
 from stat import ST_MTIME
 
+import subprocess
+
 import netscan
 import ipscan
 from MountManager import AutoMountManager
@@ -264,30 +266,34 @@ class NetworkBrowser(Screen):
 		self.sharecache_file = '/etc/enigma2/' + hostname.strip() + '.cache' #Path to cache directory
 		username = ""
 		password = ""
-# 		if os_path.exists(self.sharecache_file):
-# 			print '[Networkbrowser] Loading userinfo from ',self.sharecache_file
-# 			try:
-# 				self.hostdata = load_cache(self.sharecache_file)
-# 				username = self.hostdata['username']
-# 				password = self.hostdata['password']
-# 			except:
-# 				pass
+ 		if os_path.exists(self.sharecache_file):
+ 			print '[Networkbrowser] Loading userinfo from ',self.sharecache_file
+ 			try:
+ 				self.hostdata = load_cache(self.sharecache_file)
+ 				username = self.hostdata['username']
+ 				password = self.hostdata['password']
+ 			except:
+ 				pass
+
+		cmd = "/usr/bin/smbclient -g -N -U Guest -L {0}".format(hostip).split()
+		if username != "" or password != "":
+			cmd = ["/usr/bin/smbclient", "-g", "-U", username, "-L", hostip, "\\\\IPC\\", password]
+		try:
+			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+			(out, err) = p.communicate()
+			for line in out.split('\n'):
+				item = line.split('|')
+				if len(item) == 3 and item[0] == "Disk" and not item[1].endswith("$"):
+					sharelist.append(["smbShare", hostname, hostip, item[1], item[0], item[2]])
+		except OSError as e:
+			print "Running " + cmd + " failed with:" + e
+			pass
+		
 		if devicetype == 'unix':
-			smblist=netscan.smbShare(hostip,hostname,username,password)
-			for x in smblist:
-				if len(x) == 6:
-					if x[3] != 'IPC$':
-						sharelist.append(x)
 			nfslist=netscan.nfsShare(hostip,hostname)
 			for x in nfslist:
 				if len(x) == 6:
 					sharelist.append(x)
-		else:
-			smblist=netscan.smbShare(hostip,hostname,username,password)
-			for x in smblist:
-				if len(x) == 6:
-					if x[3] != 'IPC$':
-						sharelist.append(x)
 		return sharelist
 
 	def updateHostsList(self):
