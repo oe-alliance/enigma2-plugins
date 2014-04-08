@@ -403,7 +403,7 @@ class AutoMount():
 		tmpfile = open(filename + '.tmp', 'w')
 		if os.path.exists(filename):
 			f = open(filename)
-			tmpfile.writelines([line for line in f.readlines() if entry not in line.strip().split(separator)])
+			tmpfile.writelines([line for line in f.readlines() if entry not in line.split(separator)])
 			tmpfile.close()
 			f.close()
 		os.rename(filename + '.tmp', filename)
@@ -449,11 +449,11 @@ class AutoMount():
 			sharetemp = None
 			if mounttype == 'nfs':
 				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir']
-				self.removeEntryFromFile(sharetemp, '/etc/auto.network')
+				self.removeEntryFromFile(sharetemp+'\n', '/etc/auto.network', ' ')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 			elif mounttype == 'cifs':
 				sharetemp = '//' + sharedata['ip'] + '/' + sharedata['sharedir']
-				self.removeEntryFromFile(":" + sharetemp, '/etc/auto.network')
+				self.removeEntryFromFile(":" + sharetemp+'\n', '/etc/auto.network', ' ')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 
 			list += self.generateMountXML(sharedata)
@@ -513,9 +513,9 @@ class AutoMount():
 			if sharedata['mounttype'] == 'nfs':
 				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir']
 			elif sharedata['mounttype'] == 'cifs':
-				sharetemp = '//' + sharedata['ip'] + '/' + sharedata['sharedir']
+				sharetemp = '://' + sharedata['ip'] + '/' + sharedata['sharedir']
 			if sharetemp:
-				self.removeEntryFromFile(":" +  sharetemp, '/etc/auto.network')
+				self.removeEntryFromFile(sharetemp+'\n', '/etc/auto.network' , ' ')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 		self.automounts.clear()
 		self.automounts = self.newautomounts
