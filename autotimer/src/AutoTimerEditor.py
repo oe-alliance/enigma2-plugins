@@ -16,6 +16,8 @@ from Screens.Setup import SetupSummary
 # GUI (Components)
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
+from Components.Sources.Boolean import Boolean
+from Components.Pixmap import Pixmap
 
 # Configuration
 from Components.config import getConfigListEntry, ConfigEnableDisable, \
@@ -1030,6 +1032,10 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 		self["key_green"] = StaticText(_("Save"))
 		self["key_yellow"] = StaticText(_("Delete"))
 		self["key_blue"] = StaticText(_("New"))
+
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
+		self["VKeyIcon"] = Boolean(False)
 
 		# Define Actions
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
