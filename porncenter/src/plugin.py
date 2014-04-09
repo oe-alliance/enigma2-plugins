@@ -3,10 +3,9 @@
 from Additions.Plugin import cache, getPlugins
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
-from Components.ConfigList import ConfigListScree# -*- coding: utf-8 -*-
+from Components.ConfigList import ConfigListScreen
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os, gettextn
 from Components.FileList import FileList
 from Components.Label import Label
 from Components.Language import language
