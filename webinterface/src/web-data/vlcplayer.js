@@ -40,16 +40,20 @@ var VlcServiceListHandler = Class.create(AbstractContentHandler, {
 	}
 });
 
-var WebTv = Class.create({
-	initialize: function(vlcObjectTarget){
+var WebTv = Class.create(BaseCore, {
+	initialize: function($super, vlcObjectTarget){
+		$super();
 		this.target = vlcObjectTarget;
 		this.instance = null;
 		this.bouquetHandler = new VlcBouquetListHandler('bouquetList');
 		this.serviceHandler = new VlcServiceListHandler('serviceList', this.setStreamTarget.bind(this));
 		this.bouquetHandler.onFinished.push(this.onLoadBouquetFinished.bind(this));
+		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
 	},
 
-	run: function(){
+	onSessionAvailable: function($super, sid){
+		debug("[WebTv].onSessionAvailable, " + sid);
+		$super(sid);
 		this.instance = $(this.target);
 
 		try {
