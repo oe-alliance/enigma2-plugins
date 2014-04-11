@@ -404,7 +404,7 @@ installit () {
   if [ ! -e "$helpfile" ] ; then
     echo "$LOGPREFIX creating patcher '$helpfile'"
     echo -e "#!/bin/sh" > $helpfile
-    echo -e "\n$SCRIPTEXEC install" >> $helpfile
+    echo -e "\n$SCRIPTEXEC autoinstall" >> $helpfile
     echo -e "exit 0" >> $helpfile
     chmod 755 $helpfile
   fi
