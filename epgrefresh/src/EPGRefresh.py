@@ -63,6 +63,8 @@ class EPGRefresh:
 		self.session = None
 		self.beginOfTimespan = 0
 		self.refreshAdapter = None
+		# to call additional tasks (from other plugins)
+		self.finishNotifiers = { }
 
 		# Mtime of configuration files
 		self.configMtime = -1
@@ -74,8 +76,14 @@ class EPGRefresh:
 		self.readConfiguration()
 
 	def _initFinishTodos(self):
-		self.finishTodos = [self._ToDoCallAutotimer, self._ToDoAutotimerCalled, self.finish]
+		self.finishTodos = [self._ToDoCallAutotimer, self._ToDoAutotimerCalled, self.finish, self._callFinishNotifiers]
 	
+	def addFinishNotifier(self, notifier):
+		if not callable(notifier):
+			print("[EPGRefresh] notifier" + str(notifier) + " isn't callable")
+			return
+		self.finishNotifiers[str(notifier)] = notifier
+
 	def readConfiguration(self):
 		# Check if file exists
 		if not path.exists(CONFIG):
@@ -383,12 +391,24 @@ class EPGRefresh:
 					autotimer = AutoTimer()
 	
 				# Parse EPG
-				autotimer.parseEPGAsync(simulateOnly=False).addBoth(self._nextTodo)
-			except Exception as e:
-				print("[EPGRefresh] Could not start AutoTimer:", e)
+				deferred = autotimer.parseEPGAsync(simulateOnly=False)
+				deferred.addCallback(self._nextTodo)
+				deferred.addErrback(self._autotimerErrback)
+			#except Exception as e:
+			except:
+				from traceback import format_exc
+				#print("[EPGRefresh] Could not start AutoTimer:", e)
+				print("[EPGRefresh] Could not start AutoTimer:" + str(format_exc()))
 		else:
 			self._nextTodo()
 	
+	def _autotimerErrback(self, failure):
+		print("[EPGRefresh] Debug: AutoTimer failed:" + str(failure))
+		if config.plugins.epgrefresh.enablemessage.value:
+			Notifications.AddPopup(_("AutoTimer failed with error %s") % (str(failure)), \
+				MessageBox.TYPE_ERROR, 10, domain = NOTIFICATIONDOMAIN)
+		self._nextTodo()
+
 	def _ToDoAutotimerCalled(self, *args, **kwargs):
 		if config.plugins.epgrefresh.enablemessage.value:
 			if len(args):
@@ -397,6 +417,12 @@ class EPGRefresh:
 				Notifications.AddPopup(_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") \
 					% (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
 					MessageBox.TYPE_INFO, 10, domain = NOTIFICATIONDOMAIN)
+		self._nextTodo()
+	
+	def _callFinishNotifiers(self, *args, **kwargs):
+		for notifier in self.finishNotifiers.keys():
+			print("[EPGRefresh] Debug: call " + str(notifier))
+			self.finishNotifiers[notifier]()
 		self._nextTodo()
 	
 	def finish(self, *args, **kwargs):

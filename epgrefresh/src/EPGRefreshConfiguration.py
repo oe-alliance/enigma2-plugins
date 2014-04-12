@@ -33,9 +33,7 @@ from traceback import print_exc
 from sys import stdout
 import os
 
-from plugin import gUserScriptExists
-
-VERSION = "2.0"
+VERSION = "2.1"
 class EPGHelpContextMenu(FixedMenu):
 	HELP_RETURN_MAINHELP = 0
 	HELP_RETURN_KEYHELP = 1
@@ -50,25 +48,15 @@ class EPGHelpContextMenu(FixedMenu):
 
 class EPGFunctionMenu(FixedMenu):
 	FUNCTION_RETURN_FORCEREFRESH = 0
-	FUNCTION_RETURN_BACKUP_DATE = 1
-	FUNCTION_RETURN_BACKUP_SIZE = 2
-	FUNCTION_RETURN_BACKUP_UNINSTALL = 3
-	FUNCTION_RETURN_STOPREFRESH = 4
-	FUNCTION_RETURN_SHOWPENDING = 5
+	FUNCTION_RETURN_STOPREFRESH = 1
+	FUNCTION_RETURN_SHOWPENDING = 2
 
-	def __init__(self, session, ispatched = False):
+	def __init__(self, session):
 		if epgrefresh.isRunning():
 			menu = [(_("Stop running refresh"), boundFunction(self.close, self.FUNCTION_RETURN_STOPREFRESH)),
 				(_("Pending Services"), boundFunction(self.close, self.FUNCTION_RETURN_SHOWPENDING))]
 		else:
 			menu = [(_("Refresh now"), boundFunction(self.close, self.FUNCTION_RETURN_FORCEREFRESH))]
-		if config.plugins.epgrefresh.backup_enabled.value:
-			menu.append((_("Restore EPG-Backups (Date)"), boundFunction(self.close, self.FUNCTION_RETURN_BACKUP_DATE)))
-			menu.append((_("Restore EPG-Backups (Size)"), boundFunction(self.close, self.FUNCTION_RETURN_BACKUP_SIZE)))
-		else:
-			menu.append((_("EPG-Backup is disabled"), self.close))
-		if ispatched:
-			menu.append((_("Uninstall EPG-Backup"), boundFunction(self.close, self.FUNCTION_RETURN_BACKUP_UNINSTALL)))
 		menu.append((_("Cancel"), self.close))
 
 		FixedMenu.__init__(self, session, _("EPGRefresh Functions"), menu)
@@ -173,29 +161,12 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Delay if not in standby (minutes)"), config.plugins.epgrefresh.delay_standby, _("If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."), False))
 			if SystemInfo.get("NumVideoDecoders", 1) > 1:
 				self.list.insert(3, getConfigListEntry(_("Refresh EPG using"), config.plugins.epgrefresh.adapter, _("If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."), False))
-			self.list.append(getConfigListEntry(_("Enable Backup"), config.plugins.epgrefresh.backup_enabled, _("Should the Backup-Functionality be enabled?\nFor more Information have a look at the Help-Screen."), True))
-			if config.plugins.epgrefresh.backup_enabled.value:
-				self.list.append(getConfigListEntry(_("Valid Filesize"), config.plugins.epgrefresh.backup_filesize_valid, _("EPG-Files with a less size of this value (KB) won't be backuped."), False))
-				self.list.append(getConfigListEntry(_("Valid Age"), config.plugins.epgrefresh.backup_timespan_valid, _("Only keep EPG-Backup-Files younger than this days."), False))
-				self.list.append(getConfigListEntry(_("Show Advanced Options"), NoSave(config.plugins.epgrefresh.showadvancedoptions), _("Display more Options"), True))
-				if config.plugins.epgrefresh.showadvancedoptions.value:
-					self.list.append(getConfigListEntry(_("Backup-Strategy"), config.plugins.epgrefresh.backup_strategy, _("Should the biggest or the youngest File be backuped?\nIf it is smaller than the Real-EPG-File then the other strategy will be the Fallback-Strategy."), False))
-					self.list.append(getConfigListEntry(_("EPG-File-Write Wait"), config.plugins.epgrefresh.backup_epgwrite_wait, _("How many seconds should EPGRefresh be wait to check if the EPG-File-Size didn't change before it starts the Backup."), False))
-					self.list.append(getConfigListEntry(_("Maximum Boot-Count"), config.plugins.epgrefresh.backup_max_boot_count, _("After that times of unsuccesfully boot enigma2, the EPG-File will be deleted."), False))
-					self.list.append(getConfigListEntry(_("Enable Debug"), config.plugins.epgrefresh.backup_enable_debug, _("Should debugmessages be printed in a File?\nThe filename will be added with the current date"), True))
-					if config.plugins.epgrefresh.backup_enable_debug.value:
-						self.list.append(getConfigListEntry(_("Log-directory"), config.plugins.epgrefresh.backup_log_dir, _("Directory for the Logfiles."), False))
-					if gUserScriptExists:
-						self.list.append(getConfigListEntry(_("Show in User-Scripts"), config.plugins.epgrefresh.showin_usr_scripts, _("Should the Manage-Script be shown in User-Scripts?"), False))
-			else:
-				self.list.append(getConfigListEntry(_("Show Advanced Options"), NoSave(config.plugins.epgrefresh.showadvancedoptions), _("Display more Options"), True))
+			self.list.append(getConfigListEntry(_("Show Advanced Options"), NoSave(config.plugins.epgrefresh.showadvancedoptions), _("Display more Options"), True))
 			if config.plugins.epgrefresh.showadvancedoptions.value:
 				if config.ParentalControl.configured.value:
 					self.list.append(getConfigListEntry(_("Skip protected Services"), config.plugins.epgrefresh.skipProtectedServices, _("Should protected services be skipped if refresh was started in interactive-mode?"), False))
 				self.list.append(getConfigListEntry(_("Show Setup in extension menu"), config.plugins.epgrefresh.show_in_extensionsmenu, _("Enable this to be able to access the EPGRefresh configuration from within the extension menu."), False))
 				self.list.append(getConfigListEntry(_("Show 'EPGRefresh Start now' in extension menu"), config.plugins.epgrefresh.show_run_in_extensionsmenu, _("Enable this to be able to start the EPGRefresh from within the extension menu."), False))
-				if config.plugins.epgrefresh.backup_enabled.value:
-					self.list.append(getConfigListEntry(_("Show 'EPGRefresh Restore Backup' in extension menu"), config.plugins.epgrefresh.show_backuprestore_in_extmenu, _("Enable this to be able to start a restore of a Backup-File from within the extension menu."), False))
 				self.list.append(getConfigListEntry(_("Show popup when refresh starts and ends"), config.plugins.epgrefresh.enablemessage, _("This setting controls whether or not an informational message will be shown at start and completion of refresh."), False))
 				self.list.append(getConfigListEntry(_("Wake up from standby for EPG refresh"), config.plugins.epgrefresh.wakeup, _("If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."), False))
 				self.list.append(getConfigListEntry(_("Force scan even if receiver is in use"), config.plugins.epgrefresh.force, _("This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."), False))
@@ -212,33 +183,6 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			
 		self["config"].list = self.list
 		self["config"].setList(self.list)
-
-	def _maybeNeedsRestart(self):
-		if config.plugins.epgrefresh.backup_enabled.value:
-			# maybe self.needsEnigmaRestart was setted by "uninstall"
-			if not self.needsEnigmaRestart:
-				try:
-					from plugin import epgbackup
-					ispatched = self._isPatched()
-					# only install it, if it was enabled for the first time
-					if config.plugins.epgrefresh.backup_enabled.value and not ispatched:
-						epgbackup.install()
-						self.session.open(MessageBox, _("EPG-Backup has been installed!:"), \
-							MessageBox.TYPE_INFO, timeout = 10)
-						self.needsEnigmaRestart = True
-				except:
-					print("[EPGRefresh] Error importing EPGBackup")
-					print_exc(file=stdout)
-	
-	def _isPatched(self):
-		ispatched = False
-		try:
-			from plugin import epgbackup
-			ispatched = epgbackup.isPatched()
-		except:
-			print("[EPGRefresh] Error importing EPGBackup")
-			print_exc(file=stdout)
-		return ispatched
 
 	def firstExec(self):
 		from plugin import epgrefreshHelp
@@ -270,18 +214,6 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 	def isConfigurationChanged(self):
 		return self.ServicesChanged or self._ConfigisChanged()
 	
-	def keyOK(self):
-		self["config"].handleKey(KEY_OK)
-		cur = self["config"].getCurrent()
-		if cur[1] == config.plugins.epgrefresh.backup_log_dir:
-			self.session.openWithCallback(self.directorySelected, LocationBox, \
-				_("Select Logfile-Location"), "", \
-				config.plugins.epgrefresh.backup_log_dir.value)
-
-	def directorySelected(self, res):
-		if res is not None:
-			config.plugins.epgrefresh.backup_log_dir.value = res
-
 	def _onKeyChange(self):
 		cur = self["config"].getCurrent()
 		if cur and cur[3]:
@@ -314,8 +246,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			self["help"].text = cur[2]
 
 	def showFunctionMenu(self):
-		ispatched = self._isPatched()
-		self.session.openWithCallback(self._FunctionMenuCB, EPGFunctionMenu, ispatched)
+		self.session.openWithCallback(self._FunctionMenuCB, EPGFunctionMenu)
 
 	def _FunctionMenuCB(self, *result):
 		if not len(result):
@@ -323,23 +254,12 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 		result = result[0]
 
 		try:
-			from plugin import epgbackup
 			if result == EPGFunctionMenu.FUNCTION_RETURN_FORCEREFRESH:
 				self.forceRefresh()
 			if result == EPGFunctionMenu.FUNCTION_RETURN_STOPREFRESH:
 				self.stopRunningRefresh()
 			if result == EPGFunctionMenu.FUNCTION_RETURN_SHOWPENDING:
 				self.showPendingServices()
-			elif result == EPGFunctionMenu.FUNCTION_RETURN_BACKUP_SIZE:
-				epgbackup.forceBackupBySize()
-			elif result == EPGFunctionMenu.FUNCTION_RETURN_BACKUP_DATE:
-				epgbackup.forceBackup()
-			elif result == EPGFunctionMenu.FUNCTION_RETURN_BACKUP_UNINSTALL:
-				epgbackup.uninstall()
-				config.plugins.epgrefresh.backup_enabled.setValue(False)
-				self.session.open(MessageBox, _("EPG-Backup has been uninstalled!:"), \
-					MessageBox.TYPE_INFO, timeout = 10)
-				self.needsEnigmaRestart = True
 		except:
 			print("[EPGRefresh] Error in Function - Call")
 			print_exc(file=stdout)
@@ -434,10 +354,6 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 		epgrefresh.services = (set(self.services[0]), set(self.services[1]))
 		epgrefresh.saveConfiguration()
 
-		if not config.plugins.epgrefresh.backup_enabled.value \
-			and config.plugins.epgrefresh.show_backuprestore_in_extmenu.value:
-			config.plugins.epgrefresh.show_backuprestore_in_extmenu.setValue(False)
-
 		for x in self["config"].list:
 			x[1].save()		
 		configfile.save()
@@ -451,7 +367,6 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 				if doSaveConfiguration:
 					self._saveConfiguration()
 		
-		self._maybeNeedsRestart()
 		self.close(self.session, self.needsEnigmaRestart)
 
 

@@ -5,7 +5,7 @@ from . import _, NOTIFICATIONDOMAIN
 
 # Config
 from Components.config import config, ConfigYesNo, ConfigNumber, ConfigSelection, \
-	ConfigSubsection, ConfigClock, ConfigYesNo, ConfigInteger, ConfigDirectory, NoSave
+	ConfigSubsection, ConfigClock, ConfigYesNo, ConfigInteger, NoSave
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
 from Tools.BoundFunction import boundFunction
@@ -61,23 +61,9 @@ config.plugins.epgrefresh.adapter = ConfigSelection(choices = [
 )
 config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.epgrefresh.show_run_in_extensionsmenu = ConfigYesNo(default = True)
-config.plugins.epgrefresh.show_backuprestore_in_extmenu = ConfigYesNo(default = False)
 config.plugins.epgrefresh.show_help = ConfigYesNo(default = True)
 config.plugins.epgrefresh.wakeup_time = ConfigInteger(default=-1)
-config.plugins.epgrefresh.backup_enabled = ConfigYesNo(default = True)
-config.plugins.epgrefresh.backup_filesize_valid = ConfigNumber(default=1024)
-config.plugins.epgrefresh.backup_timespan_valid = ConfigNumber(default=7)
 config.plugins.epgrefresh.showadvancedoptions = NoSave(ConfigYesNo(default = False))
-config.plugins.epgrefresh.backup_epgwrite_wait = ConfigNumber(default=3)
-config.plugins.epgrefresh.showin_usr_scripts = ConfigYesNo(default = True)
-config.plugins.epgrefresh.backup_strategy = ConfigSelection(choices = [
-		("biggest", _("Biggest before Youngest")),
-		("youngest", _("Youngest before Biggest")),
-	], default = "biggest"
-)
-config.plugins.epgrefresh.backup_enable_debug = ConfigYesNo(default = False)
-config.plugins.epgrefresh.backup_log_dir = ConfigDirectory(default = "/hdd")
-config.plugins.epgrefresh.backup_max_boot_count = ConfigNumber(default=3)
 
 # convert previous parameters
 config.plugins.epgrefresh.background = ConfigYesNo(default = False)
@@ -121,7 +107,7 @@ except Exception as e:
 # Plugin
 from EPGRefresh import epgrefresh
 from EPGRefreshService import EPGRefreshService
-epgbackup = None
+
 # Plugins
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
@@ -141,23 +127,12 @@ def timeCallback(isCallback=True):
 		return
 	epgrefresh.start()
 
-gUserScriptExists = False
 # Autostart
 def autostart(reason, **kwargs):
-	global epgbackup
-	global gUserScriptExists
-	
 	if reason == 0 and "session" in kwargs:
 		session = kwargs["session"]
 		epgrefresh.session = session
 
-		from EPGBackupSupport import EPGBackupSupport
-		try:
-			epgbackup = EPGBackupSupport(session)
-		except:
-			print("[EPGRefresh] Error while initializing EPGBackupSupport")
-			print_exc(file=stdout)
-	
 		if config.plugins.epgrefresh.enabled.value:
 			# check if box was woken up by a timer, if so, check if epgrefresh set this timer
 			if session.nav.wasTimerWakeup() and config.misc.prev_wakeup_time.value == config.plugins.epgrefresh.wakeup_time.value:
@@ -168,13 +143,6 @@ def autostart(reason, **kwargs):
 					Notifications.AddNotificationWithID("Standby", Standby)
 			timeCallback(isCallback=False)
 		
-		try:
-			from Plugins.Extensions.UserScripts.plugin import UserScriptsConfiguration
-			gUserScriptExists = True
-			del UserScriptsConfiguration
-		except:
-			pass
-
 	elif reason == 1:
 		epgrefresh.stop()
 
@@ -225,9 +193,6 @@ def forceRefresh(session, **kwargs):
 def stopRunningRefresh(session, **kwargs):
 	epgrefresh.stopRunningRefresh(session)
 
-def restoreBackup(session, **kwargs):
-	epgbackup.forceBackup()
-
 def showPendingServices(session, **kwargs):
 	epgrefresh.showPendingServices(session)
 
@@ -272,7 +237,6 @@ extPrefix = _("EXTENSIONMENU_PREFIX")
 extSetupDescriptor = PluginDescriptor(name = extPrefix + " " + _("EXTENSIONNAME_SETUP"), description = _("Automatically refresh EPG"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart=False)
 extRunDescriptor = PluginDescriptor(name = extPrefix + " " + _("Refresh now"), description = _("Start EPGrefresh immediately"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = forceRefresh, needsRestart = False)
 extStopDescriptor = PluginDescriptor(name = extPrefix + " " + _("Stop Refresh"), description = _("Stop Running EPG-refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = stopRunningRefresh, needsRestart = False)
-extBackupDescriptor = PluginDescriptor(name = extPrefix + " " + _("Restore Backup"), description = _("Start a Restore of a Backup"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = restoreBackup, needsRestart = False)
 extPendingServDescriptor = PluginDescriptor(name = extPrefix + " " + _("Pending Services"), description = _("Show the pending Services for refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = showPendingServices, needsRestart = False)
 
 def AdjustExtensionsmenu(enable, PlugDescriptor):
@@ -292,14 +256,11 @@ def housekeepingExtensionsmenu(configentry, force=False):
 			PlugDescriptor = extSetupDescriptor
 		elif configentry == config.plugins.epgrefresh.show_run_in_extensionsmenu:
 			PlugDescriptor = extRunDescriptor
-		elif configentry == config.plugins.epgrefresh.show_backuprestore_in_extmenu:
-			PlugDescriptor = extBackupDescriptor
 		if PlugDescriptor != None:
 			AdjustExtensionsmenu(configentry.value, PlugDescriptor)
 
 config.plugins.epgrefresh.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 config.plugins.epgrefresh.show_run_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
-config.plugins.epgrefresh.show_backuprestore_in_extmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 
 def Plugins(**kwargs):
 	# NOTE: this might be a little odd to check this, but a user might expect
@@ -342,8 +303,5 @@ def Plugins(**kwargs):
 	if config.plugins.epgrefresh.show_run_in_extensionsmenu.value:
 		extRunDescriptor.needsRestart = needsRestart
 		list.append(extRunDescriptor)
-	if config.plugins.epgrefresh.show_backuprestore_in_extmenu.value:
-		extBackupDescriptor.needsRestart = needsRestart
-		list.append(extBackupDescriptor)
 
 	return list

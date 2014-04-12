@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-11 07:00+CET\n"
-"PO-Revision-Date: 2014-03-11 07:09+0100\n"
+"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
+"PO-Revision-Date: 2014-04-12 10:32+0100\n"
 "Last-Translator: Joe128 <johnny.u@gmx.at>\n"
 "Language-Team: none\n"
 "Language: de_DE\n"
@@ -20,8 +20,8 @@ msgid "No Backupfiles found"
 msgstr "Keine Backupdateien gefunden"
 
 #: EPGBackupSupport.py:53 EPGRefreshChannelEditor.py:79
-#: EPGRefreshConfiguration.py:46 EPGRefreshConfiguration.py:72
-#: EPGRefreshConfiguration.py:119
+#: EPGRefreshConfiguration.py:44 EPGRefreshConfiguration.py:60
+#: EPGRefreshConfiguration.py:107
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -49,14 +49,14 @@ msgstr "Jüngstes"
 msgid "FILELIST_FORCED"
 msgstr "erzwungen"
 
-#: EPGRefresh.py:269
+#: EPGRefresh.py:277
 msgid ""
 "There is still a refresh running. The Operation isn't allowed at this moment."
 msgstr ""
 "Zurzeit läuft gerade eine Aktualisierung. Die Aktion ist im Moment nicht "
 "erlaubt."
 
-#: EPGRefresh.py:359
+#: EPGRefresh.py:367
 msgid ""
 "EPG refresh finished.\n"
 "Should AutoTimer be search for new matches?"
@@ -64,7 +64,11 @@ msgstr ""
 "EPG-Aktualisierung abgeschlossen.\n"
 "Soll Auto Timer nach neuen Ereignissen suchen?"
 
-#: EPGRefresh.py:397
+#: EPGRefresh.py:408
+msgid "AutoTimer failed with error %s"
+msgstr "Parsen des EPGs durch den AutoTimer hat einen Fehler verursacht %s"
+
+#: EPGRefresh.py:417
 msgid ""
 "Found a total of %d matching Events.\n"
 "%d Timer were added and\n"
@@ -78,15 +82,15 @@ msgstr ""
 "%d Konflikte gefunden,\n"
 "%d alternative Timer hinzugefügt."
 
-#: EPGRefresh.py:405 PipAdapter.py:79
+#: EPGRefresh.py:431 PipAdapter.py:79
 msgid "EPG refresh finished."
 msgstr "EPG Aktualisierung beendet."
 
-#: EPGRefresh.py:520
+#: EPGRefresh.py:546
 msgid "%d more services"
 msgstr "%d weitere Kanäle"
 
-#: EPGRefresh.py:521
+#: EPGRefresh.py:547
 msgid "Following Services have to be scanned:"
 msgstr "Folgende Sender werden noch gescannt:"
 
@@ -102,7 +106,7 @@ msgstr "Sender"
 msgid "Bouquets"
 msgstr "Bouquets"
 
-#: EPGRefreshChannelEditor.py:80 EPGRefreshConfiguration.py:120
+#: EPGRefreshChannelEditor.py:80 EPGRefreshConfiguration.py:108
 msgid "OK"
 msgstr "OK"
 
@@ -134,91 +138,75 @@ msgstr "Zu aktualisierenden Sender auswählen"
 msgid "Select bouquet to refresh"
 msgstr "Zu aktualisierendes Bouquet auswählen"
 
-#: EPGRefreshConfiguration.py:44
+#: EPGRefreshConfiguration.py:42
 msgid "General Help"
 msgstr "Generelle Hilfe"
 
-#: EPGRefreshConfiguration.py:45
+#: EPGRefreshConfiguration.py:43
 msgid "Key Help"
 msgstr "Tastenhilfe"
 
-#: EPGRefreshConfiguration.py:48
+#: EPGRefreshConfiguration.py:46
 msgid "EPGRefresh Configuration Help"
 msgstr "EPGRefresh Konfiguration Hilfe"
 
-#: EPGRefreshConfiguration.py:61
+#: EPGRefreshConfiguration.py:56
 msgid "Stop running refresh"
 msgstr "Laufende Aktualisierung stoppen"
 
-#: EPGRefreshConfiguration.py:62 plugin.py:276
+#: EPGRefreshConfiguration.py:57 plugin.py:240
 msgid "Pending Services"
 msgstr "ausstehende Kanäle"
 
-#: EPGRefreshConfiguration.py:64 plugin.py:273
+#: EPGRefreshConfiguration.py:59 plugin.py:238
 msgid "Refresh now"
 msgstr " Jetzt Aktualisieren"
 
-#: EPGRefreshConfiguration.py:66
-msgid "Restore EPG-Backups (Date)"
-msgstr "Backup wiederherstellen (Datum)"
-
-#: EPGRefreshConfiguration.py:67
-msgid "Restore EPG-Backups (Size)"
-msgstr "Backup wiederherstellen (Größe)"
-
-#: EPGRefreshConfiguration.py:69
-msgid "EPG-Backup is disabled"
-msgstr "EPG-Backup ist deaktiviert"
-
-#: EPGRefreshConfiguration.py:71
-msgid "Uninstall EPG-Backup"
-msgstr "EPG-Backup deinstallieren"
-
-#: EPGRefreshConfiguration.py:74
+#: EPGRefreshConfiguration.py:62
 msgid "EPGRefresh Functions"
 msgstr "EPGRefresh Funktionen"
 
-#: EPGRefreshConfiguration.py:102 EPGRefreshConfiguration.py:251
+#: EPGRefreshConfiguration.py:90 EPGRefreshConfiguration.py:195
 msgid "EPGRefresh Configuration"
 msgstr "EPGRefresh Konfiguration"
 
-#: EPGRefreshConfiguration.py:121
+#: EPGRefreshConfiguration.py:109
 msgid "Functions"
 msgstr "Funktionen"
 
-#: EPGRefreshConfiguration.py:122 EPGRefreshConfiguration.py:130
+#: EPGRefreshConfiguration.py:110 EPGRefreshConfiguration.py:118
 msgid "Edit Services"
 msgstr "Kanäle"
 
-#: EPGRefreshConfiguration.py:129
+#: EPGRefreshConfiguration.py:117
 msgid "Show more Functions"
 msgstr "Mehr Funktionen anzeigen"
 
-#: EPGRefreshConfiguration.py:135
+#: EPGRefreshConfiguration.py:123
 msgid "Show last EPGRefresh - Time"
 msgstr "Letzte EPG-Aktualisierung zeigen"
 
-#: EPGRefreshConfiguration.py:140
+#: EPGRefreshConfiguration.py:128
 msgid "Move page up"
 msgstr "Eine Seite nach oben springen"
 
-#: EPGRefreshConfiguration.py:141
+#: EPGRefreshConfiguration.py:129
 msgid "Move page down"
 msgstr "Eine Seite nach unten springen"
 
-#: EPGRefreshConfiguration.py:151
+#: EPGRefreshConfiguration.py:139
 msgid "Close and forget changes"
 msgstr "Schließen und Änderungen verwerfen"
 
-#: EPGRefreshConfiguration.py:152
+#: EPGRefreshConfiguration.py:140
 msgid "Close and save changes"
 msgstr "Schließen und Änderungen speichern"
 
-#: EPGRefreshConfiguration.py:168
+#: EPGRefreshConfiguration.py:156
 msgid "Refresh EPG automatically"
 msgstr "EPG automatisch aktualisieren"
 
-#: EPGRefreshConfiguration.py:168
+#: EPGRefreshConfiguration.py:156
 msgid ""
 "Unless this is enabled, EPGRefresh won't automatically run but needs to be "
 "explicitly started by the yellow button in this menu."
@@ -227,16 +215,16 @@ msgstr ""
 "laufen, sondern muss explizit mittels gelbem Button hier im Menü gestartet "
 "werden."
 
-#: EPGRefreshConfiguration.py:170
+#: EPGRefreshConfiguration.py:158
 msgid "Duration to stay on service (seconds)"
 msgstr "Verbleibe auf Sender für (Sekunden)"
 
-#: EPGRefreshConfiguration.py:170
+#: EPGRefreshConfiguration.py:158
 msgid ""
 "This is the duration each service/channel will stay active during a refresh."
 msgstr "Anzahl Sekunden, für die die einzelnen Kanäle aktiviert werden."
 
-#: EPGRefreshConfiguration.py:171
+#: EPGRefreshConfiguration.py:159
 msgid ""
 "An automated refresh will start after this time of day, but before the time "
 "specified in next setting."
@@ -244,11 +232,11 @@ msgstr ""
 "Die automatische Aktualisierung wird nach dieser Uhrzeit und vor der Uhrzeit "
 "im nächsten Feld durchgeführt."
 
-#: EPGRefreshConfiguration.py:171
+#: EPGRefreshConfiguration.py:159
 msgid "EPG refresh auto-start earliest (hh:mm)"
 msgstr "Früheste Zeit für Aktualisierung (hh:mm)"
 
-#: EPGRefreshConfiguration.py:172
+#: EPGRefreshConfiguration.py:160
 msgid ""
 "An automated refresh will start before this time of day, but after the time "
 "specified in previous setting."
@@ -256,15 +244,15 @@ msgstr ""
 "Die automatische Aktualisierung wird vor dieser Uhrzeit und nach der Uhrzeit "
 "im vorherigen Feld durchgeführt."
 
-#: EPGRefreshConfiguration.py:172
+#: EPGRefreshConfiguration.py:160
 msgid "EPG refresh auto-start latest (hh:mm)"
 msgstr "Späteste Zeit für Aktualisierung (hh:mm)"
 
-#: EPGRefreshConfiguration.py:173
+#: EPGRefreshConfiguration.py:161
 msgid "Delay if not in standby (minutes)"
 msgstr "Verzögerung sofern nicht im Standby (min)"
 
-#: EPGRefreshConfiguration.py:173
+#: EPGRefreshConfiguration.py:161
 msgid ""
 "If the receiver currently isn't in standby, this is the duration which "
 "EPGRefresh will wait before retry."
@@ -273,7 +261,7 @@ msgstr ""
 "das Plugin für die hier eingetragene Zeit, bevor es einen erneuten Versuch "
 "startet."
 
-#: EPGRefreshConfiguration.py:175
+#: EPGRefreshConfiguration.py:163
 msgid ""
 "If you want to refresh the EPG in background, you can choose the method "
 "which best suits your needs here, e.g. hidden, fake reocrding or regular "
@@ -283,116 +271,19 @@ msgstr ""
 "besten Ihren Anforderungen entspricht: versteckt, Pseudo- Aufnahme oder "
 "normales Bild in Bild."
 
-#: EPGRefreshConfiguration.py:175
+#: EPGRefreshConfiguration.py:163
 msgid "Refresh EPG using"
 msgstr "Aktualisiere unter Verwendung von"
 
-#: EPGRefreshConfiguration.py:176
-msgid "Enable Backup"
-msgstr "Backup aktivieren"
-
-#: EPGRefreshConfiguration.py:176
-msgid ""
-"Should the Backup-Functionality be enabled?\n"
-"For more Information have a look at the Help-Screen."
-msgstr ""
-"Soll die Backup-Funktionalität aktiviert werden?\n"
-"Für weitere Informationen bitte die generelle Hilfe ansehen."
-
-#: EPGRefreshConfiguration.py:178
-msgid "EPG-Files with a less size of this value (KB) won't be backuped."
-msgstr ""
-"EPG-Dateien die kleiner sind als dieser Wert in KB werden nicht kopiert."
-
-#: EPGRefreshConfiguration.py:178
-msgid "Valid Filesize"
-msgstr "Gültige Dateigröße"
-
-#: EPGRefreshConfiguration.py:179
-msgid "Only keep EPG-Backup-Files younger than this days."
-msgstr ""
-"Nur EPG-Backup-Dateien die jünger als diese Anzahl an Tagen sind aufheben."
-
-#: EPGRefreshConfiguration.py:179
-msgid "Valid Age"
-msgstr "Gültiges Alter"
-
-#: EPGRefreshConfiguration.py:180 EPGRefreshConfiguration.py:191
+#: EPGRefreshConfiguration.py:164
 msgid "Display more Options"
 msgstr "mehr Optionen anzeigen"
 
-#: EPGRefreshConfiguration.py:180 EPGRefreshConfiguration.py:191
+#: EPGRefreshConfiguration.py:164
 msgid "Show Advanced Options"
 msgstr "Erweiterte Optionen anzeigen"
 
-#: EPGRefreshConfiguration.py:182
-msgid "Backup-Strategy"
-msgstr "Backup-Strategie"
-
-#: EPGRefreshConfiguration.py:182
-msgid ""
-"Should the biggest or the youngest File be backuped?\n"
-"If it is smaller than the Real-EPG-File then the other strategy will be the "
-"Fallback-Strategy."
-msgstr ""
-"Soll die Größte oder die jüngste Backup-Datei verwendet werden?\n"
-"Falls die Datei kleiner als die echte EPG-Datei ist, wird die andere "
-"Strategie probiert."
-
-#: EPGRefreshConfiguration.py:183
-msgid "EPG-File-Write Wait"
-msgstr "auf EPG-Datei schreiben warten"
-
-#: EPGRefreshConfiguration.py:183
-msgid ""
-"How many seconds should EPGRefresh be wait to check if the EPG-File-Size "
-"didn't change before it starts the Backup."
-msgstr ""
-"Wie viele Sekunden soll gewartet werden um zu überprüfen ob sich die EPG-"
-"Datei-Größe nicht mehr ändert, bevor ein Backup erstellt wird."
-
-#: EPGRefreshConfiguration.py:184
-msgid ""
-"After that times of unsuccesfully boot enigma2, the EPG-File will be deleted."
-msgstr ""
-"Nach dieser Anzahl an erfolglosen enigma2-Starts, wird die EPG-Datei "
-"gelöscht."
-
-#: EPGRefreshConfiguration.py:184
-msgid "Maximum Boot-Count"
-msgstr "Maximale Boot-Versuche"
-
-#: EPGRefreshConfiguration.py:185
-msgid "Enable Debug"
-msgstr "Debug aktivieren"
-
-#: EPGRefreshConfiguration.py:185
-msgid ""
-"Should debugmessages be printed in a File?\n"
-"The filename will be added with the current date"
-msgstr ""
-"Sollen Debug-Meldungen ausgegeben werden? Es wird standardmäßig im "
-"Verzeichnis \"tmp\" geloggt. Falls Debug aktiviert ist wird der Dateiname "
-"mit dem aktuellen Datum versehen und nur solange wie die Backup-Dateien "
-"aufgehoben."
-
-#: EPGRefreshConfiguration.py:187
-msgid "Directory for the Logfiles."
-msgstr "Verzeichnis für die Log-Dateien"
-
-#: EPGRefreshConfiguration.py:187
-msgid "Log-directory"
-msgstr "Logdatei-Verzeichnis"
-
-#: EPGRefreshConfiguration.py:189
-msgid "Should the Manage-Script be shown in User-Scripts?"
-msgstr "Soll das Administrations-Script in User-Scripts angeboten werden?"
-
-#: EPGRefreshConfiguration.py:189
-msgid "Show in User-Scripts"
-msgstr "In User-Scripts anzeigen"
-
-#: EPGRefreshConfiguration.py:194
+#: EPGRefreshConfiguration.py:167
 msgid ""
 "Should protected services be skipped if refresh was started in interactive-"
 "mode?"
@@ -400,11 +291,11 @@ msgstr ""
 "Sollen geschützte Kanäle bei einer manuellen Aktualisierung übersprpungen "
 "werden?"
 
-#: EPGRefreshConfiguration.py:194
+#: EPGRefreshConfiguration.py:167
 msgid "Skip protected Services"
 msgstr "überspringe geschützte Kanäle"
 
-#: EPGRefreshConfiguration.py:195
+#: EPGRefreshConfiguration.py:168
 msgid ""
 "Enable this to be able to access the EPGRefresh configuration from within "
 "the extension menu."
@@ -412,11 +303,11 @@ msgstr ""
 "Soll die Konfiguration direkt aus dem Erweiterungsmenü heraus aufgerufen "
 "werden können?"
 
-#: EPGRefreshConfiguration.py:195
+#: EPGRefreshConfiguration.py:168
 msgid "Show Setup in extension menu"
 msgstr "Setup in Erweiterungsmenü anzeigen"
 
-#: EPGRefreshConfiguration.py:196
+#: EPGRefreshConfiguration.py:169
 msgid ""
 "Enable this to be able to start the EPGRefresh from within the extension "
 "menu."
@@ -424,27 +315,15 @@ msgstr ""
 "Soll der Menüpunkt \"EPGRefresh Jetzt Aktualisieren\" direkt aus dem "
 "Erweiterungsmenü heraus aufgerufen werden können?"
 
-#: EPGRefreshConfiguration.py:196
+#: EPGRefreshConfiguration.py:169
 msgid "Show 'EPGRefresh Start now' in extension menu"
 msgstr "\"Aktualisierung starten\" in Erweiterungsmenü anzeigen"
 
-#: EPGRefreshConfiguration.py:198
-msgid ""
-"Enable this to be able to start a restore of a Backup-File from within the "
-"extension menu."
-msgstr ""
-"Soll der Menüpunkt \"EPGRefresh Backup wiederherstellen\" direkt aus dem "
-"Erweiterungsmenü heraus aufgerufen werden können?"
-
-#: EPGRefreshConfiguration.py:198
-msgid "Show 'EPGRefresh Restore Backup' in extension menu"
-msgstr "\" Backup wiederherstellen\" in Erweiterungsmenü anzeigen"
-
-#: EPGRefreshConfiguration.py:199
+#: EPGRefreshConfiguration.py:170
 msgid "Show popup when refresh starts and ends"
 msgstr "Meldung zeigen, wenn Aktualisierung startet/endet"
 
-#: EPGRefreshConfiguration.py:199
+#: EPGRefreshConfiguration.py:170
 msgid ""
 "This setting controls whether or not an informational message will be shown "
 "at start and completion of refresh."
@@ -452,7 +331,7 @@ msgstr ""
 "Soll zum Start und Ende der Aktualisierung eine Informationsmeldung "
 "angezeigt werden?"
 
-#: EPGRefreshConfiguration.py:200
+#: EPGRefreshConfiguration.py:171
 msgid ""
 "If this is enabled, the plugin will wake up the receiver from standby if "
 "possible. Otherwise it needs to be switched on already."
@@ -460,15 +339,15 @@ msgstr ""
 "Bei aktivierter Option weckt das Plugin den Receiver aus dem Standby auf - "
 "sofern möglich. Andernfalls muss die Box schon eingeschaltet sein."
 
-#: EPGRefreshConfiguration.py:200
+#: EPGRefreshConfiguration.py:171
 msgid "Wake up from standby for EPG refresh"
 msgstr "Aus dem Standby hochfahren"
 
-#: EPGRefreshConfiguration.py:201
+#: EPGRefreshConfiguration.py:172
 msgid "Force scan even if receiver is in use"
 msgstr "Aktualisierung erzwingen"
 
-#: EPGRefreshConfiguration.py:201
+#: EPGRefreshConfiguration.py:172
 msgid ""
 "This setting controls whether or not the refresh will be initiated even "
 "though the receiver is active (either not in standby or currently recording)."
@@ -476,11 +355,11 @@ msgstr ""
 "Aktualisierung auch starten, wenn die Box gerade in Verwendung ist (also "
 "nicht im Standby oder bei aktiver Aufnahme)?"
 
-#: EPGRefreshConfiguration.py:202
+#: EPGRefreshConfiguration.py:173
 msgid "Shutdown after EPG refresh"
 msgstr "Nach EPG Aktualisierung herunterfahren"
 
-#: EPGRefreshConfiguration.py:202
+#: EPGRefreshConfiguration.py:173
 msgid ""
 "This setting controls whether the receiver should be set to standby after "
 "refresh is completed."
@@ -488,15 +367,15 @@ msgstr ""
 "Soll der Receiver nach vollständiger Aktualisierung in den Standby versetzt "
 "werden?"
 
-#: EPGRefreshConfiguration.py:207
+#: EPGRefreshConfiguration.py:178
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Liste der Kanäle automatisch um die Kanäle des AutoTimers erweitern?"
 
-#: EPGRefreshConfiguration.py:207
+#: EPGRefreshConfiguration.py:178
 msgid "Inherit Services from AutoTimer"
 msgstr "Zusätzlich Sender vom AutoTimer verwenden"
 
-#: EPGRefreshConfiguration.py:209
+#: EPGRefreshConfiguration.py:180
 msgid ""
 "After a successful refresh the AutoTimer will automatically search for new "
 "matches if this is enabled. The options 'Ask*' has only affect on a manually "
@@ -508,35 +387,23 @@ msgstr ""
 "manuelle Aktualisierungen relevant. Im Hintergrund wird die Default-Antwort "
 "ausgeführt."
 
-#: EPGRefreshConfiguration.py:209
+#: EPGRefreshConfiguration.py:180
 msgid "Run AutoTimer after refresh"
 msgstr "AutoTimer nach Aktualisierung starten"
 
-#: EPGRefreshConfiguration.py:226
-msgid "EPG-Backup has been installed!:"
-msgstr "EPG-Backup wurde installiert!"
-
-#: EPGRefreshConfiguration.py:251
+#: EPGRefreshConfiguration.py:195
 msgid "Version"
 msgstr "Version"
 
-#: EPGRefreshConfiguration.py:278
-msgid "Select Logfile-Location"
-msgstr "Logdatei-Verzeichnis wählen"
-
-#: EPGRefreshConfiguration.py:340
-msgid "EPG-Backup has been uninstalled!:"
-msgstr "EPG-Backup wurde deinstalliert!"
-
-#: EPGRefreshConfiguration.py:408
+#: EPGRefreshConfiguration.py:328
 msgid "never"
 msgstr "niemals"
 
-#: EPGRefreshConfiguration.py:412
+#: EPGRefreshConfiguration.py:332
 msgid "Last refresh was %s"
 msgstr "Letzte Aktualisierung: %s"
 
-#: EPGRefreshConfiguration.py:428
+#: EPGRefreshConfiguration.py:348
 msgid "Really close without saving settings?"
 msgstr "Wirklich beenden ohne zu speichern?"
 
@@ -596,19 +463,11 @@ msgstr "Bild in Bild (versteckt)"
 msgid "Fake recording"
 msgstr "Pseudoaufnahme"
 
-#: plugin.py:74
-msgid "Biggest before Youngest"
-msgstr "Größtes vor Jüngstem "
-
-#: plugin.py:75
-msgid "Youngest before Biggest"
-msgstr "Jüngstes vor Größtem"
-
-#: plugin.py:116
+#: plugin.py:102
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "EPGRefresh"
 
-#: plugin.py:237
+#: plugin.py:202
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
@@ -616,49 +475,164 @@ msgstr ""
 "Um die Änderungen zu übernehmen muss die GUI neu gestartet werden.\n"
 "Wollen Sie die GUI jetzt neu starten?"
 
-#: plugin.py:271
+#: plugin.py:236
 msgid "EXTENSIONMENU_PREFIX"
 msgstr "EPGRefresh"
 
-#: plugin.py:272
+#: plugin.py:237
 msgid "EXTENSIONNAME_SETUP"
 msgstr "Konfiguration"
 
-#: plugin.py:272 plugin.py:332
+#: plugin.py:237 plugin.py:293
 msgid "Automatically refresh EPG"
 msgstr "Automatisierte EPG Aktualisierung"
 
-#: plugin.py:273
+#: plugin.py:238
 msgid "Start EPGrefresh immediately"
 msgstr "Eine Aktualisierung sofort starten"
 
-#: plugin.py:274
+#: plugin.py:239
 msgid "Stop Refresh"
 msgstr "Aktualisierung stoppen"
 
-#: plugin.py:274
+#: plugin.py:239
 msgid "Stop Running EPG-refresh"
 msgstr "Laufende Aktualisierung stoppen"
 
-#: plugin.py:275
-msgid "Restore Backup"
-msgstr "Backup wiederherstellen"
-
-#: plugin.py:275
-msgid "Start a Restore of a Backup"
-msgstr "Ein EPG-Backup wiederherstellen (Neustart erforderlich)"
-
-#: plugin.py:276
+#: plugin.py:240
 msgid "Show the pending Services for refresh"
 msgstr "Ausstehende Sender einer laufenden Aktualisierung ansehen"
 
-#: plugin.py:325
+#: plugin.py:286
 msgid "add to EPGRefresh"
 msgstr "Zu EPGRefresh hinzufügen"
 
-#: plugin.py:331
+#: plugin.py:292
 msgid "PLUGINNAME_EPGRefresh"
 msgstr "EPGRefresh"
+
+#~ msgid "Restore EPG-Backups (Date)"
+#~ msgstr "Backup wiederherstellen (Datum)"
+
+#~ msgid "Restore EPG-Backups (Size)"
+#~ msgstr "Backup wiederherstellen (Größe)"
+
+#~ msgid "EPG-Backup is disabled"
+#~ msgstr "EPG-Backup ist deaktiviert"
+
+#~ msgid "Uninstall EPG-Backup"
+#~ msgstr "EPG-Backup deinstallieren"
+
+#~ msgid "Enable Backup"
+#~ msgstr "Backup aktivieren"
+
+#~ msgid ""
+#~ "Should the Backup-Functionality be enabled?\n"
+#~ "For more Information have a look at the Help-Screen."
+#~ msgstr ""
+#~ "Soll die Backup-Funktionalität aktiviert werden?\n"
+#~ "Für weitere Informationen bitte die generelle Hilfe ansehen."
+
+#~ msgid "EPG-Files with a less size of this value (KB) won't be backuped."
+#~ msgstr ""
+#~ "EPG-Dateien die kleiner sind als dieser Wert in KB werden nicht kopiert."
+
+#~ msgid "Valid Filesize"
+#~ msgstr "Gültige Dateigröße"
+
+#~ msgid "Only keep EPG-Backup-Files younger than this days."
+#~ msgstr ""
+#~ "Nur EPG-Backup-Dateien die jünger als diese Anzahl an Tagen sind aufheben."
+
+#~ msgid "Valid Age"
+#~ msgstr "Gültiges Alter"
+
+#~ msgid "Backup-Strategy"
+#~ msgstr "Backup-Strategie"
+
+#~ msgid ""
+#~ "Should the biggest or the youngest File be backuped?\n"
+#~ "If it is smaller than the Real-EPG-File then the other strategy will be "
+#~ "the Fallback-Strategy."
+#~ msgstr ""
+#~ "Soll die Größte oder die jüngste Backup-Datei verwendet werden?\n"
+#~ "Falls die Datei kleiner als die echte EPG-Datei ist, wird die andere "
+#~ "Strategie probiert."
+
+#~ msgid "EPG-File-Write Wait"
+#~ msgstr "auf EPG-Datei schreiben warten"
+
+#~ msgid ""
+#~ "How many seconds should EPGRefresh be wait to check if the EPG-File-Size "
+#~ "didn't change before it starts the Backup."
+#~ msgstr ""
+#~ "Wie viele Sekunden soll gewartet werden um zu überprüfen ob sich die EPG-"
+#~ "Datei-Größe nicht mehr ändert, bevor ein Backup erstellt wird."
+
+#~ msgid ""
+#~ "After that times of unsuccesfully boot enigma2, the EPG-File will be "
+#~ "deleted."
+#~ msgstr ""
+#~ "Nach dieser Anzahl an erfolglosen enigma2-Starts, wird die EPG-Datei "
+#~ "gelöscht."
+
+#~ msgid "Maximum Boot-Count"
+#~ msgstr "Maximale Boot-Versuche"
+
+#~ msgid "Enable Debug"
+#~ msgstr "Debug aktivieren"
+
+#~ msgid ""
+#~ "Should debugmessages be printed in a File?\n"
+#~ "The filename will be added with the current date"
+#~ msgstr ""
+#~ "Sollen Debug-Meldungen ausgegeben werden? Es wird standardmäßig im "
+#~ "Verzeichnis \"tmp\" geloggt. Falls Debug aktiviert ist wird der Dateiname "
+#~ "mit dem aktuellen Datum versehen und nur solange wie die Backup-Dateien "
+#~ "aufgehoben."
+
+#~ msgid "Directory for the Logfiles."
+#~ msgstr "Verzeichnis für die Log-Dateien"
+
+#~ msgid "Log-directory"
+#~ msgstr "Logdatei-Verzeichnis"
+
+#~ msgid "Should the Manage-Script be shown in User-Scripts?"
+#~ msgstr "Soll das Administrations-Script in User-Scripts angeboten werden?"
+
+#~ msgid "Show in User-Scripts"
+#~ msgstr "In User-Scripts anzeigen"
+
+#~ msgid ""
+#~ "Enable this to be able to start a restore of a Backup-File from within "
+#~ "the extension menu."
+#~ msgstr ""
+#~ "Soll der Menüpunkt \"EPGRefresh Backup wiederherstellen\" direkt aus dem "
+#~ "Erweiterungsmenü heraus aufgerufen werden können?"
+
+#~ msgid "Show 'EPGRefresh Restore Backup' in extension menu"
+#~ msgstr "\" Backup wiederherstellen\" in Erweiterungsmenü anzeigen"
+
+#~ msgid "EPG-Backup has been installed!:"
+#~ msgstr "EPG-Backup wurde installiert!"
+
+#~ msgid "Select Logfile-Location"
+#~ msgstr "Logdatei-Verzeichnis wählen"
+
+#~ msgid "EPG-Backup has been uninstalled!:"
+#~ msgstr "EPG-Backup wurde deinstalliert!"
+
+#~ msgid "Biggest before Youngest"
+#~ msgstr "Größtes vor Jüngstem "
+
+#~ msgid "Youngest before Biggest"
+#~ msgstr "Jüngstes vor Größtem"
+
+#~ msgid "Restore Backup"
+#~ msgstr "Backup wiederherstellen"
+
+#~ msgid "Start a Restore of a Backup"
+#~ msgstr "Ein EPG-Backup wiederherstellen (Neustart erforderlich)"
 
 #~ msgid "EPGRefresh Start now"
 #~ msgstr "EPGRefresh Jetzt Aktualisieren"
