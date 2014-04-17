@@ -126,18 +126,16 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.sharetypelist.append(("cifs", _("CIFS share")))
 		self.sharetypelist.append(("nfs", _("NFS share")))
 
+		mountusing_default = "fstab"
+		if getImageDistro() in ("openvix", "easy-gui-aus"):
+			mountusing_default = "autofs"
+
 		if self.mountinfo.has_key('mountusing'):
 			mountusing = self.mountinfo['mountusing']
 			if mountusing is False:
-				if getImageDistro() in ("openvix"):
-					mountusing = "autofs"
-				else:
-					mountusing = "fstab"
+				mountusing = mountusing_default
 		else:
-			if getImageDistro() in ("openvix"):
-				mountusing = "autofs"
-			else:
-				mountusing = "fstab"
+				mountusing = mountusing_default
 
 		if self.mountinfo.has_key('mounttype'):
 			mounttype = self.mountinfo['mounttype']
