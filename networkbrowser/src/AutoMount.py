@@ -463,7 +463,7 @@ class AutoMount():
 					if mounttype == 'nfs':
 						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',' + self.sanitizeOptions(sharedata['options'], autofs=True) + ' ' + sharedata['ip'] + ':/' + sharedata['sharedir'] + '\n'
 					elif sharedata['mounttype'] == 'cifs':
-						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',user=' + sharedata['username'] + ',pass=' + sharedata['password'] +','+ self.sanitizeOptions(sharedata['options'], autofs=True) + ' ://' + sharedata['ip'] + '/' + sharedata['sharedir'] + '\n'
+						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',user=' + sharedata['username'] + ',pass=' + sharedata['password'] +','+ self.sanitizeOptions(sharedata['options'], cifs=True, autofs=True) + ' ://' + sharedata['ip'] + '/' + sharedata['sharedir'] + '\n'
 					out.write(line)
 					out.close()
 			elif mountusing == 'fstab':
