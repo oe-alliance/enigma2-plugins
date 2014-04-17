@@ -286,7 +286,7 @@ class NetworkBrowser(Screen):
 				if len(item) == 3 and item[0] == "Disk" and not item[1].endswith("$"):
 					sharelist.append(["smbShare", hostname, hostip, item[1], item[0], item[2]])
 		except OSError as e:
-			print "Running " + cmd + " failed with:" + e
+			print "Running " + str(cmd) + " failed with:" + str(e)
 			pass
 		
 		if devicetype == 'unix':
