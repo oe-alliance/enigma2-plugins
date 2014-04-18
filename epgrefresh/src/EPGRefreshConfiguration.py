@@ -33,7 +33,7 @@ from traceback import print_exc
 from sys import stdout
 import os
 
-VERSION = "2.1"
+VERSION = "2.1.1"
 class EPGHelpContextMenu(FixedMenu):
 	HELP_RETURN_MAINHELP = 0
 	HELP_RETURN_KEYHELP = 1
