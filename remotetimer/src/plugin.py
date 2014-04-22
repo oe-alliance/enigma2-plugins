@@ -52,6 +52,7 @@ config.plugins.remoteTimer.httpip = ConfigIP(default = [0, 0, 0, 0])
 config.plugins.remoteTimer.httpport = ConfigNumber(default = 80)
 config.plugins.remoteTimer.username = ConfigText(default = "root", fixed_size = False)
 config.plugins.remoteTimer.password = ConfigPassword(default = "", fixed_size = False)
+config.plugins.remoteTimer.default = ConfigYesNo(default = False)
 
 def localGetPage(url):
 	username = config.plugins.remoteTimer.username.value
@@ -240,6 +241,7 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 		self["key_green"] = Button(_("OK"))
 
 		ConfigListScreen.__init__(self, [
+			getConfigListEntry(_("Remote Timer - Default"), config.plugins.remoteTimer.default),
 			getConfigListEntry(_("Remote Timer - Hostname"), config.plugins.remoteTimer.httphost),
 			getConfigListEntry(_("Remote Timer - Network IP"), config.plugins.remoteTimer.httpip),
 			getConfigListEntry(_("Remote Timer - WebIf Port"), config.plugins.remoteTimer.httpport),
@@ -269,7 +271,7 @@ def timerInit():
 
 def createNewnigma2Setup(self, widget):
 	baseTimerEntrySetup(self, widget)
-	self.timerentry_remote = ConfigYesNo()
+	self.timerentry_remote = ConfigYesNo(default = config.plugins.remoteTimer.default.value)
 	self.list.insert(0, getConfigListEntry(_("Remote Timer"), self.timerentry_remote))
 
 	# force re-reading the list
@@ -312,6 +314,19 @@ def newnigma2KeyGo(self):
 				elif n > 0:
 					parent = service_ref.ref
 					service_ref = ServiceReference(event.getLinkageService(parent, 0))
+
+		# unify the service ref
+		service_ref = str(service_ref)
+		clean_ref = ""
+		colon_counter = 0
+
+		for char in serviceref:
+			if char == ':':
+				colon_counter += 1
+			if colon_counter < 10:
+				clean_ref += char
+
+		service_ref = clean_ref;
 
 		# XXX: this will - without any hassle - ignore the value of repeated
 		begin, end = self.getBeginEnd()
