@@ -239,16 +239,16 @@ static bool signature()
 		unsigned char level3_mod[128];
 		unsigned char buf[128];
 		std::string challenge((char*)rnd, CLEN);
-		std::string response = tpm.challenge(challenge);
+		std::string response = tpm.computeSignature(challenge);
 		unsigned int len = response.size();
 		unsigned char val[len];
 		if ( len != 128 )
 			return false;
 		memcpy(val, response.c_str(), len);
-		std::string cert = tpm.getCert(eTPM::TPMD_DT_LEVEL2_CERT);
+		std::string cert = tpm.getData(eTPM::DT_LEVEL2_CERT);
 		if ( cert.size() != 210 || !validate_cert(level2_mod, (const unsigned char*) cert.c_str(), tpm_root_mod))
 			return false;
-		cert = tpm.getCert(eTPM::TPMD_DT_LEVEL3_CERT);
+		cert = tpm.getData(eTPM::DT_LEVEL3_CERT);
 		if ( cert.size() != 210 || !validate_cert(level3_mod, (const unsigned char*) cert.c_str(), level2_mod))
 			return false;
 		if (!decrypt_block(buf, val, 128, level3_mod))
