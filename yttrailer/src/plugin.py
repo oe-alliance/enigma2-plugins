@@ -63,7 +63,7 @@ etpm = eTPM()
 
 def autostart(reason, **kwargs):
 	global l2key
-	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+	l2cert = etpm.getData(eTPM.DT_LEVEL2_CERT)
 	if l2cert:
 		l2key = validate_cert(l2cert, rootkey)
 		if l2key:
@@ -146,7 +146,7 @@ def showTrailerList(self):
 class YTTrailer:
 	def __init__(self, session):
 		self.session = session
-		self.l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+		self.l3cert = etpm.getData(eTPM.DT_LEVEL3_CERT)
 
 	def showTrailer(self, eventname):
 		if eventname:
@@ -293,7 +293,7 @@ class YTTrailer:
 				l3key = validate_cert(self.l3cert, l2key)
 				if l3key:
 					rnd = read_random()
-					val = etpm.challenge(rnd)
+					val = etpm.computeSignature(rnd)
 					result = decrypt_block(val, l3key)
 					if result[80:88] == rnd:
 						print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
