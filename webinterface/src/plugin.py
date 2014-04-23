@@ -235,7 +235,7 @@ def stopWebserver(session):
 def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usessl=False):
 	if hw.get_device_name().lower() != "dm7025":
 		l3k = None
-		l3c = tpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+		l3c = tpm.getData(eTPM.DT_LEVEL3_CERT)
 
 		if l3c is None:
 			return False
@@ -248,7 +248,7 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 		if random is None:
 			return False
 
-		value = tpm.challenge(random)
+		value = tpm.computeSignature(random)
 		result = decrypt_block(value, l3k)
 
 		if result is None:
@@ -531,7 +531,7 @@ def networkstart(reason, session):
 	l2r = False
 	l2k = None
 	if hw.get_device_name().lower() != "dm7025":
-		l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+		l2c = tpm.getData(eTPM.DT_LEVEL2_CERT)
 
 		if l2c is None:
 			return
@@ -560,7 +560,7 @@ def configCB(result, session):
 	l2r = False
 	l2k = None
 	if hw.get_device_name().lower() != "dm7025":
-		l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+		l2c = tpm.getData(eTPM.DT_LEVEL2_CERT)
 
 		if l2c is None:
 			return
