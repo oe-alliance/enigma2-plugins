@@ -103,7 +103,7 @@ var SimpleWebAdminPages = Class.create({
 	PAGE_TERMINAL: 'tplTerminal',
 
 	initialize: function(target){
-		this.simpleHandler = new SimplePageHandler(target);
+		this.simpleHandler = new SimpleWebAdminPageHandler(target);
 	},
 
 	show: function(tpl, data){
@@ -114,7 +114,7 @@ var SimpleWebAdminPages = Class.create({
 					   
 	loadTerminal: function(){
 		setContentHd('Terminal');
-		var data = { 'host' : document.location.host }
+		var data = { 'host' : document.location.host };
 		this.show(this.PAGE_TERMINAL, data);
 	}
 });
