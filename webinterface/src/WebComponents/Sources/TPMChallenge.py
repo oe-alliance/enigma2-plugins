@@ -23,8 +23,8 @@ class TPMChallenge(Source):
 		cmd = self.cmd.get('cmd', self.CERTIFICATES)
 
 		if cmd == self.CERTIFICATES:
-			l2cert = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
-			l3cert = tpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+			l2cert = tpm.getData(eTPM.DT_LEVEL2_CERT)
+			l3cert = tpm.getData(eTPM.DT_LEVEL3_CERT)
 
 			return (b64encode(l2cert), b64encode(l3cert), None, True, _('LEVEL2 and LEVEL3 Certifcates (Base64-encoded)'))
 
@@ -33,7 +33,7 @@ class TPMChallenge(Source):
 
 			if random != None:
 
-				value = b64encode( tpm.challenge( b64decode(random) ) )
+				value = b64encode( tpm.computeSignature( b64decode(random) ) )
 				return (None, None, value, True, _('Challenge executed, please verify the result!'))
 			else:
 				return (None, None, None, False, _('Obligatory parameter "random" for cmd="%s" missing') %self.CHALLENGE)

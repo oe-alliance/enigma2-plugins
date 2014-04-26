@@ -399,7 +399,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if current[1].help_window.instance is not None:
 			current[1].help_window.instance.hide()
 
-		l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+		l3cert = etpm.getData(eTPM.DT_LEVEL3_CERT)
 		if l3cert is None or l3cert is "":
 			self["videoactions"].setEnabled(False)
 			self["searchactions"].setEnabled(False)
@@ -422,7 +422,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			print "random error"
 			return
 
-		val = etpm.challenge(rnd)
+		val = etpm.computeSignature(rnd)
 		result = decrypt_block(val, self.l3key)
 
 		self.statuslist = []
@@ -486,7 +486,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				rnd = get_rnd()
 				if rnd is None:
 					return
-				val = etpm.challenge(rnd)
+				val = etpm.computeSignature(rnd)
 				result = decrypt_block(val, self.l3key)
 			if not result or result[80:88] != rnd:
 				self["key_green"].show()
@@ -1895,7 +1895,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 
 def MyTubeMain(session, **kwargs):
 	l2 = False
-	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+	l2cert = etpm.getData(eTPM.DT_LEVEL2_CERT)
 	if l2cert is None:
 		print "l2cert not found"
 		return

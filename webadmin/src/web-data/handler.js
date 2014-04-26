@@ -157,4 +157,20 @@ var MemoryHandler  = Class.create(AbstractAdminContentHandler, {
 		};
 	},
 });
- 
+
+/**
+ * SimpleWebAdminPageHandler
+ * 
+ */
+
+var templateEngine2 = new TemplateEngine('/webadmin/tpl/');
+
+var SimpleWebAdminPageHandler = Class.create(AbstractContentHandler,{
+	initialize: function($super, target){
+		$super(null, target);
+	},
+
+	show: function(tpl, data){
+		templateEngine2.process(tpl, data, this.target, this.finished.bind(this));
+	}
+});

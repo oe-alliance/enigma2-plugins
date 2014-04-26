@@ -76,13 +76,18 @@ class EPGRefresh:
 		self.readConfiguration()
 
 	def _initFinishTodos(self):
-		self.finishTodos = [self._ToDoCallAutotimer, self._ToDoAutotimerCalled, self.finish, self._callFinishNotifiers]
+		self.finishTodos = [self._ToDoCallAutotimer, self._ToDoAutotimerCalled, self._callFinishNotifiers, self.finish]
 	
 	def addFinishNotifier(self, notifier):
 		if not callable(notifier):
 			print("[EPGRefresh] notifier" + str(notifier) + " isn't callable")
 			return
 		self.finishNotifiers[str(notifier)] = notifier
+
+	def removeFinishNotifier(self, notifier):
+		notifierKey = str(notifier)
+		if self.finishNotifiers.has_key(notifierKey):
+			self.finishNotifiers.pop(notifierKey)
 
 	def readConfiguration(self):
 		# Check if file exists
@@ -443,6 +448,7 @@ class EPGRefresh:
 				Notifications.AddNotificationWithID("Shutdown", Screens.Standby.TryQuitMainloop, 1, domain = NOTIFICATIONDOMAIN)
 		self.forcedScan = False
 		self.isrunning = False
+		self._nextTodo()
 		
 	def refresh(self):
 		if self.doStopRunningRefresh:
