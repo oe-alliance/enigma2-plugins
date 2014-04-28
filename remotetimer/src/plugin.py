@@ -226,8 +226,8 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		#self["HelpWindow"] = Pixmap()
-		#self["HelpWindow"].hide()
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
 
  		self["SetupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
