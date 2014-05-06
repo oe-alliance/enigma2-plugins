@@ -320,7 +320,7 @@ def newnigma2KeyGo(self):
 		clean_ref = ""
 		colon_counter = 0
 
-		for char in serviceref:
+		for char in service_ref:
 			if char == ':':
 				colon_counter += 1
 			if colon_counter < 10:
