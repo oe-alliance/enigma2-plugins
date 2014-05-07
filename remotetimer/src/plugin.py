@@ -53,6 +53,7 @@ config.plugins.remoteTimer.httpport = ConfigNumber(default = 80)
 config.plugins.remoteTimer.username = ConfigText(default = "root", fixed_size = False)
 config.plugins.remoteTimer.password = ConfigPassword(default = "", fixed_size = False)
 config.plugins.remoteTimer.default = ConfigYesNo(default = False)
+config.plugins.remoteTimer.remotedir = ConfigYesNo(default = False)
 
 def localGetPage(url):
 	username = config.plugins.remoteTimer.username.value
@@ -241,12 +242,13 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 		self["key_green"] = Button(_("OK"))
 
 		ConfigListScreen.__init__(self, [
-			getConfigListEntry(_("Remote Timer - Default"), config.plugins.remoteTimer.default),
 			getConfigListEntry(_("Remote Timer - Hostname"), config.plugins.remoteTimer.httphost),
 			getConfigListEntry(_("Remote Timer - Network IP"), config.plugins.remoteTimer.httpip),
 			getConfigListEntry(_("Remote Timer - WebIf Port"), config.plugins.remoteTimer.httpport),
 			getConfigListEntry(_("Remote Timer - Username"), config.plugins.remoteTimer.username),
 			getConfigListEntry(_("Remote Timer - Password"), config.plugins.remoteTimer.password),
+			getConfigListEntry(_("Remote Timer - Default"), config.plugins.remoteTimer.default),
+			getConfigListEntry(_("Remote Timer - Remotedir"), config.plugins.remoteTimer.remotedir),
 		], session)
 
 	def keySave(self):
@@ -340,6 +342,11 @@ def newnigma2KeyGo(self):
 		rt_disabled = 0 # XXX: do we really want to hardcode this? why do we offer this option then?
 		rt_repeated = 0 # XXX: same here
 
+		if config.plugins.remoteTimer.remotedir.value:
+			rt_dirname = urllib.quote(self.timerentry_dirname.value.decode('utf8').encode('utf8','ignore'))
+		else:
+			rt_dirname = "None"
+
 		if self.timerentry_justplay.value == "zap":
 			rt_justplay = 1
 		else:
@@ -354,7 +361,7 @@ def newnigma2KeyGo(self):
 		# Add Timer on RemoteBox via WebIf Command
 		# http://192.168.178.20/web/timeradd?sRef=&begin=&end=&name=&description=&disabled=&justplay=&afterevent=&repeated=
 		remoteip = "%d.%d.%d.%d" % tuple(config.plugins.remoteTimer.httpip.value)
-		remoteurl = "http://%s:%s/web/timeradd?sRef=%s&begin=%s&end=%s&name=%s&description=%s&disabled=%s&justplay=%s&afterevent=%s&repeated=%s" % (
+		remoteurl = "http://%s:%s/web/timeradd?sRef=%s&begin=%s&end=%s&name=%s&description=%s&disabled=%s&justplay=%s&afterevent=%s&repeated=%s&dirname=%s" % (
 			remoteip,
 			config.plugins.remoteTimer.httpport.value,
 			service_ref,
@@ -365,7 +372,8 @@ def newnigma2KeyGo(self):
 			rt_disabled,
 			rt_justplay,
 			rt_afterEvent,
-			rt_repeated
+			rt_repeated,
+			rt_dirname
 		)
 		print "[RemoteTimer] debug remote", remoteurl
 
