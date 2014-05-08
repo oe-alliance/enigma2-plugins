@@ -1,0 +1,14 @@
+<mphelp skin="EPGRefreshHelp" caption="EPGRefresh Help">
+	<page title="Willkommen zu EPGRefresh">
+		<text value="Diese Hilfe gibt Ihnen einen Überblick der Funktionen von EPGRefresh.\nSie können sie jederzeit mit der Roten oder der Exit-Taste beenden oder sie mittels der Hilfe-Taste aus dem Konfigurationsmenü wieder aufrufen (mehr datzu später).\n\n\nAber Sie sollten sich wirklich ein paar Minuten Zeit nehmen um diese Hilfeseiten zu lesen."/>
+	</page>
+	<page title="Das Konfigurationsmenü">
+		<text value="Dies ist der Einstiegspunkt von EPGRefresh. In diesem Menü können Sie alle Aspekte des Plugins einstellen.\nAlle Konfigurationsoptionen haben eine eigene Erklärung welche Ihnen dabei helfen soll deren Aufgabe besser zu verstehen.\n\nMit der gelben Taste gelangen Sie zu weiteren Funktionen wie z.B. eine manuelle Aktualisierung zu starten oder ein Backup laden falls die Backup-Funktion aktiviert ist. Sie können diese Funktionen auch im Erweiterungsmenü verfügbar machen. Während einer laufenden Aktualisierung finden Sie auch einen Eintrag um diesen zu stoppen. Die Info-Taste zeigt Ihnen den Zeitpunkt der letzten erfolgreichen Aktualisierung. \nDie blaue Taste öffnet den Kanal-Editor (nächste Seite)."/>
+	</page>
+	<page title="Kanalliste bearbeiten">
+		<text value="Die erste Zeile erlaubt es Ihnen zwischen dem Editor für Kanäle und Bouquets zu wählen und die weiteren Zeilen zeigen die Kanäle/Bouquets die Sie bereits gewählt haben.\n\nMit der blauen Taste können Sie neue Einträge zur Liste hinzufügen und mit der gelben Taste können Sie bestehende Einträge wieder entfernen.\n\n\nFür die meisten Leute wird es ausreichen das &quot;Favoriten&quot; Bouquet zu verwenden."/>
+	</page>
+	<page title="Gratulation">
+		<text value="Sie wissen jetzt wie Sie die ersten Schritte in EPGRefresh tätigen.\n\nWir wollen Sie noch darauf hinweisen, dass das Plugin nichts von sich aus ausführt. Wenn Sie wollen dass die Aktualisierung automatisch im Hintergrund geschieht, müssen Sie dies einstellen.\nDies wurde nicht standardmäßig eingestellt damit keine Unannehmlichkeiten entstehen."/>
+	</page>
+</mphelp>

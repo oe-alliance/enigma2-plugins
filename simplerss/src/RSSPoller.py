@@ -217,7 +217,7 @@ class RSSPoller:
 					notifications = Notifications.notificationQueue.queue
 					current_notifications = Notifications.notificationQueue.current
 					handler = lambda note: (note.fnc, note.screen, note.args, note.kwargs, note.id)
-					handler_current = lambda note_tup: (note[0].id,)
+					handler_current = lambda note: (note[0].id,)
 				else:
 					notifications = Notifications.notifications
 					current_notifications = Notifications.current_notifications

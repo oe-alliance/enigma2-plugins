@@ -156,30 +156,60 @@ static int getline(char** pbuffer, size_t* pbufsize, int fd)
 	}
 }
 
+typedef struct UrlComponents
+{
+	std::string protocol;
+	std::string host;
+	std::string authorization;
+	int port;
+	std::string uri;
+} UrlComponents;
+
+int splitUrl(std::string url, UrlComponents& components)
+{
+	size_t proto = url.find("://");
+    if (proto == std::string::npos)
+        return -1;
+	components.protocol = url.substr(0, proto);
+	url = url.substr(proto+3);
+    
+	size_t at = url.find("@");
+	if (at != std::string::npos) {
+		components.authorization = url.substr(0, at);
+		url = url.substr(at + 1);
+	} else {
+		components.authorization = "";
+	}
+	size_t slash = url.find("/");
+	if (slash != std::string::npos) {
+		components.host = url.substr(0, slash);
+		components.uri = url.substr(slash);
+	} else {
+		components.host = url;
+		components.uri = "";
+	}
+	size_t dp = components.host.find(":");
+	if (dp == 0) {
+		components.port = atoi(components.host.substr(1).c_str());
+		components.host = "localhost";
+	} else if (dp != std::string::npos) {
+		components.port = atoi(components.host.substr(dp + 1).c_str());
+		components.host = components.host.substr(0, dp);
+	} else {
+		components.port = (components.protocol == "https" ? 443 : 80);
+	}
+	return 0;
+}
+
 int eServiceTS::openHttpConnection(std::string url)
 {
-	std::string host;
-	int port = 80;
-	std::string uri;
-
-	int slash = url.find("/", 7);
-	if (slash > 0) {
-		host = url.substr(7, slash-7);
-		uri = url.substr(slash, url.length()-slash);
-	} else {
-		host = url.substr(7, url.length()-7);
-		uri = "";
-	}
-	int dp = host.find(":");
-	if (dp == 0) {
-		port = atoi(host.substr(1, host.length()-1).c_str());
-		host = "localhost";
-	} else if (dp > 0) {
-		port = atoi(host.substr(dp+1, host.length()-dp-1).c_str());
-		host = host.substr(0, dp);
+	UrlComponents comp;
+	if (splitUrl(url, comp) != 0) {
+		eDebug("[VLC] invalid url: %s", url.c_str());
+		return -1;
 	}
 
-	struct hostent* h = gethostbyname(host.c_str());
+	struct hostent* h = gethostbyname(comp.host.c_str());
 	if (h == NULL || h->h_addr_list == NULL)
 		return -1;
 	int fd = socket(PF_INET, SOCK_STREAM, 0);
@@ -189,9 +219,9 @@ int eServiceTS::openHttpConnection(std::string url)
 	struct sockaddr_in addr;
 	addr.sin_family = AF_INET;
 	addr.sin_addr.s_addr = *((in_addr_t*)h->h_addr_list[0]);
-	addr.sin_port = htons(port);
+	addr.sin_port = htons(comp.port);
 
-	eDebug("connecting to %s", url.c_str());
+	eDebug("[VLC] connecting to %s", url.c_str());
 
 	if (connect(fd, (sockaddr*)&addr, sizeof(addr)) == -1) {
 		std::string msg = "connect failed for: " + url;
@@ -200,9 +230,18 @@ int eServiceTS::openHttpConnection(std::string url)
 	}
 
 	std::string request = "GET ";
-	request.append(uri).append(" HTTP/1.1\n");
-	request.append("Host: ").append(host).append("\n");
+	request.append(comp.uri).append(" HTTP/1.1\n");
 	request.append("Accept: */*\n");
+	if (comp.authorization.length() > 0) {
+		request.append("Authorization: Basic ").append(comp.authorization).append("\n");
+	}
+	request.append("Host: ").append(comp.host);
+	if (comp.port != 80) {
+		char buf[20];
+		sprintf(buf, ":%d", comp.port);
+		request.append(buf);
+	}
+	request.append("\n");
 	request.append("Connection: close\n");
 	request.append("\n");
 	//eDebug(request.c_str());
@@ -213,7 +252,7 @@ int eServiceTS::openHttpConnection(std::string url)
 	char* linebuf = (char*)malloc(1000);
 
 	rc = getline(&linebuf, &buflen, fd);
-	//eDebug("RECV(%d): %s", rc, linebuf);
+	//eDebug("[VLC] RECV(%d): %s", rc, linebuf);
 	if (rc <= 0)
 	{
 		close(fd);
@@ -226,16 +265,17 @@ int eServiceTS::openHttpConnection(std::string url)
 	char statusmsg[100];
 	rc = sscanf(linebuf, "%99s %d %99s", proto, &statuscode, statusmsg);
 	if (rc != 3 || statuscode != 200) {
-		eDebug("wrong response: \"200 OK\" expected.");
+		eDebug(request.c_str());
+		eDebug("[VLC] wrong response %d: \"200 OK\" expected.", statuscode);
 		free(linebuf);
 		close(fd);
 		return -1;
 	}
-	eDebug("proto=%s, code=%d, msg=%s", proto, statuscode, statusmsg);
+	//eDebug("[VLC] %s %d %s", proto, statuscode, statusmsg);
 	while (rc > 0)
 	{
 		rc = getline(&linebuf, &buflen, fd);
-		//eDebug("RECV(%d): %s", rc, linebuf);
+		//eDebug("[VLC] RECV(%d): %s", rc, linebuf);
 	}
 	free(linebuf);
 

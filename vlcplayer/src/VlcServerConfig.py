@@ -45,7 +45,7 @@ class ConfigMutable(ConfigElement):
 			self.currentConfig = self.configElementDict[key]
 			self.currentKey = key
 			self.saved_value = self.currentConfig.saved_value
-
+			
 	def setValue(self, val):
 		self.currentConfig.value = val
 		self.changed()
@@ -61,7 +61,7 @@ class ConfigMutable(ConfigElement):
 		return self.currentConfig._value
 
 	_value = property(get_Value, set_Value)
-
+	
 	def fromstring(self, value):
 		return self.currentConfig.fromstring(value)
 
@@ -80,9 +80,19 @@ class ConfigMutable(ConfigElement):
 	def cancel(self):
 		self.setAsCurrent(self.defaultKey)
 		self.load()
-
+		
 	def isChanged(self):
 		return self.currentConfig.isChanged()
+
+	def changed(self):
+		for x in self.notifiers:
+			x(self)
+			
+	def addNotifier(self, notifier, initial_call = True):
+		assert callable(notifier), "notifiers must be callable"
+		self.notifiers.append(notifier)
+		if initial_call:
+			notifier(self)
 
 	def disableSave(self):
 		self.currentConfig.disableSave()
@@ -117,9 +127,8 @@ class ConfigSelectionExtended(ConfigSelection):
 		ConfigSelection.__init__(self, choices, default)
 
 	def deleteNotifier(self, notifier):
-		pass
-		### TODO Some kind of bug, no idea what - HACK solusion
-		#self.removeNotifier(notifier)
+		try: self.removeNotifier(notifier)
+		except: pass
 
 
 class __VlcServerConfig():
@@ -148,6 +157,7 @@ class __VlcServerConfig():
 				 "FQDN": ConfigText("fqdname", False)
 				}, newServerConfigSubsection.addressType.value)
 		newServerConfigSubsection.httpport = ConfigInteger(8080, (0,65535))
+		newServerConfigSubsection.password = ConfigText("", False)
 		newServerConfigSubsection.basedir = ConfigText("/", False)
 		newServerConfigSubsection.dvdPath = ConfigText("", False)
 		newServerConfigSubsection.transcodeVideo = ConfigYesNo()
@@ -172,6 +182,7 @@ class __VlcServerConfig():
 		newServerConfigSubsection.videonorm = ConfigSelection(
 				[("720,576,4:3,25,i", "720 x 576 (4:3) @ 25fps (PAL)"),
 				 ("720,576,16:9,25,i", "720 x 576 (16:9) @ 25fps (PAL)"),
+				 ("720,576,16:9,24,i", "720 x 576 (16:9) @ 24fps (PAL)"), 
 				 ("704,576,4:3,25,i", "704 x 576 (4:3) @ 25fps (PAL)"),
 				 ("704,576,16:9,25,i", "704 x 576 (16:9) @ 25fps (PAL)"),
 				 ("544,576,4:3,25,i", "544 x 576 (4:3) @ 25fps (PAL)"),
@@ -294,6 +305,7 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		self.hostConfigListEntry = getConfigListEntry(_("Server Address"), server.host())
 		cfglist.append(self.hostConfigListEntry)
 		cfglist.append(getConfigListEntry(_("HTTP Port"), server.httpPort()))
+		cfglist.append(getConfigListEntry(_("HTTP Password"), server.password()))
 		cfglist.append(getConfigListEntry(_("Movie Directory"), server.basedir()))
 		cfglist.append(getConfigListEntry(_("DVD Device (leave empty for default)"), server.dvdPath()))
 

@@ -12,10 +12,11 @@
 
 import re
 import posixpath
+import base64
 from sys import maxint
 from random import randint, seed
 from urllib import urlencode
-from urllib2 import urlopen
+from urllib2 import urlopen,Request
 from xml.dom.minidom import parse
 from VlcPlayer import VlcPlayer, isDvdUrl
 
@@ -69,6 +70,12 @@ class VlcServer:
 
 	def httpPort(self):
 		return self.cfg.httpport
+
+	def getPassword(self):
+		return self.cfg.password.value
+
+	def password(self):
+		return self.cfg.password
 
 	def getBasedir(self):
 		return self.cfg.basedir.value
@@ -152,7 +159,12 @@ class VlcServer:
 		uri = "/requests/" + request + ".xml"
 		if params is not None: uri = uri + "?" + urlencode(params, True).replace('+', '%20')
 		location = "%s:%d" % (self.getHost(), self.getHttpPort())
-		resp = urlopen("http://" + location + uri)
+		httpreq = Request("http://" + location + uri)
+		if self.getPassword():
+			username = '' # VLC uses empty username
+			authorization = base64.encodestring('%s:%s' % (username, self.getPassword()))[:-1]
+			httpreq.add_header("Authorization", "Basic %s" % authorization)
+		resp = urlopen(httpreq)
 		if resp is None:
 			raise IOError, "No response from Server"
 		xml = parse(resp)
@@ -271,7 +283,13 @@ class VlcServer:
 			return None
 		else:
 			self.lastError = None
-		return "http://%s:%d/%s.ts" % (self.getHost(), self.getHttpPort(), streamName)
+		host = self.getHost()
+		port = self.getHttpPort()
+		if self.getPassword():
+			username = '' # VLC uses empty username
+			authorization = base64.encodestring('%s:%s' % (username, self.getPassword()))[:-1]
+			host = authorization + "@" + host
+		return "http://%s:%d/%s.ts" % (host, port, streamName)
 
 	def unpause(self):
 		self.__xmlRequest("status", {"command": "pl_pause"})
@@ -290,8 +308,11 @@ class VlcServer:
 		currentElement = self.getCurrentElement()
 		while currentElement is not None and currentElement.parentNode.getAttribute("ro") != "ro":
 			currentElement = currentElement.parentNode
-		id = int(currentElement.getAttribute("id"))
-		self.delete(id)
+		if currentElement is not None:
+			id = int(currentElement.getAttribute("id"))
+			self.delete(id)
+		else:
+			print "[VLC] no current element!"
 		
 	def seek(self, value):
 		"""  Allowed values are of the form:

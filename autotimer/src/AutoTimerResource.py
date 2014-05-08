@@ -97,8 +97,9 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 		# We re-read the config so we won't display empty or wrong information
 		try:
 			autotimer.readXml()
-		except Exception:
-			return self.returnResult(req, False, _("Couldn't load config file!"))
+		except Exception as e:
+			return self.returnResult(req, False, _("Couldn't load config file!") + '\n' + str(e))
+
 		# show xml
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
