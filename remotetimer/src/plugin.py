@@ -415,7 +415,7 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	plugin = []
-	if getImageDistro() in ("openvix", "openatv"):
+	if getImageDistro() in ("openvix", "openatv", "openxta"):
 		plugin.append(PluginDescriptor(name=_("Remote Timer"), description = _("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu))
 	else:
 		plugin.append(PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main))
