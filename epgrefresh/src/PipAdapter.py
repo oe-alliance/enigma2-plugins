@@ -29,7 +29,7 @@ class PipAdapter:
 			return False
 
 		if config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddPopup(_("EPG refresh started in background.") + "\n" + _("Please don't use PiP meanwhile!"), MessageBox.TYPE_INFO, 4, STARTNOTIFICATIONID, domain = NOTIFICATIONDOMAIN)
+			Notifications.AddPopup(_("EPG refresh started in background.") + "\n" + _("Please don't use PiP meanwhile!"), MessageBox.TYPE_INFO, 4, STARTNOTIFICATIONID)
 		if hasattr(self.session, 'pipshown') and self.session.pipshown:
 			# Hijack PiP
 			self.wasShown = True
@@ -76,7 +76,7 @@ class PipAdapter:
 		if not self.pipAvail: return
 
 		if config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddPopup(_("EPG refresh finished.") + "\n" + _("PiP available now."), MessageBox.TYPE_INFO, 4, ENDNOTIFICATIONID, domain = NOTIFICATIONDOMAIN)
+			Notifications.AddPopup(_("EPG refresh finished.") + "\n" + _("PiP available now."), MessageBox.TYPE_INFO, 4, ENDNOTIFICATIONID)
 
 		# remove pip preemptively
 		try: del self.session.pip

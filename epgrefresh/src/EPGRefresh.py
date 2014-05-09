@@ -286,7 +286,7 @@ class EPGRefresh:
 			except:
 				print("[EPGRefresh] Error while opening Messagebox!")
 				print_exc(file=stdout)
-				Notifications.AddPopup(message, MessageBox.TYPE_INFO, 10, domain = NOTIFICATIONDOMAIN)
+				Notifications.AddPopup(message, MessageBox.TYPE_INFO, 10)
 			return False
 		return True
 
@@ -369,7 +369,7 @@ class EPGRefresh:
 					# only if we are interactive
 					Notifications.AddNotificationWithCallback(self._ToDoCallAutotimerCB, MessageBox, \
 						text = _("EPG refresh finished.\nShould AutoTimer be search for new matches?"), \
-						type = MessageBox.TYPE_YESNO, default = defaultanswer, timeout = 10, domain = NOTIFICATIONDOMAIN)
+						type = MessageBox.TYPE_YESNO, default = defaultanswer, timeout = 10)
 				else:
 					self._ToDoCallAutotimerCB(parseAT=defaultanswer)
 			else:
@@ -410,7 +410,7 @@ class EPGRefresh:
 		print("[EPGRefresh] Debug: AutoTimer failed:" + str(failure))
 		if config.plugins.epgrefresh.enablemessage.value:
 			Notifications.AddPopup(_("AutoTimer failed with error %s") % (str(failure)), \
-				MessageBox.TYPE_ERROR, 10, domain = NOTIFICATIONDOMAIN)
+				MessageBox.TYPE_ERROR, 10)
 		self._nextTodo()
 
 	def _ToDoAutotimerCalled(self, *args, **kwargs):
@@ -420,7 +420,7 @@ class EPGRefresh:
 				ret=args[0]
 				Notifications.AddPopup(_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") \
 					% (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
-					MessageBox.TYPE_INFO, 10, domain = NOTIFICATIONDOMAIN)
+					MessageBox.TYPE_INFO, 10)
 		self._nextTodo()
 	
 	def _callFinishNotifiers(self, *args, **kwargs):
@@ -432,7 +432,7 @@ class EPGRefresh:
 	def finish(self, *args, **kwargs):
 		print("[EPGRefresh] Debug: Refresh finished!")
 		if config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddPopup(_("EPG refresh finished."), MessageBox.TYPE_INFO, 4, ENDNOTIFICATIONID, domain = NOTIFICATIONDOMAIN)
+			Notifications.AddPopup(_("EPG refresh finished."), MessageBox.TYPE_INFO, 4, ENDNOTIFICATIONID)
 		epgrefreshtimer.cleanup()
 		self.maybeStopAdapter()
 		
@@ -444,7 +444,7 @@ class EPGRefresh:
 			if Screens.Standby.inStandby:
 				self.session.open(Screens.Standby.TryQuitMainloop, 1)
 			else:
-				Notifications.AddNotificationWithID("Shutdown", Screens.Standby.TryQuitMainloop, 1, domain = NOTIFICATIONDOMAIN)
+				Notifications.AddNotificationWithID("Shutdown", Screens.Standby.TryQuitMainloop, 1)
 		self.forcedScan = False
 		self.isrunning = False
 		self._nextTodo()
