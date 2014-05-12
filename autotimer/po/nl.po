@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma - autotimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-12 21:12+0200\n"
-"PO-Revision-Date: 2013-08-13 18:44+0100\n"
+"POT-Creation-Date: 2014-05-08 13:56+0100\n"
+"PO-Revision-Date: 2014-05-12 12:10+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: nl_NL\n"
@@ -13,6 +13,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #, python-format
 msgid ""
@@ -353,9 +355,8 @@ msgstr "Als er een timer conflict ontstaat, zal AutoTimer buiten de opgegeven ti
 msgid "If enabled, the polling will be skipped if a recording is in progress."
 msgstr "Indien ingeschakeld zal het ondervragen niet uitgevoerd worden tijdens een opname."
 
-#, python-format
-msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80%% of the it."
-msgstr "Als dit is ingeschakeld wordt een bestaande timer beschouwd als dezelfde als het event voor minstens 80% % overlapt."
+msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
+msgstr "Als dit is ingeschakeldzal een bestaande timer worden beschouwd als overeenkomend ald deze tenminste 80% van het event opneemt."
 
 msgid "If this is selected, the name of the respective AutoTimer will be added as a tag to timers created by this plugin."
 msgstr "Als dit is geselecteerd zal de naam van de autotimer toegevoegd worden als tag aan de timers die gecreëerd worden."
@@ -956,6 +957,9 @@ msgstr "kanaal wisselen"
 
 #~ msgid "If enabled, the polling will be skipped if the Dreambox is recording."
 #~ msgstr "Als deze optie is ingeschakeld wordt er tijdens een opname niet gecontroleerd op overeenkomende events."
+
+#~ msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80%% of the it."
+#~ msgstr "Als dit is ingeschakeld wordt een bestaande timer beschouwd als dezelfde als het event voor minstens 80% % overlapt."
 
 #~ msgid "Override found with alternative service"
 #~ msgstr "Overschrijf items met de alternatieve Service"
