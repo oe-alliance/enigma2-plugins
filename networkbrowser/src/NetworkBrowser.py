@@ -100,7 +100,10 @@ class NetworkBrowser(Screen):
 		self.session = session
 		self.iface = iface
 		if self.iface is None:
+			self.iface = self.GetNetworkInterfaces()
+		if self.iface is None:
 			self.iface = 'eth0'
+		print "[Networkbrowser] Using Network Interface: %s" % self.iface
 		self.networklist = None
 		self.device = None
 		self.mounts = None
@@ -137,6 +140,20 @@ class NetworkBrowser(Screen):
 		self.onClose.append(self.cleanup)
 		self.Timer = eTimer()
 		self.Timer.callback.append(self.TimerFire)
+
+	def GetNetworkInterfaces(self):
+		self.adapters = [(iNetwork.getFriendlyAdapterName(x),x) for x in iNetwork.getAdapterList()]
+
+		if not self.adapters:
+			self.adapters = [(iNetwork.getFriendlyAdapterName(x),x) for x in iNetwork.getConfiguredAdapters()]
+
+		if len(self.adapters) == 0:
+			self.adapters = [(iNetwork.getFriendlyAdapterName(x),x) for x in iNetwork.getInstalledAdapters()]
+
+		for x in self.adapters:
+			if iNetwork.getAdapterAttribute(x[1], 'up') is True:
+				return x[1]
+		return None
 
 	def cleanup(self):
 		del self.Timer
@@ -266,14 +283,14 @@ class NetworkBrowser(Screen):
 		self.sharecache_file = '/etc/enigma2/' + hostname.strip() + '.cache' #Path to cache directory
 		username = ""
 		password = ""
- 		if os_path.exists(self.sharecache_file):
- 			print '[Networkbrowser] Loading userinfo from ',self.sharecache_file
- 			try:
- 				self.hostdata = load_cache(self.sharecache_file)
- 				username = self.hostdata['username']
- 				password = self.hostdata['password']
- 			except:
- 				pass
+		if os_path.exists(self.sharecache_file):
+			print '[Networkbrowser] Loading userinfo from ',self.sharecache_file
+			try:
+				self.hostdata = load_cache(self.sharecache_file)
+				username = self.hostdata['username']
+				password = self.hostdata['password']
+			except:
+				pass
 
 		cmd = "/usr/bin/smbclient -g -N -U Guest -L {0}".format(hostip).split()
 		if username != "" or password != "":
