@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: moviecut\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 21:28+0100\n"
-"PO-Revision-Date: 2014-03-14 14:21+0100\n"
+"PO-Revision-Date: 2014-05-02 18:55+0100\n"
 "Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
 "Language-Team:  <Mariusz1970@onet.eu>\n"
 "Language: pl\n"
@@ -48,9 +48,8 @@ msgstr "Nie można otworzyć wejściowego pliku TS."
 msgid "Couldn't open output .ap file"
 msgstr "Nie można otworzyć pliku wyjściowego ap."
 
-#, fuzzy
 msgid "Couldn't open output .cuts file"
-msgstr "Nie można otworzyć wyjściowych ucietych plików"
+msgstr "Nie można otworzyć  uciętego wyjściowego pliku"
 
 msgid "Couldn't open output .ts file"
 msgstr "Nie można otworzyć wyjścowego. Ts plik"
@@ -58,15 +57,11 @@ msgstr "Nie można otworzyć wyjścowego. Ts plik"
 msgid "Cut Parameter Input"
 msgstr "Parametr wejściowy cięcia"
 
-#, fuzzy
-msgid "Cut source:"
-msgstr "Wytnij źródło:"
-
 msgid "Cutlist"
 msgstr "Lista cięć"
 
 msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
-msgstr "Cięcia(an IN OUT IN OUT Sekwencja ... godzina: min: s)"
+msgstr "Cięcia(obecnie... sekwencje godzina: min:sek)"
 
 msgid "Cutting failed for movie \"%s\""
 msgstr "Dla tego Film cięcie nie powiodło się \"%s\""
@@ -129,4 +124,7 @@ msgid "The movie \"%s\" is successfully cut"
 msgstr " Film \"%s\" jest z powodzeniem ucięty"
 
 msgid "Yes"
-msgstr "Ja"
+msgstr "Tak"
+
+msgid "Cut source:"
+msgstr "Źródło cięć:"
