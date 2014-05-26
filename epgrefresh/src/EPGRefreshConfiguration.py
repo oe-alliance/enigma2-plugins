@@ -33,7 +33,7 @@ from traceback import print_exc
 from sys import stdout
 import os
 
-VERSION = "2.1.1"
+VERSION = "2.1.2"
 class EPGHelpContextMenu(FixedMenu):
 	HELP_RETURN_MAINHELP = 0
 	HELP_RETURN_KEYHELP = 1
@@ -160,7 +160,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("EPG refresh auto-start latest (hh:mm)"), config.plugins.epgrefresh.end, _("An automated refresh will start before this time of day, but after the time specified in previous setting."), False))
 			self.list.append(getConfigListEntry(_("Delay if not in standby (minutes)"), config.plugins.epgrefresh.delay_standby, _("If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."), False))
 			if SystemInfo.get("NumVideoDecoders", 1) > 1:
-				self.list.insert(3, getConfigListEntry(_("Refresh EPG using"), config.plugins.epgrefresh.adapter, _("If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."), False))
+				self.list.append(getConfigListEntry(_("Refresh EPG using"), config.plugins.epgrefresh.adapter, _("If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."), False))
 			self.list.append(getConfigListEntry(_("Show Advanced Options"), NoSave(config.plugins.epgrefresh.showadvancedoptions), _("Display more Options"), True))
 			if config.plugins.epgrefresh.showadvancedoptions.value:
 				if config.ParentalControl.configured.value:
@@ -176,8 +176,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 					from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
 		
 					self.list.append(getConfigListEntry(_("Inherit Services from AutoTimer"), config.plugins.epgrefresh.inherit_autotimer, _("Extend the list of services to refresh by those your AutoTimers use?"), True))
-					if config.plugins.epgrefresh.inherit_autotimer.value:
-						self.list.append(getConfigListEntry(_("Run AutoTimer after refresh"), config.plugins.epgrefresh.parse_autotimer, _("After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"), False))
+					self.list.append(getConfigListEntry(_("Run AutoTimer after refresh"), config.plugins.epgrefresh.parse_autotimer, _("After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"), False))
 				except ImportError as ie:
 					print("[EPGRefresh] AutoTimer Plugin not installed:", ie)
 			
