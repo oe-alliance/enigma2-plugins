@@ -260,7 +260,7 @@ def AdvHdmiCecDOIT():
 
 # Overwrite CEC-Base
 def Cec__receivedStandby(self):
-	if config.plugins.cec.receivepower.value:
+	if config.cec.receivepower.value:
 		from Screens.Standby import Standby, inStandby
 		if not inStandby and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND and self.session.in_exec:
 			if callHook(ADVHDMI_BEFORE_RECEIVED_STANDBY):
@@ -268,7 +268,7 @@ def Cec__receivedStandby(self):
 				callHook(ADVHDMI_AFTER_RECEIVED_STANDBY)
 
 def Cec__receivedNowActive(self):
-	if config.plugins.cec.receivepower.value:
+	if config.cec.receivepower.value:
 		from Screens.Standby import inStandby
 		if inStandby != None:
 			if callHook(ADVHDMI_BEFORE_RECEIVED_NOWACTIVE):
@@ -277,7 +277,7 @@ def Cec__receivedNowActive(self):
 
 def Cec_powerOn(self):
 	global g_AdvHdmi_initalized
-	if config.plugins.cec.sendpower.value:
+	if config.cec.sendpower.value:
 		if self.session.shutdown:
 			self.idle_to_standby = True
 		else:
@@ -290,7 +290,7 @@ def Cec_powerOn(self):
 
 def Cec_powerOff(self):
 	global g_AdvHdmi_initalized
-	if config.plugins.cec.sendpower.value and config.plugins.AdvHdmiCec.enable_power_off.value and AdvHdmiCecDOIT():
+	if config.cec.sendpower.value and config.plugins.AdvHdmiCec.enable_power_off.value and AdvHdmiCecDOIT():
 		if callHook(ADVHDMI_BEFORE_POWEROFF):
 			_print("power off")
 			if not g_AdvHdmi_initalized:
