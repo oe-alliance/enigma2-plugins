@@ -47,6 +47,18 @@ class AutoTimerList(MenuList):
 		self.colorDisabled = 12368828
 
 	def applySkin(self, desktop, parent):
+		attribs = [ ] 
+		if self.skinAttributes is not None:
+			for (attrib, value) in self.skinAttributes:
+				if attrib == "font":
+					self.l.setFont(0, parseFont(value, ((1,1),(1,1))))
+				elif attrib == "itemHeight":
+					self.l.setItemHeight(int(value))
+				elif attrib == "colorDisabled":
+					self.colorDisabled = parseColor(value).argb()
+				else:
+					attribs.append((attrib, value))
+		self.skinAttributes = attribs
 		return MenuList.applySkin(self, desktop, parent)
 
 	#
