@@ -410,17 +410,17 @@ class EPGRefresh:
 		print("[EPGRefresh] Debug: AutoTimer failed:" + str(failure))
 		if config.plugins.epgrefresh.enablemessage.value:
 			Notifications.AddPopup(_("AutoTimer failed with error %s") % (str(failure)), \
-				MessageBox.TYPE_ERROR, 10)
+				MessageBox.TYPE_ERROR, 100)
 		self._nextTodo()
 
 	def _ToDoAutotimerCalled(self, *args, **kwargs):
-		if config.plugins.epgrefresh.enablemessage.value:
-			if len(args):
-				# Autotimer has been started
-				ret=args[0]
-				Notifications.AddPopup(_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") \
-					% (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
-					MessageBox.TYPE_INFO, 10)
+#		if config.plugins.epgrefresh.enablemessage.value:
+#			if len(args):
+#				# Autotimer has been started
+#				ret=args[0]
+#				Notifications.AddPopup(_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") \
+#					% (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
+#					MessageBox.TYPE_INFO, 10)
 		self._nextTodo()
 	
 	def _callFinishNotifiers(self, *args, **kwargs):

@@ -44,7 +44,7 @@ from collections import defaultdict
 from difflib import SequenceMatcher
 from operator import itemgetter
 
-# from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
+from Plugins.SystemPlugins.Toolkit.SimpleThread import SimpleThread
 
 try:
 	from Plugins.Extensions.SeriesPlugin.plugin import renameTimer
@@ -214,10 +214,11 @@ class AutoTimer:
 			idx += 1
 		self.timers.append(timer)
 
-#	def parseEPGAsync(self, simulateOnly=False):
-#		t = SimpleThread(lambda: self.parseEPG(simulateOnly=simulateOnly))
-#		t.start()
-#		return t.deferred
+	#call from epgrefresh
+	def parseEPGAsync(self, simulateOnly=False):
+		t = SimpleThread(lambda: self.parseEPG(simulateOnly=simulateOnly))
+		t.start()
+		return t.deferred
 
 	# Main function
 	def parseEPG(self, autoPoll = False, simulateOnly = False):
