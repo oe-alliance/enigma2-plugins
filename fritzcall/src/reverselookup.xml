@@ -853,23 +853,9 @@ $Date: 2013-12-04 21:30:22 +0100 (Wed, 04 Dec 2013) $
 		</website>
 	</country>
 	<country code="+46">
-		<website name="privatpersoner.eniro.se" url="http://privatpersoner.eniro.se/query?what=wp&amp;search_word=$NUMBER&amp;geo_area=" prefix="0">
-			<entry firstOccurance="firstname">
-				<firstname>&lt;span class=&quot;given-name&quot;&gt;([^&lt;]*)&lt;/span&gt;</firstname>
-				<lastname>&lt;span class=&quot;family-name&quot;&gt;([^&lt;]*)&lt;/span&gt;</lastname>
-				<street>&lt;span class=&quot;street-address&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
-				<city>&lt;span class=&quot;locality&quot;&gt;([^&lt;]*)&lt;/span&gt;</city>
-				<zipcode>&lt;span class=&quot;postal-code&quot;&gt;([^&lt;]*)&lt;/span&gt;</zipcode>
-			</entry>
-			<entry firstOccurance="firstname">
-				<firstname>&lt;span class=&quot;given-name&quot;&gt;([^&lt;]*)&lt;/span&gt;</firstname>
-				<lastname>&lt;span class=&quot;given-name&quot;&gt;([^&lt;]*)&lt;/span&gt;&lt;/a&gt;</lastname>
-				<street>&lt;span class=&quot;street-address&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
-				<city>&lt;span class=&quot;locality&quot;&gt;([^&lt;]*)&lt;/span&gt;</city>
-				<zipcode>&lt;span class=&quot;postal-code&quot;&gt;([^&lt;]*)&lt;/span&gt;</zipcode>
-			</entry>
+		<website name="privatpersoner.eniro.se" url="http://privatpersoner.eniro.se/resultat/$NUMBER" prefix="0">
 			<entry>
-				<name>fn expand(?:(?:.*owner-of-cell)|[^&gt;]*&gt;)[^&gt;]*&gt;([^&lt;]*)&lt;</name>
+				<name>&lt;span class="hit-name-ellipsis"&gt;\s+&lt;a class=[^&gt;]+&gt;\s+([^\n]+)\s+&lt;/a&gt;</name>
 				<street>street-address&quot;?&gt;([^&lt;]*)&lt;</street>
 				<city>locality&quot;?&gt;([^&lt;]*)&lt;</city>
 				<zipcode>postal-code&quot;?&gt;([^&lt;]*)&lt;</zipcode>
@@ -936,10 +922,10 @@ $Date: 2013-12-04 21:30:22 +0100 (Wed, 04 Dec 2013) $
 	<country code="+49">
 		<website name="www.dasoertliche.de" url="http://www.dasoertliche.de/Controller?form_name=search_inv&amp;ph=$NUMBER" prefix="0" numLines="1">
 	        <entry>
-	        	<name>&lt;a href="[^"]+"\s+class="preview iname"&gt;&lt;span class=""&gt;(.+?)&amp;nbsp;&lt;/span&gt;</name>
-	        	<street>&lt;div class="strasse"&gt;\s+([^,]+),&amp;nbsp;\d+ &lt;span class=""&gt;</street>
+	        	<name>&lt;a href="[^"]+"\s+class="name "&gt;&lt;span class=""&gt;(.+?)&amp;nbsp;&lt;/span&gt;</name>
+	        	<street>&lt;address&gt;\s+([^,]+),&amp;nbsp;\d+ &lt;span class=""&gt;</street>
 	        	<city>ci = "([^"]+)";</city>
-	        	<zipcode>&lt;div class="strasse"&gt;\s+[^,]+,&amp;nbsp;(\d+) &lt;span class=""&gt;</zipcode>
+	        	<zipcode>&lt;address&gt;\s+[^,]+,&amp;nbsp;(\d+) &lt;span class=""&gt;</zipcode>
 	        </entry>
 	    </website>
 		<website name="www.dastelefonbuch.de" url="http://www3.dastelefonbuch.de/?la=de&amp;kw=$NUMBER&amp;cmd=detail&amp;recSelected=0" prefix="0">
