@@ -798,19 +798,22 @@ var Services = Class.create(Controller, {
 		var cls = 'even';
 		for(var i = 0; i < this.cachedServiceElements.length; i++){
 			var row = this.cachedServiceElements[i];
-			var serviceName = row.readAttribute('data-servicename').toLowerCase();
-
-			if(serviceName.match(needle) != needle && serviceName != ""){
+			var serviceName = row.readAttribute('data-servicename');
+			if(serviceName)
+				serviceName = serviceName.toLowerCase();
+			var isMarker = serviceName == null;
+			if( (isMarker || ( serviceName.match(needle) != needle && serviceName != "")) && needle != "" ){
 				row.hide();
 			} else {
+				row.show();
+				if(isMarker)
+					continue;
 				cls = cls == 'odd' ? 'even' : 'odd';
 				notCls = cls == 'odd' ? 'even' : 'odd';
 
 				var td = row.firstDescendant();
 				td.removeClassName(notCls);
 				td.addClassName(cls);
-
-				row.show();
 			}
 		}
 	},
