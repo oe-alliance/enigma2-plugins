@@ -147,7 +147,7 @@ class EPGSearch(EPGSelection):
 		self.sort_type = 0
 		self.eventviewDialog = None
 		self["key_red"] = Button(_("IMDb Search"))
-		self["key_green"] = Button(_("Add timer"))
+		self["key_green"] = Button(_("Add Timer"))
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
 		self["list"] = EPGSearchList(type = self.type, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)

@@ -30,7 +30,7 @@ msgstr "Lisa käesolevale saatele salvestustaimer"
 msgid "Add a zap timer for current event"
 msgstr "Lisa käesolevale saatele kanalivahetustaimer"
 
-msgid "Add timer"
+msgid "Add Timer"
 msgstr "Lisa taimer"
 
 msgid "Add/Remove timer for current event"

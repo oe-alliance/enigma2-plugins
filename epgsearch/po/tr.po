@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../src/EPGSearch.py:150
-msgid "Add timer"
+msgid "Add Timer"
 msgstr "Zamanlayıcı eke"
 
 #: ../src/EPGSearch.py:349

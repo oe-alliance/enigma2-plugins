@@ -31,7 +31,7 @@ msgstr "Voeg een opnametimer toe voor het huidige event"
 msgid "Add a zap timer for current event"
 msgstr "Voeg een zaptimer toe voor het huidige event"
 
-msgid "Add timer"
+msgid "Add Timer"
 msgstr "Voeg timer toe"
 
 msgid "Add/Remove timer for current event"
