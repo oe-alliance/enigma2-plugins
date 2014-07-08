@@ -31,7 +31,7 @@ msgstr "Lisää tallennusajastus tähän ohjelmaan"
 msgid "Add a zap timer for current event"
 msgstr "Lisää kanavanvaihtoajastus tähän ohjelmaan"
 
-msgid "Add timer"
+msgid "Add Timer"
 msgstr "Lisää ajastus"
 
 msgid "Add/Remove timer for current event"

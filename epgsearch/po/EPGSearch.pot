@@ -22,7 +22,7 @@ msgid "Add AutoTimer"
 msgstr ""
 
 #: ../src/EPGSearch.py:127
-msgid "Add timer"
+msgid "Add Timer"
 msgstr ""
 
 #: ../src/EPGSearch.py:349 ../src/EPGSearchSetup.py:64

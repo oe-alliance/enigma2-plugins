@@ -25,7 +25,7 @@ msgstr "Добавить таймер записи для данного соб�
 msgid "Add a zap timer for current event"
 msgstr "Добавить таймер переключения для данного события"
 
-msgid "Add timer"
+msgid "Add Timer"
 msgstr "Добавить таймер"
 
 msgid "Add/Remove timer for current event"

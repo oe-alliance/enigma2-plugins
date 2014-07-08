@@ -22,7 +22,7 @@ msgstr ""
 msgid "Add AutoTimer"
 msgstr ""
 
-msgid "Add timer"
+msgid "Add Timer"
 msgstr "Dodaj tajmer"
 
 msgid "Cancel"
