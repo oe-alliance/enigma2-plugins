@@ -12,6 +12,7 @@ from Components.Network import iNetwork
 from Components.Input import Input
 from Components.config import getConfigListEntry, NoSave, config, ConfigIP
 from Components.ConfigList import ConfigList, ConfigListScreen
+from Components.Console import Console
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from Tools.LoadPixmap import LoadPixmap
 from cPickle import dump, load
@@ -62,7 +63,7 @@ class NetworkDescriptor:
 
 class NetworkBrowser(Screen):
 	skin = """
-		<screen name="NetworkBrowser" position="90,80" size="560,450" title="Network Neighbourhood">
+		<screen name="NetworkBrowser" position="center,center" size="560,450" title="Network Neighbourhood">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
@@ -86,7 +87,7 @@ class NetworkBrowser(Screen):
 					}
 				</convert>
 			</widget>
-			<ePixmap pixmap="skin_default/div-h.png" position="0,410" zPosition="1" size="560,2" />		
+			<ePixmap pixmap="skin_default/div-h.png" position="0,410" zPosition="1" size="560,2" />
 			<widget source="infotext" render="Label" position="0,420" size="560,30" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
 		</screen>"""
 
@@ -96,20 +97,22 @@ class NetworkBrowser(Screen):
 		self.session = session
 		self.iface = iface
 		if self.iface is None:
-			self.iface = 'eth0'
+			self.iface = self.GetNetworkInterfaces()
+		print "[Networkbrowser] Using Network Interface: %s" % self.iface
 		self.networklist = None
 		self.device = None
 		self.mounts = None
 		self.expanded = []
 		self.cache_ttl = 604800 #Seconds cache is considered valid, 7 Days should be ok
 		self.cache_file = '/etc/enigma2/networkbrowser.cache' #Path to cache directory
+		self.Console = Console()
 
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Mounts management"))
 		self["key_yellow"] = StaticText(_("Rescan"))
 		self["key_blue"] = StaticText(_("Expert"))
 		self["infotext"] = StaticText(_("Press OK to mount!"))
-		
+
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"ok": self.go,
@@ -131,6 +134,20 @@ class NetworkBrowser(Screen):
 		self.onClose.append(self.cleanup)
 		self.Timer = eTimer()
 		self.Timer.callback.append(self.TimerFire)
+
+	def GetNetworkInterfaces(self):
+		adapters = [(iNetwork.getFriendlyAdapterName(x),x) for x in iNetwork.getAdapterList()]
+
+		if not adapters:
+			adapters = [(iNetwork.getFriendlyAdapterName(x),x) for x in iNetwork.getConfiguredAdapters()]
+
+		if len(adapters) == 0:
+			adapters = [(iNetwork.getFriendlyAdapterName(x),x) for x in iNetwork.getInstalledAdapters()]
+
+		for x in adapters:
+			if iNetwork.getAdapterAttribute(x[1], 'up') is True:
+				return x[1]
+		return 'eth0'
 
 	def cleanup(self):
 		del self.Timer
@@ -204,12 +221,12 @@ class NetworkBrowser(Screen):
 				self.inv_cache = 1
 		if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
 			print '[Networkbrowser] Getting fresh network list'
-			self.networklist = self.getNetworkIPs()
-			write_cache(self.cache_file, self.networklist)
-		if len(self.networklist) > 0:
-			self.updateHostsList()
+			self.getNetworkIPs()
 		else:
-			self.setStatus('error')
+			if len(self.networklist) > 0:
+				self.updateHostsList()
+			else:
+				self.setStatus('error')
 
 	def getNetworkIPs(self):
 		nwlist = []
@@ -218,8 +235,40 @@ class NetworkBrowser(Screen):
 		if len(self.IP):
 			strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
 			nwlist.append(netscan.netzInfo(strIP))
-		tmplist = nwlist[0]
-		return tmplist
+		self.networklist = nwlist[0]
+		if len(self.IP) and (self.IP[0] != 0 or self.IP[1] != 0 or self.IP[2] != 0):
+			strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
+			self.Console.ePopen("nmap -oX - " + strIP + ' -sP', self.Stage1SettingsComplete)
+		else:
+			write_cache(self.cache_file, self.networklist)
+			if len(self.networklist) > 0:
+				self.updateHostsList()
+			else:
+				self.setStatus('error')
+
+	def Stage1SettingsComplete(self, result, retval, extra_args):
+		import xml.dom.minidom
+
+		dom = xml.dom.minidom.parseString(result)
+		scan_result = []
+		for dhost in dom.getElementsByTagName('host'):
+			# host ip
+			host = ''
+			hostname = ''
+			host = dhost.getElementsByTagName('address')[0].getAttributeNode('addr').value
+			for dhostname in dhost.getElementsByTagName('hostname'):
+				hostname = dhostname.getAttributeNode('name').value
+				hostname = hostname.split('.')
+				hostname = hostname[0]
+				host = dhost.getElementsByTagName('address')[0].getAttributeNode('addr').value
+				scan_result.append(['host',str(hostname).upper(),str(host),'00:00:00:00:00:00'])
+
+		self.networklist += scan_result
+		write_cache(self.cache_file, self.networklist)
+		if len(self.networklist) > 0:
+			self.updateHostsList()
+		else:
+			self.setStatus('error')
 
 	def getNetworkShares(self,hostip,hostname,devicetype):
 		sharelist = []
@@ -263,7 +312,7 @@ class NetworkBrowser(Screen):
 			if not self.network.has_key(x[2]):
 				self.network[x[2]] = []
 			self.network[x[2]].append((NetworkDescriptor(name = x[1], description = x[2]), x))
-		
+
 		for x in self.network.keys():
 			hostentry = self.network[x][0][1]
 			name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
@@ -376,6 +425,7 @@ class NetworkBrowser(Screen):
 
 		self.hostcache_file = None
 		if sel[0][0] == 'host': # host entry selected
+			print '[Networkbrowser] sel host'
 			if selectedhost in self.expanded:
 				self.expanded.remove(selectedhost)
 				self.updateNetworkList()
@@ -507,9 +557,9 @@ class ScanIP(Screen, ConfigListScreen):
 			"green": self.goNfs,
 			"yellow": self.goAddress,
 		}, -1)
-		
+
 		self.ipAddress = ConfigIP(default=[0,0,0,0])
-		
+
 		ConfigListScreen.__init__(self, [
 			getConfigListEntry(_("IP Address"), self.ipAddress),
 		], self.session)
