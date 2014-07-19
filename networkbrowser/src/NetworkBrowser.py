@@ -13,7 +13,7 @@ from Components.Input import Input
 from Components.config import getConfigListEntry, NoSave, config, ConfigIP
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.Console import Console
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, fileExists
 from Tools.LoadPixmap import LoadPixmap
 from cPickle import dump, load
 from os import path as os_path, stat, mkdir, remove
@@ -229,12 +229,17 @@ class NetworkBrowser(Screen):
 		if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
 			print '[Networkbrowser] Getting fresh network list'
 			self.networklist = self.getNetworkIPs()
-			nwlist = []
-			sharelist = []
-			self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
-			if len(self.IP):
-				strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
-				self.Console.ePopen("nmap -oX - " + strIP + ' -sP', self.Stage1SettingsComplete)
+			if fileExists("/usr/bin/nmap"):
+				nwlist = []
+				sharelist = []
+				self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
+				if len(self.IP):
+					strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
+					self.Console.ePopen("nmap -oX - " + strIP + ' -sP', self.Stage1SettingsComplete)
+			else:
+				write_cache(self.cache_file, self.networklist)
+				if len(self.networklist) > 0:
+					self.updateHostsList()
 		else:
 			if len(self.networklist) > 0:
 				self.updateHostsList()
