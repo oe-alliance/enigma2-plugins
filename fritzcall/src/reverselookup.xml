@@ -2,9 +2,8 @@
 
 <!-- reverselookup.xml
 
-
-$Revision: 825 $
-$Date: 2013-12-04 21:30:22 +0100 (Wed, 04 Dec 2013) $
+$Revision: 899 $
+$Date: 2014-07-21 13:52:11 +0200 (Mon, 21 Jul 2014) $
 
 	 The syntax of this file is fairly self-explanatory
      However, a few things need to be said. First and foremost
@@ -856,7 +855,7 @@ $Date: 2013-12-04 21:30:22 +0100 (Wed, 04 Dec 2013) $
 	<country code="+46">
 		<website name="privatpersoner.eniro.se" url="http://privatpersoner.eniro.se/resultat/$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;span class="hit-name-ellipsis"&gt;\s+&lt;a class=[^&gt;]+&gt;\s+([^\n]+)\s+&lt;/a&gt;</name>
+				<name>&lt;span class="hit-name-ellipsis"&gt;\s+&lt;a class=[^&gt;]+&gt;([^&lt;]+)&lt;/a&gt;</name>
 				<street>street-address&quot;?&gt;([^&lt;]*)&lt;</street>
 				<city>locality&quot;?&gt;([^&lt;]*)&lt;</city>
 				<zipcode>postal-code&quot;?&gt;([^&lt;]*)&lt;</zipcode>
@@ -921,7 +920,7 @@ $Date: 2013-12-04 21:30:22 +0100 (Wed, 04 Dec 2013) $
 		</website>
 	</country>
 	<country code="+49">
-		<website name="www.dasoertliche.de" url="http://www.dasoertliche.de/Controller?form_name=search_inv&amp;ph=$NUMBER" prefix="0" numLines="1">
+	    <website name="www.dasoertliche.de" url="http://www.dasoertliche.de/Controller?form_name=search_inv&amp;ph=$NUMBER" prefix="0" numLines="1">
 	        <entry>
 	        	<name>&lt;a href="[^"]+"\s+class="name "&gt;&lt;span class=""&gt;(.+?)&amp;nbsp;&lt;/span&gt;</name>
 	        	<street>&lt;address&gt;\s+([^,]+),&amp;nbsp;\d+ &lt;span class=""&gt;</street>
@@ -945,6 +944,14 @@ $Date: 2013-12-04 21:30:22 +0100 (Wed, 04 Dec 2013) $
 				<zipcode>&lt;address class="popupMenuTrigger"&gt;\s+[^,]+,\s+(\d+)\s+&lt;span itemprop</zipcode>
 			</entry>
 		</website>
+   		<website name="www.rueckwaertssuche24.de" url="http://www.rueckwaertssuche24.de/$NUMBER.html" prefix="0" numLines="1">
+	        <entry>
+	        	<name>&lt;div class="as23"&gt;\s+&lt;h3 style="[^"]*" &gt;([^&lt;]*)&lt;/h3&gt;\s*&lt;p&gt;[^,]*,  \d+, [^&lt;]*&lt;/p&gt;</name>
+	        	<street>&lt;div class="as23"&gt;\s+&lt;h3 style="[^"]*" &gt;[^&lt;]*&lt;/h3&gt;\s*&lt;p&gt;([^,]*),  \d+, [^&lt;]*&lt;/p&gt;</street>
+	        	<city>&lt;div class="as23"&gt;\s+&lt;h3 style="[^"]*" &gt;[^&lt;]*&lt;/h3&gt;\s*&lt;p&gt;[^,]*,  \d+, ([^&lt;]*)&lt;/p&gt;</city>
+	        	<zipcode>&lt;div class="as23"&gt;\s+&lt;h3 style="[^"]*" &gt;[^&lt;]*&lt;/h3&gt;\s*&lt;p&gt;[^,]*,  (\d+), [^&lt;]*&lt;/p&gt;</zipcode>
+	        </entry>
+	    </website>
 		<website name="www.goyellow.de" url="http://www.goyellow.de/suche/$NUMBER/-" prefix="0">
 	        <entry>
 	        	<name>&lt;a href="[^"]+"&gt; &lt;span style="[^"]+" title="[^"]+"&gt;([^&lt;]+)&lt;/span&gt;&lt;/a&gt;</name>
@@ -961,6 +968,14 @@ $Date: 2013-12-04 21:30:22 +0100 (Wed, 04 Dec 2013) $
 	        	<zipcode>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+[^\n]*\n\s+&lt;br&gt;\s+(\d+)\s+[^\n]*\n\s+&lt;/p&gt;</zipcode>
 	        </entry>
 		</website>
+		<website name="www.klicktel.de" url="http://www.klicktel.de/rueckwaertssuche/$NUMBER" prefix="0">
+	        <entry>
+	        	<name>&lt;div class=&quot;results direct&quot;&gt;.*?&lt;a href=.*?&gt;\d+\.\s+(.*?)&lt;/a&gt;</name>
+	        	<street>&lt;div class=&quot;entryData&quot;&gt;\s+&lt;p&gt;\s+([^\n]+)\n\s+&lt;br&gt;\s+\d+ .*?\s*&lt;/p&gt;</street>
+	        	<city>&lt;div class=&quot;entryData&quot;&gt;\s+&lt;p&gt;\s+[^\n]+\n\s+&lt;br&gt;\s+\d+ (.*?)\s*&lt;/p&gt;</city>
+	        	<zipcode>&lt;div class=&quot;entryData&quot;&gt;\s+&lt;p&gt;\s+[^\n]+\n\s+&lt;br&gt;\s+(\d+) .*?\s*&lt;/p&gt;</zipcode>
+	        </entry>
+	    </website>
 	</country>
 	<country code="+501">
 		<website name="belizeweb.com" url="http://www.belizeweb.com:8080/directory/index-new.jsp" cookie="(JSESSIONID=[^;]*);" nexturl="http://www.belizeweb.com:8080/directory/index-new.jsp?dirlist=$PART1-$PART2&amp;imageField.x=0&amp;imageField.y=0&amp;maxrecords=5" post="" hidden="(wrzlgrmpf)" prefix="">
