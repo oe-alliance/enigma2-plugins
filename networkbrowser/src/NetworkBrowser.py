@@ -240,6 +240,7 @@ class NetworkBrowser(Screen):
 				write_cache(self.cache_file, self.networklist)
 				if len(self.networklist) > 0:
 					self.updateHostsList()
+				self["shortcuts"].setEnabled(True)
 		else:
 			if len(self.networklist) > 0:
 				self.updateHostsList()
