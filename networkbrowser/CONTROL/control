@@ -1,2 +1,2 @@
 Description: Networkbrowser and Network-Mountmanager
-Depends: enigma2, nmap, autofs
+Depends: enigma2, autofs

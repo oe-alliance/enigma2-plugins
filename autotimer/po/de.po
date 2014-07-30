@@ -664,7 +664,7 @@ msgid "Remove selected AutoTimer"
 msgstr "Markierten AutoTimer löschen"
 
 msgid "Require description to be unique"
-msgstr "Beschreibung muss Eindeutig sein"
+msgstr "Beschreibung muss eindeutig sein"
 
 msgid "Reset count"
 msgstr "Setze Zähler zurück"
