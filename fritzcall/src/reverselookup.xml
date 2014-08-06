@@ -536,12 +536,12 @@ $Date: 2014-07-28 16:17:43 +0200 (Mon, 28 Jul 2014) $
 				<city>&lt;td\s+class=&quot;nowrap&quot;&gt;[\d]*-[\d]*&lt;/td&gt;\s*&lt;td&gt;[^&lt;]*&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;[^&lt;]*&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;[^&lt;]*&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;([^&lt;]*)&lt;/td&gt;</city>
 			</entry>
 		</website>
-				<website name="www.gebeld.nl" url="http://www.gebeld.nl/content.asp?action=zapp&amp;what=Nummer&amp;searchfield1=fullnumber&amp;queryfield1=$NUMBER" prefix="0">
+		<website name="www.gebeld.nl" url="http://www.gebeld.nl/content.asp?zapp=zapp&amp;land=&amp;zoek=Nummer&amp;searchfield1=fullnumber&amp;searchfield2=&amp;queryfield1=$NUMBER&amp;queryfield2=&amp;fuzzy=&amp;volll=&amp;database=open&amp;tld=" prefix="0">
 			<entry>
 				<name>&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;([^&lt;]*)&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+</name>
-				<street>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&lt;]*)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</street>
-				<city>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;([^&lt;]*)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</city>
-				<zipcode>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&amp;]*)&amp;nbsp;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</zipcode>
+				<street>&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;([^&lt;]*)&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+</street>
+				<city>&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&amp;]*&amp;nbsp;([^&lt;]*)&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+</city>
+				<zipcode>&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;([^&amp;]*)&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+</zipcode>
 			</entry>
 		</website>
 	</country>
@@ -944,7 +944,7 @@ $Date: 2014-07-28 16:17:43 +0200 (Mon, 28 Jul 2014) $
 	    </website>
 		<website name="www.11880.com" url="http://www.11880.com/rueckwaertssuche/$NUMBER" prefix="0">
 	        <entry>
-	        	<name>&lt;h3 itemprop="name"&gt;&lt;a href="[^"]*" target="_self">1. ([^&lt;]+)&lt;/a&gt;&lt;/h3&gt;</name>
+	        	<name>&lt;h3&gt;&lt;a href="[^"]*" target="_self">1. ([^&lt;]+)&lt;/a&gt;&lt;/h3&gt;</name>
 	        	<street>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+([^\n]*)\n\s+&lt;br&gt;\s+\d+\s+[^\&lt;]*&lt;/p&gt;</street>
 	        	<city>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+[^\n]*\n\s+&lt;br&gt;\s+\d+\s+([^\&lt;]*)&lt;/p&gt;</city>
 	        	<zipcode>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+[^\n]*\n\s+&lt;br&gt;\s+(\d+)\s+[^\&lt;]*&lt;/p&gt;</zipcode>
@@ -952,10 +952,10 @@ $Date: 2014-07-28 16:17:43 +0200 (Mon, 28 Jul 2014) $
 		</website>
 		<website name="www.klicktel.de" url="http://www.klicktel.de/rueckwaertssuche/$NUMBER" prefix="0">
 	        <entry>
-	        	<name>&lt;div class=&quot;results direct&quot;&gt;.*?&lt;a href=.*?&gt;\d+\.\s+(.*?)&lt;/a&gt;</name>
-	        	<street>&lt;div class=&quot;entryData&quot;&gt;\s+&lt;p&gt;\s+([^\n]+)\n\s+&lt;br&gt;\s+\d+ .*?\s*&lt;/p&gt;</street>
-	        	<city>&lt;div class=&quot;entryData&quot;&gt;\s+&lt;p&gt;\s+[^\n]+\n\s+&lt;br&gt;\s+\d+ (.*?)\s*&lt;/p&gt;</city>
-	        	<zipcode>&lt;div class=&quot;entryData&quot;&gt;\s+&lt;p&gt;\s+[^\n]+\n\s+&lt;br&gt;\s+(\d+) .*?\s*&lt;/p&gt;</zipcode>
+	        	<name>&lt;h3&gt;&lt;a href="[^"]*" target="_self">1. ([^&lt;]+)&lt;/a&gt;&lt;/h3&gt;</name>
+	        	<street>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+([^\n]*)\n\s+&lt;br&gt;\s+\d+\s+[^\&lt;]*&lt;/p&gt;</street>
+	        	<city>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+[^\n]*\n\s+&lt;br&gt;\s+\d+\s+([^\&lt;]*)&lt;/p&gt;</city>
+	        	<zipcode>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+[^\n]*\n\s+&lt;br&gt;\s+(\d+)\s+[^\&lt;]*&lt;/p&gt;</zipcode>
 	        </entry>
 	    </website>
    		<website name="www.dastelefonbuch.de" url="http://www3.dastelefonbuch.de/?la=de&amp;kw=$NUMBER&amp;cmd=detail&amp;recSelected=0" prefix="0">
@@ -969,9 +969,9 @@ $Date: 2014-07-28 16:17:43 +0200 (Mon, 28 Jul 2014) $
 		<website name="www.dastelefonbuch.de" url="http://www.dastelefonbuch.de/?sourceid=Mozilla-search&amp;cmd=search&amp;kw=$NUMBER" prefix="0">
 			<entry>
 				<name>&lt;a id="name0" href="[^"]+" itemprop="name" title="[^"]+"  rel="nofollow" class="name"&gt;\s+([^&lt;]+)&lt;/a&gt;</name>
-				<street>&lt;address class="popupMenuTrigger"&gt;\s+([^,]+),\s+\d+\s+&lt;span itemprop</street>
+				<street>&lt;span itemprop="street-address"&gt;([^&lt;]+)&lt;/span&gt;</street>
 				<city>&lt;span itemprop="locality"&gt;([^&lt;]+)&lt;/span&gt;</city>
-				<zipcode>&lt;address class="popupMenuTrigger"&gt;\s+[^,]+,\s+(\d+)\s+&lt;span itemprop</zipcode>
+				<zipcode>&lt;span itemprop="postal-code"&gt;([^&lt;]+)&lt;/span&gt;</zipcode>
 			</entry>
 		</website>
    		<website name="www.rueckwaertssuche24.de" url="http://www.rueckwaertssuche24.de/$NUMBER.html" prefix="0" numLines="1">
