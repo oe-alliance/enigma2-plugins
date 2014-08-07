@@ -757,10 +757,10 @@ $Date: 2014-07-28 16:17:43 +0200 (Mon, 28 Jul 2014) $
 		</website>
 		<website name="infobel.com" url="http://www.infobel.com/it/Italy/Inverse.aspx?qPhone=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;div class=\"result-item\"&gt;&lt;h[1-9]&gt;[^&lt;]*&lt;a [^&gt;]*&gt;([^&lt;]*)&lt;/a&gt;</name>
-				<street>&lt;div class=&quot;result-box-col&quot;&gt;&lt;div&gt;&lt;strong&gt;([^,]*),.[0-9]+\s*[^&lt;]*&lt;/strong&gt;&lt;/div&gt;</street>
-				<city>&lt;div class=&quot;result-box-col&quot;&gt;&lt;div&gt;&lt;strong&gt;[^,]*,.[0-9]+\s*([^&lt;]*)&lt;/strong&gt;&lt;/div&gt;</city>
-				<zipcode>&lt;div class=&quot;result-box-col&quot;&gt;&lt;div&gt;&lt;strong&gt;[^,]*,.([0-9]+)\s*[^&lt;]*&lt;/strong&gt;&lt;/div&gt;</zipcode>
+				<name>&lt;span itemprop="name" class="fn org"&gt;([^&lt;]*)&lt;/span&gt;</name>
+				<street>&lt;span class="street-address" itemprop="streetAddress"&gt;([^&lt;]*)&lt;/span&gt;</street>
+				<city>&lt;span class="locality" itemprop="addressLocality"&gt;([^&lt;]*)&lt;/span&gt;</city>
+				<zipcode>&lt;span class="postal-code" itemprop="postalCode"&gt;([^&lt;]*)&lt;/span&gt;</zipcode>
 			</entry>
 		</website>
 		<!-- does not work -->
@@ -804,10 +804,10 @@ $Date: 2014-07-28 16:17:43 +0200 (Mon, 28 Jul 2014) $
 		</website>
 		<website name ="tel.local.ch" url="http://tel.local.ch/de/q/?ext=1&amp;phone=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;h[1-9](?:&gt;&lt;a)?\sclass=&quot;fn&quot;[^&gt;]*&gt;([^&lt;]*)&lt;</name>
-				<street>&lt;span class=&quot;street-address&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
-				<city>&lt;span class=&quot;locality&quot;&gt;(?:&lt;a href=[^&gt;]*&gt;)?([^&lt;]*)(?:&lt;/a&gt;)?&lt;/span&gt;</city>
-				<zipcode>&lt;span class=&quot;postal-code&quot;>([^&lt;]*)&lt;/span&gt;</zipcode>
+				<name>&lt;a class='big info-link button' href='[^']*' title='([^']*)'&gt;Details&lt;/a&gt;</name>
+				<street>&lt;span class='address'&gt;([^,]*), \d+ [^&lt;]*&lt;/span&gt;</street>
+				<city>&lt;span class='address'&gt;[^,]*, \d+ ([^&lt;]*)&lt;/span&gt;</city>
+				<zipcode>&lt;span class='address'&gt;[^,]*, (\d+) [^&lt;]*&lt;/span&gt;</zipcode>
 			</entry>
 		</website>		
 	</country>
@@ -832,10 +832,10 @@ $Date: 2014-07-28 16:17:43 +0200 (Mon, 28 Jul 2014) $
 		</website>
 		<website name="herold.at (Firma)" url="http://www.herold.at/servlet/at.herold.sp.servlet.SPYPSearchServlet?searchmask=2&amp;phone=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;h[1-9]&gt;&lt;a href=&quot;[^&quot;]*&quot;\s*class=&quot;bold&quot;&gt;([^&lt;]*)&lt;/a&gt;&lt;/h[1-9]&gt;</name>
-				<street>&lt;div class=&quot;addrF&quot;&gt;&lt;p class=&quot;bold&quot;&gt;\s*[^,]*,\s*([^&lt;]*)&lt;br/&gt;&lt;/p&gt;</street>
-				<city>&lt;div class=&quot;addrF&quot;&gt;&lt;p class=&quot;bold&quot;&gt;\s*[^\s]*([^,]*),\s[^&lt;]*&lt;br/&gt;&lt;/p&gt;</city>
-				<zipcode>&lt;div class=&quot;addrF&quot;&gt;&lt;p class=&quot;bold&quot;&gt;\s*([^\s]*)\s[^,]*,\s*[^&lt;]*&lt;br/&gt;&lt;/p&gt;</zipcode>
+				<name>&lt;h2 class="fullw"&gt;&lt;a href="[^"]*"&gt;([^&lt;]*)&lt;/a&gt;&lt;/h2&gt;</name>
+				<street>&lt;p class="allEntries"&gt;&lt;a href="[^"]*" onclick="[^"]*"&gt;[^&lt;]*&lt;/a&gt;&lt;/p&gt;&lt;p&gt;\d+ [^,]*, ([^&lt;]*)&lt;br /&gt;&lt;/p&gt;</street>
+				<city>&lt;p class="allEntries"&gt;&lt;a href="[^"]*" onclick="[^"]*"&gt;[^&lt;]*&lt;/a&gt;&lt;/p&gt;&lt;p&gt;\d+ ([^,]*), [^&lt;]*&lt;br /&gt;&lt;/p&gt;</city>
+				<zipcode>&lt;p class="allEntries"&gt;&lt;a href="[^"]*" onclick="[^"]*"&gt;[^&lt;]*&lt;/a&gt;&lt;/p&gt;&lt;p&gt;(\d+) [^,]*, [^&lt;]*&lt;br /&gt;&lt;/p&gt;</zipcode>
 			</entry>
 		</website>
 		<website name="tb-online.at" url="http://www.tb-online.at/index.php?pc=in&amp;telnummer=$NUMBER&amp;aktion=suchein" prefix="0">
@@ -944,7 +944,7 @@ $Date: 2014-07-28 16:17:43 +0200 (Mon, 28 Jul 2014) $
 	    </website>
 		<website name="www.11880.com" url="http://www.11880.com/rueckwaertssuche/$NUMBER" prefix="0">
 	        <entry>
-	        	<name>&lt;h3&gt;&lt;a href="[^"]*" target="_self">1. ([^&lt;]+)&lt;/a&gt;&lt;/h3&gt;</name>
+	        	<name>&lt;h3(?: itemprop="name")?&gt;&lt;a href="[^"]*" target="_self">1. ([^&lt;]+)&lt;/a&gt;&lt;/h3&gt;</name>
 	        	<street>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+([^\n]*)\n\s+&lt;br&gt;\s+\d+\s+[^\&lt;]*&lt;/p&gt;</street>
 	        	<city>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+[^\n]*\n\s+&lt;br&gt;\s+\d+\s+([^\&lt;]*)&lt;/p&gt;</city>
 	        	<zipcode>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+[^\n]*\n\s+&lt;br&gt;\s+(\d+)\s+[^\&lt;]*&lt;/p&gt;</zipcode>
@@ -952,7 +952,7 @@ $Date: 2014-07-28 16:17:43 +0200 (Mon, 28 Jul 2014) $
 		</website>
 		<website name="www.klicktel.de" url="http://www.klicktel.de/rueckwaertssuche/$NUMBER" prefix="0">
 	        <entry>
-	        	<name>&lt;h3&gt;&lt;a href="[^"]*" target="_self">1. ([^&lt;]+)&lt;/a&gt;&lt;/h3&gt;</name>
+	        	<name>&lt;h3(?: itemprop="name")?&gt;&lt;a href="[^"]*" target="_self">1. ([^&lt;]+)&lt;/a&gt;&lt;/h3&gt;</name>
 	        	<street>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+([^\n]*)\n\s+&lt;br&gt;\s+\d+\s+[^\&lt;]*&lt;/p&gt;</street>
 	        	<city>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+[^\n]*\n\s+&lt;br&gt;\s+\d+\s+([^\&lt;]*)&lt;/p&gt;</city>
 	        	<zipcode>&lt;div class="entryData"&gt;\s+&lt;p&gt;\s+[^\n]*\n\s+&lt;br&gt;\s+(\d+)\s+[^\&lt;]*&lt;/p&gt;</zipcode>
@@ -961,17 +961,23 @@ $Date: 2014-07-28 16:17:43 +0200 (Mon, 28 Jul 2014) $
    		<website name="www.dastelefonbuch.de" url="http://www3.dastelefonbuch.de/?la=de&amp;kw=$NUMBER&amp;cmd=detail&amp;recSelected=0" prefix="0">
 			<entry>	
 				<name>miniMapData.push\(new Array\("([^"]+)"</name>
-				<street>&lt;address&gt;\s+([^&lt;]+)&lt;br /&gt;\s+\d+ &lt;span itemprop="locality"&gt;[^&lt;]+.*?&lt;br /&gt;&lt;/address&gt;</street>
-				<city>&lt;address&gt;\s+[^&lt;]+&lt;br /&gt;\s+\d+ &lt;span itemprop="locality"&gt;([^&lt;]+).*?&lt;br /&gt;&lt;/address&gt;</city>
-				<zipcode>&lt;address&gt;\s+[^&lt;]+&lt;br /&gt;\s+(\d+) &lt;span itemprop="locality"&gt;[^&lt;]+.*?&lt;br /&gt;&lt;/address&gt;</zipcode>
+				<street>&lt;address&gt;\s+([^&lt;]+)&lt;br /&gt;\s+\d+ (?:&lt;span itemprop="locality"&gt;)?[^&lt;]+.*?&lt;br /&gt;&lt;/address&gt;</street>
+				<city>&lt;address&gt;\s+[^&lt;]+&lt;br /&gt;\s+\d+ (?:&lt;span itemprop="locality"&gt;)?([^&lt;]+).*?&lt;br /&gt;&lt;/address&gt;</city>
+				<zipcode>&lt;address&gt;\s+[^&lt;]+&lt;br /&gt;\s+(\d+) (?:&lt;span itemprop="locality"&gt;)?[^&lt;]+.*?&lt;br /&gt;&lt;/address&gt;</zipcode>
 			</entry>
 		</website>
 		<website name="www.dastelefonbuch.de" url="http://www.dastelefonbuch.de/?sourceid=Mozilla-search&amp;cmd=search&amp;kw=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;a id="name0" href="[^"]+" itemprop="name" title="[^"]+"  rel="nofollow" class="name"&gt;\s+([^&lt;]+)&lt;/a&gt;</name>
-				<street>&lt;span itemprop="street-address"&gt;([^&lt;]+)&lt;/span&gt;</street>
-				<city>&lt;span itemprop="locality"&gt;([^&lt;]+)&lt;/span&gt;</city>
-				<zipcode>&lt;span itemprop="postal-code"&gt;([^&lt;]+)&lt;/span&gt;</zipcode>
+				<name>&lt;a id="name0" href="[^"]+" itemprop="name(?: itemreviewed)?" title="[^"]+"  rel="nofollow" class="name"&gt;\s+([^&lt;]+)&lt;/a&gt;</name>
+				<street>&lt;span itemprop="street-address"&gt;([^&lt;]*)&lt;/span&gt;</street>
+				<city>&lt;span itemprop="locality"&gt;([^&lt;]*)&lt;/span&gt;</city>
+				<zipcode>&lt;span itemprop="postal-code"&gt;([^&lt;]*)&lt;/span&gt;</zipcode>
+			</entry>
+			<entry>
+				<name>&lt;a id="name0" href="[^"]+" itemprop="name(?: itemreviewed)?" title="[^"]+"  rel="nofollow" class="name"&gt;\s+([^&lt;]+)&lt;/a&gt;</name>
+				<street>&lt;address class="popupMenuTrigger"&gt;\s+(?:&lt;span itemprop="street-address"&gt;)?([^,]*),</street>
+				<city>&lt;span itemprop="address" itemscope itemtype="[^"]*"&gt;\s+&lt;address class="popupMenuTrigger"&gt;\s+[^,]*,  \d+ &lt;span itemprop="locality"&gt;([^&lt;]*)&lt;/span&gt;&lt;/address&gt;</city>
+				<zipcode>&lt;span itemprop="address" itemscope itemtype="[^"]*"&gt;\s+&lt;address class="popupMenuTrigger"&gt;\s+[^,]*,  (\d+) &lt;span itemprop="locality"&gt;[^&lt;]*&lt;/span&gt;&lt;/address&gt;</zipcode>
 			</entry>
 		</website>
    		<website name="www.rueckwaertssuche24.de" url="http://www.rueckwaertssuche24.de/$NUMBER.html" prefix="0" numLines="1">
