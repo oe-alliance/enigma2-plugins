@@ -303,6 +303,10 @@ class NetworkBrowser(Screen):
 				if len(x) == 6:
 					if x[3] != 'IPC$':
 						sharelist.append(x)
+			nfslist=netscan.nfsShare(hostip,hostname)
+			for x in nfslist:
+				if len(x) == 6:
+					sharelist.append(x)
 		return sharelist
 
 	def updateHostsList(self):
@@ -386,6 +390,7 @@ class NetworkBrowser(Screen):
 		for sharename, sharedata in self.mounts.items():
 			if sharedata['ip'] == sharehost:
 				if sharetype == 'nfsShare' and sharedata['mounttype'] == 'nfs':
+					sharedir = sharedir.replace('/', '')					
 					if sharedir == sharedata['sharedir']:
 						if sharedata["isMounted"] is True:
 							self.isMounted = True
