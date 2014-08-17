@@ -220,7 +220,15 @@ class myHTTPClientFactory(HTTPClientFactory):
 
 
 def sendPartnerBoxWebCommand(url, contextFactory=None, timeout=60, username = "root", password = "", *args, **kwargs):
-	scheme, host, port, path = client._parse(url)
+	if hasattr(client, '_parse'):
+		scheme, host, port, path = _parse(url)
+	else:
+			from twisted.web.client import _URI
+			uri = _URI.fromBytes(url)
+			scheme = uri.scheme
+			host = uri.host
+			port = uri.port
+			path = uri.path
 	basicAuth = encodestring(("%s:%s")%(username,password))
 	authHeader = "Basic " + basicAuth.strip()
 	AuthHeaders = {"Authorization": authHeader}

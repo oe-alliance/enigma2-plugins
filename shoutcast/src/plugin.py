@@ -116,7 +116,15 @@ class myHTTPClientFactory(HTTPClientFactory):
 		connector.connect()
 
 def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
-	scheme, host, port, path = client._parse(url)
+	if hasattr(client, '_parse'):
+		scheme, host, port, path = _parse(url)
+	else:
+			from twisted.web.client import _URI
+			uri = _URI.fromBytes(url)
+			scheme = uri.scheme
+			host = uri.host
+			port = uri.port
+			path = uri.path
 	factory = myHTTPClientFactory(url, *args, **kwargs)
 	# print "scheme=%s host=%s port=%s path=%s\n" % (scheme, host, port, path)
 	reactor.connectTCP(host, port, factory, timeout=timeout)
