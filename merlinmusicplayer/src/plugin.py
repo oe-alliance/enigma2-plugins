@@ -44,10 +44,6 @@ from urllib import quote
 from Components.ScrollLabel import ScrollLabel
 from Components.AVSwitch import AVSwitch
 from Tools.Directories import fileExists, resolveFilename, SCOPE_CURRENT_SKIN
-try:
-	from Tools.Directories import SCOPE_ACTIVE_SKIN
-except:
-	pass	
 from Tools.LoadPixmap import LoadPixmap
 from Components.Pixmap import Pixmap, MultiPixmap
 from Components.ServicePosition import ServicePositionGauge
@@ -293,7 +289,16 @@ class myHTTPClientFactory(HTTPClientFactory):
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies,followRedirect=followRedirect)
 
 def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
-	scheme, host, port, path = client._parse(url)
+	if hasattr(client, '_parse'):
+			scheme, host, port, path = client._parse(url)
+	else:
+		from twisted.web.client import _URI
+		uri = _URI.fromBytes(url)
+		scheme = uri.scheme
+		host = uri.host
+		port = uri.port
+		path = uri.path
+
 	factory = myHTTPClientFactory(url, *args, **kwargs)
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
@@ -893,7 +898,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			"info" : self.showLyrics,
 			"yellow": self.pauseEntry,
 			"green": self.play,
-			"input_date_time": self.config,
+			"menu": self.config,
 			"ok": self.showTV,
 		}, -1)
 
@@ -1062,7 +1067,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 						year = "(%s)" % str(date)
 					else:
 						year = ""
-					self.updateMusicInformation( artist, title, album, genre, year, track, clear = True )
+					self.updateMusicInformation( artist, title, album, genre, track, year, clear = True )
 				else:
 					self.updateMusicInformation( title = title, clear = True)
 				audio = None
@@ -1129,6 +1134,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 				track = "%s/%s" % (sTrackNumber,sTrackCount)
 			elif sTrackNumber:
 				track = str(sTrackNumber)
+			
 			if sYear:
 				sYear = "(%s)" % sYear
 			if not sTitle:
@@ -1149,7 +1155,6 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.updateSingleMusicInformation("album", album, clear)
 		self.updateSingleMusicInformation("genre", genre, clear)
 		self.updateSingleMusicInformation("track", track, clear)
-
 		self.currentTitle = title
 		if not self.iDreamMode and self.songList[self.currentIndex][0].PTS is None:
 			# for lyrics
@@ -1514,10 +1519,10 @@ class MerlinMusicPlayerLyrics(Screen):
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions"],
 		{
 			"back": self.close,
-			"upUp": self.pageUp,
-			"leftUp": self.pageUp,
-			"downUp": self.pageDown,
-			"rightUp": self.pageDown,
+			"up": self.pageUp,
+			"left": self.pageUp,
+			"down": self.pageDown,
+			"right": self.pageDown,
 		}, -1)
 		self["lyric_text"] = ScrollLabel()
 		self.currentSong = currentsong
@@ -1723,7 +1728,7 @@ class iDreamMerlin(Screen):
 			"green": self.green_pressed,
 			"yellow": self.yellow_pressed,
 			"blue": self.blue_pressed,
-			"input_date_time": self.menu_pressed,
+			"menu": self.menu_pressed,
 			"info" : self.info_pressed,
 		}, -1)
 
@@ -2687,10 +2692,7 @@ class MerlinMediaPixmap(Pixmap):
 					noCoverFile = value
 					break
 		if noCoverFile is None:
-			try:
-				noCoverFile = resolveFilename(SCOPE_ACTIVE_SKIN, "no_coverArt.png")
-			except:
-				noCoverFile = resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/no_coverArt.png")
+			noCoverFile = resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/no_coverArt.png")
 		self.noCoverPixmap = LoadPixmap(noCoverFile)
 		return Pixmap.applySkin(self, desktop, screen)
 
@@ -2702,7 +2704,7 @@ class MerlinMediaPixmap(Pixmap):
 	def paintCoverArtPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr != None:
-			self.instance.setPixmap(ptr)
+			self.instance.setPixmap(ptr.__deref__())
 
 	def updateCoverArt(self, path):
 		back = False
@@ -2998,7 +3000,7 @@ class MerlinMusicPlayerFileList(Screen):
 		{
 			"ok": self.ok,
 			"back": self.close,
-			"input_date_time": self.menu_pressed,
+			"menu": self.menu_pressed,
 			"info" : self.info_pressed,
 			"green": self.green_pressed,
 			"up": self.moveup,
@@ -3354,16 +3356,14 @@ def main(session,**kwargs):
 	if kwargs.has_key("servicelist"):
 		servicelist = kwargs["servicelist"]
 	else:
-		from Screens.InfoBar import InfoBar
-		servicelist = InfoBar.instance.servicelist
+		servicelist = None
 	session.open(iDreamMerlin, servicelist)
 
 def merlinmusicplayerfilelist(session,**kwargs):
 	if kwargs.has_key("servicelist"):
 		servicelist = kwargs["servicelist"]
 	else:
-		from Screens.InfoBar import InfoBar
-		servicelist = InfoBar.instance.servicelist
+		servicelist = None
 	session.open(MerlinMusicPlayerFileList, servicelist)
 
 def menu_merlinmusicplayerfilelist(menuid, **kwargs):
@@ -3389,4 +3389,3 @@ def Plugins(**kwargs):
 	if config.plugins.merlinmusicplayer.idreammainmenu.value:
 		list.append(PluginDescriptor(name="iDream", description=_("iDream"), where = [PluginDescriptor.WHERE_MENU], fnc=menu_idream))
 	return list
-
