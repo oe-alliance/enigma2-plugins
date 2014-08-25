@@ -45,6 +45,7 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 				getConfigListEntry(_("Only poll while in standby"), config.plugins.autotimer.onlyinstandby, _("When this is enabled AutoTimer will ONLY check for new events whilst in stanadby.")),
 				getConfigListEntry(_("Startup delay (in min)"), config.plugins.autotimer.delay, _("This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time.")),
 				getConfigListEntry(_("Poll Interval (in mins)"), config.plugins.autotimer.interval, _("This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again.")),
+				getConfigListEntry(_("Timeout (in min)"), config.plugins.autotimer.timeout, _("This is the duration in minutes that the AutoTimer is allowed to run.")),
 				getConfigListEntry(_("Only add timer for next x days"), config.plugins.autotimer.maxdaysinfuture, _("You can control for how many days in the future timers are added. Set this to 0 to disable this feature.")),
 				getConfigListEntry(_("Show in plugin browser"), config.plugins.autotimer.show_in_plugins, _("Enable this to be able to access the AutoTimer Overview from within the plugin browser.")),
 				getConfigListEntry(_("Show in extension menu"), config.plugins.autotimer.show_in_extensionsmenu, _("Enable this to be able to access the AutoTimer Overview from within the extension menu.")),

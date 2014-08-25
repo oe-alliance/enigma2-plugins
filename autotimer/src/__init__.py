@@ -12,6 +12,7 @@ config.plugins.autotimer.autopoll = ConfigEnableDisable(default=True)
 config.plugins.autotimer.onlyinstandby = ConfigEnableDisable(default=False)
 config.plugins.autotimer.delay = ConfigNumber(default=3)
 config.plugins.autotimer.interval = ConfigNumber(default=30)
+config.plugins.autotimer.timeout = ConfigNumber(default=1)
 config.plugins.autotimer.refresh = ConfigSelection(choices=[
 		("none", _("None")),
 		("auto", _("Only AutoTimers created during this session")),
