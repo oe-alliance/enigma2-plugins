@@ -285,6 +285,8 @@ def main(session, **kwargs):
 
 def mainCB(saved,session):
     global activebar,doshow
+    if not activebar:
+        activebar = session.instantiateDialog(AntiScrollOverlay)
     activebar.evStart()
 
 def autostart(session, **kwargs):
