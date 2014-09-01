@@ -21,7 +21,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Plugins.Plugin import PluginDescriptor
 
 class AutoTimerSettings(Screen, ConfigListScreen):
-	skin = """<screen name="AutoTimerSettings" position="center,center" size="565,370">
+	skin = """<screen name="AutoTimerSettings" title="AutoTimer Settings" position="center,center" size="565,370">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
@@ -44,7 +44,7 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 				getConfigListEntry(_("Poll automatically"), config.plugins.autotimer.autopoll, _("Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button.")),
 				getConfigListEntry(_("Only poll while in standby"), config.plugins.autotimer.onlyinstandby, _("When this is enabled AutoTimer will ONLY check for new events whilst in stanadby.")),
 				getConfigListEntry(_("Startup delay (in min)"), config.plugins.autotimer.delay, _("This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time.")),
-				getConfigListEntry(_("Poll Interval (in mins)"), config.plugins.autotimer.interval, _("This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again.")),
+				getConfigListEntry(_("Poll Interval (in h)"), config.plugins.autotimer.interval, _("This is the delay in hours that the AutoTimer will wait after a search to search the EPG again.")),
 				getConfigListEntry(_("Timeout (in min)"), config.plugins.autotimer.timeout, _("This is the duration in minutes that the AutoTimer is allowed to run.")),
 				getConfigListEntry(_("Only add timer for next x days"), config.plugins.autotimer.maxdaysinfuture, _("You can control for how many days in the future timers are added. Set this to 0 to disable this feature.")),
 				getConfigListEntry(_("Show in plugin browser"), config.plugins.autotimer.show_in_plugins, _("Enable this to be able to access the AutoTimer Overview from within the plugin browser.")),

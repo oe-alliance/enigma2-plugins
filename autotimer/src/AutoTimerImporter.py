@@ -320,3 +320,4 @@ class AutoTimerImporter(Screen):
 				autotimer,
 				self.session
 			))
+
