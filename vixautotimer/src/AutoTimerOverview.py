@@ -216,7 +216,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 	def menu(self):
 		list = [
-			(_("Preview"), "preview"),
+			#(_("Preview"), "preview"),
 			(_("Import existing Timer"), "import"),
 			(_("Import from EPG"), "import_epg"),
 			(_("Setup"), "setup"),
@@ -251,12 +251,12 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/faq.xml"))
 				autotimerFaq = PluginHelp(*reader)
 				autotimerFaq.open(self.session)
-			elif ret == "preview":
-				total, new, modified, timers, conflicts, similars = self.autotimer.parseEPG(simulateOnly = True)
-				self.session.open(
-					AutoTimerPreview,
-					timers
-				)
+			#elif ret == "preview":
+				#total, new, modified, timers, conflicts, similars = self.autotimer.parseEPG(simulateOnly = True)
+				#self.session.open(
+					#AutoTimerPreview,
+					#timers
+				#)
 			elif ret == "import":
 				newTimer = self.autotimer.defaultTimer.clone()
 				newTimer.id = self.autotimer.getUniqueId()

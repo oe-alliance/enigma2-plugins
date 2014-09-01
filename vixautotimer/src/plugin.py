@@ -4,8 +4,6 @@ from . import _, config
 
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
-from Tools.Notifications import AddPopup
-
 # Plugin
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
@@ -116,7 +114,7 @@ def main(session, **kwargs):
 
 	# Do not run in background while editing, this might screw things up
 	if autopoller is not None:
-		autopoller.pause()
+		autopoller.stop()
 
 	from AutoTimerOverview import AutoTimerOverview
 	session.openWithCallback(
@@ -125,46 +123,27 @@ def main(session, **kwargs):
 		autotimer
 	)
 
-def handleAutoPoller():
+def editCallback(session):
 	global autopoller
+
+	# XXX: canceling of GUI (Overview) won't affect config values which might have been changed - is this intended?
+
+	# Don't parse EPG if editing was canceled
+	if session is not None:
+		# Save xml
+		autotimer.writeXml()
+		# Poll EPGCache
+		autotimer.parseEPG()
 
 	# Start autopoller again if wanted
 	if config.plugins.autotimer.autopoll.value:
 		if autopoller is None:
 			from AutoPoller import AutoPoller
 			autopoller = AutoPoller()
-		autopoller.start(initial = False)
+		autopoller.start()
 	# Remove instance if not running in background
 	else:
 		autopoller = None
-
-def editCallback(session):
-	# Don't parse EPG if editing was canceled
-	if session is not None:
-		autotimer.parseEPGAsync().addCallback(parseEPGCallback)#.addErrback(parseEPGErrback)
-	else:
-		handleAutoPoller()
-
-#def parseEPGErrback(failure):
-#	AddPopup(
-#		_("AutoTimer failed with error %s" (str(failure),)),
-#	)
-#
-#	# Save xml
-#	autotimer.writeXml()
-#	handleAutoPoller()
-
-def parseEPGCallback(ret):
-	AddPopup(
-		_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
-		MessageBox.TYPE_INFO,
-		10,
-		'AT_PopUp_ID_ParseEPGCallback'
-	)
-
-	# Save xml
-	autotimer.writeXml()
-	handleAutoPoller()
 
 # Movielist
 def movielist(session, service, **kwargs):
@@ -216,3 +195,4 @@ def timermenu(menuid):
 	if menuid == "timermenu":
 		return [(_("AutoTimers"), main, "autotimer_setup", None)]
 	return []
+

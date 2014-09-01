@@ -1,0 +1,446 @@
+<!-- tplAutoTimerEditor -->
+					<table class="tabEditor"> 
+						<tr>
+							<td>
+								<table class="editor"> 
+									<tr>
+										<td class="optionTitle">Enabled:</td>
+										<td class="optionContent">
+											<input id="enabled" type="checkbox" class="input" ${enabled}>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Name:</td>
+										<td class="optionContent">
+											<input id="name" type="text" class="input text" maxlength="1000" value="${name}">
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Match:</td>
+										<td class="optionContent">
+											<input id="match" type="text" class="input text" maxlength="1000" value="${match}">
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Encoding:</td>
+										<td class="optionContent">
+											<select id="encoding" size="1" class="select">
+												{for e in encoding}
+													<option value="${e.value}" ${e.selected}>${e.txt}</option>
+												{/for}	
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Search type:</td>
+										<td class="optionContent">
+											<select id="searchType" size="1" class="select">
+												{for e in searchType}
+													<option value="${e.value}" ${e.selected}>${e.txt}</option>
+												{/for}	
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Search case:</td>
+										<td class="optionContent">
+											<select id="searchCase" size="1" class="select">
+												{for e in searchCase}
+													<option value="${e.value}" ${e.selected}>${e.txt}</option>
+												{/for}	
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Timer type:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<select id="justplay" size="1" class="select">
+															{for e in justplay}
+																<option value="${e.value}" ${e.selected}>${e.txt}</option>
+															{/for}	
+														</select>
+													</td>
+													<td>
+														<div id="justplaycontent" class="optionSub">
+															Set end time:
+															<input id="setEndtime" type="checkbox" class="input" ${setEndtime}>
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Override alternatives:</td>
+										<td class="optionContent">
+											<input id="overrideAlternatives" type="checkbox" class="input" ${overrideAlternatives}>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Time span:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<input id="timespan" type="checkbox" class="input" ${timespan.usetimespan}>
+													</td>
+													<td>
+														<div id="timespancontent" class="optionSub">
+															Begin:
+															<input id="from" type="text" class="input timepicker" size="6" value="${timespan.from}">
+															End:
+															<input id="to" type="text" class="input timepicker" size="6" value="${timespan.to}">
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Time frame:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<input id="timeframe" type="checkbox" class="input" ${timeframe.usetimeframe}>
+													</td>
+													<td>
+														<div id="timeframecontent" class="optionSub">
+															After:
+															<input id="after" type="text" class="input datepicker" size="14" value="${timeframe.after}">
+															Before:
+															<input id="before" type="text" class="input datepicker" size="14" value="${timeframe.before}">
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Timer offset:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<input id="offset" type="checkbox" class="input" ${offset.useoffset}>
+													</td>
+													<td>
+														<div id="offsetcontent" class="optionSub">
+															Before:
+															<select id="offsetbegin" size="1" class="select">
+																{for e in offset.begin}
+																	<option value="${e.value}" ${e.selected}>${e.txt}</option>
+																{/for}	
+															</select>
+															After:
+															<select id="offsetend" size="1" class="select">
+																{for e in offset.end}
+																	<option value="${e.value}" ${e.selected}>${e.txt}</option>
+																{/for}	
+															</select>
+															minutes
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Max duration:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<input id="maxdurationavailable" type="checkbox" class="input" ${maxduration.usemaxduration}>
+													</td>
+													<td>
+														<div id="maxdurationavailablecontent" class="optionSub">
+															<select id="maxduration" size="1" class="select">
+																{for e in maxduration.maxduration}
+																	<option value="${e.value}" ${e.selected}>${e.txt}</option>
+																{/for}	
+															</select>
+															minutes
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">After event:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<select id="afterevent" size="1" class="select">
+															{for e in afterevent.options}
+																<option value="${e.value}" ${e.selected}>${e.txt}</option>
+															{/for}	
+														</select>
+													</td>
+													<td>
+														<div id="aftereventcontent" class="optionSub">
+															Time span:
+															<input id="aftereventusetimespan" type="checkbox" class="input" ${afterevent.usetimespan}>
+														</div>
+														<div id="aftereventusetimespancontent" class="optionSub">
+															From:
+															<input id="aftereventFrom" type="text" class="input timepicker" size="6" value="${afterevent.from}">
+															To:
+															<input id="aftereventTo" type="text" class="input timepicker" size="6" value="${afterevent.to}">
+														</div>
+													</td>
+												</tr>
+											</table>	
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Counter:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														Max:
+														<select id="counter" size="1" class="select">
+															{for e in counter.options}
+																<option value="${e.value}" ${e.selected}>${e.txt}</option>
+															{/for}	
+														</select>
+													</td>
+													<td>
+														<table id="countercontent" class="optionSub">
+															<tr>
+																<td>
+																	Left:
+																	<select id="left" size="1" class="select">
+																		{for e in counter.left}
+																			<option value="${e.value}" ${e.selected}>${e.txt}</option>
+																		{/for}	
+																	</select>
+																	Reset:
+																	<select id="counterFormat" size="1" class="select">
+																		{for e in counter.counterFormat}
+																			<option value="${e.value}" ${e.selected}>${e.txt}</option>
+																		{/for}	
+																	</select>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	Last activation:
+																	<input id="lastActivation" type="text" class="input" size="20" value="${counter.lastActivation}" DISABLED>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	Last begin:
+																	<input id="lastBegin" type="text" class="input" size="20" value="${counter.lastBegin}" DISABLED>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Avoid duplicate description:</td>
+										<td class="optionContent">
+											<select id="avoidDuplicateDescription" size="1" class="select">
+												{for e in avoidDuplicateDescription}
+													<option value="${e.value}" ${e.selected}>${e.txt}</option>
+												{/for}	
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Location:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<input id="locationavailable" type="checkbox" class="input" ${location.uselocation}>
+													</td>
+													<td>
+														<div id="locationavailablecontent" class="optionSub">
+															<select id="location" size="1" class="select">
+																{for l in location.locations}
+																	<option value="${l.value}" ${l.selected}>${l.txt}</option>
+																{/for}
+															</select>
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Tags:</td>
+										<td class="optionContent">
+											<div id="taglist">
+												{for t in tags}
+													<a href="#" class="tags ${t.selected}" data-value="${t.value}" data-selected="${t.selected}">&nbsp;${t.txt}&nbsp;</a>
+												{/for}
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Filter:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<input id="usefilters" type="checkbox" class="input" ${filters.usefilters}>
+													</td>
+													<td>
+														<div id="usefilterscontent" class="optionSub">
+															<table id="filterlist" class="list">
+																{for f in filters.filters}
+																	<tr class="filter">
+																		<td class="nopadding">
+																			<select size="1" class="select">
+																				{for ft in f.type}
+																					<option value="${ft.value}" ${ft.selected}>${ft.txt}</option>
+																				{/for}
+																			</select>
+																		</td>
+																		<td class="nopadding">
+																			<select size="1" class="select filterwhere">
+																				{for fw in f.where}
+																					<option value="${fw.value}" ${fw.selected}>${fw.txt}</option>
+																				{/for}
+																			</select>
+																		</td>
+																		<td class="nopadding">
+																			<input type="text" class="input fixedwidth" size="20" value="${f.text}">
+																			<select size="1" class="select fixedwidth">
+																				{for fwd in f.weekdays}
+																					<option value="${fwd.value}" ${fwd.selected}>${fwd.txt}</option>
+																				{/for}
+																			</select>
+																		</td>
+																		<td class=${f.class}></td>
+																	</tr>
+																{/for}
+															</table>
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Bouquets:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<input id="usebouquets" type="checkbox" class="input" ${bouquets.usebouquets}>
+													</td>
+													<td>
+														<div id="usebouquetscontent" class="optionSub">
+															<table id="bouquetlist" class="list">
+																{for b in bouquets.bouquets}
+																	<tr class="bouquet">
+																		<td class="nopadding">
+																			<select size="1" class="select fixedwidthbouquet">
+																				{for bb in b.bouquet}
+																					<option value="${bb.value}" ${bb.selected}>${bb.txt}</option>
+																				{/for}
+																			</select>
+																		</td>
+																		<td class=${b.class}></td>
+																	</tr>
+																{/for}
+															</table>
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td class="optionTitle">Services:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<input id="useservices" type="checkbox" class="input" ${services.useservices}>
+													</td>
+													<td>
+														<div id="useservicescontent" class="optionSub">
+															<table id="servicelist" class="list">
+																{for s in services.services}
+																	<tr class="service">
+																		<td class="nopadding">
+																			<select size="1" class="select servicebouquet fixedwidthbouquet">
+																				{for b in s.bouquet}
+																					<option value="${b.value}" ${b.selected}>${b.txt}</option>
+																				{/for}
+																			</select>
+																		</td>
+																		<td class="nopadding">
+																			<select size="1" class="select fixedwidthservice">
+																				{for ss in s.service}
+																					<option value="${ss.value}" ${ss.selected}>${ss.txt}</option>
+																				{/for}
+																			</select>
+																		</td>
+																		<td class=${s.class}></td>
+																	</tr>
+																{/for}
+															</table>
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr class="${vps.hasVPS}"">
+										<td class="optionTitle">VPS:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<input id="vps_enabled" type="checkbox" class="input" ${vps.vps_enabled}>
+													</td>
+													<td>
+														<div id="vps_enabledcontent" class="optionSub">
+															VPS Overwrite:
+															<input id="vps_overwrite" type="checkbox" class="input" ${vps.vps_overwrite}>
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr class="${seriesplugin.hasSeriesPlugin}"">
+										<td class="optionTitle">Label series:</td>
+										<td class="optionContent">
+											<table> 
+												<tr>
+													<td class="optionMain">
+														<input id="series_labeling" type="checkbox" class="input" ${seriesplugin.series_labeling}>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<hr />
+									<div class="buttonbar">
+									<button type="button" id="save">Save</button>
+									<button type="button" id="cancel">Cancel</button>
+								</div>
+							</td>
+						</tr>
+					</table>
+<!-- /tplAutoTimerEditor -->

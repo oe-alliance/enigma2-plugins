@@ -10,7 +10,6 @@ SUBDIRS = \
 	automaticcleanup \
 	automaticvolumeadjustment \
 	autoresolution \
-	autotimer \
 	babelzapper \
 	birthdayreminder \
 	bonjour \
@@ -103,6 +102,12 @@ SUBDIRS = \
 	vierg \
 	bmediacenter \
 	advancedmovieselection
+
+if OPENVIX
+SUBDIRS += vixautotimer
+else
+SUBDIRS += autotimer
+endif
 
 if DREAMBOX
 SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview genuinedreambox

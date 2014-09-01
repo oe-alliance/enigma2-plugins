@@ -1,0 +1,730 @@
+	html, body{
+		font-family: Tahoma, Sans-Serif;
+		font-size: 14px;
+		font-weight: bold;
+		color: #485052;
+		text-align: center;
+		background: #555
+	}
+
+	a, a:visited, a:active,{
+		color: #485052;
+		text-decoration: none;
+	}
+	
+	a, a:visited, a:active, .remark{
+		color: #485052;
+		text-decoration: none;
+	}
+	
+	img{
+		border: 0px;
+	}
+
+	hr{
+		margin: 0px;
+		padding: 0px;
+		height: 1px;
+		color: grey;
+		background-color: grey;
+		border: none;
+	}
+
+	form{
+		margin: 2px;
+	}
+
+	table, table tr, table td{
+		margin: 0px;
+		padding: 0px;
+		border-width: 0 0 0 0;
+		border-style: collapse;
+		border-spacing: 0px;
+		border: 0px;
+	}
+
+	#notification{
+		color: #000;
+		width: 50%;
+		height: 32px;
+		position: absolute;
+		top: 0px;
+		left: 25%;		
+		text-align: center;
+		vertical-align: bottom;
+		z-index: 2;
+	}
+
+
+/***********************
+ WAP
+ ***********************/
+
+	.wap a, .wap a:visited, .wap a:active{
+		color: #fff;
+	}
+
+
+/***********************
+ GENERAL
+ ***********************/
+	.black{
+		background: #000;
+	}
+	
+	.odd{
+		background-color: #FFF;
+	}
+	
+	.even{
+		background-color: #DDD;
+	}
+	
+	.fullwidth {
+		width: 100%;
+	}
+
+	.halfwidth {
+		width: 50%;
+	}
+	
+	.center {
+		text-align: center;
+	}
+	
+	.underline {
+		text-decoration:underline;
+	}
+	
+	.buttonbar {
+		margin: 5px;
+	}
+
+/***********************
+ BANNER with MainMenu
+ ***********************/
+
+	#banner{
+		width: 1000px;
+		height: 47px;
+		background: #000;
+		padding-left: 5px;
+		margin-bottom: 8px;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+	}
+	
+	#banner a, #banner a:visited, #banner a:active{
+		color: #FFF;
+		text-decoration: none;
+	}
+	
+	#bannerText{
+		margin-bottom: 5px;
+		padding-left: 2px;
+		padding-top: 6px;
+	}
+
+	#bannerLeft{
+		width: 940px;
+		float: left;
+	}
+	
+	#bannerCenter{
+		padding: 10px;
+		text-align: center;
+		vertical-align: middle;
+		height: auto;
+	}
+	
+	#powerState{
+		border: 0px;
+		margin-left: 93px;
+		text-align: right;
+	}
+	
+	#bannerRight{
+		width: 50px;
+		text-align: right;
+		height: 60px;
+		float: left;
+	}
+	
+	#bannerRight img{
+		padding-top: 5px;
+	}
+		
+	#menu{
+		width: 999px;
+		height: 32px;
+		background: #000;
+		padding-left: 3px;
+		padding-right: 3px;
+		padding-bottom: 1px;
+		margin-bottom: 8px;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px; 	
+	}
+	
+	#mainMenu{
+		width: 100%;
+		height: auto;
+		margin: 0px;
+		padding: 0px;
+		text-align: center;
+		overflow: hidden;
+	}
+	
+	#mainMenu ul{
+		margin: 0px;
+		padding: 0px;
+		height: auto;
+		text-align: center;
+		overflow: hidden;
+	}
+	
+	#mainMenu #mainMenuLeft{
+		float: left;
+		margin-left: 5px;
+	}
+	
+	#mainMenu #mainMenuRight{
+		float: right;
+		margin-right: 5px;
+	}
+	
+	#mainMenu li {
+		list-style: none;
+		float: left;
+		height: 21px;
+		margin-left: 2px;
+		background: #485052;
+		margin-top: 6px;
+		margin-bottom: 0;
+		padding: 0;
+		position: relative;
+		z-index: 2;
+	}
+	
+	#mainMenu li:hover {
+		background: #AAA;
+	}
+	
+	#mainMenu a {
+		display: inline-block;
+		color: white;
+		text-decoration: none;
+		height: 100%;
+		padding: 2px 6px;
+	}
+	
+	.roundedNav {
+		display: block;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+	}
+	
+	#mainMenu form {
+		padding: 0;
+		margin: 0;
+	}
+	
+	input[type=file] {
+		-webkit-appearance: textfield;
+		position: relative;
+		-webkit-box-sizing: border-box;
+		padding-right: 6px;
+	}
+	
+	input[type=file]::-webkit-file-upload-button {
+		width: 0;
+		padding: 0;
+		margin: 0;
+		-webkit-appearance: none;
+		border: none;
+	}
+
+/***************
+ AutoTimer List
+ ***************/
+
+	#navContainer{
+		float:left;
+		width: 320px;
+	}
+	 
+	#nav{
+		width: 100%;
+		min-height: 50px;
+		background: #FFF;
+		border: 2px solid #000;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+	}
+
+	#navHd{
+		background: #000;
+	}
+
+	#navContent{
+		color: #485052;
+	}
+
+	#navSearch{
+		width: 100%;
+		height: 61px;
+		background: #FFF;
+		margin-top: 8px;
+		border: 2px solid #000;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+	}
+
+	#searchHd{
+		background: #000;
+		text-align: center;
+		width: 153px;
+	}
+	
+	#navVolume{
+		width: 100%;
+		height: 75px;
+		background: #FFF;
+		margin-top: 8px;
+		border: 2px solid #000;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+	}
+
+	#volHd{
+		background: #000;
+		text-align: center;
+		width: 153px;
+	}
+	
+	.tabOverview{
+		width: 100%;
+	}
+	.overview{
+		width: 100%;
+		margin : 0px;
+		padding: 0px;
+		border: 0px
+	}
+	.enabled{
+		background-color: #58FA58;
+	}
+	.disabled{
+		background-color: #D8D8D8;
+	}
+
+
+/**************
+ AutoTimer Editor
+ **************/
+	#contentContainer{
+		float: left;
+		background: #FFF;
+		width: 673px;
+		min-height: 50px;
+		margin-left: 8px;
+		border: 2px solid #000;		
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+	}
+	#content{
+	}
+	#contentHd{
+		background: #000;
+	}
+	#contentHdExt{
+		background: #000;		
+		dipslay:block;
+	}
+	.tabEditor{
+		width: 100%;
+		color: #485052;
+	}
+	.editor{
+		width: 100%;
+	}
+	
+	.optionTitle{
+		padding-left: 5px;
+		padding-right: 5px;
+		padding-bottom: 5px;
+		white-space: nowrap;
+		/*vertical-align:top;*/
+	}
+	.optionContent{
+		height: 25px;
+		font-weight: normal;
+		padding: 2px;
+	}
+	.optionMain{
+		padding-right: 2px;
+		/*vertical-align:top;*/
+	}
+	.optionSub{
+		padding-left: 5px;
+	}
+	
+	.input,.select, a.tags, .list tr {
+		font-family: Tahoma, Sans-Serif;
+		font-size: 14px;
+		font-weight: normal;
+		border: 1px solid #CCC;
+		background-color: #fff;
+		color: #485052;
+		margin: 2px;
+	}
+	.text{
+		width: 350px;
+	}
+	
+	a.tags {
+		margin: 3px 0px 3px 0px;
+		padding: 3px;
+		display: inline-block;
+	}
+	a.tags:hover {
+		box-shadow: 0 0 5px #485052;
+		-webkit-box-shadow: 0 0 5px #485052; 
+		-moz-box-shadow: 0 0 5px #485052; 
+	}
+	a.selected {
+		background: #FFFF99;
+	}
+	a.selected:hover {
+		box-shadow: 0 0 5px #485052;
+		-webkit-box-shadow: 0 0 5px #485052; 
+		-moz-box-shadow: 0 0 5px #485052; 
+	}
+	
+	.list{
+		border-collapse: collapse;
+		margin: 3px;
+	}
+	.list td{
+		padding: 3px; 
+	}
+	.list .nopadding{
+		padding: 0px; 
+	}
+	.list tr:hover{
+		background: none repeat scroll 0 0 #D8D6D0;
+	}
+	
+	.list .add{
+		width : 30px;
+		cursor: pointer;
+		background-image:url("add.png");
+		background-position:center center; background-repeat:no-repeat;
+	}
+	.list .remove{
+		width : 30px;
+		cursor: pointer;
+		background-image:url("remove.png");
+		background-position:center center; background-repeat:no-repeat;
+	}
+	
+	.invisible{
+		display: none;
+	}
+	
+	.fixedwidth{
+		width : 150px;
+	}
+	
+	.fixedwidthbouquet{
+		width : 150px;
+	}
+	
+	.fixedwidthservice{
+		width : 240px;
+	}
+	
+	.timepicker{
+		display: inline;
+		background-image:url("clock.png");
+		background-position:96% center; background-repeat:no-repeat;
+	}
+	.timepicker:hover{
+		cursor: pointer;
+		background-image:url("clock_hover.png");
+		background-position:96% center; background-repeat:no-repeat;
+	}
+	
+	.datepicker{
+		display: inline;
+		background-image:url("calendar.png");
+		background-position:98% center; background-repeat:no-repeat;
+	}
+	.datepicker:hover{
+		cursor: pointer;
+		background-image:url("calendar_hover.png");
+		background-position:98% center; background-repeat:no-repeat;
+	}
+
+
+/**************
+ AutoTimer Preview
+ **************/
+	#previewlist{
+		width: 100%;
+	}
+	#previewlist tr{
+		margin-bottom: 3px;
+	}
+	#previewlist td{
+		vertical-align: text-top;
+		padding-top: 3px;
+	}
+	#previewlist td:not(.nopadding){
+		padding-left: 10px;
+	}
+
+
+/**************
+ AutoTimer Timers
+ **************/
+	#contentAutoTimerContent{
+		padding: 8px;
+	}
+		
+	.tListItemTable {
+		position: relative;
+		top: 0;
+		left: 0;
+		margin-left: 22px;
+		width: 585px !important
+	}
+
+	.tListSName {
+		text-align: left
+	}
+
+	.tListItem {
+		font-weight: bold;
+		font-size: 13px
+	}
+
+	.tListTitle {
+		width: 150px;
+		text-align: left
+	}
+
+	.tListDescr {
+		width: 150px;
+		text-align: left
+	}
+
+	.tListRepeat {
+		width: 120px;
+		text-align: left
+	}
+
+	.tListDuration {
+		width: 120px;
+		text-align: left
+	}
+
+	.tListBegin {
+		width: 170px;
+		text-align: left
+	}
+
+	.tListEnd {
+		width: 170px;
+		text-align: left
+	}
+
+	.tListAfter {
+		width: 85px;
+		text-align: left
+	}
+
+	.tListType {
+		width: 85px;
+		text-align: left
+	}
+
+	.tListOption {
+		text-align: right;
+		vertical-align: bottom;
+		z-index: 9999
+	}
+
+	.tListDelete {
+		position: absolute;
+		bottom: 2px;
+		right: 1px;
+		height: 26px;
+		width: 100px;
+		margin: 0px;
+		padding: 0
+	}
+
+	.tListToggleDisabled {
+		position: absolute;
+		bottom: 2px;
+		right: 105px;
+		height: 26px;
+		width: 100px;
+		margin: 0;
+		padding: 0
+	}
+
+	.tListButton {
+		margin: 0;
+		height: 100%;
+		width: 100px;
+		font-size: 11px;
+		vertical-align: middle
+	}
+
+	div.legendRow {
+		height: auto;
+		overflow: auto
+	}
+
+	div.legendCol {
+		float: left;
+		width: 100px;
+		padding-left: 2px
+	}
+
+	.timerState {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 10px;
+		display: block;
+		padding: 0
+	}
+
+	.timerState0 {
+		background: #485052;
+		color: #FFFFFF
+	}
+
+	.timerState1 {
+		background: #BD282D;
+		color: #FFFFFF
+	}
+
+	.timerState2 {
+		background: #2DBD28;
+		color: #FFFFFF
+	}
+
+	.timerState3 {
+		background: #282DBD;
+		color: #FFFFFF
+	}
+
+	td.timerList {
+		width: 100%;
+		position: relative;
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid #AAA;
+		display: block;
+		padding-bottom: 30px;
+	}
+
+	a.tListEdit {
+		display: block;
+		margin: 0;
+		padding: 1px
+	}
+
+	a.tListEdit:hover {
+		display: block;
+		margin: 0;
+		background: #DDD
+	}
+
+	#timerEditForm table {
+		cell-spacing: 1px
+	}
+
+
+/**************
+ AutoTimer About
+ **************/
+	.about{
+		font-size: 12px;
+	}
+	
+	.about h1{
+		font-size: 16px;
+		margin-left: 20px;
+	}
+
+	.about div, .about pre{
+		margin-left: 25px;
+		margin-bottom: 10px;
+	}
+
+
+/*****************
+* General
+******************/
+
+	#container {
+		margin: 0 auto;   /* align for good browsers */
+		text-align: left; /* counter the body center */
+		width: 1005px;
+	}
+
+	.header{
+		color: #FFF;
+		padding-top: 2px;
+		padding-left: 4px;
+		padding-right: 4px;
+		display: block;
+		height: 22px;
+	}
+
+	.headerindent{
+		margin-left: 7px;
+	}
+
+	.nobreak {
+	  white-space: nowrap;
+	}
+
+
+/***************
+* IE6 Hackstuff
+***************/
+
+	* html #banner{
+		width: 1005px;
+		height: 78px;
+	}
+	
+	* html #bannerRight{
+		width: 120px;
+		height: 60px;		
+	}
+
+	* html #nav{
+		width: 99%;
+		height: 250px;
+		background: #000;
+		padding-left: 5px;
+	}
+	
+	* html .navTable{
+		width: 95%;
+	}
