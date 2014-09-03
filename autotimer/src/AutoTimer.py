@@ -5,6 +5,14 @@ from xml.etree.cElementTree import parse as cet_parse
 from os import path as os_path
 from AutoTimerConfiguration import parseConfig, buildConfig
 
+# Tasks
+import Components.Task
+
+# GUI (Screens)
+from Screens.MessageBox import MessageBox
+from Tools.FuzzyDate import FuzzyTime
+from Tools.Notifications import AddPopup
+
 # Navigation (RecordTimer)
 import NavigationInstance
 
@@ -14,7 +22,7 @@ from RecordTimer import RecordTimerEntry
 from Components.TimerSanityCheck import TimerSanityCheck
 
 # Timespan
-from time import localtime, strftime, time, mktime
+from time import localtime, strftime, time, mktime, sleep
 from datetime import timedelta, date
 
 # EPGCache & Event
@@ -108,7 +116,6 @@ class AutoTimer:
 		)
 
 # Configuration
-
 	def readXml(self):
 		# Abort if no config found
 		if not os_path.exists(XML_CONFIG):
@@ -125,7 +132,9 @@ class AutoTimer:
 		self.configMtime = mtime
 
 		# Parse Config
-		configuration = cet_parse(XML_CONFIG).getroot()
+		file = open(XML_CONFIG, 'r')
+		configuration = cet_parse(file).getroot()
+		file.close()
 
 		# Empty out timers and reset Ids
 		del self.timers[:]
@@ -148,7 +157,6 @@ class AutoTimer:
 			config.writelines(buildConfig(self.defaultTimer, self.timers))
 
 # Manage List
-
 	def add(self, timer):
 		self.timers.append(timer)
 
@@ -188,22 +196,24 @@ class AutoTimer:
 			idx += 1
 		self.timers.append(timer)
 
-	def parseEPGAsync(self, simulateOnly = False):
+	#call from epgrefresh
+	def parseEPGAsync(self, simulateOnly=False):
 		t = SimpleThread(lambda: self.parseEPG(simulateOnly=simulateOnly))
 		t.start()
 		return t.deferred
 
-# Main function
+	# Main function
 
 	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, timerdict, moviedict, simulateOnly=False):
 		new = 0
 		modified = 0
+		skipped = 0
 
 		# Precompute timer destination dir
 		dest = timer.destination or config.usage.default_path.value
 
 		# Workaround to allow search for umlauts if we know the encoding
-		match = timer.match
+		match = timer.match.replace('\xc2\x86', '').replace('\xc2\x87', '')
 		if timer.encoding != 'UTF-8':
 			try:
 				match = match.decode('UTF-8').encode(timer.encoding)
@@ -286,7 +296,7 @@ class AutoTimer:
 
 		else:
 			# Search EPG, default to empty list
-			epgmatches = epgcache.search( ('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
+			epgmatches = epgcache.search( ('RITBDSE', 3000, typeMap[timer.searchType], match, caseMap[timer.searchCase]) ) or []
 
 		# Sort list of tuples by begin time 'B'
 		epgmatches.sort(key=itemgetter(3))
@@ -295,6 +305,7 @@ class AutoTimer:
 		similardict = defaultdict(list)		
 
 		# Loop over all EPG matches
+		preveit = False
 		for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
 
 			eserviceref = eServiceReference(serviceref)
@@ -312,9 +323,14 @@ class AutoTimer:
 			evtEnd = end = begin + duration
 
 			# If event starts in less than 60 seconds skip it
-			if begin < time() + 60:
-				print("[AutoTimer] Skipping an event because it starts in less than 60 seconds")
-				continue
+			# if begin < time() + 60:
+			# 	print ("[AutoTimer] Skipping " + name + " because it starts in less than 60 seconds")
+			# 	skipped += 1
+			# 	continue
+
+			# Set short description to equal extended description if it is empty.
+			if not shortdesc:
+				shortdesc = extdesc
 
 			# Convert begin time
 			timestamp = localtime(begin)
@@ -374,7 +390,7 @@ class AutoTimer:
 				if dest and dest not in moviedict:
 					self.addDirectoryToMovieDict(moviedict, dest, serviceHandler)
 				for movieinfo in moviedict.get(dest, ()):
-					if self.checkSimilarity(timer, name, movieinfo.get("name"), shortdesc, movieinfo.get("shortdesc"), extdesc, movieinfo.get("extdesc") ):
+					if self.checkSimilarity(timer, name, movieinfo.get("name"), shortdesc, movieinfo.get("shortdesc"), extdesc, movieinfo.get("extdesc")):
 						print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
 						movieExists = True
 						break
@@ -389,7 +405,7 @@ class AutoTimer:
 			# We first check eit and if user wants us to guess event based on time
 			# we try this as backup. The allowed diff should be configurable though.
 			for rtimer in timerdict.get(serviceref, ()):
-				if rtimer.eit == eit or config.plugins.autotimer.try_guessing.value and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
+				if (rtimer.eit == eit or config.plugins.autotimer.try_guessing.getValue()) and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
 					oldExists = True
 
 					# Abort if we don't want to modify timers or timer is repeated
@@ -397,28 +413,33 @@ class AutoTimer:
 						print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
 						break
 
-					if hasattr(rtimer, "isAutoTimer"):
-						rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
+					if eit == preveit:
+						break
+					
+					if (evtBegin - (config.recording.margin_before.getValue() * 60) != rtimer.begin) or (evtEnd + (config.recording.margin_after.getValue() * 60) != rtimer.end) or (shortdesc != rtimer.description):
+						if rtimer.isAutoTimer and eit == rtimer.eit:
+							print ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
+							rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
+							preveit = eit
+						else:
+							if config.plugins.autotimer.refresh.getValue() != "all":
+								print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
+								break
+							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it: %s ." % (timer.name, rtimer.name))
+						newEntry = rtimer
+						modified += 1
+						self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref, eit)
+						rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
+						break
 					else:
-						if config.plugins.autotimer.refresh.value != "all":
-							print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
-							break
-
-						rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it: %s ." % (timer.name, rtimer.name))
-
-					newEntry = rtimer
-					modified += 1
-
-					self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref, eit)
-					rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
-					break
-				elif timer.avoidDuplicateDescription >= 1 \
-					and not rtimer.disabled:
-						if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
-						# if searchForDuplicateDescription > 1 then check short description
-							oldExists = True
-							print("[AutoTimer] We found a timer (similar service) with same description, skipping event")
-							break
+						print ("[AutoTimer] Skipping timer because it has not changed.")
+						skipped += 1
+						break
+				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
+					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
+						print("[AutoTimer] We found a timer with similar description, skipping event")
+						oldExists = True
+						break
 
 			# We found no timer we want to edit
 			if newEntry is None:
@@ -427,15 +448,19 @@ class AutoTimer:
 					continue
 
 				# We want to search for possible doubles
-				if timer.avoidDuplicateDescription >= 2:
-					for rtimer in chain.from_iterable( itervalues(timerdict) ):
-						if not rtimer.disabled:
+				for rtimer in chain.from_iterable( itervalues(timerdict) ):
+					if not rtimer.disabled:
+						if self.checkDoubleTimers(timer, name, rtimer.name, begin, rtimer.begin, end, rtimer.end ):
+							oldExists = True
+							# print("[AutoTimer] We found a timer with same StartTime, skipping event")
+							break
+						if timer.avoidDuplicateDescription >= 2:
 							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
 								oldExists = True
 								print("[AutoTimer] We found a timer (any service) with same description, skipping event")
 								break
-					if oldExists:
-						continue
+				if oldExists:
+					continue
 
 				if timer.checkCounter(timestamp):
 					print("[AutoTimer] Not adding new timer because counter is depleted.")
@@ -637,14 +662,27 @@ class AutoTimer:
 				})
 
 	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2, force=False):
-		foundTitle = name1 == name2
-		foundShort = shortdesc1 == shortdesc2 if (timer.searchForDuplicateDescription > 0 or force) else True
-		foundExt = True
-		# NOTE: only check extended if short description already is a match because otherwise
-		# it won't evaluate to True anyway
-		if (timer.searchForDuplicateDescription > 0 or force) and foundShort and extdesc1 != extdesc2:
-			# Some channels indicate replays in the extended descriptions
-			# If the similarity percent is higher then 0.8 it is a very close match
-			foundExt = ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+		foundTitle = False
+		foundShort = False
+		foundExt = False
+		if name1 and name2:
+			foundTitle = ( 0.8 < SequenceMatcher(lambda x: x == " ",name1, name2).ratio() )
+		# NOTE: only check extended & short if tile is a partial match
+		if foundTitle:
+			if timer.searchForDuplicateDescription > 0 or force:
+				if extdesc1 and extdesc2:
+					# Some channels indicate replays in the extended descriptions
+					# If the similarity percent is higher then 0.7 it is a very close match
+					foundExt = ( 0.7 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
 
-		return foundTitle and foundShort and foundExt
+				if not foundExt and shortdesc1 and shortdesc2:
+					# some channels do not use extended description, so try to find a close match to short description.
+					# If the similarity percent is higher then 0.7 it is a very close match
+					foundShort = ( 0.7 < SequenceMatcher(lambda x: x == " ",shortdesc1, shortdesc2).ratio() )
+		return foundShort or foundExt
+
+	def checkDoubleTimers(self, timer, name1, name2, starttime1, starttime2, endtime1, endtime2):
+		foundTitle = name1 == name2
+		foundstart = starttime1 == starttime2
+		foundend = endtime1 == endtime2
+		return foundTitle and foundstart and foundend
