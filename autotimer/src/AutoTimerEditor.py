@@ -68,20 +68,6 @@ except ImportError as ie:
 else:
 	hasSeriesPlugin = True
 
-class ExtendedConfigText(ConfigText):
-	def __init__(self, default = "", fixed_size = True, visible_width = False):
-		ConfigText.__init__(self, default = default, fixed_size = fixed_size, visible_width = visible_width)
-
-		# Workaround some characters currently not "typeable" using NumericalTextInput
-		mapping = self.mapping
-		if mapping:
-			if "&" not in mapping[0]:
-				mapping[0] += "&"
-			if ";" not in mapping[0]:
-				mapping[0] += ";"
-			if "%" not in mapping[0]:
-				mapping[0] += "%"
-
 class SimpleBouquetSelection(SimpleChannelSelection):
 	def __init__(self, session, title):
 		SimpleChannelSelection.__init__(self, session, title)
@@ -181,10 +167,10 @@ class AutoTimerEditorBase:
 
 	def createSetup(self, timer):
 		# Name
-		self.name = NoSave(ExtendedConfigText(default = timer.name, fixed_size = False))
+		self.name = NoSave(ConfigText(default = timer.name, fixed_size = False))
 
 		# Match
-		self.match = NoSave(ExtendedConfigText(default = timer.match, fixed_size = False))
+		self.match = NoSave(ConfigText(default = timer.match, fixed_size = False))
 
 		# Encoding
 		default = timer.encoding
@@ -1141,12 +1127,12 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			self.idx = 2
 
 		self.list.extend([
-			getConfigListEntry(_("Exclude"), NoSave(ExtendedConfigText(default = x, fixed_size = False)))
+			getConfigListEntry(_("Exclude"), NoSave(ConfigText(default = x, fixed_size = False)))
 				for x in self.excludes[self.idx]
 		])
 		self.lenExcludes = len(self.list)
 		self.list.extend([
-			getConfigListEntry(_("Include"), NoSave(ExtendedConfigText(default = x, fixed_size = False)))
+			getConfigListEntry(_("Include"), NoSave(ConfigText(default = x, fixed_size = False)))
 				for x in self.includes[self.idx]
 		])
 
@@ -1186,7 +1172,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			if self.typeSelection.value == "day":
 				entry = getConfigListEntry(text, NoSave(ConfigSelection(choices = weekdays)))
 			else:
-				entry = getConfigListEntry(text, NoSave(ExtendedConfigText(fixed_size = False)))
+				entry = getConfigListEntry(text, NoSave(ConfigText(fixed_size = False)))
 
 			list.insert(pos, entry)
 			self["config"].setList(list)
