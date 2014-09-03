@@ -491,6 +491,11 @@ class EPGRefresh:
 		epgrefreshtimer.add(EPGRefreshTimerEntry(time() + 30, self.prepareRefresh))
 
 	def isServiceProtected(self, service):
+		if not config.ParentalControl.configured.value \
+			or not config.ParentalControl.servicepinactive.value:
+			print("[EPGRefresh] DEBUG: ParentalControl not configured")
+			return False
+		print("[EPGRefresh] DEBUG: ParentalControl ProtectionLevel:" + str(parentalControl.getProtectionLevel(str(service))))
 		return parentalControl.getProtectionLevel(str(service)) != -1
 
 	def nextService(self):

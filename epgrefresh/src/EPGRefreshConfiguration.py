@@ -33,7 +33,7 @@ from traceback import print_exc
 from sys import stdout
 import os
 
-VERSION = "2.1.2"
+VERSION = "2.1.4"
 class EPGHelpContextMenu(FixedMenu):
 	HELP_RETURN_MAINHELP = 0
 	HELP_RETURN_KEYHELP = 1
@@ -163,7 +163,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 				self.list.append(getConfigListEntry(_("Refresh EPG using"), config.plugins.epgrefresh.adapter, _("If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."), False))
 			self.list.append(getConfigListEntry(_("Show Advanced Options"), NoSave(config.plugins.epgrefresh.showadvancedoptions), _("Display more Options"), True))
 			if config.plugins.epgrefresh.showadvancedoptions.value:
-				if config.ParentalControl.configured.value:
+				if config.ParentalControl.configured.value and  config.ParentalControl.servicepinactive.value:
 					self.list.append(getConfigListEntry(_("Skip protected Services"), config.plugins.epgrefresh.skipProtectedServices, _("Should protected services be skipped if refresh was started in interactive-mode?"), False))
 				self.list.append(getConfigListEntry(_("Show Setup in extension menu"), config.plugins.epgrefresh.show_in_extensionsmenu, _("Enable this to be able to access the EPGRefresh configuration from within the extension menu."), False))
 				self.list.append(getConfigListEntry(_("Show 'EPGRefresh Start now' in extension menu"), config.plugins.epgrefresh.show_run_in_extensionsmenu, _("Enable this to be able to start the EPGRefresh from within the extension menu."), False))
