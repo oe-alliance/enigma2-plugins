@@ -239,6 +239,12 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			list = list,
 		)
 
+	def openPreview(self, timers):
+		self.session.open(
+			AutoTimerPreview,
+			timers
+		)
+
 	def menuCallback(self, ret):
 		ret = ret and ret[1]
 		if ret:
@@ -252,11 +258,8 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				autotimerFaq = PluginHelp(*reader)
 				autotimerFaq.open(self.session)
 			elif ret == "preview":
-				total, new, modified, timers, conflicts, similars = self.autotimer.parseEPG(simulateOnly = True)
-				self.session.open(
-					AutoTimerPreview,
-					timers
-				)
+				# todo timeout / error handling
+				self.autotimer.parseEPG(simulateOnly = True, callback = self.openPreview)
 			elif ret == "import":
 				newTimer = self.autotimer.defaultTimer.clone()
 				newTimer.id = self.autotimer.getUniqueId()

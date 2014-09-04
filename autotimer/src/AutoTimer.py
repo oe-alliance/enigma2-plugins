@@ -1,5 +1,8 @@
 from __future__ import print_function
 
+# for localized messages
+from . import _
+
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse
 from os import path as os_path
@@ -19,7 +22,6 @@ import NavigationInstance
 # Timer
 from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry
-from Components.TimerSanityCheck import TimerSanityCheck
 
 # Timespan
 from time import localtime, strftime, time, mktime, sleep
@@ -27,11 +29,6 @@ from datetime import timedelta, date
 
 # EPGCache & Event
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
-
-from twisted.internet import reactor, defer
-from twisted.python import failure
-from threading import currentThread
-import Queue
 
 # AutoTimer Component
 from AutoTimerComponent import preferredAutoTimerComponent
@@ -52,41 +49,16 @@ from . import config, xrange, itervalues
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
+NOTIFICATIONID = 'AutoTimerNotification'
+CONFLICTNOTIFICATIONID = 'AutoTimerConflictEncounteredNotification'
+SIMILARNOTIFICATIONID = 'AutoTimerSimilarUsedNotification'
+
 def getTimeDiff(timer, begin, end):
 	if begin <= timer.begin <= end:
 		return end - timer.begin
 	elif timer.begin <= begin <= timer.end:
 		return timer.end - begin
 	return 0
-
-def blockingCallFromMainThread(f, *a, **kw):
-	"""
-	  Modified version of twisted.internet.threads.blockingCallFromThread
-	  which waits 30s for results and otherwise assumes the system to be shut down.
-	  This is an ugly workaround for a twisted-internal deadlock.
-	  Please keep the look intact in case someone comes up with a way
-	  to reliably detect from the outside if twisted is currently shutting
-	  down.
-	"""
-	queue = Queue.Queue()
-	def _callFromThread():
-		result = defer.maybeDeferred(f, *a, **kw)
-		result.addBoth(queue.put)
-	reactor.callFromThread(_callFromThread)
-
-	result = None
-	while True:
-		try:
-			result = queue.get(True, config.plugins.autotimer.timeout.value*60)
-		except Queue.Empty as qe:
-			if True: #not reactor.running: # reactor.running is only False AFTER shutdown, we are during.
-				raise ValueError("Reactor no longer active, aborting.")
-		else:
-			break
-
-	if isinstance(result, failure.Failure):
-		result.raiseException()
-	return result
 
 typeMap = {
 	"exact": eEPGCache.EXAKT_TITLE_SEARCH,
@@ -161,7 +133,7 @@ class AutoTimer:
 		self.timers.append(timer)
 
 	def getEnabledTimerList(self):
-		return (x for x in self.timers if x.enabled)
+		return sorted([x for x in self.timers if x.enabled], key=lambda x: x.name)
 
 	def getTimerList(self):
 		return self.timers
@@ -203,6 +175,74 @@ class AutoTimer:
 		return t.deferred
 
 	# Main function
+	def parseEPG(self, autoPoll = False, simulateOnly = False, callback = None):
+		self.autoPoll = autoPoll
+		self.simulateOnly = simulateOnly
+
+		self.new = 0
+		self.modified = 0
+		self.skipped = 0
+		self.total = 0
+		self.autotimers = []
+		self.conflicting = []
+		self.similars = []
+		self.callback = callback
+
+		# NOTE: the config option specifies "the next X days" which means today (== 1) + X
+		delta = timedelta(days = config.plugins.autotimer.maxdaysinfuture.getValue() + 1)
+		self.evtLimit = mktime((date.today() + delta).timetuple())
+		self.checkEvtLimit = delta.days > 1
+		del delta
+
+		# Read AutoTimer configuration
+		self.readXml()
+
+		# Get E2 instances
+		self.epgcache = eEPGCache.getInstance()
+		self.serviceHandler = eServiceCenter.getInstance()
+		self.recordHandler = NavigationInstance.instance.RecordTimer
+
+		# Save Timer in a dict to speed things up a little
+		# We include processed timers as we might search for duplicate descriptions
+		# NOTE: It is also possible to use RecordTimer isInTimer(), but we won't get the timer itself on a match
+		self.timerdict = defaultdict(list)
+		self.populateTimerdict(self.epgcache, self.recordHandler, self.timerdict)
+
+		# Create dict of all movies in all folders used by an autotimer to compare with recordings
+		# The moviedict will be filled only if one AutoTimer is configured to avoid duplicate description for any recordings
+		self.moviedict = defaultdict(list)
+
+		# Iterate Timer
+		Components.Task.job_manager.AddJob(self.createTask())
+
+	def createTask(self):
+		self.timer_count = 0
+		self.completed = []
+		job = Components.Task.Job(_("AutoTimer"))
+		timer = None
+
+		# Iterate Timer
+		for timer in self.getEnabledTimerList():
+			task = Components.Task.PythonTask(job, timer.name)
+			task.work = self.JobStart
+			task.weighting = 1
+			self.timer_count += 1
+
+		if timer:
+			task = Components.Task.PythonTask(job, 'Show results')
+			task.work = self.JobMessage
+			task.weighting = 1
+		
+		return job
+
+	def JobStart(self):
+		for timer in self.getEnabledTimerList():
+			if timer.name not in self.completed:
+				self.parseTimer(timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.timerdict, self.moviedict, self.simulateOnly)
+				self.new += self.result[0]
+				self.modified += self.result[1]
+				self.skipped += self.result[2]
+				break
 
 	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, timerdict, moviedict, simulateOnly=False):
 		new = 0
@@ -565,55 +605,40 @@ class AutoTimer:
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = recordHandler.record(newEntry)
-		return (new, modified)
+		self.result=(new, modified, skipped)
+		self.completed.append(timer.name)
+		sleep(0.5)
 
-	def parseEPG(self, simulateOnly = False):
-		if NavigationInstance.instance is None:
-			print("[AutoTimer] Navigation is not available, can't parse EPG")
-			return (0, 0, 0, [], [], [])
-
-		new = 0
-		modified = 0
-		timers = []
-		conflicting = []
-		similars = []
-
-		if currentThread().getName() == 'MainThread':
-			doBlockingCallFromMainThread = lambda f, *a, **kw: f(*a, **kw)
+	def JobMessage(self):
+		if self.callback is not None:
+			if self.simulateOnly == True:
+				self.callback(self.autotimers)
+			else:
+				total = (self.new+self.modified+len(self.conflicting)+self.skipped+len(self.similars))
+				_result = (total, self.new, self.modified, self.autotimers, self.conflicting, self.similars, self.skipped)
+				self.callback(_result)
+		elif self.autoPoll:
+			if self.conflicting and config.plugins.autotimer.notifconflict.value:
+				AddPopup(
+					_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(self.conflicting), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.conflicting])),
+					MessageBox.TYPE_INFO,
+					15,
+					CONFLICTNOTIFICATIONID
+				)
+			elif self.similars and config.plugins.autotimer.notifsimilar.value:
+				AddPopup(
+					_("%d conflict(s) solved with similar timer(s):\n%s") % (len(self.similars), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.similars])),
+					MessageBox.TYPE_INFO,
+					15,
+					SIMILARNOTIFICATIONID
+				)
 		else:
-			doBlockingCallFromMainThread = blockingCallFromMainThread
-
-		# NOTE: the config option specifies "the next X days" which means today (== 1) + X
-		delta = timedelta(days = config.plugins.autotimer.maxdaysinfuture.value + 1)
-		evtLimit = mktime((date.today() + delta).timetuple())
-		checkEvtLimit = delta.days > 1
-		del delta
-
-		# Read AutoTimer configuration
-		self.readXml()
-
-		# Get E2 instances
-		epgcache = eEPGCache.getInstance()
-		serviceHandler = eServiceCenter.getInstance()
-		recordHandler = NavigationInstance.instance.RecordTimer
-
-		# Save Timer in a dict to speed things up a little
-		# We include processed timers as we might search for duplicate descriptions
-		# NOTE: It is also possible to use RecordTimer isInTimer(), but we won't get the timer itself on a match
-		timerdict = defaultdict(list)
-		doBlockingCallFromMainThread(self.populateTimerdict, epgcache, recordHandler, timerdict)
-
-		# Create dict of all movies in all folders used by an autotimer to compare with recordings
-		# The moviedict will be filled only if one AutoTimer is configured to avoid duplicate description for any recordings
-		moviedict = defaultdict(list)
-
-		# Iterate Timer
-		for timer in self.getEnabledTimerList():
-			tup = doBlockingCallFromMainThread(self.parseTimer, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, timerdict, moviedict, simulateOnly=simulateOnly)
-			new += tup[0]
-			modified += tup[1]
-
-		return (len(timers), new, modified, timers, conflicting, similars)
+			AddPopup(
+				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+self.skipped+len(self.similars)), self.new, self.modified, len(self.conflicting), self.skipped, len(self.similars)),
+				MessageBox.TYPE_INFO,
+				15,
+				NOTIFICATIONID
+			)
 
 # Supporting functions
 

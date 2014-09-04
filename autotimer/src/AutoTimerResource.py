@@ -29,51 +29,36 @@ class AutoTimerBaseResource(resource.Resource):
 	<e2statetext>%s</e2statetext>
 </e2simplexmlresult>""" % ('True' if state else 'False', statetext)
 
-class AutoTimerBackgroundThread(threading.Thread):
-	def __init__(self, req, fnc):
-		threading.Thread.__init__(self)
-		self.__req = req
-		if hasattr(req, 'notifyFinish'):
-			req.notifyFinish().addErrback(self.connectionLost)
-		self.__stillAlive = True
-		self.__fnc = fnc
-		self.start()
-
-	def connectionLost(self, err):
-		self.__stillAlive = False
-
-	def run(self):
-		req = self.__req
-		ret = self.__fnc(req)
-		if self.__stillAlive and ret != server.NOT_DONE_YET:
-			def finishRequest():
-				req.write(ret)
-				req.finish()
-			reactor.callFromThread(finishRequest)
-
-class AutoTimerBackgroundingResource(AutoTimerBaseResource, threading.Thread):
+class AutoTimerDoParseResource(AutoTimerBaseResource):
+	def parsecallback(self, ret):
+		rets = self.renderBackground (self.req, ret)
+		self.req.write(rets)
+		self.req.finish()
 	def render(self, req):
-		AutoTimerBackgroundThread(req, self.renderBackground)
+		self.req = req
+		# todo timeout / error handling
+		autotimer.parseEPG(callback = self.parsecallback)
 		return server.NOT_DONE_YET
-
-	def renderBackground(self, req):
-		pass
-
-class AutoTimerDoParseResource(AutoTimerBackgroundingResource):
-	def renderBackground(self, req):
-		ret = autotimer.parseEPG()
+	def renderBackground(self, req ,ret):
 		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5]))
-
 		return self.returnResult(req, True, output)
 
-class AutoTimerSimulateResource(AutoTimerBackgroundingResource):
-	def renderBackground(self, req):
-		ret = autotimer.parseEPG(simulateOnly=True)
+class AutoTimerSimulateResource(AutoTimerBaseResource):
+	def parsecallback(self, timers):
+		ret = self.renderBackground (self.req, timers)
+		self.req.write(ret)
+		self.req.finish()
+	def render(self, req):
+		self.req = req
+		# todo timeout / error handling
+		autotimer.parseEPG(simulateOnly=True, callback = self.parsecallback)
+		return server.NOT_DONE_YET
+	def renderBackground(self, req ,ret):
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
 
-		for (name, begin, end, serviceref, autotimername) in ret[3]:
+		for (name, begin, end, serviceref, autotimername) in ret:
 			ref = ServiceReference(str(serviceref))
 			extend((
 				'<e2simulatedtimer>\n'
@@ -362,6 +347,8 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.disabled_on_conflict.value = True if value == "true" else False
 			elif key == "addsimilar_on_conflict":
 				config.plugins.autotimer.addsimilar_on_conflict.value = True if value == "true" else False
+			elif key == "show_in_plugins":
+				config.plugins.autotimer.show_in_plugins.value = True if value == "true" else False
 			elif key == "show_in_extensionsmenu":
 				config.plugins.autotimer.show_in_extensionsmenu.value = True if value == "true" else False
 			elif key == "fastscan":
@@ -440,6 +427,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.show_in_plugins</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>config.plugins.autotimer.show_in_extensionsmenu</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
@@ -491,6 +482,7 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.editor.value,
 				config.plugins.autotimer.addsimilar_on_conflict.value,
 				config.plugins.autotimer.disabled_on_conflict.value,
+				config.plugins.autotimer.show_in_plugins.value,
 				config.plugins.autotimer.show_in_extensionsmenu.value,
 				config.plugins.autotimer.fastscan.value,
 				config.plugins.autotimer.notifconflict.value,

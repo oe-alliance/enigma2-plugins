@@ -1,125 +1,57 @@
-from __future__ import print_function
-
-# Core functionality
-from enigma import eTimer, ePythonMessagePump
+# Timer
+from enigma import eTimer
 
 # Config
 from Components.config import config
+from plugin import autotimer
 
 # Notifications
 from Tools.FuzzyDate import FuzzyTime
 from Tools.Notifications import AddPopup
 from Screens.MessageBox import MessageBox
-
-NOTIFICATIONID = 'AutoTimerConflictEncounteredNotification'
-SIMILARNOTIFICATIONID = 'AutoTimerSimilarUsedNotification'
-
-from threading import Thread, Semaphore
-from collections import deque
-
-from twisted.internet import reactor
-
-class AutoPollerThread(Thread):
-	"""Background thread where the EPG is parsed (unless initiated by the user)."""
-	def __init__(self):
-		Thread.__init__(self)
-		self.__semaphore = Semaphore(0)
-		self.__queue = deque(maxlen=1)
-		self.__pump = ePythonMessagePump()
-		self.__pump.recv_msg.get().append(self.gotThreadMsg)
-		self.__timer = eTimer()
-		self.__timer.callback.append(self.timeout)
-		self.running = False
-
-	def timeout(self):
-		self.__semaphore.release()
-
-	def gotThreadMsg(self, msg):
-		"""Create Notifications if there is anything to display."""
-		ret = self.__queue.pop()
-		conflicts = ret[4]
-		if conflicts and config.plugins.autotimer.notifconflict.value:
-			AddPopup(
-				_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(conflicts), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in conflicts])),
-				MessageBox.TYPE_INFO,
-				5,
-				NOTIFICATIONID
-			)
-		similars = ret[5]
-		if similars and config.plugins.autotimer.notifsimilar.value:
-			AddPopup(
-				_("%d conflict(s) solved with similar timer(s):\n%s") % (len(similars), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in similars])),
-				MessageBox.TYPE_INFO,
-				5,
-				SIMILARNOTIFICATIONID
-			)
-
-	def start(self, initial=True):
-		# NOTE: we wait for several minutes on initial launch to not delay enigma2 startup time
-		if initial: delay = config.plugins.autotimer.delay.value*60
-		else: delay = config.plugins.autotimer.interval.value*3600
-
-		self.__timer.startLongTimer(delay)
-		if not self.isAlive():
-			Thread.start(self)
-
-	def pause(self):
-		self.__timer.stop()
-
-	def stop(self):
-		self.__timer.stop()
-		self.running = False
-		self.__semaphore.release()
-		self.__pump.recv_msg.get().remove(self.gotThreadMsg)
-		self.__timer.callback.remove(self.timeout)
-
-	def run(self):
-		sem = self.__semaphore
-		queue = self.__queue
-		pump = self.__pump
-		timer = self.__timer
-
-		self.running = True
-		while 1:
-			sem.acquire()
-			# NOTE: we have to check this here and not using the while to prevent the parser to be started on shutdown
-			if not self.running: break
-			
-			if config.plugins.autotimer.skip_during_records.value:
-				try:
-					import NavigationInstance
-					if NavigationInstance.instance.RecordTimer.isRecording():
-						print("[AutoTimer]: Skip check during running records")
-						continue
-				except:
-					pass
-
-			from plugin import autotimer
-			# Ignore any program errors
-			try:
-				queue.append(autotimer.parseEPG())
-				pump.send(0)
-			except Exception:
-				# Dump error to stdout
-				import traceback, sys
-				traceback.print_exc(file=sys.stdout)
-			#Keep that eTimer in the mainThread
-			reactor.callFromThread(timer.startLongTimer, config.plugins.autotimer.interval.value*3600)
+import NavigationInstance
 
 class AutoPoller:
-	"""Manages actual thread which does the polling. Used for convenience."""
+	"""Automatically Poll AutoTimer"""
 
 	def __init__(self):
-		self.thread = AutoPollerThread()
+		# Init Timer
+		print "[AutoTimer] Auto Poll Enabled"
+		self.timer = eTimer()
 
-	def start(self, initial=True):
-		self.thread.start(initial=initial)
-
-	def pause(self):
-		self.thread.pause()
+	def start(self):
+		if self.query not in self.timer.callback:
+			self.timer.callback.append(self.query)
+		self.timer.startLongTimer(config.plugins.autotimer.delay.value*60)
 
 	def stop(self):
-		self.thread.stop()
-		# NOTE: while we don't need to join the thread, we should do so in case it's currently parsing
-		self.thread.join()
-		self.thread = None
+		if self.query in self.timer.callback:
+			self.timer.callback.remove(self.query)
+		self.timer.stop()
+
+	def query(self):
+		self.timer.stop()
+		from Screens.Standby import inStandby
+		print "[AutoTimer] Auto Poll"
+		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
+			print("[AutoTimer] Skip check during running records")
+		else:
+			if config.plugins.autotimer.onlyinstandby.value and inStandby:
+				print "[AutoTimer] Auto Poll Started"
+				# Ignore any program errors
+				try:
+					ret = autotimer.parseEPG(autoPoll = True)
+				except Exception:
+					# Dump error to stdout
+					import traceback, sys
+					traceback.print_exc(file=sys.stdout)
+			elif not config.plugins.autotimer.onlyinstandby.value:
+				print "[AutoTimer] Auto Poll Started"
+				# Ignore any program errors
+				try:
+					ret = autotimer.parseEPG(autoPoll = True)
+				except Exception:
+					# Dump error to stdout
+					import traceback, sys
+					traceback.print_exc(file=sys.stdout)
+		self.timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
