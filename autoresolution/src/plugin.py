@@ -17,6 +17,8 @@ except:
 	from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
 from Components.Sources.Boolean import Boolean
 
+from boxbranding import getImageDistro
+
 # for localized messages
 from . import _
 
@@ -369,8 +371,12 @@ def autostart(reason, **kwargs):
 		AutoRes(session)
 
 def startSetup(menuid):
-	if menuid != "system":
-		return [ ]
+	if getImageDistro() in ('openmips'):
+		if menuid != "video_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return [ ]
 	return [(_("Autoresolution"), autoresSetup, "autores_setup", 45)]
 
 def autoresSetup(session, **kwargs):
