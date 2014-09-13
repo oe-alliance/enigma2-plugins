@@ -54,4 +54,4 @@ class AutoPoller:
 					# Dump error to stdout
 					import traceback, sys
 					traceback.print_exc(file=sys.stdout)
-		self.timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
+		self.timer.startLongTimer(config.plugins.autotimer.interval.value*60)

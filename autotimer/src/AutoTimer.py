@@ -125,8 +125,9 @@ class AutoTimer:
 		return buildConfig(self.defaultTimer, self.timers, webif = True)
 
 	def writeXml(self):
-		with open(XML_CONFIG, 'w') as config:
-			config.writelines(buildConfig(self.defaultTimer, self.timers))
+		file = open(XML_CONFIG, 'w')
+		file.writelines(buildConfig(self.defaultTimer, self.timers))
+		file.close()
 
 # Manage List
 	def add(self, timer):
