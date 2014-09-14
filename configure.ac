@@ -28,8 +28,6 @@ AC_ARG_WITH(distro,
 AC_SUBST(DISTRO)
 AC_DEFINE_UNQUOTED(DISTRO,"$DISTRO",[distro name])
 
-AM_CONDITIONAL(OPENVIX, test "$DISTRO" == "openvix")
-
 AC_ARG_WITH(boxtype,
 	[  --with-boxtype=NAME box type [[none,dm7025,dm800...]]],
 	[BOXTYPE="$withval"],[BOXTYPE="dm800"])
@@ -201,18 +199,6 @@ autoresolution/Makefile
 autoresolution/meta/Makefile
 autoresolution/po/Makefile
 autoresolution/src/Makefile
-
-vixautotimer/etc/Makefile
-vixautotimer/Makefile
-vixautotimer/meta/Makefile
-vixautotimer/po/Makefile
-vixautotimer/src/Makefile
-vixautotimer/src/WebChilds/Makefile
-vixautotimer/src/WebComponents/Makefile
-vixautotimer/src/WebComponents/Sources/Makefile
-vixautotimer/src/WebScreens/Makefile
-vixautotimer/src/web/Makefile
-vixautotimer/src/web-data/Makefile
 
 autotimer/etc/Makefile
 autotimer/Makefile
