@@ -24,7 +24,7 @@ class RequestData(Source):
 
 	def getHTML(self, id):
 		if self.what is self.HOST:
-			host = self.request.getHeader(b'host')
+			host = self.request.getHeader('host')
 			if host:
 				if host[0]=='[':
 					return host.split(']',1)[0] + "]"
