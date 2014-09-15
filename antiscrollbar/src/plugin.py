@@ -276,15 +276,17 @@ activebar = None
 
 def main(session, **kwargs):
     global activebar
-	try:
-		if activebar.show:
-			activebar.hide()
-		session.openWithCallback(mainCB,AntiScrollConfig)
-	except:
-		session.openWithCallback(mainCB,AntiScrollConfig)	
+    try:
+        if activebar.show:
+            activebar.hide()
+        session.openWithCallback(mainCB,AntiScrollConfig)
+    except:
+        session.openWithCallback(mainCB,AntiScrollConfig)
 
 def mainCB(saved,session):
     global activebar,doshow
+    if not activebar:
+        activebar = session.instantiateDialog(AntiScrollOverlay)
     activebar.evStart()
 
 def autostart(session, **kwargs):
