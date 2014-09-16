@@ -908,13 +908,13 @@ msgid "IPv6 address(es)"
 msgstr "IPv6-Adresse(n)"
 
 msgid "IPv4-only kernel"
-msgstr ""
+msgstr "Kernel ohne IPv6-Unterstützung"
 
 msgid "none/IPv4-only network"
-msgstr ""
+msgstr "keine/reines IPv4-Netzwerk"
 
 msgid "IPv4-only Python/Twisted"
-msgstr ""
+msgstr "Python/Twisted ohne IPv6-Unterstützung"
 
 #: ../src/WebComponents/Sources/Strings.py:131
 msgid "Netmask"
