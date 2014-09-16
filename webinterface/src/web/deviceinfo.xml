@@ -21,6 +21,7 @@
 			&lt;e2ip><e2:item name="Ip" filter="xml"/>&lt;/e2ip>
 			&lt;e2gateway><e2:item name="Gateway" filter="xml"/>&lt;/e2gateway>
 			&lt;e2netmask><e2:item name="Netmask" filter="xml"/>&lt;/e2netmask>
+			&lt;e2ipv6><e2:item name="Ipv6" filter="xml"/>&lt;/e2ipv6>
 		&lt;/e2interface></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
 	</e2network>
 

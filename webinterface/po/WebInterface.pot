@@ -551,6 +551,18 @@ msgstr ""
 msgid "IP Address"
 msgstr ""
 
+msgid "IPv6 address(es)"
+msgstr ""
+
+msgid "IPv4-only kernel"
+msgstr ""
+
+msgid "none/IPv4-only network"
+msgstr ""
+
+msgid "IPv4-only Python/Twisted"
+msgstr ""
+
 #: src/WebComponents/Sources/Strings.py:130
 msgid "Netmask"
 msgstr ""

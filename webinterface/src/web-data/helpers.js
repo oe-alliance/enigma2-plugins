@@ -1140,6 +1140,7 @@ function DeviceInfo(xml){
 			var ip = nic.getElementsByTagName('e2ip').item(0).firstChild.data;
 			var gateway = nic.getElementsByTagName('e2gateway').item(0).firstChild.data;
 			var netmask = nic.getElementsByTagName('e2netmask').item(0).firstChild.data;
+			var ipv6 = nic.getElementsByTagName('e2ipv6').item(0).firstChild.data;
 
 			this.nics[i] = {
 					'name' : name,
@@ -1147,7 +1148,8 @@ function DeviceInfo(xml){
 					'dhcp' : dhcp,
 					'ip' : ip,
 					'gateway' : gateway,
-					'netmask' : netmask
+					'netmask' : netmask,
+					'ipv6' : ipv6
 			};
 		} catch (e) {
 			core.notify("Error parsing NIC data: " + e, false);
