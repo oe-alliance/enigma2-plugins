@@ -904,6 +904,9 @@ msgstr "DHCP aktiviert"
 msgid "IP Address"
 msgstr "IP-Adresse"
 
+msgid "IPv6 address(es)"
+msgstr "IPv6-Adresse(n)"
+
 #: ../src/WebComponents/Sources/Strings.py:131
 msgid "Netmask"
 msgstr "Netzmaske"
