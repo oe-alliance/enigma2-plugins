@@ -128,6 +128,7 @@ class Strings(Source):
 			["mac_address", _("Mac Address")],
 			["dhcp_enabled", _("DHCP enabled")],
 			["ip_address", _("IP Address")],
+			["ipv6_addresses", _("IPv6 address(es)")],
 			["netmask", _("Netmask")],
 			["gateway", _("Gateway")],
 			["videosize", _("Video Size")],
