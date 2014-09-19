@@ -11,7 +11,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import os, gettext
-
+from boxbranding import getImageDistro
 ##############################################################################
 
 config.plugins.PermanentClock = ConfigSubsection()
@@ -198,8 +198,12 @@ def startConfig(session, **kwargs):
 	session.open(PermanentClockMenu)
 
 def main(menuid):
-	if menuid != "system": 
-		return [ ]
+	if getImageDistro() in ('openmips'):
+		if menuid != "general_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return []
 	return [(_("Permanent Clock"), startConfig, "permanent_clock", None)]
 
 ##############################################################################
