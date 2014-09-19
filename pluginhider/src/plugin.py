@@ -1,7 +1,6 @@
 from __future__ import print_function
 
 from . import _
-
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
@@ -11,6 +10,8 @@ from Components.config import config, ConfigSubsection, ConfigSet
 from PluginHiderSetup import PluginHiderSetup
 
 from operator import attrgetter
+
+from boxbranding import getImageDistro
 
 config.plugins.pluginhider = ConfigSubsection()
 config.plugins.pluginhider.hideextensions = ConfigSet(choices=[])
@@ -24,7 +25,7 @@ def hidePlugin(plugin):
 	hide = config.plugins.pluginhider.hideplugins.value
 	if not plugin.name in hide:
 		hide.append(plugin.name)
-		config.plugins.pluginhider.hideplugins.save()	
+		config.plugins.pluginhider.hideplugins.save()
 
 def PluginComponent_getPlugins(self, where):
 	if not isinstance(where, list):
@@ -74,8 +75,12 @@ def main(session, *args, **kwargs):
 	session.open(PluginHiderSetup)
 
 def menu(menuid):
-	if menuid != "system":
-		return []
+	if getImageDistro() in ('openmips'):
+		if menuid != "general_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return []
 	return [(_("Hide Plugins"), main, "pluginhider_setup", None)]
 
 def Plugins(**kwargs):

@@ -61,7 +61,7 @@ from Components.ConfigList import ConfigListScreen
 # GUI (Summary)
 from Screens.Setup import SetupSummary
 
-
+from boxbranding import getImageDistro
 ###############################################################################        
 VERSION = "0.1.9"
 # History:
@@ -460,9 +460,13 @@ def setup(session, **kwargs):
 	session.open(AutomaticCleanupSetup) # start setup
 
 def startSetup(menuid):
-	if menuid != "system": # show setup only in system level menu
-		return []
-	return [(_("System cleanup"), setup, "AutomaticCleanup", 46)]
+	if getImageDistro() in ('openmips'):
+		if menuid != "general_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return []
+	return [(_("System cleanup"), setup, "AutomaticCleanup", 50)]
 	
 def Plugins(**kwargs):
 	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart), PluginDescriptor(name="System cleanup", description=_("Automatic System Cleanup Setup"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
