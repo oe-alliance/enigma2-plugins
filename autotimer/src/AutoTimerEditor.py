@@ -352,6 +352,11 @@ class AutoTimerEditorBase:
 		# SeriesPlugin
 		self.series_labeling = NoSave(ConfigYesNo(default = timer.series_labeling))
 
+		# Filter info
+		self.isActive_services_value     = _("unknown")
+		self.isActive_dayofweek_value    = _("unknown")
+		self.isActive_otherfilters_value = _("unknown")
+        
 	def pathSelected(self, res):
 		if res is not None:
 			# I'm pretty sure this will always fail
@@ -425,7 +430,6 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.series_labeling.addNotifier(self.reloadList, initial_call = False)
 
 		self.refresh()
-		self.initHelpTexts()
 
 		# XXX: no help for numericaltextinput since it is shown on top of our help
 		ConfigListScreen.__init__(self, self.list, on_change = self.changed)
@@ -467,12 +471,24 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self["key_yellow"].text = _("Edit filters")
 		else:
 			self["key_yellow"].text = _("Add filters")
-
+		if self.excludes[0] or self.excludes[1] or self.excludes[2]  or self.includes[0] or self.includes[1] or self.includes[2]:
+			self.isActive_otherfilters_value = _("enabled")
+		else:
+			self.isActive_otherfilters_value = _("disabled")
+		if self.excludes[3] or self.includes[3]:
+			self.isActive_dayofweek_value = _("enabled")
+		else:
+			self.isActive_dayofweek_value = _("disabled")
+		self.reloadList(True)
+        
 	def renameServiceButton(self):
 		if self.serviceRestriction:
 			self["key_blue"].text = _("Edit services")
+			self.isActive_services_value = _("enabled")
 		else:
 			self["key_blue"].text = _("Add services")
+			self.isActive_services_value = _("disabled")
+		self.reloadList(True)
 
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
@@ -530,6 +546,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.destination: _("Select the location to save the recording to."),
 			self.tags: _("Tags the Timer/Recording will have."),
 			self.series_labeling: _("Label Timers with season, episode and title, according to the SeriesPlugin settings."),
+			self.isActive_services: _("Use blue key to edit services."),
+			self.isActive_dayofweek: _("Use yellow key to edit filters."),
+			self.isActive_otherfilters: _("Use yellow key to edit filters."),
 		}
 
 	def refresh(self):
@@ -627,7 +646,16 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		if hasSeriesPlugin:
 			list.append(getConfigListEntry(_("Label series"), self.series_labeling))
 
+		# Display short info on active filters in autotimer editor
+		self.isActive_services =     NoSave(ConfigSelection([("0", self.isActive_services_value)],     default="0"))
+		self.isActive_dayofweek =    NoSave(ConfigSelection([("0", self.isActive_dayofweek_value)],    default="0"))
+		self.isActive_otherfilters = NoSave(ConfigSelection([("0", self.isActive_otherfilters_value)], default="0"))
+		list.append(getConfigListEntry(_("Restriction to services or bouquets (edit in services menu)"), self.isActive_services))
+		list.append(getConfigListEntry(_("Restriction to certain days of week (edit in filter menu)"),   self.isActive_dayofweek))
+		list.append(getConfigListEntry(_("Other filters (edit in filter menu)"),                         self.isActive_otherfilters))
+
 		self.list = list
+		self.initHelpTexts()
 
 	def reloadList(self, value):
 		self.refresh()
