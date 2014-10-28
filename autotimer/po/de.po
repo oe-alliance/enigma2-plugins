@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-28 15:02+0100\n"
-"PO-Revision-Date: 2014-03-28 20:12+0100\n"
-"Last-Translator: Ralf Biedermann <ralf.biedermann@rbsoft.de>\n"
+"PO-Revision-Date: 2014-10-28 14:23+0100\n"
+"Last-Translator: mike99 <mike99@gmx.net>\n"
 "Language-Team: none\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: ../src\n"
 "X-Poedit-SearchPath-1: ../src/webinterface\n"
 
@@ -1264,6 +1264,21 @@ msgstr "Kann Timer mit Id %i nicht finden"
 
 msgid "zap"
 msgstr "umschalten"
+
+msgid "Restriction to services or bouquets (edit in services menu)"
+msgstr "Beschr. auf Sender/Bouquets (editieren im Sender-Menü)"
+
+msgid "Restriction to certain days of week (edit in filter menu)"
+msgstr "Beschränkung auf Wochentage (editieren im Filter-Menü)"
+
+msgid "Other filters (edit in filter menu)"
+msgstr "Andere Filter (editieren im Filter-Menü)"
+
+msgid "Use blue key to edit services."
+msgstr "Die blaue Taste drücken, um Sender/Bouquets zu editieren"
+
+msgid "Use yellow key to edit filters."
+msgstr "Die gelbe Taste drücken, um Filter zu editieren"
 
 #~ msgid "AutoTimer overview"
 #~ msgstr "AutoTimer Übersicht"
