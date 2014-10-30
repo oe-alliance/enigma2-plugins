@@ -1265,8 +1265,11 @@ msgstr "Kann Timer mit Id %i nicht finden"
 msgid "zap"
 msgstr "umschalten"
 
-msgid "Restriction to services or bouquets (edit in services menu)"
-msgstr "Beschr. auf Sender/Bouquets (editieren im Sender-Menü)"
+msgid "Restriction to certain services (edit in services menu)"
+msgstr "Beschränkung auf Sender (editieren im Sender-Menü)"
+
+msgid "Restriction to certain bouquets (edit in services menu)"
+msgstr "Beschränkung auf Bouquets (editieren im Sender-Menü)"
 
 msgid "Restriction to certain days of week (edit in filter menu)"
 msgstr "Beschränkung auf Wochentage (editieren im Filter-Menü)"
@@ -1274,7 +1277,7 @@ msgstr "Beschränkung auf Wochentage (editieren im Filter-Menü)"
 msgid "Other filters (edit in filter menu)"
 msgstr "Andere Filter (editieren im Filter-Menü)"
 
-msgid "Use blue key to edit services."
+msgid "Use blue key to edit bouquets or services."
 msgstr "Die blaue Taste drücken, um Sender/Bouquets zu editieren"
 
 msgid "Use yellow key to edit filters."

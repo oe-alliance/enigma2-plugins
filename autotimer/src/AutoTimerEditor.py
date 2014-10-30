@@ -354,6 +354,7 @@ class AutoTimerEditorBase:
 
 		# Filter info
 		self.isActive_services_value     = _("unknown")
+		self.isActive_bouquets_value     = _("unknown")
 		self.isActive_dayofweek_value    = _("unknown")
 		self.isActive_otherfilters_value = _("unknown")
         
@@ -484,10 +485,16 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	def renameServiceButton(self):
 		if self.serviceRestriction:
 			self["key_blue"].text = _("Edit services")
-			self.isActive_services_value = _("enabled")
 		else:
 			self["key_blue"].text = _("Add services")
+		if self.services:
+			self.isActive_services_value = _("enabled")
+		else:
 			self.isActive_services_value = _("disabled")
+		if self.bouquets:
+			self.isActive_bouquets_value = _("enabled")
+		else:
+			self.isActive_bouquets_value = _("disabled")
 		self.reloadList(True)
 
 	def updateHelp(self):
@@ -546,7 +553,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.destination: _("Select the location to save the recording to."),
 			self.tags: _("Tags the Timer/Recording will have."),
 			self.series_labeling: _("Label Timers with season, episode and title, according to the SeriesPlugin settings."),
-			self.isActive_services: _("Use blue key to edit services."),
+			self.isActive_services: _("Use blue key to edit bouquets or services."),
+			self.isActive_bouquets: _("Use blue key to edit bouquets or services."),
 			self.isActive_dayofweek: _("Use yellow key to edit filters."),
 			self.isActive_otherfilters: _("Use yellow key to edit filters."),
 		}
@@ -648,9 +656,11 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Display short info on active filters in autotimer editor
 		self.isActive_services =     NoSave(ConfigSelection([("0", self.isActive_services_value)],     default="0"))
+		self.isActive_bouquets =     NoSave(ConfigSelection([("0", self.isActive_bouquets_value)],     default="0"))
 		self.isActive_dayofweek =    NoSave(ConfigSelection([("0", self.isActive_dayofweek_value)],    default="0"))
 		self.isActive_otherfilters = NoSave(ConfigSelection([("0", self.isActive_otherfilters_value)], default="0"))
-		list.append(getConfigListEntry(_("Restriction to services or bouquets (edit in services menu)"), self.isActive_services))
+		list.append(getConfigListEntry(_("Restriction to certain services (edit in services menu)"), self.isActive_services))
+		list.append(getConfigListEntry(_("Restriction to certain bouquets (edit in services menu)"), self.isActive_bouquets))
 		list.append(getConfigListEntry(_("Restriction to certain days of week (edit in filter menu)"),   self.isActive_dayofweek))
 		list.append(getConfigListEntry(_("Other filters (edit in filter menu)"),                         self.isActive_otherfilters))
 
