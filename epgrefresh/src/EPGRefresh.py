@@ -5,7 +5,7 @@ from __future__ import print_function
 import Screens.Standby
 
 # eServiceReference
-from enigma import eServiceReference, eServiceCenter
+from enigma import eServiceReference, eServiceCenter, getBestPlayableServiceReference
 
 # ...
 from ServiceReference import ServiceReference
@@ -210,6 +210,8 @@ class EPGRefresh:
 	def addServices(self, fromList, toList, channelIds):
 		for scanservice in fromList:
 			service = eServiceReference(scanservice.sref)
+			if (service.flags & eServiceReference.isGroup):
+				service = getBestPlayableServiceReference(eServiceReference(scanservice.sref), eServiceReference())
 			if not service.valid() \
 				or (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
 
