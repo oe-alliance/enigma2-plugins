@@ -1,0 +1,201 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2011 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2014-10-28 18:43+0100\n"
+"Last-Translator: OEA\n"
+"Language-Team: french\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.6.10\n"
+
+#: ../src/plugin.py:120 ../src/plugin.py:190 ../src/plugin.py:436
+msgid "Automatic System Cleanup Setup"
+msgstr "Configuration Automatic System Cleanup"
+
+#: ../src/plugin.py:167
+msgid "Cancel"
+msgstr "Annuler"
+
+#: ../src/plugin.py:213
+msgid ""
+"Cleanup timerlist, orphaned movie files and stored setting backups "
+"automatically.\n"
+"\n"
+"Modify the settings to match your preferences. More detailed explanations "
+"given with each adjustable option."
+msgstr ""
+"Nettoyage de la liste des timers, des fichiers films orphelins et des "
+"backups des paramètres automatiques.\n"
+"\n"
+"Modifier les paramètres en fonction de vos préférences. Plus de détails "
+"donnés à chaque paramètre ajustable."
+
+#: ../src/plugin.py:131
+msgid "Delete crashlogs"
+msgstr "Effacer les crashlogs"
+
+#: ../src/plugin.py:129
+msgid "Delete orphaned movie files"
+msgstr "Effacer les fichiers films orphelins"
+
+#: ../src/plugin.py:125
+msgid "Delete system setting backups"
+msgstr "Effacer les backups des paramètres systèmes"
+
+#: ../src/plugin.py:146 ../src/plugin.py:149
+msgid "Delete timerlist entries"
+msgstr "Effacer la liste des timers"
+
+#: ../src/plugin.py:169
+msgid "Help"
+msgstr "Aide"
+
+#: ../src/plugin.py:130
+msgid ""
+"If enabled, orphaned movie files will be automatically deleted from movie "
+"directories."
+msgstr ""
+"Si activé, les fichiers orphelins des films seront automatiquement effacés "
+"du répertoire des films."
+
+#: ../src/plugin.py:133
+msgid "Maximum number of crashlogs"
+msgstr "Nombre maximum de crashlogs"
+
+#: ../src/plugin.py:127
+msgid "Maximum number of system setting backups"
+msgstr "Nombre maximum de backups de paramètres systèmes"
+
+#: ../src/plugin.py:128
+msgid ""
+"Maximum number of system setting backups to keep, regardless of retention "
+"period."
+msgstr ""
+"Nombre maximum de backup des paramètres systèmes à conserver, indépendament "
+"de la période de rétention."
+
+#: ../src/plugin.py:168
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:132 ../src/plugin.py:134
+msgid ""
+"Sorry, this feature is not available due to license reasons. To get the full "
+"version, please search the web for \"dreambox automaticcleanup.\""
+msgstr ""
+"Désolé, cette fonctionnalité n'est pas disponible à cause d'un problème de "
+"licence. Pour obtenir la version complète, merci de rechercher après "
+"\"dreambox automaticcleanup.\""
+
+#: ../src/plugin.py:150
+msgid ""
+"Specify, how long expired timer list entries shall be kept at most. "
+"Deactivated repeat timer entries won't be deleted ever."
+msgstr ""
+"Spécifie combien de temps au maximum les entrées dans la liste de timers "
+"expirés doivent être conservées. Néanmoins les timers qui se répétent "
+"désactivés ne seront pas effacé."
+
+#: ../src/plugin.py:126
+msgid ""
+"Specify, how long system setting backups shall be kept at most (even if "
+"maximum number is not yet exceeded). Latest backup will be kept anyway!"
+msgstr ""
+"Spécifie combien de temps les backups des paramètres systèmes doivent être "
+"conservé (même si le nombre maximum n'est pas encore dépassé). Les derniers "
+"backups seront de toute façon conservé!"
+
+#: ../src/plugin.py:433
+msgid "System cleanup"
+msgstr "Nettoyage du système."
+
+#: ../src/plugin.py:147
+msgid ""
+"Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't "
+"delete entries whilst this option is enabled in EMC."
+msgstr ""
+"Le nettoyage de la liste des timers est activé dans le plugin EMC! Pour "
+"éviter les crashs, nous n'effaçerons pas les entrées tant que cette option "
+"est activée dans EMC."
+
+#: ../src/plugin.py:190
+msgid "Ver."
+msgstr "Ver."
+
+#: ../src/plugin.py:87 ../src/plugin.py:91
+msgid "all"
+msgstr "Tous"
+
+#: ../src/plugin.py:89 ../src/plugin.py:93
+msgid "cleanup disabled"
+msgstr "nettoyage désactivé"
+
+#: ../src/plugin.py:93
+msgid "immediately after recording"
+msgstr "immédiatement après un enregistrement"
+
+#: ../src/plugin.py:91
+msgid "last 10"
+msgstr "10 derniers"
+
+#: ../src/plugin.py:91
+msgid "last 2"
+msgstr "2 derniers"
+
+#: ../src/plugin.py:91
+msgid "last 3"
+msgstr "3 derniers"
+
+#: ../src/plugin.py:91
+msgid "last 5"
+msgstr "5 derniers"
+
+#: ../src/plugin.py:93
+msgid "older than 1 day"
+msgstr "plus vieux que 1 jour"
+
+#: ../src/plugin.py:89 ../src/plugin.py:93
+msgid "older than 1 week"
+msgstr "plus vieux que 1 semaine"
+
+#: ../src/plugin.py:89 ../src/plugin.py:93
+msgid "older than 2 weeks"
+msgstr "plus vieux que 2 semaines"
+
+#: ../src/plugin.py:93
+msgid "older than 3 days"
+msgstr "plus vieux que 3 jours"
+
+#: ../src/plugin.py:89
+msgid "older than 3 months"
+msgstr "plus vieux que 3 mois"
+
+#: ../src/plugin.py:89 ../src/plugin.py:93
+msgid "older than 4 weeks"
+msgstr "plus vieux que 4 semaines"
+
+#: ../src/plugin.py:89
+msgid "older than 6 months"
+msgstr "plus vieux que 6 mois"
+
+#: ../src/plugin.py:93
+msgid "older than 6 weeks"
+msgstr "plus vieux que 6 semaines"
+
+#: ../src/plugin.py:91
+msgid "only last one"
+msgstr "seulement le dernier"
+
+#: ../src/plugin.py:85
+msgid "void"
+msgstr "nul"
