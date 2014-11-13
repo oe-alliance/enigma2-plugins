@@ -336,7 +336,7 @@ def Plugins(**kwargs):
 			needsRestart=False,
 		),
 		PluginDescriptor(
-			where=PluginDescriptor.WHERE_MENU,
+			where=PluginDescriptor.WHERE_PLUGINMENU,
 			name="MenuSort",
 			description=_("Sort main menu"),
 			fnc=menu,
