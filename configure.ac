@@ -444,6 +444,7 @@ mediadownloader/src/Makefile
 menusort/Makefile
 menusort/meta/Makefile
 menusort/src/Makefile
+menusort/po/Makefile
 
 merlinepg/Makefile
 merlinepg/meta/Makefile

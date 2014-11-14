@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+from . import _
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
@@ -23,7 +24,6 @@ try:
 	from xml.etree.cElementTree import ParseError
 except ImportError as ie:
 	ParseError = SyntaxError
-from Tools.XMLTools import stringToXML
 
 try:
 	dict.iteritems
@@ -80,17 +80,18 @@ class MenuWeights:
 			self.weights[text] = (weight, hidden)
 
 	def save(self):
-		lst = ['<?xml version="1.0" ?>\n<menusort>\n\n']
-		append = lst.append
-		extend = lst.extend
+		list = ['<?xml version="1.0" ?>\n<menusort>\n\n']
+		append = list.append
+		extend = list.extend
 
 		for text, values in iteritems(self.weights):
 			weight, hidden = values
-			extend((' <entry text="', stringToXML(str(text)), '" weight="', str(weight), '" hidden="', "yes" if hidden else "no", '"/>\n'))
+			extend((' <entry text="', str(text), '" weight="', str(weight), '" hidden="', "yes" if hidden else "no", '"/>\n'))
 		append('\n</menusort>\n')
 
-		with open(XML_CONFIG, 'w') as config:
-			config.writelines(lst)
+		file = open(XML_CONFIG, 'w')
+		file.writelines(list)
+		file.close()
 
 	def isHidden(self, tuple):
 		weight, hidden = self.weights.get(tuple[0], (tuple[3], False))
@@ -131,7 +132,7 @@ class SortableMenuList(MenuList):
 		l.setFont(0, gFont("Regular", 22))
 		l.setBuildFunc(self.buildListboxEntry)
 		self.selected = None
-		self.selectedColor = 0x8c8c8c
+		self.selectedColor = 8388608
 		self.hiddenColor = 8388564
 
 	def invalidate(self):
@@ -146,7 +147,7 @@ class SortableMenuList(MenuList):
 				elif attrib == "itemHeight":
 					self.l.setItemHeight(int(value))
 				elif attrib == "selectedColor":
-					self.selectedColor = parseColor(value).argb()
+					self.selectedColor = int(parseColor(value))
 				elif attrib == "hiddenColor":
 					self.hiddenColor = int(parseColor(value))
 				else:
