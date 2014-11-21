@@ -2,7 +2,7 @@
 from . import _
 
 from enigma import eEPGCache, eServiceReference, RT_HALIGN_LEFT, \
-		RT_HALIGN_RIGHT, eListboxPythonMultiContent
+		RT_HALIGN_RIGHT, eListboxPythonMultiContent, RT_VALIGN_CENTER
 
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
@@ -14,7 +14,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 from Components.ActionMap import ActionMap
 from Components.Button import Button
@@ -99,12 +99,12 @@ class EPGSearchList(EPGList):
 		serviceref = ServiceReference(service) # for Servicename
 		res = [
 			None, # no private data needed
-			(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT, self.days[t[6]]),
-			(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
+			(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, self.days[t[6]]),
+			(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width(), r1.height(), 0, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
 		]
 		if rec1 or rec2:
 			if rec1:			
-				clock_pic = self.getClockPixmap(service, beginTime, duration, eventId)
+				clock_types = self.getClockTypesForEntry(service, eventId, beginTime, duration)
 				# maybe Partnerbox too
 				if rec2:
 					clock_pic_partnerbox = getRemoteClockPixmap(self,service, beginTime, duration, eventId)
@@ -112,16 +112,20 @@ class EPGSearchList(EPGList):
 				clock_pic = getRemoteClockPixmap(self,service, beginTime, duration, eventId)
 			if rec1 and rec2:
 				# Partnerbox and local
+				for i in range(len(clock_types)):
+					res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top(), 21, 21, self.clocks[clock_types[i]]))
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top(), 21, 21, clock_pic),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left() + 25, r3.top(), 21, 21, clock_pic_partnerbox),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + 50, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left() + 25, r3.top()+4, 21, 21, clock_pic_partnerbox),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + 50, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			else:
-				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top(), 21, 21, clock_pic),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.left() + 25, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, serviceref.getServiceName() + ": " + EventName)))
+				if rec1:
+					for i in range(len(clock_types)):
+						res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top(), 21, 21, self.clocks[clock_types[i]]))
+				else:
+					res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, r3.left(), r3.top()+4, 21, 21, clock_pic))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left() + 25, r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
 		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, serviceref.getServiceName() + ": " + EventName))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
 		return res
 
 # main class of plugin
@@ -208,6 +212,11 @@ class EPGSearch(EPGSelection):
 		if PartnerBoxIconsEnabled:
 			EPGSelection.GetPartnerboxTimerlist(self)
 
+	def onSelectionChanged(self):
+		self["Service"].newService(eServiceReference(str(self["list"].getCurrent()[1])))
+		self["Event"].newEvent(self["list"].getCurrent()[0])
+		EPGSelection.onSelectionChanged(self)
+
 	def closeScreen(self):
 		# Save our history
 		config.plugins.epgsearch.save()
@@ -216,7 +225,7 @@ class EPGSearch(EPGSelection):
 	def yellowButtonPressed(self):
 		self.session.openWithCallback(
 			self.searchEPG,
-			NTIVirtualKeyBoard,
+			VirtualKeyBoard,
 			title = _("Enter text to search for")
 		)
 

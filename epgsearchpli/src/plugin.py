@@ -2,6 +2,7 @@
 from . import _
 
 from enigma import eServiceCenter
+from Components.config import config
 
 # Plugin
 from EPGSearch import EPGSearch, EPGSearchEPGSelection, EPGSelectionInit
@@ -34,6 +35,10 @@ def eventinfo(session, *args, **kwargs):
 	ref = session.nav.getCurrentlyPlayingServiceReference()
 	session.open(EPGSearchEPGSelection, ref, True)
 
+# EPG Further Options
+def epgfurther(session, selectedevent, **kwargs):
+	session.open(EPGSearch, selectedevent[0].getEventName())
+
 # Movielist
 def movielist(session, service, **kwargs):
 	serviceHandler = eServiceCenter.getInstance()
@@ -43,7 +48,7 @@ def movielist(session, service, **kwargs):
 	session.open(EPGSearch, name)
 
 def Plugins(**kwargs):
-	return [
+	path = [
 		PluginDescriptor(
 			where = PluginDescriptor.WHERE_AUTOSTART,
 			fnc = autostart,
@@ -72,3 +77,6 @@ def Plugins(**kwargs):
 			needsRestart = False,
 		),
 	]
+	if config.plugins.epgsearch.show_in_furtheroptionsmenu.value:
+		path.append(PluginDescriptor( name = _("Search event in EPG"), where = PluginDescriptor.WHERE_EVENTINFO, fnc = epgfurther,needsRestart = False,))
+	return path
