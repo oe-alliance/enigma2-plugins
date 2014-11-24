@@ -236,6 +236,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
+			title=_("AutoTimer Context Menu"),
 			list = list,
 		)
 
