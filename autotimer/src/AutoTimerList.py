@@ -48,17 +48,17 @@ class AutoTimerList(MenuList):
 		else:
 			self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/lock_off.png"))
 		if path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_on.png")):
-			self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_on.png"))
+			self.iconEnabled = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_on.png"))
 		else:
-			self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/lock_on.png"))
+			self.iconEnabled = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/lock_on.png"))
 		if path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_rec.png")):
-			self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_rec.png"))
+			self.iconRecording = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_rec.png"))
 		else:
-			self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_rec.png"))
+			self.iconRecording = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_rec.png"))
 		if path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_zap.png")):
-			self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_zap.png"))
+			self.iconZapped = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_zap.png"))
 		else:
-			self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_zap.png"))
+			self.iconZapped = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_zap.png"))
 
 		self.colorDisabled = 12368828
 
