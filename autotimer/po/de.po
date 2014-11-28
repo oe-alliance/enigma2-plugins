@@ -553,7 +553,7 @@ msgid "On same service"
 msgstr "Auf dem gleichen Sender"
 
 msgid "Only AutoTimers created during this session"
-msgstr "Nur die AutoTimer dieser Sitzung"
+msgstr "Nur AutoTimer mit der gleichen EIT"
 
 msgid "Only add timer for next x days"
 msgstr "Nur Timer für die nächsten x Tage hinzufügen"

@@ -498,7 +498,7 @@ msgid "On same service"
 msgstr "On same service"
 
 msgid "Only AutoTimers created during this session"
-msgstr "Only AutoTimers created during this session"
+msgstr "Only AutoTimers with the same EIT"
 
 msgid "Only add timer for next x days"
 msgstr "Only add timer for next x days"
