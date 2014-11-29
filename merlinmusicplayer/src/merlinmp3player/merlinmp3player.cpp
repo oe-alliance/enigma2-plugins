@@ -123,7 +123,11 @@ eServiceMerlinMP3Player::eServiceMerlinMP3Player(eServiceReference ref):  m_ref(
 		g_object_set (G_OBJECT (source), "location", m_filename.c_str(), NULL);
 		gst_bin_add_many (GST_BIN (m_gst_pipeline), source, decoder, sink, NULL);
 		gst_element_link_many (source, decoder, sink, NULL);
+#if GST_VERSION_MAJOR < 1
 		gst_bus_set_sync_handler(gst_pipeline_get_bus (GST_PIPELINE (m_gst_pipeline)), gstBusSyncHandler, this);
+#else
+		gst_bus_set_sync_handler(gst_pipeline_get_bus (GST_PIPELINE (m_gst_pipeline)), gstBusSyncHandler, this, NULL);
+#endif
 		gst_element_set_state (m_gst_pipeline, GST_STATE_PLAYING);
 	}
 	else
@@ -241,8 +245,13 @@ RESULT eServiceMerlinMP3Player::getLength(pts_t &pts)
 	GstFormat fmt = GST_FORMAT_TIME;
 	gint64 len;
 	
-	if (!gst_element_query_duration(m_gst_pipeline, &fmt, &len))
+#if GST_VERSION_MAJOR < 1
+ 	if (!gst_element_query_duration(m_gst_pipeline, &fmt, &len))
+ 		return -1;
+#else
+	if (!gst_element_query_duration(m_gst_pipeline, fmt, &len))
 		return -1;
+#endif
 	
 		/* len is in nanoseconds. we have 90 000 pts per second. */
 	
@@ -296,8 +305,13 @@ RESULT eServiceMerlinMP3Player::getPlayPosition(pts_t &pts)
 	GstFormat fmt = GST_FORMAT_TIME;
 	gint64 len;
 	
-	if (!gst_element_query_position(m_gst_pipeline, &fmt, &len))
+#if GST_VERSION_MAJOR < 1
+ 	if (!gst_element_query_position(m_gst_pipeline, &fmt, &len))
+ 		return -1;
+#else
+	if (!gst_element_query_position(m_gst_pipeline, fmt, &len))
 		return -1;
+#endif
 	
 		/* len is in nanoseconds. we have 90 000 pts per second. */
 	pts = len / 11111;
