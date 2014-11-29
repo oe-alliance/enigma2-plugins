@@ -102,11 +102,7 @@ AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
 
 
 PKG_CHECK_MODULES(ENIGMA2, enigma2)
-if test "x$GST_MAJORMINOR" < "x1"; then
-	PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
-else 
-	PKG_CHECK_MODULES(GSTREAMER, gstreamer-1.0 gstreamer-pbutils-1.0)
-fi
+PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR)
 PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
 
 AC_ARG_WITH(tpm,
