@@ -215,6 +215,8 @@ class NetworkBrowser(Screen):
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/update.png"))
 				self.statuslist.append(( ['info'], statuspng, _("Searching your network. Please wait..."), None, None, None, None ))
 				self['list'].setList(self.statuslist)
+				name = _("Searching your network. Please wait...")
+				desc = name
 			elif status == 'error':
 				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/error.png")):
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/error.png"))
@@ -222,6 +224,13 @@ class NetworkBrowser(Screen):
 					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/error.png"))
 				self.statuslist.append(( ['info'], statuspng, _("No network devices found!"), None, None, None, None ))
 				self['list'].setList(self.statuslist)
+				name = _("No network devices found!")
+				desc = name
+			else:
+				name = " "
+				desc = " "
+			for cb in self.onChangedEntry:
+				cb(name, desc)
 
 	def process_NetworkIPs(self):
 		self.inv_cache = 0
@@ -463,19 +472,19 @@ class NetworkBrowser(Screen):
 				if current[0][0] in ("nfsShare", "smbShare"):
 					self["infotext"].setText(_("Press OK to mount this share!"))
 					name = str(current[0][2]) + ' ( ' + str(current[0][1]) + ' )'
+					if current[0][0] == "nfsShare":
+						desc = str(current[0][4])
+					elif current[0][0] == "smbShare":
+						desc = str(current[0][3])
 				else:
 					name = str(current[2])
 					selectedhost = current[0][2]
 					if selectedhost in self.expanded:
 						self["infotext"].setText(_("Press OK to collapse this host"))
+						desc = _("Press OK to collapse this host")
 					else:
 						self["infotext"].setText(_("Press OK to expand this host"))
-				if current[0][0] == "nfsShare":
-					desc = str(current[0][4])
-				elif current[0][0] == "smbShare":
-					desc = str(current[0][3])
-				else:
-					desc = ""
+						desc = _("Press OK to expand this host")
 			else:
 				name = ""
 				desc = ""
@@ -601,6 +610,7 @@ class ScanIP(Screen, ConfigListScreen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Scan NFS share"))
 		self["key_yellow"] = StaticText(_("Scan range"))
+		self["summary_description"] = StaticText("")
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -619,6 +629,9 @@ class ScanIP(Screen, ConfigListScreen):
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
+	def createSummary(self):
+		pass
+
 	def exit(self):
 		self.close((None,None))
 
@@ -627,6 +640,10 @@ class ScanIP(Screen, ConfigListScreen):
 
 	def setWindowTitle(self):
 		self.setTitle(_("Enter IP to scan..."))
+		try:
+			self["summary_description"].text = self.getCurrentEntry()
+		except:
+			print '[ScanIp] no "summary_description" available'
 
 	def goAddress(self):
 		if self.ipAddress.getText() != "0.0.0.0":
