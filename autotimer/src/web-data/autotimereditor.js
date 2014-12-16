@@ -1716,7 +1716,7 @@ function AutoTimer(xml, defaults){
 	this.name = (this.name == undefined) ? name : this.match;
 	
 	var encoding = getAttribute(xml, 'encoding', defaults);
-	if (encoding==undefined) encoding = 'ISO8859-15';
+	if (encoding==undefined) encoding = 'UTF-8';
 	var options = ['ISO8859-15', 'UTF-8'];
 	this.encoding = toOptionList(options, encoding);
 	this.encoding.shift();

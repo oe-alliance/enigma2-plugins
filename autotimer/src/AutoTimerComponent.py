@@ -715,8 +715,8 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 		return override_service
 
 def getDefaultEncoding():
-	if 'de' in language.getLanguage():
-		return 'ISO8859-15'
+	#if 'de' in language.getLanguage():
+	#	return 'ISO8859-15'
 	return 'UTF-8'
 
 # very basic factory ;-)
