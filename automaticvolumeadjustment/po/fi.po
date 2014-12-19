@@ -1,0 +1,91 @@
+# Finnish translations for enigma2-plugins package.
+# Copyright (C) 2014 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-05 14:40+0000\n"
+"PO-Revision-Date: 2014-12-19 17:13+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: Samzan\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: FINLAND\n"
+
+msgid "Add"
+msgstr "Lisää"
+
+msgid "Adjustment value"
+msgstr "Säätöarvo"
+
+msgid "Automatic Volume Adjustment"
+msgstr "Automaattinen äänenvoimakkuus"
+
+msgid "Automatic Volume Adjustment - Config"
+msgstr "Automaattinen äänenvoimakkuus - asetukset"
+
+msgid "Automatic Volume Adjustment - Entry Config"
+msgstr "Automaattinen äänenvoimakkuus - asetuksiin"
+
+msgid "Automatic Volume Adjustment - Service Config"
+msgstr "Automaattinen äänenvoimakkuus - palveluasetukset"
+
+msgid "Automatic volume adjust"
+msgstr "Automaattinen äänenvoimakkuus"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Channel Selection"
+msgstr "Kanavavalinta"
+
+msgid "Default volume adjustment value for AC3/DTS"
+msgstr "Äänenvoimakkuuden oletusarvo AC3/DTS:lle"
+
+msgid "Delete"
+msgstr "Poista"
+
+msgid "Do you really want to delete this entry?"
+msgstr "Haluatko todella poistaa tämän arvon"
+
+msgid "Edit"
+msgstr "Muokkaa"
+
+msgid "Enable"
+msgstr "Salli"
+
+msgid "Max. volume for mpeg audio"
+msgstr "Max äänenvoimakkuus mpeg äänelle"
+
+msgid "Modus"
+msgstr "Tila"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Press OK to select a service"
+msgstr "Paina OK valitaksesi palvelun"
+
+msgid "Remember service volume value"
+msgstr "Muista palvelun äänenvoimakkuus"
+
+msgid "Servicename"
+msgstr "Palvelunnimi"
+
+msgid "Services"
+msgstr "Palvelut"
+
+msgid "Show volumebar when volume-value was changed"
+msgstr "Näytä äänenvoimakkuuspalkki muutoksessa"
+
+msgid "You must select a valid service!"
+msgstr "Sinun on valittava oikea palvelu"
+
