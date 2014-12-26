@@ -125,7 +125,10 @@ if TPM
 SUBDIRS += \
 	mytube \
 	yttrailer \
-	webinterface
+	webinterface \
+	menusort \
+	pluginhider \
+	pluginsort 
 endif
 
 if PLI
