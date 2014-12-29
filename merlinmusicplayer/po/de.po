@@ -1,0 +1,430 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MerlinMusicPlayer\n"
+"POT-Creation-Date: 2014-12-23 08:59+0100\n"
+"PO-Revision-Date: 2014-12-29 12:19+0100\n"
+"Last-Translator: husky <husky@mail.to>\n"
+"Language-Team: OpenATV\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.1\n"
+"X-Poedit-Basepath: c:\\00000000_0MerlinPlayer\\merlinmusicplayer\\src\\\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: c:\\00000000_0MerlinPlayer\\merlinmusicplayer\\src\n"
+
+#: /src/plugin.py:211
+#, python-format
+msgid ""
+"%s\n"
+" added to database"
+msgstr ""
+"%s\n"
+" zur Datenbank hinzugefügt."
+
+#: /src/plugin.py:215 /src/plugin.py:219
+#, python-format
+msgid ""
+"%s\n"
+" already exists in database!"
+msgstr ""
+"%s\n"
+" ist schon in der Datenbank vorhanden!"
+
+#: /src/plugin.py:228
+msgid ""
+"Process aborted.\n"
+" 0 files added to database!\n"
+"Press OK to close."
+msgstr ""
+"Prozess abgebrochen.\n"
+"Es wurden keine  Dateien zur Datenbank hinzugefügt!\n"
+"Drücken Sie OK zum Schließen."
+
+#: /src/plugin.py:230
+#, python-format
+msgid ""
+"%d files added to database!\n"
+"Press OK to close."
+msgstr ""
+"%d Dateien zur Datenbank hinzugefügt!\n"
+"Drücken Sie OK zum Schließen."
+
+#: /src/plugin.py:232
+msgid ""
+"Error!\n"
+"Can not open database!\n"
+"Check if save folder is correct and writeable!\n"
+"Press OK to close."
+msgstr ""
+"Fehler!\n"
+"Datenbank kann nicht geöffnet werden\n"
+"Prüfen Sie ob der Ordner vorhanden und beschreibbar ist!\n"
+"Drücken Sie OK zum Schließen."
+
+#: /src/plugin.py:260 /src/plugin.py:2772 /src/plugin.py:2893
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: /src/plugin.py:1299
+#, python-format
+msgid "This Dreambox can't decode %s streams!"
+msgstr "Ihr Receiver kann keine %s Streams decodieren!"
+
+#: /src/plugin.py:1429
+msgid "Shuffle is not available yet with cue-files!"
+msgstr "Zufallswiedergabe ist noch nicht verfügbar für Cue-Dateien!"
+
+#: /src/plugin.py:1441
+msgid "Repeat is not available yet with cue-files!"
+msgstr "Wiederholen ist noch nicht verfügbar für Cue-Dateien!"
+
+#: /src/plugin.py:1516
+msgid "Merlin Music Player Lyrics"
+msgstr "Merlin Music Player Songtexte"
+
+#: /src/plugin.py:1563
+#, python-format
+msgid "Response -> lyrics for: %s (%s)"
+msgstr "Antwort-> Songtexte für: %s (%s)"
+
+#: /src/plugin.py:1566
+msgid "No lyrics found"
+msgstr "Keine Songtexte gefunden"
+
+#: /src/plugin.py:1611
+msgid "Merlin Music Player Songlist"
+msgstr "Merlin Music Player Songliste"
+
+#: /src/plugin.py:1759 /src/plugin.py:2336
+msgid "iDream Main Menu"
+msgstr "iDream Hauptmenü"
+
+#: /src/plugin.py:1806 /src/plugin.py:1930
+msgid ""
+"There are no playlists defined.\n"
+"Do you want to create a new playlist?"
+msgstr ""
+"Es sind keine Playlisten vorhanden.\n"
+"Wollen Sie eine neue Playliste erstellen?"
+
+#: /src/plugin.py:1810 /src/plugin.py:3223
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#: /src/plugin.py:1810
+msgid "Search in iDream database"
+msgstr "In iDream Datenbank suchen"
+
+#: /src/plugin.py:1811
+msgid "Scan path for music files and add them to database"
+msgstr "Pfad duchsuchen und Musikdateien zur Datenbank hinzufügen"
+
+#: /src/plugin.py:1813
+msgid "Create new playlist"
+msgstr "Neue Playlist erzeugen"
+
+#: /src/plugin.py:1816
+msgid "Delete song from current playlist"
+msgstr "Lied aus der aktuellen Playlist löschen"
+
+#: /src/plugin.py:1818
+msgid "Add selected song to a playlist"
+msgstr "Ausgewählten Song zur Playlist hinzufügen "
+
+#: /src/plugin.py:1820 /src/plugin.py:1834
+msgid "Add all songs from selected album to a playlist"
+msgstr "Alle Lieder vom ausgewählten Album in die Playlist aufnehmen"
+
+#: /src/plugin.py:1822 /src/plugin.py:1832
+msgid "Add all songs from selected artist to a playlist"
+msgstr "Alle Lieder vom ausgewählten Interpreten in die Songliste aufnehmen"
+
+#: /src/plugin.py:1823
+msgid "Delete song from database"
+msgstr "Lied aus der Datenbank löschen"
+
+#: /src/plugin.py:1824 /src/plugin.py:3227
+msgid "Clear current songlist and play selected entry"
+msgstr "Songliste leeren und ausgewähltes Lied abspielen"
+
+#: /src/plugin.py:1825
+msgid "Append file to current playing songlist"
+msgstr "Datei in die aktuelle Songliste aufnehmen"
+
+#: /src/plugin.py:1827
+msgid "Insert file to current playing songlist and play next"
+msgstr "Datei in die aktuelle Songliste aufnehmen und als nächstes abspielen"
+
+#: /src/plugin.py:1830
+msgid "Delete selected playlist"
+msgstr "Ausgewählte Playliste löschen"
+
+#: /src/plugin.py:1836
+msgid "Add all songs from selected genre to a playlist"
+msgstr "Alle Lieder vom ausgewählten Genre in die Playliste aufnehmen"
+
+#: /src/plugin.py:1860
+msgid "Do you really want to add all songs from that genre to a playlist?"
+msgstr "Wollen Sie wirklich alle Lieder dieses Genres zu einer Playliste hinzufügen?"
+
+#: /src/plugin.py:1870
+msgid "Do you really want to add all songs from that artist to a playlist?"
+msgstr "Wollen Sie wirklich alle Lieder dieses Interpreten zu einer Playliste hinzufügen?"
+
+#: /src/plugin.py:1880
+msgid "Do you really want to add all songs from that album to a playlist?"
+msgstr "Wollen Sie wirklich alle Lieder dieses Albums zu einer Playliste hinzufügen?"
+
+#: /src/plugin.py:1890
+msgid "Do you really want to delete the current playlist?"
+msgstr "Wollen Sie wirklich die aktuelle Playliste löschen?"
+
+#: /src/plugin.py:1903
+msgid "Do you really want to delete that song the current playlist?"
+msgstr "Wollen Sie wirklich diese Lied aus der aktuellen Songliste löschen?"
+
+#: /src/plugin.py:1914
+msgid "Do you really want to delete that song from the database?"
+msgstr "Wollen Sie wirklich diese Lied aus der Datenbank löschen?"
+
+#: /src/plugin.py:1944
+msgid "Enter name for playlist"
+msgstr "Namen für Playliste eingeben"
+
+#: /src/plugin.py:1953
+msgid "search for title"
+msgstr "Nach Titel suchen"
+
+#: /src/plugin.py:1954
+msgid "search for artist"
+msgstr "Nach Interpret suchen"
+
+#: /src/plugin.py:1955
+msgid "search for album"
+msgstr "Nach Album suchen"
+
+#: /src/plugin.py:1956
+msgid "search in all of them"
+msgstr "In allen suchen"
+
+#: /src/plugin.py:1961
+msgid "Enter search-text"
+msgstr "Suchtext eingeben"
+
+#: /src/plugin.py:1968
+#, python-format
+msgid "Search results for \"%s\" in all titles"
+msgstr "Suchergebnis für \"%s\" in allen Titeln"
+
+#: /src/plugin.py:1971
+#, python-format
+msgid "Search results for \"%s\" in all artists"
+msgstr "Suchergebnis für \"%s\" in allen Interpreten"
+
+#: /src/plugin.py:1974
+#, python-format
+msgid "Search results for \"%s\" in all albums"
+msgstr "Suchergebnis für \"%s\" in allen Alben"
+
+#: /src/plugin.py:1977
+#, python-format
+msgid "Search results for \"%s\" in title, artist or album"
+msgstr "Suchergebnis für \"%s\" in allen Titeln, Interpreten und Alben"
+
+#: /src/plugin.py:2073
+msgid "Playlists"
+msgstr "Playlisten"
+
+#: /src/plugin.py:2079 /src/plugin.py:2101 /src/plugin.py:2126
+#: /src/plugin.py:2148 /src/plugin.py:2243 /src/plugin.py:2269
+#: /src/plugin.py:2293 /src/plugin.py:2319 /src/plugin.py:2379
+#: /src/plugin.py:2399 /src/plugin.py:2428
+msgid "[back]"
+msgstr "[zurück]"
+
+#: /src/plugin.py:2107
+#, python-format
+msgid "Playlist (%s) -> Song List"
+msgstr "Playlist (%s) -> Songliste"
+
+#: /src/plugin.py:2120
+msgid "Genre List"
+msgstr "Genreliste"
+
+#: /src/plugin.py:2154
+#, python-format
+msgid "Genre (%s) -> Song List"
+msgstr "Genre (%s) -> Songliste"
+
+#: /src/plugin.py:2237
+msgid "All Songs"
+msgstr "Alle Lieder"
+
+#: /src/plugin.py:2299
+#, python-format
+msgid "Artist (%s) -> Song List"
+msgstr "Interpret (%s) -> Songliste"
+
+#: /src/plugin.py:2325
+#, python-format
+msgid "Album (%s) -> Song List"
+msgstr "Album (%s) -> Songliste"
+
+#: /src/plugin.py:2345
+#, python-format
+msgid "Playlists (%d)"
+msgstr "Playlisten (%d)"
+
+#: /src/plugin.py:2349
+#, python-format
+msgid "Artists (%d)"
+msgstr "Interpreten (%d)"
+
+#: /src/plugin.py:2353
+#, python-format
+msgid "Albums (%d)"
+msgstr "Alben (%d)"
+
+#: /src/plugin.py:2357
+#, python-format
+msgid "Songs (%d)"
+msgstr "Lieder (%d)"
+
+#: /src/plugin.py:2361
+#, python-format
+msgid "Genres (%d)"
+msgstr "Genres (%d)"
+
+#: /src/plugin.py:2373
+msgid "Artists List"
+msgstr "Interpreten Liste"
+
+#: /src/plugin.py:2409
+#, python-format
+msgid "Artist (%s) -> Album List"
+msgstr "Interpet (%s) -> Albumliste"
+
+#: /src/plugin.py:2422
+msgid "Albums List"
+msgstr "Albenliste"
+
+#: /src/plugin.py:2520 /src/plugin.py:3265
+#, python-format
+msgid ""
+"%s\n"
+"appended to songlist"
+msgstr ""
+"%s\n"
+"in der Songliste aufgenommen"
+
+#: /src/plugin.py:2530 /src/plugin.py:3276
+#, python-format
+msgid ""
+"%s\n"
+"inserted and will be played as next song"
+msgstr ""
+"%s\n"
+"aufgenommen und wird als nächstes abgespielt"
+
+#: /src/plugin.py:2773 /src/plugin.py:2894
+msgid "OK"
+msgstr "OK"
+
+#: /src/plugin.py:2807
+msgid "Invalid Location"
+msgstr "Ungültiger Ordner"
+
+#: /src/plugin.py:2898
+msgid "Use hardware-decoder for MP3"
+msgstr "Hardware-Decoder für MP3 benutzen"
+
+#: /src/plugin.py:2899
+msgid "Play last used songlist after starting"
+msgstr "Letzte Songliste nach dem Starten abspielen"
+
+#: /src/plugin.py:2901
+msgid "iDream database path"
+msgstr "iDream Datenbank Pfad"
+
+#: /src/plugin.py:2905
+msgid "Use google-images for cover art"
+msgstr "Benutze Google Images für Cover"
+
+#: /src/plugin.py:2906
+msgid "Google image path"
+msgstr "Google Image Ordner"
+
+#: /src/plugin.py:2908
+msgid "Activate screensaver"
+msgstr "Bildschirmschoner aktivieren"
+
+#: /src/plugin.py:2909
+msgid "Wait for screensaver (in min)"
+msgstr "Wartezeit für Bildschirmschoner (in Minuten)"
+
+#: /src/plugin.py:2910
+msgid "Wait for screentimeout (in sec)"
+msgstr "Dateibrowser Timeout (in Sekunden)"
+
+#: /src/plugin.py:2911
+msgid "Remember last path of filebrowser"
+msgstr "Letzten Ordner im Dateibrowser merken"
+
+#: /src/plugin.py:2912
+msgid "Filebrowser startup path"
+msgstr "Dateibrowser Startordner"
+
+#: /src/plugin.py:2914
+msgid "Show iDream in extended-pluginlist"
+msgstr "Zeige iDream in Erweiterungen"
+
+#: /src/plugin.py:2915
+msgid "Show Merlin Music Player in extended-pluginlist"
+msgstr "Zeige Merlin Music Player in Erweiterungen"
+
+#: /src/plugin.py:2916
+msgid "Show iDream in mainmenu"
+msgstr "Zeige iDream im Hauptmenü"
+
+#: /src/plugin.py:2917
+msgid "Show Merlin Music Player in mainmenu"
+msgstr "Zeige  Merlin Music Player in Hauptmenü"
+
+#: /src/plugin.py:3178 /src/plugin.py:3215
+msgid "No music files found!"
+msgstr "Keine Musik Dateien gefunden!"
+
+#: /src/plugin.py:3228
+msgid "Append file to current songlist"
+msgstr "Datei an die aktuelle Songliste anhängen"
+
+#: /src/plugin.py:3230
+msgid "Insert file to current songlist and play next"
+msgstr "Datei in die aktuelle Songliste aufnehmen und als nächste abspielen"
+
+#: /src/plugin.py:3306
+#, python-format
+msgid "Filelist: %s"
+msgstr "Dateiliste: %s"
+
+#: /src/plugin.py:3373 /src/plugin.py:3384 /src/plugin.py:3388
+#: /src/plugin.py:3390
+msgid "Merlin Music Player"
+msgstr "Merlin Music Player"
+
+#: /src/plugin.py:3378 /src/plugin.py:3392
+msgid "iDream"
+msgstr "iDream"
+
+#: /src/plugin.py:3383 /src/plugin.py:3386
+msgid "Dreambox Music Database"
+msgstr "Dreambox Music Database"
+
+msgid "Add music files to iDream database"
+msgstr "Musikdatein in die iDream Datenbank aufnehmen"
+
+msgid "Close"
+msgstr "Schliessen"

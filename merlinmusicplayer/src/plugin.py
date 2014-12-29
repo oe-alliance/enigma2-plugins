@@ -20,6 +20,8 @@
 #  distributed other than under the conditions noted above.
 #
 
+# for localized messages
+from . import _
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
@@ -79,7 +81,6 @@ from enigma import ePoint, eEPGCache
 from Screens.InfoBarGenerics import NumberZap
 
 
-START_MERLIN_PLAYER_SCREEN_TIMER_VALUE = 7000
 
 config.plugins.merlinmusicplayer = ConfigSubsection()
 config.plugins.merlinmusicplayer.hardwaredecoder = ConfigYesNo(default = True)
@@ -90,6 +91,7 @@ config.plugins.merlinmusicplayer.usegoogleimage = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.googleimagepath = ConfigDirectory(default = "/hdd/")
 config.plugins.merlinmusicplayer.usescreensaver = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.screensaverwait = ConfigInteger(1,limits = (1, 60))
+config.plugins.merlinmusicplayer.screentimerwait = ConfigInteger(7,limits = (7, 120))
 config.plugins.merlinmusicplayer.idreamextendedpluginlist = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.merlinmusicplayerextendedpluginlist = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.defaultfilebrowserpath = ConfigDirectory(default = "/hdd/")
@@ -2494,7 +2496,7 @@ class iDreamMerlin(Screen):
 			self.player.doClose()
 			self.player = None
 		self.appendFileToSongList()	
-		self.startMerlinPlayerScreenTimer.start(START_MERLIN_PLAYER_SCREEN_TIMER_VALUE)
+		self.startMerlinPlayerScreenTimer.start(config.plugins.merlinmusicplayer.screentimerwait.value * 1000)
 
 	def appendFileToSongList(self):
 		SongList = []
@@ -2552,7 +2554,7 @@ class iDreamMerlin(Screen):
 		
 
 	def lcdUpdate(self):
-		self.startMerlinPlayerScreenTimer.start(START_MERLIN_PLAYER_SCREEN_TIMER_VALUE)
+		self.startMerlinPlayerScreenTimer.start(config.plugins.merlinmusicplayer.screentimerwait.value * 1000)
 		try:
 			count = self["list"].getItemCount()
 			index = self["list"].getCurrentIndex()
@@ -2906,6 +2908,7 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 		self.list.append(self.googleimage)
 		self.list.append(getConfigListEntry(_("Activate screensaver"), config.plugins.merlinmusicplayer.usescreensaver))
 		self.list.append(getConfigListEntry(_("Wait for screensaver (in min)"), config.plugins.merlinmusicplayer.screensaverwait))
+		self.list.append(getConfigListEntry(_("Wait for screentimeout (in sec)"), config.plugins.merlinmusicplayer.screentimerwait))
 		self.list.append(getConfigListEntry(_("Remember last path of filebrowser"), config.plugins.merlinmusicplayer.rememberlastfilebrowserpath))
 		self.defaultFileBrowserPath = getConfigListEntry(_("Filebrowser startup path"), config.plugins.merlinmusicplayer.defaultfilebrowserpath)
 		self.list.append(self.defaultFileBrowserPath)
@@ -3237,7 +3240,7 @@ class MerlinMusicPlayerFileList(Screen):
 			self.player.doClose()
 			self.player = None
 		self.appendFileToSongList()	
-		self.startMerlinPlayerScreenTimer.start(START_MERLIN_PLAYER_SCREEN_TIMER_VALUE)
+		self.startMerlinPlayerScreenTimer.start(config.plugins.merlinmusicplayer.screentimerwait.value * 1000)
 
 	def appendFileToSongList(self):
 		playerAvailable =  self.player is not None and self.player.songList
@@ -3305,7 +3308,7 @@ class MerlinMusicPlayerFileList(Screen):
 		self.lcdupdate()
 
 	def lcdupdate(self):
-		self.startMerlinPlayerScreenTimer.start(START_MERLIN_PLAYER_SCREEN_TIMER_VALUE)
+		self.startMerlinPlayerScreenTimer.start(config.plugins.merlinmusicplayer.screentimerwait.value * 1000)
 		index = self["list"].getSelectionIndex()
 		sel = self["list"].list[index]
 		text = sel[1][7]
