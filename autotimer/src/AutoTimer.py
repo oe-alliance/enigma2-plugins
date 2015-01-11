@@ -690,22 +690,26 @@ class AutoTimer:
 	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2, force=False):
 		foundTitle = False
 		foundShort = False
-		foundExt = False
+		retValue = False
 		if name1 and name2:
 			foundTitle = ( 0.8 < SequenceMatcher(lambda x: x == " ",name1, name2).ratio() )
 		# NOTE: only check extended & short if tile is a partial match
 		if foundTitle:
 			if timer.searchForDuplicateDescription > 0 or force:
-				if extdesc1 and extdesc2:
-					# Some channels indicate replays in the extended descriptions
-					# If the similarity percent is higher then 0.7 it is a very close match
-					foundExt = ( 0.7 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
-
-				if not foundExt and shortdesc1 and shortdesc2:
-					# some channels do not use extended description, so try to find a close match to short description.
+				if shortdesc1 and shortdesc2:
 					# If the similarity percent is higher then 0.7 it is a very close match
 					foundShort = ( 0.7 < SequenceMatcher(lambda x: x == " ",shortdesc1, shortdesc2).ratio() )
-		return foundShort or foundExt
+					if foundShort:
+						if timer.searchForDuplicateDescription == 3:
+							if extdesc1 and extdesc2:
+								# Some channels indicate replays in the extended descriptions
+								# If the similarity percent is higher then 0.7 it is a very close match
+								retValue = ( 0.7 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+						else:
+							retValue = True
+			else:
+				retValue = True
+		return retValue
 
 	def checkDoubleTimers(self, timer, name1, name2, starttime1, starttime2, endtime1, endtime2):
 		foundTitle = name1 == name2
