@@ -179,16 +179,16 @@ class ZapHistoryBrowser(Screen, ProtectedScreen):
 		self["list"] = ZapHistoryBrowserList([])
 		self["key_red"] = Label(_("Clear"))
 		self["key_green"] = Label(_("Delete"))
-		self["key_yellow"] = Label(_("Zap & Close"))
+		self["key_yellow"] = Label(_("Zap"))
 		self["key_blue"] = Label(_("Config"))
 		
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 			{
-				"ok": self.zap,
+				"ok": self.zapAndClose,
 				"cancel": self.close,
 				"red": self.clear,
 				"green": self.delete,
-				"yellow": self.zapAndClose,
+				"yellow": self.zap,
 				"blue": self.config
 			}, prio=-1)
 		
