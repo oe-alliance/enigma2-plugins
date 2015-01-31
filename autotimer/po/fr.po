@@ -1,13 +1,8 @@
-# English translations for enigma2-plugins package.
-# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the enigma2-plugins package.
-# Automatically generated, 2012.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2015-01-11 12:35+0100\n"
 "PO-Revision-Date: 2014-10-29 12:15+0100\n"
 "Last-Translator: OEA\n"
 "Language-Team: french\n"
@@ -18,7 +13,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.6.10\n"
 
-#, python-format
 msgid ""
 "%d conflict(s) encountered when trying to add new timers:\n"
 "%s"
@@ -26,7 +20,6 @@ msgstr ""
 "%d conflit(s) rencontrés en essayant d'ajouter de nouveaux timers:\n"
 "%s"
 
-#, python-format
 msgid ""
 "%d conflict(s) solved with similar timer(s):\n"
 "%s"
@@ -37,7 +30,6 @@ msgstr ""
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
-#, python-format
 msgid "%s: %s at %s"
 msgstr "%s: %s à %s"
 
@@ -108,7 +100,7 @@ msgid "AutoTimer was removed"
 msgstr "AutoTimer a été enlevé"
 
 msgid "AutoTimers"
-msgstr "AutoTimers"
+msgstr "Programmations Auto"
 
 msgid "Begin of \"after event\" timespan"
 msgstr "Début de la plage horaire \"après événement\""
@@ -165,6 +157,9 @@ msgstr "Choisir le répertoire cible"
 msgid "Classic"
 msgstr "Classique"
 
+msgid "Close"
+msgstr "Fermer"
+
 msgid "Close and forget changes"
 msgstr "Fermer et oublier les changements"
 
@@ -189,7 +184,6 @@ msgstr "Créer un nouveau timer en utilisant l'éditeur classique"
 msgid "Create a new timer using the wizard"
 msgstr "Créer un nouveau timer en utilisant l'Assitant"
 
-#, python-format
 msgid "Custom (%s)"
 msgstr "Personnaliser (%s)"
 
@@ -212,7 +206,6 @@ msgstr "Effacer"
 msgid "Description"
 msgstr "Description"
 
-#, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Voulez-vous vraiment effacer %s?"
 
@@ -228,7 +221,6 @@ msgstr "Editer filtres AutoTimer"
 msgid "Edit AutoTimer services"
 msgstr "Editer services AutoTimer"
 
-#. TRANSLATORS: description of AutoTimer in PluginBrowser
 msgid "Edit Timers and scan for new Events"
 msgstr "Editer Timers et scanner pour les nouveaux événements"
 
@@ -315,7 +307,6 @@ msgstr ""
 "Premier jour correspondance des événements. Aucun événement qui commence "
 "avant cette date ne correspondra."
 
-#, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
 "%d Timer were added and\n"
@@ -353,14 +344,6 @@ msgid ""
 msgstr ""
 "Si un conflit se produit, AutoTimer recherchera en dehors la plage horaire "
 "pour un événement similaire et l'ajoutera."
-
-#, python-format
-msgid ""
-"If this is enabled an existing timer will also be considered recording an "
-"event if it records at least 80%% of the it."
-msgstr ""
-"Si c'est activé un timer existant sera considéré comme enregistrant un "
-"événement si il enregistre au moins 80%% de celui-ci."
 
 msgid ""
 "If this is selected, the name of the respective AutoTimer will be added as a "
@@ -437,14 +420,12 @@ msgstr ""
 "Limite inférieur du laps de temps. Aucune correspondance avant cette date ne "
 "sera prise en compte. Les marges ne sont pas prises en compte!"
 
-#, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
 msgstr "Corresponds à la plage horaire: %02d:%02d - %02d:%02d"
 
 msgid "Match title"
 msgstr "Correspondance Titre"
 
-#, python-format
 msgid "Match title: %s"
 msgstr "Correspondance titre: %s"
 
@@ -515,11 +496,9 @@ msgstr "Seulement ajouter des timers pour les prochains x jours"
 msgid "Only match during timespan"
 msgstr "Correspond seulement pendant la plage horaire"
 
-#, python-format
 msgid "Only on Service: %s"
 msgstr "Seulement sur Service: %s"
 
-#, python-format
 msgid "Only on Weekday: %s"
 msgstr "Seulement pendant jour de la semaine: %s"
 
@@ -528,9 +507,6 @@ msgstr "Seulement sonder en veille"
 
 msgid "Open Context Menu"
 msgstr "Ouvrir le Menu Contextuel"
-
-msgid "Override found with alternative service"
-msgstr "Remplaçant trouvé avec les services alternatifs"
 
 msgid "Please provide a Text to match"
 msgstr "Merci de fournir un texte a recheché"
@@ -579,8 +555,8 @@ msgid ""
 "Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: "
 "The show I'm trying to record contains umlauts in its title. AutoTimer does "
 "not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For "
-"german stations 'UTF-8' should be selected./n/nQ: I seem to be unable "
-"to record two subsequent events. There is only a single timer created that "
+"german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to "
+"record two subsequent events. There is only a single timer created that "
 "spans (part of) both events./nA: From the Overview press MENU and enter the "
 "'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
 msgstr ""
@@ -1027,13 +1003,6 @@ msgstr ""
 "timer with the same description already exists in the timer list."
 
 msgid ""
-"With this option enabled the channel to record on can be changed to a "
-"alternative service it is restricted to."
-msgstr ""
-"With this option enabled the channel to record on can be changed to a "
-"alternative service it is restricted to."
-
-msgid ""
 "With this option you can restrict the AutoTimer to a certain amount of "
 "scheduled recordings. Set this to 0 to disable this functionality."
 msgstr ""
@@ -1078,7 +1047,6 @@ msgstr ""
 " Comme ceci est un attribut obligatoire vous ne pouvez pas continuer sans le "
 "définir."
 
-#, python-format
 msgid ""
 "You entered \"%s\" as Text to match.\n"
 "Do you want to remove trailing whitespaces?"
@@ -1118,7 +1086,6 @@ msgstr ""
 "Votre attribut 'Recherche en titre' se termine par un espace.\n"
 "Merci de confirmer si c'est intentionel, si pas il sera supprimé."
 
-#, python-format
 msgid ""
 "Your config file is not well-formed:\n"
 "%s"
@@ -1126,19 +1093,11 @@ msgstr ""
 "Votre fichier de configuration n'est pas bien formé:\n"
 "%s"
 
-#. TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
 msgid "add AutoTimer"
 msgstr "ajouter AutoTimer"
 
-#. TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)
 msgid "add AutoTimer..."
 msgstr "ajouter AutoTimer..."
-
-msgid "add filters"
-msgstr "ajouter filtres"
-
-msgid "add services"
-msgstr "ajouter services"
 
 msgid "auto"
 msgstr "auto"
@@ -1155,9 +1114,6 @@ msgstr "recherche sensible à la case"
 msgid "config changed."
 msgstr "config changée."
 
-msgid "delete"
-msgstr "effacer"
-
 msgid "description match"
 msgstr "la description correspond"
 
@@ -1166,12 +1122,6 @@ msgstr "désactiver"
 
 msgid "do nothing"
 msgstr "ne rien faire"
-
-msgid "edit filters"
-msgstr "éditer filtres"
-
-msgid "edit services"
-msgstr "éditer services"
 
 msgid "enable"
 msgstr "activer"
@@ -1215,12 +1165,8 @@ msgstr "standard"
 msgid "title starts with"
 msgstr "titre commence avec"
 
-#, python-format
 msgid "unable to find timer with id %i"
 msgstr "impossible de trouver un timer avec id %i"
 
 msgid "zap"
 msgstr "zapper"
-
-#~ msgid "AutoTimerTask"
-#~ msgstr "AutoTimerTask"

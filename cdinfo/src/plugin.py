@@ -3,7 +3,8 @@ from Components.MediaPlayer import PlayList
 import xml.dom.minidom
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
-from Components.Sources.StaticText import StaticText
+from Components.Label import Label
+from Components.Button import Button
 from Screens.Screen import Screen
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
@@ -20,17 +21,16 @@ config.plugins.CDInfo.CDDB_cache = ConfigYesNo(default = True)
 
 class CDInfo(ConfigListScreen,Screen):
 	skin = """
-		<screen name="CDInfo" position="center,center" size="560,440" title="CDInfo" >
-			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
-			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
-			<widget source="info" render="Label" position="5,50" size="550,40" font="Regular;20" backgroundColor="#25062748" transparent="1" />
-			<widget name="config" position="5,115" size="550,200" scrollbarMode="showOnDemand" />
-			<ePixmap pixmap="skin_default/div-h.png" position="0,330" zPosition="1" size="560,2" />
-			<widget source="info2" render="Label" position="5,350" size="520,80" font="Regular;20" backgroundColor="#25062748" transparent="1" />
+		<screen position="90,95" size="560,430" title="CDInfo" >
+		    <ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		    <ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		    <ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+		    <widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+		    <widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+		    <widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+		    <widget name="info" position="20,50" size="520,40" font="Regular;20" transparent="1" />
+		    <widget name="config" position="20,120" size="520,200" scrollbarMode="showOnDemand" />
+		    <widget name="info2" position="20,340" size="520,80" font="Regular;20" transparent="1" />
 		</screen>
 		"""
 	
@@ -38,24 +38,24 @@ class CDInfo(ConfigListScreen,Screen):
 		self.skin = CDInfo.skin
 		Screen.__init__(self, session)
 
-		self["info"] = StaticText("Gather audio cd album information and track listing from CDDB (online database) and / or CD-Text (from medium).")
+		self["info"] = Label(_("Gather audio cd album information and track listing from CDDB (online database) and / or CD-Text (from medium)."))
 
-		self["info2"] = StaticText("Playlist string variables: $i=track, $t=title, $a=artist\nCDDB query will not delay start of audio CD playback. The request will be sent asynchronously and playlist text will be updated when match was found.")
+		self["info2"] = Label(_("Playlist string variables: $i=track, $t=title, $a=artist\nCDDB query will not delay start of audio CD playback. The request will be sent asynchronously and playlist text will be updated when match was found."))
 
 		self.list = []
-		self.list.append(getConfigListEntry("Try to extract CDTEXT", config.plugins.CDInfo.useCDTEXT))
-		self.list.append(getConfigListEntry("Try to query CDDB", config.plugins.CDInfo.useCDDB))
-		self.list.append(getConfigListEntry("Playlist string", config.plugins.CDInfo.displayString))
-		self.list.append(getConfigListEntry("CDDB overwrites CDTEXT info", config.plugins.CDInfo.preferCDDB))
-		self.list.append(getConfigListEntry("CDDB server hostname", config.plugins.CDInfo.CDDB_server))
-		self.list.append(getConfigListEntry("CDDB server port number", config.plugins.CDInfo.CDDB_port))
-		self.list.append(getConfigListEntry("CDDB retrieval timeout (s)", config.plugins.CDInfo.CDDB_timeout))
-		self.list.append(getConfigListEntry("store local CDDB cache", config.plugins.CDInfo.CDDB_cache))
-
+		self.list.append(getConfigListEntry(_("Try to extract CDTEXT"), config.plugins.CDInfo.useCDTEXT))
+		self.list.append(getConfigListEntry(_("Try to query CDDB"), config.plugins.CDInfo.useCDDB))
+		self.list.append(getConfigListEntry(_("Playlist string"), config.plugins.CDInfo.displayString))
+		self.list.append(getConfigListEntry(_("CDDB overwrites CDTEXT info"), config.plugins.CDInfo.preferCDDB))
+		self.list.append(getConfigListEntry(_("CDDB server hostname"), config.plugins.CDInfo.CDDB_server))
+		self.list.append(getConfigListEntry(_("CDDB server port number"), config.plugins.CDInfo.CDDB_port))
+		self.list.append(getConfigListEntry(_("CDDB retrieval timeout (s)"), config.plugins.CDInfo.CDDB_timeout))
+		self.list.append(getConfigListEntry(_("store local CDDB cache"), config.plugins.CDInfo.CDDB_cache))
+		
 		ConfigListScreen.__init__(self, self.list)
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("OK"))
-		self["key_blue"] = StaticText(_("Defaults"))
+		self["key_red"] = Button(_("cancel"))
+		self["key_green"] = Button(_("ok"))
+		self["key_blue"] = Button(_("defaults"))
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -66,11 +66,6 @@ class CDInfo(ConfigListScreen,Screen):
 		    "cancel": self.cancel,
 		    "ok": self.save,
 		}, -2)
-
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(_("CDInfo"))
 
 	def save(self):
 		for x in self["config"].list:
@@ -107,11 +102,11 @@ class Query:
 		self.albuminfo = {}
 
 	def getText(self, nodelist):
-		rc = ""
-		for node in nodelist:
-			if node.nodeType == node.TEXT_NODE:
-				rc = rc + node.data
-		return rc.encode("utf-8")
+	    rc = ""
+	    for node in nodelist:
+		if node.nodeType == node.TEXT_NODE:
+		    rc = rc + node.data
+	    return rc.encode("utf-8")
 
 	def xml_parse_output(self,string):
 		data = string.decode("utf-8","replace").replace('&',"&amp;").encode("ascii",'xmlcharrefreplace')
@@ -128,53 +123,53 @@ class Query:
 		return True
 
 	def xml_parse_query(self, queries_xml):
-		for queries in queries_xml:
-			if queries.nodeType == xml.dom.minidom.Element.nodeType:
-				if queries.tagName == 'query':
-					print "[xml_parse_query] cdinfo source is %s, hit %s of %s" % (queries.getAttribute("source"),queries.getAttribute("match"),queries.getAttribute("num_matches"))
-					for query in queries.childNodes:
-						if query.nodeType == xml.dom.minidom.Element.nodeType:
-							if query.tagName == 'albuminfo':
-								self.xml_parse_albuminfo(query.childNodes)
-							elif query.tagName == 'tracklisting':
-								self.xml_parse_tracklisting(query.childNodes)
+	    for queries in queries_xml:
+		if queries.nodeType == xml.dom.minidom.Element.nodeType:
+		    if queries.tagName == 'query':
+			print "[xml_parse_query] cdinfo source is %s, hit %s of %s" % (queries.getAttribute("source"),queries.getAttribute("match"),queries.getAttribute("num_matches"))
+			for query in queries.childNodes:
+			    if query.nodeType == xml.dom.minidom.Element.nodeType:
+				if query.tagName == 'albuminfo':
+				    self.xml_parse_albuminfo(query.childNodes)
+				elif query.tagName == 'tracklisting':
+				    self.xml_parse_tracklisting(query.childNodes)
 
 	def xml_parse_albuminfo(self, albuminfo_xml):
-		for albuminfo in albuminfo_xml:
-			if albuminfo.nodeType == xml.dom.minidom.Element.nodeType:
-				if albuminfo.tagName == 'PERFORMER' or albuminfo.tagName == 'artist':
-					artist = self.getText(albuminfo.childNodes)
-					self.albuminfo["artist"] = artist
-				elif albuminfo.tagName.upper() == 'TITLE':
-					title = self.getText(albuminfo.childNodes)
-					self.albuminfo["title"] = title
-				elif albuminfo.tagName.upper() == 'YEAR':
-					year = self.getText(albuminfo.childNodes)
-					self.albuminfo["year"] = year
-				elif albuminfo.tagName.upper() == 'GENRE':
-					genre = self.getText(albuminfo.childNodes)
-					self.albuminfo["genre"] = genre
-				elif albuminfo.tagName == 'category' and not "GENRE" in self.albuminfo:
-					category = self.getText(albuminfo.childNodes)
-					self.albuminfo["genre"] = category
+	    for albuminfo in albuminfo_xml:
+		if albuminfo.nodeType == xml.dom.minidom.Element.nodeType:
+		    if albuminfo.tagName == 'PERFORMER' or albuminfo.tagName == 'artist':
+			artist = self.getText(albuminfo.childNodes)
+			self.albuminfo["artist"] = artist
+		    elif albuminfo.tagName.upper() == 'TITLE':
+			title = self.getText(albuminfo.childNodes)
+			self.albuminfo["title"] = title
+		    elif albuminfo.tagName.upper() == 'YEAR':
+			year = self.getText(albuminfo.childNodes)
+			self.albuminfo["year"] = year
+		    elif albuminfo.tagName.upper() == 'GENRE':
+			genre = self.getText(albuminfo.childNodes)
+			self.albuminfo["genre"] = genre
+		    elif albuminfo.tagName == 'category' and not "GENRE" in self.albuminfo:
+			category = self.getText(albuminfo.childNodes)
+			self.albuminfo["genre"] = category
 
 	def xml_parse_tracklisting(self, tracklisting_xml):
-		for tracklist in tracklisting_xml:
-			if tracklist.nodeType == xml.dom.minidom.Element.nodeType:
-				if tracklist.tagName == 'track':
-					index = int(tracklist.getAttribute("number"))
-					trackinfo = {}
-					for track in tracklist.childNodes:
-						if track.nodeType == xml.dom.minidom.Element.nodeType:
-							if track.tagName == 'PERFORMER' or track.tagName == 'artist':
-								artist = self.getText(track.childNodes)
-								trackinfo["artist"] = artist
-							if track.tagName.upper() == 'TITLE':
-								title = self.getText(track.childNodes)
-								trackinfo["title"] = title
-							#elif track.tagName == 'length':
-								#tracktext += "Dauer=%ss " % self.getText(track.childNodes)
-					self.tracklisting[index]=trackinfo
+	    for tracklist in tracklisting_xml:
+		if tracklist.nodeType == xml.dom.minidom.Element.nodeType:
+		    if tracklist.tagName == 'track':
+			index = int(tracklist.getAttribute("number"))
+			trackinfo = {}
+			for track in tracklist.childNodes:
+			    if track.nodeType == xml.dom.minidom.Element.nodeType:
+				if track.tagName == 'PERFORMER' or track.tagName == 'artist':
+				    artist = self.getText(track.childNodes)
+				    trackinfo["artist"] = artist
+				if track.tagName.upper() == 'TITLE':
+				    title = self.getText(track.childNodes)
+				    trackinfo["title"] = title
+				#elif track.tagName == 'length':
+				    #tracktext += "Dauer=%ss " % self.getText(track.childNodes)
+			self.tracklisting[index]=trackinfo
 
 	def updateAlbuminfo(self, replace = False):
 		for tag in self.albuminfo:
@@ -257,4 +252,4 @@ def main(session, **kwargs):
 	session.open(CDInfo)
 
 def Plugins(**kwargs):
-	return [ PluginDescriptor(name="CDInfo", description="AudioCD info from CDDB & CD-Text", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="plugin.png") ]
+	return [ PluginDescriptor(name="CDInfo", description=_("AudioCD info from CDDB & CD-Text"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main, icon="plugin.png") ]
