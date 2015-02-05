@@ -2,310 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-11 12:35+0100\n"
-"PO-Revision-Date: 2014-10-29 12:15+0100\n"
-"Last-Translator: OEA\n"
-"Language-Team: french\n"
+"POT-Creation-Date: 2015-02-02 12:19-0700\n"
+"PO-Revision-Date: 2015-02-02 22:44+0100\n"
+"Last-Translator: mimi74\n"
+"Language-Team: french-EGAMI\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Poedit 1.6.10\n"
-
-msgid ""
-"%d conflict(s) encountered when trying to add new timers:\n"
-"%s"
-msgstr ""
-"%d conflit(s) rencontrés en essayant d'ajouter de nouveaux timers:\n"
-"%s"
-
-msgid ""
-"%d conflict(s) solved with similar timer(s):\n"
-"%s"
-msgstr ""
-"%d conflit(s) résolu(s) avec des timer(s) similaire(s):\n"
-"%s"
-
-msgid "%d.%B %Y"
-msgstr "%d.%B %Y"
-
-msgid "%s: %s at %s"
-msgstr "%s: %s à %s"
-
-msgid "Abort this Wizard."
-msgstr "Abandonner cet Assistant."
-
-msgid "Activate VPS"
-msgstr "Activater VPS"
-
-msgid "Add"
-msgstr "Ajouter"
-
-msgid "Add new AutoTimer"
-msgstr "Ajouter un nouveau AutoTimer"
-
-msgid "Add similar timer on conflict"
-msgstr "Ajouter un timer similaire en cas de conflit"
-
-msgid "Add timer as disabled on conflict"
-msgstr "Ajouter un timer désactivé en cas de conflit"
-
-msgid "Add zap timer instead of record timer?"
-msgstr "Ajouter un timer de zap à la place d'un timer d'enregistrement?"
-
-msgid "After event"
-msgstr "Après l'événement"
-
-msgid "All non-repeating timers"
-msgstr "Tous les timers non-répétitifs"
-
-msgid "Amount of recordings left"
-msgstr "Nombre d'enregistrement restant"
-
-msgid "Any service/recording"
-msgstr "N'importe quel service/enregistrement"
-
-msgid "Auto Timers"
-msgstr "Auto Timers"
-
-msgid "AutoTimer"
-msgstr "AutoTimer"
-
-msgid "AutoTimer Editor"
-msgstr "AutoTimer Editeur"
-
-msgid "AutoTimer FAQ"
-msgstr "AutoTimer FAQ"
-
-msgid "AutoTimer Filters"
-msgstr "AutoTimer Filtres"
-
-msgid "AutoTimer Help"
-msgstr "AutoTimer Aide"
-
-msgid "AutoTimer Services"
-msgstr "AutoTimer Services"
-
-msgid "AutoTimer Settings"
-msgstr "AutoTimer Configuration"
-
-msgid "AutoTimer was added successfully"
-msgstr "AutoTimer a été ajouté avec succès"
-
-msgid "AutoTimer was changed successfully"
-msgstr "AutoTimer a été modifié avec succès"
-
-msgid "AutoTimer was removed"
-msgstr "AutoTimer a été enlevé"
-
-msgid "AutoTimers"
-msgstr "Programmations Auto"
-
-msgid "Begin of \"after event\" timespan"
-msgstr "Début de la plage horaire \"après événement\""
-
-msgid "Begin of timespan"
-msgstr "Début de la plage horaire"
-
-msgid "Bouquets"
-msgstr "Bouquets"
-
-msgid ""
-"By enabling this events will not be matched if they don't occur on certain "
-"dates."
-msgstr ""
-"En activant ceci, les événements ne seront pas pris en compte si ils ne se "
-"produisent pas à certaines dates."
-
-msgid ""
-"By enabling this you will be notified about similar timers added during "
-"automated polling. There is no intelligence involved, so it might bother you "
-"about the same conflict over and over."
-msgstr ""
-"En activant ceci, vous serez notifié à propos des événements similaires "
-"ajoutés pendant le sondage automatique. Il n'y a pas d'intelligence "
-"impliquée, donc il peut vous ennuyer constamment avec le même conflit."
-
-msgid ""
-"By enabling this you will be notified about timer conflicts found during "
-"automated polling. There is no intelligence involved, so it might bother you "
-"about the same conflict over and over."
-msgstr ""
-"En activant ceci, vous serez notifié  en cas de conflit pendant le sondage "
-"automatique. Il n'y a pas d'intelligence impliquée, donc il peut vous "
-"ennuyer constamment avec le même conflit."
-
-msgid "Cancel"
-msgstr "Annuler"
-
-msgid "Change default recording offset?"
-msgstr "Changer la marge par défaut des enregistrements?"
-
-msgid "Channel Selection"
-msgstr "Sélection Chaîne"
-
-msgid "Channels"
-msgstr "Chaînes"
-
-msgid "Check for uniqueness in"
-msgstr "Vérfier pour unicité en"
-
-msgid "Choose target folder"
-msgstr "Choisir le répertoire cible"
-
-msgid "Classic"
-msgstr "Classique"
-
-msgid "Close"
-msgstr "Fermer"
-
-msgid "Close and forget changes"
-msgstr "Fermer et oublier les changements"
-
-msgid "Close and save changes"
-msgstr "Fermet et sauvegarder les changements"
-
-msgid "Configure AutoTimer behavior"
-msgstr "Configurer le comportement de AutoTimer"
-
-msgid "Congratulations"
-msgstr "Félicitations"
-
-msgid "Control recording completely by service"
-msgstr "Contrôler complètement les enregistrements par service"
-
-msgid "Create a new AutoTimer."
-msgstr "Créer un nouveau AutoTimer."
-
-msgid "Create a new timer using the classic editor"
-msgstr "Créer un nouveau timer en utilisant l'éditeur classique"
-
-msgid "Create a new timer using the wizard"
-msgstr "Créer un nouveau timer en utilisant l'Assitant"
-
-msgid "Custom (%s)"
-msgstr "Personnaliser (%s)"
-
-msgid "Custom location"
-msgstr "Localisation personnalisée"
-
-msgid "Custom offset"
-msgstr "Marge personnalisée"
-
-msgid ""
-"Defines where to search for duplicates (only title, short description or "
-"even extended description)"
-msgstr ""
-"Définir où rechercher pour les dupliqués (seulement titre, description "
-"courte ou même description étendue)"
-
-msgid "Delete"
-msgstr "Effacer"
-
-msgid "Description"
-msgstr "Description"
-
-msgid "Do you really want to delete %s?"
-msgstr "Voulez-vous vraiment effacer %s?"
-
-msgid "EPG encoding"
-msgstr "Encodage EPG"
-
-msgid "Edit AutoTimer"
-msgstr "Editer AutoTimer"
-
-msgid "Edit AutoTimer filters"
-msgstr "Editer filtres AutoTimer"
-
-msgid "Edit AutoTimer services"
-msgstr "Editer services AutoTimer"
-
-msgid "Edit Timers and scan for new Events"
-msgstr "Editer Timers et scanner pour les nouveaux événements"
-
-msgid "Edit new timer defaults"
-msgstr "Editer les paramètres par défaut des nouveaux timers"
-
-msgid "Edit selected AutoTimer"
-msgstr "Editer AutoTimer sélectionné"
-
-msgid "Editing"
-msgstr "Edition"
-
-msgid "Editor for new AutoTimers"
-msgstr "Editeur pour nouveau AutoTimers"
-
-msgid "Enable Filtering"
-msgstr "Activer filtrage"
-
-msgid "Enable Service Restriction"
-msgstr "Activer les restrictions de service"
-
-msgid ""
-"Enable this to be able to access the AutoTimer Overview from within the "
-"extension menu."
-msgstr ""
-"Activer ceci pour avoir accès à l'aperçu de AutoTimer dans le menu des "
-"extensions."
-
-msgid ""
-"Enable this to be able to access the AutoTimer Overview from within the "
-"plugin browser."
-msgstr ""
-"Activer ceci pour avoir accès à l'aperçu de AutoTimer dans le menu plugin."
-
-msgid "Enabled"
-msgstr "Activé"
-
-msgid ""
-"Encoding the channel uses for it's EPG data. You only need to change this if "
-"you're searching for special characters like the german umlauts."
-msgstr ""
-"Codage utilisé par la chaîne pour ses données EPG. Vous devez uniquement "
-"changer cette option si vous voulez pouvoir utiliser les caractères spéciaux "
-"comme le trémas allemands."
-
-msgid "End of \"after event\" timespan"
-msgstr "Fin de la plage horaire \"après événement\" timespan"
-
-msgid "End of timespan"
-msgstr "Fin de le plage horaire"
-
-msgid "Exact match"
-msgstr "Correspondance parfaite"
-
-msgid "Exclude"
-msgstr "Exclure"
-
-msgid "Execute \"after event\" during timespan"
-msgstr "Executer  \"après événement\" pendant la plage horaire"
-
-msgid "FAQ"
-msgstr "FAQ"
-
-msgid "Filter"
-msgstr "Filtre"
-
-msgid ""
-"Filters are another powerful tool when matching events. An AutoTimer can be "
-"restricted to certain Weekdays or only match an event with a text inside eg "
-"it's Description.\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
-msgstr ""
-"Filtres est un autre outil puissant lors de la recherche d'événement. Un "
-"AutoTimer peut être restreinds à certains jours de la semaine ou seulement "
-"correspondre à un événement avec un texte à l'intérieure par exemple "
-"Description.\n"
-"Appuyez sur BLEU pour ajouter une nouvelle restriction et JAUNE pour enlever "
-"celui qui est sélectionné."
-
-msgid ""
-"First day to match events. No event that begins before this date will be "
-"matched."
-msgstr ""
-"Premier jour correspondance des événements. Aucun événement qui commence "
-"avant cette date ne correspondra."
+"X-Poedit-SourceCharset: iso-8859-15\n"
 
 msgid ""
 "Found a total of %d matching Events.\n"
@@ -320,98 +27,767 @@ msgstr ""
 "%d conflits rencontrés,\n"
 "%d similaires ajoutés."
 
-msgid "Frequently asked questions"
-msgstr "Questions fréquement posées"
+msgid "Couldn't load config file!"
+msgstr "Ne peux charger le fichier config!"
 
-msgid "Frequently asked questions about the AutoTimer"
-msgstr "Questions fréquement posée à propos de Auto Timer"
+msgid "AutoTimer was removed"
+msgstr "ProgAuto a été enlevé"
 
-msgid "Friday"
-msgstr "Vendredi"
+msgid "missing parameter \"id\""
+msgstr "paramètres manquants \"id\""
 
-msgid "Generic setup"
-msgstr "Configuration générique"
+msgid "unable to find timer with id %i"
+msgstr "impossible de trouver une programmation avec id %i"
+
+msgid "autotimers need a match attribute"
+msgstr "progauto ont besoin d'un attribut correspondant"
+
+msgid "AutoTimer was added successfully"
+msgstr "ProgAuto a été ajoutée avec succès"
+
+msgid "AutoTimer was changed successfully"
+msgstr "ProgAuto a été modifiée avec succès"
+
+msgid "config changed."
+msgstr "config changée"
+
+msgid "do nothing"
+msgstr "ne rien faire"
+
+msgid "go to deep standby"
+msgstr "aller en veille profonde"
+
+msgid "go to standby"
+msgstr "aller en veille"
+
+msgid "auto"
+msgstr "auto"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Select a timer to import"
+msgstr "Choisir une programmation à importer"
+
+msgid "Enabled"
+msgstr "Activé"
+
+msgid "disable"
+msgstr "désactive"
+
+msgid "enable"
+msgstr "active"
+
+msgid "Match title: %s"
+msgstr "Correspondance titre: %s"
+
+msgid "Exact match"
+msgstr "Correspondance parfaite"
+
+msgid "Match Timespan: %02d:%02d - %02d:%02d"
+msgstr "Corresponds à la plage horaire: %02d:%02d - %02d:%02d"
+
+msgid "Only on Weekday: %s"
+msgstr "Seulement pendant jour de la semaine: %s"
+
+msgid "Only on Service: %s"
+msgstr "Seulement sur Service: %s"
+
+msgid "After event"
+msgstr "Après l'événement"
+
+msgid "Timer type"
+msgstr "Type de programmation"
+
+msgid "record"
+msgstr "enregistrement"
+
+msgid "zap"
+msgstr "zapper"
+
+msgid "Location"
+msgstr "Emplacement"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Import AutoTimer"
+msgstr "Importer ProgAuto"
+
+msgid "Really close without saving settings?"
+msgstr "Vraiment fermer sans sauvegarder les paramètres?"
+
+msgid ""
+"You entered \"%s\" as Text to match.\n"
+"Do you want to remove trailing whitespaces?"
+msgstr ""
+"Vous avez entré \"%s\" comme texte à égaler.\n"
+"Voulez-vous supprimer les espaces blancs inutiles?"
+
+msgid "Please provide a Text to match"
+msgstr "Merci de fournir un texte à rechercher"
+
+msgid "AutoTimer Settings"
+msgstr "Paramètres ProgAuto"
+
+msgid "Poll automatically"
+msgstr "Interroger automatiquement"
+
+msgid ""
+"Unless this is enabled AutoTimer will NOT automatically look for events "
+"matching your AutoTimers but only when you leave the GUI with the green "
+"button."
+msgstr ""
+"Sauf si cela est permis ProgAuto ne va PAS automatiquement regarder les "
+"événements correspondants à vos ProgAutos mais seulement lorsque vous "
+"quittez l'interface graphique avec le bouton vert."
+
+msgid "Startup delay (in min)"
+msgstr "Délai départ (en min)"
+
+msgid ""
+"This is the delay in minutes that the AutoTimer will wait on initial launch "
+"to not delay enigma2 startup time."
+msgstr ""
+"Ceci est le délai en minutes que la ProgAuto attendra sur le lancement initial "
+"pour ne pas retarder le démarrage de enigma2."
+
+msgid "Poll Interval (in h)"
+msgstr "Interval interrogation (en h)"
+
+msgid ""
+"This is the delay in hours that the AutoTimer will wait after a search to "
+"search the EPG again."
+msgstr ""
+"Ceci est le délai en heures que la ProgAuto  attendra après une recherche "
+"pour rechercher à nouveau le EPG."
+
+msgid "Timeout (in min)"
+msgstr "Temps dépassé (en min)"
+
+msgid "This is the duration in minutes that the AutoTimer is allowed to run."
+msgstr "Ceci est la durée en minutes que la ProgAuto est autorisé à tourner."
+
+msgid "Only add timer for next x days"
+msgstr "Ajouter seulement ProgAutos pour prochains x jours"
+
+msgid ""
+"You can control for how many days in the future timers are added. Set this "
+"to 0 to disable this feature."
+msgstr ""
+"Vous pouvez contrôler combien de jours dans le future les programmations seront "
+"ajoutés. Définissez le à 0 pour désactiver cette fonction."
+
+msgid "Show in extension menu"
+msgstr "Afficher dans le menu extension"
+
+msgid ""
+"Enable this to be able to access the AutoTimer Overview from within the "
+"extension menu."
+msgstr ""
+"Activer ceci pour avoir accès à l'aperçu de ProgAuto dans le menu des "
+"extensions."
+
+msgid "Show in event menu"
+msgstr "Afficher dans menu événement"
+
+msgid ""
+"Enable this to add item for create the AutoTimer into event menu (needs "
+"restart GUI)."
+msgstr ""
+"Activer ceci pour ajouter pour créer la ProgAuto dans le menu événement "
+"Besoin de relancer IGU)."
+
+msgid "Show \"add to AutoTimer\" in channel selection menu"
+msgstr "Afficher  \"ajouer à ProgAuto\" dans menu sélection chaîne"
+
+msgid ""
+"Enable this to be able to access the add to AutoTimer from the channel "
+"selection context menu."
+msgstr ""
+"Activer ceci pour pouvoir accéder à ajouter à ProgAuto depuis le menu "
+"de sélection des chaînes."
+
+msgid "Add \"Choice list AutoTimer\" menu button to single-EPG"
+msgstr "Ajouter bouton menu \"Choix liste ProgAuto\" à EPG-simple"
+
+msgid ""
+"If this is enabled, up on the Menu button in the standard single-EPG will "
+"list of choices for AutoTimer."
+msgstr ""
+"Si ceci est activé, l'appui sur le bouton Menu dans l'EPG-simple standard "
+"affichera la liste des choix pour ProgAuto."
+
+msgid "Add \"Choice list AutoTimer\" menu button to multi-EPG"
+msgstr "Ajouter bouton menu \"Choix liste ProgAuto\" à EPG-multi"
+
+msgid ""
+"If this is enabled, up on the MENU button in the multi-EPG will list of "
+"choices for AutoTimer."
+msgstr ""
+"Si ceci est activé, l'appui sur le bouton Menu dans l'EPG-multi "
+"affichera la liste des choix pour ProgAuto."
+
+msgid "Modify existing timers"
+msgstr "Modifier prog. existante"
+
+msgid "This setting controls the behavior when a timer matches a found event."
+msgstr ""
+"Ce paramètre contrôle le comportement lorsqu'une programmation correspond à un "
+"événement."
 
 msgid "Guess existing timer based on begin/end"
-msgstr "Déviner le timer existant sur base du début/fin"
+msgstr "Deviner la prog existante sur base du début/fin"
 
-msgid "Help"
-msgstr "Aide"
+msgid ""
+"If this is enabled an existing timer will also be considered recording an "
+"event if it records at least 80% of the it."
+msgstr ""
+"Si ceci est activé, une programmation existante sera aussi considérée enregistrant "
+"un événement si elle enregistre au moins 80% de celle-ci."
+
+msgid "Add similar timer on conflict"
+msgstr "Ajouter programmation similaire si conflit"
 
 msgid ""
 "If a timer conflict occurs, AutoTimer will search outside the timespan for a "
 "similar event and add it."
 msgstr ""
-"Si un conflit se produit, AutoTimer recherchera en dehors la plage horaire "
+"Si un conflit se produit, ProgAuto recherchera en dehors la plage horaire "
 "pour un événement similaire et l'ajoutera."
 
+msgid "Add timer as disabled on conflict"
+msgstr "Ajouter programmation désactivée si conflit"
+
 msgid ""
-"If this is selected, the name of the respective AutoTimer will be added as a "
-"tag to timers created by this plugin."
+"This toggles the behavior on timer conflicts. If an AutoTimer matches an "
+"event that conflicts with an existing timer it will not ignore this event "
+"but add it disabled."
 msgstr ""
-"Si ceci est sélectionné, le nom du Auto Timer respectif sera ajouté comme "
-"tag aux timers créés par ce plugin."
+"Ceci bascule le comportement en cas de conflits de programmation. Si une ProgAuto "
+"correspond à un événement qui entre en conflit avec une programmation existante, il ne "
+"va pas ignorer cet événement mais l'ajouter désactivé."
+
+msgid "Include \"AutoTimer\" in tags"
+msgstr "Inclure \"AutoTimer\" comme tags"
 
 msgid ""
 "If this is selected, the tag \"AutoTimer\" will be given to timers created "
 "by this plugin."
 msgstr ""
-"Si ceci est sélectionné, le tag \"AutoTimer\" sera donné aux timers créés "
-"par ce plugin."
-
-msgid "Import AutoTimer"
-msgstr "Importer AutoTimer"
-
-msgid "Import existing Timer"
-msgstr "Importer Timer existant"
-
-msgid "Import from EPG"
-msgstr "Importer de EPG"
-
-msgid "Include"
-msgstr "Inclure"
-
-msgid "Include \"AutoTimer\" in tags"
-msgstr "Inclure \"AutoTimer\" comme tags"
+"Si ceci est sélectionné, le tag \"AutoTimer\" sera donné aux prgrammations créées "
+"par cette extension."
 
 msgid "Include AutoTimer name in tags"
-msgstr "Inclure le nom du AutoTimer comme tags"
+msgstr "Inclure le nom de la ProgAuto comme tags"
 
 msgid ""
-"It's possible to restrict an AutoTimer to certain Services or Bouquets or to "
-"deny specific ones.\n"
-"An Event will only match this AutoTimer if it's on a specific and not denied "
-"Service (inside a Bouquet).\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+"If this is selected, the name of the respective AutoTimer will be added as a "
+"tag to timers created by this plugin."
 msgstr ""
-"Il est possible de restreindre un Auto Timer à certains Services ou Bouquets "
-"ou pour renier un spécifique.\n"
-"Un événément va uniquement correspondre à un AutoTimer si c'est sur un "
-"service spécifique et non dénié (au sein d'un Bouquet).\n"
-"Appuyer sur BLEU pour ajouter une restriction et JAUNE pour en enlever une."
+"Si ceci est sélectionné, le nom de la ProgAuto respective sera ajoutée comme "
+"tag aux programmations créées par cette extension."
+
+msgid "Show notification on conflicts"
+msgstr "Afficher une notification en cas de conflit"
 
 msgid ""
-"Label Timers with season, episode and title, according to the SeriesPlugin "
-"settings."
+"By enabling this you will be notified about timer conflicts found during "
+"automated polling. There is no intelligence involved, so it might bother you "
+"about the same conflict over and over."
 msgstr ""
-"Labelisé les Timers avec saison, épisode et titre, en fonction des "
-"paramètres du SeriesPlugin."
+"En activant ceci, vous serez notifié  en cas de conflit pendant l'interrogation "
+"automatique. Il n'y a pas d'intelligence impliquée, donc il peut vous "
+"ennuyer constamment avec le même conflit."
 
-msgid "Label series"
-msgstr "Label séries"
+msgid "Show notification on similars"
+msgstr "Afficher une notification en cas de similaires"
 
 msgid ""
-"Last day to match events. Events have to begin before this date to be "
-"matched."
+"By enabling this you will be notified about similar timers added during "
+"automated polling. There is no intelligence involved, so it might bother you "
+"about the same conflict over and over."
 msgstr ""
-"Dernier jour pour prendre en compte les événements. Les événements doivent "
-"commencer avant cette date pour être pris en compte."
+"En activant ceci, vous serez notifié à propos des événements similaires "
+"ajoutés pendant l'interrogation automatique. Il n'y a pas d'intelligence "
+"impliquée, donc il peut vous ennuyer constamment avec le même conflit."
 
-msgid "Location"
-msgstr "Localisation"
+msgid "Show notification on added timers"
+msgstr "Montrer message pour programmations ajoutées"
 
-msgid "Lower bound of timespan."
-msgstr "Limite inférieur du laps de temps."
+msgid ""
+"By enabling this you will be notified about timer(s) added during automated "
+"polling. Just not in standby mode."
+msgstr ""
+"En activant ceci vous serez avertis à propos de programmation(s)ajoutée(s) "
+"pendant interrogatiosn auto. Sauf en mode veille."
+
+msgid "Editor for new AutoTimers"
+msgstr "Editeur pour nouvelles ProgAutos"
+
+msgid ""
+"The editor to be used for new AutoTimers. This can either be the Wizard or "
+"the classic editor."
+msgstr ""
+"L'éditeur peut être utilisé pour des nouvelles ProgAutos. Ceci peut être soit "
+"l'Assistant soit l'éditeur classique."
+
+msgid "Support \"Fast Scan\"?"
+msgstr "Supporter \"Analyse rapide\"?"
+
+msgid ""
+"When supporting \"Fast Scan\" the service type is ignored. You don't need to "
+"enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr ""
+"Si \"Analyse rapide\" est supporté, le type de service est ignoré. Inutile "
+"d'activer si votre image ne supporte pas \"Balayage rapide\" et que vous l'utilisiez."
+
+msgid "Skip poll during records"
+msgstr "Sauter interrogations pendant enregistrements"
+
+msgid "If enabled, the polling will be skipped if a recording is in progress."
+msgstr "Si activé, les interrogations seront sautées si un enregistrement est en cours"
+
+msgid "Only poll while in standby"
+msgstr "Interroger seulement pendant la veille"
+
+msgid ""
+"When this is enabled AutoTimer will ONLY check for new events whilst in "
+"stanadby."
+msgstr ""
+"Quand ceci est activé, ProgAuto vérifiera SEULEMENT les nouveaux événements pendant "
+"la veille."
+
+msgid "Style auto timers list"
+msgstr "Style liste programmations auto"
+
+msgid ""
+"If the style is advanced, you will see more information about each auto "
+"timer."
+msgstr ""
+"Si le style est avancé, vous verrez plus d'informations à propos "
+"des programmations auto."
+
+msgid "Skip poll during epg refresh"
+msgstr "Sauter interrogations pendant rafraîchissement epg"
+
+msgid ""
+"If enabled, the polling will be skipped if EPGRefresh is currently running."
+msgstr ""
+"Si activé, les interrogration seront sautées si le rafraîchissement EPG est en cours."
+
+msgid "Configure AutoTimer behavior"
+msgstr "Configurer comportement ProgAuto"
+
+msgid "mins"
+msgstr "mins"
+
+msgid "Preview AutoTimer"
+msgstr "Prévisualiser ProgAuto"
+
+msgid "Sort Time"
+msgstr "Trier par heure"
+
+msgid "Sort AutoTimer"
+msgstr "Trier ProgAuto"
+
+msgid "None"
+msgstr "aucun"
+
+msgid "Only AutoTimers created during this session"
+msgstr "seulement les ProgAutos créées pendant cette session"
+
+msgid "All non-repeating timers"
+msgstr "toutes les programmations non-répétitives"
+
+msgid "Classic"
+msgstr "classique"
+
+msgid "Wizard"
+msgstr "assistant"
+
+msgid "Standard"
+msgstr "standard"
+
+msgid "Advanced"
+msgstr "avancé"
+
+msgid "Open standard setup menu"
+msgstr "Ouvrir menu paramètre standard"
+
+msgid "Add new AutoTimer"
+msgstr "Ajouter nouvelle ProgAuto"
+
+msgid "Preview for your AutoTimers"
+msgstr "Prévisualisation pour vos ProgAutos"
+
+msgid "Search new events matching for your AutoTimers"
+msgstr "Recherches nouveaux événements correspondant pour vos ProgAutos"
+
+msgid "Timers list"
+msgstr "Listes programmations"
+
+msgid "Select action for AutoTimer:"
+msgstr "Sélectionner action AutoTimer:"
+
+msgid "Choice list AutoTimer"
+msgstr "Liste choix ProgAuto"
+
+msgid "Open plugin"
+msgstr "Ouvrir extension"
+
+msgid "Standard input date/time"
+msgstr "Entrer date/heure standard"
+
+msgid "Select action for AutoTimer or input date/time:"
+msgstr "Sélectionner action ProgAuto ou entrer date/heure:"
+
+msgid "create AutoTimer for current event"
+msgstr "créer ProgAuto pour événement actuel"
+
+msgid ""
+"Your config file is not well-formed:\n"
+"%s"
+msgstr ""
+"Votre fichier de configuration n'est pas bien formé:\n"
+"%s"
+
+msgid "AutoTimer"
+msgstr "ProgAuto"
+
+msgid "Edit Timers and scan for new Events"
+msgstr "Editer Timers et scanner pour les nouveaux événements"
+
+msgid "Add AutoTimer"
+msgstr "Ajouter ProgAuto"
+
+msgid "add AutoTimer"
+msgstr "ajouter progAuto"
+
+msgid "add AutoTimer..."
+msgstr "ajout ProgAuto..."
+
+msgid "Create AutoTimer"
+msgstr "Créer ProgAuto"
+
+msgid ""
+"%d conflict(s) encountered when trying to add new timers:\n"
+"%s"
+msgstr ""
+"%d conflit(s) rencontrés en essayant d'ajouter de nouveaux timers:\n"
+"%s"
+
+msgid "%s: %s at %s"
+msgstr "%s: %s à %s"
+
+msgid ""
+"%d conflict(s) solved with similar timer(s):\n"
+"%s"
+msgstr ""
+"%d conflit(s) résolu(s) avec des timer(s) similaire(s):\n"
+"%s"
+
+msgid ""
+"AutoTimer\n"
+"%d timer(s) were added."
+msgstr ""
+"ProgAuto\n"
+"%d programmation(s) ajoutée(s)."
+
+msgid "All channels"
+msgstr "Toutes chaînes"
+
+msgid "Mon"
+msgstr "Lun"
+
+msgid "Tue"
+msgstr "Mar"
+
+msgid "Wed"
+msgstr "Mer"
+
+msgid "Thur"
+msgstr "Jeu"
+
+msgid "Fri"
+msgstr "Ven"
+
+msgid "Sat"
+msgstr "Sam"
+
+msgid "Sun"
+msgstr "Dim"
+
+msgid "Weekend"
+msgstr "Weekend"
+
+msgid "Weekday"
+msgstr "Jour semaine"
+
+msgid "Everyday"
+msgstr "Tous les jours"
+
+msgid "Any time"
+msgstr "Toute heure"
+
+msgid "Only match during timespan"
+msgstr "Correspond seulement pendant plage horaire"
+
+msgid "Begin of timespan"
+msgstr "Début de plage horaire"
+
+msgid "End of timespan"
+msgstr "Fin de plage horaire"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Match title"
+msgstr "Titre correspondant"
+
+msgid "Save and search now"
+msgstr "Sauver et rechercher maintenant"
+
+msgid "Delete"
+msgstr "Effacer"
+
+msgid "Add"
+msgstr "Ajouter"
+
+msgid "Edit selected AutoTimer"
+msgstr "Editer ProgAuto sélectionnée"
+
+msgid "Close and forget changes"
+msgstr "Fermer et oublier les changements"
+
+msgid "Open Context Menu"
+msgstr "Ouvrir le menu contextuel"
+
+msgid "Open Timers list"
+msgstr "Ouvrir liste programmations"
+
+msgid "Close, save changes and search now"
+msgstr "Fermer, sauver changements et chercher maintenant"
+
+msgid "Remove selected AutoTimer"
+msgstr "Retirer ProgAuto sélectionnée"
+
+msgid "AutoTimer overview"
+msgstr "Vue d'ensemble ProgAuto"
+
+msgid "Do you really want to delete %s?"
+msgstr "Voulez-vous réellement effacer %s?"
+
+msgid "Preview"
+msgstr "Prévisualiser"
+
+msgid "Import existing Timer"
+msgstr "Importer programmation existante"
+
+msgid "Import from EPG"
+msgstr "Importer depuis EPG"
+
+msgid "Setup"
+msgstr "Configuration"
+
+msgid "Edit new timer defaults"
+msgstr "Editer paramètres standards nouvelles programmations"
+
+msgid "Create a new timer using the classic editor"
+msgstr "Créer nouvelle programmation avec l'éditeur classique"
+
+msgid "Create a new timer using the wizard"
+msgstr "Créer nouvelle programmation avec l'assistant"
+
+msgid "Help"
+msgstr "Aide"
+
+msgid "Frequently asked questions"
+msgstr "Questions fréquement posées"
+
+msgid "AutoTimer Context Menu"
+msgstr "ProgAuto menu contextuel"
+
+msgid "Monday"
+msgstr "Lundi"
+
+msgid "Tuesday"
+msgstr "Mardi"
+
+msgid "Wednesday"
+msgstr "Mercredi"
+
+msgid "Thursday"
+msgstr "Jeudi"
+
+msgid "Friday"
+msgstr "Vendredi"
+
+msgid "Saturday"
+msgstr "Samedi"
+
+msgid "Sunday"
+msgstr "Dimanche"
+
+msgid "Channel Selection"
+msgstr "Sélection Chaîne"
+
+msgid " add AutoTimer"
+msgstr " ajouter ProgAuto"
+
+msgid "partial match"
+msgstr "correspondance partielle"
+
+msgid "exact match"
+msgstr "correspondance parfaite"
+
+msgid "title starts with"
+msgstr "titre commence avec"
+
+msgid "description match"
+msgstr "la description correspond"
+
+msgid "case-sensitive search"
+msgstr "recherche sensible à la casse"
+
+msgid "case-insensitive search"
+msgstr "recherche non sensible à la casse"
+
+msgid "%d.%B %Y"
+msgstr "%d.%B %Y"
+
+msgid "standard"
+msgstr "standard"
+
+msgid "Never"
+msgstr "Jamais"
+
+msgid "Monthly"
+msgstr "Mensuellement"
+
+msgid "Weekly (Sunday)"
+msgstr "Hebdomadaire (Dimanche)"
+
+msgid "Weekly (Monday)"
+msgstr "Hebdomadaire (Lundi)"
+
+msgid "Custom (%s)"
+msgstr "Personnaliser (%s)"
+
+msgid "No"
+msgstr "Non"
+
+msgid "On same service"
+msgstr "Sur le même service"
+
+msgid "On any service"
+msgstr "Sur n'importe quel service"
+
+msgid "Any service/recording"
+msgstr "N'importe quel service/enregistrement"
+
+msgid "Title"
+msgstr "Titre"
+
+msgid "Title and Short description"
+msgstr "Titre et description courte"
+
+msgid "Title and all descriptions"
+msgstr "Titre et toutes les descriptions"
+
+msgid "unknown"
+msgstr "inconnu"
+
+msgid "Choose target folder"
+msgstr "Choisir le répertoire cible"
+
+msgid "AutoTimer Editor"
+msgstr "Editeur ProgAuto"
+
+msgid "Edit AutoTimer"
+msgstr "Editer ProgAuto"
+
+msgid "Edit filters"
+msgstr "Editer filtres"
+
+msgid "Add filters"
+msgstr "Ajouter filtres"
+
+msgid "enabled"
+msgstr "activé"
+
+msgid "disabled"
+msgstr "désactivé"
+
+msgid "Edit services"
+msgstr "Editer services"
+
+msgid "Add services"
+msgstr "Ajouter services"
+
+msgid "Set this NO to disable this AutoTimer."
+msgstr "Définir ceci à Non pour désactiver cette ProgAuto."
+
+msgid ""
+"This is a name you can give the AutoTimer. It will be shown in the Overview "
+"and the Preview."
+msgstr ""
+"Ceci est un nom qui peut être donné à la ProgAuto. Il sera visible dans "
+"l'aperçu et dans la prévisualisation."
+
+msgid ""
+"This is what will be looked for in event titles. Note that looking for e.g. "
+"german umlauts can be tricky as you have to know the encoding the channel "
+"uses."
+msgstr ""
+"Voilà ce qui sera recherchée dans les titres d'événements. On notera que par "
+"exemple la recherche de trémas allemands peuvent être difficile car vous "
+"devez connaître le codage que le canal utilise."
+
+msgid ""
+"Encoding the channel uses for it's EPG data. You only need to change this if "
+"you're searching for special characters like the german umlauts."
+msgstr ""
+"Codage utilisé par la chaîne pour ses données EPG. Vous devez uniquement "
+"changer cette option si vous voulez pouvoir utiliser les caractères spéciaux "
+"comme le trémas allemands."
+
+msgid ""
+"Select \"exact match\" to enforce \"Match title\" to match exactly, "
+"\"partial match\" if you only want to search for a part of the event title "
+"or \"description match\" if you only want to search for a part of the event "
+"description"
+msgstr ""
+"Choisir \"correspondance parfaite\" pour forcer \"correspondre à titre\" pour une "
+"correspondance exacte, \"correspondance partielle\" pour chercher une "
+"partie du titre \"correspondre description\" si vous voulez chercher une "
+"partie de la description de l'événement"
+
+msgid "Select whether or not you want to enforce case correctness."
+msgstr "Choisir si vous voulez respecter la casse ou pas."
+
+msgid "Add zap timer instead of record timer?"
+msgstr "Ajouter prog. zap au lieu prog. d'enregistrement?"
+
+msgid ""
+"Set an end time for the timer. If you do, the timespan of the event might be "
+"blocked for recordings."
+msgstr ""
+"Définir une heure de fin pour le timer. Si vous le faites, la plage horaire "
+"de l'événement pourrait bloquer les enregistrements."
+
+msgid ""
+"With this option enabled the channel to record on can be changed to a "
+"alternative service it is restricted to."
+msgstr ""
+"Avec cette option activée le canal à enregistrer peut être changé à "
+"un service de remplacement auquel il est limité."
+
+msgid "Should this AutoTimer be restricted to a timespan?"
+msgstr "Est-ce que cette ProgAuto doit être restreinte à une plage horaire?"
 
 msgid ""
 "Lower bound of timespan. Nothing before this time will be matched. Offsets "
@@ -420,17 +796,46 @@ msgstr ""
 "Limite inférieur du laps de temps. Aucune correspondance avant cette date ne "
 "sera prise en compte. Les marges ne sont pas prises en compte!"
 
-msgid "Match Timespan: %02d:%02d - %02d:%02d"
-msgstr "Corresponds à la plage horaire: %02d:%02d - %02d:%02d"
+msgid ""
+"Upper bound of timespan. Nothing after this time will be matched. Offsets "
+"are not taken into account!"
+msgstr ""
+"Limite supérieure du laps de temps. Rien après ce temps ne correspondra. Les "
+"décalages ne sont pas pris en compte!"
 
-msgid "Match title"
-msgstr "Correspondance Titre"
+msgid ""
+"By enabling this events will not be matched if they don't occur on certain "
+"dates."
+msgstr ""
+"En activant ceci, les événements ne seront pas pris en compte si ils ne se "
+"produisent pas à certaines dates."
 
-msgid "Match title: %s"
-msgstr "Correspondance titre: %s"
+msgid ""
+"First day to match events. No event that begins before this date will be "
+"matched."
+msgstr ""
+"Premier jour correspondance des événements. Aucun événement qui commence "
+"avant cette date ne correspondra."
 
-msgid "Maximum duration (in m)"
-msgstr "Durée Maximum (en m)"
+msgid ""
+"Last day to match events. Events have to begin before this date to be "
+"matched."
+msgstr ""
+"Dernier jour pour prendre en compte les événements. Les événements doivent "
+"commencer avant cette date pour être pris en compte."
+
+msgid "Change default recording offset?"
+msgstr "Changer la marge par défaut des enregistrements?"
+
+msgid "Time in minutes to prepend to recording."
+msgstr "Temps en minute à ajouter avant l'enregistrement."
+
+msgid "Time in minutes to append to recording."
+msgstr "Temps en minutes à ajouter aux enregistrements."
+
+msgid "Should this AutoTimer only match up to a certain event duration?"
+msgstr ""
+"Est-ce que cette ProgAuto doit uniquement correspondre à une durée précise?"
 
 msgid ""
 "Maximum event duration to match. If an event is longer than this amount of "
@@ -438,84 +843,6 @@ msgid ""
 msgstr ""
 "Durée maximum de l'événement qui correspond. Si un événement est plus long "
 "que cette durée (sans les marges) il ne correspondra pas."
-
-msgid "Modify existing timers"
-msgstr "Modifier un timer existant"
-
-msgid "Monday"
-msgstr "Lundi"
-
-msgid "Monthly"
-msgstr "Mensuellement"
-
-msgid "Never"
-msgstr "Jamais"
-
-msgid "New"
-msgstr "Nouveau"
-
-msgid "No"
-msgstr "Non"
-
-msgid "No, remove them."
-msgstr "Non, les enlever."
-
-msgid "None"
-msgstr "Aucun"
-
-msgid "Not after"
-msgstr "Pas après"
-
-msgid "Not before"
-msgstr "Pas avant"
-
-msgid "Number of scheduled recordings left."
-msgstr "Nombre d'enregistrements planifiés restants."
-
-msgid "OK"
-msgstr "OK"
-
-msgid "Offset after recording (in m)"
-msgstr "Marge après enregistrement (en m)"
-
-msgid "Offset before recording (in m)"
-msgstr "Marge avant enregistrement (en m)"
-
-msgid "On any service"
-msgstr "Sur n'importe quel service"
-
-msgid "On same service"
-msgstr "Sur le même service"
-
-msgid "Only AutoTimers created during this session"
-msgstr "Seulement les Auto Timers créés pendant cette session"
-
-msgid "Only add timer for next x days"
-msgstr "Seulement ajouter des timers pour les prochains x jours"
-
-msgid "Only match during timespan"
-msgstr "Correspond seulement pendant la plage horaire"
-
-msgid "Only on Service: %s"
-msgstr "Seulement sur Service: %s"
-
-msgid "Only on Weekday: %s"
-msgstr "Seulement pendant jour de la semaine: %s"
-
-msgid "Only poll while in standby"
-msgstr "Seulement sonder en veille"
-
-msgid "Open Context Menu"
-msgstr "Ouvrir le Menu Contextuel"
-
-msgid "Please provide a Text to match"
-msgstr "Merci de fournir un texte a recheché"
-
-msgid "Poll Interval (in mins)"
-msgstr "Interval du sondage (en mins)"
-
-msgid "Poll automatically"
-msgstr "Sondage automatique"
 
 msgid ""
 "Power state to change to after recordings. Select \"standard\" to not change "
@@ -525,203 +852,263 @@ msgstr ""
 "\"standard\" pour ne pas changer le comportement par défaut d'Enigma2 ou la "
 "valeur changée par vous."
 
-msgid "Preview AutoTimer"
-msgstr "Prévisualiser AutoTimer"
-
-msgid ""
-"Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: "
-"First try the AutoTimer version in a recent (experimental) Image to see if "
-"the problem was fixed. Then read the Help again and the upcoming FAQs to "
-"make sure that this is actually a problem and not expected behavior./nIf you "
-"still think there is something wrong with the AutoTimer, please visit http://"
-"www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The "
-"plugin only adds timers when leaving the configuration, not automatically. "
-"What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In "
-"this screen enable 'Poll automatically' and you should be good to go."
-msgstr ""
-"Question: J'ai trouvé un problème avec AutoTimer?/nRéponse: Essayer d'abord "
-"une version récentre de AutoTimer dans une image récente (expérimentale) "
-"pour voir si le problème est résolu. Ensuite lire à nouveau l'aider et les "
-"FAQs pour voir si c'est un vrai problème ou un comportement normal./nSi vous "
-"pensez que AutoTimer a un vrai problème , merci de visiter http://www.dream-"
-"multimedia-tv.de/board et poster votre problème là./n/nQ: Le plugin ajoute "
-"seulement les timers en quittant la configuration, pas automatiquement. Que "
-"puis-je faire?/nR: Dans l'aperçu appuyez sur MENU et entrer dans "
-"'Configuration'.Dans cet écran activez 'Sondage automatique' et cela devrai "
-"fonctionner."
-
-msgid ""
-"Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: "
-"Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: "
-"The show I'm trying to record contains umlauts in its title. AutoTimer does "
-"not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For "
-"german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to "
-"record two subsequent events. There is only a single timer created that "
-"spans (part of) both events./nA: From the Overview press MENU and enter the "
-"'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
-msgstr ""
-"Question: Mon AutoTimer pour 'News' n'enregistre pas les 'Late News'./"
-"nRéponse: Vérfifier 'Type de recherche' et 'Recherche stricte' pour cet "
-"AutoTimer./n/nQ: L'émission que j'essaye d'enregistrer contient un caractère "
-"spécial dans son titre. AutoTimer ne le trouve pas./nA: Vérifier le "
-"'Encodage EPG' pour cet AutoTimer. Pour l'allemand 'UTF-8' doit être "
-"sélectionné./n/nQ:Il semble impossible d'enregistrer 2 événements qui se "
-"suivent. Il y a uniquement 1 timer de créé qui s'étends (en partie) sur les "
-"deux événements./nA:De l'aperçu appuyer sur MENU et entrer dans "
-"'Configuration'. Dans cet écran désactivé 'Devinez minuterie existante basée "
-"sur début/fin'."
-
-msgid ""
-"Question: You keep talking about help being provided for each parameter. I'm "
-"unable to read it (in part or in full)./nAnswer: Try using the default skin "
-"and if it works ask the creator of your regular skin. If it still does not "
-"work your image might not provide the actual default skin so contact the "
-"creator of your image."
-msgstr ""
-"Question: Vous parlez que l'aide est fournie pour chaque paramètre. Mais je "
-"n'arrive pas la lire (en partie ou en entier)./nRéponse: Essayez avec le "
-"thème par défaut et si cela fonctionne démandez au créateur de votre théme "
-"de corriger. Si cela ne fonctionne toujours pas contactez votre fournisseur "
-"d'image."
-
-msgid "Really close without saving settings?"
-msgstr "Vraiment fermer sans sauvegarder les paramètres?"
-
-msgid "Record a maximum of x times"
-msgstr "Enregistrer un maximum de x fois"
-
-msgid "Record on"
-msgstr "Enregistrer sur"
-
-msgid "Remove selected AutoTimer"
-msgstr "Enlever les AutoTimers sélectionnés"
-
-msgid "Require description to be unique"
-msgstr "La description doit être unique"
-
-msgid "Reset count"
-msgstr "Remise à zéro des compteurs"
-
 msgid "Restrict \"after event\" to a certain timespan?"
 msgstr "Restreindre \"après événement\" à un certain laps de temps?"
 
-msgid "Restrict to events on certain dates"
-msgstr "Restreindre les événements à certaines dates"
+msgid "Lower bound of timespan."
+msgstr "Limite inférieur du laps de temps."
 
-msgid "Saturday"
-msgstr "Dimanche"
-
-msgid "Save"
-msgstr "Sauvegarder"
-
-msgid "Search strictness"
-msgstr "Recherche stricte"
-
-msgid "Search type"
-msgstr "Type de recherche"
+msgid "Upper bound of timespan."
+msgstr "Limite supérieure du laps de temps."
 
 msgid ""
-"Select \"exact match\" to enforce \"Match title\" to match exactly, "
-"\"partial match\" if you only want to search for a part of the event title "
-"or \"description match\" if you only want to search for a part of the event "
-"description"
+"With this option you can restrict the AutoTimer to a certain amount of "
+"scheduled recordings. Set this to 0 to disable this functionality."
 msgstr ""
-"Chosir \"correspondance parfaite\" pour forcer \"correspondre titre\" pour "
-"corresponder exactement, \"correspondance partielle\" pour chercher une "
-"partie du titre  \"correspondre description\" si vous voulez chercher une "
-"partie de la description de l'événement"
+"Avec cette option vous pouvez limiter la ProgAuto à une certaine quantité d'"
+"enregistrements programmés. Réglez à 0 pour désactiver cette fonctionnalité."
 
-msgid "Select a timer to import"
-msgstr "Chosir un time à importer"
-
-msgid "Select bouquet to record on"
-msgstr "Choisir un bouquet à enregistrer"
-
-msgid "Select channel to record on"
-msgstr "Choisir une chaîne à enregistrer"
-
-msgid "Select the location to save the recording to."
-msgstr "Choisir la localisation où sauvegader les enregistrements."
-
-msgid "Select type of Filter"
-msgstr "Choisir le type de filtre"
-
-msgid "Select whether or not you want to enforce case correctness."
-msgstr "Choisir si vous voulez respecter la case ou pas."
-
-msgid "Set End Time"
-msgstr "Définir heure de fin"
+msgid "Number of scheduled recordings left."
+msgstr "Nombre d'enregistrements planifiés restants."
 
 msgid ""
-"Set an end time for the timer. If you do, the timespan of the event might be "
-"blocked for recordings."
+"The counter can automatically be reset to the limit at certain intervals."
 msgstr ""
-"Définir une heure de fin pour le timer. Si vous le faites, la plage horaire "
-"de l'événement pourrait bloquer les enregistrements."
+"Le compteur peut automatiquement être remis à la limite à certains intervals."
 
-msgid "Set maximum duration"
-msgstr "Définir la durée maximale"
-
-msgid "Set this NO to disable this AutoTimer."
-msgstr "Définir ceci à Non pour désactiver cet AutoTimer."
-
-msgid "Setup"
-msgstr "Configuration"
-
-msgid "Should this AutoTimer be restricted to a timespan?"
-msgstr "Est-ce que cet AutoTimer doit être restreinds à une plage horaire?"
-
-msgid "Should this AutoTimer only match up to a certain event duration?"
+msgid ""
+"When this option is enabled the AutoTimer won't match events where another "
+"timer with the same description already exists in the timer list."
 msgstr ""
-"Est-ce que cet AutoTimer doit uniquement correspondre à une durée précise?"
+"Lorsque cette option est activée, la ProgAuto ne correspondra pas à des événements "
+"où une autre programmation avec la même description existe déjà dans la liste."
+
+msgid ""
+"Defines where to search for duplicates (only title, short description or "
+"even extended description)"
+msgstr ""
+"Définir où rechercher pour les dupliqués (seulement titre, description "
+"courte ou même description étendue)"
 
 msgid ""
 "Should timers created by this AutoTimer be recorded to a custom location?"
 msgstr ""
-"Est-ce que les timers créer par AutoTimer doivent être enregistrée à un "
-"endroit personnalisé?"
+"Est-ce que les programmations créée par ProgAuto doivent être enregistrées à un "
+"emplacement personnalisé?"
 
-msgid "Show in extension menu"
-msgstr "Afficher dans le menu extension"
-
-msgid "Show in plugin browser"
-msgstr "Afficher dans le plugin browser"
-
-msgid "Show notification on conflicts"
-msgstr "Afficher une notification en cas de conflit"
-
-msgid "Show notification on similars"
-msgstr "Afficher une notification en cas de similaires"
-
-msgid "Sort AutoTimer"
-msgstr "Trier AutoTimer"
-
-msgid "Sort Time"
-msgstr "Trier par heure"
-
-msgid "Sunday"
-msgstr "Dimanche"
-
-msgid "Support \"Fast Scan\"?"
-msgstr "Supporter \"Fast Scan\"?"
-
-msgid "Tags"
-msgstr "Tags"
+msgid "Select the location to save the recording to."
+msgstr "Choisir l'emplacement de sauvegarde des enregistrements."
 
 msgid "Tags the Timer/Recording will have."
-msgstr "Tags que le Timer/Enregistrement aura"
+msgstr "Tags que la Programmation/Enregistrement aura."
 
 msgid ""
-"Thank you for using the wizard. Your new AutoTimer has been added to the "
-"List.\n"
-"Please press OK to continue."
+"Label Timers with season, episode and title, according to the SeriesPlugin "
+"settings."
 msgstr ""
-"Merci d'avoir utiliser l'Assitant. Votre nouveau AutoTimer a été ajouré dans "
-"la liste.\n"
-"Appuyez sur OK pour continuer."
+"Labelisé les Programmations avec saison, épisode et titre, en fonction des "
+"paramètres de l'extension Séries."
+
+msgid "Use blue key to edit bouquets or services."
+msgstr "Utiliser touche bleue pour éditer bouquets ou services."
+
+msgid "Use yellow key to edit filters."
+msgstr "Utiliser touche jaune pour éditer les filtres."
+
+msgid "EPG encoding"
+msgstr "Encodage EPG"
+
+msgid "Search type"
+msgstr "Type de recherche"
+
+msgid "Search strictness"
+msgstr "Recherche stricte"
+
+msgid "Set End Time"
+msgstr "Définir heure de fin"
+
+msgid "Override found with alternative service"
+msgstr "Override trouvé avec service de remplacement"
+
+msgid "Restrict to events on certain dates"
+msgstr "Restreindre les événements à certaines dates"
+
+msgid "Not before"
+msgstr "Pas avant"
+
+msgid "Not after"
+msgstr "Pas après"
+
+msgid "Custom offset"
+msgstr "Marge personnalisée"
+
+msgid "Offset before recording (in m)"
+msgstr "Marge avant enregistrement (en min)"
+
+msgid "Offset after recording (in m)"
+msgstr "Marge après enregistrement (en min)"
+
+msgid "Set maximum duration"
+msgstr "Définir la durée maximale"
+
+msgid "Maximum duration (in m)"
+msgstr "Durée Maximum (en min)"
+
+msgid "Execute \"after event\" during timespan"
+msgstr "Exécuter \"après événement\" pendant plage horaire"
+
+msgid "Begin of \"after event\" timespan"
+msgstr "Début de la plage horaire \"après événement\""
+
+msgid "End of \"after event\" timespan"
+msgstr "Fin de la plage horaire \"après événement\" timespan"
+
+msgid "Record a maximum of x times"
+msgstr "Enregistrer un maximum de x fois"
+
+msgid "Amount of recordings left"
+msgstr "Nombre d'enregistrement restant"
+
+msgid "Reset count"
+msgstr "Remise à zéro compteurs"
+
+msgid "Require description to be unique"
+msgstr "La description doit être unique"
+
+msgid "Check for uniqueness in"
+msgstr "Vérifier unicité dans"
+
+msgid "Use a custom location"
+msgstr "Utiliser un emplacement personnalisé"
+
+msgid "Custom location"
+msgstr "Emplacement personnalisé"
+
+msgid "Activate VPS"
+msgstr "Activater VPS"
+
+msgid "Control recording completely by service"
+msgstr "Contrôler complètement les enregistrements par service"
+
+msgid "Label series"
+msgstr "Label séries"
+
+msgid "Restriction to certain services (edit in services menu)"
+msgstr "Restreindre à certains services (édition dans menu services)"
+
+msgid "Restriction to certain bouquets (edit in services menu)"
+msgstr "Restreindre à certains bouquets (édition dans menu services)"
+
+msgid "Restriction to certain days of week (edit in filter menu)"
+msgstr "Restreindre à certains jours de semaine (édition dans menu filtre)"
+
+msgid "Other filters (edit in filter menu)"
+msgstr "Autres filtres (édition dans menu filtre)"
+
+msgid "Enter or edit description"
+msgstr "Entrer ou éditer description"
+
+msgid "Enter or edit match title"
+msgstr "Entrer ou éditer titre correspondant"
+
+msgid "The match attribute is mandatory."
+msgstr "L'attribut de correspondance est obligatoire."
+
+msgid "AutoTimer Filters"
+msgstr "Filtres ProgAuto"
+
+msgid "in Title"
+msgstr "dans titre"
+
+msgid "in Shortdescription"
+msgstr "dans description courte"
+
+msgid "in Description"
+msgstr "dans description"
+
+msgid "on Weekday"
+msgstr "pendant jours de semaine"
+
+msgid "Save"
+msgstr "Sauver"
+
+msgid "delete"
+msgstr "effacer"
+
+msgid "New"
+msgstr "Nouveau"
+
+msgid "Edit AutoTimer filters"
+msgstr "Editer filtres AutoTimer"
+
+msgid "Enable Filtering"
+msgstr "Activer filtrage"
+
+msgid "Filter"
+msgstr "Filtre"
+
+msgid "Exclude"
+msgstr "Exclure"
+
+msgid "Include"
+msgstr "Inclure"
+
+msgid "Select type of Filter"
+msgstr "Choisir le type de filtre"
+
+msgid "Enter or edit text"
+msgstr "Entrer ou éditer text"
+
+msgid "AutoTimer Services"
+msgstr "Services ProgAuto"
+
+msgid "Channels"
+msgstr "chaînes"
+
+msgid "Bouquets"
+msgstr "bouquets"
+
+msgid "Edit AutoTimer services"
+msgstr "Editer services AutoTimer"
+
+msgid "Enable Service Restriction"
+msgstr "Activer les restrictions de service"
+
+msgid "Editing"
+msgstr "Edition"
+
+msgid "Record on"
+msgstr "Enregistrer sur"
+
+msgid "Select channel to record on"
+msgstr "Choisir une chaîne à enregistrer"
+
+msgid "Select bouquet to record on"
+msgstr "Choisir un bouquet à enregistrer"
+
+#messages MHelp
+
+msgid "Welcome to the AutoTimer-Plugin"
+msgstr "Bienvenue dans le l'extension ProgAuto"
+
+msgid ""
+"This help screen is supposed to give you a quick look at everything the "
+"AutoTimer has to offer./nYou can abort it at any time by pressing the RED or "
+"EXIT button on your remote control or bring it up at a later point by "
+"selecting it from the control menu using the MENU button from the regular "
+"entry point of the plugin (more on that later)./n/n/nBut you really should "
+"consider to take the few minutes it takes to read these help pages."
+msgstr ""
+"Cet écran d'aide est sensé vous donner un aperçu rapide de toutes les "
+"possiblités de ProgAuto. /nVous pouvez l'interrompre à tout moment en "
+"appuyant sur le bouton ROUGE ou EXIT de votre télécommande ou l'amener à un "
+"point suivant en le sélectionnant à partir du menu de commande en "
+"utilisant le bouton MENU à partir du point d'entrée courant de l'extension (nous "
+"dessus plus tard) ./n/n/nMais vous devriez vraiment envisager de prendre "
+"les quelques minutes qu'il faut pour lire ces pages d'aide."
 
 msgid "The 'Overview'"
-msgstr "L  'Aperçu'"
+msgstr "L'Aperçu'"
 
 msgid ""
 "The AutoTimer overview is the standard entry point to this plugin./n/nIf "
@@ -733,31 +1120,18 @@ msgid ""
 "regular search interval of the plugin to search for events open the control "
 "menu and enter the plugin setup."
 msgstr ""
-"L'AutoTimer aperçu est la vue standard est le point d'entrée de ce plugin./n/"
-"nSi des AutoTimers sont configurés vous pouvez les choisir dans une liste "
+"L'aperçu ProgAuto est la vue standard du point d'entrée de cette extension./n/"
+"nSi des ProgAutos sont configurées vous pouvez les choisir dans une liste "
 "pour les modifier (touche OK de votre télécommande) ou les enlever (bouton "
 "JAUNE).\n"
-"Nouveau Timers peuvent être ajouté en pressant le bouton BLEU et le menu "
-"contrôle peut être ouvert en utilisant le bouton MENU./n/nEn quitant le "
-"plugin avec la touche VERTE il cherchera pour les événements dans l'EPG. "
-"Pour configurer un interval de recherche régulier du plugin pour rechercher "
-"un événement ouvrir le menu contrôle et entrez la configuration du plugin."
+"Nouvelles programmations peuvent être ajoutées en pressant le bouton BLEU et le menu "
+"contrôle peut être ouvert en utilisant le bouton MENU./n/nEn quittant l'extension "
+"avec la touche VERTE elle cherchera pour les événements dans l'EPG. "
+"Pour configurer un interval de recherche régulier de l'extension pour rechercher "
+"un événement ouvrir le menu contrôle et configuration de l'extension."
 
-msgid ""
-"The Timer will not be added to the List.\n"
-"Please press OK to close this Wizard."
-msgstr ""
-"Le timer ne sera pas ajouté à la liste.\n"
-"Appuyez sur OK pour ferme l'Assistant."
-
-msgid ""
-"The Timespan of an AutoTimer is the first 'advanced' attribute. If a "
-"timespan is specified an event will only match this AutoTimer if it lies "
-"inside of this timespan."
-msgstr ""
-"La plage horaire d'un AutoTimer est le premier paramètre 'avancé'. Si une "
-"plage horaire est définie un événement correspondra à cet AutoTimer "
-"uniquement si il est dans cette plage horaire."
+msgid "What is this 'control menu' you keep talking about?"
+msgstr "Qu'est-ce que le 'Menu Contrôle' dont vous parlez?"
 
 msgid ""
 "The control menu hides less frequently used options of the plugin, including "
@@ -772,34 +1146,78 @@ msgid ""
 "a new timer using the wizard/classic editor:/n   Use the non-default editor "
 "to create a new AutoTimer."
 msgstr ""
-"Le menu de commande cache les options moins fréquemment utilisées  du "
-"plugin, y compris la configuration et les paramètres par défaut pour les "
-"nouveaux AutoTimers./n/n Lorsque vous pouvez simplement ouvrir le menu et "
+"Le menu de contrôle cache les options moins fréquemment utilisées de "
+"l'extension, y compris la configuration et les paramètres par défaut pour les "
+"nouvelles ProgAutos./n/n Lorsque vous pouvez simplement ouvrir le menu et "
 "jetez un oeil par vous-même, nous allons passer par les options "
-"disponibles:./n - Aide:/n Ce que vous cherchez en ce moment /n - Aperçu: /n "
-"Simuler recherche EPG, aide à trouver les erreurs dans votre   "
-"configuration./n - Import timer existant:/n Créer un nouveau autotimer basé "
-"sur un timer ordinaire existant. /n - Importation EPG: /n Créer un AutoTimer "
-"basé sur un événement EPG  n - Configuration:. /n configuration générique du "
-"plugin /n - Modifier nouveaux paramètres par défaut du timer:/n Configurer "
-"des valeurs par défaut pour les nouveaux AutoTimers /n - Créer un nouveau "
-"timer à l'aide de l'assistant / éditeur classique: /n Utilisez l'éditeur non-"
-"défaut pour créer un nouvel autotimer."
+"disponibles:./n - Aide:/n Ce que vous parcourezz en ce moment /n - Aperçu: /n "
+"Simuler recherche EPG, aide à trouver les erreurs dans votre "
+"configuration./n - Importer programmation existante:/n Créer une nouvelle ProgAuto basée "
+"sur une programmation ordinaire existante. /n - Importation EPG: /n Créer une ProgAuto "
+"basée sur un événement EPG  n - Configuration:. /n configuration générique de "
+"l'extension /n - Modifier nouveaux paramètres programmations standards:/n Configurer "
+"des valeurs standards pour les nouvelles ProgAutos /n - Créer une nouvelle "
+"programmation à l'aide de l'assistant / éditeur classique: /n Utilisez l'éditeur non-"
+"standard pour créer une nouvelle ProgAuto."
+
+msgid "Generic setup"
+msgstr "Configuration générique"
 
 msgid ""
-"The counter can automatically be reset to the limit at certain intervals."
+"This screen should be pretty straight-forward. If the option name does not "
+"give its meaning away there should be an explanation for each of them when "
+"you select them. If there is no visible explanation this is most likely a "
+"skin issue and please try if the default skin fixes the issue./n/nA lot of "
+"effort has been put in making the parameters as easy to understand as "
+"possible, so give reading them a try ;-)."
 msgstr ""
-"Le compteur peut automatiquement être remis à la limite à certains intervals."
+"Cet écran devrait être assez simple. Si le nom de l'option donnée n'est "
+"pas significatif, il devrait y avoir une explication pour chacun d'eux "
+"lorsque vous les sélectionnez. Si il n'y a aucune explication visible, c'est "
+"probablement un problème de thème (skin). Veuillez alors essayer si le "
+"thème par défaut résoud le problème. /n/nBeaucoup d'efforts ont été mis en "
+"rendant les paramètres aussi facile à comprendre que possible, donc prenez "
+"le temps de les lire ;-)."
+
+msgid "Wizard or Classic Editor?"
+msgstr "Assitant ou éditeur classique?"
 
 msgid ""
-"The editor to be used for new AutoTimers. This can either be the Wizard or "
-"the classic editor."
+"This is mostly a matter of taste./nThe Wizard provides you with a reduced "
+"set of options and presents them in smaller sets at a time. It is mostly "
+"aimed at users not very experienced with this plugin or the 'expert' level "
+"features of enigma2./n/nYou can check out the 'classic' editor by opening an "
+"existing timer from the overview and if you prefer this view over the wizard "
+"you can change the default editor in the setup dialog."
 msgstr ""
-"L'éditeur peut être utilisé pour un nouveau AutoTimers. Ceci peut être soit "
-"l'Assistant soit l'éditeur classique."
+"Cela est surtout une question de goût. Assistant /nL'Assitant vous offre un "
+"ensemble réduit d'options et les présente dans des ensembles plus petits à "
+"la fois. Il est principalement destiné aux utilisateurs pas très expérimentés "
+"avec cette extension ou les caractéristiques «d'experts» au niveau de Enigma2. /n/"
+"nVous pouvez voir l'éditeur 'classique' par l'ouverture d'une programmation existante "
+"dans l'aperçu, si vous préférez ce mode à l'Assistant, vous pouvez "
+"changer l'éditeur par défaut dans la boîte de dialogue de configuration."
 
-msgid "The match attribute is mandatory."
-msgstr "L'attribut de correspondance est obligatoire."
+msgid "Congratulations"
+msgstr "Félicitations"
+
+msgid ""
+"You now know almost everything there is to know about the AutoTimer-Plugin./"
+"n/nAs a final hint I can't stress how important it is to take a look at the "
+"help texts that are shown in the setup dialogs as they cover the most "
+"frequently asked questions. Surprisingly even after the hints were added ;-)."
+msgstr ""
+"Vous savez maintenant presque tout ce qu'il y a à savoir sur l'extension "
+"ProgAuto./n/n Comme conseil final, je ne peux pas souligner à quel point il "
+"est important de jeter un oeil sur les textes d'aide qui sont affichés dans "
+"les boîtes de dialogue de configuration car ils couvrent les questions les "
+"plus fréquemment posées. Etonnamment, même après que les conseils soient "
+"ajoutés;-)."
+
+#messages FAQ
+
+msgid "Frequently asked questions about the AutoTimer"
+msgstr "Questions fréquement posée à propos de ProgAuto"
 
 msgid ""
 "This FAQ is supposed to help everyone unwilling to help themselves by "
@@ -818,355 +1236,61 @@ msgstr ""
 "votre télécommande et arrière en utilisant le jaune. En appuyant sur le "
 "bouton ROUGE ou EXIT ferme la FAQ."
 
-msgid ""
-"This help screen is supposed to give you a quick look at everything the "
-"AutoTimer has to offer./nYou can abort it at any time by pressing the RED or "
-"EXIT button on your remote control or bring it up at a later point by "
-"selecting it from the control menu using the MENU button from the regular "
-"entry point of the plugin (more on that later)./n/n/nBut you really should "
-"consider to take the few minutes it takes to read these help pages."
-msgstr ""
-"Cet écran d'aide est censé vous donner un aperçu rapide de toutes les "
-"possiblités de autotimer. /nVous pouvez interrompre à tout moment en "
-"appuyant sur le bouton ROUGE ou EXIT de votre télécommande ou l'amener à un "
-"point plus éloigné en le sélectionnant à partir de le menu de commande en "
-"utilisant le bouton MENU à partir du point d'entrée courant du plugin (plus "
-"sur cela plus tard) ./n/n/nMais vous devriez vraiment envisager de prendre "
-"les quelques minutes qu'il faut pour lire ces pages d'aide."
+msgid "FAQ"
+msgstr "FAQ"
 
 msgid ""
-"This is a name you can give the AutoTimer. It will be shown in the Overview "
-"and the Preview."
+"Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: "
+"First try the AutoTimer version in a recent (experimental) Image to see if "
+"the problem was fixed. Then read the Help again and the upcoming FAQs to "
+"make sure that this is actually a problem and not expected behavior./nIf you "
+"still think there is something wrong with the AutoTimer, please visit http://"
+"www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The "
+"plugin only adds timers when leaving the configuration, not automatically. "
+"What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In "
+"this screen enable 'Poll automatically' and you should be good to go."
 msgstr ""
-"Ceci est un nom qui peut être donné au AutoTimer. Il sera visible dans "
-"l'aperçu et dans la prévisualisation."
+"Question: J'ai trouvé un problème avec ProgAuto?/nRéponse: Essayer d'abord "
+"une version récente de ProgAuto avec une image récente (expérimentale) "
+"pour voir si le problème est résolu. Ensuite lire à nouveau l'aide et les "
+"FAQs pour voir si c'est un vrai problème ou un comportement normal./nSi vous "
+"pensez que ProgAuto a un vrai problème , merci de visiter http://www.dream-"
+"multimedia-tv.de/board et poster votre problème là./n/nQ: L'extension ajoute "
+"seulement les ProgAutos en quittant la configuration, pas automatiquement. Que "
+"puis-je faire?/nR: Dans l'aperçu appuyez sur MENU et entrer dans "
+"'Configuration'.Dans cet écran activez 'Sondage automatique' et cela devrait "
+"fonctionner."
 
 msgid ""
-"This is mostly a matter of taste./nThe Wizard provides you with a reduced "
-"set of options and presents them in smaller sets at a time. It is mostly "
-"aimed at users not very experienced with this plugin or the 'expert' level "
-"features of enigma2./n/nYou can check out the 'classic' editor by opening an "
-"existing timer from the overview and if you prefer this view over the wizard "
-"you can change the default editor in the setup dialog."
+"Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: "
+"Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: "
+"The show I'm trying to record contains umlauts in its title. AutoTimer does "
+"not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For "
+"german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to "
+"record two subsequent events. There is only a single timer created that "
+"spans (part of) both events./nA: From the Overview press MENU and enter the "
+"'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
 msgstr ""
-"Cela est surtout une question de goût. Assistant /nL'Assitant vous offre un "
-"ensemble réduit d'options et les présente dans des ensembles plus petits à "
-"la fois. Il est principalement destiné aux utilisateurs pas très expérimenté "
-"avec ce plugin ou les caractéristiques «d'experts» au niveau de Enigma2. /n/"
-"nVous pouvez voir l'éditeur 'classique' par l'ouverture d'un Timer existant "
-"dans l'aperçu et, si vous préférez ce mode sur l'Assistant, vous pouvez "
-"changer l'éditeur par défaut dans la boîte de dialogue de configuration."
+"Question: Ma ProgAuto pour 'News' n'enregistre pas les 'Late News'./"
+"nRéponse: Vérifier 'Type de recherche' et 'Recherche stricte' pour cette "
+"ProgAuto./n/nQ: L'émission que j'essaye d'enregistrer contient un caractère "
+"spécial dans son titre. ProgAuto ne le trouve pas./nA: Vérifier l'encodage "
+"EPG' pour cette ProgAuto. Pour l'allemand 'UTF-8' doit être "
+"sélectionné./n/nQ:Il semble impossible d'enregistrer 2 événements qui se "
+"suivent. Il y a uniquement 1 programmation de créée qui s'étends (en partie) sur les "
+"deux événements./nA:De l'aperçu appuyer sur MENU et entrer dans "
+"'Configuration'. Dans cet écran désactivez 'Devinez programmation existante basée "
+"sur début/fin'."
 
 msgid ""
-"This is the delay in minutes that the AutoTimer will wait after a search to "
-"search the EPG again."
+"Question: You keep talking about help being provided for each parameter. I'm "
+"unable to read it (in part or in full)./nAnswer: Try using the default skin "
+"and if it works ask the creator of your regular skin. If it still does not "
+"work your image might not provide the actual default skin so contact the "
+"creator of your image."
 msgstr ""
-"Ceci est le délai en minutes que le AutoTimer attendra après une recheche "
-"dans l'EPG avant de refaire une recherche."
-
-msgid ""
-"This is what will be looked for in event titles. Note that looking for e.g. "
-"german umlauts can be tricky as you have to know the encoding the channel "
-"uses."
-msgstr ""
-"Voilà ce que sera recherchée dans les titres d'événements. On notera que par "
-"exemple la recherche de trémas allemands peuvent être difficile car vous "
-"devez connaître le codage que le canal utilise."
-
-msgid ""
-"This screen should be pretty straight-forward. If the option name does not "
-"give its meaning away there should be an explanation for each of them when "
-"you select them. If there is no visible explanation this is most likely a "
-"skin issue and please try if the default skin fixes the issue./n/nA lot of "
-"effort has been put in making the parameters as easy to understand as "
-"possible, so give reading them a try ;-)."
-msgstr ""
-"Cet écran devrait être assez simple. Si le nom de l'option ne donne n'est "
-"pas significatif, il devrait y avoir une explication pour chacun d'eux "
-"lorsque vous les sélectionnez. Si il n'y a aucune explication visible c'est "
-"probablement d'un problème de thème (skin) et s'il vous plaît essayer si le "
-"thème par défaut résout le problème. /n/nBeaucoup d'efforts ont été mis en "
-"rendant les paramètres aussi facile à comprendre que possible, donc prenez "
-"le temps des les lire ;-)."
-
-msgid "This setting controls the behavior when a timer matches a found event."
-msgstr ""
-"Cet paramètre contrôle le comportement lorsq'un timer correspond à un "
-"événement."
-
-msgid ""
-"This toggles the behavior on timer conflicts. If an AutoTimer matches an "
-"event that conflicts with an existing timer it will not ignore this event "
-"but add it disabled."
-msgstr ""
-"Ceci bascule le comportement en cas de conflits de Timer. Si un AutoTimer "
-"correspond à un événement qui entre en conflit avec un Timer existant, il ne "
-"va pas ignorer cet événement mais l'ajouter désactivé."
-
-msgid "Thursday"
-msgstr "Jeudi"
-
-msgid "Time in minutes to append to recording."
-msgstr "Temps en minutes à ajouter aux enregistrements."
-
-msgid "Time in minutes to prepend to recording."
-msgstr "Temps en minute à ajouter avant l'enregistrement."
-
-msgid "Timer type"
-msgstr "Type de timer"
-
-msgid "Title"
-msgstr "Titre"
-
-msgid "Title and Short description"
-msgstr "Titre et description courte"
-
-msgid "Title and all descriptions"
-msgstr "Titre et toutes les descriptions"
-
-msgid "Tuesday"
-msgstr "Mardi"
-
-msgid ""
-"Unless this is enabled AutoTimer will NOT automatically look for events "
-"matching your AutoTimers but only when you leave the GUI with the green "
-"button."
-msgstr ""
-"Sauf si cela est permis AutoTimer ne va PAS automatiquement regarder les "
-"événements correspondant à vos AutoTimers mais seulement lorsque vous "
-"quittez l'interface graphique avec le bouton vert."
-
-msgid "Upper bound of timespan."
-msgstr "Limite supérieure du laps de temps."
-
-msgid ""
-"Upper bound of timespan. Nothing after this time will be matched. Offsets "
-"are not taken into account!"
-msgstr ""
-"Limite supérieure du laps de temps. Rien après ce temps ne correspondra. Les "
-"décalages ne sont pas pris en compte!"
-
-msgid "Use a custom location"
-msgstr "Utiliser une localisation personnalisée"
-
-msgid "Wednesday"
-msgstr "Mercredi"
-
-msgid "Weekday"
-msgstr "Jour de la semaine"
-
-msgid "Weekend"
-msgstr "Weekend"
-
-msgid "Weekly (Monday)"
-msgstr "Hebdomadaire (Lundi)"
-
-msgid "Weekly (Sunday)"
-msgstr "Hebdomadaire (Dimanche)"
-
-msgid "Welcome to the AutoTimer-Plugin"
-msgstr "Bienvenue dans le plugin AutoTimer"
-
-msgid ""
-"Welcome.\n"
-"\n"
-"This Wizard will help you to create a new AutoTimer by providing "
-"descriptions for common settings."
-msgstr ""
-"Bienvenue.\n"
-"\n"
-"Cet assistant vous aidera à créer un nouvel AutoTimer en fournissant une "
-"description des paramètres courants."
-
-msgid "What is this 'control menu' you keep talking about?"
-msgstr "Qu'est-ce que 'Menu Contrôle' dont vous parlez?"
-
-msgid ""
-"When supporting \"Fast Scan\" the service type is ignored. You don't need to "
-"enable this unless your Image supports \"Fast Scan\" and you are using it."
-msgstr ""
-"When supporting \"Fast Scan\" the service type is ignored. You don't need to "
-"enable this unless your Image supports \"Fast Scan\" and you are using it."
-
-msgid ""
-"When this is enabled AutoTimer will ONLY check for new events whilst in "
-"stanadby."
-msgstr ""
-"When this is enabled AutoTimer will ONLY check for new events whilst in "
-"standby."
-
-msgid ""
-"When this option is enabled the AutoTimer won't match events where another "
-"timer with the same description already exists in the timer list."
-msgstr ""
-"When this option is enabled the AutoTimer won't match events where another "
-"timer with the same description already exists in the timer list."
-
-msgid ""
-"With this option you can restrict the AutoTimer to a certain amount of "
-"scheduled recordings. Set this to 0 to disable this functionality."
-msgstr ""
-"With this option you can restrict the AutoTimer to a certain amount of "
-"scheduled recordings. Set this to 0 to disable this functionality."
-
-msgid "Wizard"
-msgstr "Assistant"
-
-msgid "Wizard or Classic Editor?"
-msgstr "Assitant ou éditeur classique?"
-
-msgid "Yes"
-msgstr "Oui"
-
-msgid "Yes, keep them."
-msgstr "Oui, garder les."
-
-msgid ""
-"You can control for how many days in the future timers are added. Set this "
-"to 0 to disable this feature."
-msgstr ""
-"Vous pouvez contrôler combien de jours dans le future les timers seront "
-"ajoutés. Définissez le à 0 pour désactiver cette fonction."
-
-msgid ""
-"You can set the basic properties of an AutoTimer here.\n"
-"While 'Name' is just a human-readable name displayed in the Overview, 'Match "
-"in title' is what is looked for in the EPG."
-msgstr ""
-"Vous pouvez définir ici les propriétés de base d'un AutoTimer. \n"
-" Alors que 'Nom' est juste un nom lisible affiché dans la vue d'ensemble, "
-"Chercher en titre' est ce qui est recherché dans l'EPG."
-
-msgid ""
-"You did not provide a valid 'Match in title' Attribute for your new "
-"AutoTimer.\n"
-"As this is a mandatory Attribute you cannot continue without doing so."
-msgstr ""
-"Vous ne fournissez pas un attribut 'Recherche en titre' valide pour votre "
-"nouveau AutoTimer.\n"
-" Comme ceci est un attribut obligatoire vous ne pouvez pas continuer sans le "
-"définir."
-
-msgid ""
-"You entered \"%s\" as Text to match.\n"
-"Do you want to remove trailing whitespaces?"
-msgstr ""
-"You entered \"%s\" as Text to match.\n"
-"Do you want to remove trailing white spaces?"
-
-msgid ""
-"You now know almost everything there is to know about the AutoTimer-Plugin./"
-"n/nAs a final hint I can't stress how important it is to take a look at the "
-"help texts that are shown in the setup dialogs as they cover the most "
-"frequently asked questions. Surprisingly even after the hints were added ;-)."
-msgstr ""
-"Vous savez maintenant presque tout ce qu'il ya à savoir sur le plugin "
-"AutoTimer./n/n Comme conseil final, je ne peux pas souligner à quel point il "
-"est important de jeter un oeil sur les textes d'aide qui sont affichés dans "
-"les boîtes de dialogue de configuration car ils couvrent les questions les "
-"plus fréquemment posées. Étonnamment, même après des conseils ont été "
-"ajoutés;-)."
-
-msgid ""
-"You successfully configured a new AutoTimer. Do you want to add it to the "
-"list?\n"
-"\n"
-"You can go back a step by pressing EXIT on your remote."
-msgstr ""
-"Vous avez configuré avec succès un nouveau AutoTimer. Voulez-vous l'ajouter "
-"à la liste?\n"
-"\n"
-"Vous pouvez revenir en arrière en appuyant sur la touche EXIT de votre "
-"télécommande."
-
-msgid ""
-"Your 'Match in title' Attribute ends with a Whitespace.\n"
-"Please confirm if this was intentional, if not they will be removed."
-msgstr ""
-"Votre attribut 'Recherche en titre' se termine par un espace.\n"
-"Merci de confirmer si c'est intentionel, si pas il sera supprimé."
-
-msgid ""
-"Your config file is not well-formed:\n"
-"%s"
-msgstr ""
-"Votre fichier de configuration n'est pas bien formé:\n"
-"%s"
-
-msgid "add AutoTimer"
-msgstr "ajouter AutoTimer"
-
-msgid "add AutoTimer..."
-msgstr "ajouter AutoTimer..."
-
-msgid "auto"
-msgstr "auto"
-
-msgid "autotimers need a match attribute"
-msgstr "auto timers ont besoin d'un attribut qui correspond"
-
-msgid "case-insensitive search"
-msgstr "recherche non sensible à la case"
-
-msgid "case-sensitive search"
-msgstr "recherche sensible à la case"
-
-msgid "config changed."
-msgstr "config changée."
-
-msgid "description match"
-msgstr "la description correspond"
-
-msgid "disable"
-msgstr "désactiver"
-
-msgid "do nothing"
-msgstr "ne rien faire"
-
-msgid "enable"
-msgstr "activer"
-
-msgid "exact match"
-msgstr "correspondance parfaite"
-
-msgid "go to deep standby"
-msgstr "aller en veille profonde"
-
-msgid "go to standby"
-msgstr "aller en veille"
-
-msgid "in Description"
-msgstr "en Description"
-
-msgid "in Shortdescription"
-msgstr "en Description Courte"
-
-msgid "in Title"
-msgstr "en Titre"
-
-msgid "mins"
-msgstr "mins"
-
-msgid "missing parameter \"id\""
-msgstr "paramètres manquants \"id\""
-
-msgid "on Weekday"
-msgstr "pendant jours de la semaine"
-
-msgid "partial match"
-msgstr "correspondance partielle"
-
-msgid "record"
-msgstr "enregistrement"
-
-msgid "standard"
-msgstr "standard"
-
-msgid "title starts with"
-msgstr "titre commence avec"
-
-msgid "unable to find timer with id %i"
-msgstr "impossible de trouver un timer avec id %i"
-
-msgid "zap"
-msgstr "zapper"
+"Question: Vous parlez que l'aide est fournie pour chaque paramètre. Mais je "
+"n'arrive pas la lire (en partie ou en entier)./nRéponse: Essayez avec le "
+"thème par défaut et si cela fonctionne démandez au créateur de votre théme "
+"de corriger. Si cela ne fonctionne toujours pas contactez votre fournisseur "
+"d'image."
