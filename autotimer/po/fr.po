@@ -33,6 +33,12 @@ msgstr "Ne peux charger le fichier config!"
 msgid "AutoTimer was removed"
 msgstr "ProgAuto a été enlevé"
 
+msgid "AutoTimer wizard"
+msgstr "Assistant ProgAuto"
+
+msgid "Abort this Wizard."
+msgstr "Abandonner cet Assistant."
+
 msgid "missing parameter \"id\""
 msgstr "paramètres manquants \"id\""
 
@@ -47,6 +53,9 @@ msgstr "ProgAuto a été ajoutée avec succès"
 
 msgid "AutoTimer was changed successfully"
 msgstr "ProgAuto a été modifiée avec succès"
+
+msgid "AutoTimers"
+msgstr "ProgAutos"
 
 msgid "config changed."
 msgstr "config changée"
@@ -155,8 +164,18 @@ msgstr ""
 "Ceci est le délai en minutes que la ProgAuto attendra sur le lancement initial "
 "pour ne pas retarder le démarrage de enigma2."
 
+msgid ""
+"This is the delay in minutes that the AutoTimer will wait after a search to "
+"search the EPG again."
+msgstr ""
+"Ceci est le délai en minutes que le AutoTimer attendra après une recheche "
+"dans l'EPG avant de refaire une recherche."
+
 msgid "Poll Interval (in h)"
 msgstr "Interval interrogation (en h)"
+
+msgid "Poll Interval (in mins)"
+msgstr "Interval interrogation (en mins)"
 
 msgid ""
 "This is the delay in hours that the AutoTimer will wait after a search to "
@@ -184,11 +203,21 @@ msgstr ""
 msgid "Show in extension menu"
 msgstr "Afficher dans le menu extension"
 
+msgid "Show in plugin browser"
+msgstr "Afficher dans l'explorateur d'extension"
+
 msgid ""
 "Enable this to be able to access the AutoTimer Overview from within the "
 "extension menu."
 msgstr ""
 "Activer ceci pour avoir accès à l'aperçu de ProgAuto dans le menu des "
+"extensions."
+
+msgid ""
+"Enable this to be able to access the AutoTimer Overview from within the "
+"plugin browser."
+msgstr ""
+"Activer ceci pour avoir accès à l'aperçu de ProgAuto dans le menu menu des "
 "extensions."
 
 msgid "Show in event menu"
@@ -202,7 +231,7 @@ msgstr ""
 "Besoin de relancer IGU)."
 
 msgid "Show \"add to AutoTimer\" in channel selection menu"
-msgstr "Afficher  \"ajouer à ProgAuto\" dans menu sélection chaîne"
+msgstr "Afficher  \"ajouter à ProgAuto\" dans menu sélection chaîne"
 
 msgid ""
 "Enable this to be able to access the add to AutoTimer from the channel "
@@ -232,7 +261,7 @@ msgstr ""
 "affichera la liste des choix pour ProgAuto."
 
 msgid "Modify existing timers"
-msgstr "Modifier prog. existante"
+msgstr "Modifier programmation existante"
 
 msgid "This setting controls the behavior when a timer matches a found event."
 msgstr ""
@@ -240,7 +269,7 @@ msgstr ""
 "événement."
 
 msgid "Guess existing timer based on begin/end"
-msgstr "Deviner la prog existante sur base du début/fin"
+msgstr "Estimer la programmation existante sur base du début/fin"
 
 msgid ""
 "If this is enabled an existing timer will also be considered recording an "
@@ -459,7 +488,7 @@ msgid "AutoTimer"
 msgstr "ProgAuto"
 
 msgid "Edit Timers and scan for new Events"
-msgstr "Editer Timers et scanner pour les nouveaux événements"
+msgstr "Editer programmations et scanner pour nouveaux événements"
 
 msgid "Add AutoTimer"
 msgstr "Ajouter ProgAuto"
@@ -563,6 +592,9 @@ msgstr "Editer ProgAuto sélectionnée"
 msgid "Close and forget changes"
 msgstr "Fermer et oublier les changements"
 
+msgid "Close"
+msgstr "Fermer"
+
 msgid "Open Context Menu"
 msgstr "Ouvrir le menu contextuel"
 
@@ -577,6 +609,15 @@ msgstr "Retirer ProgAuto sélectionnée"
 
 msgid "AutoTimer overview"
 msgstr "Vue d'ensemble ProgAuto"
+
+msgid ""
+"You can set the basic properties of an AutoTimer here.\n"
+"While 'Name' is just a human-readable name displayed in the Overview, 'Match "
+"in title' is what is looked for in the EPG."
+msgstr ""
+"Vous pouvez définir ici les propriétés de base d'un AutoTimer. \n"
+" Alors que 'Nom' est juste un nom lisible affiché dans la vue d'ensemble, "
+"Chercher en titre' est ce qui est recherché dans l'EPG."
 
 msgid "Do you really want to delete %s?"
 msgstr "Voulez-vous réellement effacer %s?"
@@ -716,6 +757,9 @@ msgstr "Editer filtres"
 msgid "Add filters"
 msgstr "Ajouter filtres"
 
+msgid "add filters"
+msgstr "Ajouter filtres"
+
 msgid "enabled"
 msgstr "activé"
 
@@ -785,6 +829,13 @@ msgid ""
 msgstr ""
 "Avec cette option activée le canal à enregistrer peut être changé à "
 "un service de remplacement auquel il est limité."
+
+msgid ""
+"With this option enabled the channel to record will be selected "
+"automaticliy using your list of alternates."
+msgstr ""
+"Avec cette option activée, la chaîne à enregistrer sera sélectionnée "
+"automatiquement en utilisant la liste des supléantes."
 
 msgid "Should this AutoTimer be restricted to a timespan?"
 msgstr "Est-ce que cette ProgAuto doit être restreinte à une plage horaire?"
@@ -928,7 +979,7 @@ msgid "Set End Time"
 msgstr "Définir heure de fin"
 
 msgid "Override found with alternative service"
-msgstr "Override trouvé avec service de remplacement"
+msgstr "Remplacer service trouvé avec remplacement"
 
 msgid "Restrict to events on certain dates"
 msgstr "Restreindre les événements à certaines dates"
@@ -981,6 +1032,9 @@ msgstr "Vérifier unicité dans"
 msgid "Use a custom location"
 msgstr "Utiliser un emplacement personnalisé"
 
+msgid "Use automatic selection of alternates."
+msgstr "Utiliser sélection automatic des remplacements"
+
 msgid "Custom location"
 msgstr "Emplacement personnalisé"
 
@@ -989,6 +1043,9 @@ msgstr "Activater VPS"
 
 msgid "Control recording completely by service"
 msgstr "Contrôler complètement les enregistrements par service"
+
+msgid "Create a new AutoTimer."
+msgstr "Créer une nouvelle ProgAuto."
 
 msgid "Label series"
 msgstr "Label séries"
@@ -1092,6 +1149,17 @@ msgid "Welcome to the AutoTimer-Plugin"
 msgstr "Bienvenue dans le l'extension ProgAuto"
 
 msgid ""
+"Welcome.\n"
+"\n"
+"This Wizard will help you to create a new AutoTimer by providing "
+"descriptions for common settings."
+msgstr ""
+"Bienvenue.\n"
+"\n"
+"Cet assistant vous aidera à créer une nouvelle ProgAuto en fournissant une "
+"description des paramètres courants."
+
+msgid ""
 "This help screen is supposed to give you a quick look at everything the "
 "AutoTimer has to offer./nYou can abort it at any time by pressing the RED or "
 "EXIT button on your remote control or bring it up at a later point by "
@@ -1129,6 +1197,13 @@ msgstr ""
 "avec la touche VERTE elle cherchera pour les événements dans l'EPG. "
 "Pour configurer un interval de recherche régulier de l'extension pour rechercher "
 "un événement ouvrir le menu contrôle et configuration de l'extension."
+
+msgid ""
+"The Timer will not be added to the List.\n"
+"Please press OK to close this Wizard."
+msgstr ""
+"La programmation ne sera pas ajoutée à la liste.\n"
+"Appuyez sur OK pour fermer l'Assistant."
 
 msgid "What is this 'control menu' you keep talking about?"
 msgstr "Qu'est-ce que le 'Menu Contrôle' dont vous parlez?"
@@ -1279,7 +1354,7 @@ msgstr ""
 "sélectionné./n/nQ:Il semble impossible d'enregistrer 2 événements qui se "
 "suivent. Il y a uniquement 1 programmation de créée qui s'étends (en partie) sur les "
 "deux événements./nA:De l'aperçu appuyer sur MENU et entrer dans "
-"'Configuration'. Dans cet écran désactivez 'Devinez programmation existante basée "
+"'Configuration'. Dans cet écran désactivez 'Estimer programmation existante basée "
 "sur début/fin'."
 
 msgid ""
