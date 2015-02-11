@@ -8,16 +8,41 @@ msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-27 18:11+0100\n"
-"PO-Revision-Date: 2011-06-12 18:45+0100\n"
-"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
-"Language-Team: none\n"
-"Language: \n"
+"PO-Revision-Date: 2015-02-11 21:14+0100\n"
+"Last-Translator: daTa deVil <http://opena.tv>\n"
+"Language-Team: openATV\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ../src\n"
+
+msgid "IMDb Menu"
+msgstr "IMDb Menü"
+
+msgid "Save current Details as .html for offline using"
+msgstr "aktuelle Details als .html speichern für lokalen Gebrauch"
+
+msgid "Save current Details as .txt"
+msgstr "aktuelle Details als .txt speichern für lokalen Gebrauch"
+
+msgid "Save current Poster and Details as .txt"
+msgstr "aktuelles Poster und die Details als .txt Datei speichern"
+
+msgid "Content:"
+msgstr "Inhalt:"
+
+msgid "Runtime:"
+msgstr "Laufzeit:"
+
+msgid "Production Countries:"
+msgstr "Produktionsländer:"
+
+msgid "Release Date:"
+msgstr "Erscheinungsdatum:"
 
 msgid " as "
 msgstr " als "
@@ -26,7 +51,7 @@ msgid "Ambiguous results"
 msgstr "Kein eindeutiger Treffer"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 msgid "Cast: "
 msgstr "Darsteller: "
@@ -79,7 +104,7 @@ msgid "IMDb Re-Download completed"
 msgstr "Erneuten Download ausgeführt"
 
 msgid "IMDb Setup"
-msgstr ""
+msgstr "IMDb Einstellungen"
 
 msgid "IMDb query failed!"
 msgstr "Anfrage an IMDb fehlgeschlagen!"
@@ -100,7 +125,7 @@ msgid "OK"
 msgstr ""
 
 msgid "Play Trailer"
-msgstr ""
+msgstr "Trailer abspielen"
 
 msgid "Please select the matching entry"
 msgstr "Bitte passenden Eintrag auswählen"
@@ -117,16 +142,16 @@ msgid "Re-Query IMDb: %s..."
 msgstr "Frage erneut bei IMDb an: %s..."
 
 msgid "Search Trailer"
-msgstr ""
+msgstr "suche Trailer"
 
 msgid "Select from EPG"
 msgstr "Aus  EPG wählen"
 
 msgid "Setup"
-msgstr ""
+msgstr "Einstellungen"
 
 msgid "Show in plugin browser"
-msgstr ""
+msgstr "Zeige im Plugin Browser"
 
 msgid "The Internet Movie Database"
 msgstr "Die Internet Movie Database"
