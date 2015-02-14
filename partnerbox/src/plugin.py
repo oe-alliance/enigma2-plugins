@@ -1684,14 +1684,14 @@ def partnerboxChannelContextMenu__init__(self, session, csel):
 		if csel.bouquet_mark_edit == OFF and not csel.movemode:
 			if not inBouquetRootList:
 				if inBouquet:
-					if config.ParentalControl.configured.value:
+					if config.ParentalControl.servicepinactive.value:
 						callFunction = self.setParentalControlPin
 					else:
 						callFunction = self.addPartnerboxService
 					self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("add Partnerbox service"), boundFunction(callFunction,0))))
 			if (not inBouquetRootList and not inBouquet) or (inBouquetRootList):
 				if config.usage.multibouquet.value:
-					if config.ParentalControl.configured.value:
+					if config.ParentalControl.servicepinactive.value:
 						callFunction = self.setParentalControlPin
 					else:
 						callFunction = self.addPartnerboxService

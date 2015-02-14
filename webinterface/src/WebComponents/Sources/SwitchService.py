@@ -20,9 +20,9 @@ class SwitchService(Source):
 			from Screens.Standby import inStandby
 			if inStandby == None:
 				if cmd["sRef"] != None:
-					pc = config.ParentalControl.configured.value
+					pc = config.ParentalControl.servicepinactive.value
 					if pc:
-						config.ParentalControl.configured.value = False
+						config.ParentalControl.servicepinactive.value = False
 
 					eref = eServiceReference(cmd["sRef"])
 
@@ -46,7 +46,7 @@ class SwitchService(Source):
 							self.session.nav.playService(eref)
 
 					if pc:
-						config.ParentalControl.configured.value = pc
+						config.ParentalControl.servicepinactive.value = pc
 
 					name = cmd["sRef"]
 					if cmd["title"] is None:

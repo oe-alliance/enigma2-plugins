@@ -128,7 +128,7 @@ def ChannelSelection_zap(self, *args, **kwargs):
 		ref = self.session.pip.getCurrentService()
 		nref = self.getCurrentSelection()
 		if ref is None or ref != nref:
-			if not config.ParentalControl.configured.value or parentalControl.getProtectionLevel(nref.toCompareString()) == -1:
+			if not config.ParentalControl.servicepinactive.value or parentalControl.getProtectionLevel(nref.toCompareString()) == -1:
 				if not self.session.pip.playService(nref):
 					# XXX: Make sure we set an invalid ref
 					self.session.pip.playService(None)
