@@ -183,18 +183,33 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		# Remove selected Timer
 		cur = self["entries"].getCurrent()
 		if cur is not None:
+			title =_("Message\nDo you really want to delete %s?") % (cur.name)
+			list = ((_("Yes, and delete all timers generated from this autotimer"), "yes_delete"),
+			(_("Yes, but keep timers generated from this autotimer"), "yes_keep"),
+			(_("No"), "no"))
 			self.session.openWithCallback(
 				self.removeCallback,
-				MessageBox,
-				_("Do you really want to delete %s?") % (cur.name),
-				default = False,
+				ChoiceBox,
+				title=title,
+				list=list,
+				selection=0
 			)
 
-	def removeCallback(self, ret):
+	def removeCallback(self, answer):
 		cur = self["entries"].getCurrent()
-		if ret and cur:
+		if (answer[1] != "no") and cur:
 			self.autotimer.remove(cur.id)
 			self.refresh()
+			if (answer[1] == "yes_delete"):
+				import NavigationInstance
+				from RecordTimer import RecordTimerEntry
+				recordHandler = NavigationInstance.instance.RecordTimer
+				for timer in recordHandler.timer_list:
+					if timer:
+						for entry in timer.log_entries:
+							if len(entry) == 3:
+								if entry[2] == '[AutoTimer] Try to add new timer based on AutoTimer '+cur.name+'.':
+									NavigationInstance.instance.RecordTimer.removeEntry(timer)
 
 	def cancel(self):
 		if self.changed:
