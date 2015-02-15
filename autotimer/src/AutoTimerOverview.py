@@ -197,19 +197,20 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 	def removeCallback(self, answer):
 		cur = self["entries"].getCurrent()
-		if (answer[1] != "no") and cur:
-			self.autotimer.remove(cur.id)
-			self.refresh()
-			if (answer[1] == "yes_delete"):
-				import NavigationInstance
-				from RecordTimer import RecordTimerEntry
-				recordHandler = NavigationInstance.instance.RecordTimer
-				for timer in recordHandler.timer_list:
-					if timer:
-						for entry in timer.log_entries:
-							if len(entry) == 3:
-								if entry[2] == '[AutoTimer] Try to add new timer based on AutoTimer '+cur.name+'.':
-									NavigationInstance.instance.RecordTimer.removeEntry(timer)
+		if answer:
+			if (answer[1] != "no") and cur:
+				self.autotimer.remove(cur.id)
+				self.refresh()
+				if (answer[1] == "yes_delete"):
+					import NavigationInstance
+					from RecordTimer import RecordTimerEntry
+					recordHandler = NavigationInstance.instance.RecordTimer
+					for timer in recordHandler.timer_list:
+						if timer:
+							for entry in timer.log_entries:
+								if len(entry) == 3:
+									if entry[2] == '[AutoTimer] Try to add new timer based on AutoTimer '+cur.name+'.':
+										NavigationInstance.instance.RecordTimer.removeEntry(timer)
 
 	def cancel(self):
 		if self.changed:
