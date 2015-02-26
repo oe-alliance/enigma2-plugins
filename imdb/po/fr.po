@@ -1,0 +1,134 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - IMDb\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-02 12:19-0700\n"
+"PO-Revision-Date: 2015-02-02 22:44+0100\n"
+"Last-Translator: mimi74\n"
+"Language-Team: french-EGAMI\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+
+msgid " as "
+msgstr " comme "
+
+msgid "Ambiguous results"
+msgstr "Résultats ambigus"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Cast: "
+msgstr "Cast: "
+
+msgid "Channel Selection"
+msgstr "Sélection chaîne"
+
+msgid "Could't get Eventname"
+msgstr "Impossible d'obtenir nom événement"
+
+msgid "Details"
+msgstr "Détails"
+
+msgid "Downloading Movie Poster: %s..."
+msgstr "Téléchargement affiche du film: %s..."
+
+msgid ""
+"Enable this to be able to access the IMDb from within the plugin browser."
+msgstr ""
+"Activer cette option afin d'accéder à IMDb à partir de le navigateur plugiciels."
+
+msgid "Enter search"
+msgstr "Entrer recherche"
+
+msgid "Enter text to search for"
+msgstr "Entrer le texte à rechercher"
+
+msgid "Exit"
+msgstr "Quitter"
+
+msgid "Extra Info"
+msgstr "Infos suplémentaires"
+
+msgid "IMDb Details"
+msgstr "IMDb Détails"
+
+msgid "IMDb Details parsed"
+msgstr "IMDb Détails filtrés"
+
+msgid "IMDb Download completed"
+msgstr "IMDb Téléchargement terminé"
+
+msgid "IMDb Download failed"
+msgstr "IMDb Téléchargement échoué"
+
+msgid "IMDb Plugin"
+msgstr "IMDb plugiciel"
+
+msgid "IMDb Re-Download completed"
+msgstr "IMDb Re-Téléchargement terminé"
+
+msgid "IMDb Setup"
+msgstr "IMDb Configuration"
+
+msgid "IMDb query failed!"
+msgstr "IMDb requête échoué!"
+
+msgid "Lookup"
+msgstr "Chercher"
+
+msgid "No IMDb match."
+msgstr "Aucune IMDb correspondante."
+
+msgid "No cast list found in the database."
+msgstr "Aucune liste des acteurs trouvée dans la base de données."
+
+msgid "No details found."
+msgstr "Aucuns détails trouvés."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Play Trailer"
+msgstr "Lire bande annonce"
+
+msgid "Please select the matching entry"
+msgstr "Veuillez sélectionner l'entrée correspondante"
+
+msgid "Query IMDb: %s..."
+msgstr "Récupération IMDb: %s..."
+
+msgid "Query details from the Internet Movie Database"
+msgstr "Récupérer détails depuis la base de données internet des films"
+
+msgid "Re-Query IMDb: %s..."
+msgstr "Re-Récupération IMDb: %s..."
+
+msgid "Search Trailer"
+msgstr "Recherche bande annonce"
+
+msgid "Select from EPG"
+msgstr "Sélectionner depuis EPG"
+
+msgid "Setup"
+msgstr "Configuration"
+
+msgid "Show in plugin browser"
+msgstr "Afficher dans le navigateur plugiciels"
+
+msgid "The Internet Movie Database"
+msgstr "La base de données internet des films"
+
+msgid "Title Menu"
+msgstr "Menu titre"
+
+msgid "User Rating"
+msgstr "Appréciation moyenne"
+
+msgid "no user rating yet"
+msgstr "pas d'appréciation encore"
