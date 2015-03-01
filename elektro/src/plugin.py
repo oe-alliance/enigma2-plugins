@@ -260,7 +260,7 @@ def setNextWakeuptime():
 	wakeuptime = getReltime(clkToTime(config_wakeup[day]))
 
 	# Lets see if we already woke up today
-	if wakeuptime < time_s:
+	if time_s > (wakeuptime + elektroTimerWakeupThreshold):
 		#yes we did -> Next wakeup is tomorrow
 		if debug:
 			print pluginPrintname, "Wakeup tomorrow"
@@ -268,7 +268,7 @@ def setNextWakeuptime():
 		wakeuptime = getReltime(clkToTime(config_wakeup[day]))
 
 	# Tomorrow we'll wake up early-> Add a full day.
-	if wakeuptime < time_s:
+	if time_s > (wakeuptime + elektroTimerWakeupThreshold):
 		wakeuptime = wakeuptime + 24 * 60 * 60
 	if debug:
 		print pluginPrintname, "Wakeup Time in seconds since nextday", wakeuptime
