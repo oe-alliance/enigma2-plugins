@@ -1,0 +1,4 @@
+#!/bin/sh
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/SeriesPlugin/
+echo "Plugin removed! You should restart enigma2 now!"
+exit 0

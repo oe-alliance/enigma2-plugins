@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-seriesplugin
+Description: Find and rename series
+Maintainer: betonme
+Architecture: all
+Homepage: http://www.i-have-a-dreambox.com/wbb2/thread.php?threadid=168016
+Depends: enigma2, python-difflib, python-html, python-json, python-shell, python-re, python-xml, python-ctypes

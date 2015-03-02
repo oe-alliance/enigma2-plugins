@@ -1,0 +1,9 @@
+#!/bin/sh
+echo "********************************************************"
+echo "*  SeriesPlugin installed                               *"
+echo "*  Coded by betonme (c) 2012                           *"
+echo "*  Support: IHAD                                       *"
+echo "*                                                      *"
+echo "*  Restart Enigma-2 GUI to activate the plugin         *"
+echo "********************************************************"
+exit 0
