@@ -1,0 +1,5 @@
+<mphelp skin="EPGBackupHelp" caption="EPGBackup Help">
+	<page title="Willkommen zu EPGBackup">
+		<text value="Wenn die Funktion &quot;EPG-Backup&quot; aktiviert ist, wird die von Enigma generierte EPG-Datei gesichert.\nNormalerweise wird die Datei von Enigma im Speicher gehalten und nach dem Beenden der Benutzeroberfläche geschrieben. Falls die Benutzeroberfläche abstürzt (ein sogennanter Green-Screen) sind die EPG-Informationen verloren.\n Die Backup-Funktionalität speichert die größte oder letzte Sicherungsdatei und kopiert sie als EPG-Datei vor dem Starten der Benutzeroberfläche.\n\nTechnische Informationen:\nEPG-Backup beinhaltet eine 'Boot-Schleifen-Sicherung'. Wenn Enigma wegen ungültigen EPG-Daten abstürzt, wäre die EPG-Datei normalerweise nicht vorhanden beim nächsten Boot, so daß es nicht zur Boot-Schleife kommen würde. EPG-Backup zählt die erfolglosen Boot-Versuche und schreibt die EPG-Datei nicht zurück, falls die Anzahl einen konfigurierbaren Wert erreicht."/>
+	</page>
+</mphelp>

@@ -1,0 +1,886 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: EPGBackup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-17 06:38+CEST\n"
+"PO-Revision-Date: 2014-09-17 06:39+0100\n"
+"Last-Translator: Joe128 <johnny.u@gmx.at>\n"
+"Language-Team: none\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+#: EPGBackupConfig.py:46 EPGBackupConfig.py:102
+msgid "EPGBackup Setup"
+msgstr "EPGBackup Konfiguration"
+
+#: EPGBackupConfig.py:55 EPGBackupSupport.py:219
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: EPGBackupConfig.py:56
+msgid "Save"
+msgstr "Speichern"
+
+#: EPGBackupConfig.py:62 EPGBackupConfig.py:73
+msgid "Close and forget changes"
+msgstr "Schließen und Änderungen verwerfen"
+
+#: EPGBackupConfig.py:63
+msgid "Close and save changes"
+msgstr "Schließen und Änderungen speichern"
+
+#: EPGBackupConfig.py:68
+msgid "Open Context Menu"
+msgstr "Kontextmenü öffnen"
+
+#: EPGBackupConfig.py:78
+msgid "Move page up"
+msgstr "Eine Seite nach oben springen"
+
+#: EPGBackupConfig.py:79
+msgid "Move page down"
+msgstr "Eine Seite nach unten springen"
+
+#: EPGBackupConfig.py:122
+msgid "Restore EPG-Backups (Date)"
+msgstr "Backup wiederherstellen (Datum)"
+
+#: EPGBackupConfig.py:123
+msgid "Restore EPG-Backups (Size)"
+msgstr "Backup wiederherstellen (Größe)"
+
+#: EPGBackupConfig.py:124
+msgid "Make a EPG-Backup"
+msgstr "EPG-Backup erstellen"
+
+#: EPGBackupConfig.py:125
+msgid "Set Restore-File for next boot"
+msgstr "Backup-Datei für nächsten Boot setzen"
+
+#: EPGBackupConfig.py:128
+msgid "Show Help"
+msgstr "Zeige Hilfe"
+
+#: EPGBackupConfig.py:161
+msgid "Enable Backup"
+msgstr "Backup aktivieren"
+
+#: EPGBackupConfig.py:161
+msgid ""
+"Should the Backup-Functionality be enabled?\n"
+"For more Information have a look at the Help-Screen."
+msgstr ""
+"Soll die Backup-Funktionalität aktiviert werden?\n"
+"Für weitere Informationen bitte die generelle Hilfe ansehen."
+
+#: EPGBackupConfig.py:163
+msgid ""
+"Make a backup before starting enigma. A backup-file will only be created, if "
+"no valid backup-file could be restored.\n"
+"Note: It's logically the same as making a backup at the ending of enigma, "
+"because the file didn't change in the meanwhile."
+msgstr ""
+"Ein Backup beim Starten erstellen. Eine Backup-Datei wird nur dann angelegt, "
+"wenn keine gültige Backup-Datei gefunden wurde.\n"
+"Hinweis: Dies ist logisch das Gleiche wie ein Backup beim Beenden "
+"herstellen, da die EPG-Datei in der Zwischenzeit nicht verändert wird."
+
+#: EPGBackupConfig.py:163
+msgid "make Backup on start"
+msgstr "Backup beim Start erstellen"
+
+#: EPGBackupConfig.py:165
+msgid "Make a backup after EPGRefresh."
+msgstr "Nach der EPGRefresh-Durchführung ein Backup erstellen"
+
+#: EPGBackupConfig.py:165
+msgid "make Backup after EPGRefresh"
+msgstr "Nach der EPGRefresh-Durchführung ein Backup erstellen"
+
+#: EPGBackupConfig.py:166
+msgid "Make backups periodically?"
+msgstr "Backups periodisch erstellen?"
+
+#: EPGBackupConfig.py:166
+msgid "make Backup every"
+msgstr "Backup erstellen alle"
+
+#: EPGBackupConfig.py:167
+msgid "Restore-Strategy"
+msgstr "Wiederherstellungs-Strategie"
+
+#: EPGBackupConfig.py:168
+msgid "EPG-Files with a less size of this value (MiB) won't be backuped."
+msgstr ""
+"EPG-Dateien die kleiner sind als dieser Wert in MiB werden nicht kopiert."
+
+#: EPGBackupConfig.py:168
+msgid "Valid Filesize"
+msgstr "Gültige Dateigröße"
+
+#: EPGBackupConfig.py:169
+msgid "Only keep EPG-Backup-Files younger than this days."
+msgstr ""
+"Nur EPG-Backup-Dateien die jünger als diese Anzahl an Tagen sind aufheben."
+
+#: EPGBackupConfig.py:169
+msgid "Valid Age"
+msgstr "Gültiges Alter"
+
+#: EPGBackupConfig.py:170
+msgid "Display more Options"
+msgstr "mehr Optionen anzeigen"
+
+#: EPGBackupConfig.py:170
+msgid "Show Advanced Options"
+msgstr "Erweiterte Optionen anzeigen"
+
+#: EPGBackupConfig.py:172
+msgid "EPG-File-Write Wait"
+msgstr "auf EPG-Datei schreiben warten"
+
+#: EPGBackupConfig.py:172
+msgid ""
+"How many seconds should EPGBackup be wait to check if the EPG-File-Size "
+"didn't change before it starts the Backup."
+msgstr ""
+"Wie viele Sekunden soll gewartet werden um zu überprüfen ob sich die EPG-"
+"Datei-Größe nicht mehr ändert, bevor ein Backup erstellt wird."
+
+#: EPGBackupConfig.py:173
+msgid ""
+"After that times of unsuccesfully boot enigma2, the EPG-File will be deleted."
+msgstr ""
+"Nach dieser Anzahl an erfolglosen enigma2-Starts, wird die EPG-Datei "
+"gelöscht."
+
+#: EPGBackupConfig.py:173
+msgid "Maximum Boot-Count"
+msgstr "Maximale Boot-Versuche"
+
+#: EPGBackupConfig.py:174
+msgid "Enable Debug"
+msgstr "Debug aktivieren"
+
+#: EPGBackupConfig.py:174
+msgid ""
+"Should debugmessages be printed?\n"
+"Messages from the shell-script will be append to a file. The filename will "
+"be added with the current date"
+msgstr ""
+"Sollen Debug-Meldungen ausgegeben werden? Es wird standardmäßig im "
+"Verzeichnis \"tmp\" geloggt. Falls Debug aktiviert ist wird der Dateiname "
+"mit dem aktuellen Datum versehen und nur solange wie die Backup-Dateien "
+"aufgehoben."
+
+#: EPGBackupConfig.py:176
+msgid ""
+"Should the debug-messages from the enigma-plugin also be append to the "
+"logfile? If you choose no the messages will print only to standard-out."
+msgstr ""
+"Sollen die Debug-Meldungen vom Enigma-Plugin auch in das Log-File "
+"geschrieben werden? Wenn Sie nein wählen, dann werden die Meldungen nur auf "
+"Standard-Out ausgegeben."
+
+#: EPGBackupConfig.py:176
+msgid "append plugin-messages"
+msgstr "Plugin-Meldungen anfügen"
+
+#: EPGBackupConfig.py:177
+msgid "Directory for the Logfiles."
+msgstr "Verzeichnis für die Log-Dateien"
+
+#: EPGBackupConfig.py:177
+msgid "Log-directory"
+msgstr "Logdatei-Verzeichnis"
+
+#: EPGBackupConfig.py:179
+msgid "Should the Manage-Script be shown in User-Scripts?"
+msgstr "Soll das Administrations-Script in User-Scripts angeboten werden?"
+
+#: EPGBackupConfig.py:179
+msgid "Show in User-Scripts"
+msgstr "In User-Scripts anzeigen"
+
+#: EPGBackupConfig.py:181
+msgid "Pop a notification if called in background?"
+msgstr ""
+"Eine Meldung anzeigen wenn Wiederherstellen im Hintergrund aufgerufen wurde?"
+
+#: EPGBackupConfig.py:181
+msgid "Show messages in background"
+msgstr "Meldungen im Hintergrund anzeigen"
+
+#: EPGBackupConfig.py:182
+msgid "Show setup in"
+msgstr "Zeige Konfiguration in"
+
+#: EPGBackupConfig.py:182
+msgid "Where should this setup be displayed?"
+msgstr "Wo soll diese Konfiguration gezeigt werden?"
+
+#: EPGBackupConfig.py:183
+msgid ""
+"Enable this to be able to make a Backup-File from within the extension menu."
+msgstr ""
+"Soll der Menüpunkt \"EPGBackup erzeugen\" direkt aus dem Erweiterungsmenü "
+"heraus aufgerufen werden können?"
+
+#: EPGBackupConfig.py:183
+msgid "Show \"Make Backup\" in extension menu"
+msgstr "\"Backup erzeugen\" in Erweiterungsmenü anzeigen"
+
+#: EPGBackupConfig.py:184
+msgid ""
+"Enable this to be able to start a restore of a Backup-File from within the "
+"extension menu."
+msgstr ""
+"Soll der Menüpunkt \"EPGBackup wiederherstellen\" direkt aus dem "
+"Erweiterungsmenü heraus aufgerufen werden können?"
+
+#: EPGBackupConfig.py:184
+msgid "Show \"Restore Backup\" in extension menu"
+msgstr "\"Backup wiederherstellen\" in Erweiterungsmenü anzeigen"
+
+#: EPGBackupConfig.py:218
+msgid "Select Logfile-Location"
+msgstr "Logdatei-Verzeichnis wählen"
+
+#: EPGBackupConfig.py:263
+msgid "Really close without saving settings?"
+msgstr "Wirklich beenden ohne zu speichern?"
+
+#: EPGBackupSupport.py:87
+msgid ""
+"The EPG-Backup was not performed, because there were %d unsuccessfully boot-"
+"attempts!\n"
+"The last restored backup-file was \"%s\".\n"
+"Do you want to delete the file?"
+msgstr ""
+"Das EPG-Backup wurde nicht durchgeführt, da es %d erfloglose Boot-Versuche "
+"gab\n"
+"Die letzte wiederhergestellte Backup-Datei war \"%s\"\n"
+"Wollen Sie diese Datei löschen?"
+
+#: EPGBackupSupport.py:131
+msgid "General Error!"
+msgstr "Genereller Fehler"
+
+#: EPGBackupSupport.py:140
+msgid "Backup and Restore are disabled!"
+msgstr "Backup und Restore sind deaktiviert"
+
+#: EPGBackupSupport.py:142
+msgid "EPG-File is too small for Backup: Size: %s; your setting: %s"
+msgstr ""
+"Die EPG-Datei ist zu klein für ein Backup: Größe: %s, Ihre Einstellung: %s"
+
+#: EPGBackupSupport.py:144
+msgid "No EPG-File found at %s!"
+msgstr "Keine EPG-Datei unter %s gefunden!"
+
+#: EPGBackupSupport.py:146
+msgid ""
+"Backup-File to restore is smaller or equal EPG-file: Backup-File: %s; Epg-"
+"File: %s"
+msgstr ""
+"Die Backup-Datei, die wiederhergestellt werden soll, ist kleiner oder gleich "
+"groß als die EPG-Datei: BackupDatei: %s, EPG-Datei: %s"
+
+#: EPGBackupSupport.py:148
+msgid ""
+"Backup-File to restore is older or equal EPG-file: Backup-File: %s; Epg-"
+"File: %s"
+msgstr ""
+"Die Backup-Datei, die wiederhergestellt werden soll, ist älter oder gleich "
+"alt als die EPG-Datei: BackupDatei: %s, EPG-Datei: %s"
+
+#: EPGBackupSupport.py:150
+msgid "Maximum Number of unsuccessfully boots reached!"
+msgstr "Maximale Anzahl an fehlgeschlagenen Boot-Versuchen erreicht!"
+
+#: EPGBackupSupport.py:152
+msgid "The EPG-File is still valid!"
+msgstr "Die EPG-Datei ist gültig!"
+
+#: EPGBackupSupport.py:163
+msgid ""
+"Logfile %s:\n"
+"%s"
+msgstr ""
+"Logdatei %s:\n"
+"%s"
+
+#: EPGBackupSupport.py:166
+msgid "There is no logfile named \"%s\"!"
+msgstr "Es existiert keine Logdatei mit Namen \"%s\"!"
+
+#: EPGBackupSupport.py:183
+msgid "Backup \"%s\" successfully created!"
+msgstr "Backup-Datei \"%s\" erfolgreich erstellt!"
+
+#: EPGBackupSupport.py:188
+msgid ""
+"Couldn't create a backup.\n"
+"Reason: %s.\n"
+"Press OK to see the logfile!"
+msgstr ""
+"Die Backup-Datei konnte nicht erstellt werden.\n"
+"Grund: %s.\n"
+"Drücken Sie OK um die Log-Datei anzusehen!"
+
+#: EPGBackupSupport.py:196 EPGBackupSupport.py:199 EPGBackupSupport.py:202
+msgid "Select a file to force a restore"
+msgstr "Eine Datei auswählen um ein Backup zu starten"
+
+#: EPGBackupSupport.py:207
+msgid "Select a file to force a restore on next boot"
+msgstr "Eine Datei auswählen um ein Backup wiederherzustellen"
+
+#: EPGBackupSupport.py:218
+msgid "No Backupfiles found"
+msgstr "Keine Backupdateien gefunden"
+
+#: EPGBackupSupport.py:237
+msgid "Backup-file \"%s\" successfully loaded!"
+msgstr "Backup-Datei \"%s\" erfolgreich geladen!"
+
+#: EPGBackupSupport.py:242
+msgid ""
+"Couldn't load backup-file.\n"
+"Reason: %s.\n"
+"Press OK to see the logfile!"
+msgstr ""
+"Die Backup-Datei konnte nicht geladen werden.\n"
+"Grund: %s.\n"
+"Drücken Sie OK um die Log-Datei anzusehen!"
+
+#: EPGBackupSupport.py:256
+msgid "Backup-file \"%s\" will be loaded on next boot!"
+msgstr "Backup-Datei \"%s\" wird beim nächsten Neustart geladen!"
+
+#: EPGBackupSupport.py:268
+msgid "FILELIST_BIGGEST"
+msgstr "Größtes"
+
+#: EPGBackupSupport.py:269
+msgid "FILELIST_YOUNGEST"
+msgstr "Jüngstes"
+
+#: EPGBackupSupport.py:270
+msgid "FILELIST_FORCED"
+msgstr "erzwungen"
+
+#: EPGBackupTools.py:40
+msgid "EPGBACKUP_NOTIFICATION_DOMAIN"
+msgstr "EPGBackup"
+
+#: plugin.py:15
+msgid "EXTENSIONMENU_PREFIX"
+msgstr "EPGBackup"
+
+#: plugin.py:20 plugin.py:22
+msgid "extensions"
+msgstr "Erweiterungen"
+
+#: plugin.py:21 plugin.py:22
+msgid "pluginmenue"
+msgstr "Pluginmenü"
+
+#: plugin.py:23
+msgid "systemmenue"
+msgstr "Systemmenü"
+
+#: plugin.py:31
+msgid "backup timer disabled"
+msgstr "periodisches Backup deaktiviert"
+
+#: plugin.py:32
+msgid "30 minutes"
+msgstr "30 Minuten"
+
+#: plugin.py:33
+msgid "1 hour"
+msgstr "1 Stunde"
+
+#: plugin.py:34
+msgid "6 hours"
+msgstr "6 Stunden"
+
+#: plugin.py:35
+msgid "1 day"
+msgstr "1 Tag"
+
+#: plugin.py:45
+msgid ""
+"The youngest file from the saved backup-files will be restored.\n"
+"If it is older than the current existing EPG-file and the EPG-file isn't "
+"valid then the biggest backup-file will be restored."
+msgstr ""
+"Die Jüngste Datei von den gespeicherten Backup-Dateien wird verwendet.\n"
+"Falls die Datei älter als die vorhandene EPG-Datei ist und die EPG-Datei "
+"nicht gültig ist, wird von der größten Backup-Datei wiederhergestellt."
+
+#: plugin.py:45
+msgid "Youngest before Biggest"
+msgstr "Jüngstes vor Größtem"
+
+#: plugin.py:46
+msgid "Biggest before Youngest"
+msgstr "Größtes vor Jüngstem "
+
+#: plugin.py:46
+msgid ""
+"The biggest file from the saved backup-files will be restored.\n"
+"If it is smaller than the current existing EPG-file and the EPG-file isn't "
+"valid then the youngest backup-file will be restored."
+msgstr ""
+"Die Größte Datei von den gespeicherten Backup-Dateien wird verwendet.\n"
+"Falls die Datei kleiner als die vorhandene EPG-Datei ist und die EPG-Datei "
+"nicht gültig ist, wird von der jüngsten Backup-Datei wiederhergestellt."
+
+#: plugin.py:47
+msgid "Only younger"
+msgstr "Nur Jüngere"
+
+#: plugin.py:47
+msgid ""
+"The backup-file will only be restored if it is younger than the current "
+"existing EPG-file."
+msgstr ""
+"Es wird nur von der Backup-Datei wiederhergestellt, wenn diese jünger als "
+"die vorhandene EPG-Datei ist."
+
+#: plugin.py:48
+msgid "Only bigger"
+msgstr "Nur Größere"
+
+#: plugin.py:48
+msgid ""
+"The backup-file will only be restored if it is greater than the current "
+"existing EPG-file."
+msgstr ""
+"Es wird nur von der Backup-Datei wiederhergestellt, wenn diese größer als "
+"die vorhandene EPG-Datei ist."
+
+#: plugin.py:109 plugin.py:128 plugin.py:132 plugin.py:199
+msgid "EXTENSIONNAME_SETUP"
+msgstr "Konfiguration"
+
+#: plugin.py:121
+msgid ""
+"To apply your Changes the GUI has to be restarted.\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+"Um die Änderungen zu übernehmen muss die GUI neu gestartet werden.\n"
+"Wollen Sie die GUI jetzt neu starten?"
+
+#: plugin.py:122
+msgid "EPGBackup Config V %s"
+msgstr "EPG-Backup Konfiguration V %s"
+
+#: plugin.py:129 plugin.py:133
+msgid "Backup and restore EPG Data, including integration of EPGRefresh-plugin"
+msgstr ""
+"Backup und Wiederherstellen von EPG-Daten, inklusive Integration vom "
+"EPGRefresh-Plugin"
+
+#: plugin.py:136
+msgid "Make Backup"
+msgstr "Backup erstellen"
+
+#: plugin.py:137
+msgid "Start making a Backup"
+msgstr "Ein EPG-Backup erzeugen"
+
+#: plugin.py:140
+msgid "Restore Backup"
+msgstr "Backup wiederherstellen"
+
+#: plugin.py:141
+msgid "Start a Restore of a Backup"
+msgstr "Ein EPG-Backup wiederherstellen"
+
+#: plugin.py:200
+msgid "Keep EPG-Data over Crashes"
+msgstr "EPG-Daten über Abstürze hinweg behalten"
+
+#~ msgid ""
+#~ "To load the Backupfile the GUI has to be restarted.\n"
+#~ "Do you want to restart the GUI now?"
+#~ msgstr ""
+#~ "Um die Backupdatei zu laden muss die GUI neu gestartet werden.\n"
+#~ "Wollen Sie die GUI jetzt neu starten?"
+
+#~ msgid "Youngest"
+#~ msgstr "Nur Jüngere"
+
+#~ msgid "Biggest"
+#~ msgstr "nur Größere"
+
+#~ msgid "Call after EPGRefresh"
+#~ msgstr "Nach EPGRefresh aufrufen"
+
+#~ msgid "Backup-Strategy"
+#~ msgstr "Backup-Strategie"
+
+#~ msgid ""
+#~ "There is still a refresh running. The Operation isn't allowed at this "
+#~ "moment."
+#~ msgstr ""
+#~ "Zurzeit läuft gerade eine Aktualisierung. Die Aktion ist im Moment nicht "
+#~ "erlaubt."
+
+#~ msgid ""
+#~ "EPG refresh finished.\n"
+#~ "Should AutoTimer be search for new matches?"
+#~ msgstr ""
+#~ "EPG-Aktualisierung abgeschlossen.\n"
+#~ "Soll Auto Timer nach neuen Ereignissen suchen?"
+
+#~ msgid "AutoTimer failed with error %s"
+#~ msgstr "Parsen des EPGs durch den AutoTimer hat einen Fehler verursacht %s"
+
+#~ msgid ""
+#~ "Found a total of %d matching Events.\n"
+#~ "%d Timer were added and\n"
+#~ "%d modified,\n"
+#~ "%d conflicts encountered,\n"
+#~ "%d similars added."
+#~ msgstr ""
+#~ "Habe insgesamt %d Sendungen gefunden.\n"
+#~ "%d Timer wurden hinzugefügt und\n"
+#~ "%d geändert,\n"
+#~ "%d Konflikte gefunden,\n"
+#~ "%d alternative Timer hinzugefügt."
+
+#~ msgid "EPG refresh finished."
+#~ msgstr "EPG Aktualisierung beendet."
+
+#~ msgid "%d more services"
+#~ msgstr "%d weitere Kanäle"
+
+#~ msgid "Following Services have to be scanned:"
+#~ msgstr "Folgende Sender werden noch gescannt:"
+
+#~ msgid "EPGRefresh Services"
+#~ msgstr "EPGRefresh Sender"
+
+#~ msgid "Channels"
+#~ msgstr "Sender"
+
+#~ msgid "Bouquets"
+#~ msgstr "Bouquets"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "delete"
+#~ msgstr "Löschen"
+
+#~ msgid "New"
+#~ msgstr "Neu"
+
+#~ msgid "Edit Services to refresh"
+#~ msgstr "Sender zur Aktualisierung auswählen"
+
+#~ msgid "Editing"
+#~ msgstr "Bearbeite"
+
+#~ msgid "Refreshing"
+#~ msgstr "Aktualisiere"
+
+#~ msgid "Select channel to refresh"
+#~ msgstr "Zu aktualisierenden Sender auswählen"
+
+#~ msgid "Select bouquet to refresh"
+#~ msgstr "Zu aktualisierendes Bouquet auswählen"
+
+#~ msgid "Key Help"
+#~ msgstr "Tastenhilfe"
+
+#~ msgid "EPGRefresh Configuration Help"
+#~ msgstr "EPGRefresh Konfiguration Hilfe"
+
+#~ msgid "Stop running refresh"
+#~ msgstr "Laufende Aktualisierung stoppen"
+
+#~ msgid "Pending Services"
+#~ msgstr "ausstehende Kanäle"
+
+#~ msgid "Refresh now"
+#~ msgstr " Jetzt Aktualisieren"
+
+#~ msgid "EPGRefresh Functions"
+#~ msgstr "EPGRefresh Funktionen"
+
+#~ msgid "EPGRefresh Configuration"
+#~ msgstr "EPGRefresh Konfiguration"
+
+#~ msgid "Functions"
+#~ msgstr "Funktionen"
+
+#~ msgid "Edit Services"
+#~ msgstr "Kanäle"
+
+#~ msgid "Show more Functions"
+#~ msgstr "Mehr Funktionen anzeigen"
+
+#~ msgid "Show last EPGRefresh - Time"
+#~ msgstr "Letzte EPG-Aktualisierung zeigen"
+
+#~ msgid "Refresh EPG automatically"
+#~ msgstr "EPG automatisch aktualisieren"
+
+#~ msgid ""
+#~ "Unless this is enabled, EPGRefresh won't automatically run but needs to "
+#~ "be explicitly started by the yellow button in this menu."
+#~ msgstr ""
+#~ "Solange diese Option nicht aktiviert ist, wird EPGRefresh nicht "
+#~ "automatisch laufen, sondern muss explizit mittels gelbem Button hier im "
+#~ "Menü gestartet werden."
+
+#~ msgid "Duration to stay on service (seconds)"
+#~ msgstr "Verbleibe auf Sender für (Sekunden)"
+
+#~ msgid ""
+#~ "This is the duration each service/channel will stay active during a "
+#~ "refresh."
+#~ msgstr "Anzahl Sekunden, für die die einzelnen Kanäle aktiviert werden."
+
+#~ msgid ""
+#~ "An automated refresh will start after this time of day, but before the "
+#~ "time specified in next setting."
+#~ msgstr ""
+#~ "Die automatische Aktualisierung wird nach dieser Uhrzeit und vor der "
+#~ "Uhrzeit im nächsten Feld durchgeführt."
+
+#~ msgid "EPG refresh auto-start earliest (hh:mm)"
+#~ msgstr "Früheste Zeit für Aktualisierung (hh:mm)"
+
+#~ msgid ""
+#~ "An automated refresh will start before this time of day, but after the "
+#~ "time specified in previous setting."
+#~ msgstr ""
+#~ "Die automatische Aktualisierung wird vor dieser Uhrzeit und nach der "
+#~ "Uhrzeit im vorherigen Feld durchgeführt."
+
+#~ msgid "EPG refresh auto-start latest (hh:mm)"
+#~ msgstr "Späteste Zeit für Aktualisierung (hh:mm)"
+
+#~ msgid "Delay if not in standby (minutes)"
+#~ msgstr "Verzögerung sofern nicht im Standby (min)"
+
+#~ msgid ""
+#~ "If the receiver currently isn't in standby, this is the duration which "
+#~ "EPGRefresh will wait before retry."
+#~ msgstr ""
+#~ "Ist der Receiver zum Startzeitpunkt des Starts nicht im Standby, pausiert "
+#~ "das Plugin für die hier eingetragene Zeit, bevor es einen erneuten "
+#~ "Versuch startet."
+
+#~ msgid ""
+#~ "If you want to refresh the EPG in background, you can choose the method "
+#~ "which best suits your needs here, e.g. hidden, fake reocrding or regular "
+#~ "Picture in Picture."
+#~ msgstr ""
+#~ "Wählen Sie hier die Methode für die Aktualisierung im Hintergrund, die am "
+#~ "besten Ihren Anforderungen entspricht: versteckt, Pseudo- Aufnahme oder "
+#~ "normales Bild in Bild."
+
+#~ msgid "Refresh EPG using"
+#~ msgstr "Aktualisiere unter Verwendung von"
+
+#~ msgid ""
+#~ "Should protected services be skipped if refresh was started in "
+#~ "interactive-mode?"
+#~ msgstr ""
+#~ "Sollen geschützte Kanäle bei einer manuellen Aktualisierung übersprpungen "
+#~ "werden?"
+
+#~ msgid "Skip protected Services"
+#~ msgstr "überspringe geschützte Kanäle"
+
+#~ msgid ""
+#~ "Enable this to be able to access the EPGRefresh configuration from within "
+#~ "the extension menu."
+#~ msgstr ""
+#~ "Soll die Konfiguration direkt aus dem Erweiterungsmenü heraus aufgerufen "
+#~ "werden können?"
+
+#~ msgid "Show Setup in extension menu"
+#~ msgstr "Setup in Erweiterungsmenü anzeigen"
+
+#~ msgid ""
+#~ "Enable this to be able to start the EPGRefresh from within the extension "
+#~ "menu."
+#~ msgstr ""
+#~ "Soll der Menüpunkt \"EPGRefresh Jetzt Aktualisieren\" direkt aus dem "
+#~ "Erweiterungsmenü heraus aufgerufen werden können?"
+
+#~ msgid "Show 'EPGRefresh Start now' in extension menu"
+#~ msgstr "\"Aktualisierung starten\" in Erweiterungsmenü anzeigen"
+
+#~ msgid "Show popup when refresh starts and ends"
+#~ msgstr "Meldung zeigen, wenn Aktualisierung startet/endet"
+
+#~ msgid ""
+#~ "This setting controls whether or not an informational message will be "
+#~ "shown at start and completion of refresh."
+#~ msgstr ""
+#~ "Soll zum Start und Ende der Aktualisierung eine Informationsmeldung "
+#~ "angezeigt werden?"
+
+#~ msgid ""
+#~ "If this is enabled, the plugin will wake up the receiver from standby if "
+#~ "possible. Otherwise it needs to be switched on already."
+#~ msgstr ""
+#~ "Bei aktivierter Option weckt das Plugin den Receiver aus dem Standby auf "
+#~ "- sofern möglich. Andernfalls muss die Box schon eingeschaltet sein."
+
+#~ msgid "Wake up from standby for EPG refresh"
+#~ msgstr "Aus dem Standby hochfahren"
+
+#~ msgid "Force scan even if receiver is in use"
+#~ msgstr "Aktualisierung erzwingen"
+
+#~ msgid ""
+#~ "This setting controls whether or not the refresh will be initiated even "
+#~ "though the receiver is active (either not in standby or currently "
+#~ "recording)."
+#~ msgstr ""
+#~ "Aktualisierung auch starten, wenn die Box gerade in Verwendung ist (also "
+#~ "nicht im Standby oder bei aktiver Aufnahme)?"
+
+#~ msgid "Shutdown after EPG refresh"
+#~ msgstr "Nach EPG Aktualisierung herunterfahren"
+
+#~ msgid ""
+#~ "This setting controls whether the receiver should be set to standby after "
+#~ "refresh is completed."
+#~ msgstr ""
+#~ "Soll der Receiver nach vollständiger Aktualisierung in den Standby "
+#~ "versetzt werden?"
+
+#~ msgid "Extend the list of services to refresh by those your AutoTimers use?"
+#~ msgstr ""
+#~ "Liste der Kanäle automatisch um die Kanäle des AutoTimers erweitern?"
+
+#~ msgid "Inherit Services from AutoTimer"
+#~ msgstr "Zusätzlich Sender vom AutoTimer verwenden"
+
+#~ msgid ""
+#~ "After a successful refresh the AutoTimer will automatically search for "
+#~ "new matches if this is enabled. The options 'Ask*' has only affect on a "
+#~ "manually refresh. If EPG-Refresh was called in background the default-"
+#~ "Answer will be executed!"
+#~ msgstr ""
+#~ "Bei aktivierter Option sucht das AutoTimer Plugin nach Aktualisierung des "
+#~ "EPG automatisch nach neuen Sendungen. Die Option \"Fragen\" ist nur für "
+#~ "manuelle Aktualisierungen relevant. Im Hintergrund wird die Default-"
+#~ "Antwort ausgeführt."
+
+#~ msgid "Run AutoTimer after refresh"
+#~ msgstr "AutoTimer nach Aktualisierung starten"
+
+#~ msgid "Version"
+#~ msgstr "Version"
+
+#~ msgid "never"
+#~ msgstr "niemals"
+
+#~ msgid "Last refresh was %s"
+#~ msgstr "Letzte Aktualisierung: %s"
+
+#~ msgid "EPG refresh starts scanning channels."
+#~ msgstr "EPG Aktualisierung startet den Kanalscan."
+
+#~ msgid "Please don't use PiP meanwhile!"
+#~ msgstr "Bitte PiP in der Zwischenzeit nicht verwenden!"
+
+#~ msgid "PiP available now."
+#~ msgstr "PiP is wieder verfügbar."
+
+#~ msgid "Background only"
+#~ msgstr "Nur im Hintergrund"
+
+#~ msgid "Foreground also"
+#~ msgstr "auch im Vordergrund"
+
+#~ msgid "Yes"
+#~ msgstr "Ja"
+
+#~ msgid "No"
+#~ msgstr "Nein"
+
+#~ msgid "Ask default Yes"
+#~ msgstr "Fragen default Ja"
+
+#~ msgid "Ask default No"
+#~ msgstr "Fragen default Nein"
+
+#~ msgid "Main Picture"
+#~ msgstr "Hauptbild"
+
+#~ msgid "Picture in Picture"
+#~ msgstr "Bild in Bild (PiP)"
+
+#~ msgid "Picture in Picture (hidden)"
+#~ msgstr "Bild in Bild (versteckt)"
+
+#~ msgid "Fake recording"
+#~ msgstr "Pseudoaufnahme"
+
+#~ msgid "Automatically refresh EPG"
+#~ msgstr "Automatisierte EPG Aktualisierung"
+
+#~ msgid "Start EPGrefresh immediately"
+#~ msgstr "Eine Aktualisierung sofort starten"
+
+#~ msgid "Stop Refresh"
+#~ msgstr "Aktualisierung stoppen"
+
+#~ msgid "Stop Running EPG-refresh"
+#~ msgstr "Laufende Aktualisierung stoppen"
+
+#~ msgid "Show the pending Services for refresh"
+#~ msgstr "Ausstehende Sender einer laufenden Aktualisierung ansehen"
+
+#~ msgid "PLUGINNAME_EPGRefresh"
+#~ msgstr "EPGRefresh"
+
+#~ msgid "EPG-Backup has been installed!:"
+#~ msgstr "EPG-Backup wurde installiert!"
+
+#~ msgid "EPG-Backup has been uninstalled!:"
+#~ msgstr "EPG-Backup wurde deinstalliert!"
+
+#~ msgid "EPGRefresh Start now"
+#~ msgstr "EPGRefresh Jetzt Aktualisieren"
+
+#~ msgid "EPGRefresh Stop"
+#~ msgstr "EPGRefresh Aktualisierung stoppen"
+
+#~ msgid "EPGRefresh Pending Services"
+#~ msgstr "EPGRefresh ausstehende Sender"
+
+#~ msgid "Move to top of Config"
+#~ msgstr "Eine Seite nach oben springen"
+
+#~ msgid "Move to bottom of Config"
+#~ msgstr "Eine Seite nach unten springen"
+
+#~ msgid ""
+#~ "This might have been an automated bootup to refresh the EPG. For this to "
+#~ "happen it is recommended to put the receiver to Standby.\n"
+#~ "Do you want to do this now?"
+#~ msgstr ""
+#~ "Der Receiver ist möglicherweise automatisiert zur Aktualisierung des EPG "
+#~ "hochgefahren. \n"
+#~ "Es wird empfohlen, dies im Standby zu tun. Jetzt in den Standby gehen?"

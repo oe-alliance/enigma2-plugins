@@ -1,0 +1,436 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2014-09-17 06:38+CEST\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: EPGBackupConfig.py:46 EPGBackupConfig.py:102
+msgid "EPGBackup Setup"
+msgstr ""
+
+#: EPGBackupConfig.py:55 EPGBackupSupport.py:219
+msgid "Cancel"
+msgstr ""
+
+#: EPGBackupConfig.py:56
+msgid "Save"
+msgstr ""
+
+#: EPGBackupConfig.py:62 EPGBackupConfig.py:73
+msgid "Close and forget changes"
+msgstr ""
+
+#: EPGBackupConfig.py:63
+msgid "Close and save changes"
+msgstr ""
+
+#: EPGBackupConfig.py:68
+msgid "Open Context Menu"
+msgstr ""
+
+#: EPGBackupConfig.py:78
+msgid "Move page up"
+msgstr ""
+
+#: EPGBackupConfig.py:79
+msgid "Move page down"
+msgstr ""
+
+#: EPGBackupConfig.py:122
+msgid "Restore EPG-Backups (Date)"
+msgstr ""
+
+#: EPGBackupConfig.py:123
+msgid "Restore EPG-Backups (Size)"
+msgstr ""
+
+#: EPGBackupConfig.py:124
+msgid "Make a EPG-Backup"
+msgstr ""
+
+#: EPGBackupConfig.py:125
+msgid "Set Restore-File for next boot"
+msgstr ""
+
+#: EPGBackupConfig.py:128
+msgid "Show Help"
+msgstr ""
+
+#: EPGBackupConfig.py:161
+msgid "Enable Backup"
+msgstr ""
+
+#: EPGBackupConfig.py:161
+msgid ""
+"Should the Backup-Functionality be enabled?\n"
+"For more Information have a look at the Help-Screen."
+msgstr ""
+
+#: EPGBackupConfig.py:163
+msgid ""
+"Make a backup before starting enigma. A backup-file will only be created, if no valid backup-file could be restored.\n"
+"Note: It's logically the same as making a backup at the ending of enigma, because the file didn't change in the meanwhile."
+msgstr ""
+
+#: EPGBackupConfig.py:163
+msgid "make Backup on start"
+msgstr ""
+
+#: EPGBackupConfig.py:165
+msgid "Make a backup after EPGRefresh."
+msgstr ""
+
+#: EPGBackupConfig.py:165
+msgid "make Backup after EPGRefresh"
+msgstr ""
+
+#: EPGBackupConfig.py:166
+msgid "Make backups periodically?"
+msgstr ""
+
+#: EPGBackupConfig.py:166
+msgid "make Backup every"
+msgstr ""
+
+#: EPGBackupConfig.py:167
+msgid "Restore-Strategy"
+msgstr ""
+
+#: EPGBackupConfig.py:168
+msgid "EPG-Files with a less size of this value (MiB) won't be backuped."
+msgstr ""
+
+#: EPGBackupConfig.py:168
+msgid "Valid Filesize"
+msgstr ""
+
+#: EPGBackupConfig.py:169
+msgid "Only keep EPG-Backup-Files younger than this days."
+msgstr ""
+
+#: EPGBackupConfig.py:169
+msgid "Valid Age"
+msgstr ""
+
+#: EPGBackupConfig.py:170
+msgid "Display more Options"
+msgstr ""
+
+#: EPGBackupConfig.py:170
+msgid "Show Advanced Options"
+msgstr ""
+
+#: EPGBackupConfig.py:172
+msgid "EPG-File-Write Wait"
+msgstr ""
+
+#: EPGBackupConfig.py:172
+msgid "How many seconds should EPGBackup be wait to check if the EPG-File-Size didn't change before it starts the Backup."
+msgstr ""
+
+#: EPGBackupConfig.py:173
+msgid "After that times of unsuccesfully boot enigma2, the EPG-File will be deleted."
+msgstr ""
+
+#: EPGBackupConfig.py:173
+msgid "Maximum Boot-Count"
+msgstr ""
+
+#: EPGBackupConfig.py:174
+msgid "Enable Debug"
+msgstr ""
+
+#: EPGBackupConfig.py:174
+msgid ""
+"Should debugmessages be printed?\n"
+"Messages from the shell-script will be append to a file. The filename will be added with the current date"
+msgstr ""
+
+#: EPGBackupConfig.py:176
+msgid "Should the debug-messages from the enigma-plugin also be append to the logfile? If you choose no the messages will print only to standard-out."
+msgstr ""
+
+#: EPGBackupConfig.py:176
+msgid "append plugin-messages"
+msgstr ""
+
+#: EPGBackupConfig.py:177
+msgid "Directory for the Logfiles."
+msgstr ""
+
+#: EPGBackupConfig.py:177
+msgid "Log-directory"
+msgstr ""
+
+#: EPGBackupConfig.py:179
+msgid "Should the Manage-Script be shown in User-Scripts?"
+msgstr ""
+
+#: EPGBackupConfig.py:179
+msgid "Show in User-Scripts"
+msgstr ""
+
+#: EPGBackupConfig.py:181
+msgid "Pop a notification if called in background?"
+msgstr ""
+
+#: EPGBackupConfig.py:181
+msgid "Show messages in background"
+msgstr ""
+
+#: EPGBackupConfig.py:182
+msgid "Show setup in"
+msgstr ""
+
+#: EPGBackupConfig.py:182
+msgid "Where should this setup be displayed?"
+msgstr ""
+
+#: EPGBackupConfig.py:183
+msgid "Enable this to be able to make a Backup-File from within the extension menu."
+msgstr ""
+
+#: EPGBackupConfig.py:183
+msgid "Show \"Make Backup\" in extension menu"
+msgstr ""
+
+#: EPGBackupConfig.py:184
+msgid "Enable this to be able to start a restore of a Backup-File from within the extension menu."
+msgstr ""
+
+#: EPGBackupConfig.py:184
+msgid "Show \"Restore Backup\" in extension menu"
+msgstr ""
+
+#: EPGBackupConfig.py:218
+msgid "Select Logfile-Location"
+msgstr ""
+
+#: EPGBackupConfig.py:263
+msgid "Really close without saving settings?"
+msgstr ""
+
+#: EPGBackupSupport.py:87
+msgid ""
+"The EPG-Backup was not performed, because there were %d unsuccessfully boot-attempts!\n"
+"The last restored backup-file was \"%s\".\n"
+"Do you want to delete the file?"
+msgstr ""
+
+#: EPGBackupSupport.py:131
+msgid "General Error!"
+msgstr ""
+
+#: EPGBackupSupport.py:140
+msgid "Backup and Restore are disabled!"
+msgstr ""
+
+#: EPGBackupSupport.py:142
+msgid "EPG-File is too small for Backup: Size: %s; your setting: %s"
+msgstr ""
+
+#: EPGBackupSupport.py:144
+msgid "No EPG-File found at %s!"
+msgstr ""
+
+#: EPGBackupSupport.py:146
+msgid "Backup-File to restore is smaller or equal EPG-file: Backup-File: %s; Epg-File: %s"
+msgstr ""
+
+#: EPGBackupSupport.py:148
+msgid "Backup-File to restore is older or equal EPG-file: Backup-File: %s; Epg-File: %s"
+msgstr ""
+
+#: EPGBackupSupport.py:150
+msgid "Maximum Number of unsuccessfully boots reached!"
+msgstr ""
+
+#: EPGBackupSupport.py:152
+msgid "The EPG-File is still valid!"
+msgstr ""
+
+#: EPGBackupSupport.py:163
+msgid ""
+"Logfile %s:\n"
+"%s"
+msgstr ""
+
+#: EPGBackupSupport.py:166
+msgid "There is no logfile named \"%s\"!"
+msgstr ""
+
+#: EPGBackupSupport.py:183
+msgid "Backup \"%s\" successfully created!"
+msgstr ""
+
+#: EPGBackupSupport.py:188
+msgid ""
+"Couldn't create a backup.\n"
+"Reason: %s.\n"
+"Press OK to see the logfile!"
+msgstr ""
+
+#: EPGBackupSupport.py:196 EPGBackupSupport.py:199 EPGBackupSupport.py:202
+msgid "Select a file to force a restore"
+msgstr ""
+
+#: EPGBackupSupport.py:207
+msgid "Select a file to force a restore on next boot"
+msgstr ""
+
+#: EPGBackupSupport.py:218
+msgid "No Backupfiles found"
+msgstr ""
+
+#: EPGBackupSupport.py:237
+msgid "Backup-file \"%s\" successfully loaded!"
+msgstr ""
+
+#: EPGBackupSupport.py:242
+msgid ""
+"Couldn't load backup-file.\n"
+"Reason: %s.\n"
+"Press OK to see the logfile!"
+msgstr ""
+
+#: EPGBackupSupport.py:256
+msgid "Backup-file \"%s\" will be loaded on next boot!"
+msgstr ""
+
+#: EPGBackupSupport.py:268
+msgid "FILELIST_BIGGEST"
+msgstr ""
+
+#: EPGBackupSupport.py:269
+msgid "FILELIST_YOUNGEST"
+msgstr ""
+
+#: EPGBackupSupport.py:270
+msgid "FILELIST_FORCED"
+msgstr ""
+
+#: EPGBackupTools.py:40
+msgid "EPGBACKUP_NOTIFICATION_DOMAIN"
+msgstr ""
+
+#: plugin.py:15
+msgid "EXTENSIONMENU_PREFIX"
+msgstr ""
+
+#: plugin.py:20 plugin.py:22
+msgid "extensions"
+msgstr ""
+
+#: plugin.py:21 plugin.py:22
+msgid "pluginmenue"
+msgstr ""
+
+#: plugin.py:23
+msgid "systemmenue"
+msgstr ""
+
+#: plugin.py:31
+msgid "backup timer disabled"
+msgstr ""
+
+#: plugin.py:32
+msgid "30 minutes"
+msgstr ""
+
+#: plugin.py:33
+msgid "1 hour"
+msgstr ""
+
+#: plugin.py:34
+msgid "6 hours"
+msgstr ""
+
+#: plugin.py:35
+msgid "1 day"
+msgstr ""
+
+#: plugin.py:45
+msgid ""
+"The youngest file from the saved backup-files will be restored.\n"
+"If it is older than the current existing EPG-file and the EPG-file isn't valid then the biggest backup-file will be restored."
+msgstr ""
+
+#: plugin.py:45
+msgid "Youngest before Biggest"
+msgstr ""
+
+#: plugin.py:46
+msgid "Biggest before Youngest"
+msgstr ""
+
+#: plugin.py:46
+msgid ""
+"The biggest file from the saved backup-files will be restored.\n"
+"If it is smaller than the current existing EPG-file and the EPG-file isn't valid then the youngest backup-file will be restored."
+msgstr ""
+
+#: plugin.py:47
+msgid "Only younger"
+msgstr ""
+
+#: plugin.py:47
+msgid "The backup-file will only be restored if it is younger than the current existing EPG-file."
+msgstr ""
+
+#: plugin.py:48
+msgid "Only bigger"
+msgstr ""
+
+#: plugin.py:48
+msgid "The backup-file will only be restored if it is greater than the current existing EPG-file."
+msgstr ""
+
+#: plugin.py:109 plugin.py:128 plugin.py:132 plugin.py:199
+msgid "EXTENSIONNAME_SETUP"
+msgstr ""
+
+#: plugin.py:121
+msgid ""
+"To apply your Changes the GUI has to be restarted.\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+
+#: plugin.py:122
+msgid "EPGBackup Config V %s"
+msgstr ""
+
+#: plugin.py:129 plugin.py:133
+msgid "Backup and restore EPG Data, including integration of EPGRefresh-plugin"
+msgstr ""
+
+#: plugin.py:136
+msgid "Make Backup"
+msgstr ""
+
+#: plugin.py:137
+msgid "Start making a Backup"
+msgstr ""
+
+#: plugin.py:140
+msgid "Restore Backup"
+msgstr ""
+
+#: plugin.py:141
+msgid "Start a Restore of a Backup"
+msgstr ""
+
+#: plugin.py:200
+msgid "Keep EPG-Data over Crashes"
+msgstr ""
+

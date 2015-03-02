@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/usr/lib/enigma2/python/Plugins/Extensions/EPGBackup/EPGBackup.sh uninstall
+exit 0
