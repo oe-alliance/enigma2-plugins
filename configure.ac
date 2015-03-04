@@ -319,6 +319,12 @@ eparted/meta/Makefile
 eparted/po/Makefile
 eparted/src/Makefile
 
+epgbackup/Makefile
+epgbackup/meta/Makefile
+epgbackup/po/Makefile
+epgbackup/src/Makefile
+epgbackup/src/localehelp/Makefile
+
 epgrefresh/Makefile
 epgrefresh/meta/Makefile
 epgrefresh/po/Makefile
@@ -647,6 +653,18 @@ satloader/po/Makefile
 schiffe/Makefile
 schiffe/meta/Makefile
 schiffe/src/Makefile
+
+seriesplugin/Makefile
+seriesplugin/etc/Makefile
+seriesplugin/meta/Makefile
+seriesplugin/po/Makefile
+seriesplugin/src/Makefile
+seriesplugin/src/Images/Makefile
+seriesplugin/src/Logos/Makefile
+seriesplugin/src/Identifiers/Makefile
+seriesplugin/src/Identifiers/bs4/Makefile
+seriesplugin/src/Identifiers/bs4/builder/Makefile
+seriesplugin/src/Identifiers/pkg/Makefile
 
 setpasswd/Makefile
 setpasswd/meta/Makefile
