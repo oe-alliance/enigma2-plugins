@@ -25,7 +25,6 @@ SUBDIRS = \
 	easymedia \
 	ecasa \
 	eibox \
-	elektro \
 	emailclient \
 	emission \
 	eparted \
