@@ -25,9 +25,11 @@ SUBDIRS = \
 	easymedia \
 	ecasa \
 	eibox \
+	elektro \
 	emailclient \
 	emission \
 	eparted \
+	epgbackup \
 	epgrefresh \
 	eurotictv \
 	eventlist \
@@ -71,6 +73,7 @@ SUBDIRS = \
 	reftopiconname \
 	remotetimer \
 	rsdownloader \
+	seriesplugin \
 	setpasswd \
 	shoutcast \
 	showclock \
