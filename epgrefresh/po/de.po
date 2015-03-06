@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-12 10:30+CEST\n"
-"PO-Revision-Date: 2014-04-12 10:32+0100\n"
-"Last-Translator: Joe128 <johnny.u@gmx.at>\n"
+"PO-Revision-Date: 2015-03-06 21:35+0100\n"
+"Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: none\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.7.4\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
 #: EPGBackupSupport.py:52
@@ -305,7 +305,7 @@ msgstr ""
 
 #: EPGRefreshConfiguration.py:168
 msgid "Show Setup in extension menu"
-msgstr "Setup in Erweiterungsmenü anzeigen"
+msgstr "\"Einstellungen\" im Erweiterungsmenü anzeigen"
 
 #: EPGRefreshConfiguration.py:169
 msgid ""
@@ -317,7 +317,7 @@ msgstr ""
 
 #: EPGRefreshConfiguration.py:169
 msgid "Show 'EPGRefresh Start now' in extension menu"
-msgstr "\"Aktualisierung starten\" in Erweiterungsmenü anzeigen"
+msgstr "\"Aktualisierung starten\" im Erweiterungsmenü anzeigen"
 
 #: EPGRefreshConfiguration.py:170
 msgid "Show popup when refresh starts and ends"
