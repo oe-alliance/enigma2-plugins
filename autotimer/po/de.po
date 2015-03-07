@@ -565,7 +565,7 @@ msgid "Please provide a Text to match"
 msgstr "Bitte zu findenden Text eingeben"
 
 msgid "Poll Interval (in mins)"
-msgstr "Abfrageintervall (in Miunten)"
+msgstr "Abfrageintervall (in Minuten)"
 
 msgid "Poll automatically"
 msgstr "Automatisch suchen"
