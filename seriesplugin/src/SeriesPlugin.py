@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 # by betonme @2012
 
 import re
@@ -78,14 +78,14 @@ def getInstance():
 			#uname()[3]'#13 SMP Thu Dec 4 00:25:51 UTC 2014'
 			#uname()[4]'mips'
 		except:
-			pass
+			sys.exc_clear()
 		
 		try:
 			from Components.About import about
 			splog( "SP: EnigmaVersion " + about.getEnigmaVersionString().strip() )
 			splog( "SP: ImageVersion " + about.getVersionString().strip() )
 		except:
-			pass
+			sys.exc_clear()
 		
 		try:
 			#http://stackoverflow.com/questions/1904394/python-selecting-to-read-the-first-line-only
@@ -93,13 +93,13 @@ def getInstance():
 			splog( "SP: imageversion " + open("/etc/image-version").readline().strip() )
 			splog( "SP: imageissue " + open("/etc/issue.net").readline().strip() )
 		except:
-			pass
+			sys.exc_clear()
 		
 		try:
 			for key, value in config.plugins.seriesplugin.dict().iteritems():
 				splog( "SP: config..%s = %s" % (key, str(value.value)) )
 		except Exception as e:
-			pass
+			sys.exc_clear()
 		
 		#try:
 		#	if os.path.exists(SERIESPLUGIN_PATH):
@@ -107,14 +107,14 @@ def getInstance():
 		#		for fname in dirList:
 		#			splog( "SP: ", fname, datetime.fromtimestamp( int( os.path.getctime( os.path.join(SERIESPLUGIN_PATH,fname) ) ) ).strftime('%Y-%m-%d %H:%M:%S') )
 		#except Exception as e:
-		#	pass
+		#	sys.exc_clear()
 		#try:
 		#	if os.path.exists(AUTOTIMER_PATH):
 		#		dirList = os.listdir(AUTOTIMER_PATH)
 		#		for fname in dirList:
 		#			splog( "SP: ", fname, datetime.fromtimestamp( int( os.path.getctime( os.path.join(AUTOTIMER_PATH,fname) ) ) ).strftime('%Y-%m-%d %H:%M:%S') )
 		#except Exception as e:
-		#	pass
+		#	sys.exc_clear()
 		
 		instance = SeriesPlugin()
 		#instance[os.getpid()] = SeriesPlugin()
@@ -144,17 +144,19 @@ def refactorTitle(org, data):
 			if config.plugins.seriesplugin.replace_chars.value:
 				repl = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
 				splog("SP: refactor org", org)
-				org = repl.sub('', str(org))
+				org = repl.sub('', org)
 				splog("SP: refactor org", org)
 				
 				splog("SP: refactor title", title)
-				title = repl.sub('', str(title))
+				title = repl.sub('', title)
 				splog("SP: refactor title", title)
 				
 				splog("SP: refactor series", series)
-				series = repl.sub('', str(series))
+				series = repl.sub('', series)
 				splog("SP: refactor series", series)
-			return config.plugins.seriesplugin.pattern_title.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			#return config.plugins.seriesplugin.pattern_title.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			cust_title = config.plugins.seriesplugin.pattern_title.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			return cust_title.replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace("\'","").replace('  ',' ')
 		else:
 			return org
 	else:
@@ -164,12 +166,14 @@ def refactorDescription(org, data):
 	if data:
 		season, episode, title, series = data
 		if config.plugins.seriesplugin.pattern_description.value and not config.plugins.seriesplugin.pattern_description.value == "Off":
-			#if season == 0 and episode == 0:
-			#	description = config.plugins.seriesplugin.pattern_description.value.strip().format( **{'org': org, 'title': title, 'series': series} )
-			#else:
-			description = config.plugins.seriesplugin.pattern_description.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
-			description = description.replace("\n", " ")
-			return description
+			##if season == 0 and episode == 0:
+			##	description = config.plugins.seriesplugin.pattern_description.value.strip().format( **{'org': org, 'title': title, 'series': series} )
+			##else:
+			#description = config.plugins.seriesplugin.pattern_description.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			#description = description.replace("\n", " ")
+			#return description
+			cust_plot = config.plugins.seriesplugin.pattern_description.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			return cust_plot.replace("\n", " ").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace("\'","").replace('  ',' ')
 		else:
 			return org
 	else:
@@ -387,6 +391,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 				serviceref = service.toString()
 			#else:
 			except:
+				sys.exc_clear()
 				serviceref = str(service)
 			serviceref = re.sub('::.*', ':', serviceref)
 
@@ -444,9 +449,12 @@ class SeriesPlugin(Modules, ChannelsBase):
 			# Reset the knownids on every new request
 			identifier.knownids = []
 			
-			if isinstance(service, eServiceReference):
+			#if isinstance(service, eServiceReference):
+			try:
 				serviceref = service.toString()
-			else:
+			#else:
+			except:
+				sys.exc_clear()
 				serviceref = str(service)
 			serviceref = re.sub('::.*', ':', serviceref)
 			

@@ -202,7 +202,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 			self.setTitle(_("Error check log file"))
 		
 	def buildList(self, entry):
-		self.setTitle(_("Web-Channel / STB-Channels."))
+		self.setTitle(_("STB-Channels / Web-Channel"))
 		
 		(stbSender, webSender, serviceref, status) = entry
 		if int(status) == 0:		

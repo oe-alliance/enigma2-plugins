@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #######################################################################
 #
 #    Series Plugin for Enigma-2
@@ -114,7 +114,7 @@ def buildSTBchannellist(BouquetName = None):
 			for (serviceref, servicename) in bouquetlist:
 				playable = not (eServiceReference(serviceref).flags & mask)
 				if playable:
-					chlist.append((servicename, serviceref, unifyChannel(servicename)))
+					chlist.append((servicename, re.sub('::.*', ':', serviceref), unifyChannel(servicename)))
 	else:
 		for bouquet in tvbouquets:
 			if bouquet[1] == BouquetName:
@@ -123,7 +123,7 @@ def buildSTBchannellist(BouquetName = None):
 				for (serviceref, servicename) in bouquetlist:
 					playable = not (eServiceReference(serviceref).flags & mask)
 					if playable:
-						chlist.append((servicename, serviceref, unifyChannel(servicename)))
+						chlist.append((servicename, re.sub('::.*', ':', serviceref), unifyChannel(servicename)))
 				break
 	return chlist
 

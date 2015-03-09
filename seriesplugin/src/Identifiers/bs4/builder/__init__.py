@@ -1,4 +1,4 @@
-from collections import defaultdict
+﻿from collections import defaultdict
 import itertools
 import sys
 from bs4.element import (

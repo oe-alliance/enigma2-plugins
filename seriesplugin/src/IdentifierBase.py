@@ -17,6 +17,9 @@ from thread import start_new_thread
 from time import sleep
 import socket
 
+from time import time
+from datetime import datetime, timedelta
+
 #import urllib2
 from urllib import urlencode
 from urllib2 import urlopen, URLError, Request, build_opener, HTTPCookieProcessor
@@ -57,6 +60,11 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase, Analytics):
 		self.returnvalue = None
 		
 		self.search_depth = 0;
+		
+		self.now = time()
+		today = datetime.today()
+		self.actual_month = today.month
+		self.actual_year = today.year
 
 	################################################
 	# Helper function

@@ -136,10 +136,10 @@ class SeriesPluginTimer(object):
 		if data and len(data) == 4 and timer:
 			
 			# Episode data available, refactor name and description
-			from SeriesPluginRenamer import newLegacyEncode
-			timer.name = refactorTitle(timer.name, data)
+			#from SeriesPluginRenamer import newLegacyEncode
+			timer.name = str(refactorTitle(timer.name, data))
 			#timer.name = newLegacyEncode(refactorTitle(timer.name, data))
-			timer.description = refactorDescription(timer.description, data)
+			timer.description = str(refactorDescription(timer.description, data))
 			
 			timer.log(610, "[SeriesPlugin] Success: Changed name: %s." % (timer.name))
 		

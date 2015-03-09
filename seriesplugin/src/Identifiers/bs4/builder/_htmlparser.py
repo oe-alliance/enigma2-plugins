@@ -1,4 +1,4 @@
-"""Use the HTMLParser library to parse HTML files that aren't too bad."""
+﻿"""Use the HTMLParser library to parse HTML files that aren't too bad."""
 
 __all__ = [
     'HTMLParserTreeBuilder',

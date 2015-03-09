@@ -28,7 +28,7 @@ from Logger import splog
 #######################################################
 # Constants
 NAME = "SeriesPlugin"
-VERSION = "2.2.2"
+VERSION = "2.4" # Based on e
 DESCRIPTION = _("SeriesPlugin")
 SHOWINFO = _("Show series info (SP)")
 RENAMESERIES = _("Rename serie(s) (SP)")
@@ -87,7 +87,7 @@ config.plugins.seriesplugin.pattern_title             = ConfigText(default = "{o
 config.plugins.seriesplugin.pattern_description       = ConfigText(default = "S{season:02d}E{episode:02d} {title:s} {org:s}", fixed_size = False)
 #config.plugins.seriesplugin.pattern_record            = ConfigText(default = "{org:s} S{season:02d}E{episode:02d} {title:s}", fixed_size = False)
 
-config.plugins.seriesplugin.replace_chars             = ConfigText(default = ":/\\,()", fixed_size = False)
+config.plugins.seriesplugin.replace_chars             = ConfigText(default = ":!/\\,\(\)", fixed_size = False)
 
 config.plugins.seriesplugin.channel_file              = ConfigText(default = "/etc/enigma2/seriesplugin_channels.xml", fixed_size = False)
 
@@ -119,7 +119,7 @@ config.plugins.seriesplugin.timer_popups_timeout     = ConfigSelectionNumber(-1,
 
 config.plugins.seriesplugin.caching                   = ConfigYesNo(default = True)
 
-#config.plugins.seriesplugin.debug                     = ConfigYesNo(default = False)
+config.plugins.seriesplugin.debug_prints              = ConfigYesNo(default = False)
 config.plugins.seriesplugin.write_log                 = ConfigYesNo(default = False)
 config.plugins.seriesplugin.log_file                  = ConfigText(default = "/tmp/seriesplugin.log", fixed_size = False)
 config.plugins.seriesplugin.log_reply_user            = ConfigText(default = "Dreambox User", fixed_size = False)

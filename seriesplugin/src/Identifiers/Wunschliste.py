@@ -21,8 +21,8 @@ from Plugins.Extensions.SeriesPlugin.Logger import splog
 
 from iso8601 import parse_date
 
-import codecs
-utf8_encoder = codecs.getencoder("utf-8")
+#import codecs
+#utf8_encoder = codecs.getencoder("utf-8")
 
 
 # Constants
@@ -44,12 +44,39 @@ CompiledRegexpEpisode = re.compile( '((\d+)[\.x])?(\d+)')
 def str_to_utf8(s):
 	# Convert a byte string with unicode escaped characters
 	splog("WL: str_to_utf8: s: ", repr(s))
-	unicode_str = s.decode('unicode-escape')
-	splog("WL: str_to_utf8: s: ", repr(unicode_str))
-	# Python 2.x can't convert the special chars nativly
-	utf8_str = utf8_encoder(unicode_str)[0]
-	splog("WL: str_to_utf8: s: ", repr(utf8_str))
-	return utf8_str
+	#unicode_str = s.decode('unicode-escape')
+	#splog("WL: str_to_utf8: s: ", repr(unicode_str))
+	## Python 2.x can't convert the special chars nativly
+	#utf8_str = utf8_encoder(unicode_str)[0]
+	#splog("WL: str_to_utf8: s: ", repr(utf8_str))
+	#return utf8_str  #.decode("utf-8").encode("ascii", "ignore")
+	if type(s) != unicode:
+		# Default shoud be here
+		try:
+			s = s.decode('ISO-8859-1')
+			splog("WL: str_to_utf8 decode ISO-8859-1: s: ", repr(s))
+		except:
+			try:
+				s = unicode(s, 'utf-8')
+				s = s.encode('ISO-8859-1')
+				splog("WL: str_to_utf8 decode utf-8: s: ", repr(s))
+			except:
+				try:
+					s = unicode(s, 'cp1252')
+					s = s.encode('ISO-8859-1')
+					splog("WL: str_to_utf8 decode cp1252: s: ", repr(s))
+				except:
+					s = unicode(s, 'utf-8', 'ignore')
+					s = s.encode('ISO-8859-1')
+					splog("WL: str_to_utf8 decode utf-8 ignore: s: ", repr(s))
+	else:
+		try:
+			s = s.encode('ISO-8859-1')
+			splog("WL: str_to_utf8 encode ISO-8859-1: s: ", repr(s))
+		except:
+			s = s.encode('ISO-8859-1', 'ignore')
+			splog("WL: str_to_utf8 except encode ISO-8859-1 ignore: s: ", repr(s))
+	return s
 
 
 class WLPrintParser(HTMLParser):
@@ -82,8 +109,6 @@ class WLPrintParser(HTMLParser):
 class Wunschliste(IdentifierBase):
 	def __init__(self):
 		IdentifierBase.__init__(self)
-		self.actual_month = 0
-		self.actual_year = 0
 
 	@classmethod
 	def knowsToday(cls):
@@ -96,10 +121,6 @@ class Wunschliste(IdentifierBase):
 	def getEpisode(self, name, begin, end=None, service=None):
 		# On Success: Return a single season, episode, title tuple
 		# On Failure: Return a empty list or String or None
-		
-		today = datetime.today()
-		self.actual_month = today.month
-		self.actual_year = today.year
 		
 		self.begin = begin
 		self.end = end
@@ -201,7 +222,7 @@ class Wunschliste(IdentifierBase):
 						year = str(self.actual_year+1)
 					else:
 						year = str(self.actual_year)
-					xbegin   = datetime.strptime( xdate+year+xbegin, "%d.%m.%Y%H.%M Uhr" )
+					xbegin   = datetime.strptime( xdate+year+" "+xbegin, "%d.%m.%Y %H.%M Uhr" )
 					#xend     = datetime.strptime( xdate+xend, "%d.%m.%Y%H.%M Uhr" )
 					#splog(xchannel, xdate, xbegin, xend, xtitle)
 					#splog(datebegin, xbegin, abs((datebegin - xbegin)))

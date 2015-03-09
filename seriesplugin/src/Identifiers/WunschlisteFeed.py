@@ -21,8 +21,8 @@ from Plugins.Extensions.SeriesPlugin.Logger import splog
 
 from iso8601 import parse_date
 
-import codecs
-utf8_encoder = codecs.getencoder("utf-8")
+#import codecs
+#utf8_encoder = codecs.getencoder("utf-8")
 
 
 # Constants
@@ -63,12 +63,39 @@ CompiledRegexpEpisode = re.compile( '((\d+)[\.x])?(\d+)')
 def str_to_utf8(s):
 	# Convert a byte string with unicode escaped characters
 	splog("WL: str_to_utf8: s: ", repr(s))
-	unicode_str = s.decode('unicode-escape')
-	splog("WL: str_to_utf8: s: ", repr(unicode_str))
-	# Python 2.x can't convert the special chars nativly
-	utf8_str = utf8_encoder(unicode_str)[0]
-	splog("WL: str_to_utf8: s: ", repr(utf8_str))
-	return utf8_str
+	#unicode_str = s.decode('unicode-escape')
+	#splog("WL: str_to_utf8: s: ", repr(unicode_str))
+	## Python 2.x can't convert the special chars nativly
+	#utf8_str = utf8_encoder(unicode_str)[0]
+	#splog("WL: str_to_utf8: s: ", repr(utf8_str))
+	#return utf8_str  #.decode("utf-8").encode("ascii", "ignore")
+	if type(s) != unicode:
+		# Default shoud be here
+		try:
+			s = s.decode('ISO-8859-1')
+			splog("WL: str_to_utf8 decode ISO-8859-1: s: ", repr(s))
+		except:
+			try:
+				s = unicode(s, 'utf-8')
+				s = s.encode('ISO-8859-1')
+				splog("WL: str_to_utf8 decode utf-8: s: ", repr(s))
+			except:
+				try:
+					s = unicode(s, 'cp1252')
+					s = s.encode('ISO-8859-1')
+					splog("WL: str_to_utf8 decode cp1252: s: ", repr(s))
+				except:
+					s = unicode(s, 'utf-8', 'ignore')
+					s = s.encode('ISO-8859-1')
+					splog("WL: str_to_utf8 decode utf-8 ignore: s: ", repr(s))
+	else:
+		try:
+			s = s.encode('ISO-8859-1')
+			splog("WL: str_to_utf8 encode ISO-8859-1: s: ", repr(s))
+		except:
+			s = s.encode('ISO-8859-1', 'ignore')
+			splog("WL: str_to_utf8 except encode ISO-8859-1 ignore: s: ", repr(s))
+	return s
 
 
 class WLAtomParser(HTMLParser):

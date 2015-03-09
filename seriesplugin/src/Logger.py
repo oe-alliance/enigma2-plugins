@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 #######################################################################
 #
 #    Series Plugin for Enigma-2
@@ -33,7 +33,9 @@ def splog(*args):
 	for arg in args:
 		if strargs: strargs += " "
 		strargs += str(arg)
-	print strargs
+	
+	if config.plugins.seriesplugin.debug_prints.value:
+		print strargs
 	
 	if config.plugins.seriesplugin.write_log.value:
 		strargs += "\n"

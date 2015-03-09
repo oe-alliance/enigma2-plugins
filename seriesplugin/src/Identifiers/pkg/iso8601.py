@@ -1,4 +1,4 @@
-"""ISO 8601 date time string parsing
+﻿"""ISO 8601 date time string parsing
 
 Basic usage:
 >>> import iso8601

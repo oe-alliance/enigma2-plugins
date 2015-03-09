@@ -13,6 +13,7 @@ from Tools.BoundFunction import boundFunction
 
 # Imports
 from urllib import urlencode
+from urllib2 import urlopen
 
 from time import time
 from datetime import datetime, timedelta
@@ -24,13 +25,13 @@ from Plugins.Extensions.SeriesPlugin.Logger import splog
 from bs4 import BeautifulSoup
 from HTMLParser import HTMLParser
 
-import codecs
-utf8_encoder = codecs.getencoder("utf-8")
+#import codecs
+#utf8_encoder = codecs.getencoder("utf-8")
 
 
 # Constants
 SERIESLISTURL = "http://www.fernsehserien.de/suche?"
-EPISODEIDURL = 'http://www.fernsehserien.de%s/sendetermine/%d'
+EPISODEIDURL = 'http://www.fernsehserien.de%s/sendetermine/%s'
 
 Headers = {
 		'User-Agent' : 'Mozilla/5.0',
@@ -44,14 +45,46 @@ Headers = {
 		'Pragma':'no-cache'
 	}
 
+CompiledRegexpNonASCII = re.compile('\xe2\x80.')
+
 
 def str_to_utf8(s):
 	# Convert a byte string with unicode escaped characters
-	splog("FS: str_to_utf8: s: ", repr(s))
-	# Python 2.x can't convert the special chars nativly
-	utf8_str = utf8_encoder(s)[0]
-	splog("FS: str_to_utf8: s: ", repr(utf8_str))
-	return utf8_str
+	splog("WL: str_to_utf8: s: ", repr(s))
+	#unicode_str = s.decode('unicode-escape')
+	#splog("WL: str_to_utf8: s: ", repr(unicode_str))
+	## Python 2.x can't convert the special chars nativly
+	#utf8_str = utf8_encoder(unicode_str)[0]
+	#splog("WL: str_to_utf8: s: ", repr(utf8_str))
+	#return utf8_str  #.decode("utf-8").encode("ascii", "ignore")
+	if type(s) == unicode:
+		# Default shoud be here
+		try:
+			s = s.encode('utf-8')
+			splog("WL: str_to_utf8 encode utf8: s: ", repr(s))
+		except:
+			s = s.encode('utf-8', 'ignore')
+			splog("WL: str_to_utf8 except encode utf8 ignore: s: ", repr(s))
+	else:
+		try:
+			s = s.decode('utf-8')
+			splog("WL: str_to_utf8 decode utf8: s: ", repr(s))
+		except:
+			try:
+				s = unicode(s, 'ISO-8859-1')
+				s = s.encode('utf-8')
+				splog("WL: str_to_utf8 decode ISO-8859-1: s: ", repr(s))
+			except:
+				try:
+					s = unicode(s, 'cp1252')
+					s = s.encode('utf-8')
+					splog("WL: str_to_utf8 decode cp1252: s: ", repr(s))
+				except:
+					s = unicode(s, 'ISO-8859-1', 'ignore')
+					s = s.encode('utf-8')
+					splog("WL: str_to_utf8 decode ISO-8859-1 ignore: s: ", repr(s))
+	s = s.replace('\xe2\x80\x93','-').replace('\xc3\x9f','ß')
+	return CompiledRegexpNonASCII.sub('', s)
 
 
 class FSParser(HTMLParser):
@@ -135,7 +168,7 @@ class Fernsehserien(IdentifierBase):
 		# On Failure: Return a empty list or String or None
 		
 		self.begin = begin
-		#self.year = datetime.fromtimestamp(begin).year
+		self.year = begin.year
 		self.end = end
 		self.service = service
 		
@@ -175,11 +208,27 @@ class Fernsehserien(IdentifierBase):
 					# Handle encodings
 					self.series = str_to_utf8(idname)
 					
-					self.page = 0
-					#if self.future:
-					#	self.page = 0
-					#else:
-					#	self.page = -1
+					#self.page = 0
+					if self.future:
+						self.page = 0
+					else:
+						if self.actual_year == self.year:
+							#if self.begin > self.now-timedelta(seconds=3600):
+							self.page = 0
+							#else:
+							#	self.page = -1
+						else:
+							self.page = 0
+							
+							year_url = EPISODEIDURL % (id, '')
+							#/sendetermine/jahr-2014
+							response = urlopen( year_url+"jahr-"+str(self.year) )
+							
+							#redirecturl = http://www.fernsehserien.de/criminal-intent-verbrechen-im-visier/sendetermine/-14
+							redirect_url = response.geturl()
+							
+							page = int( redirect_url.replace(year_url,'') )
+							
 					
 					self.first = None
 					self.last = None

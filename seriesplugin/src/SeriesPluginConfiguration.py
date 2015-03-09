@@ -210,6 +210,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			except:
 				pass
 			
+			self.list.append( getConfigListEntry(  _("Debug: Print debug messages (Shell)")        , config.plugins.seriesplugin.debug_prints ) )
 			self.list.append( getConfigListEntry(  _("Debug: Write Log")                           , config.plugins.seriesplugin.write_log ) )
 			if config.plugins.seriesplugin.write_log.value:
 				self.list.append( getConfigListEntry(  _("Debug: Log file path")                   , config.plugins.seriesplugin.log_file ) )

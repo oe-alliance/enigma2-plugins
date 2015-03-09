@@ -1,4 +1,4 @@
-__all__ = [
+﻿__all__ = [
     'HTML5TreeBuilder',
     ]
 
