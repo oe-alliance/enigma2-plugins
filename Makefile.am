@@ -28,7 +28,6 @@ SUBDIRS = \
 	emailclient \
 	emission \
 	eparted \
-	epgbackup \
 	epgrefresh \
 	eurotictv \
 	eventlist \
