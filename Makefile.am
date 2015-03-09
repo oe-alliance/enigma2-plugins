@@ -71,6 +71,7 @@ SUBDIRS = \
 	reftopiconname \
 	remotetimer \
 	rsdownloader \
+	seriesplugin \
 	setpasswd \
 	shoutcast \
 	showclock \
