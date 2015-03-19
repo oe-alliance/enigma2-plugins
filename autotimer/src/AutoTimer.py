@@ -432,7 +432,7 @@ class AutoTimer:
 					self.addDirectoryToMovieDict(moviedict, dest, serviceHandler)
 				for movieinfo in moviedict.get(dest, ()):
 					if self.checkSimilarity(timer, name, movieinfo.get("name"), shortdesc, movieinfo.get("shortdesc"), extdesc, movieinfo.get("extdesc")):
-						print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
+						# print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
 						movieExists = True
 						break
 				if movieExists:
@@ -451,7 +451,7 @@ class AutoTimer:
 
 					# Abort if we don't want to modify timers or timer is repeated
 					if config.plugins.autotimer.refresh.value == "none" or rtimer.repeated:
-						print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
+						# print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
 						break
 
 					if eit == preveit:
@@ -459,12 +459,12 @@ class AutoTimer:
 					
 					if (evtBegin - (config.recording.margin_before.getValue() * 60) != rtimer.begin) or (evtEnd + (config.recording.margin_after.getValue() * 60) != rtimer.end) or (shortdesc != rtimer.description):
 						if rtimer.isAutoTimer and eit == rtimer.eit:
-							print ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
+							# print ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							preveit = eit
 						else:
 							if config.plugins.autotimer.refresh.getValue() != "all":
-								print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
+								# print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
 								break
 							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it: %s ." % (timer.name, rtimer.name))
 						newEntry = rtimer
@@ -473,12 +473,12 @@ class AutoTimer:
 						rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
 						break
 					else:
-						print ("[AutoTimer] Skipping timer because it has not changed.")
+						# print ("[AutoTimer] Skipping timer because it has not changed.")
 						skipped += 1
 						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
 					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
-						print("[AutoTimer] We found a timer with similar description, skipping event")
+						# print("[AutoTimer] We found a timer with similar description, skipping event")
 						oldExists = True
 						break
 
@@ -498,13 +498,13 @@ class AutoTimer:
 						if timer.avoidDuplicateDescription >= 2:
 							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
 								oldExists = True
-								print("[AutoTimer] We found a timer (any service) with same description, skipping event")
+								# print("[AutoTimer] We found a timer (any service) with same description, skipping event")
 								break
 				if oldExists:
 					continue
 
 				if timer.checkCounter(timestamp):
-					print("[AutoTimer] Not adding new timer because counter is depleted.")
+					# print("[AutoTimer] Not adding new timer because counter is depleted.")
 					continue
 
 				newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
@@ -567,7 +567,7 @@ class AutoTimer:
 							if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS, force=True ):
 								# Check if the similar is already known
 								if eitS not in similardict:
-									print("[AutoTimer] Found similar Timer: " + name)
+									# print("[AutoTimer] Found similar Timer: " + name)
 
 									# Store the actual and similar eit and conflictString, so it can be handled later
 									newEntry.conflictString = conflictString
