@@ -404,7 +404,7 @@ msgid ""
 "If this is selected, the tag \"AutoTimer\" will be given to timers created "
 "by this plugin."
 msgstr ""
-"Wenn diese Option gewählt ist dann wird \"AutoTimer\" als Tag zun den "
+"Wenn diese Option gewählt ist dann wird \"AutoTimer\" als Tag zu den "
 "erzeugten Timern hinzugefügt."
 
 msgid "Import AutoTimer"
