@@ -423,7 +423,7 @@ msgid "Include \"AutoTimer\" in tags"
 msgstr "\"AutoTimer\" als Tag hinzufügen"
 
 msgid "Include AutoTimer name in tags"
-msgstr "AutoTimer Name als Tag hinzufügen"
+msgstr "Name des AutoTimers als Tag hinzufügen"
 
 msgid ""
 "It's possible to restrict an AutoTimer to certain Services or Bouquets or to "
