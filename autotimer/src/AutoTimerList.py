@@ -39,10 +39,10 @@ class AutoTimerList(MenuList):
 		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
 		self.l.setBuildFunc(self.buildListboxEntry)
 		self.l.setFont(0, gFont("Regular", 20))
-		self.l.setFont(1, gFont("Regular", 17))
+		self.l.setFont(1, gFont("Regular", 18))
 		self.l.setFont(2, gFont("Regular", 30))
-		self.l.setFont(3, gFont("Regular", 28))
-		self.l.setItemHeight(70)
+		self.l.setFont(3, gFont("Regular", 27))
+		self.l.setItemHeight(50)
 		if path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_off.png")):
 			self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_off.png"))
 		else:
@@ -101,11 +101,11 @@ class AutoTimerList(MenuList):
 		res = [ None ]
 		x = (2*width) // 3
 		if screenwidth and screenwidth == 1920:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 100, 2, x-26, 35, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 43, width-4, 35, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, channel))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 78, 3, x-39, 38, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 39, width-6, 35, 3, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, channel))
 		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 52, 2, x-26, 25, 0, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 47, width-4, 25, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, channel))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 52, 3, x-26, 25, 0, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 26, width-4, 23, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, channel))
 
 		if timer.include[3]:
 			total = len(timer.include[3])
@@ -130,9 +130,9 @@ class AutoTimerList(MenuList):
 		else:
 			days = _("Everyday")
 		if screenwidth and screenwidth == 1920:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width)/10*4.5+1, 35, float(width)/10*5.5-5, 35, 2, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, days))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width)/10*4.5+1, 39, float(width)/10*5.5-5, 35, 3, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, days))
 		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width)/10*4.5+1, 25, float(width)/10*5.5-5, 25, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, days))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width)/10*4.5+1, 26, float(width)/10*5.5-5, 23, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, days))
 
 		if timer.hasTimespan():
 			nowt = time()
@@ -143,28 +143,28 @@ class AutoTimerList(MenuList):
 		else:
 			timespan = _("Any time")
 		if screenwidth and screenwidth == 1920:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-200-4, 0, 200, 35, 2, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-225-4, 3, 225, 35, 3, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
 		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-150-4, 0, 150, 25, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-150-4, 3, 150, 23, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
 
 		if timer.hasTimeframe():
 			begin = strftime("%a, %d %b", localtime(timer.getTimeframeBegin()))
 			end = strftime("%a, %d %b", localtime(timer.getTimeframeEnd()))
 			timespan = (("%s ... %s") % (begin, end))
 			if screenwidth and screenwidth == 1920:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 20, float(width)/10*4.5-5, 35, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timespan))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 39, float(width)/10*4.5-5, 35, 3, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timespan))
 			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 25, float(width)/10*4.5-5, 25, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timespan))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 26, float(width)/10*4.5-5, 23, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timespan))
 
 		if icon:
 			if screenwidth and screenwidth == 1920:
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 2, 2, 35, 35, icon))
+				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 3, 0, 36, 38, icon))
 			else:
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 2, 24, 25, icon))
+				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 0, 24, 25, icon))
 			if screenwidth and screenwidth == 1920:
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 50, 2, 30, 30, rectypeicon))
+				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 42, 5, 30, 30, rectypeicon))
 			else:
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 28, 5, 24, 25, rectypeicon))
+				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 28, 3, 20, 20, rectypeicon))
 		try:
 			devide = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png"))
 		except:
