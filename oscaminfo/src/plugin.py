@@ -110,7 +110,8 @@ class OscamInfo:
 			return _("file oscam.conf could not be found")
 
 	def openWebIF(self, part = None, reader = None):
-		if config.plugins.oscaminfo.userdatafromconf.value:
+		self.proto = "http"
+		if config.oscaminfo.userdatafromconf.value:
 			self.ip = "127.0.0.1"
 			udata = self.getUserData()
 			if isinstance(udata, str):
@@ -119,24 +120,28 @@ class OscamInfo:
 				elif "httppwd" in udata:
 					self.password = ""
 				else:
-					return (False, udata)
+					return False, udata
 			else:
 				self.port = udata[2]
 				self.username = udata[0]
 				self.password = udata[1]
 		else:
-			self.ip = ".".join("%d" % d for d in config.plugins.oscaminfo.ip.value)
-			self.port = config.plugins.oscaminfo.port.value
-			self.username = config.plugins.oscaminfo.username.value
-			self.password = config.plugins.oscaminfo.password.value
+			self.ip = ".".join("%d" % d for d in config.oscaminfo.ip.value)
+			self.port = config.oscaminfo.port.value
+			self.username = config.oscaminfo.username.value
+			self.password = config.oscaminfo.password.value
+
+		if self.port.startswith( '+' ):
+			self.proto = "https"
+			self.port.replace("+","")
+
 		if part is None:
-			self.url = "http://%s:%s/oscamapi.html?part=status" % ( self.ip, self.port )
+			self.url = "%s://%s:%s/oscamapi.html?part=status" % ( self.proto, self.ip, self.port )
 		else:
-			self.url = "http://%s:%s/oscamapi.html?part=%s" % (self.ip, self.port, part )
+			self.url = "%s://%s:%s/oscamapi.html?part=%s" % ( self.proto, self.ip, self.port, part )
 		if part is not None and reader is not None:
-			self.url = "http://%s:%s/oscamapi.html?part=%s&label=%s" % ( self.ip, self.port, part, reader )
-			
-		print "URL=%s" % self.url
+			self.url = "%s://%s:%s/oscamapi.html?part=%s&label=%s" % ( self.proto, self.ip, self.port, part, reader )
+
 		pwman = urllib2.HTTPPasswordMgrWithDefaultRealm()
 		pwman.add_password( None, self.url, self.username, self.password )
 		handlers = urllib2.HTTPDigestAuthHandler( pwman )
@@ -154,10 +159,10 @@ class OscamInfo:
 				err = str(e.code)
 		if err is not False:
 			print "[openWebIF] Fehler: %s" % err
-			return (False, err)
+			return False, err
 		else:
-			return (True, data)
-			
+			return True, data
+
 	def readXML(self, typ):
 		if typ == "l":
 			self.showLog = True
