@@ -60,15 +60,48 @@ class OscamInfo:
 	version = ""
 
 	def confPath(self):
-		search_dirs = [ "/usr", "/var", "/etc" ]
-		sdirs = " ".join(search_dirs)
-		cmd = 'find %s -name "oscam.conf"' % sdirs
+		#search_dirs = [ "/usr", "/var", "/etc" ]
+		#sdirs = " ".join(search_dirs)
+		#cmd = 'find %s -name "oscam.conf"' % sdirs
+		#res = os.popen(cmd).read()
+		#if res == "":
+		#	return None
+		#else:
+		#	return res.replace("\n", "")
+		cmd = 'ps -eo command | sort -u | grep -v "grep" | grep -c "oscam"'
 		res = os.popen(cmd).read()
-		if res == "":
-			return None
-		else:
-			return res.replace("\n", "")
-
+		if res:
+			data = res.replace("\n", "")
+			if int(data) == 1:
+				cmd = 'ps -eo command | sort -u | grep -v "grep" | grep "oscam"'
+				res = os.popen(cmd).read()
+				if res:
+					data = res.replace("\n", "")
+					data = res.replace("--config-dir ", "-c ")
+					binary = res.split(" ")[0]
+					try:
+						data = data.split("-c ")[1]
+						data = data.split("-")[0]
+					except:
+						try:
+							print 'OScaminfo - oscam start-command is not as "/oscam-binary -parameter /config-folder" executed, using hard-coded config dir'
+							cmd = binary + ' -V | grep ConfigDir'
+							res = os.popen(cmd).read()
+							data = res.split(":")[1]
+						except:
+							print 'OScaminfo - oscam binary appears to be broken'
+							return None
+					data = data.strip() + '/oscam.conf'
+					if os.path.exists(data):
+						print 'OScaminfo - config file "%s" ' % data
+						return data
+					print 'OScaminfo - config file "%s" not found' % data
+					return None
+			elif int(data) > 1:
+				print 'OScaminfo - more than one(%s) oscam binarys is active'  % data
+				return None
+		print 'OScaminfo - no active oscam binarys found'
+		return None
 
 	def getUserData(self):
 		err = ""
