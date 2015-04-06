@@ -45,7 +45,7 @@ config.plugins.Webinterface.version = ConfigText(__version__) # used to make the
 
 config.plugins.Webinterface.http = ConfigSubsection()
 config.plugins.Webinterface.http.enabled = ConfigYesNo(default=True)
-config.plugins.Webinterface.http.port = ConfigInteger(default = 80, limits=(1, 65535) )
+config.plugins.Webinterface.http.port = ConfigInteger(default = 81, limits=(1, 65535) )
 config.plugins.Webinterface.http.auth = ConfigYesNo(default=False)
 
 config.plugins.Webinterface.https = ConfigSubsection()
@@ -194,14 +194,14 @@ def startWebserver(session, l2k):
 				registerBonjourService('http', config.plugins.Webinterface.http.port.value)
 
 		#Streaming requires listening on 127.0.0.1:80 no matter what, ensure it its available
-		if config.plugins.Webinterface.http.port.value != 80 or not config.plugins.Webinterface.http.enabled.value:
-			#LOCAL HTTP Connections (Streamproxy)
-			ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.http.auth.value, l2k)
-			if ret == False:
-				errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
-
-			if errors != "":
-				session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), type=MessageBox.TYPE_ERROR, timeout=30)
+		#if config.plugins.Webinterface.http.port.value != 80 or not config.plugins.Webinterface.http.enabled.value:
+		#	#LOCAL HTTP Connections (Streamproxy)
+		#	ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.http.auth.value, l2k)
+		#	if ret == False:
+		#		errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
+		#
+		#	if errors != "":
+		#		session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), type=MessageBox.TYPE_ERROR, timeout=30)
 
 		#HTTPS
 		if config.plugins.Webinterface.https.enabled.value is True:
