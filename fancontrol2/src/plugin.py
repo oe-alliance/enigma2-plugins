@@ -43,6 +43,9 @@ from threading import Thread, Lock
 import Queue
 Briefkasten = Queue.Queue()
 
+from boxbranding import getImageDistro
+
+
 def main(session,**kwargs):
 	try:
 		session.open(FanControl2Plugin)
@@ -1267,8 +1270,12 @@ def autostart(reason, **kwargs):
 		session.open(FanControl2)
 
 def selSetup(menuid, **kwargs):
-	if menuid != "system":
-		return [ ]
+	if getImageDistro() in ('openhdf'):
+		if menuid != "devices_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return []
 	return [(_("Fan Control 2"), main, "fansetup_config", 70)]
 
 def Plugins(**kwargs):
