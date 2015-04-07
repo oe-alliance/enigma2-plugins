@@ -6,9 +6,6 @@ from Components.config import config
 from plugin import autotimer
 
 # Notifications
-from Tools.FuzzyDate import FuzzyTime
-from Tools.Notifications import AddPopup
-from Screens.MessageBox import MessageBox
 import NavigationInstance
 
 class AutoPoller:
@@ -22,7 +19,7 @@ class AutoPoller:
 	def start(self):
 		if self.query not in self.timer.callback:
 			self.timer.callback.append(self.query)
-		self.timer.startLongTimer(config.plugins.autotimer.delay.value*60)
+		self.timer.startLongTimer(config.plugins.autotimer.delay.value * 60)
 
 	def stop(self):
 		if self.query in self.timer.callback:
@@ -40,7 +37,7 @@ class AutoPoller:
 				print "[AutoTimer] Auto Poll Started"
 				# Ignore any program errors
 				try:
-					ret = autotimer.parseEPG(autoPoll = True)
+					ret = autotimer.parseEPG(autoPoll=True)
 				except Exception:
 					# Dump error to stdout
 					import traceback, sys
@@ -54,4 +51,4 @@ class AutoPoller:
 					# Dump error to stdout
 					import traceback, sys
 					traceback.print_exc(file=sys.stdout)
-		self.timer.startLongTimer(config.plugins.autotimer.interval.value*60)
+		self.timer.startLongTimer(config.plugins.autotimer.interval.value * 60)
