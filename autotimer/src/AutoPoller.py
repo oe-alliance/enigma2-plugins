@@ -33,20 +33,11 @@ class AutoPoller:
 		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
 			print("[AutoTimer] Skip check during running records")
 		else:
-			if config.plugins.autotimer.onlyinstandby.value and inStandby:
+			if not (config.plugins.autotimer.onlyinstandby.value and not inStandby):
 				print "[AutoTimer] Auto Poll Started"
 				# Ignore any program errors
 				try:
 					ret = autotimer.parseEPG(autoPoll=True)
-				except Exception:
-					# Dump error to stdout
-					import traceback, sys
-					traceback.print_exc(file=sys.stdout)
-			elif not config.plugins.autotimer.onlyinstandby.value:
-				print "[AutoTimer] Auto Poll Started"
-				# Ignore any program errors
-				try:
-					ret = autotimer.parseEPG(autoPoll = True)
 				except Exception:
 					# Dump error to stdout
 					import traceback, sys
