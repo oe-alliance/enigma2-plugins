@@ -14,7 +14,7 @@ config.plugins.vps.enabled = ConfigYesNo(default = True)
 config.plugins.vps.initial_time = ConfigInteger(default=10, limits=(0, 120))
 config.plugins.vps.allow_wakeup = ConfigYesNo(default = False)
 config.plugins.vps.allow_seeking_multiple_pdc = ConfigYesNo(default = True)
-config.plugins.vps.vps_default = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default = "no") 
+config.plugins.vps.vps_default = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))], default = "no")
 config.plugins.vps.instanttimer = ConfigSelection(choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes")), ("ask", _("always ask"))], default = "ask")
 config.plugins.vps.infotext = ConfigInteger(default=0)
 
@@ -48,10 +48,10 @@ def autostart(reason, **kwargs):
 				addExternalChild(("vpsplugin", root, "VPS-Plugin", "1", False))
 		else:
 			register_vps()
-	
+
 	elif reason == 1:
 		vps_timers.shutdown()
-		
+
 
 def setup(session, **kwargs):
 	session.openWithCallback(doneConfig, VPS_Setup)
@@ -63,6 +63,9 @@ def startSetup(menuid):
 	if getImageDistro() in ('openmips'):
 		if menuid != "general_menu":
 			return [ ]
+	elif getImageDistro() in ('openhdf'):
+		if menuid != "record_menu":
+			return [ ]
 	else:
 		if menuid != "system":
 			return []
@@ -70,8 +73,8 @@ def startSetup(menuid):
 
 def getNextWakeup():
 	return vps_timers.NextWakeup()
-	
-	
+
+
 
 def Plugins(**kwargs):
 	return [
