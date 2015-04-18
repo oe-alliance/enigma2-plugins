@@ -27,6 +27,7 @@ from Plugins.Plugin import PluginDescriptor
 from AutomaticVolumeAdjustmentSetup import AutomaticVolumeAdjustmentConfigScreen
 from AutomaticVolumeAdjustment import AutomaticVolumeAdjustment
 from AutomaticVolumeAdjustmentConfig import saveVolumeDict
+from boxbranding import getImageDistro
 
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
