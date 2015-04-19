@@ -31,6 +31,7 @@ from Screens.Screen import Screen
 from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServiceReference, eDBoxLCD
 from ServiceReference import ServiceReference
 from os.path import basename as os_basename
+from boxbranding import getImageDistro
 
 # for localized messages
 from . import _

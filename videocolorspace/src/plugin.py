@@ -22,6 +22,7 @@ from __init__ import _
 from Components.config import config
 from Plugins.Plugin import PluginDescriptor
 from VideoColorSpace import VideoColorSpace, initializeConfig
+from boxbranding import getImageDistro
 
 def autostart(reason, **kwargs):
     if reason == 0:

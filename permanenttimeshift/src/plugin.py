@@ -43,6 +43,8 @@ import os, gettext
 import Screens.InfoBar
 import Screens.Standby
 
+from boxbranding import getImageDistro
+
 ##############################
 ###   Multilanguage Init   ###
 ##############################
