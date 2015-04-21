@@ -99,12 +99,9 @@ class AutoTimerList(MenuList):
 		height = self.l.getItemSize().height()
 		width = self.l.getItemSize().width()
 		res = [ None ]
-		x = (2*width) // 3
 		if screenwidth and screenwidth == 1920:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 78, 3, x-39, 38, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 39, width-6, 35, 3, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, channel))
 		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 52, 3, x-26, 25, 0, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 26, width-4, 23, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, channel))
 
 		if timer.include[3]:
@@ -142,19 +139,26 @@ class AutoTimerList(MenuList):
 			timespan = ((" %s ... %s") % (FuzzyTime(begintime)[1], FuzzyTime(endtime)[1]))
 		else:
 			timespan = _("Any time")
-		if screenwidth and screenwidth == 1920:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-225-4, 3, 225, 35, 3, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
-		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-150-4, 3, 150, 23, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
 
 		if timer.hasTimeframe():
+			x = width // 2
 			begin = strftime("%a, %d %b", localtime(timer.getTimeframeBegin()))
 			end = strftime("%a, %d %b", localtime(timer.getTimeframeEnd()))
-			timespan = (("%s ... %s") % (begin, end))
+			timespan = (("%s ... %s") % (begin, end)) + " , " + timespan
 			if screenwidth and screenwidth == 1920:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 39, float(width)/10*4.5-5, 35, 3, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timespan))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 78, 3, x-82, 38, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, 3, x-4, 35, 3, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
 			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 26, float(width)/10*4.5-5, 23, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timespan))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 52, 3, x-56, 25, 0, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, 3, x-4, 23, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
+		else:
+			x = (2*width) // 3
+			if screenwidth and screenwidth == 1920:
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 78, 3, x-39, 38, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, width-225-4, 3, 225, 35, 3, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
+			else:
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 52, 3, x-26, 25, 0, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, width-150-4, 3, 150, 23, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
 
 		if icon:
 			if screenwidth and screenwidth == 1920:
