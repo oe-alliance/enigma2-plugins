@@ -7,12 +7,14 @@ from . import _
 # Plugin
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, configfile, ConfigSelection, ConfigSubsection, getConfigListEntry, ConfigSubList, \
-	ConfigClock, ConfigInteger, ConfigYesNo 
+	ConfigClock, ConfigInteger, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
 
 # for function
 from time import localtime, mktime
 from Components.HdmiCec import hdmi_cec
+
+from boxbranding import getImageDistro
 
 def _print(outtxt):
 	ltim = localtime()
@@ -26,7 +28,7 @@ try:
 except ImportError:
 	g_AdvHdmi_setup_available = False
 	_print("error while loading AdvHdmiCecSetup")
-	print_exc(file=stdout) 
+	print_exc(file=stdout)
 
 # overwrite functions
 from Plugins.SystemPlugins.HdmiCec.plugin import Cec
@@ -38,7 +40,7 @@ except ImportError:
 	_print("No Webinterface-Plugin installed")
 	g_AdvHdmi_webif_available = False
 
-WEEKDAYS = [ 
+WEEKDAYS = [
 	_("Monday"),
 	_("Tuesday"),
 	_("Wednesday"),
@@ -60,7 +62,7 @@ def TimeSpanEntryInit():
 	now = localtime()
 	begin = mktime((now.tm_year, now.tm_mon, now.tm_mday, 8, 00, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
 	end = mktime((now.tm_year, now.tm_mon, now.tm_mday, 16, 00, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
-	
+
 	config.plugins.AdvHdmiCec.Entries.append(ConfigSubsection())
 	i = len(config.plugins.AdvHdmiCec.Entries) -1
 	config.plugins.AdvHdmiCec.Entries[i].fromWD = ConfigSelection(choices=[
@@ -104,7 +106,7 @@ initTimeSpanEntryList()
 ADVHDMI_VERSION = "1.4.3"
 
 # HDMI-Hook-Events
-# To implement a hook, just instantiate a AdvHdmiCecIF, 
+# To implement a hook, just instantiate a AdvHdmiCecIF,
 # and overwrite the methods before_event and/or after_event
 
 # Events with boolean-return, that means if the CEC-signal has to be send / handled
@@ -126,7 +128,7 @@ def callHook(advhdmi_event):
 	if advhdmiHooks:
 		for hookKey,hook in advhdmiHooks.iteritems():
 			if config.plugins.AdvHdmiCec.debug.value: _print("Debug: call Hook '" + str(hookKey) + "'")
-			try: 
+			try:
 				if advhdmi_event in (ADVHDMI_BEFORE_POWERON, ADVHDMI_BEFORE_POWEROFF, ADVHDMI_BEFORE_RECEIVED_STANDBY, ADVHDMI_BEFORE_RECEIVED_NOWACTIVE):
 					if not hook.before_event(advhdmi_event):
 						_print("Hook '" + str(hookKey) + "' prevents sending HDMI-Cec-signal!")
@@ -161,8 +163,12 @@ def main(session, **kwargs):
 		session.open(AdvHdmiCecSetup)
 
 def showinSetup(menuid):
-	if menuid != "system":
-		return []
+	if getImageDistro() in ('openhdf'):
+		if menuid != "video_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return []
 	return [(_("Advanced HDMI-Cec Setup"), main, "", 46)]
 
 def Plugins(**kwargs):
@@ -173,9 +179,9 @@ def Plugins(**kwargs):
 	]
 	if config.plugins.AdvHdmiCec.show_in.value == "system":
 		list.append (PluginDescriptor(
-			name="Advanced HDMI-Cec Control", 
-			description=_("manage when HDMI Cec is enabled"), 
-			where = PluginDescriptor.WHERE_MENU, 
+			name="Advanced HDMI-Cec Control",
+			description=_("manage when HDMI Cec is enabled"),
+			where = PluginDescriptor.WHERE_MENU,
 			fnc=showinSetup)
 		)
 	if config.plugins.AdvHdmiCec.show_in.value == "plugin":
@@ -194,9 +200,9 @@ def Plugins(**kwargs):
 				fnc = main,
 				needsRestart = False)
 		)
-	
+
 	return list
-	
+
 def checkTimespan(lt, begin, end):
 	# Check if we span a day
 	if begin[0] > end[0] or (begin[0] == end[0] and begin[1] >= end[1]):
@@ -232,7 +238,7 @@ def AdvHdmiCecDOIT():
 		if ret_val and g_AdvHdmi_fromwebif and config.plugins.AdvHdmiCec.disable_from_webif.value:
 			_print("prevent sending HDMICec, because it was from webif")
 			ret_val = False
-		
+
 		if ret_val and int(config.plugins.AdvHdmiCec.entriescount.value) > 0:
 			lt = localtime()
 			for e in config.plugins.AdvHdmiCec.Entries:

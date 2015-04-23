@@ -106,6 +106,9 @@ def menu(menuid):
 	if getImageDistro() in ('openmips'):
 		if menuid != "ui_menu":
 			return [ ]
+	elif getImageDistro() in ('openhdf'):
+		if menuid != "gui_menu":
+			return [ ]
 	else:
 		if menuid != "system":
 			return []

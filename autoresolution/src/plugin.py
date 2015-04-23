@@ -374,6 +374,9 @@ def startSetup(menuid):
 	if getImageDistro() in ('openmips'):
 		if menuid != "video_menu":
 			return [ ]
+	elif getImageDistro() in ('openhdf'):
+		if menuid != "video_menu":
+			return [ ]
 	else:
 		if menuid != "system":
 			return [ ]
