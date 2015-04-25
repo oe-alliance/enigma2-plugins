@@ -337,8 +337,8 @@ class MSNWeatherPluginSearchResultList(MenuList):
 		list = []
 		for childs in root:
 			if childs.tag == "weather":
-				searchlocation = childs.attrib.get("searchlocation").encode("utf-8", 'ignore')
-				searchresult = childs.attrib.get("searchresult").encode("utf-8", 'ignore')
+				searchlocation = childs.attrib.get("weatherlocationname").encode("utf-8", 'ignore')
+				searchresult = childs.attrib.get("weatherfullname").encode("utf-8", 'ignore')
 				weatherlocationcode = childs.attrib.get("weatherlocationcode").encode("utf-8", 'ignore')
 				res = [
 					(weatherlocationcode, searchlocation),
