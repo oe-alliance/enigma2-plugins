@@ -313,6 +313,11 @@ class NetworkBrowser(Screen):
 			except:
 				pass
 
+		if devicetype == 'unix':
+			nfslist=netscan.nfsShare(hostip,hostname)
+			for x in nfslist:
+				if len(x) == 6:
+					sharelist.append(x)
 		cmd = "/usr/bin/smbclient -g -N -U Guest -L {0}".format(hostip).split()
 		if username != "" or password != "":
 			cmd = ["/usr/bin/smbclient", "-g", "-U", username, "-L", hostip, "\\\\IPC\\", password]
@@ -326,17 +331,6 @@ class NetworkBrowser(Screen):
 		except OSError as e:
 			print "Running " + str(cmd) + " failed with:" + str(e)
 			pass
-		
-		if devicetype == 'unix':
-			nfslist=netscan.nfsShare(hostip,hostname)
-			for x in nfslist:
-				if len(x) == 6:
-					sharelist.append(x)
-		else:
-			nfslist=netscan.nfsShare(hostip,hostname)
-			for x in nfslist:
-				if len(x) == 6:
-					sharelist.append(x)		
 		return sharelist
 
 	def updateHostsList(self):
@@ -511,20 +505,9 @@ class NetworkBrowser(Screen):
 			except:
 				print 'load cache failed'
 				pass
-
-		if sel[0][0] == 'host': # host entry selected
-			if selectedhost in self.expanded:
-				self.expanded.remove(selectedhost)
-			else:
-				self.expanded.append(selectedhost)
-			self.updateNetworkList()
-		elif sel[0][0] == 'nfsShare': # share entry selected
-			self.openMountEdit(sel[0])
-		elif sel[0][0] == 'smbShare': # share entry selected
-			if os_path.exists(self.hostcache_file):
-				self.openMountEdit(sel[0])
-			else:
-				self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
+			self.passwordQuestion(False)
+		else:
+			self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
 
 	def passwordQuestion(self, ret = False):
 		sel = self["list"].getCurrent()
@@ -533,7 +516,14 @@ class NetworkBrowser(Screen):
 		if (ret == True):
 			self.session.openWithCallback(self.UserDialogClosed, UserDialog, self.skin_path, selectedhostname.strip())
 		else:
-			self.openMountEdit(sel[0])
+			if sel[0][0] == 'host': # host entry selected
+				if selectedhost in self.expanded:
+					self.expanded.remove(selectedhost)
+				else:
+					self.expanded.append(selectedhost)
+				self.updateNetworkList()
+			elif sel[0][0] in ('nfsShare', 'smbShare'): # share entry selected
+				self.openMountEdit(sel[0])
 
 	def UserDialogClosed(self, *ret):
 		if ret is not None and len(ret):
