@@ -5,7 +5,12 @@ from os import path
 from . import _
 
 # GUI (Components)
-from skin import parseFont, parameters
+from skin import parseFont
+try:
+	 from skin import parameters
+	 skinparms = True
+except:
+	 skinparms = False
 from Components.MenuList import MenuList
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_VALIGN_BOTTOM, getDesktop
 from Tools.LoadPixmap import LoadPixmap
@@ -131,10 +136,16 @@ class AutoTimerList(MenuList):
 
 		res = [ None ]
 		if icon:
-			x, y, w, h = parameters.get("AutotimerEnabledIcon",(iconMargin, 0, statusIconHeight, statusIconWidth))
+			if skinparms:
+				x, y, w, h = parameters.get("AutotimerEnabledIcon",(iconMargin, 0, statusIconHeight, statusIconWidth))
+			else:
+				x, y, w, h = (iconMargin, 0, statusIconHeight, statusIconWidth)
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, icon))
 		if rectypeicon:
-			x, y, w, h = parameters.get("AutotimerRecordIcon",(iconMargin+statusIconWidth+iconMargin, 3, statusIconHeight, typeIconWidth))
+			if skinparms:
+				x, y, w, h = parameters.get("AutotimerRecordIcon",(iconMargin+statusIconWidth+iconMargin, 3, statusIconHeight, typeIconWidth))
+			else:
+				x, y, w, h = (iconMargin+statusIconWidth+iconMargin, 3, statusIconHeight, typeIconWidth)
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, rectypeicon))
 
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin+statusIconWidth+iconMargin+typeIconWidth+iconMargin, 2, width-(iconMargin+statusIconWidth+iconMargin+typeIconWidth+iconMargin), rowHeight, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, timer.name))
