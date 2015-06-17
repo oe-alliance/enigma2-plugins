@@ -1,0 +1,16 @@
+#!/bin/sh
+if [ -e /usr/lib/gstreamer-1.0/libgstdvbvideosink.so ]; then
+    GST="gstreamer1.0"
+else
+    GST="gst"
+fi
+# remove all gst depents from control file and add this depends here !!!
+GSTPackages="${GST}-plugins-good-flv"
+
+for i in $GSTPackages; do
+    if [ $(opkg status $i 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+        rm /var/lib/opkg/lock
+        opkg install $i
+        touch /var/lib/opkg/lock
+    fi
+done
