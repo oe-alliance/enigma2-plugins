@@ -33,7 +33,7 @@ config.plugins.oscaminfo.autoupdate = ConfigYesNo(default = False)
 config.plugins.oscaminfo.username = ConfigText(default = "username", fixed_size = False, visible_width=12)
 config.plugins.oscaminfo.password = ConfigPassword(default = "password", fixed_size = False)
 config.plugins.oscaminfo.ip = ConfigIP( default = [ 127,0,0,1 ], auto_jump=True)
-config.plugins.oscaminfo.port = ConfigInteger(default = 16002, limits=(0,65536) )
+config.plugins.oscaminfo.port = ConfigInteger(default = 83, limits=(0,65536) )
 config.plugins.oscaminfo.intervall = ConfigInteger(default = 10, limits=(1,600) )
 
 fb = getDesktop(0).size()
@@ -144,7 +144,7 @@ class OscamInfo:
 
 	def openWebIF(self, part = None, reader = None):
 		self.proto = "http"
-		if config.oscaminfo.userdatafromconf.value:
+		if config.plugins.oscaminfo.userdatafromconf.value:
 			self.ip = "127.0.0.1"
 			udata = self.getUserData()
 			if isinstance(udata, str):
@@ -159,10 +159,10 @@ class OscamInfo:
 				self.username = udata[0]
 				self.password = udata[1]
 		else:
-			self.ip = ".".join("%d" % d for d in config.oscaminfo.ip.value)
-			self.port = config.oscaminfo.port.value
-			self.username = config.oscaminfo.username.value
-			self.password = config.oscaminfo.password.value
+			self.ip = ".".join("%d" % d for d in config.plugins.oscaminfo.ip.value)
+			self.port = str(config.plugins.oscaminfo.port.value)
+			self.username = str(config.plugins.oscaminfo.username.value)
+			self.password = str(config.plugins.oscaminfo.password.value)
 
 		if self.port.startswith( '+' ):
 			self.proto = "https"
