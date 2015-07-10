@@ -4,7 +4,7 @@ from __future__ import print_function
 # for localized messages
 from . import _
 
-from AutoTimerComponent import preferredAutoTimerComponent, getDefaultEncoding
+from AutoTimerComponent import preferredAutoTimerComponent
 from RecordTimer import AFTEREVENT
 from Tools.XMLTools import stringToXML
 from ServiceReference import ServiceReference
@@ -110,9 +110,6 @@ def parseEntry(element, baseTimer, defaults = False):
 	series_labeling = element.get("series_labeling", "no")
 	baseTimer.series_labeling = True if series_labeling == "yes" else False
 	del series_labeling
-
-	# Read out encoding (won't change if no value is set)
-	baseTimer.encoding = element.get("encoding")
 
 	# Read out search type/case
 	baseTimer.searchType = element.get("searchType", baseTimer.searchType)
@@ -526,7 +523,6 @@ def buildConfig(defaultTimer, timers, webif = False):
 	list = ['<?xml version="1.0" ?>\n<autotimer version="', CURRENT_CONFIG_VERSION, '">\n\n']
 	append = list.append
 	extend = list.extend
-	defaultEncoding = getDefaultEncoding()
 
 	# This gets deleted afterwards if we do not have set any defaults
 	append(' <defaults')
@@ -571,10 +567,6 @@ def buildConfig(defaultTimer, timers, webif = False):
 		extend((' justplay="', str(defaultTimer.getJustplay()), '"'))
 		if not defaultTimer.setEndtime:
 			append(' setEndtime="0"')
-
-	# Only display encoding if != utf-8
-	if defaultTimer.encoding != defaultEncoding or webif:
-		extend((' encoding="', str(defaultTimer.encoding), '"'))
 
 	# SearchType
 	if defaultTimer.searchType != "partial":
@@ -719,10 +711,6 @@ def buildConfig(defaultTimer, timers, webif = False):
 			extend((' justplay="', str(timer.getJustplay()), '"'))
 			if not timer.setEndtime:
 				append(' setEndtime="0"')
-
-		# Only display encoding if != utf-8
-		if timer.encoding != defaultEncoding or webif:
-			extend((' encoding="', str(timer.encoding), '"'))
 
 		# SearchType
 		if timer.searchType != "partial":

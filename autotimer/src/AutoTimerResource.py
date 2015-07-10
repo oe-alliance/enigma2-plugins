@@ -150,9 +150,6 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			elif before == '' or after == '':
 				timer.timeframe = None
 
-		# Encoding
-		timer.encoding = get("encoding", timer.encoding)
-
 		# ...
 		timer.searchType = get("searchType", timer.searchType)
 		timer.searchCase = get("searchCase", timer.searchCase)
