@@ -295,24 +295,33 @@ class NetworkBrowser(Screen):
 
 		if devicetype == 'unix':
 			smblist=netscan.smbShare(hostip,hostname,username,password)
+			print '[Networkbrowser] unix smblist ',smblist
 			for x in smblist:
 				if len(x) == 6:
 					if x[3] != 'IPC$':
 						sharelist.append(x)
+						print '[Networkbrowser] unix sharelist ',sharelist
 			nfslist=netscan.nfsShare(hostip,hostname)
+			print '[Networkbrowser] unix nfslist ',nfslist
 			for x in nfslist:
 				if len(x) == 6:
 					sharelist.append(x)
+					print '[Networkbrowser] unix sharelist ',sharelist
 		else:
 			smblist=netscan.smbShare(hostip,hostname,username,password)
+			print '[Networkbrowser] smblist ',smblist
 			for x in smblist:
 				if len(x) == 6:
 					if x[3] != 'IPC$':
 						sharelist.append(x)
+						print '[Networkbrowser] sharelist ',sharelist
 			nfslist=netscan.nfsShare(hostip,hostname)
+			print '[Networkbrowser] nfslist ',nfslist
 			for x in nfslist:
 				if len(x) == 6:
 					sharelist.append(x)
+					print '[Networkbrowser] sharelist ',sharelist
+		print '[Networkbrowser] sharelist final ',sharelist
 		return sharelist
 
 	def updateHostsList(self):

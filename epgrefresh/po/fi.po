@@ -1,0 +1,381 @@
+# Finnish translations for enigma2-plugins package.
+# Copyright (C) 2015 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-01 06:58+0100\n"
+"PO-Revision-Date: 2015-07-03 20:16+0200\n"
+"Last-Translator: Timo\n"
+"Language-Team: Kojo_\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%d more services"
+msgstr "%d enemmän palveluita"
+
+msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"
+msgstr "Jos tämä on valittuna, onnistuneen virkistyksen jälkeen AutoTimer käy automaattisesti läpi päivitetyn EPG:n. Oletusvastaukset toimivat vain käsin tehdyssä virkistyksessä. Jos EPGRefresh käynnistyi tausta-ajona, käytetään valittua oletusvastausta."
+
+msgid "An automated refresh will start after this time of day, but before the time specified in next setting."
+msgstr "Automaattinen virkistys käynnistyy tämän kellonajan jälkeen, mutta vain ennen aikaa joka on määritelty seuraavassa asetuksessa."
+
+msgid "An automated refresh will start before this time of day, but after the time specified in previous setting."
+msgstr "Automaattinen virkistys käynnistyy ennen tätä kellonaikaa, mutta vain ajan jälkeen joka on määritelty edellisessä asetuksessa."
+
+msgid "Ask default No"
+msgstr "Kysymyksen oletusvastauksena Ei"
+
+msgid "Ask default Yes"
+msgstr "Kysymyksen oletusvastauksena Kyllä"
+
+#, python-format
+msgid "AutoTimer failed with error %s"
+msgstr "AutoTimer pysähtyi virheeseen %s"
+
+msgid "Automatically refresh EPG"
+msgstr "Päivitä EPG automaattisesti"
+
+msgid "Background only"
+msgstr "Vain taustalla"
+
+msgid "Bouquets"
+msgstr "Suosikkilistat"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Channels"
+msgstr "Kanavat"
+
+msgid "Close and forget changes"
+msgstr "Sulje ja hylkää muutokset"
+
+msgid "Close and save changes"
+msgstr "Sulje ja tallenna muutokset"
+
+msgid "Delay if not in standby (minutes)"
+msgstr "Viive, ellei ole valmiustilassa (minuutteja)"
+
+msgid "Display more Options"
+msgstr "Näytä lisää vaihtoehtoja"
+
+msgid "Duration to stay on service (seconds)"
+msgstr "Aika sekunteina jonka aikana pysytään palvelussa"
+
+msgid "EPG refresh auto-start earliest (hh:mm)"
+msgstr "Automaattinen EPGRefresh:n käynnistys aikaisintaan (hh:mm)"
+
+msgid "EPG refresh auto-start latest (hh:mm)"
+msgstr "Automaattinen EPGRefresh:n käynnistys viimeistään (hh:mm)"
+
+msgid "EPG refresh finished."
+msgstr "EPG:n virkistys päättynyt"
+
+msgid ""
+"EPG refresh finished.\n"
+"Should AutoTimer be search for new matches?"
+msgstr ""
+"EPG:n virkistys päättynyt.\n"
+"Haluatko että AutoTimer käy läpi virkistetyn EPG:n?"
+
+msgid "EPG refresh started in background."
+msgstr "EPGRefresh käynnistynyt tausta-ajona"
+
+msgid "EPG refresh starts scanning channels."
+msgstr "EPGRefresh käy läpi kanavia"
+
+msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
+msgstr "EPGREFRESH_NOTIFICATION_DOMAIN"
+
+msgid "EPGRefresh Configuration"
+msgstr "EPGRefresh asetukset"
+
+msgid "EPGRefresh Configuration Help"
+msgstr "Apua EPGRefresh asetuksiin"
+
+msgid "EPGRefresh Functions"
+msgstr "EPGRefresh toimintoja"
+
+msgid "EPGRefresh Services"
+msgstr "EPGRefresh palveluita"
+
+msgid "EXTENSIONMENU_PREFIX"
+msgstr "EXTENSIONMENU_PREFIX"
+
+msgid "EXTENSIONNAME_SETUP"
+msgstr "EXTENSIONNAME_SETUP"
+
+msgid "Edit Services"
+msgstr "Palvelut"
+
+msgid "Edit Services to refresh"
+msgstr "Muokkaa virkistettäviä palveluita"
+
+msgid "Editing"
+msgstr "Muokkaamassa"
+
+msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
+msgstr "Aktivoi tämä että pääset EPGRefresh:n asetuksiin laajennukset-valikon kautta"
+
+msgid "Enable this to be able to start the EPGRefresh from within the extension menu."
+msgstr "Aktivoi tämä käynnistääksesi EPGRefresh laajennukset-valikosta."
+
+msgid "Extend the list of services to refresh by those your AutoTimers use?"
+msgstr "Laajenna AutoTimer:n käyttämä palvelulista?"
+
+msgid "Fake recording"
+msgstr "Valeäänitys"
+
+msgid "Following Services have to be scanned:"
+msgstr "Seuraavat palvelut pitää päivittää"
+
+msgid "Force scan even if receiver is in use"
+msgstr "Pakota päivitys vaikka vastaanotin on käytössä"
+
+msgid "Foreground also"
+msgstr "Etualalla myös"
+
+msgid "Functions"
+msgstr "Toiminnot"
+
+msgid "General Help"
+msgstr "Yleisohjeita"
+
+msgid "If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."
+msgstr "Jos vastaanotin ei ole valmiustilassa, tämä on aika jonka EPGRefresh odottaa ennen uudelleenyritystä."
+
+msgid "If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."
+msgstr "Jos tämä on aktivoituna, plugin herättää vastaanottimen valmiustilasta (jos mahdollista). Muuten vastaanottimen pitää olla päällä."
+
+msgid "If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."
+msgstr "Jos haluat että EPGRefresh ajetaan tausta-ajona, voit valita tästä tavan joka sopii Sinulle parhaiten: piilotettu, valeäänitys tai tavallinen PiP."
+
+msgid "Inherit Services from AutoTimer"
+msgstr "Peri palvelut Autotimer:ista"
+
+msgid "Key Help"
+msgstr "Kaukosäätimen pikavalinnat"
+
+#, python-format
+msgid "Last refresh was %s"
+msgstr "Viimeisin virkistys oli %s"
+
+msgid "Main Picture"
+msgstr "Vastaanottimen kuva"
+
+msgid "Move page down"
+msgstr "Siirrä sivua alas"
+
+msgid "Move page up"
+msgstr "Siirrä sivua ylös"
+
+msgid "New"
+msgstr "Uusi"
+
+msgid "No"
+msgstr "Ei"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "PLUGINNAME_EPGRefresh"
+msgstr "PLUGINNAME_EPGRefresh"
+
+msgid "Pending Services"
+msgstr "Odottavat palvelut"
+
+msgid "PiP available now."
+msgstr "PiP valittavissa nyt"
+
+msgid "Picture in Picture"
+msgstr "PiP"
+
+msgid "Picture in Picture (hidden)"
+msgstr "PiP (piilotettuna)"
+
+msgid "Please don't use PiP meanwhile!"
+msgstr "Älä käytä tällä hetkellä PiP:ä"
+
+msgid "Really close without saving settings?"
+msgstr "Oletko varma että haluat sulkea tallentamatta?"
+
+msgid "Refresh EPG automatically"
+msgstr "Virkistä EPG automaattisesti"
+
+msgid "Refresh EPG using"
+msgstr "Virkistä EPG käyttäen"
+
+msgid "Refresh now"
+msgstr "Virkistä nyt"
+
+msgid "Refreshing"
+msgstr "Virkistää"
+
+msgid "Run AutoTimer after refresh"
+msgstr "Käynnistä AutoTimer virkistyksen jälkeen"
+
+msgid "Select bouquet to refresh"
+msgstr "Valitse virkistettävä suosikkilista"
+
+msgid "Select channel to refresh"
+msgstr "Valitse virkistettävä kanava"
+
+msgid "Should protected services be skipped if refresh was started in interactive-mode?"
+msgstr "Pitäisikö suojatut kanavat ohittaa jos virkistys on käynnistetty interactive -tilassa?"
+
+msgid "Show 'EPGRefresh Start now' in extension menu"
+msgstr "Näytä ''EPGRefresh käynnistyy nyt' laajennukset -valikossa"
+
+msgid "Show Advanced Options"
+msgstr "Näytä lisävalikko"
+
+msgid "Show Setup in extension menu"
+msgstr "Näytä asetukset laajennukset-valikossa"
+
+msgid "Show last EPGRefresh - Time"
+msgstr "Näytä viimeisin EPGrefresh - Aika"
+
+msgid "Show more Functions"
+msgstr "Näytä lisää toimintoja"
+
+msgid "Show popup when refresh starts and ends"
+msgstr "Näytä popup kun virkistys alkaa ja loppuu"
+
+msgid "Show the pending Services for refresh"
+msgstr "Näytä virkistystä odottavat palvelut"
+
+msgid "Shutdown after EPG refresh"
+msgstr "Sammuta EPG:n virkistyksen jälkeen"
+
+msgid "Skip protected Services"
+msgstr "Ohita suojatut palvelut"
+
+msgid "Start EPGrefresh immediately"
+msgstr "Käynnistä EPGrefresh välittömästi"
+
+msgid "Stop Refresh"
+msgstr "Pysäytä virkistys"
+
+msgid "Stop Running EPG-refresh"
+msgstr "Lopeta EPGRefresh:n käyttö"
+
+msgid "Stop running refresh"
+msgstr "Pysäytä virkistyksen suorittaminen"
+
+msgid "There is still a refresh running. The Operation isn't allowed at this moment."
+msgstr "Virkistys on vielä käynnissä. Toiminto ei ole sallittu tällä hetkellä."
+
+msgid "This is the duration each service/channel will stay active during a refresh."
+msgstr "Tämä näyttää ajan kuinka kauan jokainen palvelu/kanava on virkistyksen aikana aktiivisena."
+
+msgid "This setting controls whether or not an informational message will be shown at start and completion of refresh."
+msgstr "Tämä asetus määrää näytetäänkö ilmoituksia kun virkistys on alkanut tai päättynyt."
+
+msgid "This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."
+msgstr "Tämä asetus määrää käynnistyykö virkistys siitä huolimatta että vastaanotin on jo käytössä."
+
+msgid "This setting controls whether the receiver should be set to standby after refresh is completed."
+msgstr "Tämä asetus määrää laitetaanko vastaanotin valmiustilaan virkistyksen jälkeen."
+
+msgid ""
+"To apply your Changes the GUI has to be restarted.\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+"Jotta asetukset tulevat voimaan, käyttöliittymä on käynnistettävä uudelleen.\n"
+"Käynnistetäänkö käyttöliittymä uudelleen?"
+
+msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
+msgstr "Ellei tämä ole aktivoituna, EPGRefresh ei käynnisty automaattisesti, vaan pitää käynnistää painamalla tämän valikon keltaista nappia."
+
+msgid "Version"
+msgstr "Versio"
+
+msgid "Wake up from standby for EPG refresh"
+msgstr "Herää valmiustilasta EPG:n virkistykseen"
+
+msgid "Yes"
+msgstr "Kyllä"
+
+msgid "add to EPGRefresh"
+msgstr "Lisää  EPGRefresh:iin"
+
+msgid "delete"
+msgstr "poista"
+
+msgid "never"
+msgstr "ei koskaan"
+
+msgid "Congratulations"
+msgstr "Onnittelut"
+
+msgid "EPGRefresh Help"
+msgstr "EPGRefresh apua"
+
+msgid "Editing the service list"
+msgstr "Muokkaamassa palvelulistausta"
+
+msgid "The configuration menu"
+msgstr "Asetusvalikko"
+
+msgid ""
+"This help screen is supposed to give you a quick look at everything EPGRefresh has to offer.\n"
+"You can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by pressing the HELP button from the configuration menu (more on that later).\n"
+"\n"
+"\n"
+"But you really should consider to take the few minutes it takes to read these help pages."
+msgstr ""
+"Tämän näkymän pitäisi kertoa sinulle pikaisesti mitä EPGRefresh osaa tehdä.\n"
+"Voit keskeyttää tekemisesi milloin vaan painamalla kaukosäätimen punaista, -tai EXIT -nappia. Saat tämän näkymän takaisin myös painamalla HELP -nappia asetusvalikossa (tästä lisää myöhemmin).\n"
+"\n"
+"\n"
+"Suosittelen että käytät muutaman minuutin näiden opastussivujen läpikäymiseen."
+
+msgid ""
+"This is the entry point of EPGRefresh. From this menu you can configure every aspect of the plugin.\n"
+"The configuration options each have an explaination which is supposed to help you to understand their effects better. Please give reading them a try, they can save you a lot of time.\n"
+"\n"
+"Using the YELLOW button you can start a refresh manually. You also be able to enable the functionalities in the Extensionmenu. The INFO button brings up the date the last refresh was completed successfully. You will also find an Extensionmenu-Entry to stop a running Refresh.\n"
+"The BLUE key opens the service editor (next page)."
+msgstr ""
+"Tämä on EPGRefresh:n käyttöliittymä. Tästä valikosta voit muokata plugin:n asetuksia.\n"
+"Jokaiselle valinnalle on selitekenttä ruudun alareunassa, joka auttaa Sinua ymmärtämään paremmin asetuksen merkitystä. Ole hyvä ja lue ne tarkkaan.\n"
+"\n"
+"Keltaisesta napista voin käynnistää virkistyksen manuaalisesti.Laajennukset-valikosta voi myös laittaa toimintoja päälle. INFO-nappula kertoo milloin virkistys on edellisen kerran mennyt onnistuneesti läpi.Laajennukset-valikosta voit myös pysäyttää virkistyksen.\n"
+"Sininen nappi avaa palveluiden muokkauksen (seuraava sivu)"
+
+msgid "Welcome to EPGRefresh"
+msgstr "Tervetuloa käyttämään EPGRefresh:iä"
+
+msgid ""
+"While the screen does not immediately show it, it does have a lot to offer. The topmost line allows you to choose between the editor for channels and bouquets and the following lines contain the channels/bouquets you chose to refresh.\n"
+"\n"
+"You can use the BLUE button to add a new entry to the list or the YELLOW button to remove an existing one.\n"
+"\n"
+"\n"
+"For most people it should be sufficient to add the 'Favourites' bouquet by selecting 'Bouquets' in the first line and by adding it using the BLUE button."
+msgstr ""
+"Vaikka tämä näkymä ei näytä ihmeelliseltä, sillä on aika paljon annettavaa. Ylin rivi on kanavien ja suosikkilistojen muokkaamiseen, ja seuraavat sisältävät kanavat/suosikkilistat jotka valitset virkistettäviksi.\n"
+"\n"
+"Sinisellä nappulalla lisäät uuden ja keltaisella poistat olemassa olevan.\n"
+"\n"
+"\n"
+"Suurimmalle osalle käyttäjistä riittää että valitsee jonkin suosikkilistan ja lisää sen painamalla sinist' nappia."
+
+msgid ""
+"You now know how to do your first steps in EPGRefresh.\n"
+"\n"
+"As a final note I want to hint you at the fact that this plugin will not do anything on its own without YOU telling it to. So if you want the refresh to happen automatically in the background you need to configure the plugin to do so.\n"
+"This was not done to cause you any inconvenience but rather to give you the freedom of choice."
+msgstr ""
+"Nyt osaat alkeet miten EPGRefresh:iä käytetään.\n"
+"\n"
+"Viimeisenä huomautuksena kertoisin että tämä plugin ei tee mitään itsestään. Jos haluat virkistyksen tapahtuvat tiettyyn aikaan, sinun pitää itse määritellä asetukset."
+

@@ -237,22 +237,23 @@ class AutoMount():
 					if 'wsize' not in options:
 						options += ',wsize=8192'
 					if 'tcp' not in options and 'udp' not in options:
-						options += ',tcp'
-					options = options + ',timeo=14,fg,soft,intr'
+						options += ',proto=tcp'
+					options = options + ',timeo=14,soft'
 		elif autofs:
 			if not options:
 				options = 'rw'
 				if not cifs:
-					options += ',rsize=8192,wsize=8192'
+					options += ',nfsvers=3,rsize=8192,wsize=8192'
 			else:
 				if not cifs:
+					options += ',nfsvers=3'
 					if 'rsize' not in options:
 						options += ',rsize=8192'
 					if 'wsize' not in options:
 						options += ',wsize=8192'
 					if 'tcp' not in options and 'udp' not in options:
-						options += ',tcp'
-					options = options + ',soft'
+						options += ',proto=tcp'
+					options = options + ',timeo=14,soft'
 		else:
 			if not options:
 				options = 'rw,rsize=8192,wsize=8192'
@@ -265,7 +266,7 @@ class AutoMount():
 					if 'wsize' not in options:
 						options += ',wsize=8192'
 					if 'tcp' not in options and 'udp' not in options:
-						options += ',tcp'
+						options += ',proto=tcp'
 		return options
 
 	def CheckMountPoint(self, item, callback, restart):
