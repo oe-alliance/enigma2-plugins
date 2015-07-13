@@ -807,25 +807,25 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         if qty == 1:
             if waste:
                 if recording:
-                    return (_("%s is currently recording!") % (name) + _("\n\nThe timer for %s will be delete for stop the recording and after this the movie will be move to trashcan.\n\nDo you really want to continue?") % (name))
+                    return (_("%s is currently recording!") % (name) + _("\n\nThe timer for %s will be deleted to stop the recording and after this the movie will be moved to trash.\n\nDo you really want to continue?") % (name))
                 else:
-                    return _("Do you really want to move %s to trashcan?") % (name)
+                    return _("Do you really want to move %s to trash?") % (name)
             else:
                 if recording:
-                    return (_("%s is currently recording!") % (name) + _("\n\nThe timer for %s will be delete for stop the recording and after this the movie will be deleted.\n\nDo you really want to continue?") % (name))
+                    return (_("%s is currently recording!") % (name) + _("\n\nThe timer for %s will be deleted to stop the recording and after this the movie will be deleted.\n\nDo you really want to continue?") % (name))
                 else:
                     return _("Do you really want to delete %s?") % (name)
         else:
             timer_text = recording and _("Recordings are active, the timer(s) will also be deleted!\n") or ""
             if waste: 
-                return timer_text + _("Do you really want to move selected movies to trashcan?")
+                return timer_text + _("Do you really want to move selected movies to trash?")
             else:
                 return timer_text + _("Do you really want to delete selected movies?")
 
     def delete(self):
         self.service = self.getCurrent()
         if self.service.flags & eServiceReference.mustDescent:
-            self.session.open(MessageBox, _("This cannot deleted, please select a movie for!"), MessageBox.TYPE_INFO)
+            self.session.open(MessageBox, _("This cannot deleted, please select a recording!"), MessageBox.TYPE_INFO)
             return
 
         if len(self.list.multiSelection) > 0:
