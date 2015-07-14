@@ -17,6 +17,10 @@ from AutoTimerList import AutoTimerList
 from Components.ActionMap import HelpableActionMap
 from Components.Sources.StaticText import StaticText
 
+from boxbranding import getBoxType
+
+BoxType = getBoxType()
+
 class AutoTimerOverviewSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
@@ -116,7 +120,10 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self.setTitle(_("AutoTimer"))
 
 	def createSummary(self):
-		return AutoTimerOverviewSummary
+		if BoxType in ('gb800ue', 'gb800ueplus', 'gbquad', 'gbquadplus', 'gbultraue'):
+			pass
+		else:
+			return AutoTimerOverviewSummary
 
 	def selectionChanged(self):
 		sel = self["entries"].getCurrent()
