@@ -3,6 +3,8 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext
 
+from boxbranding import getImageDistro
+
 # Config
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
 	ConfigNumber, ConfigSelection, ConfigYesNo
@@ -11,7 +13,10 @@ config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default=True)
 config.plugins.autotimer.onlyinstandby = ConfigEnableDisable(default=False)
 config.plugins.autotimer.delay = ConfigNumber(default=3)
-config.plugins.autotimer.interval = ConfigNumber(default=30)
+if getImageDistro() in ('openmips', 'openatv'):
+	config.plugins.autotimer.interval = ConfigNumber(default=240)
+else:
+	config.plugins.autotimer.interval = ConfigNumber(default=30)
 config.plugins.autotimer.refresh = ConfigSelection(choices=[
 		("none", _("None")),
 		("auto", _("Only AutoTimers created during this session")),
