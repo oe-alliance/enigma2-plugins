@@ -267,6 +267,8 @@ class AutoMount():
 						options += ',wsize=8192'
 					if 'tcp' not in options and 'udp' not in options:
 						options += ',proto=tcp'
+		if cifs:
+			options += ",cache=loose"
 		return options
 
 	def CheckMountPoint(self, item, callback, restart):
