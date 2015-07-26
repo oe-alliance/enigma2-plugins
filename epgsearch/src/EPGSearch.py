@@ -87,30 +87,30 @@ class EPGSearchList(EPGList):
 		if clock_pic or clock_pic_partnerbox:
 			if clock_pic and clock_pic_partnerbox and self.wasEntryAutoTimer:
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-65, (r3.h/2-11), 21, 21, self.autotimericon),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-43, (r3.h/2-11), 21, 21, self.clocks[clock_pic]),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, self.clocks[clock_pic_partnerbox]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-66, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-81, (r3.h/2-11), 25, 25, self.autotimericon),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-54, (r3.h/2-11), 25, 25, self.clocks[clock_pic]),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-27, (r3.h/2-11), 25, 25, self.clocks[clock_pic_partnerbox]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-85, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			elif clock_pic and clock_pic_partnerbox:
 				# Partnerbox and local
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-43, (r3.h/2-11), 21, 21, self.clocks[clock_pic]),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, self.clocks[clock_pic_partnerbox]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-44, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-54, (r3.h/2-11), 25, 25, self.clocks[clock_pic]),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-27, (r3.h/2-11), 25, 25, self.clocks[clock_pic_partnerbox]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-58, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			elif clock_pic_partnerbox:
 				# Partnerbox and local
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, self.clocks[clock_pic_partnerbox]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-21, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-27, (r3.h/2-11), 25, 25, self.clocks[clock_pic_partnerbox]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-31, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			elif self.wasEntryAutoTimer:
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-43, (r3.h/2-11), 21, 21, self.autotimericon),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, self.clocks[clock_pic]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-44, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-54, (r3.h/2-11), 25, 25, self.autotimericon),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-27, (r3.h/2-11), 25, 25, self.clocks[clock_pic]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-58, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			else:
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-21, (r3.h/2-11), 21, 21, self.clocks[clock_pic]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-21, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-27, (r3.h/2-11), 25, 25, self.clocks[clock_pic]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-31, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 		else:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
 		return res
