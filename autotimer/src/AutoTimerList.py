@@ -26,6 +26,11 @@ except:
 	from Tools.Directories import SCOPE_CURRENT_SKIN
 	
 from skin import parseColor, parseFont
+try:
+	from Tools.TextBoundary import getTextBoundarySize
+	TextBoundary = True
+except:
+	TextBoundary = False
 
 class DAYS:
 	MONDAY = 0
@@ -158,8 +163,10 @@ class AutoTimerList(MenuList):
 			timespan = _("  Any time")
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width)/10*4.5, 0, width-float(width)/10*4.5-5, rowHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_TOP, timespan))
 
-		from Tools.TextBoundary import getTextBoundarySize
-		timespanWidth = getTextBoundarySize(self.instance, self.eventNameFont, self.l.getItemSize(), timespan).width()
+		if TextBoundary:
+			timespanWidth = getTextBoundarySize(self.instance, self.eventNameFont, self.l.getItemSize(), timespan).width()
+		else:
+			timespanWidth = float(width)/10*2
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin+statusIconWidth+iconMargin+typeIconWidth+iconMargin, 2, width-(iconMargin+statusIconWidth+iconMargin+typeIconWidth+iconMargin)- timespanWidth, rowHeight, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, timer.name))
 
 		if timer.hasTimeframe():
