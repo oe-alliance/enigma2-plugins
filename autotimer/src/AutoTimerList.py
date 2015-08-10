@@ -26,6 +26,11 @@ except:
 	from Tools.Directories import SCOPE_CURRENT_SKIN
 	
 from skin import parseColor, parseFont
+try:
+	from Tools.TextBoundary import getTextBoundarySize
+	TextBoundary = True
+except:
+	TextBoundary = False
 
 class DAYS:
 	MONDAY = 0
@@ -148,17 +153,21 @@ class AutoTimerList(MenuList):
 				x, y, w, h = (iconMargin+statusIconWidth+iconMargin, 3, statusIconHeight, typeIconWidth)
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, rectypeicon))
 
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin+statusIconWidth+iconMargin+typeIconWidth+iconMargin, 2, width-(iconMargin+statusIconWidth+iconMargin+typeIconWidth+iconMargin), rowHeight, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, timer.name))
-
 		if timer.hasTimespan():
 			nowt = time()
 			now = localtime(nowt)
 			begintime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, timer.timespan[0][0], timer.timespan[0][1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 			endtime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, timer.timespan[1][0], timer.timespan[1][1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
-			timespan = ((" %s ... %s") % (FuzzyTime(begintime)[1], FuzzyTime(endtime)[1]))
+			timespan = (("  %s ... %s") % (FuzzyTime(begintime)[1], FuzzyTime(endtime)[1]))
 		else:
-			timespan = _("Any time")
+			timespan = _("  Any time")
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width)/10*4.5, 0, width-float(width)/10*4.5-5, rowHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_TOP, timespan))
+
+		if TextBoundary:
+			timespanWidth = getTextBoundarySize(self.instance, self.eventNameFont, self.l.getItemSize(), timespan).width()
+		else:
+			timespanWidth = float(width)/10*2
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin+statusIconWidth+iconMargin+typeIconWidth+iconMargin, 2, width-(iconMargin+statusIconWidth+iconMargin+typeIconWidth+iconMargin)- timespanWidth, rowHeight, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, timer.name))
 
 		if timer.hasTimeframe():
 			begin = strftime("%a, %d %b", localtime(timer.getTimeframeBegin()))

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-08 13:56+0100\n"
-"PO-Revision-Date: 2014-05-12 12:37+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2015-07-25 12:54+0100\n"
+"PO-Revision-Date: 2015-07-26 16:55+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -39,6 +39,9 @@ msgstr "Cast: "
 msgid "Channel Selection"
 msgstr "Kanaallijst"
 
+msgid "Content:"
+msgstr "Inhoud:"
+
 msgid "Could't get Eventname"
 msgstr "Kon de naam van het event niet bepalen"
 
@@ -64,6 +67,9 @@ msgstr "Afsluiten"
 msgid "Extra Info"
 msgstr "Extra Info"
 
+msgid "Genre:"
+msgstr "Genre:"
+
 msgid "IMDb Details"
 msgstr "IMDb Details"
 
@@ -76,14 +82,34 @@ msgstr "Download van IMDb voltooid"
 msgid "IMDb Download failed"
 msgstr "Download van IMDb mislukt"
 
+msgid "IMDb Menu"
+msgstr "IMDb menu"
+
 msgid "IMDb Plugin"
 msgstr "IMDb Plugin"
 
 msgid "IMDb Re-Download completed"
 msgstr "IMDB-Download nogmaals uitgevoerd"
 
+msgid "IMDb Save-Download completed"
+msgstr "IMDb opslaan gereed"
+
 msgid "IMDb Setup"
 msgstr "IMDb instellingen"
+
+msgid ""
+"IMDb can not get Movie Information, to\n"
+" write .jpg and .txt-file!"
+msgstr ""
+"IMDb kan geen filminformatie vinden,\n"
+"schrijven als .jpg en .txt bestanden "
+
+msgid ""
+"IMDb can not get Movie Information, to\n"
+" write .txt-file!"
+msgstr ""
+"IMDb kan geen filminformatie vinden,\n"
+"schrijven als .txt bestand "
 
 msgid "IMDb query failed!"
 msgstr "Zoeken in de IMDb mislukt!"
@@ -109,6 +135,9 @@ msgstr "Speel Trailer"
 msgid "Please select the matching entry"
 msgstr "Maak de juiste keuze"
 
+msgid "Production Countries:"
+msgstr "Productieland"
+
 #, python-format
 msgid "Query IMDb: %s"
 msgstr "Zoekslag IMDb: %s"
@@ -119,6 +148,21 @@ msgstr "Filminformatie van de Internet Movie Database"
 #, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "Nieuwe zoekslag in de IMDb: %s..."
+
+msgid "Release Date:"
+msgstr "Releasedatum:"
+
+msgid "Runtime:"
+msgstr "Duur:"
+
+msgid "Save current Details as .html for offline using"
+msgstr "Sla huidige details op als .html voor offline gebruik."
+
+msgid "Save current Details as .txt"
+msgstr "Sla huidige details op als .txt"
+
+msgid "Save current Poster and Details as .txt"
+msgstr "Sla huidige poster en details op als .txt"
 
 msgid "Search Trailer"
 msgstr "Zoek Trailer"
