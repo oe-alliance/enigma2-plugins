@@ -52,9 +52,12 @@ config.plugins.autoresolution.delay_switch_mode = ConfigSelection(default = "100
 
 def setDeinterlacer(mode):
 	print "[AutoRes] switch deinterlacer mode to %s" % mode
-	f = open('/proc/stb/vmpeg/deinterlace' , "w")
-	f.write("%s\n" % mode)
-	f.close()
+	try:
+		f = open('/proc/stb/vmpeg/deinterlace' , "w")
+		f.write("%s\n" % mode)
+		f.close()
+	except:
+		pass
 
 frqdic = { 23976: '24', \
 		24000: '24', \
