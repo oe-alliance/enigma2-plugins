@@ -229,9 +229,12 @@ class AutoRes(Screen):
 			mode = self.lastmode
 			if mode.find("p24") != -1 or mode.find("p25") != -1 or mode.find("p30") != -1:
 				print "[AutoRes] switching to", mode
-				v = open('/proc/stb/video/videomode' , "w")
-				v.write("%s\n" % mode)
-				v.close()
+				try:
+					v = open('/proc/stb/video/videomode' , "w")
+					v.write("%s\n" % mode)
+					v.close()
+				except:
+					pass
 				resolutionlabel["restxt"].setText("Videomode: %s" % mode)
 				if config.plugins.autoresolution.showinfo.value:
 					resolutionlabel.show()
