@@ -17,7 +17,7 @@ from AutoTimerList import AutoTimerList
 from Components.ActionMap import HelpableActionMap
 from Components.Sources.StaticText import StaticText
 
-from boxbranding import getBoxType, getImageDistro
+from boxbranding import getBoxType
 
 BoxType = getBoxType()
 
@@ -120,7 +120,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self.setTitle(_("AutoTimer"))
 
 	def createSummary(self):
-		if BoxType in ('gb800ue', 'gb800ueplus', 'gbquad', 'gbquadplus', 'gbultraue') and getImageDistro() in ('openmips', 'openatv'):
+		if BoxType in ('gb800ue', 'gb800ueplus', 'gbquad', 'gbquadplus', 'gbultraue'):
 			pass
 		else:
 			return AutoTimerOverviewSummary
