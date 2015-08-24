@@ -8,6 +8,7 @@ from Components.Label import Label
 from Components.Language import language
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
+from Components.ParentalControl import parentalControl
 from enigma import eListboxPythonMultiContent, eServiceCenter, \
 		eServiceReference, gFont
 from Plugins.Plugin import PluginDescriptor
