@@ -12,6 +12,7 @@ auto-run at intervals
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
 from Screens.MessageBox import MessageBox
+from Screens.TextBox import TextBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -20,6 +21,7 @@ from Components.Pixmap import Pixmap
 from Components.ConfigList import ConfigListScreen
 from Components.UsageConfig import defaultMoviePath
 from Components.config import config, ConfigText, getConfigListEntry
+from Tools import ASCIItranslit
 from time import time, localtime, strftime
 from collections import defaultdict
 from os.path import isfile, isdir, splitext, join as joinpath, split as splitpath
@@ -27,8 +29,8 @@ import os
 
 def Plugins(**kwargs):
     return PluginDescriptor(
-        name='Series to Folder',
-        description='Move series recordings into folders',
+        name=_('Series to Folder'),
+        description=_('Move series recordings into folders'),
         where=PluginDescriptor.WHERE_MOVIELIST,
         needsRestart=False,
         fnc=main
@@ -62,17 +64,16 @@ class Series2Folder(ChoiceBox):
         # Movie recording path
         rootdir = defaultMoviePath()
 
-        initErrMess = "--------\n"
-        errMess = initErrMess
+        errMess = []
 
         if service is not None:
                 dir, fullname = splitpath(service.getPath())
                 if dir + '/' == rootdir and fullname:
                     showname, date_time, err = self.getShowInfo(rootdir, fullname)
                     if showname:
-                        moveSelection = showname
+                        moveSelection = self.cleanName(showname)
                     elif err:
-                        errMess += err
+                        errMess.append(err)
 
         # Full pathnames of current recordings' .ts files
         isRecording = set([timer.Filename + '.ts' for timer in self.session.nav.RecordTimer.timer_list if timer.state in (timer.StatePrepared, timer.StateRunning)])
@@ -89,44 +90,56 @@ class Series2Folder(ChoiceBox):
         for f in os.listdir(rootdir):
             fullpath = joinpath(rootdir, f)
             if f.endswith('.ts') and f[0:8].isdigit() and fullpath not in isRecording and isfile(fullpath):
-                showname, date_time, err = self.getShowInfo(rootdir, f)
+                origShowname, date_time, err = self.getShowInfo(rootdir, f)
+                showname = self.cleanName(origShowname)
                 if showname and (not moveSelection or showname == moveSelection):
-                    if moviesFolder and showname.lower().startswith("movie: "):
-                        shows[moviesFolder].append((showname, f, date_time))
+                    if moviesFolder and origShowname.lower().startswith("movie: "):
+                        shows[moviesFolder].append((origShowname, f, date_time))
                     else:
-                        shows[showname].append((showname, f, date_time))
+                        shows[showname].append((origShowname, f, date_time))
                 elif err:
-                    errMess += err
+                    errMess.append(err)
             elif isdir(fullpath):
                 dirs.add(f)
 
         # create a directory for each series and move shows into it
         # also add any single shows to existing series directories
-        moves = ''
+        moves = []
         numRecordings = int(config.plugins.seriestofolder.autofolder.value)
         for foldername, fileInfo in sorted(shows.items()):
             if (numRecordings != 0 and len(fileInfo) >= numRecordings) or foldername == moviesFolder or foldername in dirs or moveSelection:
                 errorText = ''
                 nerrors = 0
-                for showname, fullname, date_time in fileInfo:
+                for origShowname, fullname, date_time in fileInfo:
                     for f in self.recFileList(rootdir, fullname):
                         try:
                             os.renames(joinpath(rootdir, f), joinpath(rootdir, foldername, f))
                             print "[Series2Folder] rename", joinpath(rootdir, f), "to", joinpath(rootdir, foldername, f)
                         except Exception, e:
-                            errMess += e.__str__() + "\n"
+                            errMess.append(e.__str__())
                             nerrors += 1
                             errorText = ngettext(" - Error", " - Errors", nerrors)
-                    moves += '%s - %s%s\n' % (showname, date_time, errorText)
+                    moves.append('%s - %s%s' % (origShowname, date_time, errorText))
 
-        if errMess != initErrMess:
-                moves += errMess
-        if moves:
-            if self.movieSelection:
+        if moves and self.movieSelection:
                 self.movieSelection.reloadList()
-            self.MsgBox('Series to Folder moved the following episodes:\n%s' % moves)
+
+        if moves:
+            title = _("Series to Folder moved the following episodes")
+            if errMess:
+                title += ngettext(" - with an error", " - with errors", len(errMess))
         else:
-            self.MsgBox('Series to Folder did not find anything to move in %s' % rootdir, 5)
+            title = _("Series to Folder did not find anything to move in %s") % rootdir
+
+        if errMess or len(moves) > 20:
+            if errMess:
+                moves.append("--------")
+            moves += errMess
+            self.session.open(ErrorBox, text='\n'.join(moves), title=title)
+        elif moves:
+            self.MsgBox('\n'.join([title + ':'] + moves))
+        else:
+            self.MsgBox(title, timeout=10)
         self.close()
 
     def MsgBox(self, msg, timeout=30):
@@ -146,8 +159,19 @@ class Series2Folder(ChoiceBox):
                 l.append(f)
         return l
 
+    def cleanName(self, name):
+        if not config.plugins.seriestofolder.portablenames.value:
+            return name
+
+        # filter out non-allowed characters
+        non_allowed_characters = "/.\\:*?<>|\""
+        name = name.replace('\xc2\x86', '').replace('\xc2\x87', '')
+        name = ''.join(['_' if c in non_allowed_characters or ord(c) < 32 else c for c in name])
+        return name
+
     def getShowInfo(self, rootdir, fullname):
         path = joinpath(rootdir, fullname) + '.meta'
+        err_mess = None
         try:
             lines = open(path).readlines()
             showname = lines[1].strip()
@@ -157,8 +181,13 @@ class Series2Folder(ChoiceBox):
             if filebase[-4:-3] == "_" and filebase[-3:].isdigit():
                 date_time += '#' + filebase[-3:]
         except:
-            return self.recSplit(fullname)
-        return showname, date_time, None
+            showname, date_time, err_mess = self.recSplit(fullname)
+
+        if showname:
+            showname.replace('/', '_')
+            showname = showname[:255]
+
+        return showname, date_time, err_mess
 
     def recSplit(self, fullname):
         try:
@@ -175,14 +204,19 @@ class Series2Folder(ChoiceBox):
                 showname = showname[0:-4]
             showname = ' - '.join(parts[startOffset:-1] + [showname])
         except:
-            return None, None, "Can't extract show name for: %s\n" % fullname
+            return None, None, _("Can't extract show name for: %s") % fullname
         return showname, date_time, None
+
+class ErrorBox(TextBox):
+    skin = """<screen name="Series2Folder" backgroundColor="background" position="90,150" size="1100,450" title="Log">
+        <widget font="Regular;18" name="text" position="0,4" size="1100,446"/>
+</screen>"""
 
 class Series2FolderConfig(ConfigListScreen, Screen):
     skin = """
-<screen name="Series2FolderConfig" position="center,center" size="640,201" title="Configure Series To Folder" >
-    <widget name="config" position="20,10" size="600,75" />
-    <widget name="description" position="20,e-103" size="600,66" font="Regular;18" foregroundColor="grey" halign="left" valign="top" />
+<screen name="Series2FolderConfig" position="center,center" size="640,226" title="Configure Series To Folder" >
+    <widget name="config" position="20,10" size="600,100" />
+    <widget name="description" position="20,e-106" size="600,88" font="Regular;18" foregroundColor="grey" halign="left" valign="top" />
     <ePixmap name="red" position="20,e-28" size="15,16" pixmap="skin_default/buttons/button_red.png" alphatest="blend" />
     <ePixmap name="green" position="170,e-28" size="15,16" pixmap="skin_default/buttons/button_green.png" alphatest="blend" />
     <widget name="VKeyIcon" position="470,e-28" size="15,16" pixmap="skin_default/buttons/button_blue.png" alphatest="blend" />
@@ -209,10 +243,15 @@ class Series2FolderConfig(ConfigListScreen, Screen):
             config.plugins.seriestofolder.autofolder,
             _("Create a folder for a series automatically if there are this number of recordings or more. If set to \"no autocreate\" only move recordings if a folder already exists for them.")
         )
+        self._confPortableNames = getConfigListEntry(
+            _("Use portable folder names"),
+            config.plugins.seriestofolder.portablenames,
+            _("Use more portable (Windows-friendly) names for folders.")
+        )
         self._confMovies = getConfigListEntry(
             _("Put movies into folder"),
             config.plugins.seriestofolder.movies,
-            _("Move recordings whose names start with \"Movie: \" (case insensitive) to a folder for movies.")
+            _('Move recordings whose names start with "Movie: " (case insensitive) to a folder for movies.')
         )
         self._confMoviesfolder = getConfigListEntry(
             _("Folder for movies"),
@@ -235,6 +274,7 @@ class Series2FolderConfig(ConfigListScreen, Screen):
     def createConfig(self, configList):
         list = [
             self._confAutofolder,
+            self._confPortableNames,
             self._confMovies,
         ]
         if self._confMovies[1].value:

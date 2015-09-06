@@ -1,4 +1,4 @@
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, ConfigText
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, ConfigText, ConfigYesNo
 
 config.plugins.seriestofolder = ConfigSubsection()
 config.plugins.seriestofolder.autofolder = ConfigSelection([
@@ -16,3 +16,4 @@ config.plugins.seriestofolder.autofolder = ConfigSelection([
 ], default="2")
 config.plugins.seriestofolder.movies = ConfigEnableDisable(default=False)
 config.plugins.seriestofolder.moviesfolder = ConfigText(default="Movies", show_help=False)
+config.plugins.seriestofolder.portablenames = ConfigYesNo(default=True)
