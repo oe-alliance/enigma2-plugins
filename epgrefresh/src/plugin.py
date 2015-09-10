@@ -270,7 +270,7 @@ def menu_main(menuid, **kwargs):
 			return []
 	else:
 		return []
-	return [(_("PLUGINNAME_EPGRefresh"), main, "epgrefresh", None)]
+	return [(_("EPGRefresh"), main, "epgrefresh", None)]
 
 def Plugins(**kwargs):
 	# NOTE: this might be a little odd to check this, but a user might expect
