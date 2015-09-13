@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma - autotimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 12:54+0100\n"
-"PO-Revision-Date: 2015-08-31 16:55+0100\n"
+"POT-Creation-Date: 2015-09-12 20:06+0100\n"
+"PO-Revision-Date: 2015-09-13 15:47+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: nl_NL\n"
@@ -13,6 +13,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
+
+msgid "  Any time"
+msgstr "Altijd"
 
 #, python-format
 msgid ""
@@ -78,9 +81,6 @@ msgstr "Aantal resterende opnames"
 
 msgid "Any service/recording"
 msgstr "Elke service/opname"
-
-msgid "Any time"
-msgstr "Altijd"
 
 msgid "Auto Timers"
 msgstr "Auto Timers"
@@ -983,6 +983,9 @@ msgstr "Onbekend"
 
 msgid "zap"
 msgstr "kanaal wisselen"
+
+#~ msgid "Any time"
+#~ msgstr "Altijd"
 
 #~ msgid "AutoTimerTask"
 #~ msgstr "AutoTimer taak"
