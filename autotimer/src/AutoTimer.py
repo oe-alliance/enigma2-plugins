@@ -253,7 +253,6 @@ class AutoTimer:
 		# Precompute timer destination dir
 		dest = timer.destination or config.usage.default_path.value
 
-		match = timer.match
 		if timer.searchType == "description":
 			epgmatches = []
 			mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
