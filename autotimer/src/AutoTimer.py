@@ -253,6 +253,14 @@ class AutoTimer:
 		# Precompute timer destination dir
 		dest = timer.destination or config.usage.default_path.value
 
+		# Workaround to allow search for umlauts if we know the encoding
+		match = timer.match.replace('\xc2\x86', '').replace('\xc2\x87', '')
+		if timer.encoding != 'UTF-8':
+			try:
+				match = match.decode('UTF-8').encode(timer.encoding)
+			except UnicodeDecodeError:
+				pass
+
 		if timer.searchType == "description":
 			epgmatches = []
 			mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
