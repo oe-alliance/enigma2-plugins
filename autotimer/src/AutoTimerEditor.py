@@ -172,13 +172,6 @@ class AutoTimerEditorBase:
 		# Match
 		self.match = NoSave(ConfigText(default = timer.match, fixed_size = False))
 
-		# Encoding
-		default = timer.encoding
-		selection = ['UTF-8', 'ISO8859-15']
-		if default not in selection:
-			selection.append(default)
-		self.encoding = NoSave(ConfigSelection(choices = selection, default = default))
-
 		# ...
 		self.searchType = NoSave(ConfigSelection(choices = [("partial", _("partial match")), ("exact", _("exact match")), ("start", _("title starts with")), ("description", _("description match"))], default = timer.searchType))
 		self.searchCase = NoSave(ConfigSelection(choices = [("sensitive", _("case-sensitive search")), ("insensitive", _("case-insensitive search"))], default = timer.searchCase))
@@ -523,7 +516,6 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.enabled: _("Set this NO to disable this AutoTimer."),
 			self.name: _("This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."),
 			self.match: _("This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."),
-			self.encoding: _("Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."),
 			self.searchType: _("Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"),
 			self.searchCase: _("Select whether or not you want to enforce case correctness."),
 			self.justplay: _("Add zap timer instead of record timer?"),
@@ -570,7 +562,6 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			))
 
 		list.extend((
-			getConfigListEntry(_("EPG encoding"), self.encoding),
 			getConfigListEntry(_("Search type"), self.searchType),
 			getConfigListEntry(_("Search strictness"), self.searchCase),
 			getConfigListEntry(_("Timer type"), self.justplay),
@@ -779,9 +770,6 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Name
 		self.timer.name = self.name.value.strip() or self.timer.match
-
-		# Encoding
-		self.timer.encoding = self.encoding.value
 
 		# ...
 		self.timer.searchType = self.searchType.value
