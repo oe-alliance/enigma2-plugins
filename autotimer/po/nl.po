@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma - autotimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-12 20:06+0100\n"
-"PO-Revision-Date: 2015-09-13 15:47+0100\n"
+"POT-Creation-Date: 2015-09-23 21:23+0100\n"
+"PO-Revision-Date: 2015-09-24 16:26+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: nl_NL\n"
@@ -209,6 +209,9 @@ msgstr "Verwijderen"
 msgid "Description"
 msgstr "Omschrijving"
 
+msgid "EPG encoding"
+msgstr "EPG codering"
+
 msgid "Edit AutoTimer"
 msgstr "Bewerk AutoTimer"
 
@@ -254,6 +257,9 @@ msgstr "Toon AutoTimer in de  plugin browser."
 
 msgid "Enabled"
 msgstr "Geactiveerd"
+
+msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
+msgstr "Encoding die het kanaal gebruikt voor EPG data. Alleen van belang indien er speciale tekens als accenten of umlauts in de zoektekst staan"
 
 msgid "End of \"after event\" timespan"
 msgstr "Einde gebeurtenis na tijdspanne"
@@ -992,12 +998,6 @@ msgstr "kanaal wisselen"
 
 #~ msgid "Do you really want to delete %s?"
 #~ msgstr "Wilt u %s echt verwijderen?"
-
-#~ msgid "EPG encoding"
-#~ msgstr "EPG codering"
-
-#~ msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
-#~ msgstr "Encoding die het kanaal gebruikt voor EPG data. Alleen van belang indien er speciale tekens als accenten of umlauts in de zoektekst staan"
 
 #~ msgid "Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description./nPress BLUE to add a new restriction and YELLOW to remove the selected one."
 #~ msgstr "Filters zijn een krachtig gereedschap voor het vergelijken van gebeurtenissen. Een AutoTimer kan beperkt worden tot bepaalde weekdagen, of alleen overeenkomen met een tekst in bijv. een beschrijving/nDruk BLAUW om een nieuw filter in te stellen of GEEL om één te verwijderen."
