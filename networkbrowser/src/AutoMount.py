@@ -410,7 +410,22 @@ class AutoMount():
 			tmpfile.close()
 			f.close()
 			os.rename(filename + '.tmp', filename)
-		
+
+	def removeEntryFromAutofsMap(self, key, location, filename):
+		if os.path.exists(filename):
+			f = open(filename)
+			tmpfile = open(filename + '.tmp', 'w')
+			for line in f.readlines():
+				parts = line.split(" ", 2)
+				if len(parts) > 1:
+					if parts[1].startswith("-") and len(parts) > 2:
+						parts = parts[:1] + parts[2:]
+					if parts[0] != key and parts[1] != location:
+						tmpfile.write(line)
+			tmpfile.close()
+			f.close()
+			os.rename(filename + '.tmp', filename)
+
 	def generateMountXML(self, sharedata):
 		res = []
 		mounttype = sharedata['mounttype']
@@ -452,11 +467,11 @@ class AutoMount():
 			sharetemp = None
 			if mounttype == 'nfs':
 				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir']
-				self.removeEntryFromFile(sharetemp+'\n', '/etc/auto.network', ' ')
+				self.removeEntryFromAutofsMap(sharedata['sharename'], sharetemp + '\n', '/etc/auto.network')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 			elif mounttype == 'cifs':
 				sharetemp = '//' + sharedata['ip'] + '/' + sharedata['sharedir']
-				self.removeEntryFromFile(":" + sharetemp+'\n', '/etc/auto.network', ' ')
+				self.removeEntryFromAutofsMap(sharedata['sharename'], ":" + sharetemp+'\n', '/etc/auto.network')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 
 			list += self.generateMountXML(sharedata)
@@ -521,7 +536,7 @@ class AutoMount():
 			elif sharedata['mounttype'] == 'cifs':
 				sharetemp = '://' + sharedata['ip'] + '/' + sharedata['sharedir']
 			if sharetemp:
-				self.removeEntryFromFile(sharetemp+'\n', '/etc/auto.network' , ' ')
+				self.removeEntryFromAutofsMap(sharedata['sharename'], sharetemp + '\n', '/etc/auto.network')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 		self.automounts.clear()
 		self.automounts = self.newautomounts
