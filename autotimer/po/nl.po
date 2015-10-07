@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma - autotimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 12:54+0100\n"
-"PO-Revision-Date: 2015-07-26 16:28+0100\n"
+"POT-Creation-Date: 2015-09-23 21:23+0100\n"
+"PO-Revision-Date: 2015-09-24 16:26+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: nl_NL\n"
@@ -13,6 +13,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
+
+msgid "  Any time"
+msgstr "Altijd"
 
 #, python-format
 msgid ""
@@ -78,9 +81,6 @@ msgstr "Aantal resterende opnames"
 
 msgid "Any service/recording"
 msgstr "Elke service/opname"
-
-msgid "Any time"
-msgstr "Altijd"
 
 msgid "Auto Timers"
 msgstr "Auto Timers"
@@ -209,6 +209,9 @@ msgstr "Verwijderen"
 msgid "Description"
 msgstr "Omschrijving"
 
+msgid "EPG encoding"
+msgstr "EPG codering"
+
 msgid "Edit AutoTimer"
 msgstr "Bewerk AutoTimer"
 
@@ -254,6 +257,9 @@ msgstr "Toon AutoTimer in de  plugin browser."
 
 msgid "Enabled"
 msgstr "Geactiveerd"
+
+msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
+msgstr "Encoding die het kanaal gebruikt voor EPG data. Alleen van belang indien er speciale tekens als accenten of umlauts in de zoektekst staan"
 
 msgid "End of \"after event\" timespan"
 msgstr "Einde gebeurtenis na tijdspanne"
@@ -422,7 +428,7 @@ msgid ""
 "Do you really want to delete %s?"
 msgstr ""
 "Bericht\n"
-"DWilt u %s echt verwijderen?"
+"Wilt u %s echt verwijderen?"
 
 msgid "Modify existing timers"
 msgstr "Bestaande timers aanpassen"
@@ -984,17 +990,14 @@ msgstr "Onbekend"
 msgid "zap"
 msgstr "kanaal wisselen"
 
+#~ msgid "Any time"
+#~ msgstr "Altijd"
+
 #~ msgid "AutoTimerTask"
 #~ msgstr "AutoTimer taak"
 
 #~ msgid "Do you really want to delete %s?"
 #~ msgstr "Wilt u %s echt verwijderen?"
-
-#~ msgid "EPG encoding"
-#~ msgstr "EPG codering"
-
-#~ msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
-#~ msgstr "Encoding die het kanaal gebruikt voor EPG data. Alleen van belang indien er speciale tekens als accenten of umlauts in de zoektekst staan"
 
 #~ msgid "Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description./nPress BLUE to add a new restriction and YELLOW to remove the selected one."
 #~ msgstr "Filters zijn een krachtig gereedschap voor het vergelijken van gebeurtenissen. Een AutoTimer kan beperkt worden tot bepaalde weekdagen, of alleen overeenkomen met een tekst in bijv. een beschrijving/nDruk BLAUW om een nieuw filter in te stellen of GEEL om één te verwijderen."

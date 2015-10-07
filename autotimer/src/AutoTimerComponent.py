@@ -10,6 +10,9 @@ from enigma import eServiceReference, eServiceCenter
 # To get preferred component
 from Components.config import config
 
+# Default encoding
+from Components.Language import language
+
 class AutoTimerComponent(object):
 	"""AutoTimer Component which also handles validity checks"""
 
@@ -48,7 +51,7 @@ class AutoTimerComponent(object):
 			destination=None, include=None, matchCount=0, matchLeft=0, \
 			matchLimit='', matchFormatString='', lastBegin=0, justplay=False, \
 			avoidDuplicateDescription=0, searchForDuplicateDescription=2, bouquets=None, \
-			tags=None, searchType="partial", searchCase="insensitive", \
+			tags=None, encoding=None, searchType="partial", searchCase="insensitive", \
 			overrideAlternatives=True, timeframe=None, vps_enabled=False, \
 			vps_overwrite=False, setEndtime=False, series_labeling=False):
 		self.name = name
@@ -72,6 +75,7 @@ class AutoTimerComponent(object):
 		self.searchForDuplicateDescription = searchForDuplicateDescription
 		self.bouquets = bouquets
 		self.tags = tags or []
+		self.encoding = encoding or getDefaultEncoding()
 		self.searchType = searchType
 		self.searchCase = searchCase
 		self.overrideAlternatives = overrideAlternatives
@@ -104,6 +108,16 @@ class AutoTimerComponent(object):
 			self._bouquets = []
 
 	bouquets = property(lambda self: self._bouquets , setBouquets)
+
+	def setEncoding(self, encoding):
+		if encoding == '(null)':
+			self._encoding = getDefaultEncoding()
+		elif encoding:
+			self._encoding = encoding
+		elif not self._encoding:
+			self._encoding = getDefaultEncoding()
+
+	encoding = property(lambda self: self._encoding, setEncoding)
 
 	def setExclude(self, exclude):
 		if exclude:
@@ -508,6 +522,7 @@ class AutoTimerComponent(object):
 			searchForDuplicateDescription = self.searchForDuplicateDescription,
 			bouquets = self.bouquets,
 			tags = self.tags,
+			encoding = self.encoding,
 			searchType = self.searchType,
 			searchCase = self.searchCase,
 			overrideAlternatives = self.overrideAlternatives,
@@ -541,6 +556,7 @@ class AutoTimerComponent(object):
 			searchForDuplicateDescription = self.searchForDuplicateDescription,
 			bouquets = self.bouquets[:],
 			tags = self.tags[:],
+			encoding = self.encoding,
 			searchType = self.searchType,
 			searchCase = self.searchCase,
 			overrideAlternatives = self.overrideAlternatives,
@@ -570,6 +586,7 @@ class AutoTimerComponent(object):
 			' (',
 			', '.join((
 					str(self.match),
+					str(self.encoding),
 					str(self.searchCase),
 					str(self.searchType),
 					str(self.timespan),
@@ -696,6 +713,11 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 							else:
 								break
 		return override_service
+
+def getDefaultEncoding():
+	#if 'de' in language.getLanguage():
+	#	return 'ISO8859-15'
+	return 'UTF-8'
 
 # very basic factory ;-)
 preferredAutoTimerComponent = lambda *args, **kwargs: AutoTimerFastscanComponent(*args, **kwargs) if config.plugins.autotimer.fastscan.value else AutoTimerComponent(*args, **kwargs)

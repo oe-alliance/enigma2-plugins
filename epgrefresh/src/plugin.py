@@ -270,7 +270,7 @@ def menu_main(menuid, **kwargs):
 			return []
 	else:
 		return []
-	return [(_("PLUGINNAME_EPGRefresh"), main, "epgrefresh", None)]
+	return [(_("EPGRefresh"), main, "epgrefresh", None)]
 
 def Plugins(**kwargs):
 	# NOTE: this might be a little odd to check this, but a user might expect
@@ -299,7 +299,7 @@ def Plugins(**kwargs):
 			needsRestart = needsRestart,
 		),
 		PluginDescriptor(
-			name = _("PLUGINNAME_EPGRefresh"),
+			name = _("EPGRefresh"),
 			description = _("Automatically refresh EPG"),
 			where = PluginDescriptor.WHERE_PLUGINMENU, 
 			fnc = main,
@@ -307,7 +307,7 @@ def Plugins(**kwargs):
 			needsRestart = needsRestart,
 		),
 	]
-	list.append(PluginDescriptor(name = _("PLUGINNAME_EPGRefresh"),
+	list.append(PluginDescriptor(name = _("EPGRefresh"),
 					description = _("Automatically refresh EPG"),
 					where = PluginDescriptor.WHERE_MENU,
 					fnc = menu_main))
