@@ -89,7 +89,7 @@ class PermanentClockPositioner(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skin = SKIN
-		
+
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions"],
 		{
 			"left": self.left,
@@ -99,11 +99,11 @@ class PermanentClockPositioner(Screen):
 			"ok": self.ok,
 			"back": self.exit
 		}, -1)
-		
+
 		desktop = getDesktop(0)
 		self.desktopWidth = desktop.size().width()
 		self.desktopHeight = desktop.size().height()
-		
+
 		self.moveTimer = eTimer()
 		self.moveTimer.callback.append(self.movePosition)
 		self.moveTimer.start(50, 1)
@@ -200,6 +200,9 @@ def startConfig(session, **kwargs):
 def main(menuid):
 	if getImageDistro() in ('openmips'):
 		if menuid != "general_menu":
+			return [ ]
+	elif getImageDistro() in ('openhdf'):
+		if menuid != "gui_menu":
 			return [ ]
 	else:
 		if menuid != "system":

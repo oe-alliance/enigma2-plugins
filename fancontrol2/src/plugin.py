@@ -43,6 +43,9 @@ from threading import Thread, Lock
 import Queue
 Briefkasten = Queue.Queue()
 
+from boxbranding import getImageDistro
+
+
 def main(session,**kwargs):
 	try:
 		session.open(FanControl2Plugin)
@@ -1237,7 +1240,7 @@ class FanControl2(Screen):
 def autostart(reason, **kwargs):
 	global session
 	if reason == 0 and kwargs.has_key("session"):
-		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.pyo") or os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.pyo"):
+		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.pyo") or os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.py"):
 			from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
 			from FC2webSite import FC2web, FC2webLog, FC2webChart
 			from twisted.web import static
@@ -1267,8 +1270,12 @@ def autostart(reason, **kwargs):
 		session.open(FanControl2)
 
 def selSetup(menuid, **kwargs):
-	if menuid != "system":
-		return [ ]
+	if getImageDistro() in ('openhdf'):
+		if menuid != "devices_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return []
 	return [(_("Fan Control 2"), main, "fansetup_config", 70)]
 
 def Plugins(**kwargs):

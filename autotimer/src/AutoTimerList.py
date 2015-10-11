@@ -5,6 +5,12 @@ from os import path
 from . import _
 
 # GUI (Components)
+from skin import parseFont
+try:
+	 from skin import parameters
+	 skinparms = True
+except:
+	 skinparms = False
 from Components.MenuList import MenuList
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_VALIGN_BOTTOM, getDesktop
 from Tools.LoadPixmap import LoadPixmap
@@ -20,6 +26,11 @@ except:
 	from Tools.Directories import SCOPE_CURRENT_SKIN
 	
 from skin import parseColor, parseFont
+try:
+	from Tools.TextBoundary import getTextBoundarySize
+	TextBoundary = True
+except:
+	TextBoundary = False
 
 class DAYS:
 	MONDAY = 0
@@ -38,48 +49,69 @@ class AutoTimerList(MenuList):
 	def __init__(self, entries):
 		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
 		self.l.setBuildFunc(self.buildListboxEntry)
-		self.l.setFont(0, gFont("Regular", 20))
-		self.l.setFont(1, gFont("Regular", 17))
-		self.l.setFont(2, gFont("Regular", 30))
-		self.l.setFont(3, gFont("Regular", 28))
-		self.l.setItemHeight(70)
-		if path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_off.png")):
-			self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_off.png"))
-		else:
-			self.iconDisabled = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/lock_off.png"))
-		if path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_on.png")):
-			self.iconEnabled = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_on.png"))
-		else:
-			self.iconEnabled = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/lock_on.png"))
-		if path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_rec.png")):
-			self.iconRecording = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_rec.png"))
-		else:
-			self.iconRecording = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_rec.png"))
-		if path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_zap.png")):
-			self.iconZapped = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_zap.png"))
-		else:
-			self.iconZapped = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/timer_zap.png"))
+		try:
+			png = resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_off.png")
+		except:
+			png = resolveFilename(SCOPE_CURRENT_SKIN, "skin-default/icons/lock_off.png")
+		self.iconDisabled = LoadPixmap(cached=True, path=png)
+		#currently intended that all icons have the same size
+		try:
+			png = resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_on.png")
+		except:
+			png = resolveFilename(SCOPE_CURRENT_SKIN, "skin-default/icons/lock_on.png")
+		self.iconEnabled = LoadPixmap(cached=True, path=png)
+		try:
+			png = resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_rec.png")
+		except:
+			png = resolveFilename(SCOPE_CURRENT_SKIN, "skin-default/icons/timer_rec.png")
+		self.iconRecording = LoadPixmap(cached=True, path=png)
+		try:
+			png = resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_zap.png")
+		except:
+			png = resolveFilename(SCOPE_CURRENT_SKIN, "skin-default/icons/timer_zap.png")
+		self.iconZapped = LoadPixmap(cached=True, path=png)
 
-		self.colorDisabled = 12368828
+		self.serviceNameFont = gFont("Regular", 20)
+		self.eventNameFont = gFont("Regular", 18)
+		self.itemHeight = 75
+		self.rowHeight = 24
+		self.rowSplit1 = 26
+		self.rowSplit2 = 47
+		self.statusIconWidth = self.iconEnabled.size().width()
+		self.statusIconHeight = self.iconEnabled.size().height()
+		self.typeIconWidth = self.iconRecording.size().width()
+		self.typeIconHeight = self.iconRecording.size().height()
+		print 'iconWidth:',self.statusIconWidth
+		print 'iconHeight:',self.statusIconHeight
+		self.iconMargin = 2
 
 	def applySkin(self, desktop, parent):
-		attribs = [ ] 
-		if self.skinAttributes is not None:
-			for (attrib, value) in self.skinAttributes:
-				if attrib == "font":
-					self.l.setFont(0, parseFont(value, ((1,1),(1,1))))
-				elif attrib == "itemHeight":
-					self.l.setItemHeight(int(value))
-				elif attrib == "colorDisabled":
-					self.colorDisabled = parseColor(value).argb()
-				else:
-					attribs.append((attrib, value))
-		self.skinAttributes = attribs
+		def itemHeight(value):
+			self.itemHeight = int(value)
+		def ServiceNameFont(value):
+			self.serviceNameFont = parseFont(value, ((1,1),(1,1)))
+		def EventNameFont(value):
+			self.eventNameFont = parseFont(value, ((1,1),(1,1)))
+		def rowHeight(value):
+			self.rowHeight = int(value)
+		def rowSplit1(value):
+			self.rowSplit1 = int(value)
+		def rowSplit2(value):
+			self.rowSplit2 = int(value)
+		def iconMargin(value):
+			self.iconMargin = int(value)
+		for (attrib, value) in list(self.skinAttributes):
+			try:
+				locals().get(attrib)(value)
+				self.skinAttributes.remove((attrib, value))
+			except:
+				pass
+		self.l.setItemHeight(self.itemHeight)
+		self.l.setFont(0, self.serviceNameFont)
+		self.l.setFont(1, self.eventNameFont)
 		return MenuList.applySkin(self, desktop, parent)
 
-	#
 	def buildListboxEntry(self, timer):
-		screenwidth = getDesktop(0).size().width()
 		if not timer.enabled:
 			icon = self.iconDisabled
 		else:
@@ -89,6 +121,16 @@ class AutoTimerList(MenuList):
 		else:
 			rectypeicon = self.iconRecording
 
+		height = self.l.getItemSize().height()
+		width = self.l.getItemSize().width()
+		iconMargin = self.iconMargin
+		statusIconHeight = self.statusIconHeight
+		statusIconWidth = self.statusIconWidth
+		typeIconHeight = self.typeIconHeight
+		typeIconWidth = self.typeIconWidth
+		rowHeight = self.rowHeight
+		rowSplit1 = self.rowSplit1
+		rowSplit2 = self.rowSplit2
 		channel = []
 		for t in timer.services:
 			channel.append(ServiceReference(t).getServiceName())
@@ -96,16 +138,42 @@ class AutoTimerList(MenuList):
 			channel = ", ".join(channel)
 		else:
 			channel = _('All channels')
-		height = self.l.getItemSize().height()
-		width = self.l.getItemSize().width()
+
 		res = [ None ]
-		x = (2*width) // 3
-		if screenwidth and screenwidth == 1920:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 100, 2, x-26, 35, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 43, width-4, 35, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, channel))
+		if icon:
+			if skinparms:
+				x, y, w, h = parameters.get("AutotimerEnabledIcon",(iconMargin, 0, statusIconHeight, statusIconWidth))
+			else:
+				x, y, w, h = (iconMargin, 0, statusIconHeight, statusIconWidth)
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, icon))
+		if rectypeicon:
+			if skinparms:
+				x, y, w, h = parameters.get("AutotimerRecordIcon",(iconMargin+statusIconWidth+iconMargin, 3, statusIconHeight, typeIconWidth))
+			else:
+				x, y, w, h = (iconMargin+statusIconWidth+iconMargin, 3, statusIconHeight, typeIconWidth)
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, rectypeicon))
+
+		if timer.hasTimespan():
+			nowt = time()
+			now = localtime(nowt)
+			begintime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, timer.timespan[0][0], timer.timespan[0][1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+			endtime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, timer.timespan[1][0], timer.timespan[1][1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+			timespan = (("  %s ... %s") % (FuzzyTime(begintime)[1], FuzzyTime(endtime)[1]))
 		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 52, 2, x-26, 25, 0, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 47, width-4, 25, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, channel))
+			timespan = _("  Any time")
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width)/10*4.5, 0, width-float(width)/10*4.5-5, rowHeight, 1, RT_HALIGN_RIGHT|RT_VALIGN_TOP, timespan))
+
+		if TextBoundary:
+			timespanWidth = getTextBoundarySize(self.instance, self.eventNameFont, self.l.getItemSize(), timespan).width()
+		else:
+			timespanWidth = float(width)/10*2
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin+statusIconWidth+iconMargin+typeIconWidth+iconMargin, 2, width-(iconMargin+statusIconWidth+iconMargin+typeIconWidth+iconMargin)- timespanWidth, rowHeight, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, timer.name))
+
+		if timer.hasTimeframe():
+			begin = strftime("%a, %d %b", localtime(timer.getTimeframeBegin()))
+			end = strftime("%a, %d %b", localtime(timer.getTimeframeEnd()))
+			timeframe = (("%s ... %s") % (begin, end))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin, rowSplit1, float(width)/10*4.5-5, rowHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_TOP, timeframe))
 
 		if timer.include[3]:
 			total = len(timer.include[3])
@@ -129,42 +197,8 @@ class AutoTimerList(MenuList):
 			days = ', '.join(days)
 		else:
 			days = _("Everyday")
-		if screenwidth and screenwidth == 1920:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width)/10*4.5+1, 35, float(width)/10*5.5-5, 35, 2, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, days))
-		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width)/10*4.5+1, 25, float(width)/10*5.5-5, 25, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, days))
-
-		if timer.hasTimespan():
-			nowt = time()
-			now = localtime(nowt)
-			begintime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, timer.timespan[0][0], timer.timespan[0][1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
-			endtime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, timer.timespan[1][0], timer.timespan[1][1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
-			timespan = ((" %s ... %s") % (FuzzyTime(begintime)[1], FuzzyTime(endtime)[1]))
-		else:
-			timespan = _("Any time")
-		if screenwidth and screenwidth == 1920:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-200-4, 0, 200, 35, 2, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
-		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-150-4, 0, 150, 25, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, timespan))
-
-		if timer.hasTimeframe():
-			begin = strftime("%a, %d %b", localtime(timer.getTimeframeBegin()))
-			end = strftime("%a, %d %b", localtime(timer.getTimeframeEnd()))
-			timespan = (("%s ... %s") % (begin, end))
-			if screenwidth and screenwidth == 1920:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 20, float(width)/10*4.5-5, 35, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timespan))
-			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 25, float(width)/10*4.5-5, 25, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timespan))
-
-		if icon:
-			if screenwidth and screenwidth == 1920:
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 2, 2, 35, 35, icon))
-			else:
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 2, 24, 25, icon))
-			if screenwidth and screenwidth == 1920:
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 50, 2, 30, 30, rectypeicon))
-			else:
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 28, 5, 24, 25, rectypeicon))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, float(width)/10*4.5+1, rowSplit1, float(width)/10*5.5-5, rowSplit1, 1, RT_HALIGN_RIGHT|RT_VALIGN_TOP, days))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin, rowSplit2, width-(iconMargin*2), rowHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_TOP, channel))
 		try:
 			devide = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png"))
 		except:

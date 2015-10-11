@@ -460,7 +460,7 @@ class AutoTimer:
 					if (evtBegin - (config.recording.margin_before.getValue() * 60) != rtimer.begin) or (evtEnd + (config.recording.margin_after.getValue() * 60) != rtimer.end) or (shortdesc != rtimer.description):
 						if rtimer.isAutoTimer and eit == rtimer.eit:
 							print ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
-							rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
+							# rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							preveit = eit
 						else:
 							if config.plugins.autotimer.refresh.getValue() != "all":
@@ -470,7 +470,7 @@ class AutoTimer:
 						newEntry = rtimer
 						modified += 1
 						self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref, eit)
-						rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
+						# rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
 						break
 					else:
 						print ("[AutoTimer] Skipping timer because it has not changed.")

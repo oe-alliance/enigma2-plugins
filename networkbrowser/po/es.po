@@ -8,300 +8,321 @@ msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2008-05-08 01:20+0100\n"
-"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
-"Language-Team: none\n"
-"Language: \n"
+"PO-Revision-Date: 2015-09-12 17:28+0200\n"
+"Last-Translator: Joan González - Jglez3 <joan@gonzalezcrego.es>\n"
+"Language-Team: OpenPlus\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 1.8.4\n"
 
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
 msgstr ""
+"Ya existe un punto de montaje con este nombre.\n"
+"¿Actualizar el existente y continuar?\n"
 
 msgid ""
 "A mount entry with this name already exists!\n"
 "and is not this share folder, please use a different name.\n"
 msgstr ""
+"Ya existe un punto de montaje con ese nombre\n"
+"y no es este carpeta compartida. Por favor, usa un nombre distinto.\n"
 
 msgid "Active"
-msgstr ""
+msgstr "Activo"
 
 msgid ""
 "Active/\n"
 "Inactive"
 msgstr ""
+"Activo/\n"
+"Inactivo"
 
 msgid "Add a new NFS or CIFS mount point to your Receiver."
-msgstr ""
+msgstr "Añadir nuevo punto de montaje NFS o CIFS en tu receptor."
 
 msgid "Add new network mount point"
-msgstr ""
+msgstr "Añadir nuevo punto de montaje en red"
 
 msgid "Adding schedule..."
-msgstr ""
+msgstr "Añadiendo calendario..."
 
 msgid "Are you sure you want to remove your network mount ?"
-msgstr ""
+msgstr "¿Seguro que quieres eliminar tus montajes en red?"
 
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
 msgstr ""
+"¿Seguro que quieres guardar este montaje en red?\n"
+"\n"
 
 msgid "Attempt to mount shares again"
-msgstr ""
+msgstr "Intenta volver a montar los recursos compartidos"
 
 msgid "Attempt to recover lost mounts (in background)"
-msgstr ""
+msgstr "Recuperar montajes perdidos (en segundo plano)"
 
 msgid "Browse network neighbourhood"
-msgstr ""
+msgstr "Navegar por el entorno de red"
 
 msgid "CIFS share"
-msgstr ""
+msgstr "CIFS"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 msgid "Change hostname"
-msgstr ""
+msgstr "Cambiar nombre de host"
 
 msgid "Change the hostname of your Receiver."
-msgstr ""
+msgstr "Cambiar nombre de host de tu receptor."
 
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 msgid "Delete mount"
-msgstr ""
+msgstr "Eliminar montaje"
 
 msgid "Dir:"
-msgstr ""
+msgstr "Dir:"
 
 msgid "Do you want to enter a username and password for this host?"
-msgstr ""
+msgstr "¿Quieres introducir usuario y contraseña para este host?"
 
 msgid "Enigma2 (mount using enigma2)"
-msgstr ""
+msgstr "Enigma2 (montar usando enigma2)"
 
 msgid "Enigma2 old format (mount using linux)"
-msgstr ""
+msgstr "Antiguo formato de enigma2 (montar usando linux)"
 
 msgid "Enter IP to scan..."
-msgstr ""
+msgstr "Introduce una IP a escanear…"
 
 msgid "Enter new hostname for your Receiver"
-msgstr ""
+msgstr "Introduce un nuevo nombre de host para tu receptor"
 
 msgid "Enter options:"
-msgstr ""
+msgstr "Introducir las opciones:"
 
 msgid "Enter password:"
-msgstr ""
+msgstr "Introduce la contraseña:"
 
 msgid "Enter share directory:"
-msgstr ""
+msgstr "Introduce el directorio compartido:"
 
 msgid "Enter share name:"
-msgstr ""
+msgstr "Introduce el nombre compartido:"
 
 msgid "Enter user and password for host: "
-msgstr ""
+msgstr "Introduce usuario y contraseña para el host: "
 
 msgid "Enter username:"
-msgstr ""
+msgstr "Introduce usuario:"
 
 msgid "Expert"
-msgstr ""
+msgstr "Experto"
 
 msgid "FSTAB (mount using linux)"
-msgstr ""
+msgstr "FSTAB (montar usando linux)"
+
+msgid "FSTAB (mount at boot)"
+msgstr "FSTAB (montar en el arranque)"
+
+msgid "AUTOFS (mount as needed)"
+msgstr "AUTOFS (montar si es necesario)"
 
 msgid "Finished restarting your network"
-msgstr ""
+msgstr "Se ha terminado de reiniciar la red"
 
 msgid "IP Address"
-msgstr ""
+msgstr "Dirección IP"
 
 msgid "IP:"
-msgstr ""
+msgstr "IP:"
 
 msgid "Local share name"
-msgstr ""
+msgstr "Nombre de recurso compartido local"
 
 msgid "Manage network shares"
-msgstr ""
+msgstr "Administra los recursos compartidos en red"
 
 msgid "Manage your network shares..."
-msgstr ""
+msgstr "Administra los recursos compartidos en red…"
 
 msgid "Mount Again"
-msgstr ""
+msgstr "Montar otra vez"
 
 msgid "Mount Manager"
-msgstr ""
+msgstr "Administrador de montajes"
+
+msgid "Mount manager"
+msgstr "Admin. montajes"
 
 msgid "Mount Viewer"
-msgstr ""
+msgstr "Visor de montajes"
 
 msgid "Mount again"
-msgstr ""
+msgstr "Montar otra vez"
 
 msgid "Mount informations"
-msgstr ""
+msgstr "Información de montaje"
 
 msgid "Mount options"
-msgstr ""
+msgstr "Opciones de montaje"
 
 msgid "Mount type"
-msgstr ""
+msgstr "Tipo de montaje"
 
 msgid "Mount using"
-msgstr ""
+msgstr "Montar usando"
 
 msgid ""
 "Mounted/\n"
 "Unmounted"
 msgstr ""
+"Montado/\n"
+"Desmontado"
 
 msgid "Mounting network shares..."
-msgstr ""
+msgstr "Montando recursos compartidos en red…"
 
 msgid "Mountpoints management"
-msgstr ""
+msgstr "Administración de puntos de montaje"
 
 msgid "Mounts editor"
-msgstr ""
+msgstr "Editor de montajes"
 
 msgid "Mounts management"
-msgstr ""
+msgstr "Administración de montajes"
 
 msgid "NFS share"
-msgstr ""
+msgstr "NFS"
 
 msgid "Network Browser"
-msgstr ""
+msgstr "Navegador del entorno de red"
 
 msgid "No network devices found!"
-msgstr ""
+msgstr "No se han encontrado dispositivos en red."
 
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 msgid "Please wait for activation of your network mount..."
-msgstr ""
+msgstr "Por favor, espera para la activación de tu montaje de red."
 
 msgid "Please wait while removing your network mount..."
-msgstr ""
+msgstr "Por favor, espera mientras se elimina tu montajes en red…"
 
 msgid "Please wait while updating your network mount..."
-msgstr ""
+msgstr "Por favor, espera mientras se actualizan tu montaje en red…"
 
 msgid "Please wait while your network is restarting..."
-msgstr ""
+msgstr "Por favor, espere mientras la red se está reiniciando ..."
 
 msgid "Press OK to activate the settings."
-msgstr ""
+msgstr "Pulsa OK para activar la configuración."
 
 msgid "Press OK to collapse this host"
-msgstr ""
+msgstr "Pulsa OK para contraer este host."
 
 msgid "Press OK to edit selected settings."
-msgstr ""
+msgstr "Pulsa OK para editar la configuración."
 
 msgid "Press OK to edit the settings."
-msgstr ""
+msgstr "Pulsa OK para editar la configuración."
 
 msgid "Press OK to expand this host"
-msgstr ""
+msgstr "Pulsa OK para expandir este host."
 
 msgid "Press OK to mount this share!"
-msgstr ""
+msgstr "Pulsa OK para montar este recurso compartido."
 
 msgid "Press OK to mount!"
-msgstr ""
+msgstr "Pulsa OK para montar."
 
 msgid "Press OK to save settings."
-msgstr ""
+msgstr "Pulsa OK para guardar la configuración."
 
 msgid "Press OK to select."
-msgstr ""
+msgstr "Pulsa OK para seleccionar."
 
 msgid "Re-mount network shares every (in hours)"
-msgstr ""
+msgstr "Remontar recursos compartidos en red cada (en horas)"
 
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "¿Seguro que quieres cerrar sin guardar la configuración?"
 
 msgid "Rescan"
-msgstr ""
+msgstr "Volver a buscar"
 
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 msgid "Scan NFS share"
-msgstr ""
+msgstr "Escanear NFS"
 
 msgid "Scan range"
-msgstr ""
+msgstr "Esc. rango"
 
 msgid "Schedule MountAgain"
-msgstr ""
+msgstr "Programar 'Montar otra vez'"
 
 msgid "Schedule a auto remount of your network shares."
-msgstr ""
+msgstr "Programar un automontaje de tus recursos compartidos en red."
 
 msgid "Search for network shares"
-msgstr ""
+msgstr "Busca recursos compartidos en red"
 
 msgid "Search for network shares..."
-msgstr ""
+msgstr "Buscar recursos compartidos en red…"
 
 msgid "Searching your network. Please wait..."
-msgstr ""
+msgstr "Buscando en tu red. Por favor, espera…"
 
 msgid "Server IP"
-msgstr ""
+msgstr "IP del servidor"
 
 msgid "Server share"
-msgstr ""
+msgstr "Servidor compartido"
 
 msgid "Setup Mount Again"
-msgstr ""
+msgstr "Configurar ‘Montar otra vez’"
 
 msgid "User management"
-msgstr ""
+msgstr "Administración de usuarios"
 
 msgid "Usermanager"
-msgstr ""
+msgstr "Administrador de usuarios"
 
 msgid "Username"
-msgstr ""
+msgstr "Usuario"
 
 msgid "View, edit or delete mountpoints on your Receiver."
-msgstr ""
+msgstr "Ver, editar o eliminar puntos de montaje en tu receptor."
 
 msgid "View, edit or delete usernames and passwords for your network."
-msgstr ""
+msgstr "Ver, editar o eliminar usuarios y contraseñas de tu red."
 
 msgid "Your network mount has been activated."
-msgstr ""
+msgstr "Tu punto de montaje en red ha sido activado."
 
 msgid "Your network mount has been removed."
-msgstr ""
+msgstr "Tu punto de montaje en red ha sido eliminado."
 
 msgid "Your network mount has been updated."
-msgstr ""
+msgstr "Tu punto de montaje en red ha sido actualizado."
 
 msgid "use as HDD replacement"
-msgstr ""
+msgstr "Usar como reemplazo de HDD"
+
+msgid "The harddisk"
+msgstr "Disco duro"

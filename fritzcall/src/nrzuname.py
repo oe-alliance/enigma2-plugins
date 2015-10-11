@@ -4,7 +4,7 @@
 $Id: nrzuname.py 824 2013-12-02 16:56:32Z michael $
 $Author: michael $
 $Revision: 824 $
-$Date: 2013-12-02 17:56:32 +0100 (Mon, 02 Dec 2013) $
+$Date: 2013-12-02 17:56:32 +0100 (Mo, 02 Dez 2013) $
 '''
 
 # W0603 (global statement); W0141 (map, filter, etc.)

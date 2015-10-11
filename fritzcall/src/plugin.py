@@ -2,10 +2,11 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 858 $
-$Date: 2014-03-06 15:31:01 +0100 (Thu, 06 Mar 2014) $
-$Id: plugin.py 858 2014-03-06 14:31:01Z michael $
+$Revision: 1200 $
+$Date: 2015-07-23 17:57:30 +0200 (Thu, 23 Jul 2015) $
+$Id: plugin.py 1200 2015-07-23 15:57:30Z michael $
 '''
+
 
 # C0111 (Missing docstring)
 # C0103 (Invalid name)
@@ -89,7 +90,8 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", "05.29 and newer")], default=None)
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 until below 6.35")), ("06.35", _("06.35 and newer"))], default=None)
+#config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 and newer"))], default=None)
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
@@ -100,7 +102,8 @@ config.plugins.FritzCall.filter = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.filtermsn = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.filtermsn.setUseableChars('0123456789,')
 config.plugins.FritzCall.filterCallList = ConfigEnableDisable(default=True)
-config.plugins.FritzCall.showOutgoing = ConfigEnableDisable(default=False)
+config.plugins.FritzCall.showBlacklistedCalls = ConfigEnableDisable(default=False)
+config.plugins.FritzCall.showOutgoingCalls = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.timeout = ConfigInteger(default=15, limits=(0, 60))
 config.plugins.FritzCall.lookup = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.internal = ConfigEnableDisable(default=False)
@@ -127,6 +130,9 @@ config.plugins.FritzCall.phonebookLocation = ConfigDirectory(default = resolveFi
 config.plugins.FritzCall.guestSSID = ConfigText(default="FRITZ!Box Gastzugang", fixed_size=False)
 config.plugins.FritzCall.guestSecure = ConfigEnableDisable(default=True)
 config.plugins.FritzCall.guestPassword = ConfigText(default="guestguest!!!", fixed_size=False)
+
+guestWLANUptime = [(None, _('Not deactivating after time')), "15", "30", "45", "60", "90", "120", "180", "240", "300", "360", "480", "600", "720", "900", "1080", "1260"]
+config.plugins.FritzCall.guestUptime = ConfigSelection(choices=guestWLANUptime, default="30")
 
 countryCodes = [
 	("0049", _("Germany")),
@@ -277,8 +283,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 858 $"[1:-2] + "\n" + 
-							"$Date: 2014-03-06 15:31:01 +0100 (Thu, 06 Mar 2014) $"[1:23] + "\n"
+							"$Revision: 1200 $"[1:-2] + "\n" + 
+							"$Date: 2015-07-23 17:57:30 +0200 (Thu, 23 Jul 2015) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -290,8 +296,7 @@ class FritzAbout(Screen):
 	def exit(self):
 		self.close()
 
-from FritzCallFBF import FBF_dectActive, FBF_faxActive, FBF_rufumlActive, FBF_tamActive
-
+from FritzCallFBF import FBF_dectActive, FBF_faxActive, FBF_rufumlActive, FBF_tamActive, FBF_wlanState
 class FritzMenu(Screen, HelpableScreen):
 	def __init__(self, session):
 		if not fritzbox or not fritzbox.info:
@@ -651,7 +656,7 @@ class FritzMenu(Screen, HelpableScreen):
 											"ok": self._exit,
 											"green": self._toggleWlan,
 											"yellow": self._toggleGast,
-											"red": self._reset,
+											"red": self._reset, # no button, does not work
 											"info": self._getInfo,
 											}, -2)
 	
@@ -766,8 +771,13 @@ class FritzMenu(Screen, HelpableScreen):
 				if dslState[0] == '5':
 					self["dsl_inactive"].hide()
 					self["dsl_active"].show()
+					if dslState[2]:
+						message = dslState[2]
+					else:
+						message = "DSL"
 					if dslState[1]:
-						self["FBFDsl"].setText('DSL ' + dslState[1])
+						message = message + ' ' + dslState[1]
+					self["FBFDsl"].setText(message)
 				else:
 					self["dsl_active"].hide()
 					self["dsl_inactive"].show()
@@ -783,7 +793,7 @@ class FritzMenu(Screen, HelpableScreen):
 					message = 'WLAN'
 					if wlanState[1] == '0':
 						message += ' ' + _('not encrypted')
-					else:
+					elif wlanState[1] == '1':
 						message += ' ' + _('encrypted')
 					if wlanState[2]:
 						if wlanState[2] == '0':
@@ -792,6 +802,8 @@ class FritzMenu(Screen, HelpableScreen):
 							message = message + ', ' + _('one device active')
 						else:
 							message = message + ', ' + wlanState[2] + ' ' + _('devices active')
+					if len(wlanState) == 4:
+						message = message + ", " + wlanState[3]
 					self["FBFWlan"].setText(message)
 				else:
 					self["wlan_active"].hide()
@@ -882,7 +894,7 @@ class FritzMenu(Screen, HelpableScreen):
 			debug("[FritzCallFBF] _fillMenu: " + traceback.format_exc())
 
 	def _toggleWlan(self):
-		self["FBFInfo"].setText(_("Setting..."))
+		self["FBFInfo"].setText(_("Setting...") + " WLAN")
 		if self._wlanActive:
 			debug("[FritzMenu] toggleWlan off")
 			fritzbox.changeWLAN('0', self._getInfo)
@@ -897,7 +909,11 @@ class FritzMenu(Screen, HelpableScreen):
 			fritzbox.changeMailbox(which, self._getInfo)
 
 	def _toggleGast(self):
-		self["FBFInfo"].setText(_("Setting..."))
+		self["FBFInfo"].setText(_("Setting...") + ' ' + _("Guest access"))
+		if fritzbox.info[FBF_wlanState][0] != '1':
+			# self["FBFInfo"].setText(_("WLAN not active"))
+			self._toggleWlan()
+			return
 		fritzbox.changeGuestAccess(self._guestActive, self._getInfo)
 
 	def _reset(self):
@@ -1121,7 +1137,7 @@ class FritzOfferAction(Screen):
 				<widget name="key_yellow" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			</screen>""" % (
 							DESKTOP_WIDTH, DESKTOP_HEIGHT, # set maximum size
-							scaleH(22,21), # text
+							scaleV(25,22), # text
 							DESKTOP_WIDTH, DESKTOP_HEIGHT, # set maximum size
 							"skin_default/buttons/red.png",
 							"skin_default/buttons/green.png",
@@ -1176,7 +1192,6 @@ class FritzOfferAction(Screen):
 			Notifications.AddNotification(MessageBox, _("Found picture\n\n%s\n\nBut did not load. Probably not PNG, 8-bit") %faceFile, type = MessageBox.TYPE_ERROR)
 			picPixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_error.png"))
 		picSize = picPixmap.size()
-		self["FacePixmap"].instance.setPixmap(picPixmap)
 
 		noButtons = 3
 		# recalculate window size
@@ -1202,6 +1217,7 @@ class FritzOfferAction(Screen):
 		self["text"].instance.resize(textSize)
 		# resize pixmap
 		self["FacePixmap"].instance.resize(picSize)
+		self["FacePixmap"].instance.setPixmap(picPixmap)
 		# move buttons
 		buttonPos = (buttonsGap, buttonsVPos)
 		self["key_red_p"].instance.move(ePoint(*buttonPos))
@@ -1289,7 +1305,13 @@ class FritzCallPhonebook:
 		if config.plugins.FritzCall.reloadPhonebookTime.value > 0:
 			debug("[FritzCallPhonebook] start timer with " + repr(config.plugins.FritzCall.reloadPhonebookTime.value))
 			self.loop = eTimer()
-			self.loop.callback.append(self.reload)
+			
+			# newer OE versions don't have the callback
+			try:
+				self.loop_conn = self.loop.timeout.connect(self.reload)
+			except AttributeError:
+				self.loop.callback.append(self.reload)
+				
 			self.loop.start(config.plugins.FritzCall.reloadPhonebookTime.value*OneHour, False)
 		self.reload()
 
@@ -1895,7 +1917,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 858 $"[1: - 1] + "$Date: 2014-03-06 15:31:01 +0100 (Thu, 06 Mar 2014) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1200 $"[1: - 1] + "$Date: 2015-07-23 17:57:30 +0200 (Thu, 23 Jul 2015) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1920,8 +1942,9 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 				self.list.append(getConfigListEntry(_("Filter also list of calls"), config.plugins.FritzCall.filterCallList))
 			self.list.append(getConfigListEntry(_("Mute on call"), config.plugins.FritzCall.muteOnCall))
 
-			self.list.append(getConfigListEntry(_("Show Outgoing Calls"), config.plugins.FritzCall.showOutgoing))
-			# not only for outgoing: config.plugins.FritzCall.showOutgoing.value:
+			self.list.append(getConfigListEntry(_("Show Blocked Calls"), config.plugins.FritzCall.showBlacklistedCalls))
+			self.list.append(getConfigListEntry(_("Show Outgoing Calls"), config.plugins.FritzCall.showOutgoingCalls))
+			# not only for outgoing: config.plugins.FritzCall.showOutgoingCalls.value:
 			self.list.append(getConfigListEntry(_("Areacode to add to calls without one (if necessary)"), config.plugins.FritzCall.prefix))
 			self.list.append(getConfigListEntry(_("Timeout for Call Notifications (seconds)"), config.plugins.FritzCall.timeout))
 			self.list.append(getConfigListEntry(_("Reverse Lookup Caller ID (select country below)"), config.plugins.FritzCall.lookup))
@@ -1929,17 +1952,20 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 				self.list.append(getConfigListEntry(_("Country"), config.plugins.FritzCall.country))
 
 			if config.plugins.FritzCall.fwVersion.value != None:
-				if config.plugins.FritzCall.fwVersion.value == "05.50":
-					self.list.append(getConfigListEntry(_("Name of WLAN guest network"), config.plugins.FritzCall.guestSSID))
-					self.list.append(getConfigListEntry(_("Secure WLAN guest network"), config.plugins.FritzCall.guestSecure))
-					self.list.append(getConfigListEntry(_("Password of WLAN guest network"), config.plugins.FritzCall.guestPassword))
+				if config.plugins.FritzCall.fwVersion.value == "05.50" or config.plugins.FritzCall.fwVersion.value == "06.35":
 					self.list.append(getConfigListEntry(_("User name Accessing FRITZ!Box"), config.plugins.FritzCall.username))
-				# TODO: make password unreadable?
 				self.list.append(getConfigListEntry(_("Password Accessing FRITZ!Box"), config.plugins.FritzCall.password))
 				self.list.append(getConfigListEntry(_("Extension number to initiate call on"), config.plugins.FritzCall.extension))
+				if config.plugins.FritzCall.fwVersion.value == "05.50" or config.plugins.FritzCall.fwVersion.value == "06.35":
+					self.list.append(getConfigListEntry(_("Name of WLAN guest network"), config.plugins.FritzCall.guestSSID))
+					self.list.append(getConfigListEntry(_("Secure WLAN guest network"), config.plugins.FritzCall.guestSecure))
+					# TODO: make password unreadable?
+					self.list.append(getConfigListEntry(_("Password of WLAN guest network"), config.plugins.FritzCall.guestPassword))
+					self.list.append(getConfigListEntry(_("Minutes of uptime of WLAN guest network"), config.plugins.FritzCall.guestUptime))
 				self.list.append(getConfigListEntry(_("Read PhoneBook from FRITZ!Box"), config.plugins.FritzCall.fritzphonebook))
 				if config.plugins.FritzCall.fritzphonebook.value:
-					self.list.append(getConfigListEntry(_("FRITZ!Box PhoneBook to read"), config.plugins.FritzCall.fritzphonebookName))
+					if config.plugins.FritzCall.fwVersion.value != "06.35":
+						self.list.append(getConfigListEntry(_("FRITZ!Box PhoneBook to read"), config.plugins.FritzCall.fritzphonebookName))
 					self.list.append(getConfigListEntry(_("Append type of number"), config.plugins.FritzCall.showType))
 					self.list.append(getConfigListEntry(_("Append shortcut number"), config.plugins.FritzCall.showShortcut))
 					self.list.append(getConfigListEntry(_("Append vanity name"), config.plugins.FritzCall.showVanity))
@@ -2129,6 +2155,7 @@ def findFace(number, name):
 	else:
 		files = os.listdir(facesDir)
 		# debug("[FritzCall] findFace listdir: %s" %repr(files))
+		# TODO macthed das hier auf ????.png1 ?!?!?
 		myFiles = [f for f in files if re.match(re.escape(number) + "\.[png|PNG]", f)]
 		if not myFiles:
 			myFiles = [f for f in files if re.match(re.escape(name) + "\.[png|PNG]", f)]
@@ -2166,7 +2193,7 @@ class MessageBoxPixmap(Screen):
 	</screen>
 		""" % (
 			# scaleH(350, 60), scaleV(175, 245),
-			scaleV(24, 22), resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
+			scaleV(25, 22), resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
 			)
 		debug("[FritzCall] MessageBoxPixmap number: %s" % number)
 		Screen.__init__(self, session)
@@ -2199,7 +2226,6 @@ class MessageBoxPixmap(Screen):
 			Notifications.AddNotification(MessageBox, _("Found picture\n\n%s\n\nBut did not load. Probably not PNG, 8-bit") %faceFile, type = MessageBox.TYPE_ERROR)
 			picPixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_error.png"))
 		picSize = picPixmap.size()
-		self["InfoPixmap"].instance.setPixmap(picPixmap)
 
 		# recalculate window size
 		textSize = self["text"].getSize()
@@ -2221,6 +2247,7 @@ class MessageBoxPixmap(Screen):
 		self["text"].instance.resize(textSize)
 		# resize pixmap
 		self["InfoPixmap"].instance.resize(picSize)
+		self["InfoPixmap"].instance.setPixmap(picPixmap)
 		# move text
 		self["text"].instance.move(ePoint(*textPos))
 		# move pixmap
@@ -2231,7 +2258,13 @@ class MessageBoxPixmap(Screen):
 	def _initTimeout(self):
 		if self._timeout > 0:
 			self._timer = eTimer()
-			self._timer.callback.append(self._timerTick)
+			
+			# newer OE versions don't have the callback
+			try:
+				self._timer_conn = self._timer.timeout.connect(self._timerTick)
+			except AttributeError:
+				self._timer.callback.append(self._timerTick)
+
 			self.onExecBegin.append(self._startTimer)
 			self._origTitle = None
 			if self.execing:
@@ -2413,7 +2446,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver): # pylint: disable=W0223
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 858 $"[1:-1]	+ "$Date: 2014-03-06 15:31:01 +0100 (Thu, 06 Mar 2014) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 1200 $"[1:-1]	+ "$Date: 2015-07-23 17:57:30 +0200 (Thu, 23 Jul 2015) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2477,14 +2510,14 @@ class FritzProtocol(LineReceiver): # pylint: disable=W0223
 		#	if not eDVBVolumecontrol.getInstance().isMuted():
 		#		globalActionMap.actions["volumeMute"]()
 		#=======================================================================
-		elif self.event == "RING" or (self.event == "CALL" and config.plugins.FritzCall.showOutgoing.value):
+		elif self.event == "RING" or (self.event == "CALL" and config.plugins.FritzCall.showOutgoingCalls.value):
 			phone = anEvent[4]
 			if self.event == "RING":
 				number = anEvent[3] 
 			else:
 				number = anEvent[5]
 
-			if fritzbox and fritzbox.blacklist:
+			if fritzbox and fritzbox.blacklist and not config.plugins.FritzCall.showBlacklistedCalls.value:
 				if self.event == "RING":
 					if number in fritzbox.blacklist[0]:
 						debug("[FritzProtocol] lineReceived phone: '''%s''' blacklisted number: '''%s'''" % (phone, number))
@@ -2574,6 +2607,8 @@ class FritzClientFactory(ReconnectingClientFactory):
 			fritzbox = FritzCallFBF.FritzCallFBF_05_27()
 		elif config.plugins.FritzCall.fwVersion.value == "05.50":
 			fritzbox = FritzCallFBF.FritzCallFBF_05_50()
+		elif config.plugins.FritzCall.fwVersion.value == "06.35":
+			fritzbox = FritzCallFBF.FritzCallFBF_06_35()
 		else:
 			Notifications.AddNotification(MessageBox, _("FRITZ!Box firmware version not configured! Please set it in the configuration."), type=MessageBox.TYPE_INFO, timeout=0)
 		phonebook.reload()

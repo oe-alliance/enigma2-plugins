@@ -43,6 +43,8 @@ import os, gettext
 import Screens.InfoBar
 import Screens.Standby
 
+from boxbranding import getImageDistro
+
 ##############################
 ###   Multilanguage Init   ###
 ##############################
@@ -586,7 +588,7 @@ class InfoBar(InfoBarOrg):
 		# Workaround: Show Dummy Popup for a second to prevent StandBy Bug
 		if action is None and postaction == "standby" and (config.plugins.pts.favoriteSaveAction.value == "savetimeshift" or config.plugins.pts.favoriteSaveAction.value == "savetimeshiftandrecord"):
 			self.session.open(MessageBox, _("Saving timeshift as movie now. This might take a while!"), MessageBox.TYPE_INFO, timeout=1)
-			
+
 		# Post PTS Actions like ZAP or whatever the user requested
 		if self.save_timeshift_postaction == "zapUp":
 			InfoBarChannelSelection.zapUp(self)
@@ -1552,7 +1554,7 @@ def _mayShow(self):
 		self.pvrstate_hide_timer = eTimer()
 		self.pvrstate_hide_timer.callback.append(self.pvrStateDialog.hide)
 		self.pvrstate_hide_timer.stop()
-		
+
 		if self.seekstate == self.SEEK_STATE_PLAY:
 			idx = config.usage.infobar_timeout.index
 			if not idx:
@@ -1601,7 +1603,7 @@ def instantRecord(self):
 	dir = preferredInstantRecordPath()
 	if not dir or not fileExists(dir, 'w'):
 		dir = defaultMoviePath()
-		
+
 	if not harddiskmanager.inside_mountpoint(dir):
 		if harddiskmanager.HDDCount() and not harddiskmanager.HDDEnabledCount():
 			self.session.open(MessageBox, _("Unconfigured storage devices found!") + "\n" \
@@ -1755,8 +1757,12 @@ class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 #################################################
 
 def startSetup(menuid):
-	if menuid != "system":
-		return [ ]
+	if getImageDistro() in ('openhdf'):
+		if menuid != "record_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return [ ]
 	return [(_("Timeshift Settings"), PTSSetupMenu, "pts_setup", 50)]
 
 def PTSSetupMenu(session, **kwargs):

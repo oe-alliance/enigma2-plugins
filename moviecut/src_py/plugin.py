@@ -277,7 +277,7 @@ class MovieCutSpawn:
 		else:
 			mess = _("Another movie is currently cut.\nThe movie \"%s\" will be cut in the background after it.") % (self.name)
 		global_mcut_block = True
-		self.dialog = self.session.openWithCallback(self.endc, MessageBox, mess, MessageBox.TYPE_INFO)
+		self.dialog = self.session.openWithCallback(self.endc, MessageBox, mess, MessageBox.TYPE_INFO, timeout = 10)
 
 	def doAck(self, retval):
 		global global_mcut_errors
