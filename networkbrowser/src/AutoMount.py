@@ -72,7 +72,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
@@ -111,7 +111,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
@@ -150,7 +150,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
@@ -189,7 +189,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
