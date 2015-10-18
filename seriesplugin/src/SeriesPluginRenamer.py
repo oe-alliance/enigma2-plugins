@@ -165,7 +165,7 @@ def renameFile(servicepath, name, data, tidy=False):
 	#Py3 for f in glob( escape(src) + "*" ):
 	glob_src = CompiledRegexpGlobEscape.sub("[\\1]", src)
 	splog("SPR: glob_src      ", glob_src)
-	for f in glob( glob_src + "*" ):
+	for f in glob( glob_src + ".*" ):
 		splog("SPR: servicepathRnm", f)
 		to = f.replace(src, dst)
 		splog("SPR: servicepathTo ", to)

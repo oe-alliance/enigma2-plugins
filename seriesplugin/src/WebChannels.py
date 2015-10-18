@@ -12,24 +12,9 @@ from urllib2 import urlopen, Request, URLError
 
 from Components.config import config
 
+import HTMLParser
+#html_parser = HTMLParser.HTMLParser()
 
-#from SerienRecorder import getUserAgent
-import datetime, random
-def getUserAgent():
-	userAgents = [
-		"Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; de) Presto/2.9.168 Version/11.52",
-	    "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20120101 Firefox/29.0",
-	    "Mozilla/5.0 (X11; Linux x86_64; rv:28.0) Gecko/20100101 Firefox/28.0",
-	    "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)",
-	    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0)",
-	    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.13+ (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2",
-	    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36",
-	    "Mozilla/5.0 (compatible; Konqueror/4.5; FreeBSD) KHTML/4.5.4 (like Gecko)",
-	    "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0"
-	]
-	today = datetime.date.today()
-	random.seed(today.toordinal())
-	return userAgents[random.randint(0, 8)]
 
 def iso8859_Decode(txt):
 	txt = unicode(txt, 'ISO-8859-1')
@@ -38,6 +23,7 @@ def iso8859_Decode(txt):
 
 	# &apos;, &quot;, &amp;, &lt;, and &gt;
 	txt = txt.replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"')
+	#txt = html_parser.unescape(txt)
 	return txt
 
 
@@ -45,17 +31,20 @@ class WebChannels(object):
 	def __init__(self, user_callback=None, user_errback=None):
 		self.user_callback = user_callback
 		self.user_errback  = user_errback
+		
+		socket.setdefaulttimeout( float(config.plugins.seriesplugin.socket_timeout.value) )
 
 	def	request(self):
 		print "[SP] request webpage.."
 		url = "http://www.wunschliste.de/updates/stationen"
-		#getPage(url, agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0", headers={'Content-Type':'application/x-www-form-urlencoded'}).addCallback(self.__callback).addErrback(self.__errback)
-		getPage(url, agent=getUserAgent(), headers={'Content-Type':'application/x-www-form-urlencoded'}).addCallback(self.__callback).addErrback(self.__errback)
+		from plugin import PROXY, USER_AGENT
+		getPage(PROXY+url, headers={'User-Agent':USER_AGENT}).addCallback(self.__callback).addErrback(self.__errback)
 
 	def request_and_return(self):
 		print "[SP] request_and_return webpage.."
 		url = "http://www.wunschliste.de/updates/stationen"
-		req = Request(url, headers={'Content-Type':'application/x-www-form-urlencoded'})
+		from plugin import PROXY, USER_AGENT
+		req = Request(PROXY+url, headers={'User-Agent':USER_AGENT})
 		try:
 			data = urlopen(req).read()
 		except URLError as e:
@@ -77,7 +66,7 @@ class WebChannels(object):
 			for station in stations:
 				if station != 'alle':
 					station = iso8859_Decode(station)
-					station = station.replace(' (Pay-TV)','').replace(' (Schweiz)','').replace(' (GB)','').replace(' (Österreich)','').replace(' (USA)','').replace(' (RP)','').replace(' (F)','').replace('&#x1f512;','')
+					station = station.replace(' (Pay-TV)','').replace(' (Schweiz)','').replace(' (GB)','').replace(' (Österreich)','').replace(' (&Ouml;sterreich)','').replace(' (USA)','').replace(' (RP)','').replace(' (F)','').replace('&#x1f512;','')
 					#station = station.strip()
 					
 					web_chlist.append(station)

@@ -13,8 +13,6 @@ from Components.MenuList import MenuList
 from Components.Button import Button
 from Screens.Screen import Screen
 #from Plugins.Plugin import PluginDescriptor
-#from twisted.web.client import getPage
-#from twisted.web.client import downloadPage
 
 #from Components.ServicePosition import ServicePositionGauge
 #from Tools.NumericalTextInput import NumericalTextInput
@@ -40,6 +38,11 @@ from twisted.web import client, error as weberror
 from twisted.internet import reactor, defer
 from urllib import urlencode
 from skin import parseColor
+
+try:
+	from skin import TemplatedListFonts
+except:
+	TemplatedListFonts = None
 
 from difflib import SequenceMatcher
 
@@ -107,8 +110,14 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 		}, 0)
 
 		self.chooseMenuList = MenuList([], enableWrapAround=True, content=eListboxPythonMultiContent)
-		self.chooseMenuList.l.setFont(0, gFont('Regular', 20 ))
-		self.chooseMenuList.l.setItemHeight(25)
+		global TemplatedListFonts
+		if TemplatedListFonts is not None:
+			tlf = TemplatedListFonts()
+			self.chooseMenuList.l.setFont(0, gFont(tlf.face(tlf.MEDIUM), tlf.size(tlf.MEDIUM)))
+			self.chooseMenuList.l.setItemHeight(30)
+		else:
+			self.chooseMenuList.l.setFont(0, gFont('Regular', 20 ))
+			self.chooseMenuList.l.setItemHeight(25)
 		self['list'] = self.chooseMenuList
 		self['list'].show()
 
@@ -209,13 +218,23 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 			imageStatus = path = os.path.join(PIXMAP_PATH, "minus.png")
 		else:
 			imageStatus = path = os.path.join(PIXMAP_PATH, "plus.png")
-			
-		return [entry,
-			(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 8, 16, 16, loadPNG(imageStatus)),
-			(eListboxPythonMultiContent.TYPE_TEXT, 35, 3, 300, 26, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, stbSender),
-			(eListboxPythonMultiContent.TYPE_TEXT, 350, 3, 250, 26, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, webSender),
-			(eListboxPythonMultiContent.TYPE_TEXT, 600, 3, 250, 26, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "", colorYellow)
-			]
+		
+		global TemplatedListFonts
+		if TemplatedListFonts is not None:
+			l = [entry,
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 8, 16, 16, loadPNG(imageStatus)),
+				(eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 400, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, stbSender),
+				(eListboxPythonMultiContent.TYPE_TEXT, 450, 1, 350, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, webSender),
+				(eListboxPythonMultiContent.TYPE_TEXT, 800, 1, 300, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "", colorYellow)
+				]
+		else:
+			l = [entry,
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 8, 16, 16, loadPNG(imageStatus)),
+				(eListboxPythonMultiContent.TYPE_TEXT, 35, 3, 300, 26, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, stbSender),
+				(eListboxPythonMultiContent.TYPE_TEXT, 350, 3, 250, 26, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, webSender),
+				(eListboxPythonMultiContent.TYPE_TEXT, 600, 3, 250, 26, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "", colorYellow)
+				]
+		return l
 
 	def getIndexOfWebSender(self, webSender):
 		for pos,webCh in enumerate(self.webChlist):

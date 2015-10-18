@@ -33,17 +33,15 @@ from HTMLParser import HTMLParser
 SERIESLISTURL = "http://www.fernsehserien.de/suche?"
 EPISODEIDURL = 'http://www.fernsehserien.de%s/sendetermine/%s'
 
-Headers = {
-		'User-Agent' : 'Mozilla/5.0',
-		'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-		'Accept-Charset':'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-		'Accept-Encoding':'',
-		'Accept-Language':'de-DE,de;q=0.8,en-US;q=0.6,en;q=0.4',
-		'Cache-Control':'no-cache',
-		'Connection':'keep-alive',
-		'Host':'www.fernsehserien.de',
-		'Pragma':'no-cache'
-	}
+#OLD trs[x] = [None,        u'31.10.2012', u'20:15\u201321:15 Uhr', u'ProSieben',                     u'8.', u'15',       u'Richtungswechsel']
+#NEW trs[x] = [None, u'So', u'31.10.2012', u'20:15\u201321:15',     u'ProSieben', None, u'216', None, u'8.', u'15', None, u'Richtungswechsel']
+COL_DATE = 2
+COL_TIME = 3
+COL_CHANNEL = 4
+#COL_ABS_EPISODE = 6
+COL_SEASON = 8
+COL_EPISODE = 9
+COL_TITLE = 11
 
 CompiledRegexpNonASCII = re.compile('\xe2\x80.')
 
@@ -83,7 +81,7 @@ def str_to_utf8(s):
 					s = unicode(s, 'ISO-8859-1', 'ignore')
 					s = s.encode('utf-8')
 					splog("WL: str_to_utf8 decode ISO-8859-1 ignore: s: ", repr(s))
-	s = s.replace('\xe2\x80\x93','-').replace('\xc3\x9f','ß')
+	s = s.replace('\xe2\x80\x93','-').replace('\xe2\x80\x99',"'").replace('\xc3\x9f','ß')
 	return CompiledRegexpNonASCII.sub('', s)
 
 
@@ -91,7 +89,9 @@ class FSParser(HTMLParser):
 	def __init__(self):
 		HTMLParser.__init__(self)
 		# Hint: xpath from Firebug without tbody elements
-		xpath = '/html/body/div[2]/div[2]/div/table/tr[3]/td/div/table[2]/tr/td'
+		#xpath = '/html/body/div[2]/div[2]/div/table/tr[3]/td/div/table[2]/tr/td'
+		#xpath = '/html/body/div/div[3]/main/div[3]/article/table/tr/td'
+		xpath = '/html/body/div/div[3]/main/div[3]/article/table'
 		
 		self.xpath = [ e for e in xpath.split('/') if e ]
 		self.xpath.reverse()
@@ -117,9 +117,11 @@ class FSParser(HTMLParser):
 						self.waitforendtag = int( s[1].split(']' )[0]) - 1
 				else:
 					self.start = True
+					#splog("FSParser: START")
 
 		if self.start and tag == 'table':
 			self.table = True
+			#splog("FSParser: TABLE")
 
 		if self.table:
 			if tag == 'td':
@@ -220,15 +222,25 @@ class Fernsehserien(IdentifierBase):
 						else:
 							self.page = 0
 							
-							year_url = EPISODEIDURL % (id, '')
+							year_base_url = EPISODEIDURL % (id, '')
+							splog("year_base_url: ", year_base_url)
+							
+							year_url = year_base_url+"jahr-"+str(self.year+1)
+							splog("year_url: ", year_url)
+							
 							#/sendetermine/jahr-2014
-							response = urlopen( year_url+"jahr-"+str(self.year) )
+							# Increment year by one, because we want to start at the end of the year
+							from plugin import PROXY
+							response = urlopen( PROXY + year_url )
 							
 							#redirecturl = http://www.fernsehserien.de/criminal-intent-verbrechen-im-visier/sendetermine/-14
 							redirect_url = response.geturl()
+							splog("redirect_url: ", redirect_url)
 							
-							page = int( redirect_url.replace(year_url,'') )
-							
+							try:
+								self.page = int( redirect_url.replace(year_base_url,'') )
+							except:
+								self.page = 0
 					
 					self.first = None
 					self.last = None
@@ -247,7 +259,7 @@ class Fernsehserien(IdentifierBase):
 	def getSeries(self, name):
 		parameter =  urlencode({ 'term' : re.sub("[^a-zA-Z0-9*]", " ", name) })
 		url = SERIESLISTURL + parameter
-		data = self.getPage(url, Headers)
+		data = self.getPage(url)
 		
 		if data and isinstance(data, basestring):
 			data = self.parseSeries(data)
@@ -259,6 +271,7 @@ class Fernsehserien(IdentifierBase):
 
 	def parseSeries(self, data):
 		serieslist = []
+		#splog( "parseSeries", data)
 		for line in json.loads(data):
 			id = line['id']
 			idname = line['value']
@@ -281,6 +294,14 @@ class Fernsehserien(IdentifierBase):
 		
 		soup = BeautifulSoup(data)
 		
+		div = soup.find('div', 'gray-bar-header nicht-nochmal')
+		if div and div.string:
+			year = div.string[-4:]
+			splog( "FS year by div", year)
+		else:
+			year = self.year
+			splog( "FS year not found", year)
+		
 		table = soup.find('table', 'sendetermine')
 		if table:
 			for trnode in table.find_all('tr'):
@@ -289,31 +310,61 @@ class Fernsehserien(IdentifierBase):
 				
 				if tdnodes:
 					# Filter for known rows
-					#if len(tdnodes) == 7 and len(tdnodes[2].string) >= 15:
-					
-					if len(tdnodes) >= 6 and tdnodes[2].string and len(tdnodes[2].string) >= 15:
+					if len(tdnodes) >= 11:		# >= 6 and tdnodes[COL_DATE].string and len(tdnodes[COL_DATE].string) >= 10:
 						tds = []
-						for tdnode in tdnodes:
-							tds.append(tdnode.string or "")
+						for idx, tdnode in enumerate(tdnodes):
+							if idx == COL_TIME:
+								tds.append( tdnode.string[0:5] )
+							elif idx == COL_DATE:
+								tds.append( tdnode.string[0:11] )
+							elif idx == COL_CHANNEL:
+								#tds[COL_CHANNEL] = tdnode[COL_CHANNEL]['title']
+								spans = tdnode.find('span')
+								if spans:
+									splog( "spans", len(spans), spans)
+									tds.append( spans.get('title', '') )
+								else:
+									tds.append(tdnode.string or "")
+							else:
+								tds.append(tdnode.string or "")
+						
+						if tds[COL_TIME].find('\xc2\xa0') != -1:
+							splog( "tdnodes xc2xa0", len(tdnodes), tdnodes)
+							continue
+						if tds[COL_DATE].find('\xc2\xa0') != -1:
+							splog( "tdnodes xc2xa0", len(tdnodes), tdnodes)
+							continue
+						tds.append( year )
+						splog( "FS table tds", tds)
 						trs.append( tds )
 					# This row belongs to the previous
-					elif trs and len(tdnodes) == 5:
-						#if trs[-1][5] and tdnodes[3].string:
-						trs[-1][5] += ' ' + (tdnodes[3].string or "")
-						#if trs[-1][6] and tdnodes[4].string:
-						trs[-1][6] += ' ' + (tdnodes[4].string or "")
+					#TODO
+					#elif trs and len(tdnodes) == 5:
+					#	trs[-1][5] += ' ' + (tdnodes[3].string or "")
+					#	trs[-1][6] += ' ' + (tdnodes[4].string or "")
 					#else:
-					#	splog( "tdnodes", len(tdnodes), tdnodes )
+					#	splog( "tdnodes", len(tdnodes), tdnodes)
 				
 				#else:
 				#	splog( "tdnodes", tdnodes )
+		
+			#http://www.fernsehserien.de/weisst-du-eigentlich-wie-lieb-ich-dich-hab/sendetermine/-1
+			for idx,tds in enumerate(trs):
+				if tds[COL_TIME] == "&nbsp;":
+					if idx > 0:
+						tds[COL_TIME] = trs[idx-1][COL_TIME]
+				if tds[COL_DATE] == "&nbsp;":
+					if idx > 0:
+						tds[COL_DATE] = trs[idx-1][COL_DATE]
+		else:
+			splog( "FS table not found")
 		
 		#splog(trs)
 		return trs
 
 	def getNextPage(self, id):
 		url = EPISODEIDURL % (id, self.page)
-		data = self.getPage(url, Headers)
+		data = self.getPage(url)
 		
 		if data and isinstance(data, basestring):
 			splog("getNextPage: basestring")
@@ -324,8 +375,7 @@ class Fernsehserien(IdentifierBase):
 			splog("getNextPage: list")
 			
 			trs = data
-			# trs[x] = [None, u'31.10.2012', u'20:15\u201321:15 Uhr', u'ProSieben', u'8.', u'15', u'Richtungswechsel']
-
+			
 			yepisode = None
 			ydelta = maxint
 			
@@ -335,13 +385,22 @@ class Fernsehserien(IdentifierBase):
 			#print last[6:11] 
 			
 			# trs[0] first line [2] second element = timestamps [a:b] use first time
-			first = datetime.strptime( trs[0][2][0:5] + trs[0][1], "%H:%M%d.%m.%Y" )
+			cust_date = trs[0][COL_TIME] + trs[0][COL_DATE]
+			if len(cust_date) == 11:
+				cust_date += trs[0][-1]
+			splog(cust_date)
+			if len(cust_date) != 15:
+				return
+			first = datetime.strptime( cust_date, "%H:%M%d.%m.%Y" )
 			
 			# trs[-1] last line [2] second element = timestamps [a:b] use second time
-			#last = datetime.strptime( trs[-1][2][6:11] + trs[-1][1], "%H:%M%d.%m.%Y" )
-			# Problem with wrap around use also start time
-			# Sa 30.11.2013 23:35 - 01:30 Uhr ProSieben 46 3. 13 Showdown 3
-			last = datetime.strptime( trs[-1][2][0:5] + trs[-1][1], "%H:%M%d.%m.%Y" )
+			cust_date = trs[-1][COL_TIME] + trs[-1][COL_DATE]
+			if len(cust_date) == 11:
+				cust_date += trs[-1][-1]
+			splog(cust_date)
+			if len(cust_date) != 15:
+				return
+			last = datetime.strptime( cust_date, "%H:%M%d.%m.%Y" )
 			
 			#first = first - self.td_max_time_drift
 			#last = last + self.td_max_time_drift
@@ -363,28 +422,31 @@ class Fernsehserien(IdentifierBase):
 				if ( test_future_timespan or test_past_timespan ):
 					#search in page for matching datetime
 					for tds in trs:
-						if tds and len(tds) >= 6:  #7:
+						if tds and len(tds) >= 11:
 							# Grey's Anathomy
-							# [None, u'31.10.2012', u'20:15\u201321:15 Uhr', u'ProSieben', u'8.', u'15', u'Richtungswechsel']
+							#OLD [None, u'31.10.2012', u'20:15\u201321:15 Uhr', u'ProSieben', u'8.', u'15', u'Richtungswechsel']
 							# 
 							# Gute Zeiten 
-							# [None, u'20.11.2012', u'06:40\u201307:20 Uhr', u'NDR', None, u'4187', u'Folge 4187']
-							# [None, u'01.12.2012', u'10:45\u201313:15 Uhr', u'RTL', None, u'5131', u'Folge 5131']
-							# [None, u'\xa0', None, u'5132', u'Folge 5132']
-							# [None, u'\xa0', None, u'5133', u'Folge 5133']
-							# [None, u'\xa0', None, u'5134', u'Folge 5134']
-							# [None, u'\xa0', None, u'5135', u'Folge 5135']
+							#OLD [None, u'20.11.2012', u'06:40\u201307:20 Uhr', u'NDR', None, u'4187', u'Folge 4187']
+							#OLD [None, u'\xa0', None, u'5132', u'Folge 5132']
 							
 							# Wahnfried
-							# [u'Sa', u'26.12.1987', u'\u2013', u'So', u'27.12.1987', u'1Plus', None]
+							#OLD [u'Sa', u'26.12.1987', u'\u2013', u'So', u'27.12.1987', u'1Plus', None]
 							
 							# First part: date, times, channel
-							xdate, xbegin = tds[1:3]
+							xdate = tds[COL_DATE]
+							xbegin = tds[COL_TIME]
 							#splog( "tds", tds )
 							
 							#xend = xbegin[6:11]
-							xbegin = xbegin[0:5]
-							xbegin = datetime.strptime( xbegin+xdate, "%H:%M%d.%m.%Y" )
+							#xbegin = xbegin[0:5]
+							cust_date = xbegin+xdate
+							if len(cust_date) == 11:
+								cust_date += tds[-1]
+							splog(cust_date)
+							if len(cust_date) != 15:
+								continue
+							xbegin = datetime.strptime( cust_date, "%H:%M%d.%m.%Y" )
 							#xend = datetime.strptime( xend+xdate, "%H:%M%d.%m.%Y" )
 							#print "xbegin", xbegin
 							
@@ -396,26 +458,27 @@ class Fernsehserien(IdentifierBase):
 							
 							if delta <= self.max_time_drift:
 								
-								if self.compareChannels(self.service, tds[3]):
+								if self.compareChannels(self.service, tds[COL_CHANNEL]):
 									
 									if delta < ydelta:
 										
 										splog( "tds", len(tds), tds )
 										if len(tds) >= 10:
 											# Second part: s1e1, s1e2,
-											xseason = tds[7] or "1"
-											xepisode = tds[8]
-											xtitle = " ".join(tds[10:])  # Use all available titles
+											xseason = tds[COL_SEASON] or "1"
+											xepisode = tds[COL_EPISODE]
+											xtitle = tds[COL_TITLE]
 										elif len(tds) >= 7:
+											#TODO
 											# Second part: s1e1, s1e2,
 											xseason = tds[4]
 											xepisode = tds[5]
 											if xseason and xseason.find(".") != -1:
 												xseason = xseason[:-1]
-												xtitle = " ".join(tds[6:])  # Use all available titles
+												xtitle = tds[6]
 											else:
 												xseason = "1"
-												xtitle = " ".join(tds[6:])  # Use all available titles
+												xtitle = tds[6]
 										elif len(tds) == 6:
 											xseason = "0"
 											xepisode = "0"
