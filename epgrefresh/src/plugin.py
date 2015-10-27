@@ -234,16 +234,10 @@ def eventinfo(session, servicelist, **kwargs):
 def extensionsmenu(session, **kwargs):
 	main(session, **kwargs)
 
-#extPrefix = _("EXTENSIONMENU_PREFIX")
-#extSetupDescriptor = PluginDescriptor(name = extPrefix + " " + _("EXTENSIONNAME_SETUP"), description = _("Automatically refresh EPG"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart=False)
-#extRunDescriptor = PluginDescriptor(name = extPrefix + " " + _("Refresh now"), description = _("Start EPGrefresh immediately"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = forceRefresh, needsRestart = False)
-#extStopDescriptor = PluginDescriptor(name = extPrefix + " " + _("Stop Refresh"), description = _("Stop Running EPG-refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = stopRunningRefresh, needsRestart = False)
-#extPendingServDescriptor = PluginDescriptor(name = extPrefix + " " + _("Pending Services"), description = _("Show the pending Services for refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = showPendingServices, needsRestart = False)
 extSetupDescriptor = PluginDescriptor( _("EPG-Refresh_SetUp"), description = _("Automatically refresh EPG"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart=False)
 extRunDescriptor = PluginDescriptor( _("EPG-Refresh_Refresh now"), description = _("Start EPGrefresh immediately"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = forceRefresh, needsRestart = False)
 extStopDescriptor = PluginDescriptor( _("EPG-Refresh_Stop Refresh"), description = _("Stop Running EPG-refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = stopRunningRefresh, needsRestart = False)
 extPendingServDescriptor = PluginDescriptor( _("EPG-Refresh_Pending Services"), description = _("Show the pending Services for refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = showPendingServices, needsRestart = False)
-
 
 def AdjustExtensionsmenu(enable, PlugDescriptor):
 	if enable:
