@@ -25,9 +25,6 @@ from Components.config import *
 from Logger import splog
 
 
-# Max Age (in seconds) of each feed in the cache
-INTER_QUERY_TIME = 60*60*24
-
 # Global cache
 # Do we have to cleanup it
 cache = {}
@@ -40,9 +37,11 @@ class Cacher(object):
 		#self.cache = {}
 		#global cache
 		#cache = {}
-		pass
+		
+		# Max Age (in seconds) of each feed in the cache
+		self.expiration = config.plugins.seriesplugin.caching_expiration.value * 60 * 60
 
-	def getCached(self, url, expires):
+	def getCached(self, url):
 		#pullCache
 		global cache
 		
@@ -60,7 +59,7 @@ class Cacher(object):
 			
 			# Woooohooo it is, elapsed_time is less than INTER_QUERY_TIME so I
 			# can get the page from the memory, recent enough
-			if elapsed_time < expires:
+			if elapsed_time < self.expiration:
 				#splog("####SPCACHE GET ", already_got)
 				return already_got[1]
 			

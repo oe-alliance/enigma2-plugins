@@ -197,8 +197,10 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 				self.list.append( getConfigListEntry(  _("Timeout for Timer Popup")                , config.plugins.seriesplugin.timer_popups_timeout ) )
 			
 			self.list.append( getConfigListEntry(  _("Use local caching")                          , config.plugins.seriesplugin.caching ) )
+			if config.plugins.seriesplugin.caching.value:
+				self.list.append( getConfigListEntry(  _("Cache expires after x hours")            , config.plugins.seriesplugin.caching_expiration ) )
 			
-			self.list.append( getConfigListEntry(  _("Allow Google Analytics")                     , config.plugins.seriesplugin.ganalytics ) )
+			self.list.append( getConfigListEntry(  _("Socket timeout")                             , config.plugins.seriesplugin.socket_timeout ) )
 			
 			self.list.append( getConfigListEntry(  _("E2: Composition of the recording filenames") , config.recording.filename_composition ) )
 			
@@ -308,8 +310,8 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 
 	# Overwrite ConfigListScreen keyCancel function
 	def keyCancel(self):
+		self.help_window_was_shown = False
 		splog("SPC keyCancel")
-		#self.seriesPlugin.resetChannels()
 		resetInstance()
 		if self["config"].isChanged() or self.changesMade:
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))

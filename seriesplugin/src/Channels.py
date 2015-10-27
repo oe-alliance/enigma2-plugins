@@ -156,6 +156,8 @@ class ChannelsFile(object):
 			# No changes in configuration, won't read again
 			return ChannelsFile.cache
 		
+		splog("SP readXML channels")
+		
 		# Parse XML
 		try:
 			etree = parse(path).getroot()
@@ -189,6 +191,8 @@ class ChannelsFile(object):
 		
 		indent(etree)
 		data = tostring(etree, 'utf-8')
+		
+		splog("SP writeXML channels")
 		
 		f = None
 		try:
@@ -224,16 +228,17 @@ class ChannelsBase(ChannelsFile):
 		ChannelsBase.channels_changed = False
 		
 		self.loadXML()
-		
+	
 	#
 	# Channel handling
 	#
 	def compareChannels(self, ref, remote):
 		splog("SP compareChannels", ref, remote)
+		remote = remote.lower()
 		if ref in ChannelsBase.channels:
 			( name, alternatives ) = ChannelsBase.channels[ref]
 			for altname in alternatives:
-				if altname in remote or remote in altname:
+				if altname.lower() in remote or remote in altname.lower():
 					return True
 			
 		return False
@@ -277,65 +282,73 @@ class ChannelsBase(ChannelsFile):
 	# I/O Functions
 	#
 	def loadXML(self):
-		# Read xml config file
-		root = self.readXML()
-		if root:
-			channels = {}
-			
-			# Parse Config
-			def parse(root):
+		try:
+			# Read xml config file
+			root = self.readXML()
+			if root:
 				channels = {}
-				version = root.get("version", "1")
-				if version.startswith("2"):
-					if root:
-						for element in root.findall("Channel"):
-							name = element.get("name", "")
-							reference = element.get("reference", "")
-							if name and reference:
-								alternatives = []
-								for alternative in element.findall("Alternative"):
-									alternatives.append( alternative.text )
-								channels[reference] = (name, list(set(alternatives)))
-				elif version.startswith("1"):
-					splog("loadXML channels - Skip old file")
-				return channels
-			
-			channels = parse( root )
-			#splog("loadXML channels", channels)
-			splog("SP loadXML channels", len(channels))
-		else:
-			channels = {}
-		ChannelsBase.channels = channels
+				
+				# Parse Config
+				def parse(root):
+					channels = {}
+					version = root.get("version", "1")
+					if version.startswith("2"):
+						if root:
+							for element in root.findall("Channel"):
+								name = element.get("name", "")
+								reference = element.get("reference", "")
+								if name and reference:
+									alternatives = []
+									for alternative in element.findall("Alternative"):
+										alternatives.append( alternative.text )
+									channels[reference] = (name, list(set(alternatives)))
+					elif version.startswith("1"):
+						splog("loadXML channels - Skip old file")
+					return channels
+				
+				channels = parse( root )
+				#splog("loadXML channels", channels)
+				splog("SP loadXML channels", len(channels))
+			else:
+				channels = {}
+			ChannelsBase.channels = channels
+		except Exception as e:
+			splog("Exception in loadXML: " + str(e))
 
 	def saveXML(self):
-		if ChannelsBase.channels_changed:
-			
-			channels = ChannelsBase.channels
-			
-			# Generate List in RAM
-			root = None
-			#splog("saveXML channels", channels)
-			splog("SP saveXML channels", len(channels))
-			
-			# Build Header
-			from plugin import NAME, VERSION
-			root = Element(NAME)
-			root.set('version', VERSION)
-			root.append(Comment(_("Don't edit this manually unless you really know what you are doing")))
-			
-			# Build Body
-			def build(root, channels):
-				if channels:
-					for reference, namealternatives in channels.iteritems():
-						name, alternatives = namealternatives
-						# Add channel
-						element = SubElement( root, "Channel", name = stringToXML(name), reference = stringToXML(reference) )
-						# Add alternatives
-						if alternatives:
-							for name in alternatives:
-								SubElement( element, "Alternative" ).text = stringToXML(name)
-				return root
-			
-			root = build( root, channels )
-			
-			self.writeXML( root )
+		try:
+			if ChannelsBase.channels_changed:
+				
+				ChannelsBase.channels_changed = False
+				
+				channels = ChannelsBase.channels
+				
+				# Generate List in RAM
+				root = None
+				#splog("saveXML channels", channels)
+				splog("SP saveXML channels", len(channels))
+				
+				# Build Header
+				from plugin import NAME, VERSION
+				root = Element(NAME)
+				root.set('version', VERSION)
+				root.append(Comment(_("Don't edit this manually unless you really know what you are doing")))
+				
+				# Build Body
+				def build(root, channels):
+					if channels:
+						for reference, namealternatives in channels.iteritems():
+							name, alternatives = namealternatives
+							# Add channel
+							element = SubElement( root, "Channel", name = stringToXML(name), reference = stringToXML(reference) )
+							# Add alternatives
+							if alternatives:
+								for name in alternatives:
+									SubElement( element, "Alternative" ).text = stringToXML(name)
+					return root
+				
+				root = build( root, channels )
+				
+				self.writeXML( root )
+		except Exception as e:
+			splog("Exception in writeXML: " + str(e))

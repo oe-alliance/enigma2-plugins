@@ -29,23 +29,21 @@ from Tools.BoundFunction import boundFunction
 
 # Internal
 from ModuleBase import ModuleBase
-from Cacher import Cacher, INTER_QUERY_TIME
+from Cacher import Cacher
 from Channels import ChannelsBase
 from Logger import splog
-from Analytics import Analytics
 
 
 class MyException(Exception):
     pass
 
-class IdentifierBase(ModuleBase, Cacher, ChannelsBase, Analytics):
+class IdentifierBase(ModuleBase, Cacher, ChannelsBase):
 	def __init__(self):
 		ModuleBase.__init__(self)
 		Cacher.__init__(self)
 		ChannelsBase.__init__(self)
-		Analytics.__init__(self)
 		
-		socket.setdefaulttimeout(5)
+		socket.setdefaulttimeout( float(config.plugins.seriesplugin.socket_timeout.value) )
 		
 		self.max_time_drift = int(config.plugins.seriesplugin.max_time_drift.value) * 60
 		
@@ -88,14 +86,12 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase, Analytics):
 
 	################################################
 	# URL functions
-	def getPage(self, url, headers={}, expires=INTER_QUERY_TIME, counter=0):
+	def getPage(self, url, use_proxy=True, counter=0):
 		response = None
 		
 		splog("SSBase getPage", url)
 		
-		cached = self.getCached(url, expires)
-		
-		self.sendAnalytics(url, True if cached else False)
+		cached = self.getCached(url)
 		
 		if cached:
 			splog("SSBase cached")
@@ -105,8 +101,15 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase, Analytics):
 			splog("SSBase not cached")
 			
 			try:
-				req = Request(url, headers=headers)
-				response = urlopen(req, timeout=15).read()
+				from plugin import PROXY, USER_AGENT
+				
+				if use_proxy:
+					temp_url = PROXY+url
+				else:
+					temp_url = url
+				
+				req = Request( temp_url, headers={'User-Agent':USER_AGENT})
+				response = urlopen(req, timeout=float(config.plugins.seriesplugin.socket_timeout.value)).read()
 				
 				#splog("SSBase response to cache: ", response) 
 				if response:
@@ -121,7 +124,7 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase, Analytics):
 					splog("SSBase URLError code")
 					print e.code, e.msg, counter
 					sleep(2)
-					return self.getPage(url, headers, expires, counter+1)
+					return self.getPage(url, counter+1)
 				else:
 					splog("SSBase URLError else")
 					raise MyException("There was an URLError: %r" % e)
@@ -135,7 +138,7 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase, Analytics):
 					splog("SSBase URLError code")
 					print e.code, e.msg, counter
 					sleep(2)
-					return self.getPage(url, headers, expires, counter+1)
+					return self.getPage(url, counter+1)
 				else:
 					splog("SSBase URLError else")
 					raise MyException("There was an SocketTimeout: %r" % e)
