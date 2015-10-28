@@ -19,6 +19,7 @@ from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ConfigList import ConfigListScreen
+from Components.PluginComponent import plugins
 from Components.UsageConfig import defaultMoviePath
 from Components.config import config, ConfigText, getConfigListEntry
 from Tools import ASCIItranslit
@@ -27,36 +28,73 @@ from collections import defaultdict
 from os.path import isfile, isdir, splitext, join as joinpath, split as splitpath
 import os
 
-def Plugins(**kwargs):
-    return PluginDescriptor(
-        name=_('Series to Folder'),
-        description=_('Move series recordings into folders'),
-        where=PluginDescriptor.WHERE_MOVIELIST,
-        needsRestart=False,
-        fnc=main
-    )
-
-def main(session, service, **kwargs):
+def menu(session, service, **kwargs):
     session.open(Series2Folder, service)
 
-class Series2Folder(ChoiceBox):
-    def __init__(self, session, service):
+def buttonSeries2Folder(session, service, **kwargs):
+    actions = Series2FolderActions(session)
+    actions.doMoves()
+
+def buttonSelSeries2Folder(session, service, **kwargs):
+    actions = Series2FolderActions(session)
+    actions.doMoves(service)
+
+pluginSeries2Folder = PluginDescriptor(
+    name=_('Series2Folder'),
+    description=_('Series to Folder'),
+    where=PluginDescriptor.WHERE_MOVIELIST,
+    needsRestart=False,
+    fnc=buttonSeries2Folder
+)
+
+pluginSelSeries2Folder = PluginDescriptor(
+    name=_('SelSeries2Folder'),
+    description=_('Sel Series to Folder'),
+    where=PluginDescriptor.WHERE_MOVIELIST,
+    needsRestart=False,
+    fnc=buttonSelSeries2Folder
+)
+
+def Plugins(**kwargs):
+    print "[Series2Folder] Plugins"
+    plugins = [PluginDescriptor(
+        name=_('Series2Folder...'),
+        description=_('Series to Folder...'),
+        where=PluginDescriptor.WHERE_MOVIELIST,
+        needsRestart=True,
+        fnc=menu
+    )]
+    if config.plugins.seriestofolder.showmovebutton.value:
+        plugins.append(pluginSeries2Folder)
+    if config.plugins.seriestofolder.showselmovebutton.value:
+        plugins.append(pluginSelSeries2Folder)
+    return plugins
+
+def addRemovePlugin(configElement, plugin):
+    if configElement.value:
+        if plugin not in plugins.pluginList:
+            plugins.addPlugin(plugin)
+    else:
+        if plugin in plugins.pluginList:
+            plugins.removePlugin(plugin)
+
+config.plugins.seriestofolder.showmovebutton.addNotifier(
+    lambda conf: addRemovePlugin(conf, pluginSeries2Folder),
+    initial_call=False,
+    immediate_feedback=False
+)
+config.plugins.seriestofolder.showselmovebutton.addNotifier(
+    lambda conf: addRemovePlugin(conf, pluginSelSeries2Folder),
+    initial_call=False,
+    immediate_feedback=False
+)
+
+class Series2FolderActions:
+    def __init__(self, session):
+        self.session = session
         self.movieSelection = session.current_dialog if isinstance(session.current_dialog, MovieSelection) else None
-        list = [
-            (_("Move series recordings to folders"), "CALLFUNC", self.doMoves),
-            (_("Move selected series recording to folder"), "CALLFUNC", self.doMoves, service),
-            (_("Configure move series recordings to folders"), "CALLFUNC", self.doConfig),
-            (_("Cancel"), "CALLFUNC", self.doCancel),
-        ]
-        ChoiceBox.__init__(self, session, _("Series to Folder"), list=list, selection=0)
 
-    def doConfig(self, arg):
-        self.session.open(Series2FolderConfig)
-
-    def doCancel(self, arg):
-        self.close(False)
-
-    def doMoves(self, service):
+    def doMoves(self, service=None):
 
         # Selection if called on a specific recording
         moveSelection = None
@@ -140,7 +178,6 @@ class Series2Folder(ChoiceBox):
             self.MsgBox('\n'.join([title + ':'] + moves))
         else:
             self.MsgBox(title, timeout=10)
-        self.close()
 
     def MsgBox(self, msg, timeout=30):
         self.session.open(MessageBox, _(msg), type=MessageBox.TYPE_INFO, timeout=timeout)
@@ -207,6 +244,28 @@ class Series2Folder(ChoiceBox):
             return None, None, _("Can't extract show name for: %s") % fullname
         return showname, date_time, None
 
+class Series2Folder(ChoiceBox):
+    def __init__(self, session, service):
+        list = [
+            (_("Move series recordings to folders"), "CALLFUNC", self.doMoves),
+            (_("Move selected series recording to folder"), "CALLFUNC", self.doMoves, service),
+            (_("Configure move series recordings to folders"), "CALLFUNC", self.doConfig),
+            (_("Cancel"), "CALLFUNC", self.doCancel),
+        ]
+        ChoiceBox.__init__(self, session, _("Series to Folder"), list=list, selection=0)
+        self.actions = Series2FolderActions(session)
+
+    def doMoves(self, service):
+        self.actions.doMoves(service)
+        self.close()
+
+    def doConfig(self, arg):
+        self.session.open(Series2FolderConfig)
+
+    def doCancel(self, arg):
+        self.close(False)
+
+
 class ErrorBox(TextBox):
     skin = """<screen name="Series2Folder" backgroundColor="background" position="90,150" size="1100,450" title="Log">
         <widget font="Regular;18" name="text" position="0,4" size="1100,446"/>
@@ -214,8 +273,8 @@ class ErrorBox(TextBox):
 
 class Series2FolderConfig(ConfigListScreen, Screen):
     skin = """
-<screen name="Series2FolderConfig" position="center,center" size="640,226" title="Configure Series To Folder" >
-    <widget name="config" position="20,10" size="600,100" />
+<screen name="Series2FolderConfig" position="center,center" size="640,276" title="Configure Series To Folder" >
+    <widget name="config" position="20,10" size="600,150" />
     <widget name="description" position="20,e-106" size="600,88" font="Regular;18" foregroundColor="grey" halign="left" valign="top" />
     <ePixmap name="red" position="20,e-28" size="15,16" pixmap="skin_default/buttons/button_red.png" alphatest="blend" />
     <ePixmap name="green" position="170,e-28" size="15,16" pixmap="skin_default/buttons/button_green.png" alphatest="blend" />
@@ -258,6 +317,16 @@ class Series2FolderConfig(ConfigListScreen, Screen):
             config.plugins.seriestofolder.moviesfolder,
             _("The name of the folder for movies.")
         )
+        self._confShowmovebutton = getConfigListEntry(
+            _("Show move series option"),
+            config.plugins.seriestofolder.showmovebutton,
+            _("Single-action move series to folder shown in menu and as button option. Requires restart if changed.")
+        )
+        self._confShowselmovebutton = getConfigListEntry(
+            _("Show move selected series option"),
+            config.plugins.seriestofolder.showselmovebutton,
+            _("Single-action move selected series to folder shown in menu and as button option. Requires restart if changed.")
+        )
 
         ConfigListScreen.__init__(self, self.list, session)
 
@@ -273,6 +342,8 @@ class Series2FolderConfig(ConfigListScreen, Screen):
 
     def createConfig(self, configList):
         list = [
+            self._confShowmovebutton,
+            self._confShowselmovebutton,
             self._confAutofolder,
             self._confPortableNames,
             self._confMovies,

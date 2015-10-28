@@ -17,3 +17,5 @@ config.plugins.seriestofolder.autofolder = ConfigSelection([
 config.plugins.seriestofolder.movies = ConfigEnableDisable(default=False)
 config.plugins.seriestofolder.moviesfolder = ConfigText(default="Movies", show_help=False)
 config.plugins.seriestofolder.portablenames = ConfigYesNo(default=True)
+config.plugins.seriestofolder.showmovebutton = ConfigYesNo(default=True)
+config.plugins.seriestofolder.showselmovebutton = ConfigYesNo(default=True)
