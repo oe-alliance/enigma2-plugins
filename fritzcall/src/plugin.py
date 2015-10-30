@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1200 $
-$Date: 2015-07-23 17:57:30 +0200 (Thu, 23 Jul 2015) $
-$Id: plugin.py 1200 2015-07-23 15:57:30Z michael $
+$Revision: 1233 $
+$Date: 2015-09-19 21:12:22 +0200 (Sat, 19 Sep 2015) $
+$Id: plugin.py 1233 2015-09-19 19:12:22Z michael $
 '''
 
 
@@ -59,7 +59,15 @@ import re, time, os, traceback
 
 from nrzuname import ReverseLookupAndNotifier
 import FritzOutlookCSV, FritzLDIF
-from . import _, __, initDebug, debug #@UnresolvedImport # pylint: disable=W0611,F0401
+from . import _, __, initDebug #@UnresolvedImport # pylint: disable=W0611,F0401
+
+import logging
+logger = logging.getLogger("[FritzCall]")
+debug = logger.debug
+info = logger.info
+warn = logger.warn
+error = logger.error
+exception = logger.exception
 
 from enigma import getDesktop
 DESKTOP_WIDTH = getDesktop(0).size().width()
@@ -88,6 +96,8 @@ def scale(y2, y1, x2, x1, x):
 	return (y2 - y1) * (x - x1) / (x2 - x1) + y1
 
 my_global_session = None
+
+initDebug()
 
 config.plugins.FritzCall = ConfigSubsection()
 config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 until below 6.35")), ("06.35", _("06.35 and newer"))], default=None)
@@ -233,13 +243,13 @@ def initCbC():
 				code = cbc.getAttribute("code").replace("+","00")
 				cbcInfos[code] = cbc.getElementsByTagName("callbycall")
 	else:
-		debug("[FritzCall] initCbC: callbycallFileName does not exist?!?!")
+		error("[FritzCall] initCbC: callbycallFileName does not exist?!?!")
 
 def stripCbCPrefix(number, countrycode):
 	if number and number[:2] != "00" and cbcInfos.has_key(countrycode):
 		for cbc in cbcInfos[countrycode]:
 			if len(cbc.getElementsByTagName("length"))<1 or len(cbc.getElementsByTagName("prefix"))<1:
-				debug("[FritzCall] stripCbCPrefix: entries for " + countrycode + " %s invalid")
+				warn("[FritzCall] stripCbCPrefix: entries for " + countrycode + " %s invalid")
 				return number
 			length = int(cbc.getElementsByTagName("length")[0].childNodes[0].data)
 			prefix = cbc.getElementsByTagName("prefix")[0].childNodes[0].data
@@ -283,8 +293,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1200 $"[1:-2] + "\n" + 
-							"$Date: 2015-07-23 17:57:30 +0200 (Thu, 23 Jul 2015) $"[1:23] + "\n"
+							"$Revision: 1233 $"[1:-2] + "\n" + 
+							"$Date: 2015-09-19 21:12:22 +0200 (Sat, 19 Sep 2015) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -299,31 +309,31 @@ class FritzAbout(Screen):
 from FritzCallFBF import FBF_dectActive, FBF_faxActive, FBF_rufumlActive, FBF_tamActive, FBF_wlanState
 class FritzMenu(Screen, HelpableScreen):
 	def __init__(self, session):
-		if not fritzbox or not fritzbox.info:
+		if not fritzbox or not fritzbox.information:
 			return
 
 		if config.plugins.FritzCall.fwVersion.value == "old" or config.plugins.FritzCall.fwVersion.value == "05.27":
 			fontSize = scaleV(24, 21) # indeed this is font size +2
 			noButtons = 2 # reset, wlan
 	
-			if fritzbox.info[FBF_tamActive]:
+			if fritzbox.information[FBF_tamActive]:
 				noButtons += 1 # toggle mailboxes
 			width = max(DESKTOP_WIDTH - scaleH(500, 250), noButtons*140+(noButtons+1)*10)
 			# boxInfo 2 lines, gap, internet 2 lines, gap, dsl/wlan each 1 line, gap, buttons
 			height = 5 + 2*fontSize + 10 + 2*fontSize + 10 + 2*fontSize + 10 + 40 + 5
-			if fritzbox.info[FBF_tamActive] is not None:
+			if fritzbox.information[FBF_tamActive] is not None:
 				height += fontSize
-			if fritzbox.info[FBF_dectActive] is not None:
+			if fritzbox.information[FBF_dectActive] is not None:
 				height += fontSize
-			if fritzbox.info[FBF_faxActive] is not None:
+			if fritzbox.information[FBF_faxActive] is not None:
 				height += fontSize
-			if fritzbox.info[FBF_rufumlActive] is not None:
+			if fritzbox.information[FBF_rufumlActive] is not None:
 				height += fontSize
 			buttonsGap = (width-noButtons*140)/(noButtons+1)
 			buttonsVPos = height-40-5
 	
 			varLinePos = 4
-			if fritzbox.info[FBF_tamActive] is not None:
+			if fritzbox.information[FBF_tamActive] is not None:
 				mailboxLine = """
 					<widget name="FBFMailbox" position="%d,%d" size="%d,%d" font="Regular;%d" />
 					<widget name="mailbox_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
@@ -345,7 +355,7 @@ class FritzMenu(Screen, HelpableScreen):
 			else:
 				mailboxLine = ""
 	
-			if fritzbox.info[FBF_dectActive] is not None:
+			if fritzbox.information[FBF_dectActive] is not None:
 				dectLine = """
 					<widget name="FBFDect" position="%d,%d" size="%d,%d" font="Regular;%d" />
 					<widget name="dect_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
@@ -363,7 +373,7 @@ class FritzMenu(Screen, HelpableScreen):
 			else:
 				dectLine = ""
 	
-			if fritzbox.info[FBF_faxActive] is not None:
+			if fritzbox.information[FBF_faxActive] is not None:
 				faxLine = """
 					<widget name="FBFFax" position="%d,%d" size="%d,%d" font="Regular;%d" />
 					<widget name="fax_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
@@ -381,7 +391,7 @@ class FritzMenu(Screen, HelpableScreen):
 			else:
 				faxLine = ""
 	
-			if fritzbox.info[FBF_rufumlActive] is not None:
+			if fritzbox.information[FBF_rufumlActive] is not None:
 				rufumlLine = """
 					<widget name="FBFRufuml" position="%d,%d" size="%d,%d" font="Regular;%d" />
 					<widget name="rufuml_inactive" pixmap="%s" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
@@ -421,8 +431,8 @@ class FritzMenu(Screen, HelpableScreen):
 					<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				</screen>""" % (
 							width, height, # size
-							40, 5, # position info
-							width-2*40, 2*fontSize, # size info
+							40, 5, # position information
+							width-2*40, 2*fontSize, # size information
 							fontSize-2,
 							40, 5+2*fontSize+10, # position internet
 							width-40, 2*fontSize, # size internet
@@ -460,7 +470,7 @@ class FritzMenu(Screen, HelpableScreen):
 			# TRANSLATORS: keep it short, this is a button
 			self["key_green"] = Button(_("Toggle WLAN"))
 			self._mailboxActive = False
-			if fritzbox.info[FBF_tamActive] is not None:
+			if fritzbox.information[FBF_tamActive] is not None:
 				# TRANSLATORS: keep it short, this is a button
 				self["key_yellow"] = Button(_("Toggle Mailbox"))
 				self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions", "NumberActions", "EPGSelectActions"],
@@ -475,7 +485,7 @@ class FritzMenu(Screen, HelpableScreen):
 												"2": (lambda: self._toggleMailbox(2)),
 												"3": (lambda: self._toggleMailbox(3)),
 												"4": (lambda: self._toggleMailbox(4)),
-												"info": self._getInfo,
+												"information": self._getInfo,
 												}, -2)
 				# TRANSLATORS: keep it short, this is a help text
 				self.helpList.append((self["menuActions"], "ColorActions", [("yellow", _("Toggle all mailboxes"))]))
@@ -500,7 +510,7 @@ class FritzMenu(Screen, HelpableScreen):
 												"ok": self._exit,
 												"green": self._toggleWlan,
 												"red": self._reset,
-												"info": self._getInfo,
+												"information": self._getInfo,
 												}, -2)
 	
 			# TRANSLATORS: keep it short, this is a help text
@@ -512,7 +522,7 @@ class FritzMenu(Screen, HelpableScreen):
 			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["menuActions"], "ColorActions", [("red", _("Reset"))]))
 			# TRANSLATORS: keep it short, this is a help text
-			self.helpList.append((self["menuActions"], "EPGSelectActions", [("info", _("Refresh status"))]))
+			self.helpList.append((self["menuActions"], "EPGSelectActions", [("information", _("Refresh status"))]))
 	
 			self["FBFInfo"] = Label(_('Getting status from FRITZ!Box Fon...'))
 	
@@ -534,19 +544,19 @@ class FritzMenu(Screen, HelpableScreen):
 			self["wlan_active"].hide()
 			self._wlanActive = False
 	
-			if fritzbox.info[FBF_dectActive] is not None: 
+			if fritzbox.information[FBF_dectActive] is not None: 
 				self["FBFDect"] = Label('DECT')
 				self["dect_inactive"] = Pixmap()
 				self["dect_active"] = Pixmap()
 				self["dect_active"].hide()
 	
-			if fritzbox.info[FBF_faxActive] is not None: 
+			if fritzbox.information[FBF_faxActive] is not None: 
 				self["FBFFax"] = Label('Fax')
 				self["fax_inactive"] = Pixmap()
 				self["fax_active"] = Pixmap()
 				self["fax_active"].hide()
 	
-			if fritzbox.info[FBF_rufumlActive] is not None: 
+			if fritzbox.information[FBF_rufumlActive] is not None: 
 				self["FBFRufuml"] = Label(_('Call redirection'))
 				self["rufuml_inactive"] = Pixmap()
 				self["rufuml_active"] = Pixmap()
@@ -591,8 +601,8 @@ class FritzMenu(Screen, HelpableScreen):
 					<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;16" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				</screen>""" % (
 							width, height, # size
-							40, 5, # position info
-							width-2*40, 2*fontSize, # size info
+							40, 5, # position information
+							width-2*40, 2*fontSize, # size information
 							fontSize-2,
 							40, 5+2*fontSize+10, # position internet
 							width-40, 2*fontSize, # size internet
@@ -657,7 +667,7 @@ class FritzMenu(Screen, HelpableScreen):
 											"green": self._toggleWlan,
 											"yellow": self._toggleGast,
 											"red": self._reset, # no button, does not work
-											"info": self._getInfo,
+											"information": self._getInfo,
 											}, -2)
 	
 			# TRANSLATORS: keep it short, this is a help text
@@ -671,7 +681,7 @@ class FritzMenu(Screen, HelpableScreen):
 			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["menuActions"], "ColorActions", [("red", _("Reset"))]))
 			# TRANSLATORS: keep it short, this is a help text
-			self.helpList.append((self["menuActions"], "EPGSelectActions", [("info", _("Refresh status"))]))
+			self.helpList.append((self["menuActions"], "EPGSelectActions", [("information", _("Refresh status"))]))
 	
 			# TRANSLATORS: keep it short, this is a button
 			self["key_red"] = Button(_("Reset"))
@@ -736,7 +746,7 @@ class FritzMenu(Screen, HelpableScreen):
 	def _getInfo(self):
 		if fritzbox:
 			fritzbox.getInfo(self._fillMenu)
-			self._fillMenu(fritzbox.info, True)
+			self._fillMenu(fritzbox.information, True)
 
 	def _fillMenu(self, status, refreshing=False):
 		(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = status
@@ -814,7 +824,7 @@ class FritzMenu(Screen, HelpableScreen):
 				self["wlan_active"].hide()
 				self["wlan_inactive"].hide()
 
-			if fritzbox.info[FBF_tamActive]:
+			if fritzbox.information[FBF_tamActive]:
 				if  not tamActive or tamActive[0] == 0:
 					self._mailboxActive = False
 					self["mailbox_active"].hide()
@@ -891,26 +901,26 @@ class FritzMenu(Screen, HelpableScreen):
 
 
 		except KeyError:
-			debug("[FritzCallFBF] _fillMenu: " + traceback.format_exc())
+			error("[FritzCallFBF] _fillMenu: " + traceback.format_exc())
 
 	def _toggleWlan(self):
 		self["FBFInfo"].setText(_("Setting...") + " WLAN")
 		if self._wlanActive:
-			debug("[FritzMenu] toggleWlan off")
+			info("[FritzMenu] toggleWlan off")
 			fritzbox.changeWLAN('0', self._getInfo)
 		else:
-			debug("[FritzMenu] toggleWlan on")
+			info("[FritzMenu] toggleWlan on")
 			fritzbox.changeWLAN('1', self._getInfo)
 
 	def _toggleMailbox(self, which):
-		debug("[FritzMenu] toggleMailbox")
-		if fritzbox.info[FBF_tamActive]:
-			debug("[FritzMenu] toggleMailbox off")
+		debug("[FritzMenu]")
+		if fritzbox.information[FBF_tamActive]:
+			info("[FritzMenu] toggleMailbox off")
 			fritzbox.changeMailbox(which, self._getInfo)
 
 	def _toggleGast(self):
 		self["FBFInfo"].setText(_("Setting...") + ' ' + _("Guest access"))
-		if fritzbox.info[FBF_wlanState][0] != '1':
+		if fritzbox.information[FBF_wlanState][0] != '1':
 			# self["FBFInfo"].setText(_("WLAN not active"))
 			self._toggleWlan()
 			return
@@ -1043,7 +1053,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		# self["entries"].l.setFont(0, gFont("Regular", fontSize))
 		# self["entries"].l.setItemHeight(fontHeight)
 		#=======================================================================
-		debug("[FritzDisplayCalls] init: '''%s'''" % config.plugins.FritzCall.fbfCalls.value)
+		debug("[FritzDisplayCalls] '''%s'''" % config.plugins.FritzCall.fbfCalls.value)
 		self.display(config.plugins.FritzCall.fbfCalls.value)
 		self.onLayoutFinish.append(self.setWindowTitle)
 
@@ -1055,7 +1065,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		self.close()
 
 	def display(self, which=None):
-		debug("[FritzDisplayCalls] display")
+		debug("[FritzDisplayCalls]")
 		if which:
 			config.plugins.FritzCall.fbfCalls.value = which
 			config.plugins.FritzCall.fbfCalls.save()
@@ -1064,7 +1074,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		fritzbox.getCalls(self, lambda x: self.gotCalls(x, which), which)
 
 	def gotCalls(self, listOfCalls, which):
-		debug("[FritzDisplayCalls] gotCalls")
+		debug("[FritzDisplayCalls]")
 		self.updateStatus(fbfCallsChoices[which] + " (" + str(len(listOfCalls)) + ")")
 
 		directout = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callout.png"))
@@ -1079,7 +1089,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				direct = directfailed
 			return direct
 
-		# debug("[FritzDisplayCalls] gotCalls: %s" %repr(listOfCalls))
+		# debug("[FritzDisplayCalls] %s" %repr(listOfCalls))
 		self.list = [(number, date[:6] + ' ' + date[9:14], pixDir(direct), remote, length, here) for (number, date, direct, remote, length, here) in listOfCalls]
 		self["entries"].setList(self.list)
 		#=======================================================================
@@ -1092,11 +1102,11 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 			self["statusbar"].setText(_("Getting calls from FRITZ!Box...") + ' ' + text)
 
 	def showEntry(self):
-		debug("[FritzDisplayCalls] showEntry")
+		debug("[FritzDisplayCalls]")
 		cur = self["entries"].getCurrent()
 		if cur:
 			if cur[0]:
-				# debug("[FritzDisplayCalls] showEntry %s" % (cur[0]))
+				# debug("[FritzDisplayCalls] %s" % (cur[0]))
 				number = cur[0]
 				fullname = phonebook.search(cur[0])
 				if fullname:
@@ -1143,7 +1153,7 @@ class FritzOfferAction(Screen):
 							"skin_default/buttons/green.png",
 							"skin_default/buttons/yellow.png",
 							) 
-		debug("[FritzOfferAction] init: %s, %s" %(__(number), __(name)))
+		debug("[FritzOfferAction] %s, %s" %(__(number), __(name)))
 		Screen.__init__(self, session)
 	
 		# TRANSLATORS: keep it short, this is a button
@@ -1184,7 +1194,7 @@ class FritzOfferAction(Screen):
 
 	def _finishLayout(self):
 		# pylint: disable=W0142
-		debug("[FritzCall] FritzOfferAction/finishLayout number: %s/%s" % (__(self._number), __(self._name)))
+		debug("[FritzOfferAction] number: %s/%s" % (__(self._number), __(self._name)))
 
 		faceFile = findFace(self._number, self._name)
 		picPixmap = LoadPixmap(faceFile)
@@ -1197,7 +1207,7 @@ class FritzOfferAction(Screen):
 		# recalculate window size
 		textSize = self["text"].getSize()
 		textSize = (textSize[0]+20, textSize[1]+20) # don't know, why, but size is too small
-		debug("[FritzCall] FritzOfferAction/finishLayout textsize: %s/%s" % textSize)
+		debug("[FritzOfferAction] textsize: %s/%s" % textSize)
 		textSize = eSize(*textSize)
 		width = max(scaleH(620, 545), noButtons*145, picSize.width() + textSize.width() + 30)
 		height = max(picSize.height()+5, textSize.height()+5, scaleV(-1, 136)) + 5 + 40 + 5
@@ -1275,20 +1285,20 @@ class FritzOfferAction(Screen):
 				name = _("No result from LDIF")
 		self._name = name
 		self._number = number
-		debug("[FritzOfferAction] lookedUp: " + str(name.replace(", ", "\n")))
+		info("[FritzOfferAction] " + str(name.replace(", ", "\n")))
 		self._setTextAndResize(str(name.replace(", ", "\n")))
 
 	def _call(self):
 		if fritzbox:
-			debug("[FritzOfferAction] call: %s" %self._number)
+			debug("[FritzOfferAction]  %s" %self._number)
 			self.session.open(MessageBox, _("Calling %s") %self._number, type=MessageBox.TYPE_INFO)
 			fritzbox.dial(self._number)
 		else:
-			debug("[FritzOfferAction] call: no fritzbox object?!?!")
+			error("[FritzOfferAction] no fritzbox object?!?!")
 			self.session.open(MessageBox, _("FRITZ!Box not available for calling"), type=MessageBox.TYPE_INFO)
 
 	def _add(self):
-		debug("[FritzOfferAction] add: %s, %s" %(self._number, self._name))
+		debug("[FritzOfferAction] %s, %s" %(self._number, self._name))
 		phonebook.FritzDisplayPhonebook(self._session).add(self._parent, self._number, self._name)
 		self._exit()
 
@@ -1299,7 +1309,7 @@ OneHour = 60*60*1000
 # OneHour = 1000
 class FritzCallPhonebook:
 	def __init__(self):
-		debug("[FritzCallPhonebook] init")
+		debug("[FritzCallPhonebook]")
 		# Beware: strings in phonebook.phonebook have to be in utf-8!
 		self.phonebook = {}
 		if config.plugins.FritzCall.reloadPhonebookTime.value > 0:
@@ -1316,7 +1326,7 @@ class FritzCallPhonebook:
 		self.reload()
 
 	def reload(self):
-		debug("[FritzCallPhonebook] reload " + time.ctime())
+		debug("[FritzCallPhonebook] " + time.ctime())
 
 		# Beware: strings in phonebook.phonebook have to be in utf-8!
 		self.phonebook = {}
@@ -1326,7 +1336,7 @@ class FritzCallPhonebook:
 
 		phonebookFilename = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.txt")
 		if config.plugins.FritzCall.phonebook.value and os.path.exists(phonebookFilename):
-			debug("[FritzCallPhonebook] reload: read " + phonebookFilename)
+			debug("[FritzCallPhonebook] read " + phonebookFilename)
 			phonebookTxtCorrupt = False
 			self.phonebook = {}
 			for line in open(phonebookFilename):
@@ -1339,19 +1349,19 @@ class FritzCallPhonebook:
 						debug("[FritzCallPhonebook] Fallback to ISO-8859-1 in %s" % line)
 						phonebookTxtCorrupt = True
 					except UnicodeDecodeError:
-						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
+						error("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
 						phonebookTxtCorrupt = True
 				line = line.encode("utf-8")
 				elems = line.split('#')
 				if len(elems) == 2:
 					try:
-						# debug("[FritzCallPhonebook] reload: Adding '''%s''' with '''%s''' from internal phonebook!" % (__(elems[1].strip()), __(elems[0], False)))
+						# debug("[FritzCallPhonebook] Adding '''%s''' with '''%s''' from internal phonebook!" % (__(elems[1].strip()), __(elems[0], False)))
 						self.phonebook[elems[0]] = elems[1]
 					except ValueError: # how could this possibly happen?!?!
-						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
+						error("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
 						phonebookTxtCorrupt = True
 				else:
-					debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
+					error("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
 					phonebookTxtCorrupt = True
 					
 				#===============================================================
@@ -1379,7 +1389,7 @@ class FritzCallPhonebook:
 						fNew.write(number + "#" + name.encode("utf-8"))
 					fNew.close()
 				except (IOError, OSError):
-					debug("[FritzCallPhonebook] error renaming or writing to %s" %phonebookFilename)
+					error("[FritzCallPhonebook] error renaming or writing to %s" %phonebookFilename)
 
 		if fritzbox and config.plugins.FritzCall.fritzphonebook.value:
 			debug("[FritzCallPhonebook] config.plugins.FritzCall.fritzphonebook.value %s" %repr(config.plugins.FritzCall.fritzphonebook.value))
@@ -1427,11 +1437,11 @@ class FritzCallPhonebook:
 			prefix = config.plugins.FritzCall.prefix.value
 			if number[0] != '0':
 				number = prefix + number
-				# debug("[FritzCallPhonebook] search: added prefix: %s" %number)
+				# debug("[FritzCallPhonebook] added prefix: %s" %number)
 			elif number[:len(prefix)] == prefix and self.phonebook.has_key(number[len(prefix):]):
-				# debug("[FritzCallPhonebook] search: same prefix")
+				# debug("[FritzCallPhonebook] same prefix")
 				name = self.phonebook[number[len(prefix):]]
-				# debug("[FritzCallPhonebook] search: result: %s" %name)
+				# debug("[FritzCallPhonebook] result: %s" %name)
 		else:
 			prefix = ""
 				
@@ -1457,7 +1467,7 @@ class FritzCallPhonebook:
 		@param number: number of entry
 		@param name: name of entry, has to be in utf-8
 		'''
-		debug("[FritzCallPhonebook] add")
+		debug("[FritzCallPhonebook]")
 		name = name.replace("\n", ", ").replace('#','') # this is just for safety reasons. add should only be called with newlines converted into commas
 		self.remove(number)
 		self.phonebook[number] = name
@@ -1470,7 +1480,7 @@ class FritzCallPhonebook:
 					f = open(os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.txt"), 'a')
 					f.write(string)
 					f.close()
-					debug("[FritzCallPhonebook] added %s with %s to Phonebook.txt" % (number, name.strip()))
+					info("[FritzCallPhonebook] added %s with %s to Phonebook.txt" % (number, name.strip()))
 					return True
 	
 				except IOError:
@@ -1478,7 +1488,7 @@ class FritzCallPhonebook:
 
 	def remove(self, number):
 		if number in self.phonebook:
-			debug("[FritzCallPhonebook] remove entry in phonebook")
+			debug("[FritzCallPhonebook]")
 			del self.phonebook[number]
 			if config.plugins.FritzCall.phonebook.value:
 				try:
@@ -1497,11 +1507,11 @@ class FritzCallPhonebook:
 					# os.remove(phonebookFilename)
 					eBackgroundFileEraser.getInstance().erase(phonebookFilename)
 					os.rename(phonebookFilename + str(os.getpid()),	phonebookFilename)
-					debug("[FritzCallPhonebook] removed %s from Phonebook.txt" % number)
+					info("[FritzCallPhonebook] removed %s from Phonebook.txt" % number)
 					return True
 	
 				except (IOError, OSError):
-					debug("[FritzCallPhonebook] error removing %s from %s" %(number, phonebookFilename))
+					error("[FritzCallPhonebook] error removing %s from %s" %(number, phonebookFilename))
 		return False
 
 	class FritzDisplayPhonebook(Screen, HelpableScreen, NumericalTextInput):
@@ -1597,7 +1607,7 @@ class FritzCallPhonebook:
 			self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("Search (case insensitive)"))]))
 	
 			self["entries"] = List([])
-			debug("[FritzDisplayPhonebook] displayPhonebook init")
+			debug("[FritzDisplayPhonebook]")
 			self.help_window = None
 			self.sortlist = []
 			self.onLayoutFinish.append(self.setWindowTitle)
@@ -1608,7 +1618,7 @@ class FritzCallPhonebook:
 			self.setTitle(_("Phonebook"))
 
 		def display(self, filterNumber=""):
-			debug("[FritzDisplayPhonebook] displayPhonebook/display")
+			debug("[FritzDisplayPhonebook]")
 			self.sortlist = []
 			# Beware: strings in phonebook.phonebook are utf-8!
 			sortlistHelp = sorted((name.lower(), name, number) for (number, name) in phonebook.phonebook.iteritems())
@@ -1621,7 +1631,7 @@ class FritzCallPhonebook:
 					try:
 						low = low.decode("iso-8859-1")
 					except UnicodeDecodeError:
-						debug("[FritzDisplayPhonebook] displayPhonebook/display: corrupt phonebook entry for %s" % number)
+						error("[FritzDisplayPhonebook] displayPhonebook/display: corrupt phonebook entry for %s" % number)
 						# self.session.open(MessageBox, _("Corrupt phonebook entry\nfor number %s\nDeleting.") %number, type = MessageBox.TYPE_ERROR)
 						phonebook.remove(number)
 						continue
@@ -1647,7 +1657,7 @@ class FritzCallPhonebook:
 		def showEntry(self):
 			cur = self["entries"].getCurrent()
 			if cur:
-				debug("[FritzDisplayPhonebook] displayPhonebook/showEntry %s" % (repr(cur)))
+				debug("[FritzDisplayPhonebook] %s" % (repr(cur)))
 				number = cur[2]
 				name = cur[0]
 				self.session.open(FritzOfferAction, self, number, name)
@@ -1655,7 +1665,7 @@ class FritzCallPhonebook:
 		def delete(self):
 			cur = self["entries"].getCurrent()
 			if cur:
-				debug("[FritzDisplayPhonebook] displayPhonebook/delete %s" % (repr(cur)))
+				debug("[FritzDisplayPhonebook] %s" % (repr(cur)))
 				self.session.openWithCallback(
 					self.deleteConfirmed,
 					MessageBox,
@@ -1666,7 +1676,7 @@ class FritzCallPhonebook:
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
 	
 		def deleteConfirmed(self, ret):
-			debug("[FritzDisplayPhonebook] displayPhonebook/deleteConfirmed")
+			debug("[FritzDisplayPhonebook]")
 			#
 			# if ret: delete number from sortlist, delete number from phonebook.phonebook and write it to disk
 			#
@@ -1674,7 +1684,7 @@ class FritzCallPhonebook:
 			if cur:
 				if ret:
 					# delete number from sortlist, delete number from phonebook.phonebook and write it to disk
-					debug("[FritzDisplayPhonebook] displayPhonebook/deleteConfirmed %s" % (repr(cur)))
+					debug("[FritzDisplayPhonebook] %s" % (repr(cur)))
 					phonebook.remove(cur[2])
 					self.display()
 				# else:
@@ -1777,13 +1787,13 @@ class FritzCallPhonebook:
 				def cancel(self):
 					self.close()
 	
-			debug("[FritzDisplayPhonebook] displayPhonebook/add")
+			debug("[FritzDisplayPhonebook]")
 			if not parent:
 				parent = self
 			self.session.open(AddScreen, parent, number, name)
 	
 		def edit(self):
-			debug("[FritzDisplayPhonebook] displayPhonebook/edit")
+			debug("[FritzDisplayPhonebook]")
 			cur = self["entries"].getCurrent()
 			if cur is None:
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
@@ -1791,7 +1801,7 @@ class FritzCallPhonebook:
 				self.add(self, cur[2], cur[0])
 	
 		def search(self):
-			debug("[FritzDisplayPhonebook] displayPhonebook/search")
+			debug("[FritzDisplayPhonebook]")
 			self.help_window = self.session.instantiateDialog(NumericalTextInputHelpDialog, self)
 			self.help_window.show()
 			# VirtualKeyboard instead of InputBox?
@@ -1800,7 +1810,7 @@ class FritzCallPhonebook:
 		def doSearch(self, searchTerms):
 			if not searchTerms:
 				searchTerms = ""
-			debug("[FritzDisplayPhonebook] displayPhonebook/doSearch: " + searchTerms)
+			debug("[FritzDisplayPhonebook]: " + searchTerms)
 			if self.help_window:
 				self.session.deleteDialog(self.help_window)
 				self.help_window = None
@@ -1855,7 +1865,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 						scaleH(20+(140+90), 140), scaleV(525, 395), scaleV(21, 21), # widget green
 						scaleH(20+2*(140+90), 2*140), scaleV(525, 395), scaleV(21, 21), # widget yellow
 						scaleH(20+3*(140+90), 3*140), scaleV(525, 395), scaleV(21, 21), # widget blue
-						scaleH(20+4*(140+90), 4*140), scaleV(532, 402), "skin_default/buttons/key_info.png", # button info
+						scaleH(20+4*(140+90), 4*140), scaleV(532, 402), "skin_default/buttons/key_info.png", # button information
 						scaleH(20+4*(140+90)+(35+40), 4*140+35), scaleV(532, 402), "skin_default/buttons/key_menu.png", # button menu
 													)
 
@@ -1889,7 +1899,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			"cancel": self.cancel,
 			"ok": self.save,
 			"menu": self.menu,
-			"info": self.about,
+			"information": self.about,
 		}, - 2)
 
 		# TRANSLATORS: keep it short, this is a help text
@@ -1907,7 +1917,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "MenuActions", [("menu", _("FRITZ!Box Fon Status"))]))
 		# TRANSLATORS: keep it short, this is a help text
-		self.helpList.append((self["setupActions"], "EPGSelectActions", [("info", _("About FritzCall"))]))
+		self.helpList.append((self["setupActions"], "EPGSelectActions", [("information", _("About FritzCall"))]))
 
 		ConfigListScreen.__init__(self, self.list, session=session)
 
@@ -1917,7 +1927,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1200 $"[1: - 1] + "$Date: 2015-07-23 17:57:30 +0200 (Thu, 23 Jul 2015) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1233 $"[1: - 1] + "$Date: 2015-09-19 21:12:22 +0200 (Sat, 19 Sep 2015) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1995,7 +2005,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		self["config"].l.setList(self.list)
 
 	def save(self):
-#		debug("[FritzCallSetup] save"
+#		debug("[FritzCallSetup]"
 		if self["config"].getCurrent()[1] == config.plugins.FritzCall.phonebookLocation:
 			self.session.openWithCallback(self.LocationBoxClosed, LocationBox, _("PhoneBook and Faces Location"), currDir=config.plugins.FritzCall.phonebookLocation.value)
 		else:
@@ -2016,7 +2026,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			config.plugins.FritzCall.phonebookLocation.setValue(path)
 
 	def cancel(self):
-#		debug("[FritzCallSetup] cancel"
+#		debug("[FritzCallSetup]"
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close()
@@ -2044,7 +2054,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def menu(self):
 		if config.plugins.FritzCall.enable.value:
-			if fritzbox and fritzbox.info:
+			if fritzbox and fritzbox.information:
 				self.session.open(FritzMenu)
 			else:
 				self.session.open(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type=MessageBox.TYPE_INFO)
@@ -2058,7 +2068,7 @@ class FritzCallList:
 		self.callList = [ ]
 	
 	def add(self, event, date, number, caller, phone):
-		debug("[FritzCallList] add: %s %s" % (number, caller))
+		debug("[FritzCallList] %s %s" % (number, caller))
 		if len(self.callList) > 10:
 			if self.callList[0] != "Start":
 				self.callList[0] = "Start"
@@ -2067,7 +2077,7 @@ class FritzCallList:
 		self.callList.append((event, number, date, caller, phone))
 	
 	def display(self):
-		debug("[FritzCallList] display")
+		debug("[FritzCallList]")
 		global standbyMode
 		standbyMode = False
 		# Standby.inStandby.onClose.remove(self.display) object does not exist anymore...
@@ -2088,7 +2098,7 @@ class FritzCallList:
 				else:
 					direction = "<-"
 	
-				# shorten the date info
+				# shorten the date information
 				date = date[:6] + date[9:14]
 	
 				# our phone could be of the form "0123456789 (home)", then we only take "home"
@@ -2123,7 +2133,7 @@ class FritzCallList:
 						phone = phone[: - 1]
 	
 				text = text + "%s %s %s %s\n" % (date, caller, direction, phone)
-				debug("[FritzCallList] display: '%s %s %s %s'" % (date, caller, direction, phone))
+				debug("[FritzCallList] '%s %s %s %s'" % (date, caller, direction, phone))
 
 		# display screen
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO)
@@ -2134,7 +2144,7 @@ class FritzCallList:
 callList = FritzCallList()
 
 def findFace(number, name):
-	# debug("[FritzCall] findFace number/name: %s/%s" % (number, name))
+	# debug("[FritzCall] number/name: %s/%s" % (number, name))
 	if name:
 		sep = name.find(',')
 		if sep != -1:
@@ -2144,17 +2154,17 @@ def findFace(number, name):
 			name = name[:sep]
 	else:
 		name = _("UNKNOWN")
-	# debug("[FritzCall] findFace looking for: %s" %name)
+	# debug("[FritzCall] looking for: %s" %name)
 
 	facesDir = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces")
-	# debug("[FritzCall] findFace looking in: %s" %facesDir)
+	# debug("[FritzCall] looking in: %s" %facesDir)
 	facesFile = None
 
 	if not os.path.isdir(facesDir):
-		debug("[FritzCall] findFace facesdir does not exist: %s" %facesDir)
+		error("[FritzCall] findFace facesdir does not exist: %s" %facesDir)
 	else:
 		files = os.listdir(facesDir)
-		# debug("[FritzCall] findFace listdir: %s" %repr(files))
+		# debug("[FritzCall] listdir: %s" %repr(files))
 		# TODO macthed das hier auf ????.png1 ?!?!?
 		myFiles = [f for f in files if re.match(re.escape(number) + "\.[png|PNG]", f)]
 		if not myFiles:
@@ -2167,12 +2177,12 @@ def findFace(number, name):
 			myFiles = [f for f in files if re.match(re.escape(name) + "\.[png|PNG]", f)]
 	
 		if myFiles:
-			# debug("[FritzCall] findFace found: %s" %repr(myFiles))
+			# debug("[FritzCall] found: %s" %repr(myFiles))
 			facesFile = os.path.join(facesDir, myFiles[0])
 	
 		if not facesFile and config.plugins.FritzCall.FritzExtendedSearchFaces.value:
 			for k in range(len(number)-1, 0, -1):
-				# debug("[FritzCall] findFace extended search: %s" %number[:k])
+				# debug("[FritzCall] extended search: %s" %number[:k])
 				myFiles = [f for f in files if re.match(re.escape(number[:k]) + "\.[png|PNG]", f)]
 				if myFiles:
 					facesFile = os.path.join(facesDir, myFiles[0])
@@ -2181,7 +2191,7 @@ def findFace(number, name):
 	if not facesFile:
 		facesFile = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
 
-	debug("[FritzCall] findFace result: %s" % (__(facesFile)))
+	info("[FritzCall] result: %s" % (__(facesFile)))
 	return facesFile
 
 class MessageBoxPixmap(Screen):
@@ -2315,7 +2325,7 @@ def runUserActionScript(event, date, number, caller, phone):
 	userActionScript = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallUserAction.sh")
 	if os.path.exists(userActionScript) and os.access(userActionScript, os.X_OK):
 		cmd = userActionScript + ' "' + event + '" "' + date + '" "' + number + '" "' + caller + '" "' + phone + '"'
-		debug("[FritzCall] runUserActionScript: calling: %s" % cmd)
+		info("[FritzCall] calling: %s" % cmd)
 		eConsoleAppContainer().execute(cmd)
 
 userActionList = [runUserActionScript]
@@ -2334,7 +2344,7 @@ def registerUserAction(fun):
 	# except:
 	#	print "import of FritzCall failed"
 	#===========================================================================
-	debug("[FritzCall] registerUserAction: register: %s" % fun.__name__)
+	info("[FritzCall] register: %s" % fun.__name__)
 	userActionList.append(fun)
 			
 mutedOnConnID = None
@@ -2343,7 +2353,7 @@ def notifyCall(event, date, number, caller, phone, connID):
 		if event == "RING":
 			global mutedOnConnID
 			if config.plugins.FritzCall.muteOnCall.value and not mutedOnConnID:
-				debug("[FritzCall] mute on connID: %s" % connID)
+				info("[FritzCall] mute on connID: %s" % connID)
 				mutedOnConnID = connID
 				# eDVBVolumecontrol.getInstance().volumeMute() # with this, we get no mute icon...
 				if not eDVBVolumecontrol.getInstance().isMuted():
@@ -2351,7 +2361,7 @@ def notifyCall(event, date, number, caller, phone, connID):
 			text = _("Incoming Call on %(date)s at %(time)s from\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nto: %(phone)s") % { 'date':date[:8], 'time':date[9:], 'number':number, 'caller':caller, 'phone':phone }
 		else:
 			text = _("Outgoing Call on %(date)s at %(time)s to\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nfrom: %(phone)s") % { 'date':date[:8], 'time':date[9:], 'number':number, 'caller':caller, 'phone':phone }
-		debug("[FritzCall] notifyCall:\n%s" % text)
+		info("[FritzCall]\n%s" % text)
 		# Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		Notifications.AddNotification(MessageBoxPixmap, text, number=number, name=caller, timeout=config.plugins.FritzCall.timeout.value)
 	elif config.plugins.FritzCall.afterStandby.value == "inList":
@@ -2363,12 +2373,12 @@ def notifyCall(event, date, number, caller, phone, connID):
 			Standby.inStandby.onHide.append(callList.display) #@UndefinedVariable
 		# add text/timeout to call list
 		callList.add(event, date, number, caller, phone)
-		debug("[FritzCall] notifyCall: added to callList")
+		info("[FritzCall] added to callList")
 	else: # this is the "None" case
-		debug("[FritzCall] notifyCall: standby and no show")
+		info("[FritzCall] standby and no show")
 
 	for fun in userActionList:
-		debug("[FritzCall] notifyCall: call user action: %s" % fun.__name__)
+		info("[FritzCall] call user action: %s" % fun.__name__)
 		fun(event, date, number, caller, phone)
 
 
@@ -2392,7 +2402,7 @@ class FritzReverseLookupAndNotifier:
 		@param phone: Number (and name) of or own phone
 		@param date: date of call
 		'''
-		debug("[FritzReverseLookupAndNotifier] reverse Lookup for %s!" % number)
+		info("[FritzReverseLookupAndNotifier] reverse Lookup for %s!" % number)
 		self.event = event
 		self.number = number
 		self.caller = caller
@@ -2414,7 +2424,7 @@ class FritzReverseLookupAndNotifier:
 		@param number: number
 		@param caller: name and address of remote. it comes in with name, address and city separated by commas
 		'''
-		debug("[FritzReverseLookupAndNotifier] got: " + caller)
+		info("[FritzReverseLookupAndNotifier] got: " + caller)
 		self.number = number
 #===============================================================================
 #		if not caller and os.path.exists(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.csv"):
@@ -2433,7 +2443,7 @@ class FritzReverseLookupAndNotifier:
 			# TODO: I don't know, why we store only for incoming calls...
 			# if self.number != 0 and config.plugins.FritzCall.addcallers.value and self.event == "RING":
 			if self.number != 0 and config.plugins.FritzCall.addcallers.value:
-				debug("[FritzReverseLookupAndNotifier] add to phonebook")
+				info("[FritzReverseLookupAndNotifier] add to phonebook")
 				phonebook.add(self.number, self.caller)
 		else:
 			name = resolveNumberWithAvon(self.number, config.plugins.FritzCall.country.value)
@@ -2446,7 +2456,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver): # pylint: disable=W0223
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 1200 $"[1:-1]	+ "$Date: 2015-07-23 17:57:30 +0200 (Thu, 23 Jul 2015) $"[7:23] + " starting")
+		info("[FritzProtocol] " + "$Revision: 1233 $"[1:-1]	+ "$Date: 2015-09-19 21:12:22 +0200 (Sat, 19 Sep 2015) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2457,7 +2467,7 @@ class FritzProtocol(LineReceiver): # pylint: disable=W0223
 		self.connID = None
 
 	def resetValues(self):
-		debug("[FritzProtocol] resetValues")
+		debug("[FritzProtocol]")
 		self.number = '0'
 		self.caller = None
 		self.phone = None
@@ -2470,7 +2480,7 @@ class FritzProtocol(LineReceiver): # pylint: disable=W0223
 		self.resetValues()
 
 	def lineReceived(self, line):
-		debug("[FritzProtocol] lineReceived: %s" % line)
+		debug("[FritzProtocol] %s" % line)
 #15.07.06 00:38:54;CALL;1;4;<from/our msn>;<to/extern>;
 #15.07.06 00:38:58;DISCONNECT;1;0;
 #15.07.06 00:39:22;RING;0;<from/extern>;<to/our msn>;
@@ -2486,10 +2496,10 @@ class FritzProtocol(LineReceiver): # pylint: disable=W0223
 		if config.plugins.FritzCall.ignoreUnknown.value:
 			if self.event == "RING":
 				if not anEvent[3]:
-					debug("[FritzProtocol] lineReceived: call from unknown phone; skipping")
+					debug("[FritzProtocol] call from unknown phone; skipping")
 					return
 				elif not anEvent[5]:
-					debug("[FritzProtocol] lineReceived: call to unknown phone; skipping")
+					debug("[FritzProtocol] call to unknown phone; skipping")
 					return
 
 		# debug("[FritzProtocol] Volcontrol dir: %s" % dir(eDVBVolumecontrol.getInstance()))
@@ -2520,17 +2530,17 @@ class FritzProtocol(LineReceiver): # pylint: disable=W0223
 			if fritzbox and fritzbox.blacklist and not config.plugins.FritzCall.showBlacklistedCalls.value:
 				if self.event == "RING":
 					if number in fritzbox.blacklist[0]:
-						debug("[FritzProtocol] lineReceived phone: '''%s''' blacklisted number: '''%s'''" % (phone, number))
+						info("[FritzProtocol] phone: '''%s''' blacklisted number: '''%s'''" % (phone, number))
 						return 
 				else:
 					if number in fritzbox.blacklist[1]:
-						debug("[FritzProtocol] lineReceived phone: '''%s''' blacklisted number: '''%s'''" % (phone, number))
+						info("[FritzProtocol] phone: '''%s''' blacklisted number: '''%s'''" % (phone, number))
 						return 
 
-			debug("[FritzProtocol] lineReceived phone: '''%s''' number: '''%s'''" % (phone, number))
+			info("[FritzProtocol] phone: '''%s''' number: '''%s'''" % (phone, number))
 
 			if not (config.plugins.FritzCall.filter.value and phone not in filtermsns):
-				debug("[FritzProtocol] lineReceived no filter hit")
+				debug("[FritzProtocol] no filter hit")
 				if phone:
 					phonename = phonebook.search(phone)		   # do we have a name for the number of our side?
 					if phonename:
@@ -2541,26 +2551,26 @@ class FritzProtocol(LineReceiver): # pylint: disable=W0223
 					self.phone = _("UNKNOWN")
 
 				if not number:
-					debug("[FritzProtocol] lineReceived: no number")
+					debug("[FritzProtocol] no number")
 					self.number = _("number suppressed")
 					self.caller = _("UNKNOWN")
 				else:
 					if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0] == "0":
-						debug("[FritzProtocol] lineReceived: strip leading 0")
+						debug("[FritzProtocol] strip leading 0")
 						self.number = number[1:]
 					else:
 						self.number = number
 						if self.event == "CALL" and self.number[0] != '0':					  # should only happen for outgoing
-							debug("[FritzProtocol] lineReceived: add local prefix")
+							debug("[FritzProtocol] add local prefix")
 							self.number = config.plugins.FritzCall.prefix.value + self.number
 	
 					# strip CbC prefixes
 					if self.event == "CALL":
 						number = stripCbCPrefix(self.number, config.plugins.FritzCall.country.value)
 	
-					debug("[FritzProtocol] lineReceived phonebook.search: %s" % self.number)
+					info("[FritzProtocol] phonebook.search: %s" % self.number)
 					self.caller = phonebook.search(self.number)
-					debug("[FritzProtocol] lineReceived phonebook.search result: %s" % self.caller)
+					info("[FritzProtocol] phonebook.search result: %s" % self.caller)
 						
 					if not self.caller:
 						if config.plugins.FritzCall.lookup.value:
@@ -2584,16 +2594,16 @@ class FritzClientFactory(ReconnectingClientFactory):
 		#=======================================================================
 
 		if config.plugins.FritzCall.connectionVerbose.value:
-			debug("[FRITZ!FritzClientFactory] - startedConnecting")
+			info("[FRITZ!FritzClientFactory]")
 			Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box..."), type=MessageBox.TYPE_INFO, timeout=2)
 
 	def buildProtocol(self, addr): #@UnusedVariable # pylint: disable=W0613
 		global fritzbox, phonebook
 		if config.plugins.FritzCall.connectionVerbose.value:
-			debug("[FRITZ!FritzClientFactory] - buildProtocol")
+			info("[FRITZ!FritzClientFactory]")
 			Notifications.AddNotification(MessageBox, _("Connected to FRITZ!Box!"), type=MessageBox.TYPE_INFO, timeout=4)
 		self.resetDelay()
-		initDebug()
+		# initDebug()
 		initCbC()
 		initAvon()
 		# TODO: swithc between FBF FW versions...
@@ -2617,7 +2627,7 @@ class FritzClientFactory(ReconnectingClientFactory):
 	def clientConnectionLost(self, connector, reason):
 		global fritzbox
 		if not self.hangup_ok and config.plugins.FritzCall.connectionVerbose.value:
-			debug("[FRITZ!FritzClientFactory] - clientConnectionLost")
+			warn("[FRITZ!FritzClientFactory] - clientConnectionLost")
 			Notifications.AddNotification(MessageBox, _("Connection to FRITZ!Box! lost\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
 		# config.plugins.FritzCall.enable.value = False
@@ -2674,7 +2684,7 @@ def displayPhonebook(session, servicelist=None): #@UnusedVariable # pylint: disa
 
 def displayFBFStatus(session, servicelist=None): #@UnusedVariable # pylint: disable=W0613
 	if config.plugins.FritzCall.enable.value:
-		if fritzbox and fritzbox.info:
+		if fritzbox and fritzbox.information:
 			session.open(FritzMenu)
 		else:
 			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type=MessageBox.TYPE_INFO)
@@ -2695,7 +2705,7 @@ def autostart(reason, **kwargs):
 		my_global_session = kwargs["session"]
 		return
 
-	debug("[FRITZ!Call] - Autostart")
+	info("[FRITZ!Call]")
 	if reason == 0:
 		fritz_call = FritzCall()
 	elif reason == 1:
