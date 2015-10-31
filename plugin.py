@@ -1,6 +1,6 @@
 __doc__ = '''
 Beyonwiz T3 Plugin
-For any recorded series (2 or more episodes with same name)
+For any recorded series (configurable number of episodes with same name)
 create a sub-directory and move the series episodes into it
 
 Mike Griffin  8/02/2015
@@ -15,15 +15,18 @@ from Screens.MessageBox import MessageBox
 from Screens.TextBox import TextBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
+import Screens.Standby
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
+from Components.Task import job_manager as JobManager
 from Components.UsageConfig import defaultMoviePath
 from Components.config import config, ConfigText, getConfigListEntry
 from Tools import ASCIItranslit
 from time import time, localtime, strftime
+from boxbranding import getMachineBrand, getMachineName
 from collections import defaultdict
 from os.path import isfile, isdir, splitext, join as joinpath, split as splitpath
 import os
@@ -56,7 +59,6 @@ pluginSelSeries2Folder = PluginDescriptor(
 )
 
 def Plugins(**kwargs):
-    print "[Series2Folder] Plugins"
     plugins = [PluginDescriptor(
         name=_('Series2Folder...'),
         description=_('Series to Folder...'),
@@ -96,6 +98,14 @@ class Series2FolderActions:
 
     def doMoves(self, service=None):
 
+        if Screens.Standby.inTryQuitMainloop:
+            self.MsgBox("Your %s %s is trying to shut down. No recordings moved." % (getMachineBrand(), getMachineName()), timeout=10)
+            return
+
+        if JobManager.getPendingJobs():
+            self.MsgBox("Your %s %s running tasks that may be accessing the recordings. No recordings moved." % (getMachineBrand(), getMachineName()), timeout=10)
+            return
+
         # Selection if called on a specific recording
         moveSelection = None
 
@@ -107,7 +117,7 @@ class Series2FolderActions:
         if service is not None:
                 dir, fullname = splitpath(service.getPath())
                 if dir + '/' == rootdir and fullname:
-                    showname, date_time, err = self.getShowInfo(rootdir, fullname)
+                    showname, __, date_time, err = self.getShowInfo(rootdir, fullname)
                     if showname:
                         moveSelection = self.cleanName(showname)
                     elif err:
@@ -128,9 +138,9 @@ class Series2FolderActions:
         for f in os.listdir(rootdir):
             fullpath = joinpath(rootdir, f)
             if f.endswith('.ts') and f[0:8].isdigit() and fullpath not in isRecording and isfile(fullpath):
-                origShowname, date_time, err = self.getShowInfo(rootdir, f)
+                origShowname, pending_merge, date_time, err = self.getShowInfo(rootdir, f)
                 showname = self.cleanName(origShowname)
-                if showname and (not moveSelection or showname == moveSelection):
+                if showname and (not moveSelection or showname == moveSelection) and not pending_merge:
                     if moviesFolder and origShowname.lower().startswith("movie: "):
                         shows[moviesFolder].append((origShowname, f, date_time))
                     else:
@@ -213,18 +223,19 @@ class Series2FolderActions:
             lines = open(path).readlines()
             showname = lines[1].strip()
             t = int(lines[3].strip())
+            pending_merge = len(lines) > 4 and "pts_merge" in lines[4].strip().split(' ')
             date_time = strftime("%d.%m.%Y %H:%M", localtime(t))
             filebase = splitext(fullname)[0]
             if filebase[-4:-3] == "_" and filebase[-3:].isdigit():
                 date_time += '#' + filebase[-3:]
         except:
-            showname, date_time, err_mess = self.recSplit(fullname)
+            showname, date_time, False, err_mess = self.recSplit(fullname)
 
         if showname:
             showname.replace('/', '_')
             showname = showname[:255]
 
-        return showname, date_time, err_mess
+        return showname, pending_merge, date_time, err_mess
 
     def recSplit(self, fullname):
         try:
@@ -241,8 +252,8 @@ class Series2FolderActions:
                 showname = showname[0:-4]
             showname = ' - '.join(parts[startOffset:-1] + [showname])
         except:
-            return None, None, _("Can't extract show name for: %s") % fullname
-        return showname, date_time, None
+            return None, None, False, _("Can't extract show name for: %s") % fullname
+        return showname, date_time, False, None
 
 class Series2Folder(ChoiceBox):
     def __init__(self, session, service):
