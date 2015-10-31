@@ -139,7 +139,7 @@ class Series2FolderActions:
             fullpath = joinpath(rootdir, f)
             if f.endswith('.ts') and f[0:8].isdigit() and fullpath not in isRecording and isfile(fullpath):
                 origShowname, pending_merge, date_time, err = self.getShowInfo(rootdir, f)
-		noRepeatName = self.stripRepeat(origShowname)
+                noRepeatName = self.stripRepeat(origShowname)
                 showname = self.cleanName(noRepeatName)
                 if showname and (not moveSelection or showname == moveSelection) and not pending_merge:
                     if moviesFolder and noRepeatName.lower().startswith("movie: "):
@@ -208,19 +208,19 @@ class Series2FolderActions:
         return l
 
     def stripRepeat(self, name):
-	name = name.strip()
+        name = name.strip()
 
-	if config.plugins.seriestofolder.striprepeattags.value:
-	    repeat_str = config.plugins.seriestofolder.repeatstr.value.strip()
-	    if repeat_str:
-	        if name.startswith(repeat_str):
-		    name = name[len(repeat_str):].strip()
-		elif name.endswith(repeat_str):
-		    name = name[:-len(repeat_str)].strip()
-	return name
+        if config.plugins.seriestofolder.striprepeattags.value:
+            repeat_str = config.plugins.seriestofolder.repeatstr.value.strip()
+            if repeat_str:
+                if name.startswith(repeat_str):
+                    name = name[len(repeat_str):].strip()
+                elif name.endswith(repeat_str):
+                    name = name[:-len(repeat_str)].strip()
+        return name
 
     def cleanName(self, name):
-	name = name.strip()
+        name = name.strip()
 
         if not config.plugins.seriestofolder.portablenames.value:
             return name
@@ -335,12 +335,12 @@ class Series2FolderConfig(ConfigListScreen, Screen):
         )
         self._confStripRepeats = getConfigListEntry(
             _("Strip repeat tags from series names"),
-	    config.plugins.seriestofolder.striprepeattags,
+            config.plugins.seriestofolder.striprepeattags,
             _("Strip repeat tagging from series titles when creating directory names.")
         )
         self._confRepeatStr = getConfigListEntry(
             _("Strip repeat tags from series names"),
-	    config.plugins.seriestofolder.repeatstr,
+            config.plugins.seriestofolder.repeatstr,
             _("Repeat tag to be stripped from from series titles when creating directory names.")
         )
         self._confMovies = getConfigListEntry(
@@ -382,10 +382,10 @@ class Series2FolderConfig(ConfigListScreen, Screen):
             self._confShowselmovebutton,
             self._confAutofolder,
             self._confStripRepeats,
-	]
+        ]
         if self._confStripRepeats[1].value:
             list.append(self._confRepeatStr)
-	list += [
+        list += [
             self._confPortableNames,
             self._confMovies,
         ]
