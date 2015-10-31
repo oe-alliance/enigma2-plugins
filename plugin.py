@@ -119,7 +119,7 @@ class Series2FolderActions:
                 if dir + '/' == rootdir and fullname:
                     showname, __, date_time, err = self.getShowInfo(rootdir, fullname)
                     if showname:
-                        moveSelection = self.cleanName(showname)
+                        moveSelection = self.cleanName(self.stripRepeat(showname))
                     elif err:
                         errMess.append(err)
 
@@ -139,9 +139,10 @@ class Series2FolderActions:
             fullpath = joinpath(rootdir, f)
             if f.endswith('.ts') and f[0:8].isdigit() and fullpath not in isRecording and isfile(fullpath):
                 origShowname, pending_merge, date_time, err = self.getShowInfo(rootdir, f)
-                showname = self.cleanName(origShowname)
+		noRepeatName = self.stripRepeat(origShowname)
+                showname = self.cleanName(noRepeatName)
                 if showname and (not moveSelection or showname == moveSelection) and not pending_merge:
-                    if moviesFolder and origShowname.lower().startswith("movie: "):
+                    if moviesFolder and noRepeatName.lower().startswith("movie: "):
                         shows[moviesFolder].append((origShowname, f, date_time))
                     else:
                         shows[showname].append((origShowname, f, date_time))
@@ -206,7 +207,21 @@ class Series2FolderActions:
                 l.append(f)
         return l
 
+    def stripRepeat(self, name):
+	name = name.strip()
+
+	if config.plugins.seriestofolder.striprepeattags.value:
+	    repeat_str = config.plugins.seriestofolder.repeatstr.value.strip()
+	    if repeat_str:
+	        if name.startswith(repeat_str):
+		    name = name[len(repeat_str):].strip()
+		elif name.endswith(repeat_str):
+		    name = name[:-len(repeat_str)].strip()
+	return name
+
     def cleanName(self, name):
+	name = name.strip()
+
         if not config.plugins.seriestofolder.portablenames.value:
             return name
 
@@ -284,8 +299,8 @@ class ErrorBox(TextBox):
 
 class Series2FolderConfig(ConfigListScreen, Screen):
     skin = """
-<screen name="Series2FolderConfig" position="center,center" size="640,276" title="Configure Series To Folder" >
-    <widget name="config" position="20,10" size="600,150" />
+<screen name="Series2FolderConfig" position="center,center" size="640,326" title="Configure Series To Folder" >
+    <widget name="config" position="20,10" size="600,200" />
     <widget name="description" position="20,e-106" size="600,88" font="Regular;18" foregroundColor="grey" halign="left" valign="top" />
     <ePixmap name="red" position="20,e-28" size="15,16" pixmap="skin_default/buttons/button_red.png" alphatest="blend" />
     <ePixmap name="green" position="170,e-28" size="15,16" pixmap="skin_default/buttons/button_green.png" alphatest="blend" />
@@ -317,6 +332,16 @@ class Series2FolderConfig(ConfigListScreen, Screen):
             _("Use portable folder names"),
             config.plugins.seriestofolder.portablenames,
             _("Use more portable (Windows-friendly) names for folders.")
+        )
+        self._confStripRepeats = getConfigListEntry(
+            _("Strip repeat tags from series names"),
+	    config.plugins.seriestofolder.striprepeattags,
+            _("Strip repeat tagging from series titles when creating directory names.")
+        )
+        self._confRepeatStr = getConfigListEntry(
+            _("Strip repeat tags from series names"),
+	    config.plugins.seriestofolder.repeatstr,
+            _("Repeat tag to be stripped from from series titles when creating directory names.")
         )
         self._confMovies = getConfigListEntry(
             _("Put movies into folder"),
@@ -356,6 +381,11 @@ class Series2FolderConfig(ConfigListScreen, Screen):
             self._confShowmovebutton,
             self._confShowselmovebutton,
             self._confAutofolder,
+            self._confStripRepeats,
+	]
+        if self._confStripRepeats[1].value:
+            list.append(self._confRepeatStr)
+	list += [
             self._confPortableNames,
             self._confMovies,
         ]
@@ -367,7 +397,7 @@ class Series2FolderConfig(ConfigListScreen, Screen):
 
     def updateConfig(self):
         currConf = self["config"].getCurrent()
-        if currConf is self._confMovies:
+        if currConf in (self._confStripRepeats, self._confMovies):
             self.createConfig(self["config"])
 
     def keyLeft(self):

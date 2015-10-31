@@ -19,3 +19,5 @@ config.plugins.seriestofolder.moviesfolder = ConfigText(default="Movies", show_h
 config.plugins.seriestofolder.portablenames = ConfigYesNo(default=True)
 config.plugins.seriestofolder.showmovebutton = ConfigYesNo(default=True)
 config.plugins.seriestofolder.showselmovebutton = ConfigYesNo(default=True)
+config.plugins.seriestofolder.striprepeattags = ConfigYesNo(default=False)
+config.plugins.seriestofolder.repeatstr = ConfigText(default="[R]", show_help=False)
