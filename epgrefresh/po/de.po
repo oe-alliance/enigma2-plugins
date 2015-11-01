@@ -168,7 +168,7 @@ msgstr " Jetzt aktualisieren"
 
 #: plugin.py:238
 msgid "EPG-Refresh_Refresh now"
-msgstr "EPG-Refresh jetzt Aktualisieren"
+msgstr "EPG-Refresh jetzt aktualisieren"
 
 #: EPGRefreshConfiguration.py:62
 msgid "EPGRefresh Functions"
