@@ -241,7 +241,8 @@ extPendingServDescriptor = PluginDescriptor( _("EPG-Refresh_Pending Services"), 
 
 def AdjustExtensionsmenu(enable, PlugDescriptor):
 	if enable:
-		plugins.addPlugin(PlugDescriptor)
+		if PlugDescriptor not in plugins.getPlugins(PlugDescriptor.where):
+			plugins.addPlugin(PlugDescriptor)
 	else:
 		try:
 			plugins.removePlugin(PlugDescriptor)

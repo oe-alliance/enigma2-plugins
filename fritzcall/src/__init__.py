@@ -36,26 +36,35 @@ def __(text, front=True):
 		out = out + text[i*2] + '.'
 	return out
 
+import logging
+from logging import debug
 def initDebug():
-	try:
-		# os.remove("/tmp/FritzDebug.log")
-		eBackgroundFileEraser.getInstance().erase("/tmp/FritzDebug.log")
-	except OSError:
-		pass
+#	try:
+#		# os.remove("/tmp/FritzDebug.log")
+#		eBackgroundFileEraser.getInstance().erase("/tmp/FritzDebugOld.log")
+#	except OSError:
+#		pass
+	logging.basicConfig(filename='/tmp/FritzDebug.log',
+					filemode='w',
+					level=logging.DEBUG,
+					# format='%(asctime)s %(levelname)s %(module)s %(name)s %(funcName)s %(message)s',
+					format='%(asctime)s %(levelname)-8s %(name)-26s %(funcName)s %(message)-15s',
+					datefmt='%Y-%m-%d %H:%M:%S')
 
-from time import localtime
-def debug(message):
-	if config.plugins.FritzCall.debug.value:
-		try:
-			# ltim = localtime()
-			# headerstr = u"%04d%02d%02d %02d:%02d " %(ltim[0],ltim[1],ltim[2],ltim[3],ltim[4])
-			deb = open("/tmp/FritzDebug.log", "aw")
-			# deb.write(headerstr + message.decode('utf-8') + u"\n")
-			deb.write(message + "\n")
-			deb.close()
-		except Exception, e:
-			debug("%s (retried debug: %s)" % (repr(message), str(e)))
-		
+
+#from time import localtime
+#def debug(message):
+#	if config.plugins.FritzCall.debug.value:
+#		try:
+#			# ltim = localtime()
+#			# headerstr = u"%04d%02d%02d %02d:%02d " %(ltim[0],ltim[1],ltim[2],ltim[3],ltim[4])
+#			deb = open("/tmp/FritzDebugOld.log", "aw")
+#			# deb.write(headerstr + message.decode('utf-8') + u"\n")
+#			deb.write(message + "\n")
+#			deb.close()
+#		except Exception, e:
+#			debug("%s (retried debug: %s)" % (repr(message), str(e)))
+#		logging.debug(message)
 
 import re
 def normalizePhoneNumber(intNo):
