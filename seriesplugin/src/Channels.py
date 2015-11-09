@@ -292,7 +292,9 @@ class ChannelsBase(ChannelsFile):
 				def parse(root):
 					channels = {}
 					version = root.get("version", "1")
-					if version.startswith("2"):
+					if version.startswith("1"):
+						splog("loadXML channels - Skip old file")
+					else:
 						if root:
 							for element in root.findall("Channel"):
 								name = element.get("name", "")
@@ -302,8 +304,6 @@ class ChannelsBase(ChannelsFile):
 									for alternative in element.findall("Alternative"):
 										alternatives.append( alternative.text )
 									channels[reference] = (name, list(set(alternatives)))
-					elif version.startswith("1"):
-						splog("loadXML channels - Skip old file")
 					return channels
 				
 				channels = parse( root )

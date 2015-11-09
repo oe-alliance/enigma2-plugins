@@ -37,7 +37,7 @@ from enigma import eServiceCenter, iServiceInformation, eServiceReference
 from ServiceReference import ServiceReference
 
 # Plugin internal
-from SeriesPlugin import getInstance, refactorTitle, refactorDescription   #, refactorRecord
+from SeriesPlugin import getInstance, refactorTitle, refactorDescription, refactorDirectory
 from Logger import splog
 
 CompiledRegexpGlobEscape = re.compile('([\[\]\?*])')  # "[\\1]"
@@ -159,6 +159,8 @@ def renameFile(servicepath, name, data, tidy=False):
 	
 	src = os.path.join(path, file_name)
 	splog("SPR: servicepathSrc", src)
+	
+	path = refactorDirectory(path, data)
 	dst = os.path.join(path, name)
 	splog("SPR: servicepathDst", dst)
 
@@ -169,10 +171,18 @@ def renameFile(servicepath, name, data, tidy=False):
 		splog("SPR: servicepathRnm", f)
 		to = f.replace(src, dst)
 		splog("SPR: servicepathTo ", to)
+		
+		
+		#TODO Check and create directory
+		
+		
 		if not os.path.exists(to):
-			os.rename(f, to)
+			try:
+				os.rename(f, to)
+			except:
+				splog("SPR: rename error", f, to)
 		elif config.plugins.seriesplugin.rename_existing_files.value:
-			splog("SPR: Destination file alreadey exists", to, " - Append _")
+			splog("SPR: Destination file already exists", to, " - Append _")
 			renameFile(servicepath, name + "_", data, True)
 			break
 		else:

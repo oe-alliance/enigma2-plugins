@@ -86,12 +86,4 @@ class Cacher(object):
 		
 		if not config.plugins.seriesplugin.caching.value:
 			return
-		cache[url] = ( time(), list[:] )
-
-	def isCached(self, url):
-		global cache
-		
-		if not config.plugins.seriesplugin.caching.value:
-			return
-		
-		return (url in cache)
+		cache[url] = ( time(), list )

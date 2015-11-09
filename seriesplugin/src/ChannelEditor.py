@@ -31,13 +31,20 @@ from Screens.MessageBox import MessageBox
 #from Screens.Standby import TryQuitMainloop
 #from Screens.VirtualKeyBoard import VirtualKeyBoard
 
-from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, loadPNG, RT_WRAP, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
+from enigma import eListboxPythonMultiContent, eListbox, gFont, getDesktop, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, loadPNG, RT_WRAP, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import sys, os, base64, re, time, shutil, datetime, codecs, urllib2
 from twisted.web import client, error as weberror
 from twisted.internet import reactor, defer
 from urllib import urlencode
 from skin import parseColor
+
+# Check if is UHD
+DESKTOP_WIDTH = getDesktop(0).size().width()
+if DESKTOP_WIDTH > 1920:
+	skinFactor = 2.0
+else:
+	skinFactor = 1
 
 try:
 	from skin import TemplatedListFonts
@@ -114,7 +121,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 		if TemplatedListFonts is not None:
 			tlf = TemplatedListFonts()
 			self.chooseMenuList.l.setFont(0, gFont(tlf.face(tlf.MEDIUM), tlf.size(tlf.MEDIUM)))
-			self.chooseMenuList.l.setItemHeight(30)
+			self.chooseMenuList.l.setItemHeight(int(30*skinFactor))
 		else:
 			self.chooseMenuList.l.setFont(0, gFont('Regular', 20 ))
 			self.chooseMenuList.l.setItemHeight(25)
@@ -222,10 +229,10 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 		global TemplatedListFonts
 		if TemplatedListFonts is not None:
 			l = [entry,
-				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 8, 16, 16, loadPNG(imageStatus)),
-				(eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 400, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, stbSender),
-				(eListboxPythonMultiContent.TYPE_TEXT, 450, 1, 350, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, webSender),
-				(eListboxPythonMultiContent.TYPE_TEXT, 800, 1, 300, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "", colorYellow)
+				(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 8, 16 * skinFactor, 16 * skinFactor, loadPNG(imageStatus)),
+				(eListboxPythonMultiContent.TYPE_TEXT, 35 * skinFactor, 0, 400 * skinFactor, 30 * skinFactor, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, stbSender),
+				(eListboxPythonMultiContent.TYPE_TEXT, 450 * skinFactor, 0, 450 * skinFactor, 30 * skinFactor, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, webSender),
+				(eListboxPythonMultiContent.TYPE_TEXT, 900 * skinFactor, 0, 300 * skinFactor, 30 * skinFactor, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "", colorYellow)
 				]
 		else:
 			l = [entry,

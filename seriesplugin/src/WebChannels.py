@@ -37,14 +37,14 @@ class WebChannels(object):
 	def	request(self):
 		print "[SP] request webpage.."
 		url = "http://www.wunschliste.de/updates/stationen"
-		from plugin import PROXY, USER_AGENT
-		getPage(PROXY+url, headers={'User-Agent':USER_AGENT}).addCallback(self.__callback).addErrback(self.__errback)
+		from plugin import buildURL, USER_AGENT
+		getPage( buildURL(url), headers={'User-Agent':USER_AGENT}).addCallback(self.__callback).addErrback(self.__errback)
 
 	def request_and_return(self):
 		print "[SP] request_and_return webpage.."
 		url = "http://www.wunschliste.de/updates/stationen"
-		from plugin import PROXY, USER_AGENT
-		req = Request(PROXY+url, headers={'User-Agent':USER_AGENT})
+		from plugin import buildURL, USER_AGENT
+		req = Request(buildURL(url), headers={'User-Agent':USER_AGENT})
 		try:
 			data = urlopen(req).read()
 		except URLError as e:

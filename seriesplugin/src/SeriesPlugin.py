@@ -48,7 +48,6 @@ except Exception as e:
 AUTOTIMER_PATH  = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/AutoTimer/" )
 SERIESPLUGIN_PATH  = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/" )
 
-
 # Globals
 instance = None
 
@@ -140,7 +139,7 @@ def resetInstance():
 def refactorTitle(org, data):
 	if data:
 		season, episode, title, series = data
-		if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off":
+		if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off" and not config.plugins.seriesplugin.pattern_title.value == "Disabled":
 			if config.plugins.seriesplugin.replace_chars.value:
 				repl = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
 				splog("SP: refactor org1", org)
@@ -159,7 +158,7 @@ def refactorTitle(org, data):
 def refactorDescription(org, data):
 	if data:
 		season, episode, title, series = data
-		if config.plugins.seriesplugin.pattern_description.value and not config.plugins.seriesplugin.pattern_description.value == "Off":
+		if config.plugins.seriesplugin.pattern_description.value and not config.plugins.seriesplugin.pattern_description.value == "Off" and not config.plugins.seriesplugin.pattern_description.value == "Disabled":
 			if config.plugins.seriesplugin.replace_chars.value:
 				repl = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
 				splog("SP: refactor des1", org)
@@ -180,6 +179,20 @@ def refactorDescription(org, data):
 	else:
 		return org
 
+def refactorDirectory(org, data):
+	if data:
+		season, episode, title, series = data
+		if config.plugins.seriesplugin.pattern_directory.value and not config.plugins.seriesplugin.pattern_directory.value == "Off" and not config.plugins.seriesplugin.pattern_directory.value == "Disabled":
+			cust_dir = config.plugins.seriesplugin.pattern_directory.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			cust_dir = cust_dir.replace("\n", " ").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
+			splog("SP: refactor des1", cust_dir)
+			cust_dir = re.sub('[^/\w\-_\. ]', '_', cust_dir)
+			splog("SP: refactor des2", cust_dir)
+			return cust_dir
+		else:
+			return org
+	else:
+		return org
 
 class ThreadItem:
 	def __init__(self, identifier = None, callback = None, name = None, begin = None, end = None, service = None):
@@ -354,6 +367,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 				import NavigationInstance
 				if NavigationInstance.instance.RecordTimer.isRecording():
 					splog("SP: Main: Skip check during running records")
+					callback( "Skip check during running records (Can be disabled)" )
 					return
 			except:
 				pass

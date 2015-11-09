@@ -101,10 +101,10 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase):
 			splog("SSBase not cached")
 			
 			try:
-				from plugin import PROXY, USER_AGENT
+				from plugin import buildURL, USER_AGENT
 				
 				if use_proxy:
-					temp_url = PROXY+url
+					temp_url = buildURL(url)
 				else:
 					temp_url = url
 				
@@ -112,8 +112,8 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase):
 				response = urlopen(req, timeout=float(config.plugins.seriesplugin.socket_timeout.value)).read()
 				
 				#splog("SSBase response to cache: ", response) 
-				if response:
-					self.doCachePage(url, response)
+				#if response:
+				#	self.doCachePage(url, response)
 			
 			except URLError as e:
 				 # For Python 2.6
@@ -124,7 +124,7 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase):
 					splog("SSBase URLError code")
 					print e.code, e.msg, counter
 					sleep(2)
-					return self.getPage(url, counter+1)
+					return self.getPage(url, use_proxy, counter+1)
 				else:
 					splog("SSBase URLError else")
 					raise MyException("There was an URLError: %r" % e)
@@ -138,7 +138,7 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase):
 					splog("SSBase URLError code")
 					print e.code, e.msg, counter
 					sleep(2)
-					return self.getPage(url, counter+1)
+					return self.getPage(url, use_proxy, counter+1)
 				else:
 					splog("SSBase URLError else")
 					raise MyException("There was an SocketTimeout: %r" % e)

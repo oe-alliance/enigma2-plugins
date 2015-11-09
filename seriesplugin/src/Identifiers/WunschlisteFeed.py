@@ -187,7 +187,7 @@ class WunschlisteFeed(IdentifierBase):
 
 	def getSeries(self, name):
 		#url = SERIESLISTURL + urlencode({ 'q' : re.sub("[^a-zA-Z0-9-*]", " ", name) })
-		url = SERIESLISTURL + urlencode({ 'q' : name })
+		url = SERIESLISTURL + urlencode({ 'q' : name.lower() })
 		data = self.getPage( url )
 		
 		if data and isinstance(data, basestring):
@@ -278,15 +278,15 @@ class WunschlisteFeed(IdentifierBase):
 												result = CompiledRegexpEpisode.search(xepisode)
 												if result and len(result.groups()) >= 3:
 													xseason = result and result.group(2) or "1"
-													xepisode = result and result.group(3) or "0"
+													xepisode = result and result.group(3) or "1"
 												else:
 													splog("WunschlisteFeed wrong episode format", xepisode)
 													xseason = "1"
-													xepisode = "0"
+													xepisode = "1"
 											else:
 												splog("WunschlisteFeed wrong title format", xtitle)
-												xseason = "0"
-												xepisode = "0"
+												xseason = "1"
+												xepisode = "1"
 											result = CompiledRegexpAtomTitle.search(xtitle)
 											
 											if result and len(result.groups()) >= 1:

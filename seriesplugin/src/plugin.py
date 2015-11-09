@@ -28,7 +28,7 @@ from Logger import splog
 #######################################################
 # Constants
 NAME = "SeriesPlugin"
-VERSION = "3.0.1"
+VERSION = "3.1.2"
 DESCRIPTION = _("SeriesPlugin")
 SHOWINFO = _("Show series info (SP)")
 RENAMESERIES = _("Rename serie(s) (SP)")
@@ -45,7 +45,7 @@ ABOUT = "\n  " + NAME + " " + VERSION + "\n\n" \
 				+ _("  Feel free to donate. \n") \
 				+ _("  PayPal: ") + DONATE
 
-PROXY = "http://serienrecorder.lima-city.de/proxy.php?url="
+PROXY = "http://serienrecorder.lima-city.de/proxy.php"
 USER_AGENT = "Enigma2-"+NAME
 
 try:
@@ -64,6 +64,10 @@ except:
 
 WHERE_EPGMENU     = 'WHERE_EPGMENU'
 WHERE_CHANNELMENU = 'WHERE_CHANNELMENU'
+
+
+def buildURL(url):
+	return PROXY + "?device=" + DEVICE + "&version=" + VERSION + "&url=" + url
 
 
 #######################################################
@@ -92,6 +96,8 @@ config.plugins.seriesplugin.pattern_file              = ConfigText(default = "/e
 config.plugins.seriesplugin.pattern_title             = ConfigText(default = "{org:s} S{season:02d}E{episode:02d} {title:s}", fixed_size = False)
 config.plugins.seriesplugin.pattern_description       = ConfigText(default = "S{season:02d}E{episode:02d} {title:s} {org:s}", fixed_size = False)
 #config.plugins.seriesplugin.pattern_record            = ConfigText(default = "{org:s} S{season:02d}E{episode:02d} {title:s}", fixed_size = False)
+config.plugins.seriesplugin.pattern_file_directories  = ConfigText(default = "/etc/enigma2/seriesplugin_patterns_directories.json", fixed_size = False)
+config.plugins.seriesplugin.pattern_directory         = ConfigText(default = "Disabled", fixed_size = False)
 
 config.plugins.seriesplugin.replace_chars             = ConfigText(default = ":\!/\\,\(\)'\?", fixed_size = False)
 
@@ -543,7 +549,7 @@ def SPmodifyTimer(self, timer, name, shortdesc, begin, end, serviceref, eit=None
 	# Never overwrite existing names, You will lose Your series informations
 	#timer.name = name
 	# Only overwrite non existing descriptions
-	timer.description = timer.description or shortdesc
+	#timer.description = timer.description or shortdesc
 	timer.begin = int(begin)
 	timer.end = int(end)
 	timer.service_ref = ServiceReference(serviceref)
