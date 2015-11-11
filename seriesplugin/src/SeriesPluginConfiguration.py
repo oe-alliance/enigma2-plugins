@@ -318,6 +318,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 
 	# Overwrite ConfigListScreen keyCancel function
 	def keyCancel(self):
+		self.help_window_was_shown = False
 		splog("SPC keyCancel")
 		#self.seriesPlugin.resetChannels()
 		resetInstance()
