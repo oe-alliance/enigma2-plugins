@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1233 $
-$Date: 2015-09-19 21:12:22 +0200 (Sat, 19 Sep 2015) $
-$Id: plugin.py 1233 2015-09-19 19:12:22Z michael $
+$Revision: 1245 $
+$Date: 2015-11-14 13:15:54 +0100 (Sat, 14 Nov 2015) $
+$Id: plugin.py 1245 2015-11-14 12:15:54Z michael $
 '''
 
 
@@ -293,8 +293,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1233 $"[1:-2] + "\n" + 
-							"$Date: 2015-09-19 21:12:22 +0200 (Sat, 19 Sep 2015) $"[1:23] + "\n"
+							"$Revision: 1245 $"[1:-2] + "\n" + 
+							"$Date: 2015-11-14 13:15:54 +0100 (Sat, 14 Nov 2015) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -485,7 +485,7 @@ class FritzMenu(Screen, HelpableScreen):
 												"2": (lambda: self._toggleMailbox(2)),
 												"3": (lambda: self._toggleMailbox(3)),
 												"4": (lambda: self._toggleMailbox(4)),
-												"information": self._getInfo,
+												"info": self._getInfo,
 												}, -2)
 				# TRANSLATORS: keep it short, this is a help text
 				self.helpList.append((self["menuActions"], "ColorActions", [("yellow", _("Toggle all mailboxes"))]))
@@ -510,7 +510,7 @@ class FritzMenu(Screen, HelpableScreen):
 												"ok": self._exit,
 												"green": self._toggleWlan,
 												"red": self._reset,
-												"information": self._getInfo,
+												"info": self._getInfo,
 												}, -2)
 	
 			# TRANSLATORS: keep it short, this is a help text
@@ -522,7 +522,7 @@ class FritzMenu(Screen, HelpableScreen):
 			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["menuActions"], "ColorActions", [("red", _("Reset"))]))
 			# TRANSLATORS: keep it short, this is a help text
-			self.helpList.append((self["menuActions"], "EPGSelectActions", [("information", _("Refresh status"))]))
+			self.helpList.append((self["menuActions"], "EPGSelectActions", [("info", _("Refresh status"))]))
 	
 			self["FBFInfo"] = Label(_('Getting status from FRITZ!Box Fon...'))
 	
@@ -667,7 +667,7 @@ class FritzMenu(Screen, HelpableScreen):
 											"green": self._toggleWlan,
 											"yellow": self._toggleGast,
 											"red": self._reset, # no button, does not work
-											"information": self._getInfo,
+											"info": self._getInfo,
 											}, -2)
 	
 			# TRANSLATORS: keep it short, this is a help text
@@ -681,7 +681,7 @@ class FritzMenu(Screen, HelpableScreen):
 			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["menuActions"], "ColorActions", [("red", _("Reset"))]))
 			# TRANSLATORS: keep it short, this is a help text
-			self.helpList.append((self["menuActions"], "EPGSelectActions", [("information", _("Refresh status"))]))
+			self.helpList.append((self["menuActions"], "EPGSelectActions", [("info", _("Refresh status"))]))
 	
 			# TRANSLATORS: keep it short, this is a button
 			self["key_red"] = Button(_("Reset"))
@@ -1899,7 +1899,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			"cancel": self.cancel,
 			"ok": self.save,
 			"menu": self.menu,
-			"information": self.about,
+			"info": self.about,
 		}, - 2)
 
 		# TRANSLATORS: keep it short, this is a help text
@@ -1917,7 +1917,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "MenuActions", [("menu", _("FRITZ!Box Fon Status"))]))
 		# TRANSLATORS: keep it short, this is a help text
-		self.helpList.append((self["setupActions"], "EPGSelectActions", [("information", _("About FritzCall"))]))
+		self.helpList.append((self["setupActions"], "EPGSelectActions", [("info", _("About FritzCall"))]))
 
 		ConfigListScreen.__init__(self, self.list, session=session)
 
@@ -1927,7 +1927,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1233 $"[1: - 1] + "$Date: 2015-09-19 21:12:22 +0200 (Sat, 19 Sep 2015) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1245 $"[1: - 1] + "$Date: 2015-11-14 13:15:54 +0100 (Sat, 14 Nov 2015) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2456,7 +2456,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver): # pylint: disable=W0223
 	def __init__(self):
-		info("[FritzProtocol] " + "$Revision: 1233 $"[1:-1]	+ "$Date: 2015-09-19 21:12:22 +0200 (Sat, 19 Sep 2015) $"[7:23] + " starting")
+		info("[FritzProtocol] " + "$Revision: 1245 $"[1:-1]	+ "$Date: 2015-11-14 13:15:54 +0100 (Sat, 14 Nov 2015) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
