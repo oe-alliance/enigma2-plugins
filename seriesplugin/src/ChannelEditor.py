@@ -161,7 +161,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 				
 				webSender = self.lookupChannelByReference(serviceref)
 				if webSender is not False:
-					self.stbToWebChlist.append((servicename, webSender, serviceref, "1"))
+					self.stbToWebChlist.append((servicename, ' / '.join(webSender), serviceref, "1"))
 					
 				else:
 					self.stbToWebChlist.append((servicename, "", serviceref, "0"))
@@ -183,7 +183,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 				
 				webSender = self.lookupChannelByReference(serviceref)
 				if webSender is not False:
-					self.stbToWebChlist.append((servicename, webSender, serviceref, "1"))
+					self.stbToWebChlist.append((servicename, ' / '.join(webSender), serviceref, "1"))
 					
 				else:
 					if len(self.webChlist) != 0:

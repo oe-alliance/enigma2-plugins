@@ -251,7 +251,7 @@ class ChannelsBase(ChannelsFile):
 				if altname:
 					splog("SP lookupChannelByReference", altname)
 					altnames.append(altname)
-			return ' / '.join(altnames)
+			return altnames
 			
 		return False
 	

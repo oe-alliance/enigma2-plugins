@@ -18,6 +18,7 @@ from sys import maxint
 # Internal
 from Plugins.Extensions.SeriesPlugin.IdentifierBase import IdentifierBase
 from Plugins.Extensions.SeriesPlugin.Logger import splog
+from Plugins.Extensions.SeriesPlugin import _
 
 from iso8601 import parse_date
 
@@ -162,7 +163,7 @@ class Wunschliste(IdentifierBase):
 			return ( self.returnvalue or _("No matching series found") )
 
 	def getSeries(self, name):
-		#url = SERIESLISTURL + urlencode({ 'q' : re.sub("[^a-zA-Z0-9-*]", " ", name) })
+		#url = SERIESLISTURL + urlencode({ 'q' : re.sub("[^a-zA-Z0-9-*]", " ", name.lower()) })
 		url = SERIESLISTURL + urlencode({ 'q' : name.lower() })
 		data = self.getPage( url )
 		
@@ -247,19 +248,19 @@ class Wunschliste(IdentifierBase):
 										result = CompiledRegexpEpisode.search(xepisode)
 										
 										if result and len(result.groups()) >= 3:
-											xseason = result and result.group(2) or "1"
-											xepisode = result and result.group(3) or "1"
+											xseason = result and result.group(2) or config.plugins.seriesplugin.default_season.value
+											xepisode = result and result.group(3) or config.plugins.seriesplugin.default_episode.value
 										else:
-											xseason = "1"
-											xepisode = "1"
+											xseason = config.plugins.seriesplugin.default_season.value
+											xepisode = config.plugins.seriesplugin.default_episode.value
 									else:
-										xseason = "1"
-										xepisode = "1"
+										xseason = config.plugins.seriesplugin.default_season.value
+										xepisode = config.plugins.seriesplugin.default_episode.value
 								
 								elif len(tds) == 6:
 									xtitle = tds[5]
-									xseason = "1"
-									xepisode = "1"
+									xseason = config.plugins.seriesplugin.default_season.value
+									xepisode = config.plugins.seriesplugin.default_episode.value
 								
 								# Handle encodings
 								xtitle = str_to_utf8(xtitle)

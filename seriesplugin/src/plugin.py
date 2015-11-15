@@ -8,6 +8,7 @@ from time import time
 
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
+from Tools.Notifications import AddPopup
 
 # Config
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, ConfigNumber, ConfigSelection, ConfigYesNo, ConfigText, ConfigSelectionNumber
@@ -28,7 +29,7 @@ from Logger import splog
 #######################################################
 # Constants
 NAME = "SeriesPlugin"
-VERSION = "3.1.2"
+VERSION = "3.3.1"
 DESCRIPTION = _("SeriesPlugin")
 SHOWINFO = _("Show series info (SP)")
 RENAMESERIES = _("Rename serie(s) (SP)")
@@ -98,6 +99,9 @@ config.plugins.seriesplugin.pattern_description       = ConfigText(default = "S{
 #config.plugins.seriesplugin.pattern_record            = ConfigText(default = "{org:s} S{season:02d}E{episode:02d} {title:s}", fixed_size = False)
 config.plugins.seriesplugin.pattern_file_directories  = ConfigText(default = "/etc/enigma2/seriesplugin_patterns_directories.json", fixed_size = False)
 config.plugins.seriesplugin.pattern_directory         = ConfigText(default = "Disabled", fixed_size = False)
+
+config.plugins.seriesplugin.default_season            = ConfigSelectionNumber(0, 1, 1, default = 1)
+config.plugins.seriesplugin.default_episode           = ConfigSelectionNumber(0, 1, 1, default = 1)
 
 config.plugins.seriesplugin.replace_chars             = ConfigText(default = ":\!/\\,\(\)'\?", fixed_size = False)
 
@@ -252,6 +256,52 @@ def getSeasonAndEpisode(timer, name, begin, end, *args, **kwargs):
 		except Exception as e:
 			splog(_("SeriesPlugin label exception ") + str(e))
 	return result
+
+# Synchronous call, blocks until we have the information
+loop_data = []
+loop_counter = 0
+def getSeasonEpisode(service_ref, name, begin, end, description, path, *args, **kwargs):
+	result = None
+	if config.plugins.seriesplugin.enabled.value:
+		try:
+			from SeriesPlugin import getInstance, refactorTitle, refactorDescription, refactorDirectory
+			seriesPlugin = getInstance()
+			data = seriesPlugin.getEpisodeBlocking(
+				name, begin, end, service_ref, future=True
+			)
+			global loop_counter
+			loop_counter += 1
+			if data and len(data) == 4:
+				name = str(refactorTitle(name, data))
+				description = str(refactorDescription(description, data))
+				path = refactorDirectory(path, data)
+				return (name, description, path)
+			elif data:
+				global loop_data
+				loop_data.append( str(data) )
+			return str(data)
+		except Exception as e:
+			splog(_("SeriesPlugin label exception ") + str(e))
+	return result
+
+def showResult(*args, **kwargs):
+	global loop_data, loop_counter
+	if not loop_data and config.plugins.seriesplugin.timer_popups_success.value:
+		AddPopup(
+			"SeriesPlugin:\n" + _("%d timer renamed successfully") % (loop_counter),
+			MessageBox.TYPE_ERROR,
+			int(config.plugins.seriesplugin.timer_popups_timeout.value),
+			'SP_PopUp_ID_Finished'
+		)
+	elif loop_data and config.plugins.seriesplugin.timer_popups.value:
+		AddPopup(
+			"SeriesPlugin:\n" + _("SP has been finished with errors:\n") +"\n" +"\n".join(loop_data),
+			MessageBox.TYPE_ERROR,
+			int(config.plugins.seriesplugin.timer_popups_timeout.value),
+			'SP_PopUp_ID_Finished'
+		)
+	loop_data = []
+	loop_counter = 0
 
 # Call asynchronous
 def renameTimer(timer, name, begin, end, *args, **kwargs):

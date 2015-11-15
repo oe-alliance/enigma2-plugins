@@ -2,19 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SeriesPlugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-08 15:16+0100\n"
-"PO-Revision-Date: 2015-02-08 15:18+0100\n"
+"POT-Creation-Date: 2015-11-12 22:02+0100\n"
+"PO-Revision-Date: 2015-11-12 22:11+0100\n"
 "Last-Translator: James Blond <alattka@freenet.de>\n"
 "Language-Team: \n"
-"Language: German\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: D:\\0000000_VUplus\\oe22\n"
 
 msgid "Channel Editor"
 msgstr "Kanal Editor"
@@ -67,8 +64,8 @@ msgstr "Fehler überprüfe Protokoll Datei"
 msgid "Channel matching..."
 msgstr "Kanalübereinstimmung..."
 
-msgid "Web-Channel / STB-Channels."
-msgstr "Web-Kanal / STB-Kanäle."
+msgid "STB-Channels / Web-Channel"
+msgstr "STB-Kanäle / Web-Kanal"
 
 msgid "Add Web Channel"
 msgstr "Web Kanal zufügen"
@@ -98,61 +95,41 @@ msgstr "Kanalliste zurücksetzen?"
 msgid "Don't edit this manually unless you really know what you are doing"
 msgstr "Bitte nicht manuell verändern wenn Du nicht wirkich weisst was du tust"
 
-msgid "SeriesPlugin"
-msgstr "SeriesPlugin"
+msgid "FS: Skip Fernsehserien: No show name specified"
+msgstr "FS: überspringe Fernsehserien: kein Sendungsnamen angegeben"
 
-msgid "Show series info (SP)"
-msgstr "Serien-Info anzeigen (SP)"
+msgid "Skip Fernsehserien: No show name specified"
+msgstr "überspringe Fernsehserien: kein Sendungsnamen angegeben"
 
-msgid "Rename serie(s) (SP)"
-msgstr "Serie(n) umbenennen (SP)"
+msgid "FS: Skip Fernsehserien: No begin timestamp specified"
+msgstr "FS: überspringe Fernsehserien: keine Anfangszeit angegeben"
 
-msgid "Check timer list for series (SP)"
-msgstr "Timerliste auf Serien überprüfen (SP)"
+msgid "Skip Fernsehserien: No begin timestamp specified"
+msgstr "überspringe Fernsehserien: keine Anfangszeit angegeben"
 
-msgid ""
-"  (C) 2012 by betonme @ IHAD \n"
-"\n"
-msgstr ""
-"  (C) 2012 von betonme @ IHAD \n"
-"\n"
+msgid "No matching series found"
+msgstr "kein Treffer für Serie gefunden"
 
-msgid "  {lookups:d} successful lookups.\n"
-msgstr "  {lookups:d} Erfolgreiche Treffer.\n"
+msgid "Check the channel name"
+msgstr "überprüfe den Kanalnamen"
 
-msgid ""
-"  How much time have You saved?\n"
-"\n"
-msgstr ""
-"  Wieviel Zeit hast Du gespart?\n"
-"\n"
+msgid "Error install python_xmlrpclib"
+msgstr "Fehler installiere python_xmlrpclib"
 
-msgid "  Support: "
-msgstr "  Unterstützung: "
+msgid "Skip SerienServer: No show name specified"
+msgstr "überspringe SerienServer: kein Sendungsnamen angegeben"
 
-msgid "  Feel free to donate. \n"
-msgstr "  Eine Spende steht dir frei. \n"
+msgid "Skip SerienServer: No begin timestamp specified"
+msgstr "überspringe SerienServer: keine Anfangszeit angegeben"
 
-msgid "  PayPal: "
-msgstr "  PayPal: "
+msgid "Skip SerienServer: No service specified"
+msgstr "überspringe SerienServer: kein Service angegeben"
 
-msgid "SeriesPlugin setup exception "
-msgstr "SeriesPlugin Ausnahme Einstellungen"
+msgid "Skip Wunschliste: No show name specified"
+msgstr "überspringe Wunschliste: kein Sendungsnamen angegeben"
 
-msgid "SeriesPlugin info exception "
-msgstr "SeriesPlugin Ausnahme Information"
-
-msgid "SeriesPlugin extension exception "
-msgstr "SeriesPlugin Ausnahme Erweiterung"
-
-msgid "SeriesPlugin renamer exception "
-msgstr "SeriesPlugin Ausnahme umbenennen"
-
-msgid "SeriesPlugin label exception "
-msgstr "SeriesPlugin Ausnahme Beschriftung"
-
-msgid "Setup"
-msgstr "Einstellungen"
+msgid "Skip Wunschliste: No begin timestamp specified"
+msgstr "überspringe Wunschliste: keine Anfangszeit angegeben"
 
 msgid "Configuration"
 msgstr "Konfiguration"
@@ -188,22 +165,28 @@ msgid "Check timer list from extension menu"
 msgstr "Timerliste aus  dem erweiterten Menü überprüfen"
 
 msgid "Select identifier for elapsed events"
-msgstr "Kennung für abgelaufende Sendung(en) auswählen"
+msgstr "Quelle für abgelaufende Sendung(en) auswählen"
 
 msgid "Select identifier for today events"
-msgstr "Kennung für heutige Sendung(en) auswählen"
+msgstr "Quelle für heutige Sendung(en) auswählen"
 
 msgid "Select identifier for future events"
-msgstr "Kennung für zukünftige Sendung(en) auswählen"
+msgstr "Quelle für zukünftige Sendung(en) auswählen"
 
 msgid "Episode pattern file"
-msgstr "Eigene Episoden Erweiterung"
+msgstr "Episoden Vorlage Datei"
 
 msgid "Record title episode pattern"
-msgstr "Episoden Erweiterung für den Aufnahmetitel"
+msgstr "Episoden Vorlage für den Aufnahmetitel"
 
 msgid "Record description episode pattern"
-msgstr "Aufnahmebeschreibung Episoden Erweiterung"
+msgstr "Aufnahmebeschreibung Episoden Vorlage"
+
+msgid "Directory pattern file"
+msgstr "Verzeichnis Vorlage"
+
+msgid "Record directory pattern"
+msgstr "Aufnahme Verzeichnis Vorlage"
 
 msgid "Skip search if pattern matches"
 msgstr "Suche überspringen wenn Vorlage übereinstimmt"
@@ -236,7 +219,7 @@ msgid "Show success after Record renaming"
 msgstr "Erfolgreiches umbenennen von Aufnahme(n) anzeigen (Popup)"
 
 msgid "Timeout for Rename Popup"
-msgstr "Anzeigedauer Popup Umbenennen"
+msgstr "Anzeigedauer Umbenennen Popup"
 
 msgid "Max time drift to match episode"
 msgstr "Maximale Zeitabweichung um Folge(n) zu erkennen"
@@ -263,13 +246,16 @@ msgid "Show success after Timer handling"
 msgstr "Fehlerfreie Timerverarbeitung anzeigen (Popup)"
 
 msgid "Timeout for Timer Popup"
-msgstr "Anzeigedauer Popup Timer"
+msgstr "Anzeigedauer Timer Popup"
 
 msgid "Use local caching"
-msgstr "Lokales Zwischenspeichern verwenden"
+msgstr "verwende lokales Zwischenspeichern"
 
-msgid "Allow Google Analytics"
-msgstr "Google Analytics erlauben"
+msgid "Cache expires after x hours"
+msgstr "Cache  wird ungültig nach x Stunden"
+
+msgid "Socket timeout"
+msgstr "Zeitlimt für Anfragen zum Proxy (Sekunden)"
 
 msgid "E2: Composition of the recording filenames"
 msgstr "E2: Dateinamen-Zusammensetzung der Aufnahmen"
@@ -284,7 +270,10 @@ msgid "AT: Poll Interval (in h)"
 msgstr "AutoTimer: Poll Abfrage (in Stunden)"
 
 msgid "AT: Timeout (in min)"
-msgstr "Autotimer: Timeout (in Minuten)"
+msgstr "Autotimer: Zeitlimit (in Minuten)"
+
+msgid "Debug: Print debug messages (Shell)"
+msgstr "Debug: drucke Debug Nachrichten (Shell)"
 
 msgid "Debug: Write Log"
 msgstr "Debug: Protokolldatei erstellen"
@@ -293,7 +282,7 @@ msgid "Debug: Log file path"
 msgstr "Debug: Protokolldatei Pfad"
 
 msgid "Debug: Forum user name"
-msgstr "Debug: Benutzername Forum"
+msgstr "Debug: Forum Benutzername"
 
 msgid "Debug: User mail address"
 msgstr "Debug: Benutzer Mail Adresse"
@@ -335,7 +324,7 @@ msgstr ""
 "{title:s}"
 
 msgid "No matching episode found"
-msgstr "Kein Treffer für Folge gefunden"
+msgstr "kein Treffer für Folge gefunden"
 
 #, python-format
 msgid "%d min"
@@ -393,40 +382,67 @@ msgstr ""
 "Beenden?"
 
 msgid "No log file found"
-msgstr "Protokolldatei nicht gefunden"
+msgstr "Keine Protokolldatei gefunden"
 
-#~ msgid "Error: No identifier"
-#~ msgstr "Fehler: keine Kennzeichnung"
+msgid "SeriesPlugin"
+msgstr "SeriesPlugin"
 
-#~ msgid "Reset"
-#~ msgstr "Zurücksetzen"
+msgid "Show series info (SP)"
+msgstr "Serien-Info anzeigen (SP)"
 
-#~ msgid "SeriesPlugin getPage exception "
-#~ msgstr "SeriesPlugin Seiternaufruf Ausnahmefehler"
+msgid "Rename serie(s) (SP)"
+msgstr "Serie(n) umbenennen (SP)"
 
-#~ msgid "SeriesPlugin base_callback exception "
-#~ msgstr "SeriesPlugin base_callback Ausnahme"
+msgid "Check timer list for series (SP)"
+msgstr "Timerliste auf Serien überprüfen (SP)"
 
-#~ msgid "Enable Logging"
-#~ msgstr "Protokollieren aktivieren"
+msgid ""
+"  (C) 2012 by betonme @ IHAD \n"
+"\n"
+msgstr ""
+"  (C) 2012 von betonme @ IHAD \n"
+"\n"
 
-#~ msgid "Enter user name or user mail"
-#~ msgstr "Benutzernamen oder E-Mail eingeben"
+msgid "  Terms: "
+msgstr "  Bedingungen: "
 
-#~ msgid ""
-#~ "I've to spend my free time for this support!\n"
-#~ "\n"
-#~ msgstr ""
-#~ "In diesem Projekt steckt viel Freizeit! \n"
-#~ "\n"
+#, python-brace-format
+msgid "  {lookups:d} successful lookups.\n"
+msgstr "  {lookups:d} Erfolgreiche Treffer.\n"
 
-#~ msgid "Have You already checked the problem list:\n"
-#~ msgstr "Hast du die Problemliste überprüft: \n"
+msgid ""
+"  How much time have You saved?\n"
+"\n"
+msgstr ""
+"  Wieviel Zeit hast Du gespart?\n"
+"\n"
 
-#~ msgid ""
-#~ "Is the information available at Wunschliste.de / Fernsehserien.de? \n"
-#~ msgstr ""
-#~ "Ist die Information auf Wunschliste.de / Fernsehserien.de verfügbar? \n"
+msgid "  Support: "
+msgstr "  Unterstützung: "
 
-#~ msgid "Does the start time match? \n"
-#~ msgstr "Stimmt die Startzeit überein? \n"
+msgid "  Feel free to donate. \n"
+msgstr "  Eine Spende steht dir frei. \n"
+
+msgid "  PayPal: "
+msgstr "  PayPal: "
+
+msgid "SeriesPlugin setup exception "
+msgstr "SeriesPlugin Ausnahme Einstellungen"
+
+msgid "SeriesPlugin info exception "
+msgstr "SeriesPlugin Ausnahme Information"
+
+msgid "SeriesPlugin extension exception "
+msgstr "SeriesPlugin Ausnahme Erweiterung"
+
+msgid "SeriesPlugin renamer exception "
+msgstr "SeriesPlugin Ausnahme Umbenennen"
+
+msgid "SeriesPlugin label exception "
+msgstr "SeriesPlugin Ausnahme Beschriftung"
+
+msgid "SP has been finished with errors:\n"
+msgstr "SP ist beendet worden mit Fehlern:\n"
+
+msgid "Setup"
+msgstr "Einstellungen"

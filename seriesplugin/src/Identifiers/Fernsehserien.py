@@ -21,6 +21,7 @@ from datetime import datetime, timedelta
 # Internal
 from Plugins.Extensions.SeriesPlugin.IdentifierBase import IdentifierBase
 from Plugins.Extensions.SeriesPlugin.Logger import splog
+from Plugins.Extensions.SeriesPlugin import _
 
 from bs4 import BeautifulSoup
 from HTMLParser import HTMLParser
@@ -403,7 +404,7 @@ class Fernsehserien(IdentifierBase):
 										splog( "FS: tds", len(tds), tds )
 										if len(tds) >= 10:
 											# Second part: s1e1, s1e2,
-											xseason = tds[COL_SEASON] or "1"
+											xseason = tds[COL_SEASON] or config.plugins.seriesplugin.default_season.value
 											xepisode = tds[COL_EPISODE]
 											xtitle = tds[COL_TITLE]
 										elif len(tds) >= 7:
@@ -413,13 +414,13 @@ class Fernsehserien(IdentifierBase):
 											xepisode = tds[5]
 											if xseason and xseason.find(".") != -1:
 												xseason = xseason[:-1]
-												xtitle = tds[6]
+												xtitle = tds[6] or config.plugins.seriesplugin.default_episode.value
 											else:
-												xseason = "1"
-												xtitle = tds[6]
+												xseason = config.plugins.seriesplugin.default_season.value
+												xtitle = tds[6] or config.plugins.seriesplugin.default_episode.value
 										elif len(tds) == 6:
-											xseason = "1"
-											xepisode = "1"
+											xseason = config.plugins.seriesplugin.default_season.value
+											xepisode = config.plugins.seriesplugin.default_episode.value
 											xtitle = tds[5]
 										if xseason and xepisode and xtitle and self.series:
 										

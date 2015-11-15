@@ -18,6 +18,7 @@ from sys import maxint
 # Internal
 from Plugins.Extensions.SeriesPlugin.IdentifierBase import IdentifierBase
 from Plugins.Extensions.SeriesPlugin.Logger import splog
+from Plugins.Extensions.SeriesPlugin import _
 
 from iso8601 import parse_date
 
@@ -277,16 +278,16 @@ class WunschlisteFeed(IdentifierBase):
 												
 												result = CompiledRegexpEpisode.search(xepisode)
 												if result and len(result.groups()) >= 3:
-													xseason = result and result.group(2) or "1"
-													xepisode = result and result.group(3) or "1"
+													xseason = result and result.group(2) or config.plugins.seriesplugin.default_season.value
+													xepisode = result and result.group(3) or config.plugins.seriesplugin.default_episode.value
 												else:
 													splog("WunschlisteFeed wrong episode format", xepisode)
-													xseason = "1"
-													xepisode = "1"
+													xseason = config.plugins.seriesplugin.default_season.value
+													xepisode = config.plugins.seriesplugin.default_episode.value
 											else:
 												splog("WunschlisteFeed wrong title format", xtitle)
-												xseason = "1"
-												xepisode = "1"
+												xseason = config.plugins.seriesplugin.default_season.value
+												xepisode = config.plugins.seriesplugin.default_episode.value
 											result = CompiledRegexpAtomTitle.search(xtitle)
 											
 											if result and len(result.groups()) >= 1:

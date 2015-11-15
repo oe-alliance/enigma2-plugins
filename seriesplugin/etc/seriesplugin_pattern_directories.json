@@ -1,0 +1,12 @@
+[
+	[
+		[ " SeriesPlugin " ],
+		[ " List of directory patterns in JSON notation " ],
+		[ " String printf pattern                        , Setup entry " ]
+	],
+	[
+		["Off"                                           , "Disabled"],
+		
+		["{org:s}\{series:s}\S{season:02d}"              , "Series\Season S01E01"],
+	]
+]
