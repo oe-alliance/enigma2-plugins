@@ -81,7 +81,7 @@ msgstr "Verbleibende Anzahl Aufnahmen"
 msgid "Any service/recording"
 msgstr "Jeder Sender / jede Aufnahme"
 
-msgid "Any time"
+msgid "  Any time"
 msgstr "Jede Zeit"
 
 msgid "Auto Timers"
