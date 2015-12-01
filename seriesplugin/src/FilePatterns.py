@@ -27,7 +27,7 @@ import os
 import json
 
 # Plugin internal
-from Logger import splog
+from Logger import logDebug
 
 
 scheme_fallback = [
@@ -52,14 +52,14 @@ def readFilePatterns():
 	patterns = None
 	
 	if os.path.exists(path):
-		splog("[SeriesPlugin] Found pattern file")
+		logDebug("[SeriesPlugin] Found pattern file")
 		f = None
 		try:
 			f = open(path, 'rb')
 			header, patterns = json.load(f)
 			patterns = [tuple(p) for p in patterns]
 		except Exception as e:
-			splog("[SeriesPlugin] Exception in readFilePatterns: " + str(e))
+			logDebug("[SeriesPlugin] Exception in readFilePatterns: " + str(e))
 		finally:
 			if f is not None:
 				f.close()

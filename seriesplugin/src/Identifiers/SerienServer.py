@@ -15,7 +15,7 @@ import re
 
 # Internal
 from Plugins.Extensions.SeriesPlugin.IdentifierBase import IdentifierBase
-from Plugins.Extensions.SeriesPlugin.Logger import splog
+from Plugins.Extensions.SeriesPlugin.Logger import logDebug, logInfo
 from Plugins.Extensions.SeriesPlugin import _
 
 # Constants
@@ -33,7 +33,7 @@ class SerienServer(IdentifierBase):
 		
 		# Check dependencies
 		if xmlrpclib is not None:
-			self.server = xmlrpclib.ServerProxy(SERIEN_SERVER_URL, verbose=True)
+			self.server = xmlrpclib.ServerProxy(SERIEN_SERVER_URL, verbose=False)
 
 	@classmethod
 	def knowsElapsed(cls):
@@ -50,7 +50,7 @@ class SerienServer(IdentifierBase):
 	def getEpisode(self, name, begin, end=None, service=None):
 		# On Success: Return a single season, episode, title tuple
 		# On Failure: Return a empty list or String or None
-		splog("SerienServer getEpisode")
+		logDebug("SerienServer getEpisode")
 		
 		self.name = name
 		self.begin = begin
@@ -62,69 +62,40 @@ class SerienServer(IdentifierBase):
 		
 		# Check dependencies
 		if xmlrpclib is None:
-			splog(_("Error install python_xmlrpclib"))
-			return _("Error install python_xmlrpclib")
+			logInfo(_("Error install")  + " python-xmlrpclib")
+			return _("Error install") + " python-xmlrpclib"
 		
 		
 		# Check preconditions
 		if not name:
-			splog(_("Skip SerienServer: No show name specified"))
+			logInfo(_("Skip SerienServer: No show name specified"))
 			return _("Skip SerienServer: No show name specified")
 		if not begin:
-			splog(_("Skip SerienServer: No begin timestamp specified"))
+			logInfo(_("Skip SerienServer: No begin timestamp specified"))
 			return _("Skip SerienServer: No begin timestamp specified")
 		if not service:
-			splog(_("Skip SerienServer: No service specified"))
+			logInfo(_("Skip SerienServer: No service specified"))
 			return _("Skip SerienServer: No service specified")
 		
+		logInfo("SerienServer getEpisode, name, begin, end=None, service", name, begin, end, service)
 		
 		# Prepare parameters
 		name = re.sub("[^a-zA-Z0-9-*]", " ", name.lower())
 		webChannels = self.lookupChannelByReference(service)
-		unixtime = str(mktime(begin.timetuple()))
-		
+		unixtime = str(int(mktime(begin.timetuple())))
 		
 		# Lookup
-		while name:	
+		for webChannel in webChannels:
+			logInfo("SerienServer getSeasonEpisode():", idname, webChannel, unixtime)
 			
-			#ids = self.getSeries(name)
-			#while ids:
-			#	idserie = ids.pop()
-			#	if idserie and len(idserie) == 2:
-			#		id, idname = idserie
+			result = self.server.sp.cache.getSeasonEpisode( idname, webChannel, unixtime, self.max_time_drift )
+			logDebug("SerienServer getSeasonEpisode result:", result)
 			
-			idname = name
-			for webChannel in webChannels:
-				splog("SerienServer getSeasonEpisode():", idname, webChannel, unixtime)
-				
-				result = self.server.sp.cache.getSeasonEpisode( idname, webChannel, unixtime )
-				splog("SerienServer getSeasonEpisode result:", result)
-				
-				if result:
-					self.series = result['series']
-					yepisode = ( result['season'], result['episode'], result['title'], result['series'] )
-					if yepisode:
-						return ( yepisode )
+			if result:
+				return ( result['season'], result['episode'], result['title'], result['series'] )
 
-			else:
-				name = self.getAlternativeSeries(name)
-		
 		else:
 			if unixtime < time():
 				return ( _("Please try Fernsehserien.de") )
 			else:
 				return ( _("No matching series found") )
-
-#	def getSeries(self, name):
-#		#url = SERIESLISTURL + urlencode({ 'q' : re.sub("[^a-zA-Z0-9-*]", " ", name.lower()) })
-#		url = SERIESLISTURL + urlencode({ 'q' : name.lower() }
-#		data = self.getPage( url, False )
-#		
-#		if data and isinstance(data, basestring):
-#			#id, calue = data
-#			#data = json.loads(data).values()
-#			data = list(reversed( json.loads(data).values() ) )
-#		
-#		if data and isinstance(data, list):
-#			splog("WunschlistePrint ids", data)
-#			return self.filterKnownIds(data)

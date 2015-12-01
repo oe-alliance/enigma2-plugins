@@ -22,12 +22,16 @@ from time import time
 
 from Components.config import *
 
-from Logger import splog
+from Logger import logDebug
 
 
 # Global cache
 # Do we have to cleanup it
 cache = {}
+
+def clearCache():
+	global cache
+	cache = {}
 
 
 class Cacher(object):
@@ -60,7 +64,7 @@ class Cacher(object):
 			# Woooohooo it is, elapsed_time is less than INTER_QUERY_TIME so I
 			# can get the page from the memory, recent enough
 			if elapsed_time < self.expiration:
-				#splog("####SPCACHE GET ", already_got)
+				#logDebug("####SPCACHE GET ", already_got)
 				return already_got[1]
 			
 			else:	
@@ -77,13 +81,21 @@ class Cacher(object):
 	def doCachePage(self, url, page):
 		global cache
 		
+		if not page:
+			return
+			
 		if not config.plugins.seriesplugin.caching.value:
 			return
+		
 		cache[url] = ( time(), page )
 
 	def doCacheList(self, url, list):
 		global cache
 		
+		if not list:
+			return
+		
 		if not config.plugins.seriesplugin.caching.value:
 			return
+		
 		cache[url] = ( time(), list )

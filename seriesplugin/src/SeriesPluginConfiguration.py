@@ -43,7 +43,7 @@ from SeriesPlugin import resetInstance, getInstance
 from SeriesPluginIndependent import startIndependent, stopIndependent
 from FilePatterns import readFilePatterns
 from DirectoryPatterns import readDirectoryPatterns
-from Logger import splog
+from Logger import logDebug
 from ShowLogScreen import ShowLogScreen
 from Channels import getTVBouquets
 from ChannelEditor import ChannelEditor
@@ -201,6 +201,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 				self.list.append( getConfigListEntry(  _("Check timer every x minutes")            , config.plugins.seriesplugin.independent_cycle ) )
 				self.list.append( getConfigListEntry(  _("Always retry to find series info")       , config.plugins.seriesplugin.independent_retry ) )
 			
+			self.list.append( getConfigListEntry(  _("Check Timer for corresponding EPG events")   , config.plugins.seriesplugin.timer_eit_check ) )
 			self.list.append( getConfigListEntry(  _("Show warnings after Timer handling")         , config.plugins.seriesplugin.timer_popups ) )
 			self.list.append( getConfigListEntry(  _("Show success after Timer handling")          , config.plugins.seriesplugin.timer_popups_success ) )
 			if (-1 < config.plugins.seriesplugin.timer_popups.value) or (-1 < config.plugins.seriesplugin.timer_popups_success.value):
@@ -322,7 +323,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 	# Overwrite ConfigListScreen keyCancel function
 	def keyCancel(self):
 		self.help_window_was_shown = False
-		splog("SPC keyCancel")
+		logDebug("SPC keyCancel")
 		#self.seriesPlugin.resetChannels()
 		resetInstance()
 		if self["config"].isChanged() or self.changesMade:
@@ -363,7 +364,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		self.session.openWithCallback(self.channelEditorClosed, ChannelEditor, )
 
 	def channelEditorClosed(self, result=None):
-		splog("SPC channelEditorClosed", result)
+		logDebug("SPC channelEditorClosed", result)
 		if result:
 			self.changesMade = True
 		else:

@@ -36,7 +36,7 @@ from Tools.XMLTools import stringToXML
 
 # Plugin internal
 from . import _
-from Logger import splog
+from Logger import logDebug
 
 try:
 	#Python >= 2.7
@@ -103,9 +103,9 @@ def buildSTBchannellist(BouquetName = None):
 	chlist = None
 	chlist = []
 	mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
-	splog("SPC: read STB Channellist..")
+	logDebug("SPC: read STB Channellist..")
 	tvbouquets = getTVBouquets()
-	splog("SPC: found %s bouquet: %s" % (len(tvbouquets), tvbouquets) )
+	logDebug("SPC: found %s bouquet: %s" % (len(tvbouquets), tvbouquets) )
 
 	if not BouquetName:
 		for bouquet in tvbouquets:
@@ -147,7 +147,7 @@ class ChannelsFile(object):
 		
 		# Abort if no config found
 		if not os.path.exists(path):
-			splog("No configuration file present")
+			logDebug("No configuration file present")
 			return None
 		
 		# Parse if mtime differs from whats saved
@@ -156,13 +156,13 @@ class ChannelsFile(object):
 			# No changes in configuration, won't read again
 			return ChannelsFile.cache
 		
-		splog("SP readXML channels")
+		logDebug("SP readXML channels")
 		
 		# Parse XML
 		try:
 			etree = parse(path).getroot()
 		except Exception as e:
-			splog("Exception in readXML: " + str(e))
+			logDebug("Exception in readXML: " + str(e))
 			etree = None
 			mtime = -1
 		
@@ -192,7 +192,7 @@ class ChannelsFile(object):
 		indent(etree)
 		data = tostring(etree, 'utf-8')
 		
-		splog("SP writeXML channels")
+		logDebug("SP writeXML channels")
 		
 		f = None
 		try:
@@ -200,7 +200,7 @@ class ChannelsFile(object):
 			if data:
 				f.writelines(data)
 		except Exception as e:
-			splog("Exception in writeXML: " + str(e))
+			logDebug("Exception in writeXML: " + str(e))
 		finally:
 			if f is not None:
 				f.close()
@@ -233,7 +233,7 @@ class ChannelsBase(ChannelsFile):
 	# Channel handling
 	#
 	def compareChannels(self, ref, remote):
-		splog("SP compareChannels", ref, remote)
+		logDebug("SP compareChannels", ref, remote)
 		remote = remote.lower()
 		if ref in ChannelsBase.channels:
 			( name, alternatives ) = ChannelsBase.channels[ref]
@@ -249,14 +249,14 @@ class ChannelsBase(ChannelsFile):
 			altnames = []
 			for altname in alternatives:
 				if altname:
-					splog("SP lookupChannelByReference", altname)
+					logDebug("SP lookupChannelByReference", altname)
 					altnames.append(altname)
 			return altnames
 			
 		return False
 	
 	def addChannel(self, ref, name, remote):
-		splog("SP addChannel name remote", name, remote)
+		logDebug("SP addChannel name remote", name, remote)
 		
 		if ref in ChannelsBase.channels:
 			( name, alternatives ) = ChannelsBase.channels[ref]
@@ -268,7 +268,7 @@ class ChannelsBase(ChannelsFile):
 		ChannelsBase.channels_changed = True
 	
 	def replaceChannel(self, ref, name, remote):
-		splog("SP addChannel name remote", name, remote)
+		logDebug("SP addChannel name remote", name, remote)
 		
 		ChannelsBase.channels[ref] = ( name, [remote] )
 		ChannelsBase.channels_changed = True
@@ -293,7 +293,7 @@ class ChannelsBase(ChannelsFile):
 					channels = {}
 					version = root.get("version", "1")
 					if version.startswith("1"):
-						splog("loadXML channels - Skip old file")
+						logDebug("loadXML channels - Skip old file")
 					else:
 						if root:
 							for element in root.findall("Channel"):
@@ -307,13 +307,13 @@ class ChannelsBase(ChannelsFile):
 					return channels
 				
 				channels = parse( root )
-				#splog("loadXML channels", channels)
-				splog("SP loadXML channels", len(channels))
+				#logDebug("loadXML channels", channels)
+				logDebug("SP loadXML channels", len(channels))
 			else:
 				channels = {}
 			ChannelsBase.channels = channels
 		except Exception as e:
-			splog("Exception in loadXML: " + str(e))
+			logDebug("Exception in loadXML: " + str(e))
 
 	def saveXML(self):
 		try:
@@ -325,8 +325,8 @@ class ChannelsBase(ChannelsFile):
 				
 				# Generate List in RAM
 				root = None
-				#splog("saveXML channels", channels)
-				splog("SP saveXML channels", len(channels))
+				#logDebug("saveXML channels", channels)
+				logDebug("SP saveXML channels", len(channels))
 				
 				# Build Header
 				from plugin import NAME, VERSION
@@ -351,4 +351,4 @@ class ChannelsBase(ChannelsFile):
 				
 				self.writeXML( root )
 		except Exception as e:
-			splog("Exception in writeXML: " + str(e))
+			logDebug("Exception in writeXML: " + str(e))

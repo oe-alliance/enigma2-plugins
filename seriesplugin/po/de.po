@@ -2,16 +2,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SeriesPlugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-12 22:02+0100\n"
-"PO-Revision-Date: 2015-11-12 22:11+0100\n"
-"Last-Translator: James Blond <alattka@freenet.de>\n"
+"POT-Creation-Date: 2015-11-23 19:58+0100\n"
+"PO-Revision-Date: 2015-11-23 20:08+0100\n"
+"Last-Translator: James Blond <jb@unknown.com>\n"
 "Language-Team: \n"
-"Language: de\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Channel Editor"
 msgstr "Kanal Editor"
@@ -70,22 +72,18 @@ msgstr "STB-Kanäle / Web-Kanal"
 msgid "Add Web Channel"
 msgstr "Web Kanal zufügen"
 
-#, python-format
 msgid "Channel '- %(servicename)s - %(remote)s -' added."
 msgstr "Kanal '- %(servicename)s - %(remote)s -' hinzugefügt."
 
 msgid "Add channel (Yes) or replace it (No)"
 msgstr "Kanal anfügen (Ja) oder entfernen (Nein)"
 
-#, python-format
 msgid "Channel '- %(servicename)s - %(remote)s -' replaced."
 msgstr "Kanal '- %(servicename)s - %(remote)s -' entfernt."
 
-#, python-format
 msgid "Remove '%s'?"
 msgstr "Entfernen '%s'?"
 
-#, python-format
 msgid "Channel '- %s -' removed."
 msgstr "Kanal '- %s -' entfernt."
 
@@ -113,8 +111,8 @@ msgstr "kein Treffer für Serie gefunden"
 msgid "Check the channel name"
 msgstr "überprüfe den Kanalnamen"
 
-msgid "Error install python_xmlrpclib"
-msgstr "Fehler installiere python_xmlrpclib"
+msgid "Error install"
+msgstr "Fehler Installation"
 
 msgid "Skip SerienServer: No show name specified"
 msgstr "überspringe SerienServer: kein Sendungsnamen angegeben"
@@ -124,6 +122,9 @@ msgstr "überspringe SerienServer: keine Anfangszeit angegeben"
 
 msgid "Skip SerienServer: No service specified"
 msgstr "überspringe SerienServer: kein Service angegeben"
+
+msgid "Please try Fernsehserien.de"
+msgstr "Bitte verwende Fernsehserien.de"
 
 msgid "Skip Wunschliste: No show name specified"
 msgstr "überspringe Wunschliste: kein Sendungsnamen angegeben"
@@ -188,8 +189,11 @@ msgstr "Verzeichnis Vorlage"
 msgid "Record directory pattern"
 msgstr "Aufnahme Verzeichnis Vorlage"
 
-msgid "Skip search if pattern matches"
-msgstr "Suche überspringen wenn Vorlage übereinstimmt"
+msgid "Default season"
+msgstr "Voreingestellte Staffel"
+
+msgid "Default episode"
+msgstr "Voreingestellte Folge"
 
 msgid "Replace special characters in title"
 msgstr "Sonderzeichen im Titel ersetzen"
@@ -227,6 +231,9 @@ msgstr "Maximale Zeitabweichung um Folge(n) zu erkennen"
 msgid "Title search depths"
 msgstr "Titel Suchtiefe"
 
+msgid "Skip search if pattern matches"
+msgstr "Suche überspringen wenn Vorlage übereinstimmt"
+
 msgid "Skip search during records"
 msgstr "Suche während einer Aufnahme überspringen"
 
@@ -238,6 +245,9 @@ msgstr "Timer alle X Minuten überprüfen"
 
 msgid "Always retry to find series info"
 msgstr "Immer erneut versuchen Serien-Infos zu finden"
+
+msgid "Check Timer for corresponding EPG events"
+msgstr "überprüfe Timer für entsprechenden EPG Eintrag"
 
 msgid "Show warnings after Timer handling"
 msgstr "Fehlermeldung nach Timerverarbeitung anzeigen (Popup)"
@@ -326,7 +336,6 @@ msgstr ""
 msgid "No matching episode found"
 msgstr "kein Treffer für Folge gefunden"
 
-#, python-format
 msgid "%d min"
 msgstr "%d Min."
 
@@ -342,29 +351,24 @@ msgstr "Erfolgreich umbenannt"
 msgid "Renaming failed"
 msgstr "Umbenennen gescheitert"
 
-#, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Möchtest Du wirklich %s löschen?"
 
 msgid "Do You want to start renaming?"
 msgstr "Möchtest Du das Umbenennen beginnen?"
 
-#, python-format
 msgid "Record rename has been finished with %d errors:\n"
 msgstr "Aufnahme umbenennen wurde beendet mit %d Fehler:\n"
 
-#, python-format
 msgid "%d records renamed successfully"
 msgstr "%d Aufnahmen erfolgreich umbenannt"
 
 msgid "No data available"
 msgstr "Keine Daten vorhanden"
 
-#, python-format
 msgid "Timer rename has been finished with %d errors:\n"
 msgstr "Timer umbenennen wurde beendet mit %d Fehler:\n"
 
-#, python-format
 msgid "%d timer renamed successfully"
 msgstr "%d Timer erfolgreich umbenannt"
 
@@ -406,7 +410,6 @@ msgstr ""
 msgid "  Terms: "
 msgstr "  Bedingungen: "
 
-#, python-brace-format
 msgid "  {lookups:d} successful lookups.\n"
 msgstr "  {lookups:d} Erfolgreiche Treffer.\n"
 
@@ -442,7 +445,7 @@ msgid "SeriesPlugin label exception "
 msgstr "SeriesPlugin Ausnahme Beschriftung"
 
 msgid "SP has been finished with errors:\n"
-msgstr "SP ist beendet worden mit Fehlern:\n"
+msgstr "SP ist beendet mit Fehlern:\n"
 
 msgid "Setup"
 msgstr "Einstellungen"

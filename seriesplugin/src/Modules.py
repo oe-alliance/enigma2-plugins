@@ -26,7 +26,7 @@ import imp, inspect
 
 # Plugin internal
 from . import _
-from Logger import splog
+from Logger import logDebug
 from IdentifierBase import IdentifierBase
 
 # Constants
@@ -37,7 +37,7 @@ class Modules(object):
 
 	def __init__(self):
 		self.modules = self.loadModules(IDENTIFIER_PATH, IdentifierBase)
-		splog("SP Modules:", self.modules)
+		logDebug("SP Modules:", self.modules)
 
 	#######################################################
 	# Module functions
@@ -45,7 +45,7 @@ class Modules(object):
 		modules = {}
 		
 		if not os.path.exists(path):
-			splog("[SP Modules]: Error: Path doesn't exist: " + path)
+			logDebug("[SP Modules]: Error: Path doesn't exist: " + path)
 			return
 		
 		# Import all subfolders to allow relative imports
@@ -55,10 +55,10 @@ class Modules(object):
 		
 		# List files
 		files = [fname[:-3] for fname in os.listdir(path) if fname.endswith(".py") and not fname.startswith("__")]
-		splog(files)
+		logDebug(files)
 		if not files:
 			files = [fname[:-4] for fname in os.listdir(path) if fname.endswith(".pyo")]
-			splog(files)
+			logDebug(files)
 		
 		# Import modules
 		for name in files:
@@ -70,39 +70,39 @@ class Modules(object):
 			try:
 				fp, pathname, description = imp.find_module(name, [path])
 			except Exception as e:
-				splog("[SP Modules] Find module exception: " + str(e))
+				logDebug("[SP Modules] Find module exception: " + str(e))
 				fp = None
 			
 			if not fp:
-				splog("[SP Modules] No module found: " + str(name))
+				logDebug("[SP Modules] No module found: " + str(name))
 				continue
 			
 			try:
 				module = imp.load_module( name, fp, pathname, description)
 			except Exception as e:
-				splog("[SP Modules] Load exception: " + str(e))
+				logDebug("[SP Modules] Load exception: " + str(e))
 			finally:
 				# Since we may exit via an exception, close fp explicitly.
 				if fp: fp.close()
 			
 			if not module:
-				splog("[SP Modules] No module available: " + str(name))
+				logDebug("[SP Modules] No module available: " + str(name))
 				continue
 			
 			# Continue only if the attribute is available
 			if not hasattr(module, name):
-				splog("[SP Modules] Warning attribute not available: " + str(name))
+				logDebug("[SP Modules] Warning attribute not available: " + str(name))
 				continue
 			
 			# Continue only if attr is a class
 			attr = getattr(module, name)
 			if not inspect.isclass(attr):
-				splog("[SeriesService] Warning no class definition: " + str(name))
+				logDebug("[SeriesService] Warning no class definition: " + str(name))
 				continue
 			
 			# Continue only if the class is a subclass of the corresponding base class
 			if not issubclass( attr, base):
-				splog("[SP Modules] Warning no subclass of base: " + str(name))
+				logDebug("[SP Modules] Warning no subclass of base: " + str(name))
 				continue
 			
 			# Add module to the module list
@@ -117,16 +117,16 @@ class Modules(object):
 				try:
 					return module()
 				except Exception as e:
-					splog("[SeriesService] Instantiate exception: " + str(module) + "\n" + str(e))
+					logDebug("[SeriesService] Instantiate exception: " + str(module) + "\n" + str(e))
 					if sys.exc_info()[0]:
-						splog("Unexpected error: ", sys.exc_info()[0])
+						logDebug("Unexpected error: ", sys.exc_info()[0])
 						traceback.print_exc(file=sys.stdout)
 						return None
 			else:
-				splog("[SeriesService] Module is not callable: " + str(name))
+				logDebug("[SeriesService] Module is not callable: " + str(name))
 				return None
 		else:
-			splog("[SeriesService] No modules for name: " + str(name))
+			logDebug("[SeriesService] No modules for name: " + str(name))
 			return None
 
 	def instantiateModule(self, module):
@@ -135,11 +135,11 @@ class Modules(object):
 			try:
 				return module()
 			except Exception as e:
-				splog("[SeriesService] Instantiate exception: " + str(module) + "\n" + str(e))
+				logDebug("[SeriesService] Instantiate exception: " + str(module) + "\n" + str(e))
 				if sys.exc_info()[0]:
-					splog("Unexpected error: ", sys.exc_info()[0])
+					logDebug("Unexpected error: ", sys.exc_info()[0])
 					traceback.print_exc(file=sys.stdout)
 					return None
 		else:
-			splog("[SeriesService] Module is not callable: " + str(module.getClass()))
+			logDebug("[SeriesService] Module is not callable: " + str(module.getClass()))
 			return None

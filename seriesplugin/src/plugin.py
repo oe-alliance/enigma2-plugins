@@ -10,8 +10,7 @@ from time import time
 from Screens.MessageBox import MessageBox
 from Tools.Notifications import AddPopup
 
-# Config
-from Components.config import config, ConfigSubsection, ConfigEnableDisable, ConfigNumber, ConfigSelection, ConfigYesNo, ConfigText, ConfigSelectionNumber
+from Components.config import config
 
 # Plugin
 from Components.PluginComponent import plugins
@@ -23,13 +22,13 @@ from SeriesPluginInfoScreen import SeriesPluginInfoScreen
 from SeriesPluginRenamer import SeriesPluginRenamer
 from SeriesPluginIndependent import startIndependent, runIndependent
 from SeriesPluginConfiguration import SeriesPluginConfiguration
-from Logger import splog
+from Logger import logDebug
 
 
 #######################################################
 # Constants
 NAME = "SeriesPlugin"
-VERSION = "3.3.1"
+VERSION = "4.0.1"
 DESCRIPTION = _("SeriesPlugin")
 SHOWINFO = _("Show series info (SP)")
 RENAMESERIES = _("Rename serie(s) (SP)")
@@ -52,14 +51,6 @@ USER_AGENT = "Enigma2-"+NAME
 try:
 	from Tools.HardwareInfo import HardwareInfo
 	DEVICE = HardwareInfo().get_device_name().strip()
-	
-	# Get Box Info
-	#from Components.Network import iNetwork
-	#self.BoxID = iNetwork.getAdapterAttribute("eth0", "mac")
-	#self.DeviceName = HardwareInfo().get_device_name()
-	#from Components.About import about
-	#self.EnigmaVersion = about.getEnigmaVersionString()
-	#self.ImageVersion = about.getVersionString()
 except:
 	DEVICE = ''
 
@@ -72,89 +63,29 @@ def buildURL(url):
 
 
 #######################################################
-# Initialize Configuration
-config.plugins.seriesplugin = ConfigSubsection()
-
-config.plugins.seriesplugin.enabled                   = ConfigEnableDisable(default = False)
-
-config.plugins.seriesplugin.menu_info                 = ConfigYesNo(default = True)
-config.plugins.seriesplugin.menu_extensions           = ConfigYesNo(default = False)
-config.plugins.seriesplugin.menu_epg                  = ConfigYesNo(default = False)
-config.plugins.seriesplugin.menu_channel              = ConfigYesNo(default = True)
-config.plugins.seriesplugin.menu_movie_info           = ConfigYesNo(default = True)
-config.plugins.seriesplugin.menu_movie_rename         = ConfigYesNo(default = True)
-
-#TODO config.plugins.seriesplugin.open MessageBox or TheTVDB  ConfigSelection if hasTheTVDB
-
-config.plugins.seriesplugin.identifier_elapsed        = ConfigText(default = "", fixed_size = False)
-config.plugins.seriesplugin.identifier_today          = ConfigText(default = "", fixed_size = False)
-config.plugins.seriesplugin.identifier_future         = ConfigText(default = "", fixed_size = False)
-
-#config.plugins.seriesplugin.manager                   = ConfigSelection(choices = [("", "")], default = "")
-#config.plugins.seriesplugin.guide                     = ConfigSelection(choices = [("", "")], default = "")
-
-config.plugins.seriesplugin.pattern_file              = ConfigText(default = "/etc/enigma2/seriesplugin_patterns.json", fixed_size = False)
-config.plugins.seriesplugin.pattern_title             = ConfigText(default = "{org:s} S{season:02d}E{episode:02d} {title:s}", fixed_size = False)
-config.plugins.seriesplugin.pattern_description       = ConfigText(default = "S{season:02d}E{episode:02d} {title:s} {org:s}", fixed_size = False)
-#config.plugins.seriesplugin.pattern_record            = ConfigText(default = "{org:s} S{season:02d}E{episode:02d} {title:s}", fixed_size = False)
-config.plugins.seriesplugin.pattern_file_directories  = ConfigText(default = "/etc/enigma2/seriesplugin_patterns_directories.json", fixed_size = False)
-config.plugins.seriesplugin.pattern_directory         = ConfigText(default = "Disabled", fixed_size = False)
-
-config.plugins.seriesplugin.default_season            = ConfigSelectionNumber(0, 1, 1, default = 1)
-config.plugins.seriesplugin.default_episode           = ConfigSelectionNumber(0, 1, 1, default = 1)
-
-config.plugins.seriesplugin.replace_chars             = ConfigText(default = ":\!/\\,\(\)'\?", fixed_size = False)
-
-config.plugins.seriesplugin.channel_file              = ConfigText(default = "/etc/enigma2/seriesplugin_channels.xml", fixed_size = False)
-
-config.plugins.seriesplugin.bouquet_main              = ConfigText(default = "", fixed_size = False)
-
-config.plugins.seriesplugin.rename_file               = ConfigYesNo(default = True)
-config.plugins.seriesplugin.rename_tidy               = ConfigYesNo(default = False)
-config.plugins.seriesplugin.rename_legacy             = ConfigYesNo(default = False)
-config.plugins.seriesplugin.rename_existing_files     = ConfigYesNo(default = False)
-config.plugins.seriesplugin.rename_popups             = ConfigYesNo(default = True)
-config.plugins.seriesplugin.rename_popups_success     = ConfigYesNo(default = False)
-config.plugins.seriesplugin.rename_popups_timeout     = ConfigSelectionNumber(-1, 20, 1, default = 3)
-
-config.plugins.seriesplugin.max_time_drift            = ConfigSelectionNumber(0, 600, 1, default = 15)
-config.plugins.seriesplugin.search_depths             = ConfigSelectionNumber(0, 10, 1, default = 0)
-
-config.plugins.seriesplugin.skip_during_records       = ConfigYesNo(default=False)
-config.plugins.seriesplugin.skip_pattern_match        = ConfigYesNo(default=True)
-
-config.plugins.seriesplugin.autotimer_independent     = ConfigYesNo(default = False)
-config.plugins.seriesplugin.independent_cycle         = ConfigSelectionNumber(5, 24*60, 5, default = 60)
-config.plugins.seriesplugin.independent_retry         = ConfigYesNo(default = False)
-
-config.plugins.seriesplugin.check_timer_list          = ConfigYesNo(default = False)
-
-config.plugins.seriesplugin.timer_popups              = ConfigYesNo(default = True)
-config.plugins.seriesplugin.timer_popups_success      = ConfigYesNo(default = False)
-config.plugins.seriesplugin.timer_popups_timeout      = ConfigSelectionNumber(-1, 20, 1, default = 3)
-
-config.plugins.seriesplugin.socket_timeout            = ConfigSelectionNumber(0, 600, 1, default = 30)
-
-config.plugins.seriesplugin.caching                   = ConfigYesNo(default = True)
-config.plugins.seriesplugin.caching_expiration        = ConfigSelectionNumber(0, 48, 1, default = 6)
-
-config.plugins.seriesplugin.debug_prints              = ConfigYesNo(default = False)
-config.plugins.seriesplugin.write_log                 = ConfigYesNo(default = False)
-config.plugins.seriesplugin.log_file                  = ConfigText(default = "/tmp/seriesplugin.log", fixed_size = False)
-config.plugins.seriesplugin.log_reply_user            = ConfigText(default = "Dreambox User", fixed_size = False)
-config.plugins.seriesplugin.log_reply_mail            = ConfigText(default = "myemail@home.com", fixed_size = False)
-
-# Internal
-config.plugins.seriesplugin.lookup_counter            = ConfigNumber(default = 0)
-#config.plugins.seriesplugin.uid                       = ConfigText(default = str(time()), fixed_size = False)
-
-
-#######################################################
 # Start
 def start(reason, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
 		# Startup
 		if reason == 0:
+			
+			#TEST AUTOTIMER
+			#from SeriesPluginBare import bareGetSeasonEpisode
+			#bareGetSeasonEpisode("1:0:19:7C:6:85:FFFF0000:0:0:0:", "The Walking Dead", 1448740500, 1448745600, "Description", "/media/hdd/movie", True, False, False)
+			
+			#TEST INFOSCREEN MOVIE
+			#if kwargs.has_key("session"):
+			#	from enigma import eServiceReference
+			#	session = kwargs["session"]
+			#	service = eServiceReference(eServiceReference.idDVB, 0, "/media/hdd/movie/20151120 0139 - Pro7 HD - The 100.ts")
+			#	movielist_info(session, service)
+			
+			#TEST AUTOTIMER
+			#from SeriesPluginBare import bareGetSeasonEpisode
+			#bareGetSeasonEpisode("1:0:1:2F50:F1:270F:FFFF0000:0:0:0:", "Are You the One", 1448751000, 1448754000, "Description", "/media/hdd/movie", False, False, True)
+			
+			#TESTEND
+
 			# Start on demand if it is requested
 			if config.plugins.seriesplugin.autotimer_independent.value:
 				startIndependent()
@@ -171,9 +102,7 @@ def setup(session, *args, **kwargs):
 	try:
 		session.open(SeriesPluginConfiguration)
 	except Exception as e:
-		splog(_("SeriesPlugin setup exception ") + str(e))
-		#exc_type, exc_value, exc_traceback = sys.exc_info()
-		#splog( exc_type, exc_value, exc_traceback )
+		logDebug(_("SeriesPlugin setup exception ") + str(e))
 
 
 #######################################################
@@ -183,9 +112,7 @@ def info(session, service=None, event=None, *args, **kwargs):
 		try:
 			session.open(SeriesPluginInfoScreen, service, event)
 		except Exception as e:
-			splog(_("SeriesPlugin info exception ") + str(e))
-			#exc_type, exc_value, exc_traceback = sys.exc_info()
-			#splog( exc_type, exc_value, exc_traceback )
+			logDebug(_("SeriesPlugin info exception ") + str(e))
 
 
 #######################################################
@@ -196,7 +123,7 @@ def sp_extension(session, *args, **kwargs):
 			if session:
 				session.open(SeriesPluginInfoScreen)
 		except Exception as e:
-			splog(_("SeriesPlugin extension exception ") + str(e))
+			logDebug(_("SeriesPlugin extension exception ") + str(e))
 
 
 #######################################################
@@ -209,7 +136,7 @@ def channel(session, service=None, *args, **kwargs):
 			event = info.getEvent(service)
 			session.open(SeriesPluginInfoScreen, service, event)
 		except Exception as e:
-			splog(_("SeriesPlugin extension exception ") + str(e))
+			logDebug(_("SeriesPlugin extension exception ") + str(e))
 
 
 #######################################################
@@ -230,7 +157,7 @@ def movielist_rename(session, service, services=None, *args, **kwargs):
 				services = [service]
 			SeriesPluginRenamer(session, services)
 		except Exception as e:
-			splog(_("SeriesPlugin renamer exception ") + str(e))
+			logDebug(_("SeriesPlugin renamer exception ") + str(e))
 
 
 #######################################################
@@ -240,68 +167,27 @@ def movielist_info(session, service, *args, **kwargs):
 		try:
 			session.open(SeriesPluginInfoScreen, service)
 		except Exception as e:
-			splog(_("SeriesPlugin extension exception ") + str(e))
+			logDebug(_("SeriesPlugin extension exception ") + str(e))
 
 
 #######################################################
 # Timer renaming
 
 # Synchronous call, blocks until we have the information
-def getSeasonAndEpisode(timer, name, begin, end, *args, **kwargs):
-	result = None
+def getSeasonEpisode4(service_ref, name, begin, end, description, path, *args, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
+		from SeriesPluginBare import bareGetSeasonEpisode
 		try:
-			spt = SeriesPluginTimer(timer, name, begin, end, True)
-			result = spt.getSeasonAndEpisode(timer, name, begin, end)
+			return bareGetSeasonEpisode(service_ref, name, begin, end, description, path, True, False, False)
 		except Exception as e:
-			splog(_("SeriesPlugin label exception ") + str(e))
-	return result
-
-# Synchronous call, blocks until we have the information
-loop_data = []
-loop_counter = 0
-def getSeasonEpisode(service_ref, name, begin, end, description, path, *args, **kwargs):
-	result = None
-	if config.plugins.seriesplugin.enabled.value:
-		try:
-			from SeriesPlugin import getInstance, refactorTitle, refactorDescription, refactorDirectory
-			seriesPlugin = getInstance()
-			data = seriesPlugin.getEpisodeBlocking(
-				name, begin, end, service_ref, future=True
-			)
-			global loop_counter
-			loop_counter += 1
-			if data and len(data) == 4:
-				name = str(refactorTitle(name, data))
-				description = str(refactorDescription(description, data))
-				path = refactorDirectory(path, data)
-				return (name, description, path)
-			elif data:
-				global loop_data
-				loop_data.append( str(data) )
-			return str(data)
-		except Exception as e:
-			splog(_("SeriesPlugin label exception ") + str(e))
-	return result
+			logDebug( "SeriesPlugin getSeasonEpisode4 exception " + str(e))
+			return str(e)
 
 def showResult(*args, **kwargs):
-	global loop_data, loop_counter
-	if not loop_data and config.plugins.seriesplugin.timer_popups_success.value:
-		AddPopup(
-			"SeriesPlugin:\n" + _("%d timer renamed successfully") % (loop_counter),
-			MessageBox.TYPE_ERROR,
-			int(config.plugins.seriesplugin.timer_popups_timeout.value),
-			'SP_PopUp_ID_Finished'
-		)
-	elif loop_data and config.plugins.seriesplugin.timer_popups.value:
-		AddPopup(
-			"SeriesPlugin:\n" + _("SP has been finished with errors:\n") +"\n" +"\n".join(loop_data),
-			MessageBox.TYPE_ERROR,
-			int(config.plugins.seriesplugin.timer_popups_timeout.value),
-			'SP_PopUp_ID_Finished'
-		)
-	loop_data = []
-	loop_counter = 0
+	if config.plugins.seriesplugin.enabled.value:
+		from SeriesPluginBare import bareShowResult
+		bareShowResult()
+
 
 # Call asynchronous
 def renameTimer(timer, name, begin, end, *args, **kwargs):
@@ -309,27 +195,52 @@ def renameTimer(timer, name, begin, end, *args, **kwargs):
 		try:
 			SeriesPluginTimer(timer, name, begin, end)
 		except Exception as e:
-			splog(_("SeriesPlugin label exception ") + str(e))
+			logDebug(_("SeriesPlugin label exception ") + str(e))
 
 
 # For compatibility reasons
 def modifyTimer(timer, name, *args, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
-		splog("SeriesPlugin modifyTimer is deprecated - Update Your AutoTimer!")
+		logDebug("SeriesPlugin modifyTimer is deprecated - Update Your AutoTimer!")
 		try:
 			SeriesPluginTimer(timer, name or timer.name, timer.begin, timer.end)
 		except Exception as e:
-			splog(_("SeriesPlugin label exception ") + str(e))
+			logDebug(_("SeriesPlugin label exception ") + str(e))
 
 
 # For compatibility reasons
 def labelTimer(timer, begin=None, end=None, *args, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
-		splog("SeriesPlugin labelTimer is deprecated - Update Your AutoTimer!")
+		logDebug("SeriesPlugin labelTimer is deprecated - Update Your AutoTimer!")
 		try:
 			SeriesPluginTimer(timer, timer.name, timer.begin, timer.end)
 		except Exception as e:
-			splog(_("SeriesPlugin label exception ") + str(e))
+			logDebug(_("SeriesPlugin label exception ") + str(e))
+
+def getSeasonAndEpisode(timer, name, begin, end, *args, **kwargs):
+	result = None
+	if config.plugins.seriesplugin.enabled.value:
+		logDebug("SeriesPlugin getSeasonEpisode is deprecated - Update Your AutoTimer!")
+		try:
+			spt = SeriesPluginTimer(timer, name, begin, end, True)
+			result = spt.getSeasonAndEpisode(timer, name, begin, end, True, False, False)
+		except Exception as e:
+			logDebug(_("SeriesPlugin label exception ") + str(e))
+	return result
+
+def getSeasonEpisode(service_ref, name, begin, end, description, path, *args, **kwargs):
+	if config.plugins.seriesplugin.enabled.value:
+		logDebug("SeriesPlugin getSeasonEpisode is deprecated - Update Your AutoTimer!")
+		from SeriesPluginBare import bareGetSeasonEpisode
+		try:
+			result = bareGetSeasonEpisode(service_ref, name, begin, end, description, path)
+			if result and len(result) == 3:
+				return (result[0],result[1],result[2])
+			else:
+				return str(result)
+		except Exception as e:
+			logDebug( "SeriesPlugin getSeasonEpisode4 exception " + str(e))
+			return str(e)
 
 
 #######################################################
@@ -337,7 +248,6 @@ def labelTimer(timer, begin=None, end=None, *args, **kwargs):
 def Plugins(**kwargs):
 	descriptors = []
 	
-	#TODO icon
 	descriptors.append( PluginDescriptor(
 											name = NAME + " " + _("Setup"),
 											description = NAME + " " + _("Setup"),
@@ -350,8 +260,7 @@ def Plugins(**kwargs):
 		overwriteAutoTimer()
 		
 		descriptors.append( PluginDescriptor(
-													#where = PluginDescriptor.WHERE_SESSIONSTART,
-													where = PluginDescriptor.WHERE_AUTOSTART,
+													where = PluginDescriptor.WHERE_SESSIONSTART,
 													needsRestart = False,
 													fnc = start) )
 
@@ -417,7 +326,7 @@ def Plugins(**kwargs):
 EPGSelection_enterDateTime = None
 #EPGSelection_openOutdatedEPGSelection = None
 def SPEPGSelectionInit():
-	print "SeriesPlugin override EPGSelection"
+	print "[SeriesPlugin] override EPGSelection"
 	global EPGSelection_enterDateTime #, EPGSelection_openOutdatedEPGSelection
 	if EPGSelection_enterDateTime is None: # and EPGSelection_openOutdatedEPGSelection is None:
 		from Screens.EpgSelection import EPGSelection
@@ -428,7 +337,7 @@ def SPEPGSelectionInit():
 		EPGSelection.SPcloseafterfinish = closeafterfinish
 
 def SPEPGSelectionUndo():
-	print "SeriesPlugin undo override EPGSelection"
+	print "[SeriesPlugin] undo override EPGSelection"
 	global EPGSelection_enterDateTime #, EPGSelection_openOutdatedEPGSelection
 	if EPGSelection_enterDateTime: # and EPGSelection_openOutdatedEPGSelection:
 		from Screens.EpgSelection import EPGSelection
@@ -490,7 +399,7 @@ def SPChannelContextMenu__init__(self, session, csel):
 		self["menu"].list.insert(0, ChoiceEntryComponent(text=(SHOWINFO, boundFunction(self.SPchannelShowSeriesInfo))))
 
 def channelShowSeriesInfo(self):
-	splog( "[SeriesPlugin] channelShowSeriesInfo ")
+	logDebug( "[SeriesPlugin] channelShowSeriesInfo ")
 	if config.plugins.seriesplugin.enabled.value:
 		try:
 			from enigma import eServiceCenter
@@ -499,7 +408,7 @@ def channelShowSeriesInfo(self):
 			event = info.getEvent(service)
 			self.session.openWithCallback(self.SPcloseafterfinish, SeriesPluginInfoScreen, service, event)
 		except Exception as e:
-			splog(_("SeriesPlugin info exception ") + str(e))
+			logDebug(_("SeriesPlugin info exception ") + str(e))
 
 def closeafterfinish(self, retval=None):
 	self.close()
@@ -575,7 +484,7 @@ def overwriteAutoTimer():
 				# Overwrite function
 				AutoTimer.modifyTimer = SPmodifyTimer
 	except:
-		splog("SeriesPlugin found old AutoTimer")
+		logDebug("SeriesPlugin found old AutoTimer")
 
 
 def recoverAutoTimer():
@@ -586,7 +495,7 @@ def recoverAutoTimer():
 				AutoTimer.modifyTimer = ATmodifyTimer
 				ATmodifyTimer = None
 	except:
-		splog("SeriesPlugin found old AutoTimer")
+		logDebug("SeriesPlugin found old AutoTimer")
 
 
 #######################################################

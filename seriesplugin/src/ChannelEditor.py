@@ -55,7 +55,7 @@ from difflib import SequenceMatcher
 
 #Internal
 from Channels import ChannelsBase, buildSTBchannellist, unifyChannel
-from Logger import splog
+from Logger import logDebug
 
 
 # Constants
@@ -157,7 +157,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 	def showChannels(self):
 		if len(self.stbChlist) != 0:
 			for servicename,serviceref,uservicename in self.stbChlist:
-				#splog("SPC: servicename", servicename, uservicename)
+				#logDebug("SPC: servicename", servicename, uservicename)
 				
 				webSender = self.lookupChannelByReference(serviceref)
 				if webSender is not False:
@@ -169,7 +169,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 		if len(self.stbToWebChlist) != 0:
 			self.chooseMenuList.setList(map(self.buildList, self.stbToWebChlist))
 		else:
-			splog("SPC: Error creating webChlist..")
+			logDebug("SPC: Error creating webChlist..")
 			self.setTitle(_("Error check log file"))
 	
 	def tryToMatchChannels(self):
@@ -179,7 +179,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 		
 		if len(self.stbChlist) != 0:
 			for servicename,serviceref,uservicename in self.stbChlist:
-				#splog("SPC: servicename", servicename, uservicename)
+				#logDebug("SPC: servicename", servicename, uservicename)
 				
 				webSender = self.lookupChannelByReference(serviceref)
 				if webSender is not False:
@@ -190,18 +190,18 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 						match = ""
 						ratio = 0
 						for webSender, uwebSender in self.webChlist:
-							#splog("SPC: webSender", webSender, uwebSender)
+							#logDebug("SPC: webSender", webSender, uwebSender)
 							if uwebSender in uservicename or uservicename in uwebSender:
 								
 								sequenceMatcher.set_seqs(uservicename, uwebSender)
 								newratio = sequenceMatcher.ratio()
 								if newratio > ratio:
-									splog("SPC: possible match", servicename, uservicename, webSender, uwebSender, ratio)
+									logDebug("SPC: possible match", servicename, uservicename, webSender, uwebSender, ratio)
 									ratio = newratio
 									match = webSender
 						
 						if ratio > 0:
-							splog("SPC: match", servicename, uservicename, match, ratio)
+							logDebug("SPC: match", servicename, uservicename, match, ratio)
 							self.stbToWebChlist.append((servicename, match, serviceref, "1"))
 							self.addChannel(serviceref, servicename, match)
 						
@@ -214,7 +214,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 		if len(self.stbToWebChlist) != 0:
 			self.chooseMenuList.setList(map(self.buildList, self.stbToWebChlist))
 		else:
-			splog("SPC: Error creating webChlist..")
+			logDebug("SPC: Error creating webChlist..")
 			self.setTitle(_("Error check log file"))
 		
 	def buildList(self, entry):
@@ -252,7 +252,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 	def keyAdd(self):
 		check = self['list'].getCurrent()
 		if check == None:
-			splog("SPC: list empty")
+			logDebug("SPC: list empty")
 			return
 		else:
 			idx = 0
@@ -260,7 +260,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 			idx = 0
 			if webSender:
 				idx = self.getIndexOfWebSender(self.webChlist)
-			splog("SPC: keyAdd webSender", webSender, idx)
+			logDebug("SPC: keyAdd webSender", webSender, idx)
 			self.session.openWithCallback( boundFunction(self.addConfirm, servicename, serviceref, webSender), ChoiceBox,_("Add Web Channel"), self.webChlist, None, idx)
 	
 	def getIndexOfServiceref(self, serviceref):
@@ -274,33 +274,33 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 			return
 		remote = result[0]
 		if webSender and remote == webSender:
-			splog("SPC: addConfirm skip already set", servicename, serviceref, remote, webSender)
+			logDebug("SPC: addConfirm skip already set", servicename, serviceref, remote, webSender)
 		elif servicename and serviceref and remote and not webSender:
 			idx = self.getIndexOfServiceref(serviceref)
-			splog("SPC: addConfirm", servicename, serviceref, remote, idx)
+			logDebug("SPC: addConfirm", servicename, serviceref, remote, idx)
 			if idx is not False:
 				self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote':remote } )
 				self.addChannel(serviceref, servicename, remote)
 				self.stbToWebChlist[idx] = (servicename, remote, serviceref, "1")
 				self.chooseMenuList.setList(map(self.buildList, self.stbToWebChlist))
 		elif servicename and serviceref and remote and webSender:
-			splog("SPC: add or replace", servicename, serviceref, remote, webSender)
+			logDebug("SPC: add or replace", servicename, serviceref, remote, webSender)
 			self.session.openWithCallback( boundFunction(self.addOrReplace, servicename, serviceref, webSender, remote), MessageBox,_("Add channel (Yes) or replace it (No)"), MessageBox.TYPE_YESNO, default = False)
 
 	def addOrReplace(self, servicename, serviceref, webSender, remote, result):
 		idx = self.getIndexOfServiceref(serviceref)
-		splog("SPC: addOrReplace", servicename, serviceref, remote, webSender, idx)
+		logDebug("SPC: addOrReplace", servicename, serviceref, remote, webSender, idx)
 		if idx is False:
 			return
 		
 		if result:
-			splog("SPC: add", servicename, serviceref, remote, webSender)
+			logDebug("SPC: add", servicename, serviceref, remote, webSender)
 			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' added.") % {'servicename': servicename, 'remote':remote } )
 			self.addChannel(serviceref, servicename, remote)
 			self.stbToWebChlist[idx] = (servicename, webSender+" / "+remote, serviceref, "1")
 			
 		else:
-			splog("SPC: replace", servicename, serviceref, remote, webSender)
+			logDebug("SPC: replace", servicename, serviceref, remote, webSender)
 			self.setTitle(_("Channel '- %(servicename)s - %(remote)s -' replaced.") % {'servicename': servicename, 'remote':remote } )
 			self.replaceChannel(serviceref, servicename, remote)
 			self.stbToWebChlist[idx] = (servicename, remote, serviceref, "1")
@@ -310,11 +310,11 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 	def keyRemove(self):
 		check = self['list'].getCurrent()
 		if check == None:
-			splog("SPC: keyRemove list empty")
+			logDebug("SPC: keyRemove list empty")
 			return
 		else:
 			(servicename, webSender, serviceref, state) = self['list'].getCurrent()[0]
-			splog("SPC: keyRemove", servicename, webSender, serviceref, state)
+			logDebug("SPC: keyRemove", servicename, webSender, serviceref, state)
 			if serviceref:
 				#TODO handle multiple links/alternatives - show a choicebox
 				self.session.openWithCallback( boundFunction(self.removeConfirm, servicename, serviceref), MessageBox, _("Remove '%s'?") % servicename, MessageBox.TYPE_YESNO, default = False)
@@ -325,7 +325,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 		if serviceref:
 			idx = self.getIndexOfServiceref(serviceref)
 			if idx is not False:
-				splog("SPC: removeConfirm", servicename, serviceref, idx)
+				logDebug("SPC: removeConfirm", servicename, serviceref, idx)
 				self.setTitle(_("Channel '- %s -' removed.") % servicename)
 				self.removeChannel(serviceref)
 				self.stbToWebChlist[idx] = (servicename, "", serviceref, "0")
@@ -336,7 +336,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 
 	def channelReset(self, answer):
 		if answer:
-			splog("SPC: channel-list reset...")
+			logDebug("SPC: channel-list reset...")
 			self.resetChannels()
 			self.stbChlist = []
 			self.webChlist = []
