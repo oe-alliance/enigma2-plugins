@@ -9,6 +9,8 @@ TODO:
 auto-run at intervals
 '''
 
+__version__ = "1.3"
+
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
 from Screens.MessageBox import MessageBox
@@ -323,6 +325,9 @@ class Series2FolderConfig(ConfigListScreen, Screen):
         self["VKeyIcon"] = Pixmap()
         self.list = []
 
+        if self.__layoutFinished not in self.onLayoutFinish:
+            self.onLayoutFinish.append(self.__layoutFinished)
+
         self._confAutofolder = getConfigListEntry(
             _("Automatically create folders"),
             config.plugins.seriestofolder.autofolder,
@@ -399,6 +404,9 @@ class Series2FolderConfig(ConfigListScreen, Screen):
         currConf = self["config"].getCurrent()
         if currConf in (self._confStripRepeats, self._confMovies):
             self.createConfig(self["config"])
+
+    def __layoutFinished(self):
+        self.title += " v" + __version__
 
     def keyLeft(self):
         ConfigListScreen.keyLeft(self)
