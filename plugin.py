@@ -244,7 +244,7 @@ class Series2FolderActions:
             if filebase[-4:-3] == "_" and filebase[-3:].isdigit():
                 date_time += '#' + filebase[-3:]
         except:
-            showname, date_time, False, err_mess = self.recSplit(fullname)
+            showname, date_time, pending_merge, err_mess = self.recSplit(fullname)
 
         if showname:
             showname.replace('/', '_')
