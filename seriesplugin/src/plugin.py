@@ -22,13 +22,13 @@ from SeriesPluginInfoScreen import SeriesPluginInfoScreen
 from SeriesPluginRenamer import SeriesPluginRenamer
 from SeriesPluginIndependent import startIndependent, runIndependent
 from SeriesPluginConfiguration import SeriesPluginConfiguration
-from Logger import logDebug
+from Logger import logDebug, logInfo
 
 
 #######################################################
 # Constants
 NAME = "SeriesPlugin"
-VERSION = "4.0.1"
+VERSION = "4.1.5"
 DESCRIPTION = _("SeriesPlugin")
 SHOWINFO = _("Show series info (SP)")
 RENAMESERIES = _("Rename serie(s) (SP)")
@@ -54,14 +54,43 @@ try:
 except:
 	DEVICE = ''
 
+REQUEST_PARAMETER = "?device=" + DEVICE + "&version=SP" + VERSION
+
 WHERE_EPGMENU     = 'WHERE_EPGMENU'
 WHERE_CHANNELMENU = 'WHERE_CHANNELMENU'
 
 
 def buildURL(url):
-	return PROXY + "?device=" + DEVICE + "&version=" + VERSION + "&url=" + url
+	return PROXY + REQUEST_PARAMETER + "&url=" + url
 
 
+#######################################################
+# Test
+def test(**kwargs):
+	# http://dm7080/autotimer
+	# http://www.unixtime.de/
+	try:
+		from SeriesPluginBare import bareGetSeasonEpisode 	#future=True, today=False, elapsed=False
+		#bareGetSeasonEpisode("1:0:19:7C:6:85:FFFF0000:0:0:0:", "The Walking Dead", 1448740500, 1448745600, "Description", "/media/hdd/movie", True, False, False)
+		bareGetSeasonEpisode("1:0:1:2F50:F1:270F:FFFF0000:0:0:0:", "Are You the One?", 1448923500, 1448926500, "Description", "/media/hdd/movie", False, False, True)
+		
+		#TEST INFOSCREEN MOVIE
+		#if kwargs.has_key("session"):
+		#	from enigma import eServiceReference
+		#	session = kwargs["session"]
+			#service = eServiceReference(eServiceReference.idDVB, 0, "/media/hdd/movie/20151120 0139 - Pro7 HD - The 100.ts")
+			#service = eServiceReference(eServiceReference.idDVB, 0, "/media/hdd/movie/20151205 1625 - TNT Serie HD (S) - The Last Ship - Staffel 1.ts")
+			#service = eServiceReference(eServiceReference.idDVB, 0, "/media/hdd/movie/20151204 1825 - VIVA_COMEDY CENTRAL HD - Rules of Engagement.ts")
+		#	movielist_info(session, service)
+		
+		#TEST AUTOTIMER
+		#from SeriesPluginBare import bareGetSeasonEpisode
+		#bareGetSeasonEpisode("1:0:1:2F50:F1:270F:FFFF0000:0:0:0:", "Are You the One", 1448751000, 1448754000, "Description", "/media/hdd/movie", False, False, True)
+		#bareGetSeasonEpisode("1:0:19:8150:14B:270F:FFFF0000:0:0:0:", "Dragons Auf zu neuen Ufern TEST_TO_BE_REMOVED", 1449390300, 1449393300, "Description", "/media/hdd/movie", False, False, True)
+		
+	except Exception as e:
+		logDebug(_("SeriesPlugin test exception ") + str(e))
+	
 #######################################################
 # Start
 def start(reason, **kwargs):
@@ -70,22 +99,9 @@ def start(reason, **kwargs):
 		if reason == 0:
 			
 			#TEST AUTOTIMER
-			#from SeriesPluginBare import bareGetSeasonEpisode
-			#bareGetSeasonEpisode("1:0:19:7C:6:85:FFFF0000:0:0:0:", "The Walking Dead", 1448740500, 1448745600, "Description", "/media/hdd/movie", True, False, False)
-			
-			#TEST INFOSCREEN MOVIE
-			#if kwargs.has_key("session"):
-			#	from enigma import eServiceReference
-			#	session = kwargs["session"]
-			#	service = eServiceReference(eServiceReference.idDVB, 0, "/media/hdd/movie/20151120 0139 - Pro7 HD - The 100.ts")
-			#	movielist_info(session, service)
-			
-			#TEST AUTOTIMER
-			#from SeriesPluginBare import bareGetSeasonEpisode
-			#bareGetSeasonEpisode("1:0:1:2F50:F1:270F:FFFF0000:0:0:0:", "Are You the One", 1448751000, 1448754000, "Description", "/media/hdd/movie", False, False, True)
-			
+			#test(kwargs)
 			#TESTEND
-
+			
 			# Start on demand if it is requested
 			if config.plugins.seriesplugin.autotimer_independent.value:
 				startIndependent()
@@ -234,7 +250,7 @@ def getSeasonEpisode(service_ref, name, begin, end, description, path, *args, **
 		from SeriesPluginBare import bareGetSeasonEpisode
 		try:
 			result = bareGetSeasonEpisode(service_ref, name, begin, end, description, path)
-			if result and len(result) == 3:
+			if result and len(result) == 4:
 				return (result[0],result[1],result[2])
 			else:
 				return str(result)

@@ -26,7 +26,7 @@ import imp, inspect
 
 # Plugin internal
 from . import _
-from Logger import logDebug
+from Logger import logDebug, logInfo
 from IdentifierBase import IdentifierBase
 
 # Constants

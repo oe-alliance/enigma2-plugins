@@ -27,7 +27,7 @@ import os
 import json
 
 # Plugin internal
-from Logger import logDebug
+from Logger import logDebug, logInfo
 
 
 scheme_fallback = [

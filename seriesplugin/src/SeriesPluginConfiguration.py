@@ -43,7 +43,7 @@ from SeriesPlugin import resetInstance, getInstance
 from SeriesPluginIndependent import startIndependent, stopIndependent
 from FilePatterns import readFilePatterns
 from DirectoryPatterns import readDirectoryPatterns
-from Logger import logDebug
+from Logger import logDebug, logInfo
 from ShowLogScreen import ShowLogScreen
 from Channels import getTVBouquets
 from ChannelEditor import ChannelEditor
@@ -322,7 +322,6 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 
 	# Overwrite ConfigListScreen keyCancel function
 	def keyCancel(self):
-		self.help_window_was_shown = False
 		logDebug("SPC keyCancel")
 		#self.seriesPlugin.resetChannels()
 		resetInstance()

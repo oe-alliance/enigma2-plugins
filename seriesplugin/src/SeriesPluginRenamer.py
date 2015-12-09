@@ -38,7 +38,7 @@ from ServiceReference import ServiceReference
 
 # Plugin internal
 from SeriesPlugin import getInstance, refactorTitle, refactorDescription, refactorDirectory
-from Logger import logDebug
+from Logger import logDebug, logInfo
 
 CompiledRegexpGlobEscape = re.compile('([\[\]\?*])')  # "[\\1]"
 
@@ -195,7 +195,7 @@ def renameFile(servicepath, name, data, tidy=False):
 class SeriesPluginRenamer(object):
 	def __init__(self, session, services, *args, **kwargs):
 		
-		logInfo("SeriesPluginRenamer: services, service:", str(services), str(service))
+		logInfo("SeriesPluginRenamer: services, service:", str(services))
 		
 		if services and not isinstance(services, list):
 			services = [services]	

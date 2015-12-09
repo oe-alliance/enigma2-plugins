@@ -55,7 +55,7 @@ from difflib import SequenceMatcher
 
 #Internal
 from Channels import ChannelsBase, buildSTBchannellist, unifyChannel
-from Logger import logDebug
+from Logger import logDebug, logInfo
 
 
 # Constants

@@ -22,7 +22,7 @@ from time import time
 
 from Components.config import *
 
-from Logger import logDebug
+from Logger import logDebug, logInfo
 
 
 # Global cache
@@ -82,6 +82,7 @@ class Cacher(object):
 		global cache
 		
 		if not page:
+			logDebug("Cache: Got empty page")
 			return
 			
 		if not config.plugins.seriesplugin.caching.value:
@@ -93,6 +94,7 @@ class Cacher(object):
 		global cache
 		
 		if not list:
+			logDebug("Cache: Got empty list")
 			return
 		
 		if not config.plugins.seriesplugin.caching.value:

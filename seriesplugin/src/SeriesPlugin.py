@@ -29,7 +29,7 @@ from Screens.MessageBox import MessageBox
 
 # Plugin internal
 from IdentifierBase import IdentifierBase
-from Logger import logDebug, initLog
+from Logger import logDebug, initLog, logInfo
 from Channels import ChannelsBase
 from ThreadQueue import ThreadQueue
 from threading import Thread, currentThread, _get_ident
@@ -52,6 +52,8 @@ SERIESPLUGIN_PATH  = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/S
 instance = None
 
 CompiledRegexpNonDecimal = re.compile(r'[^\d]+')
+CompiledRegexpReplaceChars = None
+CompiledRegexpReplaceDirChars = re.compile('[^/\w\-_\. ]')
 
 def dump(obj):
 	for attr in dir(obj):
@@ -96,6 +98,14 @@ def getInstance():
 		except Exception as e:
 			sys.exc_clear()
 		
+		global CompiledRegexpReplaceChars
+		try:
+			if config.plugins.seriesplugin.replace_chars.value:
+				CompiledRegexpReplaceChars = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
+		except:
+			logInfo( "SP: Config option 'Replace Chars' is no valid regular expression" )
+			CompiledRegexpReplaceChars = re.compile("[:\!/\\,\(\)'\?]")
+		
 		instance = SeriesPlugin()
 		
 		logDebug( "SP: ", strftime("%a, %d %b %Y %H:%M:%S", localtime()) )
@@ -116,37 +126,37 @@ def resetInstance():
 	clearCache()
 
 
-def refactorTitle(org, data):
+def refactorTitle(org_, data):
+	if CompiledRegexpReplaceChars:
+		org = CompiledRegexpReplaceChars.sub('', org_)
+		logDebug("SP: refactor title org", org_, org)
+	else:
+		org = org_
 	if data:
 		season, episode, title, series = data
 		if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off" and not config.plugins.seriesplugin.pattern_title.value == "Disabled":
-			if config.plugins.seriesplugin.replace_chars.value:
-				repl = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
-				logDebug("SP: refactor org1", org)
-				org = repl.sub('', org)
-				logDebug("SP: refactor org2", org)
-			cust_title = config.plugins.seriesplugin.pattern_title.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
-			cust_title.replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
-			logDebug("SP: refactor org3", cust_title)
-			return cust_title
+			cust_ = config.plugins.seriesplugin.pattern_title.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			cust = cust_.replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
+			logDebug("SP: refactor title", cust_, cust)
+			return cust
 		else:
 			return org
 	else:
 		return org
 
-def refactorDescription(org, data):
+def refactorDescription(org_, data):
+	if CompiledRegexpReplaceChars:
+		org = CompiledRegexpReplaceChars.sub('', org_)
+		logDebug("SP: refactor desc", org_, org)
+	else:
+		org = org_
 	if data:
 		season, episode, title, series = data
 		if config.plugins.seriesplugin.pattern_description.value and not config.plugins.seriesplugin.pattern_description.value == "Off" and not config.plugins.seriesplugin.pattern_description.value == "Disabled":
-			if config.plugins.seriesplugin.replace_chars.value:
-				repl = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
-				logDebug("SP: refactor des1", org)
-				org = repl.sub('', org)
-				logDebug("SP: refactor des2", org)
-			cust_plot = config.plugins.seriesplugin.pattern_description.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
-			cust_plot = cust_plot.replace("\n", " ").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
-			logDebug("SP: refactor des3", cust_plot)
-			return cust_plot
+			cust_ = config.plugins.seriesplugin.pattern_description.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			cust = cust_.replace("\n", " ").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
+			logDebug("SP: refactor desc", cust_, cust)
+			return cust
 		else:
 			return org
 	else:
@@ -156,12 +166,11 @@ def refactorDirectory(org, data):
 	if data:
 		season, episode, title, series = data
 		if config.plugins.seriesplugin.pattern_directory.value and not config.plugins.seriesplugin.pattern_directory.value == "Off" and not config.plugins.seriesplugin.pattern_directory.value == "Disabled":
-			cust_dir = config.plugins.seriesplugin.pattern_directory.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
-			cust_dir = cust_dir.replace("\n", " ").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
-			logDebug("SP: refactor des1", cust_dir)
-			cust_dir = re.sub('[^/\w\-_\. ]', '_', cust_dir)
-			logDebug("SP: refactor des2", cust_dir)
-			return cust_dir
+			cust_ = config.plugins.seriesplugin.pattern_directory.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			cust_ = cust_.replace("\n", " ").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
+			cust = CompiledRegexpReplaceDirChars.sub('_', cust_)
+			logDebug("SP: refactor dir", cust_, cust)
+			return cust
 		else:
 			return org
 	else:
@@ -170,20 +179,20 @@ def refactorDirectory(org, data):
 def normalizeResult(result):
 	if result and len(result) == 4:
 		logDebug("SP: Worker: result callback")
-		season, episode, title, series = result
+		season, episode, title_, series_ = result
 		season = int(CompiledRegexpNonDecimal.sub('', season))
 		episode = int(CompiledRegexpNonDecimal.sub('', episode))
-		title = title.strip()
-		if config.plugins.seriesplugin.replace_chars.value:
-			repl = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
+		title_ = title_.strip()
+		series_ = series_.strip()
+		if CompiledRegexpReplaceChars:
+			title = CompiledRegexpReplaceChars.sub('', title_)
+			logDebug("SP: normalize title", title_, title)
 			
-			logDebug("SP: refactor title", title)
-			title = repl.sub('', title)
-			logDebug("SP: refactor title", title)
-			
-			logDebug("SP: refactor series", series)
-			series = repl.sub('', series)
-			logDebug("SP: refactor series", series)
+			series = CompiledRegexpReplaceChars.sub('', series_)
+			logDebug("SP: normalize serie", series_, series)
+		else:
+			title = title_
+			series = series_
 		return (season, episode, title, series)
 	else:
 		logDebug("SP: Worker: result failed", str(result))

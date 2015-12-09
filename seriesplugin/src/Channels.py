@@ -36,7 +36,7 @@ from Tools.XMLTools import stringToXML
 
 # Plugin internal
 from . import _
-from Logger import logDebug
+from Logger import logDebug, logInfo
 
 try:
 	#Python >= 2.7

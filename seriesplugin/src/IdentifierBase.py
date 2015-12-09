@@ -31,7 +31,7 @@ from Tools.BoundFunction import boundFunction
 from ModuleBase import ModuleBase
 from Cacher import Cacher
 from Channels import ChannelsBase
-from Logger import logDebug
+from Logger import logDebug, logInfo
 
 
 class MyException(Exception):
@@ -70,9 +70,16 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase):
 		
 		self.search_depth += 1
 		if( self.search_depth < config.plugins.seriesplugin.search_depths.value ):
-			alt = " ".join(name.split(" ")[:-1])
 			
-			# The, Der, Die, Das...
+			if self.search_depth == 1:
+				if name.find("-") != -1:
+					alt = " ".join(name.split("-")[:-1]).strip()
+				else:
+					alt = " ".join(name.split(" ")[:-1])
+			else:
+				alt = " ".join(name.split(" ")[:-1])
+			
+			# Avoid searchs with: The, Der, Die, Das...
 			if len(alt) > 3:
 				return alt
 			else:
@@ -95,16 +102,16 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase):
 	def getPage(self, url, use_proxy=True, counter=0):
 		response = None
 		
-		logDebug("SSBase getPage", url)
+		logDebug("IB: getPage", url)
 		
 		cached = self.getCached(url)
 		
 		if cached:
-			logDebug("SSBase cached")
+			logDebug("IB: cached")
 			response = cached
 		
 		else:
-			logDebug("SSBase not cached")
+			logDebug("IB: not cached")
 			
 			try:
 				from plugin import buildURL, USER_AGENT
@@ -117,39 +124,42 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase):
 				req = Request( temp_url, headers={'User-Agent':USER_AGENT})
 				response = urlopen(req, timeout=float(config.plugins.seriesplugin.socket_timeout.value)).read()
 				
-				#logDebug("SSBase response to cache: ", response) 
+				if not response:
+					logDebug("IB: No data returned")
+				
+				#logDebug("IB: response to cache: ", response) 
 				#if response:
 				#	self.doCachePage(url, response)
 			
 			except URLError as e:
 				 # For Python 2.6
 				if counter > 2:
-					logDebug("SSBase URLError counter > 2")
+					logDebug("IB: URLError counter > 2")
 					raise MyException("There was an URLError: %r" % e)
 				elif hasattr(e, "code"):
-					logDebug("SSBase URLError code")
+					logDebug("IB: URLError code")
 					print e.code, e.msg, counter
 					sleep(2)
 					return self.getPage(url, use_proxy, counter+1)
 				else:
-					logDebug("SSBase URLError else")
+					logDebug("IB: URLError else")
 					raise MyException("There was an URLError: %r" % e)
 			
 			except socket.timeout as e:
 				 # For Python 2.7
 				if counter > 2:
-					logDebug("SSBase URLError counter > 2")
+					logDebug("IB: URLError counter > 2")
 					raise MyException("There was an SocketTimeout: %r" % e)
 				elif hasattr(e, "code"):
-					logDebug("SSBase URLError code")
+					logDebug("IB: URLError code")
 					print e.code, e.msg, counter
 					sleep(2)
 					return self.getPage(url, use_proxy, counter+1)
 				else:
-					logDebug("SSBase URLError else")
+					logDebug("IB: URLError else")
 					raise MyException("There was an SocketTimeout: %r" % e)
 			
-		logDebug("SSBase success")
+		logDebug("IB: success")
 		return response
 	
 	################################################

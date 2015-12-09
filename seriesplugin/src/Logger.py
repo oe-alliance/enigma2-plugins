@@ -84,6 +84,11 @@ def logInfo(*args):
 	
 	elif config.plugins.seriesplugin.debug_prints.value:
 		print strargs
+	
+	if sys.exc_info()[0]:
+		logger.debug( str(sys.exc_info()[0]) )
+		logger.debug( str(traceback.format_exc()) )
+		sys.exc_clear()
 
 def logDebug(*args):
 	strargs = " ".join( [ str(arg) for arg in args ] )
@@ -94,5 +99,10 @@ def logDebug(*args):
 	
 	elif config.plugins.seriesplugin.debug_prints.value:
 		print strargs
+	
+	if sys.exc_info()[0]:
+		logger.debug( str(sys.exc_info()[0]) )
+		logger.debug( str(traceback.format_exc()) )
+		sys.exc_clear()
 
 initLog()
