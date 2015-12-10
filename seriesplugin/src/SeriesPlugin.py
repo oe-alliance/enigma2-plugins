@@ -330,7 +330,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 		
 		return self.getEpisode(None, name, begin, end, service, future, today, elapsed, rename, block=True)
 
-	def getEpisode(self, callback, name, begin, end=None, service=None, future=False, today=False, elapsed=False, rename=False, block=False):
+	def getEpisode(self, callback, name, begin_, end_=None, service=None, future=False, today=False, elapsed=False, rename=False, block=False):
 		
 		if config.plugins.seriesplugin.skip_during_records.value:
 			try:
@@ -353,11 +353,11 @@ class SeriesPlugin(Modules, ChannelsBase):
 			if match.group(1):
 				name = match.group(1)
 		
-		begin = datetime.fromtimestamp(begin)
-		logDebug("SP: Main: begin:", begin.strftime('%Y-%m-%d %H:%M:%S'))
+		begin = datetime.fromtimestamp(begin_)
+		logDebug("SP: Main: begin:", begin.strftime('%Y-%m-%d %H:%M:%S'), str(begin_))
 		
-		end = datetime.fromtimestamp(end)
-		logDebug("SP: Main: end:", end.strftime('%Y-%m-%d %H:%M:%S'))
+		end = datetime.fromtimestamp(end_)
+		logDebug("SP: Main: end:", end.strftime('%Y-%m-%d %H:%M:%S'), str(end_))
 		
 		if elapsed:
 			identifier = self.identifier_elapsed

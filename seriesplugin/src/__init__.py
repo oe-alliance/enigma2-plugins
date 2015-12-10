@@ -83,6 +83,8 @@ config.plugins.seriesplugin.log_reply_mail            = ConfigText(default = "my
 config.plugins.seriesplugin.lookup_counter            = ConfigNumber(default = 0)
 #config.plugins.seriesplugin.uid                       = ConfigText(default = str(time()), fixed_size = False)
 
+config.plugins.seriesplugin.proxy_url                 = ConfigText(default = "http://176.9.54.54/serienserver/proxy/proxy.php", fixed_size = False)
+
 
 def localeInit():
 	lang = language.getLanguage()[:2]  # getLanguage returns e.g. "fi_FI" for "language_country"

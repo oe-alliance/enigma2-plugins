@@ -269,13 +269,13 @@ class SeriesPluginRenamer(object):
 							begin = end - (info.getLength(service) or 0)
 						#MAYBE we could also try to parse the filename
 						# We don't know the exact margins, we will assume the E2 default margins
-						begin + (int(config.recording.margin_before.value) * 60)
-						end - (int(config.recording.margin_after.value) * 60)
+						begin -= (int(config.recording.margin_before.value) * 60)
+						end += (int(config.recording.margin_after.value) * 60)
 					
 					rec_ref_str = info.getInfoString(service, iServiceInformation.sServiceref)
 					#channel = ServiceReference(rec_ref_str).getServiceName()
 					
-					logDebug("SPR: getEpisode:", name, begin, end)
+					logDebug("SPR: getEpisode:", name, begin, end, rec_ref_str)
 					seriesPlugin.getEpisode(
 							boundFunction(self.renamerCallback, servicepath, name, short),
 							name, begin, end, rec_ref_str, elapsed=True, rename=True

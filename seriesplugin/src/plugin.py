@@ -28,7 +28,7 @@ from Logger import logDebug, logInfo
 #######################################################
 # Constants
 NAME = "SeriesPlugin"
-VERSION = "4.1.5"
+VERSION = "4.2.1"
 DESCRIPTION = _("SeriesPlugin")
 SHOWINFO = _("Show series info (SP)")
 RENAMESERIES = _("Rename serie(s) (SP)")
@@ -45,7 +45,6 @@ ABOUT = "\n  " + NAME + " " + VERSION + "\n\n" \
 				+ _("  Feel free to donate. \n") \
 				+ _("  PayPal: ") + DONATE
 
-PROXY = "http://serienrecorder.lima-city.de/proxy.php"
 USER_AGENT = "Enigma2-"+NAME
 
 try:
@@ -61,7 +60,10 @@ WHERE_CHANNELMENU = 'WHERE_CHANNELMENU'
 
 
 def buildURL(url):
-	return PROXY + REQUEST_PARAMETER + "&url=" + url
+	if config.plugins.seriesplugin.proxy_url.value:
+		return config.plugins.seriesplugin.proxy_url.value + REQUEST_PARAMETER + "&url=" + url
+	else:
+		return url
 
 
 #######################################################
