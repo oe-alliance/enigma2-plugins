@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1233 $
-$Date: 2015-09-19 21:12:22 +0200 (Sat, 19 Sep 2015) $
-$Id: FritzCallFBF.py 1233 2015-09-19 19:12:22Z michael $
+$Revision: 1252 $
+$Date: 2015-12-10 11:11:04 +0100 (Thu, 10 Dec 2015) $
+$Id: FritzCallFBF.py 1252 2015-12-10 10:11:04Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -77,6 +77,7 @@ def resolveNumber(number, default=None, phonebook=None):
 
 def cleanNumber(number):
 	# self.debug("[FritzCallFBF] " + number)
+	number = re.sub("<.*?>", "", number)
 	newNumber = (" ".join(re.findall(r"[+0-9*#ABCD]*", number))).replace(" ","")
 	if len(newNumber) == 0:
 		return number
@@ -2785,7 +2786,8 @@ class FritzCallFBF_06_35:
 # 		linkP.write(html)
 # 		linkP.close()
 
-		entrymask = re.compile('<td class="tname" title="([^"]*)">[^<]*</td><td class="tnum"(?: datalabel="[^"]*")?>([^<]+(?:<br>[^<]+)*)</td><td class="ttype">([^<]+(?:<br>[^<]+)*)</td><td class="tcode"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td><td class="tvanity"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td>', re.S)
+		entrymask = re.compile('<td class="tname" title="([^"]*)">[^<]*</td><td class="tnum"(?: datalabel="[^"]*")?>((?:<a class="print"[^>]+>)?[^<]+(?:<br>(?:<a class="print"[^>]+>)?[^<]+)*)</td><td class="ttype">([^<]+(?:<br>[^<]+)*)</td><td class="tcode"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td><td class="tvanity"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td>', re.S)
+		# entrymask = re.compile('<td class="tname" title="([^"]*)">[^<]*</td><td class="tnum"(?: datalabel="[^"]*")?>(?:&lt;a class="print"[^&gt;]+&gt;)?([^<]+(?:<br>[^<]+)*)</td><td class="ttype">([^<]+(?:<br>[^<]+)*)</td><td class="tcode"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td><td class="tvanity"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td>', re.S)
 		entries = entrymask.finditer(html)
 		for found in entries:
 			# self.debug("processing entry for '''%s'''" % repr(found.groups()))
@@ -3110,9 +3112,11 @@ class FritzCallFBF_06_35:
 
 		self.debug("")
 
-# 		linkP = open("/tmp/FritzCallDataOverview.lua", "w")
-# 		linkP.write(html)
-# 		linkP.close()
+		#=======================================================================
+		# linkP = open("/tmp/FritzCallGetInfo.lua", "w")
+		# linkP.write(html)
+		# linkP.close()
+		#=======================================================================
 
 		(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = (None, None, None, None, None, None, None, None, None, None)
 
@@ -3164,7 +3168,7 @@ class FritzCallFBF_06_35:
 			self.info("upTime6: " + upTime)
 
 		#found = re.match('.*"ipv4": {\s*"txt": \["IPv4, verbunden seit ([^"]+) Uhr",( "Anbieter: ([^"]*)",)? "IP-Adresse: ([^"]+)"\],', html, re.S)
-		found = re.match('.*"ipv6": {\s*"txt": \["IPv6, [^"]+", "Anbieter: ([^"]*)",', html, re.S)
+		found = re.match('.*"ipv6": {\s*"txt": \["IPv6,(?: [^"]+",)? "Anbieter: ([^"]*)",', html, re.S)
 		if found:
 			provider6 = found.group(1)
 			if provider and provider.find(provider6) == -1:
@@ -3177,7 +3181,7 @@ class FritzCallFBF_06_35:
 			if upTime:
 				upTime = upTime + ' mit ' + provider
 		
-		found = re.match('.*"ipv6": {\s*"txt": \["IPv6, [^"]+",(?: "Anbieter: [^"]*",)? "IPv6-Präfix: ([^"]+)"\],', html, re.S)
+		found = re.match('.*"ipv6": {\s*"txt": \["IPv6,(?: [^"]+",)?(?: "Anbieter: [^"]*",)? "IPv6-(?:Adresse|Präfix): ([^"]+)"\],', html, re.S)
 		if found:
 			if ipAddress:
 				ipAddress = ipAddress + ' / ' + found.group(1).replace('\\', '')
@@ -3234,7 +3238,7 @@ class FritzCallFBF_06_35:
 
 		# found = re.match('.*<tr id="uiTrDect"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">DECT</a></td><td>(?:aus|an, (ein|\d*) Schnurlostelefon)', html, re.S)
 		#found = re.match('.*<div class="desc led_green"><div class="desc title"><a href="">DECT</a></div><div class="details information">an, ([\d+]+) Schnurlostelefone angemeldet</div></div>', html, re.S)
-		found = re.match('.*"dect": {\s*"txt": "an, ([\d+]+) Schnurlostelefone angemeldet",\s*"led": "led_green"', html, re.S)
+		found = re.match('.*"dect": {\s*"txt": "an, ([\d+]+|ein) Schnurlostelefon(?:e)? angemeldet",\s*"led": "led_green"', html, re.S)
 		if found:
 			dectActive = found.group(1)
 		self.info("dectActive: " + repr(dectActive))
@@ -3244,9 +3248,12 @@ class FritzCallFBF_06_35:
 			faxActive = True
 			self.info("faxActive: " + repr(faxActive))
  
-		found = re.match('.*"linktxt": "Rufumleitung",\s*"details": "aktiv",', html, re.S)
+		found = re.match('.*"linktxt": "Rufumleitung",\s*"details": "(?:(\d+) )?aktiv",', html, re.S)
 		if found:
-			rufumlActive = -1 # means no number available
+			if found.group(1):
+				rufumlActive = int(found.group(1))
+			else:
+				rufumlActive = -1 # means no number available
 			self.info("rufumlActive: " + repr(rufumlActive))
  
 		guestAccess = ""
