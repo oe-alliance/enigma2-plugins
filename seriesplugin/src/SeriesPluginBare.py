@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # by betonme @2012
 
+# for localized messages
+from . import _
+
 from Components.config import *
 
 from Screens.MessageBox import MessageBox

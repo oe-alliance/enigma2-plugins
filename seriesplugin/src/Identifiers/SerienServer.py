@@ -19,7 +19,7 @@ from Plugins.Extensions.SeriesPlugin.Logger import logDebug, logInfo
 from Plugins.Extensions.SeriesPlugin import _
 
 # Constants
-SERIEN_SERVER_URL = 'http://serienrecorder.lima-city.de/cache.php'
+SERIEN_SERVER_URL = 'http://176.9.54.54/serienserver/cache/cache.php'
 
 CompiledRegexpReplaceChars = re.compile("[^a-zA-Z0-9-\*]")
 
@@ -37,7 +37,7 @@ class SerienServer(IdentifierBase):
 		if xmlrpclib is not None:
 			from Plugins.Extensions.SeriesPlugin.plugin import REQUEST_PARAMETER
 			self.server = xmlrpclib.ServerProxy(SERIEN_SERVER_URL + REQUEST_PARAMETER, verbose=False)
-
+	
 	@classmethod
 	def knowsElapsed(cls):
 		return True

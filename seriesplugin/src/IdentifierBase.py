@@ -135,10 +135,13 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase):
 				 # For Python 2.6
 				if counter > 2:
 					logDebug("IB: URLError counter > 2")
+					from SeriesPlugin import getInstance
+					instance = getInstance()
+					if instance:
+						instance.stop()
 					raise MyException("There was an URLError: %r" % e)
 				elif hasattr(e, "code"):
-					logDebug("IB: URLError code")
-					print e.code, e.msg, counter
+					logDebug("IB: URLError code", e.code, e.msg, counter)
 					sleep(2)
 					return self.getPage(url, use_proxy, counter+1)
 				else:
@@ -149,10 +152,13 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase):
 				 # For Python 2.7
 				if counter > 2:
 					logDebug("IB: URLError counter > 2")
+					from SeriesPlugin import getInstance
+					instance = getInstance()
+					if instance:
+						instance.stop()
 					raise MyException("There was an SocketTimeout: %r" % e)
 				elif hasattr(e, "code"):
-					logDebug("IB: URLError code")
-					print e.code, e.msg, counter
+					logDebug("IB: URLError code", e.code, e.msg, counter)
 					sleep(2)
 					return self.getPage(url, use_proxy, counter+1)
 				else:

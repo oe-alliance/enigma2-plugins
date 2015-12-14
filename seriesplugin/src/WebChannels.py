@@ -59,7 +59,6 @@ class WebChannels(object):
 			self.user_errback(error)
 
 	def __callback(self, data):
-		#from SP import iso8859_Decode
 		stations = re.findall('<option value=".*?>(.*?)</option>', data, re.S)
 		if stations:
 			web_chlist = []

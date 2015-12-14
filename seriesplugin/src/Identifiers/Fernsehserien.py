@@ -313,6 +313,8 @@ class Fernsehserien(IdentifierBase):
 						for idx, tdnode in enumerate(tdnodes):
 							
 							if not tdnode or not tdnode.string:
+                                                                if idx == TDS_TIME:
+                                                                        tds_time=""
 								continue
 							
 							td = tdnode.string.strip()

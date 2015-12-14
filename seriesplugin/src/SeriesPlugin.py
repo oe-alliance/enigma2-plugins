@@ -112,6 +112,12 @@ def getInstance():
 	
 	return instance
 
+def stopWorker():
+	global instance
+	if instance is not None:
+		logDebug("SP: SERIESPLUGIN STOP WORKER")
+		instance.stop()
+
 def resetInstance():
 	if config.plugins.seriesplugin.lookup_counter.isChanged():
 		config.plugins.seriesplugin.lookup_counter.save()
@@ -180,8 +186,8 @@ def normalizeResult(result):
 	if result and len(result) == 4:
 		logDebug("SP: Worker: result callback")
 		season, episode, title_, series_ = result
-		season = int(CompiledRegexpNonDecimal.sub('', season))
-		episode = int(CompiledRegexpNonDecimal.sub('', episode))
+		season = int(CompiledRegexpNonDecimal.sub('', str(season)))
+		episode = int(CompiledRegexpNonDecimal.sub('', str(episode)))
 		title_ = title_.strip()
 		series_ = series_.strip()
 		if CompiledRegexpReplaceChars:
@@ -245,6 +251,7 @@ class SeriesPluginWorker(Thread):
 
 	def stop(self):
 		self.running = False
+		self.__queue = ThreadQueue()
 		try:
 			self.__pump.recv_msg.get().remove(self.gotThreadMsg)
 		except:
