@@ -52,9 +52,9 @@ service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 
 class EPGSearchList(EPGList):
 	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None):
 		EPGList.__init__(self, type, selChangedCB, timer)
-		self.l.setBuildFunc(self.buildEPGSearchEntry)
-
+		self.listSizeWidth = None
 		self.screenwidth = getDesktop(0).size().width()
+		self.l.setBuildFunc(self.buildEPGSearchEntry)
 
 		if PartnerBoxIconsEnabled:
 			# Partnerbox Clock Icons
@@ -66,6 +66,10 @@ class EPGSearchList(EPGList):
 					LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, 'Extensions/EPGSearchicons/epgclock_add.png'))]
 
 	def buildEPGSearchEntry(self, service, eventId, beginTime, duration, EventName):
+		lsw = self.l.getItemSize().width()
+		if self.listSizeWidth != lsw: #recalc size if scrollbar is shown
+			self.listSizeWidth = lsw
+			self.recalcEntrySize()
 		self.wasEntryAutoTimer = None
 		clock_pic = self.getPixmapForEntry(service, eventId, beginTime, duration)
 		clock_pic_partnerbox = None
