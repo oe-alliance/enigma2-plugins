@@ -29,7 +29,7 @@ from Screens.MessageBox import MessageBox
 
 # Plugin internal
 from IdentifierBase import IdentifierBase
-from Logger import splog
+from Logger import logDebug, initLog, logInfo
 from Channels import ChannelsBase
 from ThreadQueue import ThreadQueue
 from threading import Thread, currentThread, _get_ident
@@ -48,15 +48,16 @@ except Exception as e:
 AUTOTIMER_PATH  = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/AutoTimer/" )
 SERIESPLUGIN_PATH  = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/" )
 
-
 # Globals
 instance = None
 
 CompiledRegexpNonDecimal = re.compile(r'[^\d]+')
+CompiledRegexpReplaceChars = None
+CompiledRegexpReplaceDirChars = re.compile('[^/\w\-_\. ]')
 
 def dump(obj):
 	for attr in dir(obj):
-		splog( "SP: %s = %s" % (attr, getattr(obj, attr)) )
+		logDebug( "SP: %s = %s" % (attr, getattr(obj, attr)) )
 
 
 def getInstance():
@@ -64,63 +65,58 @@ def getInstance():
 	
 	if instance is None:
 		
+		initLog()
+		
 		from plugin import VERSION
 		
-		splog("SP: SERIESPLUGIN NEW INSTANCE " + VERSION)
+		logDebug("SP: SERIESPLUGIN NEW INSTANCE " + VERSION)
 		
 		try:
 			from Tools.HardwareInfo import HardwareInfo
-			splog( "SP: DeviceName " + HardwareInfo().get_device_name().strip() )
-			#from os import uname
-			#uname()[0]'Linux'
-			#uname()[1]'dm7080'
-			#uname()[2]'3.4-3.0-dm7080'
-			#uname()[3]'#13 SMP Thu Dec 4 00:25:51 UTC 2014'
-			#uname()[4]'mips'
+			logDebug( "SP: DeviceName " + HardwareInfo().get_device_name().strip() )
 		except:
 			sys.exc_clear()
 		
 		try:
 			from Components.About import about
-			splog( "SP: EnigmaVersion " + about.getEnigmaVersionString().strip() )
-			splog( "SP: ImageVersion " + about.getVersionString().strip() )
+			logDebug( "SP: EnigmaVersion " + about.getEnigmaVersionString().strip() )
+			logDebug( "SP: ImageVersion " + about.getVersionString().strip() )
 		except:
 			sys.exc_clear()
 		
 		try:
 			#http://stackoverflow.com/questions/1904394/python-selecting-to-read-the-first-line-only
-			splog( "SP: dreamboxmodel " + open("/proc/stb/info/model").readline().strip() )
-			splog( "SP: imageversion " + open("/etc/image-version").readline().strip() )
-			splog( "SP: imageissue " + open("/etc/issue.net").readline().strip() )
+			logDebug( "SP: dreamboxmodel " + open("/proc/stb/info/model").readline().strip() )
+			logDebug( "SP: imageversion " + open("/etc/image-version").readline().strip() )
+			logDebug( "SP: imageissue " + open("/etc/issue.net").readline().strip() )
 		except:
 			sys.exc_clear()
 		
 		try:
 			for key, value in config.plugins.seriesplugin.dict().iteritems():
-				splog( "SP: config..%s = %s" % (key, str(value.value)) )
+				logDebug( "SP: config..%s = %s" % (key, str(value.value)) )
 		except Exception as e:
 			sys.exc_clear()
 		
-		#try:
-		#	if os.path.exists(SERIESPLUGIN_PATH):
-		#		dirList = os.listdir(SERIESPLUGIN_PATH)
-		#		for fname in dirList:
-		#			splog( "SP: ", fname, datetime.fromtimestamp( int( os.path.getctime( os.path.join(SERIESPLUGIN_PATH,fname) ) ) ).strftime('%Y-%m-%d %H:%M:%S') )
-		#except Exception as e:
-		#	sys.exc_clear()
-		#try:
-		#	if os.path.exists(AUTOTIMER_PATH):
-		#		dirList = os.listdir(AUTOTIMER_PATH)
-		#		for fname in dirList:
-		#			splog( "SP: ", fname, datetime.fromtimestamp( int( os.path.getctime( os.path.join(AUTOTIMER_PATH,fname) ) ) ).strftime('%Y-%m-%d %H:%M:%S') )
-		#except Exception as e:
-		#	sys.exc_clear()
+		global CompiledRegexpReplaceChars
+		try:
+			if config.plugins.seriesplugin.replace_chars.value:
+				CompiledRegexpReplaceChars = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
+		except:
+			logInfo( "SP: Config option 'Replace Chars' is no valid regular expression" )
+			CompiledRegexpReplaceChars = re.compile("[:\!/\\,\(\)'\?]")
 		
 		instance = SeriesPlugin()
-		#instance[os.getpid()] = SeriesPlugin()
-		splog( "SP: ", strftime("%a, %d %b %Y %H:%M:%S", localtime()) )
+		
+		logDebug( "SP: ", strftime("%a, %d %b %Y %H:%M:%S", localtime()) )
 	
 	return instance
+
+def stopWorker():
+	global instance
+	if instance is not None:
+		logDebug("SP: SERIESPLUGIN STOP WORKER")
+		instance.stop()
 
 def resetInstance():
 	if config.plugins.seriesplugin.lookup_counter.isChanged():
@@ -128,57 +124,85 @@ def resetInstance():
 	
 	global instance
 	if instance is not None:
-		splog("SP: SERIESPLUGIN INSTANCE STOP")
+		logDebug("SP: SERIESPLUGIN INSTANCE STOP")
 		instance.stop()
 		instance = None
 	
-	from Cacher import cache
-	global cache
-	cache = {}
+	from Cacher import clearCache
+	clearCache()
 
 
-def refactorTitle(org, data):
+def refactorTitle(org_, data):
+	if CompiledRegexpReplaceChars:
+		org = CompiledRegexpReplaceChars.sub('', org_)
+		logDebug("SP: refactor title org", org_, org)
+	else:
+		org = org_
 	if data:
 		season, episode, title, series = data
-		if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off":
-			if config.plugins.seriesplugin.replace_chars.value:
-				repl = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
-				splog("SP: refactor org1", org)
-				org = repl.sub('', org)
-				splog("SP: refactor org2", org)
-			#return config.plugins.seriesplugin.pattern_title.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
-			cust_title = config.plugins.seriesplugin.pattern_title.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
-			cust_title.replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
-			splog("SP: refactor org3", cust_title)
-			return cust_title
+		if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off" and not config.plugins.seriesplugin.pattern_title.value == "Disabled":
+			cust_ = config.plugins.seriesplugin.pattern_title.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			cust = cust_.replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
+			logDebug("SP: refactor title", cust_, cust)
+			return cust
 		else:
 			return org
 	else:
 		return org
 
-def refactorDescription(org, data):
+def refactorDescription(org_, data):
+	if CompiledRegexpReplaceChars:
+		org = CompiledRegexpReplaceChars.sub('', org_)
+		logDebug("SP: refactor desc", org_, org)
+	else:
+		org = org_
 	if data:
 		season, episode, title, series = data
-		if config.plugins.seriesplugin.pattern_description.value and not config.plugins.seriesplugin.pattern_description.value == "Off":
-			if config.plugins.seriesplugin.replace_chars.value:
-				repl = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
-				splog("SP: refactor des1", org)
-				org = repl.sub('', org)
-				splog("SP: refactor des2", org)
-			##if season == 0 and episode == 0:
-			##	description = config.plugins.seriesplugin.pattern_description.value.strip().format( **{'org': org, 'title': title, 'series': series} )
-			##else:
-			#description = config.plugins.seriesplugin.pattern_description.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
-			#description = description.replace("\n", " ")
-			#return description
-			cust_plot = config.plugins.seriesplugin.pattern_description.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
-			cust_plot = cust_plot.replace("\n", " ").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
-			splog("SP: refactor des3", cust_plot)
-			return cust_plot
+		if config.plugins.seriesplugin.pattern_description.value and not config.plugins.seriesplugin.pattern_description.value == "Off" and not config.plugins.seriesplugin.pattern_description.value == "Disabled":
+			cust_ = config.plugins.seriesplugin.pattern_description.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			cust = cust_.replace("\n", " ").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
+			logDebug("SP: refactor desc", cust_, cust)
+			return cust
 		else:
 			return org
 	else:
 		return org
+
+def refactorDirectory(org, data):
+	if data:
+		season, episode, title, series = data
+		if config.plugins.seriesplugin.pattern_directory.value and not config.plugins.seriesplugin.pattern_directory.value == "Off" and not config.plugins.seriesplugin.pattern_directory.value == "Disabled":
+			cust_ = config.plugins.seriesplugin.pattern_directory.value.strip().format( **{'org': org, 'season': season, 'episode': episode, 'title': title, 'series': series} )
+			cust_ = cust_.replace("\n", " ").replace('&amp;','&').replace('&apos;',"'").replace('&gt;','>').replace('&lt;','<').replace('&quot;','"').replace('/',' ').replace('  ',' ')
+			cust = CompiledRegexpReplaceDirChars.sub('_', cust_)
+			logDebug("SP: refactor dir", cust_, cust)
+			return cust
+		else:
+			return org
+	else:
+		return org
+
+def normalizeResult(result):
+	if result and len(result) == 4:
+		logDebug("SP: Worker: result callback")
+		season, episode, title_, series_ = result
+		season = int(CompiledRegexpNonDecimal.sub('', str(season)))
+		episode = int(CompiledRegexpNonDecimal.sub('', str(episode)))
+		title_ = title_.strip()
+		series_ = series_.strip()
+		if CompiledRegexpReplaceChars:
+			title = CompiledRegexpReplaceChars.sub('', title_)
+			logDebug("SP: normalize title", title_, title)
+			
+			series = CompiledRegexpReplaceChars.sub('', series_)
+			logDebug("SP: normalize serie", series_, series)
+		else:
+			title = title_
+			series = series_
+		return (season, episode, title, series)
+	else:
+		logDebug("SP: Worker: result failed", str(result))
+		return result
 
 
 class ThreadItem:
@@ -213,12 +237,6 @@ class SeriesPluginWorker(Thread):
 
 	def add(self, item):
 		
-		from ctypes import CDLL
-		SYS_gettid = 4222
-		libc = CDLL("libc.so.6")
-		tid = libc.syscall(SYS_gettid)
-		splog('SP: Worker add from thread: ', currentThread(), _get_ident(), self.ident, os.getpid(), tid )
-		
 		self.__queue.push(item)
 		
 		if not self.__running:
@@ -227,18 +245,13 @@ class SeriesPluginWorker(Thread):
 	
 	def gotThreadMsg(self, msg=None):
 		
-		from ctypes import CDLL
-		SYS_gettid = 4222
-		libc = CDLL("libc.so.6")
-		tid = libc.syscall(SYS_gettid)
-		splog('SP: Worker got message: ', currentThread(), _get_ident(), self.ident, os.getpid(), tid )
-		
 		data = self.__messages.pop()
 		if callable(self.callback):
 			self.callback(data)
 
 	def stop(self):
 		self.running = False
+		self.__queue = ThreadQueue()
 		try:
 			self.__pump.recv_msg.get().remove(self.gotThreadMsg)
 		except:
@@ -247,20 +260,14 @@ class SeriesPluginWorker(Thread):
 	
 	def run(self):
 		
-		from ctypes import CDLL
-		SYS_gettid = 4222
-		libc = CDLL("libc.so.6")
-		tid = libc.syscall(SYS_gettid)
-		splog('SP: Worker got message: ', currentThread(), _get_ident(), self.ident, os.getpid(), tid )
-		
 		while not self.__queue.empty():
 			
 			# NOTE: we have to check this here and not using the while to prevent the parser to be started on shutdown
 			if not self.__running: break
 			
-			item = self.__queue.pop()
+			logDebug('SP: Worker is processing')
 			
-			splog('SP: Worker is processing')
+			item = self.__queue.pop()
 			
 			result = None
 			
@@ -269,38 +276,18 @@ class SeriesPluginWorker(Thread):
 					item.name, item.begin, item.end, item.service
 				)
 			except Exception, e:
-				splog("SP: Worker: Exception:", str(e))
+				logDebug("SP: Worker: Exception:", str(e))
 				
 				# Exception finish job with error
 				result = str(e)
 			
 			config.plugins.seriesplugin.lookup_counter.value += 1
 			
-			if result and len(result) == 4:
-				splog("SP: Worker: result callback")
-				season, episode, title, series = result
-				season = int(CompiledRegexpNonDecimal.sub('', season))
-				episode = int(CompiledRegexpNonDecimal.sub('', episode))
-				title = title.strip()
-				if config.plugins.seriesplugin.replace_chars.value:
-					repl = re.compile('['+config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\")+']')
-					
-					splog("SP: refactor title", title)
-					title = repl.sub('', title)
-					splog("SP: refactor title", title)
-					
-					splog("SP: refactor series", series)
-					series = repl.sub('', series)
-					splog("SP: refactor series", series)
-				self.__messages.push( (item.callback, (season, episode, title, series)) )
-			else:
-				splog("SP: Worker: result failed")
-				self.__messages.push( (item.callback, result) )
+			self.__messages.push( (item.callback, normalizeResult(result)) )
+			
 			self.__pump.send(0)
-			#from twisted.internet import reactor
-			#reactor.callFromThread(self.gotThreadMsg)
 		
-		splog('SP: Worker: list is emty, done')
+		logDebug('SP: Worker: list is emty, done')
 		Thread.__init__(self)
 		self.__running = False
 
@@ -308,7 +295,7 @@ class SeriesPluginWorker(Thread):
 class SeriesPlugin(Modules, ChannelsBase):
 
 	def __init__(self):
-		splog("SP: Main: Init")
+		logDebug("SP: Main: Init")
 		self.thread = SeriesPluginWorker(self.gotResult)
 		Modules.__init__(self)
 		ChannelsBase.__init__(self)
@@ -319,13 +306,13 @@ class SeriesPlugin(Modules, ChannelsBase):
 		datetime.strptime('2012-01-01', '%Y-%m-%d')
 		
 		self.identifier_elapsed = self.instantiateModuleWithName( config.plugins.seriesplugin.identifier_elapsed.value )
-		#splog(self.identifier_elapsed)
+		#logDebug(self.identifier_elapsed)
 		
 		self.identifier_today = self.instantiateModuleWithName( config.plugins.seriesplugin.identifier_today.value )
-		#splog(self.identifier_today)
+		#logDebug(self.identifier_today)
 		
 		self.identifier_future = self.instantiateModuleWithName( config.plugins.seriesplugin.identifier_future.value )
-		#splog(self.identifier_future)
+		#logDebug(self.identifier_future)
 		
 		pattern = config.plugins.seriesplugin.pattern_title.value
 		pattern = pattern.replace("{org:s}", "(.+)")
@@ -346,14 +333,18 @@ class SeriesPlugin(Modules, ChannelsBase):
 		else:
 			return None
 	
-	def getEpisode(self, callback, name, begin, end=None, service=None, future=False, today=False, elapsed=False, rename=False):
-		#available = False
+	def getEpisodeBlocking(self, name, begin, end=None, service=None, future=False, today=False, elapsed=False, rename=False):
+		
+		return self.getEpisode(None, name, begin, end, service, future, today, elapsed, rename, block=True)
+
+	def getEpisode(self, callback, name, begin_, end_=None, service=None, future=False, today=False, elapsed=False, rename=False, block=False):
 		
 		if config.plugins.seriesplugin.skip_during_records.value:
 			try:
 				import NavigationInstance
 				if NavigationInstance.instance.RecordTimer.isRecording():
-					splog("SP: Main: Skip check during running records")
+					logDebug("SP: Main: Skip check during running records")
+					callback( "Skip check during running records (Can be disabled)" )
 					return
 			except:
 				pass
@@ -361,18 +352,19 @@ class SeriesPlugin(Modules, ChannelsBase):
 		# Check for episode information in title
 		match = self.compiledRegexpSeries.match(name)
 		if match:
-			#splog(match.group(0))     # Entire match
-			#splog(match.group(1))     # First parenthesized subgroup
+			#logDebug(match.group(0))     # Entire match
+			#logDebug(match.group(1))     # First parenthesized subgroup
 			if not rename and config.plugins.seriesplugin.skip_pattern_match.value:
-				splog("SP: Main: Skip check because of pattern match")
+				logDebug("SP: Main: Skip check because of pattern match")
 				return
 			if match.group(1):
 				name = match.group(1)
 		
-		begin = datetime.fromtimestamp(begin)
-		splog("SP: Main: begin:", begin.strftime('%Y-%m-%d %H:%M:%S'))
-		end = datetime.fromtimestamp(end)
-		splog("SP: Main: end:", end.strftime('%Y-%m-%d %H:%M:%S'))
+		begin = datetime.fromtimestamp(begin_)
+		logDebug("SP: Main: begin:", begin.strftime('%Y-%m-%d %H:%M:%S'), str(begin_))
+		
+		end = datetime.fromtimestamp(end_)
+		logDebug("SP: Main: end:", end.strftime('%Y-%m-%d %H:%M:%S'), str(end_))
 		
 		if elapsed:
 			identifier = self.identifier_elapsed
@@ -396,104 +388,37 @@ class SeriesPlugin(Modules, ChannelsBase):
 			# Reset the knownids on every new request
 			identifier.knownids = []
 			
-			#if isinstance(service, eServiceReference):
 			try:
 				serviceref = service.toString()
-			#else:
 			except:
 				sys.exc_clear()
 				serviceref = str(service)
 			serviceref = re.sub('::.*', ':', serviceref)
 
-			self.thread.add( ThreadItem(identifier, callback, name, begin, end, serviceref) )
-			
-			return identifier.getName()
-
-	def getEpisodeBlocking(self, name, begin, end=None, service=None, future=False, today=False, elapsed=False, rename=False):
-		#available = False
-		
-		if config.plugins.seriesplugin.skip_during_records.value:
-			try:
-				import NavigationInstance
-				if NavigationInstance.instance.RecordTimer.isRecording():
-					splog("SP: Main: Skip check during running records")
-					return
-			except:
-				pass
-		
-		# Check for episode information in title
-		match = self.compiledRegexpSeries.match(name)
-		if match:
-			#splog(match.group(0))     # Entire match
-			#splog(match.group(1))     # First parenthesized subgroup
-			if not rename and config.plugins.seriesplugin.skip_pattern_match.value:
-				splog("SP: Main: Skip check because of pattern match")
-				return
-			if match.group(1):
-				name = match.group(1)
-		
-		begin = datetime.fromtimestamp(begin)
-		splog("SP: Main: begin:", begin.strftime('%Y-%m-%d %H:%M:%S'))
-		end = datetime.fromtimestamp(end)
-		splog("SP: Main: end:", end.strftime('%Y-%m-%d %H:%M:%S'))
-		
-		if elapsed:
-			identifier = self.identifier_elapsed
-		elif today:
-			identifier = self.identifier_today
-		elif future:
-			identifier = self.identifier_future
-		else:
-			identifier = None
-		
-		if not identifier:
-			return "Error: No identifier available"
-		
-		elif identifier.channelsEmpty():
-			return "Error: Open setup and channel editor"
-		
-		else:
-			# Reset title search depth on every new request
-			identifier.search_depth = 0;
-			
-			# Reset the knownids on every new request
-			identifier.knownids = []
-			
-			#if isinstance(service, eServiceReference):
-			try:
-				serviceref = service.toString()
-			#else:
-			except:
-				sys.exc_clear()
-				serviceref = str(service)
-			serviceref = re.sub('::.*', ':', serviceref)
-			
-			result = None
-			
-			try:
-				result = identifier.getEpisode( name, begin, end, serviceref )
-			except Exception, e:
-				splog("SP: Worker: Exception:", str(e))
+			if block == False:
 				
-				# Exception finish job with error
-				result = str(e)
-			
-			config.plugins.seriesplugin.lookup_counter.value += 1
-			
-			splog("SP: Worker: result")
-			if result and len(result) == 4:
-				season, episode, title, series = result
-				season = int(CompiledRegexpNonDecimal.sub('', season))
-				episode = int(CompiledRegexpNonDecimal.sub('', episode))
-				title = title.strip()
-				splog("SP: Worker: result callback")
-				return (season, episode, title, series)
+				self.thread.add( ThreadItem(identifier, callback, name, begin, end, serviceref) )
+				
+				return identifier.getName()
+				
 			else:
-				splog("SP: Worker: result failed")
-				return result
+				
+				result = None
+				
+				try:
+					result = identifier.getEpisode( name, begin, end, serviceref )
+				except Exception, e:
+					logDebug("SP: Worker: Exception:", str(e))
+					
+					# Exception finish job with error
+					result = str(e)
+				
+				config.plugins.seriesplugin.lookup_counter.value += 1
+				
+				return normalizeResult(result)
 
 	def gotResult(self, msg):
-		splog("SP: Main: Thread: gotResult:", msg)
+		logDebug("SP: Main: Thread: gotResult:", msg)
 		callback, data = msg
 		if callable(callback):
 			callback(data)
@@ -511,7 +436,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 			)
 
 	def stop(self):
-		splog("SP: Main: stop")
+		logDebug("SP: Main: stop")
 		self.thread.stop()
 		# NOTE: while we don't need to join the thread, we should do so in case it's currently parsing
 		#self.thread.join()

@@ -33,7 +33,7 @@ from time import localtime
 # Plugin internal
 from SeriesPlugin import getInstance, refactorTitle, refactorDescription
 from SeriesPluginTimer import SeriesPluginTimer
-from Logger import splog
+from Logger import logDebug, logInfo
 
 
 # Globals
@@ -58,21 +58,21 @@ def runIndependent():
 		for timer in NavigationInstance.instance.RecordTimer.timer_list:
 			
 			if timer.isRunning():
-				splog("SeriesPluginIndependent: Skip running timer", timer.name)
+				logDebug("SeriesPluginIndependent: Skip running timer", timer.name)
 				continue
 			
 			if timer.justplay:
-				splog("SeriesPluginIndependent: Skip justplay timer", timer.name)
+				logDebug("SeriesPluginIndependent: Skip justplay timer", timer.name)
 				continue
 			
 			if timer.repeated:
-				splog("SeriesPluginIndependent: Skip repeating timer", timer.name)
+				logDebug("SeriesPluginIndependent: Skip repeating timer", timer.name)
 				continue
 			
 			if not config.plugins.seriesplugin.independent_retry.value:
-				splog("SeriesPluginIndependent: timer retry is disabled")
+				logDebug("SeriesPluginIndependent: timer retry is disabled")
 				if hasattr(timer, 'serieslookupdone') and timer.serieslookupdone:
-					splog("SeriesPluginIndependent: Skip timer retry", timer.name)
+					logDebug("SeriesPluginIndependent: Skip timer retry", timer.name)
 					continue
 			
 			#Maybe later add a series whitelist xml
@@ -81,7 +81,7 @@ def runIndependent():
 			timer.serieslookupdone = True
 	
 	except Exception as e:
-		splog("SeriesPluginIndependent: run exception " + str(e))
+		logDebug("SeriesPluginIndependent: run exception " + str(e))
 
 
 
@@ -105,7 +105,7 @@ class SeriesPluginIndependent(object):
 		#self.etimer.start( 10, True )
 
 	def run(self):
-		splog("SeriesPluginIndependent: run",  strftime("%a, %d %b %Y %H:%M:%S", localtime()) )
+		logDebug("SeriesPluginIndependent: run",  strftime("%a, %d %b %Y %H:%M:%S", localtime()) )
 
 		runIndependent()
 

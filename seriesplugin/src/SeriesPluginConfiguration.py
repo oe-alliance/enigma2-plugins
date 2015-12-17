@@ -41,8 +41,9 @@ from Plugins.Plugin import PluginDescriptor
 # Plugin internal
 from SeriesPlugin import resetInstance, getInstance
 from SeriesPluginIndependent import startIndependent, stopIndependent
-from EpisodePatterns import readPatternFile
-from Logger import splog
+from FilePatterns import readFilePatterns
+from DirectoryPatterns import readDirectoryPatterns
+from Logger import logDebug, logInfo
 from ShowLogScreen import ShowLogScreen
 from Channels import getTVBouquets
 from ChannelEditor import ChannelEditor
@@ -109,10 +110,12 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		self.cfg_identifier_future  = NoSave( ConfigSelection(choices = identifiers_future,  default = config.plugins.seriesplugin.identifier_future.value  or identifiers_future[0]) )
 		
 		# Load patterns
-		patterns = readPatternFile()
-		self.cfg_pattern_title       = NoSave( ConfigSelection(choices = patterns, default = config.plugins.seriesplugin.pattern_title.value ) )
-		self.cfg_pattern_description = NoSave( ConfigSelection(choices = patterns, default = config.plugins.seriesplugin.pattern_description.value ) )
-		#self.cfg_pattern_record      = NoSave( ConfigSelection(choices = patterns, default = config.plugins.seriesplugin.pattern_record.value ) )
+		patterns_file = readFilePatterns()
+		self.cfg_pattern_title       = NoSave( ConfigSelection(choices = patterns_file, default = config.plugins.seriesplugin.pattern_title.value ) )
+		self.cfg_pattern_description = NoSave( ConfigSelection(choices = patterns_file, default = config.plugins.seriesplugin.pattern_description.value ) )
+		#self.cfg_pattern_record     = NoSave( ConfigSelection(choices = patterns_file, default = config.plugins.seriesplugin.pattern_record.value ) )
+		patterns_directory = readDirectoryPatterns()
+		self.cfg_pattern_directory   = NoSave( ConfigSelection(choices = patterns_directory, default = config.plugins.seriesplugin.pattern_directory.value ) )
 		
 		bouquetList = [("", "")]
 		tvbouquets = getTVBouquets()
@@ -122,6 +125,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		
 		checkList( self.cfg_pattern_title )
 		checkList( self.cfg_pattern_description )
+		checkList( self.cfg_pattern_directory )
 		checkList( self.cfg_bouquet_main )
 		
 		self.changesMade = False
@@ -162,7 +166,12 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			self.list.append( getConfigListEntry(  _("Episode pattern file")                       , config.plugins.seriesplugin.pattern_file ) )
 			self.list.append( getConfigListEntry(  _("Record title episode pattern")               , self.cfg_pattern_title ) )
 			self.list.append( getConfigListEntry(  _("Record description episode pattern")         , self.cfg_pattern_description ) )
-			self.list.append( getConfigListEntry(  _("Skip search if pattern matches")             , config.plugins.seriesplugin.skip_pattern_match ) )
+			
+			self.list.append( getConfigListEntry(  _("Directory pattern file")                     , config.plugins.seriesplugin.pattern_file_directories ) )
+			self.list.append( getConfigListEntry(  _("Record directory pattern")                   , self.cfg_pattern_directory ) )
+			
+			self.list.append( getConfigListEntry(  _("Default season")                             , config.plugins.seriesplugin.default_season ) )
+			self.list.append( getConfigListEntry(  _("Default episode")                            , config.plugins.seriesplugin.default_episode ) )
 			
 			self.list.append( getConfigListEntry(  _("Replace special characters in title")        , config.plugins.seriesplugin.replace_chars ) )
 			
@@ -184,6 +193,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			self.list.append( getConfigListEntry(  _("Max time drift to match episode")            , config.plugins.seriesplugin.max_time_drift ) )
 			self.list.append( getConfigListEntry(  _("Title search depths")                        , config.plugins.seriesplugin.search_depths ) )
 			
+			self.list.append( getConfigListEntry(  _("Skip search if pattern matches")             , config.plugins.seriesplugin.skip_pattern_match ) )
 			self.list.append( getConfigListEntry(  _("Skip search during records")                 , config.plugins.seriesplugin.skip_during_records ) )
 			
 			self.list.append( getConfigListEntry(  _("AutoTimer independent mode")                 , config.plugins.seriesplugin.autotimer_independent ) )
@@ -191,6 +201,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 				self.list.append( getConfigListEntry(  _("Check timer every x minutes")            , config.plugins.seriesplugin.independent_cycle ) )
 				self.list.append( getConfigListEntry(  _("Always retry to find series info")       , config.plugins.seriesplugin.independent_retry ) )
 			
+			self.list.append( getConfigListEntry(  _("Check Timer for corresponding EPG events")   , config.plugins.seriesplugin.timer_eit_check ) )
 			self.list.append( getConfigListEntry(  _("Show warnings after Timer handling")         , config.plugins.seriesplugin.timer_popups ) )
 			self.list.append( getConfigListEntry(  _("Show success after Timer handling")          , config.plugins.seriesplugin.timer_popups_success ) )
 			if (-1 < config.plugins.seriesplugin.timer_popups.value) or (-1 < config.plugins.seriesplugin.timer_popups_success.value):
@@ -249,17 +260,11 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		config.plugins.seriesplugin.pattern_title.value       = self.cfg_pattern_title.value
 		config.plugins.seriesplugin.pattern_description.value = self.cfg_pattern_description.value
 		#config.plugins.seriesplugin.pattern_record.value      = self.cfg_pattern_record.value
+		config.plugins.seriesplugin.pattern_directory.value       = self.cfg_pattern_directory.value
 		config.plugins.seriesplugin.bouquet_main.value = self.cfg_bouquet_main.value
 		config.plugins.seriesplugin.save()
 		
 		self.seriesPlugin.saveXML()
-		
-		from plugin import overwriteAutoTimer, recoverAutoTimer
-		
-		if config.plugins.seriesplugin.enabled.value:
-			overwriteAutoTimer()
-		else:
-			recoverAutoTimer()
 		
 		# Set new configuration
 		from plugin import WHERE_EPGMENU, WHERE_CHANNELMENU, addSeriesPlugin, removeSeriesPlugin, SHOWINFO, RENAMESERIES, CHECKTIMERS, info, sp_extension, channel, movielist_info, movielist_rename, checkTimers
@@ -311,7 +316,8 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 	# Overwrite ConfigListScreen keyCancel function
 	def keyCancel(self):
 		self.help_window_was_shown = False
-		splog("SPC keyCancel")
+		logDebug("SPC keyCancel")
+		#self.seriesPlugin.resetChannels()
 		resetInstance()
 		if self["config"].isChanged() or self.changesMade:
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
@@ -351,7 +357,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		self.session.openWithCallback(self.channelEditorClosed, ChannelEditor, )
 
 	def channelEditorClosed(self, result=None):
-		splog("SPC channelEditorClosed", result)
+		logDebug("SPC channelEditorClosed", result)
 		if result:
 			self.changesMade = True
 		else:

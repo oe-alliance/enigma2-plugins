@@ -19,44 +19,90 @@
 
 from . import _
 
+import logging
+
 import os, sys, traceback
 
 from Components.config import config
 
-from Screens.MessageBox import MessageBox
+localLog = False
+log = ""
+logger = None
 
-#import requests
-
-
-def splog(*args):
-	strargs = ""
-	for arg in args:
-		if strargs: strargs += " "
-		strargs += str(arg)
+def initLog():
+	global logger
+	logger = logger or logging.getLogger("SeriesPlugin")
+	logger.setLevel(logging.WARNING)
+	
+	logger.handlers = [] 
 	
 	if config.plugins.seriesplugin.debug_prints.value:
+		shandler = logging.StreamHandler(sys.stdout)
+		shandler.setLevel(logging.DEBUG)
+
+		sformatter = logging.Formatter('[%(name)s] %(levelname)s - %(message)s')
+		shandler.setFormatter(sformatter)
+
+		logger.addHandler(shandler)
+		logger.setLevel(logging.DEBUG)
+		
+	if config.plugins.seriesplugin.write_log.value:
+		fhandler = logging.FileHandler(config.plugins.seriesplugin.log_file.value)
+		fhandler.setLevel(logging.DEBUG)
+
+		fformatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+		fhandler.setFormatter(fformatter)
+
+		logger.addHandler(fhandler)
+		logger.setLevel(logging.DEBUG)
+
+def shutdownLog():
+	global logger
+	if logger:
+		logger.shutdown()
+
+def startLog():
+	global log, localLog
+	log = ""
+	localLog = True
+
+def getLog():
+	global log, localLog
+	localLog = False
+	return log
+
+def logInfo(*args):
+	strargs = " ".join( [ str(arg) for arg in args ] )
+	
+	global log, localLog
+	if localLog:
+		log += "&#13;&#10;" + strargs
+	
+	global logger
+	if logger:
+		logger.info(strargs)
+	
+	elif config.plugins.seriesplugin.debug_prints.value:
 		print strargs
 	
-	if config.plugins.seriesplugin.write_log.value:
-		strargs += "\n"
-		
-		# Append to file
-		f = None
-		try:
-			f = open(config.plugins.seriesplugin.log_file.value, 'a')
-			f.write(strargs)
-			if sys.exc_info()[0]:
-				print "Unexpected error:", sys.exc_info()[0]
-				traceback.print_exc(file=f)
-		except Exception as e:
-			print "SeriesPlugin splog exception " + str(e)
-		finally:
-			if f:
-				f.close()
+	if sys.exc_info()[0]:
+		logger.debug( str(sys.exc_info()[0]) )
+		logger.debug( str(traceback.format_exc()) )
+		sys.exc_clear()
+
+def logDebug(*args):
+	strargs = " ".join( [ str(arg) for arg in args ] )
+
+	global logger
+	if logger:
+		logger.debug(strargs)
+	
+	elif config.plugins.seriesplugin.debug_prints.value:
+		print strargs
 	
 	if sys.exc_info()[0]:
-		print "Unexpected error:", sys.exc_info()[0]
-		traceback.print_exc(file=sys.stdout)
-	
-	sys.exc_clear()
+		logger.debug( str(sys.exc_info()[0]) )
+		logger.debug( str(traceback.format_exc()) )
+		sys.exc_clear()
 
+initLog()

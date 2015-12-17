@@ -2,28 +2,32 @@
 # by betonme @2012
 
 # Imports
+import re
+
 from Components.config import config
 
 from Tools.BoundFunction import boundFunction
 
 from urllib import urlencode
 
-from HTMLParser import HTMLParser
-
 from datetime import datetime
 
-import re
 from sys import maxint
 
 # Internal
 from Plugins.Extensions.SeriesPlugin.IdentifierBase import IdentifierBase
-from Plugins.Extensions.SeriesPlugin.Logger import splog
+from Plugins.Extensions.SeriesPlugin.Logger import logDebug, logInfo
+from Plugins.Extensions.SeriesPlugin import _
 
-from iso8601 import parse_date
+try:
+	from HTMLParser import HTMLParser
+except ImportError as ie:
+	HTMLParser = None
 
-#import codecs
-#utf8_encoder = codecs.getencoder("utf-8")
-
+try:
+	from iso8601 import parse_date
+except ImportError as ie:
+	parse_date = None
 
 # Constants
 SERIESLISTURL     = "http://www.wunschliste.de/ajax/search_dropdown.pl?"
@@ -62,39 +66,39 @@ CompiledRegexpEpisode = re.compile( '((\d+)[\.x])?(\d+)')
 
 def str_to_utf8(s):
 	# Convert a byte string with unicode escaped characters
-	splog("WL: str_to_utf8: s: ", repr(s))
+	logDebug("WLF: str_to_utf8: s: ", repr(s))
 	#unicode_str = s.decode('unicode-escape')
-	#splog("WL: str_to_utf8: s: ", repr(unicode_str))
+	#logDebug("WLF: str_to_utf8: s: ", repr(unicode_str))
 	## Python 2.x can't convert the special chars nativly
 	#utf8_str = utf8_encoder(unicode_str)[0]
-	#splog("WL: str_to_utf8: s: ", repr(utf8_str))
+	#logDebug("WLF: str_to_utf8: s: ", repr(utf8_str))
 	#return utf8_str  #.decode("utf-8").encode("ascii", "ignore")
 	if type(s) != unicode:
 		# Default shoud be here
 		try:
 			s = s.decode('ISO-8859-1')
-			splog("WL: str_to_utf8 decode ISO-8859-1: s: ", repr(s))
+			logDebug("WLF: str_to_utf8 decode ISO-8859-1: s: ", repr(s))
 		except:
 			try:
 				s = unicode(s, 'utf-8')
 				s = s.encode('ISO-8859-1')
-				splog("WL: str_to_utf8 decode utf-8: s: ", repr(s))
+				logDebug("WLF: str_to_utf8 decode utf-8: s: ", repr(s))
 			except:
 				try:
 					s = unicode(s, 'cp1252')
 					s = s.encode('ISO-8859-1')
-					splog("WL: str_to_utf8 decode cp1252: s: ", repr(s))
+					logDebug("WLF: str_to_utf8 decode cp1252: s: ", repr(s))
 				except:
 					s = unicode(s, 'utf-8', 'ignore')
 					s = s.encode('ISO-8859-1')
-					splog("WL: str_to_utf8 decode utf-8 ignore: s: ", repr(s))
+					logDebug("WLF: str_to_utf8 decode utf-8 ignore: s: ", repr(s))
 	else:
 		try:
 			s = s.encode('ISO-8859-1')
-			splog("WL: str_to_utf8 encode ISO-8859-1: s: ", repr(s))
+			logDebug("WLF: str_to_utf8 encode ISO-8859-1: s: ", repr(s))
 		except:
 			s = s.encode('ISO-8859-1', 'ignore')
-			splog("WL: str_to_utf8 except encode ISO-8859-1 ignore: s: ", repr(s))
+			logDebug("WLF: str_to_utf8 except encode ISO-8859-1 ignore: s: ", repr(s))
 	return s
 
 
@@ -142,9 +146,41 @@ class WunschlisteFeed(IdentifierBase):
 	def knowsFuture(cls):
 		return True
 
+	def getName(self):
+		return "Wunschliste"
+
 	def getEpisode(self, name, begin, end=None, service=None):
 		# On Success: Return a single season, episode, title tuple
 		# On Failure: Return a empty list or String or None
+		
+		
+		# Check dependencies
+		if HTMLParser is None:
+			msg = _("Error install")  + " HTMLParser"
+			logInfo(msg)
+			return msg
+		if parse_date is None:
+			msg = _("Error install")  + " parse_date"
+			logInfo(msg)
+			return msg
+		
+		
+		# Check preconditions
+		if not name:
+			msg =_("Skip: No show name specified")
+			logInfo(msg)
+			return msg
+		if not begin:
+			msg = _("Skip: No begin timestamp specified")
+			logInfo(msg)
+			return msg
+		if not service:
+			msg = _("Skip: No service specified")
+			logInfo(msg)
+			return msg
+		
+		
+		logInfo("WLF: getEpisode, name, begin, end=None, service", name, begin, end, service)
 		
 		self.begin = begin
 		self.end = end
@@ -152,16 +188,6 @@ class WunschlisteFeed(IdentifierBase):
 		
 		self.knownids = []
 		self.returnvalue = None
-		
-		# Check preconditions
-		if not name:
-			splog(_("Skip Wunschliste: No show name specified"))
-			return _("Skip Wunschliste: No show name specified")
-		if not begin:
-			splog(_("Skip Wunschliste: No begin timestamp specified"))
-			return _("Skip Wunschliste: No begin timestamp specified")
-		
-		splog("WunschlisteFeed getEpisode")
 		
 		while name:	
 			ids = self.getSeries(name)
@@ -174,6 +200,7 @@ class WunschlisteFeed(IdentifierBase):
 					
 					# Handle encodings
 					self.series = str_to_utf8(idname)
+					logInfo("WLF: Possible matched series:", self.series)
 					
 					result = self.getNextPage( id )
 					if result:
@@ -187,7 +214,7 @@ class WunschlisteFeed(IdentifierBase):
 
 	def getSeries(self, name):
 		#url = SERIESLISTURL + urlencode({ 'q' : re.sub("[^a-zA-Z0-9-*]", " ", name) })
-		url = SERIESLISTURL + urlencode({ 'q' : name })
+		url = SERIESLISTURL + urlencode({ 'q' : name.lower() })
 		data = self.getPage( url )
 		
 		if data and isinstance(data, basestring):
@@ -195,7 +222,7 @@ class WunschlisteFeed(IdentifierBase):
 			self.doCacheList(url, data)
 		
 		if data and isinstance(data, list):
-			splog("WunschlisteFeed ids", data)
+			logDebug("WLF: ids", data)
 			return self.filterKnownIds(data)
 
 	def parseSeries(self, data):
@@ -204,10 +231,10 @@ class WunschlisteFeed(IdentifierBase):
 			values = line.split("|")
 			if len(values) == 4:
 				idname, countryyear, id, temp = values
-				splog(id, idname)
+				logDebug(id, idname)
 				serieslist.append( (id, idname) )
 			else:
-				splog("WunschlisteFeed: ParseError: " + str(line))
+				logDebug("WLF: ParseError: " + str(line))
 		serieslist.reverse()
 		return serieslist
 
@@ -216,11 +243,11 @@ class WunschlisteFeed(IdentifierBase):
 		data = data.replace('&amp;','&')  # target=\"_blank\"&amp;
 		parser = WLAtomParser()
 		parser.feed(data)
-		#splog(parser.list)
+		#logDebug(parser.list)
 		return parser.list
 	
 	def getNextPage(self, id):
-		splog("WunschlisteFeed getNextPage")
+		logDebug("WLF: getNextPage")
 		
 		url = EPISODEIDURLATOM + urlencode({ 's' : id })
 		data = self.getPage( url )
@@ -250,14 +277,17 @@ class WunschlisteFeed(IdentifierBase):
 						#Py2.6
 						delta = abs(self.begin - xbegin)
 						delta = delta.seconds + delta.days * 24 * 3600
-						#Py2.7 delta = abs(self.begin - xbegin).total_seconds()
-						splog(self.begin, xbegin, delta, self.max_time_drift)
+						#Py2.7
+						#delta = abs(self.begin - xbegin).total_seconds()
+						logDebug("WLF:", self.begin, '-', xbegin, '-', delta, '-', self.max_time_drift)
 						
 						if delta <= self.max_time_drift:
 							result = CompiledRegexpAtomChannel.search(xtitle)
 							if result and len(result.groups()) >= 1:
 								
-								if self.compareChannels(self.service, result.group(1)):
+								xchannel = result.group(1)
+								logInfo("WLF: Possible match witch channel: ", xchannel)
+								if self.compareChannels(self.service, xchannel):
 									
 									if delta < ydelta:
 										# Slice string to remove channel
@@ -277,16 +307,16 @@ class WunschlisteFeed(IdentifierBase):
 												
 												result = CompiledRegexpEpisode.search(xepisode)
 												if result and len(result.groups()) >= 3:
-													xseason = result and result.group(2) or "1"
-													xepisode = result and result.group(3) or "0"
+													xseason = result and result.group(2) or config.plugins.seriesplugin.default_season.value
+													xepisode = result and result.group(3) or config.plugins.seriesplugin.default_episode.value
 												else:
-													splog("WunschlisteFeed wrong episode format", xepisode)
-													xseason = "1"
-													xepisode = "0"
+													logDebug("WLF: wrong episode format", xepisode)
+													xseason = config.plugins.seriesplugin.default_season.value
+													xepisode = config.plugins.seriesplugin.default_episode.value
 											else:
-												splog("WunschlisteFeed wrong title format", xtitle)
-												xseason = "0"
-												xepisode = "0"
+												logDebug("WLF: wrong title format", xtitle)
+												xseason = config.plugins.seriesplugin.default_season.value
+												xepisode = config.plugins.seriesplugin.default_episode.value
 											result = CompiledRegexpAtomTitle.search(xtitle)
 											
 											if result and len(result.groups()) >= 1:
@@ -306,8 +336,19 @@ class WunschlisteFeed(IdentifierBase):
 								else:
 									self.returnvalue = _("Check the channel name")
 								
-						elif yepisode:
-							break
+						else:
+							if yepisode:
+								return ( yepisode )
+							
+							if delta <= 600:
+								# Compare channels?
+								logInfo("WLF: Max time trift exceeded", delta)
 			
 			if yepisode:
 				return ( yepisode )
+
+		else:
+			logInfo("WLF: No data returned")
+		
+		# Nothing found
+		return
