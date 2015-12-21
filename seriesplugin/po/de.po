@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SeriesPlugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-06 00:50+0100\n"
-"PO-Revision-Date: 2015-12-06 01:31+0100\n"
+"POT-Creation-Date: 2015-12-07 21:15+0100\n"
+"PO-Revision-Date: 2015-12-07 21:45+0100\n"
 "Last-Translator: James Blond <jb@unknown.com>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -97,13 +97,13 @@ msgid "Error install"
 msgstr "Fehler Installation"
 
 msgid "Skip: No show name specified"
-msgstr "Ausgelassen: kein Sendungsnamen angegeben"
+msgstr "Übersprungen: kein Sendungsnamen angegeben"
 
 msgid "Skip: No begin timestamp specified"
-msgstr "Ausgelassen: keine Anfangszeit angegeben"
+msgstr "Übersprungen: keine Anfangszeit angegeben"
 
 msgid "Skip: No service specified"
-msgstr "Ausgelassen: kein Service angegeben"
+msgstr "Übersprungen: kein Service angegeben"
 
 msgid "No matching series found"
 msgstr "Kein Treffer für Serie gefunden"
@@ -133,25 +133,25 @@ msgid "Enable SeriesPlugin"
 msgstr "SeriesPlugin aktivieren"
 
 msgid "Show in info menu"
-msgstr "In der Info Menü anzeigen"
+msgstr "Serien-Info im Info Menü anzeigen"
 
 msgid "Show in extensions menu"
-msgstr "In der erweiterten Menü anzeigen"
+msgstr "Serien-Info im Erweiterten Menü anzeigen"
 
 msgid "Show in epg menu"
-msgstr "Serien-Info in EPG-Auswahl anzeigen"
+msgstr "Serien-Info im EPG-Menü anzeigen"
 
 msgid "Show in channel menu"
-msgstr "Serien-Info in Kanalauswahl Menü anzeigen"
+msgstr "Serien-Info in Kanalauswahl anzeigen"
 
 msgid "Show Info in movie list menu"
-msgstr "Serien-Info in Filmlisten Menü anzeigen"
+msgstr "Serien-Info im Filmlisten Menü anzeigen"
 
 msgid "Show Rename in movie list menu"
-msgstr "Umbenennen in Filmlisten Menü anzeigen"
+msgstr "Umbenennen im Filmlisten Menü anzeigen"
 
 msgid "Check timer list from extension menu"
-msgstr "Timerliste aus  dem erweiterten Menü prüfen"
+msgstr "Timerliste aus  dem Erweiterten Menü prüfen"
 
 msgid "Select identifier for elapsed events"
 msgstr "Quelle für abgelaufene Sendung(en) auswählen"
@@ -169,13 +169,13 @@ msgid "Record title episode pattern"
 msgstr "Episoden Vorlage für den Aufnahmetitel"
 
 msgid "Record description episode pattern"
-msgstr "Aufnahmebeschreibung Episoden Vorlage"
+msgstr "Episoden Vorlage für Aufnahmebeschreibung"
 
 msgid "Directory pattern file"
-msgstr "Verzeichnis Vorlage"
+msgstr "Episoden Vorlage Dateiverzeichnis"
 
 msgid "Record directory pattern"
-msgstr "Aufnahme Verzeichnis Vorlage"
+msgstr "Episoden Vorlage Aufnahmeverzeichnis"
 
 msgid "Default season"
 msgstr "Voreingestellte Staffel"
@@ -196,7 +196,7 @@ msgid "Rename files"
 msgstr "Datei(en) umbenennen"
 
 msgid "Tidy up filename on rename"
-msgstr "Bereinige den Dateinamen beim Umbenennen"
+msgstr "Bereinige den Dateinamen beim umbenennen"
 
 msgid "Use legacy filenames"
 msgstr "Verwende ältere Dateinamen"
@@ -414,6 +414,9 @@ msgstr "  Fühl dich frei zu Spenden. \n"
 msgid "  PayPal: "
 msgstr "  PayPal: "
 
+msgid "SeriesPlugin test exception "
+msgstr "SeriesPlugin Test Ausnahme"
+
 msgid "SeriesPlugin setup exception "
 msgstr "SeriesPlugin Ausnahme Einstellungen"
 
@@ -431,4 +434,3 @@ msgstr "SeriesPlugin Ausnahme Beschriftung"
 
 msgid "Setup"
 msgstr "Einstellungen"
-

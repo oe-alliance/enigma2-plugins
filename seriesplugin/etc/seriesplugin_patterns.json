@@ -52,6 +52,7 @@
 		["{title:s} S{season:02d}E{episode:02d} {series:s}" , "Title S01E01 Series"],
 		["{title:s} S{season:d}E{episode:d} {series:s}"     , "Title S1E1 Series"],
 		
-		["{series:s} - s{season:02d}e{episode:02d} - {title:s}" , "Series - s01e01 - Title"]
+		["{series:s} - s{season:02d}e{episode:02d} - {title:s}" , "Series - s01e01 - Title"],
+		["{series:s} - S{season:02d}E{episode:02d} - {title:s}" , "Series - S01E01 - Title"]
 	]
 ]

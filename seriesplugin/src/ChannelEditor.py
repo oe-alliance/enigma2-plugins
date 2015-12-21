@@ -2,34 +2,17 @@
 from __init__ import _
 
 from Components.ActionMap import ActionMap, HelpableActionMap
-#from Components.Label import Label
 from Components.MenuList import MenuList
-#from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
-#from Tools.LoadPixmap import LoadPixmap
-#from Components.Pixmap import Pixmap
-#from Components.AVSwitch import AVSwitch
-#from Screens.InfoBar import MoviePlayer
-#from Components.PluginComponent import plugins
 from Components.Button import Button
 from Screens.Screen import Screen
-#from Plugins.Plugin import PluginDescriptor
 
-#from Components.ServicePosition import ServicePositionGauge
-#from Tools.NumericalTextInput import NumericalTextInput
 from Tools.BoundFunction import boundFunction
-#from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import config
 
-#from Components.ScrollLabel import ScrollLabel
-#from Components.FileList import FileList
-#from Components.Sources.StaticText import StaticText
-
 from Screens.HelpMenu import HelpableScreen
-#from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
-#from Screens.Standby import TryQuitMainloop
-#from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Tools.Notifications import AddPopup
 
 from enigma import eListboxPythonMultiContent, eListbox, gFont, getDesktop, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, loadPNG, RT_WRAP, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -54,7 +37,7 @@ except:
 from difflib import SequenceMatcher
 
 #Internal
-from Channels import ChannelsBase, buildSTBchannellist, unifyChannel
+from Channels import ChannelsBase, buildSTBchannellist, unifyChannel, getTVBouquets
 from Logger import logDebug, logInfo
 
 
@@ -103,7 +86,11 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 			"up"       : (self.keyUp, _("One row up")),
 			"down"     : (self.keyDown, _("One row down")),
 		}, -1)
-		self["actions_3"] = HelpableActionMap(self, "ColorActions", {
+		self["actions_3"] = HelpableActionMap(self, "ChannelSelectBaseActions", {
+			"nextBouquet":	(self.nextBouquet, _("Next bouquet")),
+			"prevBouquet":	(self.prevBouquet, _("Previous bouquet")),
+		}, -1)
+		self["actions_4"] = HelpableActionMap(self, "ColorActions", {
 			"red"      : (self.keyCancel, _("Cancel and close")),
 			"green"    : (self.keySave, _("Save and close")),
 			"blue"     : (self.keyRemove, _("Remove channel")),
@@ -132,15 +119,30 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 		self.webChlist = []
 		self.stbToWebChlist = []
 		
-		self.onLayoutFinish.append(self.readChannels)
-
-	def readChannels(self):
-		self.setTitle(_("Load Web-Channels..."))
+		self.bouquet = None
 		
+		self.onLayoutFinish.append(self.readChannels)
+		self.onShown.append(self.showMessage)
+
+	def showMessage(self):
+		if self.showMessage in self.onShown:
+			self.onShown.remove(self.showMessage)
+			self.session.open( MessageBox, _("You have to match SD and HD channels separately!"), MessageBox.TYPE_INFO )
+
+	def readChannels(self, bouquet=None):
 		self.stbToWebChlist = []
 		
+		if bouquet is None:
+			self.bouquet = config.plugins.seriesplugin.bouquet_main.value
+			self.stbChlist = []
+		elif bouquet != self.bouquet:
+			self.bouquet = bouquet
+			self.stbChlist = []
+		
+		self.setTitle(_("Load channels for bouquet") + " " + self.bouquet)
+		
 		if not self.stbChlist:
-			self.stbChlist = buildSTBchannellist(config.plugins.seriesplugin.bouquet_main.value)
+			self.stbChlist = buildSTBchannellist(self.bouquet)
 		
 		if not self.webChlist:
 			from WebChannels import WebChannels
@@ -218,7 +220,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 			self.setTitle(_("Error check log file"))
 		
 	def buildList(self, entry):
-		self.setTitle(_("STB-Channels / Web-Channel"))
+		self.setTitle(_("STB- / Web-Channel for bouquet:") + " " + self.bouquet )
 		
 		(stbSender, webSender, serviceref, status) = entry
 		if int(status) == 0:		
@@ -354,6 +356,24 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 
 	def keyUp(self):
 		self['list'].up()
+	
+	def nextBouquet(self):
+		tvbouquets = getTVBouquets()
+		next = tvbouquets[0][1]
+		for tvbouquet in reversed(tvbouquets):
+			if tvbouquet[1] == self.bouquet:
+				break
+			next = tvbouquet[1]
+		self.readChannels(next)
+	
+	def prevBouquet(self):
+		tvbouquets = getTVBouquets()
+		prev = tvbouquets[-1][1]
+		for tvbouquet in tvbouquets:
+			if tvbouquet[1] == self.bouquet:
+				break
+			prev = tvbouquet[1]
+		self.readChannels(prev)
 	
 	def keySave(self):
 		self.close(ChannelsBase.channels_changed)

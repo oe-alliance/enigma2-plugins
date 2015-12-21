@@ -354,7 +354,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		self.session.open(ShowLogScreen, config.plugins.seriesplugin.log_file.value)
 
 	def openChannelEditor(self):
-		self.session.openWithCallback(self.channelEditorClosed, ChannelEditor, )
+		self.session.openWithCallback(self.channelEditorClosed, ChannelEditor)
 
 	def channelEditorClosed(self, result=None):
 		logDebug("SPC channelEditorClosed", result)

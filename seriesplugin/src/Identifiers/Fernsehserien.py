@@ -298,6 +298,8 @@ class Fernsehserien(IdentifierBase):
 		table = soup.find('table', 'sendetermine')
 		if table:
 			
+			tds_date = ""
+			tds_time = ""
 			act_month = 0
 			prev_month = 0
 			tds = [""]*COL_SIZE
@@ -311,14 +313,16 @@ class Fernsehserien(IdentifierBase):
 					if len(tdnodes) == 12:
 						
 						for idx, tdnode in enumerate(tdnodes):
+							#logDebug( "FS: tdnode:", idx, str(tdnode))
 							
-							if not tdnode or not tdnode.string:
-                                                                if idx == TDS_TIME:
-                                                                        tds_time=""
+							if not tdnode:
 								continue
 							
-							td = tdnode.string.strip()
-							#logDebug( "FS: tdnode:", str(td))
+							if tdnode.string:
+								td = tdnode.string.strip()
+							else:
+								td = ""
+							#logDebug( "FS: td:", idx, str(td))
 							
 							if idx == TDS_DATE:
 								# 01.11.2015 [0:11]
@@ -382,9 +386,12 @@ class Fernsehserien(IdentifierBase):
 									continue
 							
 							elif idx == TDS_CHANNEL:
-								spans = tdnode.find('span')
+								spans = tdnode.find_all('span')
+								#logDebug( "FS: tdnode:", str(td), str(spans))
 								if spans:
-									tds[COL_CHANNEL] = spans.get('title', '').strip()
+									for span in spans:
+										tds[COL_CHANNEL] = span.get('title', '').strip()
+										break
 								else:
 									tds[COL_CHANNEL] = td
 							

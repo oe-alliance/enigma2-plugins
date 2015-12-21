@@ -8,7 +8,6 @@ from time import time
 
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
-from Tools.Notifications import AddPopup
 
 from Components.config import config
 
@@ -31,7 +30,7 @@ from spChannelContextMenu import SPChannelContextMenuInit, SPChannelContextMenuU
 #######################################################
 # Constants
 NAME = "SeriesPlugin"
-VERSION = "4.3.1"
+VERSION = "4.5"
 DESCRIPTION = _("SeriesPlugin")
 SHOWINFO = _("Show series info (SP)")
 RENAMESERIES = _("Rename serie(s) (SP)")

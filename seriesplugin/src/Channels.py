@@ -249,7 +249,7 @@ class ChannelsBase(ChannelsFile):
 			altnames = []
 			for altname in alternatives:
 				if altname:
-					logDebug("SP lookupChannelByReference", altname)
+					logDebug("SP lookupChannelByReference", ref, altname)
 					altnames.append(altname)
 			return altnames
 			
@@ -304,6 +304,7 @@ class ChannelsBase(ChannelsFile):
 									for alternative in element.findall("Alternative"):
 										alternatives.append( alternative.text )
 									channels[reference] = (name, list(set(alternatives)))
+									logDebug("SP loadXML parse", reference, channels[reference] )
 					return channels
 				
 				channels = parse( root )
