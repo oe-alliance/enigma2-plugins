@@ -9,7 +9,7 @@ TODO:
 auto-run at intervals
 '''
 
-__version__ = "1.3"
+__version__ = "1.4dev"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -101,99 +101,114 @@ class Series2FolderActions:
     def doMoves(self, service=None):
 
         if Screens.Standby.inTryQuitMainloop:
-            self.MsgBox("Your %s %s is trying to shut down. No recordings moved." % (getMachineBrand(), getMachineName()), timeout=10)
+            self.MsgBox(_("Your %s %s is trying to shut down. No recordings moved.") % (getMachineBrand(), getMachineName()), timeout=10)
             return
 
         if JobManager.getPendingJobs():
-            self.MsgBox("Your %s %s running tasks that may be accessing the recordings. No recordings moved." % (getMachineBrand(), getMachineName()), timeout=10)
+            self.MsgBox(_("Your %s %s is running tasks that may be accessing the recordings. No recordings moved.") % (getMachineBrand(), getMachineName()), timeout=10)
             return
 
-        # Selection if called on a specific recording
-        moveSelection = None
+        self.prepare(service)
 
-        # Movie recording path
-        rootdir = defaultMoviePath()
-
-        errMess = []
-
-        if service is not None:
-                dir, fullname = splitpath(service.getPath())
-                if dir + '/' == rootdir and fullname:
-                    showname, __, date_time, err = self.getShowInfo(rootdir, fullname)
-                    if showname:
-                        moveSelection = self.cleanName(self.stripRepeat(showname))
-                    elif err:
-                        errMess.append(err)
-
-        # Full pathnames of current recordings' .ts files
-        isRecording = set([timer.Filename + '.ts' for timer in self.session.nav.RecordTimer.timer_list if timer.state in (timer.StatePrepared, timer.StateRunning)])
-
-        # Folder for movies
-        moviesFolder = config.plugins.seriestofolder.movies.value and config.plugins.seriestofolder.moviesfolder.value
-
-        # lists of shows in each series and for movies
-        shows = defaultdict(list)
-
-        # directories
-        dirs = set()
-
-        for f in os.listdir(rootdir):
-            fullpath = joinpath(rootdir, f)
-            if f.endswith('.ts') and f[0:8].isdigit() and fullpath not in isRecording and isfile(fullpath):
-                origShowname, pending_merge, date_time, err = self.getShowInfo(rootdir, f)
-                noRepeatName = self.stripRepeat(origShowname)
-                showname = self.cleanName(noRepeatName)
-                if showname and (not moveSelection or showname == moveSelection) and not pending_merge:
-                    if moviesFolder and noRepeatName.lower().startswith("movie: "):
-                        shows[moviesFolder].append((origShowname, f, date_time))
-                    else:
-                        shows[showname].append((origShowname, f, date_time))
-                elif err:
-                    errMess.append(err)
-            elif isdir(fullpath):
-                dirs.add(f)
+        for f in os.listdir(self.rootdir):
+            self.addRecording(f)
 
         # create a directory for each series and move shows into it
         # also add any single shows to existing series directories
-        moves = []
-        numRecordings = int(config.plugins.seriestofolder.autofolder.value)
-        for foldername, fileInfo in sorted(shows.items()):
-            if (numRecordings != 0 and len(fileInfo) >= numRecordings) or foldername == moviesFolder or foldername in dirs or moveSelection:
-                errorText = ''
-                nerrors = 0
-                for origShowname, fullname, date_time in fileInfo:
-                    for f in self.recFileList(rootdir, fullname):
-                        try:
-                            os.renames(joinpath(rootdir, f), joinpath(rootdir, foldername, f))
-                            print "[Series2Folder] rename", joinpath(rootdir, f), "to", joinpath(rootdir, foldername, f)
-                        except Exception, e:
-                            errMess.append(e.__str__())
-                            nerrors += 1
-                            errorText = ngettext(" - Error", " - Errors", nerrors)
-                    moves.append('%s - %s%s' % (origShowname, date_time, errorText))
 
-        if moves and self.movieSelection:
+        self.shows = sorted(self.shows.items())
+        while self.shows:
+            self.processRecording()
+        self.finish()
+
+    def prepare(self, service):
+        # Selection if called on a specific recording
+        self.moveSelection = None
+
+        # Movie recording path
+        self.rootdir = defaultMoviePath()
+
+        # Information about moves and errors
+        self.moves = []
+        self.errMess = []
+
+        if service is not None:
+                dir, fullname = splitpath(service.getPath())
+                if dir + '/' == self.rootdir and fullname:
+                    showname, __, date_time, err = self.getShowInfo(self.rootdir, fullname)
+                    if showname:
+                        self.moveSelection = self.cleanName(self.stripRepeat(showname))
+                    elif err:
+                        self.errMess.append(err)
+
+        # Full pathnames of current recordings' .ts files
+        self.isRecording = set([timer.Filename + '.ts' for timer in self.session.nav.RecordTimer.timer_list if timer.state in (timer.StatePrepared, timer.StateRunning)])
+
+        # Folder for movies
+        self.moviesFolder = config.plugins.seriestofolder.movies.value and config.plugins.seriestofolder.moviesfolder.value
+
+        # lists of shows in each series and for movies
+        self.shows = defaultdict(list)
+
+        # directories
+        self.dirs = set()
+
+    def addRecording(self, f):
+        fullpath = joinpath(self.rootdir, f)
+        if f.endswith('.ts') and f[0:8].isdigit() and fullpath not in self.isRecording and isfile(fullpath):
+            origShowname, pending_merge, date_time, err = self.getShowInfo(self.rootdir, f)
+            noRepeatName = self.stripRepeat(origShowname)
+            showname = self.cleanName(noRepeatName)
+            if showname and (not self.moveSelection or showname == self.moveSelection) and not pending_merge:
+                if self.moviesFolder and noRepeatName.lower().startswith("movie: "):
+                    self.shows[self.moviesFolder].append((origShowname, f, date_time))
+                else:
+                    self.shows[showname].append((origShowname, f, date_time))
+            elif err:
+                self.errMess.append(err)
+        elif isdir(fullpath):
+            self.dirs.add(f)
+
+    def processRecording(self):
+        foldername, fileInfo = self.shows.pop(0)
+        numRecordings = int(config.plugins.seriestofolder.autofolder.value)
+        if (numRecordings != 0 and len(fileInfo) >= numRecordings) or foldername == self.moviesFolder or foldername in self.dirs or self.moveSelection:
+            errorText = ''
+            nerrors = 0
+            for origShowname, fullname, date_time in fileInfo:
+                for f in self.recFileList(self.rootdir, fullname):
+                    try:
+                        os.renames(joinpath(self.rootdir, f), joinpath(self.rootdir, foldername, f))
+                        print "[Series2Folder] rename", joinpath(self.rootdir, f), "to", joinpath(self.rootdir, foldername, f)
+                    except Exception, e:
+                        self.errMess.append(e.__str__())
+                        nerrors += 1
+                        errorText = ngettext(" - Error", " - Errors", nerrors)
+                self.moves.append('%s - %s%s' % (origShowname, date_time, errorText))
+
+    def finish(self):
+        if self.moves and self.movieSelection:
                 self.movieSelection.reloadList()
 
-        if moves:
+        if self.moves:
             title = _("Series to Folder moved the following episodes")
-            if errMess:
-                title += ngettext(" - with an error", " - with errors", len(errMess))
+            if self.errMess:
+                title += ngettext(" - with an error", " - with errors", len(self.errMess))
         else:
-            title = _("Series to Folder did not find anything to move in %s") % rootdir
+            title = _("Series to Folder did not find anything to move in %s") % self.rootdir
 
-        if errMess or len(moves) > 20:
-            if errMess:
-                moves.append("--------")
-            moves += errMess
-            self.session.open(ErrorBox, text='\n'.join(moves), title=title)
-        elif moves:
-            self.MsgBox('\n'.join([title + ':'] + moves))
+        if self.errMess or len(self.moves) > 20:
+            if self.errMess:
+                self.moves.append("--------")
+            self.moves += self.errMess
+            self.session.open(ErrorBox, text='\n'.join(self.moves), title=title)
+        elif self.moves:
+            self.MsgBox('\n'.join([title + ':'] + self.moves))
         else:
             self.MsgBox(title, timeout=10)
 
     def MsgBox(self, msg, timeout=30):
-        self.session.open(MessageBox, _(msg), type=MessageBox.TYPE_INFO, timeout=timeout)
+        self.session.open(MessageBox, msg, type=MessageBox.TYPE_INFO, timeout=timeout)
 
     def recFileList(self, rootdir, fullname):
         base, ext = splitext(fullname)
