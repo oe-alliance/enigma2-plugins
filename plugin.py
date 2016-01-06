@@ -26,7 +26,6 @@ from Components.PluginComponent import plugins
 from Components.Task import job_manager as JobManager
 from Components.UsageConfig import defaultMoviePath
 from Components.config import config, ConfigText, getConfigListEntry
-from Tools import ASCIItranslit
 from time import time, localtime, strftime
 from boxbranding import getMachineBrand, getMachineName
 from collections import defaultdict
@@ -93,10 +92,9 @@ config.plugins.seriestofolder.showselmovebutton.addNotifier(
     immediate_feedback=False
 )
 
-class Series2FolderActions:
+class Series2FolderActions(object):
     def __init__(self, session):
         self.session = session
-        self.movieSelection = session.current_dialog if isinstance(session.current_dialog, MovieSelection) else None
 
     def doMoves(self, service=None):
 
@@ -119,11 +117,18 @@ class Series2FolderActions:
         self.shows = sorted(self.shows.items())
         while self.shows:
             self.processRecording()
+
+        if self.moves and self.movieSelection:
+                self.movieSelection.reloadList()
+
         self.finish()
 
     def prepare(self, service):
         # Selection if called on a specific recording
         self.moveSelection = None
+
+        # MovieSelection screen if current dialog, otherwise None
+        self.movieSelection = self.session.current_dialog if isinstance(self.session.current_dialog, MovieSelection) else None
 
         # Movie recording path
         self.rootdir = defaultMoviePath()
@@ -187,9 +192,6 @@ class Series2FolderActions:
                 self.moves.append('%s - %s%s' % (origShowname, date_time, errorText))
 
     def finish(self):
-        if self.moves and self.movieSelection:
-                self.movieSelection.reloadList()
-
         if self.moves:
             title = _("Series to Folder moved the following episodes")
             if self.errMess:
@@ -295,7 +297,7 @@ class Series2Folder(ChoiceBox):
             (_("Configure move series recordings to folders"), "CALLFUNC", self.doConfig),
             (_("Cancel"), "CALLFUNC", self.doCancel),
         ]
-        ChoiceBox.__init__(self, session, _("Series to Folder"), list=list, selection=0)
+        super(Series2Folder, self).__init__(session, _("Series to Folder"), list=list, selection=0)
         self.actions = Series2FolderActions(session)
 
     def doMoves(self, service):
