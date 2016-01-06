@@ -92,36 +92,9 @@ config.plugins.seriestofolder.showselmovebutton.addNotifier(
     immediate_feedback=False
 )
 
-class Series2FolderActions(object):
+class Series2FolderActionsBase(object):
     def __init__(self, session):
         self.session = session
-
-    def doMoves(self, service=None):
-
-        if Screens.Standby.inTryQuitMainloop:
-            self.MsgBox(_("Your %s %s is trying to shut down. No recordings moved.") % (getMachineBrand(), getMachineName()), timeout=10)
-            return
-
-        if JobManager.getPendingJobs():
-            self.MsgBox(_("Your %s %s is running tasks that may be accessing the recordings. No recordings moved.") % (getMachineBrand(), getMachineName()), timeout=10)
-            return
-
-        self.prepare(service)
-
-        for f in os.listdir(self.rootdir):
-            self.addRecording(f)
-
-        # create a directory for each series and move shows into it
-        # also add any single shows to existing series directories
-
-        self.shows = sorted(self.shows.items())
-        while self.shows:
-            self.processRecording()
-
-        if self.moves and self.movieSelection:
-                self.movieSelection.reloadList()
-
-        self.finish()
 
     def prepare(self, service):
         # Selection if called on a specific recording
@@ -288,6 +261,39 @@ class Series2FolderActions(object):
         except:
             return None, None, False, _("Can't extract show name for: %s") % fullname
         return showname, date_time, False, None
+
+
+class Series2FolderActions(Series2FolderActionsBase):
+    def __init__(self, session):
+        super(Series2FolderActions, self).__init__(session)
+
+    def doMoves(self, service=None):
+
+        if Screens.Standby.inTryQuitMainloop:
+            self.MsgBox(_("Your %s %s is trying to shut down. No recordings moved.") % (getMachineBrand(), getMachineName()), timeout=10)
+            return
+
+        if JobManager.getPendingJobs():
+            self.MsgBox(_("Your %s %s is running tasks that may be accessing the recordings. No recordings moved.") % (getMachineBrand(), getMachineName()), timeout=10)
+            return
+
+        self.prepare(service)
+
+        for f in os.listdir(self.rootdir):
+            self.addRecording(f)
+
+        # create a directory for each series and move shows into it
+        # also add any single shows to existing series directories
+
+        self.shows = sorted(self.shows.items())
+        while self.shows:
+            self.processRecording()
+
+        if self.moves and self.movieSelection:
+                self.movieSelection.reloadList()
+
+        self.finish()
+
 
 class Series2Folder(ChoiceBox):
     def __init__(self, session, service):
