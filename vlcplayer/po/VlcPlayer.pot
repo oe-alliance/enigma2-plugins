@@ -8,16 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2009-02-17 13:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:68
+#: ../src/plugin.py:69
 msgid "A video streaming solution based on VLC"
 msgstr ""
 
@@ -78,7 +77,7 @@ msgid ""
 "%(error)s"
 msgstr ""
 
-#: ../src/VlcPlayer.py:339 ../src/VlcPlayer.py:374 ../src/VlcPlayer.py:402
+#: ../src/VlcPlayer.py:330 ../src/VlcPlayer.py:365 ../src/VlcPlayer.py:393
 #, python-format
 msgid ""
 "Error with VLC server:\n"
@@ -93,7 +92,7 @@ msgstr ""
 msgid "HTTP Port"
 msgstr ""
 
-#: ../src/VlcServerList.py:98
+#: ../src/VlcServerList.py:80
 msgid "List of known VLC-Server Profiles"
 msgstr ""
 
@@ -101,15 +100,15 @@ msgstr ""
 msgid "Movie Directory"
 msgstr ""
 
-#: ../src/VlcPlayer.py:454
+#: ../src/VlcPlayer.py:445
 msgid "No more files in this directory"
 msgstr ""
 
-#: ../src/VlcPlayer.py:481
+#: ../src/VlcPlayer.py:472
 msgid "No previous file in this directory"
 msgstr ""
 
-#: ../src/VlcPlayer.py:329
+#: ../src/VlcPlayer.py:320
 msgid ""
 "No valid Enigma-Service to play a VLC-Stream\n"
 "Check your installation and try again!"
@@ -128,7 +127,7 @@ msgstr ""
 msgid "Playlist"
 msgstr ""
 
-#: ../src/VlcServerList.py:144
+#: ../src/VlcServerList.py:126
 msgid "Really delete this Server?"
 msgstr ""
 
@@ -168,15 +167,15 @@ msgstr ""
 msgid "Video Norm"
 msgstr ""
 
-#: ../src/VlcServerList.py:101
+#: ../src/VlcServerList.py:83
 msgid "add server"
 msgstr ""
 
-#: ../src/VlcServerList.py:100
+#: ../src/VlcServerList.py:82
 msgid "delete server"
 msgstr ""
 
-#: ../src/VlcServerList.py:102
+#: ../src/VlcServerList.py:84
 msgid "edit server"
 msgstr ""
 
@@ -196,6 +195,6 @@ msgstr ""
 msgid "refresh"
 msgstr ""
 
-#: ../src/VlcServerList.py:103
+#: ../src/VlcServerList.py:85
 msgid "set default"
 msgstr ""

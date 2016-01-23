@@ -1,0 +1,173 @@
+# German translations for enigma package.
+# Copyright (C) 2008 THE enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma package.
+# Alex <info@laetsch.de>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2.plugins.vlcplayer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-17 13:14+0100\n"
+"PO-Revision-Date: 2012-02-20 16:38+0100\n"
+"Last-Translator: ims <ims21@users.sourceforge.net>\n"
+"Language-Team: PLi <ims21@users.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+msgid "A video streaming solution based on VLC"
+msgstr "Streamování videa na základě VLC"
+
+msgid "Audio Bitrate"
+msgstr "Datový tok zvuku"
+
+msgid "Audio Channels"
+msgstr "Kánály zvuku"
+
+msgid "Audio Codec"
+msgstr "Kodek zvuku"
+
+msgid "Audio Samplerate"
+msgstr "Vzorkování zvuku"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "DVD Device (leave empty for default)"
+msgstr "DVD zařízení (pro standardní ponechte prázdné)"
+
+msgid "Enter VLC-Server as FQDN or IP-Address"
+msgstr "Zadat VLC-Server jako FQDN nebo IP-Adresu"
+
+#, python-format
+msgid ""
+"Error loading filelist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Chyba při načítání seznamu souborů do serveru %(server)s:\n"
+"%(error)s"
+
+#, python-format
+msgid ""
+"Error loading playlist %(media)s into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Chyba při načítání playlistu %(media)s do serveru %(server)s:\n"
+"%(error)s"
+
+#, python-format
+msgid ""
+"Error loading playlist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Chyba při načítání playlistu do serveru %(server)s:\n"
+"%(error)s"
+
+#, python-format
+msgid ""
+"Error updating filelist from server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Chyba při aktualizaci seznamu souborů ze serveru %(server)s:\n"
+"%(error)s"
+
+#, python-format
+msgid ""
+"Error with VLC server:\n"
+"%s"
+msgstr ""
+"Chyba VLC serveru:\n"
+"%s"
+
+msgid "Filelist"
+msgstr "Soubory"
+
+msgid "HTTP Port"
+msgstr "HTTP Port"
+
+msgid "List of known VLC-Server Profiles"
+msgstr "Seznam VLC-Server profilů"
+
+msgid "Movie Directory"
+msgstr "Adresář filmů"
+
+msgid "No more files in this directory"
+msgstr "Žádné další soubory v tomto adresáři"
+
+msgid "No previous file in this directory"
+msgstr "Žádný předchozí soubor v tomto adresáři"
+
+msgid ""
+"No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+msgstr ""
+"Žádný platný Enigma-program k přehrání VLC-Streamu\n"
+"Zkontrolujte instalaci a zkuste to znovu."
+
+msgid "OK"
+msgstr "OK"
+
+#, python-format
+msgid "Overscan Correction [in %(percentsign)s of Video width]"
+msgstr "Overscan korekce [v %(percentsign)s výšky videa]"
+
+msgid "Playlist"
+msgstr "Playlist"
+
+msgid "Really delete this Server?"
+msgstr "Opravdu chcete odstranit tento server?"
+
+msgid "Server Address"
+msgstr "Adresa serveru"
+
+msgid "Server Profile Name"
+msgstr "Název profilu serveru"
+
+msgid "Serverlist"
+msgstr "servery"
+
+msgid "Subtitle overlay"
+msgstr "Overlay titulky"
+
+msgid "Transcode MPEG/DVD Audio"
+msgstr "Transkódovat MPEG/DVD Audio"
+
+msgid "Transcode MPEG/DVD Video"
+msgstr "Transkódovat MPEG/DVD Video"
+
+msgid "Video Bitrate"
+msgstr "Datový tok videa"
+
+msgid "Video Codec"
+msgstr "Kodek videa"
+
+msgid "Video Norm"
+msgstr "Norma videa"
+
+msgid "add server"
+msgstr "Přidat server"
+
+msgid "delete server"
+msgstr "Smazat server"
+
+msgid "edit server"
+msgstr "Upravit server"
+
+msgid "filter off"
+msgstr "vypnout filtr"
+
+msgid "filter on"
+msgstr "zapnout filtr"
+
+msgid "play DVD"
+msgstr "přehrát DVD"
+
+msgid "refresh"
+msgstr "aktualizovat"
+
+msgid "set default"
+msgstr "Výchozí"
+

@@ -9,7 +9,7 @@
                     <name>Partnerbox</name>
                     <packagename>enigma2-plugin-extensions-partnerbox</packagename>
                     <shortdescription>Remote timer and remote TV player</shortdescription>
-                    <description>Partnerbox allows editing a remote Receiver's record timers and stream its TV  program.</description>
+                    <description>Partnerbox allows editing a remote Dreambox's record timers and stream its TV  program.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_partnerbox_en.jpg" />		    
           </info>
 

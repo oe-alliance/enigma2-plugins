@@ -1,6 +1,6 @@
 # -*- coding: ISO-8859-1 -*-
 #===============================================================================
-# VLC Player Plugin by A. Lätsch 2007
+# VLC Player Plugin by A. Latsch 2007
 #                   modified by Volker Christian 2008
 #
 # This is free software; you can redistribute it and/or modify it under
@@ -8,7 +8,6 @@
 # Software Foundation; either version 2, or (at your option) any later
 # version.
 #===============================================================================
-
 
 from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
 

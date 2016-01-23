@@ -1,0 +1,267 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2.plugins.vlcplayer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-12 07:20+0200\n"
+"PO-Revision-Date: 2015-10-01 20:20+0300\n"
+"Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
+"Language-Team: Dimitrij opePLi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Language: ru_RU\n"
+"X-Generator: Poedit 1.8.4\n"
+
+msgid "1 minute"
+msgstr "1 минута"
+
+msgid "10 minutes"
+msgstr "10 минут"
+
+msgid "15 minutes"
+msgstr "15 минут"
+
+msgid "20 minutes"
+msgstr "20 минут"
+
+msgid "3 minutes"
+msgstr "3 минуты"
+
+msgid "30 minutes"
+msgstr "30 минут"
+
+msgid "5 minutes"
+msgstr "5 минут"
+
+msgid "A video streaming solution based on VLC"
+msgstr "Потоковое видео на основе плеера VLC"
+
+msgid "Audio Bitrate"
+msgstr "Аудио битрейт"
+
+msgid "Audio Channels"
+msgstr "Аудио каналы"
+
+msgid "Audio Codec"
+msgstr "Аудио кодек"
+
+msgid "Audio Samplerate"
+msgstr "Частота дискретизации аудио"
+
+msgid "Cache Directory"
+msgstr "Каталог кэша"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Choice of minutes to jump"
+msgstr "Выбор минут для перехода"
+
+msgid "Choose an action:"
+msgstr "Выберите действие:"
+
+msgid "DVD Device (leave empty for default)"
+msgstr "Устройство DVD (оставьте пустым по умолчанию)"
+
+msgid "Direct play"
+msgstr "Прямое проигрывание"
+
+msgid "Edit VLC Server"
+msgstr "Редактор сервера VLC"
+
+msgid "Enter VLC-Server as FQDN or IP-Address"
+msgstr "Ввод VLC-сервера как FQDN или IP-адрес"
+
+msgid "Enter subtitles as Track or Language"
+msgstr "Ввод субтитров в качестве треков или языка"
+
+msgid ""
+"Error loading filelist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Ошибка загрузки файлиста с сервера %(server)s:\n"
+"%(error)s"
+
+msgid ""
+"Error loading playlist %(media)s into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Ошибка загрузки плейлиста %(media)s с сервера %(server)s:\n"
+"%(error)s"
+
+msgid ""
+"Error loading playlist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Ошибка, загрузки плейлиста с сервера %(server)s:\n"
+"%(error)s"
+
+msgid ""
+"Error updating filelist from server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Ошибка обновления файлиста с сервера %(server)s:\n"
+"%(error)s"
+
+msgid ""
+"Error with VLC server:\n"
+"%s"
+msgstr ""
+"Ошибка VLC-сервера:\n"
+"%s"
+
+msgid "Filelist"
+msgstr "Файлист"
+
+msgid "HTTP Port"
+msgstr "Порт HTTP"
+
+msgid "IP-Address"
+msgstr "IP-Адрес"
+
+msgid "List of known profiles. Note: key info - help"
+msgstr "Список доступных профилей. Заметка: кнопка инфо - помощь"
+
+msgid "Movie Directory"
+msgstr "Каталог видео"
+
+msgid "No more files in this directory"
+msgstr "Нет больше файлов в этом каталоге"
+
+msgid ""
+"No ping from Server:\n"
+"%s\n"
+"%s"
+msgstr ""
+"Нет ответа на пинг сервера:\n"
+"%s\n"
+"%s"
+
+msgid "No previous file in this directory"
+msgstr "Нет предыдущего файла в этом каталоге"
+
+msgid ""
+"No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+msgstr ""
+"Нет доступной службы в Enigma для воспроизведения VLC-стрима!\n"
+"Проверьте установку и попробуйте еще раз!"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Overscan Correction [in %(percentsign)s of Video width]"
+msgstr "Коррекция забегания развёртки [в %(percentsign)s видеоширины]"
+
+msgid "Ping IP-Address when open Server"
+msgstr "Пинг IP-адреса при открытии сервера"
+
+msgid "Playlist"
+msgstr "Плейлист"
+
+msgid "Really delete this Server?"
+msgstr "Действительно удалить этот сервер?"
+
+msgid "Reset default"
+msgstr "Сброс дефолтного сервера"
+
+msgid "Russian"
+msgstr "Русский"
+
+msgid "Save as .ts and play"
+msgstr "Сохранить как .ts и проиграть"
+
+msgid "Select method?"
+msgstr "Выберите метод:"
+
+msgid "Server Address"
+msgstr "Адрес сервера"
+
+msgid "Server Profile Name"
+msgstr "Название профиля сервера"
+
+msgid "Serverlist"
+msgstr "cписок серверов"
+
+msgid "Set as default"
+msgstr "Установить как дефолтный сервер"
+
+msgid "Subtitle overlay"
+msgstr "Наложение субтитров"
+
+msgid "Subtitles"
+msgstr "Субтитры"
+
+msgid "Transcode MPEG/DVD Audio"
+msgstr "Транскодируйте аудио MPEG/DVD"
+
+msgid "Transcode MPEG/DVD Video"
+msgstr "Транскодируйте видео MPEG/DVD"
+
+msgid "Use saving to Cache Directory"
+msgstr "Использовать сохранение в кэш каталог"
+
+msgid "VLC Video Player"
+msgstr "VLC видео плеер"
+
+msgid "Select VLC-Server profile"
+msgstr "Выбор профиля VLC-сервера"
+
+msgid "Video Bitrate"
+msgstr "Видео битрейт"
+
+msgid "Video Codec"
+msgstr "Видео кодек"
+
+msgid "Video Norm"
+msgstr "Видео стандарт"
+
+msgid "Yellow subtitles"
+msgstr "Желтые субтитры"
+
+msgid "add server"
+msgstr "добавить сервер"
+
+msgid "delete server"
+msgstr "удалить сервер"
+
+msgid "edit server"
+msgstr "изменить сервер"
+
+msgid "filter off"
+msgstr "фильтр выкл"
+
+msgid "filter on"
+msgstr "фильтр вкл"
+
+msgid "languages"
+msgstr "языки"
+
+msgid "play DVD"
+msgstr "проиграть как DVD"
+
+msgid "refresh"
+msgstr "обновление"
+
+msgid "set default"
+msgstr "установка по дефолту"
+
+msgid "VLC Media List"
+msgstr "VLC список медиа"
+
+msgid "tracks"
+msgstr "треки"
+
+msgid ""
+"Latest compatible version VLC 2.0.7\n"
+"Setup VLC for PC:\n"
+"Tools -> Preferences -> All -> Interface -> Main Interface -> Select Web\n"
+"Find file c:/Program Files/VideoLAN/VLC/Lua/http/.hosts and insert your box ip (without #).\n"
+"Add shortcut to the startup of the background start VLC 'C:\\Program Files\\VideoLAN\\VLC\vlc.exe --intf telnet --extraintf http'"
+msgstr ""
+"Последняя совместимая версия VLC 2.0.7\n"
+"Настройки VLC для ПК:\n"
+"Tools -> Preferences -> All -> Interface -> Main Interface -> Select Web\n"
+"Найдите файл c:/Program Files/VideoLAN/VLC/Lua/http/.hosts здесь впишите айпи ресивера.\n"
+"Добавить в автозагрузку ярлык для фонового запуска плеера VLC 'C:\\Program Files\\VideoLAN\\VLC\vlc.exe --intf telnet --extraintf http'"

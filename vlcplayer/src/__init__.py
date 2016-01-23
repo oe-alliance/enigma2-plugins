@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+# -*- coding: ISO-8859-1 -*-
 #===============================================================================
-# VLC Player Plugin by A. Lätsch 2007
+# VLC Player Plugin by A. Latsch 2007
 #                   modified by Volker Christian 2008
 #
 # This is free software; you can redistribute it and/or modify it under
@@ -11,19 +11,16 @@
 
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os, gettext
-
-PluginLanguageDomain = "VlcPlayer"
-PluginLanguagePath = "Extensions/VlcPlayer/locale"
+import os,gettext
 
 def localeInit():
-	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+	gettext.bindtextdomain("VlcPlayer", resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/locale"))
 
 def _(txt):
-	if gettext.dgettext(PluginLanguageDomain, txt):
-		return gettext.dgettext(PluginLanguageDomain, txt)
-	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
-		return gettext.gettext(txt)
+	t = gettext.dgettext("VlcPlayer", txt)
+	if t == txt:
+		print "[VLC] fallback to default translation for", txt
+		t = gettext.gettext(txt)
+	return t
 
-language.addCallback(localeInit())
+localeInit()
