@@ -1,0 +1,556 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Partnerbox\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-24 16:16+0200\n"
+"PO-Revision-Date: 2016-06-24 07:12+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"Language: lt\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "%d min"
+msgstr "%d min."
+
+msgid "%d.%B %Y"
+msgstr "%Y %B.%d"
+
+msgid "%s%d min"
+msgstr "%s%d min."
+
+msgid "(ZAP)"
+msgstr "(PERJUNGTI)"
+
+msgid "400 Bad Request"
+msgstr "400-netinkama užklausa"
+
+msgid "500 Internal Server Error"
+msgstr "500-vidinė serverio klaida."
+
+msgid "<unknown>"
+msgstr "<nežinomas>"
+
+msgid "Abort"
+msgstr "Nutraukti"
+
+msgid "Activate Picture in Picture"
+msgstr "Įjungti vaizdą vaizde (PiP)"
+
+msgid "Add"
+msgstr "Pridėti"
+
+msgid "Add internal timer"
+msgstr "Įtraukti vidinį laikmatį"
+
+msgid "Add timer"
+msgstr "Įtraukti laikmatį"
+
+msgid "After event"
+msgstr "Po užduoties"
+
+msgid "Alternative services are not supported!"
+msgstr "Alternatyvių kanalų nepalaikoma!"
+
+msgid "An error occurred while connecting: 148: No route to host."
+msgstr "Prisijungimo klaida: 148: maršrutizacija neturi adreso."
+
+msgid "Apply"
+msgstr "Pritaikyti"
+
+msgid "Attention, this is repeated timer!\n"
+msgstr "Dėmesio, tai pasikartojantis laikmatis!\n"
+
+msgid "Bouquet List"
+msgstr "Bukietų sąrašas"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Change pin code"
+msgstr "Keisti PIN kodą"
+
+msgid "Channel"
+msgstr "Kanalas"
+
+msgid "Choice list Partnerbox"
+msgstr "Partnerbox pasirinkimų sąrašas"
+
+msgid "Choose action:"
+msgstr "Pasirinkite veiksmą:"
+
+msgid "Clean up"
+msgstr "Išvalyti"
+
+msgid "Cleaning up finished timer entries..."
+msgstr "Šalinami atliktų laikmačių įrašai..."
+
+msgid "Connetction was refused by other side: 146: Connetction refused."
+msgstr "Prisijungimas atmestas iš kitos pusės: 146-prisijungimas atmestas."
+
+msgid "Could not add timer '%s'!"
+msgstr "Laikmačio '%s' pridėti nepavyko!"
+
+msgid "Could not find timer '%s' with given start and end time!"
+msgstr "Nepavyko rasti laikmačio '%s' su nurodytu pradžios ir pabaigos laiku!"
+
+msgid "DVR"
+msgstr "DVR"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Deep Standby"
+msgstr "Išjungti"
+
+msgid "Delete"
+msgstr "Šalinti"
+
+msgid "Description"
+msgstr "Aprašymas"
+
+msgid "Disable Picture in Picture"
+msgstr "Išjungti vaizdą vaizde (PiP)"
+
+msgid ""
+"Do you really want to delete the remote timer \n"
+"%s ?"
+msgstr ""
+"Ar tikrai norite pašalinti nuotolinį laikmatį\n"
+"%s ?"
+
+msgid ""
+"Do you really want to delete the timer \n"
+"%s ?"
+msgstr ""
+"Ar tikrai norite pašalinti laikmatį\n"
+"%s ?"
+
+msgid "EPG Selection"
+msgstr "EPG pasirinkimas"
+
+msgid "Edit"
+msgstr "Redaguoti"
+
+msgid "Edit internal timer"
+msgstr "Redaguoti vidinį laikmatį"
+
+msgid "Edit remote timer"
+msgstr "Redaguoti nuotolinį laikmatį"
+
+msgid "Enable Partnerbox-Function in Channel Selector"
+msgstr "Įjungti Partnerbox funkciją kanalų pasirinkime"
+
+msgid "Enable Partnerbox-Function in EPGList"
+msgstr "Įjungti Partnerbox funkciją EPG sąrašuose"
+
+msgid "Enable Partnerbox-Function in TimerEvent"
+msgstr "Įjungti Partnerbox funkciją laikmačių nustatyme"
+
+msgid "Enable Red Button-Function in single/multi EPG"
+msgstr "Partnerbox funkcija 'RAUDONU' mygtuku viena/daugiakanaliuose EPG"
+
+msgid "Enable VPS"
+msgstr "Įjungti VPS"
+
+msgid "Enable VPS-Function in TimerEvent"
+msgstr "Įjungti VPS funkciją laikmačių nustatyme"
+
+msgid "Enable first Partnerbox-entry in Timeredit as default"
+msgstr "Pirmasis Partnerbox įrašas laikmačių redagavime - numatytasis"
+
+msgid "EndTime"
+msgstr "Pabaigos laikas"
+
+msgid "Enigma 1"
+msgstr "Enigma 1"
+
+msgid "Enigma 2"
+msgstr "Enigma 2"
+
+msgid "Enigma Type"
+msgstr "Enigma tipas"
+
+msgid "Enter the service pin"
+msgstr "Įrašykite kanalo PIN "
+
+msgid "Error: No space left"
+msgstr "Klaida! Neliko laisvos vietos"
+
+msgid "Error: Outdated"
+msgstr "Klaida! Pasenusi"
+
+msgid "Error: User aborted"
+msgstr "Klaida! Atšaukta vartotojo"
+
+msgid "Error: Zap failed"
+msgstr "Klaida! Perjungti nepavyko"
+
+msgid "EventId not found"
+msgstr "Įvykio ID nerastas"
+
+msgid "Eventview"
+msgstr "Įvykių peržiūra"
+
+msgid "Fri"
+msgstr "Pen"
+
+msgid "Friday"
+msgstr "penktadienis"
+
+msgid "Getting Channel Information..."
+msgstr "Gaunama kanalo informacija..."
+
+msgid "Getting EPG Information..."
+msgstr "Gaunama EPG informacija..."
+
+msgid "Getting EPG data..."
+msgstr "Gaunami EPG duomenys..."
+
+msgid "Getting Partnerbox Bouquet Information..."
+msgstr "Gaunama Partnerbox bukietų informacija..."
+
+msgid "Getting Partnerbox Information..."
+msgstr "Gaunama Partnerbox informacija..."
+
+msgid "Getting timerlist data..."
+msgstr "Gaunami laikmačių sąrašo duomenys..."
+
+msgid "Give Enigma time to fill epg cache..."
+msgstr "Palaukite, kol užpildomas EPG podėlis..."
+
+msgid "IP"
+msgstr "IP"
+
+msgid "Info"
+msgstr "Informacija"
+
+msgid "Internet services are not supported!"
+msgstr ""
+
+msgid "Location"
+msgstr "Padėtis"
+
+msgid "Manage timer for other dreamboxes in network"
+msgstr "Valdykite laikmatį kituose tinklo aparatuose"
+
+msgid "Menu PiP"
+msgstr "PiP meniu"
+
+msgid "Mon"
+msgstr "Pir"
+
+msgid "Monday"
+msgstr "pirmadienis"
+
+msgid "Move Picture in Picture"
+msgstr "Perkelti vaizdą vaizde (PiP)"
+
+msgid "NGRAB"
+msgstr "NGRAB"
+
+msgid "Name"
+msgstr "Pavadinimas"
+
+msgid "No"
+msgstr "ne"
+
+msgid "No matching Timer found"
+msgstr "Atitinkančio laikmačio nerasta"
+
+msgid "OK"
+msgstr " Gerai"
+
+msgid "Partnerbox"
+msgstr "Partnerbox"
+
+msgid "Partnerbox - RemotePlayer"
+msgstr "Partnerbox - nuotolinis grotuvas"
+
+msgid ""
+"Partnerbox Answer: \n"
+"%s"
+msgstr ""
+"Partnerbox atsakas: \n"
+"%s"
+
+msgid "Partnerbox Entries"
+msgstr "Partnerbox įrašai"
+
+msgid "Partnerbox RemoteTimer"
+msgstr "Partnerbox nuotolinis laikmatis"
+
+msgid "Partnerbox Setup"
+msgstr "Partnerbox sąranka"
+
+msgid "Partnerbox: Edit Entry"
+msgstr "Partnerbox: įrašų redagavimas"
+
+msgid "Partnerbox: List of Entries"
+msgstr "Partnerbox: įrašų sąrašas"
+
+msgid "Partnerbox: RemoteTV Player"
+msgstr "Partnerbox: nuotolinis TV grotuvas"
+
+msgid "Partnerbox: RemoteTimer"
+msgstr "Partnerbox: nuotolinis laikmatis"
+
+msgid "Password"
+msgstr "Slaptažodis"
+
+msgid "Port"
+msgstr "Prievadas"
+
+msgid "Power"
+msgstr "Įjungimas"
+
+msgid "Press OK to edit timer..."
+msgstr "Laikmačiui redaguoti, spauskite 'OK'...."
+
+msgid "Really delete this Partnerbox Entry?"
+msgstr "Ar tikrai ištrinti šį Partnerbox įrašą?"
+
+msgid "Remote Timer"
+msgstr "Nuotolinis laikmatis"
+
+msgid "Remote timers for partnerbox"
+msgstr "Nuotolinis Partnerbox laikmatis"
+
+msgid "RemoteTimer Timerlist"
+msgstr "Nuotolinio laikmačio laikmačių sąrašas"
+
+msgid "Remove timer"
+msgstr "Pašalinti laikmatį"
+
+msgid "Repeated Timer are not supported!"
+msgstr "Pasikartojantys laikmačiai nepalaikomi!"
+
+msgid "Restart"
+msgstr "Paleisti iš naujo"
+
+msgid "Restart enigma"
+msgstr "Paleisti Enigma2 iš naujo"
+
+msgid "Sat"
+msgstr "Šeš"
+
+msgid "Saturday"
+msgstr "šeštadienis"
+
+msgid "Select action for remote timer '%s':"
+msgstr "Pasirinkite veiksmą nuotoliniam laikmačiui '%s':"
+
+msgid "Select action for timer '%s':"
+msgstr "Pasirinkite veiksmą laikmačiui %s:"
+
+msgid "Select action:"
+msgstr "Pasirinkite veiksmą:"
+
+msgid "Select operation for partnerbox"
+msgstr "Pasirinkite Partnerbox veiksmą"
+
+msgid "Servicelists/EPG"
+msgstr "Kanalų sąrašai / EPG duomenys"
+
+msgid "Show 'RemoteTV Player' in E-Menu"
+msgstr "'Nuotolinis TV grotuvas' į plėtinių meniu"
+
+msgid "Show 'RemoteTimer' in E-Menu"
+msgstr "'Nuotolinis laikmatis' į plėtinių meniu"
+
+msgid "Show 'RemoteTimer' in Event View context menu"
+msgstr "'Nuotolinis laikmatis' į įvykių peržiūros kontekstiniame meniu"
+
+msgid "Show 'RemoteTimer' in Eventinfo menu"
+msgstr "'Nuotolinis laikmatis' į įvykių informacijos meniu"
+
+msgid "Show 'Stream current Service' in E-Menu"
+msgstr "'Transliuoti šį kanalą' į plėtinių meniu"
+
+msgid "Show all icon for event in EPGList"
+msgstr "EPG sąraše rodyti įvykio piktogramą"
+
+msgid "Show duration time for event"
+msgstr "Rodyti įvykio trukmę"
+
+msgid "Shutdown"
+msgstr "Išjungti"
+
+msgid "Standard Zap"
+msgstr "Paprastas perjungimas"
+
+msgid "Standby"
+msgstr "Budintis režimas"
+
+msgid "StartTime"
+msgstr "Pradžios laikas"
+
+msgid "Starting Remote Player (IP = %s)"
+msgstr "Nuotolinis TV grotuvas paleidžiamas (IP = %s)"
+
+msgid "Stream TV from your Partnerbox"
+msgstr "TV transliacija iš Partnerbox"
+
+msgid "Stream current Service from Partnerbox"
+msgstr "Transliuoti šį kanalą iš Partnerbox"
+
+msgid "Stream current service from partnerbox"
+msgstr "Transliuoti šį kanalą iš Partnerbox"
+
+msgid "Sun"
+msgstr "Sek"
+
+msgid "Sunday"
+msgstr "sekmadienis"
+
+msgid "The pin code you entered is wrong."
+msgstr "Įvedėte neteisingą PIN kodą."
+
+msgid "The timer '%s' has been %s successfully"
+msgstr "Laikmatis '%s' sėkmingai %s"
+
+msgid "The timer '%s' has been deleted successfully"
+msgstr "Laikmatis '%s' pašalintas sėkmingai"
+
+msgid "Thu"
+msgstr "Ket"
+
+msgid "Thursday"
+msgstr "ketvirtadienis"
+
+msgid "Timer '%s' added"
+msgstr "Laikmatis '%s' pridėtas"
+
+msgid "Timer '%s' not saved while Conflict"
+msgstr "Laikmatis '%s' neįtrauktas dėl konflikto"
+
+msgid "Timer Type"
+msgstr "Laikmačio tipas"
+
+msgid "Timer can not be added...no locations on partnerbox available."
+msgstr "Laikmatis negali būti pridėtas... Partnerbox nėra laisvos vietos."
+
+msgid "Timer event deleted successfully."
+msgstr "Laikmačio įrašas pašalintas sėkmingai."
+
+msgid "Timer event was created successfully."
+msgstr "Laikmačio įrašas sukurtas sėkmingai."
+
+msgid "Timer menu"
+msgstr "Laikmačio meniu"
+
+msgid "Toggle Standby"
+msgstr "Įjungti/išjungti budėjimo režimą"
+
+msgid "Toggle status (on/off)"
+msgstr "Perjungimo būsena (įjungta/išjungta)"
+
+msgid "Tue"
+msgstr "Ant"
+
+msgid "Tuesday"
+msgstr "antradienis"
+
+msgid "Wakeup"
+msgstr "Pažadinti"
+
+msgid "Wed"
+msgstr "Tre"
+
+msgid "Wednesday"
+msgstr "trečiadienis"
+
+msgid "Yes (safe mode)"
+msgstr "Taip (saugus režimas)"
+
+msgid ""
+"You can not add services or bouquets from Enigma1-receivers into the "
+"channellist..."
+msgstr ""
+"Jūs negalite įkelti į kanalų sąrašą kanalų, ar bukietų iš Enigma1 imtuvų..."
+
+msgid "You have to restart Enigma2 to activate your new preferences!"
+msgstr "Kad aktyvuoti pakeitius, enigma2 reikia paleisti iš naujo."
+
+msgid "Zap"
+msgstr "Perjungti"
+
+msgid "Zap focus to Picture in Picture"
+msgstr "Pakeisti tarpusavy vaizdus vaizde"
+
+msgid "Zap focus to main screen"
+msgstr "Perjungti į pagrindinį ekraną"
+
+msgid "Zap to service when streaming"
+msgstr "Perjungti į transliuojamą kanalą"
+
+msgid "Zap/"
+msgstr "Perjungti/"
+
+msgid "Zapping to "
+msgstr "Perjungiama į"
+
+msgid "about to start"
+msgstr "pradedama"
+
+msgid "add Partnerbox bouquet"
+msgstr "pridėti Partnerbox bukietą"
+
+msgid "add Partnerbox service"
+msgstr "pridėti Partnerbox kanalą"
+
+msgid "auto"
+msgstr "automatiškai"
+
+msgid "disabled"
+msgstr "išjungta"
+
+msgid "do nothing"
+msgstr "nieko nedaryti"
+
+msgid "done!"
+msgstr "atlikta!"
+
+msgid "go to deep standby"
+msgstr "išjungti"
+
+msgid "go to standby"
+msgstr "į budėjimo režimą"
+
+msgid "mins"
+msgstr "min."
+
+msgid "record"
+msgstr "įrašyti"
+
+msgid "recording..."
+msgstr "įrašoma..."
+
+msgid "setup for partnerbox"
+msgstr "Partnerbox sąranka"
+
+msgid "unknown service"
+msgstr "nežinomas kanalas"
+
+msgid "use external"
+msgstr "naudoti išorinį"
+
+msgid "use internal"
+msgstr "naudoti vidinį"
+
+msgid "waiting"
+msgstr "laukiama"
+
+msgid "zap"
+msgstr "perjungti"
+
+msgid "zapped"
+msgstr "perjungta"
+
+msgid "Choose bouquet"
+msgstr "Pasirinkite bukietą"

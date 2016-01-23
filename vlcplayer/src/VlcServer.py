@@ -1,6 +1,6 @@
 # -*- coding: ISO-8859-1 -*-
 #===============================================================================
-# VLC Player Plugin by A. Lätsch 2007
+# VLC Player Plugin by A. Latsch 2007
 #                   modified by Volker Christian 2008
 #
 # This is free software; you can redistribute it and/or modify it under
@@ -9,14 +9,13 @@
 # version.
 #===============================================================================
 
-
 import re
 import posixpath
-import base64
+import urllib
 from sys import maxint
 from random import randint, seed
-from urllib import urlencode
-from urllib2 import urlopen,Request
+from urllib import urlencode, quote_plus
+from urllib2 import urlopen
 from xml.dom.minidom import parse
 from VlcPlayer import VlcPlayer, isDvdUrl
 
@@ -38,7 +37,6 @@ def normpath(path):
 	elif path == ".":
 		return None
 	return path
-	
 
 class VlcServer:
 	def __init__(self, cfg):
@@ -71,17 +69,23 @@ class VlcServer:
 	def httpPort(self):
 		return self.cfg.httpport
 
-	def getPassword(self):
-		return self.cfg.password.value
-
-	def password(self):
-		return self.cfg.password
-
 	def getBasedir(self):
 		return self.cfg.basedir.value
 
 	def basedir(self):
 		return self.cfg.basedir
+
+	def getUseCachedir(self):
+		return self.cfg.usecachedir.value
+
+	def usecachedir(self):
+		return self.cfg.usecachedir
+
+	def getCachedir(self):
+		return self.cfg.cachedir.value
+
+	def cachedir(self):
+		return self.cfg.cachedir
 
 	def getVideoCodec(self):
 		return self.cfg.videocodec.value
@@ -137,6 +141,30 @@ class VlcServer:
 	def sOverlay(self):
 		return self.cfg.soverlay
 
+	def getSubYellow(self):
+		return self.cfg.subyellow.value
+
+	def subYellow(self):
+		return self.cfg.subyellow
+
+	def getlangInputType(self):
+		return self.cfg.langInputType.value
+
+	def langInputType(self):
+		return self.cfg.langInputType
+
+	def gettypeAudio(self):
+		return self.cfg.typeAudio.value
+
+	def typeAudio(self):
+		return self.cfg.typeAudio
+
+	def gettypeSubtitles(self):
+		return self.cfg.typeSubtitles.value
+
+	def typeSubtitles(self):
+		return self.cfg.typeSubtitles
+
 	def getTranscodeVideo(self):
 		return self.cfg.transcodeVideo.value
 
@@ -149,22 +177,32 @@ class VlcServer:
 	def transcodeAudio(self):
 		return self.cfg.transcodeAudio
 
+	def getVLCType(self):
+		return self.cfg.vlctype.value
+
+	def vlcType(self):
+		return self.cfg.vlctype
+
+	def getPingIp(self):
+		return self.cfg.pingonopen.value
+
+	def PingIp(self):
+		return self.cfg.pingonopen
+
 	def dvdPath(self):
 		return self.cfg.dvdPath
 
 	def getDvdPath(self):
 		return self.cfg.dvdPath.value
 
-	def __xmlRequest(self, request, params):
+	def __xmlRequest(self, request, params, sout=""):
 		uri = "/requests/" + request + ".xml"
-		if params is not None: uri = uri + "?" + urlencode(params, True).replace('+', '%20')
+		if params is not None: uri = uri + "?" + urlencode(params).replace('+', '%20') + sout.replace('+', '%20')
 		location = "%s:%d" % (self.getHost(), self.getHttpPort())
-		httpreq = Request("http://" + location + uri)
-		if self.getPassword():
-			username = '' # VLC uses empty username
-			authorization = base64.encodestring('%s:%s' % (username, self.getPassword()))[:-1]
-			httpreq.add_header("Authorization", "Basic %s" % authorization)
-		resp = urlopen(httpreq)
+		try:
+			resp = urlopen("http://" + location + uri)
+		except:
+			resp = None
 		if resp is None:
 			raise IOError, "No response from Server"
 		xml = parse(resp)
@@ -209,15 +247,17 @@ class VlcServer:
 
 	def play(self, session, media, name, currentList = None, player = None):
 		if player is None:
-# or not isinstance(player, VlcPlayer):
+		# or not isinstance(player, VlcPlayer):
 			player = VlcPlayer
 		dlg = session.open(player, self, currentList)
 		dlg.playfile(media, name)
 		return dlg
-	
+
 	def playFile(self, filename, videoPid, audioPid):
 		streamName = "dream" + str(randint(0, maxint))
 		transcode = []
+		parameters = ""
+		oldVLC = self.getVLCType()
 
 		doDirect = isDvdUrl(filename) or re.match("(?i).*\.(mpg|mpeg|ts)$", filename.lower())
 
@@ -229,13 +269,17 @@ class VlcServer:
 				videoNormList[3]
 			))
 			#New canvas - since VLC 0.9
-			transcode.append("vfilter=canvas{width=%s,height=%s,aspect=%s}" % (
-				str(int(float(videoNormList[0]) - float(videoNormList[0]) * float(self.getOverscanCorrection()) / 100)),
-				str(int(float(videoNormList[1]) - float(videoNormList[1]) * float(self.getOverscanCorrection()) / 100)),
-				videoNormList[2]
-			))
+			if oldVLC:
+				transcode.append("vfilter=canvas{width=%s,height=%s,aspect=%s}" % (
+					str(int(float(videoNormList[0]) - float(videoNormList[0]) * float(self.getOverscanCorrection()) / 100)),
+					str(int(float(videoNormList[1]) - float(videoNormList[1]) * float(self.getOverscanCorrection()) / 100)),
+					videoNormList[2]
+				))
 			if self.getSOverlay():
 				transcode.append("soverlay")
+				if not oldVLC:
+					parameters += " :sout-spu"
+
 		if not doDirect or self.getTranscodeAudio():
 			transcode.append("acodec=%s,ab=%d,channels=%d,samplerate=%s" % (
 				self.getAudioCodec(),
@@ -243,36 +287,75 @@ class VlcServer:
 				self.getAudioChannels(),
 				self.getSamplerate()
 			))
+		# txt or dvbs subtitles:
+		transcode.append("scodec=dvbs")
+
+		# Fix for nat. chars in path/filename
+		if not re.match("dvd", filename):
+			filename = urllib.pathname2url(filename)
+
 		if re.match("[a-zA-Z]:", filename):
 			# Fix for subtitles with VLC on Windows.
 			filename = filename.replace("/", "\\")
 
-		filename = filename.replace("\\", "\\\\").replace("'", "\\'")
-		param = {
-			"command": "in_play",
-			"input": filename,
-			"option": []
-		}
+		# Fix for overlay subtitles with VLC > 1.1
+		if not re.match("dvd", filename) and not re.match("http:", filename):
+			filename = "file:///" + filename
 
-		input = ":sout=#"
+		filename = filename.replace("\\", "\\\\").replace("'", "\\'")
+
+		# yellow overlay subtitles
+		if self.getSubYellow():
+			parameters += " :freetype-color=0xFFFF00"
+
+		# caching
+		if re.match("dvd", filename):
+			parameters += " :dvdread-caching=3000"
+		else:
+			parameters += " :file-caching=1000"
+
+		# languages/tracks
+		if self.getlangInputType()=="language":
+			if self.gettypeAudio()!="---":
+				parameters += " :audio-language=%s" % self.gettypeAudio()
+			if self.gettypeSubtitles()!="---":
+				parameters += " :sub-language=%s" % self.gettypeSubtitles()
+		else:
+			if self.gettypeAudio()!="-1":
+				parameters += " :audio-track=%s" % self.gettypeAudio()
+			if self.gettypeSubtitles()!="-1":
+				parameters += " :sub-track=%s" % self.gettypeSubtitles()
+
+		if re.match("dvd", filename):
+			# sout-all only, if is not selected subtitle track or subtitle language
+			if self.gettypeSubtitles()=="---" or self.gettypeSubtitles()=="-1": 
+				parameters += " :sout-all"
+		else:
+			parameters += " :sout-all"
+
+		input = filename
+		sout = ":sout=#"
 
 		if len(transcode) > 0:
-			input += "transcode{%s}:" % (",".join(transcode))
+			sout += "transcode{%s}:" % (",".join(transcode))
 
-		mux = "ts{pid-video=%d,pid-audio=%d}" % (videoPid, audioPid)
-		input += "std{access=http,mux=%s,dst=/%s.ts}" % (mux, streamName)
-		param["option"].append(input)
+		mux="ts{pid-video=%d,pid-audio=%d}" % (videoPid, audioPid)
+		sout += "std{access=http,mux=%s,dst=/%s.ts}" % (mux, streamName)
 
-		param["option"].append(":sout-all")
-		param["option"].append(":sout-keep")
+		if oldVLC:
+			input +=  " " + sout + parameters
+			sout = ""
+		else:
+			params = "".join((sout,parameters)).split(' ')
+			sout = ""
+			for par in params:
+				sout +="&option=%s" % quote_plus(par.lstrip(':'))
 
-		if self.apiversion() <= 2:
-			param["input"] = param["input"] + ' ' + ' '.join(param["option"])
-			del param["option"]
+		print "[VLC] playfile", input
+		print "[VLC] sout", sout
 
-		print "[VLC] playfile", param
+		xml = self.__xmlRequest("status", [("command", "in_play"),("input", input)], sout)
 
-		xml = self.__xmlRequest("status", param)
 		error = xml.getElementsByTagName("error")
 		if error is not None and len(error) > 0:
 			self.lastError = getText(error[0].childNodes).strip()
@@ -283,13 +366,7 @@ class VlcServer:
 			return None
 		else:
 			self.lastError = None
-		host = self.getHost()
-		port = self.getHttpPort()
-		if self.getPassword():
-			username = '' # VLC uses empty username
-			authorization = base64.encodestring('%s:%s' % (username, self.getPassword()))[:-1]
-			host = authorization + "@" + host
-		return "http://%s:%d/%s.ts" % (host, port, streamName)
+		return "http://%s:%d/%s.ts" % (self.getHost(), self.getHttpPort(), streamName)
 
 	def unpause(self):
 		self.__xmlRequest("status", {"command": "pl_pause"})
@@ -301,28 +378,25 @@ class VlcServer:
 		self.__xmlRequest("status", {"command": "pl_pause"})
 
 	def delete(self, id):
-		self.__xmlRequest("status", {"command": "pl_delete", "id": str(id)})
+		self.__xmlRequest("status", [("command", "pl_delete"), ("id", str(id))])
 
 	def deleteCurrentTree(self):
 		print "[VLC] delete current tree"
 		currentElement = self.getCurrentElement()
 		while currentElement is not None and currentElement.parentNode.getAttribute("ro") != "ro":
 			currentElement = currentElement.parentNode
-		if currentElement is not None:
-			id = int(currentElement.getAttribute("id"))
-			self.delete(id)
-		else:
-			print "[VLC] no current element!"
-		
+		id = int(currentElement.getAttribute("id"))
+		self.delete(id)
+
 	def seek(self, value):
 		"""  Allowed values are of the form:
-  [+ or -][<int><H or h>:][<int><M or m or '>:][<int><nothing or S or s or ">]
-  or [+ or -]<int>%
-  (value between [ ] are optional, value between < > are mandatory)
-examples:
-  1000 -> seek to the 1000th second
-  +1H:2M -> seek 1 hour and 2 minutes forward
-  -10% -> seek 10% back"""
+			[+ or -][<int><H or h>:][<int><M or m or '>:][<int><nothing or S or s or ">]
+			or [+ or -]<int>%
+			(value between [ ] are optional, value between < > are mandatory)
+			examples:
+			1000 -> seek to the 1000th second
+			+1H:2M -> seek 1 hour and 2 minutes forward
+			-10% -> seek 10% back"""
 		self.__xmlRequest("status", {"command": "seek", "val": str(value)})
 
 	def status(self):
@@ -335,10 +409,6 @@ examples:
 				else:
 					stats[e.nodeName.encode("latin_1", "replace")] = e.firstChild.nodeValue.encode("latin_1", "replace")
 		return stats
-
-	def apiversion(self):
-		status = self.status()
-		return int(status.get("apiversion", 2)) if status else 2
 
 	def loadPlaylist(self, playlist):
 		self.__xmlRequest("status", {"command": "in_play", "input": playlist})

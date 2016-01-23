@@ -1,0 +1,214 @@
+# German translations for enigma package.
+# Copyright (C) 2008 THE enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma package.
+# Alex <info@laetsch.de>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2.plugins.vlcplayer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-17 13:14+0100\n"
+"PO-Revision-Date: 2012-12-15 15:31+0100\n"
+"Last-Translator: andy1 <dmm8000pvr@gmail.com>\n"
+"Language-Team: German <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/plugin.py:69
+msgid "A video streaming solution based on VLC"
+msgstr "En bilde strømmings løsning basert på VLC"
+
+#: ../src/VlcServerConfig.py:318
+msgid "Audio Bitrate"
+msgstr "Lyd bitrate"
+
+#: ../src/VlcServerConfig.py:320
+msgid "Audio Channels"
+msgstr "Lyd kanaler"
+
+#: ../src/VlcServerConfig.py:317
+msgid "Audio Codec"
+msgstr "Lyd codec"
+
+#: ../src/VlcServerConfig.py:319
+msgid "Audio Samplerate"
+msgstr "Lyd samplingshastighet"
+
+#: ../src/VlcServerConfig.py:294
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: ../src/VlcServerConfig.py:306
+msgid "DVD Device (leave empty for default)"
+msgstr "DVD spiller (la stå tom som standard)"
+
+#: ../src/VlcServerConfig.py:301
+msgid "Enter VLC-Server as FQDN or IP-Address"
+msgstr "Oppgi VLC-server i FQDN eller IP adresse"
+
+#: ../src/VlcMediaList.py:186
+#, python-format
+msgid ""
+"Error loading filelist into server %(server)s:\n"
+"%(error)s"
+msgstr "Feil ved lasting av fil liste til server %(server)s:`n%(error)s"
+
+#: ../src/VlcMediaList.py:164
+#, python-format
+msgid ""
+"Error loading playlist %(media)s into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Feil ved lastining av spilliste %(media)s til server %(server)s:\n"
+"%(error)s"
+
+#: ../src/VlcMediaList.py:180
+#: ../src/VlcMediaList.py:196
+#: ../src/VlcMediaList.py:201
+#, python-format
+msgid ""
+"Error loading playlist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Feil ved lasting av spilliste till server %(server)s:\n"
+"%(error)s"
+
+#: ../src/VlcMediaList.py:127
+#, python-format
+msgid ""
+"Error updating filelist from server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Feil ved oppdatering av fil liste fra server %(server)s:\n"
+"%(error)s"
+
+#: ../src/VlcPlayer.py:330
+#: ../src/VlcPlayer.py:365
+#: ../src/VlcPlayer.py:393
+#, python-format
+msgid ""
+"Error with VLC server:\n"
+"%s"
+msgstr ""
+"Feil med VLC server:\n"
+"%s"
+
+#: ../src/VlcMediaList.py:62
+msgid "Filelist"
+msgstr "Filliste"
+
+#: ../src/VlcServerConfig.py:304
+msgid "HTTP Port"
+msgstr "HTTP port"
+
+#: ../src/VlcServerList.py:80
+msgid "List of known VLC-Server Profiles"
+msgstr "Liste over kjente VLC serverprofiler"
+
+#: ../src/VlcServerConfig.py:305
+msgid "Movie Directory"
+msgstr "Filmkatalog"
+
+#: ../src/VlcPlayer.py:445
+msgid "No more files in this directory"
+msgstr "Ikke flere filer i denne katalogen"
+
+#: ../src/VlcPlayer.py:472
+msgid "No previous file in this directory"
+msgstr "Ingen tidligere filer i denne katalogen"
+
+#: ../src/VlcPlayer.py:320
+msgid ""
+"No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+msgstr ""
+"Ingen godkjent Enigma service for spilling av VLC-strøm\n"
+"Kontrollér din installasjon og prøv igjen!"
+
+#: ../src/VlcServerConfig.py:295
+msgid "OK"
+msgstr "OK"
+
+#: ../src/VlcServerConfig.py:312
+#, python-format
+msgid "Overscan Correction [in %(percentsign)s of Video width]"
+msgstr "Feilkorreksjon [på %(percentsign)s av bilde bredde]"
+
+#: ../src/VlcMediaList.py:63
+msgid "Playlist"
+msgstr "Spilleliste"
+
+#: ../src/VlcServerList.py:126
+msgid "Really delete this Server?"
+msgstr "Fjerne denne server?"
+
+#: ../src/VlcServerConfig.py:302
+msgid "Server Address"
+msgstr "Server adresse"
+
+#: ../src/VlcServerConfig.py:300
+msgid "Server Profile Name"
+msgstr "Server profilnavn"
+
+#: ../src/VlcMediaList.py:57
+msgid "Serverlist"
+msgstr "Serverliste"
+
+#: ../src/VlcServerConfig.py:314
+msgid "Subtitle overlay"
+msgstr "Teksting overlegg"
+
+#: ../src/VlcServerConfig.py:316
+msgid "Transcode MPEG/DVD Audio"
+msgstr "Transkode MPEG/DVD lyd"
+
+#: ../src/VlcServerConfig.py:308
+msgid "Transcode MPEG/DVD Video"
+msgstr "Transkode MPEG/DVD bilde"
+
+#: ../src/VlcServerConfig.py:310
+msgid "Video Bitrate"
+msgstr "Video bitrate"
+
+#: ../src/VlcServerConfig.py:309
+msgid "Video Codec"
+msgstr "Bilde codec"
+
+#: ../src/VlcServerConfig.py:311
+msgid "Video Norm"
+msgstr "Bildestandard"
+
+#: ../src/VlcServerList.py:83
+msgid "add server"
+msgstr "legg til server"
+
+#: ../src/VlcServerList.py:82
+msgid "delete server"
+msgstr "ta bort server"
+
+#: ../src/VlcServerList.py:84
+msgid "edit server"
+msgstr "innstille server"
+
+#: ../src/VlcMediaList.py:55
+#: ../src/VlcMediaList.py:119
+msgid "filter off"
+msgstr "filter av"
+
+#: ../src/VlcMediaList.py:122
+msgid "filter on"
+msgstr "filter på"
+
+#: ../src/VlcMediaList.py:58
+msgid "play DVD"
+msgstr "spelle DVD"
+
+#: ../src/VlcMediaList.py:56
+msgid "refresh"
+msgstr "oppdatere"
+
+#: ../src/VlcServerList.py:85
+msgid "set default"
+msgstr "sett som standard"

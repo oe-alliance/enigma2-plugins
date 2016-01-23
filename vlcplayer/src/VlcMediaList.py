@@ -1,6 +1,6 @@
 # -*- coding: ISO-8859-1 -*-
 #===============================================================================
-# VLC Player Plugin by A. Lätsch 2007
+# VLC Player Plugin by A. Latsch 2007
 #                   modified by Volker Christian 2008
 #
 # This is free software; you can redistribute it and/or modify it under
@@ -8,7 +8,6 @@
 # Software Foundation; either version 2, or (at your option) any later
 # version.
 #===============================================================================
-
 
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -23,10 +22,9 @@ from VlcFileList import VlcFileList
 from VlcPlayList import VlcPlayList
 from . import _
 
-
 class VlcMediaListScreen(Screen):
 	skin ="""
-		<screen size="560,400" position="80,100" name="VlcMediaListScreen" >
+		<screen size="560,400" position="80,100" name="VLC Media List" >
 			<ePixmap name="red"    position="0,355"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap name="green"  position="140,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<ePixmap name="yellow" position="280,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -43,11 +41,12 @@ class VlcMediaListScreen(Screen):
 			<widget size="540,320" scrollbarMode="showOnDemand" position="11,35" name="filelist" />
 			<widget size="540,320" scrollbarMode="showOnDemand" position="11,35" name="playlist" />
 		</screen>"""
-	
+
 	defaultFilter = "(?i)\.(avi|mpeg|mpg|divx|xvid|mp4|mov|ts|vob|wmv|mkv|iso|m3u|pls|xspf|flv)$"
 
 	def __init__(self, session, server):
 		Screen.__init__(self, session)
+		self.setTitle(_("VLC Media List"))
 		self.session = session
 		self.server = server
 		self["filelist"] = VlcFileList(self.getFilesAndDirsCB, server.getBasedir(), self.defaultFilter)
@@ -63,7 +62,7 @@ class VlcMediaListScreen(Screen):
 		self["playlist_text"] = Label(_("Playlist"))
 		self["server_name"] = Label(server.getName())
 		self["current_dir"] = Label()
-		
+
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"],
 			{
 			 "back": 	self.close,
@@ -88,14 +87,14 @@ class VlcMediaListScreen(Screen):
 	def __onFirstExecBegin(self):
 		self.setTitle("vlc://" + (self.server.getName() or self.server.getHost()) + "/" + self.server.getBasedir())
 		self["current_dir"].setText(self.server.getBasedir())
-			
+
 	def __onClose(self):
 		try:
 			for id in self.playlistIds:
 				self.server.delete(id)
 		except Exception, e:
 			pass
-			
+
 	def close(self, proceed = False):
 		Screen.close(self, proceed)
 
@@ -124,8 +123,8 @@ class VlcMediaListScreen(Screen):
 			self.updateFilelist()
 		except Exception, e:
 			self.session.open(
-				MessageBox, _("Error updating filelist from server %(server)s:\n%(error)s" % (
-						{"server" : self.server.getName(), "error" : e})
+				MessageBox, _("Error updating filelist from server %(server)s:\n%(error)s") % (
+						{"server" : self.server.getName(), "error" : e}
 					), MessageBox.TYPE_ERROR)
 
 	def keyDvd(self):
@@ -161,8 +160,8 @@ class VlcMediaListScreen(Screen):
 						self.switchToPlayList()
 				except Exception, e:
 					self.session.open(
-						MessageBox, _("Error loading playlist %(media)s into server %(server)s:\n%(error)s" % (
-								{"media" : media, "server" : self.server.getName(), "error" : e})
+						MessageBox, _("Error loading playlist %(media)s into server %(server)s:\n%(error)s") % (
+								{"media" : media, "server" : self.server.getName(), "error" : e}
 							), MessageBox.TYPE_ERROR)
 			elif media.lower().endswith(".iso"):
 				self.play("dvdsimple://" + media, "DVD")
@@ -177,14 +176,14 @@ class VlcMediaListScreen(Screen):
 			return self.server.getFilesAndDirs(currentDirectory, regex)
 		except ExpatError, e:
 			self.session.open(
-				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s" % (
-						{"server" : self.server.getName(), "error" : e })
+				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s") % (
+						{"server" : self.server.getName(), "error" : e }
 					), MessageBox.TYPE_ERROR)
 			raise ExpatError, e
 		except Exception, e:
 			self.session.open(
-				MessageBox, _("Error loading filelist into server %(server)s:\n%(error)s" % (
-						{"server" : self.server.getName(), "error" : e })
+				MessageBox, _("Error loading filelist into server %(server)s:\n%(error)s") % (
+						{"server" : self.server.getName(), "error" : e }
 					), MessageBox.TYPE_ERROR)
 		return None
 
@@ -193,13 +192,13 @@ class VlcMediaListScreen(Screen):
 			return self.server.getPlaylistEntries()
 		except ExpatError, e:
 			self.session.open(
-				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s" % (
-						{"server" : self.server.getName(), "error" : e })
+				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s") % (
+						{"server" : self.server.getName(), "error" : e }
 					), MessageBox.TYPE_ERROR)
 		except Exception, e:
 			self.session.open(
-				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s" % (
-						{"server" : self.server.getName(), "error" : e })
+				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s") % (
+						{"server" : self.server.getName(), "error" : e }
 					), MessageBox.TYPE_ERROR)
 		return None
 

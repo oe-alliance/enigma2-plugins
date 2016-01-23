@@ -1,6 +1,6 @@
 # -*- coding: ISO-8859-1 -*-
 #===============================================================================
-# VLC Player Plugin by A. Lätsch 2007
+# VLC Player Plugin by A. Latsch 2007
 #                   modified by Volker Christian 2008
 #
 # This is free software; you can redistribute it and/or modify it under
@@ -8,7 +8,6 @@
 # Software Foundation; either version 2, or (at your option) any later
 # version.
 #===============================================================================
-
 
 import re
 
@@ -36,13 +35,11 @@ MEDIA_EXTENSIONS = {
 		"flv": "movie"
 	}
 
-
 PLAYLIST_EXTENSIONS = {
 		"m3u": "playlist.png",
 		"pls": "playlist.png",
 		"xspf": "playlist.png",
 	}
-
 
 class VlcFileList(MenuList):
 	def __init__(self, getFilesAndDirsCB, baseDir, matchingPattern):
@@ -179,4 +176,3 @@ class VlcFileList(MenuList):
 				return cur[0], cur[2]
 			i = i - 1
 		return None, None
-

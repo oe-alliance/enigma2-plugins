@@ -1,6 +1,6 @@
 # -*- coding: ISO-8859-1 -*-
 #===============================================================================
-# VLC Player Plugin by A. Lätsch 2007
+# VLC Player Plugin by A. Latsch 2007
 #                   modified by Volker Christian 2008
 #
 # This is free software; you can redistribute it and/or modify it under
@@ -127,8 +127,7 @@ class ConfigSelectionExtended(ConfigSelection):
 		ConfigSelection.__init__(self, choices, default)
 
 	def deleteNotifier(self, notifier):
-		try: self.removeNotifier(notifier)
-		except: pass
+		self.notifiers.remove(notifier)
 
 
 class __VlcServerConfig():
@@ -149,16 +148,19 @@ class __VlcServerConfig():
 		if newServerConfigSubsection.name.value == newServerConfigSubsection.name.default:
 			newServerConfigSubsection.name.default = ""
 		newServerConfigSubsection.addressType = ConfigSelectionExtended(
-				[("FQDN", "FQDN"),
-				 ("IP", "IP-Address")
+				[("FQDN", _("FQDN")),
+				 ("IP", _("IP-Address"))
 				], "IP")
 		newServerConfigSubsection.hostip = ConfigMutable(
 				{"IP": ConfigIP([192,168,1,1]),
 				 "FQDN": ConfigText("fqdname", False)
 				}, newServerConfigSubsection.addressType.value)
 		newServerConfigSubsection.httpport = ConfigInteger(8080, (0,65535))
-		newServerConfigSubsection.password = ConfigText("", False)
+		newServerConfigSubsection.vlctype = ConfigYesNo(False)
 		newServerConfigSubsection.basedir = ConfigText("/", False)
+		newServerConfigSubsection.pingonopen = ConfigYesNo(True)
+		newServerConfigSubsection.usecachedir = ConfigYesNo(False)
+		newServerConfigSubsection.cachedir = ConfigText("/media/hdd/movie", False)
 		newServerConfigSubsection.dvdPath = ConfigText("", False)
 		newServerConfigSubsection.transcodeVideo = ConfigYesNo()
 		newServerConfigSubsection.transcodeAudio = ConfigYesNo(True)
@@ -176,14 +178,17 @@ class __VlcServerConfig():
 		newServerConfigSubsection.samplerate = ConfigSelection(
 				[("32000", "32000"),
 				 ("44100", "44100"),
-				 ("48000", "48000")
+				 ("48000", "48000"),
+				 ("0", "0")
 				], "44100")
 		newServerConfigSubsection.audiochannels = ConfigInteger(2, (1, 9))
 		newServerConfigSubsection.videonorm = ConfigSelection(
 				[("720,576,4:3,25,i", "720 x 576 (4:3) @ 25fps (PAL)"),
 				 ("720,576,16:9,25,i", "720 x 576 (16:9) @ 25fps (PAL)"),
-				 ("720,576,16:9,24,i", "720 x 576 (16:9) @ 24fps (PAL)"), 
 				 ("704,576,4:3,25,i", "704 x 576 (4:3) @ 25fps (PAL)"),
+				 ("704,440,4:3,25,i", "704 x 440 (4:3) @ 25fps (PAL)"),
+				 ("704,420,4:3,25,i", "704 x 420 (4:3) @ 25fps (PAL)"),
+				 ("704,400,4:3,25,i", "704 x 400 (4:3) @ 25fps (PAL)"),
 				 ("704,576,16:9,25,i", "704 x 576 (16:9) @ 25fps (PAL)"),
 				 ("544,576,4:3,25,i", "544 x 576 (4:3) @ 25fps (PAL)"),
 				 ("544,576,16:9,25,i", "544 x 576 (16:9) @ 25fps (PAL)"),
@@ -220,6 +225,117 @@ class __VlcServerConfig():
 				], "352,288,4:3,25,i")
 		newServerConfigSubsection.overscancorrection = ConfigInteger(0, (0, 100))
 		newServerConfigSubsection.soverlay = ConfigYesNo()
+		newServerConfigSubsection.subyellow = ConfigYesNo()
+		
+		newServerConfigSubsection.langInputType = ConfigSelectionExtended(
+				[("track", _("tracks")),
+				 ("language", _("languages"))
+				], "language")
+		newServerConfigSubsection.typeAudio = ConfigMutable(
+				{"track": ConfigSelection([
+							("-1","-1"),
+							("0","0"),
+							("1","1"),
+							("2","2"),
+							("3","3"),
+							("4","4"),
+							("5","5"),
+							("6","6"),
+							("7","7"),
+							("8","8"),
+							("9","9"),
+							("10","10"),
+							("11","11"),
+							("12","12"),
+							("13","13"),
+							("14","14"),
+							("15","15")
+							],"-1"),
+				 "language": ConfigSelection([
+							("---", "None"),
+							("ara", "Arabic"),
+							("baq", "Basque"),
+							("hrv", "Croatian"),
+							("cze", "Czech"),
+							("dan", "Danish"),
+							("dut", "Dutch"),
+							("eng", "English"),
+							("est", "Estonian"),
+							("fin", "Finnish"),
+							("fra", "French"),
+							("ger", "German"),
+							("gre", "Greek"),
+							("hun", "Hungarian"),
+							("ita", "Italian"),
+							("lat", "Latvian"),
+							("lit", "Lithuanian"),
+							("nob", "Norwegian"),
+							("pol", "Polish"),
+							("por", "Portuguese"),
+							("fas", "Persian"),
+							("ron", "Romanian"),
+							("rus", "Russian"),
+							("srp", "Serbian"),
+							("slk", "Slovak"),
+							("slv", "Slovenian"),
+							("spa", "Spanish"),
+							("swe", "Swedish"),
+							("tur", "Turkish")
+							],"---")
+				}, newServerConfigSubsection.langInputType.value)
+		newServerConfigSubsection.typeSubtitles = ConfigMutable(
+				{"track": ConfigSelection([
+							("-1","-1"),
+							("0","0"),
+							("1","1"),
+							("2","2"),
+							("3","3"),
+							("4","4"),
+							("5","5"),
+							("6","6"),
+							("7","7"),
+							("8","8"),
+							("9","9"),
+							("10","10"),
+							("11","11"),
+							("12","12"),
+							("13","13"),
+							("14","14"),
+							("15","15")
+							],"-1"),
+				 "language": ConfigSelection([
+							("---", "None"),
+							("ara", "Arabic"),
+							("baq", "Basque"),
+							("hrv", "Croatian"),
+							("cze", "Czech"),
+							("dan", "Danish"),
+							("dut", "Dutch"),
+							("eng", "English"),
+							("est", "Estonian"),
+							("fin", "Finnish"),
+							("fra", "French"),
+							("ger", "German"),
+							("gre", "Greek"),
+							("hun", "Hungarian"),
+							("ita", "Italian"),
+							("lat", "Latvian"),
+							("lit", "Lithuanian"),
+							("nob", "Norwegian"),
+							("pol", "Polish"),
+							("por", "Portuguese"),
+							("fas", "Persian"),
+							("ron", "Romanian"),
+							("rus", "Russian"),
+							("srp", "Serbian"),
+							("slk", "Slovak"),
+							("slv", "Slovenian"),
+							("spa", "Spanish"),
+							("swe", "Swedish"),
+							("tur", "Turkish")
+							],"---")
+				}, newServerConfigSubsection.langInputType.value)
+
 		newServer = VlcServer(newServerConfigSubsection)
 
 		self.serverlist.append(newServer)
@@ -257,7 +373,9 @@ class __VlcServerConfig():
 	def setAsDefault(self, defaultServer):
 		if defaultServer is not None:
 			config.plugins.vlcplayer.defaultserver.value = defaultServer.getName()
-			config.plugins.vlcplayer.defaultserver.save()
+		else:
+			config.plugins.vlcplayer.defaultserver.value = ''
+		config.plugins.vlcplayer.defaultserver.save()
 
 	def __save(self):
 		config.plugins.vlcplayer.servercount.value = self.__getServerCount()
@@ -293,7 +411,8 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 			"red": self.keyCancel,
 			"cancel": self.keyCancel
 		}, -2)
-
+		
+		self.setTitle(_("Edit VLC Server"))
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
 		self["key_yellow"] = Button("")
@@ -305,8 +424,11 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		self.hostConfigListEntry = getConfigListEntry(_("Server Address"), server.host())
 		cfglist.append(self.hostConfigListEntry)
 		cfglist.append(getConfigListEntry(_("HTTP Port"), server.httpPort()))
-		cfglist.append(getConfigListEntry(_("HTTP Password"), server.password()))
+		cfglist.append(getConfigListEntry(_("Ping IP-Address when open Server"), server.PingIp()))
+		cfglist.append(getConfigListEntry(_("VLC < 2.x"), server.vlcType()))
 		cfglist.append(getConfigListEntry(_("Movie Directory"), server.basedir()))
+		cfglist.append(getConfigListEntry(_("Use saving to Cache Directory"), server.usecachedir()))
+		cfglist.append(getConfigListEntry(_("Cache Directory"), server.cachedir()))
 		cfglist.append(getConfigListEntry(_("DVD Device (leave empty for default)"), server.dvdPath()))
 
 		cfglist.append(getConfigListEntry(_("Transcode MPEG/DVD Video"), server.transcodeVideo()))
@@ -316,7 +438,14 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		cfglist.append(getConfigListEntry(_("Overscan Correction [in %(percentsign)s of Video width]") % { "percentsign" : "%"}, server.overscanCorrection()))
 
 		cfglist.append(getConfigListEntry(_("Subtitle overlay"), server.sOverlay()))
+		cfglist.append(getConfigListEntry(_("Yellow subtitles"), server.subYellow()))
 
+		cfglist.append(getConfigListEntry(_("Enter subtitles as Track or Language"), server.langInputType()))
+		self.typeAudioConfigListEntry = getConfigListEntry(_("Audio"), server.typeAudio())
+		cfglist.append(self.typeAudioConfigListEntry)
+		self.typeSubtitlesConfigListEntry = getConfigListEntry(_("Subtitles"), server.typeSubtitles())
+		cfglist.append(self.typeSubtitlesConfigListEntry)
+		
 		cfglist.append(getConfigListEntry(_("Transcode MPEG/DVD Audio"), server.transcodeAudio()))
 		cfglist.append(getConfigListEntry(_("Audio Codec"), server.audioCodec()))
 		cfglist.append(getConfigListEntry(_("Audio Bitrate"), server.audioBitrate()))
@@ -326,16 +455,24 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, cfglist, session)
 
 		server.addressType().addNotifier(self.switchAddressType, False)
+		server.langInputType().addNotifier(self.switchlangInputType, False)
 		
 		self.onClose.append(self.__onClose)
 		
 	def __onClose(self):
 		self.server.addressType().deleteNotifier(self.switchAddressType)
+		self.server.langInputType().deleteNotifier(self.switchlangInputType)
 
 	def switchAddressType(self, configElement):
 		self.server.host().setAsCurrent(configElement.value)
 		self["config"].invalidate(self.hostConfigListEntry)
-
+		
+	def switchlangInputType(self, configElement):
+		self.server.typeAudio().setAsCurrent(configElement.value)
+		self["config"].invalidate(self.typeAudioConfigListEntry)
+		self.server.typeSubtitles().setAsCurrent(configElement.value)
+		self["config"].invalidate(self.typeSubtitlesConfigListEntry)
+		
 	def keySave(self):
 		self.close(True, self.server)
 

@@ -1,0 +1,214 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: VLCPlayer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-05 12:41+0200\n"
+"PO-Revision-Date: 2015-05-06 16:10+0100\n"
+"Last-Translator: Pr2 <dummy@dummy.com>\n"
+"Language-Team: OpenPLi\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.6\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: plugin.py:68
+msgid "A video streaming solution based on VLC"
+msgstr "Une solution de streaming vidéo basée sur VLC"
+
+#: VlcMediaList.py:55 VlcMediaList.py:119
+msgid "filter off"
+msgstr "Filtre off"
+
+#: VlcMediaList.py:56
+msgid "refresh"
+msgstr "Rafraîchir"
+
+#: VlcMediaList.py:57
+msgid "Serverlist"
+msgstr "Liste des serveurs"
+
+#: VlcMediaList.py:58
+msgid "play DVD"
+msgstr "Jouer DVD"
+
+#: VlcMediaList.py:62
+msgid "Filelist"
+msgstr "Liste des fichiers"
+
+#: VlcMediaList.py:63
+msgid "Playlist"
+msgstr "Liste de lecture"
+
+#: VlcMediaList.py:122
+msgid "filter on"
+msgstr "Filtre on"
+
+#: VlcMediaList.py:127
+#, python-format
+msgid ""
+"Error updating filelist from server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Erreur lors de la mise à jour de la liste des fichiers depuis le serveur %(server)s:\n"
+"%(error)s"
+
+#: VlcMediaList.py:164
+#, python-format
+msgid ""
+"Error loading playlist %(media)s into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Erreur lors du chargement de la liste de lecture %(media)s sur le serveur %(server)s:\n"
+"%(error)s"
+
+#: VlcMediaList.py:180 VlcMediaList.py:196 VlcMediaList.py:201
+#, python-format
+msgid ""
+"Error loading playlist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Erreur lors du chargement de la liste de lecteur sur le serveur %(server)s:\n"
+"%(error)s"
+
+#: VlcMediaList.py:186
+#, python-format
+msgid ""
+"Error loading filelist into server %(server)s:\n"
+"%(error)s"
+msgstr ""
+"Erreur lors du chargement de la liste des fichiers sur le %(server)s:\n"
+"%(error)s"
+
+#: VlcPlayer.py:324
+msgid ""
+"No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+msgstr ""
+"Aucun service Enigma valide pour lire un flux (stream) VLC\n"
+"Vérifiez votre installation et recommencez!"
+
+#: VlcPlayer.py:334 VlcPlayer.py:369 VlcPlayer.py:397
+#, python-format
+msgid ""
+"Error with VLC server:\n"
+"%s"
+msgstr ""
+"Erreur avec le serveur VLC:\n"
+"%s"
+
+#: VlcPlayer.py:449
+msgid "No more files in this directory"
+msgstr "Plus aucun fichier dans le répertoire"
+
+#: VlcPlayer.py:476
+msgid "No previous file in this directory"
+msgstr "Aucun ancien fichier dans le répertoire"
+
+#: VlcServerConfig.py:294
+msgid "Cancel"
+msgstr "Annuler"
+
+#: VlcServerConfig.py:295
+msgid "OK"
+msgstr "OK"
+
+#: VlcServerConfig.py:300
+msgid "Server Profile Name"
+msgstr "Nom du profil du serveur"
+
+#: VlcServerConfig.py:301
+msgid "Enter VLC-Server as FQDN or IP-Address"
+msgstr "Entrer le serveur VLC comme nom complet (FQDN) ou adresse IP"
+
+#: VlcServerConfig.py:302
+msgid "Server Address"
+msgstr "Adresse du serveur"
+
+#: VlcServerConfig.py:304
+msgid "HTTP Port"
+msgstr "Port HTTP"
+
+#: VlcServerConfig.py:305
+msgid "Movie Directory"
+msgstr "Répertoire des films"
+
+#: VlcServerConfig.py:306
+msgid "DVD Device (leave empty for default)"
+msgstr "Périphérique DVD (laisser vide pour celui par défaut)"
+
+#: VlcServerConfig.py:308
+msgid "Transcode MPEG/DVD Video"
+msgstr "Transcoder MPEG/DVD vidéo"
+
+#: VlcServerConfig.py:309
+msgid "Video Codec"
+msgstr "Codec vidéo"
+
+#: VlcServerConfig.py:310
+msgid "Video Bitrate"
+msgstr "Taux d'échantillonnage vidéo"
+
+#: VlcServerConfig.py:311
+msgid "Video Norm"
+msgstr "Norme vidéo"
+
+#: VlcServerConfig.py:312
+#, python-format
+msgid "Overscan Correction [in %(percentsign)s of Video width]"
+msgstr "Correction de l'overscan [en %(percentsign)s de la largeur vidéo]"
+
+#: VlcServerConfig.py:314
+msgid "Subtitle overlay"
+msgstr "Superposition des sous-titres"
+
+#: VlcServerConfig.py:316
+msgid "Transcode MPEG/DVD Audio"
+msgstr "Transcoder MPEG/DVD Audio"
+
+#: VlcServerConfig.py:317
+msgid "Audio Codec"
+msgstr "Codec audio"
+
+#: VlcServerConfig.py:318
+msgid "Audio Bitrate"
+msgstr "Taux d'échantillonnage audio"
+
+#: VlcServerConfig.py:319
+msgid "Audio Samplerate"
+msgstr "Echantillonnage audio"
+
+#: VlcServerConfig.py:320
+msgid "Audio Channels"
+msgstr "Canaux audio"
+
+#: VlcServerList.py:98
+msgid "List of known VLC-Server Profiles"
+msgstr "Liste des profils des serveurs VLC connus"
+
+#: VlcServerList.py:100
+msgid "delete server"
+msgstr "Effacer serveur"
+
+#: VlcServerList.py:101
+msgid "add server"
+msgstr "Ajouter serveur"
+
+#: VlcServerList.py:102
+msgid "edit server"
+msgstr "Editer serveur"
+
+#: VlcServerList.py:103
+msgid "set default"
+msgstr "Définir par défaut"
+
+#: VlcServerList.py:144
+msgid "Really delete this Server?"
+msgstr "Voulez-vous vraiment effacer ce serveur?"
