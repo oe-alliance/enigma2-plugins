@@ -30,7 +30,7 @@ from spChannelContextMenu import SPChannelContextMenuInit, SPChannelContextMenuU
 #######################################################
 # Constants
 NAME = "SeriesPlugin"
-VERSION = "4.5"
+VERSION = "5.0.2"
 DESCRIPTION = _("SeriesPlugin")
 SHOWINFO = _("Show series info (SP)")
 RENAMESERIES = _("Rename serie(s) (SP)")
@@ -70,18 +70,21 @@ def buildURL(url):
 
 #######################################################
 # Test
-def test(**kwargs):
+def test(session=None):
 	# http://dm7080/autotimer
 	# http://www.unixtime.de/
 	try:
 		#from SeriesPluginBare import bareGetSeasonEpisode 	#future=True, today=False, elapsed=False
 		#bareGetSeasonEpisode("1:0:19:7C:6:85:FFFF0000:0:0:0:", "The Walking Dead", 1448740500, 1448745600, "Description", "/media/hdd/movie", True, False, False)
 		#bareGetSeasonEpisode("1:0:1:2F50:F1:270F:FFFF0000:0:0:0:", "Are You the One?", 1448923500, 1448926500, "Description", "/media/hdd/movie", False, False, True)
+		#bareGetSeasonEpisode("1:0:19:814D:14B:270F:FFFF0000:0:0:0:", "Bones", 1451416200, 1451416200, "Description", "/media/hdd/movie", False, True, False)
+		#sp = bareGetSeasonEpisode("1:0:19:2B66:437:66:FFFF0000:0:0:0:", "Bares für Rares", 1451311500, 1451311500, "Description", "/media/hdd/movie", False, True, False)
+		#sp = bareGetSeasonEpisode("1:0:19:7980:1C3:270F:FFFF0000:0:0:0:", "Offroad Survivors", 1451492100, 1451492100, "Description", "/media/hdd/movie", False, True, False)
+		#from Tools.Notifications import AddPopup
+		#AddPopup( sp[0], MessageBox.TYPE_INFO, 0, 'SP_PopUp_ID_Test' )
 		
 		#TEST INFOSCREEN MOVIE
-		#if kwargs.has_key("session"):
 		#	from enigma import eServiceReference
-		#	session = kwargs["session"]
 			#service = eServiceReference(eServiceReference.idDVB, 0, "/media/hdd/movie/20151120 0139 - Pro7 HD - The 100.ts")
 			#service = eServiceReference(eServiceReference.idDVB, 0, "/media/hdd/movie/20151205 1625 - TNT Serie HD (S) - The Last Ship - Staffel 1.ts")
 			#service = eServiceReference(eServiceReference.idDVB, 0, "/media/hdd/movie/20151204 1825 - VIVA_COMEDY CENTRAL HD - Rules of Engagement.ts")
@@ -104,7 +107,10 @@ def start(reason, **kwargs):
 		if reason == 0:
 			
 			#TEST AUTOTIMER
-			#test(kwargs)
+			#test()
+			#if kwargs.has_key("session"):
+			#	session = kwargs["session"]
+			#	test(session)
 			#TESTEND
 			
 			# Start on demand if it is requested
@@ -244,7 +250,7 @@ def getSeasonAndEpisode(timer, name, begin, end, *args, **kwargs):
 		logDebug("SeriesPlugin getSeasonEpisode is deprecated - Update Your AutoTimer!")
 		try:
 			spt = SeriesPluginTimer(timer, name, begin, end, True)
-			result = spt.getSeasonAndEpisode(timer, name, begin, end, True, False, False)
+			result = spt.getSeasonAndEpisode(timer, name, begin, end)
 		except Exception as e:
 			logDebug(_("SeriesPlugin label exception ") + str(e))
 	return result

@@ -27,7 +27,6 @@ import imp, inspect
 # Plugin internal
 from . import _
 from Logger import logDebug, logInfo
-from IdentifierBase import IdentifierBase
 
 # Constants
 IDENTIFIER_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Identifiers/" )
@@ -36,7 +35,8 @@ IDENTIFIER_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/Seri
 class Modules(object):
 
 	def __init__(self):
-		self.modules = self.loadModules(IDENTIFIER_PATH, IdentifierBase)
+		from IdentifierBase import IdentifierBase2
+		self.modules = self.loadModules(IDENTIFIER_PATH, IdentifierBase2)
 		logDebug("SP Modules:", self.modules)
 
 	#######################################################

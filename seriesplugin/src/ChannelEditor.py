@@ -37,9 +37,9 @@ except:
 from difflib import SequenceMatcher
 
 #Internal
-from Channels import ChannelsBase, buildSTBchannellist, unifyChannel, getTVBouquets
+from Channels import ChannelsBase, buildSTBchannellist, unifyChannel, getTVBouquets, lookupChannelByReference
 from Logger import logDebug, logInfo
-
+from WebChannels import WebChannels
 
 # Constants
 PIXMAP_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Images/" )
@@ -51,15 +51,16 @@ colorYellow = 0xbab329
 colorWhite  = 0xffffff
 
 
-class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
+class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 	
-	skinfile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/skinChannelEditor.xml" )
+	skinfile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/ChannelEditor.xml" )
 	skin = open(skinfile).read()
 	
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		ChannelsBase.__init__(self)
+		WebChannels.__init__(self)
 		
 		self.session = session
 		
@@ -145,8 +146,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 			self.stbChlist = buildSTBchannellist(self.bouquet)
 		
 		if not self.webChlist:
-			from WebChannels import WebChannels
-			WebChannels(self.setWebChannels).request()
+			self.setWebChannels(self.getWebChannels())
 		else:
 			self.showChannels()
 
@@ -161,7 +161,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 			for servicename,serviceref,uservicename in self.stbChlist:
 				#logDebug("SPC: servicename", servicename, uservicename)
 				
-				webSender = self.lookupChannelByReference(serviceref)
+				webSender = lookupChannelByReference(serviceref)
 				if webSender is not False:
 					self.stbToWebChlist.append((servicename, ' / '.join(webSender), serviceref, "1"))
 					
@@ -183,7 +183,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase):
 			for servicename,serviceref,uservicename in self.stbChlist:
 				#logDebug("SPC: servicename", servicename, uservicename)
 				
-				webSender = self.lookupChannelByReference(serviceref)
+				webSender = lookupChannelByReference(serviceref)
 				if webSender is not False:
 					self.stbToWebChlist.append((servicename, ' / '.join(webSender), serviceref, "1"))
 					

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# by betonme @2012
+# by betonme @2015
 
 # for localized messages
 from . import _
@@ -19,7 +19,7 @@ loop_counter = 0
 
 
 def bareGetSeasonEpisode(service_ref, name, begin, end, description, path, future=True, today=False, elapsed=False):
-	result = None
+	result = _("SeriesPlugin is deactivated")
 	if config.plugins.seriesplugin.enabled.value:
 		
 		startLog()
@@ -53,17 +53,17 @@ def bareGetSeasonEpisode(service_ref, name, begin, end, description, path, futur
 def bareShowResult():
 	global loop_data, loop_counter
 	
-	if not loop_data and config.plugins.seriesplugin.timer_popups_success.value:
+	if loop_data and config.plugins.seriesplugin.timer_popups.value:
 		AddPopup(
-			"SeriesPlugin:\n" + _("%d timer renamed successfully") % (loop_counter),
+			"SeriesPlugin:\n" + _("SP has been finished with errors:\n") +"\n" +"\n".join(loop_data),
 			MessageBox.TYPE_ERROR,
 			int(config.plugins.seriesplugin.timer_popups_timeout.value),
 			'SP_PopUp_ID_Finished'
 		)
-	elif loop_data and config.plugins.seriesplugin.timer_popups.value:
+	elif not loop_data and config.plugins.seriesplugin.timer_popups_success.value:
 		AddPopup(
-			"SeriesPlugin:\n" + _("SP has been finished with errors:\n") +"\n" +"\n".join(loop_data),
-			MessageBox.TYPE_ERROR,
+			"SeriesPlugin:\n" + _("%d timer renamed successfully") % (loop_counter),
+			MessageBox.TYPE_INFO,
 			int(config.plugins.seriesplugin.timer_popups_timeout.value),
 			'SP_PopUp_ID_Finished'
 		)

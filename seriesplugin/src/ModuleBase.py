@@ -17,6 +17,6 @@ class ModuleBase(object):
 
 	################################################
 	# Base functions
-	def getName(self):
+	def getName(self, dummy=None):
 		# Return the Class Name
 		return self.__class__.__name__

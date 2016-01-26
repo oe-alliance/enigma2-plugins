@@ -52,6 +52,8 @@ from Screens.TimerEdit import TimerSanityConflict
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
+from skin import loadSkin
+from enigma import getDesktop
 
 # Plugin internal
 from SeriesPlugin import getInstance
@@ -68,8 +70,19 @@ instance = None
 # Info screen
 class SeriesPluginInfoScreen(Screen):
 	
-	skinfile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/skin.xml" )
-	skin = open(skinfile).read()
+	desktop = getDesktop(0)
+	desktopSize = desktop and desktop.size()
+	dwidth = desktopSize and desktopSize.width()
+	if dwidth == 1920:
+		skinFile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenFULLHD.xml" )
+	elif dwidth == 1280:
+		skinFile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenHD.xml" )
+	elif dwidth == 1024:
+		skinFile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenXD.xml" )
+	else:
+		skinFile = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Skins/InfoScreenSD.xml" )
+	
+	skin = open(skinFile).read()
 	
 	def __init__(self, session, service=None, event=None):
 		if session:
@@ -384,27 +397,30 @@ class SeriesPluginInfoScreen(Screen):
 
 
 	def setColorButtons(self):
-		logDebug("SPI: event eit", self.event and self.event.getEventId())
-		if self.service and self.data:
-			
-			if self.path and os.path.exists(self.path):
-				# Record file exists
-				self["key_red"].setText(_("Rename"))
-				self.redButtonFunction = self.rename
-			elif self.event and self.event.getEventId():
-				# Event exists
-				#if (not self.service.flags & eServiceReference.isGroup) and self.service.getPath() and self.service.getPath()[0] == '/'
-				#for timer in self.session.nav.RecordTimer.timer_list:
-				#	if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
-				#		cb_func = lambda ret : not ret or self.removeTimer(timer)
-				self["key_red"].setText(_("Record"))
-				self.redButtonFunction = self.record
+		try:
+			logDebug("SPI: event eit", self.event and self.event.getEventId())
+			if self.service and self.data:
+				
+				if self.path and os.path.exists(self.path):
+					# Record file exists
+					self["key_red"].setText(_("Rename"))
+					self.redButtonFunction = self.rename
+				elif self.event and self.event.getEventId():
+					# Event exists
+					#if (not self.service.flags & eServiceReference.isGroup) and self.service.getPath() and self.service.getPath()[0] == '/'
+					#for timer in self.session.nav.RecordTimer.timer_list:
+					#	if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
+					#		cb_func = lambda ret : not ret or self.removeTimer(timer)
+					self["key_red"].setText(_("Record"))
+					self.redButtonFunction = self.record
+				else:
+					self["key_red"].setText("")
+					self.redButtonFunction = None
 			else:
 				self["key_red"].setText("")
 				self.redButtonFunction = None
-		else:
-			self["key_red"].setText("")
-			self.redButtonFunction = None
+		except:
+			pass
 
 	def redButton(self):
 		if callable(self.redButtonFunction):
