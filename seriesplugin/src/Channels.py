@@ -20,6 +20,7 @@
 import os
 import re
 
+
 # Config
 from Components.config import config
 
@@ -30,12 +31,11 @@ from Screens.MessageBox import MessageBox
 from Tools.BoundFunction import boundFunction
 
 # XML
-from xml.etree.cElementTree import ElementTree, parse, Element, SubElement, Comment
+from xml.etree.cElementTree import ElementTree, tostring, parse, Element, SubElement, Comment
 from Tools.XMLTools import stringToXML
 
 # Plugin internal
 from . import _
-from XMLFile import XMLFile, indent
 from Logger import logDebug, logInfo
 
 try:
@@ -132,41 +132,93 @@ def getChannelByRef(stb_chlist,serviceref):
 		if channelref == serviceref:
 			return channelname
 
-def compareChannels(ref, remote):
-	logDebug("compareChannels", ref, remote)
-	remote = remote.lower()
-	if ref in ChannelsBase.channels:
-		( name, alternatives ) = ChannelsBase.channels[ref]
-		for altname in alternatives:
-			if altname.lower() in remote or remote in altname.lower():
-				return True
+	
+
+class ChannelsFile(object):
+
+	cache = ""
+	mtime = -1
+	
+	def __init__(self):
+		pass
+
+	def readXML(self):
+		path = config.plugins.seriesplugin.channel_file.value
 		
-	return False
-
-def lookupChannelByReference(ref):
-	if ref in ChannelsBase.channels:
-		( name, alternatives ) = ChannelsBase.channels[ref]
-		altnames = []
-		for altname in alternatives:
-			if altname:
-				logDebug("lookupChannelByReference", ref, altname)
-				altnames.append(altname)
-		return altnames
+		# Abort if no config found
+		if not os.path.exists(path):
+			logDebug("No configuration file present")
+			return None
 		
-	return False
+		# Parse if mtime differs from whats saved
+		mtime = os.path.getmtime(path)
+		if mtime == ChannelsFile.mtime:
+			# No changes in configuration, won't read again
+			return ChannelsFile.cache
+		
+		logDebug("SP readXML channels")
+		
+		# Parse XML
+		try:
+			etree = parse(path).getroot()
+		except Exception as e:
+			logDebug("Exception in readXML: " + str(e))
+			etree = None
+			mtime = -1
+		
+		# Save time and cache file content
+		ChannelsFile.mtime = mtime
+		ChannelsFile.cache = etree
+		return ChannelsFile.cache
+
+	def writeXML(self, etree):
+		path = config.plugins.seriesplugin.channel_file.value
+		
+		def indent(elem, level=0):
+			i = "\n" + level*"  "
+			if len(elem):
+				if not elem.text or not elem.text.strip():
+					elem.text = i + "  "
+				if not elem.tail or not elem.tail.strip():
+					elem.tail = i
+				for elem in elem:
+					indent(elem, level+1)
+				if not elem.tail or not elem.tail.strip():
+					elem.tail = i
+			else:
+				if level and (not elem.tail or not elem.tail.strip()):
+					elem.tail = i
+		
+		indent(etree)
+		data = tostring(etree, 'utf-8')
+		
+		logDebug("SP writeXML channels")
+		
+		f = None
+		try:
+			f = open(path, 'w')
+			if data:
+				f.writelines(data)
+		except Exception as e:
+			logDebug("Exception in writeXML: " + str(e))
+		finally:
+			if f is not None:
+				f.close()
+		
+		# Save time and cache file content
+		self.mtime = os.path.getmtime( path )
+		self.cache = etree
 
 
-class ChannelsBase(XMLFile):
+class ChannelsBase(ChannelsFile):
 
 	channels = {}  # channels[reference] = ( name, [ name1, name2, ... ] )
 	channels_changed = False
 	
 	def __init__(self):
-		
-		path = config.plugins.seriesplugin.channel_file.value
-		XMLFile.__init__(self, path)
-		
-		self.resetChannels()
+		ChannelsFile.__init__(self)
+		if not ChannelsBase.channels:
+			self.resetChannels()
 	
 	def channelsEmpty(self):
 		return not ChannelsBase.channels
@@ -176,6 +228,32 @@ class ChannelsBase(XMLFile):
 		ChannelsBase.channels_changed = False
 		
 		self.loadXML()
+	
+	#
+	# Channel handling
+	#
+	def compareChannels(self, ref, remote):
+		logDebug("SP compareChannels", ref, remote)
+		remote = remote.lower()
+		if ref in ChannelsBase.channels:
+			( name, alternatives ) = ChannelsBase.channels[ref]
+			for altname in alternatives:
+				if altname.lower() in remote or remote in altname.lower():
+					return True
+			
+		return False
+		
+	def lookupChannelByReference(self, ref):
+		if ref in ChannelsBase.channels:
+			( name, alternatives ) = ChannelsBase.channels[ref]
+			altnames = []
+			for altname in alternatives:
+				if altname:
+					logDebug("SP lookupChannelByReference", ref, altname)
+					altnames.append(altname)
+			return altnames
+			
+		return False
 	
 	def addChannel(self, ref, name, remote):
 		logDebug("SP addChannel name remote", name, remote)
@@ -206,8 +284,8 @@ class ChannelsBase(XMLFile):
 	def loadXML(self):
 		try:
 			# Read xml config file
-			etree = self.readXML()
-			if etree:
+			root = self.readXML()
+			if root:
 				channels = {}
 				
 				# Parse Config
@@ -216,9 +294,7 @@ class ChannelsBase(XMLFile):
 					version = root.get("version", "1")
 					if version.startswith("1"):
 						logDebug("loadXML channels - Skip old file")
-					elif version.startswith("2") or version.startswith("3") or version.startswith("4"):
-						logDebug("Channel XML Version 4")
-						ChannelsBase.channels_changed = True
+					else:
 						if root:
 							for element in root.findall("Channel"):
 								name = element.get("name", "")
@@ -228,26 +304,12 @@ class ChannelsBase(XMLFile):
 									for alternative in element.findall("Alternative"):
 										alternatives.append( alternative.text )
 									channels[reference] = (name, list(set(alternatives)))
-									logDebug("Channel", reference, channels[reference] )
-					else:
-						# XMLTV compatible channels file
-						logDebug("Channel XML Version 5")
-						if root:
-							for element in root.findall("channel"):
-								alternatives = []
-								id = element.get("id", "")
-								alternatives.append( id )
-								name = element.get("name", "")
-								reference = element.text
-								#Test customization but XML conform
-								for web in element.findall("web"):
-									alternatives.append( web.text )
-								channels[reference] = (name, list(set(alternatives)))
-								logDebug("Channel", reference, channels[reference] )
+									logDebug("SP loadXML parse", reference, channels[reference] )
 					return channels
 				
-				channels = parse( etree.getroot() )
-				logDebug("Channel XML load", len(channels))
+				channels = parse( root )
+				#logDebug("loadXML channels", channels)
+				logDebug("SP loadXML channels", len(channels))
 			else:
 				channels = {}
 			ChannelsBase.channels = channels
@@ -263,57 +325,31 @@ class ChannelsBase(XMLFile):
 				channels = ChannelsBase.channels
 				
 				# Generate List in RAM
-				etree = None
+				root = None
 				#logDebug("saveXML channels", channels)
 				logDebug("SP saveXML channels", len(channels))
 				
-				# XMLTV compatible channels file
-				#TEST Do we need to write the xml header node
-				
 				# Build Header
 				from plugin import NAME, VERSION
-				root = Element("channels")
+				root = Element(NAME)
 				root.set('version', VERSION)
-				root.set('created_by', NAME)
 				root.append(Comment(_("Don't edit this manually unless you really know what you are doing")))
 				
 				# Build Body
 				def build(root, channels):
 					if channels:
 						for reference, namealternatives in channels.iteritems():
-							name, alternatives = namealternatives[:]
+							name, alternatives = namealternatives
+							# Add channel
+							element = SubElement( root, "Channel", name = stringToXML(name), reference = stringToXML(reference) )
+							# Add alternatives
 							if alternatives:
-								# Add channel
-								web = alternatives[0]
-								element = SubElement( root, "channel", name = stringToXML(name), id = stringToXML(web) )
-								element.text = stringToXML(reference)
-								del alternatives[0]
-								if alternatives:
-									for web in alternatives:
-										SubElement( element, "web" ).text = stringToXML(web)
+								for name in alternatives:
+									SubElement( element, "Alternative" ).text = stringToXML(name)
 					return root
 				
-				etree = ElementTree( build( root, channels ) )
+				root = build( root, channels )
 				
-				indent(etree.getroot())
-				
-				self.writeXML( etree )
-				
-				if config.plugins.seriesplugin.epgimport.value:
-					logDebug("Write: xml channels for epgimport")
-					try:
-						path = "/etc/epgimport/wunschliste.channels.xml"
-						etree.write(path, encoding='utf-8', xml_declaration=True) 
-					except Exception as e:
-						logDebug("Exception in write XML: " + str(e))
-				
-				if config.plugins.seriesplugin.xmltvimport.value:
-					logDebug("Write: xml channels for xmltvimport")
-					try:
-						path = "/etc/xmltvimport/wunschliste.channels.xml"
-						etree.write(path, encoding='utf-8', xml_declaration=True) 
-					except Exception as e:
-						logDebug("Exception in write XML: " + str(e))
-			
+				self.writeXML( root )
 		except Exception as e:
 			logDebug("Exception in writeXML: " + str(e))

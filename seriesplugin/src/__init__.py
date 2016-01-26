@@ -13,9 +13,6 @@ config.plugins.seriesplugin = ConfigSubsection()
 
 config.plugins.seriesplugin.enabled                   = ConfigOnOff(default = False)
 
-config.plugins.seriesplugin.epgimport                 = ConfigYesNo(default = False)
-config.plugins.seriesplugin.xmltvimport               = ConfigYesNo(default = False)
-
 config.plugins.seriesplugin.menu_info                 = ConfigYesNo(default = True)
 config.plugins.seriesplugin.menu_extensions           = ConfigYesNo(default = False)
 config.plugins.seriesplugin.menu_epg                  = ConfigYesNo(default = False)
@@ -34,7 +31,7 @@ config.plugins.seriesplugin.pattern_file              = ConfigText(default = "/e
 config.plugins.seriesplugin.pattern_title             = ConfigText(default = "{org:s} S{season:02d}E{episode:02d} {title:s}", fixed_size = False)
 config.plugins.seriesplugin.pattern_description       = ConfigText(default = "S{season:02d}E{episode:02d} {title:s} {org:s}", fixed_size = False)
 #config.plugins.seriesplugin.pattern_record            = ConfigText(default = "{org:s} S{season:02d}E{episode:02d} {title:s}", fixed_size = False)
-config.plugins.seriesplugin.pattern_file_directories  = ConfigText(default = "/etc/enigma2/seriesplugin_pattern_directories.json", fixed_size = False)
+config.plugins.seriesplugin.pattern_file_directories  = ConfigText(default = "/etc/enigma2/seriesplugin_patterns_directories.json", fixed_size = False)
 config.plugins.seriesplugin.pattern_directory         = ConfigText(default = "Disabled", fixed_size = False)
 
 config.plugins.seriesplugin.default_season            = ConfigSelectionNumber(0, 1, 1, default = 1)
@@ -71,7 +68,7 @@ config.plugins.seriesplugin.timer_popups              = ConfigYesNo(default = Tr
 config.plugins.seriesplugin.timer_popups_success      = ConfigYesNo(default = False)
 config.plugins.seriesplugin.timer_popups_timeout      = ConfigSelectionNumber(-1, 20, 1, default = 3)
 
-config.plugins.seriesplugin.socket_timeout            = ConfigSelectionNumber(0, 600, 1, default = 10)
+config.plugins.seriesplugin.socket_timeout            = ConfigSelectionNumber(0, 600, 1, default = 30)
 
 config.plugins.seriesplugin.caching                   = ConfigYesNo(default = True)
 config.plugins.seriesplugin.caching_expiration        = ConfigSelectionNumber(0, 48, 1, default = 6)
@@ -86,9 +83,7 @@ config.plugins.seriesplugin.log_reply_mail            = ConfigText(default = "my
 config.plugins.seriesplugin.lookup_counter            = ConfigNumber(default = 0)
 #config.plugins.seriesplugin.uid                       = ConfigText(default = str(time()), fixed_size = False)
 
-config.plugins.seriesplugin.proxy_url                 = ConfigText(default = 'http://www.serienserver.de/proxy/proxy.php', fixed_size = False)
-config.plugins.seriesplugin.serienserver_url          = ConfigText(default = 'http://www.serienserver.de/cache/cache.php', fixed_size = False)
-config.plugins.seriesplugin.xmltv_url                 = ConfigText(default = 'http://www.serienserver.de/xmltv/wunschliste.xml', fixed_size = False)
+config.plugins.seriesplugin.proxy_url                 = ConfigText(default = "http://176.9.54.54/serienserver/proxy/proxy.php", fixed_size = False)
 
 
 def localeInit():

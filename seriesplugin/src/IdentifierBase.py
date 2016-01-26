@@ -15,9 +15,14 @@ from thread import start_new_thread
 #from twisted.python.failure import Failure
 
 from time import sleep
+import socket
 
 from time import time
 from datetime import datetime, timedelta
+
+#import urllib2
+from urllib import urlencode
+from urllib2 import urlopen, URLError, Request, build_opener, HTTPCookieProcessor
 
 from Components.config import config
 from Tools.BoundFunction import boundFunction
@@ -25,16 +30,20 @@ from Tools.BoundFunction import boundFunction
 # Internal
 from ModuleBase import ModuleBase
 from Cacher import Cacher
+from Channels import ChannelsBase
 from Logger import logDebug, logInfo
 
 
 class MyException(Exception):
     pass
 
-class IdentifierBase2(ModuleBase, Cacher):
+class IdentifierBase(ModuleBase, Cacher, ChannelsBase):
 	def __init__(self):
 		ModuleBase.__init__(self)
 		Cacher.__init__(self)
+		ChannelsBase.__init__(self)
+		
+		socket.setdefaulttimeout( float(config.plugins.seriesplugin.socket_timeout.value) )
 		
 		self.max_time_drift = int(config.plugins.seriesplugin.max_time_drift.value) * 60
 		
@@ -87,6 +96,78 @@ class IdentifierBase2(ModuleBase, Cacher):
 		
 		return filteredids
 
+
+	################################################
+	# URL functions
+	def getPage(self, url, use_proxy=True, counter=0):
+		response = None
+		
+		logDebug("IB: getPage", url)
+		
+		cached = self.getCached(url)
+		
+		if cached:
+			logDebug("IB: cached")
+			response = cached
+		
+		else:
+			logDebug("IB: not cached")
+			
+			try:
+				from plugin import buildURL, USER_AGENT
+				
+				if use_proxy:
+					temp_url = buildURL(url)
+				else:
+					temp_url = url
+				
+				req = Request( temp_url, headers={'User-Agent':USER_AGENT})
+				response = urlopen(req, timeout=float(config.plugins.seriesplugin.socket_timeout.value)).read()
+				
+				if not response:
+					logDebug("IB: No data returned")
+				
+				#logDebug("IB: response to cache: ", response) 
+				#if response:
+				#	self.doCachePage(url, response)
+			
+			except URLError as e:
+				 # For Python 2.6
+				if counter > 2:
+					logDebug("IB: URLError counter > 2")
+					from SeriesPlugin import getInstance
+					instance = getInstance()
+					if instance:
+						instance.stop()
+					raise MyException("There was an URLError: %r" % e)
+				elif hasattr(e, "code"):
+					logDebug("IB: URLError code", e.code, e.msg, counter)
+					sleep(2)
+					return self.getPage(url, use_proxy, counter+1)
+				else:
+					logDebug("IB: URLError else")
+					raise MyException("There was an URLError: %r" % e)
+			
+			except socket.timeout as e:
+				 # For Python 2.7
+				if counter > 2:
+					logDebug("IB: URLError counter > 2")
+					from SeriesPlugin import getInstance
+					instance = getInstance()
+					if instance:
+						instance.stop()
+					raise MyException("There was an SocketTimeout: %r" % e)
+				elif hasattr(e, "code"):
+					logDebug("IB: URLError code", e.code, e.msg, counter)
+					sleep(2)
+					return self.getPage(url, use_proxy, counter+1)
+				else:
+					logDebug("IB: URLError else")
+					raise MyException("There was an SocketTimeout: %r" % e)
+			
+		logDebug("IB: success")
+		return response
+	
 	################################################
 	# Service prototypes
 	@classmethod

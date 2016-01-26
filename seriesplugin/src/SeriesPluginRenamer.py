@@ -163,7 +163,7 @@ def renameFile(servicepath, name, data, tidy=False):
 	path = refactorDirectory(path, data)
 	dst = os.path.join(path, name)
 	logDebug("SPR: servicepathDst", dst)
-	
+
 	#Py3 for f in glob( escape(src) + "*" ):
 	glob_src = CompiledRegexpGlobEscape.sub("[\\1]", src)
 	logDebug("SPR: glob_src      ", glob_src)
@@ -171,6 +171,10 @@ def renameFile(servicepath, name, data, tidy=False):
 		logDebug("SPR: servicepathRnm", f)
 		to = f.replace(src, dst)
 		logDebug("SPR: servicepathTo ", to)
+		
+		
+		#TODO Check and create directory
+		
 		
 		if not os.path.exists(to):
 			try:
