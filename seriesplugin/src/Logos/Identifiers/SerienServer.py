@@ -8,35 +8,22 @@ from Components.config import config
 
 from Tools.BoundFunction import boundFunction
 
-from urllib import urlencode
-
 from time import time, mktime
 from datetime import datetime
 
 # Internal
-from Plugins.Extensions.SeriesPlugin.IdentifierBase import IdentifierBase
-from Plugins.Extensions.SeriesPlugin.Logger import logDebug, logInfo
 from Plugins.Extensions.SeriesPlugin import _
-
-# Constants
-SERIEN_SERVER_URL = 'http://176.9.54.54/serienserver/cache/cache.php'
-
-CompiledRegexpReplaceChars = re.compile("[^a-zA-Z0-9-\*]")
-
-try:
-	import xmlrpclib
-except ImportError as ie:
-	xmlrpclib = None
+from Plugins.Extensions.SeriesPlugin.IdentifierBase import IdentifierBase2
+from Plugins.Extensions.SeriesPlugin.Logger import logDebug, logInfo
+from Plugins.Extensions.SeriesPlugin.Channels import lookupChannelByReference
+from Plugins.Extensions.SeriesPlugin.TimeoutServerProxy import TimeoutServerProxy
 
 
-class SerienServer(IdentifierBase):
+class SerienServer(IdentifierBase2):
 	def __init__(self):
-		IdentifierBase.__init__(self)
+		IdentifierBase2.__init__(self)
 		
-		# Check dependencies
-		if xmlrpclib is not None:
-			from Plugins.Extensions.SeriesPlugin.plugin import REQUEST_PARAMETER
-			self.server = xmlrpclib.ServerProxy(SERIEN_SERVER_URL + REQUEST_PARAMETER, verbose=False)
+		self.server = TimeoutServerProxy()
 	
 	@classmethod
 	def knowsElapsed(cls):
@@ -50,19 +37,15 @@ class SerienServer(IdentifierBase):
 	def knowsFuture(cls):
 		return True
 
-	def getName(self):
-		return "Wunschliste"
+	def getName(self, future=True):
+		if future:
+			return "Wunschliste"
+		else:
+			return "Fernsehserien"
 
 	def getEpisode(self, name, begin, end=None, service=None):
 		# On Success: Return a single season, episode, title tuple
 		# On Failure: Return a empty list or String or None
-		
-		
-		# Check dependencies
-		if xmlrpclib is None:
-			msg = _("Error install")  + " python-xmlrpclib"
-			logInfo(msg)
-			return msg
 		
 		
 		# Check preconditions
@@ -90,14 +73,18 @@ class SerienServer(IdentifierBase):
 		logInfo("SerienServer getEpisode, name, begin, end=None, service", name, begin, end, service)
 		
 		# Prepare parameters
-		name = CompiledRegexpReplaceChars.sub(" ", name.lower())
-		webChannels = self.lookupChannelByReference(service)
+		webChannels = lookupChannelByReference(service)
+		if not webChannels:
+			msg = _("Check the channel name")
+			logInfo(msg)
+			return msg
+		
 		unixtime = str(int(mktime(begin.timetuple())))
 		max_time_drift = self.max_time_drift
 		
 		# Lookup
 		for webChannel in webChannels:
-			logInfo("SerienServer getSeasonEpisode():", name, webChannel, unixtime)
+			logDebug("SerienServer getSeasonEpisode(): [\"%s\",\"%s\",\"%s\",%s]" % (name, webChannel, unixtime, max_time_drift))
 			
 			result = self.server.sp.cache.getSeasonEpisode( name, webChannel, unixtime, max_time_drift )
 			logDebug("SerienServer getSeasonEpisode result:", result)
@@ -106,7 +93,4 @@ class SerienServer(IdentifierBase):
 				return ( result['season'], result['episode'], result['title'], result['series'] )
 
 		else:
-			if unixtime < time():
-				return ( _("Please try Fernsehserien.de") )
-			else:
-				return ( _("No matching series found") )
+			return ( _("No match found") )
