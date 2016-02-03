@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1252 $
-$Date: 2015-12-10 11:11:04 +0100 (Thu, 10 Dec 2015) $
-$Id: FritzCallFBF.py 1252 2015-12-10 10:11:04Z michael $
+$Revision: 1255 $
+$Date: 2016-01-30 18:43:34 +0100 (Sat, 30 Jan 2016) $
+$Id: FritzCallFBF.py 1255 2016-01-30 17:43:34Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -2478,7 +2478,7 @@ class FritzCallFBF_05_50:
 # 			self.debug("guestAccess LAN: " + repr(guestAccess))
 		# WLAN-Gastzugang</a></td><td title="aktiv (2,4 GHz), gesichert, 29 Minuten verbleiben, 0 Geräte">aktiv (2,4 GHz), gesichert, 29 Minuten verbleiben, 0 Geräte</td>
 		# found = re.match('.*linktxt": "WLAN-Gastzugang",\s*"details": "aktiv \(([^\)]+)\)(, (ungesichert|gesichert))?,( (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Geräte), ([^"]+)",\s*"link": "wGuest"', html, re.S)
-		found = re.match('.*WLAN-Gastzugang</a></td><td title="[^"]*">aktiv \(([^\)]+)\)(, (ungesichert|gesichert))?,( (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Geräte)</td>', html, re.S)
+		found = re.match('.*WLAN-Gastzugang</a></td><td title="[^"]*">aktiv \(([^\)]+)\)(, (ungesichert|gesichert))?,( (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Geräte)(, Funknetz: ([^<]+))?</td>', html, re.S)
 		if found:
 			# guestAccess =  "WLAN " + found.group(1)
 			if found.group(2):
@@ -2497,6 +2497,8 @@ class FritzCallFBF_05_50:
 					guestAccess = guestAccess + ', ' + found.group(5) + ' Std.' # n Stunden verbleiben
 			if found.group(7):
 				guestAccess = guestAccess + ', ' + found.group(7) # Geräte
+			if found.group(8):
+				guestAccess = guestAccess + ', ' + found.group(9) # WLAN Name
 			self.info("guestAccess WLAN: " + repr(guestAccess))
 
 		info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
@@ -3361,13 +3363,11 @@ class FritzCallFBF_06_35:
 
 	def _okBlacklist(self, html, md5Sid):
 		self.debug("")
-		#=======================================================================
-		# linkP = open("/tmp/FritzCallBlacklist.htm", "w")
-		# linkP.write(html)
-		# linkP.close()
-		#=======================================================================
+# 		linkP = open("/tmp/FritzCallBlacklist.htm", "w")
+# 		linkP.write(html)
+# 		linkP.close()
 		# entries = re.compile('<span title="(?:Ankommende|Ausgehende) Rufe">(Ankommende|Ausgehende) Rufe</span></nobr></td><td><nobr><span title="[\d]+">([\d]+)</span>', re.S).finditer(html)
-		entries = re.compile('<tr><td>(Ankommende|Ausgehende) Rufe</td><td>([\d]+)</td><td>weg</td>', re.S).finditer(html)
+		entries = re.compile('<tr><td(?: [^>]*)?>(Ankommende|Ausgehende) Rufe</td><td(?: datalabel="[^"]*")?>([\d]+)</td>', re.S).finditer(html)
 		self.blacklist = ([], [])
 		for entry in entries:
 			if entry.group(1) == "Ankommende":
