@@ -232,7 +232,8 @@ class IMDB(Screen):
 		syslang = language.getLanguage()
 		if 1: #"de" not in syslang or config.plugins.imdb.force_english.value is True:
 			self.generalinfomask = re.compile(
-			'<h1 class="header".*?>(?P<title>.*?)<.*?</h1>.*?'
+			#'<h1 class="header".*?>(?P<title>.*?)<.*?</h1>.*?'
+			'<h1 itemprop="name" class="".*?>(?P<title>.*?)<.*?/h1>*'
 			'(?:.*?<h4 class="inline">\s*(?P<g_director>Regisseur|Directors?):\s*</h4>.*?<a.*?>(?P<director>.*?)</a>)*'
 			'(?:.*?<h4 class="inline">\s*(?P<g_creator>Sch\S*?pfer|Creators?):\s*</h4>.*?<a.*?>(?P<creator>.*?)</a>)*'
 			'(?:.*?<h4 class="inline">\s*(?P<g_seasons>Seasons?):\s*</h4>.*?<a.*?>(?P<seasons>(?:\d+|unknown)?)</a>)*'
@@ -266,7 +267,8 @@ class IMDB(Screen):
 			self.genreblockmask = re.compile('<h4 class="inline">Genre:</h4>\s<div class="info-content">\s+?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
 			self.ratingmask = re.compile('<span itemprop="ratingValue">(?P<rating>.*?)</', re.DOTALL)
 			self.castmask = re.compile('itemprop=.url.> <span class="itemprop" itemprop="name">(?P<actor>.*?)</span>.*?<a href="/character/.*?" >(?P<character>.*?)</a>', re.DOTALL)
-			self.postermask = re.compile('<td .*?id="img_primary">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
+			#self.postermask = re.compile('<td .*?id="img_primary">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
+			self.postermask = re.compile('<div class="poster">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 
 		self.htmltags = re.compile('<.*?>')
 
