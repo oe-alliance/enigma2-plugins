@@ -106,12 +106,14 @@ PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MA
 PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
 
 AC_ARG_WITH(tpm,
-	AS_HELP_STRING([--with-tpm], [enable plugins that require a TPM]),
-	[with_tpm="$withval"],[with_tpm="no"])
-if test "$with_tpm" = "yes"; then
-	AC_DEFINE([HAVE_TPM],[1],[Define to 1 to enable plugins that require a TPM])
+	AS_HELP_STRING([--with-tpm], [enable plugins that require a TPM, yes or no]),
+	[[with_tpm=$withval]],
+	[[with_tpm=no]]
+	)
+if test x"$with_tpm" != xno; then
+	AC_DEFINE(HAVE_TPM, 1,[Define to 1 to enable plugins that require a TPM])
 fi
-AM_CONDITIONAL(TPM, test "$with_tpm" = "yes")
+AM_CONDITIONAL(HAVE_TPM, test x"$with_tpm" != xno)
 
 AC_ARG_WITH(pli,
 	AS_HELP_STRING([--with-pli], [enable plugins for image with openpli based e2]),
@@ -119,7 +121,7 @@ AC_ARG_WITH(pli,
 if test "$with_pli" = "yes"; then
 	AC_DEFINE([HAVE_PLI],[1],[Define to 1 to enable plugins for image with openpli based e2])
 fi
-AM_CONDITIONAL(PLI, test "$with_pli" = "yes")
+AM_CONDITIONAL(HAVE_PLI, test "$with_pli" = "yes")
 
 AC_ARG_WITH(debug,
 	AS_HELP_STRING([--without-debug],[disable debugging code]),
