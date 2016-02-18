@@ -122,7 +122,7 @@ if VUULTIMO
 SUBDIRS +=  fancontrol2
 endif
 
-if HAVE_TPM
+if TPM
 SUBDIRS += \
 	mytube \
 	yttrailer \
@@ -132,7 +132,7 @@ SUBDIRS += \
 	pluginsort 
 endif
 
-if HAVE_PLI
+if PLI
 SUBDIRS += networkbrowserpli epgsearchpli
 else
 SUBDIRS += networkbrowser epgsearch
