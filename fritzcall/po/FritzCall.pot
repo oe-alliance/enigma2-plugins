@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-01 12:42+0100\n"
+"POT-Creation-Date: 2016-02-24 20:01+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "05.29 until below 6.35"
+msgstr ""
+
+msgid "06.35 and newer"
+msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -354,6 +360,9 @@ msgstr ""
 msgid "Mailbox"
 msgstr ""
 
+msgid "Minutes of uptime of WLAN guest network"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr ""
@@ -399,6 +408,9 @@ msgid "No result from Outlook export"
 msgstr ""
 
 msgid "No result from reverse lookup"
+msgstr ""
+
+msgid "Not deactivating after time"
 msgstr ""
 
 msgid "Number"
@@ -516,6 +528,9 @@ msgid "Setting..."
 msgstr ""
 
 msgid "Shortcut"
+msgstr ""
+
+msgid "Show Blocked Calls"
 msgstr ""
 
 msgid "Show Outgoing Calls"
@@ -668,6 +683,9 @@ msgid "no calls"
 msgstr ""
 
 msgid "no device active"
+msgstr ""
+
+msgid "not available with this firmware version"
 msgstr ""
 
 msgid "not configured"
