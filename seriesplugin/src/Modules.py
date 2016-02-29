@@ -26,8 +26,7 @@ import imp, inspect
 
 # Plugin internal
 from . import _
-from Logger import logDebug, logInfo
-from IdentifierBase import IdentifierBase
+from Logger import log
 
 # Constants
 IDENTIFIER_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/SeriesPlugin/Identifiers/" )
@@ -36,8 +35,9 @@ IDENTIFIER_PATH = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/Seri
 class Modules(object):
 
 	def __init__(self):
-		self.modules = self.loadModules(IDENTIFIER_PATH, IdentifierBase)
-		logDebug("SP Modules:", self.modules)
+		from IdentifierBase import IdentifierBase2
+		self.modules = self.loadModules(IDENTIFIER_PATH, IdentifierBase2)
+		log.debug("SP Modules:", self.modules)
 
 	#######################################################
 	# Module functions
@@ -45,7 +45,7 @@ class Modules(object):
 		modules = {}
 		
 		if not os.path.exists(path):
-			logDebug("[SP Modules]: Error: Path doesn't exist: " + path)
+			log.debug("[SP Modules]: Error: Path doesn't exist: " + path)
 			return
 		
 		# Import all subfolders to allow relative imports
@@ -55,10 +55,10 @@ class Modules(object):
 		
 		# List files
 		files = [fname[:-3] for fname in os.listdir(path) if fname.endswith(".py") and not fname.startswith("__")]
-		logDebug(files)
+		log.debug(files)
 		if not files:
 			files = [fname[:-4] for fname in os.listdir(path) if fname.endswith(".pyo")]
-			logDebug(files)
+			log.debug(files)
 		
 		# Import modules
 		for name in files:
@@ -70,39 +70,39 @@ class Modules(object):
 			try:
 				fp, pathname, description = imp.find_module(name, [path])
 			except Exception as e:
-				logDebug("[SP Modules] Find module exception: " + str(e))
+				log.debug("[SP Modules] Find module exception: " + str(e))
 				fp = None
 			
 			if not fp:
-				logDebug("[SP Modules] No module found: " + str(name))
+				log.debug("[SP Modules] No module found: " + str(name))
 				continue
 			
 			try:
 				module = imp.load_module( name, fp, pathname, description)
 			except Exception as e:
-				logDebug("[SP Modules] Load exception: " + str(e))
+				log.debug("[SP Modules] Load exception: " + str(e))
 			finally:
 				# Since we may exit via an exception, close fp explicitly.
 				if fp: fp.close()
 			
 			if not module:
-				logDebug("[SP Modules] No module available: " + str(name))
+				log.debug("[SP Modules] No module available: " + str(name))
 				continue
 			
 			# Continue only if the attribute is available
 			if not hasattr(module, name):
-				logDebug("[SP Modules] Warning attribute not available: " + str(name))
+				log.debug("[SP Modules] Warning attribute not available: " + str(name))
 				continue
 			
 			# Continue only if attr is a class
 			attr = getattr(module, name)
 			if not inspect.isclass(attr):
-				logDebug("[SeriesService] Warning no class definition: " + str(name))
+				log.debug("[SeriesService] Warning no class definition: " + str(name))
 				continue
 			
 			# Continue only if the class is a subclass of the corresponding base class
 			if not issubclass( attr, base):
-				logDebug("[SP Modules] Warning no subclass of base: " + str(name))
+				log.debug("[SP Modules] Warning no subclass of base: " + str(name))
 				continue
 			
 			# Add module to the module list
@@ -117,16 +117,16 @@ class Modules(object):
 				try:
 					return module()
 				except Exception as e:
-					logDebug("[SeriesService] Instantiate exception: " + str(module) + "\n" + str(e))
+					log.exception("[SeriesService] Instantiate exception: " + str(module) + "\n" + str(e))
 					if sys.exc_info()[0]:
-						logDebug("Unexpected error: ", sys.exc_info()[0])
+						log.debug("Unexpected error: ", sys.exc_info()[0])
 						traceback.print_exc(file=sys.stdout)
 						return None
 			else:
-				logDebug("[SeriesService] Module is not callable: " + str(name))
+				log.debug("[SeriesService] Module is not callable: " + str(name))
 				return None
 		else:
-			logDebug("[SeriesService] No modules for name: " + str(name))
+			log.debug("[SeriesService] No modules for name: " + str(name))
 			return None
 
 	def instantiateModule(self, module):
@@ -135,11 +135,11 @@ class Modules(object):
 			try:
 				return module()
 			except Exception as e:
-				logDebug("[SeriesService] Instantiate exception: " + str(module) + "\n" + str(e))
+				log.exception("[SeriesService] Instantiate exception: " + str(module) + "\n" + str(e))
 				if sys.exc_info()[0]:
-					logDebug("Unexpected error: ", sys.exc_info()[0])
+					log.debug("Unexpected error: ", sys.exc_info()[0])
 					traceback.print_exc(file=sys.stdout)
 					return None
 		else:
-			logDebug("[SeriesService] Module is not callable: " + str(module.getClass()))
+			log.debug("[SeriesService] Module is not callable: " + str(module.getClass()))
 			return None

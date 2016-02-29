@@ -1,0 +1,22 @@
+<screen name="SeriesPluginInfoScreen" position="0,0" size="1920,1080" title="SeriesPlugin" zPosition="1">
+	<!-- Logo -->
+	<widget name="logo" position="150,200" size="380,64" zPosition="1" alphatest="on" />
+	
+	<!-- Text -->
+	<widget name="event_title"       position="700,30"   size="1200,42"  font="Regular;40" />
+	<widget name="event_episode"     position="700,90"   size="1200,100" font="Regular;37" />
+	<widget name="event_description" position="700,200"  size="1200,720" font="Regular;35" />
+	<widget name="datetime"          position="700,940"  size="350,40"   font="Regular;35" />
+	<widget name="duration"          position="1100,940" size="200,40"   font="Regular;35" />
+	<widget name="channel"           position="1400,940" size="470,40"   font="Regular;35" halign="right" />
+	
+	<!-- Buttons -->
+	<ePixmap pixmap="skin_default/buttons/red.png"    position="700,998"  size="10,35" alphatest="on" />
+	<ePixmap pixmap="skin_default/buttons/green.png"  position="1000,998" size="10,35" alphatest="on" />
+	<ePixmap pixmap="skin_default/buttons/yellow.png" position="1300,998" size="10,35" alphatest="on" />
+	<ePixmap pixmap="skin_default/buttons/blue.png"   position="1600,998" size="10,35" alphatest="on" />
+	<widget name="key_red"    position="720,995"  size="280,38" zPosition="1" backgroundColor="#9f1313" font="Regular;35" halign="left" transparent="1" />
+	<widget name="key_green"  position="1020,995" size="280,38" zPosition="1" backgroundColor="#1f771f" font="Regular;35" halign="left" transparent="1" />
+	<widget name="key_yellow" position="1320,995" size="280,38" zPosition="1" backgroundColor="#a08500" font="Regular;35" halign="left" transparent="1" />
+	<widget name="key_blue"   position="1620,995" size="280,38" zPosition="1" backgroundColor="#18188b" font="Regular;35" halign="left" transparent="1" />
+</screen>
