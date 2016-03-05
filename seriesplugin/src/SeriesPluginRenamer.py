@@ -38,7 +38,7 @@ from ServiceReference import ServiceReference
 
 # Plugin internal
 from SeriesPlugin import getInstance, refactorTitle, refactorDescription, refactorDirectory
-from Logger import logDebug, logInfo
+from Logger import log
 
 CompiledRegexpGlobEscape = re.compile('([\[\]\?*])')  # "[\\1]"
 
@@ -67,32 +67,32 @@ def newLegacyEncode(string):
 
 def rename(servicepath, name, short, data):
 	# Episode data available
-	logDebug("SPR: rename:", data)
+	log.debug("rename:", data)
 	result = True
 	
 	#MAYBE Check if it is already renamed?
 	try:
 		# Before renaming change content
-		renameMeta(servicepath, name, data)
+		rewriteMeta(servicepath, name, data)
 	except Exception as e:
-		logDebug("SPR: renameMeta:", str(e) )
-		result = "SPR: renameMeta:" + str(e)
+		log.exception("rewriteMeta:", str(e) )
+		result = "rewriteMeta:" + str(e)
 	
 	if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off":
 
 		if config.plugins.seriesplugin.rename_file.value == True:
 			
 			try:
-				renameFile(servicepath, name, data)
+				renameFiles(servicepath, name, data)
 			except Exception as e:
-				logDebug("SPR: renameFile:", str(e) )
-				result = "SPR: renameFile:" + str(e)
+				log.exception("renameFiles:", str(e) )
+				result = "renameFiles:" + str(e)
 	
 	return result
 
 
 # Adapted from MovieRetitle setTitleDescr
-def renameMeta(servicepath, name, data):
+def rewriteMeta(servicepath, name, data):
 	#TODO Use MetaSupport EitSupport classes from EMC ?
 	if servicepath.endswith(".ts"):
 		meta_file = servicepath + ".meta"
@@ -125,68 +125,64 @@ def renameMeta(servicepath, name, data):
 			title = refactorTitle(oldtitle, data)
 		else:
 			title = oldtitle
-		logDebug("SPR: title",title)
+		log.debug("title",title)
 		if config.plugins.seriesplugin.pattern_description.value and not config.plugins.seriesplugin.pattern_description.value == "Off":
 			descr = refactorDescription(olddescr, data)
 		else:
 			descr = olddescr
-		logDebug("SPR: descr",descr)
+		log.debug("descr",descr)
 		
 		metafile = open(meta_file, "w")
 		metafile.write("%s%s\n%s\n%s" % (sid, title, descr, rest))
 		metafile.close()
 	return True
 
-def renameFile(servicepath, name, data, tidy=False):
-	logDebug("SPR: servicepath", servicepath)
+def renameFiles(servicepath, name, data):
+	log.debug("servicepath", servicepath)
 	
 	path = os.path.dirname(servicepath)
 	file_name = os.path.basename(os.path.splitext(servicepath)[0])
-	logDebug("SPR: file_name", file_name)
+	log.debug("file_name", file_name)
 	
-	logDebug("SPR: name     ", name)
+	log.debug("name     ", name)
 	# Refactor title
-	if config.plugins.seriesplugin.rename_tidy.value or tidy:
-		name = refactorTitle(name, data)
-	else:
-		name = refactorTitle(file_name, data)
-	logDebug("SPR: name     ", name)
+	name = refactorTitle(file_name, data)
+	log.debug("name     ", name)
 	#if config.recording.ascii_filenames.value:
 	#	filename = ASCIItranslit.legacyEncode(filename)
 	if config.plugins.seriesplugin.rename_legacy.value:
 		name = newLegacyEncode(name)
-		logDebug("SPR: name     ", name)
+		log.debug("name     ", name)
 	
 	src = os.path.join(path, file_name)
-	logDebug("SPR: servicepathSrc", src)
+	log.debug("servicepathSrc", src)
 	
 	path = refactorDirectory(path, data)
 	dst = os.path.join(path, name)
-	logDebug("SPR: servicepathDst", dst)
-
+	log.debug("servicepathDst", dst)
+	
+	return osrename(src, dst)
+	
+def osrename(src, dst):
 	#Py3 for f in glob( escape(src) + "*" ):
 	glob_src = CompiledRegexpGlobEscape.sub("[\\1]", src)
-	logDebug("SPR: glob_src      ", glob_src)
+	log.debug("glob_src      ", glob_src)
 	for f in glob( glob_src + ".*" ):
-		logDebug("SPR: servicepathRnm", f)
+		log.debug("servicepathRnm", f)
 		to = f.replace(src, dst)
-		logDebug("SPR: servicepathTo ", to)
-		
-		
-		#TODO Check and create directory
-		
+		log.debug("servicepathTo ", to)
 		
 		if not os.path.exists(to):
 			try:
 				os.rename(f, to)
 			except:
-				logDebug("SPR: rename error", f, to)
+				log.exception("rename error", f, to)
 		elif config.plugins.seriesplugin.rename_existing_files.value:
-			logDebug("SPR: Destination file already exists", to, " - Append _")
-			renameFile(servicepath, name + "_", data, True)
+			log.debug("Destination file already exists", to, " - Append '_'")
+			return osrename( src, dst + "_")
 			break
 		else:
-			logDebug("SPR: Destination file alreadey exists", to, " - Skip rename")
+			log.warning( _("Skipping rename because file already exists") + "\n" + to + "\n\n" + _("Can be configured within the setup") )
 	return True
 
 
@@ -195,7 +191,7 @@ def renameFile(servicepath, name, data, tidy=False):
 class SeriesPluginRenamer(object):
 	def __init__(self, session, services, *args, **kwargs):
 		
-		logInfo("SeriesPluginRenamer: services, service:", str(services))
+		log.info("SeriesPluginRenamer: services, service:", str(services))
 		
 		if services and not isinstance(services, list):
 			services = [services]	
@@ -228,24 +224,24 @@ class SeriesPluginRenamer(object):
 					elif isinstance(service, ServiceReference):
 						service = service.ref
 					else:
-						logDebug("SPR: Wrong instance")
+						log.debug("Wrong instance")
 						continue
 					
 					servicepath = service.getPath()
 					
 					if not os.path.exists( servicepath ):
-						logDebug("SPR: File not exists: " + servicepath)
+						log.debug("File not exists: " + servicepath)
 						continue
 					
 					info = serviceHandler.info(service)
 					if not info:
-						logDebug("SPR: No info available: " + servicepath)
+						log.debug("No info available: " + servicepath)
 						continue
 					
 					name = service.getName() or info.getName(service) or ""
 					if name[-2:] == 'ts':
 						name = name[:-2]
-					#logDebug("SPR: name", name)
+					#log.debug("name", name)
 					
 					short = ""
 					begin = None
@@ -267,63 +263,57 @@ class SeriesPluginRenamer(object):
 						else:
 							end = os.path.getmtime(servicepath)
 							begin = end - (info.getLength(service) or 0)
+						
 						#MAYBE we could also try to parse the filename
-						# We don't know the exact margins, we will assume the E2 default margins
+						log.debug("We don't know the exact margins, we will assume the E2 default margins")
 						begin -= (int(config.recording.margin_before.value) * 60)
 						end += (int(config.recording.margin_after.value) * 60)
 					
 					rec_ref_str = info.getInfoString(service, iServiceInformation.sServiceref)
 					#channel = ServiceReference(rec_ref_str).getServiceName()
 					
-					logDebug("SPR: getEpisode:", name, begin, end, rec_ref_str)
+					log.debug("getEpisode:", name, begin, end, rec_ref_str)
 					seriesPlugin.getEpisode(
 							boundFunction(self.renamerCallback, servicepath, name, short),
-							name, begin, end, rec_ref_str, elapsed=True, rename=True
+							name, begin, end, rec_ref_str, elapsed=True, block=True, rename=True
 						)
 					
-					#result = seriesPlugin.getEpisodeBlocking( name, begin, end, rec_ref_str, elapsed=True )
-					#self.renamerCallback( servicepath, name, short, result )
-					
 			except Exception as e:
-				logDebug("SPR: Exception:", str(e))
+				log.exception("Exception:", str(e))
 
 	def renamerCallback(self, servicepath, name, short, data=None):
-		logDebug("SPR: renamerCallback", name, data)
+		log.debug("renamerCallback", name, data)
 		
 		result = None
 		
-		if data and len(data) == 4:
+		if data and isinstance(data, dict):
 			result = rename(servicepath, name, short, data)
 		
+		elif data and isinstance(data, basestring):
+			msg = _("Failed: %s." % ( str( data ) ))
+			log.debug(msg)
+			self.data.append( name + ": " + msg )
 		
-		if result and isinstance(result, basestring):
-			self.data.append( result )
+		else:
+			msg = _("No data available")
+			log.debug(msg)
+			self.data.append( name + ": " + msg )
 		
-		if config.plugins.seriesplugin.rename_popups.value or config.plugins.seriesplugin.rename_popups_success.value:
-			
-			self.counter = self.counter +1
-			
-			if self.data or config.plugins.seriesplugin.rename_popups_success.value:
-			
-				# Maybe there is a better way to avoid multiple Popups
-				from SeriesPlugin import getInstance
+		self.counter = self.counter +1
+		
+		# Maybe there is a better way to avoid multiple Popups
+		from SeriesPlugin import getInstance
+		
+		instance = getInstance()
+		
+		if instance.thread.empty() and instance.thread.finished():
+			if self.data:
+				msg = "SeriesPlugin:\n" + _("Record rename has been finished with %d errors:\n") % (len(self.data)) +"\n" +"\n".join(self.data)
+				log.warning(msg)
 				
-				instance = getInstance()
+			else:
+				msg = "SeriesPlugin:\n" + _("%d records renamed successfully") % (self.counter)
+				log.success(msg)
 				
-				if instance.thread.empty() and instance.thread.finished():
-					if self.data:
-						AddPopup(
-							"SeriesPlugin:\n" + _("Record rename has been finished with %d errors:\n") % (len(self.data)) +"\n" +"\n".join(self.data),
-							MessageBox.TYPE_ERROR,
-							int(config.plugins.seriesplugin.rename_popups_timeout.value),
-							'SP_PopUp_ID_RenameFinished'
-						)
-					else:
-						AddPopup(
-							"SeriesPlugin:\n" + _("%d records renamed successfully") % (self.counter),
-							MessageBox.TYPE_INFO,
-							int(config.plugins.seriesplugin.rename_popups_timeout.value),
-							'SP_PopUp_ID_RenameFinished'
-						)
-					self.data = []
-					self.counter = 0
+			self.data = []
+			self.counter = 0

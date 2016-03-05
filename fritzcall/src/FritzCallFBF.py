@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1252 $
-$Date: 2015-12-10 11:11:04 +0100 (Thu, 10 Dec 2015) $
-$Id: FritzCallFBF.py 1252 2015-12-10 10:11:04Z michael $
+$Revision: 1265 $
+$Date: 2016-02-24 19:45:50 +0100 (Wed, 24 Feb 2016) $
+$Id: FritzCallFBF.py 1265 2016-02-24 18:45:50Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -18,7 +18,7 @@ $Id: FritzCallFBF.py 1252 2015-12-10 10:11:04Z michael $
 # pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,W1401
 
 from . import _, __ #@UnresolvedImport # pylint: disable=W0611,F0401
-from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS
+from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
 from twisted.web.client import getPage #@UnresolvedImport
@@ -249,7 +249,7 @@ class FritzCallFBF:
 		self._notify(text)
 
 	def loadFritzBoxPhonebook(self, phonebook):
-		self.debug()
+		self.debug("")
 		if config.plugins.FritzCall.fritzphonebook.value:
 			self.phonebook = phonebook
 			self._phoneBookID = '0'
@@ -2106,6 +2106,7 @@ class FritzCallFBF_05_50:
 		# 0: direct; 1: date; 2: Name; 3: Nummer; 4: Nebenstelle; 5: Eigene Rufnumme; 6: Dauer
 		calls = csv.reader(StringIO.StringIO(csvString), delimiter=';')
 		calls.next() # skip sep
+		calls.next() # skip header line
 		for call in calls:
 			if len(call) != 7:
 				self.warn("skip %s len: %s" %(repr(call), str(len(call))))
@@ -2117,6 +2118,8 @@ class FritzCallFBF_05_50:
 				direct = FBF_OUT_CALLS
 			elif direct == '2':
 				direct = FBF_MISSED_CALLS
+			elif direct == '3':
+				direct = FBF_BLOCKED_CALLS
 			if self._callType != '.' and self._callType != direct:
 				continue
 
@@ -2405,17 +2408,21 @@ class FritzCallFBF_05_50:
 		# wlanstate = [ active, encrypted, no of devices ]
 		# encrypted == 2 means unknown
 		#                                      <tr id="uiTrWlan"><td class="led_green"></td><td><a href="/wlan/wlan_settings.lua?sid=9c824da3ecfc7168">WLAN</a></td><td title="an
-		found = re.match('.*<tr id="uiTrWlan"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">WLAN</a></td><td([^>]*)>(?:aus|an)([^<]*)', html, re.S)
+		# <tr id="uiTrWlan"><td class="led_green"></td><td><a href="/wlan/wlan_settings.lua?sid=af3b8ddd6a9176da">WLAN</a></td><td title="an">an, Funknetz: mms</td></tr>
+		found = re.match('.*<tr id="uiTrWlan"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">WLAN</a></td><td[^>]*>((aus|an)[^<]*)', html, re.S)
 		if found:
 			if found.group(1) == "led_green":
 				if found.group(2):
 					wlans = found.group(2)
-					found = re.match('.*"an, ([^"]+)"', wlans, re.S)
+					found = re.match('.*an, ([^"]+)', wlans, re.S)
 					if found:
 						wlanState = [ '1', '2', '', '' ]
 						wlans = found.group(1)
 					else:
 						wlanState = [ '0', '0', '', '' ]
+					found = re.match('.*Funknetz: ([^,"]*)', wlans, re.S)
+					if found:
+						wlanState[3] = found.group(1)
 					found = re.match('.*Funknetz \(2,4 GHz\): ([^,"]*)', wlans, re.S)
 					if found:
 						wlanState[3] = "2,4Ghz: " + found.group(1)
@@ -2478,7 +2485,7 @@ class FritzCallFBF_05_50:
 # 			self.debug("guestAccess LAN: " + repr(guestAccess))
 		# WLAN-Gastzugang</a></td><td title="aktiv (2,4 GHz), gesichert, 29 Minuten verbleiben, 0 Geräte">aktiv (2,4 GHz), gesichert, 29 Minuten verbleiben, 0 Geräte</td>
 		# found = re.match('.*linktxt": "WLAN-Gastzugang",\s*"details": "aktiv \(([^\)]+)\)(, (ungesichert|gesichert))?,( (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Geräte), ([^"]+)",\s*"link": "wGuest"', html, re.S)
-		found = re.match('.*WLAN-Gastzugang</a></td><td title="[^"]*">aktiv \(([^\)]+)\)(, (ungesichert|gesichert))?,( (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Geräte)</td>', html, re.S)
+		found = re.match('.*WLAN-Gastzugang</a></td><td title="[^"]*">aktiv \(([^\)]+)\)(, (ungesichert|gesichert))?,( (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Gerät(?:e)?)(, Funknetz: ([^<]+))?</td>', html, re.S)
 		if found:
 			# guestAccess =  "WLAN " + found.group(1)
 			if found.group(2):
@@ -2497,6 +2504,8 @@ class FritzCallFBF_05_50:
 					guestAccess = guestAccess + ', ' + found.group(5) + ' Std.' # n Stunden verbleiben
 			if found.group(7):
 				guestAccess = guestAccess + ', ' + found.group(7) # Geräte
+			if found.group(8):
+				guestAccess = guestAccess + ', ' + found.group(9) # WLAN Name
 			self.info("guestAccess WLAN: " + repr(guestAccess))
 
 		info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
@@ -2868,6 +2877,7 @@ class FritzCallFBF_06_35:
 		# 0: direct; 1: date; 2: Name; 3: Nummer; 4: Nebenstelle; 5: Eigene Rufnumme; 6: Dauer
 		calls = csv.reader(StringIO.StringIO(csvString), delimiter=';')
 		calls.next() # skip sep
+
 		for call in calls:
 			if len(call) != 7:
 				self.warn("skip %s len: %s" %(repr(call), str(len(call))))
@@ -2879,9 +2889,10 @@ class FritzCallFBF_06_35:
 				direct = FBF_OUT_CALLS
 			elif direct == '2':
 				direct = FBF_MISSED_CALLS
+			elif direct == '3':
+				direct = FBF_BLOCKED_CALLS
 			if self._callType != '.' and self._callType != direct:
 				continue
-
 			date = call[1]
 			length = call[6]
 
@@ -3361,13 +3372,11 @@ class FritzCallFBF_06_35:
 
 	def _okBlacklist(self, html, md5Sid):
 		self.debug("")
-		#=======================================================================
-		# linkP = open("/tmp/FritzCallBlacklist.htm", "w")
-		# linkP.write(html)
-		# linkP.close()
-		#=======================================================================
+# 		linkP = open("/tmp/FritzCallBlacklist.htm", "w")
+# 		linkP.write(html)
+# 		linkP.close()
 		# entries = re.compile('<span title="(?:Ankommende|Ausgehende) Rufe">(Ankommende|Ausgehende) Rufe</span></nobr></td><td><nobr><span title="[\d]+">([\d]+)</span>', re.S).finditer(html)
-		entries = re.compile('<tr><td>(Ankommende|Ausgehende) Rufe</td><td>([\d]+)</td><td>weg</td>', re.S).finditer(html)
+		entries = re.compile('<tr><td(?: [^>]*)?>(Ankommende|Ausgehende) Rufe</td><td(?: datalabel="[^"]*")?>([\d]+)</td>', re.S).finditer(html)
 		self.blacklist = ([], [])
 		for entry in entries:
 			if entry.group(1) == "Ankommende":

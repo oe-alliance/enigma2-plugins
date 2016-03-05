@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1253 $
-$Date: 2015-12-10 11:26:55 +0100 (Thu, 10 Dec 2015) $
-$Id: plugin.py 1253 2015-12-10 10:26:55Z michael $
+$Revision: 1265 $
+$Date: 2016-02-24 19:45:50 +0100 (Wed, 24 Feb 2016) $
+$Id: plugin.py 1265 2016-02-24 18:45:50Z michael $
 '''
 
 
@@ -164,6 +164,7 @@ FBF_ALL_CALLS = "."
 FBF_IN_CALLS = "1"
 FBF_MISSED_CALLS = "2"
 FBF_OUT_CALLS = "3"
+FBF_BLOCKED_CALLS = "4"
 fbfCallsChoices = {FBF_ALL_CALLS: _("All calls"),
 				   FBF_IN_CALLS: _("Incoming calls"),
 				   FBF_MISSED_CALLS: _("Missed calls"),
@@ -298,8 +299,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1253 $"[1:-2] + "\n" + 
-							"$Date: 2015-12-10 11:26:55 +0100 (Thu, 10 Dec 2015) $"[1:23] + "\n"
+							"$Revision: 1265 $"[1:-2] + "\n" + 
+							"$Date: 2016-02-24 19:45:50 +0100 (Wed, 24 Feb 2016) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1085,13 +1086,16 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		directout = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callout.png"))
 		directin = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callin.png"))
 		directfailed = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callinfailed.png"))
+		directrejected = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callrejected.png"))
 		def pixDir(direct):
 			if direct == FBF_OUT_CALLS:
 				direct = directout
 			elif direct == FBF_IN_CALLS:
 				direct = directin
-			else:
+			elif direct == FBF_MISSED_CALLS:
 				direct = directfailed
+			else:
+				direct = directrejected
 			return direct
 
 		# debug("[FritzDisplayCalls] %s" %repr(listOfCalls))
@@ -1932,7 +1936,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1253 $"[1: - 1] + "$Date: 2015-12-10 11:26:55 +0100 (Thu, 10 Dec 2015) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1265 $"[1: - 1] + "$Date: 2016-02-24 19:45:50 +0100 (Wed, 24 Feb 2016) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2461,7 +2465,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver): # pylint: disable=W0223
 	def __init__(self):
-		info("[FritzProtocol] " + "$Revision: 1253 $"[1:-1]	+ "$Date: 2015-12-10 11:26:55 +0100 (Thu, 10 Dec 2015) $"[7:23] + " starting")
+		info("[FritzProtocol] " + "$Revision: 1265 $"[1:-1]	+ "$Date: 2016-02-24 19:45:50 +0100 (Wed, 24 Feb 2016) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

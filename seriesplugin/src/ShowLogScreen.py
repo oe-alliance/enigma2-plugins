@@ -8,15 +8,9 @@ from Components.Sources.StaticText import StaticText
 
 # Screen
 from Components.ActionMap import ActionMap
-from Components.ActionMap import HelpableActionMap
 from Components.ScrollLabel import ScrollLabel
 from enigma import eSize, ePoint, getDesktop
 from Screens.Screen import Screen
-from Screens.Setup import SetupSummary
-from Screens.ChoiceBox import ChoiceBox
-from Screens.MessageBox import MessageBox
-from Screens.HelpMenu import HelpableScreen
-from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 # Plugin internal

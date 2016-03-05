@@ -411,6 +411,9 @@ class AutoMount():
 			f.close()
 			os.rename(filename + '.tmp', filename)
 
+	def escape(self, data):
+		return data.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace("'", '&#39;')
+
 	def removeEntryFromAutofsMap(self, key, location, filename):
 		if os.path.exists(filename):
 			f = open(filename)
@@ -428,21 +431,21 @@ class AutoMount():
 
 	def generateMountXML(self, sharedata):
 		res = []
-		mounttype = sharedata['mounttype']
-		mountusing = sharedata['mountusing']
+		mounttype = self.escape(sharedata['mounttype'])
+		mountusing = self.escape(sharedata['mountusing'])
 		if mountusing != 'old_enigma2':
 			res.append('<' + mountusing + '>\n')
 		res.append(' <' + mounttype + '>\n')
 		res.append('  <mount>\n')
-		res.append('   <active>' + str(sharedata['active']) + '</active>\n')
-		res.append('   <hdd_replacement>' + str(sharedata['hdd_replacement']) + '</hdd_replacement>\n')
-		res.append('   <ip>' + sharedata['ip'] + '</ip>\n')
-		res.append('   <sharename>' + sharedata['sharename'] + '</sharename>\n')
-		res.append('   <sharedir>' + sharedata['sharedir'] + '</sharedir>\n')
-		res.append('   <options>' + sharedata['options'] + '</options>\n')
+		res.append('   <active>' + self.escape(str(sharedata['active'])) + '</active>\n')
+		res.append('   <hdd_replacement>' + self.escape(str(sharedata['hdd_replacement'])) + '</hdd_replacement>\n')
+		res.append('   <ip>' + self.escape(sharedata['ip']) + '</ip>\n')
+		res.append('   <sharename>' + self.escape(sharedata['sharename']) + '</sharename>\n')
+		res.append('   <sharedir>' + self.escape(sharedata['sharedir']) + '</sharedir>\n')
+		res.append('   <options>' + self.escape(sharedata['options']) + '</options>\n')
 		if mounttype == 'cifs':
-			res.append("   <username>" + sharedata['username'] + "</username>\n")
-			res.append("   <password>" + sharedata['password'] + "</password>\n")
+			res.append("   <username>" + self.escape(sharedata['username']) + "</username>\n")
+			res.append("   <password>" + self.escape(sharedata['password']) + "</password>\n")
 		res.append('  </mount>\n')
 		res.append(' </' + mounttype + '>\n')
 		if mountusing != 'old_enigma2':

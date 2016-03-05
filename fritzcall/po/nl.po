@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-01 12:42+0100\n"
+"POT-Creation-Date: 2015-07-22 17:57+0200\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -17,6 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "05.29 until below 6.35"
+msgstr ""
+
+msgid "06.35 and newer"
+msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -366,6 +372,9 @@ msgstr "Laat MSN zien (door een komma gescheiden)"
 msgid "Mailbox"
 msgstr "Mailbox"
 
+msgid "Minutes of uptime of WLAN guest network"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Gemist"
@@ -413,6 +422,9 @@ msgstr "Geen Resultaat van Outlook export"
 
 msgid "No result from reverse lookup"
 msgstr "Geen resultaat uit omgekeerd zoeken"
+
+msgid "Not deactivating after time"
+msgstr ""
 
 msgid "Number"
 msgstr "Nummer"
@@ -531,6 +543,9 @@ msgstr ""
 
 msgid "Shortcut"
 msgstr "Snelkoppeling"
+
+msgid "Show Blocked Calls"
+msgstr ""
 
 msgid "Show Outgoing Calls"
 msgstr "Laat uitgaande gesprekken zien"
@@ -692,6 +707,9 @@ msgstr ""
 #, fuzzy
 msgid "no device active"
 msgstr "Eén mailbox actief"
+
+msgid "not available with this firmware version"
+msgstr ""
 
 msgid "not configured"
 msgstr ""

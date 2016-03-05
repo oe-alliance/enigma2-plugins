@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-01 12:42+0100\n"
+"POT-Creation-Date: 2015-07-22 17:57+0200\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -16,6 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "05.29 until below 6.35"
+msgstr ""
+
+msgid "06.35 and newer"
+msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -365,6 +371,9 @@ msgstr "MSN a mostrar (separado por ,)"
 msgid "Mailbox"
 msgstr "Carpeta de correo"
 
+msgid "Minutes of uptime of WLAN guest network"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Perdidas"
@@ -412,6 +421,9 @@ msgstr "No hay resultado desde la exportación de Outlook"
 
 msgid "No result from reverse lookup"
 msgstr "No hay resultado de resolución inversa"
+
+msgid "Not deactivating after time"
+msgstr ""
 
 msgid "Number"
 msgstr "Número"
@@ -530,6 +542,9 @@ msgstr ""
 
 msgid "Shortcut"
 msgstr "Acceso rápido"
+
+msgid "Show Blocked Calls"
+msgstr ""
 
 msgid "Show Outgoing Calls"
 msgstr "Mostrar Llamadas Salientes"
@@ -690,6 +705,9 @@ msgstr ""
 #, fuzzy
 msgid "no device active"
 msgstr "Una cuenta de correo activa"
+
+msgid "not available with this firmware version"
+msgstr ""
 
 msgid "not configured"
 msgstr ""

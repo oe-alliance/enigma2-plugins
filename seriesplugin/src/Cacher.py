@@ -22,7 +22,7 @@ from time import time
 
 from Components.config import *
 
-from Logger import logDebug, logInfo
+from Logger import log
 
 
 # Global cache
@@ -64,7 +64,7 @@ class Cacher(object):
 			# Woooohooo it is, elapsed_time is less than INTER_QUERY_TIME so I
 			# can get the page from the memory, recent enough
 			if elapsed_time < self.expiration:
-				#logDebug("####SPCACHE GET ", already_got)
+				#log.debug("####SPCACHE GET ", already_got)
 				return already_got[1]
 			
 			else:	
@@ -82,7 +82,7 @@ class Cacher(object):
 		global cache
 		
 		if not page:
-			logDebug("Cache: Got empty page")
+			log.debug("Cache: Got empty page")
 			return
 			
 		if not config.plugins.seriesplugin.caching.value:
@@ -94,7 +94,7 @@ class Cacher(object):
 		global cache
 		
 		if not list:
-			logDebug("Cache: Got empty list")
+			log.debug("Cache: Got empty list")
 			return
 		
 		if not config.plugins.seriesplugin.caching.value:

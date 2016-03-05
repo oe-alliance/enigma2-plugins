@@ -7,7 +7,7 @@ from . import _
 from Components.config import config
 
 # Plugin internal
-from Logger import logDebug, logInfo
+from Logger import log
 
 
 #######################################################
@@ -45,7 +45,7 @@ def SPChannelContextMenu__init__(self, session, csel):
 		self["menu"].list.insert(0, ChoiceEntryComponent(text=(SHOWINFO, boundFunction(self.SPchannelShowSeriesInfo))))
 
 def channelShowSeriesInfo(self):
-	logDebug( "[SeriesPlugin] channelShowSeriesInfo ")
+	log.debug( "[SeriesPlugin] channelShowSeriesInfo ")
 	if config.plugins.seriesplugin.enabled.value:
 		try:
 			from enigma import eServiceCenter
@@ -55,7 +55,7 @@ def channelShowSeriesInfo(self):
 			from Plugins.Extensions.SeriesPlugin.SeriesPluginInfoScreen import SeriesPluginInfoScreen
 			self.session.openWithCallback(self.SPcloseafterfinish, SeriesPluginInfoScreen, service, event)
 		except Exception as e:
-			logDebug(_("SeriesPlugin info exception ") + str(e))
+			log.debug(_("SeriesPlugin info exception ") + str(e))
 
 def closeafterfinish(self, retval=None):
 	self.close()

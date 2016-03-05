@@ -6,10 +6,6 @@ from . import _
 
 from time import time
 
-# GUI (Screens)
-from Screens.MessageBox import MessageBox
-from Tools.Notifications import AddPopup
-
 from Components.config import config
 
 # Plugin
@@ -22,7 +18,7 @@ from SeriesPluginInfoScreen import SeriesPluginInfoScreen
 from SeriesPluginRenamer import SeriesPluginRenamer
 from SeriesPluginIndependent import startIndependent, runIndependent
 from SeriesPluginConfiguration import SeriesPluginConfiguration
-from Logger import logDebug, logInfo
+from Logger import log
 
 from spEPGSelection import SPEPGSelectionInit, SPEPGSelectionUndo
 from spChannelContextMenu import SPChannelContextMenuInit, SPChannelContextMenuUndo
@@ -31,7 +27,7 @@ from spChannelContextMenu import SPChannelContextMenuInit, SPChannelContextMenuU
 #######################################################
 # Constants
 NAME = "SeriesPlugin"
-VERSION = "4.3.1"
+VERSION = "5.5.5"
 DESCRIPTION = _("SeriesPlugin")
 SHOWINFO = _("Show series info (SP)")
 RENAMESERIES = _("Rename serie(s) (SP)")
@@ -71,31 +67,35 @@ def buildURL(url):
 
 #######################################################
 # Test
-def test(**kwargs):
+def test(session=None):
 	# http://dm7080/autotimer
 	# http://www.unixtime.de/
 	try:
-		#from SeriesPluginBare import bareGetSeasonEpisode 	#future=True, today=False, elapsed=False
-		#bareGetSeasonEpisode("1:0:19:7C:6:85:FFFF0000:0:0:0:", "The Walking Dead", 1448740500, 1448745600, "Description", "/media/hdd/movie", True, False, False)
-		#bareGetSeasonEpisode("1:0:1:2F50:F1:270F:FFFF0000:0:0:0:", "Are You the One?", 1448923500, 1448926500, "Description", "/media/hdd/movie", False, False, True)
+		#from SeriesPluginBare import bareGetEpisode 	#future=True, today=False, elapsed=False
+		#bareGetEpisode("1:0:19:7C:6:85:FFFF0000:0:0:0:", "The Walking Dead", 1448740500, 1448745600, "Description", "/media/hdd/movie", True, False, False)
+		#bareGetEpisode("1:0:1:2F50:F1:270F:FFFF0000:0:0:0:", "Are You the One?", 1448923500, 1448926500, "Description", "/media/hdd/movie", False, False, True)
+		#bareGetEpisode("1:0:19:814D:14B:270F:FFFF0000:0:0:0:", "Bones", 1451416200, 1451416200, "Description", "/media/hdd/movie", False, True, False)
+		#sp = bareGetEpisode("1:0:19:2B66:437:66:FFFF0000:0:0:0:", "Bares für Rares", 1451311500, 1451311500, "Description", "/media/hdd/movie", False, True, False)
+		#sp = bareGetEpisode("1:0:19:7980:1C3:270F:FFFF0000:0:0:0:", "Offroad Survivors", 1451492100, 1451492100, "Description", "/media/hdd/movie", False, True, False)
+		#from Tools.Notifications import AddPopup
+		#from Screens.MessageBox import MessageBox
+		#AddPopup( sp[0], MessageBox.TYPE_INFO, 0, 'SP_PopUp_ID_Test' )
 		
 		#TEST INFOSCREEN MOVIE
-		#if kwargs.has_key("session"):
 		#	from enigma import eServiceReference
-		#	session = kwargs["session"]
 			#service = eServiceReference(eServiceReference.idDVB, 0, "/media/hdd/movie/20151120 0139 - Pro7 HD - The 100.ts")
 			#service = eServiceReference(eServiceReference.idDVB, 0, "/media/hdd/movie/20151205 1625 - TNT Serie HD (S) - The Last Ship - Staffel 1.ts")
 			#service = eServiceReference(eServiceReference.idDVB, 0, "/media/hdd/movie/20151204 1825 - VIVA_COMEDY CENTRAL HD - Rules of Engagement.ts")
 		#	movielist_info(session, service)
 		
 		#TEST AUTOTIMER
-		#from SeriesPluginBare import bareGetSeasonEpisode
-		#bareGetSeasonEpisode("1:0:1:2F50:F1:270F:FFFF0000:0:0:0:", "Are You the One", 1448751000, 1448754000, "Description", "/media/hdd/movie", False, False, True)
-		#bareGetSeasonEpisode("1:0:19:8150:14B:270F:FFFF0000:0:0:0:", "Dragons Auf zu neuen Ufern TEST_TO_BE_REMOVED", 1449390300, 1449393300, "Description", "/media/hdd/movie", False, False, True)
+		#from SeriesPluginBare import bareGetEpisode
+		#bareGetEpisode("1:0:1:2F50:F1:270F:FFFF0000:0:0:0:", "Are You the One", 1448751000, 1448754000, "Description", "/media/hdd/movie", False, False, True)
+		#bareGetEpisode("1:0:19:8150:14B:270F:FFFF0000:0:0:0:", "Dragons Auf zu neuen Ufern TEST_TO_BE_REMOVED", 1449390300, 1449393300, "Description", "/media/hdd/movie", False, False, True)
 		pass
 		
 	except Exception as e:
-		logDebug(_("SeriesPlugin test exception ") + str(e))
+		log.exception(_("SeriesPlugin test exception ") + str(e))
 	
 #######################################################
 # Start
@@ -105,7 +105,10 @@ def start(reason, **kwargs):
 		if reason == 0:
 			
 			#TEST AUTOTIMER
-			#test(kwargs)
+			#test()
+			#if kwargs.has_key("session"):
+			#	session = kwargs["session"]
+			#	test(session)
 			#TESTEND
 			
 			# Start on demand if it is requested
@@ -124,7 +127,7 @@ def setup(session, *args, **kwargs):
 	try:
 		session.open(SeriesPluginConfiguration)
 	except Exception as e:
-		logDebug(_("SeriesPlugin setup exception ") + str(e))
+		log.exception(_("SeriesPlugin setup exception ") + str(e))
 
 
 #######################################################
@@ -134,7 +137,7 @@ def info(session, service=None, event=None, *args, **kwargs):
 		try:
 			session.open(SeriesPluginInfoScreen, service, event)
 		except Exception as e:
-			logDebug(_("SeriesPlugin info exception ") + str(e))
+			log.exception(_("SeriesPlugin info exception ") + str(e))
 
 
 #######################################################
@@ -145,7 +148,7 @@ def sp_extension(session, *args, **kwargs):
 			if session:
 				session.open(SeriesPluginInfoScreen)
 		except Exception as e:
-			logDebug(_("SeriesPlugin extension exception ") + str(e))
+			log.exception(_("SeriesPlugin extension exception ") + str(e))
 
 
 #######################################################
@@ -158,13 +161,24 @@ def channel(session, service=None, *args, **kwargs):
 			event = info.getEvent(service)
 			session.open(SeriesPluginInfoScreen, service, event)
 		except Exception as e:
-			logDebug(_("SeriesPlugin extension exception ") + str(e))
+			log.exception(_("SeriesPlugin extension exception ") + str(e))
 
 
 #######################################################
 # Timer
 def checkTimers(session, *args, **kwargs):
-	runIndependent()
+	if config.plugins.seriesplugin.enabled.value:
+		runIndependent()
+
+# Call from timer list - not used yet
+def showTimerInfo(session, timer, *args, **kwargs):
+	if config.plugins.seriesplugin.enabled.value:
+		from enigma import eEPGCache
+		try:
+			event = timer.eit and epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
+			session.open(SeriesPluginInfoScreen, timer.service_ref, event)
+		except Exception as e:
+			log.exception(_("SeriesPlugin info exception ") + str(e))
 
 
 #######################################################
@@ -179,7 +193,7 @@ def movielist_rename(session, service, services=None, *args, **kwargs):
 				services = [service]
 			SeriesPluginRenamer(session, services)
 		except Exception as e:
-			logDebug(_("SeriesPlugin renamer exception ") + str(e))
+			log.exception(_("SeriesPlugin renamer exception ") + str(e))
 
 
 #######################################################
@@ -189,7 +203,7 @@ def movielist_info(session, service, *args, **kwargs):
 		try:
 			session.open(SeriesPluginInfoScreen, service)
 		except Exception as e:
-			logDebug(_("SeriesPlugin extension exception ") + str(e))
+			log.exception(_("SeriesPlugin extension exception ") + str(e))
 
 
 #######################################################
@@ -198,11 +212,11 @@ def movielist_info(session, service, *args, **kwargs):
 # Synchronous call, blocks until we have the information
 def getSeasonEpisode4(service_ref, name, begin, end, description, path, *args, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
-		from SeriesPluginBare import bareGetSeasonEpisode
+		from SeriesPluginBare import bareGetEpisode
 		try:
-			return bareGetSeasonEpisode(service_ref, name, begin, end, description, path, True, False, False)
+			return bareGetEpisode(service_ref, name, begin, end, description, path, True, False, False)
 		except Exception as e:
-			logDebug( "SeriesPlugin getSeasonEpisode4 exception " + str(e))
+			log.exception( "SeriesPlugin getSeasonEpisode4 exception " + str(e))
 			return str(e)
 
 def showResult(*args, **kwargs):
@@ -212,56 +226,72 @@ def showResult(*args, **kwargs):
 
 
 # Call asynchronous
-def renameTimer(timer, name, begin, end, *args, **kwargs):
+# Can also be called from a timer list - not used yet
+def renameTimer(timer, *args, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
 		try:
-			SeriesPluginTimer(timer, name, begin, end)
+			spt = SeriesPluginTimer()
+			spt.getEpisode(timer)
 		except Exception as e:
-			logDebug(_("SeriesPlugin label exception ") + str(e))
+			log.exception(_("SeriesPlugin label exception ") + str(e))
+
+def renameTimers(timers, *args, **kwargs):
+	if config.plugins.seriesplugin.enabled.value:
+		try:
+			spt = SeriesPluginTimer()
+			for timer in timers:
+				spt.getEpisode(timer)
+		except Exception as e:
+			log.exception(_("SeriesPlugin label exception ") + str(e))
+
+
+#######################################################
+# For compatibility reasons
+def modifyTimer(timer, *args, **kwargs):
+	if config.plugins.seriesplugin.enabled.value:
+		log.debug("SeriesPlugin modifyTimer is deprecated - Update Your AutoTimer!")
+		try:
+			spt = SeriesPluginTimer()
+			spt.getEpisode(timer)
+		except Exception as e:
+			log.exception(_("SeriesPlugin label exception ") + str(e))
 
 
 # For compatibility reasons
-def modifyTimer(timer, name, *args, **kwargs):
+def labelTimer(timer, *args, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
-		logDebug("SeriesPlugin modifyTimer is deprecated - Update Your AutoTimer!")
+		log.debug("SeriesPlugin labelTimer is deprecated - Update Your AutoTimer!")
 		try:
-			SeriesPluginTimer(timer, name or timer.name, timer.begin, timer.end)
+			spt = SeriesPluginTimer()
+			spt.getEpisode(timer)
 		except Exception as e:
-			logDebug(_("SeriesPlugin label exception ") + str(e))
-
+			log.exception(_("SeriesPlugin label exception ") + str(e))
 
 # For compatibility reasons
-def labelTimer(timer, begin=None, end=None, *args, **kwargs):
-	if config.plugins.seriesplugin.enabled.value:
-		logDebug("SeriesPlugin labelTimer is deprecated - Update Your AutoTimer!")
-		try:
-			SeriesPluginTimer(timer, timer.name, timer.begin, timer.end)
-		except Exception as e:
-			logDebug(_("SeriesPlugin label exception ") + str(e))
-
-def getSeasonAndEpisode(timer, name, begin, end, *args, **kwargs):
+def getSeasonAndEpisode(timer, *args, **kwargs):
 	result = None
 	if config.plugins.seriesplugin.enabled.value:
-		logDebug("SeriesPlugin getSeasonEpisode is deprecated - Update Your AutoTimer!")
+		log.debug("SeriesPlugin getSeasonAndEpisode is deprecated - Update Your AutoTimer!")
 		try:
-			spt = SeriesPluginTimer(timer, name, begin, end, True)
-			result = spt.getSeasonAndEpisode(timer, name, begin, end, True, False, False)
+			spt = SeriesPluginTimer()
+			result = spt.getEpisode(timer, True)
 		except Exception as e:
-			logDebug(_("SeriesPlugin label exception ") + str(e))
+			log.exception(_("SeriesPlugin label exception ") + str(e))
 	return result
 
+# For compatibility reasons
 def getSeasonEpisode(service_ref, name, begin, end, description, path, *args, **kwargs):
 	if config.plugins.seriesplugin.enabled.value:
-		logDebug("SeriesPlugin getSeasonEpisode is deprecated - Update Your AutoTimer!")
-		from SeriesPluginBare import bareGetSeasonEpisode
+		log.debug("SeriesPlugin getSeasonEpisode is deprecated - Update Your AutoTimer!")
+		from SeriesPluginBare import bareGetEpisode
 		try:
-			result = bareGetSeasonEpisode(service_ref, name, begin, end, description, path)
-			if result and len(result) == 4:
+			result = bareGetEpisode(service_ref, name, begin, end, description, path)
+			if result and isinstance(result, dict):
 				return (result[0],result[1],result[2])
 			else:
 				return str(result)
 		except Exception as e:
-			logDebug( "SeriesPlugin getSeasonEpisode4 exception " + str(e))
+			log.exception( "SeriesPlugin getSeasonEpisode4 exception " + str(e))
 			return str(e)
 
 

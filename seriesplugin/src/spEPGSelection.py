@@ -7,7 +7,7 @@ from . import _
 from Components.config import config
 
 # Plugin internal
-from Logger import logDebug, logInfo
+from Logger import log
 
 
 #######################################################

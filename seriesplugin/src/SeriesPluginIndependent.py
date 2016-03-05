@@ -31,9 +31,8 @@ from time import localtime
 #from ServiceReference import ServiceReference
 
 # Plugin internal
-from SeriesPlugin import getInstance, refactorTitle, refactorDescription
 from SeriesPluginTimer import SeriesPluginTimer
-from Logger import logDebug, logInfo
+from Logger import log
 
 
 # Globals
@@ -55,34 +54,19 @@ def stopIndependent():
 def runIndependent():
 	try:
 		
+		spt = SeriesPluginTimer()
+		
 		for timer in NavigationInstance.instance.RecordTimer.timer_list:
 			
-			if timer.isRunning():
-				logDebug("SeriesPluginIndependent: Skip running timer", timer.name)
-				continue
+			#Maybe later
+			# Add a series whitelist
+			# Configured with a dialog
+			# Stored in a db or xml
 			
-			if timer.justplay:
-				logDebug("SeriesPluginIndependent: Skip justplay timer", timer.name)
-				continue
+			spt.getEpisode(timer)
 			
-			if timer.repeated:
-				logDebug("SeriesPluginIndependent: Skip repeating timer", timer.name)
-				continue
-			
-			if not config.plugins.seriesplugin.independent_retry.value:
-				logDebug("SeriesPluginIndependent: timer retry is disabled")
-				if hasattr(timer, 'serieslookupdone') and timer.serieslookupdone:
-					logDebug("SeriesPluginIndependent: Skip timer retry", timer.name)
-					continue
-			
-			#Maybe later add a series whitelist xml
-			SeriesPluginTimer(timer, timer.name, timer.begin, timer.end)
-			
-			timer.serieslookupdone = True
-	
 	except Exception as e:
-		logDebug("SeriesPluginIndependent: run exception " + str(e))
-
+		log.exception( _("Independent mode exception") + "\n" + str(e))
 
 
 #######################################################
@@ -105,7 +89,7 @@ class SeriesPluginIndependent(object):
 		#self.etimer.start( 10, True )
 
 	def run(self):
-		logDebug("SeriesPluginIndependent: run",  strftime("%a, %d %b %Y %H:%M:%S", localtime()) )
+		log.debug("SeriesPluginIndependent: run",  strftime("%a, %d %b %Y %H:%M:%S", localtime()) )
 
 		runIndependent()
 

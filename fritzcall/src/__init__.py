@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
 '''
 general functions for FritzCall plugin
+
+$Id: __init__.py 1260 2016-02-20 17:50:18Z michael $
+$Author: michael $
+$Revision: 1260 $
+$Date: 2016-02-20 18:50:18 +0100 (Sat, 20 Feb 2016) $
 '''
+
 from Components.config import config #@UnresolvedImport
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
@@ -14,7 +20,7 @@ gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain("enigma2")
 gettext.bindtextdomain("FritzCall", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/FritzCall/locale/"))
 
-def _(txt): # pylint: disable-msg=C0103
+def _(txt): # pylint: disable=C0103
 	td = gettext.dgettext("FritzCall", txt)
 	if td == txt:
 		td = gettext.gettext(txt)
