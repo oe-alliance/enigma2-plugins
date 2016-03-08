@@ -305,6 +305,7 @@ def Plugins(**kwargs):
 											description = NAME + " " + _("Setup"),
 											where = PluginDescriptor.WHERE_PLUGINMENU,
 											fnc = setup,
+											icon = "plugin.png",
 											needsRestart = False) )
 	
 	if config.plugins.seriesplugin.enabled.value:
@@ -394,6 +395,7 @@ def addSeriesPlugin(menu, title, fnc=None):
 																name = title,
 																description = title,
 																where = menu,
+																icon = "plugin.png",
 																needsRestart = False,
 																fnc = fnc)
 				if menu in plugins.plugins:
