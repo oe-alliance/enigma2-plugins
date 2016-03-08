@@ -64,12 +64,13 @@ def bareShowResult():
 	global loop_data, loop_counter
 	
 	if loop_data:
-		msg = "SeriesPlugin:\n" + _("SP has been finished with errors:\n") +"\n" +"\n".join(loop_data)
+		msg = "SeriesPlugin:\n" + _("Finished with errors:\n") +"\n" +"\n".join(loop_data)
 		log.warning(msg)
 	
 	else:
-		msg = "SeriesPlugin:\n" + _("%d timer renamed successfully") % (loop_counter)
-		log.success(msg)
+		if loop_counter > 0:
+			msg = "SeriesPlugin:\n" + _("Lookup of %d episodes was successful") % (loop_counter)
+			log.success(msg)
 	
 	loop_data = []
 	loop_counter = 0
