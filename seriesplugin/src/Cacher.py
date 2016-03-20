@@ -22,15 +22,16 @@ from time import time
 
 from Components.config import *
 
-from Logger import splog
+from Logger import log
 
-
-# Max Age (in seconds) of each feed in the cache
-INTER_QUERY_TIME = 60*60*24
 
 # Global cache
 # Do we have to cleanup it
 cache = {}
+
+def clearCache():
+	global cache
+	cache = {}
 
 
 class Cacher(object):
@@ -40,9 +41,11 @@ class Cacher(object):
 		#self.cache = {}
 		#global cache
 		#cache = {}
-		pass
+		
+		# Max Age (in seconds) of each feed in the cache
+		self.expiration = config.plugins.seriesplugin.caching_expiration.value * 60 * 60
 
-	def getCached(self, url, expires):
+	def getCached(self, url):
 		#pullCache
 		global cache
 		
@@ -60,8 +63,8 @@ class Cacher(object):
 			
 			# Woooohooo it is, elapsed_time is less than INTER_QUERY_TIME so I
 			# can get the page from the memory, recent enough
-			if elapsed_time < expires:
-				#splog("####SPCACHE GET ", already_got)
+			if elapsed_time < self.expiration:
+				#log.debug("####SPCACHE GET ", already_got)
 				return already_got[1]
 			
 			else:	
@@ -78,21 +81,23 @@ class Cacher(object):
 	def doCachePage(self, url, page):
 		global cache
 		
+		if not page:
+			log.debug("Cache: Got empty page")
+			return
+			
 		if not config.plugins.seriesplugin.caching.value:
 			return
+		
 		cache[url] = ( time(), page )
 
 	def doCacheList(self, url, list):
 		global cache
 		
-		if not config.plugins.seriesplugin.caching.value:
+		if not list:
+			log.debug("Cache: Got empty list")
 			return
-		cache[url] = ( time(), list[:] )
-
-	def isCached(self, url):
-		global cache
 		
 		if not config.plugins.seriesplugin.caching.value:
 			return
 		
-		return (url in cache)
+		cache[url] = ( time(), list )

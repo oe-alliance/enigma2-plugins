@@ -17,6 +17,8 @@
 #
 #######################################################################
 
+import os
+
 # for localized messages
 from . import _
 
@@ -32,9 +34,10 @@ from Tools.Notifications import AddPopup
 from Tools.BoundFunction import boundFunction
 
 # Plugin internal
-from SeriesPlugin import getInstance, refactorTitle, refactorDescription
-from Logger import splog
+from SeriesPlugin import getInstance, refactorTitle, refactorDescription, refactorDirectory
+from Logger import log
 
+TAG = "SeriesPlugin"
 
 #######################################################
 # Label timer
@@ -43,146 +46,159 @@ class SeriesPluginTimer(object):
 	data = []
 	counter = 0;
 	
-	def __init__(self, timer, name, begin, end, block=False):
+	def __init__(self):
 		
-		splog("SPT: SeriesPluginTimer: name, timername, begin, end:", name, timer.name, begin, end)
-		timer.log(600, "[SeriesPlugin] Try to find infos for %s" % (timer.name) )
+		log.debug("SeriesPluginTimer: New instance")
+
+	def getEpisode(self, timer, block=False):
+		
+		log.info("timername, service, begin, end:", timer.name, str(timer.service_ref.ref), timer.begin, timer.end)
 		
 		if hasattr(timer, 'sp_in_queue'):
 			if timer.sp_in_queue:
-				splog("SPT: SeriesPluginTimer: Skip timer is already in queue:", timer.name)
-				timer.log(601, "[SeriesPlugin] Skip timer is already in queue %s" % (timer.name) )
-		
-		timer.sp_in_queue = True
+				msg = _("Skipping timer because it is already in queue")
+				log.warning(msg, timer.name)
+				timer.log(601, "[SeriesPlugin]" + " " + msg )
+				return
 		
 		# We have to compare the length,
 		# because of the E2 special chars handling for creating the filenames
 		#if timer.name == name:
 		# Mad Men != Mad_Men
 		
-		epgcache = eEPGCache.getInstance()
-		
-		event = None
-		
-		if timer.eit:
-			#splog("SPT: Timer Eit is set", timer.service_ref.ref, timer.eit)
-			event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
-			splog("SPT: LookupEventId", timer.eit, event)
-		if not(event):
-			#splog("Lookup EventTime", timer.service_ref.ref, end, begin)
-			event = epgcache.lookupEventTime( timer.service_ref.ref, begin + ((end - begin) /2) );
-			splog("SPT: lookupEventTime", event )
-		#if not(event):
-		#	splog("Lookup Event", timer.service_ref.ref, end, begin)
-		#	events = epgcache.lookupEvent( [ "T" , ( timer.service_ref.ref, 0, begin + ((end - begin) /2) ) ] );
-		#	splog("LookupEvent event(s) found", len(events), events )
-		#	event = events and events[0]
-		
-		if event:
-			#splog("EPG event found")
-			if not ( len(timer.name) == len(name) == len(event.getEventName()) ):
-				splog("SPT: Skip timer because it is already modified", timer.name, name, event and event.getEventName(), len(timer.name), len(name), len(event.getEventName()) )
-				timer.log(602, "[SeriesPlugin] Skip timer because it is already modified")
-				return
-		else:
-			if ( len(timer.name) == len(name) ):
-				splog("SPT: Skip timer because no event was found", timer.name, name, len(timer.name), len(name))
-				timer.log(603, "[SeriesPlugin] Skip timer because no event was found")
-				return
+		if TAG in timer.tags:
+			msg = _("Skipping timer because it is already handled") + "\n\n" + _("Can be configured within the setup")
+			log.warning(msg, timer.name)
+			timer.log(607, "[SeriesPlugin]" + " " + msg )
+			return
 		
 		if timer.begin < time() + 60:
-			splog("SPT: Skipping an event because it starts in less than 60 seconds", timer.name )
-			timer.log(604, "[SeriesPlugin] Skip timer because it starts in less than 60 seconds")
+			msg = _("Skipping timer because it starts in less than 60 seconds")
+			log.debug(msg, timer.name)
+			timer.log(604, "[SeriesPlugin]" + " " + msg )
 			return
 		
 		if timer.isRunning():
-			splog("SPT: Skipping timer because it is already running", timer.name )
-			timer.log(605, "[SeriesPlugin] Skip timer because it is already running")
+			msg = _("Skipping timer because it is already running")
+			log.debug(msg, timer.name)
+			timer.log(605, "[SeriesPlugin]" + " " + msg )
 			return
 		
 		if timer.justplay:
-			splog("SPT: Skipping justplay timer", timer.name )
-			timer.log(606, "[SeriesPlugin] Skip justplay timer")
+			msg = _("Skipping timer because it is a just play timer")
+			log.debug(msg, timer.name)
+			timer.log(606, "[SeriesPlugin]" + " " + msg )
 			return
 		
+		
+		event = None
+		epgcache = eEPGCache.getInstance()
+		
+		if timer.eit:
+			event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
+			log.debug("lookupEventId", timer.eit, event)
+		if not(event):
+			event = epgcache.lookupEventTime( timer.service_ref.ref, timer.begin + ((timer.end - timer.begin) /2) );
+			log.debug("lookupEventTime", event )
+		
+		if event:
+			if not ( len(timer.name) == len(event.getEventName()) ):
+				msg = _("Skipping timer because it is already modified %s" % (timer.name) )
+				log.info(msg)
+				timer.log(602, "[SeriesPlugin]" + " " + msg )
+				return
+			begin = event.getBeginTime() or 0
+			duration = event.getDuration() or 0
+			end = begin + duration
+			
+		else:
+			if config.plugins.seriesplugin.timer_eit_check.value:
+				msg = _("Skipping timer because no event was found")
+				log.info(msg, timer.name)
+				timer.log(603, "[SeriesPlugin]" + " " + msg )
+				return
+			else:
+				# We don't know the exact margins, we will assume the E2 default margins
+				log.debug("We don't know the exact margins, we will assume the E2 default margins")
+				begin = timer.begin + (config.recording.margin_before.value * 60)
+				end = timer.end - (config.recording.margin_after.value * 60)
+		
+		
+		timer.log(600, "[SeriesPlugin]" + " " + _("Try to find infos for %s" % (timer.name) ) )
 		
 		seriesPlugin = getInstance()
 		
 		if timer.service_ref:
-			#channel = timer.service_ref.getServiceName()
-			#splog(channel)
+			log.debug("getEpisode:", timer.name, timer.begin, timer.end, block)
 			
-			splog("SPT: getEpisode:", name, begin, end, block)
-			if not block:
-				seriesPlugin.getEpisode(
+			timer.sp_in_queue = True
+			
+			return seriesPlugin.getEpisode(
 					boundFunction(self.timerCallback, timer),
-					#name, begin, end, channel, future=True
-					name, begin, end, timer.service_ref, future=True
+					timer.name, begin, end, timer.service_ref, future=True, block=block
 				)
-			else:
-				result = seriesPlugin.getEpisodeBlocking(
-					name, begin, end, timer.service_ref, future=True
-				)
-				self.timerCallback(timer, result)
-				return result
 		else:
-			splog("SPT: SeriesPluginTimer: No channel specified")
-			self.timerCallback("No channel specified")
+			msg = _("Skipping lookup because no channel is specified")
+			log.warning(msg)
+			self.timerCallback(timer, msg)
+			return None
 
 	def timerCallback(self, timer, data=None):
-		splog("SPT: timerCallback", data)
-		splog(data)
+		log.debug("timerCallback", data)
 		
-		if data and len(data) == 4 and timer:
+		if data and isinstance(data, dict) and timer:
 			
 			# Episode data available, refactor name and description
-			#from SeriesPluginRenamer import newLegacyEncode
 			timer.name = str(refactorTitle(timer.name, data))
-			#timer.name = newLegacyEncode(refactorTitle(timer.name, data))
 			timer.description = str(refactorDescription(timer.description, data))
 			
-			timer.log(610, "[SeriesPlugin] Success: Changed name: %s." % (timer.name))
+			timer.dirname = str(refactorDirectory(timer.dirname or config.usage.default_path.value, data))
+			timer.calculateFilename()
+			
+			msg = _("Success: %s" % (timer.name))
+			log.debug(msg)
+			timer.log(610, "[SeriesPlugin]" + " " + msg)
+			
+			if config.plugins.seriesplugin.timer_add_tag.value:
+				timer.tags.append(TAG)
 		
 		elif data:
-			timer.log(611, "[SeriesPlugin] Failed: %s." % ( str( data ) ))
+			msg = _("Failed: %s." % ( str( data ) ))
+			log.debug(msg)
+			timer.log(611, "[SeriesPlugin]" + " " + msg)
 			SeriesPluginTimer.data.append(
-				str(timer.name) + " " + str( data )
+				str(timer.name) + ": " + msg
 			)
 		
 		else:
-			timer.log(612, "[SeriesPlugin] Failed." )
+			msg = _("No data available")
+			log.debug(msg)
+			timer.log(612, "[SeriesPlugin]" + " " + msg)
 			SeriesPluginTimer.data.append(
-				str(timer.name) + " " + _("No data available")
+				str(timer.name) + ": " + msg
 			)
 		
 		timer.sp_in_queue = False
 		
-		if config.plugins.seriesplugin.timer_popups.value or config.plugins.seriesplugin.timer_popups_success.value:
-			
-			SeriesPluginTimer.counter = SeriesPluginTimer.counter +1
-			
-			if SeriesPluginTimer.data or config.plugins.seriesplugin.timer_popups_success.value:
+		SeriesPluginTimer.counter = SeriesPluginTimer.counter +1
+		
+		# Maybe there is a better way to avoid multiple Popups
+		from SeriesPlugin import getInstance
+		
+		instance = getInstance()
+		
+		if instance.thread.empty() and instance.thread.finished():
+		
+			if SeriesPluginTimer.data:
+				msg = "SeriesPlugin:\n" + _("Timer rename has been finished with %d errors:\n") % (len(SeriesPluginTimer.data)) +"\n" +"\n".join(SeriesPluginTimer.data)
+				log.warning(msg)
 				
-				# Maybe there is a better way to avoid multiple Popups
-				from SeriesPlugin import getInstance
+			else:
+				if SeriesPluginTimer.counter > 0:
+					msg = "SeriesPlugin:\n" + _("%d timer renamed successfully") % (SeriesPluginTimer.counter)
+					log.success(msg)
 				
-				instance = getInstance()
-				
-				if instance.thread.empty() and instance.thread.finished():
-				
-					if SeriesPluginTimer.data:
-						AddPopup(
-							"SeriesPlugin:\n" + _("Timer rename has been finished with %d errors:\n") % (len(SeriesPluginTimer.data)) +"\n" +"\n".join(SeriesPluginTimer.data),
-							MessageBox.TYPE_ERROR,
-							int(config.plugins.seriesplugin.timer_popups_timeout.value),
-							'SP_PopUp_ID_TimerFinished'
-						)
-					else:
-						AddPopup(
-							"SeriesPlugin:\n" + _("%d timer renamed successfully") % (SeriesPluginTimer.counter),
-							MessageBox.TYPE_INFO,
-							int(config.plugins.seriesplugin.timer_popups_timeout.value),
-							'SP_PopUp_ID_TimerFinished'
-						)
-					SeriesPluginTimer.data = []
-					SeriesPluginTimer.counter = 0
+			SeriesPluginTimer.data = []
+			SeriesPluginTimer.counter = 0
+		
+		return timer

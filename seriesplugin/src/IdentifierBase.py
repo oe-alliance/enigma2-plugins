@@ -15,37 +15,26 @@ from thread import start_new_thread
 #from twisted.python.failure import Failure
 
 from time import sleep
-import socket
 
 from time import time
 from datetime import datetime, timedelta
-
-#import urllib2
-from urllib import urlencode
-from urllib2 import urlopen, URLError, Request, build_opener, HTTPCookieProcessor
 
 from Components.config import config
 from Tools.BoundFunction import boundFunction
 
 # Internal
 from ModuleBase import ModuleBase
-from Cacher import Cacher, INTER_QUERY_TIME
-from Channels import ChannelsBase
-from Logger import splog
-from Analytics import Analytics
+from Cacher import Cacher
+from Logger import log
 
 
 class MyException(Exception):
     pass
 
-class IdentifierBase(ModuleBase, Cacher, ChannelsBase, Analytics):
+class IdentifierBase2(ModuleBase, Cacher):
 	def __init__(self):
 		ModuleBase.__init__(self)
 		Cacher.__init__(self)
-		ChannelsBase.__init__(self)
-		Analytics.__init__(self)
-		
-		socket.setdefaulttimeout(5)
 		
 		self.max_time_drift = int(config.plugins.seriesplugin.max_time_drift.value) * 60
 		
@@ -72,7 +61,20 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase, Analytics):
 		
 		self.search_depth += 1
 		if( self.search_depth < config.plugins.seriesplugin.search_depths.value ):
-			return " ".join(name.split(" ")[:-1])
+			
+			if self.search_depth == 1:
+				if name.find("-") != -1:
+					alt = " ".join(name.split("-")[:-1]).strip()
+				else:
+					alt = " ".join(name.split(" ")[:-1])
+			else:
+				alt = " ".join(name.split(" ")[:-1])
+			
+			# Avoid searchs with: The, Der, Die, Das...
+			if len(alt) > 3:
+				return alt
+			else:
+				return ""
 		else:
 			return ""
 
@@ -85,64 +87,6 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase, Analytics):
 		
 		return filteredids
 
-
-	################################################
-	# URL functions
-	def getPage(self, url, headers={}, expires=INTER_QUERY_TIME, counter=0):
-		response = None
-		
-		splog("SSBase getPage", url)
-		
-		cached = self.getCached(url, expires)
-		
-		self.sendAnalytics(url, True if cached else False)
-		
-		if cached:
-			splog("SSBase cached")
-			response = cached
-		
-		else:
-			splog("SSBase not cached")
-			
-			try:
-				req = Request(url, headers=headers)
-				response = urlopen(req, timeout=15).read()
-				
-				#splog("SSBase response to cache: ", response) 
-				if response:
-					self.doCachePage(url, response)
-			
-			except URLError as e:
-				 # For Python 2.6
-				if counter > 2:
-					splog("SSBase URLError counter > 2")
-					raise MyException("There was an URLError: %r" % e)
-				elif hasattr(e, "code"):
-					splog("SSBase URLError code")
-					print e.code, e.msg, counter
-					sleep(2)
-					return self.getPage(url, headers, expires, counter+1)
-				else:
-					splog("SSBase URLError else")
-					raise MyException("There was an URLError: %r" % e)
-			
-			except socket.timeout as e:
-				 # For Python 2.7
-				if counter > 2:
-					splog("SSBase URLError counter > 2")
-					raise MyException("There was an SocketTimeout: %r" % e)
-				elif hasattr(e, "code"):
-					splog("SSBase URLError code")
-					print e.code, e.msg, counter
-					sleep(2)
-					return self.getPage(url, headers, expires, counter+1)
-				else:
-					splog("SSBase URLError else")
-					raise MyException("There was an SocketTimeout: %r" % e)
-			
-		splog("SSBase success")
-		return response
-	
 	################################################
 	# Service prototypes
 	@classmethod
@@ -165,6 +109,10 @@ class IdentifierBase(ModuleBase, Cacher, ChannelsBase, Analytics):
 
 	################################################
 	# To be implemented by subclass
+	def getLogo(self, future=True, today=False, elapsed=False):
+		# Return the name of the logo without extension .png
+		pass
+
 	def getEpisode(self, name, begin, end, service):
 		# On Success: Return a single season, episode, title tuple
 		# On Failure: Return a empty list or String or None

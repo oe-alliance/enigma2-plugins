@@ -154,13 +154,21 @@ msgstr "EPGRefresh Konfiguration Hilfe"
 msgid "Stop running refresh"
 msgstr "Laufende Aktualisierung stoppen"
 
-#: EPGRefreshConfiguration.py:57 plugin.py:240
+#: EPGRefreshConfiguration.py:57
 msgid "Pending Services"
-msgstr "ausstehende Kanäle"
+msgstr "Ausstehende Kanäle"
 
-#: EPGRefreshConfiguration.py:59 plugin.py:238
+#: plugin.py:240
+msgid "EPG-Refresh_Pending Services"
+msgstr "EPG-Refresh ausstehende Kanäle"
+
+#: EPGRefreshConfiguration.py:59
 msgid "Refresh now"
-msgstr " Jetzt Aktualisieren"
+msgstr " Jetzt aktualisieren"
+
+#: plugin.py:238
+msgid "EPG-Refresh_Refresh now"
+msgstr "EPG-Refresh jetzt aktualisieren"
 
 #: EPGRefreshConfiguration.py:62
 msgid "EPGRefresh Functions"
@@ -480,8 +488,8 @@ msgid "EXTENSIONMENU_PREFIX"
 msgstr "EPGRefresh"
 
 #: plugin.py:237
-msgid "EXTENSIONNAME_SETUP"
-msgstr "Konfiguration"
+msgid "EPG-Refresh_SetUp"
+msgstr "EPG-Refresh Konfiguration"
 
 #: plugin.py:237 plugin.py:293
 msgid "Automatically refresh EPG"
@@ -492,8 +500,8 @@ msgid "Start EPGrefresh immediately"
 msgstr "Eine Aktualisierung sofort starten"
 
 #: plugin.py:239
-msgid "Stop Refresh"
-msgstr "Aktualisierung stoppen"
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "EPG-Refresh Aktualisierung stoppen"
 
 #: plugin.py:239
 msgid "Stop Running EPG-refresh"

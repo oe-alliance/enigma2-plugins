@@ -1,7 +1,7 @@
 # for localized messages
 from . import _
 
-from enigma import eEPGCache, eTimer, eServiceReference, eServiceCenter, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent
+from enigma import eEPGCache, eTimer, eServiceReference, eServiceCenter, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, getDesktop
 import NavigationInstance
 
 from Tools.LoadPixmap import LoadPixmap
@@ -52,6 +52,8 @@ service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 
 class EPGSearchList(EPGList):
 	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None):
 		EPGList.__init__(self, type, selChangedCB, timer)
+		self.listSizeWidth = None
+		self.screenwidth = getDesktop(0).size().width()
 		self.l.setBuildFunc(self.buildEPGSearchEntry)
 
 		if PartnerBoxIconsEnabled:
@@ -64,6 +66,10 @@ class EPGSearchList(EPGList):
 					LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, 'Extensions/EPGSearchicons/epgclock_add.png'))]
 
 	def buildEPGSearchEntry(self, service, eventId, beginTime, duration, EventName):
+		lsw = self.l.getItemSize().width()
+		if self.listSizeWidth != lsw: #recalc size if scrollbar is shown
+			self.listSizeWidth = lsw
+			self.recalcEntrySize()
 		self.wasEntryAutoTimer = None
 		clock_pic = self.getPixmapForEntry(service, eventId, beginTime, duration)
 		clock_pic_partnerbox = None
@@ -84,33 +90,41 @@ class EPGSearchList(EPGList):
 			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _(strftime("%a", t))),
 			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, strftime("%e/%m, %-H:%M", t))
 		]
+		if self.screenwidth and self.screenwidth == 1920:
+			picx = 25
+			picy = 25
+			posy = 13
+		else:
+			picx = 21
+			picy = 21
+			posy = 11
 		if clock_pic or clock_pic_partnerbox:
 			if clock_pic and clock_pic_partnerbox and self.wasEntryAutoTimer:
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-81, (r3.h/2-11), 25, 25, self.autotimericon),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-54, (r3.h/2-11), 25, 25, self.clocks[clock_pic]),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-27, (r3.h/2-11), 25, 25, self.clocks[clock_pic_partnerbox]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-85, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-picx*3, (r3.h/2-posy), picx, picy, self.autotimericon),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-picx*2, (r3.h/2-posy), picx, picy, self.clocks[clock_pic]),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-picx, (r3.h/2-posy), picx, picy, self.clocks[clock_pic_partnerbox]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-picx*3, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			elif clock_pic and clock_pic_partnerbox:
 				# Partnerbox and local
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-54, (r3.h/2-11), 25, 25, self.clocks[clock_pic]),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-27, (r3.h/2-11), 25, 25, self.clocks[clock_pic_partnerbox]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-58, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-picx*2, (r3.h/2-posy), picx, picy, self.clocks[clock_pic]),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-picx, (r3.h/2-posy), picx, picy, self.clocks[clock_pic_partnerbox]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-picx*2, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			elif clock_pic_partnerbox:
 				# Partnerbox and local
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-27, (r3.h/2-11), 25, 25, self.clocks[clock_pic_partnerbox]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-31, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-picx, (r3.h/2-posy), picx, picy, self.clocks[clock_pic_partnerbox]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-picx, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			elif self.wasEntryAutoTimer:
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-54, (r3.h/2-11), 25, 25, self.autotimericon),
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-27, (r3.h/2-11), 25, 25, self.clocks[clock_pic]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-58, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-picx*2, (r3.h/2-posy), picx, picy, self.autotimericon),
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-picx, (r3.h/2-posy), picx, picy, self.clocks[clock_pic]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-picx*2, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 			else:
 				res.extend((
-					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-27, (r3.h/2-11), 25, 25, self.clocks[clock_pic]),
-					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-31, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
+					(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x+r3.w-picx, (r3.h/2-posy), picx, picy, self.clocks[clock_pic]),
+					(eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w-picx, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName)))
 		else:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
 		return res

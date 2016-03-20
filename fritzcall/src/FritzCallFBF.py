@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1202 $
-$Date: 2015-07-23 19:54:35 +0200 (Thu, 23 Jul 2015) $
-$Id: FritzCallFBF.py 1202 2015-07-23 17:54:35Z michael $
+$Revision: 1265 $
+$Date: 2016-02-24 19:45:50 +0100 (Wed, 24 Feb 2016) $
+$Id: FritzCallFBF.py 1265 2016-02-24 18:45:50Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -17,8 +17,8 @@ $Id: FritzCallFBF.py 1202 2015-07-23 17:54:35Z michael $
 # W1401 Anomalous backslash in string
 # pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,W1401
 
-from . import _, __, debug #@UnresolvedImport # pylint: disable=W0611,F0401
-from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS
+from . import _, __ #@UnresolvedImport # pylint: disable=W0611,F0401
+from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
 from twisted.web.client import getPage #@UnresolvedImport
@@ -26,6 +26,10 @@ from nrzuname import html2unicode
 
 from urllib import urlencode 
 import re, time, hashlib
+
+import logging
+#debug = logging.getLogger(__name__ + "XXX").debug
+debug = logging.getLogger(__name__).debug
 
 FBF_boxInfo = 0
 FBF_upTime = 1
@@ -72,7 +76,8 @@ def resolveNumber(number, default=None, phonebook=None):
 	return number
 
 def cleanNumber(number):
-	# debug("[FritzCallFBF] cleanNumber: " + number)
+	# self.debug("[FritzCallFBF] " + number)
+	number = re.sub("<.*?>", "", number)
 	newNumber = (" ".join(re.findall(r"[+0-9*#ABCD]*", number))).replace(" ","")
 	if len(newNumber) == 0:
 		return number
@@ -87,15 +92,17 @@ def cleanNumber(number):
 	return number
 		
 class FritzCallFBF:
+	debug = logging.getLogger("[FritzCallFBF]").debug
+
 	def __init__(self):
-		debug("[FritzCallFBF] __init__")
+		self.debug("")
 		self._callScreen = None
 		self._md5LoginTimestamp = None
 		self._md5Sid = '0000000000000000'
 		self._callTimestamp = 0
 		self._callList = []
 		self._callType = config.plugins.FritzCall.fbfCalls.value
-		self.info = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
+		self.information = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
 		self.getInfo(None)
 		self.blacklist = ([], [])
 		self.readBlacklist()
@@ -104,101 +111,101 @@ class FritzCallFBF:
 		self.phonebooksFBF = []
 
 	def _notify(self, text):
-		debug("[FritzCallFBF] notify: " + text)
+		self.debug(text)
 		self._md5LoginTimestamp = None
 		if self._callScreen:
-			debug("[FritzCallFBF] notify: try to close callScreen")
+			self.debug("try to close callScreen")
 			self._callScreen.close()
 			self._callScreen = None
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 			
 	def _login(self, callback=None):
-		debug("[FritzCallFBF] _login")
+		self.debug("")
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login"))
 		if self._md5LoginTimestamp and ((time.time() - self._md5LoginTimestamp) < float(9.5*60)) and self._md5Sid != '0000000000000000': # new login after 9.5 minutes inactivity 
-			debug("[FritzCallFBF] _login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
+			self.debug("[FritzCallFBF] renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
 			self._md5LoginTimestamp = time.time()
 			callback(None)
 		else:
-			debug("[FritzCallFBF] _login: not logged in or outdated login")
+			self.debug("not logged in or outdated login")
 			# http://fritz.box/cgi-bin/webcm?getpage=../html/login_sid.xml
 			parms = urlencode({'getpage':'../html/login_sid.xml'})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
-			debug("[FritzCallFBF] _login: '" + url + "' parms: '" + parms + "'")
+			self.debug("'" + url + "' parms: '" + parms + "'")
 			getPage(url,
 				method="POST",
 				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
 						}, postdata=parms).addCallback(lambda x: self._md5Login(callback,x)).addErrback(lambda x:self._oldLogin(callback,x))
 
 	def _oldLogin(self, callback, error): 
-		debug("[FritzCallFBF] _oldLogin: " + repr(error))
+		self.debug(repr(error))
 		self._md5LoginTimestamp = None
 		if config.plugins.FritzCall.password.value != "":
 			parms = "login:command/password=%s" % (config.plugins.FritzCall.password.value)
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
-			debug("[FritzCallFBF] _oldLogin: '" + url + "' parms: '" + parms + "'")
+			self.debug("'" + url + "' parms: '" + parms + "'")
 			getPage(url,
 				method="POST",
 				agent=USERAGENT,
 				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
 						}, postdata=parms).addCallback(self._gotPageLogin).addCallback(callback).addErrback(self._errorLogin)
 		elif callback:
-			debug("[FritzCallFBF] _oldLogin: no password, calling " + repr(callback))
+			self.debug("no password, calling " + repr(callback))
 			callback(None)
 
 	def _md5Login(self, callback, sidXml):
 		def buildResponse(challenge, text):
-			debug("[FritzCallFBF] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + __(text))
+			self.debug("_md5Login: challenge: " + challenge + ' text: ' + __(text))
 			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
 			for i in range(len(text)):
 				if ord(text[i]) > 255:
 					text[i] = '.'
 			md5 = hashlib.md5()
 			md5.update(text) # pylint: disable=E1101
-			debug("[FritzCallFBF] md5Login/buildResponse: " + md5.hexdigest())
+			self.debug("md5Login: " + md5.hexdigest())
 			return challenge + '-' + md5.hexdigest()
 
-		debug("[FritzCallFBF] _md5Login")
+		self.debug("")
 		found = re.match('.*<SID>([^<]*)</SID>', sidXml, re.S)
 		if found:
 			self._md5Sid = found.group(1)
-			debug("[FritzCallFBF] _md5Login: SID "+ self._md5Sid)
+			self.debug("SID "+ self._md5Sid)
 		else:
-			debug("[FritzCallFBF] _md5Login: no sid! That must be an old firmware.")
+			self.debug("no sid! That must be an old firmware.")
 			self._oldLogin(callback, 'No error')
 			return
 
-		debug("[FritzCallFBF] _md5Login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
+		self.debug("renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
 		self._md5LoginTimestamp = time.time()
 		if sidXml.find('<iswriteaccess>0</iswriteaccess>') != -1:
-			debug("[FritzCallFBF] _md5Login: logging in")
+			self.debug("logging in")
 			found = re.match('.*<Challenge>([^<]*)</Challenge>', sidXml, re.S)
 			if found:
 				challenge = found.group(1)
-				debug("[FritzCallFBF] _md5Login: challenge " + challenge)
+				self.debug("challenge " + challenge)
 			else:
 				challenge = None
-				debug("[FritzCallFBF] _md5Login: login necessary and no challenge! That is terribly wrong.")
+				self.debug("login necessary and no challenge! That is terribly wrong.")
 			parms = urlencode({
 							'getpage':'../html/de/menus/menu2.html', # 'var:pagename':'home', 'var:menu':'home', 
 							'login:command/response': buildResponse(challenge, config.plugins.FritzCall.password.value),
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
-			debug("[FritzCallFBF] _md5Login: '" + url + "' parms: '" + parms + "'")
+			self.debug("'" + url + "' parms: '" + parms + "'")
 			getPage(url,
 				method="POST",
 				agent=USERAGENT,
 				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
 						}, postdata=parms).addCallback(self._gotPageLogin).addCallback(callback).addErrback(self._errorLogin)
 		elif callback: # we assume value 1 here, no login necessary
-			debug("[FritzCallFBF] _md5Login: no login necessary")
+			self.debug("no login necessary")
 			callback(None)
 
 	def _gotPageLogin(self, html):
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login verification"))
-		debug("[FritzCallFBF] _gotPageLogin: verify login")
+		self.debug("verify login")
 		start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
 		if start != -1:
 			start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
@@ -211,11 +218,11 @@ class FritzCallFBF:
 		found = re.match('.*<input type="hidden" name="sid" value="([^\"]*)"', html, re.S)
 		if found:
 			self._md5Sid = found.group(1)
-			debug("[FritzCallFBF] _gotPageLogin: found sid: " + self._md5Sid)
+			self.debug("found sid: " + self._md5Sid)
 
 	def _errorLogin(self, error):
 		global fritzbox
-		debug("[FritzCallFBF] _errorLogin: %s" % (error))
+		self.debug(error)
 		text = _("FRITZ!Box - Error logging in: %s\nDisabling plugin.") % error.getErrorMessage()
 		# config.plugins.FritzCall.enable.value = False
 		fritzbox = None
@@ -229,7 +236,7 @@ class FritzCallFBF:
 							'login:command/logout':'bye bye Fritz'
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
-			debug("[FritzCallFBF] logout: '" + url + "' parms: '" + parms + "'")
+			self.debug("'" + url + "' parms: '" + parms + "'")
 			getPage(url,
 				method="POST",
 				agent=USERAGENT,
@@ -237,16 +244,16 @@ class FritzCallFBF:
 						}, postdata=parms).addErrback(self._errorLogout)
 
 	def _errorLogout(self, error):
-		debug("[FritzCallFBF] _errorLogout: %s" % (error))
+		self.debug(error)
 		text = _("FRITZ!Box - Error logging out: %s") % error.getErrorMessage()
 		self._notify(text)
 
 	def loadFritzBoxPhonebook(self, phonebook):
-		debug("[FritzCallFBF] loadFritzBoxPhonebook")
+		self.debug("")
 		if config.plugins.FritzCall.fritzphonebook.value:
 			self.phonebook = phonebook
 			self._phoneBookID = '0'
-			debug("[FritzCallFBF] loadFritzBoxPhonebook: logging in")
+			self.debug("logging in")
 			self._login(self._loadFritzBoxPhonebook)
 
 	def _loadFritzBoxPhonebook(self, html):
@@ -271,7 +278,7 @@ class FritzCallFBF:
 						'telcfg:settings/Phonebook/Books/Select':self._phoneBookID, # this selects always the first phonbook first
 						})
 		url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF] _loadFritzBoxPhonebook: '" + url + "' parms: '" + parms + "'")
+		self.debug("'" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -280,21 +287,21 @@ class FritzCallFBF:
 
 	def _parseFritzBoxPhonebook(self, html):
 
-		# debug("[FritzCallFBF] _parseFritzBoxPhonebook")
+		# self.debug("")
 
 		# first, let us get the charset
 		found = re.match('.*<meta http-equiv=content-type content="text/html; charset=([^"]*)">', html, re.S)
 		if found:
 			charset = found.group(1)
-			debug("[FritzCallFBF] _parseFritzBoxPhonebook: found charset: " + charset)
+			self.debug("found charset: " + charset)
 			html = html2unicode(html.replace(chr(0xf6),'').decode(charset)).encode('utf-8')
 		else: # this is kind of emergency conversion...
 			try:
-				debug("[FritzCallFBF] _parseFritzBoxPhonebook: try charset utf-8")
+				self.debug("try charset utf-8")
 				charset = 'utf-8'
 				html = html2unicode(html.decode('utf-8')).encode('utf-8') # this looks silly, but has to be
 			except UnicodeDecodeError:
-				debug("[FritzCallFBF] _parseFritzBoxPhonebook: try charset iso-8859-1")
+				self.debug("try charset iso-8859-1")
 				charset = 'iso-8859-1'
 				html = html2unicode(html.decode('iso-8859-1')).encode('utf-8') # this looks silly, but has to be
 
@@ -311,14 +318,14 @@ class FritzCallFBF:
 			# 
 			#  Photo could be fetched with http://192.168.0.1/lua/photo.lua?photo=<Path to picture[7:]&sid=????
 			#===============================================================================
-			debug("[FritzCallFBF] _parseFritzBoxPhonebook: discovered newer firmware")
+			self.debug("discovered newer firmware")
 			found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name\d+" value="(?:' + config.plugins.FritzCall.fritzphonebookName.value +')" id="uiPostPhonebookName\d+" disabled>\s*<input type="hidden" name="telcfg:settings/Phonebook/Books/Id\d+" value="(\d+)" id="uiPostPhonebookId\d+" disabled>', html, re.S)
 			if found:
 				phoneBookID = found.group(1)
-				debug("[FritzCallFBF] _parseFritzBoxPhonebook: found dreambox phonebook with id: " + phoneBookID)
+				self.debug("found dreambox phonebook with id: " + phoneBookID)
 				if self._phoneBookID != phoneBookID:
 					self._phoneBookID = phoneBookID
-					debug("[FritzCallFBF] _parseFritzBoxPhonebook: reload phonebook")
+					self.debug("reload phonebook")
 					self._loadFritzBoxPhonebook(None) # reload with dreambox phonebook
 					return
 
@@ -329,10 +336,10 @@ class FritzCallFBF:
 				# TODO: replace re.match?
 				found = re.match('TrFonName\("[^"]*", "([^"]+)", "[^"]*"(?:, "[^"]*")?\);', entry.group(1))
 				if found:
-					# debug("[FritzCallFBF] _parseFritzBoxPhonebook: name: %s" %found.group(1))
+					# self.debug("name: %s" %found.group(1))
 					name = found.group(1).replace(',','').strip()
 				else:
-					debug("[FritzCallFBF] _parseFritzBoxPhonebook: could not find name")
+					self.debug("could not find name")
 					continue
 				# TrFonNr (type, rufnr, code, vanity)
 				detailmask = re.compile('TrFonNr\("([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)"\);', re.S)
@@ -340,7 +347,7 @@ class FritzCallFBF:
 				for found in details:
 					thisnumber = found.group(2).strip()
 					if not thisnumber:
-						debug("[FritzCallFBF] Ignoring entry with empty number for '''%s'''" % (__(name)))
+						self.debug("Ignoring entry with empty number for '''%s'''" % (__(name)))
 						continue
 					else:
 						thisname = name
@@ -361,11 +368,11 @@ class FritzCallFBF:
 						thisnumber = cleanNumber(thisnumber)
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						if not self.phonebook.phonebook.has_key(thisnumber):
-							# debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
+							# self.debug("Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
 							self.phonebook.phonebook[thisnumber] = thisname
 						else:
 							pass
-							# debug("[FritzCallFBF] Ignoring '''%s''' with '''%s'''" % (thisname.strip(), thisnumber))
+							# self.debug("Ignoring '''%s''' with '''%s'''" % (thisname.strip(), thisnumber))
 
 		# elif re.search('document.write\(TrFon\(', html):
 		elif html.find('document.write(TrFon(') != -1:
@@ -378,7 +385,7 @@ class FritzCallFBF:
 			entries = entrymask.finditer(html)
 			for found in entries:
 				name = found.group(1).strip().replace(',','')
-				# debug("[FritzCallFBF] pos: %s name: %s" %(found.group(0),name))
+				# self.debug("pos: %s name: %s" %(found.group(0),name))
 				thisnumber = found.group(2).strip()
 				if config.plugins.FritzCall.showShortcut.value and found.group(3):
 					name = name + ", " + _("Shortcut") + ": " + found.group(3)
@@ -388,22 +395,22 @@ class FritzCallFBF:
 					# name = name.encode('utf-8')
 					# Beware: strings in phonebook.phonebook have to be in utf-8!
 					if not self.phonebook.phonebook.has_key(thisnumber):
-						# debug("[FritzCallFBF] Adding '''%s''' with '''%s'''" % (name, __(thisnumber)))
+						# self.debug("Adding '''%s''' with '''%s'''" % (name, __(thisnumber)))
 						self.phonebook.phonebook[thisnumber] = name
 					else:
-						debug("[FritzCallFBF] Ignoring '''%s''' with '''%s'''" % (__(name), __(thisnumber)))
+						self.debug("Ignoring '''%s''' with '''%s'''" % (__(name), __(thisnumber)))
 				else:
-					debug("[FritzCallFBF] ignoring empty number for %s" % name)
+					self.debug("ignoring empty number for %s" % name)
 				continue
 		elif self._md5Sid == '0000000000000000': # retry, it could be a race condition
-			debug("[FritzCallFBF] _parseFritzBoxPhonebook: retry loading phonebook")
+			self.debug("retry loading phonebook")
 			self.loadFritzBoxPhonebook(self.phonebook)
 		else:
-			debug("[FritzCallFBF] _parseFritzBoxPhonebook: could not read FBF phonebook; wrong version?")
+			self.debug("could not read FBF phonebook; wrong version?")
 			self._notify(_("Could not read FRITZ!Box phonebook; wrong version?"))
 
 	def _errorLoad(self, error):
-		debug("[FritzCallFBF] _errorLoad: %s" % (error))
+		self.debug(error)
 		text = _("FRITZ!Box - Could not load phonebook: %s") % error.getErrorMessage()
 		self._notify(text)
 
@@ -414,18 +421,18 @@ class FritzCallFBF:
 		# - getPage -> _gotPageLogin
 		# - loginCallback (_getCalls)
 		# - getPage -> _getCalls1
-		debug("[FritzCallFBF] getCalls")
+		self.debug("")
 		self._callScreen = callScreen
 		self._callType = callType
 		if (time.time() - self._callTimestamp) > 180: 
-			debug("[FritzCallFBF] getCalls: outdated data, login and get new ones: " + time.ctime(self._callTimestamp) + " time: " + time.ctime())
+			self.debug("outdated data, login and get new ones: " + time.ctime(self._callTimestamp) + " time: " + time.ctime())
 			self._callTimestamp = time.time()
 			self._login(lambda x:self._getCalls(callback, x))
 		elif not self._callList:
-			debug("[FritzCallFBF] getCalls: time is ok, but no callList")
+			self.debug("time is ok, but no callList")
 			self._getCalls1(callback)
 		else:
-			debug("[FritzCallFBF] getCalls: time is ok, callList is ok")
+			self.debug("time is ok, callList is ok")
 			self._gotPageCalls(callback)
 
 	def _getCalls(self, callback, html):
@@ -445,7 +452,7 @@ class FritzCallFBF:
 		# we need this to fill Anrufliste.csv
 		# http://repeater1/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:menu=fon&var:pagename=foncalls
 		#
-		debug("[FritzCallFBF] _getCalls")
+		self.debug("")
 		if html:
 			#===================================================================
 			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
@@ -470,7 +477,7 @@ class FritzCallFBF:
 		#
 		# finally we should have successfully lgged in and filled the csv
 		#
-		debug("[FritzCallFBF] _getCalls1")
+		self.debug("")
 		if self._callScreen:
 			self._callScreen.updateStatus(_("finishing"))
 		parms = urlencode({'getpage':'../html/de/FRITZ!Box_Anrufliste.csv', 'sid':self._md5Sid})
@@ -480,7 +487,7 @@ class FritzCallFBF:
 	def _gotPageCalls(self, callback, csvIn=""):
 
 		if csvIn:
-			debug("[FritzCallFBF] _gotPageCalls: got csv, setting callList")
+			self.debug("got csv, setting callList")
 			if self._callScreen:
 				self._callScreen.updateStatus(_("done"))
 			if csvIn.find('Melden Sie sich mit dem Kennwort der FRITZ!Box an') != -1:
@@ -493,12 +500,12 @@ class FritzCallFBF:
 			lines = csvIn.splitlines()
 			self._callList = lines
 		elif self._callList:
-			debug("[FritzCallFBF] _gotPageCalls: got no csv, but have callList")
+			self.debug("got no csv, but have callList")
 			if self._callScreen:
 				self._callScreen.updateStatus(_("done, using last list"))
 			lines = self._callList
 		else:
-			debug("[FritzCallFBF] _gotPageCalls: Could not get call list; wrong version?")
+			self.debug("Could not get call list; wrong version?")
 			self._notify(_("Could not get call list; wrong version?"))
 			return
 			
@@ -506,7 +513,7 @@ class FritzCallFBF:
 		if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
 			filtermsns = map(lambda x: x.strip(), config.plugins.FritzCall.filtermsn.value.split(","))
 			# TODO: scramble filtermsns
-			debug("[FritzCallFBF] _gotPageCalls: filtermsns %s" % (repr(filtermsns)))
+			self.debug("filtermsns %s" % (repr(filtermsns)))
 
 		# Typ;Datum;Name;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
 		# 0  ;1	   ;2   ;3		  ;4		  ;5			   ;6
@@ -514,7 +521,7 @@ class FritzCallFBF:
 		lines = filter(lambda line: (len(line)==7 and (line[0]=="Typ" or self._callType == '.' or line[0] == self._callType)), lines)
 
 		for line in lines:
-			# debug("[FritzCallFBF] _gotPageCalls: line %s" % (line))
+			# self.debug("line %s" % (line))
 			direct = line[0]
 			date = line[1]
 			length = line[6]
@@ -530,9 +537,9 @@ class FritzCallFBF:
 			else:
 				here = line[5]
 			if direct != "Typ" and config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
-				# debug("[FritzCallFBF] _gotPageCalls: check %s" % (here))
+				# self.debug("check %s" % (here))
 				if here not in filtermsns:
-					# debug("[FritzCallFBF] _gotPageCalls: skip %s" % (here))
+					# self.debug("skip %s" % (here))
 					continue
 			here = resolveNumber(here, line[4], self.phonebook)
 
@@ -542,12 +549,12 @@ class FritzCallFBF:
 			callListL.append((number, date, direct, remote, length, here))
 
 		if callback:
-			# debug("[FritzCallFBF] _gotPageCalls call callback with\n" + repr(callListL))
+			# self.debug("call callback with\n" + repr(callListL))
 			callback(callListL)
 		self._callScreen = None
 
 	def _errorCalls(self, error):
-		debug("[FritzCallFBF] _errorCalls: %s" % (error))
+		self.debug(error)
 		text = _("FRITZ!Box - Could not load calls: %s") % error.getErrorMessage()
 		self._notify(text)
 
@@ -578,7 +585,7 @@ class FritzCallFBF:
 			'telcfg:command/Dial':number,
 			'sid':self._md5Sid
 			})
-		debug("[FritzCallFBF] dial url: '" + url + "' parms: '" + parms + "'")
+		self.debug("url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -588,16 +595,16 @@ class FritzCallFBF:
 			postdata=parms).addCallback(self._okDial).addErrback(self._errorDial)
 
 	def _okDial(self, html): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF] okDial")
+		self.debug("")
 
 	def _errorDial(self, error):
-		debug("[FritzCallFBF] errorDial: $s" % error)
+		self.debug(error)
 		text = _("FRITZ!Box - Dialling failed: %s") % error.getErrorMessage()
 		self._notify(text)
 
 	def changeWLAN(self, statusWLAN, callback):
-		''' get status info from FBF '''
-		debug("[FritzCallFBF] changeWLAN start")
+		''' get status information from FBF '''
+		self.debug("")
 		if not statusWLAN or (statusWLAN != '1' and statusWLAN != '0'):
 			return
 		self._login(lambda x: self._changeWLAN(statusWLAN, callback, x))
@@ -624,7 +631,7 @@ class FritzCallFBF:
 			'wlan:settings/ap_enabled':str(statusWLAN),
 			'sid':self._md5Sid
 			})
-		debug("[FritzCallFBF] changeWLAN url: '" + url + "' parms: '" + parms + "'")
+		self.debug("url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -634,18 +641,18 @@ class FritzCallFBF:
 			postdata=parms).addCallback(self._okChangeWLAN, callback).addErrback(self._errorChangeWLAN, callback)
 
 	def _okChangeWLAN(self, callback, html): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF] _okChangeWLAN")
+		self.debug("")
 		callback()
 
 	def _errorChangeWLAN(self, callback, error):
-		debug("[FritzCallFBF] _errorChangeWLAN: $s" % error)
+		self.debug(error)
 		text = _("FRITZ!Box - Failed changing WLAN: %s") % error.getErrorMessage()
 		self._notify(text)
 		callback()
 
 	def changeMailbox(self, whichMailbox, callback):
 		''' switch mailbox on/off '''
-		debug("[FritzCallFBF] changeMailbox start: " + str(whichMailbox))
+		self.debug("start: " + str(whichMailbox))
 		self._login(lambda x: self._changeMailbox(whichMailbox, callback, x))
 
 	def _changeMailbox(self, whichMailbox, callback, html):
@@ -661,11 +668,11 @@ class FritzCallFBF:
 				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
 				self._errorChangeMailbox(callback, 'Login: ' + html[start, html.find('</p>', start)])
 				return
-		debug("[FritzCallFBF] _changeMailbox")
+		self.debug("")
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
 		if whichMailbox == -1:
 			for i in range(5):
-				if self.info[FBF_tamActive][i+1]:
+				if self.information[FBF_tamActive][i+1]:
 					state = '0'
 				else:
 					state = '1'
@@ -673,7 +680,7 @@ class FritzCallFBF:
 					'tam:settings/TAM'+str(i)+'/Active':state,
 					'sid':self._md5Sid
 					})
-				debug("[FritzCallFBF] changeMailbox url: '" + url + "' parms: '" + parms + "'")
+				self.debug("url: '" + url + "' parms: '" + parms + "'")
 				getPage(url,
 					method="POST",
 					agent=USERAGENT,
@@ -682,9 +689,9 @@ class FritzCallFBF:
 							'Content-Length': str(len(parms))},
 					postdata=parms).addCallback(self._okChangeMailbox, callback).addErrback(self._errorChangeMailbox, callback)
 		elif whichMailbox > 4:
-			debug("[FritzCallFBF] changeMailbox invalid mailbox number")
+			self.debug("invalid mailbox number")
 		else:
-			if self.info[FBF_tamActive][whichMailbox+1]:
+			if self.information[FBF_tamActive][whichMailbox+1]:
 				state = '0'
 			else:
 				state = '1'
@@ -692,7 +699,7 @@ class FritzCallFBF:
 				'tam:settings/TAM'+str(whichMailbox)+'/Active':state,
 				'sid':self._md5Sid
 				})
-			debug("[FritzCallFBF] changeMailbox url: '" + url + "' parms: '" + parms + "'")
+			self.debug("url: '" + url + "' parms: '" + parms + "'")
 			getPage(url,
 				method="POST",
 				agent=USERAGENT,
@@ -702,23 +709,23 @@ class FritzCallFBF:
 				postdata=parms).addCallback(self._okChangeMailbox, callback).addErrback(self._errorChangeMailbox, callback)
 
 	def _okChangeMailbox(self, callback, html): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF] _okChangeMailbox")
+		self.debug("")
 		callback()
 
 	def _errorChangeMailbox(self, callback, error):
-		debug("[FritzCallFBF] _errorChangeMailbox: $s" % error)
+		self.debug(error)
 		text = _("FRITZ!Box - Failed changing Mailbox: %s") % error.getErrorMessage()
 		self._notify(text)
 		callback()
 
 	def getInfo(self, callback):
-		''' get status info from FBF '''
-		debug("[FritzCallFBF] getInfo")
+		''' get status information from FBF '''
+		self.debug("")
 		self._login(lambda x:self._getInfo(callback, x))
 		
 	def _getInfo(self, callback, html):
 		# http://192.168.178.1/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:pagename=home&var:menu=home
-		debug("[FritzCallFBF] _getInfo: verify login")
+		self.debug("verify login")
 		if html:
 			#===================================================================
 			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
@@ -740,7 +747,7 @@ class FritzCallFBF:
 			'var:menu':'home',
 			'sid':self._md5Sid
 			})
-		debug("[FritzCallFBF] _getInfo url: '" + url + "' parms: '" + parms + "'")
+		self.debug("url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -751,21 +758,21 @@ class FritzCallFBF:
 
 	def _okGetInfo(self, callback, html):
 		def readInfo(html):
-			if self.info:
-				(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.info
+			if self.information:
+				(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.information
 			else:
 				(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = (None, None, None, None, None, None, None, None, None, None)
 
-			debug("[FritzCallFBF] _okGetInfo/readinfo")
+			self.debug("_okGetInfo")
 			found = re.match('.*<table class="tborder" id="tProdukt">\s*<tr>\s*<td style="padding-top:2px;">([^<]*)</td>\s*<td style="padding-top:2px;text-align:right;">\s*([^\s]*)\s*</td>', html, re.S)
 			if found:
 				boxInfo = found.group(1)+ ', ' + found.group(2)
 				boxInfo = boxInfo.replace('&nbsp;',' ')
-				# debug("[FritzCallFBF] _okGetInfo Boxinfo: " + boxInfo)
+				# self.debug("Boxinfo: " + boxInfo)
 			else:
 				found = re.match('.*<p class="ac">([^<]*)</p>', html, re.S)
 				if found:
-					# debug("[FritzCallFBF] _okGetInfo Boxinfo: " + found.group(1))
+					# self.debug("Boxinfo: " + found.group(1))
 					boxInfo = found.group(1)
 
 			if html.find('home_coninf.txt') != -1:
@@ -774,7 +781,7 @@ class FritzCallFBF:
 					'getpage':'../html/de/home/home_coninf.txt',
 					'sid':self._md5Sid
 					})
-				# debug("[FritzCallFBF] get coninfo: url: '" + url + "' parms: '" + parms + "'")
+				# self.debug("get coninfo: url: '" + url + "' parms: '" + parms + "'")
 				getPage(url,
 					method="POST",
 					agent=USERAGENT,
@@ -785,17 +792,17 @@ class FritzCallFBF:
 			else:
 				found = re.match('.*if \(isNaN\(jetzt\)\)\s*return "";\s*var str = "([^"]*)";', html, re.S)
 				if found:
-					# debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
+					# self.debug("Uptime: " + found.group(1))
 					upTime = found.group(1)
 				else:
 					found = re.match('.*str = g_pppSeit \+"([^<]*)<br>"\+mldIpAdr;', html, re.S)
 					if found:
-						# debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
+						# self.debug("Uptime: " + found.group(1))
 						upTime = found.group(1)
 	
 				found = re.match(".*IpAdrDisplay\('([.\d]+)'\)", html, re.S)
 				if found:
-					# debug("[FritzCallFBF] _okGetInfo IpAdrDisplay: " + found.group(1))
+					# self.debug("IpAdrDisplay: " + found.group(1))
 					ipAddress = found.group(1)
 
 			if html.find('g_tamActive') != -1:
@@ -808,7 +815,7 @@ class FritzCallFBF:
 						tamActive[0] += 1
 						tamActive[i] = True
 					i += 1
-				# debug("[FritzCallFBF] _okGetInfo tamActive: " + str(tamActive))
+				# self.debug("tamActive: " + str(tamActive))
 		
 			if html.find('home_dect.txt') != -1:
 				url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
@@ -816,7 +823,7 @@ class FritzCallFBF:
 					'getpage':'../html/de/home/home_dect.txt',
 					'sid':self._md5Sid
 					})
-				# debug("[FritzCallFBF] get coninfo: url: '" + url + "' parms: '" + parms + "'")
+				# self.debug("get coninfo: url: '" + url + "' parms: '" + parms + "'")
 				getPage(url,
 					method="POST",
 					agent=USERAGENT,
@@ -828,12 +835,12 @@ class FritzCallFBF:
 				if html.find('countDect2') != -1:
 					entries = re.compile('if \("1" == "1"\) countDect2\+\+;', re.S).findall(html)
 					dectActive = len(entries)
-					# debug("[FritzCallFBF] _okGetInfo dectActive: " + str(dectActive))
+					# self.debug("dectActive: " + str(dectActive))
 
 			found = re.match('.*var g_intFaxActive = "0";\s*if \("1" != ""\) {\s*g_intFaxActive = "1";\s*}\s*', html, re.S)
 			if found:
 				faxActive = True
-				# debug("[FritzCallFBF] _okGetInfo faxActive")
+				# self.debug("faxActive")
 
 			if html.find('cntRufumleitung') != -1:
 				entries = re.compile('mode = "1";\s*ziel = "[^"]+";\s*if \(mode == "1" \|\| ziel != ""\)\s*{\s*g_RufumleitungAktiv = true;', re.S).findall(html)
@@ -841,12 +848,12 @@ class FritzCallFBF:
 				entries = re.compile('if \("([^"]*)"=="([^"]*)"\) isAllIncoming\+\+;', re.S).finditer(html)
 				isAllIncoming = 0
 				for entry in entries:
-					# debug("[FritzCallFBF] _okGetInfo rufumlActive add isAllIncoming")
+					# self.debug("rufumlActive add isAllIncoming")
 					if entry.group(1) == entry.group(2):
 						isAllIncoming += 1
 				if isAllIncoming == 2 and rufumlActive > 0:
 					rufumlActive -= 1
-				# debug("[FritzCallFBF] _okGetInfo rufumlActive: " + str(rufumlActive))
+				# self.debug("rufumlActive: " + str(rufumlActive))
 
 			# /cgi-bin/webcm?getpage=../html/de/home/home_dsl.txt
 			# alternative through: fritz.box/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:menu=internet&var:pagename=overview
@@ -857,7 +864,7 @@ class FritzCallFBF:
 					'getpage':'../html/de/home/home_dsl.txt',
 					'sid':self._md5Sid
 					})
-				# debug("[FritzCallFBF] get dsl state: url: '" + url + "' parms: '" + parms + "'")
+				# self.debug("get dsl state: url: '" + url + "' parms: '" + parms + "'")
 				getPage(url,
 					method="POST",
 					agent=USERAGENT,
@@ -868,11 +875,11 @@ class FritzCallFBF:
 			else:
 				found = re.match('.*function DslStateDisplay \(state\){\s*var state = "(\d+)";', html, re.S)
 				if found:
-					# debug("[FritzCallFBF] _okGetInfo DslState: " + found.group(1))
+					# self.debug("DslState: " + found.group(1))
 					dslState = [ found.group(1), None, None ] # state, speed
 					found = re.match('.*function DslStateDisplay \(state\){\s*var state = "\d+";.*?if \("3130" != "0"\) str = "([^"]*)";', html, re.S)
 					if found:
-						# debug("[FritzCallFBF] _okGetInfo DslSpeed: " + found.group(1).strip())
+						# self.debug("DslSpeed: " + found.group(1).strip())
 						dslState[1] = found.group(1).strip()
 		
 			# /cgi-bin/webcm?getpage=../html/de/home/home_wlan.txt
@@ -883,7 +890,7 @@ class FritzCallFBF:
 					'getpage':'../html/de/home/home_wlan.txt',
 					'sid':self._md5Sid
 					})
-				# debug("[FritzCallFBF] get wlan state: url: '" + url + "' parms: '" + parms + "'")
+				# self.debug("get wlan state: url: '" + url + "' parms: '" + parms + "'")
 				getPage(url,
 					method="POST",
 					agent=USERAGENT,
@@ -894,103 +901,103 @@ class FritzCallFBF:
 			else:
 				found = re.match('.*function WlanStateLed \(state\){.*?return StateLed\("(\d+)"\);\s*}', html, re.S)
 				if found:
-					# debug("[FritzCallFBF] _okGetInfo WlanState: " + found.group(1))
+					# self.debug("WlanState: " + found.group(1))
 					wlanState = [ found.group(1), 0, 0 ] # state, encryption, number of devices
 					found = re.match('.*var (?:g_)?encryption = "(\d+)";', html, re.S)
 					if found:
-						# debug("[FritzCallFBF] _okGetInfo WlanEncrypt: " + found.group(1))
+						# self.debug("WlanEncrypt: " + found.group(1))
 						wlanState[1] = found.group(1)
 
 			return (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
 
-		debug("[FritzCallFBF] _okGetInfo")
+		self.debug("")
 		info = readInfo(html)
-		debug("[FritzCallFBF] _okGetInfo info: " + str(info))
-		self.info = info
+		self.debug("information: " + str(info))
+		self.information = info
 		if callback:
 			callback(info)
 
 	def _okSetDect(self, callback, html):
-		# debug("[FritzCallFBF] _okSetDect: " + html)
+		# self.debug(html)
 		# found = re.match('.*"connection_status":"(\d+)".*"connection_ip":"([.\d]+)".*"connection_detail":"([^"]+)".*"connection_uptime":"([^"]+)"', html, re.S)
 		if html.find('"dect_enabled": "1"') != -1:
-			# debug("[FritzCallFBF] _okSetDect: dect_enabled")
+			# self.debug("dect_enabled")
 			found = re.match('.*"dect_device_list":.*\[([^\]]*)\]', html, re.S)
 			if found:
-				# debug("[FritzCallFBF] _okSetDect: dect_device_list: %s" %(found.group(1)))
+				# self.debug("dect_device_list: %s" %(found.group(1)))
 				entries = re.compile('"1"', re.S).findall(found.group(1))
 				dectActive = len(entries)
-				(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dummy, faxActive, rufumlActive, guestAccess) = self.info
-				self.info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
-				debug("[FritzCallFBF] _okSetDect info: " + str(self.info))
+				(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dummy, faxActive, rufumlActive, guestAccess) = self.information
+				self.information = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
+				self.debug("information: " + str(self.information))
 		if callback:
-			callback(self.info)
+			callback(self.information)
 
 	def _okSetConInfo(self, callback, html):
-		# debug("[FritzCallFBF] _okSetConInfo: " + html)
+		# self.debug(html)
 		# found = re.match('.*"connection_status":"(\d+)".*"connection_ip":"([.\d]+)".*"connection_detail":"([^"]+)".*"connection_uptime":"([^"]+)"', html, re.S)
 		found = re.match('.*"connection_ip": "([.\d]+)".*"connection_uptime": "([^"]+)"', html, re.S)
 		if found:
-			# debug("[FritzCallFBF] _okSetConInfo: connection_ip: %s upTime: %s" %( found.group(1), found.group(2)))
+			# self.debug("connection_ip: %s upTime: %s" %( found.group(1), found.group(2)))
 			ipAddress = found.group(1)
 			upTime = found.group(2)
-			(boxInfo, dummy, dummy, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.info
-			self.info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
-			debug("[FritzCallFBF] _okSetWlanState info: " + str(self.info))
+			(boxInfo, dummy, dummy, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.information
+			self.information = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
+			self.debug("[FritzCallFBF] _okSetWlanState information: " + str(self.information))
 		else:
 			found = re.match('.*_ip": "([.\d]+)".*"connection_uptime": "([^"]+)"', html, re.S)
 			if found:
-				# debug("[FritzCallFBF] _okSetConInfo: _ip: %s upTime: %s" %( found.group(1), found.group(2)))
+				# self.debug("_ip: %s upTime: %s" %( found.group(1), found.group(2)))
 				ipAddress = found.group(1)
 				upTime = found.group(2)
-				(boxInfo, dummy, dummy, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.info
-				self.info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
-				debug("[FritzCallFBF] _okSetWlanState info: " + str(self.info))
+				(boxInfo, dummy, dummy, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.information
+				self.information = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
+				self.debug("information: " + str(self.information))
 		if callback:
-			callback(self.info)
+			callback(self.information)
 
 	def _okSetWlanState(self, callback, html):
-		# debug("[FritzCallFBF] _okSetWlanState: " + html)
+		# self.debug(html)
 		found = re.match('.*"ap_enabled": "(\d+)"', html, re.S)
 		if found:
-			# debug("[FritzCallFBF] _okSetWlanState: ap_enabled: " + found.group(1))
+			# self.debug("ap_enabled: " + found.group(1))
 			wlanState = [ found.group(1), None, None ]
 			found = re.match('.*"encryption": "(\d+)"', html, re.S)
 			if found:
-				# debug("[FritzCallFBF] _okSetWlanState: encryption: " + found.group(1))
+				# self.debug("encryption: " + found.group(1))
 				wlanState[1] = found.group(1)
 			found = re.match('.*"active_stations": "(\d+)"', html, re.S)
 			if found:
-				# debug("[FritzCallFBF] _okSetWlanState: active_stations: " + found.group(1))
+				# self.debug("active_stations: " + found.group(1))
 				wlanState[2] = found.group(1)
-			(boxInfo, upTime, ipAddress, dummy, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.info
-			self.info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
-			debug("[FritzCallFBF] _okSetWlanState info: " + str(self.info))
+			(boxInfo, upTime, ipAddress, dummy, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.information
+			self.information = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
+			self.debug("information: " + str(self.information))
 		if callback:
-			callback(self.info)
+			callback(self.information)
 
 	def _okSetDslState(self, callback, html):
-		# debug("[FritzCallFBF] _okSetDslState: " + html)
+		# self.debug(html)
 		found = re.match('.*"dsl_carrier_state": "(\d+)"', html, re.S)
 		if found:
-			# debug("[FritzCallFBF] _okSetDslState: dsl_carrier_state: " + found.group(1))
+			# self.debug("dsl_carrier_state: " + found.group(1))
 			dslState = [ found.group(1), "", None ]
 			found = re.match('.*"dsl_ds_nrate": "(\d+)"', html, re.S)
 			if found:
-				# debug("[FritzCallFBF] _okSetDslState: dsl_ds_nrate: " + found.group(1))
+				# self.debug("dsl_ds_nrate: " + found.group(1))
 				dslState[1] = found.group(1)
 			found = re.match('.*"dsl_us_nrate": "(\d+)"', html, re.S)
 			if found:
-				# debug("[FritzCallFBF] _okSetDslState: dsl_us_nrate: " + found.group(1))
+				# self.debug("dsl_us_nrate: " + found.group(1))
 				dslState[1] = dslState[1] + '/' + found.group(1)
-			(boxInfo, upTime, ipAddress, wlanState, dummy, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.info
-			self.info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
-			debug("[FritzCallFBF] _okSetDslState info: " + str(self.info))
+			(boxInfo, upTime, ipAddress, wlanState, dummy, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.information
+			self.information = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
+			self.debug("information: " + str(self.information))
 		if callback:
-			callback(self.info)
+			callback(self.information)
 
 	def _errorGetInfo(self, error):
-		debug("[FritzCallFBF] _errorGetInfo: %s" % (error))
+		self.debug(error)
 		text = _("FRITZ!Box - Error getting status: %s") % error.getErrorMessage()
 		self._notify(text)
 		# linkP = open("/tmp/FritzCall_errorGetInfo.htm", "w")
@@ -1025,7 +1032,7 @@ class FritzCallFBF:
 			'logic:command/reboot':'../gateway/commands/saveconfig.html',
 			'sid':self._md5Sid
 			})
-		debug("[FritzCallFBF] _reset url: '" + url + "' parms: '" + parms + "'")
+		self.debug("url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1035,10 +1042,10 @@ class FritzCallFBF:
 			postdata=parms)
 
 	def _okReset(self, html): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF] _okReset")
+		self.debug("")
 
 	def _errorReset(self, error):
-		debug("[FritzCallFBF] _errorReset: %s" % (error))
+		self.debug(error)
 		text = _("FRITZ!Box - Error resetting: %s") % error.getErrorMessage()
 		self._notify(text)
 
@@ -1067,7 +1074,7 @@ class FritzCallFBF:
 			'var:menu':'fon',
 			'sid':self._md5Sid
 			})
-		debug("[FritzCallFBF] _readBlacklist url: '" + url + "' parms: '" + parms + "'")
+		self.debug("url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1077,7 +1084,7 @@ class FritzCallFBF:
 			postdata=parms).addCallback(self._okBlacklist).addErrback(self._errorBlacklist)
 
 	def _okBlacklist(self, html):
-		debug("[FritzCallFBF] _okBlacklist")
+		self.debug("")
 		entries = re.compile('<script type="text/javascript">document.write\(Tr(Out|In)\("\d+", "(\d+)", "\w*"\)\);</script>', re.S).finditer(html)
 		self.blacklist = ([], [])
 		for entry in entries:
@@ -1085,16 +1092,18 @@ class FritzCallFBF:
 				self.blacklist[0].append(entry.group(2))
 			else:
 				self.blacklist[1].append(entry.group(2))
-		debug("[FritzCallFBF] _okBlacklist: %s" % repr(self.blacklist))
+		self.debug(repr(self.blacklist))
 
 	def _errorBlacklist(self, error):
-		debug("[FritzCallFBF] _errorBlacklist: %s" % (error))
+		self.debug(error)
 		text = _("FRITZ!Box - Error getting blacklist: %s") % error.getErrorMessage()
 		self._notify(text)
 
 class FritzCallFBF_05_27:
+	debug = logging.getLogger("[FritzCallFBF_05_27]").debug
+	
 	def __init__(self):
-		debug("[FritzCallFBF_05_27] __init__")
+		self.debug("[FritzCallFBF_05_27] __init__")
 		self._callScreen = None
 		self._md5LoginTimestamp = None
 		self._md5Sid = '0000000000000000'
@@ -1104,29 +1113,29 @@ class FritzCallFBF_05_27:
 		self._phoneBookID = '0'
 		self._loginCallbacks = []
 		self.blacklist = ([], [])
-		self.info = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
+		self.information = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
 		self.phonebook = None
 		self.getInfo(None)
 		# self.readBlacklist() now in getInfo
 		self.phonebooksFBF = []
 
 	def _notify(self, text):
-		debug("[FritzCallFBF_05_27] notify: " + text)
+		self.debug("[FritzCallFBF_05_27] notify: " + text)
 		self._md5LoginTimestamp = None
 		if self._callScreen:
-			debug("[FritzCallFBF_05_27] notify: try to close callScreen")
+			self.debug("[FritzCallFBF_05_27] notify: try to close callScreen")
 			self._callScreen.close()
 			self._callScreen = None
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 			
 	def _login(self, callback=None):
-		debug("[FritzCallFBF_05_27] _login: " + time.ctime())
+		self.debug("[FritzCallFBF_05_27] _login: " + time.ctime())
 		if callback:
-			debug("[FritzCallFBF_05_27] _login: add callback " + callback.__name__)
+			self.debug("[FritzCallFBF_05_27] _login: add callback " + callback.__name__)
 			if self._loginCallbacks:
 				# if login in process just add callback to _loginCallbacks
 				self._loginCallbacks.append(callback)
-				debug("[FritzCallFBF_05_27] _login: login in progress: leave")
+				self.debug("[FritzCallFBF_05_27] _login: login in progress: leave")
 				return
 			else:
 				self._loginCallbacks.append(callback)
@@ -1134,18 +1143,18 @@ class FritzCallFBF_05_27:
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login"))
 		if self._md5LoginTimestamp and ((time.time() - self._md5LoginTimestamp) < float(9.5*60)) and self._md5Sid != '0000000000000000': # new login after 9.5 minutes inactivity 
-			debug("[FritzCallFBF_05_27] _login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
+			self.debug("[FritzCallFBF_05_27] _login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
 			self._md5LoginTimestamp = time.time()
 			for callback in self._loginCallbacks:
-				debug("[FritzCallFBF_05_27] _login: calling " + callback.__name__)
+				self.debug("[FritzCallFBF_05_27] _login: calling " + callback.__name__)
 				callback(None)
 			self._loginCallbacks = []
 		else:
-			debug("[FritzCallFBF_05_27] _login: not logged in or outdated login")
+			self.debug("[FritzCallFBF_05_27] _login: not logged in or outdated login")
 			# http://fritz.box/cgi-bin/webcm?getpage=../html/login_sid.xml
 			parms = urlencode({'getpage':'../html/login_sid.xml'})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
-			debug("[FritzCallFBF_05_27] _login: '" + url + "?" + parms + "'")
+			self.debug("[FritzCallFBF_05_27] _login: '" + url + "?" + parms + "'")
 			getPage(url,
 				method="POST",
 				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
@@ -1153,43 +1162,43 @@ class FritzCallFBF_05_27:
 
 	def _md5Login(self, sidXml):
 		def buildResponse(challenge, text):
-			debug("[FritzCallFBF_05_27] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + __(text))
+			self.debug("[FritzCallFBF_05_27] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + __(text))
 			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
 			for i in range(len(text)):
 				if ord(text[i]) > 255:
 					text[i] = '.'
 			md5 = hashlib.md5()
 			md5.update(text) # pylint: disable=e1101
-			debug("[FritzCallFBF_05_27] md5Login/buildResponse: " + md5.hexdigest())
+			self.debug("[FritzCallFBF_05_27] md5Login/buildResponse: " + md5.hexdigest())
 			return challenge + '-' + md5.hexdigest()
 
-		debug("[FritzCallFBF_05_27] _md5Login")
+		self.debug("[FritzCallFBF_05_27] _md5Login")
 		found = re.match('.*<SID>([^<]*)</SID>', sidXml, re.S)
 		if found:
 			self._md5Sid = found.group(1)
-			debug("[FritzCallFBF_05_27] _md5Login: SID "+ self._md5Sid)
+			self.debug("[FritzCallFBF_05_27] _md5Login: SID "+ self._md5Sid)
 		else:
-			debug("[FritzCallFBF_05_27] _md5Login: no sid! That must be an old firmware.")
+			self.debug("[FritzCallFBF_05_27] _md5Login: no sid! That must be an old firmware.")
 			self._errorLogin('No sid?!?')
 			return
 
-		debug("[FritzCallFBF_05_27] _md5Login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
+		self.debug("[FritzCallFBF_05_27] _md5Login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
 		self._md5LoginTimestamp = time.time()
 		if sidXml.find('<iswriteaccess>0</iswriteaccess>') != -1:
-			debug("[FritzCallFBF_05_27] _md5Login: logging in")
+			self.debug("[FritzCallFBF_05_27] _md5Login: logging in")
 			found = re.match('.*<Challenge>([^<]*)</Challenge>', sidXml, re.S)
 			if found:
 				challenge = found.group(1)
-				debug("[FritzCallFBF_05_27] _md5Login: challenge " + challenge)
+				self.debug("[FritzCallFBF_05_27] _md5Login: challenge " + challenge)
 			else:
 				challenge = None
-				debug("[FritzCallFBF_05_27] _md5Login: login necessary and no challenge! That is terribly wrong.")
+				self.debug("[FritzCallFBF_05_27] _md5Login: login necessary and no challenge! That is terribly wrong.")
 			parms = urlencode({
 							'getpage':'../html/de/menus/menu2.html', # 'var:pagename':'home', 'var:menu':'home', 
 							'login:command/response': buildResponse(challenge, config.plugins.FritzCall.password.value),
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
-			debug("[FritzCallFBF_05_27] _md5Login: '" + url + "?" + parms + "'")
+			self.debug("[FritzCallFBF_05_27] _md5Login: '" + url + "?" + parms + "'")
 			getPage(url,
 				method="POST",
 				agent=USERAGENT,
@@ -1197,14 +1206,14 @@ class FritzCallFBF_05_27:
 						}, postdata=parms).addCallback(self._gotPageLogin).addErrback(self._errorLogin)
 		else:
 			for callback in self._loginCallbacks:
-				debug("[FritzCallFBF_05_27] _md5Login: calling " + callback.__name__)
+				self.debug("[FritzCallFBF_05_27] _md5Login: calling " + callback.__name__)
 				callback(None)
 			self._loginCallbacks = []
 
 	def _gotPageLogin(self, html):
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login verification"))
-		debug("[FritzCallFBF_05_27] _gotPageLogin: verify login")
+		self.debug("[FritzCallFBF_05_27] _gotPageLogin: verify login")
 		start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
 		if start != -1:
 			start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
@@ -1217,16 +1226,16 @@ class FritzCallFBF_05_27:
 		found = re.match('.*<input type="hidden" name="sid" value="([^\"]*)"', html, re.S)
 		if found:
 			self._md5Sid = found.group(1)
-			debug("[FritzCallFBF_05_27] _gotPageLogin: found sid: " + self._md5Sid)
+			self.debug("[FritzCallFBF_05_27] _gotPageLogin: found sid: " + self._md5Sid)
 
 		for callback in self._loginCallbacks:
-			debug("[FritzCallFBF_05_27] _gotPageLogin: calling " + callback.__name__)
+			self.debug("[FritzCallFBF_05_27] _gotPageLogin: calling " + callback.__name__)
 			callback(None)
 		self._loginCallbacks = []
 
 	def _errorLogin(self, error):
 		global fritzbox
-		debug("[FritzCallFBF_05_27] _errorLogin: %s" % (error))
+		self.debug("[FritzCallFBF_05_27] _errorLogin: %s" % (error))
 		if type(error) != str:
 			error =  error.getErrorMessage()
 		text = _("FRITZ!Box - Error logging in: %s\nDisabling plugin.") % error
@@ -1242,7 +1251,7 @@ class FritzCallFBF_05_27:
 							'login:command/logout':'bye bye Fritz'
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
-			debug("[FritzCallFBF_05_27] logout: '" + url + "' parms: '" + parms + "'")
+			self.debug("[FritzCallFBF_05_27] logout: '" + url + "' parms: '" + parms + "'")
 			getPage(url,
 				method="POST",
 				agent=USERAGENT,
@@ -1250,7 +1259,7 @@ class FritzCallFBF_05_27:
 						}, postdata=parms).addErrback(self._errorLogout)
 
 	def _errorLogout(self, error):
-		debug("[FritzCallFBF_05_27] _errorLogout: %s" % (error))
+		self.debug("[FritzCallFBF_05_27] _errorLogout: %s" % (error))
 		text = _("FRITZ!Box - Error logging out: %s") % error.getErrorMessage()
 		self._notify(text)
 
@@ -1271,7 +1280,7 @@ class FritzCallFBF_05_27:
 						'sid':self._md5Sid,
 						})
 		url = "http://%s/fon_num/fonbook_select.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_05_27] _selectPhonebook: '" + url + "' parms: '" + parms + "'")
+		self.debug("[FritzCallFBF_05_27] _selectPhonebook: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1284,7 +1293,7 @@ class FritzCallFBF_05_27:
 		found = re.match('.*<label for="uiBookid:([\d]+)">' + config.plugins.FritzCall.fritzphonebookName.value, html, re.S)
 		if found:
 			bookid = found.group(1)
-			debug("[FritzCallFBF_05_27] _loadFritzBoxPhonebook: found dreambox phonebook %s" % (bookid))
+			self.debug("[FritzCallFBF_05_27] _loadFritzBoxPhonebook: found dreambox phonebook %s" % (bookid))
 		else:
 			bookid = 1
 		# http://192.168.178.1/fon_num/fonbook_list.lua?sid=2faec13b0000f3a2
@@ -1293,7 +1302,7 @@ class FritzCallFBF_05_27:
 						'sid':self._md5Sid,
 						})
 		url = "http://%s/fon_num/fonbook_list.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_05_27] _loadFritzBoxPhonebookNew: '" + url + "' parms: '" + parms + "'")
+		self.debug("[FritzCallFBF_05_27] _loadFritzBoxPhonebookNew: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1301,14 +1310,14 @@ class FritzCallFBF_05_27:
 					}, postdata=parms).addCallback(self._parseFritzBoxPhonebook).addErrback(self._errorLoad)
 
 	def _parseFritzBoxPhonebook(self, html):
-		debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew")
+		self.debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew")
 		found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name\d+" value="' + config.plugins.FritzCall.fritzphonebookName.value +'" id="uiPostPhonebookName\d+" disabled>\s*<input type="hidden" name="telcfg:settings/Phonebook/Books/Id\d+" value="(\d+)" id="uiPostPhonebookId\d+" disabled>', html, re.S)
 		if found:
 			phoneBookID = found.group(1)
-			debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: found dreambox phonebook with id: " + phoneBookID)
+			self.debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: found dreambox phonebook with id: " + phoneBookID)
 			if self._phoneBookID != phoneBookID:
 				self._phoneBookID = phoneBookID
-				debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: reload phonebook")
+				self.debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: reload phonebook")
 				self._loadFritzBoxPhonebook(None) # reload with dreambox phonebook
 				return
 
@@ -1316,15 +1325,15 @@ class FritzCallFBF_05_27:
 		found = re.match('.*<meta http-equiv=content-type content="text/html; charset=([^"]*)">', html, re.S)
 		if found:
 			charset = found.group(1)
-			debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: found charset: " + charset)
+			self.debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: found charset: " + charset)
 			html = html2unicode(html.replace(chr(0xf6),'').decode(charset)).encode('utf-8')
 		else: # this is kind of emergency conversion...
 			try:
-				debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: try charset utf-8")
+				self.debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: try charset utf-8")
 				charset = 'utf-8'
 				html = html2unicode(html.decode('utf-8')).encode('utf-8') # this looks silly, but has to be
 			except UnicodeDecodeError:
-				debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: try charset iso-8859-1")
+				self.debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: try charset iso-8859-1")
 				charset = 'iso-8859-1'
 				html = html2unicode(html.decode('iso-8859-1')).encode('utf-8') # this looks silly, but has to be
 
@@ -1338,12 +1347,12 @@ class FritzCallFBF_05_27:
 		#=======================================================================
 
 		if html.find('class="zebra_reverse"') != -1:
-			debug("[FritzCallFBF_05_27] Found new 7390 firmware")
+			self.debug("[FritzCallFBF_05_27] Found new 7390 firmware")
 			# <td class="tname">Mama</td><td class="tnum">03602191620<br>015228924783<br>03602181567</td><td class="ttype">geschäftl.<br>mobil<br>privat</td><td class="tcode"><br>**701<br></td><td class="tvanity"><br>1<br></td>
 			entrymask = re.compile('<td class="tname">([^<]*)</td><td class="tnum">([^<]+(?:<br>[^<]+)*)</td><td class="ttype">([^<]+(?:<br>[^<]+)*)</td><td class="tcode">([^<]*(?:<br>[^<]*)*)</td><td class="tvanity">([^<]*(?:<br>[^<]*)*)</td>', re.S)
 			entries = entrymask.finditer(html)
 			for found in entries:
-				# debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: processing entry for '''%s'''" % (found.group(1)))
+				# self.debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: processing entry for '''%s'''" % (found.group(1)))
 				name = found.group(1)
 				thisnumbers = found.group(2).split("<br>")
 				thistypes = found.group(3).split("<br>")
@@ -1352,11 +1361,11 @@ class FritzCallFBF_05_27:
 				for i in range(len(thisnumbers)):
 					thisnumber = cleanNumber(thisnumbers[i])
 					if self.phonebook.phonebook.has_key(thisnumber):
-						debug("[FritzCallFBF_05_27] Ignoring '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (name, __(thisnumber)))
+						self.debug("[FritzCallFBF_05_27] Ignoring '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (name, __(thisnumber)))
 						continue
 
 					if not thisnumbers[i]:
-						debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: Ignoring entry with empty number for '''%s'''" % (name))
+						self.debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: Ignoring entry with empty number for '''%s'''" % (name))
 						continue
 					else:
 						thisname = name
@@ -1367,14 +1376,14 @@ class FritzCallFBF_05_27:
 						if config.plugins.FritzCall.showVanity.value and thisvanitys[i]:
 							thisname = thisname + ", " + _("Vanity") + ": " + thisvanitys[i]
 	
-						# debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
+						# self.debug("[FritzCallFBF_05_27] _parseFritzBoxPhonebookNew: Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						self.phonebook.phonebook[thisnumber] = thisname
 		else:
 			self._notify(_("Could not parse FRITZ!Box Phonebook entry"))
 
 	def _errorLoad(self, error):
-		debug("[FritzCallFBF_05_27] _errorLoad: %s" % (error))
+		self.debug("[FritzCallFBF_05_27] _errorLoad: %s" % (error))
 		text = _("FRITZ!Box - Could not load phonebook: %s") % error.getErrorMessage()
 		self._notify(text)
 
@@ -1384,7 +1393,7 @@ class FritzCallFBF_05_27:
 		#
 		self._callScreen = callScreen
 		self._callType = callType
-		debug("[FritzCallFBF_05_27] _getCalls1New")
+		self.debug("[FritzCallFBF_05_27] _getCalls1New")
 		if self._callScreen:
 			self._callScreen.updateStatus(_("finishing"))
 		# http://192.168.178.1/fon_num/foncalls_list.lua?sid=da78ab0797197dc7
@@ -1394,7 +1403,7 @@ class FritzCallFBF_05_27:
 
 	def _gotPageCalls(self, callback, html=""):
 
-		debug("[FritzCallFBF_05_27] _gotPageCalls")
+		self.debug("[FritzCallFBF_05_27] _gotPageCalls")
 		if self._callScreen:
 			self._callScreen.updateStatus(_("preparing"))
 
@@ -1402,7 +1411,7 @@ class FritzCallFBF_05_27:
 		if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
 			filtermsns = map(lambda x: x.strip(), config.plugins.FritzCall.filtermsn.value.split(","))
 			# TODO: scramble filtermsns
-			debug("[FritzCallFBF_05_27] _gotPageCalls: filtermsns %s" % (repr(filtermsns)))
+			self.debug("[FritzCallFBF_05_27] _gotPageCalls: filtermsns %s" % (repr(filtermsns)))
 
 		#=======================================================================
 		# linkP = open("/tmp/FritzCall_Calllist.htm", "w")
@@ -1420,21 +1429,21 @@ class FritzCallFBF_05_27:
 				direct = FBF_OUT_CALLS
 			elif found.group(1) == "call_in_fail":
 				direct = FBF_MISSED_CALLS
-			# debug("[FritzCallFBF_05_27] _gotPageCallsNew: direct: " + direct)
+			# self.debug("[FritzCallFBF_05_27] _gotPageCallsNew: direct: " + direct)
 			if direct != self._callType and "." != self._callType:
 				continue
 
 			date = found.group(2)
-			# debug("[FritzCallFBF_05_27] _gotPageCallsNew: date: " + date)
+			# self.debug("[FritzCallFBF_05_27] _gotPageCallsNew: date: " + date)
 			length = found.group(8)
-			# debug("[FritzCallFBF_05_27] _gotPageCallsNew: len: " + length)
+			# self.debug("[FritzCallFBF_05_27] _gotPageCallsNew: len: " + length)
 			remote = found.group(4)
 			if config.plugins.FritzCall.phonebook.value:
 				if remote and not remote.isdigit():
 					remote = resolveNumber(found.group(3), remote + " (FBF)", self.phonebook)
 				else:
 					remote = resolveNumber(found.group(3), "", self.phonebook)
-			# debug("[FritzCallFBF_05_27] _gotPageCallsNew: remote. " + remote)
+			# self.debug("[FritzCallFBF_05_27] _gotPageCallsNew: remote. " + remote)
 			here = found.group(7)
 			#===================================================================
 			# start = here.find('Internet: ')
@@ -1445,27 +1454,27 @@ class FritzCallFBF_05_27:
 			#	here = line[5]
 			#===================================================================
 			if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
-				# debug("[FritzCallFBF_05_27] _gotPageCalls: check %s" % (here))
+				# self.debug("[FritzCallFBF_05_27] _gotPageCalls: check %s" % (here))
 				if here not in filtermsns:
-					# debug("[FritzCallFBF_05_27] _gotPageCalls: skip %s" % (here))
+					# self.debug("[FritzCallFBF_05_27] _gotPageCalls: skip %s" % (here))
 					continue
 			here = resolveNumber(here, found.group(6), self.phonebook)
-			# debug("[FritzCallFBF_05_27] _gotPageCallsNew: here: " + here)
+			# self.debug("[FritzCallFBF_05_27] _gotPageCallsNew: here: " + here)
 
 			number = stripCbCPrefix(found.group(3), config.plugins.FritzCall.country.value)
 			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
 				number = config.plugins.FritzCall.prefix.value + number
-			# debug("[FritzCallFBF_05_27] _gotPageCallsNew: number: " + number)
-			debug("[FritzCallFBF_05_27] _gotPageCallsNew: append: %s" % repr((number, date, direct, remote, length, here)) )
+			# self.debug("[FritzCallFBF_05_27] _gotPageCallsNew: number: " + number)
+			self.debug("[FritzCallFBF_05_27] _gotPageCallsNew: append: %s" % repr((number, date, direct, remote, length, here)) )
 			callListL.append((number, date, direct, remote, length, here))
 
 		if callback:
-			# debug("[FritzCallFBF_05_27] _gotPageCalls call callback with\n" + text
+			# self.debug("[FritzCallFBF_05_27] _gotPageCalls call callback with\n" + text
 			callback(callListL)
 		self._callScreen = None
 
 	def _errorCalls(self, error):
-		debug("[FritzCallFBF_05_27] _errorCalls: %s" % (error))
+		self.debug("[FritzCallFBF_05_27] _errorCalls: %s" % (error))
 		text = _("FRITZ!Box - Could not load calls: %s") % error.getErrorMessage()
 		self._notify(text)
 
@@ -1496,7 +1505,7 @@ class FritzCallFBF_05_27:
 			'telcfg:command/Dial':number,
 			'sid':self._md5Sid
 			})
-		debug("[FritzCallFBF_05_27] dial url: '" + url + "' parms: '" + parms + "'")
+		self.debug("[FritzCallFBF_05_27] dial url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1506,16 +1515,16 @@ class FritzCallFBF_05_27:
 			postdata=parms).addCallback(self._okDial).addErrback(self._errorDial)
 
 	def _okDial(self, html): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF_05_27] okDial")
+		self.debug("[FritzCallFBF_05_27] okDial")
 
 	def _errorDial(self, error):
-		debug("[FritzCallFBF_05_27] errorDial: $s" % error)
+		self.debug("[FritzCallFBF_05_27] errorDial: $s" % error)
 		text = _("FRITZ!Box - Dialling failed: %s") % error.getErrorMessage()
 		self._notify(text)
 
 	def changeWLAN(self, statusWLAN, callback):
-		''' get status info from FBF '''
-		debug("[FritzCallFBF_05_27] changeWLAN start")
+		''' get status information from FBF '''
+		self.debug("[FritzCallFBF_05_27] changeWLAN start")
 		Notifications.AddNotification(MessageBox, _("not available with this firmware version"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 		return
 		
@@ -1543,7 +1552,7 @@ class FritzCallFBF_05_27:
 			'active':str(statusWLAN),
 			'sid':self._md5Sid
 			})
-		debug("[FritzCallFBF] changeWLAN url: '" + url + "' parms: '" + parms + "'")
+		self.debug("[FritzCallFBF] changeWLAN url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1553,38 +1562,38 @@ class FritzCallFBF_05_27:
 			postdata=parms).addCallback(self._okChangeWLAN, callback).addErrback(self._errorChangeWLAN, callback)
 
 	def _okChangeWLAN(self, callback, html): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF] _okChangeWLAN")
+		self.debug("[FritzCallFBF] _okChangeWLAN")
 		callback()
 
 	def _errorChangeWLAN(self, callback, error):
-		debug("[FritzCallFBF] _errorChangeWLAN: $s" % error)
+		self.debug("[FritzCallFBF] _errorChangeWLAN: $s" % error)
 		text = _("FRITZ!Box - Failed changing WLAN: %s") % error.getErrorMessage()
 		self._notify(text)
 		callback()
 
 	def changeMailbox(self, whichMailbox, callback):
 		''' switch mailbox on/off '''
-		debug("[FritzCallFBF_05_27] changeMailbox start: " + str(whichMailbox))
+		self.debug("[FritzCallFBF_05_27] changeMailbox start: " + str(whichMailbox))
 		Notifications.AddNotification(MessageBox, _("not available with this firmware version"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def _changeMailbox(self, whichMailbox, html): # pylint: disable=W0613
 		return
 
 	def _okChangeMailbox(self, html): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF_05_27] _okChangeMailbox")
+		self.debug("[FritzCallFBF_05_27] _okChangeMailbox")
 
 	def _errorChangeMailbox(self, error):
-		debug("[FritzCallFBF_05_27] _errorChangeMailbox: $s" % error)
+		self.debug("[FritzCallFBF_05_27] _errorChangeMailbox: $s" % error)
 		text = _("FRITZ!Box - Failed changing Mailbox: %s") % error.getErrorMessage()
 		self._notify(text)
 
 	def getInfo(self, callback):
-		''' get status info from FBF '''
-		debug("[FritzCallFBF_05_27] getInfo")
+		''' get status information from FBF '''
+		self.debug("[FritzCallFBF_05_27] getInfo")
 		self._login(lambda x:self._getInfo(callback, x))
 		
 	def _getInfo(self, callback, html):
-		debug("[FritzCallFBF_05_27] _getInfo: verify login")
+		self.debug("[FritzCallFBF_05_27] _getInfo: verify login")
 		if html:
 			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
 			if start != -1:
@@ -1598,7 +1607,7 @@ class FritzCallFBF_05_27:
 		parms = urlencode({
 			'sid':self._md5Sid
 			})
-		debug("[FritzCallFBF_05_27] _getInfo url: '" + url + "' parms: '" + parms + "'")
+		self.debug("[FritzCallFBF_05_27] _getInfo url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1609,7 +1618,7 @@ class FritzCallFBF_05_27:
 
 	def _okGetInfo(self, callback, html):
 
-		debug("[FritzCallFBF_05_27] _okGetInfo")
+		self.debug("[FritzCallFBF_05_27] _okGetInfo")
 
 		#=======================================================================
 		# linkP = open("/tmp/FritzCallInfo.htm", "w")
@@ -1617,8 +1626,8 @@ class FritzCallFBF_05_27:
 		# linkP.close()
 		#=======================================================================
 
-		if self.info:
-			(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.info
+		if self.information:
+			(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = self.information
 		else:
 			(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = (None, None, None, None, None, None, None, None, None, None)
 
@@ -1626,17 +1635,17 @@ class FritzCallFBF_05_27:
 		if found:
 			boxInfo = found.group(1) + ', ' + found.group(2) + found.group(3)
 			boxInfo = boxInfo.replace('&nbsp;',' ')
-			debug("[FritzCallFBF_05_27] _okGetInfo Boxinfo: " + boxInfo)
+			self.debug("[FritzCallFBF_05_27] _okGetInfo Boxinfo: " + boxInfo)
 
 		found = re.match('.*<div id=\'ipv4_info\'><span class="[^"]*">verbunden seit ([^<]*)</span>', html, re.S)
 		if found:
 			upTime = found.group(1)
-			debug("[FritzCallFBF_05_27] _okGetInfo upTime: " + upTime)
+			self.debug("[FritzCallFBF_05_27] _okGetInfo upTime: " + upTime)
 
 		found = re.match('.*IP-Adresse: ([^<]*)</span>', html, re.S)
 		if found:
 			ipAddress = found.group(1)
-			debug("[FritzCallFBF_05_27] _okGetInfo ipAddress: " + ipAddress)
+			self.debug("[FritzCallFBF_05_27] _okGetInfo ipAddress: " + ipAddress)
 
 		# wlanstate = [ active, encrypted, no of devices ]
 		found = re.match('.*<tr id="uiTrWlan"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">WLAN</a></td><td>(aus|an)(|, gesichert)</td>', html, re.S)
@@ -1648,7 +1657,7 @@ class FritzCallFBF_05_27:
 					wlanState = [ '1', '0', '' ]
 			else:
 				wlanState = [ '0', '0', '0' ]
-			debug("[FritzCallFBF_05_27] _okGetInfo wlanState: " + repr(wlanState))
+			self.debug("[FritzCallFBF_05_27] _okGetInfo wlanState: " + repr(wlanState))
 
 		found = re.match('.*<tr id="uiTrDsl"><td class="(led_gray|led_green|led_red)">', html, re.S)
 		if found:
@@ -1659,34 +1668,34 @@ class FritzCallFBF_05_27:
 					dslState[1] = found.group(1) + "/" + found.group(2)
 			else:
 				dslState = ['0', None, None]
-		debug("[FritzCallFBF_05_27] _okGetInfo dslState: " + repr(dslState))
+		self.debug("[FritzCallFBF_05_27] _okGetInfo dslState: " + repr(dslState))
 
 		found = re.match('.*<tr id="trTam" style=""><td><a href="[^"]*">Anrufbeantworter</a></td><td title=\'[^\']*\'>([\d]+) aktiv([^<]*)</td></tr>', html, re.S)
 		if found:
 			# found.group(2) could be ', neue Nachrichten vorhanden'; ignore for now
 			tamActive = [ found.group(1), False, False, False, False, False]
-		debug("[FritzCallFBF_05_27] _okGetInfo tamActive: " + repr(tamActive))
+		self.debug("[FritzCallFBF_05_27] _okGetInfo tamActive: " + repr(tamActive))
 
 		found = re.match('.*<tr id="uiTrDect"><td class="led_green"></td><td><a href="[^"]*">DECT</a></td><td>an, (ein|\d*) Schnurlostelefon', html, re.S)
 		if found:
 			dectActive = found.group(1)
-		debug("[FritzCallFBF_05_27] _okGetInfo dectActive: " + repr(dectActive))
+		self.debug("[FritzCallFBF_05_27] _okGetInfo dectActive: " + repr(dectActive))
 
 		found = re.match('.*<td>Integriertes Fax aktiv</td>', html, re.S)
 		if found:
 			faxActive = True
-		debug("[FritzCallFBF_05_27] _okGetInfo faxActive: " + repr(faxActive))
+		self.debug("[FritzCallFBF_05_27] _okGetInfo faxActive: " + repr(faxActive))
 
 		found = re.match('.* <tr style=""><td><a href="[^"]*">Rufumleitung</a></td><td>deaktiviert</td></tr>', html, re.S)
 		if found:
 			rufumlActive = False
 		else:
 			rufumlActive = True
-		debug("[FritzCallFBF_05_27] _okGetInfo rufumlActive: " + repr(rufumlActive))
+		self.debug("[FritzCallFBF_05_27] _okGetInfo rufumlActive: " + repr(rufumlActive))
 
 		info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
-		debug("[FritzCallFBF_05_27] _okGetInfo info: " + str(info))
-		self.info = info
+		self.debug("[FritzCallFBF_05_27] _okGetInfo information: " + str(info))
+		self.information = info
 		if callback:
 			callback(info)
 
@@ -1703,7 +1712,7 @@ class FritzCallFBF_05_27:
 		return
 
 	def _errorGetInfo(self, error):
-		debug("[FritzCallFBF_05_27] _errorGetInfo: %s" % (error))
+		self.debug("[FritzCallFBF_05_27] _errorGetInfo: %s" % (error))
 		text = _("FRITZ!Box - Error getting status: %s") % error.getErrorMessage()
 		self._notify(text)
 		return
@@ -1736,7 +1745,7 @@ class FritzCallFBF_05_27:
 			'logic:command/reboot':'../gateway/commands/saveconfig.html',
 			'sid':self._md5Sid
 			})
-		debug("[FritzCallFBF_05_27] _reset url: '" + url + "' parms: '" + parms + "'")
+		self.debug("[FritzCallFBF_05_27] _reset url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1746,10 +1755,10 @@ class FritzCallFBF_05_27:
 			postdata=parms)
 
 	def _okReset(self, html): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF_05_27] _okReset")
+		self.debug("[FritzCallFBF_05_27] _okReset")
 
 	def _errorReset(self, error):
-		debug("[FritzCallFBF_05_27] _errorReset: %s" % (error))
+		self.debug("[FritzCallFBF_05_27] _errorReset: %s" % (error))
 		text = _("FRITZ!Box - Error resetting: %s") % error.getErrorMessage()
 		self._notify(text)
 
@@ -1759,7 +1768,7 @@ class FritzCallFBF_05_27:
 		parms = urlencode({
 			'sid':self._md5Sid
 			})
-		debug("[FritzCallFBF_05_27] _readBlacklist url: '" + url + "' parms: '" + parms + "'")
+		self.debug("[FritzCallFBF_05_27] _readBlacklist url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1769,7 +1778,7 @@ class FritzCallFBF_05_27:
 			postdata=parms).addCallback(self._okBlacklist).addErrback(self._errorBlacklist)
 
 	def _okBlacklist(self, html):
-		debug("[FritzCallFBF_05_27] _okBlacklist")
+		self.debug("[FritzCallFBF_05_27] _okBlacklist")
 		#=======================================================================
 		# linkP = open("/tmp/FritzCallBlacklist.htm", "w")
 		# linkP.write(html)
@@ -1782,10 +1791,10 @@ class FritzCallFBF_05_27:
 				self.blacklist[0].append(entry.group(2))
 			else:
 				self.blacklist[1].append(entry.group(2))
-		debug("[FritzCallFBF_05_27] _okBlacklist: %s" % repr(self.blacklist))
+		self.debug("[FritzCallFBF_05_27] _okBlacklist: %s" % repr(self.blacklist))
 
 	def _errorBlacklist(self, error):
-		debug("[FritzCallFBF_05_27] _errorBlacklist: %s" % (error))
+		self.debug("[FritzCallFBF_05_27] _errorBlacklist: %s" % (error))
 		text = _("FRITZ!Box - Error getting blacklist: %s") % error.getErrorMessage()
 		self._notify(text)
 
@@ -1793,21 +1802,28 @@ import xml.etree.ElementTree as ET
 import StringIO, csv
 
 class FritzCallFBF_05_50:
+	logger = logging.getLogger("[FritzCallFBF_05_50]")
+	debug = logger.debug
+	info = logger.info
+	warn = logger.warn
+	error = logger.error
+	exception = logger.exception
+	
 	def __init__(self):
-		debug("[FritzCallFBF_05_50] __init__")
+		self.debug("")
 		self._callScreen = None
 		self._callType = config.plugins.FritzCall.fbfCalls.value
 		self._phoneBookID = '0'
 		self.blacklist = ([], [])
-		self.info = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
+		self.information = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
 		self.phonebook = None
 		self.getInfo(None)
 		# self.readBlacklist() now in getInfo
 
 	def _notify(self, text):
-		debug("[FritzCallFBF_05_50] notify: " + text)
+		self.debug(text)
 		if self._callScreen:
-			debug("[FritzCallFBF_05_50] notify: try to close callScreen")
+			self.debug("try to close callScreen")
 			self._callScreen.close()
 			self._callScreen = None
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
@@ -1815,7 +1831,7 @@ class FritzCallFBF_05_50:
 	def _login(self, callback=None):
 		# http://fritz.box/login_lua.xml
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_05_50] _login: " + time.ctime() + " :"+ url)
+		self.debug(time.ctime() + " :"+ url)
 		getPage(url,
 			method="GET",
 			headers={'Content-Type': "application/x-www-form-urlencoded"}
@@ -1823,14 +1839,14 @@ class FritzCallFBF_05_50:
 
 	def _md5Login(self, sidXml, callback):
 		def buildResponse(challenge, text):
-			debug("[FritzCallFBF_05_50] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + __(text))
+			self.debug("challenge: " + challenge + ' text: ' + __(text))
 			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
 			for i in range(len(text)):
 				if ord(text[i]) > 255:
 					text[i] = '.'
 			md5 = hashlib.md5()
 			md5.update(text) # pylint: disable=e1101
-			debug("[FritzCallFBF_05_50] md5Login/buildResponse: " + md5.hexdigest())
+			self.debug(md5.hexdigest())
 			return challenge + '-' + md5.hexdigest()
 
 		#=======================================================================
@@ -1839,21 +1855,21 @@ class FritzCallFBF_05_50:
 		# linkP.close()
 		#=======================================================================
 
-		debug("[FritzCallFBF_05_50] _md5Login")
+		self.debug("")
 		sidX = ET.fromstring(sidXml)
 	#===========================================================================
 	#	self._md5Sid = sidX.find("SID").text
 	#	if self._md5Sid:
-	#		debug("[FritzCallFBF_05_50] _md5Login: SID "+ self._md5Sid)
+	#		self.debug("SID "+ self._md5Sid)
 	#	else:
-	#		debug("[FritzCallFBF_05_50] _md5Login: no sid! That must be an old firmware.")
+	#		self.debug("no sid! That must be an old firmware.")
 	#		self._notify(_("FRITZ!Box - Error logging in\n\n") + _("wrong firmware version?"))
 	#		return
 	# 
 	#	if self._md5Sid != "0000000000000000":
-	#		debug("[FritzCallFBF_05_50] _md5Login: SID "+ self._md5Sid)
+	#		self.debug("SID "+ self._md5Sid)
 	#		for callback in self._loginCallbacks:
-	#			debug("[FritzCallFBF_05_50] _md5Login: calling " + callback.__name__)
+	#			self.debug("calling " + callback.__name__)
 	#			callback(None)
 	#		self._loginCallbacks = []
 	#		return
@@ -1861,9 +1877,9 @@ class FritzCallFBF_05_50:
 
 		challenge = sidX.find("Challenge").text
 		if challenge:
-			debug("[FritzCallFBF_05_50] _md5Login: challenge " + challenge)
+			self.debug("challenge " + challenge)
 		else:
-			debug("[FritzCallFBF_05_50] _md5Login: login necessary and no challenge! That is terribly wrong.")
+			self.error("login necessary and no challenge! That is terribly wrong.")
 
 		# TODO: check validity of username?
 		parms = urlencode({
@@ -1871,7 +1887,7 @@ class FritzCallFBF_05_50:
 						'response': buildResponse(challenge, config.plugins.FritzCall.password.value),
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_05_50] _md5Login: " + url + "?" + parms)
+		self.debug(url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1891,16 +1907,16 @@ class FritzCallFBF_05_50:
 		sidX = ET.fromstring(sidXml)
 		md5Sid = sidX.find("SID").text
 		if md5Sid and md5Sid != "0000000000000000":
-			debug("[FritzCallFBF_05_50] _gotPageLogin: found sid: " + md5Sid)
+			self.logger.debug("found sid: " + md5Sid)
 		else:
-			debug("[FritzCallFBF_05_50] _gotPageLogin: found no sid")
+			self.error("found no sid")
 			self._notify(_("FRITZ!Box - Error logging in\n\n") + _("wrong user or password?"))
 			return
 
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login ok"))
 
-		debug("[FritzCallFBF_05_50] _gotPageLogin: calling " + callback.__name__)
+		self.debug("calling " + callback.__name__)
 		callback(md5Sid)
 
 	def _errorLogin(self, error):
@@ -1912,7 +1928,7 @@ class FritzCallFBF_05_50:
 		text = _("FRITZ!Box - Error logging in: %s\nDisabling plugin.") % text
 		# config.plugins.FritzCall.enable.value = False
 		fritzbox = None
-		debug("[FritzCallFBF_05_50] _errorLogin: %s" % (error))
+		self.exception(error)
 		self._notify(text)
 
 	def _logout(self, md5Sid, what):
@@ -1921,7 +1937,7 @@ class FritzCallFBF_05_50:
 						'logout':'bye bye Fritz'
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_05_50] _logout (" + what + ") " + time.ctime() + ": " + url + "?" + parms)
+		self.debug("(" + what + ") " + time.ctime() + ": " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1929,7 +1945,7 @@ class FritzCallFBF_05_50:
 					}, postdata=parms).addErrback(self._errorLogout)
 
 	def _errorLogout(self, error):
-		debug("[FritzCallFBF_05_50] _errorLogout: %s" % (error))
+		self.exception(error)
 		text = _("FRITZ!Box - Error logging out: %s") % error.getErrorMessage()
 		self._notify(text)
 
@@ -1944,7 +1960,7 @@ class FritzCallFBF_05_50:
 						'sid':md5Sid,
 						})
 		url = "http://%s/fon_num/fonbook_select.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_05_50] _selectPhonebook: " + url + "?" + parms)
+		self.debug(url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1959,7 +1975,7 @@ class FritzCallFBF_05_50:
 			bookid = found.group(1)
 		else:
 			bookid = 1
-		debug("[FritzCallFBF_05_50] _loadFritzBoxPhonebook: phonebook %s" % (bookid))
+		self.debug("phonebook %s" % (bookid))
 
 		# http://192.168.178.1/fon_num/fonbook_list.lua?sid=2faec13b0000f3a2
 		parms = urlencode({
@@ -1969,7 +1985,7 @@ class FritzCallFBF_05_50:
 						'apply':'uiApply',
 						})
 		url = "http://%s/fon_num/fonbook_select.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_05_50] _loadFritzBoxPhonebookNew: " + url + "?" + parms)
+		self.debug(url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -1977,21 +1993,21 @@ class FritzCallFBF_05_50:
 					}, postdata=parms).addCallback(self._parseFritzBoxPhonebook, md5Sid).addErrback(self._errorLoad, md5Sid)
 
 	def _parseFritzBoxPhonebook(self, html, md5Sid):
-		debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook")
+		self.debug("")
 		# first, let us get the charset
 		found = re.match('.*<meta http-equiv=content-type content="text/html; charset=([^"]*)">', html, re.S)
 		if found:
 			charset = found.group(1)
-			debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: found charset: " + charset)
+			self.debug("found charset: " + charset)
 			if charset != 'utf-8':
 				html = html2unicode(html.replace(chr(0xf6),'').decode(charset)).encode('utf-8')
 		else: # this is kind of emergency conversion...
 			try:
-				debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: try charset utf-8")
+				self.debug("try charset utf-8")
 				charset = 'utf-8'
 				html = html2unicode(html.decode('utf-8')).encode('utf-8') # this looks silly, but has to be
 			except UnicodeDecodeError:
-				debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: try charset iso-8859-1")
+				self.debug("try charset iso-8859-1")
 				charset = 'iso-8859-1'
 				html = html2unicode(html.decode('iso-8859-1')).encode('utf-8') # this looks silly, but has to be
 
@@ -2006,11 +2022,10 @@ class FritzCallFBF_05_50:
 		#=======================================================================
 
 		if html.find('class="zebra_reverse"') != -1:
-			debug("[FritzCallFBF_05_50] Found new 7390 firmware")
 			entrymask = re.compile('<td class="tname" title="([^"]*)">[^<]*</td><td class="tnum"(?: datalabel="[^"]*")?>([^<]+(?:<br>[^<]+)*)</td><td class="ttype">([^<]+(?:<br>[^<]+)*)</td><td class="tcode"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td><td class="tvanity"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td>', re.S)
 			entries = entrymask.finditer(html)
 			for found in entries:
-				# debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: processing entry for '''%s'''" % repr(found.groups()))
+				# self.info("processing entry for '''%s'''" % repr(found.groups()))
 				name = html2unicode(re.sub(",", "", found.group(1)))
 				thisnumbers = found.group(2).split("<br>")
 				thistypes = found.group(3).split("<br>")
@@ -2021,11 +2036,11 @@ class FritzCallFBF_05_50:
 						continue;
 					thisnumber = cleanNumber(thisnumbers[i])
 					if self.phonebook.phonebook.has_key(thisnumber):
-						# debug("[FritzCallFBF_05_50] Ignoring '%s' ('%s') with %s' ( have: '%s')" % (name, thistypes[i], __(thisnumber), self.phonebook.phonebook[thisnumber]))
+						# self.debug("Ignoring '%s' ('%s') with %s' ( have: '%s')" % (name, thistypes[i], __(thisnumber), self.phonebook.phonebook[thisnumber]))
 						continue
 
 					if not thisnumbers[i]:
-						# debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Ignoring entry with empty number for '''%s'''" % (__(name)))
+						# self.debug("Ignoring entry with empty number for '''%s'''" % (__(name)))
 						continue
 					else:
 						thisname = name.decode('utf-8')
@@ -2036,8 +2051,8 @@ class FritzCallFBF_05_50:
 						if config.plugins.FritzCall.showVanity.value and thisvanitys[i]:
 							thisname = thisname + ", " + _("Vanity") + ": " + thisvanitys[i]
 	
-						# debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
-						# debug("[FritzCallFBF_05_50] _parseFritzBoxPhonebook: Adding '''%s''' with '''%s'''" % (thisname.strip(), thisnumber))
+						# self.debug("Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
+						# self.debug("Adding '''%s''' with '''%s'''" % (thisname.strip(), thisnumber))
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						self.phonebook.phonebook[thisnumber] = thisname.encode('utf-8')
 		else:
@@ -2045,7 +2060,7 @@ class FritzCallFBF_05_50:
 		self._logout(md5Sid, "_parseFritzBoxPhonebook")
 
 	def _errorLoad(self, error, md5Sid):
-		debug("[FritzCallFBF_05_50] _errorLoad: %s" % (error))
+		self.exception(error)
 		text = _("FRITZ!Box - Could not load phonebook: %s") % error.getErrorMessage()
 		self._notify(text)
 		self._logout(md5Sid, "_errorLoad")
@@ -2054,13 +2069,13 @@ class FritzCallFBF_05_50:
 		#
 		# FW 05.27 onwards
 		#
-		debug("[FritzCallFBF_05_50] getCalls")
+		self.debug("")
 		self._callScreen = callScreen
 		self._callType = callType
 		self._login(lambda md5Sid:self._getCalls(callback, md5Sid))
 
 	def _getCalls(self, callback, md5Sid): # pylint: disable=W0613
-		debug("[FritzCallFBF_05_50] _getCalls")
+		self.debug("")
 		if self._callScreen:
 			self._callScreen.updateStatus(_("preparing"))
 		# besser csv mit: https://fritz.box/fon_num/foncalls_list.lua?sid=dea373c2d0257a41&csv=
@@ -2070,7 +2085,7 @@ class FritzCallFBF_05_50:
 
 	def _gotPageCalls(self, callback, csvString="", md5Sid=""):
 
-		debug("[FritzCallFBF_05_50] _gotPageCalls")
+		self.debug("")
 		if self._callScreen:
 			self._callScreen.updateStatus(_("finishing"))
 
@@ -2078,7 +2093,7 @@ class FritzCallFBF_05_50:
 		if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
 			filtermsns = map(lambda x: x.strip(), config.plugins.FritzCall.filtermsn.value.split(","))
 			# TODO: scramble filtermsns
-			debug("[FritzCallFBF_05_50] _gotPageCalls: filtermsns %s" % (repr(map(__, filtermsns))))
+			self.info("filtermsns %s" % (repr(map(__, filtermsns))))
 		else:
 			filtermsns = None
 
@@ -2091,9 +2106,10 @@ class FritzCallFBF_05_50:
 		# 0: direct; 1: date; 2: Name; 3: Nummer; 4: Nebenstelle; 5: Eigene Rufnumme; 6: Dauer
 		calls = csv.reader(StringIO.StringIO(csvString), delimiter=';')
 		calls.next() # skip sep
+		calls.next() # skip header line
 		for call in calls:
 			if len(call) != 7:
-				debug("[FritzCallFBF_05_50] _gotPageCalls: skip %s len: %s" %(repr(call), str(len(call))))
+				self.warn("skip %s len: %s" %(repr(call), str(len(call))))
 				continue
 			direct = call[0]
 			if direct == '1':
@@ -2102,6 +2118,8 @@ class FritzCallFBF_05_50:
 				direct = FBF_OUT_CALLS
 			elif direct == '2':
 				direct = FBF_MISSED_CALLS
+			elif direct == '3':
+				direct = FBF_BLOCKED_CALLS
 			if self._callType != '.' and self._callType != direct:
 				continue
 
@@ -2115,39 +2133,39 @@ class FritzCallFBF_05_50:
 				here = here[start:]
 
 			if filtermsns and here not in filtermsns:
-				# debug("[FritzCallFBF_05_50] _gotPageCalls: skip %s" % (here))
+				# self.debug("skip %s" % (here))
 				continue
 
 			if call[4]:
 				here = resolveNumber(here, call[4] + " (" + here + ")", self.phonebook)
 			else:
 				here = resolveNumber(here, "", self.phonebook)
-			# debug("[FritzCallFBF_05_50] _gotPageCalls: here: " + here)
+			# self.debug("here: " + here)
 
 			number = stripCbCPrefix(call[3], config.plugins.FritzCall.country.value)
 			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
 				number = config.plugins.FritzCall.prefix.value + number
-			# debug("[FritzCallFBF_05_50] _gotPageCalls: number: " + number)
+			# self.debug("number: " + number)
 
 			found = re.match("\d+ \((\d+)\)", call[2])
 			if found:
 				remote = resolveNumber(number, resolveNumber(found.group(1), None, self.phonebook), self.phonebook)
 			else:
 				remote = resolveNumber(number, re.sub(",", "", call[2]), self.phonebook)
-			# debug("[FritzCallFBF_05_50] _gotPageCalls: remote. " + remote)
+			# self.debug("remote. " + remote)
 
-			# debug("[FritzCallFBF_05_50] _gotPageCalls: append: %s" % repr((__(number, False), date, direct, __(remote), length, __(here))))
-			# debug("[FritzCallFBF_05_50] _gotPageCalls: append: %s" % repr((number, date, direct, remote, length, here)))
+			# self.debug("append: %s" % repr((__(number, False), date, direct, __(remote), length, __(here))))
+			# self.debug("append: %s" % repr((number, date, direct, remote, length, here)))
 			callListL.append((number, date, direct, remote, length, here))
 
 		if callback:
-			# debug("[FritzCallFBF_05_50] _gotPageCalls call callback with\n" + text
+			# self.debug("call callback with\n" + text
 			callback(callListL)
 		self._callScreen = None
 		self._logout(md5Sid, "_gotPageCalls")
 
 	def _errorCalls(self, error, md5Sid):
-		debug("[FritzCallFBF_05_50] _errorCalls: %s" % (error))
+		self.exception(error)
 		text = _("FRITZ!Box - Could not load calls: %s") % error.getErrorMessage()
 		self._notify(text)
 		self._logout(md5Sid, "_errorCalls")
@@ -2167,7 +2185,7 @@ class FritzCallFBF_05_50:
 			'telcfg:command/Dial':number,
 			'sid':md5Sid
 			})
-		debug("[FritzCallFBF_05_50] dial url: " + url + "?" + parms)
+		self.info("url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -2177,7 +2195,7 @@ class FritzCallFBF_05_50:
 			postdata=parms).addCallback(self._okDial, md5Sid).addErrback(self._errorDial, md5Sid)
 
 	def _okDial(self, html, md5Sid): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF_05_50] okDial")
+		self.debug("")
 		if html:
 			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
 			if found:
@@ -2185,14 +2203,14 @@ class FritzCallFBF_05_50:
 		self._logout(md5Sid, "_okDial")
 
 	def _errorDial(self, error, md5Sid):
-		debug("[FritzCallFBF_05_50] errorDial: $s" % error)
+		self.exception(error)
 		text = _("FRITZ!Box - Dialling failed: %s") % error.getErrorMessage()
 		self._notify(text)
 		self._logout(md5Sid, "_errorDial")
 
 	def changeWLAN(self, statusWLAN, callback):
-		''' get status info from FBF '''
-		debug("[FritzCallFBF_05_50] changeWLAN start")
+		''' get status information from FBF '''
+		self.debug("")
 		#=======================================================================
 		# Notifications.AddNotification(MessageBox, _("not available with this firmware version"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 		# return
@@ -2223,7 +2241,7 @@ class FritzCallFBF_05_50:
 				})
 
 		url = "http://%s//wlan/wlan_settings.lua" % config.plugins.FritzCall.hostname.value
-		debug("[FritzCallFBF_05_50] changeWLAN url: " + url + "?" + parms)
+		self.debug("url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -2232,7 +2250,7 @@ class FritzCallFBF_05_50:
 			postdata=parms).addCallback(self._okChangeWLAN, callback, md5Sid).addErrback(self._errorChangeWLAN, md5Sid)
 
 	def _okChangeWLAN(self, html, callback, md5Sid): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF_05_50] _okChangeWLAN")
+		self.debug("")
 		if html:
 			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
 			if found:
@@ -2241,13 +2259,13 @@ class FritzCallFBF_05_50:
 		self._logout(md5Sid, "_okChangeWLAN")
 
 	def _errorChangeWLAN(self, error, md5Sid):
-		debug("[FritzCallFBF_05_50] _errorChangeWLAN: $s" % error)
+		self.exception(error)
 		text = _("FRITZ!Box - Failed changing WLAN: %s") % error.getErrorMessage()
 		self._notify(text)
 		self._logout(md5Sid, "_errorChangeWLAN")
 
 	def changeGuestAccess(self, statusGuestAccess, callback):
-		debug("[FritzCallFBF_05_50] changeGuestAccess start")
+		self.debug("")
 # 		if not statusGuestAccess:
 # 			return
 		self._login(lambda md5Sid: self._changeGuestAccessWLAN(statusGuestAccess, callback, md5Sid))
@@ -2287,7 +2305,7 @@ class FritzCallFBF_05_50:
 		parms = urlencode(parms)
 
 		url = "http://%s/wlan/guest_access.lua" % config.plugins.FritzCall.hostname.value
-		debug("[FritzCallFBF_05_50] _changeGuestAccessWLAN url: " + url + "?" + parms)
+		self.debug("url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -2296,7 +2314,7 @@ class FritzCallFBF_05_50:
 			postdata=parms).addCallback(self._okChangeGuestAccess, callback, md5Sid).addErrback(self._errorChangeGuestAccess, md5Sid)
 
 	def _okChangeGuestAccess(self, html, callback, md5Sid): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF_05_50] _okChangeGuestAccess")
+		self.debug("")
 		if html:
 			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
 			if found:
@@ -2305,23 +2323,23 @@ class FritzCallFBF_05_50:
 		self._logout(md5Sid, "_okChangeGuestAccess")
 
 	def _errorChangeGuestAccess(self, error, md5Sid):
-		debug("[FritzCallFBF_05_50] _errorChangeGuestAccess: $s" % error)
+		self.exception(error)
 		text = _("FRITZ!Box - Failed changing GuestAccess: %s") % error.getErrorMessage()
 		self._notify(text)
 		self._logout(md5Sid, "_errorChangeGuestAccess")
 
 	def changeMailbox(self, whichMailbox, callback):
 		''' switch mailbox on/off '''
-		debug("[FritzCallFBF_05_50] changeMailbox start: " + str(whichMailbox))
+		self.debug("start: " + str(whichMailbox))
 		Notifications.AddNotification(MessageBox, _("not available with this firmware version"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def getInfo(self, callback):
-		''' get status info from FBF '''
-		debug("[FritzCallFBF_05_50] getInfo")
+		''' get status information from FBF '''
+		self.debug("")
 		self._login(lambda md5Sid: self._getInfo(callback, md5Sid))
 		
 	def _getInfo(self, callback, md5Sid):
-		debug("[FritzCallFBF_05_50] _getInfo: verify login")
+		self.debug("verify login")
 
 		self._login(self._readBlacklist)
 
@@ -2329,7 +2347,7 @@ class FritzCallFBF_05_50:
 		parms = urlencode({
 			'sid':md5Sid
 			})
-		debug("[FritzCallFBF_05_50] _getInfo url: " + url + "?" + parms)
+		self.debug("url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -2340,7 +2358,7 @@ class FritzCallFBF_05_50:
 
 	def _okGetInfo(self, callback, html, md5Sid):
 
-		debug("[FritzCallFBF_05_50] _okGetInfo")
+		self.debug("")
 
 		#=======================================================================
 		# linkP = open("/tmp/FritzCallInfo.htm", "w")
@@ -2354,27 +2372,27 @@ class FritzCallFBF_05_50:
 		if found:
 			boxInfo = found.group(1) + ', ' + found.group(2) + found.group(3)
 			boxInfo = boxInfo.replace('&nbsp;',' ')
-			debug("[FritzCallFBF_05_50] _okGetInfo Boxinfo: " + boxInfo)
+			self.info("Boxinfo: " + boxInfo)
 
 		found = re.match('.*<div id=\'ipv._info\'><span class="[^"]*">verbunden seit ([^<]*)</span>', html, re.S)
 		if found:
 			upTime = found.group(1)
-			debug("[FritzCallFBF_05_50] _okGetInfo upTime: " + upTime)
+			self.info("upTime: " + upTime)
 
 		ipAddress = ""
 		found = re.match('.*IP-Adresse: ([^<]*)</span>', html, re.S)
 		if found:
 			ipAddress = found.group(1)
-			debug("[FritzCallFBF_05_50] _okGetInfo ipAddress v4: " + ipAddress)
+			self.info("ipAddress v4: " + ipAddress)
 		found = re.match('.*IPv6-Präfix: ([^<]*)</span>', html, re.S)
 		if found:
 			if ipAddress:
 				ipAddress = ipAddress + ' / ' + found.group(1)
 			else:
 				ipAddress = found.group(1)
-			debug("[FritzCallFBF_05_50] _okGetInfo ipAddress v6: " + ipAddress)
+			self.info("ipAddress v6: " + ipAddress)
 
-		# dslState = [ state, info, unused ]; state == '5' means up, everything else down
+		# dslState = [ state, information, unused ]; state == '5' means up, everything else down
 		found = re.match('.*<tr id="uiTrDsl"><td class="(led_gray|led_green|led_red)">', html, re.S)
 		if found:
 			if found.group(1) == "led_green":
@@ -2385,22 +2403,26 @@ class FritzCallFBF_05_50:
 					dslState[2] = found.group(1)
 			else:
 				dslState = ['0', None, None]
-		debug("[FritzCallFBF_05_50] _okGetInfo dslState: " + repr(dslState))
+		self.info("dslState: " + repr(dslState))
 
 		# wlanstate = [ active, encrypted, no of devices ]
 		# encrypted == 2 means unknown
 		#                                      <tr id="uiTrWlan"><td class="led_green"></td><td><a href="/wlan/wlan_settings.lua?sid=9c824da3ecfc7168">WLAN</a></td><td title="an
-		found = re.match('.*<tr id="uiTrWlan"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">WLAN</a></td><td([^>]*)>(?:aus|an)([^<]*)', html, re.S)
+		# <tr id="uiTrWlan"><td class="led_green"></td><td><a href="/wlan/wlan_settings.lua?sid=af3b8ddd6a9176da">WLAN</a></td><td title="an">an, Funknetz: mms</td></tr>
+		found = re.match('.*<tr id="uiTrWlan"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">WLAN</a></td><td[^>]*>((aus|an)[^<]*)', html, re.S)
 		if found:
 			if found.group(1) == "led_green":
 				if found.group(2):
 					wlans = found.group(2)
-					found = re.match('.*"an, ([^"]+)"', wlans, re.S)
+					found = re.match('.*an, ([^"]+)', wlans, re.S)
 					if found:
 						wlanState = [ '1', '2', '', '' ]
 						wlans = found.group(1)
 					else:
 						wlanState = [ '0', '0', '', '' ]
+					found = re.match('.*Funknetz: ([^,"]*)', wlans, re.S)
+					if found:
+						wlanState[3] = found.group(1)
 					found = re.match('.*Funknetz \(2,4 GHz\): ([^,"]*)', wlans, re.S)
 					if found:
 						wlanState[3] = "2,4Ghz: " + found.group(1)
@@ -2417,7 +2439,7 @@ class FritzCallFBF_05_50:
 						wlanState = [ '1', '0', '' ]
 			else:
 				wlanState = [ '0', '0', '0' ]
-			debug("[FritzCallFBF_05_50] _okGetInfo wlanState: " + repr(wlanState))
+			self.info("wlanState: " + repr(wlanState))
 			
 
 		#=======================================================================
@@ -2425,25 +2447,25 @@ class FritzCallFBF_05_50:
 		# if found:
 		#	# found.group(2) could be ', neue Nachrichten vorhanden'; ignore for now
 		#	tamActive = [ found.group(1), False, False, False, False, False]
-		# debug("[FritzCallFBF_05_50] _okGetInfo tamActive: " + repr(tamActive))
+		# self.debug("tamActive: " + repr(tamActive))
 		#=======================================================================
 
 		found = re.match('.*<tr id="uiTrDect"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">DECT</a></td><td>(?:aus|an, (ein|\d*) Schnurlostelefon)', html, re.S)
 		if found:
-			debug("[FritzCallFBF_05_50] _okGetInfo dectActive: " + repr(found.groups()))
+			self.debug("dectActive: " + repr(found.groups()))
 			if found.group(1) == "led_green":
 				dectActive = found.group(2)
-				debug("[FritzCallFBF_05_50] _okGetInfo dectActive: " + repr(dectActive))
+				self.info("dectActive: " + repr(dectActive))
 
 		found = re.match('.*<tr (?:style="")?><td><a href="[^"]*">Faxfunktion</a></td><td>Integriertes Fax aktiv</td>', html, re.S)
 		if found:
 			faxActive = True
-			debug("[FritzCallFBF_05_50] _okGetInfo faxActive: " + repr(faxActive))
+			self.info("faxActive: " + repr(faxActive))
 
 		found = re.match('.*Rufumleitung</a></td><td>aktiv</td>', html, re.S)
 		if found:
 			rufumlActive = -1 # means no number available
-			debug("[FritzCallFBF_05_50] _okGetInfo rufumlActive: " + repr(rufumlActive))
+			self.info("rufumlActive: " + repr(rufumlActive))
 
 		guestAccess = ""
 # 		found = re.match('.*WLAN-Gastzugang</a></td><td title="[^"]*">aktiv ([^<]*)</td>', html, re.S)
@@ -2453,17 +2475,17 @@ class FritzCallFBF_05_50:
 # 				guestAccess =  "WLAN (gesichert)"
 # 			else:
 # 				guestAccess =  "WLAN (ungesichert)"
-# 			debug("[FritzCallFBF_05_50] _okGetInfo guestAccess WLAN: " + repr(guestAccess))
+# 			self.debug("guestAccess WLAN: " + repr(guestAccess))
 # 		found = re.match('.*LAN-Gastzugang</a></td><td title="aktiv">aktiv</td>', html, re.S)
 # 		if found:
 # 			if guestAccess:
 # 				guestAccess =  guestAccess + ", LAN"
 # 			else:
 # 				guestAccess = "LAN"
-# 			debug("[FritzCallFBF_05_50] _okGetInfo guestAccess LAN: " + repr(guestAccess))
+# 			self.debug("guestAccess LAN: " + repr(guestAccess))
 		# WLAN-Gastzugang</a></td><td title="aktiv (2,4 GHz), gesichert, 29 Minuten verbleiben, 0 Geräte">aktiv (2,4 GHz), gesichert, 29 Minuten verbleiben, 0 Geräte</td>
 		# found = re.match('.*linktxt": "WLAN-Gastzugang",\s*"details": "aktiv \(([^\)]+)\)(, (ungesichert|gesichert))?,( (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Geräte), ([^"]+)",\s*"link": "wGuest"', html, re.S)
-		found = re.match('.*WLAN-Gastzugang</a></td><td title="[^"]*">aktiv \(([^\)]+)\)(, (ungesichert|gesichert))?,( (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Geräte)</td>', html, re.S)
+		found = re.match('.*WLAN-Gastzugang</a></td><td title="[^"]*">aktiv \(([^\)]+)\)(, (ungesichert|gesichert))?,( (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Gerät(?:e)?)(, Funknetz: ([^<]+))?</td>', html, re.S)
 		if found:
 			# guestAccess =  "WLAN " + found.group(1)
 			if found.group(2):
@@ -2482,17 +2504,19 @@ class FritzCallFBF_05_50:
 					guestAccess = guestAccess + ', ' + found.group(5) + ' Std.' # n Stunden verbleiben
 			if found.group(7):
 				guestAccess = guestAccess + ', ' + found.group(7) # Geräte
-			debug("[FritzCallFBF_06_35] _okGetInfo guestAccess WLAN: " + repr(guestAccess))
+			if found.group(8):
+				guestAccess = guestAccess + ', ' + found.group(9) # WLAN Name
+			self.info("guestAccess WLAN: " + repr(guestAccess))
 
 		info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
-		debug("[FritzCallFBF_05_50] _okGetInfo info: " + str(info))
-		self.info = info
+		self.info("Information: " + str(info))
+		self.information = info
 		if callback:
 			callback(info)
 		self._logout(md5Sid, "_okGetInfo")
 
 	def _errorGetInfo(self, error, md5Sid):
-		debug("[FritzCallFBF_05_50] _errorGetInfo: %s" % (error))
+		self.exception(error)
 		text = _("FRITZ!Box - Error getting status: %s") % error.getErrorMessage()
 		self._notify(text)
 		self._logout(md5Sid, "_errorGetInfo")
@@ -2509,7 +2533,7 @@ class FritzCallFBF_05_50:
 			'reboot':'',
 			'sid':md5Sid
 			})
-		debug("[FritzCallFBF_05_50] _reset url: " + url + "?" + parms)
+		self.debug("url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -2519,7 +2543,7 @@ class FritzCallFBF_05_50:
 
 
 	def _okReset(self, html, md5Sid): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF_05_50] _okReset")
+		self.debug("")
 		#=======================================================================
 		# linkP = open("/tmp/_okReset.htm", "w")
 		# linkP.write(html)
@@ -2532,7 +2556,7 @@ class FritzCallFBF_05_50:
 		self._logout(md5Sid, "_okReset")
 
 	def _errorReset(self, error, md5Sid):
-		debug("[FritzCallFBF_05_50] _errorReset: %s" % (error))
+		self.exception(error)
 		text = _("FRITZ!Box - Error resetting: %s") % error.getErrorMessage()
 		self._notify(text)
 		self._logout(md5Sid, "_errorReset")
@@ -2543,7 +2567,7 @@ class FritzCallFBF_05_50:
 		parms = urlencode({
 			'sid':md5Sid
 			})
-		debug("[FritzCallFBF_05_50] _readBlacklist url: " + url + "?" + parms)
+		self.debug("url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -2553,7 +2577,7 @@ class FritzCallFBF_05_50:
 			postdata=parms).addCallback(self._okBlacklist, md5Sid).addErrback(self._errorBlacklist, md5Sid)
 
 	def _okBlacklist(self, html, md5Sid):
-		debug("[FritzCallFBF_05_50] _okBlacklist")
+		self.debug("")
 		#=======================================================================
 		# linkP = open("/tmp/FritzCallBlacklist.htm", "w")
 		# linkP.write(html)
@@ -2578,31 +2602,37 @@ class FritzCallFBF_05_50:
 				self.blacklist[0].append(entry.group(2))
 			else:
 				self.blacklist[1].append(entry.group(2))
-		debug("[FritzCallFBF_05_50] _okBlacklist: %s" % repr(self.blacklist))
+		self.debug(repr(self.blacklist))
 		self._logout(md5Sid, "_okBlacklist")
 
 	def _errorBlacklist(self, error, md5Sid):
-		debug("[FritzCallFBF_05_50] _errorBlacklist: %s" % (error))
+		self.exception(error)
 		text = _("FRITZ!Box - Error getting blacklist: %s") % error.getErrorMessage()
 		self._notify(text)
 		self._logout(md5Sid, "_errorBlacklist")
 
 class FritzCallFBF_06_35:
+	logger = logging.getLogger("[FritzCallFBF_06_35]")
+	debug = logger.debug
+	info = logger.info
+	warn = logger.warn
+	error = logger.error
+
 	def __init__(self):
-		debug("[FritzCallFBF_06_35] __init__")
+		self.debug("")
 		self._callScreen = None
 		self._callType = config.plugins.FritzCall.fbfCalls.value
 		self._phoneBookID = '0'
 		self.blacklist = ([], [])
-		self.info = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
+		self.information = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
 		self.phonebook = None
 		self.getInfo(None)
 		# self.readBlacklist() now in getInfo
 
 	def _notify(self, text):
-		debug("[FritzCallFBF_06_35] notify: " + text)
+		self.info(text)
 		if self._callScreen:
-			debug("[FritzCallFBF_06_35] notify: try to close callScreen")
+			self.debug("try to close callScreen")
 			self._callScreen.close()
 			self._callScreen = None
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
@@ -2610,7 +2640,7 @@ class FritzCallFBF_06_35:
 	def _login(self, callback=None):
 		# http://fritz.box/login_lua.xml
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_06_35] _login: " + time.ctime() + " :"+ url)
+		self.debug(time.ctime() + " :"+ url)
 		getPage(url,
 			method="GET",
 			headers={'Content-Type': "application/x-www-form-urlencoded"}
@@ -2618,14 +2648,14 @@ class FritzCallFBF_06_35:
 
 	def _md5Login(self, sidXml, callback):
 		def buildResponse(challenge, text):
-			debug("[FritzCallFBF_06_35] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + __(text))
+			self.debug("_md5Login: challenge: " + challenge + ' text: ' + __(text))
 			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
 			for i in range(len(text)):
 				if ord(text[i]) > 255:
 					text[i] = '.'
 			md5 = hashlib.md5()
 			md5.update(text) # pylint: disable=e1101
-			debug("[FritzCallFBF_06_35] md5Login/buildResponse: " + md5.hexdigest())
+			self.debug("_md5Login: " + md5.hexdigest())
 			return challenge + '-' + md5.hexdigest()
 
 		#=======================================================================
@@ -2634,21 +2664,21 @@ class FritzCallFBF_06_35:
 		# linkP.close()
 		#=======================================================================
 
-		debug("[FritzCallFBF_06_35] _md5Login")
+		self.debug("")
 		sidX = ET.fromstring(sidXml)
 	#===========================================================================
 	#	self._md5Sid = sidX.find("SID").text
 	#	if self._md5Sid:
-	#		debug("[FritzCallFBF_06_35] _md5Login: SID "+ self._md5Sid)
+	#		self.debug("SID "+ self._md5Sid)
 	#	else:
-	#		debug("[FritzCallFBF_06_35] _md5Login: no sid! That must be an old firmware.")
+	#		self.debug("no sid! That must be an old firmware.")
 	#		self._notify(_("FRITZ!Box - Error logging in\n\n") + _("wrong firmware version?"))
 	#		return
 	# 
 	#	if self._md5Sid != "0000000000000000":
-	#		debug("[FritzCallFBF_06_35] _md5Login: SID "+ self._md5Sid)
+	#		self.debug("SID "+ self._md5Sid)
 	#		for callback in self._loginCallbacks:
-	#			debug("[FritzCallFBF_06_35] _md5Login: calling " + callback.__name__)
+	#			self.debug("calling " + callback.__name__)
 	#			callback(None)
 	#		self._loginCallbacks = []
 	#		return
@@ -2656,9 +2686,9 @@ class FritzCallFBF_06_35:
 
 		challenge = sidX.find("Challenge").text
 		if challenge:
-			debug("[FritzCallFBF_06_35] _md5Login: challenge " + challenge)
+			self.debug("challenge " + challenge)
 		else:
-			debug("[FritzCallFBF_06_35] _md5Login: login necessary and no challenge! That is terribly wrong.")
+			self.error("login necessary and no challenge! That is terribly wrong.")
 
 		# TODO: check validity of username?
 		parms = urlencode({
@@ -2666,7 +2696,7 @@ class FritzCallFBF_06_35:
 						'response': buildResponse(challenge, config.plugins.FritzCall.password.value),
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_06_35] _md5Login: " + url + "?" + parms)
+		self.debug(url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -2686,16 +2716,16 @@ class FritzCallFBF_06_35:
 		sidX = ET.fromstring(sidXml)
 		md5Sid = sidX.find("SID").text
 		if md5Sid and md5Sid != "0000000000000000":
-			debug("[FritzCallFBF_06_35] _gotPageLogin: found sid: " + md5Sid)
+			self.debug("found sid: " + md5Sid)
 		else:
-			debug("[FritzCallFBF_06_35] _gotPageLogin: found no sid")
+			self.error("found no sid")
 			self._notify(_("FRITZ!Box - Error logging in\n\n") + _("wrong user or password?"))
 			return
 
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login ok"))
 
-		debug("[FritzCallFBF_06_35] _gotPageLogin: calling " + callback.__name__)
+		self.info("calling " + callback.__name__)
 		callback(md5Sid)
 
 	def _errorLogin(self, error):
@@ -2707,7 +2737,7 @@ class FritzCallFBF_06_35:
 		text = _("FRITZ!Box - Error logging in: %s\nDisabling plugin.") % text
 		# config.plugins.FritzCall.enable.value = False
 		fritzbox = None
-		debug("[FritzCallFBF_06_35] _errorLogin: %s" % (error))
+		self.exception(error)
 		self._notify(text)
 
 	def _logout(self, md5Sid, what):
@@ -2716,7 +2746,7 @@ class FritzCallFBF_06_35:
 						'logout':'bye bye Fritz'
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_06_35] _logout (" + what + ") " + time.ctime() + ": " + url + "?" + parms)
+		self.debug("(" + what + ") " + time.ctime() + ": " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -2724,8 +2754,8 @@ class FritzCallFBF_06_35:
 					}, postdata=parms).addErrback(self._errorLogout)
 
 	def _errorLogout(self, error):
-		debug("[FritzCallFBF_06_35] _errorLogout: %s" % (error))
 		text = _("FRITZ!Box - Error logging out: %s") % error.getErrorMessage()
+		self.exception(error)
 		self._notify(text)
 
 	def loadFritzBoxPhonebook(self, phonebook):
@@ -2740,7 +2770,7 @@ class FritzCallFBF_06_35:
 						})
 		# TODO /?fonbook_select /data.lua?xhr=1&sid=1c08ccd3e37327c7&lang=de&no_sidrenew=&page=bookLi
 		url = "http://%s/data.lua" % (config.plugins.FritzCall.hostname.value)
-		debug("[FritzCallFBF_06_35] _loadFritzBoxPhonebookNew: " + url + "?" + parms)
+		self.debug(url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -2748,13 +2778,13 @@ class FritzCallFBF_06_35:
 					}, postdata=parms).addCallback(self._parseFritzBoxPhonebook, md5Sid).addErrback(self._errorLoad, md5Sid)
 
 	def _parseFritzBoxPhonebook(self, html, md5Sid):
-		debug("[FritzCallFBF_06_35] _parseFritzBoxPhonebook")
+		self.debug("")
 		# first, let us get the charset
 		try:
-			debug("[FritzCallFBF_06_35] _parseFritzBoxPhonebook: try charset utf-8")
+			self.debug("try charset utf-8")
 			html = html2unicode(html.decode('utf-8')).encode('utf-8') # this looks silly, but has to be
 		except UnicodeDecodeError:
-			debug("[FritzCallFBF_06_35] _parseFritzBoxPhonebook: try charset iso-8859-1")
+			self.debug("try charset iso-8859-1")
 			html = html2unicode(html.decode('iso-8859-1')).encode('utf-8') # this looks silly, but has to be
 
 		# cleanout hrefs
@@ -2765,10 +2795,11 @@ class FritzCallFBF_06_35:
 # 		linkP.write(html)
 # 		linkP.close()
 
-		entrymask = re.compile('<td class="tname" title="([^"]*)">[^<]*</td><td class="tnum"(?: datalabel="[^"]*")?>([^<]+(?:<br>[^<]+)*)</td><td class="ttype">([^<]+(?:<br>[^<]+)*)</td><td class="tcode"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td><td class="tvanity"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td>', re.S)
+		entrymask = re.compile('<td class="tname" title="([^"]*)">[^<]*</td><td class="tnum"(?: datalabel="[^"]*")?>((?:<a class="print"[^>]+>)?[^<]+(?:<br>(?:<a class="print"[^>]+>)?[^<]+)*)</td><td class="ttype">([^<]+(?:<br>[^<]+)*)</td><td class="tcode"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td><td class="tvanity"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td>', re.S)
+		# entrymask = re.compile('<td class="tname" title="([^"]*)">[^<]*</td><td class="tnum"(?: datalabel="[^"]*")?>(?:&lt;a class="print"[^&gt;]+&gt;)?([^<]+(?:<br>[^<]+)*)</td><td class="ttype">([^<]+(?:<br>[^<]+)*)</td><td class="tcode"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td><td class="tvanity"(?: datalabel="[^"]*")?>([^<]*(?:<br>[^<]*)*)</td>', re.S)
 		entries = entrymask.finditer(html)
 		for found in entries:
-			# debug("[FritzCallFBF_06_35] _parseFritzBoxPhonebook: processing entry for '''%s'''" % repr(found.groups()))
+			# self.debug("processing entry for '''%s'''" % repr(found.groups()))
 			name = html2unicode(re.sub(",", "", found.group(1)))
 			thisnumbers = found.group(2).split("<br>")
 			thistypes = found.group(3).split("<br>")
@@ -2779,11 +2810,11 @@ class FritzCallFBF_06_35:
 					continue;
 				thisnumber = cleanNumber(thisnumbers[i])
 				if self.phonebook.phonebook.has_key(thisnumber):
-					# debug("[FritzCallFBF_06_35] Ignoring '%s' ('%s') with %s' ( have: '%s')" % (name, thistypes[i], __(thisnumber), self.phonebook.phonebook[thisnumber]))
+					# self.debug("Ignoring '%s' ('%s') with %s' ( have: '%s')" % (name, thistypes[i], __(thisnumber), self.phonebook.phonebook[thisnumber]))
 					continue
 
 				if not thisnumbers[i]:
-					# debug("[FritzCallFBF_06_35] _parseFritzBoxPhonebook: Ignoring entry with empty number for '''%s'''" % (__(name)))
+					# self.debug("Ignoring entry with empty number for '''%s'''" % (__(name)))
 					continue
 				else:
 					thisname = name.decode('utf-8')
@@ -2794,27 +2825,27 @@ class FritzCallFBF_06_35:
 					if config.plugins.FritzCall.showVanity.value and thisvanitys[i]:
 						thisname = thisname + ", " + _("Vanity") + ": " + thisvanitys[i]
 
-					# debug("[FritzCallFBF_06_35] _parseFritzBoxPhonebook: Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
-					# debug("[FritzCallFBF_06_35] _parseFritzBoxPhonebook: Adding '''%s''' with '''%s'''" % (thisname.strip(), thisnumber))
+					# self.debug("Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
+					# self.debug("Adding '''%s''' with '''%s'''" % (thisname.strip(), thisnumber))
 					# Beware: strings in phonebook.phonebook have to be in utf-8!
 					self.phonebook.phonebook[thisnumber] = thisname.encode('utf-8')
 
 		self._logout(md5Sid, "_parseFritzBoxPhonebook")
 
 	def _errorLoad(self, error, md5Sid):
-		debug("[FritzCallFBF_06_35] _errorLoad: %s" % (error))
 		text = _("FRITZ!Box - Could not load phonebook: %s") % error.getErrorMessage()
+		self.exception(error)
 		self._notify(text)
 		self._logout(md5Sid, "_errorLoad")
 
 	def getCalls(self, callScreen, callback, callType):
-		debug("[FritzCallFBF_06_35] getCalls")
+		self.debug("")
 		self._callScreen = callScreen
 		self._callType = callType
 		self._login(lambda md5Sid:self._getCalls(callback, md5Sid))
 
 	def _getCalls(self, callback, md5Sid): # pylint: disable=W0613
-		debug("[FritzCallFBF_06_35] _getCalls")
+		self.debug("")
 		if self._callScreen:
 			self._callScreen.updateStatus(_("preparing"))
 		# besser csv mit: https://fritz.box/fon_num/foncalls_list.lua?sid=dea373c2d0257a41&csv=
@@ -2825,7 +2856,7 @@ class FritzCallFBF_06_35:
 
 	def _gotPageCalls(self, callback, csvString="", md5Sid=""):
 
-		debug("[FritzCallFBF_06_35] _gotPageCalls")
+		self.debug("")
 		if self._callScreen:
 			self._callScreen.updateStatus(_("finishing"))
 
@@ -2833,7 +2864,7 @@ class FritzCallFBF_06_35:
 		if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
 			filtermsns = map(lambda x: x.strip(), config.plugins.FritzCall.filtermsn.value.split(","))
 			# TODO: scramble filtermsns
-			debug("[FritzCallFBF_06_35] _gotPageCalls: filtermsns %s" % (repr(map(__, filtermsns))))
+			self.info("filtermsns %s" % (repr(map(__, filtermsns))))
 		else:
 			filtermsns = None
 
@@ -2846,9 +2877,10 @@ class FritzCallFBF_06_35:
 		# 0: direct; 1: date; 2: Name; 3: Nummer; 4: Nebenstelle; 5: Eigene Rufnumme; 6: Dauer
 		calls = csv.reader(StringIO.StringIO(csvString), delimiter=';')
 		calls.next() # skip sep
+
 		for call in calls:
 			if len(call) != 7:
-				debug("[FritzCallFBF_06_35] _gotPageCalls: skip %s len: %s" %(repr(call), str(len(call))))
+				self.warn("skip %s len: %s" %(repr(call), str(len(call))))
 				continue
 			direct = call[0]
 			if direct == '1':
@@ -2857,9 +2889,10 @@ class FritzCallFBF_06_35:
 				direct = FBF_OUT_CALLS
 			elif direct == '2':
 				direct = FBF_MISSED_CALLS
+			elif direct == '3':
+				direct = FBF_BLOCKED_CALLS
 			if self._callType != '.' and self._callType != direct:
 				continue
-
 			date = call[1]
 			length = call[6]
 
@@ -2870,40 +2903,40 @@ class FritzCallFBF_06_35:
 				here = here[start:]
 
 			if filtermsns and here not in filtermsns:
-				# debug("[FritzCallFBF_06_35] _gotPageCalls: skip %s" % (here))
+				# self.debug("skip %s" % (here))
 				continue
 
 			if call[4]:
 				here = resolveNumber(here, call[4] + " (" + here + ")", self.phonebook)
 			else:
 				here = resolveNumber(here, "", self.phonebook)
-			# debug("[FritzCallFBF_06_35] _gotPageCalls: here: " + here)
+			# self.debug("here: " + here)
 
 			number = stripCbCPrefix(call[3], config.plugins.FritzCall.country.value)
 			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
 				number = config.plugins.FritzCall.prefix.value + number
-			# debug("[FritzCallFBF_06_35] _gotPageCalls: number: " + number)
+			# self.debug("number: " + number)
 
 			found = re.match("\d+ \((\d+)\)", call[2])
 			if found:
 				remote = resolveNumber(number, resolveNumber(found.group(1), None, self.phonebook), self.phonebook)
 			else:
 				remote = resolveNumber(number, re.sub(",", "", call[2]), self.phonebook)
-			# debug("[FritzCallFBF_06_35] _gotPageCalls: remote. " + remote)
+			# self.debug("remote. " + remote)
 
-			# debug("[FritzCallFBF_06_35] _gotPageCalls: append: %s" % repr((__(number, False), date, direct, __(remote), length, __(here))))
-			# debug("[FritzCallFBF_06_35] _gotPageCalls: append: %s" % repr((number, date, direct, remote, length, here)))
+			# self.debug("append: %s" % repr((__(number, False), date, direct, __(remote), length, __(here))))
+			# self.debug("ppend: %s" % repr((number, date, direct, remote, length, here)))
 			callListL.append((number, date, direct, remote, length, here))
 
 		if callback:
-			# debug("[FritzCallFBF_06_35] _gotPageCalls call callback with\n" + text
+			# self.debug("call callback with\n" + text
 			callback(callListL)
 		self._callScreen = None
 		self._logout(md5Sid, "_gotPageCalls")
 
 	def _errorCalls(self, error, md5Sid):
-		debug("[FritzCallFBF_06_35] _errorCalls: %s" % (error))
 		text = _("FRITZ!Box - Could not load calls: %s") % error.getErrorMessage()
+		self.exception(error)
 		self._notify(text)
 		self._logout(md5Sid, "_errorCalls")
 
@@ -2914,7 +2947,7 @@ class FritzCallFBF_06_35:
 		@param number: number to dial
 		@type number: string
 		'''
-		debug("[FritzCallFBF_06_35] dial start")
+		self.debug("")
 		Notifications.AddNotification(MessageBox, _("not available with this firmware version"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def changeWLAN(self, statusWLAN, callback):
@@ -2924,7 +2957,7 @@ class FritzCallFBF_06_35:
 		@param state: '0' means: turn off, '1' turn on
 		@type state: string
 		'''
-		debug("[FritzCallFBF_06_35] changeWLAN start")
+		self.debug("")
 		#=======================================================================
 		# Notifications.AddNotification(MessageBox, _("not available with this firmware version"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 		# return
@@ -2955,7 +2988,7 @@ class FritzCallFBF_06_35:
 				})
 
 		url = "http://%s//wlan/wlan_settings.lua" % config.plugins.FritzCall.hostname.value
-		debug("[FritzCallFBF_05_50] changeWLAN url: " + url + "?" + parms)
+		self.debug("url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -2964,7 +2997,7 @@ class FritzCallFBF_06_35:
 			postdata=parms).addCallback(self._okChangeWLAN, callback, md5Sid).addErrback(self._errorChangeWLAN, md5Sid)
 
 	def _okChangeWLAN(self, html, callback, md5Sid): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF_05_50] _okChangeWLAN")
+		self.debug("")
 		if html:
 			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
 			if found:
@@ -2973,8 +3006,8 @@ class FritzCallFBF_06_35:
 		self._logout(md5Sid, "_okChangeWLAN")
 
 	def _errorChangeWLAN(self, error, md5Sid):
-		debug("[FritzCallFBF_05_50] _errorChangeWLAN: $s" % error)
 		text = _("FRITZ!Box - Failed changing WLAN: %s") % error.getErrorMessage()
+		self.exception(error)
 		self._notify(text)
 		self._logout(md5Sid, "_errorChangeWLAN")
 
@@ -2985,7 +3018,7 @@ class FritzCallFBF_06_35:
 		@param statusGuestAccess: 'WLAN', 'WLAN, LAN' or 'LAN'
 		@type statusGuestAccess: string
 		'''
-		debug("[FritzCallFBF_06_35] changeWLAN start")
+		self.debug("")
 # 		if not statusGuestAccess:
 # 			return
 		self._login(lambda md5Sid: self._changeGuestAccessWLAN(statusGuestAccess, callback, md5Sid))
@@ -3025,7 +3058,7 @@ class FritzCallFBF_06_35:
 		parms = urlencode(parms)
 
 		url = "http://%s/data.lua" % config.plugins.FritzCall.hostname.value
-		debug("[FritzCallFBF_06_35] _changeGuestAccessWLAN url: " + url + "?" + parms)
+		self.debug("url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -3034,7 +3067,7 @@ class FritzCallFBF_06_35:
 			postdata=parms).addCallback(self._okChangeGuestAccess, callback, md5Sid).addErrback(self._errorChangeGuestAccess, md5Sid)
 
 	def _okChangeGuestAccess(self, html, callback, md5Sid): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF_06_35] _okChangeGuestAccess")
+		self.debug("")
 		if html:
 			found = re.match('.*<p class="ErrorMsg">([^<]*)</p>', html, re.S)
 			if found:
@@ -3043,8 +3076,8 @@ class FritzCallFBF_06_35:
 		self._logout(md5Sid, "_okChangeGuestAccess")
 
 	def _errorChangeGuestAccess(self, error, md5Sid):
-		debug("[FritzCallFBF_06_35] _errorChangeGuestAccess: $s" % error)
 		text = _("FRITZ!Box - Failed changing GuestAccess: %s") % error.getErrorMessage()
+		self.exception(error)
 		self._notify(text)
 		self._logout(md5Sid, "_errorChangeGuestAccess")
 
@@ -3055,18 +3088,18 @@ class FritzCallFBF_06_35:
 		@param which: number, which mailbox to toggle; '-1' means all
 		@type which: string
 		'''
-		debug("[FritzCallFBF_06_35] changeMailbox start")
+		self.debug("")
 		Notifications.AddNotification(MessageBox, _("not available with this firmware version"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def getInfo(self, callback):
 		'''
-		Retrieve info from box and fill in self.info and self.blacklist
+		Retrieve information from box and fill in self.information and self.blacklist
 		'''
-		debug("[FritzCallFBF_06_35] getInfo start")
+		self.debug("")
 		self._login(lambda md5Sid: self._getInfo(callback, md5Sid))
 		
 	def _getInfo(self, callback, md5Sid):
-		debug("[FritzCallFBF_06_35] _getInfo: verify login")
+		self.debug("verify login")
 
 		self._login(self._readBlacklist)
 
@@ -3077,7 +3110,7 @@ class FritzCallFBF_06_35:
 			'page':'overview',
 			'type':'all'
 			})
-		debug("[FritzCallFBF_06_35] _getInfo url: " + url + "?" + parms)
+		self.debug("url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -3088,11 +3121,13 @@ class FritzCallFBF_06_35:
 
 	def _okGetInfo(self, callback, html, md5Sid):
 
-		debug("[FritzCallFBF_06_35] _okGetInfo")
+		self.debug("")
 
-# 		linkP = open("/tmp/FritzCallDataOverview.lua", "w")
-# 		linkP.write(html)
-# 		linkP.close()
+		#=======================================================================
+		# linkP = open("/tmp/FritzCallGetInfo.lua", "w")
+		# linkP.write(html)
+		# linkP.close()
+		#=======================================================================
 
 		(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = (None, None, None, None, None, None, None, None, None, None)
 
@@ -3105,35 +3140,35 @@ class FritzCallFBF_06_35:
 			found = re.match('.*"fb_name": "([^"]+)"', html, re.S)
 			if found:
 				boxInfo = boxInfo + ", " + found.group(1)
-			debug("[FritzCallFBF_06_35] _okGetInfo Boxinfo: " + boxInfo)
+			self.info("Boxinfo: " + boxInfo)
 
 		# found = re.match('.*"ipv4": {\s*"txt": \["IPv4, verbunden seit ([^"]+) Uhr",( "Anbieter: ([^"]*)",)? "IP-Adresse: ([^"]+)"\],', html, re.S)
 		found = re.match('.*"ipv4": {\s*"txt": \["(?:IPv4, )?verbunden seit ([^"]+) Uhr",', html, re.S)
 		if found:
 			upTime = found.group(1)
-			debug("[FritzCallFBF_06_35] _okGetInfo upTime: " + upTime)
+			self.info("upTime: " + upTime)
 
 		#found = re.match('.*"ipv4": {\s*"txt": \["IPv4, verbunden seit ([^"]+) Uhr",( "Anbieter: ([^"]*)",)? "IP-Adresse: ([^"]+)"\],', html, re.S)
 		found = re.match('.*"ipv4": {\s*"txt": \["IPv4, [^"]+", "Anbieter: ([^"]*)",', html, re.S)
 		provider = None
 		if found:
 			provider = found.group(1)
-			debug("[FritzCallFBF_06_35] _okGetInfo provider: " + provider)
+			self.info("provider: " + provider)
 		else:
 			found = re.match('.*"ipv4": {\s*"txt": \["[^"]+", "Anbieter: ([^"]*)",', html, re.S)
 			if found:
 				provider = found.group(1)
-				debug("[FritzCallFBF_06_35] _okGetInfo provider2: " + provider)
+				self.info("provider2: " + provider)
 
 		found = re.match('.*"ipv4": {\s*"txt": \["IPv4, [^"]+",(?: "Anbieter: [^"]*",)? "IP-Adresse: ([^"]+)"\],', html, re.S)
 		if found:
 			ipAddress = found.group(1)
-			debug("[FritzCallFBF_06_35] _okGetInfo ipAddress: " + ipAddress)
+			self.info("ipAddress: " + ipAddress)
 		else:
 			found = re.match('.*"ipv4": {\s*"txt": \["[^"]+",(?: "Anbieter: [^"]*",)? "IP-Adresse: ([^"]+)"\],', html, re.S)
 			if found:
 				ipAddress = found.group(1)
-				debug("[FritzCallFBF_06_35] _okGetInfo ipAddress: " + ipAddress)
+				self.info("ipAddress: " + ipAddress)
 
 		# found = re.match('.*"ipv4": {\s*"txt": \["IPv4, verbunden seit ([^"]+) Uhr",( "Anbieter: ([^"]*)",)? "IP-Adresse: ([^"]+)"\],', html, re.S)
 		found = re.match('.*"ipv6": {\s*"txt": \["IPv6, verbunden seit ([^"]+) Uhr",', html, re.S)
@@ -3141,33 +3176,33 @@ class FritzCallFBF_06_35:
 			upTime6 = found.group(1)
 			if upTime and upTime.find(upTime6) == -1:
 				upTime = upTime +'/' + upTime6
-			debug("[FritzCallFBF_06_35] _okGetInfo upTime6: " + upTime)
+			self.info("upTime6: " + upTime)
 
 		#found = re.match('.*"ipv4": {\s*"txt": \["IPv4, verbunden seit ([^"]+) Uhr",( "Anbieter: ([^"]*)",)? "IP-Adresse: ([^"]+)"\],', html, re.S)
-		found = re.match('.*"ipv6": {\s*"txt": \["IPv6, [^"]+", "Anbieter: ([^"]*)",', html, re.S)
+		found = re.match('.*"ipv6": {\s*"txt": \["IPv6,(?: [^"]+",)? "Anbieter: ([^"]*)",', html, re.S)
 		if found:
 			provider6 = found.group(1)
 			if provider and provider.find(provider6) == -1:
 				provider = provider +'/' + provider6
 			else:
 				provider = provider6
-			debug("[FritzCallFBF_06_35] _okGetInfo provider6: " + provider)
+			self.info("provider6: " + provider)
 		
 		if provider:
 			if upTime:
 				upTime = upTime + ' mit ' + provider
 		
-		found = re.match('.*"ipv6": {\s*"txt": \["IPv6, [^"]+",(?: "Anbieter: [^"]*",)? "IPv6-Präfix: ([^"]+)"\],', html, re.S)
+		found = re.match('.*"ipv6": {\s*"txt": \["IPv6,(?: [^"]+",)?(?: "Anbieter: [^"]*",)? "IPv6-(?:Adresse|Präfix): ([^"]+)"\],', html, re.S)
 		if found:
 			if ipAddress:
 				ipAddress = ipAddress + ' / ' + found.group(1).replace('\\', '')
 			else:
 				ipAddress = found.group(1).replace('\\', '')
-			debug("[FritzCallFBF_06_35] _okGetInfo ipAddress6: " + ipAddress)
+			self.info("ipAddress6: " + ipAddress)
 
-		# dslState = [ state, info, unused ]; state == '5' means up, everything else down
+		# dslState = [ state, information, unused ]; state == '5' means up, everything else down
 		#found = re.match('.*<tr id="uiTrDsl"><td class="(led_gray|led_green|led_red)">', html, re.S)
-		# found = re.match('.*<div class="desc (led_gray|led_green|led_red)"><div class="desc title"><a href="">(DSL|Kabel)</a></div><div class="details info">[^<]*<div class="speed"><span class="downstream">([^<]*)</span><span class="upstream">([^<]*)</span></div></div></div>', html, re.S)
+		# found = re.match('.*<div class="desc (led_gray|led_green|led_red)"><div class="desc title"><a href="">(DSL|Kabel)</a></div><div class="details information">[^<]*<div class="speed"><span class="downstream">([^<]*)</span><span class="upstream">([^<]*)</span></div></div></div>', html, re.S)
 		found = re.match('.*"(?:dsl|cable)": {\s*"txt": "(?:verbunden|aktiviert|deaktiviert)",\s*"led": "(led_gray|led_green|led_red)",\s*"title": "(DSL|Kabel)",\s*"up": "([^"]*)",\s*"down": "([^"]*)",', html, re.S)
 		if found:
 			if found.group(1) == "led_green":
@@ -3177,19 +3212,19 @@ class FritzCallFBF_06_35:
 				dslState[2] = found.group(2)
 			else:
 				dslState = ['0', None, None]
-		debug("[FritzCallFBF_06_35] _okGetInfo dslState: " + repr(dslState))
+		self.info("dslState: " + repr(dslState))
 
-		# wlanstate = [ active, encrypted, no of devices, info ]
+		# wlanstate = [ active, encrypted, no of devices, information ]
 		# encrypted == 2 means unknown
 		#found = re.match('.*<tr id="uiTrWlan"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">WLAN</a></td><td[^>]*>(aus|an)', html, re.S)
-		#found = re.match('.*<div class="desc led_green)"><div class="desc title"><a href="">WLAN</a></div><div class="details info">an, Funknetz 2,4 GHz: ([^<]*)</div></div>', html, re.S)
+		#found = re.match('.*<div class="desc led_green)"><div class="desc title"><a href="">WLAN</a></div><div class="details information">an, Funknetz 2,4 GHz: ([^<]*)</div></div>', html, re.S)
 		found = re.match('.*"wlan24": {\s*"txt": "(an|aus), Funknetz 2,4 GHz: ([^"]+)",\s*"led": "(led_gray|led_green)",', html, re.S)
 		if found:
 			if found.group(1) == 'an':
 				wlanState = [ '1', '', '',  "2,4GHz an: " + found.group(2)]
 			else:
 				wlanState = [ '0', '', '',  "2,4GHz aus: " + found.group(2)]
-		#found = re.match('.*<div class="desc led_green"><div class="desc title"><a href="">WLAN</a></div><div class="details info">an, Funknetz 5 GHz: ([^<]*)</div></div>', html, re.S)
+		#found = re.match('.*<div class="desc led_green"><div class="desc title"><a href="">WLAN</a></div><div class="details information">an, Funknetz 5 GHz: ([^<]*)</div></div>', html, re.S)
 		found = re.match('.*"wlan5": {\s*"txt": "(an|aus), Funknetz 5 GHz: ([^"]+)",\s*"led": "(led_gray|led_green)",', html, re.S)
 		if found:
 			if not wlanState:
@@ -3201,7 +3236,7 @@ class FritzCallFBF_06_35:
 				if found.group(1) == 'an':
 					wlanState[0] = '1'
 					wlanState[3] = wlanState[3] + ", 5GHz an: " + found.group(2)
-		debug("[FritzCallFBF_06_35] _okGetInfo wlanState: " + repr(wlanState))
+		self.info("wlanState: " + repr(wlanState))
 			
 
 		#=======================================================================
@@ -3209,25 +3244,28 @@ class FritzCallFBF_06_35:
 		# if found:
 		#	# found.group(2) could be ', neue Nachrichten vorhanden'; ignore for now
 		#	tamActive = [ found.group(1), False, False, False, False, False]
-		# debug("[FritzCallFBF_06_35] _okGetInfo tamActive: " + repr(tamActive))
+		# self.debug("tamActive: " + repr(tamActive))
 		#=======================================================================
 
 		# found = re.match('.*<tr id="uiTrDect"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">DECT</a></td><td>(?:aus|an, (ein|\d*) Schnurlostelefon)', html, re.S)
-		#found = re.match('.*<div class="desc led_green"><div class="desc title"><a href="">DECT</a></div><div class="details info">an, ([\d+]+) Schnurlostelefone angemeldet</div></div>', html, re.S)
-		found = re.match('.*"dect": {\s*"txt": "an, ([\d+]+) Schnurlostelefone angemeldet",\s*"led": "led_green"', html, re.S)
+		#found = re.match('.*<div class="desc led_green"><div class="desc title"><a href="">DECT</a></div><div class="details information">an, ([\d+]+) Schnurlostelefone angemeldet</div></div>', html, re.S)
+		found = re.match('.*"dect": {\s*"txt": "an, ([\d+]+|ein) Schnurlostelefon(?:e)? angemeldet",\s*"led": "led_green"', html, re.S)
 		if found:
 			dectActive = found.group(1)
-		debug("[FritzCallFBF_06_35] _okGetInfo dectActive: " + repr(dectActive))
+		self.info("dectActive: " + repr(dectActive))
 
 		found = re.match('.*"details": "Integriertes Fax aktiv"', html, re.S)
 		if found:
 			faxActive = True
-			debug("[FritzCallFBF_06_35] _okGetInfo faxActive: " + repr(faxActive))
+			self.info("faxActive: " + repr(faxActive))
  
-		found = re.match('.*"linktxt": "Rufumleitung",\s*"details": "aktiv",', html, re.S)
+		found = re.match('.*"linktxt": "Rufumleitung",\s*"details": "(?:(\d+) )?aktiv",', html, re.S)
 		if found:
-			rufumlActive = -1 # means no number available
-			debug("[FritzCallFBF_06_35] _okGetInfo rufumlActive: " + repr(rufumlActive))
+			if found.group(1):
+				rufumlActive = int(found.group(1))
+			else:
+				rufumlActive = -1 # means no number available
+			self.info("rufumlActive: " + repr(rufumlActive))
  
 		guestAccess = ""
 		# found = re.match('.*WLAN-Gastzugang</a></td><td title="[^"]*">aktiv ([^<]*)</td>', html, re.S)
@@ -3252,7 +3290,7 @@ class FritzCallFBF_06_35:
 				guestAccess = guestAccess + ', ' + found.group(7) # Geräte
 			if found.group(8):
 				guestAccess = guestAccess + ', ' + found.group(8) # WLAN Name
-			debug("[FritzCallFBF_06_35] _okGetInfo guestAccess WLAN: " + repr(guestAccess))
+			self.info("guestAccess WLAN: " + repr(guestAccess))
 #		found = re.match('.*LAN-Gastzugang</a></td><td title="aktiv">aktiv</td>', html, re.S)
 		found = re.match('.*linktxt": "LAN-Gastzugang",\s*"details": "aktiv"', html, re.S)
 		if found:
@@ -3260,18 +3298,18 @@ class FritzCallFBF_06_35:
 				guestAccess =  'LAN, ' + guestAccess
 			else:
 				guestAccess = "LAN"
-			debug("[FritzCallFBF_06_35] _okGetInfo guestAccess LAN: " + repr(guestAccess))
+			self.info("guestAccess LAN: " + repr(guestAccess))
 
 		info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
-		debug("[FritzCallFBF_06_35] _okGetInfo info: " + str(info))
-		self.info = info
+		self.info("information: " + str(info))
+		self.information = info
 		if callback:
 			callback(info)
 		self._logout(md5Sid, "_okGetInfo")
 
 	def _errorGetInfo(self, error, md5Sid):
-		debug("[FritzCallFBF_06_35] _errorGetInfo: %s" % (error))
 		text = _("FRITZ!Box - Error getting status: %s") % error.getErrorMessage()
+		self.exception(error)
 		self._notify(text)
 		self._logout(md5Sid, "_errorGetInfo")
 
@@ -3288,7 +3326,7 @@ class FritzCallFBF_06_35:
 			'reboot':'',
 			'sid':md5Sid
 			})
-		debug("[FritzCallFBF_06_35] _reset url: " + url + "?" + parms)
+		self.debug("url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -3297,7 +3335,7 @@ class FritzCallFBF_06_35:
 			postdata=parms).addCallback(self._okReset, md5Sid).addErrback(self._errorReset, md5Sid)
 
 	def _okReset(self, html, md5Sid): #@UnusedVariable # pylint: disable=W0613
-		debug("[FritzCallFBF_06_35] _okReset")
+		self.debug("")
 		#=======================================================================
 		# linkP = open("/tmp/_okReset.htm", "w")
 		# linkP.write(html)
@@ -3310,8 +3348,8 @@ class FritzCallFBF_06_35:
 		self._logout(md5Sid, "_okReset")
 
 	def _errorReset(self, error, md5Sid):
-		debug("[FritzCallFBF_06_35] _errorReset: %s" % (error))
 		text = _("FRITZ!Box - Error resetting: %s") % error.getErrorMessage()
+		self.exception(error)
 		self._notify(text)
 		self._logout(md5Sid, "_errorReset")
 
@@ -3323,7 +3361,7 @@ class FritzCallFBF_06_35:
 			'sid':md5Sid,
 			'page':'callLock'
 			})
-		debug("[FritzCallFBF_06_35] _readBlacklist url: " + url + "?" + parms)
+		self.debug("url: " + url + "?" + parms)
 		getPage(url,
 			method="POST",
 			agent=USERAGENT,
@@ -3333,14 +3371,12 @@ class FritzCallFBF_06_35:
 			postdata=parms).addCallback(self._okBlacklist, md5Sid).addErrback(self._errorBlacklist, md5Sid)
 
 	def _okBlacklist(self, html, md5Sid):
-		debug("[FritzCallFBF_06_35] _okBlacklist")
-		#=======================================================================
-		# linkP = open("/tmp/FritzCallBlacklist.htm", "w")
-		# linkP.write(html)
-		# linkP.close()
-		#=======================================================================
+		self.debug("")
+# 		linkP = open("/tmp/FritzCallBlacklist.htm", "w")
+# 		linkP.write(html)
+# 		linkP.close()
 		# entries = re.compile('<span title="(?:Ankommende|Ausgehende) Rufe">(Ankommende|Ausgehende) Rufe</span></nobr></td><td><nobr><span title="[\d]+">([\d]+)</span>', re.S).finditer(html)
-		entries = re.compile('<tr><td>(Ankommende|Ausgehende) Rufe</td><td>([\d]+)</td><td>weg</td>', re.S).finditer(html)
+		entries = re.compile('<tr><td(?: [^>]*)?>(Ankommende|Ausgehende) Rufe</td><td(?: datalabel="[^"]*")?>([\d]+)</td>', re.S).finditer(html)
 		self.blacklist = ([], [])
 		for entry in entries:
 			if entry.group(1) == "Ankommende":
@@ -3359,32 +3395,34 @@ class FritzCallFBF_06_35:
 				self.blacklist[0].append(entry.group(2))
 			else:
 				self.blacklist[1].append(entry.group(2))
-		debug("[FritzCallFBF_06_35] _okBlacklist: %s" % repr(self.blacklist))
+		self.debug(repr(self.blacklist))
 		self._logout(md5Sid, "_okBlacklist")
 
 	def _errorBlacklist(self, error, md5Sid):
-		debug("[FritzCallFBF_06_35] _errorBlacklist: %s" % (error))
 		text = _("FRITZ!Box - Error getting blacklist: %s") % error.getErrorMessage()
+		self.exception(error)
 		self._notify(text)
 		self._logout(md5Sid, "_errorBlacklist")
 
 class FritzCallFBF_dummy:
+	debug = logging.getLogger("[FritzCallFBF_dummy]").debug
+
 	def __init__(self):
 		'''
 		
 		'''
-		debug("[FritzCallFBF_dummy] __init__")
-		# self.info contains basic info about the (FBF) device:
+		self.debug("")
+		# self.information contains basic information about the (FBF) device:
 		# (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive)
 		# ('FRITZ!Box Fon WLAN 7390, FRITZ!OS 06.01', '21.01.2014, 05:02 Uhr', '87.185.104.85', ['0', '0', '0'], ['5', '6,7 Mbit/s / 667 kbit/s', None], None, '2', True, None)
-		# boxinfo: basic info like type, fw version
+		# boxinfo: basic information like type, fw version
 		# uptime: up since when
 		# ipAddress: external ip address
 		# wlanState: status of WLAN: [ active, encrypted, no of devices active ]; active == '1' means active, encrypted == '0' means not encrypted
-		# dslState: whether connected via DSL or not: [ state, info, unused ]; state == '5' means up, everything else down
+		# dslState: whether connected via DSL or not: [ state, information, unused ]; state == '5' means up, everything else down
 		# tamActive: is a mailbox active: [ number of active mailboxes, infos, ... ]
 		# dectActive: is a dect device registered: if dect is active set to the number of connected dect devices
-		self.info = None
+		self.information = None
 
 		# numbers, which are blacklisted in the FBF and calls from them should also not be shown
 		self.blacklist = None
@@ -3396,14 +3434,14 @@ class FritzCallFBF_dummy:
 		@param callback: function to be called with list of (number, date, direction, remote, length, here) entries
 		@param which: direction of calls to be grabbed
 		'''
-		debug("[FritzCallFBF_dummy] getcalls start")
+		self.debug("")
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def getInfo(self):
 		'''
-		Retrieve info from box and fill in self.info and self.blacklist
+		Retrieve information from box and fill in self.information and self.blacklist
 		'''
-		debug("[FritzCallFBF_dummy] getInfo start")
+		self.debug("")
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def loadFritzBoxPhonebook(self, phonebook):
@@ -3411,9 +3449,9 @@ class FritzCallFBF_dummy:
 		Load phonebook from device and add it to the phonebook
 
 		@param phonebook: phonebook to be amended
-		@type phonebook: dictionary of number, info
+		@type phonebook: dictionary of number, information
 		'''
-		debug("[FritzCallFBF_dummy] loadFritzBoxPhonebook start")
+		self.debug("")
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def changeWLAN(self, state, callback):
@@ -3423,7 +3461,7 @@ class FritzCallFBF_dummy:
 		@param state: '0' means: turn off, '1' turn on
 		@type state: string
 		'''
-		debug("[FritzCallFBF_dummy] changeWLAN start")
+		self.debug("")
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def changeGuestAccess(self, statusGuestAccess, callback):
@@ -3433,7 +3471,7 @@ class FritzCallFBF_dummy:
 		@param statusGuestAccess: 'WLAN', 'WLAN, LAN' or 'LAN'
 		@type statusGuestAccess: string
 		'''
-		debug("[FritzCallFBF_dummy] changeWLAN start")
+		self.debug("")
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 
@@ -3444,7 +3482,7 @@ class FritzCallFBF_dummy:
 		@param which: number, which mailbox to toggle; '-1' means all
 		@type which: string
 		'''
-		debug("[FritzCallFBF_dummy] changeMailbox start")
+		self.debug("")
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def dial(self, number):
@@ -3454,13 +3492,13 @@ class FritzCallFBF_dummy:
 		@param number: number to dial
 		@type number: string
 		'''
-		debug("[FritzCallFBF_dummy] dial start")
+		self.debug("")
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 	
 	def reset(self):
 		'''
 		Reset box
 		'''
-		debug("[FritzCallFBF_dummy] reset start")
+		self.debug("")
 		Notifications.AddNotification(MessageBox, _("not yet implemented"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 	

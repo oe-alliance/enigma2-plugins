@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-01 12:42+0100\n"
+"POT-Creation-Date: 2015-07-22 17:57+0200\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -18,6 +18,12 @@ msgstr ""
 "X-Poedit-Language: Serbian\n"
 "X-Poedit-Country: SERBIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
+
+msgid "05.29 until below 6.35"
+msgstr ""
+
+msgid "06.35 and newer"
+msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -367,6 +373,9 @@ msgstr "Pokazati MSN (odvojen sa  ,)"
 msgid "Mailbox"
 msgstr "Poštansko sanduče"
 
+msgid "Minutes of uptime of WLAN guest network"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Propušten"
@@ -413,6 +422,9 @@ msgstr "Nema rezultata iz Outlook-Export"
 
 msgid "No result from reverse lookup"
 msgstr "Nema rezultata traženja unazad"
+
+msgid "Not deactivating after time"
+msgstr ""
 
 msgid "Number"
 msgstr "Broj"
@@ -530,6 +542,9 @@ msgstr ""
 
 msgid "Shortcut"
 msgstr "Prečica"
+
+msgid "Show Blocked Calls"
+msgstr ""
 
 msgid "Show Outgoing Calls"
 msgstr "Prikaži odlazne pozive"
@@ -686,6 +701,9 @@ msgstr ""
 
 msgid "no device active"
 msgstr "Nijedan urećaj nije aktivan"
+
+msgid "not available with this firmware version"
+msgstr ""
 
 msgid "not configured"
 msgstr ""
