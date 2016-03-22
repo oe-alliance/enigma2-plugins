@@ -134,14 +134,14 @@ class AutoMountManager(Screen):
 	def hostEdit(self):
 		if os_path.exists("/etc/hostname"):
 			fp = open('/etc/hostname', 'r')
-			self.hostname = fp.read()
+			self.hostname = fp.readline().rstrip('\n')
 			fp.close()
 			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title = (_("Enter new hostname for your Receiver")), text = self.hostname)
 
 	def hostnameCallback(self, callback = None):
 		if callback is not None and len(callback):
 			fp = open('/etc/hostname', 'w+')
-			fp.write(callback)
+			fp.write(callback + '\n')
 			fp.flush()
 			fsync(fp.fileno())
 			fp.close()
