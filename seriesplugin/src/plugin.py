@@ -27,7 +27,7 @@ from spChannelContextMenu import SPChannelContextMenuInit, SPChannelContextMenuU
 #######################################################
 # Constants
 NAME = "SeriesPlugin"
-VERSION = "5.5.5"
+VERSION = "5.5.6"
 DESCRIPTION = _("SeriesPlugin")
 SHOWINFO = _("Show series info (SP)")
 RENAMESERIES = _("Rename serie(s) (SP)")
@@ -305,6 +305,7 @@ def Plugins(**kwargs):
 											description = NAME + " " + _("Setup"),
 											where = PluginDescriptor.WHERE_PLUGINMENU,
 											fnc = setup,
+											icon = "plugin.png",
 											needsRestart = False) )
 	
 	if config.plugins.seriesplugin.enabled.value:
@@ -394,6 +395,7 @@ def addSeriesPlugin(menu, title, fnc=None):
 																name = title,
 																description = title,
 																where = menu,
+																icon = "plugin.png",
 																needsRestart = False,
 																fnc = fnc)
 				if menu in plugins.plugins:

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SeriesPlugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-21 17:37+0100\n"
-"PO-Revision-Date: 2016-02-21 17:54+0100\n"
+"POT-Creation-Date: 2016-03-06 17:43+0100\n"
+"PO-Revision-Date: 2016-03-06 17:49+0100\n"
 "Last-Translator: James Blond <jb@unknown.com>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -178,11 +178,11 @@ msgstr "Gescheitert: %s."
 msgid "No data available"
 msgstr "Keine Daten vorhanden"
 
-msgid "SP has been finished with errors:\n"
-msgstr "SP mit Fehlern beendet:\n"
+msgid "Finished with errors:\n"
+msgstr "Erledigt mit Fehlern:\n"
 
-msgid "%d timer renamed successfully"
-msgstr "%d Timer erfolgreich umbenannt"
+msgid "Lookup of %d episodes was successful"
+msgstr "Nachschlagen von %d Episoden war erfolgreich"
 
 msgid "Configuration"
 msgstr "Konfiguration"
@@ -250,15 +250,6 @@ msgstr "Verwende ältere Dateinamen"
 msgid "Append '_' if file exist"
 msgstr "Anhängen '_' wenn die Datei vorhanden ist"
 
-msgid "Show warnings after Record renaming"
-msgstr "Warnung anzeigen nach Aufnahme(n) umbenennen (Popup)"
-
-msgid "Show success after Record renaming"
-msgstr "Erfolgreiches umbenennen von Aufnahme(n) anzeigen (Popup)"
-
-msgid "Timeout for Rename Popup"
-msgstr "Anzeigedauer umbenennen Popup"
-
 msgid "Max time drift to match episode"
 msgstr "Maximale Zeitabweichung um Folge(n) zu erkennen"
 
@@ -283,17 +274,11 @@ msgstr "Prüfe Timer auf entsprechenden EPG Eintrag"
 msgid "Add tag 'SeriesPlugin' to timer"
 msgstr "Füge TAG 'SeriesPlugin' zu Timer hinzu"
 
-msgid "Show warnings after Timer handling"
-msgstr "Zeige Warnung nach Timer Erstellung (Popup)"
-
-msgid "Show success after Timer handling"
-msgstr "Zeige Fehlerfreie Timer Erstellung (Popup)"
-
-msgid "Timeout for Timer Popup"
-msgstr "Anzeigedauer Timer Popup"
-
 msgid "Socket timeout"
 msgstr "Zeitlimt für Anfragen zum Proxy (Sekunden)"
+
+msgid "Timeout for Success Popups"
+msgstr "Anzeigedauer für erfolgreiche Popups"
 
 msgid "Timeout for Warnings Popups"
 msgstr "Anzeigedauer Warnungen (Popup)"
@@ -415,12 +400,6 @@ msgstr "Überspringe Timer wenn in Warteschleife vorhanden"
 msgid "Skipping timer because it is already handled"
 msgstr "Überspringe Timer wenn in Bearbeitung"
 
-msgid "Skipping timer because it is already modified %s"
-msgstr "Überspringe Timer wenn %s bereits geändert sind"
-
-msgid "Skipping timer because no event was found"
-msgstr "Überspringe Timer wenn kein Ereignis gefunden wurde"
-
 msgid "Skipping timer because it starts in less than 60 seconds"
 msgstr "Überspringe Timer wenn er in weniger als 60 Sekunden startet"
 
@@ -430,6 +409,12 @@ msgstr "Überspringe Timer wenn er bereits ausgeführt wird"
 msgid "Skipping timer because it is a just play timer"
 msgstr "Überspringe Timer wenn  es ein Wiedergabetimer ist"
 
+msgid "Skipping timer because it is already modified %s"
+msgstr "Überspringe Timer wenn %s bereits geändert sind"
+
+msgid "Skipping timer because no event was found"
+msgstr "Überspringe Timer wenn kein Ereignis gefunden wurde"
+
 msgid "Try to find infos for %s"
 msgstr "Versuche Informationen zu finden für %s"
 
@@ -438,6 +423,9 @@ msgstr "Erfolgreich: %s"
 
 msgid "Timer rename has been finished with %d errors:\n"
 msgstr "Timer umbenennen wurde beendet mit %d Fehlern:\n"
+
+msgid "%d timer renamed successfully"
+msgstr "%d Timer erfolgreich umbenannt"
 
 msgid "Show Log file"
 msgstr "Protokolldatei anzeigen (Log)"

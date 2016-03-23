@@ -238,11 +238,6 @@ class SeriesPluginRenamer(object):
 						log.debug("No info available: " + servicepath)
 						continue
 					
-					name = service.getName() or info.getName(service) or ""
-					if name[-2:] == 'ts':
-						name = name[:-2]
-					#log.debug("name", name)
-					
 					short = ""
 					begin = None
 					end = None
@@ -250,11 +245,18 @@ class SeriesPluginRenamer(object):
 					
 					event = info.getEvent(service)
 					if event:
+						name = event.getEventName() or ""
 						short = event.getShortDescription()
 						begin = event.getBeginTime()
 						duration = event.getDuration() or 0
 						end = begin + duration or 0
 						# We got the exact start times, no need for margin handling
+						log.debug("event")
+					else:
+						name = service.getName() or info.getName(service) or ""
+						if name[-2:] == 'ts':
+							name = name[:-2]
+						log.debug("not event")
 					
 					if not begin:
 						begin = info.getInfo(service, iServiceInformation.sTimeCreate) or -1
@@ -312,8 +314,9 @@ class SeriesPluginRenamer(object):
 				log.warning(msg)
 				
 			else:
-				msg = "SeriesPlugin:\n" + _("%d records renamed successfully") % (self.counter)
-				log.success(msg)
+				if self.counter > 0:
+					msg = "SeriesPlugin:\n" + _("%d records renamed successfully") % (self.counter)
+					log.success(msg)
 				
 			self.data = []
 			self.counter = 0

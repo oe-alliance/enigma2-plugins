@@ -51,7 +51,7 @@ SERIESPLUGIN_PATH  = os.path.join( resolveFilename(SCOPE_PLUGINS), "Extensions/S
 # Globals
 instance = None
 
-CompiledRegexpNonDecimal = re.compile(r'[^\d]*(\d+).*')
+CompiledRegexpNonDecimal = re.compile(r'[^\d]')
 CompiledRegexpReplaceChars = None
 CompiledRegexpReplaceDirChars = re.compile('[^/\w\-_\. ]')
 
@@ -221,8 +221,8 @@ def normalizeResult(result):
 		
 		result['rawseason'] = season_ or str(config.plugins.seriesplugin.default_season.value)
 		result['rawepisode'] = episode_ or str(config.plugins.seriesplugin.default_episode.value)
-		result['season'] = int(CompiledRegexpNonDecimal.sub('\\1', str(season_)) or config.plugins.seriesplugin.default_season.value)
-		result['episode'] = int(CompiledRegexpNonDecimal.sub('\\1', str(episode_)) or config.plugins.seriesplugin.default_episode.value)
+		result['season'] = int(CompiledRegexpNonDecimal.sub('', str(season_)) or config.plugins.seriesplugin.default_season.value)
+		result['episode'] = int(CompiledRegexpNonDecimal.sub('', str(episode_)) or config.plugins.seriesplugin.default_episode.value)
 		
 		if CompiledRegexpReplaceChars:
 			title = CompiledRegexpReplaceChars.sub('', title_)
