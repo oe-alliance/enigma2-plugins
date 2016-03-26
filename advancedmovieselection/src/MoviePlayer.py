@@ -411,7 +411,10 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
                 self.close()
 
 if pluginPresent.DVDPlayer:
-    from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer as eDVDPlayer
+    if fileExists('/usr/lib/enigma2/python/Screens/DVD.pyo'):
+        from Screens.DVD import DVDPlayer as eDVDPlayer
+    else:
+        from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer as eDVDPlayer
     class DVDPlayer(DVDCutListSupport, eDVDPlayer, PlayerBase):
         def __init__(self, session, service):
             DVDCutListSupport.__init__(self, service)
