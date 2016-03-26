@@ -13,6 +13,7 @@ from Screens.ChannelSelection import SimpleChannelSelection
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
 from Screens.MessageBox import MessageBox
+from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen
 from Plugins.SystemPlugins.Toolkit.NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
@@ -134,6 +135,7 @@ class EPGSearch(EPGSelection):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
 		self.skinName = ["EPGSearch", "EPGSelection"]
+		HelpableScreen.__init__(self)
 
 		self.searchargs = args
 		self.currSearch = ""
