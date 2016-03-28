@@ -68,7 +68,7 @@ class SeriesPluginTimer(object):
 		
 		if TAG in timer.tags:
 			msg = _("Skipping timer because it is already handled") + "\n\n" + _("Can be configured within the setup")
-			log.warning(msg, timer.name)
+			log.info(msg, timer.name)
 			timer.log(607, "[SeriesPlugin]" + " " + msg )
 			return
 		

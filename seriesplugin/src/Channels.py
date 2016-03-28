@@ -98,32 +98,41 @@ def getTVBouquets():
 	from Screens.ChannelSelection import service_types_tv
 	return getServiceList(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 
-def buildSTBchannellist(BouquetName = None):
-	chlist = None
+def getServicesOfBouquet(bouquet):
+	bouquetlist = getServiceList(bouquet)
 	chlist = []
-	mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
-	log.debug("SPC: read STB Channellist..")
+	for (serviceref, servicename) in bouquetlist:
+		
+		if (eServiceReference(serviceref).flags & eServiceReference.isDirectory):
+			# handle directory services
+			log.debug("SPC: found directory %s" % (serviceref) )
+			chlist.extend( getServicesOfBouquet(serviceref) )
+		
+		elif (eServiceReference(serviceref).flags & eServiceReference.isGroup):
+			# handle group services
+			log.debug("SPC: found group %s" % (serviceref) )
+			chlist.extend( getServicesOfBouquet(serviceref) )
+		
+		elif not (eServiceReference(serviceref).flags & eServiceReference.isMarker):
+			# playable
+			log.debug("SPC: found playable service %s" % (serviceref) )
+			chlist.append((servicename, re.sub('::.*', ':', serviceref), unifyChannel(servicename)))
+		
+	return chlist
+
+def buildSTBchannellist(BouquetName = None):
+	chlist = []
 	tvbouquets = getTVBouquets()
 	log.debug("SPC: found %s bouquet: %s" % (len(tvbouquets), tvbouquets) )
 
 	if not BouquetName:
 		for bouquet in tvbouquets:
-			bouquetlist = []
-			bouquetlist = getServiceList(bouquet[0])
-			for (serviceref, servicename) in bouquetlist:
-				playable = not (eServiceReference(serviceref).flags & mask)
-				if playable:
-					chlist.append((servicename, re.sub('::.*', ':', serviceref), unifyChannel(servicename)))
+			chlist.extend( getServicesOfBouquet(bouquet[0]) )
 	else:
 		for bouquet in tvbouquets:
 			if bouquet[1] == BouquetName:
-				bouquetlist = []
-				bouquetlist = getServiceList(bouquet[0])
-				for (serviceref, servicename) in bouquetlist:
-					playable = not (eServiceReference(serviceref).flags & mask)
-					if playable:
-						chlist.append((servicename, re.sub('::.*', ':', serviceref), unifyChannel(servicename)))
-				break
+				chlist.extend( getServicesOfBouquet(bouquet[0]) )
+	
 	return chlist
 
 def getChannel(ref):
