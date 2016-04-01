@@ -7,7 +7,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.4"
+__version__ = "1.5"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -341,7 +341,7 @@ class Series2FolderActions(Series2FolderActionsBase):
             return
 
         if _autoSeries2Folder and _autoSeries2Folder.isActive():
-            self.MsgBox(_("Series to Folder is already running in the background.") % (getMachineBrand(), getMachineName()), timeout=10)
+            self.MsgBox(_("Series to Folder is already running in the background."), timeout=10)
             return
 
         self.prepare(service)
