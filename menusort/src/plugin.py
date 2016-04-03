@@ -1,6 +1,5 @@
 from __future__ import print_function
 
-from . import _
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
@@ -17,13 +16,13 @@ from skin import parseColor, parseFont
 
 from Components.ActionMap import HelpableActionMap, ActionMap
 from Components.SystemInfo import SystemInfo
-from Components.Sources.StaticText import StaticText
 
 from xml.etree.cElementTree import parse as cet_parse
 try:
 	from xml.etree.cElementTree import ParseError
 except ImportError as ie:
 	ParseError = SyntaxError
+from Tools.XMLTools import stringToXML
 
 try:
 	dict.iteritems
@@ -52,9 +51,7 @@ class MenuWeights:
 			return
 
 		try:
-			file = open(XML_CONFIG, 'r')
-			config = cet_parse(file).getroot()
-			file.close()
+			config = cet_parse(XML_CONFIG).getroot()
 		except ParseError as pe:
 			from time import time
 			print("[MenuSort] Parse Error occured in configuration, backing it up and starting from scratch!")
@@ -86,7 +83,7 @@ class MenuWeights:
 
 		for text, values in iteritems(self.weights):
 			weight, hidden = values
-			extend((' <entry text="', str(text), '" weight="', str(weight), '" hidden="', "yes" if hidden else "no", '"/>\n'))
+			extend((' <entry text="', stringToXML(str(text)), '" weight="', str(weight), '" hidden="', "yes" if hidden else "no", '"/>\n'))
 		append('\n</menusort>\n')
 
 		file = open(XML_CONFIG, 'w')
@@ -170,24 +167,21 @@ class SortableMenuList(MenuList):
 		return l
 
 class SortableMenu(Menu, HelpableScreen):
-	skin = """<screen name="SortableMenu" position="center,center" size="210,330">
-		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget source="key_blue" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="menu" position="5,95" size="200,225" scrollbarMode="showOnDemand" font="Regular;23" />
+	skin = """<screen name="SortableMenu" position="center,center" size="210,285">
+		<widget source="title" render="Label" position="5,10" size="200,35" font="Regular;23" />
+		<widget name="menu" position="5,55" size="200,225" scrollbarMode="showOnDemand" font="Regular;23" />
 		</screen>"""
 	def __init__(self, *args, **kwargs):
 		baseMethods.Menu__init__(self, *args, **kwargs) # using the base initializer saves us a few cycles
 		HelpableScreen.__init__(self)
 		self.skinName = "SortableMenu"
-		self.setTitle(_("Main menu"))
 
 		# XXX: not nice, but makes our life a little easier
 		l = [(x[0], x[1], x[2], menuWeights.get(x, supportHiding=False), menuWeights.isHidden(x)) for x in self["menu"].list]
 		l.sort(key=itemgetter(3))
 		self["menu"] = SortableMenuList(l)
-		self["key_blue"] = StaticText(_("hide entry"))
 
-		self["DirectionActions"] = ActionMap(["DirectionActions"],
+		self["WizardActions"] = ActionMap(["WizardActions"],
 			{
 				"left": boundFunction(self.doMove, self["menu"].pageUp),
 				"right": boundFunction(self.doMove, self["menu"].pageDown),
