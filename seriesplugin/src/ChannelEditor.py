@@ -138,6 +138,8 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 		
 		self.skinName = [ "SeriesPluginChannelEditor" ]
 		
+		log.debug("ChannelEditor")
+		
 		from plugin import NAME, VERSION
 		self.setup_title = NAME + " " + _("Channel Editor") + " " + VERSION
 		
@@ -213,10 +215,12 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 	
 	def loadStbChannels(self):
 		self.setTitle(_("Load STB channels for bouquet") + " " + self.bouquet)
+		log.debug("Load STB")
 		self.stbChlist = buildSTBchannellist(self.bouquet)
 	
 	def loadWebChannels(self):
 		self.setTitle(_("Load Web channels for bouquet") + " " + self.bouquet)
+		log.debug("Load Web channels")
 		data = self.getWebChannels()
 		if data:
 			temp = [ (x,unifyChannel(x)) for x in data]

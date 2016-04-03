@@ -74,6 +74,8 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 		from plugin import NAME, VERSION
 		self.setup_title = NAME + " " + _("Configuration") + " " + VERSION
 		
+		log.debug("SeriesPluginConfiguration")
+		
 		self.onChangedEntry = [ ]
 		
 		# Buttons

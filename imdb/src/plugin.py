@@ -53,7 +53,10 @@ config.plugins.imdb.ignore_tags = ConfigText(visible_width = 50, fixed_size = Fa
 
 def quoteEventName(eventName, safe="/()" + ''.join(map(chr,range(192,255)))):
 	# BBC uses '\x86' markers in program names, remove them
-	text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('utf8')
+	try:
+		text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('utf8')
+	except:
+		text = eventName
 	# IMDb doesn't seem to like urlencoded characters at all, hence the big "safe" list
 	return quote_plus(text, safe=safe)
 
