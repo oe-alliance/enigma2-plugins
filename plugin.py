@@ -7,7 +7,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.5"
+__version__ = "1.6"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -172,7 +172,7 @@ class Series2FolderActionsBase(object):
                         self.errMess.append(err)
 
         # Full pathnames of current recordings' .ts files
-        self.isRecording = set([timer.Filename + '.ts' for timer in self.session.nav.RecordTimer.timer_list if timer.state in (timer.StatePrepared, timer.StateRunning)])
+        self.isRecording = set([timer.Filename + '.ts' for timer in self.session.nav.RecordTimer.timer_list if timer.state in (timer.StatePrepared, timer.StateRunning) and not timer.justplay and hasattr(timer, "Filename")])
 
         # Folder for movies
         self.moviesFolder = self.conf_movies and self.conf_moviesfolder
