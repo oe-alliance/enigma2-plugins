@@ -16,6 +16,7 @@ from skin import parseColor, parseFont
 
 from Components.ActionMap import HelpableActionMap, ActionMap
 from Components.SystemInfo import SystemInfo
+from Components.Sources.StaticText import StaticText
 
 from xml.etree.cElementTree import parse as cet_parse
 try:
@@ -167,9 +168,10 @@ class SortableMenuList(MenuList):
 		return l
 
 class SortableMenu(Menu, HelpableScreen):
-	skin = """<screen name="SortableMenu" position="center,center" size="210,285">
-		<widget source="title" render="Label" position="5,10" size="200,35" font="Regular;23" />
-		<widget name="menu" position="5,55" size="200,225" scrollbarMode="showOnDemand" font="Regular;23" />
+	skin = """<screen name="SortableMenu" position="center,center" size="210,280">
+		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget source="key_blue" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="menu" position="5,45" size="200,225" scrollbarMode="showOnDemand" font="Regular;23" />
 		</screen>"""
 	def __init__(self, *args, **kwargs):
 		baseMethods.Menu__init__(self, *args, **kwargs) # using the base initializer saves us a few cycles
@@ -180,6 +182,7 @@ class SortableMenu(Menu, HelpableScreen):
 		l = [(x[0], x[1], x[2], menuWeights.get(x, supportHiding=False), menuWeights.isHidden(x)) for x in self["menu"].list]
 		l.sort(key=itemgetter(3))
 		self["menu"] = SortableMenuList(l)
+		self["key_blue"] = StaticText(_("hide"))
 
 		self["WizardActions"] = ActionMap(["WizardActions"],
 			{
