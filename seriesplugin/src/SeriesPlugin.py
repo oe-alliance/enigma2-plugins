@@ -221,8 +221,14 @@ def normalizeResult(result):
 		
 		result['rawseason']  = season_  or config.plugins.seriesplugin.default_season.value
 		result['rawepisode'] = episode_ or config.plugins.seriesplugin.default_episode.value
-		result['season']  = int( CompiledRegexpNonDecimal.sub('', str(season_))  or config.plugins.seriesplugin.default_season.value  or "0" )
-		result['episode'] = int( CompiledRegexpNonDecimal.sub('', str(episode_)) or config.plugins.seriesplugin.default_episode.value or "0" )
+		if season_:
+			result['season']  = int( CompiledRegexpNonDecimal.sub('', str(season_)) or config.plugins.seriesplugin.default_season.value or "0" )
+		else:
+			result['season']  = int(config.plugins.seriesplugin.default_season.value) or 0
+		if episode_:
+			result['episode'] = int( CompiledRegexpNonDecimal.sub('', str(episode_)) or config.plugins.seriesplugin.default_episode.value or "0" )
+		else:
+			result['episode'] = int(config.plugins.seriesplugin.default_episode.value) or 0
 		
 		if CompiledRegexpReplaceChars:
 			title = CompiledRegexpReplaceChars.sub('', title_)
