@@ -166,7 +166,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			# Check if xmltvimport exists
 			if os.path.exists("/etc/epgimport"):
 				log.debug("Config: Found epgimport")
-#				self.list.append( getConfigListEntry(  _("Enable support for EPGImport")           , config.plugins.seriesplugin.epgimport ) )
+				self.list.append( getConfigListEntry(  _("Enable support for EPGImport")           , config.plugins.seriesplugin.epgimport ) )
 			elif config.plugins.seriesplugin.epgimport.value:
 				self.changesMade = True
 				config.plugins.seriesplugin.epgimport.value = False
@@ -174,7 +174,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			# Check if xmltvimport exists
 			if os.path.exists("/etc/xmltvimport"):
 				log.debug("Config: Found xmltvimport")
-#				self.list.append( getConfigListEntry(  _("Enable support for XMLTVImport")         , config.plugins.seriesplugin.xmltvimport ) )
+				self.list.append( getConfigListEntry(  _("Enable support for XMLTVImport")         , config.plugins.seriesplugin.xmltvimport ) )
 			elif config.plugins.seriesplugin.xmltvimport.value:
 				self.changesMade = True
 				config.plugins.seriesplugin.xmltvimport.value = False
