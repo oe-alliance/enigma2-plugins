@@ -225,8 +225,8 @@ class AutoTimerEditorBase:
 			begin = mktime(now)
 			end = begin + 604800 # today + 7d
 		self.timeframe = NoSave(ConfigEnableDisable(default = default))
-		self.timeframebegin = NoSave(ConfigDateTime(begin, _("%d.%B %Y"), increment = 86400))
-		self.timeframeend = NoSave(ConfigDateTime(end, _("%d.%B %Y"), increment = 86400))
+		self.timeframebegin = NoSave(ConfigDateTime(begin, _("%d %b %Y"), increment = 86400))
+		self.timeframeend = NoSave(ConfigDateTime(end, _("%d %b %Y"), increment = 86400))
 
 		# Services have their own Screen
 
