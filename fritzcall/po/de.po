@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-22 17:57+0200\n"
-"PO-Revision-Date: 2015-07-22 17:58+0200\n"
+"POT-Creation-Date: 2016-03-26 17:20+0100\n"
+"PO-Revision-Date: 2016-03-28 12:27+0200\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: de\n"
@@ -134,6 +134,9 @@ msgstr ""
 
 msgid "Country"
 msgstr "Land"
+
+msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgstr "Ländervorwahl (z.B. 44 für UK, 34 für Spain, etc.)"
 
 msgid "DECT inactive"
 msgstr "DECT inaktiv"
@@ -531,8 +534,8 @@ msgstr "Lade Telefonbücher neu nach soviel Stunden"
 msgid "Reset"
 msgstr "Reset"
 
-msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Rückwärtssuche (bitte Land auswählen)"
+msgid "Reverse Lookup Caller ID"
+msgstr "Rückwärtssuche"
 
 msgid "Reverse searching..."
 msgstr "Rückwärtssuche..."
@@ -774,6 +777,3 @@ msgstr "Büro"
 
 msgid "wrong user or password?"
 msgstr "falscher Benutzer oder falsches Passwort?"
-
-#~ msgid "05.29 and newer"
-#~ msgstr "05.29 und neuer"

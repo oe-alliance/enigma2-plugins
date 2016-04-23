@@ -2,10 +2,11 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1270 $
-$Date: 2016-03-17 15:07:36 +0100 (Thu, 17 Mar 2016) $
-$Id: plugin.py 1270 2016-03-17 14:07:36Z michael $
+$Revision: 1287 $
+$Date: 2016-04-14 19:18:49 +0200 (Thu, 14 Apr 2016) $
+$Id: plugin.py 1287 2016-04-14 17:18:49Z michael $
 '''
+
 
 # C0111 (Missing docstring)
 # C0103 (Invalid name)
@@ -158,6 +159,7 @@ countryCodes = [
 	("", _("Others"))
 	]
 config.plugins.FritzCall.country = ConfigSelection(choices=countryCodes)
+config.plugins.FritzCall.countrycode = ConfigText(default="", fixed_size=False)
 
 FBF_ALL_CALLS = "."
 FBF_IN_CALLS = "1"
@@ -194,7 +196,7 @@ def initAvon():
 def resolveNumberWithAvon(number, countrycode):
 	if not number or number[0] != '0':
 		return ""
-		
+
 	countrycode = countrycode.replace('00','+')
 	if number[:2] == '00':
 		normNumber = '+' + number[2:]
@@ -206,7 +208,7 @@ def resolveNumberWithAvon(number, countrycode):
 	# debug('normNumer: ' + normNumber)
 	for i in reversed(range(min(10, len(number)))):
 		if avon.has_key(normNumber[:i]):
-			return '[' + avon[normNumber[:i]].strip() + ']'
+			return '(' + avon[normNumber[:i]].strip() + ')'
 	return ""
 
 def handleReverseLookupResult(name):
@@ -298,8 +300,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1270 $"[1:-2] + "\n" + 
-							"$Date: 2016-03-17 15:07:36 +0100 (Thu, 17 Mar 2016) $"[1:23] + "\n"
+							"$Revision: 1287 $"[1:-2] + "\n" + 
+							"$Date: 2016-04-14 19:18:49 +0200 (Thu, 14 Apr 2016) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -802,7 +804,7 @@ class FritzMenu(Screen, HelpableScreen):
 				self["dsl_inactive"].hide()
 
 			if wlanState:
-				if wlanState[0 ] == '1':
+				if wlanState[0] == '1':
 					self["wlan_inactive"].hide()
 					self["wlan_active"].show()
 					message = 'WLAN'
@@ -1935,7 +1937,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1270 $"[1: - 1] + "$Date: 2016-03-17 15:07:36 +0100 (Thu, 17 Mar 2016) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1287 $"[1: - 1] + "$Date: 2016-04-14 19:18:49 +0200 (Thu, 14 Apr 2016) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1965,9 +1967,13 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			# not only for outgoing: config.plugins.FritzCall.showOutgoingCalls.value:
 			self.list.append(getConfigListEntry(_("Areacode to add to calls without one (if necessary)"), config.plugins.FritzCall.prefix))
 			self.list.append(getConfigListEntry(_("Timeout for Call Notifications (seconds)"), config.plugins.FritzCall.timeout))
-			self.list.append(getConfigListEntry(_("Reverse Lookup Caller ID (select country below)"), config.plugins.FritzCall.lookup))
-			if config.plugins.FritzCall.lookup.value:
-				self.list.append(getConfigListEntry(_("Country"), config.plugins.FritzCall.country))
+			self.list.append(getConfigListEntry(_("Country"), config.plugins.FritzCall.country))
+			if config.plugins.FritzCall.country.value:
+				self.list.append(getConfigListEntry(_("Reverse Lookup Caller ID"), config.plugins.FritzCall.lookup))
+			if not config.plugins.FritzCall.country.value:
+				self.list.append(getConfigListEntry(_("Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"), config.plugins.FritzCall.countrycode))
+				if config.plugins.FritzCall.countrycode.value:
+					config.plugins.FritzCall.country.value = "00" + config.plugins.FritzCall.countrycode.value
 
 			if config.plugins.FritzCall.fwVersion.value != None:
 				if config.plugins.FritzCall.fwVersion.value == "05.50" or config.plugins.FritzCall.fwVersion.value == "06.35":
@@ -2464,7 +2470,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver): # pylint: disable=W0223
 	def __init__(self):
-		info("[FritzProtocol] " + "$Revision: 1270 $"[1:-1]	+ "$Date: 2016-03-17 15:07:36 +0100 (Thu, 17 Mar 2016) $"[7:23] + " starting")
+		info("[FritzProtocol] " + "$Revision: 1287 $"[1:-1]	+ "$Date: 2016-04-14 19:18:49 +0200 (Thu, 14 Apr 2016) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

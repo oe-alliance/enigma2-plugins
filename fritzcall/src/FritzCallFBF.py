@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1270 $
-$Date: 2016-03-17 15:07:36 +0100 (Thu, 17 Mar 2016) $
-$Id: FritzCallFBF.py 1270 2016-03-17 14:07:36Z michael $
+$Revision: 1287 $
+$Date: 2016-04-14 19:18:49 +0200 (Thu, 14 Apr 2016) $
+$Id: FritzCallFBF.py 1287 2016-04-14 17:18:49Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -2409,15 +2409,16 @@ class FritzCallFBF_05_50:
 		# encrypted == 2 means unknown
 		#                                      <tr id="uiTrWlan"><td class="led_green"></td><td><a href="/wlan/wlan_settings.lua?sid=9c824da3ecfc7168">WLAN</a></td><td title="an
 		# <tr id="uiTrWlan"><td class="led_green"></td><td><a href="/wlan/wlan_settings.lua?sid=af3b8ddd6a9176da">WLAN</a></td><td title="an">an, Funknetz: mms</td></tr>
-		found = re.match('.*<tr id="uiTrWlan"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">WLAN</a></td><td title="((aus|an)[^"]*)"', html, re.S)
+		found = re.match('.*<tr id="uiTrWlan"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">WLAN</a></td><td title="(aus|an[^"]*)">([^<]*)</td>', html, re.S)
 		if found:
 			if found.group(1) == "led_green":
 				if found.group(2):
-					wlans = found.group(2)
-					found = re.match('.*an, ([^"]+)', wlans, re.S)
-					if found:
-						wlanState = [ '1', '2', '', '' ]
-						wlans = found.group(1)
+					wlanState = [ '1', '2', '', '' ]
+					found1 = re.match('.*an, ([^"]+)', found.group(2), re.S)
+					if not found1:
+						found1 = re.match('.*an, ([^"]+)', found.group(3), re.S)
+					if found1:
+						wlans = found1.group(1)
 					else:
 						wlanState = [ '0', '0', '', '' ]
 					found = re.match('.*Funknetz: ([^,"]*)', wlans, re.S)
@@ -3175,8 +3176,12 @@ class FritzCallFBF_06_35:
 		found = re.match('.*"ipv6": {\s*"txt": \["IPv6, verbunden seit ([^"]+) Uhr",', html, re.S)
 		if found:
 			upTime6 = found.group(1)
-			if upTime and upTime.find(upTime6) == -1:
-				upTime = upTime +'/' + upTime6
+			if upTime:
+				if upTime.find(upTime6) == -1:
+					upTime = upTime +'/' + upTime6
+			else:
+				upTime = upTime6
+					
 			self.info("upTime6: " + upTime)
 
 		#found = re.match('.*"ipv4": {\s*"txt": \["IPv4, verbunden seit ([^"]+) Uhr",( "Anbieter: ([^"]*)",)? "IP-Adresse: ([^"]+)"\],', html, re.S)
@@ -3204,7 +3209,7 @@ class FritzCallFBF_06_35:
 		# dslState = [ state, information, unused ]; state == '5' means up, everything else down
 		#found = re.match('.*<tr id="uiTrDsl"><td class="(led_gray|led_green|led_red)">', html, re.S)
 		# found = re.match('.*<div class="desc (led_gray|led_green|led_red)"><div class="desc title"><a href="">(DSL|Kabel)</a></div><div class="details information">[^<]*<div class="speed"><span class="downstream">([^<]*)</span><span class="upstream">([^<]*)</span></div></div></div>', html, re.S)
-		found = re.match('.*"(?:dsl|cable)": {\s*"txt": "(?:verbunden|aktiviert|deaktiviert)",\s*"led": "(led_gray|led_green|led_red)",\s*"title": "(DSL|Kabel)",\s*"up": "([^"]*)",\s*"down": "([^"]*)",', html, re.S)
+		found = re.match('.*"(?:dsl|cable|docsis)": {\s*"txt": "(?:verbunden|aktiviert|deaktiviert)",\s*"led": "(led_gray|led_green|led_red)",\s*"title": "(DSL|Kabel)",\s*"up": "([^"]*)",\s*"down": "([^"]*)",', html, re.S)
 		if found:
 			if found.group(1) == "led_green":
 				dslState = ['5', None, None]

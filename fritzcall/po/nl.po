@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-22 17:57+0200\n"
+"POT-Creation-Date: 2016-03-26 17:20+0100\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -133,6 +133,9 @@ msgstr ""
 
 msgid "Country"
 msgstr "Land"
+
+msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgstr ""
 
 msgid "DECT inactive"
 msgstr ""
@@ -508,8 +511,8 @@ msgstr ""
 msgid "Reset"
 msgstr "Reset"
 
-msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Omgekeerd zoeken van een beller ID (select land hieronder)"
+msgid "Reverse Lookup Caller ID"
+msgstr ""
 
 msgid "Reverse searching..."
 msgstr "Zoekt omgekeerd..."
@@ -813,6 +816,9 @@ msgstr ""
 
 #~ msgid "PhoneBook Location"
 #~ msgstr "Telefoonboek locatie"
+
+#~ msgid "Reverse Lookup Caller ID (select country below)"
+#~ msgstr "Omgekeerd zoeken van een beller ID (select land hieronder)"
 
 #~ msgid "Show Calls for specific MSN"
 #~ msgstr "Laat gesprekken van een specifieke MSN zien"

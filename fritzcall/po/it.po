@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-22 17:57+0200\n"
+"POT-Creation-Date: 2016-03-26 17:20+0100\n"
 "PO-Revision-Date: 2015-04-14 23:22+0200\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -135,6 +135,9 @@ msgstr "Impossibile leggere Rubrica della FRITZ!Box: versione errata?"
 
 msgid "Country"
 msgstr "Nazione"
+
+msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgstr ""
 
 msgid "DECT inactive"
 msgstr "DECT non attivo"
@@ -530,8 +533,8 @@ msgstr "Intervallo aggiornamento rubriche (ore)"
 msgid "Reset"
 msgstr "Reset"
 
-msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Identificativo chiamante (selezionare il Paese!)"
+msgid "Reverse Lookup Caller ID"
+msgstr ""
 
 msgid "Reverse searching..."
 msgstr "Ricerca identificativo chiamante..."
@@ -770,3 +773,6 @@ msgstr "Ufficio"
 
 msgid "wrong user or password?"
 msgstr "Utente o password errati?"
+
+#~ msgid "Reverse Lookup Caller ID (select country below)"
+#~ msgstr "Identificativo chiamante (selezionare il Paese!)"

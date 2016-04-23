@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-22 17:57+0200\n"
+"POT-Creation-Date: 2016-03-26 17:20+0100\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -132,6 +132,9 @@ msgstr ""
 
 msgid "Country"
 msgstr "País"
+
+msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgstr ""
 
 msgid "DECT inactive"
 msgstr ""
@@ -507,8 +510,8 @@ msgstr ""
 msgid "Reset"
 msgstr "Resetear"
 
-msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Búsqueda inversa del ID llamante (seleccionar país abajo)"
+msgid "Reverse Lookup Caller ID"
+msgstr ""
 
 msgid "Reverse searching..."
 msgstr "Búsqueda inversa..."
@@ -841,6 +844,9 @@ msgstr ""
 
 #~ msgid "PhoneBook Location"
 #~ msgstr "Ubicación de la Agenda"
+
+#~ msgid "Reverse Lookup Caller ID (select country below)"
+#~ msgstr "Búsqueda inversa del ID llamante (seleccionar país abajo)"
 
 #~ msgid "Show Calls for specific MSN"
 #~ msgstr "Mostrar Llamadas para un específico MSN"
