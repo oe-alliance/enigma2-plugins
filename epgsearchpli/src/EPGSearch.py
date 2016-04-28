@@ -54,7 +54,7 @@ def EPGSelectionInit():
 	EPGSelection.__init__ = EPGSelection__init__
 
 # Modified EPGSelection __init__
-def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None):
+def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, parent=None):
 	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)
 	if self.type != EPG_TYPE_MULTI and config.plugins.epgsearch.add_search_to_epg.value:
 		def bluePressed():
