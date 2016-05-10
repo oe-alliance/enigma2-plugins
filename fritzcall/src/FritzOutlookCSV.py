@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 699 $
-$Date: 2012-10-25 19:04:03 +0200 (Do, 25. Okt 2012) $
-$Id: FritzOutlookCSV.py 699 2012-10-25 17:04:03Z michael $
+$Revision: 1290 $
+$Date: 2016-05-01 18:09:29 +0200 (Sun, 01 May 2016) $
+$Id: FritzOutlookCSV.py 1290 2016-05-01 16:09:29Z michael $
 '''
 #
 # needs python-textutils for csv
 #
 try:
-	from . import _, debug, normalizePhoneNumber #@UnresolvedImport # pylint: disable-msg=W0613,F0401
+	from . import _, normalizePhoneNumber #@UnresolvedImport # pylint: disable-msg=W0613,F0401
 except ValueError:
 	def _(string): # pylint: disable-msg=C0103
 		return string
@@ -34,6 +34,10 @@ except ValueError:
 			return found.group(1)
 		else:
 			return '0'
+
+import logging
+logger = logging.getLogger("[FritzCall] OutlookCSV")
+debug = logger.debug
 
 def out(number, name):
 	print number + '#' + name

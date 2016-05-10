@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-26 17:20+0100\n"
-"PO-Revision-Date: 2016-03-28 12:27+0200\n"
+"POT-Creation-Date: 2016-05-01 14:08+0200\n"
+"PO-Revision-Date: 2016-05-01 20:12+0200\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: de\n"
@@ -147,9 +147,6 @@ msgstr "Schnurlostelefone angemeldet"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Deactivate WLAN guest access"
 msgstr "Deaktiviere WLAN Gastzugang"
-
-msgid "Debug"
-msgstr "Debug"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
@@ -383,6 +380,9 @@ msgstr "Italien"
 
 msgid "Last 10 calls:\n"
 msgstr "Die letzten zehn Anrufe im Standby:\n"
+
+msgid "Log level"
+msgstr "Log Level"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Lookup"
@@ -680,6 +680,9 @@ msgstr ""
 "\n"
 "Es könnte eine Kommunikationsproblem mit der FRITZ!Box sein.\n"
 "Versuchen Sie es nochmal."
+
+msgid "all"
+msgstr "Alles"
 
 msgid "before 05.27"
 msgstr "vor 05.27"

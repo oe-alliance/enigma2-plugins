@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-26 17:20+0100\n"
+"POT-Creation-Date: 2016-05-01 14:08+0200\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -147,9 +147,6 @@ msgstr "DECT telefoni registrovani"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Deactivate WLAN guest access"
 msgstr ""
-
-msgid "Debug"
-msgstr "Debag"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
@@ -365,6 +362,9 @@ msgstr "Italija"
 
 msgid "Last 10 calls:\n"
 msgstr "Poslednjih 10 poziva:\n"
+
+msgid "Log level"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Lookup"
@@ -652,6 +652,9 @@ msgstr ""
 "\n"
 "To može biti problem veza,samo opet probajte."
 
+msgid "all"
+msgstr ""
+
 msgid "before 05.27"
 msgstr ""
 
@@ -754,6 +757,9 @@ msgstr ""
 
 #~ msgid "CF Drive"
 #~ msgstr "CF Laufwerk"
+
+#~ msgid "Debug"
+#~ msgstr "Debag"
 
 #~ msgid "Flash"
 #~ msgstr "Fleš"

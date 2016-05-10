@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-26 17:20+0100\n"
+"POT-Creation-Date: 2016-05-01 14:08+0200\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -145,9 +145,6 @@ msgstr "Teléfonos DECT registrados"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Deactivate WLAN guest access"
 msgstr ""
-
-msgid "Debug"
-msgstr "Testear"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
@@ -363,6 +360,9 @@ msgstr "Italia"
 
 msgid "Last 10 calls:\n"
 msgstr "Últimas 10 llamadas:\n"
+
+msgid "Log level"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Lookup"
@@ -654,6 +654,9 @@ msgstr ""
 "\n"
 "Puede hacer un problema de comunicación, sólo reintente otra vez."
 
+msgid "all"
+msgstr ""
+
 msgid "before 05.27"
 msgstr ""
 
@@ -771,6 +774,9 @@ msgstr ""
 
 #~ msgid "Could not load calls from FRITZ!Box - Error: %s"
 #~ msgstr "No puedo cargar llamadas desde FRITZ!Box - Error: %s"
+
+#~ msgid "Debug"
+#~ msgstr "Testear"
 
 #~ msgid "Dialling failed - Error: %s"
 #~ msgstr "Falló la llamada - Error: %s"

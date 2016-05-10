@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1287 $
-$Date: 2016-04-14 19:18:49 +0200 (Thu, 14 Apr 2016) $
-$Id: FritzCallFBF.py 1287 2016-04-14 17:18:49Z michael $
+$Revision: 1296 $
+$Date: 2016-05-02 15:52:11 +0200 (Mon, 02 May 2016) $
+$Id: FritzCallFBF.py 1296 2016-05-02 13:52:11Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -18,7 +18,7 @@ $Id: FritzCallFBF.py 1287 2016-04-14 17:18:49Z michael $
 # pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,W1401
 
 from . import _, __ #@UnresolvedImport # pylint: disable=W0611,F0401
-from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS
+from plugin import config, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
 from twisted.web.client import getPage #@UnresolvedImport
@@ -29,7 +29,7 @@ import re, time, hashlib
 
 import logging
 #debug = logging.getLogger(__name__ + "XXX").debug
-debug = logging.getLogger(__name__).debug
+#debug = logging.getLogger(__name__).debug
 
 FBF_boxInfo = 0
 FBF_upTime = 1
@@ -92,7 +92,8 @@ def cleanNumber(number):
 	return number
 		
 class FritzCallFBF:
-	debug = logging.getLogger("[FritzCallFBF]").debug
+	logger = logging.getLogger("FritzCallFBF.old")
+	debug = logger.debug
 
 	def __init__(self):
 		self.debug("")
@@ -1100,7 +1101,8 @@ class FritzCallFBF:
 		self._notify(text)
 
 class FritzCallFBF_05_27:
-	debug = logging.getLogger("[FritzCallFBF_05_27]").debug
+	logger = logging.getLogger("FritzCall.FBF_05_27")
+	debug = logger.debug
 	
 	def __init__(self):
 		self.debug("[FritzCallFBF_05_27] __init__")
@@ -1802,7 +1804,7 @@ import xml.etree.ElementTree as ET
 import StringIO, csv
 
 class FritzCallFBF_05_50:
-	logger = logging.getLogger("[FritzCallFBF_05_50]")
+	logger = logging.getLogger("FritzCall.FBF_05_50")
 	debug = logger.debug
 	info = logger.info
 	warn = logger.warn
@@ -2614,7 +2616,7 @@ class FritzCallFBF_05_50:
 		self._logout(md5Sid, "_errorBlacklist")
 
 class FritzCallFBF_06_35:
-	logger = logging.getLogger("[FritzCallFBF_06_35]")
+	logger = logging.getLogger("FritzCall.FBF_06_35")
 	debug = logger.debug
 	info = logger.info
 	warn = logger.warn
@@ -3264,7 +3266,7 @@ class FritzCallFBF_06_35:
 		if found:
 			faxActive = True
 			self.info("faxActive: " + repr(faxActive))
- 
+
 		found = re.match('.*"linktxt": "Rufumleitung",\s*"details": "(?:(\d+) )?aktiv",', html, re.S)
 		if found:
 			if found.group(1):
@@ -3272,7 +3274,7 @@ class FritzCallFBF_06_35:
 			else:
 				rufumlActive = -1 # means no number available
 			self.info("rufumlActive: " + repr(rufumlActive))
- 
+
 		guestAccess = ""
 		# found = re.match('.*WLAN-Gastzugang</a></td><td title="[^"]*">aktiv ([^<]*)</td>', html, re.S)
 		found = re.match('.*linktxt": "WLAN-Gastzugang",\s*"details": "aktiv \(([^\)]+)\)(, (ungesichert|gesichert))?,( (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Geräte), ([^"]+)",\s*"link": "wGuest"', html, re.S)
@@ -3411,7 +3413,8 @@ class FritzCallFBF_06_35:
 		self._logout(md5Sid, "_errorBlacklist")
 
 class FritzCallFBF_dummy:
-	debug = logging.getLogger("[FritzCallFBF_dummy]").debug
+	logger = logging.getLogger("FritzCall.FBF_dummy")
+	debug = logger.debug
 
 	def __init__(self):
 		'''

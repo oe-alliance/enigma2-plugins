@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-17 15:08+0100\n"
+"POT-Creation-Date: 2016-05-10 18:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,6 +127,9 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
+msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgstr ""
+
 msgid "DECT inactive"
 msgstr ""
 
@@ -135,9 +138,6 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Deactivate WLAN guest access"
-msgstr ""
-
-msgid "Debug"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -350,6 +350,9 @@ msgstr ""
 msgid "Last 10 calls:\n"
 msgstr ""
 
+msgid "Log level"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Lookup"
 msgstr ""
@@ -494,7 +497,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-msgid "Reverse Lookup Caller ID (select country below)"
+msgid "Reverse Lookup Caller ID"
 msgstr ""
 
 msgid "Reverse searching..."
@@ -630,6 +633,9 @@ msgid ""
 "in the configuration dialog to display calls\n"
 "\n"
 "It could be a communication issue, just try again."
+msgstr ""
+
+msgid "all"
 msgstr ""
 
 msgid "before 05.27"
