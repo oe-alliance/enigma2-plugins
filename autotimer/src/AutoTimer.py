@@ -53,12 +53,42 @@ NOTIFICATIONID = 'AutoTimerNotification'
 CONFLICTNOTIFICATIONID = 'AutoTimerConflictEncounteredNotification'
 SIMILARNOTIFICATIONID = 'AutoTimerSimilarUsedNotification'
 
-def getTimeDiff(timer, begin, end):
-	if begin <= timer.begin <= end:
-		return end - timer.begin
-	elif timer.begin <= begin <= timer.end:
-		return timer.end - begin
-	return 0
+def timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer=None):
+	#print("rtimer [",rtimer.begin,",",rtimer.end,"] (",rtimer.end-rtimer.begin," s) - evt [",evtBegin,",",evtEnd,"] (",evtEnd-evtBegin," s)")
+	if (timer is not None) and (timer.offset is not None):
+		# remove custom offset from rtimer using timer.offset as RecordTimerEntry doesn't store the offset
+		# ('evtBegin' and 'evtEnd' are also without offset)
+		rtimerBegin = rtimer.begin + timer.offset[0]
+		rtimerEnd   = rtimer.end   - timer.offset[1]
+	else:
+		# remove E2 offset
+		rtimerBegin = rtimer.begin + config.recording.margin_before.value * 60
+		rtimerEnd   = rtimer.end   - config.recording.margin_after.value * 60
+	#print("trimer [",rtimerBegin,",",rtimerEnd,"] (",rtimerEnd-rtimerBegin," s) after removing offsets")
+	if (rtimerBegin <= evtBegin) and (evtEnd <= rtimerEnd):
+		commonTime = evtEnd - evtBegin
+	elif (evtBegin <= rtimerBegin) and (rtimerEnd <= evtEnd):
+		commonTime = rtimerEnd - rtimerBegin
+	elif evtBegin <= rtimerBegin <= evtEnd:
+		commonTime = evtEnd - rtimerBegin
+	elif rtimerBegin <= evtBegin <= rtimerEnd:
+		commonTime = rtimerEnd - evtBegin
+	else:
+		commonTime = 0
+	if evtBegin != evtEnd:
+		commonTime_percent = 100*commonTime/(evtEnd - evtBegin)
+	else:
+		return 0
+	if rtimerEnd != rtimerBegin:
+		durationMatch_percent = 100*(evtEnd - evtBegin)/(rtimerEnd - rtimerBegin)
+	else:
+		return 0
+	#print("commonTime_percent = ",commonTime_percent,", durationMatch_percent = ",durationMatch_percent)
+	if durationMatch_percent < commonTime_percent:
+		#avoid false match for a short event completely inside a very long rtimer's time span 
+		return durationMatch_percent
+	else:
+		return commonTime_percent
 
 typeMap = {
 	"exact": eEPGCache.EXAKT_TITLE_SEARCH,
@@ -405,10 +435,14 @@ class AutoTimer:
 			if timer.hasOffset():
 				# Apply custom Offset
 				begin, end = timer.applyOffset(begin, end)
+				offsetBegin = timer.offset[0]
+				offsetEnd   = timer.offset[1]
 			else:
 				# Apply E2 Offset
 				begin -= config.recording.margin_before.value * 60
 				end += config.recording.margin_after.value * 60
+				offsetBegin = config.recording.margin_before.value * 60
+				offsetEnd   = config.recording.margin_after.value * 60
 
 			# Overwrite endtime if requested
 			if timer.justplay and not timer.setEndtime:
@@ -446,7 +480,7 @@ class AutoTimer:
 			# We first check eit and if user wants us to guess event based on time
 			# we try this as backup. The allowed diff should be configurable though.
 			for rtimer in timerdict.get(serviceref, ()):
-				if (rtimer.eit == eit or config.plugins.autotimer.try_guessing.getValue()) and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
+				if (rtimer.eit == eit or config.plugins.autotimer.try_guessing.getValue()) and timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer) > 80:
 					oldExists = True
 
 					# Abort if we don't want to modify timers or timer is repeated
@@ -457,7 +491,7 @@ class AutoTimer:
 					if eit == preveit:
 						break
 					
-					if (evtBegin - (config.recording.margin_before.getValue() * 60) != rtimer.begin) or (evtEnd + (config.recording.margin_after.getValue() * 60) != rtimer.end) or (shortdesc != rtimer.description):
+					if (evtBegin - offsetBegin != rtimer.begin) or (evtEnd + offsetEnd != rtimer.end) or (shortdesc != rtimer.description):
 						if rtimer.isAutoTimer and eit == rtimer.eit:
 							print ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							# rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
