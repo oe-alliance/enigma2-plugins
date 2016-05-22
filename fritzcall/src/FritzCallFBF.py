@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1296 $
-$Date: 2016-05-02 15:52:11 +0200 (Mon, 02 May 2016) $
-$Id: FritzCallFBF.py 1296 2016-05-02 13:52:11Z michael $
+$Revision: 1300 $
+$Date: 2016-05-21 12:06:39 +0200 (Sa, 21 Mai 2016) $
+$Id: FritzCallFBF.py 1300 2016-05-21 10:06:39Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -18,7 +18,7 @@ $Id: FritzCallFBF.py 1296 2016-05-02 13:52:11Z michael $
 # pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,W1401
 
 from . import _, __ #@UnresolvedImport # pylint: disable=W0611,F0401
-from plugin import config, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS
+from plugin import config, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS, encode, decode
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
 from twisted.web.client import getPage #@UnresolvedImport
@@ -143,7 +143,7 @@ class FritzCallFBF:
 		self.debug(repr(error))
 		self._md5LoginTimestamp = None
 		if config.plugins.FritzCall.password.value != "":
-			parms = "login:command/password=%s" % (config.plugins.FritzCall.password.value)
+			parms = "login:command/password=%s" % (decode(config.plugins.FritzCall.password.value))
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("'" + url + "' parms: '" + parms + "'")
 			getPage(url,
@@ -190,7 +190,7 @@ class FritzCallFBF:
 				self.debug("login necessary and no challenge! That is terribly wrong.")
 			parms = urlencode({
 							'getpage':'../html/de/menus/menu2.html', # 'var:pagename':'home', 'var:menu':'home', 
-							'login:command/response': buildResponse(challenge, config.plugins.FritzCall.password.value),
+							'login:command/response': buildResponse(challenge, decode(config.plugins.FritzCall.password).value),
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("'" + url + "' parms: '" + parms + "'")
@@ -1197,7 +1197,7 @@ class FritzCallFBF_05_27:
 				self.debug("[FritzCallFBF_05_27] _md5Login: login necessary and no challenge! That is terribly wrong.")
 			parms = urlencode({
 							'getpage':'../html/de/menus/menu2.html', # 'var:pagename':'home', 'var:menu':'home', 
-							'login:command/response': buildResponse(challenge, config.plugins.FritzCall.password.value),
+							'login:command/response': buildResponse(challenge, decode(config.plugins.FritzCall.password.value)),
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("[FritzCallFBF_05_27] _md5Login: '" + url + "?" + parms + "'")
@@ -1886,7 +1886,7 @@ class FritzCallFBF_05_50:
 		# TODO: check validity of username?
 		parms = urlencode({
 						'username': config.plugins.FritzCall.username.value,
-						'response': buildResponse(challenge, config.plugins.FritzCall.password.value),
+						'response': buildResponse(challenge, decode(config.plugins.FritzCall.password.value)),
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(url + "?" + parms)
@@ -2298,7 +2298,7 @@ class FritzCallFBF_05_50:
 			if config.plugins.FritzCall.guestSecure.value:
 				parms.update({
 							'sec_mode':'4',
-							'wpa_key': config.plugins.FritzCall.guestPassword.value,
+							'wpa_key': decode(config.plugins.FritzCall.guestPassword.value),
 							})
 			else:
 				parms.update({
@@ -2697,7 +2697,7 @@ class FritzCallFBF_06_35:
 		# TODO: check validity of username?
 		parms = urlencode({
 						'username': config.plugins.FritzCall.username.value,
-						'response': buildResponse(challenge, config.plugins.FritzCall.password.value),
+						'response': buildResponse(challenge, decode(config.plugins.FritzCall.password.value)),
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(url + "?" + parms)
@@ -3053,7 +3053,7 @@ class FritzCallFBF_06_35:
 			if config.plugins.FritzCall.guestSecure.value:
 				parms.update({
 					'sec_mode':'3',
-					'wpa_key': config.plugins.FritzCall.guestPassword.value,
+					'wpa_key': decode(config.plugins.FritzCall.guestPassword.value),
 					})
 			else:
 				parms.update({
