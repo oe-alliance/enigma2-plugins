@@ -1,14 +1,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fancontrol2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-18 21:47+0100\n"
-"PO-Revision-Date: 2015-03-21 22:20+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-05-29 12:50+0100\n"
 "Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
 "Language-Team: OpenSPA <openspa.info>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Spanish\n"
@@ -34,13 +32,13 @@ msgid "Action in case of Fan failure"
 msgstr "Acción en caso de fallo del ventilador"
 
 msgid "Auto-Delete Data older than (Days)"
-msgstr "Borrado automático de datos anteriores a (dias)"
+msgstr "Autoborrado de datos anteriores a (dias)"
 
 msgid "Auto-Delete older %s Days"
 msgstr "Autoborrar los anteriores a %s dias"
 
 msgid "Box Shutdown"
-msgstr "Apagar el receptor"
+msgstr "apagar el receptor"
 
 msgid "Box has no fancontrol hardware -> FC2 deactivated"
 msgstr ""
@@ -60,10 +58,10 @@ msgid "Choose path"
 msgstr "Elegir destino"
 
 msgid "Control disabled"
-msgstr "Deshabilitado"
+msgstr "deshabilitado"
 
 msgid "Current rpm  %4d"
-msgstr "Velocidad %4d rpm"
+msgstr "velocidad: %4d rpm"
 
 msgid "Current value: %s"
 msgstr "Valor actual: %s"
@@ -80,23 +78,44 @@ msgstr "Libre: %d MByte"
 msgid "Download"
 msgstr "Descargar"
 
+msgid "Enable Console Logging"
+msgstr "Habilitar depuración por consola"
+
 msgid "Enable Data Logging"
-msgstr "Habilitar log de datos"
+msgstr "habilitar log de datos"
 
 msgid "Enable Event Logging"
 msgstr "Habilitar el log de eventos"
 
+msgid "Enable Thread use"
+msgstr "Activar el uso del hilo"
+
 msgid "End temperature C"
-msgstr "Temperatura final ºC"
+msgstr "ºC final"
 
 msgid "Extended Control Range"
 msgstr "Control extendido"
+
+msgid "Fan Control"
+msgstr "Control del ventilador"
+
+msgid "Fan Control 2"
+msgstr "Fan Control 2"
+
+msgid "Fan Control 2 - Monitor"
+msgstr "Monitor de Fan Control 2"
+
+msgid "Fan Control 2 - Test"
+msgstr "Comprobación"
 
 msgid "Fan is not working!"
 msgstr "El vent. no está funcionando"
 
 msgid "Fan off in Idle Mode"
-msgstr "Apagar ventilador en modo inactivo"
+msgstr "En reposo, apagar el ventilador?"
+
+msgid "Fan off in Standby"
+msgstr "Apagar en modo reposo"
 
 msgid "Fan type"
 msgstr "Tipo de ventilador"
@@ -130,19 +149,19 @@ msgid "Initial Voltage"
 msgstr "Voltaje inicial"
 
 msgid "Logging path"
-msgstr "Ruta de Logs"
+msgstr "ruta de acceso"
 
 msgid "Logging-Path: %s"
 msgstr "Ruta de acceso: %s"
 
 msgid "Max Fan %d rpm at PWM=255 (%s)"
-msgstr "Velocidad máxima: %d rpm en PWM=255 (%s)"
+msgstr "Veloc. max: %d rpm en PWM=255 (%s)"
 
 msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
-msgstr "Velocidad máxima: %d rpm en PWM=255 y VLT=255 (%s)"
+msgstr "Veloc. max: %d rpm en PWM=255 y VLT=255 (%s)"
 
 msgid "Max Fan %d rpm at VLT=255 (%s)"
-msgstr "Velocidad max: %d rpm en VLT=255 (%s)"
+msgstr "Veloc. max: %d rpm en VLT=255 (%s)"
 
 msgid "Min Fan Start %d rpm at PWM=%d"
 msgstr "Puesta en marcha: %d rpm en PWM=%d"
@@ -166,7 +185,7 @@ msgid "Number of WebIF-Log-Entries"
 msgstr "Entradas de log en WebIF"
 
 msgid "PID Ctl Err %03.2f %%"
-msgstr "Ctrl. Error PID %03.2f %%"
+msgstr "Ctl. Error PID %03.2f %%"
 
 msgid "PWM  %03d"
 msgstr "PWM  %03d"
@@ -184,16 +203,16 @@ msgid "Show Fan Speed as"
 msgstr "Mostrar velocidad como"
 
 msgid "Show Monitor in Extension-Menu"
-msgstr "Mostrar el monitor de FC2 en 'Extensiones'"
+msgstr "Mostrar monitor en 'Extensiones'"
 
 msgid "Show Plugin in Extension-Menu"
-msgstr "Mostrar FanControl2 en 'Extensiones'"
+msgstr "Mostrar el plugin en 'Extensiones'"
 
 msgid "Speed"
 msgstr "Velocidad"
 
 msgid "Static temp C"
-msgstr "Temp. estática ºC"
+msgstr "ºC estática"
 
 msgid "Target rpm  %4d"
 msgstr "Veloc. deseada  %4d"
@@ -214,25 +233,28 @@ msgid "active"
 msgstr "activo"
 
 msgid "auto"
-msgstr "Auto"
+msgstr "auto"
 
 msgid "below Tunerslot 4"
-msgstr "ranura de sint. 4"
+msgstr "ranura inferior de sint. 4"
 
 msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
 msgstr "RPM actual:%d RPM deseada:%d Temp:%4.1f"
 
+msgid "disable DMM-FanControl"
+msgstr "deshabilitar el control de ventilador"
+
 msgid "disabled"
-msgstr "Deshabilitado"
+msgstr "deshabilitado"
 
 msgid "display Info"
-msgstr "Mostrar información"
+msgstr "mostrar información"
 
 msgid "do nothing"
-msgstr "No hacer nada"
+msgstr "no hacer nada"
 
 msgid "increases overheating protection to (C)"
-msgstr "Aumentar protección de sobrecalentamiento en (ºC)"
+msgstr "aumentar protección de sobrecalentamiento a (ºC)"
 
 msgid "left near Card-Slot"
 msgstr "a la izda. junto al lector"
@@ -244,22 +266,22 @@ msgid "left of the Battery"
 msgstr "a la izda. de la bateria"
 
 msgid "max Speed rpm"
-msgstr "Veloc. máxima (rpm)"
+msgstr "RPM máx."
 
 msgid "min Speed rpm"
-msgstr "Veloc. mínima (rpm)"
+msgstr "RPM mín."
 
 msgid "near XILINX Spartan"
 msgstr "cerca de XILINX"
 
 msgid "never"
-msgstr "Nunca"
+msgstr "nunca"
 
 msgid "no"
-msgstr "No"
+msgstr "no"
 
 msgid "not active"
-msgstr "Inactivo"
+msgstr "inactivo"
 
 msgid "over Security Card"
 msgstr "Sobre la tarj. de seguridad"
@@ -268,16 +290,19 @@ msgid "please set fan type (3Pin or 4Pin)"
 msgstr "especifique el tipo de ventilador (3 ó 4 pin)"
 
 msgid "please wait (until 3min)..."
-msgstr "Espere mientras se procesan los datos de los sensores..."
+msgstr "espere (+/- 3 min.)..."
 
 msgid "press Info for HDD-Temp"
 msgstr "pulse info para ver la temp. del HDD"
 
 msgid "read HDD-Temperature in HDD-Standby-Mode"
-msgstr "Leer temperatura del HDD en reposo"
+msgstr "leer temperatura del HDD en reposo"
 
 msgid "readme.txt"
-msgstr "readmees.txt"
+msgstr "Léeme.txt"
+
+msgid "setup Fancontol inStandby mode"
+msgstr "Configurar FanControl cuando está en reposo"
 
 msgid "turn off"
 msgstr "apagar"
@@ -292,14 +317,7 @@ msgid "under the WLAN"
 msgstr "bajo la WLAN"
 
 msgid "yes"
-msgstr "Si"
+msgstr "si"
 
 msgid "yes, Except for Recording or HDD"
-msgstr "Si, excepto en grabaciones o HDD"
-
-msgid "Enable Console Logging"
-msgstr "Habilitar la consola de depuración"
-
-msgid "Enable Thread use"
-msgstr "Habilitar el uso del hilo"
-
+msgstr "si, excepto en grabaciones o HDD"
