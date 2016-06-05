@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-21 12:52+0200\n"
+"POT-Creation-Date: 2016-06-05 15:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -567,6 +567,12 @@ msgstr ""
 msgid "The Netherlands"
 msgstr ""
 
+#, python-format
+msgid ""
+"There might be a problem with your FritzCall %spassword.\n"
+"Check in the configuration."
+msgstr ""
+
 msgid "Timeout for Call Notifications (seconds)"
 msgstr ""
 
@@ -635,9 +641,6 @@ msgid ""
 "It could be a communication issue, just try again."
 msgstr ""
 
-msgid "all"
-msgstr ""
-
 msgid "before 05.27"
 msgstr ""
 
@@ -665,6 +668,9 @@ msgid "encrypted"
 msgstr ""
 
 msgid "finishing"
+msgstr ""
+
+msgid "guest "
 msgstr ""
 
 msgid "home"
@@ -701,6 +707,9 @@ msgid "not encrypted"
 msgstr ""
 
 msgid "not yet implemented"
+msgstr ""
+
+msgid "nothing"
 msgstr ""
 
 msgid "number suppressed"

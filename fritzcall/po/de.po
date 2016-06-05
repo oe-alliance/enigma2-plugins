@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-01 14:08+0200\n"
-"PO-Revision-Date: 2016-05-01 20:12+0200\n"
+"POT-Creation-Date: 2016-06-01 17:50+0200\n"
+"PO-Revision-Date: 2016-06-01 19:51+0200\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: de\n"
@@ -604,6 +604,14 @@ msgstr "Schweiz"
 msgid "The Netherlands"
 msgstr "Niederlande"
 
+#, python-format
+msgid ""
+"There might be a problem with your FritzCall %spassword.\n"
+"Check in the configuration."
+msgstr ""
+"Es gibt anscheinend ein Problem mit dem FritzCall %sPasswort.\n"
+"Bitte in der Konfiguration überprüfen."
+
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Anzeigedauer in Sekunden"
 
@@ -681,9 +689,6 @@ msgstr ""
 "Es könnte eine Kommunikationsproblem mit der FRITZ!Box sein.\n"
 "Versuchen Sie es nochmal."
 
-msgid "all"
-msgstr "Alles"
-
 msgid "before 05.27"
 msgstr "vor 05.27"
 
@@ -712,6 +717,9 @@ msgstr "verschlüsselt"
 
 msgid "finishing"
 msgstr "Fertigstellung"
+
+msgid "guest "
+msgstr "Gast-"
 
 msgid "home"
 msgstr "Privat"
@@ -748,6 +756,9 @@ msgstr "nicht verschlüsselt"
 
 msgid "not yet implemented"
 msgstr "noch nicht eingebaut"
+
+msgid "nothing"
+msgstr "Nichts"
 
 msgid "number suppressed"
 msgstr "Nummer unterdrückt"

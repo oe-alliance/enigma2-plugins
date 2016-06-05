@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-01 14:08+0200\n"
+"POT-Creation-Date: 2016-06-01 17:50+0200\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -576,6 +576,12 @@ msgstr "İsviçre"
 msgid "The Netherlands"
 msgstr "Hollanda"
 
+#, python-format
+msgid ""
+"There might be a problem with your FritzCall %spassword.\n"
+"Check in the configuration."
+msgstr ""
+
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Arama uyarıları için zaman aşımı süresi (saniye)"
 
@@ -649,9 +655,6 @@ msgstr ""
 "\n"
 "Bağlantı sorunu yaşarsanız, tekrar deneyin."
 
-msgid "all"
-msgstr ""
-
 msgid "before 05.27"
 msgstr ""
 
@@ -680,6 +683,9 @@ msgstr "şifrelenmiş"
 
 msgid "finishing"
 msgstr "sonlandırılıyor"
+
+msgid "guest "
+msgstr ""
 
 msgid "home"
 msgstr "ev"
@@ -715,6 +721,9 @@ msgid "not encrypted"
 msgstr "şifrelenmemiş"
 
 msgid "not yet implemented"
+msgstr ""
+
+msgid "nothing"
 msgstr ""
 
 msgid "number suppressed"

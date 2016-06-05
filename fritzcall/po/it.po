@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-01 14:08+0200\n"
+"POT-Creation-Date: 2016-06-01 17:50+0200\n"
 "PO-Revision-Date: 2015-04-14 23:22+0200\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -603,6 +603,12 @@ msgstr "Svizzera"
 msgid "The Netherlands"
 msgstr "Olanda"
 
+#, python-format
+msgid ""
+"There might be a problem with your FritzCall %spassword.\n"
+"Check in the configuration."
+msgstr ""
+
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Ritardo notifica chiamate (secondi)"
 
@@ -677,9 +683,6 @@ msgstr ""
 "\n"
 "Potrebbe trattarsi di un problema di comunicazione, riprovare."
 
-msgid "all"
-msgstr ""
-
 msgid "before 05.27"
 msgstr "anteriore a 05.27"
 
@@ -708,6 +711,9 @@ msgstr "codificato"
 
 msgid "finishing"
 msgstr "Quasi terminato..."
+
+msgid "guest "
+msgstr ""
 
 msgid "home"
 msgstr "Casa"
@@ -744,6 +750,9 @@ msgstr "non codificato"
 
 msgid "not yet implemented"
 msgstr "Funzione non ancora implementata"
+
+msgid "nothing"
+msgstr ""
 
 msgid "number suppressed"
 msgstr "numero mascherato"
