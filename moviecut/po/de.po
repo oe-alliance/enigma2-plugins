@@ -28,7 +28,7 @@ msgstr "nicht schneiden"
 
 #: /200/plugin.py:38
 msgid "Replace the original movie with the cut movie"
-msgstr "Ersetzte Original Film durch geschnittenen Film"
+msgstr "Ersetze Original Film durch geschnittenen Film"
 
 #: /200/plugin.py:39
 msgid "Place the cut movie in a new file ending with \" cut\""
