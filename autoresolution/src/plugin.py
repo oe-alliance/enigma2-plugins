@@ -423,6 +423,9 @@ class AutoFrameRate(Screen):
 		self.lastService = None
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap = {iPlayableService.evVideoFramerateChanged: self.AutoVideoFramerateChanged})
 		self.need_reset = getBoxType() in ('solo4k')
+		self.replace_mode = '30'
+		if '1080p60' in video_hw.modes_available:
+			self.replace_mode = '60'
 
 	def AutoVideoFramerateChanged(self):
 		if usable and config.plugins.autoresolution.mode.value == "auto":
@@ -446,7 +449,7 @@ class AutoFrameRate(Screen):
 						elif framerate in (23976, 24000):
 							self.setVideoFrameRate('24')
 						elif framerate in (29970, 30000):
-							self.setVideoFrameRate('30')
+							self.setVideoFrameRate(self.replace_mode)
 						else:
 							self.setVideoFrameRate('50')
 
@@ -521,10 +524,7 @@ def autostart(reason, **kwargs):
 		AutoRes(session)
 
 def startSetup(menuid):
-	if getImageDistro() in ('openmips'):
-		if menuid != "video_menu":
-			return [ ]
-	elif getImageDistro() in ('openhdf'):
+	if getImageDistro() in ('openmips', 'openhdf'):
 		if menuid != "video_menu":
 			return [ ]
 	else:
