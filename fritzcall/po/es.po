@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-01 17:50+0200\n"
+"POT-Creation-Date: 2016-06-11 15:37+0200\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -373,6 +373,9 @@ msgstr "MSN a mostrar (separado por ,)"
 
 msgid "Mailbox"
 msgstr "Carpeta de correo"
+
+msgid "Make it more skin friendly"
+msgstr ""
 
 msgid "Minutes of uptime of WLAN guest network"
 msgstr ""
