@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-11 15:37+0200\n"
+"POT-Creation-Date: 2016-06-01 17:50+0200\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -375,9 +375,6 @@ msgstr "Pokazati MSN (odvojen sa  ,)"
 
 msgid "Mailbox"
 msgstr "Poštansko sanduče"
-
-msgid "Make it more skin friendly"
-msgstr ""
 
 msgid "Minutes of uptime of WLAN guest network"
 msgstr ""

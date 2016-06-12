@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-11 15:37+0200\n"
+"POT-Creation-Date: 2016-06-01 17:50+0200\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -371,9 +371,6 @@ msgstr "MSN göster (virgülle ayrılmış)"
 
 msgid "Mailbox"
 msgstr "Posta kutusu"
-
-msgid "Make it more skin friendly"
-msgstr ""
 
 msgid "Minutes of uptime of WLAN guest network"
 msgstr ""
