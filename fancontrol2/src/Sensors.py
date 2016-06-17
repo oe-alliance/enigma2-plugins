@@ -46,7 +46,6 @@ class Sensors:
 				value = int(f.readline().strip())
 			except:
 				pass
-				value = int(f.readline().strip())
 			f.close()
 		return value
 
