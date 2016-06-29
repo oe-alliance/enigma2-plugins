@@ -306,40 +306,58 @@ class EPGSearch(EPGSelection):
 		self.eventSelected()
 
 	def zap(self):
+		def serviceInBouquet(bouquet, serviceHandler, ref):
+			servicelist = serviceHandler.list(bouquet)
+			if servicelist is not None:
+				serviceIterator = servicelist.getNext()
+				while serviceIterator.valid():
+					if ref == serviceIterator:
+						# Servicerefs from the EPG don't (can't) have the
+						# channel number set
+						ref.setChannelNum(serviceIterator.getChannelNum())
+						return True
+					serviceIterator = servicelist.getNext()
+			return False
+
 		from Screens.ChannelSelection import ChannelSelection
 		ChannelSelectionInstance = ChannelSelection.instance
 		self.service_types = service_types_tv
+		foundService = False
 		if ChannelSelectionInstance:
-			if config.usage.multibouquet.getValue():
+			serviceHandler = eServiceCenter.getInstance()
+			if config.usage.multibouquet.value:
 				bqrootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
+				rootbouquet = eServiceReference(bqrootstr)
+				currentBouquet = ChannelSelectionInstance.getRoot()
+				for searchCurrent in (True, False):
+					bouquet = eServiceReference(bqrootstr)
+					bouquetlist = serviceHandler.list(bouquet)
+					if bouquetlist is not None:
+						bouquet = bouquetlist.getNext()
+						while bouquet.valid():
+							if bouquet.flags & (eServiceReference.isDirectory | eServiceReference.isInvisible) == eServiceReference.isDirectory and (currentBouquet is None or (currentBouquet == bouquet) == searchCurrent):
+								ChannelSelectionInstance.clearPath()
+								ChannelSelectionInstance.setRoot(bouquet)
+								foundService = serviceInBouquet(bouquet, serviceHandler, self.currentService.ref)
+								if foundService:
+									break
+							bouquet = bouquetlist.getNext()
+						if foundService:
+							break
 			else:
 				bqrootstr = '%s FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'%(self.service_types)
-			rootstr = ''
-			serviceHandler = eServiceCenter.getInstance()
-			rootbouquet = eServiceReference(bqrootstr)
-			bouquet = eServiceReference(bqrootstr)
-			bouquetlist = serviceHandler.list(bouquet)
-			if not bouquetlist is None:
-				while True:
-					bouquet = bouquetlist.getNext()
-					if (bouquet.flags and int(bouquet.flags) != 519) & eServiceReference.isDirectory:
-						ChannelSelectionInstance.clearPath()
-						ChannelSelectionInstance.setRoot(bouquet)
-						servicelist = serviceHandler.list(bouquet)
-						if not servicelist is None:
-							serviceIterator = servicelist.getNext()
-							while serviceIterator.valid():
-								if self.currentService.ref == serviceIterator:
-									break
-								serviceIterator = servicelist.getNext()
-							if self.currentService.ref == serviceIterator or not serviceIterator.valid():
-								break
-				ChannelSelectionInstance.enterPath(rootbouquet)
-				ChannelSelectionInstance.enterPath(bouquet)
-				ChannelSelectionInstance.saveRoot()
-				ChannelSelectionInstance.saveChannel(self.currentService.ref)
+				rootbouquet = eServiceReference(bqrootstr)
+				bouquet = eServiceReference(bqrootstr)
+				if bouquet.valid() and bouquet.flags & (eServiceReference.isDirectory | eServiceReference.isInvisible) == eServiceReference.isDirectory:
+					foundService = serviceInBouquet(bouquet, serviceHandler, self.currentService.ref)
+
+		if foundService:
+			ChannelSelectionInstance.enterPath(rootbouquet)
+			ChannelSelectionInstance.enterPath(bouquet)
+			ChannelSelectionInstance.saveRoot()
+			ChannelSelectionInstance.saveChannel(self.currentService.ref)
 			ChannelSelectionInstance.addToHistory(self.currentService.ref)
-		NavigationInstance.instance.playService(self.currentService.ref)
+			NavigationInstance.instance.playService(self.currentService.ref)
 		self.close()
 
 	def yellowButtonPressed(self):
