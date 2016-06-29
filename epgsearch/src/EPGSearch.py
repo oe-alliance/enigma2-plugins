@@ -328,18 +328,22 @@ class EPGSearch(EPGSelection):
 			if config.usage.multibouquet.value:
 				bqrootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
 				rootbouquet = eServiceReference(bqrootstr)
-				bouquet = eServiceReference(bqrootstr)
-				bouquetlist = serviceHandler.list(bouquet)
-				if bouquetlist is not None:
-					bouquet = bouquetlist.getNext()
-					while bouquet.valid():
-						if bouquet.flags & (eServiceReference.isDirectory | eServiceReference.isInvisible) == eServiceReference.isDirectory:
-							ChannelSelectionInstance.clearPath()
-							ChannelSelectionInstance.setRoot(bouquet)
-							foundService = serviceInBouquet(bouquet, serviceHandler, self.currentService.ref)
-							if foundService:
-								break
+				currentBouquet = ChannelSelectionInstance.getRoot()
+				for searchCurrent in (True, False):
+					bouquet = eServiceReference(bqrootstr)
+					bouquetlist = serviceHandler.list(bouquet)
+					if bouquetlist is not None:
 						bouquet = bouquetlist.getNext()
+						while bouquet.valid():
+							if bouquet.flags & (eServiceReference.isDirectory | eServiceReference.isInvisible) == eServiceReference.isDirectory and (currentBouquet is None or (currentBouquet == bouquet) == searchCurrent):
+								ChannelSelectionInstance.clearPath()
+								ChannelSelectionInstance.setRoot(bouquet)
+								foundService = serviceInBouquet(bouquet, serviceHandler, self.currentService.ref)
+								if foundService:
+									break
+							bouquet = bouquetlist.getNext()
+						if foundService:
+							break
 			else:
 				bqrootstr = '%s FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'%(self.service_types)
 				rootbouquet = eServiceReference(bqrootstr)
