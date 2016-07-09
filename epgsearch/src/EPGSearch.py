@@ -27,6 +27,8 @@ from Components.TimerList import TimerList
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.Event import Event
 
+from Tools.BoundFunction import boundFunction
+
 from time import localtime, strftime
 from operator import itemgetter
 
@@ -154,6 +156,8 @@ class EPGSearch(EPGSelection):
 		self.ask_time = -1 #now
 		self.closeRecursive = False
 		self.saved_title = None
+		self.firstSearch = True
+		self.lastAsk = None
 		self["Service"] = ServiceEvent()
 		self["Event"] = Event()
 		self["number"] = Label()
@@ -232,7 +236,11 @@ class EPGSearch(EPGSelection):
 			EPGSelection.PartnerboxInit(self, False)
 
 		self.refreshTimer = eTimer()
-		self.refreshTimer.timeout.get().append(self.refreshlist)
+		self.refreshTimer.callback.append(self.refreshlist)
+
+		self.startTimer = eTimer()
+		self.startTimer.callback.append(self.startUp)
+		self.startTimer.start(10, 1)
 
 		# Hook up actions for yttrailer if installed
 		try:
@@ -251,6 +259,11 @@ class EPGSearch(EPGSelection):
 	def onCreate(self):
 		self.setTitle(_("EPG Search"))
 
+		# Partnerbox
+		if PartnerBoxIconsEnabled:
+			EPGSelection.GetPartnerboxTimerlist(self)
+
+	def startUp(self):
 		if self.searchargs:
 			self.searchEPG(*self.searchargs)
 		else:
@@ -259,15 +272,12 @@ class EPGSearch(EPGSelection):
 			l.list = []
 			l.l.setList(l.list)
 		del self.searchargs
-
-		# Partnerbox
-		if PartnerBoxIconsEnabled:
-			EPGSelection.GetPartnerboxTimerlist(self)
+		del self.startTimer
 
 	def refreshlist(self):
 		self.refreshTimer.stop()
 		if self.currSearch:
-			self.searchEPG(self.currSearch)
+			self.searchEPG(self.currSearch, lastAsk=self.lastAsk)
 		else:
 			l = self["list"]
 			l.recalcEntrySize()
@@ -467,7 +477,7 @@ class EPGSearch(EPGSelection):
 		self.session.openWithCallback(self.setupCallback, EPGSearchSetup)
 
 	def setupCallback(self, *args):
-		if self.saveScope != config.plugins.epgsearch.scope.value:
+		if self.saveScope != config.plugins.epgsearch.scope.value and config.plugins.epgsearch.scope.value != "ask":
 			self.refreshlist()
 		del self.saveScope
 
@@ -492,7 +502,7 @@ class EPGSearch(EPGSelection):
 		if ret:
 			self.searchEPG(ret[1])
 
-	def searchEPG(self, searchString = None, searchSave = True):
+	def searchEPG(self, searchString = None, searchSave = True, lastAsk = None):
 		if searchString:
 			self.currSearch = searchString
 			if searchSave:
@@ -506,9 +516,37 @@ class EPGSearch(EPGSelection):
 				else:
 					history.remove(searchString)
 					history.insert(0, searchString)
-			self.doSearchEPG(searchString, config.plugins.epgsearch.scope.value)
+			if config.plugins.epgsearch.scope.value == "ask" and lastAsk is None:
+				list = [
+					(_("All services"), "all"),
+					(_("All bouquets"), "allbouquets"),
+					(_("Current bouquet"), "currentbouquet"),
+					(_("Current service"), "currentservice"),
+				]
+				selection = next((i for i, sel in enumerate(list) if sel[1] == config.plugins.epgsearch.defaultscope.value), 0)
+				self.session.openWithCallback(
+					boundFunction(self.searchEPGAskCallback, searchString),
+					ChoiceBox,
+					title = _("Search in..."),
+					list = list,
+					selection = selection
+				)
+			else:
+				self.doSearchEPG(searchString, lastAsk if lastAsk is not None else config.plugins.epgsearch.scope.value)
+
+	def searchEPGAskCallback(self, searchString, ret):
+		if ret:
+			self.lastAsk = ret[1]
+			self.doSearchEPG(searchString, ret[1])
+		else:
+			if self.firstSearch:
+				# Don't save abandoned initial search,
+				# so don't use closeScreen()
+				EPGSelection.close(self)
 
 	def doSearchEPG(self, searchString, searchScope):
+		self.firstSearch = False
+
 		# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
 		encoding = config.plugins.epgsearch.encoding.value
 		searchString = searchString.replace('\xc2\x86', '').replace('\xc2\x87', '')
