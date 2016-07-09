@@ -41,6 +41,7 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
 		self['footnote'] = Label("")
+		self["description"] = Label()
 
 		# Summary
 		self.setup_title = _("EPGSearch Setup")
