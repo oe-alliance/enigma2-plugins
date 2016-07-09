@@ -9,7 +9,8 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from ServiceReference import ServiceReference
 
 from EPGSearchSetup import EPGSearchSetup
-from Screens.ChannelSelection import SimpleChannelSelection
+from Screens.InfoBar import MoviePlayer
+from Screens.ChannelSelection import ChannelSelection, SimpleChannelSelection
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
 from Screens.MessageBox import MessageBox
@@ -48,6 +49,7 @@ except ImportError:
 	autoTimerAvailable = False
 
 service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
+rootbouquet_tv = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
 
 # Modified EPGSearchList with support for PartnerBox
 class EPGSearchList(EPGList):
@@ -319,14 +321,13 @@ class EPGSearch(EPGSelection):
 					serviceIterator = servicelist.getNext()
 			return False
 
-		from Screens.ChannelSelection import ChannelSelection
 		ChannelSelectionInstance = ChannelSelection.instance
 		self.service_types = service_types_tv
 		foundService = False
 		if ChannelSelectionInstance:
 			serviceHandler = eServiceCenter.getInstance()
 			if config.usage.multibouquet.value:
-				bqrootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
+				bqrootstr = rootbouquet_tv
 				rootbouquet = eServiceReference(bqrootstr)
 				currentBouquet = ChannelSelectionInstance.getRoot()
 				for searchCurrent in (True, False):
@@ -462,7 +463,13 @@ class EPGSearch(EPGSelection):
 			pass
 
 	def setup(self):
-		self.session.open(EPGSearchSetup)
+		self.saveScope = config.plugins.epgsearch.scope.value
+		self.session.openWithCallback(self.setupCallback, EPGSearchSetup)
+
+	def setupCallback(self, *args):
+		if self.saveScope != config.plugins.epgsearch.scope.value:
+			self.refreshlist()
+		del self.saveScope
 
 	def showHistory(self):
 		options = [(x, x) for x in config.plugins.epgsearch.history.value]
@@ -499,26 +506,76 @@ class EPGSearch(EPGSelection):
 				else:
 					history.remove(searchString)
 					history.insert(0, searchString)
+			self.doSearchEPG(searchString, config.plugins.epgsearch.scope.value)
 
-			# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
-			encoding = config.plugins.epgsearch.encoding.value
-			searchString = searchString.replace('\xc2\x86', '').replace('\xc2\x87', '')
-			if encoding != 'UTF-8':
-				try:
-					searchString = searchString.decode('UTF-8').encode(encoding)
-				except (UnicodeDecodeError, UnicodeEncodeError):
-					pass
+	def doSearchEPG(self, searchString, searchScope):
+		# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
+		encoding = config.plugins.epgsearch.encoding.value
+		searchString = searchString.replace('\xc2\x86', '').replace('\xc2\x87', '')
+		if encoding != 'UTF-8':
+			try:
+				searchString = searchString.decode('UTF-8').encode(encoding)
+			except (UnicodeDecodeError, UnicodeEncodeError):
+				pass
 
-			# Search EPG, default to empty list
-			epgcache = eEPGCache.getInstance() # XXX: the EPGList also keeps an instance of the cache but we better make sure that we get what we want :-)
-			ret = epgcache.search(('RIBDT', 1000, eEPGCache.PARTIAL_TITLE_SEARCH, searchString, eEPGCache.NO_CASE_CHECK)) or []
-			ret.sort(key=itemgetter(2)) # sort by time
+		# Search EPG, default to empty list
+		epgcache = eEPGCache.getInstance() # XXX: the EPGList also keeps an instance of the cache but we better make sure that we get what we want :-)
+		ret = epgcache.search(('RIBDT', 1000, eEPGCache.PARTIAL_TITLE_SEARCH, searchString, eEPGCache.NO_CASE_CHECK)) or []
+		ret.sort(key=itemgetter(2)) # sort by time
 
-			# Update List
-			l = self["list"]
-			l.recalcEntrySize()
-			l.list = ret
-			l.l.setList(ret)
+		searchFilter = None # all services/fallback
+
+		if searchScope == "allbouquets":
+			searchFilter = self.allBouquetServiceRefSet()
+		elif searchScope == "currentbouquet":
+			searchFilter = self.currentBouquetServiceRefSet()
+		elif searchScope == "currentservice":
+			searchFilter = self.currentServiceServiceRefSet()
+
+		if searchFilter is not None:
+			ret = [event for event in ret if event[0] in searchFilter]
+
+		# Update List
+		l = self["list"]
+		l.recalcEntrySize()
+		l.list = ret
+		l.l.setList(ret)
+
+	def _addBouquetServices(self, bouquet, serviceRefSet):
+		serviceHandler = eServiceCenter.getInstance()
+		servicelist = serviceHandler.list(bouquet)
+		if servicelist is not None:
+			serviceIterator = servicelist.getNext()
+			while serviceIterator.valid():
+				if serviceIterator.flags == 0:
+					serviceRefSet.add(serviceIterator.toString())
+				serviceIterator = servicelist.getNext()
+
+	def allBouquetServiceRefSet(self):
+		serviceHandler = eServiceCenter.getInstance()
+		bqrootstr = rootbouquet_tv
+		rootbouquet = eServiceReference(bqrootstr)
+		bouquetlist = serviceHandler.list(rootbouquet)
+		serviceRefSet = set()
+		if bouquetlist is not None:
+			bouquet = bouquetlist.getNext()
+			while bouquet.valid():
+				if bouquet.flags & (eServiceReference.isDirectory | eServiceReference.isInvisible) == eServiceReference.isDirectory:
+					self._addBouquetServices(bouquet, serviceRefSet)
+				bouquet = bouquetlist.getNext()
+		return serviceRefSet
+
+	def currentBouquetServiceRefSet(self):
+		bouquet = ChannelSelection.instance.getRoot()
+		serviceRefSet = set()
+		self._addBouquetServices(bouquet, serviceRefSet)
+		return serviceRefSet
+
+	def currentServiceServiceRefSet(self):
+		service = MoviePlayer.instance and MoviePlayer.instance.lastservice or NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
+		if not service or not service.valid:
+			return None
+		return set((service.toString(), ))
 
 class EPGSearchTimerImport(Screen):
 	def __init__(self, session):

@@ -51,6 +51,7 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(
 			self,
 			[
+				getConfigListEntry(_("Search scope"), config.plugins.epgsearch.scope, _("Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled.")),
 				getConfigListEntry(_("Show in plugin browser"), config.plugins.epgsearch.showinplugins, _("Enable this to be able to access the EPG-Search from within the plugin browser.")),
 				getConfigListEntry(_("Length of History"), config.plugins.epgsearch.history_length, _("How many entries to keep in the search history at most. 0 disables history entirely!")),
 				getConfigListEntry(_("Search Encoding"), config.plugins.epgsearch.encoding, _("Choose the encode type for search, helpful for foreign languages.")),
