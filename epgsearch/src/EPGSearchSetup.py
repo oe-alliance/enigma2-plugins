@@ -41,7 +41,6 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
 		self['footnote'] = Label("")
-		self["status"] = StaticText()
 
 		# Summary
 		self.setup_title = _("EPGSearch Setup")
@@ -72,12 +71,6 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		}, -2)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
-		if not self.selectionChanged in self["config"].onSelectionChanged:
-			self["config"].onSelectionChanged.append(self.selectionChanged)
-		self.selectionChanged()
-
-	def selectionChanged(self):
-		self["status"].setText(self["config"].getCurrent()[2])
 
 	# for summary:
 	def changedEntry(self):
