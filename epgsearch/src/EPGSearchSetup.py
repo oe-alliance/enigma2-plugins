@@ -41,26 +41,20 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
 		self['footnote'] = Label("")
-		self["status"] = StaticText()
+		self["description"] = Label()
 
 		# Summary
 		self.setup_title = _("EPGSearch Setup")
 		Screen.setTitle(self, _(self.setup_title))
 		self.onChangedEntry = []
 
-		ConfigListScreen.__init__(
-			self,
-			[
-				getConfigListEntry(_("Show in plugin browser"), config.plugins.epgsearch.showinplugins, _("Enable this to be able to access the EPG-Search from within the plugin browser.")),
-				getConfigListEntry(_("Length of History"), config.plugins.epgsearch.history_length, _("How many entries to keep in the search history at most. 0 disables history entirely!")),
-				getConfigListEntry(_("Search Encoding"), config.plugins.epgsearch.encoding, _("Choose the encode type for search, helpful for foreign languages.")),
-# 				getConfigListEntry(_("Add \"Search\" Button to EPG"), config.plugins.epgsearch.add_search_to_epg , _("If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG.")),
-			],
-			session = session,
-			on_change = self.changedEntry
+		ConfigListScreen.__init__(self, [], session = session, on_change = self.changedEntry)
+		self.createConfig()
+		self.notifiers = (
+			config.plugins.epgsearch.scope,
 		)
-		if config.usage.sort_settings.value:
-			self["config"].list.sort()
+		self.addNotifiers()
+		self.onClose.append(self.clearNotifiers)
 
 		self["actions"] = ActionMap(["SetupActions", 'ColorActions'],
 		{
@@ -72,12 +66,33 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		}, -2)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
-		if not self.selectionChanged in self["config"].onSelectionChanged:
-			self["config"].onSelectionChanged.append(self.selectionChanged)
-		self.selectionChanged()
 
-	def selectionChanged(self):
-		self["status"].setText(self["config"].getCurrent()[2])
+	def addNotifiers(self):
+		for n in self.notifiers:
+			n.addNotifier(self.updateConfig, initial_call=False)
+
+	def clearNotifiers(self):
+		for n in self.notifiers:
+			n.removeNotifier(self.updateConfig, initial_call=False)
+
+	def createConfig(self):
+		configList = [
+			getConfigListEntry(_("Search scope"), config.plugins.epgsearch.scope, _("Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled.")),
+		]
+		if config.plugins.epgsearch.scope.value == "ask":
+			configList.append(getConfigListEntry(_("Default scope when asked"), config.plugins.epgsearch.defaultscope, _("Sets the default search scope when the user is asked.")))
+		configList += [
+			getConfigListEntry(_("Show in plugin browser"), config.plugins.epgsearch.showinplugins, _("Enable this to allow access to EPG Search from within the plugin browser.")),
+			getConfigListEntry(_("Length of history"), config.plugins.epgsearch.history_length, _("Maximum number of entries in the search history. Set this to 0 to disable search history.")),
+			getConfigListEntry(_("Search encoding"), config.plugins.epgsearch.encoding, _("Choose the encoding type for searches, helpful for foreign languages.")),
+# 				getConfigListEntry(_("Add \"Search\" button to EPG"), config.plugins.epgsearch.add_search_to_epg , _("If this setting is enabled, the plugin adds a \"Search\" button to the regular EPG.")),
+		]
+		self["config"].setList(configList)
+		if config.usage.sort_settings.value:
+			self["config"].list.sort()
+
+	def updateConfig(self, configElement):
+		self.createConfig()
 
 	# for summary:
 	def changedEntry(self):
