@@ -183,38 +183,38 @@ class EPGSearch(EPGSelection):
 
 		self['okactions'] = HelpableActionMap(self, 'OkCancelActions',
 			{
-				'cancel': (self.closeScreen, _('Exit EPG')),
-				'OK': (self.epgsearchOK, _('Zap to channel (setup in menu)')),
-				'OKLong': (self.epgsearchOKLong, _('Zap to channel and close (setup in menu)'))
+				'cancel': (self.closeScreen, _('Exit EPG Search')),
+				'OK': (self.epgsearchOK, _('Zap to channel')),
+				'OKLong': (self.epgsearchOKLong, _('Show detailed event information'))
 			}, -1)
 		self['okactions'].csel = self
 
 		self['colouractions'] = HelpableActionMap(self, 'ColorActions', 
 			{
-				'red': (self.redButtonPressed, _('IMDB search for current event')),
-				'green': (self.timerAdd, _('Add/Remove timer for current event')),
-				'yellow': (self.yellowButtonPressed, _('Search for similar events')),
-				'blue': (self.exportAutoTimer, _('Add a auto timer for current event')),
-				'bluelong': (self.blueButtonPressed, _('Show AutoTimer List'))
+				'red': (self.redButtonPressed, _('IMDB search for highlighted event')),
+				'green': (self.timerAdd, _('Add/remove/edit timer for highlighted event')),
+				'yellow': (self.yellowButtonPressed, _('Enter new search')),
+				'blue': (self.exportAutoTimer, _('Add an AutoTimer for highlighted event')),
+				'bluelong': (self.blueButtonPressedLong, _('Show AutoTimer list'))
 			}, -1)
 		self['colouractions'].csel = self
 
 		self['recordingactions'] = HelpableActionMap(self, 'InfobarInstantRecord', 
 			{
-				'ShortRecord': (self.doRecordTimer, _('Add a record timer for current event')),
-				'LongRecord': (self.doZapTimer, _('Add a zap timer for current event'))
+				'ShortRecord': (self.doRecordTimer, _('Add a record timer for highlighted event')),
+				'LongRecord': (self.doZapTimer, _('Add a zap timer for highlighted event'))
 			}, -1)
 		self['recordingactions'].csel = self
 
 		self['epgactions'] = HelpableActionMap(self, 'EPGSelectActions', 
 			{
-				'nextBouquet': (self.nextBouquet, _('Goto next bouquet')),
-				'prevBouquet': (self.prevBouquet, _('Goto previous bouquet')),
-				'nextService': (self.nextService, _('Move down a page')),
-				'prevService': (self.prevService, _('Move up a page')),
-				'epg': (self.Info, _('Show detailed event info')),
-				'info': (self.Info, _('Show detailed event info')),
-				'infolong': (self.infoKeyPressed, _('Show single epg for current channel')),
+				'nextBouquet': (self.nextPage, _('Move down a page')),
+				'prevBouquet': (self.prevPage, _('Move up a page')),
+				'nextService': (self.prevPage, _('Move up a page')),
+				'prevService': (self.nextPage, _('Move down a page')),
+				'epg': (self.Info, _('Show detailed event information')),
+				'info': (self.Info, _('Show detailed event information')),
+				'infolong': (self.infoKeyPressed, _('Show detailed event information')),
 				'menu': (self.menu, _('Setup menu'))
 			}, -1)
 		self['epgactions'].csel = self
@@ -223,8 +223,8 @@ class EPGSearch(EPGSelection):
 			{
 				'left': (self.prevPage, _('Move up a page')),
 				'right': (self.nextPage, _('Move down a page')),
-				'up': (self.moveUp, _('Goto previous channel')),
-				'down': (self.moveDown, _('Goto next channel'))
+				'up': (self.moveUp, _('Move up')),
+				'down': (self.moveDown, _('Move down'))
 			}, -1)
 		self['epgcursoractions'].csel = self
 
@@ -399,6 +399,7 @@ class EPGSearch(EPGSelection):
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
+			title = _("EPG Search setup"),
 			list = options
 		)
 

@@ -82,10 +82,10 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		if config.plugins.epgsearch.scope.value == "ask":
 			configList.append(getConfigListEntry(_("Default scope when asked"), config.plugins.epgsearch.defaultscope, _("Sets the default search scope when the user is asked.")))
 		configList += [
-			getConfigListEntry(_("Show in plugin browser"), config.plugins.epgsearch.showinplugins, _("Enable this to be able to access the EPG-Search from within the plugin browser.")),
-			getConfigListEntry(_("Length of History"), config.plugins.epgsearch.history_length, _("How many entries to keep in the search history at most. 0 disables history entirely!")),
-			getConfigListEntry(_("Search Encoding"), config.plugins.epgsearch.encoding, _("Choose the encode type for search, helpful for foreign languages.")),
-# 				getConfigListEntry(_("Add \"Search\" Button to EPG"), config.plugins.epgsearch.add_search_to_epg , _("If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG.")),
+			getConfigListEntry(_("Show in plugin browser"), config.plugins.epgsearch.showinplugins, _("Enable this to allow access to EPG Search from within the plugin browser.")),
+			getConfigListEntry(_("Length of history"), config.plugins.epgsearch.history_length, _("Maximum number of entries in the search history. Set this to 0 to disable search history.")),
+			getConfigListEntry(_("Search encoding"), config.plugins.epgsearch.encoding, _("Choose the encoding type for searches, helpful for foreign languages.")),
+# 				getConfigListEntry(_("Add \"Search\" button to EPG"), config.plugins.epgsearch.add_search_to_epg , _("If this setting is enabled, the plugin adds a \"Search\" button to the regular EPG.")),
 		]
 		self["config"].setList(configList)
 		if config.usage.sort_settings.value:
