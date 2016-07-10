@@ -194,6 +194,7 @@ class EPGSearch(EPGSelection):
 				'red': (self.redButtonPressed, _('IMDB search for highlighted event')),
 				'green': (self.timerAdd, _('Add/remove/edit timer for highlighted event')),
 				'yellow': (self.yellowButtonPressed, _('Enter new search')),
+				'yellowlong': (self.showHistory, _('Show search history')),
 				'blue': (self.exportAutoTimer, _('Add an AutoTimer for highlighted event')),
 				'bluelong': (self.blueButtonPressedLong, _('Show AutoTimer list'))
 			}, -1)
