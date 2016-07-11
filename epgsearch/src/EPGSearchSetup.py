@@ -73,7 +73,7 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 
 	def clearNotifiers(self):
 		for n in self.notifiers:
-			n.removeNotifier(self.updateConfig, initial_call=False)
+			n.removeNotifier(self.updateConfig)
 
 	def createConfig(self):
 		configList = [
