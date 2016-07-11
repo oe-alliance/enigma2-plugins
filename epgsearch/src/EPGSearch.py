@@ -140,6 +140,9 @@ class EPGSearch(EPGSelection):
 	# Ignore these flags in services from bouquets
 	SERVICE_FLAG_MASK = ~(eServiceReference.shouldSort | eServiceReference.hasSortKey | eServiceReference.sort1)
 
+	@property
+	def firstSearch(self):
+	        return hasattr(self, "searchargs")
 
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
@@ -161,7 +164,6 @@ class EPGSearch(EPGSelection):
 		self.ask_time = -1 #now
 		self.closeRecursive = False
 		self.saved_title = None
-		self.firstSearch = True
 		self.lastAsk = None
 		self["Service"] = ServiceEvent()
 		self["Event"] = Event()
@@ -270,19 +272,14 @@ class EPGSearch(EPGSelection):
 			EPGSelection.GetPartnerboxTimerlist(self)
 
 	def startUp(self):
-		if self.searchargs:
-			self.searchEPG(*self.searchargs)
-		else:
-			l = self["list"]
-			l.recalcEntrySize()
-			l.list = []
-			l.l.setList(l.list)
-		del self.searchargs
+		self.refreshlist()
 		del self.startTimer
 
 	def refreshlist(self):
 		self.refreshTimer.stop()
-		if self.currSearch:
+		if self.firstSearch and self.searchargs:
+			self.searchEPG(*self.searchargs)
+		elif self.currSearch:
 			self.searchEPG(self.currSearch, lastAsk=self.lastAsk)
 		else:
 			l = self["list"]
@@ -484,7 +481,7 @@ class EPGSearch(EPGSelection):
 		self.session.openWithCallback(self.setupCallback, EPGSearchSetup)
 
 	def setupCallback(self, *args):
-		if self.saveScope != config.plugins.epgsearch.scope.value and config.plugins.epgsearch.scope.value != "ask":
+		if self.saveScope != config.plugins.epgsearch.scope.value and config.plugins.epgsearch.scope.value != "ask" or config.plugins.epgsearch.scope.value == "ask" and not self.lastAsk or self.firstSearch:
 			self.refreshlist()
 		del self.saveScope
 
@@ -511,7 +508,6 @@ class EPGSearch(EPGSelection):
 
 	def searchEPG(self, searchString = None, searchSave = True, lastAsk = None):
 		if searchString:
-			self.currSearch = searchString
 			if searchSave:
 				# Maintain history
 				history = config.plugins.epgsearch.history.value
@@ -529,6 +525,7 @@ class EPGSearch(EPGSelection):
 					(_("All bouquets"), "allbouquets"),
 					(_("Current bouquet"), "currentbouquet"),
 					(_("Current service"), "currentservice"),
+					(_("Setup"), "setup"),
 				]
 				selection = next((i for i, sel in enumerate(list) if sel[1] == config.plugins.epgsearch.defaultscope.value), 0)
 				self.session.openWithCallback(
@@ -543,8 +540,12 @@ class EPGSearch(EPGSelection):
 
 	def searchEPGAskCallback(self, searchString, ret):
 		if ret:
-			self.lastAsk = ret[1]
-			self.doSearchEPG(searchString, ret[1])
+			if ret[1] == "setup":
+				self.lastAsk = None
+				self.setup()
+			else:
+				self.lastAsk = ret[1]
+				self.doSearchEPG(searchString, ret[1])
 		else:
 			if self.firstSearch:
 				# Don't save abandoned initial search,
@@ -552,7 +553,10 @@ class EPGSearch(EPGSelection):
 				EPGSelection.close(self)
 
 	def doSearchEPG(self, searchString, searchScope):
-		self.firstSearch = False
+		if self.firstSearch:
+			del self.searchargs
+
+		self.currSearch = searchString
 
 		# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
 		encoding = config.plugins.epgsearch.encoding.value
