@@ -36,7 +36,7 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = "Setup"
+		self.skinName = [self.skinName, "Setup"]
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
@@ -73,7 +73,7 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 
 	def clearNotifiers(self):
 		for n in self.notifiers:
-			n.removeNotifier(self.updateConfig, initial_call=False)
+			n.removeNotifier(self.updateConfig)
 
 	def createConfig(self):
 		configList = [
