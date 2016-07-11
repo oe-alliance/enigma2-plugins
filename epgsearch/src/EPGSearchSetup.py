@@ -36,7 +36,7 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = "Setup"
+		self.skinName = [self.skinName, "Setup"]
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
