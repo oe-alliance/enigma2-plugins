@@ -136,6 +136,11 @@ class EPGSearchList(EPGList):
 
 # main class of plugin
 class EPGSearch(EPGSelection):
+
+	# Ignore these flags in services from bouquets
+	SERVICE_FLAG_MASK = ~(eServiceReference.shouldSort | eServiceReference.hasSortKey | eServiceReference.sort1)
+
+
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
 		self.skinName = ["EPGSearch", "EPGSelection"]
@@ -572,8 +577,14 @@ class EPGSearch(EPGSelection):
 		elif searchScope == "currentservice":
 			searchFilter = self.currentServiceServiceRefSet()
 
+		def searchFilterMatch(servicerefStr, filter):
+			# Force flags to 0 for filtering
+			sref = eServiceReference(servicerefStr)
+			sref.flags = 0
+			return sref.toString() in filter
+
 		if searchFilter is not None:
-			ret = [event for event in ret if event[0] in searchFilter]
+			ret = [event for event in ret if searchFilterMatch(event[0], searchFilter)]
 
 		# Update List
 		l = self["list"]
@@ -587,8 +598,11 @@ class EPGSearch(EPGSelection):
 		if servicelist is not None:
 			serviceIterator = servicelist.getNext()
 			while serviceIterator.valid():
-				if serviceIterator.flags == 0:
-					serviceRefSet.add(serviceIterator.toString())
+				if not (serviceIterator.flags & self.SERVICE_FLAG_MASK):
+					# Force flags to 0 for filtering
+					sref = eServiceReference(serviceIterator.toString())
+					sref.flags = 0
+					serviceRefSet.add(sref.toString())
 				serviceIterator = servicelist.getNext()
 
 	def allBouquetServiceRefSet(self):
