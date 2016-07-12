@@ -28,7 +28,7 @@ msgstr "Abbrechen"
 msgid "Channel Selection"
 msgstr "Kanalliste"
 
-msgid "Choose the encode type for search, helpful for foreign languages."
+msgid "Choose the encoding type for searches, helpful for foreign languages."
 msgstr "Wähle die Text-Kodierung. Das ist hilfreich für fremde Sprachen."
 
 #, python-format
@@ -39,25 +39,19 @@ msgid "EPG Search"
 msgstr "EPG Suche"
 
 msgid "EPGSearch"
-msgstr "EPGSuche"
+msgstr "EPG Suche"
 
-msgid "EPGSearch Setup"
-msgstr "EPGSearch Einrichtung"
+msgid "EPG Search setup"
+msgstr "EPG Such Einrichtung"
 
-msgid ""
-"Enable this to be able to access the EPG-Search from within the plugin "
-"browser."
-msgstr "EPGSuche in Erweiterungen aufführen"
+msgid "Enable this to allow access to EPG Search from within the plugin browser."
+msgstr "EPG Suche in Erweiterungen aufführen"
 
 msgid "Enter text to search for"
 msgstr "Zu suchenden Text eingeben"
 
-msgid ""
-"How many entries to keep in the search history at most. 0 disables history "
-"entirely!"
-msgstr ""
-"Maximale Anzahl von Einträgen im Suchverlauf. Diesen Wert auf \"0\" setzen, "
-"um den Verlauf zu deaktivieren."
+msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
+msgstr "Maximale Anzahl von Einträgen im Suchverlauf. Diesen Wert auf \"0\" setzen, um den Verlauf zu deaktivieren."
 
 msgid "IMDb Search"
 msgstr "IMDb Suche"
@@ -71,7 +65,7 @@ msgstr "Importiere aus EPG"
 msgid "Import from Timer"
 msgstr "Importiere aus Timer"
 
-msgid "Length of History"
+msgid "Length of history"
 msgstr "Limit des Suchverlaufs"
 
 msgid "New Search"
@@ -95,7 +89,7 @@ msgstr "Suche"
 msgid "Search EPG"
 msgstr "Durchsuche EPG"
 
-msgid "Search Encoding"
+msgid "Search encoding"
 msgstr "Kodierung für die Suche"
 
 msgid "Select a timer to search"
@@ -108,7 +102,7 @@ msgid "Setup"
 msgstr "Suche einrichten"
 
 msgid "Show in plugin browser"
-msgstr "Zeige EPGSuche unter Erweiterungen"
+msgstr "Zeige EPG Suche unter Erweiterungen"
 
 msgid "Show search history"
 msgstr "Zeige Suchverlauf"
