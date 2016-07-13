@@ -493,14 +493,27 @@ class EPGSearch(EPGSelection):
 		except ImportError as ie:
 			pass
 
+	def getReSearchSetings(self):
+		return (
+			config.plugins.epgsearch.scope.value,
+			config.plugins.epgsearch.search_type.value,
+			config.plugins.epgsearch.search_case.value,
+		)
+
 	def setup(self):
-		self.saveScope = config.plugins.epgsearch.scope.value
+		self.__reSearchSettings = self.getReSearchSetings()
 		self.session.openWithCallback(self.setupCallback, EPGSearchSetup)
 
 	def setupCallback(self, *args):
-		if self.saveScope != config.plugins.epgsearch.scope.value and config.plugins.epgsearch.scope.value != "ask" or config.plugins.epgsearch.scope.value == "ask" and not self.lastAsk or self.firstSearch:
+		if (
+			self.__reSearchSettings != self.getReSearchSetings() and (
+				config.plugins.epgsearch.scope.value != "ask" or
+				config.plugins.epgsearch.scope.value == "ask" and self.lastAsk
+			) or
+			self.firstSearch
+		):
 			self.refreshlist()
-		del self.saveScope
+		del self.__reSearchSettings
 
 	def showHistory(self):
 		options = [(x, x) for x in config.plugins.epgsearch.history.value]
@@ -584,9 +597,20 @@ class EPGSearch(EPGSelection):
 			except (UnicodeDecodeError, UnicodeEncodeError):
 				pass
 
+		search_type = {
+			"partial": eEPGCache.PARTIAL_TITLE_SEARCH,
+			"exact": eEPGCache.EXAKT_TITLE_SEARCH,
+			"start": eEPGCache.START_TITLE_SEARCH,
+		}.get(config.plugins.epgsearch.search_type.value, eEPGCache.PARTIAL_TITLE_SEARCH)
+		search_case = {
+			"insensitive": eEPGCache.NO_CASE_CHECK,
+			"sensitive": eEPGCache.CASE_CHECK,
+		}.get(config.plugins.epgsearch.search_case.value, eEPGCache.NO_CASE_CHECK)
+
 		# Search EPG, default to empty list
+
 		epgcache = eEPGCache.getInstance() # XXX: the EPGList also keeps an instance of the cache but we better make sure that we get what we want :-)
-		ret = epgcache.search(('RIBDT', 1000, eEPGCache.PARTIAL_TITLE_SEARCH, searchString, eEPGCache.NO_CASE_CHECK)) or []
+		ret = epgcache.search(('RIBDT', 1000, search_type, searchString, search_case)) or []
 		ret.sort(key=itemgetter(2)) # sort by time
 
 		searchFilter = None # all services/fallback
