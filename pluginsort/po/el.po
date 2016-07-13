@@ -1,0 +1,88 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PluginSort\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-20 09:03+0100\n"
+"PO-Revision-Date: 2016-07-13 14:26+0200\n"
+"Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
+"Language-Team: SiennaRoot <fk-912737@versanet.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: /Users/fk/Desktop/PluginSort/locale/de/LC_MESSAGES\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.7.7\n"
+"Language: el_GR\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+#: ../src/plugin.py:243
+msgid "Sort Extensions"
+msgstr "Ταξινόμηση Επεκτάσεων"
+
+#: ../src/plugin.py:244
+msgid "Sort MovieList Extensions"
+msgstr "Ταξινόμηση Επεκτάσεων Λίστας Ταινιών"
+
+#: ../src/plugin.py:245
+msgid "Sort EventInfo Extensions"
+msgstr "Ταξινόμηση Επεκτάσεων Πληροφοριών Προγραμμάτων"
+
+#: ../src/plugin.py:275
+msgid "Manage extensions"
+msgstr "Διαχείριση επεκτάσεων"
+
+#: ../src/plugin.py:276 ../src/plugin.py:290 ../src/plugin.py:402
+msgid "Sort"
+msgstr "Ταξινόμηση"
+
+#: ../src/plugin.py:276 ../src/plugin.py:290 ../src/plugin.py:414
+msgid "End Sort"
+msgstr "Τέλος Ταξινόμησης"
+
+#: ../src/plugin.py:282
+msgid "Remove Plugins"
+msgstr "Αφαίρεση Προσθέτων"
+
+#: ../src/plugin.py:284
+msgid "Download Plugins"
+msgstr "Λήψη Προσθέτων"
+
+#: ../src/plugin.py:354
+msgid "disable move mode"
+msgstr "απενεργοποίηση κατάστασης μεταφοράς"
+
+#: ../src/plugin.py:357
+msgid "enable move mode"
+msgstr "ενεργοποίηση κατάστασης μεταφοράς"
+
+#: ../src/plugin.py:361
+msgid "move extensions"
+msgstr "μετακίνηση επεκτάσεων"
+
+#: ../src/plugin.py:362
+msgid "move movie extensions"
+msgstr "μετακίνηση επεκτάσεων ταινιών"
+
+#: ../src/plugin.py:363
+msgid "move event extensions"
+msgstr "μετακίνηση επεκτάσεων προγραμμάτων"
+
+#: ../src/plugin.py:367
+msgid "hide selected plugin"
+msgstr "απόκρυψη επιλεγμένου πρόσθετου"
+
+#: ../src/plugin.py:370
+msgid "Help"
+msgstr "Βοήθεια"
+
+#: ../src/plugin.py:388
+msgid "Unable to load PluginHider"
+msgstr "Αδυναμία φόρτωσης Απόκρυψης Πρόσθετου"
