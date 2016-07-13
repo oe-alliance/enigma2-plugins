@@ -92,6 +92,9 @@ class EPGSearchList(EPGList):
 			pics.append(self.clocks[clock_pic])
 		if getattr(self, "wasEntryAutoTimer", False) and hasattr(self, "autotimericon"):
 			pics.append(self.autotimericon)
+		# Timer icons for timers set by IceTV (icetv.com.au)
+		if getattr(self, "wasEntryIceTV", False) and hasattr(self, "icetvicon"):
+			pics.append(self.icetvicon)
 
 		if self.screenwidth and self.screenwidth == 1920:
 			picx = 25
