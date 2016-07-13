@@ -1,5 +1,5 @@
 # for localized messages
-from . import _
+from . import _, allowShowOrbital
 
 # GUI (Screens)
 from Screens.Screen import Screen
@@ -81,6 +81,8 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		]
 		if config.plugins.epgsearch.scope.value == "ask":
 			configList.append(getConfigListEntry(_("Default scope when asked"), config.plugins.epgsearch.defaultscope, _("Sets the default search scope when the user is asked.")))
+		if allowShowOrbital:
+			configList.append(getConfigListEntry(_("Show orbital position"), config.plugins.epgsearch.showorbital, _("Show satellite orbital positions in the search results.")))
 		configList += [
 			getConfigListEntry(_("Show in plugin browser"), config.plugins.epgsearch.showinplugins, _("Enable this to allow access to EPG Search from within the plugin browser.")),
 			getConfigListEntry(_("Length of history"), config.plugins.epgsearch.history_length, _("Maximum number of entries in the search history. Set this to 0 to disable search history.")),
