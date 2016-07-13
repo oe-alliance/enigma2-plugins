@@ -1,11 +1,12 @@
 # for localized messages
-from . import _
+from . import _, allowShowOrbital
 
 from enigma import eEPGCache, eTimer, eServiceReference, eServiceCenter, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, getDesktop
 import NavigationInstance
 
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from Tools.Alternatives import GetWithAlternative
 from ServiceReference import ServiceReference
 
 from EPGSearchSetup import EPGSearchSetup
@@ -28,6 +29,8 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.Event import Event
 
 from Tools.BoundFunction import boundFunction
+
+from boxbranding import getImageDistro
 
 from time import localtime, strftime
 from operator import itemgetter
@@ -99,24 +102,54 @@ class EPGSearchList(EPGList):
 			picy = 23
 			posy = 11
 
+		if allowShowOrbital and config.plugins.epgsearch.showorbital.value:
+			orbitalPosWidth = float(lsw * 14) / 100
+			orbitalPosSpace = float(lsw * 3) / 100
+		else:
+			orbitalPosWidth = 0
+			orbitalPosSpace = 0
+
 		r1 = self.weekday_rect
 		r2 = self.datetime_rect
-		r3 = Rect(self.descr_rect.x, self.descr_rect.y, lsw - r2.x - r2.w, self.descr_rect.h)
+		r3 = Rect(self.descr_rect.x, self.descr_rect.y, orbitalPosWidth, self.descr_rect.h)
+		r4 = Rect(r3.x + r3.w + orbitalPosSpace, r3.y, lsw -  r3.x - r3.w - orbitalPosSpace, self.descr_rect.h)
 		t = localtime(beginTime)
-		serviceref = ServiceReference(service) # for Servicename
+		serviceref = ServiceReference(service) # for Servicename and orbital position
 		res = [
 			None, # no private data needed
 			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _(strftime("%a", t))),
 			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, strftime("%e/%m, %H:%M", t))
 		]
+		if orbitalPosWidth:
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r1.h, 0, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, self.getOrbitalPos(serviceref)))
 		picwidth = 0
 		for pic in pics:
 			picwidth += picx
-			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, lsw-picwidth, (r3.h/2-posy), picx, picy, pic))
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, lsw-picwidth, (r4.h/2-posy), picx, picy, pic))
 		if picwidth:
 			picwidth += float(lsw * 1) / 100
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w - picwidth, r3.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w - picwidth, r4.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
 		return res
+
+	def getOrbitalPos(self, ref):
+		refstr = None
+		if hasattr(ref, 'sref'):
+			refstr = str(ref.sref)
+		else:
+			refstr = str(ref)
+		refstr = refstr and GetWithAlternative(refstr)
+		if '%3a//' in refstr:
+			return "%s" % _("Stream")
+		op = int(refstr.split(':', 10)[6][:-4] or "0", 16)
+		if op == 0xeeee:
+			return "%s" % _("DVB-T")
+		if op == 0xffff:
+			return "%s" % _("DVB-C")
+		direction = 'E'
+		if op > 1800:
+			op = 3600 - op
+			direction = 'W'
+		return ("%d.%d\xc2\xb0%s") % (op // 10, op % 10, direction)
 
 # main class of plugin
 class EPGSearch(EPGSelection):
