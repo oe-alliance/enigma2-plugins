@@ -7,35 +7,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 10:00+0200\n"
-"PO-Revision-Date: 2013-07-25 17:03+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2016-07-13 10:53+0200\n"
+"PO-Revision-Date: 2016-07-14 05:25+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
-"Language: \n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.6\n"
 
 msgid "Add AutoTimer"
 msgstr "Voeg AutoTimer toe"
 
-msgid "Add a auto timer for current event"
-msgstr "Voeg een autotimer toe voor het huidige event"
-
-msgid "Add a record timer for current event"
-msgstr "Voeg een opnametimer toe voor het huidige event"
-
-msgid "Add a zap timer for current event"
-msgstr "Voeg een zaptimer toe voor het huidige event"
-
 msgid "Add Timer"
 msgstr "Voeg timer toe"
 
-msgid "Add/Remove timer for current event"
-msgstr "Verwijder/Voeg een timer toe voor het huidige event"
+msgid "Add a record timer for highlighted event"
+msgstr "Voeg een opnametimer toe voor het geselecteerde event."
+
+msgid "Add a zap timer for highlighted event"
+msgstr "Voeg een zaptimer toe voor het geselecteerde event."
+
+msgid "Add an AutoTimer for highlighted event"
+msgstr "Voeg een autotimer toe voor het geselecteerde event."
+
+msgid "Add/remove/edit timer for highlighted event"
+msgstr "Voeg toe/verwijder/bewerk timer voor het geselecteerde event."
+
+msgid "All bouquets"
+msgstr "Alle boeketten"
+
+msgid "All services"
+msgstr "Alle kanalen"
 
 msgid "Cancel"
 msgstr "Annuleren"
@@ -43,18 +48,39 @@ msgstr "Annuleren"
 msgid "Channel Selection"
 msgstr "Zenderkeuze"
 
-msgid "Choose the encode type for search, helpful for foreign languages."
-msgstr "Kies het code type voor het zoeken; handig voor diverse talen."
+msgid "Choose the encoding type for searches, helpful for foreign languages."
+msgstr "Kies het coderingstype; handig voor diverse talen."
 
 msgid "Close dialog"
 msgstr "Sluit dialoog"
+
+msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr "Bepaal waar te zoeken in de EPG. Indien 'alle boeketten' is gekozen, wordt daadwerkelijk in alle boeketten gezocht, ook als 'Meerdere favorietenlijsten toestaan' is uitgeschakeld."
 
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Kan AutoTimer timer lijst niet lezen : %s"
 
+msgid "Current bouquet"
+msgstr "Huidige boeket"
+
+msgid "Current service"
+msgstr "Huidige kanaal"
+
+msgid "DVB-C"
+msgstr "DVB-C"
+
+msgid "DVB-T"
+msgstr "DVB-T"
+
+msgid "Default scope when asked"
+msgstr "Standaard bereik wanneer gevraagd"
+
 msgid "EPG Search"
 msgstr "EPG doorzoeken"
+
+msgid "EPG Search setup"
+msgstr "EPG Search instellingen"
 
 msgid "EPGSearch"
 msgstr "EPGSearch"
@@ -62,32 +88,20 @@ msgstr "EPGSearch"
 msgid "EPGSearch Setup"
 msgstr "EPGSearch instellingen"
 
-msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
-msgstr "Toon EPG-Search in plugin browser."
+msgid "Enable this to allow access to EPG Search from within the plugin browser."
+msgstr "Schakel dit in om EPG search vanuit de pluginbrowser te kunnen openen."
+
+msgid "Enter new search"
+msgstr "Opnieuw zoeken"
 
 msgid "Enter text to search for"
 msgstr "Voer te zoeken tekst in:"
 
-msgid "Exit EPG"
-msgstr "Verlaat EPG"
+msgid "Exit EPG Search"
+msgstr "Sluit EPG search af"
 
-msgid "Goto next bouquet"
-msgstr "Ga naar de volgende favoriet"
-
-msgid "Goto next channel"
-msgstr "Ga naar het volgende kanaal"
-
-msgid "Goto previous bouquet"
-msgstr "Ga naar de vorige favoriet"
-
-msgid "Goto previous channel"
-msgstr "Ga naar het vorige kanaal"
-
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-msgstr "Hoeveel entries mogen er in de zoekhistory bewaard worden? \"0\" schakelt history geheel uit!"
-
-msgid "IMDB search for current event"
-msgstr "IMDB zoekslag voor het huidige event"
+msgid "IMDB search for highlighted event"
+msgstr "Zoek in IMDb naar geselecteerde event"
 
 msgid "IMDb Search"
 msgstr "IMDb zoeken"
@@ -101,11 +115,23 @@ msgstr "Uit de EPG importeren"
 msgid "Import from Timer"
 msgstr "Importeren uit de timer"
 
-msgid "Length of History"
-msgstr "Grotte van de geschiedenis"
+msgid "Is the search case-sensitive or case-insensitive"
+msgstr "Hoofdlettergevoelig zoeken"
+
+msgid "Length of history"
+msgstr "Geschiedenis lengte"
+
+msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
+msgstr "Maximum aantal ingangen in de zoekgeschiedenis. Stel in op 0 om de geschiedenis uit te schakelen."
+
+msgid "Move down"
+msgstr "Verplaats naar beneden"
 
 msgid "Move down a page"
 msgstr "Ga één pagina omlaag"
+
+msgid "Move up"
+msgstr "Verplaats naar boven"
 
 msgid "Move up a page"
 msgstr "Ga één pagina omhoog"
@@ -131,11 +157,20 @@ msgstr "Zoeken"
 msgid "Search EPG"
 msgstr "EPG doorzoeken"
 
-msgid "Search Encoding"
+msgid "Search encoding"
 msgstr "Zoek codering"
 
-msgid "Search for similar events"
-msgstr "Zoek naar gelijksoortige events"
+msgid "Search in..."
+msgstr "Zoek in..."
+
+msgid "Search scope"
+msgstr "Zoekbereik"
+
+msgid "Search strictness"
+msgstr "Zoekbeperkingen"
+
+msgid "Search type"
+msgstr "Zoektype"
 
 msgid "Select a timer to search"
 msgstr "Selecteer te zoeken timer..."
@@ -143,32 +178,68 @@ msgstr "Selecteer te zoeken timer..."
 msgid "Select text to search for"
 msgstr "Selecteer te zoeken tekst..."
 
+msgid "Set type of match used to compare program titles with the search string"
+msgstr "Kies het soort overeenkomst tussen programmatitels en zoekslag"
+
+msgid "Sets the default search scope when the user is asked."
+msgstr "Kies het stanf=daard bereik wanneer de gebruiker wordt gevraagd"
+
 msgid "Setup"
 msgstr "Instellingen"
 
 msgid "Setup menu"
 msgstr "Instellingen menu"
 
-msgid "Show AutoTimer List"
-msgstr "Toon AutoTimer lijst"
+msgid "Show AutoTimer list"
+msgstr "Toon autotimerlijst"
 
-msgid "Show detailed event info"
-msgstr "Toon gedetailleerde event informatie"
+msgid "Show detailed event information"
+msgstr "Toon gedetailleerde eventinformatie"
 
 msgid "Show in plugin browser"
 msgstr "Toon in Plugoin browser"
 
+msgid "Show orbital position"
+msgstr "Toon baanpositie"
+
+msgid "Show satellite orbital positions in the search results."
+msgstr "Toon baanpositie in zoekresultaten."
+
 msgid "Show search history"
 msgstr "Toon zoekhistory"
 
-msgid "Show single epg for current channel"
-msgstr "Toon de EPG voor het huidige kanaal"
+msgid "Stream"
+msgstr "Stream"
 
-msgid "Zap to channel (setup in menu)"
-msgstr "Zap naar kanaal (stel in in menu)"
+msgid "Zap to channel"
+msgstr "Zap naar kanaal"
 
-msgid "Zap to channel and close (setup in menu)"
-msgstr "Zap naar kanaal en sluit (stel in in menu)"
+msgid "all bouquets"
+msgstr "alle boeketten"
+
+msgid "all services"
+msgstr "alle kanalen"
+
+msgid "ask user"
+msgstr "vraag gebruiker"
+
+msgid "case-insensitive search"
+msgstr "Hoofdletterongevoelig zoeken"
+
+msgid "case-sensitive search"
+msgstr "Hoofdlettergevoelig zoeken"
+
+msgid "current bouquet"
+msgstr "huidige boeket"
+
+msgid "current service"
+msgstr "huidig kanaal"
+
+msgid "exact match"
+msgstr "exacte overeenkomst"
+
+msgid "partial match"
+msgstr "gedeeltelijke overeenkomst"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
@@ -178,3 +249,68 @@ msgstr "EPG doorzoeken"
 msgid "search EPG..."
 msgstr "EPG doorzoeken..."
 
+msgid "title starts with"
+msgstr "titel begint met"
+
+#~ msgid "Add a auto timer for current event"
+#~ msgstr "Voeg een autotimer toe voor het huidige event"
+
+#~ msgid "Add a record timer for current event"
+#~ msgstr "Voeg een opnametimer toe voor het huidige event"
+
+#~ msgid "Add a zap timer for current event"
+#~ msgstr "Voeg een zaptimer toe voor het huidige event"
+
+#~ msgid "Add/Remove timer for current event"
+#~ msgstr "Verwijder/Voeg een timer toe voor het huidige event"
+
+#~ msgid "Choose the encode type for search, helpful for foreign languages."
+#~ msgstr "Kies het code type voor het zoeken; handig voor diverse talen."
+
+#~ msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
+#~ msgstr "Toon EPG-Search in plugin browser."
+
+#~ msgid "Exit EPG"
+#~ msgstr "Verlaat EPG"
+
+#~ msgid "Goto next bouquet"
+#~ msgstr "Ga naar de volgende favoriet"
+
+#~ msgid "Goto next channel"
+#~ msgstr "Ga naar het volgende kanaal"
+
+#~ msgid "Goto previous bouquet"
+#~ msgstr "Ga naar de vorige favoriet"
+
+#~ msgid "Goto previous channel"
+#~ msgstr "Ga naar het vorige kanaal"
+
+#~ msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+#~ msgstr "Hoeveel entries mogen er in de zoekhistory bewaard worden? \"0\" schakelt history geheel uit!"
+
+#~ msgid "IMDB search for current event"
+#~ msgstr "IMDB zoekslag voor het huidige event"
+
+#~ msgid "Length of History"
+#~ msgstr "Grotte van de geschiedenis"
+
+#~ msgid "Search Encoding"
+#~ msgstr "Zoek codering"
+
+#~ msgid "Search for similar events"
+#~ msgstr "Zoek naar gelijksoortige events"
+
+#~ msgid "Show AutoTimer List"
+#~ msgstr "Toon AutoTimer lijst"
+
+#~ msgid "Show detailed event info"
+#~ msgstr "Toon gedetailleerde event informatie"
+
+#~ msgid "Show single epg for current channel"
+#~ msgstr "Toon de EPG voor het huidige kanaal"
+
+#~ msgid "Zap to channel (setup in menu)"
+#~ msgstr "Zap naar kanaal (stel in in menu)"
+
+#~ msgid "Zap to channel and close (setup in menu)"
+#~ msgstr "Zap naar kanaal en sluit (stel in in menu)"
