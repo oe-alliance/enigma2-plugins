@@ -131,8 +131,9 @@ class EPGSearchList(EPGList):
 		lsw = self.l.getItemSize().width()
 		self.listSizeWidth = lsw
 		if allowShowOrbital and config.plugins.epgsearch.showorbital.value:
-			orbitalPosWidth = float(lsw * 14) / 100
-			orbitalPosSpace = float(lsw * 3) / 100
+			fontSize = self.eventFontSizeSingle + config.epgselection.enhanced_eventfs.value
+			orbitalPosWidth = int(fontSize * 4.2)
+			orbitalPosSpace = int(fontSize * 0.5)
 		else:
 			orbitalPosWidth = 0
 			orbitalPosSpace = 0
