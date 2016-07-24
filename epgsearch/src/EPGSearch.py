@@ -164,7 +164,7 @@ class EPGSearch(EPGSelection):
 	def firstSearch(self):
 	        return hasattr(self, "searchargs")
 
-	def __init__(self, session, *args):
+	def __init__(self, session, *args, **kwargs):
 		Screen.__init__(self, session)
 		self.skinName = [self.skinName, "EPGSelection"]
 		HelpableScreen.__init__(self)
@@ -256,6 +256,8 @@ class EPGSearch(EPGSelection):
 			}, -1)
 		self['epgcursoractions'].csel = self
 
+		self.openHistory = kwargs.get("openHistory", False)
+
 		self.onLayoutFinish.append(self.onCreate)
 		# end stripped copy of EPGSelection.__init__
 
@@ -297,6 +299,9 @@ class EPGSearch(EPGSelection):
 
 	def refreshlist(self):
 		self.refreshTimer.stop()
+		if self.firstSearch and self.openHistory:
+			self.showHistory()
+			return
 		if self.firstSearch and self.searchargs:
 			self.searchEPG(*self.searchargs)
 		elif self.currSearch:
