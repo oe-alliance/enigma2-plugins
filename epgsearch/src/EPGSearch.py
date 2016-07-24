@@ -76,7 +76,6 @@ class EPGSearchList(EPGList):
 	def buildEPGSearchEntry(self, service, eventId, beginTime, duration, EventName):
 		lsw = self.l.getItemSize().width()
 		if self.listSizeWidth != lsw: #recalc size if scrollbar is shown
-			self.listSizeWidth = lsw
 			self.recalcEntrySize()
 		# Pics in right-to-left order
 		pics = []
@@ -105,17 +104,10 @@ class EPGSearchList(EPGList):
 			picy = 23
 			posy = 11
 
-		if allowShowOrbital and config.plugins.epgsearch.showorbital.value:
-			orbitalPosWidth = float(lsw * 14) / 100
-			orbitalPosSpace = float(lsw * 3) / 100
-		else:
-			orbitalPosWidth = 0
-			orbitalPosSpace = 0
-
 		r1 = self.weekday_rect
 		r2 = self.datetime_rect
-		r3 = Rect(self.descr_rect.x, self.descr_rect.y, orbitalPosWidth, self.descr_rect.h)
-		r4 = Rect(r3.x + r3.w + orbitalPosSpace, r3.y, lsw -  r3.x - r3.w - orbitalPosSpace, self.descr_rect.h)
+		r3 = self.orbpos_rect
+		r4 = self.descr_rect
 		t = localtime(beginTime)
 		serviceref = ServiceReference(service) # for Servicename and orbital position
 		res = [
@@ -123,7 +115,7 @@ class EPGSearchList(EPGList):
 			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _(strftime("%a", t))),
 			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, strftime("%e/%m, %H:%M", t))
 		]
-		if orbitalPosWidth:
+		if r3.w:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r1.h, 0, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, self.getOrbitalPos(serviceref)))
 		picwidth = 0
 		for pic in pics:
@@ -133,6 +125,21 @@ class EPGSearchList(EPGList):
 			picwidth += float(lsw * 1) / 100
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w - picwidth, r4.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
 		return res
+
+	def recalcEntrySize(self):
+		super(EPGSearchList, self).recalcEntrySize()
+		lsw = self.l.getItemSize().width()
+		self.listSizeWidth = lsw
+		if allowShowOrbital and config.plugins.epgsearch.showorbital.value:
+			orbitalPosWidth = float(lsw * 14) / 100
+			orbitalPosSpace = float(lsw * 3) / 100
+		else:
+			orbitalPosWidth = 0
+			orbitalPosSpace = 0
+
+		self.orbpos_rect = Rect(self.descr_rect.x, self.descr_rect.y, orbitalPosWidth, self.descr_rect.h)
+		orbpos_r = self.orbpos_rect.x + self.orbpos_rect.w
+		self.descr_rect = Rect(orbpos_r + orbitalPosSpace, self.orbpos_rect.y, lsw - orbpos_r - orbitalPosSpace, self.orbpos_rect.h)
 
 	def getOrbitalPos(self, ref):
 		refstr = None
