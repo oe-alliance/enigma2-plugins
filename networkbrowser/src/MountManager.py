@@ -184,6 +184,8 @@ class MountManagerMenu(Screen,ConfigListScreen):
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
+		self["footnote"] = StaticText()
+		self["description"] = StaticText()
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
