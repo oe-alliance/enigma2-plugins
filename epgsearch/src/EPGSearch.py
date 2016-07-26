@@ -638,20 +638,24 @@ class EPGSearch(EPGSelection):
 		elif searchScope == "currentservice":
 			searchFilter = self.currentServiceServiceRefSet()
 
-		def searchFilterMatch(servicerefStr, filter):
-			# Force flags to 0 for filtering
-			sref = eServiceReference(servicerefStr)
-			sref.flags = 0
-			return sref.toString() in filter
-
 		if searchFilter is not None:
-			ret = [event for event in ret if searchFilterMatch(event[0], searchFilter)]
+			ret = [event for event in ret if self._normaliseSref(event[0]) in searchFilter]
 
 		# Update List
 		l = self["list"]
 		l.recalcEntrySize()
 		l.list = ret
 		l.l.setList(ret)
+
+	def _normaliseSref(self, servicerefStr):
+		sref = eServiceReference(servicerefStr)
+		# Force flags to 0 and path and name to the empty string for filtering
+		sref.flags = 0
+		# Ignore "scrambled" bit when testing for service type
+		if sref.type & ~0x100 == eServiceReference.idDVB:
+			sref.setPath('')
+		sref.setName('')
+		return sref.toString()
 
 	def _addBouquetServices(self, bouquet, serviceRefSet):
 		serviceHandler = eServiceCenter.getInstance()
@@ -660,10 +664,7 @@ class EPGSearch(EPGSelection):
 			serviceIterator = servicelist.getNext()
 			while serviceIterator.valid():
 				if not (serviceIterator.flags & self.SERVICE_FLAG_MASK):
-					# Force flags to 0 for filtering
-					sref = eServiceReference(serviceIterator.toString())
-					sref.flags = 0
-					serviceRefSet.add(sref.toString())
+					serviceRefSet.add(self._normaliseSref(serviceIterator.toString()))
 				serviceIterator = servicelist.getNext()
 
 	def allBouquetServiceRefSet(self):
@@ -690,7 +691,7 @@ class EPGSearch(EPGSelection):
 		service = MoviePlayer.instance and MoviePlayer.instance.lastservice or NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
 		if not service or not service.valid:
 			return None
-		return set((service.toString(), ))
+		return { self._normaliseSref(service.toString()) }
 
 class EPGSearchTimerImport(Screen):
 	def __init__(self, session):
