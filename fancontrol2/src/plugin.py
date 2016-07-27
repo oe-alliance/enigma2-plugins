@@ -1294,6 +1294,9 @@ def selSetup(menuid, **kwargs):
 	if getImageDistro() in ('openhdf'):
 		if menuid != "devices_menu":
 			return [ ]
+	elif getImageDistro() in ('openatv'):
+		if menuid != "extended":
+			return []
 	else:
 		if menuid != "system":
 			return []
