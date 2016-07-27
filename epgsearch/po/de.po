@@ -107,26 +107,41 @@ msgstr "Zeige EPG Suche unter Erweiterungen"
 msgid "Show search history"
 msgstr "Zeige Suchverlauf"
 
+msgid "Search in..."
+msgstr "Suche in..."
+
 msgid "Search scope"
 msgstr "Suchbereich"
 
 msgid "all services"
 msgstr "Alle Sender"
 
+msgid "All services"
+msgstr "Alle Sender"
+
 msgid "all bouquets"
+msgstr "Alle Bouquets"
+
+msgid "All bouquets"
 msgstr "Alle Bouquets"
 
 msgid "current bouquet"
 msgstr "Aktuelles Bouquet"
 
+msgid "Current bouquet"
+msgstr "Aktuelles Bouquet"
+
 msgid "current service"
+msgstr "Aktuellen Sender"
+
+msgid "Current service"
 msgstr "Aktuellen Sender"
 
 msgid "ask user"
 msgstr "Frage Benutzer"
 
 msgid "Default scope when asked"
-msgstr "Standard Suchbereich bei 'Fragen'"
+msgstr "Standard Suchbereich bei 'Frage Benutzer'"
 
 msgid "Show orbital position"
 msgstr "Zeige Orbitalposition"
@@ -174,6 +189,54 @@ msgstr "Suche in EPG"
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 msgid "search EPG..."
 msgstr "Durchsuche EPG..."
+
+msgid "Close dialog"
+msgstr "Dialog schließen"
+
+msgid "Exit EPG Search"
+msgstr "Beende EPG Suche"
+
+msgid "Show detailed event information"
+msgstr "Zeige detaillierte Sendungsinformationen"
+
+msgid "Zap to channel"
+msgstr "Schalte zum Sender"
+
+msgid "Add an AutoTimer for highlighted event"
+msgstr "AutoTimer für ausgewählte Sendung hinzufügen"
+
+msgid "Show AutoTimer list"
+msgstr "Zeige alle AutoTimer"
+
+msgid "Enter new search"
+msgstr "Neue Suche eingeben"
+
+msgid "Add/remove/edit timer for highlighted event"
+msgstr "Erstelle/lösche/ändere Timer für ausgewählte Sendung"
+
+msgid "IMDB search for highlighted event"
+msgstr "IMBD Suche für ausgewählte Sendung"
+
+msgid "Add a zap timer for highlighted event"
+msgstr "Umschalttimer für ausgewählte Sendung hinzufügen"
+
+msgid "Add a record timer for highlighted event"
+msgstr "Aufnahmetimer für ausgewählte Sendung hinzufügen"
+
+msgid "Move down a page"
+msgstr "Seitenweise nach unten blättern"
+
+msgid "Move up a page"
+msgstr "Seitenweise nach oben blättern"
+
+msgid "Setup menu"
+msgstr "Einstellungen"
+
+msgid "Move up"
+msgstr "Hoch"
+
+msgid "Move down"
+msgstr "Runter"
 
 #~ msgid "Add \"Search\" Button to EPG"
 #~ msgstr "\"Suchen\" im Standard EPG hinzufügen"
