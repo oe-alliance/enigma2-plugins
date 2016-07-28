@@ -238,6 +238,9 @@ msgstr "Hoch"
 msgid "Move down"
 msgstr "Runter"
 
+msgid "search EPG from history..."
+msgstr "Durchsuche EPG aus Verlauf..."
+
 #~ msgid "Add \"Search\" Button to EPG"
 #~ msgstr "\"Suchen\" im Standard EPG hinzufügen"
 
