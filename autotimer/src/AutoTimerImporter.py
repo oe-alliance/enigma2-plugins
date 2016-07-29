@@ -41,6 +41,7 @@ class AutoTimerImportSelector(Screen):
 		self.fillTimerList()
 
 		self["timerlist"] = TimerList(self.list)
+		self["description"] = StaticText()
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
