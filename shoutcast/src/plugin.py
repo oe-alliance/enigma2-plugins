@@ -6,6 +6,8 @@
 #  Coded by Dr.Best (c) 2010
 #  Support: www.dreambox-tools.info
 #
+#  30.07.2016 - Update covers by mosz_nowy
+#
 #  This plugin is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported 
 #  License. To view a copy of this license, visit
@@ -23,12 +25,15 @@
 from Plugins.Plugin import PluginDescriptor
 from urlparse import urlparse
 from Screens.Screen import Screen
+from Screens.InfoBar import InfoBar
+from Components.SystemInfo import SystemInfo
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from enigma import eServiceReference
 from enigma import eListboxPythonMultiContent, eListbox, gFont, \
 	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER
 from Tools.LoadPixmap import LoadPixmap
+from Tools.Directories import fileExists
 import xml.etree.cElementTree
 from enigma import iPlayableService, iServiceInformation
 
@@ -39,9 +44,10 @@ from Components.Pixmap import Pixmap
 from enigma import ePicLoad
 from Components.ScrollLabel import ScrollLabel
 import string
-import os
+import os, re
+import skin
 from enigma import getDesktop
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigDirectory, ConfigYesNo, Config, ConfigInteger, ConfigSubList, ConfigText, getConfigListEntry, configfile
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigDirectory, ConfigYesNo, Config, ConfigInteger, ConfigSubList, ConfigText, ConfigNumber, getConfigListEntry, configfile
 from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Components.GUIComponent import GUIComponent
@@ -65,12 +71,15 @@ config.plugins.shoutcast.showcover = ConfigYesNo(default = True)
 config.plugins.shoutcast.showinextensions = ConfigYesNo(default = False)
 config.plugins.shoutcast.streamingrate = ConfigSelection(default="0", choices = [("0",_("All")), ("64",_(">= 64 kbps")), ("128",_(">= 128 kbps")), ("192",_(">= 192 kbps")), ("256",_(">= 256 kbps"))])
 config.plugins.shoutcast.reloadstationlist = ConfigSelection(default="0", choices = [("0",_("Off")), ("1",_("every minute")), ("3",_("every three minutes")), ("5",_("every five minutes"))])
-config.plugins.shoutcast.dirname = ConfigDirectory(default = "/hdd/streamripper/")
+config.plugins.shoutcast.dirname = ConfigDirectory(default = "/media/hdd/streamripper/")
 config.plugins.shoutcast.riptosinglefile = ConfigYesNo(default = False)
 config.plugins.shoutcast.createdirforeachstream = ConfigYesNo(default = True)
 config.plugins.shoutcast.addsequenceoutputfile = ConfigYesNo(default = False)
-config.plugins.shoutcast.coverwidth = ConfigText (default = "200", fixed_size = False, visible_width = 8)
-config.plugins.shoutcast.coverheight = ConfigText (default = "300", fixed_size = False, visible_width = 8)
+config.plugins.shoutcast.pos_cover_width = ConfigNumber(default = 605)
+config.plugins.shoutcast.pos_cover_height = ConfigNumber(default = 585)
+config.plugins.shoutcast.size_cover_width = ConfigNumber(default = 500)
+config.plugins.shoutcast.size_cover_height = ConfigNumber(default = 500)
+config.plugins.shoutcast.lista = ConfigInteger(4, (1, 7)) 
 
 devid = "fa1jo93O_raeF0v9"
 
@@ -101,7 +110,7 @@ class Favorite:
 
 class myHTTPClientFactory(HTTPClientFactory):
 	def __init__(self, url, method='GET', postdata=None, headers=None,
-			agent="SHOUTcast", timeout=0, cookies=None,
+			agent="Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0", timeout=0, cookies=None,
 			followRedirect=1, lastModified=None, etag=None):
 		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
@@ -159,36 +168,39 @@ class SHOUTcastWidget(Screen):
 	if sz_h < 500:
 		sz_h += 4
 	skin = """
-		<screen name="SHOUTcastWidget" position="center,65" title="SHOUTcast" size="%d,%d">
+		<screen name="SHOUTcastWidget" position="center,65" title="SHOUTcast" size="%d,%d" backgroundColor="#00000000">
 			<ePixmap position="5,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap position="150,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<ePixmap position="295,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 			<ePixmap position="440,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="585,10" zPosition="0" size="35,25" alphatest="on" />
-			<widget render="Label" source="key_red" position="5,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget render="Label" source="key_green" position="150,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget render="Label" source="key_yellow" position="295,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget render="Label" source="key_blue" position="440,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_red" position="5,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_green" position="150,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_yellow" position="295,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_blue" position="440,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="headertext" position="5,47" zPosition="1" size="%d,23" font="Regular;20" transparent="1"  backgroundColor="#00000000"/>
-			<widget name="statustext" position="5,240" zPosition="1" size="%d,90" font="Regular;20" halign="center" valign="center" transparent="0"  backgroundColor="#00000000"/>
+			<widget name="statustext" position="200,240" zPosition="1" size="%d,90" font="Regular;20" halign="center" valign="center" transparent="0"  backgroundColor="#00000000"/>
 			<widget name="list" position="5,80" zPosition="2" size="%d,%d" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
-			<widget name="titel" position="115,%d" zPosition="1" size="%d,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-			<widget name="station" position="115,%d" zPosition="1" size="%d,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
+			<widget name="titel" position="0,%d" zPosition="1" size="%d,40" font="Regular;30" transparent="1"  backgroundColor="#00000000"/>
+			<widget name="station" position="0,%d" zPosition="1" size="%d,40" font="Regular;30" transparent="1"  backgroundColor="#00000000"/>
 			<widget name="console" position="115,%d" zPosition="1" size="%d,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-			<widget name="cover" zPosition="2" position="5,%d" size="102,110" alphatest="blend" />
-			<ePixmap position="%d,41" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
+			<widget name="cover" zPosition="2" position="%d,%d" size="%d,%d" alphatest="blend" />
+			<ePixmap position="%d,0" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
 		</screen>""" %(
 			sz_w, sz_h, # size
 			sz_w - 135, # size headertext
 			sz_w - 100, # size statustext
-			sz_w - 10, sz_h - 205, # size list
-			sz_h - 105, # position titel
+			sz_w - 700, sz_h - 225, # size list
+			sz_h - 85, # position titel
 			sz_w - 125, # size titel
-			sz_h - 70, # position station
+			sz_h - 50, # position station
 			sz_w - 125, # size station
 			sz_h - 25, # position console
 			sz_w - 125, # size console
-			sz_h - 105, # position cover
+			sz_w - int(config.plugins.shoutcast.pos_cover_width.value), # position cover 605
+			sz_h - int(config.plugins.shoutcast.pos_cover_height.value), # position cover 585
+			int(config.plugins.shoutcast.size_cover_width.value), # size cover 500
+			int(config.plugins.shoutcast.size_cover_height.value), # size cover 500
 			sz_w - 125, # position logo
 			)
 	
@@ -217,11 +229,13 @@ class SHOUTcastWidget(Screen):
 			"ok": self.ok_pressed,
 			"back": self.close,
 			"menu": self.menu_pressed,
+			"input_date_time": self.menu_pressed, 
 			"red": self.red_pressed,
 			"green": self.green_pressed,
 			"yellow": self.yellow_pressed,
 			"blue": self.blue_pressed,
-			
+			"nextBouquet": self.nextPipService, 
+			"prevBouquet": self.prevPipService
 		}, -1)
 		self.stationList = []
 		self.stationListIndex = 0
@@ -274,6 +288,151 @@ class SHOUTcastWidget(Screen):
 			self.currentStreamingStation = _("Recording stream station")
 			self.playServiceStream("http://localhost:9191")
 
+		if InfoBar.instance is not None:
+			self.servicelist = InfoBar.instance.servicelist
+		else:
+			self.servicelist = None
+		slist = self.servicelist
+		if slist:
+			try:
+				self.pipZapAvailable = slist.dopipzap
+			except:
+				self.pipZapAvailable = None
+
+	def openServiceList(self):
+		if self.pipZapAvailable is None:
+			return
+		if self.servicelist and self.servicelist.dopipzap:
+			self.session.execDialog(self.servicelist)
+		else:
+			self.showWindow()
+
+	def activatePiP(self):
+		if self.pipZapAvailable is None:
+			return
+		if SystemInfo.get("NumVideoDecoders", 1) > 1:
+			if InfoBar.instance is not None:
+				modeslist = [ ]
+				keyslist = [ ]
+				if InfoBar.pipShown(InfoBar.instance):
+					slist = self.servicelist
+					if slist:
+						try:
+							if slist.dopipzap:
+								modeslist.append((_("Zap focus to main screen"), "pipzap"))
+							else:
+								modeslist.append((_("Zap focus to Picture in Picture"), "pipzap"))
+							keyslist.append('red')
+						except:
+							pass
+					modeslist.append((_("Move Picture in Picture"), "move"))
+					keyslist.append('green')
+					modeslist.append((_("Disable Picture in Picture"), "stop"))
+					keyslist.append('blue')
+				else:
+					if len(self.currentStreamingURL) == 0:
+						self.session.open(MessageBox, _("First play streaming!"), MessageBox.TYPE_INFO, timeout = 5)
+						return
+					modeslist.append((_("Activate Picture in Picture"), "start"))
+					keyslist.append('blue')
+				dlg = self.session.openWithCallback(self.pipAnswerConfirmed, ChoiceBox, title=_("Choose action:"), list = modeslist, keys = keyslist)
+				dlg.setTitle(_("Menu PiP"))
+
+	def pipAnswerConfirmed(self, answer):
+		answer = answer and answer[1]
+		if answer is None:
+			return
+		if answer == "pipzap":
+			try:
+				InfoBar.togglePipzap(InfoBar.instance)
+				if self.visible:
+					self.hideWindow()
+			except:
+				pass
+		elif answer == "move":
+			if InfoBar.instance is not None:
+				InfoBar.movePiP(InfoBar.instance)
+		elif answer == "stop":
+			if InfoBar.instance is not None:
+				if InfoBar.pipShown(InfoBar.instance):
+					slist = self.servicelist
+					try:
+						if slist and slist.dopipzap:
+							slist.togglePipzap()
+					except:
+						pass
+					if hasattr(self.session, 'pip'):
+						del self.session.pip
+					self.session.pipshown = False
+		elif answer == "start":
+			prev_playingref = self.session.nav.getCurrentlyPlayingServiceReference()
+			if prev_playingref:
+				self.session.nav.currentlyPlayingServiceReference = None
+			InfoBar.showPiP(InfoBar.instance)
+			if self.visible:
+				self.hideWindow()
+			if prev_playingref:
+				self.session.nav.currentlyPlayingServiceReference = prev_playingref
+			slist = self.servicelist
+			if slist:
+				try:
+					if not slist.dopipzap and hasattr(self.session, 'pip'):
+						InfoBar.togglePipzap(InfoBar.instance)
+				except:
+					pass
+
+	def nextPipService(self):
+		if self.pipZapAvailable is None:
+			return
+		if self.visible:
+			return
+		try:
+			slist = self.servicelist
+			if slist and slist.dopipzap:
+				if slist.inBouquet():
+					prev = slist.getCurrentSelection()
+					if prev:
+						prev = prev.toString()
+						while True:
+							if config.usage.quickzap_bouquet_change.value and slist.atEnd():
+								slist.nextBouquet()
+							else:
+								slist.moveDown()
+							cur = slist.getCurrentSelection()
+							if not cur or (not (cur.flags & 64)) or cur.toString() == prev:
+								break
+				else:
+					slist.moveDown()
+				slist.zap(enable_pipzap = True)
+		except:
+			pass
+
+	def prevPipService(self):
+		if self.pipZapAvailable is None:
+			return
+		if self.visible:
+			return
+		try:
+			slist = self.servicelist
+			if slist and slist.dopipzap:
+				if slist.inBouquet():
+					prev = slist.getCurrentSelection()
+					if prev:
+						prev = prev.toString()
+						while True:
+							if config.usage.quickzap_bouquet_change.value:
+								if slist.atBegin():
+									slist.prevBouquet()
+							slist.moveUp()
+							cur = slist.getCurrentSelection()
+							if not cur or (not (cur.flags & 64)) or cur.toString() == prev:
+								break
+				else:
+					slist.moveUp()
+				slist.zap(enable_pipzap = True)
+		except:
+			pass
+
 	def streamripperClosed(self, retval):
 		if retval == 0:
 			self["console"].setText("")
@@ -297,7 +456,11 @@ class SHOUTcastWidget(Screen):
 		if returnValue:
 			recordingLength =  int(returnValue) * 60
 			if not os.path.exists(config.plugins.shoutcast.dirname.value):
-				os.mkdir(config.plugins.shoutcast.dirname.value)
+				try:
+					os.mkdir(config.plugins.shoutcast.dirname.value)
+				except:
+					self.session.open(MessageBox, _("Error create directory %s!") % config.plugins.shoutcast.dirname.value, MessageBox.TYPE_ERROR, timeout = 10)
+					return
 			args = []
 			args.append(self.currentStreamingURL)
 			args.append('-d')
@@ -314,6 +477,9 @@ class SHOUTcastWidget(Screen):
 				args.append('-s')
 			if config.plugins.shoutcast.addsequenceoutputfile.value:
 				args.append('-q')
+			if not fileExists(self.STREAMRIPPER_BIN):
+				self.session.open(MessageBox, _("streamripper not installed!"), MessageBox.TYPE_ERROR, timeout = 10)
+				return
 			cmd = [self.STREAMRIPPER_BIN, self.STREAMRIPPER_BIN] + args
 			containerStreamripper.execute(*cmd)
 			self["key_red"].setText(_("Stop record"))
@@ -323,39 +489,68 @@ class SHOUTcastWidget(Screen):
 			containerStreamripper.sendCtrlC()
 
 	def red_pressed(self):
-		if containerStreamripper.running():
-			self.session.openWithCallback(self.deleteRecordingConfirmed, MessageBox, _("Do you really want to stop the recording?"))
-		else:
-			if len(self.currentStreamingURL) != 0:
-				self.session.openWithCallback(self.InputBoxStartRecordingCallback, InputBox, windowTitle = _("Recording length"),  title=_("Enter in minutes (0 means unlimited)"), text="0", type=Input.NUMBER)
+		if self.visible:
+			if containerStreamripper.running():
+				self.session.openWithCallback(self.deleteRecordingConfirmed, MessageBox, _("Do you really want to stop the recording?"))
 			else:
-				self.session.open(MessageBox, _("Only running streamings can be recorded!"), type = MessageBox.TYPE_INFO,timeout = 20 )
+				if len(self.currentStreamingURL) != 0:
+					self.session.openWithCallback(self.InputBoxStartRecordingCallback, InputBox, windowTitle = _("Recording length"),  title=_("Enter in minutes (0 means unlimited)"), text="0", type=Input.NUMBER)
+				else:
+					self.session.open(MessageBox, _("Only running streamings can be recorded!"), type = MessageBox.TYPE_INFO,timeout = 20 )
+		else:
+			if self.pipZapAvailable is not None and SystemInfo.get("NumVideoDecoders", 1) > 1:
+				self.activatePiP()
+			else:
+				self.showWindow()
 
 	def green_pressed(self):
-		if self.mode != self.GENRELIST:
-			self.stopReloadStationListTimer()
-			self.mode = self.GENRELIST
-		if not self.genreList:
-			self.getGenreList()
+		if self.visible:
+			if self.mode != self.GENRELIST:
+				self.stopReloadStationListTimer()
+				self.mode = self.GENRELIST
+			if not self.genreList:
+				self.getGenreList()
+			else:
+				self.showGenreList()
 		else:
-			self.showGenreList()
+			self.showWindow()
 
 	def yellow_pressed(self):
-		if self.mode != self.STATIONLIST:
-			if len(self.stationList):
-				self.mode = self.STATIONLIST
-				self.headerTextString = _("SHOUTcast station list for %s") % self.stationListHeader
-				self["headertext"].setText(self.headerTextString)
-				self["list"].setMode(self.mode)
-				self["list"].setList([ (x,) for x in self.stationList])
-				self["list"].moveToIndex(self.stationListIndex)
-				if self.reloadStationListTimerVar != 0:
+		baza_list = ["http://www.radio-browser.info/webservice/xml/stations/bycountry/poland", \
+		"http://www.radio-browser.info/webservice/xml/stations/byname/italo", \
+		"http://www.radio-browser.info/webservice/xml/stations/bytag/italo", \
+		"http://www.radio-browser.info/webservice/xml/stations/bytag/80s", \
+		"http://www.radio-browser.info/webservice/xml/stations/bytag/disco%20polo", \
+		"http://www.radio-browser.info/webservice/xml/stations/bytag/disco", \
+		"http://www.radio-browser.info/webservice/xml/stations"]
+		self.stationListURL = baza_list[config.plugins.shoutcast.lista.value-1]
+		tag = self.stationListURL.replace('http://www.radio-browser.info/webservice/xml/stations', '') 
+		if tag == "": tag = "ALL STATION"
+		if self.visible:
+			if self.mode != self.STATIONLIST:
+				if self.visible:   #len(self.stationList):
+					self.mode = self.STATIONLIST
+					self.stationListHeader = 'www.radio-browser.info'
+					self.headerTextString = ("Lista stacji z %s %s") % (self.stationListHeader, tag)
+					self["headertext"].setText(self.headerTextString)
+					self["list"].setMode(self.mode)
+					self["list"].setList([ (x,) for x in self.stationList])
+					self["list"].moveToIndex(self.stationListIndex)
+					#if self.reloadStationListTimerVar != 0:
 					self.reloadStationListTimer.start(60000 * self.reloadStationListTimerVar)
+		else:
+			self.showWindow()
 
 	def blue_pressed(self):
-		if self.mode != self.FAVORITELIST:
-			self.stopReloadStationListTimer()
-			self.getFavoriteList(self.favoriteListIndex)
+		if self.visible:
+			if self.mode != self.FAVORITELIST:
+				self.stopReloadStationListTimer()
+				self.getFavoriteList(self.favoriteListIndex)
+		else:
+			if self.pipZapAvailable is not None and SystemInfo.get("NumVideoDecoders", 1) > 1:
+				self.openServiceList()
+			else:
+				self.showWindow()
 
 	def getFavoriteList(self, favoriteListIndex = 0):
 		self["statustext"].setText("")
@@ -379,6 +574,7 @@ class SHOUTcastWidget(Screen):
 			url = self.SC + "/genre/secondary?parentid=%s&k=%s&f=xml" % (id, devid)
 		else:
 			url = "http://207.200.98.1/sbin/newxml.phtml"
+		print "[SHOUTcast] getGenreList %s" % url
 		sendUrlCommand(url, None,10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
@@ -446,6 +642,7 @@ class SHOUTcastWidget(Screen):
 #			self.genreListIndex = self["list"].getCurrentIndex()
 
 	def ok_pressed(self):
+		print "[gender]   press OK"
 		if self.visible:
 			sel = None
 			try:
@@ -455,17 +652,23 @@ class SHOUTcastWidget(Screen):
 				return
 			else:
 				if self.mode == self.GENRELIST:
+					print "[gender]   GENRELIST"
 					self.genreListIndex = self["list"].getCurrentIndex()
 					self.getStationList(sel.name)
 				elif self.mode == self.STATIONLIST:
+					print "[gender]   STATIONLIST %s" % (sel.ct)
 					self.stationListIndex = self["list"].getCurrentIndex()
 					self.stopPlaying()
-					if len(devid) > 8:
-						url = self.SCY + "/sbin/tunein-station.pls?id=%s" % (sel.id)
-					self["list"].hide()
-					self["statustext"].setText(_("Getting streaming data from\n%s") % sel.name)
-					self.currentStreamingStation = sel.name
-					sendUrlCommand(url, None, 10).addCallback(self.callbackPLS).addErrback(self.callbackStationListError)
+					if not sel.ct.startswith('http') :
+						if len(devid) > 8:
+							url = self.SCY + "/sbin/tunein-station.pls?id=%s" % (sel.id)
+						self["list"].hide()
+						self["statustext"].setText(_("Getting streaming data from\n%s") % sel.name)
+						self.currentStreamingStation = sel.name
+						sendUrlCommand(url, None, 10).addCallback(self.callbackPLS).addErrback(self.callbackStationListError)
+					else:
+						self.currentStreamingStation = sel.name
+						self.playServiceStream(sel.ct)
 				elif self.mode == self.FAVORITELIST:
 					self.favoriteListIndex = self["list"].getCurrentIndex()
 					if sel.configItem.type.value == "url":
@@ -515,7 +718,9 @@ class SHOUTcastWidget(Screen):
 			self.currentStreamingStation = ""
 			self["statustext"].setText(_("No streaming data found..."))
 			self["list"].show()
-	def getStationList(self,genre):
+
+	def getStationList(self, genre):
+		print "[gender] getStationList"
 		self.stationListHeader = _("genre %s") % genre
 		self.headerTextString = _("SHOUTcast station list for %s") % self.stationListHeader
 		self["headertext"].setText("")
@@ -544,26 +749,36 @@ class SHOUTcastWidget(Screen):
 			self.reloadStationListTimer.start(1000 * 60)
 
 	def fillStationList(self,xmlstring):
+		print "[SHOUTcast] fillStationList"
 		stationList = []
 		try:
 			root = xml.etree.cElementTree.fromstring(xmlstring)
 		except: return []
 		config_bitrate = int(config.plugins.shoutcast.streamingrate.value)
 		data = root.find("data")
-		if data == None:
-			print "[SHOUTcast] could not find data tag\n"
-			return []
-		for slist in data.findall("stationlist"):
-			for childs in slist.findall("tunein"):
-				self.tunein = childs.get("base")
-			for childs in slist.findall("station"):
-				try: bitrate = int(childs.get("br"))
-				except: bitrate = 0
-				if bitrate >= config_bitrate:
-					stationList.append(SHOUTcastStation(name = childs.get("name"), 
-									mt = childs.get("mt"), id = childs.get("id"), br = childs.get("br"), 
-									genre = childs.get("genre"), ct = childs.get("ct"), lc = childs.get("lc"), ml = childs.get("ml"), nsc = childs.get("nsc"),
-									cst = childs.get("cst")))
+		if data != None:
+			for slist in data.findall("stationlist"):
+				for childs in slist.findall("tunein"):
+					self.tunein = childs.get("base")
+				for childs in slist.findall("station"):
+					try: bitrate = int(childs.get("br"))
+					except: bitrate = 0
+					if bitrate >= config_bitrate:
+						stationList.append(SHOUTcastStation(name = childs.get("name"), 
+										mt = childs.get("mt"), id = childs.get("id"), br = childs.get("br"), 
+										genre = childs.get("genre"), ct = childs.get("ct"), lc = childs.get("lc"), ml = childs.get("ml"), nsc = childs.get("nsc"),
+										cst = childs.get("cst")))
+		data = root.find("station")
+		if data != None:
+			for childs in root.findall("station"):
+				print "[gender] id %s" % childs.get("id")
+				print "[gender] url %s" % childs.get("url")
+				if (not childs.get("url").endswith('.pls')) and (not childs.get("url").endswith('.m3u')) and (not childs.get("url").endswith('winamp')): 
+					stationList.append(SHOUTcastStation(name = str(childs.get("name")), 
+					mt = childs.get("codec"), id = childs.get("id"), br = childs.get("bitrate"), 
+					genre = childs.get("genre"), ct = childs.get("url"), lc = childs.get("lc"), ml = childs.get("ml"), nsc = childs.get("nsc"),
+					cst = childs.get("cst")))
+
 		return stationList
 
 	def menu_pressed(self):
@@ -580,6 +795,8 @@ class SHOUTcastWidget(Screen):
 		if len(self.currentStreamingURL) != 0:
 			options.extend(((_("Add current playing stream to favorite"), self.addCurrentStreamToFavorite),))
 		options.extend(((_("Hide"), self.hideWindow),))
+		if self.pipZapAvailable is not None and SystemInfo.get("NumVideoDecoders", 1) > 1:
+			options.extend(((_("Menu PiP"), self.activatePiP),))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox,list = options)
 
 	def menuCallback(self, ret):
@@ -596,7 +813,7 @@ class SHOUTcastWidget(Screen):
 	def addGenreToFavorite(self):
 		sel = self.getSelectedItem()
 		if sel is not None:
-			self.addFavorite(name = sel.name, text = sel.name, favoritetype = "genre")			
+			self.addFavorite(name = sel.name, text = sel.name, favoritetype = "genre")
 
 	def addStationToFavorite(self):
 		sel = self.getSelectedItem()
@@ -631,7 +848,6 @@ class SHOUTcastWidget(Screen):
 			self.favoriteConfig.saveToFile(self.FAVORITE_FILE)
 			self.favoriteListIndex = 0
 			self.getFavoriteList()
-
 
 	def removeFavorite(self):
 		sel = self.getSelectedItem()
@@ -716,16 +932,46 @@ class SHOUTcastWidget(Screen):
 
 	def GoogleImageCallback(self, result):
 		global coverfiles
+		bad_link  = ['http://cdn.discogs.com', 'http://www.jaren80muziek.nl', 'http://www.inthestudio.net', \
+		'https://deepmp3.ru', 'http://beyondbreed.com', 'https://i1.sndcdn.com', 'http://www.lyrics007.com', 'https://lametralleta.es', \
+		'http://www.caramail.tv', 'http://cloud.freehandmusic.netdna-cdn.com', 'http://rockyourlyrics.com', 'http://www.franceinter.fr', \
+		'http://audio-max.home.pl', 'https://www.mystic.pl', 'http://radiobox2.omroep.nl', 'http://s0.hulkshare.com', 'http://static2.ising.pl', \
+		'http://www.disco-polo.info', 'http://merlin.pl', 'http://www.muzikbuldum.com', 'http://img2.zcdn.com.au', 'http://www.duoviva.com', \
+		'http://thumbnail.mixcloud.com', 'http://www.modern-talking.net', 'http://galleryplus.ebayimg.com', 'http://www.radiotrip.it', \
+		'https://dlmetal.org', 'http://i.iplsc.com', 'http://www.copertinedvd.org', 'http://flacmusic.org', 'https://imgcdn.ok.de', \
+		'http://www.mediaboom.org', 'http://democracy.allerdale.gov.uk', 'http://lahoradelrelax.com', 'http://www.isvent.com',  \
+		'http://www.wallpaperfo.com', 'http://www.analyticdatasolutions.net', 'http://caratulascd.com', 'http://img.youtube.com', \
+		'http://satpic.ru', 'http://imagizer.imageshack.us'] 
+		#'http://upload.wikimedia.org''http://img.wax.fm', 
+		nr = 0
+		url = 'http://memytutaj.pl/uploads/2015/07/27/55b66ab973ad1.jpg'
 		if self.nextGoogle:
 			self.currentGoogle = self.nextGoogle
 			self.nextGoogle = None
 			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 			return
 		self.currentGoogle = None
-		foundPos = result.find("unescapedUrl\":\"")
-		foundPos2 = result.find("\",\"url\":\"")
-		if foundPos != -1 and foundPos2 != -1:
-			url=result[foundPos+15:foundPos2]
+#		with open('/tmp/datafull', 'w') as titleFile: 
+#			titleFile.write(result) 
+		r=re.findall(',imgurl:&quot;(.*?)&quot;,tid',result) 
+		if r:
+			url = r[nr]
+			print "[SHOUTcast] pierwszy:%s" % (url)
+			for link in bad_link: 
+				if url.startswith(link) : 
+					nr += 1
+					url = r[nr]
+					print "[SHOUTcast] drugi:%s" % (url)
+					for link in bad_link: 
+						if url.startswith(link) : 
+							nr += 1
+							url = r[nr]
+							print "[SHOUTcast] trzeci:%s" % (url)
+							for link in bad_link: 
+								if url.startswith(link) : 
+									nr += 1
+									url = r[nr]
+									print "[SHOUTcast] czwarty:%s" % (url)
 			if len(url)>15:
 				url= url.replace(" ", "%20")
 				print "download url: %s " % url
@@ -742,7 +988,7 @@ class SHOUTcastWidget(Screen):
 				except:
 					pass
 				coverfile = coverfiles[self.currentcoverfile]
-				print "[SHOUTcast] downloading cover from %s to %s" % (url, coverfile)
+				print "[SHOUTcast] downloading cover from %s to %s numer%s" % (url, coverfile, str(nr))
 				downloadPage(url, coverfile).addCallback(self.coverDownloadFinished, coverfile).addErrback(self.coverDownloadFailed)
 
 	def coverDownloadFailed(self,result):
@@ -757,7 +1003,7 @@ class SHOUTcastWidget(Screen):
 			self["statustext"].setText("")
 			self["cover"].updateIcon(coverfile)
 			self["cover"].doShow()
-		
+
 	def __event(self, ev):
 		if ev != 17:
 			print "[SHOUTcast] EVENT ==>", ev
@@ -774,12 +1020,15 @@ class SHOUTcastWidget(Screen):
 			if self.oldtitle != sTitle:
 				self.oldtitle=sTitle
 				sTitle = sTitle.replace("Title:", "")[:55]
+				sTitle = re.sub(' w .+', '', sTitle) 
+				sTitle = re.sub('00:0.+', '', sTitle) 
+				if len(sTitle)<4: sTitle=''
 				if config.plugins.shoutcast.showcover.value:
-					searchpara="covers "
+					searchpara = sTitle
 					if sTitle:
-						url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s%s&biw=%s&bih=%s&ift=jpg&ift=gif&ift=png" % (quote(searchpara), quote(sTitle), config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
+						url = "http://www.bing.com/images/search?q=%s&FORM=HDRSC2" % quote(searchpara)
 					else:
-						url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=no+cover+pic&biw=%s&bih=%s&ift=jpg&ift=gif&ift=png" % (config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
+						url = "http://www.bing.com/images/search?q=%s&FORM=HDRSC2" % quote('pamela anderson')
 					print "[SHOUTcast] coverurl = %s " % url
 					if self.currentGoogle:
 						self.nextGoogle = url
@@ -801,10 +1050,15 @@ class SHOUTcastWidget(Screen):
 			
 	def playServiceStream(self, url):
 		self.currPlay = None
+		print "[SHOUTcast] play %s" % url
 		self.session.nav.stopService()
 		if config.plugins.shoutcast.showcover.value:
 			self["cover"].doHide()
 		sref = eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s" % url.replace(':', '%3a'))
+		try:
+			self.session.nav.playService(sref, adjust=False)
+		except:
+			print "[SHOUTcast] Could not play %s" % sref
 		try:
 			self.session.nav.playService(sref)
 		except:
@@ -853,27 +1107,27 @@ class Cover(Pixmap):
 		self.decodeNext = None
 
 	def doShow(self):
-		if not self.visible == 1:
-			self.visible = 1
+		if not self.visible:
+			self.visible = True
 			print "[SHOUTcast] cover visible %s self.show" % self.visible
 			self.show()
 
 	def doHide(self):
-		if not self.visible == 0:
-			self.visible = 0
+		if self.visible:
+			self.visible = False
 			print "[SHOUTcast] cover visible %s self.hide" % self.visible
 			self.hide()
 
 	def onShow(self):
 		Pixmap.onShow(self)
-		coverwidth=self.instance.size().width()
-		if int(config.plugins.shoutcast.coverwidth.value) > coverwidth:
-			config.plugins.shoutcast.coverwidth.value = str(coverwidth)
-		coverheight=self.instance.size().height()
-		if int(config.plugins.shoutcast.coverheight.value) > coverheight:
-			config.plugins.shoutcast.coverheight.value = str(coverheight)	
+		coverwidth = self.instance.size().width()
+#		if int(config.plugins.shoutcast.cover_width.value) > coverwidth:
+#			config.plugins.shoutcast.cover_width.value = coverwidth
+		coverheight = self.instance.size().height()
+#		if int(config.plugins.shoutcast.cover_height.value) > coverheight:
+#			config.plugins.shoutcast.cover_height.value = coverheight
 		self.picload.setPara((coverwidth, coverheight, 1, 1, False, 1, "#00000000"))
-		
+
 	def paintIconPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr != None:
@@ -933,19 +1187,25 @@ class SHOUTcastList(GUIComponent, object):
 	def __init__(self):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
+		font = ("Regular", 20)
+		#font = skin.fonts.get("SHOUTcastListFont0", ("Regular", 20))
 		self.l.setFont(0, gFont("Regular", 20))
-		self.l.setFont(1, gFont("Regular", 18))
+		#font = skin.fonts.get("SHOUTcastListFont1", ("Regular", 18))
+		self.l.setFont(1, gFont("Regular", 20))
+		#font = skin.fonts.get("SHOUTcastListItem", (22, 69))
 		self.l.setBuildFunc(self.buildEntry)
-		self.l.setItemHeight(22)
+		self.cenrylist = 90 #90
+		self.favlist = 70  #60
+		self.l.setItemHeight(self.cenrylist)
 		self.onSelectionChanged = [ ]
 		self.mode = 0
 
 	def setMode(self, mode):
 		self.mode = mode
 		if mode == 0: # GENRELIST
-			self.l.setItemHeight(22)
+			self.l.setItemHeight(self.cenrylist)
 		elif mode == 1 or mode == 2: # STATIONLIST OR FAVORITELIST
-			self.l.setItemHeight(69)
+			self.l.setItemHeight(self.favlist)
 
 	def connectSelChanged(self, fnc):
 		if not fnc in self.onSelectionChanged:
@@ -967,6 +1227,7 @@ class SHOUTcastList(GUIComponent, object):
 	
 	def postWidgetCreate(self, instance):
 		instance.setContent(self.l)
+		instance.setWrapAround(True)
 		instance.selectionChanged.get().append(self.selectionChanged)
 
 	def preWidgetRemove(self, instance):
@@ -1016,20 +1277,24 @@ class SHOUTcastSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.setTitle(_("SHOUTcast setup"))
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 
 		self.list = [
 			getConfigListEntry(_("Show cover:"), config.plugins.shoutcast.showcover),
-			getConfigListEntry(_("Coverwidth:"), config.plugins.shoutcast.coverwidth),
-			getConfigListEntry(_("Coverheight:"), config.plugins.shoutcast.coverheight),
+			getConfigListEntry(_("Cover Position H:"), config.plugins.shoutcast.pos_cover_width),
+			getConfigListEntry(_("Cover Position V:"), config.plugins.shoutcast.pos_cover_height),
+			getConfigListEntry(_("Cover Size H:"), config.plugins.shoutcast.size_cover_width),
+			getConfigListEntry(_("Cover Size V:"), config.plugins.shoutcast.size_cover_height),
 			getConfigListEntry(_("Show in extension menu:"), config.plugins.shoutcast.showinextensions),
 			getConfigListEntry(_("Streaming rate:"), config.plugins.shoutcast.streamingrate),
 			getConfigListEntry(_("Reload station list:"), config.plugins.shoutcast.reloadstationlist),
 			getConfigListEntry(_("Rip to single file, name is timestamped"), config.plugins.shoutcast.riptosinglefile),
 			getConfigListEntry(_("Create a directory for each stream"), config.plugins.shoutcast.createdirforeachstream),
 			getConfigListEntry(_("Add sequence number to output file"), config.plugins.shoutcast.addsequenceoutputfile),
+			getConfigListEntry(_("Lista Stacji nr:"), config.plugins.shoutcast.lista),
 				]
 		self.dirname = getConfigListEntry(_("Recording location:"), config.plugins.shoutcast.dirname)
 		self.list.append(self.dirname)
@@ -1052,6 +1317,8 @@ class SHOUTcastSetup(Screen, ConfigListScreen):
 			config.plugins.shoutcast.dirname.value = res
 
 	def keySave(self):
+		if config.plugins.shoutcast.dirname.value == "":
+			config.plugins.shoutcast.dirname.value = "/media/hdd/streamripper/"
 		for x in self["config"].list:
 			x[1].save()
 		configfile.save()
@@ -1077,6 +1344,7 @@ class SHOUTcastStreamripperRecordingPath(Screen):
 		
 	def __init__(self, session, initDir):
 		Screen.__init__(self, session)
+		self.setTitle(_("Select record path for streamripper"))
 		inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]
 		inhibitMounts = []
 		self["filelist"] = FileList(initDir, showDirectories = True, showFiles = False, inhibitMounts = inhibitMounts, inhibitDirs = inhibitDirs)
@@ -1157,3 +1425,4 @@ class SHOUTcastStreamripperRecordingPath(Screen):
 			self["target"].setText(currFolder)
 		else:
 			self["target"].setText(_("Invalid Location"))
+ 
