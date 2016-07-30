@@ -190,10 +190,10 @@ class SHOUTcastWidget(Screen):
 			sz_w, sz_h, # size
 			sz_w - 135, # size headertext
 			sz_w - 100, # size statustext
-			sz_w - 700, sz_h - 225, # size list
-			sz_h - 85, # position titel
+			sz_w - 10, sz_h - 205, # size list
+			sz_h - 105, # position titel
 			sz_w - 125, # size titel
-			sz_h - 50, # position station
+			sz_h - 70, # position station
 			sz_w - 125, # size station
 			sz_h - 25, # position console
 			sz_w - 125, # size console
@@ -531,7 +531,7 @@ class SHOUTcastWidget(Screen):
 				if self.visible:   #len(self.stationList):
 					self.mode = self.STATIONLIST
 					self.stationListHeader = 'www.radio-browser.info'
-					self.headerTextString = ("Lista stacji z %s %s") % (self.stationListHeader, tag)
+					self.headerTextString = ("List of station from %s %s") % (self.stationListHeader, tag)
 					self["headertext"].setText(self.headerTextString)
 					self["list"].setMode(self.mode)
 					self["list"].setList([ (x,) for x in self.stationList])
@@ -1169,33 +1169,32 @@ class SHOUTcastList(GUIComponent, object):
 					iname = item.name
 			else:
 				iname = "     %s" % item.name
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 22, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, iname))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 32, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, iname))
 		elif self.mode == 1: # STATIONLIST
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.name))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 23, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.ct))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 43, width / 2, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _("Audio: %s") % item.mt))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT,  width / 2, 43, width / 2, 20, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, _("Bit rate: %s kbps") % item.br))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, 35, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.name))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 33, width, 35, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.ct))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 60, width / 2, 35, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _("Audio: %s") % item.mt))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT,  width / 2, 53, width / 2, 35, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, _("Bit rate: %s kbps") % item.br))
 		elif self.mode == 2: # FAVORITELIST
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.configItem.name.value))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 23, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s (%s)" % (item.configItem.text.value, item.configItem.type.value)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, 35, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.configItem.name.value))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 33, width, 35, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s (%s)" % (item.configItem.text.value, item.configItem.type.value)))
 			if len(item.configItem.audio.value) != 0:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 43, width / 2, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _("Audio: %s") % item.configItem.audio.value))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 60, width / 2, 35, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _("Audio: %s") % item.configItem.audio.value))
 			if len(item.configItem.bitrate.value) != 0:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT,  width / 2, 43, width / 2, 20, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, _("Bit rate: %s kbps") % item.configItem.bitrate.value))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT,  width / 2, 60, width / 2, 35, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, _("Bit rate: %s kbps") % item.configItem.bitrate.value))
 		return res
 
 	def __init__(self):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
-		font = ("Regular", 20)
-		#font = skin.fonts.get("SHOUTcastListFont0", ("Regular", 20))
-		self.l.setFont(0, gFont("Regular", 20))
-		#font = skin.fonts.get("SHOUTcastListFont1", ("Regular", 18))
-		self.l.setFont(1, gFont("Regular", 20))
-		#font = skin.fonts.get("SHOUTcastListItem", (22, 69))
+		font = skin.fonts.get("SHOUTcastListFont0", ("Regular", 26))
+		self.l.setFont(0, gFont(font[0], font[1]))
+		font = skin.fonts.get("SHOUTcastListFont1", ("Regular", 22))
+		self.l.setFont(1, gFont(font[0], font[1]))
+		font = skin.fonts.get("SHOUTcastListItem", (35, 96))
 		self.l.setBuildFunc(self.buildEntry)
-		self.cenrylist = 90 #90
-		self.favlist = 70  #60
+		self.cenrylist = font[0]
+		self.favlist = font[1]
 		self.l.setItemHeight(self.cenrylist)
 		self.onSelectionChanged = [ ]
 		self.mode = 0
@@ -1294,7 +1293,7 @@ class SHOUTcastSetup(Screen, ConfigListScreen):
 			getConfigListEntry(_("Rip to single file, name is timestamped"), config.plugins.shoutcast.riptosinglefile),
 			getConfigListEntry(_("Create a directory for each stream"), config.plugins.shoutcast.createdirforeachstream),
 			getConfigListEntry(_("Add sequence number to output file"), config.plugins.shoutcast.addsequenceoutputfile),
-			getConfigListEntry(_("Lista Stacji nr:"), config.plugins.shoutcast.lista),
+			getConfigListEntry(_("Station list number"), config.plugins.shoutcast.lista),
 				]
 		self.dirname = getConfigListEntry(_("Recording location:"), config.plugins.shoutcast.dirname)
 		self.list.append(self.dirname)
