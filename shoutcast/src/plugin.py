@@ -29,9 +29,7 @@ from Screens.InfoBar import InfoBar
 from Components.SystemInfo import SystemInfo
 from Components.ActionMap import ActionMap
 from Components.Label import Label
-from enigma import eServiceReference
-from enigma import eListboxPythonMultiContent, eListbox, gFont, \
-	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER
+from enigma import getDesktop, eServiceReference, eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists
 import xml.etree.cElementTree
@@ -1187,11 +1185,20 @@ class SHOUTcastList(GUIComponent, object):
 	def __init__(self):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
-		font = skin.fonts.get("SHOUTcastListFont0", ("Regular", 26))
-		self.l.setFont(0, gFont(font[0], font[1]))
-		font = skin.fonts.get("SHOUTcastListFont1", ("Regular", 22))
-		self.l.setFont(1, gFont(font[0], font[1]))
-		font = skin.fonts.get("SHOUTcastListItem", (35, 96))
+		
+		screenwidth = getDesktop(0).size().width()
+		if screenwidth and screenwidth == 1920:
+			font = skin.fonts.get("SHOUTcastListFont0", ("Regular", 30))
+			self.l.setFont(0, gFont(font[0], font[1]))
+			font = skin.fonts.get("SHOUTcastListFont1", ("Regular", 27))
+			self.l.setFont(1, gFont(font[0], font[1]))
+			font = skin.fonts.get("SHOUTcastListItem", (35, 96))
+		else:
+			font = skin.fonts.get("SHOUTcastListFont0", ("Regular", 26))
+			self.l.setFont(0, gFont(font[0], font[1]))
+			font = skin.fonts.get("SHOUTcastListFont1", ("Regular", 22))
+			self.l.setFont(1, gFont(font[0], font[1]))
+			font = skin.fonts.get("SHOUTcastListItem", (35, 96))
 		self.l.setBuildFunc(self.buildEntry)
 		self.cenrylist = font[0]
 		self.favlist = font[1]
