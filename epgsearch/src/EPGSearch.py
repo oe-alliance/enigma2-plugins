@@ -514,6 +514,7 @@ class EPGSearch(EPGSelection):
 			config.plugins.epgsearch.scope.value,
 			config.plugins.epgsearch.search_type.value,
 			config.plugins.epgsearch.search_case.value,
+			allowShowOrbital and config.plugins.epgsearch.showorbital.value,
 		)
 
 	def setup(self):
