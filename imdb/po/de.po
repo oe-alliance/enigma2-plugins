@@ -69,10 +69,6 @@ msgstr "Details"
 msgid "Downloading Movie Poster: %s..."
 msgstr "Lade Filmplakat herunter: %s..."
 
-msgid ""
-"Enable this to be able to access the IMDb from within the plugin browser."
-msgstr ""
-
 msgid "Enter search"
 msgstr "Suchen"
 
@@ -164,3 +160,15 @@ msgstr "Nutzer-Bewertung"
 
 msgid "no user rating yet"
 msgstr "noch keine Nutzerwertung"
+
+msgid "* = Restart Required"
+msgstr "* = Neustart erforderlich"
+
+msgid "Enable this to be able to access the IMDb from within the plugin browser."
+msgstr "Diese Option erlaubt es Ihnen, IMDb in den Erweiterungen anzuzeigen."
+
+msgid "Words / phrases to ignore "
+msgstr "Wörter / Sätze ignorieren "
+
+msgid "This option allows you add words/phrases for IMDb to ignore when searching. please seperaate with a comma"
+msgstr "Diese Option erlaubt es Ihnen, Wörter/Sätze bei der Suche mit IMDb zu ignorieren. Bitte die Wörter mit einem Komma trennen."
