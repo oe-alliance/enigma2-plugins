@@ -32,8 +32,8 @@ from Components.Label import Label
 
 def isValidServiceId(id):
 	testSRef = eServiceReference(id, 0, "Just a TestReference")
-	info = eServiceCenter.getInstance().info(testSRef)
-	return info is not None
+	inst = eServiceCenter.getInstance().play(testSRef)
+	return inst is not None
 
 ENIGMA_SERVICEGS_ID = 0x1001
 ENIGMA_SERVICETS_ID = 0x1002
