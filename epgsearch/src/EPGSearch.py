@@ -175,7 +175,8 @@ class EPGSearch(EPGSelection):
 	def __init__(self, session, *args, **kwargs):
 		Screen.__init__(self, session)
 		self.skinName = [self.skinName, "EPGSelection"]
-		HelpableScreen.__init__(self)
+		if isinstance(self, HelpableScreen):
+			HelpableScreen.__init__(self)
 
 		self.searchargs = args
 		self.currSearch = ""
