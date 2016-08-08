@@ -690,7 +690,7 @@ class EPGSearch(EPGSelection):
 		return serviceRefSet
 
 	def currentServiceServiceRefSet(self):
-		service = MoviePlayer.instance and MoviePlayer.instance.lastservice or NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
+		service = MoviePlayer.instance and MoviePlayer.instance.lastservice or NavigationInstance.instance.getCurrentlyPlayingServiceReference()
 		if not service or not service.valid:
 			return None
 		return { self._normaliseSref(service.toString()) }
