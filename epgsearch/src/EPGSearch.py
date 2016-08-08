@@ -317,9 +317,9 @@ class EPGSearch(EPGSelection):
 			self.searchEPG(self.currSearch, lastAsk=self.lastAsk)
 		else:
 			l = self["list"]
-			l.recalcEntrySize()
 			l.list = []
 			l.l.setList(l.list)
+			l.recalcEntrySize()
 
 	def closeScreen(self):
 		# Save our history
@@ -645,9 +645,9 @@ class EPGSearch(EPGSelection):
 
 		# Update List
 		l = self["list"]
-		l.recalcEntrySize()
 		l.list = ret
 		l.l.setList(ret)
+		l.recalcEntrySize()
 
 	def _normaliseSref(self, servicerefStr):
 		sref = eServiceReference(servicerefStr)
