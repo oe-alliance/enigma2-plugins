@@ -110,6 +110,7 @@ class EPGSearchList(EPGList):
 		r4 = self.descr_rect
 		t = localtime(beginTime)
 		serviceref = ServiceReference(service) # for Servicename and orbital position
+		width = r4.x + r4.w
 		res = [
 			None, # no private data needed
 			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, _(strftime("%a", t))),
@@ -120,16 +121,16 @@ class EPGSearchList(EPGList):
 		picwidth = 0
 		for pic in pics:
 			picwidth += picx
-			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, lsw-picwidth, (r4.h/2-posy), picx, picy, pic))
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, width-picwidth, (r4.h/2-posy), picx, picy, pic))
 		if picwidth:
-			picwidth += float(lsw * 1) / 100
+			picwidth += 5
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w - picwidth, r4.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
 		return res
 
 	def recalcEntrySize(self):
 		super(EPGSearchList, self).recalcEntrySize()
-		lsw = self.l.getItemSize().width()
-		self.listSizeWidth = lsw
+		self.listSizeWidth = self.l.getItemSize().width()
+		width = self.descr_rect.x + self.descr_rect.w
 		if allowShowOrbital and config.plugins.epgsearch.showorbital.value:
 			fontSize = self.eventFontSizeSingle + config.epgselection.enhanced_eventfs.value
 			orbitalPosWidth = int(fontSize * 4.2)
@@ -140,7 +141,7 @@ class EPGSearchList(EPGList):
 
 		self.orbpos_rect = Rect(self.descr_rect.x, self.descr_rect.y, orbitalPosWidth, self.descr_rect.h)
 		orbpos_r = self.orbpos_rect.x + self.orbpos_rect.w
-		self.descr_rect = Rect(orbpos_r + orbitalPosSpace, self.orbpos_rect.y, lsw - orbpos_r - orbitalPosSpace, self.orbpos_rect.h)
+		self.descr_rect = Rect(orbpos_r + orbitalPosSpace, self.orbpos_rect.y, width - orbpos_r - orbitalPosSpace, self.orbpos_rect.h)
 
 	def getOrbitalPos(self, ref):
 		refstr = None
@@ -175,7 +176,8 @@ class EPGSearch(EPGSelection):
 	def __init__(self, session, *args, **kwargs):
 		Screen.__init__(self, session)
 		self.skinName = [self.skinName, "EPGSelection"]
-		HelpableScreen.__init__(self)
+		if isinstance(self, HelpableScreen):
+			HelpableScreen.__init__(self)
 
 		self.searchargs = args
 		self.currSearch = ""
@@ -316,9 +318,9 @@ class EPGSearch(EPGSelection):
 			self.searchEPG(self.currSearch, lastAsk=self.lastAsk)
 		else:
 			l = self["list"]
-			l.recalcEntrySize()
 			l.list = []
 			l.l.setList(l.list)
+			l.recalcEntrySize()
 
 	def closeScreen(self):
 		# Save our history
@@ -644,15 +646,15 @@ class EPGSearch(EPGSelection):
 
 		# Update List
 		l = self["list"]
-		l.recalcEntrySize()
 		l.list = ret
 		l.l.setList(ret)
+		l.recalcEntrySize()
 
 	def _normaliseSref(self, servicerefStr):
 		sref = eServiceReference(servicerefStr)
 		# Force flags to 0 and path and name to the empty string for filtering
 		sref.flags = 0
-		# Ignore "scrambled" bit when testing for service type
+		# Ignore "scrambled" bit when testing for DVB service type
 		if sref.type & ~0x100 == eServiceReference.idDVB:
 			sref.setPath('')
 		sref.setName('')
@@ -689,7 +691,7 @@ class EPGSearch(EPGSelection):
 		return serviceRefSet
 
 	def currentServiceServiceRefSet(self):
-		service = MoviePlayer.instance and MoviePlayer.instance.lastservice or NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
+		service = MoviePlayer.instance and MoviePlayer.instance.lastservice or NavigationInstance.instance.getCurrentlyPlayingServiceReference()
 		if not service or not service.valid:
 			return None
 		return { self._normaliseSref(service.toString()) }
