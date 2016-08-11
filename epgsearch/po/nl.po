@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-27 17:50+0200\n"
-"PO-Revision-Date: 2016-08-11 07:34+0200\n"
+"PO-Revision-Date: 2016-08-11 07:40+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl_NL\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 
 msgid "Add AutoTimer"
-msgstr "Voeg AutoTimer toe"
+msgstr "Voeg autotimer toe"
 
 msgid "Add Timer"
 msgstr "Voeg timer toe"
@@ -59,7 +59,7 @@ msgstr "Bepaal waar te zoeken in de EPG. Indien 'alle boeketten' is gekozen, wor
 
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
-msgstr "Kan AutoTimer timer lijst niet lezen : %s"
+msgstr "Kan autotimer timer-lijst niet lezen : %s"
 
 msgid "Current bouquet"
 msgstr "Huidige boeket"
@@ -80,7 +80,7 @@ msgid "EPG Search"
 msgstr "EPG doorzoeken"
 
 msgid "EPG Search setup"
-msgstr "EPG Search instellingen"
+msgstr "EPGSearch instellingen"
 
 msgid "EPGSearch"
 msgstr "EPGSearch"
@@ -89,13 +89,13 @@ msgid "EPGSearch Setup"
 msgstr "EPGSearch instellingen"
 
 msgid "Enable this to allow access to EPG Search from within the plugin browser."
-msgstr "Schakel dit in om EPG search vanuit de pluginbrowser te kunnen openen."
+msgstr "Schakel dit in om EPGSearch vanuit de pluginbrowser te kunnen openen."
 
 msgid "Enter new search"
 msgstr "Opnieuw zoeken"
 
 msgid "Enter text to search for"
-msgstr "Voer te zoeken tekst in:"
+msgstr "Voer de te zoeken tekst in:"
 
 msgid "Exit EPG Search"
 msgstr "Sluit EPG search af"
@@ -104,10 +104,10 @@ msgid "IMDB search for highlighted event"
 msgstr "Zoek in IMDb naar geselecteerde event"
 
 msgid "IMDb Search"
-msgstr "IMDb zoeken"
+msgstr "Zoeken in IMDb"
 
 msgid "Import from AutoTimer"
-msgstr "Importeren uit AutoTimer"
+msgstr "Importeren uit autotimer"
 
 msgid "Import from EPG"
 msgstr "Uit de EPG importeren"
@@ -140,7 +140,7 @@ msgid "New Search"
 msgstr "Nieuw"
 
 msgid "No history"
-msgstr "Geen historiek"
+msgstr "Geen historie"
 
 msgid "OK"
 msgstr "OK"
@@ -149,7 +149,7 @@ msgid "Open selected in IMDb"
 msgstr "Open selectie in IMDb"
 
 msgid "Save search as AutoTimer"
-msgstr "Bewaar als AutoTimer"
+msgstr "Bewaar als autotimer"
 
 msgid "Search"
 msgstr "Zoeken"
@@ -182,13 +182,13 @@ msgid "Set type of match used to compare program titles with the search string"
 msgstr "Kies het soort overeenkomst tussen programmatitels en zoekslag"
 
 msgid "Sets the default search scope when the user is asked."
-msgstr "Kies het stanf=daard bereik wanneer de gebruiker wordt gevraagd"
+msgstr "Kies het standaard bereik wanneer de gebruiker wordt gevraagd"
 
 msgid "Setup"
 msgstr "Instellingen"
 
 msgid "Setup menu"
-msgstr "Instellingen menu"
+msgstr "Instellingenmenu"
 
 msgid "Show AutoTimer list"
 msgstr "Toon autotimerlijst"
@@ -197,7 +197,7 @@ msgid "Show detailed event information"
 msgstr "Toon gedetailleerde eventinformatie"
 
 msgid "Show in plugin browser"
-msgstr "Toon in Plugin browser"
+msgstr "Toon in pluginbrowser"
 
 msgid "Show orbital position"
 msgstr "Toon baanpositie"
