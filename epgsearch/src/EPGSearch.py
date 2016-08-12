@@ -1,7 +1,7 @@
 # for localized messages
 from . import _, allowShowOrbital
 
-from enigma import eEPGCache, eTimer, eServiceReference, eServiceCenter, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, getDesktop
+from enigma import eEPGCache, eTimer, eServiceReference, eServiceCenter, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, getDesktop, getBestPlayableServiceReference
 import NavigationInstance
 
 from Tools.LoadPixmap import LoadPixmap
@@ -666,7 +666,9 @@ class EPGSearch(EPGSelection):
 		if servicelist is not None:
 			serviceIterator = servicelist.getNext()
 			while serviceIterator.valid():
-				if not (serviceIterator.flags & self.SERVICE_FLAG_MASK):
+				if serviceIterator.flags & eServiceReference.isGroup:
+					serviceIterator = getBestPlayableServiceReference(serviceIterator, eServiceReference())
+				if serviceIterator and not (serviceIterator.flags & self.SERVICE_FLAG_MASK):
 					serviceRefSet.add(self._normaliseSref(serviceIterator.toString()))
 				serviceIterator = servicelist.getNext()
 
