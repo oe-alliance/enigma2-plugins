@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-27 17:50+0200\n"
-"PO-Revision-Date: 2016-08-11 07:40+0200\n"
+"PO-Revision-Date: 2016-08-13 10:52+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl_NL\n"
@@ -245,13 +245,13 @@ msgstr "gedeeltelijke overeenkomst"
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
 #. TRANSLATORS: \0x86 is non-printing and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it as the first character in translations.
 msgid "search EPG"
-msgstr "EPG doorzoeken"
+msgstr "%sEPG doorzoeken"
 
 #. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
 #. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
 #. TRANSLATORS: \0x87 is non-printing and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it as the first character in translations.
 msgid "search EPG from history..."
-msgstr "EPG-geschiedenis doorzoeken"
+msgstr "%sEPG-geschiedenis doorzoeken"
 
 msgid "title starts with"
 msgstr "titel begint met"
