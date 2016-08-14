@@ -244,8 +244,6 @@ msgstr "gedeeltelijke overeenkomst"
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
 #. TRANSLATORS: \0x86 is non-printing and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it as the first character in translations.
-msgid "%ssearch EPG"
-msgstr "%sEPG doorzoeken"
 
 #. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
 #. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
