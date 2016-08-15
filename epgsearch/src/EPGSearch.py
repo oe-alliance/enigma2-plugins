@@ -118,7 +118,7 @@ class EPGSearchList(EPGList):
 			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, strftime("%e/%m, %H:%M", t))
 		]
 		if r3.w:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r1.h, 0, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, self.getOrbitalPos(serviceref)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, self.getOrbitalPos(serviceref)))
 		picwidth = 0
 		for pic in pics:
 			picwidth += picx
@@ -134,15 +134,13 @@ class EPGSearchList(EPGList):
 		width = self.descr_rect.x + self.descr_rect.w
 		if allowShowOrbital and config.plugins.epgsearch.showorbital.value:
 			fontSize = self.eventFontSizeSingle + config.epgselection.enhanced_eventfs.value
-			orbitalPosWidth = int(fontSize * 4.2)
-			orbitalPosSpace = int(fontSize * 0.5)
+			orbitalPosWidth = int(fontSize * 4.4)
 		else:
 			orbitalPosWidth = 0
-			orbitalPosSpace = 0
 
 		self.orbpos_rect = Rect(self.descr_rect.x, self.descr_rect.y, orbitalPosWidth, self.descr_rect.h)
 		orbpos_r = self.orbpos_rect.x + self.orbpos_rect.w
-		self.descr_rect = Rect(orbpos_r + orbitalPosSpace, self.orbpos_rect.y, width - orbpos_r - orbitalPosSpace, self.orbpos_rect.h)
+		self.descr_rect = Rect(orbpos_r, self.orbpos_rect.y, width - orbpos_r, self.orbpos_rect.h)
 
 	def getOrbitalPos(self, ref):
 		refstr = None
