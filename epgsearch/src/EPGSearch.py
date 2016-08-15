@@ -11,7 +11,7 @@ from ServiceReference import ServiceReference
 
 from EPGSearchSetup import EPGSearchSetup
 from Screens.InfoBar import MoviePlayer
-from Screens.ChannelSelection import ChannelSelection, SimpleChannelSelection
+from Screens.ChannelSelection import ChannelSelection, SimpleChannelSelection, MODE_RADIO
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
 from Screens.MessageBox import MessageBox
@@ -53,8 +53,8 @@ try:
 except ImportError:
 	autoTimerAvailable = False
 
-service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
 rootbouquet_tv = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
+rootbouquet_radio = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.radio" ORDER BY bouquet'
 
 # Modified EPGSearchList with support for PartnerBox
 class EPGSearchList(EPGList):
@@ -117,7 +117,7 @@ class EPGSearchList(EPGList):
 			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, strftime("%e/%m, %H:%M", t))
 		]
 		if r3.w:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r1.h, 0, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, self.getOrbitalPos(serviceref)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r1.h, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, self.getOrbitalPos(serviceref)))
 		picwidth = 0
 		for pic in pics:
 			picwidth += picx
@@ -133,15 +133,13 @@ class EPGSearchList(EPGList):
 		width = self.descr_rect.x + self.descr_rect.w
 		if allowShowOrbital and config.plugins.epgsearch.showorbital.value:
 			fontSize = self.eventFontSizeSingle + config.epgselection.enhanced_eventfs.value
-			orbitalPosWidth = int(fontSize * 4.2)
-			orbitalPosSpace = int(fontSize * 0.5)
+			orbitalPosWidth = int(fontSize * 4.4)
 		else:
 			orbitalPosWidth = 0
-			orbitalPosSpace = 0
 
 		self.orbpos_rect = Rect(self.descr_rect.x, self.descr_rect.y, orbitalPosWidth, self.descr_rect.h)
 		orbpos_r = self.orbpos_rect.x + self.orbpos_rect.w
-		self.descr_rect = Rect(orbpos_r + orbitalPosSpace, self.orbpos_rect.y, width - orbpos_r - orbitalPosSpace, self.orbpos_rect.h)
+		self.descr_rect = Rect(orbpos_r, self.orbpos_rect.y, width - orbpos_r, self.orbpos_rect.h)
 
 	def getOrbitalPos(self, ref):
 		refstr = None
@@ -370,12 +368,12 @@ class EPGSearch(EPGSelection):
 			return False
 
 		ChannelSelectionInstance = ChannelSelection.instance
-		self.service_types = service_types_tv
 		foundService = False
 		if ChannelSelectionInstance:
+			self.service_types = ChannelSelectionInstance.service_types
 			serviceHandler = eServiceCenter.getInstance()
+			bqrootstr = ChannelSelectionInstance.bouquet_rootstr
 			if config.usage.multibouquet.value:
-				bqrootstr = rootbouquet_tv
 				rootbouquet = eServiceReference(bqrootstr)
 				currentBouquet = ChannelSelectionInstance.getRoot()
 				for searchCurrent in (True, False):
@@ -394,7 +392,6 @@ class EPGSearch(EPGSelection):
 						if foundService:
 							break
 			else:
-				bqrootstr = '%s FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'%(self.service_types)
 				rootbouquet = eServiceReference(bqrootstr)
 				bouquet = eServiceReference(bqrootstr)
 				if bouquet.valid() and bouquet.flags & (eServiceReference.isDirectory | eServiceReference.isInvisible) == eServiceReference.isDirectory:
@@ -626,23 +623,16 @@ class EPGSearch(EPGSelection):
 			"sensitive": eEPGCache.CASE_CHECK,
 		}.get(config.plugins.epgsearch.search_case.value, eEPGCache.NO_CASE_CHECK)
 
-		# Search EPG, default to empty list
 
-		epgcache = eEPGCache.getInstance() # XXX: the EPGList also keeps an instance of the cache but we better make sure that we get what we want :-)
-		ret = epgcache.search(('RIBDT', 1000, search_type, searchString, search_case)) or []
+		searchFilter = {
+			"allbouquets":  self.allBouquetServiceRefSet,
+			"currentbouquet":  self.currentBouquetServiceRefSet,
+			"currentservice":  self.currentServiceServiceRefSet,
+			"all": self.allServiceRefSet,
+		}.get(searchScope, self.allServiceRefSet)()
+
+		ret = self._filteredSearch('RIBDT', 1000, search_type, searchString, search_case, searchFilter)
 		ret.sort(key=itemgetter(2)) # sort by time
-
-		searchFilter = None # all services/fallback
-
-		if searchScope == "allbouquets":
-			searchFilter = self.allBouquetServiceRefSet()
-		elif searchScope == "currentbouquet":
-			searchFilter = self.currentBouquetServiceRefSet()
-		elif searchScope == "currentservice":
-			searchFilter = self.currentServiceServiceRefSet()
-
-		if searchFilter is not None:
-			ret = [event for event in ret if self._normaliseSref(event[0]) in searchFilter]
 
 		# Update List
 		l = self["list"]
@@ -650,15 +640,32 @@ class EPGSearch(EPGSelection):
 		l.l.setList(ret)
 		l.recalcEntrySize()
 
-	def _normaliseSref(self, servicerefStr):
-		sref = eServiceReference(servicerefStr)
-		# Force flags to 0 and path and name to the empty string for filtering
-		sref.flags = 0
-		# Ignore "scrambled" bit when testing for DVB service type
-		if sref.type & ~0x100 == eServiceReference.idDVB:
-			sref.setPath('')
-		sref.setName('')
-		return sref.toString()
+	def _filteredSearch(self, args, maxRet, search_type, searchString, search_case, searchFilter):
+		titleEntry = args.index('T')
+		if titleEntry < 0:
+			return []
+		partialMatchFunc = lambda s: searchString in s
+		matchFunc = {
+			eEPGCache.PARTIAL_TITLE_SEARCH: partialMatchFunc,
+			eEPGCache.EXAKT_TITLE_SEARCH: lambda s: searchString == s,
+			eEPGCache.START_TITLE_SEARCH: lambda s: s.startswith(searchString),
+		}.get(search_type, partialMatchFunc)
+		if search_case == eEPGCache.CASE_CHECK:
+			caseMatchFunc = matchFunc
+		else:
+			searchString = searchString.lower()
+			caseMatchFunc = lambda s: matchFunc(s.lower())
+
+		ret = []
+		for sref in searchFilter:
+			lookup = [args, (sref, 0, 0, -1)]
+			# Enumerate EPG for service, defaulting to empty list
+			# and apply search, accumulating results
+			ret += [event for event in eEPGCache.getInstance().lookupEvent(lookup) or [] if caseMatchFunc(event[titleEntry])]
+			if len(ret) > maxRet:
+				del ret[maxRet:]
+				break
+		return ret
 
 	def _addBouquetServices(self, bouquet, serviceRefSet):
 		serviceHandler = eServiceCenter.getInstance()
@@ -669,12 +676,24 @@ class EPGSearch(EPGSelection):
 				if serviceIterator.flags & eServiceReference.isGroup:
 					serviceIterator = getBestPlayableServiceReference(serviceIterator, eServiceReference())
 				if serviceIterator and not (serviceIterator.flags & self.SERVICE_FLAG_MASK):
-					serviceRefSet.add(self._normaliseSref(serviceIterator.toString()))
+					serviceRefSet.add(serviceIterator.toString())
 				serviceIterator = servicelist.getNext()
+
+	def allServiceRefSet(self):
+		serviceRefSet = self.allBouquetServiceRefSet()
+		ChannelSelectionInstance = ChannelSelection.instance
+		if ChannelSelectionInstance:
+			lamedbServices = eServiceReference(ChannelSelectionInstance.service_types)
+			self._addBouquetServices(lamedbServices, serviceRefSet)
+		return serviceRefSet
 
 	def allBouquetServiceRefSet(self):
 		serviceHandler = eServiceCenter.getInstance()
-		bqrootstr = rootbouquet_tv
+		ChannelSelectionInstance = ChannelSelection.instance
+		if ChannelSelectionInstance and ChannelSelectionInstance.mode == MODE_RADIO:
+			bqrootstr = rootbouquet_radio
+		else:
+			bqrootstr = rootbouquet_tv
 		rootbouquet = eServiceReference(bqrootstr)
 		bouquetlist = serviceHandler.list(rootbouquet)
 		serviceRefSet = set()
@@ -687,16 +706,18 @@ class EPGSearch(EPGSelection):
 		return serviceRefSet
 
 	def currentBouquetServiceRefSet(self):
-		bouquet = ChannelSelection.instance.getRoot()
 		serviceRefSet = set()
-		self._addBouquetServices(bouquet, serviceRefSet)
+		ChannelSelectionInstance = ChannelSelection.instance
+		if ChannelSelectionInstance:
+			bouquet = ChannelSelectionInstance.getRoot()
+			self._addBouquetServices(bouquet, serviceRefSet)
 		return serviceRefSet
 
 	def currentServiceServiceRefSet(self):
 		service = MoviePlayer.instance and MoviePlayer.instance.lastservice or NavigationInstance.instance.getCurrentlyPlayingServiceReference()
 		if not service or not service.valid:
 			return None
-		return { self._normaliseSref(service.toString()) }
+		return { service.toString() }
 
 class EPGSearchTimerImport(Screen):
 	def __init__(self, session):
