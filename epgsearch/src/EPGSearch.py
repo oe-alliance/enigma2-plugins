@@ -11,7 +11,7 @@ from ServiceReference import ServiceReference
 
 from EPGSearchSetup import EPGSearchSetup
 from Screens.InfoBar import MoviePlayer
-from Screens.ChannelSelection import ChannelSelection, SimpleChannelSelection
+from Screens.ChannelSelection import ChannelSelection, SimpleChannelSelection, MODE_RADIO
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
 from Screens.MessageBox import MessageBox
@@ -55,6 +55,7 @@ except ImportError:
 
 service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
 rootbouquet_tv = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
+rootbouquet_radio = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.radio" ORDER BY bouquet'
 
 # Modified EPGSearchList with support for PartnerBox
 class EPGSearchList(EPGList):
@@ -692,7 +693,11 @@ class EPGSearch(EPGSelection):
 
 	def allBouquetServiceRefSet(self):
 		serviceHandler = eServiceCenter.getInstance()
-		bqrootstr = rootbouquet_tv
+		ChannelSelectionInstance = ChannelSelection.instance
+		if ChannelSelectionInstance and ChannelSelectionInstance.mode == MODE_RADIO:
+			bqrootstr = rootbouquet_radio
+		else:
+			bqrootstr = rootbouquet_tv
 		rootbouquet = eServiceReference(bqrootstr)
 		bouquetlist = serviceHandler.list(rootbouquet)
 		serviceRefSet = set()
@@ -705,9 +710,11 @@ class EPGSearch(EPGSelection):
 		return serviceRefSet
 
 	def currentBouquetServiceRefSet(self):
-		bouquet = ChannelSelection.instance.getRoot()
 		serviceRefSet = set()
-		self._addBouquetServices(bouquet, serviceRefSet)
+		ChannelSelectionInstance = ChannelSelection.instance
+		if ChannelSelectionInstance:
+			bouquet = ChannelSelectionInstance.getRoot()
+			self._addBouquetServices(bouquet, serviceRefSet)
 		return serviceRefSet
 
 	def currentServiceServiceRefSet(self):
