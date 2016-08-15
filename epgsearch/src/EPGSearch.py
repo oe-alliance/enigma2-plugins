@@ -53,7 +53,6 @@ try:
 except ImportError:
 	autoTimerAvailable = False
 
-service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
 rootbouquet_tv = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
 rootbouquet_radio = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.radio" ORDER BY bouquet'
 
@@ -369,12 +368,12 @@ class EPGSearch(EPGSelection):
 			return False
 
 		ChannelSelectionInstance = ChannelSelection.instance
-		self.service_types = service_types_tv
 		foundService = False
 		if ChannelSelectionInstance:
+			self.service_types = ChannelSelectionInstance.service_types
 			serviceHandler = eServiceCenter.getInstance()
+			bqrootstr = ChannelSelectionInstance.bouquet_rootstr
 			if config.usage.multibouquet.value:
-				bqrootstr = rootbouquet_tv
 				rootbouquet = eServiceReference(bqrootstr)
 				currentBouquet = ChannelSelectionInstance.getRoot()
 				for searchCurrent in (True, False):
@@ -393,7 +392,6 @@ class EPGSearch(EPGSelection):
 						if foundService:
 							break
 			else:
-				bqrootstr = '%s FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'%(self.service_types)
 				rootbouquet = eServiceReference(bqrootstr)
 				bouquet = eServiceReference(bqrootstr)
 				if bouquet.valid() and bouquet.flags & (eServiceReference.isDirectory | eServiceReference.isInvisible) == eServiceReference.isDirectory:
