@@ -75,6 +75,7 @@ def Plugins(**kwargs):
 		),
 		PluginDescriptor(
 			# TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+			name = _("search EPG"),
 			description = _("search EPG"),
 			where = PluginDescriptor.WHERE_MOVIELIST,
 			fnc = movielist,
@@ -82,6 +83,7 @@ def Plugins(**kwargs):
 		),
 		PluginDescriptor(
 			# TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
+			name = _("search EPG from history..."),
 			description = _("search EPG from history..."),
 			where = PluginDescriptor.WHERE_MOVIELIST,
 			fnc = seachhistory,
