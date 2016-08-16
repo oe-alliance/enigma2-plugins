@@ -1,0 +1,143 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-06 19:12+0100\n"
+"PO-Revision-Date: 2016-08-17 01:36+0300\n"
+"Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
+"Language-Team: \n"
+"Language: el_GR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Add AutoTimer"
+msgstr "Προσθήκη Αυτ. Χρ/κόπτη"
+
+msgid "Add Timer"
+msgstr "Προσθήκη Χρονοδιακόπτη"
+
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+msgid "Channel Selection"
+msgstr "Επιλογή Καναλιών"
+
+msgid "Choose the encode type for search, helpful for foreign languages."
+msgstr ""
+"Επιλογή τύπου κωδικοποίησης για την αναζήτηση, βοηθά στις ξένες γλώσσες."
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Αδυναμία ανάγνωσης λίστας Αυτόματων Χρονοδιακοπτών: %s"
+
+msgid "EPG Search"
+msgstr "Αναζήτηση στο EPG"
+
+msgid "EPGSearch"
+msgstr "Αναζήτηση EPG"
+
+msgid "EPGSearch Setup"
+msgstr "Ρυθμίσεις Αναζήτησης στο EPG"
+
+msgid ""
+"Enable this to be able to access the EPG-Search from within the plugin "
+"browser."
+msgstr ""
+"Η ενεργοποίηση αυτής της επιλογής δίνει πρόσβαση στην Αναζήτηση EPG μέσα από "
+"τον πλοηγό προσθέτων."
+
+msgid "Enter text to search for"
+msgstr "Εισαγωγή κειμένου αναζήτησης"
+
+msgid ""
+"How many entries to keep in the search history at most. 0 disables history "
+"entirely!"
+msgstr ""
+"Μέγιστος αριθμός στοιχείων που θα διατηρούνται στο ιστορικό. Το 0 "
+"απενεργοποιεί το ιστορικό τελείως!"
+
+msgid "IMDb Search"
+msgstr "Αναζήτηση IMDb"
+
+msgid "Import from AutoTimer"
+msgstr "Εισαγωγή από Αυτ. Χρ/κόπτη"
+
+msgid "Import from EPG"
+msgstr "Εισαγωγή από το EPG"
+
+msgid "Import from Timer"
+msgstr "Εισαγωγή από Χρονοδιακόπτη"
+
+msgid "Length of History"
+msgstr "Μέγεθος Ιστορικού"
+
+msgid "New Search"
+msgstr "Νέα Αναζήτηση"
+
+msgid "No history"
+msgstr "Χωρίς ιστορικό"
+
+msgid "OK"
+msgstr "ΟΚ"
+
+msgid "Open selected in IMDb"
+msgstr "Άνοιγμα επιλεγμένων στο IMDB"
+
+msgid "Save search as AutoTimer"
+msgstr "Αποθήκευση αναζήτησης ως Αυτ. Χρ/κόπτης"
+
+msgid "Search"
+msgstr "Αναζήτηση"
+
+msgid "Search EPG"
+msgstr "Αναζήτηση στο EPG"
+
+msgid "Search Encoding"
+msgstr "Κωδικοποίηση Αναζήτησης"
+
+msgid "Select a timer to search"
+msgstr "Επιλογή χρονοδιακόπτη για αναζήτηση"
+
+msgid "Select text to search for"
+msgstr "Επιλογή κειμένου για αναζήτηση"
+
+msgid "Setup"
+msgstr "Εγκατάσταση"
+
+msgid "Show in plugin browser"
+msgstr "Εμφάνιση στον πλοηγό προσθέτων"
+
+msgid "Show search history"
+msgstr "Εμφάνιση ιστορικού αναζήτησης"
+
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+msgid "search EPG"
+msgstr "αναζήτηση στο EPG"
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
+msgid "search EPG..."
+msgstr "αναζήτηση στο EPG..."
+
+msgid "Add \"Search\" Button to EPG"
+msgstr "Προσθήκη πλήκτρου \"Αναζήτηση\" στο EPG"
+
+msgid "Export selected as AutoTimer"
+msgstr "Εξαγωγή επιλεγμένων ως Αυτ. Χρ/κόπτης"
+
+msgid "History"
+msgstr "Ιστορικό"
+
+msgid ""
+"If this setting is enabled, the plugin adds a \"Search\" Button to the "
+"regular EPG."
+msgstr ""
+"Με αυτή τη ρύθμιση ενεργή, το πρόσθετο προσθέτει το πλήκτρο \"Αναζήτηση\" "
+"στον κανονικό EPG."
