@@ -1,116 +1,117 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2013-03-19 22:30+0100\n"
-"Last-Translator: xxx\n"
-"Language-Team: xxx\n"
+"POT-Creation-Date: 2014-11-22 20:42+0100\n"
+"PO-Revision-Date: 2014-11-22 20:47+0100\n"
+"Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
+"Language-Team: none\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
 "X-Poedit-Language: Swedish\n"
 "X-Poedit-Country: SWEDEN\n"
-"X-Poedit-SourceCharset: iso-8859-15\n"
-
-msgid "Add AutoTimer"
-msgstr "Lägg till AutoTimer"
-
-msgid "Add timer"
-msgstr "Lägg till Timer"
-
-msgid "Cancel"
-msgstr "Avbryt"
-
-msgid "Channel Selection"
-msgstr "Avbryt val"
-
-msgid "Choose the encode type for search, helpful for foreign languages."
-msgstr "Choose the encode type for search, helpful for foreign languages."
-
-#, python-format
-msgid "Could not read AutoTimer timer list: %s"
-msgstr "Kunde inte läsa AutoTimer Timerlista: %s"
-
-msgid "EPG Search"
-msgstr "EPG-sökning"
-
-msgid "EPGSearch"
-msgstr "EPG-sökning"
-
-msgid "EPGSearch Setup"
-msgstr "Ställ in EPG-sökning"
-
-msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
-msgstr "Aktivera detta för att kunna få tillgång till EPG-sökning inifrån Plugins."
-
-msgid "Enter text to search for"
-msgstr "Ange text att söka efter"
-
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-msgstr "How many entries to keep in the search history at most. 0 disables history entirely!"
-
-msgid "IMDb Search"
-msgstr "IMDb-sökning"
-
-msgid "Import from AutoTimer"
-msgstr "Importera från AutoTimer"
-
-msgid "Import from EPG"
-msgstr "Importera från EPG"
-
-msgid "Import from Timer"
-msgstr "Importera från Timers"
-
-msgid "Length of History"
-msgstr "Längd på Historik"
-
-msgid "New Search"
-msgstr "Ny sökning"
-
-msgid "No history"
-msgstr "Ingen historik"
-
-msgid "OK"
-msgstr "OK"
-
-msgid "Open selected in IMDb"
-msgstr "Öppna vald i IMDb"
-
-msgid "Save search as AutoTimer"
-msgstr "Spara sökning som AutoTimer"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ../src\n"
 
 msgid "Search"
 msgstr "Sök"
 
-msgid "Search EPG"
-msgstr "Sök EPG"
+msgid "New Search"
+msgstr "Ny sökning"
 
-msgid "Search Encoding"
-msgstr "Sök avkodning"
+msgid "History"
+msgstr "Historik"
 
-msgid "Select a timer to search"
-msgstr "Välj en timer att söka"
+msgid "Add timer"
+msgstr "Lägg till timer"
+
+msgid "EPG Search"
+msgstr "EPG sökning"
+
+msgid "Enter text to search for"
+msgstr "Skriv in text att söka efter"
+
+msgid "Import from Timer"
+msgstr "Importera från timer"
+
+msgid "Import from EPG"
+msgstr "Importera från EPG"
+
+msgid "Import from AutoTimer"
+msgstr "Importera från AutoTimer"
+
+msgid "Save search as AutoTimer"
+msgstr "Spara sökning som AutoTimer"
+
+msgid "Export selected as AutoTimer"
+msgstr "Exportera vald som AutoTimer"
+
+msgid "Setup"
+msgstr "Inställning"
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Kunde inte läsa timerlistan för AutoTimer: %s"
 
 msgid "Select text to search for"
 msgstr "Välj text att söka efter"
 
-msgid "Setup"
-msgstr "Ställ in"
+msgid "No history"
+msgstr "Ingen historik"
 
-msgid "Show in plugin browser"
-msgstr "Visa i Pluginbläddrare"
+msgid "Cancel"
+msgstr "Avbryt"
 
-msgid "Show search history"
-msgstr "Visa sökhistorik"
+msgid "OK"
+msgstr "OK"
 
-#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
-msgid "search EPG"
-msgstr "EPG-sökning"
+msgid "Select a timer to search"
+msgstr "Välj en timer för sökning"
 
-#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
+msgid "Channel Selection"
+msgstr "Kanalval"
+
+msgid "Search EPG"
+msgstr "Sök EPG"
+
 msgid "search EPG..."
-msgstr "EPG-sökning"
+msgstr "Sök EPG..."
+
+msgid "search EPG"
+msgstr "Sök EPG"
+
+#, fuzzy
+msgid "Search event in EPG"
+msgstr "Sök EPG"
+
+msgid "EPGSearch Setup"
+msgstr "Inställningar för EPG Sökning"
+
+msgid "Length of History"
+msgstr "Längd på historik"
+
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr "Hur många poster som skall vara i sökhistoriken som mest. 0 inaktiverar historia helt!"
+
+msgid "Add \"Search\" Button to EPG"
+msgstr "Lägg \"Sök\" knappen till EPG"
+
+msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
+msgstr "Om denna inställning är aktiverad, kommer pluginet att lägga till \"sök\" knapp till den vanliga EPG:n."
+
+msgid "Add \"Search event in EPG\" to event menu"
+msgstr ""
+
+msgid "Adds \"Search event in EPG\" item into the event menu."
+msgstr ""
+
+msgid "Add \"Search event in EPG\" to channel menu"
+msgstr ""
+
+msgid "Adds \"Search event in EPG\" item into the channel selection context menu."
+msgstr ""
 

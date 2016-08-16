@@ -1,0 +1,116 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-22 20:42+0100\n"
+"PO-Revision-Date: 2014-11-22 20:46+0100\n"
+"Last-Translator: BoxFreak\n"
+"Language-Team: none\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+msgid "Search"
+msgstr "Hae"
+
+msgid "New Search"
+msgstr "Uusi haku"
+
+msgid "History"
+msgstr "Historia"
+
+msgid "Add timer"
+msgstr "Lisää ajastus"
+
+msgid "EPG Search"
+msgstr "Ohjelmaoppaasta haku"
+
+msgid "Enter text to search for"
+msgstr "Syötä haettava teksti"
+
+msgid "Import from Timer"
+msgstr "Tuo tehdystä ajastuksesta"
+
+msgid "Import from EPG"
+msgstr "Tuo ajastus ohjelmaoppaasta"
+
+msgid "Import from AutoTimer"
+msgstr "Tuo ajastus AutoTimerista"
+
+msgid "Save search as AutoTimer"
+msgstr "Tallenna haku AutoTimeriin"
+
+msgid "Export selected as AutoTimer"
+msgstr "Vie valitut AutoTimeriin"
+
+msgid "Setup"
+msgstr "Asetukset"
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "AutoTimerin ajastuslistaa ei voitu lukea: %s"
+
+msgid "Select text to search for"
+msgstr "Valitse haettava teksti"
+
+msgid "No history"
+msgstr "Ei historiaa"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Select a timer to search"
+msgstr "Valitse ajastus jota haetaan"
+
+msgid "Channel Selection"
+msgstr "Kanavanvalinta"
+
+msgid "Search EPG"
+msgstr "Hae ohjelmaoppaasta"
+
+msgid "search EPG..."
+msgstr "Hae ohjelmaoppaasta..."
+
+msgid "search EPG"
+msgstr "Hae ohjelmaoppaasta"
+
+#, fuzzy
+msgid "Search event in EPG"
+msgstr "Hae ohjelmaoppaasta"
+
+msgid "EPGSearch Setup"
+msgstr "Ohjelmaoppaan haun asetukset"
+
+msgid "Length of History"
+msgstr "Hakuhistorian pituus"
+
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr "Kuinka monta hakua pidetään hakuhistoriassa. 0 asettaa historian pois käytöstä kokonaan!"
+
+msgid "Add \"Search\" Button to EPG"
+msgstr "Lisää \"Hae\" Nappi ohjelmaoppaaseen"
+
+msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
+msgstr "Kun tämä asetus on päällä, lisäosa lisää \"Hae\" Napin ohjelmaoppaaseen."
+
+msgid "Add \"Search event in EPG\" to event menu"
+msgstr ""
+
+msgid "Adds \"Search event in EPG\" item into the event menu."
+msgstr ""
+
+msgid "Add \"Search event in EPG\" to channel menu"
+msgstr ""
+
+msgid "Adds \"Search event in EPG\" item into the channel selection context menu."
+msgstr ""
+
