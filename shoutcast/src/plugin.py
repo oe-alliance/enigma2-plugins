@@ -1123,11 +1123,7 @@ class SHOUTcastList(GUIComponent, object):
 	def __init__(self):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
-		fontsize0, fontsize1, self.cenrylist, self.favlist, self.para, self.parb, self.parc, self.pard = skin.parameters.get("SHOUTcastListItem",(20, 18, 22, 69, 20, 23, 43, 22))
-		self.l.setFont(0, gFont("Regular", fontsize0))
-		self.l.setFont(1, gFont("Regular", fontsize1))
-		self.l.setBuildFunc(self.buildEntry)
-		self.l.setItemHeight(self.cenrylist)
+		self.fontsize0, self.fontsize1, self.cenrylist, self.favlist, self.para, self.parb, self.parc, self.pard = skin.parameters.get("SHOUTcastListItem",(20, 18, 22, 69, 20, 23, 43, 22))
 		self.onSelectionChanged = [ ]
 		self.mode = 0
 
@@ -1176,6 +1172,19 @@ class SHOUTcastList(GUIComponent, object):
 
 	def setList(self, list):
 		self.l.setList(list)
+
+	def applySkin(self, desktop, parent):
+		font = "Regular"
+		for (attrib, value) in list(self.skinAttributes):
+			if attrib == "font":
+				font = value.split(";")[0]
+				self.skinAttributes.remove((attrib, value))
+				break
+		self.l.setFont(0, gFont(font, self.fontsize0))
+		self.l.setFont(1, gFont(font, self.fontsize1))
+		self.l.setBuildFunc(self.buildEntry)
+		self.l.setItemHeight(self.cenrylist)
+		return GUIComponent.applySkin(self, desktop, parent)
 
 class SHOUTcastLCDScreen(Screen):
 	skin = """
