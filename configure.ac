@@ -345,6 +345,7 @@ epgsearchpli/Makefile
 epgsearchpli/meta/Makefile
 epgsearchpli/po/Makefile
 epgsearchpli/src/Makefile
+epgsearchpli/src/icons/Makefile
 
 eurotictv/Makefile
 eurotictv/meta/Makefile
