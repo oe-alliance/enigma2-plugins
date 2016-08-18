@@ -311,7 +311,7 @@ class EPGSearchList(EPGList):
 
 	def buildEPGSearchEntry(self, service, eventId, beginTime, duration, EventName):
 		rec1 = self.getClockTypesForEntry(service, eventId, beginTime, duration)
-		# Partnerbox 
+		# Partnerbox
 		if PartnerBoxIconsEnabled:
 			rec2 = beginTime and isInRemoteTimer(self, beginTime, duration, service)
 		else:
@@ -747,7 +747,7 @@ class EPGSearch(EPGSelection):
 				name2 = cur[0].getEventName() or ''
 				name3 = name2.split("(")[0].strip()
 				eventname = name3.replace('"', '').replace('Õ/Ô', '').replace('Ì/Ô', '').replace('Õ/ô', '').replace('.', '')
-				eventname = eventname.replace('0+', '').replace('(0+)', '').replace('6+', '').replace('(6+)', '').replace('7+', '').replace('(7+)', '').replace('12+', '').replace('(12+)', '').replace('16+', '').replace('(16+)', '').replace('18+', '').replace('(18+)', '')				
+				eventname = eventname.replace('0+', '').replace('(0+)', '').replace('6+', '').replace('(6+)', '').replace('7+', '').replace('(7+)', '').replace('12+', '').replace('(12+)', '').replace('16+', '').replace('(16+)', '').replace('18+', '').replace('(18+)', '')
 				try:
 					tmbdsearch = config.plugins.tmbd.profile.value
 				except:
@@ -893,7 +893,7 @@ class EPGSearch(EPGSelection):
 			self.session.open(IMDB, cur[0].getEventName())
 		except ImportError as ie:
 			pass
-			
+
 	def zapToSelectedService(self):
 		cur = self["list"].getCurrent()
 		serviceref = cur[1]
@@ -911,7 +911,7 @@ class EPGSearch(EPGSelection):
 				self.session.nav.playService(serviceref.ref)
 			except:
 				pass
-		
+
 	def opentmdb(self):
 		cur = self['list'].getCurrent()
 		event = cur[0]
