@@ -1,10 +1,2 @@
-Package: enigma2-plugin-extensions-epgsearch
-Version: 4.4
 Description: search the epg and list results
-Section: base
-Priority: optional
-Maintainer: OpenPLi Team, dima73
-License: CC
-Architecture: all
-Homepage: openpli.org
 Depends: enigma2
