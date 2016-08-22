@@ -1,5 +1,5 @@
 # for localized messages
-from . import _, allowShowOrbital
+from . import _, allowShowOrbital, getOrbposConfList
 
 from enigma import eEPGCache, eTimer, eServiceReference, eServiceCenter, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, getDesktop, getBestPlayableServiceReference
 import NavigationInstance
@@ -293,7 +293,6 @@ class EPGSearch(EPGSelection):
 					"showRadio": self.showTrailerList,
 					"startTeletext": self.showConfig
 				})
-
 	def onCreate(self):
 		self.setTitle(_("EPG Search"))
 
@@ -513,8 +512,11 @@ class EPGSearch(EPGSelection):
 			config.plugins.epgsearch.scope.value,
 			config.plugins.epgsearch.search_type.value,
 			config.plugins.epgsearch.search_case.value,
+			config.plugins.epgsearch.enableorbpos.value,
+			config.plugins.epgsearch.invertorbpos.value,
 			allowShowOrbital and config.plugins.epgsearch.showorbital.value,
-		)
+		) + tuple(set((orbposItem.orbital_position for orbposItem in getOrbposConfList())))
+
 
 	def setup(self):
 		self.__reSearchSettings = self.getReSearchSetings()
@@ -657,7 +659,7 @@ class EPGSearch(EPGSelection):
 			caseMatchFunc = lambda s: matchFunc(s.lower())
 
 		ret = []
-		for sref in searchFilter:
+		for sref in self._sourceFilter(searchFilter):
 			lookup = [args, (sref, 0, 0, -1)]
 			# Enumerate EPG for service, defaulting to empty list
 			# and apply search, accumulating results
@@ -718,6 +720,23 @@ class EPGSearch(EPGSelection):
 		if not service or not service.valid:
 			return None
 		return { service.toString() }
+
+	def _sourceFilter(self, serviceRefSet):
+		if not config.plugins.epgsearch.enableorbpos.value:
+			return serviceRefSet
+
+		filtSet = set((orbposItem.orbital_position << 16 for orbposItem in getOrbposConfList()))
+
+		if not filtSet:
+			return serviceRefSet
+
+		filtServiceRefSet = set()
+		include = config.plugins.epgsearch.invertorbpos.value == _("include")
+		for srefstr in serviceRefSet:
+			sref = eServiceReference(srefstr)
+			if (sref.getUnsignedData(4) in filtSet) == include:
+				filtServiceRefSet.add(srefstr)
+		return filtServiceRefSet
 
 class EPGSearchTimerImport(Screen):
 	def __init__(self, session):
