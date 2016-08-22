@@ -7,7 +7,7 @@ from enigma import eServiceReference, eServiceCenter
 import os, gettext
 
 # Config
-from Components.config import config, configfile, ConfigSet, ConfigSubsection, ConfigSelection, ConfigNumber, ConfigYesNo, ConfigSatlist
+from Components.config import config, configfile, ConfigSet, ConfigSubsection, ConfigSelection, ConfigSelectionNumber, ConfigYesNo, ConfigSatlist
 
 PluginLanguageDomain = "EPGSearch"
 PluginLanguagePath = "Extensions/EPGSearch/locale"
@@ -36,7 +36,7 @@ config.plugins.epgsearch.showorbital = ConfigYesNo(default = allowShowOrbital)
 config.plugins.epgsearch.history = ConfigSet(choices = [])
 # XXX: configtext is more flexible but we cannot use this for a (not yet created) gui config
 config.plugins.epgsearch.encoding = ConfigSelection(choices = ['UTF-8', 'ISO8859-15'], default = 'UTF-8')
-config.plugins.epgsearch.history_length = ConfigNumber(default = 10)
+config.plugins.epgsearch.history_length = ConfigSelectionNumber(0, 50, 1, default = 10)
 config.plugins.epgsearch.add_search_to_epg = ConfigYesNo(default = True)
 
 orbposDisabled = 3600

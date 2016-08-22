@@ -534,6 +534,8 @@ class EPGSearch(EPGSelection):
 		del self.__reSearchSettings
 
 	def showHistory(self):
+		self._trimHistory()
+
 		options = [(x, x) for x in config.plugins.epgsearch.history.value]
 
 		if options:
@@ -550,6 +552,12 @@ class EPGSearch(EPGSelection):
 				type = MessageBox.TYPE_INFO
 			)
 
+	def _trimHistory(self):
+		history = config.plugins.epgsearch.history.value
+		maxLen = config.plugins.epgsearch.history_length.value
+		if len(history) > maxLen:
+			del history[maxLen:]
+
 	def searchEPGWrapper(self, ret):
 		if ret:
 			self.searchEPG(ret[1])
@@ -561,12 +569,11 @@ class EPGSearch(EPGSelection):
 				history = config.plugins.epgsearch.history.value
 				if searchString not in history:
 					history.insert(0, searchString)
-					maxLen = config.plugins.epgsearch.history_length.value
-					if len(history) > maxLen:
-						del history[maxLen:]
+					self._trimHistory()
 				else:
 					history.remove(searchString)
 					history.insert(0, searchString)
+
 			if config.plugins.epgsearch.scope.value == "ask" and lastAsk is None:
 				list = [
 					(_("All services"), "all"),
