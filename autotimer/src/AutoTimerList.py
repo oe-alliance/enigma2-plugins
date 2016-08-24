@@ -174,7 +174,7 @@ class AutoTimerList(MenuList):
 			timespanWidth = getTextBoundarySize(self.instance, self.eventNameFont, self.l.getItemSize(), timespan).width()
 		else:
 			timespanWidth = float(width)/10*2
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, statusIconWidth+typeIconWidth+iconMargin*4, 2, width-statusIconWidth-typeIconWidth-iconMargin*4- timespanWidth, rowHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, statusIconWidth+typeIconWidth+iconMargin*3, 2, width-statusIconWidth-typeIconWidth-iconMargin*3- timespanWidth, rowHeight, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
 
 		if timer.hasTimeframe():
 			begin = strftime("%a, %d %b", localtime(timer.getTimeframeBegin()))
