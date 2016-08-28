@@ -1269,6 +1269,18 @@ msgstr "Die blaue Taste drücken, um Sender/Bouquets zu editieren"
 msgid "Use yellow key to edit filters."
 msgstr "Die gelbe Taste drücken, um Filter zu editieren"
 
+msgid "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it: %s ."
+msgstr "[AutoTimer] Warnung, AutoTimer '%s' hat einen Timer verändert, der evtl. nicht von ihm erzeugt wurde: '%s' ."
+
+msgid "[AutoTimer] Try to add new timer based on AutoTimer %s."
+msgstr "[AutoTimer] Timer erstellt, durch AutoTimer '%s'"
+
+msgid "[AutoTimer] Try to add similar Timer because of conflicts with %s."
+msgstr "[AutoTimer] Ähnlichen Timer erstellt, wegen Konflikt mit '%s'"
+
+msgid "[AutoTimer] Timer disabled because of conflicts with %s."
+msgstr "[AutoTimer] Timer deaktiviert, wegen Konflikt mit '%s'"
+
 #: ../src/AutoTimerOverview.py:186
 msgid ""
 "Message\n"
