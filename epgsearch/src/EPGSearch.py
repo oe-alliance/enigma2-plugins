@@ -1,7 +1,7 @@
 # for localized messages
 from . import _, allowShowOrbital, getOrbposConfList
 
-from enigma import eEPGCache, eTimer, eServiceReference, eServiceCenter, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, getDesktop, getBestPlayableServiceReference
+from enigma import eEPGCache, eTimer, eServiceReference, eServiceCenter, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, eListboxPythonMultiContent, getDesktop, getBestPlayableServiceReference
 import NavigationInstance
 
 from Tools.LoadPixmap import LoadPixmap
@@ -34,6 +34,7 @@ from boxbranding import getImageDistro
 
 from time import localtime, strftime
 from operator import itemgetter
+from collections import defaultdict
 
 # Partnerbox installed and icons in epglist enabled?
 try:
@@ -77,6 +78,19 @@ class EPGSearchList(EPGList):
 		lsw = self.l.getItemSize().width()
 		if self.listSizeWidth != lsw: #recalc size if scrollbar is shown
 			self.recalcEntrySize()
+
+		r1 = self.weekday_rect
+		r2 = self.datetime_rect
+		r3 = self.orbpos_rect
+		r4 = self.descr_rect
+
+		if eventId < 0:
+			res = [
+				None, # no private data needed
+				(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r4.x + r4.w - r1.x, r1.h, 0, RT_HALIGN_CENTER|RT_VALIGN_CENTER, EventName)
+			]
+			return res
+
 		# Pics in right-to-left order
 		pics = []
 		# Partnerbox
@@ -104,10 +118,6 @@ class EPGSearchList(EPGList):
 			picy = 23
 			posy = 11
 
-		r1 = self.weekday_rect
-		r2 = self.datetime_rect
-		r3 = self.orbpos_rect
-		r4 = self.descr_rect
 		t = localtime(beginTime)
 		serviceref = ServiceReference(service) # for Servicename and orbital position
 		width = r4.x + r4.w
@@ -280,6 +290,8 @@ class EPGSearch(EPGSelection):
 		self.startTimer.callback.append(self.startUp)
 		self.startTimer.start(10, 1)
 
+		self.searchStartTimer = eTimer()
+
 		# Hook up actions for yttrailer if installed
 		try:
 			from Plugins.Extensions.YTTrailer.plugin import baseEPGSelection__init__
@@ -315,6 +327,7 @@ class EPGSearch(EPGSelection):
 			self.searchEPG(self.currSearch, lastAsk=self.lastAsk)
 		else:
 			l = self["list"]
+			l.instance.setSelectionEnable(True)
 			l.list = []
 			l.l.setList(l.list)
 			l.recalcEntrySize()
@@ -322,6 +335,7 @@ class EPGSearch(EPGSelection):
 	def closeScreen(self):
 		# Save our history
 		config.plugins.epgsearch.save()
+		self.searchStartTimer.stop()
 		EPGSelection.close(self)
 
 	def closeChoiceBoxDialog(self):
@@ -591,7 +605,7 @@ class EPGSearch(EPGSelection):
 					selection = selection
 				)
 			else:
-				self.doSearchEPG(searchString, lastAsk if lastAsk is not None else config.plugins.epgsearch.scope.value)
+				self.startSearchEPG(searchString, lastAsk if lastAsk is not None else config.plugins.epgsearch.scope.value)
 
 	def searchEPGAskCallback(self, searchString, ret):
 		if ret:
@@ -600,12 +614,27 @@ class EPGSearch(EPGSelection):
 				self.setup()
 			else:
 				self.lastAsk = ret[1]
-				self.doSearchEPG(searchString, ret[1])
+				self.startSearchEPG(searchString, ret[1])
 		else:
 			if self.firstSearch:
 				# Don't save abandoned initial search,
 				# so don't use closeScreen()
 				EPGSelection.close(self)
+
+	def startSearchEPG(self, searchString, searchScope):
+		l = self["list"]
+		l.instance.setSelectionEnable(False)
+		# Match an RIBDT search for dummy entries
+		invalSref = eServiceReference().toString()
+		searching = [(invalSref, -1, -1, -1, "")]  * (config.epgselection.enhanced_itemsperpage.value / 2)
+		searching.append((invalSref, -1, -1, -1, _("Searching...")))
+		l.list = searching
+		l.l.setList(searching)
+		l.recalcEntrySize()
+
+		del self.searchStartTimer.callback[:]
+		self.searchStartTimer.callback.append(lambda: self.doSearchEPG(searchString, searchScope))
+		self.searchStartTimer.start(1, 1)
 
 	def doSearchEPG(self, searchString, searchScope):
 		if self.firstSearch:
@@ -631,28 +660,67 @@ class EPGSearch(EPGSelection):
 			"insensitive": eEPGCache.NO_CASE_CHECK,
 			"sensitive": eEPGCache.CASE_CHECK,
 		}.get(config.plugins.epgsearch.search_case.value, eEPGCache.NO_CASE_CHECK)
+		searchFilter  = {
+			"all": self.allServiceRefMap,
+			"allbouquets":  self.allBouquetServiceRefMap,
+			"currentbouquet":  self.currentBouquetServiceRefMap,
+			"currentservice":  self.currentServiceServiceRefMap,
+		}.get(searchScope, self.allServiceRefMap)()
 
+		if len(searchFilter) > 5:
+			runFilter = self._filteredSearchByName
+		else:
+			runFilter = self._filteredSearchByService
 
-		searchFilter = {
-			"allbouquets":  self.allBouquetServiceRefSet,
-			"currentbouquet":  self.currentBouquetServiceRefSet,
-			"currentservice":  self.currentServiceServiceRefSet,
-			"all": self.allServiceRefSet,
-		}.get(searchScope, self.allServiceRefSet)()
+		ret = runFilter('RIBDT', 1000, search_type, searchString, search_case, searchFilter)
 
-		ret = self._filteredSearch('RIBDT', 1000, search_type, searchString, search_case, searchFilter)
 		ret.sort(key=itemgetter(2)) # sort by time
 
 		# Update List
 		l = self["list"]
+		l.instance.setSelectionEnable(True)
 		l.list = ret
 		l.l.setList(ret)
 		l.recalcEntrySize()
 
-	def _filteredSearch(self, args, maxRet, search_type, searchString, search_case, searchFilter):
+	def _filteredSearchByName(self, args, maxRet, search_type, searchString, search_case, searchFilter):
+		srefEntry = args.index('R')
+		if srefEntry < 0:
+			return []
+		eventIdEntry = args.index('I')
+		if eventIdEntry < 0:
+			return []
+
+		ret = eEPGCache.getInstance().search((args, maxRet, search_type, searchString, search_case)) or []
+
+		newRet = []
+		triplesCache = {}
+		processed = set()
+		for event in ret:
+			srefStr = event[srefEntry]
+			if srefStr in triplesCache:
+				triple = triplesCache[srefStr]
+			else:
+				sref = eServiceReference(srefStr)
+				triple = tuple(sref.getUnsignedData(i) for i in range(1, 4))
+				triplesCache[srefStr] = triple
+			processing = triple + (event[eventIdEntry], )
+			if processing not in processed:
+				event1 = event[1:]
+				newRet += ((newSrefStr,) + event1 for newSrefStr in searchFilter.get(triple, []))
+				if len(newRet) >= maxRet:
+					del newRet[maxRet:]
+					break
+				processed.add(processing)
+		return newRet
+
+	def _filteredSearchByService(self, args, maxRet, search_type, searchString, search_case, searchFilter):
 		titleEntry = args.index('T')
 		if titleEntry < 0:
 			return []
+
+		searchFilter = reduce(lambda acc, val: acc.union(val), searchFilter.itervalues(), set())
+
 		partialMatchFunc = lambda s: searchString in s
 		matchFunc = {
 			eEPGCache.PARTIAL_TITLE_SEARCH: partialMatchFunc,
@@ -676,27 +744,33 @@ class EPGSearch(EPGSelection):
 				break
 		return ret
 
-	def _addBouquetServices(self, bouquet, serviceRefSet):
+	def _processBouquetServiceRefMap(self, tempServiceRefMap):
+		serviceHandler = eServiceCenter.getInstance()
+		bouquetServiceRefMap = defaultdict(set)
+		for srefId, srefDict in tempServiceRefMap.iteritems():
+			if len(srefDict) > 1 and '' in srefDict:
+				noName = srefDict['']
+				info = serviceHandler.info(noName)
+				name = info and info.getName(noName) or ''
+				if name and name in srefDict:
+					del srefDict['']
+			bouquetServiceRefMap[srefId[2:5]].update(sref.toString() for sref in srefDict.itervalues())
+		return bouquetServiceRefMap
+
+	def _addBouquetTempServiceRefMap(self, bouquet, tempServiceRefMap):
 		serviceHandler = eServiceCenter.getInstance()
 		servicelist = serviceHandler.list(bouquet)
 		if servicelist is not None:
-			serviceIterator = servicelist.getNext()
-			while serviceIterator.valid():
-				if serviceIterator.flags & eServiceReference.isGroup:
-					serviceIterator = getBestPlayableServiceReference(serviceIterator, eServiceReference())
-				if serviceIterator and not (serviceIterator.flags & self.SERVICE_FLAG_MASK):
-					serviceRefSet.add(serviceIterator.toString())
-				serviceIterator = servicelist.getNext()
+			for sref in servicelist.getContent('R'):
+				if sref.flags & eServiceReference.isGroup:
+					sref = getBestPlayableServiceReference(sref, eServiceReference())
+				if sref and not (sref.flags & self.SERVICE_FLAG_MASK):
+					# Unroll tuple(sref.getUnsignedData(i) for i in range(8))
+					# for extra speed...
+					srefId = (sref.type, sref.getUnsignedData(0), sref.getUnsignedData(1), sref.getUnsignedData(2), sref.getUnsignedData(3), sref.getUnsignedData(4), sref.getUnsignedData(5), sref.getUnsignedData(6), sref.getUnsignedData(7), sref.getPath())
+					tempServiceRefMap[srefId][sref.getName()] = sref
 
-	def allServiceRefSet(self):
-		serviceRefSet = self.allBouquetServiceRefSet()
-		ChannelSelectionInstance = ChannelSelection.instance
-		if ChannelSelectionInstance:
-			lamedbServices = eServiceReference(ChannelSelectionInstance.service_types)
-			self._addBouquetServices(lamedbServices, serviceRefSet)
-		return serviceRefSet
-
-	def allBouquetServiceRefSet(self):
+	def _allBouquetTempServiceRefMap(self, tempServiceRefMap):
 		serviceHandler = eServiceCenter.getInstance()
 		ChannelSelectionInstance = ChannelSelection.instance
 		if ChannelSelectionInstance and ChannelSelectionInstance.mode == MODE_RADIO:
@@ -705,28 +779,43 @@ class EPGSearch(EPGSelection):
 			bqrootstr = rootbouquet_tv
 		rootbouquet = eServiceReference(bqrootstr)
 		bouquetlist = serviceHandler.list(rootbouquet)
-		serviceRefSet = set()
 		if bouquetlist is not None:
 			bouquet = bouquetlist.getNext()
 			while bouquet.valid():
 				if bouquet.flags & (eServiceReference.isDirectory | eServiceReference.isInvisible) == eServiceReference.isDirectory:
-					self._addBouquetServices(bouquet, serviceRefSet)
+					self._addBouquetTempServiceRefMap(bouquet, tempServiceRefMap)
 				bouquet = bouquetlist.getNext()
-		return serviceRefSet
 
-	def currentBouquetServiceRefSet(self):
-		serviceRefSet = set()
+	def allServiceRefMap(self):
+		tempServiceRefMap = defaultdict(dict)
+		self._allBouquetTempServiceRefMap(tempServiceRefMap)
+		ChannelSelectionInstance = ChannelSelection.instance
+		if ChannelSelectionInstance:
+			lamedbServices = eServiceReference(ChannelSelectionInstance.service_types)
+			self._addBouquetTempServiceRefMap(lamedbServices, tempServiceRefMap)
+		return self._processBouquetServiceRefMap(tempServiceRefMap)
+
+	def allBouquetServiceRefMap(self):
+		tempServiceRefMap = defaultdict(dict)
+		self._allBouquetTempServiceRefMap(tempServiceRefMap)
+		return self._processBouquetServiceRefMap(tempServiceRefMap)
+
+	def currentBouquetServiceRefMap(self):
+		tempServiceRefMap = defaultdict(dict)
 		ChannelSelectionInstance = ChannelSelection.instance
 		if ChannelSelectionInstance:
 			bouquet = ChannelSelectionInstance.getRoot()
-			self._addBouquetServices(bouquet, serviceRefSet)
-		return serviceRefSet
+			self._addBouquetTempServiceRefMap(bouquet, tempServiceRefMap)
+		return self._processBouquetServiceRefMap(tempServiceRefMap)
 
-	def currentServiceServiceRefSet(self):
+	def currentServiceServiceRefMap(self):
 		service = MoviePlayer.instance and MoviePlayer.instance.lastservice or NavigationInstance.instance.getCurrentlyPlayingServiceReference()
 		if not service or not service.valid:
 			return None
-		return { service.toString() }
+		serviceRefMap = defaultdict(set)
+		triple = tuple(service.getUnsignedData(i) for i in range(1, 4))
+		serviceRefMap[triple] = set((service.toString(), ))
+		return serviceRefMap
 
 	def _sourceFilter(self, serviceRefSet):
 		if not config.plugins.epgsearch.enableorbpos.value:
