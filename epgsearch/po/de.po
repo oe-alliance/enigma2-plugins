@@ -247,6 +247,9 @@ msgstr "%sDurchsuche EPG aus Verlauf..."
 msgid "%ssearch EPG"
 msgstr "%sSuche in EPG"
 
+msgid "Searching..."
+msgstr "Suche..."
+
 #~ msgid "Add \"Search\" Button to EPG"
 #~ msgstr "\"Suchen\" im Standard EPG hinzufügen"
 
