@@ -380,7 +380,7 @@ class IMDB(Screen):
 			if self.savingpath is not None:
 				# TODO: save Poster also as option for .html
 				list.extend((
-					(_("Save current Details as .html for offline using"), self.saveHtmlDetails),
+					(_("Save current Details as .html for offline use"), self.saveHtmlDetails),
 					(_("Save current Details as .txt"), self.saveTxtDetails),
 					(_("Save current Poster and Details as .txt"), self.savePosterTxtDetails),
 				))
@@ -419,7 +419,7 @@ class IMDB(Screen):
 					file(self.savingpath + ".txt",'w').write(getTXT)
 				else:
 					from Screens.MessageBox import MessageBox
-					self.session.open(MessageBox, (_('IMDb can not get Movie Information, to\n write .txt-file!')), MessageBox.TYPE_INFO, 10)
+					self.session.open(MessageBox, (_('IMDb can not get Movie Information to write to .txt file!')), MessageBox.TYPE_INFO, 10)
 		except Exception, e:
 			print('[IMDb] saveTxtDetails exception failure: ', str(e))
 
@@ -431,12 +431,12 @@ class IMDB(Screen):
 					file(self.savingpath + ".txt",'w').write(getTXT)
 				else:
 					from Screens.MessageBox import MessageBox
-					self.session.open(MessageBox, (_('IMDb can not get Movie Information, to\n write .jpg and .txt-file!')), MessageBox.TYPE_INFO, 10)
+					self.session.open(MessageBox, (_('IMDb can not get Movie Information to write to .jpg and .txt files!')), MessageBox.TYPE_INFO, 10)
 		except Exception, e:
 			print('[IMDb] savePosterTxtDetails exception failure: ', str(e))
 
 	def IMDBsave(self,string):
-		self["statusbar"].setText(_("IMDb Save-Download completed"))
+		self["statusbar"].setText(_("IMDb Save - Download completed"))
 		self.html2utf8(open("/tmp/imdbquery2.html", "r").read())
 		self.generalinfos = self.generalinfomask.search(self.inhtml)
 		self.IMDBparse()
@@ -605,7 +605,7 @@ class IMDB(Screen):
 				download.start().addCallback(self.IMDBquery).addErrback(self.http_failed)
 
 			else:
-				self["statusbar"].setText(_("Could't get Eventname"))
+				self["statusbar"].setText(_("Could't get event name"))
 
 	def html2utf8(self,in_html):
 		in_html = (re.subn(r'<(script).*?</\1>(?s)', '', in_html)[0])
@@ -671,7 +671,7 @@ class IMDB(Screen):
 					self.showMenu()
 				else:
 					self["detailslabel"].setText(_("No IMDb match."))
-					self["statusbar"].setText(_("No IMDb match.") + ' ' + self.eventName)
+					self["statusbar"].setText(_("No IMDb match:") + ' ' + self.eventName)
 			else:
 				splitpos = self.eventName.find('(')
 				if splitpos > 0 and self.eventName.endswith(')'):
@@ -871,7 +871,7 @@ class IMDbSetup(Screen, ConfigListScreen):
 	def createSetup(self):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Show in plugin browser"), config.plugins.imdb.showinplugins, _("Enable this to be able to access the IMDb from within the plugin browser.")))
-		self.list.append(getConfigListEntry(_("Words / phrases to ignore "), config.plugins.imdb.ignore_tags, _("This option allows you add words/phrases for IMDb to ignore when searching. please seperaate with a comma")))
+		self.list.append(getConfigListEntry(_("Words / phrases to ignore "), config.plugins.imdb.ignore_tags, _("This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas.")))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
