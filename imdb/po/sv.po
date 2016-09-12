@@ -32,7 +32,7 @@ msgstr "Roll: "
 msgid "Channel Selection"
 msgstr "Kanallista"
 
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "Kunde inte få händelsenamn"
 
 msgid "Details"
@@ -84,7 +84,7 @@ msgstr "IMDb förfrågan misslyckades!"
 msgid "Lookup"
 msgstr "Sök"
 
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr "Ingen IMDb matchning."
 
 msgid "No cast list found in the database."

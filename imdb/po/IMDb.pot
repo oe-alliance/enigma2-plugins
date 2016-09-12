@@ -38,7 +38,7 @@ msgid "Channel Selection"
 msgstr ""
 
 #: ../src/plugin.py:470
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr ""
 
 #: ../src/plugin.py:340 ../src/plugin.py:555
@@ -108,7 +108,7 @@ msgid "Lookup"
 msgstr ""
 
 #: ../src/plugin.py:529 ../src/plugin.py:530
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr ""
 
 #: ../src/plugin.py:604

@@ -23,7 +23,7 @@ msgstr ""
 msgid "IMDb Menu"
 msgstr "IMDb Menü"
 
-msgid "Save current Details as .html for offline using"
+msgid "Save current Details as .html for offline use"
 msgstr "aktuelle Details als .html speichern für lokalen Gebrauch"
 
 msgid "Save current Details as .txt"
@@ -59,7 +59,7 @@ msgstr "Darsteller: "
 msgid "Channel Selection"
 msgstr "Kanalliste"
 
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "Konnte Sendungstitel nicht feststellen"
 
 msgid "Details"
@@ -108,7 +108,7 @@ msgstr "Anfrage an IMDb fehlgeschlagen!"
 msgid "Lookup"
 msgstr "Suchen"
 
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr "Keine passenden Einträge gefunden."
 
 msgid "No cast list found in the database."
@@ -170,5 +170,5 @@ msgstr "Diese Option erlaubt es Ihnen, IMDb in den Erweiterungen anzuzeigen."
 msgid "Words / phrases to ignore "
 msgstr "Wörter / Sätze ignorieren "
 
-msgid "This option allows you add words/phrases for IMDb to ignore when searching. please seperaate with a comma"
+msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
 msgstr "Diese Option erlaubt es Ihnen, Wörter/Sätze bei der Suche mit IMDb zu ignorieren. Bitte die Wörter mit einem Komma trennen."

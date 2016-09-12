@@ -29,7 +29,7 @@ msgstr "Cast: "
 msgid "Channel Selection"
 msgstr "Sélection chaîne"
 
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "Impossible d'obtenir nom événement"
 
 msgid "Details"
@@ -82,7 +82,7 @@ msgstr "IMDb requête échoué!"
 msgid "Lookup"
 msgstr "Chercher"
 
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr "Aucune IMDb correspondante."
 
 msgid "No cast list found in the database."
