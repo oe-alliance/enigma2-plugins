@@ -42,7 +42,7 @@ msgstr "Kanaallijst"
 msgid "Content:"
 msgstr "Inhoud:"
 
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "Kon de naam van het event niet bepalen"
 
 msgid "Details"
@@ -91,7 +91,7 @@ msgstr "IMDb Plugin"
 msgid "IMDb Re-Download completed"
 msgstr "IMDB-Download nogmaals uitgevoerd"
 
-msgid "IMDb Save-Download completed"
+msgid "IMDb Save - Download completed"
 msgstr "IMDb opslaan gereed"
 
 msgid "IMDb Setup"
@@ -117,7 +117,7 @@ msgstr "Zoeken in de IMDb mislukt!"
 msgid "Lookup"
 msgstr "Zoeken"
 
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr "Geen passende titel in de IMDB gevonden."
 
 msgid "No cast list found in the database."
@@ -155,7 +155,7 @@ msgstr "Releasedatum:"
 msgid "Runtime:"
 msgstr "Duur:"
 
-msgid "Save current Details as .html for offline using"
+msgid "Save current Details as .html for offline use"
 msgstr "Sla huidige details op als .html voor offline gebruik."
 
 msgid "Save current Details as .txt"
@@ -179,7 +179,7 @@ msgstr "Toon in plugin browser"
 msgid "The Internet Movie Database"
 msgstr "De Internet Movie Database"
 
-msgid "This option allows you add words/phrases for IMDb to ignore when searching. please seperaate with a comma"
+msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
 msgstr "Deze optie maakt het mogelijk woorden/zinnen uit te sluiten van de zoekslag. Gebruik een komma als scheidingsteken."
 
 msgid "Title Menu"

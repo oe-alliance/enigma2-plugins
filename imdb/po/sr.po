@@ -33,7 +33,7 @@ msgstr "Uloge: "
 msgid "Channel Selection"
 msgstr "Izbor kanala"
 
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "Nema naziva dešavanja"
 
 msgid "Details"
@@ -86,7 +86,7 @@ msgstr "IMDb upit neuspešan!"
 msgid "Lookup"
 msgstr "Pregledanje"
 
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr "Nema IMDb pogodaka."
 
 msgid "No cast list found in the database."

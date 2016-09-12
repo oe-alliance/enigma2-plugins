@@ -27,7 +27,7 @@ msgstr "Состав: "
 msgid "Channel Selection"
 msgstr "Выбор канала"
 
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "Не удалось получить описание события"
 
 msgid "Details"
@@ -80,7 +80,7 @@ msgstr "Запрос в IMDb не удался!"
 msgid "Lookup"
 msgstr "Искать"
 
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr "Описание не найдено в IMDb!"
 
 msgid "No cast list found in the database."

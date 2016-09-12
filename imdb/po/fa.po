@@ -33,7 +33,7 @@ msgstr "پخش کردن :"
 msgid "Channel Selection"
 msgstr "انتخاب کانال"
 
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "تهیه کردن نام رویداد ها ممکن نیست"
 
 msgid "Details"
@@ -85,7 +85,7 @@ msgstr "ناموفق گردید IMDb پرس و جوی"
 msgid "Lookup"
 msgstr "مراجعه"
 
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr "IMDb سازگار نیست"
 
 msgid "No cast list found in the database."
