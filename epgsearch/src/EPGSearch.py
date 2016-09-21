@@ -67,7 +67,7 @@ class EPGSearchList(EPGList):
 
 		if PartnerBoxIconsEnabled:
 			# Partnerbox Clock Icons
-			self.partnerbox_clocks = [ LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, 'Extensions/EPGSearchicons/epgclock_add.png')),
+			self.partnerbox_clocks = [ LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, 'Extensions/EPGSearch/icons/epgclock_add.png')),
 					LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, 'Extensions/EPGSearch/icons/epgclock_pre.png')),
 					LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, 'Extensions/EPGSearch/icons/epgclock.png')),
 					LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, 'Extensions/EPGSearch/icons/epgclock_prepost.png')),
