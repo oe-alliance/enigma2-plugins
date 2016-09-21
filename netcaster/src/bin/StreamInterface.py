@@ -7,12 +7,16 @@ def getPage(url, contextFactory=None, *args, **kwargs):
 	if hasattr(client, '_parse'):
 		scheme, host, port, path = _parse(url)
 	else:
-			from twisted.web.client import _URI
-			uri = _URI.fromBytes(url)
-			scheme = uri.scheme
-			host = uri.host
-			port = uri.port
-			path = uri.path
+		# _URI class renamed to URI in 15.0.0
+		try:
+			from twisted.web.client import _URI as URI
+		except ImportError:
+			from twisted.web.client import URI
+		uri = URI.fromBytes(url)
+		scheme = uri.scheme
+		host = uri.host
+		port = uri.port
+		path = uri.path
 	factory = LimitedHTTPClientFactory(url, *args, **kwargs)
 	if scheme == 'https':
 		from twisted.internet import ssl 
