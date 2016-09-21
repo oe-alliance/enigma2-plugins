@@ -224,9 +224,9 @@ def sendPartnerBoxWebCommand(url, contextFactory=None, timeout=60, username = "r
 		scheme, host, port, path = _parse(url)
 	else:
 		# _URI class renamed to URI in 15.0.0
- 		try:
- 			from twisted.web.client import _URI as URI
- 		except ImportError:
+		try:
+			from twisted.web.client import _URI as URI
+		except ImportError:
 			from twisted.web.client import URI
 		uri = URI.fromBytes(url)
 		scheme = uri.scheme
