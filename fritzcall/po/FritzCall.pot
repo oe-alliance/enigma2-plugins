@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-17 15:08+0100\n"
+"POT-Creation-Date: 2016-06-05 15:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,6 +127,9 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
+msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgstr ""
+
 msgid "DECT inactive"
 msgstr ""
 
@@ -135,9 +138,6 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Deactivate WLAN guest access"
-msgstr ""
-
-msgid "Debug"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -350,6 +350,9 @@ msgstr ""
 msgid "Last 10 calls:\n"
 msgstr ""
 
+msgid "Log level"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Lookup"
 msgstr ""
@@ -494,7 +497,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-msgid "Reverse Lookup Caller ID (select country below)"
+msgid "Reverse Lookup Caller ID"
 msgstr ""
 
 msgid "Reverse searching..."
@@ -562,6 +565,12 @@ msgid "Switzerland"
 msgstr ""
 
 msgid "The Netherlands"
+msgstr ""
+
+#, python-format
+msgid ""
+"There might be a problem with your FritzCall %spassword.\n"
+"Check in the configuration."
 msgstr ""
 
 msgid "Timeout for Call Notifications (seconds)"
@@ -661,6 +670,9 @@ msgstr ""
 msgid "finishing"
 msgstr ""
 
+msgid "guest "
+msgstr ""
+
 msgid "home"
 msgstr ""
 
@@ -695,6 +707,9 @@ msgid "not encrypted"
 msgstr ""
 
 msgid "not yet implemented"
+msgstr ""
+
+msgid "nothing"
 msgstr ""
 
 msgid "number suppressed"

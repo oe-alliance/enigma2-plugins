@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 '''
-$Id: nrzuname.py 1233 2015-09-19 19:12:22Z michael $
+$Id: nrzuname.py 1299 2016-05-10 16:54:30Z michael $
 $Author: michael $
-$Revision: 1233 $
-$Date: 2015-09-19 21:12:22 +0200 (Sat, 19 Sep 2015) $
+$Revision: 1299 $
+$Date: 2016-05-10 18:54:30 +0200 (Tue, 10 May 2016) $
 '''
 
 # W0603 (global statement); W0141 (map, filter, etc.)
@@ -14,11 +14,11 @@ import re, sys, os
 from xml.dom.minidom import parse
 from twisted.web.client import getPage #@UnresolvedImport
 from twisted.internet import reactor #@UnresolvedImport
+from Components.config import config
 
 try:
-	from . import debug #@UnresolvedImport # pylint: disable=W0613,F0401
 	import logging
-	logger = logging.getLogger("[nrzuname]")
+	logger = logging.getLogger("FritzCall.nrzuname")
 	debug = logger.debug
 	info = logger.info
 	warn = logger.warn
@@ -141,15 +141,9 @@ countries = { }
 reverselookupMtime = 0
 
 class ReverseLookupAndNotifier:
-	logger = logging.getLogger("[ReverseLookupAndNotifier]")
-	debug = logger.debug
-	info = logger.info
-	warn = logger.warn
-	error = logger.error
-	exception = logger.exception
 
 	def __init__(self, number, outputFunction=out, charset="cp1252", countrycode = "0049"):
-		self.debug("reverse Lookup for %s!" %number)
+		debug("reverse Lookup for %s!" %number)
 		self.number = number
 		self.outputFunction = outputFunction
 		self.caller = ""
@@ -159,14 +153,14 @@ class ReverseLookupAndNotifier:
 # sorry does not work at all
 #		if not charset:
 #			charset = sys.getdefaultencoding()
-#			self.debug("set charset from system: %s!" %charset)
+#			debug("set charset from system: %s!" %charset)
 #===============================================================================
 		self.charset = charset
 
 		global reverselookupMtime
 		reverselookupMtimeAct = os.stat(reverseLookupFileName)[8]
 		if not countries or reverselookupMtimeAct > reverselookupMtime:
-			self.debug("(Re-)Reading %s\n" %reverseLookupFileName)
+			debug("(Re-)Reading %s\n" %reverseLookupFileName)
 			reverselookupMtime = reverselookupMtimeAct
 			dom = parse(reverseLookupFileName)
 			for top in dom.getElementsByTagName("reverselookup"):
@@ -188,7 +182,7 @@ class ReverseLookupAndNotifier:
 			return
 
 		if self.number[:2] == "00":
-			self.debug("number %s, %s" %(self.number, self.number[:4]))
+			debug("number %s, %s" %(self.number, self.number[:4]))
 			if countries.has_key(self.number[:3]):	 #	e.g. USA
 				self.countrycode = self.number[:3]
 			elif countries.has_key(self.number[:4]):
@@ -196,18 +190,18 @@ class ReverseLookupAndNotifier:
 			elif countries.has_key(self.number[:5]):
 				self.countrycode = self.number[:5]
 			else:
-				self.debug("Country cannot be reverse handled")
+				debug("Country cannot be reverse handled")
 				# self.caller = _("UNKNOWN")
 				self.notifyAndReset()
 				return
 
-		self.debug("Found website for reverse lookup")
+		debug("Found website for reverse lookup")
 		self.websites = countries[self.countrycode]
 		self.nextWebsiteNo = 1
 		self.handleWebsite(self.websites[0])
 
 	def handleWebsite(self, website):
-		self.info(website.getAttribute("name"))
+		info(website.getAttribute("name"))
 		if self.number[:2] == "00":
 			number = website.getAttribute("prefix") + self.number.replace(self.countrycode,"")
 		else:
@@ -215,7 +209,7 @@ class ReverseLookupAndNotifier:
 
 		url = website.getAttribute("url")
 		if re.search('$AREACODE', url) or re.search('$PFXAREACODE', url):
-			self.error("(PFX)ARECODE cannot be handled")
+			error("(PFX)ARECODE cannot be handled")
 			# self.caller = _("UNKNOWN")
 			self.notifyAndReset()
 			return
@@ -233,11 +227,11 @@ class ReverseLookupAndNotifier:
 		elif re.search('\\$NUMBER', url): 
 			url = url.replace("$NUMBER","%s") %number
 		else:
-			self.error("cannot handle websites with no $NUMBER in url")
+			error("cannot handle websites with no $NUMBER in url")
 			# self.caller = _("UNKNOWN")
 			self.notifyAndReset()
 			return
-		self.debug("Url to query: " + url)
+		info("Url to query: " + url)
 		url = url.encode("UTF-8", "replace")
 		self.currentWebsite = website
 		getPage(url,
@@ -254,16 +248,16 @@ class ReverseLookupAndNotifier:
 			# try: # this works under Windows
 			#	item = item.encode('iso-8859-1')
 			# except UnicodeEncodeError:
-			#	self.debug("cleanName: encoding problem with iso8859")
+			#	debug("cleanName: encoding problem with iso8859")
 			#	try: # this works under Enigma2
 			#		item = item.encode('utf-8')
 			#	except UnicodeEncodeError:
-			#		self.debug("encoding problem with utf-8")
+			#		debug("encoding problem with utf-8")
 			#		try: # fall back
 			#			item = item.encode(self.charset)
 			#		except UnicodeEncodeError:
-			#			# self.debug("traceback.format_exc())
-			#			self.debug("encoding problem")
+			#			# debug("traceback.format_exc())
+			#			debug("encoding problem")
 			#===================================================================
 
 			newitem = item.replace("  ", " ")
@@ -272,7 +266,7 @@ class ReverseLookupAndNotifier:
 				newitem = item.replace("  ", " ")
 			return newitem.strip()
 	
-		self.debug("")
+		debug("")
 
 		#=======================================================================
 		# userDesktop = os.path.join(os.environ['USERPROFILE'], "Desktop")
@@ -283,10 +277,10 @@ class ReverseLookupAndNotifier:
 
 		found = re.match('.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />', page, re.S)
 		if found:
-			self.debug("Charset: " + found.group(1))
+			debug("Charset: " + found.group(1))
 			page = page.replace("\xa0"," ").decode(found.group(1), "replace")
 		else:
-			self.debug("Default Charset: iso-8859-1")
+			debug("Default Charset: iso-8859-1")
 			page = page.replace("\xa0"," ").decode("ISO-8859-1", "replace")
 
 		for entry in self.currentWebsite.getElementsByTagName("entry"):
@@ -296,7 +290,7 @@ class ReverseLookupAndNotifier:
 			pat = self.getPattern(entry, "number")
 			if pat:
 				pat = ".*?" + pat
-				self.debug("look for number with '''%s'''" %( pat ))
+				debug("look for number with '''%s'''" %( pat ))
 				found = re.match(pat, page, re.S|re.M)
 				if found:
 					if self.number[:2] == '00':
@@ -304,7 +298,7 @@ class ReverseLookupAndNotifier:
 					else:
 						number = self.number
 					if number != normalizePhoneNumber(found.group(1)):
-						self.debug("got unequal number '''%s''' for '''%s'''" %(found.group(1), self.number))
+						debug("got unequal number '''%s''' for '''%s'''" %(found.group(1), self.number))
 						continue
 			
 			# look for <firstname> and <lastname> match, if not there look for <name>, if not there break
@@ -317,72 +311,72 @@ class ReverseLookupAndNotifier:
 			pat = self.getPattern(entry, "lastname")
 			if pat:
 				pat = ".*?" + pat
-				self.debug("look for '''%s''' with '''%s'''" %( "lastname", pat ))
+				debug("look for '''%s''' with '''%s'''" %( "lastname", pat ))
 				found = re.match(pat, page, re.S|re.M)
 				if found:
-					self.debug("found for '''%s''': '''%s'''" %( "lastname", found.group(1)))
+					debug("found for '''%s''': '''%s'''" %( "lastname", found.group(1)))
 					name = cleanName(found.group(1))
 
 					pat = self.getPattern(entry, "firstname")
 					if pat:
 						pat = ".*?" + pat
-						self.debug("look for '''%s''' with '''%s'''" %( "firstname", pat ))
+						debug("look for '''%s''' with '''%s'''" %( "firstname", pat ))
 						found = re.match(pat, page, re.S|re.M)
 						if found:
-							self.debug("found for '''%s''': '''%s'''" %( "firstname", found.group(1)))
+							debug("found for '''%s''': '''%s'''" %( "firstname", found.group(1)))
 						firstname = cleanName(found.group(1)).strip()
 
 			else:
 				pat = ".*?" + self.getPattern(entry, "name")
-				self.debug("look for '''%s''' with '''%s'''" %( "name", pat ))
+				debug("look for '''%s''' with '''%s'''" %( "name", pat ))
 				found = re.match(pat, page, re.S|re.M)
 				if found:
-					self.debug("found for '''%s''': '''%s'''" %( "name", found.group(1)))
+					debug("found for '''%s''': '''%s'''" %( "name", found.group(1)))
 					item = cleanName(found.group(1))
-					# self.debug("name: " + item)
+					# debug("name: " + item)
 					name = item.strip()
 					firstNameFirst = entry.getElementsByTagName('name')[0].getAttribute('swapFirstAndLastName')
-					# self.debug("swapFirstAndLastName: " + firstNameFirst)
+					# debug("swapFirstAndLastName: " + firstNameFirst)
 					if firstNameFirst == 'true': # that means, the name is of the form "firstname lastname"
 						found = re.match('(.*?)\s+(.*)', name)
 						if found:
 							firstname = found.group(1)
 							name = found.group(2)
 				else:
-					self.info("no name found, skipping")
+					info("no name found, skipping")
 					continue
 
 			if not name:
 				continue
 
 			pat = ".*?" + self.getPattern(entry, "city")
-			self.debug("look for '''%s''' with '''%s'''" %( "city", pat ))
+			debug("look for '''%s''' with '''%s'''" %( "city", pat ))
 			found = re.match(pat, page, re.S|re.M)
 			if found:
-				self.debug("found for '''%s''': '''%s'''" %( "city", found.group(1)))
+				debug("found for '''%s''': '''%s'''" %( "city", found.group(1)))
 				item = cleanName(found.group(1))
-				self.info("city: " + item)
+				info("city: " + item)
 				city = item.strip()
 
 			if not city:
 				continue
 
 			pat = ".*?" + self.getPattern(entry, "zipcode")
-			self.debug("look for '''%s''' with '''%s'''" %( "zipcode", pat ))
+			debug("look for '''%s''' with '''%s'''" %( "zipcode", pat ))
 			found = re.match(pat, page, re.S|re.M)
 			if found and found.group(1):
-				self.debug("found for '''%s''': '''%s'''" %( "zipcode", found.group(1)))
+				debug("found for '''%s''': '''%s'''" %( "zipcode", found.group(1)))
 				item = cleanName(found.group(1))
-				self.info("zipcode: " + item)
+				info("zipcode: " + item)
 				zipcode = item.strip()
 
 			pat = ".*?" + self.getPattern(entry, "street")
-			self.debug("look for '''%s''' with '''%s'''" %( "street", pat ))
+			debug("look for '''%s''' with '''%s'''" %( "street", pat ))
 			found = re.match(pat, page, re.S|re.M)
 			if found and found.group(1):
-				self.debug("found for '''%s''': '''%s'''" %( "street", found.group(1)))
+				debug("found for '''%s''': '''%s'''" %( "street", found.group(1)))
 				item = cleanName(found.group(1))
-				self.info("street: " + item)
+				info("street: " + item)
 				street = item.strip()
 				streetno = ''
 				found = re.match("^(.+) ([-\d]+)$", street, re.S)
@@ -398,7 +392,7 @@ class ReverseLookupAndNotifier:
 				#===============================================================
 
 			self.caller = "NA: %s;VN: %s;STR: %s;HNR: %s;PLZ: %s;ORT: %s" % ( name, firstname, street, streetno, zipcode, city )
-			self.info("Reverse lookup succeeded:\nName: %s" %(self.caller))
+			info("Reverse lookup succeeded:\nName: %s" %(self.caller))
 
 			self.notifyAndReset()
 			return True
@@ -406,15 +400,15 @@ class ReverseLookupAndNotifier:
 			self._gotError("Nothing found at %s" %self.currentWebsite.getAttribute("name"))
 			return False
 			
-	def _gotError(self, error = ""):
-		self.error("Error: %s" %error)
+	def _gotError(self, errorMsg = ""):
+		error("Error: %s" %errorMsg)
 		if self.nextWebsiteNo >= len(self.websites):
-			self.debug("I give up")
+			debug("I give up")
 			# self.caller = _("UNKNOWN")
 			self.notifyAndReset()
 			return
 		else:
-			self.debug("try next website")
+			debug("try next website")
 			self.nextWebsiteNo = self.nextWebsiteNo+1
 			self.handleWebsite(self.websites[self.nextWebsiteNo-1])
 
@@ -428,17 +422,17 @@ class ReverseLookupAndNotifier:
 			return pat1[0].childNodes[0].data
 
 	def notifyAndReset(self):
-		self.info("Number: " + self.number + "; Caller: " + self.caller)
-		# self.debug("1: " + repr(self.caller))
+		info("Number: " + self.number + "; Caller: " + self.caller)
+		# debug("1: " + repr(self.caller))
 		if self.caller:
 			try:
-				self.debug("2: " + repr(self.caller))
+				debug("2: " + repr(self.caller))
 				self.caller = self.caller.encode(self.charset, 'replace')
-				self.debug("3: " + repr(self.caller))
+				debug("3: " + repr(self.caller))
 			except UnicodeDecodeError:
 				exception("cannot encode?!?!")
 			# self.caller = unicode(self.caller)
-			# self.debug("4: " + repr(self.caller))
+			# debug("4: " + repr(self.caller))
 			self.outputFunction(self.number, self.caller)
 		else:
 			self.outputFunction(self.number, "")

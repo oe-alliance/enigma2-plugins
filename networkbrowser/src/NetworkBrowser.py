@@ -29,6 +29,11 @@ from AutoMount import iAutoMount
 from MountEdit import AutoMountEdit
 from UserDialog import UserDialog
 
+def formatIp(ip):
+	if ip is None or len(ip) != 4:
+		return "0.0.0.0"
+	return "%d.%d.%d.%d" % (ip[0], ip[1], ip[2], ip[3])
+
 def write_cache(cache_file, cache_data):
 	#Does a cPickle dump
 	if not os_path.isdir( os_path.dirname(cache_file) ):
@@ -246,7 +251,9 @@ class NetworkBrowser(Screen):
 				sharelist = []
 				self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
 				if len(self.IP):
-					strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
+					self.netmask = iNetwork.getAdapterAttribute(self.iface, "netmask")
+					strCIDR = str(sum([bin(int(x)).count('1') for x in formatIp(iNetwork.getAdapterAttribute(self.iface, "netmask")).split('.')]))
+					strIP = str(self.IP[0] & self.netmask[0]) + "." + str(self.IP[1] & self.netmask[1]) + "." + str(self.IP[2] & self.netmask[2]) + "." + str(self.IP[3] & self.netmask[3]) + "/" + strCIDR
 					self.Console.ePopen("nmap -oX - " + strIP + ' -sP', self.Stage1SettingsComplete)
 			else:
 				write_cache(self.cache_file, self.networklist)
@@ -265,7 +272,9 @@ class NetworkBrowser(Screen):
 		sharelist = []
 		self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
 		if len(self.IP):
-			strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
+			self.netmask = iNetwork.getAdapterAttribute(self.iface, "netmask")
+			strCIDR = str(sum([bin(int(x)).count('1') for x in formatIp(iNetwork.getAdapterAttribute(self.iface, "netmask")).split('.')]))
+			strIP = str(self.IP[0] & self.netmask[0]) + "." + str(self.IP[1] & self.netmask[1]) + "." + str(self.IP[2] & self.netmask[2]) + "." + str(self.IP[3] & self.netmask[3]) + "/" + strCIDR
 			nwlist.append(netscan.netzInfo(strIP))
 		tmplist = nwlist[0]
 		return tmplist

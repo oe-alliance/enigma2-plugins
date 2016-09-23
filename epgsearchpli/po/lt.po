@@ -1,0 +1,335 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: EPGSearch\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-23 08:58+0300\n"
+"PO-Revision-Date: 2016-06-23 11:28+0300\n"
+"Last-Translator: \n"
+"Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.8\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: EPGSearch.py:326
+#, python-format
+msgid " (%d min)"
+msgstr " (%d min.)"
+
+#: EPGSearch.py:332
+#, python-format
+msgid " (%s%d min)"
+msgstr " (%s%d min.)"
+
+#: EPGSearchSetup.py:46
+msgid "Add \"Search event in EPG\" to channel menu"
+msgstr "Pridėti \"ieškoti įvykio EPG\" į kanalo meniu"
+
+#: EPGSearchSetup.py:45
+msgid "Add \"Search event in EPG\" to event menu"
+msgstr "Pridėti \"ieškoti įvykio EPG\" į įvykio meniu"
+
+#: EPGSearchSetup.py:40
+msgid "Add \"Search\" Button to EPG"
+msgstr "Į EPG pridėti 'Paieška' mygtuką"
+
+#: EPGSearch.py:568
+msgid "Add timer"
+msgstr "Įtraukti laikmatį"
+
+#: EPGSearchSetup.py:46
+msgid ""
+"Adds \"Search event in EPG\" item into the channel selection context menu "
+"(needs restart GUI)"
+msgstr ""
+"Pridės \"ieškoti įvykio EPG\" į kanalo pasirinkimo kontekstinį meniu "
+"(grafinę aplinką reikės paleisti iš naujo)"
+
+#: EPGSearchSetup.py:45
+msgid ""
+"Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
+msgstr ""
+"Pridės \"ieškoti įvykio EPG\" į įvykio meniu (grafinę aplinką reikės "
+"paleisti iš naujo)"
+
+#: EPGSearch.py:1057 EPGSearchSetup.py:69
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#: EPGSearch.py:1095
+msgid "Channel Selection"
+msgstr "Kanalo pasirinkimas"
+
+#: plugin.py:54 EPGSearch.py:599 EPGSearch.py:709
+msgid "Choice list"
+msgstr "Pasirinkimų sąrašas"
+
+#: plugin.py:46
+msgid "Choice list EPGSearch"
+msgstr "EPG paieškos pasirinkimų sąrašas"
+
+#: EPGSearch.py:721
+msgid "Choice list RED Button"
+msgstr "Pasirinkimų sąrašas 'RAUDONU' mygtuku"
+
+#: EPGSearchSetup.py:43
+msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
+msgstr "Koduotės pasirinkimas. EPG paieškai kirilica - UTF-8."
+
+#: EPGSearch.py:802
+msgid "Clear history"
+msgstr "Išvalyti istoriją"
+
+#: EPGSearch.py:850
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Nepavyko perskaityti autolaikmačio laikmačių sąrašo: %s"
+
+#: EPGSearchSetup.py:49
+msgid "Display name service as in bouquets"
+msgstr "Kanalų pavadinimus rodyti, kaip bukietuose"
+
+#: EPGSearch.py:620
+msgid "EPG Search"
+msgstr "EPG paieška"
+
+#: plugin.py:131
+msgid "EPGSearch"
+msgstr "EPG paieška"
+
+#: EPGSearchSetup.py:33 EPGSearchSetup.py:87
+msgid "EPGSearch Setup"
+msgstr "EPG paieškos sąranka"
+
+#: EPGSearchSetup.py:43
+msgid "Encoding Search to EPG"
+msgstr "EPG paieškos koduotė"
+
+#: EPGSearch.py:775
+msgid "Enter text to search for"
+msgstr "Įrašykite ieškomą tekstą"
+
+#: EPGSearch.py:794
+msgid "Export selected as AutoTimer"
+msgstr "Eksportuoti pasirinktą, kaip autolaikmatį"
+
+#: EPGSearch.py:553
+msgid "History"
+msgstr "Istorija"
+
+#: EPGSearchSetup.py:39
+msgid ""
+"How many entries to keep in the search history at most. 0 disables history "
+"entirely!"
+msgstr ""
+"Kokį didžiausią skaičių įrašų saugoti paieškos istorijoje. '0' - uždrausti "
+"istoriją!"
+
+#: EPGSearchSetup.py:49
+msgid ""
+"If 'Search only bouquets' is enabled, show service name as in bouquets for "
+"renamed services."
+msgstr ""
+"Įjungus 'Ieškoti tik bukietuose', pervadinti kanalai rodomi pavadinimais, "
+"kaip bukietuose."
+
+#: EPGSearchSetup.py:48
+msgid ""
+"If this setting is enabled, searching EPG in only services in user bouquets."
+msgstr ""
+"Jei šis parametras įjungtas, EPG ieškoma tik kanalams, esantiems bukietuose."
+
+#: EPGSearchSetup.py:40
+msgid ""
+"If this setting is enabled, the plugin adds a \"Search\" Button to the "
+"regular EPG."
+msgstr ""
+"Jei šis parametras įjungtas, įskiepis prideda 'Paieška' mygtuką į įprastą "
+"EPG."
+
+#: EPGSearchSetup.py:42
+msgid "If this setting is enabled, the plugin adds picons."
+msgstr "Jei šis parametras įjungtas, įskiepis įkels piktogramas."
+
+#: EPGSearch.py:792
+msgid "Import from AutoTimer"
+msgstr "Importuoti iš autolaikmačio"
+
+#: EPGSearch.py:781
+msgid "Import from EPG"
+msgstr "Importuoti iš EPG"
+
+#: EPGSearch.py:780
+msgid "Import from Timer"
+msgstr "Importuoti iš laikmačio"
+
+#: EPGSearchSetup.py:39
+msgid "Length of History"
+msgstr "Istorijos dydis"
+
+#: EPGSearch.py:928
+msgid "List of history is cleared !"
+msgstr "Istorijos sąrašas išvalytas!"
+
+#: EPGSearch.py:603 EPGSearch.py:717
+msgid "Lookup in TMBD"
+msgstr "Paieška TMBD"
+
+#: EPGSearch.py:552
+msgid "New Search"
+msgstr "Nauja paieška"
+
+#: EPGSearch.py:946
+msgid "No history !"
+msgstr "Be istorijos!"
+
+#: EPGSearch.py:1058 EPGSearchSetup.py:68
+msgid "OK"
+msgstr "Gerai"
+
+#: EPGSearch.py:799
+msgid "Open selected in IMDb"
+msgstr "Atverti pasirinktą IMDb"
+
+#: EPGSearch.py:718
+msgid "Partnerbox Entries"
+msgstr "Kaimyninio aparato įrašai"
+
+#: EPGSearch.py:793
+msgid "Save search as AutoTimer"
+msgstr "Išsaugoti paiešką, kaip autolaikmatį"
+
+#: plugin.py:42 plugin.py:52
+msgid "Search"
+msgstr "Paieška"
+
+#: plugin.py:132
+msgid "Search EPG by title event"
+msgstr "EPG paieška pagal įvykio pavadinimą"
+
+#: plugin.py:152 plugin.py:154
+msgid "Search event in EPG"
+msgstr "Ieškoti EPG įvykio"
+
+#: EPGSearch.py:797
+msgid "Search for TMDb info"
+msgstr "Ieškoti TMDB informacijos"
+
+#: EPGSearchSetup.py:48
+msgid "Search only bouquets"
+msgstr "Ieškoti tik bukietuose"
+
+#: EPGSearchSetup.py:47
+msgid "Search strictness"
+msgstr "Paieškos tikslumas"
+
+#: EPGSearchSetup.py:44
+msgid "Search type"
+msgstr "Paieškos tipas"
+
+#: EPGSearchSetup.py:50
+msgid "Search type for filter"
+msgstr "Paieškos tipo filtras"
+
+#: EPGSearch.py:1072
+msgid "Select a timer to search"
+msgstr "Pasirinkite laikmatį paieškai"
+
+#: plugin.py:45 EPGSearch.py:720
+msgid "Select action:"
+msgstr "Pasirinkite veiksmą:"
+
+#: plugin.py:43
+msgid "Select channel"
+msgstr "Pasirinkite kanalą"
+
+#: EPGSearch.py:861 EPGSearch.py:940
+msgid "Select text to search for"
+msgstr "Pasirinkite ieškomą tekstą"
+
+#: EPGSearchSetup.py:50
+msgid ""
+"Select type for filter search. Press button P +/- for show/hide filter in "
+"description after search."
+msgstr ""
+"Pasirinkite paieškos tipo filtrą. Spauskite 'P +/-', kad atverti/užverti "
+"filtrą aprašyme po paieškos."
+
+#: EPGSearchSetup.py:44
+msgid ""
+"Select type for search, \"partial match\" for the most extensive search."
+msgstr ""
+"Pasirinkite paieškos tipą 'dalinis atitikimas', kad labiausiai išplėsti "
+"paiešką."
+
+#: EPGSearchSetup.py:41
+msgid "Select type: 'Search and Select channel' or 'Search'."
+msgstr "Pasirinkite tipą: 'Ieškoti ir pasirinkti kanalą', arba 'Ieškoti'."
+
+#: EPGSearchSetup.py:47
+msgid "Select whether or not you want to enforce case correctness."
+msgstr "Pasirinkite, norėsite, ar ne laikytis raidžių tikslumo."
+
+#: EPGSearch.py:804
+msgid "Setup"
+msgstr "Sąranka"
+
+#: EPGSearch.py:803
+msgid "Timers list"
+msgstr "Laikmačių sąrašas"
+
+#: EPGSearchSetup.py:41
+msgid "Type blue Button"
+msgstr "Spauskite 'MĖLYNĄ' mygtuką."
+
+#: EPGSearchSetup.py:42
+msgid "Use Picons"
+msgstr "Naudoti piktogramas"
+
+#: EPGSearch.py:789
+msgid "Zap to selected service"
+msgstr "Perjungti į pasirinktą kanalą"
+
+#: __init__.py:36
+msgid "case-insensitive search"
+msgstr "paieška, neatsižvelgiant į DIDŽIĄSIAS-mažąsias raides"
+
+#: __init__.py:36
+msgid "case-sensitive search"
+msgstr "paieška, atsižvelgiant į DIDŽIĄSIAS-mažąsias raides"
+
+#: __init__.py:29
+msgid "choice (Search and standard)"
+msgstr "pasirinkimas (paieška ir standartas)"
+
+#: __init__.py:35 __init__.py:37
+msgid "exact match"
+msgstr "tikslus atitikimas"
+
+#: __init__.py:29
+msgid "only Search"
+msgstr "tik paieška"
+
+#: __init__.py:35 __init__.py:37
+msgid "partial match"
+msgstr "dalinis atitikimas"
+
+#: plugin.py:145
+msgid "search EPG"
+msgstr "ieškoti EPG"
+
+#: plugin.py:139
+msgid "search EPG..."
+msgstr "ieškoti EPG..."
+
+#: __init__.py:37
+msgid "title starts with"
+msgstr "pavadinimas prasideda"

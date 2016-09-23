@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-22 17:57+0200\n"
+"POT-Creation-Date: 2016-06-01 17:50+0200\n"
 "PO-Revision-Date: 2015-04-14 23:22+0200\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -136,6 +136,9 @@ msgstr "Impossibile leggere Rubrica della FRITZ!Box: versione errata?"
 msgid "Country"
 msgstr "Nazione"
 
+msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgstr ""
+
 msgid "DECT inactive"
 msgstr "DECT non attivo"
 
@@ -145,9 +148,6 @@ msgstr "Telefoni DECT registrati"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Deactivate WLAN guest access"
 msgstr "Disattivare accesso Guest WLAN"
-
-msgid "Debug"
-msgstr "Debug"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
@@ -380,6 +380,9 @@ msgstr "Italia"
 msgid "Last 10 calls:\n"
 msgstr "Ultime 10 chiamate:\n"
 
+msgid "Log level"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Lookup"
 msgstr "Lookup"
@@ -530,8 +533,8 @@ msgstr "Intervallo aggiornamento rubriche (ore)"
 msgid "Reset"
 msgstr "Reset"
 
-msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Identificativo chiamante (selezionare il Paese!)"
+msgid "Reverse Lookup Caller ID"
+msgstr ""
 
 msgid "Reverse searching..."
 msgstr "Ricerca identificativo chiamante..."
@@ -599,6 +602,12 @@ msgstr "Svizzera"
 
 msgid "The Netherlands"
 msgstr "Olanda"
+
+#, python-format
+msgid ""
+"There might be a problem with your FritzCall %spassword.\n"
+"Check in the configuration."
+msgstr ""
 
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Ritardo notifica chiamate (secondi)"
@@ -703,6 +712,9 @@ msgstr "codificato"
 msgid "finishing"
 msgstr "Quasi terminato..."
 
+msgid "guest "
+msgstr ""
+
 msgid "home"
 msgstr "Casa"
 
@@ -739,6 +751,9 @@ msgstr "non codificato"
 msgid "not yet implemented"
 msgstr "Funzione non ancora implementata"
 
+msgid "nothing"
+msgstr ""
+
 msgid "number suppressed"
 msgstr "numero mascherato"
 
@@ -770,3 +785,9 @@ msgstr "Ufficio"
 
 msgid "wrong user or password?"
 msgstr "Utente o password errati?"
+
+#~ msgid "Debug"
+#~ msgstr "Debug"
+
+#~ msgid "Reverse Lookup Caller ID (select country below)"
+#~ msgstr "Identificativo chiamante (selezionare il Paese!)"

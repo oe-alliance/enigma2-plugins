@@ -38,7 +38,7 @@ msgid "Channel Selection"
 msgstr "Channel Selection"
 
 #: ../src/plugin.py:470
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "Could't get Event name"
 
 #: ../src/plugin.py:340
@@ -112,8 +112,8 @@ msgstr "Lookup"
 
 #: ../src/plugin.py:529
 #: ../src/plugin.py:530
-msgid "No IMDb match."
-msgstr "No IMDb match."
+msgid "No IMDb match:"
+msgstr "No IMDb match:"
 
 #: ../src/plugin.py:604
 msgid "No cast list found in the database."

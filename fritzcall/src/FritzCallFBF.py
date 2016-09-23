@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1270 $
-$Date: 2016-03-17 15:07:36 +0100 (Thu, 17 Mar 2016) $
-$Id: FritzCallFBF.py 1270 2016-03-17 14:07:36Z michael $
+$Revision: 1315 $
+$Date: 2016-06-05 15:36:48 +0200 (So, 05 Jun 2016) $
+$Id: FritzCallFBF.py 1315 2016-06-05 13:36:48Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -18,7 +18,7 @@ $Id: FritzCallFBF.py 1270 2016-03-17 14:07:36Z michael $
 # pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,W1401
 
 from . import _, __ #@UnresolvedImport # pylint: disable=W0611,F0401
-from plugin import config, fritzbox, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS
+from plugin import config, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS, decode
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
 from twisted.web.client import getPage #@UnresolvedImport
@@ -29,7 +29,7 @@ import re, time, hashlib
 
 import logging
 #debug = logging.getLogger(__name__ + "XXX").debug
-debug = logging.getLogger(__name__).debug
+#debug = logging.getLogger(__name__).debug
 
 FBF_boxInfo = 0
 FBF_upTime = 1
@@ -92,7 +92,8 @@ def cleanNumber(number):
 	return number
 		
 class FritzCallFBF:
-	debug = logging.getLogger("[FritzCallFBF]").debug
+	logger = logging.getLogger("FritzCallFBF.old")
+	debug = logger.debug
 
 	def __init__(self):
 		self.debug("")
@@ -102,6 +103,7 @@ class FritzCallFBF:
 		self._callTimestamp = 0
 		self._callList = []
 		self._callType = config.plugins.FritzCall.fbfCalls.value
+		self.password = decode(config.plugins.FritzCall.password.value)
 		self.information = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
 		self.getInfo(None)
 		self.blacklist = ([], [])
@@ -141,8 +143,8 @@ class FritzCallFBF:
 	def _oldLogin(self, callback, error): 
 		self.debug(repr(error))
 		self._md5LoginTimestamp = None
-		if config.plugins.FritzCall.password.value != "":
-			parms = "login:command/password=%s" % (config.plugins.FritzCall.password.value)
+		if self.password != "":
+			parms = "login:command/password=%s" % self.password
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("'" + url + "' parms: '" + parms + "'")
 			getPage(url,
@@ -189,7 +191,7 @@ class FritzCallFBF:
 				self.debug("login necessary and no challenge! That is terribly wrong.")
 			parms = urlencode({
 							'getpage':'../html/de/menus/menu2.html', # 'var:pagename':'home', 'var:menu':'home', 
-							'login:command/response': buildResponse(challenge, config.plugins.FritzCall.password.value),
+							'login:command/response': buildResponse(challenge, decode(config.plugins.FritzCall.password).value),
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("'" + url + "' parms: '" + parms + "'")
@@ -224,7 +226,6 @@ class FritzCallFBF:
 		global fritzbox
 		self.debug(error)
 		text = _("FRITZ!Box - Error logging in: %s\nDisabling plugin.") % error.getErrorMessage()
-		# config.plugins.FritzCall.enable.value = False
 		fritzbox = None
 		self._notify(text)
 
@@ -1100,7 +1101,8 @@ class FritzCallFBF:
 		self._notify(text)
 
 class FritzCallFBF_05_27:
-	debug = logging.getLogger("[FritzCallFBF_05_27]").debug
+	logger = logging.getLogger("FritzCall.FBF_05_27")
+	debug = logger.debug
 	
 	def __init__(self):
 		self.debug("[FritzCallFBF_05_27] __init__")
@@ -1110,6 +1112,7 @@ class FritzCallFBF_05_27:
 		self._callTimestamp = 0
 		self._callList = []
 		self._callType = config.plugins.FritzCall.fbfCalls.value
+		self.password = decode(config.plugins.FritzCall.password.value)
 		self._phoneBookID = '0'
 		self._loginCallbacks = []
 		self.blacklist = ([], [])
@@ -1195,7 +1198,7 @@ class FritzCallFBF_05_27:
 				self.debug("[FritzCallFBF_05_27] _md5Login: login necessary and no challenge! That is terribly wrong.")
 			parms = urlencode({
 							'getpage':'../html/de/menus/menu2.html', # 'var:pagename':'home', 'var:menu':'home', 
-							'login:command/response': buildResponse(challenge, config.plugins.FritzCall.password.value),
+							'login:command/response': buildResponse(challenge, self.password),
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			self.debug("[FritzCallFBF_05_27] _md5Login: '" + url + "?" + parms + "'")
@@ -1239,7 +1242,6 @@ class FritzCallFBF_05_27:
 		if type(error) != str:
 			error =  error.getErrorMessage()
 		text = _("FRITZ!Box - Error logging in: %s\nDisabling plugin.") % error
-		# config.plugins.FritzCall.enable.value = False
 		fritzbox = None
 		self._notify(text)
 
@@ -1802,7 +1804,7 @@ import xml.etree.ElementTree as ET
 import StringIO, csv
 
 class FritzCallFBF_05_50:
-	logger = logging.getLogger("[FritzCallFBF_05_50]")
+	logger = logging.getLogger("FritzCall.FBF_05_50")
 	debug = logger.debug
 	info = logger.info
 	warn = logger.warn
@@ -1813,6 +1815,8 @@ class FritzCallFBF_05_50:
 		self.debug("")
 		self._callScreen = None
 		self._callType = config.plugins.FritzCall.fbfCalls.value
+		self.password = decode(config.plugins.FritzCall.password.value)
+		self.guestPassword = decode(config.plugins.FritzCall.guestPassword.value)
 		self._phoneBookID = '0'
 		self.blacklist = ([], [])
 		self.information = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
@@ -1884,7 +1888,7 @@ class FritzCallFBF_05_50:
 		# TODO: check validity of username?
 		parms = urlencode({
 						'username': config.plugins.FritzCall.username.value,
-						'response': buildResponse(challenge, config.plugins.FritzCall.password.value),
+						'response': buildResponse(challenge, self.password),
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(url + "?" + parms)
@@ -1926,7 +1930,6 @@ class FritzCallFBF_05_50:
 		else:
 			text = error.getErrorMessage()
 		text = _("FRITZ!Box - Error logging in: %s\nDisabling plugin.") % text
-		# config.plugins.FritzCall.enable.value = False
 		fritzbox = None
 		self.exception(error)
 		self._notify(text)
@@ -2296,7 +2299,7 @@ class FritzCallFBF_05_50:
 			if config.plugins.FritzCall.guestSecure.value:
 				parms.update({
 							'sec_mode':'4',
-							'wpa_key': config.plugins.FritzCall.guestPassword.value,
+							'wpa_key': self.guestPassword,
 							})
 			else:
 				parms.update({
@@ -2409,15 +2412,16 @@ class FritzCallFBF_05_50:
 		# encrypted == 2 means unknown
 		#                                      <tr id="uiTrWlan"><td class="led_green"></td><td><a href="/wlan/wlan_settings.lua?sid=9c824da3ecfc7168">WLAN</a></td><td title="an
 		# <tr id="uiTrWlan"><td class="led_green"></td><td><a href="/wlan/wlan_settings.lua?sid=af3b8ddd6a9176da">WLAN</a></td><td title="an">an, Funknetz: mms</td></tr>
-		found = re.match('.*<tr id="uiTrWlan"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">WLAN</a></td><td title="((aus|an)[^"]*)"', html, re.S)
+		found = re.match('.*<tr id="uiTrWlan"><td class="(led_gray|led_green|led_red)"></td><td><a href="[^"]*">WLAN</a></td><td title="(aus|an[^"]*)">([^<]*)</td>', html, re.S)
 		if found:
 			if found.group(1) == "led_green":
 				if found.group(2):
-					wlans = found.group(2)
-					found = re.match('.*an, ([^"]+)', wlans, re.S)
-					if found:
-						wlanState = [ '1', '2', '', '' ]
-						wlans = found.group(1)
+					wlanState = [ '1', '2', '', '' ]
+					found1 = re.match('.*an, ([^"]+)', found.group(2), re.S)
+					if not found1:
+						found1 = re.match('.*an, ([^"]+)', found.group(3), re.S)
+					if found1:
+						wlans = found1.group(1)
 					else:
 						wlanState = [ '0', '0', '', '' ]
 					found = re.match('.*Funknetz: ([^,"]*)', wlans, re.S)
@@ -2613,7 +2617,7 @@ class FritzCallFBF_05_50:
 		self._logout(md5Sid, "_errorBlacklist")
 
 class FritzCallFBF_06_35:
-	logger = logging.getLogger("[FritzCallFBF_06_35]")
+	logger = logging.getLogger("FritzCall.FBF_06_35")
 	debug = logger.debug
 	info = logger.info
 	warn = logger.warn
@@ -2623,6 +2627,8 @@ class FritzCallFBF_06_35:
 		self.debug("")
 		self._callScreen = None
 		self._callType = config.plugins.FritzCall.fbfCalls.value
+		self.password = decode(config.plugins.FritzCall.password.value)
+		self.guestPassword = decode(config.plugins.FritzCall.guestPassword.value)
 		self._phoneBookID = '0'
 		self.blacklist = ([], [])
 		self.information = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
@@ -2694,7 +2700,7 @@ class FritzCallFBF_06_35:
 		# TODO: check validity of username?
 		parms = urlencode({
 						'username': config.plugins.FritzCall.username.value,
-						'response': buildResponse(challenge, config.plugins.FritzCall.password.value),
+						'response': buildResponse(challenge, self.password),
 						})
 		url = "http://%s/login_sid.lua" % (config.plugins.FritzCall.hostname.value)
 		self.debug(url + "?" + parms)
@@ -2736,7 +2742,6 @@ class FritzCallFBF_06_35:
 		else:
 			text = error.getErrorMessage()
 		text = _("FRITZ!Box - Error logging in: %s\nDisabling plugin.") % text
-		# config.plugins.FritzCall.enable.value = False
 		fritzbox = None
 		self.exception(error)
 		self._notify(text)
@@ -3050,7 +3055,7 @@ class FritzCallFBF_06_35:
 			if config.plugins.FritzCall.guestSecure.value:
 				parms.update({
 					'sec_mode':'3',
-					'wpa_key': config.plugins.FritzCall.guestPassword.value,
+					'wpa_key': self.guestPassword,
 					})
 			else:
 				parms.update({
@@ -3175,8 +3180,12 @@ class FritzCallFBF_06_35:
 		found = re.match('.*"ipv6": {\s*"txt": \["IPv6, verbunden seit ([^"]+) Uhr",', html, re.S)
 		if found:
 			upTime6 = found.group(1)
-			if upTime and upTime.find(upTime6) == -1:
-				upTime = upTime +'/' + upTime6
+			if upTime:
+				if upTime.find(upTime6) == -1:
+					upTime = upTime +'/' + upTime6
+			else:
+				upTime = upTime6
+					
 			self.info("upTime6: " + upTime)
 
 		#found = re.match('.*"ipv4": {\s*"txt": \["IPv4, verbunden seit ([^"]+) Uhr",( "Anbieter: ([^"]*)",)? "IP-Adresse: ([^"]+)"\],', html, re.S)
@@ -3204,7 +3213,7 @@ class FritzCallFBF_06_35:
 		# dslState = [ state, information, unused ]; state == '5' means up, everything else down
 		#found = re.match('.*<tr id="uiTrDsl"><td class="(led_gray|led_green|led_red)">', html, re.S)
 		# found = re.match('.*<div class="desc (led_gray|led_green|led_red)"><div class="desc title"><a href="">(DSL|Kabel)</a></div><div class="details information">[^<]*<div class="speed"><span class="downstream">([^<]*)</span><span class="upstream">([^<]*)</span></div></div></div>', html, re.S)
-		found = re.match('.*"(?:dsl|cable)": {\s*"txt": "(?:verbunden|aktiviert|deaktiviert)",\s*"led": "(led_gray|led_green|led_red)",\s*"title": "(DSL|Kabel)",\s*"up": "([^"]*)",\s*"down": "([^"]*)",', html, re.S)
+		found = re.match('.*"(?:dsl|cable|docsis)": {\s*"txt": "(?:verbunden|aktiviert|deaktiviert)",\s*"led": "(led_gray|led_green|led_red)",\s*"title": "(DSL|Kabel)",\s*"up": "([^"]*)",\s*"down": "([^"]*)",', html, re.S)
 		if found:
 			if found.group(1) == "led_green":
 				dslState = ['5', None, None]
@@ -3259,7 +3268,7 @@ class FritzCallFBF_06_35:
 		if found:
 			faxActive = True
 			self.info("faxActive: " + repr(faxActive))
- 
+
 		found = re.match('.*"linktxt": "Rufumleitung",\s*"details": "(?:(\d+) )?aktiv",', html, re.S)
 		if found:
 			if found.group(1):
@@ -3267,7 +3276,7 @@ class FritzCallFBF_06_35:
 			else:
 				rufumlActive = -1 # means no number available
 			self.info("rufumlActive: " + repr(rufumlActive))
- 
+
 		guestAccess = ""
 		# found = re.match('.*WLAN-Gastzugang</a></td><td title="[^"]*">aktiv ([^<]*)</td>', html, re.S)
 		found = re.match('.*linktxt": "WLAN-Gastzugang",\s*"details": "aktiv \(([^\)]+)\)(, (ungesichert|gesichert))?,( (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Geräte), ([^"]+)",\s*"link": "wGuest"', html, re.S)
@@ -3406,13 +3415,15 @@ class FritzCallFBF_06_35:
 		self._logout(md5Sid, "_errorBlacklist")
 
 class FritzCallFBF_dummy:
-	debug = logging.getLogger("[FritzCallFBF_dummy]").debug
+	logger = logging.getLogger("FritzCall.FBF_dummy")
+	debug = logger.debug
 
 	def __init__(self):
 		'''
 		
 		'''
 		self.debug("")
+		self.password = decode(config.plugins.FritzCall.password.value)
 		# self.information contains basic information about the (FBF) device:
 		# (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive)
 		# ('FRITZ!Box Fon WLAN 7390, FRITZ!OS 06.01', '21.01.2014, 05:02 Uhr', '87.185.104.85', ['0', '0', '0'], ['5', '6,7 Mbit/s / 667 kbit/s', None], None, '2', True, None)

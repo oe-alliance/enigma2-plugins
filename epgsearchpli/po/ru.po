@@ -1,123 +1,163 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-03 21:51+0100\n"
-"PO-Revision-Date: 2013-05-05 13:49+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
-"Language-Team: RU locale edited by Sowa\n"
-"Language: ru_RU\n"
+"POT-Creation-Date: 2009-09-24 16:16+0200\n"
+"PO-Revision-Date: 2015-01-20 14:16+0200\n"
+"Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
+"Language-Team:  openPli\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.5.5\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"Language: ru_RU\n"
+"X-Generator: Poedit 1.7.1\n"
 
-msgid "Add AutoTimer"
-msgstr "Добавить АвтоТаймер"
+msgid " (%d min)"
+msgstr " (%d мин)"
 
-msgid "Add a auto timer for current event"
-msgstr "Добавить АвтоТаймер для данного события"
+msgid " (%s%d min)"
+msgstr " (%s%d мин)"
 
-msgid "Add a record timer for current event"
-msgstr "Добавить таймер записи для данного события"
+msgid "Add \"Search event in EPG\" to channel menu"
+msgstr "Добавить \"Поиск события в EPG\" в меню каналов"
 
-msgid "Add a zap timer for current event"
-msgstr "Добавить таймер переключения для данного события"
+msgid "Add \"Search event in EPG\" to event menu"
+msgstr "Добавить \"Поиск события в EPG\" в меню событий"
+
+msgid "Add \"Search\" Button to EPG"
+msgstr "Добавить \"Поиск\" на синюю кнопку в EPG"
 
 msgid "Add timer"
 msgstr "Добавить таймер"
 
-msgid "Add/Remove timer for current event"
-msgstr "Добавить/Удалить таймер для данного события"
+msgid ""
+"Adds \"Search event in EPG\" item into the channel selection context menu "
+"(needs restart GUI)"
+msgstr ""
+"Добавляет \"Поиск события в EPG\" в контекстное меню селектора каналов "
+"(кнопка меню), необходим рестарт GUI."
+
+msgid ""
+"Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
+msgstr ""
+"Добавляет \"Поиск события в EPG\" в меню событий (кнопка меню) одиночного/"
+"мульти/графического EPG (необходим рестарт GUI)."
 
 msgid "Cancel"
 msgstr "Отмена"
 
 msgid "Channel Selection"
-msgstr "Выбор канала"
+msgstr "Список каналов"
 
-msgid "Choose the encode type for search, helpful for foreign languages."
-msgstr "Выберите тип кодирования для поиска, понятный для иностранных языков."
+msgid "Choice list"
+msgstr "Список выбора"
 
-msgid "Close dialog"
-msgstr "Закрыть диалог"
+msgid "Choice list EPGSearch"
+msgstr "Список выбора поиска EPG"
 
-#, python-format
+msgid "Choice list RED Button"
+msgstr "Список выбора на красной кнопке"
+
+msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
+msgstr ""
+"Выбор кодировки для поиска. Выберите \"UTF-8\" для поиска EPG на кириллице."
+
+msgid "Clear history"
+msgstr "Очистка истории"
+
 msgid "Could not read AutoTimer timer list: %s"
-msgstr "Не удалось прочитать список АвтоТаймеров: %s"
+msgstr "Не удалось прочитать список таймеров из Автотаймера: %s"
+
+msgid "Display name service as in bouquets"
+msgstr "Имя сервиса как в букетах"
 
 msgid "EPG Search"
-msgstr "Поиск в EPG"
+msgstr "EPG поиск"
 
 msgid "EPGSearch"
 msgstr "Поиск EPG"
 
 msgid "EPGSearch Setup"
-msgstr "Настройка EPG поиска"
+msgstr "Поиск EPG - настройки"
 
-msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
-msgstr "При включении плагин будет доступен в меню плагинов."
+msgid "Encoding Search to EPG"
+msgstr "Кодировка для поиска EPG"
 
 msgid "Enter text to search for"
 msgstr "Введите текст для поиска"
 
-msgid "Exit EPG"
-msgstr "Выйти из EPG"
+msgid "Export selected as AutoTimer"
+msgstr "Экспорт выбранного как Автотаймер"
 
-msgid "Goto next bouquet"
-msgstr "На следующий букет"
+msgid "History"
+msgstr "История"
 
-msgid "Goto next channel"
-msgstr "На следующий канал"
+msgid ""
+"How many entries to keep in the search history at most. 0 disables history "
+"entirely!"
+msgstr ""
+"Сколько элементов хранить в истории поиска. 0 - отключает историю полностью! "
 
-msgid "Goto previous bouquet"
-msgstr "На предыдущем букет"
+msgid ""
+"If 'Search only bouquets' is enabled, show service name as in bouquets for "
+"renamed services."
+msgstr ""
+"Если 'Поиск только в фаворитах' включен, то показывать имя сервиса как в "
+"букетах, для переименованных сервисов."
 
-msgid "Goto previous channel"
-msgstr "На предыдущий канал"
+msgid ""
+"If this setting is enabled, searching EPG in only services in user bouquets."
+msgstr ""
+"Если этот параметр включен, поиск EPG производится только в сервисах из "
+"фаворитных списков."
 
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-msgstr "Количество записей для хранения в истории поиска. 0 отключает историю целиком!"
+msgid ""
+"If this setting is enabled, the plugin adds a \"Search\" Button to the "
+"regular EPG."
+msgstr ""
+"Если этот параметр включен, плагин добавляет \"Поиск\" на синюю кнопку в "
+"одиночное EPG."
 
-msgid "IMDB search for current event"
-msgstr "Поиск в IMDB для данного события"
-
-msgid "IMDb Search"
-msgstr "Поиск в IMDb"
+msgid "If this setting is enabled, the plugin adds picons."
+msgstr "Если этот параметр включен, плагин отображает пиконы."
 
 msgid "Import from AutoTimer"
-msgstr "Импорт из АвтоТаймера"
+msgstr "Импорт из Автотаймера"
 
 msgid "Import from EPG"
 msgstr "Импорт из EPG"
 
 msgid "Import from Timer"
-msgstr "Импорт из Таймера"
+msgstr "Импорт из таймеров"
 
 msgid "Length of History"
-msgstr "Количество записей истории"
+msgstr "Количество истории поиска"
 
-msgid "Move down a page"
-msgstr "Вниз страницы"
+msgid "List of history is cleared !"
+msgstr "Лист истории очищен !"
 
-msgid "Move up a page"
-msgstr "Вверх страницы"
+msgid "Lookup in TMBD"
+msgstr "Поиск в TMBD"
 
 msgid "New Search"
 msgstr "Новый поиск"
 
-msgid "No history"
-msgstr "История пуста"
+msgid "No history !"
+msgstr "Нет истории !"
 
 msgid "OK"
 msgstr "OK"
 
 msgid "Open selected in IMDb"
-msgstr "Открыть выбранное в IMDb"
+msgstr "Открыть поиск в IMDb"
+
+msgid "Partnerbox Entries"
+msgstr "Профили Partnerbox"
 
 msgid "Save search as AutoTimer"
-msgstr "Сохранить результаты поиска в АвтоТаймер"
+msgstr "Сохранить поиск как Автотаймер"
 
 msgid "Search"
 msgstr "Поиск"
@@ -125,50 +165,95 @@ msgstr "Поиск"
 msgid "Search EPG"
 msgstr "Поиск EPG"
 
-msgid "Search Encoding"
-msgstr "Кодировка текста поиска"
+msgid "Search EPG by title event"
+msgstr "поиск EPG по названию события"
 
-msgid "Search for similar events"
-msgstr "Поиск похожих событий"
+msgid "Search event in EPG"
+msgstr "Поиск события в EPG"
+
+msgid "Search for TMDb info"
+msgstr "Поиск в TMDb инфо"
+
+msgid "Search only bouquets"
+msgstr "Поиск только в фаворитах"
+
+msgid "Search strictness"
+msgstr "Регистр поиска"
+
+msgid "Search type"
+msgstr "Тип поиска"
+
+msgid "Search type for filter"
+msgstr "Тип поиска для фильтра"
 
 msgid "Select a timer to search"
-msgstr "Выберите Таймер для поиска"
+msgstr "Выберите таймер для поиска..."
+
+msgid "Select action:"
+msgstr "Выберите действие:"
+
+msgid "Select channel"
+msgstr "Выбор канала"
 
 msgid "Select text to search for"
-msgstr "Выбрать текст для поиска"
+msgstr "Выберите текст для поиска"
+
+msgid ""
+"Select type for filter search. Press button P +/- for show/hide filter in "
+"description after search."
+msgstr ""
+"Выберите тип поиска для фильтра. Нажмите P +/- ,что бы показать/скрыть "
+"фильтр в описании сервисов, после успешного поиска."
+
+msgid ""
+"Select type for search, \"partial match\" for the most extensive search."
+msgstr ""
+"Выберите тип поиска, \"частичное совпадение\" для самого обширного поиска."
+
+msgid "Select type: 'Search and Select channel' or 'Search'."
+msgstr "Выберите тип: 'Поиск и выбор канала' или 'Поиск'."
+
+msgid "Select whether or not you want to enforce case correctness."
+msgstr "Выберите, учитывать или не учитывать регистр при поиске."
 
 msgid "Setup"
-msgstr "Настройка"
+msgstr "Настройки"
 
-msgid "Setup menu"
-msgstr "Меню настроек"
+msgid "Timers list"
+msgstr "Список таймеров"
 
-msgid "Show AutoTimer List"
-msgstr "Показать список АвтоТаймер`ов"
+msgid "Type blue Button"
+msgstr "Тип синей кнопки"
 
-msgid "Show detailed event info"
-msgstr "Показать подробную информацию о событии"
+msgid "Use Picons"
+msgstr "Использовать пиконы"
 
-msgid "Show in plugin browser"
-msgstr "Показывать в меню плагинов"
+msgid "Zap to selected service"
+msgstr "Переключить на выбранный сервис"
 
-msgid "Show search history"
-msgstr "Показать историю поиска"
+msgid "case-insensitive search"
+msgstr "поиск без учета регистра"
 
-msgid "Show single epg for current channel"
-msgstr "Показать EPG для данного канала"
+msgid "case-sensitive search"
+msgstr "поиск с учетом регистра"
 
-msgid "Zap to channel (setup in menu)"
-msgstr "Переключиться на канал (настройка в меню)"
+msgid "choice (Search and standard)"
+msgstr "выбор (поиск и стандарт)"
 
-msgid "Zap to channel and close (setup in menu)"
-msgstr "Переключиться на канал и закрыть (настройка в меню)"
+msgid "exact match"
+msgstr "точное совпадение"
 
-#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+msgid "only Search"
+msgstr "только поиск"
+
+msgid "partial match"
+msgstr "частичное совпадение"
+
 msgid "search EPG"
 msgstr "поиск EPG"
 
-#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 msgid "search EPG..."
-msgstr "поиск в EPG..."
+msgstr "поиск EPG..."
 
+msgid "title starts with"
+msgstr "название начинается с"

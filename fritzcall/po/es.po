@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-22 17:57+0200\n"
+"POT-Creation-Date: 2016-06-01 17:50+0200\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -133,6 +133,9 @@ msgstr ""
 msgid "Country"
 msgstr "País"
 
+msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgstr ""
+
 msgid "DECT inactive"
 msgstr ""
 
@@ -142,9 +145,6 @@ msgstr "Teléfonos DECT registrados"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Deactivate WLAN guest access"
 msgstr ""
-
-msgid "Debug"
-msgstr "Testear"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
@@ -361,6 +361,9 @@ msgstr "Italia"
 msgid "Last 10 calls:\n"
 msgstr "Últimas 10 llamadas:\n"
 
+msgid "Log level"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Lookup"
 msgstr "Buscar"
@@ -507,8 +510,8 @@ msgstr ""
 msgid "Reset"
 msgstr "Resetear"
 
-msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Búsqueda inversa del ID llamante (seleccionar país abajo)"
+msgid "Reverse Lookup Caller ID"
+msgstr ""
 
 msgid "Reverse searching..."
 msgstr "Búsqueda inversa..."
@@ -577,6 +580,12 @@ msgstr "Suiza"
 
 msgid "The Netherlands"
 msgstr "Holanda"
+
+#, python-format
+msgid ""
+"There might be a problem with your FritzCall %spassword.\n"
+"Check in the configuration."
+msgstr ""
 
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Tiempo cumplido para Notificaciones de Llamadas (segundos)"
@@ -681,6 +690,9 @@ msgstr "encriptado"
 msgid "finishing"
 msgstr "terminando"
 
+msgid "guest "
+msgstr ""
+
 msgid "home"
 msgstr "casa"
 
@@ -716,6 +728,9 @@ msgid "not encrypted"
 msgstr "no encriptado"
 
 msgid "not yet implemented"
+msgstr ""
+
+msgid "nothing"
 msgstr ""
 
 msgid "number suppressed"
@@ -768,6 +783,9 @@ msgstr ""
 
 #~ msgid "Could not load calls from FRITZ!Box - Error: %s"
 #~ msgstr "No puedo cargar llamadas desde FRITZ!Box - Error: %s"
+
+#~ msgid "Debug"
+#~ msgstr "Testear"
 
 #~ msgid "Dialling failed - Error: %s"
 #~ msgstr "Falló la llamada - Error: %s"
@@ -841,6 +859,9 @@ msgstr ""
 
 #~ msgid "PhoneBook Location"
 #~ msgstr "Ubicación de la Agenda"
+
+#~ msgid "Reverse Lookup Caller ID (select country below)"
+#~ msgstr "Búsqueda inversa del ID llamante (seleccionar país abajo)"
 
 #~ msgid "Show Calls for specific MSN"
 #~ msgstr "Mostrar Llamadas para un específico MSN"

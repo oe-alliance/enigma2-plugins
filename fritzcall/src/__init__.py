@@ -2,10 +2,10 @@
 '''
 general functions for FritzCall plugin
 
-$Id: __init__.py 1260 2016-02-20 17:50:18Z michael $
+$Id: __init__.py 1296 2016-05-02 13:52:11Z michael $
 $Author: michael $
-$Revision: 1260 $
-$Date: 2016-02-20 18:50:18 +0100 (Sat, 20 Feb 2016) $
+$Revision: 1296 $
+$Date: 2016-05-02 15:52:11 +0200 (Mon, 02 May 2016) $
 '''
 
 from Components.config import config #@UnresolvedImport
@@ -13,6 +13,7 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
 import gettext, os
 from enigma import eBackgroundFileEraser
+from logging import NOTSET
 
 lang = language.getLanguage()
 os.environ["LANGUAGE"] = lang[:2]
@@ -41,36 +42,6 @@ def __(text, front=True):
 	for i in range(len(text)/2):
 		out = out + text[i*2] + '.'
 	return out
-
-import logging
-from logging import debug
-def initDebug():
-#	try:
-#		# os.remove("/tmp/FritzDebug.log")
-#		eBackgroundFileEraser.getInstance().erase("/tmp/FritzDebugOld.log")
-#	except OSError:
-#		pass
-	logging.basicConfig(filename='/tmp/FritzDebug.log',
-					filemode='w',
-					level=logging.DEBUG,
-					# format='%(asctime)s %(levelname)s %(module)s %(name)s %(funcName)s %(message)s',
-					format='%(asctime)s %(levelname)-8s %(name)-26s %(funcName)s %(message)-15s',
-					datefmt='%Y-%m-%d %H:%M:%S')
-
-
-#from time import localtime
-#def debug(message):
-#	if config.plugins.FritzCall.debug.value:
-#		try:
-#			# ltim = localtime()
-#			# headerstr = u"%04d%02d%02d %02d:%02d " %(ltim[0],ltim[1],ltim[2],ltim[3],ltim[4])
-#			deb = open("/tmp/FritzDebugOld.log", "aw")
-#			# deb.write(headerstr + message.decode('utf-8') + u"\n")
-#			deb.write(message + "\n")
-#			deb.close()
-#		except Exception, e:
-#			debug("%s (retried debug: %s)" % (repr(message), str(e)))
-#		logging.debug(message)
 
 import re
 def normalizePhoneNumber(intNo):

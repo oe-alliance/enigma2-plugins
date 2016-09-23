@@ -330,7 +330,6 @@ epgrefresh/meta/Makefile
 epgrefresh/po/Makefile
 epgrefresh/src/Makefile
 epgrefresh/src/localehelp/Makefile
-epgrefresh/src/webinterface/Makefile
 
 esame/Makefile
 esame/meta/Makefile
@@ -346,6 +345,7 @@ epgsearchpli/Makefile
 epgsearchpli/meta/Makefile
 epgsearchpli/po/Makefile
 epgsearchpli/src/Makefile
+epgsearchpli/src/icons/Makefile
 
 eurotictv/Makefile
 eurotictv/meta/Makefile

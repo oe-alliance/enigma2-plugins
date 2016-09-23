@@ -38,7 +38,7 @@ msgstr "Pääosissa:"
 msgid "Channel Selection"
 msgstr "Kanavavalinta"
 
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "Ei löytynyt tuloksia"
 
 msgid "Details"
@@ -90,7 +90,7 @@ msgstr "IMDb haku epäonnistui!"
 msgid "Lookup"
 msgstr "Tiedot"
 
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr "Ei IMDb hakuosumaa!"
 
 msgid "No cast list found in the database."
@@ -134,7 +134,7 @@ msgstr "Näytä lisäosavalikossa"
 msgid "The Internet Movie Database"
 msgstr "The Internet Movie Database"
 
-msgid "This option allows you add words/phrases for IMDb to ignore when searching. please seperaate with a comma"
+msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
 msgstr "Sallii poistaa sanoja tai sanontoja hakuehdoista. Eroittele sanat pilkulla."
 
 msgid "Title Menu"
