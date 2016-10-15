@@ -10,6 +10,7 @@ from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.ScrollLabel import ScrollLabel
 from Components.ServiceEventTracker import ServiceEventTracker
+from Components.Sources.Boolean import Boolean
 from Components.Sources.List import List
 from Components.Task import Task, Job, job_manager
 from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry, ConfigPassword
@@ -239,7 +240,9 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			<widget name="key_green" position="330,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_yellow" position="470,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="ButtonBlue" pixmap="skin_default/buttons/button_blue.png" position="610,510" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget name="VKeyIcon" pixmap="skin_default/vkey_icon.png" position="620,495" zPosition="10" size="60,48" transparent="1" alphatest="on" />
+			<widget source="VKeyIcon" render="Pixmap" pixmap="skin_default/vkey_icon.png" position="620,495" zPosition="10" size="60,48" transparent="1" alphatest="on">
+				<convert type="ConditionalShowHide" />
+			</widget>
 			<widget name="thumbnail" position="0,0" size="100,75" alphatest="on"/> # fake entry for dynamic thumbnail resizing, currently there is no other way doing this.
 			<widget name="HelpWindow" position="160,255" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 		</screen>"""
@@ -290,9 +293,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["key_green"] = Button(_("Std. Feeds"))
 		self["key_yellow"] = Button(_("History"))
 		self["ButtonBlue"] = Pixmap()
-		self["VKeyIcon"] = Pixmap()
+		self["VKeyIcon"] = Boolean(False)
 		self["ButtonBlue"].hide()
-		self["VKeyIcon"].hide()
 		self["result"] = Label("")
 
 
@@ -478,7 +480,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self["historyactions"].setEnabled(False)
 			self["statusactions"].setEnabled(True)
 			self["ButtonBlue"].hide()
-			self["VKeyIcon"].hide()
+			self["VKeyIcon"].boolean = False
 			self.statuslist = []
 			self.hideSuggestions()
 			result = None
@@ -882,7 +884,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		print "switchToSuggestionsList"
 		self.currList = "suggestionslist"
 		self["ButtonBlue"].hide()
-		self["VKeyIcon"].hide()
+		self["VKeyIcon"].boolean = False
 		self["statusactions"].setEnabled(False)
 		self["config_actions"].setEnabled(False)
 		self["videoactions"].setEnabled(False)
@@ -907,7 +909,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["searchactions"].setEnabled(True)
 		self["key_green"].hide()
 		self["ButtonBlue"].show()
-		self["VKeyIcon"].show()
+		self["VKeyIcon"].boolean = True
 		self["config"].invalidateCurrent()
 		helpwindowpos = self["HelpWindow"].getPosition()
 		current = self["config"].getCurrent()
@@ -935,7 +937,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if len(self.videolist):
 			self.currList = "feedlist"
 			self["ButtonBlue"].hide()
-			self["VKeyIcon"].hide()
+			self["VKeyIcon"].boolean = False
 			self["videoactions"].setEnabled(True)
 			self["suggestionactions"].setEnabled(False)
 			self["searchactions"].setEnabled(False)
@@ -958,7 +960,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		print "switchToHistory oldlist",self.oldlist
 		self.hideSuggestions()
 		self["ButtonBlue"].hide()
-		self["VKeyIcon"].hide()
+		self["VKeyIcon"].boolean = False
 		self["key_green"].hide()
 		self["videoactions"].setEnabled(False)
 		self["suggestionactions"].setEnabled(False)

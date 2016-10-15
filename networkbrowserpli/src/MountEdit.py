@@ -5,6 +5,7 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import ActionMap
+from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigIP, NoSave, ConfigText, ConfigEnableDisable, ConfigPassword, ConfigSelection, getConfigListEntry, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
@@ -22,7 +23,9 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			<widget name="config" position="5,50" size="550,250" zPosition="1" scrollbarMode="showOnDemand" />
 			<ePixmap pixmap="skin_default/div-h.png" position="0,420" zPosition="1" size="560,2" />
 			<widget source="introduction" render="Label" position="10,430" size="540,21" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
-			<widget name="VKeyIcon" pixmap="skin_default/buttons/key_text.png" position="10,430" zPosition="10" size="35,25" transparent="1" alphatest="on" />
+			<widget source="VKeyIcon" render="Pixmap" pixmap="skin_default/buttons/key_text.png" position="10,430" zPosition="10" size="35,25" transparent="1" alphatest="on">
+				<convert type="ConditionalShowHide" />
+			</widget>
 			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />	
 		</screen>"""
 
@@ -59,7 +62,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.createSetup()
 		self.onLayoutFinish.append(self.layoutFinished)
 		# Initialize Buttons
-		self["VKeyIcon"] = Pixmap()
+		self["VKeyIcon"] = Boolean(False)
 		self["HelpWindow"] = Pixmap()
 		self["introduction"] = StaticText(_("Press OK to activate the settings."))
 		self["key_red"] = StaticText(_("Cancel"))
@@ -67,7 +70,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 
 	def layoutFinished(self):
 		self.setTitle(_("Mounts editor"))
-		self["VKeyIcon"].hide()
+		self["VKeyIcon"].boolean = False
 		self["VirtualKB"].setEnabled(False)
 		self["HelpWindow"].hide()
 
@@ -246,13 +249,13 @@ class AutoMountEdit(Screen, ConfigListScreen):
 	def selectionChanged(self):
 		current = self["config"].getCurrent()
 		if current == self.activeEntry or current == self.ipEntry or current == self.mounttypeEntry or current == self.hdd_replacementEntry:
-			self["VKeyIcon"].hide()
+			self["VKeyIcon"].boolean = False
 			self["VirtualKB"].setEnabled(False)
 		else:
 			helpwindowpos = self["HelpWindow"].getPosition()
 			if current[1].help_window.instance is not None:
 				current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
-				self["VKeyIcon"].show()
+				self["VKeyIcon"].boolean = True
 				self["VirtualKB"].setEnabled(True)
 
 	def ok(self):
