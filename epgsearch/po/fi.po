@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-12 20:49+0100\n"
-"PO-Revision-Date: 2016-08-23 11:51+0200\n"
+"POT-Creation-Date: 2016-09-10 17:01+0100\n"
+"PO-Revision-Date: 2016-09-14 19:41+0200\n"
 "Last-Translator: Samzam <http://www.world-of-satellite.com>\n"
 "Language-Team: TimoJ\n"
 "Language: fi\n"
@@ -17,6 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
+msgid "%ssearch EPG"
+msgstr "%sOhjelmaopashaku"
+
+#. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
+msgid "%ssearch EPG from history..."
+msgstr "%sOhjelmaoppaan hakuhistoria..."
 
 msgid "Add AutoTimer"
 msgstr "Lisää automaattiajastus"
@@ -75,8 +87,14 @@ msgstr "Nykyinen kanava"
 msgid "DVB-C"
 msgstr "DVB-C"
 
+msgid "DVB-C Cable services"
+msgstr "DVB-C kaapelikanavat"
+
 msgid "DVB-T"
 msgstr "DVB-T"
+
+msgid "DVB-T Terrestrial services"
+msgstr "DVB-T antennikanavat"
 
 msgid "Default scope when asked"
 msgstr "Oletuslaajuus"
@@ -101,10 +119,16 @@ msgid "Enter new search"
 msgstr "Lisää uusi haku"
 
 msgid "Enter text to search for"
-msgstr "Syötä haettava teksti"
+msgstr "Syötä haettavan ohjelman nimi"
+
+msgid "Exclude results from"
+msgstr "Rajoita hakutuloksia"
 
 msgid "Exit EPG Search"
 msgstr "Poistu ohjelmaopashausta"
+
+msgid "Filter results by source"
+msgstr "Suodata hakutulokset lähteestä"
 
 msgid "IMDB search for highlighted event"
 msgstr "IMDB haku korostetulle ohjelmalle"
@@ -120,6 +144,19 @@ msgstr "Tuo ohjelmaoppaasta"
 
 msgid "Import from Timer"
 msgstr "Tuo ajastuksista"
+
+msgid ""
+"Include or exclude results depending on their source (e.g. by satellite)"
+msgstr "Sisällytä tai rajoita hakutulokset riippuen lähteestä (DVB-T,C,S)"
+
+msgid "Include results from"
+msgstr "Sisällytä hakutulokset"
+
+msgid "Include/exclude search results from this type of source"
+msgstr "Sisällytä/rajoita hakutulokset lähteestä"
+
+msgid "Include/exclude sources"
+msgstr "Sisällytä/rajoita hakutuloksia"
 
 msgid "Is the search case-sensitive or case-insensitive"
 msgstr "Onko haku tapauskohtainen vai yleinen"
@@ -149,6 +186,12 @@ msgstr "Uusi haku"
 
 msgid "No history"
 msgstr "Ei historiaa"
+
+msgid "Number of filters for inclusion/exclusion of results"
+msgstr "Sisällytettyjen/rajoitettujen hakutuloksien suodattimien määrä"
+
+msgid "Number of inclusions/exclusions"
+msgstr "Sisällytettyjen/rajoitettujen lähteiden määrä"
 
 msgid "OK"
 msgstr "OK"
@@ -180,11 +223,14 @@ msgstr "Haun tarkkuus"
 msgid "Search type"
 msgstr "Hakutyyppi"
 
+msgid "Searching..."
+msgstr "Haetaan..."
+
 msgid "Select a timer to search"
 msgstr "Valitse haettava ajastus"
 
 msgid "Select text to search for"
-msgstr "Syötä haettava teksti"
+msgstr "Valitse haettavan ohjelman nimi"
 
 msgid "Set type of match used to compare program titles with the search string"
 msgstr ""
@@ -220,6 +266,13 @@ msgstr "Näytä hakuhistoria"
 msgid "Stream"
 msgstr "Streami"
 
+msgid ""
+"Use source restrictions below to only include results from the sources, or "
+"exclude them."
+msgstr ""
+"Käytä lähderajoituksia sisällyttääksesi tai rajoittaaksesi hakutuloksia "
+"riippuen lähteestä (DVB-T,C,S)"
+
 msgid "Zap to channel"
 msgstr "Vaihda kanavalle"
 
@@ -244,25 +297,26 @@ msgstr "Nykyinen suosikkilista"
 msgid "current service"
 msgstr "Nykyinen kanava"
 
+msgid "disabled"
+msgstr "Pois"
+
 msgid "exact match"
 msgstr "Tarkka vastaavuus"
+
+msgid "exclude"
+msgstr "Rajoita"
+
+msgid "include"
+msgstr "Sisällytä"
 
 msgid "partial match"
 msgstr "Osittainen vastaavuus"
 
-#. #-#-#-#-#  EPGSearch-py.pot (PACKAGE VERSION)  #-#-#-#-#
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
-#. #-#-#-#-#  EPGSearch-py.pot (PACKAGE VERSION)  #-#-#-#-#
-#. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
-#. TRANSLATORS: \0x86 is non-printing and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it as the first character in translations.
 msgid "search EPG"
 msgstr "Hae ohjelmaoppaasta"
 
-#. #-#-#-#-#  EPGSearch-py.pot (PACKAGE VERSION)  #-#-#-#-#
 #. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
-#. #-#-#-#-#  EPGSearch-py.pot (PACKAGE VERSION)  #-#-#-#-#
-#. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
-#. TRANSLATORS: \0x87 is non-printing and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it as the first character in translations.
 msgid "search EPG from history..."
 msgstr "Hae ohjelmaoppaan hakuhistoriasta"
 

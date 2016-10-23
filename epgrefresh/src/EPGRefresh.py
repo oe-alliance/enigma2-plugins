@@ -212,9 +212,15 @@ class EPGRefresh:
 			service = eServiceReference(scanservice.sref)
 			if (service.flags & eServiceReference.isGroup):
 				service = getBestPlayableServiceReference(eServiceReference(scanservice.sref), eServiceReference())
-			if not service.valid() \
-				or (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
 
+			# service can be a "NoneType" without attribute "valid" -> Crash
+			try:
+				if not service.valid():
+					continue
+			except:
+				continue
+
+			if (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
 				continue
 
 			channelID = '%08x%04x%04x' % (
