@@ -1216,7 +1216,11 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			self["config"].setList(list)
 
 	def cancel(self):
+		self.show_hw = False
 		if self["config"].isChanged():
+			if isinstance(self["config"].getCurrent()[1], ConfigText) and self["config"].getCurrent()[1].help_window.instance is not None:
+				self.show_hw = True
+				self["config"].getCurrent()[1].help_window.hide()
 			self.session.openWithCallback(
 				self.cancelConfirm,
 				MessageBox,
@@ -1228,6 +1232,8 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 	def cancelConfirm(self, ret):
 		if ret:
 			self.close(None)
+		elif self.show_hw:
+			self["config"].getCurrent()[1].help_window.show()
 
 	def save(self):
 		self.refresh()
