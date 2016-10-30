@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-15 14:10+0000\n"
-"PO-Revision-Date: 2012-09-09 12:27+0300\n"
+"PO-Revision-Date: 2016-10-30 11:46+0200\n"
 "Last-Translator: rimas\n"
 "Language-Team: rimas\n"
 "Language: et\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.9\n"
 
 #: ../src_py/plugin.py:41
 msgid "Advanced cut specification..."
@@ -32,7 +33,7 @@ msgstr ""
 
 #: ../src_py/plugin.py:247
 msgid "Bad arguments"
-msgstr "Vigased argumendid"
+msgstr "Kõlbmatud määrangud"
 
 #: ../src_py/plugin.py:88
 msgid "Cancel"
@@ -40,7 +41,7 @@ msgstr "Tühista"
 
 #: ../src_py/plugin.py:179
 msgid "Choose target folder"
-msgstr "Määra sihtkaust"
+msgstr "Vali sihtkataloog"
 
 #: ../src_py/plugin.py:250
 msgid "Couldn't open input .ap file"
@@ -68,7 +69,7 @@ msgstr "Väljund .ts faili avamine nurjus"
 
 #: ../src_py/plugin.py:131
 msgid "Cut Parameter Input"
-msgstr "Lõikamise parameetrid"
+msgstr "Lõikamise määrangud"
 
 #: ../src_py/plugin.py:123
 msgid "Cut source:"
@@ -76,21 +77,15 @@ msgstr "Lõigatav:"
 
 #: ../src_py/plugin.py:104
 msgid "Cutlist"
-msgstr ""
+msgstr "Lõiked"
 
 #: ../src_py/plugin.py:124
 msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
 msgstr "Lõikekohad (ALGUS LÕPP ALGUS LÕPP ... tsükkel tund:min:sek)"
 
-#: ../src_py/plugin.py:247
-#: ../src_py/plugin.py:248
-#: ../src_py/plugin.py:249
-#: ../src_py/plugin.py:250
-#: ../src_py/plugin.py:251
-#: ../src_py/plugin.py:252
-#: ../src_py/plugin.py:253
-#: ../src_py/plugin.py:254
-#: ../src_py/plugin.py:255
+#: ../src_py/plugin.py:247 ../src_py/plugin.py:248 ../src_py/plugin.py:249
+#: ../src_py/plugin.py:250 ../src_py/plugin.py:251 ../src_py/plugin.py:252
+#: ../src_py/plugin.py:253 ../src_py/plugin.py:254 ../src_py/plugin.py:255
 #: ../src_py/plugin.py:256
 #, python-format
 msgid "Cutting failed for movie \"%s\""
@@ -111,7 +106,7 @@ msgstr "Tühi .ap fail"
 
 #: ../src_py/plugin.py:24
 msgid "Execute cuts..."
-msgstr "Käivita lõikamine..."
+msgstr "Teosta lõikamine..."
 
 #: ../src_py/plugin.py:43
 #, python-format
@@ -148,11 +143,11 @@ msgstr "Lõikekohad määramata"
 
 #: ../src_py/plugin.py:87
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../src_py/plugin.py:40
 msgid "Place the cut movie in a new file ending with \" cut\""
-msgstr "Loo uus lõigatud \" cut\" lõpuga fail "
+msgstr "Loo uus lõigatud \"cut\" lõpuga fail "
 
 #: ../src_py/plugin.py:256
 msgid "Read/write error (disk full?)"
@@ -179,4 +174,3 @@ msgstr "Filmi \"%s\" lõikamine õnnestus"
 #: ../src_py/plugin.py:96
 msgid "Yes"
 msgstr "Jah"
-
