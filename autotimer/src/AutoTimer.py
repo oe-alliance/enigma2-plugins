@@ -480,7 +480,7 @@ class AutoTimer:
 			# We first check eit and if user wants us to guess event based on time
 			# we try this as backup. The allowed diff should be configurable though.
 			for rtimer in timerdict.get(serviceref, ()):
-				if (rtimer.eit == eit or config.plugins.autotimer.try_guessing.getValue()) and timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer) > 80:
+				if rtimer.eit == eit or (config.plugins.autotimer.try_guessing.getValue() and timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer) > 80):
 					oldExists = True
 
 					# Abort if we don't want to modify timers or timer is repeated
