@@ -21,7 +21,7 @@ msgid ""
 "%d conflict(s) encountered when trying to add new timers:\n"
 "%s"
 msgstr ""
-"%d Konflikt(e) gefunden beim hinzufügen neuer Timer:\n"
+"%d Konflikt(e) gefunden beim Hinzufügen neuer Timer:\n"
 "%s"
 
 #, python-format
@@ -29,7 +29,7 @@ msgid ""
 "%d conflict(s) solved with similar timer(s):\n"
 "%s"
 msgstr ""
-"%d Konflikt(e) gefunden beim hinzufügen alternativer Timer:\n"
+"%d Konflikt(e) gefunden beim Hinzufügen alternativer Timer:\n"
 "%s"
 
 msgid "%d.%B %Y"
