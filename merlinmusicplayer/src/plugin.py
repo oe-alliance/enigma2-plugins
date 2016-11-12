@@ -89,7 +89,7 @@ config.plugins.merlinmusicplayer = ConfigSubsection()
 config.plugins.merlinmusicplayer.startlastsonglist = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.lastsonglistindex = ConfigInteger(-1)
 config.plugins.merlinmusicplayer.databasepath = ConfigDirectory(default = "/media/hdd/")
-config.plugins.merlinmusicplayer.usegoogleimage = ConfigYesNo(default = True)
+#config.plugins.merlinmusicplayer.usegoogleimage = ConfigYesNo(default = False)
 config.plugins.merlinmusicplayer.googleimagepath = ConfigDirectory(default = "/media/hdd/")
 config.plugins.merlinmusicplayer.usescreensaver = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.screensaverwait = ConfigInteger(1,limits = (1, 60))
@@ -1232,12 +1232,12 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			audio = None
 		if not hasCover:
 			if not self["coverArt"].updateCoverArt(self.currentFilename):
-				if config.plugins.merlinmusicplayer.usegoogleimage.value:
-					self.getGoogleCover(artist, album, title)
-				else:
-					self["coverArt"].showDefaultCover()
-					if self.screenSaverScreen:
-						self.screenSaverScreen.updateCover(modus = 1)
+				#if config.plugins.merlinmusicplayer.usegoogleimage.value:
+				#	self.getGoogleCover(artist, album, title)
+				#else:
+				self["coverArt"].showDefaultCover()
+				if self.screenSaverScreen:
+					self.screenSaverScreen.updateCover(modus = 1)
 			else:
 				if self.screenSaverScreen:
 					self.screenSaverScreen.updateCover(filename = self.currentFilename, modus = 3)
@@ -2904,9 +2904,9 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 			self.list.append(self.database)
 		else:
 			self.database = None
-		self.list.append(getConfigListEntry(_("Use google-images for cover art"), config.plugins.merlinmusicplayer.usegoogleimage))
-		self.googleimage = getConfigListEntry(_("Google image path"), config.plugins.merlinmusicplayer.googleimagepath)
-		self.list.append(self.googleimage)
+		#self.list.append(getConfigListEntry(_("Use google-images for cover art"), config.plugins.merlinmusicplayer.usegoogleimage))
+		#self.googleimage = getConfigListEntry(_("Google image path"), config.plugins.merlinmusicplayer.googleimagepath)
+		#self.list.append(self.googleimage)
 		self.list.append(getConfigListEntry(_("Activate screensaver"), config.plugins.merlinmusicplayer.usescreensaver))
 		self.list.append(getConfigListEntry(_("Wait for screensaver (in min)"), config.plugins.merlinmusicplayer.screensaverwait))
 		self.list.append(getConfigListEntry(_("Remember last path of filebrowser"), config.plugins.merlinmusicplayer.rememberlastfilebrowserpath))
