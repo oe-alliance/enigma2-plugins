@@ -18,7 +18,6 @@
 #  This plugin is NOT free software. It is open source, you are allowed to
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
-#
 
 # for localized messages
 from . import _
@@ -27,9 +26,6 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Label import Label
 from enigma import RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, gFont, eListbox,ePoint, eListboxPythonMultiContent
-# merlin mp3 player
-import merlinmp3player
-ENIGMA_MERLINPLAYER_ID = 0x1014
 from Components.FileList import FileList
 from enigma import eServiceReference, eTimer
 from os import path as os_path, mkdir as os_mkdir, listdir as os_listdir, walk as os_walk, access as os_access, W_OK as os_W_OK
@@ -39,10 +35,12 @@ from twisted.web import client
 from twisted.web.client import HTTPClientFactory, downloadPage
 from enigma import getDesktop
 from Screens.MessageBox import MessageBox
+from Screens.InfoBar import InfoBar
 from Components.GUIComponent import GUIComponent
 from enigma import ePicLoad
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from urllib import quote
+from urlparse import urlparse
 from Components.ScrollLabel import ScrollLabel
 from Components.AVSwitch import AVSwitch
 from Tools.Directories import fileExists, resolveFilename, SCOPE_CURRENT_SKIN
@@ -67,9 +65,9 @@ from datetime import timedelta as datetime_timedelta
 from time import time
 from random import shuffle, randrange
 import re
+import skin
 from Components.config import config, ConfigSubsection, ConfigDirectory, ConfigYesNo, ConfigInteger, getConfigListEntry, configfile
 from Components.ConfigList import ConfigListScreen
-from Tools.HardwareInfo import HardwareInfo
 
 from Components.SystemInfo import SystemInfo
 from enigma import eServiceCenter, getBestPlayableServiceReference
@@ -79,29 +77,31 @@ from Screens.EpgSelection import EPGSelection
 from Screens.EventView import  EventViewEPGSelect
 from enigma import ePoint, eEPGCache
 from Screens.InfoBarGenerics import NumberZap
+try:
+	from Plugins.SystemPlugins.PiPServiceRelation.plugin import getRelationDict, CONFIG_FILE
+	plugin_PiPServiceRelation_installed = True
+except:
+	plugin_PiPServiceRelation_installed = False
 
-
+START_MERLIN_PLAYER_SCREEN_TIMER_VALUE = 7000
 
 config.plugins.merlinmusicplayer = ConfigSubsection()
-config.plugins.merlinmusicplayer.hardwaredecoder = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.startlastsonglist = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.lastsonglistindex = ConfigInteger(-1)
-config.plugins.merlinmusicplayer.databasepath = ConfigDirectory(default = "/hdd/")
+config.plugins.merlinmusicplayer.databasepath = ConfigDirectory(default = "/media/hdd/")
 config.plugins.merlinmusicplayer.usegoogleimage = ConfigYesNo(default = True)
-config.plugins.merlinmusicplayer.googleimagepath = ConfigDirectory(default = "/hdd/")
+config.plugins.merlinmusicplayer.googleimagepath = ConfigDirectory(default = "/media/hdd/")
 config.plugins.merlinmusicplayer.usescreensaver = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.screensaverwait = ConfigInteger(1,limits = (1, 60))
-config.plugins.merlinmusicplayer.screentimerwait = ConfigInteger(7,limits = (7, 120))
 config.plugins.merlinmusicplayer.idreamextendedpluginlist = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.merlinmusicplayerextendedpluginlist = ConfigYesNo(default = True)
-config.plugins.merlinmusicplayer.defaultfilebrowserpath = ConfigDirectory(default = "/hdd/")
+config.plugins.merlinmusicplayer.defaultfilebrowserpath = ConfigDirectory(default = "/media/hdd/")
 config.plugins.merlinmusicplayer.rememberlastfilebrowserpath = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.idreammainmenu = ConfigYesNo(default = False)
 config.plugins.merlinmusicplayer.merlinmusicplayermainmenu = ConfigYesNo(default = False)
 
 from enigma import ePythonMessagePump
 from threading import Thread, Lock
-from timer import TimerEntry
 
 class ThreadQueue:
 	def __init__(self):
@@ -197,7 +197,7 @@ class PathToDatabase(Thread):
 										albumID = row[0]
 
 								# 3. Genre
-								genreID = -1		
+								genreID = -1
 								cursor.execute('SELECT genre_id FROM Genre WHERE genre_text = "%s";' % (genre.replace('"','""')))
 								row = cursor.fetchone()
 								if row is None:
@@ -205,7 +205,7 @@ class PathToDatabase(Thread):
 										genreID = cursor.lastrowid
 								else:
 										genreID = row[0]
-							
+
 								# 4. Songs
 								try:
 									cursor.execute("INSERT INTO Songs (filename,title,artist_id,album_id,genre_id,tracknumber, bitrate, length, track, date) VALUES(?,?,?,?,?,?,?,?,?,?);" , (os_path.join(root,filename),title,artistID,albumID,genreID, tracknr, bitrate, length, track, date))
@@ -220,15 +220,15 @@ class PathToDatabase(Thread):
 							self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root,filename)))
 							mp.send(0)
 							checkTime = time()
-						
+
 				if not self.__cancel:
 					connection.commit()
-				cursor.close()  
+				cursor.close()
 				connection.close()
 				if self.__cancel:
 					self.__messages.push((THREAD_FINISHED, _("Process aborted.\n 0 files added to database!\nPress OK to close.") ))
-				else:	
-					self.__messages.push((THREAD_FINISHED, _("%d files added to database!\nPress OK to close." % counter)))
+				else:
+					self.__messages.push((THREAD_FINISHED, _("%d files added to database!\nPress OK to close.") % counter))
 			else:
 				self.__messages.push((THREAD_FINISHED, _("Error!\nCan not open database!\nCheck if save folder is correct and writeable!\nPress OK to close.") ))
 			mp.send(0)
@@ -237,7 +237,6 @@ class PathToDatabase(Thread):
 
 pathToDatabase = PathToDatabase()
 
-
 class iDreamAddToDatabase(Screen):
 	skin = """<screen name="iDreamAddToDatabase" position="center,center" size="560,320" title="Add music files to iDream database">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
@@ -245,24 +244,25 @@ class iDreamAddToDatabase(Screen):
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<widget name="output" position="10,10" size="540,300" valign="center" halign="center" font="Regular;22" />
-			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_red" position="0,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 	def __init__(self, session, initDir):
 		Screen.__init__(self, session)
+		self.setTitle(_("Add music files to iDream database"))
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
 		{
 			"back": self.cancel,
 			"green": self.green,
 			"red": self.cancel,
 			"ok": self.green,
-			
+
 		}, -1)
 		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText("Close")
+		self["key_green"] = StaticText(_("Close"))
 		self["output"] = Label()
 		self.onClose.append(self.__onClose)
-		pathToDatabase.MessagePump.recv_msg.get().append(self.gotThreadMsg)	
+		pathToDatabase.MessagePump.recv_msg.get().append(self.gotThreadMsg)
 		if not pathToDatabase.isRunning and initDir:
 			pathToDatabase.Start(initDir)
 
@@ -271,17 +271,16 @@ class iDreamAddToDatabase(Screen):
 		self["output"].setText(msg[1])
 		if msg[0] == THREAD_FINISHED:
 			self["key_red"].setText("")
-	
+
 	def green(self):
 		self.close()
-	
+
 	def cancel(self):
 		if pathToDatabase.isRunning:
 			pathToDatabase.Cancel()
 
 	def __onClose(self):
 		pathToDatabase.MessagePump.recv_msg.get().remove(self.gotThreadMsg)	
-		
 
 class myHTTPClientFactory(HTTPClientFactory):
 	def __init__(self, url, method='GET', postdata=None, headers=None,
@@ -291,24 +290,13 @@ class myHTTPClientFactory(HTTPClientFactory):
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies,followRedirect=followRedirect)
 
 def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
-	if hasattr(client, '_parse'):
-			scheme, host, port, path = client._parse(url)
-	else:
-		# _URI class renamed to URI in 15.0.0
-		try:
-			from twisted.web.client import _URI as URI
-		except ImportError:
-			from twisted.web.client import URI
-		uri = URI.fromBytes(url)
-		scheme = uri.scheme
-		host = uri.host
-		port = uri.port
-		path = uri.path
-
+	parsed = urlparse(url)
+	scheme = parsed.scheme
+	host = parsed.hostname
+	port = parsed.port or (443 if scheme == 'https' else 80)
 	factory = myHTTPClientFactory(url, *args, **kwargs)
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
-
 
 class MethodArguments:
 	def __init__(self, method = None, arguments = None):
@@ -343,7 +331,7 @@ class Item:
 		self.length = length
 		self.genre = genre
 		if track is not None:
-			self.track = "Track %s" % track
+			self.track = _("Track %s") % track
 		else:
 			self.track = ""
 		if date is not None:
@@ -359,7 +347,6 @@ class Item:
 		self.songID = songID
 		self.PTS = PTS
 
-
 def OpenDatabase():
 		connectstring = os_path.join(config.plugins.merlinmusicplayer.databasepath.value ,"iDream.db")
 		db_exists = False
@@ -374,7 +361,7 @@ def OpenDatabase():
 		except:
 			print "[MerlinMusicPlayer] unable to open database file: %s" % connectstring
 			return None
-		if not db_exists :
+		if not db_exists:
 				connection.execute('CREATE TABLE IF NOT EXISTS Songs (song_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, filename TEXT NOT NULL UNIQUE, title TEXT, artist_id INTEGER, album_id INTEGER, genre_id INTEGER, tracknumber INTEGER, bitrate INTEGER, length TEXT, track TEXT, date TEXT, lyrics TEXT);')
 				connection.execute('CREATE TABLE IF NOT EXISTS Artists (artist_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, artist TEXT NOT NULL UNIQUE);')
 				connection.execute('CREATE TABLE IF NOT EXISTS Album (album_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, album_text TEXT NOT NULL UNIQUE);')
@@ -463,7 +450,7 @@ def getID3Tags(root,filename):
 			bitrate = None
 
 	return audio, isAudio, title, genre ,artist, album, tracknr, track, date, length, bitrate
-	
+
 class MerlinMusicPlayerScreenSaver(Screen):
 
 	sz_w = getDesktop(0).size().width()
@@ -510,12 +497,11 @@ class MerlinMusicPlayerScreenSaver(Screen):
 			"prevBouquet": self.close,
 			"nextBouquet": self.close,
 			"info": self.close,
-
 		}, -1)
 		self["coverArt"] = MerlinMediaPixmap()
 		self.coverMoveTimer = eTimer()
-	        self.coverMoveTimer.timeout.get().append(self.moveCoverArt)
-	        self.coverMoveTimer.start(1)
+		self.coverMoveTimer.timeout.get().append(self.moveCoverArt)
+		self.coverMoveTimer.start(1)
 		self["display"] = Label()
 
 	def updateDisplayText(self, text):
@@ -550,7 +536,6 @@ class MerlinMusicPlayerScreenSaver(Screen):
 	def createSummary(self):
 		return MerlinMusicPlayerLCDScreen
 
-
 class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 
 	w = getDesktop(0).size().width()
@@ -568,13 +553,13 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 		<screen backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="%d,%d" title="MerlinMusicPlayerTV">
 			<widget backgroundColor="transparent" name="video" position="0,0" size="%d,%d" zPosition="1"/>
 			<widget name="coverArt" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/no_coverArt.png" position="%d,%d" size="64,64" transparent="1" alphatest="blend" zPosition="2" />
-			<widget name="display" position="%d,%d" size="%d,24" zPosition="2" backgroundColor="#33000000" font="Regular;20" foregroundColor="#fcc000" />		
+			<widget name="display" position="%d,%d" size="%d,24" zPosition="2" backgroundColor="#33000000" font="Regular;20" foregroundColor="#fcc000" />
 		</screen>""" % (w,h,w,h,cx,cy,dx,dy,dw)
-
 
 	def __init__(self, session, currentService, servicelist):
 		self.session = session
 		Screen.__init__(self, session)
+		self.setTitle(_("Merlin Music Player TV"))
 		self.onClose.append(self.__onClose)
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ChannelSelectBaseActions", "ChannelSelectEPGActions"], 
 		{
@@ -585,7 +570,6 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 			"nextBouquet": self.nextBouquet,
 			"prevBouquet": self.prevBouquet,
 			"showEPGList": self.openEventView,
-
 		}, -1)
 		self["actions2"] = NumberActionMap(["NumberActions"],
 		{
@@ -600,21 +584,38 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 			"9": self.keyNumberGlobal,
 		}, -1)
 		self.epgcache = eEPGCache.getInstance()
+		self.currentService = currentService
 		self.servicelist = servicelist
+		self.currentPiP = ""
 		self["coverArt"] = MerlinMediaPixmap()
 		self["display"] = Label()
 		self["video"] = VideoWindow(fb_width = getDesktop(0).size().width(), fb_height = getDesktop(0).size().height())
-		if self.servicelist is None:
-			self.playService(currentService)
+		if plugin_PiPServiceRelation_installed:
+			self.pipServiceRelation = getRelationDict()
 		else:
-			current = ServiceReference(self.servicelist.getCurrentSelection())
-			self.playService(current.ref)
+			self.pipServiceRelation = {}
+		try:
+			if self.currentService:
+				current = ServiceReference(self.currentService)
+				cur_service = current.ref
+		except:
+			cur_service = None
+		if cur_service is None:
+			try:
+				if self.servicelist:
+					current = ServiceReference(self.servicelist.getCurrentSelection())
+					service = current.ref
+					self.playService(service)
+			except:
+				pass
+		else:
+			self.playService(cur_service)
 
 		self.showHideTimer = eTimer()
-	        self.showHideTimer.timeout.get().append(self.showHideTimerTimeout)
+		self.showHideTimer.timeout.get().append(self.showHideTimerTimeout)
 		self.idx = config.usage.infobar_timeout.index
 		if self.idx:
-		        self.showHideTimer.start(self.idx * 1000)
+			self.showHideTimer.start(self.idx * 1000)
 		self.displayShown = True
 
 	def showHide(self):
@@ -627,7 +628,7 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 			self["coverArt"].show()
 			self["display"].show()
 			if self.idx:
-			        self.showHideTimer.start(self.idx * 1000)
+				self.showHideTimer.start(self.idx * 1000)
 		self.displayShown = not self.displayShown
 
 	def showHideTimerTimeout(self):
@@ -640,56 +641,69 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 		self.displayShown = False
 		self.showHide()
 
-# Source Code taken from Virtual(Pip)Zap :-)
-
-	# switch with numbers
 	def keyNumberGlobal(self, number):
-		self.session.openWithCallback(self.numberEntered, NumberZap, number)
+		if self.servicelist is not None:
+			self.session.openWithCallback(self.numberEntered, NumberZap, number, self.searchNumber)
 
 	def numberEntered(self, retval):
 		if retval > 0:
 			self.zapToNumber(retval)
 
+	def numberEntered(self, service = None, bouquet = None):
+		if service:
+			self.selectAndStartService(service, bouquet)
+
 	def searchNumberHelper(self, serviceHandler, num, bouquet):
 		servicelist = serviceHandler.list(bouquet)
-		if not servicelist is None:
-			while num:
+		if servicelist:
+			serviceIterator = servicelist.getNext()
+			while serviceIterator.valid():
+				if num == serviceIterator.getChannelNum():
+					return serviceIterator
 				serviceIterator = servicelist.getNext()
-				if not serviceIterator.valid(): #check end of list
-					break
-				playable = not (serviceIterator.flags & (eServiceReference.isMarker|eServiceReference.isDirectory))
-				if playable:
-					num -= 1;
-			if not num: #found service with searched number ?
-				return serviceIterator, 0
-		return None, num
+		return None
 
-	def zapToNumber(self, number):
-		bouquet = self.servicelist.bouquet_root
+	def searchNumber(self, number, firstBouquetOnly = False):
+		bouquet = self.servicelist.getRoot()
 		service = None
 		serviceHandler = eServiceCenter.getInstance()
-		bouquetlist = serviceHandler.list(bouquet)
-		if not bouquetlist is None:
-			while number:
+		if not firstBouquetOnly:
+			service = self.searchNumberHelper(serviceHandler, number, bouquet)
+		if config.usage.multibouquet.value and not service:
+			bouquet = self.servicelist.bouquet_root
+			bouquetlist = serviceHandler.list(bouquet)
+			if bouquetlist:
 				bouquet = bouquetlist.getNext()
-				if not bouquet.valid(): #check end of list
-					break
-				if bouquet.flags & eServiceReference.isDirectory:
-					service, number = self.searchNumberHelper(serviceHandler, number, bouquet)
-		if not service is None:
-			if self.servicelist.getRoot() != bouquet: #already in correct bouquet?
+				while bouquet.valid():
+					if bouquet.flags & eServiceReference.isDirectory:
+						service = self.searchNumberHelper(serviceHandler, number, bouquet)
+						if service:
+							playable = not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+							if not playable:
+								service = None
+							break
+						if config.usage.alternative_number_mode.value or firstBouquetOnly:
+							break
+					bouquet = bouquetlist.getNext()
+		return service, bouquet
+
+	def selectAndStartService(self, service, bouquet):
+		if service:
+			if self.servicelist.getRoot() != bouquet:
 				self.servicelist.clearPath()
 				if self.servicelist.bouquet_root != bouquet:
 					self.servicelist.enterPath(self.servicelist.bouquet_root)
 				self.servicelist.enterPath(bouquet)
-			self.servicelist.setCurrentSelection(service) #select the service in servicelist
-		# update infos, no matter if service is none or not
-		current = ServiceReference(self.servicelist.getCurrentSelection())
-		self.playService(current.ref)
+			self.servicelist.setCurrentSelection(service)
+			current = ServiceReference(self.servicelist.getCurrentSelection())
+			self.playService(current.ref)
+
+	def zapToNumber(self, number):
+		service, bouquet = self.searchNumber(number)
+		self.selectAndStartService(service, bouquet)
 
 	def nextService(self):
 		if self.servicelist is not None:
-			# get next service
 			if self.servicelist.inBouquet():
 				prev = self.servicelist.getCurrentSelection()
 				if prev:
@@ -712,7 +726,6 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 
 	def prevService(self):
 		if self.servicelist is not None:
-			# get previous service
 			if self.servicelist.inBouquet():
 				prev = self.servicelist.getCurrentSelection()
 				if prev:
@@ -734,14 +747,11 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 				self.prevService()
 
 	def isPlayable(self):
-		# check if service is playable
 		current = ServiceReference(self.servicelist.getCurrentSelection())
 		return not (current.ref.flags & (eServiceReference.isMarker|eServiceReference.isDirectory))
 
-
 	def nextBouquet(self):
 		if self.servicelist is not None:
-			# next bouquet with first service
 			if config.usage.multibouquet.value:
 				self.servicelist.nextBouquet()
 				current = ServiceReference(self.servicelist.getCurrentSelection())
@@ -749,31 +759,30 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 
 	def prevBouquet(self):
 		if self.servicelist is not None:
-			# previous bouquet with first service
 			if config.usage.multibouquet.value:
 				self.servicelist.prevBouquet()
 				current = ServiceReference(self.servicelist.getCurrentSelection())
 				self.playService(current.ref)
 
 	def openSingleServiceEPG(self):
-		# show EPGList
-		current = ServiceReference(self.servicelist.getCurrentSelection())
-		self.session.open(EPGSelection, current.ref)
+		if self.servicelist is not None:
+			current = ServiceReference(self.servicelist.getCurrentSelection())
+			self.session.open(EPGSelection, current.ref)
 
 	def openEventView(self):
-		# show EPG Event
-		epglist = [ ]
-		self.epglist = epglist
-		service = ServiceReference(self.servicelist.getCurrentSelection())
-		ref = service.ref
-		evt = self.epgcache.lookupEventTime(ref, -1)
-		if evt:
-			epglist.append(evt)
-		evt = self.epgcache.lookupEventTime(ref, -1, 1)
-		if evt:
-			epglist.append(evt)
-		if epglist:
-			self.session.open(EventViewEPGSelect, epglist[0], service, self.eventViewCallback, self.openSingleServiceEPG, self.openMultiServiceEPG, self.openSimilarList)
+		if self.servicelist is not None: 
+			epglist = [ ]
+			self.epglist = epglist
+			service = ServiceReference(self.servicelist.getCurrentSelection())
+			ref = service.ref
+			evt = self.epgcache.lookupEventTime(ref, -1)
+			if evt:
+				epglist.append(evt)
+			evt = self.epgcache.lookupEventTime(ref, -1, 1)
+			if evt:
+				epglist.append(evt)
+			if epglist:
+				self.session.open(EventViewEPGSelect, epglist[0], service, self.eventViewCallback, self.openSingleServiceEPG, self.openMultiServiceEPG, self.openSimilarList)
 
 	def eventViewCallback(self, setEvent, setService, val):
 		epglist = self.epglist
@@ -783,31 +792,59 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
 			epglist[1] = tmp
 			setEvent(epglist[0])
 
+	def getBouquetServices(self, bouquet):
+		services = [ ]
+		Servicelist = eServiceCenter.getInstance().list(bouquet)
+		if not Servicelist is None:
+			while True:
+				service = Servicelist.getNext()
+				if not service.valid():
+					break
+				if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):
+					continue
+				services.append(ServiceReference(service))
+		return services
+
 	def openMultiServiceEPG(self):
-		# not supported
-		pass
+		if self.servicelist is not None:
+			bouquet = self.servicelist.getRoot()
+			services = self.getBouquetServices(bouquet)
+			if services:
+				self.session.open(EPGSelection, services)
 
 	def openSimilarList(self, eventid, refstr):
 		self.session.open(EPGSelection, refstr, None, eventid)
 
 	def playService(self, service):
+		current_service = service
+		n_service = self.pipServiceRelation.get(service.toString(),None)
+		if n_service is not None:
+			service = eServiceReference(n_service)
 		if service and (service.flags & eServiceReference.isGroup):
 			ref = getBestPlayableServiceReference(service, eServiceReference())
 		else:
 			ref = service
-		self.pipservice = eServiceCenter.getInstance().play(ref)
-		if self.pipservice and not self.pipservice.setTarget(1):
-			self.pipservice.start()
+		if ref and ref.toString() != self.currentPiP:
+			self.pipservice = eServiceCenter.getInstance().play(ref)
+			if self.pipservice and not self.pipservice.setTarget(1):
+				self.pipservice.start()
+				if self.servicelist is not None:
+					self.servicelist.setCurrentSelection(current_service) 
+				self.currentPiP = current_service.toString()
+			else:
+				self.pipservice = None
+				self.currentPiP = ""
+		else:
+			self.pipservice = None
+			self.currentPiP = ""
 
 	def __onClose(self):
 		self.pipservice = None
+		self.currentPiP = ""
 		if self.showHideTimer.isActive():
 			self.showHideTimer.stop()
 
-
-
 class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications):
-	
 	sz_w = getDesktop(0).size().width()
 	if sz_w == 1280:
 		skin = """
@@ -884,7 +921,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			<widget name="repeat" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/placeholder1.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/dvr_rep.png" position="320,167" size="53,34" transparent="1" alphatest="on"/>
 			<widget name="dvrStatus" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/dvr_pl.png,/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/dvr_pau.png" position="405,155" size="160,39" transparent="1" alphatest="on"/>
 			</screen>"""
-		
+
 	def __init__(self, session, songlist, index, idreammode, currentservice, servicelist):
 		self.session = session
 		Screen.__init__(self, session)
@@ -919,7 +956,6 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self["album"] = Label()
 		self["artist"] = Label()
 		self["genre"] = Label()
-		self["track"] = Label()
 		self["nextTitle"] = Label()
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 			{
@@ -958,7 +994,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.currentService = currentservice
 		self.serviceList = servicelist
 
-	def embeddedCoverArt(self):		
+	def embeddedCoverArt(self):
 		self["coverArt"].embeddedCoverArt()
 		if self.screenSaverScreen:
 			self.screenSaverScreen.updateCover(modus = 2)
@@ -998,7 +1034,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 				self.screenSaverScreen.doClose()
 				self.screenSaverScreen = None
 		self.resetScreenSaverTimer()
-		
+
 	def __onClose(self):
 		del self["coverArt"].picload
 		self.seek = None
@@ -1026,7 +1062,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 				text = self["title"].getText()
 			self.screenSaverScreen.updateDisplayText(text)
 			self.screenSaverScreen.updateCover(self["coverArt"].coverArtFileName, modus = 0)
-	
+
 	def setupFinished(self, result):
 		if result:
 			self.googleDownloadDir = os_path.join(config.plugins.merlinmusicplayer.googleimagepath.value, "downloaded_covers/" )
@@ -1037,7 +1073,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 					self.googleDownloadDir = "/tmp/"
 		self.resetScreenSaverTimer()
 
-	def closePlayer(self):	
+	def closePlayer(self):
 		if config.plugins.merlinmusicplayer.startlastsonglist.value:
 			config.plugins.merlinmusicplayer.lastsonglistindex.value = self.currentIndex
 			config.plugins.merlinmusicplayer.lastsonglistindex.save()
@@ -1059,35 +1095,16 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.session.nav.stopService()
 		self.seek = None
 		self.currentFilename = filename
-		if not config.plugins.merlinmusicplayer.hardwaredecoder.value and self.currentFilename.lower().endswith(".mp3") and self.songList[self.currentIndex][0].PTS is None:
-			sref = eServiceReference(ENIGMA_MERLINPLAYER_ID, 0, self.currentFilename) # play mp3 file with merlinmp3player lib
-			self.session.nav.playService(sref)
-			if self.iDreamMode:
-				self.updateMusicInformation( self.songList[self.currentIndex][0].artist, self.songList[self.currentIndex][0].title, 
-					self.songList[self.currentIndex][0].album, self.songList[self.currentIndex][0].genre, self.songList[self.currentIndex][0].date, self.songList[self.currentIndex][0].track.replace("Track",""), clear = True )
-			else:
-				path,filename = os_path.split(self.currentFilename)
-				audio, isAudio, title, genre,artist,album,tracknr,track,date,length,bitrate = getID3Tags(path,filename)
-				if audio:
-					if date:
-						year = "(%s)" % str(date)
-					else:
-						year = ""
-					self.updateMusicInformation( artist, title, album, genre, track, year, clear = True )
-				else:
-					self.updateMusicInformation( title = title, clear = True)
-				audio = None
-		else:
-			sref = eServiceReference(4097, 0, self.currentFilename)
-			self.session.nav.playService(sref)
-			if self.songList[self.currentIndex][0].PTS is not None:
-				service = self.session.nav.getCurrentService()
-				if service:
-					self.seek = service.seek()
-				self.updateMusicInformationCUE()
-				self.ptsTimer = eTimer()
-				self.ptsTimer.callback.append(self.ptsTimerCallback)
-				self.ptsTimer.start(1000)
+		sref = eServiceReference(4097, 0, self.currentFilename)
+		self.session.nav.playService(sref, adjust=False)
+		if self.songList[self.currentIndex][0].PTS is not None:
+			service = self.session.nav.getCurrentService()
+			if service:
+				self.seek = service.seek()
+			self.updateMusicInformationCUE()
+			self.ptsTimer = eTimer()
+			self.ptsTimer.callback.append(self.ptsTimerCallback)
+			self.ptsTimer.start(1000)
 		self["nextTitle"].setText(self.getNextTitle())
 
 	def ptsTimerCallback(self):
@@ -1110,7 +1127,6 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.updateSingleMusicInformation("artist", self.songList[self.currentIndex][0].artist, True)
 		self.updateSingleMusicInformation("title", self.songList[self.currentIndex][0].title, True)
 		self.updateSingleMusicInformation("album", self.songList[self.currentIndex][0].album, True)
-		self.updateSingleMusicInformation("track", self.songList[self.currentIndex][0].track.replace("Track",""), True)
 		self.summaries.setText(self.songList[self.currentIndex][0].title,1)
 		if self.screenSaverScreen:
 			self.screenSaverScreen.updateLCD(self.songList[self.currentIndex][0].title,1)
@@ -1133,34 +1149,25 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			sArtist = currPlay.info().getInfoString(iServiceInformation.sTagArtist)
 			sGenre = currPlay.info().getInfoString(iServiceInformation.sTagGenre)
 			sYear = currPlay.info().getInfoString(iServiceInformation.sTagDate)
-			sTrackNumber = currPlay.info().getInfo(iServiceInformation.sTagTrackNumber)
-			sTrackCount = currPlay.info().getInfo(iServiceInformation.sTagTrackCount)
-			track = ""
-			if sTrackNumber and sTrackCount:
-				track = "%s/%s" % (sTrackNumber,sTrackCount)
-			elif sTrackNumber:
-				track = str(sTrackNumber)
-			
 			if sYear:
 				sYear = "(%s)" % sYear
 			if not sTitle:
 				sTitle = os_path.splitext(os_path.basename(self.currentFilename))[0]
-			
+
 			if self.songList[self.currentIndex][0].PTS is None:
-				self.updateMusicInformation( sArtist, sTitle, sAlbum, sGenre, sYear, track, clear = True )
+				self.updateMusicInformation( sArtist, sTitle, sAlbum, sGenre, sYear, clear = True )
 			else:
 				self.updateSingleMusicInformation("genre", sGenre, True)
 		else:
 			self.updateMusicInformation()
 
-	def updateMusicInformation(self, artist = "", title = "", album = "", genre = "", year = "", track = "", clear = False):
+	def updateMusicInformation(self, artist = "", title = "", album = "", genre = "", year = "", clear = False):
 		if year and album:
 			album = "%s %s" % (album, year)
 		self.updateSingleMusicInformation("artist", artist, clear)
 		self.updateSingleMusicInformation("title", title, clear)
 		self.updateSingleMusicInformation("album", album, clear)
 		self.updateSingleMusicInformation("genre", genre, clear)
-		self.updateSingleMusicInformation("track", track, clear)
 		self.currentTitle = title
 		if not self.iDreamMode and self.songList[self.currentIndex][0].PTS is None:
 			# for lyrics
@@ -1204,13 +1211,6 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 				apicframes = audio.getall("APIC")
 				if len(apicframes) >= 1:
 					hasCover = True
-					if not config.plugins.merlinmusicplayer.hardwaredecoder.value:
-						coverArtFile = file("/tmp/.id3coverart", 'wb')
-                    				coverArtFile.write(apicframes[0].data)
-				                coverArtFile.close()
-						self["coverArt"].embeddedCoverArt()
-						if self.screenSaverScreen:
-							self.screenSaverScreen.updateCover(modus = 2)
 			elif audiotype == 2:
 				if len(audio.pictures) >= 1:
 					hasCover = True
@@ -1301,7 +1301,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		currPlay = self.session.nav.getCurrentService()
 		sAudioType = currPlay.info().getInfoString(iServiceInformation.sUser+10)
 		print "[MerlinMusicPlayer] audio-codec %s can't be decoded by hardware" % (sAudioType)
-		self.session.open(MessageBox, _("This Dreambox can't decode %s streams!") % sAudioType, type = MessageBox.TYPE_INFO,timeout = 20 )
+		self.session.open(MessageBox, _("This Receiver can't decode %s streams!") % sAudioType, type = MessageBox.TYPE_INFO,timeout = 20 )
 
 	def __evPluginError(self):
 		currPlay = self.session.nav.getCurrentService()
@@ -1334,7 +1334,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			if self.seek:
 				self.seek.seekTo(self.songList[self.currentIndex][0].PTS)
 				self.updatedSeekState()
-		self.resetScreenSaverTimer()		
+		self.resetScreenSaverTimer()
 
 	def unPauseService(self):
 		self.setSeekState(self.SEEK_STATE_PLAY)
@@ -1458,7 +1458,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			if self.songList[self.currentIndex][0].PTS is None:
 				self.playSong(self.songList[self.currentIndex][0].filename)
 			else:
-				self.playCUETrack()		
+				self.playCUETrack()
 
 		self.resetScreenSaverTimer()
 
@@ -1518,6 +1518,7 @@ class MerlinMusicPlayerLyrics(Screen):
 	def __init__(self, session, currentsong):
 		self.session = session
 		Screen.__init__(self, session)
+		self.setTitle(_("Lyrics"))
 		self["headertext"] = Label(_("Merlin Music Player Lyrics"))
 		# leoslyrics does not work anymore
 #		self["resulttext"] = Label(_("Getting lyrics from api.leoslyrics.com..."))
@@ -1525,10 +1526,10 @@ class MerlinMusicPlayerLyrics(Screen):
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions"],
 		{
 			"back": self.close,
-			"up": self.pageUp,
-			"left": self.pageUp,
-			"down": self.pageDown,
-			"right": self.pageDown,
+			"upUp": self.pageUp,
+			"leftUp": self.pageUp,
+			"downUp": self.pageDown,
+			"rightUp": self.pageDown,
 		}, -1)
 		self["lyric_text"] = ScrollLabel()
 		self.currentSong = currentsong
@@ -1543,7 +1544,7 @@ class MerlinMusicPlayerLyrics(Screen):
 		text = getEncodedString(self.getLyricsFromID3Tag(audio)).replace("\r\n","\n")
 		text = text.replace("\r","\n")
 		self["lyric_text"].setText(text)
-  
+ 
 	def getLyricsFromID3Tag(self,tag):
 		if tag:
 			for frame in tag.values():
@@ -1552,7 +1553,7 @@ class MerlinMusicPlayerLyrics(Screen):
 		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(self.currentSong.artist), quote(self.currentSong.title))
 		sendUrlCommand(url, None,10).addCallback(self.gotLyrics).addErrback(self.urlError)
 		return "No lyrics found in id3-tag, trying api.chartlyrics.com..."
-	
+
 	def urlError(self, error = None):
 		if error is not None:
 			self["resulttext"].setText(str(error.getErrorMessage()))
@@ -1575,7 +1576,7 @@ class MerlinMusicPlayerLyrics(Screen):
 		self["lyric_text"].pageUp()
 
 	def pageDown(self):
-		self["lyric_text"].pageDown()	
+		self["lyric_text"].pageDown()
 
 class MerlinMusicPlayerSongList(Screen):
 	
@@ -1613,6 +1614,8 @@ class MerlinMusicPlayerSongList(Screen):
 	def __init__(self, session, songlist, index, idreammode):
 		self.session = session
 		Screen.__init__(self, session)
+		
+		
 		self["headertext"] = Label(_("Merlin Music Player Songlist"))
 		self["list"] = iDreamList()
 		self["list"].connectSelChanged(self.lcdUpdate)
@@ -1671,8 +1674,6 @@ class MerlinMusicPlayerSongList(Screen):
 		return MerlinMusicPlayerLCDScreenText
 
 class iDreamMerlin(Screen):
-	
-
 	sz_w = getDesktop(0).size().width()
 	if sz_w == 1280:
 		skin = """
@@ -1682,10 +1683,10 @@ class iDreamMerlin(Screen):
 				<ePixmap position="328,102" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 				<ePixmap position="478,102" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 				<ePixmap position="628,102" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-				<widget render="Label" source="key_red" position="178,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_green" position="328,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_yellow" position="478,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_blue" position="628,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_red" position="178,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_green" position="328,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_yellow" position="478,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_blue" position="628,102" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="headertext" position="178,149" zPosition="1" size="900,23" font="Regular;20" transparent="1"  foregroundColor="#fcc000" backgroundColor="#00000000"/>
 				<widget name="list" position="178,182" zPosition="2" size="940,350" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 			</screen>"""
@@ -1696,10 +1697,10 @@ class iDreamMerlin(Screen):
 				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 				<ePixmap position="350,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 				<ePixmap position="500,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_green" position="200,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_yellow" position="350,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_blue" position="500,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_green" position="200,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_yellow" position="350,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_blue" position="500,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="headertext" position="50,77" zPosition="1" size="900,23" font="Regular;20" transparent="1"  foregroundColor="#fcc000" backgroundColor="#00000000"/>
 				<widget name="list" position="50,110" zPosition="2" size="940,350" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 			</screen>"""
@@ -1710,22 +1711,18 @@ class iDreamMerlin(Screen):
 				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 				<ePixmap position="350,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 				<ePixmap position="500,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_green" position="200,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_yellow" position="350,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_blue" position="500,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_green" position="200,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_yellow" position="350,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_blue" position="500,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;18" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="headertext" position="50,77" zPosition="1" size="620,23" font="Regular;20" transparent="1"  foregroundColor="#fcc000" backgroundColor="#00000000"/>
 				<widget name="list" position="50,110" zPosition="2" size="620,350" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 			</screen>"""
-		
-	
 	def __init__(self, session, servicelist):
 		self.session = session
 		Screen.__init__(self, session)
 		self["list"] = iDreamList()
 		self["list"].connectSelChanged(self.lcdUpdate)
-
-
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"],
 		{
 			"ok": self.ok,
@@ -1857,9 +1854,6 @@ class iDreamMerlin(Screen):
 			self.close()
 		else:
 			self.red_pressed()
-		
-
-
 
 	def addGenreToPlaylist(self):
 		self.session.openWithCallback(boundFunction(self.addListToPlaylistConfirmed,self.addGenreToPlaylistConfirmedCallback), MessageBox, _("Do you really want to add all songs from that genre to a playlist?"))
@@ -1902,7 +1896,6 @@ class iDreamMerlin(Screen):
 				self.sqlCommand("delete from playlists where playlist_id = %d" % (sel.playlistID))
 				self["list"].removeItem(self["list"].getCurrentIndex())
 				self.clearCache()
-
 
 	def deleteSongFromPlaylist(self):
 		self.session.openWithCallback(self.deleteSongFromPlaylistConfirmed, MessageBox, _("Do you really want to delete that song the current playlist?"))
@@ -1963,7 +1956,7 @@ class iDreamMerlin(Screen):
 
 	def enterSearchText(self, ret):
 		if ret:
-			self.session.openWithCallback(boundFunction(self.enterSearchTextFinished,ret[1]), VirtualKeyBoard, title = _("Enter search-text"))
+			self.session.openWithCallback(boundFunction(self.enterSearchTextFinished,ret[1]), VirtualKeyBoard, title = _("Enter search text"))
 
 	def enterSearchTextFinished(self, searchType, searchText = None):
 		if searchText:
@@ -2115,7 +2108,7 @@ class iDreamMerlin(Screen):
 			self["list"].setList(playlistSongList)
 			if len(playlistSongList) > 1:
 				self["list"].moveToIndex(1)
-				
+
 	def buildGenreList(self, addToCache):
 		if addToCache:
 			self.cacheList.append(CacheList(index = self["list"].getCurrentIndex(), listview = self["list"].getList(), headertext = self["headertext"].getText(), methodarguments = self.LastMethod))
@@ -2165,19 +2158,19 @@ class iDreamMerlin(Screen):
 
 	def setButtons(self, red = False, green = False, yellow = False, blue = False):
 		if red:
-			self["key_red"].setText("Main Menu")
+			self["key_red"].setText(_("Main Menu"))
 		else:
 			self["key_red"].setText("")
 		if green:
-			self["key_green"].setText("Play")
+			self["key_green"].setText(_("Play"))
 		else:
 			self["key_green"].setText("")
 		if yellow:
-			self["key_yellow"].setText("All Artists")
-		else:		
+			self["key_yellow"].setText(_("All Artists"))
+		else:
 			self["key_yellow"].setText("")
 		if blue:
-			self["key_blue"].setText("Show Album")
+			self["key_blue"].setText(_("Show Album"))
 		else:
 			self["key_blue"].setText("")
 
@@ -2208,7 +2201,7 @@ class iDreamMerlin(Screen):
 		self.mode = 0
 		self["list"].setMode(self.mode)
 		self.buildMainMenuList()
-	
+
 	def yellow_pressed(self):
 		try:
 			sel = self["list"].l.getCurrentSelection()[0]
@@ -2220,7 +2213,7 @@ class iDreamMerlin(Screen):
 			self.setButtons(red = True, green = True, blue = True)
 			self["list"].setMode(self.mode)
 			self.buildArtistSongList(artistID = sel.artistID, mode = oldmode, addToCache = True)
-		
+
 	def blue_pressed(self):
 		try:
 			sel = self["list"].l.getCurrentSelection()[0]
@@ -2232,7 +2225,7 @@ class iDreamMerlin(Screen):
 			self.mode = 18
 			self["list"].setMode(self.mode)
 			self.buildAlbumSongList(albumID = sel.albumID, mode = oldmode, addToCache = True)
-	
+
 	def buildSongList(self, addToCache):
 		if addToCache:
 			self.cacheList.append(CacheList(index = self["list"].getCurrentIndex(), listview = self["list"].getList(), headertext = self["headertext"].getText(), methodarguments = self.LastMethod))
@@ -2254,7 +2247,6 @@ class iDreamMerlin(Screen):
 			self["list"].setList(SongList)
 			if len(SongList) > 1:
 				self["list"].moveToIndex(1)
-
 
 	def buildSearchSongList(self, sql_where, headerText, mode, addToCache):
 		if addToCache:
@@ -2281,7 +2273,6 @@ class iDreamMerlin(Screen):
 			if len(SongList) > 1:
 				self["list"].moveToIndex(1)
 
-	
 	def buildArtistSongList(self, artistID, mode, addToCache):
 		if addToCache:
 			self.cacheList.append(CacheList(index = self["list"].getCurrentIndex(), listview = self["list"].getList(), headertext = self["headertext"].getText(), methodarguments = self.LastMethod))
@@ -2307,7 +2298,7 @@ class iDreamMerlin(Screen):
 			self["list"].setList(artistSongList)
 			if len(artistSongList) > 1:
 				self["list"].moveToIndex(1)
-			
+
 	def buildAlbumSongList(self, albumID, mode, addToCache):
 		if addToCache:
 			self.cacheList.append(CacheList(index = self["list"].getCurrentIndex(), listview = self["list"].getList(), headertext = self["headertext"].getText(), methodarguments = self.LastMethod))
@@ -2333,7 +2324,7 @@ class iDreamMerlin(Screen):
 			self["list"].setList(albumSongList)
 			if len(albumSongList) > 1:
 				self["list"].moveToIndex(1)
-		
+
 	def buildMainMenuList(self, addToCache = True):
 		arguments = {}
 		arguments["addToCache"] = True
@@ -2368,7 +2359,7 @@ class iDreamMerlin(Screen):
 			connection.close()
 			self["list"].setList(mainMenuList)
 			self["list"].moveToIndex(0)
-		
+
 	def buildArtistList(self, addToCache):
 		if addToCache:
 			self.cacheList.append(CacheList(index = self["list"].getCurrentIndex(), listview = self["list"].getList(), headertext = self["headertext"].getText(), methodarguments = self.LastMethod))
@@ -2417,7 +2408,7 @@ class iDreamMerlin(Screen):
 			self["list"].setList(albumArtistList)
 			if len(albumArtistList) > 1:
 				self["list"].moveToIndex(1)
-			
+
 	def buildAlbumList(self, addToCache):
 		if addToCache:
 			self.cacheList.append(CacheList(index = self["list"].getCurrentIndex(), listview = self["list"].getList(), headertext = self["headertext"].getText(), methodarguments = self.LastMethod))
@@ -2439,7 +2430,7 @@ class iDreamMerlin(Screen):
 			self["list"].setList(albumList)
 			if len(albumList) > 1:
 				self["list"].moveToIndex(1)
-			
+
 	def startRun(self):
 		if pathToDatabase.isRunning:
 			self.showScanner = eTimer()
@@ -2456,7 +2447,6 @@ class iDreamMerlin(Screen):
 
 	def showScannerCallback(self):
 		self.session.openWithCallback(self.filesAdded, iDreamAddToDatabase,None)
-
 
 	def startPlayerTimerCallback(self):
 		connection = OpenDatabase()
@@ -2493,14 +2483,13 @@ class iDreamMerlin(Screen):
 		if result:
 			self.red_pressed()
 
-
 	def stopPlayingAndAppendFileToSongList(self):
 		self.startMerlinPlayerScreenTimer.stop()
 		if self.player is not None:
 			self.player.doClose()
 			self.player = None
-		self.appendFileToSongList()	
-		self.startMerlinPlayerScreenTimer.start(config.plugins.merlinmusicplayer.screentimerwait.value * 1000)
+		self.appendFileToSongList()
+		self.startMerlinPlayerScreenTimer.start(START_MERLIN_PLAYER_SCREEN_TIMER_VALUE)
 
 	def appendFileToSongList(self):
 		SongList = []
@@ -2522,7 +2511,7 @@ class iDreamMerlin(Screen):
 				self.player.init = 1
 			else:
 				self.player["nextTitle"].setText(self.player.getNextTitle())
-				self.session.open(MessageBox, _("%s\nappended to songlist")%sel.title, type = MessageBox.TYPE_INFO,timeout = 3 )
+				self.session.open(MessageBox, _("%s\nappended to songlist") % sel.title, type = MessageBox.TYPE_INFO,timeout = 3)
 
 	def insertFileToSongList(self):
 		sel = self.getCurrentSelection()
@@ -2532,7 +2521,7 @@ class iDreamMerlin(Screen):
 				self.player.songList.insert(index+1,(sel,))
 				self.player.origSongList.insert(index+1,(sel,))
 				self.player["nextTitle"].setText(self.player.getNextTitle())
-				self.session.open(MessageBox, _("%s\ninserted and will be played as next song")%sel.title, type = MessageBox.TYPE_INFO,timeout = 3 )
+				self.session.open(MessageBox, _("%s\ninserted and will be played as next song") % sel.title, type = MessageBox.TYPE_INFO,timeout = 3)
 			else:
 				self.appendFileToSongList()
 
@@ -2540,10 +2529,10 @@ class iDreamMerlin(Screen):
 		if error is not None:
 			self["list"].hide()
 			self["statustext"].setText(str(error.getErrorMessage()))
-			
+
 	def closing(self):
 		self.close()
-		
+
 	def __onClose(self):
 		self.startMerlinPlayerScreenTimer.stop()
 		if self.player is not None:
@@ -2551,14 +2540,13 @@ class iDreamMerlin(Screen):
 			self.player.doClose()
 			self.player = None
 		if self.serviceList is None:
-			self.session.nav.playService(self.currentService)
+			self.session.nav.playService(self.currentService, adjust=False)
 		else:
 			current = ServiceReference(self.serviceList.getCurrentSelection())
-			self.session.nav.playService(current.ref)
-		
+			self.session.nav.playService(current.ref, adjust=False)
 
 	def lcdUpdate(self):
-		self.startMerlinPlayerScreenTimer.start(config.plugins.merlinmusicplayer.screentimerwait.value * 1000)
+		self.startMerlinPlayerScreenTimer.start(START_MERLIN_PLAYER_SCREEN_TIMER_VALUE)
 		try:
 			count = self["list"].getItemCount()
 			index = self["list"].getCurrentIndex()
@@ -2579,7 +2567,7 @@ class iDreamMerlin(Screen):
 	def createSummary(self):
 		return MerlinMusicPlayerLCDScreenText
 
-		
+
 class iDreamList(GUIComponent, object):
 	def buildEntry(self, item):
 		width = self.l.getItemSize().width()
@@ -2602,16 +2590,20 @@ class iDreamList(GUIComponent, object):
 					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width , 20, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s" % item.text))
 				else:
 					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width , 20, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s" % item.title))
-		
 		return res
-	
+
 	def __init__(self):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
 		self.l.setBuildFunc(self.buildEntry)
-		self.l.setFont(0, gFont("Regular", 20))
-		self.l.setFont(1, gFont("Regular", 16))
-		self.l.setItemHeight(22)
+		font = skin.fonts.get("iDreamListFont0", ("Regular", 20))
+		self.l.setFont(0, gFont(font[0], font[1]))
+		font = skin.fonts.get("iDreamListFont1", ("Regular", 16))
+		self.l.setFont(1, gFont(font[0], font[1]))
+		font = skin.fonts.get("iDreamListItem", (22, 68))
+		self.item = font[0]
+		self.item1 = font[1]
+		self.l.setItemHeight(self.item)
 		self.onSelectionChanged = [ ]
 		self.mode = 0
 		self.displaySongMode = False
@@ -2629,15 +2621,16 @@ class iDreamList(GUIComponent, object):
 	def selectionChanged(self):
 		for x in self.onSelectionChanged:
 			x()
-	
+
 	def getCurrent(self):
 		cur = self.l.getCurrentSelection()
 		return cur and cur[0]
-	
+
 	GUI_WIDGET = eListbox
-	
+
 	def postWidgetCreate(self, instance):
 		instance.setContent(self.l)
+		instance.setWrapAround(True)
 		instance.selectionChanged.get().append(self.selectionChanged)
 
 	def preWidgetRemove(self, instance):
@@ -2657,7 +2650,7 @@ class iDreamList(GUIComponent, object):
 		self.list = list
 		self.l.setList(list)
 		self.itemCount = len(self.list) - 1
-	
+
 	def getItemCount(self):
 		return  self.itemCount
 
@@ -2675,11 +2668,10 @@ class iDreamList(GUIComponent, object):
 		self.mode = mode
 		if mode == 2 or mode == 6 or mode == 8 or mode == 10 or mode == 18 or mode == 19 or mode == 14 or mode == 20:
 			self.displaySongMode = True
-			self.l.setItemHeight(68)
+			self.l.setItemHeight(self.item1)
 		else:
 			self.displaySongMode = False
-			self.l.setItemHeight(22)
-
+			self.l.setItemHeight(self.item)
 
 class MerlinMediaPixmap(Pixmap):
 	def __init__(self):
@@ -2758,6 +2750,7 @@ class SelectPath(Screen):
 		</screen>"""
 	def __init__(self, session, initDir):
 		Screen.__init__(self, session)
+		self.setTitle(_("Select path"))
 		inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]
 		inhibitMounts = []
 		self["filelist"] = FileList(initDir, showDirectories = True, showFiles = False, inhibitMounts = inhibitMounts, inhibitDirs = inhibitDirs)
@@ -2772,7 +2765,6 @@ class SelectPath(Screen):
 			"ok": self.ok,
 			"green": self.green,
 			"red": self.cancel
-			
 		}, -1)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
@@ -2810,7 +2802,6 @@ class SelectPath(Screen):
 			self["target"].setText(currFolder)
 		else:
 			self["target"].setText(_("Invalid Location"))
-
 
 class MerlinMusicPlayerLCDScreen(Screen):
 	skin = """
@@ -2857,9 +2848,7 @@ class MerlinMusicPlayerLCDScreenText(Screen):
 		elif line == 4:
 			self["text4"].setText(text)
 
-
 class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
-
 	sz_w = getDesktop(0).size().width()
 	if sz_w == 1280:
 		skin = """
@@ -2894,13 +2883,12 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session, databasePath):
 		Screen.__init__(self, session)
+		self.setTitle(_("Merlin Music Player Setup"))
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 
 		self.list = [ ]
-		if HardwareInfo().get_device_name() != "dm7025":
-			self.list.append(getConfigListEntry(_("Use hardware-decoder for MP3"), config.plugins.merlinmusicplayer.hardwaredecoder))
 		self.list.append(getConfigListEntry(_("Play last used songlist after starting"), config.plugins.merlinmusicplayer.startlastsonglist))
 		if databasePath:
 			self.database = getConfigListEntry(_("iDream database path"), config.plugins.merlinmusicplayer.databasepath)
@@ -2912,14 +2900,13 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 		self.list.append(self.googleimage)
 		self.list.append(getConfigListEntry(_("Activate screensaver"), config.plugins.merlinmusicplayer.usescreensaver))
 		self.list.append(getConfigListEntry(_("Wait for screensaver (in min)"), config.plugins.merlinmusicplayer.screensaverwait))
-		self.list.append(getConfigListEntry(_("Wait for screentimeout (in sec)"), config.plugins.merlinmusicplayer.screentimerwait))
 		self.list.append(getConfigListEntry(_("Remember last path of filebrowser"), config.plugins.merlinmusicplayer.rememberlastfilebrowserpath))
 		self.defaultFileBrowserPath = getConfigListEntry(_("Filebrowser startup path"), config.plugins.merlinmusicplayer.defaultfilebrowserpath)
 		self.list.append(self.defaultFileBrowserPath)
-		self.list.append(getConfigListEntry(_("Show iDream in extended-pluginlist"), config.plugins.merlinmusicplayer.idreamextendedpluginlist))
-		self.list.append(getConfigListEntry(_("Show Merlin Music Player in extended-pluginlist"), config.plugins.merlinmusicplayer.merlinmusicplayerextendedpluginlist))
-		self.list.append(getConfigListEntry(_("Show iDream in mainmenu"), config.plugins.merlinmusicplayer.idreammainmenu))
-		self.list.append(getConfigListEntry(_("Show Merlin Music Player in mainmenu"), config.plugins.merlinmusicplayer.merlinmusicplayermainmenu))
+		self.list.append(getConfigListEntry(_("Show iDream in extensions menu"), config.plugins.merlinmusicplayer.idreamextendedpluginlist))
+		self.list.append(getConfigListEntry(_("Show Merlin Music Player in extensions menu"), config.plugins.merlinmusicplayer.merlinmusicplayerextendedpluginlist))
+		self.list.append(getConfigListEntry(_("Show iDream in main menu"), config.plugins.merlinmusicplayer.idreammainmenu))
+		self.list.append(getConfigListEntry(_("Show Merlin Music Player in main menu"), config.plugins.merlinmusicplayer.merlinmusicplayermainmenu))
 
 		ConfigListScreen.__init__(self, self.list, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -2962,7 +2949,6 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 		self.close(False)
 
 
-
 class MerlinMusicPlayerFileList(Screen):
 	
 	sz_w = getDesktop(0).size().width()
@@ -2974,7 +2960,7 @@ class MerlinMusicPlayerFileList(Screen):
 			<eLabel backgroundColor="#999999" font="Regular;16" foregroundColor="#0f0f0f" halign="center" position="178,104" size="250,20" text="MERLIN  MUSIC  PLAYER" valign="center" zPosition="2"/>
 			<eLabel backgroundColor="#999999" font="Regular;16" foregroundColor="#0f0f0f" halign="center" position="852,104" size="250,20" text="WWW.DREAMBOX-TOOLS.INFO" valign="center" zPosition="2"/>
 			<widget name="headertext" position="178,145" zPosition="1" size="900,23" font="Regular;20" transparent="1"  foregroundColor="#fcc000" backgroundColor="#00000000"/>
-			<widget name="list" position="178,182" zPosition="2" size="940,350" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>				
+			<widget name="list" position="178,182" zPosition="2" size="940,350" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 			</screen>"""
 	elif sz_w == 1024:
 		skin = """
@@ -3001,7 +2987,6 @@ class MerlinMusicPlayerFileList(Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		self["list"] = FileList(config.plugins.merlinmusicplayer.defaultfilebrowserpath.value, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(mp3|m4a|flac|ogg|m3u|pls|cue)", useServiceRef = False)
-
 
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"],
 		{
@@ -3062,7 +3047,7 @@ class MerlinMusicPlayerFileList(Screen):
 					index = 0
 				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, index, iDreamMode, self.currentService, self.serviceList)
 				self.session.execDialog(self.player)
-	
+
 	def readCUE(self, filename):
 		SongList = []
 		displayname = None
@@ -3214,7 +3199,7 @@ class MerlinMusicPlayerFileList(Screen):
 			self.startMerlinPlayerScreenTimer.stop()
 			count = len(SongList)
 			if count:
-				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, foundIndex, False, self.currentService, self.serviceList)
+				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen, SongList, foundIndex, False, self.currentService, self.serviceList)
 				self.session.execDialog(self.player)
 			else:
 				self.session.open(MessageBox, _("No music files found!"), type = MessageBox.TYPE_INFO,timeout = 20 )
@@ -3244,7 +3229,7 @@ class MerlinMusicPlayerFileList(Screen):
 			self.player.doClose()
 			self.player = None
 		self.appendFileToSongList()	
-		self.startMerlinPlayerScreenTimer.start(config.plugins.merlinmusicplayer.screentimerwait.value * 1000)
+		self.startMerlinPlayerScreenTimer.start(START_MERLIN_PLAYER_SCREEN_TIMER_VALUE)
 
 	def appendFileToSongList(self):
 		playerAvailable =  self.player is not None and self.player.songList
@@ -3307,12 +3292,12 @@ class MerlinMusicPlayerFileList(Screen):
 	def updateTarget(self):
 		currFolder = self["list"].getCurrentDirectory()
 		if currFolder is None:
-			currFolder = ("Invalid Location")
+			currFolder = _("Invalid Location")
 		self["headertext"].setText(_("Filelist: %s") % currFolder)
 		self.lcdupdate()
 
 	def lcdupdate(self):
-		self.startMerlinPlayerScreenTimer.start(config.plugins.merlinmusicplayer.screentimerwait.value * 1000)
+		self.startMerlinPlayerScreenTimer.start(START_MERLIN_PLAYER_SCREEN_TIMER_VALUE)
 		index = self["list"].getSelectionIndex()
 		sel = self["list"].list[index]
 		text = sel[1][7]
@@ -3330,7 +3315,7 @@ class MerlinMusicPlayerFileList(Screen):
 		self.summaries.setText(text,3)
 		# naechstes
 		index = self["list"].getSelectionIndex() + 1
-		if index > (len(self["list"].list) -1):		
+		if index > (len(self["list"].list) -1):
 			index = 0
 		sel = self["list"].list[index]
 		text = sel[1][7]
@@ -3345,10 +3330,10 @@ class MerlinMusicPlayerFileList(Screen):
 			self.player.doClose()
 			self.player = None
 		if self.serviceList is None:
-			self.session.nav.playService(self.currentService)
+			self.session.nav.playService(self.currentService, adjust=False)
 		else:
 			current = ServiceReference(self.serviceList.getCurrentSelection())
-			self.session.nav.playService(current.ref)
+			self.session.nav.playService(current.ref, adjust=False)
 		if config.plugins.merlinmusicplayer.rememberlastfilebrowserpath.value:
 			try:
 				config.plugins.merlinmusicplayer.defaultfilebrowserpath.value = self["list"].getCurrentDirectory()
@@ -3360,39 +3345,30 @@ class MerlinMusicPlayerFileList(Screen):
 		return MerlinMusicPlayerLCDScreenText
 
 def main(session,**kwargs):
-	if kwargs.has_key("servicelist"):
-		servicelist = kwargs["servicelist"]
-	else:
-		servicelist = None
+	servicelist = InfoBar.instance and InfoBar.instance.servicelist
 	session.open(iDreamMerlin, servicelist)
 
 def merlinmusicplayerfilelist(session,**kwargs):
-	if kwargs.has_key("servicelist"):
-		servicelist = kwargs["servicelist"]
-	else:
-		servicelist = None
+	servicelist = InfoBar.instance and InfoBar.instance.servicelist
 	session.open(MerlinMusicPlayerFileList, servicelist)
 
 def menu_merlinmusicplayerfilelist(menuid, **kwargs):
-	if menuid == "mainmenu":
+	if menuid == "mainmenu" and config.plugins.merlinmusicplayer.merlinmusicplayermainmenu.value:
 		return [(_("Merlin Music Player"), merlinmusicplayerfilelist, "merlin_music_player", 46)]
 	return []
 
 def menu_idream(menuid, **kwargs):
-	if menuid == "mainmenu":
+	if menuid == "mainmenu" and config.plugins.merlinmusicplayer.idreammainmenu.value:
 		return [(_("iDream"), main, "idream", 47)]
 	return []
 
 def Plugins(**kwargs):
-
-	list = [PluginDescriptor(name="Merlin iDream", description=_("Dreambox Music Database"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "iDream.png", fnc=main)]
-	list.append(PluginDescriptor(name="Merlin Music Player", description=_("Merlin Music Player"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "MerlinMusicPlayer.png", fnc=merlinmusicplayerfilelist))
+	list = [PluginDescriptor(name= _("iDream"), description=_("Receiver Music Database"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "iDream.png", fnc=main)]
+	list.append(PluginDescriptor(name= _("Merlin Music Player"), description=_("Merlin music player"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "MerlinMusicPlayer.png", fnc=merlinmusicplayerfilelist))
 	if config.plugins.merlinmusicplayer.idreamextendedpluginlist.value:
-		list.append(PluginDescriptor(name="iDream", description=_("Dreambox Music Database"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
+		list.append(PluginDescriptor(name= _("iDream"), description=_("Receiver Music Database"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
 	if config.plugins.merlinmusicplayer.merlinmusicplayerextendedpluginlist.value:
-		list.append(PluginDescriptor(name="Merlin Music Player", description=_("Merlin Music Player"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=merlinmusicplayerfilelist))
-	if config.plugins.merlinmusicplayer.merlinmusicplayermainmenu.value:
-		list.append(PluginDescriptor(name="Merlin Music Player", description=_("Merlin Music Player"), where = [PluginDescriptor.WHERE_MENU], fnc=menu_merlinmusicplayerfilelist))
-	if config.plugins.merlinmusicplayer.idreammainmenu.value:
-		list.append(PluginDescriptor(name="iDream", description=_("iDream"), where = [PluginDescriptor.WHERE_MENU], fnc=menu_idream))
+		list.append(PluginDescriptor(name= _("Merlin Music Player"), description=_("Merlin music player"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=merlinmusicplayerfilelist))
+	list.append(PluginDescriptor(name= _("Merlin Music Player"), description=_("Merlin music player"), where = [PluginDescriptor.WHERE_MENU], fnc=menu_merlinmusicplayerfilelist))
+	list.append(PluginDescriptor(name= _("iDream"), description=_("Receiver Music Database"), where = [PluginDescriptor.WHERE_MENU], fnc=menu_idream))
 	return list

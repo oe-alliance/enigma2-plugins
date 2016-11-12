@@ -1,0 +1,341 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MerlinMusicPlayer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-17 15:07+0100\n"
+"PO-Revision-Date: 2015-10-07 18:57+0300\n"
+"Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
+"Language-Team: openpli.org\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru\n"
+"X-Generator: Poedit 1.8.4\n"
+
+msgid ""
+"%d files added to database!\n"
+"Press OK to close."
+msgstr ""
+"%d файлов добавлено в базу данных!\n"
+"Нажмите ОК для закрытия."
+
+msgid ""
+"%s\n"
+" added to database"
+msgstr ""
+"%s\n"
+" добавлено в базу данных"
+
+msgid ""
+"%s\n"
+" already exists in database!"
+msgstr ""
+"%s\n"
+" уже существует в базе данных!"
+
+msgid ""
+"%s\n"
+"appended to songlist"
+msgstr ""
+"%s\n"
+"добавляется к списку композиций"
+
+msgid ""
+"%s\n"
+"inserted and will be played as next song"
+msgstr ""
+"%s\n"
+"вставлен и будет играть в следующей композиции"
+
+msgid "Activate screensaver"
+msgstr "Активировать скринсейвер"
+
+msgid "Add all songs from selected album to a playlist"
+msgstr "Добавить все композиции из выбранного альбома в плейлист"
+
+msgid "Add all songs from selected artist to a playlist"
+msgstr "Добавить все композиции из выбранного исполнителя в плейлист"
+
+msgid "Add all songs from selected genre to a playlist"
+msgstr "Добавить все композиции из выбранного жанра в плейлист"
+
+msgid "Add music files to iDream database"
+msgstr "Добавить музыкальные файлы в базу данных iDream"
+
+msgid "Add selected song to a playlist"
+msgstr "Добавить выбранную композицию в плейлист"
+
+msgid "Album (%s) -> Song List"
+msgstr "Альбом (%s) -> список композиций"
+
+msgid "Albums (%d)"
+msgstr "Альбомы (%d)"
+
+msgid "Albums List"
+msgstr "Список альбомов"
+
+msgid "All Artists"
+msgstr "Все исполнители"
+
+msgid "All Songs"
+msgstr "Все композиции"
+
+msgid "Append file to current playing songlist"
+msgstr "Добавить файл в текущий играющий список композиций"
+
+msgid "Append file to current songlist"
+msgstr "Добавить файл в текущий список композиций"
+
+msgid "Artist (%s) -> Album List"
+msgstr "Исполнитель (%s) -> список альбомов"
+
+msgid "Artist (%s) -> Song List"
+msgstr "Исполнитель (%s) -> список композиций"
+
+msgid "Artists (%d)"
+msgstr "Исполнители (%d)"
+
+msgid "Artists List"
+msgstr "Список исполнителей"
+
+msgid "Receiver Music Database"
+msgstr "База данных музыки в ресивере"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Clear current songlist and play selected entry"
+msgstr "Удалить текущий список композиций и проиграть выбранный"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Configuration"
+msgstr "Конфигурация"
+
+msgid "Create new playlist"
+msgstr "Создать новый плейлист"
+
+msgid "Delete selected playlist"
+msgstr "Удалить выбранный плейлист"
+
+msgid "Delete song from current playlist"
+msgstr "Удалить композицию из текущего плейлиста"
+
+msgid "Delete song from database"
+msgstr "Удалить композицию из базы данных"
+
+msgid "Do you really want to add all songs from that album to a playlist?"
+msgstr "Вы действительно хотите добавить все композиции этого альбома в плейлист?"
+
+msgid "Do you really want to add all songs from that artist to a playlist?"
+msgstr "Вы действительно хотите добавить все композиции этого исполнителя в плейлист?"
+
+msgid "Do you really want to add all songs from that genre to a playlist?"
+msgstr "Вы действительно хотите добавить все композиции этого жанра в плейлист?"
+
+msgid "Do you really want to delete that song from the database?"
+msgstr "Вы действительно хотите удалить эту вкомпозицию из базы данных?"
+
+msgid "Do you really want to delete that song the current playlist?"
+msgstr "Вы действительно хотите удалить эту вкомпозицию из текущего плейлиста?"
+
+msgid "Do you really want to delete the current playlist?"
+msgstr "Вы действительно хотите удалить текущий плейлист?"
+
+msgid "Enter name for playlist"
+msgstr "Введите имя для плейлиста"
+
+msgid "Enter search text"
+msgstr "Введите текст поиска"
+
+msgid ""
+"Error!\n"
+"Can not open database!\n"
+"Check if save folder is correct and writeable!\n"
+"Press OK to close."
+msgstr ""
+"Ошибка!\n"
+"Невозможно открыть базу данных!\n"
+"Проверьте, что бы сохраненная папка была корректна и доступна для записи!\n"
+"Нажмите ОК для закрытия."
+
+msgid "Filebrowser startup path"
+msgstr "Стартовый путь для браузера файлов"
+
+msgid "Filelist: %s"
+msgstr "Список файлов: %s"
+
+msgid "Genre (%s) -> Song List"
+msgstr "Жанр (%s) -> список композиций"
+
+msgid "Genre List"
+msgstr "Список жанров"
+
+msgid "Genres (%d)"
+msgstr "Жанры (%d)"
+
+msgid "Google image path"
+msgstr "Путь для изображений google"
+
+msgid "Insert file to current playing songlist and play next"
+msgstr "Вставить файл в текущий играющий список композиций и проиграть следующим"
+
+msgid "Insert file to current songlist and play next"
+msgstr "Вставить файл в текущий список композиций и проиграть следующим"
+
+msgid "Invalid Location"
+msgstr "Неправильное расположение"
+
+msgid "Lyrics"
+msgstr "Текст композиций"
+
+msgid "Main Menu"
+msgstr "Главное меню"
+
+msgid "Merlin Music Player"
+msgstr "Merlin Music Player"
+
+msgid "Merlin Music Player Lyrics"
+msgstr "Merlin Music Player - текст композиций"
+
+msgid "Merlin Music Player Setup"
+msgstr "Merlin Music Player - настройки"
+
+msgid "Merlin Music Player Songlist"
+msgstr "Merlin Music Player - список композиций"
+
+msgid "Merlin Music Player TV"
+msgstr "Merlin Music Player - ТВ"
+
+msgid "Merlin music player"
+msgstr "пригрыватель музыкальных файлов"
+
+msgid "No lyrics found"
+msgstr "Не найдены тесты композиций"
+
+msgid "No music files found!"
+msgstr "Не найдены музыкальные файлы!"
+
+msgid "OK"
+msgstr "ОК"
+
+msgid "Play"
+msgstr "Играть"
+
+msgid "Play last used songlist after starting"
+msgstr "Воспроизвести последний список композиций после запуска"
+
+msgid "Playlist (%s) -> Song List"
+msgstr "Плейлист (%s) -> список композиций"
+
+msgid "Playlists"
+msgstr "Плейлисты"
+
+msgid "Playlists (%d)"
+msgstr "Плейлисты (%d)"
+
+msgid ""
+"Process aborted.\n"
+" 0 files added to database!\n"
+"Press OK to close."
+msgstr ""
+"Процесс прерван.\n"
+" 0 файлов добавлено в базу даных!\n"
+"Нажмите ОК для закрытия."
+
+msgid "Remember last path of filebrowser"
+msgstr "Запоминать последний путь для браузера файлов"
+
+msgid "Repeat is not available yet with cue-files!"
+msgstr "Повтор пока не доступен для cue-файлов!"
+
+msgid "Response -> lyrics for: %s (%s)"
+msgstr "Ответ -> тест композиции для: %s (%s)"
+
+msgid "Scan path for music files and add them to database"
+msgstr "Путь сканирования для муз. файлов и добавление их в базу данных"
+
+msgid "Search in iDream database"
+msgstr "Поиск в базе данных iDream "
+
+msgid "Search results for \"%s\" in all albums"
+msgstr "Поиск результатов для \"%s\" во всех альбомах"
+
+msgid "Search results for \"%s\" in all artists"
+msgstr "Поиск результов для \"%s\" во всех исполнителях"
+
+msgid "Search results for \"%s\" in all titles"
+msgstr "Поиск результов для \"%s\" во всех названиях"
+
+msgid "Search results for \"%s\" in title, artist or album"
+msgstr "Поиск результов для \"%s\" в названии, исполнителе и альбоме."
+
+msgid "Select path"
+msgstr "Выберите путь"
+
+msgid "Show Album"
+msgstr "Показать альбом"
+
+msgid "Show Merlin Music Player in extensions menu"
+msgstr "Показать Merlin Music Player в меню дополнений"
+
+msgid "Show Merlin Music Player in main menu"
+msgstr "Показать Merlin Music Player в главном меню"
+
+msgid "Show iDream in extensions menu"
+msgstr "Показать iDream в меню дополнений"
+
+msgid "Show iDream in main menu"
+msgstr "Показать iDream в главном меню"
+
+msgid "Shuffle is not available yet with cue-files!"
+msgstr "Перемешивание пока не доступно для cue-файлов!"
+
+msgid "Songs (%d)"
+msgstr "Композиции (%d)"
+
+msgid ""
+"There are no playlists defined.\n"
+"Do you want to create a new playlist?"
+msgstr ""
+"Нет назначенных плейлистов.\n"
+"Вы действительно хотите создать новый плейлист?"
+
+msgid "This Receiver can't decode %s streams!"
+msgstr "Этот ресивер не может декодировать  %s!"
+
+msgid "Track %s"
+msgstr "Дорожка %s"
+
+msgid "Use google-images for cover art"
+msgstr "Использовать изображения google для обложки"
+
+msgid "Wait for screensaver (in min)"
+msgstr "Ожидание для скринсейвера (в мин)"
+
+msgid "[back]"
+msgstr "[назад]"
+
+msgid "iDream"
+msgstr "iDream"
+
+msgid "iDream Main Menu"
+msgstr "iDream - главное меню"
+
+msgid "iDream database path"
+msgstr "iDream - путь к базе данных"
+
+msgid "search for album"
+msgstr "поиск для альбома"
+
+msgid "search for artist"
+msgstr "поиск для исполнителя"
+
+msgid "search for title"
+msgstr "поиска для названия"
+
+msgid "search in all of them"
+msgstr "поиск во всех из них"
