@@ -28,7 +28,7 @@ msgstr "Pesquisa"
 
 #: plugin.py:171
 msgid "The Internet Movie Database"
-msgstr "Base de dados de filmes na Internedt"
+msgstr "Base de dados de filmes na Internet"
 
 #: plugin.py:187
 msgid "Exit"
@@ -44,7 +44,7 @@ msgstr "Por favor, selecionar entrada correspondente"
 
 #: plugin.py:318
 msgid "Title Menu"
-msgstr "Menu Título"
+msgstr "Título do Menu"
 
 #: plugin.py:319 plugin.py:706
 msgid "Details"
@@ -65,7 +65,7 @@ msgstr "Seleccione do EPG"
 
 #: plugin.py:376
 msgid "Setup"
-msgstr "Instalação"
+msgstr "Definição"
 
 #: plugin.py:383
 msgid "Save current Details as .html for offline use"
@@ -73,7 +73,7 @@ msgstr "Guardar os detalhes atuais como .html para usar offline"
 
 #: plugin.py:384
 msgid "Save current Details as .txt"
-msgstr "Salvar os detalhes atuais como .txt"
+msgstr "Guardar os detalhes atuais como .txt"
 
 #: plugin.py:385
 msgid "Save current Poster and Details as .txt"
@@ -81,11 +81,11 @@ msgstr "Guardar o poster atual e os detalhes como .txt"
 
 #: plugin.py:390
 msgid "Play Trailer"
-msgstr "Reproduzir Trailer"
+msgstr "Reproduzir Excerto"
 
 #: plugin.py:391
 msgid "Search Trailer"
-msgstr "Procurar Trailer"
+msgstr "Procurar Excerto"
 
 #: plugin.py:397
 msgid "IMDb Menu"
@@ -160,11 +160,11 @@ msgstr "Consulta do IMDb falhou!"
 
 #: plugin.py:689
 msgid "IMDb Download failed"
-msgstr "IMDb Descarga falhou"
+msgstr "IMDb Descarga falhou!"
 
 #: plugin.py:697
 msgid "IMDb Re-Download completed"
-msgstr "IMDb descarga concluída"
+msgstr "IMDb descarga concluída!"
 
 #: plugin.py:704
 msgid "No details found."
@@ -176,7 +176,7 @@ msgstr "Detalhes do IMDb analisados:"
 
 #: plugin.py:732
 msgid "no user rating yet"
-msgstr "Não classificado pelo utilizador ainda"
+msgstr "Não classificado ainda pelo utilizador"
 
 #: plugin.py:749
 msgid " as "
@@ -184,7 +184,7 @@ msgstr " como "
 
 #: plugin.py:753
 msgid "Cast: "
-msgstr "Elenco:"
+msgstr "Elenco: "
 
 #: plugin.py:755
 msgid "No cast list found in the database."
@@ -221,12 +221,12 @@ msgstr "Cancelar"
 
 #: plugin.py:873
 msgid "Show in plugin browser"
-msgstr "Mostra no Explorador de Plugins"
+msgstr "Mostrar no Explorador de Plugins"
 
 #: plugin.py:873
 msgid ""
 "Enable this to be able to access the IMDb from within the plugin browser."
-msgstr "Permite que seja capaz de acessar o IMDb de dentro do browser plugin."
+msgstr "Permite que seja capaz de aceder ao IMDb a partir do browser plugin."
 
 #: plugin.py:874
 msgid "Words / phrases to ignore "
@@ -246,4 +246,4 @@ msgstr "IMDb Detalhes"
 
 #: plugin.py:976 plugin.py:980
 msgid "Query details from the Internet Movie Database"
-msgstr "Consulta detalhes da Base de dados de filmes da Internet"
+msgstr "Consultar detalhes da Base de dados de filmes da Internet"
