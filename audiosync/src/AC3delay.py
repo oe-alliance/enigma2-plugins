@@ -165,8 +165,10 @@ class AC3delay:
         oAudioTracks = self.iService and self.iService.audioTracks()
         n = oAudioTracks and oAudioTracks.getNumberOfTracks() or 0
         tlist = []
-        self.selectedAudioIndex = oAudioTracks.getCurrentTrack()
-        if n >= 0:
+        self.selectedAudioInfo = ("", 0)
+        self.selectedAudioIndex = None
+        if n > 0:
+            self.selectedAudioIndex = oAudioTracks.getCurrentTrack()
             for x in range(n):
                 i = oAudioTracks.getTrackInfo(x)
                 language = i.getLanguage()
@@ -189,7 +191,7 @@ class AC3delay:
                     self.selectedAudioInfo = (description, x)
             tlist.sort(key=lambda x: x[0])
 
-            self.audioTrackList = tlist
+        self.audioTrackList = tlist
         for sAudio in AC3PCM:
             self.systemDelay[sAudio]=self.getSystemDelay(sAudio)
         del oAudioTracks
