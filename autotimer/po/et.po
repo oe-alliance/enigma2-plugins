@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-09 13:57+0100\n"
-"PO-Revision-Date: 2016-03-20 12:55+0200\n"
+"POT-Creation-Date: 2016-11-25 14:13+0200\n"
+"PO-Revision-Date: 2016-11-28 11:10+0200\n"
 "Last-Translator: rimas\n"
 "Language-Team: none\n"
 "Language: et_EE\n"
@@ -12,9 +12,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SearchPath-0: ../src\n"
 "X-Poedit-SearchPath-1: ../src/webinterface\n"
+
+msgid "  Any time"
+msgstr "  Igal ajal"
 
 #, python-format
 msgid ""
@@ -80,9 +83,6 @@ msgstr "Järelejäänud salvestuste arv"
 
 msgid "Any service/recording"
 msgstr "Iga kanal/salvestis"
-
-msgid "Any time"
-msgstr "Igal ajal"
 
 msgid "Auto Timers"
 msgstr "Autotaimerid"
@@ -290,7 +290,7 @@ msgstr ""
 "kui kasutad otsingus täpitähti."
 
 msgid "End of \"after event\" timespan"
-msgstr "\"pärast sündmust\" ajavahemiku lõpp"
+msgstr "\"Pärast sündmust\" ajavahemiku lõpp"
 
 msgid "End of timespan"
 msgstr "Ajavahemiku lõpp"
@@ -426,7 +426,7 @@ msgid "Include"
 msgstr "Hõlma"
 
 msgid "Include \"AutoTimer\" in tags"
-msgstr "Lisa siltidele \"autotaimer\""
+msgstr "Lisa siltidele \"Autotaimer\""
 
 msgid "Include AutoTimer name in tags"
 msgstr "Lisa siltidele autotaimeri nimi"
@@ -476,10 +476,10 @@ msgstr ""
 
 #, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
-msgstr "Vastab ajavahemikuga: %02d:%02d - %02d:%02d"
+msgstr "Vaste ajavahemikuga: %02d:%02d - %02d:%02d"
 
 msgid "Match title"
-msgstr "Vastab pealkirjaga"
+msgstr "Vaste pealkirjale"
 
 #, python-format
 msgid "Match title: %s"
@@ -537,7 +537,7 @@ msgid "Not before"
 msgstr "Mitte enne"
 
 msgid "Number of scheduled recordings left."
-msgstr "Järgijäänud ajastatud salvestuste arv."
+msgstr "Järgi jäänud ajastatud salvestuste arv."
 
 msgid "OK"
 msgstr "OK"
@@ -549,7 +549,7 @@ msgid "Offset before recording (in m)"
 msgstr "Ajavaru enne salvestust (min)"
 
 msgid "On any service"
-msgstr "Suvalisel kanalil"
+msgstr "Igal kanalil"
 
 msgid "On same service"
 msgstr "Samal kanalil"
@@ -634,14 +634,14 @@ msgid ""
 "'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
 msgstr ""
 "Küsimus: Autotaimer otsisõnaga \"Uudised\" ei salvesta \"Seitsmeseid uudiseid"
-"\"./nVastus: Kontrolli antud autotaimri filtreid 'Otsingu tüüp' ja ''Otsingu "
-"rangus\"./n/nKüsimus: Salvestatava saate nimi sisaldab täpitähti. Autotaimer "
-"ei leia saadet./nVastus: Kontrolli antud autotaimeri ''EPG tähemärgistik''. "
-"Eesti kanalitel tuleks valida ''ISO8859-15''./n/nKüsimus: Kahe järgneva "
-"saate salvestamine ei õnnestu.Luuakse vaid üks taimer, mis salvestab "
-"osaliselt mõlemat saadet./nVastus: Autotaimeri ülevaates vajuta MENU > "
-"Seadistamine. Seal keela valik \"Eelda olemasolev taimer algus/lõpuaja järgi"
-"\"."
+"\"./nVastus: Kontrolli antud autotaimeri filtreid 'Otsingu tüüp' ja "
+"''Otsingu rangus\"./n/nKüsimus: Salvestatava saate nimi sisaldab täpitähti. "
+"Autotaimer ei leia saadet./nVastus: Kontrolli antud autotaimeri ''EPG "
+"tähemärgistik''. Eesti kanalitel tuleks valida ''ISO8859-15''./n/nKüsimus: "
+"Kahe järgneva saate salvestamine ei õnnestu.Luuakse vaid üks taimer, mis "
+"salvestab osaliselt mõlemat saadet./nVastus: Autotaimeri ülevaates vajuta "
+"MENU > Seadistamine. Seal keela valik \"Eelda olemasolev taimer algus/"
+"lõpuaja järgi\"."
 
 msgid ""
 "Question: You keep talking about help being provided for each parameter. I'm "
@@ -671,13 +671,13 @@ msgid "Require description to be unique"
 msgstr "Nõua ainukordset kirjeldust"
 
 msgid "Reset count"
-msgstr "Arvestus nulli"
+msgstr "Lähtesta arvestus"
 
 msgid "Restrict \"after event\" to a certain timespan?"
 msgstr "Kas piirata \"pärast sündmust\" kindla ajavahemikuga?"
 
 msgid "Restrict to events on certain dates"
-msgstr "Piira otsing ainult kindlal kuupäeval algavatele saadetele"
+msgstr "Ainult kindlal kuupäeval"
 
 msgid "Restriction to certain bouquets (edit in services menu)"
 msgstr "Piira otsing määratud kanalinimekirjadesse (muutmine kanalimenüüs)"
@@ -709,9 +709,9 @@ msgid ""
 "or \"description match\" if you only want to search for a part of the event "
 "description"
 msgstr ""
-"Vali \"täpne vaste\", et \"Vastab pealkirjaga\" valik otsiks täpselt selle "
+"Vali \"täpne vaste\", et \"Vaste pealkirjale\" määrang otsiks täpselt selle "
 "nimega saadet, \"osaline vaste\" osaliselt kattuva nimega saate otsinguks "
-"või \"vastab kirjeldusele\", kui soovid otsida ainult osa kirjeldusest."
+"või \"vaste kirjeldusele\", kui soovid otsida ainult osa kirjeldusest."
 
 msgid "Select a timer to import"
 msgstr "Vali importimiseks taimer"
@@ -742,7 +742,7 @@ msgstr ""
 "salvestustele."
 
 msgid "Set maximum duration"
-msgstr "Sea suurim kestus"
+msgstr "Määra suurim kestus"
 
 msgid "Set this NO to disable this AutoTimer."
 msgstr "Autotaimeri keelamiseks määra 'EI'"
@@ -999,7 +999,7 @@ msgid "Use a custom location"
 msgstr "Kasuta määratud asukohta"
 
 msgid "Use automatic selection of alternates."
-msgstr "Kasuta asenduskanalite automaatset valikut."
+msgstr "Asenduskanalite automaatset valik"
 
 msgid "Use blue key to edit bouquets or services."
 msgstr "Kanalite või kanalinimekirjade muutmiseks kasuta sinist nuppu."
@@ -1008,13 +1008,13 @@ msgid "Use yellow key to edit filters."
 msgstr "Filtrite muutmiseks kasuta kollast nuppu."
 
 msgid "Wed"
-msgstr "Kolmapäev"
+msgstr "K"
 
 msgid "Wednesday"
 msgstr "Kolmapäev"
 
 msgid "Weekday"
-msgstr "Tööpäev"
+msgstr "Argipäev"
 
 msgid "Weekend"
 msgstr "Nädalavahetus"
@@ -1159,7 +1159,7 @@ msgstr ""
 
 #. TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
 msgid "add AutoTimer"
-msgstr "lisa autotaimer"
+msgstr "Lisa autotaimer"
 
 #. TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)
 msgid "add AutoTimer..."
@@ -1172,40 +1172,40 @@ msgid "autotimers need a match attribute"
 msgstr "autotaimerid peavad vastama tunnusele"
 
 msgid "case-insensitive search"
-msgstr "tõusutundetu otsing"
+msgstr "Tõusutundetu otsing"
 
 msgid "case-sensitive search"
-msgstr "tõusutundlik otsing"
+msgstr "Tõusutundlik otsing"
 
 msgid "config changed."
 msgstr "seadistus muudetud."
 
 msgid "description match"
-msgstr "vastab kirjeldusele"
+msgstr "Vaste kirjeldusele"
 
 msgid "disable"
-msgstr "keela"
+msgstr "Keela"
 
 msgid "disabled"
-msgstr "keelatud"
+msgstr "Keelatud"
 
 msgid "do nothing"
-msgstr "ära tee midagi"
+msgstr "Ei tee midagi"
 
 msgid "enable"
-msgstr "luba"
+msgstr "Luba"
 
 msgid "enabled"
-msgstr "lubatud"
+msgstr "Lubatud"
 
 msgid "exact match"
-msgstr "täpne vaste"
+msgstr "Täpne vaste"
 
 msgid "go to deep standby"
-msgstr "puhkeseisundisse"
+msgstr "Puhkeseisundisse"
 
 msgid "go to standby"
-msgstr "ooteseisundisse"
+msgstr "Ooteseisundisse"
 
 msgid "in Description"
 msgstr "Kirjelduses"
@@ -1214,7 +1214,7 @@ msgid "in Shortdescription"
 msgstr "Lühikirjelduses"
 
 msgid "in Title"
-msgstr "nimes"
+msgstr "Nimes"
 
 msgid "mins"
 msgstr "minutit"
@@ -1223,35 +1223,35 @@ msgid "missing parameter \"id\""
 msgstr "parameetri \"id\" puudub"
 
 msgid "on Weekday"
-msgstr "tööpäeval"
+msgstr "Nädalapäeval"
 
 msgid "partial match"
-msgstr "osaline vaste"
+msgstr "Osaline vaste"
 
 msgid "record"
-msgstr "salvestus"
+msgstr "Salvestus"
 
 msgid "standard"
-msgstr "tavaline"
+msgstr "Tavaline"
 
 msgid "title starts with"
-msgstr "nimi algab"
+msgstr "Nimi algab"
 
 #, python-format
 msgid "unable to find timer with id %i"
-msgstr "taimerit %i ei leitud"
+msgstr "Taimerit %i ei leitud"
 
 msgid "unknown"
-msgstr "tundmatu"
+msgstr "Tundmatu "
 
 msgid "zap"
-msgstr "kanalivahetus"
+msgstr "Kanalivahetus"
+
+#~ msgid "Any time"
+#~ msgstr "Igal ajal"
 
 #~ msgid "Do you really want to delete %s?"
 #~ msgstr "Kas kustutad %s?"
-
-#~ msgid "  Any time"
-#~ msgstr "  Igal ajal"
 
 #~ msgid ""
 #~ "If this is enabled an existing timer will also be considered recording an "
