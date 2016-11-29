@@ -28,10 +28,12 @@ config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default=True)
 config.plugins.autotimer.onlyinstandby = ConfigEnableDisable(default=False)
 config.plugins.autotimer.delay = ConfigNumber(default=3)
+config.plugins.autotimer.editdelay = ConfigNumber(default=3)
 if getImageDistro() in ('openmips', 'openatv'):
 	config.plugins.autotimer.interval = ConfigNumber(default=240)
 else:
 	config.plugins.autotimer.interval = ConfigNumber(default=30)
+config.plugins.autotimer.timeout = ConfigNumber(default=5)
 config.plugins.autotimer.refresh = ConfigSelection(choices=[
 		("none", _("None")),
 		("auto", _("Only AutoTimers created during this session")),
@@ -56,6 +58,7 @@ config.plugins.autotimer.notifsimilar = ConfigYesNo(default=True)
 config.plugins.autotimer.maxdaysinfuture = ConfigNumber(default=0)
 config.plugins.autotimer.show_help = ConfigYesNo(default=True)
 config.plugins.autotimer.skip_during_records = ConfigYesNo(default=False)
+config.plugins.autotimer.skip_during_epgrefresh = ConfigYesNo(default=False)
 
 try:
 	xrange = xrange
