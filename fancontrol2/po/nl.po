@@ -6,136 +6,311 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FanControl2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-08 13:56+0100\n"
-"PO-Revision-Date: 2014-05-12 12:28+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2016-11-29 16:31+0100\n"
+"PO-Revision-Date: 2016-11-29 18:23+0100\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: AndyBlac, Rob van der Does\n"
-"Language: \n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#, python-format
-msgid "%s   %02d C"
-msgstr "%s   %02d C"
+#: src/FC2webSite.py:48
+msgid "Temperature"
+msgstr "Temperatuur"
 
-msgid "."
-msgstr ","
+#: src/FC2webSite.py:49
+msgid "Speed"
+msgstr "Snelheid"
 
-msgid "3Pin"
-msgstr "3Pin"
+#: src/FC2webSite.py:50
+msgid "Voltage"
+msgstr "Spanning"
 
-msgid "4Pin"
-msgstr "4Pin"
+#: src/FC2webSite.py:57
+msgid "Sensors"
+msgstr "Sensoren"
 
-msgid "4Pin (PID)"
-msgstr "4Pin (PID)"
+#: src/FC2webSite.py:152 src/FC2webSite.py:188
+msgid "active"
+msgstr "Actief"
 
-msgid "Action in case of Fan failure"
-msgstr "Actie bij uitval Fan "
+#: src/FC2webSite.py:155 src/FC2webSite.py:191
+msgid "turn off"
+msgstr "Uitschakelen"
 
-msgid "Auto-Delete Data older than (Days)"
-msgstr "Automatisch data verwijderen ouder dan (dagen) "
+#: src/FC2webSite.py:158 src/FC2webSite.py:194
+msgid "not active"
+msgstr "Niet Actief"
 
-#, python-format
-msgid "Auto-Delete older %s Days"
-msgstr "Auto-Delete older %s Days"
+#: src/FC2webSite.py:161 src/FC2webSite.py:197
+msgid "turn on"
+msgstr "Inschakelen"
 
-msgid "Box Shutdown"
-msgstr "Box uitschakelen"
-
-msgid "Box has no fancontrol hardware -> FC2 deactivated"
-msgstr "Box has no fancontrol hardware -> FC2 deactivated"
-
-msgid "Box shutdown at Temperature (C)"
-msgstr "Box uitschakelen bij Temperatuur (C)"
-
-msgid "Cancel"
-msgstr "Annuleren"
-
-msgid "Check"
-msgstr "Controle"
-
-msgid "Choose path"
-msgstr "Kies het pad"
-
-msgid "Control disabled"
-msgstr "Controle uitgeschakeld"
-
-#, python-format
-msgid "Current rpm  %4d"
-msgstr "Actuele rpm  %4d"
-
-#, python-format
-msgid "Current value: %s"
-msgstr "Huidige waarde: %s"
-
-msgid "Delete"
-msgstr "Verwijder"
-
-msgid "Delete older 48h"
-msgstr "+48u verwijderen"
-
-#, python-format
-msgid "Disk free : %d MByte"
-msgstr "Beschikbare opslag : %d MByte"
-
-msgid "Download"
-msgstr "Download"
-
-msgid "Enable Console Logging"
-msgstr "Schakel console logging in"
-
-msgid "Enable Data Logging"
-msgstr "Datalogging inschakelen"
-
-msgid "Enable Event Logging"
-msgstr "Eventlogging inschakelen"
-
-msgid "Enable Thread use"
-msgstr "Schakel thread gebruik in"
-
-msgid "End temperature C"
-msgstr "Eindtemperatuur C"
-
-msgid "Extended Control Range"
-msgstr "Uitgebreid controlebereik"
-
-msgid "Fan Control"
-msgstr "Fan Control"
-
-msgid "Fan Control 2"
-msgstr "Fan Control 2"
-
-msgid "Fan Control 2 - Monitor"
-msgstr "Fan Control 2 - Monitor"
-
-msgid "Fan is not working!"
-msgstr "Fan werkt niet!"
-
-msgid "Fan off in Idle Mode"
-msgstr "Fan uit in stand-by"
-
-msgid "Fan type"
-msgstr "Fan type"
-
-msgid "FanControl2 emergency, Box Shutdown now?"
-msgstr ""
-"FanControl2 melding: te hoge temperatuur\n"
-"Box nu uitschakelen?"
-
-#, python-format
-msgid "File %s does not exists"
-msgstr "Bestand %s bestaat niet!"
-
+#: src/FC2webSite.py:166 src/FC2webSite.py:168 src/FC2webSite.py:202
+#: src/FC2webSite.py:204
 #, python-format
 msgid "Filesize : %d %sByte"
 msgstr "Bestandsgrootte : %d %sByte"
 
+#: src/FC2webSite.py:170 src/FC2webSite.py:206
+#, python-format
+msgid "Disk free : %d MByte"
+msgstr "Beschikbare opslag : %d MByte"
+
+#: src/FC2webSite.py:173 src/FC2webSite.py:209
+msgid "Download"
+msgstr "Download"
+
+#: src/FC2webSite.py:177 src/FC2webSite.py:213
+msgid "Delete"
+msgstr "Verwijder"
+
+#: src/FC2webSite.py:181
+msgid "Delete older 48h"
+msgstr "+48u verwijderen"
+
+#: src/FC2webSite.py:184 src/FC2webSite.py:221
+#, python-format
+msgid "File %s does not exists"
+msgstr "Bestand %s bestaat niet!"
+
+#: src/FC2webSite.py:223
+#, python-format
+msgid "Logging-Path: %s"
+msgstr "Log locatie: %s"
+
+#: src/FC2webSite.py:224
+#, python-format
+msgid "Auto-Delete older %s Days"
+msgstr "Automatisch verwijderen ouder dan %s dagen"
+
+#: src/globals.py:35
+msgid "below Tunerslot 4"
+msgstr "onder Tunerslot 4"
+
+#: src/globals.py:36
+msgid "near XILINX Spartan"
+msgstr "bij XILINX Spartan"
+
+#: src/globals.py:37
+msgid "under the WLAN"
+msgstr "onder de WLAN"
+
+#: src/globals.py:38
+msgid "left of the Battery"
+msgstr "links van de batterij"
+
+#: src/globals.py:39
+msgid "left near Front-CI"
+msgstr "links bij Front-CI"
+
+#: src/globals.py:40
+msgid "left near Card-Slot"
+msgstr "links bij Card-Slot"
+
+#: src/globals.py:41
+msgid "over Security Card"
+msgstr "boven de Security Card"
+
+#: src/globals.py:42
+msgid "under the Fan"
+msgstr "onder de Fan"
+
+#: src/plugin.py:102
+msgid "."
+msgstr ","
+
+#: src/plugin.py:149 src/plugin.py:158 src/plugin.py:167
+msgid "disabled"
+msgstr "uitgeschakeld"
+
+#: src/plugin.py:149 src/plugin.py:158 src/plugin.py:167
+msgid "Control disabled"
+msgstr "Controle uitgeschakeld"
+
+#: src/plugin.py:149 src/plugin.py:158 src/plugin.py:167
+msgid "3Pin"
+msgstr "3Pin"
+
+#: src/plugin.py:149 src/plugin.py:158 src/plugin.py:167
+msgid "4Pin"
+msgstr "4Pin"
+
+#: src/plugin.py:149 src/plugin.py:158 src/plugin.py:167
+msgid "4Pin (PID)"
+msgstr "4Pin (PID)"
+
+#: src/plugin.py:150 src/plugin.py:159 src/plugin.py:168 src/plugin.py:182
+#: src/plugin.py:186
+msgid "no"
+msgstr "nee"
+
+#: src/plugin.py:150 src/plugin.py:159 src/plugin.py:168 src/plugin.py:186
+msgid "yes"
+msgstr "ja"
+
+#: src/plugin.py:150 src/plugin.py:159 src/plugin.py:168
+msgid "yes, Except for Recording or HDD"
+msgstr "ja, behalve voor Opname of HDD"
+
+#: src/plugin.py:176
+msgid "do nothing"
+msgstr "geen actie"
+
+#: src/plugin.py:176
+msgid "display Info"
+msgstr "Melding weergeven"
+
+#: src/plugin.py:176
+msgid "Box Shutdown"
+msgstr "Box uitschakelen"
+
+#: src/plugin.py:186
+msgid "auto"
+msgstr "auto"
+
+#: src/plugin.py:186
+msgid "never"
+msgstr "nooit"
+
+#: src/plugin.py:345
+msgid "please wait (until 3min)..."
+msgstr "wachten aub (tot 3 min)..."
+
+#: src/plugin.py:383
+#, python-format
+msgid "Min Fan Start %d rpm at PWM=%d"
+msgstr "Min Fan Start %d rpm bij PWM=%d"
+
+#: src/plugin.py:389
+#, python-format
+msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
+msgstr "Min Fan Stop %d rpm bij PWM=%d (%s)"
+
+#: src/plugin.py:395
+#, python-format
+msgid "Max Fan %d rpm at PWM=255 (%s)"
+msgstr "Max Fan %d rpm bij PWM=255 (%s)"
+
+#: src/plugin.py:397
+msgid "Extended Control Range"
+msgstr "Uitgebreid controlebereik"
+
+#: src/plugin.py:407
+#, python-format
+msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
+msgstr "Min Fan Start %d rpm bij VLT=%d en PWM=0"
+
+#: src/plugin.py:410
+#, python-format
+msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
+msgstr "Min Fan Stop %d rpm bij VLT=%d en PWM=0 (%s)"
+
+#: src/plugin.py:417
+#, python-format
+msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
+msgstr "Max Fan %d rpm bij PWM=255 en VLT=255 (%s)"
+
+#: src/plugin.py:425
+#, python-format
+msgid "Min Fan Start %d rpm at VLT=%d"
+msgstr "Min Fan Start %d rpm bij VLT=%d"
+
+#: src/plugin.py:428
+#, python-format
+msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
+msgstr "Min Fan Stop %d rpm bij VLT=%d (%s)"
+
+#: src/plugin.py:433
+#, python-format
+msgid "Max Fan %d rpm at VLT=255 (%s)"
+msgstr "Max Fan %d rpm bij VLT=255 (%s)"
+
+#: src/plugin.py:436
+msgid "please set fan type (3Pin or 4Pin)"
+msgstr "Stel het juiste ventilator type in (3- of 4 pins)"
+
+#: src/plugin.py:508 src/plugin.py:510 src/plugin.py:514
+#, python-format
+msgid "%s   %02d C"
+msgstr "%s   %02d C"
+
+#: src/plugin.py:516
+msgid "press Info for HDD-Temp"
+msgstr "druk Info voor de HDD-Temp"
+
+#: src/plugin.py:517 src/plugin.py:772
+#, python-format
+msgid "Current rpm  %4d"
+msgstr "Actuele rpm  %4d"
+
+#: src/plugin.py:549
+msgid "Action in case of Fan failure"
+msgstr "Actie bij uitval Fan "
+
+#: src/plugin.py:550
+msgid "Box shutdown at Temperature (C)"
+msgstr "Box uitschakelen bij Temperatuur (C)"
+
+#: src/plugin.py:551
+msgid "increases overheating protection to (C)"
+msgstr "Verhoog oververhittingsbescherming met (C)"
+
+#: src/plugin.py:552
+msgid "read HDD-Temperature in HDD-Standby-Mode"
+msgstr "HDD-temp tijdens HDD-Standby-Mode uitlezen"
+
+#: src/plugin.py:554
+msgid "Show Fan Speed as"
+msgstr "Toon ventolator snelheid als"
+
+#: src/plugin.py:555
+msgid "Show Plugin in Extension-Menu"
+msgstr "Plugin weergeven in extentie-menu"
+
+#: src/plugin.py:556
+msgid "Show Monitor in Extension-Menu"
+msgstr "Monitor weergeven in extentie-menu"
+
+#: src/plugin.py:557
+msgid "Enable Console Logging"
+msgstr "Schakel console logging in"
+
+#: src/plugin.py:558
+msgid "Number of WebIF-Log-Entries"
+msgstr "Aantal WebIF log vermeldingen"
+
+#: src/plugin.py:559
+msgid "Logging path"
+msgstr "Log locatie"
+
+#: src/plugin.py:560
+msgid "Enable Data Logging"
+msgstr "Datalogging inschakelen"
+
+#: src/plugin.py:561
+msgid "Auto-Delete Data older than (Days)"
+msgstr "Automatisch data verwijderen ouder dan (dagen) "
+
+#: src/plugin.py:562
+msgid "Enable Event Logging"
+msgstr "Gebeurtenissen loggen inschakelen"
+
+#: src/plugin.py:563
+msgid "Enable Thread use"
+msgstr "Thread gebruik inschakelen"
+
+#: src/plugin.py:578
+msgid "Choose path"
+msgstr "Selecteer locatie"
+
+#: src/plugin.py:612
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
@@ -143,207 +318,133 @@ msgstr ""
 "GUI moet herstart worden om de instellingen toe te passen\n"
 "De GUI herstarten?"
 
-msgid "Help"
-msgstr "Help"
-
-msgid "Information"
-msgstr "Informatie"
-
-msgid "Initial PWM"
-msgstr "Initiële PWM"
-
-msgid "Initial Voltage"
-msgstr "Initiële spanning"
-
-msgid "Logging path"
-msgstr "Loggingpad:"
-
-#, python-format
-msgid "Logging-Path: %s"
-msgstr "Loggingpad: %s"
-
-#, python-format
-msgid "Max Fan %d rpm at PWM=255 (%s)"
-msgstr "Max Fan %d rpm bij PWM=255 (%s)"
-
-#, python-format
-msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
-msgstr "Max Fan %d rpm bij PWM=255 en VLT=255 (%s)"
-
-#, python-format
-msgid "Max Fan %d rpm at VLT=255 (%s)"
-msgstr "Max Fan %d rpm bij VLT=255 (%s)"
-
-#, python-format
-msgid "Min Fan Start %d rpm at PWM=%d"
-msgstr "Min Fan Start %d rpm bij PWM=%d"
-
-#, python-format
-msgid "Min Fan Start %d rpm at VLT=%d"
-msgstr "Min Fan Start %d rpm bij VLT=%d"
-
-#, python-format
-msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
-msgstr "Min Fan Start %d rpm bij VLT=%d en PWM=0"
-
-#, python-format
-msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
-msgstr "Min Fan Stop %d rpm bij PWM=%d (%s)"
-
-#, python-format
-msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
-msgstr "Min Fan Stop %d rpm bij VLT=%d (%s)"
-
-#, python-format
-msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
-msgstr "Min Fan Stop %d rpm bij VLT=%d en PWM=0 (%s)"
-
-msgid "Number of WebIF-Log-Entries"
-msgstr "Aantal WebIF-Log-Entries"
-
-#, python-format
-msgid "PID Ctl Err %03.2f %%"
-msgstr "PID Ctl Err %03.2f %%"
-
-#, python-format
-msgid "PWM  %03d"
-msgstr "PWM  %03d"
-
+#: src/plugin.py:613
 msgid "Restart GUI now?"
 msgstr "GUI nu herstarten?"
 
-msgid "Save"
-msgstr "Opslaan"
+#: src/plugin.py:682
+msgid "Fan type"
+msgstr "Fan type"
 
-msgid "Sensors"
-msgstr "Sensoren"
+#: src/plugin.py:683
+msgid "Fan off in Idle Mode"
+msgstr "Fan uit in stand-by"
 
-msgid "Show Fan Speed as"
-msgstr "Toon ventolator snelheid als"
+#: src/plugin.py:684
+msgid "min Speed rpm"
+msgstr "min snelheid rpm"
 
-msgid "Show Monitor in Extension-Menu"
-msgstr "Monitor weergeven in extentie-menu"
+#: src/plugin.py:685
+msgid "max Speed rpm"
+msgstr "max snelheid rpm"
 
-msgid "Show Plugin in Extension-Menu"
-msgstr "Plugin weergeven in extentie-menu"
-
-msgid "Speed"
-msgstr "Snelheid"
-
+#: src/plugin.py:686
 msgid "Static temp C"
 msgstr "Statische temp C"
 
+#: src/plugin.py:687
+msgid "End temperature C"
+msgstr "Eindtemperatuur C"
+
+#: src/plugin.py:688
+msgid "Initial Voltage"
+msgstr "Initiële spanning"
+
+#: src/plugin.py:689
+msgid "Initial PWM"
+msgstr "Initiële PWM"
+
+#: src/plugin.py:694
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/plugin.py:695
+msgid "Save"
+msgstr "Bevestigen"
+
+#: src/plugin.py:696
+msgid "Check"
+msgstr "Controle"
+
+#: src/plugin.py:697
+msgid "Help"
+msgstr "Help"
+
+#: src/plugin.py:737
 #, python-format
-msgid "Target rpm  %4d"
-msgstr "Gewenste rpm  %4d"
+msgid "Current value: %s"
+msgstr "Huidige waarde: %s"
 
-msgid "Temperature"
-msgstr "Temperatuur"
-
+#: src/plugin.py:770
 #, python-format
 msgid "Temperature C  %4.1f"
 msgstr "Temperatuur C  %4.1f"
 
-msgid "Voltage"
-msgstr "Spanning"
+#: src/plugin.py:771
+#, python-format
+msgid "Target rpm  %4d"
+msgstr "Gewenste rpm  %4d"
 
+#: src/plugin.py:773
 #, python-format
 msgid "Voltage  %03d"
 msgstr "Spanning  %03d"
 
-msgid "active"
-msgstr "Actief"
+#: src/plugin.py:774
+#, python-format
+msgid "PWM  %03d"
+msgstr "PWM  %03d"
 
-msgid "auto"
-msgstr "auto"
+#: src/plugin.py:787
+#, python-format
+msgid "PID Ctl Err %03.2f %%"
+msgstr "PID Ctl Err %03.2f %%"
 
-msgid "below Tunerslot 4"
-msgstr "onder Tunerslot 4"
+#: src/plugin.py:809
+msgid "Information"
+msgstr "Informatie"
 
+#: src/plugin.py:809
+msgid "readme.txt"
+msgstr "readme.txt"
+
+#: src/plugin.py:1001
+msgid "FanControl2 emergency, Box Shutdown now?"
+msgstr ""
+"FanControl2 melding: te hoge temperatuur!\n"
+"Box nu uitschakelen?"
+
+#: src/plugin.py:1066
+msgid "Fan is not working!"
+msgstr "Fan werkt niet!"
+
+#: src/plugin.py:1209
 #, python-format
 msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
-msgstr "actueelRPM:%d doelRPM:%d Temp:%4.1f"
+msgstr "actuele RPM:%d doel RPM:%d Temp:%4.1f"
 
-msgid "disabled"
-msgstr "uitgeschakeld"
+#: src/plugin.py:1287
+msgid "Box has no fancontrol hardware -> FC2 deactivated"
+msgstr "Box beschikt niet over Fan beheer hardware -> FC2 gedeactiveerd"
 
-msgid "display Info"
-msgstr "Melding weergeven"
+#: src/plugin.py:1303 src/plugin.py:1307 src/plugin.py:1309 src/plugin.py:1311
+msgid "Fan Control 2"
+msgstr "Fan Control 2"
 
-msgid "do nothing"
-msgstr "geen actie"
+#: src/plugin.py:1307 src/plugin.py:1311 src/plugin.py:1313
+msgid "Fan Control"
+msgstr "Fan Control"
 
-msgid "increases overheating protection to (C)"
-msgstr "Verhoog oververhittingsbescherming met (C)"
-
-msgid "left near Card-Slot"
-msgstr "links bij Card-Slot"
-
-msgid "left near Front-CI"
-msgstr "links bij Front-CI"
-
-msgid "left of the Battery"
-msgstr "links van de batterij"
-
-msgid "max Speed rpm"
-msgstr "max snelheid rpm"
-
-msgid "min Speed rpm"
-msgstr "min snelheid rpm"
-
-msgid "near XILINX Spartan"
-msgstr "bij XILINX Spartan"
-
-msgid "never"
-msgstr "nooit"
-
-msgid "no"
-msgstr "nee"
-
-msgid "not active"
-msgstr "Niet Actief"
-
-msgid "over Security Card"
-msgstr "boven de Security Card"
-
-msgid "please set fan type (3Pin or 4Pin)"
-msgstr "Stel het juiste ventilator type in (3- of 4 pins)"
-
-msgid "please wait (until 3min)..."
-msgstr "wachten aub (tot 3 min)..."
-
-msgid "press Info for HDD-Temp"
-msgstr "druk Info voor de HDD-Temp"
-
-msgid "read HDD-Temperature in HDD-Standby-Mode"
-msgstr "HDD-temp tijdens HDD-Standby-Mode uitlezen"
-
-msgid "readme.txt"
-msgstr "leesmij.txt"
-
+#: src/plugin.py:1309
 msgid "setup Fancontol inStandby mode"
-msgstr "Instellinge Fancontol in Standby"
+msgstr "Instellingen Fancontol in Standby"
 
-msgid "turn off"
-msgstr "Uitschakelen"
+#: src/plugin.py:1313
+msgid "Fan Control 2 - Monitor"
+msgstr "Fan Control 2 - Monitor"
 
-msgid "turn on"
-msgstr "Inschakelen"
+msgid "Fan off in Standby"
+msgstr "Fan uit in Standby"
 
-msgid "under the Fan"
-msgstr "onder de Fan"
-
-msgid "under the WLAN"
-msgstr "onder de WLAN"
-
-msgid "yes"
-msgstr "ja"
-
-msgid "yes, Except for Recording or HDD"
-msgstr "ja, behalve voor Opname of HDD"
-
-#~ msgid "Fan off in Standby"
-#~ msgstr "Fan uit in Standby"
-
-#~ msgid "disable System FanControl"
-#~ msgstr "Schakel System ventiliatorcontrole uit"
+msgid "disable System FanControl"
+msgstr "Schakel System ventiliatorcontrole uit"
