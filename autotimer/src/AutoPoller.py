@@ -30,16 +30,30 @@ class AutoPoller:
 		self.timer.stop()
 		from Screens.Standby import inStandby
 		print "[AutoTimer] Auto Poll"
+		doparse = True
 		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
 			print("[AutoTimer] Skip check during running records")
-		else:
-			if not (config.plugins.autotimer.onlyinstandby.value and not inStandby):
-				print "[AutoTimer] Auto Poll Started"
-				# Ignore any program errors
-				try:
-					ret = autotimer.parseEPG(autoPoll=True)
-				except Exception:
-					# Dump error to stdout
-					import traceback, sys
-					traceback.print_exc(file=sys.stdout)
+			doparse = False
+		if config.plugins.autotimer.skip_during_epgrefresh.value:
+			try:
+				from Plugins.Extensions.EPGRefresh.EPGRefresh import epgrefresh
+				if epgrefresh.isrunning:
+					print("[AutoTimer] Skip check during running EPGRefresh")
+					doparse = False
+			except:
+				pass
+		if not inStandby and config.plugins.autotimer.onlyinstandby.value:
+			print("[AutoTimer] Skip check while not in Standby")
+			doparse = False
+		if doparse:
+			print "[AutoTimer] Auto Poll Started"
+			# Ignore any program errors
+			try:
+				ret = autotimer.parseEPG(autoPoll=True)
+			except Exception:
+				# Dump error to stdout
+				import traceback, sys
+				traceback.print_exc(file=sys.stdout)
+		#TODO back to hours
+		#self.timer.startLongTimer(config.plugins.autotimer.interval.value * 3600)
 		self.timer.startLongTimer(config.plugins.autotimer.interval.value * 60)
