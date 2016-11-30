@@ -179,17 +179,6 @@ SKIN0L = """
 		</widget>	</screen>"""
 ##############################################################################
 
-#	<screen name="PermanentClockScreen" position="0,0" size="205,48" zPosition="-1" backgroundColor="transparent" flags="wfNoBorder">
-#		<widget source="global.CurrentTime" render="Label" position="0,0" size="150,48" font="Regular;39" backgroundColor="transparent" transparent="1" zPosition="0" borderWidth="3" borderColor="black" halign="right">
-#			<convert type="ClockToText">Default</convert>
-#		</widget>
-#		<widget source="global.CurrentTime" render="Label" position="151,14" size="50,30" font="Regular;22" backgroundColor="transparent" transparent="1" zPosition="0" borderWidth="3" borderColor="black" halign="left">
-#			<convert type="ClockToText">Format::%S</convert>
-#		</widget>
-#	</screen>
-
-
-
 class PermanentClockNewScreen(Screen):
 	def __init__(self, session):
 		if config.plugins.PermanentClock.analog.value:
