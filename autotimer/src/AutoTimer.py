@@ -24,7 +24,7 @@ from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry
 
 # Timespan
-from time import localtime, strftime, time, mktime, sleep
+from time import localtime, strftime, time, mktime, sleep, ctime
 from datetime import timedelta, date
 
 # EPGCache & Event
@@ -543,7 +543,8 @@ class AutoTimer:
 
 				newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
 				newEntry.log(500, "[AutoTimer] Try to add new timer based on AutoTimer %s." % (timer.name))
-
+				newEntry.log(509, "[AutoTimer] Timer start on: %s" % ctime(begin))
+				
 				# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
 				# It is only temporarily, after a restart it will be lost,
 				# because it won't be stored in the timer xml file
