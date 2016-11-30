@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-29 20:50+0100\n"
-"PO-Revision-Date: 2016-11-30 03:02+0100\n"
+"PO-Revision-Date: 2016-11-30 15:43+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl_NL\n"
@@ -226,7 +226,7 @@ msgstr "Toon in pluginbrowser"
 #: plugin.py:873
 msgid ""
 "Enable this to be able to access the IMDb from within the plugin browser."
-msgstr "Schakel dit in om IMDb vanuit de pluginbrowsert te kunnen benaderen."
+msgstr "Schakel dit in om IMDb vanuit de pluginbrowser te kunnen benaderen."
 
 #: plugin.py:874
 msgid "Words / phrases to ignore "
