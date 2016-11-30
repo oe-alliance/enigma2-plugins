@@ -161,19 +161,34 @@ SKIN0 = """
 	</screen>"""
 ##############################################################################
 SKINL = """
-	<screen position="0,0" size="180,45" zPosition="-1" backgroundColor="#ff000000" title="Permanent Clock" flags="wfNoBorder">
-		<widget source="global.CurrentTime" render="Label" position="1,1" size="180,45" backgroundColor="#ff000000" transparent="1" zPosition="0" foregroundColor="#00f0f0f0" borderWidth="2" font="Regular;39" borderColor="#00000000" valign="center" halign="center">
+	<screen position="0,0" size="235,48" zPosition="-1" backgroundColor="#ff000000" title="Permanent Clock" flags="wfNoBorder">
+		<widget source="global.CurrentTime" render="Label" position="1,1" size="180,45" backgroundColor="#ff000000" transparent="1" zPosition="0" foregroundColor="#00f0f0f0" borderWidth="2" font="Regular;39" borderColor="#00000000" valign="center" halign="right">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-	</screen>"""
+		<widget source="global.CurrentTime" render="Label" position="181,14" size="50,30" font="Regular;22" backgroundColor="#ff000000" transparent="1" zPosition="0" foregroundColor="#00f0f0f0" borderWidth="2" borderColor="#00000000" halign="left">
+			<convert type="ClockToText">Format::%S</convert>
+		</widget>	</screen>"""
 ##############################################################################
 SKIN0L = """
-	<screen position="0,0" size="180,45" zPosition="-1" backgroundColor="#ff000000" title="Permanent Clock" flags="wfNoBorder">
-		<widget source="global.CurrentTime" render="Label" position="1,1" size="180,45" backgroundColor="#ff000000" transparent="1" zPosition="0" foregroundColor="#00ffc000" borderWidth="2" font="Regular;39" borderColor="#00000000" valign="center" halign="center">
+	<screen position="0,0" size="235,48" zPosition="-1" backgroundColor="#ff000000" title="Permanent Clock" flags="wfNoBorder">
+		<widget source="global.CurrentTime" render="Label" position="1,1" size="180,45" backgroundColor="#ff000000" transparent="1" zPosition="0" foregroundColor="#00ffc000" borderWidth="2" font="Regular;39" borderColor="#00000000" valign="center" halign="right">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-	</screen>"""
+		<widget source="global.CurrentTime" render="Label" position="181,14" size="50,30" font="Regular;22" backgroundColor="#ff000000" transparent="1" zPosition="0" foregroundColor="#00ffc000" borderWidth="2" borderColor="#00000000" halign="left">
+			<convert type="ClockToText">Format::%S</convert>
+		</widget>	</screen>"""
 ##############################################################################
+
+#	<screen name="PermanentClockScreen" position="0,0" size="205,48" zPosition="-1" backgroundColor="transparent" flags="wfNoBorder">
+#		<widget source="global.CurrentTime" render="Label" position="0,0" size="150,48" font="Regular;39" backgroundColor="transparent" transparent="1" zPosition="0" borderWidth="3" borderColor="black" halign="right">
+#			<convert type="ClockToText">Default</convert>
+#		</widget>
+#		<widget source="global.CurrentTime" render="Label" position="151,14" size="50,30" font="Regular;22" backgroundColor="transparent" transparent="1" zPosition="0" borderWidth="3" borderColor="black" halign="left">
+#			<convert type="ClockToText">Format::%S</convert>
+#		</widget>
+#	</screen>
+
+
 
 class PermanentClockNewScreen(Screen):
 	def __init__(self, session):
