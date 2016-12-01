@@ -1,2 +1,2 @@
 Description: Shows the clock permanent on the screen
-Depends: enigma2
+Depends: enigma2, enigma2-plugin-extensions-permanentclock-src
