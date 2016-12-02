@@ -13,7 +13,7 @@ from ServiceReference import ServiceReference
 from Tools.XMLTools import stringToXML
 from enigma import eServiceReference
 from . import _, config, iteritems, plugin
-from plugin import autotimer
+from plugin import autotimer, AUTOTIMER_VERSION
 
 API_VERSION = "1.5"
 
@@ -53,12 +53,12 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 		# todo timeout / error handling
 		autotimer.parseEPG(simulateOnly=True, callback = self.parsecallback)
 		return server.NOT_DONE_YET
-	def renderBackground(self, req ,ret):
+	def renderBackground(self, req ,timers):
 
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
 
-		for (name, begin, end, serviceref, autotimername) in ret:
+		for (name, begin, end, serviceref, autotimername) in timers:
 			ref = ServiceReference(str(serviceref))
 			extend((
 				'<e2simulatedtimer>\n'
@@ -70,6 +70,59 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 				'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n'
 				'</e2simulatedtimer>\n'
 			))
+		returnlist.append('</e2autotimersimulate>')
+
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application/xhtml+xml')
+		req.setHeader('charset', 'UTF-8')
+		return ''.join(returnlist)
+#TODO
+class AutoTimerTestResource(AutoTimerBaseResource):
+	def parsecallback(self, timers):
+		ret = self.renderBackground (self.req, timers)
+		self.req.write(ret)
+		self.req.finish()
+	def render(self, req):
+		self.req = req
+		# todo timeout / error handling
+		autotimer.parseEPG(simulateOnly=True, callback = self.parsecallback)
+		return server.NOT_DONE_YET
+	def renderBackground(self, req ,timers, skipped):
+
+		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
+		extend = returnlist.extend
+
+		for (name, begin, end, serviceref, autotimername, message) in timers:
+			ref = ServiceReference(str(serviceref))
+			extend((
+				'<e2simulatedtimer>\n'
+				'   <e2servicereference>', stringToXML(serviceref), '</e2servicereference>\n',
+				'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
+				'   <e2name>', stringToXML(name), '</e2name>\n',
+				'   <e2timebegin>', str(begin), '</e2timebegin>\n',
+				'   <e2timeend>', str(end), '</e2timeend>\n',
+				'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n',
+				'   <e2state>OK</e2state>\n'
+				'   <e2message>', stringToXML(message), '</e2message>\n'
+				'</e2simulatedtimer>\n'
+			))
+
+		if skipped:
+			for (name, begin, end, serviceref, autotimername, message) in skipped:
+				ref = ServiceReference(str(serviceref))
+				extend((
+					'<e2simulatedtimer>\n'
+					'   <e2servicereference>', stringToXML(serviceref), '</e2servicereference>\n',
+					'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
+					'   <e2name>', stringToXML(name), '</e2name>\n',
+					'   <e2timebegin>', str(begin), '</e2timebegin>\n',
+					'   <e2timeend>', str(end), '</e2timeend>\n',
+					'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n',
+					'   <e2state>Skip</e2state>\n'
+					'   <e2message>', stringToXML(message), '</e2message>\n'
+					'</e2simulatedtimer>\n'
+				))
+		
 		returnlist.append('</e2autotimersimulate>')
 
 		req.setResponseCode(http.OK)
@@ -96,6 +149,12 @@ class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 		id = req.args.get("id")
 		if id:
 			autotimer.remove(int(id[0]))
+			
+			# Save modified xml
+			# TODO
+			#if config.plugins.autotimer.always_write_config.value:
+			#	autotimer.writeXml()
+			
 			return self.returnResult(req, True, _("AutoTimer was removed"))
 		else:
 			return self.returnResult(req, False, _("missing parameter \"id\""))
@@ -327,6 +386,11 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		else:
 			message = _("AutoTimer was changed successfully")
 
+		# Save modified xml
+		#TODO
+		#if config.plugins.autotimer.always_write_config.value:
+		#	autotimer.writeXml()
+
 		return self.returnResult(req, True, message)
 
 class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
@@ -510,6 +574,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingname>api_version</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
+	<e2setting>
+		<e2settingname>autotimer_version</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
 </e2settings>""" % (
 				config.plugins.autotimer.autopoll.value,
 				config.plugins.autotimer.interval.value,
@@ -536,4 +604,5 @@ class AutoTimerSettingsResource(resource.Resource):
 				hasSeriesPlugin,
 				CURRENT_CONFIG_VERSION,
 				API_VERSION,
+				AUTOTIMER_VERSION
 			)

@@ -49,6 +49,8 @@ from . import config, xrange, itervalues
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
+TAG = "AutoTimer"
+
 NOTIFICATIONID = 'AutoTimerNotification'
 CONFLICTNOTIFICATIONID = 'AutoTimerConflictEncounteredNotification'
 SIMILARNOTIFICATIONID = 'AutoTimerSimilarUsedNotification'
@@ -212,7 +214,7 @@ class AutoTimer:
 
 		self.new = 0
 		self.modified = 0
-		self.skipped = 0
+		self.skipped = []
 		self.total = 0
 		self.autotimers = []
 		self.conflicting = []
@@ -269,16 +271,14 @@ class AutoTimer:
 	def JobStart(self):
 		for timer in self.getEnabledTimerList():
 			if timer.name not in self.completed:
-				self.parseTimer(timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.timerdict, self.moviedict, self.simulateOnly)
+				self.parseTimer(timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.skipped, self.timerdict, self.moviedict, self.simulateOnly)
 				self.new += self.result[0]
 				self.modified += self.result[1]
-				self.skipped += self.result[2]
 				break
 
-	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, timerdict, moviedict, simulateOnly=False):
+	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, skipped, timerdict, moviedict, simulateOnly=False):
 		new = 0
 		modified = 0
-		skipped = 0
 
 		# Precompute timer destination dir
 		dest = timer.destination or config.usage.default_path.value
@@ -383,6 +383,7 @@ class AutoTimer:
 			evt = epgcache.lookupEventId(eserviceref, eit)
 			if not evt:
 				print("[AutoTimer] Could not create Event!")
+				skipped.append((name, begin, end, str(serviceref), timer.name))
 				continue
 			# Try to determine real service (we always choose the last one)
 			n = evt.getNumOfLinkageServices()
@@ -418,6 +419,8 @@ class AutoTimer:
 				# If maximum days in future is set then check time
 				if checkEvtLimit:
 					if begin > evtLimit:
+						print("Skipping an event because of maximum days in future is reached")
+						skipped.append((name, begin, end, serviceref, timer.name))
 						continue
 
 				dayofweek = str(timestamp.tm_wday)
@@ -430,6 +433,8 @@ class AutoTimer:
 					timer.checkTimespan(timestamp) \
 					or timer.checkTimeframe(begin) \
 				)) or timer.checkFilter(name, shortdesc, extdesc, dayofweek):
+				print("Skipping an event because of filter check")
+				skipped.append((name, begin, end, serviceref, timer.name))
 				continue
 
 			if timer.hasOffset():
@@ -470,6 +475,8 @@ class AutoTimer:
 						movieExists = True
 						break
 				if movieExists:
+					print("Skipping an event because movie already exists")
+					skipped.append((name, begin, end, serviceref, timer.name))
 					continue
 
 			# Initialize
@@ -508,7 +515,7 @@ class AutoTimer:
 						break
 					else:
 						print ("[AutoTimer] Skipping timer because it has not changed.")
-						skipped += 1
+						skipped.append((name, begin, end, serviceref, timer.name))
 						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
 					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
@@ -564,12 +571,14 @@ class AutoTimer:
 			newEntry.vpsplugin_overwrite = timer.vps_overwrite
 			tags = timer.tags[:]
 			if config.plugins.autotimer.add_autotimer_to_tags.value:
-				tags.append('AutoTimer')
+				if TAG not in tags:
+					tags.append(TAG)
 			if config.plugins.autotimer.add_name_to_tags.value:
 				tagname = timer.name.strip()
 				if tagname:
 					tagname = tagname[0].upper() + tagname[1:].replace(" ", "_")
-					tags.append(tagname)
+					if tagname not in tags:
+						tags.append(tagname)
 			newEntry.tags = tags
 
 			if oldExists:
@@ -583,7 +592,9 @@ class AutoTimer:
 				conflictString = ""
 				if similarTimer:
 					conflictString = similardict[eit].conflictString
-					newEntry.log(504, "[AutoTimer] Try to add similar Timer because of conflicts with %s." % (conflictString))
+					msg = "[AutoTimer] Try to add similar Timer because of conflicts with %s." % (conflictString)
+					print(msg)
+					newEntry.log(504, msg)
 
 				# Try to add timer
 				conflicts = recordHandler.record(newEntry)
@@ -637,11 +648,13 @@ class AutoTimer:
 					conflicting.append((name, begin, end, serviceref, timer.name))
 
 					if config.plugins.autotimer.disabled_on_conflict.value:
-						newEntry.log(503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString))
+						msg = "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString)
+						print(msg)
+						newEntry.log(503, msg)
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = recordHandler.record(newEntry)
-		self.result=(new, modified, skipped)
+		self.result=(new, modified)
 		self.completed.append(timer.name)
 		sleep(0.5)
 
@@ -650,7 +663,7 @@ class AutoTimer:
 			if self.simulateOnly == True:
 				self.callback(self.autotimers)
 			else:
-				total = (self.new+self.modified+len(self.conflicting)+self.skipped+len(self.similars))
+				total = (self.new+self.modified+len(self.conflicting)+len(self.skipped)+len(self.similars))
 				_result = (total, self.new, self.modified, self.autotimers, self.conflicting, self.similars, self.skipped)
 				self.callback(_result)
 		elif self.autoPoll:
@@ -670,7 +683,7 @@ class AutoTimer:
 				)
 		else:
 			AddPopup(
-				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+self.skipped+len(self.similars)), self.new, self.modified, len(self.conflicting), self.skipped, len(self.similars)),
+				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+len(self.skipped)+len(self.similars)), self.new, self.modified, len(self.conflicting), len(self.skipped), len(self.similars)),
 				MessageBox.TYPE_INFO,
 				15,
 				NOTIFICATIONID

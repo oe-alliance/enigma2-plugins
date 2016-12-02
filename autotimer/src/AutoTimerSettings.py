@@ -100,7 +100,8 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 		self.onLayoutFinish.append(self.setCustomTitle)
 
 	def setCustomTitle(self):
-		self.setTitle(_("Configure AutoTimer behavior"))
+		from plugin import AUTOTIMER_VERSION
+		self.setTitle(_("Configure AutoTimer behavior") + " - Version: " + AUTOTIMER_VERSION)
 
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
