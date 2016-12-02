@@ -78,8 +78,8 @@ class AutoTimerSimulateResource(AutoTimerBaseResource):
 		return ''.join(returnlist)
 #TODO
 class AutoTimerTestResource(AutoTimerBaseResource):
-	def parsecallback(self, timers):
-		ret = self.renderBackground (self.req, timers)
+	def parsecallback(self, timers, skipped):
+		ret = self.renderBackground (self.req, timers, skipped)
 		self.req.write(ret)
 		self.req.finish()
 	def render(self, req):

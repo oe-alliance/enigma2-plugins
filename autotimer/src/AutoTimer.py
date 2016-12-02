@@ -661,7 +661,7 @@ class AutoTimer:
 	def JobMessage(self):
 		if self.callback is not None:
 			if self.simulateOnly == True:
-				self.callback(self.autotimers)
+				self.callback(self.autotimers, self.skipped)
 			else:
 				total = (self.new+self.modified+len(self.conflicting)+len(self.skipped)+len(self.similars))
 				_result = (total, self.new, self.modified, self.autotimers, self.conflicting, self.similars, self.skipped)
