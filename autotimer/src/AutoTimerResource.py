@@ -44,7 +44,7 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 		return self.returnResult(req, True, output)
 
 class AutoTimerSimulateResource(AutoTimerBaseResource):
-	def parsecallback(self, timers):
+	def parsecallback(self, timers, skipped):
 		ret = self.renderBackground (self.req, timers)
 		self.req.write(ret)
 		self.req.finish()
