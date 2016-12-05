@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-29 20:50+0100\n"
-"PO-Revision-Date: 2016-11-29 20:50+0100\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2016-11-30 15:43+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr "Maak de juiste keuze"
 
 #: plugin.py:318
 msgid "Title Menu"
-msgstr "Titel menu"
+msgstr "Titelmenu"
 
 #: plugin.py:319 plugin.py:706
 msgid "Details"
@@ -83,15 +83,15 @@ msgstr "Huidige poster en details opslaan als .txt"
 
 #: plugin.py:390
 msgid "Play Trailer"
-msgstr "Speel Trailer"
+msgstr "Speel trailer"
 
 #: plugin.py:391
 msgid "Search Trailer"
-msgstr "Zoek Trailer"
+msgstr "Zoek trailer"
 
 #: plugin.py:397
 msgid "IMDb Menu"
-msgstr "IMDb menu"
+msgstr "IMDb-menu"
 
 #: plugin.py:422
 msgid "IMDb can not get Movie Information to write to .txt file!"
@@ -127,7 +127,7 @@ msgstr "Releasedatum:"
 
 #: plugin.py:507 plugin.py:509 plugin.py:736
 msgid "User Rating"
-msgstr "Gebruikers waardering"
+msgstr "Gebruikerswaardering"
 
 #: plugin.py:552
 msgid "Enter text to search for"
@@ -164,7 +164,7 @@ msgstr "Download van IMDb mislukt"
 
 #: plugin.py:697
 msgid "IMDb Re-Download completed"
-msgstr "IMDB-Download nogmaals uitgevoerd"
+msgstr "IMDB-download nogmaals uitgevoerd"
 
 #: plugin.py:704
 msgid "No details found."
@@ -172,7 +172,7 @@ msgstr "Geen informatie gevonden."
 
 #: plugin.py:707 plugin.py:789
 msgid "IMDb Details parsed"
-msgstr "IMDB informatie ingelezen"
+msgstr "IMDB-informatie ingelezen"
 
 #: plugin.py:732
 msgid "no user rating yet"
@@ -193,7 +193,7 @@ msgstr "Geen cast in de database gevonden."
 #: plugin.py:761
 #, python-format
 msgid "Downloading Movie Poster: %s..."
-msgstr "Film poster wordt gedownload: %s..."
+msgstr "Filmposter wordt gedownload: %s..."
 
 #: plugin.py:783
 msgid "Extra Info"
@@ -201,7 +201,7 @@ msgstr "Extra Info"
 
 #: plugin.py:819
 msgid "IMDb Plugin"
-msgstr "IMDb Plugin"
+msgstr "IMDb-plugin"
 
 #: plugin.py:836
 msgid "* = Restart Required"
@@ -209,7 +209,7 @@ msgstr "* = Herstart noodzakelijk"
 
 #: plugin.py:842
 msgid "IMDb Setup"
-msgstr "IMDb instellingen"
+msgstr "IMDb-instellingen"
 
 #: plugin.py:846
 msgid "OK"
@@ -221,12 +221,12 @@ msgstr "Annuleren"
 
 #: plugin.py:873
 msgid "Show in plugin browser"
-msgstr "Toon in applicatie overzicht"
+msgstr "Toon in pluginbrowser"
 
 #: plugin.py:873
 msgid ""
 "Enable this to be able to access the IMDb from within the plugin browser."
-msgstr "Selecteer om IMDb vanuit het applicatie overzicht te kunnen benaderen."
+msgstr "Schakel dit in om IMDb vanuit de pluginbrowser te kunnen benaderen."
 
 #: plugin.py:874
 msgid "Words / phrases to ignore "
@@ -242,7 +242,7 @@ msgstr ""
 
 #: plugin.py:954 plugin.py:976 plugin.py:979
 msgid "IMDb Details"
-msgstr "IMDb informatie"
+msgstr "IMDb-informatie"
 
 #: plugin.py:976 plugin.py:980
 msgid "Query details from the Internet Movie Database"

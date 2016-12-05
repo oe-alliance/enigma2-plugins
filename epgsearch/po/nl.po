@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-27 17:50+0200\n"
-"PO-Revision-Date: 2016-11-29 20:36+0100\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2016-11-30 02:42+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
@@ -21,25 +21,25 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 msgid "Add AutoTimer"
-msgstr "AutoTimer toevoegen"
+msgstr "Autotimer toevoegen"
 
 msgid "Add Timer"
 msgstr "Timer toevoegen"
 
 msgid "Add a record timer for highlighted event"
-msgstr "OpnameTimer toevoegen voor het geselecteerde programma."
+msgstr "Opnametimer toevoegen voor het geselecteerde programma."
 
 msgid "Add a zap timer for highlighted event"
-msgstr "ZapTimer toevoegen voor het geselecteerde programma."
+msgstr "Zaptimer toevoegen voor het geselecteerde programma."
 
 msgid "Add an AutoTimer for highlighted event"
-msgstr "AutoTimer toevoegen voor het geselecteerde programma."
+msgstr "Autotimer toevoegen voor het geselecteerde programma."
 
 msgid "Add/remove/edit timer for highlighted event"
-msgstr "Toevoegen/verwijder/bewerk Timer voor het geselecteerde programma."
+msgstr "Toevoegen/verwijder/bewerk timer voor het geselecteerde programma."
 
 msgid "All bouquets"
-msgstr "Alle bouquetten"
+msgstr "Alle boeketten"
 
 msgid "All services"
 msgstr "Alle zenders"
@@ -51,7 +51,7 @@ msgid "Channel Selection"
 msgstr "Zenderkeuze"
 
 msgid "Choose the encoding type for searches, helpful for foreign languages."
-msgstr "Selecteer het taalregio formaat (locale encoding) bij zoek opdrachten, handig voor andere talen."
+msgstr "Kies het coderingstype; handig voor diverse talen."
 
 msgid "Include or exclude results depending on their source (e.g. by satellite)"
 msgstr "Verberg of geef resultaten weer naar bron, zoals satelliet etc."
@@ -60,14 +60,14 @@ msgid "Close dialog"
 msgstr "Sluit dialoog"
 
 msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
-msgstr "Bepaal waar naar de EPG te zoeken. Indien 'alle bouquetten' is gekozen, wordt daadwerkelijk in alle bouquetten gezocht, ook als 'Meerdere bouquetlijsten toestaan' is uitgeschakeld."
+msgstr "Bepaal waar te zoeken in de EPG. Indien 'alle boeketten' is gekozen, wordt daadwerkelijk in alle boeketten gezocht, ook als 'Meerdere boeketten toestaan' is uitgeschakeld."
 
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
-msgstr "Kan AutoTimer timer-lijst niet lezen : %s"
+msgstr "Kan autotimer timer-lijst niet lezen : %s"
 
 msgid "Current bouquet"
-msgstr "Huidig bouquet"
+msgstr "Huidige boeket"
 
 msgid "Current service"
 msgstr "Huidige zender"
@@ -94,13 +94,13 @@ msgid "EPGSearch Setup"
 msgstr "EPG Search instellingen"
 
 msgid "Enable this to allow access to EPG Search from within the plugin browser."
-msgstr "Selecteer deze optie om EPG Search in het applicatie overzicht te tonen."
+msgstr "Schakel dit in om EPG Search vanuit de pluginbrowser te kunnen openen"
 
 msgid "Enter new search"
 msgstr "Opnieuw zoeken"
 
 msgid "Enter text to search for"
-msgstr "Zoektekst invoeren:"
+msgstr "Voer de te zoeken tekst in"
 
 msgid "Exit EPG Search"
 msgstr "EPG Search afsluiten"
@@ -109,19 +109,19 @@ msgid "IMDB search for highlighted event"
 msgstr "Zoek op IMDb naar geselecteerd programma"
 
 msgid "IMDb Search"
-msgstr "IMDb informatie"
+msgstr "Zoeken in IMDb"
 
 msgid "Import from AutoTimer"
-msgstr "Importeren uit AutoTimer"
+msgstr "Importeren uit autotimer"
 
 msgid "Import from EPG"
 msgstr "Importeren uit EPG"
 
 msgid "Import from Timer"
-msgstr "Importeren uit Timer"
+msgstr "Importeren uit timer"
 
 msgid "Is the search case-sensitive or case-insensitive"
-msgstr "Hoofdletter gevoelig zoeken"
+msgstr "Hoofdlettergevoelig zoeken"
 
 msgid "Length of history"
 msgstr "Geschiedenis lengte"
@@ -154,7 +154,7 @@ msgid "Open selected in IMDb"
 msgstr "Open in IMDb"
 
 msgid "Save search as AutoTimer"
-msgstr "Bewaar als AutoTimer"
+msgstr "Bewaar als autotimer"
 
 msgid "Search"
 msgstr "Zoeken"
@@ -163,7 +163,7 @@ msgid "%ssearch EPG"
 msgstr "%s EPG doorzoeken"
 
 msgid "Search encoding"
-msgstr "Zoek taalregio formaat (locale encoding)"
+msgstr "Zoek codering"
 
 msgid "Filter results by source"
 msgstr "Filter resultaten naar bron"
@@ -175,13 +175,13 @@ msgid "Search scope"
 msgstr "Zoekbereik"
 
 msgid "Search strictness"
-msgstr "Zoek beperkingen"
+msgstr "Zoekbeperkingen"
 
 msgid "Search type"
-msgstr "Zoek type"
+msgstr "Zoektype"
 
 msgid "Select a timer to search"
-msgstr "Selecteer te zoeken timer..."
+msgstr "Selecteer te zoeken timer"
 
 msgid "Select text to search for"
 msgstr "Selecteer te zoeken tekst..."
@@ -196,10 +196,10 @@ msgid "Setup"
 msgstr "Instellingen"
 
 msgid "Setup menu"
-msgstr "Instellingen menu"
+msgstr "Instellingenmenu"
 
 msgid "Show AutoTimer list"
-msgstr "Toon AutoTimer lijst"
+msgstr "Toon autotimerlijst"
 
 msgid "Show detailed event information"
 msgstr "Toon gedetailleerde programma informatie"
@@ -211,7 +211,7 @@ msgid "Show orbital position"
 msgstr "Toon orbitale positie"
 
 msgid "Show satellite orbital positions in the search results."
-msgstr "Toon satelliet orbitale positie in zoek resultaten."
+msgstr "Toon satelliet orbitale positie in zoekresultaten."
 
 msgid "Show search history"
 msgstr "Toon zoekgeschiedenis"
@@ -223,7 +223,7 @@ msgid "Zap to channel"
 msgstr "Zap naar zender"
 
 msgid "all bouquets"
-msgstr "alle bouquetten"
+msgstr "alle boeketten"
 
 msgid "all services"
 msgstr "alle zenders"
@@ -232,13 +232,13 @@ msgid "ask user"
 msgstr "vraag gebruiker"
 
 msgid "case-insensitive search"
-msgstr "Hoofdletter ongevoelig zoeken"
+msgstr "Hoofdletterongevoelig zoeken"
 
 msgid "case-sensitive search"
-msgstr "Hoofdletter gevoelig zoeken"
+msgstr "Hoofdlettergevoelig zoeken"
 
 msgid "current bouquet"
-msgstr "huidig bouquet"
+msgstr "huidige boeket"
 
 msgid "current service"
 msgstr "huidige zender"

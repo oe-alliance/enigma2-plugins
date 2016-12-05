@@ -1,0 +1,123 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: litvcom\n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.11\n"
+
+msgid "Autoresolution"
+msgstr "Авторазрешение экрана"
+
+msgid "Auto frame rate (refresh need 'multi')"
+msgstr "Авто (необходимо выбрать частоту обновления - 'multi')"
+
+msgid ""
+"Autoresolution Plugin Testmode:\n"
+"Is %s OK?"
+msgstr ""
+"Авторазрешение работает в тестовом режиме:\n"
+"%s OK?"
+
+msgid "Autoresolution Switch"
+msgstr "Переключение"
+
+msgid "Autoresolution is not working in Scart/DVI-PC Mode"
+msgstr "Авторазрешение не работает в режиме Scart/DVI-PC Mode"
+
+msgid "Autoresolution settings"
+msgstr "Настройки авторазрешения экрана"
+
+msgid "Autoresolution videomode setup"
+msgstr "Установка видеорежима"
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Deinterlacer mode for interlaced content"
+msgstr "Устранение чересстрочности (чересстрочный контент)"
+
+msgid "Deinterlacer mode for progressive content"
+msgstr "Устранение чересстрочности (прогрессивный контент)"
+
+msgid "Delay x seconds after service started"
+msgstr "Задержка х секунд после старта службы"
+
+msgid "Enable 1080p24 Mode"
+msgstr "Включить режим 1080p24"
+
+msgid "Enable 1080p25 Mode"
+msgstr "Включить режим 1080p25"
+
+msgid "Enable 1080p30 Mode"
+msgstr "Включить режим 1080p30"
+
+msgid "Enable 720p24 Mode"
+msgstr "Включить режим 720p24"
+
+msgid "Enable Autoresolution"
+msgstr "Включить"
+
+msgid "HD Interlace Mode"
+msgstr "Чересстрочная развёртка HD"
+
+msgid "HD Progressive Mode"
+msgstr "Прогрессивная развёртка HD"
+
+msgid "Lock timeout"
+msgstr "Время ожидания"
+
+msgid "Mode"
+msgstr "Режим"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Refresh Rate"
+msgstr "Частота обновления"
+
+msgid "Running in testmode"
+msgstr "Запуск в тестовом режиме"
+
+msgid "SD 24HZ Progressive mode"
+msgstr "Прогрессивная развертка SD 24Гц"
+
+msgid "SD 25/50HZ Interlace Mode"
+msgstr "Чересстрочная развертка SD 25/50Гц"
+
+msgid "SD 25/50HZ Progressive Mode"
+msgstr "Прогрессивная развертка SD 25/50Гц"
+
+msgid "SD 30/60HZ Interlace Mode"
+msgstr "Чересстрочная развертка SD 30/60Гц"
+
+msgid "SD 30/60HZ Progressive Mode"
+msgstr "Чересстрочная развертка SD 30/60Гц"
+
+msgid "Show info screen"
+msgstr "Отображать информацию"
+
+msgid "bob"
+msgstr "удвоения частоты кадров"
+
+msgid "default"
+msgstr "по умолчанию"
+
+msgid "off"
+msgstr "выкл."
+
+msgid "on"
+msgstr "вкл."
+
+msgid "second"
+msgstr "секунда"
+
+msgid "seconds"
+msgstr "секунд"

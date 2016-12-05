@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: FanControl2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-29 16:31+0100\n"
-"PO-Revision-Date: 2016-11-29 18:23+0100\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2016-11-30 02:55+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac, Rob van der Does\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
@@ -42,11 +42,11 @@ msgstr "Actief"
 
 #: src/FC2webSite.py:155 src/FC2webSite.py:191
 msgid "turn off"
-msgstr "Uitschakelen"
+msgstr "uitschakelen"
 
 #: src/FC2webSite.py:158 src/FC2webSite.py:194
 msgid "not active"
-msgstr "Niet Actief"
+msgstr "Niet actief"
 
 #: src/FC2webSite.py:161 src/FC2webSite.py:197
 msgid "turn on"
@@ -73,7 +73,7 @@ msgstr "Verwijder"
 
 #: src/FC2webSite.py:181
 msgid "Delete older 48h"
-msgstr "+48u verwijderen"
+msgstr "Verwijder ouder dan 48 uur"
 
 #: src/FC2webSite.py:184 src/FC2webSite.py:221
 #, python-format
@@ -83,7 +83,7 @@ msgstr "Bestand %s bestaat niet!"
 #: src/FC2webSite.py:223
 #, python-format
 msgid "Logging-Path: %s"
-msgstr "Log locatie: %s"
+msgstr "Logpad: %s"
 
 #: src/FC2webSite.py:224
 #, python-format
@@ -120,7 +120,7 @@ msgstr "boven de Security Card"
 
 #: src/globals.py:42
 msgid "under the Fan"
-msgstr "onder de Fan"
+msgstr "onder de ventilator"
 
 #: src/plugin.py:102
 msgid "."
@@ -157,7 +157,7 @@ msgstr "ja"
 
 #: src/plugin.py:150 src/plugin.py:159 src/plugin.py:168
 msgid "yes, Except for Recording or HDD"
-msgstr "ja, behalve voor Opname of HDD"
+msgstr "ja, behalve voor opname of HDD"
 
 #: src/plugin.py:176
 msgid "do nothing"
@@ -181,7 +181,7 @@ msgstr "nooit"
 
 #: src/plugin.py:345
 msgid "please wait (until 3min)..."
-msgstr "wachten aub (tot 3 min)..."
+msgstr "wacht (tot 3 min)..."
 
 #: src/plugin.py:383
 #, python-format
@@ -234,7 +234,7 @@ msgstr "Max Fan %d rpm bij VLT=255 (%s)"
 
 #: src/plugin.py:436
 msgid "please set fan type (3Pin or 4Pin)"
-msgstr "Stel het juiste ventilator type in (3- of 4 pins)"
+msgstr "Stel het juiste ventilatortype in (3- of 4 pins)"
 
 #: src/plugin.py:508 src/plugin.py:510 src/plugin.py:514
 #, python-format
@@ -256,7 +256,7 @@ msgstr "Actie bij uitval Fan "
 
 #: src/plugin.py:550
 msgid "Box shutdown at Temperature (C)"
-msgstr "Box uitschakelen bij Temperatuur (C)"
+msgstr "Box uitschakelen bij temperatuur (C)"
 
 #: src/plugin.py:551
 msgid "increases overheating protection to (C)"
@@ -264,7 +264,7 @@ msgstr "Verhoog oververhittingsbescherming met (C)"
 
 #: src/plugin.py:552
 msgid "read HDD-Temperature in HDD-Standby-Mode"
-msgstr "HDD-temp tijdens HDD-Standby-Mode uitlezen"
+msgstr "HDD-temp tijdens HDD-stand-by uitlezen"
 
 #: src/plugin.py:554
 msgid "Show Fan Speed as"
@@ -288,7 +288,7 @@ msgstr "Aantal WebIF log vermeldingen"
 
 #: src/plugin.py:559
 msgid "Logging path"
-msgstr "Log locatie"
+msgstr "Logpad"
 
 #: src/plugin.py:560
 msgid "Enable Data Logging"
@@ -304,7 +304,7 @@ msgstr "Gebeurtenissen loggen inschakelen"
 
 #: src/plugin.py:563
 msgid "Enable Thread use"
-msgstr "Thread gebruik inschakelen"
+msgstr "Threadgebruik inschakelen"
 
 #: src/plugin.py:578
 msgid "Choose path"
@@ -324,11 +324,11 @@ msgstr "GUI nu herstarten?"
 
 #: src/plugin.py:682
 msgid "Fan type"
-msgstr "Fan type"
+msgstr "Ventilatortype"
 
 #: src/plugin.py:683
 msgid "Fan off in Idle Mode"
-msgstr "Fan uit in stand-by"
+msgstr "Ventilator uit in stand-by"
 
 #: src/plugin.py:684
 msgid "min Speed rpm"
@@ -416,7 +416,7 @@ msgstr ""
 
 #: src/plugin.py:1066
 msgid "Fan is not working!"
-msgstr "Fan werkt niet!"
+msgstr "Ventilator werkt niet!"
 
 #: src/plugin.py:1209
 #, python-format
@@ -425,26 +425,26 @@ msgstr "actuele RPM:%d doel RPM:%d Temp:%4.1f"
 
 #: src/plugin.py:1287
 msgid "Box has no fancontrol hardware -> FC2 deactivated"
-msgstr "Box beschikt niet over Fan beheer hardware -> FC2 gedeactiveerd"
+msgstr "Box beschikt niet over ventilatorcontrole hardware -> FC2 gedeactiveerd"
 
 #: src/plugin.py:1303 src/plugin.py:1307 src/plugin.py:1309 src/plugin.py:1311
 msgid "Fan Control 2"
-msgstr "Fan Control 2"
+msgstr "Fancontrol2"
 
 #: src/plugin.py:1307 src/plugin.py:1311 src/plugin.py:1313
 msgid "Fan Control"
-msgstr "Fan Control"
+msgstr "Ventilatorcontrole"
 
 #: src/plugin.py:1309
 msgid "setup Fancontol inStandby mode"
-msgstr "Instellingen Fancontol in Standby"
+msgstr "Instellingen Fancontol in stand-by"
 
 #: src/plugin.py:1313
 msgid "Fan Control 2 - Monitor"
-msgstr "Fan Control 2 - Monitor"
+msgstr "Fancontrol2 - Monitor"
 
 msgid "Fan off in Standby"
-msgstr "Fan uit in Standby"
+msgstr "Ventilator uit in stand-by"
 
 msgid "disable System FanControl"
 msgstr "Schakel System ventiliatorcontrole uit"
