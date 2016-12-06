@@ -30,8 +30,6 @@ from Components.Sources.Event import Event
 
 from Tools.BoundFunction import boundFunction
 
-from boxbranding import getImageDistro
-
 from time import localtime, strftime
 from operator import itemgetter
 from collections import defaultdict
@@ -120,10 +118,26 @@ class EPGSearchList(EPGList):
 		t = localtime(beginTime)
 		serviceref = ServiceReference(service)  # for Servicename and orbital position
 		width = r4.x + r4.w
+		if hasattr(self, "showend"):
+			et = localtime(beginTime + duration)
+			align = RT_HALIGN_RIGHT
+			if hasattr(config.usage, "time"):
+				weekday = strftime(config.usage.date.dayshort.value, t)
+				datetime = "%s - %s" % (strftime(config.usage.time.short.value, t), strftime(config.usage.time.short.value, et))
+			else:
+				weekday = strftime("%a %d %b", t)
+				datetime = "%s ~ %s" % (strftime("%H:%M", t), strftime("%H:%M", et))
+		else:
+			align = RT_HALIGN_LEFT
+			weekday = strftime("%a", t)
+			if hasattr(config.usage, "time"):
+				datetime = "%s, %s" % (strftime(config.usage.date.short.value, t), strftime(config.usage.time.short.value, t))
+			else:
+				datetime = strftime("%e/%m, %H:%M", t)
 		res = [
 			None,  # no private data needed
-			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, _(strftime("%a", t))),
-			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, strftime("%e/%m, %H:%M", t))
+			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, weekday),
+			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, align | RT_VALIGN_CENTER, datetime)
 		]
 		if r3.w:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, self.getOrbitalPos(serviceref)))
