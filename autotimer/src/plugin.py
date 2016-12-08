@@ -72,7 +72,7 @@ def sessionstart(reason, **kwargs):
 			from AutoTimerResource import AutoTimerDoParseResource, \
 				AutoTimerListAutoTimerResource, AutoTimerAddOrEditAutoTimerResource, \
 				AutoTimerRemoveAutoTimerResource, AutoTimerChangeSettingsResource, \
-				AutoTimerSettingsResource, AutoTimerSimulateResource, API_VERSION
+				AutoTimerSettingsResource, AutoTimerSimulateResource, AutoTimerTestResource, API_VERSION
 		except ImportError as ie:
 			pass
 		else:
@@ -91,6 +91,7 @@ def sessionstart(reason, **kwargs):
 			root.putChild('get', AutoTimerSettingsResource())
 			root.putChild('set', AutoTimerChangeSettingsResource())
 			root.putChild('simulate', AutoTimerSimulateResource())
+			root.putChild('test', AutoTimerTestResource())
 			addExternalChild( ("autotimer", root , "AutoTimer-Plugin", API_VERSION, False) )
 
 			# webgui
