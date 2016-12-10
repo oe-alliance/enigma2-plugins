@@ -261,7 +261,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			list = list,
 		)
 
-	def openPreview(self, timers):
+	def openPreview(self, timers, skipped):
 		self.session.open(
 			AutoTimerPreview,
 			timers
