@@ -137,10 +137,10 @@ class EPGSearchList(EPGList):
 		res = [
 			None,  # no private data needed
 			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, weekday),
-			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r1.h, 0, align | RT_VALIGN_CENTER, datetime)
+			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r2.h, 0, align | RT_VALIGN_CENTER, datetime)
 		]
 		if r3.w:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, self.getOrbitalPos(serviceref)))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, self.getOrbitalPos(serviceref)))
 		picwidth = 0
 		for pic in pics:
 			picwidth += picx
