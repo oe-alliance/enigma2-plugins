@@ -215,6 +215,7 @@ class AutoTimer:
 		self.new = 0
 		self.modified = 0
 		self.skipped = []
+		self.existing = []
 		self.total = 0
 		self.autotimers = []
 		self.conflicting = []
@@ -271,12 +272,12 @@ class AutoTimer:
 	def JobStart(self):
 		for timer in self.getEnabledTimerList():
 			if timer.name not in self.completed:
-				self.parseTimer(timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.skipped, self.timerdict, self.moviedict, self.simulateOnly)
+				self.parseTimer(timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.skipped, self.existing, self.timerdict, self.moviedict, self.simulateOnly)
 				self.new += self.result[0]
 				self.modified += self.result[1]
 				break
 
-	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, skipped, timerdict, moviedict, simulateOnly=False):
+	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, skipped, existing, timerdict, moviedict, simulateOnly=False):
 		new = 0
 		modified = 0
 
@@ -515,7 +516,7 @@ class AutoTimer:
 						break
 					else:
 						# print ("[AutoTimer] Skipping timer because it has not changed.")
-						skipped.append((name, begin, end, serviceref, timer.name))
+						existing.append((name, begin, end, serviceref, timer.name))
 						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
 					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc):
@@ -663,8 +664,8 @@ class AutoTimer:
 			if self.simulateOnly == True:
 				self.callback(self.autotimers, self.skipped)
 			else:
-				total = (self.new+self.modified+len(self.conflicting)+len(self.skipped)+len(self.similars))
-				_result = (total, self.new, self.modified, self.autotimers, self.conflicting, self.similars, self.skipped)
+				total = (self.new+self.modified+len(self.conflicting)+len(self.existing)+len(self.similars))
+				_result = (total, self.new, self.modified, self.autotimers, self.conflicting, self.similars, self.existing, self.skipped)
 				self.callback(_result)
 		elif self.autoPoll:
 			if self.conflicting and config.plugins.autotimer.notifconflict.value:
@@ -683,7 +684,7 @@ class AutoTimer:
 				)
 		else:
 			AddPopup(
-				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+len(self.skipped)+len(self.similars)), self.new, self.modified, len(self.conflicting), len(self.skipped), len(self.similars)),
+				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+len(self.existing)+len(self.similars)), self.new, self.modified, len(self.conflicting), len(self.existing), len(self.similars)),
 				MessageBox.TYPE_INFO,
 				15,
 				NOTIFICATIONID
