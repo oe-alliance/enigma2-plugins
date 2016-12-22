@@ -584,6 +584,7 @@ permanentclock/Makefile
 permanentclock/meta/Makefile
 permanentclock/po/Makefile
 permanentclock/src/Makefile
+permanentclock/src/trad/Makefile
 
 pipservicerelation/Makefile
 pipservicerelation/src/Makefile
