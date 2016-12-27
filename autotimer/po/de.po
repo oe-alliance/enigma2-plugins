@@ -1211,6 +1211,12 @@ msgstr "nichts"
 msgid "enable"
 msgstr "aktiviert"
 
+msgid "enabled"
+msgstr "Aktiviert"
+
+msgid "disabled"
+msgstr "Deaktiviert"
+
 msgid "exact match"
 msgstr "gesamter Titel"
 
