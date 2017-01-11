@@ -420,7 +420,7 @@ class AutoTimer:
 				# If maximum days in future is set then check time
 				if checkEvtLimit:
 					if begin > evtLimit:
-						print("Skipping an event because of maximum days in future is reached")
+#						print("[AutoTimer] Skipping an event because of maximum days in future is reached")
 						skipped.append((name, begin, end, serviceref, timer.name))
 						continue
 
@@ -434,7 +434,7 @@ class AutoTimer:
 					timer.checkTimespan(timestamp)
 					or timer.checkTimeframe(begin)
 				)) or timer.checkFilter(name, shortdesc, extdesc, dayofweek):
-				print("Skipping an event because of filter check")
+#				print("[AutoTimer] Skipping an event because of filter check")
 				skipped.append((name, begin, end, serviceref, timer.name))
 				continue
 
@@ -476,7 +476,7 @@ class AutoTimer:
 						movieExists = True
 						break
 				if movieExists:
-					print("Skipping an event because movie already exists")
+#					print("[AutoTimer] Skipping an event because movie already exists")
 					skipped.append((name, begin, end, serviceref, timer.name))
 					continue
 

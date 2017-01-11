@@ -1185,7 +1185,7 @@ msgid "add AutoTimer..."
 msgstr "AutoTimer hinzufügen..."
 
 msgid "auto"
-msgstr "automatisch"
+msgstr "Automatisch"
 
 msgid "autotimers need a match attribute"
 msgstr "AutoTimer benötigen einen Suchtext"
@@ -1210,6 +1210,12 @@ msgstr "nichts"
 
 msgid "enable"
 msgstr "aktiviert"
+
+msgid "enabled"
+msgstr "Aktiviert"
+
+msgid "disabled"
+msgstr "Deaktiviert"
 
 msgid "exact match"
 msgstr "gesamter Titel"
@@ -1242,10 +1248,10 @@ msgid "partial match"
 msgstr "Teil des Titels"
 
 msgid "record"
-msgstr "aufnehmen"
+msgstr "Aufnehmen"
 
 msgid "standard"
-msgstr "standard"
+msgstr "Standard"
 
 msgid "title starts with"
 msgstr "Titel fängt an mit"
@@ -1255,7 +1261,7 @@ msgid "unable to find timer with id %i"
 msgstr "Kann Timer mit Id %i nicht finden"
 
 msgid "zap"
-msgstr "umschalten"
+msgstr "Umschalten"
 
 msgid "Restriction to certain services (edit in services menu)"
 msgstr "Beschränkung auf Sender (editieren im Sender-Menü)"
