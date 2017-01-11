@@ -227,14 +227,14 @@ class PermanentClock():
 		self.start_key()
 
 	def start_key(self):
-		global globalActionMap
-		if config.plugins.PermanentClock.show_hide.value and self.clockey == False:
-			readKeymap("/usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/keymap.xml")
-			globalActionMap.actions['showClock'] = self.ShowHideKey
+		if config.plugins.PermanentClock.show_hide.value and not self.clockey:
+			if 'showClock' not in globalActionMap.actions:
+				readKeymap("/usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/keymap.xml")
+				globalActionMap.actions['showClock'] = self.ShowHideKey
 			self.clockey = True
 
-	def unload_key(self):
-		if not config.plugins.PermanentClock.show_hide.value and self.clockey == True:
+	def unload_key(self, force=False):
+		if not config.plugins.PermanentClock.show_hide.value and self.clockey or force:
 			removeKeymap("/usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/keymap.xml")
 			if 'showClock' in globalActionMap.actions:
 				del globalActionMap.actions['showClock']
@@ -544,8 +544,11 @@ class PermanentClockMenu(Screen):
 		self.newConfig()
 
 def sessionstart(reason, **kwargs):
-	if reason == 0:
-		pClock.gotSession(kwargs["session"])
+	global _session
+	if reason == 0 and _session is None:
+		_session = kwargs["session"]
+		if _session:
+			pClock.gotSession(_session)
 
 def startConfig(session, **kwargs):
 	session.open(PermanentClockMenu)
