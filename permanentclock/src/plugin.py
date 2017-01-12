@@ -554,8 +554,15 @@ def startConfig(session, **kwargs):
 	session.open(PermanentClockMenu)
 
 def main(menuid):
-	if menuid != "system": 
-		return [ ]
+	if getImageDistro() in ('openmips'):
+		if menuid != "general_menu":
+			return [ ]
+	elif getImageDistro() in ('openhdf'):
+		if menuid != "gui_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return []
 	return [(_("Permanent Clock"), startConfig, "permanent_clock", None)]
 
 def Plugins(**kwargs):
