@@ -6,6 +6,8 @@ from Components.ActionMap import ActionMap
 from Components.config import config, ConfigInteger, ConfigSubsection, ConfigYesNo, ConfigSelection
 from Components.Language import language
 from Components.MenuList import MenuList
+from Components.Input import Input
+from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from enigma import ePoint, eTimer, getDesktop
@@ -40,7 +42,7 @@ language.addCallback(localeInit)
 
 config.plugins.PermanentClock = ConfigSubsection()
 config.plugins.PermanentClock.enabled = ConfigYesNo(default=False)
-config.plugins.PermanentClock.position_x = ConfigInteger(default=590)
+config.plugins.PermanentClock.position_x = ConfigInteger(default=500)
 config.plugins.PermanentClock.position_y = ConfigInteger(default=35)
 config.plugins.PermanentClock.analog = ConfigYesNo(default=False)
 config.plugins.PermanentClock.show_hide = ConfigYesNo(default=False)
@@ -323,46 +325,64 @@ class PermanentClockPositioner(Screen):
 			"ok": self.ok,
 			"back": self.exit
 		}, -1)
-		desktop = getDesktop(0)
-		self.desktopWidth = desktop.size().width()
-		self.desktopHeight = desktop.size().height()
-		self.moveTimer = eTimer()
-		self.moveTimer.callback.append(self.movePosition)
-		self.moveTimer.start(50, 1)
+		self.desktopWidth = getDesktop(0).size().width()
+		self.desktopHeight = getDesktop(0).size().height()
+		self.slider = 1
+		self.onLayoutFinish.append(self.__layoutFinished)
+
+	def __layoutFinished(self):
+		self.movePosition()
 
 	def movePosition(self):
 		self.instance.move(ePoint(config.plugins.PermanentClock.position_x.value, config.plugins.PermanentClock.position_y.value))
-		self.moveTimer.start(50, 1)
 
 	def left(self):
 		value = config.plugins.PermanentClock.position_x.value
-		value -= 1
+		value -= self.slider
 		if value < 0:
 			value = 0
 		config.plugins.PermanentClock.position_x.value = value
+		self.movePosition()
 
 	def up(self):
 		value = config.plugins.PermanentClock.position_y.value
-		value -= 1
+		value -= self.slider
 		if value < 0:
 			value = 0
 		config.plugins.PermanentClock.position_y.value = value
+		self.movePosition()
 
 	def right(self):
 		value = config.plugins.PermanentClock.position_x.value
-		value += 1
+		value += self.slider
 		if value > self.desktopWidth:
 			value = self.desktopWidth
 		config.plugins.PermanentClock.position_x.value = value
+		self.movePosition()
 
 	def down(self):
 		value = config.plugins.PermanentClock.position_y.value
-		value += 1
+		value += self.slider
 		if value > self.desktopHeight:
 			value = self.desktopHeight
 		config.plugins.PermanentClock.position_y.value = value
+		self.movePosition()
 
 	def ok(self):
+		menu = [(_("Save"), "save"),(_("Set slider"), "slider")]
+		def extraAction(choice):
+			if choice is not None:
+				if choice[1] == "slider":
+					self.session.openWithCallback(self.setSliderStep, InputBox, title=_("Set slider step (1 - 20):"), text=str(self.slider), type = Input.NUMBER)
+				elif choice[1] == "save":
+					self.Save()
+		self.session.openWithCallback(extraAction, ChoiceBox, list=menu)
+
+	def setSliderStep(self, step):
+		if step and (0 < int(step) < 21):
+			self.slider = int(step)
+
+	def Save(self):
 		config.plugins.PermanentClock.position_x.save()
 		config.plugins.PermanentClock.position_y.save()
 		self.close()
@@ -544,8 +564,6 @@ def main(menuid):
 		if menuid != "system":
 			return []
 	return [(_("Permanent Clock"), startConfig, "permanent_clock", None)]
-
-##############################################################################
 
 def Plugins(**kwargs):
 	return [
