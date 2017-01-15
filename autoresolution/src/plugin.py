@@ -18,6 +18,14 @@ try:
 except:
 	from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
 
+# modes_available used to be a member variable, but that was removed and
+# the value can now only be accessed using an accessor function.
+# Need to cater for either...
+#
+if hasattr(video_hw, "modes_available"):
+	modes_available = video_hw.modes_available
+else:
+	modes_available = video_hw.readAvailableModes()
 
 
 # for localized messages
@@ -74,6 +82,7 @@ frqdic = { 23976: '24', \
 class AutoRes(Screen):
 	def __init__(self, session):
 		global port
+		global modes_available
 		Screen.__init__(self, session)
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
 			{
@@ -85,8 +94,8 @@ class AutoRes(Screen):
 			})
 		self.timer = eTimer()
 		self.timer.callback.append(self.determineContent)
-		self.extra_mode1080p50 = '1080p50' in video_hw.modes_available
-		self.extra_mode1080p60 = '1080p60' in video_hw.modes_available
+		self.extra_mode1080p50 = '1080p50' in modes_available
+		self.extra_mode1080p60 = '1080p60' in modes_available
 		if config.av.videoport.value in config.av.videomode:
 			self.lastmode = config.av.videomode[config.av.videoport.value].value
 		config.av.videoport.addNotifier(self.defaultModeChanged)
@@ -416,6 +425,7 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 
 class AutoFrameRate(Screen):
 	def __init__(self, session):
+		global modes_available
 		Screen.__init__(self, session)
 		self.lockTimer = eTimer()
 		self.lockTimer.callback.append(self.unlockFramerateChange)
@@ -424,7 +434,7 @@ class AutoFrameRate(Screen):
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap = {iPlayableService.evVideoFramerateChanged: self.AutoVideoFramerateChanged})
 		self.need_reset = getBoxType() in ('solo4k')
 		self.replace_mode = '30'
-		if '1080p60' in video_hw.modes_available:
+		if '1080p60' in modes_available:
 			self.replace_mode = '60'
 
 	def AutoVideoFramerateChanged(self):
@@ -516,8 +526,8 @@ class AutoFrameRate(Screen):
  		seekable.seekRelative(pts < 0 and -1 or 1, abs(pts))
 
 def autostart(reason, **kwargs):
+	global resolutionlabel
 	if reason == 0 and "session" in kwargs and resolutionlabel is None:
-		global resolutionlabel
 		session = kwargs["session"]
 		resolutionlabel = session.instantiateDialog(ResolutionLabel)
 		AutoFrameRate(session)
