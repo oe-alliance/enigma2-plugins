@@ -22,7 +22,7 @@ msgstr ""
 #: ../src_py/Vps_check.py:250
 #: ../src_py/Vps_check.py:278
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: ../src_py/Modifications.py:141
 #: ../src_py/plugin.py:16
@@ -37,7 +37,7 @@ msgstr "Ja (Sicherheitsmodus)"
 #: ../src_py/Vps_check.py:250
 #: ../src_py/Vps_check.py:278
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: ../src_py/Modifications.py:144
 #: ../src_py/Modifications.py:147
