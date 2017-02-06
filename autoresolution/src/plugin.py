@@ -18,6 +18,14 @@ try:
 except:
 	from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
 
+# modes_available used to be a member variable, but that was removed and
+# the value can now only be accessed using an accessor function.
+# Need to cater for either...
+#
+if hasattr(video_hw, "modes_available"):
+	modes_available = video_hw.modes_available
+else:
+	modes_available = video_hw.readAvailableModes()
 
 
 # for localized messages
@@ -30,12 +38,33 @@ port = None
 videoresolution_dictionary = {}
 resolutionlabel = None
 
-resolutions = (('sd_i_50', (_("SD 25/50HZ Interlace Mode"))), ('sd_i_60', (_("SD 30/60HZ Interlace Mode"))), \
-			('sd_p_24', (_("SD 24HZ Progressive mode"))), \
-			('sd_p_50', (_("SD 25/50HZ Progressive Mode"))), ('sd_p_60', (_("SD 30/60HZ Progressive Mode"))), \
-			('hd_i', (_("HD Interlace Mode"))), ('hd_p', (_("HD Progressive Mode"))), \
-			('p720_24', (_("Enable 720p24 Mode"))), ('p1080_24', (_("Enable 1080p24 Mode"))), \
-			('p1080_25', (_("Enable 1080p25 Mode"))), ('p1080_30', (_("Enable 1080p30 Mode"))))
+# Added p720_50
+resolutions = ( \
+	('sd_i_50',        _("SD 25/50HZ Interlace Mode")), \
+	('sd_i_60',        _("SD 30/60HZ Interlace Mode")), \
+	('sd_p_24',        _("SD 24HZ Progressive mode")), \
+	('sd_p_50',        _("SD 25/50HZ Progressive Mode")), \
+	('sd_p_60',        _("SD 30/60HZ Progressive Mode")), \
+	('hd_i',           _("HD Interlace Mode")), \
+	('hd_p',           _("HD Progressive Mode")), \
+	('p720_24',        _("Enable 720p24 Mode")), \
+	('p720_50',        _("Enable 720p50 Mode")), \
+	('p1080_24',       _("Enable 1080p24 Mode")), \
+	('p1080_25',       _("Enable 1080p25 Mode")), \
+	('p1080_30',       _("Enable 1080p30 Mode")), \
+)
+
+# from OpenPLi
+have_2160p = config.av.videorate.get("2160p", False)
+
+if have_2160p:				        
+	resolutions += (
+		('uhd_i',    _("UHD Interlace Mode")),
+		('uhd_p',    _("UHD Progressive Mode")),
+		('p2160_24', _("Enable 2160p24 Mode")),
+		('p2160_25', _("Enable 2160p25 Mode")),
+		('p2160_30', _("Enable 2160p30 Mode")), # Trailing , is NEEDED!
+)
 
 config.plugins.autoresolution = ConfigSubsection()
 config.plugins.autoresolution.enable = ConfigYesNo(default = False)
@@ -74,6 +103,7 @@ frqdic = { 23976: '24', \
 class AutoRes(Screen):
 	def __init__(self, session):
 		global port
+		global modes_available
 		Screen.__init__(self, session)
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
 			{
@@ -85,8 +115,8 @@ class AutoRes(Screen):
 			})
 		self.timer = eTimer()
 		self.timer.callback.append(self.determineContent)
-		self.extra_mode1080p50 = '1080p50' in video_hw.modes_available
-		self.extra_mode1080p60 = '1080p60' in video_hw.modes_available
+		self.extra_mode1080p50 = '1080p50' in modes_available
+		self.extra_mode1080p60 = '1080p60' in modes_available
 		if config.av.videoport.value in config.av.videomode:
 			self.lastmode = config.av.videomode[config.av.videoport.value].value
 		config.av.videoport.addNotifier(self.defaultModeChanged)
@@ -166,7 +196,31 @@ class AutoRes(Screen):
 			if self.extra_mode1080p60:
 				default_choices.append('1080p60')
 			for mode in resolutions:
-				choices = default_choices + preferedmodes
+# from OpenPLi
+				if have_2160p:
+					if mode[0].startswith('p2160'):
+						choices = ['2160p24', '2160p25', '2160p30'] + preferedmodes
+					elif mode[0].startswith('p1080_24'):
+						choices = ['1080p24', '2160p24'] + preferedmodes
+					elif mode[0].startswith('p1080'):
+						choices = ['1080p24', '1080p25', '1080p30'] + preferedmodes
+					elif mode[0] == 'p720_24':
+						choices = ['720p24', '1080p24', '2160p24'] + preferedmodes
+# Added p720_50
+					elif mode[0] == 'p720_50':
+						choices = ['720p50', '1080p25', '2160p25'] + preferedmodes
+					else:
+						choices = default_choices + preferedmodes
+				else:
+					if mode[0].startswith('p1080'):
+						choices = ['1080p24', '1080p25', '1080p30'] + preferedmodes
+					elif mode[0] == 'p720_24':
+						choices = ['720p24', '1080p24'] + preferedmodes
+# Added p720_50
+					elif mode[0] == 'p720_50':
+						choices = ['720p50', '1080p25'] + preferedmodes
+					else:
+						choices = default_choices + preferedmodes
 				config.plugins.autoresolution.videoresolution[mode[0]] = ConfigSelection(default = default[0], choices = choices)
 				config.plugins.autoresolution.videoresolution[mode[0]].addNotifier(self.modeConfigChanged, initial_call = False, immediate_feedback = False)
 				videoresolution_dictionary[mode[0]] = (config.plugins.autoresolution.videoresolution[mode[0]])
@@ -218,13 +272,23 @@ class AutoRes(Screen):
 				progressive = info and info.getInfo(iServiceInformation.sProgressive)
 
 				prog = progressive == 1 and 'p' or 'i'
-
-				if frate in ('24'): # always 1080p24 content ???
+# from OpenPLi
+				if have_2160p and (height >= 2100 or width >= 3200): # 2160 content
+					if frate in ('24', '25', '30') and prog == 'p':
+						new_mode = 'p2160_%s' % frate
+					elif frate in ('50', '60') and prog == 'p':
+						new_mode = 'uhd_p'
+					else:
+						new_mode = 'uhd_i' # 2160i content - senseless ???
+				elif frate in ('24'): # always 1080p24 content ???
 					new_mode = 'p1080_24'
 				elif (height >= 900 or width >= 1600) and frate in ('24', '25', '30') and prog == 'p': # 1080p content
 					new_mode = 'p1080_%s' % frate
 				elif (height > 576 or width > 720) and frate == '24' and prog == 'p': # 720p24 detection
 					new_mode = 'p720_24'
+# Added p720_50
+				elif (height > 576 or width > 720) and frate == '50' and prog == 'p': # 720p50 detection
+					new_mode = 'p720_50'
 				elif (height <= 576) and (width <= 720) and frate in ('25', '50'):
 					new_mode = 'sd_%s_50' % prog
 				elif (height <= 480) and (width <= 720) and frate in ('24', '30', '60'):
@@ -416,6 +480,7 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 
 class AutoFrameRate(Screen):
 	def __init__(self, session):
+		global modes_available
 		Screen.__init__(self, session)
 		self.lockTimer = eTimer()
 		self.lockTimer.callback.append(self.unlockFramerateChange)
@@ -424,7 +489,7 @@ class AutoFrameRate(Screen):
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap = {iPlayableService.evVideoFramerateChanged: self.AutoVideoFramerateChanged})
 		self.need_reset = getBoxType() in ('solo4k')
 		self.replace_mode = '30'
-		if '1080p60' in video_hw.modes_available:
+		if '1080p60' in modes_available:
 			self.replace_mode = '60'
 
 	def AutoVideoFramerateChanged(self):
@@ -516,8 +581,8 @@ class AutoFrameRate(Screen):
  		seekable.seekRelative(pts < 0 and -1 or 1, abs(pts))
 
 def autostart(reason, **kwargs):
+	global resolutionlabel
 	if reason == 0 and "session" in kwargs and resolutionlabel is None:
-		global resolutionlabel
 		session = kwargs["session"]
 		resolutionlabel = session.instantiateDialog(ResolutionLabel)
 		AutoFrameRate(session)

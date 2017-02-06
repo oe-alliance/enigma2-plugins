@@ -118,17 +118,17 @@ class EPGSearchList(EPGList):
 		t = localtime(beginTime)
 		serviceref = ServiceReference(service)  # for Servicename and orbital position
 		width = r4.x + r4.w
+		align = RT_HALIGN_LEFT
 		if hasattr(self, "showend"):
 			et = localtime(beginTime + duration)
-			align = RT_HALIGN_RIGHT
 			if hasattr(config.usage, "time"):
+				align = RT_HALIGN_CENTER
 				weekday = strftime(config.usage.date.dayshort.value, t)
 				datetime = "%s - %s" % (strftime(config.usage.time.short.value, t), strftime(config.usage.time.short.value, et))
 			else:
 				weekday = strftime("%a %d %b", t)
 				datetime = "%s ~ %s" % (strftime("%H:%M", t), strftime("%H:%M", et))
 		else:
-			align = RT_HALIGN_LEFT
 			weekday = strftime("%a", t)
 			if hasattr(config.usage, "time"):
 				datetime = "%s, %s" % (strftime(config.usage.date.short.value, t), strftime(config.usage.time.short.value, t))
