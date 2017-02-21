@@ -118,27 +118,32 @@ class EPGSearchList(EPGList):
 		t = localtime(beginTime)
 		serviceref = ServiceReference(service)  # for Servicename and orbital position
 		width = r4.x + r4.w
-		align = RT_HALIGN_LEFT
 		if hasattr(self, "showend"):
 			et = localtime(beginTime + duration)
 			if hasattr(config.usage, "time"):
-				align = RT_HALIGN_CENTER
-				weekday = strftime(config.usage.date.dayshort.value, t)
-				datetime = "%s - %s" % (strftime(config.usage.time.short.value, t), strftime(config.usage.time.short.value, et))
+				split = int(r2.w * 0.55)
+				res = [
+					None,  # no private data needed
+					(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, strftime(config.usage.date.dayshort.value, t)),
+					(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, split, r2.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, strftime(config.usage.time.short.value + " -", t)),
+					(eListboxPythonMultiContent.TYPE_TEXT, r2.x + split, r2.y, r2.w - split, r2.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, strftime(config.usage.time.short.value, et))
+				]
 			else:
-				weekday = strftime("%a %d %b", t)
-				datetime = "%s ~ %s" % (strftime("%H:%M", t), strftime("%H:%M", et))
+				res = [
+					None,  # no private data needed
+					(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, strftime("%a %d %b", t)),
+					(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, "%s ~ %s" % (strftime("%H:%M", t), strftime("%H:%M", et)))
+				]
 		else:
-			weekday = strftime("%a", t)
 			if hasattr(config.usage, "time"):
 				datetime = "%s, %s" % (strftime(config.usage.date.short.value, t), strftime(config.usage.time.short.value, t))
 			else:
 				datetime = strftime("%e/%m, %H:%M", t)
-		res = [
-			None,  # no private data needed
-			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, weekday),
-			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r2.h, 0, align | RT_VALIGN_CENTER, datetime)
-		]
+			res = [
+				None,  # no private data needed
+				(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, strftime("%a", t)),
+				(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, datetime)
+			]
 		if r3.w:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, self.getOrbitalPos(serviceref)))
 		picwidth = 0

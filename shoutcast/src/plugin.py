@@ -901,7 +901,7 @@ class SHOUTcastWidget(Screen):
 			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 			return
 		self.currentGoogle = None
-		r=re.findall(',imgurl:&quot;(.*?)&quot;,tid',result)
+		r=re.findall('murl&quot;:&quot;(http.*?)&quot',result, re.S|re.I)
 		if r:
 			url = r[nr]
 			print "[SHOUTcast] fetch cover first try:%s" % (url)
