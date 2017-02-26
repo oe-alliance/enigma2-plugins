@@ -3,7 +3,7 @@ from EPGRefresh import epgrefresh
 from EPGRefreshService import EPGRefreshService
 from enigma import eServiceReference
 from Components.config import config
-from Components.SystemInfo import SystemInfo
+from Components.NimManager import nimmanager
 from time import localtime
 from OrderedSet import OrderedSet
 from ServiceReference import ServiceReference
@@ -268,7 +268,7 @@ class EPGRefreshSettingsResource(resource.Resource):
 			0, now.tm_wday, now.tm_yday, now.tm_isdst)
 		)
 
-		canDoBackgroundRefresh = SystemInfo.get("NumVideoDecoders", 1) > 1
+		canDoBackgroundRefresh = len(nimmanager.nim_slots) > 1
 		hasAutoTimer = False
 		try:
 			from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
