@@ -25,7 +25,7 @@ from Screens.FixedMenu import FixedMenu
 from Tools.BoundFunction import boundFunction
 
 from EPGRefresh import epgrefresh
-from Components.SystemInfo import SystemInfo
+from Components.NimManager import nimmanager
 from Screens.MessageBox import MessageBox
 
 # Error-print
@@ -159,7 +159,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("EPG refresh auto-start earliest (hh:mm)"), config.plugins.epgrefresh.begin, _("An automated refresh will start after this time of day, but before the time specified in next setting."), False))
 			self.list.append(getConfigListEntry(_("EPG refresh auto-start latest (hh:mm)"), config.plugins.epgrefresh.end, _("An automated refresh will start before this time of day, but after the time specified in previous setting."), False))
 			self.list.append(getConfigListEntry(_("Delay if not in standby (minutes)"), config.plugins.epgrefresh.delay_standby, _("If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."), False))
-			if SystemInfo.get("NumVideoDecoders", 1) > 1:
+			if len(nimmanager.nim_slots) > 1:
 				self.list.append(getConfigListEntry(_("Refresh EPG using"), config.plugins.epgrefresh.adapter, _("If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."), False))
 			self.list.append(getConfigListEntry(_("Show Advanced Options"), NoSave(config.plugins.epgrefresh.showadvancedoptions), _("Display more Options"), True))
 			if config.plugins.epgrefresh.showadvancedoptions.value:
