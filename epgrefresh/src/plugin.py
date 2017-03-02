@@ -11,6 +11,9 @@ from Screens.Standby import TryQuitMainloop
 from Tools.BoundFunction import boundFunction
 from boxbranding import getImageDistro
 
+from Components.SystemInfo import SystemInfo
+from Components.NimManager import nimmanager
+
 # Error-print
 from traceback import print_exc
 from sys import stdout
@@ -53,13 +56,15 @@ config.plugins.epgrefresh.parse_autotimer = ConfigSelection(choices = [
 		("ask_no", _("Ask default No")),
 	], default = "never"
 )
-config.plugins.epgrefresh.adapter = ConfigSelection(choices = [
-		("main", _("Main Picture")),
-		("pip", _("Picture in Picture")),
-		("pip_hidden", _("Picture in Picture (hidden)")),
-		("record", _("Fake recording")),
-	], default = "main"
-)
+
+adapter_choices = [("main", _("Main Picture"))]
+if SystemInfo.get("NumVideoDecoders", 1) > 1:
+	adapter_choices.append(("pip", _("Picture in Picture")))
+	adapter_choices.append(("pip_hidden", _("Picture in Picture (hidden)")))
+if len(nimmanager.nim_slots) > 1:
+	adapter_choices.append(("record", _("Fake recording")))
+config.plugins.epgrefresh.adapter = ConfigSelection(choices = adapter_choices, default = "main")
+
 config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.epgrefresh.show_run_in_extensionsmenu = ConfigYesNo(default = True)
 config.plugins.epgrefresh.show_help = ConfigYesNo(default = True)

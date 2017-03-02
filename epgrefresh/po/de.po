@@ -429,7 +429,7 @@ msgstr "EPG Aktualisierung wurde im Hintergrund gestartet"
 
 #: PipAdapter.py:79
 msgid "PiP available now."
-msgstr "PiP is wieder verfügbar."
+msgstr "PiP ist wieder verfügbar."
 
 #: plugin.py:40 plugin.py:50
 msgid "Background only"
