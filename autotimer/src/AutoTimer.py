@@ -384,7 +384,7 @@ class AutoTimer:
 			evt = epgcache.lookupEventId(eserviceref, eit)
 			if not evt:
 				print("[AutoTimer] Could not create Event!")
-				skipped.append((name, begin, end, str(serviceref), timer.name))
+				skipped.append((name, begin, begin, str(serviceref), timer.name))
 				continue
 			# Try to determine real service (we always choose the last one)
 			n = evt.getNumOfLinkageServices()
