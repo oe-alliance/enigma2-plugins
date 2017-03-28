@@ -622,7 +622,7 @@ void copysmallfile(int n, int f1, int f2)
 
 int main(int argc, char* argv[])
 {
-  int f_ts, f_out, f_cuts, f_cutsout, f_ap, f_apout, f_sc, f_scout, f_meta, f_metaout, f_eit, f_eitout;
+  int f_ts, f_out, f_cuts, f_cutsout, f_ap, f_apout, f_sc, f_scout = -1, f_meta, f_metaout, f_eit, f_eitout;
   char* tmpname;
   const char* suff = 0;
   char* inname = 0;
