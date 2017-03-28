@@ -4,12 +4,12 @@
   * modify it under the terms of the GNU General Public License as
   * published by the Free Software Foundation; either version 2, or
   * (at your option) any later version.
-  * 
+  *
   * This program is distributed in the hope that it will be useful,
   * but WITHOUT ANY WARRANTY; without even the implied warranty of
   * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   * GNU General Public License for more details.
-  * 
+  *
   * You should have received a copy of the GNU General Public License
   * along with this software; see the file COPYING.  If not, write to
   * the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
@@ -201,9 +201,9 @@ off64_t readoff(int fa, int fao, int fs, int fso, double t, int beg, double& tr)
       break;
     if (buf0[1] - buf1[1] > 45000 || buf1[1] - buf0[1] > 900000) {
       if (absless(buf1[1] + ((long long int)1)<<33 - buf0[1], 900000))
-	time_offset -= ((long long int)1)<<33;
+        time_offset -= ((long long int)1)<<33;
       else
-	time_offset += buf1[1] - buf0[1];
+        time_offset += buf1[1] - buf0[1];
     }
     lt = tt;
     if (buf0[1] - buf1[1] > 0 && buf0[1] - buf1[1] <= 45000)
@@ -388,7 +388,7 @@ int donextinterval1(int fc, int fco, int fa, int fao, int fs, int fso, int fts, 
     lseek(fc, 0, SEEK_SET);
     while (1) {
       if (n == 0)
-	return 0;
+        return 0;
       read(fc, buf, 12);
       n--;
       tmp = bswap_32(buf[2]);
@@ -401,26 +401,26 @@ int donextinterval1(int fc, int fco, int fa, int fao, int fs, int fso, int fts, 
         if (transfer_rest(fts, ftso, c1, c2, c2ret)) return -1;
         movesc(fs, fso, c2ret, 0);
         printf("Interval: %lld - %lld\n", c1ret, c2ret);
-	// move all passed marks
-	lseek(fc, 0, SEEK_SET);
-	read(fc, buf, 12);
-	while (bswap_32(buf[2]) != 1) {
-	  write(fco, buf, 12);
-	  read(fc, buf, 12);
-	}
-	return 1;
+        // move all passed marks
+        lseek(fc, 0, SEEK_SET);
+        read(fc, buf, 12);
+        while (bswap_32(buf[2]) != 1) {
+            write(fco, buf, 12);
+            read(fc, buf, 12);
+        }
+        return 1;
       } else if (tmp == 0) {
         c1 = readoff(fa, fao, fs, fso, inttotime(buf[0], buf[1]), 1, toff);
         if (transfer_start(fts, ftso, c1, c1ret)) return -1;
         curr_size_offset = size_offset;
         movesc(fs, fso, c1ret, 1);
-	if (lcheck) {
-	  buf[0] = buf[1] = 0;
-	  write(fco, buf, 12);
-	}
-	break;
+        if (lcheck) {
+            buf[0] = buf[1] = 0;
+            write(fco, buf, 12);
+        }
+        break;
       } else if (tmp == 3)
-	lcheck = 1;
+          lcheck = 1;
     }
   } else {
     while (1) {
@@ -439,13 +439,13 @@ int donextinterval1(int fc, int fco, int fa, int fao, int fs, int fso, int fts, 
         }
         movesc(fs, fso, c1ret, 1);
         toff += ttmp - tlast;
-	break;
+        break;
       } else if (tmp == 3) {
-	timetoint(tlast-toff, buf[0], buf[1]);
-	write(fco, buf, 12);
+          timetoint(tlast-toff, buf[0], buf[1]);
+          write(fco, buf, 12);
       }
       if (n == 0)
-	return 0;
+          return 0;
     }
   }
   while (1) {
@@ -574,7 +574,7 @@ char* makefilename(const char* base, const char* pre, const char* ext, const cha
 }
 
 void copymeta(int n, int f1, int f2, const char* title, const char* suff, const char* descr)
-{ 
+{
   int i, j, k;
   char* buf = new char[n];
   read(f1, buf, n);
@@ -613,7 +613,7 @@ void copymeta(int n, int f1, int f2, const char* title, const char* suff, const 
 }
 
 void copysmallfile(int n, int f1, int f2)
-{ 
+{
   char* buf = new char[n];
   read(f1, buf, n);
   write(f2, buf, n);
@@ -958,7 +958,7 @@ int main(int argc, char* argv[])
       tmpname = makefilename(inname, 0, ".ts", ".eit", 1);
       tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
       rename(tmpname, makefilename(outname, 0, ".ts", ".eit", 1));
-      if (!metafailed) 
+      if (!metafailed)
         unlink(makefilename(inname, 0, ".ts", ".meta"));
       else {
         tmpname = makefilename(inname, 0, ".ts", ".meta");
@@ -968,4 +968,3 @@ int main(int argc, char* argv[])
     }
   }
 }
-
