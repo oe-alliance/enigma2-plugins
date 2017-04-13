@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-01 17:50+0200\n"
-"PO-Revision-Date: 2016-06-01 19:51+0200\n"
+"POT-Creation-Date: 2017-03-14 20:05+0100\n"
+"PO-Revision-Date: 2016-09-09 14:46+0200\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: de\n"
@@ -125,6 +125,10 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr "Konnte Anrufliste nicht bekommen; falsche Firmware-Version?"
 
+#, python-format
+msgid "Could not load phonebook: %s"
+msgstr "\"Telefonbuch konnte nicht geladen werden: %ss"
+
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "Konnte Eintrag in FRITZ!Box-Telefonbuch nicht lesen"
 
@@ -201,6 +205,7 @@ msgid "Edit"
 msgstr "Ändern"
 
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr "Eintrag bearbeiten"
 
@@ -219,13 +224,12 @@ msgstr "Erweiterte Suche für Namen"
 msgid "Extension number to initiate call on"
 msgstr "Nebenstelle für Anrufe"
 
+msgid "FRITZ!Box - "
+msgstr "FRITZ!Box - "
+
 #, python-format
 msgid "FRITZ!Box - Could not load calls: %s"
 msgstr "FRITZ!Box - Anrufe konnten nicht geladen werden: %s"
-
-#, python-format
-msgid "FRITZ!Box - Could not load phonebook: %s"
-msgstr "\"FRITZ!Box - Telefonbuch konnte nicht geladen werden: %s"
 
 #, python-format
 msgid "FRITZ!Box - Dialling failed: %s"
@@ -394,6 +398,9 @@ msgstr "anzuzeigende MSNs (getrennt durch ,)"
 msgid "Mailbox"
 msgstr "Anrufbeantworter"
 
+msgid "Make it more skin friendly"
+msgstr "Mehr Möglichkeiten für Skins"
+
 msgid "Minutes of uptime of WLAN guest network"
 msgstr "Dauer für den WLAN-Gastzugang in Minuten"
 
@@ -403,6 +410,9 @@ msgstr "Verpasst"
 
 msgid "Missed calls"
 msgstr "Verpasste Anrufe"
+
+msgid "Mute also on outgoing calls"
+msgstr ""
 
 msgid "Mute on call"
 msgstr "Ton aus bei angezeigten Anrufen"
@@ -663,6 +673,9 @@ msgstr "Toggle AB"
 msgid "UNKNOWN"
 msgstr "UNBEKANNT"
 
+msgid "Update available"
+msgstr "Update verfügbar"
+
 msgid "Use internal PhoneBook"
 msgstr "Benutze internes Telefonbuch"
 
@@ -671,6 +684,9 @@ msgstr "Benutzername für FRITZ!Box"
 
 msgid "Vanity"
 msgstr "Vanity"
+
+msgid "WLAN not active"
+msgstr "WLAN nicht aktiviert"
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
 msgstr ""
@@ -694,6 +710,9 @@ msgstr "vor 05.27"
 
 msgid "call redirections active"
 msgstr "Rufumleitungen aktiv"
+
+msgid "calls in mailbox"
+msgstr "Anrufe auf AB"
 
 msgid "devices active"
 msgstr "WLAN-Stationen aktiv"
