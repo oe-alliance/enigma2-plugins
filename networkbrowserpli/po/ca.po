@@ -3,256 +3,262 @@
 # This file is distributed under the same license as the tuxbox-enigma package.
 #
 # Automatically generated, 2006.
-# Oriol Pellicer i Sabrià <oriol@elsud.org>, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: ca\n"
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-28 16:39+0100\n"
-"PO-Revision-Date: 2007-08-14 10:23+0200\n"
-"Last-Translator: Oriol Pellicer <oriol@elsud.org>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2008-05-08 01:20+0100\n"
+"Last-Translator: JR <openspateam@gmail.com>\n"
+"Language-Team: none\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Catalan\n"
-"X-Poedit-Country: CATALONIA\n"
+"X-Poedit-Country: Catalunya\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: KBabel 1.11.4\n"
 
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
 msgstr ""
+"Ja existeix un punt de muntatge amb aquest nom.\n"
+"Actualitzar l'existent i continuar?\n"
 
 msgid "Active"
-msgstr ""
+msgstr "Actiu"
 
 msgid ""
 "Active/\n"
 "Inactive"
 msgstr ""
+"Actiu/\n"
+"Inactiu"
 
 msgid "Add a new NFS or CIFS mount point to your Dreambox."
-msgstr ""
+msgstr "Afegir un nou punt de muntatge NFS o CIFS al teu receptor."
 
 msgid "Add new network mount point"
-msgstr ""
+msgstr "Afegir un nou punt de muntatge de red"
 
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
 msgstr ""
+"Estàs segur que vols guardar el muntatge de red?\n"
+"\n"
 
 msgid "Attempt to mount shares again"
-msgstr ""
+msgstr "Intentar muntar de nou el recursos"
 
 msgid "Attempt to recover lost mounts (in background)"
-msgstr ""
+msgstr "Intentar recuperar muntatges perduts (en segon pla)"
 
 msgid "Browse network neighbourhood"
-msgstr ""
+msgstr "Explorar red local"
 
 msgid "CIFS share"
-msgstr ""
+msgstr "CIFS"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel·lar"
 
 msgid "Change hostname"
-msgstr ""
+msgstr "Canviar nom de host"
 
 msgid "Change the hostname of your Dreambox."
-msgstr ""
+msgstr "Canviar nom de host del teu receptor"
 
 msgid "Close"
-msgstr ""
+msgstr "Tancar"
 
 msgid "Delete"
-msgstr ""
+msgstr "Borrar"
 
 msgid "Delete mount"
-msgstr ""
+msgstr "Borrar muntatge"
 
 msgid "Dir:"
-msgstr ""
+msgstr "Dir:"
 
 msgid "Do you want to enter a username and password for this host?\n"
-msgstr ""
+msgstr "Vols introduir nom d'usuari y contrasenya per aquest host?\n"
 
 msgid "Enter IP to scan..."
-msgstr ""
+msgstr "Introduir IP a buscar..."
 
 msgid "Enter new hostname for your Dreambox"
-msgstr ""
+msgstr "Introduir nou nom de host per al teu receptor"
 
 msgid "Enter options:"
-msgstr ""
+msgstr "Introduir opcions:"
 
 msgid "Enter password:"
-msgstr ""
+msgstr "Introduir contrasenya:"
 
 msgid "Enter share directory:"
-msgstr ""
+msgstr "Introduir directori compartit:"
 
 msgid "Enter share name:"
-msgstr ""
+msgstr "Introduir nom del recurs compartit:"
 
 msgid "Enter user and password for host: "
-msgstr ""
+msgstr "Introduir usuari i contrasenya per al host: "
 
 msgid "Enter username:"
-msgstr ""
+msgstr "Introduir nom d'usuari:"
 
 msgid "Expert"
-msgstr ""
+msgstr "Expert"
 
 msgid "Finished restarting your network"
-msgstr ""
+msgstr "Reinici de red finalitzat"
 
 msgid "IP Address"
-msgstr ""
+msgstr "Direcció IP"
 
 msgid "IP:"
-msgstr ""
+msgstr "IP:"
 
 msgid "Local share name"
-msgstr ""
+msgstr "Nom de recurs local"
 
 msgid "Manage network shares"
-msgstr ""
+msgstr "Administrar els recursos de red"
 
 msgid "Manage your network shares..."
-msgstr ""
+msgstr "Administrar els recursos de red..."
 
 msgid "Mount again"
-msgstr ""
+msgstr "Muntar de nou"
 
 msgid "Mount informations"
-msgstr ""
+msgstr "Informació de muntatge"
 
 msgid "Mount options"
-msgstr ""
+msgstr "Opcions de muntatge"
 
 msgid "Mount type"
-msgstr ""
+msgstr "Tipus de muntatge"
 
 msgid "MountManager"
-msgstr ""
+msgstr "Administrador de muntatges"
 
 msgid ""
 "Mounted/\n"
 "Unmounted"
 msgstr ""
+"Muntat/\n"
+"Desmuntat"
 
 msgid "Mountpoints management"
-msgstr ""
+msgstr "Administració de punts de muntatge"
 
 msgid "Mounts editor"
-msgstr ""
+msgstr "Editor de muntatges"
 
 msgid "Mounts management"
-msgstr ""
+msgstr "Administració de muntatges"
 
 msgid "NFS share"
-msgstr ""
+msgstr "NFS"
 
 msgid "NetworkBrowser"
-msgstr ""
+msgstr "Explorador de red"
 
 msgid "No network devices found!"
-msgstr ""
+msgstr "Cap dispositiu de red trobat!"
 
 msgid "Password"
-msgstr ""
+msgstr "Contrasenya"
 
 msgid "Please wait for activation of your network mount..."
-msgstr ""
+msgstr "Per favor, espera mentre s'activa el teu muntatge de red..."
 
 msgid "Please wait while removing your network mount..."
-msgstr ""
+msgstr "Per favor, espera mentre s'elimina el teu muntatge de red..."
 
 msgid "Please wait while updating your network mount..."
-msgstr ""
+msgstr "Per favor, espera mentre s'actualitza el teu muntatge de red..."
 
 msgid "Please wait while your network is restarting..."
-msgstr ""
+msgstr "Per favor, espera mentre es reinicia la red..."
 
 msgid "Press OK to activate the settings."
-msgstr ""
+msgstr "Prem OK per activar la configuració"
 
 msgid "Press OK to collapse this host"
-msgstr ""
+msgstr "Prem OK per contraure aquest host"
 
 msgid "Press OK to edit selected settings."
-msgstr ""
+msgstr "Prem OK per a editar la configuració seleccionada."
 
 msgid "Press OK to edit the settings."
-msgstr ""
+msgstr "Prem OK per a editar la configuració."
 
 msgid "Press OK to expand this host"
-msgstr ""
+msgstr "Prem OK per a expandir aquest host."
 
 msgid "Press OK to mount this share!"
-msgstr ""
+msgstr "Prem OK per a muntar aquest recurs compartit!"
 
 msgid "Press OK to mount!"
-msgstr ""
+msgstr "Prem OK per a muntar!"
 
 msgid "Press OK to save settings."
-msgstr ""
+msgstr "Prem OK per a guardar la configuració."
 
 msgid "Press OK to select."
-msgstr ""
+msgstr "Prem OK per a seleccionar."
 
 msgid "Rescan"
-msgstr ""
+msgstr "Tornar a buscar"
 
 msgid "Scan NFS share"
-msgstr ""
+msgstr "Buscar muntatge NFS"
 
 msgid "Scan range"
-msgstr ""
+msgstr "Rang de recerca"
 
 msgid "Search for network shares"
-msgstr ""
+msgstr "Buscar recursos de red compartits"
 
 msgid "Search for network shares..."
-msgstr ""
+msgstr "Buscar recursos de red compartits..."
 
 msgid "Searching your network. Please wait..."
-msgstr ""
+msgstr "Buscant en la teva red. Per favor, espera..."
 
 msgid "Server IP"
-msgstr ""
+msgstr "IP servidor"
 
 msgid "Server share"
-msgstr ""
+msgstr "Servidor compartit"
 
 msgid "User management"
-msgstr ""
+msgstr "Administració d'usuari"
 
 msgid "Usermanager"
-msgstr ""
+msgstr "Administrador d'usuari"
 
 msgid "Username"
-msgstr ""
+msgstr "Nom d'usuari"
 
 msgid "View, edit or delete mountpoints on your Dreambox."
-msgstr ""
+msgstr "Veure, editar o eliminar punts de muntatge del teu receptor."
 
 msgid "View, edit or delete usernames and passwords for your network."
-msgstr ""
+msgstr "Veure, editar o eliminar usuaris i contrasenyes de la teva red."
 
 msgid "Your network mount has been activated."
-msgstr ""
+msgstr "El teu muntatge de red s'ha activat."
 
 msgid "Your network mount has been removed."
-msgstr ""
+msgstr "El teu muntatge de red s'ha eliminat."
 
 msgid "Your network mount has been updated."
-msgstr ""
+msgstr "El teu muntatge de red s'ha actualitzat."
 
 msgid "use as HDD replacement"
-msgstr ""
+msgstr "utilitzar com reemplaçament del HDD"
