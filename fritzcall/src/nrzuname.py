@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 '''
-$Id: nrzuname.py 1373 2016-08-18 13:27:19Z michael $
+$Id: nrzuname.py 1394 2017-03-14 09:16:47Z michael $
 $Author: michael $
-$Revision: 1373 $
-$Date: 2016-08-18 15:27:19 +0200 (Thu, 18 Aug 2016) $
+$Revision: 1394 $
+$Date: 2017-03-14 10:16:47 +0100 (Tue, 14 Mar 2017) $
 '''
 
 # C0111 (Missing docstring)
@@ -18,7 +18,7 @@ $Date: 2016-08-18 15:27:19 +0200 (Thu, 18 Aug 2016) $
 # W0110 deprecated-lambda
 # C0302 too-many-lines
 # C0410 multiple-imports
-# pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,C0302,C0410
+# pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,C0302
 
 import re, sys, os
 from xml.dom.minidom import parse
@@ -36,9 +36,11 @@ try:
 		pass
 except ValueError:
 	debugVal = True
+
 	def setDebug(what):
 		global debugVal
 		debugVal = what
+
 	def debug(message):
 		if debugVal:
 			print message
@@ -149,7 +151,7 @@ try:
 except ImportError:
 	reverseLookupFileName = "reverselookup.xml"
 
-countries = { }
+countries = {}
 reverselookupMtime = 0
 
 class ReverseLookupAndNotifier(object):
@@ -195,11 +197,11 @@ class ReverseLookupAndNotifier(object):
 
 		if self.number[:2] == "00":
 			debug("number %s, %s", self.number, self.number[:4])
-			if countries.has_key(self.number[:3]):  # 	e.g. USA
+			if self.number[:3] in countries:  # e.g. USA
 				self.countrycode = self.number[:3]
-			elif countries.has_key(self.number[:4]):
+			elif self.number[:4] in countries:
 				self.countrycode = self.number[:4]
-			elif countries.has_key(self.number[:5]):
+			elif self.number[:5] in countries:
 				self.countrycode = self.number[:5]
 			else:
 				debug("Country cannot be reverse handled")
@@ -235,7 +237,7 @@ class ReverseLookupAndNotifier(object):
 		elif re.search('\\$PFXAREACODE', url) and website.hasAttribute("pfxareacode"):
 			areaCodeLen = int(website.getAttribute("pfxareacode"))
 			url = url.replace("$PFXAREACODE", "%(pfxareacode)s").replace("$NUMBER", "%(number)s")
-			url = url % { 'pfxareacode': number[:areaCodeLen], 'number': number[areaCodeLen:] }
+			url = url % {'pfxareacode': number[:areaCodeLen], 'number': number[areaCodeLen:]}
 		elif re.search('\\$NUMBER', url):
 			url = url.replace("$NUMBER", "%s") % number
 		else:
@@ -246,10 +248,7 @@ class ReverseLookupAndNotifier(object):
 		info("Url to query: " + url)
 		url = url.encode("UTF-8", "replace")
 		self.currentWebsite = website
-		getPage(url,
-			agent = "Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5"
-			).addCallback(self._gotPage).addErrback(self._gotError)
-
+		getPage(url, agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5").addCallback(self._gotPage).addErrback(self._gotError)
 
 	def _gotPage(self, page):
 		def cleanName(text):
@@ -287,13 +286,17 @@ class ReverseLookupAndNotifier(object):
 		# linkP.close()
 		#=======================================================================
 
-		found = re.match(r'.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />', page, re.S)
+		found = re.match(r'.*http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)"', page, re.S)
+		found1 = re.match(r'.*charset="([^"]+)"', page, re.S)
 		if found:
 			debug("Charset: " + found.group(1))
 			page = page.replace("\xa0", " ").decode(found.group(1), "replace")
+		elif found1:
+			debug("Charset: " + found1.group(1))
+			page = page.replace("\xa0", " ").decode(found1.group(1), "replace")
 		else:
 			debug("Default Charset: iso-8859-1")
-			page = page.replace("\xa0", " ").decode("ISO-8859-1", "replace")
+			page = page.replace("\xa0", " ").decode("UTF-8", "replace")
 
 		for entry in self.currentWebsite.getElementsByTagName("entry"):
 			#
@@ -408,8 +411,8 @@ class ReverseLookupAndNotifier(object):
 
 			self.notifyAndReset()
 			return True
-		
-		self._gotError("[ReverseLookupAndNotifier] _gotPage: Nothing found at %s" %self.currentWebsite.getAttribute("name"))
+
+		self._gotError("[ReverseLookupAndNotifier] _gotPage: Nothing found at %s" % self.currentWebsite.getAttribute("name"))
 		return False
 
 	def _gotError(self, errorMsg = ""):

@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1385 $
-$Date: 2016-12-13 18:09:20 +0100 (Tue, 13 Dec 2016) $
-$Id: plugin.py 1385 2016-12-13 17:09:20Z michael $
+$Revision: 1394 $
+$Date: 2017-03-14 10:16:47 +0100 (Tue, 14 Mar 2017) $
+$Id: plugin.py 1394 2017-03-14 09:16:47Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -118,6 +118,7 @@ config.plugins.FritzCall.debug = ConfigSelection(choices = [
 # config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
 # config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
 config.plugins.FritzCall.muteOnCall = ConfigYesNo(default = False)
+config.plugins.FritzCall.muteOnOutgoingCall = ConfigYesNo(default = False)
 config.plugins.FritzCall.hostname = ConfigText(default = "fritz.box", fixed_size = False)
 config.plugins.FritzCall.afterStandby = ConfigSelection(choices = [("none", _("show nothing")), ("inList", _("show as list")), ("each", _("show each call"))])
 config.plugins.FritzCall.filter = ConfigYesNo(default = False)
@@ -360,8 +361,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1385 $"[1:-2] + "\n" +
-							"$Date: 2016-12-13 18:09:20 +0100 (Tue, 13 Dec 2016) $"[1:23] + "\n"
+							"$Revision: 1394 $"[1:-2] + "\n" +
+							"$Date: 2017-03-14 10:16:47 +0100 (Tue, 14 Mar 2017) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -2598,7 +2599,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1385 $"[1:-1] + "$Date: 2016-12-13 18:09:20 +0100 (Tue, 13 Dec 2016) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1394 $"[1:-1] + "$Date: 2017-03-14 10:16:47 +0100 (Tue, 14 Mar 2017) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2622,6 +2623,8 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 				self.list.append(getConfigListEntry(_("MSN to show (separated by ,)"), config.plugins.FritzCall.filtermsn))
 				self.list.append(getConfigListEntry(_("Filter also list of calls"), config.plugins.FritzCall.filterCallList))
 			self.list.append(getConfigListEntry(_("Mute on call"), config.plugins.FritzCall.muteOnCall))
+			if config.plugins.FritzCall.muteOnCall.value:
+				self.list.append(getConfigListEntry(_("Mute also on outgoing calls"), config.plugins.FritzCall.muteOnOutgoingCall))
 
 			self.list.append(getConfigListEntry(_("Show Blocked Calls"), config.plugins.FritzCall.showBlacklistedCalls))
 			self.list.append(getConfigListEntry(_("Show Outgoing Calls"), config.plugins.FritzCall.showOutgoingCalls))
@@ -3085,14 +3088,14 @@ def registerUserAction(fun):
 mutedOnConnID = None
 def notifyCall(event, date, number, caller, phone, connID):
 	if Standby.inStandby is None or config.plugins.FritzCall.afterStandby.value == "each":
+		global mutedOnConnID
+		if config.plugins.FritzCall.muteOnCall.value and not mutedOnConnID and (event == "RING" or config.plugins.FritzCall.muteOnOutgoingCall.value):
+			info("[FritzCall] mute on connID: %s", connID)
+			mutedOnConnID = connID
+			# eDVBVolumecontrol.getInstance().volumeMute() # with this, we get no mute icon...
+			if not eDVBVolumecontrol.getInstance().isMuted():
+				globalActionMap.actions["volumeMute"]()
 		if event == "RING":
-			global mutedOnConnID
-			if config.plugins.FritzCall.muteOnCall.value and not mutedOnConnID:
-				info("[FritzCall] mute on connID: %s", connID)
-				mutedOnConnID = connID
-				# eDVBVolumecontrol.getInstance().volumeMute() # with this, we get no mute icon...
-				if not eDVBVolumecontrol.getInstance().isMuted():
-					globalActionMap.actions["volumeMute"]()
 			text = _("Incoming Call on %(date)s at %(time)s from\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nto: %(phone)s") % {'date':date[:8], 'time':date[9:], 'number':number, 'caller':caller, 'phone':phone}
 		else:
 			text = _("Outgoing Call on %(date)s at %(time)s to\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nfrom: %(phone)s") % {'date':date[:8], 'time':date[9:], 'number':number, 'caller':caller, 'phone':phone}
@@ -3189,7 +3192,7 @@ class FritzReverseLookupAndNotifier(object):
 
 class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 	def __init__(self):
-		info("[FritzProtocol] " + "$Revision: 1385 $"[1:-1] + "$Date: 2016-12-13 18:09:20 +0100 (Tue, 13 Dec 2016) $"[7:23] + " starting")
+		info("[FritzProtocol] " + "$Revision: 1394 $"[1:-1] + "$Date: 2017-03-14 10:16:47 +0100 (Tue, 14 Mar 2017) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
