@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 21:28+0100\n"
-"PO-Revision-Date: 2009-02-10 13:35+0100\n"
-"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
+"PO-Revision-Date: 2017-05-02 14:11+0200\n"
+"Last-Translator: VillaK <soporte@openplus.es>\n"
 "Language-Team: none\n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.1\n"
 
 msgid "Add AutoTimer"
-msgstr ""
+msgstr "Añadir autotemporizador"
 
 msgid "Add Timer"
-msgstr ""
+msgstr "Añadir temporizador"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -31,24 +32,26 @@ msgstr "Selección canal"
 
 msgid "Choose the encode type for search, helpful for foreign languages."
 msgstr ""
+"Seleccione el tipo de codificación para buscar ayuda para lenguas "
+"extranjeras."
 
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
-msgstr ""
+msgstr "No se pudo leer la lista de grabaciónr autotimer: %s"
 
 msgid "EPG Search"
-msgstr ""
+msgstr "Búsqueda en EPG"
 
 msgid "EPGSearch"
-msgstr ""
+msgstr "Búsqueda en EPG"
 
 msgid "EPGSearch Setup"
-msgstr ""
+msgstr "Configuración búsqueda EPG"
 
 msgid ""
 "Enable this to be able to access the EPG-Search from within the plugin "
 "browser."
-msgstr ""
+msgstr "Habilitar para poder acceder al IMDb desde el navegador de plugin."
 
 msgid "Enter text to search for"
 msgstr "Introduzca texto a buscar"
@@ -57,12 +60,14 @@ msgid ""
 "How many entries to keep in the search history at most. 0 disables history "
 "entirely!"
 msgstr ""
+"Cuántas entradas para mantener el historial de búsqueda en la mayoría. ¡0 "
+"desactiva completamente la historia!"
 
 msgid "IMDb Search"
-msgstr ""
+msgstr "Búsqueda IMDb"
 
 msgid "Import from AutoTimer"
-msgstr ""
+msgstr "Importar de AutoProgramación"
 
 msgid "Import from EPG"
 msgstr "Importar desde el EPG"
@@ -71,22 +76,22 @@ msgid "Import from Timer"
 msgstr "Importar desde la Programación"
 
 msgid "Length of History"
-msgstr ""
+msgstr "Duración del historial"
 
 msgid "New Search"
 msgstr "Nueva búsqueda"
 
 msgid "No history"
-msgstr ""
+msgstr "Sin Historial"
 
 msgid "OK"
 msgstr "OK"
 
 msgid "Open selected in IMDb"
-msgstr ""
+msgstr "Abrir selección en IMDB..."
 
 msgid "Save search as AutoTimer"
-msgstr ""
+msgstr "Guardar el resultado como Autotimer"
 
 msgid "Search"
 msgstr "Buscar"
@@ -95,7 +100,7 @@ msgid "Search EPG"
 msgstr "Buscar EPG"
 
 msgid "Search Encoding"
-msgstr ""
+msgstr "Codificación de búsqueda"
 
 msgid "Select a timer to search"
 msgstr "Seleccionar una programación a buscar"
@@ -104,13 +109,13 @@ msgid "Select text to search for"
 msgstr "Seleccionar texto a buscar"
 
 msgid "Setup"
-msgstr ""
+msgstr "Configuración"
 
 msgid "Show in plugin browser"
-msgstr ""
+msgstr "Mostrar en el navegador de complementos"
 
 msgid "Show search history"
-msgstr ""
+msgstr "Ver historial"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
