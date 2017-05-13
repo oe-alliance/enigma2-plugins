@@ -137,8 +137,15 @@ class AutoTimer:
 
 		# Parse Config
 		file = open(XML_CONFIG, 'r')
-		configuration = cet_parse(file).getroot()
+		try:
+			configuration = cet_parse(file).getroot()
+			parse_failed = 0
+		except:
+			parse_failed = 1
 		file.close()
+		if parse_failed:
+			print("[AutoTimer] Configuration file corrupt (or empty)")
+                        return
 
 		# Empty out timers and reset Ids
 		del self.timers[:]
