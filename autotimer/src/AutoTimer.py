@@ -136,9 +136,13 @@ class AutoTimer:
 		self.configMtime = mtime
 
 		# Parse Config
-		file = open(XML_CONFIG, 'r')
-		configuration = cet_parse(file).getroot()
-		file.close()
+		try:
+			file = open(XML_CONFIG, 'r')
+			configuration = cet_parse(file).getroot()
+			file.close()
+		except:
+			print("[AutoTimer] Configuration file corrupt (or empty)")
+			return
 
 		# Empty out timers and reset Ids
 		del self.timers[:]
