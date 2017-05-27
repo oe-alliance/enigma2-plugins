@@ -721,15 +721,34 @@ class AutoTimer:
 # Supporting functions
 
 	def populateTimerdict(self, epgcache, recordHandler, timerdict):
+		remove = []
 		for timer in chain(recordHandler.timer_list, recordHandler.processed_timers):
 			if timer and timer.service_ref:
 				if timer.eit is not None:
 					event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
-					extdesc = event and event.getExtendedDescription() or ''
-					timer.extdesc = extdesc
+					if event:
+						timer.extdesc = event.getExtendedDescription() or ''
+					else:
+						remove.append(timer)
 				elif not hasattr(timer, 'extdesc'):
 					timer.extdesc = ''
+				else:
+					remove.append(timer)
+					continue
 				timerdict[str(timer.service_ref)].append(timer)
+
+		if config.plugins.autotimer.check_eit_and_remove.value:
+			for timer in remove:
+				if "autotimer" in timer.flags:
+					try:
+						# Because of the duplicate check, we only want to remove future timer
+						if timer in recordHandler.timer_list:
+							if not timer.isRunning():
+								recordHandler.removeEntry(timer)
+								doLog("[AutoTimer] Remove timer because of eit check %s." % (timer.name))
+					except:
+						pass
+		del remove
 
 	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref, eit):
 		# Don't update the name, it will overwrite the name of the SeriesPlugin

@@ -436,6 +436,8 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.skip_during_records.value = True if value == "true" else False
 			elif key == "skip_during_epgrefresh":
 				config.plugins.autotimer.skip_during_epgrefresh.value = True if value == "true" else False
+			elif key == "check_eit_and_remove":
+				config.plugins.autotimer.check_eit_and_remove.value = True if value == "true" else False
 			elif key == "always_write_config":
 				config.plugins.autotimer.always_write_config.value,
 			elif key == "onlyinstandby":
@@ -564,6 +566,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.check_eit_and_remove</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>config.plugins.autotimer.always_write_config</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
@@ -621,6 +627,7 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.editdelay.value,
 				config.plugins.autotimer.skip_during_records.value,
 				config.plugins.autotimer.skip_during_epgrefresh.value,
+				config.plugins.autotimer.check_eit_and_remove.value,
 				config.plugins.autotimer.always_write_config.value,
 				config.plugins.autotimer.onlyinstandby.value,
 				config.plugins.autotimer.log_write.value,

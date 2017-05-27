@@ -34,6 +34,7 @@ else:
 	config.plugins.autotimer.interval = ConfigNumber(default=30)
 config.plugins.autotimer.timeout = ConfigNumber(default=5)
 config.plugins.autotimer.popup_timeout = ConfigNumber(default=5)
+config.plugins.autotimer.check_eit_and_remove = ConfigYesNo(default=False)
 config.plugins.autotimer.always_write_config = ConfigYesNo(default=True)
 config.plugins.autotimer.refresh = ConfigSelection(choices=[
 		("none", _("None")),
