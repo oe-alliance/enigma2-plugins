@@ -7,7 +7,7 @@ from boxbranding import getImageDistro
 
 # Config
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
-	ConfigNumber, ConfigSelection, ConfigYesNo
+	ConfigNumber, ConfigSelection, ConfigYesNo, ConfigText
 
 PluginLanguageDomain = "AutoTimer"
 PluginLanguagePath = "Extensions/AutoTimer/locale"
