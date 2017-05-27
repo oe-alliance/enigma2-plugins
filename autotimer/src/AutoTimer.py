@@ -5,17 +5,12 @@ from . import _
 
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse
-from os import path as os_path
+from os import path as os_path,rename as os_rename
 from AutoTimerConfiguration import parseConfig, buildConfig
 from Logger import doLog, startLog, getLog, doDebug
 
 # Tasks
 import Components.Task
-
-# GUI (Screens)
-from Screens.MessageBox import MessageBox
-from Tools.FuzzyDate import FuzzyTime
-from Tools.Notifications import AddPopup
 
 # Navigation (RecordTimer)
 import NavigationInstance
@@ -24,9 +19,15 @@ import NavigationInstance
 from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry
 
+# Notifications
+from Tools.Notifications import AddPopup
+from Screens import Standby
+from Screens.MessageBox import MessageBox
+
 # Timespan
 from time import localtime, strftime, time, mktime, sleep, ctime
 from datetime import timedelta, date
+from Tools.FuzzyDate import FuzzyTime
 
 # EPGCache & Event
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
@@ -138,11 +139,15 @@ class AutoTimer:
 
 		# Parse Config
 		try:
-			file = open(XML_CONFIG, 'r')
-			configuration = cet_parse(file).getroot()
-			file.close()
+			configuration = cet_parse(XML_CONFIG).getroot()
 		except:
-			doLog("[AutoTimer] Configuration file corrupt (or empty)")
+			try:
+				os_rename(XML_CONFIG, XML_CONFIG + "_old")
+				doLog("[AutoTimer] autotimer.xml is corrupt rename file to /etc/enigma2/autotimer.xml_old")
+			except:
+				pass
+			if Standby.inStandby is None:
+				AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt and could not be loaded."), type = MessageBox.TYPE_ERROR, timeout = 0, id = "AutoTimerLoadFailed")
 			return
 
 		# Empty out timers and reset Ids
