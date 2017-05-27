@@ -149,12 +149,8 @@ class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 		id = req.args.get("id")
 		if id:
 			autotimer.remove(int(id[0]))
-			
-			# Save modified xml
-			# TODO
-			#if config.plugins.autotimer.always_write_config.value:
-			#	autotimer.writeXml()
-			
+			if config.plugins.autotimer.always_write_config.value:
+				autotimer.writeXml()
 			return self.returnResult(req, True, _("AutoTimer was removed"))
 		else:
 			return self.returnResult(req, False, _("missing parameter \"id\""))
@@ -386,10 +382,8 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		else:
 			message = _("AutoTimer was changed successfully")
 
-		# Save modified xml
-		#TODO
-		#if config.plugins.autotimer.always_write_config.value:
-		#	autotimer.writeXml()
+		if config.plugins.autotimer.always_write_config.value:
+			autotimer.writeXml()
 
 		return self.returnResult(req, True, message)
 
@@ -437,8 +431,14 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.skip_during_records.value = True if value == "true" else False
 			elif key == "skip_during_epgrefresh":
 				config.plugins.autotimer.skip_during_epgrefresh.value = True if value == "true" else False
+			elif key == "always_write_config":
+				config.plugins.autotimer.always_write_config.value,
 			elif key == "onlyinstandby":
 				config.plugins.autotimer.onlyinstandby.value = True if value == "true" else False
+			elif key == "log_write":
+				config.plugins.autotimer.log_write.value = True if value == "true" else False
+			elif key == "log_shell":
+				config.plugins.autotimer.log_shell.value = True if value == "true" else False
 
 		if config.plugins.autotimer.autopoll.value:
 			if plugin.autopoller is None:
@@ -555,7 +555,19 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.always_write_config</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>config.plugins.autotimer.onlyinstandby</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.log_write</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.log_shell</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
@@ -599,7 +611,10 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.editdelay.value,
 				config.plugins.autotimer.skip_during_records.value,
 				config.plugins.autotimer.skip_during_epgrefresh.value,
+				config.plugins.autotimer.always_write_config.value,
 				config.plugins.autotimer.onlyinstandby.value,
+				config.plugins.autotimer.log_write.value,
+				config.plugins.autotimer.log_shell.value,
 				hasVps,
 				hasSeriesPlugin,
 				CURRENT_CONFIG_VERSION,
