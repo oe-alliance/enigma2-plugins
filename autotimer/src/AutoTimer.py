@@ -7,6 +7,7 @@ from . import _
 from xml.etree.cElementTree import parse as cet_parse
 from os import path as os_path
 from AutoTimerConfiguration import parseConfig, buildConfig
+from Logger import doLog, startLog, getLog, doDebug
 
 # Tasks
 import Components.Task
@@ -123,13 +124,13 @@ class AutoTimer:
 	def readXml(self):
 		# Abort if no config found
 		if not os_path.exists(XML_CONFIG):
-			print("[AutoTimer] No configuration file present")
+			doLog("[AutoTimer] No configuration file present")
 			return
 
 		# Parse if mtime differs from whats saved
 		mtime = os_path.getmtime(XML_CONFIG)
 		if mtime == self.configMtime:
-			print("[AutoTimer] No changes in configuration, won't parse")
+			doLog("[AutoTimer] No changes in configuration, won't parse")
 			return
 
 		# Save current mtime
@@ -141,7 +142,7 @@ class AutoTimer:
 			configuration = cet_parse(file).getroot()
 			file.close()
 		except:
-			print("[AutoTimer] Configuration file corrupt (or empty)")
+			doLog("[AutoTimer] Configuration file corrupt (or empty)")
 			return
 
 		# Empty out timers and reset Ids
@@ -387,7 +388,7 @@ class AutoTimer:
 			eserviceref = eServiceReference(serviceref)
 			evt = epgcache.lookupEventId(eserviceref, eit)
 			if not evt:
-				print("[AutoTimer] Could not create Event!")
+				doLog("[AutoTimer] Could not create Event!")
 				skipped.append((name, begin, begin, str(serviceref), timer.name))
 				continue
 			# Try to determine real service (we always choose the last one)
@@ -401,7 +402,7 @@ class AutoTimer:
 
 			# If event starts in less than 60 seconds skip it
 			# if begin < time() + 60:
-			# 	print ("[AutoTimer] Skipping " + name + " because it starts in less than 60 seconds")
+			# 	doLog ("[AutoTimer] Skipping " + name + " because it starts in less than 60 seconds")
 			# 	skipped += 1
 			# 	continue
 
@@ -424,7 +425,7 @@ class AutoTimer:
 				# If maximum days in future is set then check time
 				if checkEvtLimit:
 					if begin > evtLimit:
-#						print("[AutoTimer] Skipping an event because of maximum days in future is reached")
+						doLog("[AutoTimer] Skipping an event because of maximum days in future is reached")
 						skipped.append((name, begin, end, serviceref, timer.name))
 						continue
 
@@ -438,7 +439,7 @@ class AutoTimer:
 					timer.checkTimespan(timestamp) \
 					or timer.checkTimeframe(begin) \
 				)) or timer.checkFilter(name, shortdesc, extdesc, dayofweek):
-#				print("[AutoTimer] Skipping an event because of filter check")
+				doLog("[AutoTimer] Skipping an event because of filter check")
 				skipped.append((name, begin, end, serviceref, timer.name))
 				continue
 
@@ -476,11 +477,11 @@ class AutoTimer:
 					self.addDirectoryToMovieDict(moviedict, dest, serviceHandler)
 				for movieinfo in moviedict.get(dest, ()):
 					if self.checkSimilarity(timer, name, movieinfo.get("name"), shortdesc, movieinfo.get("shortdesc"), extdesc, movieinfo.get("extdesc")):
-						print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
+						doLog("[AutoTimer] We found a matching recorded movie, skipping event:", name)
 						movieExists = True
 						break
 				if movieExists:
-#					print("[AutoTimer] Skipping an event because movie already exists")
+					doLog("[AutoTimer] Skipping an event because movie already exists")
 					skipped.append((name, begin, end, serviceref, timer.name))
 					continue
 
@@ -505,12 +506,12 @@ class AutoTimer:
 					
 					if (evtBegin - offsetBegin != rtimer.begin) or (evtEnd + offsetEnd != rtimer.end) or (shortdesc != rtimer.description):
 						if rtimer.isAutoTimer and eit == rtimer.eit:
-							print ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
+							doLog ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							# rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							preveit = eit
 						else:
 							if config.plugins.autotimer.refresh.getValue() != "all":
-								print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
+								doLog("[AutoTimer] Won't modify existing timer because it's no timer set by us")
 								break
 							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it: %s ." % (timer.name, rtimer.name))
 						newEntry = rtimer
@@ -524,7 +525,7 @@ class AutoTimer:
 						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
 					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
-						print("[AutoTimer] We found a timer with similar description, skipping event")
+						doLog("[AutoTimer] We found a timer with similar description, skipping event")
 						oldExists = True
 						break
 
@@ -539,7 +540,7 @@ class AutoTimer:
 					if not rtimer.disabled:
 						if self.checkDoubleTimers(timer, name, rtimer.name, begin, rtimer.begin, end, rtimer.end ):
 							oldExists = True
-							# print("[AutoTimer] We found a timer with same StartTime, skipping event")
+							doLog("[AutoTimer] We found a timer with same StartTime, skipping event")
 							break
 						if timer.avoidDuplicateDescription >= 2:
 							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
@@ -550,7 +551,7 @@ class AutoTimer:
 					continue
 
 				if timer.checkCounter(timestamp):
-					print("[AutoTimer] Not adding new timer because counter is depleted.")
+					doLog("[AutoTimer] Not adding new timer because counter is depleted.")
 					continue
 
 				newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
@@ -598,7 +599,7 @@ class AutoTimer:
 				if similarTimer:
 					conflictString = similardict[eit].conflictString
 					msg = "[AutoTimer] Try to add similar Timer because of conflicts with %s." % (conflictString)
-					print(msg)
+					doLog(msg)
 					newEntry.log(504, msg)
 
 				# Try to add timer
@@ -607,7 +608,7 @@ class AutoTimer:
 				if conflicts:
 					# Maybe use newEntry.log
 					conflictString += ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
-					print("[AutoTimer] conflict with %s detected" % (conflictString))
+					doLog("[AutoTimer] conflict with %s detected" % (conflictString))
 
 					if config.plugins.autotimer.addsimilar_on_conflict.value:
 						# We start our search right after our actual index
@@ -618,7 +619,7 @@ class AutoTimer:
 							if self.checkSimilarity(timer, name, nameS, shortdesc, shortdescS, extdesc, extdescS, force=True ):
 								# Check if the similar is already known
 								if eitS not in similardict:
-									print("[AutoTimer] Found similar Timer: " + name)
+									doLog("[AutoTimer] Found similar Timer: " + name)
 
 									# Store the actual and similar eit and conflictString, so it can be handled later
 									newEntry.conflictString = conflictString
@@ -654,7 +655,7 @@ class AutoTimer:
 
 					if config.plugins.autotimer.disabled_on_conflict.value:
 						msg = "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString)
-						print(msg)
+						doLog(msg)
 						newEntry.log(503, msg)
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
@@ -719,7 +720,7 @@ class AutoTimer:
 	def addDirectoryToMovieDict(self, moviedict, dest, serviceHandler):
 		movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
 		if movielist is None:
-			print("[AutoTimer] listing of movies in " + dest + " failed")
+			doLog("[AutoTimer] listing of movies in " + dest + " failed")
 		else:
 			append = moviedict[dest].append
 			while 1:
