@@ -410,8 +410,9 @@ class AutoTimer:
 			eserviceref = eServiceReference(serviceref)
 			evt = epgcache.lookupEventId(eserviceref, eit)
 			if not evt:
-				doLog("[AutoTimer] Could not create Event!")
-				skipped.append((name, begin, begin, str(serviceref), timer.name))
+				msg="[AutoTimer] Could not create Event!"
+				doLog(msg)
+				skipped.append((name, begin, begin, str(serviceref), timer.name, msg))
 				continue
 			# Try to determine real service (we always choose the last one)
 			n = evt.getNumOfLinkageServices()
@@ -447,8 +448,9 @@ class AutoTimer:
 				# If maximum days in future is set then check time
 				if checkEvtLimit:
 					if begin > evtLimit:
-						doLog("[AutoTimer] Skipping an event because of maximum days in future is reached")
-						skipped.append((name, begin, end, serviceref, timer.name))
+						msg="[AutoTimer] Skipping an event because of maximum days in future is reached"
+						doLog(msg)
+						skipped.append((name, begin, end, serviceref, timer.name, msg))
 						continue
 
 				dayofweek = str(timestamp.tm_wday)
@@ -461,8 +463,9 @@ class AutoTimer:
 					timer.checkTimespan(timestamp) \
 					or timer.checkTimeframe(begin) \
 				)) or timer.checkFilter(name, shortdesc, extdesc, dayofweek):
-				doLog("[AutoTimer] Skipping an event because of filter check")
-				skipped.append((name, begin, end, serviceref, timer.name))
+				msg="[AutoTimer] Skipping an event because of filter check"
+				doLog(msg)
+				skipped.append((name, begin, end, serviceref, timer.name, msg))
 				continue
 
 			if timer.hasOffset():
@@ -503,8 +506,9 @@ class AutoTimer:
 						movieExists = True
 						break
 				if movieExists:
-					doLog("[AutoTimer] Skipping an event because movie already exists")
-					skipped.append((name, begin, end, serviceref, timer.name))
+					msg="[AutoTimer] Skipping an event because movie already exists"
+					doLog(msg)
+					skipped.append((name, begin, end, serviceref, timer.name, msg))
 					continue
 
 			# Initialize
