@@ -142,13 +142,30 @@ class AutoTimer:
 			configuration = cet_parse(XML_CONFIG).getroot()
 		except:
 			try:
+				if os_path.exists(XML_CONFIG + "_old"):
+					os_rename(XML_CONFIG + "_old", XML_CONFIG + "_old(1)")
 				os_rename(XML_CONFIG, XML_CONFIG + "_old")
 				doLog("[AutoTimer] autotimer.xml is corrupt rename file to /etc/enigma2/autotimer.xml_old")
 			except:
 				pass
 			if Standby.inStandby is None:
-				AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt and could not be loaded."), type = MessageBox.TYPE_ERROR, timeout = 0, id = "AutoTimerLoadFailed")
-			return
+				AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "), type = MessageBox.TYPE_ERROR, timeout = 0, id = "AutoTimerLoadFailed")
+
+			self.timers = []
+			self.defaultTimer = preferredAutoTimerComponent(
+				0,		# Id
+				"",		# Name
+				"",		# Match
+				True	# Enabled
+			)
+
+			try:
+				self.writeXml()
+				configuration = cet_parse(XML_CONFIG).getroot()
+			except:
+				pass
+				doLog("[AutoTimer] fatal error, the autotimer.xml cannot create")
+				return
 
 		# Empty out timers and reset Ids
 		del self.timers[:]
