@@ -19,8 +19,6 @@ from Components.config import getConfigListEntry, KEY_0, KEY_DELETE, \
 # Wizard XML Path
 from Tools import Directories
 
-from Logger import doLog
-
 class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 	STEP_ID_BASIC = 2
 	STEP_ID_TIMESPAN = 5
@@ -179,7 +177,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 	def maybeRemoveWhitespaces(self):
 		# XXX: Hack alert
 		if self["list"].current[1] == "removeTrailingWhitespaces":
-			doLog("[AutoTimer] Next step would be to remove trailing whitespaces, removing them and redirecting to 'conf2'")
+			print("[AutoTimer] Next step would be to remove trailing whitespaces, removing them and redirecting to 'conf2'")
 			self.timer.match = self.timer.match.rstrip()
 			self.match.value = self.match.value.rstrip()
 			self.currStep = self.getStepWithID("conf2")

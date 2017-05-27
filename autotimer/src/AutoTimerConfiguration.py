@@ -11,8 +11,6 @@ from ServiceReference import ServiceReference
 
 from enigma import eServiceReference
 
-from Logger import doLog
-
 """
 Configuration Version.
 To be bumped for any modification of the config format.
@@ -47,7 +45,7 @@ def parseConfig(configuration, list, version = None, uniqueTimerId = 0, defaultT
 	try:
 		intVersion = int(version)
 	except ValueError:
-		doLog('[AutoTimer] Config version "%s" is not a valid integer, assuming old version' % version)
+		print('[AutoTimer] Config version "%s" is not a valid integer, assuming old version' % version)
 		intVersion = -1
 
 	if intVersion < 5:
@@ -76,13 +74,13 @@ def parseEntry(element, baseTimer, defaults = False):
 		# Read out match
 		baseTimer.match = element.get("match", "").encode("UTF-8")
 		if not baseTimer.match:
-			doLog('[AutoTimer] Erroneous config is missing attribute "match", skipping entry')
+			print('[AutoTimer] Erroneous config is missing attribute "match", skipping entry')
 			return False
 
 		# Read out name
 		baseTimer.name = element.get("name", "").encode("UTF-8")
 		if not baseTimer.name:
-			doLog('[AutoTimer] Timer is missing attribute "name", defaulting to match')
+			print('[AutoTimer] Timer is missing attribute "name", defaulting to match')
 			baseTimer.name = baseTimer.match
 
 		# Read out enabled
@@ -92,7 +90,7 @@ def parseEntry(element, baseTimer, defaults = False):
 		elif enabled == "yes":
 			baseTimer.enabled = True
 		else:
-			doLog('[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', disabling')
+			print('[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', disabling')
 			baseTimer.enabled = False
 
 		# Read timeframe
@@ -217,7 +215,7 @@ def parseEntry(element, baseTimer, defaults = False):
 			if value in idx:
 				value = idx[value]
 			else:
-				doLog('[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition')
+				print('[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition')
 				continue
 
 			start = afterevent.get("from")
@@ -274,7 +272,7 @@ def parseEntry(element, baseTimer, defaults = False):
 	return True
 
 def parseConfigOld(configuration, list, uniqueTimerId = 0):
-	doLog("[AutoTimer] Trying to parse old config")
+	print("[AutoTimer] Trying to parse old config")
 
 	# Iterate Timers
 	for timer in configuration.findall("timer"):
@@ -291,7 +289,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			name = getValue(timer.findall("name"), "").encode("UTF-8")
 
 		if not name:
-			doLog('[AutoTimer] Erroneous config is missing attribute "name", skipping entry')
+			print('[AutoTimer] Erroneous config is missing attribute "name", skipping entry')
 			continue
 
 		# Read out match (V3+)
@@ -300,7 +298,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			# Read out match
 			match = match.encode("UTF-8")
 			if not match:
-				doLog('[AutoTimer] Erroneous config contains empty attribute "match", skipping entry')
+				print('[AutoTimer] Erroneous config contains empty attribute "match", skipping entry')
 				continue
 		# V2-
 		else:
@@ -316,7 +314,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			elif enabled == "yes":
 				enabled = True
 			else:
-				doLog('[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', skipping entry')
+				print('[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', skipping entry')
 				enabled = False
 		# V1
 		else:
@@ -349,7 +347,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 					end = [int(x) for x in end.split(':')]
 					timetuple = (start, end)
 				else:
-					doLog('[AutoTimer] Erroneous config contains invalid definition of "timespan", ignoring definition')
+					print('[AutoTimer] Erroneous config contains invalid definition of "timespan", ignoring definition')
 					timetuple = None
 			else:
 				timetuple = None
@@ -438,7 +436,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			if value in idx:
 				value = idx[value]
 			else:
-				doLog('[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition')
+				print('[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition')
 				continue
 
 			start = element.get("from")

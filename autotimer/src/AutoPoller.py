@@ -8,14 +8,12 @@ from plugin import autotimer
 # Notifications
 import NavigationInstance
 
-from Logger import doLog
-
 class AutoPoller:
 	"""Automatically Poll AutoTimer"""
 
 	def __init__(self):
 		# Init Timer
-		doLog("[AutoTimer] Auto Poll Enabled")
+		print("[AutoTimer] Auto Poll Enabled")
 		self.timer = eTimer()
 
 	def start(self):
@@ -31,24 +29,24 @@ class AutoPoller:
 	def query(self):
 		self.timer.stop()
 		from Screens.Standby import inStandby
-		doLog("[AutoTimer] Auto Poll")
+		print("[AutoTimer] Auto Poll")
 		doparse = True
 		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
-			doLog("[AutoTimer] Skip check during running records")
+			print("[AutoTimer] Skip check during running records")
 			doparse = False
 		if config.plugins.autotimer.skip_during_epgrefresh.value:
 			try:
 				from Plugins.Extensions.EPGRefresh.EPGRefresh import epgrefresh
 				if epgrefresh.isrunning:
-					doLog("[AutoTimer] Skip check during running EPGRefresh")
+					print("[AutoTimer] Skip check during running EPGRefresh")
 					doparse = False
 			except:
 				pass
 		if not inStandby and config.plugins.autotimer.onlyinstandby.value:
-			doLog("[AutoTimer] Skip check while not in Standby")
+			print("[AutoTimer] Skip check while not in Standby")
 			doparse = False
 		if doparse:
-			doLog("[AutoTimer] Auto Poll Started")
+			print("[AutoTimer] Auto Poll Started")
 			# Ignore any program errors
 			try:
 				ret = autotimer.parseEPG(autoPoll=True)
