@@ -52,7 +52,7 @@ class AutoTimerComponent(object):
 			matchLimit='', matchFormatString='', lastBegin=0, justplay=False, \
 			avoidDuplicateDescription=0, searchForDuplicateDescription=2, bouquets=None, \
 			tags=None, encoding=None, searchType="partial", searchCase="insensitive", \
-			overrideAlternatives=True, timeframe=None, vps_enabled=False, vps_overwrite=False, setEndtime=False, \
+			overrideAlternatives=False, timeframe=None, vps_enabled=False, vps_overwrite=False, setEndtime=False, \
 			always_zap=False, series_labeling=False):
 		self.name = name
 		self.match = match
