@@ -163,7 +163,6 @@ class AutoTimer:
 				self.writeXml()
 				configuration = cet_parse(XML_CONFIG).getroot()
 			except:
-				pass
 				doLog("[AutoTimer] fatal error, the autotimer.xml cannot create")
 				return
 
@@ -449,7 +448,7 @@ class AutoTimer:
 				if checkEvtLimit:
 					if begin > evtLimit:
 						msg="[AutoTimer] Skipping an event because of maximum days in future is reached"
-						doLog(msg)
+#						doLog(msg)
 						skipped.append((name, begin, end, serviceref, timer.name, msg))
 						continue
 
@@ -464,7 +463,7 @@ class AutoTimer:
 					or timer.checkTimeframe(begin) \
 				)) or timer.checkFilter(name, shortdesc, extdesc, dayofweek):
 				msg="[AutoTimer] Skipping an event because of filter check"
-				doLog(msg)
+#				doLog(msg)
 				skipped.append((name, begin, end, serviceref, timer.name, msg))
 				continue
 
@@ -507,7 +506,7 @@ class AutoTimer:
 						break
 				if movieExists:
 					msg="[AutoTimer] Skipping an event because movie already exists"
-					doLog(msg)
+#					doLog(msg)
 					skipped.append((name, begin, end, serviceref, timer.name, msg))
 					continue
 
@@ -524,7 +523,7 @@ class AutoTimer:
 
 					# Abort if we don't want to modify timers or timer is repeated
 					if config.plugins.autotimer.refresh.value == "none" or rtimer.repeated:
-						print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
+#						doLog("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
 						break
 
 					if eit == preveit:
@@ -546,7 +545,7 @@ class AutoTimer:
 						# rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
 						break
 					else:
-#						print ("[AutoTimer] Skipping timer because it has not changed.")
+#						doLog("[AutoTimer] Skipping timer because it has not changed.")
 						existing.append((name, begin, end, serviceref, timer.name))
 						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
@@ -571,7 +570,7 @@ class AutoTimer:
 						if timer.avoidDuplicateDescription >= 2:
 							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
 								oldExists = True
-								print("[AutoTimer] We found a timer (any service) with same description, skipping event")
+#								doLog("[AutoTimer] We found a timer (any service) with same description, skipping event")
 								break
 				if oldExists:
 					continue
