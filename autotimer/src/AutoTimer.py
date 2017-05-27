@@ -597,6 +597,7 @@ class AutoTimer:
 			newEntry.justplay = timer.justplay
 			newEntry.vpsplugin_enabled = timer.vps_enabled
 			newEntry.vpsplugin_overwrite = timer.vps_overwrite
+			newEntry.always_zap = timer.always_zap
 			tags = timer.tags[:]
 			if config.plugins.autotimer.add_autotimer_to_tags.value:
 				if TAG not in tags:

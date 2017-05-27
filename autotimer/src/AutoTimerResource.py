@@ -376,6 +376,9 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			except ValueError: series_labeling = series_labeling == "yes"
 			timer.series_labeling = series_labeling
 
+		# Always zap
+		timer.always_zap = get("always_zap", timer.always_zap)
+
 		if newTimer:
 			autotimer.add(timer)
 			message = _("AutoTimer was added successfully")

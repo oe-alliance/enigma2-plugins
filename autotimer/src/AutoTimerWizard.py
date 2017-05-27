@@ -129,6 +129,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 			timer.name = self.name.value.strip() or self.match.value
 			timer.match = self.match.value
 			timer.justplay = self.justplay.value == "zap"
+			self.timer.always_zap = self.justplay.value == "zap+record"
 			self.emptyMatch = not timer.match.strip()
 			self.trailingWhitespacesMatch = (timer.match[-1:] == " ")
 		elif self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN: # Timespan

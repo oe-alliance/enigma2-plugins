@@ -186,7 +186,7 @@ class AutoTimerEditorBase:
 		self.overrideAlternatives = NoSave(ConfigYesNo(default = timer.overrideAlternatives))
 
 		# Justplay
-		self.justplay = NoSave(ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)]))
+		self.justplay = NoSave(ConfigSelection(choices = [("zap", _("zap")), ("record", _("record")), ("zap+record", _("zap and record"))], default = {0: "record", 1: "zap", 2: "zap+record"}[int(timer.justplay) + 2*int(timer.always_zap)]))
 		self.setEndtime = NoSave(ConfigYesNo(default=timer.setEndtime))
 
 		# Timespan
@@ -542,7 +542,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.encoding: _("Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."),
 			self.searchType: _("Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"),
 			self.searchCase: _("Select whether or not you want to enforce case correctness."),
-			self.justplay: _("Add zap timer instead of record timer?"),
+			self.justplay: _("Set timer type: zap, simple record, zap+record (always zap to service before start record)."),
 			self.setEndtime: _("Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."),
 			self.overrideAlternatives: _("With this option enabled the channel to record will be selected automaticliy using your list of alternates."),
 			self.timespan: _("Should this AutoTimer be restricted to a timespan?"),
@@ -906,6 +906,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		self.timer.series_labeling = self.series_labeling.value
 
+		self.timer.always_zap = self.justplay.value == "zap+record"
+
 		# Close
 		self.close(self.timer)
 
@@ -1031,6 +1033,8 @@ class AutoTimerEditorSilent(AutoTimerEditor):
 		self.timer.vps_overwrite = self.vps_overwrite.value
 
 		self.timer.series_labeling = self.series_labeling.value
+
+		self.timer.always_zap = self.justplay.value == "zap+record"
 
 		# Close
 		self.returnVal = self.timer
