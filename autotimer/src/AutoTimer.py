@@ -682,21 +682,21 @@ class AutoTimer:
 				AddPopup(
 					_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(self.conflicting), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.conflicting])),
 					MessageBox.TYPE_INFO,
-					15,
+					config.plugins.autotimer.popup_timeout.value,
 					CONFLICTNOTIFICATIONID
 				)
 			elif self.similars and config.plugins.autotimer.notifsimilar.value:
 				AddPopup(
 					_("%d conflict(s) solved with similar timer(s):\n%s") % (len(self.similars), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.similars])),
 					MessageBox.TYPE_INFO,
-					15,
+					config.plugins.autotimer.popup_timeout.value,
 					SIMILARNOTIFICATIONID
 				)
 		else:
 			AddPopup(
 				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+len(self.existing)+len(self.similars)), self.new, self.modified, len(self.conflicting), len(self.existing), len(self.similars)),
 				MessageBox.TYPE_INFO,
-				15,
+				config.plugins.autotimer.popup_timeout.value,
 				NOTIFICATIONID
 			)
 

@@ -423,6 +423,8 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.add_name_to_tags.value = True if value == "true" else False
 			elif key == "timeout":
 				config.plugins.autotimer.timeout.value = int(value)
+			elif key == "popup_timeout":
+				config.plugins.autotimer.popup_timeout.value = int(value)
 			elif key == "delay":
 				config.plugins.autotimer.delay.value = int(value)
 			elif key == "editdelay":
@@ -539,6 +541,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.popup_timeout</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>config.plugins.autotimer.delay</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
@@ -607,6 +613,7 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.add_autotimer_to_tags.value,
 				config.plugins.autotimer.add_name_to_tags.value,
 				config.plugins.autotimer.timeout.value,
+				config.plugins.autotimer.popup_timeout.value,
 				config.plugins.autotimer.delay.value,
 				config.plugins.autotimer.editdelay.value,
 				config.plugins.autotimer.skip_during_records.value,
