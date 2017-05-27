@@ -15,7 +15,7 @@ class AutoPoller:
 
 	def __init__(self):
 		# Init Timer
-		doLog "[AutoTimer] Auto Poll Enabled"
+		doLog("[AutoTimer] Auto Poll Enabled")
 		self.timer = eTimer()
 
 	def start(self):
@@ -31,7 +31,7 @@ class AutoPoller:
 	def query(self):
 		self.timer.stop()
 		from Screens.Standby import inStandby
-		doLog "[AutoTimer] Auto Poll"
+		doLog("[AutoTimer] Auto Poll")
 		doparse = True
 		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
 			doLog("[AutoTimer] Skip check during running records")
@@ -48,7 +48,7 @@ class AutoPoller:
 			doLog("[AutoTimer] Skip check while not in Standby")
 			doparse = False
 		if doparse:
-			doLog "[AutoTimer] Auto Poll Started"
+			doLog("[AutoTimer] Auto Poll Started")
 			# Ignore any program errors
 			try:
 				ret = autotimer.parseEPG(autoPoll=True)
