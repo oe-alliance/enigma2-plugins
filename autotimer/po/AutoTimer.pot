@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-28 22:19+0200\n"
+"POT-Creation-Date: 2017-05-28 22:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,6 +127,10 @@ msgstr ""
 
 #: ../src/AutoTimerEditor.py:411 ../src/AutoTimerEditor.py:432
 msgid "AutoTimer Editor"
+msgstr ""
+
+#: ../src/faq.xml:2
+msgid "AutoTimer FAQ"
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:871 ../src/AutoTimerEditor.py:1064
@@ -466,6 +470,10 @@ msgstr ""
 msgid "Frequently asked questions"
 msgstr ""
 
+#: ../src/faq.xml:3
+msgid "Frequently asked questions about the AutoTimer"
+msgstr ""
+
 #: ../src/AutoTimerList.py:196
 msgid "Fri"
 msgstr ""
@@ -778,6 +786,40 @@ msgstr ""
 msgid "Preview AutoTimer"
 msgstr ""
 
+#: ../src/faq.xml:7
+msgid ""
+"Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: "
+"First try the AutoTimer version in a recent (experimental) Image to see if "
+"the problem was fixed. Then read the Help again and the upcoming FAQs to "
+"make sure that this is actually a problem and not expected behavior./nIf you "
+"still think there is something wrong with the AutoTimer, please visit http://"
+"www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The "
+"plugin only adds timers when leaving the configuration, not automatically. "
+"What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In "
+"this screen enable 'Poll automatically' and you should be good to go."
+msgstr ""
+
+#: ../src/faq.xml:10
+msgid ""
+"Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: "
+"Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: "
+"The show I'm trying to record contains umlauts in its title. AutoTimer does "
+"not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For "
+"german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to "
+"record two subsequent events. There is only a single timer created that "
+"spans (part of) both events./nA: From the Overview press MENU and enter the "
+"'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
+msgstr ""
+
+#: ../src/faq.xml:13
+msgid ""
+"Question: You keep talking about help being provided for each parameter. I'm "
+"unable to read it (in part or in full)./nAnswer: Try using the default skin "
+"and if it works ask the creator of your regular skin. If it still does not "
+"work your image might not provide the actual default skin so contact the "
+"creator of your image."
+msgstr ""
+
 #: ../src/AutoTimerEditor.py:695 ../src/AutoTimerEditor.py:1038
 #: ../src/AutoTimerEditor.py:1209 ../src/AutoTimerImporter.py:235
 #: ../src/AutoTimerOverview.py:203 ../src/AutoTimerEditor.py:753
@@ -1076,6 +1118,17 @@ msgstr ""
 
 #: ../src/AutoTimerEditor.py:712 ../src/AutoTimerEditor.py:770
 msgid "The match attribute is mandatory."
+msgstr ""
+
+#: ../src/faq.xml:4
+msgid ""
+"This FAQ is supposed to help everyone unwilling to help themselves by "
+"reading all the provided help available, and those who did not find a "
+"solution to their problems within the provided documentation./n/nTo make "
+"these hints a little easier to read, they are split up on multiple pages. "
+"You can go to the next page using the BLUE button on your remote control and "
+"back using the YELLOW one. Pressing the RED button or EXIT will close the "
+"FAQ."
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:575
