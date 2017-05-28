@@ -1,0 +1,178 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-02 14:24+0200\n"
+"PO-Revision-Date: 2017-05-02 14:45+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"Last-Translator: VillaK <soporte@openplus.es>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_ES\n"
+
+#: ../src/plugin.py:598
+msgid " as "
+msgstr " cómo "
+
+#: ../src/plugin.py:335
+msgid "Ambiguous results"
+msgstr "Resultados ambiguos"
+
+#: ../src/plugin.py:707
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../src/plugin.py:602
+msgid "Cast: "
+msgstr "Casting: "
+
+#: ../src/plugin.py:68
+msgid "Channel Selection"
+msgstr "Selección canal"
+
+#: ../src/plugin.py:470
+msgid "Could't get Eventname"
+msgstr "No se puede obtener Nombre de evento"
+
+#: ../src/plugin.py:340 ../src/plugin.py:555
+msgid "Details"
+msgstr "Detalles"
+
+#: ../src/plugin.py:610
+#, python-format
+msgid "Downloading Movie Poster: %s..."
+msgstr "Descargando carátula: %s..."
+
+#: ../src/plugin.py:689
+msgid "Enable this to be able to access the IMDb from within the plugin browser."
+msgstr "Habilitar para poder acceder al IMDb desde el navegador de plugin."
+
+#: ../src/plugin.py:383
+msgid "Enter search"
+msgstr "Introduce tu búsqueda"
+
+#: ../src/plugin.py:428
+msgid "Enter text to search for"
+msgstr "Introduzca texto a buscar"
+
+#: ../src/plugin.py:182
+msgid "Exit"
+msgstr "Salir"
+
+#: ../src/plugin.py:630
+msgid "Extra Info"
+msgstr "- Información Adicional"
+
+#: ../src/plugin.py:745 ../src/plugin.py:765
+msgid "IMDb Details"
+msgstr "Detalles IMDb"
+
+#: ../src/plugin.py:556 ../src/plugin.py:636
+msgid "IMDb Details parsed"
+msgstr "Detalles IMDb analizado"
+
+#: ../src/plugin.py:503
+msgid "IMDb Download completed"
+msgstr "IMDb Descarga completa"
+
+#: ../src/plugin.py:474
+msgid "IMDb Download failed"
+msgstr "IMDb Descarga fallida"
+
+#: ../src/plugin.py:666
+msgid "IMDb Plugin"
+msgstr "IMDb Complemnto"
+
+#: ../src/plugin.py:545
+msgid "IMDb Re-Download completed"
+msgstr "IMDb Re-Descarga completa"
+
+#: ../src/plugin.py:683 ../src/plugin.py:724
+msgid "IMDb Setup"
+msgstr "IMDb Configuración"
+
+#: ../src/plugin.py:542
+msgid "IMDb query failed!"
+msgstr "La consulta de IMDb falló!"
+
+#: ../src/plugin.py:97
+msgid "Lookup"
+msgstr "Buscar"
+
+#: ../src/plugin.py:529 ../src/plugin.py:530
+msgid "No IMDb match."
+msgstr "No hay resultados de IMDb."
+
+#: ../src/plugin.py:604
+msgid "No cast list found in the database."
+msgstr "No se ha encontrado ninguna lista de casting en la base de datos."
+
+#: ../src/plugin.py:553
+msgid "No details found."
+msgstr "No se han encontrado detalles."
+
+#: ../src/plugin.py:706
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:390
+msgid "Play Trailer"
+msgstr "Reproducir Trailer"
+
+#: ../src/plugin.py:336
+msgid "Please select the matching entry"
+msgstr "Seleccione la entrada correspondiente"
+
+#: ../src/plugin.py:460
+#, python-format
+msgid "Query IMDb: %s..."
+msgstr "Consulta IMDb: %s..."
+
+#: ../src/plugin.py:765 ../src/plugin.py:769
+msgid "Query details from the Internet Movie Database"
+msgstr "Detalles de la consulta de la base de datos de películas en Internet"
+
+#: ../src/plugin.py:351 ../src/plugin.py:519 ../src/plugin.py:535
+#, python-format
+msgid "Re-Query IMDb: %s..."
+msgstr "Re-Consulta IMDb: %s..."
+
+#: ../src/plugin.py:391
+msgid "Search Trailer"
+msgstr "Buscar Trailer"
+
+#: ../src/plugin.py:384
+msgid "Select from EPG"
+msgstr "Seleccionar desde epg"
+
+#: ../src/plugin.py:385
+msgid "Setup"
+msgstr "Configuración"
+
+#: ../src/plugin.py:689
+msgid "Show in plugin browser"
+msgstr "Mostrar en el navegador de complementos"
+
+#: ../src/plugin.py:166
+msgid "The Internet Movie Database"
+msgstr "Base de Datos de Películas en Internet"
+
+#: ../src/plugin.py:339
+msgid "Title Menu"
+msgstr "Menú de Título"
+
+#: ../src/plugin.py:585
+msgid "User Rating"
+msgstr "Puntuación de usuarios"
+
+#: ../src/plugin.py:581
+msgid "no user rating yet"
+msgstr "No hay Puntuación de usuarios"

@@ -11,7 +11,7 @@ from Screens.Setup import SetupSummary
 # GUI (Components)
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
-
+from enigma import getDesktop
 # Configuration
 from Components.config import config, getConfigListEntry
 from Components.PluginComponent import plugins
@@ -19,17 +19,30 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
-
+HD = False
+if getDesktop(0).size().width() >= 1280:
+	HD = True
 class AutoTimerSettings(Screen, ConfigListScreen):
-	skin = """<screen name="AutoTimerSettings" title="AutoTimer Settings" position="center,center" size="565,370">
-		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget name="config" position="5,50" size="555,250" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="0,301" zPosition="1" size="565,2" />
-		<widget source="help" render="Label" position="5,305" size="555,63" font="Regular;21" />
-	</screen>"""
+	if HD:
+		skin = """<screen name="AutoTimerSettings" title="AutoTimer Settings" position="center,center" size="750,635">
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="config" position="5,50" size="740,475" scrollbarMode="showOnDemand" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,530" zPosition="1" size="750,2" />
+			<widget source="help" render="Label" position="5,535" size="740,110" font="Regular;21" />
+		</screen>"""
+	else:
+		skin = """<screen name="AutoTimerSettings" title="AutoTimer Settings" position="center,center" size="565,430">
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="config" position="5,50" size="555,300" scrollbarMode="showOnDemand" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,355" zPosition="1" size="565,2" />
+			<widget source="help" render="Label" position="5,360" size="555,70" font="Regular;20" />
+		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -66,6 +79,9 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 				getConfigListEntry(_("Support \"Fast Scan\"?"), config.plugins.autotimer.fastscan, _("When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it.")),
 				getConfigListEntry(_("Skip poll during records"), config.plugins.autotimer.skip_during_records, _("If enabled, the polling will be skipped if a recording is in progress.")),
 				getConfigListEntry(_("Skip poll during epg refresh"), config.plugins.autotimer.skip_during_epgrefresh, _("If enabled, the polling will be skipped if EPGRefresh is currently running.")),
+				getConfigListEntry(_("Popup timeout in seconds"), config.plugins.autotimer.popup_timeout, _("If 0, the popup will remain open.")),
+				getConfigListEntry(_("Remove not existing events"), config.plugins.autotimer.check_eit_and_remove, _("Check the event id (eit) and remove the timer if there is no corresponding EPG event. Due to compatibility issues with SerienRecorder and IPRec, only timer created by AutoTimer are affected.")),
+				getConfigListEntry(_("Always write config"), config.plugins.autotimer.always_write_config, _("Write the config file after every change which the user quits by saving.")),
 			],
 			session = session,
 			on_change = self.changed

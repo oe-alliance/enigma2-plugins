@@ -89,13 +89,13 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 		return server.NOT_DONE_YET
 	def renderBackground(self, req ,timers, skipped):
 
-		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimersimulate api_version=\"", str(API_VERSION), "\">\n"]
+		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimertest api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
 
 		for (name, begin, end, serviceref, autotimername, message) in timers:
 			ref = ServiceReference(str(serviceref))
 			extend((
-				'<e2simulatedtimer>\n'
+				'<e2testtimer>\n'
 				'   <e2servicereference>', stringToXML(serviceref), '</e2servicereference>\n',
 				'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
 				'   <e2name>', stringToXML(name), '</e2name>\n',
@@ -104,14 +104,14 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 				'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n',
 				'   <e2state>OK</e2state>\n'
 				'   <e2message>', stringToXML(message), '</e2message>\n'
-				'</e2simulatedtimer>\n'
+				'</e2testtimer>\n'
 			))
 
 		if skipped:
 			for (name, begin, end, serviceref, autotimername, message) in skipped:
 				ref = ServiceReference(str(serviceref))
 				extend((
-					'<e2simulatedtimer>\n'
+					'<e2testtimer>\n'
 					'   <e2servicereference>', stringToXML(serviceref), '</e2servicereference>\n',
 					'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
 					'   <e2name>', stringToXML(name), '</e2name>\n',
@@ -120,10 +120,10 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 					'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n',
 					'   <e2state>Skip</e2state>\n'
 					'   <e2message>', stringToXML(message), '</e2message>\n'
-					'</e2simulatedtimer>\n'
+					'</e2testtimer>\n'
 				))
 		
-		returnlist.append('</e2autotimersimulate>')
+		returnlist.append('</e2autotimertest>')
 
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
@@ -149,12 +149,8 @@ class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 		id = req.args.get("id")
 		if id:
 			autotimer.remove(int(id[0]))
-			
-			# Save modified xml
-			# TODO
-			#if config.plugins.autotimer.always_write_config.value:
-			#	autotimer.writeXml()
-			
+			if config.plugins.autotimer.always_write_config.value:
+				autotimer.writeXml()
 			return self.returnResult(req, True, _("AutoTimer was removed"))
 		else:
 			return self.returnResult(req, False, _("missing parameter \"id\""))
@@ -380,16 +376,17 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			except ValueError: series_labeling = series_labeling == "yes"
 			timer.series_labeling = series_labeling
 
+		# Always zap
+		timer.always_zap = get("always_zap", timer.always_zap)
+
 		if newTimer:
 			autotimer.add(timer)
 			message = _("AutoTimer was added successfully")
 		else:
 			message = _("AutoTimer was changed successfully")
 
-		# Save modified xml
-		#TODO
-		#if config.plugins.autotimer.always_write_config.value:
-		#	autotimer.writeXml()
+		if config.plugins.autotimer.always_write_config.value:
+			autotimer.writeXml()
 
 		return self.returnResult(req, True, message)
 
@@ -429,6 +426,8 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.add_name_to_tags.value = True if value == "true" else False
 			elif key == "timeout":
 				config.plugins.autotimer.timeout.value = int(value)
+			elif key == "popup_timeout":
+				config.plugins.autotimer.popup_timeout.value = int(value)
 			elif key == "delay":
 				config.plugins.autotimer.delay.value = int(value)
 			elif key == "editdelay":
@@ -437,8 +436,16 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.skip_during_records.value = True if value == "true" else False
 			elif key == "skip_during_epgrefresh":
 				config.plugins.autotimer.skip_during_epgrefresh.value = True if value == "true" else False
+			elif key == "check_eit_and_remove":
+				config.plugins.autotimer.check_eit_and_remove.value = True if value == "true" else False
+			elif key == "always_write_config":
+				config.plugins.autotimer.always_write_config.value,
 			elif key == "onlyinstandby":
 				config.plugins.autotimer.onlyinstandby.value = True if value == "true" else False
+			elif key == "log_write":
+				config.plugins.autotimer.log_write.value = True if value == "true" else False
+			elif key == "log_shell":
+				config.plugins.autotimer.log_shell.value = True if value == "true" else False
 
 		if config.plugins.autotimer.autopoll.value:
 			if plugin.autopoller is None:
@@ -539,6 +546,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.popup_timeout</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>config.plugins.autotimer.delay</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
@@ -555,7 +566,23 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.check_eit_and_remove</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.always_write_config</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>config.plugins.autotimer.onlyinstandby</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.log_write</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.log_shell</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
@@ -595,11 +622,16 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.add_autotimer_to_tags.value,
 				config.plugins.autotimer.add_name_to_tags.value,
 				config.plugins.autotimer.timeout.value,
+				config.plugins.autotimer.popup_timeout.value,
 				config.plugins.autotimer.delay.value,
 				config.plugins.autotimer.editdelay.value,
 				config.plugins.autotimer.skip_during_records.value,
 				config.plugins.autotimer.skip_during_epgrefresh.value,
+				config.plugins.autotimer.check_eit_and_remove.value,
+				config.plugins.autotimer.always_write_config.value,
 				config.plugins.autotimer.onlyinstandby.value,
+				config.plugins.autotimer.log_write.value,
+				config.plugins.autotimer.log_shell.value,
 				hasVps,
 				hasSeriesPlugin,
 				CURRENT_CONFIG_VERSION,

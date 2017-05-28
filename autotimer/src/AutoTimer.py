@@ -5,16 +5,11 @@ from . import _
 
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse
-from os import path as os_path
+from os import path as os_path,rename as os_rename
 from AutoTimerConfiguration import parseConfig, buildConfig
 
 # Tasks
 import Components.Task
-
-# GUI (Screens)
-from Screens.MessageBox import MessageBox
-from Tools.FuzzyDate import FuzzyTime
-from Tools.Notifications import AddPopup
 
 # Navigation (RecordTimer)
 import NavigationInstance
@@ -23,9 +18,15 @@ import NavigationInstance
 from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry
 
+# Notifications
+from Tools.Notifications import AddPopup
+from Screens import Standby
+from Screens.MessageBox import MessageBox
+
 # Timespan
 from time import localtime, strftime, time, mktime, sleep, ctime
 from datetime import timedelta, date
+from Tools.FuzzyDate import FuzzyTime
 
 # EPGCache & Event
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
@@ -136,9 +137,33 @@ class AutoTimer:
 		self.configMtime = mtime
 
 		# Parse Config
-		file = open(XML_CONFIG, 'r')
-		configuration = cet_parse(file).getroot()
-		file.close()
+		try:
+			configuration = cet_parse(XML_CONFIG).getroot()
+		except:
+			try:
+				if os_path.exists(XML_CONFIG + "_old"):
+					os_rename(XML_CONFIG + "_old", XML_CONFIG + "_old(1)")
+				os_rename(XML_CONFIG, XML_CONFIG + "_old")
+				print("[AutoTimer] autotimer.xml is corrupt rename file to /etc/enigma2/autotimer.xml_old")
+			except:
+				pass
+			if Standby.inStandby is None:
+				AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "), type = MessageBox.TYPE_ERROR, timeout = 0, id = "AutoTimerLoadFailed")
+
+			self.timers = []
+			self.defaultTimer = preferredAutoTimerComponent(
+				0,		# Id
+				"",		# Name
+				"",		# Match
+				True	# Enabled
+			)
+
+			try:
+				self.writeXml()
+				configuration = cet_parse(XML_CONFIG).getroot()
+			except:
+				print("[AutoTimer] fatal error, the autotimer.xml cannot create")
+				return
 
 		# Empty out timers and reset Ids
 		del self.timers[:]
@@ -383,8 +408,9 @@ class AutoTimer:
 			eserviceref = eServiceReference(serviceref)
 			evt = epgcache.lookupEventId(eserviceref, eit)
 			if not evt:
-				print("[AutoTimer] Could not create Event!")
-				skipped.append((name, begin, begin, str(serviceref), timer.name))
+				msg="[AutoTimer] Could not create Event!"
+				print(msg)
+				skipped.append((name, begin, begin, str(serviceref), timer.name, msg))
 				continue
 			# Try to determine real service (we always choose the last one)
 			n = evt.getNumOfLinkageServices()
@@ -420,8 +446,9 @@ class AutoTimer:
 				# If maximum days in future is set then check time
 				if checkEvtLimit:
 					if begin > evtLimit:
-#						print("[AutoTimer] Skipping an event because of maximum days in future is reached")
-						skipped.append((name, begin, end, serviceref, timer.name))
+						msg="[AutoTimer] Skipping an event because of maximum days in future is reached"
+#						print(msg)
+						skipped.append((name, begin, end, serviceref, timer.name, msg))
 						continue
 
 				dayofweek = str(timestamp.tm_wday)
@@ -434,8 +461,9 @@ class AutoTimer:
 					timer.checkTimespan(timestamp) \
 					or timer.checkTimeframe(begin) \
 				)) or timer.checkFilter(name, shortdesc, extdesc, dayofweek):
-#				print("[AutoTimer] Skipping an event because of filter check")
-				skipped.append((name, begin, end, serviceref, timer.name))
+				msg="[AutoTimer] Skipping an event because of filter check"
+#				print(msg)
+				skipped.append((name, begin, end, serviceref, timer.name, msg))
 				continue
 
 			if timer.hasOffset():
@@ -476,8 +504,9 @@ class AutoTimer:
 						movieExists = True
 						break
 				if movieExists:
-#					print("[AutoTimer] Skipping an event because movie already exists")
-					skipped.append((name, begin, end, serviceref, timer.name))
+					msg="[AutoTimer] Skipping an event because movie already exists"
+#					print(msg)
+					skipped.append((name, begin, end, serviceref, timer.name, msg))
 					continue
 
 			# Initialize
@@ -493,7 +522,7 @@ class AutoTimer:
 
 					# Abort if we don't want to modify timers or timer is repeated
 					if config.plugins.autotimer.refresh.value == "none" or rtimer.repeated:
-						print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
+#						print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
 						break
 
 					if eit == preveit:
@@ -515,7 +544,7 @@ class AutoTimer:
 						# rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
 						break
 					else:
-#						print ("[AutoTimer] Skipping timer because it has not changed.")
+#						print("[AutoTimer] Skipping timer because it has not changed.")
 						existing.append((name, begin, end, serviceref, timer.name))
 						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
@@ -535,12 +564,12 @@ class AutoTimer:
 					if not rtimer.disabled:
 						if self.checkDoubleTimers(timer, name, rtimer.name, begin, rtimer.begin, end, rtimer.end ):
 							oldExists = True
-							# print("[AutoTimer] We found a timer with same StartTime, skipping event")
+							print("[AutoTimer] We found a timer with same StartTime, skipping event")
 							break
 						if timer.avoidDuplicateDescription >= 2:
 							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
 								oldExists = True
-								print("[AutoTimer] We found a timer (any service) with same description, skipping event")
+#								print("[AutoTimer] We found a timer (any service) with same description, skipping event")
 								break
 				if oldExists:
 					continue
@@ -570,6 +599,7 @@ class AutoTimer:
 			newEntry.justplay = timer.justplay
 			newEntry.vpsplugin_enabled = timer.vps_enabled
 			newEntry.vpsplugin_overwrite = timer.vps_overwrite
+			newEntry.always_zap = timer.always_zap
 			tags = timer.tags[:]
 			if config.plugins.autotimer.add_autotimer_to_tags.value:
 				if TAG not in tags:
@@ -672,36 +702,55 @@ class AutoTimer:
 				AddPopup(
 					_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(self.conflicting), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.conflicting])),
 					MessageBox.TYPE_INFO,
-					15,
+					config.plugins.autotimer.popup_timeout.value,
 					CONFLICTNOTIFICATIONID
 				)
 			elif self.similars and config.plugins.autotimer.notifsimilar.value:
 				AddPopup(
 					_("%d conflict(s) solved with similar timer(s):\n%s") % (len(self.similars), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.similars])),
 					MessageBox.TYPE_INFO,
-					15,
+					config.plugins.autotimer.popup_timeout.value,
 					SIMILARNOTIFICATIONID
 				)
 		else:
 			AddPopup(
 				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+len(self.existing)+len(self.similars)), self.new, self.modified, len(self.conflicting), len(self.existing), len(self.similars)),
 				MessageBox.TYPE_INFO,
-				15,
+				config.plugins.autotimer.popup_timeout.value,
 				NOTIFICATIONID
 			)
 
 # Supporting functions
 
 	def populateTimerdict(self, epgcache, recordHandler, timerdict):
+		remove = []
 		for timer in chain(recordHandler.timer_list, recordHandler.processed_timers):
 			if timer and timer.service_ref:
 				if timer.eit is not None:
 					event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
-					extdesc = event and event.getExtendedDescription() or ''
-					timer.extdesc = extdesc
+					if event:
+						timer.extdesc = event.getExtendedDescription() or ''
+					else:
+						remove.append(timer)
 				elif not hasattr(timer, 'extdesc'):
 					timer.extdesc = ''
+				else:
+					remove.append(timer)
+					continue
 				timerdict[str(timer.service_ref)].append(timer)
+
+		if config.plugins.autotimer.check_eit_and_remove.value:
+			for timer in remove:
+				if "autotimer" in timer.flags:
+					try:
+						# Because of the duplicate check, we only want to remove future timer
+						if timer in recordHandler.timer_list:
+							if not timer.isRunning():
+								recordHandler.removeEntry(timer)
+								print("[AutoTimer] Remove timer because of eit check %s." % (timer.name))
+					except:
+						pass
+		del remove
 
 	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref, eit):
 		# Don't update the name, it will overwrite the name of the SeriesPlugin
