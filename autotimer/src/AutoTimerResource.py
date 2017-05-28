@@ -40,7 +40,7 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 		autotimer.parseEPG(callback = self.parsecallback)
 		return server.NOT_DONE_YET
 	def renderBackground(self, req ,ret):
-		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5]))
+		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[6]), len(ret[5]))
 		return self.returnResult(req, True, output)
 
 class AutoTimerSimulateResource(AutoTimerBaseResource):

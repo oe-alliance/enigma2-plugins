@@ -1263,6 +1263,34 @@ msgstr "Die blaue Taste drücken, um Sender/Bouquets zu editieren"
 msgid "Use yellow key to edit filters."
 msgstr "Die gelbe Taste drücken, um Filter zu editieren"
 
+msgid ""
+"Restrict autotimer to specific services, channels.\n"
+"Use the blue key to edit the service filter.
+msgstr ""
+"Definiere die Enschränkung auf bestimmte Sender\n"
+"Die blaue Taste drücken, um Sender zu editieren"
+
+msgid ""
+"Restrict autotimer to bouquets.\n"
+"Use the blue key to edit the bouquet filter"
+msgstr ""
+"Definiere die Enschränkung auf bestimmte Favoriten\n"
+"Die blaue Taste drücken, um Favoriten zu editieren"
+
+msgid ""
+"Restrict autotimer to specific days.\n"
+"Use the yellow key to edit the day filter."
+msgstr""
+"Hier können Sie Filter auf Tage definieren.\n"
+"Die gelbe Taste drücken, um diese zu editieren"
+
+msgid ""
+"This allows you to apply other filters.\n"
+"Use the yellow key to edit other filters."
+msgstr ""
+"Hier können Sie andere Filter definieren.\n"
+"Die gelbe Taste drücken, um diese zu editieren."
+
 #: ../src/AutoTimerOverview.py:186
 msgid ""
 "Message\n"

@@ -336,13 +336,14 @@ msgid ""
 "matched."
 msgstr ""
 
-#: ../src/AutoTimerResource.py:78 ../src/plugin.py:189
+#: ../src/AutoTimerResource.py:43 ../src/AutoTimer.py:717
 #, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
 "%d Timer were added and\n"
 "%d modified,\n"
 "%d conflicts encountered,\n"
+"%d unchanged,\n"
 "%d similars added."
 msgstr ""
 
