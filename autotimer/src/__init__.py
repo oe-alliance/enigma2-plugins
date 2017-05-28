@@ -62,13 +62,6 @@ config.plugins.autotimer.maxdaysinfuture = ConfigNumber(default=0)
 config.plugins.autotimer.show_help = ConfigYesNo(default=True)
 config.plugins.autotimer.skip_during_records = ConfigYesNo(default=False)
 config.plugins.autotimer.skip_during_epgrefresh = ConfigYesNo(default=False)
-# TODO : needs to be improved
-#config.plugins.autotimer.log_shell = ConfigYesNo(default = False)
-#config.plugins.autotimer.log_write = ConfigYesNo(default = False)
-#config.plugins.autotimer.log_file  = ConfigText(default = "/tmp/autotimer.log", fixed_size = False)
-#if config.plugins.autotimer.log_file.value == "":
-#	config.plugins.autotimer.log_file.value = "/tmp/autotimer.log"
-#	config.plugins.autotimer.log_file.save()
 
 try:
 	xrange = xrange
