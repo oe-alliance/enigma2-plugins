@@ -15,6 +15,8 @@ from enigma import eServiceReference
 from . import _, config, iteritems, plugin
 from plugin import autotimer, AUTOTIMER_VERSION
 
+from AutoTimerSettings import getAutoTimerSettingsDefinitions
+
 API_VERSION = "1.5"
 
 class AutoTimerBaseResource(resource.Resource):
@@ -40,7 +42,7 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 		autotimer.parseEPG(callback = self.parsecallback)
 		return server.NOT_DONE_YET
 	def renderBackground(self, req ,ret):
-		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5]))
+		output = _("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[6]), len(ret[5]))
 		return self.returnResult(req, True, output)
 
 class AutoTimerSimulateResource(AutoTimerBaseResource):
@@ -442,10 +444,6 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.always_write_config.value,
 			elif key == "onlyinstandby":
 				config.plugins.autotimer.onlyinstandby.value = True if value == "true" else False
-			elif key == "log_write":
-				config.plugins.autotimer.log_write.value = True if value == "true" else False
-			elif key == "log_shell":
-				config.plugins.autotimer.log_shell.value = True if value == "true" else False
 
 		if config.plugins.autotimer.autopoll.value:
 			if plugin.autopoller is None:
@@ -479,162 +477,39 @@ class AutoTimerSettingsResource(resource.Resource):
 		else:
 			hasSeriesPlugin = True
 
-		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
-<e2settings>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.autopoll</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.interval</e2settingname>
-		<e2settingvalue>%d</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.refresh</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.try_guessing</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.editor</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.disabled_on_conflict</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.addsimilar_on_conflict</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.show_in_plugins</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.show_in_extensionsmenu</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.fastscan</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.notifconflict</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.notifsimilar</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.maxdaysinfuture</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.add_autotimer_to_tags</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.add_name_to_tags</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.timeout</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.popup_timeout</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.delay</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.editdelay</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.skip_during_records</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.skip_during_epgrefresh</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.check_eit_and_remove</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.always_write_config</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.onlyinstandby</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.log_write</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>config.plugins.autotimer.log_shell</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>hasVps</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>hasSeriesPlugin</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>version</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>api_version</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-	<e2setting>
-		<e2settingname>autotimer_version</e2settingname>
-		<e2settingvalue>%s</e2settingvalue>
-	</e2setting>
-</e2settings>""" % (
-				config.plugins.autotimer.autopoll.value,
-				config.plugins.autotimer.interval.value,
-				config.plugins.autotimer.refresh.value,
-				config.plugins.autotimer.try_guessing.value,
-				config.plugins.autotimer.editor.value,
-				config.plugins.autotimer.addsimilar_on_conflict.value,
-				config.plugins.autotimer.disabled_on_conflict.value,
-				config.plugins.autotimer.show_in_plugins.value,
-				config.plugins.autotimer.show_in_extensionsmenu.value,
-				config.plugins.autotimer.fastscan.value,
-				config.plugins.autotimer.notifconflict.value,
-				config.plugins.autotimer.notifsimilar.value,
-				config.plugins.autotimer.maxdaysinfuture.value,
-				config.plugins.autotimer.add_autotimer_to_tags.value,
-				config.plugins.autotimer.add_name_to_tags.value,
-				config.plugins.autotimer.timeout.value,
-				config.plugins.autotimer.popup_timeout.value,
-				config.plugins.autotimer.delay.value,
-				config.plugins.autotimer.editdelay.value,
-				config.plugins.autotimer.skip_during_records.value,
-				config.plugins.autotimer.skip_during_epgrefresh.value,
-				config.plugins.autotimer.check_eit_and_remove.value,
-				config.plugins.autotimer.always_write_config.value,
-				config.plugins.autotimer.onlyinstandby.value,
-				config.plugins.autotimer.log_write.value,
-				config.plugins.autotimer.log_shell.value,
-				hasVps,
-				hasSeriesPlugin,
-				CURRENT_CONFIG_VERSION,
-				API_VERSION,
-				AUTOTIMER_VERSION
-			)
+		defs = getAutoTimerSettingsDefinitions()
+
+		resultstr = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?><e2settings>"""
+
+		for (title,cfg,key,description) in defs:
+			resultstr += """<e2setting>
+				<e2settingname>config.plugins.autotimer.%s</e2settingname>
+				<e2settingvalue>%s</e2settingvalue>
+				<e2settingtitle>%s</e2settingtitle>
+				<e2settingdescription>%s</e2settingdescription>
+			</e2setting>""" % (key, cfg.value , title , description )
+
+		resultstr += """<e2setting>
+				<e2settingname>hasVps</e2settingname>
+				<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>hasSeriesPlugin</e2settingname>
+					<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>version</e2settingname>
+					<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>api_version</e2settingname>
+					<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>autotimer_version</e2settingname>
+					<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
+			</e2settings>""" % (hasVps, hasSeriesPlugin, CURRENT_CONFIG_VERSION, API_VERSION, AUTOTIMER_VERSION )
+
+		return resultstr
+
