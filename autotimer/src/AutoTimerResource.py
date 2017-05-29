@@ -94,7 +94,7 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 		returnlist = ["<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<e2autotimertest api_version=\"", str(API_VERSION), "\">\n"]
 		extend = returnlist.extend
 
-		for (name, begin, end, serviceref, autotimername, message) in timers:
+		for (name, begin, end, serviceref, autotimername) in timers:
 			ref = ServiceReference(str(serviceref))
 			extend((
 				'<e2testtimer>\n'
@@ -105,7 +105,6 @@ class AutoTimerTestResource(AutoTimerBaseResource):
 				'   <e2timeend>', str(end), '</e2timeend>\n',
 				'   <e2autotimername>', stringToXML(autotimername), '</e2autotimername>\n',
 				'   <e2state>OK</e2state>\n'
-				'   <e2message>', stringToXML(message), '</e2message>\n'
 				'</e2testtimer>\n'
 			))
 
