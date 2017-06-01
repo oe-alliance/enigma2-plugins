@@ -599,7 +599,9 @@ class AutoTimer:
 			newEntry.justplay = timer.justplay
 			newEntry.vpsplugin_enabled = timer.vps_enabled
 			newEntry.vpsplugin_overwrite = timer.vps_overwrite
-			newEntry.always_zap = timer.always_zap
+
+			if hasattr(timer, 'always_zap') and hasattr(newEntry, 'always_zap'):
+				newEntry.always_zap = timer.always_zap
 			tags = timer.tags[:]
 			if config.plugins.autotimer.add_autotimer_to_tags.value:
 				if TAG not in tags:
@@ -723,7 +725,7 @@ class AutoTimer:
 # Supporting functions
 
 	def populateTimerdict(self, epgcache, recordHandler, timerdict):
-		remove = []
+#		remove = []
 		for timer in chain(recordHandler.timer_list, recordHandler.processed_timers):
 			if timer and timer.service_ref:
 				if timer.eit is not None:
@@ -731,26 +733,27 @@ class AutoTimer:
 					if event:
 						timer.extdesc = event.getExtendedDescription() or ''
 					else:
-						remove.append(timer)
+						timer.extdesc = ''
+#						remove.append(timer)
 				elif not hasattr(timer, 'extdesc'):
 					timer.extdesc = ''
-				else:
-					remove.append(timer)
-					continue
+#				else:
+#					remove.append(timer)
+#					continue
 				timerdict[str(timer.service_ref)].append(timer)
 
-		if config.plugins.autotimer.check_eit_and_remove.value:
-			for timer in remove:
-				if "autotimer" in timer.flags:
-					try:
-						# Because of the duplicate check, we only want to remove future timer
-						if timer in recordHandler.timer_list:
-							if not timer.isRunning():
-								recordHandler.removeEntry(timer)
-								print("[AutoTimer] Remove timer because of eit check %s." % (timer.name))
-					except:
-						pass
-		del remove
+#		if config.plugins.autotimer.check_eit_and_remove.value:
+#			for timer in remove:
+#				if "autotimer" in timer.flags:
+#					try:
+#						# Because of the duplicate check, we only want to remove future timer
+#						if timer in recordHandler.timer_list:
+#							if not timer.isRunning():
+#								recordHandler.removeEntry(timer)
+#								print("[AutoTimer] Remove timer because of eit check %s." % (timer.name))
+#					except:
+#						pass
+#		del remove
 
 	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref, eit):
 		# Don't update the name, it will overwrite the name of the SeriesPlugin
