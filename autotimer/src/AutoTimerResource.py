@@ -378,7 +378,8 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			timer.series_labeling = series_labeling
 
 		# Always zap
-		timer.always_zap = get("always_zap", timer.always_zap)
+		if hasattr(timer, 'always_zap'):
+			timer.always_zap = get("always_zap", timer.always_zap)
 
 		if newTimer:
 			autotimer.add(timer)
