@@ -1,0 +1,605 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Partnerbox\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-26 12:49+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: ims <ims21@users.sourceforge.net>\n"
+"Language-Team: PLi <ims21@users.sourceforge.net>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#
+#: plugin.py:126
+#: plugin.py:134
+msgid "Partnerbox: RemoteTimer"
+msgstr "Partnerbox: Časovač"
+
+#: plugin.py:126
+#: plugin.py:134
+msgid "Manage timer for other dreamboxes in network"
+msgstr "Správa časovačů ostatních přijímačů v síti"
+
+#: plugin.py:132
+msgid "Partnerbox"
+msgstr "Partnerbox"
+
+#: plugin.py:132
+msgid "setup for partnerbox"
+msgstr "Nastavení Partnerboxu"
+
+#
+#: plugin.py:137
+msgid "Partnerbox: RemoteTV Player"
+msgstr "Partnerbox: TV přehrávač"
+
+#: plugin.py:137
+msgid "Stream TV from your Partnerbox"
+msgstr "Streamovat TV z Partnerboxu"
+
+#
+#: plugin.py:139
+msgid "Stream current Service from Partnerbox"
+msgstr "Streamovat aktuální program z Partnerboxu"
+
+#: plugin.py:139
+msgid "Stream current service from partnerbox"
+msgstr "Streamovat aktuální program z Partnerboxu"
+
+#
+#: plugin.py:160
+msgid "Remote Player"
+msgstr "Vzdálený přehrávač"
+
+#
+#: plugin.py:175
+#, python-format
+msgid "Starting Remote Player (IP = %s)"
+msgstr "Spouští se vzdálený přehrávač (IP=%s)"
+
+#
+#: plugin.py:230
+msgid "RemoteTimer Timerlist"
+msgstr "RemoteTimer časovače"
+
+#: plugin.py:231
+#: PartnerboxSetup.py:141
+#: PartnerboxSetup.py:307
+msgid "Delete"
+msgstr "Odstranit"
+
+#: plugin.py:233
+#: plugin.py:508
+#: plugin.py:666
+#: plugin.py:969
+msgid "EPG Selection"
+msgstr "Výběr EPG"
+
+#: plugin.py:234
+msgid "Clean up"
+msgstr "Vyčistit"
+
+#: plugin.py:235
+msgid "Getting Partnerbox Information..."
+msgstr "Získávají se informace z Partnerboxu..."
+
+#: plugin.py:319
+msgid "Cleaning up finished timer entries..."
+msgstr "Vyčistit dokončené události..."
+
+#: plugin.py:338
+#: plugin.py:1180
+#: PartnerboxEPGSelection.py:130
+#, python-format
+msgid ""
+"Do you really want to delete the timer \n"
+"%s ?"
+msgstr ""
+"Chcete skutečně odstranit časovač \n"
+"%s ?"
+
+#
+#: plugin.py:399
+msgid "Choose bouquet"
+msgstr "Zvolte přehled"
+
+#: plugin.py:401
+msgid "Getting Partnerbox Bouquet Information..."
+msgstr "Získávají se informace o přehledech Partnerboxu..."
+
+#: plugin.py:502
+msgid "Bouquet List"
+msgstr "Přehled"
+
+#: plugin.py:505
+msgid "Zap"
+msgstr "Přepnout"
+
+#: plugin.py:511
+#: plugin.py:667
+#: plugin.py:976
+#: plugin.py:1026
+msgid "Info"
+msgstr "Info"
+
+#: plugin.py:513
+msgid "Getting Channel Information..."
+msgstr "Získávají se informace o programu..."
+
+#
+#: plugin.py:606
+msgid "Give Enigma time to fill epg cache..."
+msgstr "Načítá se epg cache, čekejte..."
+
+#
+#: plugin.py:816
+msgid "Partnerbox - RemotePlayer"
+msgstr "Partnerbox - vzdálený přehrávač"
+
+#: plugin.py:821
+#: plugin.py:907
+#: plugin.py:1264
+#: plugin.py:1269
+#: plugin.py:1317
+#: plugin.py:1320
+#: plugin.py:1322
+#: plugin.py:1430
+#: plugin.py:1627
+msgid "mins"
+msgstr "minut"
+
+#: plugin.py:973
+#: plugin.py:1031
+msgid "Add timer"
+msgstr "Přidat časovač"
+
+#: plugin.py:977
+msgid "Getting EPG Information..."
+msgstr "Získávají se EPG Informace..."
+
+#: plugin.py:1035
+#: PartnerboxEPGSelection.py:181
+msgid "Remove timer"
+msgstr "Odstranit časovač"
+
+#: plugin.py:1250
+#: plugin.py:1303
+#: plugin.py:1443
+msgid "Mon"
+msgstr "Po"
+
+#: plugin.py:1250
+#: plugin.py:1303
+#: plugin.py:1443
+msgid "Tue"
+msgstr "Di"
+
+#: plugin.py:1250
+#: plugin.py:1303
+#: plugin.py:1443
+msgid "Wed"
+msgstr "St"
+
+#: plugin.py:1250
+#: plugin.py:1303
+#: plugin.py:1443
+msgid "Thu"
+msgstr "Čt"
+
+#: plugin.py:1250
+#: plugin.py:1303
+#: plugin.py:1443
+msgid "Fri"
+msgstr "Pá"
+
+#: plugin.py:1250
+#: plugin.py:1303
+#: plugin.py:1443
+msgid "Sat"
+msgstr "So"
+
+#: plugin.py:1250
+#: plugin.py:1303
+#: plugin.py:1443
+msgid "Sun"
+msgstr "Ne"
+
+#: plugin.py:1262
+#: plugin.py:1267
+#: plugin.py:1315
+#: plugin.py:1320
+msgid "(ZAP)"
+msgstr "(PŘEPNOUT)"
+
+#: plugin.py:1272
+#: plugin.py:1325
+msgid "waiting"
+msgstr "čekání"
+
+#: plugin.py:1274
+msgid "about to start"
+msgstr "začít okamžitě"
+
+#: plugin.py:1277
+#: plugin.py:1328
+msgid "zapped"
+msgstr "přepnuto"
+
+#: plugin.py:1279
+#: plugin.py:1330
+msgid "recording..."
+msgstr "nahrávání..."
+
+#: plugin.py:1281
+#: plugin.py:1332
+msgid "done!"
+msgstr "dokončeno!"
+
+#: plugin.py:1283
+#: plugin.py:1343
+#: plugin.py:1345
+msgid "<unknown>"
+msgstr "<neznámý>"
+
+#: plugin.py:1286
+msgid "disabled"
+msgstr "zakázáno"
+
+#: plugin.py:1335
+msgid "Error: No space left"
+msgstr "Chyba: žádné volné místo"
+
+#: plugin.py:1337
+msgid "Error: User aborted"
+msgstr "Chyba: zrušeno uživatelem"
+
+#: plugin.py:1339
+msgid "Error: Zap failed"
+msgstr "Chyba: přepnutí selhalo"
+
+#: plugin.py:1341
+msgid "Error: Outdated"
+msgstr "Chyba: zastaralé"
+
+#
+#: plugin.py:1577
+msgid "Eventview"
+msgstr "Zobrazení události"
+
+#: plugin.py:1612
+msgid "unknown service"
+msgstr "neznámý program"
+
+#
+#: RemoteTimerEntry.py:68
+msgid "Timer entry"
+msgstr "Položka časovače"
+
+#: RemoteTimerEntry.py:73
+#: PartnerboxSetup.py:71
+#: PartnerboxSetup.py:306
+msgid "OK"
+msgstr "OK"
+
+#: RemoteTimerEntry.py:74
+#: PartnerboxSetup.py:70
+#: PartnerboxSetup.py:305
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: RemoteTimerEntry.py:129
+#: RemoteTimerEntry.py:133
+#: RemoteTimerEntry.py:408
+#: RemoteTimerEntry.py:413
+msgid "zap"
+msgstr "přepnout"
+
+#: RemoteTimerEntry.py:129
+#: RemoteTimerEntry.py:408
+msgid "record"
+msgstr "záznam"
+
+#: RemoteTimerEntry.py:130
+#: RemoteTimerEntry.py:134
+#: RemoteTimerEntry.py:409
+#: RemoteTimerEntry.py:414
+msgid "do nothing"
+msgstr "nic nedělat"
+
+#: RemoteTimerEntry.py:130
+#: RemoteTimerEntry.py:134
+#: RemoteTimerEntry.py:409
+#: RemoteTimerEntry.py:414
+msgid "go to standby"
+msgstr "přejít do Standby"
+
+#: RemoteTimerEntry.py:130
+#: RemoteTimerEntry.py:134
+#: RemoteTimerEntry.py:409
+#: RemoteTimerEntry.py:414
+msgid "go to deep standby"
+msgstr "přejít do hlubokého spánku"
+
+#: RemoteTimerEntry.py:130
+#: RemoteTimerEntry.py:409
+msgid "auto"
+msgstr "automaticky"
+
+#: RemoteTimerEntry.py:133
+#: RemoteTimerEntry.py:413
+msgid "NGRAB"
+msgstr "NGRAB"
+
+#: RemoteTimerEntry.py:133
+#: RemoteTimerEntry.py:413
+msgid "DVR"
+msgstr "DVR"
+
+#: RemoteTimerEntry.py:136
+#: RemoteTimerEntry.py:416
+msgid "%d.%B %Y"
+msgstr "%d.%B %Y"
+
+#: RemoteTimerEntry.py:145
+#: RemoteTimerEntry.py:424
+msgid "Monday"
+msgstr "Pondělí"
+
+#: RemoteTimerEntry.py:145
+#: RemoteTimerEntry.py:424
+msgid "Tuesday"
+msgstr "Úterý"
+
+#: RemoteTimerEntry.py:145
+#: RemoteTimerEntry.py:424
+msgid "Wednesday"
+msgstr "Středa"
+
+#: RemoteTimerEntry.py:145
+#: RemoteTimerEntry.py:424
+msgid "Thursday"
+msgstr "Čtvrtek"
+
+#: RemoteTimerEntry.py:145
+#: RemoteTimerEntry.py:424
+msgid "Friday"
+msgstr "Pátek"
+
+#: RemoteTimerEntry.py:145
+#: RemoteTimerEntry.py:424
+msgid "Saturday"
+msgstr "Sobota"
+
+#: RemoteTimerEntry.py:145
+#: RemoteTimerEntry.py:424
+msgid "Sunday"
+msgstr "Neděle"
+
+#: RemoteTimerEntry.py:155
+#: RemoteTimerEntry.py:442
+#: PartnerboxSetup.py:134
+#: PartnerboxSetup.py:317
+msgid "Name"
+msgstr "Název"
+
+#: RemoteTimerEntry.py:156
+#: RemoteTimerEntry.py:443
+msgid "Description"
+msgstr "Popis"
+
+#: RemoteTimerEntry.py:157
+#: RemoteTimerEntry.py:444
+msgid "Timer Type"
+msgstr "Typ časovače"
+
+#: RemoteTimerEntry.py:159
+#: RemoteTimerEntry.py:446
+msgid "Date"
+msgstr "Datum"
+
+#: RemoteTimerEntry.py:161
+#: RemoteTimerEntry.py:448
+msgid "StartTime"
+msgstr "Čas začátku"
+
+#: RemoteTimerEntry.py:165
+#: RemoteTimerEntry.py:170
+#: RemoteTimerEntry.py:452
+#: RemoteTimerEntry.py:457
+msgid "EndTime"
+msgstr "Čas konce"
+
+#: RemoteTimerEntry.py:172
+#: RemoteTimerEntry.py:459
+msgid "Channel"
+msgstr "Kanál"
+
+#: RemoteTimerEntry.py:175
+#: RemoteTimerEntry.py:462
+msgid "Location"
+msgstr "Umístění"
+
+#: RemoteTimerEntry.py:178
+#: RemoteTimerEntry.py:180
+#: RemoteTimerEntry.py:465
+#: RemoteTimerEntry.py:467
+msgid "After event"
+msgstr "Po skončení"
+
+#: RemoteTimerEntry.py:291
+msgid "No"
+msgstr "Ne"
+
+#: RemoteTimerEntry.py:314
+msgid "Remote Timer"
+msgstr "Vzdálený časovač"
+
+#: RemoteTimerEntry.py:526
+#: RemoteTimerEntry.py:536
+#, python-format
+msgid ""
+"Partnerbox Answer: \n"
+"%s"
+msgstr ""
+"Odpověď Partnerboxu:\n"
+"%s"
+
+#: PartnerboxSetup.py:40
+msgid "Enigma 2"
+msgstr "Enigma 2"
+
+#: PartnerboxSetup.py:40
+msgid "Enigma 1"
+msgstr "Enigma 1"
+
+#: PartnerboxSetup.py:42
+msgid "use external"
+msgstr "použít externí"
+
+#: PartnerboxSetup.py:42
+msgid "use internal"
+msgstr "použít interní"
+
+#
+#: PartnerboxSetup.py:68
+msgid "Partnerbox Setup"
+msgstr "Nastavení partnerboxu"
+
+#: PartnerboxSetup.py:72
+msgid "Partnerbox Entries"
+msgstr "Partnerboxy"
+
+#: PartnerboxSetup.py:75
+msgid "Show 'RemoteTimer' in E-Menu"
+msgstr "Zobrazovat 'Časovač' v E-Menu"
+
+#: PartnerboxSetup.py:76
+msgid "Show 'RemoteTV Player' in E-Menu"
+msgstr "Zobrazovat 'TV Přehrávač' v E-Menu"
+
+#: PartnerboxSetup.py:77
+msgid "Show 'Stream current Service' in E-Menu"
+msgstr "Zobrazovat 'Streamovat aktuální program' v E-Menu"
+
+#: PartnerboxSetup.py:78
+msgid "Enable Partnerbox-Function in TimerEvent"
+msgstr "Povolit Partnerbox v Časovači"
+
+#: PartnerboxSetup.py:79
+msgid "Enable Partnerbox-Function in EPGList"
+msgstr "Povolit Partnerbox v přehledech EPG"
+
+#: PartnerboxSetup.py:132
+msgid "Partnerbox: List of Entries"
+msgstr "Partnerbox: seznam"
+
+#: PartnerboxSetup.py:135
+#: PartnerboxSetup.py:318
+msgid "IP"
+msgstr "IP"
+
+#: PartnerboxSetup.py:136
+#: PartnerboxSetup.py:319
+msgid "Port"
+msgstr "Port"
+
+#: PartnerboxSetup.py:137
+#: PartnerboxSetup.py:320
+msgid "Enigma Type"
+msgstr "Enigma"
+
+#: PartnerboxSetup.py:138
+msgid "Add"
+msgstr "Přidat"
+
+#
+#: PartnerboxSetup.py:139
+msgid "Power"
+msgstr "Napájení"
+
+#: PartnerboxSetup.py:140
+msgid "Edit"
+msgstr "Upravit"
+
+#
+#: PartnerboxSetup.py:187
+msgid "Wakeup"
+msgstr "Probudit"
+
+#
+#: PartnerboxSetup.py:188
+msgid "Standby"
+msgstr "Pohotovostní režim"
+
+#: PartnerboxSetup.py:189
+msgid "Restart enigma"
+msgstr "Restartovat enigma"
+
+#: PartnerboxSetup.py:190
+msgid "Restart"
+msgstr "Restartovat"
+
+#
+#: PartnerboxSetup.py:192
+msgid "Toggle Standby"
+msgstr "Přepnout Standby"
+
+#
+#: PartnerboxSetup.py:193
+msgid "Deep Standby"
+msgstr "Hluboký spánek"
+
+#: PartnerboxSetup.py:195
+msgid "Shutdown"
+msgstr "Vypnout"
+
+#: PartnerboxSetup.py:197
+msgid "Select operation for partnerbox"
+msgstr "Zvolte operaci pro partnerbox"
+
+#: PartnerboxSetup.py:238
+#: PartnerboxSetup.py:346
+msgid "Really delete this Partnerbox Entry?"
+msgstr "Opravdu chcete odstranit tento Partnerbox?"
+
+#: PartnerboxSetup.py:295
+msgid "Partnerbox: Edit Entry"
+msgstr "Partnerbox: úprava"
+
+#: PartnerboxSetup.py:321
+msgid "Password"
+msgstr "Heslo"
+
+#: PartnerboxSetup.py:322
+msgid "Servicelists/EPG"
+msgstr "Seznam programů/EPG"
+
+#: PartnerboxSetup.py:323
+msgid "Zap to service when streaming"
+msgstr "Přepnout na program při streamování"
+
+msgid "Enable VPS-Function in TimerEvent"
+msgstr "Povolit VPS-funkci v Časovači"
+
+msgid "Enable VPS"
+msgstr "Povolit VPS"
+
+msgid "Yes (safe mode)"
+msgstr "Ano (bezpečný mód)"
+
+msgid "Yes"
+msgstr "Ano"
+
+#~ msgid "You have to restart Enigma2 to activate your new preferences!"
+#~ msgstr "Pro uplatnění změn musíte restartovat Enigma2!"
+
+#~ msgid "Timer event was created successfully."
+#~ msgstr "Časovač byl úspěšně založen."
+
+#~ msgid "Bouquet EPG Selection"
+#~ msgstr "Výběr EPG"

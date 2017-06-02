@@ -1,2 +1,6 @@
+Package: enigma2-plugin-extensions-partnerbox
+Version: 0.93
 Description: Partnerbox (Remote Timer and Remote TV Player)
+Maintainer: OpenPLi team <forum@openpli.org>
+Homepage: http://www.openpli.org
 Depends: enigma2, python-twisted-web

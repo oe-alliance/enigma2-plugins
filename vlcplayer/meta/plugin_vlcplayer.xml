@@ -6,8 +6,8 @@
                     <author>lexx911</author>
                     <name>VlcPlayer</name>
                     <packagename>enigma2-plugin-extensions-vlcplayer</packagename>
-                    <shortdescription>Play videos from PC on your Receiver</shortdescription>
-                    <description>Enigma2 Plugin to play AVI/DIVX/WMV/etc. videos from PC on your Receiver. Needs a running VLC from www.videolan.org on your pc.</description>
+                    <shortdescription>Play videos from PC on your Dreambox</shortdescription>
+                    <description>Enigma2 Plugin to play AVI/DIVX/WMV/etc. videos from PC on your Dreambox. Needs a running VLC from www.videolan.org on your pc.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_vlcplayer_en.jpg" />		    
           </info>
 
