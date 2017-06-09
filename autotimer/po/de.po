@@ -253,7 +253,7 @@ msgid ""
 "Check the event id (eit) and remove the timer if there is no corresponding "
 "EPG event. Due to compatibility issues with SerienRecorder and IPRec, only "
 "timer created by AutoTimer are affected."
-msgstr ""
+msgstr "Prüfe die Event ID (eit) und entferne nicht übereinstimmende Timer. Wegen Problemen mit Serienrecorder und IPRec werden nur AutoTimer berücksichtigt."
 
 #: ../src/AutoTimerEditor.py:369 ../src/AutoTimerEditor.py:373
 msgid "Choose target folder"
@@ -528,7 +528,7 @@ msgstr "Hilfe"
 
 #: ../src/AutoTimerSettings.py:82 ../src/AutoTimerSettings.py:65
 msgid "If 0, the popup will remain open."
-msgstr ""
+msgstr "Bei dem Wert '0', bleibt das Info-Fenster dauerhaft geöffnet."
 
 #: ../src/AutoTimerSettings.py:45 ../src/AutoTimerSettings.py:72
 #: ../src/AutoTimerSettings.py:55
@@ -825,7 +825,7 @@ msgstr "Automatisch suchen"
 
 #: ../src/AutoTimerSettings.py:82 ../src/AutoTimerSettings.py:65
 msgid "Popup timeout in seconds"
-msgstr "Fenster automatisch schliessen nach x Sekunden."
+msgstr "Fenster nach (x) Sekunden automatisch schliessen"
 
 #: ../src/AutoTimerEditor.py:520 ../src/AutoTimerEditor.py:559
 msgid ""
@@ -922,7 +922,7 @@ msgstr "Aufnahme von"
 
 #: ../src/AutoTimerSettings.py:83 ../src/AutoTimerSettings.py:66
 msgid "Remove not existing events"
-msgstr "Entferne nicht existierende Sendungen."
+msgstr "Entferne nicht existierende Sendungen"
 
 #: ../src/AutoTimerOverview.py:100 ../src/AutoTimerOverview.py:115
 msgid "Remove selected AutoTimer"
