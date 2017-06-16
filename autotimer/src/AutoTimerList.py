@@ -155,7 +155,7 @@ class AutoTimerList(MenuList):
 					print("[AutoTimerListIPTVMod] full service found:" + fullserviceref)
 					fullservicename = fullserviceref.rsplit(':', 1)[-1]
 					if fullservicename != "":
-						svcname = fullservicename + "*" #add * to signify IPTV
+						svcname = fullservicename
 						print("[AutoTimerListIPTVMod] service name:" + svcname)
 			channel.append(svcname)
 		if len(channel) >0 :
