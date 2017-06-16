@@ -153,8 +153,10 @@ class AutoTimerList(MenuList):
 				fullserviceref = self.getFullServiceRef(str(ServiceReference(t)), eServiceCenter.getInstance())
 				if fullserviceref != "":
 					print("[AutoTimerListIPTVMod] full service found:" + fullserviceref)
-					svcname = fullserviceref.rsplit(':', 1)[-1]
-					print("[AutoTimerListIPTVMod] service name:" + svcname)                       
+					fullservicename = fullserviceref.rsplit(':', 1)[-1]
+					if fullservicename != "":
+						svcname = fullservicename + "*" #add * to signify IPTV
+						print("[AutoTimerListIPTVMod] service name:" + svcname)
 			channel.append(svcname)
 		if len(channel) >0 :
 			channel = ", ".join(channel)
