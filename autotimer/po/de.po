@@ -966,7 +966,7 @@ msgstr ""
 
 #: ../src/AutoTimerEditor.py:680
 msgid "Restrict to days"
-msgstr ""
+msgstr "Beschränkung auf Wochentage"
 
 #: ../src/AutoTimerEditor.py:564 ../src/AutoTimerEditor.py:608
 msgid "Restrict to events on certain dates"
@@ -974,11 +974,11 @@ msgstr "Auf bestimmtes Datum beschränken"
 
 #: ../src/AutoTimerEditor.py:679
 msgid "Restrict to specific bouquets"
-msgstr ""
+msgstr "Beschränkung auf Bouquets"
 
 #: ../src/AutoTimerEditor.py:678
 msgid "Restrict to specific services"
-msgstr ""
+msgstr "Beschränkung auf Sender"
 
 #: ../src/AutoTimerList.py:197
 msgid "Sat"
