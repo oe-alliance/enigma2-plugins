@@ -16,6 +16,10 @@ from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, 
 from Tools.LoadPixmap import LoadPixmap
 from ServiceReference import ServiceReference
 
+# EPGCache & Event
+from enigma import eServiceReference, eServiceCenter
+from . import config
+
 from Tools.FuzzyDate import FuzzyTime
 from time import localtime, time, strftime, mktime
 
@@ -89,6 +93,9 @@ class AutoTimerList(MenuList):
 		self.typeIconHeight = self.iconRecording.size().height()
 		self.iconMargin = 2
 
+		self.haveCachedServiceList = False
+		self.cachedServiceList = []
+
 	def applySkin(self, desktop, parent):
 		def itemHeight(value):
 			self.itemHeight = int(value)
@@ -140,7 +147,17 @@ class AutoTimerList(MenuList):
 		rowSplit2 = self.rowSplit2
 		channel = []
 		for t in timer.services:
-			channel.append(ServiceReference(t).getServiceName())
+                        svcname = ServiceReference(t).getServiceName()
+                        print("[AutoTimerListIPTVMod] svcname:" + svcname)
+			if str(t).find("http") != -1:
+				fullserviceref = self.getFullServiceRef(str(ServiceReference(t)), eServiceCenter.getInstance())
+				if fullserviceref != "":
+					print("[AutoTimerListIPTVMod] full service found:" + fullserviceref)
+					fullservicename = fullserviceref.rsplit(':', 1)[-1]
+					if fullservicename != "":
+						svcname = fullservicename
+						print("[AutoTimerListIPTVMod] service name:" + svcname)
+			channel.append(svcname)
 		if len(channel) >0 :
 			channel = ", ".join(channel)
 		else:
@@ -228,3 +245,51 @@ class AutoTimerList(MenuList):
 				break
 			idx += 1
 
+	def getFullServiceRef(self, serviceref, serviceHandler):
+		print("[AutoTimerIPTVMod] getFullServiceRef:" + serviceref)
+		if not self.haveCachedServiceList:
+			print("[AutoTimerIPTVMod] Getting full service list")
+			# Get all bouquets
+			bouquetlist = []
+			refstr = '1:134:1:0:0:0:0:0:0:0:FROM BOUQUET \"bouquets.tv\" ORDER BY bouquet'
+			bouquetroot = eServiceReference(refstr)
+			mask = eServiceReference.isDirectory
+			if config.usage.multibouquet.value:
+				bouquets = serviceHandler.list(bouquetroot)
+				if bouquets:
+					while True:
+						s = bouquets.getNext()
+						if not s.valid():
+							break
+						if s.flags & mask:
+							info = serviceHandler.info(s)
+							if info:
+								bouquetlist.append((info.getName(s), s))
+			else:
+				info = serviceHandler.info(bouquetroot)
+				if info:
+					bouquetlist.append((info.getName(bouquetroot), bouquetroot))
+
+			# Get all services
+			mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
+			for name, bouquet in bouquetlist:
+				if not bouquet.valid(): #check end of list
+					break
+				if bouquet.flags & eServiceReference.isDirectory:
+					services = serviceHandler.list(bouquet)
+					if not services is None:
+						while True:
+							service = services.getNext()
+							if not service.valid(): #check end of list
+								break
+							if not (service.flags & mask):
+								if service.toString().find("http") != -1: #only save http streams
+									self.cachedServiceList.append( service.toString() )
+			self.haveCachedServiceList = True
+		else:
+			print("[AutoTimerIPTVMod] Using cached full service list")
+			
+		for service in self.cachedServiceList:
+			if service.find(serviceref) != -1:
+				return service
+		return ""

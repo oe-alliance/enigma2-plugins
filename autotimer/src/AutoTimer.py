@@ -120,6 +120,9 @@ class AutoTimer:
 			True 	# Enabled
 		)
 
+		self.haveCachedServiceList = False
+		self.cachedServiceList = []
+
 # Configuration
 	def readXml(self):
 		# Abort if no config found
@@ -305,7 +308,7 @@ class AutoTimer:
 	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, skipped, existing, timerdict, moviedict, simulateOnly=False):
 		new = 0
 		modified = 0
-
+				
 		# Precompute timer destination dir
 		dest = timer.destination or config.usage.default_path.value
 
@@ -406,12 +409,12 @@ class AutoTimer:
 		for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
 
 			eserviceref = eServiceReference(serviceref)
-			evt = epgcache.lookupEventId(eserviceref, eit)
+			evt = epgcache.lookupEventId(eserviceref, eit)			
 			if not evt:
 				msg="[AutoTimer] Could not create Event!"
 				print(msg)
 				skipped.append((name, begin, begin, str(serviceref), timer.name, msg))
-				continue
+				continue		
 			# Try to determine real service (we always choose the last one)
 			n = evt.getNumOfLinkageServices()
 			if n > 0:
@@ -455,7 +458,21 @@ class AutoTimer:
 
 			# Check timer conditions
 			# NOTE: similar matches do not care about the day/time they are on, so ignore them
-			if timer.checkServices(serviceref) \
+			
+			chkServices = timer.checkServices(serviceref)
+			
+			if str(timer).find("http") != -1:
+				#print("[AutoTimerIPTVMod] Found http in timer!")
+				# now replace serviceref with http one
+				for service in timer.services:
+					if str(service).find(serviceref) != -1:
+						#print("[AutoTimerIPTVMod] Service matched (" + serviceref + ") (" + str(service) + ")")
+						chkServices = False
+						serviceref = str(service)
+					#else:
+						#print("[AutoTimerIPTVMod] Service not matched (" + serviceref + ") (" + str(service) + ")")
+			
+			if chkServices \
 				or timer.checkDuration(duration) \
 				or (not similarTimer and (\
 					timer.checkTimespan(timestamp) \
@@ -465,6 +482,14 @@ class AutoTimer:
 #				print(msg)
 				skipped.append((name, begin, end, serviceref, timer.name, msg))
 				continue
+
+			if str(timer).find("http") != -1:
+				#print("[AutoTimerIPTVMod] Geting full service name")
+				#try to get full service from bouquet, incl name at end
+				fullserviceref = self.getFullServiceRef(serviceref, serviceHandler)
+				if fullserviceref != "":
+					print("[AutoTimerIPTVMod] full service found (" + serviceref + ") (" + fullserviceref + ")")
+					serviceref = fullserviceref
 
 			if timer.hasOffset():
 				# Apply custom Offset
@@ -817,3 +842,51 @@ class AutoTimer:
 		foundstart = starttime1 == starttime2
 		foundend = endtime1 == endtime2
 		return foundTitle and foundstart and foundend
+
+	def getFullServiceRef(self, serviceref, serviceHandler):
+		if not self.haveCachedServiceList:
+			print("[AutoTimerIPTVMod] Getting full service list")
+			# Get all bouquets
+			bouquetlist = []
+			refstr = '1:134:1:0:0:0:0:0:0:0:FROM BOUQUET \"bouquets.tv\" ORDER BY bouquet'
+			bouquetroot = eServiceReference(refstr)
+			mask = eServiceReference.isDirectory
+			if config.usage.multibouquet.value:
+				bouquets = serviceHandler.list(bouquetroot)
+				if bouquets:
+					while True:
+						s = bouquets.getNext()
+						if not s.valid():
+							break
+						if s.flags & mask:
+							info = serviceHandler.info(s)
+							if info:
+								bouquetlist.append((info.getName(s), s))
+			else:
+				info = serviceHandler.info(bouquetroot)
+				if info:
+					bouquetlist.append((info.getName(bouquetroot), bouquetroot))
+
+			# Get all services
+			mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
+			for name, bouquet in bouquetlist:
+				if not bouquet.valid(): #check end of list
+					break
+				if bouquet.flags & eServiceReference.isDirectory:
+					services = serviceHandler.list(bouquet)
+					if not services is None:
+						while True:
+							service = services.getNext()
+							if not service.valid(): #check end of list
+								break
+							if not (service.flags & mask):
+								if service.toString().find("http") != -1: #only save http streams
+									self.cachedServiceList.append( service.toString() )
+			self.haveCachedServiceList = True
+		else:
+			print("[AutoTimerIPTVMod] Using cached full service list")
+			
+		for service in self.cachedServiceList:
+			if service.find(serviceref) != -1:
+				return service
+		return ""
