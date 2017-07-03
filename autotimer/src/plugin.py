@@ -9,6 +9,7 @@ from Screens.MessageBox import MessageBox
 # Plugin
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
+from boxbranding import getImageDistro
 
 from AutoTimer import AutoTimer
 autotimer = AutoTimer()
@@ -136,7 +137,8 @@ def editCallback(session):
 	# Don't parse EPG if editing was canceled
 	if session is not None:
 		# Save xml
-		autotimer.writeXml()
+		if config.plugins.autotimer.always_write_config.value:
+			autotimer.writeXml()
 		# Poll EPGCache
 		autotimer.parseEPG()
 
@@ -198,5 +200,8 @@ def Plugins(**kwargs):
 
 def timermenu(menuid):
 	if menuid == "timermenu":
-		return [(_("AutoTimers"), main, "autotimer_setup", None)]
+		if getImageDistro() in ('openhdf'):
+			return [(_("Auto Timer"), main, "autotimer_setup", None)]
+		else:
+			return [(_("AutoTimers"), main, "autotimer_setup", None)]
 	return []

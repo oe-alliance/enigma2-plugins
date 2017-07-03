@@ -325,9 +325,9 @@ class NetworkBrowser(Screen):
 				if len(x) == 6:
 					sharelist.append(x)
 
-		cmd = "/usr/bin/smbclient -g -N -U Guest -L {0}".format(hostip).split()
+		cmd = "/usr/bin/smbclient -m SMB3 -g -N -U Guest -L {0}".format(hostip).split()
 		if username:
-			cmd = ["/usr/bin/smbclient", "-g", "-U", username, "-L", hostip, "\\\\IPC\\", password]
+			cmd = ["/usr/bin/smbclient", "-m SMB3", "-g", "-U", username, "-L", hostip, "\\\\IPC\\", password]
 		try:
 			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
 			(out, err) = p.communicate()

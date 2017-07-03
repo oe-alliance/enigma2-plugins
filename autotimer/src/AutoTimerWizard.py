@@ -127,6 +127,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 			timer.name = self.name.value.strip() or self.match.value
 			timer.match = self.match.value
 			timer.justplay = self.justplay.value == "zap"
+			self.timer.always_zap = self.justplay.value == "zap+record"
 			self.emptyMatch = not timer.match.strip()
 			self.trailingWhitespacesMatch = (timer.match[-1:] == " ")
 		elif self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN: # Timespan
@@ -176,7 +177,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 	def maybeRemoveWhitespaces(self):
 		# XXX: Hack alert
 		if self["list"].current[1] == "removeTrailingWhitespaces":
-			print("Next step would be to remove trailing whitespaces, removing them and redirecting to 'conf2'")
+			print("[AutoTimer] Next step would be to remove trailing whitespaces, removing them and redirecting to 'conf2'")
 			self.timer.match = self.timer.match.rstrip()
 			self.match.value = self.match.value.rstrip()
 			self.currStep = self.getStepWithID("conf2")

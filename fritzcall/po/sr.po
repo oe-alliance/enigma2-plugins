@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-01 17:50+0200\n"
+"POT-Creation-Date: 2017-03-14 20:05+0100\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -126,6 +126,10 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr ""
 
+#, python-format
+msgid "Could not load phonebook: %s"
+msgstr ""
+
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "Ne mogu tumačiti unos FRITZ!Box imenika"
 
@@ -201,6 +205,7 @@ msgid "Edit"
 msgstr "Uredi"
 
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr "Uredi izabrani unos"
 
@@ -219,13 +224,12 @@ msgstr ""
 msgid "Extension number to initiate call on"
 msgstr "Dodatni broj za početak poziva"
 
+msgid "FRITZ!Box - "
+msgstr ""
+
 #, python-format
 msgid "FRITZ!Box - Could not load calls: %s"
 msgstr "FRITZ!Box - Ne mogu učitati pozive: %s"
-
-#, python-format
-msgid "FRITZ!Box - Could not load phonebook: %s"
-msgstr "\"FRITZ!Box - Ne mogu učitati imenik: %s"
 
 #, python-format
 msgid "FRITZ!Box - Dialling failed: %s"
@@ -376,6 +380,9 @@ msgstr "Pokazati MSN (odvojen sa  ,)"
 msgid "Mailbox"
 msgstr "Poštansko sanduče"
 
+msgid "Make it more skin friendly"
+msgstr ""
+
 msgid "Minutes of uptime of WLAN guest network"
 msgstr ""
 
@@ -385,6 +392,9 @@ msgstr "Propušten"
 
 msgid "Missed calls"
 msgstr "Propušteni pozivi"
+
+msgid "Mute also on outgoing calls"
+msgstr ""
 
 msgid "Mute on call"
 msgstr "Priguši kod poziva"
@@ -635,6 +645,9 @@ msgstr "Prebaci sve pošt. sand."
 msgid "UNKNOWN"
 msgstr "NEPOZNATO"
 
+msgid "Update available"
+msgstr ""
+
 msgid "Use internal PhoneBook"
 msgstr "Koristi interni tel. imenik"
 
@@ -643,6 +656,9 @@ msgstr ""
 
 msgid "Vanity"
 msgstr "Ništavnost"
+
+msgid "WLAN not active"
+msgstr ""
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
 msgstr "Treba da uključite kontrolu vašeg FRITZ!box-a pozivanjem #96*5*!"
@@ -663,6 +679,9 @@ msgstr ""
 
 msgid "call redirections active"
 msgstr "Preusmerenje poziva aktivno"
+
+msgid "calls in mailbox"
+msgstr ""
 
 msgid "devices active"
 msgstr "Aktivni uređaji"
@@ -769,6 +788,9 @@ msgstr ""
 
 #~ msgid "Debug"
 #~ msgstr "Debag"
+
+#~ msgid "FRITZ!Box - Could not load phonebook: %s"
+#~ msgstr "\"FRITZ!Box - Ne mogu učitati imenik: %s"
 
 #~ msgid "Flash"
 #~ msgstr "Fleš"

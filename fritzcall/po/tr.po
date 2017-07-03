@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-01 17:50+0200\n"
+"POT-Creation-Date: 2017-03-14 20:05+0100\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -122,6 +122,10 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr ""
 
+#, python-format
+msgid "Could not load phonebook: %s"
+msgstr ""
+
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "FRITZ!Box rehber kaydı ayrıştırılamıyor"
 
@@ -197,6 +201,7 @@ msgid "Edit"
 msgstr "Düzelt"
 
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr "Seçili kaydı düzelt"
 
@@ -215,13 +220,12 @@ msgstr ""
 msgid "Extension number to initiate call on"
 msgstr "Dış hatta ulaşmak için çevrilen numara"
 
+msgid "FRITZ!Box - "
+msgstr ""
+
 #, python-format
 msgid "FRITZ!Box - Could not load calls: %s"
 msgstr "FRITZ!Box - Aramalar yüklenemedi: %s"
-
-#, python-format
-msgid "FRITZ!Box - Could not load phonebook: %s"
-msgstr "Rehber, FRITZ!Box'dan yüklenemiyor: %s"
 
 #, python-format
 msgid "FRITZ!Box - Dialling failed: %s"
@@ -372,6 +376,9 @@ msgstr "MSN göster (virgülle ayrılmış)"
 msgid "Mailbox"
 msgstr "Posta kutusu"
 
+msgid "Make it more skin friendly"
+msgstr ""
+
 msgid "Minutes of uptime of WLAN guest network"
 msgstr ""
 
@@ -381,6 +388,9 @@ msgstr "Cevapsız"
 
 msgid "Missed calls"
 msgstr "Cevapsız aramalar"
+
+msgid "Mute also on outgoing calls"
+msgstr ""
 
 msgid "Mute on call"
 msgstr "Çağrı olduğunda sessize al"
@@ -631,6 +641,9 @@ msgstr "Posta kutularını aç/kapat"
 msgid "UNKNOWN"
 msgstr "BİLİNMİYOR"
 
+msgid "Update available"
+msgstr ""
+
 msgid "Use internal PhoneBook"
 msgstr "FRITZ!Box rehberini kullan"
 
@@ -639,6 +652,9 @@ msgstr ""
 
 msgid "Vanity"
 msgstr "Vanity"
+
+msgid "WLAN not active"
+msgstr ""
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
 msgstr ""
@@ -660,6 +676,9 @@ msgstr ""
 
 msgid "call redirections active"
 msgstr "çağrı yönlendirmesi etkin"
+
+msgid "calls in mailbox"
+msgstr ""
 
 msgid "devices active"
 msgstr "cihaz etkin"
@@ -853,6 +872,9 @@ msgstr ""
 
 #~ msgid "Edit phonebook entry"
 #~ msgstr "Rehber kaydını düzelt"
+
+#~ msgid "FRITZ!Box - Could not load phonebook: %s"
+#~ msgstr "Rehber, FRITZ!Box'dan yüklenemiyor: %s"
 
 #, fuzzy
 #~ msgid "FRITZ!Box Fon has no mailbox"
