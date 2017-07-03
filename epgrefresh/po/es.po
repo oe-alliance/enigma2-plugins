@@ -137,6 +137,17 @@ msgstr ""
 msgid "Inherit Services from AutoTimer"
 msgstr "Heredar servicios de AutoTimer"
 
+msgid ""
+"After a successful refresh the AutoTimer will automatically search for new "
+"matches if this is enabled. The options 'Ask*' has only affect on a manually "
+"refresh. If EPG-Refresh was called in background the default-Answer will be "
+"executed!"
+msgstr ""
+"Tras una actualización satisfactoria, el AutoTimer buscará automáticamente "
+"Si está habilitado. Las opciones \"Preguntar\" sólo afectan a un refresco "
+"manual. Si EPG-Refresh se llamó en segundo plano, la respuesta predeterminada será "
+"¡ejecutado!."
+
 #, python-format
 msgid "Last refresh was %s"
 msgstr "La última actualización fue %s"
@@ -194,6 +205,13 @@ msgstr "Mostrar popup cuando se inicia y termina la actualización"
 
 msgid "Shutdown after EPG refresh"
 msgstr "Apagado después de refrescar EPG"
+
+msgid ""
+"This setting controls whether the receiver should be set to standby after "
+"refresh is completed."
+msgstr ""
+"Este ajuste controla si el receptor debe estar en modo de espera después de "
+"que se haya completado el resfresco."
 
 msgid "The configuration menu"
 msgstr "El menú de configuración"
@@ -349,14 +367,31 @@ msgstr "nunca"
 msgid "Show Advanced Options"
 msgstr "Mostrar opciones avanzadas"
 
+msgid "Display more Options"
+msgstr "Mostrar más opciones"
+
 msgid "Show Setup in extension menu"
 msgstr "Mostrar configuración en el menú de extensiones"
 
 msgid "Show 'EPGRefresh Start now' in extension menu"
 msgstr "Mostrar 'Iniciar EPGRefresh ahora' en el menú de extensiones"
 
+msgid ""
+"Enable this to be able to start the EPGRefresh from within the extension "
+"menu."
+msgstr ""
+"Habilite esto para poder iniciar el EPGRefresh desde dentro del menú de "
+"extensiones."
+
 msgid "Wake up from standby for EPG refresh"
 msgstr "Desactivar desde el modo de espera para la actualización de EPG"
+
+msgid ""
+"If this is enabled, the plugin will wake up the receiver from standby if "
+"possible. Otherwise it needs to be switched on already."
+msgstr ""
+"Si está activado, el plugin desactiva el receptor del modo de espera si es posible. "
+"De lo contrario, debe estar encendido ya."
 
 #~ msgid "Configure EPGRefresh"
 #~ msgstr "Configurar EPGRefresh"
