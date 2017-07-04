@@ -111,6 +111,9 @@ def parseEntry(element, baseTimer, defaults = False):
 	baseTimer.series_labeling = True if series_labeling == "yes" else False
 	del series_labeling
 
+	# Read always_zap
+	baseTimer.always_zap = int(element.get("always_zap", 0))
+
 	# Read out encoding (won't change if no value is set)
 	baseTimer.encoding = element.get("encoding")
 
@@ -745,6 +748,11 @@ def buildConfig(defaultTimer, timers, webif = False):
 		# Only add seriesplugin related entry if true
 		if timer.series_labeling:
 			append(' series_labeling="yes"')
+
+		# Only add always zap related entry if true
+		if timer.always_zap:
+			append(' always_zap="1"')
+
 
 		# Close still opened timer tag
 		append('>\n')

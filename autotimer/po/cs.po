@@ -313,6 +313,7 @@ msgid ""
 "%d Timer were added and\n"
 "%d modified,\n"
 "%d conflicts encountered,\n"
+"%d unchanged,\n"
 "%d similars added."
 msgstr ""
 
