@@ -510,7 +510,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.isActive_services_value = _("enabled")
 		else:
 			self.isActive_services_value = _("disabled")
-		if self.bouquets:
+		if self.bouquets and not self.services:
 			self.isActive_bouquets_value = _("enabled")
 		else:
 			self.isActive_bouquets_value = _("disabled")
@@ -572,8 +572,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.destination: _("Select the location to save the recording to."),
 			self.tags: _("Tags the Timer/Recording will have."),
 			self.series_labeling: _("Label Timers with season, episode and title, according to the SeriesPlugin settings."),
-			self.isActive_services: _("Restrict autotimer to specific services, channels.\nUse the blue key to edit the service filter."),
-			self.isActive_bouquets: _("Restrict autotimer to bouquets.\nUse the blue key to edit the bouquet filter"),
+			self.isActive_services: _("Restrict autotimer to specific services, channels.\nUse the blue key to edit the service filter.") + _(" (if services are enabled, bouquets are ignored.)."),
+			self.isActive_bouquets: _("Restrict autotimer to bouquets.\nUse the blue key to edit the bouquet filter") + _(" (if services are enabled, bouquets are ignored.)."),
 			self.isActive_dayofweek: _("Restrict autotimer to specific days.\nUse the yellow key to edit the day filter."),
 			self.isActive_otherfilters: _("This allows you to apply other filters.\nUse the yellow key to edit other filters."),
 		}
