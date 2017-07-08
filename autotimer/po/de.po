@@ -964,6 +964,10 @@ msgstr ""
 "Definiere die Einschränkung auf bestimmte Sender\n"
 "Die blaue Taste drücken, um die Sender zu editieren"
 
+#: ../src/AutoTimerEditor.py:575
+msgid " (if services are enabled, bouquets are ignored.)."
+msgstr " ( wenn Sender ausgewählt wurden, dann werden Favoriten ignoriert.)."
+
 #: ../src/AutoTimerEditor.py:680
 msgid "Restrict to days"
 msgstr "Beschränkung auf Wochentage"
