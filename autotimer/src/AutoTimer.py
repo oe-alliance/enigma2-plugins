@@ -643,7 +643,7 @@ class AutoTimer:
 							elif change_begin:
 								newEntry.begin -= 30
 						else:
-							print "[AutoTimer] The conflict is resolved by offset time begin/end (30 sec) for %s." % newEntry.name
+							print ("[AutoTimer] The conflict is resolved by offset time begin/end (30 sec) for %s." % newEntry.name)
 
 				if conflicts:
 					# Maybe use newEntry.log
