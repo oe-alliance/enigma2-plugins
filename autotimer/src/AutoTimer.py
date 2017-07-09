@@ -625,6 +625,26 @@ class AutoTimer:
 				# Try to add timer
 				conflicts = recordHandler.record(newEntry)
 
+				if conflicts and not timer.hasOffset() and not config.recording.margin_before.value and not config.recording.margin_after.value and len(conflicts) > 1:
+					change_end = change_begin = False
+					conflict_begin = conflicts[1].begin
+					conflict_end = conflicts[1].end
+					if conflict_begin == newEntry.end:
+						newEntry.end -= 30
+						change_end = True
+					elif newEntry.begin == conflict_end:
+						newEntry.begin += 30
+						change_begin = True
+					if change_end or change_begin:
+						conflicts = recordHandler.record(newEntry)
+						if conflicts:
+							if change_end:
+								newEntry.end += 30
+							elif change_begin:
+								newEntry.begin -= 30
+						else:
+							doLog("[AutoTimer] The conflict is resolved by offset time begin/end (30 sec) for %s." % newEntry.name)
+
 				if conflicts:
 					# Maybe use newEntry.log
 					conflictString += ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
