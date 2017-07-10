@@ -1,0 +1,229 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: FTPBrowser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-10 17:12+0300\n"
+"PO-Revision-Date: 2017-07-10 17:13+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#, python-format
+msgid "%d kb/s"
+msgstr "%d kb/s"
+
+msgid "A basic FTP client"
+msgstr "Pagrindinis ftp klientas"
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists locally.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Failas tokiu pavadinimu (%s) jau yra lokaliai.\n"
+"Jūs norite jį perrašyti?"
+
+#, python-format
+msgid ""
+"A file with this name (%s) already exists on the remote host.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Failas tokiu pavadinimu (%s) nutolusiame aparate jau yra.\n"
+"Jūs norite jį perrašyti?"
+
+msgid ""
+"A transfer is currently in progress.\n"
+"What do you want to do?"
+msgstr ""
+"Šiuo metu vyksta perkėlimas.\n"
+"Ką norite daryti?"
+
+msgid "Abort transfer"
+msgstr "Nutraukti perkėlimą"
+
+msgid "Add"
+msgstr "Pridėti"
+
+msgid "Address:"
+msgstr "Adresas:"
+
+#, python-format
+msgid "Are you sure you want to delete %s?"
+msgstr "Ar tikrai norite pašalinti  %s?"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Configuration saved."
+msgstr "Konfigūracija išsaugota."
+
+msgid "Connect to FTP..."
+msgstr "Jungtis prie FTP..."
+
+msgid "Could not connect to ftp server!"
+msgstr "Prisijungti prie FTP serverio nepavyko!"
+
+#, python-format
+msgid "Could not delete %s."
+msgstr "Pašalinti %s nepavyko."
+
+msgid "Could not obtain list of files."
+msgstr "Parsiųsti failų sąrašo nepavyko."
+
+#, python-format
+msgid "Could not rename %s."
+msgstr "Pervadinti %s nepavyko"
+
+msgid "Delete"
+msgstr "Pašalinti"
+
+msgid "Download"
+msgstr "Parsisiuntimas"
+
+msgid "Download finished."
+msgstr "Parsisiuntimas baigtas."
+
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr "ETA %d:%02d min."
+
+msgid "Edit"
+msgstr "Redaguoti"
+
+msgid "Enter URI"
+msgstr "Įrašykite internetinį adresą"
+
+msgid "Enter URI of FTP Server:"
+msgstr "Įrašykite FTP serverio internetinį adresą:"
+
+msgid "Enter new filename:"
+msgstr "Įrašykite naują failo pavadinimą:"
+
+msgid "Error"
+msgstr "Klaida"
+
+msgid "Error during download."
+msgstr "Atsisiuntimo klaida."
+
+msgid "Exit"
+msgstr "Užverti"
+
+msgid "FTP Queue Manager"
+msgstr "FTP eilės tvarkytuvas"
+
+msgid "FTP Server Editor"
+msgstr "FTP serverio redaktorius"
+
+msgid "FTP Server Manager"
+msgstr "FTP serverio tvarkytuvas"
+
+msgid "Local"
+msgstr "Vietinis"
+
+msgid "Name:"
+msgstr "Pavadinimas:"
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "Parent Directory"
+msgstr "Aukštesnysis katalogas"
+
+msgid "Passive:"
+msgstr "Pasyvus:"
+
+msgid "Password:"
+msgstr "Slaptažodis:"
+
+msgid "Port:"
+msgstr "Prievadas:"
+
+msgid "Queue Manager"
+msgstr "Eilės tvarkytuvas"
+
+msgid "Queue processed."
+msgstr "Eilė sudaryta."
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Tikrai pašalinti šį įrašą?\n"
+"Tai neatstatoma!"
+
+msgid "Remote"
+msgstr "Nuotolinis"
+
+msgid "Remote (not connected)"
+msgstr "Nuotolinis (neprisijungta)"
+
+#, python-format
+msgid "Removed %s."
+msgstr "%s pašalinta."
+
+msgid "Removing directories is not supported."
+msgstr "Katalogų pašalinti negalima."
+
+msgid "Rename"
+msgstr "Pervadinti"
+
+#, python-format
+msgid "Renamed %s to %s."
+msgstr "%s pervadinta į %s."
+
+msgid "Run in Background"
+msgstr "Vykdyti fone"
+
+msgid "Save"
+msgstr "Išsaugoti"
+
+msgid "Select local file list"
+msgstr "Pasirinkti vietinių failų sąrašą"
+
+msgid "Select remote file list"
+msgstr "Pasirinkti nutolusių failų sąrašą"
+
+msgid "Server Manager"
+msgstr "Serverio tvarkytuvas"
+
+msgid ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+msgstr ""
+"Jau yra aktyviai jungtis.\n"
+"Ar norite jį nutraukti?"
+
+msgid "There already is an active transfer."
+msgstr "Jau yra aktyvus perdavimas."
+
+msgid "Upload"
+msgstr "Įkelti"
+
+msgid "Upload finished."
+msgstr "Įkėlimas baigtas."
+
+msgid "Username:"
+msgstr "Vartotojo vardas:"
+
+msgid "Which server do you want to connect to?"
+msgstr "Prie kurio serverio norite prisijungti?"
+
+msgid "close"
+msgstr "užverti"
+
+msgid "enter directory/get file/put file"
+msgstr "įveskite  directory/get file/put file"
+
+msgid "open menu"
+msgstr "atverti meniu"
