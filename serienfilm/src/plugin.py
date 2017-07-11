@@ -108,7 +108,7 @@ def Plugins(**kwargs):
 	descriptors = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]
 	descriptors.append( PluginDescriptor(
 		name = "SerienFilm "+SerienFilmVersion,
-		description = _x("group movies of a series to virtual directories"),
+		description = _("group movies of a series to virtual directories"),
 		icon = "SerienFilm.png",
 		where = PluginDescriptor.WHERE_PLUGINMENU,
 		fnc = pluginConfig) )
