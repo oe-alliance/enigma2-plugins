@@ -1,254 +1,343 @@
-# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the tuxbox-enigma package.
 # Automatically generated, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Project-Id-Version: NetworkBrowser-PLi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-28 16:39+0100\n"
-"PO-Revision-Date: 2008-03-30 18:12+0200\n"
-"Last-Translator: Audronis Grincevicius <audrgrin@takas.lt>\n"
-"Language-Team: Adga / enigma2 (c) <audrgrin@takas.lt>\n"
+"POT-Creation-Date: 2017-07-10 19:10+0300\n"
+"PO-Revision-Date: 2017-07-10 19:10+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Lithuanian\n"
-"X-Poedit-Country: LITHUANIA\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.0.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: ../src/MountEdit.py:269
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
 msgstr ""
+"Pajungimas tokiu pavadinimu jau yra!\n"
+"Atnaujinti esamą įrašą ir tęsti?\n"
 
+#: ../src/MountEdit.py:177
 msgid "Active"
-msgstr ""
+msgstr "Aktyvus"
 
+#: ../src/MountView.py:61
 msgid ""
 "Active/\n"
 "Inactive"
 msgstr ""
+"Aktyvus/\n"
+"Neaktyvus"
 
+#: ../src/MountManager.py:73
 msgid "Add a new NFS or CIFS mount point to your Dreambox."
-msgstr ""
+msgstr "Pridėti naują NFS, arba CIFS pajungimo tašką."
 
+#: ../src/MountManager.py:73
 msgid "Add new network mount point"
-msgstr ""
+msgstr "Pridėti naują tinklo pajungimo tašką"
 
+#: ../src/MountEdit.py:271
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
 msgstr ""
+"Jūs tikrai norite išsaugoti šį tinklo pajungimą?\n"
+"\n"
 
+#: ../src/plugin.py:42
 msgid "Attempt to mount shares again"
-msgstr ""
+msgstr "Pabandyti pajungti bendrinimus iš naujo"
 
+#: ../src/plugin.py:45
 msgid "Attempt to recover lost mounts (in background)"
-msgstr ""
+msgstr "Bandyti atkurti prarastus pajungimus (fone)"
 
+#: ../src/NetworkBrowser.py:157
 msgid "Browse network neighbourhood"
-msgstr ""
+msgstr "Naršyti tinklo kaimynystę"
 
+#: ../src/MountEdit.py:98
 msgid "CIFS share"
-msgstr ""
+msgstr "CIFS bendrinimas"
 
+#: ../src/MountEdit.py:65 ../src/NetworkBrowser.py:498
 msgid "Cancel"
-msgstr ""
+msgstr "Atšaukti"
 
+#: ../src/MountManager.py:76
 msgid "Change hostname"
-msgstr ""
+msgstr "Keisti vardą tinkle"
 
+#: ../src/MountManager.py:76
 msgid "Change the hostname of your Dreambox."
-msgstr ""
+msgstr "Keisti TV imtuvo vardą tinkle."
 
+#: ../src/MountManager.py:54 ../src/MountView.py:63
+#: ../src/NetworkBrowser.py:107 ../src/UserDialog.py:91
+#: ../src/UserManager.py:50
 msgid "Close"
-msgstr ""
+msgstr "Užverti"
 
+#: ../src/UserManager.py:52
 msgid "Delete"
-msgstr ""
+msgstr "Pašalinti"
 
+#: ../src/MountView.py:64
 msgid "Delete mount"
-msgstr ""
+msgstr "Šalinti pajungimą"
 
+#: ../src/MountView.py:85
 msgid "Dir:"
-msgstr ""
+msgstr "Kat.:"
 
+#: ../src/NetworkBrowser.py:391 ../src/NetworkBrowser.py:393
+#: ../src/NetworkBrowser.py:406
 msgid "Do you want to enter a username and password for this host?\n"
-msgstr ""
+msgstr "Ar norite įrašyti vartotojo vardą ir slaptažodį šiam prisijungimui?\n"
 
+#: ../src/NetworkBrowser.py:526
 msgid "Enter IP to scan..."
-msgstr ""
+msgstr "Įrašykite IP skenavimui..."
 
+#: ../src/MountManager.py:108
 msgid "Enter new hostname for your Dreambox"
-msgstr ""
+msgstr "Įveskite naują šio TV imtuvo vardą tinkle"
 
+#: ../src/MountEdit.py:217
 msgid "Enter options:"
-msgstr ""
+msgstr "Įrašykite pasirinkimus:"
 
+#: ../src/MountEdit.py:221 ../src/UserDialog.py:141
 msgid "Enter password:"
-msgstr ""
+msgstr "Įrašykite slaptažodį:"
 
+#: ../src/MountEdit.py:215
 msgid "Enter share directory:"
-msgstr ""
+msgstr "Įrašykite bendrinamą katalogą:"
 
+#: ../src/MountEdit.py:213
 msgid "Enter share name:"
-msgstr ""
+msgstr "Įrašykite bendrinimo vardą:"
 
+#: ../src/UserDialog.py:94
 msgid "Enter user and password for host: "
-msgstr ""
+msgstr "Įrašykite vartotoją ir slaptažodį prisijungimui: "
 
+#: ../src/MountEdit.py:219 ../src/UserDialog.py:139
 msgid "Enter username:"
-msgstr ""
+msgstr "Įrašykite vartotoją:"
 
+#: ../src/NetworkBrowser.py:110
 msgid "Expert"
-msgstr ""
+msgstr "Išplėstinis"
 
+#: ../src/MountManager.py:132
 msgid "Finished restarting your network"
-msgstr ""
+msgstr "Tinklo paleidimas iš naujo baigtas"
 
+#: ../src/NetworkBrowser.py:514
 msgid "IP Address"
-msgstr ""
+msgstr "IP adresas"
 
+#: ../src/MountView.py:84
 msgid "IP:"
-msgstr ""
+msgstr "IP:"
 
+#: ../src/MountEdit.py:179
 msgid "Local share name"
-msgstr ""
+msgstr "Bendrinimo vardas"
 
+#: ../src/plugin.py:41
 msgid "Manage network shares"
-msgstr ""
+msgstr "Valdykite tinklo bendrus resursus"
 
+#: ../src/plugin.py:41
 msgid "Manage your network shares..."
-msgstr ""
+msgstr "Valdykite savo tinklo pajungimus..."
 
+#: ../src/plugin.py:42 ../src/plugin.py:44
 msgid "Mount again"
-msgstr ""
+msgstr "Pajungti iš naujo"
 
+#: ../src/MountView.py:60
 msgid "Mount informations"
-msgstr ""
+msgstr "Pajungimo informacija"
 
+#: ../src/MountEdit.py:194
 msgid "Mount options"
-msgstr ""
+msgstr "Pajungimo parinktys"
 
+#: ../src/MountEdit.py:181
 msgid "Mount type"
-msgstr ""
+msgstr "Pajungimo tipas"
 
+#: ../src/MountManager.py:64 ../src/plugin.py:41
 msgid "MountManager"
-msgstr ""
+msgstr "Pajungimų valdymas"
 
+#: ../src/MountView.py:59
 msgid ""
 "Mounted/\n"
 "Unmounted"
 msgstr ""
+"Pajungta/\n"
+"Atjungta"
 
+#: ../src/MountManager.py:74
 msgid "Mountpoints management"
-msgstr ""
+msgstr "Pajungimo taškų valdymas"
 
+#: ../src/MountEdit.py:69
 msgid "Mounts editor"
-msgstr ""
+msgstr "Pajungimų redaktorius"
 
+#: ../src/NetworkBrowser.py:108
 msgid "Mounts management"
-msgstr ""
+msgstr "Pajungimų valdymas"
 
+#: ../src/MountEdit.py:97
 msgid "NFS share"
-msgstr ""
+msgstr "NFS bendrinimas"
 
+#: ../src/plugin.py:40
 msgid "NetworkBrowser"
-msgstr ""
+msgstr "Tinklo naršyklė"
 
+#: ../src/NetworkBrowser.py:193
 msgid "No network devices found!"
-msgstr ""
+msgstr "Tinklo įrenginių nerasta!"
 
+#: ../src/MountEdit.py:199 ../src/UserDialog.py:130
 msgid "Password"
-msgstr ""
+msgstr "Slaptažodis"
 
+#: ../src/MountEdit.py:328
 msgid "Please wait for activation of your network mount..."
-msgstr ""
+msgstr "Palaukite, kol bus aktyvuotas jūsų tinklo pajungimas..."
 
+#: ../src/MountView.py:113
 msgid "Please wait while removing your network mount..."
-msgstr ""
+msgstr "Palaukite, kol šalinamas jūsų tinklo pajungimas..."
 
+#: ../src/MountEdit.py:291
 msgid "Please wait while updating your network mount..."
-msgstr ""
+msgstr "Palaukite, kol atnaujinamas jūsų tinklo pajungimas..."
 
+#: ../src/MountManager.py:119
 msgid "Please wait while your network is restarting..."
-msgstr ""
+msgstr "Palaukite, kol jūsų tinklas paleidžiamas iš naujo..."
 
+#: ../src/MountEdit.py:64
 msgid "Press OK to activate the settings."
-msgstr ""
+msgstr "Nustatymams aktyvuoti, spauskite 'OK'."
 
+#: ../src/NetworkBrowser.py:364
 msgid "Press OK to collapse this host"
-msgstr ""
+msgstr "Kad panaikinti šį tinklo vadrą, spauskite 'OK'."
 
+#: ../src/UserManager.py:51
 msgid "Press OK to edit selected settings."
-msgstr ""
+msgstr "Pasirinktiems nustatymams redaguoti, spauskite 'OK'."
 
+#: ../src/MountView.py:62
 msgid "Press OK to edit the settings."
-msgstr ""
+msgstr "Nustatymams redaguoti, spauskite 'OK'."
 
+#: ../src/NetworkBrowser.py:366
 msgid "Press OK to expand this host"
-msgstr ""
+msgstr "Kad išplėsti šį tinklo vardą, spauskite 'OK'."
 
+#: ../src/NetworkBrowser.py:360
 msgid "Press OK to mount this share!"
-msgstr ""
+msgstr "Kad pajungti šią prieigą, spauskite 'OK'!"
 
+#: ../src/NetworkBrowser.py:111
 msgid "Press OK to mount!"
-msgstr ""
+msgstr "Kad pajungti, spauskite 'OK'!"
 
+#: ../src/UserDialog.py:90
 msgid "Press OK to save settings."
-msgstr ""
+msgstr "Kad išsaugoti nustatymus, spauskite 'OK'."
 
+#: ../src/MountManager.py:55
 msgid "Press OK to select."
-msgstr ""
+msgstr "Pasirinkti, spauskite 'OK'."
 
+#: ../src/NetworkBrowser.py:109
 msgid "Rescan"
-msgstr ""
+msgstr "Perskenuoti"
 
+#: ../src/NetworkBrowser.py:499
 msgid "Scan NFS share"
-msgstr ""
+msgstr "Skenuoti NFS bendrinimą"
 
+#: ../src/NetworkBrowser.py:500
 msgid "Scan range"
-msgstr ""
+msgstr "Skenavimo diapazonas"
 
+#: ../src/plugin.py:40
 msgid "Search for network shares"
-msgstr ""
+msgstr "Tinklo bendrinimų paieška"
 
+#: ../src/plugin.py:40
 msgid "Search for network shares..."
-msgstr ""
+msgstr "Tinklo bendrinimų paieška..."
 
+#: ../src/NetworkBrowser.py:189
 msgid "Searching your network. Please wait..."
-msgstr ""
+msgstr "Vyksta paieška tinkle. Palaukite..."
 
+#: ../src/MountEdit.py:183
 msgid "Server IP"
-msgstr ""
+msgstr "Serverio IP"
 
+#: ../src/MountEdit.py:185
 msgid "Server share"
-msgstr ""
+msgstr "Serverio bendrinimas"
 
+#: ../src/MountManager.py:75
 msgid "User management"
-msgstr ""
+msgstr "Vartotojų valdymas"
 
+#: ../src/UserManager.py:60
 msgid "Usermanager"
-msgstr ""
+msgstr "Vartotojų valdymas"
 
+#: ../src/MountEdit.py:197 ../src/UserDialog.py:128
 msgid "Username"
-msgstr ""
+msgstr "Vartotojas"
 
+#: ../src/MountManager.py:74
 msgid "View, edit or delete mountpoints on your Dreambox."
-msgstr ""
+msgstr "Žiūrėkite, redaguokite, ar šalinkite savo pajungimo taškus."
 
+#: ../src/MountManager.py:75
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr ""
+"žiūrėkite, redaguokite, ar šalinkite savo tinklo vartotojus ir slaptažodžius."
 
+#: ../src/MountEdit.py:341
 msgid "Your network mount has been activated."
-msgstr ""
+msgstr "Jūsų tinklo pajungimas aktyvuotas."
 
+#: ../src/MountView.py:128
 msgid "Your network mount has been removed."
-msgstr ""
+msgstr "Jūsų tinklo pajungimas pašalintas."
 
+#: ../src/MountEdit.py:303
 msgid "Your network mount has been updated."
-msgstr ""
+msgstr "Jūsų tinklo pajungimas atnaujintas."
 
+#: ../src/MountEdit.py:187
 msgid "use as HDD replacement"
-msgstr ""
+msgstr "naudoti, kaip HDD pakaitalą"

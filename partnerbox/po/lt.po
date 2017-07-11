@@ -2,128 +2,82 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Partnerbox\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-24 16:16+0200\n"
-"PO-Revision-Date: 2016-06-24 07:12+0300\n"
+"POT-Creation-Date: 2017-07-10 19:31+0300\n"
+"PO-Revision-Date: 2017-07-10 19:32+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
-"Language: lt\n"
-"X-Generator: Poedit 1.8.8\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-msgid "%d min"
-msgstr "%d min."
-
+#: ../src/RemoteTimerEntry.py:135 ../src/RemoteTimerEntry.py:414
 msgid "%d.%B %Y"
 msgstr "%Y %B.%d"
 
-msgid "%s%d min"
-msgstr "%s%d min."
-
+#: ../src/plugin.py:1234 ../src/plugin.py:1239 ../src/plugin.py:1291
+#: ../src/plugin.py:1296
 msgid "(ZAP)"
 msgstr "(PERJUNGTI)"
 
-msgid "400 Bad Request"
-msgstr "400-netinkama užklausa"
-
-msgid "500 Internal Server Error"
-msgstr "500-vidinė serverio klaida."
-
+#: ../src/plugin.py:1255 ../src/plugin.py:1319 ../src/plugin.py:1321
 msgid "<unknown>"
 msgstr "<nežinomas>"
 
-msgid "Abort"
-msgstr "Nutraukti"
-
-msgid "Activate Picture in Picture"
-msgstr "Įjungti vaizdą vaizde (PiP)"
-
+#: ../src/PartnerboxSetup.py:127
 msgid "Add"
 msgstr "Pridėti"
 
-msgid "Add internal timer"
-msgstr "Įtraukti vidinį laikmatį"
-
+#: ../src/plugin.py:944 ../src/plugin.py:1003
 msgid "Add timer"
 msgstr "Įtraukti laikmatį"
 
+#: ../src/RemoteTimerEntry.py:176 ../src/RemoteTimerEntry.py:178
+#: ../src/RemoteTimerEntry.py:463 ../src/RemoteTimerEntry.py:465
 msgid "After event"
 msgstr "Po užduoties"
 
-msgid "Alternative services are not supported!"
-msgstr "Alternatyvių kanalų nepalaikoma!"
-
-msgid "An error occurred while connecting: 148: No route to host."
-msgstr "Prisijungimo klaida: 148: maršrutizacija neturi adreso."
-
-msgid "Apply"
-msgstr "Pritaikyti"
-
-msgid "Attention, this is repeated timer!\n"
-msgstr "Dėmesio, tai pasikartojantis laikmatis!\n"
-
-msgid "Bouquet List"
-msgstr "Bukietų sąrašas"
-
+#: ../src/PartnerboxSetup.py:68 ../src/PartnerboxSetup.py:234
+#: ../src/RemoteTimerEntry.py:73
 msgid "Cancel"
 msgstr "Atšaukti"
 
-msgid "Change pin code"
-msgstr "Keisti PIN kodą"
-
+#: ../src/RemoteTimerEntry.py:170 ../src/RemoteTimerEntry.py:457
 msgid "Channel"
 msgstr "Kanalas"
 
-msgid "Choice list Partnerbox"
-msgstr "Partnerbox pasirinkimų sąrašas"
-
-msgid "Choose action:"
-msgstr "Pasirinkite veiksmą:"
-
+#: ../src/plugin.py:236
 msgid "Clean up"
-msgstr "Išvalyti"
+msgstr "Valymas"
 
+#: ../src/plugin.py:318
 msgid "Cleaning up finished timer entries..."
 msgstr "Šalinami atliktų laikmačių įrašai..."
 
-msgid "Connetction was refused by other side: 146: Connetction refused."
-msgstr "Prisijungimas atmestas iš kitos pusės: 146-prisijungimas atmestas."
-
-msgid "Could not add timer '%s'!"
-msgstr "Laikmačio '%s' pridėti nepavyko!"
-
-msgid "Could not find timer '%s' with given start and end time!"
-msgstr "Nepavyko rasti laikmačio '%s' su nurodytu pradžios ir pabaigos laiku!"
-
+#: ../src/RemoteTimerEntry.py:132 ../src/RemoteTimerEntry.py:411
 msgid "DVR"
 msgstr "DVR"
 
+#: ../src/RemoteTimerEntry.py:157 ../src/RemoteTimerEntry.py:444
 msgid "Date"
 msgstr "Data"
 
-msgid "Deep Standby"
-msgstr "Išjungti"
-
+#: ../src/PartnerboxSetup.py:129 ../src/PartnerboxSetup.py:236
+#: ../src/plugin.py:233
 msgid "Delete"
 msgstr "Šalinti"
 
+#: ../src/RemoteTimerEntry.py:154 ../src/RemoteTimerEntry.py:441
 msgid "Description"
 msgstr "Aprašymas"
 
-msgid "Disable Picture in Picture"
-msgstr "Išjungti vaizdą vaizde (PiP)"
-
-msgid ""
-"Do you really want to delete the remote timer \n"
-"%s ?"
-msgstr ""
-"Ar tikrai norite pašalinti nuotolinį laikmatį\n"
-"%s ?"
-
+#: ../src/PartnerboxEPGSelection.py:111 ../src/plugin.py:337
+#: ../src/plugin.py:1152
+#, python-format
 msgid ""
 "Do you really want to delete the timer \n"
 "%s ?"
@@ -131,147 +85,124 @@ msgstr ""
 "Ar tikrai norite pašalinti laikmatį\n"
 "%s ?"
 
+#: ../src/plugin.py:235 ../src/plugin.py:507 ../src/plugin.py:651
 msgid "EPG Selection"
 msgstr "EPG pasirinkimas"
 
+#: ../src/PartnerboxSetup.py:128
 msgid "Edit"
 msgstr "Redaguoti"
 
-msgid "Edit internal timer"
-msgstr "Redaguoti vidinį laikmatį"
-
-msgid "Edit remote timer"
-msgstr "Redaguoti nuotolinį laikmatį"
-
-msgid "Enable Partnerbox-Function in Channel Selector"
-msgstr "Įjungti Partnerbox funkciją kanalų pasirinkime"
-
+#: ../src/PartnerboxSetup.py:78
 msgid "Enable Partnerbox-Function in EPGList"
 msgstr "Įjungti Partnerbox funkciją EPG sąrašuose"
 
+#: ../src/PartnerboxSetup.py:77
 msgid "Enable Partnerbox-Function in TimerEvent"
 msgstr "Įjungti Partnerbox funkciją laikmačių nustatyme"
 
-msgid "Enable Red Button-Function in single/multi EPG"
-msgstr "Partnerbox funkcija 'RAUDONU' mygtuku viena/daugiakanaliuose EPG"
-
-msgid "Enable VPS"
-msgstr "Įjungti VPS"
-
-msgid "Enable VPS-Function in TimerEvent"
-msgstr "Įjungti VPS funkciją laikmačių nustatyme"
-
-msgid "Enable first Partnerbox-entry in Timeredit as default"
-msgstr "Pirmasis Partnerbox įrašas laikmačių redagavime - numatytasis"
-
+#: ../src/RemoteTimerEntry.py:163 ../src/RemoteTimerEntry.py:168
+#: ../src/RemoteTimerEntry.py:450 ../src/RemoteTimerEntry.py:455
 msgid "EndTime"
 msgstr "Pabaigos laikas"
 
+#: ../src/PartnerboxSetup.py:40
 msgid "Enigma 1"
 msgstr "Enigma 1"
 
+#: ../src/PartnerboxSetup.py:40
 msgid "Enigma 2"
 msgstr "Enigma 2"
 
+#: ../src/PartnerboxSetup.py:126 ../src/PartnerboxSetup.py:249
 msgid "Enigma Type"
 msgstr "Enigma tipas"
 
-msgid "Enter the service pin"
-msgstr "Įrašykite kanalo PIN "
-
+#: ../src/plugin.py:1311
 msgid "Error: No space left"
 msgstr "Klaida! Neliko laisvos vietos"
 
+#: ../src/plugin.py:1317
 msgid "Error: Outdated"
 msgstr "Klaida! Pasenusi"
 
+#: ../src/plugin.py:1313
 msgid "Error: User aborted"
 msgstr "Klaida! Atšaukta vartotojo"
 
+#: ../src/plugin.py:1315
 msgid "Error: Zap failed"
 msgstr "Klaida! Perjungti nepavyko"
 
-msgid "EventId not found"
-msgstr "Įvykio ID nerastas"
-
-msgid "Eventview"
-msgstr "Įvykių peržiūra"
-
+#: ../src/plugin.py:1222 ../src/plugin.py:1279 ../src/plugin.py:1395
 msgid "Fri"
 msgstr "Pen"
 
+#: ../src/RemoteTimerEntry.py:143 ../src/RemoteTimerEntry.py:422
 msgid "Friday"
 msgstr "penktadienis"
 
+#: ../src/plugin.py:512
 msgid "Getting Channel Information..."
 msgstr "Gaunama kanalo informacija..."
 
+#: ../src/plugin.py:948
 msgid "Getting EPG Information..."
 msgstr "Gaunama EPG informacija..."
 
-msgid "Getting EPG data..."
-msgstr "Gaunami EPG duomenys..."
-
+#: ../src/plugin.py:400
 msgid "Getting Partnerbox Bouquet Information..."
 msgstr "Gaunama Partnerbox bukietų informacija..."
 
+#: ../src/plugin.py:237
 msgid "Getting Partnerbox Information..."
 msgstr "Gaunama Partnerbox informacija..."
 
-msgid "Getting timerlist data..."
-msgstr "Gaunami laikmačių sąrašo duomenys..."
-
-msgid "Give Enigma time to fill epg cache..."
-msgstr "Palaukite, kol užpildomas EPG podėlis..."
-
+#: ../src/PartnerboxSetup.py:124 ../src/PartnerboxSetup.py:247
 msgid "IP"
 msgstr "IP"
 
+#: ../src/plugin.py:510 ../src/plugin.py:652 ../src/plugin.py:947
+#: ../src/plugin.py:998
 msgid "Info"
 msgstr "Informacija"
 
-msgid "Internet services are not supported!"
-msgstr ""
-
+#: ../src/RemoteTimerEntry.py:173 ../src/RemoteTimerEntry.py:460
 msgid "Location"
 msgstr "Padėtis"
 
+#: ../src/plugin.py:127 ../src/plugin.py:135
 msgid "Manage timer for other dreamboxes in network"
 msgstr "Valdykite laikmatį kituose tinklo aparatuose"
 
-msgid "Menu PiP"
-msgstr "PiP meniu"
-
+#: ../src/plugin.py:1222 ../src/plugin.py:1279 ../src/plugin.py:1395
 msgid "Mon"
 msgstr "Pir"
 
+#: ../src/RemoteTimerEntry.py:143 ../src/RemoteTimerEntry.py:422
 msgid "Monday"
 msgstr "pirmadienis"
 
-msgid "Move Picture in Picture"
-msgstr "Perkelti vaizdą vaizde (PiP)"
-
+#: ../src/RemoteTimerEntry.py:132 ../src/RemoteTimerEntry.py:411
 msgid "NGRAB"
 msgstr "NGRAB"
 
+#: ../src/PartnerboxSetup.py:123 ../src/PartnerboxSetup.py:246
+#: ../src/RemoteTimerEntry.py:153 ../src/RemoteTimerEntry.py:440
 msgid "Name"
 msgstr "Pavadinimas"
 
+#: ../src/RemoteTimerEntry.py:289
 msgid "No"
 msgstr "ne"
 
-msgid "No matching Timer found"
-msgstr "Atitinkančio laikmačio nerasta"
-
+#: ../src/PartnerboxSetup.py:69 ../src/PartnerboxSetup.py:235
+#: ../src/RemoteTimerEntry.py:72
 msgid "OK"
 msgstr " Gerai"
 
-msgid "Partnerbox"
-msgstr "Partnerbox"
-
-msgid "Partnerbox - RemotePlayer"
-msgstr "Partnerbox - nuotolinis grotuvas"
-
+#: ../src/RemoteTimerEntry.py:523 ../src/RemoteTimerEntry.py:533
+#, python-format
 msgid ""
 "Partnerbox Answer: \n"
 "%s"
@@ -279,194 +210,197 @@ msgstr ""
 "Partnerbox atsakas: \n"
 "%s"
 
+#: ../src/PartnerboxSetup.py:70
 msgid "Partnerbox Entries"
 msgstr "Partnerbox įrašai"
 
-msgid "Partnerbox RemoteTimer"
-msgstr "Partnerbox nuotolinis laikmatis"
-
-msgid "Partnerbox Setup"
-msgstr "Partnerbox sąranka"
-
+#: ../src/PartnerboxSetup.py:220
 msgid "Partnerbox: Edit Entry"
 msgstr "Partnerbox: įrašų redagavimas"
 
+#: ../src/PartnerboxSetup.py:118
 msgid "Partnerbox: List of Entries"
 msgstr "Partnerbox: įrašų sąrašas"
 
-msgid "Partnerbox: RemoteTV Player"
-msgstr "Partnerbox: nuotolinis TV grotuvas"
-
-msgid "Partnerbox: RemoteTimer"
-msgstr "Partnerbox: nuotolinis laikmatis"
-
+#: ../src/PartnerboxSetup.py:250
 msgid "Password"
 msgstr "Slaptažodis"
 
+#: ../src/PartnerboxSetup.py:125 ../src/PartnerboxSetup.py:248
 msgid "Port"
 msgstr "Prievadas"
 
-msgid "Power"
-msgstr "Įjungimas"
-
-msgid "Press OK to edit timer..."
-msgstr "Laikmačiui redaguoti, spauskite 'OK'...."
-
+#: ../src/PartnerboxSetup.py:168 ../src/PartnerboxSetup.py:274
 msgid "Really delete this Partnerbox Entry?"
 msgstr "Ar tikrai ištrinti šį Partnerbox įrašą?"
 
+#: ../src/RemoteTimerEntry.py:312
 msgid "Remote Timer"
 msgstr "Nuotolinis laikmatis"
 
-msgid "Remote timers for partnerbox"
-msgstr "Nuotolinis Partnerbox laikmatis"
-
-msgid "RemoteTimer Timerlist"
-msgstr "Nuotolinio laikmačio laikmačių sąrašas"
-
+#: ../src/PartnerboxEPGSelection.py:159 ../src/plugin.py:1007
 msgid "Remove timer"
 msgstr "Pašalinti laikmatį"
 
-msgid "Repeated Timer are not supported!"
-msgstr "Pasikartojantys laikmačiai nepalaikomi!"
-
-msgid "Restart"
-msgstr "Paleisti iš naujo"
-
-msgid "Restart enigma"
-msgstr "Paleisti Enigma2 iš naujo"
-
+#: ../src/plugin.py:1222 ../src/plugin.py:1279 ../src/plugin.py:1395
 msgid "Sat"
 msgstr "Šeš"
 
+#: ../src/RemoteTimerEntry.py:143 ../src/RemoteTimerEntry.py:422
 msgid "Saturday"
 msgstr "šeštadienis"
 
-msgid "Select action for remote timer '%s':"
-msgstr "Pasirinkite veiksmą nuotoliniam laikmačiui '%s':"
-
-msgid "Select action for timer '%s':"
-msgstr "Pasirinkite veiksmą laikmačiui %s:"
-
-msgid "Select action:"
-msgstr "Pasirinkite veiksmą:"
-
-msgid "Select operation for partnerbox"
-msgstr "Pasirinkite Partnerbox veiksmą"
-
+#: ../src/PartnerboxSetup.py:251
 msgid "Servicelists/EPG"
 msgstr "Kanalų sąrašai / EPG duomenys"
 
+#: ../src/PartnerboxSetup.py:75
 msgid "Show 'RemoteTV Player' in E-Menu"
-msgstr "'Nuotolinis TV grotuvas' į plėtinių meniu"
+msgstr "'Nuotolinis TV grotuvas' plėtinių meniu"
 
+#: ../src/PartnerboxSetup.py:74
 msgid "Show 'RemoteTimer' in E-Menu"
-msgstr "'Nuotolinis laikmatis' į plėtinių meniu"
+msgstr "'Nuotolinis laikmatis' plėtinių meniu"
 
-msgid "Show 'RemoteTimer' in Event View context menu"
-msgstr "'Nuotolinis laikmatis' į įvykių peržiūros kontekstiniame meniu"
-
-msgid "Show 'RemoteTimer' in Eventinfo menu"
-msgstr "'Nuotolinis laikmatis' į įvykių informacijos meniu"
-
+#: ../src/PartnerboxSetup.py:76
 msgid "Show 'Stream current Service' in E-Menu"
-msgstr "'Transliuoti šį kanalą' į plėtinių meniu"
+msgstr "'Transliuoti šį kanalą' plėtinių meniu"
 
-msgid "Show all icon for event in EPGList"
-msgstr "EPG sąraše rodyti įvykio piktogramą"
-
-msgid "Show duration time for event"
-msgstr "Rodyti įvykio trukmę"
-
-msgid "Shutdown"
-msgstr "Išjungti"
-
-msgid "Standard Zap"
-msgstr "Paprastas perjungimas"
-
-msgid "Standby"
-msgstr "Budintis režimas"
-
+#: ../src/RemoteTimerEntry.py:159 ../src/RemoteTimerEntry.py:446
 msgid "StartTime"
 msgstr "Pradžios laikas"
 
-msgid "Starting Remote Player (IP = %s)"
-msgstr "Nuotolinis TV grotuvas paleidžiamas (IP = %s)"
-
+#: ../src/plugin.py:138
 msgid "Stream TV from your Partnerbox"
 msgstr "TV transliacija iš Partnerbox"
 
-msgid "Stream current Service from Partnerbox"
-msgstr "Transliuoti šį kanalą iš Partnerbox"
-
+#: ../src/plugin.py:140
 msgid "Stream current service from partnerbox"
 msgstr "Transliuoti šį kanalą iš Partnerbox"
 
+#: ../src/plugin.py:1222 ../src/plugin.py:1279 ../src/plugin.py:1395
 msgid "Sun"
 msgstr "Sek"
 
+#: ../src/RemoteTimerEntry.py:143 ../src/RemoteTimerEntry.py:422
 msgid "Sunday"
 msgstr "sekmadienis"
 
-msgid "The pin code you entered is wrong."
-msgstr "Įvedėte neteisingą PIN kodą."
-
-msgid "The timer '%s' has been %s successfully"
-msgstr "Laikmatis '%s' sėkmingai %s"
-
-msgid "The timer '%s' has been deleted successfully"
-msgstr "Laikmatis '%s' pašalintas sėkmingai"
-
+#: ../src/plugin.py:1222 ../src/plugin.py:1279 ../src/plugin.py:1395
 msgid "Thu"
 msgstr "Ket"
 
+#: ../src/RemoteTimerEntry.py:143 ../src/RemoteTimerEntry.py:422
 msgid "Thursday"
 msgstr "ketvirtadienis"
 
-msgid "Timer '%s' added"
-msgstr "Laikmatis '%s' pridėtas"
-
-msgid "Timer '%s' not saved while Conflict"
-msgstr "Laikmatis '%s' neįtrauktas dėl konflikto"
-
+#: ../src/RemoteTimerEntry.py:155 ../src/RemoteTimerEntry.py:442
 msgid "Timer Type"
 msgstr "Laikmačio tipas"
 
-msgid "Timer can not be added...no locations on partnerbox available."
-msgstr "Laikmatis negali būti pridėtas... Partnerbox nėra laisvos vietos."
-
-msgid "Timer event deleted successfully."
-msgstr "Laikmačio įrašas pašalintas sėkmingai."
-
-msgid "Timer event was created successfully."
-msgstr "Laikmačio įrašas sukurtas sėkmingai."
-
-msgid "Timer menu"
-msgstr "Laikmačio meniu"
-
-msgid "Toggle Standby"
-msgstr "Įjungti/išjungti budėjimo režimą"
-
-msgid "Toggle status (on/off)"
-msgstr "Perjungimo būsena (įjungta/išjungta)"
-
+#: ../src/plugin.py:1222 ../src/plugin.py:1279 ../src/plugin.py:1395
 msgid "Tue"
 msgstr "Ant"
 
+#: ../src/RemoteTimerEntry.py:143 ../src/RemoteTimerEntry.py:422
 msgid "Tuesday"
 msgstr "antradienis"
 
-msgid "Wakeup"
-msgstr "Pažadinti"
-
+#: ../src/plugin.py:1222 ../src/plugin.py:1279 ../src/plugin.py:1395
 msgid "Wed"
 msgstr "Tre"
 
+#: ../src/RemoteTimerEntry.py:143 ../src/RemoteTimerEntry.py:422
 msgid "Wednesday"
 msgstr "trečiadienis"
 
-msgid "Yes (safe mode)"
-msgstr "Taip (saugus režimas)"
+#: ../src/plugin.py:111
+msgid "You have to restart Enigma2 to activate your new preferences!"
+msgstr "Kad aktyvuoti pakeitius, enigma2 reikia paleisti iš naujo."
+
+#: ../src/plugin.py:504
+msgid "Zap"
+msgstr "Perjungti"
+
+#: ../src/plugin.py:1246
+msgid "about to start"
+msgstr "pradedama"
+
+#: ../src/RemoteTimerEntry.py:129 ../src/RemoteTimerEntry.py:407
+msgid "auto"
+msgstr "automatiškai"
+
+#: ../src/plugin.py:1258
+msgid "disabled"
+msgstr "išjungta"
+
+#: ../src/RemoteTimerEntry.py:129 ../src/RemoteTimerEntry.py:133
+#: ../src/RemoteTimerEntry.py:407 ../src/RemoteTimerEntry.py:412
+msgid "do nothing"
+msgstr "nieko nedaryti"
+
+#: ../src/plugin.py:1253 ../src/plugin.py:1308
+msgid "done!"
+msgstr "atlikta!"
+
+#: ../src/RemoteTimerEntry.py:129 ../src/RemoteTimerEntry.py:133
+#: ../src/RemoteTimerEntry.py:407 ../src/RemoteTimerEntry.py:412
+msgid "go to deep standby"
+msgstr "į gilų budėjimą"
+
+#: ../src/RemoteTimerEntry.py:129 ../src/RemoteTimerEntry.py:133
+#: ../src/RemoteTimerEntry.py:407 ../src/RemoteTimerEntry.py:412
+msgid "go to standby"
+msgstr "į budėjimo režimą"
+
+#: ../src/plugin.py:807 ../src/plugin.py:879 ../src/plugin.py:1236
+#: ../src/plugin.py:1241 ../src/plugin.py:1293 ../src/plugin.py:1296
+#: ../src/plugin.py:1298 ../src/plugin.py:1382 ../src/plugin.py:1579
+msgid "mins"
+msgstr "min."
+
+#: ../src/RemoteTimerEntry.py:128 ../src/RemoteTimerEntry.py:406
+msgid "record"
+msgstr "įrašyti"
+
+#: ../src/plugin.py:1251 ../src/plugin.py:1306
+msgid "recording..."
+msgstr "įrašoma..."
+
+#: ../src/plugin.py:133
+msgid "setup for partnerbox"
+msgstr "Partnerbox sąranka"
+
+#: ../src/plugin.py:1564
+msgid "unknown service"
+msgstr "nežinomas kanalas"
+
+#: ../src/PartnerboxSetup.py:42
+msgid "use external"
+msgstr "naudoti išorinį"
+
+#: ../src/PartnerboxSetup.py:42
+msgid "use internal"
+msgstr "naudoti vidinį"
+
+#: ../src/plugin.py:1244 ../src/plugin.py:1301
+msgid "waiting"
+msgstr "laukiama"
+
+#: ../src/RemoteTimerEntry.py:128 ../src/RemoteTimerEntry.py:132
+#: ../src/RemoteTimerEntry.py:406 ../src/RemoteTimerEntry.py:411
+msgid "zap"
+msgstr "perjungti"
+
+#: ../src/plugin.py:1249 ../src/plugin.py:1304
+msgid "zapped"
+msgstr "perjungta"
+
+msgid "add Partnerbox service"
+msgstr "pridėti Partnerbox kanalą"
+
+msgid "add Partnerbox bouquet"
+msgstr "pridėti Partnerbox bukietą"
 
 msgid ""
 "You can not add services or bouquets from Enigma1-receivers into the "
@@ -474,83 +408,6 @@ msgid ""
 msgstr ""
 "Jūs negalite įkelti į kanalų sąrašą kanalų, ar bukietų iš Enigma1 imtuvų..."
 
-msgid "You have to restart Enigma2 to activate your new preferences!"
-msgstr "Kad aktyvuoti pakeitius, enigma2 reikia paleisti iš naujo."
-
-msgid "Zap"
-msgstr "Perjungti"
-
-msgid "Zap focus to Picture in Picture"
-msgstr "Pakeisti tarpusavy vaizdus vaizde"
-
-msgid "Zap focus to main screen"
-msgstr "Perjungti į pagrindinį ekraną"
-
+#: ../src/PartnerboxSetup.py:257
 msgid "Zap to service when streaming"
 msgstr "Perjungti į transliuojamą kanalą"
-
-msgid "Zap/"
-msgstr "Perjungti/"
-
-msgid "Zapping to "
-msgstr "Perjungiama į"
-
-msgid "about to start"
-msgstr "pradedama"
-
-msgid "add Partnerbox bouquet"
-msgstr "pridėti Partnerbox bukietą"
-
-msgid "add Partnerbox service"
-msgstr "pridėti Partnerbox kanalą"
-
-msgid "auto"
-msgstr "automatiškai"
-
-msgid "disabled"
-msgstr "išjungta"
-
-msgid "do nothing"
-msgstr "nieko nedaryti"
-
-msgid "done!"
-msgstr "atlikta!"
-
-msgid "go to deep standby"
-msgstr "išjungti"
-
-msgid "go to standby"
-msgstr "į budėjimo režimą"
-
-msgid "mins"
-msgstr "min."
-
-msgid "record"
-msgstr "įrašyti"
-
-msgid "recording..."
-msgstr "įrašoma..."
-
-msgid "setup for partnerbox"
-msgstr "Partnerbox sąranka"
-
-msgid "unknown service"
-msgstr "nežinomas kanalas"
-
-msgid "use external"
-msgstr "naudoti išorinį"
-
-msgid "use internal"
-msgstr "naudoti vidinį"
-
-msgid "waiting"
-msgstr "laukiama"
-
-msgid "zap"
-msgstr "perjungti"
-
-msgid "zapped"
-msgstr "perjungta"
-
-msgid "Choose bouquet"
-msgstr "Pasirinkite bukietą"
