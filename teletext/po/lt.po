@@ -1,0 +1,262 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - teletext\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"PO-Revision-Date: 2017-07-11 11:13+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P.\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .../enigma2-plugins/teletext\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.0.2\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/teletext\n"
+
+msgid "<empty>"
+msgstr "< tuščia >"
+
+msgid "Add"
+msgstr "Pridėti"
+
+msgid "Arabic"
+msgstr "Arabų"
+
+msgid "Background caching"
+msgstr "Į podėlį kelti fone"
+
+msgid "Brightness"
+msgstr "Šviesumas"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Central and Southeast Europe"
+msgstr "Vidurio ir Pietryčių Europa"
+
+msgid "Clear all"
+msgstr "Išvalyti viską"
+
+msgid "Contrast"
+msgstr "Kontrastas"
+
+msgid "Cyrillic"
+msgstr "Kirilica"
+
+msgid "Debug"
+msgstr "Derinti"
+
+msgid "Default"
+msgstr "Numatyta"
+
+msgid "Delete"
+msgstr "Ištrinti"
+
+msgid "Delete all favorites?"
+msgstr "Trinti visus mėgstamiausius?"
+
+msgid "Delete favorite?"
+msgstr "Trinti šį mėgstamiausią?"
+
+msgid "Disabled"
+msgstr "Išjungtas"
+
+msgid "Discard changes?"
+msgstr "Atšaukti pakeitimus?"
+
+msgid "Display edges"
+msgstr "Ekrano kraštai"
+
+msgid "Display first and last row."
+msgstr "Rodyti pirmą ir paskutinę eilutes."
+
+msgid "Eastern Europe"
+msgstr "Rytų Europa"
+
+msgid "Edit"
+msgstr "Redaguoti"
+
+#, python-format
+msgid "Enter text for page %s"
+msgstr "Įrašykite tekstą puslapiui %s"
+
+msgid ""
+"Enter values (left, top, right, bottom) or press TEXT to move and resize the "
+"teletext graphically."
+msgstr ""
+"Įrašykite reikšmes (kairė, viršus, dešinė, apačia) arba spauskite 'TEXT', "
+"kad perkelti ir keisti teletekstą grafiškai."
+
+msgid "Hebrew / Arabic"
+msgstr "Hebrajų / Arabų"
+
+msgid ""
+"If caching is disabled, each teletext page will searched when you entered "
+"its number."
+msgstr ""
+"Jei kėlimas į podėlį išjungtas, bus ieškoma kiekviename teleteksto, kurio "
+"numerį nurodysite, puslapyje."
+
+msgid "No teletext available."
+msgstr "Nėra prieinamo teleteksto."
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "Position and size"
+msgstr "Padėtis ir dydis"
+
+msgid "Print debug messages to /tmp/dbttcp.log."
+msgstr "Spausdinti derinimo pranešimus į /tmp/dbttcp.log."
+
+msgid "Region"
+msgstr "Regionas"
+
+msgid "Scale filter"
+msgstr "Mastelio keitimo filtras"
+
+msgid "Scale filter zoom"
+msgstr "Filtras didinant"
+
+msgid "Select"
+msgstr "Pasirinkti"
+
+msgid "Select brightness."
+msgstr "Pasirinkite ryškumą."
+
+msgid "Select contrast."
+msgstr "Pasirinkite kontrastą."
+
+msgid "Select splitting mode."
+msgstr "Pasirinkite perskirto ekrano režimą palyginimui."
+
+msgid "Select teletext"
+msgstr "Pasirinkite teletekstą"
+
+msgid "Select teletext version to use."
+msgstr "Pasirinkite teleteksto versiją."
+
+msgid "Select transparency."
+msgstr "Pasirinkite skaidrumą."
+
+msgid "Select your favourite scale filter."
+msgstr "Pasirinkite mėgstamiausią mastelio keitimo filtrą."
+
+msgid "Select your region to use the proper font."
+msgstr "Pasirinkite regioną, kad matytumėte teisingą šriftą."
+
+msgid "Splitting mode"
+msgstr "Perskirto ekrano režimas"
+
+msgid "TeleText favorites"
+msgstr "Mėgstamiausi teletekstai"
+
+msgid "TeleText settings"
+msgstr "Teleteksto nustatymai"
+
+msgid "Text level"
+msgstr "Teksto lygis"
+
+msgid "Transparency"
+msgstr "Skaidrumas"
+
+msgid "Turkish / Greek"
+msgstr "Turkų / Graikų"
+
+msgid "Western Europe and Turkey"
+msgstr "Vakarų Europa ir Turkija"
+
+msgid "Western and Central Europe"
+msgstr "Vakarų ir Vidurio Europa"
+
+msgid "anisotropic"
+msgstr "anizotropinio"
+
+msgid "bilinear"
+msgstr "dviejų linijų"
+
+msgid "blue teletext link"
+msgstr "mėlyna teleteksto nuoroda"
+
+msgid "enter page number"
+msgstr "Įrašykite puslapio numerį"
+
+msgid "enter page number / page 100"
+msgstr "Įrašykite puslapio numerį / puslapio 100"
+
+msgid "enter page number / rezap"
+msgstr "Įrašykite puslapio numerį / perjungti"
+
+msgid "exit"
+msgstr "užverti"
+
+msgid "favorites / decrease height"
+msgstr "mėgstamiausi / sumažinti aukštį"
+
+msgid "green teletext link"
+msgstr "žalia teleteksto nuoroda"
+
+msgid "next channel / channel list"
+msgstr "sekantis kanalas / kanalų sąrašas"
+
+msgid "next page / catch page / move"
+msgstr "sekantis puslapis / fiksuoti puslapį / perkelti"
+
+msgid "next sub page / move"
+msgstr "sekantis subpuslapis / perkelti"
+
+msgid "picture and teletext"
+msgstr "vaizdas ir teletekstas"
+
+msgid "prev channel / channel list"
+msgstr "kanalo peržiūra / kanalų sąrašas"
+
+msgid "prev page / catch page / move"
+msgstr "ankstesnis puslapis / fiksuoti puslapį / perkelti"
+
+msgid "prev sub page / move"
+msgstr "ankstesnis subpuslapis / perkelti"
+
+msgid "red teletext link"
+msgstr "raudona teleteksto nuoroda"
+
+msgid "sharp"
+msgstr "ryškus"
+
+msgid "sharper"
+msgstr "ryškesnis"
+
+msgid "split screen"
+msgstr "perskirtas ekranas"
+
+msgid "start page catching / select page"
+msgstr "kelti puslapį į podėlį / pasirinkti puslapį"
+
+msgid "teletext and picture"
+msgstr "teletekstas ir vaizdas"
+
+msgid "teletext in picture"
+msgstr "teletekstas vaizde"
+
+msgid "teletext settings"
+msgstr "Teleteksto nustatymai"
+
+msgid "toggle flof/top"
+msgstr "perjungti apačią / viršų"
+
+msgid "toggle info"
+msgstr "perjungti informaciją"
+
+msgid "toggle transparency"
+msgstr "Perjungti skaidrumą"
+
+msgid "yellow teletext link"
+msgstr "geltona teleteksto nuoroda"
+
+msgid "zoom / increase height"
+msgstr "priartinti / padidinti aukštį"
