@@ -1,0 +1,213 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SimpleRSS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-11 09:09+0300\n"
+"PO-Revision-Date: 2017-07-11 09:10+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../src/plugin.py:102
+#, python-format
+msgid "%d Feed(s) were added to configuration."
+msgstr "Į konfigūraciją įtraukti %d šaltiniai."
+
+#: ../src/plugin.py:134
+msgid "A simple to use RSS reader"
+msgstr "Naudotis RSS skaitytuvu paprasta"
+
+#: ../src/RSSSetup.py:22
+msgid "Autoupdate"
+msgstr "Automatinis atnaujinimas"
+
+#: ../src/RSSSetup.py:28 ../src/RSSSetup.py:78
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#: ../src/RSSScreens.py:460 ../src/RSSScreens.py:465
+msgid "Close"
+msgstr "Uždaryti"
+
+#: ../src/RSSSetup.py:81
+msgid "Delete"
+msgstr "Pašalinti"
+
+#: ../src/RSSScreens.py:126 ../src/RSSScreens.py:213
+msgid "Enclosures"
+msgstr "Priedų"
+
+#: ../src/RSSScreens.py:414 ../src/RSSScreens.py:442
+msgid "Entries"
+msgstr "Įrašai"
+
+#: ../src/RSSScreens.py:121 ../src/RSSScreens.py:208 ../src/RSSScreens.py:316
+#, python-format
+msgid "Entry %s/%s"
+msgstr "Įrašas %s/%s"
+
+#: ../src/RSSScreens.py:57
+msgid ""
+"Error while parsing Feed, this usually means there is something wrong with "
+"it."
+msgstr ""
+"Klaida, nuskaitant šaltinius. Dažniausiai tai reiškia, kad ten kažkas "
+"negerai."
+
+#: ../src/RSSPoller.py:84
+msgid "Failed to get subscriptions from Google Reader."
+msgstr "Nepavyko gauti Google Reader prenumeratos."
+
+#: ../src/RSSPoller.py:65
+msgid "Failed to login to Google Reader."
+msgstr "Prie Google Reader prisijungti nepavyko."
+
+#: ../src/RSSSetup.py:103
+msgid "Feed"
+msgstr "Šaltinis"
+
+#: ../src/RSSScreens.py:415 ../src/RSSScreens.py:443
+#, python-format
+msgid "Feed %s/%s"
+msgstr "Šaltinis %s/%s"
+
+#: ../src/RSSSetup.py:23
+msgid "Feed URI"
+msgstr "Šaltinių internetinis adresas"
+
+#: ../src/RSSScreens.py:319 ../src/RSSScreens.py:321
+msgid "Feed is empty."
+msgstr "Šaltiniai tušti."
+
+#: ../src/RSSSetup.py:118
+msgid "Fetch feeds from Google Reader?"
+msgstr "Parsiųsti šaltinius iš Google Reader?"
+
+#: ../src/RSSScreens.py:98
+msgid "Found no Enclosure we can display."
+msgstr "Galimų parodyti priedų nerasta."
+
+#: ../src/RSSSetup.py:124
+msgid "Google Password"
+msgstr "Google slaptažodis"
+
+#: ../src/RSSSetup.py:123
+msgid "Google Username"
+msgstr "Google vartotojas"
+
+#: ../src/RSSSetup.py:110
+msgid "Keep running in background"
+msgstr "Leisti ir fone"
+
+#: ../src/RSSSetup.py:80
+msgid "New"
+msgstr "Naujas"
+
+#: ../src/RSSPoller.py:37
+msgid "New Items"
+msgstr "Nauji elementai"
+
+#: ../src/RSSPoller.py:38
+msgid "New Items since last Auto-Update"
+msgstr "Nauji elementai nuo paskutinio autoatnaujinimo"
+
+#: ../src/RSSScreens.py:152 ../src/RSSScreens.py:215
+msgid "No such Item."
+msgstr "Tokio elemento nėra"
+
+#: ../src/plugin.py:15
+msgid "Notification"
+msgstr "Pranešimas"
+
+#: ../src/RSSSetup.py:29 ../src/RSSSetup.py:79
+msgid "OK"
+msgstr "Gerai"
+
+#: ../src/plugin.py:16
+msgid "Preview"
+msgstr "Peržiūra"
+
+#: ../src/RSSSetup.py:139
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Tikrai pašalinti šį įrašą?\n"
+"Tai neatstatoma!"
+
+#: ../src/RSSPoller.py:193
+#, python-format
+msgid "Received %d new news item(s)."
+msgstr "Parsiųsta %d naujienų įrašų."
+
+#: ../src/RSSScreens.py:459 ../src/RSSScreens.py:464
+msgid "Setup"
+msgstr "Sąranka"
+
+#: ../src/RSSSetup.py:116
+msgid "Show new Messages as"
+msgstr "Naujus pranešimus rodyti, kaip"
+
+#: ../src/RSSScreens.py:423
+msgid "Simple RSS Reader"
+msgstr "Paprastas RSS skaitytuvas"
+
+#: ../src/RSSSetup.py:42 ../src/RSSSetup.py:96
+msgid "Simple RSS Reader Setup"
+msgstr "RSS skaitytuvo sąranka"
+
+#: ../src/RSSScreens.py:146 ../src/RSSScreens.py:308
+#, python-format
+msgid "Simple RSS Reader: %s"
+msgstr "Paprastas RSS skaitytuvas: %s"
+
+#: ../src/RSSPoller.py:124
+#, python-format
+msgid ""
+"Sorry, this type of feed is unsupported:\n"
+"%s"
+msgstr ""
+"Atleiskite, šis šaltinių tipas netinka:\n"
+"%s"
+
+#: ../src/RSSSetup.py:107
+msgid "Start automatically with Enigma2"
+msgstr "Paleisti su Enigma2 automatiškai"
+
+#: ../src/plugin.py:124
+msgid "Subscribe Newsfeed..."
+msgstr "Prenumeruoti naujienas..."
+
+#: ../src/RSSScreens.py:458
+msgid "Update Feed"
+msgstr "Atnaujinti šaltinius"
+
+#: ../src/RSSSetup.py:117
+msgid "Update Interval (min)"
+msgstr "Atnaujinimo intervalas (min.)"
+
+#: ../src/RSSScreens.py:83
+msgid ""
+"Update is being done in Background.\n"
+"Contents will automatically be updated when it's done."
+msgstr ""
+"Fone vyksta atnaujinimas.\n"
+"Po to turinys atsinaujins automatiškai."
+
+#: ../src/plugin.py:145
+msgid "View RSS..."
+msgstr "Peržiūrėti RSS..."
+
+#: ../src/RSSScreens.py:471
+msgid "What to do?"
+msgstr "Ką daryti?"
+
+#: ../src/plugin.py:17
+msgid "none"
+msgstr "jokio"
