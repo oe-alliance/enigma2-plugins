@@ -558,7 +558,7 @@ msgstr "Jei čia įjungta, užklausa bus praleista, jei vyksta įrašymas."
 #: ../src/AutoTimerSettings.py:71 ../src/AutoTimerSettings.py:54
 msgid ""
 "If this is enabled an existing timer will also be considered recording an "
-"event if it records at least 80% of the it."
+"event if it records at least 80%s of the it."
 msgstr ""
 "Pažymėjus čia, esamas laikmatis taip pat bus skaitomas įrašančiu įvykį, jei "
 "jis įrašo bent 80 procentų įvykio."
@@ -1875,3 +1875,6 @@ msgstr "perjungti"
 #: ../src/AutoTimerEditor.py:189
 msgid "zap and record"
 msgstr "perjungti ir įrašyti"
+
+msgid " - Version: "
+msgstr " - versija: "
