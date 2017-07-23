@@ -1066,7 +1066,7 @@ msgstr "Auf  NEIN setzen, um den AutoTimer zu deaktivieren."
 msgid ""
 "Set timer type: zap, simple record, zap+record (always zap to service before "
 "start record)."
-msgstr "Setzte Timer Typ : Umschalten, Aufnahme oder Umschalten + Aufnahme."
+msgstr "Setze Timer Typ : Umschalten, Aufnahme oder Umschalten + Aufnahme."
 
 #: ../src/AutoTimerOverview.py:221 ../src/AutoTimerOverview.py:257
 msgid "Setup"
