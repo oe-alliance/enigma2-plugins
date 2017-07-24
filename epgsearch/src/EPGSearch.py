@@ -138,7 +138,7 @@ class EPGSearchList(EPGList):
 			if hasattr(config.usage, "time"):
 				datetime = "%s, %s" % (strftime(config.usage.date.short.value, t), strftime(config.usage.time.short.value, t))
 			else:
-				datetime = strftime("%e/%m, %H:%M", t)
+				datetime = strftime(_("%e/%m, %H:%M"), t)
 			res = [
 				None,  # no private data needed
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, strftime("%a", t)),

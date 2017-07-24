@@ -250,6 +250,9 @@ msgstr "%sSuche in EPG"
 msgid "Searching..."
 msgstr "Suche..."
 
+msgid "%e/%m, %H:%M"
+msgstr "%02e.%02m, %02H:%02M"
+
 #~ msgid "Add \"Search\" Button to EPG"
 #~ msgstr "\"Suchen\" im Standard EPG hinzufügen"
 
