@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-05 15:40+0200\n"
+"POT-Creation-Date: 2017-07-04 10:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,13 +67,16 @@ msgstr ""
 msgid "Call"
 msgstr ""
 
+msgid "Call diversion"
+msgstr ""
+
+msgid "Call diversion active"
+msgstr ""
+
 msgid "Call monitoring"
 msgstr ""
 
 msgid "Call redirection"
-msgstr ""
-
-msgid "Call redirection active"
 msgstr ""
 
 #, python-format
@@ -118,6 +121,13 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr ""
 
+msgid "Could not load phonebook: "
+msgstr ""
+
+#, python-format
+msgid "Could not load phonebook: %s"
+msgstr ""
+
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr ""
 
@@ -127,7 +137,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgid "Countrycode (e.g. 0044 for UK, 0034 for Spain, etc.)"
 msgstr ""
 
 msgid "DECT inactive"
@@ -188,6 +198,7 @@ msgid "Edit"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr ""
 
@@ -206,12 +217,11 @@ msgstr ""
 msgid "Extension number to initiate call on"
 msgstr ""
 
-#, python-format
-msgid "FRITZ!Box - Could not load calls: %s"
+msgid "FRITZ!Box - "
 msgstr ""
 
 #, python-format
-msgid "FRITZ!Box - Could not load phonebook: %s"
+msgid "FRITZ!Box - Could not load calls: %s"
 msgstr ""
 
 #, python-format
@@ -220,6 +230,9 @@ msgstr ""
 
 #, python-format
 msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr ""
+
+msgid "FRITZ!Box - Error getting status: "
 msgstr ""
 
 #, python-format
@@ -363,7 +376,7 @@ msgstr ""
 msgid "Mailbox"
 msgstr ""
 
-msgid "Minutes of uptime of WLAN guest network"
+msgid "Make it more skin friendly"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -373,13 +386,13 @@ msgstr ""
 msgid "Missed calls"
 msgstr ""
 
-msgid "Mute on call"
+msgid "Mute on incoming call"
+msgstr ""
+
+msgid "Mute on outgoing calls"
 msgstr ""
 
 msgid "Name"
-msgstr ""
-
-msgid "Name of WLAN guest network"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -392,7 +405,7 @@ msgstr ""
 msgid "No DECT phone registered"
 msgstr ""
 
-msgid "No call redirection active"
+msgid "No call diversion active"
 msgstr ""
 
 msgid "No entry selected"
@@ -426,7 +439,7 @@ msgstr ""
 msgid "One DECT phone registered"
 msgstr ""
 
-msgid "One call redirection active"
+msgid "One call diversion active"
 msgstr ""
 
 msgid "One mailbox active"
@@ -453,9 +466,6 @@ msgid "Outgoing calls"
 msgstr ""
 
 msgid "Password Accessing FRITZ!Box"
-msgstr ""
-
-msgid "Password of WLAN guest network"
 msgstr ""
 
 #. TRANSLATORS: this is a window title.
@@ -524,9 +534,6 @@ msgstr ""
 msgid "Searching in Outlook export..."
 msgstr ""
 
-msgid "Secure WLAN guest network"
-msgstr ""
-
 msgid "Setting..."
 msgstr ""
 
@@ -540,6 +547,9 @@ msgid "Show Outgoing Calls"
 msgstr ""
 
 msgid "Show after Standby"
+msgstr ""
+
+msgid "Show also internal numbers"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
@@ -622,6 +632,12 @@ msgstr ""
 msgid "UNKNOWN"
 msgstr ""
 
+msgid "Unknown"
+msgstr ""
+
+msgid "Update available"
+msgstr ""
+
 msgid "Use internal PhoneBook"
 msgstr ""
 
@@ -629,6 +645,9 @@ msgid "User name Accessing FRITZ!Box"
 msgstr ""
 
 msgid "Vanity"
+msgstr ""
+
+msgid "WLAN not active"
 msgstr ""
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
@@ -644,7 +663,10 @@ msgstr ""
 msgid "before 05.27"
 msgstr ""
 
-msgid "call redirections active"
+msgid "call diversions active"
+msgstr ""
+
+msgid "calls in mailbox"
 msgstr ""
 
 msgid "devices active"
@@ -665,6 +687,12 @@ msgid "done, using last list"
 msgstr ""
 
 msgid "encrypted"
+msgstr ""
+
+msgid "fax_home"
+msgstr ""
+
+msgid "fax_work"
 msgstr ""
 
 msgid "finishing"
@@ -715,7 +743,16 @@ msgstr ""
 msgid "number suppressed"
 msgstr ""
 
+msgid "off"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
 msgid "one device active"
+msgstr ""
+
+msgid "pager"
 msgstr ""
 
 msgid "preparing"
@@ -736,6 +773,9 @@ msgid "show each call"
 msgstr ""
 
 msgid "show nothing"
+msgstr ""
+
+msgid "with"
 msgstr ""
 
 msgid "work"

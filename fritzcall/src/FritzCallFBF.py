@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1386 $
-$Date: 2017-01-19 18:16:38 +0100 (Thu, 19 Jan 2017) $
-$Id: FritzCallFBF.py 1386 2017-01-19 17:16:38Z michael $
+$Revision: 1479 $
+$Date: 2017-07-02 15:51:13 +0200 (Sun, 02 Jul 2017) $
+$Id: FritzCallFBF.py 1479 2017-07-02 13:51:13Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -18,23 +18,25 @@ $Id: FritzCallFBF.py 1386 2017-01-19 17:16:38Z michael $
 # W0110 deprecated-lambda
 # C0302 too-many-lines
 # C0410 multiple-imports
-# pylint: disable=C0111,C0103,C0301,W0603,W0403,C0302
+# E0611 No name %r in module %r
+# pylint: disable=C0111,C0103,C0301,W0603,W0403,C0302,W0611,F0401,E0611
 
+import re, time, hashlib, logging, StringIO, csv, json
 from urllib import urlencode
-import re, time, hashlib, logging, StringIO, csv
-import json
 import xml.etree.ElementTree as ET
 
 
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
-from twisted.web.client import getPage  # @UnresolvedImport
+from twisted.web.client import getPage
+from enigma import eTimer #@UnresolvedImport
 
-from plugin import config, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS, decode
+from . import _, __ #@UnresolvedImport
+from plugin import config, stripCbCPrefix, resolveNumberWithAvon, FBF_IN_CALLS, FBF_OUT_CALLS, FBF_MISSED_CALLS, FBF_BLOCKED_CALLS, \
+	decode
 from nrzuname import html2unicode
-from . import _, __  # @UnresolvedImport # pylint: disable=W0611,F0401
-# debug = logging.getLogger(__name__ + "XXX").debug
-# debug = logging.getLogger(__name__).debug
+from FritzConnection import FritzConnection
+from twisted.python.failure import Failure
 
 FBF_boxInfo = 0
 FBF_upTime = 1
@@ -54,7 +56,7 @@ def resolveNumber(number, default=None, phonebook=None):
 		if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0] == "0":
 			number = number[1:]
 		# strip CbC prefix
-		number = stripCbCPrefix(number, config.plugins.FritzCall.country.value)
+		number = stripCbCPrefix(number, config.plugins.FritzCall.countrycode.value)
 		if config.plugins.FritzCall.prefix.value and number and number[0] != '0':  # should only happen for outgoing
 			number = config.plugins.FritzCall.prefix.value + number
 		name = None
@@ -73,7 +75,7 @@ def resolveNumber(number, default=None, phonebook=None):
 		elif default:
 			number = default
 		else:
-			name = resolveNumberWithAvon(number, config.plugins.FritzCall.country.value)
+			name = resolveNumberWithAvon(number, config.plugins.FritzCall.countrycode.value)
 			if name:
 				number = number + ' ' + name
 	elif number == "":
@@ -93,8 +95,8 @@ def cleanNumber(number):
 		number = '00' + number[1:]
 	elif number[0] != '0':
 		number = config.plugins.FritzCall.prefix.value + number
-	if config.plugins.FritzCall.country.value and number.startswith(config.plugins.FritzCall.country.value):
-		number = '0' + number[len(config.plugins.FritzCall.country.value):]
+	if config.plugins.FritzCall.countrycode.value and number.startswith(config.plugins.FritzCall.countrycode.value):
+		number = '0' + number[len(config.plugins.FritzCall.countrycode.value):]
 	return number
 
 class FritzCallFBF(object):
@@ -549,7 +551,7 @@ class FritzCallFBF(object):
 					continue
 			here = resolveNumber(here, line[4], self.phonebook)
 
-			number = stripCbCPrefix(line[3], config.plugins.FritzCall.country.value)
+			number = stripCbCPrefix(line[3], config.plugins.FritzCall.countrycode.value)
 			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':  # should only happen for outgoing
 				number = config.plugins.FritzCall.prefix.value + number
 			callListL.append((number, date, direct, remote, length, here))
@@ -1467,7 +1469,7 @@ class FritzCallFBF_05_27(object):
 			here = resolveNumber(here, found.group(6), self.phonebook)
 			# self.debug("[FritzCallFBF_05_27] _gotPageCallsNew: here: " + here)
 
-			number = stripCbCPrefix(found.group(3), config.plugins.FritzCall.country.value)
+			number = stripCbCPrefix(found.group(3), config.plugins.FritzCall.countrycode.value)
 			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':  # should only happen for outgoing
 				number = config.plugins.FritzCall.prefix.value + number
 			# self.debug("[FritzCallFBF_05_27] _gotPageCallsNew: number: " + number)
@@ -1582,7 +1584,7 @@ class FritzCallFBF_05_27(object):
 		self.debug("[FritzCallFBF_05_27] changeMailbox start: " + str(whichMailbox))
 		Notifications.AddNotification(MessageBox, _("not available with this firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
 
-	def _changeMailbox(self, whichMailbox, html):  # pylint: disable=W0613
+	def _changeMailbox(self, whichMailbox, html):  # @UnusedVariable  pylint: disable=W0613
 		return
 
 	def _okChangeMailbox(self, html):  # @UnusedVariable # pylint: disable=W0613
@@ -1705,16 +1707,16 @@ class FritzCallFBF_05_27(object):
 		if callback:
 			callback(info)
 
-	def _okSetDect(self, callback, html):  # pylint: disable=W0613
+	def _okSetDect(self, callback, html):  # @UnusedVariable  pylint: disable=W0613
 		return
 
-	def _okSetConInfo(self, callback, html):  # pylint: disable=W0613
+	def _okSetConInfo(self, callback, html):  # @UnusedVariable  pylint: disable=W0613
 		return
 
-	def _okSetWlanState(self, callback, html):  # pylint: disable=W0613
+	def _okSetWlanState(self, callback, html):  # @UnusedVariable  pylint: disable=W0613
 		return
 
-	def _okSetDslState(self, callback, html):  # pylint: disable=W0613
+	def _okSetDslState(self, callback, html):  # @UnusedVariable  pylint: disable=W0613
 		return
 
 	def _errorGetInfo(self, error):
@@ -1955,7 +1957,7 @@ class FritzCallFBF_05_50(object):
 		self.phonebook = phonebook
 		self._login(self._selectFritzBoxPhonebook)
 
-	def _selectFritzBoxPhonebook(self, md5Sid, html = None):  # pylint: disable=W0613
+	def _selectFritzBoxPhonebook(self, md5Sid, html = None):  # @UnusedVariable  pylint: disable=W0613
 		parms = urlencode({
 						'sid':md5Sid,
 						})
@@ -2141,7 +2143,7 @@ class FritzCallFBF_05_50(object):
 				here = resolveNumber(here, "", self.phonebook)
 			# self.debug("here: " + here)
 
-			number = stripCbCPrefix(call[3], config.plugins.FritzCall.country.value)
+			number = stripCbCPrefix(call[3], config.plugins.FritzCall.countrycode.value)
 			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':  # should only happen for outgoing
 				number = config.plugins.FritzCall.prefix.value + number
 			# self.debug("number: " + number)
@@ -2909,7 +2911,7 @@ class FritzCallFBF_06_35(object):
 				here = resolveNumber(here, "", self.phonebook)
 			# self.debug("here: " + here)
 
-			number = stripCbCPrefix(call[3], config.plugins.FritzCall.country.value)
+			number = stripCbCPrefix(call[3], config.plugins.FritzCall.countrycode.value)
 			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':  # should only happen for outgoing
 				number = config.plugins.FritzCall.prefix.value + number
 			# self.debug("number: " + number)
@@ -3159,12 +3161,24 @@ class FritzCallFBF_06_35(object):
 				found = re.match(r'.*verbunden seit (.*)', item, re.S)
 				if found:
 					upTime = found.group(1)
+				else:
+					found = re.match(r'.*connected since (.*)', item, re.S)
+					if found:
+						upTime = found.group(1)
 				found = re.match(r'\s*Anbieter: (.*)', item, re.S)
 				if found:
 					provider = found.group(1)
+				else:
+					found = re.match(r'\s*Provider: (.*)', item, re.S)
+					if found:
+						provider = found.group(1)
 				found = re.match(r'IP(?:v4)?-Adresse: (.*)', item, re.S)
 				if found:
 					ipAddress = found.group(1)
+				else:
+					found = re.match(r'IP(?:v4)? address: (.*)', item, re.S)
+					if found:
+						ipAddress = found.group(1)
 
 		self.info("upTime: " + repr(upTime))
 		self.info("provider: " + repr(provider))
@@ -3178,12 +3192,24 @@ class FritzCallFBF_06_35(object):
 				found = re.match(r'.*verbunden seit (.*)', item, re.S)
 				if found:
 					upTime6 = found.group(1).encode("utf-8")
+				else:
+					found = re.match(r'.*connected since (.*)', item, re.S)
+					if found:
+						upTime6 = found.group(1).encode("utf-8")
 				found = re.match(r'\s*Anbieter: (.*)', item, re.S)
 				if found:
 					provider6 = found.group(1).encode("utf-8")
+				else:
+					found = re.match(r'\s*Provider:: (.*)', item, re.S)
+					if found:
+						provider6 = found.group(1).encode("utf-8")
 				found = re.match(r'IP(?:v6)?-(?:Adresse|Prefix): (.*)', item, re.S)
 				if found:
 					ipAddress6 = found.group(1).encode("utf-8")
+				else:
+					found = re.match(r'IP(?:v6)? (?:address|prefix): (.*)', item, re.S)
+					if found:
+						ipAddress6 = found.group(1).encode("utf-8")
 
 			self.info("upTime6: " + repr(upTime6))
 			self.info("provider6: " + repr(provider6))
@@ -3209,7 +3235,7 @@ class FritzCallFBF_06_35(object):
 
 		if provider:
 			if upTime:
-				upTime = upTime + ' mit ' + provider
+				upTime = upTime + ' ' + _("with") + ' ' + provider
 
 		self.info("upTime final: " + repr(upTime))
 		self.info("provider final: " + repr(provider))
@@ -3225,7 +3251,7 @@ class FritzCallFBF_06_35(object):
 			if connData["led"] == "led_green":
 				dslState = ['5', None, None]
 				dslState[1] = connData["down"].encode("utf-8") + " / " + connData["up"].encode("utf-8")
-				dslState[1] = dslState[1].replace('\\', '').encode("utf-8")
+				dslState[1] = dslState[1].replace('\\', '').decode("utf-8").encode("utf-8")
 				dslState[2] = connData["title"].encode("utf-8")
 		self.info("dslState: " + repr(dslState))
 
@@ -3234,9 +3260,9 @@ class FritzCallFBF_06_35(object):
 			if wlan24:
 				netName = re.sub(r".*: ", "", wlan24["txt"]).encode("utf-8")
 				if wlan24["led"] == "led_green":
-					wlanState = ['1', '', '', "2,4GHz an: " + netName]
+					wlanState = ['1', '', '', "2,4GHz " + _("on") + ": " + netName]
 				else:
-					wlanState = ['0', '', '', "2,4GHz aus: " + netName]
+					wlanState = ['0', '', '', "2,4GHz " + _("off") + ": " + netName]
 		self.info("wlanState24: " + repr(wlanState))
 
 		if "wlan5" in boxData:
@@ -3245,13 +3271,13 @@ class FritzCallFBF_06_35(object):
 				netName = re.sub(r".*: ", "", wlan5["txt"]).encode("utf-8")
 				if not wlanState:
 					if wlan5["led"] == "led_green":
-						wlanState = ['1', '', '', "5GHz an: " + netName]
+						wlanState = ['1', '', '', "5GHz " + _("on") + ": " + netName]
 					else:
-						wlanState = ['0', '', '', "5GHz aus: " + netName]
+						wlanState = ['0', '', '', "5GHz " + _("off") + ": " + netName]
 				else:
 					if wlan5["led"] == "led_green":
 						wlanState[0] = '1'
-						wlanState[3] = wlanState[3] + ", 5GHz an: " + netName
+						wlanState[3] = wlanState[3] + ", 5GHz " + _("on") + ": " + netName
 		self.info("wlanState5: " + repr(wlanState))
 
 		if "dect" in boxData:
@@ -3260,6 +3286,10 @@ class FritzCallFBF_06_35(object):
 				found = re.match(r'an, ([\d+]+|ein) Schnurlostelefon(?:e)? angemeldet', dect["txt"].encode("utf-8"), re.S)
 				if found:
 					dectActive = found.group(1)
+				else:
+					found = re.match(r'enabled, ([\d+]+|one) cordless telephone(?:s)? registered', dect["txt"].encode("utf-8"), re.S)
+					if found:
+						dectActive = found.group(1)
 		self.info("dectActive: " + repr(dectActive))
 
 		self.debug("comfort")
@@ -3270,9 +3300,18 @@ class FritzCallFBF_06_35(object):
 				if "linktxt" in fun:
 					if fun["linktxt"] == "Faxfunktion" and fun["details"] == "Integriertes Fax aktiv":
 						faxActive = True
+					if fun["linktxt"] == "Fax function" and fun["details"] == "Integrated fax enabled":
+						faxActive = True
 					elif fun["linktxt"] == "Rufumleitung" and fun["details"]:
 						if fun["details"] != "deaktiviert":
 							found = re.match(r'.*(?:(\d+) )?aktiv', fun["details"].encode("utf-8"), re.S)
+							if found and found.group(1):
+								rufumlActive = int(found.group(1))
+							else:
+								rufumlActive = -1  # means no number available
+					elif fun["linktxt"] == "Call diversion" and fun["details"]:
+						if fun["details"] != "disabled":
+							found = re.match(r'.*(?:(\d+) )?active', fun["details"].encode("utf-8"), re.S)
 							if found and found.group(1):
 								rufumlActive = int(found.group(1))
 							else:
@@ -3292,6 +3331,25 @@ class FritzCallFBF_06_35(object):
 									guestAccess = guestAccess + ', ' + found.group(2) + ' Min.'  # n Minuten verbleiben
 								else:
 									guestAccess = guestAccess + ', ' + found.group(2) + ' Std.'  # n Stunden verbleiben
+							if found.group(4):
+								guestAccess = guestAccess + ', ' + found.group(4)  # Geräte
+							if found.group(5):
+								guestAccess = guestAccess + ', ' + found.group(5)  # WLAN Name
+					elif fun["linktxt"] == "Wireless guest access" and fun["details"]:
+						found = re.match(r'.*enabled \([^\)]+\)(?:, (secured|unsecured))?,(?: (\d+) (minutes|hours) left,)? (\d+ devices), (.+)', fun["details"].encode("utf-8"), re.S)
+						if found:
+							if found.group(1):
+								if found.group().find('secured') != -1:
+									guestAccess = "WIFI (sec.)"
+								else:
+									guestAccess = "WIFI (unsec.)"
+							else:
+								guestAccess = "WIFI"
+							if found.group(3):
+								if found.group(3) == 'minutes':
+									guestAccess = guestAccess + ', ' + found.group(2) + ' min.'  # n Minuten verbleiben
+								else:
+									guestAccess = guestAccess + ', ' + found.group(2) + ' hrs.'  # n Minuten verbleiben
 							if found.group(4):
 								guestAccess = guestAccess + ', ' + found.group(4)  # Geräte
 							if found.group(5):
@@ -3409,6 +3467,643 @@ class FritzCallFBF_06_35(object):
 		self.exception(error)
 		self._notify(text)
 		self._logout(md5Sid, "_errorBlacklist")
+
+TIMEOUT=20
+
+class FritzCallFBF_upnp():
+	logger = logging.getLogger("FritzCall.FBF_upnp")
+	debug = logger.debug
+	info = logger.info
+	warn = logger.warn
+	error = logger.error
+	exception = logger.exception
+
+	def __init__(self):
+		self._callScreen = None
+		self._callType = config.plugins.FritzCall.fbfCalls.value
+		self.password = decode(config.plugins.FritzCall.password.value)
+		# (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, guestAccess)
+		self.information = (None, None, None, None, None, [False, False, False, False, False, False], None, None, None, None)
+		self.phonebook = None
+		self.blacklist = ([], [])
+		self._timer = eTimer()
+		self._timeout = TIMEOUT
+		self._callback = None
+		self._phonebook_timer = eTimer()
+		self._phonebook_timeout = TIMEOUT
+		self.fc = FritzConnection(address=config.plugins.FritzCall.hostname.value,
+								user=config.plugins.FritzCall.username.value,
+								password=self.password,
+								servicesToGet=["DeviceConfig:1", "X_AVM-DE_OnTel:1", "WLANConfiguration:1", "WLANConfiguration:2", "WLANConfiguration:3"])
+		self.getInfo(None)
+
+	def _notify(self, text):
+		self.info(text)
+		if self._callScreen:
+			self.debug("try to close callScreen")
+			self._callScreen.close()
+			self._callScreen = None
+		Notifications.AddNotification(MessageBox, text, type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
+
+	def getInfo(self, callback=None):
+		'''
+		Retrieve information from box and fill in self.information and self.blacklist
+		'''
+		self.debug("")
+		self._infoCallback = callback
+		if "DeviceConfig:1" in self.fc.services.keys():
+			self.fc.call_action(self._getInfo, "DeviceConfig", "X_AVM-DE_CreateUrlSID")
+		else:
+			try:
+				self._timer_conn = self._timer.timeout.connect(self._timerTick)
+			except AttributeError:
+				self._timer.callback.append(self._timerTick)
+			self._timer.start(1000)
+			self._timerTick()
+
+	def _timerTick(self):
+		self.debug(repr(self.fc.services.keys()))
+		self._timeout -= 1
+		if "DeviceConfig:1" in self.fc.services.keys():
+			self.fc.call_action(self._getInfo, "DeviceConfig", "X_AVM-DE_CreateUrlSID")
+			self._timer.stop()
+			self._timeout = TIMEOUT
+		if self._timeout == 0:
+			self._timer.stop()
+			self._timeout = TIMEOUT
+
+	def _getInfo(self, result):
+		self.debug(repr(result))
+		if isinstance(result, Failure):
+			text = _("FRITZ!Box - Error getting status: ")  + _("wrong user or password?")
+			self._notify(text)
+			return
+
+		if "NewX_AVM-DE_UrlSID" not in result:
+			return
+
+		md5Sid = result["NewX_AVM-DE_UrlSID"]
+		md5Sid = md5Sid[md5Sid.find("sid=")+4:]
+		self.debug("md5sid: " + md5Sid)
+
+		self._readBlacklist()
+
+		url = "http://%s/data.lua" % config.plugins.FritzCall.hostname.value
+		parms = urlencode({
+			'sid':md5Sid,
+			'page':'overview',
+			'type':'all'
+			})
+		self.debug("url: " + url + "?" + parms)
+		getPage(url,
+			method = "POST",
+			agent = USERAGENT,
+			headers = {
+					'Content-Type': "application/x-www-form-urlencoded",
+					'Content-Length': str(len(parms))},
+			postdata = parms).addCallback(self._okGetInfo)
+
+	def _okGetInfo(self, html):
+		self.debug("")
+
+		if self.logger.getEffectiveLevel() == logging.DEBUG:
+			self.debug("dumping info to /tmp/FritzCall_okGetInfo.json")
+			linkP = open("/tmp/FritzCall_okGetInfo.json", "w")
+			linkP.write(html)
+			linkP.close()
+
+		(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = (None, None, None, None, None, None, None, None, None, "")  # @UnusedVariable # pylint: disable=W0613
+
+		boxData = json.loads(html)["data"]
+
+		fritzOs = boxData["fritzos"]
+		if fritzOs["Productname"]:
+			boxInfo = fritzOs["Productname"]
+			if fritzOs["nspver"]:
+				boxInfo = boxInfo + " FRITZ!OS: " + fritzOs["nspver"]
+			if fritzOs["isLabor"] and fritzOs["isLabor"] == "true":
+				boxInfo = boxInfo + " Labor"
+			if fritzOs["isUpdateAvail"]:
+				boxInfo = boxInfo + " (" + _("Update available") + ")"
+
+			boxInfo1 = ""
+			if fritzOs["fb_name"]:
+				boxInfo1 = "Name: " + fritzOs["fb_name"]
+			if boxData["fonnum"] and boxData["fonnum"]["txt"]:
+				boxInfo1 = boxInfo1 + (", " if boxInfo1 else "") + boxData["fonnum"]["txt"]
+			if boxData["tamcalls"] and boxData["tamcalls"]["count"]:
+				boxInfo1 = boxInfo1 + (", " if boxInfo1 else "") + str(boxData["tamcalls"]["count"]) + " " + _("calls in mailbox")
+			if boxInfo1:
+				boxInfo = boxInfo + "\n" + boxInfo1
+
+		boxInfo = boxInfo.encode("utf-8")
+
+		self.info("Boxinfo: " + repr(boxInfo))
+
+		provider = None
+		if "ipv4" in boxData and "txt" in boxData["ipv4"]:
+			for item in boxData["ipv4"]["txt"]:
+				item = item.encode("utf-8")
+				found = re.match(r'.*verbunden seit (.*)', item, re.S)
+				if found:
+					upTime = found.group(1)
+				else:
+					found = re.match(r'.*connected since (.*)', item, re.S)
+					if found:
+						upTime = found.group(1)
+				found = re.match(r'\s*Anbieter: (.*)', item, re.S)
+				if found:
+					provider = found.group(1)
+				else:
+					found = re.match(r'\s*Provider: (.*)', item, re.S)
+					if found:
+						provider = found.group(1)
+				found = re.match(r'IP(?:v4)?-Adresse: (.*)', item, re.S)
+				if found:
+					ipAddress = found.group(1)
+				else:
+					found = re.match(r'IP(?:v4)? address: (.*)', item, re.S)
+					if found:
+						ipAddress = found.group(1)
+
+		self.info("upTime: " + repr(upTime))
+		self.info("provider: " + repr(provider))
+		self.info("ipAddress: " + repr(ipAddress))
+
+		if "ipv6" in boxData and "txt" in boxData["ipv6"]:
+			upTime6 = None
+			provider6 = None
+			ipAddress6 = None
+			for item in boxData["ipv6"]["txt"]:
+				found = re.match(r'.*verbunden seit (.*)', item, re.S)
+				if found:
+					upTime6 = found.group(1).encode("utf-8")
+				else:
+					found = re.match(r'.*connected since (.*)', item, re.S)
+					if found:
+						upTime6 = found.group(1).encode("utf-8")
+				found = re.match(r'\s*Anbieter: (.*)', item, re.S)
+				if found:
+					provider6 = found.group(1).encode("utf-8")
+				else:
+					found = re.match(r'\s*Provider:: (.*)', item, re.S)
+					if found:
+						provider6 = found.group(1).encode("utf-8")
+				found = re.match(r'IP(?:v6)?-(?:Adresse|Prefix): (.*)', item, re.S)
+				if found:
+					ipAddress6 = found.group(1).encode("utf-8")
+				else:
+					found = re.match(r'IP(?:v6)? (?:address|prefix): (.*)', item, re.S)
+					if found:
+						ipAddress6 = found.group(1).encode("utf-8")
+
+			self.info("upTime6: " + repr(upTime6))
+			self.info("provider6: " + repr(provider6))
+			self.info("ipAddress6: " + repr(ipAddress6))
+
+			if upTime6:
+				if upTime and upTime.find(upTime6) == -1:
+					upTime = upTime + '/' + upTime6
+				else:
+					upTime = upTime6
+
+			if provider6:
+				if provider and provider.find(provider6) == -1:
+					provider = provider + '/' + provider6
+				else:
+					provider = provider6
+
+			if ipAddress6:
+				if ipAddress:
+					ipAddress = ipAddress + '/' + ipAddress6
+				else:
+					ipAddress = ipAddress6
+
+		if provider:
+			if upTime:
+				upTime = upTime + ' ' + _("with") + ' ' + provider
+
+		self.info("upTime final: " + repr(upTime))
+		self.info("provider final: " + repr(provider))
+		self.info("ipAddress final: " + repr(ipAddress))
+
+		if "dsl" in boxData or "docsis" in boxData or "cable" in boxData:
+			if "dsl" in boxData:
+				connData = boxData["dsl"]
+			elif "cable" in boxData:
+				connData = boxData["cable"]
+			else:
+				connData = boxData["docsis"]
+			if connData["led"] == "led_green":
+				dslState = ['5', None, None]
+				dslState[1] = connData["down"].encode("utf-8") + " / " + connData["up"].encode("utf-8")
+				dslState[1] = dslState[1].replace('\\', '').decode("utf-8").encode("utf-8")
+				dslState[2] = connData["title"].encode("utf-8")
+		self.info("dslState: " + repr(dslState))
+
+		if "wlan24" in boxData:
+			wlan24 = boxData["wlan24"]
+			if wlan24:
+				netName = re.sub(r".*: ", "", wlan24["txt"]).encode("utf-8")
+				if wlan24["led"] == "led_green":
+					wlanState = ['1', '', '', "2,4GHz " + _("on") + ": " + netName]
+				else:
+					wlanState = ['0', '', '', "2,4GHz " + _("off") + ": " + netName]
+		self.info("wlanState24: " + repr(wlanState))
+
+		if "wlan5" in boxData:
+			wlan5 = boxData["wlan5"]
+			if wlan5:
+				netName = re.sub(r".*: ", "", wlan5["txt"]).encode("utf-8")
+				if not wlanState:
+					if wlan5["led"] == "led_green":
+						wlanState = ['1', '', '', "5GHz " + _("on") + ": " + netName]
+					else:
+						wlanState = ['0', '', '', "5GHz " + _("off") + ": " + netName]
+				else:
+					if wlan5["led"] == "led_green":
+						wlanState[0] = '1'
+						wlanState[3] = wlanState[3] + ", 5GHz " + _("on") + ": " + netName
+		self.info("wlanState5: " + repr(wlanState))
+
+		if "dect" in boxData:
+			dect = boxData["dect"]
+			if dect and dect["led"] == "led_green":
+				found = re.match(r'an, ([\d+]+|ein) Schnurlostelefon(?:e)? angemeldet', dect["txt"].encode("utf-8"), re.S)
+				if found:
+					dectActive = found.group(1)
+				else:
+					found = re.match(r'enabled, ([\d+]+|one) cordless telephone(?:s)? registered', dect["txt"].encode("utf-8"), re.S)
+					if found:
+						dectActive = found.group(1)
+		self.info("dectActive: " + repr(dectActive))
+
+		self.debug("comfort")
+		if "comfort" in boxData and "func" in boxData["comfort"]:
+			comfortFuncs = boxData["comfort"]["func"]
+			guestAccess = ""
+			for fun in comfortFuncs:
+				if "linktxt" in fun:
+					if fun["linktxt"] == "Faxfunktion" and fun["details"] == "Integriertes Fax aktiv":
+						faxActive = True
+					if fun["linktxt"] == "Fax function" and fun["details"] == "Integrated fax enabled":
+						faxActive = True
+					elif fun["linktxt"] == "Rufumleitung" and fun["details"]:
+						if fun["details"] != "deaktiviert":
+							found = re.match(r'.*(?:(\d+) )?aktiv', fun["details"].encode("utf-8"), re.S)
+							if found and found.group(1):
+								rufumlActive = int(found.group(1))
+							else:
+								rufumlActive = -1  # means no number available
+					elif fun["linktxt"] == "Call diversion" and fun["details"]:
+						if fun["details"] != "disabled":
+							found = re.match(r'.*(?:(\d+) )?active', fun["details"].encode("utf-8"), re.S)
+							if found and found.group(1):
+								rufumlActive = int(found.group(1))
+							else:
+								rufumlActive = -1  # means no number available
+					elif fun["linktxt"] == "WLAN-Gastzugang" and fun["details"]:
+						found = re.match(r'.*aktiv \([^\)]+\)(?:, (ungesichert|gesichert))?,(?: (\d+) (Minuten|Stunden) verbleiben,)? (\d+ Geräte), (.+)', fun["details"].encode("utf-8"), re.S)
+						if found:
+							if found.group(1):
+								if found.group().find('ungesichert') != -1:
+									guestAccess = "WLAN (unges.)"
+								else:
+									guestAccess = "WLAN (ges.)"
+							else:
+								guestAccess = "WLAN"
+							if found.group(3):
+								if found.group(3) == 'Minuten':
+									guestAccess = guestAccess + ', ' + found.group(2) + ' Min.'  # n Minuten verbleiben
+								else:
+									guestAccess = guestAccess + ', ' + found.group(2) + ' Std.'  # n Stunden verbleiben
+							if found.group(4):
+								guestAccess = guestAccess + ', ' + found.group(4)  # Geräte
+							if found.group(5):
+								guestAccess = guestAccess + ', ' + found.group(5)  # WLAN Name
+					elif fun["linktxt"] == "Wireless guest access" and fun["details"]:
+						found = re.match(r'.*enabled \([^\)]+\)(?:, (secured|unsecured))?,(?: (\d+) (minutes|hours) left,)? (\d+ devices), (.+)', fun["details"].encode("utf-8"), re.S)
+						if found:
+							if found.group(1):
+								if found.group().find('secured') != -1:
+									guestAccess = "WIFI (sec.)"
+								else:
+									guestAccess = "WIFI (unsec.)"
+							else:
+								guestAccess = "WIFI"
+							if found.group(3):
+								if found.group(3) == 'minutes':
+									guestAccess = guestAccess + ', ' + found.group(2) + ' min.'  # n Minuten verbleiben
+								else:
+									guestAccess = guestAccess + ', ' + found.group(2) + ' hrs.'  # n Minuten verbleiben
+							if found.group(4):
+								guestAccess = guestAccess + ', ' + found.group(4)  # Geräte
+							if found.group(5):
+								guestAccess = guestAccess + ', ' + found.group(5)  # WLAN Name
+					elif fun["linktxt"] == "LAN-Gastzugang" and fun["details"]:
+						if fun["details"] == "aktiv":
+							if guestAccess:
+								guestAccess = 'LAN, ' + guestAccess
+							else:
+								guestAccess = "LAN"
+
+		self.info("faxActive: " + repr(faxActive))
+		self.info("rufumlActive: " + repr(rufumlActive))
+		self.info("guestAccess: " + repr(guestAccess))
+
+		info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess)
+		self.info("information: " + str(info))
+		self.information = info
+		if self._infoCallback:
+			self._infoCallback(info)
+			self._infoCallback = None
+
+	def getCalls(self, callScreen, callback, callType):
+		self.debug("")
+		self._callScreen = callScreen
+		self._callType = callType
+		if "X_AVM-DE_OnTel:1" in self.fc.services.keys():
+			self.fc.call_action(lambda x: self._getCalls_cb1(x, callback), "X_AVM-DE_OnTel", "GetCallList")
+		else:
+			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
+
+	def _getCalls_cb1(self, result, callback):
+		self.debug("")
+		if self._callScreen:
+			self._callScreen.updateStatus(_("preparing"))
+		url = result["NewCallListURL"]
+		getPage(url).addCallback(self._getCalls_cb2, callback)
+
+	def _getCalls_cb2(self, result, callback):
+		# self.debug("")
+		if self.logger.getEffectiveLevel() == logging.DEBUG:
+			self.debug("dumping calls to /tmp/FritzCall_getCalls_cb2.xml")
+			linkP = open("/tmp/FritzCall_getCalls_cb2.xml", "w")
+			linkP.write(result)
+			linkP.close()
+		if self._callScreen:
+			self._callScreen.updateStatus(_("finishing"))
+
+		if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
+			filtermsns = [x.strip() for x in config.plugins.FritzCall.filtermsn.value.split(",")]
+			self.info("filtermsns %s", repr([__(x) for x in filtermsns]))
+		else:
+			filtermsns = None
+
+		callListL = []
+		root = ET.fromstring(result)
+		calls = root.iterfind("./Call")
+		for call in calls:
+			direct = call.find("./Type").text
+			if self._callType != '.' and self._callType != direct:
+				# self.debug("skip: %s", call.find("./Id").text)
+				continue
+			if direct == FBF_OUT_CALLS:
+				number = call.find("./Called").text
+				remote = call.find("./Name").text
+				if remote:
+					remote = remote.encode("utf-8")
+				else:
+					remote = resolveNumber(number, "", self.phonebook)
+				here = call.find("./CallerNumber").text
+				if here.isdigit():
+					here = resolveNumber(here, call.find("./Caller").text, self.phonebook)
+			else:
+				number = call.find("./Caller").text
+				if not number:
+					number = _("Unknown")
+				remote = call.find("./Name").text
+				if remote:
+					remote = remote.encode("utf-8")
+				else:
+					remote = resolveNumber(call.find("./Caller").text, "", self.phonebook)
+				here = call.find("./CalledNumber").text
+				if here.isdigit():
+					here = resolveNumber(here, call.find("./Called").text, self.phonebook)
+			if filtermsns and here not in filtermsns:
+				# self.debug("skip %s" % (here))
+				continue
+
+			device = call.find("./Device").text
+			if device:
+				device = device.encode("utf-8")
+				here = here + " (" + device + ")"
+			# self.debug("here: " + here)
+
+			number = stripCbCPrefix(number, config.plugins.FritzCall.countrycode.value)
+			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':  # should only happen for outgoing
+				number = config.plugins.FritzCall.prefix.value + number
+
+			date = call.find("./Date").text
+			length = call.find("./Duration").text
+			# self.debug("got: " + repr((number, date, direct, remote, length, here)))
+			callListL.append((number, date, direct, remote, length, here))
+
+		# self.debug(repr(callListL))
+		if callback:
+			callback(callListL)
+		self._callScreen = None
+
+	def loadFritzBoxPhonebook(self, phonebook):
+		'''
+		Load phonebook from device and add it to the phonebook
+
+		@param phonebook: phonebook to be amended
+		@type phonebook: dictionary of number, information
+		'''
+		self.debug("")
+		self.phonebook = phonebook
+
+		# newer OE versions don't have the callback
+		self._phonebook_timeout -= 1
+		if "X_AVM-DE_OnTel:1" in self.fc.services.keys():
+			self.fc.call_action(self._loadFritzBoxPhonebook_cb1, "X_AVM-DE_OnTel", "GetPhonebookList")
+		else:
+			try:
+				self._phonebook_timer_conn = self._phonebook_timer.timeout.connect(self._phonebook_timerTick)
+			except AttributeError:
+				self._phonebook_timer.callback.append(self._phonebook_timerTick)
+			self._phonebook_timer.start(1000)
+			self._phonebook_timerTick()
+
+	def _phonebook_timerTick(self):
+		self.debug(repr(self.fc.services.keys()))
+		self._phonebook_timeout -= 1
+		if "X_AVM-DE_OnTel:1" in self.fc.services.keys():
+			self.fc.call_action(self._loadFritzBoxPhonebook_cb1, "X_AVM-DE_OnTel", "GetPhonebookList")
+			self._phonebook_timer.stop()
+			self._phonebook_timeout = TIMEOUT
+		if self._phonebook_timeout == 0:
+			self._phonebook_timer.stop()
+			self._phonebook_timeout = TIMEOUT
+
+	def _loadFritzBoxPhonebook_cb1(self, result):
+		self.debug(repr(result))
+		if isinstance(result, Failure) or 'NewPhonebookList' not in result:
+			text = _("FRITZ!Box - ") + _("Could not load phonebook: ") + _("wrong user or password?")
+			self._notify(text)
+			return
+			
+		ids = result['NewPhonebookList'].split(',')
+		ids = [int(x) for x in ids]
+		for ident in ids:
+			self.fc.call_action(self._loadFritzBoxPhonebook_cb2, "X_AVM-DE_OnTel", "GetPhonebook", NewPhonebookId=ident)
+
+	def _loadFritzBoxPhonebook_cb2(self, result):
+		self.debug(repr(result))
+		if 'NewPhonebookName' not in result or 'NewPhonebookURL' not in result:
+			text = _("FRITZ!Box - ") + _("Could not load phonebook: %s") % 'NewPhonebookName'
+			self._notify(text)
+			return
+
+		if result["NewPhonebookName"] == config.plugins.FritzCall.fritzphonebookName.value:
+			getPage(result["NewPhonebookURL"]).addCallback(self._loadFritzBoxPhonebook_cb3)
+
+	def _loadFritzBoxPhonebook_cb3(self, result):
+		root = ET.fromstring(result)
+		thisName = root.find(".//phonebook").attrib["name"]
+		self.debug("Phonebook: %s", thisName)
+		if self.logger.getEffectiveLevel() == logging.DEBUG:
+			self.debug("dumping phonebook to /tmp/FritzCall_loadFritzBoxPhonebook_cb3_%s.xml", thisName)
+			linkP = open("/tmp/FritzCall_loadFritzBoxPhonebook_cb3_%s.xml" % thisName, "w")
+			linkP.write(result)
+			linkP.close()
+
+		contacts = root.iterfind(".//contact")
+		for contact in contacts:
+			name = contact.find("./person/realName").text.replace(",", "")
+			numbers = contact.iterfind("./telephony/number")
+			for number in numbers:
+				# self.debug("Name: " + name)
+				# self.debug("Number: " + number.text + " " + number.attrib["type"])
+				thisname = name.encode("utf-8")
+				thisnumber = cleanNumber(number.text)
+				if thisnumber in self.phonebook.phonebook:
+					continue
+
+				if not thisnumber:
+					self.info("Ignoring entry with empty number for '''%s'''", (__(thisname)))
+					continue
+				else:
+					dummy = _("fax_work") + _("fax_home") + _("pager") # this is just to trigger localisation
+					thisType = number.attrib["type"]
+					if thisType.startswith('label:'):
+						thisType = thisType[6:]
+					if not config.plugins.FritzCall.fritzphonebookShowInternal.value and (thisType == "intern" or thisType == "memo" or thisType == ""):
+						continue
+					if config.plugins.FritzCall.showType.value and thisType:
+						thisname = thisname + " (" + _(thisType) + ")"
+					if config.plugins.FritzCall.showShortcut.value and number.attrib["quickdial"]:
+						thisname = thisname + ", " + _("Shortcut") + ": " + number.attrib["quickdial"]
+					if config.plugins.FritzCall.showVanity.value and number.attrib["vanity"]:
+						thisname = thisname + ", " + _("Vanity") + ": " + number.attrib["vanity"]
+
+					# self.debug("Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
+					# Beware: strings in phonebook.phonebook have to be in utf-8!
+					self.phonebook.phonebook[thisnumber] = thisname
+
+	def changeWLAN(self, statusWLAN, callback):
+		'''
+		Change the status of the WLAN
+
+		@param state: '0' means: turn off, '1' turn on
+		@type state: string
+		'''
+		self.debug("")
+		if not statusWLAN or (statusWLAN != '1' and statusWLAN != '0'):
+			return
+
+		if "WLANConfiguration:1" not in self.fc.services.keys():
+			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
+			return
+
+		if "WLANConfiguration:3" in self.fc.services.keys():
+			if "WLANConfiguration:2" in self.fc.services.keys():
+				self.fc.call_action(None, "WLANConfiguration:2", "SetEnable", NewEnable=int(statusWLAN))
+		self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:1", "SetEnable", NewEnable=int(statusWLAN))
+
+	def changeGuestAccess(self, statusGuestAccess, callback):
+		'''
+		Change the status of the WLAN guest access
+
+		@param statusGuestAccess: 'WLAN', 'WLAN, LAN' or 'LAN'
+		@type statusGuestAccess: string
+		'''
+		self.debug("")
+
+		if "WLANConfiguration:2" not in self.fc.services.keys():
+			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
+			return
+
+		if statusGuestAccess.find('WLAN') != -1:
+			if "WLANConfiguration:3" in self.fc.services.keys():
+				self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:3", "SetEnable", NewEnable=0)
+			else:
+				self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:2", "SetEnable", NewEnable=0)
+		else:
+			if "WLANConfiguration:3" in self.fc.services.keys():
+				self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:3", "SetEnable", NewEnable=1)
+			else:
+				self.fc.call_action(lambda x: self._general_cb(x, callback), "WLANConfiguration:2", "SetEnable", NewEnable=1)
+		callback()
+
+	def _general_cb(self, result, callback):
+		self.debug("result: " + repr(result))
+		callback()
+
+	def _general_cb1(self, result):
+		self.debug("result: " + repr(result))
+
+	def _readBlacklist(self):
+		self.debug("")
+		self.blacklist = ([], [])
+		if "X_AVM-DE_OnTel:1" not in self.fc.services.keys():
+			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
+			return
+		self.fc.call_action(self._readBlacklist_cb, "X_AVM-DE_OnTel", "GetDeflections")
+		
+	def _readBlacklist_cb(self, result):
+		self.debug("")
+		if self.logger.getEffectiveLevel() == logging.DEBUG:
+			self.debug("dumping result to /tmp/FritzCall_readBlacklist_cb.xml")
+			linkP = open("/tmp/FritzCall_readBlacklist_cb.xml", "w")
+			linkP.write(result["NewDeflectionList"])
+			linkP.close()
+
+		root = ET.fromstring(result["NewDeflectionList"])
+		deflections =  root.iterfind(".//Item")
+		for deflection in deflections:
+			# self.debug("enable: " + deflection.find("./Enable").text)
+			enabled = deflection.find("./Enable").text == '1'
+			if enabled:
+				outgoing = deflection.find("./Outgoing")
+				if outgoing is not None:
+					# self.debug("Outgoing")
+					self.blacklist[1].append(deflection.find("./Number").text)
+				else:
+					# self.debug("Incoming")
+					self.blacklist[0].append(deflection.find("./Number").text)
+		self.debug(repr(self.blacklist))
+
+	def dial(self, number):  # @UnusedVariable # pylint: disable=W0613
+		'''
+		Dial a number on extension config.plugins.FritzCall.extension.value
+
+		@param number: number to dial
+		@type number: string
+		'''
+		self.debug("")
+		Notifications.AddNotification(MessageBox, _("not yet implemented"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
+
+	def reset(self):
+		'''
+		Reset box
+		'''
+		self.debug("")
+		if "DeviceConfig:1" in self.fc.services.keys():
+			self.fc.call_action(self._getInfo, "DeviceConfig", "Reboot")
+		else:
+			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
 
 class FritzCallFBF_dummy(object):
 	logger = logging.getLogger("FritzCall.FBF_dummy")

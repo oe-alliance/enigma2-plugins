@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 20:05+0100\n"
-"PO-Revision-Date: 2016-09-09 14:46+0200\n"
+"POT-Creation-Date: 2017-06-29 18:00+0200\n"
+"PO-Revision-Date: 2017-06-06 17:43+0200\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: de\n"
@@ -66,14 +66,17 @@ msgstr "Anrufer automatisch dem Telefonbuch hinzufügen"
 msgid "Call"
 msgstr "Anrufen"
 
+msgid "Call diversion"
+msgstr "Rufumleitung"
+
+msgid "Call diversion active"
+msgstr "Rufumleitung aktiv"
+
 msgid "Call monitoring"
 msgstr "Anrufanzeige"
 
 msgid "Call redirection"
 msgstr "Rufumleitung"
-
-msgid "Call redirection active"
-msgstr "Rufumleitung aktiv"
 
 #, python-format
 msgid "Calling %s"
@@ -125,6 +128,9 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr "Konnte Anrufliste nicht bekommen; falsche Firmware-Version?"
 
+msgid "Could not load phonebook: "
+msgstr ""
+
 #, python-format
 msgid "Could not load phonebook: %s"
 msgstr "\"Telefonbuch konnte nicht geladen werden: %ss"
@@ -139,8 +145,8 @@ msgstr ""
 msgid "Country"
 msgstr "Land"
 
-msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
-msgstr "Ländervorwahl (z.B. 44 für UK, 34 für Spain, etc.)"
+msgid "Countrycode (e.g. 0044 for UK, 0034 for Spain, etc.)"
+msgstr "Ländervorwahl (z.B. 0044 für UK, 0034 für Spain, etc.)"
 
 msgid "DECT inactive"
 msgstr "DECT inaktiv"
@@ -238,6 +244,9 @@ msgstr "FRITZ!Box - Wählen fehlgeschlagen: %s"
 #, python-format
 msgid "FRITZ!Box - Error getting blacklist: %s"
 msgstr "FRITZ!Box - Sperrliste konnte nicht geholt werden: %s"
+
+msgid "FRITZ!Box - Error getting status: "
+msgstr ""
 
 #, python-format
 msgid "FRITZ!Box - Error getting status: %s"
@@ -401,9 +410,6 @@ msgstr "Anrufbeantworter"
 msgid "Make it more skin friendly"
 msgstr "Mehr Möglichkeiten für Skins"
 
-msgid "Minutes of uptime of WLAN guest network"
-msgstr "Dauer für den WLAN-Gastzugang in Minuten"
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Verpasst"
@@ -411,17 +417,14 @@ msgstr "Verpasst"
 msgid "Missed calls"
 msgstr "Verpasste Anrufe"
 
-msgid "Mute also on outgoing calls"
-msgstr ""
+msgid "Mute on incoming call"
+msgstr "Ton aus bei eingehenden Anrufen"
 
-msgid "Mute on call"
-msgstr "Ton aus bei angezeigten Anrufen"
+msgid "Mute on outgoing calls"
+msgstr "Ton aus bei abgehenden Anrufen"
 
 msgid "Name"
 msgstr "Name"
-
-msgid "Name of WLAN guest network"
-msgstr "Name des WLAN Gastfunknetzes"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -433,7 +436,7 @@ msgstr "Neuer Anruf"
 msgid "No DECT phone registered"
 msgstr "Kein Schnurlostelefon angemeldet"
 
-msgid "No call redirection active"
+msgid "No call diversion active"
 msgstr "Keine Rufumleitung aktiv"
 
 msgid "No entry selected"
@@ -467,7 +470,7 @@ msgstr "OK"
 msgid "One DECT phone registered"
 msgstr "Ein Schnurlostelefon angemeldet"
 
-msgid "One call redirection active"
+msgid "One call diversion active"
 msgstr "Eine Rufumleitung aktiv"
 
 msgid "One mailbox active"
@@ -501,9 +504,6 @@ msgstr "Abgehende Anrufe"
 
 msgid "Password Accessing FRITZ!Box"
 msgstr "Passwort der FRITZ!Box"
-
-msgid "Password of WLAN guest network"
-msgstr "Netzwerkschlüssel des WLAN Gastfunknetzes"
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -571,9 +571,6 @@ msgstr "Suche in LDIF..."
 msgid "Searching in Outlook export..."
 msgstr "Suche in Outlook-Export..."
 
-msgid "Secure WLAN guest network"
-msgstr "WLAN Gastzugang verschlüsseln"
-
 msgid "Setting..."
 msgstr "Setze..."
 
@@ -588,6 +585,9 @@ msgstr "Zeige abgehende Anrufe an"
 
 msgid "Show after Standby"
 msgstr "Anzeige nach Standby"
+
+msgid "Show also internal numbers"
+msgstr "Zeige auch interne Nummern an"
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
@@ -673,6 +673,9 @@ msgstr "Toggle AB"
 msgid "UNKNOWN"
 msgstr "UNBEKANNT"
 
+msgid "Unknown"
+msgstr "Unbekannt"
+
 msgid "Update available"
 msgstr "Update verfügbar"
 
@@ -708,7 +711,7 @@ msgstr ""
 msgid "before 05.27"
 msgstr "vor 05.27"
 
-msgid "call redirections active"
+msgid "call diversions active"
 msgstr "Rufumleitungen aktiv"
 
 msgid "calls in mailbox"
@@ -733,6 +736,12 @@ msgstr "fertig, benutze letzte Liste"
 
 msgid "encrypted"
 msgstr "verschlüsselt"
+
+msgid "fax_home"
+msgstr "Fax privat"
+
+msgid "fax_work"
+msgstr "Fax Büro"
 
 msgid "finishing"
 msgstr "Fertigstellung"
@@ -782,8 +791,17 @@ msgstr "Nichts"
 msgid "number suppressed"
 msgstr "Nummer unterdrückt"
 
+msgid "off"
+msgstr "aus"
+
+msgid "on"
+msgstr "an"
+
 msgid "one device active"
 msgstr "eine WLAN-Station aktiv"
+
+msgid "pager"
+msgstr "Pager"
 
 msgid "preparing"
 msgstr "Vorbereitung"
@@ -805,8 +823,23 @@ msgstr "Anzeige der einzelnen Anrufe"
 msgid "show nothing"
 msgstr "keine Anzeige"
 
+msgid "with"
+msgstr "mit"
+
 msgid "work"
 msgstr "Büro"
 
 msgid "wrong user or password?"
 msgstr "falscher Benutzer oder falsches Passwort?"
+
+#~ msgid "Minutes of uptime of WLAN guest network"
+#~ msgstr "Dauer für den WLAN-Gastzugang in Minuten"
+
+#~ msgid "Name of WLAN guest network"
+#~ msgstr "Name des WLAN Gastfunknetzes"
+
+#~ msgid "Password of WLAN guest network"
+#~ msgstr "Netzwerkschlüssel des WLAN Gastfunknetzes"
+
+#~ msgid "Secure WLAN guest network"
+#~ msgstr "WLAN Gastzugang verschlüsseln"
