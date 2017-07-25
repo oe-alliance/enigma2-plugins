@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 20:05+0100\n"
+"POT-Creation-Date: 2017-06-29 18:00+0200\n"
 "PO-Revision-Date: 2015-04-14 23:22+0200\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -68,14 +68,17 @@ msgstr "Ins. autom. nuovo chiamante in rubrica"
 msgid "Call"
 msgstr "Chiam."
 
+msgid "Call diversion"
+msgstr ""
+
+msgid "Call diversion active"
+msgstr ""
+
 msgid "Call monitoring"
 msgstr "Monitoraggio chiamate"
 
 msgid "Call redirection"
 msgstr "Deviazione chiamate"
-
-msgid "Call redirection active"
-msgstr "deviazione chiamate attiva"
 
 #, python-format
 msgid "Calling %s"
@@ -127,6 +130,9 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr "Impossibile ottenere elenco chiamate: versione errata?"
 
+msgid "Could not load phonebook: "
+msgstr ""
+
 #, python-format
 msgid "Could not load phonebook: %s"
 msgstr ""
@@ -140,7 +146,7 @@ msgstr "Impossibile leggere Rubrica della FRITZ!Box: versione errata?"
 msgid "Country"
 msgstr "Nazione"
 
-msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgid "Countrycode (e.g. 0044 for UK, 0034 for Spain, etc.)"
 msgstr ""
 
 msgid "DECT inactive"
@@ -239,6 +245,9 @@ msgstr "FRITZ!Box - Composizione fallita: %s"
 #, python-format
 msgid "FRITZ!Box - Error getting blacklist: %s"
 msgstr "FRITZ!Box - Errore in recupero blacklist: %s"
+
+msgid "FRITZ!Box - Error getting status: "
+msgstr ""
 
 #, python-format
 msgid "FRITZ!Box - Error getting status: %s"
@@ -400,9 +409,6 @@ msgstr "Casella di posta"
 msgid "Make it more skin friendly"
 msgstr ""
 
-msgid "Minutes of uptime of WLAN guest network"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Ch. perse"
@@ -410,17 +416,14 @@ msgstr "Ch. perse"
 msgid "Missed calls"
 msgstr "Chiamate perse"
 
-msgid "Mute also on outgoing calls"
+msgid "Mute on incoming call"
 msgstr ""
 
-msgid "Mute on call"
-msgstr "Mute su Chiamata"
+msgid "Mute on outgoing calls"
+msgstr ""
 
 msgid "Name"
 msgstr "Nome"
-
-msgid "Name of WLAN guest network"
-msgstr "Nome della rete WLAN Guest"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -432,8 +435,8 @@ msgstr "Nuova chiamata"
 msgid "No DECT phone registered"
 msgstr "Nessun telefono DECT registrato"
 
-msgid "No call redirection active"
-msgstr "Nessuna deviazione chiamate attiva"
+msgid "No call diversion active"
+msgstr ""
 
 msgid "No entry selected"
 msgstr "Nessuna voce selezionata"
@@ -466,8 +469,8 @@ msgstr "Ok"
 msgid "One DECT phone registered"
 msgstr "Un telefono DECT registrato"
 
-msgid "One call redirection active"
-msgstr "Una deviazione chiamate attiva"
+msgid "One call diversion active"
+msgstr ""
 
 msgid "One mailbox active"
 msgstr "Una casella di posta attiva"
@@ -500,9 +503,6 @@ msgstr "Chiamate in uscita"
 
 msgid "Password Accessing FRITZ!Box"
 msgstr "Password di accesso alla FRITZ!Box"
-
-msgid "Password of WLAN guest network"
-msgstr "Password per la rete WLAN Guest"
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -570,9 +570,6 @@ msgstr "Ricerca in LDIF..."
 msgid "Searching in Outlook export..."
 msgstr "Ricerca in Outlook  export..."
 
-msgid "Secure WLAN guest network"
-msgstr "Sicurezza rete WLAN Guest"
-
 msgid "Setting..."
 msgstr "impostazioni..."
 
@@ -587,6 +584,9 @@ msgstr "Mostrare le chiamate in uscita"
 
 msgid "Show after Standby"
 msgstr "Mostrare chiamate dopo lo standby"
+
+msgid "Show also internal numbers"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
@@ -670,6 +670,9 @@ msgstr "Comm. tutte le caselle"
 msgid "UNKNOWN"
 msgstr "SCONOSCIUTO"
 
+msgid "Unknown"
+msgstr ""
+
 msgid "Update available"
 msgstr ""
 
@@ -702,8 +705,8 @@ msgstr ""
 msgid "before 05.27"
 msgstr "anteriore a 05.27"
 
-msgid "call redirections active"
-msgstr "deviazione chiamate attiva"
+msgid "call diversions active"
+msgstr ""
 
 msgid "calls in mailbox"
 msgstr ""
@@ -727,6 +730,12 @@ msgstr "Fatto, sarà usata l'ultimo elenco"
 
 msgid "encrypted"
 msgstr "codificato"
+
+msgid "fax_home"
+msgstr ""
+
+msgid "fax_work"
+msgstr ""
 
 msgid "finishing"
 msgstr "Quasi terminato..."
@@ -776,8 +785,17 @@ msgstr ""
 msgid "number suppressed"
 msgstr "numero mascherato"
 
+msgid "off"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
 msgid "one device active"
 msgstr "Un dispositivo attivo"
+
+msgid "pager"
+msgstr ""
 
 msgid "preparing"
 msgstr "Preparazione in corso"
@@ -799,11 +817,17 @@ msgstr "Tutte"
 msgid "show nothing"
 msgstr "Nulla"
 
+msgid "with"
+msgstr ""
+
 msgid "work"
 msgstr "Ufficio"
 
 msgid "wrong user or password?"
 msgstr "Utente o password errati?"
+
+#~ msgid "Call redirection active"
+#~ msgstr "deviazione chiamate attiva"
 
 #~ msgid "Debug"
 #~ msgstr "Debug"
@@ -811,5 +835,26 @@ msgstr "Utente o password errati?"
 #~ msgid "FRITZ!Box - Could not load phonebook: %s"
 #~ msgstr "FRITZ!Box - Impossibile caricare la rubrica: %s"
 
+#~ msgid "Mute on call"
+#~ msgstr "Mute su Chiamata"
+
+#~ msgid "Name of WLAN guest network"
+#~ msgstr "Nome della rete WLAN Guest"
+
+#~ msgid "No call redirection active"
+#~ msgstr "Nessuna deviazione chiamate attiva"
+
+#~ msgid "One call redirection active"
+#~ msgstr "Una deviazione chiamate attiva"
+
+#~ msgid "Password of WLAN guest network"
+#~ msgstr "Password per la rete WLAN Guest"
+
 #~ msgid "Reverse Lookup Caller ID (select country below)"
 #~ msgstr "Identificativo chiamante (selezionare il Paese!)"
+
+#~ msgid "Secure WLAN guest network"
+#~ msgstr "Sicurezza rete WLAN Guest"
+
+#~ msgid "call redirections active"
+#~ msgstr "deviazione chiamate attiva"

@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: werbezapper\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-11 17:05+0300\n"
+"PO-Revision-Date: 2017-07-11 17:08+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P.\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../src/plugin.py:28
+msgid "Automatically zaps back to current service after given Time"
+msgstr "Po nurodyto laiko automatiškai įjungs atgal į dabartinį kanalą"
+
+#: ../src/WerbeZapper.py:58
+msgid "Custom"
+msgstr "Pasirinktinis"
+
+#: ../src/WerbeZapper.py:84
+msgid "How many minutes to wait until zapping back?"
+msgstr "Kiek minučių laukti, prieš perjungiant atgal?"
+
+#: ../src/WerbeZapper.py:38
+msgid ""
+"Timer already running.\n"
+"Stop it?"
+msgstr ""
+"Laikmatis jau veikia.\n"
+"Išjungti?"
+
+#: ../src/WerbeZapper.py:47
+msgid "When to Zap back?"
+msgstr "Kada perjungti atgal?"
+
+#: ../src/WerbeZapper.py:107
+#, python-format
+msgid "Zapping back in %d Minutes"
+msgstr "Perjungimas atgal po %d min."
+
+#: ../src/WerbeZapper.py:49
+msgid "minute"
+msgstr "min."
+
+#: ../src/WerbeZapper.py:50 ../src/WerbeZapper.py:51 ../src/WerbeZapper.py:52
+#: ../src/WerbeZapper.py:53 ../src/WerbeZapper.py:54 ../src/WerbeZapper.py:55
+#: ../src/WerbeZapper.py:56 ../src/WerbeZapper.py:57
+msgid "minutes"
+msgstr "min."

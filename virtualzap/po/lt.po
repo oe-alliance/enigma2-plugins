@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: VirtualZap\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-11 11:31+0300\n"
+"PO-Revision-Date: 2017-07-11 11:33+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Could not open Picture in Picture"
+msgstr "Nepavyko atverti vaizdo vaizde (PiP)"
+
+msgid ""
+"GUI needs a restart to apply the new settings.\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+"Kad pakeitimai įsigaliotų, grafinę aplinką reikia paleisti iš naujo.\n"
+"Paleisti iš naujo dabar?"
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "Remember last service"
+msgstr "Įsiminti paskutinį kanalą"
+
+msgid "Restart GUI now?"
+msgstr "Paleisti grafinę aplinką iš naujo dabar?"
+
+msgid "Show PiP in Infobar"
+msgstr "Rodyti PiP lango infojuostoje"
+
+msgid "Start standard PiP after x secs (0 = disabled)"
+msgstr "Atverti įprastinį PiP po X sek. (0 = išjungta)"
+
+msgid "Usage"
+msgstr "Naudojimas"
+
+msgid "Use PiP"
+msgstr "Naudoti PiP"
+
+msgid "Virtual (PiP) Zap"
+msgstr "Virtualus (PiP) perjungimas"
+
+msgid "Virtual Zap Setup"
+msgstr "Virtualaus perjungimo sąranka"
+
+msgid "as plugin in extended bar"
+msgstr "kaip priedą išplėstinėje juostoje"
+
+msgid "with exit button"
+msgstr "'EXIT' mygtuku"
+
+msgid "with long OK press"
+msgstr "ilgu 'OK' paspaudimu"

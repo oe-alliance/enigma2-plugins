@@ -51,7 +51,7 @@ def getAutoTimerSettingsDefinitions():
 		[_("Show in plugin browser"), config.plugins.autotimer.show_in_plugins,"show_in_plugins", _("Enable this to be able to access the AutoTimer Overview from within the plugin browser.")],
 		[_("Show in extension menu"), config.plugins.autotimer.show_in_extensionsmenu,"show_in_extensionsmenu", _("Enable this to be able to access the AutoTimer Overview from within the extension menu.")],
 		[_("Modify existing timers"), config.plugins.autotimer.refresh,"refresh", _("This setting controls the behavior when a timer matches a found event.")],
-		[_("Guess existing timer based on begin/end"), config.plugins.autotimer.try_guessing,"try_guessing", _("If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it.")],
+		[_("Guess existing timer based on begin/end"), config.plugins.autotimer.try_guessing,"try_guessing", _("If this is enabled an existing timer will also be considered recording an event if it records at least 80%s of the it.")],
 		[_("Add similar timer on conflict"), config.plugins.autotimer.addsimilar_on_conflict,"addsimilar_on_conflict", _("If a timer conflict occurs, AutoTimer will search outside the timespan for a similar event and add it.")],
 		[_("Add timer as disabled on conflict"), config.plugins.autotimer.disabled_on_conflict,"disabled_on_conflict", _("This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled.")],
 		[_("Include \"AutoTimer\" in tags"), config.plugins.autotimer.add_autotimer_to_tags,"add_autotimer_to_tags", _("If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin.")],
@@ -143,7 +143,7 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 
 	def setCustomTitle(self):
 		from plugin import AUTOTIMER_VERSION
-		self.setTitle(_("Configure AutoTimer behavior") + " - Version: " + AUTOTIMER_VERSION)
+		self.setTitle(_("Configure AutoTimer behavior") + _(" - Version: ") + AUTOTIMER_VERSION)
 
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
