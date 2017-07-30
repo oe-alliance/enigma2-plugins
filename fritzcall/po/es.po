@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 20:05+0100\n"
+"POT-Creation-Date: 2017-06-29 18:00+0200\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -67,13 +67,16 @@ msgstr "Añadir el Llamante automáticamente a la Agenda"
 msgid "Call"
 msgstr "Llamar"
 
+msgid "Call diversion"
+msgstr ""
+
+msgid "Call diversion active"
+msgstr ""
+
 msgid "Call monitoring"
 msgstr "Monitorizar llamada"
 
 msgid "Call redirection"
-msgstr ""
-
-msgid "Call redirection active"
 msgstr ""
 
 #, python-format
@@ -124,6 +127,9 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr ""
 
+msgid "Could not load phonebook: "
+msgstr ""
+
 #, python-format
 msgid "Could not load phonebook: %s"
 msgstr ""
@@ -137,7 +143,7 @@ msgstr ""
 msgid "Country"
 msgstr "País"
 
-msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgid "Countrycode (e.g. 0044 for UK, 0034 for Spain, etc.)"
 msgstr ""
 
 msgid "DECT inactive"
@@ -235,6 +241,9 @@ msgstr ""
 
 #, python-format
 msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr ""
+
+msgid "FRITZ!Box - Error getting status: "
 msgstr ""
 
 #, python-format
@@ -381,9 +390,6 @@ msgstr "Carpeta de correo"
 msgid "Make it more skin friendly"
 msgstr ""
 
-msgid "Minutes of uptime of WLAN guest network"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Perdidas"
@@ -391,17 +397,14 @@ msgstr "Perdidas"
 msgid "Missed calls"
 msgstr "Llamadas perdidas"
 
-msgid "Mute also on outgoing calls"
+msgid "Mute on incoming call"
 msgstr ""
 
-msgid "Mute on call"
-msgstr "Silencio en llamada"
+msgid "Mute on outgoing calls"
+msgstr ""
 
 msgid "Name"
 msgstr "Nombre"
-
-msgid "Name of WLAN guest network"
-msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -413,9 +416,8 @@ msgstr ""
 msgid "No DECT phone registered"
 msgstr "No hay teléfono DECT registrado"
 
-#, fuzzy
-msgid "No call redirection active"
-msgstr "No cuenta de correo activa"
+msgid "No call diversion active"
+msgstr ""
 
 msgid "No entry selected"
 msgstr "No hay entrada seleccionada"
@@ -448,9 +450,8 @@ msgstr "OK"
 msgid "One DECT phone registered"
 msgstr "Un teléfono DECT registrado"
 
-#, fuzzy
-msgid "One call redirection active"
-msgstr "Una cuenta de correo activa"
+msgid "One call diversion active"
+msgstr ""
 
 msgid "One mailbox active"
 msgstr "Una cuenta de correo activa"
@@ -477,9 +478,6 @@ msgstr "Llamadas salientes"
 
 msgid "Password Accessing FRITZ!Box"
 msgstr "Contraseña accediendo a FRITZ!Box"
-
-msgid "Password of WLAN guest network"
-msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -547,9 +545,6 @@ msgstr "Buscando en LDIF..."
 msgid "Searching in Outlook export..."
 msgstr "Buscando en la exportación de Outlook..."
 
-msgid "Secure WLAN guest network"
-msgstr ""
-
 msgid "Setting..."
 msgstr ""
 
@@ -564,6 +559,9 @@ msgstr "Mostrar Llamadas Salientes"
 
 msgid "Show after Standby"
 msgstr "Mostrar después del inicio"
+
+msgid "Show also internal numbers"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
@@ -647,6 +645,9 @@ msgstr "Marcar Cuenta de Correo"
 msgid "UNKNOWN"
 msgstr "DESCONOCIDO"
 
+msgid "Unknown"
+msgstr ""
+
 msgid "Update available"
 msgstr ""
 
@@ -679,7 +680,7 @@ msgstr ""
 msgid "before 05.27"
 msgstr ""
 
-msgid "call redirections active"
+msgid "call diversions active"
 msgstr ""
 
 msgid "calls in mailbox"
@@ -705,6 +706,12 @@ msgstr "hecho, usando la última lista"
 
 msgid "encrypted"
 msgstr "encriptado"
+
+msgid "fax_home"
+msgstr ""
+
+msgid "fax_work"
+msgstr ""
 
 msgid "finishing"
 msgstr "terminando"
@@ -755,9 +762,18 @@ msgstr ""
 msgid "number suppressed"
 msgstr ""
 
+msgid "off"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
 #, fuzzy
 msgid "one device active"
 msgstr "Una cuenta de correo activa"
+
+msgid "pager"
+msgstr ""
 
 msgid "preparing"
 msgstr "preparando"
@@ -778,6 +794,9 @@ msgstr "mostrar cada llamada"
 
 msgid "show nothing"
 msgstr "no mostrar nada"
+
+msgid "with"
+msgstr ""
 
 msgid "work"
 msgstr "trabajo"
@@ -864,6 +883,17 @@ msgstr ""
 #~ "%(caller)s\n"
 #~ "---------------------------------------------\n"
 #~ "a: %(phone)s"
+
+#~ msgid "Mute on call"
+#~ msgstr "Silencio en llamada"
+
+#, fuzzy
+#~ msgid "No call redirection active"
+#~ msgstr "No cuenta de correo activa"
+
+#, fuzzy
+#~ msgid "One call redirection active"
+#~ msgstr "Una cuenta de correo activa"
 
 #~ msgid ""
 #~ "Outgoing Call on %(date)s to\n"
