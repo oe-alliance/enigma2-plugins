@@ -13,7 +13,7 @@ class AutoPoller:
 
 	def __init__(self):
 		# Init Timer
-		print "[AutoTimer] Auto Poll Enabled"
+		print("[AutoTimer] Auto Poll Enabled")
 		self.timer = eTimer()
 
 	def start(self):
@@ -29,7 +29,7 @@ class AutoPoller:
 	def query(self):
 		self.timer.stop()
 		from Screens.Standby import inStandby
-		print "[AutoTimer] Auto Poll"
+		print("[AutoTimer] Auto Poll")
 		doparse = True
 		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
 			print("[AutoTimer] Skip check during running records")
@@ -46,7 +46,7 @@ class AutoPoller:
 			print("[AutoTimer] Skip check while not in Standby")
 			doparse = False
 		if doparse:
-			print "[AutoTimer] Auto Poll Started"
+			print("[AutoTimer] Auto Poll Started")
 			# Ignore any program errors
 			try:
 				ret = autotimer.parseEPG(autoPoll=True)

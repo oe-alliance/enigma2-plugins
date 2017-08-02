@@ -52,8 +52,8 @@ class AutoTimerComponent(object):
 			matchLimit='', matchFormatString='', lastBegin=0, justplay=False, \
 			avoidDuplicateDescription=0, searchForDuplicateDescription=2, bouquets=None, \
 			tags=None, encoding=None, searchType="partial", searchCase="insensitive", \
-			overrideAlternatives=True, timeframe=None, vps_enabled=False, \
-			vps_overwrite=False, setEndtime=False, series_labeling=False):
+			overrideAlternatives=False, timeframe=None, vps_enabled=False, vps_overwrite=False, setEndtime=False, \
+			always_zap=False, series_labeling=False):
 		self.name = name
 		self.match = match
 		self.enabled = enabled
@@ -80,6 +80,7 @@ class AutoTimerComponent(object):
 		self.searchCase = searchCase
 		self.overrideAlternatives = overrideAlternatives
 		self.timeframe = timeframe
+		self.always_zap = always_zap
 		self.vps_enabled = vps_enabled
 		self.vps_overwrite = vps_overwrite
 		self.series_labeling = series_labeling
@@ -402,7 +403,9 @@ class AutoTimerComponent(object):
 	def checkServices(self, check_service):
 		services = self.services
 		bouquets = self.bouquets
-		if services or bouquets:
+		if services:
+			bouquets = []
+ 		if services or bouquets:
 			addbouquets = []
 
 			for service in services:
@@ -418,7 +421,7 @@ class AutoTimerComponent(object):
 				myref = eServiceReference(str(bouquet))
 				mylist = serviceHandler.list(myref)
 				if mylist is not None:
-					while 1:
+					while True:
 						s = mylist.getNext()
 						# TODO: I wonder if its sane to assume we get services here (and not just new lists)
 						# We can ignore markers & directorys here because they won't match any event's service :-)
@@ -431,6 +434,10 @@ class AutoTimerComponent(object):
 									pos -= 1
 								value = value[:pos+1]
 
+							if value == check_service:
+								return False
+
+							value = s.toCompareString()
 							if value == check_service:
 								return False
 						else:
@@ -452,7 +459,7 @@ class AutoTimerComponent(object):
 				if myref.flags & eServiceReference.isGroup:
 					mylist = serviceHandler.list(myref)
 					if mylist is not None:
-						while 1:
+						while True:
 							s = mylist.getNext()
 							if s.valid():
 								# strip all after last :
@@ -527,6 +534,7 @@ class AutoTimerComponent(object):
 			searchCase = self.searchCase,
 			overrideAlternatives = self.overrideAlternatives,
 			timeframe = self.timeframe,
+			always_zap = self.always_zap,
 			vps_enabled = self.vps_enabled,
 			vps_overwrite = self.vps_overwrite,
 			series_labeling = self.series_labeling,
@@ -561,6 +569,7 @@ class AutoTimerComponent(object):
 			searchCase = self.searchCase,
 			overrideAlternatives = self.overrideAlternatives,
 			timeframe = self.timeframe,
+			always_zap = self.always_zap,
 			vps_enabled = self.vps_enabled,
 			vps_overwrite = self.vps_overwrite,
 			series_labeling = self.series_labeling,
@@ -618,6 +627,7 @@ class AutoTimerComponent(object):
 					str(self.tags),
 					str(self.overrideAlternatives),
 					str(self.timeframe),
+					str(self.always_zap),
 					str(self.vps_enabled),
 					str(self.vps_overwrite),
 					str(self.series_labeling),
@@ -643,7 +653,11 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 			fastServices = []
 			append = fastServices.append
 			addbouquets = []
-			for service in self.services:
+			services = self.services
+			bouquets = self.bouquets
+			if services:
+				bouquets = []
+			for service in services:
 				myref = eServiceReference(str(service))
 				if myref.flags & eServiceReference.isGroup:
 					addbouquets.append(service)
@@ -652,11 +666,11 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 					append(':'.join(comp[3:]))
 
 			serviceHandler = eServiceCenter.getInstance()
-			for bouquet in self.bouquets + addbouquets:
+			for bouquet in bouquets + addbouquets:
 				myref = eServiceReference(str(bouquet))
 				mylist = serviceHandler.list(myref)
 				if mylist is not None:
-					while 1:
+					while True:
 						s = mylist.getNext()
 						# TODO: I wonder if its sane to assume we get services here (and not just new lists)
 						# We can ignore markers & directorys here because they won't match any event's service :-)

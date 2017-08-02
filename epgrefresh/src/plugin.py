@@ -270,7 +270,7 @@ config.plugins.epgrefresh.show_in_extensionsmenu.addNotifier(housekeepingExtensi
 config.plugins.epgrefresh.show_run_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 
 def menu_main(menuid, **kwargs):
-	if getImageDistro() in ("openvix", "openatv"):
+	if getImageDistro() in ("openvix", "openatv", "openspa"):
 		if menuid != "epg":
 			return []
 	else:

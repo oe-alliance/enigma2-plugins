@@ -6,7 +6,7 @@ ldif - generate and parse LDIF data (see RFC 2849)
 
 See http://python-ldap.sourceforge.net for details.
 
-$Id: ldif.py 699 2012-10-25 17:04:03Z michael $
+$Id: ldif.py 1391 2017-03-13 09:58:51Z michael $
 
 Python compability note:
 Tested with Python 2.0+, but should work with Python 1.5.2+.
@@ -18,7 +18,8 @@ __all__ = [
   # constants
   'ldif_pattern',
   # functions
-  'AttrTypeandValueLDIF','CreateLDIF','ParseLDIF',
+  # 'AttrTypeandValueLDIF',
+  'CreateLDIF','ParseLDIF',
   # classes
   'LDIFWriter',
   'LDIFParser',

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-01 17:50+0200\n"
+"POT-Creation-Date: 2017-03-14 20:05+0100\n"
 "PO-Revision-Date: 2015-04-14 23:22+0200\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -127,6 +127,10 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr "Impossibile ottenere elenco chiamate: versione errata?"
 
+#, python-format
+msgid "Could not load phonebook: %s"
+msgstr ""
+
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
 
@@ -202,6 +206,7 @@ msgid "Edit"
 msgstr "Mod."
 
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr "Mod. voce selezionata"
 
@@ -220,13 +225,12 @@ msgstr "Ricerca estesa nomi"
 msgid "Extension number to initiate call on"
 msgstr "Numero apparecchio su cui indirizzare la chiamata"
 
+msgid "FRITZ!Box - "
+msgstr ""
+
 #, python-format
 msgid "FRITZ!Box - Could not load calls: %s"
 msgstr "FRITZ!Box - Impossibile caricare le chiamate: %s"
-
-#, python-format
-msgid "FRITZ!Box - Could not load phonebook: %s"
-msgstr "FRITZ!Box - Impossibile caricare la rubrica: %s"
 
 #, python-format
 msgid "FRITZ!Box - Dialling failed: %s"
@@ -393,6 +397,9 @@ msgstr "MSN da mostrare (separare con ,)"
 msgid "Mailbox"
 msgstr "Casella di posta"
 
+msgid "Make it more skin friendly"
+msgstr ""
+
 msgid "Minutes of uptime of WLAN guest network"
 msgstr ""
 
@@ -402,6 +409,9 @@ msgstr "Ch. perse"
 
 msgid "Missed calls"
 msgstr "Chiamate perse"
+
+msgid "Mute also on outgoing calls"
+msgstr ""
 
 msgid "Mute on call"
 msgstr "Mute su Chiamata"
@@ -660,6 +670,9 @@ msgstr "Comm. tutte le caselle"
 msgid "UNKNOWN"
 msgstr "SCONOSCIUTO"
 
+msgid "Update available"
+msgstr ""
+
 msgid "Use internal PhoneBook"
 msgstr "Usare la rubrica interna"
 
@@ -668,6 +681,9 @@ msgstr "User name di accesso alla FRITZ!Box"
 
 msgid "Vanity"
 msgstr "\"Vanity\""
+
+msgid "WLAN not active"
+msgstr ""
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
 msgstr "Per abilitare il monitoraggio sulla FRITZ!Box comporre #96*5*!"
@@ -688,6 +704,9 @@ msgstr "anteriore a 05.27"
 
 msgid "call redirections active"
 msgstr "deviazione chiamate attiva"
+
+msgid "calls in mailbox"
+msgstr ""
 
 msgid "devices active"
 msgstr "Dispositivi attivi"
@@ -788,6 +807,9 @@ msgstr "Utente o password errati?"
 
 #~ msgid "Debug"
 #~ msgstr "Debug"
+
+#~ msgid "FRITZ!Box - Could not load phonebook: %s"
+#~ msgstr "FRITZ!Box - Impossibile caricare la rubrica: %s"
 
 #~ msgid "Reverse Lookup Caller ID (select country below)"
 #~ msgstr "Identificativo chiamante (selezionare il Paese!)"
