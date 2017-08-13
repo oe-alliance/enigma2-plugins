@@ -19,10 +19,10 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../enigma2-plugins/fritzcall\n"
 
 msgid "05.29 until below 6.35"
-msgstr ""
+msgstr "05.29 fino alla 6.35"
 
 msgid "06.35 and newer"
-msgstr ""
+msgstr "06.35 e recenti"
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -89,20 +89,20 @@ msgid "Cancel"
 msgstr "Annull."
 
 msgid "Cannot get calls from FRITZ!Box"
-msgstr "Recupero chiamate dalla FRITZ!Box impossibile"
+msgstr "Impossibile recuperare le chiamate dal Fritz!Box"
 
 msgid ""
 "Cannot get infos from FRITZ!Box yet\n"
 "Still initialising or wrong firmware version"
 msgstr ""
-"Recupero informazioni dalla FRITZ!Box impossibile.\n"
+"Errore nel recuperare le informazioni dal FRITZ!Box.\n"
 "Avvio ancora in corso o versione firmware errata."
 
 msgid "Connected since"
 msgstr "Connesso da"
 
 msgid "Connected to FRITZ!Box!"
-msgstr "Connesso alla FRITZ!Box!"
+msgstr "Connesso al FRITZ!Box!"
 
 #, python-format
 msgid ""
@@ -110,12 +110,12 @@ msgid ""
 " (%s)\n"
 "retrying..."
 msgstr ""
-"Connessione alla FRITZ!Box fallita!\n"
+"Connessione al FRITZ!Box fallita!\n"
 "(%s)\n"
 "Nuovo tentativo in corso..."
 
 msgid "Connecting to FRITZ!Box..."
-msgstr "Connessione alla FRITZ!Box in corso..."
+msgstr "Connessione al FRITZ!Box in corso..."
 
 #, python-format
 msgid ""
@@ -123,7 +123,7 @@ msgid ""
 " (%s)\n"
 "retrying..."
 msgstr ""
-"Connessione alla FRITZ!Box persa!\n"
+"Connessione al FRITZ!Box persa!\n"
 "(%s)\n"
 "Nuovo tentativo in corso..."
 
@@ -131,14 +131,14 @@ msgid "Could not get call list; wrong version?"
 msgstr "Impossibile ottenere elenco chiamate: versione errata?"
 
 msgid "Could not load phonebook: "
-msgstr ""
+msgstr "Impossibile caricare la rubrica:"
 
 #, python-format
 msgid "Could not load phonebook: %s"
-msgstr ""
+msgstr "Impossibile caricare la rubrica: %s"
 
 msgid "Could not parse FRITZ!Box Phonebook entry"
-msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
+msgstr "Impossibile analizzare la voce nella Rubrica del FRITZ!Box!"
 
 msgid "Could not read FRITZ!Box phonebook; wrong version?"
 msgstr "Impossibile leggere Rubrica della FRITZ!Box: versione errata?"
@@ -147,7 +147,7 @@ msgid "Country"
 msgstr "Nazione"
 
 msgid "Countrycode (e.g. 0044 for UK, 0034 for Spain, etc.)"
-msgstr ""
+msgstr "Countrycode (es. 0044 per UK, 0034 per Spagna, ecc.)"
 
 msgid "DECT inactive"
 msgstr "DECT non attivo"
@@ -161,7 +161,7 @@ msgstr "Disattivare accesso Guest WLAN"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
-msgstr "Cancell."
+msgstr "Cancella"
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Delete entry"
@@ -417,10 +417,10 @@ msgid "Missed calls"
 msgstr "Chiamate perse"
 
 msgid "Mute on incoming call"
-msgstr ""
+msgstr "Silenzioso sulle chiamate in arrivo"
 
 msgid "Mute on outgoing calls"
-msgstr ""
+msgstr "Silenzioso sulle chiamate in uscita"
 
 msgid "Name"
 msgstr "Nome"
