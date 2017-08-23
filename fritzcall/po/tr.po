@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 20:05+0100\n"
+"POT-Creation-Date: 2017-06-29 18:00+0200\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -65,14 +65,17 @@ msgstr "Kayıtsız arayan kişisini, rehbere otomatik olarak ekle"
 msgid "Call"
 msgstr "Ara"
 
+msgid "Call diversion"
+msgstr ""
+
+msgid "Call diversion active"
+msgstr ""
+
 msgid "Call monitoring"
 msgstr "Çağrı görüntüleme"
 
 msgid "Call redirection"
 msgstr "Çağrı yönlendirme"
-
-msgid "Call redirection active"
-msgstr ""
 
 #, python-format
 msgid "Calling %s"
@@ -122,6 +125,9 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr ""
 
+msgid "Could not load phonebook: "
+msgstr ""
+
 #, python-format
 msgid "Could not load phonebook: %s"
 msgstr ""
@@ -135,7 +141,7 @@ msgstr ""
 msgid "Country"
 msgstr "Ülke"
 
-msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgid "Countrycode (e.g. 0044 for UK, 0034 for Spain, etc.)"
 msgstr ""
 
 msgid "DECT inactive"
@@ -233,6 +239,9 @@ msgstr "FRITZ!Box araması başarısız: %s"
 
 #, python-format
 msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr ""
+
+msgid "FRITZ!Box - Error getting status: "
 msgstr ""
 
 #, python-format
@@ -379,9 +388,6 @@ msgstr "Posta kutusu"
 msgid "Make it more skin friendly"
 msgstr ""
 
-msgid "Minutes of uptime of WLAN guest network"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Cevapsız"
@@ -389,17 +395,14 @@ msgstr "Cevapsız"
 msgid "Missed calls"
 msgstr "Cevapsız aramalar"
 
-msgid "Mute also on outgoing calls"
+msgid "Mute on incoming call"
 msgstr ""
 
-msgid "Mute on call"
-msgstr "Çağrı olduğunda sessize al"
+msgid "Mute on outgoing calls"
+msgstr ""
 
 msgid "Name"
 msgstr "Ad"
-
-msgid "Name of WLAN guest network"
-msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -411,8 +414,8 @@ msgstr ""
 msgid "No DECT phone registered"
 msgstr "DECT telefon tanıtılmamış"
 
-msgid "No call redirection active"
-msgstr "Çağrı yönlendirme etkin değil"
+msgid "No call diversion active"
+msgstr ""
 
 msgid "No entry selected"
 msgstr "Seçim yapılmadı"
@@ -445,8 +448,8 @@ msgstr "Tamam"
 msgid "One DECT phone registered"
 msgstr "Bir DECT telefon tanıtılmış"
 
-msgid "One call redirection active"
-msgstr "Bir çağrı yönlendirmesi etkin"
+msgid "One call diversion active"
+msgstr ""
 
 msgid "One mailbox active"
 msgstr "Bir posta kutusu etkin"
@@ -473,9 +476,6 @@ msgstr "Giden aramalar"
 
 msgid "Password Accessing FRITZ!Box"
 msgstr "FRITZ!Box yönetici parolası"
-
-msgid "Password of WLAN guest network"
-msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -543,9 +543,6 @@ msgstr "LDIF dosyası içinde aranıyor..."
 msgid "Searching in Outlook export..."
 msgstr "Outlook adres defteri içinde aranıyor..."
 
-msgid "Secure WLAN guest network"
-msgstr ""
-
 msgid "Setting..."
 msgstr ""
 
@@ -560,6 +557,9 @@ msgstr "Giden aramalarda göster"
 
 msgid "Show after Standby"
 msgstr "Hazırda bekletme kipine geçtikten sonra"
+
+msgid "Show also internal numbers"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
@@ -641,6 +641,9 @@ msgstr "Posta kutularını aç/kapat"
 msgid "UNKNOWN"
 msgstr "BİLİNMİYOR"
 
+msgid "Unknown"
+msgstr ""
+
 msgid "Update available"
 msgstr ""
 
@@ -674,8 +677,8 @@ msgstr ""
 msgid "before 05.27"
 msgstr ""
 
-msgid "call redirections active"
-msgstr "çağrı yönlendirmesi etkin"
+msgid "call diversions active"
+msgstr ""
 
 msgid "calls in mailbox"
 msgstr ""
@@ -699,6 +702,12 @@ msgstr "tamamlandı, son liste kullanıyor"
 
 msgid "encrypted"
 msgstr "şifrelenmiş"
+
+msgid "fax_home"
+msgstr ""
+
+msgid "fax_work"
+msgstr ""
 
 msgid "finishing"
 msgstr "sonlandırılıyor"
@@ -748,8 +757,17 @@ msgstr ""
 msgid "number suppressed"
 msgstr ""
 
+msgid "off"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
 msgid "one device active"
 msgstr "Bir cihaz etkin"
+
+msgid "pager"
+msgstr ""
 
 msgid "preparing"
 msgstr "hazırlanıyor"
@@ -770,6 +788,9 @@ msgstr "aramaları ayrı göster"
 
 msgid "show nothing"
 msgstr "birşey gösterme"
+
+msgid "with"
+msgstr ""
 
 msgid "work"
 msgstr "iş"
@@ -913,6 +934,15 @@ msgstr ""
 #~ msgid "Minuten"
 #~ msgstr "dakika"
 
+#~ msgid "Mute on call"
+#~ msgstr "Çağrı olduğunda sessize al"
+
+#~ msgid "No call redirection active"
+#~ msgstr "Çağrı yönlendirme etkin değil"
+
+#~ msgid "One call redirection active"
+#~ msgstr "Bir çağrı yönlendirmesi etkin"
+
 #~ msgid ""
 #~ "Outgoing Call on %(date)s to\n"
 #~ "---------------------------------------------\n"
@@ -965,3 +995,6 @@ msgstr ""
 
 #~ msgid "WLAN on"
 #~ msgstr "WLAN aç"
+
+#~ msgid "call redirections active"
+#~ msgstr "çağrı yönlendirmesi etkin"
