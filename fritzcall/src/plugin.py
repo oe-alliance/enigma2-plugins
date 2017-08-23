@@ -2,9 +2,9 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1481 $
-$Date: 2017-07-04 10:28:00 +0200 (Tue, 04 Jul 2017) $
-$Id: plugin.py 1481 2017-07-04 08:28:00Z michael $
+$Revision: 1490 $
+$Date: 2017-08-17 18:40:48 +0200 (Thu, 17 Aug 2017) $
+$Id: plugin.py 1490 2017-08-17 16:40:48Z michael $
 '''
 
 
@@ -368,8 +368,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1481 $"[1:-2] + "\n" +
-							"$Date: 2017-07-04 10:28:00 +0200 (Tue, 04 Jul 2017) $"[1:23] + "\n"
+							"$Revision: 1490 $"[1:-2] + "\n" +
+							"$Date: 2017-08-17 18:40:48 +0200 (Thu, 17 Aug 2017) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1919,7 +1919,7 @@ class FritzCallPhonebook(object):
 					for k, v in json.loads(open(phonebookFilename).read().decode("utf-8")).items():
 						phonebookTmp[k.encode("utf-8")] = v.encode("utf-8")
 					phonebookTmp[number] = name
-					json.dump(self.phonebook, open(phonebookFilename, "w"), ensure_ascii=False, encoding="utf-8", indent=0, separators=(',', ': '), sort_keys=True)
+					json.dump(phonebookTmp, open(phonebookFilename, "w"), ensure_ascii=False, encoding="utf-8", indent=0, separators=(',', ': '), sort_keys=True)
 					info("[FritzCallPhonebook] added %s with %s to Phonebook.json", number, name.strip())
 					return True
 				except IOError:
@@ -1947,12 +1947,19 @@ class FritzCallPhonebook(object):
 # 					eBackgroundFileEraser.getInstance().erase(phonebookFilename)
 # 					os.rename(phonebookFilename + str(os.getpid()), 	phonebookFilename)
 					phonebookFilename = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.json")
+					# check whether PhoneBook.json exists, if not drop empty JSOn file
+					if not os.path.isfile(phonebookFilename):
+						json.dump({}, open(phonebookFilename, "w"), ensure_ascii=False, encoding="utf-8", indent=0, separators=(',', ': '), sort_keys=True)
+						info("[FritzCallPhonebook] empty Phonebook.json created")
+						return true
+
 					phonebookTmp = {}
 					for k, v in json.loads(open(phonebookFilename).read().decode("utf-8")).items():
 						phonebookTmp[k.encode("utf-8")] = v.encode("utf-8")
-					del phonebookTmp[number]
-					json.dump(self.phonebook, open(phonebookFilename, "w"), ensure_ascii=False, encoding="utf-8", indent=0, separators=(',', ': '), sort_keys=True)
-					info("[FritzCallPhonebook] removed %s from Phonebook.json", number)
+					if number in phonebookTmp:
+						del phonebookTmp[number]
+						json.dump(phonebookTmp, open(phonebookFilename, "w"), ensure_ascii=False, encoding="utf-8", indent=0, separators=(',', ': '), sort_keys=True)
+						info("[FritzCallPhonebook] removed %s from Phonebook.json", number)
 					return True
 
 				except (IOError, OSError):
@@ -2611,7 +2618,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1481 $"[1:-1] + "$Date: 2017-07-04 10:28:00 +0200 (Tue, 04 Jul 2017) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1490 $"[1:-1] + "$Date: 2017-08-17 18:40:48 +0200 (Thu, 17 Aug 2017) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -3130,8 +3137,8 @@ def notifyCall(event, date, number, caller, phone, connID): # @UnusedVariable # 
 	elif config.plugins.FritzCall.afterStandby.value == "inList":
 		#
 		# if not yet done, register function to show call list
-		global standbyMode
 		if not standbyMode:
+			global standbyMode
 			standbyMode = True
 			Standby.inStandby.onHide.append(callList.display)  # @UndefinedVariable
 		# add text/timeout to call list
@@ -3217,7 +3224,7 @@ class FritzReverseLookupAndNotifier(object):
 
 class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 	def __init__(self):
-		info("[FritzProtocol] " + "$Revision: 1481 $"[1:-1] + "$Date: 2017-07-04 10:28:00 +0200 (Tue, 04 Jul 2017) $"[7:23] + " starting")
+		info("[FritzProtocol] " + "$Revision: 1490 $"[1:-1] + "$Date: 2017-08-17 18:40:48 +0200 (Thu, 17 Aug 2017) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

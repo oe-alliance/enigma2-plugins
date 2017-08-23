@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1479 $
-$Date: 2017-07-02 15:51:13 +0200 (Sun, 02 Jul 2017) $
-$Id: FritzCallFBF.py 1479 2017-07-02 13:51:13Z michael $
+$Revision: 1492 $
+$Date: 2017-08-21 17:00:25 +0200 (Mon, 21 Aug 2017) $
+$Id: FritzCallFBF.py 1492 2017-08-21 15:00:25Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -3479,6 +3479,7 @@ class FritzCallFBF_upnp():
 	exception = logger.exception
 
 	def __init__(self):
+		self._loginFailure = False
 		self._callScreen = None
 		self._callType = config.plugins.FritzCall.fbfCalls.value
 		self.password = decode(config.plugins.FritzCall.password.value)
@@ -3491,10 +3492,11 @@ class FritzCallFBF_upnp():
 		self._callback = None
 		self._phonebook_timer = eTimer()
 		self._phonebook_timeout = TIMEOUT
+		self.version = None
 		self.fc = FritzConnection(address=config.plugins.FritzCall.hostname.value,
 								user=config.plugins.FritzCall.username.value,
 								password=self.password,
-								servicesToGet=["DeviceConfig:1", "X_AVM-DE_OnTel:1", "WLANConfiguration:1", "WLANConfiguration:2", "WLANConfiguration:3"])
+								servicesToGet=["DeviceConfig:1", "X_AVM-DE_OnTel:1", "WLANConfiguration:1", "WLANConfiguration:2", "WLANConfiguration:3", "UserInterface:1"])
 		self.getInfo(None)
 
 	def _notify(self, text):
@@ -3510,9 +3512,12 @@ class FritzCallFBF_upnp():
 		Retrieve information from box and fill in self.information and self.blacklist
 		'''
 		self.debug("")
+		if self._loginFailure:
+			self.debug("skip because of login failure")
 		self._infoCallback = callback
 		if "DeviceConfig:1" in self.fc.services.keys():
 			self.fc.call_action(self._getInfo, "DeviceConfig", "X_AVM-DE_CreateUrlSID")
+			# self.fc.call_action(self._getVersion, "UserInterface", "GetInfo")
 		else:
 			try:
 				self._timer_conn = self._timer.timeout.connect(self._timerTick)
@@ -3525,21 +3530,31 @@ class FritzCallFBF_upnp():
 		self.debug(repr(self.fc.services.keys()))
 		self._timeout -= 1
 		if "DeviceConfig:1" in self.fc.services.keys():
-			self.fc.call_action(self._getInfo, "DeviceConfig", "X_AVM-DE_CreateUrlSID")
+			if self._loginFailure:
+				self.debug("skip because of login failure")
+			else:
+				self.fc.call_action(self._getInfo, "DeviceConfig", "X_AVM-DE_CreateUrlSID")
 			self._timer.stop()
 			self._timeout = TIMEOUT
 		if self._timeout == 0:
 			self._timer.stop()
 			self._timeout = TIMEOUT
 
+	def _getVersion(self, result):
+		if "NewX_AVM-DE_Version" in result:
+			self.version = result["NewX_AVM-DE_Version"]
+			self.debug("FW Version:", self.version)
+
 	def _getInfo(self, result):
 		self.debug(repr(result))
 		if isinstance(result, Failure):
 			text = _("FRITZ!Box - Error getting status: ")  + _("wrong user or password?")
+			self._loginFailure = True
 			self._notify(text)
 			return
 
 		if "NewX_AVM-DE_UrlSID" not in result:
+			self.error("no UrlSID in response!")
 			return
 
 		md5Sid = result["NewX_AVM-DE_UrlSID"]
@@ -3704,11 +3719,11 @@ class FritzCallFBF_upnp():
 		if "wlan24" in boxData:
 			wlan24 = boxData["wlan24"]
 			if wlan24:
-				netName = re.sub(r".*: ", "", wlan24["txt"]).encode("utf-8")
+				netName24 = re.sub(r".*: ", "", wlan24["txt"]).encode("utf-8")
 				if wlan24["led"] == "led_green":
-					wlanState = ['1', '', '', "2,4GHz " + _("on") + ": " + netName]
+					wlanState = ['1', '', '', "2,4GHz " + _("on") + ": " + netName24]
 				else:
-					wlanState = ['0', '', '', "2,4GHz " + _("off") + ": " + netName]
+					wlanState = ['0', '', '', "2,4GHz " + _("off") + ": " + netName24]
 		self.info("wlanState24: " + repr(wlanState))
 
 		if "wlan5" in boxData:
@@ -3723,7 +3738,10 @@ class FritzCallFBF_upnp():
 				else:
 					if wlan5["led"] == "led_green":
 						wlanState[0] = '1'
-						wlanState[3] = wlanState[3] + ", 5GHz " + _("on") + ": " + netName
+						if netName == netName24:
+							wlanState[3] = "2,4GHz/5GHz " + _("on") + ": " + netName
+						else:
+							wlanState[3] = wlanState[3] + ", 5GHz " + _("on") + ": " + netName
 		self.info("wlanState5: " + repr(wlanState))
 
 		if "dect" in boxData:
@@ -3820,6 +3838,8 @@ class FritzCallFBF_upnp():
 
 	def getCalls(self, callScreen, callback, callType):
 		self.debug("")
+		if self._loginFailure:
+			self.debug("skip because of login failure")
 		self._callScreen = callScreen
 		self._callType = callType
 		if "X_AVM-DE_OnTel:1" in self.fc.services.keys():
@@ -3829,6 +3849,13 @@ class FritzCallFBF_upnp():
 
 	def _getCalls_cb1(self, result, callback):
 		self.debug("")
+
+		if isinstance(result, Failure):
+			text = _("FRITZ!Box - Could not load calls: %s")  % _("wrong user or password?")
+			self._loginFailure = True
+			self._notify(text)
+			return
+
 		if self._callScreen:
 			self._callScreen.updateStatus(_("preparing"))
 		url = result["NewCallListURL"]
@@ -3866,8 +3893,13 @@ class FritzCallFBF_upnp():
 				else:
 					remote = resolveNumber(number, "", self.phonebook)
 				here = call.find("./CallerNumber").text
+				if filtermsns and here not in filtermsns:
+					# self.debug("skip %s" % (here))
+					continue
 				if here.isdigit():
 					here = resolveNumber(here, call.find("./Caller").text, self.phonebook)
+				elif here.startswith("SIP: "):
+					here = here[5:]
 			else:
 				number = call.find("./Caller").text
 				if not number:
@@ -3878,11 +3910,13 @@ class FritzCallFBF_upnp():
 				else:
 					remote = resolveNumber(call.find("./Caller").text, "", self.phonebook)
 				here = call.find("./CalledNumber").text
+				if filtermsns and here not in filtermsns:
+					# self.debug("skip %s" % (here))
+					continue
 				if here.isdigit():
 					here = resolveNumber(here, call.find("./Called").text, self.phonebook)
-			if filtermsns and here not in filtermsns:
-				# self.debug("skip %s" % (here))
-				continue
+				elif here.startswith("SIP: "):
+					here = here[5:]
 
 			device = call.find("./Device").text
 			if device:
@@ -3913,6 +3947,8 @@ class FritzCallFBF_upnp():
 		'''
 		self.debug("")
 		self.phonebook = phonebook
+		if self._loginFailure:
+			self.debug("skip because of login failure")
 
 		# newer OE versions don't have the callback
 		self._phonebook_timeout -= 1
@@ -3930,7 +3966,10 @@ class FritzCallFBF_upnp():
 		self.debug(repr(self.fc.services.keys()))
 		self._phonebook_timeout -= 1
 		if "X_AVM-DE_OnTel:1" in self.fc.services.keys():
-			self.fc.call_action(self._loadFritzBoxPhonebook_cb1, "X_AVM-DE_OnTel", "GetPhonebookList")
+			if self._loginFailure:
+				self.debug("skip because of login failure")
+			else:
+				self.fc.call_action(self._loadFritzBoxPhonebook_cb1, "X_AVM-DE_OnTel", "GetPhonebookList")
 			self._phonebook_timer.stop()
 			self._phonebook_timeout = TIMEOUT
 		if self._phonebook_timeout == 0:
@@ -3939,11 +3978,16 @@ class FritzCallFBF_upnp():
 
 	def _loadFritzBoxPhonebook_cb1(self, result):
 		self.debug(repr(result))
-		if isinstance(result, Failure) or 'NewPhonebookList' not in result:
+		if isinstance(result, Failure):
 			text = _("FRITZ!Box - ") + _("Could not load phonebook: ") + _("wrong user or password?")
 			self._notify(text)
+			self._loginFailure = True
 			return
-			
+
+		if 'NewPhonebookList' not in result:
+			self.error("no NewPhonebookList in response!")
+			return
+
 		ids = result['NewPhonebookList'].split(',')
 		ids = [int(x) for x in ids]
 		for ident in ids:
@@ -3951,6 +3995,12 @@ class FritzCallFBF_upnp():
 
 	def _loadFritzBoxPhonebook_cb2(self, result):
 		self.debug(repr(result))
+		if isinstance(result, Failure):
+			text = _("FRITZ!Box - ") + _("Could not load phonebook: ") + _("wrong user or password?")
+			self._notify(text)
+			self._loginFailure = True
+			return
+
 		if 'NewPhonebookName' not in result or 'NewPhonebookURL' not in result:
 			text = _("FRITZ!Box - ") + _("Could not load phonebook: %s") % 'NewPhonebookName'
 			self._notify(text)
@@ -4010,6 +4060,9 @@ class FritzCallFBF_upnp():
 		@type state: string
 		'''
 		self.debug("")
+		if self._loginFailure:
+			self.debug("skip because of login failure")
+
 		if not statusWLAN or (statusWLAN != '1' and statusWLAN != '0'):
 			return
 
@@ -4030,6 +4083,8 @@ class FritzCallFBF_upnp():
 		@type statusGuestAccess: string
 		'''
 		self.debug("")
+		if self._loginFailure:
+			self.debug("skip because of login failure")
 
 		if "WLANConfiguration:2" not in self.fc.services.keys():
 			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
@@ -4049,13 +4104,26 @@ class FritzCallFBF_upnp():
 
 	def _general_cb(self, result, callback):
 		self.debug("result: " + repr(result))
+		if isinstance(result, Failure):
+			text = _("FRITZ!Box - Error logging in: %s")  % _("wrong user or password?")
+			self._loginFailure = True
+			self._notify(text)
+			return
 		callback()
 
 	def _general_cb1(self, result):
 		self.debug("result: " + repr(result))
+		if isinstance(result, Failure):
+			text = _("FRITZ!Box - Error logging in: %s")  % _("wrong user or password?")
+			self._loginFailure = True
+			self._notify(text)
+			return
 
 	def _readBlacklist(self):
 		self.debug("")
+		if self._loginFailure:
+			self.debug("skip because of login failure")
+
 		self.blacklist = ([], [])
 		if "X_AVM-DE_OnTel:1" not in self.fc.services.keys():
 			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box yet\nStill initialising or wrong firmware version"), type = MessageBox.TYPE_ERROR, timeout = config.plugins.FritzCall.timeout.value)
@@ -4064,6 +4132,12 @@ class FritzCallFBF_upnp():
 		
 	def _readBlacklist_cb(self, result):
 		self.debug("")
+		if isinstance(result, Failure):
+			text = _("FRITZ!Box - Error getting blacklist: %s")  % _("wrong user or password?")
+			self._loginFailure = True
+			self._notify(text)
+			return
+
 		if self.logger.getEffectiveLevel() == logging.DEBUG:
 			self.debug("dumping result to /tmp/FritzCall_readBlacklist_cb.xml")
 			linkP = open("/tmp/FritzCall_readBlacklist_cb.xml", "w")
@@ -4100,6 +4174,9 @@ class FritzCallFBF_upnp():
 		Reset box
 		'''
 		self.debug("")
+		if self._loginFailure:
+			self.debug("skip because of login failure")
+
 		if "DeviceConfig:1" in self.fc.services.keys():
 			self.fc.call_action(self._getInfo, "DeviceConfig", "Reboot")
 		else:
