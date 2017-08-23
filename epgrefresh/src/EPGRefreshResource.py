@@ -15,7 +15,7 @@ except ImportError as ie:
 	from urllib.parse import unquote
 	iteritems = lambda d: d.items()
 
-API_VERSION = "1.3"
+API_VERSION = "1.4"
 
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
@@ -228,9 +228,16 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 			elif key == "parse_autotimer":
 				if value in config.plugins.epgrefresh.parse_autotimer.choices:
 					config.plugins.epgrefresh.parse_autotimer.value = value
+				elif value == "true":
+					config.plugins.epgrefresh.parse_autotimer.value = "always"
+				else:
+					config.plugins.epgrefresh.parse_autotimer.value = "never"
 			elif key == "adapter":
 				if value in config.plugins.epgrefresh.adapter.choices:
 					config.plugins.epgrefresh.adapter.value = value
+			elif key == "skipProtectedServices":
+				if value in config.plugins.epgrefresh.skipProtectedServices.choices:
+					config.plugins.epgrefresh.skipProtectedServices.value = value
 
 		config.plugins.epgrefresh.save()
 
@@ -330,6 +337,10 @@ class EPGRefreshSettingsResource(resource.Resource):
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
  <e2setting>
+  <e2settingname>config.plugins.epgrefresh.skipProtectedServices</e2settingname>
+  <e2settingvalue>%s</e2settingvalue>
+ </e2setting>
+ <e2setting>
   <e2settingname>canDoBackgroundRefresh</e2settingname>
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
@@ -355,6 +366,7 @@ class EPGRefreshSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.parse_autotimer.value,
 				config.plugins.epgrefresh.lastscan.value,
 				config.plugins.epgrefresh.adapter.value,
+				config.plugins.epgrefresh.skipProtectedServices.value,
 				canDoBackgroundRefresh,
 				hasAutoTimer,
 				API_VERSION,
