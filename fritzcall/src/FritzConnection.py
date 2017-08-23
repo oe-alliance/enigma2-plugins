@@ -177,23 +177,28 @@ class FritzAction(object):
 			linkP.write(content)
 			linkP.close()
 		root = ET.fromstring(content)
-		nonce = root.find(".//Nonce").text
-		realm = root.find(".//Realm").text
-		secret = md5.new(config.plugins.FritzCall.username.value + ":" +
-					realm + ":" +
-					self.password).hexdigest()
-		response = md5.new(secret + ":" + nonce).hexdigest()
+		if root.find(".//Nonce") != None and root.find(".//Realm") != None:
+			nonce = root.find(".//Nonce").text
+			realm = root.find(".//Realm").text
+			secret = md5.new(config.plugins.FritzCall.username.value + ":" +
+						realm + ":" +
+						self.password).hexdigest()
+			response = md5.new(secret + ":" + nonce).hexdigest()
+			# self.debug("user %s, passwort %s", config.plugins.FritzCall.username.value, self.password)
+			header_clientauth = self.header_clientauth_template % (
+																nonce,
+																response,
+																config.plugins.FritzCall.username.value,
+																realm)
+		else: # Anmeldung im Heimnetz ohne Passwort
+			self.debug("Anmeldung im Heimnetz ohne Passwort!")
+			header_clientauth = ""
 
-		# self.debug("user %s, passwort %s", config.plugins.FritzCall.username.value, self.password)
 		headers = self.header.copy()
 		headers['soapaction'] = '%s#%s' % (self.service_type, self.name)
-		header_clientauth = self.header_clientauth_template % (
-															nonce,
-															response,
-															config.plugins.FritzCall.username.value,
-															realm)
 		data = self.envelope.strip() % ( header_clientauth,
 										self._body_builder(kwargs))
+
 		url = 'http://%s:%s%s' % (self.address, self.port, self.control_url)
 		# self.debug("url: " + url + "\n" + data)
 		getPage(url,
