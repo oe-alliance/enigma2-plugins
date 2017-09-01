@@ -150,7 +150,7 @@ msgid "IP:"
 msgstr "IP:"
 
 msgid "Local share name"
-msgstr "Nombre de recurso compartido local"
+msgstr "Nombre de montaje local"
 
 msgid "Manage network shares"
 msgstr "Administra los recursos compartidos en red"
@@ -292,7 +292,7 @@ msgid "Server IP"
 msgstr "IP del servidor"
 
 msgid "Server share"
-msgstr "Servidor compartido"
+msgstr "Nombre del recurso compartido del servidor"
 
 msgid "Setup Mount Again"
 msgstr "Configurar ‘Montar otra vez’"
@@ -326,3 +326,6 @@ msgstr "Usar como reemplazo de HDD"
 
 msgid "The harddisk"
 msgstr "Disco duro"
+
+msgid "You have changed the share name!\nUpdate existing entry and continue?\n"
+msgstr "¡Has cambiado el nombre del montaje!\n¿Actualizar el existente y continuar?\n"
