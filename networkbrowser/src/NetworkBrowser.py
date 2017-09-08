@@ -23,7 +23,6 @@ from stat import ST_MTIME
 import subprocess
 
 import netscan
-import ipscan
 from MountManager import AutoMountManager
 from AutoMount import iAutoMount
 from MountEdit import AutoMountEdit
@@ -285,10 +284,6 @@ class NetworkBrowser(Screen):
 		dom = xml.dom.minidom.parseString(result)
 		scan_result = []
 		for dhost in dom.getElementsByTagName('host'):
-			# host ip
-			host = ''
-			hostname = ''
-			host = dhost.getElementsByTagName('address')[0].getAttributeNode('addr').value
 			for dhostname in dhost.getElementsByTagName('hostname'):
 				hostname = dhostname.getAttributeNode('name').value
 				hostname = hostname.split('.')
