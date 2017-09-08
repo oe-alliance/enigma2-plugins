@@ -554,7 +554,7 @@ def startConfig(session, **kwargs):
 	session.open(PermanentClockMenu)
 
 def main(menuid):
-	if getImageDistro() in ('openmips'):
+	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
 			return [ ]
 	elif getImageDistro() in ('openhdf'):

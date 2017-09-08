@@ -460,7 +460,7 @@ def setup(session, **kwargs):
 	session.open(AutomaticCleanupSetup) # start setup
 
 def startSetup(menuid):
-	if getImageDistro() in ('openmips'):
+	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
 			return [ ]
 	else:

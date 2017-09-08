@@ -589,7 +589,7 @@ def autostart(reason, **kwargs):
 		AutoRes(session)
 
 def startSetup(menuid):
-	if getImageDistro() in ('openmips', 'openhdf'):
+	if getImageDistro() in ('teamblue', 'openhdf'):
 		if menuid != "video_menu":
 			return [ ]
 	else:

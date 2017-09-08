@@ -31,7 +31,7 @@ def getAutoTimerSettingsDefinitions():
 	intervaltext = _("Poll Interval (in h)")
 	intervaldesc = _("This is the delay in hours that the AutoTimer will wait after a search to search the EPG again.")
 
-	if getImageDistro() in ('beyonwiz', 'openmips', 'openatv'):
+	if getImageDistro() in ('beyonwiz', 'teamblue', 'openatv'):
 		intervaltext = _("Poll Interval (in mins)")
 		intervaldesc = _("This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again.")
 

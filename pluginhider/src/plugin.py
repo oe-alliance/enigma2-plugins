@@ -75,7 +75,7 @@ def main(session, *args, **kwargs):
 	session.open(PluginHiderSetup)
 
 def menu(menuid):
-	if getImageDistro() in ('openmips'):
+	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
 			return [ ]
 	else:
