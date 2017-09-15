@@ -339,6 +339,12 @@ msgstr "Löschen"
 msgid "Description"
 msgstr "Beschreibung"
 
+msgid "Enter or edit description"
+msgstr "Bitte geben Sie eine neue Beschreibung ein:"
+
+msgid "Enter or edit match title"
+msgstr "Bitte geben Sie einen neuen Suchbegriff ein:"
+
 #: ../src/AutoTimerOverview.py:189
 #, python-format
 msgid "Do you really want to delete %s?"
