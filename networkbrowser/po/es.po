@@ -329,3 +329,6 @@ msgstr "Disco duro"
 
 msgid "You have changed the share name!\nUpdate existing entry and continue?\n"
 msgstr "¡Has cambiado el nombre del montaje!\n¿Actualizar el existente y continuar?\n"
+
+msgid "Mount shares again"
+msgstr "Montar recursos de red otra vez"
