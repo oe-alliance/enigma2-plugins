@@ -11,7 +11,7 @@ from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
 
 PluginLanguageDomain = "AutoTimer"
 PluginLanguagePath = "Extensions/AutoTimer/locale"
- 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
@@ -28,10 +28,21 @@ config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default=True)
 config.plugins.autotimer.delay = ConfigNumber(default=3)
 config.plugins.autotimer.editdelay = ConfigNumber(default=3)
+
+default_unit = "hour"
+if getImageDistro() in ('beyonwiz', 'teamblue', 'openatv', 'openvix'): # distros that want default polling in minutes
+	default_unit = "minute"
+config.plugins.autotimer.unit = ConfigSelection(choices=[
+		("hour", _("Hour")),
+		("minute", _("Minute"))
+	], default = default_unit
+)
+
+default_interval = {"hour": 4, "minute": 30} # default poll every 4 hours or 30 minutes
 if getImageDistro() in ('teamblue', 'openatv'):
-	config.plugins.autotimer.interval = ConfigNumber(default=240)
-else:
-	config.plugins.autotimer.interval = ConfigNumber(default=30)
+	default_interval["minute"] = 240
+config.plugins.autotimer.interval = ConfigNumber(default=default_interval[config.plugins.autotimer.unit.value])
+
 config.plugins.autotimer.timeout = ConfigNumber(default=5)
 config.plugins.autotimer.popup_timeout = ConfigNumber(default=5)
 config.plugins.autotimer.check_eit_and_remove = ConfigYesNo(default=False)
