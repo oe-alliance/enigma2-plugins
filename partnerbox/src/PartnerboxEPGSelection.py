@@ -74,7 +74,7 @@ def Partnerbox_EPGSelectionInit():
 	EPGSelection.remoteTimerMenu = remoteTimerMenu
 	EPGSelection.PartnerboxInit = PartnerboxInit
 
-def Partnerbox_EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, parent=None):
+def Partnerbox_EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, parent=None, StartRef = None, EPGtype = None, StartBouquet = None):
 	#check if alternatives are defined
 	#if isinstance(service, eServiceReference):
 	#	if service.flags & (eServiceReference.isGroup):
