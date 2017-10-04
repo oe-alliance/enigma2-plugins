@@ -285,7 +285,7 @@ msgstr "Aktualisiere unter Verwendung von"
 
 #: EPGRefreshConfiguration.py:164
 msgid "Display more Options"
-msgstr "mehr Optionen anzeigen"
+msgstr "Mehr Optionen anzeigen"
 
 #: EPGRefreshConfiguration.py:164
 msgid "Show Advanced Options"
