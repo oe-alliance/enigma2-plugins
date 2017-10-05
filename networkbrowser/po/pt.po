@@ -90,7 +90,7 @@ msgid "Delete"
 msgstr "Apagar"
 
 msgid "Delete mount"
-msgstr "Eliminar Montagem de Rede"
+msgstr "Apagar Montagem"
 
 msgid "Dir:"
 msgstr "Dir:"
@@ -126,7 +126,7 @@ msgid "Enter user and password for host: "
 msgstr "Introduza o utilizador  e palavra-passe para o host:"
 
 msgid "Enter username:"
-msgstr "Introduza o nome do utilizador:"
+msgstr "Nome do utilizador:"
 
 msgid "Expert"
 msgstr "Especialista"
@@ -135,7 +135,7 @@ msgid "FSTAB (mount using linux)"
 msgstr "FSTAB (montar e usar linux)"
 
 msgid "Finished restarting your network"
-msgstr "Terminou a reiniciação de rede"
+msgstr "Terminou de reiniciar a sua rede"
 
 msgid "IP Address"
 msgstr "Endereço IP"
@@ -165,10 +165,10 @@ msgid "Mount Viewer"
 msgstr "Ver Montagens"
 
 msgid "Mount again"
-msgstr "Montar outra vez "
+msgstr "Montar de novo"
 
 msgid "Mount informations"
-msgstr "Informação de Montagem"
+msgstr "Informações de Montagem"
 
 msgid "Mount options"
 msgstr "Opções de Montagem"
@@ -317,4 +317,3 @@ msgstr "A montagem de rede foi atualizada."
 
 msgid "use as HDD replacement"
 msgstr "usar como substituição do HDD"
-
