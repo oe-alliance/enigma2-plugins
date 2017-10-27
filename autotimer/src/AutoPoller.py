@@ -8,6 +8,9 @@ from plugin import autotimer
 # Notifications
 import NavigationInstance
 
+# Debug
+from datetime import datetime, timedelta
+
 class AutoPoller:
 	"""Automatically Poll AutoTimer"""
 
@@ -29,7 +32,7 @@ class AutoPoller:
 	def query(self):
 		self.timer.stop()
 		from Screens.Standby import inStandby
-		print("[AutoTimer] Auto Poll")
+		print"[AutoTimer][query] current auto poll", datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 		doparse = True
 		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
 			print("[AutoTimer] Skip check during running records")
@@ -54,6 +57,6 @@ class AutoPoller:
 				# Dump error to stdout
 				import traceback, sys
 				traceback.print_exc(file=sys.stdout)
-		#TODO back to hours
-		#self.timer.startLongTimer(config.plugins.autotimer.interval.value * 3600)
-		self.timer.startLongTimer(config.plugins.autotimer.interval.value * 60)
+		multiplier = config.plugins.autotimer.unit.value == "hour" and 60 or 1
+		self.timer.startLongTimer(config.plugins.autotimer.interval.value * 60 * multiplier)
+		print"[AutoTimer][query] next auto poll at", (datetime.now() + timedelta(minutes=config.plugins.autotimer.interval.value * multiplier)).strftime('%Y-%m-%d %H:%M:%S')

@@ -398,6 +398,8 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 			value = value[0]
 			if key == "autopoll":
 				config.plugins.autotimer.autopoll.value = True if value == "true" else False
+			elif key == "unit":
+				config.plugins.autotimer.unit.value = value == "hour" and "hour" or "minute"
 			elif key == "interval":
 				config.plugins.autotimer.interval.value = int(value)
 			elif key == "refresh":
