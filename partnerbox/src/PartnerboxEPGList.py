@@ -290,7 +290,7 @@ def Partnerbox_SimilarEntry(self, service, eventId, beginTime, service_name, dur
 
 def Partnerbox_MultiEntry(self, changecount, service, eventId, beginTime, duration, EventName, nowTime, service_name):
 	if self.listSizeWidth != self.l.getItemSize().width(): #recalc size if scrollbar is shown
-	self.recalcEntrySize()
+		self.recalcEntrySize()
 	r1 = self.service_rect
 	r2 = self.progress_rect
 	r3 = self.descr_rect
