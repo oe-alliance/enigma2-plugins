@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-28 19:58+0200\n"
-"PO-Revision-Date: 2016-07-31 10:14+0200\n"
+"POT-Creation-Date: 2017-11-09 23:22+0000\n"
+"PO-Revision-Date: 2017-11-10 15:05+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Rob van der Does\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 2.0.4\n"
 
 msgid "Auto frame rate (refresh need 'multi')"
 msgstr "Auto frame rate (verversen benodigt 'multi')"
@@ -65,8 +65,20 @@ msgstr "Schakel 1080p25 modus in"
 msgid "Enable 1080p30 Mode"
 msgstr "Schakel 1080p30 modus in"
 
+msgid "Enable 2160p24 Mode"
+msgstr "Schakel 2160p24 modus in."
+
+msgid "Enable 2160p25 Mode"
+msgstr "Schakel 2160p25 modus in."
+
+msgid "Enable 2160p30 Mode"
+msgstr "Schakel 2160p30 modus in."
+
 msgid "Enable 720p24 Mode"
 msgstr "Schakel 720p24 modus in"
+
+msgid "Enable 720p50 Mode"
+msgstr "Schakel 720p50 modus in"
 
 msgid "Enable Autoresolution"
 msgstr "Schakel Autoresolutie in"
@@ -93,22 +105,28 @@ msgid "Running in testmode"
 msgstr "Draait in testmode"
 
 msgid "SD 24HZ Progressive mode"
-msgstr "SD 24HZ Progressive modus"
+msgstr "SD 24HZ Progressieve modus"
 
 msgid "SD 25/50HZ Interlace Mode"
 msgstr "SD 25/50HZ Interlace modus"
 
 msgid "SD 25/50HZ Progressive Mode"
-msgstr "SD 25/50HZ Progressive modus"
+msgstr "SD 25/50HZ Progressieve modus"
 
 msgid "SD 30/60HZ Interlace Mode"
 msgstr "SD 30/60HZ Interlace modus"
 
 msgid "SD 30/60HZ Progressive Mode"
-msgstr "SD 30/60HZ Progressive modus"
+msgstr "SD 30/60HZ Progressieve modus"
 
 msgid "Show info screen"
 msgstr "Toon informatiescherm"
+
+msgid "UHD Interlace Mode"
+msgstr "UHD Interlace modus."
+
+msgid "UHD Progressive Mode"
+msgstr "UHD Progressieve modus."
 
 #, python-format
 msgid "Videocontent: %sx%s%s %sHZ"

@@ -2,17 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-03 21:23+0100\n"
-"PO-Revision-Date: 2015-09-07 05:52+0100\n"
+"POT-Creation-Date: 2017-11-09 23:22+0000\n"
+"PO-Revision-Date: 2017-11-10 14:46+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
-"Language: \n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #, python-format
 msgid "%d more services"
@@ -92,8 +90,20 @@ msgstr "EPG-refresh loopt op de achtergrond."
 msgid "EPG refresh starts scanning channels."
 msgstr "EPG-refresh start het scannen van kanalen."
 
+msgid "EPG-Refresh_Pending Services"
+msgstr "EPG-Refresh_Afhankelijke kanalen"
+
+msgid "EPG-Refresh_Refresh now"
+msgstr "EPG-Refresh_Refresh nu"
+
+msgid "EPG-Refresh_SetUp"
+msgstr "EPG-Refresh-Instellingen"
+
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "EPG-Refresh_Stop Refresh"
+
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
-msgstr ""
+msgstr "EPGREFRESH_NOTIFICATIE_DOMEIN"
 
 msgid "EPGRefresh"
 msgstr "EPG-refresh"
@@ -112,12 +122,6 @@ msgstr "EPG-refresh Help"
 
 msgid "EPGRefresh Services"
 msgstr "EPG-refresh kanalen"
-
-msgid "EXTENSIONMENU_PREFIX"
-msgstr "EXTENSIONMENU_PREFIX"
-
-msgid "EXTENSIONNAME_SETUP"
-msgstr "EXTENSIONNAME_SETUP"
 
 msgid "Edit Services"
 msgstr "Zenders bewerken"
@@ -195,9 +199,6 @@ msgstr "Nee"
 msgid "OK"
 msgstr "Ok"
 
-msgid "PLUGINNAME_EPGRefresh"
-msgstr ""
-
 msgid "Pending Services"
 msgstr "Nog niet afgewerkte kanalen."
 
@@ -269,9 +270,6 @@ msgstr "Sla met kinderslot beschermde kanalen over"
 
 msgid "Start EPGrefresh immediately"
 msgstr "Start EPG verversen nu"
-
-msgid "Stop Refresh"
-msgstr "Stop verversen"
 
 msgid "Stop Running EPG-refresh"
 msgstr "Stop EPG verversen"
@@ -386,11 +384,20 @@ msgstr "nooit"
 #~ msgid "EPG refresh finished. PiP available now."
 #~ msgstr "EPG refresh gereed. PiP is nu weer beschikbaar."
 
+#~ msgid "EXTENSIONMENU_PREFIX"
+#~ msgstr "EXTENSIONMENU_PREFIX"
+
+#~ msgid "EXTENSIONNAME_SETUP"
+#~ msgstr "EXTENSIONNAME_SETUP"
+
 #~ msgid "If this is enabled, the plugin will wake up the receiver from deep standby if possible. Otherwise it needs to be switched on already."
 #~ msgstr "Als dit is ingeschakeld, zal de plugin de ontvanger uit deep sleep halen. Anders moet de ontvanger al ingeschakeld zijn."
 
 #~ msgid "Show in extension menu"
 #~ msgstr "Toon in extensie menu"
+
+#~ msgid "Stop Refresh"
+#~ msgstr "Stop verversen"
 
 #~ msgid ""
 #~ "This is the entry point of EPGRefresh. From this menu you can configure every aspect of the plugin and start a manual refresh of the EPG.\n"
