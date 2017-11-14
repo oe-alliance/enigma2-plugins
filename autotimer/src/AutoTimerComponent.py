@@ -300,6 +300,7 @@ class AutoTimerComponent(object):
 	getIncludedDays = lambda self: self.include[3]
 
 	getJustplay = lambda self: self.justplay and "1" or "0"
+	getAlwaysZap = lambda self: self.always_zap and "1" or "0"
 
 	getLastBegin = lambda self: self.lastBegin
 
@@ -735,3 +736,4 @@ def getDefaultEncoding():
 
 # very basic factory ;-)
 preferredAutoTimerComponent = lambda *args, **kwargs: AutoTimerFastscanComponent(*args, **kwargs) if config.plugins.autotimer.fastscan.value else AutoTimerComponent(*args, **kwargs)
+

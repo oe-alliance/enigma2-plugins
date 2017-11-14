@@ -575,6 +575,9 @@ def buildConfig(defaultTimer, timers, webif = False):
 		if not defaultTimer.setEndtime:
 			append(' setEndtime="0"')
 
+	if defaultTimer.always_zap:
+		extend((' always_zap="', str(defaultTimer.getAlwaysZap()), '"'))
+
 	# Only display encoding if != utf-8
 	if defaultTimer.encoding != defaultEncoding or webif:
 		extend((' encoding="', str(defaultTimer.encoding), '"'))
@@ -831,4 +834,5 @@ def buildConfig(defaultTimer, timers, webif = False):
 	append('</autotimer>\n')
 
 	return list
+
 
