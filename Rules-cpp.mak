@@ -11,6 +11,7 @@ AM_CXXFLAGS = \
 	-Wall \
 	-fno-exceptions \
 	@DEBUG_CFLAGS@ \
+	@ENIGMA2_CFLAGS@ \
 	@GSTREAMER_CFLAGS@ \
 	@LIBCRYPTO_CFLAGS@ \
 	@PTHREAD_CFLAGS@
