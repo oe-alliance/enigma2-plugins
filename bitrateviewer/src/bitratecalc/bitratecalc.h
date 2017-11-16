@@ -26,7 +26,7 @@
 #include <lib/dvb/idvb.h>
 #include <lib/dvb/dvb.h>
 
-class eBitrateCalc: public Object
+class eBitrateCalc: public sigc::trackable
 {
 private:
 	unsigned long long m_size;
