@@ -26,6 +26,18 @@ msgstr "Position der permanenten Uhr ändern"
 msgid "Deactivate permanent clock"
 msgstr "Deaktiviere permanente Uhr"
 
+msgid "Show digital clock"
+msgstr "Wechsle auf digitale Uhr"
+
+msgid "Color analog clock"
+msgstr "Farbe für Analoguhr"
+
+msgid "Show analog clock"
+msgstr "Wechsle auf analoge Uhr"
+
+msgid "Color digital clock"
+msgstr "Farbe für digitale Uhr"
+
 msgid "Permanent Clock"
 msgstr "Permanente Uhr"
 
