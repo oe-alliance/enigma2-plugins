@@ -346,7 +346,14 @@ class Series2FolderActions(Series2FolderActionsBase):
 
         self.prepare(service)
 
-        for f in os.listdir(self.rootdir):
+        try:
+            contents = os.listdir(self.rootdir)
+        except Exception as ex:
+            self.errMess.append("Can not process folder: %s" % str(ex))
+            self.finish()
+            return
+
+        for f in contents:
             self.addRecording(f)
 
         # create a directory for each series and move shows into it
@@ -435,7 +442,13 @@ class Series2FolderAutoActions(Series2FolderActionsBase):
     def runMoves(self):
         self.prepare(None)
 
-        self.dirList = os.listdir(self.rootdir)
+        try:
+            self.dirList = os.listdir(self.rootdir)
+        except Exception as ex:
+            self.dirList = []
+            self.errMess.append("Can not process folder: %s" % str(ex))
+            self.finish()
+            return
 
         self.iterTimer.start(self.ITER_STEP, True)
 
