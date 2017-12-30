@@ -400,19 +400,19 @@ class AutoTimer:
 
 			eserviceref = eServiceReference(serviceref)
 			evt = epgcache.lookupEventId(eserviceref, eit)
+			evtBegin = begin
+			evtEnd = end = begin + duration
+
 			if not evt:
 				msg="[AutoTimer] Could not create Event!"
 				print(msg)
-				skipped.append((name, begin, begin, str(serviceref), timer.name, msg))
+				skipped.append((name, begin, end, str(serviceref), timer.name, msg))
 				continue
 			# Try to determine real service (we always choose the last one)
 			n = evt.getNumOfLinkageServices()
 			if n > 0:
 				i = evt.getLinkageService(eserviceref, n-1)
 				serviceref = i.toString()
-
-			evtBegin = begin
-			evtEnd = end = begin + duration
 
 			# If event starts in less than 60 seconds skip it
 			# if begin < time() + 60:
