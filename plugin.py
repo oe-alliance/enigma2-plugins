@@ -235,8 +235,8 @@ class Series2FolderActionsBase(object):
             self.MsgBox('\n'.join([title + ':'] + self.moves), notification=notification)
         else:
             self.MsgBox(title, timeout=10, notification=notification)
-	self.moves = []
-	self.errMess = []
+        self.moves = []
+        self.errMess = []
 
     def MsgBox(self, msg, timeout=30, notification=False):
         if notification:
@@ -322,7 +322,7 @@ class Series2FolderActionsBase(object):
                 showname = showname[0:-4]
             showname = ' - '.join(parts[startOffset:-1] + [showname])
         except:
-            return None, None, False, _("Can't extract show name for: %s") % fullname
+            return None, None, False, _("Can not extract show name for: %s") % fullname
         return showname, date_time, False, None
 
 
