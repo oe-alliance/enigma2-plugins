@@ -630,10 +630,10 @@ class IMDB(Screen):
 			if key not in entitydict:
 				entitydict[key] = x.group(1)
 
-		if re.search("charset=utf-8", in_html):
+		if 'charset="utf-8"' in in_html or 'charset=utf-8' in in_html:
 			for key, codepoint in iteritems(entitydict):
-				in_html = in_html.replace(key, unichr(int(codepoint)))
-			self.inhtml = in_html.encode('utf8')
+				in_html = in_html.replace(key, unichr(int(codepoint)).encode('utf8'))
+			self.inhtml = in_html
 			return
 
 		for key, codepoint in iteritems(entitydict):
