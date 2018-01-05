@@ -273,7 +273,7 @@ class IMDB(Screen):
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genres?:</h4>\s*?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
 			self.ratingmask = re.compile('<span itemprop="ratingValue">(?P<rating>.*?)</', re.DOTALL)
-			self.castmask = re.compile('itemprop=.url.> <span class="itemprop" itemprop="name">(?P<actor>.*?)</span>.*?<a href="/character/.*?" >(?P<character>.*?)</a>', re.DOTALL)
+			self.castmask = re.compile('itemprop=.url.> <span class="itemprop" itemprop="name">(?P<actor>.*?)</span>.*?<td class="character">(?P<character>.*?)(<a href="#"|</td>)', re.DOTALL)
 			#self.postermask = re.compile('<td .*?id="img_primary">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 			self.postermask = re.compile('<div class="poster">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 
@@ -753,9 +753,8 @@ class IMDB(Screen):
 				for x in castresult:
 					Casttext += "\n" + self.htmltags.sub('', x.group('actor'))
 					if x.group('character'):
-						Casttext += _(" as ") + self.htmltags.sub('', x.group('character').replace('/ ...','')).replace('\n', ' ')
-						#if x.group('additional'):
-						#	Casttext += ' ' + x.group('additional')
+						chartext = self.htmltags.sub('', x.group('character').replace('/ ...','')).replace('\n', ' ').replace(self.NBSP, ' ')
+						Casttext += _(" as ") + ' '.join(chartext.split())
 				if Casttext:
 					Casttext = _("Cast: ") + Casttext
 				else:
