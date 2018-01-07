@@ -6,11 +6,12 @@ from Plugins.Plugin import PluginDescriptor
 from Tools.Downloader import downloadWithProgress
 from enigma import ePicLoad, eServiceReference
 from Screens.Screen import Screen
+from Screens.HelpMenu import HelpableScreen
 from Screens.EpgSelection import EPGSelection
 from Screens.ChannelSelection import SimpleChannelSelection
 from Screens.ChoiceBox import ChoiceBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
@@ -117,7 +118,7 @@ class IMDBEPGSelection(EPGSelection):
 	def onSelectionChanged(self):
 		pass
 
-class IMDB(Screen):
+class IMDB(Screen, HelpableScreen):
 	skin = """
 		<screen name="IMDB" position="center,center" size="600,420" title="Internet Movie Database Details Plugin" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
@@ -148,6 +149,7 @@ class IMDB(Screen):
 
 	def __init__(self, session, eventName, callbackNeeded=False, save=False, savepath=None, localpath=None):
 		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
 
 		for tag in config.plugins.imdb.ignore_tags.getValue().split(','):
 			eventName = eventName.replace(tag,'')
@@ -201,18 +203,27 @@ class IMDB(Screen):
 		# 2 = extra infos page
 		self.Page = 0
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MovieSelectionActions", "DirectionActions"],
+		self["actionsOk"] = HelpableActionMap(self, "OkCancelActions",
 		{
-			"ok": self.showDetails,
-			"cancel": self.exit,
-			"down": self.pageDown,
-			"up": self.pageUp,
-			"red": self.exit,
-			"green": self.showMenu,
-			"yellow": self.showDetails,
-			"blue": self.showExtras,
-			"contextMenu": self.contextMenuPressed,
-			"showEventInfo": self.showDetails
+			"ok": (self.showDetails, _("Show movie and series basic details")),
+			"cancel": (self.exit, _("Exit IMDb search")),
+		}, -1)
+		self["actionsColor"] = HelpableActionMap(self, "ColorActions",
+		{
+			"red": (self.exit, _("Exit IMDb search")),
+			"green": (self.showMenu, _("Show list of matched movies an series")),
+			"yellow": (self.showDetails, _("Show movie and series basic details")),
+			"blue": (self.showExtras, _("Show movie and series extra details")),
+		}, -1)
+		self["actionsMovieSel"] = HelpableActionMap(self, "MovieSelectionActions",
+		{
+			"contextMenu": (self.contextMenuPressed, _("Menu")),
+			"showEventInfo": (self.showDetails, _("Show movie and series basic details")),
+		}, -1)
+		self["actionsDir"] = HelpableActionMap(self, "DirectionActions",
+		{
+			"down": (self.pageDown, _("Page down")),
+			"up": (self.pageUp, _("Page up")),
 		}, -1)
 
 		self.getIMDB()
