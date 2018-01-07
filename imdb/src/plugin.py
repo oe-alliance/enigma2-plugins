@@ -794,13 +794,13 @@ class IMDB(Screen, HelpableScreen):
 			if awardsresult:
 				awardslist = [' '.join(x.group('awards').split()) for x in awardsresult]
 				if awardslist:
-					Extratext = "Extra Info\n\n" + ' | '.join(awardslist) + "\n"
+					Extratext = _("Extra Info") + "\n\n" + ' | '.join(awardslist) + "\n"
 
 			extrainfos = self.extrainfomask.search(self.inhtml)
 
 			if extrainfos:
 				if not Extratext:
-					Extratext = "Extra Info\n"
+					Extratext = _("Extra Info") + "\n"
 
 				addspace = { "outline", "synopsis","tagline","runtime","locations","trivia","goofs","quotes","connections" }
 				extraspace = ''
