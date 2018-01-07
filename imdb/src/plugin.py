@@ -50,6 +50,7 @@ config.plugins.imdb = ConfigSubsection()
 config.plugins.imdb.showinplugins = ConfigYesNo(default = False)
 config.plugins.imdb.force_english = ConfigYesNo(default=False)
 config.plugins.imdb.ignore_tags = ConfigText(visible_width = 50, fixed_size = False)
+config.plugins.imdb.showlongmenuinfo = ConfigYesNo(default = False)
 config.plugins.imdb.showepisodeinfo = ConfigYesNo(default = False)
 
 def quoteEventName(eventName, safe="/()" + ''.join(map(chr,range(192,255)))):
@@ -657,12 +658,13 @@ class IMDB(Screen):
 			self.IMDBparse()
 		else:
 			if re.search("<title>Find - IMDb</title>", self.inhtml):
-				pos = self.inhtml.find("<table class=\"findList\">")
+				pos = self.inhtml.find('<table class="findList">')
 				pos2 = self.inhtml.find("</table>",pos)
 				findlist = self.inhtml[pos:pos2]
-				searchresultmask = re.compile('<tr class=\"findResult (?:odd|even)\">.*?<td class=\"result_text\"> <a href=\"/title/(tt\d{7,7})/.*?\"\s?>(.*?)</a>.*?</td>', re.DOTALL)
+				searchresultmask = re.compile('<tr class="findResult (?:odd|even)">.*?<td class="result_text"> (<a href="/title/(tt\d{7,7})/.*?"\s?>(.*?)</a>.*?)</td>', re.DOTALL)
 				searchresults = searchresultmask.finditer(findlist)
-				self.resultlist = [(self.htmltags.sub('',x.group(2)), x.group(1)) for x in searchresults]
+				titlegroup = 1 if config.plugins.imdb.showlongmenuinfo.value else 3
+				self.resultlist = [(' '.join(self.htmltags.sub('',x.group(titlegroup)).replace(self.NBSP," ").split()), x.group(2)) for x in searchresults]
 				Len = len(self.resultlist)
 				self["menu"].l.setList(self.resultlist)
 				if Len == 1:
@@ -906,6 +908,7 @@ class IMDbSetup(Screen, ConfigListScreen):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Show in plugin browser"), config.plugins.imdb.showinplugins, _("Enable this to be able to access the IMDb from within the plugin browser.")))
 		self.list.append(getConfigListEntry(_("Words / phrases to ignore "), config.plugins.imdb.ignore_tags, _("This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas.")))
+		self.list.append(getConfigListEntry(_("Show full movie or series name in title menu"), config.plugins.imdb.showlongmenuinfo, _("Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name.")))
 		self.list.append(getConfigListEntry(_("Show episode and year information in cast list"), config.plugins.imdb.showepisodeinfo, _("Show episode and year information for cast when available. Takes effect after the next fetch of show details.")))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
