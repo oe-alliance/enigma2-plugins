@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 20:05+0100\n"
+"POT-Creation-Date: 2017-06-29 18:00+0200\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -68,13 +68,16 @@ msgstr "Nieuw contact automatisch toevoegen aan het telefoonboek"
 msgid "Call"
 msgstr "Gesprek"
 
+msgid "Call diversion"
+msgstr ""
+
+msgid "Call diversion active"
+msgstr ""
+
 msgid "Call monitoring"
 msgstr "Gespreksmonitoring"
 
 msgid "Call redirection"
-msgstr ""
-
-msgid "Call redirection active"
 msgstr ""
 
 #, python-format
@@ -125,6 +128,9 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr ""
 
+msgid "Could not load phonebook: "
+msgstr ""
+
 #, python-format
 msgid "Could not load phonebook: %s"
 msgstr ""
@@ -138,7 +144,7 @@ msgstr ""
 msgid "Country"
 msgstr "Land"
 
-msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgid "Countrycode (e.g. 0044 for UK, 0034 for Spain, etc.)"
 msgstr ""
 
 msgid "DECT inactive"
@@ -236,6 +242,9 @@ msgstr ""
 
 #, python-format
 msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr ""
+
+msgid "FRITZ!Box - Error getting status: "
 msgstr ""
 
 #, python-format
@@ -382,9 +391,6 @@ msgstr "Mailbox"
 msgid "Make it more skin friendly"
 msgstr ""
 
-msgid "Minutes of uptime of WLAN guest network"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Gemist"
@@ -392,17 +398,14 @@ msgstr "Gemist"
 msgid "Missed calls"
 msgstr "Gemiste gesprekken"
 
-msgid "Mute also on outgoing calls"
+msgid "Mute on incoming call"
 msgstr ""
 
-msgid "Mute on call"
-msgstr "Muten bij oproep"
+msgid "Mute on outgoing calls"
+msgstr ""
 
 msgid "Name"
 msgstr "Naam"
-
-msgid "Name of WLAN guest network"
-msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -414,9 +417,8 @@ msgstr ""
 msgid "No DECT phone registered"
 msgstr "Geen DECT telefoon geregistreerd"
 
-#, fuzzy
-msgid "No call redirection active"
-msgstr "Geen mailbox actief"
+msgid "No call diversion active"
+msgstr ""
 
 msgid "No entry selected"
 msgstr "Geen regel geselecteerd"
@@ -449,9 +451,8 @@ msgstr "Ok"
 msgid "One DECT phone registered"
 msgstr "Eén DECT telefoon geregistreerd"
 
-#, fuzzy
-msgid "One call redirection active"
-msgstr "Eén mailbox actief"
+msgid "One call diversion active"
+msgstr ""
 
 msgid "One mailbox active"
 msgstr "Eén mailbox actief"
@@ -478,9 +479,6 @@ msgstr "Uitgaande gesprekken"
 
 msgid "Password Accessing FRITZ!Box"
 msgstr "Wachtwoord voor toegang FRITZ!Box"
-
-msgid "Password of WLAN guest network"
-msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -548,9 +546,6 @@ msgstr "Zoekt in LDIF..."
 msgid "Searching in Outlook export..."
 msgstr "Zoekt in Outlook export..."
 
-msgid "Secure WLAN guest network"
-msgstr ""
-
 msgid "Setting..."
 msgstr ""
 
@@ -565,6 +560,9 @@ msgstr "Laat uitgaande gesprekken zien"
 
 msgid "Show after Standby"
 msgstr "Laat zien na standby"
+
+msgid "Show also internal numbers"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
@@ -647,6 +645,9 @@ msgstr "Mailbox Aan/Uit"
 msgid "UNKNOWN"
 msgstr "ONBEKEND"
 
+msgid "Unknown"
+msgstr ""
+
 msgid "Update available"
 msgstr ""
 
@@ -681,7 +682,7 @@ msgstr ""
 msgid "before 05.27"
 msgstr ""
 
-msgid "call redirections active"
+msgid "call diversions active"
 msgstr ""
 
 msgid "calls in mailbox"
@@ -707,6 +708,12 @@ msgstr "klaar, gebruikt nu de laatste lijst"
 
 msgid "encrypted"
 msgstr "gecodeerd"
+
+msgid "fax_home"
+msgstr ""
+
+msgid "fax_work"
+msgstr ""
 
 msgid "finishing"
 msgstr "wordt beëindigd"
@@ -757,9 +764,18 @@ msgstr ""
 msgid "number suppressed"
 msgstr ""
 
+msgid "off"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
 #, fuzzy
 msgid "one device active"
 msgstr "Eén mailbox actief"
+
+msgid "pager"
+msgstr ""
 
 msgid "preparing"
 msgstr "aan het voorbereiden"
@@ -780,6 +796,9 @@ msgstr "alle gesprekken tonen"
 
 msgid "show nothing"
 msgstr "niets weergeven"
+
+msgid "with"
+msgstr ""
 
 msgid "work"
 msgstr "werk"
@@ -836,6 +855,17 @@ msgstr ""
 #~ "%(caller)s\n"
 #~ "---------------------------------------------\n"
 #~ "to: %(phone)s"
+
+#~ msgid "Mute on call"
+#~ msgstr "Muten bij oproep"
+
+#, fuzzy
+#~ msgid "No call redirection active"
+#~ msgstr "Geen mailbox actief"
+
+#, fuzzy
+#~ msgid "One call redirection active"
+#~ msgstr "Eén mailbox actief"
 
 #~ msgid ""
 #~ "Outgoing Call on %(date)s to\n"

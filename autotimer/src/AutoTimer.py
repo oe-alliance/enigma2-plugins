@@ -319,31 +319,26 @@ class AutoTimer:
 
 		if timer.searchType == "description":
 			epgmatches = []
-			mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
 
 			casesensitive = timer.searchCase == "sensitive"
 			if not casesensitive:
 				match = match.lower()
 
-			# Service filter defined
-			# Search only using the specified services
-			test = [(service, 0, -1, -1) for service in timer.services]
-
-			for bouquet in timer.bouquets:
-				services = serviceHandler.list(eServiceReference(bouquet))
-				if not services is None:
-					while True:
-						service = services.getNext()
-						if not service.valid(): #check end of list
-							break
-						if not (service.flags & mask):
-							test.append( (service.toString(), 0, -1, -1 ) )
-
-			if not test:
-				# No service filter defined
-				# Search within all services - could be very slow
-
-				# Get all bouquets
+			test = []
+			if timer.services:
+				test = [(service, 0, -1, -1) for service in timer.services]
+			elif timer.bouquets:
+				for bouquet in timer.bouquets:
+					services = serviceHandler.list(eServiceReference(bouquet))
+					if services:
+						while True:
+							service = services.getNext()
+							if not service.valid():
+								break
+							playable = not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+							if playable:
+								test.append((service.toString(), 0, -1, -1))
+			else: # Get all bouquets
 				bouquetlist = []
 				refstr = '1:134:1:0:0:0:0:0:0:0:FROM BOUQUET \"bouquets.tv\" ORDER BY bouquet'
 				bouquetroot = eServiceReference(refstr)
@@ -358,26 +353,25 @@ class AutoTimer:
 							if s.flags & mask:
 								info = serviceHandler.info(s)
 								if info:
-									bouquetlist.append((info.getName(s), s))
+									bouquetlist.append(s)
 				else:
 					info = serviceHandler.info(bouquetroot)
 					if info:
-						bouquetlist.append((info.getName(bouquetroot), bouquetroot))
-
-				# Get all services
-				mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
-				for name, bouquet in bouquetlist:
-					if not bouquet.valid(): #check end of list
-						break
+						bouquetlist.append(bouquetroot)
+				if bouquetlist:
+					for bouquet in bouquetlist:
+						if not bouquet.valid():
+							break
 					if bouquet.flags & eServiceReference.isDirectory:
 						services = serviceHandler.list(bouquet)
-						if not services is None:
+						if services:
 							while True:
 								service = services.getNext()
-								if not service.valid(): #check end of list
+								if not service.valid():
 									break
-								if not (service.flags & mask):
-									test.append( (service.toString(), 0, -1, -1 ) )
+									playable = not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+									if playable:
+										test.append((service.toString(), 0, -1, -1))
 
 			if test:
 				# Get all events
@@ -387,9 +381,8 @@ class AutoTimer:
 
 				# Filter events
 				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-					if match in (shortdesc if casesensitive else shortdesc.lower()) \
-						or match in (extdesc if casesensitive else extdesc.lower()):
-						epgmatches.append( (serviceref, eit, name, begin, duration, shortdesc, extdesc) )
+					if match in (shortdesc if casesensitive else shortdesc.lower()) or match in (extdesc if casesensitive else extdesc.lower()):
+						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
 
 		else:
 			# Search EPG, default to empty list
@@ -631,6 +624,26 @@ class AutoTimer:
 
 				# Try to add timer
 				conflicts = recordHandler.record(newEntry)
+
+				if conflicts and not timer.hasOffset() and not config.recording.margin_before.value and not config.recording.margin_after.value and len(conflicts) > 1:
+					change_end = change_begin = False
+					conflict_begin = conflicts[1].begin
+					conflict_end = conflicts[1].end
+					if conflict_begin == newEntry.end:
+						newEntry.end -= 30
+						change_end = True
+					elif newEntry.begin == conflict_end:
+						newEntry.begin += 30
+						change_begin = True
+					if change_end or change_begin:
+						conflicts = recordHandler.record(newEntry)
+						if conflicts:
+							if change_end:
+								newEntry.end += 30
+							elif change_begin:
+								newEntry.begin -= 30
+						else:
+							print ("[AutoTimer] The conflict is resolved by offset time begin/end (30 sec) for %s." % newEntry.name)
 
 				if conflicts:
 					# Maybe use newEntry.log

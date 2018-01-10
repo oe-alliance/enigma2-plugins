@@ -1,0 +1,229 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-10 18:51+0300\n"
+"PO-Revision-Date: 2017-07-10 18:59+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: lt\n"
+
+#. TRANSLATORS: this is a window title.
+msgid "Add entry to phonebook"
+msgstr "Įtraukti į telefonų knygą"
+
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr "Pridėti šį vietovės kodą be vieneto (jei reikia)"
+
+msgid "Austria"
+msgstr "Austrija"
+
+msgid "Automatically add new Caller to PhoneBook"
+msgstr "Naują skambinantį į telefonų knygą įtraukti automatiškai"
+
+msgid "Call monitoring"
+msgstr "Skambučių stebėsena"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Compact Flash"
+msgstr "CF atmintinė"
+
+msgid "Connected to NCID Server"
+msgstr "Prisijungta prie NCID serverio"
+
+#, python-format
+msgid ""
+"Connecting to NCID Server failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Prisijungti prie NCID serverio napavyko\n"
+" (%s)\n"
+"kartojama..."
+
+msgid "Connecting to NCID Server..."
+msgstr "Jungiamasi prie NCID serverio..."
+
+#, python-format
+msgid ""
+"Connection to NCID Server lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Ryšys su NCID serveriu nutrūko\n"
+" (%s)\n"
+"kartojama"
+
+msgid "Country"
+msgstr "Šalis"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Delete"
+msgstr "Ištrinti"
+
+msgid "Display Fon calls on screen"
+msgstr "Rodyti Fon skambučius ekrane"
+
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+"Ar tikrai norite pašalinti įrašą\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Edit"
+msgstr "Redaguoti"
+
+msgid "Enter Search Terms"
+msgstr "Įrašykite ieškomą tekstą"
+
+msgid "Entry incomplete."
+msgstr "Įrašas nebaigtas."
+
+msgid "Flash"
+msgstr "Atmintinė"
+
+msgid "France"
+msgstr "Prancūzija"
+
+msgid "Germany"
+msgstr "Vokietija"
+
+#, python-format
+msgid ""
+"Incoming Call on %s from\n"
+"---------------------------------------------\n"
+"%s\n"
+"%s\n"
+"---------------------------------------------"
+msgstr ""
+"Įeinantis skambutis %s nuo\n"
+"---------------------------------------------\n"
+"%s\n"
+"%s\n"
+"---------------------------------------------"
+
+msgid "Italy"
+msgstr "Italija"
+
+msgid "Last 10 calls:\n"
+msgstr "Paskutiniai 10 skambučių:\n"
+
+msgid "Media directory"
+msgstr "Medijos katalogas"
+
+#. TRANSLATORS: this is a window title.
+msgid "NCID Client - Setup"
+msgstr "NCID kliento sąranka"
+
+msgid "NCID server (Name or IP)"
+msgstr "NCID serveris (pavadinimas arba IP)"
+
+msgid "NCID server listening port (1-65535)"
+msgstr "NCID serververio prievadas (1 – 65535)"
+
+msgid "Name"
+msgstr "Pavadinimas"
+
+msgid "Network mount"
+msgstr "Tinklinis pajungimas"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "New"
+msgstr "Naujas"
+
+msgid "No entry selected"
+msgstr "Nepasirinkta įrašų"
+
+msgid "No phonebook"
+msgstr "Telefonų knygos nėra"
+
+msgid "Number"
+msgstr "Numeris"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "OK"
+msgstr "Gerai"
+
+msgid "PhoneBook Location"
+msgstr "Telefonų knygos vieta"
+
+#. TRANSLATORS: this is a window title.
+msgid "Phonebook"
+msgstr "Telefonų knyga"
+
+msgid "Plugin not active"
+msgstr "Įskiepis neveiklus"
+
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr "Apversti skambinančiųjų ID (pasirinkite šalį)"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Search"
+msgstr "Paieška"
+
+msgid "Search phonebook"
+msgstr "Ieškoti telefonų knygoje"
+
+msgid "Show after Standby"
+msgstr "Rodyti po budėjimo"
+
+msgid "Show connection information popups"
+msgstr "Rodyti iškylantį prisijungimo pranešimą"
+
+msgid "Strip Leading 0"
+msgstr "Nuimti pradinį '0'"
+
+msgid "Switzerland"
+msgstr "Šveicarija"
+
+msgid "The Netherlands"
+msgstr "Nyderlandai"
+
+msgid "Timeout for Call Notifications (seconds)"
+msgstr "Skambučio trukmė iki pranešimo (sek.)"
+
+msgid "UNKNOWN"
+msgstr "NEŽINOMA"
+
+msgid "USB Device"
+msgstr "USB įrenginys"
+
+msgid "Use internal PhoneBook"
+msgstr "Naudoti vidinę telefonų knygą"
+
+msgid "no calls"
+msgstr "be skambučių"
+
+msgid "number suppressed"
+msgstr "numeris užblokuotas"
+
+msgid "show as list"
+msgstr "rodyti sąrašu"
+
+msgid "show each call"
+msgstr "rodyti visus skambučius"
+
+msgid "show nothing"
+msgstr "nerodyti nieko"

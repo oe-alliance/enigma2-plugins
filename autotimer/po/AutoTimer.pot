@@ -519,7 +519,7 @@ msgstr ""
 #, python-format
 msgid ""
 "If this is enabled an existing timer will also be considered recording an "
-"event if it records at least 80% of the it."
+"event if it records at least 80%s of the it."
 msgstr ""
 
 #: ../src/AutoTimerSettings.py:44
@@ -1602,4 +1602,8 @@ msgstr ""
 
 #: ../src/AutoTimerEditor.py:189
 msgid "zap and record"
+msgstr ""
+
+#: ../src/AutoTimerSettings.py:146
+msgid " - Version: "
 msgstr ""

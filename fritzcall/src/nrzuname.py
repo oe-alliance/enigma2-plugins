@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 '''
-$Id: nrzuname.py 1394 2017-03-14 09:16:47Z michael $
+$Id: nrzuname.py 1451 2017-06-08 16:35:18Z michael $
 $Author: michael $
-$Revision: 1394 $
-$Date: 2017-03-14 10:16:47 +0100 (Tue, 14 Mar 2017) $
+$Revision: 1451 $
+$Date: 2017-06-08 18:35:18 +0200 (Thu, 08 Jun 2017) $
 '''
 
 # C0111 (Missing docstring)
@@ -18,7 +18,7 @@ $Date: 2017-03-14 10:16:47 +0100 (Tue, 14 Mar 2017) $
 # W0110 deprecated-lambda
 # C0302 too-many-lines
 # C0410 multiple-imports
-# pylint: disable=C0111,C0103,C0301,W0603,W0141,W0403,C0302
+# pylint: disable=C0111,C0103,C0301,W0603,W0403,C0302
 
 import re, sys, os
 from xml.dom.minidom import parse
@@ -158,6 +158,9 @@ class ReverseLookupAndNotifier(object):
 
 	def __init__(self, number, outputFunction = out, charset = "cp1252", countrycode = "0049"):
 		debug("reverse Lookup for %s!", number)
+		if not countrycode:
+			out(number, "")
+
 		self.number = number
 		self.outputFunction = outputFunction
 		self.caller = ""

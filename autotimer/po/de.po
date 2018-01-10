@@ -20,6 +20,14 @@ msgstr ""
 msgid "  Any time"
 msgstr "  Jede Zeit"
 
+#: ../src/__init__.py:36
+msgid "Hour"
+msgstr "Stunde"
+
+#: ../src/__init__.py:37
+msgid "Minute"
+msgstr "Minute"
+
 #: ../src/AutoPoller.py:41 ../src/AutoTimer.py:703
 #, python-format
 msgid ""
@@ -338,6 +346,12 @@ msgstr "Löschen"
 #: ../src/AutoTimerEditor.py:584
 msgid "Description"
 msgstr "Beschreibung"
+
+msgid "Enter or edit description"
+msgstr "Bitte geben Sie eine neue Beschreibung ein:"
+
+msgid "Enter or edit match title"
+msgstr "Bitte geben Sie einen neuen Suchbegriff ein:"
 
 #: ../src/AutoTimerOverview.py:189
 #, python-format
@@ -811,13 +825,17 @@ msgstr "Sendung durch Alternative ersetzen"
 msgid "Please provide a Text to match"
 msgstr "Bitte zu findenden Text eingeben"
 
-#: ../src/AutoTimerSettings.py:40 ../src/AutoTimerSettings.py:31
-msgid "Poll Interval (in h)"
-msgstr "Abfrageintervall (in Stunden)"
+#: ../src/AutoTimerSettings.py:42
+msgid "Poll Interval (in %s)"
+msgstr "Abfrageintervall (in %s)"
 
-#: ../src/AutoTimerSettings.py:64 ../src/AutoTimerSettings.py:35
-msgid "Poll Interval (in mins)"
-msgstr "Abfrageintervall (in Minuten)"
+#: ../src/AutoTimerSettings.py:34
+msgid "hours"
+msgstr "Stunden"
+
+#: ../src/AutoTimerSettings.py:34
+msgid "minutes"
+msgstr "Minuten"
 
 #: ../src/AutoTimerSettings.py:39 ../src/AutoTimerSettings.py:57
 msgid "Poll automatically"
@@ -964,6 +982,10 @@ msgstr ""
 "Definiere die Einschränkung auf bestimmte Sender\n"
 "Die blaue Taste drücken, um die Sender zu editieren"
 
+#: ../src/AutoTimerEditor.py:575
+msgid " (if services are enabled, bouquets are ignored.)."
+msgstr " ( wenn Sender ausgewählt wurden, dann werden Favoriten ignoriert.)."
+
 #: ../src/AutoTimerEditor.py:680
 msgid "Restrict to days"
 msgstr "Beschränkung auf Wochentage"
@@ -1062,7 +1084,7 @@ msgstr "Auf  NEIN setzen, um den AutoTimer zu deaktivieren."
 msgid ""
 "Set timer type: zap, simple record, zap+record (always zap to service before "
 "start record)."
-msgstr "Setzte Timer Typ : Umschalten, Aufnahme oder Umschalten + Aufnahme."
+msgstr "Setze Timer Typ : Umschalten, Aufnahme oder Umschalten + Aufnahme."
 
 #: ../src/AutoTimerOverview.py:221 ../src/AutoTimerOverview.py:257
 msgid "Setup"
@@ -1122,6 +1144,10 @@ msgstr "Sortiere nach Zeit"
 #: ../src/AutoTimerSettings.py:61 ../src/AutoTimerSettings.py:43
 msgid "Startup delay (in min)"
 msgstr "Einschaltverzögerung (in Minuten)"
+
+#: ../src/AutoTimerSettings.py
+msgid "Poll unit"
+msgstr "Abfrageeinheit"
 
 #: ../src/AutoTimerList.py:198
 msgid "Sun"
@@ -1321,19 +1347,26 @@ msgstr ""
 
 #: ../src/AutoTimerSettings.py:64 ../src/AutoTimerSettings.py:36
 msgid ""
-"This is the delay in minutes that the AutoTimer will wait after a search to "
-"search the EPG again."
+"This is the delay in %s that the AutoTimer will wait after "
+"doing a search before searching the EPG again."
 msgstr ""
-"Dies ist die Verzögerung in Minuten, die der AutoTimer wartet, bis nach "
+"Dies ist die Verzögerung in %s, die der AutoTimer wartet, bis nach "
 "einer erfolgten Suche eine neue gestartet wird."
 
 #: ../src/AutoTimerSettings.py:61 ../src/AutoTimerSettings.py:43
 msgid ""
-"This is the delay in minutes that the AutoTimer will wait on initial launch "
-"to not delay enigma2 startup time."
+"Startup delay is the number of minutes before polling after "
+"a reboot, so as to not delay enigma2 startup time."
 msgstr ""
 "Dies ist eine Verzögerung die AutoTimer beim ersten Start wartet, um die "
 "Startzeit von Enigma2 nicht zu verlängern."
+
+#: ../src/AutoTimerSettings.py
+msgid "Poll unit selects whether the poll interval should be interpreted in hours or minutes."
+msgstr ""
+"Hiermit können Sie die Abfrageeinheit, zwischen Stunden und Minuten auswählen, "
+"die beim Abfrageintervall benutzt wird."
+
 
 #: ../src/AutoTimerEditor.py:502 ../src/AutoTimerEditor.py:541
 msgid ""
@@ -1424,7 +1457,7 @@ msgstr "Dienstag"
 
 #: ../src/AutoTimerSettings.py:39 ../src/AutoTimerSettings.py:57
 msgid ""
-"Unless this is enabled AutoTimer will NOT automatically look for events "
+"If this is disabled AutoTimer will NOT automatically look for events "
 "matching your AutoTimers but only when you leave the GUI with the green "
 "button."
 msgstr ""

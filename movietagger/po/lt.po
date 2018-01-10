@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: MovieTagger\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-09 14:29+0100\n"
+"PO-Revision-Date: 2016-01-31 15:35+0200\n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
+"Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: /Users/fk/Desktop/PluginSort/locale/de/LC_MESSAGES\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Language: lt\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+#: ../src/plugin.py:174
+msgid "Can't write movietags, because no meta-file found!"
+msgstr "Negalima rašyti filmo žymų, nes meta failas nerastas!"
+
+#: ../src/plugin.py:252
+msgid "Whitepace will be replaced by \"_\""
+msgstr "Tarpai bus pakeisti į \"_\""
+
+#: ../src/plugin.py:252
+msgid "Enter the new Tag"
+msgstr "Įrašykite naują žymą"
+
+#: ../src/plugin.py:256
+msgid ""
+"Clear all Tags?\n"
+"\n"
+"This will delete ALL tags in ALL recodings!\n"
+"Are you sure?"
+msgstr ""
+"Išvalyti visas žymas?\n"
+"\n"
+"Bus panaikintos VISOS žymos VISUOSE įrašuose!\n"
+"Jūs įsitikinę, kad to norite?"
+
+#: ../src/plugin.py:259
+msgid "Movie Tagger"
+msgstr "Filmų žymeklis"
+
+#: ../src/plugin.py:259
+msgid "Ver."
+msgstr "Vers."
+
+#: ../src/plugin.py:260
+msgid "Assigned Tags"
+msgstr "Paskirtos žymos"
+
+#: ../src/plugin.py:261
+msgid "Specified Tags"
+msgstr "Nurodytos žymos"
+
+#: ../src/plugin.py:262
+msgid "Used Tag"
+msgstr "Naudota žyma"
+
+#: ../src/plugin.py:263
+msgid "User-specific Tag"
+msgstr "Vartotojo žyma"
+
+#: ../src/plugin.py:264
+msgid "Predefined Tag"
+msgstr "Numatyta žyma"
+
+#: ../src/plugin.py:268
+msgid "Remove Tag"
+msgstr "Šalinti žymą"
+
+#: ../src/plugin.py:269
+msgid "Add new Tag"
+msgstr "Pridėti naują žymą"
+
+#: ../src/plugin.py:271 ../src/plugin.py:279
+msgid "Toggle List"
+msgstr "Perjungti sąrašą"
+
+#: ../src/plugin.py:276
+msgid "Add Tag"
+msgstr "Pridėti žymą"
+
+#: ../src/plugin.py:278
+msgid "Clear all Tags"
+msgstr "Išvalyti visas žymas"
+
+#: ../src/plugin.py:315
+msgid "Movie Tagger..."
+msgstr "Filmų žymeklis..."

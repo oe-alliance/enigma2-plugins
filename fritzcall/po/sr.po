@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 20:05+0100\n"
+"POT-Creation-Date: 2017-06-29 18:00+0200\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -69,14 +69,17 @@ msgstr "Automatski dodaj novog pozivaoca u imenik"
 msgid "Call"
 msgstr "Pozovi"
 
+msgid "Call diversion"
+msgstr ""
+
+msgid "Call diversion active"
+msgstr ""
+
 msgid "Call monitoring"
 msgstr "Kontrola poziva"
 
 msgid "Call redirection"
 msgstr "Preusmerenje poziva"
-
-msgid "Call redirection active"
-msgstr ""
 
 #, python-format
 msgid "Calling %s"
@@ -126,6 +129,9 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr ""
 
+msgid "Could not load phonebook: "
+msgstr ""
+
 #, python-format
 msgid "Could not load phonebook: %s"
 msgstr ""
@@ -139,7 +145,7 @@ msgstr ""
 msgid "Country"
 msgstr "Država"
 
-msgid "Countrycode (e.g. 44 for UK, 34 for Spain, etc.)"
+msgid "Countrycode (e.g. 0044 for UK, 0034 for Spain, etc.)"
 msgstr ""
 
 msgid "DECT inactive"
@@ -237,6 +243,9 @@ msgstr "FRITZ!Box - Pozivanje nije uspelo: %s"
 
 #, python-format
 msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr ""
+
+msgid "FRITZ!Box - Error getting status: "
 msgstr ""
 
 #, python-format
@@ -383,9 +392,6 @@ msgstr "Poštansko sanduče"
 msgid "Make it more skin friendly"
 msgstr ""
 
-msgid "Minutes of uptime of WLAN guest network"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Propušten"
@@ -393,17 +399,14 @@ msgstr "Propušten"
 msgid "Missed calls"
 msgstr "Propušteni pozivi"
 
-msgid "Mute also on outgoing calls"
+msgid "Mute on incoming call"
 msgstr ""
 
-msgid "Mute on call"
-msgstr "Priguši kod poziva"
+msgid "Mute on outgoing calls"
+msgstr ""
 
 msgid "Name"
 msgstr "Ime"
-
-msgid "Name of WLAN guest network"
-msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -415,8 +418,8 @@ msgstr ""
 msgid "No DECT phone registered"
 msgstr "Nijedan DECT tel. nije registrovan "
 
-msgid "No call redirection active"
-msgstr "Nema aktivnih preusmerenja poziva"
+msgid "No call diversion active"
+msgstr ""
 
 msgid "No entry selected"
 msgstr "Nijedan unos nije izabran"
@@ -449,8 +452,8 @@ msgstr "OK"
 msgid "One DECT phone registered"
 msgstr "Jedan DECT tel. je registrovan "
 
-msgid "One call redirection active"
-msgstr "Jedno preusmerenje poziva je aktivno"
+msgid "One call diversion active"
+msgstr ""
 
 msgid "One mailbox active"
 msgstr "Jedno pošt. sand. je aktivno"
@@ -477,9 +480,6 @@ msgstr "Odlazni pozivi"
 
 msgid "Password Accessing FRITZ!Box"
 msgstr "Lozinka za pristup FRITZ!Box-u"
-
-msgid "Password of WLAN guest network"
-msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -547,9 +547,6 @@ msgstr "Traži u  LDIF..."
 msgid "Searching in Outlook export..."
 msgstr "Tražim u Outlook-Export..."
 
-msgid "Secure WLAN guest network"
-msgstr ""
-
 msgid "Setting..."
 msgstr ""
 
@@ -564,6 +561,9 @@ msgstr "Prikaži odlazne pozive"
 
 msgid "Show after Standby"
 msgstr "Pokaži posle stend baja"
+
+msgid "Show also internal numbers"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
@@ -645,6 +645,9 @@ msgstr "Prebaci sve pošt. sand."
 msgid "UNKNOWN"
 msgstr "NEPOZNATO"
 
+msgid "Unknown"
+msgstr ""
+
 msgid "Update available"
 msgstr ""
 
@@ -677,8 +680,8 @@ msgstr ""
 msgid "before 05.27"
 msgstr ""
 
-msgid "call redirections active"
-msgstr "Preusmerenje poziva aktivno"
+msgid "call diversions active"
+msgstr ""
 
 msgid "calls in mailbox"
 msgstr ""
@@ -702,6 +705,12 @@ msgstr "Završeno,koristim zadnju listu"
 
 msgid "encrypted"
 msgstr "kodirano"
+
+msgid "fax_home"
+msgstr ""
+
+msgid "fax_work"
+msgstr ""
 
 msgid "finishing"
 msgstr "završavam"
@@ -751,8 +760,17 @@ msgstr ""
 msgid "number suppressed"
 msgstr ""
 
+msgid "off"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
 msgid "one device active"
 msgstr "Jedan aktivan uređaj"
+
+msgid "pager"
+msgstr ""
 
 msgid "preparing"
 msgstr "Pripremam"
@@ -773,6 +791,9 @@ msgstr "Pokaži svaki poziv"
 
 msgid "show nothing"
 msgstr "Ništa ne pokazuj"
+
+msgid "with"
+msgstr ""
 
 msgid "work"
 msgstr "Posao"
@@ -816,6 +837,15 @@ msgstr ""
 #~ "---------------------------------------------\n"
 #~ "za: %(phone)s"
 
+#~ msgid "Mute on call"
+#~ msgstr "Priguši kod poziva"
+
+#~ msgid "No call redirection active"
+#~ msgstr "Nema aktivnih preusmerenja poziva"
+
+#~ msgid "One call redirection active"
+#~ msgstr "Jedno preusmerenje poziva je aktivno"
+
 #~ msgid ""
 #~ "Outgoing Call on %(date)s to\n"
 #~ "---------------------------------------------\n"
@@ -845,3 +875,6 @@ msgstr ""
 
 #~ msgid "business"
 #~ msgstr "posao"
+
+#~ msgid "call redirections active"
+#~ msgstr "Preusmerenje poziva aktivno"
