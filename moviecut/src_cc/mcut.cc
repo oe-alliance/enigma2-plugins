@@ -26,7 +26,7 @@
 #include <string.h>
 #include <byteswap.h>
 
-#define LEN 24064
+#define LEN 192512
 
 static off64_t time_offset;
 static off64_t size_offset;
@@ -34,11 +34,6 @@ static off64_t curr_size_offset;
 
 int use_leadin = 1;
 int use_leadout = 1;
-
-inline int absless(long long int x, int lim)
-{
-  return (x<lim && x>-lim);
-}
 
 double strtotime(char* str)
 {
@@ -146,6 +141,7 @@ off64_t readoff(int fa, int fao, int fs, int fso, double t, int beg, double& tr)
   static double last;
   static int endp;
   off64_t sizetmp;
+  off64_t last_offset;
   double tt, lt;
   if (!buf0) {
     buf0 = new off64_t[2];
@@ -155,10 +151,8 @@ off64_t readoff(int fa, int fao, int fs, int fso, double t, int beg, double& tr)
       exit(8);
     }
     time_offset = buf0[1];
-    if (buf1[1] > buf0[1] && buf1[1] - buf0[1] < 900000)
+    if (buf0[0] != 0 && buf0[0] < buf1[0])
       time_offset -= (buf1[1]-buf0[1])*buf0[0]/(buf1[0]-buf0[0]);
-    else if (buf1[1] > buf0[1] || buf0[1] - buf1[1] > 45000)
-      time_offset = buf1[1];
     size_offset = buf0[0];
     lastreturn = 0;
     last = 0.0;
@@ -170,10 +164,8 @@ off64_t readoff(int fa, int fao, int fs, int fso, double t, int beg, double& tr)
     readbufinternal(fa, buf0);
     readbufinternal(fa, buf1);
     time_offset = buf0[1];
-    if (buf1[1] > buf0[1] && buf1[1] - buf0[1] < 900000)
+    if (buf0[0] != 0 && buf0[0] < buf1[0])
       time_offset -= (buf1[1]-buf0[1])*buf0[0]/(buf1[0]-buf0[0]);
-    else if (buf1[1] > buf0[1] || buf0[1] - buf1[1] > 45000)
-      time_offset = buf1[1];
     size_offset += buf0[0] - sizetmp;
     lastreturn = 0;
     last = 0.0;
@@ -185,11 +177,10 @@ off64_t readoff(int fa, int fao, int fs, int fso, double t, int beg, double& tr)
   if (!beg)
     writebufinternal(fao, buf0);
   last = t;
-  lt = lltotime(buf0[1] - time_offset);
-  if (buf0[1] - buf1[1] > 0 && buf0[1] - buf1[1] <= 45000)
-    tt = lt, buf1[1] = buf0[1];
-  else
-    tt = lltotime(buf1[1] - time_offset);
+  lt = lltotime(last_offset = buf0[1] - time_offset);
+  if (buf1[1] <= buf0[1] || buf1[1] - buf0[1] > 900000)
+    time_offset = buf1[1] - last_offset - 3600;
+  tt = lltotime(last_offset = buf1[1] - time_offset);
   sizetmp = buf0[0];
   while (tt < t || t == -1.0) {
     swapbuf(buf0, buf1);
@@ -199,17 +190,10 @@ off64_t readoff(int fa, int fao, int fs, int fso, double t, int beg, double& tr)
       writebufinternal(fao, buf0);
     if (endp)
       break;
-    if (buf0[1] - buf1[1] > 45000 || buf1[1] - buf0[1] > 900000) {
-      if (absless(buf1[1] + (((long long int)1) << 33) - buf0[1], 900000))
-        time_offset -= ((long long int)1) << 33;
-      else
-        time_offset += buf1[1] - buf0[1];
-    }
     lt = tt;
-    if (buf0[1] - buf1[1] > 0 && buf0[1] - buf1[1] <= 45000)
-      tt = lt, buf1[1] = buf0[1];
-    else
-      tt = lltotime(buf1[1] - time_offset);
+    if (buf1[1] <= buf0[1] || buf1[1] - buf0[1] > 900000)
+      time_offset = buf1[1] - last_offset - 3600;
+    tt = lltotime(last_offset = buf1[1] - time_offset);
   }
   if (endp) {
     tr = tt;
@@ -217,8 +201,6 @@ off64_t readoff(int fa, int fao, int fs, int fso, double t, int beg, double& tr)
     swapbuf(buf0, buf1);
     if (!readbufinternal(fa, buf1))
       endp = 1;
-    if (buf0[1] - buf1[1] > 0 && buf0[1] - buf1[1] <= 45000)
-      buf1[1] = buf0[1];
     if (!beg)
       writebufinternal(fao, buf0);
     tr = tt;
