@@ -411,8 +411,8 @@ int donextinterval1(int fc, int fco, int fa, int fao, int fs, int fso, int fts, 
         lseek(fc, 0, SEEK_SET);
         read(fc, buf, 12);
         while (bswap_32(buf[2]) != 1) {
-            write(fco, buf, 12);
-            read(fc, buf, 12);
+          write(fco, buf, 12);
+          read(fc, buf, 12);
         }
         return 1;
       } else if (tmp == 0) {
@@ -421,12 +421,12 @@ int donextinterval1(int fc, int fco, int fa, int fao, int fs, int fso, int fts, 
         curr_size_offset = size_offset;
         movesc(fs, fso, c1ret, 1);
         if (lcheck) {
-            buf[0] = buf[1] = 0;
-            write(fco, buf, 12);
+          buf[0] = buf[1] = 0;
+          write(fco, buf, 12);
         }
         break;
       } else if (tmp == 3)
-          lcheck = 1;
+        lcheck = 1;
     }
   } else {
     while (1) {
@@ -447,11 +447,11 @@ int donextinterval1(int fc, int fco, int fa, int fao, int fs, int fso, int fts, 
         toff += ttmp - tlast;
         break;
       } else if (tmp == 3) {
-          timetoint(tlast-toff, buf[0], buf[1]);
-          write(fco, buf, 12);
+        timetoint(tlast-toff, buf[0], buf[1]);
+        write(fco, buf, 12);
       }
       if (n == 0)
-          return 0;
+        return 0;
     }
   }
   while (1) {
