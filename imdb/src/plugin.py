@@ -50,6 +50,7 @@ config.plugins.imdb = ConfigSubsection()
 config.plugins.imdb.showinplugins = ConfigYesNo(default = False)
 config.plugins.imdb.force_english = ConfigYesNo(default=False)
 config.plugins.imdb.ignore_tags = ConfigText(visible_width = 50, fixed_size = False)
+config.plugins.imdb.showepisodeinfo = ConfigYesNo(default = False)
 
 def quoteEventName(eventName, safe="/()" + ''.join(map(chr,range(192,255)))):
 	# BBC uses '\x86' markers in program names, remove them
@@ -274,7 +275,7 @@ class IMDB(Screen):
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genres?:</h4>\s*?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
 			self.ratingmask = re.compile('<span itemprop="ratingValue">(?P<rating>.*?)</', re.DOTALL)
-			self.castmask = re.compile('itemprop=.url.> <span class="itemprop" itemprop="name">(?P<actor>.*?)</span>.*?<td class="character">(?P<character>.*?)(<a href="#"|</td>)', re.DOTALL)
+			self.castmask = re.compile('itemprop=.url.> <span class="itemprop" itemprop="name">(?P<actor>.*?)</span>.*?<td class="character">(?P<character>.*?)(?:<a href="#"\s+class="toggle-episodes".*?>(?P<episodes>.*?)</a>.*?)?</td>', re.DOTALL)
 			#self.postermask = re.compile('<td .*?id="img_primary">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 			self.postermask = re.compile('<div class="poster">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 
@@ -756,6 +757,8 @@ class IMDB(Screen):
 					if x.group('character'):
 						chartext = self.htmltags.sub('', x.group('character').replace('/ ...','')).replace('\n', ' ').replace(self.NBSP, ' ')
 						Casttext += _(" as ") + ' '.join(chartext.split())
+						if config.plugins.imdb.showepisodeinfo.value and x.group('episodes'):
+							Casttext += ' [' + self.htmltags.sub('', x.group('episodes')).strip() + ']'
 				if Casttext:
 					Casttext = _("Cast: ") + Casttext
 				else:
@@ -903,6 +906,7 @@ class IMDbSetup(Screen, ConfigListScreen):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Show in plugin browser"), config.plugins.imdb.showinplugins, _("Enable this to be able to access the IMDb from within the plugin browser.")))
 		self.list.append(getConfigListEntry(_("Words / phrases to ignore "), config.plugins.imdb.ignore_tags, _("This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas.")))
+		self.list.append(getConfigListEntry(_("Show episode and year information in cast list"), config.plugins.imdb.showepisodeinfo, _("Show episode and year information for cast when available. Takes effect after the next fetch of show details.")))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
