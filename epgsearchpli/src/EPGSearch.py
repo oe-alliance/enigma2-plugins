@@ -36,6 +36,7 @@ from operator import itemgetter
 typeMap = {
 	"exact": eEPGCache.EXAKT_TITLE_SEARCH,
 	"partial": eEPGCache.PARTIAL_TITLE_SEARCH,
+	"partialdesc": eEPGCache.PARTIAL_DESCRIPTION_SEARCH,
 	"start": eEPGCache.START_TITLE_SEARCH
 }
 

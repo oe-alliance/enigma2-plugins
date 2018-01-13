@@ -34,7 +34,7 @@ config.plugins.epgsearch.show_in_furtheroptionsmenu = ConfigYesNo(default = True
 config.plugins.epgsearch.search_in_channelmenu = ConfigYesNo(default = True)
 config.plugins.epgsearch.filter_type = ConfigSelection(default = "exact", choices = [("partial", _("partial match")), ("exact", _("exact match"))])
 config.plugins.epgsearch.search_case = ConfigSelection(default = "insensitive", choices = [("insensitive", _("case-insensitive search")), ("sensitive", _("case-sensitive search"))])
-config.plugins.epgsearch.search_type = ConfigSelection(default = "partial", choices = [("partial", _("partial match")), ("exact", _("exact match")), ("start", _("title starts with"))])
+config.plugins.epgsearch.search_type = ConfigSelection(default = "partial", choices = [("partial", _("partial match")), ("exact", _("exact match")), ("partialdesc", _("description contains")), ("start", _("title starts with"))])
 
 
 
