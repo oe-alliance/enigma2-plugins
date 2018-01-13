@@ -250,25 +250,26 @@ class IMDB(Screen):
 			'(?:.*?<h4 class="inline">\s*(?P<g_alternativ>Auch bekannt als|Also Known As):\s*</h4>\s*(?P<alternativ>.*?)\s*<span)?'
 			, re.DOTALL)
 
+			self.awardsmask = re.compile('<span itemprop="awards">\s*(?:<b>)?\s*(?P<awards>.+?)\s*(?:</b>)?\s*</span>', re.DOTALL)
+
 			self.extrainfomask = re.compile(
-			'(?:.*?<h4 class="inline">(?P<g_outline>Kurzbeschreibung|Plot Outline):</h4>(?P<outline>.+?)<)*'
-			'(?:.*?<h2>(?P<g_synopsis>Storyline)</h2>.*?<p>(?P<synopsis>.+?)\s*</p>)*'
-			'(?:.*?<h4 class="inline">(?P<g_keywords>Plot Keywords):</h4>(?P<keywords>.+?)(?:Mehr|See more</a>|</div>))*'
-			'(?:.*?<h4 class="inline">(?P<g_tagline>Werbezeile|Tagline?):</h4>\s*(?P<tagline>.+?)<)*'
-			'(?:.*?<h4 class="inline">(?P<g_awards>Filmpreise|Awards):</h4>\s*(?P<awards>.+?)(?:Mehr|See more</a>|</div>))*'
-			'(?:.*?<h4 class="inline">(?P<g_language>Sprache|Language):</h4>\s*(?P<language>.+?)</div>)*'
-			'(?:.*?<h4 class="inline">(?P<g_locations>Drehorte|Filming Locations):</h4>.*?<a.*?>(?P<locations>.+?)</a>)*'
-			'(?:.*?<h4 class="inline">(?P<g_runtime>L\S*?nge|Runtime):</h4>\s*(?P<runtime>.+?)</div>)*'
-			'(?:.*?<h4 class="inline">(?P<g_sound>Tonverfahren|Sound Mix):</h4>\s*(?P<sound>.+?)</div>)*'
-			'(?:.*?<h4 class="inline">(?P<g_color>Farbe|Color):</h4>\s*(?P<color>.+?)</div>)*'
-			'(?:.*?<h4 class="inline">(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h4>\s*(?P<aspect>.+?)(?:Mehr|See more</a>|</div>))*'
-			'(?:.*?<h4 class="inline">(?P<g_cert>Altersfreigabe|Certification):</h4>\s*(?P<cert>.+?)</div>)*'
-			'(?:.*?<h4 class="inline">(?P<g_company>Firma|Company):</h4>\s*(?P<company>.+?)(?:Mehr|See more</a>|</div>))*'
-			'(?:.*?<h4>(?P<g_trivia>Dies und das|Trivia)</h4>\s*(?P<trivia>.+?)(?:<span))*'
-			'(?:.*?<h4>(?P<g_goofs>Pannen|Goofs)</h4>\s*(?P<goofs>.+?)(?:<span))*'
-			'(?:.*?<h4>(?P<g_quotes>Dialogzitate|Quotes)</h4>\s*(?P<quotes>.+?)(?:<span))*'
-			'(?:.*?<h4>(?P<g_connections>Bez\S*?ge zu anderen Titeln|Movie Connections)</h4>\s*(?P<connections>.+?)(?:<span))*'
-			'(?:.*?<h2>(?P<g_comments>Nutzerkommentare|User Reviews)</h2>.*?<a href="/user/ur\d{7,7}/comments">(?P<commenter>.+?)</a>.*?<p>(?P<comment>.+?)</p>)*'
+			'(?:.*?<div class="summary_text" itemprop="description">(?P<outline>.+?)</div>)?'
+			'(?:.*?<h2>(?P<g_synopsis>Storyline)</h2>.*?<div class="inline canwrap" itemprop="description">(?P<synopsis>.+?)</div>)?'
+			'(?:.*?<h4 class="inline">(?P<g_keywords>Plot Keywords):</h4>(?P<keywords>.+?)(?:(?:Mehr|See All) \(\d+\)</a>|</div>))?'
+			'(?:.*?<h4 class="inline">(?P<g_tagline>Werbezeile|Taglines?):</h4>\s*(?P<tagline>.+?)<)?'
+			'(?:.*?<h4 class="inline">(?P<g_cert>Altersfreigabe|Certificate):</h4>\s*<span itemprop="contentRating">(?P<cert>.+?)</span>)?'
+			'(?:.*?<h4 class="inline">(?P<g_language>Sprache|Language):</h4>\s*(?P<language>.+?)</div>)?'
+			'(?:.*?<h4 class="inline">(?P<g_locations>Drehorte|Filming Locations):</h4>.*?<a.*?>(?P<locations>.+?)</a>)?'
+			'(?:.*?<h4 class="inline">(?P<g_company>Firma|Production Co):</h4>\s*(?P<company>.+?)(?:Mehr|See more</a>|</div>))?'
+			'(?:.*?<h4 class="inline">(?P<g_runtime>L\S*?nge|Runtime):</h4>\s*(?P<runtime>.+?)</div>)?'
+			'(?:.*?<h4 class="inline">(?P<g_sound>Tonverfahren|Sound Mix):</h4>\s*(?P<sound>.+?)</div>)?'
+			'(?:.*?<h4 class="inline">(?P<g_color>Farbe|Color):</h4>\s*(?P<color>.+?)</div>)?'
+			'(?:.*?<h4 class="inline">(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h4>\s*(?P<aspect>.+?)(?:Mehr|See more</a>|</div>))?'
+			'(?:.*?<h4>(?P<g_trivia>Dies und das|Trivia)</h4>\s*(?P<trivia>.+?)(?:Mehr|See more</a>|</div>))*'
+			'(?:.*?<h4>(?P<g_goofs>Pannen|Goofs)</h4>\s*(?P<goofs>.+?)(?:Mehr|See more</a>|</div>))*'
+			'(?:.*?<h4>(?P<g_quotes>Dialogzitate|Quotes)</h4>\s*(?P<quotes>.+?)(?:Mehr|See more</a>|</div>))?'
+			'(?:.*?<h4>(?P<g_connections>Bez\S*?ge zu anderen Titeln|Connections)</h4>\s*(?P<connections>.+?)(?:Mehr|See more</a>|</div>))?'
+			'(?:.*?<h2>(?P<g_comments>Nutzerkommentare|User Reviews)</h2>.*?<strong itemprop="name">(?P<commenttitle>.*?)</strong>.*?<span itemprop="author">(?P<commenter>.+?)</span>.*?<p.*?>(?P<comment>.+?)</p>)?'
 			, re.DOTALL)
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genres?:</h4>\s*?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
@@ -458,8 +459,8 @@ class IMDB(Screen):
 			if extrainfos:
 				# get entry 1 = Overview(details)
 				try:
-					text = self.htmltags.sub('',extrainfos.group("synopsis").replace("\n",'').replace("<br>", '\n').replace("<br />",'\n').replace('&view=simple&sort=alpha&ref_=tt_stry_pl" >',' '))
-					overview = (_("Content:") + " " + text.encode('utf-8'))
+					text = ' '.join(self.htmltags.sub('',extrainfos.group("synopsis").replace("\n",' ').replace("<br>", '\n').replace("<br />",'\n')).replace(' |' + self.NBSP, '').replace(self.NBSP, ' ').split()) + "\n"
+					overview = _("Content:") + " " + text
 				except Exception, e:
 					print('[IMDb] IMDBsavetxt exception failure in get overview: ', str(e))
 					overview = (_("Content:"))
@@ -467,8 +468,8 @@ class IMDB(Screen):
 
 				# get entry 2 = Runtime
 				try:
-					time = self.htmltags.sub('',extrainfos.group("runtime").replace("\n",'').replace("<br>", '\n').replace("<br />",'\n').replace('&view=simple&sort=alpha&ref_=tt_stry_pl" >',' '))
-					runtime = (_("Runtime:") + " " + time.encode('utf-8'))
+					time = ' '.join(self.htmltags.sub('',extrainfos.group(category).replace("\n",' ').replace("<br>", '\n').replace("<br />",'\n')).replace(' |' + self.NBSP, '').replace(self.NBSP, ' ').split())
+					runtime = _("Runtime:") + " " + time
 				except Exception, e:
 					print('[IMDb] IMDBsavetxt exception failure in get runtime: ', str(e))
 					runtime = (_("Runtime:"))
@@ -479,7 +480,7 @@ class IMDB(Screen):
 			if genreblock:
 				genres = ' '.join(self.htmltags.sub('', genreblock.group(0)).replace(self.NBSP, ' ').split())
 				if genres:
-					genre = (_("Genre:") + " " + genres.encode('utf-8'))
+					genre = _("Genre:") + " " + genres
 			else:
 				genre = (_("Genre:"))
 #			print'[IMDb] IMDBsavetxt genre: ', genre
@@ -487,7 +488,7 @@ class IMDB(Screen):
 			# get entry 4 = Country
 			try:
 				land = ' '.join(self.htmltags.sub('', self.generalinfos.group("country").replace('\n',' ')).split())
-				country = (_("Production Countries:") + " " + land.encode('utf-8'))
+				country = _("Production Countries:") + " " + land
 			except Exception, e:
 				print('[IMDb] IMDBsavetxt exception failure in get country: ', str(e))
 				country = (_("Production Countries:"))
@@ -496,7 +497,7 @@ class IMDB(Screen):
 			# get entry 5 = ReleaseDate
 			try:
 				date = ' '.join(self.htmltags.sub('', self.generalinfos.group("premiere").replace('\n',' ')).split())
-				release = (_("Release Date:") + " " + date.encode('utf-8'))
+				release = _("Release Date:") + " " + date
 			except Exception, e:
 				print('[IMDb] IMDBsavetxt exception failure in get release: ', str(e))
 				release = (_("Release Date:"))
@@ -508,7 +509,7 @@ class IMDB(Screen):
 				ratingtext = ratingtext.group("rating")
 				if ratingtext != '<span id="voteuser"></span>':
 					text = ratingtext                                # + " / 10"
-					rating = (_("User Rating") + ": " + text.encode('utf-8'))
+					rating = _("User Rating") + ": " + text
 			else:
 				rating = (_("User Rating") + ": ")
 #			print'[IMDb] IMDBsavetxt rating: ', rating
@@ -771,19 +772,43 @@ class IMDB(Screen):
 				download.start().addCallback(self.IMDBPoster).addErrback(self.http_failed)
 			else:
 				self.IMDBPoster("kein Poster")
+
+			Extratext = ''
+			awardsresult = self.awardsmask.finditer(self.inhtml)
+			if awardsresult:
+				awardslist = [' '.join(x.group('awards').split()) for x in awardsresult]
+				if awardslist:
+					Extratext = "Extra Info\n\n" + ' | '.join(awardslist) + "\n"
+
 			extrainfos = self.extrainfomask.search(self.inhtml)
 
 			if extrainfos:
-				Extratext = "Extra Info\n"
+				if not Extratext:
+					Extratext = "Extra Info\n"
 
-				for category in ("tagline","outline","synopsis","keywords","awards","runtime","language","color","aspect","sound","cert","locations","company","trivia","goofs","quotes","connections"):
-					if extrainfos.group('g_'+category):
-						Extratext += extrainfos.group('g_'+category) + ": " + self.htmltags.sub('',extrainfos.group(category).replace("\n",'').replace("<br>", '\n').replace("<br />",'\n').replace('&view=simple&sort=alpha&ref_=tt_stry_pl" >',' ')) + "\n"
+				addspace = { "outline", "synopsis","tagline","runtime","locations","trivia","goofs","quotes","connections" }
+				extraspace = ''
+
+				for category in ("outline","synopsis","tagline","keywords","cert","runtime","language","color","aspect","sound","locations","company","trivia","goofs","quotes","connections"):
+					if category in addspace:
+						extraspace = "\n"
+					if extrainfos.group(category):
+						sep = ":\n" if category in ("outline", "synopsis") else ": "
+						Extratext += extraspace
+						if category == "outline":
+							if "Add a Plot" in extrainfos.group(category):
+								continue
+							Extratext += _("Plot Outline")
+						elif extrainfos.group('g_'+category):
+							Extratext += extrainfos.group('g_'+category)
+						else:
+							Extratext += _("Unknown category")
+						Extratext += sep  + ' '.join(self.htmltags.sub('',extrainfos.group(category).replace("\n",' ').replace("<br>", '\n').replace("<br />",'\n')).replace(' |' + self.NBSP, '').replace(self.NBSP, ' ').split()) + "\n"
+						extraspace = ''
 				if extrainfos.group("g_comments"):
-					stripmask = re.compile('\s{2,}', re.DOTALL)
-					Extratext += extrainfos.group("g_comments") + " [" + stripmask.sub(' ', self.htmltags.sub('',extrainfos.group("commenter"))) + "]: " + self.htmltags.sub('',extrainfos.group("comment").replace("\n",' ')) + "\n"
+					Extratext += "\n" + extrainfos.group("g_comments") + ":\n" + extrainfos.group("commenttitle") + " [" + ' '.join(self.htmltags.sub('',extrainfos.group("commenter")).split()) + "]: " + self.htmltags.sub('',extrainfos.group("comment").replace("\n",' ').replace(self.NBSP, ' ').replace("<br>", '\n').replace("<br/>",'\n').replace("<br />",'\n')) + "\n"
 
-				Extratext = transHTML(Extratext)
+			if Extratext:
 				self["extralabel"].setText(Extratext)
 				self["extralabel"].hide()
 				self["key_blue"].setText(_("Extra Info"))
