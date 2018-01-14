@@ -30,7 +30,7 @@ __searchDefaultScope = "currentbouquet" if getImageDistro() in ("easy-gui-aus", 
 config.plugins.epgsearch.scope = ConfigSelection(choices=[("all", _("all services")), ("allbouquets", _("all bouquets")), ("currentbouquet", _("current bouquet")), ("currentservice", _("current service")), ("ask", _("ask user"))], default=__searchDefaultScope)
 config.plugins.epgsearch.defaultscope = ConfigSelection(choices=[("all", _("all services")), ("allbouquets", _("all bouquets")), ("currentbouquet", _("current bouquet")), ("currentservice", _("current service"))], default=__searchDefaultScope)
 config.plugins.epgsearch.search_type = ConfigSelection(default = "partial", choices = [("partial", _("partial match")), ("exact", _("exact match")), ("partialdesc", _("description contains")), ("start", _("title starts with"))])
-config.plugins.epgsearch.search_case = ConfigSelection(default = "insensitive", choices = [("insensitive", _("case-insensitive search")), ("sensitive", _("case-sensitive search"))])
+config.plugins.epgsearch.search_case = ConfigSelection(default = "insensitive", choices = [("insensitive", _("case-insensitive search")), ("sensitive", _("case-sensitive search")),("regex", _("regex search"))])
 allowShowOrbital = getImageDistro() not in ("easy-gui-aus", "beyonwiz")
 config.plugins.epgsearch.showorbital = ConfigYesNo(default = allowShowOrbital)
 config.plugins.epgsearch.history = ConfigSet(choices = [])

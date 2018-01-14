@@ -625,11 +625,12 @@ class EPGSearch(EPGSelection):
 			"partial": eEPGCache.PARTIAL_TITLE_SEARCH,
 			"exact": eEPGCache.EXAKT_TITLE_SEARCH,
 			"partialdesc": eEPGCache.PARTIAL_DESCRIPTION_SEARCH,
-			"start": eEPGCache.START_TITLE_SEARCH,
+			"start": eEPGCache.START_TITLE_SEARCH
 		}.get(config.plugins.epgsearch.search_type.value, eEPGCache.PARTIAL_TITLE_SEARCH)
 		search_case = {
 			"insensitive": eEPGCache.NO_CASE_CHECK,
 			"sensitive": eEPGCache.CASE_CHECK,
+			"regex": eEPGCache.REGEX_CHECK
 		}.get(config.plugins.epgsearch.search_case.value, eEPGCache.NO_CASE_CHECK)
 		searchFilter = {
 			"all": self.allServiceRefMap,
@@ -699,7 +700,7 @@ class EPGSearch(EPGSelection):
 			eEPGCache.PARTIAL_DESCRIPTION_SEARCH: partialMatchFunc,
 			eEPGCache.START_TITLE_SEARCH: lambda s: s.startswith(searchString),
 		}.get(search_type, partialMatchFunc)
-		if search_case == eEPGCache.CASE_CHECK:
+		if search_case == eEPGCache.CASE_CHECK or search_case == eEPGCache.REGEX_CHECK:
 			caseMatchFunc = matchFunc
 		else:
 			searchString = searchString.lower()
