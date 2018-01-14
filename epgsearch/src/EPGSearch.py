@@ -624,8 +624,8 @@ class EPGSearch(EPGSelection):
 		search_type = {
 			"partial": eEPGCache.PARTIAL_TITLE_SEARCH,
 			"exact": eEPGCache.EXAKT_TITLE_SEARCH,
-			"start": eEPGCache.START_TITLE_SEARCH,
 			"partialdesc": eEPGCache.PARTIAL_DESCRIPTION_SEARCH,
+			"start": eEPGCache.START_TITLE_SEARCH,
 		}.get(config.plugins.epgsearch.search_type.value, eEPGCache.PARTIAL_TITLE_SEARCH)
 		search_case = {
 			"insensitive": eEPGCache.NO_CASE_CHECK,
@@ -696,8 +696,8 @@ class EPGSearch(EPGSelection):
 		matchFunc = {
 			eEPGCache.PARTIAL_TITLE_SEARCH: partialMatchFunc,
 			eEPGCache.EXAKT_TITLE_SEARCH: lambda s: searchString == s,
-			eEPGCache.START_TITLE_SEARCH: lambda s: s.startswith(searchString),
 			eEPGCache.PARTIAL_DESCRIPTION_SEARCH: partialMatchFunc,
+			eEPGCache.START_TITLE_SEARCH: lambda s: s.startswith(searchString),
 		}.get(search_type, partialMatchFunc)
 		if search_case == eEPGCache.CASE_CHECK:
 			caseMatchFunc = matchFunc
