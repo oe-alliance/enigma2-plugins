@@ -65,8 +65,8 @@ class GoogleMapsConfigScreen(ConfigListScreen,Screen):
     skin = """
         <screen position="100,100" size="550,400" title="Google Maps Setup" >
         <widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
-        <widget name="buttonred" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
-        <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
+        <widget name="key_red" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
+        <widget name="key_green" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
         <widget name="label" position="240,360" size="200,40"  valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
         </screen>"""
     def __init__(self, session, args = 0):
@@ -80,10 +80,10 @@ class GoogleMapsConfigScreen(ConfigListScreen,Screen):
         self.list.append(getConfigListEntry(_("enable caching of Images in /tmp/"), config.plugins.GoogleMaps.cache_enabled))
         self.list.append(getConfigListEntry(_("show Preview Image for Searchresults"), config.plugins.GoogleMaps.show_preview_on_searchresults))
         self.list.append(getConfigListEntry(_("default Zoomlevel for Preview Images"), config.plugins.GoogleMaps.default_zoomlevel_for_searchresults))
-
+        self.setTitle(_("Google Maps Setup"))
         ConfigListScreen.__init__(self, self.list)
-        self["buttonred"] = Label(_("cancel"))
-        self["buttongreen"] = Label(_("ok"))
+        self["key_red"] = Label(_("cancel"))
+        self["key_green"] = Label(_("ok"))
         self["label"] = Label("Author: 3c5x9")
         self["setupActions"] = ActionMap(["SetupActions"],
         {
