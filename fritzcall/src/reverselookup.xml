@@ -2,8 +2,8 @@
 
 <!-- reverselookup.xml
 
-$Revision: 1484 $
-$Date: 2017-07-29 14:01:39 +0200 (Sat, 29 Jul 2017) $
+$Revision: 1501 $
+$Date: 2018-01-13 13:58:25 +0100 (Sat, 13 Jan 2018) $
 
 	 The syntax of this file is fairly self-explanatory
      However, a few things need to be said. First and foremost
@@ -773,24 +773,24 @@ $Date: 2017-07-29 14:01:39 +0200 (Sat, 29 Jul 2017) $
 	<country code="+41">
 		<website name="tel.search.ch" url="http://tel.search.ch/result.html?tel=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;h1&gt;&lt;a href=&quot;[^&quot;]+&quot;(?: data-stats=&quot;[^&quot;]+&quot;)?&gt;([^&lt;]+)&lt;/a&gt;&lt;/h1&gt;</name>
-				<street>&lt;div class=&quot;tel-address&quot;&gt;([^,]+),</street>
+				<name>&lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;([^&quot;]+)&quot;&gt;</name>
+				<street>&lt;span class=&quot;street-address&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
 				<city>&lt;span class=&quot;locality&quot;&gt;([^&lt;]*)&lt;/span&gt;</city>
 				<zipcode>&lt;span class=&quot;postal-code&quot;&gt;(\d+)&lt;/span&gt;</zipcode>
 			</entry>
 			<entry>
 				<name>&lt;h1&gt;(\D[^&lt;]+)(?:&lt;span class=&quot;sl-nowrap&quot;&gt;[^&lt;]+&lt;/span&gt;)?&lt;/h1&gt;</name>
 				<street>&lt;(?:span|div) class=&quot;(?:tel|street)-address&quot;&gt;([^&lt;]+)&lt;</street>
-				<city>&lt;span class=&quot;locality&quot;&gt;([^&lt;]*)&lt;/span&gt;</city>
-				<zipcode>&lt;span class=&quot;postal-code&quot;&gt;(\d+)&lt;/span&gt;</zipcode>
+				<city>&lt;span class=&quot;locality&quot;&gt;([^&lt;]+)&lt;/span&gt;</city>
+				<zipcode>&lt;span class=&quot;postal-code&quot;&gt;([^&lt;]+)&lt;/span&gt;</zipcode>
 			</entry>
-		</website>
+				</website>
 		<website name ="tel.local.ch" url="http://tel.local.ch/de/q/?ext=1&amp;phone=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;a class='big info-link(?: button details-entry-link-button)?' href='[^']+' title='([^']+)'&gt;</name>
-				<city>&lt;span class='address'&gt;[^,]+, \d+ ([^&lt;]+)&lt;/span&gt;</city>
-				<street>&lt;span class='address'&gt;([^,]+), \d+ [^&lt;]+&lt;/span&gt;</street>
-				<zipcode>&lt;span class='address'&gt;[^,]+, (\d+) [^&lt;]+&lt;/span&gt;</zipcode>
+				<name>"name": "([^"]+)"</name>
+				<city>"addressLocality": "([^"]+)"</city>
+				<street>"streetAddress": "([^"]+)"</street>
+				<zipcode>"postalCode": "([^"]+)"</zipcode>
 			</entry>
 			<entry>
 				<name>&lt;h1 class=&#39;listing-name&#39;&gt;\s+([^&lt;]*)\s*&lt;/h1&gt;</name>
@@ -939,7 +939,7 @@ $Date: 2017-07-29 14:01:39 +0200 (Sat, 29 Jul 2017) $
 	        	<zipcode>&lt;address&gt;\s+[^,]+,&amp;nbsp;(\d+) &lt;span class=""&gt;</zipcode>
 	        </entry>
 	        <entry>
-	        	<name>&lt;a href="[^"]+"\s+class="name "&gt;&lt;span class=""&gt;(.+?)&amp;nbsp;&lt;/span&gt;</name>
+	        	<name>&lt;a href="[^"]+"\s+class="name "(?: onmouseover="" onMouseOut="")?&gt;&lt;span class=""&gt;(.+?)&amp;nbsp;&lt;/span&gt;</name>
 	        	<street>&lt;address&gt;\s+([^,]+),&amp;nbsp;\d+ &lt;span class=""&gt;</street>
 	        	<city>ci = "([^"]+)";</city>
 	        	<zipcode>&lt;address&gt;\s+[^,]+,&amp;nbsp;(\d+) &lt;span class=""&gt;</zipcode>

@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1492 $
-$Date: 2017-08-21 17:00:25 +0200 (Mon, 21 Aug 2017) $
-$Id: FritzCallFBF.py 1492 2017-08-21 15:00:25Z michael $
+$Revision: 1496 $
+$Date: 2017-10-05 11:17:25 +0200 (Thu, 05 Oct 2017) $
+$Id: FritzCallFBF.py 1496 2017-10-05 09:17:25Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -3496,7 +3496,7 @@ class FritzCallFBF_upnp():
 		self.fc = FritzConnection(address=config.plugins.FritzCall.hostname.value,
 								user=config.plugins.FritzCall.username.value,
 								password=self.password,
-								servicesToGet=["DeviceConfig:1", "X_AVM-DE_OnTel:1", "WLANConfiguration:1", "WLANConfiguration:2", "WLANConfiguration:3", "UserInterface:1"])
+								servicesToGet=["DeviceConfig:1", "X_AVM-DE_OnTel:1", "WLANConfiguration:1", "WLANConfiguration:2", "WLANConfiguration:3"])
 		self.getInfo(None)
 
 	def _notify(self, text):
@@ -3517,7 +3517,6 @@ class FritzCallFBF_upnp():
 		self._infoCallback = callback
 		if "DeviceConfig:1" in self.fc.services.keys():
 			self.fc.call_action(self._getInfo, "DeviceConfig", "X_AVM-DE_CreateUrlSID")
-			# self.fc.call_action(self._getVersion, "UserInterface", "GetInfo")
 		else:
 			try:
 				self._timer_conn = self._timer.timeout.connect(self._timerTick)
@@ -3539,11 +3538,6 @@ class FritzCallFBF_upnp():
 		if self._timeout == 0:
 			self._timer.stop()
 			self._timeout = TIMEOUT
-
-	def _getVersion(self, result):
-		if "NewX_AVM-DE_Version" in result:
-			self.version = result["NewX_AVM-DE_Version"]
-			self.debug("FW Version:", self.version)
 
 	def _getInfo(self, result):
 		self.debug(repr(result))
@@ -3661,7 +3655,7 @@ class FritzCallFBF_upnp():
 				if found:
 					provider6 = found.group(1).encode("utf-8")
 				else:
-					found = re.match(r'\s*Provider:: (.*)', item, re.S)
+					found = re.match(r'\s*Provider: (.*)', item, re.S)
 					if found:
 						provider6 = found.group(1).encode("utf-8")
 				found = re.match(r'IP(?:v6)?-(?:Adresse|Prefix): (.*)', item, re.S)
@@ -3716,14 +3710,15 @@ class FritzCallFBF_upnp():
 				dslState[2] = connData["title"].encode("utf-8")
 		self.info("dslState: " + repr(dslState))
 
+		wlan24NetName = ""
 		if "wlan24" in boxData:
 			wlan24 = boxData["wlan24"]
 			if wlan24:
-				netName24 = re.sub(r".*: ", "", wlan24["txt"]).encode("utf-8")
+				wlan24NetName = re.sub(r".*: ", "", wlan24["txt"]).encode("utf-8")
 				if wlan24["led"] == "led_green":
-					wlanState = ['1', '', '', "2,4GHz " + _("on") + ": " + netName24]
+					wlanState = ['1', '', '', "2,4GHz " + _("on") + ": " + wlan24NetName]
 				else:
-					wlanState = ['0', '', '', "2,4GHz " + _("off") + ": " + netName24]
+					wlanState = ['0', '', '', "2,4GHz " + _("off") + ": " + wlan24NetName]
 		self.info("wlanState24: " + repr(wlanState))
 
 		if "wlan5" in boxData:
@@ -3738,7 +3733,7 @@ class FritzCallFBF_upnp():
 				else:
 					if wlan5["led"] == "led_green":
 						wlanState[0] = '1'
-						if netName == netName24:
+						if netName == wlan24NetName:
 							wlanState[3] = "2,4GHz/5GHz " + _("on") + ": " + netName
 						else:
 							wlanState[3] = wlanState[3] + ", 5GHz " + _("on") + ": " + netName

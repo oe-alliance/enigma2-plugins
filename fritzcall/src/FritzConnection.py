@@ -520,7 +520,11 @@ class FritzConnection(object):
 	def _read_services_cb(self, service, parser):
 		# self.debug("Service: " + service.name)
 		actions = parser.get_actions(self.action_parameters)
-		service.actions = {action.name: action for action in actions}
+		# not in Python 2.6
+		try:
+			service.actions = {action.name: action for action in actions}
+		except:
+			dict((action.name, action) for action in actions)
 		self.services[service.name] = service
 
 	# @property
