@@ -2,11 +2,10 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1490 $
-$Date: 2017-08-17 18:40:48 +0200 (Thu, 17 Aug 2017) $
-$Id: plugin.py 1490 2017-08-17 16:40:48Z michael $
+$Revision: 1502 $
+$Date: 2018-01-13 14:00:04 +0100 (Sat, 13 Jan 2018) $
+$Id: plugin.py 1502 2018-01-13 13:00:04Z michael $
 '''
-
 
 # C0111 (Missing docstring)
 # C0103 (Invalid name)
@@ -368,8 +367,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1490 $"[1:-2] + "\n" +
-							"$Date: 2017-08-17 18:40:48 +0200 (Thu, 17 Aug 2017) $"[1:23] + "\n"
+							"$Revision: 1502 $"[1:-2] + "\n" +
+							"$Date: 2018-01-13 14:00:04 +0100 (Sat, 13 Jan 2018) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1951,7 +1950,7 @@ class FritzCallPhonebook(object):
 					if not os.path.isfile(phonebookFilename):
 						json.dump({}, open(phonebookFilename, "w"), ensure_ascii=False, encoding="utf-8", indent=0, separators=(',', ': '), sort_keys=True)
 						info("[FritzCallPhonebook] empty Phonebook.json created")
-						return true
+						return True
 
 					phonebookTmp = {}
 					for k, v in json.loads(open(phonebookFilename).read().decode("utf-8")).items():
@@ -2618,7 +2617,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1490 $"[1:-1] + "$Date: 2017-08-17 18:40:48 +0200 (Thu, 17 Aug 2017) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1502 $"[1:-1] + "$Date: 2018-01-13 14:00:04 +0100 (Sat, 13 Jan 2018) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2812,8 +2811,10 @@ class FritzCallList(object):
 		# build screen from call list
 		text = "\n"
 
-		if not self.callList:
+		if not self.callList: # why is this happening at all?!?!
 			text = _("no calls")
+			debug("[FritzCallList] %s", text)
+			return
 		else:
 			if self.callList[0] == "Start":
 				text = text + _("Last 10 calls:\n")
@@ -3224,7 +3225,7 @@ class FritzReverseLookupAndNotifier(object):
 
 class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 	def __init__(self):
-		info("[FritzProtocol] " + "$Revision: 1490 $"[1:-1] + "$Date: 2017-08-17 18:40:48 +0200 (Thu, 17 Aug 2017) $"[7:23] + " starting")
+		info("[FritzProtocol] " + "$Revision: 1502 $"[1:-1] + "$Date: 2018-01-13 14:00:04 +0100 (Sat, 13 Jan 2018) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -3269,6 +3270,7 @@ class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 
 		filtermsns = config.plugins.FritzCall.filtermsn.value.split(",")
 		filtermsns = [i.strip() for i in filtermsns]
+		debug("Filtermsns: %s", filtermsns)
 
 		if config.plugins.FritzCall.ignoreUnknown.value:
 			if self.event == "RING":
@@ -3282,15 +3284,18 @@ class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 		# debug("[FritzProtocol] Volcontrol dir: %s" % dir(eDVBVolumecontrol.getInstance()))
 		# debug("[FritzCall] unmute on connID: %s?" %self.connID)
 		global mutedOnConnID
+		phone = anEvent[4]
+		debug("Phone: %s", phone)
 		if Standby.inStandby is None and not mutedOnConnID:
-			info("[FritzCall] check mute")
-			if (self.event == "RING" and config.plugins.FritzCall.muteOnCall.value) or (self.event == "CALL" and config.plugins.FritzCall.muteOnOutgoingCall.value):
-				info("[FritzCall] mute on connID: %s", self.connID)
-				mutedOnConnID = self.connID
-				# eDVBVolumecontrol.getInstance().volumeMute() # with this, we get no mute icon...
-				if not eDVBVolumecontrol.getInstance().isMuted():
-					globalActionMap.actions["volumeMute"]()
-				# self.pauseEnigma2()
+			if not (config.plugins.FritzCall.filter.value and phone not in filtermsns):
+				info("[FritzCall] check mute")
+				if (self.event == "RING" and config.plugins.FritzCall.muteOnCall.value) or (self.event == "CALL" and config.plugins.FritzCall.muteOnOutgoingCall.value):
+					info("[FritzCall] mute on connID: %s", self.connID)
+					mutedOnConnID = self.connID
+					# eDVBVolumecontrol.getInstance().volumeMute() # with this, we get no mute icon...
+					if not eDVBVolumecontrol.getInstance().isMuted():
+						globalActionMap.actions["volumeMute"]()
+					# self.pauseEnigma2()
 		if self.event == "DISCONNECT"and (config.plugins.FritzCall.muteOnCall.value or config.plugins.FritzCall.muteOnOutgoingCall.value) and mutedOnConnID == self.connID:
 			debug("[FritzCall] unmute on connID: %s!", self.connID)
 			mutedOnConnID = None
@@ -3308,7 +3313,6 @@ class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 		# 		globalActionMap.actions["volumeMute"]()
 		#=======================================================================
 		elif self.event == "RING" or (self.event == "CALL" and config.plugins.FritzCall.showOutgoingCalls.value):
-			phone = anEvent[4]
 			if self.event == "RING":
 				number = anEvent[3]
 			else:
