@@ -103,12 +103,13 @@ except Exception as e:
 #pragma mark -
 
 # Notification-Domain
+# Q: Do we really need this or can we do this better?
 from Tools import Notifications
 try:
 	Notifications.notificationQueue.registerDomain(NOTIFICATIONDOMAIN, _("EPGREFRESH_NOTIFICATION_DOMAIN"), deferred_callable = True)
 except Exception as e:
 	EPGRefreshNotificationKey = ""
-	print("[EPGRefresh] Error registering Notification-Domain:", e)
+	#print("[EPGRefresh] Error registering Notification-Domain:", e)
 	
 # Plugin
 from EPGRefresh import epgrefresh
