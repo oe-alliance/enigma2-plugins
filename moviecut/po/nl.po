@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-11 13:30+0000\n"
-"PO-Revision-Date: 2012-03-14 16:01+0100\n"
+"POT-Creation-Date: 2018-02-13 08:13+0000\n"
+"PO-Revision-Date: 2018-02-15 06:52+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
@@ -16,167 +16,123 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
 
-#: ../src_py/plugin.py:41
 msgid "Advanced cut specification..."
 msgstr "Geavanceerde snij specificaties..."
 
-#: ../src_py/plugin.py:278
-#, python-format
-msgid ""
-"Another movie is currently cut.\n"
-"The movie \"%s\" will be cut in the background after it."
-msgstr ""
-"Een ander bestand wordt momenteel behandeld.\n"
-"De opname \"%s\" zal hierna op de achtergrond behandeld worden."
-
-#: ../src_py/plugin.py:247
 msgid "Bad arguments"
 msgstr "Verkeerde argumenten"
 
-#: ../src_py/plugin.py:88
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: ../src_py/plugin.py:179
 msgid "Choose target folder"
 msgstr "Kies doelmap"
 
-#: ../src_py/plugin.py:250
 msgid "Couldn't open input .ap file"
 msgstr "Kon het input .ap bestand niet openen"
 
-#: ../src_py/plugin.py:249
 msgid "Couldn't open input .cuts file"
 msgstr "Kon het input .cuts bestand niet openen"
 
-#: ../src_py/plugin.py:248
 msgid "Couldn't open input .ts file"
 msgstr "Kon het input .ts bestand niet openen"
 
-#: ../src_py/plugin.py:253
 msgid "Couldn't open output .ap file"
 msgstr "Kon het output .ap bestand niet openen"
 
-#: ../src_py/plugin.py:252
 msgid "Couldn't open output .cuts file"
 msgstr "Kon het output .cuts bestand niet openen"
 
-#: ../src_py/plugin.py:251
 msgid "Couldn't open output .ts file"
 msgstr "Kon het output .ts bestand niet openen"
 
-#: ../src_py/plugin.py:131
 msgid "Cut Parameter Input"
 msgstr "Snij parameter input"
 
-#: ../src_py/plugin.py:123
 msgid "Cut source:"
 msgstr "Snij bron:"
 
-#: ../src_py/plugin.py:104
 msgid "Cutlist"
 msgstr "Cutlist"
 
-#: ../src_py/plugin.py:124
 msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
 msgstr "Snijpunten (een IN OUT IN OUT ... volgorde in uur:min:sec)"
 
-#: ../src_py/plugin.py:247
-#: ../src_py/plugin.py:248
-#: ../src_py/plugin.py:249
-#: ../src_py/plugin.py:250
-#: ../src_py/plugin.py:251
-#: ../src_py/plugin.py:252
-#: ../src_py/plugin.py:253
-#: ../src_py/plugin.py:254
-#: ../src_py/plugin.py:255
-#: ../src_py/plugin.py:256
 #, python-format
 msgid "Cutting failed for movie \"%s\""
 msgstr "Snijden mislukt voor opname \"%s\""
 
-#: ../src_py/plugin.py:257
 #, python-format
 msgid "Cutting was aborted for movie \"%s\""
 msgstr "Snijden afgebroken voor opname \"%s\""
 
-#: ../src_py/plugin.py:38
 msgid "Don't cut"
 msgstr "Niet snijden"
 
-#: ../src_py/plugin.py:254
 msgid "Empty .ap file"
 msgstr "Leeg .ap bestand"
 
-#: ../src_py/plugin.py:24
+msgid "Execute cuts"
+msgstr "Snijpunten uitvoeren"
+
 msgid "Execute cuts..."
 msgstr "Voer snijpunten uit..."
 
-#: ../src_py/plugin.py:43
 #, python-format
 msgid "How would you like to cut \"%s\"?"
 msgstr "Hoe moet \"%s\" gesneden worden?"
 
-#: ../src_py/plugin.py:104
 msgid "Manual specification"
 msgstr "Handmatige specificatie"
 
-#: ../src_py/plugin.py:121
 msgid "New description:"
 msgstr "Nieuwe beschrijving:"
 
-#: ../src_py/plugin.py:119
 msgid "New filename:"
 msgstr "Nieuwe bestandsnaam:"
 
-#: ../src_py/plugin.py:122
 msgid "New location:"
 msgstr "Nieuwe lokatie:"
 
-#: ../src_py/plugin.py:120
 msgid "New title:"
 msgstr "Nieuwe titel:"
 
-#: ../src_py/plugin.py:96
 msgid "No"
 msgstr "Nee"
 
-#: ../src_py/plugin.py:255
 msgid "No cuts specified"
 msgstr "Geen snijpunten gespecificeerd"
 
-#: ../src_py/plugin.py:87
 msgid "OK"
 msgstr "OK"
 
-#: ../src_py/plugin.py:40
 msgid "Place the cut movie in a new file ending with \" cut\""
 msgstr "Hernoem het gesneden bestand dat eindigt met \" cut\""
 
-#: ../src_py/plugin.py:256
 msgid "Read/write error (disk full?)"
 msgstr "Schrijf/Leesfout (schijf vol?)"
 
-#: ../src_py/plugin.py:118
 msgid "Replace original:"
 msgstr "Vervang origineel:"
 
-#: ../src_py/plugin.py:39
 msgid "Replace the original movie with the cut movie"
 msgstr "Vervang het origineel door de gesneden opname"
 
-#: ../src_py/plugin.py:276
-#, python-format
-msgid "The movie \"%s\" is cut in the background."
-msgstr "De opname \"%s\" is op de achtergrond gesneden."
-
-#: ../src_py/plugin.py:246
 #, python-format
 msgid "The movie \"%s\" is successfully cut"
 msgstr "De opname \"%s\" is succesvol gesneden"
 
-#: ../src_py/plugin.py:96
 msgid "Yes"
 msgstr "Ja"
 
+#~ msgid ""
+#~ "Another movie is currently cut.\n"
+#~ "The movie \"%s\" will be cut in the background after it."
+#~ msgstr ""
+#~ "Een ander bestand wordt momenteel behandeld.\n"
+#~ "De opname \"%s\" zal hierna op de achtergrond behandeld worden."
+
+#~ msgid "The movie \"%s\" is cut in the background."
+#~ msgstr "De opname \"%s\" is op de achtergrond gesneden."
