@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: shoutcast\n"
+"Project-Id-Version: Shoutcast\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-09 23:22+0000\n"
 "PO-Revision-Date: \n"
@@ -10,9 +10,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
 #, python-format
@@ -116,7 +116,7 @@ msgid "Favorites"
 msgstr "Favorieten"
 
 msgid "First play streaming!"
-msgstr ""
+msgstr "Ga eerst streamen!"
 
 msgid "Genres"
 msgstr "Genres"
