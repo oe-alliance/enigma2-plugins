@@ -50,7 +50,7 @@ int set_range(char* range_str, struct ip_range* range_struct) {
 };
 
 int print_header() {
-  printf("%-17s%-17s%-10s%-17s%-17s\n", "IP address", "NetBIOS Name", 
+  printf("%-17s%-17s%-10s%-17s%-17s\n", "IP address", "NetBIOS Name",
 	 "Server", "User", "MAC address");
   printf("------------------------------------------------------------------------------\n");
   return 0;
@@ -81,14 +81,14 @@ netinfo * newNetInfo()
 {
 	netinfo *nInfo = malloc(sizeof(netinfo)*255);
 	if(!nInfo)
-		exit(0); // TODO: besser machen 
+		exit(0); // TODO: besser machen
 	memset(nInfo,0,sizeof(netinfo)*255);
 	return nInfo;
 }
 
 void freeNetInfo(netinfo *nInfo)
 {
-	free(nInfo); 
+	free(nInfo);
 }
 
 
@@ -120,7 +120,7 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
   my_uint32_t rtt_base; /* Base time (seconds) for round trip time calculations */
   float rtt; /* most recent measured RTT, seconds */
   float srtt=0; /* smoothed rtt estimator, seconds */
-  float rttvar=0.75; /* smoothed mean deviation, seconds */ 
+  float rttvar=0.75; /* smoothed mean deviation, seconds */
   double delta; /* used in retransmit timeout calculations */
   int rto, retransmits=0, more_to_send=1, i;
   char errmsg[80];
@@ -131,33 +131,34 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
 	verbose = 1;
 
 	if((target_string=strdup(pythonIp))==NULL)
-	{ 
+	{
 		err_die("Malloc failed.\n", quiet);
 	}
 	if(!set_range(target_string, &range)) {
 		printf("Error: %s is not an IP address or address range.\n", target_string);
-		free(target_string);
 	};
-  /* Finished with options */
+	free(target_string);
+
+	/* Finished with options */
   /*************************/
 
   /* Prepare socket and address structures */
   /*****************************************/
   sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-  if (sock < 0) 
+  if (sock < 0)
     err_die("Failed to create socket", quiet);
 
   bzero((void*)&src_sockaddr, sizeof(src_sockaddr));
   src_sockaddr.sin_family = AF_INET;
   if(use137) src_sockaddr.sin_port = htons(NB_DGRAM);
-  if (bind(sock, (struct sockaddr *)&src_sockaddr, sizeof(src_sockaddr)) == -1) 
+  if (bind(sock, (struct sockaddr *)&src_sockaddr, sizeof(src_sockaddr)) == -1)
     err_die("Failed to bind", quiet);
-        
+
   fdsr=malloc(sizeof(fd_set));
   if(!fdsr)  err_die("Malloc failed", quiet);
   FD_ZERO(fdsr);
   FD_SET(sock, fdsr);
-        
+
   fdsw=malloc(sizeof(fd_set));
   if(!fdsw) err_die("Malloc failed", quiet);
   FD_ZERO(fdsw);
@@ -176,11 +177,11 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
 
   buff=malloc(BUFFSIZE);
   if(!buff) err_die("Malloc failed", quiet);
-	
+
   /* Calculate interval between subsequent sends */
 
   timerclear(&send_interval);
-  if(bandwidth) send_interval.tv_usec = 
+  if(bandwidth) send_interval.tv_usec =
 		  (NBNAME_REQUEST_SIZE + UDP_HEADER_SIZE + IP_HEADER_SIZE)*8*1000000 /
 		  bandwidth;  /* Send interval in microseconds */
   else /* Assuming 10baseT bandwidth */
@@ -189,14 +190,14 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
     send_interval.tv_sec = send_interval.tv_usec / 1000000;
     send_interval.tv_usec = send_interval.tv_usec % 1000000;
   }
-	
+
   gettimeofday(&last_send_time, NULL); /* Get current time */
 
-  rtt_base = last_send_time.tv_sec; 
+  rtt_base = last_send_time.tv_sec;
 
   /* Send queries, receive answers and print results */
   /***************************************************/
-	
+
   scanned = new_list();
 
   for(i=0; i <= retransmits; i++) {
@@ -218,10 +219,10 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
 	};
 				/* If this packet isn't a duplicate */
 	if(insert(scanned, ntohl(dest_sockaddr.sin_addr.s_addr))) {
-	  rtt = recv_time.tv_sec + 
-	    recv_time.tv_usec/1000000 - rtt_base - 
+	  rtt = recv_time.tv_sec +
+	    recv_time.tv_usec/1000000 - rtt_base -
 	    hostinfo->header->transaction_id/1000;
-	  /* Using algorithm described in Stevens' 
+	  /* Using algorithm described in Stevens'
 	     Unix Network Programming */
 	  delta = rtt - srtt;
 	  srtt += delta / 8;
@@ -238,14 +239,14 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
   };
 
   FD_ZERO(fdsr);
-  FD_SET(sock, fdsr);		
+  FD_SET(sock, fdsr);
 
       /* check if send_interval time passed since last send */
       gettimeofday(&current_time, NULL);
       timersub(&current_time, &last_send_time, &diff_time);
       send_ok = timercmp(&diff_time, &send_interval, >=);
-			
-		
+
+
       if(more_to_send && FD_ISSET(sock, fdsw) && send_ok) {
 	if(targetlist) {
 	  if(fgets(str, 80, targetlist)) {
@@ -253,12 +254,12 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
             /* if(!inet_pton(AF_INET, str, next_in_addr)) { */
 	      fprintf(stderr,"%s - bad IP address\n", str);
 	    } else {
-	      if(!in_list(scanned, ntohl(next_in_addr->s_addr))) 
+	      if(!in_list(scanned, ntohl(next_in_addr->s_addr)))
 	        send_query(sock, *next_in_addr, rtt_base);
 	    }
 	  } else {
 	    if(feof(targetlist)) {
-	      more_to_send=0; 
+	      more_to_send=0;
 	      FD_ZERO(fdsw);
               /* timeout is in milliseconds */
 	      select_timeout.tv_sec = timeout / 1000;
@@ -270,20 +271,20 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
 	    }
 	  }
 	} else if(next_address(&range, prev_in_addr, next_in_addr) ) {
-	  if(!in_list(scanned, ntohl(next_in_addr->s_addr))) 
+	  if(!in_list(scanned, ntohl(next_in_addr->s_addr)))
 	    send_query(sock, *next_in_addr, rtt_base);
 	  prev_in_addr=next_in_addr;
 	  /* Update last send time */
-	  gettimeofday(&last_send_time, NULL); 
+	  gettimeofday(&last_send_time, NULL);
 	} else { /* No more queries to send */
-	  more_to_send=0; 
+	  more_to_send=0;
 	  FD_ZERO(fdsw);
           /* timeout is in milliseconds */
           select_timeout.tv_sec = timeout / 1000;
           select_timeout.tv_usec = (timeout % 1000) * 1000; /* Microseconds */
 	  continue;
 	};
-      };	
+      };
       if(more_to_send) {
 	FD_ZERO(fdsw);
 	FD_SET(sock, fdsw);
@@ -298,8 +299,8 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
     if ( rto < 2.0 ) rto = 2.0;
     if ( rto > 60.0 ) rto = 60.0;
     gettimeofday(&now, NULL);
-		
-    if(now.tv_sec < (transmit_started.tv_sec+rto)) 
+
+    if(now.tv_sec < (transmit_started.tv_sec+rto))
       sleep((transmit_started.tv_sec+rto)-now.tv_sec);
     prev_in_addr = NULL ;
     more_to_send=1;

@@ -72,7 +72,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
@@ -111,7 +111,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
@@ -150,7 +150,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
@@ -189,7 +189,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
 						self.automounts[data['sharename']] = data
 					except Exception, e:
 						print "[MountManager] Error reading Mounts:", e
@@ -267,6 +267,8 @@ class AutoMount():
 						options += ',wsize=8192'
 					if 'tcp' not in options and 'udp' not in options:
 						options += ',proto=tcp'
+		if cifs:
+			options += ",cache=loose"
 		return options
 
 	def CheckMountPoint(self, item, callback, restart):
@@ -408,9 +410,24 @@ class AutoMount():
 			tmpfile.close()
 			f.close()
 			os.rename(filename + '.tmp', filename)
-		
+
 	def escape(self, data):
 		return data.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace("'", '&#39;')
+
+	def removeEntryFromAutofsMap(self, key, location, filename):
+		if os.path.exists(filename):
+			f = open(filename)
+			tmpfile = open(filename + '.tmp', 'w')
+			for line in f.readlines():
+				parts = line.split(" ", 2)
+				if len(parts) > 1:
+					if parts[1].startswith("-") and len(parts) > 2:
+						parts = parts[:1] + parts[2:]
+					if parts[0] != key and parts[1] != location:
+						tmpfile.write(line)
+			tmpfile.close()
+			f.close()
+			os.rename(filename + '.tmp', filename)
 
 	def generateMountXML(self, sharedata):
 		res = []
@@ -453,11 +470,11 @@ class AutoMount():
 			sharetemp = None
 			if mounttype == 'nfs':
 				sharetemp = sharedata['ip'] + ':/' + sharedata['sharedir']
-				self.removeEntryFromFile(sharetemp+'\n', '/etc/auto.network', ' ')
+				self.removeEntryFromAutofsMap(sharedata['sharename'], sharetemp + '\n', '/etc/auto.network')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 			elif mounttype == 'cifs':
 				sharetemp = '//' + sharedata['ip'] + '/' + sharedata['sharedir']
-				self.removeEntryFromFile(":" + sharetemp+'\n', '/etc/auto.network', ' ')
+				self.removeEntryFromAutofsMap(sharedata['sharename'], ":" + sharetemp+'\n', '/etc/auto.network')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 
 			list += self.generateMountXML(sharedata)
@@ -522,7 +539,7 @@ class AutoMount():
 			elif sharedata['mounttype'] == 'cifs':
 				sharetemp = '://' + sharedata['ip'] + '/' + sharedata['sharedir']
 			if sharetemp:
-				self.removeEntryFromFile(sharetemp+'\n', '/etc/auto.network' , ' ')
+				self.removeEntryFromAutofsMap(sharedata['sharename'], sharetemp + '\n', '/etc/auto.network')
 				self.removeEntryFromFile(sharetemp, '/etc/fstab')
 		self.automounts.clear()
 		self.automounts = self.newautomounts

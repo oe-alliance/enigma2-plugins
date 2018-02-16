@@ -23,7 +23,6 @@ from stat import ST_MTIME
 import subprocess
 
 import netscan
-import ipscan
 from MountManager import AutoMountManager
 from AutoMount import iAutoMount
 from MountEdit import AutoMountEdit
@@ -119,7 +118,7 @@ class NetworkBrowser(Screen):
 		self.Console = Console()
 
 		self["key_red"] = StaticText(_("Close"))
-		self["key_green"] = StaticText(_("Mount manager"))
+		self["key_green"] = StaticText(_("Login..."))
 		self["key_yellow"] = StaticText(_("Rescan"))
 		self["key_blue"] = StaticText(_("Expert"))
 		self["infotext"] = StaticText(_("Press OK to mount!"))
@@ -129,7 +128,7 @@ class NetworkBrowser(Screen):
 			"ok": self.go,
 			"back": self.close,
 			"red": self.close,
-			"green": self.keyGreen,
+			"green": self.setCredentials,
 			"yellow": self.keyYellow,
 			"blue": self.keyBlue,
 		})
@@ -185,11 +184,8 @@ class NetworkBrowser(Screen):
 	def setWindowTitle(self):
 		self.setTitle(_("Browse network neighbourhood"))
 
-	def keyGreen(self):
-		self.session.open(AutoMountManager, None, self.skin_path)
-
 	def keyYellow(self):
-		if (os_path.exists(self.cache_file) == True):
+		if os_path.exists(self.cache_file):
 			remove(self.cache_file)
 		self.startRun()
 
@@ -288,10 +284,6 @@ class NetworkBrowser(Screen):
 		dom = xml.dom.minidom.parseString(result)
 		scan_result = []
 		for dhost in dom.getElementsByTagName('host'):
-			# host ip
-			host = ''
-			hostname = ''
-			host = dhost.getElementsByTagName('address')[0].getAttributeNode('addr').value
 			for dhostname in dhost.getElementsByTagName('hostname'):
 				hostname = dhostname.getAttributeNode('name').value
 				hostname = hostname.split('.')
@@ -323,12 +315,13 @@ class NetworkBrowser(Screen):
 				pass
 
 		if devicetype == 'unix':
-			nfslist=netscan.nfsShare(hostip,hostname)
+			nfslist = netscan.nfsShare(hostip, hostname)
 			for x in nfslist:
 				if len(x) == 6:
 					sharelist.append(x)
+
 		cmd = "/usr/bin/smbclient -m SMB3 -g -N -U Guest -L {0}".format(hostip).split()
-		if username != "" or password != "":
+		if username:
 			cmd = ["/usr/bin/smbclient", "-m SMB3", "-g", "-U", username, "-L", hostip, "\\\\IPC\\", password]
 		try:
 			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -497,6 +490,14 @@ class NetworkBrowser(Screen):
 		for cb in self.onChangedEntry:
 			cb(name, desc)
 
+	def setCredentials(self):
+		sel = self["list"].getCurrent()
+		selectedhostname = sel[0][1]
+		self.session.openWithCallback(self.credentialsDone, UserDialog, self.skin_path, selectedhostname.strip())
+
+	def credentialsDone(self, ret=None):
+		self.updateNetworkList()
+
 	def go(self):
 		sel = self["list"].getCurrent()
 		if sel is None:
@@ -584,7 +585,7 @@ class NetworkBrowser(Screen):
 					if sharedata['ip'] == selection[2].strip() and sharedata['sharedir'] in selection[3].strip():
 						data = sharedata
 						newmount = False
-			self.session.openWithCallback(self.MountEditClosed,AutoMountEdit, self.skin_path, data, newmount)
+			self.session.openWithCallback(self.MountEditClosed, AutoMountEdit, self.skin_path, data, newmount)
 
 	def MountEditClosed(self, returnValue = None):
 		if returnValue == None:
