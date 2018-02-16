@@ -103,12 +103,13 @@ except Exception as e:
 #pragma mark -
 
 # Notification-Domain
+# Q: Do we really need this or can we do this better?
 from Tools import Notifications
 try:
 	Notifications.notificationQueue.registerDomain(NOTIFICATIONDOMAIN, _("EPGREFRESH_NOTIFICATION_DOMAIN"), deferred_callable = True)
 except Exception as e:
 	EPGRefreshNotificationKey = ""
-	print("[EPGRefresh] Error registering Notification-Domain:", e)
+	#print("[EPGRefresh] Error registering Notification-Domain:", e)
 	
 # Plugin
 from EPGRefresh import epgrefresh
@@ -270,7 +271,7 @@ config.plugins.epgrefresh.show_in_extensionsmenu.addNotifier(housekeepingExtensi
 config.plugins.epgrefresh.show_run_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 
 def menu_main(menuid, **kwargs):
-	if getImageDistro() in ("openvix", "openatv"):
+	if getImageDistro() in ("openvix", "openatv", "openspa"):
 		if menuid != "epg":
 			return []
 	else:

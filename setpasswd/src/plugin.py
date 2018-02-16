@@ -119,7 +119,7 @@ class ChangePasswdScreen(Screen):
 			self.buildList(callback)
 
 def startChange(menuid):
-	if getImageDistro() in ('openmips'):
+	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
 			return [ ]
 	else:

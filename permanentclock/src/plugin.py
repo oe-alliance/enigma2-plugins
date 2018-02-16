@@ -19,10 +19,10 @@ from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import gettext
 import os
 from boxbranding import getImageDistro
-if not os.path.exists('/usr/lib/enigma2/python/Components/Converter/PermanentClockTime.py'):
-	os.system('cp /usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/PermanentClockTime.py /usr/lib/enigma2/python/Components/Converter/PermanentClockTime.py')
-if not os.path.exists('/usr/lib/enigma2/python/Components/Renderer/PermanentClockWatches.py'):
-	os.system('cp /usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/PermanentClockWatches.py /usr/lib/enigma2/python/Components/Renderer/PermanentClockWatches.py')
+if not os.path.exists('/usr/lib/enigma2/python/Components/Converter/PermanentClockTime.pyo'):
+	os.system('cp /usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/PermanentClockTime.pyo /usr/lib/enigma2/python/Components/Converter/PermanentClockTime.pyo')
+if not os.path.exists('/usr/lib/enigma2/python/Components/Renderer/PermanentClockWatches.pyo'):
+	os.system('cp /usr/lib/enigma2/python/Plugins/Extensions/PermanentClock/PermanentClockWatches.pyo /usr/lib/enigma2/python/Components/Renderer/PermanentClockWatches.pyo')
 
 _session = None
 def localeInit():
@@ -554,7 +554,7 @@ def startConfig(session, **kwargs):
 	session.open(PermanentClockMenu)
 
 def main(menuid):
-	if getImageDistro() in ('openmips'):
+	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
 			return [ ]
 	elif getImageDistro() in ('openhdf'):

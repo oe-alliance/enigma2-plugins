@@ -2,11 +2,10 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1481 $
-$Date: 2017-07-04 10:28:00 +0200 (Tue, 04 Jul 2017) $
-$Id: plugin.py 1481 2017-07-04 08:28:00Z michael $
+$Revision: 1502 $
+$Date: 2018-01-13 14:00:04 +0100 (Sat, 13 Jan 2018) $
+$Id: plugin.py 1502 2018-01-13 13:00:04Z michael $
 '''
-
 
 # C0111 (Missing docstring)
 # C0103 (Invalid name)
@@ -153,7 +152,7 @@ config.plugins.FritzCall.reloadPhonebookTime = ConfigInteger(default = 8, limits
 config.plugins.FritzCall.FritzExtendedSearchFaces = ConfigYesNo(default = False)
 config.plugins.FritzCall.FritzExtendedSearchNames = ConfigYesNo(default = False)
 config.plugins.FritzCall.phonebookLocation = ConfigDirectory(default = resolveFilename(SCOPE_CONFIG))
-config.plugins.FritzCall.advancedSkin = ConfigYesNo(default = False)
+config.plugins.FritzCall.advancedSkin = ConfigYesNo(default = True)
 config.plugins.FritzCall.guestSSID = ConfigText(default = "FRITZ!Box Gastzugang", fixed_size = False)
 config.plugins.FritzCall.guestSecure = ConfigYesNo(default = True)
 config.plugins.FritzCall.guestPassword = ConfigPassword(default = encode("guestguest!!!"), fixed_size = False)
@@ -368,8 +367,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1481 $"[1:-2] + "\n" +
-							"$Date: 2017-07-04 10:28:00 +0200 (Tue, 04 Jul 2017) $"[1:23] + "\n"
+							"$Revision: 1502 $"[1:-2] + "\n" +
+							"$Date: 2018-01-13 14:00:04 +0100 (Sat, 13 Jan 2018) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -1919,7 +1918,7 @@ class FritzCallPhonebook(object):
 					for k, v in json.loads(open(phonebookFilename).read().decode("utf-8")).items():
 						phonebookTmp[k.encode("utf-8")] = v.encode("utf-8")
 					phonebookTmp[number] = name
-					json.dump(self.phonebook, open(phonebookFilename, "w"), ensure_ascii=False, encoding="utf-8", indent=0, separators=(',', ': '), sort_keys=True)
+					json.dump(phonebookTmp, open(phonebookFilename, "w"), ensure_ascii=False, encoding="utf-8", indent=0, separators=(',', ': '), sort_keys=True)
 					info("[FritzCallPhonebook] added %s with %s to Phonebook.json", number, name.strip())
 					return True
 				except IOError:
@@ -1947,12 +1946,19 @@ class FritzCallPhonebook(object):
 # 					eBackgroundFileEraser.getInstance().erase(phonebookFilename)
 # 					os.rename(phonebookFilename + str(os.getpid()), 	phonebookFilename)
 					phonebookFilename = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.json")
+					# check whether PhoneBook.json exists, if not drop empty JSOn file
+					if not os.path.isfile(phonebookFilename):
+						json.dump({}, open(phonebookFilename, "w"), ensure_ascii=False, encoding="utf-8", indent=0, separators=(',', ': '), sort_keys=True)
+						info("[FritzCallPhonebook] empty Phonebook.json created")
+						return True
+
 					phonebookTmp = {}
 					for k, v in json.loads(open(phonebookFilename).read().decode("utf-8")).items():
 						phonebookTmp[k.encode("utf-8")] = v.encode("utf-8")
-					del phonebookTmp[number]
-					json.dump(self.phonebook, open(phonebookFilename, "w"), ensure_ascii=False, encoding="utf-8", indent=0, separators=(',', ': '), sort_keys=True)
-					info("[FritzCallPhonebook] removed %s from Phonebook.json", number)
+					if number in phonebookTmp:
+						del phonebookTmp[number]
+						json.dump(phonebookTmp, open(phonebookFilename, "w"), ensure_ascii=False, encoding="utf-8", indent=0, separators=(',', ': '), sort_keys=True)
+						info("[FritzCallPhonebook] removed %s from Phonebook.json", number)
 					return True
 
 				except (IOError, OSError):
@@ -2611,7 +2617,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1481 $"[1:-1] + "$Date: 2017-07-04 10:28:00 +0200 (Tue, 04 Jul 2017) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1502 $"[1:-1] + "$Date: 2018-01-13 14:00:04 +0100 (Sat, 13 Jan 2018) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2805,8 +2811,10 @@ class FritzCallList(object):
 		# build screen from call list
 		text = "\n"
 
-		if not self.callList:
+		if not self.callList: # why is this happening at all?!?!
 			text = _("no calls")
+			debug("[FritzCallList] %s", text)
+			return
 		else:
 			if self.callList[0] == "Start":
 				text = text + _("Last 10 calls:\n")
@@ -3130,8 +3138,8 @@ def notifyCall(event, date, number, caller, phone, connID): # @UnusedVariable # 
 	elif config.plugins.FritzCall.afterStandby.value == "inList":
 		#
 		# if not yet done, register function to show call list
-		global standbyMode
 		if not standbyMode:
+			global standbyMode
 			standbyMode = True
 			Standby.inStandby.onHide.append(callList.display)  # @UndefinedVariable
 		# add text/timeout to call list
@@ -3217,7 +3225,7 @@ class FritzReverseLookupAndNotifier(object):
 
 class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 	def __init__(self):
-		info("[FritzProtocol] " + "$Revision: 1481 $"[1:-1] + "$Date: 2017-07-04 10:28:00 +0200 (Tue, 04 Jul 2017) $"[7:23] + " starting")
+		info("[FritzProtocol] " + "$Revision: 1502 $"[1:-1] + "$Date: 2018-01-13 14:00:04 +0100 (Sat, 13 Jan 2018) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -3262,6 +3270,7 @@ class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 
 		filtermsns = config.plugins.FritzCall.filtermsn.value.split(",")
 		filtermsns = [i.strip() for i in filtermsns]
+		debug("Filtermsns: %s", filtermsns)
 
 		if config.plugins.FritzCall.ignoreUnknown.value:
 			if self.event == "RING":
@@ -3275,15 +3284,18 @@ class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 		# debug("[FritzProtocol] Volcontrol dir: %s" % dir(eDVBVolumecontrol.getInstance()))
 		# debug("[FritzCall] unmute on connID: %s?" %self.connID)
 		global mutedOnConnID
+		phone = anEvent[4]
+		debug("Phone: %s", phone)
 		if Standby.inStandby is None and not mutedOnConnID:
-			info("[FritzCall] check mute")
-			if (self.event == "RING" and config.plugins.FritzCall.muteOnCall.value) or (self.event == "CALL" and config.plugins.FritzCall.muteOnOutgoingCall.value):
-				info("[FritzCall] mute on connID: %s", self.connID)
-				mutedOnConnID = self.connID
-				# eDVBVolumecontrol.getInstance().volumeMute() # with this, we get no mute icon...
-				if not eDVBVolumecontrol.getInstance().isMuted():
-					globalActionMap.actions["volumeMute"]()
-				# self.pauseEnigma2()
+			if not (config.plugins.FritzCall.filter.value and phone not in filtermsns):
+				info("[FritzCall] check mute")
+				if (self.event == "RING" and config.plugins.FritzCall.muteOnCall.value) or (self.event == "CALL" and config.plugins.FritzCall.muteOnOutgoingCall.value):
+					info("[FritzCall] mute on connID: %s", self.connID)
+					mutedOnConnID = self.connID
+					# eDVBVolumecontrol.getInstance().volumeMute() # with this, we get no mute icon...
+					if not eDVBVolumecontrol.getInstance().isMuted():
+						globalActionMap.actions["volumeMute"]()
+					# self.pauseEnigma2()
 		if self.event == "DISCONNECT"and (config.plugins.FritzCall.muteOnCall.value or config.plugins.FritzCall.muteOnOutgoingCall.value) and mutedOnConnID == self.connID:
 			debug("[FritzCall] unmute on connID: %s!", self.connID)
 			mutedOnConnID = None
@@ -3301,7 +3313,6 @@ class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 		# 		globalActionMap.actions["volumeMute"]()
 		#=======================================================================
 		elif self.event == "RING" or (self.event == "CALL" and config.plugins.FritzCall.showOutgoingCalls.value):
-			phone = anEvent[4]
 			if self.event == "RING":
 				number = anEvent[3]
 			else:

@@ -103,7 +103,7 @@ def main(session, *args, **kwargs):
 	session.open(NamezapSetup)
 
 def menu(menuid):
-	if getImageDistro() in ('openmips'):
+	if getImageDistro() in ('teamblue'):
 		if menuid != "ui_menu":
 			return [ ]
 	elif getImageDistro() in ('openhdf'):

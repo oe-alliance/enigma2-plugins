@@ -9,6 +9,7 @@ from Screens.ChannelSelection import SimpleChannelSelection
 from Screens.EpgSelection import EPGSelection
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 # GUI (Summary)
 from Screens.Setup import SetupSummary
@@ -745,8 +746,27 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.chooseDestination()
 		elif cur == self.tags:
 			self.chooseTags()
+		elif cur == self.name:
+			self.nameKeyboard()
+		elif cur == self.match:
+			self.matchKeyboard()
 		else:
 			ConfigListScreen.keyOK(self)
+
+	def nameKeyboard(self):
+		self.session.openWithCallback(self.SearchNameCallback, VirtualKeyBoard, title = _("Enter or edit description"), text = self.name.value)
+
+	def SearchNameCallback(self, callback = None):
+		if callback:
+			self.name.value = callback
+
+	def matchKeyboard(self):
+		self.session.openWithCallback(self.SearchMatchCallback, VirtualKeyBoard, title = _("Enter or edit match title"), text = self.match.value)
+
+	def SearchMatchCallback(self, callback = None):
+		if callback:
+			self.match.value = callback
+			#ConfigListScreen.keyOK(self)
 
 	def cancel(self):
 		if self["config"].isChanged():

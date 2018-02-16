@@ -60,7 +60,7 @@ def doneConfig(session, **kwargs):
 	vps_timers.checkTimer()
 
 def startSetup(menuid):
-	if getImageDistro() in ('openmips'):
+	if getImageDistro() in ('teamblue'):
 		if menuid != "general_menu":
 			return [ ]
 	elif getImageDistro() in ('openhdf'):
