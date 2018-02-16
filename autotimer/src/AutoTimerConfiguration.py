@@ -22,7 +22,7 @@ is the only reliable way to make remote tools aware of our capabilities without
 much overhead (read: a special api just for this) we chose to change the meaning
 of the version attribue.
 """
-CURRENT_CONFIG_VERSION = "7"
+CURRENT_CONFIG_VERSION = "8"
 
 def getValue(definitions, default):
 	# Initialize Output
@@ -110,6 +110,9 @@ def parseEntry(element, baseTimer, defaults = False):
 	series_labeling = element.get("series_labeling", "no")
 	baseTimer.series_labeling = True if series_labeling == "yes" else False
 	del series_labeling
+
+	# Read always_zap
+	baseTimer.always_zap = int(element.get("always_zap", 0))
 
 	# Read out encoding (won't change if no value is set)
 	baseTimer.encoding = element.get("encoding")
@@ -572,6 +575,9 @@ def buildConfig(defaultTimer, timers, webif = False):
 		if not defaultTimer.setEndtime:
 			append(' setEndtime="0"')
 
+	if defaultTimer.always_zap:
+		extend((' always_zap="', str(defaultTimer.getAlwaysZap()), '"'))
+
 	# Only display encoding if != utf-8
 	if defaultTimer.encoding != defaultEncoding or webif:
 		extend((' encoding="', str(defaultTimer.encoding), '"'))
@@ -746,6 +752,11 @@ def buildConfig(defaultTimer, timers, webif = False):
 		if timer.series_labeling:
 			append(' series_labeling="yes"')
 
+		# Only add always zap related entry if true
+		if timer.always_zap:
+			append(' always_zap="1"')
+
+
 		# Close still opened timer tag
 		append('>\n')
 
@@ -823,4 +834,5 @@ def buildConfig(defaultTimer, timers, webif = False):
 	append('</autotimer>\n')
 
 	return list
+
 

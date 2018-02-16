@@ -1,0 +1,25 @@
+<!-- /tplAutoTimerList -->
+					<div id="navContent">
+						<table class="tabOverview"> 
+							<tr>
+								<td>
+									<select id="list" class="overview">
+									{for autotimer in list}
+										<option value="${autotimer.id}" class="${autotimer.css}">&nbsp;${autotimer.name}</option>
+									{/for}		
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<hr />
+									<div id="listmenu" class="buttonbar">
+										<button type="button" id="add">Add AutoTimer</button>
+										<button type="button" id="delete">Delete AutoTimer</button>
+										<!--TODO MAYBE button id="clone">Clone AutoTimer</button -->
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+<!-- /tplAutoTimerList -->

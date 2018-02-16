@@ -16,6 +16,7 @@ from AutoTimerWizard import AutoTimerWizard
 from AutoTimerList import AutoTimerList
 from Components.ActionMap import HelpableActionMap
 from Components.Sources.StaticText import StaticText
+from enigma import getDesktop
 
 class AutoTimerOverviewSummary(Screen):
 	skin = """
@@ -43,19 +44,33 @@ class AutoTimerOverviewSummary(Screen):
 	def selectionChanged(self, text):
 		self["entry"].text = text
 
+HD = False
+if getDesktop(0).size().width() >= 1280:
+	HD = True
 class AutoTimerOverview(Screen, HelpableScreen):
 	"""Overview of AutoTimers"""
-
-	skin = """<screen name="AutoTimerOverview" position="center,center" size="460,280" title="AutoTimer Overview">
-			<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-			<ePixmap position="422,10" zPosition="1" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
-			<widget source="key_green" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget source="key_yellow" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget source="key_blue" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="entries" position="5,45" size="450,225" scrollbarMode="showOnDemand" />
-		</screen>"""
+	if HD:
+		skin = """<screen name="AutoTimerOverview" position="center,center" size="680,480" title="AutoTimer Overview">
+				<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap position="160,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+				<ePixmap position="320,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+				<ePixmap position="480,0" zPosition="1" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+				<widget source="key_green" render="Label" position="10,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;17" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget source="key_yellow" render="Label" position="160,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;17" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget source="key_blue" render="Label" position="320,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;17" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="entries" position="5,45" size="450,425" scrollbarMode="showOnDemand" />
+			</screen>"""
+	else:
+		skin = """<screen name="AutoTimerOverview" position="center,center" size="460,280" title="AutoTimer Overview">
+				<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+				<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+				<ePixmap position="422,10" zPosition="1" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+				<widget source="key_green" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget source="key_yellow" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget source="key_blue" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="entries" position="5,45" size="450,225" scrollbarMode="showOnDemand" />
+			</screen>"""
 
 	def __init__(self, session, autotimer):
 		Screen.__init__(self, session)
@@ -113,7 +128,8 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			autotimerHelp.open(self.session)
 
 	def setCustomTitle(self):
-		self.setTitle(_("AutoTimer"))
+		from plugin import AUTOTIMER_VERSION
+		self.setTitle(_("AutoTimer overview") + _(" - Version: ") + AUTOTIMER_VERSION)
 
 	def createSummary(self):
 		return AutoTimerOverviewSummary
@@ -183,18 +199,37 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		# Remove selected Timer
 		cur = self["entries"].getCurrent()
 		if cur is not None:
+			title =_("Message\nDo you really want to delete %s?") % (cur.name)
+			list = ((_("Yes, and delete all timers generated by this autotimer"), "yes_delete"),
+			(_("Yes, but keep timers generated by this autotimer"), "yes_keep"),
+			(_("No"), "no"))
 			self.session.openWithCallback(
 				self.removeCallback,
-				MessageBox,
-				_("Do you really want to delete %s?") % (cur.name),
-				default = False,
+				ChoiceBox,
+				title=title,
+				list=list,
+				selection=0
 			)
 
-	def removeCallback(self, ret):
+	def removeCallback(self, answer):
 		cur = self["entries"].getCurrent()
-		if ret and cur:
-			self.autotimer.remove(cur.id)
-			self.refresh()
+		if answer:
+			if (answer[1] != "no") and cur:
+				self.autotimer.remove(cur.id)
+				self.refresh()
+				if (answer[1] == "yes_delete"):
+					import NavigationInstance
+					from RecordTimer import RecordTimerEntry
+					recordHandler = NavigationInstance.instance.RecordTimer
+					for timer in recordHandler.timer_list[:]: # '[:]' for working on a copy, avoid processing a changing list
+						#print '[AutoTimerOverview] checking whether timer should be deleted: ', timer
+						if timer:
+							for entry in timer.log_entries:
+								if len(entry) == 3:
+									#print '[AutoTimerOverview] checking line: ', entry[2]
+									if entry[2] == '[AutoTimer] Try to add new timer based on AutoTimer '+cur.name+'.':
+										NavigationInstance.instance.RecordTimer.removeEntry(timer)
+										break
 
 	def cancel(self):
 		if self.changed:
@@ -216,11 +251,12 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 	def menu(self):
 		list = [
-			#(_("Preview"), "preview"),
+			(_("Preview"), "preview"),
 			(_("Import existing Timer"), "import"),
 			(_("Import from EPG"), "import_epg"),
 			(_("Setup"), "setup"),
 			(_("Edit new timer defaults"), "defaults"),
+			(_("Clone selected timer"), "clone")
 		]
 
 		from plugin import autotimerHelp
@@ -236,7 +272,14 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
+			title=_("AutoTimer Context Menu"),
 			list = list,
+		)
+
+	def openPreview(self, timers, skipped):
+		self.session.open(
+			AutoTimerPreview,
+			timers
 		)
 
 	def menuCallback(self, ret):
@@ -251,12 +294,9 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/faq.xml"))
 				autotimerFaq = PluginHelp(*reader)
 				autotimerFaq.open(self.session)
-			#elif ret == "preview":
-				#total, new, modified, timers, conflicts, similars = self.autotimer.parseEPG(simulateOnly = True)
-				#self.session.open(
-					#AutoTimerPreview,
-					#timers
-				#)
+			elif ret == "preview":
+				# todo timeout / error handling
+				self.autotimer.parseEPG(simulateOnly = True, callback = self.openPreview)
 			elif ret == "import":
 				newTimer = self.autotimer.defaultTimer.clone()
 				newTimer.id = self.autotimer.getUniqueId()
@@ -300,6 +340,18 @@ class AutoTimerOverview(Screen, HelpableScreen):
 					AutoTimerEditor,
 					newTimer
 				)
+			elif ret == "clone":
+				current = self["entries"].getCurrent()
+				if current is not None:
+					newTimer = current.clone()
+					newTimer.id = self.autotimer.getUniqueId()
+
+					self.session.openWithCallback(
+						self.addCallback,
+						AutoTimerEditor,
+						newTimer
+					)
+				
 
 	def save(self):
 		# Just close here, saving will be done by cb

@@ -1,6 +1,7 @@
 from __future__ import print_function
 
-from Components.SystemInfo import SystemInfo
+from Components.NimManager import nimmanager
+from enigma import pNavigation
 
 # MessageBox
 from Screens.MessageBox import MessageBox
@@ -14,7 +15,7 @@ from . import _, STARTNOTIFICATIONID, NOTIFICATIONDOMAIN
 class RecordAdapter:
 	backgroundCapable = True
 	def __init__(self, session):
-		if SystemInfo.get("NumVideoDecoders", 1) < 2:
+		if len(nimmanager.nim_slots) < 2:
 			self.backgroundRefreshAvailable = False
 			return
 
@@ -34,7 +35,11 @@ class RecordAdapter:
 		print("[EPGRefresh.RecordAdapter.play]")
 		if not self.backgroundRefreshAvailable: return False
 		self.stopStreaming()
-		self.__service = self.navcore.recordService(service)
+		try:
+			#not all images support recording type indicators
+			self.__service = self.navcore.recordService(service,False,pNavigation.isPseudoRecording|pNavigation.isFromEPGrefresh)
+		except:
+			self.__service = self.navcore.recordService(service)
 		if self.__service is not None:
 			self.__service.prepareStreaming()
 			self.__service.start()

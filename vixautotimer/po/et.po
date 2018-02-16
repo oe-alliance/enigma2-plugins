@@ -1,0 +1,953 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 AutoTimer Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-12 21:43+0200\n"
+"PO-Revision-Date: 2013-08-13 19:01+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: none\n"
+"Language: et_EE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: ../src\n"
+"X-Poedit-SearchPath-1: ../src/webinterface\n"
+
+#, python-format
+msgid ""
+"%d conflict(s) encountered when trying to add new timers:\n"
+"%s"
+msgstr ""
+"%d vastuolu uute taimerite lisamisel:\n"
+"%s"
+
+#, python-format
+msgid ""
+"%d conflict(s) solved with similar timer(s):\n"
+"%s"
+msgstr ""
+"%d vastuolu lahendati asendustaimeriga:\n"
+"%s"
+
+msgid "%d.%B %Y"
+msgstr "%d.%B %Y"
+
+#, python-format
+msgid "%s: %s at %s"
+msgstr "%s: %s at %s"
+
+msgid "Abort this Wizard."
+msgstr "Sulge abiline."
+
+msgid "Activate VPS"
+msgstr "VPS käivitamine"
+
+msgid "Add"
+msgstr "Lisa"
+
+msgid "Add filters"
+msgstr "Lisa filtreid"
+
+msgid "Add new AutoTimer"
+msgstr "Lisa uus autotaimer"
+
+msgid "Add services"
+msgstr "Lisa kanaleid"
+
+msgid "Add similar timer on conflict"
+msgstr "Vastuolu tekkimisel lisa asendustaimer"
+
+msgid "Add timer as disabled on conflict"
+msgstr "Lisa keelatud või vastuolus taimerina"
+
+msgid "Add zap timer instead of record timer?"
+msgstr "Lisada salvestustaimeri asemel kanalivahetustaimer?"
+
+msgid "After event"
+msgstr "Pärast sündmust"
+
+msgid "All channels"
+msgstr "Kõik kanalid"
+
+msgid "All non-repeating timers"
+msgstr "Kõik mittekorduvad taimerid"
+
+msgid "Amount of recordings left"
+msgstr "Järelejäänud salvestuste arv"
+
+msgid "Any service/recording"
+msgstr "Iga kanal/salvestis"
+
+msgid "Any time"
+msgstr "Igal ajal"
+
+msgid "Auto Timers"
+msgstr "Autotaimerid"
+
+msgid "AutoTimer"
+msgstr "Autotaimer"
+
+msgid "AutoTimer Editor"
+msgstr "Autotaimeri muutmine"
+
+msgid "AutoTimer FAQ"
+msgstr "Autotaimeri KKK"
+
+msgid "AutoTimer Filters"
+msgstr "Autotaimeri filtrid"
+
+msgid "AutoTimer Help"
+msgstr "Autotaimeri abi"
+
+msgid "AutoTimer Services"
+msgstr "Autotaimeri kanalid"
+
+msgid "AutoTimer Settings"
+msgstr "Autotaimeri seadistused"
+
+msgid "AutoTimer was added successfully"
+msgstr "Autotaimeri lisamine õnnestus"
+
+msgid "AutoTimer was changed successfully"
+msgstr "Autotaimeri muutmine õnnestus"
+
+msgid "AutoTimer was removed"
+msgstr "Autotaimer eemaldatud"
+
+msgid "AutoTimers"
+msgstr "Autotaimerid"
+
+msgid "Begin of \"after event\" timespan"
+msgstr "\"pärast sündmust\" ajavahemiku algus"
+
+msgid "Begin of timespan"
+msgstr "Ajavahemiku algus"
+
+msgid "Bouquets"
+msgstr "Lemmiknimekirjad"
+
+msgid "By enabling this events will not be matched if they don't occur on certain dates."
+msgstr "Seda lubades ei leita vasteid, kui need ei toimu kindlal kuupäeval."
+
+msgid "By enabling this you will be notified about similar timers added during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
+msgstr "Kui see on lubatud, antakse märku automaatse päringu ajal lisatud sarnastest taimeritest. Ühe ja sama konflikti kohta võib tulla mitmekordne automaatne teade."
+
+msgid "By enabling this you will be notified about timer conflicts found during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
+msgstr "Kui see on kubatud, antakse märku automaatse päringu ajal leitud taimerikonfliktidest. Ühe ja sama konflikti kohta võib tulla mitmekordne automaatne teade."
+
+msgid "Cancel"
+msgstr "Tühista"
+
+msgid "Change default recording offset?"
+msgstr "Muuda salvestuse vaikimisi ajavaru?"
+
+msgid "Channel Selection"
+msgstr "Kanalinimekiri"
+
+msgid "Channels"
+msgstr "Kanalid"
+
+msgid "Check for uniqueness in"
+msgstr "Kontrolli unikaalsust"
+
+msgid "Choose target folder"
+msgstr "Vali sihtkataloog"
+
+msgid "Classic"
+msgstr "Klassikaline"
+
+msgid "Close"
+msgstr "Sulge"
+
+msgid "Close and forget changes"
+msgstr "Sulge ja tühista muudatused"
+
+msgid "Close and save changes"
+msgstr "Sulge ja salvesta muudatused"
+
+msgid "Configure AutoTimer behavior"
+msgstr "Seadista autotaimeri käitumist"
+
+msgid "Congratulations"
+msgstr "Palju õnne"
+
+msgid "Control recording completely by service"
+msgstr "Salvestamine on täielikult kanali juhtida"
+
+msgid "Couldn't load config file!"
+msgstr "Seadistusfaili laadimine nurjus!"
+
+msgid "Create a new AutoTimer."
+msgstr "Loo uus autotaimer"
+
+msgid "Create a new timer using the classic editor"
+msgstr "Loo uus taimer tavaredaktoriga"
+
+msgid "Create a new timer using the wizard"
+msgstr "Loo uus taimer kasutades abimeest"
+
+#, python-format
+msgid "Custom (%s)"
+msgstr "Kohandatud (%s)"
+
+msgid "Custom location"
+msgstr "Määratud asukoht"
+
+msgid "Custom offset"
+msgstr "Kohandatud viiteaeg"
+
+msgid "Defines where to search for duplicates (only title, short description or even extended description)"
+msgstr "Määrab, kust otsida koopiaid (ainult pealkiri, lühikirjeldus või isegi laiendatud kirjeldus)"
+
+msgid "Delete"
+msgstr "Kustuta"
+
+msgid "Description"
+msgstr "Sisututvustus"
+
+#, python-format
+msgid "Do you really want to delete %s?"
+msgstr "Kas kustutad %s?"
+
+msgid "EPG encoding"
+msgstr "EPG kodeering"
+
+msgid "Edit AutoTimer"
+msgstr "Muuda autotaimerit"
+
+msgid "Edit AutoTimer filters"
+msgstr "Muuda autotaimeri filtreid"
+
+msgid "Edit AutoTimer services"
+msgstr "Muuda autotaimeri kanaleid"
+
+#. TRANSLATORS: description of AutoTimer in PluginBrowser
+msgid "Edit Timers and scan for new Events"
+msgstr "Muuda taimereid ja otsi uusi saateid"
+
+msgid "Edit filters"
+msgstr "Muuda filtreid"
+
+msgid "Edit new timer defaults"
+msgstr "Muuda uute taimerite vaikeväärtusi"
+
+msgid "Edit selected AutoTimer"
+msgstr "Muuda valitud autotaimerit"
+
+msgid "Edit services"
+msgstr "Muuda kanaleid"
+
+msgid "Editing"
+msgstr "Muutmine"
+
+msgid "Editor for new AutoTimers"
+msgstr "Redaktor uuele autotaimerile"
+
+msgid "Enable Filtering"
+msgstr "Luba filtrid"
+
+msgid "Enable Service Restriction"
+msgstr "Luba kanalite piirangud"
+
+msgid "Enable this to be able to access the AutoTimer Overview from within the extension menu."
+msgstr "Luba see, et leida autotaimeri ülevaade laienduste menüüst."
+
+msgid "Enable this to be able to access the AutoTimer Overview from within the plugin browser."
+msgstr "Luba see, et leida autotaimeri ülevaade laienduste menüüst."
+
+msgid "Enabled"
+msgstr "Lubatud"
+
+msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
+msgstr "Kodeeringut kasutatakse saatekava andmetes. Seda on vaja muuta ainult siis kui soovite täpitähti õieti näha."
+
+msgid "End of \"after event\" timespan"
+msgstr "\"pärast sündmust\" ajavahemiku lõpp"
+
+msgid "End of timespan"
+msgstr "Ajavahemiku lõpp"
+
+msgid "Everyday"
+msgstr "Iga päev"
+
+msgid "Exact match"
+msgstr "Täpne vaste"
+
+msgid "Exclude"
+msgstr "Jäta välja"
+
+msgid "Execute \"after event\" during timespan"
+msgstr "Teosta \"pärast sündmust\" ajavahemiku ajal"
+
+msgid "FAQ"
+msgstr "KKK"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid ""
+"Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"Filtrid on üks võimsaid vahendeid vajalike saadete leidmiseks. Autotaimeri abil saab ära keelata teatud nädalapäevade jaoks või ainult leida saade , kus on kirjelduses tekst nt. \n"
+"Vajuta SININE uue keelu seadmiseks ja KOLLANE seatud keelu muutmiseks."
+
+msgid "First day to match events. No event that begins before this date will be matched."
+msgstr "Esimene päev vastete otsimiseks. Enne seda päeva algavad saated ei lähe arvesse."
+
+#, python-format
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and\n"
+"%d modified,\n"
+"%d conflicts encountered,\n"
+"%d similars added."
+msgstr ""
+"Leiti %d vastet.\n"
+"%d taimerit lisatud,\n"
+"%d muudetud,\n"
+"%d vastuolu leitud,\n"
+"%d asendustaimerit lisatud."
+
+#, python-format
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and\n"
+"%d modified,\n"
+"%d conflicts encountered,\n"
+"%d unchanged,\n"
+"%d similars added."
+msgstr ""
+"Kokku leiti %d vastet.\n"
+"%d taimerit lisatud ja\n"
+"%d muudetud,\n"
+"%d vastuolu leitud,\n"
+"%d muutmata,\n"
+"%d asendustaimerit lisatud."
+
+msgid "Frequently asked questions"
+msgstr "Korduma kippuvad küsimused"
+
+msgid "Frequently asked questions about the AutoTimer"
+msgstr "Korduma kippuvad küsimused"
+
+msgid "Fri"
+msgstr "Reede"
+
+msgid "Friday"
+msgstr "Reede"
+
+msgid "Generic setup"
+msgstr "Üldseaded"
+
+msgid "Guess existing timer based on begin/end"
+msgstr "Eelda olemasolev taimer alguse/lõpu aja järgi"
+
+msgid "Help"
+msgstr "Abi"
+
+msgid "If a timer conflict occurs, AutoTimer will search outside the timespan for a similar event and add it."
+msgstr "Vastuolus taimerite korral otsib Autotaimer sarnaseid saateid ajavahemikust väljas ja lisab need."
+
+msgid "If enabled, the polling will be skipped if a recording is in progress."
+msgstr "Määrates 'jah', jäetakse salvestamise ajal päring vahele."
+
+#, python-format
+msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80%% of the it."
+msgstr "Kui see on lubatud, siis loetakse olemasolev taimer täidetuks, kui salvestatakse vähemalt 80%% saatest."
+
+msgid "If this is selected, the name of the respective AutoTimer will be added as a tag to timers created by this plugin."
+msgstr "Määrates 'jah', lisatakse vastava autotaimeri nimi selle laienduse poolt loodud taimerile sildina."
+
+msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
+msgstr "Kui see valik on lubatud, lisatakse silt \"autotaimer\" selle laienduse loodud taimeritele."
+
+msgid "Import AutoTimer"
+msgstr "Impordi autotaimer"
+
+msgid "Import existing Timer"
+msgstr "Impordi olemasolev taimer"
+
+msgid "Import from EPG"
+msgstr "Impordi EPG-st"
+
+msgid "Include"
+msgstr "Kaasa"
+
+msgid "Include \"AutoTimer\" in tags"
+msgstr "Lisa siltidele \"autotaimer\""
+
+msgid "Include AutoTimer name in tags"
+msgstr "Lisa siltidele autotaimeri nimi"
+
+msgid ""
+"It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\n"
+"An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"Autotaimeri saab piirata teatud kanalite või lemmiknimekirjadele või keelata mõnede kasutamine.\n"
+"Saade vastab sellele autotaimerile, kui see on kindlal ja mitte keelatud kanalil (lemmiknimekirjas).\n"
+"Vajuta sinist nuppu uue keelu seadmiseks ja kollast nuppu valitud keelu muutmiseks."
+
+msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
+msgstr "Sildista taimerid hooaja, episoodi ja nime järgi vastavalt 'SeriesPlugin' seadetele."
+
+msgid "Label series"
+msgstr "Sildista seriaalid"
+
+msgid "Last day to match events. Events have to begin before this date to be matched."
+msgstr "Viimane päev vastete leidmiseks. Pärast seda päeva algavad saated ei lähe arvesse."
+
+msgid "Location"
+msgstr "Asukoht"
+
+msgid "Lower bound of timespan."
+msgstr "Ajavahemiku alampiir."
+
+msgid "Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"
+msgstr "Ajavahemiku alampiir. Miski enne seda aega ei sobi. Määratud ajavaru ei võeta arvesse!"
+
+#, python-format
+msgid "Match Timespan: %02d:%02d - %02d:%02d"
+msgstr "Vastab ajavahemikuga: %02d:%02d - %02d:%02d"
+
+msgid "Match title"
+msgstr "Vastab pealkirjaga"
+
+#, python-format
+msgid "Match title: %s"
+msgstr "Pealkirjale vastab: %s"
+
+msgid "Maximum duration (in m)"
+msgstr "Maksimaalne kestus (min)"
+
+msgid "Maximum event duration to match. If an event is longer than this amount of time (without offset) it won't be matched."
+msgstr "Suurim sobiv saate kestus. Kui saade on  sellest pikem (ilma seatud eranditeta), see ei sobi."
+
+msgid "Modify existing timers"
+msgstr "Muuda olemasolevaid taimereid"
+
+msgid "Mon"
+msgstr "Esmaspäev"
+
+msgid "Monday"
+msgstr "Esmaspäev"
+
+msgid "Monthly"
+msgstr "Kord kuus"
+
+msgid "Never"
+msgstr "Mitte kunagi"
+
+msgid "New"
+msgstr "Uus"
+
+msgid "No"
+msgstr "Ei"
+
+msgid "No, remove them."
+msgstr "Ei, kustuta need."
+
+msgid "None"
+msgstr "Mitte ükski"
+
+msgid "Not after"
+msgstr "Mitte pärast"
+
+msgid "Not before"
+msgstr "Mitte enne"
+
+msgid "Number of scheduled recordings left."
+msgstr "Järgijäänud ajastatud salvestuste arv."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Offset after recording (in m)"
+msgstr "Ajavaru pärast salvestust (min)"
+
+msgid "Offset before recording (in m)"
+msgstr "Ajavaru enne salvestust (min)"
+
+msgid "On any service"
+msgstr "Suvalisel kanalil"
+
+msgid "On same service"
+msgstr "Samal kanalil"
+
+msgid "Only AutoTimers created during this session"
+msgstr "Ainult sel korral loodud autotaimerid"
+
+msgid "Only add timer for next x days"
+msgstr "Lisa taimer ainult järgnevaks x päevaks"
+
+msgid "Only match during timespan"
+msgstr "Ainult sobivas ajavahemikus"
+
+#, python-format
+msgid "Only on Service: %s"
+msgstr "Ainult kanalil: %s"
+
+#, python-format
+msgid "Only on Weekday: %s"
+msgstr "Ainult kindlal päeval: %s"
+
+msgid "Only poll while in standby"
+msgstr "Otsi ainult ooterežiimis"
+
+msgid "Open Context Menu"
+msgstr "Ava kontekstmenüü"
+
+msgid "Please provide a Text to match"
+msgstr "Sisesta tekst, mida otsida"
+
+msgid "Poll Interval (in mins)"
+msgstr "Kontrolli sagedus (tundides)"
+
+msgid "Poll automatically"
+msgstr "Kontrolli automaatselt"
+
+msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
+msgstr "Toite seaded peale salvestamist. Vali \"tavaline\", et mitte muuta  enigma2 vaikimisi toimingut või enda muudetud seadeid."
+
+msgid "Preview AutoTimer"
+msgstr "Eelvaade"
+
+msgid "Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
+msgstr ""
+
+msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'ISO8859-15' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
+msgstr ""
+
+msgid "Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr "Kas soovid seadeid salvestamata väljuda?"
+
+msgid "Record a maximum of x times"
+msgstr "Salvesta maksimaalselt x korda"
+
+msgid "Record on"
+msgstr "Salvesta"
+
+msgid "Remove selected AutoTimer"
+msgstr "Kustuta valitud autotaimer"
+
+msgid "Require description to be unique"
+msgstr "Nõua täpselt vastavat sisukirjeldust"
+
+msgid "Reset count"
+msgstr "Arvestus nulli"
+
+msgid "Restrict \"after event\" to a certain timespan?"
+msgstr "Piira \"pärast sündmust\" kindla ajavahemikuga?"
+
+msgid "Restrict to events on certain dates"
+msgstr "Piirata ainult kindlal kuupäeval algavatele saadetele"
+
+msgid "Sat"
+msgstr "Laupäev"
+
+msgid "Saturday"
+msgstr "Laupäev"
+
+msgid "Save"
+msgstr "Salvesta"
+
+msgid "Search strictness"
+msgstr "Otsingu rangus"
+
+msgid "Search type"
+msgstr "Otsingu tüüp"
+
+msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"
+msgstr "Vali \"täpne vaste\" et leida täpne \"Vastab pealkirjaga\" kirje, \"osaline vaste\" pealkirja sobiva osa otsinguks või \"saatesisu vaste\" kui soovid leida sündmuse kirjelduse osa"
+
+msgid "Select a timer to import"
+msgstr "Vali importimiseks taimer"
+
+msgid "Select bouquet to record on"
+msgstr "Vali lemmiknimekiri. millelt salvestada"
+
+msgid "Select channel to record on"
+msgstr "Vali kanal. millelt salvestada"
+
+msgid "Select the location to save the recording to."
+msgstr "Vali salvestise jaoks asukoht."
+
+msgid "Select type of Filter"
+msgstr "Vali filtri tüüp"
+
+msgid "Select whether or not you want to enforce case correctness."
+msgstr "Vali, kas soovid kasutada tähesuuruse jälgimist."
+
+msgid "Set End Time"
+msgstr "Määra lõppaeg"
+
+msgid "Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."
+msgstr "Määra taimeri lõpuaeg. Seda tehes võivad salvestused blokeerida saate ajaakna."
+
+msgid "Set maximum duration"
+msgstr "Sea suurim kestus"
+
+msgid "Set this NO to disable this AutoTimer."
+msgstr "Autotaimeri keelamiseks määra 'EI'."
+
+msgid "Setup"
+msgstr "Seadistamine"
+
+msgid "Should this AutoTimer be restricted to a timespan?"
+msgstr "Kas see autotaimer järgib ajavahemiku piirangut?"
+
+msgid "Should this AutoTimer only match up to a certain event duration?"
+msgstr "Kas see autotaimer peaks vastama ainult teatud kindlale kestusele?"
+
+msgid "Should timers created by this AutoTimer be recorded to a custom location?"
+msgstr "Kas selle Autotaimeri poolt seatud taimerid tuleks salvestada kindlasse asukohta?"
+
+msgid "Show in extension menu"
+msgstr "Näita laienduste menüüs"
+
+msgid "Show in plugin browser"
+msgstr "Näita laienduste lehitsejas"
+
+msgid "Show notification on conflicts"
+msgstr "Teavita vastuolude korral"
+
+msgid "Show notification on similars"
+msgstr "Teavita sarnaste leidmisel"
+
+msgid "Skip poll during records"
+msgstr "Salvestamise ajal jäetakse päring vahele"
+
+msgid "Sort AutoTimer"
+msgstr "Järjesta autotaimer"
+
+msgid "Sort Time"
+msgstr "Järjesta aja järgi"
+
+msgid "Startup delay (in min)"
+msgstr "Määra viiteaeg (min.)"
+
+msgid "Sun"
+msgstr "Pühapäev"
+
+msgid "Sunday"
+msgstr "Pühapäev"
+
+msgid "Support \"Fast Scan\"?"
+msgstr " \"Kiirotsingu\"-tugi?"
+
+msgid "Tags"
+msgstr "Sildid"
+
+msgid "Tags the Timer/Recording will have."
+msgstr "Nimesilt taimerile/salvestusele."
+
+msgid ""
+"Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
+"Please press OK to continue."
+msgstr ""
+"Tänan abilise kasutamise eest, uus autotaimer on lisatud nimekirja. \n"
+"Vajuta jätkamiseks OK."
+
+msgid "The 'Overview'"
+msgstr "Autotaimeri ülevaade"
+
+msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remove) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
+msgstr ""
+
+msgid ""
+"The Timer will not be added to the List.\n"
+"Please press OK to close this Wizard."
+msgstr ""
+"Taimerit ei lisata nimekirja. \n"
+"Vajuta abilise sulgemiseks OK."
+
+msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
+msgstr "'Ajavahemik' on Autotaimeri tähtsaim omadus. Kui ajavahemik on määratud, vastab antud autotaimerile ainult selle ajavahemiku sees olev saade."
+
+msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
+msgstr ""
+
+msgid "The counter can automatically be reset to the limit at certain intervals."
+msgstr "Loendurit saab automaatselt seada piirangutele teatud ajavahemike järel."
+
+msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
+msgstr "Siin saad lisada uusi autotaimereid. Seda saab teha kasutades abilist või klassikalist redaktorit."
+
+msgid "The match attribute is mandatory."
+msgstr "Vastete omadus on kohustuslik."
+
+msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
+msgstr ""
+
+msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
+msgstr ""
+
+msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
+msgstr "See on nimi, mille saab anda autotaimerile. Antud nime näidatakse nii ülevaates kui ka eelvaates."
+
+msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog."
+msgstr ""
+
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr "Viiteaeg tundides enne Autotaimeri uut EPG otsingut"
+
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr "Viiteaeg minutites enne Autotaimeri käivitamist alglaadimisel, et mitte aeglustada enigma2 käivitumist."
+
+msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
+msgstr "Seda hakatakse otsima saate nimes. Täpitähtede otsimine on keeruline, sest tuleb teada, millist EPG kodeeringut kanal kasutab."
+
+msgid "This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible explanation this is most likely a skin issue and please try if the default skin fixes the issue./n/nA lot of effort has been put in making the parameters as easy to understand as possible, so give reading them a try ;-)."
+msgstr ""
+
+msgid "This setting controls the behavior when a timer matches a found event."
+msgstr "See säte reguleerib vastuvõtja käitumist taimerile vastava saate leidmisel."
+
+msgid "This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled."
+msgstr "See määrab käitumise taimeri konflikti puhul. Kui autotaimer vastab sündmusele, mis on konfliktis olemasoleva taimeriga, lisatakse sündmus mitte lubatuna."
+
+msgid "Thur"
+msgstr "Neljapäev"
+
+msgid "Thursday"
+msgstr "Neljapäev"
+
+msgid "Time in minutes to append to recording."
+msgstr "Salvestiste lõppu lisatav aeg (min)."
+
+msgid "Time in minutes to prepend to recording."
+msgstr "Salvestiste algusesse lisatav aeg (min)."
+
+msgid "Timer type"
+msgstr "Taimeri liik"
+
+msgid "Title"
+msgstr "Nimi"
+
+msgid "Title and Short description"
+msgstr "Nimi ja lühike sisututvustus"
+
+msgid "Title and all descriptions"
+msgstr "Nimi ja pikk sisututvustus"
+
+msgid "Tue"
+msgstr "Teisipäev"
+
+msgid "Tuesday"
+msgstr "Teisipäev"
+
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "Kuni see on keelatud, ei otsi Autotaimer automaatselt vasteid seatud autotaimeritega. Otsing toimub ainult kasutajaliidesest lahkumisel rohelist nuppu vajutades."
+
+msgid "Upper bound of timespan."
+msgstr "Ajavahemiku suurim piir."
+
+msgid "Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"
+msgstr "Ajavahemiku ülemine piir. Pärast seda aega miski ei sobi. Arvesse ei võeta püsimuutusi!"
+
+msgid "Use a custom location"
+msgstr "Kasuta määratud asukohta"
+
+msgid "Use automatic selection of alternates."
+msgstr "Kasuta asenduskanalite automaatset valikut."
+
+msgid "Wed"
+msgstr "Kolmapäev"
+
+msgid "Wednesday"
+msgstr "Kolmapäev"
+
+msgid "Weekday"
+msgstr "Nädalapäev"
+
+msgid "Weekend"
+msgstr "Nädalavahetus"
+
+msgid "Weekly (Monday)"
+msgstr "Kord nädalas (Esmaspäev)"
+
+msgid "Weekly (Sunday)"
+msgstr "Kord nädalas (Pühapäev)"
+
+msgid "Welcome to the AutoTimer-Plugin"
+msgstr "Tere tulemast kasutama Autotaimerit"
+
+msgid ""
+"Welcome.\n"
+"\n"
+"This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
+msgstr ""
+"Tere tulemast.\n"
+"\n"
+"See abimees aitab luua uut autotaimerit, vastavalt kirjeldustele ja üldseadetele."
+
+msgid "What is this 'control menu' you keep talking about?"
+msgstr "Mis see 'juhtmenüü' on, millest siin räägitakse?"
+
+msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
+msgstr "Olemasoleva \"Fast Scan\" toetuse puhul teenuse liiki ei kontrollita. Seda pole vaja lubada, v.a. tarkvara \"Fast Scan\" toetuse puhul ning selle kasutamisel."
+
+msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
+msgstr "Kui see valik on aktiivne, otsib Autotaimer uusi saateid ainult ooterežiimil olles."
+
+msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
+msgstr "Kui see valik on aktiivne, ei vasta autotaimer sündmustele juhul, kui samasuguse kirjeldusega teine taimer on juba taimerite nimekirjas."
+
+msgid "With this option enabled the channel to record will be selected automaticliy using your list of alternates."
+msgstr "Lubades selle valiku, valitakse salvestatav kanal automaatselt asenduskanalite nimekirjast."
+
+msgid "With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. Set this to 0 to disable this functionality."
+msgstr "Valikuga saad piirata Autotaimeri poolt tehtavate salvestuste arvu teatud hulgani. Sea see 0 peale, kui soovid võimalust välja lülitada."
+
+msgid "Wizard"
+msgstr "Abimees"
+
+msgid "Wizard or Classic Editor?"
+msgstr "Seadistusabi või klassikaline redaktor?"
+
+msgid "Yes"
+msgstr "Jah"
+
+msgid "Yes, keep them."
+msgstr "Jah, hoia alles."
+
+msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
+msgstr "Saad otsustada, mitmeks järgnevaks päevaks taimerid lisatakse. Keelamiseks määra '0'."
+
+msgid ""
+"You can set the basic properties of an AutoTimer here.\n"
+"While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
+msgstr ""
+"Siin saad seada Autotaimeri põhilisi omadusi. \n"
+"Kuna 'Nimi' on vaid vaataja loetav nimi vaadatavas ülevaates, otsitakse EPG-st tunnust  'Kokkulangevus pealkirjas'."
+
+msgid ""
+"You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
+"As this is a mandatory Attribute you cannot continue without doing so."
+msgstr ""
+"Ei ole sisestatud kehtivat 'Kokkulangevus pealkirjas' tunnust oma uue autotaimeri jaoks. \n"
+"Kuivõrd see on kohustuslik, ei saa jätkata enne seda sisestamata."
+
+#, python-format
+msgid ""
+"You entered \"%s\" as Text to match.\n"
+"Do you want to remove trailing whitespaces?"
+msgstr ""
+"Sisestasid \"%s\" kokkusobivaks tekstiks. \n"
+"Kas eemaldad järgnevad tühikud?"
+
+msgid "You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
+msgstr ""
+
+msgid ""
+"You successfully configured a new AutoTimer. Do you want to add it to the list?\n"
+"\n"
+"You can go back a step by pressing EXIT on your remote."
+msgstr ""
+"Uus autotaimer on häälestatud. Soovid seda lisada nimekirja?\n"
+"\n"
+"Saad minna sammu tagasi vajutades puldil EXIT."
+
+msgid ""
+"Your 'Match in title' Attribute ends with a Whitespace.\n"
+"Please confirm if this was intentional, if not they will be removed."
+msgstr ""
+"'Nime kokkulangevuse' tunnuse lõpus on tühik. \n"
+"Kinnita, et see oli tahtlik; kui ei, siis tühik kõrvaldatakse."
+
+#, python-format
+msgid ""
+"Your config file is not well-formed:\n"
+"%s"
+msgstr ""
+"Seadistusfail pole õieti tehtud:\n"
+"%s"
+
+#. TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
+msgid "add AutoTimer"
+msgstr "lisa autotaimer"
+
+#. TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)
+msgid "add AutoTimer..."
+msgstr "lisa autotaimer..."
+
+msgid "auto"
+msgstr "automaatne"
+
+msgid "autotimers need a match attribute"
+msgstr "autotaimerid peavad vastama väärtusele"
+
+msgid "case-insensitive search"
+msgstr "tõusutundetu otsing"
+
+msgid "case-sensitive search"
+msgstr "tõusutundlik otsing"
+
+msgid "config changed."
+msgstr "seadistus muudetud."
+
+msgid "description match"
+msgstr "saatesisu vaste"
+
+msgid "disable"
+msgstr "keela"
+
+msgid "do nothing"
+msgstr "ära tee midagi"
+
+msgid "enable"
+msgstr "luba"
+
+msgid "exact match"
+msgstr "täpne vaste"
+
+msgid "go to deep standby"
+msgstr "sügavooterežiim"
+
+msgid "go to standby"
+msgstr "ooterežiim"
+
+msgid "in Description"
+msgstr "saatetutvustusest"
+
+msgid "in Shortdescription"
+msgstr "lühitutvustusest"
+
+msgid "in Title"
+msgstr "nimest"
+
+msgid "mins"
+msgstr "minutit"
+
+msgid "missing parameter \"id\""
+msgstr "puuduv parameeter: \"id\""
+
+msgid "on Weekday"
+msgstr "tööpäeval"
+
+msgid "partial match"
+msgstr "osaline vaste"
+
+msgid "record"
+msgstr "salvestus"
+
+msgid "standard"
+msgstr "tavaline"
+
+msgid "title starts with"
+msgstr "nimi algab"
+
+#, python-format
+msgid "unable to find timer with id %i"
+msgstr "taimerit %i ei leitud"
+
+msgid "zap"
+msgstr "kanalivahetus"
+

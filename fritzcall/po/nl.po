@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-01 12:42+0100\n"
+"POT-Creation-Date: 2017-06-29 18:00+0200\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -17,6 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "05.29 until below 6.35"
+msgstr ""
+
+msgid "06.35 and newer"
+msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -62,13 +68,16 @@ msgstr "Nieuw contact automatisch toevoegen aan het telefoonboek"
 msgid "Call"
 msgstr "Gesprek"
 
+msgid "Call diversion"
+msgstr ""
+
+msgid "Call diversion active"
+msgstr ""
+
 msgid "Call monitoring"
 msgstr "Gespreksmonitoring"
 
 msgid "Call redirection"
-msgstr ""
-
-msgid "Call redirection active"
 msgstr ""
 
 #, python-format
@@ -119,6 +128,13 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr ""
 
+msgid "Could not load phonebook: "
+msgstr ""
+
+#, python-format
+msgid "Could not load phonebook: %s"
+msgstr ""
+
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "Fout bij het verwerken van een FRITZ!Box telefoonboek regel"
 
@@ -127,6 +143,9 @@ msgstr ""
 
 msgid "Country"
 msgstr "Land"
+
+msgid "Countrycode (e.g. 0044 for UK, 0034 for Spain, etc.)"
+msgstr ""
 
 msgid "DECT inactive"
 msgstr ""
@@ -137,9 +156,6 @@ msgstr "geregistreerde DECT telefoons"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Deactivate WLAN guest access"
 msgstr ""
-
-msgid "Debug"
-msgstr "Debug"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
@@ -194,6 +210,7 @@ msgid "Edit"
 msgstr "Bewerken"
 
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr "Gesel. regel bewerken"
 
@@ -212,13 +229,12 @@ msgstr ""
 msgid "Extension number to initiate call on"
 msgstr "Voorkies nummer voor een telefoonoproep"
 
+msgid "FRITZ!Box - "
+msgstr ""
+
 #, python-format
 msgid "FRITZ!Box - Could not load calls: %s"
 msgstr ""
-
-#, fuzzy, python-format
-msgid "FRITZ!Box - Could not load phonebook: %s"
-msgstr "Fout bij het laden van het FRITZ!Box telefoonboek -fout: %s"
 
 #, python-format
 msgid "FRITZ!Box - Dialling failed: %s"
@@ -226,6 +242,9 @@ msgstr ""
 
 #, python-format
 msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr ""
+
+msgid "FRITZ!Box - Error getting status: "
 msgstr ""
 
 #, python-format
@@ -356,6 +375,9 @@ msgstr "Italië"
 msgid "Last 10 calls:\n"
 msgstr "Laatste 10 gesprekken: \n"
 
+msgid "Log level"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Lookup"
 msgstr "Zoek"
@@ -366,6 +388,9 @@ msgstr "Laat MSN zien (door een komma gescheiden)"
 msgid "Mailbox"
 msgstr "Mailbox"
 
+msgid "Make it more skin friendly"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Gemist"
@@ -373,14 +398,14 @@ msgstr "Gemist"
 msgid "Missed calls"
 msgstr "Gemiste gesprekken"
 
-msgid "Mute on call"
-msgstr "Muten bij oproep"
+msgid "Mute on incoming call"
+msgstr ""
+
+msgid "Mute on outgoing calls"
+msgstr ""
 
 msgid "Name"
 msgstr "Naam"
-
-msgid "Name of WLAN guest network"
-msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -392,9 +417,8 @@ msgstr ""
 msgid "No DECT phone registered"
 msgstr "Geen DECT telefoon geregistreerd"
 
-#, fuzzy
-msgid "No call redirection active"
-msgstr "Geen mailbox actief"
+msgid "No call diversion active"
+msgstr ""
 
 msgid "No entry selected"
 msgstr "Geen regel geselecteerd"
@@ -414,6 +438,9 @@ msgstr "Geen Resultaat van Outlook export"
 msgid "No result from reverse lookup"
 msgstr "Geen resultaat uit omgekeerd zoeken"
 
+msgid "Not deactivating after time"
+msgstr ""
+
 msgid "Number"
 msgstr "Nummer"
 
@@ -424,9 +451,8 @@ msgstr "Ok"
 msgid "One DECT phone registered"
 msgstr "Eén DECT telefoon geregistreerd"
 
-#, fuzzy
-msgid "One call redirection active"
-msgstr "Eén mailbox actief"
+msgid "One call diversion active"
+msgstr ""
 
 msgid "One mailbox active"
 msgstr "Eén mailbox actief"
@@ -453,9 +479,6 @@ msgstr "Uitgaande gesprekken"
 
 msgid "Password Accessing FRITZ!Box"
 msgstr "Wachtwoord voor toegang FRITZ!Box"
-
-msgid "Password of WLAN guest network"
-msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -496,8 +519,8 @@ msgstr ""
 msgid "Reset"
 msgstr "Reset"
 
-msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Omgekeerd zoeken van een beller ID (select land hieronder)"
+msgid "Reverse Lookup Caller ID"
+msgstr ""
 
 msgid "Reverse searching..."
 msgstr "Zoekt omgekeerd..."
@@ -523,20 +546,23 @@ msgstr "Zoekt in LDIF..."
 msgid "Searching in Outlook export..."
 msgstr "Zoekt in Outlook export..."
 
-msgid "Secure WLAN guest network"
-msgstr ""
-
 msgid "Setting..."
 msgstr ""
 
 msgid "Shortcut"
 msgstr "Snelkoppeling"
 
+msgid "Show Blocked Calls"
+msgstr ""
+
 msgid "Show Outgoing Calls"
 msgstr "Laat uitgaande gesprekken zien"
 
 msgid "Show after Standby"
 msgstr "Laat zien na standby"
+
+msgid "Show also internal numbers"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
@@ -563,6 +589,12 @@ msgstr "Zwitzerland"
 
 msgid "The Netherlands"
 msgstr "Nederland"
+
+#, python-format
+msgid ""
+"There might be a problem with your FritzCall %spassword.\n"
+"Check in the configuration."
+msgstr ""
 
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Timeout voor gespreksnotificatie (seconden)"
@@ -613,6 +645,12 @@ msgstr "Mailbox Aan/Uit"
 msgid "UNKNOWN"
 msgstr "ONBEKEND"
 
+msgid "Unknown"
+msgstr ""
+
+msgid "Update available"
+msgstr ""
+
 msgid "Use internal PhoneBook"
 msgstr "Gebruik het interne telefoonboek"
 
@@ -621,6 +659,9 @@ msgstr ""
 
 msgid "Vanity"
 msgstr "Trots"
+
+msgid "WLAN not active"
+msgstr ""
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
 msgstr ""
@@ -641,7 +682,10 @@ msgstr ""
 msgid "before 05.27"
 msgstr ""
 
-msgid "call redirections active"
+msgid "call diversions active"
+msgstr ""
+
+msgid "calls in mailbox"
 msgstr ""
 
 #, fuzzy
@@ -665,8 +709,17 @@ msgstr "klaar, gebruikt nu de laatste lijst"
 msgid "encrypted"
 msgstr "gecodeerd"
 
+msgid "fax_home"
+msgstr ""
+
+msgid "fax_work"
+msgstr ""
+
 msgid "finishing"
 msgstr "wordt beëindigd"
+
+msgid "guest "
+msgstr ""
 
 msgid "home"
 msgstr "home"
@@ -693,6 +746,9 @@ msgstr ""
 msgid "no device active"
 msgstr "Eén mailbox actief"
 
+msgid "not available with this firmware version"
+msgstr ""
+
 msgid "not configured"
 msgstr ""
 
@@ -702,12 +758,24 @@ msgstr "ongecodeerd "
 msgid "not yet implemented"
 msgstr ""
 
+msgid "nothing"
+msgstr ""
+
 msgid "number suppressed"
+msgstr ""
+
+msgid "off"
+msgstr ""
+
+msgid "on"
 msgstr ""
 
 #, fuzzy
 msgid "one device active"
 msgstr "Eén mailbox actief"
+
+msgid "pager"
+msgstr ""
 
 msgid "preparing"
 msgstr "aan het voorbereiden"
@@ -729,6 +797,9 @@ msgstr "alle gesprekken tonen"
 msgid "show nothing"
 msgstr "niets weergeven"
 
+msgid "with"
+msgstr ""
+
 msgid "work"
 msgstr "werk"
 
@@ -744,8 +815,15 @@ msgstr ""
 #~ msgid "Could not load calls from FRITZ!Box - Error: %s"
 #~ msgstr "Kon de gesprekken niet laden van FRITZ!Box - Fout: %s"
 
+#~ msgid "Debug"
+#~ msgstr "Debug"
+
 #~ msgid "Dialling failed - Error: %s"
 #~ msgstr "FRITZ!Box Login mislukt! - Error: %s"
+
+#, fuzzy
+#~ msgid "FRITZ!Box - Could not load phonebook: %s"
+#~ msgstr "Fout bij het laden van het FRITZ!Box telefoonboek -fout: %s"
 
 #~ msgid "FRITZ!Box Login failed! - Wrong Password!"
 #~ msgstr "FRITZ!Box Login mislukt! - Onjuist wachtwoord"
@@ -778,6 +856,17 @@ msgstr ""
 #~ "---------------------------------------------\n"
 #~ "to: %(phone)s"
 
+#~ msgid "Mute on call"
+#~ msgstr "Muten bij oproep"
+
+#, fuzzy
+#~ msgid "No call redirection active"
+#~ msgstr "Geen mailbox actief"
+
+#, fuzzy
+#~ msgid "One call redirection active"
+#~ msgstr "Eén mailbox actief"
+
 #~ msgid ""
 #~ "Outgoing Call on %(date)s to\n"
 #~ "---------------------------------------------\n"
@@ -795,6 +884,9 @@ msgstr ""
 
 #~ msgid "PhoneBook Location"
 #~ msgstr "Telefoonboek locatie"
+
+#~ msgid "Reverse Lookup Caller ID (select country below)"
+#~ msgstr "Omgekeerd zoeken van een beller ID (select land hieronder)"
 
 #~ msgid "Show Calls for specific MSN"
 #~ msgstr "Laat gesprekken van een specifieke MSN zien"

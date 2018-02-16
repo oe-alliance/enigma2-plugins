@@ -217,10 +217,10 @@ class PictureViewer(Screen):
 		<widget name="menu" position="1,1" size="275,400"  scrollbarMode="showOnDemand" />
 		<widget name="pixmap" position="275,1" size="275,200" backgroundColor="red" />
 		<widget name="slist" position="275,200" size="275,200"  scrollbarMode="showOnDemand" />
-		<widget name="buttonred" position="6,405" size="130,40" backgroundColor="red" valign="center" halign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-		<widget name="buttongreen" position="142,405" size="130,40" backgroundColor="green" valign="center" halign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-		<widget name="buttonyellow" position="278,405" size="130,40" backgroundColor="yellow" valign="center" halign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
-		<widget name="buttonblue" position="414,405" size="130,40" backgroundColor="blue" valign="center" halign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
+		<widget name="key_red" position="6,405" size="130,40" backgroundColor="red" valign="center" halign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
+		<widget name="key_green" position="142,405" size="130,40" backgroundColor="green" valign="center" halign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
+		<widget name="key_yellow" position="278,405" size="130,40" backgroundColor="yellow" valign="center" halign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
+		<widget name="key_blue" position="414,405" size="130,40" backgroundColor="blue" valign="center" halign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
 		</screen>""" % config.plugins.pictureviewer.rootdir.value
 		self.skin = skin
 		Screen.__init__(self, session)
@@ -235,10 +235,10 @@ class PictureViewer(Screen):
 		self.slideshowlist =MenuList(self.slideshowfiles)
 		self["slist"] = self.slideshowlist
 
-		self["buttonred"] = Label("")
-		self["buttongreen"] = Label("")
-		self["buttonyellow"] = Label("")
-		self["buttonblue"] = Label("")
+		self["key_red"] = Label("")
+		self["key_green"] = Label("")
+		self["key_yellow"] = Label("")
+		self["key_blue"] = Label("")
 
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "DirectionActions", "ShortcutActions"],
 			{
@@ -365,19 +365,19 @@ class PictureViewer(Screen):
 			# Slideshow activieren
 			self.filelist.selectionEnabled(0)
 			self.slideshowlist.selectionEnabled(1)
-			self["buttonred"].setText("speichern")
-			self["buttongreen"].setText("laden")
-			self["buttonyellow"].setText("loeschen")
-			self["buttonblue"].setText("Dateien")
+			self["key_red"].setText("speichern")
+			self["key_green"].setText("laden")
+			self["key_yellow"].setText("loeschen")
+			self["key_blue"].setText("Dateien")
 			self.currList = "slideshowlist"
 		else:
 			# filelist activieren
 			self.filelist.selectionEnabled(1)
 			self.slideshowlist.selectionEnabled(0)
-			self["buttonred"].setText("starte Slideshow")
-			self["buttongreen"].setText("alle hinzufuegen")
-			self["buttonyellow"].setText("hinzufuegen")
-			self["buttonblue"].setText("Slideshow bearbeiten")
+			self["key_red"].setText("starte Slideshow")
+			self["key_green"].setText("alle hinzufuegen")
+			self["key_yellow"].setText("hinzufuegen")
+			self["key_blue"].setText("Slideshow bearbeiten")
 			self.currList = "filelist"
 
 	def go(self):

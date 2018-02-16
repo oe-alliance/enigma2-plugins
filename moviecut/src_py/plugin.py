@@ -3,13 +3,14 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.LocationBox import MovieLocationBox
-import Screens.Standby
 from Components.config import config, ConfigText, ConfigSelection, ConfigNothing, getConfigListEntry
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer, eEnv
+from Components.Task import Task, Job, job_manager as JobManager
 from os import access, chmod, X_OK
+from os.path import getsize
 from __init__ import _
 
 mcut_path = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut")
@@ -24,38 +25,66 @@ def Plugins(**kwargs):
 	return PluginDescriptor(name="MovieCut", description=_("Execute cuts..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
 
 
+import struct
+cutsParser = struct.Struct('>QI')  # big-endian, 64-bit PTS and 32-bit type
+
+def _getCutsLength(filename, len_sec):
+	len_pts = in_pts = 0
+	try:
+		with open(filename + '.cuts', 'rb') as f:
+			while True:
+				data = f.read(cutsParser.size)
+				if len(data) < cutsParser.size:
+					break
+				pts, cutType = cutsParser.unpack(data)
+				if cutType == 0:  # In cut
+					if not in_pts:
+						in_pts = pts
+				elif cutType == 1: # Out cut
+					if in_pts is not None:
+						len_pts += pts - in_pts
+						in_pts = None
+			if in_pts is not None and len_sec:
+				len_pts += len_sec * 90000 - in_pts
+	except:
+		pass
+	return len_pts / 90000
+
+
 class MovieCut(ChoiceBox):
 	def __init__(self, session, service):
 		self.service = service
 		serviceHandler = eServiceCenter.getInstance()
-		path = self.service.getPath()
+		self.path = self.service.getPath()
 		info = serviceHandler.info(self.service)
 		if not info:
 			self.name = path
+			self.len = 0
 		else:
 			self.name = info.getName(self.service)
+			self.len = info.getLength(self.service)
 		tlist = [
 			(_("Don't cut"), "CALLFUNC", self.confirmed0),
 			(_("Replace the original movie with the cut movie"), "CALLFUNC", self.confirmed1),
 			(_("Place the cut movie in a new file ending with \" cut\""), "CALLFUNC", self.confirmed2),
 			(_("Advanced cut specification..."), "CALLFUNC", self.confirmed3),
 		]
-		ChoiceBox.__init__(self, session, _("How would you like to cut \"%s\"?") % (self.name), list = tlist, selection = 0)
+		ChoiceBox.__init__(self, session, _("How would you like to cut \"%s\"?") % (self.name), list=tlist)
 		self.skinName = "ChoiceBox"
 
 	def confirmed0(self, arg):
 		self.close()
 
 	def confirmed1(self, arg):
-		MovieCutSpawn(self.session, self, [mcut_path, "-r", self.service.getPath()], self.name)
+		self.cut(self.name, self.path, self.path[:-3] + '_.ts', self.len, _getCutsLength(self.path, self.len), ["-r", self.path])
 
 	def confirmed2(self, arg):
-		MovieCutSpawn(self.session, self, [mcut_path, self.service.getPath()], self.name)
+		self.cut(self.name, self.path, self.path[:-3] + ' cut.ts', self.len, _getCutsLength(self.path, self.len), [self.path])
 
 	def confirmed3(self, arg):
 		serviceHandler = eServiceCenter.getInstance()
 		info = serviceHandler.info(self.service)
-		path = self.service.getPath()
+		path = self.path
 		self.name = info.getName(self.service)
 		descr = info.getInfoString(self.service, iServiceInformation.sDescription)
 		self.session.openWithCallback(self.advcutConfirmed, AdvancedCutInput, self.name, path, descr)
@@ -64,12 +93,17 @@ class MovieCut(ChoiceBox):
 		if len(ret) <= 1 or not ret[0]:
 			self.close()
 			return
-		clist = [mcut_path]
+		clist = []
 		if ret[1] == True:
 			clist.append("-r")
-		clist.append(self.service.getPath())
+		clist.append(self.path)
 		if ret[2] != False:
 			clist += ["-o", ret[2]]
+			outpath = ret[2]
+		elif ret[1] == True:
+			outpath = self.path[:-3] + '_.ts'
+		else:
+			outpath = self.path[:-3] + ' cut.ts'
 		if ret[3] != False:
 			clist += ["-n", ret[3]]
 		if ret[4] != False:
@@ -77,8 +111,93 @@ class MovieCut(ChoiceBox):
 		if ret[5] != False:
 			clist.append("-c")
 			clist += ret[5]
-		MovieCutSpawn(self.session, self, clist, self.name)
-		
+			cut_len = 0
+			in_t = None
+			try:
+				for t in ret[5]:
+					tt = t.split(':')
+					if len(tt) == 3:
+						tt = int(tt[0]) * 3600 + int(tt[1]) * 60 + float(tt[2])
+					elif len(tt) == 2:
+						tt = int(tt[0]) * 60 + float(tt[1])
+					elif len(tt) == 1:
+						tt = float(tt[0])
+					else:
+						cut_len = 0
+						break
+					if not in_t:
+						in_t = t
+					else:
+						cut_len += tt - in_t
+						in_t = None
+				if in_t or cut_len > self.len:
+					cut_len = 0
+			except:
+				cut_len = 0
+		else:
+			cut_len = _getCutsLength(self.path, self.len)
+		self.cut(self.name, self.path, outpath, self.len, cut_len, clist)
+
+	def cut(self, name, inpath, outpath, inlen, outlen, clist):
+		job = Job(_("Execute cuts"))
+		CutTask(job, self.session, name, inpath, outpath, inlen, outlen, mcut_path, clist)
+		JobManager.AddJob(job, onFail=self.noFail)
+		self.close()
+
+	# Prevent the normal aborted notification, using our own from cleanup.
+	def noFail(self, job, task, problems):
+	    return False
+
+class CutTask(Task):
+	def __init__(self, job, session, name, inpath, outpath, inlen, outlen, cmd, args):
+		Task.__init__(self, job, name)
+		self.session = session
+		self.name = name
+		self.inpath = inpath
+		self.outpath = outpath
+		self.inlen = inlen
+		self.outlen = outlen
+		self.setCommandline(cmd, [cmd] + args)
+		self.progressTimer = eTimer()
+		self.progressTimer.callback.append(self.progressUpdate)
+
+	def prepare(self):
+		if self.inlen and self.outlen:
+			try:
+				self.end = getsize(self.inpath) * self.outlen / self.inlen
+				self.end += self.end / 50	# add 2% for a bit of leeway
+				self.progressTimer.start(1000)
+			except:
+				pass
+
+	def progressUpdate(self):
+		try:
+			self.setProgress(getsize(self.outpath))
+		except:
+			pass
+
+	def afterRun(self):
+		self.progressTimer.stop()
+		self.setProgress(self.end)
+
+	def cleanup(self, failed):
+		if failed or not 0 <= self.returncode <= 10:
+			self.returncode = 11
+
+		msg = (_("The movie \"%s\" is successfully cut"),
+			   _("Cutting failed for movie \"%s\"")+":\n"+_("Bad arguments"),
+			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .ts file"),
+			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .cuts file"),
+			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .ap file"),
+			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .ts file"),
+			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .cuts file"),
+			   _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .ap file"),
+			   _("Cutting failed for movie \"%s\"")+":\n"+_("Empty .ap file"),
+			   _("Cutting failed for movie \"%s\"")+":\n"+_("No cuts specified"),
+			   _("Cutting failed for movie \"%s\"")+":\n"+_("Read/write error (disk full?)"),
+			   _("Cutting was aborted for movie \"%s\""))[self.returncode]
+		self.session.open(MessageBox, msg % self.name, type=MessageBox.TYPE_ERROR if self.returncode else MessageBox.TYPE_INFO, timeout=10)
+
 class AdvancedCutInput(Screen, ConfigListScreen):
 	def __init__(self, session, name, path, descr):
 		Screen.__init__(self, session)
@@ -214,101 +333,3 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 			return dir + name[:-3]
 		else:
 			return dir + name
-
-class MovieCutQueue:
-	def __init__(self):
-		self.container = eConsoleAppContainer()
-		self.container.appClosed.append(self.runDone)
-		self.queue = []
-		self.running = False
-
-	def enqueue(self, cb, cmd):
-		self.queue.append((cb, cmd))
-		if not self.running:
-			self.running = True
-			self.runNext()
-			return True
-		else:
-			return False
-
-	def runNext(self):
-		if not self.queue:
-			self.running = False
-		else:
-			self.container.execute(*self.queue[0][1])
-
-	def runDone(self, retval):
-		cb = self.queue[0][0]
-		self.queue = self.queue[1:]
-		cb(retval)
-		self.runNext()
-
-global_mcut_errors = [_("The movie \"%s\" is successfully cut"),
-		      _("Cutting failed for movie \"%s\"")+":\n"+_("Bad arguments"),
-		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .ts file"),
-		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .cuts file"),
-		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .ap file"),
-		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .ts file"),
-		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .cuts file"),
-		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .ap file"),
-		      _("Cutting failed for movie \"%s\"")+":\n"+_("Empty .ap file"),
-		      _("Cutting failed for movie \"%s\"")+":\n"+_("No cuts specified"),
-		      _("Cutting failed for movie \"%s\"")+":\n"+_("Read/write error (disk full?)"),
-		      _("Cutting was aborted for movie \"%s\"")]
-
-global_mcut_queue = MovieCutQueue()
-
-global_mcut_block = False
-
-class MovieCutSpawn:
-	def __init__(self, session, parent, clist, name):
-		global global_mcut_queue
-		global global_mcut_block
-		self.session = session
-		self.parent = parent
-		self.name = name
-		self.clist = [clist[0]] + clist
-		self.mess = ""
-		self.dialog = False
-		self.waitTimer = eTimer()
-		self.waitTimer.callback.append(self.doWaitAck)
-		if global_mcut_queue.enqueue(self.doAck, self.clist):
-			mess = _("The movie \"%s\" is cut in the background.") % (self.name)
-		else:
-			mess = _("Another movie is currently cut.\nThe movie \"%s\" will be cut in the background after it.") % (self.name)
-		global_mcut_block = True
-		self.dialog = self.session.openWithCallback(self.endc, MessageBox, mess, MessageBox.TYPE_INFO)
-
-	def doAck(self, retval):
-		global global_mcut_errors
-#		if WIFEXITED(retval):
-#			self.mess = global_mcut_errors[WEXITSTATUS(retval)] % (self.name)
-#		else:
-#			self.mess = global_mcut_errors[-1] % (self.name)
-		if retval < 0 or retval > 10:
-			self.mess = global_mcut_errors[11] % (self.name)
-		else:
-			self.mess = global_mcut_errors[retval] % (self.name)
-		self.doWaitAck()
-
-	def doWaitAck(self):
-		global global_mcut_block
-		if Screens.Standby.inStandby or not self.session.in_exec or (global_mcut_block and not self.dialog):
-			self.waitTimer.start(2000, True)
-		else:
-			global_mcut_block = True
-			self.session.openWithCallback(self.endw, MessageBox, self.mess, MessageBox.TYPE_INFO)
-
-	def endw(self, arg = 0):
-		global global_mcut_block
-		global_mcut_block = False
-		if self.session.current_dialog == self.dialog:
-			self.session.current_dialog.close(True)
-			self.endc(arg)
-
-	def endc(self, arg = 0):
-		global global_mcut_block
-		global_mcut_block = False
-		self.dialog = False
-		self.parent.close()
-#		self.session.current_dialog.close()

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+chmod u+x /usr/lib/enigma2/python/Plugins/Extensions/EPGBackup/EPGBackup.sh
+/usr/lib/enigma2/python/Plugins/Extensions/EPGBackup/EPGBackup.sh install
+exit 0

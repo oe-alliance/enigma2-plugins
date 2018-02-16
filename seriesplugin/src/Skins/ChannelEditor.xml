@@ -1,0 +1,12 @@
+<screen name="SeriesPluginChannelEditor" position="center,100" size="1120,580" title="Channel Editor">
+	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SeriesPlugin/Images/red_round.png" position="10,5" size="32,32" alphatest="on" />
+	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SeriesPlugin/Images/green_round.png" position="280,5" size="32,32" alphatest="on" />
+	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SeriesPlugin/Images/yellow_round.png" position="550,5" size="32,32" alphatest="on" />
+	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SeriesPlugin/Images/blue_round.png" position="820,5" size="32,32" alphatest="on" />
+	<widget name="key_red" position="60,0" size="200,42" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#9f1313" transparent="1" shadowColor="black" shadowOffset="-2,-2" />
+	<widget name="key_green" position="330,0" size="200,42" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#1f771f" transparent="1" shadowColor="black" shadowOffset="-2,-2" />
+	<widget name="key_yellow" position="600,0" size="200,42" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#a08500" transparent="1" shadowColor="black" shadowOffset="-2,-2" />
+	<widget name="key_blue" position="870,0" size="200,42" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#18188b" transparent="1" shadowColor="black" shadowOffset="-2,-2" />
+	<eLabel position="10,50" size="1100,1" backgroundColor="grey" />
+	<widget name="list" position="10,60" size="1100,510" itemHeight="30" iconPosX="8" iconPosY="8" iconSize="16" colWidthStb="300" colWidthWeb="750" margin="5" scrollbarMode="showOnDemand" />
+</screen>

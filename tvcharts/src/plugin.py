@@ -26,11 +26,11 @@ from Screens.Screen import Screen
 from Screens.Setup import SetupSummary
 from Screens.TimerEntry import TimerEntry
 from Screens.TimerEdit import TimerSanityConflict
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, pathExists, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, resolveFilename
 from Tools.HardwareInfo import HardwareInfo
 from Plugins.Plugin import PluginDescriptor
 
-from enigma import eTimer, eEPGCache, loadPNG, eListboxPythonMultiContent, gFont, eServiceReference, eServiceCenter, iPlayableService
+from enigma import eTimer, eEPGCache, loadPNG, eListboxPythonMultiContent, gFont, eServiceReference, eServiceCenter, iPlayableService, BT_SCALE
 from random import randint
 from os import system as os_system
 from time import time, gmtime, strftime
@@ -69,7 +69,7 @@ def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname,
 	res = [ (serviceref, eventid) ]
 
 	# PIXMAP / PICON
-	pixmap = "/usr/share/enigma2/skin_default/picon_default.png"
+	pixmap = resolveFilename(SCOPE_ACTIVE_SKIN, "picon_default.png")
 	searchPaths = ('/usr/share/enigma2/picon/','/media/cf/picon/','/media/usb/picon/')
 
 	srefstring = serviceref
@@ -83,16 +83,16 @@ def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname,
 
 	# Build Menu
 	if type == "tvcharts":
-		res.append(MultiContentEntryPixmapAlphaTest(pos=(8, 8), size=(100, 60), png=loadPNG(pixmap)))
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(8, 8), size=(100, 60), png=loadPNG(pixmap), flags=BT_SCALE))
 		res.append(MultiContentEntryText(pos=(130, 5), size=(480, 30), font=0, text="%s (Viewer: %s)" % (channelname, usercount)))
 		res.append(MultiContentEntryText(pos=(130, 35), size=(480, 25), font=1, text=eventname))
 	elif type == "timercharts":
-		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(100, 60), png=loadPNG(pixmap)))
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(100, 60), png=loadPNG(pixmap), flags=BT_SCALE))
 		res.append(MultiContentEntryText(pos=(130, 5), size=(480, 28), font=0, text="%s (User: %s)" % (channelname, usercount)))
 		res.append(MultiContentEntryText(pos=(130, 33), size=(480, 25), font=1, text=eventname))
 		res.append(MultiContentEntryText(pos=(130, 57), size=(480, 20), font=2, text="%s Uhr - %s Uhr (%smin)" % (strftime("%d.%m.%Y %H:%M", gmtime(starttime)), strftime("%H:%M", gmtime(endtime)), int((endtime-starttime)/60))))
 	elif type == "moviecharts":
-		res.append(MultiContentEntryPixmapAlphaTest(pos=(8, 8), size=(100, 60), png=loadPNG(pixmap)))
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(8, 8), size=(100, 60), png=loadPNG(pixmap), flags=BT_SCALE))
 		res.append(MultiContentEntryText(pos=(130, 5), size=(480, 30), font=0, text=eventname))
 		res.append(MultiContentEntryText(pos=(130, 33), size=(480, 25), font=1, text="Viewer: %s" % (usercount)))
 		res.append(MultiContentEntryText(pos=(130, 57), size=(480, 20), font=2, text="%s Uhr - %s" % (strftime("%d.%m.%Y %H:%M", gmtime(starttime)), channelname)))

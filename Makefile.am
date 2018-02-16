@@ -71,6 +71,7 @@ SUBDIRS = \
 	reftopiconname \
 	remotetimer \
 	rsdownloader \
+	seriesplugin \
 	setpasswd \
 	shoutcast \
 	showclock \
@@ -121,11 +122,18 @@ if VUULTIMO
 SUBDIRS +=  fancontrol2
 endif
 
+if XC7346
+SUBDIRS +=  fancontrol2
+endif
+
 if TPM
 SUBDIRS += \
 	mytube \
 	yttrailer \
-	webinterface
+	webinterface \
+	menusort \
+	pluginhider \
+	pluginsort 
 endif
 
 if PLI

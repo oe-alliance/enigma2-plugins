@@ -1,0 +1,115 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Hasan Kiran <sunder67@hotmail.com>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: 2015-10-23 23:06+0300\n"
+"Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
+"Language-Team: Turkish <Sunder67@hotmail.com>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:141
+msgid "Add"
+msgstr "Ekle"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:140
+#: ../src/AutomaticVolumeAdjustmentSetup.py:266
+msgid "Adjustment value"
+msgstr "Ayar değeri"
+
+#: ../src/plugin.py:49 ../src/plugin.py:52
+msgid "Automatic Volume Adjustment"
+msgstr "Otomatik Ses Ayarı"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:56
+msgid "Automatic Volume Adjustment - Config"
+msgstr "Otomatik Ses Ayarı - Yapılandırma"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:243
+msgid "Automatic Volume Adjustment - Entry Config"
+msgstr "Otomatik Ses Ayarı - Giriş Yapılandırma"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:138
+msgid "Automatic Volume Adjustment - Service Config"
+msgstr "Otomatik Ses Ayarı - Kanal Yapılandırma"
+
+#: ../src/AutomaticVolumeAdjustmentConfig.py:72
+msgid "Automatic volume adjust"
+msgstr "Otomatik ses ayarı"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:64
+#: ../src/AutomaticVolumeAdjustmentSetup.py:251
+msgid "Cancel"
+msgstr "İptal"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:274
+msgid "Channel Selection"
+msgstr "Kanal Seçimi"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:81
+msgid "Default volume adjustment value for AC3/DTS"
+msgstr "AC3/DTS için varsayılan ses ayarı değeri"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:144
+msgid "Delete"
+msgstr "Sil"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:185
+msgid "Do you really want to delete this entry?"
+msgstr "Gerçekten bu girdiyi silmek istiyor musunuz?"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:143
+msgid "Edit"
+msgstr "Düzenle"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:75
+msgid "Enable"
+msgstr "Etkin"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:82
+msgid "Max. volume for mpeg audio"
+msgstr "Mpeg sesi için asgari ses"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:78
+msgid "Modus"
+msgstr ""
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:65
+#: ../src/AutomaticVolumeAdjustmentSetup.py:142
+#: ../src/AutomaticVolumeAdjustmentSetup.py:252
+msgid "OK"
+msgstr "Tamam"
+
+#: ../src/AutomaticVolumeAdjustmentConfig.py:91
+msgid "Press OK to select a service"
+msgstr "Bir kanal seçmek için OK tuşuna basın"
+
+#: ../src/AutomaticVolumeAdjustmentConfig.py:72
+msgid "Remember service volume value"
+msgstr "Kanal ses değerini hatırla"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:139
+#: ../src/AutomaticVolumeAdjustmentSetup.py:264
+msgid "Servicename"
+msgstr "Kanal ismi"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:83
+msgid "Services"
+msgstr "Kanallar"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:86
+msgid "Show volumebar when volume-value was changed"
+msgstr "Ses değeri değiştirildiğinde ses çubuğunu göster"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:294
+msgid "You must select a valid service!"
+msgstr "Geçerli bir kanal seçmelisiniz!"

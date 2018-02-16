@@ -13,7 +13,7 @@ from Components.Input import Input
 from Components.config import getConfigListEntry, NoSave, config, ConfigIP
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.Console import Console
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, fileExists
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, fileExists
 from Tools.LoadPixmap import LoadPixmap
 from cPickle import dump, load
 from os import path as os_path, stat, mkdir, remove
@@ -28,6 +28,11 @@ from MountManager import AutoMountManager
 from AutoMount import iAutoMount
 from MountEdit import AutoMountEdit
 from UserDialog import UserDialog
+
+def formatIp(ip):
+	if ip is None or len(ip) != 4:
+		return "0.0.0.0"
+	return "%d.%d.%d.%d" % (ip[0], ip[1], ip[2], ip[3])
 
 def write_cache(cache_file, cache_data):
 	#Does a cPickle dump
@@ -209,13 +214,28 @@ class NetworkBrowser(Screen):
 		if status:
 			self.statuslist = []
 			if status == 'update':
-				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/update.png"))
+				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/update.png")):
+					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/update.png"))
+				else:
+					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/update.png"))
 				self.statuslist.append(( ['info'], statuspng, _("Searching your network. Please wait..."), None, None, None, None ))
 				self['list'].setList(self.statuslist)
+				name = _("Searching your network. Please wait...")
+				desc = name
 			elif status == 'error':
-				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/error.png"))
+				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/error.png")):
+					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/error.png"))
+				else:
+					statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/error.png"))
 				self.statuslist.append(( ['info'], statuspng, _("No network devices found!"), None, None, None, None ))
 				self['list'].setList(self.statuslist)
+				name = _("No network devices found!")
+				desc = name
+			else:
+				name = " "
+				desc = " "
+			for cb in self.onChangedEntry:
+				cb(name, desc)
 
 	def process_NetworkIPs(self):
 		self.inv_cache = 0
@@ -234,8 +254,10 @@ class NetworkBrowser(Screen):
 				sharelist = []
 				self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
 				if len(self.IP):
-					strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
-					self.Console.ePopen("nmap -oX - " + strIP + ' -sP', self.Stage1SettingsComplete)
+					self.netmask = iNetwork.getAdapterAttribute(self.iface, "netmask")
+					strCIDR = str(sum([bin(int(x)).count('1') for x in formatIp(iNetwork.getAdapterAttribute(self.iface, "netmask")).split('.')]))
+					strIP = str(self.IP[0] & self.netmask[0]) + "." + str(self.IP[1] & self.netmask[1]) + "." + str(self.IP[2] & self.netmask[2]) + "." + str(self.IP[3] & self.netmask[3]) + "/" + strCIDR
+					self.Console.ePopen("nmap -oX - " + strIP + ' -sP 2>/dev/null', self.Stage1SettingsComplete)
 			else:
 				write_cache(self.cache_file, self.networklist)
 				if len(self.networklist) > 0:
@@ -253,7 +275,9 @@ class NetworkBrowser(Screen):
 		sharelist = []
 		self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
 		if len(self.IP):
-			strIP = str(self.IP[0]) + "." + str(self.IP[1]) + "." + str(self.IP[2]) + ".0/24"
+			self.netmask = iNetwork.getAdapterAttribute(self.iface, "netmask")
+			strCIDR = str(sum([bin(int(x)).count('1') for x in formatIp(iNetwork.getAdapterAttribute(self.iface, "netmask")).split('.')]))
+			strIP = str(self.IP[0] & self.netmask[0]) + "." + str(self.IP[1] & self.netmask[1]) + "." + str(self.IP[2] & self.netmask[2]) + "." + str(self.IP[3] & self.netmask[3]) + "/" + strCIDR
 			nwlist.append(netscan.netzInfo(strIP))
 		tmplist = nwlist[0]
 		return tmplist
@@ -298,9 +322,14 @@ class NetworkBrowser(Screen):
 			except:
 				pass
 
-		cmd = "/usr/bin/smbclient -g -N -U Guest -L {0}".format(hostip).split()
+		if devicetype == 'unix':
+			nfslist=netscan.nfsShare(hostip,hostname)
+			for x in nfslist:
+				if len(x) == 6:
+					sharelist.append(x)
+		cmd = "/usr/bin/smbclient -m SMB3 -g -N -U Guest -L {0}".format(hostip).split()
 		if username != "" or password != "":
-			cmd = ["/usr/bin/smbclient", "-g", "-U", username, "-L", hostip, "\\\\IPC\\", password]
+			cmd = ["/usr/bin/smbclient", "-m SMB3", "-g", "-U", username, "-L", hostip, "\\\\IPC\\", password]
 		try:
 			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
 			(out, err) = p.communicate()
@@ -311,17 +340,6 @@ class NetworkBrowser(Screen):
 		except OSError as e:
 			print "Running " + str(cmd) + " failed with:" + str(e)
 			pass
-		
-		if devicetype == 'unix':
-			nfslist=netscan.nfsShare(hostip,hostname)
-			for x in nfslist:
-				if len(x) == 6:
-					sharelist.append(x)
-		else:
-			nfslist=netscan.nfsShare(hostip,hostname)
-			for x in nfslist:
-				if len(x) == 6:
-					sharelist.append(x)		
 		return sharelist
 
 	def updateHostsList(self):
@@ -335,7 +353,10 @@ class NetworkBrowser(Screen):
 		for x in self.network.keys():
 			hostentry = self.network[x][0][1]
 			name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
-			expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
+			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
+				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
+			else:
+				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
 			self.list.append(( hostentry, expandableIcon, name, None, None, None, None, None ))
 
 		if len(self.list):
@@ -365,14 +386,20 @@ class NetworkBrowser(Screen):
 				networkshares = self.getNetworkShares(x,self.network[x][0][1][1].strip(),self.device)
 				hostentry = self.network[x][0][1]
 				name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
-				expandedIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
+				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
+					expandedIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
+				else:
+					expandedIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
 				self.list.append(( hostentry, expandedIcon, name, None, None, None, None, None ))
 				for share in networkshares:
 					self.list.append(self.BuildNetworkShareEntry(share))
 			else: # HOSTLIST - VIEW
 				hostentry = self.network[x][0][1]
 				name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
-				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
+				if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png")):
+					expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/host.png"))
+				else:
+					expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
 				self.list.append(( hostentry, expandableIcon, name, None, None, None, None, None ))
 		if len(self.list):
 			for entry in self.list:
@@ -384,7 +411,10 @@ class NetworkBrowser(Screen):
 		self["list"].setIndex(self.listindex)
 
 	def BuildNetworkShareEntry(self,share):
-		verticallineIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/verticalLine.png"))
+		if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/verticalLine.png")):
+			verticallineIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/verticalLine.png"))
+		else:
+			verticallineIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/verticalLine.png"))
 		sharetype = share[0]
 		localsharename = share[1]
 		sharehost = share[2]
@@ -397,9 +427,15 @@ class NetworkBrowser(Screen):
 			sharedescription = share[3]
 
 		if sharetype == 'nfsShare':
-			newpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/i-nfs.png"))
+			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-nfs.png")):
+				newpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-nfs.png"))
+			else:
+				newpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/i-nfs.png"))
 		else:
-			newpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/i-smb.png"))
+			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-smb.png")):
+				newpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/i-smb.png"))
+			else:
+				newpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/i-smb.png"))
 
 		self.isMounted = False
 		for sharename, sharedata in self.mounts.items():
@@ -414,9 +450,15 @@ class NetworkBrowser(Screen):
 						if sharedata["isMounted"] is True:
 							self.isMounted = True
 		if self.isMounted is True:
-			isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
+			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png")):
+				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png"))
+			else:
+				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
 		else:
-			isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/cancel.png"))
+			if os_path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/cancel.png")):
+				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/cancel.png"))
+			else:
+				isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/cancel.png"))
 
 		return((share, verticallineIcon, None, sharedir, sharedescription, newpng, isMountedpng, self.isMounted))
 
@@ -433,19 +475,19 @@ class NetworkBrowser(Screen):
 				if current[0][0] in ("nfsShare", "smbShare"):
 					self["infotext"].setText(_("Press OK to mount this share!"))
 					name = str(current[0][2]) + ' ( ' + str(current[0][1]) + ' )'
+					if current[0][0] == "nfsShare":
+						desc = str(current[0][4])
+					elif current[0][0] == "smbShare":
+						desc = str(current[0][3])
 				else:
 					name = str(current[2])
 					selectedhost = current[0][2]
 					if selectedhost in self.expanded:
 						self["infotext"].setText(_("Press OK to collapse this host"))
+						desc = _("Press OK to collapse this host")
 					else:
 						self["infotext"].setText(_("Press OK to expand this host"))
-				if current[0][0] == "nfsShare":
-					desc = str(current[0][4])
-				elif current[0][0] == "smbShare":
-					desc = str(current[0][3])
-				else:
-					desc = ""
+						desc = _("Press OK to expand this host")
 			else:
 				name = ""
 				desc = ""
@@ -472,20 +514,9 @@ class NetworkBrowser(Screen):
 			except:
 				print 'load cache failed'
 				pass
-
-		if sel[0][0] == 'host': # host entry selected
-			if selectedhost in self.expanded:
-				self.expanded.remove(selectedhost)
-			else:
-				self.expanded.append(selectedhost)
-			self.updateNetworkList()
-		elif sel[0][0] == 'nfsShare': # share entry selected
-			self.openMountEdit(sel[0])
-		elif sel[0][0] == 'smbShare': # share entry selected
-			if os_path.exists(self.hostcache_file):
-				self.openMountEdit(sel[0])
-			else:
-				self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
+			self.passwordQuestion(False)
+		else:
+			self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?") ) )
 
 	def passwordQuestion(self, ret = False):
 		sel = self["list"].getCurrent()
@@ -494,7 +525,14 @@ class NetworkBrowser(Screen):
 		if (ret == True):
 			self.session.openWithCallback(self.UserDialogClosed, UserDialog, self.skin_path, selectedhostname.strip())
 		else:
-			self.openMountEdit(sel[0])
+			if sel[0][0] == 'host': # host entry selected
+				if selectedhost in self.expanded:
+					self.expanded.remove(selectedhost)
+				else:
+					self.expanded.append(selectedhost)
+				self.updateNetworkList()
+			elif sel[0][0] in ('nfsShare', 'smbShare'): # share entry selected
+				self.openMountEdit(sel[0])
 
 	def UserDialogClosed(self, *ret):
 		if ret is not None and len(ret):
@@ -571,6 +609,7 @@ class ScanIP(Screen, ConfigListScreen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Scan NFS share"))
 		self["key_yellow"] = StaticText(_("Scan range"))
+		self["summary_description"] = StaticText("")
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -589,6 +628,9 @@ class ScanIP(Screen, ConfigListScreen):
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
+	def createSummary(self):
+		pass
+
 	def exit(self):
 		self.close((None,None))
 
@@ -597,6 +639,10 @@ class ScanIP(Screen, ConfigListScreen):
 
 	def setWindowTitle(self):
 		self.setTitle(_("Enter IP to scan..."))
+		try:
+			self["summary_description"].text = self.getCurrentEntry()
+		except:
+			print '[ScanIp] no "summary_description" available'
 
 	def goAddress(self):
 		if self.ipAddress.getText() != "0.0.0.0":
@@ -609,4 +655,3 @@ class ScanIP(Screen, ConfigListScreen):
 			self.close((self.ipAddress.getText(), "nfs"))
 		else:
 			self.exit
-

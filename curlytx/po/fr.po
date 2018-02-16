@@ -1,0 +1,187 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"PO-Revision-Date: 2014-10-29 13:12+0100\n"
+"Last-Translator: OEA\n"
+"Language-Team: french\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.6.10\n"
+
+#: ../src/CurlyTxSettings.py:90
+msgid "Add new page"
+msgstr "Ajouter une nouvelle page"
+
+#: ../src/CurlyTxSettings.py:49 ../src/CurlyTxSettings.py:209
+msgid "Cancel"
+msgstr "Annuler"
+
+#: ../src/CurlyTx.py:103 ../src/CurlyTx.py:106
+msgid "Close window"
+msgstr "Fermer fenêtre"
+
+#: ../src/CurlyTxSettings.py:68
+msgid "Default page"
+msgstr "Page par défaut"
+
+#: ../src/CurlyTxSettings.py:52
+msgid "Delete"
+msgstr "Effacer"
+
+#: ../src/CurlyTxSettings.py:93
+msgid "Delete selected page"
+msgstr "Effacer page sélectionnée"
+
+#: ../src/CurlyTxSettings.py:78
+msgid "Dismiss all setting changes"
+msgstr "Annuler tous les changements de paramètres"
+
+#: ../src/CurlyTxSettings.py:84
+msgid "Edit selected page"
+msgstr "Éditer la page sélectionnée"
+
+#: ../src/CurlyTx.py:196
+msgid "Error fetching URL:"
+msgstr "Erreur en retrouvant URL:"
+
+#: ../src/CurlyTxSettings.py:173
+msgid "Error loading page feed:"
+msgstr "Erreur en chargeant la page source:"
+
+#: ../src/CurlyTxSettings.py:223
+msgid "Font size"
+msgstr "Taille Police"
+
+#: ../src/CurlyTx.py:201
+msgid "Go and add a page in the settings"
+msgstr "Aller et ajouter une page dans les paramètres"
+
+#: ../src/CurlyTx.py:209
+msgid "HTTP response headers for"
+msgstr "Réponse de l'entête HTTP pour"
+
+#: ../src/CurlyTx.py:168
+msgid "Invalid page"
+msgstr "Page non valide"
+
+#: ../src/CurlyTxSettings.py:87
+msgid "Load pages from feed"
+msgstr "Chargement des pages depuis la source"
+
+#: ../src/CurlyTx.py:183
+msgid "Loading ..."
+msgstr "Chargement..."
+
+#: ../src/CurlyTxSettings.py:71
+msgid "Menu title"
+msgstr "Menu titre"
+
+#: ../src/CurlyTxSettings.py:51
+msgid "New"
+msgstr "Nouveau"
+
+#: ../src/CurlyTx.py:53 ../src/CurlyTx.py:124
+msgid "Next"
+msgstr "Suivant"
+
+#: ../src/CurlyTxSettings.py:143
+msgid "No page feed URL defined"
+msgstr "Pas d'URL de page source définie"
+
+#: ../src/CurlyTxSettings.py:50 ../src/CurlyTxSettings.py:210
+msgid "OK"
+msgstr "OK"
+
+#: ../src/CurlyTxSettings.py:221
+msgid "Page URL"
+msgstr "Page URL"
+
+#: ../src/CurlyTxSettings.py:72
+msgid "Page feed URL"
+msgstr "Page source URL"
+
+#: ../src/CurlyTxSettings.py:64
+msgid "Page:"
+msgstr "Page:"
+
+#: ../src/CurlyTx.py:52 ../src/CurlyTx.py:123
+msgid "Prev"
+msgstr "Prév"
+
+#: ../src/CurlyTxSettings.py:110
+msgid ""
+"Really delete this page?\n"
+"It cannot be recovered!"
+msgstr ""
+"Voulez-vous vraiment effacer cette page?\n"
+"Elle ne sera pas récupérable!"
+
+#: ../src/CurlyTx.py:51 ../src/CurlyTx.py:118 ../src/CurlyTx.py:122
+msgid "Reload"
+msgstr "Recharger"
+
+#: ../src/CurlyTx.py:94
+msgid "Reload current page URL"
+msgstr "Recharger l'URL de la page courante"
+
+#: ../src/CurlyTxSettings.py:81
+msgid "Save settings and close screen"
+msgstr "Sauvegarder les paramètres et fermer la fenêtre"
+
+#: ../src/CurlyTx.py:85
+msgid "Scroll page contents down"
+msgstr "Faire défiler la page vers le bas"
+
+#: ../src/CurlyTx.py:82
+msgid "Scroll page contents up"
+msgstr "Faire défiler la page vers le haut"
+
+#: ../src/CurlyTx.py:50 ../src/CurlyTxSettings.py:38
+msgid "Settings"
+msgstr "Paramètres"
+
+#: ../src/CurlyTx.py:88
+msgid "Show HTTP response headers"
+msgstr "Afficher la réponse de l'entête HTTP"
+
+#: ../src/CurlyTxSettings.py:70
+msgid "Show in extensions menu"
+msgstr "Afficher dans le menu extensions"
+
+#: ../src/CurlyTxSettings.py:69
+msgid "Show in main menu"
+msgstr "Afficher dans le menu principal"
+
+#: ../src/CurlyTx.py:91
+msgid "Show program settings"
+msgstr "Afficher les paramètres du programme"
+
+#: ../src/CurlyTx.py:109
+msgid "Show this help screen"
+msgstr "Afficher cet écran d'aide"
+
+#: ../src/CurlyTx.py:97
+msgid "Switch to next configured page URL"
+msgstr "Passer à la page URL configurée suivante"
+
+#: ../src/CurlyTx.py:100
+msgid "Switch to previous configured page URL"
+msgstr "Passer à la page URL configurée précédente"
+
+#: ../src/CurlyTxSettings.py:222
+msgid "Title"
+msgstr "Titre"
+
+#: ../src/plugin.py:36 ../src/plugin.py:43
+msgid "View remote text files"
+msgstr "Afficher les fichiers textes distant"

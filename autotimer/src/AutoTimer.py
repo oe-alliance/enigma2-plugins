@@ -5,16 +5,11 @@ from . import _
 
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse
-from os import path as os_path
+from os import path as os_path,rename as os_rename
 from AutoTimerConfiguration import parseConfig, buildConfig
 
 # Tasks
 import Components.Task
-
-# GUI (Screens)
-from Screens.MessageBox import MessageBox
-from Tools.FuzzyDate import FuzzyTime
-from Tools.Notifications import AddPopup
 
 # Navigation (RecordTimer)
 import NavigationInstance
@@ -22,19 +17,19 @@ import NavigationInstance
 # Timer
 from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry
-# from Components.TimerSanityCheck import TimerSanityCheck
+
+# Notifications
+from Tools.Notifications import AddPopup
+from Screens import Standby
+from Screens.MessageBox import MessageBox
 
 # Timespan
-from time import localtime, strftime, time, mktime, sleep
+from time import localtime, strftime, time, mktime, sleep, ctime
 from datetime import timedelta, date
+from Tools.FuzzyDate import FuzzyTime
 
 # EPGCache & Event
 from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
-
-# from twisted.internet import reactor, defer
-# from twisted.python import failure
-# from threading import currentThread
-# import Queue
 
 # AutoTimer Component
 from AutoTimerComponent import preferredAutoTimerComponent
@@ -55,45 +50,48 @@ from . import config, xrange, itervalues
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
+TAG = "AutoTimer"
+
 NOTIFICATIONID = 'AutoTimerNotification'
 CONFLICTNOTIFICATIONID = 'AutoTimerConflictEncounteredNotification'
 SIMILARNOTIFICATIONID = 'AutoTimerSimilarUsedNotification'
 
-def getTimeDiff(timer, begin, end):
-	if begin <= timer.begin <= end:
-		return end - timer.begin
-	elif timer.begin <= begin <= timer.end:
-		return timer.end - begin
-	return 0
-
-# def blockingCallFromMainThread(f, *a, **kw):
-# 	"""
-# 	  Modified version of twisted.internet.threads.blockingCallFromThread
-# 	  which waits 30s for results and otherwise assumes the system to be shut down.
-# 	  This is an ugly workaround for a twisted-internal deadlock.
-# 	  Please keep the look intact in case someone comes up with a way
-# 	  to reliably detect from the outside if twisted is currently shutting
-# 	  down.
-# 	"""
-# 	queue = Queue.Queue()
-# 	def _callFromThread():
-# 		result = defer.maybeDeferred(f, *a, **kw)
-# 		result.addBoth(queue.put)
-# 	reactor.callFromThread(_callFromThread)
-# 
-# 	result = None
-# 	while True:
-# 		try:
-# 			result = queue.get(True, 30)
-# 		except Queue.Empty as qe:
-# 			if True: #not reactor.running: # reactor.running is only False AFTER shutdown, we are during.
-# 				raise ValueError("Reactor no longer active, aborting.")
-# 		else:
-# 			break
-# 
-# 	if isinstance(result, failure.Failure):
-# 		result.raiseException()
-# 	return result
+def timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer=None):
+	#print("rtimer [",rtimer.begin,",",rtimer.end,"] (",rtimer.end-rtimer.begin," s) - evt [",evtBegin,",",evtEnd,"] (",evtEnd-evtBegin," s)")
+	if (timer is not None) and (timer.offset is not None):
+		# remove custom offset from rtimer using timer.offset as RecordTimerEntry doesn't store the offset
+		# ('evtBegin' and 'evtEnd' are also without offset)
+		rtimerBegin = rtimer.begin + timer.offset[0]
+		rtimerEnd   = rtimer.end   - timer.offset[1]
+	else:
+		# remove E2 offset
+		rtimerBegin = rtimer.begin + config.recording.margin_before.value * 60
+		rtimerEnd   = rtimer.end   - config.recording.margin_after.value * 60
+	#print("trimer [",rtimerBegin,",",rtimerEnd,"] (",rtimerEnd-rtimerBegin," s) after removing offsets")
+	if (rtimerBegin <= evtBegin) and (evtEnd <= rtimerEnd):
+		commonTime = evtEnd - evtBegin
+	elif (evtBegin <= rtimerBegin) and (rtimerEnd <= evtEnd):
+		commonTime = rtimerEnd - rtimerBegin
+	elif evtBegin <= rtimerBegin <= evtEnd:
+		commonTime = evtEnd - rtimerBegin
+	elif rtimerBegin <= evtBegin <= rtimerEnd:
+		commonTime = rtimerEnd - evtBegin
+	else:
+		commonTime = 0
+	if evtBegin != evtEnd:
+		commonTime_percent = 100*commonTime/(evtEnd - evtBegin)
+	else:
+		return 0
+	if rtimerEnd != rtimerBegin:
+		durationMatch_percent = 100*(evtEnd - evtBegin)/(rtimerEnd - rtimerBegin)
+	else:
+		return 0
+	#print("commonTime_percent = ",commonTime_percent,", durationMatch_percent = ",durationMatch_percent)
+	if durationMatch_percent < commonTime_percent:
+		#avoid false match for a short event completely inside a very long rtimer's time span 
+		return durationMatch_percent
+	else:
+		return commonTime_percent
 
 typeMap = {
 	"exact": eEPGCache.EXAKT_TITLE_SEARCH,
@@ -106,16 +104,6 @@ caseMap = {
 	"sensitive": eEPGCache.CASE_CHECK,
 	"insensitive": eEPGCache.NO_CASE_CHECK
 }
-
-# class AutoTimerIgnoreTimerException(Exception):
-# 	def __init__(self, cause):
-# 		self.cause = cause
-# 
-# 	def __str__(self):
-# 		return "[AutoTimer] " + str(self.cause)
-# 
-# 	def __repr__(self):
-# 		return str(type(self))
 
 class AutoTimer:
 	"""Read and save xml configuration, query EPGCache"""
@@ -149,9 +137,33 @@ class AutoTimer:
 		self.configMtime = mtime
 
 		# Parse Config
-		file = open(XML_CONFIG, 'r')
-		configuration = cet_parse(file).getroot()
-		file.close()
+		try:
+			configuration = cet_parse(XML_CONFIG).getroot()
+		except:
+			try:
+				if os_path.exists(XML_CONFIG + "_old"):
+					os_rename(XML_CONFIG + "_old", XML_CONFIG + "_old(1)")
+				os_rename(XML_CONFIG, XML_CONFIG + "_old")
+				print("[AutoTimer] autotimer.xml is corrupt rename file to /etc/enigma2/autotimer.xml_old")
+			except:
+				pass
+			if Standby.inStandby is None:
+				AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "), type = MessageBox.TYPE_ERROR, timeout = 0, id = "AutoTimerLoadFailed")
+
+			self.timers = []
+			self.defaultTimer = preferredAutoTimerComponent(
+				0,		# Id
+				"",		# Name
+				"",		# Match
+				True	# Enabled
+			)
+
+			try:
+				self.writeXml()
+				configuration = cet_parse(XML_CONFIG).getroot()
+			except:
+				print("[AutoTimer] fatal error, the autotimer.xml cannot create")
+				return
 
 		# Empty out timers and reset Ids
 		del self.timers[:]
@@ -221,25 +233,19 @@ class AutoTimer:
 		return t.deferred
 
 	# Main function
-	def parseEPG(self, autoPoll = False, simulateOnly = False):
+	def parseEPG(self, autoPoll = False, simulateOnly = False, callback = None):
 		self.autoPoll = autoPoll
 		self.simulateOnly = simulateOnly
-		# if NavigationInstance.instance is None:
-		# 	print("[AutoTimer] Navigation is not available, can't parse EPG")
-		# 	return (0, 0, 0, [], [], [])
 
 		self.new = 0
 		self.modified = 0
-		self.skipped = 0
+		self.skipped = []
+		self.existing = []
 		self.total = 0
 		self.autotimers = []
 		self.conflicting = []
 		self.similars = []
-
-		# if currentThread().getName() == 'MainThread':
-		# 	doBlockingCallFromMainThread = lambda f, *a, **kw: f(*a, **kw)
-		# else:
-		# 	doBlockingCallFromMainThread = blockingCallFromMainThread
+		self.callback = callback
 
 		# NOTE: the config option specifies "the next X days" which means today (== 1) + X
 		delta = timedelta(days = config.plugins.autotimer.maxdaysinfuture.getValue() + 1)
@@ -268,12 +274,6 @@ class AutoTimer:
 		# Iterate Timer
 		Components.Task.job_manager.AddJob(self.createTask())
 
-		# for timer in self.getEnabledTimerList():
-		# 	tup = doBlockingCallFromMainThread(self.parseTimer, timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.timerdict, self.moviedict, self.simulateOnly)
-		# 	new += tup[0]
-		# 	modified += tup[1]
-		# return (len(timers), new, modified, timers, conflicting, similars)
-
 	def createTask(self):
 		self.timer_count = 0
 		self.completed = []
@@ -297,19 +297,17 @@ class AutoTimer:
 	def JobStart(self):
 		for timer in self.getEnabledTimerList():
 			if timer.name not in self.completed:
-				self.parseTimer(timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.timerdict, self.moviedict, self.simulateOnly)
+				self.parseTimer(timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.skipped, self.existing, self.timerdict, self.moviedict, self.simulateOnly)
 				self.new += self.result[0]
 				self.modified += self.result[1]
-				self.skipped += self.result[2]
 				break
 
-	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, timerdict, moviedict, simulateOnly=False):
+	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, skipped, existing, timerdict, moviedict, simulateOnly=False):
 		new = 0
 		modified = 0
-		skipped = 0
 
 		# Precompute timer destination dir
-		dest = timer.destination or config.usage.default_path.getValue()
+		dest = timer.destination or config.usage.default_path.value
 
 		# Workaround to allow search for umlauts if we know the encoding
 		match = timer.match.replace('\xc2\x86', '').replace('\xc2\x87', '')
@@ -321,36 +319,31 @@ class AutoTimer:
 
 		if timer.searchType == "description":
 			epgmatches = []
-			mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
 
 			casesensitive = timer.searchCase == "sensitive"
 			if not casesensitive:
 				match = match.lower()
 
-			# Service filter defined
-			# Search only using the specified services
-			test = [(service, 0, -1, -1) for service in timer.services]
-
-			for bouquet in timer.bouquets:
-				services = serviceHandler.list(eServiceReference(bouquet))
-				if not services is None:
-					while True:
-						service = services.getNext()
-						if not service.valid(): #check end of list
-							break
-						if not (service.flags & mask):
-							test.append( (service.toString(), 0, -1, -1 ) )
-
-			if not test:
-				# No service filter defined
-				# Search within all services - could be very slow
-
-				# Get all bouquets
+			test = []
+			if timer.services:
+				test = [(service, 0, -1, -1) for service in timer.services]
+			elif timer.bouquets:
+				for bouquet in timer.bouquets:
+					services = serviceHandler.list(eServiceReference(bouquet))
+					if services:
+						while True:
+							service = services.getNext()
+							if not service.valid():
+								break
+							playable = not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+							if playable:
+								test.append((service.toString(), 0, -1, -1))
+			else: # Get all bouquets
 				bouquetlist = []
 				refstr = '1:134:1:0:0:0:0:0:0:0:FROM BOUQUET \"bouquets.tv\" ORDER BY bouquet'
 				bouquetroot = eServiceReference(refstr)
 				mask = eServiceReference.isDirectory
-				if config.usage.multibouquet.getValue():
+				if config.usage.multibouquet.value:
 					bouquets = serviceHandler.list(bouquetroot)
 					if bouquets:
 						while True:
@@ -360,26 +353,25 @@ class AutoTimer:
 							if s.flags & mask:
 								info = serviceHandler.info(s)
 								if info:
-									bouquetlist.append((info.getName(s), s))
+									bouquetlist.append(s)
 				else:
 					info = serviceHandler.info(bouquetroot)
 					if info:
-						bouquetlist.append((info.getName(bouquetroot), bouquetroot))
-
-				# Get all services
-				mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
-				for name, bouquet in bouquetlist:
-					if not bouquet.valid(): #check end of list
-						break
+						bouquetlist.append(bouquetroot)
+				if bouquetlist:
+					for bouquet in bouquetlist:
+						if not bouquet.valid():
+							break
 					if bouquet.flags & eServiceReference.isDirectory:
 						services = serviceHandler.list(bouquet)
-						if not services is None:
+						if services:
 							while True:
 								service = services.getNext()
-								if not service.valid(): #check end of list
+								if not service.valid():
 									break
-								if not (service.flags & mask):
-									test.append( (service.toString(), 0, -1, -1 ) )
+									playable = not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+									if playable:
+										test.append((service.toString(), 0, -1, -1))
 
 			if test:
 				# Get all events
@@ -389,9 +381,8 @@ class AutoTimer:
 
 				# Filter events
 				for serviceref, eit, name, begin, duration, shortdesc, extdesc in allevents:
-					if match in (shortdesc if casesensitive else shortdesc.lower()) \
-						or match in (extdesc if casesensitive else extdesc.lower()):
-						epgmatches.append( (serviceref, eit, name, begin, duration, shortdesc, extdesc) )
+					if match in (shortdesc if casesensitive else shortdesc.lower()) or match in (extdesc if casesensitive else extdesc.lower()):
+						epgmatches.append((serviceref, eit, name, begin, duration, shortdesc, extdesc))
 
 		else:
 			# Search EPG, default to empty list
@@ -409,17 +400,19 @@ class AutoTimer:
 
 			eserviceref = eServiceReference(serviceref)
 			evt = epgcache.lookupEventId(eserviceref, eit)
+			evtBegin = begin
+			evtEnd = end = begin + duration
+
 			if not evt:
-				print("[AutoTimer] Could not create Event!")
+				msg="[AutoTimer] Could not create Event!"
+				print(msg)
+				skipped.append((name, begin, end, str(serviceref), timer.name, msg))
 				continue
 			# Try to determine real service (we always choose the last one)
 			n = evt.getNumOfLinkageServices()
 			if n > 0:
 				i = evt.getLinkageService(eserviceref, n-1)
 				serviceref = i.toString()
-
-			evtBegin = begin
-			evtEnd = end = begin + duration
 
 			# If event starts in less than 60 seconds skip it
 			# if begin < time() + 60:
@@ -446,6 +439,9 @@ class AutoTimer:
 				# If maximum days in future is set then check time
 				if checkEvtLimit:
 					if begin > evtLimit:
+						msg="[AutoTimer] Skipping an event because of maximum days in future is reached"
+#						print(msg)
+						skipped.append((name, begin, end, serviceref, timer.name, msg))
 						continue
 
 				dayofweek = str(timestamp.tm_wday)
@@ -458,15 +454,22 @@ class AutoTimer:
 					timer.checkTimespan(timestamp) \
 					or timer.checkTimeframe(begin) \
 				)) or timer.checkFilter(name, shortdesc, extdesc, dayofweek):
+				msg="[AutoTimer] Skipping an event because of filter check"
+#				print(msg)
+				skipped.append((name, begin, end, serviceref, timer.name, msg))
 				continue
 
 			if timer.hasOffset():
 				# Apply custom Offset
 				begin, end = timer.applyOffset(begin, end)
+				offsetBegin = timer.offset[0]
+				offsetEnd   = timer.offset[1]
 			else:
 				# Apply E2 Offset
-				begin -= config.recording.margin_before.getValue() * 60
-				end += config.recording.margin_after.getValue() * 60
+				begin -= config.recording.margin_before.value * 60
+				end += config.recording.margin_after.value * 60
+				offsetBegin = config.recording.margin_before.value * 60
+				offsetEnd   = config.recording.margin_after.value * 60
 
 			# Overwrite endtime if requested
 			if timer.justplay and not timer.setEndtime:
@@ -494,6 +497,9 @@ class AutoTimer:
 						movieExists = True
 						break
 				if movieExists:
+					msg="[AutoTimer] Skipping an event because movie already exists"
+#					print(msg)
+					skipped.append((name, begin, end, serviceref, timer.name, msg))
 					continue
 
 			# Initialize
@@ -504,21 +510,21 @@ class AutoTimer:
 			# We first check eit and if user wants us to guess event based on time
 			# we try this as backup. The allowed diff should be configurable though.
 			for rtimer in timerdict.get(serviceref, ()):
-				if (rtimer.eit == eit or config.plugins.autotimer.try_guessing.getValue()) and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
+				if rtimer.eit == eit or (config.plugins.autotimer.try_guessing.getValue() and timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer) > 80):
 					oldExists = True
-					
+
 					# Abort if we don't want to modify timers or timer is repeated
-					if config.plugins.autotimer.refresh.getValue() == "none" or rtimer.repeated:
-						print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
+					if config.plugins.autotimer.refresh.value == "none" or rtimer.repeated:
+#						print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
 						break
 
 					if eit == preveit:
 						break
 					
-					if (evtBegin - (config.recording.margin_before.getValue() * 60) != rtimer.begin) or (evtEnd + (config.recording.margin_after.getValue() * 60) != rtimer.end) or (shortdesc != rtimer.description):
+					if (evtBegin - offsetBegin != rtimer.begin) or (evtEnd + offsetEnd != rtimer.end) or (shortdesc != rtimer.description):
 						if rtimer.isAutoTimer and eit == rtimer.eit:
 							print ("[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
-							rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
+							# rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 							preveit = eit
 						else:
 							if config.plugins.autotimer.refresh.getValue() != "all":
@@ -528,11 +534,11 @@ class AutoTimer:
 						newEntry = rtimer
 						modified += 1
 						self.modifyTimer(rtimer, name, shortdesc, begin, end, serviceref, eit)
-						rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
+						# rtimer.log(501, "[AutoTimer] AutoTimer modified timer: %s ." % (rtimer.name))
 						break
 					else:
-						print ("[AutoTimer] Skipping timer because it has not changed.")
-						skipped += 1
+#						print("[AutoTimer] Skipping timer because it has not changed.")
+						existing.append((name, begin, end, serviceref, timer.name))
 						break
 				elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled:
 					if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
@@ -551,12 +557,12 @@ class AutoTimer:
 					if not rtimer.disabled:
 						if self.checkDoubleTimers(timer, name, rtimer.name, begin, rtimer.begin, end, rtimer.end ):
 							oldExists = True
-							# print("[AutoTimer] We found a timer with same StartTime, skipping event")
+							print("[AutoTimer] We found a timer with same StartTime, skipping event")
 							break
 						if timer.avoidDuplicateDescription >= 2:
 							if self.checkSimilarity(timer, name, rtimer.name, shortdesc, rtimer.description, extdesc, rtimer.extdesc ):
 								oldExists = True
-								print("[AutoTimer] We found a timer (any service) with same description, skipping event")
+#								print("[AutoTimer] We found a timer (any service) with same description, skipping event")
 								break
 				if oldExists:
 					continue
@@ -567,8 +573,11 @@ class AutoTimer:
 
 				newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
 				newEntry.log(500, "[AutoTimer] Try to add new timer based on AutoTimer %s." % (timer.name))
-
+				newEntry.log(509, "[AutoTimer] Timer start on: %s" % ctime(begin))
+				
 				# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
+				# It is only temporarily, after a restart it will be lost,
+				# because it won't be stored in the timer xml file
 				newEntry.isAutoTimer = True
 
 			# Apply afterEvent
@@ -583,14 +592,19 @@ class AutoTimer:
 			newEntry.justplay = timer.justplay
 			newEntry.vpsplugin_enabled = timer.vps_enabled
 			newEntry.vpsplugin_overwrite = timer.vps_overwrite
+
+			if hasattr(timer, 'always_zap') and hasattr(newEntry, 'always_zap'):
+				newEntry.always_zap = timer.always_zap
 			tags = timer.tags[:]
-			if config.plugins.autotimer.add_autotimer_to_tags.getValue():
-				tags.append('AutoTimer')
-			if config.plugins.autotimer.add_name_to_tags.getValue():
+			if config.plugins.autotimer.add_autotimer_to_tags.value:
+				if TAG not in tags:
+					tags.append(TAG)
+			if config.plugins.autotimer.add_name_to_tags.value:
 				tagname = timer.name.strip()
 				if tagname:
 					tagname = tagname[0].upper() + tagname[1:].replace(" ", "_")
-					tags.append(tagname)
+					if tagname not in tags:
+						tags.append(tagname)
 			newEntry.tags = tags
 
 			if oldExists:
@@ -604,17 +618,39 @@ class AutoTimer:
 				conflictString = ""
 				if similarTimer:
 					conflictString = similardict[eit].conflictString
-					newEntry.log(504, "[AutoTimer] Try to add similar Timer because of conflicts with %s." % (conflictString))
+					msg = "[AutoTimer] Try to add similar Timer because of conflicts with %s." % (conflictString)
+					print(msg)
+					newEntry.log(504, msg)
 
 				# Try to add timer
 				conflicts = recordHandler.record(newEntry)
+
+				if conflicts and not timer.hasOffset() and not config.recording.margin_before.value and not config.recording.margin_after.value and len(conflicts) > 1:
+					change_end = change_begin = False
+					conflict_begin = conflicts[1].begin
+					conflict_end = conflicts[1].end
+					if conflict_begin == newEntry.end:
+						newEntry.end -= 30
+						change_end = True
+					elif newEntry.begin == conflict_end:
+						newEntry.begin += 30
+						change_begin = True
+					if change_end or change_begin:
+						conflicts = recordHandler.record(newEntry)
+						if conflicts:
+							if change_end:
+								newEntry.end += 30
+							elif change_begin:
+								newEntry.begin -= 30
+						else:
+							print ("[AutoTimer] The conflict is resolved by offset time begin/end (30 sec) for %s." % newEntry.name)
 
 				if conflicts:
 					# Maybe use newEntry.log
 					conflictString += ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
 					print("[AutoTimer] conflict with %s detected" % (conflictString))
 
-					if config.plugins.autotimer.addsimilar_on_conflict.getValue():
+					if config.plugins.autotimer.addsimilar_on_conflict.value:
 						# We start our search right after our actual index
 						# Attention we have to use a copy of the list, because we have to append the previous older matches
 						lepgm = len(epgmatches)
@@ -657,51 +693,80 @@ class AutoTimer:
 				elif not similarTimer:
 					conflicting.append((name, begin, end, serviceref, timer.name))
 
-					if config.plugins.autotimer.disabled_on_conflict.getValue():
-						newEntry.log(503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString))
+					if config.plugins.autotimer.disabled_on_conflict.value:
+						msg = "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString)
+						print(msg)
+						newEntry.log(503, msg)
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = recordHandler.record(newEntry)
-		self.result=(new, modified, skipped)
+		self.result=(new, modified)
 		self.completed.append(timer.name)
 		sleep(0.5)
-		# return (new, modified)
 
 	def JobMessage(self):
-		if self.autoPoll:
+		if self.callback is not None:
+			if self.simulateOnly == True:
+				self.callback(self.autotimers, self.skipped)
+			else:
+				total = (self.new+self.modified+len(self.conflicting)+len(self.existing)+len(self.similars))
+				_result = (total, self.new, self.modified, self.autotimers, self.conflicting, self.similars, self.existing, self.skipped)
+				self.callback(_result)
+		elif self.autoPoll:
 			if self.conflicting and config.plugins.autotimer.notifconflict.value:
 				AddPopup(
 					_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(self.conflicting), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.conflicting])),
 					MessageBox.TYPE_INFO,
-					15,
+					config.plugins.autotimer.popup_timeout.value,
 					CONFLICTNOTIFICATIONID
 				)
 			elif self.similars and config.plugins.autotimer.notifsimilar.value:
 				AddPopup(
 					_("%d conflict(s) solved with similar timer(s):\n%s") % (len(self.similars), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.similars])),
 					MessageBox.TYPE_INFO,
-					15,
+					config.plugins.autotimer.popup_timeout.value,
 					SIMILARNOTIFICATIONID
 				)
 		else:
 			AddPopup(
-				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+self.skipped+len(self.similars)), self.new, self.modified, len(self.conflicting), self.skipped, len(self.similars)),
+				_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d unchanged,\n%d similars added.") % ((self.new+self.modified+len(self.conflicting)+len(self.existing)+len(self.similars)), self.new, self.modified, len(self.conflicting), len(self.existing), len(self.similars)),
 				MessageBox.TYPE_INFO,
-				15,
+				config.plugins.autotimer.popup_timeout.value,
 				NOTIFICATIONID
 			)
+
 # Supporting functions
 
 	def populateTimerdict(self, epgcache, recordHandler, timerdict):
+#		remove = []
 		for timer in chain(recordHandler.timer_list, recordHandler.processed_timers):
 			if timer and timer.service_ref:
 				if timer.eit is not None:
 					event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
-					extdesc = event and event.getExtendedDescription() or ''
-					timer.extdesc = extdesc
+					if event:
+						timer.extdesc = event.getExtendedDescription() or ''
+					else:
+						timer.extdesc = ''
+#						remove.append(timer)
 				elif not hasattr(timer, 'extdesc'):
 					timer.extdesc = ''
+#				else:
+#					remove.append(timer)
+#					continue
 				timerdict[str(timer.service_ref)].append(timer)
+
+#		if config.plugins.autotimer.check_eit_and_remove.value:
+#			for timer in remove:
+#				if "autotimer" in timer.flags:
+#					try:
+#						# Because of the duplicate check, we only want to remove future timer
+#						if timer in recordHandler.timer_list:
+#							if not timer.isRunning():
+#								recordHandler.removeEntry(timer)
+#								print("[AutoTimer] Remove timer because of eit check %s." % (timer.name))
+#					except:
+#						pass
+#		del remove
 
 	def modifyTimer(self, timer, name, shortdesc, begin, end, serviceref, eit):
 		# Don't update the name, it will overwrite the name of the SeriesPlugin
@@ -739,22 +804,26 @@ class AutoTimer:
 	def checkSimilarity(self, timer, name1, name2, shortdesc1, shortdesc2, extdesc1, extdesc2, force=False):
 		foundTitle = False
 		foundShort = False
-		foundExt = False
+		retValue = False
 		if name1 and name2:
 			foundTitle = ( 0.8 < SequenceMatcher(lambda x: x == " ",name1, name2).ratio() )
 		# NOTE: only check extended & short if tile is a partial match
 		if foundTitle:
 			if timer.searchForDuplicateDescription > 0 or force:
-				if extdesc1 and extdesc2:
-					# Some channels indicate replays in the extended descriptions
-					# If the similarity percent is higher then 0.7 it is a very close match
-					foundExt = ( 0.7 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
-
-				if not foundExt and shortdesc1 and shortdesc2:
-					# some channels do not use extended description, so try to find a close match to short description.
+				if shortdesc1 and shortdesc2:
 					# If the similarity percent is higher then 0.7 it is a very close match
 					foundShort = ( 0.7 < SequenceMatcher(lambda x: x == " ",shortdesc1, shortdesc2).ratio() )
-		return foundShort or foundExt
+					if foundShort:
+						if timer.searchForDuplicateDescription == 3:
+							if extdesc1 and extdesc2:
+								# Some channels indicate replays in the extended descriptions
+								# If the similarity percent is higher then 0.7 it is a very close match
+								retValue = ( 0.7 < SequenceMatcher(lambda x: x == " ",extdesc1, extdesc2).ratio() )
+						else:
+							retValue = True
+			else:
+				retValue = True
+		return retValue
 
 	def checkDoubleTimers(self, timer, name1, name2, starttime1, starttime2, endtime1, endtime2):
 		foundTitle = name1 == name2

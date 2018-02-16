@@ -3,7 +3,7 @@ from EPGRefresh import epgrefresh
 from EPGRefreshService import EPGRefreshService
 from enigma import eServiceReference
 from Components.config import config
-from Components.SystemInfo import SystemInfo
+from Components.NimManager import nimmanager
 from time import localtime
 from OrderedSet import OrderedSet
 from ServiceReference import ServiceReference
@@ -15,7 +15,7 @@ except ImportError as ie:
 	from urllib.parse import unquote
 	iteritems = lambda d: d.items()
 
-API_VERSION = "1.2"
+API_VERSION = "1.4"
 
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
@@ -226,11 +226,18 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 			elif key == "wakeup":
 				config.plugins.epgrefresh.wakeup.value = True if value == "true" else False
 			elif key == "parse_autotimer":
-				if value in epgrefresh.parse_autotimer.choices:
+				if value in config.plugins.epgrefresh.parse_autotimer.choices:
 					config.plugins.epgrefresh.parse_autotimer.value = value
+				elif value == "true":
+					config.plugins.epgrefresh.parse_autotimer.value = "always"
+				else:
+					config.plugins.epgrefresh.parse_autotimer.value = "never"
 			elif key == "adapter":
 				if value in config.plugins.epgrefresh.adapter.choices:
 					config.plugins.epgrefresh.adapter.value = value
+			elif key == "skipProtectedServices":
+				if value in config.plugins.epgrefresh.skipProtectedServices.choices:
+					config.plugins.epgrefresh.skipProtectedServices.value = value
 
 		config.plugins.epgrefresh.save()
 
@@ -268,7 +275,7 @@ class EPGRefreshSettingsResource(resource.Resource):
 			0, now.tm_wday, now.tm_yday, now.tm_isdst)
 		)
 
-		canDoBackgroundRefresh = SystemInfo.get("NumVideoDecoders", 1) > 1
+		canDoBackgroundRefresh = len(nimmanager.nim_slots) > 1
 		hasAutoTimer = False
 		try:
 			from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
@@ -330,6 +337,10 @@ class EPGRefreshSettingsResource(resource.Resource):
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
  <e2setting>
+  <e2settingname>config.plugins.epgrefresh.skipProtectedServices</e2settingname>
+  <e2settingvalue>%s</e2settingvalue>
+ </e2setting>
+ <e2setting>
   <e2settingname>canDoBackgroundRefresh</e2settingname>
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
@@ -355,6 +366,7 @@ class EPGRefreshSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.parse_autotimer.value,
 				config.plugins.epgrefresh.lastscan.value,
 				config.plugins.epgrefresh.adapter.value,
+				config.plugins.epgrefresh.skipProtectedServices.value,
 				canDoBackgroundRefresh,
 				hasAutoTimer,
 				API_VERSION,

@@ -1,0 +1,9 @@
+<e2:screen external_module="Plugins.Extensions.AutoTimer.WebScreens.AutoTimerEditorWebScreens" name="AutoTimerEditorWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:element source="Restore" id="Filename">
+	<e2:convert type="web:Null" />
+</e2:element>
+<e2simplexmlresult>
+	<e2state><e2:element source="Restore"><e2:convert type="SimpleResult">Result</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2state>
+	<e2statetext><e2:element source="Restore"><e2:convert type="SimpleResult">ResultText</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2statetext>
+</e2simplexmlresult>
+</e2:screen>

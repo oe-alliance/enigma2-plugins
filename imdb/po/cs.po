@@ -32,7 +32,7 @@ msgstr ""
 msgid "Channel Selection"
 msgstr "Výběr stanice"
 
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "Nelze načíst název události"
 
 msgid "Details"
@@ -85,7 +85,7 @@ msgstr "IMDb dotaz selhal!"
 msgid "Lookup"
 msgstr "Vyhledat"
 
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr "IMDb-Žádná shoda"
 
 msgid "No cast list found in the database."

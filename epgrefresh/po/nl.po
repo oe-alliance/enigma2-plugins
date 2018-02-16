@@ -2,24 +2,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-08 13:56+0100\n"
-"PO-Revision-Date: 2014-05-12 12:24+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2017-11-09 23:22+0000\n"
+"PO-Revision-Date: 2017-11-10 14:46+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
-"Language: \n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #, python-format
 msgid "%d more services"
 msgstr "%d meer kanalen"
 
 msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"
-msgstr ""
+msgstr "Als dit is ingeschakeld zal AutoTimer na een succesvolle refresh naar overeenkomsten zoeken. De opties 'Vraag*' heeft alleen effect op een handmatig uitgevoerde refresh. Als EPG-Refresh op de achtergrond werd uitgevoerd, zal het standaard antwoord worden uitgevoerd!"
 
 msgid "An automated refresh will start after this time of day, but before the time specified in next setting."
 msgstr "Automatische refresh zal starten na de ingestelde tijd, maar voor de tijd die in de volgende instelling staat."
@@ -71,48 +69,59 @@ msgid "Duration to stay on service (seconds)"
 msgstr "Hoe lang op een kanaal afstemmen (seconden)?"
 
 msgid "EPG refresh auto-start earliest (hh:mm)"
-msgstr "Vroegste EPG refresh auto-start (hh:mm)"
+msgstr "Vroegste EPG-refresh auto-start (hh:mm)"
 
 msgid "EPG refresh auto-start latest (hh:mm)"
-msgstr "Laatste EPG refresh auto-start (hh:mm)"
+msgstr "Laatste EPG-refresh auto-start (hh:mm)"
 
 msgid "EPG refresh finished."
-msgstr "EPG refresh gereed."
+msgstr "EPG-refresh gereed."
 
 msgid ""
 "EPG refresh finished.\n"
 "Should AutoTimer be search for new matches?"
 msgstr ""
+"EPG-refresh is gereed.\n"
+"Moet AutoTimer naar nieuwe overeenkomsten zoeken?"
 
 msgid "EPG refresh started in background."
-msgstr "EPG refresh loopt op de achtergrond."
+msgstr "EPG-refresh loopt op de achtergrond."
 
 msgid "EPG refresh starts scanning channels."
-msgstr "EPG refresh start het scannen van kanalen."
+msgstr "EPG-refresh start het scannen van kanalen."
+
+msgid "EPG-Refresh_Pending Services"
+msgstr "EPG-Refresh_Afhankelijke kanalen"
+
+msgid "EPG-Refresh_Refresh now"
+msgstr "EPG-Refresh_Refresh nu"
+
+msgid "EPG-Refresh_SetUp"
+msgstr "EPG-Refresh-Instellingen"
+
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "EPG-Refresh_Stop Refresh"
 
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
-msgstr ""
+msgstr "EPGREFRESH_NOTIFICATIE_DOMEIN"
+
+msgid "EPGRefresh"
+msgstr "EPG-refresh"
 
 msgid "EPGRefresh Configuration"
-msgstr "EPGRefresh configuratie"
+msgstr "EPG-refresh configuratie"
 
 msgid "EPGRefresh Configuration Help"
-msgstr ""
+msgstr "EPG-refresh configuratie Help"
 
 msgid "EPGRefresh Functions"
 msgstr "Functies EPG verversen"
 
 msgid "EPGRefresh Help"
-msgstr "EPGRefresh Help"
+msgstr "EPG-refresh Help"
 
 msgid "EPGRefresh Services"
-msgstr "EPGRefresh Services"
-
-msgid "EXTENSIONMENU_PREFIX"
-msgstr ""
-
-msgid "EXTENSIONNAME_SETUP"
-msgstr ""
+msgstr "EPG-refresh kanalen"
 
 msgid "Edit Services"
 msgstr "Zenders bewerken"
@@ -127,10 +136,10 @@ msgid "Editing the service list"
 msgstr "Bewerk de service lijst"
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
-msgstr "Toon EPG Refresh instellingsmenu in het extensie menu."
+msgstr "Toon EPG-refresh instellingsmenu in het extensiemenu."
 
 msgid "Enable this to be able to start the EPGRefresh from within the extension menu."
-msgstr ""
+msgstr "Schakel dit in om EPG-refresh vanuit het extensiemenu te kunnen starten."
 
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Breidt de lijst met kanalen uit met die kanalen die AutoTimers gebruikt?"
@@ -139,22 +148,13 @@ msgid "Fake recording"
 msgstr "Nep opname"
 
 msgid "Following Services have to be scanned:"
-msgstr ""
+msgstr "De volgende kanalen moeten worden gescand:"
 
 msgid "Force scan even if receiver is in use"
 msgstr "Zoeken wanneer de ontvanger in gebruik is"
 
 msgid "Foreground also"
 msgstr "Ook op voorgrond"
-
-#, python-format
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d similars added."
-msgstr ""
 
 msgid "Functions"
 msgstr "Functies"
@@ -163,10 +163,10 @@ msgid "General Help"
 msgstr "Algemene help"
 
 msgid "If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."
-msgstr "Als de ontvanger momenteel niet in standby is, is dit de tijd die EPG Refresh zal wachten alvorens het weer te proberen."
+msgstr "Als de ontvanger momenteel niet in standby is, is dit de tijd die EPG-refresh zal wachten alvorens het weer te proberen."
 
 msgid "If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."
-msgstr ""
+msgstr "Als dit is ingeschakeld, zal de plugin de ontvanger indien mogelijk uit standby halen. Anders moet deze al zijn ingeschakeld."
 
 msgid "If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."
 msgstr "Als u de de EPG op de achtergrond wilt laten lopen, kunt u de gewenste modus hier aangeven (zoals verborgen, nep-opname of de reguliere PiP)."
@@ -199,11 +199,8 @@ msgstr "Nee"
 msgid "OK"
 msgstr "Ok"
 
-msgid "PLUGINNAME_EPGRefresh"
-msgstr ""
-
 msgid "Pending Services"
-msgstr ""
+msgstr "Nog niet afgewerkte kanalen."
 
 msgid "PiP available now."
 msgstr "PiP is nu beschikbaar."
@@ -224,7 +221,7 @@ msgid "Refresh EPG automatically"
 msgstr "Ververs EPG automatisch"
 
 msgid "Refresh EPG using"
-msgstr "Maak voor EPG- Refresh gebruik van"
+msgstr "Maak voor EPG-refresh gebruik van"
 
 msgid "Refresh now"
 msgstr "Nu vernieuwen"
@@ -242,10 +239,10 @@ msgid "Select channel to refresh"
 msgstr "Kies zender om te vernieuwen"
 
 msgid "Should protected services be skipped if refresh was started in interactive-mode?"
-msgstr ""
+msgstr "Moeten met kinderslot beschermde kanalen overgeslageb worden als de interactieve modus gebruikt wordt?"
 
 msgid "Show 'EPGRefresh Start now' in extension menu"
-msgstr ""
+msgstr "Toon 'EPG-refresh nu starten' in het extensiemenu."
 
 msgid "Show Advanced Options"
 msgstr "Toon geavanceerde opties"
@@ -263,19 +260,16 @@ msgid "Show popup when refresh starts and ends"
 msgstr "Toon popup als refresh begint en eindigt"
 
 msgid "Show the pending Services for refresh"
-msgstr ""
+msgstr "Toon de nog niet afgewerkte kanalen."
 
 msgid "Shutdown after EPG refresh"
-msgstr "Ontvanger uitschakelen na EPG refresh"
+msgstr "Ontvanger uitschakelen na EPG-refresh"
 
 msgid "Skip protected Services"
-msgstr ""
+msgstr "Sla met kinderslot beschermde kanalen over"
 
 msgid "Start EPGrefresh immediately"
 msgstr "Start EPG verversen nu"
-
-msgid "Stop Refresh"
-msgstr "Stop verversen"
 
 msgid "Stop Running EPG-refresh"
 msgstr "Stop EPG verversen"
@@ -287,7 +281,7 @@ msgid "The configuration menu"
 msgstr "Het instellingen menu"
 
 msgid "There is still a refresh running. The Operation isn't allowed at this moment."
-msgstr ""
+msgstr "Deze handeling kan op dit moment niet worden uitgevoerd omdat er nog een refresh loopt."
 
 msgid ""
 "This help screen is supposed to give you a quick look at everything EPGRefresh has to offer.\n"
@@ -296,7 +290,7 @@ msgid ""
 "\n"
 "But you really should consider to take the few minutes it takes to read these help pages."
 msgstr ""
-"Dit help-scherm geeft u een snel overzicht over alles dat EPG Refresh u te bieden heeft.\n"
+"Dit help-scherm geeft u een snel overzicht over alles dat EPG-refresh u te bieden heeft.\n"
 "U kunt te allen tijde afbreken met de rode- of exit-toets, of in een later stadium via de help-toets in het instellingen menu (waarover later meer).\n"
 "\n"
 "\n"
@@ -309,9 +303,14 @@ msgid ""
 "This is the entry point of EPGRefresh. From this menu you can configure every aspect of the plugin.\n"
 "The configuration options each have an explaination which is supposed to help you to understand their effects better. Please give reading them a try, they can save you a lot of time.\n"
 "\n"
-"Using the YELLOW button you can start a refresh manually or load a EPG-Backup if the Backup is enabled. You also be able to enable the functionalities in the Extensionmenu. The INFO button brings up the date the last refresh was completed successfully. You will also find an Extensionmenu-Entry to stop a running Refresh.\n"
+"Using the YELLOW button you can start a refresh manually. You also be able to enable the functionalities in the Extensionmenu. The INFO button brings up the date the last refresh was completed successfully. You will also find an Extensionmenu-Entry to stop a running Refresh.\n"
 "The BLUE key opens the service editor (next page)."
 msgstr ""
+"Dit is het beginpunt van EPG-refresh. Vanuit dir menu kunt u alle functionaliteit van de plugin instellen.\n"
+"De configuratieopties hebben elk hun eigen uitleg om u te helpen deze te begrijpen. Leest u deze, want dat kan veel tijd en ergernis schelen.\n"
+"\n"
+"Gebruik de gele toets om rehresh handmatig te starten. U kunt dit ook doen vanuit het extensiemenu. De INFO-toets toont de datum van de laatste succesvolle uitvoering. U heeft ook een toets in het extensiemenu om een lopende refresh te beeindigen.\n"
+"De blauwe toets opent de kanaleneditor (volgende pagina)."
 
 msgid "This setting controls whether or not an informational message will be shown at start and completion of refresh."
 msgstr "Deze instelling bepaalt of er een melding wordt vertoond by het begin en het einde van een refresh."
@@ -320,7 +319,7 @@ msgid "This setting controls whether or not the refresh will be initiated even t
 msgstr "Deze instelling bepaalt of de refresh zal worden geinitieerd zelfs als de ontvanger actief is (dus niet in standby en niet aan het opnemen)."
 
 msgid "This setting controls whether the receiver should be set to standby after refresh is completed."
-msgstr ""
+msgstr "Deze instelling bepaalt of de ontvanger in standby zal gaan als de refresh gereed is."
 
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
@@ -330,16 +329,16 @@ msgstr ""
 "Wilt u nu herstarten?"
 
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
-msgstr "Tenzij dit is ingeschakeld, zal EPG Refresh niet automatisch starten, maar moet met de hand via de gele toets in dit nemu worden gestart."
+msgstr "Tenzij dit is ingeschakeld, zal EPG-refresh niet automatisch starten, maar moet met de hand via de gele toets in dit nemu worden gestart."
 
 msgid "Version"
 msgstr "Versie"
 
 msgid "Wake up from standby for EPG refresh"
-msgstr "Voer EOG-verversing ook uit indien in standby"
+msgstr "Voer EPG-verversing ook uit indien in standby"
 
 msgid "Welcome to EPGRefresh"
-msgstr "Welkom bij EPGRefresh"
+msgstr "Welkom bij EPG-refresh"
 
 msgid ""
 "While the screen does not immediately show it, it does have a lot to offer. The topmost line allows you to choose between the editor for channels and bouquets and the following lines contain the channels/bouquets you chose to refresh.\n"
@@ -365,13 +364,13 @@ msgid ""
 "As a final note I want to hint you at the fact that this plugin will not do anything on its own without YOU telling it to. So if you want the refresh to happen automatically in the background you need to configure the plugin to do so.\n"
 "This was not done to cause you any inconvenience but rather to give you the freedom of choice."
 msgstr ""
-"U kent nu de basis van EPGRefresh.\n"
+"U kent nu de basis van EPG-refresh.\n"
 "\n"
 "Als laatste wil ik u erop wijzen dat deze plugin niets doet zonder dat u daar opdracht voor geeft. Dus als u wilt dat de plugin op de achtergrond data binnenhaalt, moet u dat zo instellen.\n"
 "Dit is niet gedaan om u het leven moeilijk te maken, maar juist om u alle vrijheid te geven."
 
 msgid "add to EPGRefresh"
-msgstr "toevoegen aan EPGRefresh"
+msgstr "toevoegen aan EPG-refresh"
 
 msgid "delete"
 msgstr "Verwijderen"
@@ -385,11 +384,20 @@ msgstr "nooit"
 #~ msgid "EPG refresh finished. PiP available now."
 #~ msgstr "EPG refresh gereed. PiP is nu weer beschikbaar."
 
+#~ msgid "EXTENSIONMENU_PREFIX"
+#~ msgstr "EXTENSIONMENU_PREFIX"
+
+#~ msgid "EXTENSIONNAME_SETUP"
+#~ msgstr "EXTENSIONNAME_SETUP"
+
 #~ msgid "If this is enabled, the plugin will wake up the receiver from deep standby if possible. Otherwise it needs to be switched on already."
 #~ msgstr "Als dit is ingeschakeld, zal de plugin de ontvanger uit deep sleep halen. Anders moet de ontvanger al ingeschakeld zijn."
 
 #~ msgid "Show in extension menu"
 #~ msgstr "Toon in extensie menu"
+
+#~ msgid "Stop Refresh"
+#~ msgstr "Stop verversen"
 
 #~ msgid ""
 #~ "This is the entry point of EPGRefresh. From this menu you can configure every aspect of the plugin and start a manual refresh of the EPG.\n"

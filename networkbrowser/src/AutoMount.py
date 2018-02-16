@@ -237,22 +237,23 @@ class AutoMount():
 					if 'wsize' not in options:
 						options += ',wsize=8192'
 					if 'tcp' not in options and 'udp' not in options:
-						options += ',tcp'
-					options = options + ',timeo=14,fg,soft,intr'
+						options += ',proto=tcp'
+					options = options + ',timeo=14,soft'
 		elif autofs:
 			if not options:
 				options = 'rw'
 				if not cifs:
-					options += ',rsize=8192,wsize=8192'
+					options += ',nfsvers=3,rsize=8192,wsize=8192'
 			else:
 				if not cifs:
+					options += ',nfsvers=3'
 					if 'rsize' not in options:
 						options += ',rsize=8192'
 					if 'wsize' not in options:
 						options += ',wsize=8192'
 					if 'tcp' not in options and 'udp' not in options:
-						options += ',tcp'
-					options = options + ',soft'
+						options += ',proto=tcp'
+					options = options + ',timeo=14,soft'
 		else:
 			if not options:
 				options = 'rw,rsize=8192,wsize=8192'
@@ -265,7 +266,7 @@ class AutoMount():
 					if 'wsize' not in options:
 						options += ',wsize=8192'
 					if 'tcp' not in options and 'udp' not in options:
-						options += ',tcp'
+						options += ',proto=tcp'
 		return options
 
 	def CheckMountPoint(self, item, callback, restart):
@@ -408,23 +409,26 @@ class AutoMount():
 			f.close()
 			os.rename(filename + '.tmp', filename)
 		
+	def escape(self, data):
+		return data.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace("'", '&#39;')
+
 	def generateMountXML(self, sharedata):
 		res = []
-		mounttype = sharedata['mounttype']
-		mountusing = sharedata['mountusing']
+		mounttype = self.escape(sharedata['mounttype'])
+		mountusing = self.escape(sharedata['mountusing'])
 		if mountusing != 'old_enigma2':
 			res.append('<' + mountusing + '>\n')
 		res.append(' <' + mounttype + '>\n')
 		res.append('  <mount>\n')
-		res.append('   <active>' + str(sharedata['active']) + '</active>\n')
-		res.append('   <hdd_replacement>' + str(sharedata['hdd_replacement']) + '</hdd_replacement>\n')
-		res.append('   <ip>' + sharedata['ip'] + '</ip>\n')
-		res.append('   <sharename>' + sharedata['sharename'] + '</sharename>\n')
-		res.append('   <sharedir>' + sharedata['sharedir'] + '</sharedir>\n')
-		res.append('   <options>' + sharedata['options'] + '</options>\n')
+		res.append('   <active>' + self.escape(str(sharedata['active'])) + '</active>\n')
+		res.append('   <hdd_replacement>' + self.escape(str(sharedata['hdd_replacement'])) + '</hdd_replacement>\n')
+		res.append('   <ip>' + self.escape(sharedata['ip']) + '</ip>\n')
+		res.append('   <sharename>' + self.escape(sharedata['sharename']) + '</sharename>\n')
+		res.append('   <sharedir>' + self.escape(sharedata['sharedir']) + '</sharedir>\n')
+		res.append('   <options>' + self.escape(sharedata['options']) + '</options>\n')
 		if mounttype == 'cifs':
-			res.append("   <username>" + sharedata['username'] + "</username>\n")
-			res.append("   <password>" + sharedata['password'] + "</password>\n")
+			res.append("   <username>" + self.escape(sharedata['username']) + "</username>\n")
+			res.append("   <password>" + self.escape(sharedata['password']) + "</password>\n")
 		res.append('  </mount>\n')
 		res.append(' </' + mounttype + '>\n')
 		if mountusing != 'old_enigma2':
@@ -463,7 +467,10 @@ class AutoMount():
 					if mounttype == 'nfs':
 						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',' + self.sanitizeOptions(sharedata['options'], autofs=True) + ' ' + sharedata['ip'] + ':/' + sharedata['sharedir'] + '\n'
 					elif sharedata['mounttype'] == 'cifs':
-						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',user=' + sharedata['username'] + ',pass=' + sharedata['password'] +','+ self.sanitizeOptions(sharedata['options'], cifs=True, autofs=True) + ' ://' + sharedata['ip'] + '/' + sharedata['sharedir'] + '\n'
+						tmpusername = sharedata['username'].replace(" ", "\ ")
+						tmppassword = sharedata['password'].replace(" ", "\ ")
+						tmpaddress = sharedata['ip']
+						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',user=' + tmpusername + ',pass=' + tmppassword +','+ self.sanitizeOptions(sharedata['options'], cifs=True, autofs=True) + ' ://' + tmpaddress + '/' + sharedata['sharedir'] + '\n'
 					out.write(line)
 					out.close()
 			elif mountusing == 'fstab':

@@ -1,0 +1,15 @@
+<default>
+	<prerequisites>
+		<tag type="EPG" />
+	</prerequisites>
+	<info>
+		<author>joe128</author>
+		<name>EPGBackup</name>
+		<packagename>enigma2-plugin-extensions-epgbackup</packagename>
+		<shortdescription>Backup and restore EPG-Data</shortdescription>
+		<description>EPG-Data will be backuped periodically and after epg-refresh</description>
+	</info>
+	<files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-epgbackup" />
+	</files>
+</default>

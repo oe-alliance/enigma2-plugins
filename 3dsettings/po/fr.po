@@ -1,0 +1,95 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 3DSettings\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-01 23:19+CEST\n"
+"PO-Revision-Date: 2014-10-28 13:01+0100\n"
+"Last-Translator: OEA\n"
+"Language-Team: french\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+#: plugin.py:76
+msgid "off"
+msgstr "Arrêt"
+
+#: plugin.py:76
+msgid "on with side by side"
+msgstr "activé en côte à côte"
+
+#: plugin.py:76
+msgid "on with top/bottom"
+msgstr "activé en haut/bas"
+
+#: plugin.py:172
+msgid "Cancel"
+msgstr "Annuler"
+
+#: plugin.py:173
+msgid "OK"
+msgstr "OK"
+
+#: plugin.py:196
+msgid "Side by side"
+msgstr "Côte à côte"
+
+#: plugin.py:197
+msgid "Top/Bottom"
+msgstr "Haut/Bas"
+
+#: plugin.py:199 plugin.py:202
+msgid "2D mode"
+msgstr "Mode 2D"
+
+#: plugin.py:207
+msgid "Show side by side option in extension menu"
+msgstr "Afficher l'option côté à côte dans le menu des extensions"
+
+#: plugin.py:208
+msgid "Show top/bottom option in extension menu"
+msgstr "Afficher l'option haut/bas dans le menu des extensions"
+
+#: plugin.py:209
+msgid "Switch OSD automatically"
+msgstr "Basculer OSD automatiquement"
+
+#: plugin.py:211
+msgid "Turn off display"
+msgstr "Éteindre l'écran"
+
+#: plugin.py:214
+msgid "Offset"
+msgstr "Compensation"
+
+#: plugin.py:252 plugin.py:266
+msgid "3D settings"
+msgstr "Paramètres 3D"
+
+#: plugin.py:260
+msgid "3D: Enable side by side menu"
+msgstr "3D: Activé le menu côte à côte"
+
+#: plugin.py:262
+msgid "3D: Enable top/bottom menu"
+msgstr "3D: Activé le menu Haut/Bas"
+
+#: plugin.py:264
+msgid "3D: 2D menu"
+msgstr "3D: Menu 2D"
+
+#: plugin.py:264
+msgid "3D: disable 3D menu"
+msgstr "3D: Désactiver le menu 3D"
+
+#: plugin.py:266
+msgid "Change 3D settings"
+msgstr "Changer les paramètres 3D"

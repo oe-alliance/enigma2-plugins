@@ -68,7 +68,19 @@ class myHTTPClientFactory(HTTPClientFactory):
 		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies,followRedirect=followRedirect)
 def sendUrlCommand(url, contextFactory=None, timeout=50, *args, **kwargs):
-	scheme, host, port, path = client._parse(url)
+	if hasattr(client, '_parse'):
+		scheme, host, port, path = client._parse(url)
+	else:
+		# _URI class renamed to URI in 15.0.0
+		try:
+			from twisted.web.client import _URI as URI
+		except ImportError:
+			from twisted.web.client import URI
+		uri = URI.fromBytes(url)
+		scheme = uri.scheme
+		host = uri.host
+		port = uri.port
+		path = uri.path
 	factory = myHTTPClientFactory(url, *args, **kwargs)
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred

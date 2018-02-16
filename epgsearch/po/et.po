@@ -7,34 +7,52 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-12 21:43+0200\n"
-"PO-Revision-Date: 2013-08-13 19:01+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2016-10-03 10:44+0300\n"
+"PO-Revision-Date: 2016-10-05 14:50+0300\n"
+"Last-Translator: rimas\n"
 "Language-Team: \n"
 "Language: et_EE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.9\n"
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
+msgid "%ssearch EPG"
+msgstr "%sEPG otsing"
+
+#. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
+msgid "%ssearch EPG from history..."
+msgstr "%sEPG ajaloo otsing"
 
 msgid "Add AutoTimer"
 msgstr "Lisa autotaimer"
 
-msgid "Add a auto timer for current event"
-msgstr "Lisa käesolevale saatele autotaimer"
-
-msgid "Add a record timer for current event"
-msgstr "Lisa käesolevale saatele salvestustaimer"
-
-msgid "Add a zap timer for current event"
-msgstr "Lisa käesolevale saatele kanalivahetustaimer"
-
 msgid "Add Timer"
 msgstr "Lisa taimer"
 
-msgid "Add/Remove timer for current event"
-msgstr "Lisa või eemalda taimer käesolevale saatele"
+msgid "Add a record timer for highlighted event"
+msgstr "Lisa valitud saatele salvestustaimer"
+
+msgid "Add a zap timer for highlighted event"
+msgstr "Lisa valitud saatele kanalivahetustaimer"
+
+msgid "Add an AutoTimer for highlighted event"
+msgstr "Lisa valitud saatele autotaimer"
+
+msgid "Add/remove/edit timer for highlighted event"
+msgstr "Lisa/eemalda/muuda taimer valitud saatele"
+
+msgid "All bouquets"
+msgstr "Kõik lemmiknimekirjad"
+
+msgid "All services"
+msgstr "Kõik kanalid"
 
 msgid "Cancel"
 msgstr "Tühista"
@@ -42,51 +60,72 @@ msgstr "Tühista"
 msgid "Channel Selection"
 msgstr "Kanalite valik"
 
-msgid "Choose the encode type for search, helpful for foreign languages."
-msgstr "Vali otsinguks kooditabel."
+msgid "Choose the encoding type for searches, helpful for foreign languages."
+msgstr "Määra otsingu tähemärgistik. Kasulik täpitähtede kasutamisel."
 
 msgid "Close dialog"
 msgstr "Sulge aken"
+
+msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr "Määra otsingu ulatus. Määrates 'Kõik lemmiknimekirjad', otsitakse lemmiknimekirjadest isegi siis, kui lemmiknimekirjade kasutamine on E2 seadistustes keelatud."
 
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Autotaimeri nimekirja lugemine nurjus: %s"
 
+msgid "Current bouquet"
+msgstr "Aktiivne lemmiknimekiri"
+
+msgid "Current service"
+msgstr "Aktiivne kanal"
+
+msgid "DVB-C"
+msgstr "DVB-C"
+
+msgid "DVB-C Cable services"
+msgstr "Kaabel TV kanalid"
+
+msgid "DVB-T"
+msgstr "DVB-T"
+
+msgid "DVB-T Terrestrial services"
+msgstr "Maapealse TV kanalid"
+
+msgid "Default scope when asked"
+msgstr "Vaikimisi ulatus küsimisel"
+
 msgid "EPG Search"
+msgstr "EPG otsing"
+
+msgid "EPG Search setup"
 msgstr "EPG otsing"
 
 msgid "EPGSearch"
 msgstr "EPG otsing"
 
 msgid "EPGSearch Setup"
-msgstr "EPGSearch seadistused"
+msgstr "EPG otsingu seadistused"
 
-msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
-msgstr "Luba see, et pääseda EPG otsingusse laienduste nimekirjas."
+msgid "Enable this to allow access to EPG Search from within the plugin browser."
+msgstr "Kui lubatud, kuvatakse EPG otsing pluginate menüüs."
+
+msgid "Enter new search"
+msgstr "Sisesta uus otsisõna"
 
 msgid "Enter text to search for"
 msgstr "Sisesta tekst otsinguks:"
 
-msgid "Exit EPG"
-msgstr "Sulge EPG"
+msgid "Exclude results from"
+msgstr "Eira vasteid"
 
-msgid "Goto next bouquet"
-msgstr "Järgmine lemmiknimekiri"
+msgid "Exit EPG Search"
+msgstr "Välju"
 
-msgid "Goto next channel"
-msgstr "Järgmine kanal"
+msgid "Filter results by source"
+msgstr "Vastete filtrid allika järgi"
 
-msgid "Goto previous bouquet"
-msgstr "Eelmine lemmiknimekiri"
-
-msgid "Goto previous channel"
-msgstr "Eelmine kanal"
-
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-msgstr "Suurim kirjete arv otsinguajaloos. 0 keelab ajaloo täielikult"
-
-msgid "IMDB search for current event"
-msgstr "IMDB otsing käesolevale saatele"
+msgid "IMDB search for highlighted event"
+msgstr "IMDB otsing valitud saatele"
 
 msgid "IMDb Search"
 msgstr "IMDb otsing"
@@ -100,11 +139,35 @@ msgstr "Impordi EPG-st"
 msgid "Import from Timer"
 msgstr "Impordi taimerist"
 
-msgid "Length of History"
-msgstr "Varasemate otsingute kestus"
+msgid "Include or exclude results depending on their source (e.g. by satellite)"
+msgstr "Hõlma või eira vasteid vastavalt nende allikale (nt. satelliidi järgi)"
+
+msgid "Include results from"
+msgstr "Hõlma vasteid"
+
+msgid "Include/exclude search results from this type of source"
+msgstr "Hõlma/eira vasteid seda tüüpi allikalt"
+
+msgid "Include/exclude sources"
+msgstr "Hõlma/eira allikaid"
+
+msgid "Is the search case-sensitive or case-insensitive"
+msgstr "Tõusutundlik või tõusutundetu otsing"
+
+msgid "Length of history"
+msgstr "Ajaloo pikkus"
+
+msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
+msgstr "Otsiajaloo kirjete suurim arv. Määrates '0' otsiajalugu keelatakse"
+
+msgid "Move down"
+msgstr "Liigu alla"
 
 msgid "Move down a page"
 msgstr "Liigu alla"
+
+msgid "Move up"
+msgstr "Liigu üles"
 
 msgid "Move up a page"
 msgstr "Liigu üles"
@@ -114,6 +177,12 @@ msgstr "Uus otsing"
 
 msgid "No history"
 msgstr "Ilma ajaloota"
+
+msgid "Number of filters for inclusion/exclusion of results"
+msgstr "Vastete hõlmamise/eiramise filtrite arv"
+
+msgid "Number of inclusions/exclusions"
+msgstr "Hõlmatute/eiratute arv"
 
 msgid "OK"
 msgstr "OK"
@@ -130,11 +199,23 @@ msgstr "EPG otsing"
 msgid "Search EPG"
 msgstr "EPG otsing"
 
-msgid "Search Encoding"
-msgstr "Otsi kooditabelit"
+msgid "Search encoding"
+msgstr "Otsingu tähemärgistik"
 
-msgid "Search for similar events"
-msgstr "Otsi sarnaseid saateid"
+msgid "Search in..."
+msgstr "Otsi asukohast..."
+
+msgid "Search scope"
+msgstr "Otsingu ulatus"
+
+msgid "Search strictness"
+msgstr "Otsingu rangus"
+
+msgid "Search type"
+msgstr "Otsingu tüüp"
+
+msgid "Searching..."
+msgstr "Otsing"
 
 msgid "Select a timer to search"
 msgstr "Vali taimer, mida otsida"
@@ -142,38 +223,88 @@ msgstr "Vali taimer, mida otsida"
 msgid "Select text to search for"
 msgstr "Vali taimer, mida otsida"
 
+msgid "Set type of match used to compare program titles with the search string"
+msgstr "Määra saatenimede ja otsisõnade võrdlemisel kasutatav vastete tüüp"
+
+msgid "Sets the default search scope when the user is asked."
+msgstr "Määra kasutajalt küsimisel vaikimisi kasutatav otsingu ulatus."
+
 msgid "Setup"
 msgstr "Seadistamine"
 
 msgid "Setup menu"
 msgstr "Seadistamine"
 
-msgid "Show AutoTimer List"
-msgstr "Näita autotaimereid"
+msgid "Show AutoTimer list"
+msgstr "Kuva autotaimerid"
 
-msgid "Show detailed event info"
-msgstr "Näita täpsemat saateinfot"
+msgid "Show detailed event information"
+msgstr "Kuva põhjalik saatetutvustus"
 
 msgid "Show in plugin browser"
 msgstr "Näita laienduste nimekirjas"
 
+msgid "Show orbital position"
+msgstr "Kuva orbitaalpositsioon"
+
+msgid "Show satellite orbital positions in the search results."
+msgstr "Kuva vastetes satelliidi orbitaalpositsioon"
+
 msgid "Show search history"
 msgstr "Näita varasemaid otsinguid"
 
-msgid "Show single epg for current channel"
-msgstr "Kanali saatekava"
+msgid "Stream"
+msgstr "IPTV"
 
-msgid "Zap to channel (setup in menu)"
-msgstr "Mine kanalile (määra menüüs)"
+msgid "Use source restrictions below to only include results from the sources, or exclude them."
+msgstr "Kasuta allolevaidid allika piiranguid ainult vastete hõlmamiseks allikatest."
 
-msgid "Zap to channel and close (setup in menu)"
-msgstr "Mine kanalile ja sulge nimekiri (määra menüüs)"
+msgid "Zap to channel"
+msgstr "Mine kanalile"
+
+msgid "all bouquets"
+msgstr "Kõik lemmiknimekirjad"
+
+msgid "all services"
+msgstr "Kõik kanalid"
+
+msgid "ask user"
+msgstr "Küsitakse"
+
+msgid "case-insensitive search"
+msgstr "Tõusutundetu otsing"
+
+msgid "case-sensitive search"
+msgstr "Tõusutundlik otsing"
+
+msgid "current bouquet"
+msgstr "Aktiivne lemmiknimekiri"
+
+msgid "current service"
+msgstr "Aktiivne kanal"
+
+msgid "disabled"
+msgstr "Keelatud"
+
+msgid "exact match"
+msgstr "Täpne vaste"
+
+msgid "exclude"
+msgstr "Eira"
+
+msgid "include"
+msgstr "Hõlma"
+
+msgid "partial match"
+msgstr "Osaline vaste"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
 msgstr "EPG otsing"
 
-#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
-msgid "search EPG..."
-msgstr "EPG otsing..."
+#. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
+msgid "search EPG from history..."
+msgstr "EPG ajaloo otsing"
 
+msgid "title starts with"
+msgstr "Nimi algab"

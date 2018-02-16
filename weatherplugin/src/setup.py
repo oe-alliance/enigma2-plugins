@@ -209,7 +209,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 				language = "en-US"
 			elif language == "no-NO": # hack
 				language = "nn-NO"
-			url = "http://weather.service.msn.com/find.aspx?outputview=search&weasearchstr=%s&culture=%s" % (urllib_quote(self.current.city.value), language)
+			url = "http://weather.service.msn.com/find.aspx?src=windows&outputview=search&weasearchstr=%s&culture=%s" % (urllib_quote(self.current.city.value), language)
 			getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
 		else:
 			self.session.open(MessageBox, _("You need to enter a valid city name before you can search for the location code."), MessageBox.TYPE_ERROR)
@@ -337,8 +337,8 @@ class MSNWeatherPluginSearchResultList(MenuList):
 		list = []
 		for childs in root:
 			if childs.tag == "weather":
-				searchlocation = childs.attrib.get("searchlocation").encode("utf-8", 'ignore')
-				searchresult = childs.attrib.get("searchresult").encode("utf-8", 'ignore')
+				searchlocation = childs.attrib.get("weatherlocationname").encode("utf-8", 'ignore')
+				searchresult = childs.attrib.get("weatherfullname").encode("utf-8", 'ignore')
 				weatherlocationcode = childs.attrib.get("weatherlocationcode").encode("utf-8", 'ignore')
 				res = [
 					(weatherlocationcode, searchlocation),

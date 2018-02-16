@@ -36,6 +36,7 @@ from Screens.LocationBox import MovieLocationBox
 from Components.UsageConfig import preferredPath
 from Screens.MessageBox import MessageBox
 from MessageBoxEx import MessageBox as MessageBoxEx
+from Components.Sources.Boolean import Boolean
 from Components.Sources.List import List
 from Components.ActionMap import ActionMap, NumberActionMap
 from enigma import getDesktop, quitMainloop
@@ -1045,9 +1046,8 @@ class AdvancedMovieSelectionOwnButtonName(Screen, ConfigListScreen):
         self["menu"] = List(self.list)
         self["help"] = StaticText()
         self["key_red"] = StaticText(_("Save/Close"))
-        self["VKeyIcon"] = Pixmap()
+        self["VKeyIcon"] = Boolean(False)
         self["HelpWindow"] = Pixmap()
-        self["VKeyIcon"].hide()
         self["VirtualKB"].setEnabled(False)
         self.onShown.append(self.setWindowTitle)
         self.createSetup()
@@ -1180,11 +1180,11 @@ class AdvancedMovieSelectionOwnButtonName(Screen, ConfigListScreen):
             self.showKeypad()
 
     def enableVKeyIcon(self):
-        self["VKeyIcon"].show()
+        self["VKeyIcon"].boolean = True
         self["VirtualKB"].setEnabled(True)
 
     def disableVKeyIcon(self):
-        self["VKeyIcon"].hide()
+        self["VKeyIcon"].boolean = False
         self["VirtualKB"].setEnabled(False)
 
     def showKeypad(self, retval=None):

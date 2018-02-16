@@ -1,0 +1,2 @@
+Description: Plugin to backup and restore EPG Data, including integration of EPGRefresh-plugin
+Depends: python-subprocess, enigma2, enigma2-plugin-systemplugins-mphelp

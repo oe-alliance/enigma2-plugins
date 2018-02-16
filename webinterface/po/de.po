@@ -904,6 +904,18 @@ msgstr "DHCP aktiviert"
 msgid "IP Address"
 msgstr "IP-Adresse"
 
+msgid "IPv6 address(es)"
+msgstr "IPv6-Adresse(n)"
+
+msgid "IPv4-only kernel"
+msgstr "Kernel ohne IPv6-Unterstützung"
+
+msgid "none/IPv4-only network"
+msgstr "keine/reines IPv4-Netzwerk"
+
+msgid "IPv4-only Python/Twisted"
+msgstr "Python/Twisted ohne IPv6-Unterstützung"
+
 #: ../src/WebComponents/Sources/Strings.py:131
 msgid "Netmask"
 msgstr "Netzmaske"

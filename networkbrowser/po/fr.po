@@ -2,11 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2009-03-25 15:34+0100\n"
 "PO-Revision-Date: 2008-05-16 17:15+0100\n"
 "Last-Translator: mimi74 <remi.jarrige0293@wanadoo.fr>\n"
 "Language-Team: french\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,284 +18,231 @@ msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
 msgstr ""
-
-msgid ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
-msgstr ""
+"Une entrée montage avec ce nom exist déjà!\n"
+"Mettre à jour et continuer avec ce nom?\n"
 
 msgid "Active"
-msgstr ""
+msgstr "Active"
 
 msgid ""
 "Active/\n"
 "Inactive"
 msgstr ""
+"Active/\n"
+"Désactive"
 
 msgid "Add a new NFS or CIFS mount point to your Receiver."
-msgstr ""
+msgstr "Ajouter nouveau point montage NFS ou CIFS à votre Récepteur."
 
 msgid "Add new network mount point"
-msgstr ""
-
-msgid "Adding schedule..."
-msgstr ""
-
-msgid "Are you sure you want to remove your network mount ?"
-msgstr ""
+msgstr "Ajouter nouveau point de montage réseau"
 
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
 msgstr ""
-
-msgid "Attempt to mount shares again"
-msgstr ""
+"Etes-vous sûr de vouloir sauver ce montage réseau?\n"
+"\n"
 
 msgid "Attempt to recover lost mounts (in background)"
-msgstr ""
+msgstr "Tenter de récupérer montages perdus (en arrière-plan)"
 
 msgid "Browse network neighbourhood"
-msgstr ""
+msgstr "Scanner le voisinage réseau"
 
 msgid "CIFS share"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
+msgstr "Partage CIFS"
 
 msgid "Change hostname"
-msgstr ""
+msgstr "Changer nom d'hôte"
 
 msgid "Change the hostname of your Receiver."
-msgstr ""
+msgstr "Changer le nom d'hôte de votre Récepteur."
 
 msgid "Close"
 msgstr "Fermer"
 
 msgid "Delete"
-msgstr ""
+msgstr "Effacer"
 
-msgid "Delete mount"
-msgstr ""
+msgid "Delete selected mount"
+msgstr "Effacer montage sélectionné"
 
 msgid "Dir:"
-msgstr ""
+msgstr "Répertoire:"
 
-msgid "Do you want to enter a username and password for this host?"
+msgid "Do you want to enter a username and password for this host?\n"
 msgstr ""
+"Voulez-vous saisir un nom utilisateur et mot de passe pour cet hôte?\n"
 
-msgid "Enigma2 (mount using enigma2)"
-msgstr ""
-
-msgid "Enigma2 old format (mount using linux)"
-msgstr ""
-
-msgid "Enter IP to scan..."
-msgstr ""
-
-msgid "Enter new hostname for your Receiver"
-msgstr ""
+msgid "Enter new hostname for your Dreambox"
+msgstr "Saisir nouveau nom d'hôte pour votre Dreambox"
 
 msgid "Enter options:"
-msgstr ""
+msgstr "Entrer options:"
 
 msgid "Enter password:"
-msgstr ""
+msgstr "Entrer mot passe:"
 
 msgid "Enter share directory:"
-msgstr ""
+msgstr "Entrer répertoire partage:"
 
 msgid "Enter share name:"
-msgstr ""
+msgstr "Entrer nom partage:"
 
 msgid "Enter user and password for host: "
-msgstr ""
+msgstr "Entrer utilisateur et mot passe d'hôte: "
 
 msgid "Enter username:"
-msgstr ""
-
-msgid "Expert"
-msgstr ""
-
-msgid "FSTAB (mount using linux)"
-msgstr ""
+msgstr "Entrer nom utilisateur:"
 
 msgid "Finished restarting your network"
-msgstr ""
-
-msgid "IP Address"
-msgstr ""
+msgstr "Terminer redémarrage de votre réseau"
 
 msgid "IP:"
-msgstr ""
+msgstr "IP:"
 
 msgid "Local share name"
-msgstr ""
+msgstr "Nom partage local"
 
 msgid "Manage network shares"
-msgstr ""
+msgstr "Netzwerkfreigaben verwalten"
 
 msgid "Manage your network shares..."
-msgstr ""
-
-msgid "Mount Again"
-msgstr ""
-
-msgid "Mount Manager"
-msgstr ""
-
-msgid "Mount Viewer"
-msgstr ""
-
-msgid "Mount again"
-msgstr ""
+msgstr "Gestion partages de votre réseau..."
 
 msgid "Mount informations"
-msgstr ""
+msgstr "Informations montage"
+
+msgid "Mount again"
+msgstr "Monter à nouveau"
 
 msgid "Mount options"
-msgstr ""
+msgstr "Options montage"
 
 msgid "Mount type"
-msgstr ""
+msgstr "Type montage"
 
-msgid "Mount using"
-msgstr ""
+msgid "Mount manager"
+msgstr "Gestion montage"
+
+msgid "Mount Manager"
+msgstr "Gestion montage"
 
 msgid ""
 "Mounted/\n"
 "Unmounted"
 msgstr ""
-
-msgid "Mounting network shares..."
-msgstr ""
+"Monté/\n"
+"Dé-monté"
 
 msgid "Mountpoints management"
-msgstr ""
+msgstr "Gestionnaire points montage"
 
 msgid "Mounts editor"
-msgstr ""
+msgstr "Editeur montages"
 
 msgid "Mounts management"
-msgstr ""
+msgstr "Gestionnaire montages"
 
 msgid "NFS share"
-msgstr ""
+msgstr "Partage NFS"
+
+msgid "NetworkBrowser"
+msgstr "Parcourir réseau"
 
 msgid "Network Browser"
-msgstr ""
+msgstr "Parcourir réseau"
 
 msgid "No network devices found!"
-msgstr ""
+msgstr "Aucun périphériques réseau trouvé!"
 
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 msgid "Please wait for activation of your network mount..."
-msgstr ""
+msgstr "Veuillez attendre l'activation de votre montage réseau..."
 
 msgid "Please wait while removing your network mount..."
-msgstr ""
+msgstr "Veuiller attendre pendant le retrait du montage réseau..."
 
 msgid "Please wait while updating your network mount..."
-msgstr ""
+msgstr "Veuillez attendre pendant la mise à jour montage réseau..."
 
 msgid "Please wait while your network is restarting..."
-msgstr ""
+msgstr "Veuillez attendre pendant le redémarrage du réseau..."
 
 msgid "Press OK to activate the settings."
-msgstr ""
-
-msgid "Press OK to collapse this host"
-msgstr ""
+msgstr "Appuyez OK pour activer les paramètres."
 
 msgid "Press OK to edit selected settings."
-msgstr ""
+msgstr "Appuyez OK pour éditer les paramètres choisis."
 
 msgid "Press OK to edit the settings."
-msgstr ""
+msgstr "Appuyez OK pour éditer les paramètres."
 
 msgid "Press OK to expand this host"
-msgstr ""
-
-msgid "Press OK to mount this share!"
-msgstr ""
+msgstr "Appuyez sur OK pour élargir cet hôte"
 
 msgid "Press OK to mount!"
-msgstr ""
+msgstr "Appuyez OK pour monter!."
 
 msgid "Press OK to save settings."
-msgstr ""
+msgstr "Appuyez OK pour sauver les paramètres."
 
 msgid "Press OK to select."
-msgstr ""
-
-msgid "Re-mount network shares every (in hours)"
-msgstr ""
-
-msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Appuyez OK pour choisir."
 
 msgid "Rescan"
-msgstr ""
+msgstr "Rescanner"
 
-msgid "Save"
-msgstr ""
-
-msgid "Scan NFS share"
-msgstr ""
-
-msgid "Scan range"
-msgstr ""
-
-msgid "Schedule MountAgain"
-msgstr ""
-
-msgid "Schedule a auto remount of your network shares."
-msgstr ""
+msgid "Rescan network"
+msgstr "Rescanner réseau"
 
 msgid "Search for network shares"
-msgstr ""
+msgstr "Parcourir les partages réseau"
 
 msgid "Search for network shares..."
-msgstr ""
+msgstr "Recherche partages réseau..."
 
 msgid "Searching your network. Please wait..."
-msgstr ""
+msgstr "Recherche réseau. Veuillez patienter..."
+
+msgid "Schedule a auto remount of your network shares."
+msgstr "Planifier un remontage automatique de vos partages réseau."
+
+msgid "Select Network Interface"
+msgstr "Sélectionnez Interface Réseau"
 
 msgid "Server IP"
-msgstr ""
+msgstr "Serveur IP"
 
 msgid "Server share"
-msgstr ""
+msgstr "Serveur partage"
 
 msgid "Setup Mount Again"
-msgstr ""
+msgstr "Paramètre remontage"
 
 msgid "User management"
-msgstr ""
+msgstr "Gestion utilisateur"
 
 msgid "Usermanager"
-msgstr ""
+msgstr "Gestionnaire utilisateur"
 
 msgid "Username"
-msgstr ""
+msgstr "Nom utilisateur"
 
 msgid "View, edit or delete mountpoints on your Receiver."
-msgstr ""
+msgstr "Voir, éditer ou effacer points montage de votre Récepteur."
 
 msgid "View, edit or delete usernames and passwords for your network."
-msgstr ""
+msgstr "Voir, éditer ou effacer noms utilisateurs et mots de passe de votre réseau."
 
 msgid "Your network mount has been activated."
-msgstr ""
+msgstr "Votre montage réseau a été activé."
 
 msgid "Your network mount has been removed."
-msgstr ""
+msgstr "Votre montage réseau a été retiré."
 
 msgid "Your network mount has been updated."
-msgstr ""
-
-msgid "use as HDD replacement"
-msgstr ""
+msgstr "Votre montage réseau a été mis à jour."

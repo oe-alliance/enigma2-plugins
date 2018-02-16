@@ -28,7 +28,7 @@ msgstr "Abbrechen"
 msgid "Channel Selection"
 msgstr "Kanalliste"
 
-msgid "Choose the encode type for search, helpful for foreign languages."
+msgid "Choose the encoding type for searches, helpful for foreign languages."
 msgstr "Wähle die Text-Kodierung. Das ist hilfreich für fremde Sprachen."
 
 #, python-format
@@ -39,25 +39,19 @@ msgid "EPG Search"
 msgstr "EPG Suche"
 
 msgid "EPGSearch"
-msgstr "EPGSuche"
+msgstr "EPG Suche"
 
-msgid "EPGSearch Setup"
-msgstr "EPGSearch Einrichtung"
+msgid "EPG Search setup"
+msgstr "EPG Such Einrichtung"
 
-msgid ""
-"Enable this to be able to access the EPG-Search from within the plugin "
-"browser."
-msgstr "EPGSuche in Erweiterungen aufführen"
+msgid "Enable this to allow access to EPG Search from within the plugin browser."
+msgstr "EPG Suche in Erweiterungen aufführen"
 
 msgid "Enter text to search for"
 msgstr "Zu suchenden Text eingeben"
 
-msgid ""
-"How many entries to keep in the search history at most. 0 disables history "
-"entirely!"
-msgstr ""
-"Maximale Anzahl von Einträgen im Suchverlauf. Diesen Wert auf \"0\" setzen, "
-"um den Verlauf zu deaktivieren."
+msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
+msgstr "Maximale Anzahl von Einträgen im Suchverlauf. Diesen Wert auf \"0\" setzen, um den Verlauf zu deaktivieren."
 
 msgid "IMDb Search"
 msgstr "IMDb Suche"
@@ -71,7 +65,7 @@ msgstr "Importiere aus EPG"
 msgid "Import from Timer"
 msgstr "Importiere aus Timer"
 
-msgid "Length of History"
+msgid "Length of history"
 msgstr "Limit des Suchverlaufs"
 
 msgid "New Search"
@@ -95,7 +89,7 @@ msgstr "Suche"
 msgid "Search EPG"
 msgstr "Durchsuche EPG"
 
-msgid "Search Encoding"
+msgid "Search encoding"
 msgstr "Kodierung für die Suche"
 
 msgid "Select a timer to search"
@@ -108,10 +102,85 @@ msgid "Setup"
 msgstr "Suche einrichten"
 
 msgid "Show in plugin browser"
-msgstr "Zeige EPGSuche unter Erweiterungen"
+msgstr "Zeige EPG Suche unter Erweiterungen"
 
 msgid "Show search history"
 msgstr "Zeige Suchverlauf"
+
+msgid "Search in..."
+msgstr "Suche in..."
+
+msgid "Search scope"
+msgstr "Suchbereich"
+
+msgid "all services"
+msgstr "Alle Sender"
+
+msgid "All services"
+msgstr "Alle Sender"
+
+msgid "all bouquets"
+msgstr "Alle Bouquets"
+
+msgid "All bouquets"
+msgstr "Alle Bouquets"
+
+msgid "current bouquet"
+msgstr "Aktuelles Bouquet"
+
+msgid "Current bouquet"
+msgstr "Aktuelles Bouquet"
+
+msgid "current service"
+msgstr "Aktuellen Sender"
+
+msgid "Current service"
+msgstr "Aktuellen Sender"
+
+msgid "ask user"
+msgstr "Frage Benutzer"
+
+msgid "Default scope when asked"
+msgstr "Standard Suchbereich bei 'Frage Benutzer'"
+
+msgid "Show orbital position"
+msgstr "Zeige Orbitalposition"
+
+msgid "Search type"
+msgstr "Suchmodus"
+
+msgid "partial match"
+msgstr "teilweise Übereinstimmung"
+
+msgid "exact match"
+msgstr "genaue Übereinstimmung"
+
+msgid "title starts with"
+msgstr "Titel beginnt mit"
+
+msgid "Search strictness"
+msgstr "Genauigkeit der Suche"
+
+msgid "case-insensitive search"
+msgstr "Groß- und Kleinschreibung ignorieren"
+
+msgid "case-sensitive search"
+msgstr "Groß- und Kleinschreibung beachten"
+
+msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr "In welchen EPG-Daten soll gesucht werden? Wenn 'Alle Bouquets' ausgewählt wurde, werden alle Bouquets durchsucht, auch wenn 'Mehrere Favoritenlisten erlauben' ausgeschaltet ist."
+
+msgid "Sets the default search scope when the user is asked."
+msgstr "Legt den Standard Suchbereich fest, wenn der Benutzer gefragt wird."
+
+msgid "Show satellite orbital positions in the search results."
+msgstr "Zeigt die Satelliten-Orbitalpositionen in den Suchergebnissen mit an."
+
+msgid "Set type of match used to compare program titles with the search string"
+msgstr "Legen Sie die Art der Übereinstimmung fest, um die Sendungstitel mit dem Suchbegriff zu vergleichen."
+
+msgid "Is the search case-sensitive or case-insensitive"
+msgstr "In der Suche Groß- und Kleinschreibung beachten ?"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
@@ -120,6 +189,69 @@ msgstr "Suche in EPG"
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 msgid "search EPG..."
 msgstr "Durchsuche EPG..."
+
+msgid "Close dialog"
+msgstr "Dialog schließen"
+
+msgid "Exit EPG Search"
+msgstr "Beende EPG Suche"
+
+msgid "Show detailed event information"
+msgstr "Zeige detaillierte Sendungsinformationen"
+
+msgid "Zap to channel"
+msgstr "Schalte zum Sender"
+
+msgid "Add an AutoTimer for highlighted event"
+msgstr "AutoTimer für ausgewählte Sendung hinzufügen"
+
+msgid "Show AutoTimer list"
+msgstr "Zeige alle AutoTimer"
+
+msgid "Enter new search"
+msgstr "Neue Suche eingeben"
+
+msgid "Add/remove/edit timer for highlighted event"
+msgstr "Erstelle/lösche/ändere Timer für ausgewählte Sendung"
+
+msgid "IMDB search for highlighted event"
+msgstr "IMBD Suche für ausgewählte Sendung"
+
+msgid "Add a zap timer for highlighted event"
+msgstr "Umschalttimer für ausgewählte Sendung hinzufügen"
+
+msgid "Add a record timer for highlighted event"
+msgstr "Aufnahmetimer für ausgewählte Sendung hinzufügen"
+
+msgid "Move down a page"
+msgstr "Seitenweise nach unten blättern"
+
+msgid "Move up a page"
+msgstr "Seitenweise nach oben blättern"
+
+msgid "Setup menu"
+msgstr "Einstellungen"
+
+msgid "Move up"
+msgstr "Hoch"
+
+msgid "Move down"
+msgstr "Runter"
+
+msgid "search EPG from history..."
+msgstr "Durchsuche EPG aus Verlauf..."
+
+msgid "%ssearch EPG from history..."
+msgstr "%sDurchsuche EPG aus Verlauf..."
+
+msgid "%ssearch EPG"
+msgstr "%sSuche in EPG"
+
+msgid "Searching..."
+msgstr "Suche..."
+
+msgid "%e/%m, %H:%M"
+msgstr "%02e.%02m, %H:%M"
 
 #~ msgid "Add \"Search\" Button to EPG"
 #~ msgstr "\"Suchen\" im Standard EPG hinzufügen"

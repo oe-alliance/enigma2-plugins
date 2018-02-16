@@ -5,7 +5,7 @@ from __future__ import print_function
 import Screens.Standby
 
 # eServiceReference
-from enigma import eServiceReference, eServiceCenter
+from enigma import eServiceReference, eServiceCenter, getBestPlayableServiceReference
 
 # ...
 from ServiceReference import ServiceReference
@@ -210,9 +210,17 @@ class EPGRefresh:
 	def addServices(self, fromList, toList, channelIds):
 		for scanservice in fromList:
 			service = eServiceReference(scanservice.sref)
-			if not service.valid() \
-				or (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+			if (service.flags & eServiceReference.isGroup):
+				service = getBestPlayableServiceReference(eServiceReference(scanservice.sref), eServiceReference())
 
+			# service can be a "NoneType" without attribute "valid" -> Crash
+			try:
+				if not service.valid():
+					continue
+			except:
+				continue
+
+			if (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
 				continue
 
 			channelID = '%08x%04x%04x' % (
@@ -491,6 +499,10 @@ class EPGRefresh:
 		epgrefreshtimer.add(EPGRefreshTimerEntry(time() + 30, self.prepareRefresh))
 
 	def isServiceProtected(self, service):
+		if not config.ParentalControl.servicepinactive.value:
+			print("[EPGRefresh] DEBUG: ParentalControl not configured")
+			return False
+		print("[EPGRefresh] DEBUG: ParentalControl ProtectionLevel:" + str(parentalControl.getProtectionLevel(str(service))))
 		return parentalControl.getProtectionLevel(str(service)) != -1
 
 	def nextService(self):

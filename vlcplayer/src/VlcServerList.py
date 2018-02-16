@@ -1,6 +1,6 @@
 # -*- coding: ISO-8859-1 -*-
 #===============================================================================
-# VLC Player Plugin by A. Lätsch 2007
+# VLC Player Plugin by A. Latsch 2007
 #                   modified by Volker Christian 2008
 #
 # This is free software; you can redistribute it and/or modify it under
@@ -9,20 +9,21 @@
 # version.
 #===============================================================================
 
-
+from . import _
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+from Components.config import config
+from Screens.ChoiceBox import ChoiceBox
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from VlcServerConfig import vlcServerConfig
 from VlcServerConfig import VlcServerConfigScreen
 from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
-from . import _
-
+import os
 from skin import parseFont
 
 class VlcServerList(MenuList):
@@ -76,8 +77,8 @@ class VlcServerList(MenuList):
 
 class VlcServerListScreen(Screen):
 	skin = """
-		<screen position="80,100" size="560,400" title="VLC Video Player V2.5 - Select a VLC-Server Profile" >
-			<widget name="serverlabel" position="10,10" size="550,20" font="Regular;18"/>
+		<screen position="80,100" size="560,400" title="Select VLC-Server Profile" >
+			<widget name="serverlabel" position="10,10" size="550,20" font="Regular;17"/>
 			<widget name="serverlist" position="10,35" size="550,310"  scrollbarMode="showOnDemand"/>
 			<ePixmap name="red"    position="0,355"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap name="green"  position="140,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
@@ -94,26 +95,29 @@ class VlcServerListScreen(Screen):
 		self.session = session
 		self.serverlist = VlcServerList()
 		self.defaultServer = defaultServer
-
-		self["serverlabel"] = Label(_("List of known VLC-Server Profiles"))
+		
+		self.setTitle(_("Select VLC-Server profile"))
+		self["serverlabel"] = Label(_("List of known profiles. Note: key info - help"))
 		self["serverlist"] = self.serverlist
 		self["key_red"] = Button(_("delete server"))
 		self["key_green"] = Button(_("add server"))
 		self["key_yellow"] = Button(_("edit server"))
 		self["key_blue"] = Button(_("set default"))
 
-		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
+		self["actions"] = ActionMap(["WizardActions", "ColorActions", "ChannelSelectEPGActions"],
 			{
 			 "back": 	self.close,
 			 "red": 	self.keyDelete,
 			 "green": 	self.keyAddServer,
 			 "yellow": 	self.keyEditServer,
-			 "blue":	self.keySetAsDefault,
+			 "blue":	self.keyGetDefault,
 			 "up": 		self.up,
 			 "down": 	self.down,
 			 "left": 	self.left,
 			 "right": 	self.right,
 			 "ok":		self.ok,
+			 "info":	self.showHelp,
+			 "epg":		self.showHelp
             }, -1)
 
 		self.onLayoutFinish.append(self.initialServerlistUpdate)
@@ -137,6 +141,13 @@ class VlcServerListScreen(Screen):
 			self.updateServerlist()
 		else:
 			vlcServerConfig.delete(server)
+
+	def showHelp(self):
+		#os.system("cat /usr/lib/enigma/python/Plugins/Extensions/VlcPlayer/help.txt")
+		self.session.open(MessageBox,
+			_("Latest compatible version VLC 2.0.7\nSetup VLC for PC:\nTools -> Preferences -> All -> Interface -> Main Interface -> Select Web\nFind file c:/Program Files/VideoLAN/VLC/Lua/http/.hosts and insert your box ip (without #).\nAdd shortcut to the startup of the background start VLC 'C:\Program Files\VideoLAN\VLC\vlc.exe --intf telnet --extraintf http'"),
+			MessageBox.TYPE_INFO
+		)
 
 	def keyDelete(self):
 		server = self.serverlist.getSelection()
@@ -162,6 +173,31 @@ class VlcServerListScreen(Screen):
 		else:
 			vlcServerConfig.cancel(server)
 
+	def keyGetDefault(self):
+		server = self.serverlist.getSelection()
+		if config.plugins.vlcplayer.defaultserver.value != '':
+			if server is not None:
+				self.session.openWithCallback(self.actionCallback, ChoiceBox, title=_("Choose an action:"), list=[(_("Set as default"), "set"), (_("Reset default"), "reset")])
+		else:
+			if server is not None:
+				self.keySetAsDefault()
+
+	def actionCallback(self, answer):
+		if answer is None:
+			return
+		if answer[1] == "set":
+			self.keySetAsDefault()
+		elif answer[1] == "reset":
+			self.keyResetDefault()
+		else:
+			pass
+
+	def keyResetDefault(self):
+		config.plugins.vlcplayer.defaultserver.value = ''
+		config.plugins.vlcplayer.defaultserver.save()
+		self.defaultServer = None
+		self.updateServerlist()
+
 	def keySetAsDefault(self):
 		self.defaultServer = self.serverlist.getSelection()
 		index = self.serverlist.getSelectedIndex()
@@ -185,4 +221,3 @@ class VlcServerListScreen(Screen):
 
 	def ok(self):
 		self.close(self.serverlist.getSelection())
-

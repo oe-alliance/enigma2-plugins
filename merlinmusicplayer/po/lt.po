@@ -1,0 +1,467 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MerlinMusicPlayer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-25 06:20+0300\n"
+"PO-Revision-Date: 2016-06-25 07:41+0300\n"
+"Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.8\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: lt\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: plugin.py:230
+#, python-format
+msgid ""
+"%d files added to database!\n"
+"Press OK to close."
+msgstr ""
+"%d failai įtraukti į duomenų bazę!\n"
+"Kad uždarytumėte, spauskite 'OK'."
+
+#: plugin.py:211
+#, python-format
+msgid ""
+"%s\n"
+" added to database"
+msgstr ""
+"%s\n"
+"įtraukta į duomenų bazę"
+
+#: plugin.py:215 plugin.py:219
+#, python-format
+msgid ""
+"%s\n"
+" already exists in database!"
+msgstr ""
+"%s\n"
+"jau yra duomenų bazėje!"
+
+#: plugin.py:2513 plugin.py:3254
+#, python-format
+msgid ""
+"%s\n"
+"appended to songlist"
+msgstr ""
+"%s\n"
+"prijungta prie dainų sąrašo"
+
+#: plugin.py:2523 plugin.py:3265
+#, python-format
+msgid ""
+"%s\n"
+"inserted and will be played as next song"
+msgstr ""
+"%s \n"
+"įtraukta ir bus grojama, kaip kita daina"
+
+#: plugin.py:2900
+msgid "Activate screensaver"
+msgstr "Įjungti ekrano užsklandą"
+
+#: plugin.py:1821 plugin.py:1835
+msgid "Add all songs from selected album to a playlist"
+msgstr "Visas pasirinkto albumo dainas įtraukti į grojaraštį"
+
+#: plugin.py:1823 plugin.py:1833
+msgid "Add all songs from selected artist to a playlist"
+msgstr "Visas pasirinkto atlikėjo dainas įtraukti į grojaraštį"
+
+#: plugin.py:1837
+msgid "Add all songs from selected genre to a playlist"
+msgstr "Visas pasirinkto žanro dainas įtraukti į grojaraštį"
+
+#: plugin.py:251
+msgid "Add music files to iDream database"
+msgstr "Įtraukti muzikos failus į iDream duomenų bazę"
+
+#: plugin.py:1819
+msgid "Add selected song to a playlist"
+msgstr "Įtraukti pasirinktą dainą į grojaraštį"
+
+#: plugin.py:2320
+#, python-format
+msgid "Album (%s) -> Song List"
+msgstr "Albumą (%s) -> dainų sąrašą"
+
+#: plugin.py:2348
+#, python-format
+msgid "Albums (%d)"
+msgstr "Albumai (%d)"
+
+#: plugin.py:2417
+msgid "Albums List"
+msgstr "Albumų sąrašas"
+
+#: plugin.py:2168
+msgid "All Artists"
+msgstr "Visi atlikėjai"
+
+#: plugin.py:2234
+msgid "All Songs"
+msgstr "Visos dainos"
+
+#: plugin.py:1826
+msgid "Append file to current playing songlist"
+msgstr "Pridėti failą prie dabar atkuriamo dainų sąrašo"
+
+#: plugin.py:3217
+msgid "Append file to current songlist"
+msgstr "Pridėti failą prie dabartinio dainų sąrašo"
+
+#: plugin.py:2404
+#, python-format
+msgid "Artist (%s) -> Album List"
+msgstr "Atlikėją (%s)-> albumų sąrašą"
+
+#: plugin.py:2294
+#, python-format
+msgid "Artist (%s) -> Song List"
+msgstr "Atlikėją (%s) -> dainų sąrašą"
+
+#: plugin.py:2344
+#, python-format
+msgid "Artists (%d)"
+msgstr "Atlikėjai (%d)"
+
+#: plugin.py:2368
+msgid "Artists List"
+msgstr "Atlikėjų sąrašas"
+
+#: plugin.py:3365 plugin.py:3368 plugin.py:3372
+msgid "Receiver Music Database"
+msgstr "Imtuvo muzikos duomenų bazė"
+
+#: plugin.py:260 plugin.py:2768 plugin.py:2887
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#: plugin.py:1825 plugin.py:3216
+msgid "Clear current songlist and play selected entry"
+msgstr "Išvalyti dabartinį dainų sąrašą ir atkurti pasirinktą įrašą"
+
+#: plugin.py:261
+msgid "Close"
+msgstr "Uždaryti"
+
+#: plugin.py:1811 plugin.py:3212
+msgid "Configuration"
+msgstr "Konfigūracija"
+
+#: plugin.py:1814
+msgid "Create new playlist"
+msgstr "Kurti naują grojaraštį"
+
+#: plugin.py:1831
+msgid "Delete selected playlist"
+msgstr "Pašalinti šį grojaraštį"
+
+#: plugin.py:1817
+msgid "Delete song from current playlist"
+msgstr "Šalinti dainą iš šio grojaraščio"
+
+#: plugin.py:1824
+msgid "Delete song from database"
+msgstr "Šalinti dainą iš duomenų bazės"
+
+#: plugin.py:1878
+msgid "Do you really want to add all songs from that album to a playlist?"
+msgstr "Ar tikrai norite įtraukti visas to albumo dainas į grojaraštį?"
+
+#: plugin.py:1868
+msgid "Do you really want to add all songs from that artist to a playlist?"
+msgstr "Ar tikrai norite įtraukti visas to atlikėjo dainas į grojaraštį?"
+
+#: plugin.py:1858
+msgid "Do you really want to add all songs from that genre to a playlist?"
+msgstr "Ar tikrai norite įtraukti visas to žanro dainas į grojaraštį?"
+
+#: plugin.py:1911
+msgid "Do you really want to delete that song from the database?"
+msgstr "Ar tikrai norite šalinti šią dainą iš duomenų bazės?"
+
+#: plugin.py:1900
+msgid "Do you really want to delete that song the current playlist?"
+msgstr "Ar tikrai norite šalinti tą dainą iš šio grojaraščio?"
+
+#: plugin.py:1888
+msgid "Do you really want to delete the current playlist?"
+msgstr "Ar tikrai norite šalinti šį grojaraštį?"
+
+#: plugin.py:1941
+msgid "Enter name for playlist"
+msgstr "Įrašykite grojaraščio pavadinimą"
+
+#: plugin.py:1958
+msgid "Enter search text"
+msgstr "Įrašykite ieškomą tekstą"
+
+#: plugin.py:232
+msgid ""
+"Error!\n"
+"Can not open database!\n"
+"Check if save folder is correct and writeable!\n"
+"Press OK to close."
+msgstr ""
+"Įvyko klaida!\n"
+"Nepavyksta atidaryti duomenų bazės!\n"
+"Patikrinkite, ar teisingas katalogas ir yra rašymo teisės!\n"
+"Kad uždarytumėte, spauskite 'OK'."
+
+#: plugin.py:2903
+msgid "Filebrowser startup path"
+msgstr "Failų naršyklės paleidimo kelias"
+
+#: plugin.py:3295
+#, python-format
+msgid "Filelist: %s"
+msgstr "Failų sąrašas: %s"
+
+#: plugin.py:2151
+#, python-format
+msgid "Genre (%s) -> Song List"
+msgstr "Žanrą (%s) -> dainų sąrašą"
+
+#: plugin.py:2117
+msgid "Genre List"
+msgstr "Žanrų sąrašas"
+
+#: plugin.py:2356
+#, python-format
+msgid "Genres (%d)"
+msgstr "Žanrai (%d)"
+
+#: plugin.py:2898
+msgid "Google image path"
+msgstr "Google atvaizdo kelias"
+
+#: plugin.py:1828
+msgid "Insert file to current playing songlist and play next"
+msgstr "Pridėti failą prie dabar atkuriamo dainų sąrašo ir atkurti sekantį"
+
+#: plugin.py:3219
+msgid "Insert file to current songlist and play next"
+msgstr "Pridėti failą prie dabartinio dainų sąrašo ir atkurti sekantį"
+
+#: plugin.py:2803 plugin.py:3294
+msgid "Invalid Location"
+msgstr "Neteisinga vieta"
+
+#: plugin.py:1520
+msgid "Lyrics"
+msgstr "Žodžiai"
+
+#: plugin.py:2160
+msgid "Main Menu"
+msgstr "Pagrindinis meniu"
+
+#: plugin.py:3356 plugin.py:3366 plugin.py:3370 plugin.py:3371
+msgid "Merlin Music Player"
+msgstr "Merlin muzikos grotuvas"
+
+#: plugin.py:1521
+msgid "Merlin Music Player Lyrics"
+msgstr "Merlin muzikos grotuvo dainų tekstai"
+
+#: plugin.py:2885
+msgid "Merlin Music Player Setup"
+msgstr "Merlin muzikos grotuvo sąranka"
+
+#: plugin.py:1618
+msgid "Merlin Music Player Songlist"
+msgstr "Merlin muzikos grotuvo dainų sąrašas"
+
+#: plugin.py:561
+msgid "Merlin Music Player TV"
+msgstr "Merlin muzikos grotuvo TV"
+
+#: plugin.py:3366 plugin.py:3370 plugin.py:3371
+msgid "Merlin music player"
+msgstr "Merlin muzikos grotuvas"
+
+#: plugin.py:1571
+msgid "No lyrics found"
+msgstr "Dainų tekstų nėra"
+
+#: plugin.py:3167 plugin.py:3204
+msgid "No music files found!"
+msgstr "Muzikos failų nėra!"
+
+#: plugin.py:2769 plugin.py:2888
+msgid "OK"
+msgstr " Gerai"
+
+#: plugin.py:2164
+msgid "Play"
+msgstr "Atkurti"
+
+#: plugin.py:2891
+msgid "Play last used songlist after starting"
+msgstr "Atvėrus, atkurti paskutinį grotų dainų sąrašą"
+
+#: plugin.py:2104
+#, python-format
+msgid "Playlist (%s) -> Song List"
+msgstr "Grojaraštį (%s) -> dainų sąrašą"
+
+#: plugin.py:2070
+msgid "Playlists"
+msgstr "Grojaraščiai"
+
+#: plugin.py:2340
+#, python-format
+msgid "Playlists (%d)"
+msgstr "Grojaraščiai (%d)"
+
+#: plugin.py:228
+msgid ""
+"Process aborted.\n"
+" 0 files added to database!\n"
+"Press OK to close."
+msgstr ""
+"Procesas nutrauktas.\n"
+" 0 failų, įtraukta į duomenų bazę!\n"
+"Kad uždarytumėte, spauskite 'OK'."
+
+#: plugin.py:2902
+msgid "Remember last path of filebrowser"
+msgstr "Įsiminti paskutinį failų naršyklės kelią"
+
+#: plugin.py:1445
+msgid "Repeat is not available yet with cue-files!"
+msgstr ".cue failų pakartoti negalima!"
+
+#: plugin.py:1568
+#, python-format
+msgid "Response -> lyrics for: %s (%s)"
+msgstr "Atsakas -> žodžiai: %s (%s)"
+
+#: plugin.py:1812
+msgid "Scan path for music files and add them to database"
+msgstr "Kelias, ieškoti muzikos failų ir įtraukti juos į duomenų bazę"
+
+#: plugin.py:1811
+msgid "Search in iDream database"
+msgstr "Ieškoti iDream duomenų bazėje"
+
+#: plugin.py:1971
+#, python-format
+msgid "Search results for \"%s\" in all albums"
+msgstr "\"%s\" paieškos albumuose rezultatai"
+
+#: plugin.py:1968
+#, python-format
+msgid "Search results for \"%s\" in all artists"
+msgstr "\"%s\" paieškos tarp atlikėjų rezultatai"
+
+#: plugin.py:1965
+#, python-format
+msgid "Search results for \"%s\" in all titles"
+msgstr "\"%s\" paieškos tarp pavadinimų rezultatai"
+
+#: plugin.py:1974
+#, python-format
+msgid "Search results for \"%s\" in title, artist or album"
+msgstr "\"%s\" paieškos pavadinime, tarp atlikėjų, ar albumų rezultatai"
+
+#: plugin.py:2752
+msgid "Select path"
+msgstr "Pasirinkite kelią"
+
+#: plugin.py:2172
+msgid "Show Album"
+msgstr "Žiūrėti albumą"
+
+#: plugin.py:2906
+msgid "Show Merlin Music Player in extensions menu"
+msgstr "Rodyti Merlin muzikos grotuvą plėtinių meniu"
+
+#: plugin.py:2908
+msgid "Show Merlin Music Player in main menu"
+msgstr "Rodyti Merlin muzikos grotuvą pagrindiniame meniu"
+
+#: plugin.py:2905
+msgid "Show iDream in extensions menu"
+msgstr "Rodyti iDream plėtinių meniu"
+
+#: plugin.py:2907
+msgid "Show iDream in main menu"
+msgstr "Rodyti iDream pagrindiniame meniu"
+
+#: plugin.py:1433
+msgid "Shuffle is not available yet with cue-files!"
+msgstr ".cue failų sumaišyti negalima!"
+
+#: plugin.py:2352
+#, python-format
+msgid "Songs (%d)"
+msgstr "Dainos (%d)"
+
+#: plugin.py:1807 plugin.py:1927
+msgid ""
+"There are no playlists defined.\n"
+"Do you want to create a new playlist?"
+msgstr ""
+"Šiuo metu nėra nustatytų grojaraščių.\n"
+"Ar norite sukurti naują grojaraštį?"
+
+#: plugin.py:1303
+#, python-format
+msgid "This Receiver can't decode %s streams!"
+msgstr "Šis aparatas negali iškoduoti %s srautų!"
+
+#: plugin.py:333
+#, python-format
+msgid "Track %s"
+msgstr "Takelis %s"
+
+#: plugin.py:2897
+msgid "Use google-images for cover art"
+msgstr "Viršeliams naudoti google vaizdus"
+
+#: plugin.py:2901
+msgid "Wait for screensaver (in min)"
+msgstr "Ekrano užsklanda po (min.)"
+
+#: plugin.py:2076 plugin.py:2098 plugin.py:2123 plugin.py:2145 plugin.py:2240
+#: plugin.py:2265 plugin.py:2288 plugin.py:2314 plugin.py:2374 plugin.py:2394
+#: plugin.py:2423
+msgid "[back]"
+msgstr "[atgal]"
+
+#: plugin.py:3361 plugin.py:3365 plugin.py:3368 plugin.py:3372
+msgid "iDream"
+msgstr "iDream"
+
+#: plugin.py:1760 plugin.py:2331
+msgid "iDream Main Menu"
+msgstr "iDream pagrindinis meniu"
+
+#: plugin.py:2893
+msgid "iDream database path"
+msgstr "Kelias į iDream duomenų bazę"
+
+#: plugin.py:1952
+msgid "search for album"
+msgstr "ieškoti albumo"
+
+#: plugin.py:1951
+msgid "search for artist"
+msgstr "ieškoti atlikėjo"
+
+#: plugin.py:1950
+msgid "search for title"
+msgstr "ieškoti pavadinimo"
+
+#: plugin.py:1953
+msgid "search in all of them"
+msgstr "ieškoti visuose juose"

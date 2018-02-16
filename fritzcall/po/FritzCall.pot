@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-01 12:42+0100\n"
+"POT-Creation-Date: 2018-01-13 14:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "05.29 until below 6.35"
+msgstr ""
+
+msgid "06.35 and newer"
+msgstr ""
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -61,13 +67,16 @@ msgstr ""
 msgid "Call"
 msgstr ""
 
+msgid "Call diversion"
+msgstr ""
+
+msgid "Call diversion active"
+msgstr ""
+
 msgid "Call monitoring"
 msgstr ""
 
 msgid "Call redirection"
-msgstr ""
-
-msgid "Call redirection active"
 msgstr ""
 
 #, python-format
@@ -112,6 +121,13 @@ msgstr ""
 msgid "Could not get call list; wrong version?"
 msgstr ""
 
+msgid "Could not load phonebook: "
+msgstr ""
+
+#, python-format
+msgid "Could not load phonebook: %s"
+msgstr ""
+
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr ""
 
@@ -119,6 +135,9 @@ msgid "Could not read FRITZ!Box phonebook; wrong version?"
 msgstr ""
 
 msgid "Country"
+msgstr ""
+
+msgid "Countrycode (e.g. 0044 for UK, 0034 for Spain, etc.)"
 msgstr ""
 
 msgid "DECT inactive"
@@ -129,9 +148,6 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Deactivate WLAN guest access"
-msgstr ""
-
-msgid "Debug"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -182,6 +198,7 @@ msgid "Edit"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr ""
 
@@ -200,12 +217,11 @@ msgstr ""
 msgid "Extension number to initiate call on"
 msgstr ""
 
-#, python-format
-msgid "FRITZ!Box - Could not load calls: %s"
+msgid "FRITZ!Box - "
 msgstr ""
 
 #, python-format
-msgid "FRITZ!Box - Could not load phonebook: %s"
+msgid "FRITZ!Box - Could not load calls: %s"
 msgstr ""
 
 #, python-format
@@ -214,6 +230,9 @@ msgstr ""
 
 #, python-format
 msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr ""
+
+msgid "FRITZ!Box - Error getting status: "
 msgstr ""
 
 #, python-format
@@ -344,6 +363,9 @@ msgstr ""
 msgid "Last 10 calls:\n"
 msgstr ""
 
+msgid "Log level"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Lookup"
 msgstr ""
@@ -354,6 +376,9 @@ msgstr ""
 msgid "Mailbox"
 msgstr ""
 
+msgid "Make it more skin friendly"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr ""
@@ -361,13 +386,13 @@ msgstr ""
 msgid "Missed calls"
 msgstr ""
 
-msgid "Mute on call"
+msgid "Mute on incoming call"
+msgstr ""
+
+msgid "Mute on outgoing calls"
 msgstr ""
 
 msgid "Name"
-msgstr ""
-
-msgid "Name of WLAN guest network"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -380,7 +405,7 @@ msgstr ""
 msgid "No DECT phone registered"
 msgstr ""
 
-msgid "No call redirection active"
+msgid "No call diversion active"
 msgstr ""
 
 msgid "No entry selected"
@@ -401,6 +426,9 @@ msgstr ""
 msgid "No result from reverse lookup"
 msgstr ""
 
+msgid "Not deactivating after time"
+msgstr ""
+
 msgid "Number"
 msgstr ""
 
@@ -411,7 +439,7 @@ msgstr ""
 msgid "One DECT phone registered"
 msgstr ""
 
-msgid "One call redirection active"
+msgid "One call diversion active"
 msgstr ""
 
 msgid "One mailbox active"
@@ -438,9 +466,6 @@ msgid "Outgoing calls"
 msgstr ""
 
 msgid "Password Accessing FRITZ!Box"
-msgstr ""
-
-msgid "Password of WLAN guest network"
 msgstr ""
 
 #. TRANSLATORS: this is a window title.
@@ -482,7 +507,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-msgid "Reverse Lookup Caller ID (select country below)"
+msgid "Reverse Lookup Caller ID"
 msgstr ""
 
 msgid "Reverse searching..."
@@ -509,19 +534,22 @@ msgstr ""
 msgid "Searching in Outlook export..."
 msgstr ""
 
-msgid "Secure WLAN guest network"
-msgstr ""
-
 msgid "Setting..."
 msgstr ""
 
 msgid "Shortcut"
 msgstr ""
 
+msgid "Show Blocked Calls"
+msgstr ""
+
 msgid "Show Outgoing Calls"
 msgstr ""
 
 msgid "Show after Standby"
+msgstr ""
+
+msgid "Show also internal numbers"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
@@ -547,6 +575,12 @@ msgid "Switzerland"
 msgstr ""
 
 msgid "The Netherlands"
+msgstr ""
+
+#, python-format
+msgid ""
+"There might be a problem with your FritzCall %spassword.\n"
+"Check in the configuration."
 msgstr ""
 
 msgid "Timeout for Call Notifications (seconds)"
@@ -598,6 +632,12 @@ msgstr ""
 msgid "UNKNOWN"
 msgstr ""
 
+msgid "Unknown"
+msgstr ""
+
+msgid "Update available"
+msgstr ""
+
 msgid "Use internal PhoneBook"
 msgstr ""
 
@@ -605,6 +645,9 @@ msgid "User name Accessing FRITZ!Box"
 msgstr ""
 
 msgid "Vanity"
+msgstr ""
+
+msgid "WLAN not active"
 msgstr ""
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
@@ -620,7 +663,10 @@ msgstr ""
 msgid "before 05.27"
 msgstr ""
 
-msgid "call redirections active"
+msgid "call diversions active"
+msgstr ""
+
+msgid "calls in mailbox"
 msgstr ""
 
 msgid "devices active"
@@ -643,7 +689,16 @@ msgstr ""
 msgid "encrypted"
 msgstr ""
 
+msgid "fax_home"
+msgstr ""
+
+msgid "fax_work"
+msgstr ""
+
 msgid "finishing"
+msgstr ""
+
+msgid "guest "
 msgstr ""
 
 msgid "home"
@@ -670,6 +725,9 @@ msgstr ""
 msgid "no device active"
 msgstr ""
 
+msgid "not available with this firmware version"
+msgstr ""
+
 msgid "not configured"
 msgstr ""
 
@@ -679,10 +737,22 @@ msgstr ""
 msgid "not yet implemented"
 msgstr ""
 
+msgid "nothing"
+msgstr ""
+
 msgid "number suppressed"
 msgstr ""
 
+msgid "off"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
 msgid "one device active"
+msgstr ""
+
+msgid "pager"
 msgstr ""
 
 msgid "preparing"
@@ -703,6 +773,9 @@ msgid "show each call"
 msgstr ""
 
 msgid "show nothing"
+msgstr ""
+
+msgid "with"
 msgstr ""
 
 msgid "work"

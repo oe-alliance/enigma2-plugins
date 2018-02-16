@@ -7,55 +7,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeatherPlugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
-"PO-Revision-Date: 2011-06-12 19:06+0100\n"
-"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
+"POT-Creation-Date: 2015-11-14 23:32+0100\n"
+"PO-Revision-Date: 2015-11-14 23:42+0100\n"
+"Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Björn Freise <mcfreis@gmx.net>\n"
-"Language: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.7.4\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-msgid "Add"
-msgstr "Hinzufügen"
+#: plugin.py:54 plugin.py:90
+msgid "Weather Plugin"
+msgstr "Wetterinformationen"
 
-msgid "Back"
-msgstr "Zurück"
+#: plugin.py:54
+msgid "Show Weather Forecast"
+msgstr "Zeigt die Wettervorhersage"
 
-msgid "Cancel"
-msgstr "Abbrechen"
-
-msgid "City"
-msgstr "Ort"
-
-msgid "Delete"
-msgstr "Löschen"
-
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#, python-format
-msgid "Feels like %s"
-msgstr "Gefühlte Temp. %s"
-
+#: plugin.py:141
 msgid "Getting weather information..."
 msgstr "Laden der Wetterinformationen..."
 
-#, python-format
-msgid "Humidity: %s %%"
-msgstr "Luftfeuchtigkeit: %s %%"
-
-msgid "Location code"
-msgstr "Location-Code"
-
-msgid "MSN location search result"
-msgstr "Suchresultat MSN Location-Code"
-
+#: plugin.py:148
 msgid ""
 "No locations defined...\n"
 "Press 'Menu' to do that."
@@ -63,44 +40,87 @@ msgstr ""
 "Keine Einträge vorhanden.\n"
 "Bitte 'Menu' drücken, um einen Eintrag anzulegen."
 
-msgid "OK"
-msgstr "OK"
-
+#: plugin.py:209
 #, python-format
-msgid "Observation point: %s"
-msgstr "Messstation: %s"
+msgid "Humidity: %s %%"
+msgstr "Luftfeuchtigkeit: %s %%"
 
+#: plugin.py:212
 #, python-format
 msgid "Observation time: %s"
 msgstr "Stand: %s"
 
-msgid "Please enter a valid city name."
-msgstr "Bitte einen gültigen Stadtnamen eingeben."
+#: plugin.py:213
+#, python-format
+msgid "Observation point: %s"
+msgstr "Messstation: %s"
 
-msgid "Please enter a valid location code for the city."
-msgstr "Bitte einen gültigen Location-Code für die Stadt eingeben."
+#: plugin.py:214
+#, python-format
+msgid "Feels like %s"
+msgstr "Gefühlte Temp. %s"
 
-msgid "Really delete this WeatherPlugin Entry?"
-msgstr "Soll der Eintrag wirklich gelöscht werden?"
+#: setup.py:43
+msgid "metric system"
+msgstr "Metrisches System"
 
-msgid "Search Code"
-msgstr "Code suchen"
+#: setup.py:43
+msgid "imperial system"
+msgstr "Englisches Maßsystem"
 
-msgid "Show Weather Forecast"
-msgstr "Zeigt die Wettervorhersage"
+#: setup.py:74
+msgid "WeatherPlugin: List of Entries"
+msgstr "WeatherPlugin: Liste der Einträge"
 
+#: setup.py:75 setup.py:198
+msgid "City"
+msgstr "Ort"
+
+#: setup.py:76 setup.py:200
 msgid "System"
 msgstr "System"
 
-msgid "Weather Plugin"
-msgstr "Wetterinformationen"
+#: setup.py:77 setup.py:294
+msgid "Back"
+msgstr "Zurück"
 
+#: setup.py:78
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: setup.py:79
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: setup.py:80 setup.py:187
+msgid "Delete"
+msgstr "Löschen"
+
+#: setup.py:119 setup.py:241
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "Soll der Eintrag wirklich gelöscht werden?"
+
+#: setup.py:175
 msgid "WeatherPlugin: Edit Entry"
 msgstr "Wetterinformationen: Eintrag bearbeiten"
 
-msgid "WeatherPlugin: List of Entries"
-msgstr ""
+#: setup.py:185
+msgid "Cancel"
+msgstr "Abbrechen"
 
+#: setup.py:186 setup.py:295
+msgid "OK"
+msgstr "OK"
+
+#: setup.py:188
+msgid "Search Code"
+msgstr "Code suchen"
+
+#: setup.py:199
+msgid "Location code"
+msgstr "Location-Code"
+
+#: setup.py:215
 msgid ""
 "You need to enter a valid city name before you can search for the location "
 "code."
@@ -108,17 +128,14 @@ msgstr ""
 "Es muss ein Stadtnamen eingeben werden bevor man nach dem Location-Code "
 "suchen kann."
 
-msgid "imperial system"
-msgstr "Englisches Maßsystem"
+#: setup.py:228
+msgid "Please enter a valid city name."
+msgstr "Bitte einen gültigen Stadtnamen eingeben."
 
-msgid "metric system"
-msgstr "Metrisches System"
+#: setup.py:230
+msgid "Please enter a valid location code for the city."
+msgstr "Bitte einen gültigen Location-Code für die Stadt eingeben."
 
-#~ msgid "City or Postal Code"
-#~ msgstr "Ort oder Postleitzahl"
-
-#~ msgid "Current: %s"
-#~ msgstr "Aktuell: %s"
-
-#~ msgid "Language"
-#~ msgstr "Sprache"
+#: setup.py:293
+msgid "MSN location search result"
+msgstr "Suchresultat MSN Location-Code"

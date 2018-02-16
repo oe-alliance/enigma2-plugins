@@ -43,6 +43,9 @@ from threading import Thread, Lock
 import Queue
 Briefkasten = Queue.Queue()
 
+from boxbranding import getBoxType, getImageDistro
+
+
 def main(session,**kwargs):
 	try:
 		session.open(FanControl2Plugin)
@@ -141,14 +144,35 @@ def setPWM(fanid, value):
 
 #Configuration
 config.plugins.FanControl = ConfigSubsection()
-config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default = "disabled")
-config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="false")
-config.plugins.FanControl.minRPM = ConfigSlider(default = 600, increment = 50, limits = (0, 1500))
-config.plugins.FanControl.maxRPM = ConfigSlider(default = 3000, increment = 50, limits = (500, 6000))
-config.plugins.FanControl.temp = ConfigSlider(default = 40, increment = 1, limits = (30, 50))
-config.plugins.FanControl.tempmax = ConfigSlider(default = 50, increment = 1, limits = (35, 55))
-config.plugins.FanControl.pwm = ConfigSlider(default = 130, increment = 5, limits = (0, 255))
-config.plugins.FanControl.vlt = ConfigSlider(default = 255, increment = 5, limits = (0, 255))
+
+if getImageDistro() in ('openspa') and getBoxType() in ('vusolo2'):
+	config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default = "3pin")
+	config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="true")
+	config.plugins.FanControl.minRPM = ConfigSlider(default = 900, increment = 50, limits = (0, 1500))
+	config.plugins.FanControl.maxRPM = ConfigSlider(default = 1100, increment = 50, limits = (500, 6000))
+	config.plugins.FanControl.temp = ConfigSlider(default = 42, increment = 1, limits = (30, 50))
+	config.plugins.FanControl.tempmax = ConfigSlider(default = 50, increment = 1, limits = (35, 55))
+	config.plugins.FanControl.pwm = ConfigSlider(default = 30, increment = 5, limits = (0, 255))
+	config.plugins.FanControl.vlt = ConfigSlider(default = 30, increment = 5, limits = (0, 255))
+elif getImageDistro() in ('openspa') and getBoxType() in ('vuduo2'):
+	config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default = "4pin")
+	config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="true")
+	config.plugins.FanControl.minRPM = ConfigSlider(default = 750, increment = 50, limits = (0, 1500))
+	config.plugins.FanControl.maxRPM = ConfigSlider(default = 1100, increment = 50, limits = (500, 6000))
+	config.plugins.FanControl.temp = ConfigSlider(default = 42, increment = 1, limits = (30, 50))
+	config.plugins.FanControl.tempmax = ConfigSlider(default = 50, increment = 1, limits = (35, 55))
+	config.plugins.FanControl.pwm = ConfigSlider(default = 125, increment = 5, limits = (0, 255))
+	config.plugins.FanControl.vlt = ConfigSlider(default = 165, increment = 5, limits = (0, 255))
+else:
+	config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default = "disabled")
+	config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="false")
+	config.plugins.FanControl.minRPM = ConfigSlider(default = 600, increment = 50, limits = (0, 1500))
+	config.plugins.FanControl.maxRPM = ConfigSlider(default = 3000, increment = 50, limits = (500, 6000))
+	config.plugins.FanControl.temp = ConfigSlider(default = 40, increment = 1, limits = (30, 50))
+	config.plugins.FanControl.tempmax = ConfigSlider(default = 50, increment = 1, limits = (35, 55))
+	config.plugins.FanControl.pwm = ConfigSlider(default = 130, increment = 5, limits = (0, 255))
+	config.plugins.FanControl.vlt = ConfigSlider(default = 255, increment = 5, limits = (0, 255))
+
 config.plugins.FanControl.ShowError = ConfigSelection(choices = [("false", _("do nothing")), ("true", _("display Info")), ("shutdown", _("Box Shutdown"))], default="true")
 config.plugins.FanControl.ShutdownTemp = ConfigInteger(default = 65,limits = (50, 80))
 config.plugins.FanControl.AddOverheat = ConfigInteger(default = 0,limits = (0, 9))
@@ -159,7 +183,7 @@ config.plugins.FanControl.DeleteData = ConfigSelection(choices = [("0", _("no"))
 config.plugins.FanControl.EnableConsoleLog = ConfigYesNo(default = False)
 config.plugins.FanControl.EnableDataLog = ConfigYesNo(default = False)
 config.plugins.FanControl.EnableEventLog = ConfigYesNo(default = False)
-config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("auto", _("auto")), ("never", _("never"))], default="auto")
+config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("auto", _("auto")), ("never", _("never"))], default="never")
 config.plugins.FanControl.MonitorInExtension = ConfigYesNo(default = True)
 config.plugins.FanControl.FanControlInExtension = ConfigYesNo(default = True)
 config.plugins.FanControl.Multi = ConfigSelection(choices = [("1", "RPM"), ("2", "RPM/2")], default = "2")
@@ -289,7 +313,7 @@ class ControllerPI:
 		return self.ControlSignal
 # the PI controller class -end
 
-class FanControl2Test(ConfigListScreen,Screen):
+class FanControl2Test(Screen, ConfigListScreen):
 	skin = """
 		<screen position="center,center" size="630,300" title="Fan Control 2 - Test" >
 			<widget source="TextTest1" render="Label" position="5,20" size="620,30" zPosition="10" font="Regular;20" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
@@ -620,10 +644,10 @@ class FanControl2Plugin(ConfigListScreen,Screen):
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/key_info.png" position="560,0" zPosition="4" size="35,25"  transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="560,20" zPosition="4" size="35,25"  transparent="1" alphatest="on" />
-			<widget source="red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget source="green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget source="yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-			<widget source="blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
 			<widget source="Version" render="Label" position="5,430" size="60,20" zPosition="1" font="Regular;11" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
 
 			<widget name="config" position="10,50" size="580,200" scrollbarMode="showOnDemand" />
@@ -667,10 +691,10 @@ class FanControl2Plugin(ConfigListScreen,Screen):
 		LastVLT = config.plugins.FanControl.vlt.value
 		LastPWM = config.plugins.FanControl.pwm.value
 
-		self["red"] = StaticText(_("Cancel"))
-		self["green"] = StaticText(_("Save"))
-		self["yellow"] = StaticText(_("Check"))
-		self["blue"] = StaticText(_("Help"))
+		self["key_red"] = self["red"] = StaticText(_("Cancel"))
+		self["key_green"] = self["green"] = StaticText(_("Save"))
+		self["key_yellow"] = self["yellow"] = StaticText(_("Check"))
+		self["key_blue"] = self["blue"] = StaticText(_("Help"))
 		self["introduction"] = StaticText()
 		self["Version"] = StaticText(Version)
 		self["TxtTemp"] = StaticText()
@@ -1237,7 +1261,7 @@ class FanControl2(Screen):
 def autostart(reason, **kwargs):
 	global session
 	if reason == 0 and kwargs.has_key("session"):
-		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.pyo") or os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.pyo"):
+		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.pyo") or os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/__init__.py"):
 			from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
 			from FC2webSite import FC2web, FC2webLog, FC2webChart
 			from twisted.web import static
@@ -1267,8 +1291,15 @@ def autostart(reason, **kwargs):
 		session.open(FanControl2)
 
 def selSetup(menuid, **kwargs):
-	if menuid != "system":
-		return [ ]
+	if getImageDistro() in ('openhdf'):
+		if menuid != "devices_menu":
+			return [ ]
+	elif getImageDistro() in ('openatv'):
+		if menuid != "extended":
+			return []
+	else:
+		if menuid != "system":
+			return []
 	return [(_("Fan Control 2"), main, "fansetup_config", 70)]
 
 def Plugins(**kwargs):

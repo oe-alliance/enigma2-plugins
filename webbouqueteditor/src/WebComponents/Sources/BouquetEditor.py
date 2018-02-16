@@ -480,7 +480,7 @@ class BouquetEditor(Source):
 			return returnValue
 			
 	def toggleLock(self, param):
-		if not config.ParentalControl.configured.value:
+		if not config.ParentalControl.servicepinactive.value:
 			return (False, "Parent Control is not activated.")
 		sRef = None
 		if "sRef" in param:
@@ -553,7 +553,7 @@ class BouquetEditor(Source):
 			files.append("/etc/enigma2/userbouquet.favourites.radio")
 			files.append("/etc/enigma2/lamedb")
 			files.append("/etc/tuxbox/satellites.xml")
-			if config.ParentalControl.configured.value:
+			if config.ParentalControl.servicepinactive.value:
 				if config.ParentalControl.type.value == LIST_BLACKLIST:
 					files.append("/etc/enigma2/blacklist")
 				else:

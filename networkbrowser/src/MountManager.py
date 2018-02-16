@@ -13,7 +13,7 @@ from Components.Network import iNetwork
 from Components.Sources.Boolean import Boolean
 from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_ACTIVE_SKIN, fileExists
 from os import path as os_path, fsync
 
 from MountView import AutoMountView
@@ -92,7 +92,10 @@ class AutoMountManager(Screen):
 
 	def updateList(self):
 		self.list = []
-		okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
+		if fileExists(resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png")):
+			okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "networkbrowser/ok.png"))
+		else:
+			okpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
 		self.list.append((_("Add new network mount point"),"add", _("Add a new NFS or CIFS mount point to your Receiver."), okpng ))
 		self.list.append((_("Mountpoints management"),"view", _("View, edit or delete mountpoints on your Receiver."), okpng ))
 		self.list.append((_("User management"),"user", _("View, edit or delete usernames and passwords for your network."), okpng))
@@ -131,14 +134,14 @@ class AutoMountManager(Screen):
 	def hostEdit(self):
 		if os_path.exists("/etc/hostname"):
 			fp = open('/etc/hostname', 'r')
-			self.hostname = fp.read()
+			self.hostname = fp.readline().rstrip('\n')
 			fp.close()
 			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title = (_("Enter new hostname for your Receiver")), text = self.hostname)
 
 	def hostnameCallback(self, callback = None):
 		if callback is not None and len(callback):
 			fp = open('/etc/hostname', 'w+')
-			fp.write(callback)
+			fp.write(callback + '\n')
 			fp.flush()
 			fsync(fp.fileno())
 			fp.close()
@@ -181,6 +184,8 @@ class MountManagerMenu(Screen,ConfigListScreen):
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
+		self["footnote"] = StaticText()
+		self["description"] = StaticText()
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))

@@ -43,6 +43,9 @@ def eventinfo(session, eventName="", **kwargs):
 			eventName = event and event.getEventName() or ''
 	session.open(EPGSearch, eventName)
 
+def seachhistory(session, *args, **kwargs):
+	session.open(EPGSearch, openHistory=True)
+
 # Movielist
 def movielist(session, service, **kwargs):
 	serviceHandler = eServiceCenter.getInstance()
@@ -55,17 +58,35 @@ pluginlist = PluginDescriptor(name = _("EPGSearch"), description = _("Search EPG
 def Plugins(**kwargs):
 	l = [
 		PluginDescriptor(
-			# TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
-			name = _("search EPG..."),
+			# TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
+			# TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+			name = _("%ssearch EPG") % "\x86",
 			where = PluginDescriptor.WHERE_EVENTINFO,
 			fnc = eventinfo,
 			needsRestart = False,
 		),
 		PluginDescriptor(
+			# TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
+			# TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+			name = _("%ssearch EPG from history...") % "\x87",
+			where = PluginDescriptor.WHERE_EVENTINFO,
+			fnc = seachhistory,
+			needsRestart = False,
+		),
+		PluginDescriptor(
 			# TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+			name = _("search EPG"),
 			description = _("search EPG"),
 			where = PluginDescriptor.WHERE_MOVIELIST,
 			fnc = movielist,
+			needsRestart = False,
+		),
+		PluginDescriptor(
+			# TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
+			name = _("search EPG from history..."),
+			description = _("search EPG from history..."),
+			where = PluginDescriptor.WHERE_MOVIELIST,
+			fnc = seachhistory,
 			needsRestart = False,
 		),
 	]

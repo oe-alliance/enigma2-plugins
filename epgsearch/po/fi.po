@@ -7,35 +7,52 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 10:47+0100\n"
-"PO-Revision-Date: 2014-01-01 17:38+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2016-09-10 17:01+0100\n"
+"PO-Revision-Date: 2016-09-14 19:41+0200\n"
+"Last-Translator: Samzam <http://www.world-of-satellite.com>\n"
 "Language-Team: TimoJ\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Finnish\n"
-"X-Poedit-Country: FINLAND\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
+msgid "%ssearch EPG"
+msgstr "%sOhjelmaopashaku"
+
+#. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
+msgid "%ssearch EPG from history..."
+msgstr "%sOhjelmaoppaan hakuhistoria..."
 
 msgid "Add AutoTimer"
 msgstr "Lisää automaattiajastus"
 
-msgid "Add a auto timer for current event"
-msgstr "Lisää automaattiajastus tähän ohjelmaan"
-
-msgid "Add a record timer for current event"
-msgstr "Lisää tallennusajastus tähän ohjelmaan"
-
-msgid "Add a zap timer for current event"
-msgstr "Lisää kanavanvaihtoajastus tähän ohjelmaan"
-
 msgid "Add Timer"
 msgstr "Lisää ajastus"
 
-msgid "Add/Remove timer for current event"
-msgstr "Lisää/poista ajastus tähän ohjelmaan"
+msgid "Add a record timer for highlighted event"
+msgstr "Lisää ajastus korostetulle ohjelmalle"
+
+msgid "Add a zap timer for highlighted event"
+msgstr "Lisää kanavanvaihto korostetulle ohjelmalle"
+
+msgid "Add an AutoTimer for highlighted event"
+msgstr "Lisää automaattiajastus korostetulle ohjelmalle"
+
+msgid "Add/remove/edit timer for highlighted event"
+msgstr "Lisää/poista/muokkaa korostetun ohjelman ajastusta"
+
+msgid "All bouquets"
+msgstr "Kaikki suosikkilistat"
+
+msgid "All services"
+msgstr "Kaikki kanavat"
 
 msgid "Cancel"
 msgstr "Keskeytä"
@@ -43,18 +60,50 @@ msgstr "Keskeytä"
 msgid "Channel Selection"
 msgstr "Kanavanvalinta"
 
-msgid "Choose the encode type for search, helpful for foreign languages."
-msgstr "Valitse haun merkistö, hyödyllinen vieraille kielille."
+msgid "Choose the encoding type for searches, helpful for foreign languages."
+msgstr "Valitse erottelutapa hauille. Auttaa vierailla kielillä."
 
 msgid "Close dialog"
 msgstr "Sulje"
+
+msgid ""
+"Control where to search in the EPG. When 'all bouquets' is set, all bouquets "
+"are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr ""
+"Valitse mistä osista ohjelmaopasta haetaan. Kun 'kaikki suosikkilistat' on "
+"valittuna, kaikista haetaan vaikka 'salli useiden suosikkilistojen käyttö' "
+"olisi pois päältä."
 
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Automaattiajastuslistaa ei voitu lukea: %s"
 
+msgid "Current bouquet"
+msgstr "Nykyinen suosikkilista"
+
+msgid "Current service"
+msgstr "Nykyinen kanava"
+
+msgid "DVB-C"
+msgstr "DVB-C"
+
+msgid "DVB-C Cable services"
+msgstr "DVB-C kaapelikanavat"
+
+msgid "DVB-T"
+msgstr "DVB-T"
+
+msgid "DVB-T Terrestrial services"
+msgstr "DVB-T antennikanavat"
+
+msgid "Default scope when asked"
+msgstr "Oletuslaajuus"
+
 msgid "EPG Search"
 msgstr "Ohjelmaopashaku"
+
+msgid "EPG Search setup"
+msgstr "Ohjelmaopashaun asetukset"
 
 msgid "EPGSearch"
 msgstr "Ohjelmaopashaku"
@@ -62,32 +111,27 @@ msgstr "Ohjelmaopashaku"
 msgid "EPGSearch Setup"
 msgstr "Ohjelmaopashaun asetukset"
 
-msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
-msgstr "Tämän ollessa päällä, voit avata ohjelmaopashaun lisäosavalikon kautta."
+msgid ""
+"Enable this to allow access to EPG Search from within the plugin browser."
+msgstr "Tämä sallii pääsyn ohjelmaopashakuun laajennusvalikosta"
+
+msgid "Enter new search"
+msgstr "Lisää uusi haku"
 
 msgid "Enter text to search for"
-msgstr "Syötä haettava teksti"
+msgstr "Syötä haettavan ohjelman nimi"
 
-msgid "Exit EPG"
-msgstr "Sulje ohjelmaopas"
+msgid "Exclude results from"
+msgstr "Rajoita hakutuloksia"
 
-msgid "Goto next bouquet"
-msgstr "Mene seuraavalle suosikkilistalle"
+msgid "Exit EPG Search"
+msgstr "Poistu ohjelmaopashausta"
 
-msgid "Goto next channel"
-msgstr "Vaihda seuraavalle kanavalle"
+msgid "Filter results by source"
+msgstr "Suodata hakutulokset lähteestä"
 
-msgid "Goto previous bouquet"
-msgstr "Mene edelliselle suosikkilistalle"
-
-msgid "Goto previous channel"
-msgstr "Vaihda edelliselle kanavalle"
-
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-msgstr "Kuinkan monta kohdetta säilytetään hakuhistoriassa. 0 poistaa historian käytöstä."
-
-msgid "IMDB search for current event"
-msgstr "Nykyisen ohjelman IMDB-haku"
+msgid "IMDB search for highlighted event"
+msgstr "IMDB haku korostetulle ohjelmalle"
 
 msgid "IMDb Search"
 msgstr "IMDb-haku"
@@ -101,11 +145,38 @@ msgstr "Tuo ohjelmaoppaasta"
 msgid "Import from Timer"
 msgstr "Tuo ajastuksista"
 
-msgid "Length of History"
+msgid ""
+"Include or exclude results depending on their source (e.g. by satellite)"
+msgstr "Sisällytä tai rajoita hakutulokset riippuen lähteestä (DVB-T,C,S)"
+
+msgid "Include results from"
+msgstr "Sisällytä hakutulokset"
+
+msgid "Include/exclude search results from this type of source"
+msgstr "Sisällytä/rajoita hakutulokset lähteestä"
+
+msgid "Include/exclude sources"
+msgstr "Sisällytä/rajoita hakutuloksia"
+
+msgid "Is the search case-sensitive or case-insensitive"
+msgstr "Onko haku tapauskohtainen vai yleinen"
+
+msgid "Length of history"
 msgstr "Historian pituus"
+
+msgid ""
+"Maximum number of entries in the search history. Set this to 0 to disable "
+"search history."
+msgstr "Hakutuloksien maksimimäärä. 0 poistaa hakuhistorian käytöstä."
+
+msgid "Move down"
+msgstr "Siirrä alas"
 
 msgid "Move down a page"
 msgstr "Sivu alaspäin"
+
+msgid "Move up"
+msgstr "Siirrä ylös"
 
 msgid "Move up a page"
 msgstr "Sivu ylöspäin"
@@ -115,6 +186,12 @@ msgstr "Uusi haku"
 
 msgid "No history"
 msgstr "Ei historiaa"
+
+msgid "Number of filters for inclusion/exclusion of results"
+msgstr "Sisällytettyjen/rajoitettujen hakutuloksien suodattimien määrä"
+
+msgid "Number of inclusions/exclusions"
+msgstr "Sisällytettyjen/rajoitettujen lähteiden määrä"
 
 msgid "OK"
 msgstr "OK"
@@ -131,17 +208,36 @@ msgstr "Haku"
 msgid "Search EPG"
 msgstr "Hae ohjelmaoppaasta"
 
-msgid "Search Encoding"
-msgstr "Haun merkistö"
+msgid "Search encoding"
+msgstr "Haun erottelutapa"
 
-msgid "Search for similar events"
-msgstr "Hae samanlaisia ohjelmia"
+msgid "Search in..."
+msgstr "Hae tyypillä..."
+
+msgid "Search scope"
+msgstr "Haun laajuus"
+
+msgid "Search strictness"
+msgstr "Haun tarkkuus"
+
+msgid "Search type"
+msgstr "Hakutyyppi"
+
+msgid "Searching..."
+msgstr "Haetaan..."
 
 msgid "Select a timer to search"
 msgstr "Valitse haettava ajastus"
 
 msgid "Select text to search for"
-msgstr "Syötä haettava teksti"
+msgstr "Valitse haettavan ohjelman nimi"
+
+msgid "Set type of match used to compare program titles with the search string"
+msgstr ""
+"Asettaa hakutyypin jota käytetään lajittelemaan ohjelmanimiä hakutuloksista"
+
+msgid "Sets the default search scope when the user is asked."
+msgstr "Asettaa oletuslaajuuden hauille"
 
 msgid "Setup"
 msgstr "Asetukset"
@@ -149,32 +245,153 @@ msgstr "Asetukset"
 msgid "Setup menu"
 msgstr "Asetusvalikko"
 
-msgid "Show AutoTimer List"
-msgstr "Näytä automaattiajastukset"
+msgid "Show AutoTimer list"
+msgstr "Näytä automaattiajastuslista"
 
-msgid "Show detailed event info"
-msgstr "Näytä ohjelman lisätiedot"
+msgid "Show detailed event information"
+msgstr "Näytä yksityiskohtaiset ohjelmatiedot"
 
 msgid "Show in plugin browser"
 msgstr "Näytä lisäosavalikossa"
 
+msgid "Show orbital position"
+msgstr "Näytä satelliittisijainti"
+
+msgid "Show satellite orbital positions in the search results."
+msgstr "Näytä satelliittisijainnit hakutuloksissa"
+
 msgid "Show search history"
 msgstr "Näytä hakuhistoria"
 
-msgid "Show single epg for current channel"
-msgstr "Näytä nykyisen kanavan ohjelmaopas"
+msgid "Stream"
+msgstr "Streami"
 
-msgid "Zap to channel (setup in menu)"
-msgstr "Vaihda kanavalle (määritetään asetuksissa)"
+msgid ""
+"Use source restrictions below to only include results from the sources, or "
+"exclude them."
+msgstr ""
+"Käytä lähderajoituksia sisällyttääksesi tai rajoittaaksesi hakutuloksia "
+"riippuen lähteestä (DVB-T,C,S)"
 
-msgid "Zap to channel and close (setup in menu)"
-msgstr "Vaihda kanavalle ja sulje (määritetään asetuksissa)"
+msgid "Zap to channel"
+msgstr "Vaihda kanavalle"
+
+msgid "all bouquets"
+msgstr "Kaikki suosikkilistat"
+
+msgid "all services"
+msgstr "Kaikki kanavat"
+
+msgid "ask user"
+msgstr "Kysy käyttäjältä"
+
+msgid "case-insensitive search"
+msgstr "Yleishaku"
+
+msgid "case-sensitive search"
+msgstr "Tapauskohtainen haku"
+
+msgid "current bouquet"
+msgstr "Nykyinen suosikkilista"
+
+msgid "current service"
+msgstr "Nykyinen kanava"
+
+msgid "disabled"
+msgstr "Pois"
+
+msgid "exact match"
+msgstr "Tarkka vastaavuus"
+
+msgid "exclude"
+msgstr "Rajoita"
+
+msgid "include"
+msgstr "Sisällytä"
+
+msgid "partial match"
+msgstr "Osittainen vastaavuus"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
 msgstr "Hae ohjelmaoppaasta"
 
-#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
-msgid "search EPG..."
-msgstr "Hae ohjelmaoppaasta..."
+#. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
+msgid "search EPG from history..."
+msgstr "Hae ohjelmaoppaan hakuhistoriasta"
 
+msgid "title starts with"
+msgstr "Nimi alkaa"
+
+#~ msgid "Add a auto timer for current event"
+#~ msgstr "Lisää automaattiajastus tähän ohjelmaan"
+
+#~ msgid "Add a record timer for current event"
+#~ msgstr "Lisää tallennusajastus tähän ohjelmaan"
+
+#~ msgid "Add a zap timer for current event"
+#~ msgstr "Lisää kanavanvaihtoajastus tähän ohjelmaan"
+
+#~ msgid "Add/Remove timer for current event"
+#~ msgstr "Lisää/poista ajastus tähän ohjelmaan"
+
+#~ msgid "Choose the encode type for search, helpful for foreign languages."
+#~ msgstr "Valitse haun merkistö, hyödyllinen vieraille kielille."
+
+#~ msgid ""
+#~ "Enable this to be able to access the EPG-Search from within the plugin "
+#~ "browser."
+#~ msgstr ""
+#~ "Tämän ollessa päällä, voit avata ohjelmaopashaun lisäosavalikon kautta."
+
+#~ msgid "Exit EPG"
+#~ msgstr "Sulje ohjelmaopas"
+
+#~ msgid "Goto next bouquet"
+#~ msgstr "Mene seuraavalle suosikkilistalle"
+
+#~ msgid "Goto next channel"
+#~ msgstr "Vaihda seuraavalle kanavalle"
+
+#~ msgid "Goto previous bouquet"
+#~ msgstr "Mene edelliselle suosikkilistalle"
+
+#~ msgid "Goto previous channel"
+#~ msgstr "Vaihda edelliselle kanavalle"
+
+#~ msgid ""
+#~ "How many entries to keep in the search history at most. 0 disables "
+#~ "history entirely!"
+#~ msgstr ""
+#~ "Kuinkan monta kohdetta säilytetään hakuhistoriassa. 0 poistaa historian "
+#~ "käytöstä."
+
+#~ msgid "IMDB search for current event"
+#~ msgstr "Nykyisen ohjelman IMDB-haku"
+
+#~ msgid "Length of History"
+#~ msgstr "Historian pituus"
+
+#~ msgid "Search Encoding"
+#~ msgstr "Haun merkistö"
+
+#~ msgid "Search for similar events"
+#~ msgstr "Hae samanlaisia ohjelmia"
+
+#~ msgid "Show AutoTimer List"
+#~ msgstr "Näytä automaattiajastukset"
+
+#~ msgid "Show detailed event info"
+#~ msgstr "Näytä ohjelman lisätiedot"
+
+#~ msgid "Show single epg for current channel"
+#~ msgstr "Näytä nykyisen kanavan ohjelmaopas"
+
+#~ msgid "Zap to channel (setup in menu)"
+#~ msgstr "Vaihda kanavalle (määritetään asetuksissa)"
+
+#~ msgid "Zap to channel and close (setup in menu)"
+#~ msgstr "Vaihda kanavalle ja sulje (määritetään asetuksissa)"
+
+#~ msgid "search EPG..."
+#~ msgstr "Hae ohjelmaoppaasta..."

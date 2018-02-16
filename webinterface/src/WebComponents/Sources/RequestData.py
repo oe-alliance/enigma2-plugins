@@ -24,7 +24,12 @@ class RequestData(Source):
 
 	def getHTML(self, id):
 		if self.what is self.HOST:
-			return self.request.getRequestHostname()
+			host = self.request.getHeader('host')
+			if host:
+				if host[0]=='[':
+					return host.split(']',1)[0] + "]"
+				return host.split(':', 1)[0].encode('ascii')
+			return self.request.getHost().host.encode('ascii')
 		elif self.what is self.PORT:
 			return str(self.request.host.port)
 		elif self.what is self.METHOD:

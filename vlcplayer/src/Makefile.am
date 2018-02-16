@@ -1,5 +1,3 @@
-SUBDIRS = servicets
-
 plugindir = $(libdir)/enigma2/python/Plugins/Extensions/VlcPlayer
 
 plugin_PYTHON = \

@@ -6,23 +6,23 @@ from Components.config import config
 from plugin import autotimer
 
 # Notifications
-from Tools.FuzzyDate import FuzzyTime
-from Tools.Notifications import AddPopup
-from Screens.MessageBox import MessageBox
 import NavigationInstance
+
+# Debug
+from datetime import datetime, timedelta
 
 class AutoPoller:
 	"""Automatically Poll AutoTimer"""
 
 	def __init__(self):
 		# Init Timer
-		print "[AutoTimer] Auto Poll Enabled"
+		print("[AutoTimer] Auto Poll Enabled")
 		self.timer = eTimer()
 
 	def start(self):
 		if self.query not in self.timer.callback:
 			self.timer.callback.append(self.query)
-		self.timer.startLongTimer(config.plugins.autotimer.delay.value*60)
+		self.timer.startLongTimer(config.plugins.autotimer.delay.value * 60)
 
 	def stop(self):
 		if self.query in self.timer.callback:
@@ -32,26 +32,31 @@ class AutoPoller:
 	def query(self):
 		self.timer.stop()
 		from Screens.Standby import inStandby
-		print "[AutoTimer] Auto Poll"
+		print"[AutoTimer] current auto poll", datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+		doparse = True
 		if config.plugins.autotimer.skip_during_records.getValue() and NavigationInstance.instance.RecordTimer.isRecording():
 			print("[AutoTimer] Skip check during running records")
-		else:
-			if config.plugins.autotimer.onlyinstandby.value and inStandby:
-				print "[AutoTimer] Auto Poll Started"
-				# Ignore any program errors
-				try:
-					ret = autotimer.parseEPG(autoPoll = True)
-				except Exception:
-					# Dump error to stdout
-					import traceback, sys
-					traceback.print_exc(file=sys.stdout)
-			elif not config.plugins.autotimer.onlyinstandby.value:
-				print "[AutoTimer] Auto Poll Started"
-				# Ignore any program errors
-				try:
-					ret = autotimer.parseEPG(autoPoll = True)
-				except Exception:
-					# Dump error to stdout
-					import traceback, sys
-					traceback.print_exc(file=sys.stdout)
-		self.timer.startLongTimer(config.plugins.autotimer.interval.value*60)
+			doparse = False
+		if config.plugins.autotimer.skip_during_epgrefresh.value:
+			try:
+				from Plugins.Extensions.EPGRefresh.EPGRefresh import epgrefresh
+				if epgrefresh.isrunning:
+					print("[AutoTimer] Skip check during running EPGRefresh")
+					doparse = False
+			except:
+				pass
+		if not inStandby and config.plugins.autotimer.onlyinstandby.value:
+			print("[AutoTimer] Skip check while not in Standby")
+			doparse = False
+		if doparse:
+			print("[AutoTimer] Auto Poll Started")
+			# Ignore any program errors
+			try:
+				ret = autotimer.parseEPG(autoPoll=True)
+			except Exception:
+				# Dump error to stdout
+				import traceback, sys
+				traceback.print_exc(file=sys.stdout)
+		multiplier = config.plugins.autotimer.unit.value == "hour" and 60 or 1
+		self.timer.startLongTimer(config.plugins.autotimer.interval.value * 60 * multiplier)
+		print"[AutoTimer] next auto poll at", (datetime.now() + timedelta(minutes=config.plugins.autotimer.interval.value * multiplier)).strftime('%Y-%m-%d %H:%M:%S')

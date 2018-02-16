@@ -24,7 +24,7 @@ class ServiceList(Source):
 			else:
 				isMarker = "0"
 			isProtected = "0"
-			if config.ParentalControl.configured.value:
+			if config.ParentalControl.servicepinactive.value:
 				protection = parentalControl.getProtectionType(item[0].toCompareString())
 				if protection[0]:
 					if protection[1] == IMG_BLACKSERVICE:

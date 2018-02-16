@@ -38,7 +38,7 @@ msgid "Channel Selection"
 msgstr "Kanalite valik"
 
 #: ../src/plugin.py:470
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "Saate nime ei tuvastatud"
 
 #: ../src/plugin.py:340
@@ -112,7 +112,7 @@ msgstr "Otsing"
 
 #: ../src/plugin.py:529
 #: ../src/plugin.py:530
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr "Vastet ei leitud"
 
 #: ../src/plugin.py:604

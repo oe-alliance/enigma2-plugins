@@ -11,6 +11,7 @@ from Screens.InfoBar import InfoBar
 from Components.config import config, ConfigSubsection, ConfigSelection
 
 from NamezapSetup import NamezapSetup
+from boxbranding import getImageDistro
 
 config.plugins.namezap = ConfigSubsection()
 config.plugins.namezap.style = ConfigSelection(choices = [
@@ -102,8 +103,15 @@ def main(session, *args, **kwargs):
 	session.open(NamezapSetup)
 
 def menu(menuid):
-	if menuid != "system":
-		return []
+	if getImageDistro() in ('teamblue'):
+		if menuid != "ui_menu":
+			return [ ]
+	elif getImageDistro() in ('openhdf'):
+		if menuid != "gui_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return []
 	return [(_("NameZAP Setup"), main, "namezap_setup", None)]
 
 def Plugins(**kwargs):

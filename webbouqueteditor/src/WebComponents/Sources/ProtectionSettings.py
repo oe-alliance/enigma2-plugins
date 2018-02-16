@@ -8,7 +8,7 @@ class ProtectionSettings(Source):
 		Source.__init__(self)
 
 	def getProtectionSettings(self):
-		configured = config.ParentalControl.configured.value
+		configured = config.ParentalControl.servicepinactive.value
 		if configured:
 			if config.ParentalControl.type.value == LIST_BLACKLIST:
 				type = "0"

@@ -1,19 +1,18 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: shoutcast\n"
+"Project-Id-Version: Shoutcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"POT-Creation-Date: 2017-11-09 23:22+0000\n"
 "PO-Revision-Date: \n"
-"Last-Translator: R.L. van der Does\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
-"Language: \n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
 #, python-format
@@ -44,6 +43,9 @@ msgstr ">= 256 kbps"
 msgid ">= 64 kbps"
 msgstr ">= 64 kbps"
 
+msgid "Activate Picture in Picture"
+msgstr "Activeer Picture in Picture"
+
 msgid "Add current playing stream to favorite"
 msgstr "Lopende zender aan favorietenlijst toevoegen"
 
@@ -70,6 +72,9 @@ msgstr "Bitrate: %s kbps"
 msgid "Cancel"
 msgstr "Annuleren"
 
+msgid "Choose action:"
+msgstr "Kies actie:"
+
 msgid "Config"
 msgstr "Configuratie"
 
@@ -81,6 +86,9 @@ msgstr "Coverbreedte:"
 
 msgid "Create a directory for each stream"
 msgstr "Voor elke opname een eigen map maken"
+
+msgid "Disable Picture in Picture"
+msgstr "Deactiveer Picture in Picture"
 
 msgid "Do you really want to stop the recording?"
 msgstr "Wilt u d eopname echt stoppen?"
@@ -94,6 +102,10 @@ msgstr "Geef een nieuwe naam op voor de favoriet"
 msgid "Enter text to search for"
 msgstr "Geef zoekargument op"
 
+#, python-format
+msgid "Error create directory %s!"
+msgstr "Fout bij creëren map %s!"
+
 msgid "Error downloading cover..."
 msgstr "Fout met het downloaden van cover..."
 
@@ -102,6 +114,9 @@ msgstr "Favorietenlijst"
 
 msgid "Favorites"
 msgstr "Favorieten"
+
+msgid "First play streaming!"
+msgstr "Ga eerst streamen!"
 
 msgid "Genres"
 msgstr "Genres"
@@ -138,6 +153,12 @@ msgstr "Verbergen"
 msgid "Invalid Location"
 msgstr "Ongeldig opnamepad"
 
+msgid "Menu PiP"
+msgstr "Menu PiP"
+
+msgid "Move Picture in Picture"
+msgstr "Verplaats Picture in Picture"
+
 msgid "No streaming data found..."
 msgstr "Geen data gevonden...."
 
@@ -173,6 +194,9 @@ msgstr "Opslaan als enkel bestand (datum/tijd wordt daaraan toegevoegd)"
 msgid "SHOUTcast genre list"
 msgstr "SHOUTcast genelijst"
 
+msgid "SHOUTcast setup"
+msgstr "SHOUTcast instellingen"
+
 #, python-format
 msgid "SHOUTcast station list for %s"
 msgstr "SHOUTcast stationsljist voor %s"
@@ -183,6 +207,9 @@ msgstr "Zoek"
 #, python-format
 msgid "Searching SHOUTcast for %s..."
 msgstr "Doorzoek SHOUTcast naar %s..."
+
+msgid "Select record path for streamripper"
+msgstr "Kies opnamepad voor streamripper"
 
 msgid "Show cover:"
 msgstr "Toon cover:"
@@ -213,6 +240,12 @@ msgstr "Titel: %s"
 msgid "Title: n/a"
 msgstr "Titel: n/a"
 
+msgid "Zap focus to Picture in Picture"
+msgstr "Zap focus naar Picture in Picture"
+
+msgid "Zap focus to main screen"
+msgstr "Zap focus naar hoofdscherm"
+
 msgid "every five minutes"
 msgstr "elke 5 minuten"
 
@@ -238,6 +271,9 @@ msgstr "hernoemen"
 #, python-format
 msgid "search-criteria %s"
 msgstr "Zoekcriterium %s"
+
+msgid "streamripper not installed!"
+msgstr "Streamripper niet geïnstalleerd!"
 
 #~ msgid "This Dreambox can't decode %s streams!"
 #~ msgstr "Deze Dreambox kan %s stream niet decoderen!"

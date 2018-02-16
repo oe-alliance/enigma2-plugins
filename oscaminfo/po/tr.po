@@ -1,21 +1,23 @@
 # Turkish translations for enigma2-plugins package.
 # Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the enigma2-plugins package.
-# Automatically generated, 2012.
 #
+# Automatically generated, 2012.
+# Hasan Kiran <sunder67@hotmail.com>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-03 18:53+0100\n"
-"PO-Revision-Date: 2012-07-03 18:53+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2016-12-22 13:49+0200\n"
+"Last-Translator: Hasan Kiran <sunder67@hotmail.com>\n"
+"Language-Team: Turkish <sunder67@hotmail.com>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: ../src/plugin.py:1112
 msgid "( All readers)"
@@ -27,7 +29,7 @@ msgstr ""
 
 #: ../src/plugin.py:332
 msgid "Address"
-msgstr ""
+msgstr "Adres"
 
 #: ../src/plugin.py:1190
 msgid "Automatically update Client/Server View?"
@@ -39,7 +41,7 @@ msgstr ""
 
 #: ../src/plugin.py:1153
 msgid "Cancel"
-msgstr ""
+msgstr "İptal"
 
 #: ../src/plugin.py:361
 msgid "Card infos (CCcam-Reader)"
@@ -47,15 +49,15 @@ msgstr ""
 
 #: ../src/plugin.py:971
 msgid "Cards:"
-msgstr ""
+msgstr "Kartlar:"
 
 #: ../src/plugin.py:1119
 msgid "Channel"
-msgstr ""
+msgstr "Kanal"
 
 #: ../src/plugin.py:633 ../src/plugin.py:760
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 #: ../src/plugin.py:361
 msgid "ECM Statistics"
@@ -79,7 +81,7 @@ msgstr ""
 
 #: ../src/plugin.py:828
 msgid "Error"
-msgstr ""
+msgstr "Hata"
 
 #: ../src/plugin.py:431 ../src/plugin.py:441 ../src/plugin.py:451
 msgid ""
@@ -97,7 +99,7 @@ msgstr ""
 
 #: ../src/plugin.py:57 ../src/plugin.py:1119
 msgid "Label"
-msgstr ""
+msgstr "Etiket"
 
 #: ../src/plugin.py:1119
 msgid "Last Req."
@@ -117,7 +119,7 @@ msgstr ""
 
 #: ../src/plugin.py:1154
 msgid "OK"
-msgstr ""
+msgstr "Tamam"
 
 #: ../src/plugin.py:1179
 msgid "Oscam Info - Configuration"
@@ -129,7 +131,7 @@ msgstr ""
 
 #: ../src/plugin.py:1187
 msgid "Password (httpwd)"
-msgstr ""
+msgstr "Parola (httpwd)"
 
 #: ../src/plugin.py:464
 msgid "Please choose CCcam-Reader"
@@ -141,15 +143,15 @@ msgstr ""
 
 #: ../src/plugin.py:57 ../src/plugin.py:334
 msgid "Protocol"
-msgstr ""
+msgstr "Protokol"
 
 #: ../src/plugin.py:328
 msgid "Provider"
-msgstr ""
+msgstr "Sağlayıcı"
 
 #: ../src/plugin.py:903 ../src/plugin.py:1043
 msgid "Providers: "
-msgstr ""
+msgstr "Sağlayıcılar: "
 
 #: ../src/plugin.py:1184
 msgid "Read Userdata from oscam.conf"
@@ -157,11 +159,11 @@ msgstr ""
 
 #: ../src/plugin.py:971
 msgid "Reader"
-msgstr ""
+msgstr "Okuyucu"
 
 #: ../src/plugin.py:1129
 msgid "Reader Statistics"
-msgstr ""
+msgstr "Okuyucu İstatistikleri"
 
 #: ../src/plugin.py:58
 msgid "Serv.Name"
@@ -169,7 +171,7 @@ msgstr ""
 
 #: ../src/plugin.py:361
 msgid "Setup"
-msgstr ""
+msgstr "Ayarlar"
 
 #: ../src/plugin.py:361
 msgid "Show /tmp/ecm.info"
@@ -181,7 +183,7 @@ msgstr ""
 
 #: ../src/plugin.py:361
 msgid "Show Log"
-msgstr ""
+msgstr "Günlüğü göster"
 
 #: ../src/plugin.py:361
 msgid "Show Readers/Proxies"
@@ -197,7 +199,7 @@ msgstr ""
 
 #: ../src/plugin.py:1119
 msgid "Status"
-msgstr ""
+msgstr "Durum"
 
 #: ../src/plugin.py:97
 msgid "There is no [webif] section in oscam.conf"
@@ -205,11 +207,11 @@ msgstr ""
 
 #: ../src/plugin.py:1119
 msgid "Total"
-msgstr ""
+msgstr "Toplam"
 
 #: ../src/plugin.py:1192
 msgid "Update interval (in seconds)"
-msgstr ""
+msgstr "Güncelleme aralığı (saniye)"
 
 #: ../src/plugin.py:1186
 msgid "Username (httpuser)"

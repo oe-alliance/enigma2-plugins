@@ -6,7 +6,7 @@ from Screens.Screen import Screen
 from enigma import iPlayableService, eAVSwitch
 
 # list of mode choices to cycle through
-MODE_CHOICES = ["pillarbox", "panscan"]
+MODE_CHOICES = ["letterbox", "panscan"]
 
 def get_mode():
 	return config.av.policy_43.value
@@ -37,7 +37,7 @@ class LetterBox(Screen):
 		modeidx = MODE_CHOICES.index(mode)
 		modeidx = (modeidx + 1) % len(MODE_CHOICES)
 		set_mode(MODE_CHOICES[modeidx])
-		aspectratio = {"panscan": _("Pan&Scan"), "pillarbox": _("Pillarbox")}
+		aspectratio = {"letterbox": _("Pan&Scan"), "panscan": _("Pillarbox")}
 		self.session.open(MessageBox, _("Display 4:3 content as") + "\n" + aspectratio[config.av.policy_43.value], MessageBox.TYPE_INFO, 3)
 		self.used = True
 

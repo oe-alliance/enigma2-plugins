@@ -9,6 +9,10 @@ from Components.config import config, ConfigYesNo, ConfigNumber, ConfigSelection
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
 from Tools.BoundFunction import boundFunction
+from boxbranding import getImageDistro
+
+from Components.SystemInfo import SystemInfo
+from Components.NimManager import nimmanager
 
 # Error-print
 from traceback import print_exc
@@ -18,11 +22,11 @@ from sys import stdout
 from time import time, localtime, mktime
 now = localtime()
 begin = mktime((
-	now.tm_year, now.tm_mon, now.tm_mday, 20, 15, \
+	now.tm_year, now.tm_mon, now.tm_mday, 07, 30, \
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 end = mktime((
-	now.tm_year, now.tm_mon, now.tm_mday, 06, 30, \
+	now.tm_year, now.tm_mon, now.tm_mday, 20, 00, \
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 
@@ -52,13 +56,15 @@ config.plugins.epgrefresh.parse_autotimer = ConfigSelection(choices = [
 		("ask_no", _("Ask default No")),
 	], default = "never"
 )
-config.plugins.epgrefresh.adapter = ConfigSelection(choices = [
-		("main", _("Main Picture")),
-		("pip", _("Picture in Picture")),
-		("pip_hidden", _("Picture in Picture (hidden)")),
-		("record", _("Fake recording")),
-	], default = "main"
-)
+
+adapter_choices = [("main", _("Main Picture"))]
+if SystemInfo.get("NumVideoDecoders", 1) > 1:
+	adapter_choices.append(("pip", _("Picture in Picture")))
+	adapter_choices.append(("pip_hidden", _("Picture in Picture (hidden)")))
+if len(nimmanager.nim_slots) > 1:
+	adapter_choices.append(("record", _("Fake recording")))
+config.plugins.epgrefresh.adapter = ConfigSelection(choices = adapter_choices, default = "main")
+
 config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.epgrefresh.show_run_in_extensionsmenu = ConfigYesNo(default = True)
 config.plugins.epgrefresh.show_help = ConfigYesNo(default = True)
@@ -97,12 +103,13 @@ except Exception as e:
 #pragma mark -
 
 # Notification-Domain
+# Q: Do we really need this or can we do this better?
 from Tools import Notifications
 try:
 	Notifications.notificationQueue.registerDomain(NOTIFICATIONDOMAIN, _("EPGREFRESH_NOTIFICATION_DOMAIN"), deferred_callable = True)
 except Exception as e:
 	EPGRefreshNotificationKey = ""
-	print("[EPGRefresh] Error registering Notification-Domain:", e)
+	#print("[EPGRefresh] Error registering Notification-Domain:", e)
 	
 # Plugin
 from EPGRefresh import epgrefresh
@@ -233,15 +240,15 @@ def eventinfo(session, servicelist, **kwargs):
 def extensionsmenu(session, **kwargs):
 	main(session, **kwargs)
 
-extPrefix = _("EXTENSIONMENU_PREFIX")
-extSetupDescriptor = PluginDescriptor(name = extPrefix + " " + _("EXTENSIONNAME_SETUP"), description = _("Automatically refresh EPG"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart=False)
-extRunDescriptor = PluginDescriptor(name = extPrefix + " " + _("Refresh now"), description = _("Start EPGrefresh immediately"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = forceRefresh, needsRestart = False)
-extStopDescriptor = PluginDescriptor(name = extPrefix + " " + _("Stop Refresh"), description = _("Stop Running EPG-refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = stopRunningRefresh, needsRestart = False)
-extPendingServDescriptor = PluginDescriptor(name = extPrefix + " " + _("Pending Services"), description = _("Show the pending Services for refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = showPendingServices, needsRestart = False)
+extSetupDescriptor = PluginDescriptor( _("EPG-Refresh_SetUp"), description = _("Automatically refresh EPG"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart=False)
+extRunDescriptor = PluginDescriptor( _("EPG-Refresh_Refresh now"), description = _("Start EPGrefresh immediately"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = forceRefresh, needsRestart = False)
+extStopDescriptor = PluginDescriptor( _("EPG-Refresh_Stop Refresh"), description = _("Stop Running EPG-refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = stopRunningRefresh, needsRestart = False)
+extPendingServDescriptor = PluginDescriptor( _("EPG-Refresh_Pending Services"), description = _("Show the pending Services for refresh"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = showPendingServices, needsRestart = False)
 
 def AdjustExtensionsmenu(enable, PlugDescriptor):
 	if enable:
-		plugins.addPlugin(PlugDescriptor)
+		if PlugDescriptor not in plugins.getPlugins(PlugDescriptor.where):
+			plugins.addPlugin(PlugDescriptor)
 	else:
 		try:
 			plugins.removePlugin(PlugDescriptor)
@@ -262,6 +269,14 @@ def housekeepingExtensionsmenu(configentry, force=False):
 
 config.plugins.epgrefresh.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 config.plugins.epgrefresh.show_run_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
+
+def menu_main(menuid, **kwargs):
+	if getImageDistro() in ("openvix", "openatv", "openspa"):
+		if menuid != "epg":
+			return []
+	else:
+		return []
+	return [(_("EPGRefresh"), main, "epgrefresh", None)]
 
 def Plugins(**kwargs):
 	# NOTE: this might be a little odd to check this, but a user might expect
@@ -290,7 +305,7 @@ def Plugins(**kwargs):
 			needsRestart = needsRestart,
 		),
 		PluginDescriptor(
-			name = _("PLUGINNAME_EPGRefresh"),
+			name = _("EPGRefresh"),
 			description = _("Automatically refresh EPG"),
 			where = PluginDescriptor.WHERE_PLUGINMENU, 
 			fnc = main,
@@ -298,6 +313,12 @@ def Plugins(**kwargs):
 			needsRestart = needsRestart,
 		),
 	]
+	list.append(PluginDescriptor(name = _("EPGRefresh"),
+					description = _("Automatically refresh EPG"),
+					where = PluginDescriptor.WHERE_MENU,
+					fnc = menu_main))
+
+
 	if config.plugins.epgrefresh.show_in_extensionsmenu.value:
 		extSetupDescriptor.needsRestart = needsRestart
 		list.append(extSetupDescriptor)

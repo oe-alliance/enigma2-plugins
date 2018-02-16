@@ -63,7 +63,7 @@ class MSNWeatherPlugin(Screen):
 			<widget render="Label" source="observationpoint" position="204,65" zPosition="1" size="450,40" font="Regular;14" transparent="1" halign="right" />
 			<widget name="currenticon" position="10,95" zPosition="1" size="55,45" alphatest="blend"/>
 			<widget render="Label" source="currentTemp" position="90,95" zPosition="1" size="100,23" font="Regular;22" transparent="1"/>
-			<widget render="Label" source="feelsliketemp" position="90,120" zPosition="1" size="140,20" font="Regular;14" transparent="1"/>
+			<widget render="Label" source="feelsliketemp" position="90,120" zPosition="1" size="155,40" font="Regular;14" transparent="1"/>
 			<widget render="Label" source="condition" position="270,95" zPosition="1" size="300,20" font="Regular;18" transparent="1"/>
 			<widget render="Label" source="wind_condition" position="270,115" zPosition="1" size="300,20" font="Regular;18" transparent="1"/>
 			<widget render="Label" source="humidity" position="270,135" zPosition="1" size="300,20" font="Regular;18" valign="bottom" transparent="1"/>

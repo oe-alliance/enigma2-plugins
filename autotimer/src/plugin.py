@@ -4,13 +4,18 @@ from . import _, config
 
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
+#from Tools.Notifications import AddPopup
+
 # Plugin
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
+from boxbranding import getImageDistro
 
 from AutoTimer import AutoTimer
 autotimer = AutoTimer()
 autopoller = None
+
+AUTOTIMER_VERSION = "4.1.2"
 
 #pragma mark - Help
 try:
@@ -68,7 +73,7 @@ def sessionstart(reason, **kwargs):
 			from AutoTimerResource import AutoTimerDoParseResource, \
 				AutoTimerListAutoTimerResource, AutoTimerAddOrEditAutoTimerResource, \
 				AutoTimerRemoveAutoTimerResource, AutoTimerChangeSettingsResource, \
-				AutoTimerSettingsResource, AutoTimerSimulateResource, API_VERSION
+				AutoTimerSettingsResource, AutoTimerSimulateResource, AutoTimerTestResource, API_VERSION
 		except ImportError as ie:
 			pass
 		else:
@@ -87,6 +92,7 @@ def sessionstart(reason, **kwargs):
 			root.putChild('get', AutoTimerSettingsResource())
 			root.putChild('set', AutoTimerChangeSettingsResource())
 			root.putChild('simulate', AutoTimerSimulateResource())
+			root.putChild('test', AutoTimerTestResource())
 			addExternalChild( ("autotimer", root , "AutoTimer-Plugin", API_VERSION, False) )
 
 			# webgui
@@ -131,7 +137,8 @@ def editCallback(session):
 	# Don't parse EPG if editing was canceled
 	if session is not None:
 		# Save xml
-		autotimer.writeXml()
+		if config.plugins.autotimer.always_write_config.value:
+			autotimer.writeXml()
 		# Poll EPGCache
 		autotimer.parseEPG()
 
@@ -193,6 +200,8 @@ def Plugins(**kwargs):
 
 def timermenu(menuid):
 	if menuid == "timermenu":
-		return [(_("AutoTimers"), main, "autotimer_setup", None)]
+		if getImageDistro() in ('openhdf'):
+			return [(_("Auto Timer"), main, "autotimer_setup", None)]
+		else:
+			return [(_("AutoTimers"), main, "autotimer_setup", None)]
 	return []
-

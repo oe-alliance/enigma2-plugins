@@ -134,8 +134,12 @@ void freeShareInfo(shareinfo *sInfo)
 /****************************************************************************
 hier gehts los 
 ****************************************************************************/
-int smbInfo(char *pythonIp , char *pythonrName, char *pythonUser, char *pythonPass, shareinfo *sInfo) 
+int smbInfo(char *pythonIp, char *pythonrName, char *pythonUser, char *pythonPass, shareinfo *sInfo)
 {
+#if DEBUG
+	printf("%s: %s(pythonIp=%s, pythonrName=%s, pythonUser=%s, pythonPass=%s)\n",
+	        __FILE__, __func__, pythonIp, pythonrName, pythonUser, pythonPass);
+#endif
 	int port = 139;
 	have_ip = True;
 	NeedSwap = big_endian();
@@ -504,7 +508,7 @@ BOOL send_login(char *inbuf,char *outbuf,BOOL use_setup)
   char *p;
   int len = 4;
   int numprots;
-	/* mal auskommentiert
+  /* mal auskommentiert
   if (connect_as_printer)
     strcpy(dev,"LPT1:");
   if (connect_as_ipc)*/

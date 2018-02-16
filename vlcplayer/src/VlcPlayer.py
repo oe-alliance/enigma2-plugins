@@ -1,6 +1,6 @@
 # -*- coding: ISO-8859-1 -*-
 #===============================================================================
-# VLC Player Plugin by A. Lätsch 2007
+# VLC Player Plugin by A. Latsch 2007
 #                   modified by Volker Christian 2008
 #
 # This is free software; you can redistribute it and/or modify it under
@@ -11,7 +11,7 @@
 
 
 from time import time
-
+from . import _
 from enigma import iPlayableServicePtr
 from enigma import iPlayableService
 from enigma import iServiceInformation
@@ -22,13 +22,15 @@ from enigma import eTimer
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.MinuteInput import MinuteInput
-from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarAudioSelection
+from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarAudioSelection, InfoBarSubtitleSupport
 from Components.Sources.Source import Source
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import ActionMap
 from Components.config import config
-from Components.Label import Label
 
+from Screens.ChoiceBox import ChoiceBox
+from Components.Button import Button
+from os import system
 
 def isValidServiceId(id):
 	testSRef = eServiceReference(id, 0, "Just a TestReference")
@@ -186,6 +188,8 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 	def frontendInfo(self): return None
 	def timeshift(self): return None
 	def subtitle(self): return None
+#		return self.player.subtitle()
+
 	def audioDelay(self): return None
 	def rdsDecoder(self): return None
 	def stream(self): return None
@@ -216,9 +220,9 @@ class VlcPlayerSummary(Screen):
 	def __init__(self, session, parent):
 		Screen.__init__(self, session)
 		self.skinName = "InfoBarMoviePlayerSummary"
-		
 
-class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
+
+class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubtitleSupport):
 	screen_timeout = 5000
 
 	STATE_IDLE = 0
@@ -229,7 +233,9 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
 		InfoBarAudioSelection.__init__(self)
+		InfoBarSubtitleSupport.__init__(self)
 		self.server = server
+		self.seek_time = 600
 		self.currentList = currentList
 		self.skinName = "MoviePlayer"
 		self.state = self.STATE_IDLE
@@ -241,10 +247,6 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		self.hidetimer = eTimer()
 		self.hidetimer.timeout.get().append(self.ok)
 		self.onClose.append(self.__onClose)
-		self["key_red"] = Label("")
-		self["key_green"] = Label("")
-		self["key_yellow"] = Label("")
-		self["key_blue"] = Label("")
 
 		class VlcPlayerActionMap(ActionMap):
 			def __init__(self, player, contexts = [ ], actions = { }, prio=0):
@@ -258,15 +260,15 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 					return 1
 				elif action[:8] == "seekdef:":
 					key = int(action[8:])
-					time = [-config.seek.selfdefined_13.getValue(), False, config.seek.selfdefined_13.getValue(),
-							-config.seek.selfdefined_46.getValue(), False, config.seek.selfdefined_46.getValue(),
-							-config.seek.selfdefined_79.getValue(), False, config.seek.selfdefined_79.getValue()][key-1]
+					time = [-config.seek.selfdefined_13.value, False, config.seek.selfdefined_13.value,
+							-config.seek.selfdefined_46.value, False, config.seek.selfdefined_46.value,
+							-config.seek.selfdefined_79.value, False, config.seek.selfdefined_79.value][key-1]
 					self.player.seekRelative(time)
 					return 1
 				else:
 					return ActionMap.action(self, contexts, action)
 
-		self["actions"] = VlcPlayerActionMap(self, ["OkCancelActions", "TvRadioActions", "InfobarSeekActions", "MediaPlayerActions"],
+		self["actions"] = VlcPlayerActionMap(self, ["OkCancelActions", "TvRadioActions", "InfobarSeekActions", "MediaPlayerActions", "ChannelSelectEPGActions"],
 		{
 				"ok": self.ok,
 				"cancel": self.stop,
@@ -283,7 +285,10 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 				"seekFwdManual": self.seekManual,
 				"seekBackManual": self.seekManual,
 				"next": self.playNextFile,
-				"previous": self.playPrevFile
+				"previous": self.playPrevFile,
+				"menu": self.openVCS,
+				"showEPGList": self.choiceJumping,
+				"subtitles": self.subtitleSelection
 			}, -2)
 
 		print "[VLC] evEOF=%d" % iPlayableService.evEOF
@@ -301,6 +306,40 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		self.session.screen["CurrentService"] = self.oldservice
 		self.session.nav.playService(self.oldNavService)
 
+	def choiceJumping(self):
+		try:
+			self.session.openWithCallback(self.choicesCallback, ChoiceBox, title=_("Choice of minutes to jump"), list=[(_("1 minute"), "1"), (_("3 minutes"), "3"),(_("5 minutes"), "5"), (_("10 minutes"), "10"),(_("15 minutes"), "15"), (_("20 minutes"), "20"),(_("30 minutes"), "30"),])
+		except:
+			pass
+
+	def choicesCallback(self, answer):
+		if answer is None:
+			return
+		if answer[1] == "1":
+			self.seek_time = 60
+		elif answer[1] == "3":
+			self.seek_time = 180
+		elif answer[1] == "5":
+			self.seek_time = 300
+		elif answer[1] == "10":
+			self.seek_time = 600
+		elif answer[1] == "15":
+			self.seek_time = 900
+		elif answer[1] == "20":
+			self.seek_time = 1200
+		elif answer[1] == "30":
+			self.seek_time = 1800
+		else:
+			pass
+
+
+	def openVCS(self):
+		try:
+			from Plugins.Extensions.VCS.VCS import VcsChoiseList
+			VcsChoiseList(self.session)
+		except:
+			pass
+
 	def __evEOF(self):
 		print "[VLC] Event EOF"
 		self.stop()
@@ -314,6 +353,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			self.stopCurrent()
 		self.filename = path
 		self.vlcservice.setName(name)
+		self.name = name
 		self.play()
 
 	def play(self):
@@ -336,11 +376,51 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		except Exception, e:
 			self.hide()
 			self.session.open(
-					MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR
+					MessageBox, (_("Error with VLC server:\n%s") % e), MessageBox.TYPE_ERROR
 			)
 			self.close()
 			return
 		if url is not None:
+			self.url = url
+			if self.server.getUseCachedir():
+				self.session.openWithCallback(self.actions, ChoiceBox, title=_("Select method?"), list=[(_("Direct play"), "dirplay"), (_("Save as .ts and play"), "cache"),])
+			else:
+				self.actions((_("Direct play"), "dirplay"))
+
+	def actions(self, answer):
+		if answer is None:
+			self.stop()
+			return
+		if answer[1] == "dirplay":
+			url = self.url
+			sref = eServiceReference(ENIGMA_SERVICE_ID, 0, url)
+			print "sref valid=", sref.valid()
+			sref.setData(0, DEFAULT_VIDEO_PID)
+			sref.setData(1, DEFAULT_AUDIO_PID)
+			self.session.nav.playService(sref)
+			self.state = self.STATE_PLAYING
+			if self.shown:
+				self.__setHideTimer()
+			self.vlcservice.setServer(self.server)
+
+		elif answer[1] == "cache":
+			svfile = self.server.getCachedir() + "/" + self.name + ".ts"
+			pcip = self.server.getHost() + "\n"
+			pcport = str(self.server.getHttpPort()) + "\n"
+			f = open('/etc/copylast.txt', 'w')
+			text = svfile + "\n"
+			f.write(text)
+			f.write(pcip)
+			f.write(pcport)
+			f.close()
+			url = self.url
+			print " svfile  =", svfile
+			print " url  =", url
+			cmd = "rm " + svfile
+			system(cmd)
+			cmd1 = "wget -c '" + url + "' -O '" + svfile + "' &"
+			system(cmd1)
+			url = self.url
 			sref = eServiceReference(ENIGMA_SERVICE_ID, 0, url)
 			print "sref valid=", sref.valid()
 			sref.setData(0, DEFAULT_VIDEO_PID)
@@ -364,6 +444,16 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		elif self.state == self.STATE_PAUSED:
 			self.unpause()
 
+	def subtitleSelection(self):
+		service = self.session.nav.getCurrentService()
+		subtitle = service and service.subtitle()
+		if subtitle is not None:
+			from Screens.AudioSelection import SubtitleSelection
+			try:
+				self.session.open(SubtitleSelection, self)
+			except:
+				pass
+
 	def unpause(self):
 		print "[VLC] unpause"
 		try:
@@ -371,7 +461,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			self.server.unpause()
 		except Exception, e:
 			self.session.open(
-				MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR
+				MessageBox, (_("Error with VLC server:\n%s") % e), MessageBox.TYPE_ERROR
 			)
 			self.stop()
 			return
@@ -398,9 +488,10 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			self.server.stop()
 			self.server.deleteCurrentTree()
 		except Exception, e:
-			self.session.open(
-				MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR
-			)
+			#self.session.open(
+			#	MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR
+			#)
+			return
 		self.state = self.STATE_IDLE
 		self.vlcservice.setServer(None)
 		self.vlcservice.refresh()
@@ -488,6 +579,9 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 	def audioTracks(self):
 		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().audioTracks();
 
+	def subtitle(self):
+		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().subtitle();
+
 	def seekRelative(self, delta):
 		"""delta is seconds as integer number
 		positive=forwards, negative=backwards"""
@@ -509,7 +603,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			self.playfile(url, "DVD")
 			self.showInfobar()
 		else:
-			self.seekRelative(600)
+			self.seekRelative(self.seek_time)
 
 	def seekBack(self):
 		if isDvdUrl(self.filename):
@@ -522,7 +616,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			self.playfile(url, "DVD")
 			self.showInfobar()
 		else:
-			self.seekRelative(-600)
+			self.seekRelative(-self.seek_time)
 
 	def seekToMinute(self, minutes):
 		self.server.seek(str(int(minutes)*60))

@@ -1,309 +1,325 @@
 # translation of ca.po to
 # Copyright (C) 2006 THE tuxbox-enigma'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the tuxbox-enigma package.
-#
-# Automatically generated, 2006.
-# Oriol Pellicer i Sabrià <oriol@elsud.org>, 2006, 2007.
+
 msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2007-08-14 10:23+0200\n"
-"Last-Translator: Oriol Pellicer <oriol@elsud.org>\n"
-"Language-Team: \n"
-"Language: \n"
+"PO-Revision-Date: 2017-09-16 19:47+0200\n"
+"Last-Translator: JR <openspateam@gmail.com>\n"
+"Language-Team: catalan\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Catalan\n"
-"X-Poedit-Country: CATALONIA\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Poedit 2.0.3\n"
 
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
 msgstr ""
+"Un muntatge amb aquest nom ja existeix!\n"
+"Actualitzar l'entrada existent i continuar?\n"
 
 msgid ""
 "A mount entry with this name already exists!\n"
 "and is not this share folder, please use a different name.\n"
 msgstr ""
+"Un muntatge amb aquest nom ja existeix!\n"
+"i no és aquesta carpeta compartida, utilitza un nom diferent.\n"
 
 msgid "Active"
-msgstr ""
+msgstr "Actiu"
 
 msgid ""
 "Active/\n"
 "Inactive"
 msgstr ""
+"Actiu/\n"
+"Inactiu"
 
 msgid "Add a new NFS or CIFS mount point to your Receiver."
-msgstr ""
+msgstr "Afegir un punt de muntatge NFS o CIFS nou al teu receptor."
 
 msgid "Add new network mount point"
-msgstr ""
+msgstr "Afegir un punt de muntatge de xarxa nou"
 
 msgid "Adding schedule..."
-msgstr ""
+msgstr "Afegir programació..."
 
 msgid "Are you sure you want to remove your network mount ?"
-msgstr ""
+msgstr "Estàs segur d'eliminar el muntatge de xarxa?"
 
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
 msgstr ""
+"Estàs segur de guardar aquest muntatge de xarxa?\n"
+"\n"
 
 msgid "Attempt to mount shares again"
-msgstr ""
+msgstr "Intentar muntar els recursos de nou"
 
 msgid "Attempt to recover lost mounts (in background)"
-msgstr ""
+msgstr "Intentar recuperar muntatges perduts (en segon pla)"
 
 msgid "Browse network neighbourhood"
-msgstr ""
+msgstr "Explorador de xarxa"
 
 msgid "CIFS share"
-msgstr ""
+msgstr "CIFS"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel·lar"
 
 msgid "Change hostname"
-msgstr ""
+msgstr "Canviar nom del host"
 
 msgid "Change the hostname of your Receiver."
-msgstr ""
+msgstr "Canviar non del host del receptor"
 
 msgid "Close"
-msgstr ""
+msgstr "Tancar"
 
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 msgid "Delete mount"
-msgstr ""
+msgstr "Eliminar muntatge"
 
 msgid "Dir:"
-msgstr ""
+msgstr "Dir:"
 
 msgid "Do you want to enter a username and password for this host?"
-msgstr ""
+msgstr "Vols introduir un nom d'usuari i contrassenya per aquest host?"
 
 msgid "Enigma2 (mount using enigma2)"
-msgstr ""
+msgstr "Enigma2 (muntar utilitzant enigma2)"
 
 msgid "Enigma2 old format (mount using linux)"
-msgstr ""
+msgstr "Format antic d'Enigma2 (muntar utilitzant linux) "
 
 msgid "Enter IP to scan..."
-msgstr ""
+msgstr "Introduir IP a buscar..."
 
 msgid "Enter new hostname for your Receiver"
-msgstr ""
+msgstr "Introduir nom de host nou per al receptor"
 
 msgid "Enter options:"
-msgstr ""
+msgstr "Introduir opcions:"
 
 msgid "Enter password:"
-msgstr ""
+msgstr "Introduir contrassenya:"
 
 msgid "Enter share directory:"
-msgstr ""
+msgstr "Introduir directori compartit:"
 
 msgid "Enter share name:"
-msgstr ""
+msgstr "Introduir nom del recurs compartit:"
 
 msgid "Enter user and password for host: "
-msgstr ""
+msgstr "Introduir usuari i contrassenya del host"
 
 msgid "Enter username:"
-msgstr ""
+msgstr "Introduir nom d'usuari"
 
 msgid "Expert"
 msgstr ""
 
 msgid "FSTAB (mount using linux)"
-msgstr ""
+msgstr "FSTAB (muntar utilitzant linux)"
 
 msgid "Finished restarting your network"
-msgstr ""
+msgstr "Reinici de la xarxa finalitzat"
 
 msgid "IP Address"
-msgstr ""
+msgstr "Adreça IP"
 
 msgid "IP:"
-msgstr ""
+msgstr "IP:"
 
 msgid "Local share name"
-msgstr ""
+msgstr "Nom del muntatge local"
 
 msgid "Manage network shares"
-msgstr ""
+msgstr "Administrar muntatges de xarxa"
 
 msgid "Manage your network shares..."
-msgstr ""
+msgstr "Administra els teus muntatges de xarxa..."
 
 msgid "Mount Again"
-msgstr ""
+msgstr "Muntar de nou"
 
 msgid "Mount Manager"
-msgstr ""
+msgstr "Administrador de muntatges"
 
 msgid "Mount Viewer"
-msgstr ""
+msgstr "Visualitzador de muntatges"
 
 msgid "Mount again"
-msgstr ""
+msgstr "Muntar de nou"
 
 msgid "Mount informations"
-msgstr ""
+msgstr "Informació de muntatge"
 
 msgid "Mount options"
-msgstr ""
+msgstr "Opcions de muntatge"
 
 msgid "Mount type"
-msgstr ""
+msgstr "Tipus de muntatge"
 
 msgid "Mount using"
-msgstr ""
+msgstr "Muntar utilitzant"
 
 msgid ""
 "Mounted/\n"
 "Unmounted"
 msgstr ""
+"Muntat/\n"
+"Desmuntat"
 
 msgid "Mounting network shares..."
-msgstr ""
+msgstr "Muntant recursos compartits..."
 
 msgid "Mountpoints management"
-msgstr ""
+msgstr "Administrador de punts de muntatge"
 
 msgid "Mounts editor"
-msgstr ""
+msgstr "Editor de muntatges"
 
 msgid "Mounts management"
-msgstr ""
+msgstr "Administració de muntatges"
 
 msgid "NFS share"
-msgstr ""
+msgstr "NFS"
 
 msgid "Network Browser"
-msgstr ""
+msgstr "Explorador de xarxa"
 
 msgid "No network devices found!"
-msgstr ""
+msgstr "No s'ha trobat dispositius de xarxa"
 
 msgid "Password"
-msgstr ""
-
-msgid "Please wait for activation of your network mount..."
-msgstr ""
+msgstr "Contrassenya"
 
 msgid "Please wait while removing your network mount..."
-msgstr ""
+msgstr "Si us plau, espera mentre s'elimina el teu muntatge..."
 
 msgid "Please wait while updating your network mount..."
-msgstr ""
+msgstr "Si us plau, espera mentre s'actualitza el muntatge..."
 
 msgid "Please wait while your network is restarting..."
-msgstr ""
+msgstr "Si us plau, espera mentre es reinicia la xarxa..."
 
 msgid "Press OK to activate the settings."
-msgstr ""
+msgstr "Prem OK per activar les configuracions"
 
 msgid "Press OK to collapse this host"
-msgstr ""
+msgstr "Prem OK per a contraure aquest host"
 
 msgid "Press OK to edit selected settings."
-msgstr ""
+msgstr "Prem OK per a editar les configuracions sel·leccionades."
 
 msgid "Press OK to edit the settings."
-msgstr ""
+msgstr "Prem OK per a editar les configuracions."
 
 msgid "Press OK to expand this host"
-msgstr ""
+msgstr "Prem OK per a expandir aquest host"
 
 msgid "Press OK to mount this share!"
-msgstr ""
+msgstr "Prem OK per a muntar aquest recurs compartit!"
 
 msgid "Press OK to mount!"
-msgstr ""
+msgstr "Prem OK per a muntar!"
 
 msgid "Press OK to save settings."
-msgstr ""
+msgstr "Prem OK per a guardar les configuracions."
 
 msgid "Press OK to select."
-msgstr ""
+msgstr "Prem OK per a sel·leccionar."
 
 msgid "Re-mount network shares every (in hours)"
-msgstr ""
+msgstr "Re-muntar els recursos compartits cada (en hores)"
 
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Tancar realment sense guardar la configuració?"
 
 msgid "Rescan"
-msgstr ""
+msgstr "Buscar de nou"
 
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 msgid "Scan NFS share"
-msgstr ""
+msgstr "Buscar NFS"
 
 msgid "Scan range"
-msgstr ""
+msgstr "Buscar interval"
 
 msgid "Schedule MountAgain"
-msgstr ""
+msgstr "Programar 'Muntar de nou'."
 
 msgid "Schedule a auto remount of your network shares."
-msgstr ""
+msgstr "Programa un re-muntatge automàtic del teus recursos compartits."
 
 msgid "Search for network shares"
-msgstr ""
+msgstr "Buscar recursos compartits"
 
 msgid "Search for network shares..."
-msgstr ""
+msgstr "Buscar recursos compartits..."
 
 msgid "Searching your network. Please wait..."
-msgstr ""
+msgstr "Buscant a la teva xarxa. Si us plau, espera..."
 
 msgid "Server IP"
-msgstr ""
+msgstr "IP del servidor"
 
 msgid "Server share"
-msgstr ""
+msgstr "Recurs compartit del servidor"
 
 msgid "Setup Mount Again"
-msgstr ""
+msgstr "Configurar Muntar de nou"
 
 msgid "User management"
-msgstr ""
+msgstr "Administració d'usuaris"
 
 msgid "Usermanager"
-msgstr ""
+msgstr "Administrar usuaris"
 
 msgid "Username"
-msgstr ""
+msgstr "Nom d'usuari"
 
 msgid "View, edit or delete mountpoints on your Receiver."
-msgstr ""
+msgstr "Veure, editar o eliminar muntatges del teu receptor."
 
 msgid "View, edit or delete usernames and passwords for your network."
-msgstr ""
+msgstr "Veure, editar o eliminar noms d'usuari i contrassenyes de la teva xarxa."
 
 msgid "Your network mount has been activated."
-msgstr ""
+msgstr "El teu muntatge s'ha activat."
 
 msgid "Your network mount has been removed."
-msgstr ""
+msgstr "El teu muntatge s'ha eliminat."
 
 msgid "Your network mount has been updated."
-msgstr ""
+msgstr "El teu muntatge s'ha actualitzat."
 
 msgid "use as HDD replacement"
+msgstr "utilitza com reemplaçament del HDD"
+
+msgid "The harddisk"
+msgstr "Disc dur"
+
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
 msgstr ""
+"¡Has canviat el nom del muntatge!\n"
+"Actualitzar l'existent i continuar?\n"
+
+msgid "Mount shares again"
+msgstr "Muntar recursos de xarxa de nou"

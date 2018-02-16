@@ -1,0 +1,85 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AutomaticVolumeAdjustment\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-11 20:09+0200\n"
+"PO-Revision-Date: 2015-11-13 20:01+0200\n"
+"Language-Team: Vytenis Pulokas <vyteniui@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.5\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: lt_LT\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:141
+msgid "Add"
+msgstr "Pridėti"
+
+msgid "Adjustment value"
+msgstr "Patikslinimo vertė"
+
+msgid "Automatic Volume Adjustment"
+msgstr "Automatinis garso reguliavimas"
+
+msgid "Automatic Volume Adjustment - Config"
+msgstr "Automatinis garso reguliavimas - konfig"
+
+msgid "Automatic Volume Adjustment - Entry Config"
+msgstr "Automatinis garso reguliavimas - įrašo konfig"
+
+msgid "Automatic Volume Adjustment - Service Config"
+msgstr "Automatinis garso reguliavimas - kanalų konfig"
+
+msgid "Automatic volume adjust"
+msgstr "Automatiškai reguliuoti garsą"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Channel Selection"
+msgstr "Kanalo pasirinkimas"
+
+msgid "Default volume adjustment value for AC3/DTS"
+msgstr "Numatytasis AC3/DTS kanalų garso lygis"
+
+msgid "Delete"
+msgstr "Pašalinti"
+
+msgid "Do you really want to delete this entry?"
+msgstr "Ar tikrai norite naikinti šį įrašą?"
+
+msgid "Edit"
+msgstr "Redaguoti"
+
+msgid "Enable"
+msgstr "Įjungti"
+
+msgid "Max. volume for mpeg audio"
+msgstr "Maks. mpeg garso lygis"
+
+msgid "Modus"
+msgstr "Būdas"
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "Press OK to select a service"
+msgstr "Kad pasirinkti, spauskite 'OK'."
+
+msgid "Remember service volume value"
+msgstr "Prisiminti kanalo garso lygį"
+
+msgid "Servicename"
+msgstr "Kanalo pavadinimas"
+
+msgid "Services"
+msgstr "Kanalai"
+
+msgid "Show volumebar when volume-value was changed"
+msgstr "Pakeitus garso lygį, parodyti garso juostą"
+
+msgid "You must select a valid service!"
+msgstr "Turite pasirinkti realų kanalą!"

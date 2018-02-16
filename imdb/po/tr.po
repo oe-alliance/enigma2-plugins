@@ -33,7 +33,7 @@ msgstr "Oyuncular: "
 msgid "Channel Selection"
 msgstr "Kanal Seçimi"
 
-msgid "Could't get Eventname"
+msgid "Could't get event name"
 msgstr "Program adı alınamıyor"
 
 msgid "Details"
@@ -86,7 +86,7 @@ msgstr "IMDb sorgusunda hata oluştu."
 msgid "Lookup"
 msgstr "Sorgula"
 
-msgid "No IMDb match."
+msgid "No IMDb match:"
 msgstr "IMDb eşleşmesi bulunamadı."
 
 msgid "No cast list found in the database."

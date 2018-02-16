@@ -1,0 +1,224 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openATV-SHOUTcast\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2015-01-29 12:43+0100\n"
+"Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
+"Language-Team: openATV-rafalcool1/Mariusz1970 <rafalcool@op.pl>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid ""
+"%s\n"
+"Press OK to try again..."
+msgstr ""
+"%s\n"
+"Nacisnij OK aby spróbować ponownie..."
+
+msgid ""
+"%s\n"
+"Press green-button to try again..."
+msgstr ""
+"%s\n"
+"Naciśnij zielony przycisk i spróbuj ponownie..."
+
+msgid ">= 128 kbps"
+msgstr ">= 128 kbps"
+
+msgid ">= 192 kbps"
+msgstr ">= 192 kbps"
+
+msgid ">= 256 kbps"
+msgstr ">= 256 kbps"
+
+msgid ">= 64 kbps"
+msgstr ">= 64 kbps"
+
+msgid "Add current playing stream to favorite"
+msgstr "Dodaj bieżącą stację do listy ulubionych"
+
+msgid "Add current selected genre to favorite"
+msgstr "Dodaj aktualnie wybrany gatunek do ulubionych"
+
+msgid "Add current selected station to favorite"
+msgstr "Dodaj bieżącą wybraną stację do listy ulubionych"
+
+msgid "Add sequence number to output file"
+msgstr "Dodaj numer sekwencji do pliku wyjściowego"
+
+msgid "All"
+msgstr "Wszystkie"
+
+msgid "Audio: %s"
+msgstr "Audio: %s"
+
+msgid "Bit rate: %s kbps"
+msgstr "Szybkość transmisji bitów: %s kbps"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Config"
+msgstr "Konfiguracja"
+
+msgid "Coverheight:"
+msgstr "Wysokość okładki:"
+
+msgid "Coverwidth:"
+msgstr "Szerokość okładki:"
+
+msgid "Create a directory for each stream"
+msgstr "Utwórz katalog dla każdego strumienia"
+
+msgid "Do you really want to stop the recording?"
+msgstr "Czy na pewno chcesz, aby zatrzymać nagrywanie?"
+
+msgid "Enter in minutes (0 means unlimited)"
+msgstr "Wprowadź w minutach (0 = bez limitu)"
+
+msgid "Enter new name for favorite item"
+msgstr "Wpisz nową nazwę dla ulubionej stacji"
+
+msgid "Enter text to search for"
+msgstr "Wpisz tekst do wyszukania"
+
+msgid "Error downloading cover..."
+msgstr "Błąd podczas pobierania okładki...."
+
+msgid "Favorite list"
+msgstr "Lista ulubionych"
+
+msgid "Favorites"
+msgstr "Ulubione"
+
+msgid "Genres"
+msgstr "Gatunki"
+
+msgid "Getting %s"
+msgstr "Otrzymywane %s"
+
+msgid "Getting SHOUTcast genre list for %s..."
+msgstr "Pierwsza lista gatunków SHOUTcast dla %s..."
+
+msgid "Getting SHOUTcast genre list..."
+msgstr "Uzyskiwana lista gatunków SHOUTcast.."
+
+msgid ""
+"Getting streaming data from\n"
+"%s"
+msgstr ""
+"Pobieranie danych z strumieniowych z\n"
+"%s"
+
+msgid ""
+"Got 0 genres. Could be a network problem.\n"
+"Please try again..."
+msgstr ""
+"Masz '0' gatunków. Może być problem z siecią.\n"
+"Spróbuj ponownie..."
+
+msgid "Hide"
+msgstr "Ukryj"
+
+msgid "Invalid Location"
+msgstr "Nieprawidłowa Lokalizacja"
+
+msgid "No streaming data found..."
+msgstr "Nie znaleziono danych strumieniowych..."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Off"
+msgstr "Wył."
+
+msgid "Only running streamings can be recorded!"
+msgstr "Tylko odtwarzane strumienie mogą być nagrywane!"
+
+msgid "Record"
+msgstr "Nagraj"
+
+msgid "Recording length"
+msgstr "Długość nagrywania"
+
+msgid "Recording location:"
+msgstr "Lokalizacja nagrania:"
+
+msgid "Recording stream station"
+msgstr "Nagrywanie strumienia stacji"
+
+msgid "Reload station list:"
+msgstr "Odśwież listę stacji:"
+
+msgid "Rip to single file, name is timestamped"
+msgstr "Zgrać do jednego pliku, nazwa jest znacznikiem czasu"
+
+msgid "SHOUTcast genre list"
+msgstr "SHOUTcast lista gatunków"
+
+msgid "SHOUTcast station list for %s"
+msgstr "Lista stacji dla SHOUTcast %s"
+
+msgid "Search"
+msgstr "Szukaj"
+
+msgid "Searching SHOUTcast for %s..."
+msgstr "Wyszukiwania dla SHOUTcast %s..."
+
+msgid "Show cover:"
+msgstr "Pokaż okładkę:"
+
+msgid "Show in extension menu:"
+msgstr "Pokaż w rozszeżonym menu:"
+
+msgid "Station: %s"
+msgstr "Stacja: %s"
+
+msgid "Stations"
+msgstr "Stacje"
+
+msgid "Stop record"
+msgstr "Zatrzymaj nagrywanie"
+
+msgid "Stream stopped playing, playback of stream stopped!"
+msgstr "Strumień przestał grać,zatrzymano odtwarzanie strumienia!"
+
+msgid "Streaming rate:"
+msgstr "Szybkość strumieniowej transmisji:"
+
+msgid "Title: %s"
+msgstr "Tytuł: %s"
+
+msgid "Title: n/a"
+msgstr "Tytuł: n/a"
+
+msgid "every five minutes"
+msgstr "co pięć minut"
+
+msgid "every minute"
+msgstr "co minutę"
+
+msgid "every three minutes"
+msgstr "co trzy minuty"
+
+msgid "genre %s"
+msgstr "gatunek %s"
+
+msgid "listen to shoutcast internet-radio"
+msgstr "Słuchaj Radia Internetowego z Shoutcast"
+
+msgid "remove current selected favorite"
+msgstr "Usuń aktualnie wybraną listę ulubionych"
+
+msgid "rename current selected favorite"
+msgstr "Zmień obecną nazwę wybraną listę ulubionych"
+
+msgid "search-criteria %s"
+msgstr "kryteria wyszukiwania %s"

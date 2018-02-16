@@ -1,0 +1,263 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BMediaCenter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-01-26 22:27+0100\n"
+"PO-Revision-Date: 2014-10-29 13:01+0100\n"
+"Last-Translator: OEA\n"
+"Language-Team: french\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: C:\\Users\\Benny\\Documents\\HDMU\\git\\plugins"
+"\\Extensions\\BMediaCenter\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-SearchPath-0: C:\\Users\\Benny\\Documents\\HDMU\\git\\plugins"
+"\\Extensions\\BMediaCenter\n"
+
+msgid ""
+"\n"
+"Artist: "
+msgstr ""
+"\n"
+"Artiste: "
+
+msgid ""
+"\n"
+"Comment: "
+msgstr ""
+"\n"
+"Commentaire: "
+
+msgid ""
+"\n"
+"Year: "
+msgstr ""
+"\n"
+"Année:"
+
+msgid "Cache Thumbnails"
+msgstr "Cache des miniatures"
+
+msgid "City"
+msgstr "Ville"
+
+msgid "Delete failed!"
+msgstr "Effacement a échoué!"
+
+msgid "Directory"
+msgstr "Répertoire"
+
+msgid "Directory:"
+msgstr "Répertoire:"
+
+msgid "Do you really want to delete %s?"
+msgstr "Voulez-vous vraiment effacer %s?"
+
+msgid "Do you really want to delete this directory and it's content ?"
+msgstr "Voulez-vous vraiment effacer ce répertoire et son contenu?"
+
+msgid "Do you really want to delete this file ?"
+msgstr "Voulez-vous vraiment effacer ce ficher?"
+
+msgid ""
+"Error loading filelist into server %s:\n"
+"%s"
+msgstr ""
+"Erreur en chargeant la liste des fichiers dans le serveur %s:\n"
+"%s"
+
+msgid ""
+"Error loading playlist %s into server %s:\n"
+"%s"
+msgstr ""
+"Erreur en chargeant la liste de lecture %s dans le serveur %s:\n"
+"%s"
+
+msgid ""
+"Error loading playlist into server %s:\n"
+"%s"
+msgstr ""
+"Erreur en chargeant la liste de lecture dans le serveur %s:\n"
+"%s"
+
+msgid ""
+"Error updating file- and playlist from server %s:\n"
+"%s"
+msgstr ""
+"Erreur en chargeant la liste des fichiers et de lecture du serveur %s:\n"
+"%s"
+
+msgid ""
+"Error updating filelist from server %s:\n"
+"%s"
+msgstr ""
+"Erreur en mettant à jour la liste des fichiers du serveur %s:\n"
+"%s"
+
+msgid ""
+"Error with VLC server:\n"
+"%s"
+msgstr ""
+"Erreur avec le serveur VLC:\n"
+"%s"
+
+msgid "Favorites"
+msgstr "Favoris"
+
+msgid "List of Storage Devices"
+msgstr "Liste des périphériques de stockages"
+
+msgid "Lyrics"
+msgstr "Paroles"
+
+msgid "My Music"
+msgstr "Ma Musique"
+
+msgid "My Pictures"
+msgstr "Mes Images"
+
+msgid "My Videos"
+msgstr "Mes Vidéos"
+
+msgid "No lyrics found"
+msgstr "Aucune parole trouvée"
+
+msgid "Please enter filename (empty = use current date)"
+msgstr ""
+"Merci d'entrer un nom de fichier (vide = utiliser les données courantes)"
+
+msgid "Please select a playlist to delete..."
+msgstr "Merci de sélectionner une liste de lecture a effacer..."
+
+msgid "Please select a playlist..."
+msgstr "Merci de choisir une liste de lecture..."
+
+msgid "Really delete this Server?"
+msgstr "Voulez-vous vraiment effacer ce serveur?"
+
+msgid "Really delete this favorite?"
+msgstr "Voulez-vous vraiment effacer ce favori?"
+
+msgid "Response -> lyrics for: %s (%s)"
+msgstr "Réponse -> Parole pour %s (%s)"
+
+msgid "Save Playlist"
+msgstr "Sauvegarder la liste de lecture"
+
+msgid "Screensaver Interval"
+msgstr "Interval de l'économiseur d'écran"
+
+msgid "Settings"
+msgstr "Paramètres"
+
+msgid "Slideshow Interval (sec.)"
+msgstr "Interval du diaporama (sec.)"
+
+msgid "This Dreambox can't decode %s video streams!"
+msgstr "Ce récepteur ne sait pas décoder un stream vidéo %s!"
+
+msgid "Thumbnail Height"
+msgstr "Hauteur des vignettes"
+
+msgid "Thumbnail Width"
+msgstr "Largeur des vignettes"
+
+msgid "Title: "
+msgstr "Titre:"
+
+msgid "Weather Info"
+msgstr "Infos Méteo"
+
+msgid ""
+"You have to close playlist before you can go to the next song while playing "
+"from file browser."
+msgstr ""
+"Vous devez fermer la liste de lecture avant d'aller à la chanson suivante "
+"lorsque vous la lisez depuis le gestionnaire de fichier."
+
+msgid ""
+"You have to close playlist before you can go to the previous song while "
+"playing from file browser."
+msgstr ""
+"Vous devez fermer la liste de lecture avant d'aller à la chanson précédente "
+"lorsque vous la lisez depuis le gestionnaire de fichier."
+
+msgid "add all files in directory to playlist"
+msgstr "ajouter tous les fichiers d'un répertoire dans la liste de lecture"
+
+msgid "add directory to playlist"
+msgstr "ajouter le répertoire à la liste de lecture"
+
+msgid "add file to playlist"
+msgstr "ajouter un fichier à la liste de lecture"
+
+msgid "add file to playlist and play"
+msgstr "ajouter un fichier à la liste de lecture et le lire"
+
+msgid "backgroundcolor"
+msgstr "Couleur de fond"
+
+msgid "better"
+msgstr "meilleur"
+
+msgid "black"
+msgstr "noir"
+
+msgid "blue"
+msgstr "bleu"
+
+msgid "clear playlist"
+msgstr "Vider la liste de lecture"
+
+msgid "delete directory"
+msgstr "effacer répertoire"
+
+msgid "delete file"
+msgstr "effacer fichier"
+
+msgid "delete from playlist"
+msgstr "effacer de la liste de lecture"
+
+msgid "delete saved playlist"
+msgstr "effacer la liste de lecture sauvegardée"
+
+msgid "filename"
+msgstr "nom du fichier"
+
+msgid "green"
+msgstr "vert"
+
+msgid "load playlist"
+msgstr "Charge une liste de lecture"
+
+msgid "manual"
+msgstr "manuel"
+
+msgid "nothing connected"
+msgstr "rien de connecté"
+
+msgid "please wait, loading picture..."
+msgstr "Merci de patienter, chargement des images..."
+
+msgid "red"
+msgstr "rouge"
+
+msgid "save playlist"
+msgstr "Sauvegarder la liste de lecture"
+
+msgid "show Infoline"
+msgstr "afficher la ligne info"
+
+msgid "simple"
+msgstr "simple"
+
+msgid "textcolor"
+msgstr "couleur du texte"
+
+msgid "yellow"
+msgstr "jaune"

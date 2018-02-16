@@ -1,0 +1,158 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+#
+# Automatically generated, 2012.
+# Hasan Kiran <sunder67@hotmail.com>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"PO-Revision-Date: 2015-10-23 22:46+0200\n"
+"Last-Translator: Hasan Kiran <sunder67@hotmail.com>\n"
+"Language-Team: Turkish <sunder67@hotmail.com"
+">\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: ../src/plugin.py:370
+msgid "Autoresolution"
+msgstr "Otomatik çözünürlük"
+
+#: ../src/plugin.py:237
+#, python-format
+msgid ""
+"Autoresolution Plugin Testmode:\n"
+"Is %s OK?"
+msgstr ""
+
+#: ../src/plugin.py:378
+msgid "Autoresolution Switch"
+msgstr "Otomatik Çöüzünürlük Değiştirme"
+
+#: ../src/plugin.py:326
+msgid "Autoresolution is not working in Scart/DVI-PC Mode"
+msgstr "Otomatik Çözünürlük Scart/DVI-PC modunda çalışmıyor"
+
+#: ../src/plugin.py:308
+msgid "Autoresolution settings"
+msgstr "Otomatik Çözünürlük ayarları"
+
+#: ../src/plugin.py:286
+msgid "Autoresolution videomode setup"
+msgstr "Otomatik Çözünürlük video kip kurulumu"
+
+#: ../src/plugin.py:302
+msgid "Cancel"
+msgstr "İptal"
+
+#: ../src/plugin.py:322
+msgid "Deinterlacer mode for interlaced content"
+msgstr ""
+
+#: ../src/plugin.py:323
+msgid "Deinterlacer mode for progressive content"
+msgstr ""
+
+#: ../src/plugin.py:320
+msgid "Delay x seconds after service started"
+msgstr "Hizmet başlatıldıktan sonra x saniye gecikme"
+
+#: ../src/plugin.py:31
+msgid "Enable 1080p24 Mode"
+msgstr "1080p24 Kipi etkinleştir"
+
+#: ../src/plugin.py:32
+msgid "Enable 1080p25 Mode"
+msgstr "1080p25 Kipi etkinleştir"
+
+#: ../src/plugin.py:32
+msgid "Enable 1080p30 Mode"
+msgstr "1080p30 Kipi etkinleştir"
+
+#: ../src/plugin.py:31
+msgid "Enable 720p24 Mode"
+msgstr "720p24 Kipi etkinleştir"
+
+#: ../src/plugin.py:311
+msgid "Enable Autoresolution"
+msgstr "Otomatik Çözünürlük Etkin"
+
+#: ../src/plugin.py:30
+msgid "HD Interlace Mode"
+msgstr "HD Geçişli Kip"
+
+#: ../src/plugin.py:30
+msgid "HD Progressive Mode"
+msgstr "HD Artan Orantılı Kip"
+
+#: ../src/plugin.py:301
+msgid "OK"
+msgstr "Tamam"
+
+#: ../src/plugin.py:317 ../src/plugin.py:318
+msgid "Refresh Rate"
+msgstr "Tazeleme Hızı"
+
+#: ../src/plugin.py:321
+msgid "Running in testmode"
+msgstr ""
+
+#: ../src/plugin.py:28
+msgid "SD 24HZ Progressive mode"
+msgstr "SD 24HZ Artan Orantılı Kip"
+
+#: ../src/plugin.py:27
+msgid "SD 25/50HZ Interlace Mode"
+msgstr "SD 25/50HZ Geçişli Kip"
+
+#: ../src/plugin.py:29
+msgid "SD 25/50HZ Progressive Mode"
+msgstr "SD 25/50HZ Artan Orantılı Kip"
+
+#: ../src/plugin.py:27
+msgid "SD 30/60HZ Interlace Mode"
+msgstr "SD 30/60HZ Geçişli Kip"
+
+#: ../src/plugin.py:29
+msgid "SD 30/60HZ Progressive Mode"
+msgstr "SD 30/60HZ Artan Orantılı Kip"
+
+#: ../src/plugin.py:319
+msgid "Show info screen"
+msgstr "Bilgi ekranını göster"
+
+#: ../src/plugin.py:39 ../src/plugin.py:41
+msgid "auto"
+msgstr "otomatik"
+
+#: ../src/plugin.py:39 ../src/plugin.py:41
+msgid "bob"
+msgstr ""
+
+#: ../src/plugin.py:130
+msgid "default"
+msgstr "öntanımlı"
+
+#: ../src/plugin.py:39 ../src/plugin.py:41
+msgid "off"
+msgstr "kapalı"
+
+#: ../src/plugin.py:39 ../src/plugin.py:41
+msgid "on"
+msgstr "açık"
+
+#: ../src/plugin.py:44
+msgid "second"
+msgstr "saniye"
+
+#: ../src/plugin.py:43 ../src/plugin.py:44 ../src/plugin.py:45
+#: ../src/plugin.py:46
+msgid "seconds"
+msgstr "saniye"
+

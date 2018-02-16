@@ -10,15 +10,15 @@ from WebIfConfig import WebIfConfigScreen
 from WebChilds.Toplevel import getToplevel
 from Tools.HardwareInfo import HardwareInfo
 
-from Tools.Directories import copyfile, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG
+from Tools.Directories import copyfile, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG, fileExists
 from Tools.IO import saveFile
 
 from twisted.internet import reactor, ssl
 from twisted.internet.error import CannotListenError
-from twisted.web import server, http, util, static, resource
+from twisted.web import server, http, util, static, resource, version
 
 from zope.interface import Interface, implements
-from socket import gethostname as socket_gethostname
+from socket import gethostname as socket_gethostname, has_ipv6
 from OpenSSL import SSL, crypto
 from time import gmtime
 from os.path import isfile as os_isfile, exists as os_exists
@@ -45,7 +45,7 @@ config.plugins.Webinterface.version = ConfigText(__version__) # used to make the
 
 config.plugins.Webinterface.http = ConfigSubsection()
 config.plugins.Webinterface.http.enabled = ConfigYesNo(default=True)
-config.plugins.Webinterface.http.port = ConfigInteger(default = 80, limits=(1, 65535) )
+config.plugins.Webinterface.http.port = ConfigInteger(default = 81, limits=(1, 65535) )
 config.plugins.Webinterface.http.auth = ConfigYesNo(default=False)
 
 config.plugins.Webinterface.https = ConfigSubsection()
@@ -194,14 +194,14 @@ def startWebserver(session, l2k):
 				registerBonjourService('http', config.plugins.Webinterface.http.port.value)
 
 		#Streaming requires listening on 127.0.0.1:80 no matter what, ensure it its available
-		if config.plugins.Webinterface.http.port.value != 80 or not config.plugins.Webinterface.http.enabled.value:
-			#LOCAL HTTP Connections (Streamproxy)
-			ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.http.auth.value, l2k)
-			if ret == False:
-				errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
-
-			if errors != "":
-				session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), type=MessageBox.TYPE_ERROR, timeout=30)
+		#if config.plugins.Webinterface.http.port.value != 80 or not config.plugins.Webinterface.http.enabled.value:
+		#	#LOCAL HTTP Connections (Streamproxy)
+		#	ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.http.auth.value, l2k)
+		#	if ret == False:
+		#		errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
+		#
+		#	if errors != "":
+		#		session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), type=MessageBox.TYPE_ERROR, timeout=30)
 
 		#HTTPS
 		if config.plugins.Webinterface.https.enabled.value is True:
@@ -265,6 +265,12 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 		root = HTTPRootResource(toplevel)
 		site = server.Site(root)
 
+	if has_ipv6 and fileExists('/proc/net/if_inet6') and version.major >= 12:
+		if ipaddress == '0.0.0.0':
+			ipaddress='::'
+		elif ipaddress == '127.0.0.1':
+			ipaddress='::1'
+
 	if usessl:
 		ctx = ChainedOpenSSLContextFactory(KEY_FILE, CERT_FILE)
 		try:
@@ -275,6 +281,8 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 	else:
 		try:
 			d = reactor.listenTCP(port, site, interface=ipaddress)
+			if ipaddress == '::1':
+				d = reactor.listenTCP(port, site, interface='::ffff:127.0.0.1')
 		except CannotListenError:
 			print "[Webinterface] FAILED to listen on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
 			return False
@@ -412,7 +420,7 @@ class HTTPAuthResource(HTTPRootResource):
 		host = request.getHost().host
 		#If streamauth is disabled allow all acces from localhost
 		if not config.plugins.Webinterface.streamauth.value:
-			if( host == "127.0.0.1" or host == "localhost" ):
+			if( host == "::ffff:127.0.0.1" or host == "127.0.0.1" or host == "localhost" ):
 				print "[WebInterface.plugin.isAuthenticated] Streaming auth is disabled bypassing authcheck because host is '%s'" %host
 				return True
 

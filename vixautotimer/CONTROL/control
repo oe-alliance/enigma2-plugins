@@ -1,0 +1,2 @@
+Description: Automatically add Timers based on simple rules 
+Depends: enigma2, python-codecs, python-difflib, python-re, python-threading, python-xml, enigma2-plugin-systemplugins-mphelp, enigma2-plugin-systemplugins-toolkit

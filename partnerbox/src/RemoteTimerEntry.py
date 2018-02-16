@@ -17,6 +17,8 @@
 #  GNU General Public License for more details.
 #
 
+# for localized messages
+from . import _
 from Screens.Screen import Screen
 import Screens.ChannelSelection
 from ServiceReference import ServiceReference
@@ -32,7 +34,7 @@ from Screens.LocationBox import MovieLocationBox
 from Screens.ChoiceBox import ChoiceBox
 from RecordTimer import AFTEREVENT
 from Tools.Directories import resolveFilename, SCOPE_HDD
-from enigma import eEPGCache
+from enigma import eEPGCache, getDesktop
 from time import localtime, mktime, time, strftime
 from datetime import datetime
 from Screens.TimerEntry import TimerEntry
@@ -46,25 +48,39 @@ from Components.ActionMap import ActionMap
 from PartnerboxFunctions import PlaylistEntry, SetPartnerboxTimerlist, sendPartnerBoxWebCommand, getServiceRef
 import PartnerboxFunctions as partnerboxfunctions
 
-# for localized messages
-from . import _
-
-
+HD = False
+try:
+	sz_w = getDesktop(0).size().width()
+	if sz_w >= 1280:
+		HD = True
+except:
+	pass
 class RemoteTimerEntry(Screen, ConfigListScreen):
-	skin = """
-		<screen name="RemoteTimerEntry" position="center,center" size="560,430" title="Timer entry">
-			<widget name="cancel" pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-			<widget name="ok" pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
-			<widget name="canceltext" position="0,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" backgroundColor="#9f1313" transparent="1" />
-			<widget name="oktext" position="140,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" backgroundColor="#1f771f" transparent="1" />
-			<widget name="config" position="10,45" size="540,385" scrollbarMode="showOnDemand" />
-		</screen>"""
+	if HD:
+		skin = """
+			<screen name="RemoteTimerEntry" position="center,center" size="760,430" title="Timer entry">
+				<widget name="cancel" pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<widget name="ok" pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<widget name="canceltext" position="0,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" backgroundColor="#9f1313" transparent="1" />
+				<widget name="oktext" position="140,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" backgroundColor="#1f771f" transparent="1" />
+				<widget name="config" position="10,45" size="740,385" scrollbarMode="showOnDemand" />
+			</screen>"""
+	else:
+		skin = """
+			<screen name="RemoteTimerEntry" position="center,center" size="560,430" title="Timer entry">
+				<widget name="cancel" pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+				<widget name="ok" pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+				<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+				<widget name="canceltext" position="0,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" backgroundColor="#9f1313" transparent="1" />
+				<widget name="oktext" position="140,0" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" backgroundColor="#1f771f" transparent="1" />
+				<widget name="config" position="10,45" size="540,385" scrollbarMode="showOnDemand" />
+			</screen>"""
 
 	def __init__(self, session, timer, Locations):
 		self.session = session
 		Screen.__init__(self, session)
+		self.setTitle(_("Timer entry"))
 		self.timer = timer
 		self.Locations = Locations
 		self.entryDate = None
@@ -88,7 +104,6 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 		self.createSetup("config")
 
 	def createConfig(self):
-		
 		if self.timer.type == 0:
 			justplay = self.timer.justplay
 			afterevent = {
@@ -103,7 +118,7 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 			elif self.timer.type & PlaylistEntry.doGoSleep:
 				afterevent = PlaylistEntry.doGoSleep
 			else:
-				afterevent = 0
+				afterevent = 3
 		
 			if self.timer.type & PlaylistEntry.RecTimerEntry:
 				if self.timer.type & PlaylistEntry.recDVR:
@@ -112,7 +127,7 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 					justplay = PlaylistEntry.recNgrab
 			elif self.timer.type & PlaylistEntry.SwitchTimerEntry:
 				justplay = PlaylistEntry.SwitchTimerEntry
-		
+
 		weekday_table = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")
 		day = []
 		weekday = 0
@@ -183,11 +198,11 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("After event"), self.timerentry_afterevent))
 		self[widget].list = self.list
 		self[widget].l.setList(self.list)
-		
+
 	def newConfig(self):
 		if self["config"].getCurrent() == self.timerJustplayEntry:
 			self.createSetup("config")
-			
+
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
 		self.newConfig()
@@ -195,7 +210,7 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
 		self.newConfig()
-		
+
 	def getTimestamp(self, date, mytime):
 		d = localtime(date)
 		dt = datetime(d.tm_year, d.tm_mon, d.tm_mday, mytime[0], mytime[1])
@@ -213,17 +228,21 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 
 	def keyCancel(self):
 		self.close((False,))
-		
+
 	def keyGo(self):
 		if self.timer.type == 0:
-			self.timer.name = self.timerentry_name.value
-			self.timer.dirname = self.timerentry_dirname.value
-			self.timer.afterevent = {
-			"nothing": 0,
-			"deepstandby": 2,
-			"standby": 1,
-			"auto": 3
-			}[self.timerentry_afterevent.value]
+			if self.timerentry_dirname.value == "N/A" or self.timerentry_dirname.value == "None":
+				self.session.open(MessageBox,_("Timer can not be added...no locations on partnerbox available."),MessageBox.TYPE_INFO)
+				return
+			else:
+				self.timer.name = self.timerentry_name.value
+				self.timer.dirname = self.timerentry_dirname.value
+				self.timer.afterevent = {
+				"nothing": 0,
+				"deepstandby": 2,
+				"standby": 1,
+				"auto": 3
+				}[self.timerentry_afterevent.value]
 		else:
 			self.timer.afterevent = int(self.timerentry_afterevent.value)
 		self.timer.description = self.timerentry_description.value
@@ -249,9 +268,7 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 		if self.entryEndTime is not None:
 			self.timerentry_endtime.decrement()
 			self["config"].invalidate(self.entryEndTime)
-			
-			
-			
+
 # ##########################################
 # TimerEntry
 # ##########################################
@@ -296,7 +313,7 @@ def RemoteTimer__init__(self, session, timer):
 	baseTimer__init__(self, session, timer)
 	if int(self.timerentry_remote.value) != 0:
 		RemoteTimernewConfig(self)
-	
+
 def RemoteTimerConfig(self):
 	self.Locations = []
 	self.entryguilist = []
@@ -322,30 +339,30 @@ def getLocations(self, url, check):
 		sxml = f.read()
 		getLocationsCallback(self,sxml, check)
 	except: pass
-	
+
 def getLocationsCallback(self, xmlstring, check = False):
 	try: root = xml.etree.cElementTree.fromstring(xmlstring)
 	except: return 
 	for location in root.findall("e2location"):
 		add = True
 		if check:
-			add = location.text.encode("utf-8", 'ignore') not in self.Locations
+			add = location.text.decode("utf-8").encode("utf-8", 'ignore') not in self.Locations
 		if add:
-			self.Locations.append(location.text.encode("utf-8", 'ignore'))
-	for location in root.findall("e2simplexmlitem"):  # vorerst Kompatibilitaet zum alten Webinterface-Api aufrecht erhalten (e2simplexmlitem)
+			self.Locations.append(location.text.decode("utf-8").encode("utf-8", 'ignore'))
+	for location in root.findall("e2simplexmlitem"):
 		add = True
 		if check:
-			add = location.text.encode("utf-8", 'ignore') not in self.Locations
+			add = location.text.decode("utf-8").encode("utf-8", 'ignore') not in self.Locations
 		if add:
-			self.Locations.append(location.text.encode("utf-8", 'ignore'))
-		
+			self.Locations.append(location.text.decode("utf-8").encode("utf-8", 'ignore'))
+
 def createRemoteTimerSetup(self, widget):
 	baseTimerEntrySetup(self, widget)
 	self.display = _("Remote Timer")
 	self.timerRemoteEntry = getConfigListEntry(self.display, self.timerentry_remote)
 	self.list.insert(0, self.timerRemoteEntry)
 	self[widget].list = self.list
-	
+
 def RemoteTimerkeyLeft(self):
 	if int(self.timerentry_remote.value) != 0:
 		ConfigListScreen.keyLeft(self)
@@ -365,8 +382,7 @@ def RemoteTimerkeySelect(self):
 		RemoteTimerGo(self)
 	else:
 		baseTimerkeySelect(self)
-	
-	
+
 def RemoteTimernewConfig(self):
 	if self["config"].getCurrent() == self.timerRemoteEntry:
 		if int(self.timerentry_remote.value) != 0:
@@ -394,7 +410,15 @@ def RemoteTimernewConfig(self):
 	else:
 			if int(self.timerentry_remote.value) == 0:
 				baseTimerEntrynewConfig(self)
-	
+
+	if isVPSplugin():
+		if self["config"].getCurrent() == self.timerVps_enabled_Entry:
+			if self.timerentry_vpsplugin_enabled.value == "no":
+				self.timerentry_vpsplugin_dontcheck_pdc = False
+
+			self.createSetup("config")
+			self["config"].setCurrentIndex(self["config"].getCurrentIndex() + 1)
+
 def  RemoteTimercreateConfig(self):
 	if int(self.entryguilist[int(self.timerentry_remote.value)][2].enigma.value) == 0:
 		justplay = self.timer.justplay
@@ -461,6 +485,7 @@ def  RemoteTimercreateConfig(self):
 		pass
 	self.timerentry_service_ref = self.timer.service_ref
 	self.timerentry_service = ConfigSelection([servicename])
+	self.timerentry_vps_in_timerevent = ConfigSelection(default = "no", choices = [("no", _("No")), ("yes_safe", _("Yes (safe mode)")), ("yes", _("Yes"))])
 
 def RemoteTimerCreateSetup(self, widget):
 	self.list = []
@@ -493,8 +518,15 @@ def RemoteTimerCreateSetup(self, widget):
 			self.list.append(getConfigListEntry(_("After event"), self.timerentry_afterevent))
 	else:
 		self.list.append(getConfigListEntry(_("After event"), self.timerentry_afterevent))
+	if config.plugins.Partnerbox.enablevpsintimerevent.value:
+		if isVPSplugin():
+			cfg = self.timerentry_vpsplugin_enabled
+		else:
+			cfg = self.timerentry_vps_in_timerevent
+		self.list.append(getConfigListEntry(_("Enable VPS"), cfg ))
 	self[widget].list = self.list
 	self[widget].l.setList(self.list)
+
 
 def RemoteTimerGo(self):
 	if int(self.timerentry_remote.value) == 0:
@@ -541,10 +573,18 @@ def RemoteTimerGo(self):
 				afterevent = {
 				"deepstandby": AFTEREVENT.DEEPSTANDBY,
 				"standby": AFTEREVENT.STANDBY,
-				}.get(self.timerentry_afterevent.value, AFTEREVENT.NONE)
+				"nothing": AFTEREVENT.NONE,
+				"auto": AFTEREVENT.AUTO
+				}.get(self.timerentry_afterevent.value, AFTEREVENT.AUTO)
+				try:
+					eit = self.timer.eit
+				except:
+					eit = 0
+				if eit is None: eit = 0
 				if service_ref.getPath(): # partnerbox service ?
 					service_ref = getServiceRef(service_ref.ref.toString())
-				sCommand = "%s/web/timeradd?sRef=%s&begin=%d&end=%d&name=%s&description=%s&dirname=%s&eit=0&justplay=%d&afterevent=%s" % (http, service_ref,begin,end,name,descr,dirname,justplay,afterevent)
+				refstr = ':'.join(str(service_ref).split(':')[:11])
+				sCommand = "%s/web/timeradd?sRef=%s&begin=%d&end=%d&name=%s&description=%s&dirname=%s&eit=%d&justplay=%d&afterevent=%s&vps_pbox=%s" % (http,refstr,begin,end,name,descr,dirname,eit,justplay,afterevent,vpsValue(self))
 				sendPartnerBoxWebCommand(sCommand, None,3, "root", str(self.entryguilist[int(self.timerentry_remote.value)][2].password.value)).addCallback(boundFunction(AddTimerE2Callback,self, self.session)).addErrback(boundFunction(AddTimerError,self,self.session))
 
 def AddTimerE2Callback(self, session, answer):
@@ -554,9 +594,9 @@ def AddTimerE2Callback(self, session, answer):
 	statetext = root.findtext("e2statetext")
 	state = root.findtext("e2state")
 	if statetext:
-		text =  statetext.encode("utf-8", 'ignore')
+		text = statetext.encode("utf-8", 'ignore')
 	ok = state == "True"
-	session.open(MessageBox,_("Partnerbox Answer: \n%s") % (text),MessageBox.TYPE_INFO, timeout = 10)
+	session.open(MessageBox,_("Partnerbox Answer: \n%s") % _(text),MessageBox.TYPE_INFO, timeout = 10)
 	if ok:
 		if (config.plugins.Partnerbox.enablepartnerboxepglist.value): 
 			# Timerlist der Partnerbox neu laden --> Anzeige fuer EPGList, aber nur, wenn die gleiche IP in EPGList auch angezeigt wird
@@ -566,6 +606,8 @@ def AddTimerE2Callback(self, session, answer):
 
 def AddTimerE1Callback(self, session, answer):
 	ok = answer == "Timer event was created successfully."
+	if answer == "Timer event was created successfully.":
+		answer = _("Timer event was created successfully.")
 	session.open(MessageBox,_("Partnerbox Answer: \n%s") % (answer),MessageBox.TYPE_INFO, timeout = 10)
 	if ok:
 		if (config.plugins.Partnerbox.enablepartnerboxepglist.value): 
@@ -573,7 +615,21 @@ def AddTimerE1Callback(self, session, answer):
 			if partnerboxfunctions.CurrentIP == self.entryguilist[int(self.timerentry_remote.value)][2].ip.value:
 				SetPartnerboxTimerlist(self.entryguilist[int(self.timerentry_remote.value)][2])
 		self.keyCancel()
-		
-def AddTimerError(self, session, error):
-	session.open(MessageBox,str(error.getErrorMessage()),MessageBox.TYPE_INFO)
 
+def AddTimerError(self, session, error):
+	session.open(MessageBox,str(_(error.getErrorMessage())),MessageBox.TYPE_INFO)
+
+def isVPSplugin():
+	try:
+		from Plugins.SystemPlugins.vps.Modifications import vps_already_registered
+		if vps_already_registered:
+			return True
+	except:
+		return False
+
+def vpsValue(self):
+	if isVPSplugin():
+		return self.timerentry_vpsplugin_enabled.value
+	if config.plugins.Partnerbox.enablevpsintimerevent.value:
+		return self.timerentry_vps_in_timerevent.value
+	return ""

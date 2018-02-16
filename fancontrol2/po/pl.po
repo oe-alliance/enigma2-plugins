@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FanControl2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-22 16:42+0100\n"
+"POT-Creation-Date: 2014-06-29 07:06+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
-"Language-Team: Mariusz1970 <Mariusz1970@onet.eu>\n"
+"Language-Team: joergm6 <Mariusz1970@onet.eu>\n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.7\n"
 
 msgid "%s   %02d C"
 msgstr "%s   %02d C"
@@ -28,7 +28,7 @@ msgid "4Pin (PID)"
 msgstr "4Pin (PID)"
 
 msgid "Action in case of Fan failure"
-msgstr "Działanie w przypadku awarii wentylatora"
+msgstr "Działanie w przypadku awarii F.C.2"
 
 msgid "Auto-Delete Data older than (Days)"
 msgstr "Usuwanie plików starszych niż(Dni)"
@@ -37,13 +37,13 @@ msgid "Auto-Delete older %s Days"
 msgstr "Automatycznie - usuń starsze % s Dni"
 
 msgid "Box Shutdown"
-msgstr "Wyłącz odbiornik "
+msgstr "Wyłącz odbiornik"
 
 msgid "Box has no fancontrol hardware -> FC2 deactivated"
 msgstr "w odbiorniku nie ma wentylatora -> F.C.2 wyłączony"
 
 msgid "Box shutdown at Temperature (C)"
-msgstr "Wyłacz odbiornik przy temperaturze (C)"
+msgstr "Wyłącz odbiornik przy temperaturze (C)"
 
 msgid "Cancel"
 msgstr "Anuluj"
@@ -73,7 +73,10 @@ msgid "Disk free : %d MByte"
 msgstr "Dysk wolny : % d MByte"
 
 msgid "Download"
-msgstr "Pobieranie"
+msgstr "Pobierz"
+
+msgid "Enable Console Logging"
+msgstr "Włącz rejestrowanie konsoli"
 
 msgid "Enable Data Logging"
 msgstr "Włącz rejestrowanie danych"
@@ -81,8 +84,11 @@ msgstr "Włącz rejestrowanie danych"
 msgid "Enable Event Logging"
 msgstr "Włącz rejestrowanie zdarzeń"
 
+msgid "Enable Thread use"
+msgstr "Umożliwiaj wykorzystanie wątku"
+
 msgid "End temperature C"
-msgstr "Temperatura końcowa C"
+msgstr "Temp. końcowa C"
 
 msgid "Extended Control Range"
 msgstr "Rozszerzony zakres regulacji"
@@ -91,13 +97,13 @@ msgid "Fan is not working!"
 msgstr "Wentyl. nie pracuje!"
 
 msgid "Fan off in Idle Mode"
-msgstr "Wył.wentyl. w trybie czuwania?"
+msgstr "Wył.wentyl.w trybie czuwania?"
 
 msgid "Fan type"
 msgstr "Typ wentylatora"
 
 msgid "FanControl2 emergency, Box Shutdown now?"
-msgstr "Awarja FanControl2, wyłaczyć odbiornik teraz?"
+msgstr "Awaria F.C.2 wyłączyć odbiornik teraz?"
 
 msgid "File %s does not exists"
 msgstr "Plik %s nie istnieje"
@@ -109,7 +115,7 @@ msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
 msgstr ""
-"Trzeba zrestartować odbiornik, aby zastosować zmiany.\n"
+"Trzeba zrestartować odbiornik,aby zastosować zmiany.\n"
 "Czy chcesz uruchomić GUI teraz ?"
 
 msgid "Help"
@@ -125,10 +131,10 @@ msgid "Initial Voltage"
 msgstr "Pocz. Napięcie"
 
 msgid "Logging path"
-msgstr "Rejestrowanie ścieżki"
+msgstr "Ścieżka logów"
 
 msgid "Logging-Path: %s"
-msgstr "Ścieżka wpisania: %s"
+msgstr "Ścieżka -logów: %s"
 
 msgid "Max Fan %d rpm at PWM=255 (%s)"
 msgstr "Max Fan %d rpm w PWM=255 (%s)"
@@ -158,7 +164,7 @@ msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
 msgstr "Min Fan Stop %d rpm w VLT=%d i PWM=0 (%s)"
 
 msgid "Number of WebIF-Log-Entries"
-msgstr "Liczba WebIF-Logi-Wpisy"
+msgstr "Numer Wpisu loga"
 
 msgid "PID Ctl Err %03.2f %%"
 msgstr "PID Ctl Err %03.2f %%"
@@ -176,13 +182,13 @@ msgid "Sensors"
 msgstr "Czujniki"
 
 msgid "Show Fan Speed as"
-msgstr "Pokaż prędkość wentyl.jako"
+msgstr "Pokaż prędkość obrotów wentyl.jako"
 
 msgid "Show Monitor in Extension-Menu"
-msgstr "Pokaz Monitor w Rozszerzeniu - Menu "
+msgstr "Pokaż Monitor w Rozszerzonym Menu"
 
 msgid "Show Plugin in Extension-Menu"
-msgstr "Pokazuj Plugin w Rozszerzeniu - Menu"
+msgstr "Pokaż Plugin w Rozszerzonym Menu"
 
 msgid "Speed"
 msgstr "Szybkość "
@@ -215,19 +221,22 @@ msgid "below Tunerslot 4"
 msgstr "poniżej głowicy 4"
 
 msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
-msgstr "prądRPM:%d docelowoRPM:%d Temp:%4.1f"
+msgstr "wartkośćRPM:%d docelowoRPM:%d Temp:%4.1f"
+
+msgid "disable DMM-FanControl"
+msgstr "wyłączyć Systemowy-M.F.?"
 
 msgid "disabled"
 msgstr "wyłączony"
 
 msgid "display Info"
-msgstr "wyświetlanie informacji"
+msgstr "wyświetl info."
 
 msgid "do nothing"
-msgstr "nie rób nic"
+msgstr "nic nie robić"
 
 msgid "increases overheating protection to (C)"
-msgstr "ochrona przed wzrostem przegrzania (C)"
+msgstr "ochrona przed wzrostem przegrzania w (C)"
 
 msgid "left near Card-Slot"
 msgstr "lewa strona niedaleko czytnika karty"
@@ -254,7 +263,7 @@ msgid "no"
 msgstr "nie"
 
 msgid "not active"
-msgstr "nie aktywne"
+msgstr "nie aktywny"
 
 msgid "over Security Card"
 msgstr "powyżej czytnika karty"
@@ -266,10 +275,10 @@ msgid "please wait (until 3min)..."
 msgstr "Proszę czekać (do 3min)..."
 
 msgid "press Info for HDD-Temp"
-msgstr "Info o HDD-temp"
+msgstr "Info o temp.HDD"
 
 msgid "read HDD-Temperature in HDD-Standby-Mode"
-msgstr "czytaj temperaturę HDD-tryb gotowości"
+msgstr "czytaj temperaturę HDD w trybie czuwania"
 
 msgid "readme.txt"
 msgstr "przeczytaj.txt"
@@ -290,10 +299,4 @@ msgid "yes"
 msgstr "tak"
 
 msgid "yes, Except for Recording or HDD"
-msgstr "tak,z wyjątkiem nagrywania na HDD"
-
-msgid "Enable Console Logging"
-msgstr "Włącz rejestrowanie konsoli"
-
-msgid "Enable Thread use"
-msgstr "Włącz wątek do użycia"
+msgstr "wyjątek,nagrywanie na HDD"

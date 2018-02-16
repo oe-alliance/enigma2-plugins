@@ -11,7 +11,7 @@ class ParentControl(Source):
 	def command(self):
 		print "ParentControl was called"
 
-		if config.ParentalControl.configured.value:
+		if config.ParentalControl.servicepinactive.value:
 			parentalControl.open()
 			if config.ParentalControl.type.value == "whitelist":
 				servicelist = parentalControl.whitelist

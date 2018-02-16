@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Automatic Volume Adjustement\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: 2014-10-28 18:57+0100\n"
+"Last-Translator: OEA\n"
+"Language-Team: french\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:141
+msgid "Add"
+msgstr "Ajouter"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:140
+#: ../src/AutomaticVolumeAdjustmentSetup.py:266
+msgid "Adjustment value"
+msgstr "Ajuster la valeur"
+
+#: ../src/plugin.py:49 ../src/plugin.py:52
+msgid "Automatic Volume Adjustment"
+msgstr "Automatic Volume Adjustment"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:56
+msgid "Automatic Volume Adjustment - Config"
+msgstr "Automatic Volume Adjustment - Configuration"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:243
+msgid "Automatic Volume Adjustment - Entry Config"
+msgstr "Automatic Volume Adjustment - Config Entrée"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:138
+msgid "Automatic Volume Adjustment - Service Config"
+msgstr "Automatic Volume Adjustment - Config Service"
+
+#: ../src/AutomaticVolumeAdjustmentConfig.py:72
+msgid "Automatic volume adjust"
+msgstr "Automatic volume adjust"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:64
+#: ../src/AutomaticVolumeAdjustmentSetup.py:251
+msgid "Cancel"
+msgstr "Annuler"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:274
+msgid "Channel Selection"
+msgstr "Sélection chaine"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:81
+msgid "Default volume adjustment value for AC3/DTS"
+msgstr "Valeur par défaut d'ajustement pour AC3/DTS"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:144
+msgid "Delete"
+msgstr "Effacer"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:185
+msgid "Do you really want to delete this entry?"
+msgstr "Voulez-vous vraiment effacer cette entrée?"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:143
+msgid "Edit"
+msgstr "Éditer"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:75
+msgid "Enable"
+msgstr "Activer"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:82
+msgid "Max. volume for mpeg audio"
+msgstr "Volume Max. pour audio mpeg"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:78
+msgid "Modus"
+msgstr "Modus"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:65
+#: ../src/AutomaticVolumeAdjustmentSetup.py:142
+#: ../src/AutomaticVolumeAdjustmentSetup.py:252
+msgid "OK"
+msgstr "OK"
+
+#: ../src/AutomaticVolumeAdjustmentConfig.py:91
+msgid "Press OK to select a service"
+msgstr "Appuyer sur OK pour choisir un service"
+
+#: ../src/AutomaticVolumeAdjustmentConfig.py:72
+msgid "Remember service volume value"
+msgstr "Se souvenir de la valeur du volume du service"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:139
+#: ../src/AutomaticVolumeAdjustmentSetup.py:264
+msgid "Servicename"
+msgstr "Nom du service"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:83
+msgid "Services"
+msgstr "Services"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:86
+msgid "Show volumebar when volume-value was changed"
+msgstr "Afficher la barre de volume lorsque la valeur du volume est changé"
+
+#: ../src/AutomaticVolumeAdjustmentSetup.py:294
+msgid "You must select a valid service!"
+msgstr "Vous devez choisir un service valide!"

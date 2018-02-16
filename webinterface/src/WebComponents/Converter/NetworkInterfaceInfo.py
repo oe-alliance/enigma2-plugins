@@ -7,6 +7,7 @@ class NetworkInfo(Converter):
 	IP = 2
 	GATEWAY = 3
 	NAMESERVER = 4
+	IPV6 = 5
 
 	def __init__(self, type):
 		Converter.___init__(self)
@@ -16,6 +17,7 @@ class NetworkInfo(Converter):
 					 "Ip" : self.IP,
 					 "Gateway" : self.GATEWAY,
 					 "Nameserver" : self.NAMESERVER,
+					 "Ipv6" : self.IPV6,
 					 }[type]
 
 	@cached
@@ -32,6 +34,8 @@ class NetworkInfo(Converter):
 			return iface.gateway
 		elif self.type is self.NAMESERVER:
 			return iface.nameserver
+		elif self.type is self.IPV6:
+			return iface.ipv6
 
 	text = property(getText)
 

@@ -22,6 +22,17 @@ AM_PATH_PYTHON
 AX_PYTHON_DEVEL
 AX_PTHREAD
 
+#dnl versions of gstreamer and plugins-base
+AC_ARG_WITH(gstversion,
+	AS_HELP_STRING([--with-gstversion],[use gstreamer version (major.minor)]),
+	[GST_MAJORMINOR=$withval],[GST_MAJORMINOR=0.10])
+
+AC_ARG_WITH(distro,
+	[  --with-distro=NAME distro name [[egami,openvix,...]]],
+	[DISTRO="$withval"],[DISTRO="openatv"])
+AC_SUBST(DISTRO)
+AC_DEFINE_UNQUOTED(DISTRO,"$DISTRO",[distro name])
+
 AC_ARG_WITH(boxtype,
 	[  --with-boxtype=NAME box type [[none,dm7025,dm800...]]],
 	[BOXTYPE="$withval"],[BOXTYPE="dm800"])
@@ -87,10 +98,11 @@ AM_CONDITIONAL(VUSOLO, test "$BOXTYPE" == vusolo)
 AM_CONDITIONAL(VUDUO, test "$BOXTYPE" == vuduo)
 AM_CONDITIONAL(VUSOLO2, test "$BOXTYPE" == vusolo2)
 AM_CONDITIONAL(VUDUO2, test "$BOXTYPE" == vuduo2)
+AM_CONDITIONAL(XC7346, test "$BOXTYPE" == xc7346)
 AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
 
 PKG_CHECK_MODULES(ENIGMA2, enigma2)
-PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
+PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR)
 PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
 
 AC_ARG_WITH(tpm,
@@ -307,12 +319,17 @@ eparted/meta/Makefile
 eparted/po/Makefile
 eparted/src/Makefile
 
+epgbackup/Makefile
+epgbackup/meta/Makefile
+epgbackup/po/Makefile
+epgbackup/src/Makefile
+epgbackup/src/localehelp/Makefile
+
 epgrefresh/Makefile
 epgrefresh/meta/Makefile
 epgrefresh/po/Makefile
 epgrefresh/src/Makefile
 epgrefresh/src/localehelp/Makefile
-epgrefresh/src/webinterface/Makefile
 
 esame/Makefile
 esame/meta/Makefile
@@ -328,6 +345,7 @@ epgsearchpli/Makefile
 epgsearchpli/meta/Makefile
 epgsearchpli/po/Makefile
 epgsearchpli/src/Makefile
+epgsearchpli/src/icons/Makefile
 
 eurotictv/Makefile
 eurotictv/meta/Makefile
@@ -360,6 +378,7 @@ fritzcall/meta/Makefile
 fritzcall/po/Makefile
 fritzcall/src/Makefile
 fritzcall/src/images/Makefile
+fritzcall/src/images/MODERN/Makefile
 
 fstabeditor/Makefile
 fstabeditor/meta/Makefile
@@ -458,9 +477,9 @@ merlinepgcenter/images/HD_Elgato/Makefile
 
 merlinmusicplayer/Makefile
 merlinmusicplayer/meta/Makefile
+merlinmusicplayer/po/Makefile
 merlinmusicplayer/src/Makefile
 merlinmusicplayer/src/images/Makefile
-merlinmusicplayer/src/merlinmp3player/Makefile
 
 mosaic/Makefile
 mosaic/meta/Makefile
@@ -561,12 +580,12 @@ partnerbox/meta/Makefile
 partnerbox/po/Makefile
 partnerbox/src/Makefile
 partnerbox/src/icons/Makefile
-partnerbox/src/servicewebts/Makefile
 
 permanentclock/Makefile
 permanentclock/meta/Makefile
 permanentclock/po/Makefile
 permanentclock/src/Makefile
+permanentclock/src/trad/Makefile
 
 pipservicerelation/Makefile
 pipservicerelation/src/Makefile
@@ -633,6 +652,16 @@ satloader/po/Makefile
 schiffe/Makefile
 schiffe/meta/Makefile
 schiffe/src/Makefile
+
+seriesplugin/Makefile
+seriesplugin/etc/Makefile
+seriesplugin/meta/Makefile
+seriesplugin/po/Makefile
+seriesplugin/src/Makefile
+seriesplugin/src/Images/Makefile
+seriesplugin/src/Logos/Makefile
+seriesplugin/src/Skins/Makefile
+seriesplugin/src/Identifiers/Makefile
 
 setpasswd/Makefile
 setpasswd/meta/Makefile
@@ -720,7 +749,6 @@ vlcplayer/Makefile
 vlcplayer/meta/Makefile
 vlcplayer/po/Makefile
 vlcplayer/src/Makefile
-vlcplayer/src/servicets/Makefile
 
 vps/Makefile
 vps/meta/Makefile

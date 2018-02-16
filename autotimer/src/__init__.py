@@ -3,15 +3,50 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext
 
+from boxbranding import getImageDistro
+
 # Config
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
-	ConfigNumber, ConfigSelection, ConfigYesNo
+	ConfigNumber, ConfigSelection, ConfigYesNo, ConfigText
+
+PluginLanguageDomain = "AutoTimer"
+PluginLanguagePath = "Extensions/AutoTimer/locale"
+
+def localeInit():
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
+def _(txt):
+	if gettext.dgettext(PluginLanguageDomain, txt):
+		return gettext.dgettext(PluginLanguageDomain, txt)
+	else:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		return gettext.gettext(txt)
+
+language.addCallback(localeInit())
 
 config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default=True)
-config.plugins.autotimer.onlyinstandby = ConfigEnableDisable(default=False)
 config.plugins.autotimer.delay = ConfigNumber(default=3)
-config.plugins.autotimer.interval = ConfigNumber(default=30)
+config.plugins.autotimer.editdelay = ConfigNumber(default=3)
+
+default_unit = "hour"
+if getImageDistro() in ('beyonwiz', 'teamblue', 'openatv', 'openvix'): # distros that want default polling in minutes
+	default_unit = "minute"
+config.plugins.autotimer.unit = ConfigSelection(choices=[
+		("hour", _("Hour")),
+		("minute", _("Minute"))
+	], default = default_unit
+)
+
+default_interval = {"hour": 4, "minute": 30} # default poll every 4 hours or 30 minutes
+if getImageDistro() in ('teamblue', 'openatv'):
+	default_interval["minute"] = 240
+config.plugins.autotimer.interval = ConfigNumber(default=default_interval[config.plugins.autotimer.unit.value])
+
+config.plugins.autotimer.timeout = ConfigNumber(default=5)
+config.plugins.autotimer.popup_timeout = ConfigNumber(default=5)
+config.plugins.autotimer.check_eit_and_remove = ConfigYesNo(default=False)
+config.plugins.autotimer.always_write_config = ConfigYesNo(default=True)
 config.plugins.autotimer.refresh = ConfigSelection(choices=[
 		("none", _("None")),
 		("auto", _("Only AutoTimers created during this session")),
@@ -25,6 +60,7 @@ config.plugins.autotimer.editor = ConfigSelection(choices=[
 	], default = "plain"
 )
 config.plugins.autotimer.addsimilar_on_conflict = ConfigEnableDisable(default=False)
+config.plugins.autotimer.onlyinstandby = ConfigEnableDisable(default=False)
 config.plugins.autotimer.add_autotimer_to_tags = ConfigYesNo(default=False)
 config.plugins.autotimer.add_name_to_tags = ConfigYesNo(default=False)
 config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default=False)
@@ -36,21 +72,7 @@ config.plugins.autotimer.notifsimilar = ConfigYesNo(default=True)
 config.plugins.autotimer.maxdaysinfuture = ConfigNumber(default=0)
 config.plugins.autotimer.show_help = ConfigYesNo(default=True)
 config.plugins.autotimer.skip_during_records = ConfigYesNo(default=False)
-
-PluginLanguageDomain = "AutoTimer"
-PluginLanguagePath = "Extensions/AutoTimer/locale"
- 
-def localeInit():
-	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
-
-def _(txt):
-	if gettext.dgettext(PluginLanguageDomain, txt):
-		return gettext.dgettext(PluginLanguageDomain, txt)
-	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
-		return gettext.gettext(txt)
-
-language.addCallback(localeInit())
+config.plugins.autotimer.skip_during_epgrefresh = ConfigYesNo(default=False)
 
 try:
 	xrange = xrange

@@ -4,8 +4,8 @@
 #  Coded by TheDOC and Dr.Best (c) 2011
 #  Support: www.dreambox-tools.info
 #
-#  This plugin is licensed under the Creative Commons 
-#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  This plugin is licensed under the Creative Commons
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported
 #  License. To view a copy of this license, visit
 #  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 #  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
@@ -14,7 +14,7 @@
 #  is licensed by Dream Multimedia GmbH.
 
 #  This plugin is NOT free software. It is open source, you are allowed to
-#  modify it (if you keep the license), but it may not be commercially 
+#  modify it (if you keep the license), but it may not be commercially
 #  distributed other than under the conditions noted above.
 #
 
@@ -31,6 +31,7 @@ from Screens.Screen import Screen
 from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServiceReference, eDBoxLCD
 from ServiceReference import ServiceReference
 from os.path import basename as os_basename
+from boxbranding import getImageDistro
 
 # for localized messages
 from . import _
@@ -86,7 +87,7 @@ def switchmode(mode):
 
 def switchsbs(session, **kwargs):
 	switchmode(THREE_D_SIDE_BY_SIDE)
-	
+
 def switchtb(session, **kwargs):
 	switchmode(THREE_D_TOP_BOTTOM)
 
@@ -107,7 +108,7 @@ class AutoThreeD(Screen):
 		self.lastmode = getmode()
 		assert not AutoThreeD.instance, "only one AutoThreeD instance is allowed!"
 		AutoThreeD.instance = self # set instance
-		
+
 		if eDBoxLCD.getInstance().detected(): # display found
 			from Components.config import NoSave
 			config.plugins.threed.disableDisplay = ConfigYesNo(default = False)
@@ -122,7 +123,7 @@ class AutoThreeD(Screen):
 	def __evUpdatedInfo(self):
 		if self.newService and config.plugins.threed.autothreed.value != "0" and self.session.nav.getCurrentlyPlayingServiceReference():
 			self.newService = False
-			ref = self.session.nav.getCurrentService() 
+			ref = self.session.nav.getCurrentService()
 			serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
 			spath = serviceRef.getPath()
 			if spath:
@@ -162,7 +163,7 @@ class ThreeDSettings(Screen, ConfigListScreen):
 			<widget source="green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget source="yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
 			<widget source="blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
-			
+
 			<widget name="config" position="10,50" size="550,320" scrollbarMode="showOnDemand" />
 		</screen>"""
 
@@ -174,12 +175,12 @@ class ThreeDSettings(Screen, ConfigListScreen):
 		self["yellow"] = StaticText("")
 		self["blue"] = StaticText("")
 		self.updateButtons()
-		
+
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session = self.session)
 		self.createSetup()
-		
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
+
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
 			"ok": self.save,
 			"cancel": self.cancel,
@@ -187,9 +188,9 @@ class ThreeDSettings(Screen, ConfigListScreen):
 			"green": self.save,
 			"yellow": self.sideBySide,
 			"blue": self.topBottom,
-			
+
 		}, -1)
-		
+
 	def updateButtons(self):
 		currentmode = getmode()
 		if currentmode == THREE_D_OFF:
@@ -201,7 +202,7 @@ class ThreeDSettings(Screen, ConfigListScreen):
 		elif currentmode == THREE_D_TOP_BOTTOM:
 			self["blue"].setText(_("2D mode"))
 			self["yellow"].setText("")
-		
+
 	def createSetup(self):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Show side by side option in extension menu"), config.plugins.threed.showSBSmenu))
@@ -214,17 +215,17 @@ class ThreeDSettings(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Offset"), config.plugins.threed.zoffset))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
-	
+
 	def cancel(self):
 		config.plugins.threed.zoffset.save()
 		self.keyCancel()
-	
+
 	def save(self):
 		self.saveAll()
 		config.plugins.threed.zoffset.save()
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.close()
-	
+
 	def sideBySide(self):
 		currentmode = getmode()
 		if currentmode == THREE_D_OFF:
@@ -233,7 +234,7 @@ class ThreeDSettings(Screen, ConfigListScreen):
 			switchmode(THREE_D_OFF)
 		self.updateButtons()
 		self.createSetup()
-	
+
 	def topBottom(self):
 		currentmode = getmode()
 		if currentmode == THREE_D_OFF:
@@ -242,13 +243,17 @@ class ThreeDSettings(Screen, ConfigListScreen):
 			switchmode(THREE_D_OFF)
 		self.updateButtons()
 		self.createSetup()
-		
+
 def opensettings(session, **kwargs):
 	session.open(ThreeDSettings)
 
 def settings(menuid, **kwargs):
-	if menuid != "system":
-		return []
+	if getImageDistro() in ('openhdf'):
+		if menuid != "video_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return []
 	return [(_("3D settings"), opensettings, "3d_settings", 10)]
 
 def autostart(session, **kwargs):

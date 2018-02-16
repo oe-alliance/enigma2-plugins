@@ -1,0 +1,18 @@
+<default>
+	  <prerequisites>
+                    <tag type="Recording" />
+                    <tag type="EPG" />
+	  </prerequisites>
+          <info>
+                    <author>betonme</author>
+                    <name>SeriesPlugin</name>
+                    <packagename>enigma2-plugin-extensions-seriesplugin</packagename>
+                    <shortdescription>Add season and episode information to Your recordings.</shortdescription>
+                    <description>Automatically search and add season and episode information to Your timer and recordings.</description>
+                    <!--screenshot src=".jpg" /-->
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-seriesplugin" />
+	  </files>
+</default>

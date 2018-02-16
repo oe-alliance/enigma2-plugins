@@ -33,7 +33,7 @@ config.plugins.oscaminfo.autoupdate = ConfigYesNo(default = False)
 config.plugins.oscaminfo.username = ConfigText(default = "username", fixed_size = False, visible_width=12)
 config.plugins.oscaminfo.password = ConfigPassword(default = "password", fixed_size = False)
 config.plugins.oscaminfo.ip = ConfigIP( default = [ 127,0,0,1 ], auto_jump=True)
-config.plugins.oscaminfo.port = ConfigInteger(default = 16002, limits=(0,65536) )
+config.plugins.oscaminfo.port = ConfigInteger(default = 83, limits=(0,65536) )
 config.plugins.oscaminfo.intervall = ConfigInteger(default = 10, limits=(1,600) )
 
 fb = getDesktop(0).size()
@@ -60,15 +60,48 @@ class OscamInfo:
 	version = ""
 
 	def confPath(self):
-		search_dirs = [ "/usr", "/var", "/etc" ]
-		sdirs = " ".join(search_dirs)
-		cmd = 'find %s -name "oscam.conf"' % sdirs
+		#search_dirs = [ "/usr", "/var", "/etc" ]
+		#sdirs = " ".join(search_dirs)
+		#cmd = 'find %s -name "oscam.conf"' % sdirs
+		#res = os.popen(cmd).read()
+		#if res == "":
+		#	return None
+		#else:
+		#	return res.replace("\n", "")
+		cmd = 'ps -eo command | sort -u | grep -v "grep" | grep -c "oscam"'
 		res = os.popen(cmd).read()
-		if res == "":
-			return None
-		else:
-			return res.replace("\n", "")
-
+		if res:
+			data = res.replace("\n", "")
+			if int(data) == 1:
+				cmd = 'ps -eo command | sort -u | grep -v "grep" | grep "oscam"'
+				res = os.popen(cmd).read()
+				if res:
+					data = res.replace("\n", "")
+					data = res.replace("--config-dir ", "-c ")
+					binary = res.split(" ")[0]
+					try:
+						data = data.split("-c ")[1]
+						data = data.split("-")[0]
+					except:
+						try:
+							print 'OScaminfo - oscam start-command is not as "/oscam-binary -parameter /config-folder" executed, using hard-coded config dir'
+							cmd = binary + ' -V | grep ConfigDir'
+							res = os.popen(cmd).read()
+							data = res.split(":")[1]
+						except:
+							print 'OScaminfo - oscam binary appears to be broken'
+							return None
+					data = data.strip() + '/oscam.conf'
+					if os.path.exists(data):
+						print 'OScaminfo - config file "%s" ' % data
+						return data
+					print 'OScaminfo - config file "%s" not found' % data
+					return None
+			elif int(data) > 1:
+				print 'OScaminfo - more than one(%s) oscam binarys is active'  % data
+				return None
+		print 'OScaminfo - no active oscam binarys found'
+		return None
 
 	def getUserData(self):
 		err = ""
@@ -110,6 +143,7 @@ class OscamInfo:
 			return _("file oscam.conf could not be found")
 
 	def openWebIF(self, part = None, reader = None):
+		self.proto = "http"
 		if config.plugins.oscaminfo.userdatafromconf.value:
 			self.ip = "127.0.0.1"
 			udata = self.getUserData()
@@ -119,24 +153,28 @@ class OscamInfo:
 				elif "httppwd" in udata:
 					self.password = ""
 				else:
-					return (False, udata)
+					return False, udata
 			else:
 				self.port = udata[2]
 				self.username = udata[0]
 				self.password = udata[1]
 		else:
 			self.ip = ".".join("%d" % d for d in config.plugins.oscaminfo.ip.value)
-			self.port = config.plugins.oscaminfo.port.value
-			self.username = config.plugins.oscaminfo.username.value
-			self.password = config.plugins.oscaminfo.password.value
+			self.port = str(config.plugins.oscaminfo.port.value)
+			self.username = str(config.plugins.oscaminfo.username.value)
+			self.password = str(config.plugins.oscaminfo.password.value)
+
+		if self.port.startswith( '+' ):
+			self.proto = "https"
+			self.port.replace("+","")
+
 		if part is None:
-			self.url = "http://%s:%s/oscamapi.html?part=status" % ( self.ip, self.port )
+			self.url = "%s://%s:%s/oscamapi.html?part=status" % ( self.proto, self.ip, self.port )
 		else:
-			self.url = "http://%s:%s/oscamapi.html?part=%s" % (self.ip, self.port, part )
+			self.url = "%s://%s:%s/oscamapi.html?part=%s" % ( self.proto, self.ip, self.port, part )
 		if part is not None and reader is not None:
-			self.url = "http://%s:%s/oscamapi.html?part=%s&label=%s" % ( self.ip, self.port, part, reader )
-			
-		print "URL=%s" % self.url
+			self.url = "%s://%s:%s/oscamapi.html?part=%s&label=%s" % ( self.proto, self.ip, self.port, part, reader )
+
 		pwman = urllib2.HTTPPasswordMgrWithDefaultRealm()
 		pwman.add_password( None, self.url, self.username, self.password )
 		handlers = urllib2.HTTPDigestAuthHandler( pwman )
@@ -154,10 +192,10 @@ class OscamInfo:
 				err = str(e.code)
 		if err is not False:
 			print "[openWebIF] Fehler: %s" % err
-			return (False, err)
+			return False, err
 		else:
-			return (True, data)
-			
+			return True, data
+
 	def readXML(self, typ):
 		if typ == "l":
 			self.showLog = True

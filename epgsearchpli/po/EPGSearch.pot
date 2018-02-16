@@ -8,134 +8,298 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2015-11-21 10:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/EPGSearch.py:112
-msgid "Add AutoTimer"
+#: EPGSearch.py:326
+#, python-format
+msgid " (%d min)"
 msgstr ""
 
-#: ../src/EPGSearch.py:127
+#: EPGSearch.py:332
+#, python-format
+msgid " (%s%d min)"
+msgstr ""
+
+#: EPGSearchSetup.py:46
+msgid "Add \"Search event in EPG\" to channel menu"
+msgstr ""
+
+#: EPGSearchSetup.py:45
+msgid "Add \"Search event in EPG\" to event menu"
+msgstr ""
+
+#: EPGSearchSetup.py:40
+msgid "Add \"Search\" Button to EPG"
+msgstr ""
+
+#: EPGSearch.py:568
 msgid "Add timer"
 msgstr ""
 
-#: ../src/EPGSearch.py:349 ../src/EPGSearchSetup.py:64
+#: EPGSearchSetup.py:46
+msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
+msgstr ""
+
+#: EPGSearchSetup.py:45
+msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
+msgstr ""
+
+#: EPGSearch.py:1057 EPGSearchSetup.py:69
 msgid "Cancel"
 msgstr ""
 
-#: ../src/EPGSearch.py:387
+#: EPGSearch.py:1095
 msgid "Channel Selection"
 msgstr ""
 
-#: ../src/EPGSearch.py:252
+#: plugin.py:54 EPGSearch.py:599 EPGSearch.py:709
+msgid "Choice list"
+msgstr ""
+
+#: plugin.py:46
+msgid "Choice list EPGSearch"
+msgstr ""
+
+#: EPGSearch.py:721
+msgid "Choice list RED Button"
+msgstr ""
+
+#: EPGSearchSetup.py:43
+msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
+msgstr ""
+
+#: EPGSearch.py:802
+msgid "Clear history"
+msgstr ""
+
+#: EPGSearch.py:850
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr ""
 
-#: ../src/EPGSearch.py:171
+#: EPGSearchSetup.py:49
+msgid "Display name service as in bouquets"
+msgstr ""
+
+#: EPGSearch.py:620
 msgid "EPG Search"
 msgstr ""
 
-#: ../src/EPGSearchSetup.py:102 ../src/plugin.py:39
+#: plugin.py:131
 msgid "EPGSearch"
 msgstr ""
 
-#: ../src/EPGSearchSetup.py:38 ../src/EPGSearchSetup.py:81
+#: EPGSearchSetup.py:33 EPGSearchSetup.py:87
 msgid "EPGSearch Setup"
 msgstr ""
 
-#: ../src/EPGSearchSetup.py:44
-msgid ""
-"Enable this to be able to access the EPG-Search from within the plugin "
-"browser."
+#: EPGSearchSetup.py:43
+msgid "Encoding Search to EPG"
 msgstr ""
 
-#: ../src/EPGSearch.py:195
+#: EPGSearch.py:775
 msgid "Enter text to search for"
 msgstr ""
 
-#: ../src/EPGSearchSetup.py:45
-msgid ""
-"How many entries to keep in the search history at most. 0 disables history "
-"entirely!"
+#: EPGSearch.py:794
+msgid "Export selected as AutoTimer"
 msgstr ""
 
-#: ../src/EPGSearch.py:126
-msgid "IMDb Search"
+#: EPGSearch.py:553
+msgid "History"
 msgstr ""
 
-#: ../src/EPGSearch.py:207
+#: EPGSearchSetup.py:39
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr ""
+
+#: EPGSearchSetup.py:49
+msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
+msgstr ""
+
+#: EPGSearchSetup.py:48
+msgid "If this setting is enabled, searching EPG in only services in user bouquets."
+msgstr ""
+
+#: EPGSearchSetup.py:40
+msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
+msgstr ""
+
+#: EPGSearchSetup.py:42
+msgid "If this setting is enabled, the plugin adds picons."
+msgstr ""
+
+#: EPGSearch.py:792
 msgid "Import from AutoTimer"
 msgstr ""
 
-#: ../src/EPGSearch.py:201
+#: EPGSearch.py:781
 msgid "Import from EPG"
 msgstr ""
 
-#: ../src/EPGSearch.py:200
+#: EPGSearch.py:780
 msgid "Import from Timer"
 msgstr ""
 
-#: ../src/EPGSearchSetup.py:45
+#: EPGSearchSetup.py:39
 msgid "Length of History"
 msgstr ""
 
-#: ../src/EPGSearch.py:111
+#: EPGSearch.py:928
+msgid "List of history is cleared !"
+msgstr ""
+
+#: EPGSearch.py:603 EPGSearch.py:717
+msgid "Lookup in TMBD"
+msgstr ""
+
+#: EPGSearch.py:552
 msgid "New Search"
 msgstr ""
 
-#: ../src/EPGSearch.py:296
-msgid "No history"
+#: EPGSearch.py:946
+msgid "No history !"
 msgstr ""
 
-#: ../src/EPGSearch.py:350 ../src/EPGSearchSetup.py:63
+#: EPGSearch.py:1058 EPGSearchSetup.py:68
 msgid "OK"
 msgstr ""
 
-#: ../src/EPGSearch.py:208
+#: EPGSearch.py:799
+msgid "Open selected in IMDb"
+msgstr ""
+
+#: EPGSearch.py:718
+msgid "Partnerbox Entries"
+msgstr ""
+
+#: EPGSearch.py:793
 msgid "Save search as AutoTimer"
 msgstr ""
 
-#: ../src/EPGSearch.py:415
+#: plugin.py:42 plugin.py:52
 msgid "Search"
 msgstr ""
 
-#: ../src/plugin.py:39
-msgid "Search EPG"
+#: plugin.py:132
+msgid "Search EPG by title event"
 msgstr ""
 
-#: ../src/EPGSearch.py:364
+#: plugin.py:152 plugin.py:154
+msgid "Search event in EPG"
+msgstr ""
+
+#: EPGSearch.py:797
+msgid "Search for TMDb info"
+msgstr ""
+
+#: EPGSearchSetup.py:48
+msgid "Search only bouquets"
+msgstr ""
+
+#: EPGSearchSetup.py:47
+msgid "Search strictness"
+msgstr ""
+
+#: EPGSearchSetup.py:44
+msgid "Search type"
+msgstr ""
+
+#: EPGSearchSetup.py:50
+msgid "Search type for filter"
+msgstr ""
+
+#: EPGSearch.py:1072
 msgid "Select a timer to search"
 msgstr ""
 
-#: ../src/EPGSearch.py:263 ../src/EPGSearch.py:290
+#: plugin.py:45 EPGSearch.py:720
+msgid "Select action:"
+msgstr ""
+
+#: plugin.py:43
+msgid "Select channel"
+msgstr ""
+
+#: EPGSearch.py:861 EPGSearch.py:940
 msgid "Select text to search for"
 msgstr ""
 
-#: ../src/EPGSearch.py:211
+#: EPGSearchSetup.py:50
+msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
+msgstr ""
+
+#: EPGSearchSetup.py:44
+msgid "Select type for search, \"partial match\" for the most extensive search."
+msgstr ""
+
+#: EPGSearchSetup.py:41
+msgid "Select type: 'Search and Select channel' or 'Search'."
+msgstr ""
+
+#: EPGSearchSetup.py:47
+msgid "Select whether or not you want to enforce case correctness."
+msgstr ""
+
+#: EPGSearch.py:804
 msgid "Setup"
 msgstr ""
 
-#: ../src/EPGSearchSetup.py:44
-msgid "Show in plugin browser"
+#: EPGSearch.py:803
+msgid "Timers list"
 msgstr ""
 
-#: ../src/EPGSearch.py:202
-msgid "Show search history"
+#: EPGSearchSetup.py:41
+msgid "Type blue Button"
 msgstr ""
 
-#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
-#: ../src/plugin.py:52
+#: EPGSearchSetup.py:42
+msgid "Use Picons"
+msgstr ""
+
+#: EPGSearch.py:789
+msgid "Zap to selected service"
+msgstr ""
+
+#: __init__.py:36
+msgid "case-insensitive search"
+msgstr ""
+
+#: __init__.py:36
+msgid "case-sensitive search"
+msgstr ""
+
+#: __init__.py:29
+msgid "choice (Search and standard)"
+msgstr ""
+
+#: __init__.py:35 __init__.py:37
+msgid "exact match"
+msgstr ""
+
+#: __init__.py:29
+msgid "only Search"
+msgstr ""
+
+#: __init__.py:35 __init__.py:37
+msgid "partial match"
+msgstr ""
+
+#: plugin.py:145
 msgid "search EPG"
 msgstr ""
 
-#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
-#: ../src/plugin.py:45
+#: plugin.py:139
 msgid "search EPG..."
+msgstr ""
+
+#: __init__.py:37
+msgid "title starts with"
 msgstr ""

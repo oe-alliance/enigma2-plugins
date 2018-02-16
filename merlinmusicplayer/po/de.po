@@ -1,0 +1,318 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MerlinMusicPlayer\n"
+"POT-Creation-Date: 2014-12-23 08:59+0100\n"
+"PO-Revision-Date: 2014-12-29 12:19+0100\n"
+"Last-Translator: husky <husky@mail.to>\n"
+"Language-Team: OpenATV\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.1\n"
+"X-Poedit-Basepath: c:\\00000000_0MerlinPlayer\\merlinmusicplayer\\src\\\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: c:\\00000000_0MerlinPlayer\\merlinmusicplayer\\src\n"
+
+msgid ""
+"%s\n"
+" added to database"
+msgstr ""
+"%s\n"
+" zur Datenbank hinzugefügt."
+
+msgid ""
+"%s\n"
+" already exists in database!"
+msgstr ""
+"%s\n"
+" ist schon in der Datenbank vorhanden!"
+
+msgid ""
+"Process aborted.\n"
+" 0 files added to database!\n"
+"Press OK to close."
+msgstr ""
+"Prozess abgebrochen.\n"
+"Es wurden keine  Dateien zur Datenbank hinzugefügt!\n"
+"Drücken Sie OK zum Schließen."
+
+msgid ""
+"%d files added to database!\n"
+"Press OK to close."
+msgstr ""
+"%d Dateien zur Datenbank hinzugefügt!\n"
+"Drücken Sie OK zum Schließen."
+
+msgid ""
+"Error!\n"
+"Can not open database!\n"
+"Check if save folder is correct and writeable!\n"
+"Press OK to close."
+msgstr ""
+"Fehler!\n"
+"Datenbank kann nicht geöffnet werden\n"
+"Prüfen Sie ob der Ordner vorhanden und beschreibbar ist!\n"
+"Drücken Sie OK zum Schließen."
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "This Receiver can't decode %s streams!"
+msgstr "Ihr Receiver kann keine %s Streams decodieren!"
+
+msgid "Shuffle is not available yet with cue-files!"
+msgstr "Zufallswiedergabe ist noch nicht verfügbar für Cue-Dateien!"
+
+msgid "Repeat is not available yet with cue-files!"
+msgstr "Wiederholen ist noch nicht verfügbar für Cue-Dateien!"
+
+msgid "Merlin Music Player Lyrics"
+msgstr "Merlin Music Player Songtexte"
+
+msgid "Response -> lyrics for: %s (%s)"
+msgstr "Antwort-> Songtexte für: %s (%s)"
+
+msgid "No lyrics found"
+msgstr "Keine Songtexte gefunden"
+
+msgid "Merlin Music Player Songlist"
+msgstr "Merlin Music Player Songliste"
+
+msgid "iDream Main Menu"
+msgstr "iDream Hauptmenü"
+
+msgid ""
+"There are no playlists defined.\n"
+"Do you want to create a new playlist?"
+msgstr ""
+"Es sind keine Playlisten vorhanden.\n"
+"Wollen Sie eine neue Playliste erstellen?"
+
+msgid "Configuration"
+msgstr "Konfiguration"
+
+msgid "Search in iDream database"
+msgstr "In iDream Datenbank suchen"
+
+msgid "Scan path for music files and add them to database"
+msgstr "Pfad duchsuchen und Musikdateien zur Datenbank hinzufügen"
+
+msgid "Create new playlist"
+msgstr "Neue Playlist erzeugen"
+
+msgid "Delete song from current playlist"
+msgstr "Lied aus der aktuellen Playlist löschen"
+
+msgid "Add selected song to a playlist"
+msgstr "Ausgewählten Song zur Playlist hinzufügen "
+
+msgid "Add all songs from selected album to a playlist"
+msgstr "Alle Lieder vom ausgewählten Album in die Playlist aufnehmen"
+
+msgid "Add all songs from selected artist to a playlist"
+msgstr "Alle Lieder vom ausgewählten Interpreten in die Songliste aufnehmen"
+
+msgid "Delete song from database"
+msgstr "Lied aus der Datenbank löschen"
+
+msgid "Clear current songlist and play selected entry"
+msgstr "Songliste leeren und ausgewähltes Lied abspielen"
+
+msgid "Append file to current playing songlist"
+msgstr "Datei in die aktuelle Songliste aufnehmen"
+
+msgid "Insert file to current playing songlist and play next"
+msgstr "Datei in die aktuelle Songliste aufnehmen und als nächstes abspielen"
+
+msgid "Delete selected playlist"
+msgstr "Ausgewählte Playliste löschen"
+
+msgid "Add all songs from selected genre to a playlist"
+msgstr "Alle Lieder vom ausgewählten Genre in die Playliste aufnehmen"
+
+msgid "Do you really want to add all songs from that genre to a playlist?"
+msgstr "Wollen Sie wirklich alle Lieder dieses Genres zu einer Playliste hinzufügen?"
+
+msgid "Do you really want to add all songs from that artist to a playlist?"
+msgstr "Wollen Sie wirklich alle Lieder dieses Interpreten zu einer Playliste hinzufügen?"
+
+msgid "Do you really want to add all songs from that album to a playlist?"
+msgstr "Wollen Sie wirklich alle Lieder dieses Albums zu einer Playliste hinzufügen?"
+
+msgid "Do you really want to delete the current playlist?"
+msgstr "Wollen Sie wirklich die aktuelle Playliste löschen?"
+
+msgid "Do you really want to delete that song the current playlist?"
+msgstr "Wollen Sie wirklich diese Lied aus der aktuellen Songliste löschen?"
+
+msgid "Do you really want to delete that song from the database?"
+msgstr "Wollen Sie wirklich diese Lied aus der Datenbank löschen?"
+
+msgid "Enter name for playlist"
+msgstr "Namen für Playliste eingeben"
+
+msgid "search for title"
+msgstr "Nach Titel suchen"
+
+msgid "search for artist"
+msgstr "Nach Interpret suchen"
+
+msgid "search for album"
+msgstr "Nach Album suchen"
+
+msgid "search in all of them"
+msgstr "In allen suchen"
+
+msgid "Enter search-text"
+msgstr "Suchtext eingeben"
+
+msgid "Search results for \"%s\" in all titles"
+msgstr "Suchergebnis für \"%s\" in allen Titeln"
+
+msgid "Search results for \"%s\" in all artists"
+msgstr "Suchergebnis für \"%s\" in allen Interpreten"
+
+msgid "Search results for \"%s\" in all albums"
+msgstr "Suchergebnis für \"%s\" in allen Alben"
+
+msgid "Search results for \"%s\" in title, artist or album"
+msgstr "Suchergebnis für \"%s\" in allen Titeln, Interpreten und Alben"
+
+msgid "Playlists"
+msgstr "Playlisten"
+
+msgid "[back]"
+msgstr "[zurück]"
+
+msgid "Playlist (%s) -> Song List"
+msgstr "Playlist (%s) -> Songliste"
+
+msgid "Genre List"
+msgstr "Genreliste"
+
+msgid "Genre (%s) -> Song List"
+msgstr "Genre (%s) -> Songliste"
+
+msgid "All Songs"
+msgstr "Alle Lieder"
+
+msgid "Artist (%s) -> Song List"
+msgstr "Interpret (%s) -> Songliste"
+
+msgid "Album (%s) -> Song List"
+msgstr "Album (%s) -> Songliste"
+
+msgid "Playlists (%d)"
+msgstr "Playlisten (%d)"
+
+msgid "Artists (%d)"
+msgstr "Interpreten (%d)"
+
+msgid "Albums (%d)"
+msgstr "Alben (%d)"
+
+msgid "Songs (%d)"
+msgstr "Lieder (%d)"
+
+msgid "Genres (%d)"
+msgstr "Genres (%d)"
+
+msgid "Artists List"
+msgstr "Interpreten Liste"
+
+msgid "Artist (%s) -> Album List"
+msgstr "Interpet (%s) -> Albumliste"
+
+msgid "Albums List"
+msgstr "Albenliste"
+
+msgid ""
+"%s\n"
+"appended to songlist"
+msgstr ""
+"%s\n"
+"in der Songliste aufgenommen"
+
+msgid ""
+"%s\n"
+"inserted and will be played as next song"
+msgstr ""
+"%s\n"
+"aufgenommen und wird als nächstes abgespielt"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Invalid Location"
+msgstr "Ungültiger Ordner"
+
+msgid "Use hardware-decoder for MP3"
+msgstr "Hardware-Decoder für MP3 benutzen"
+
+msgid "Play last used songlist after starting"
+msgstr "Letzte Songliste nach dem Starten abspielen"
+
+msgid "iDream database path"
+msgstr "iDream Datenbank Pfad"
+
+msgid "Use google-images for cover art"
+msgstr "Benutze Google Images für Cover"
+
+msgid "Google image path"
+msgstr "Google Image Ordner"
+
+msgid "Activate screensaver"
+msgstr "Bildschirmschoner aktivieren"
+
+msgid "Wait for screensaver (in min)"
+msgstr "Wartezeit für Bildschirmschoner (in Minuten)"
+
+msgid "Wait for screentimeout (in sec)"
+msgstr "Dateibrowser Timeout (in Sekunden)"
+
+msgid "Remember last path of filebrowser"
+msgstr "Letzten Ordner im Dateibrowser merken"
+
+msgid "Filebrowser startup path"
+msgstr "Dateibrowser Startordner"
+
+msgid "Show iDream in extensions menu"
+msgstr "Zeige iDream in Erweiterungen"
+
+msgid "Show Merlin Music Player in extensions menu"
+msgstr "Zeige Merlin Music Player in Erweiterungen"
+
+msgid "Show iDream in main menu"
+msgstr "Zeige iDream im Hauptmenü"
+
+msgid "Show Merlin Music Player in main menu"
+msgstr "Zeige  Merlin Music Player in Hauptmenü"
+
+msgid "No music files found!"
+msgstr "Keine Musik Dateien gefunden!"
+
+msgid "Append file to current songlist"
+msgstr "Datei an die aktuelle Songliste anhängen"
+
+msgid "Insert file to current songlist and play next"
+msgstr "Datei in die aktuelle Songliste aufnehmen und als nächste abspielen"
+
+msgid "Filelist: %s"
+msgstr "Dateiliste: %s"
+
+msgid "Merlin Music Player"
+msgstr "Merlin Music Player"
+
+msgid "iDream"
+msgstr "iDream"
+
+msgid "Receiver Music Database"
+msgstr "Receiver Music Database"
+
+msgid "Add music files to iDream database"
+msgstr "Musikdatein in die iDream Datenbank aufnehmen"
+
+msgid "Close"
+msgstr "Schliessen"
