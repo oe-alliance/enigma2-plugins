@@ -57,5 +57,6 @@ def Plugins(**kwargs):
 	return [
 		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
 		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autoend),
-		PluginDescriptor(name="Automatic Volume Adjustment", description=_("Automatic Volume Adjustment"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup)
+		PluginDescriptor(name="Automatic Volume Adjustment", description=_("Automatic Volume Adjustment"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup),
+		PluginDescriptor(name="Automatic Volume Adjustment", description=_("Automatic Volume Adjustment"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup)
 	]
