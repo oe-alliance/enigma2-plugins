@@ -65,7 +65,7 @@ class AutomaticVolumeAdjustment(Screen):
 					self.serviceList[c.servicereference.value] = int(c.adjustvalue.value) # adjust volume
 		else: # Remember channel volume mode
 			self.serviceList = getVolumeDict()
-		self.defaultValue = int(configVA.config.adustvalue.value)
+		self.defaultValue = int(configVA.config.adjustvalue.value)
 		self.enabled = configVA.config.enable.value
 		self.maxMPEGVolume = configVA.config.mpeg_max_volume.value
 		self.showVolumeBar = configVA.config.show_volumebar.value

@@ -78,7 +78,7 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 			self.config_mode = getConfigListEntry(_("Mode"), self.configVA.config.mode)
 			self.list.append(self.config_mode)
 			if self.configVA.config.mode.value == "0":
-				self.list.append(getConfigListEntry(_("Default adjustment for AC3/DTS"), self.configVA.config.adustvalue))
+				self.list.append(getConfigListEntry(_("Default adjustment for AC3/DTS"), self.configVA.config.adjustvalue))
 				self.list.append(getConfigListEntry(_("Max. volume for MPEG audio"), self.configVA.config.mpeg_max_volume))
 				self["key_blue"].text = _("Services")
 			else:
