@@ -75,15 +75,15 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 		self.config_enable = getConfigListEntry(_("Enable"), self.configVA.config.enable)
 		self.list.append(self.config_enable)
 		if self.configVA.config.enable.value:
-			self.config_modus = getConfigListEntry(_("Modus"), self.configVA.config.modus)
+			self.config_modus = getConfigListEntry(_("Mode"), self.configVA.config.modus)
 			self.list.append(self.config_modus)
 			if self.configVA.config.modus.value == "0":
-				self.list.append(getConfigListEntry(_("Default volume adjustment value for AC3/DTS"), self.configVA.config.adustvalue))
-				self.list.append(getConfigListEntry(_("Max. volume for mpeg audio"), self.configVA.config.mpeg_max_volume))
+				self.list.append(getConfigListEntry(_("Default adjustment for AC3/DTS"), self.configVA.config.adustvalue))
+				self.list.append(getConfigListEntry(_("Max. volume for MPEG audio"), self.configVA.config.mpeg_max_volume))
 				self["key_blue"].text = _("Services")
 			else:
 				self["key_blue"].text = ""
-			self.list.append(getConfigListEntry(_("Show volumebar when volume-value was changed"), self.configVA.config.show_volumebar))
+			self.list.append(getConfigListEntry(_("Show volume bar on volume change"), self.configVA.config.show_volumebar))
 		else:
 			self.config_modus = None
 		self[widget].list = self.list
@@ -136,7 +136,7 @@ class AutomaticVolumeAdjustmentEntriesListConfigScreen(Screen):
 	def __init__(self, session, configVA):
 		Screen.__init__(self, session)
 		self.title = _("Automatic Volume Adjustment - Service Config")
-		self["name"] = StaticText(_("Servicename"))
+		self["name"] = StaticText(_("Service"))
 		self["adjustvalue"] = StaticText(_("Adjustment value"))
 		self["key_red"] = StaticText(_("Add"))
 		self["key_green"] = StaticText(_("OK"))
@@ -261,7 +261,7 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 			self.currentref = entry.servicereference.value
 			self.currentvalue = entry.adjustvalue.value
 		self.list = [ ]
-		self.service = getConfigListEntry(_("Servicename"), self.current.name)
+		self.service = getConfigListEntry(_("Service"), self.current.name)
 		self.list.append(self.service)
 		self.adjustValue = getConfigListEntry(_("Adjustment value"), self.current.adjustvalue)
 		self.list.append(self.adjustValue)
