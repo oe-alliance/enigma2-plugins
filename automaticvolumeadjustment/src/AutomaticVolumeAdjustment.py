@@ -59,8 +59,8 @@ class AutomaticVolumeAdjustment(Screen):
 	def initializeConfigValues(self, configVA, fromOutside):
 		print "[AutomaticVolumeAdjustment] initialize config values..."
 		self.serviceList = { }
-		self.modus = configVA.config.modus.value # get modus
-		if self.modus == "0": # Automatic volume adjust mode
+		self.mode = configVA.config.mode.value # get mode
+		if self.mode == "0": # Automatic volume adjust mode
 			for c in configVA.config.Entries:
 					self.serviceList[c.servicereference.value] = int(c.adjustvalue.value) # adjust volume
 		else: # Remember channel volume mode
@@ -69,7 +69,7 @@ class AutomaticVolumeAdjustment(Screen):
 		self.enabled = configVA.config.enable.value
 		self.maxMPEGVolume = configVA.config.mpeg_max_volume.value
 		self.showVolumeBar = configVA.config.show_volumebar.value
-		if self.modus == "0": # Automatic volume adjust mode
+		if self.mode == "0": # Automatic volume adjust mode
 			VolumeControlInit(self.enabled, self.maxMPEGVolume) # overwrite VolumeControl Class, when max MPEG Volume was set (<> 100)
 		if not self.pluginStarted and self.enabled and fromOutside:
 			self.newService = True
@@ -77,7 +77,7 @@ class AutomaticVolumeAdjustment(Screen):
 		
 	def __evEnd(self):
 		if self.pluginStarted and self.enabled:
-			if self.modus == "0": # Automatic volume adjust mode
+			if self.mode == "0": # Automatic volume adjust mode
 				# if played service had AC3||DTS audio and volume value was changed with RC, take new delta value from the config
 				if self.currentVolume and self.volctrl.getVolume() != self.currentVolume:
 					self.lastAdjustedValue = self.serviceList.get(self.session.nav.getCurrentlyPlayingServiceReference().toString(), self.defaultValue)
@@ -96,7 +96,7 @@ class AutomaticVolumeAdjustment(Screen):
 			print "[AutomaticVolumeAdjustment] service changed"
 			self.newService = False
 			self.currentVolume = 0 # init
-			if self.modus == "0": # Automatic volume adjust mode
+			if self.mode == "0": # Automatic volume adjust mode
 				self.currentAC3DTS = self.isCurrentAudioAC3DTS()
 				if self.pluginStarted:
 					if self.currentAC3DTS: # ac3 dts?
@@ -130,7 +130,7 @@ class AutomaticVolumeAdjustment(Screen):
 							print "[AutomaticVolumeAdjustment] Change volume for service: %s (-%d) to %d"%(ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), vol-ajvol, self.volctrl.getVolume())
 							self.lastAdjustedValue = 0 # mpeg audio, no delta here
 					return # get out of here, nothing to do anymore
-			else: # modus = Remember channel volume
+			else: # mode = Remember channel volume
 				if self.pluginStarted:
 					ref = self.getPlayingServiceReference()
 					if ref.valid():
@@ -142,7 +142,7 @@ class AutomaticVolumeAdjustment(Screen):
 							print "[AutomaticVolumeAdjustment] Set last used volume value for service %s to %d"%(ServiceReference(ref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), self.volctrl.getVolume())
 					return # get out of here, nothing to do anymore
 			if not self.pluginStarted:
-				if self.modus == "0": # Automatic volume adjust mode
+				if self.mode == "0": # Automatic volume adjust mode
 					# starting plugin, if service audio is ac3 or dts --> get delta from config...volume value is set by enigma2-system at start
 					if self.currentAC3DTS:
 						self.lastAdjustedValue = self.serviceList.get(self.session.nav.getCurrentlyPlayingServiceReference().toString(), self.defaultValue)

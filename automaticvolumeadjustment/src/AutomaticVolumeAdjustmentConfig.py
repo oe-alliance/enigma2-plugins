@@ -69,7 +69,7 @@ class AutomaticVolumeAdjustmentConfig():
 		self.config.entriescount =  ConfigInteger(0)
 		self.config.Entries = ConfigSubList()
 		self.config.enable = ConfigYesNo(default = False)
-		self.config.modus = ConfigSelection(choices = [("0", _("Automatic volume adjust")), ("1", _("Remember service volume"))], default = "0")
+		self.config.mode = ConfigSelection(choices = [("0", _("Automatic volume adjust")), ("1", _("Remember service volume"))], default = "0")
 		self.config.adustvalue = ConfigSelectionNumber(-50, 50, 5, default = 25)
 		self.config.mpeg_max_volume = ConfigSelectionNumber(10, 100, 5, default = 100)
 		self.config.show_volumebar = ConfigYesNo(default = False)

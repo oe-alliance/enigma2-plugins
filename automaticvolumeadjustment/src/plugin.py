@@ -35,10 +35,10 @@ def autostart(reason, **kwargs):
 		AutomaticVolumeAdjustment(session)
 
 def autoend(reason, **kwargs):
-	# save config values for last used volume modus
+	# save config values for last used volume mode
 	if reason == 1:
 		if AutomaticVolumeAdjustment.instance:
-			if AutomaticVolumeAdjustment.instance.enabled and AutomaticVolumeAdjustment.instance.modus != "0":
+			if AutomaticVolumeAdjustment.instance.enabled and AutomaticVolumeAdjustment.instance.mode != "0":
 				saveVolumeDict(AutomaticVolumeAdjustment.instance.serviceList)
 
 def setup(session, **kwargs):
