@@ -1,4 +1,3 @@
-from . import _
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Setup import SetupSummary
