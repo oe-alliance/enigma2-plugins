@@ -46,6 +46,7 @@ from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, 
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.Screen import Screen
 from skin import parseColor
 from Tools import Notifications
@@ -580,6 +581,7 @@ class EditBirthdayScreen(Screen, ConfigListScreen, HelpableScreen):
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 		{
 			"cancel":	(self.cancel, _("Cancel")),
+			'ok':		(self.ok, _("VirtualKeyBoard")),
 		}, -1)
 		
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
@@ -591,7 +593,26 @@ class EditBirthdayScreen(Screen, ConfigListScreen, HelpableScreen):
 	# close this screen
 	def cancel(self):
 		self.close(None, None)
-		
+
+	# open VirtualKeyBoard
+	def ok (self):
+		text = self["config"].getCurrent()[1].value
+		if text == config.plugins.birthdayreminder.name.value:
+			title = _("Enter the name of the person:")
+			self.session.openWithCallback(self.VirtualKeyBoardCallBack, VirtualKeyBoard, title = title, text = text)
+		else:
+			pass
+
+	# VirtualKeyBoard callback
+	def VirtualKeyBoardCallBack(self, callback):
+		try:
+			if callback:  
+				self["config"].getCurrent()[1].value = callback
+			else:
+				pass
+		except:
+			pass
+
 	# close the screen if we've got a valid date, otherwise show a warning
 	def accept(self):
 		try:
@@ -658,11 +679,28 @@ class BirthdayReminderSettings(Screen, ConfigListScreen, HelpableScreen):
 		self.notificationTime = copy(config.plugins.birthdayreminder.notificationTime.value)
 		
 	def keySelect(self):
-		self.session.openWithCallback(self.pathSelected, PathSelectionScreen, self.path.value)
-		
+		text = self["config"].getCurrent()[1].value
+		if text == self.path.value:
+			self.session.openWithCallback(self.pathSelected, PathSelectionScreen, self.path.value)
+		elif text == self.filename.value:
+			title = _("Choose the filename:")
+			self.session.openWithCallback(self.VirtualKeyBoardCallBack, VirtualKeyBoard, title = title, text = text)
+		else:
+			pass
+
 	def pathSelected(self, res):
 		if res is not None:
 			self.path.value = res
+
+	# VirtualKeyBoard callback
+	def VirtualKeyBoardCallBack(self, callback):
+		try:
+			if callback:  
+				self["config"].getCurrent()[1].value = callback
+			else:
+				pass
+		except:
+			pass
 			
 	# save the config changes
 	def save(self):
