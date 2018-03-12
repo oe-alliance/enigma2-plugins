@@ -416,19 +416,6 @@ infobartunerstate/meta/Makefile
 infobartunerstate/po/Makefile
 infobartunerstate/src/Makefile
 
-internetradio/Makefile
-internetradio/meta/Makefile
-internetradio/po/Makefile
-internetradio/src/Makefile
-internetradio/src/images/Makefile
-internetradio/src/WebComponents/Makefile
-internetradio/src/WebComponents/Sources/Makefile
-internetradio/src/WebScreens/Makefile
-internetradio/src/web/Makefile
-internetradio/src/web-data/Makefile
-internetradio/src/web-data/img/Makefile
-internetradio/src/web-data/tpl/Makefile
-
 kiddytimer/Makefile
 kiddytimer/img/Makefile
 kiddytimer/meta/Makefile
