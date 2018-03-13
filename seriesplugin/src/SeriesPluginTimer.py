@@ -153,14 +153,24 @@ class SeriesPluginTimer(object):
 			timer.description = str(refactorDescription(timer.description, data))
 			
 			timer.dirname = str(refactorDirectory(timer.dirname or config.usage.default_path.value, data))
-			timer.calculateFilename()
+# RecordTimer needs to check that there is free space there....
+# ...this sets the MountPath object variable.
+			if not timer.freespace():
+				msg = _("Failed: %s.") % _("[No freespace]") + " " + str(data)
+				log.debug(msg)
+				timer.log(609, "[SeriesPlugin]" + " " + msg)
+				SeriesPluginTimer.data.append(
+					str(timer.name) + ": " + msg
+				)
+			else:
+				timer.calculateFilename()
 			
-			msg = _("Success: %s" % (timer.name))
-			log.debug(msg)
-			timer.log(610, "[SeriesPlugin]" + " " + msg)
+				msg = _("Success: %s" % (timer.name))
+				log.debug(msg)
+				timer.log(610, "[SeriesPlugin]" + " " + msg)
 			
-			if config.plugins.seriesplugin.timer_add_tag.value:
-				timer.tags.append(TAG)
+				if config.plugins.seriesplugin.timer_add_tag.value:
+					timer.tags.append(TAG)
 		
 		elif data:
 			msg = _("Failed: %s." % ( str( data ) ))
