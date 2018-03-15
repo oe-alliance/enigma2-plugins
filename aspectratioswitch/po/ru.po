@@ -1,0 +1,118 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Aspect Ratio Switch V.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: litvcom\n"
+"Language-Team: litvcom\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+msgid "16:10 Letterbox"
+msgstr "16:10 Режим ящика"
+
+msgid "16:10 PanScan"
+msgstr "16:10 Панорама"
+
+msgid "16:9"
+msgstr "16:9"
+
+msgid "16:9 Letterbox"
+msgstr "16:9 Режим ящика"
+
+msgid "16:9 always"
+msgstr "16:9 всегда"
+
+msgid "4:3 Letterbox"
+msgstr "4:3 Режим ящика"
+
+msgid "4:3 PanScan"
+msgstr "4:3 Панорама"
+
+msgid "Aspect Ratio Switch setup"
+msgstr "Сотношение сторон"
+
+msgid ""
+"Aspect ratio switched from:\n"
+"   %s\n"
+"to:\n"
+"   %s"
+msgstr ""
+"Соотношение сторон переключено с:\n"
+"   %s\n"
+"на:\n"
+"   %s"
+
+msgid "AspectRatioSwitch Setup"
+msgstr "Сотношение сторон"
+
+msgid "Bouquet +/- long"
+msgstr "Bouquet +/- (длинное)"
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Changing keymap failed (%s)."
+msgstr "Не удалось сменить назначение (%s)."
+
+msgid "Extensions menu"
+msgstr "Меню расширений"
+
+msgid "Help key long"
+msgstr "HELP (длинное)"
+
+msgid "Include %s"
+msgstr "Включать %s"
+
+msgid "Key mapping"
+msgstr "Кнопка назначение"
+
+msgid "PVR key long"
+msgstr "PVR (длинное)"
+
+msgid "Plugin menu"
+msgstr "Меню плагинов"
+
+msgid "Quick switching of aspect ratio setting"
+msgstr "Быстрое переключение соотношение сторон"
+
+msgid "Quick switching via remote control"
+msgstr "Быстрое переключение пультом"
+
+msgid "Radio key long"
+msgstr "RADIO (длинное)"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Set aspect ratio on startup"
+msgstr "Соотношение сторон при запуске"
+
+msgid "Show Setup in"
+msgstr "Показывать настройки"
+
+msgid "Show switch message"
+msgstr "Показывать инф. переключение"
+
+msgid "Startup aspect ratio"
+msgstr "Задать соотношение при запуске"
+
+msgid ""
+"Use the configured key(s) on your remote control to switch aspect ratio modes. "
+"If any 'Quickbutton' actions were assigned to these keys, they will be "
+"disabled as long as this plugin is activated!"
+msgstr ""
+"Используйте настроенные кнопки на пульте для переключения режимов соотношения "
+"сторон. Если на эти кнопки были назначены действия \"Горячие кнопки\", они "
+"будут отключены до тех пор, пока этот плагин будет активирован!"
+
+msgid "Ver."
+msgstr " "
+
+msgid "You need to include at least %d aspect ratio modes!"
+msgstr "Необходимо включить не менее %d режимов!"
