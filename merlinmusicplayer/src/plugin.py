@@ -103,6 +103,8 @@ config.plugins.merlinmusicplayer.merlinmusicplayermainmenu = ConfigYesNo(default
 from enigma import ePythonMessagePump
 from threading import Thread, Lock
 
+DESKTOP_WIDTH = getDesktop(0).size().width()
+
 class ThreadQueue:
 	def __init__(self):
 		self.__list = [ ]
@@ -2581,37 +2583,65 @@ class iDreamList(GUIComponent, object):
 	def buildEntry(self, item):
 		width = self.l.getItemSize().width()
 		res = [ None ]
-		if self.displaySongMode:
-			if item.navigator:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width , 20, 0, RT_HALIGN_CENTER|RT_VALIGN_CENTER, "%s" % item.text))
-			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width - 100 , 20, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s - %s" % (item.title, item.artist)))
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, width - 100,3,100, 20, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%s" % item.track))
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 26,width -200, 18, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s%s" % (item.album, item.date)))
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, width -200, 26,200, 18, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%s" % item.length))
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 47,width -200, 18, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s" % item.genre))
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, width -200, 47,200, 18, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%s" % item.bitrate))
-		else:
-			if item.navigator:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width , 20, 0, RT_HALIGN_CENTER|RT_VALIGN_CENTER, "%s" % item.text))
-			else:
-				if item.PTS is None:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width , 20, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s" % item.text))
+		if DESKTOP_WIDTH <= 1280:
+			if self.displaySongMode:
+				if item.navigator:
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 1, width - 4, 27, 0, RT_HALIGN_CENTER|RT_VALIGN_CENTER, "%s" % item.text))
 				else:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width , 20, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s" % item.title))
-		return res
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 1, width - 104, 27, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s - %s" % (item.title, item.artist)))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, width - 102, 1, 100, 27, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%s" % item.track))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 31, width - 204, 27, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s%s" % (item.album, item.date)))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, width - 202, 31, 200, 27, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%s" % item.length))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 61, width - 204, 27, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s" % item.genre))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, width - 202, 61, 200, 27, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%s" % item.bitrate))
+			else:
+				if item.navigator:
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 1, width - 4, 27, 0, RT_HALIGN_CENTER|RT_VALIGN_CENTER, "%s" % item.text))
+				else:
+					if item.PTS is None:
+						res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 1, width - 4, 27, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s" % item.text))
+					else:
+						res.append((eListboxPythonMultiContent.TYPE_TEXT, 2, 1, width - 4, 27, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s" % item.title))
+			return res
+		else:
+			if self.displaySongMode:
+				if item.navigator:
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 2, width - 6, 41, 0, RT_HALIGN_CENTER|RT_VALIGN_CENTER, "%s" % item.text))
+				else:
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 2, width - 156, 41, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s - %s" % (item.title, item.artist)))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, width - 153, 2, 150, 41, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%s" % item.track))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 47, width - 306, 41, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s%s" % (item.album, item.date)))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, width - 303, 47, 300, 41, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%s" % item.length))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 92, width - 306, 41, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s" % item.genre))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, width - 303, 92, 300, 41, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, "%s" % item.bitrate))
+			else:
+				if item.navigator:
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 2, width - 6, 41, 0, RT_HALIGN_CENTER|RT_VALIGN_CENTER, "%s" % item.text))
+				else:
+					if item.PTS is None:
+						res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 2, width - 6, 41, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s" % item.text))
+					else:
+						res.append((eListboxPythonMultiContent.TYPE_TEXT, 3, 2, width - 6, 41, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, "%s" % item.title))
+			return res
 
 	def __init__(self):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
 		self.l.setBuildFunc(self.buildEntry)
-		font = skin.fonts.get("iDreamListFont0", ("Regular", 20))
-		self.l.setFont(0, gFont(font[0], font[1]))
-		font = skin.fonts.get("iDreamListFont1", ("Regular", 16))
-		self.l.setFont(1, gFont(font[0], font[1]))
-		font = skin.fonts.get("iDreamListItem", (22, 68))
-		self.item = font[0]
-		self.item1 = font[1]
+		if DESKTOP_WIDTH <= 1280:
+			font = skin.fonts.get('iDreamListFont0', ('Regular', 22))
+			self.l.setFont(0, gFont(font[0], font[1]))
+			font = skin.fonts.get('iDreamListFont1', ('Regular', 22))
+			self.l.setFont(1, gFont(font[0], font[1]))
+			self.item = 30
+			self.item1 = 90
+		else:
+			font = skin.fonts.get('iDreamListFont0', ('Regular', 32))
+			self.l.setFont(0, gFont(font[0], font[1]))
+			font = skin.fonts.get('iDreamListFont1', ('Regular', 32))
+			self.l.setFont(1, gFont(font[0], font[1]))
+			self.item = 45
+			self.item1 = 135
 		self.l.setItemHeight(self.item)
 		self.onSelectionChanged = [ ]
 		self.mode = 0
