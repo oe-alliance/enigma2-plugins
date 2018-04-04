@@ -641,7 +641,7 @@ msgid ""
 "Label Timers with season, episode and title, according to the SeriesPlugin "
 "settings."
 msgstr ""
-"Bennen Timer mit Staffel, Episode und Titel nach den Einstellungen vom "
+"Bennene Timer mit Staffel, Episode und Titel nach den Einstellungen vom "
 "Series-Plugin."
 
 #: ../src/AutoTimerEditor.py:671
