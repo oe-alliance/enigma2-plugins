@@ -4,7 +4,7 @@ from . import _
 
 from Plugins.Plugin import PluginDescriptor
 from Tools.Downloader import downloadWithProgress
-from enigma import ePicLoad, eServiceReference
+from enigma import ePicLoad, eServiceReference, eServiceCenter
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.EpgSelection import EPGSelection
@@ -80,10 +80,14 @@ class IMDBChannelSelection(SimpleChannelSelection):
 		if (ref.flags & 7) == 7:
 			self.enterPath(ref)
 		elif not (ref.flags & eServiceReference.isMarker):
+			info = eServiceCenter.getInstance().info(ref)
+			evt = info and info.getEvent(ref, -1)
+			event_id = evt and evt.getEventId() or None
 			self.session.openWithCallback(
 				self.epgClosed,
 				IMDBEPGSelection,
 				ref,
+				eventid=event_id,
 				openPlugin = False
 			)
 
@@ -92,32 +96,40 @@ class IMDBChannelSelection(SimpleChannelSelection):
 			self.close(ret)
 
 class IMDBEPGSelection(EPGSelection):
-	def __init__(self, session, ref, openPlugin = True):
-		EPGSelection.__init__(self, session, ref)
+	def __init__(self, session, ref, eventid=None, openPlugin = True):
+		EPGSelection.__init__(self, session, ref.toString(), eventid=eventid)
 		self.skinName = "EPGSelection"
 		self["key_green"].setText(_("Lookup"))
 		self.openPlugin = openPlugin
 
 	def infoKeyPressed(self):
-		self.timerAdd()
+		self.greenButtonPressed()
 
 	def timerAdd(self):
-		cur = self["list"].getCurrent()
-		evt = cur[0]
-		sref = cur[1]
-		if not evt:
-			return
+		self.greenButtonPressed()
 
-		if self.openPlugin:
-			self.session.open(
-				IMDB,
-				evt.getEventName()
-			)
-		else:
-			self.close(evt.getEventName())
+	def greenButtonPressed(self):
+		self.closeEventViewDialog()
+		from Screens.InfoBar import InfoBar
+		InfoBarInstance = InfoBar.instance
+		if not InfoBarInstance.LongButtonPressed:
+			cur = self["list"].getCurrent()
+			evt = cur[0]
+			sref = cur[1]
+			if not evt:
+				return
+
+			if self.openPlugin:
+				self.session.open(
+					IMDB,
+					evt.getEventName()
+				)
+			else:
+				self.close(evt.getEventName())
 
 	def onSelectionChanged(self):
-		pass
+		super(IMDBEPGSelection, self).onSelectionChanged()
+		self["key_green"].setText(_("Lookup"))
 
 class IMDB(Screen, HelpableScreen):
 	skin = """
