@@ -4,7 +4,7 @@ from . import _
 
 from Plugins.Plugin import PluginDescriptor
 from Tools.Downloader import downloadWithProgress
-from enigma import ePicLoad, eServiceReference
+from enigma import ePicLoad, eServiceReference, eServiceCenter
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.EpgSelection import EPGSelection
@@ -33,6 +33,7 @@ except ImportError as ie:
 	from urllib.parse import quote_plus
 	iteritems = lambda d: d.items()
 	unichr = chr
+from urlparse import urlsplit, SplitResult
 import os, gettext
 
 # Configuration
@@ -79,10 +80,14 @@ class IMDBChannelSelection(SimpleChannelSelection):
 		if (ref.flags & 7) == 7:
 			self.enterPath(ref)
 		elif not (ref.flags & eServiceReference.isMarker):
+			info = eServiceCenter.getInstance().info(ref)
+			evt = info and info.getEvent(ref, -1)
+			event_id = evt and evt.getEventId() or None
 			self.session.openWithCallback(
 				self.epgClosed,
 				IMDBEPGSelection,
 				ref,
+				eventid=event_id,
 				openPlugin = False
 			)
 
@@ -91,32 +96,40 @@ class IMDBChannelSelection(SimpleChannelSelection):
 			self.close(ret)
 
 class IMDBEPGSelection(EPGSelection):
-	def __init__(self, session, ref, openPlugin = True):
-		EPGSelection.__init__(self, session, ref)
+	def __init__(self, session, ref, eventid=None, openPlugin = True):
+		EPGSelection.__init__(self, session, ref.toString(), eventid=eventid)
 		self.skinName = "EPGSelection"
 		self["key_green"].setText(_("Lookup"))
 		self.openPlugin = openPlugin
 
 	def infoKeyPressed(self):
-		self.timerAdd()
+		self.greenButtonPressed()
 
 	def timerAdd(self):
-		cur = self["list"].getCurrent()
-		evt = cur[0]
-		sref = cur[1]
-		if not evt:
-			return
+		self.greenButtonPressed()
 
-		if self.openPlugin:
-			self.session.open(
-				IMDB,
-				evt.getEventName()
-			)
-		else:
-			self.close(evt.getEventName())
+	def greenButtonPressed(self):
+		self.closeEventViewDialog()
+		from Screens.InfoBar import InfoBar
+		InfoBarInstance = InfoBar.instance
+		if not InfoBarInstance.LongButtonPressed:
+			cur = self["list"].getCurrent()
+			evt = cur[0]
+			sref = cur[1]
+			if not evt:
+				return
+
+			if self.openPlugin:
+				self.session.open(
+					IMDB,
+					evt.getEventName()
+				)
+			else:
+				self.close(evt.getEventName())
 
 	def onSelectionChanged(self):
-		pass
+		super(IMDBEPGSelection, self).onSelectionChanged()
+		self["key_green"].setText(_("Lookup"))
 
 class IMDB(Screen, HelpableScreen):
 	skin = """
@@ -533,6 +546,8 @@ class IMDB(Screen, HelpableScreen):
 					posterurl = self.postermask.search(self.inhtml)
 					if posterurl and posterurl.group(1).find("jpg") > 0:
 						posterurl = posterurl.group(1)
+						# Hack to avoid problems downloading from https://ia.media-imdb.com/
+						posterurl = SplitResult(*(('http', ) + urlsplit(posterurl)[1:])).geturl()
 						postersave = self.savingpath + ".poster.jpg"
 						print("[IMDB] downloading poster " + posterurl + " to " + postersave)
 						download = downloadWithProgress(posterurl,postersave)
@@ -593,6 +608,9 @@ class IMDB(Screen, HelpableScreen):
 
 	def getIMDB(self, search=False):
 		self.resetLabels()
+		if not isinstance(self.eventName, basestring):
+			self["statusbar"].setText("")
+			return
 		if not self.eventName:
 			s = self.session.nav.getCurrentService()
 			info = s and s.info()
@@ -630,19 +648,19 @@ class IMDB(Screen, HelpableScreen):
 		in_html = (re.subn(r'<(style).*?</\1>(?s)', '', in_html)[0])
 		entitydict = {}
 
-		entities = re.finditer('&([^#][A-Za-z]{1,5}?);', in_html)
+		entities = re.finditer('&([:_A-Za-z][:_\-.A-Za-z"0-9]*);', in_html)
 		for x in entities:
 			key = x.group(0)
 			if key not in entitydict:
 				entitydict[key] = htmlentitydefs.name2codepoint[x.group(1)]
 
-		entities = re.finditer('&#x([0-9A-Fa-f]{2,2}?);', in_html)
+		entities = re.finditer('&#x([0-9A-Fa-f]+);', in_html)
 		for x in entities:
 			key = x.group(0)
 			if key not in entitydict:
-				entitydict[key] = "%d" % int(key[3:5], 16)
+				entitydict[key] = "%d" % int(x.group(1), 16)
 
-		entities = re.finditer('&#(\d{1,5}?);', in_html)
+		entities = re.finditer('&#(\d+);', in_html)
 		for x in entities:
 			key = x.group(0)
 			if key not in entitydict:
@@ -781,6 +799,8 @@ class IMDB(Screen, HelpableScreen):
 			posterurl = self.postermask.search(self.inhtml)
 			if posterurl and posterurl.group(1).find("jpg") > 0:
 				posterurl = posterurl.group(1)
+				# Hack to avoid problems downloading from https://ia.media-imdb.com/
+				posterurl = SplitResult(*(('http', ) + urlsplit(posterurl)[1:])).geturl()
 				self["statusbar"].setText(_("Downloading Movie Poster: %s...") % (posterurl))
 				localfile = "/tmp/poster.jpg"
 				print("[IMDB] downloading poster " + posterurl + " to " + localfile)
