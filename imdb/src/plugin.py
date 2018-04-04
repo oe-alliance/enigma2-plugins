@@ -596,6 +596,9 @@ class IMDB(Screen, HelpableScreen):
 
 	def getIMDB(self, search=False):
 		self.resetLabels()
+		if not isinstance(self.eventName, basestring):
+			self["statusbar"].setText("")
+			return
 		if not self.eventName:
 			s = self.session.nav.getCurrentService()
 			info = s and s.info()
