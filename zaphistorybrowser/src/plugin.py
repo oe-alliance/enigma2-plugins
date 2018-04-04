@@ -16,7 +16,7 @@ from Screens.ChannelSelection import ChannelSelection
 from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
-from enigma import eServiceReference
+from enigma import eServiceReference, getDesktop
 import os, gettext
 
 ################################################
@@ -142,14 +142,27 @@ class ZapHistoryConfigurator(ConfigListScreen, Screen):
 class ZapHistoryBrowserList(MenuList):
 	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setItemHeight(40)
-		self.l.setFont(0, gFont("Regular", 20))
-		self.l.setFont(1, gFont("Regular", 18))
+		DESKTOP_WIDTH = getDesktop(0).size().width()
+		if DESKTOP_WIDTH <= 1280:
+			self.l.setItemHeight(40)
+			self.l.setFont(0, gFont("Regular", 20))
+			self.l.setFont(1, gFont("Regular", 18))
+		else:
+			self.l.setItemHeight(75)
+			self.l.setFont(0, gFont("Regular", 30))
+			self.l.setFont(1, gFont("Regular", 27))
+
 
 def ZapHistoryBrowserListEntry(serviceName, eventName):
 	res = [serviceName]
-	res.append(MultiContentEntryText(pos=(0, 0), size=(560, 22), font=0, text=serviceName))
-	res.append(MultiContentEntryText(pos=(0, 22), size=(560, 18), font=1, text=eventName))
+	DESKTOP_WIDTH = getDesktop(0).size().width()
+	if DESKTOP_WIDTH <= 1280:
+		res.append(MultiContentEntryText(pos=(0, 0), size=(560, 22), font=0, text=serviceName))
+		res.append(MultiContentEntryText(pos=(0, 22), size=(560, 18), font=1, text=eventName))
+	else:
+		res.append(MultiContentEntryText(pos=(2, 1), size=(840, 38), font=0, text=serviceName))
+		res.append(MultiContentEntryText(pos=(2, 40), size=(840, 33), font=1, text=eventName))
+
 	return res
 
 ################################################
