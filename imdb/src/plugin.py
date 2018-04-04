@@ -636,19 +636,19 @@ class IMDB(Screen, HelpableScreen):
 		in_html = (re.subn(r'<(style).*?</\1>(?s)', '', in_html)[0])
 		entitydict = {}
 
-		entities = re.finditer('&([^#][A-Za-z]{1,5}?);', in_html)
+		entities = re.finditer('&([:_A-Za-z][:_\-.A-Za-z"0-9]*);', in_html)
 		for x in entities:
 			key = x.group(0)
 			if key not in entitydict:
 				entitydict[key] = htmlentitydefs.name2codepoint[x.group(1)]
 
-		entities = re.finditer('&#x([0-9A-Fa-f]{2,2}?);', in_html)
+		entities = re.finditer('&#x([0-9A-Fa-f]+);', in_html)
 		for x in entities:
 			key = x.group(0)
 			if key not in entitydict:
-				entitydict[key] = "%d" % int(key[3:5], 16)
+				entitydict[key] = "%d" % int(x.group(1), 16)
 
-		entities = re.finditer('&#(\d{1,5}?);', in_html)
+		entities = re.finditer('&#(\d+);', in_html)
 		for x in entities:
 			key = x.group(0)
 			if key not in entitydict:
