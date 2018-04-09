@@ -7,7 +7,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.6"
+__version__ = "1.7"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -235,8 +235,8 @@ class Series2FolderActionsBase(object):
             self.MsgBox('\n'.join([title + ':'] + self.moves), notification=notification)
         else:
             self.MsgBox(title, timeout=10, notification=notification)
-	self.moves = []
-	self.errMess = []
+        self.moves = []
+        self.errMess = []
 
     def MsgBox(self, msg, timeout=30, notification=False):
         if notification:
@@ -322,7 +322,7 @@ class Series2FolderActionsBase(object):
                 showname = showname[0:-4]
             showname = ' - '.join(parts[startOffset:-1] + [showname])
         except:
-            return None, None, False, _("Can't extract show name for: %s") % fullname
+            return None, None, False, _("Can not extract show name for: %s") % fullname
         return showname, date_time, False, None
 
 
@@ -346,7 +346,14 @@ class Series2FolderActions(Series2FolderActionsBase):
 
         self.prepare(service)
 
-        for f in os.listdir(self.rootdir):
+        try:
+            contents = os.listdir(self.rootdir)
+        except Exception as ex:
+            self.errMess.append("Can not process folder: %s" % str(ex))
+            self.finish()
+            return
+
+        for f in contents:
             self.addRecording(f)
 
         # create a directory for each series and move shows into it
@@ -435,7 +442,13 @@ class Series2FolderAutoActions(Series2FolderActionsBase):
     def runMoves(self):
         self.prepare(None)
 
-        self.dirList = os.listdir(self.rootdir)
+        try:
+            self.dirList = os.listdir(self.rootdir)
+        except Exception as ex:
+            self.dirList = []
+            self.errMess.append("Can not process folder: %s" % str(ex))
+            self.finish()
+            return
 
         self.iterTimer.start(self.ITER_STEP, True)
 
