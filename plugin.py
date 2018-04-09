@@ -185,7 +185,7 @@ class Series2FolderActionsBase(object):
 
     def addRecording(self, f):
         fullpath = joinpath(self.rootdir, f)
-        if f.endswith('.ts') and f[0:8].isdigit() and fullpath not in self.isRecording and isfile(fullpath):
+        if self.recNameType(f) is not None and fullpath not in self.isRecording and isfile(fullpath):
             origShowname, pending_merge, date_time, err = self.getShowInfo(self.rootdir, f)
             noRepeatName = self.stripRepeat(origShowname)
             showname = self.cleanName(noRepeatName)
@@ -307,22 +307,49 @@ class Series2FolderActionsBase(object):
 
         return showname, pending_merge, date_time, err_mess
 
+    def recNameType(self, fullname):
+        def isDate(s):
+            return s.isdigit() and len(s) == 8 and int(s[4:6]) <= 12 and int(s[6:8]) <= 31
+
+        def isHHMM(s):
+            return s.isdigit() and len(s) == 4 and int(s[0:2]) < 24 and int(s[2:4]) < 60
+
+        base, ext = splitext(fullname)
+        if ext == ".ts":
+            parts = base.split(' - ')
+            if len(parts) > 1:
+                t = parts[0]
+                if len(t) == 8 and isDate(t[0:8]):
+                        return "short"
+                elif len(t) == 13 and isDate(t[0:8]) and t[8] == ' ' and isHHMM(t[9:13]):
+                        return "long" if len(parts) >= 4 else "standard"
+                else:
+                    t = parts[-1]
+                    if len(t) >= 14 and isDate(t[0:8]) and t[8] == ' ' and isHHMM(t[9:13]) and t[13] == '_':
+                        return "event"
+        return None
+
     def recSplit(self, fullname):
-        try:
-            startOffset = 2
-            parts = fullname.split(' - ')
-            date_time = parts[0][6:8] + '.' + parts[0][4:6] + '.' + parts[0][0:4]
-            if len(parts[0]) > 8:
-                date_time += ' ' + parts[0][9:11] + ':' + parts[0][11:13]
-            else:
-                startOffset = 1
-            showname = splitext(parts[-1])[0]
-            if showname[-4:-3] == "_" and showname[-3:].isdigit():
-                date_time += '#' + showname[-3:]
-                showname = showname[0:-4]
-            showname = ' - '.join(parts[startOffset:-1] + [showname])
-        except:
+        nameType = self.recNameType(fullname)
+        if nameType is None:
             return None, None, False, _("Can not extract show name for: %s") % fullname
+        base = splitext(fullname)[0]
+        parts = base.split(' - ')
+        if nameType == "event":
+            t = parts[-1]
+            date_time = '.'.join((t[6:8], t[4:6], t[0:4])) + ' ' + t[9:11] + ':' + t[11:13]
+            showname = parts[0]
+        else:
+            t = parts[0]
+            showname = parts[1]
+            date_time = '.'.join((t[6:8], t[4:6], t[0:4]))
+            if nameType in ("standard", "long"):
+                date_time += ' ' + t[9:11] + ':' + t[11:13]
+                showname = parts[2]
+        if base[-4:-3] == "_" and base[-3:].isdigit():
+            date_time += '#' + base[-3:]
+            if nameType != "event":
+                showname = showname[0:-4]
         return showname, date_time, False, None
 
 
