@@ -386,7 +386,7 @@ msgstr "Versuch Mounts erneut zu verbinden"
 
 #: plugin.py:102
 msgid "Mount again"
-msgstr "erneut verbinden"
+msgstr "Erneut verbinden"
 
 #: plugin.py:102
 msgid "Attempt to recover lost mounts (in background)"
