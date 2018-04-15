@@ -172,3 +172,36 @@ msgstr "Wörter / Sätze ignorieren "
 
 msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
 msgstr "Diese Option erlaubt es Ihnen, Wörter/Sätze bei der Suche mit IMDb zu ignorieren. Bitte die Wörter mit einem Komma trennen."
+
+msgid "Exit IMDb search"
+msgstr "Beende IMDb-Details"
+
+msgid "Show movie and series basic details"
+msgstr "Zeige Film- und Serien-Details"
+
+msgid "Show movie and series extra details"
+msgstr "Zeige Film- und Serien-Zusatzinfos"
+
+msgid "Show list of matched movies an series"
+msgstr "Zeige Liste der gefundenen Filme und Serien"
+
+msgid "Menu"
+msgstr "Menü"
+
+msgid "Page up"
+msgstr "Eintrag rauf"
+
+msgid "Page down"
+msgstr "Eintrag runter"
+
+msgid "Show full movie or series name in title menu"
+msgstr "Zeige den vollen Film- oder Seriennamen in der Ergebnisliste"
+
+msgid "Show episode and year information in cast list"
+msgstr "Zeige Episoden- und Jahresinformationen in der Ergebnisliste"
+
+msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgstr "Zeige im Titel die gesamten IMDb-Info´s für einen Film oder eine Serie, einschließlich z.B. alternativer Namen und ob es sich um eine Serie handelt. Wird erst mit der nächsten Suche wirksam."
+
+msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
+msgstr "Zeige im Titel, wenn verfügbar, Episoden- und Jahresinformationen mit an. Wird erst mit der nächsten Suche wirksam."
