@@ -553,7 +553,7 @@ class EPGSearch(EPGSelection):
 			self.searchEPG(ret[1])
 
 	def searchEPG(self, searchString=None, searchSave=True, lastAsk=None):
-		if searchString:
+		if isinstance(searchString, basestring) and searchString:
 			if searchSave:
 				# Maintain history
 				history = config.plugins.epgsearch.history.value
