@@ -7,7 +7,7 @@ an option to do the processing automatically in the background.
 Mike Griffin  8/02/2015
 '''
 
-__version__ = "1.7"
+__version__ = "1.8"
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.MovieSelection import MovieSelection
@@ -30,7 +30,7 @@ from enigma import eTimer, iRecordableService, iPlayableService
 from time import time, localtime, strftime
 from boxbranding import getMachineBrand, getMachineName
 from collections import defaultdict
-from os.path import isfile, isdir, splitext, join as joinpath, split as splitpath
+from os.path import isfile, isdir, splitext, join as joinpath, split as splitpath, lexists
 import os
 
 try:
@@ -133,6 +133,11 @@ config.plugins.seriestofolder.showselmovebutton.addNotifier(
 )
 
 class Series2FolderActionsBase(object):
+    TS = ".ts"
+    META = ".meta"
+    BAREEXTS = frozenset((".eit",))
+    TSEXTS = frozenset((".ap", ".cuts", ".meta", ".sc"))
+
     def __init__(self, session):
         self.session = session
 
@@ -172,7 +177,7 @@ class Series2FolderActionsBase(object):
                         self.errMess.append(err)
 
         # Full pathnames of current recordings' .ts files
-        self.isRecording = set([timer.Filename + '.ts' for timer in self.session.nav.RecordTimer.timer_list if timer.state in (timer.StatePrepared, timer.StateRunning) and not timer.justplay and hasattr(timer, "Filename")])
+        self.isRecording = set([timer.Filename + self.TS for timer in self.session.nav.RecordTimer.timer_list if timer.state in (timer.StatePrepared, timer.StateRunning) and not timer.justplay and hasattr(timer, "Filename")])
 
         # Folder for movies
         self.moviesFolder = self.conf_movies and self.conf_moviesfolder
@@ -204,19 +209,57 @@ class Series2FolderActionsBase(object):
         foldername, fileInfo = self.shows.pop(0)
         numRecordings = int(self.conf_autofolder)
         if (numRecordings != 0 and len(fileInfo) >= numRecordings) or foldername == self.moviesFolder or foldername in self.dirs or self.moveSelection:
-            errorText = ''
-            nerrors = 0
             for origShowname, fullname, date_time in fileInfo:
                 if not self.isPlaying(joinpath(self.rootdir, fullname)):
-                    for f in self.recFileList(self.rootdir, fullname):
-                        try:
-                            os.renames(joinpath(self.rootdir, f), joinpath(self.rootdir, foldername, f))
-                            print "[Series2Folder] rename", joinpath(self.rootdir, f), "to", joinpath(self.rootdir, foldername, f)
-                        except Exception, e:
-                            self.errMess.append(e.__str__())
-                            nerrors += 1
-                            errorText = ngettext(" - Error", " - Errors", nerrors)
+
+                    errorText = self.renameRecording(foldername, fullname)
                     self.moves.append('%s - %s%s' % (origShowname, date_time, errorText))
+
+    def renameRecording(self, foldername, fullname):
+        errorText = ''
+        nerrors = 0
+        renameList = self.recRenameList(foldername, fullname)
+        if renameList:
+            for fromPath, toPath in renameList:
+                try:
+                    os.renames(fromPath, toPath)
+                    print "[Series2Folder] rename", fromPath, "to", toPath
+                except Exception, e:
+                    self.errMess.append(e.__str__())
+                    nerrors += 1
+                    errorText = ngettext(" - Error", " - Errors", nerrors)
+        else:
+            self.errMess.append(_("Too many recordings with similar filenames: %s") % fullname)
+            errorText = _(" - Error")
+        return errorText
+
+    def recRenameList(self, foldername, fullname):
+        i = 0
+        destBase, destExt = splitext(fullname)
+        while True:
+            if i:
+                suffix = "_%03d" % i
+            else:
+                suffix = ''
+            i += 1
+            renameList = tuple(((joinpath(self.rootdir, f), joinpath(self.rootdir, foldername, self.addSuffix(f, suffix))) for f in self.recFileList(self.rootdir, fullname)))
+            if not any((lexists(t[1]) for t in renameList)):
+                return renameList
+            if i > 999:
+                return []
+
+    def addSuffix(self, f, suffix):
+        if not suffix:
+            return f
+        base1, ext1 = splitext(f)
+        if ext1 in self.TSEXTS:
+            base2, ext2 = splitext(base1)
+	    if base2[-4:-3] == '_' and base2[-3:].isdigit():
+                base2 = base2[0:-4]
+            return base2 + suffix + ext2 + ext1
+	if base1[-4:-3] == '_' and base1[-3:].isdigit():
+            base1 = base1[0:-4]
+        return base1 + suffix + ext1
 
     def finish(self, notification=False, stopping=False):
         if self.moves:
@@ -251,12 +294,12 @@ class Series2FolderActionsBase(object):
     def recFileList(self, rootdir, fullname):
         base, ext = splitext(fullname)
         l = [fullname]
-        for e in (".eit",):
+        for e in self.BAREEXTS:
             f = base + e
             if isfile(joinpath(rootdir, f)):
                 l.append(f)
         base = fullname
-        for e in (".ap", ".cuts", ".meta", ".sc"):
+        for e in self.TSEXTS:
             f = base + e
             if isfile(joinpath(rootdir, f)):
                 l.append(f)
@@ -287,7 +330,7 @@ class Series2FolderActionsBase(object):
         return name
 
     def getShowInfo(self, rootdir, fullname):
-        path = joinpath(rootdir, fullname) + '.meta'
+        path = joinpath(rootdir, fullname) + self.META
         err_mess = None
         try:
             lines = open(path).readlines()
@@ -315,7 +358,7 @@ class Series2FolderActionsBase(object):
             return s.isdigit() and len(s) == 4 and int(s[0:2]) < 24 and int(s[2:4]) < 60
 
         base, ext = splitext(fullname)
-        if ext == ".ts":
+        if ext == self.TS:
             parts = base.split(' - ')
             if len(parts) > 1:
                 t = parts[0]
