@@ -9,7 +9,7 @@ CP=cp
 SCP=scp
 SSH=ssh
 IPKG-BUILD=../ipkg-build
-BUILD-HOST=beyonwizt4
+BUILD-HOST=beyonwizu4
 
 package: clean
 	${MKDIR} -p ${BUILD-DIR}/${INSTALL-PATH}
