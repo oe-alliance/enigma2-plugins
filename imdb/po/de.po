@@ -81,8 +81,11 @@ msgstr "Beenden"
 msgid "Extra Info"
 msgstr "Zusatzinfos"
 
-msgid "IMDb Details"
-msgstr ""
+msgid "IMDb search"
+msgstr "IMDb-Suche"
+
+msgid "Search for details from the Internet Movie Database"
+msgstr "Suche in der Internet Movie Database nach Filminfos"
 
 msgid "IMDb Details parsed"
 msgstr "Filminformationen eingelesen"
@@ -99,8 +102,11 @@ msgstr "IMDb Plugin"
 msgid "IMDb Re-Download completed"
 msgstr "Erneuten Download ausgeführt"
 
-msgid "IMDb Setup"
-msgstr "IMDb Einstellungen"
+msgid "IMDb setup"
+msgstr "IMDb-Einstellungen"
+
+msgid "Settings for Internet Movie Database searches"
+msgstr "Einstellungen für die Suche in der Internet Movie Database"
 
 msgid "IMDb query failed!"
 msgstr "Anfrage an IMDb fehlgeschlagen!"
@@ -146,8 +152,14 @@ msgstr "Aus  EPG wählen"
 msgid "Setup"
 msgstr "Einstellungen"
 
-msgid "Show in plugin browser"
-msgstr "Zeige im Plugin Browser"
+msgid "Show search in plugin browser"
+msgstr "Zeige Suche im Plugin Browser"
+
+msgid "Show setup in plugin browser"
+msgstr "Zeige Einstellungen im Plugin Browser"
+
+msgid "Show in movie list"
+msgstr "Zeige Suche in der Filmliste"
 
 msgid "The Internet Movie Database"
 msgstr "Die Internet Movie Database"
@@ -164,8 +176,14 @@ msgstr "noch keine Nutzerwertung"
 msgid "* = Restart Required"
 msgstr "* = Neustart erforderlich"
 
-msgid "Enable this to be able to access the IMDb from within the plugin browser."
-msgstr "Diese Option erlaubt es Ihnen, IMDb in den Erweiterungen anzuzeigen."
+msgid "Enable this to be able to access IMDb searches from within the plugin browser."
+msgstr "Diese Option erlaubt es Ihnen, die IMDb-Suche in den Erweiterungen anzuzeigen."
+
+msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
+msgstr "Diese Option erlaubt es Ihnen, die IMDb-Einstellungen in den Erweiterungen anzuzeigen."
+
+msgid "Enable this to be able to access IMDb searches from within the movie list."
+msgstr "Diese Option erlaubt es Ihnen, die IMDb-Suche in der Filmliste anzuzeigen."
 
 msgid "Words / phrases to ignore "
 msgstr "Wörter / Sätze ignorieren "
