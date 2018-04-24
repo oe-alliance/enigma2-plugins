@@ -210,7 +210,7 @@ msgstr "Erneut Mounten Einstellungen"
 
 #: MountManager.py:103
 msgid "Schedule a auto remount of your network shares."
-msgstr "Zeitplan für das erneute verbinden der Netzwerkfreigaben."
+msgstr "Zeitplan für das erneute Verbinden der Netzwerkfreigaben."
 
 #: MountManager.py:139
 msgid "Enter new hostname for your Receiver"
