@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-24 18:47+0200\n"
-"PO-Revision-Date: 2018-04-24 20:24+0200\n"
+"PO-Revision-Date: 2018-04-24 21:43+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl_NL\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: ..\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.0.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: src/plugin.py:72
@@ -124,11 +124,11 @@ msgstr "IMDb-menu"
 
 #: src/plugin.py:458
 msgid "IMDb can not get Movie Information to write to .txt file!"
-msgstr "IMDb kan film informatie niet naar .txt bestand schrijven!"
+msgstr "IMDb kan filminformatie niet naar .txt bestand schrijven!"
 
 #: src/plugin.py:470
 msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
-msgstr "IMDb kan film informatie niet naar .jpg en .txt bestanden schrijven!"
+msgstr "IMDb kan filminformatie niet naar .jpg en .txt bestanden schrijven!"
 
 #: src/plugin.py:475
 msgid "IMDb Save - Download completed"
@@ -148,7 +148,7 @@ msgstr "Genre:"
 
 #: src/plugin.py:522 src/plugin.py:525
 msgid "Production Countries:"
-msgstr "Productie land(en):"
+msgstr "Productieland(en):"
 
 #: src/plugin.py:531 src/plugin.py:534
 msgid "Release Date:"
@@ -317,15 +317,15 @@ msgstr ""
 
 #: src/plugin.py:950
 msgid "Show episode and year information in cast list"
-msgstr "Toon aflevering en jaar informatie in cast lijst"
+msgstr "Toon aflevering en jaarinformatie in castlijst"
 
 #: src/plugin.py:950
 msgid ""
 "Show episode and year information for cast when available. Takes effect "
 "after the next fetch of show details."
 msgstr ""
-"Toon aflevering en jaar informatie voor personages wanneer beschikbaar. "
-"Beschikbaar na eerstvolgende keer binnenhalen van programma informatie."
+"Toon aflevering en jaarinformatie voor personages indien beschikbaar. "
+"Beschikbaar na eerstvolgende keer binnenhalen van programmainformatie."
 
 #: src/plugin.py:1070 src/plugin.py:1092 src/plugin.py:1093 src/plugin.py:1102
 #| msgid "No IMDb match."
