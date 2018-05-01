@@ -254,6 +254,12 @@ int framesearch_f(char* buf, int start, int stop, int pid, int& tp)
           tp = (p[4] >> 5) + 1;
           return pos;
         }
+      } else if ((p[3] >> 1)==35) {
+        pos = ((p - buf)/188)*188;
+        if ((buf[pos+1] & 0x40) && (pid == -1 || framepid(buf, pos) == pid)) {
+          tp = (p[5] >> 5) + 1;
+          return pos;
+        }
       }
     }
   return -1;
@@ -269,7 +275,7 @@ int framesearch_b(char* buf, int start, int stop, int pid)
         pos = ((p - buf)/188)*188;
         if (pid == -1 || framepid(buf, pos) == pid)
           return pos;
-      } else if (p[0]==0x09) {
+      } else if (p[0]==0x09 || (p[0] >> 1)==35) {
         pos = ((p - buf)/188)*188;
         if ((buf[pos+1] & 0x40) && (pid == -1 || framepid(buf, pos) == pid))
           return pos;
