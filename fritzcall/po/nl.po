@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-29 18:00+0200\n"
+"POT-Creation-Date: 2018-02-20 10:41+0100\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -773,6 +773,9 @@ msgstr ""
 #, fuzzy
 msgid "one device active"
 msgstr "Eén mailbox actief"
+
+msgid "only failed"
+msgstr ""
 
 msgid "pager"
 msgstr ""

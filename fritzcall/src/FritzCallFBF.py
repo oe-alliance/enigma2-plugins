@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1496 $
-$Date: 2017-10-05 11:17:25 +0200 (Thu, 05 Oct 2017) $
-$Id: FritzCallFBF.py 1496 2017-10-05 09:17:25Z michael $
+$Revision: 1516 $
+$Date: 2018-03-24 11:36:55 +0100 (Sat, 24 Mar 2018) $
+$Id: FritzCallFBF.py 1516 2018-03-24 10:36:55Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -3878,7 +3878,7 @@ class FritzCallFBF_upnp():
 		for call in calls:
 			direct = call.find("./Type").text
 			if self._callType != '.' and self._callType != direct:
-				# self.debug("skip: %s", call.find("./Id").text)
+				# self.debug("skip: id %s of type %s", call.find("./Id").text, direct)
 				continue
 			if direct == FBF_OUT_CALLS:
 				number = call.find("./Called").text

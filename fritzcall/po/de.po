@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-29 18:00+0200\n"
-"PO-Revision-Date: 2017-06-06 17:43+0200\n"
+"POT-Creation-Date: 2018-02-20 10:41+0100\n"
+"PO-Revision-Date: 2018-02-20 10:43+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: de\n"
@@ -129,7 +129,7 @@ msgid "Could not get call list; wrong version?"
 msgstr "Konnte Anrufliste nicht bekommen; falsche Firmware-Version?"
 
 msgid "Could not load phonebook: "
-msgstr ""
+msgstr "Konnte Telefonbuch nicht laden: "
 
 #, python-format
 msgid "Could not load phonebook: %s"
@@ -246,7 +246,7 @@ msgid "FRITZ!Box - Error getting blacklist: %s"
 msgstr "FRITZ!Box - Sperrliste konnte nicht geholt werden: %s"
 
 msgid "FRITZ!Box - Error getting status: "
-msgstr ""
+msgstr "FRITZ!Box - Fehler bei Statusabruf: "
 
 #, python-format
 msgid "FRITZ!Box - Error getting status: %s"
@@ -800,6 +800,9 @@ msgstr "an"
 msgid "one device active"
 msgstr "eine WLAN-Station aktiv"
 
+msgid "only failed"
+msgstr "nur Fehler"
+
 msgid "pager"
 msgstr "Pager"
 
@@ -831,15 +834,3 @@ msgstr "Büro"
 
 msgid "wrong user or password?"
 msgstr "falscher Benutzer oder falsches Passwort?"
-
-#~ msgid "Minutes of uptime of WLAN guest network"
-#~ msgstr "Dauer für den WLAN-Gastzugang in Minuten"
-
-#~ msgid "Name of WLAN guest network"
-#~ msgstr "Name des WLAN Gastfunknetzes"
-
-#~ msgid "Password of WLAN guest network"
-#~ msgstr "Netzwerkschlüssel des WLAN Gastfunknetzes"
-
-#~ msgid "Secure WLAN guest network"
-#~ msgstr "WLAN Gastzugang verschlüsseln"
