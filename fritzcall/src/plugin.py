@@ -152,7 +152,7 @@ config.plugins.FritzCall.reloadPhonebookTime = ConfigInteger(default = 8, limits
 config.plugins.FritzCall.FritzExtendedSearchFaces = ConfigYesNo(default = False)
 config.plugins.FritzCall.FritzExtendedSearchNames = ConfigYesNo(default = False)
 config.plugins.FritzCall.phonebookLocation = ConfigDirectory(default = resolveFilename(SCOPE_CONFIG))
-config.plugins.FritzCall.advancedSkin = ConfigYesNo(default = False)
+config.plugins.FritzCall.advancedSkin = ConfigYesNo(default = True)
 config.plugins.FritzCall.guestSSID = ConfigText(default = "FRITZ!Box Gastzugang", fixed_size = False)
 config.plugins.FritzCall.guestSecure = ConfigYesNo(default = True)
 config.plugins.FritzCall.guestPassword = ConfigPassword(default = encode("guestguest!!!"), fixed_size = False)
