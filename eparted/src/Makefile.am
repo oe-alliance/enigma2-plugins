@@ -1,5 +1,5 @@
 
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/eParted
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/eParted
 
 install_PYTHON = *.py
 
