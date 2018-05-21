@@ -1070,7 +1070,7 @@ msgid ""
 "blocked for recordings."
 msgstr ""
 "Setze eine Endzeit für den Timer. Wenn Sie dies tun, werden andere Aufnahmen "
-"in dem  Zeitraum gesperrt."
+"in dem Zeitraum gesperrt."
 
 #: ../src/AutoTimerEditor.py:582 ../src/AutoTimerEditor.py:626
 msgid "Set maximum duration"
