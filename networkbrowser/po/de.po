@@ -346,7 +346,7 @@ msgstr "IP Adresse"
 
 #: NetworkBrowser.py:632
 msgid "Enter IP to scan..."
-msgstr "Ip für Suche eingeben"
+msgstr "IP für Suche eingeben"
 
 #: plugin.py:35 plugin.py:100
 msgid "Network Browser"
