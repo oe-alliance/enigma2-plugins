@@ -2,10 +2,11 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1516 $
-$Date: 2018-03-24 11:36:55 +0100 (Sat, 24 Mar 2018) $
-$Id: plugin.py 1516 2018-03-24 10:36:55Z michael $
+$Revision: 1527 $
+$Date: 2018-05-20 16:41:35 +0200 (Sun, 20 May 2018) $
+$Id: plugin.py 1527 2018-05-20 14:41:35Z michael $
 '''
+
 
 # C0111 (Missing docstring)
 # C0103 (Invalid name)
@@ -128,7 +129,7 @@ config.plugins.FritzCall.filtermsn.setUseableChars('0123456789,')
 config.plugins.FritzCall.filterCallList = ConfigYesNo(default = True)
 config.plugins.FritzCall.showBlacklistedCalls = ConfigYesNo(default = False)
 config.plugins.FritzCall.showOutgoingCalls = ConfigYesNo(default = False)
-config.plugins.FritzCall.timeout = ConfigInteger(default = 15, limits = (0, 60))
+config.plugins.FritzCall.timeout = ConfigInteger(default = 15, limits = (0, 65535))
 config.plugins.FritzCall.lookup = ConfigYesNo(default = False)
 config.plugins.FritzCall.internal = ConfigYesNo(default = False)
 config.plugins.FritzCall.fritzphonebook = ConfigYesNo(default = False)
@@ -152,7 +153,7 @@ config.plugins.FritzCall.reloadPhonebookTime = ConfigInteger(default = 8, limits
 config.plugins.FritzCall.FritzExtendedSearchFaces = ConfigYesNo(default = False)
 config.plugins.FritzCall.FritzExtendedSearchNames = ConfigYesNo(default = False)
 config.plugins.FritzCall.phonebookLocation = ConfigDirectory(default = resolveFilename(SCOPE_CONFIG))
-config.plugins.FritzCall.advancedSkin = ConfigYesNo(default = True)
+config.plugins.FritzCall.advancedSkin = ConfigYesNo(default = False)
 config.plugins.FritzCall.guestSSID = ConfigText(default = "FRITZ!Box Gastzugang", fixed_size = False)
 config.plugins.FritzCall.guestSecure = ConfigYesNo(default = True)
 config.plugins.FritzCall.guestPassword = ConfigPassword(default = encode("guestguest!!!"), fixed_size = False)
@@ -367,8 +368,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1516 $"[1:-2] + "\n" +
-							"$Date: 2018-03-24 11:36:55 +0100 (Sat, 24 Mar 2018) $"[1:23] + "\n"
+							"$Revision: 1527 $"[1:-2] + "\n" +
+							"$Date: 2018-05-20 16:41:35 +0200 (Sun, 20 May 2018) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -981,6 +982,10 @@ class FritzMenu(Screen, HelpableScreen):
 					self["FBFInternet"].setText('Internet ' + _('IP Address:') + ' ' + ipAddress)
 				self["internet_inactive"].hide()
 				self["internet_active"].show()
+			elif upTime:
+				self["FBFInternet"].setText(_('Connected since') + ' ' + upTime)
+				self["internet_inactive"].hide()
+				self["internet_active"].show()
 			else:
 				self["internet_active"].hide()
 				self["internet_inactive"].show()
@@ -1429,8 +1434,9 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				direct = directrejected
 			return direct
 
-		debug("[FritzDisplayCalls] %s" %repr(listOfCalls))
+		# debug("[FritzDisplayCalls] %s" %repr(listOfCalls))
 		self.list = [(number, date[:6] + ' ' + date[9:14], pixDir(direct), remote, length, here) for (number, date, direct, remote, length, here) in listOfCalls]
+		# debug("[FritzDisplayCalls] %s" %repr(self.list))
 		self["entries"].setList(self.list)
 		#=======================================================================
 		# if len(self.list) > 1:
@@ -2617,7 +2623,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1516 $"[1:-1] + "$Date: 2018-03-24 11:36:55 +0100 (Sat, 24 Mar 2018) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1527 $"[1:-1] + "$Date: 2018-05-20 16:41:35 +0200 (Sun, 20 May 2018) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -3225,7 +3231,7 @@ class FritzReverseLookupAndNotifier(object):
 
 class FritzProtocol(LineReceiver):  # pylint: disable=W0223
 	def __init__(self):
-		info("[FritzProtocol] " + "$Revision: 1516 $"[1:-1] + "$Date: 2018-03-24 11:36:55 +0100 (Sat, 24 Mar 2018) $"[7:23] + " starting")
+		info("[FritzProtocol] " + "$Revision: 1527 $"[1:-1] + "$Date: 2018-05-20 16:41:35 +0200 (Sun, 20 May 2018) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

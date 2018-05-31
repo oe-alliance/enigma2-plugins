@@ -184,7 +184,7 @@ class FritzAction(object):
 						realm + ":" +
 						self.password).hexdigest()
 			response = md5.new(secret + ":" + nonce).hexdigest()
-			self.debug("user %s, passwort %s", config.plugins.FritzCall.username.value, self.password)
+			# self.debug("user %s, passwort %s", config.plugins.FritzCall.username.value, self.password)
 			header_clientauth = self.header_clientauth_template % (
 																nonce,
 																response,
