@@ -210,7 +210,7 @@ msgstr "Erneut Mounten Einstellungen"
 
 #: MountManager.py:103
 msgid "Schedule a auto remount of your network shares."
-msgstr "Zeitplan für das erneute verbinden der Netzwerkfreigaben."
+msgstr "Zeitplan für das erneute Verbinden der Netzwerkfreigaben."
 
 #: MountManager.py:139
 msgid "Enter new hostname for your Receiver"
@@ -346,7 +346,7 @@ msgstr "IP Adresse"
 
 #: NetworkBrowser.py:632
 msgid "Enter IP to scan..."
-msgstr "Ip für Suche eingeben"
+msgstr "IP für Suche eingeben"
 
 #: plugin.py:35 plugin.py:100
 msgid "Network Browser"
@@ -386,7 +386,7 @@ msgstr "Versuch Mounts erneut zu verbinden"
 
 #: plugin.py:102
 msgid "Mount again"
-msgstr "erneut verbinden"
+msgstr "Erneut verbinden"
 
 #: plugin.py:102
 msgid "Attempt to recover lost mounts (in background)"

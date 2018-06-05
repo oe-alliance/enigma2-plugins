@@ -81,8 +81,11 @@ msgstr "Beenden"
 msgid "Extra Info"
 msgstr "Zusatzinfos"
 
-msgid "IMDb Details"
-msgstr ""
+msgid "IMDb search"
+msgstr "IMDb-Suche"
+
+msgid "Search for details from the Internet Movie Database"
+msgstr "Suche in der Internet Movie Database nach Filminfos"
 
 msgid "IMDb Details parsed"
 msgstr "Filminformationen eingelesen"
@@ -99,8 +102,11 @@ msgstr "IMDb Plugin"
 msgid "IMDb Re-Download completed"
 msgstr "Erneuten Download ausgeführt"
 
-msgid "IMDb Setup"
-msgstr "IMDb Einstellungen"
+msgid "IMDb setup"
+msgstr "IMDb-Einstellungen"
+
+msgid "Settings for Internet Movie Database searches"
+msgstr "Einstellungen für die Suche in der Internet Movie Database"
 
 msgid "IMDb query failed!"
 msgstr "Anfrage an IMDb fehlgeschlagen!"
@@ -146,8 +152,14 @@ msgstr "Aus  EPG wählen"
 msgid "Setup"
 msgstr "Einstellungen"
 
-msgid "Show in plugin browser"
-msgstr "Zeige im Plugin Browser"
+msgid "Show search in plugin browser"
+msgstr "Zeige Suche im Plugin Browser"
+
+msgid "Show setup in plugin browser"
+msgstr "Zeige Einstellungen im Plugin Browser"
+
+msgid "Show in movie list"
+msgstr "Zeige Suche in der Filmliste"
 
 msgid "The Internet Movie Database"
 msgstr "Die Internet Movie Database"
@@ -164,11 +176,50 @@ msgstr "noch keine Nutzerwertung"
 msgid "* = Restart Required"
 msgstr "* = Neustart erforderlich"
 
-msgid "Enable this to be able to access the IMDb from within the plugin browser."
-msgstr "Diese Option erlaubt es Ihnen, IMDb in den Erweiterungen anzuzeigen."
+msgid "Enable this to be able to access IMDb searches from within the plugin browser."
+msgstr "Diese Option erlaubt es Ihnen, die IMDb-Suche in den Erweiterungen anzuzeigen."
+
+msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
+msgstr "Diese Option erlaubt es Ihnen, die IMDb-Einstellungen in den Erweiterungen anzuzeigen."
+
+msgid "Enable this to be able to access IMDb searches from within the movie list."
+msgstr "Diese Option erlaubt es Ihnen, die IMDb-Suche in der Filmliste anzuzeigen."
 
 msgid "Words / phrases to ignore "
 msgstr "Wörter / Sätze ignorieren "
 
 msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
 msgstr "Diese Option erlaubt es Ihnen, Wörter/Sätze bei der Suche mit IMDb zu ignorieren. Bitte die Wörter mit einem Komma trennen."
+
+msgid "Exit IMDb search"
+msgstr "Beende IMDb-Details"
+
+msgid "Show movie and series basic details"
+msgstr "Zeige Film- und Serien-Details"
+
+msgid "Show movie and series extra details"
+msgstr "Zeige Film- und Serien-Zusatzinfos"
+
+msgid "Show list of matched movies an series"
+msgstr "Zeige Liste der gefundenen Filme und Serien"
+
+msgid "Menu"
+msgstr "Menü"
+
+msgid "Page up"
+msgstr "Eintrag rauf"
+
+msgid "Page down"
+msgstr "Eintrag runter"
+
+msgid "Show full movie or series name in title menu"
+msgstr "Zeige den vollen Film- oder Seriennamen in der Ergebnisliste"
+
+msgid "Show episode and year information in cast list"
+msgstr "Zeige Episoden- und Jahresinformationen in der Ergebnisliste"
+
+msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgstr "Zeige im Titel die gesamten IMDb-Info´s für einen Film oder eine Serie, einschließlich z.B. alternativer Namen und ob es sich um eine Serie handelt. Wird erst mit der nächsten Suche wirksam."
+
+msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
+msgstr "Zeige im Titel, wenn verfügbar, Episoden- und Jahresinformationen mit an. Wird erst mit der nächsten Suche wirksam."

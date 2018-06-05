@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-29 18:00+0200\n"
+"POT-Creation-Date: 2018-02-20 10:41+0100\n"
 "PO-Revision-Date: 2015-04-14 23:22+0200\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -793,6 +793,9 @@ msgstr ""
 
 msgid "one device active"
 msgstr "Un dispositivo attivo"
+
+msgid "only failed"
+msgstr ""
 
 msgid "pager"
 msgstr ""

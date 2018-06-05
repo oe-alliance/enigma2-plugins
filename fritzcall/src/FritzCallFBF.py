@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1496 $
-$Date: 2017-10-05 11:17:25 +0200 (Thu, 05 Oct 2017) $
-$Id: FritzCallFBF.py 1496 2017-10-05 09:17:25Z michael $
+$Revision: 1527 $
+$Date: 2018-05-20 16:41:35 +0200 (Sun, 20 May 2018) $
+$Id: FritzCallFBF.py 1527 2018-05-20 14:41:35Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -3610,6 +3610,35 @@ class FritzCallFBF_upnp():
 		self.info("Boxinfo: " + repr(boxInfo))
 
 		provider = None
+		if "internet" in boxData and "txt" in boxData["internet"]:
+			for item in boxData["internet"]["txt"]:
+				item = item.encode("utf-8")
+				found = re.match(r'.*verbunden seit (.*)', item, re.S)
+				if found:
+					upTime = found.group(1)
+				else:
+					found = re.match(r'.*connected since (.*)', item, re.S)
+					if found:
+						upTime = found.group(1)
+				found = re.match(r'\s*Anbieter: (.*)', item, re.S)
+				if found:
+					provider = found.group(1)
+				else:
+					found = re.match(r'\s*Provider: (.*)', item, re.S)
+					if found:
+						provider = found.group(1)
+				found = re.match(r'IP(?:v4)?-Adresse: (.*)', item, re.S)
+				if found:
+					ipAddress = found.group(1)
+				else:
+					found = re.match(r'IP(?:v4)? address: (.*)', item, re.S)
+					if found:
+						ipAddress = found.group(1)
+
+		self.info("upTime: " + repr(upTime))
+		self.info("provider: " + repr(provider))
+		self.info("ipAddress: " + repr(ipAddress))
+		
 		if "ipv4" in boxData and "txt" in boxData["ipv4"]:
 			for item in boxData["ipv4"]["txt"]:
 				item = item.encode("utf-8")
@@ -3724,7 +3753,9 @@ class FritzCallFBF_upnp():
 		if "wlan5" in boxData:
 			wlan5 = boxData["wlan5"]
 			if wlan5:
+				# self.info("wlanState5/1: " + repr(wlanState))
 				netName = re.sub(r".*: ", "", wlan5["txt"]).encode("utf-8")
+				# self.info("wlanState5/2: " + repr(netName))
 				if not wlanState:
 					if wlan5["led"] == "led_green":
 						wlanState = ['1', '', '', "5GHz " + _("on") + ": " + netName]
@@ -3738,6 +3769,19 @@ class FritzCallFBF_upnp():
 						else:
 							wlanState[3] = wlanState[3] + ", 5GHz " + _("on") + ": " + netName
 		self.info("wlanState5: " + repr(wlanState))
+		# self.info("wlanState5/3: " + repr(wlanState))
+
+		if not wlanState and "wlan" in boxData:
+			wlan = boxData["wlan"]
+			# self.debug("wlan: " + repr(wlan))
+			netName = re.sub(r".*: ", "", wlan["txt"]).encode("utf-8")
+			# self.debug("netName: %s; led: %s", repr(netName), repr(wlan["led"]))
+			if wlan["led"] == "led_green":
+				wlanState = ['1', '', '', "2,4Ghz/5GHz " + _("on") + ": " + netName]
+			else:
+				wlanState = ['0', '', '', "2,4Ghz/5GHz " + _("off") + ": " + netName]
+			# self.info("wlanState2,4/5: " + repr(wlanState))
+		self.info("wlanState: " + repr(wlanState))
 
 		if "dect" in boxData:
 			dect = boxData["dect"]
@@ -3759,7 +3803,7 @@ class FritzCallFBF_upnp():
 				if "linktxt" in fun:
 					if fun["linktxt"] == "Faxfunktion" and fun["details"] == "Integriertes Fax aktiv":
 						faxActive = True
-					if fun["linktxt"] == "Fax function" and fun["details"] == "Integrated fax enabled":
+					elif fun["linktxt"] == "Fax function" and fun["details"] == "Integrated fax enabled":
 						faxActive = True
 					elif fun["linktxt"] == "Rufumleitung" and fun["details"]:
 						if fun["details"] != "deaktiviert":
@@ -3878,7 +3922,7 @@ class FritzCallFBF_upnp():
 		for call in calls:
 			direct = call.find("./Type").text
 			if self._callType != '.' and self._callType != direct:
-				# self.debug("skip: %s", call.find("./Id").text)
+				# self.debug("skip: id %s of type %s", call.find("./Id").text, direct)
 				continue
 			if direct == FBF_OUT_CALLS:
 				number = call.find("./Called").text
@@ -4139,19 +4183,14 @@ class FritzCallFBF_upnp():
 			linkP.write(result["NewDeflectionList"])
 			linkP.close()
 
-		root = ET.fromstring(result["NewDeflectionList"])
-		deflections =  root.iterfind(".//Item")
-		for deflection in deflections:
+		for deflection in ET.fromstring(result["NewDeflectionList"]).iterfind(".//Item"):
 			# self.debug("enable: " + deflection.find("./Enable").text)
-			enabled = deflection.find("./Enable").text == '1'
-			if enabled:
-				outgoing = deflection.find("./Outgoing")
-				if outgoing is not None:
-					# self.debug("Outgoing")
-					self.blacklist[1].append(deflection.find("./Number").text)
-				else:
-					# self.debug("Incoming")
+			if deflection.find("./Enable").text == '1':
+				if deflection.find("./Type").text == "fromNumber":
 					self.blacklist[0].append(deflection.find("./Number").text)
+				if deflection.find("./Type").text == "fromAnonymous":
+					self.blacklist[0].append("")
+
 		self.debug(repr(self.blacklist))
 
 	def dial(self, number):  # @UnusedVariable # pylint: disable=W0613

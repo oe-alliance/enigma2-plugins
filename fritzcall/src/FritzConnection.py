@@ -44,7 +44,7 @@ USERAGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
 
 # FritzConnection defaults:
 FRITZ_IP_ADDRESS = '192.168.188.1'
-FRITZ_TCP_PORT = 49000
+FRITZ_TCP_PORT = 49443
 FRITZ_IGD_DESC_FILE = 'igddesc.xml'
 FRITZ_TR64_DESC_FILE = 'tr64desc.xml'
 FRITZ_USERNAME = 'dslf-config'
@@ -161,7 +161,7 @@ class FritzAction(object):
 # 		self.debug("headers: " + repr(headers))
 		data = self.envelope.strip() % ( self.header_initchallenge_template % config.plugins.FritzCall.username.value,
 										self._body_builder(kwargs))
-		url = 'http://%s:%s%s' % (self.address, self.port, self.control_url)
+		url = 'https://%s:%s%s' % (self.address, self.port, self.control_url)
 
 		# self.debug("url: " + url + "\n" + data)
 		getPage(url,
@@ -196,10 +196,11 @@ class FritzAction(object):
 
 		headers = self.header.copy()
 		headers['soapaction'] = '%s#%s' % (self.service_type, self.name)
+		# self.debug("headers: " + repr(headers))
 		data = self.envelope.strip() % ( header_clientauth,
 										self._body_builder(kwargs))
 
-		url = 'http://%s:%s%s' % (self.address, self.port, self.control_url)
+		url = 'https://%s:%s%s' % (self.address, self.port, self.control_url)
 		# self.debug("url: " + url + "\n" + data)
 		getPage(url,
 			method = "POST",
@@ -304,14 +305,14 @@ class FritzXmlParser(object):
 		self.callback = callback
 		if address is None:
 			source = filename
-			# self.debug("source: %s", source)
+			self.debug("source: %s", source)
 			tree = ET.parse(source)
 			self.root = tree.getroot()
 			self.namespace = namespace(self.root)
 		else:
 			self.root = None
-			source = 'http://{0}:{1}/{2}'.format(address, port, filename)
-			# self.debug("source: %s", source)
+			source = 'https://{0}:{1}/{2}'.format(address, port, filename)
+			self.debug("source: %s", source)
 			getPage(source,
  				method = "GET",).addCallback(self._okInit).addErrback(self._errorInit)
 

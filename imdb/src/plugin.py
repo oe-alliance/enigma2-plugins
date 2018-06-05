@@ -22,6 +22,7 @@ from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
+from Components.MovieList import KNOWN_EXTENSIONS
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import os, re
 try:
@@ -50,6 +51,8 @@ def transHTML(text):
 
 config.plugins.imdb = ConfigSubsection()
 config.plugins.imdb.showinplugins = ConfigYesNo(default = False)
+config.plugins.imdb.showsetupinplugins = ConfigYesNo(default = True)
+config.plugins.imdb.showinmovielist = ConfigYesNo(default = True)
 config.plugins.imdb.force_english = ConfigYesNo(default=False)
 config.plugins.imdb.ignore_tags = ConfigText(visible_width = 50, fixed_size = False)
 config.plugins.imdb.showlongmenuinfo = ConfigYesNo(default = False)
@@ -166,6 +169,8 @@ class IMDB(Screen, HelpableScreen):
 
 		for tag in config.plugins.imdb.ignore_tags.getValue().split(','):
 			eventName = eventName.replace(tag,'')
+
+		eventName = ' '.join(eventName.split()).strip()
 
 		self.eventName = eventName
 
@@ -937,7 +942,9 @@ class IMDbSetup(Screen, ConfigListScreen):
 
 	def createSetup(self):
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show in plugin browser"), config.plugins.imdb.showinplugins, _("Enable this to be able to access the IMDb from within the plugin browser.")))
+		self.list.append(getConfigListEntry(_("Show search in plugin browser"), config.plugins.imdb.showinplugins, _("Enable this to be able to access IMDb searches from within the plugin browser.")))
+		self.list.append(getConfigListEntry(_("Show setup in plugin browser"), config.plugins.imdb.showsetupinplugins, _("Enable this to be able to access IMDb search setup from within the plugin browser.")))
+		self.list.append(getConfigListEntry(_("Show in movie list"), config.plugins.imdb.showinmovielist, _("Enable this to be able to access IMDb searches from within the movie list."))),
 		self.list.append(getConfigListEntry(_("Words / phrases to ignore "), config.plugins.imdb.ignore_tags, _("This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas.")))
 		self.list.append(getConfigListEntry(_("Show full movie or series name in title menu"), config.plugins.imdb.showlongmenuinfo, _("Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name.")))
 		self.list.append(getConfigListEntry(_("Show episode and year information in cast list"), config.plugins.imdb.showepisodeinfo, _("Show episode and year information for cast when available. Takes effect after the next fetch of show details.")))
@@ -1018,10 +1025,12 @@ class IMDbSetup(Screen, ConfigListScreen):
 
 	def keySave(self):
 		self.saveAll()
-		if not config.plugins.imdb.showinplugins.value:
-			for plugin in plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU):
-				if plugin.name == _("IMDb Details"):
-					plugins.removePlugin(plugin)
+
+		for pl in pluginlist:
+			if not pl[0].value:
+				for plugin in plugins.getPlugins(pl[1].where):
+					if plugin is pl[1]:
+						plugins.removePlugin(plugin)
 
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.close()
@@ -1042,18 +1051,62 @@ def eventinfo(session, eventName="", **kwargs):
 def main(session, eventName="", **kwargs):
 	session.open(IMDB, eventName)
 
-pluginlist = PluginDescriptor(name=_("IMDb Details"), description=_("Query details from the Internet Movie Database"), icon="imdb.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, needsRestart=False)
+def setup(session, **kwargs):
+	session.open(IMDbSetup)
+
+def movielistSearch(session, serviceref, **kwargs):
+	serviceHandler = eServiceCenter.getInstance()
+	info = serviceHandler.info(serviceref)
+	eventName = info and info.getName(serviceref) or ''
+	(root, ext) = os.path.splitext(eventName)
+	if ext in KNOWN_EXTENSIONS:
+		eventName = re.sub("[\W_]+", ' ', root.decode("utf8"), 0, re.LOCALE|re.UNICODE).encode("utf8")
+	session.open(IMDB, eventName)
+
+pluginlist = (
+	(
+		config.plugins.imdb.showinplugins,
+		PluginDescriptor(
+			name=_("IMDb search"),
+			description=_("Search for details from the Internet Movie Database"),
+			icon="imdb.png",
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=main,
+			needsRestart=False,
+		)
+	),
+	(
+		config.plugins.imdb.showsetupinplugins,
+		PluginDescriptor(
+			name=_("IMDb setup"),
+			description=_("Settings for Internet Movie Database searches"),
+			icon="imdb.png",
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=setup,
+			needsRestart=False,
+		)
+	),
+	(
+		config.plugins.imdb.showinmovielist,
+		PluginDescriptor(
+			name=_("IMDb search"),
+			description=_("IMDb search"),
+			where=PluginDescriptor.WHERE_MOVIELIST,
+			fnc=movielistSearch,
+			needsRestart=False,
+		)
+	),
+)
 
 def Plugins(**kwargs):
-	l = [PluginDescriptor(name=_("IMDb Details") + "...",
-			description=_("Query details from the Internet Movie Database"),
+	l = [PluginDescriptor(name=_("IMDb search") + "...",
+			description=_("Search for details from the Internet Movie Database"),
 			where=PluginDescriptor.WHERE_EVENTINFO,
 			fnc=eventinfo,
 			needsRestart=False,
 			),
 		]
 
-	if config.plugins.imdb.showinplugins.value:
-		l.append(pluginlist)
+	l += [pl[1] for pl in pluginlist if pl[0].value]
 
 	return l

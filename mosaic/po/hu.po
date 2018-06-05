@@ -1,0 +1,33 @@
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mosaic v1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"PO-Revision-Date: 2018-04-20 06:46+0200\n"
+"Last-Translator: Alec <alex1vagyok@gmail.com>\n"
+"Language-Team: alec <alex1vagyok@gmail.com>\n"
+"Language: hu_HU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+msgid "Channel: "
+msgstr "Csatorna: "
+
+msgid "Countdown:"
+msgstr "Visszaszámlálás:"
+
+msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
+msgstr ""
+"Hiba történt a képernyőkép készítése során. Szükséged van a grab 0.8 vagy az "
+"újabb verziójára!"
+
+msgid "Mosaic"
+msgstr "Mosaic"

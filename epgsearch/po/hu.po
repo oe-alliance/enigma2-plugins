@@ -1,32 +1,30 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# English translations for enigma2-plugins package.
+# Copyright (C) 2012 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2012.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 - epgsearch\n"
+"Project-Id-Version: EPGSearch v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-07 12:36+0200\n"
-"PO-Revision-Date: 2018-04-24 21:38+0200\n"
-"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
-"Language-Team: Andy Blackburn/Rob van der Does\n"
-"Language: nl_NL\n"
+"POT-Creation-Date: 2017-07-07 12:46+0200\n"
+"PO-Revision-Date: 2018-04-08 10:32+0200\n"
+"Last-Translator: Alec <alex1vagyok@gmail.com>\n"
+"Language-Team: alec <alex1vagyok@gmail.com>\n"
+"Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.7\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: src/EPGSearch.py:141
 msgid "%e/%m, %H:%M"
-msgstr "%e/%m, %H:%M"
+msgstr "%m/%d %H:%M"
 
 #: src/EPGSearch.py:180
 msgid "Stream"
-msgstr "Stream"
+msgstr "Adatfolyam"
 
 #: src/EPGSearch.py:183
 msgid "DVB-T"
@@ -38,169 +36,170 @@ msgstr "DVB-C"
 
 #: src/EPGSearch.py:213
 msgid "New Search"
-msgstr "Nieuwe zoekopdracht"
+msgstr "Új keresés"
 
 #: src/EPGSearch.py:214
 msgid "Add AutoTimer"
-msgstr "Autotimer toevoegen"
+msgstr "AutoTimer hozzáadása"
 
 #: src/EPGSearch.py:234
 msgid "IMDb Search"
-msgstr "Zoeken in IMDb"
+msgstr "IMDb keresés"
 
 #: src/EPGSearch.py:235
 msgid "Add Timer"
-msgstr "Timer toevoegen"
+msgstr "Időzítés hozzáadása"
 
 #: src/EPGSearch.py:241
 msgid "Close dialog"
-msgstr "Sluit dialoog"
+msgstr "Párbeszédpanel bezárása"
 
 #: src/EPGSearch.py:247
 msgid "Exit EPG Search"
-msgstr "EPG Search afsluiten"
+msgstr "Kilépés az Műsor keresésből"
 
 #: src/EPGSearch.py:248
 msgid "Zap to channel"
-msgstr "Zap naar zender"
+msgstr "Csatornára ugrás"
 
 #: src/EPGSearch.py:249 src/EPGSearch.py:274 src/EPGSearch.py:275
 #: src/EPGSearch.py:276
 msgid "Show detailed event information"
-msgstr "Toon gedetailleerde programma informatie"
+msgstr "Részletes eseményinformációk megjelenítése"
 
 #: src/EPGSearch.py:254
 msgid "IMDB search for highlighted event"
-msgstr "Zoek op IMDb naar geselecteerd programma"
+msgstr "IMDB keresés a kiválasztott eseményre"
 
 #: src/EPGSearch.py:255
 msgid "Add/remove/edit timer for highlighted event"
-msgstr "Toevoegen/verwijder/bewerk timer voor het geselecteerde programma"
+msgstr ""
+"A kiválasztott eseménynél az időzítő Hozzáadása/Eltávolítása/Szerkesztése"
 
 #: src/EPGSearch.py:256
 msgid "Enter new search"
-msgstr "Opnieuw zoeken"
+msgstr "Írja be az új keresést"
 
 #: src/EPGSearch.py:257 src/EPGSearch.py:441
 msgid "Show search history"
-msgstr "Toon zoekgeschiedenis"
+msgstr "Keresési előzmények megjelenítése"
 
 #: src/EPGSearch.py:258
 msgid "Add an AutoTimer for highlighted event"
-msgstr "Autotimer toevoegen voor het geselecteerde programma"
+msgstr "A kijelölt eseménynél egy AutoTimer hozzáadása"
 
 #: src/EPGSearch.py:259
 msgid "Show AutoTimer list"
-msgstr "Toon autotimerlijst"
+msgstr "AutoTimer lista megjelenítése"
 
 #: src/EPGSearch.py:264
 msgid "Add a record timer for highlighted event"
-msgstr "Opnametimer toevoegen voor het geselecteerde programma"
+msgstr "Adjon felvételi időzítőt a kiválasztott eseményhez"
 
 #: src/EPGSearch.py:265
 msgid "Add a zap timer for highlighted event"
-msgstr "Zaptimer toevoegen voor het geselecteerde programma"
+msgstr "Adjon időzítőt a kiválasztott esemény indulási megjelenítéséhez"
 
 #: src/EPGSearch.py:270 src/EPGSearch.py:273 src/EPGSearch.py:283
 msgid "Move down a page"
-msgstr "Ga één pagina omlaag"
+msgstr "Ugrás a következő lapra"
 
 #: src/EPGSearch.py:271 src/EPGSearch.py:272 src/EPGSearch.py:282
 msgid "Move up a page"
-msgstr "Ga één pagina omhoog"
+msgstr "Ugrás a előző lapra"
 
 #: src/EPGSearch.py:277
 msgid "Setup menu"
-msgstr "Instellingenmenu"
+msgstr "Beállítások menü"
 
 #: src/EPGSearch.py:284
 msgid "Move up"
-msgstr "Verplaats naar boven"
+msgstr "Mozgatás felfelé"
 
 #: src/EPGSearch.py:285
 msgid "Move down"
-msgstr "Verplaats naar beneden"
+msgstr "Mozgatás lefelé"
 
 #: src/EPGSearch.py:321
 msgid "EPG Search"
-msgstr "EPG Search"
+msgstr "Műsor keresése"
 
 #: src/EPGSearch.py:435
 msgid "Enter text to search for"
-msgstr "Voer de te zoeken tekst in"
+msgstr "Írja be a keresendő szöveget"
 
 #: src/EPGSearch.py:439
 msgid "Import from Timer"
-msgstr "Importeren uit timer"
+msgstr "Importálás Időzítőből"
 
 #: src/EPGSearch.py:440
 msgid "Import from EPG"
-msgstr "Importeren uit EPG"
+msgstr "Importálás Műsorújságból"
 
 #: src/EPGSearch.py:446
 msgid "Import from AutoTimer"
-msgstr "Importeren uit autotimer"
+msgstr "Importálás AutoTimer-ből"
 
 #: src/EPGSearch.py:447
 msgid "Save search as AutoTimer"
-msgstr "Bewaar als autotimer"
+msgstr "Keresés mentése AutoTimer-ként"
 
 #: src/EPGSearch.py:450
 msgid "Open selected in IMDb"
-msgstr "Open in IMDb"
+msgstr "Kijelölt elemek megnyitása IMDb-ben"
 
 #: src/EPGSearch.py:451 src/EPGSearch.py:573
 msgid "Setup"
-msgstr "Instellingen"
+msgstr "Beállítás"
 
 #: src/EPGSearch.py:453
 msgid "EPG Search setup"
-msgstr "EPG Search instellingen"
+msgstr "Műsor keresés beállítás"
 
 #: src/EPGSearch.py:479
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
-msgstr "Kan autotimer timer-lijst niet lezen : %s"
+msgstr "Nem sikerült olvasni az AutoTimer időzítő listáját: %s"
 
 #: src/EPGSearch.py:485 src/EPGSearch.py:541
 msgid "Select text to search for"
-msgstr "Selecteer te zoeken tekst..."
+msgstr "Válassza ki a keresendő szöveget"
 
 #: src/EPGSearch.py:543
 msgid "No history"
-msgstr "Geen geschiedenis"
+msgstr "Nincs előzmény"
 
 #: src/EPGSearch.py:569
 msgid "All services"
-msgstr "Alle zenders"
+msgstr "Összes csatorna"
 
 #: src/EPGSearch.py:570
 msgid "All bouquets"
-msgstr "Alle boeketten"
+msgstr "Összes csatornacsomag"
 
 #: src/EPGSearch.py:571
 msgid "Current bouquet"
-msgstr "Huidige boeket"
+msgstr "Aktuális csatornacsomag"
 
 #: src/EPGSearch.py:572
 msgid "Current service"
-msgstr "Huidige zender"
+msgstr "Aktuális csatorna"
 
 #: src/EPGSearch.py:576
 msgid "Search in..."
-msgstr "Zoek in..."
+msgstr "Keresés ebben..."
 
 #: src/EPGSearch.py:600
 msgid "Searching..."
-msgstr "Zoeken..."
+msgstr "Keresés..."
 
 #: src/EPGSearch.py:800 src/EPGSearchSetup.py:145 src/__init__.py:184
 msgid "include"
-msgstr "toevoegen"
+msgstr "tartalmazza"
 
 #: src/EPGSearch.py:818 src/EPGSearchSetup.py:76
 msgid "Cancel"
-msgstr "Annuleren"
+msgstr "Mégse"
 
 #: src/EPGSearch.py:819 src/EPGSearchSetup.py:77
 msgid "OK"
@@ -208,292 +207,232 @@ msgstr "OK"
 
 #: src/EPGSearch.py:832
 msgid "Select a timer to search"
-msgstr "Selecteer te zoeken timer"
+msgstr "Válasszon egy időzítő a kereséshez"
 
 #: src/EPGSearch.py:855
 msgid "Channel Selection"
-msgstr "Zenderkeuze"
+msgstr "Kiválasztás mellőzése"
 
 #: src/EPGSearch.py:877
 msgid "Search"
-msgstr "Zoeken"
+msgstr "Keresés"
 
 #: src/EPGSearchSetup.py:50
 msgid "EPGSearch Setup"
-msgstr "EPG Search instellingen"
+msgstr "Műsor keresés beállítás"
 
 #: src/EPGSearchSetup.py:89
 msgid "Search scope"
-msgstr "Zoekbereik"
+msgstr "Keresés hatóköre"
 
 #: src/EPGSearchSetup.py:89
 msgid ""
 "Control where to search in the EPG. When 'all bouquets' is set, all bouquets "
 "are searched, even if 'Enable multiple bouquets' is disabled."
 msgstr ""
-"Bepaal waar te zoeken in de EPG. Indien 'alle boeketten' is gekozen, wordt "
-"daadwerkelijk in alle boeketten gezocht, ook als 'Meerdere boeketten "
-"toestaan' is uitgeschakeld."
+"Ellenőrizze, hogy hol keressen az EPG műsorújságban. Amikor \"összes "
+"csatornacsomag\" be van állítva, akkor minden csatornacsomagban keres, még "
+"akkor is, ha a \"Többszörös csatornacsomag engedélyezve\" tiltott."
 
 #: src/EPGSearchSetup.py:92
 msgid "Default scope when asked"
-msgstr "Standaard bereik wanneer gevraagd"
+msgstr "Alapértelmezett hatókört mikor kérdezve van"
 
 #: src/EPGSearchSetup.py:92
 msgid "Sets the default search scope when the user is asked."
-msgstr "Selecteer het standaard bereik wanneer de gebruiker wordt gevraagd."
+msgstr ""
+"Beállítja az alapértelmezett keresési tartományt, amikor a felhasználó meg "
+"van kérdezve."
 
 #: src/EPGSearchSetup.py:94
 msgid "Show orbital position"
-msgstr "Toon orbitale positie"
+msgstr "A tuner típus megjelenítése"
 
 #: src/EPGSearchSetup.py:94
 msgid "Show satellite orbital positions in the search results."
-msgstr "Toon satelliet orbitale positie in zoekresultaten."
+msgstr ""
+"Mutatja a tuner típusát, illetve műholdas orbitális pozíciókat a keresési "
+"eredmények listájában."
 
 #: src/EPGSearchSetup.py:96
 msgid "Search type"
-msgstr "Zoektype"
+msgstr "Keresés típusa"
 
 #: src/EPGSearchSetup.py:96
 msgid "Set type of match used to compare program titles with the search string"
 msgstr ""
-"Selecteer het soort overeenkomst tussen programma titels en zoekopdracht."
+"Állítsa be a keresésben használt szöveg egyezés, illeszkedés típusát. A "
+"'pontos egyezés, illeszkedés' csak a Teljes szóra, a 'részleges egyezés, "
+"illeszkedés' a Szóban, vagy kifejezésben szerelő kifejezésre utal"
 
 #: src/EPGSearchSetup.py:97
 msgid "Search strictness"
-msgstr "Zoekbeperkingen"
+msgstr "Keresés pontosabban"
 
 #: src/EPGSearchSetup.py:97
 msgid "Is the search case-sensitive or case-insensitive"
-msgstr "Hoofdlettergevoelig zoeken"
+msgstr "A keresés a kis-és nagybetűkre érzékeny"
 
 #: src/EPGSearchSetup.py:98
 msgid "Show in plugin browser"
-msgstr "Toon in applicatie overzicht"
+msgstr "Megjelenítés a Bővítmény kezelőben"
 
 #: src/EPGSearchSetup.py:98
 msgid ""
 "Enable this to allow access to EPG Search from within the plugin browser."
-msgstr "Schakel dit in om EPG Search vanuit de pluginbrowser te kunnen openen."
+msgstr ""
+"Engedélyezze ezt, hogy hozzáférhessen a Műsorok kereséshez a Bővítmény "
+"kezelőben."
 
 #: src/EPGSearchSetup.py:99
 msgid "Length of history"
-msgstr "Lengte van geschiedenis"
+msgstr "Előzmények hossza"
 
 #: src/EPGSearchSetup.py:99
 msgid ""
 "Maximum number of entries in the search history. Set this to 0 to disable "
 "search history."
 msgstr ""
-"Maximum aantal vermeldingen in de zoekgeschiedenis. Stel in op 0 om de "
-"geschiedenis uit te schakelen."
+"A keresési előzmények maximális száma. Állítsa 0-ra, ha le akarja tiltani a "
+"keresési előzményt."
 
 #: src/EPGSearchSetup.py:100
 msgid "Search encoding"
-msgstr "Zoek codering"
+msgstr "Keresés kódolása"
 
 #: src/EPGSearchSetup.py:100
 msgid "Choose the encoding type for searches, helpful for foreign languages."
-msgstr "Kies het coderingstype; handig voor diverse talen."
+msgstr ""
+"Válassza ki a kódolás típusát, hasznos lehet az idegen nyelvek számára."
 
 #: src/EPGSearchSetup.py:128 src/plugin.py:56
 msgid "EPGSearch"
-msgstr "EPG Search"
+msgstr "Műsor keresés"
 
 #: src/EPGSearchSetup.py:139
 msgid "Filter results by source"
-msgstr "Filter resultaten naar bron"
+msgstr "Szűrje az eredményeket forrás szerint"
 
 #: src/EPGSearchSetup.py:139
 msgid ""
 "Include or exclude results depending on their source (e.g. by satellite)"
-msgstr "Verberg of geef resultaten weer naar bron, zoals satelliet etc."
+msgstr ""
+"Az eredmények bevitele vagy kizárása a forrástól függően (például műhold "
+"által)"
 
 #: src/EPGSearchSetup.py:142
 msgid "Include/exclude sources"
-msgstr "toevoegen/uitsluiten bronnen"
+msgstr "Források bevonása/kizárása"
 
 #: src/EPGSearchSetup.py:142
 msgid ""
 "Use source restrictions below to only include results from the sources, or "
 "exclude them."
 msgstr ""
-"Gebruik de bron beperkingen hieronder, om gewenste resultaten wel of niet "
-"toe te voegen."
+"Használja az alábbi forráskorlátozásokat, hogy csak forrásforrásokat "
+"tartalmazzon, vagy kizárhatja azokat."
 
 #: src/EPGSearchSetup.py:143
 msgid "Number of inclusions/exclusions"
-msgstr "Aantal toevoegingen/uitsluitingen"
+msgstr "Befoglalások/kizárások száma"
 
 #: src/EPGSearchSetup.py:143
 msgid "Number of filters for inclusion/exclusion of results"
-msgstr "Aantal filters voor toevoegen/uitsluiten van resultaten"
+msgstr "Az eredmények felvételére/kizárására szolgáló szűrők száma"
 
 #: src/EPGSearchSetup.py:146
 msgid "Include results from"
-msgstr "Zoekresultaten toevoegen van"
+msgstr "Eredmények bevitele ebből"
 
 #: src/EPGSearchSetup.py:148
 msgid "Exclude results from"
-msgstr "Zoekresultaten uitsluiten van"
+msgstr "Az eredmények kizárása ebből"
 
 #: src/EPGSearchSetup.py:149
 msgid "Include/exclude search results from this type of source"
-msgstr "Toevoegen/uitsluiten van zoek resultaten van dit type bron"
+msgstr ""
+"Az ilyen típusú forrásokból származó keresési eredmények bevonása/kizárása"
 
 #: src/__init__.py:30 src/__init__.py:31
 msgid "all services"
-msgstr "alle zenders"
+msgstr "összes csatorna"
 
 #: src/__init__.py:30 src/__init__.py:31
 msgid "all bouquets"
-msgstr "alle boeketten"
+msgstr "összes csatornacsomagok"
 
 #: src/__init__.py:30 src/__init__.py:31
 msgid "current bouquet"
-msgstr "huidige boeket"
+msgstr "aktuális csatornacsomag"
 
 #: src/__init__.py:30 src/__init__.py:31
 msgid "current service"
-msgstr "huidige zender"
+msgstr "aqktuális csatorna"
 
 #: src/__init__.py:30
 msgid "ask user"
-msgstr "vraag gebruiker"
+msgstr "felhasználó kérdezése"
 
 #: src/__init__.py:32
 msgid "partial match"
-msgstr "gedeeltelijke overeenkomst"
+msgstr "részleges egyezés, illeszkedés"
 
 #: src/__init__.py:32
 msgid "exact match"
-msgstr "exacte overeenkomst"
+msgstr "pontos egyezés, illeszkedés"
 
 #: src/__init__.py:32
 msgid "title starts with"
-msgstr "titel begint met"
+msgstr "ezzel kezdődik a keresett műsor"
 
 #: src/__init__.py:33
 msgid "case-insensitive search"
-msgstr "Hoofdletterongevoelig zoeken"
+msgstr "nem érzékeny a kis- és nagybetűs keresésre"
 
 #: src/__init__.py:33
 msgid "case-sensitive search"
-msgstr "Hoofdlettergevoelig zoeken"
+msgstr "kis- és nagybetűkre érzékeny keresés"
 
 #: src/__init__.py:63
 msgid "disabled"
-msgstr "uitgeschakeld"
+msgstr "letíltva"
 
 #: src/__init__.py:73
 msgid "DVB-T Terrestrial services"
-msgstr "DVB-T terrestrische zenders"
+msgstr "DVB-T földfelszíni csatornák"
 
 #: src/__init__.py:75
 msgid "DVB-C Cable services"
-msgstr "DVB-C kabel zenders"
+msgstr "DVB-C kábel csatornák"
 
 #: src/__init__.py:184
 msgid "exclude"
-msgstr "uitsluiten"
+msgstr "kizár"
 
 #: src/plugin.py:56
 msgid "Search EPG"
-msgstr "EPG doorzoeken"
+msgstr "Műsor keresés"
 
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
 #. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
 #: src/plugin.py:63
 #, python-format
 msgid "%ssearch EPG"
-msgstr "%s EPG doorzoeken"
+msgstr "%s keresés"
 
 #. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
 #. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
 #: src/plugin.py:71
 #, python-format
 msgid "%ssearch EPG from history..."
-msgstr "%s EPG geschiedenis doorzoeken..."
+msgstr "%s keresés az Előzmények közül..."
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 #: src/plugin.py:78 src/plugin.py:79
 msgid "search EPG"
-msgstr "EPG doorzoeken"
+msgstr "keresés"
 
 #. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
 #: src/plugin.py:86 src/plugin.py:87
 msgid "search EPG from history..."
-msgstr "EPG geschiedenis doorzoeken..."
-
-#~ msgid "Add a auto timer for current event"
-#~ msgstr "Voeg een autotimer toe voor het huidige event"
-
-#~ msgid "Add a record timer for current event"
-#~ msgstr "Voeg een opnametimer toe voor het huidige event"
-
-#~ msgid "Add a zap timer for current event"
-#~ msgstr "Voeg een zaptimer toe voor het huidige event"
-
-#~ msgid "Add/Remove timer for current event"
-#~ msgstr "Verwijder/Voeg een timer toe voor het huidige event"
-
-#~ msgid "Choose the encode type for search, helpful for foreign languages."
-#~ msgstr "Kies het code type voor het zoeken; handig voor diverse talen."
-
-#~ msgid ""
-#~ "Enable this to be able to access the EPG-Search from within the plugin "
-#~ "browser."
-#~ msgstr "Toon EPG-Search in plugin browser."
-
-#~ msgid "Exit EPG"
-#~ msgstr "Verlaat EPG"
-
-#~ msgid "Goto next bouquet"
-#~ msgstr "Ga naar de volgende favoriet"
-
-#~ msgid "Goto next channel"
-#~ msgstr "Ga naar het volgende kanaal"
-
-#~ msgid "Goto previous bouquet"
-#~ msgstr "Ga naar de vorige favoriet"
-
-#~ msgid "Goto previous channel"
-#~ msgstr "Ga naar het vorige kanaal"
-
-#~ msgid ""
-#~ "How many entries to keep in the search history at most. 0 disables "
-#~ "history entirely!"
-#~ msgstr ""
-#~ "Hoeveel entries mogen er in de zoekhistory bewaard worden? \"0\" schakelt "
-#~ "history geheel uit!"
-
-#~ msgid "IMDB search for current event"
-#~ msgstr "IMDB zoekslag voor het huidige event"
-
-#~ msgid "Length of History"
-#~ msgstr "Grootte van de geschiedenis"
-
-#~ msgid "Search Encoding"
-#~ msgstr "Zoek codering"
-
-#~ msgid "Search for similar events"
-#~ msgstr "Zoek naar gelijksoortige events"
-
-#~ msgid "Show AutoTimer List"
-#~ msgstr "Toon AutoTimer lijst"
-
-#~ msgid "Show detailed event info"
-#~ msgstr "Toon gedetailleerde event informatie"
-
-#~ msgid "Show single epg for current channel"
-#~ msgstr "Toon de EPG voor het huidige kanaal"
-
-#~ msgid "Zap to channel (setup in menu)"
-#~ msgstr "Zap naar kanaal (stel in in menu)"
-
-#~ msgid "Zap to channel and close (setup in menu)"
-#~ msgstr "Zap naar kanaal en sluit (stel in in menu)"
-
-#~ msgid "search EPG..."
-#~ msgstr "EPG doorzoeken..."
+msgstr "keresés az Előzmények közül..."
