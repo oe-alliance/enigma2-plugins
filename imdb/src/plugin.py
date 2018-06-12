@@ -34,7 +34,6 @@ except ImportError as ie:
 	from urllib.parse import quote_plus
 	iteritems = lambda d: d.items()
 	unichr = chr
-from urlparse import urlsplit, SplitResult
 import os, gettext
 
 # Configuration
@@ -551,8 +550,6 @@ class IMDB(Screen, HelpableScreen):
 					posterurl = self.postermask.search(self.inhtml)
 					if posterurl and posterurl.group(1).find("jpg") > 0:
 						posterurl = posterurl.group(1)
-						# Hack to avoid problems downloading from https://ia.media-imdb.com/
-						posterurl = SplitResult(*(('http', ) + urlsplit(posterurl)[1:])).geturl()
 						postersave = self.savingpath + ".poster.jpg"
 						print("[IMDB] downloading poster " + posterurl + " to " + postersave)
 						download = downloadWithProgress(posterurl,postersave)
@@ -804,8 +801,6 @@ class IMDB(Screen, HelpableScreen):
 			posterurl = self.postermask.search(self.inhtml)
 			if posterurl and posterurl.group(1).find("jpg") > 0:
 				posterurl = posterurl.group(1)
-				# Hack to avoid problems downloading from https://ia.media-imdb.com/
-				posterurl = SplitResult(*(('http', ) + urlsplit(posterurl)[1:])).geturl()
 				self["statusbar"].setText(_("Downloading Movie Poster: %s...") % (posterurl))
 				localfile = "/tmp/poster.jpg"
 				print("[IMDB] downloading poster " + posterurl + " to " + localfile)
