@@ -73,7 +73,7 @@ class MovieCut(ChoiceBox):
 		self.skinName = "ChoiceBox"
 
 	def confirmed0(self, arg):
-		self.close()
+		self.close(False)
 
 	def confirmed1(self, arg):
 		self.cut(self.name, self.path, self.path[:-3] + '_.ts', self.len, _getCutsLength(self.path, self.len), ["-r", self.path])
@@ -91,7 +91,7 @@ class MovieCut(ChoiceBox):
 
 	def advcutConfirmed(self, ret):
 		if len(ret) <= 1 or not ret[0]:
-			self.close()
+			self.close(False)
 			return
 		clist = []
 		if ret[1] == True:
@@ -142,11 +142,11 @@ class MovieCut(ChoiceBox):
 		job = Job(_("Execute cuts"))
 		CutTask(job, self.session, name, inpath, outpath, inlen, outlen, mcut_path, clist)
 		JobManager.AddJob(job, onFail=self.noFail)
-		self.close()
+		self.close(True)
 
 	# Prevent the normal aborted notification, using our own from cleanup.
 	def noFail(self, job, task, problems):
-	    return False
+		return False
 
 class CutTask(Task):
 	def __init__(self, job, session, name, inpath, outpath, inlen, outlen, cmd, args):
@@ -196,7 +196,13 @@ class CutTask(Task):
 			   _("Cutting failed for movie \"%s\"")+":\n"+_("No cuts specified"),
 			   _("Cutting failed for movie \"%s\"")+":\n"+_("Read/write error (disk full?)"),
 			   _("Cutting was aborted for movie \"%s\""))[self.returncode]
-		self.session.open(MessageBox, msg % self.name, type=MessageBox.TYPE_ERROR if self.returncode else MessageBox.TYPE_INFO, timeout=10)
+		try:
+			self.session.open(MessageBox, msg % self.name, type=MessageBox.TYPE_ERROR if self.returncode else MessageBox.TYPE_INFO, timeout=10)
+		except RuntimeError:
+			# This is probably the modal error when called from CutListEditor,
+			# so just use a normal popup.
+			from Tools.Notifications import AddPopup
+			AddPopup(msg % self.name, type=MessageBox.TYPE_ERROR if self.returncode else MessageBox.TYPE_INFO, timeout=10, id=self.name)
 
 class AdvancedCutInput(Screen, ConfigListScreen):
 	def __init__(self, session, name, path, descr):
