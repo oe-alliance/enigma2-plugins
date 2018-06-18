@@ -34,6 +34,8 @@ from time import localtime, strftime
 from operator import itemgetter
 from collections import defaultdict
 
+from skin import parameters as skinparameter
+
 # Partnerbox installed and icons in epglist enabled?
 try:
 	from Plugins.Extensions.Partnerbox.PartnerboxEPGList import isInRemoteTimer, getRemoteClockPixmap
@@ -58,6 +60,10 @@ class EPGSearchList(EPGList):
 		EPGList.__init__(self, type, selChangedCB, timer)
 		self.listSizeWidth = None
 		self.screenwidth = getDesktop(0).size().width()
+		if self.screenwidth and self.screenwidth == 1920:
+			self.posx, self.posy , self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (2,13,25,25,2))
+		else:
+			self.posx, self.posy , self.picx, self.picy, self.gap = skinparameter.get("EpgListIcon", (1,11,23,23,1))
 		self.l.setBuildFunc(self.buildEPGSearchEntry)
 
 		if PartnerBoxIconsEnabled:
@@ -106,15 +112,6 @@ class EPGSearchList(EPGList):
 		if getattr(self, "wasEntryIceTV", False) and hasattr(self, "icetvicon"):
 			pics.append(self.icetvicon)
 
-		if self.screenwidth and self.screenwidth == 1920:
-			picx = 25
-			picy = 25
-			posy = 13
-		else:
-			picx = 23
-			picy = 23
-			posy = 11
-
 		t = localtime(beginTime)
 		serviceref = ServiceReference(service)  # for Servicename and orbital position
 		width = r4.x + r4.w
@@ -148,11 +145,12 @@ class EPGSearchList(EPGList):
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, self.getOrbitalPos(serviceref)))
 		picwidth = 0
 		for pic in pics:
-			picwidth += picx
-			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, width - picwidth, (r4.h / 2 - posy), picx, picy, pic))
-		if picwidth:
-			picwidth += 5
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w - picwidth, r4.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
+			if picwidth:
+				picwidth += (self.picx + self.gap)
+			else:
+				picwidth = self.picx + self.posx
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, width - picwidth, (r4.h / 2 - self.posy), self.picx, self.picy, pic))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w - picwidth - (self.gap*2), r4.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
 		return res
 
 	def recalcEntrySize(self):
