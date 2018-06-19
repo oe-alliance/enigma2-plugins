@@ -150,7 +150,9 @@ class EPGSearchList(EPGList):
 			else:
 				picwidth = self.picx + self.posx
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, width - picwidth, (r4.h / 2 - self.posy), self.picx, self.picy, pic))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w - picwidth - (self.gap*2), r4.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
+		if picwidth:
+			picwidth += (self.gap*2)
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w - picwidth, r4.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, serviceref.getServiceName() + ": " + EventName))
 		return res
 
 	def recalcEntrySize(self):
