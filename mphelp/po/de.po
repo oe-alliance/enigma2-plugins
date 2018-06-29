@@ -24,7 +24,7 @@ msgid "AutoTimer Help"
 msgstr "AutoTimer Hilfe"
 
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Schließen"
 
 msgid "Congratulations"
 msgstr "Gratulation"
