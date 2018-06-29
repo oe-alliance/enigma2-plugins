@@ -843,7 +843,7 @@ msgstr "Automatisch suchen"
 
 #: ../src/AutoTimerSettings.py:82 ../src/AutoTimerSettings.py:65
 msgid "Popup timeout in seconds"
-msgstr "Fenster nach (x) Sekunden automatisch schliessen"
+msgstr "Fenster nach (x) Sekunden automatisch schließen"
 
 #: ../src/AutoTimerEditor.py:520 ../src/AutoTimerEditor.py:559
 msgid ""
