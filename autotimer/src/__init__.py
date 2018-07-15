@@ -30,7 +30,7 @@ config.plugins.autotimer.delay = ConfigNumber(default=3)
 config.plugins.autotimer.editdelay = ConfigNumber(default=3)
 
 default_unit = "hour"
-if getImageDistro() in ('beyonwiz', 'teamblue', 'openatv', 'openvix'): # distros that want default polling in minutes
+if getImageDistro() in ('beyonwiz', 'teamblue', 'openatv', 'openvix', 'opendroid'): # distros that want default polling in minutes
 	default_unit = "minute"
 config.plugins.autotimer.unit = ConfigSelection(choices=[
 		("hour", _("Hour")),
