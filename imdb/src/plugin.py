@@ -283,8 +283,8 @@ class IMDB(Screen, HelpableScreen):
 			self.awardsmask = re.compile('<span itemprop="awards">\s*(?:<b>)?\s*(?P<awards>.+?)\s*(?:</b>)?\s*</span>', re.DOTALL)
 
 			self.extrainfomask = re.compile(
-			'(?:.*?<div class="summary_text" itemprop="description">(?P<outline>.+?)</div>)?'
-			'(?:.*?<h2>(?P<g_synopsis>Storyline)</h2>.*?<div class="inline canwrap" itemprop="description">(?P<synopsis>.+?)</div>)?'
+			'(?:.*?<div class="summary_text">(?P<outline>.+?)</div>)?'
+			'(?:.*?<h2>(?P<g_synopsis>Storyline)</h2>.*?<span itemprop="description">(?P<synopsis>.+?)</span>)?'
 			'(?:.*?<h4 class="inline">(?P<g_keywords>Plot Keywords):</h4>(?P<keywords>.+?)(?:(?:Mehr|See All) \(\d+\)</a>|</div>))?'
 			'(?:.*?<h4 class="inline">(?P<g_tagline>Werbezeile|Taglines?):</h4>\s*(?P<tagline>.+?)<)?'
 			'(?:.*?<h4 class="inline">(?P<g_cert>Altersfreigabe|Certificate):</h4>\s*<span itemprop="contentRating">(?P<cert>.+?)</span>)?'
