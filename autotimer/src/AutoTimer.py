@@ -369,9 +369,9 @@ class AutoTimer:
 								service = services.getNext()
 								if not service.valid():
 									break
-									playable = not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
-									if playable:
-										test.append((service.toString(), 0, -1, -1))
+								playable = not (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)) or (service.flags & eServiceReference.isNumberedMarker)
+								if playable:
+									test.append((service.toString(), 0, -1, -1))
 
 			if test:
 				# Get all events
