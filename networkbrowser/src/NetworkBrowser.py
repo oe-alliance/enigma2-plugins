@@ -237,6 +237,15 @@ class NetworkBrowser(Screen):
 			for cb in self.onChangedEntry:
 				cb(name, desc)
 
+	def makeStrIP(self):
+		self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
+		self.netmask = iNetwork.getAdapterAttribute(self.iface, "netmask")
+		if self.IP and self.netmask and len(self.IP) == 4 and len(self.netmask) == 4 and sum(self.IP) and sum(self.netmask):
+			strCIDR = str(sum((bin(x).count('1') for x in self.netmask)))
+			strIP = '.'.join((str(ip & mask) for ip, mask in zip(self.IP, self.netmask))) + "/" + strCIDR
+			return strIP
+		return None
+
 	def process_NetworkIPs(self):
 		self.inv_cache = 0
 		self.vc = valid_cache(self.cache_file, self.cache_ttl)
@@ -250,14 +259,14 @@ class NetworkBrowser(Screen):
 			print '[Networkbrowser] Getting fresh network list'
 			self.networklist = self.getNetworkIPs()
 			if fileExists("/usr/bin/nmap"):
-				nwlist = []
-				sharelist = []
-				self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
-				if len(self.IP):
-					self.netmask = iNetwork.getAdapterAttribute(self.iface, "netmask")
-					strCIDR = str(sum([bin(int(x)).count('1') for x in formatIp(iNetwork.getAdapterAttribute(self.iface, "netmask")).split('.')]))
-					strIP = str(self.IP[0] & self.netmask[0]) + "." + str(self.IP[1] & self.netmask[1]) + "." + str(self.IP[2] & self.netmask[2]) + "." + str(self.IP[3] & self.netmask[3]) + "/" + strCIDR
+				strIP = self.makeStrIP()
+				if strIP:
 					self.Console.ePopen("nmap -oX - " + strIP + ' -sP 2>/dev/null', self.Stage1SettingsComplete)
+				else:
+					self.session.open(MessageBox, _("Your nework interface %s is not properly configured, so a network scan cannot be done.\nPlease configure the interface and try again.") % self.iface, type=MessageBox.TYPE_ERROR)
+					self.setStatus('error')
+					self["shortcuts"].setEnabled(True)
+					return
 			else:
 				write_cache(self.cache_file, self.networklist)
 				if len(self.networklist) > 0:
@@ -272,15 +281,10 @@ class NetworkBrowser(Screen):
 
 	def getNetworkIPs(self):
 		nwlist = []
-		sharelist = []
-		self.IP = iNetwork.getAdapterAttribute(self.iface, "ip")
-		if len(self.IP):
-			self.netmask = iNetwork.getAdapterAttribute(self.iface, "netmask")
-			strCIDR = str(sum([bin(int(x)).count('1') for x in formatIp(iNetwork.getAdapterAttribute(self.iface, "netmask")).split('.')]))
-			strIP = str(self.IP[0] & self.netmask[0]) + "." + str(self.IP[1] & self.netmask[1]) + "." + str(self.IP[2] & self.netmask[2]) + "." + str(self.IP[3] & self.netmask[3]) + "/" + strCIDR
-			nwlist.append(netscan.netzInfo(strIP))
-		tmplist = nwlist[0]
-		return tmplist
+		strIP = self.makeStrIP()
+		if strIP:
+			nwlist = netscan.netzInfo(strIP)
+		return nwlist
 
 	def Stage1SettingsComplete(self, result, retval, extra_args):
 		import xml.dom.minidom
