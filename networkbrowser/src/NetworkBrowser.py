@@ -263,7 +263,7 @@ class NetworkBrowser(Screen):
 				if strIP:
 					self.Console.ePopen("nmap -oX - " + strIP + ' -sP 2>/dev/null', self.Stage1SettingsComplete)
 				else:
-					self.session.open(MessageBox, _("Your nework interface %s is not properly configured, so a network scan cannot be done.\nPlease configure the interface and try again.") % self.iface, type=MessageBox.TYPE_ERROR)
+					self.session.open(MessageBox, _("Your network interface %s is not properly configured, so a network scan cannot be done.\nPlease configure the interface and try again.") % self.iface, type=MessageBox.TYPE_ERROR)
 					self.setStatus('error')
 					self["shortcuts"].setEnabled(True)
 					return
