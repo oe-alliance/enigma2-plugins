@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1527 $
-$Date: 2018-05-20 16:41:35 +0200 (Sun, 20 May 2018) $
-$Id: FritzCallFBF.py 1527 2018-05-20 14:41:35Z michael $
+$Revision: 1534 $
+$Date: 2018-08-17 14:16:52 +0200 (Fri, 17 Aug 2018) $
+$Id: FritzCallFBF.py 1534 2018-08-17 12:16:52Z michael $
 '''
 
 # C0111 (Missing docstring)
@@ -3609,15 +3609,20 @@ class FritzCallFBF_upnp():
 
 		self.info("Boxinfo: " + repr(boxInfo))
 
+		if "internet" in boxData and "led" in boxData["internet"] and boxData["internet"]["led"] == "globe_online":
+			upTime = _("Unknown")
+			if "txt" in boxData["internet"] and len(boxData["internet"]["txt"][0]) >= 1:
+				upTime = upTime + ' (' + boxData["internet"]["txt"][0].encode("utf-8").strip() + ')'
+
 		provider = None
 		if "internet" in boxData and "txt" in boxData["internet"]:
 			for item in boxData["internet"]["txt"]:
 				item = item.encode("utf-8")
-				found = re.match(r'.*verbunden seit (.*)', item, re.S)
+				found = re.match(r'.*verbunden (?:als WLAN-Repeater )?seit (.*)', item, re.S)
 				if found:
 					upTime = found.group(1)
 				else:
-					found = re.match(r'.*connected since (.*)', item, re.S)
+					found = re.match(r'.*connected (?:as WIFI repeater )?since (.*)', item, re.S)
 					if found:
 						upTime = found.group(1)
 				found = re.match(r'\s*Anbieter: (.*)', item, re.S)
@@ -3634,6 +3639,13 @@ class FritzCallFBF_upnp():
 					found = re.match(r'IP(?:v4)? address: (.*)', item, re.S)
 					if found:
 						ipAddress = found.group(1)
+
+		if "internet" in boxData and "down" in boxData["internet"] and "up" in boxData["internet"]:
+			connData = boxData["internet"]
+			internetSpeed = connData["down"].encode("utf-8") + " / " + connData["up"].encode("utf-8")
+			internetSpeed = internetSpeed.replace('\\', '').decode("utf-8").encode("utf-8")
+		else:
+			internetSpeed = None
 
 		self.info("upTime: " + repr(upTime))
 		self.info("provider: " + repr(provider))
@@ -3737,6 +3749,8 @@ class FritzCallFBF_upnp():
 				dslState[1] = connData["down"].encode("utf-8") + " / " + connData["up"].encode("utf-8")
 				dslState[1] = dslState[1].replace('\\', '').decode("utf-8").encode("utf-8")
 				dslState[2] = connData["title"].encode("utf-8")
+				if internetSpeed:
+					dslState[1] = dslState[1] + "; Internet: " + internetSpeed
 		self.info("dslState: " + repr(dslState))
 
 		wlan24NetName = ""
@@ -4058,6 +4072,7 @@ class FritzCallFBF_upnp():
 			linkP.write(result)
 			linkP.close()
 
+		count = 0
 		contacts = root.iterfind(".//contact")
 		for contact in contacts:
 			name = contact.find("./person/realName").text.replace(",", "")
@@ -4068,28 +4083,33 @@ class FritzCallFBF_upnp():
 				thisname = name.encode("utf-8")
 				thisnumber = cleanNumber(number.text)
 				if thisnumber in self.phonebook.phonebook:
+					self.info("Number already exists, skipping '''%s'''", (__(thisnumber)))
 					continue
 
 				if not thisnumber:
 					self.info("Ignoring entry with empty number for '''%s'''", (__(thisname)))
 					continue
 				else:
-					dummy = _("fax_work") + _("fax_home") + _("pager") # this is just to trigger localisation
-					thisType = number.attrib["type"]
+					dummy = _("fax_work") + _("fax_home") + _("pager") # this is just to trigger localisation; WTF?!?!
+					thisType = number.attrib["type"].encode("utf-8")
+					# self.debug("thisType: %s",  thisType)
 					if thisType.startswith('label:'):
 						thisType = thisType[6:]
 					if not config.plugins.FritzCall.fritzphonebookShowInternal.value and (thisType == "intern" or thisType == "memo" or thisType == ""):
+						self.info("Skipping internal number %s", (__(thisnumber)))
 						continue
 					if config.plugins.FritzCall.showType.value and thisType:
 						thisname = thisname + " (" + _(thisType) + ")"
-					if config.plugins.FritzCall.showShortcut.value and number.attrib["quickdial"]:
-						thisname = thisname + ", " + _("Shortcut") + ": " + number.attrib["quickdial"]
-					if config.plugins.FritzCall.showVanity.value and number.attrib["vanity"]:
-						thisname = thisname + ", " + _("Vanity") + ": " + number.attrib["vanity"]
+					if config.plugins.FritzCall.showShortcut.value and "quickdial" in number.attrib and number.attrib["quickdial"]:
+						thisname = thisname + ", " + _("Shortcut") + ": " + number.attrib["quickdial"].encode("utf-8")
+					if config.plugins.FritzCall.showVanity.value and "vanity" in number.attrib and number.attrib["vanity"]:
+						thisname = thisname + ", " + _("Vanity") + ": " + number.attrib["vanity"].encode("utf-8")
 
-					# self.debug("Adding '''%s''' with '''%s'''" % (__(thisname.strip()), __(thisnumber, False)))
+					# self.debug("Adding '''%s''' with '''%s'''", __(thisname.strip()), __(thisnumber, False))
 					# Beware: strings in phonebook.phonebook have to be in utf-8!
 					self.phonebook.phonebook[thisnumber] = thisname
+					count += 1
+		self.info("Added %d phone numbers", count)
 
 	def changeWLAN(self, statusWLAN, callback):
 		'''
