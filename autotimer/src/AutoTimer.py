@@ -121,42 +121,48 @@ class AutoTimer:
 		)
 
 # Configuration
-	def readXml(self):
-		# Abort if no config found
-		if not os_path.exists(XML_CONFIG):
-			print("[AutoTimer] No configuration file present")
-			return
-
-		# Parse if mtime differs from whats saved
-		mtime = os_path.getmtime(XML_CONFIG)
-		if mtime == self.configMtime:
-			print("[AutoTimer] No changes in configuration, won't parse")
-			return
-
-		# Save current mtime
-		self.configMtime = mtime
-
+	def readXml(self, **kwargs):
+		if "xml_string" in kwargs:
+			# reset time
+			self.configMtime = -1
 		# Parse Config
-		try:
-			configuration = cet_parse(XML_CONFIG).getroot()
-		except:
-			try:
-				if os_path.exists(XML_CONFIG + "_old"):
-					os_rename(XML_CONFIG + "_old", XML_CONFIG + "_old(1)")
-				os_rename(XML_CONFIG, XML_CONFIG + "_old")
-				print("[AutoTimer] autotimer.xml is corrupt rename file to /etc/enigma2/autotimer.xml_old")
-			except:
-				pass
-			if Standby.inStandby is None:
-				AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "), type = MessageBox.TYPE_ERROR, timeout = 0, id = "AutoTimerLoadFailed")
+			configuration = cet_fromstring(kwargs["xml_string"])
+		else:
+		# Abort if no config found
+			if not os_path.exists(XML_CONFIG):
+				print("[AutoTimer] No configuration file present")
+				return
 
-			self.timers = []
-			self.defaultTimer = preferredAutoTimerComponent(
-				0,		# Id
-				"",		# Name
-				"",		# Match
-				True	# Enabled
-			)
+			# Parse if mtime differs from whats saved
+			mtime = os_path.getmtime(XML_CONFIG)
+			if mtime == self.configMtime:
+				print("[AutoTimer] No changes in configuration, won't parse")
+				return
+
+			# Save current mtime
+			self.configMtime = mtime
+
+			# Parse Config
+			try:
+				configuration = cet_parse(XML_CONFIG).getroot()
+			except:
+				try:
+					if os_path.exists(XML_CONFIG + "_old"):
+						os_rename(XML_CONFIG + "_old", XML_CONFIG + "_old(1)")
+					os_rename(XML_CONFIG, XML_CONFIG + "_old")
+					print("[AutoTimer] autotimer.xml is corrupt rename file to /etc/enigma2/autotimer.xml_old")
+				except:
+					pass
+				if Standby.inStandby is None:
+					AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "), type = MessageBox.TYPE_ERROR, timeout = 0, id = "AutoTimerLoadFailed")
+
+				self.timers = []
+				self.defaultTimer = preferredAutoTimerComponent(
+					0,		# Id
+					"",		# Name
+					"",		# Match
+					True	# Enabled
+				)
 
 			try:
 				self.writeXml()
@@ -178,13 +184,32 @@ class AutoTimer:
 		)
 		self.uniqueTimerId = len(self.timers)
 
-	def getXml(self):
-		return buildConfig(self.defaultTimer, self.timers, webif = True)
+	def getXml(self, webif = True):
+		return buildConfig(self.defaultTimer, self.timers, webif)
 
 	def writeXml(self):
 		file = open(XML_CONFIG, 'w')
 		file.writelines(buildConfig(self.defaultTimer, self.timers))
 		file.close()
+
+	def writeXmlTimer(self, timers):
+		return ''.join(buildConfig(self.defaultTimer, timers))
+
+	def readXmlTimer(self, xml_string):
+		# Parse xml string
+		configuration = cet_fromstring(xml_string)
+		
+		parseConfig(
+			configuration,
+			self.timers,
+			configuration.get("version"),
+			self.uniqueTimerId,
+			self.defaultTimer
+		)
+		self.uniqueTimerId += 1
+		
+		# reset time
+		self.configMtime = -1
 
 # Manage List
 	def add(self, timer):

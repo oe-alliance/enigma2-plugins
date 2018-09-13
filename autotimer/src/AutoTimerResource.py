@@ -17,7 +17,7 @@ from plugin import autotimer, AUTOTIMER_VERSION
 
 from AutoTimerSettings import getAutoTimerSettingsDefinitions
 
-API_VERSION = "1.5"
+API_VERSION = "1.6"
 
 class AutoTimerBaseResource(resource.Resource):
 	def returnResult(self, req, state, statetext):
@@ -138,12 +138,15 @@ class AutoTimerListAutoTimerResource(AutoTimerBaseResource):
 			autotimer.readXml()
 		except Exception as e:
 			return self.returnResult(req, False, _("Couldn't load config file!") + '\n' + str(e))
-
+		webif = True
+		p = req.args.get('webif')
+		if p:
+			webif = not(p[0] == "false")
 		# show xml
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application/xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
-		return ''.join(autotimer.getXml())
+		return ''.join(autotimer.getXml(webif))
 
 class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 	def render(self, req):
@@ -155,6 +158,26 @@ class AutoTimerRemoveAutoTimerResource(AutoTimerBaseResource):
 			return self.returnResult(req, True, _("AutoTimer was removed"))
 		else:
 			return self.returnResult(req, False, _("missing parameter \"id\""))
+
+class AutoTimerAddXMLAutoTimerResource(AutoTimerBaseResource):
+	def render_POST(self, req):
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application/xhtml+xml;' )
+		req.setHeader('charset', 'UTF-8')	
+		autotimer.readXmlTimer(req.args['xml'][0])
+		if config.plugins.autotimer.always_write_config.value:
+			autotimer.writeXml()
+		return self.returnResult(req, True, _("AutoTimer was added successfully"))
+		
+class AutoTimerUploadXMLConfigurationAutoTimerResource(AutoTimerBaseResource):
+	def render_POST(self, req):
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application/xhtml+xml;' )
+		req.setHeader('charset', 'UTF-8')	
+		autotimer.readXml(xml_string=req.args['xml'][0])
+		if config.plugins.autotimer.always_write_config.value:
+			autotimer.writeXml()
+		return self.returnResult(req, True, _("AutoTimers were changed successfully"))	
 
 class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 	# TODO: recheck if we can modify regular config parser to work on this
