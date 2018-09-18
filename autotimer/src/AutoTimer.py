@@ -4,7 +4,7 @@ from __future__ import print_function
 from . import _
 
 # Plugins Config
-from xml.etree.cElementTree import parse as cet_parse
+from xml.etree.cElementTree import parse as cet_parse, fromstring as cet_fromstring
 from os import path as os_path,rename as os_rename
 from AutoTimerConfiguration import parseConfig, buildConfig
 
@@ -121,49 +121,57 @@ class AutoTimer:
 		)
 
 # Configuration
-	def readXml(self):
-		# Abort if no config found
-		if not os_path.exists(XML_CONFIG):
-			print("[AutoTimer] No configuration file present")
-			return
+	def readXml(self, **kwargs):
+		if "xml_string" in kwargs:
+			# reset time
+			self.configMtime = -1
+			# Parse Config
+			configuration = cet_fromstring(kwargs["xml_string"])
+			# TODO : check config and create backup if wrong
+		else:
 
-		# Parse if mtime differs from whats saved
-		mtime = os_path.getmtime(XML_CONFIG)
-		if mtime == self.configMtime:
-			print("[AutoTimer] No changes in configuration, won't parse")
-			return
-
-		# Save current mtime
-		self.configMtime = mtime
-
-		# Parse Config
-		try:
-			configuration = cet_parse(XML_CONFIG).getroot()
-		except:
+			# Abort if no config found
+			if not os_path.exists(XML_CONFIG):
+				print("[AutoTimer] No configuration file present")
+				return
+	
+			# Parse if mtime differs from whats saved
+			mtime = os_path.getmtime(XML_CONFIG)
+			if mtime == self.configMtime:
+				print("[AutoTimer] No changes in configuration, won't parse")
+				return
+	
+			# Save current mtime
+			self.configMtime = mtime
+	
+			# Parse Config
 			try:
-				if os_path.exists(XML_CONFIG + "_old"):
-					os_rename(XML_CONFIG + "_old", XML_CONFIG + "_old(1)")
-				os_rename(XML_CONFIG, XML_CONFIG + "_old")
-				print("[AutoTimer] autotimer.xml is corrupt rename file to /etc/enigma2/autotimer.xml_old")
-			except:
-				pass
-			if Standby.inStandby is None:
-				AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "), type = MessageBox.TYPE_ERROR, timeout = 0, id = "AutoTimerLoadFailed")
-
-			self.timers = []
-			self.defaultTimer = preferredAutoTimerComponent(
-				0,		# Id
-				"",		# Name
-				"",		# Match
-				True	# Enabled
-			)
-
-			try:
-				self.writeXml()
 				configuration = cet_parse(XML_CONFIG).getroot()
 			except:
-				print("[AutoTimer] fatal error, the autotimer.xml cannot create")
-				return
+				try:
+					if os_path.exists(XML_CONFIG + "_old"):
+						os_rename(XML_CONFIG + "_old", XML_CONFIG + "_old(1)")
+					os_rename(XML_CONFIG, XML_CONFIG + "_old")
+					print("[AutoTimer] autotimer.xml is corrupt rename file to /etc/enigma2/autotimer.xml_old")
+				except:
+					pass
+				if Standby.inStandby is None:
+					AddPopup(_("The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "), type = MessageBox.TYPE_ERROR, timeout = 0, id = "AutoTimerLoadFailed")
+	
+				self.timers = []
+				self.defaultTimer = preferredAutoTimerComponent(
+					0,		# Id
+					"",		# Name
+					"",		# Match
+					True	# Enabled
+				)
+	
+				try:
+					self.writeXml()
+					configuration = cet_parse(XML_CONFIG).getroot()
+				except:
+					print("[AutoTimer] fatal error, the autotimer.xml cannot create")
+					return
 
 		# Empty out timers and reset Ids
 		del self.timers[:]
@@ -178,13 +186,32 @@ class AutoTimer:
 		)
 		self.uniqueTimerId = len(self.timers)
 
-	def getXml(self):
-		return buildConfig(self.defaultTimer, self.timers, webif=True)
+	def getXml(self, webif = True):
+		return buildConfig(self.defaultTimer, self.timers, webif)
 
 	def writeXml(self):
 		f = open(XML_CONFIG, 'w')
 		f.writelines(buildConfig(self.defaultTimer, self.timers))
 		f.close()
+
+	def writeXmlTimer(self, timers):
+		return ''.join(buildConfig(self.defaultTimer, timers))
+
+	def readXmlTimer(self, xml_string):
+		# Parse xml string
+		configuration = cet_fromstring(xml_string)
+		
+		parseConfig(
+			configuration,
+			self.timers,
+			configuration.get("version"),
+			self.uniqueTimerId,
+			self.defaultTimer
+		)
+		self.uniqueTimerId += 1
+		
+		# reset time
+		self.configMtime = -1
 
 # Manage List
 	def add(self, timer):

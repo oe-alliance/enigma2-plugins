@@ -2,8 +2,8 @@
 
 <!-- reverselookup.xml
 
-$Revision: 1501 $
-$Date: 2018-01-13 13:58:25 +0100 (Sat, 13 Jan 2018) $
+$Revision: 1532 $
+$Date: 2018-07-26 16:52:05 +0200 (Thu, 26 Jul 2018) $
 
 	 The syntax of this file is fairly self-explanatory
      However, a few things need to be said. First and foremost
@@ -520,14 +520,6 @@ $Date: 2018-01-13 13:58:25 +0100 (Sat, 13 Jan 2018) $
 		</website>
 	</country>
 	<country code="+31">
-		<website name="www.gevonden.cc" url="http://www.gevonden.cc/telefoonnummer/$NUMBER/lastname/" prefix="0" numLines="5">
-			<entry>
-				<name>&lt;div class="resultaat"&gt;&amp;nbsp;&lt;b&gt;([^&lt;]+)&lt;/b&gt;&lt;br /&gt;&amp;nbsp;[^&amp;]+&amp;nbsp;&lt;br /&gt;&amp;nbsp;\d+ [^&lt;]+&lt;br /&gt;</name>
-				<street>&lt;div class="resultaat"&gt;&amp;nbsp;&lt;b&gt;[^&lt;]+&lt;/b&gt;&lt;br /&gt;&amp;nbsp;([^&amp;]+)&amp;nbsp;&lt;br /&gt;&amp;nbsp;\d+ [^&lt;]+&lt;br /&gt;</street>
-				<zipcode>&lt;div class="resultaat"&gt;&amp;nbsp;&lt;b&gt;[^&lt;]+&lt;/b&gt;&lt;br /&gt;&amp;nbsp;[^&amp;]+&amp;nbsp;&lt;br /&gt;&amp;nbsp;(\d+ [^ ]+)&amp;nbsp;[^&lt;]+&lt;br /&gt;</zipcode>
-				<city>&lt;div class="resultaat"&gt;&amp;nbsp;&lt;b&gt;[^&lt;]+&lt;/b&gt;&lt;br /&gt;&amp;nbsp;[^&amp;]+&amp;nbsp;&lt;br /&gt;&amp;nbsp;\d+ [^ ]+&amp;nbsp;([^&lt;]+)&lt;br /&gt;</city>
-			</entry>
-		</website>
 		<website name="www.nummerzoeker.com" url="http://www.nummerzoeker.com/?phone=$NUMBER" prefix="0" numLines="5">
 			<entry>
 				<name>&lt;td\s+class=&quot;nowrap&quot;&gt;[\d]*-[\d]*&lt;/td&gt;\s*&lt;td&gt;([^&lt;]*)&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;[^&lt;]*&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;[^&lt;]*&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;[^&lt;]*&lt;/td&gt;</name>
@@ -536,12 +528,20 @@ $Date: 2018-01-13 13:58:25 +0100 (Sat, 13 Jan 2018) $
 				<city>&lt;td\s+class=&quot;nowrap&quot;&gt;[\d]*-[\d]*&lt;/td&gt;\s*&lt;td&gt;[^&lt;]*&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;[^&lt;]*&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;[^&lt;]*&lt;/td&gt;\s*&lt;td\s+class=&quot;nowrap&quot;&gt;([^&lt;]*)&lt;/td&gt;</city>
 			</entry>
 		</website>
-		<website name="www.gebeld.nl" url="http://www.gebeld.nl/content.asp?zapp=zapp&amp;land=&amp;zoek=Nummer&amp;searchfield1=fullnumber&amp;searchfield2=&amp;queryfield1=$NUMBER&amp;queryfield2=&amp;fuzzy=&amp;volll=&amp;database=open&amp;tld=" prefix="0">
+		<website name="www.gebeld.nl" url="http://www.gebeld.nl/index.php?page=1&amp;queryfield1=$NUMBER&amp;searchfield1=fullnumber&amp;action=Zoeken" prefix="0">
 			<entry>
-				<name>&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;([^&lt;]*)&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+</name>
-				<street>&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;([^&lt;]*)&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+</street>
-				<city>&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&amp;]*&amp;nbsp;([^&lt;]*)&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+</city>
-				<zipcode>&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+&lt;tr bgcolor=&quot;[^&quot;]*&quot;&gt;\s*&lt;TD&gt;&lt;/TD&gt;\s*&lt;td width=&quot;[^&quot;]*&quot;&gt;&amp;nbsp;([^&amp;]*)&amp;nbsp;[^&lt;]*&lt;/td&gt;\s+&lt;TD&gt;&lt;/TD&gt;&lt;/tr&gt;\s+</zipcode>
+				<name>&lt;div class=&quot;small-12 large-4 columns information&quot;&gt;\s*([^&lt;]+)&lt;BR&gt;\s*[^&lt;]+&lt;br&gt;\s*\w+ [^&lt;]+&lt;br&gt;\s+</name>
+				<street>&lt;div class=&quot;small-12 large-4 columns information&quot;&gt;\s*[^&lt;]+&lt;BR&gt;\s*([^&lt;]+)&lt;br&gt;\s*\w+ [^&lt;]+&lt;br&gt;\s+</street>
+				<city>&lt;div class=&quot;small-12 large-4 columns information&quot;&gt;\s*[^&lt;]+&lt;BR&gt;\s*[^&lt;]+&lt;br&gt;\s*\w+ ([^&lt;]+)&lt;br&gt;\s+</city>
+				<zipcode>&lt;div class=&quot;small-12 large-4 columns information&quot;&gt;\s*[^&lt;]+&lt;BR&gt;\s*[^&lt;]+&lt;br&gt;\s*(\w+) [^&lt;]+&lt;br&gt;\s+</zipcode>
+			</entry>
+		</website>
+		<website name="mijnnummer.info" url="https://mijnnummer.info/?phonenumber=$NUMBER&amp;search=Zoeken" prefix="0" numLines="5">
+			<entry>
+				<name>&lt;tr class=&quot;c0&quot;&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/br&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;([^&lt;]+)&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/br&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;</name>
+				<street>&lt;tr class=&quot;c0&quot;&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/br&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;([^&lt;]+)&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/br&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;</street>
+				<zipcode>&lt;tr class=&quot;c0&quot;&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/br&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/br&gt;([^&lt;]+)&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;</zipcode>
+				<city>&lt;tr class=&quot;c0&quot;&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/br&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/br&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;([^&lt;]+)&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;</city>
 			</entry>
 		</website>
 	</country>
