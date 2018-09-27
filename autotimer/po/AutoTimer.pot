@@ -860,7 +860,7 @@ msgstr ""
 #: ../src/AutoTimerEditor.py:573
 msgid ""
 "Restrict autotimer to bouquets.\n"
-"Use the blue key to edit the bouquet filter"
+"Use the blue key to edit the bouquet filter."
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:574
@@ -917,7 +917,7 @@ msgid ""
 "Select \"exact match\" to enforce \"Match title\" to match exactly, "
 "\"partial match\" if you only want to search for a part of the event title "
 "or \"description match\" if you only want to search for a part of the event "
-"description"
+"description."
 msgstr ""
 
 #: ../src/AutoTimerImporter.py:60 ../src/AutoTimerImporter.py:61

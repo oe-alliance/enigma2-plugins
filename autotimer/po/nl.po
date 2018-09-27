@@ -139,7 +139,7 @@ msgstr "AutoTimer verwijderd"
 msgid "AutoTimers"
 msgstr "AutoTimers"
 
-msgid "AutoTimers were changed successfully"
+msgid "AutoTimers were changed successfully."
 msgstr "AutoTimers zijn succesvol aangepast."
 
 msgid "Autotimer Settings"
@@ -610,7 +610,7 @@ msgstr "Beperk \"na event\" tot een zekere tijdspanne?"
 
 msgid ""
 "Restrict autotimer to bouquets.\n"
-"Use the blue key to edit the bouquet filter"
+"Use the blue key to edit the bouquet filter."
 msgstr ""
 "Beperk autotimer tot bouquetten.\n"
 "Gebruik de blauwe knop voor wijzigen van de bouquet filter."
@@ -656,7 +656,7 @@ msgstr "Hoe strikt zoeken"
 msgid "Search type"
 msgstr "Zoektype"
 
-msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"
+msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr "Kies \"exacte overeenkomst\" om af te dwingen dat \"Titel overeenkomstig\" alleen exacte overeenkomsten zoekt, \"gedeeltelijke overeenkomst\" als u slechts wilt dat op een deel van de titelnaam gezocht wordt \"beschrijving komt overeen\" als u dat deel in de beschrijving wilt zoeken."
 
 msgid "Select a timer to import"

@@ -862,7 +862,7 @@ msgstr "Τύπος αναζήτησης"
 #: AutoTimerEditor.py:567
 msgid ""
 "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of "
-"the event title or \"description match\" if you only want to search for a part of the event description"
+"the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr ""
 "Επιλέξτε \"ακριβής συσχέτιση\" για να αναγκάσετε τον ακριβή συσχετισμό του \"Συσχέτιση τίτλου\", \"μερική συσχέτιση\" αν "
 "θέλετε να ψάξετε μόνο ένα μέρος του τίτλου ή \"συσχετισμός περιγραφής\" αν θέλετε να ψάξετε μόνο ένα μέρος της περιγραφής του "

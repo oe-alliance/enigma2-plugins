@@ -449,7 +449,7 @@ msgstr "Procura rigorosa"
 msgid "Search type"
 msgstr "Tipo de procura"
 
-msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"
+msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr "Selecionar \"correspondência exata\" para forçar \"título correspondente\" a corresponder exatamente, \"parcialmente correspondente\" se pretende procurar por uma parte do evento ou \"descrição correspondente\" se pretende procurar por uma parte da descrição do evento"
 
 msgid "Select a timer to import"

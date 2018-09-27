@@ -961,7 +961,7 @@ msgstr "\"Nach dem Event\" nur in einem bestimmten Zeitraum setzen?"
 #: ../src/AutoTimerEditor.py:573
 msgid ""
 "Restrict autotimer to bouquets.\n"
-"Use the blue key to edit the bouquet filter"
+"Use the blue key to edit the bouquet filter."
 msgstr ""
 "Definiere die Einschränkung auf bestimmte Favoriten\n"
 "Die blaue Taste drücken, um Favoriten zu editieren"
@@ -1028,7 +1028,7 @@ msgid ""
 "Select \"exact match\" to enforce \"Match title\" to match exactly, "
 "\"partial match\" if you only want to search for a part of the event title "
 "or \"description match\" if you only want to search for a part of the event "
-"description"
+"description."
 msgstr ""
 "Wähle \"gesamter Titel\" damit \"Finde in Titel\" genau mit dem "
 "Sendungstitel übereinstimmen muss, oder \"Teil des Titels\" wenn dies nur "
@@ -1844,6 +1844,10 @@ msgstr "Umschalten"
 #: ../src/AutoTimerEditor.py:189
 msgid "zap and record"
 msgstr "Umschalten + Aufnehmen"
+
+#: ../src/AutoTimerResource.py:180
+msgid "AutoTimers were changed successfully."
+msgstr "AutoTimer wurde erfolgreich geändert."
 
 #~ msgid "Restriction to certain services (edit in services menu)"
 #~ msgstr "Beschränkung auf Sender (editieren im Sender-Menü)"
