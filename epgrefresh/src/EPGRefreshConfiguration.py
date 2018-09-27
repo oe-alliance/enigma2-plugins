@@ -166,11 +166,11 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 				if config.ParentalControl.servicepinactive.value:
 					self.list.append(getConfigListEntry(_("Skip protected Services"), config.plugins.epgrefresh.skipProtectedServices, _("Should protected services be skipped if refresh was started in interactive-mode?"), False))
 				self.list.append(getConfigListEntry(_("Show Setup in extension menu"), config.plugins.epgrefresh.show_in_extensionsmenu, _("Enable this to be able to access the EPGRefresh configuration from within the extension menu."), False))
-				self.list.append(getConfigListEntry(_("Show 'EPGRefresh Start now' in extension menu"), config.plugins.epgrefresh.show_run_in_extensionsmenu, _("Enable this to be able to start the EPGRefresh from within the extension menu."), False))
-				self.list.append(getConfigListEntry(_("Show popup when refresh starts and ends"), config.plugins.epgrefresh.enablemessage, _("This setting controls whether or not an informational message will be shown at start and completion of refresh."), False))
-				self.list.append(getConfigListEntry(_("Wake up from standby for EPG refresh"), config.plugins.epgrefresh.wakeup, _("If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."), False))
-				self.list.append(getConfigListEntry(_("Force scan even if receiver is in use"), config.plugins.epgrefresh.force, _("This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."), False))
-				self.list.append(getConfigListEntry(_("Shutdown after EPG refresh"), config.plugins.epgrefresh.afterevent, _("This setting controls whether the receiver should be set to standby after refresh is completed."), False))
+				self.list.append(getConfigListEntry(_("Show 'EPGRefresh Start now' in extension menu."), config.plugins.epgrefresh.show_run_in_extensionsmenu, _("Enable this to be able to start the EPGRefresh from within the extension menu."), False))
+				self.list.append(getConfigListEntry(_("Show popup when refresh starts and ends."), config.plugins.epgrefresh.enablemessage, _("This setting controls whether or not an informational message will be shown at start and completion of refresh."), False))
+				self.list.append(getConfigListEntry(_("Wake up from standby for EPG refresh."), config.plugins.epgrefresh.wakeup, _("If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."), False))
+				self.list.append(getConfigListEntry(_("Force scan even if receiver is in use."), config.plugins.epgrefresh.force, _("This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."), False))
+				self.list.append(getConfigListEntry(_("Shutdown after EPG refresh."), config.plugins.epgrefresh.afterevent, _("This setting controls whether the receiver should be set to standby after refresh is completed."), False))
 				try:
 					# try to import autotimer module to check for its existence
 					from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
