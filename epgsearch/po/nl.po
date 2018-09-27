@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-07 12:36+0200\n"
-"PO-Revision-Date: 2018-04-24 21:38+0200\n"
+"POT-Creation-Date: 2018-09-22 13:23+0100\n"
+"PO-Revision-Date: 2018-09-27 10:50+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl_NL\n"
@@ -16,415 +16,303 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/EPGSearch.py:141
 msgid "%e/%m, %H:%M"
 msgstr "%e/%m, %H:%M"
 
-#: src/EPGSearch.py:180
-msgid "Stream"
-msgstr "Stream"
-
-#: src/EPGSearch.py:183
-msgid "DVB-T"
-msgstr "DVB-T"
-
-#: src/EPGSearch.py:185
-msgid "DVB-C"
-msgstr "DVB-C"
-
-#: src/EPGSearch.py:213
-msgid "New Search"
-msgstr "Nieuwe zoekopdracht"
-
-#: src/EPGSearch.py:214
-msgid "Add AutoTimer"
-msgstr "Autotimer toevoegen"
-
-#: src/EPGSearch.py:234
-msgid "IMDb Search"
-msgstr "Zoeken in IMDb"
-
-#: src/EPGSearch.py:235
-msgid "Add Timer"
-msgstr "Timer toevoegen"
-
-#: src/EPGSearch.py:241
-msgid "Close dialog"
-msgstr "Sluit dialoog"
-
-#: src/EPGSearch.py:247
-msgid "Exit EPG Search"
-msgstr "EPG Search afsluiten"
-
-#: src/EPGSearch.py:248
-msgid "Zap to channel"
-msgstr "Zap naar zender"
-
-#: src/EPGSearch.py:249 src/EPGSearch.py:274 src/EPGSearch.py:275
-#: src/EPGSearch.py:276
-msgid "Show detailed event information"
-msgstr "Toon gedetailleerde programma informatie"
-
-#: src/EPGSearch.py:254
-msgid "IMDB search for highlighted event"
-msgstr "Zoek op IMDb naar geselecteerd programma"
-
-#: src/EPGSearch.py:255
-msgid "Add/remove/edit timer for highlighted event"
-msgstr "Toevoegen/verwijder/bewerk timer voor het geselecteerde programma"
-
-#: src/EPGSearch.py:256
-msgid "Enter new search"
-msgstr "Opnieuw zoeken"
-
-#: src/EPGSearch.py:257 src/EPGSearch.py:441
-msgid "Show search history"
-msgstr "Toon zoekgeschiedenis"
-
-#: src/EPGSearch.py:258
-msgid "Add an AutoTimer for highlighted event"
-msgstr "Autotimer toevoegen voor het geselecteerde programma"
-
-#: src/EPGSearch.py:259
-msgid "Show AutoTimer list"
-msgstr "Toon autotimerlijst"
-
-#: src/EPGSearch.py:264
-msgid "Add a record timer for highlighted event"
-msgstr "Opnametimer toevoegen voor het geselecteerde programma"
-
-#: src/EPGSearch.py:265
-msgid "Add a zap timer for highlighted event"
-msgstr "Zaptimer toevoegen voor het geselecteerde programma"
-
-#: src/EPGSearch.py:270 src/EPGSearch.py:273 src/EPGSearch.py:283
-msgid "Move down a page"
-msgstr "Ga één pagina omlaag"
-
-#: src/EPGSearch.py:271 src/EPGSearch.py:272 src/EPGSearch.py:282
-msgid "Move up a page"
-msgstr "Ga één pagina omhoog"
-
-#: src/EPGSearch.py:277
-msgid "Setup menu"
-msgstr "Instellingenmenu"
-
-#: src/EPGSearch.py:284
-msgid "Move up"
-msgstr "Verplaats naar boven"
-
-#: src/EPGSearch.py:285
-msgid "Move down"
-msgstr "Verplaats naar beneden"
-
-#: src/EPGSearch.py:321
-msgid "EPG Search"
-msgstr "EPG Search"
-
-#: src/EPGSearch.py:435
-msgid "Enter text to search for"
-msgstr "Voer de te zoeken tekst in"
-
-#: src/EPGSearch.py:439
-msgid "Import from Timer"
-msgstr "Importeren uit timer"
-
-#: src/EPGSearch.py:440
-msgid "Import from EPG"
-msgstr "Importeren uit EPG"
-
-#: src/EPGSearch.py:446
-msgid "Import from AutoTimer"
-msgstr "Importeren uit autotimer"
-
-#: src/EPGSearch.py:447
-msgid "Save search as AutoTimer"
-msgstr "Bewaar als autotimer"
-
-#: src/EPGSearch.py:450
-msgid "Open selected in IMDb"
-msgstr "Open in IMDb"
-
-#: src/EPGSearch.py:451 src/EPGSearch.py:573
-msgid "Setup"
-msgstr "Instellingen"
-
-#: src/EPGSearch.py:453
-msgid "EPG Search setup"
-msgstr "EPG Search instellingen"
-
-#: src/EPGSearch.py:479
-#, python-format
-msgid "Could not read AutoTimer timer list: %s"
-msgstr "Kan autotimer timer-lijst niet lezen : %s"
-
-#: src/EPGSearch.py:485 src/EPGSearch.py:541
-msgid "Select text to search for"
-msgstr "Selecteer te zoeken tekst..."
-
-#: src/EPGSearch.py:543
-msgid "No history"
-msgstr "Geen geschiedenis"
-
-#: src/EPGSearch.py:569
-msgid "All services"
-msgstr "Alle zenders"
-
-#: src/EPGSearch.py:570
-msgid "All bouquets"
-msgstr "Alle boeketten"
-
-#: src/EPGSearch.py:571
-msgid "Current bouquet"
-msgstr "Huidige boeket"
-
-#: src/EPGSearch.py:572
-msgid "Current service"
-msgstr "Huidige zender"
-
-#: src/EPGSearch.py:576
-msgid "Search in..."
-msgstr "Zoek in..."
-
-#: src/EPGSearch.py:600
-msgid "Searching..."
-msgstr "Zoeken..."
-
-#: src/EPGSearch.py:800 src/EPGSearchSetup.py:145 src/__init__.py:184
-msgid "include"
-msgstr "toevoegen"
-
-#: src/EPGSearch.py:818 src/EPGSearchSetup.py:76
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: src/EPGSearch.py:819 src/EPGSearchSetup.py:77
-msgid "OK"
-msgstr "OK"
-
-#: src/EPGSearch.py:832
-msgid "Select a timer to search"
-msgstr "Selecteer te zoeken timer"
-
-#: src/EPGSearch.py:855
-msgid "Channel Selection"
-msgstr "Zenderkeuze"
-
-#: src/EPGSearch.py:877
-msgid "Search"
-msgstr "Zoeken"
-
-#: src/EPGSearchSetup.py:50
-msgid "EPGSearch Setup"
-msgstr "EPG Search instellingen"
-
-#: src/EPGSearchSetup.py:89
-msgid "Search scope"
-msgstr "Zoekbereik"
-
-#: src/EPGSearchSetup.py:89
-msgid ""
-"Control where to search in the EPG. When 'all bouquets' is set, all bouquets "
-"are searched, even if 'Enable multiple bouquets' is disabled."
-msgstr ""
-"Bepaal waar te zoeken in de EPG. Indien 'alle boeketten' is gekozen, wordt "
-"daadwerkelijk in alle boeketten gezocht, ook als 'Meerdere boeketten "
-"toestaan' is uitgeschakeld."
-
-#: src/EPGSearchSetup.py:92
-msgid "Default scope when asked"
-msgstr "Standaard bereik wanneer gevraagd"
-
-#: src/EPGSearchSetup.py:92
-msgid "Sets the default search scope when the user is asked."
-msgstr "Selecteer het standaard bereik wanneer de gebruiker wordt gevraagd."
-
-#: src/EPGSearchSetup.py:94
-msgid "Show orbital position"
-msgstr "Toon orbitale positie"
-
-#: src/EPGSearchSetup.py:94
-msgid "Show satellite orbital positions in the search results."
-msgstr "Toon satelliet orbitale positie in zoekresultaten."
-
-#: src/EPGSearchSetup.py:96
-msgid "Search type"
-msgstr "Zoektype"
-
-#: src/EPGSearchSetup.py:96
-msgid "Set type of match used to compare program titles with the search string"
-msgstr ""
-"Selecteer het soort overeenkomst tussen programma titels en zoekopdracht."
-
-#: src/EPGSearchSetup.py:97
-msgid "Search strictness"
-msgstr "Zoekbeperkingen"
-
-#: src/EPGSearchSetup.py:97
-msgid "Is the search case-sensitive or case-insensitive"
-msgstr "Hoofdlettergevoelig zoeken"
-
-#: src/EPGSearchSetup.py:98
-msgid "Show in plugin browser"
-msgstr "Toon in applicatie overzicht"
-
-#: src/EPGSearchSetup.py:98
-msgid ""
-"Enable this to allow access to EPG Search from within the plugin browser."
-msgstr "Schakel dit in om EPG Search vanuit de pluginbrowser te kunnen openen."
-
-#: src/EPGSearchSetup.py:99
-msgid "Length of history"
-msgstr "Lengte van geschiedenis"
-
-#: src/EPGSearchSetup.py:99
-msgid ""
-"Maximum number of entries in the search history. Set this to 0 to disable "
-"search history."
-msgstr ""
-"Maximum aantal vermeldingen in de zoekgeschiedenis. Stel in op 0 om de "
-"geschiedenis uit te schakelen."
-
-#: src/EPGSearchSetup.py:100
-msgid "Search encoding"
-msgstr "Zoek codering"
-
-#: src/EPGSearchSetup.py:100
-msgid "Choose the encoding type for searches, helpful for foreign languages."
-msgstr "Kies het coderingstype; handig voor diverse talen."
-
-#: src/EPGSearchSetup.py:128 src/plugin.py:56
-msgid "EPGSearch"
-msgstr "EPG Search"
-
-#: src/EPGSearchSetup.py:139
-msgid "Filter results by source"
-msgstr "Filter resultaten naar bron"
-
-#: src/EPGSearchSetup.py:139
-msgid ""
-"Include or exclude results depending on their source (e.g. by satellite)"
-msgstr "Verberg of geef resultaten weer naar bron, zoals satelliet etc."
-
-#: src/EPGSearchSetup.py:142
-msgid "Include/exclude sources"
-msgstr "toevoegen/uitsluiten bronnen"
-
-#: src/EPGSearchSetup.py:142
-msgid ""
-"Use source restrictions below to only include results from the sources, or "
-"exclude them."
-msgstr ""
-"Gebruik de bron beperkingen hieronder, om gewenste resultaten wel of niet "
-"toe te voegen."
-
-#: src/EPGSearchSetup.py:143
-msgid "Number of inclusions/exclusions"
-msgstr "Aantal toevoegingen/uitsluitingen"
-
-#: src/EPGSearchSetup.py:143
-msgid "Number of filters for inclusion/exclusion of results"
-msgstr "Aantal filters voor toevoegen/uitsluiten van resultaten"
-
-#: src/EPGSearchSetup.py:146
-msgid "Include results from"
-msgstr "Zoekresultaten toevoegen van"
-
-#: src/EPGSearchSetup.py:148
-msgid "Exclude results from"
-msgstr "Zoekresultaten uitsluiten van"
-
-#: src/EPGSearchSetup.py:149
-msgid "Include/exclude search results from this type of source"
-msgstr "Toevoegen/uitsluiten van zoek resultaten van dit type bron"
-
-#: src/__init__.py:30 src/__init__.py:31
-msgid "all services"
-msgstr "alle zenders"
-
-#: src/__init__.py:30 src/__init__.py:31
-msgid "all bouquets"
-msgstr "alle boeketten"
-
-#: src/__init__.py:30 src/__init__.py:31
-msgid "current bouquet"
-msgstr "huidige boeket"
-
-#: src/__init__.py:30 src/__init__.py:31
-msgid "current service"
-msgstr "huidige zender"
-
-#: src/__init__.py:30
-msgid "ask user"
-msgstr "vraag gebruiker"
-
-#: src/__init__.py:32
-msgid "partial match"
-msgstr "gedeeltelijke overeenkomst"
-
-#: src/__init__.py:32
-msgid "exact match"
-msgstr "exacte overeenkomst"
-
-#: src/__init__.py:32
-msgid "title starts with"
-msgstr "titel begint met"
-
-#: src/__init__.py:33
-msgid "case-insensitive search"
-msgstr "Hoofdletterongevoelig zoeken"
-
-#: src/__init__.py:33
-msgid "case-sensitive search"
-msgstr "Hoofdlettergevoelig zoeken"
-
-#: src/__init__.py:63
-msgid "disabled"
-msgstr "uitgeschakeld"
-
-#: src/__init__.py:73
-msgid "DVB-T Terrestrial services"
-msgstr "DVB-T terrestrische zenders"
-
-#: src/__init__.py:75
-msgid "DVB-C Cable services"
-msgstr "DVB-C kabel zenders"
-
-#: src/__init__.py:184
-msgid "exclude"
-msgstr "uitsluiten"
-
-#: src/plugin.py:56
-msgid "Search EPG"
-msgstr "EPG doorzoeken"
-
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
 #. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
-#: src/plugin.py:63
 #, python-format
 msgid "%ssearch EPG"
 msgstr "%s EPG doorzoeken"
 
 #. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
 #. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
-#: src/plugin.py:71
 #, python-format
 msgid "%ssearch EPG from history..."
 msgstr "%s EPG geschiedenis doorzoeken..."
 
+msgid "Add AutoTimer"
+msgstr "Autotimer toevoegen"
+
+msgid "Add Timer"
+msgstr "Timer toevoegen"
+
+msgid "Add a record timer for highlighted event"
+msgstr "Opnametimer toevoegen voor het geselecteerde programma"
+
+msgid "Add a zap timer for highlighted event"
+msgstr "Zaptimer toevoegen voor het geselecteerde programma"
+
+msgid "Add an AutoTimer for highlighted event"
+msgstr "Autotimer toevoegen voor het geselecteerde programma"
+
+msgid "Add/remove/edit timer for highlighted event"
+msgstr "Toevoegen/verwijder/bewerk timer voor het geselecteerde programma"
+
+msgid "All bouquets"
+msgstr "Alle boeketten"
+
+msgid "All services"
+msgstr "Alle zenders"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Channel Selection"
+msgstr "Zenderkeuze"
+
+msgid "Choose the encoding type for searches, helpful for foreign languages."
+msgstr "Kies het coderingstype; handig voor diverse talen."
+
+msgid "Close dialog"
+msgstr "Sluit dialoog"
+
+msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr "Bepaal waar te zoeken in de EPG. Indien 'alle boeketten' is gekozen, wordt daadwerkelijk in alle boeketten gezocht, ook als 'Meerdere boeketten toestaan' is uitgeschakeld."
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Kan autotimer timer-lijst niet lezen : %s"
+
+msgid "Current bouquet"
+msgstr "Huidige boeket"
+
+msgid "Current service"
+msgstr "Huidige zender"
+
+msgid "DVB-C"
+msgstr "DVB-C"
+
+msgid "DVB-C Cable services"
+msgstr "DVB-C kabel zenders"
+
+msgid "DVB-T"
+msgstr "DVB-T"
+
+msgid "DVB-T Terrestrial services"
+msgstr "DVB-T terrestrische zenders"
+
+msgid "Default scope when asked"
+msgstr "Standaard bereik wanneer gevraagd"
+
+msgid "EPG Search"
+msgstr "EPG Search"
+
+msgid "EPG Search setup"
+msgstr "EPG Search instellingen"
+
+msgid "EPGSearch"
+msgstr "EPG Search"
+
+msgid "EPGSearch Setup"
+msgstr "EPG Search instellingen"
+
+msgid "Enable this to allow access to EPG Search from within the plugin browser."
+msgstr "Schakel dit in om EPG Search vanuit de pluginbrowser te kunnen openen."
+
+msgid "Enter new search"
+msgstr "Opnieuw zoeken"
+
+msgid "Enter text to search for"
+msgstr "Voer de te zoeken tekst in"
+
+msgid "Exclude results from"
+msgstr "Zoekresultaten uitsluiten van"
+
+msgid "Exit EPG Search"
+msgstr "EPG Search afsluiten"
+
+msgid "Filter results by source"
+msgstr "Filter resultaten naar bron"
+
+msgid "IMDB search for highlighted event"
+msgstr "Zoek op IMDb naar geselecteerd programma"
+
+msgid "IMDb Search"
+msgstr "Zoeken in IMDb"
+
+msgid "Import from AutoTimer"
+msgstr "Importeren uit autotimer"
+
+msgid "Import from EPG"
+msgstr "Importeren uit EPG"
+
+msgid "Import from Timer"
+msgstr "Importeren uit timer"
+
+msgid "Include or exclude results depending on their source (e.g. by satellite)"
+msgstr "Verberg of geef resultaten weer naar bron, zoals satelliet etc."
+
+msgid "Include results from"
+msgstr "Zoekresultaten toevoegen van"
+
+msgid "Include/exclude search results from this type of source"
+msgstr "Toevoegen/uitsluiten van zoek resultaten van dit type bron"
+
+msgid "Include/exclude sources"
+msgstr "Toevoegen/uitsluiten bronnen"
+
+msgid "Is the search case-sensitive or case-insensitive"
+msgstr "Hoofdlettergevoelig zoeken"
+
+msgid "Length of history"
+msgstr "Lengte van geschiedenis"
+
+msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
+msgstr "Maximum aantal vermeldingen in de zoekgeschiedenis. Stel in op 0 om de geschiedenis uit te schakelen."
+
+msgid "Move down"
+msgstr "Verplaats naar beneden"
+
+msgid "Move down a page"
+msgstr "Ga één pagina omlaag"
+
+msgid "Move up"
+msgstr "Verplaats naar boven"
+
+msgid "Move up a page"
+msgstr "Ga één pagina omhoog"
+
+msgid "New Search"
+msgstr "Nieuwe zoekopdracht"
+
+msgid "No history"
+msgstr "Geen geschiedenis"
+
+msgid "Number of filters for inclusion/exclusion of results"
+msgstr "Aantal filters voor toevoegen/uitsluiten van resultaten"
+
+msgid "Number of inclusions/exclusions"
+msgstr "Aantal toevoegingen/uitsluitingen"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open selected in IMDb"
+msgstr "Open in IMDb"
+
+msgid "Save search as AutoTimer"
+msgstr "Bewaar als autotimer"
+
+msgid "Search"
+msgstr "Zoeken"
+
+msgid "Search EPG"
+msgstr "EPG doorzoeken"
+
+msgid "Search encoding"
+msgstr "Zoek codering"
+
+msgid "Search in..."
+msgstr "Zoek in..."
+
+msgid "Search scope"
+msgstr "Zoekbereik"
+
+msgid "Search strictness"
+msgstr "Zoekbeperkingen"
+
+msgid "Search type"
+msgstr "Zoektype"
+
+msgid "Searching..."
+msgstr "Zoeken..."
+
+msgid "Select a timer to search"
+msgstr "Selecteer te zoeken timer"
+
+msgid "Select text to search for"
+msgstr "Selecteer te zoeken tekst"
+
+msgid "Set type of match used to compare program titles with the search string"
+msgstr "Selecteer het soort overeenkomst tussen programma titels en zoekopdracht."
+
+msgid "Sets the default search scope when the user is asked."
+msgstr "Selecteer het standaard bereik wanneer de gebruiker wordt gevraagd."
+
+msgid "Setup"
+msgstr "Instellingen"
+
+msgid "Setup menu"
+msgstr "Instellingenmenu"
+
+msgid "Show AutoTimer list"
+msgstr "Toon autotimerlijst"
+
+msgid "Show detailed event information"
+msgstr "Toon gedetailleerde programma informatie"
+
+msgid "Show in plugin browser"
+msgstr "Toon in applicatie overzicht"
+
+msgid "Show orbital position"
+msgstr "Toon orbitale positie"
+
+msgid "Show satellite orbital positions in the search results."
+msgstr "Toon satelliet orbitale positie in zoekresultaten."
+
+msgid "Show search history"
+msgstr "Toon zoekgeschiedenis"
+
+msgid "Stream"
+msgstr "Stream"
+
+msgid "Use source restrictions below to only include results from the sources, or exclude them."
+msgstr "Gebruik de bron beperkingen hieronder, om gewenste resultaten wel of niet toe te voegen."
+
+msgid "Zap to channel"
+msgstr "Zap naar zender"
+
+msgid "all bouquets"
+msgstr "alle boeketten"
+
+msgid "all services"
+msgstr "alle zenders"
+
+msgid "ask user"
+msgstr "vraag gebruiker"
+
+msgid "case-insensitive search"
+msgstr "hoofdletterongevoelig zoeken"
+
+msgid "case-sensitive search"
+msgstr "hoofdlettergevoelig zoeken"
+
+msgid "current bouquet"
+msgstr "huidige boeket"
+
+msgid "current service"
+msgstr "huidige zender"
+
+msgid "disabled"
+msgstr "uitgeschakeld"
+
+msgid "exact match"
+msgstr "exacte overeenkomst"
+
+msgid "exclude"
+msgstr "uitsluiten"
+
+msgid "include"
+msgstr "toevoegen"
+
+msgid "partial match"
+msgstr "gedeeltelijke overeenkomst"
+
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
-#: src/plugin.py:78 src/plugin.py:79
 msgid "search EPG"
 msgstr "EPG doorzoeken"
 
 #. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
-#: src/plugin.py:86 src/plugin.py:87
 msgid "search EPG from history..."
 msgstr "EPG geschiedenis doorzoeken..."
+
+msgid "title starts with"
+msgstr "titel begint met"
 
 #~ msgid "Add a auto timer for current event"
 #~ msgstr "Voeg een autotimer toe voor het huidige event"
@@ -441,9 +329,7 @@ msgstr "EPG geschiedenis doorzoeken..."
 #~ msgid "Choose the encode type for search, helpful for foreign languages."
 #~ msgstr "Kies het code type voor het zoeken; handig voor diverse talen."
 
-#~ msgid ""
-#~ "Enable this to be able to access the EPG-Search from within the plugin "
-#~ "browser."
+#~ msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
 #~ msgstr "Toon EPG-Search in plugin browser."
 
 #~ msgid "Exit EPG"
@@ -461,12 +347,8 @@ msgstr "EPG geschiedenis doorzoeken..."
 #~ msgid "Goto previous channel"
 #~ msgstr "Ga naar het vorige kanaal"
 
-#~ msgid ""
-#~ "How many entries to keep in the search history at most. 0 disables "
-#~ "history entirely!"
-#~ msgstr ""
-#~ "Hoeveel entries mogen er in de zoekhistory bewaard worden? \"0\" schakelt "
-#~ "history geheel uit!"
+#~ msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+#~ msgstr "Hoeveel entries mogen er in de zoekhistory bewaard worden? \"0\" schakelt history geheel uit!"
 
 #~ msgid "IMDB search for current event"
 #~ msgstr "IMDB zoekslag voor het huidige event"
