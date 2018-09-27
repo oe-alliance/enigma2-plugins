@@ -235,7 +235,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.list.append(self.ipEntry)
 		self.sharedirEntry = getConfigListEntry(_("Server share"), self.sharedirConfigEntry)
 		self.list.append(self.sharedirEntry)
-		self.hdd_replacementEntry = getConfigListEntry(_("use as HDD replacement"), self.hdd_replacementConfigEntry)
+		self.hdd_replacementEntry = getConfigListEntry(_("Use as HDD replacement"), self.hdd_replacementConfigEntry)
 		self.list.append(self.hdd_replacementEntry)
 		self.optionsEntry = getConfigListEntry(_("Mount options"), self.optionsConfigEntry)
 		self.list.append(self.optionsEntry)
