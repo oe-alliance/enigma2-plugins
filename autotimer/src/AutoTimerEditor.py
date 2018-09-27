@@ -544,7 +544,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.name: _("This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."),
 			self.match: _("This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."),
 			self.encoding: _("Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."),
-			self.searchType: _("Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"),
+			self.searchType: _("Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."),
 			self.searchCase: _("Select whether or not you want to enforce case correctness."),
 			self.justplay: _("Set timer type: zap, simple record, zap+record (always zap to service before start record)."),
 			self.setEndtime: _("Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."),
@@ -574,7 +574,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.tags: _("Tags the Timer/Recording will have."),
 			self.series_labeling: _("Label Timers with season, episode and title, according to the SeriesPlugin settings."),
 			self.isActive_services: _("Restrict autotimer to specific services, channels.\nUse the blue key to edit the service filter.") + _(" (if services are enabled, bouquets are ignored.)."),
-			self.isActive_bouquets: _("Restrict autotimer to bouquets.\nUse the blue key to edit the bouquet filter") + _(" (if services are enabled, bouquets are ignored.)."),
+			self.isActive_bouquets: _("Restrict autotimer to bouquets.\nUse the blue key to edit the bouquet filter.") + _(" (if services are enabled, bouquets are ignored.)."),
 			self.isActive_dayofweek: _("Restrict autotimer to specific days.\nUse the yellow key to edit the day filter."),
 			self.isActive_otherfilters: _("This allows you to apply other filters.\nUse the yellow key to edit other filters."),
 		}

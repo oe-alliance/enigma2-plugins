@@ -177,7 +177,7 @@ class AutoTimerUploadXMLConfigurationAutoTimerResource(AutoTimerBaseResource):
 		autotimer.readXml(xml_string=req.args['xml'][0])
 		if config.plugins.autotimer.always_write_config.value:
 			autotimer.writeXml()
-		return self.returnResult(req, True, _("AutoTimers were changed successfully"))	
+		return self.returnResult(req, True, _("AutoTimers were changed successfully."))	
 
 class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 	# TODO: recheck if we can modify regular config parser to work on this
