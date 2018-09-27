@@ -302,5 +302,5 @@ msgstr ""
 msgid "Your network mount has been updated."
 msgstr ""
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr ""

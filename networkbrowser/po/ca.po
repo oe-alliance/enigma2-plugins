@@ -308,7 +308,7 @@ msgstr "El teu muntatge s'ha eliminat."
 msgid "Your network mount has been updated."
 msgstr "El teu muntatge s'ha actualitzat."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "utilitza com reemplaçament del HDD"
 
 msgid "The harddisk"

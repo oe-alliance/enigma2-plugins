@@ -83,7 +83,7 @@ msgid "Server share"
 msgstr "Serveri võrgujagu"
 
 #: MountEdit.py:235
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "Kasuta kõvaketta asendajana"
 
 #: MountEdit.py:237

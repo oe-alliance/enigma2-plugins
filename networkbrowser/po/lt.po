@@ -83,7 +83,7 @@ msgid "Server share"
 msgstr "Serverio bendrinimas"
 
 #: MountEdit.py:235
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "naudoti, kaip HDD pakaitalą"
 
 #: MountEdit.py:237

@@ -81,7 +81,7 @@ msgid "Server share"
 msgstr "Κοινόχρηστο στοιχείο διακομιστή"
 
 #: MountEdit.py:235
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "Χρήση ως HDD"
 
 #: MountEdit.py:237

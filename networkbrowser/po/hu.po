@@ -84,7 +84,7 @@ msgid "Server share"
 msgstr "Szerver megosztás neve"
 
 #: MountEdit.py:235
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "használva a merevlemez kiváltásaként"
 
 #: MountEdit.py:237

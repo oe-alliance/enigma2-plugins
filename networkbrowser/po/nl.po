@@ -322,7 +322,7 @@ msgstr "Uw netwerkverbinding is verwijderd."
 msgid "Your network mount has been updated."
 msgstr "Uw netwerkverbinding is bijgewerkt."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr "Gebruik als harde schijf vervanging"
 
 #~ msgid ""

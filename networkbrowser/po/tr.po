@@ -307,7 +307,7 @@ msgstr "Ağ diski bağlantınız kaldırıldı."
 msgid "Your network mount has been updated."
 msgstr "Ağ diski bağlantınız güncellendi."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr ""
 
 #~ msgid "MountManager"

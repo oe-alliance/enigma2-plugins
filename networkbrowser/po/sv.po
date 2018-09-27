@@ -311,7 +311,7 @@ msgstr "Din nätverksmontering har tagits bort."
 msgid "Your network mount has been updated."
 msgstr "Din nätverksmontering har uppdaterats."
 
-msgid "use as HDD replacement"
+msgid "Use as HDD replacement"
 msgstr ""
 
 #~ msgid "MountManager"
