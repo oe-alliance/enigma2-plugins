@@ -261,7 +261,7 @@ msgid "Search strictness"
 msgstr ""
 
 #: src/EPGSearchSetup.py:97
-msgid "Is the search case-sensitive or case-insensitive"
+msgid "Is the search case-sensitive or case-insensitive?"
 msgstr ""
 
 #: src/EPGSearchSetup.py:98

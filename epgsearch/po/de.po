@@ -179,7 +179,7 @@ msgstr "Zeigt die Satelliten-Orbitalpositionen in den Suchergebnissen mit an."
 msgid "Set type of match used to compare program titles with the search string."
 msgstr "Legen Sie die Art der Übereinstimmung fest, um die Sendungstitel mit dem Suchbegriff zu vergleichen."
 
-msgid "Is the search case-sensitive or case-insensitive"
+msgid "Is the search case-sensitive or case-insensitive?"
 msgstr "In der Suche Groß- und Kleinschreibung beachten ?"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)

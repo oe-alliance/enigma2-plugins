@@ -156,7 +156,7 @@ msgstr "Toevoegen/uitsluiten van zoek resultaten van dit type bron"
 msgid "Include/exclude sources"
 msgstr "Toevoegen/uitsluiten bronnen"
 
-msgid "Is the search case-sensitive or case-insensitive"
+msgid "Is the search case-sensitive or case-insensitive?"
 msgstr "Hoofdlettergevoelig zoeken"
 
 msgid "Length of history"

@@ -158,7 +158,7 @@ msgstr "Sisällytä/rajoita hakutulokset lähteestä"
 msgid "Include/exclude sources"
 msgstr "Sisällytä/rajoita hakutuloksia"
 
-msgid "Is the search case-sensitive or case-insensitive"
+msgid "Is the search case-sensitive or case-insensitive?"
 msgstr "Onko haku tapauskohtainen vai yleinen"
 
 msgid "Length of history"

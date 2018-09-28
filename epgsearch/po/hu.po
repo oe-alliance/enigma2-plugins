@@ -270,7 +270,7 @@ msgid "Search strictness"
 msgstr "Keresés pontosabban"
 
 #: src/EPGSearchSetup.py:97
-msgid "Is the search case-sensitive or case-insensitive"
+msgid "Is the search case-sensitive or case-insensitive?"
 msgstr "A keresés a kis-és nagybetűkre érzékeny"
 
 #: src/EPGSearchSetup.py:98
