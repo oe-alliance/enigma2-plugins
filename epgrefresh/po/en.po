@@ -101,7 +101,7 @@ msgid "OK"
 msgstr ""
 
 #: EPGRefreshChannelEditor.py:81
-msgid "delete"
+msgid "Delete"
 msgstr ""
 
 #: EPGRefreshChannelEditor.py:82
@@ -287,11 +287,11 @@ msgid ""
 msgstr ""
 
 #: EPGRefreshConfiguration.py:169
-msgid "Show 'EPGRefresh Start now' in extension menu"
+msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr ""
 
 #: EPGRefreshConfiguration.py:170
-msgid "Show popup when refresh starts and ends"
+msgid "Show popup when refresh starts and ends."
 msgstr ""
 
 #: EPGRefreshConfiguration.py:170
@@ -307,11 +307,11 @@ msgid ""
 msgstr ""
 
 #: EPGRefreshConfiguration.py:171
-msgid "Wake up from standby for EPG refresh"
+msgid "Wake up from standby for EPG refresh."
 msgstr ""
 
 #: EPGRefreshConfiguration.py:172
-msgid "Force scan even if receiver is in use"
+msgid "Force scan even if receiver is in use."
 msgstr ""
 
 #: EPGRefreshConfiguration.py:172
@@ -321,7 +321,7 @@ msgid ""
 msgstr ""
 
 #: EPGRefreshConfiguration.py:173
-msgid "Shutdown after EPG refresh"
+msgid "Shutdown after EPG refresh."
 msgstr ""
 
 #: EPGRefreshConfiguration.py:173

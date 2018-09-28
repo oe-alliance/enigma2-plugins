@@ -97,7 +97,7 @@ msgstr ""
 msgid "Fake recording"
 msgstr ""
 
-msgid "Force scan even if receiver is in use"
+msgid "Force scan even if receiver is in use."
 msgstr "Alıcı kullanılırken dahi aramaya zorla"
 
 msgid ""
@@ -171,10 +171,10 @@ msgstr "Yenilemek için kanal seçin"
 msgid "Show in extension menu"
 msgstr ""
 
-msgid "Show popup when refresh starts and ends"
+msgid "Show popup when refresh starts and ends."
 msgstr ""
 
-msgid "Shutdown after EPG refresh"
+msgid "Shutdown after EPG refresh."
 msgstr ""
 
 msgid "The configuration menu"
@@ -272,7 +272,7 @@ msgstr ""
 msgid "add to EPGRefresh"
 msgstr "Otomatik EPG yenileyiciye ekle"
 
-msgid "delete"
+msgid "Delete"
 msgstr "sil"
 
 msgid "never"

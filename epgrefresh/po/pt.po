@@ -110,7 +110,7 @@ msgid "OK"
 msgstr "OK"
 
 #: EPGRefreshChannelEditor.py:81
-msgid "delete"
+msgid "Delete"
 msgstr "apagar"
 
 #: EPGRefreshChannelEditor.py:82
@@ -313,11 +313,11 @@ msgid ""
 msgstr "Habilitar isto para iniciar o EPGRefresh através do menu extensões."
 
 #: EPGRefreshConfiguration.py:169
-msgid "Show 'EPGRefresh Start now' in extension menu"
+msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "Mostrar 'iniciar agora EPGRefresh' no menu de extensões"
 
 #: EPGRefreshConfiguration.py:170
-msgid "Show popup when refresh starts and ends"
+msgid "Show popup when refresh starts and ends."
 msgstr "Mostrar popup quando atualização começar e terminar"
 
 #: EPGRefreshConfiguration.py:170
@@ -337,11 +337,11 @@ msgstr ""
 "espera se possível. Caso contrário, ele precisa ser ligado já."
 
 #: EPGRefreshConfiguration.py:171
-msgid "Wake up from standby for EPG refresh"
+msgid "Wake up from standby for EPG refresh."
 msgstr "Acordar do modo de espera para atualização do EPG"
 
 #: EPGRefreshConfiguration.py:172
-msgid "Force scan even if receiver is in use"
+msgid "Force scan even if receiver is in use."
 msgstr "Forçar a verificação, mesmo se o receptor estiver em uso"
 
 #: EPGRefreshConfiguration.py:172
@@ -353,7 +353,7 @@ msgstr ""
 "recetor esteja ativo (ou não em modo de espera ou a gravar)."
 
 #: EPGRefreshConfiguration.py:173
-msgid "Shutdown after EPG refresh"
+msgid "Shutdown after EPG refresh."
 msgstr "Desligar após atualização do EPG"
 
 #: EPGRefreshConfiguration.py:173

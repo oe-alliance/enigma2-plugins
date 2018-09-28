@@ -108,8 +108,8 @@ msgstr "Extend the list of services to refresh by those your AutoTimers use?"
 msgid "Fake recording"
 msgstr "Fake recording"
 
-msgid "Force scan even if receiver is in use"
-msgstr "Force scan even if receiver is in use"
+msgid "Force scan even if receiver is in use."
+msgstr "Force scan even if receiver is in use."
 
 msgid ""
 "If the receiver currently isn't in standby, this is the duration which "
@@ -189,11 +189,11 @@ msgstr "Select channel to refresh"
 msgid "Show in extension menu"
 msgstr "Show in extension menu"
 
-msgid "Show popup when refresh starts and ends"
-msgstr "Show popup when refresh starts and ends"
+msgid "Show popup when refresh starts and ends."
+msgstr "Show popup when refresh starts and ends."
 
-msgid "Shutdown after EPG refresh"
-msgstr "Shutdown after EPG refresh"
+msgid "Shutdown after EPG refresh."
+msgstr "Shutdown after EPG refresh."
 
 msgid "The configuration menu"
 msgstr "The configuration menu"
@@ -332,8 +332,8 @@ msgstr ""
 msgid "add to EPGRefresh"
 msgstr "add to EPGRefresh"
 
-msgid "delete"
-msgstr "delete"
+msgid "Delete"
+msgstr "Delete"
 
 msgid "never"
 msgstr "never"

@@ -150,7 +150,7 @@ msgstr "Nep opname"
 msgid "Following Services have to be scanned:"
 msgstr "De volgende kanalen moeten worden gescand:"
 
-msgid "Force scan even if receiver is in use"
+msgid "Force scan even if receiver is in use."
 msgstr "Zoeken wanneer de ontvanger in gebruik is"
 
 msgid "Foreground also"
@@ -241,7 +241,7 @@ msgstr "Kies zender om te vernieuwen"
 msgid "Should protected services be skipped if refresh was started in interactive-mode?"
 msgstr "Moeten met kinderslot beschermde kanalen overgeslageb worden als de interactieve modus gebruikt wordt?"
 
-msgid "Show 'EPGRefresh Start now' in extension menu"
+msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "Toon 'EPG-refresh nu starten' in het extensiemenu."
 
 msgid "Show Advanced Options"
@@ -256,13 +256,13 @@ msgstr "Toon tijdstip laatste EPG verversen"
 msgid "Show more Functions"
 msgstr "Toon meer functies"
 
-msgid "Show popup when refresh starts and ends"
+msgid "Show popup when refresh starts and ends."
 msgstr "Toon popup als refresh begint en eindigt"
 
 msgid "Show the pending Services for refresh"
 msgstr "Toon de nog niet afgewerkte kanalen."
 
-msgid "Shutdown after EPG refresh"
+msgid "Shutdown after EPG refresh."
 msgstr "Ontvanger uitschakelen na EPG-refresh"
 
 msgid "Skip protected Services"
@@ -334,7 +334,7 @@ msgstr "Tenzij dit is ingeschakeld, zal EPG-refresh niet automatisch starten, ma
 msgid "Version"
 msgstr "Versie"
 
-msgid "Wake up from standby for EPG refresh"
+msgid "Wake up from standby for EPG refresh."
 msgstr "Voer EPG-verversing ook uit indien in standby"
 
 msgid "Welcome to EPGRefresh"
@@ -372,7 +372,7 @@ msgstr ""
 msgid "add to EPGRefresh"
 msgstr "toevoegen aan EPG-refresh"
 
-msgid "delete"
+msgid "Delete"
 msgstr "Verwijderen"
 
 msgid "never"

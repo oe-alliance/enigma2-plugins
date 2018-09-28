@@ -105,7 +105,7 @@ msgstr "Lisada kanalid, mida juba kasutab Autotaimer?"
 msgid "Fake recording"
 msgstr "Võltssalvestus."
 
-msgid "Force scan even if receiver is in use"
+msgid "Force scan even if receiver is in use."
 msgstr "Sunnitud uuendamine ka siis, kui tuuner on hõivatud"
 
 msgid ""
@@ -185,10 +185,10 @@ msgstr "Vali kanal, millelt uuendada"
 msgid "Show in extension menu"
 msgstr "Näita laienduste menüüs"
 
-msgid "Show popup when refresh starts and ends"
+msgid "Show popup when refresh starts and ends."
 msgstr "Näita EPG uuendamise alates ja lõppedes hüpikakent"
 
-msgid "Shutdown after EPG refresh"
+msgid "Shutdown after EPG refresh."
 msgstr "Lülita pärast EPG uuendamist välja"
 
 msgid "The configuration menu"
@@ -293,7 +293,7 @@ msgstr ""
 msgid "add to EPGRefresh"
 msgstr "lisa EPG uuendajasse"
 
-msgid "delete"
+msgid "Delete"
 msgstr "kustuta"
 
 msgid "never"

@@ -108,7 +108,7 @@ msgstr "¿Extender la lista de servicios a actualizar por aquellos que utilizan 
 msgid "Fake recording"
 msgstr "Grabación falsa"
 
-msgid "Force scan even if receiver is in use"
+msgid "Force scan even if receiver is in use."
 msgstr "Forzar el escaneo incluso cuando el receptor está en uso"
 
 msgid ""
@@ -200,10 +200,10 @@ msgstr "Seleccionar canal a refrescar"
 msgid "Show in extension menu"
 msgstr "Mostrar en el menú de extensiones"
 
-msgid "Show popup when refresh starts and ends"
+msgid "Show popup when refresh starts and ends."
 msgstr "Mostrar popup cuando se inicia y termina la actualización"
 
-msgid "Shutdown after EPG refresh"
+msgid "Shutdown after EPG refresh."
 msgstr "Apagado después de refrescar EPG"
 
 msgid ""
@@ -358,7 +358,7 @@ msgstr ""
 msgid "add to EPGRefresh"
 msgstr "Agregar a EPGRefresh"
 
-msgid "delete"
+msgid "Delete"
 msgstr "borrar"
 
 msgid "never"
@@ -373,7 +373,7 @@ msgstr "Mostrar más opciones"
 msgid "Show Setup in extension menu"
 msgstr "Mostrar configuración en el menú de extensiones"
 
-msgid "Show 'EPGRefresh Start now' in extension menu"
+msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "Mostrar 'Iniciar EPGRefresh ahora' en el menú de extensiones"
 
 msgid ""
@@ -383,7 +383,7 @@ msgstr ""
 "Habilite esto para poder iniciar el EPGRefresh desde dentro del menú de "
 "extensiones."
 
-msgid "Wake up from standby for EPG refresh"
+msgid "Wake up from standby for EPG refresh."
 msgstr "Desactivar desde el modo de espera para la actualización de EPG"
 
 msgid ""
