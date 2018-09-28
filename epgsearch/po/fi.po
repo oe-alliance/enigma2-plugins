@@ -232,7 +232,7 @@ msgstr "Valitse haettava ajastus"
 msgid "Select text to search for"
 msgstr "Valitse haettavan ohjelman nimi"
 
-msgid "Set type of match used to compare program titles with the search string"
+msgid "Set type of match used to compare program titles with the search string."
 msgstr ""
 "Asettaa hakutyypin jota käytetään lajittelemaan ohjelmanimiä hakutuloksista"
 

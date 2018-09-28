@@ -253,7 +253,7 @@ msgstr ""
 
 #: src/EPGSearchSetup.py:96
 msgid ""
-"Set type of match used to compare program titles with the search string"
+"Set type of match used to compare program titles with the search string."
 msgstr ""
 
 #: src/EPGSearchSetup.py:97

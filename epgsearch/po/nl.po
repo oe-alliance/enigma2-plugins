@@ -228,7 +228,7 @@ msgstr "Selecteer te zoeken timer"
 msgid "Select text to search for"
 msgstr "Selecteer te zoeken tekst"
 
-msgid "Set type of match used to compare program titles with the search string"
+msgid "Set type of match used to compare program titles with the search string."
 msgstr "Selecteer het soort overeenkomst tussen programma titels en zoekopdracht."
 
 msgid "Sets the default search scope when the user is asked."

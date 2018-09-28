@@ -254,7 +254,7 @@ msgid "Search type"
 msgstr "Paieškos tipas"
 
 #: src/EPGSearchSetup.py:96
-msgid "Set type of match used to compare program titles with the search string"
+msgid "Set type of match used to compare program titles with the search string."
 msgstr ""
 "Nustatykite atitikimo tipą, naudojamą palyginti programų pavadinimus su "
 "paieškos eilute"

@@ -259,7 +259,7 @@ msgid "Search type"
 msgstr "Keresés típusa"
 
 #: src/EPGSearchSetup.py:96
-msgid "Set type of match used to compare program titles with the search string"
+msgid "Set type of match used to compare program titles with the search string."
 msgstr ""
 "Állítsa be a keresésben használt szöveg egyezés, illeszkedés típusát. A "
 "'pontos egyezés, illeszkedés' csak a Teljes szóra, a 'részleges egyezés, "
