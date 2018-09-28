@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-22 13:23+0100\n"
-"PO-Revision-Date: 2018-09-27 10:50+0200\n"
+"POT-Creation-Date: 2018-09-28 07:52+0100\n"
+"PO-Revision-Date: 2018-09-28 15:46+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl_NL\n"
@@ -157,7 +157,7 @@ msgid "Include/exclude sources"
 msgstr "Toevoegen/uitsluiten bronnen"
 
 msgid "Is the search case-sensitive or case-insensitive?"
-msgstr "Hoofdlettergevoelig zoeken"
+msgstr "Hoofdletter gevoelig of ongevoelig zoeken?"
 
 msgid "Length of history"
 msgstr "Lengte van geschiedenis"
@@ -229,7 +229,7 @@ msgid "Select text to search for"
 msgstr "Selecteer te zoeken tekst"
 
 msgid "Set type of match used to compare program titles with the search string."
-msgstr "Selecteer het soort overeenkomst tussen programma titels en zoekopdracht."
+msgstr "Kies de soort van overeenkomst met de titel."
 
 msgid "Sets the default search scope when the user is asked."
 msgstr "Selecteer het standaard bereik wanneer de gebruiker wordt gevraagd."
@@ -353,6 +353,9 @@ msgstr "titel begint met"
 #~ msgid "IMDB search for current event"
 #~ msgstr "IMDB zoekslag voor het huidige event"
 
+#~ msgid "Is the search case-sensitive or case-insensitive"
+#~ msgstr "Hoofdlettergevoelig zoeken"
+
 #~ msgid "Length of History"
 #~ msgstr "Grootte van de geschiedenis"
 
@@ -361,6 +364,9 @@ msgstr "titel begint met"
 
 #~ msgid "Search for similar events"
 #~ msgstr "Zoek naar gelijksoortige events"
+
+#~ msgid "Set type of match used to compare program titles with the search string"
+#~ msgstr "Selecteer het soort overeenkomst tussen programma titels en zoekopdracht."
 
 #~ msgid "Show AutoTimer List"
 #~ msgstr "Toon AutoTimer lijst"
