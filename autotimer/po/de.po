@@ -509,7 +509,7 @@ msgstr ""
 "%d Timer wurden modifiziert,\n"
 "%d Konflikte gefunden,\n"
 "%d unverändert,\n"
-"%d Ähnliche hinzugefügt."
+"%d ähnliche hinzugefügt."
 
 #: ../src/AutoTimerOverview.py:228 ../src/AutoTimerOverview.py:265
 msgid "Frequently asked questions"
