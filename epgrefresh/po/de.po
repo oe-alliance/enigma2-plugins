@@ -519,6 +519,14 @@ msgstr "Zu EPGRefresh hinzufügen"
 msgid "PLUGINNAME_EPGRefresh"
 msgstr "EPGRefresh"
 
+#: EPGRefreshConfiguration.py
+msgid "Flush EPG before refresh"
+msgstr "EPG-Daten vor dem Aktualisieren löschen"
+
+#: EPGRefreshConfiguration.py
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr "Aktivieren Sie diese Option, wenn vor der EPG-Aktualisierung, die kompletten EPG-Daten gelöscht werden sollen."
+
 #~ msgid "Restore EPG-Backups (Date)"
 #~ msgstr "Backup wiederherstellen (Datum)"
 

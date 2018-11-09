@@ -171,6 +171,7 @@ class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
 				self.list.append(getConfigListEntry(_("Wake up from standby for EPG refresh."), config.plugins.epgrefresh.wakeup, _("If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."), False))
 				self.list.append(getConfigListEntry(_("Force scan even if receiver is in use."), config.plugins.epgrefresh.force, _("This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."), False))
 				self.list.append(getConfigListEntry(_("Shutdown after EPG refresh."), config.plugins.epgrefresh.afterevent, _("This setting controls whether the receiver should be set to standby after refresh is completed."), False))
+				self.list.append(getConfigListEntry(_("Flush EPG before refresh"), config.plugins.epgrefresh.erase, _("Enable this item to flush all EPG data before starting a new EPG refresh cycle"), False))
 				try:
 					# try to import autotimer module to check for its existence
 					from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
