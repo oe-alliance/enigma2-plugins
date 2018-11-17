@@ -432,7 +432,7 @@ class EPGSearch(EPGSelection):
 		self.close()
 
 	def yellowButtonPressed(self):
-		self.session.openWithCallback(self.searchEPG, VirtualKeyBoard, title=_("Enter text to search for"))
+		self.session.openWithCallback(self.searchEPG, VirtualKeyBoard, title=_("Enter text to search for"), text=self.currSearch)
 
 	def menu(self):
 		options = [
