@@ -254,7 +254,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 			if self.mounttypeConfigEntry.value == "nfs":
 				defaultOptions = "rw,nolock,tcp"
 			else:
-				defaultOptions = "rw,utf8"
+				defaultOptions = "rw,utf8,vers=1.0"
 			if self.mountinfo.has_key('options'):
 				options = self.mountinfo['options']
 			else:
