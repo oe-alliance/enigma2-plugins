@@ -8,6 +8,7 @@ from Components.Console import Console
 from Components.Harddisk import harddiskmanager #global harddiskmanager
 from xml.etree.cElementTree import parse as cet_parse
 from shutil import rmtree
+from subprocess import call
 
 XML_FSTAB = "/etc/enigma2/automounts.xml"
 
@@ -352,6 +353,13 @@ class AutoMount():
 							os.symlink(path, hdd_dir)
 					elif not os.path.exists(hdd_dir):
 						os.symlink(path, hdd_dir)
+					else:
+						# we have no symlink and the directory already exists:
+						# option 1: remove directory and create a symlink -> potential dangerous,
+						#			may be not empty
+						# option 2: remount folder via --bind option, this prevents potential
+						#			data loss
+						call(['mount', '--bind', path, hdd_dir])
 			elif os.path.ismount(path):
 				if self.automounts.has_key(data['sharename']):
 					self.automounts[data['sharename']]['isMounted'] = True
