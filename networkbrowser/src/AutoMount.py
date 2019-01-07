@@ -8,7 +8,6 @@ from Components.Console import Console
 from Components.Harddisk import harddiskmanager #global harddiskmanager
 from xml.etree.cElementTree import parse as cet_parse
 from shutil import rmtree
-from subprocess import call
 
 XML_FSTAB = "/etc/enigma2/automounts.xml"
 
