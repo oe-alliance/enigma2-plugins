@@ -274,29 +274,32 @@ class AutoMount():
 		data = self.automounts[item]
 		if not self.MountConsole:
 			self.MountConsole = Console()
+			
 		command = []
-		mountcommand = None
+		mountcommand = []
 		unmountcommand = []
-		if data['mountusing'] == 'autofs':
-			path = os.path.join('/media/autofs', data['sharename'])
-		elif data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True:
+
+		if data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True:
 			path = os.path.join('/media/hdd')
 		else:
 			path = os.path.join('/media/net', data['sharename'])
+			
+		if os.path.ismount(path):
+			unmountcommand.append('umount -fl '+ path)
 		if data['mountusing'] == 'autofs' and restart:
 			unmountcommand.append("/etc/init.d/autofs stop")
-		if os.path.ismount(path) and 'autofs' not in path:
-			unmountcommand.append('umount -fl '+ path)
 		if self.activeMountsCounter != 0:
 			if data['active'] == 'True' or data['active'] is True:
-				if data['mountusing'] == 'autofs' and restart:
-					mountcommand = "/etc/init.d/autofs start"
+				if data['mountusing'] == 'autofs':
+					if restart:
+						mountcommand.append("/etc/init.d/autofs start")
+					mountcommand.append('mount --bind ' + os.path.join('/media/autofs', data['sharename']) + ' ' + path)
 				elif data['mountusing'] == 'fstab':
 					if data['mounttype'] == 'nfs':
 						tmpcmd = 'mount ' + data['ip'] + ':/' + data['sharedir']
 					elif data['mounttype'] == 'cifs':
 						tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
-					mountcommand = tmpcmd.encode("UTF-8")
+					mountcommand.append(tmpcmd.encode("UTF-8"))
 				elif data['mountusing'] == 'enigma2' or data['mountusing'] == 'old_enigma2':
 					tmpsharedir = data['sharedir'].replace(" ", "\\ ")
 					if tmpsharedir[-1:] == "$":
@@ -305,14 +308,14 @@ class AutoMount():
 					if data['mounttype'] == 'nfs':
 						if not os.path.ismount(path):
 							tmpcmd = 'mount -t nfs -o ' + self.sanitizeOptions(data['options']) + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
-							mountcommand = tmpcmd.encode("UTF-8")
+							mountcommand.append(tmpcmd.encode("UTF-8"))
 					elif data['mounttype'] == 'cifs':
 						if not os.path.ismount(path):
 							tmpusername = data['username'].replace(" ", "\\ ")
 							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',noatime,noserverino,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
-							mountcommand = tmpcmd.encode("UTF-8")
+							mountcommand.append(tmpcmd.encode("UTF-8"))
 
-		if len(unmountcommand) > 0 or mountcommand is not None:
+		if len(unmountcommand) > 0 or len(mountcommand) > 0:
 			if len(unmountcommand) > 0:
 				for x in unmountcommand:
 					command.append(x)
@@ -320,8 +323,9 @@ class AutoMount():
 				command.append('mkdir -p ' + path)
 			if command is not None:
 				command.append('sleep 2')
-			if mountcommand is not None:
-				command.append(mountcommand)
+			if len(mountcommand) > 0:
+				for x in mountcommand:
+					command.append(x)
 			print 'command',command
 			self.MountConsole.eBatch(command, self.CheckMountPointFinished, [data, callback, restart], debug=True)
 		else:
@@ -330,51 +334,34 @@ class AutoMount():
 	def CheckMountPointFinished(self, extra_args):
 # 		print "[NetworkBrowser] CheckMountPointFinished"
 		(data, callback, restart) = extra_args
-		hdd_dir = '/media/hdd'
-		sharepath = os.path.join('/media/net', data['sharename'])
-		if data['mountusing'] == 'autofs':
-			sharepath = os.path.join('/media/autofs', data['sharename'])
-			path = os.path.join('/media/autofs', data['sharename'])
-		elif data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True:
-			path = os.path.join('/media/hdd')
-		else:
-			path = os.path.join('/media/net', data['sharename'])
 
-		if os.path.exists(path):
-			if data['mountusing'] == 'autofs':
-				if self.automounts.has_key(data['sharename']):
-					self.automounts[data['sharename']]['isMounted'] = True
-					desc = data['sharename']
-					harddiskmanager.addMountedPartition(sharepath, desc)
-				if data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True:
-					if os.path.islink(hdd_dir):
-						if os.readlink(hdd_dir) != path:
-							os.unlink(hdd_dir)
-							os.symlink(path, hdd_dir)
-					elif not os.path.exists(hdd_dir):
-						os.symlink(path, hdd_dir)
-					else:
-						# we have no symlink and the directory already exists:
-						# option 1: remove directory and create a symlink -> potential dangerous,
-						#			may be not empty
-						# option 2: remount folder via --bind option, this prevents potential
-						#			data loss
-						call(['mount', '--bind', path, hdd_dir])
-			elif os.path.ismount(path):
-				if self.automounts.has_key(data['sharename']):
+		if self.automounts.has_key(data['sharename']):
+			hddreplace = data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True
+			
+			if hddreplace is True:
+				path = os.path.join('/media/autofs', data['sharename'])
+			else:
+				path = os.path.join('/media/net', data['sharename'])
+		
+			mountfailed = True
+			
+			if os.path.exists(path):
+				hddreplace = data['hdd_replacement'] == 'True' or data['hdd_replacement'] is True
+				# check for mounted network path /media/autofs|net/sharename and in case of hddreplace=true also mounted /media/hdd
+				if os.path.ismount(path) and (hddreplace is False or hddreplace is True and os.path.exists('/media/hdd') and os.path.ismount('/media/hdd')):
 					self.automounts[data['sharename']]['isMounted'] = True
 					desc = data['sharename']
 					harddiskmanager.addMountedPartition(path, desc)
-			else:
-				if self.automounts.has_key(data['sharename']):
-					self.automounts[data['sharename']]['isMounted'] = False
-				if os.path.exists(path):
-					if not os.path.ismount(path):
-						try:
-							rmtree(path)
-							harddiskmanager.removeMountedPartition(path)
-						except Exception, ex:
-							print "Failed to remove", path, "Error:", ex
+					mountfailed = False
+				else:
+					try:
+						rmtree(path)
+					except Exception, ex:
+						print "Failed to remove", path, "Error:", ex
+						
+			if mountfailed:
+				self.automounts[data['sharename']]['isMounted'] = False
+				harddiskmanager.removeMountedPartition(path)
 		if self.checkList:
 			# Go to next item in list...
 			self.CheckMountPoint(self.checkList.pop(), callback, restart)
