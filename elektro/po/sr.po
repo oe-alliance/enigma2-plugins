@@ -47,8 +47,7 @@ msgstr "Nedelja"
 msgid "Enable Elektro Power Save"
 msgstr "Uključi štednju elektr. energije"
 
-#: plugin.py:196
-#: plugin.py:300
+#: plugin.py:196 plugin.py:300
 msgid "Standby on boot"
 msgstr "Pripravnost posle podizanja"
 
@@ -107,4 +106,3 @@ msgstr "Idi u pripravnost sada?"
 #: plugin.py:465
 msgid "Go to sleep now?"
 msgstr "Idi u mod spavanja sada?"
-

@@ -63,30 +63,23 @@ msgstr "Toon bekeken events met enkele tatistische gegevens"
 msgid "Sort (date+)"
 msgstr "Sorteer (datum+)"
 
-#: ../src/plugin.py:456
-#: ../src/plugin.py:539
+#: ../src/plugin.py:456 ../src/plugin.py:539
 msgid "Sort (date-)"
 msgstr "Sorteer (datum-)"
 
-#: ../src/plugin.py:229
-#: ../src/plugin.py:327
+#: ../src/plugin.py:229 ../src/plugin.py:327
 msgid "Sort (duration+)"
 msgstr "Sorteer (duur+)"
 
-#: ../src/plugin.py:230
-#: ../src/plugin.py:328
+#: ../src/plugin.py:230 ../src/plugin.py:328
 msgid "Sort (duration-)"
 msgstr "Sorteer (duur-)"
 
-#: ../src/plugin.py:227
-#: ../src/plugin.py:325
-#: ../src/plugin.py:451
+#: ../src/plugin.py:227 ../src/plugin.py:325 ../src/plugin.py:451
 msgid "Sort (name+)"
 msgstr "Sorteer (naam+)"
 
-#: ../src/plugin.py:228
-#: ../src/plugin.py:326
-#: ../src/plugin.py:454
+#: ../src/plugin.py:228 ../src/plugin.py:326 ../src/plugin.py:454
 #: ../src/plugin.py:524
 msgid "Sort (name-)"
 msgstr "Sorteer (naam-)"
@@ -107,10 +100,7 @@ msgstr "Sorteer op naam (oplopend)"
 msgid "Sort by name (descending)"
 msgstr "Sorteer op naam (aflopend)"
 
-#: ../src/plugin.py:220
-#: ../src/plugin.py:317
-#: ../src/plugin.py:422
+#: ../src/plugin.py:220 ../src/plugin.py:317 ../src/plugin.py:422
 #: ../src/plugin.py:598
 msgid "Zap Statistic"
 msgstr "Zap statistiek"
-

@@ -97,4 +97,3 @@ msgstr "3D: menu 2D"
 #: .../enigma2-plugins/3dsettings/src/plugin.py:266
 msgid "Change 3D settings"
 msgstr "Cambiare impostazioni 3D"
-

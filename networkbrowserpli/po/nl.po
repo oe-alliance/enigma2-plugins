@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - networkbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-28 16:39+0100\n"
+"POT-Creation-Date: 2012-01-28 16:44+0100\n"
 "PO-Revision-Date: 2009-06-07 11:56+0100\n"
 "Last-Translator: \n"
 "Language-Team:  <Benny.DeTandt@gmail.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -174,16 +175,13 @@ msgid "Password"
 msgstr "Wachtwoord"
 
 msgid "Please wait for activation of your network mount..."
-msgstr ""
-"Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding activeren..."
+msgstr "Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding activeren..."
 
 msgid "Please wait while removing your network mount..."
-msgstr ""
-"Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding verwijderen..."
+msgstr "Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding verwijderen..."
 
 msgid "Please wait while updating your network mount..."
-msgstr ""
-"Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding bijwerken..."
+msgstr "Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding bijwerken..."
 
 msgid "Please wait while your network is restarting..."
 msgstr "Een ogenblikje geduld a.u.b. terwijl we uw netwerk herstarten..."
@@ -252,8 +250,7 @@ msgid "View, edit or delete mountpoints on your Dreambox."
 msgstr "Bekijk, wijzig of verwijder verbindingen op uw Dreambox."
 
 msgid "View, edit or delete usernames and passwords for your network."
-msgstr ""
-"Bekijk, wijzig of verwijder gebruikersnaam en wachtwoord voor uw netwerk."
+msgstr "Bekijk, wijzig of verwijder gebruikersnaam en wachtwoord voor uw netwerk."
 
 msgid "Your network mount has been activated."
 msgstr "Uw netwerkverbinding is geactiveerd."
@@ -266,15 +263,3 @@ msgstr "Uw netwerkverbinding is bijgewerkt."
 
 msgid "use as HDD replacement"
 msgstr "Gebruik als harde schijf vervanging"
-
-#~ msgid "Delete selected mount"
-#~ msgstr "Verwijder deze verbinding"
-
-#~ msgid "Rescan network"
-#~ msgstr "Netwerk opnieuw doorzoeken"
-
-#~ msgid "Scan NFS Share"
-#~ msgstr "Zoek NFS share"
-
-#~ msgid "address range"
-#~ msgstr "Adresbereik"

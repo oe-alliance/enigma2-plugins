@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"POT-Creation-Date: 2011-07-25 22:29+0200\n"
 "PO-Revision-Date: 2012-03-16 16:36+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,20 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "1080p"
-msgstr "1080p"
-
-msgid "720p"
-msgstr "720p"
-
 msgid "Best resolution"
 msgstr "Best resolution"
 
 msgid "Cancel"
 msgstr "Cancel"
-
-msgid "Close Player with exit-key"
-msgstr "Close Player with exit-key"
 
 msgid "Extended search filter"
 msgstr "Extended search filter"
@@ -38,20 +29,5 @@ msgstr "Extended search filter"
 msgid "Max. results in list-mode"
 msgstr "Max. results in list-mode"
 
-msgid "No HD streaming"
-msgstr "No HD streaming"
-
 msgid "Save"
 msgstr "Save"
-
-msgid "Show Setup in Extensions menu"
-msgstr "Show Setup in Extensions menu"
-
-msgid "YouTube-Trailer Setup"
-msgstr "YouTube-Trailer Setup"
-
-msgid "leave movie player..."
-msgstr "leave movie player..."
-
-#~ msgid "YT-Trailer Setup"
-#~ msgstr "YT-Trailer Setup"

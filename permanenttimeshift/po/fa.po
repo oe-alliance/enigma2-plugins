@@ -37,4 +37,3 @@ msgstr "تغییر مکان ساعت دائمی"
 #: /home/aliabdul/dream/enigma2-plugins/permanentclock/src/plugin.py:210
 msgid "Shows the clock permanent on the screen"
 msgstr "نمایش ساعت دائمی بروی صفحه نمایش"
-

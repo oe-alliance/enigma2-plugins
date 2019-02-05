@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DVDBackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2010-05-01 09:36+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: Nabil Hanna <nabil1978@web.de>\n"
@@ -30,6 +30,9 @@ msgstr "Sichert Video-DVD auf Festplatte"
 msgid "Could not find any file to backup!"
 msgstr "Konnte keine Datei zum Sichern finden!"
 
+msgid "Could not install needed dvdbackup package!"
+msgstr "Konnte das benötigte dvdbackup Paket nicht installieren!"
+
 msgid "Could not read the DVD informations!"
 msgstr "Konnte die DVD Informationen nicht lesen!"
 
@@ -53,6 +56,9 @@ msgstr "DVD auswerfen?"
 
 msgid "Error while backup of DVD!"
 msgstr "Fehler beim Sichern der DVD!"
+
+msgid "Installing..."
+msgstr "Installiere..."
 
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -78,12 +84,3 @@ msgid ""
 msgstr ""
 "genisoimage Job erledigt.\n"
 "DVD Ordner löschen?"
-
-#~ msgid "Could not install needed dvdbackup package!"
-#~ msgstr "Konnte das benötigte dvdbackup Paket nicht installieren!"
-
-#~ msgid "DVD Name"
-#~ msgstr "DVD Name"
-
-#~ msgid "Installing..."
-#~ msgstr "Installiere..."

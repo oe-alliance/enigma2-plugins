@@ -41,8 +41,7 @@ msgstr "Nebeneinander"
 msgid "Top/Bottom"
 msgstr "Oben/Unten"
 
-#: plugin.py:199
-#: plugin.py:202
+#: plugin.py:199 plugin.py:202
 msgid "2D mode"
 msgstr "2D Modus"
 
@@ -66,8 +65,7 @@ msgstr "Display ausschalten"
 msgid "Offset"
 msgstr "Offset"
 
-#: plugin.py:252
-#: plugin.py:266
+#: plugin.py:252 plugin.py:266
 msgid "3D settings"
 msgstr "3D Einstellungen"
 
@@ -90,4 +88,3 @@ msgstr "3D: 3D Anzeige deaktivieren"
 #: plugin.py:266
 msgid "Change 3D settings"
 msgstr "3D Einstellungen bearbeiten"
-

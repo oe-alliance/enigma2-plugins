@@ -13,10 +13,8 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/"
-"porncenter/src\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src\n"
 
 #: ../src/plugin.py:55
 msgid "Adult streaming plugins for dm800/dm8000"

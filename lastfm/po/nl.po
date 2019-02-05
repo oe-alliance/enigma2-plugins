@@ -88,8 +88,7 @@ msgstr "Interval voor  coverart animatie"
 msgid "Interval to refresh Metadata (seconds)"
 msgstr "Interval om Metadata te verversen (secondes)"
 
-#: ../src/LastFMConfig.py:14
-#: ../src/plugin.py:35
+#: ../src/LastFMConfig.py:14 ../src/plugin.py:35
 msgid "Last.FM"
 msgstr "Last.FM"
 
@@ -113,8 +112,7 @@ msgstr "Vrienden worden geladen"
 msgid "Loading Global Tags"
 msgstr "Global tags worden geladen"
 
-#: ../src/plugin.py:509
-#: ../src/plugin.py:513
+#: ../src/plugin.py:509 ../src/plugin.py:513
 msgid "Loading Loved Tracks"
 msgstr "Geliefde tracks worden geladen"
 
@@ -134,8 +132,7 @@ msgstr "Top tacks worden geladen"
 msgid "Love"
 msgstr "Geliefd"
 
-#: ../src/plugin.py:154
-#: ../src/plugin.py:457
+#: ../src/plugin.py:154 ../src/plugin.py:457
 msgid "Loved Tracks"
 msgstr "Geliefde tracks"
 
@@ -195,8 +192,7 @@ msgstr "Persoonlijke aanbevelingen"
 msgid "Personal Stations"
 msgstr "Persoonlijke Stations"
 
-#: ../src/plugin.py:178
-#: ../src/plugin.py:407
+#: ../src/plugin.py:178 ../src/plugin.py:407
 msgid "Play"
 msgstr "Speel"
 
@@ -252,8 +248,7 @@ msgstr "Stuur now playing audio tracks"
 msgid "Server returned"
 msgstr "Server antwoorde"
 
-#: ../src/LastFMConfig.py:27
-#: ../src/plugin.py:209
+#: ../src/LastFMConfig.py:27 ../src/plugin.py:209
 msgid "Setup"
 msgstr "Instellingen"
 
@@ -357,9 +352,7 @@ msgstr "Gebruik LastFM Proxy"
 msgid "Use Screensaver"
 msgstr "Gebruik screensaver"
 
-#: ../src/plugin.py:92
-#: ../src/plugin.py:100
-#: ../src/plugin.py:135
+#: ../src/plugin.py:92 ../src/plugin.py:100 ../src/plugin.py:135
 #: ../src/plugin.py:413
 msgid "Ver."
 msgstr "Ver."
@@ -388,4 +381,3 @@ msgstr "speelt:"
 #, python-format
 msgid "please enter an %s name to listen to"
 msgstr "geef een %s naam om naar te luisteren"
-

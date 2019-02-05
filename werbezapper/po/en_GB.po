@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2012-03-16 16:35+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -26,89 +26,20 @@ msgstr "Custom"
 msgid "How many minutes to wait until zapping back?"
 msgstr "How many minutes to wait until zapping back?"
 
-#, python-format
-msgid "Monitoring: %s (%d:%02d Min)"
-msgstr "Monitoring: %s (%d:%02d Min)"
-
-msgid "Rezap"
-msgstr "Rezap"
-
-msgid "Start / Stop monitoring instantly"
-msgstr "Start / Stop monitoring instantly"
-
-msgid "Start monitoring"
-msgstr "Start monitoring"
-
-msgid "Stop monitoring"
-msgstr "Stop monitoring"
-
-msgid "Stop timer"
-msgstr "Stop timer"
-
-#, python-format
 msgid ""
-"WerbeZapper\n"
-"Monitoring ends\n"
-"%s"
+"Timer already running.\n"
+"Stop it?"
 msgstr ""
-"WerbeZapper\n"
-"Monitoring ends\n"
-"%s"
-
-#, python-format
-msgid ""
-"WerbeZapper\n"
-"Monitoring started\n"
-"%s"
-msgstr ""
-"WerbeZapper\n"
-"Monitoring started\n"
-"%s"
-
-msgid ""
-"WerbeZapper\n"
-"Monitoring started unlimited\n"
-"Has to be deactivated manually"
-msgstr ""
-"WerbeZapper\n"
-"Monitoring started unlimited\n"
-"Has to be deactivated manually"
 
 msgid "When to Zap back?"
 msgstr "When to Zap back?"
 
-msgid "Zapping back"
-msgstr "Zapping back"
-
-#, python-format
-msgid "Zapping back in %d Minute(s)"
+#, fuzzy, python-format
+msgid "Zapping back in %d Minutes"
 msgstr "Zapping back in %d Minute(s)"
-
-#, python-format
-msgid "Zapping back in %d:%02d Min"
-msgstr "Zapping back in %d:%02d Min"
 
 msgid "minute"
 msgstr "minute"
 
 msgid "minutes"
 msgstr "minutes"
-
-#~ msgid ""
-#~ "Monitoring:\n"
-#~ "%s (%d:%02d Min)"
-#~ msgstr ""
-#~ "Monitoring:\n"
-#~ "%s (%d:%02d Min)"
-
-#~ msgid "Start monitoring..."
-#~ msgstr "Start monitoring..."
-
-#~ msgid "Stop monitoring: %s"
-#~ msgstr "Stop monitoring: %s"
-
-#~ msgid "Stop timer (%s Min)"
-#~ msgstr "Stop timer (%s Min)"
-
-#~ msgid "Zapping back in (%s Min)"
-#~ msgstr "Zapping back in (%s Min)"

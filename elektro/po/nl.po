@@ -76,44 +76,31 @@ msgstr "geen naam"
 msgid "Connection Error"
 msgstr "Verbindingsfout"
 
-#: plugin.py:211
-#: plugin.py:222
-#: plugin.py:230
-#: plugin.py:530
+#: plugin.py:211 plugin.py:222 plugin.py:230 plugin.py:530
 msgid "Ver."
 msgstr "Ver."
 
-#: plugin.py:263
-#: plugin.py:268
+#: plugin.py:263 plugin.py:268
 msgid "Wakeup"
 msgstr "Start"
 
-#: plugin.py:264
-#: plugin.py:269
+#: plugin.py:264 plugin.py:269
 msgid "Sleep"
 msgstr "Stop"
 
-#: plugin.py:265
-#: plugin.py:270
+#: plugin.py:265 plugin.py:270
 msgid "Next day starts at"
 msgstr "Volgende dag start om"
 
-#: plugin.py:266
-#: plugin.py:271
+#: plugin.py:266 plugin.py:271
 msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
 msgstr "Als bijvoorbeeld de box verondersteld wordt om in deep standby te schakelen op maandag om 01u00, is het feitelijk al dinsdag. Om dit correct te laten verlopen kan het uur van de dagschakeling ingesteld worden (vb. 03u00)"
 
-#: plugin.py:275
-#: plugin.py:321
-#: plugin.py:400
-#: plugin.py:507
+#: plugin.py:275 plugin.py:321 plugin.py:400 plugin.py:507
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: plugin.py:276
-#: plugin.py:322
-#: plugin.py:401
-#: plugin.py:508
+#: plugin.py:276 plugin.py:322 plugin.py:401 plugin.py:508
 msgid "Ok"
 msgstr "OK"
 
@@ -177,8 +164,7 @@ msgstr "Profielen alternerend activeren"
 msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
 msgstr "Beide profielen worden alternerend gebruikt. Bij het uitschakelen wordt het profiel gewisseld. Dit laat 2 periodes per dag toe. De tijden niet overlappen. "
 
-#: plugin.py:467
-#: plugin.py:624
+#: plugin.py:467 plugin.py:624
 msgid "Standby on boot"
 msgstr "Standby na start"
 
@@ -297,4 +283,3 @@ msgstr "In Standby schakelen?"
 #: plugin.py:828
 msgid "Go to sleep now?"
 msgstr "In Deep Standby schakelen?"
-

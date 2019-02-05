@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - partnerbox\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 14:08+0100\n"
+"POT-Creation-Date: 2015-09-27 15:42+0300\n"
 "PO-Revision-Date: 2009-10-29 20:40+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,9 +17,118 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/partnerbox\n"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxEPGSelection.py:123
-#: /home/dario/Plugins/partnerbox/src/plugin.py:337
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1158
+#, python-format
+msgid "%d min"
+msgstr ""
+
+msgid "%d.%B %Y"
+msgstr "%d.%B %Y"
+
+#, python-format
+msgid "%s%d min"
+msgstr ""
+
+msgid "(ZAP)"
+msgstr "(ZAP)"
+
+msgid "<unknown>"
+msgstr "<sconosciuto>"
+
+msgid "Abort"
+msgstr ""
+
+msgid "Activate Picture in Picture"
+msgstr ""
+
+msgid "Add"
+msgstr "Agg."
+
+#, fuzzy
+msgid "Add internal timer"
+msgstr "Agg. timer"
+
+msgid "Add timer"
+msgstr "Agg. timer"
+
+msgid "After event"
+msgstr "Dopo l'evento"
+
+msgid "Alternative"
+msgstr ""
+
+msgid "Alternative services are not supported!"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Attention, this is repeated timer!\n"
+msgstr ""
+
+msgid "Bouquet List"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Annull."
+
+msgid "Change pin code"
+msgstr ""
+
+msgid "Channel"
+msgstr "Canale"
+
+msgid "Choice list Partnerbox"
+msgstr ""
+
+msgid "Choose action:"
+msgstr ""
+
+msgid "Choose bouquet"
+msgstr ""
+
+msgid "Clean up"
+msgstr "Ripulire"
+
+msgid "Cleaning up finished timer entries..."
+msgstr "Rimozione delle voci di timer conclusi..."
+
+msgid "DVB-C"
+msgstr ""
+
+msgid "DVB-T"
+msgstr ""
+
+msgid "DVR"
+msgstr "DVR"
+
+msgid "Date"
+msgstr "Data"
+
+#, fuzzy
+msgid "Deep Standby"
+msgstr "Spegnimento (Deep standby)"
+
+msgid "Delete"
+msgstr "Canc."
+
+#, fuzzy
+msgid "Delete timer"
+msgstr "Rim. timer"
+
+msgid "Description"
+msgstr "Descrizione"
+
+msgid "Disable Picture in Picture"
+msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"Do you really want to delete the remote timer \n"
+"%s ?"
+msgstr ""
+"Rimuovere il timer \n"
+"%s?"
+
 #, python-format
 msgid ""
 "Do you really want to delete the timer \n"
@@ -27,448 +137,152 @@ msgstr ""
 "Rimuovere il timer \n"
 "%s?"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxEPGSelection.py:174
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1013
-msgid "Remove timer"
-msgstr "Rim. timer"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:111
-msgid "You have to restart Enigma2 to activate your new preferences!"
-msgstr "Riavvaire enigma2 per attivare la nuova configurazione!"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:127
-#: /home/dario/Plugins/partnerbox/src/plugin.py:135
-msgid "Manage timer for other dreamboxes in network"
-msgstr "Gestire timer su altri Dreambox in rete"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:133
-msgid "setup for partnerbox"
-msgstr "Configurazione Partnerbox"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:138
-msgid "Stream TV from your Partnerbox"
-msgstr "Stream TV dal Partnerbox"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:140
-msgid "Stream current service from partnerbox"
-msgstr "Stream canale corrente da Partnerbox"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:233
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:134
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:241
-msgid "Delete"
-msgstr "Canc."
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:235
-#: /home/dario/Plugins/partnerbox/src/plugin.py:507
-#: /home/dario/Plugins/partnerbox/src/plugin.py:658
 msgid "EPG Selection"
 msgstr "Selezione EPG"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:236
-msgid "Clean up"
-msgstr "Ripulire"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:237
-msgid "Getting Partnerbox Information..."
-msgstr "Recupero informazioni Partnerbox in corso..."
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:318
-msgid "Cleaning up finished timer entries..."
-msgstr "Rimozione delle voci di timer conclusi..."
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:400
-msgid "Getting Partnerbox Bouquet Information..."
-msgstr "Recupero informazioni bouquet Partnerbox in corso..."
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:504
-msgid "Zap"
-msgstr "Zap"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:510
-#: /home/dario/Plugins/partnerbox/src/plugin.py:659
-#: /home/dario/Plugins/partnerbox/src/plugin.py:953
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1004
-msgid "Info"
-msgstr "Informazioni"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:512
-msgid "Getting Channel Information..."
-msgstr "Recupero informazioni canale in corso..."
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:813
-#: /home/dario/Plugins/partnerbox/src/plugin.py:885
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1242
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1247
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1299
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1302
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1304
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1388
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1585
-msgid "mins"
-msgstr "Min"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:950
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1009
-msgid "Add timer"
-msgstr "Agg. timer"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:954
-msgid "Getting EPG Information..."
-msgstr "Recupero informazioni EPG in corso..."
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
-msgid "Mon"
-msgstr "Lun"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
-msgid "Tue"
-msgstr "Mar"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
-msgid "Wed"
-msgstr "Mer"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
-msgid "Thu"
-msgstr "Gio"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
-msgid "Fri"
-msgstr "Ven"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
-msgid "Sat"
-msgstr "Sab"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
-msgid "Sun"
-msgstr "Dom"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1240
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1245
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1297
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1302
-msgid "(ZAP)"
-msgstr "(ZAP)"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1250
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1307
-msgid "waiting"
-msgstr "In attesa"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1252
-msgid "about to start"
-msgstr "Avvio in corso"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1255
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1310
-msgid "zapped"
-msgstr "Zap eseguito"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1257
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1312
-msgid "recording..."
-msgstr "Registrazione..."
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1259
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1314
-msgid "done!"
-msgstr "Fatto!"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1261
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1325
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1327
-msgid "<unknown>"
-msgstr "<sconosciuto>"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1264
-msgid "disabled"
-msgstr "Disabilitato"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1317
-msgid "Error: No space left"
-msgstr "Errore: spazio insufficiente"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1319
-msgid "Error: User aborted"
-msgstr "Errore: annullato dall'utente"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1321
-msgid "Error: Zap failed"
-msgstr "Errore : zap fallito"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1323
-msgid "Error: Outdated"
-msgstr "Errore: sorpassato"
-
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1570
-msgid "unknown service"
-msgstr "Canale sconosciuto"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:40
-msgid "Enigma 2"
-msgstr "Enigma 2"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:40
-msgid "Enigma 1"
-msgstr "Enigma 1"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:42
-msgid "use external"
-msgstr "Usare il remoto"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:42
-msgid "use internal"
-msgstr "Usare il locale"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:73
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:239
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:73
-msgid "Cancel"
-msgstr "Annull."
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:74
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:240
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:72
-msgid "OK"
-msgstr "Ok"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:75
-msgid "Partnerbox Entries"
-msgstr "Voci Partnerbox"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:79
-msgid "Show 'RemoteTimer' in E-Menu"
-msgstr "Mostrare \"RemoteTimer\" nel E-menu:"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:80
-msgid "Show 'RemoteTV Player' in E-Menu"
-msgstr "Mostrare \"RemoteTV Player\" nel E-menu:"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:81
-msgid "Show 'Stream current Service' in E-Menu"
-msgstr "Mostrare \"Stream del canale corrente\" nel E-menu:"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:82
-msgid "Enable Partnerbox-Function in TimerEvent"
-msgstr "Abilitare la funzione Partnerbox nell'evento timer"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:83
-msgid "Enable Partnerbox-Function in EPGList"
-msgstr "Abilitare la funzione Partnerbox in elenco EPG"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:123
-msgid "Partnerbox: List of Entries"
-msgstr "Partnerbox: elenco voci"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:128
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:251
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:153
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:440
-msgid "Name"
-msgstr "Nome"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:129
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:252
-msgid "IP"
-msgstr "IP"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:130
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:253
-msgid "Port"
-msgstr "Porta"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:131
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:254
-msgid "Enigma Type"
-msgstr "Tipo enigma"
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:132
-msgid "Add"
-msgstr "Agg."
-
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:133
 msgid "Edit"
 msgstr "Modif."
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:173
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:280
-msgid "Really delete this Partnerbox Entry?"
-msgstr "Cancellare la voce?"
+msgid "Edit internal timer"
+msgstr ""
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:225
-msgid "Partnerbox: Edit Entry"
-msgstr "Partnerbox: modificare voce"
+#, fuzzy
+msgid "Edit remote timer"
+msgstr "Rim. timer"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:255
-msgid "Password"
-msgstr "Password"
+#, fuzzy
+msgid "Enable Partnerbox-Function in Channel Selector"
+msgstr "Abilitare la funzione Partnerbox nell'evento timer"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:256
-msgid "Servicelists/EPG"
-msgstr "Elenco canali/EPG:"
+msgid "Enable Partnerbox-Function in EPGList"
+msgstr "Abilitare la funzione Partnerbox in elenco EPG"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:257
-msgid "Zap to service when streaming"
-msgstr "Sintonizzarsi sul canale di streaming"
+msgid "Enable Partnerbox-Function in TimerEvent"
+msgstr "Abilitare la funzione Partnerbox nell'evento timer"
 
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:128
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:132
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:406
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:411
-msgid "zap"
-msgstr "Zap"
+#, fuzzy
+msgid "Enable Red Button-Function in single/multi EPG"
+msgstr "Abilitare la funzione Partnerbox in elenco EPG"
 
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:128
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:406
-msgid "record"
-msgstr "Registrare"
+msgid "Enable VPS"
+msgstr ""
 
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:129
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:133
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:407
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:412
-msgid "do nothing"
-msgstr "Non fare nulla"
+msgid "Enable VPS-Function in TimerEvent"
+msgstr ""
 
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:129
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:133
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:407
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:412
-msgid "go to standby"
-msgstr "Standby"
+#, fuzzy
+msgid "Enable first Partnerbox-entry in Timeredit as default"
+msgstr "Abilitare la funzione Partnerbox nell'evento timer"
 
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:129
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:133
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:407
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:412
-msgid "go to deep standby"
-msgstr "Spegnimento (Deep standby)"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:129
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:407
-msgid "auto"
-msgstr "Auto"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:132
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:411
-msgid "NGRAB"
-msgstr "NGRAB"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:132
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:411
-msgid "DVR"
-msgstr "DVR"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:135
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:414
-msgid "%d.%B %Y"
-msgstr "%d.%B %Y"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:143
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:422
-msgid "Monday"
-msgstr "Lunedì"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:143
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:422
-msgid "Tuesday"
-msgstr "Martedì"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:143
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:422
-msgid "Wednesday"
-msgstr "Mercoledì"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:143
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:422
-msgid "Thursday"
-msgstr "Giovedì"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:143
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:422
-msgid "Friday"
-msgstr "Venerdì"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:143
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:422
-msgid "Saturday"
-msgstr "Sabato"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:143
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:422
-msgid "Sunday"
-msgstr "Domenica"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:154
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:441
-msgid "Description"
-msgstr "Descrizione"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:155
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:442
-msgid "Timer Type"
-msgstr "Tipo timer"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:157
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:444
-msgid "Date"
-msgstr "Data"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:159
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:446
-msgid "StartTime"
-msgstr "Ora avvio"
-
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:163
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:168
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:450
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:455
 msgid "EndTime"
 msgstr "Ora fine"
 
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:170
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:457
-msgid "Channel"
-msgstr "Canale"
+msgid "Enigma 1"
+msgstr "Enigma 1"
 
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:173
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:460
+msgid "Enigma 2"
+msgstr "Enigma 2"
+
+msgid "Enigma Type"
+msgstr "Tipo enigma"
+
+msgid "Enter the service pin"
+msgstr ""
+
+#, fuzzy
+msgid "Error: "
+msgstr "Errore: sorpassato"
+
+msgid "Error: No space left"
+msgstr "Errore: spazio insufficiente"
+
+msgid "Error: Outdated"
+msgstr "Errore: sorpassato"
+
+msgid "Error: User aborted"
+msgstr "Errore: annullato dall'utente"
+
+msgid "Error: Zap failed"
+msgstr "Errore : zap fallito"
+
+msgid "Eventview"
+msgstr ""
+
+msgid "Fri"
+msgstr "Ven"
+
+msgid "Friday"
+msgstr "Venerdì"
+
+msgid "Getting Channel Information..."
+msgstr "Recupero informazioni canale in corso..."
+
+msgid "Getting EPG Information..."
+msgstr "Recupero informazioni EPG in corso..."
+
+#, fuzzy
+msgid "Getting EPG data..."
+msgstr "Recupero informazioni EPG in corso..."
+
+msgid "Getting Partnerbox Bouquet Information..."
+msgstr "Recupero informazioni bouquet Partnerbox in corso..."
+
+msgid "Getting Partnerbox Information..."
+msgstr "Recupero informazioni Partnerbox in corso..."
+
+msgid "Getting timerlist data..."
+msgstr ""
+
+msgid "Give Enigma time to fill epg cache..."
+msgstr ""
+
+msgid "IP"
+msgstr "IP"
+
+msgid "Info"
+msgstr "Informazioni"
+
+msgid "Internet services are not supported!"
+msgstr ""
+
 msgid "Location"
 msgstr "Destinazione"
 
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:176
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:178
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:463
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:465
-msgid "After event"
-msgstr "Dopo l'evento"
+msgid "Manage timer for other dreamboxes in network"
+msgstr "Gestire timer su altri Dreambox in rete"
 
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:289
+msgid "Menu PiP"
+msgstr ""
+
+msgid "Mon"
+msgstr "Lun"
+
+msgid "Monday"
+msgstr "Lunedì"
+
+msgid "Move Picture in Picture"
+msgstr ""
+
+msgid "NGRAB"
+msgstr "NGRAB"
+
+msgid "Name"
+msgstr "Nome"
+
 msgid "No"
 msgstr "No"
 
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:312
-msgid "Remote Timer"
-msgstr "Timer remoto"
+msgid "OK"
+msgstr "Ok"
 
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:523
-#: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:533
+#, fuzzy
+msgid "Partnerbox"
+msgstr "Voci Partnerbox"
+
+#, fuzzy
+msgid "Partnerbox - RemotePlayer"
+msgstr "Voci Partnerbox"
+
 #, python-format
 msgid ""
 "Partnerbox Answer: \n"
@@ -477,14 +291,288 @@ msgstr ""
 "Risposta Partnerbox: \n"
 "%s"
 
-msgid "Enable VPS-Function in TimerEvent"
+msgid "Partnerbox Entries"
+msgstr "Voci Partnerbox"
+
+#, fuzzy
+msgid "Partnerbox RemoteTimer"
+msgstr "Voci Partnerbox"
+
+#, fuzzy
+msgid "Partnerbox Setup"
+msgstr "Voci Partnerbox"
+
+msgid "Partnerbox: Edit Entry"
+msgstr "Partnerbox: modificare voce"
+
+msgid "Partnerbox: List of Entries"
+msgstr "Partnerbox: elenco voci"
+
+#, fuzzy
+msgid "Partnerbox: RemoteTV Player"
+msgstr "Partnerbox: modificare voce"
+
+#, fuzzy
+msgid "Partnerbox: RemoteTimer"
+msgstr "Voci Partnerbox"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Port"
+msgstr "Porta"
+
+msgid "Power"
 msgstr ""
 
-msgid "Enable VPS"
+msgid "Press OK to edit timer..."
+msgstr ""
+
+msgid "Really delete this Partnerbox Entry?"
+msgstr "Cancellare la voce?"
+
+#, fuzzy
+msgid "Remote Player"
+msgstr "Timer remoto"
+
+msgid "Remote Timer"
+msgstr "Timer remoto"
+
+#, fuzzy
+msgid "RemoteTimer Timerlist"
+msgstr "Timer remoto"
+
+msgid "Remove timer"
+msgstr "Rim. timer"
+
+msgid "Repeated Timer are not supported!"
+msgstr ""
+
+msgid "Restart"
+msgstr ""
+
+msgid "Restart enigma"
+msgstr ""
+
+msgid "Sat"
+msgstr "Sab"
+
+msgid "Saturday"
+msgstr "Sabato"
+
+#, python-format
+msgid "Select action for remote timer '%s':"
+msgstr ""
+
+#, python-format
+msgid "Select action for timer '%s':"
+msgstr ""
+
+#, fuzzy
+msgid "Select action:"
+msgstr "Selezione EPG"
+
+#, fuzzy
+msgid "Select operation for partnerbox"
+msgstr "Configurazione Partnerbox"
+
+msgid "Servicelists/EPG"
+msgstr "Elenco canali/EPG:"
+
+msgid "Show 'RemoteTV Player' in E-Menu"
+msgstr "Mostrare \"RemoteTV Player\" nel E-menu:"
+
+msgid "Show 'RemoteTimer' in E-Menu"
+msgstr "Mostrare \"RemoteTimer\" nel E-menu:"
+
+#, fuzzy
+msgid "Show 'RemoteTimer' in Event View context menu"
+msgstr "Mostrare \"RemoteTimer\" nel E-menu:"
+
+#, fuzzy
+msgid "Show 'RemoteTimer' in Eventinfo menu"
+msgstr "Mostrare \"RemoteTimer\" nel E-menu:"
+
+msgid "Show 'Stream current Service' in E-Menu"
+msgstr "Mostrare \"Stream del canale corrente\" nel E-menu:"
+
+msgid "Show all icon for event in EPGList"
+msgstr ""
+
+msgid "Show duration time for event"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
+msgid "Standard Zap"
+msgstr ""
+
+#, fuzzy
+msgid "Standby"
+msgstr "Standby"
+
+msgid "StartTime"
+msgstr "Ora avvio"
+
+#, python-format
+msgid "Starting Remote Player (IP = %s)"
+msgstr ""
+
+msgid "Stream"
+msgstr ""
+
+msgid "Stream TV from your Partnerbox"
+msgstr "Stream TV dal Partnerbox"
+
+#, fuzzy
+msgid "Stream current Service from Partnerbox"
+msgstr "Stream canale corrente da Partnerbox"
+
+msgid "Stream current service from partnerbox"
+msgstr "Stream canale corrente da Partnerbox"
+
+msgid "Sun"
+msgstr "Dom"
+
+msgid "Sunday"
+msgstr "Domenica"
+
+msgid "The pin code you entered is wrong."
+msgstr ""
+
+msgid "Thu"
+msgstr "Gio"
+
+msgid "Thursday"
+msgstr "Giovedì"
+
+msgid "Timer Overview"
+msgstr ""
+
+msgid "Timer Type"
+msgstr "Tipo timer"
+
+msgid "Timer can not be added...no locations on partnerbox available."
+msgstr ""
+
+#, fuzzy
+msgid "Timer entry"
+msgstr "Tipo timer"
+
+msgid "Timer event deleted successfully."
+msgstr ""
+
+msgid "Timer event was created successfully."
+msgstr ""
+
+#, fuzzy
+msgid "Timer menu"
+msgstr "Tipo timer"
+
+msgid "Toggle Standby"
+msgstr ""
+
+msgid "Toggle status (on/off)"
+msgstr ""
+
+msgid "Tue"
+msgstr "Mar"
+
+msgid "Tuesday"
+msgstr "Martedì"
+
+msgid "Wakeup"
+msgstr ""
+
+msgid "Wed"
+msgstr "Mer"
+
+msgid "Wednesday"
+msgstr "Mercoledì"
+
+msgid "Yes"
 msgstr ""
 
 msgid "Yes (safe mode)"
 msgstr ""
 
-msgid "Yes"
+msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
 msgstr ""
+
+msgid "Zap"
+msgstr "Zap"
+
+msgid "Zap focus to Picture in Picture"
+msgstr ""
+
+msgid "Zap focus to main screen"
+msgstr ""
+
+msgid "Zap to service when streaming"
+msgstr "Sintonizzarsi sul canale di streaming"
+
+msgid "Zap/"
+msgstr ""
+
+msgid "Zapping to "
+msgstr ""
+
+msgid "about to start"
+msgstr "Avvio in corso"
+
+#, fuzzy
+msgid "add Partnerbox bouquet"
+msgstr "Voci Partnerbox"
+
+#, fuzzy
+msgid "add Partnerbox service"
+msgstr "Voci Partnerbox"
+
+msgid "auto"
+msgstr "Auto"
+
+msgid "disabled"
+msgstr "Disabilitato"
+
+msgid "do nothing"
+msgstr "Non fare nulla"
+
+msgid "done!"
+msgstr "Fatto!"
+
+msgid "go to deep standby"
+msgstr "Spegnimento (Deep standby)"
+
+msgid "go to standby"
+msgstr "Standby"
+
+msgid "mins"
+msgstr "Min"
+
+msgid "record"
+msgstr "Registrare"
+
+msgid "recording..."
+msgstr "Registrazione..."
+
+msgid "setup for partnerbox"
+msgstr "Configurazione Partnerbox"
+
+msgid "unknown service"
+msgstr "Canale sconosciuto"
+
+msgid "use external"
+msgstr "Usare il remoto"
+
+msgid "use internal"
+msgstr "Usare il locale"
+
+msgid "waiting"
+msgstr "In attesa"
+
+msgid "zap"
+msgstr "Zap"
+
+msgid "zapped"
+msgstr "Zap eseguito"

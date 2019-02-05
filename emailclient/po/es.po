@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2009-10-28 08:44+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -77,15 +77,13 @@ msgstr "Asunto"
 msgid ""
 "[EmailAccount] %(name)s: _cbCapabilities:\n"
 "####################################################################################################\n"
-"# If you have problems to log into your imap-server, please send me the "
-"output of the following line\n"
+"# If you have problems to log into your imap-server, please send me the output of the following line\n"
 "# cbCapabilities: %(capa)s\n"
 "####################################################################################################\n"
 msgstr ""
 "[CuentaEmail] %(name)s: _cbCapacidades:\n"
 "####################################################################################################\n"
-"# Si tiene problemas al entrar en el servidor imap, envíeme la salida de la "
-"siguiente línea\n"
+"# Si tiene problemas al entrar en el servidor imap, envíeme la salida de la siguiente línea\n"
 "# cbCapabilities: %(capa)s\n"
 "####################################################################################################\n"
 
@@ -239,63 +237,3 @@ msgstr "nombre de usuario"
 
 msgid "view Emails via IMAP4"
 msgstr "ver Correos via IMAP4"
-
-#~ msgid "Box '%s' is empty"
-#~ msgstr "Buzón '%s' está vacío"
-
-#~ msgid ""
-#~ "In order of missing standart python library files\n"
-#~ "i have copied the nessary files now.\n"
-#~ "But you have to restart your Box\n"
-#~ " to apply this!"
-#~ msgstr ""
-#~ "Faltaban ficheros de librería python\n"
-#~ "he copiado los ficheros necesarios.\n"
-#~ "Deberá reiniciar el equipo\n"
-#~ "para aplicar esto!"
-
-#~ msgid "Mailbox"
-#~ msgstr "Buzón"
-
-#~ msgid "cannot access mailbox '%(mboxname)s'"
-#~ msgstr "no puedo acceder al buzón '%(mboxname)s'"
-
-#~ msgid "cannot get capabilities of mailserver"
-#~ msgstr "no puedo obtener las capacidades del servidor"
-
-#~ msgid "connection to %(server)s:%(port)d failed"
-#~ msgstr "falló la conexión a %(server)s:%(port)d"
-
-#~ msgid ""
-#~ "connection to %(server)s:%(port)d failed:\n"
-#~ "%(reason)s"
-#~ msgstr ""
-#~ "falló la conexión a %(server)s:%(port)d:\n"
-#~ "%(reason)s"
-
-#~ msgid "encrypted login failed, trying without encryption"
-#~ msgstr "falló el login encriptado, intente sin encriptar"
-
-#~ msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
-#~ msgstr "cargando cabeceras %(from)d-%(to)d del Buzón '%(name)s'"
-
-#~ msgid "logged in"
-#~ msgstr "logueado"
-
-#~ msgid "login failed"
-#~ msgstr "falló el logueo"
-
-#~ msgid "max of Headers to load"
-#~ msgstr "máx de Caberas a cargar"
-
-#~ msgid "no"
-#~ msgstr "no"
-
-#~ msgid "notify about new mails"
-#~ msgstr "notifíqueme sobre nuevos correos"
-
-#~ msgid "unread messages in mailbox"
-#~ msgstr "mensajes no leídos en el buzón"
-
-#~ msgid "yes"
-#~ msgstr "si"

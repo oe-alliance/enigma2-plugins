@@ -141,4 +141,3 @@ msgstr "Timeshift beenden wenn Aufnahme läuft?"
 
 msgid "Creating Hardlink to Timeshift file failed!"
 msgstr "Fehler beim erstellen des Hardlinks zur Timeshift Datei!"
-

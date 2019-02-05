@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - werbezapper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-11 13:30+0000\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2012-03-14 12:16+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -27,80 +27,22 @@ msgstr "Aangepast"
 msgid "How many minutes to wait until zapping back?"
 msgstr "Hoeveel minuten wachten om terug te zappen?"
 
-#, python-format
-msgid "Monitoring: %s (%d:%02d Min)"
-msgstr "Controleer: %s (%d:%02d Min)"
-
-msgid "Rezap"
-msgstr "Zap opnieuw"
-
-msgid "Start / Stop monitoring instantly"
-msgstr "Start/Stop controleren onmiddellijk"
-
-msgid "Start monitoring"
-msgstr "Start controleren"
-
-msgid "Stop monitoring"
-msgstr "Stop controleren"
-
-msgid "Stop timer"
-msgstr "Stop timer"
-
-#, python-format
 msgid ""
-"WerbeZapper\n"
-"Monitoring ends\n"
-"%s"
+"Timer already running.\n"
+"Stop it?"
 msgstr ""
-"WerbeZapper\n"
-"Controleren eindigt\n"
-"%s"
-
-#, python-format
-msgid ""
-"WerbeZapper\n"
-"Monitoring started\n"
-"%s"
-msgstr ""
-"WerbeZapper\n"
-"Controleren gestart\n"
-"%s"
-
-msgid ""
-"WerbeZapper\n"
-"Monitoring started unlimited\n"
-"Has to be deactivated manually"
-msgstr ""
-"WerbeZapper\n"
-"Ongelimiteerd controleren gestart\n"
-"Moet handmatig geactiveerd worden"
+"Timer reeds gestart.\n"
+"Deze stoppen?"
 
 msgid "When to Zap back?"
 msgstr "Wanneer terug zappen?"
 
-msgid "Zapping back"
-msgstr "Terug zappen"
-
 #, python-format
-msgid "Zapping back in %d Minute(s)"
-msgstr "Zapt terug in %d Minuut(en)"
-
-#, python-format
-msgid "Zapping back in %d:%02d Min"
-msgstr "Zapt terug in %d:%02d Min"
+msgid "Zapping back in %d Minutes"
+msgstr "Terug zappen in %d minuten"
 
 msgid "minute"
 msgstr "minuut"
 
 msgid "minutes"
 msgstr "minuten"
-
-#~ msgid ""
-#~ "Timer already running.\n"
-#~ "Stop it?"
-#~ msgstr ""
-#~ "Timer reeds gestart.\n"
-#~ "Deze stoppen?"
-
-#~ msgid "Zapping back in %d Minutes"
-#~ msgstr "Terug zappen in %d minuten"

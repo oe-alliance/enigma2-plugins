@@ -111,12 +111,8 @@ msgstr "account %s is not connected"
 msgid "account name"
 msgstr "account name"
 
-#: ../src/plugin.py:127
-#: ../src/plugin.py:194
-#: ../src/plugin.py:235
-#: ../src/plugin.py:384
-#: ../src/plugin.py:387
-#: ../src/plugin.py:393
+#: ../src/plugin.py:127 ../src/plugin.py:194 ../src/plugin.py:235
+#: ../src/plugin.py:384 ../src/plugin.py:387 ../src/plugin.py:393
 msgid "account not connected"
 msgstr "account not connected"
 
@@ -124,8 +120,7 @@ msgstr "account not connected"
 msgid "add"
 msgstr "add"
 
-#: ../src/EmailConfig.py:39
-#: ../src/EmailConfig.py:102
+#: ../src/EmailConfig.py:39 ../src/EmailConfig.py:102
 msgid "cancel"
 msgstr "cancel"
 
@@ -228,13 +223,11 @@ msgstr "maximum mail size to fetch"
 msgid "message too large"
 msgstr "message too large"
 
-#: ../src/plugin.py:1015
-#: ../src/plugin.py:1052
+#: ../src/plugin.py:1015 ../src/plugin.py:1052
 msgid "no account selected"
 msgstr "no account selected"
 
-#: ../src/plugin.py:346
-#: ../src/plugin.py:604
+#: ../src/plugin.py:346 ../src/plugin.py:604
 msgid "no date"
 msgstr "no date"
 
@@ -254,13 +247,11 @@ msgstr "no mailbox?!?!"
 msgid "no sender"
 msgstr "no sender"
 
-#: ../src/plugin.py:347
-#: ../src/plugin.py:597
+#: ../src/plugin.py:347 ../src/plugin.py:597
 msgid "no subject"
 msgstr "no subject"
 
-#: ../src/EmailConfig.py:40
-#: ../src/EmailConfig.py:103
+#: ../src/EmailConfig.py:40 ../src/EmailConfig.py:103
 msgid "ok"
 msgstr "ok"
 
@@ -307,4 +298,3 @@ msgstr "user name"
 #: ../src/plugin.py:1147
 msgid "view Emails via IMAP4"
 msgstr "view Emails via IMAP4"
-

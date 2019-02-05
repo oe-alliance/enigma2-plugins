@@ -28,17 +28,13 @@ msgstr "Annuler"
 
 #: ../src/plugin.py:213
 msgid ""
-"Cleanup timerlist, orphaned movie files and stored setting backups "
-"automatically.\n"
+"Cleanup timerlist, orphaned movie files and stored setting backups automatically.\n"
 "\n"
-"Modify the settings to match your preferences. More detailed explanations "
-"given with each adjustable option."
+"Modify the settings to match your preferences. More detailed explanations given with each adjustable option."
 msgstr ""
-"Nettoyage de la liste des timers, des fichiers films orphelins et des "
-"backups des paramètres automatiques.\n"
+"Nettoyage de la liste des timers, des fichiers films orphelins et des backups des paramètres automatiques.\n"
 "\n"
-"Modifier les paramètres en fonction de vos préférences. Plus de détails "
-"donnés à chaque paramètre ajustable."
+"Modifier les paramètres en fonction de vos préférences. Plus de détails donnés à chaque paramètre ajustable."
 
 #: ../src/plugin.py:131
 msgid "Delete crashlogs"
@@ -61,12 +57,8 @@ msgid "Help"
 msgstr "Aide"
 
 #: ../src/plugin.py:130
-msgid ""
-"If enabled, orphaned movie files will be automatically deleted from movie "
-"directories."
-msgstr ""
-"Si activé, les fichiers orphelins des films seront automatiquement effacés "
-"du répertoire des films."
+msgid "If enabled, orphaned movie files will be automatically deleted from movie directories."
+msgstr "Si activé, les fichiers orphelins des films seront automatiquement effacés du répertoire des films."
 
 #: ../src/plugin.py:133
 msgid "Maximum number of crashlogs"
@@ -77,56 +69,32 @@ msgid "Maximum number of system setting backups"
 msgstr "Nombre maximum de backups de paramètres systèmes"
 
 #: ../src/plugin.py:128
-msgid ""
-"Maximum number of system setting backups to keep, regardless of retention "
-"period."
-msgstr ""
-"Nombre maximum de backup des paramètres systèmes à conserver, indépendament "
-"de la période de rétention."
+msgid "Maximum number of system setting backups to keep, regardless of retention period."
+msgstr "Nombre maximum de backup des paramètres systèmes à conserver, indépendament de la période de rétention."
 
 #: ../src/plugin.py:168
 msgid "OK"
 msgstr "OK"
 
 #: ../src/plugin.py:132 ../src/plugin.py:134
-msgid ""
-"Sorry, this feature is not available due to license reasons. To get the full "
-"version, please search the web for \"dreambox automaticcleanup.\""
-msgstr ""
-"Désolé, cette fonctionnalité n'est pas disponible à cause d'un problème de "
-"licence. Pour obtenir la version complète, merci de rechercher après "
-"\"dreambox automaticcleanup.\""
+msgid "Sorry, this feature is not available due to license reasons. To get the full version, please search the web for \"dreambox automaticcleanup.\""
+msgstr "Désolé, cette fonctionnalité n'est pas disponible à cause d'un problème de licence. Pour obtenir la version complète, merci de rechercher après \"dreambox automaticcleanup.\""
 
 #: ../src/plugin.py:150
-msgid ""
-"Specify, how long expired timer list entries shall be kept at most. "
-"Deactivated repeat timer entries won't be deleted ever."
-msgstr ""
-"Spécifie combien de temps au maximum les entrées dans la liste de timers "
-"expirés doivent être conservées. Néanmoins les timers qui se répétent "
-"désactivés ne seront pas effacé."
+msgid "Specify, how long expired timer list entries shall be kept at most. Deactivated repeat timer entries won't be deleted ever."
+msgstr "Spécifie combien de temps au maximum les entrées dans la liste de timers expirés doivent être conservées. Néanmoins les timers qui se répétent désactivés ne seront pas effacé."
 
 #: ../src/plugin.py:126
-msgid ""
-"Specify, how long system setting backups shall be kept at most (even if "
-"maximum number is not yet exceeded). Latest backup will be kept anyway!"
-msgstr ""
-"Spécifie combien de temps les backups des paramètres systèmes doivent être "
-"conservé (même si le nombre maximum n'est pas encore dépassé). Les derniers "
-"backups seront de toute façon conservé!"
+msgid "Specify, how long system setting backups shall be kept at most (even if maximum number is not yet exceeded). Latest backup will be kept anyway!"
+msgstr "Spécifie combien de temps les backups des paramètres systèmes doivent être conservé (même si le nombre maximum n'est pas encore dépassé). Les derniers backups seront de toute façon conservé!"
 
 #: ../src/plugin.py:433
 msgid "System cleanup"
 msgstr "Nettoyage du système."
 
 #: ../src/plugin.py:147
-msgid ""
-"Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't "
-"delete entries whilst this option is enabled in EMC."
-msgstr ""
-"Le nettoyage de la liste des timers est activé dans le plugin EMC! Pour "
-"éviter les crashs, nous n'effaçerons pas les entrées tant que cette option "
-"est activée dans EMC."
+msgid "Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't delete entries whilst this option is enabled in EMC."
+msgstr "Le nettoyage de la liste des timers est activé dans le plugin EMC! Pour éviter les crashs, nous n'effaçerons pas les entrées tant que cette option est activée dans EMC."
 
 #: ../src/plugin.py:190
 msgid "Ver."

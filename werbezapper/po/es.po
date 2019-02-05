@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:29+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2009-02-10 14:32+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -26,71 +26,22 @@ msgstr "Personalizado"
 msgid "How many minutes to wait until zapping back?"
 msgstr "¿Cuántos minutos esperaramos hasta que vuelva el zapping?"
 
-#, python-format
-msgid "Monitoring: %s (%d:%02d Min)"
-msgstr ""
-
-msgid "Rezap"
-msgstr ""
-
-msgid "Start / Stop monitoring instantly"
-msgstr ""
-
-msgid "Start monitoring"
-msgstr ""
-
-msgid "Stop monitoring"
-msgstr ""
-
-msgid "Stop timer"
-msgstr ""
-
-#, python-format
 msgid ""
-"WerbeZapper\n"
-"Monitoring ends\n"
-"%s"
+"Timer already running.\n"
+"Stop it?"
 msgstr ""
-
-#, python-format
-msgid ""
-"WerbeZapper\n"
-"Monitoring started\n"
-"%s"
-msgstr ""
-
-msgid ""
-"WerbeZapper\n"
-"Monitoring started unlimited\n"
-"Has to be deactivated manually"
-msgstr ""
+"La alarma ya está ejecutándose.\n"
+"¿La paramos?"
 
 msgid "When to Zap back?"
 msgstr "¿Cuando volveremos al Zapping?"
 
-msgid "Zapping back"
-msgstr ""
-
 #, python-format
-msgid "Zapping back in %d Minute(s)"
-msgstr ""
-
-#, python-format
-msgid "Zapping back in %d:%02d Min"
-msgstr ""
+msgid "Zapping back in %d Minutes"
+msgstr "El Zapping volverá en %d Minutos"
 
 msgid "minute"
 msgstr ""
 
 msgid "minutes"
 msgstr "minutos"
-
-#~ msgid ""
-#~ "Timer already running.\n"
-#~ "Stop it?"
-#~ msgstr ""
-#~ "La alarma ya está ejecutándose.\n"
-#~ "¿La paramos?"
-
-#~ msgid "Zapping back in %d Minutes"
-#~ msgstr "El Zapping volverá en %d Minutos"

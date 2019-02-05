@@ -44,6 +44,3 @@ msgstr "verbinding verbroken"
 
 msgid "pause"
 msgstr "pauze"
-
-#~ msgid "Watch eUroticTV via HTTP Live Streaming"
-#~ msgstr "Bekijk eUroticTV via HTTP Live Streaming"

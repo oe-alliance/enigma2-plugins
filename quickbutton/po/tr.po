@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 Quickbutton plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2009-06-14 20:55+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -60,6 +60,9 @@ msgstr "Görev yok"
 msgid "OK"
 msgstr "Tamam"
 
+msgid "Overwrite HBBTV-red-button"
+msgstr ""
+
 msgid "Pan&Scan"
 msgstr "Pan&Scan"
 
@@ -101,6 +104,3 @@ msgstr "Hızlı tuşa görev ataması yapın"
 
 msgid "switch 4:3 content display"
 msgstr "4:3 içerik görünümü değiştir"
-
-#~ msgid "EPG List"
-#~ msgstr "Kanal EPG"

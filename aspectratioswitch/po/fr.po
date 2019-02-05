@@ -111,15 +111,8 @@ msgid "Save"
 msgstr "Sauvegarder"
 
 #: ../src/plugin.py:121
-msgid ""
-"Use the configured key(s) on your remote control to switch aspect ratio "
-"modes. If any 'Quickbutton' actions were assigned to these keys, they will "
-"be disabled as long as this plugin is activated!"
-msgstr ""
-"Utiliser les touches configurées sur votre télécommande pour basculer les "
-"mode de rapport d'aspect. Si n'importe quelles actions 'Quickbutton' a été "
-"assignée à ces touches, elles seront désactivées tant que ce plugin sera "
-"activé!"
+msgid "Use the configured key(s) on your remote control to switch aspect ratio modes. If any 'Quickbutton' actions were assigned to these keys, they will be disabled as long as this plugin is activated!"
+msgstr "Utiliser les touches configurées sur votre télécommande pour basculer les mode de rapport d'aspect. Si n'importe quelles actions 'Quickbutton' a été assignée à ces touches, elles seront désactivées tant que ce plugin sera activé!"
 
 #: ../src/plugin.py:134
 msgid "Ver."

@@ -13,8 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _(\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
@@ -112,14 +111,8 @@ msgid "Save"
 msgstr "Išsaugoti"
 
 #: ../src/plugin.py:121
-msgid ""
-"Use the configured key(s) on your remote control to switch aspect ratio "
-"modes. If any 'Quickbutton' actions were assigned to these keys, they will "
-"be disabled as long as this plugin is activated!"
-msgstr ""
-"Proporcijų režimams perjungti naudokite nuotolinio pulto paskirtą(-us) "
-"mygtuką(-us). Jei šiems mygtukams priskirti kokie kiti veiksmai, jie bus "
-"išjungti, kol veikia šis įskiepis!"
+msgid "Use the configured key(s) on your remote control to switch aspect ratio modes. If any 'Quickbutton' actions were assigned to these keys, they will be disabled as long as this plugin is activated!"
+msgstr "Proporcijų režimams perjungti naudokite nuotolinio pulto paskirtą(-us) mygtuką(-us). Jei šiems mygtukams priskirti kokie kiti veiksmai, jie bus išjungti, kol veikia šis įskiepis!"
 
 #: ../src/plugin.py:134
 msgid "Ver."

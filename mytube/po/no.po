@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-24 13:22+0200\n"
+"POT-Creation-Date: 2009-05-29 17:38+0200\n"
 "PO-Revision-Date: 2008-02-14 11:44+0100\n"
 "Last-Translator: theMMMMMM <theMMMMMM@gmail.com>\n"
 "Language-Team: none\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,16 +22,28 @@ msgstr ""
 msgid " Results"
 msgstr ""
 
+msgid "Added: "
+msgstr ""
+
 msgid "All"
 msgstr ""
 
 msgid "All Time"
 msgstr ""
 
-msgid "Ascanding"
+msgid "An error occured."
+msgstr ""
+
+msgid "Ascending"
+msgstr ""
+
+msgid "Ask user"
 msgstr ""
 
 msgid "Australia"
+msgstr ""
+
+msgid "Author: "
 msgstr ""
 
 msgid "Autos & Vehicles"
@@ -42,7 +55,10 @@ msgstr ""
 msgid "Canada"
 msgstr ""
 
-msgid "Category"
+msgid "Choose target folder"
+msgstr ""
+
+msgid "Clear history on Exit:"
 msgstr ""
 
 msgid "Close"
@@ -57,10 +73,28 @@ msgstr ""
 msgid "Descending"
 msgstr ""
 
+msgid "Display search results by:"
+msgstr ""
+
 msgid "Do you want to see more entries?"
 msgstr ""
 
+msgid "Download Video"
+msgstr ""
+
+msgid "Download location"
+msgstr ""
+
+msgid "Downloading screenshots. Please wait..."
+msgstr ""
+
+msgid "Duration: "
+msgstr ""
+
 msgid "Education"
+msgstr ""
+
+msgid "Enter your search term(s)"
 msgstr ""
 
 msgid "Entertainment"
@@ -78,9 +112,6 @@ msgstr ""
 msgid "France"
 msgstr ""
 
-msgid "From Region"
-msgstr ""
-
 msgid "Gaming"
 msgstr ""
 
@@ -88,6 +119,15 @@ msgid "Germany"
 msgstr ""
 
 msgid "Great Britain"
+msgstr ""
+
+msgid "HD videos"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "History"
 msgstr ""
 
 msgid "Holland"
@@ -114,10 +154,31 @@ msgstr ""
 msgid "Japan"
 msgstr ""
 
+msgid "Load feed on startup:"
+msgstr ""
+
 msgid "Mexico"
 msgstr ""
 
 msgid "More video entries."
+msgstr ""
+
+msgid "Most discussed"
+msgstr ""
+
+msgid "Most linked"
+msgstr ""
+
+msgid "Most popular"
+msgstr ""
+
+msgid "Most recent"
+msgstr ""
+
+msgid "Most responded"
+msgstr ""
+
+msgid "Most viewed"
 msgstr ""
 
 msgid "Music"
@@ -126,10 +187,25 @@ msgstr ""
 msgid "My TubePlayer"
 msgstr ""
 
+msgid "MyTube Settings"
+msgstr ""
+
 msgid "MyTubePlayer"
 msgstr ""
 
+msgid "MyTubePlayer Help"
+msgstr ""
+
+msgid "MyTubePlayer active video downloads"
+msgstr ""
+
+msgid "MyTubePlayer settings"
+msgstr ""
+
 msgid "MyTubeVideoInfoScreen"
+msgstr ""
+
+msgid "MyTubeVideohelpScreen"
 msgstr ""
 
 msgid "New Zealand"
@@ -144,16 +220,22 @@ msgstr ""
 msgid "No playable video found! Stop playing this movie?"
 msgstr ""
 
-msgid "No, but play next video"
+msgid "No videos to display"
 msgstr ""
 
-msgid "No, but play previous video"
+msgid "No, but play video again"
+msgstr ""
+
+msgid "No, but switch to video entries."
+msgstr ""
+
+msgid "No, but switch to video search."
 msgstr ""
 
 msgid "Nonprofits & Activism"
 msgstr ""
 
-msgid "Order by"
+msgid "Not fetching feed entries"
 msgstr ""
 
 msgid "People & Blogs"
@@ -165,6 +247,18 @@ msgstr ""
 msgid "Play YouTube movies"
 msgstr ""
 
+msgid "Play next video"
+msgstr ""
+
+msgid "Play video again"
+msgstr ""
+
+msgid "Please enter your search term."
+msgstr ""
+
+msgid "Please select a standard feed or try searching for videos."
+msgstr ""
+
 msgid "Poland"
 msgstr ""
 
@@ -174,22 +268,52 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
+msgid "Ratings: "
+msgstr ""
+
+msgid "Really quit MyTube Player?"
+msgstr ""
+
+msgid "Recently featured"
+msgstr ""
+
+msgid "Related video entries."
+msgstr ""
+
 msgid "Relevance"
 msgstr ""
 
-msgid "Restricted Content"
+msgid "Response video entries."
+msgstr ""
+
+msgid "Return to movie list"
 msgstr ""
 
 msgid "Russia"
 msgstr ""
 
+msgid "Save"
+msgstr ""
+
 msgid "Science & Technology"
 msgstr ""
 
-msgid "Search"
+msgid "Search Term(s)"
 msgstr ""
 
-msgid "Search Term(s)"
+msgid "Search category:"
+msgstr ""
+
+msgid "Search region:"
+msgstr ""
+
+msgid "Search restricted content:"
+msgstr ""
+
+msgid "Select new feed to view."
+msgstr ""
+
+msgid "Select your choice."
 msgstr ""
 
 msgid "Short Movies"
@@ -207,13 +331,25 @@ msgstr ""
 msgid "Sports"
 msgstr ""
 
+msgid "Start with following feed:"
+msgstr ""
+
+msgid "Std. Feeds"
+msgstr ""
+
 msgid "Stop playing this movie?"
 msgstr ""
 
 msgid "Sweden"
 msgstr ""
 
+msgid "Tags: "
+msgstr ""
+
 msgid "Taiwan"
+msgstr ""
+
+msgid "There was an error getting the feed entries. Please try again."
 msgstr ""
 
 msgid "This Month"
@@ -222,7 +358,16 @@ msgstr ""
 msgid "This Week"
 msgstr ""
 
+msgid "This is the help screen. Feed me with something to display."
+msgstr ""
+
 msgid "Today"
+msgstr ""
+
+msgid "Top favorites"
+msgstr ""
+
+msgid "Top rated"
 msgstr ""
 
 msgid "Travel & Events"
@@ -237,8 +382,56 @@ msgstr ""
 msgid "United States"
 msgstr ""
 
+msgid "Videobrowser exit behavior:"
+msgstr ""
+
+msgid "Videoplayer stop/exit behavior:"
+msgstr ""
+
 msgid "View Count"
 msgstr ""
 
+msgid "View active downloads"
+msgstr ""
+
+msgid "View related videos"
+msgstr ""
+
+msgid "View response videos"
+msgstr ""
+
+msgid "Views: "
+msgstr ""
+
+msgid ""
+"Welcome to the MyTube Youtube Player.\n"
+"\n"
+"Use the Bouqet+ button to navigate to the search field and the Bouqet- to navigate to the video entries.\n"
+"\n"
+"To play a movie just press OK on your remote control.\n"
+"\n"
+"Press info to see the movie description.\n"
+"\n"
+"Press the Menu button for additional options.\n"
+"\n"
+"The Help button shows this help again."
+msgstr ""
+
+msgid ""
+"Welcome to the MyTube Youtube Player.\n"
+"\n"
+"While entering your search term(s) you will get suggestions displayed matching your search term.\n"
+"\n"
+"To select a suggestion press DOWN on your remote, select the desired result and press OK on your remote to start the search.\n"
+"\n"
+"Press exit to get back to the input field."
+msgstr ""
+
 msgid "Yes"
+msgstr ""
+
+msgid "Yes, but play next video"
+msgstr ""
+
+msgid "Yes, but play previous video"
 msgstr ""

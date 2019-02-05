@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2015-06-25 18:59+0200\n"
 "PO-Revision-Date: 2012-12-03 17:33-0000\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -25,12 +25,8 @@ msgstr ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
 
-msgid ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
+msgid "AUTOFS (mount as needed)"
 msgstr ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
 
 msgid "Active"
 msgstr "Active"
@@ -130,7 +126,8 @@ msgstr "Enter username:"
 msgid "Expert"
 msgstr "Expert"
 
-msgid "FSTAB (mount using linux)"
+#, fuzzy
+msgid "FSTAB (mount at boot)"
 msgstr "FSTAB (mount using linux)"
 
 msgid "Finished restarting your network"
@@ -166,6 +163,10 @@ msgstr "Mount again"
 msgid "Mount informations"
 msgstr "Mount informations"
 
+#, fuzzy
+msgid "Mount manager"
+msgstr "Mount Manager"
+
 msgid "Mount options"
 msgstr "Mount options"
 
@@ -190,9 +191,6 @@ msgstr "Mount points management"
 
 msgid "Mounts editor"
 msgstr "Mounts editor"
-
-msgid "Mounts management"
-msgstr "Mounts management"
 
 msgid "NFS share"
 msgstr "NFS share"
@@ -287,6 +285,9 @@ msgstr "Server share"
 msgid "Setup Mount Again"
 msgstr "Setup Mount Again"
 
+msgid "Use as HDD replacement"
+msgstr "Use as HDD replacement"
+
 msgid "User management"
 msgstr "User management"
 
@@ -302,6 +303,14 @@ msgstr "View, edit or delete mount points on your Receiver."
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "View, edit or delete usernames and passwords for your network."
 
+#, fuzzy
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"A mount entry with this name already exists!\n"
+"Update existing entry and continue?\n"
+
 msgid "Your network mount has been activated."
 msgstr "Your network mount has been activated."
 
@@ -310,9 +319,3 @@ msgstr "Your network mount has been removed."
 
 msgid "Your network mount has been updated."
 msgstr "Your network mount has been updated."
-
-msgid "Use as HDD replacement"
-msgstr "Use as HDD replacement"
-
-#~ msgid "Enigma2 (mount using enigma2"
-#~ msgstr "Enigma2 (mount using enigma2"

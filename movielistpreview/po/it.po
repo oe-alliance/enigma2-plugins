@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - movielistpreview\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-14 23:30+0100\n"
+"POT-Creation-Date: 2010-01-14 18:16+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,56 +17,39 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/MovielistPreview\n"
 
-#: /home/dario/Plugins/MovielistPreview/plugin.py:140
-#: /home/dario/Plugins/MovielistPreview/plugin.py:301
-#: /home/dario/Plugins/MovielistPreview/plugin.py:356
-#: /home/dario/Plugins/MovielistPreview/plugin.py:460
-#: /home/dario/Plugins/MovielistPreview/plugin.py:538
-msgid "Movielist Preview"
-msgstr "Movielist Preview"
-
-#: /home/dario/Plugins/MovielistPreview/plugin.py:145
-msgid "OK"
-msgstr "Ok"
-
-#: /home/dario/Plugins/MovielistPreview/plugin.py:343
-msgid "Preview created."
-msgstr "Anteprima creata."
-
-#: /home/dario/Plugins/MovielistPreview/plugin.py:406
-msgid "Could not find any movie!"
-msgstr "Impossibile trovare registrazioni!"
-
-#: /home/dario/Plugins/MovielistPreview/plugin.py:419
 #, python-format
 msgid "%s - creating preview for movie %s"
 msgstr "%s - creazione anteprima per %s in corso "
 
-#: /home/dario/Plugins/MovielistPreview/plugin.py:428
-msgid "Everything done ;)"
-msgstr "Tutto fatto ;-)"
-
-#: /home/dario/Plugins/MovielistPreview/plugin.py:449
-msgid "Autocreate of previews aborted due user!"
-msgstr "Creazione automatica anteprime interrotta dall'utente!"
-
-#: /home/dario/Plugins/MovielistPreview/plugin.py:473
-msgid "Deactivate Movielist Preview"
-msgstr "Disattivare Movielist Preview"
-
-#: /home/dario/Plugins/MovielistPreview/plugin.py:475
 msgid "Activate Movielist Preview"
 msgstr "Attivare Movielist Preview"
 
-#: /home/dario/Plugins/MovielistPreview/plugin.py:476
-msgid "Create preview"
-msgstr "Creare anteprima"
-
-#: /home/dario/Plugins/MovielistPreview/plugin.py:477
 msgid "Autocreate of missing previews"
 msgstr "Creare automaticamente anteprime mancanti"
 
-#: /home/dario/Plugins/MovielistPreview/plugin.py:478
+msgid "Autocreate of previews aborted due user!"
+msgstr "Creazione automatica anteprime interrotta dall'utente!"
+
 msgid "Change Movielist Preview position"
 msgstr "Cambiare posizione a Movielist Preview"
 
+msgid "Could not find any movie!"
+msgstr "Impossibile trovare registrazioni!"
+
+msgid "Create preview"
+msgstr "Creare anteprima"
+
+msgid "Deactivate Movielist Preview"
+msgstr "Disattivare Movielist Preview"
+
+msgid "Everything done ;)"
+msgstr "Tutto fatto ;-)"
+
+msgid "Movielist Preview"
+msgstr "Movielist Preview"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Preview created."
+msgstr "Anteprima creata."

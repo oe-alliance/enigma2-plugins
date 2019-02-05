@@ -176,4 +176,3 @@ msgstr ""
 #: /media/TREKSTOR/git/enigma2-plugins/automaticcleanup/src/plugin.py:453
 msgid "System cleanup"
 msgstr "Cleanup sistema"
-

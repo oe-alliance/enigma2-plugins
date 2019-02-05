@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 EPGSearch plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-22 20:42+0100\n"
+"POT-Creation-Date: 2015-11-21 10:41+0200\n"
 "PO-Revision-Date: 2014-11-22 20:47+0100\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -14,102 +14,226 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-msgid "Search"
-msgstr "Ara"
-
-msgid "New Search"
-msgstr "Yeni Arama"
-
-msgid "History"
-msgstr "Geçmiş"
-
-msgid "Add timer"
-msgstr "Zamanlayıcı eke"
-
-msgid "EPG Search"
-msgstr "EPG Arama"
-
-msgid "Enter text to search for"
-msgstr "Arama metnini girin"
-
-msgid "Import from Timer"
-msgstr "Zamanlayıcıdan içeri al"
-
-msgid "Import from EPG"
-msgstr "EPG'den içeri al"
-
-msgid "Import from AutoTimer"
-msgstr "Otomatik zamanlayıcıdan içeri al"
-
-msgid "Save search as AutoTimer"
-msgstr "Aramayı AutoTimer olarak kaydet"
-
-msgid "Export selected as AutoTimer"
-msgstr "Seçililenleri AutoTimer olarak dışarı ver"
-
-msgid "Setup"
+#, python-format
+msgid " (%d min)"
 msgstr ""
 
 #, python-format
-msgid "Could not read AutoTimer timer list: %s"
-msgstr "AutoTimer zamanlayıcı listesi okunamıyor : %s"
-
-msgid "Select text to search for"
-msgstr "Arama metnini seçin"
-
-msgid "No history"
-msgstr "Geçmiş kaydı yok"
-
-msgid "Cancel"
-msgstr "Vazgeç"
-
-msgid "OK"
-msgstr "Tamam"
-
-msgid "Select a timer to search"
-msgstr "Arama zamanını seçin"
-
-msgid "Channel Selection"
-msgstr "Kanal Seçimi"
-
-msgid "Search EPG"
-msgstr "EPG'de ara"
-
-msgid "search EPG..."
-msgstr "EPG'de ara..."
-
-msgid "search EPG"
-msgstr "EPG'de ara"
-
-#, fuzzy
-msgid "Search event in EPG"
-msgstr "EPG'de ara"
-
-#, fuzzy
-msgid "EPGSearch Setup"
-msgstr "EPG Arama"
-
-msgid "Length of History"
-msgstr ""
-
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-msgstr ""
-
-msgid "Add \"Search\" Button to EPG"
-msgstr ""
-
-msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
-msgstr ""
-
-msgid "Add \"Search event in EPG\" to event menu"
-msgstr ""
-
-msgid "Adds \"Search event in EPG\" item into the event menu."
+msgid " (%s%d min)"
 msgstr ""
 
 msgid "Add \"Search event in EPG\" to channel menu"
 msgstr ""
 
-msgid "Adds \"Search event in EPG\" item into the channel selection context menu."
+msgid "Add \"Search event in EPG\" to event menu"
 msgstr ""
 
+msgid "Add \"Search\" Button to EPG"
+msgstr ""
+
+msgid "Add timer"
+msgstr "Zamanlayıcı eke"
+
+msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
+msgstr ""
+
+msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Vazgeç"
+
+msgid "Channel Selection"
+msgstr "Kanal Seçimi"
+
+msgid "Choice list"
+msgstr ""
+
+msgid "Choice list EPGSearch"
+msgstr ""
+
+msgid "Choice list RED Button"
+msgstr ""
+
+msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
+msgstr ""
+
+#, fuzzy
+msgid "Clear history"
+msgstr "Geçmiş kaydı yok"
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "AutoTimer zamanlayıcı listesi okunamıyor : %s"
+
+msgid "Display name service as in bouquets"
+msgstr ""
+
+msgid "EPG Search"
+msgstr "EPG Arama"
+
+#, fuzzy
+msgid "EPGSearch"
+msgstr "EPG Arama"
+
+#, fuzzy
+msgid "EPGSearch Setup"
+msgstr "EPG Arama"
+
+#, fuzzy
+msgid "Encoding Search to EPG"
+msgstr "EPG'de ara"
+
+msgid "Enter text to search for"
+msgstr "Arama metnini girin"
+
+msgid "Export selected as AutoTimer"
+msgstr "Seçililenleri AutoTimer olarak dışarı ver"
+
+msgid "History"
+msgstr "Geçmiş"
+
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr ""
+
+msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
+msgstr ""
+
+msgid "If this setting is enabled, searching EPG in only services in user bouquets."
+msgstr ""
+
+msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
+msgstr ""
+
+msgid "If this setting is enabled, the plugin adds picons."
+msgstr ""
+
+msgid "Import from AutoTimer"
+msgstr "Otomatik zamanlayıcıdan içeri al"
+
+msgid "Import from EPG"
+msgstr "EPG'den içeri al"
+
+msgid "Import from Timer"
+msgstr "Zamanlayıcıdan içeri al"
+
+msgid "Length of History"
+msgstr ""
+
+msgid "List of history is cleared !"
+msgstr ""
+
+msgid "Lookup in TMBD"
+msgstr ""
+
+msgid "New Search"
+msgstr "Yeni Arama"
+
+#, fuzzy
+msgid "No history !"
+msgstr "Geçmiş kaydı yok"
+
+msgid "OK"
+msgstr "Tamam"
+
+msgid "Open selected in IMDb"
+msgstr ""
+
+msgid "Partnerbox Entries"
+msgstr ""
+
+msgid "Save search as AutoTimer"
+msgstr "Aramayı AutoTimer olarak kaydet"
+
+msgid "Search"
+msgstr "Ara"
+
+msgid "Search EPG by title event"
+msgstr ""
+
+#, fuzzy
+msgid "Search event in EPG"
+msgstr "EPG'de ara"
+
+msgid "Search for TMDb info"
+msgstr ""
+
+msgid "Search only bouquets"
+msgstr ""
+
+msgid "Search strictness"
+msgstr ""
+
+#, fuzzy
+msgid "Search type"
+msgstr "Ara"
+
+msgid "Search type for filter"
+msgstr ""
+
+msgid "Select a timer to search"
+msgstr "Arama zamanını seçin"
+
+msgid "Select action:"
+msgstr ""
+
+msgid "Select channel"
+msgstr ""
+
+msgid "Select text to search for"
+msgstr "Arama metnini seçin"
+
+msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
+msgstr ""
+
+msgid "Select type for search, \"partial match\" for the most extensive search."
+msgstr ""
+
+msgid "Select type: 'Search and Select channel' or 'Search'."
+msgstr ""
+
+msgid "Select whether or not you want to enforce case correctness."
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Timers list"
+msgstr ""
+
+msgid "Type blue Button"
+msgstr ""
+
+msgid "Use Picons"
+msgstr ""
+
+msgid "Zap to selected service"
+msgstr ""
+
+msgid "case-insensitive search"
+msgstr ""
+
+msgid "case-sensitive search"
+msgstr ""
+
+msgid "choice (Search and standard)"
+msgstr ""
+
+msgid "exact match"
+msgstr ""
+
+#, fuzzy
+msgid "only Search"
+msgstr "Ara"
+
+msgid "partial match"
+msgstr ""
+
+msgid "search EPG"
+msgstr "EPG'de ara"
+
+msgid "search EPG..."
+msgstr "EPG'de ara..."
+
+msgid "title starts with"
+msgstr ""

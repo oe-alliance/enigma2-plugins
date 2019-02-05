@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2011-09-14 19:42+CEST\n"
 "PO-Revision-Date: 2014-10-29 12:40+0100\n"
 "Last-Translator: OEA\n"
 "Language-Team: french\n"
@@ -18,7 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.6.10\n"
 
-#, python-format
 msgid "%s will turn %s in %s!"
 msgstr "%s tournera %s dans %s!"
 
@@ -55,7 +54,6 @@ msgstr "Birthday Reminder"
 msgid "Birthday Reminder Settings"
 msgstr "Birthday Reminder Configuration"
 
-#, python-format
 msgid "Birthday Reminder received %s birthdays from %s."
 msgstr "Birthday Reminder a reçu %s anniversaire de %s."
 
@@ -68,15 +66,12 @@ msgstr "Anniversaires"
 msgid "CSV import successful!"
 msgstr "CSV importé avec succès!"
 
-#, python-format
 msgid "Can't find CSV file %s!"
 msgstr "Impossible de trouver un fichier CSV %s!"
 
-#, python-format
 msgid "Can't import CSV data from file %s."
 msgstr "Impossible d'importer des données du fichier CSV %s."
 
-#, python-format
 msgid "Can't write CSV file %s."
 msgstr "Impossible d'écrire un fichier CSV %s."
 
@@ -98,7 +93,6 @@ msgstr "Désactivé"
 msgid "Distribute birthdays to other Dreamboxes"
 msgstr "Distribuer les anniversaires aux autres récepteurs."
 
-#, python-format
 msgid "Do you really want to delete the entry for %s?"
 msgstr "Voulez-vous vraiment effacer l'entrée pour %s?"
 
@@ -114,7 +108,6 @@ msgstr "Éditer anniversaires"
 msgid "Edit the selected entry"
 msgstr "Éditer l'entrée sélectionnée"
 
-#, python-format
 msgid ""
 "Error reading file %s.\n"
 "\n"
@@ -124,7 +117,6 @@ msgstr ""
 "\n"
 "Erreur: %s, %s"
 
-#, python-format
 msgid ""
 "Error writing file %s.\n"
 "\n"
@@ -206,7 +198,6 @@ msgstr "Tri suivant"
 msgid "Sorting previous"
 msgstr "Tri précédent"
 
-#, python-format
 msgid ""
 "Today is %s's birthday!\n"
 "\n"
@@ -219,7 +210,6 @@ msgstr ""
 msgid "What do you want to do?"
 msgstr "Que voulez-vous faire?"
 
-#, python-format
 msgid "Wrote CSV file %s."
 msgstr "Écrire un fichier CSV %s."
 

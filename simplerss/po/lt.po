@@ -11,8 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../src/plugin.py:102
 #, python-format
@@ -53,12 +52,8 @@ msgid "Entry %s/%s"
 msgstr "Įrašas %s/%s"
 
 #: ../src/RSSScreens.py:57
-msgid ""
-"Error while parsing Feed, this usually means there is something wrong with "
-"it."
-msgstr ""
-"Klaida, nuskaitant šaltinius. Dažniausiai tai reiškia, kad ten kažkas "
-"negerai."
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
+msgstr "Klaida, nuskaitant šaltinius. Dažniausiai tai reiškia, kad ten kažkas negerai."
 
 #: ../src/RSSPoller.py:84
 msgid "Failed to get subscriptions from Google Reader."

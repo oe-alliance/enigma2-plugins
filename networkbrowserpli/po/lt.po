@@ -15,8 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../src/MountEdit.py:269
 msgid ""
@@ -323,8 +322,7 @@ msgstr "Žiūrėkite, redaguokite, ar šalinkite savo pajungimo taškus."
 
 #: ../src/MountManager.py:75
 msgid "View, edit or delete usernames and passwords for your network."
-msgstr ""
-"žiūrėkite, redaguokite, ar šalinkite savo tinklo vartotojus ir slaptažodžius."
+msgstr "žiūrėkite, redaguokite, ar šalinkite savo tinklo vartotojus ir slaptažodžius."
 
 #: ../src/MountEdit.py:341
 msgid "Your network mount has been activated."

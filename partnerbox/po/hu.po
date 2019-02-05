@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: partnerbox\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-20 14:39+0200\n"
+"POT-Creation-Date: 2015-09-27 15:42+0300\n"
 "PO-Revision-Date: 2012-06-27 09:22+0100\n"
 "Last-Translator: robertut <robertut@yahoo.com>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,83 +19,118 @@ msgstr ""
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/RemoteTimerEntry.py:135
-#: ../src/RemoteTimerEntry.py:414
+#, python-format
+msgid "%d min"
+msgstr ""
+
 msgid "%d.%B %Y"
 msgstr "%Y. %B %d."
 
-#: ../src/plugin.py:1234
-#: ../src/plugin.py:1239
-#: ../src/plugin.py:1291
-#: ../src/plugin.py:1296
+#, python-format
+msgid "%s%d min"
+msgstr ""
+
 msgid "(ZAP)"
 msgstr "(Ugrás)"
 
-#: ../src/plugin.py:1255
-#: ../src/plugin.py:1319
-#: ../src/plugin.py:1321
 msgid "<unknown>"
 msgstr "<ismeretlen>"
 
-#: ../src/PartnerboxSetup.py:127
+msgid "Abort"
+msgstr ""
+
+msgid "Activate Picture in Picture"
+msgstr ""
+
 msgid "Add"
 msgstr "Hozzáadás"
 
-#: ../src/plugin.py:944
-#: ../src/plugin.py:1003
+#, fuzzy
+msgid "Add internal timer"
+msgstr "Időzítés hozzáadása"
+
 msgid "Add timer"
 msgstr "Időzítés hozzáadása"
 
-#: ../src/RemoteTimerEntry.py:176
-#: ../src/RemoteTimerEntry.py:178
-#: ../src/RemoteTimerEntry.py:463
-#: ../src/RemoteTimerEntry.py:465
 msgid "After event"
 msgstr "Esemény után"
 
-#: ../src/PartnerboxSetup.py:68
-#: ../src/PartnerboxSetup.py:234
-#: ../src/RemoteTimerEntry.py:73
+msgid "Alternative"
+msgstr ""
+
+msgid "Alternative services are not supported!"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Attention, this is repeated timer!\n"
+msgstr ""
+
+msgid "Bouquet List"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Mégse"
 
-#: ../src/RemoteTimerEntry.py:170
-#: ../src/RemoteTimerEntry.py:457
+msgid "Change pin code"
+msgstr ""
+
 msgid "Channel"
 msgstr "Csatorna"
 
-#: ../src/plugin.py:236
+msgid "Choice list Partnerbox"
+msgstr ""
+
+msgid "Choose action:"
+msgstr ""
+
+msgid "Choose bouquet"
+msgstr ""
+
 msgid "Clean up"
 msgstr "Takarítás"
 
-#: ../src/plugin.py:318
 msgid "Cleaning up finished timer entries..."
 msgstr "A befejeződött tételek takarítása..."
 
-#: ../src/RemoteTimerEntry.py:132
-#: ../src/RemoteTimerEntry.py:411
+msgid "DVB-C"
+msgstr ""
+
+msgid "DVB-T"
+msgstr ""
+
 msgid "DVR"
 msgstr "Felvevő"
 
-#: ../src/RemoteTimerEntry.py:157
-#: ../src/RemoteTimerEntry.py:444
 msgid "Date"
 msgstr "Dátum"
 
-#: ../src/PartnerboxSetup.py:129
-#: ../src/PartnerboxSetup.py:236
-#: ../src/plugin.py:233
+#, fuzzy
+msgid "Deep Standby"
+msgstr "mély készenlétbe megy"
+
 msgid "Delete"
 msgstr "Törlés"
 
-#: ../src/RemoteTimerEntry.py:154
-#: ../src/RemoteTimerEntry.py:441
+#, fuzzy
+msgid "Delete timer"
+msgstr "Időzítő eltávolítása"
+
 msgid "Description"
 msgstr "Leírás"
 
-#: ../src/PartnerboxEPGSelection.py:111
-#: ../src/plugin.py:337
-#: ../src/plugin.py:1152
+msgid "Disable Picture in Picture"
+msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"Do you really want to delete the remote timer \n"
+"%s ?"
+msgstr ""
+"Biztos benne, hogy törölni szeretné ezt az időzítést: \n"
+"%s ?"
+
 #, python-format
 msgid ""
 "Do you really want to delete the timer \n"
@@ -103,144 +139,152 @@ msgstr ""
 "Biztos benne, hogy törölni szeretné ezt az időzítést: \n"
 "%s ?"
 
-#: ../src/plugin.py:235
-#: ../src/plugin.py:507
-#: ../src/plugin.py:651
 msgid "EPG Selection"
 msgstr "EPG választás"
 
-#: ../src/PartnerboxSetup.py:128
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: ../src/PartnerboxSetup.py:78
+msgid "Edit internal timer"
+msgstr ""
+
+#, fuzzy
+msgid "Edit remote timer"
+msgstr "Távoli időzítő"
+
+#, fuzzy
+msgid "Enable Partnerbox-Function in Channel Selector"
+msgstr "Partnerbox-funkció engedélyezése az időzítőben"
+
 msgid "Enable Partnerbox-Function in EPGList"
 msgstr "Partnerbox-funkció engedélyezése az EPG listában"
 
-#: ../src/PartnerboxSetup.py:77
 msgid "Enable Partnerbox-Function in TimerEvent"
 msgstr "Partnerbox-funkció engedélyezése az időzítőben"
 
-#: ../src/RemoteTimerEntry.py:163
-#: ../src/RemoteTimerEntry.py:168
-#: ../src/RemoteTimerEntry.py:450
-#: ../src/RemoteTimerEntry.py:455
+#, fuzzy
+msgid "Enable Red Button-Function in single/multi EPG"
+msgstr "Partnerbox-funkció engedélyezése az EPG listában"
+
+msgid "Enable VPS"
+msgstr ""
+
+msgid "Enable VPS-Function in TimerEvent"
+msgstr ""
+
+#, fuzzy
+msgid "Enable first Partnerbox-entry in Timeredit as default"
+msgstr "Partnerbox-funkció engedélyezése az időzítőben"
+
 msgid "EndTime"
 msgstr "Vége"
 
-#: ../src/PartnerboxSetup.py:40
 msgid "Enigma 1"
 msgstr "Enigma 1"
 
-#: ../src/PartnerboxSetup.py:40
 msgid "Enigma 2"
 msgstr "Enigma 2"
 
-#: ../src/PartnerboxSetup.py:126
-#: ../src/PartnerboxSetup.py:249
 msgid "Enigma Type"
 msgstr "Enigma verzió"
 
-#: ../src/plugin.py:1311
+msgid "Enter the service pin"
+msgstr ""
+
+#, fuzzy
+msgid "Error: "
+msgstr "Hiba: Elavult"
+
 msgid "Error: No space left"
 msgstr "Hiba: kifogyott a tárterület"
 
-#: ../src/plugin.py:1317
 msgid "Error: Outdated"
 msgstr "Hiba: Elavult"
 
-#: ../src/plugin.py:1313
 msgid "Error: User aborted"
 msgstr "Hiba: Felhasználói megszakzítás"
 
-#: ../src/plugin.py:1315
 msgid "Error: Zap failed"
 msgstr "Hiba: Csatornaváltás nem sikerült"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "Eventview"
+msgstr ""
+
 msgid "Fri"
 msgstr "Pén"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Friday"
 msgstr "Péntek"
 
-#: ../src/plugin.py:512
 msgid "Getting Channel Information..."
 msgstr "Csatornainformáció beolvasása..."
 
-#: ../src/plugin.py:948
 msgid "Getting EPG Information..."
 msgstr "EPG-információ beolvasása..."
 
-#: ../src/plugin.py:400
+#, fuzzy
+msgid "Getting EPG data..."
+msgstr "EPG-információ beolvasása..."
+
 msgid "Getting Partnerbox Bouquet Information..."
 msgstr "Partner bouquet-ek beolvasása..."
 
-#: ../src/plugin.py:237
 msgid "Getting Partnerbox Information..."
 msgstr "Partnerbox információk betöltése..."
 
-#: ../src/PartnerboxSetup.py:124
-#: ../src/PartnerboxSetup.py:247
+msgid "Getting timerlist data..."
+msgstr ""
+
+msgid "Give Enigma time to fill epg cache..."
+msgstr ""
+
 msgid "IP"
 msgstr "IP"
 
-#: ../src/plugin.py:510
-#: ../src/plugin.py:652
-#: ../src/plugin.py:947
-#: ../src/plugin.py:998
 msgid "Info"
 msgstr "Infó"
 
-#: ../src/RemoteTimerEntry.py:173
-#: ../src/RemoteTimerEntry.py:460
+msgid "Internet services are not supported!"
+msgstr ""
+
 msgid "Location"
 msgstr "Pozíció"
 
-#: ../src/plugin.py:127
-#: ../src/plugin.py:135
 msgid "Manage timer for other dreamboxes in network"
 msgstr "Egyéb, a hálózaton lévő készülékek időzítésének kezelése"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "Menu PiP"
+msgstr ""
+
 msgid "Mon"
 msgstr "Hét"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Monday"
 msgstr "Hétfő"
 
-#: ../src/RemoteTimerEntry.py:132
-#: ../src/RemoteTimerEntry.py:411
+msgid "Move Picture in Picture"
+msgstr ""
+
 msgid "NGRAB"
 msgstr "NGRAB"
 
-#: ../src/PartnerboxSetup.py:123
-#: ../src/PartnerboxSetup.py:246
-#: ../src/RemoteTimerEntry.py:153
-#: ../src/RemoteTimerEntry.py:440
 msgid "Name"
 msgstr "Név"
 
-#: ../src/RemoteTimerEntry.py:289
 msgid "No"
 msgstr "Nem"
 
-#: ../src/PartnerboxSetup.py:69
-#: ../src/PartnerboxSetup.py:235
-#: ../src/RemoteTimerEntry.py:72
 msgid "OK"
 msgstr "OK"
 
-#: ../src/RemoteTimerEntry.py:523
-#: ../src/RemoteTimerEntry.py:533
+#, fuzzy
+msgid "Partnerbox"
+msgstr "Partnerbox tételek"
+
+#, fuzzy
+msgid "Partnerbox - RemotePlayer"
+msgstr "Partnerbox tételek"
+
 #, python-format
 msgid ""
 "Partnerbox Answer: \n"
@@ -249,244 +293,288 @@ msgstr ""
 "Partnerbox válasza: \n"
 "%s"
 
-#: ../src/PartnerboxSetup.py:70
 msgid "Partnerbox Entries"
 msgstr "Partnerbox tételek"
 
-#: ../src/PartnerboxSetup.py:220
+#, fuzzy
+msgid "Partnerbox RemoteTimer"
+msgstr "Partnerbox tételek"
+
+#, fuzzy
+msgid "Partnerbox Setup"
+msgstr "Partnerbox tételek"
+
 msgid "Partnerbox: Edit Entry"
 msgstr "Partnerbox: tétel szerkesztése"
 
-#: ../src/PartnerboxSetup.py:118
 msgid "Partnerbox: List of Entries"
 msgstr "Partnerbox: tétellista"
 
-#: ../src/PartnerboxSetup.py:250
+#, fuzzy
+msgid "Partnerbox: RemoteTV Player"
+msgstr "Partnerbox: tétel szerkesztése"
+
+#, fuzzy
+msgid "Partnerbox: RemoteTimer"
+msgstr "Partnerbox tételek"
+
 msgid "Password"
 msgstr "Jelszó"
 
-#: ../src/PartnerboxSetup.py:125
-#: ../src/PartnerboxSetup.py:248
 msgid "Port"
 msgstr "Port"
 
-#: ../src/PartnerboxSetup.py:168
-#: ../src/PartnerboxSetup.py:274
+msgid "Power"
+msgstr ""
+
+msgid "Press OK to edit timer..."
+msgstr ""
+
 msgid "Really delete this Partnerbox Entry?"
 msgstr "Bizos benne, hogy törölni szeretné ezt a Partnerbox tételt?"
 
-#: ../src/RemoteTimerEntry.py:312
+#, fuzzy
+msgid "Remote Player"
+msgstr "Távoli időzítő"
+
 msgid "Remote Timer"
 msgstr "Távoli időzítő"
 
-#: ../src/PartnerboxEPGSelection.py:159
-#: ../src/plugin.py:1007
+#, fuzzy
+msgid "RemoteTimer Timerlist"
+msgstr "Távoli időzítő"
+
 msgid "Remove timer"
 msgstr "Időzítő eltávolítása"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "Repeated Timer are not supported!"
+msgstr ""
+
+msgid "Restart"
+msgstr ""
+
+msgid "Restart enigma"
+msgstr ""
+
 msgid "Sat"
 msgstr "Szo"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Saturday"
 msgstr "Szombat"
 
-#: ../src/PartnerboxSetup.py:251
+#, python-format
+msgid "Select action for remote timer '%s':"
+msgstr ""
+
+#, python-format
+msgid "Select action for timer '%s':"
+msgstr ""
+
+#, fuzzy
+msgid "Select action:"
+msgstr "EPG választás"
+
+#, fuzzy
+msgid "Select operation for partnerbox"
+msgstr "partnerbox beállítása"
+
 msgid "Servicelists/EPG"
 msgstr "Csatornalista/EPG"
 
-#: ../src/PartnerboxSetup.py:75
 msgid "Show 'RemoteTV Player' in E-Menu"
 msgstr "Távoli 'TV-lejátszó' megjelenítése a menüben"
 
-#: ../src/PartnerboxSetup.py:74
 msgid "Show 'RemoteTimer' in E-Menu"
 msgstr "Távoli 'Időzítés' megjelenítése a menüben"
 
-#: ../src/PartnerboxSetup.py:76
+#, fuzzy
+msgid "Show 'RemoteTimer' in Event View context menu"
+msgstr "Távoli 'Időzítés' megjelenítése a menüben"
+
+#, fuzzy
+msgid "Show 'RemoteTimer' in Eventinfo menu"
+msgstr "Távoli 'Időzítés' megjelenítése a menüben"
+
 msgid "Show 'Stream current Service' in E-Menu"
 msgstr "Távoli 'aktuális csatorna' megjelenítése a menüben"
 
-#: ../src/RemoteTimerEntry.py:159
-#: ../src/RemoteTimerEntry.py:446
+msgid "Show all icon for event in EPGList"
+msgstr ""
+
+msgid "Show duration time for event"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
+msgid "Standard Zap"
+msgstr ""
+
+#, fuzzy
+msgid "Standby"
+msgstr "készenlétbe megy"
+
 msgid "StartTime"
 msgstr "Kezdet"
 
-#: ../src/plugin.py:138
+#, python-format
+msgid "Starting Remote Player (IP = %s)"
+msgstr ""
+
+msgid "Stream"
+msgstr ""
+
 msgid "Stream TV from your Partnerbox"
 msgstr "TV lejátszása a Partnerbox-ról"
 
-#: ../src/plugin.py:140
+#, fuzzy
+msgid "Stream current Service from Partnerbox"
+msgstr "Aktuális csatorna megjelenítése a partnerbox-ról"
+
 msgid "Stream current service from partnerbox"
 msgstr "Aktuális csatorna megjelenítése a partnerbox-ról"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
 msgid "Sun"
 msgstr "Vas"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Sunday"
 msgstr "Vasárnap"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "The pin code you entered is wrong."
+msgstr ""
+
 msgid "Thu"
 msgstr "Csü"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Thursday"
 msgstr "Csütörtök"
 
-#: ../src/RemoteTimerEntry.py:155
-#: ../src/RemoteTimerEntry.py:442
+msgid "Timer Overview"
+msgstr ""
+
 msgid "Timer Type"
 msgstr "Időzítés típusa"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "Timer can not be added...no locations on partnerbox available."
+msgstr ""
+
+#, fuzzy
+msgid "Timer entry"
+msgstr "Időzítés típusa"
+
+msgid "Timer event deleted successfully."
+msgstr ""
+
+msgid "Timer event was created successfully."
+msgstr ""
+
+#, fuzzy
+msgid "Timer menu"
+msgstr "Időzítés típusa"
+
+msgid "Toggle Standby"
+msgstr ""
+
+msgid "Toggle status (on/off)"
+msgstr ""
+
 msgid "Tue"
 msgstr "Ked"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Tuesday"
 msgstr "Kedd"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "Wakeup"
+msgstr ""
+
 msgid "Wed"
 msgstr "Sze"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Wednesday"
 msgstr "Szerda"
 
-#: ../src/plugin.py:111
-msgid "You have to restart Enigma2 to activate your new preferences!"
-msgstr "A kezelőfelület újraindítása szükséges a beállítások aktiválásához!"
-
-#: ../src/plugin.py:504
-msgid "Zap"
-msgstr "Ugrás"
-
-#: ../src/plugin.py:1246
-msgid "about to start"
-msgstr "hamarosan indul"
-
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:407
-msgid "auto"
-msgstr "auto"
-
-#: ../src/plugin.py:1258
-msgid "disabled"
-msgstr "letiltva"
-
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:133
-#: ../src/RemoteTimerEntry.py:407
-#: ../src/RemoteTimerEntry.py:412
-msgid "do nothing"
-msgstr "nem tesz semmit"
-
-#: ../src/plugin.py:1253
-#: ../src/plugin.py:1308
-msgid "done!"
-msgstr "kész!"
-
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:133
-#: ../src/RemoteTimerEntry.py:407
-#: ../src/RemoteTimerEntry.py:412
-msgid "go to deep standby"
-msgstr "mély készenlétbe megy"
-
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:133
-#: ../src/RemoteTimerEntry.py:407
-#: ../src/RemoteTimerEntry.py:412
-msgid "go to standby"
-msgstr "készenlétbe megy"
-
-#: ../src/plugin.py:807
-#: ../src/plugin.py:879
-#: ../src/plugin.py:1236
-#: ../src/plugin.py:1241
-#: ../src/plugin.py:1293
-#: ../src/plugin.py:1296
-#: ../src/plugin.py:1298
-#: ../src/plugin.py:1382
-#: ../src/plugin.py:1579
-msgid "mins"
-msgstr "perc"
-
-#: ../src/RemoteTimerEntry.py:128
-#: ../src/RemoteTimerEntry.py:406
-msgid "record"
-msgstr "felvétel"
-
-#: ../src/plugin.py:1251
-#: ../src/plugin.py:1306
-msgid "recording..."
-msgstr "felvétel..."
-
-#: ../src/plugin.py:133
-msgid "setup for partnerbox"
-msgstr "partnerbox beállítása"
-
-#: ../src/plugin.py:1564
-msgid "unknown service"
-msgstr "ismeretlen csatorna"
-
-#: ../src/PartnerboxSetup.py:42
-msgid "use external"
-msgstr "külső használata"
-
-#: ../src/PartnerboxSetup.py:42
-msgid "use internal"
-msgstr "belső használata"
-
-#: ../src/plugin.py:1244
-#: ../src/plugin.py:1301
-msgid "waiting"
-msgstr "várakozás"
-
-#: ../src/RemoteTimerEntry.py:128
-#: ../src/RemoteTimerEntry.py:132
-#: ../src/RemoteTimerEntry.py:406
-#: ../src/RemoteTimerEntry.py:411
-msgid "zap"
-msgstr "ugrás"
-
-#: ../src/plugin.py:1249
-#: ../src/plugin.py:1304
-msgid "zapped"
-msgstr "ugorva"
-
-#: ../src/PartnerboxSetup.py:257
-msgid "Zap to service when streaming"
-msgstr "Ugrás a csatornára stream-eléskor"
-
-msgid "Enable VPS-Function in TimerEvent"
-msgstr ""
-
-msgid "Enable VPS"
+msgid "Yes"
 msgstr ""
 
 msgid "Yes (safe mode)"
 msgstr ""
 
-msgid "Yes"
+msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
 msgstr ""
+
+msgid "Zap"
+msgstr "Ugrás"
+
+msgid "Zap focus to Picture in Picture"
+msgstr ""
+
+msgid "Zap focus to main screen"
+msgstr ""
+
+msgid "Zap to service when streaming"
+msgstr "Ugrás a csatornára stream-eléskor"
+
+msgid "Zap/"
+msgstr ""
+
+msgid "Zapping to "
+msgstr ""
+
+msgid "about to start"
+msgstr "hamarosan indul"
+
+#, fuzzy
+msgid "add Partnerbox bouquet"
+msgstr "Partnerbox tételek"
+
+#, fuzzy
+msgid "add Partnerbox service"
+msgstr "Partnerbox tételek"
+
+msgid "auto"
+msgstr "auto"
+
+msgid "disabled"
+msgstr "letiltva"
+
+msgid "do nothing"
+msgstr "nem tesz semmit"
+
+msgid "done!"
+msgstr "kész!"
+
+msgid "go to deep standby"
+msgstr "mély készenlétbe megy"
+
+msgid "go to standby"
+msgstr "készenlétbe megy"
+
+msgid "mins"
+msgstr "perc"
+
+msgid "record"
+msgstr "felvétel"
+
+msgid "recording..."
+msgstr "felvétel..."
+
+msgid "setup for partnerbox"
+msgstr "partnerbox beállítása"
+
+msgid "unknown service"
+msgstr "ismeretlen csatorna"
+
+msgid "use external"
+msgstr "külső használata"
+
+msgid "use internal"
+msgstr "belső használata"
+
+msgid "waiting"
+msgstr "várakozás"
+
+msgid "zap"
+msgstr "ugrás"
+
+msgid "zapped"
+msgstr "ugorva"

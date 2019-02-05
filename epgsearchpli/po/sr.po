@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - Plugin epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-22 20:42+0100\n"
+"POT-Creation-Date: 2015-11-21 10:41+0200\n"
 "PO-Revision-Date: 2014-11-22 20:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -19,102 +19,226 @@ msgstr ""
 "X-Poedit-Country: SERBIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-msgid "Search"
-msgstr "Traženje"
-
-msgid "New Search"
-msgstr "Nova pretraga"
-
-msgid "History"
-msgstr "Istorija"
-
-msgid "Add timer"
-msgstr "Dodaj tajmer"
-
-msgid "EPG Search"
-msgstr "EPG pretraga"
-
-msgid "Enter text to search for"
-msgstr "Unesi tekst za traženje"
-
-msgid "Import from Timer"
-msgstr "Uvezi iz tajmera"
-
-msgid "Import from EPG"
-msgstr "Uvezi iz EPG"
-
-msgid "Import from AutoTimer"
-msgstr "Uvezi iz autotajmera"
-
-msgid "Save search as AutoTimer"
-msgstr "Sačuvaj pretragu kao autotajmer"
-
-msgid "Export selected as AutoTimer"
-msgstr "Izvezi izabrano kao autotajmer"
-
-msgid "Setup"
+#, python-format
+msgid " (%d min)"
 msgstr ""
 
 #, python-format
-msgid "Could not read AutoTimer timer list: %s"
-msgstr "Ne mogu pročitati listu autotajmera: %s"
-
-msgid "Select text to search for"
-msgstr "Izaberi tekst za pretragu"
-
-msgid "No history"
-msgstr "Bez istorije"
-
-msgid "Cancel"
-msgstr "Otkaži"
-
-msgid "OK"
-msgstr "OK"
-
-msgid "Select a timer to search"
-msgstr "Izaberi tajmer za pretragu"
-
-msgid "Channel Selection"
-msgstr "Izbor kanala"
-
-msgid "Search EPG"
-msgstr "Pretraga EPG"
-
-msgid "search EPG..."
-msgstr "pretraga EPG..."
-
-msgid "search EPG"
-msgstr "pretraga EPG"
-
-#, fuzzy
-msgid "Search event in EPG"
-msgstr "Pretraga EPG"
-
-#, fuzzy
-msgid "EPGSearch Setup"
-msgstr "EPG pretraga"
-
-msgid "Length of History"
-msgstr ""
-
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-msgstr ""
-
-msgid "Add \"Search\" Button to EPG"
-msgstr ""
-
-msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
-msgstr ""
-
-msgid "Add \"Search event in EPG\" to event menu"
-msgstr ""
-
-msgid "Adds \"Search event in EPG\" item into the event menu."
+msgid " (%s%d min)"
 msgstr ""
 
 msgid "Add \"Search event in EPG\" to channel menu"
 msgstr ""
 
-msgid "Adds \"Search event in EPG\" item into the channel selection context menu."
+msgid "Add \"Search event in EPG\" to event menu"
 msgstr ""
 
+msgid "Add \"Search\" Button to EPG"
+msgstr ""
+
+msgid "Add timer"
+msgstr "Dodaj tajmer"
+
+msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
+msgstr ""
+
+msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Otkaži"
+
+msgid "Channel Selection"
+msgstr "Izbor kanala"
+
+msgid "Choice list"
+msgstr ""
+
+msgid "Choice list EPGSearch"
+msgstr ""
+
+msgid "Choice list RED Button"
+msgstr ""
+
+msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
+msgstr ""
+
+#, fuzzy
+msgid "Clear history"
+msgstr "Bez istorije"
+
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Ne mogu pročitati listu autotajmera: %s"
+
+msgid "Display name service as in bouquets"
+msgstr ""
+
+msgid "EPG Search"
+msgstr "EPG pretraga"
+
+#, fuzzy
+msgid "EPGSearch"
+msgstr "EPG pretraga"
+
+#, fuzzy
+msgid "EPGSearch Setup"
+msgstr "EPG pretraga"
+
+#, fuzzy
+msgid "Encoding Search to EPG"
+msgstr "Pretraga EPG"
+
+msgid "Enter text to search for"
+msgstr "Unesi tekst za traženje"
+
+msgid "Export selected as AutoTimer"
+msgstr "Izvezi izabrano kao autotajmer"
+
+msgid "History"
+msgstr "Istorija"
+
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr ""
+
+msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
+msgstr ""
+
+msgid "If this setting is enabled, searching EPG in only services in user bouquets."
+msgstr ""
+
+msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
+msgstr ""
+
+msgid "If this setting is enabled, the plugin adds picons."
+msgstr ""
+
+msgid "Import from AutoTimer"
+msgstr "Uvezi iz autotajmera"
+
+msgid "Import from EPG"
+msgstr "Uvezi iz EPG"
+
+msgid "Import from Timer"
+msgstr "Uvezi iz tajmera"
+
+msgid "Length of History"
+msgstr ""
+
+msgid "List of history is cleared !"
+msgstr ""
+
+msgid "Lookup in TMBD"
+msgstr ""
+
+msgid "New Search"
+msgstr "Nova pretraga"
+
+#, fuzzy
+msgid "No history !"
+msgstr "Bez istorije"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open selected in IMDb"
+msgstr ""
+
+msgid "Partnerbox Entries"
+msgstr ""
+
+msgid "Save search as AutoTimer"
+msgstr "Sačuvaj pretragu kao autotajmer"
+
+msgid "Search"
+msgstr "Traženje"
+
+msgid "Search EPG by title event"
+msgstr ""
+
+#, fuzzy
+msgid "Search event in EPG"
+msgstr "Pretraga EPG"
+
+msgid "Search for TMDb info"
+msgstr ""
+
+msgid "Search only bouquets"
+msgstr ""
+
+msgid "Search strictness"
+msgstr ""
+
+#, fuzzy
+msgid "Search type"
+msgstr "Traženje"
+
+msgid "Search type for filter"
+msgstr ""
+
+msgid "Select a timer to search"
+msgstr "Izaberi tajmer za pretragu"
+
+msgid "Select action:"
+msgstr ""
+
+msgid "Select channel"
+msgstr ""
+
+msgid "Select text to search for"
+msgstr "Izaberi tekst za pretragu"
+
+msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
+msgstr ""
+
+msgid "Select type for search, \"partial match\" for the most extensive search."
+msgstr ""
+
+msgid "Select type: 'Search and Select channel' or 'Search'."
+msgstr ""
+
+msgid "Select whether or not you want to enforce case correctness."
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Timers list"
+msgstr ""
+
+msgid "Type blue Button"
+msgstr ""
+
+msgid "Use Picons"
+msgstr ""
+
+msgid "Zap to selected service"
+msgstr ""
+
+msgid "case-insensitive search"
+msgstr ""
+
+msgid "case-sensitive search"
+msgstr ""
+
+msgid "choice (Search and standard)"
+msgstr ""
+
+msgid "exact match"
+msgstr ""
+
+#, fuzzy
+msgid "only Search"
+msgstr "Traženje"
+
+msgid "partial match"
+msgstr ""
+
+msgid "search EPG"
+msgstr "pretraga EPG"
+
+msgid "search EPG..."
+msgstr "pretraga EPG..."
+
+msgid "title starts with"
+msgstr ""

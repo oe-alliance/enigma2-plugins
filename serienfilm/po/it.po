@@ -263,13 +263,11 @@ msgstr "Usare predefinito"
 msgid "Change"
 msgstr "Cambiare"
 
-#: ...//serienfilm/src/SerienFilm.py:59
-#: ...//serienfilm/src/SerienFilm.py:135
+#: ...//serienfilm/src/SerienFilm.py:59 ...//serienfilm/src/SerienFilm.py:135
 msgid "Disable "
 msgstr "Disabilitare"
 
-#: ...//serienfilm/src/SerienFilm.py:61
-#: ...//serienfilm/src/SerienFilm.py:132
+#: ...//serienfilm/src/SerienFilm.py:61 ...//serienfilm/src/SerienFilm.py:132
 msgid "Enable "
 msgstr "Abilitare"
 
@@ -317,4 +315,3 @@ msgstr "Numero di caratteri"
 #: ...//serienfilm/src/SerienFilm.py:142
 msgid "Length of the title:episode separator"
 msgstr "Lunghezza titolo: separatore episodi"
-

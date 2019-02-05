@@ -21,281 +21,209 @@ msgstr ""
 "X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/infobartunerstate\n"
 
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:45
-msgid "Configuration"
-msgstr "Yapılandırma"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:49
-msgid "Cancel"
-msgstr "İptal"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:50
-msgid "OK"
-msgstr "Tamam"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:77
-msgid "Usage"
-msgstr "Kullanım"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:85
-msgid "Enable InfoBarTunerState"
-msgstr "InfoBarTunerState etkinleştir"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:87
-msgid "Add to extension menu"
-msgstr "Eklentiler menüsüne ekle"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:89
-msgid "Show and hide with InfoBar"
-msgstr "Bilgi çubuğu ile göster gizle"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:90
-msgid "Show on events"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:91
-msgid "MoviePlayer integration"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:92
-msgid "Time format"
-msgstr "Zaman biçimi"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:93
-msgid "Number of finished records in list"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:94
-msgid "Number of seconds for displaying finished records"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:100
-#, python-format
-msgid "Field %d content"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:105
-msgid "Horizontal offset in pixel"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:106
-msgid "Vertical offset in pixel"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:107
-msgid "Text padding offset in pixel"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:108
-msgid "Text spacing offset in pixel"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:109
-msgid "Background transparency"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:114
-msgid "Infobar timeout"
-msgstr "Bilgi çubuğu zaman aşımı"
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:115
-msgid "Show Message when Recording starts"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:148
-msgid "Only one Icon field allowed:"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/IBTSConfiguration.py:153
-msgid "Only one Graphical Progress field allowed:"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:775
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:776
-msgid "-"
-msgstr "-"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:873
-msgid "Record"
-msgstr "Kayıt"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:875
-msgid "Stream"
-msgstr "Akış"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:877
-msgid "Finished"
-msgstr "Bitti"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:889
 #, python-format
 msgid "%d"
 msgstr "%d"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:902
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:909
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:917
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:920
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:935
-#, python-format
-msgid "%d Min"
-msgstr "%d dk"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:939
 #, python-format
 msgid "%d %%"
 msgstr "%% %d"
 
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:969
-#, python-format
-msgid "%d MB"
-msgstr "%d MB"
-
-#: .../enigma2-plugins/infobartunerstate/src/InfoBarTunerState.py:973
 #, python-format
 msgid "%d GB"
 msgstr "%d GB"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:37
-msgid "InfoBar Tuner State"
+#, python-format
+msgid "%d MB"
+msgstr "%d MB"
+
+#, python-format
+msgid "%d Min"
+msgstr "%d dk"
+
+msgid "-"
+msgstr "-"
+
+msgid "Add to extension menu"
+msgstr "Eklentiler menüsüne ekle"
+
+msgid "Background transparency"
 msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:38
-msgid "Show InfoBar Tuner State"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:49
-msgid "Type (Icon)"
-msgstr "Tür (Simge)"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:50
-msgid "Type (Text)"
-msgstr "Tür (Metin)"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:51
-msgid "Tuner"
-msgstr "Tuner"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:52
-msgid "Tuner Type"
-msgstr "Tuner tipi"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:53
-msgid "Channel Number"
-msgstr "Kanal Numarası"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:54
-msgid "Channel Name"
-msgstr "Kanal Adı"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:55
-msgid "Name"
-msgstr "Ad"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:56
-msgid "Time Left / Duration"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:57
-msgid "Time Left"
-msgstr "Kalan Zaman"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:58
-msgid "Time Elapsed"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:59
 msgid "Begin"
 msgstr "Başlangıç"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:60
-msgid "End"
-msgstr "Bitiş"
+msgid "Cancel"
+msgstr "İptal"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:61
-msgid "Duration"
-msgstr "Süre"
+msgid "Channel Name"
+msgstr "Kanal Adı"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:62
-msgid "Timer Progress (Graphical)"
-msgstr ""
+msgid "Channel Number"
+msgstr "Kanal Numarası"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:63
-msgid "Timer Progress (Text)"
-msgstr ""
+msgid "Configuration"
+msgstr "Yapılandırma"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:64
-msgid "Destination"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:65
-msgid "Stream Client"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:66
-msgid "Stream Client with Port"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:67
-msgid "Destination / Client"
-msgstr ""
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:70
-msgid "File Size"
-msgstr "Dosya Boyutu"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:71
-msgid "Free Space"
-msgstr "Boş Alan"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:72
-msgid "None"
-msgstr "Hiçbiri"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:76
-msgid "HH:MM"
-msgstr "SS:DD"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:77
 msgid "DD.MM HH:MM"
 msgstr "GG.AA SS:DD"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:78
-msgid "MM/DD HH:MM"
-msgstr "AA/GG SS:DD"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:79
 msgid "DD.MM.YYYY HH:MM"
 msgstr "GG.AA.YYYY SS:DD"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:80
-msgid "YYYY/MM/DD HH:MM"
-msgstr "YYYY/AA/GG SS:DD"
+msgid "Destination"
+msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:81
+msgid "Destination / Client"
+msgstr ""
+
+msgid "Duration"
+msgstr "Süre"
+
+msgid "Enable InfoBarTunerState"
+msgstr "InfoBarTunerState etkinleştir"
+
+msgid "End"
+msgstr "Bitiş"
+
+#, python-format
+msgid "Field %d content"
+msgstr ""
+
+msgid "File Size"
+msgstr "Dosya Boyutu"
+
+msgid "Finished"
+msgstr "Bitti"
+
+msgid "Free Space"
+msgstr "Boş Alan"
+
+msgid "HH:MM"
+msgstr "SS:DD"
+
 msgid "HH:MM DD.MM"
 msgstr "SS:DD GG.AA"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:82
-msgid "HH:MM MM/DD"
-msgstr "SS:DD AA/GG"
-
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:83
 msgid "HH:MM DD.MM.YYYY"
 msgstr "SS:DD GG.AA.YYYY"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:84
+msgid "HH:MM MM/DD"
+msgstr "SS:DD AA/GG"
+
 msgid "HH:MM YYYY/MM/DD"
 msgstr "SS:DD YYYY/AA/GG"
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:141
-msgid "configuration"
-msgstr "yapılandırma"
+msgid "Horizontal offset in pixel"
+msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:190
+msgid "InfoBar Tuner State"
+msgstr ""
+
+msgid "InfoBarTunerState is disabled"
+msgstr ""
+
+msgid "Infobar timeout"
+msgstr "Bilgi çubuğu zaman aşımı"
+
+msgid "MM/DD HH:MM"
+msgstr "AA/GG SS:DD"
+
+msgid "MoviePlayer integration"
+msgstr ""
+
+msgid "Name"
+msgstr "Ad"
+
+msgid "None"
+msgstr "Hiçbiri"
+
 msgid "Nothing running"
 msgstr ""
 
-#: .../enigma2-plugins/infobartunerstate/src/plugin.py:194
-msgid "InfoBarTunerState is disabled"
+msgid "Number of finished records in list"
 msgstr ""
+
+msgid "Number of seconds for displaying finished records"
+msgstr ""
+
+msgid "OK"
+msgstr "Tamam"
+
+msgid "Only one Graphical Progress field allowed:"
+msgstr ""
+
+msgid "Only one Icon field allowed:"
+msgstr ""
+
+msgid "Record"
+msgstr "Kayıt"
+
+msgid "Show InfoBar Tuner State"
+msgstr ""
+
+msgid "Show Message when Recording starts"
+msgstr ""
+
+msgid "Show and hide with InfoBar"
+msgstr "Bilgi çubuğu ile göster gizle"
+
+msgid "Show on events"
+msgstr ""
+
+msgid "Stream"
+msgstr "Akış"
+
+msgid "Stream Client"
+msgstr ""
+
+msgid "Stream Client with Port"
+msgstr ""
+
+msgid "Text padding offset in pixel"
+msgstr ""
+
+msgid "Text spacing offset in pixel"
+msgstr ""
+
+msgid "Time Elapsed"
+msgstr ""
+
+msgid "Time Left"
+msgstr "Kalan Zaman"
+
+msgid "Time Left / Duration"
+msgstr ""
+
+msgid "Time format"
+msgstr "Zaman biçimi"
+
+msgid "Timer Progress (Graphical)"
+msgstr ""
+
+msgid "Timer Progress (Text)"
+msgstr ""
+
+msgid "Tuner"
+msgstr "Tuner"
+
+msgid "Tuner Type"
+msgstr "Tuner tipi"
+
+msgid "Type (Icon)"
+msgstr "Tür (Simge)"
+
+msgid "Type (Text)"
+msgstr "Tür (Metin)"
+
+msgid "Usage"
+msgstr "Kullanım"
+
+msgid "Vertical offset in pixel"
+msgstr ""
+
+msgid "YYYY/MM/DD HH:MM"
+msgstr "YYYY/AA/GG SS:DD"
+
+msgid "configuration"
+msgstr "yapılandırma"

@@ -6,29 +6,18 @@ msgstr ""
 "PO-Revision-Date: 2011-10-14 16:33+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
-#: ../src/plugin.py:82
-msgid "set as startup service"
-msgstr "Kanaal kiezen bij opstarten"
-
-#: ../src/plugin.py:83
-msgid "reset startup service"
-msgstr "Kanaal niet meer kiezen bij het opstarten"
-
-#: ../src/plugin.py:102
 msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr "Als u dit bericht ziet gaat u naar het kanaal dat u wilt kiezen bij het opstarten en probeert u het opnieuw"
 
-msgid "set as startup service after booting..."
-msgstr "Kanaal kiezen na booten..."
-
-msgid "set as startup service after leaving standby mode..."
-msgstr "Kanaal kiezen bij uit standby komen"
+msgid "reset startup service"
+msgstr "Kanaal niet meer kiezen bij het opstarten"
 
 msgid "reset startup service for booting..."
 msgstr "Kanaal niet meer kiezen na het booten..."
@@ -36,3 +25,11 @@ msgstr "Kanaal niet meer kiezen na het booten..."
 msgid "reset startup service for leaving standby mode..."
 msgstr "Kanaal niet meer kiezen bij na standby..."
 
+msgid "set as startup service"
+msgstr "Kanaal kiezen bij opstarten"
+
+msgid "set as startup service after booting..."
+msgstr "Kanaal kiezen na booten..."
+
+msgid "set as startup service after leaving standby mode..."
+msgstr "Kanaal kiezen bij uit standby komen"

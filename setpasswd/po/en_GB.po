@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2012-03-16 16:32+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,43 +17,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/plugin.py:51
 msgid "Cancel"
 msgstr "Cancel"
 
-#: ../src/plugin.py:25
 msgid "Change Root Password"
 msgstr "Change Root Password"
 
-#: ../src/plugin.py:130
-msgid "Change or reset the root password of your Receiver"
+#, fuzzy
+msgid "Change or reset the root password of your dreambox"
 msgstr "Change or reset the root password of your Receiver"
 
-#: ../src/plugin.py:73
 msgid "Enter new Password"
 msgstr "Enter new Password"
 
-#: ../src/plugin.py:113
 msgid "Enter your password here:"
 msgstr "Enter your password here:"
 
-#: ../src/plugin.py:52
 msgid "Set Password"
 msgstr "Set Password"
 
-#: ../src/plugin.py:88
 msgid "Sucessfully changed password for root user to: "
 msgstr "Successfully changed password for root user to: "
 
-#: ../src/plugin.py:90
 msgid "Unable to change/reset password for root user"
 msgstr "Unable to change/reset password for root user"
 
-#: ../src/plugin.py:53
 msgid "new Random"
 msgstr "new Random"
 
-#: ../src/plugin.py:54
 msgid "virt. Keyboard"
 msgstr "virt. Keyboard"
-

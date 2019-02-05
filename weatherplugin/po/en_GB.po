@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2015-11-14 23:32+0100\n"
 "PO-Revision-Date: 2012-03-16 16:34+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -97,9 +97,7 @@ msgstr "WeatherPlugin: Edit Entry"
 msgid "WeatherPlugin: List of Entries"
 msgstr "WeatherPlugin: List of Entries"
 
-msgid ""
-"You need to enter a valid city name before you can search for the location "
-"code."
+msgid "You need to enter a valid city name before you can search for the location code."
 msgstr ""
 
 msgid "imperial system"
@@ -107,12 +105,3 @@ msgstr ""
 
 msgid "metric system"
 msgstr ""
-
-#~ msgid "City or Postal Code"
-#~ msgstr "City or Postal Code"
-
-#~ msgid "Current: %s"
-#~ msgstr "Current: %s"
-
-#~ msgid "Language"
-#~ msgstr "Language"

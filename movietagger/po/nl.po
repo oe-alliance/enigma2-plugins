@@ -75,8 +75,7 @@ msgstr "Verwijder Tag"
 msgid "Specified Tags"
 msgstr "Gespecificeerde Tags"
 
-#: ../src/plugin.py:271
-#: ../src/plugin.py:279
+#: ../src/plugin.py:271 ../src/plugin.py:279
 msgid "Toggle List"
 msgstr "Wissel lijst"
 
@@ -95,4 +94,3 @@ msgstr "Ver."
 #: ../src/plugin.py:252
 msgid "Whitepace will be replaced by \"_\""
 msgstr "Witruimte zal worden vervangen door \"_\""
-

@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: OEA\n"
 "Language-Team: french\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,53 +14,40 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 1.6.10\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:36
-msgid "disabled"
-msgstr "désactiver"
-
-#: ../src/plugin.py:36
-msgid "immediately after recording"
-msgstr "immédiatement après l'enregistrement"
-
-#: ../src/plugin.py:36
-msgid "older than 1 day"
-msgstr "plus vieux que 1 jour"
-
-#: ../src/plugin.py:36
-msgid "older than 3 days"
-msgstr "plus vieux que 3 jours"
-
-#: ../src/plugin.py:36
-msgid "older than 1 week"
-msgstr "plus vieux que 1 semaine"
-
-#: ../src/plugin.py:36
-msgid "older than 2 weeks"
-msgstr "plus vieux que 2 semaines"
-
-#: ../src/plugin.py:36
-msgid "older than 4 weeks"
-msgstr "plus vieux que 4 semaines"
-
-#: ../src/plugin.py:36
-msgid "older than 6 weeks"
-msgstr "plus vieux que 6 semaines"
-
-#: ../src/plugin.py:49 ../src/plugin.py:122 ../src/plugin.py:125
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "Configuration de Automatic Timerlist Cleanup"
 
-#: ../src/plugin.py:53
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../src/plugin.py:54
+msgid "Cleanup timerlist-entries"
+msgstr "Nettoyer les entrées de la liste des timers"
+
 msgid "OK"
 msgstr "OK"
 
-#: ../src/plugin.py:56
-msgid "Cleanup timerlist-entries"
-msgstr "Nettoyer les entrées de la liste des timers"
+msgid "disabled"
+msgstr "désactiver"
+
+msgid "immediately after recording"
+msgstr "immédiatement après l'enregistrement"
+
+msgid "older than 1 day"
+msgstr "plus vieux que 1 jour"
+
+msgid "older than 1 week"
+msgstr "plus vieux que 1 semaine"
+
+msgid "older than 2 weeks"
+msgstr "plus vieux que 2 semaines"
+
+msgid "older than 3 days"
+msgstr "plus vieux que 3 jours"
+
+msgid "older than 4 weeks"
+msgstr "plus vieux que 4 semaines"
+
+msgid "older than 6 weeks"
+msgstr "plus vieux que 6 semaines"

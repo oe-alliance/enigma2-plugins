@@ -300,9 +300,7 @@ msgstr "Estado de Fon FRITZ!Box"
 msgid "FRITZ!Box PhoneBook to read"
 msgstr ""
 
-msgid ""
-"FRITZ!Box firmware version not configured! Please set it in the "
-"configuration."
+msgid "FRITZ!Box firmware version not configured! Please set it in the configuration."
 msgstr ""
 
 msgid "FRITZ!Box not available for calling"
@@ -598,9 +596,7 @@ msgstr ""
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Tiempo cumplido para Notificaciones de Llamadas (segundos)"
 
-msgid ""
-"To enjoy more functionalities of your FRITZ!Box, configure the firmware "
-"version!"
+msgid "To enjoy more functionalities of your FRITZ!Box, configure the firmware version!"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
@@ -806,132 +802,3 @@ msgstr "trabajo"
 
 msgid "wrong user or password?"
 msgstr ""
-
-#~ msgid "Areacode to add to Outgoing Calls (if necessary)"
-#~ msgstr "Añadir código de área a las llamadas salientes (si es necesario)"
-
-#~ msgid "CF Drive"
-#~ msgstr "Unidad CF"
-
-#~ msgid ""
-#~ "Corrupt phonebook entry\n"
-#~ "for number %d\n"
-#~ "Deleting."
-#~ msgstr ""
-#~ "Posición en la agenda corrupta\n"
-#~ "para el número %d\n"
-#~ "Borrando."
-
-#~ msgid "Could not load calls from FRITZ!Box - Error: %s"
-#~ msgstr "No puedo cargar llamadas desde FRITZ!Box - Error: %s"
-
-#~ msgid "Debug"
-#~ msgstr "Testear"
-
-#~ msgid "Dialling failed - Error: %s"
-#~ msgstr "Falló la llamada - Error: %s"
-
-#~ msgid ""
-#~ "Do you really want to overwrite entry for %(number)s\n"
-#~ "\n"
-#~ "%(name)s\n"
-#~ "\n"
-#~ "with\n"
-#~ "\n"
-#~ "%(newname)s?"
-#~ msgstr ""
-#~ "¿Quiere sobreescribir la entrada para %(number)s\n"
-#~ "\n"
-#~ "%(name)s\n"
-#~ "\n"
-#~ "con\n"
-#~ "\n"
-#~ "%(newname)s?"
-
-#, fuzzy
-#~ msgid "FRITZ!Box - Could not load phonebook: %s"
-#~ msgstr "No puedo cargar la agenda desde FRITZ!Box - Error: %s"
-
-#, fuzzy
-#~ msgid "FRITZ!Box Fon has no mailbox"
-#~ msgstr "Estado de Fon FRITZ!Box"
-
-#~ msgid "FRITZ!Box Login failed! - Wrong Password!"
-#~ msgstr "Falló la identificación FRITZ!Box - Contraseña errónea!"
-
-#, fuzzy
-#~ msgid "FRITZ!Box Login failed: "
-#~ msgstr "Falló la identificación a FRITZ!Box - Error: %s"
-
-#~ msgid "Flash"
-#~ msgstr "Flash"
-
-#~ msgid "Full screen display"
-#~ msgstr "Visualización a pantalla completa"
-
-#~ msgid "Harddisk"
-#~ msgstr "Disco duro"
-
-#~ msgid ""
-#~ "Incoming Call on %(date)s from\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "to: %(phone)s"
-#~ msgstr ""
-#~ "Llamada Entrante en %(date)s desde\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "a: %(phone)s"
-
-#~ msgid "Mute on call"
-#~ msgstr "Silencio en llamada"
-
-#, fuzzy
-#~ msgid "No call redirection active"
-#~ msgstr "No cuenta de correo activa"
-
-#, fuzzy
-#~ msgid "One call redirection active"
-#~ msgstr "Una cuenta de correo activa"
-
-#~ msgid ""
-#~ "Outgoing Call on %(date)s to\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "from: %(phone)s"
-#~ msgstr ""
-#~ "Llamadas saliente en %(date)s a\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "desde: %(phone)s"
-
-#~ msgid "PhoneBook Location"
-#~ msgstr "Ubicación de la Agenda"
-
-#~ msgid "Reverse Lookup Caller ID (select country below)"
-#~ msgstr "Búsqueda inversa del ID llamante (seleccionar país abajo)"
-
-#~ msgid "Show Calls for specific MSN"
-#~ msgstr "Mostrar Llamadas para un específico MSN"
-
-#, fuzzy
-#~ msgid "Toggle "
-#~ msgstr "Marcar WLAN"
-
-#, fuzzy
-#~ msgid "USB Device"
-#~ msgstr "Lápiz USB"
-
-#~ msgid "WLAN off"
-#~ msgstr "WLAN apagado"
-
-#~ msgid "WLAN on"
-#~ msgstr "WLAN encendido"

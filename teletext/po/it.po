@@ -87,19 +87,13 @@ msgstr ""
 msgid "Enter text for page %s"
 msgstr ""
 
-msgid ""
-"Enter values (left, top, right, bottom) or press TEXT to move and resize the "
-"teletext graphically."
-msgstr ""
-"Inserire i valori (Sx, Alto, Dx, Basso) o premere EXIT per muovere e "
-"ridimensionare il teletext graficamente."
+msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
+msgstr "Inserire i valori (Sx, Alto, Dx, Basso) o premere EXIT per muovere e ridimensionare il teletext graficamente."
 
 msgid "Hebrew / Arabic"
 msgstr "Ebraico / Arabo"
 
-msgid ""
-"If caching is disabled, each teletext page will searched when you entered "
-"its number."
+msgid "If caching is disabled, each teletext page will searched when you entered its number."
 msgstr ""
 
 msgid "No teletext available."
@@ -148,8 +142,7 @@ msgid "Select your favourite scale filter."
 msgstr "Selezionare il filtro scaling desiderato."
 
 msgid "Select your region to use the proper font."
-msgstr ""
-"Selezionare la propria Regione per l'utilizzo dei caratteri appropriati."
+msgstr "Selezionare la propria Regione per l'utilizzo dei caratteri appropriati."
 
 msgid "Splitting mode"
 msgstr "Schermo diviso"
@@ -261,15 +254,3 @@ msgstr "Link teletext Giallo"
 
 msgid "zoom / increase height"
 msgstr "Zoom / Aumentare altezza"
-
-#~ msgid "Message"
-#~ msgstr "Messaggio"
-
-#~ msgid "Show message if no teletext available or exit silently."
-#~ msgstr "Mostrare un messaggio su teletext non disponibile."
-
-#~ msgid "decrease height"
-#~ msgstr "Diminuire altezza"
-
-#~ msgid "toggle flof"
-#~ msgstr "Commutare FLOF"

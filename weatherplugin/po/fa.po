@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: weather plugin Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:02+0000\n"
+"POT-Creation-Date: 2015-11-14 23:32+0100\n"
 "PO-Revision-Date: 2012-07-25 22:42+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -104,12 +104,3 @@ msgstr ""
 
 msgid "metric system"
 msgstr ""
-
-#~ msgid "City or Postal Code"
-#~ msgstr "شهر یا کد پستی"
-
-#~ msgid "Current: %s"
-#~ msgstr "وضعیت موجود %s"
-
-#~ msgid "Language"
-#~ msgstr "زبان "

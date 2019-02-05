@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - werbezapper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:29+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2012-05-06 23:05+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -28,67 +28,17 @@ msgstr "Personalizzato"
 msgid "How many minutes to wait until zapping back?"
 msgstr "Quanti minuti attendere prima dello Zap indietro?"
 
-#, python-format
-msgid "Monitoring: %s (%d:%02d Min)"
-msgstr "Monitor in corso: %s (%d:%02d Min)"
-
-msgid "Rezap"
-msgstr "Rizap"
-
-msgid "Start / Stop monitoring instantly"
-msgstr "Avviare/Arrestare il monitor immediatamente"
-
-msgid "Start monitoring"
-msgstr "Avviare monitor"
-
-msgid "Stop monitoring"
-msgstr "Arrestare monitor"
-
-msgid "Stop timer"
-msgstr "Arrestare timer"
-
-#, python-format
 msgid ""
-"WerbeZapper\n"
-"Monitoring ends\n"
-"%s"
+"Timer already running.\n"
+"Stop it?"
 msgstr ""
-"WerbeZapper\n"
-"Termine monitor\n"
-"%s"
-
-#, python-format
-msgid ""
-"WerbeZapper\n"
-"Monitoring started\n"
-"%s"
-msgstr ""
-"WerbeZapper\n"
-"Inizio monitor\n"
-"%s"
-
-msgid ""
-"WerbeZapper\n"
-"Monitoring started unlimited\n"
-"Has to be deactivated manually"
-msgstr ""
-"WerbeZapper\n"
-"Avviato monitor illimitato\n"
-"Disattivazione manuale"
 
 msgid "When to Zap back?"
 msgstr "Quando eseguire lo Zap?"
 
-msgid "Zapping back"
-msgstr "Ritorno..."
-
-#, python-format
-msgid "Zapping back in %d Minute(s)"
+#, fuzzy, python-format
+msgid "Zapping back in %d Minutes"
 msgstr "Zap indietro tra minuti: %d"
-
-#, python-format
-msgid "Zapping back in %d:%02d Min"
-msgstr "Ritorno tra %d:%02d min"
 
 msgid "minute"
 msgstr "Minuto"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2015-06-25 18:59+0200\n"
 "PO-Revision-Date: 2013-03-19 22:24+0100\n"
 "Last-Translator: xxx\n"
 "Language-Team: WeeGull <weegull@hotmail.com>\n"
@@ -27,9 +27,7 @@ msgstr ""
 "En monteringspunkt med samma namn finns redan!\n"
 "Uppdatera befintligt monteringspunkt och forsätta?\n"
 
-msgid ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
+msgid "AUTOFS (mount as needed)"
 msgstr ""
 
 msgid "Active"
@@ -130,7 +128,7 @@ msgstr "Ange användarnamn:"
 msgid "Expert"
 msgstr "Expert"
 
-msgid "FSTAB (mount using linux)"
+msgid "FSTAB (mount at boot)"
 msgstr ""
 
 msgid "Finished restarting your network"
@@ -166,6 +164,10 @@ msgstr "Montera igen"
 msgid "Mount informations"
 msgstr "Monteringsinformation"
 
+#, fuzzy
+msgid "Mount manager"
+msgstr "Monteringshantering"
+
 msgid "Mount options"
 msgstr "Monteringsalternativ"
 
@@ -190,9 +192,6 @@ msgstr "Hantera monteringspunkter"
 
 msgid "Mounts editor"
 msgstr "Monteringseditor"
-
-msgid "Mounts management"
-msgstr "Monteringshantering"
 
 msgid "NFS share"
 msgstr "NFS-delning"
@@ -287,6 +286,9 @@ msgstr "Server delning"
 msgid "Setup Mount Again"
 msgstr "Ställ in Montera igen"
 
+msgid "Use as HDD replacement"
+msgstr ""
+
 msgid "User management"
 msgstr "Användarhantering"
 
@@ -302,6 +304,14 @@ msgstr "Visa, redigera eller radera monteringspunkter i din Miraclebox"
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Visa, ändra eller ta bort användarnamn och lösenord på ditt nätverk."
 
+#, fuzzy
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"En monteringspunkt med samma namn finns redan!\n"
+"Uppdatera befintligt monteringspunkt och forsätta?\n"
+
 msgid "Your network mount has been activated."
 msgstr "Din nätverksmontering har aktiverats."
 
@@ -310,12 +320,3 @@ msgstr "Din nätverksmontering har tagits bort."
 
 msgid "Your network mount has been updated."
 msgstr "Din nätverksmontering har uppdaterats."
-
-msgid "Use as HDD replacement"
-msgstr ""
-
-#~ msgid "MountManager"
-#~ msgstr "Monteringshantering"
-
-#~ msgid "NetworkBrowser"
-#~ msgstr "Nätverksbläddring"

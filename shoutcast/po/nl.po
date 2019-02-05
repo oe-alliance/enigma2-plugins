@@ -274,6 +274,3 @@ msgstr "Zoekcriterium %s"
 
 msgid "streamripper not installed!"
 msgstr "Streamripper niet geïnstalleerd!"
-
-#~ msgid "This Dreambox can't decode %s streams!"
-#~ msgstr "Deze Dreambox kan %s stream niet decoderen!"

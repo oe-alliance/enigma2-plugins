@@ -19,9 +19,7 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
-#: ../src/plugin.py:120
-#: ../src/plugin.py:190
-#: ../src/plugin.py:436
+#: ../src/plugin.py:120 ../src/plugin.py:190 ../src/plugin.py:436
 msgid "Automatic System Cleanup Setup"
 msgstr "Automatic System Cleanup instellingen"
 
@@ -51,8 +49,7 @@ msgstr "Verwijder wees-bestanden van opnames"
 msgid "Delete system setting backups"
 msgstr "Verwijder systeem setting backups"
 
-#: ../src/plugin.py:146
-#: ../src/plugin.py:149
+#: ../src/plugin.py:146 ../src/plugin.py:149
 msgid "Delete timerlist entries"
 msgstr "Verwijder timers"
 
@@ -80,8 +77,7 @@ msgstr "Maximum aantal backups dat bewaard wordt, ongeacht de retentie periode."
 msgid "OK"
 msgstr "OK"
 
-#: ../src/plugin.py:132
-#: ../src/plugin.py:134
+#: ../src/plugin.py:132 ../src/plugin.py:134
 msgid "Sorry, this feature is not available due to license reasons. To get the full version, please search the web for \"dreambox automaticcleanup.\""
 msgstr "Sorry, dit onderdeel is niet beschikbaar vanwege een licentie kwestie. Om de volledige versie te verkrijgen moet u op het internet zoeken naar \"dreambox automaticcleanup.\""
 
@@ -105,13 +101,11 @@ msgstr "Opschonen van timers is in de EMC plugin ingeschakeld! Om problemen te v
 msgid "Ver."
 msgstr "Ver."
 
-#: ../src/plugin.py:87
-#: ../src/plugin.py:91
+#: ../src/plugin.py:87 ../src/plugin.py:91
 msgid "all"
 msgstr "alles"
 
-#: ../src/plugin.py:89
-#: ../src/plugin.py:93
+#: ../src/plugin.py:89 ../src/plugin.py:93
 msgid "cleanup disabled"
 msgstr "opschonen uitgeschakeld"
 
@@ -139,13 +133,11 @@ msgstr "laatste 5"
 msgid "older than 1 day"
 msgstr "ouder dan 1 dag"
 
-#: ../src/plugin.py:89
-#: ../src/plugin.py:93
+#: ../src/plugin.py:89 ../src/plugin.py:93
 msgid "older than 1 week"
 msgstr "ouder dan 1 week"
 
-#: ../src/plugin.py:89
-#: ../src/plugin.py:93
+#: ../src/plugin.py:89 ../src/plugin.py:93
 msgid "older than 2 weeks"
 msgstr "ouder dan 2 weken"
 
@@ -157,8 +149,7 @@ msgstr "ouder dan 3 dagen"
 msgid "older than 3 months"
 msgstr "ouder dan 3 maanden"
 
-#: ../src/plugin.py:89
-#: ../src/plugin.py:93
+#: ../src/plugin.py:89 ../src/plugin.py:93
 msgid "older than 4 weeks"
 msgstr "ouder dan 4 weken"
 
@@ -177,4 +168,3 @@ msgstr "alleen de laatste"
 #: ../src/plugin.py:85
 msgid "void"
 msgstr "ongeldig"
-

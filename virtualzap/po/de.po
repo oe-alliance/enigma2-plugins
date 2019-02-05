@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: koivo <koivo@hdfreaks.cc>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,9 +36,6 @@ msgstr "GUI Neustart?"
 
 msgid "Show PiP in Infobar"
 msgstr "PiP in Infobar anzeigen"
-
-msgid "Show PiP in LCD"
-msgstr "PiP im LCD anzeigen"
 
 msgid "Start standard PiP after x secs (0 = disabled)"
 msgstr "Standard PiP nach x Sek. starten (0 = aus)"

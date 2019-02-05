@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Quickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dr.Best <dr.best@dreambox-tools.info>\n"
 "Language-Team: Dr.Best <dr.best@dreambox-tools.info>\n"
@@ -59,6 +59,9 @@ msgstr "Keine Zuordnung"
 msgid "OK"
 msgstr ""
 
+msgid "Overwrite HBBTV-red-button"
+msgstr "HBBTV-Red-Button überschreiben"
+
 msgid "Pan&Scan"
 msgstr ""
 
@@ -100,7 +103,3 @@ msgstr "Quickbutton Setup"
 
 msgid "switch 4:3 content display"
 msgstr "4:3 Bildumschaltung"
-
-msgid "Overwrite HBBTV-red-button"
-msgstr "HBBTV-Red-Button überschreiben"
-

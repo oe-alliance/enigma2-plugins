@@ -74,44 +74,31 @@ msgstr "hayır, Isim"
 msgid "Connection Error"
 msgstr "Bağlantı hatası"
 
-#: plugin.py:211
-#: plugin.py:222
-#: plugin.py:230
-#: plugin.py:530
+#: plugin.py:211 plugin.py:222 plugin.py:230 plugin.py:530
 msgid "Ver."
 msgstr "Sürüm"
 
-#: plugin.py:263
-#: plugin.py:268
+#: plugin.py:263 plugin.py:268
 msgid "Wakeup"
 msgstr "Uyan"
 
-#: plugin.py:264
-#: plugin.py:269
+#: plugin.py:264 plugin.py:269
 msgid "Sleep"
 msgstr "Hazırda beklet"
 
-#: plugin.py:265
-#: plugin.py:270
+#: plugin.py:265 plugin.py:270
 msgid "Next day starts at"
 msgstr "Sonraki gün başlangıcı"
 
-#: plugin.py:266
-#: plugin.py:271
+#: plugin.py:266 plugin.py:271
 msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
 msgstr ""
 
-#: plugin.py:275
-#: plugin.py:321
-#: plugin.py:400
-#: plugin.py:507
+#: plugin.py:275 plugin.py:321 plugin.py:400 plugin.py:507
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: plugin.py:276
-#: plugin.py:322
-#: plugin.py:401
-#: plugin.py:508
+#: plugin.py:276 plugin.py:322 plugin.py:401 plugin.py:508
 msgid "Ok"
 msgstr "Tamam"
 
@@ -175,8 +162,7 @@ msgstr ""
 msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
 msgstr ""
 
-#: plugin.py:467
-#: plugin.py:624
+#: plugin.py:467 plugin.py:624
 msgid "Standby on boot"
 msgstr "Açılışta hazırda beklet"
 
@@ -295,4 +281,3 @@ msgstr "Hazırda bekletme kipine şimdi geçilsin mi?"
 #: plugin.py:828
 msgid "Go to sleep now?"
 msgstr "Uyku kipine şimdi geçilsin mi?"
-

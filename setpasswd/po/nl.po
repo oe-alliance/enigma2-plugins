@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-15 13:09+0000\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2012-01-17 11:32+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -26,7 +26,8 @@ msgstr "Annuleren"
 msgid "Change Root Password"
 msgstr "Wijzig root wachtwoord..."
 
-msgid "Change or reset the root password of your Receiver"
+#, fuzzy
+msgid "Change or reset the root password of your dreambox"
 msgstr "Verander of reset het root-wachtwoord van uw ontvanger"
 
 msgid "Enter new Password"

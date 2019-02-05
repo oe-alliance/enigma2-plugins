@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2011-09-14 19:42+CEST\n"
 "PO-Revision-Date: 2012-12-03 15:01+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,7 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#, python-format
 msgid "%s will turn %s in %s!"
 msgstr "%s will turn %s in %s!"
 
@@ -54,7 +53,6 @@ msgstr "Birthday Reminder"
 msgid "Birthday Reminder Settings"
 msgstr "Birthday Reminder Settings"
 
-#, python-format
 msgid "Birthday Reminder received %s birthdays from %s."
 msgstr "Birthday Reminder received %s birthdays from %s."
 
@@ -67,15 +65,12 @@ msgstr "Birthdays"
 msgid "CSV import successful!"
 msgstr "CSV import successful!"
 
-#, python-format
 msgid "Can't find CSV file %s!"
 msgstr "Can't find CSV file %s!"
 
-#, python-format
 msgid "Can't import CSV data from file %s."
 msgstr "Can't import CSV data from file %s."
 
-#, python-format
 msgid "Can't write CSV file %s."
 msgstr "Can't write CSV file %s."
 
@@ -97,7 +92,6 @@ msgstr "Disabled"
 msgid "Distribute birthdays to other Dreamboxes"
 msgstr "Distribute birthdays to other Dreamboxes"
 
-#, python-format
 msgid "Do you really want to delete the entry for %s?"
 msgstr "Do you really want to delete the entry for %s?"
 
@@ -113,7 +107,6 @@ msgstr "Edit birthdays"
 msgid "Edit the selected entry"
 msgstr "Edit the selected entry"
 
-#, python-format
 msgid ""
 "Error reading file %s.\n"
 "\n"
@@ -123,7 +116,6 @@ msgstr ""
 "\n"
 "Error: %s, %s"
 
-#, python-format
 msgid ""
 "Error writing file %s.\n"
 "\n"
@@ -205,7 +197,6 @@ msgstr "Sorting next"
 msgid "Sorting previous"
 msgstr "Sorting previous"
 
-#, python-format
 msgid ""
 "Today is %s's birthday!\n"
 "\n"
@@ -218,7 +209,6 @@ msgstr ""
 msgid "What do you want to do?"
 msgstr "What do you want to do?"
 
-#, python-format
 msgid "Wrote CSV file %s."
 msgstr "Wrote CSV file %s."
 

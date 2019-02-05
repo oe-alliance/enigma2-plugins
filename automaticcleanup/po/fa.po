@@ -92,9 +92,7 @@ msgid "Delete system setting backups"
 msgstr "حذف نسخه پشتیبان تنظیمات سیستمی"
 
 #: ../src/plugin.py:126
-msgid ""
-"Specify, how long system setting backups shall be kept at most (even if "
-"maximum number is not yet exceeded). Latest backup will be kept anyway!"
+msgid "Specify, how long system setting backups shall be kept at most (even if maximum number is not yet exceeded). Latest backup will be kept anyway!"
 msgstr ""
 
 #: ../src/plugin.py:127
@@ -102,33 +100,23 @@ msgid "Maximum number of system setting backups"
 msgstr "بیشترین تعداد نسخه پشتیبان تنظیمات سیستمی"
 
 #: ../src/plugin.py:128
-msgid ""
-"Maximum number of system setting backups to keep, regardless of retention "
-"period."
-msgstr ""
-"بیشترین تعداد نسخه پشتیبان تنظیمات سیستمی بدون در نظر گرفتن بازه زمانی "
-"نگهداری می شود"
+msgid "Maximum number of system setting backups to keep, regardless of retention period."
+msgstr "بیشترین تعداد نسخه پشتیبان تنظیمات سیستمی بدون در نظر گرفتن بازه زمانی نگهداری می شود"
 
 #: ../src/plugin.py:129
 msgid "Delete orphaned movie files"
 msgstr "پاک کردن فیلم های بی هویت"
 
 #: ../src/plugin.py:130
-msgid ""
-"If enabled, orphaned movie files will be automatically deleted from movie "
-"directories."
-msgstr ""
-"در صورت فعال سازی این گزینه بصورت خودکار فیلم های بی هویت را از پوشه فیلم ها "
-"پاک کن"
+msgid "If enabled, orphaned movie files will be automatically deleted from movie directories."
+msgstr "در صورت فعال سازی این گزینه بصورت خودکار فیلم های بی هویت را از پوشه فیلم ها پاک کن"
 
 #: ../src/plugin.py:131
 msgid "Delete crashlogs"
 msgstr "پاک سازی گزارش های خرابی"
 
 #: ../src/plugin.py:132 ../src/plugin.py:134
-msgid ""
-"Sorry, this feature is not available due to license reasons. To get the full "
-"version, please search the web for \"dreambox automaticcleanup.\""
+msgid "Sorry, this feature is not available due to license reasons. To get the full version, please search the web for \"dreambox automaticcleanup.\""
 msgstr ""
 
 #: ../src/plugin.py:133
@@ -140,18 +128,11 @@ msgid "Delete timerlist entries"
 msgstr "حذف لیست ورودی زمان ها"
 
 #: ../src/plugin.py:147
-msgid ""
-"Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't "
-"delete entries whilst this option is enabled in EMC."
-msgstr ""
-"پاک سازی لیست زمان ها از پلاگین ای ام سی فعال گردید به منظور جلوگیری از "
-"خرابی های احتمالی لیست ورودی زمان در این گزینه از پلاگین ای ام سی پاک نخواهد "
-"شد"
+msgid "Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't delete entries whilst this option is enabled in EMC."
+msgstr "پاک سازی لیست زمان ها از پلاگین ای ام سی فعال گردید به منظور جلوگیری از خرابی های احتمالی لیست ورودی زمان در این گزینه از پلاگین ای ام سی پاک نخواهد شد"
 
 #: ../src/plugin.py:150
-msgid ""
-"Specify, how long expired timer list entries shall be kept at most. "
-"Deactivated repeat timer entries won't be deleted ever."
+msgid "Specify, how long expired timer list entries shall be kept at most. Deactivated repeat timer entries won't be deleted ever."
 msgstr ""
 
 #: ../src/plugin.py:167
@@ -172,11 +153,9 @@ msgstr "ورژن."
 
 #: ../src/plugin.py:213
 msgid ""
-"Cleanup timerlist, orphaned movie files and stored setting backups "
-"automatically.\n"
+"Cleanup timerlist, orphaned movie files and stored setting backups automatically.\n"
 "\n"
-"Modify the settings to match your preferences. More detailed explanations "
-"given with each adjustable option."
+"Modify the settings to match your preferences. More detailed explanations given with each adjustable option."
 msgstr ""
 
 #: ../src/plugin.py:433

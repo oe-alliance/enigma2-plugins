@@ -26,8 +26,7 @@ msgstr "Hinzufügen"
 msgid "Adjustment value"
 msgstr "Korrekturwert"
 
-#: ../src/plugin.py:49
-#: ../src/plugin.py:52
+#: ../src/plugin.py:49 ../src/plugin.py:52
 msgid "Automatic Volume Adjustment"
 msgstr "Automatische Lautstärkekorrektur"
 
@@ -114,4 +113,3 @@ msgstr "Zeige Lautstärkebalken wenn Lautstärke geändert wurde"
 #: ../src/AutomaticVolumeAdjustmentSetup.py:294
 msgid "You must select a valid service!"
 msgstr "Es muss ein gültiger Sender gewählt werden!"
-

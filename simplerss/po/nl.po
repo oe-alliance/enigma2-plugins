@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SimpleRSS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2011-12-05 16:10+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -147,9 +147,6 @@ msgstr "Start automatisch met Enigma2"
 msgid "Subscribe Newsfeed..."
 msgstr "Inschrijven op Newsfeed..."
 
-msgid "Ticker"
-msgstr "Ponsband"
-
 msgid "Update Feed"
 msgstr "Feed "
 
@@ -171,4 +168,3 @@ msgstr "Wat te doen?"
 
 msgid "none"
 msgstr "geen"
-

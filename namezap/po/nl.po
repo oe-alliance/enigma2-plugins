@@ -27,9 +27,7 @@ msgstr "Annuleer"
 msgid "Controls the visual appearance of the number zap dialog."
 msgstr "Bepaalt het visuele uiterlijk van de nummer zap dialoog."
 
-#: ../src/NamezapSetup.py:33
-#: ../src/NamezapSetup.py:74
-#: ../src/plugin.py:107
+#: ../src/NamezapSetup.py:33 ../src/NamezapSetup.py:74 ../src/plugin.py:107
 msgid "NameZAP Setup"
 msgstr "NameZAP instellingen"
 
@@ -56,4 +54,3 @@ msgstr "Onbekende Service"
 #: ../src/NamezapSetup.py:39
 msgid "Zapper Style"
 msgstr "Zapper Style"
-

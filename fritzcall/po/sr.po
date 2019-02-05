@@ -302,9 +302,7 @@ msgstr "FRITZ!Box Stanje telefona"
 msgid "FRITZ!Box PhoneBook to read"
 msgstr ""
 
-msgid ""
-"FRITZ!Box firmware version not configured! Please set it in the "
-"configuration."
+msgid "FRITZ!Box firmware version not configured! Please set it in the configuration."
 msgstr ""
 
 msgid "FRITZ!Box not available for calling"
@@ -599,9 +597,7 @@ msgstr ""
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Prekid za obaveštenja o pozivima (sekundi) "
 
-msgid ""
-"To enjoy more functionalities of your FRITZ!Box, configure the firmware "
-"version!"
+msgid "To enjoy more functionalities of your FRITZ!Box, configure the firmware version!"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
@@ -803,81 +799,3 @@ msgstr "Posao"
 
 msgid "wrong user or password?"
 msgstr ""
-
-#~ msgid "Areacode to add to Outgoing Calls (if necessary)"
-#~ msgstr "Pozivni broj za dodati izlaznim pozivima (ako je potrebno)"
-
-#~ msgid "CF Drive"
-#~ msgstr "CF Laufwerk"
-
-#~ msgid "Debug"
-#~ msgstr "Debag"
-
-#~ msgid "FRITZ!Box - Could not load phonebook: %s"
-#~ msgstr "\"FRITZ!Box - Ne mogu učitati imenik: %s"
-
-#~ msgid "Flash"
-#~ msgstr "Fleš"
-
-#~ msgid "Full screen display"
-#~ msgstr "Prikaži ceo ekran"
-
-#~ msgid "Harddisk"
-#~ msgstr "Festplatte"
-
-#~ msgid ""
-#~ "Incoming Call on %(date)s from\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "to: %(phone)s"
-#~ msgstr ""
-#~ "Dolazni poziv %(date)s od\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "za: %(phone)s"
-
-#~ msgid "Mute on call"
-#~ msgstr "Priguši kod poziva"
-
-#~ msgid "No call redirection active"
-#~ msgstr "Nema aktivnih preusmerenja poziva"
-
-#~ msgid "One call redirection active"
-#~ msgstr "Jedno preusmerenje poziva je aktivno"
-
-#~ msgid ""
-#~ "Outgoing Call on %(date)s to\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "from: %(phone)s"
-#~ msgstr ""
-#~ "Odlazni poziv  %(date)s za\n"
-#~ "---------------------------------------------\n"
-#~ "%(number)s\n"
-#~ "%(caller)s\n"
-#~ "---------------------------------------------\n"
-#~ "od: %(phone)s"
-
-#~ msgid "PhoneBook Location"
-#~ msgstr "Lokacija tel. imenika"
-
-#~ msgid "Reverse Lookup Caller ID (select country below)"
-#~ msgstr "Traženje ID pozivaoca unazad (odaberi zemlju ispod)"
-
-#~ msgid "Show Calls for specific MSN"
-#~ msgstr "Pokaži pozive za spec. MSN"
-
-#~ msgid "USB Stick"
-#~ msgstr "USB Stick"
-
-#~ msgid "business"
-#~ msgstr "posao"
-
-#~ msgid "call redirections active"
-#~ msgstr "Preusmerenje poziva aktivno"

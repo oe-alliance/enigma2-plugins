@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moviecut\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2012-02-15 16:04+0100\n"
 "PO-Revision-Date: 2014-05-02 18:55+0100\n"
 "Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
 "Language-Team:  <Mariusz1970@onet.eu>\n"
@@ -20,6 +20,7 @@ msgstr ""
 msgid "Advanced cut specification..."
 msgstr "Zaawansowane specyfikacje cięcia ..."
 
+#, python-format
 msgid ""
 "Another movie is currently cut.\n"
 "The movie \"%s\" will be cut in the background after it."
@@ -57,15 +58,20 @@ msgstr "Nie można otworzyć wyjścowego. Ts plik"
 msgid "Cut Parameter Input"
 msgstr "Parametr wejściowy cięcia"
 
+msgid "Cut source:"
+msgstr "Źródło cięć:"
+
 msgid "Cutlist"
 msgstr "Lista cięć"
 
 msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
 msgstr "Cięcia(obecnie... sekwencje godzina: min:sek)"
 
+#, python-format
 msgid "Cutting failed for movie \"%s\""
 msgstr "Dla tego Film cięcie nie powiodło się \"%s\""
 
+#, python-format
 msgid "Cutting was aborted for movie \"%s\""
 msgstr "Sekcja została odwołana do filmu\"%s\""
 
@@ -78,6 +84,7 @@ msgstr "Pusty plik. Ap"
 msgid "Execute cuts..."
 msgstr "Wykonanie cięć ..."
 
+#, python-format
 msgid "How would you like to cut \"%s\"?"
 msgstr "Jak chcesz wyciąć \"%s\"?"
 
@@ -117,14 +124,13 @@ msgstr "Zastąp oryginalny:"
 msgid "Replace the original movie with the cut movie"
 msgstr "Zastąpić oryginalny film z uciętym filmem"
 
+#, python-format
 msgid "The movie \"%s\" is cut in the background."
 msgstr "Film \"%s\" ucina się w tle."
 
+#, python-format
 msgid "The movie \"%s\" is successfully cut"
 msgstr " Film \"%s\" jest z powodzeniem ucięty"
 
 msgid "Yes"
 msgstr "Tak"
-
-msgid "Cut source:"
-msgstr "Źródło cięć:"

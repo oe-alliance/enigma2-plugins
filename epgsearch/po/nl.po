@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 07:52+0100\n"
+"POT-Creation-Date: 2017-07-07 12:46+0200\n"
 "PO-Revision-Date: 2018-09-28 15:46+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -313,75 +313,3 @@ msgstr "EPG geschiedenis doorzoeken..."
 
 msgid "title starts with"
 msgstr "titel begint met"
-
-#~ msgid "Add a auto timer for current event"
-#~ msgstr "Voeg een autotimer toe voor het huidige event"
-
-#~ msgid "Add a record timer for current event"
-#~ msgstr "Voeg een opnametimer toe voor het huidige event"
-
-#~ msgid "Add a zap timer for current event"
-#~ msgstr "Voeg een zaptimer toe voor het huidige event"
-
-#~ msgid "Add/Remove timer for current event"
-#~ msgstr "Verwijder/Voeg een timer toe voor het huidige event"
-
-#~ msgid "Choose the encode type for search, helpful for foreign languages."
-#~ msgstr "Kies het code type voor het zoeken; handig voor diverse talen."
-
-#~ msgid "Enable this to be able to access the EPG-Search from within the plugin browser."
-#~ msgstr "Toon EPG-Search in plugin browser."
-
-#~ msgid "Exit EPG"
-#~ msgstr "Verlaat EPG"
-
-#~ msgid "Goto next bouquet"
-#~ msgstr "Ga naar de volgende favoriet"
-
-#~ msgid "Goto next channel"
-#~ msgstr "Ga naar het volgende kanaal"
-
-#~ msgid "Goto previous bouquet"
-#~ msgstr "Ga naar de vorige favoriet"
-
-#~ msgid "Goto previous channel"
-#~ msgstr "Ga naar het vorige kanaal"
-
-#~ msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-#~ msgstr "Hoeveel entries mogen er in de zoekhistory bewaard worden? \"0\" schakelt history geheel uit!"
-
-#~ msgid "IMDB search for current event"
-#~ msgstr "IMDB zoekslag voor het huidige event"
-
-#~ msgid "Is the search case-sensitive or case-insensitive"
-#~ msgstr "Hoofdlettergevoelig zoeken"
-
-#~ msgid "Length of History"
-#~ msgstr "Grootte van de geschiedenis"
-
-#~ msgid "Search Encoding"
-#~ msgstr "Zoek codering"
-
-#~ msgid "Search for similar events"
-#~ msgstr "Zoek naar gelijksoortige events"
-
-#~ msgid "Set type of match used to compare program titles with the search string"
-#~ msgstr "Selecteer het soort overeenkomst tussen programma titels en zoekopdracht."
-
-#~ msgid "Show AutoTimer List"
-#~ msgstr "Toon AutoTimer lijst"
-
-#~ msgid "Show detailed event info"
-#~ msgstr "Toon gedetailleerde event informatie"
-
-#~ msgid "Show single epg for current channel"
-#~ msgstr "Toon de EPG voor het huidige kanaal"
-
-#~ msgid "Zap to channel (setup in menu)"
-#~ msgstr "Zap naar kanaal (stel in in menu)"
-
-#~ msgid "Zap to channel and close (setup in menu)"
-#~ msgstr "Zap naar kanaal en sluit (stel in in menu)"
-
-#~ msgid "search EPG..."
-#~ msgstr "EPG doorzoeken..."

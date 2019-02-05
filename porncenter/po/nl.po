@@ -56,11 +56,8 @@ msgstr "Fout met verkrijgen van de video url!"
 msgid "Name:"
 msgstr "Naam:"
 
-#: ../src/plugin.py:54
-#: ../src/plugin.py:108
-#: ../src/plugin.py:171
-#: ../src/plugin.py:189
-#: ../src/plugin.py:237
+#: ../src/plugin.py:54 ../src/plugin.py:108 ../src/plugin.py:171
+#: ../src/plugin.py:189 ../src/plugin.py:237
 msgid "Porn Center"
 msgstr "PornoCetrum"
 
@@ -83,4 +80,3 @@ msgstr "Verwijder"
 #: ../src/plugin.py:58
 msgid "keep on device"
 msgstr "Bewaar"
-

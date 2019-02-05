@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: Dr. Best <dr.best@dreambox-tools.info>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,53 +14,38 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:36
-msgid "disabled"
-msgstr "abgeschaltet"
-
-#: ../src/plugin.py:36
-msgid "immediately after recording"
-msgstr "direkt nach Aufnahme"
-
-#: ../src/plugin.py:36
-msgid "older than 1 day"
-msgstr "älter als 1 Tag"
-
-#: ../src/plugin.py:36
-msgid "older than 3 days"
-msgstr "älter als 3 Tage"
-
-#: ../src/plugin.py:36
-msgid "older than 1 week"
-msgstr "älter als 1 Woche"
-
-#: ../src/plugin.py:36
-msgid "older than 2 weeks"
-msgstr "älter als 2 Wochen"
-
-#: ../src/plugin.py:36
-msgid "older than 4 weeks"
-msgstr "älter als 4 Wochen"
-
-#: ../src/plugin.py:36
-msgid "older than 6 weeks"
-msgstr "älter als 6 Wochen"
-
-#: ../src/plugin.py:49
-#: ../src/plugin.py:122
-#: ../src/plugin.py:125
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "Autom. Aufräumen der Timerlisten"
 
-#: ../src/plugin.py:53
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../src/plugin.py:54
-msgid "OK"
-msgstr "OK"
-
-#: ../src/plugin.py:56
 msgid "Cleanup timerlist-entries"
 msgstr "Timerlisteneinträge aufräumen"
 
+msgid "OK"
+msgstr "OK"
+
+msgid "disabled"
+msgstr "abgeschaltet"
+
+msgid "immediately after recording"
+msgstr "direkt nach Aufnahme"
+
+msgid "older than 1 day"
+msgstr "älter als 1 Tag"
+
+msgid "older than 1 week"
+msgstr "älter als 1 Woche"
+
+msgid "older than 2 weeks"
+msgstr "älter als 2 Wochen"
+
+msgid "older than 3 days"
+msgstr "älter als 3 Tage"
+
+msgid "older than 4 weeks"
+msgstr "älter als 4 Wochen"
+
+msgid "older than 6 weeks"
+msgstr "älter als 6 Wochen"

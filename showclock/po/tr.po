@@ -31,8 +31,7 @@ msgstr ""
 msgid "Extensions menu"
 msgstr "Eklenti menüsü"
 
-#: plugin.py:112
-#: plugin.py:167
+#: plugin.py:112 plugin.py:167
 msgid "Show Clock Setup"
 msgstr "Show Clock ayar"
 
@@ -84,9 +83,7 @@ msgstr "Yardım"
 msgid "Move clock"
 msgstr ""
 
-#: plugin.py:167
-#: plugin.py:388
-#: plugin.py:396
+#: plugin.py:167 plugin.py:388 plugin.py:396
 msgid "Ver."
 msgstr "Sürüm"
 
@@ -105,4 +102,3 @@ msgid ""
 "\n"
 "Press OK to store current position and return to the setup menu or EXIT to cancel the moving."
 msgstr ""
-

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AdvancedMovieSelection\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-22 07:30+0300\n"
+"POT-Creation-Date: 2013-10-01 18:46+0100\n"
 "PO-Revision-Date: 2017-07-22 07:31+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -14,181 +14,37 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../SearchTVDb.py:124
-msgid "Sorry, no description found at www.thetvdb.com!"
-msgstr "www.thetvdb.com aprašymo nerasta!"
-
-#: ../SearchTVDb.py:126 ../SearchTVDb.py:148
 #, python-format
-msgid "ID: %s"
-msgstr "ID: %s"
+msgid ""
+"\n"
+"\n"
+"The timer for %s will be delete for stop the recording and after this the movie will be deleted.\n"
+"\n"
+"Do you really want to continue?"
+msgstr ""
+"\n"
+"\n"
+"Kad sustabdyti įrašymą, %s laikmatis bus ištrintas, o po to filmas bus ištrintas.\n"
+"\n"
+"Ar tikrai norite tęsti?"
 
-#: ../SearchTVDb.py:149
 #, python-format
-msgid "Season: %s"
-msgstr "Sezonas: %s"
+msgid ""
+"\n"
+"\n"
+"The timer for %s will be delete for stop the recording and after this the movie will be move to trashcan.\n"
+"\n"
+"Do you really want to continue?"
+msgstr ""
+"\n"
+"\n"
+"Kad sustabdyti įrašymą, %s laikmatis bus ištrintas, o po to filmas bus perkeltas į šiukšliadėžę.\n"
+"\n"
+"Ar tikrai norite tęsti?"
 
-#: ../SearchTVDb.py:150
-#, python-format
-msgid "Episode: %s"
-msgstr "Epizodas: %s"
-
-#: ../SearchTVDb.py:159
-msgid "Show serie detail"
-msgstr "Rodyti serijos aprašymą"
-
-#: ../SearchTVDb.py:160
-msgid "Show episode detail"
-msgstr "Rodyti epizodo aprašymą"
-
-#: ../SearchTVDb.py:161
-msgid "Show episodes overview"
-msgstr "Rodyti epizodų apžvalgą"
-
-#: ../SearchTVDb.py:162
-msgid "Show search result"
-msgstr "Rodyti paieškos rezultatus"
-
-#: ../SearchTVDb.py:163 ../DownloadMovies.py:66
-msgid "Manual search"
-msgstr "Rankinė paieška"
-
-#: ../SearchTVDb.py:164
-msgid "Info/Cover save"
-msgstr "Išsaugoti Info/viršelį"
-
-#: ../SearchTVDb.py:165 ../AdvancedMovieSelectionSetup.py:677
-msgid "Trailer search"
-msgstr "Trilerių paieška"
-
-#: ../SearchTVDb.py:261 ../AdvancedMovieSelectionSetup.py:669
-#: ../MovieSelection.py:183
-msgid "TheTVDB Info & D/L"
-msgstr "TVDB informacija & D / L"
-
-#: ../SearchTVDb.py:262
-#, python-format
-msgid "Searching for ' %s ' on TheTVDB.com, please wait ..."
-msgstr "TheTVDB.com iešoma '%s', prašome palaukti ..."
-
-#: ../SearchTVDb.py:313
-msgid "Sorry, no data found at TheTVDB.com!"
-msgstr "TheTVDB.com nieko nerasta!"
-
-#: ../SearchTVDb.py:326 ../SearchTVDb.py:328 ../SearchTVDb.py:370
-#: ../SearchTVDb.py:372
-#, python-format
-msgid "Total %s"
-msgstr "Iš viso %s"
-
-#: ../SearchTVDb.py:326
-msgid "show found"
-msgstr "Rastas šou"
-
-#: ../SearchTVDb.py:328
-msgid "shows found"
-msgstr "Rasta šou"
-
-#: ../SearchTVDb.py:333
-#, python-format
-msgid "Episodes for: %s"
-msgstr "Epizodai: %s"
-
-#: ../SearchTVDb.py:358 ../SearchTVDb.py:389
-msgid "Sorry, no description for this episode at TheTVDB.com available!"
-msgstr "TheTVDB.com šio epizodo aprašymo nerasta!"
-
-#: ../SearchTVDb.py:370
-msgid "episode found"
-msgstr "Rastas epizodas"
-
-#: ../SearchTVDb.py:372
-msgid "episodes found"
-msgstr "Rasti epizodai"
-
-#: ../SearchTVDb.py:381
-#, python-format
-msgid "Episode details for: %s"
-msgstr "Epizodo %s aprašymas"
-
-#: ../SearchTVDb.py:383
-msgid "Sorry, no episode titel available!"
-msgstr "Epizodo pavadinimas nerastas!"
-
-#: ../SearchTVDb.py:395
-#, python-format
-msgid "Regie: %s"
-msgstr "Režisūra: %s"
-
-#: ../SearchTVDb.py:400
-#, python-format
-msgid "Writer: %s\n"
-msgstr "Autorius: %s\n"
-
-#: ../SearchTVDb.py:408
-#, python-format
-msgid "Guest Stars: %s\n"
-msgstr "Vaidina: %s\n"
-
-#: ../SearchTVDb.py:412 ../SearchTVDb.py:453
-#, python-format
-msgid "First Aired: %s"
-msgstr "Pirmąkart: %s"
-
-#: ../SearchTVDb.py:430
-msgid "Enter new movie name for search:"
-msgstr "Įrašykite naują ieškomo filmo pavadinimą:"
-
-#: ../SearchTVDb.py:445
-#, python-format
-msgid "Sorry, no description for ' %s ' at TheTVDB.com found!"
-msgstr "TheTVDB.com ' %s ' aprašymo nerasta!"
-
-#: ../SearchTVDb.py:457
-#, python-format
-msgid "Air Day: %s"
-msgstr "Rodymo diena: %s"
-
-#: ../SearchTVDb.py:463
-#, python-format
-msgid "Air Time: %s"
-msgstr "Rodymo laikas: %s"
-
-#: ../SearchTVDb.py:467
-#, python-format
-msgid "Runtime: %s minutes\n"
-msgstr "Trukmė: %s minučių\n"
-
-#: ../SearchTVDb.py:471
-#, python-format
-msgid "Broadcast TV network: %s"
-msgstr "Transliacijos TV tinklas: %s"
-
-#: ../SearchTVDb.py:477
-#, python-format
-msgid "Genre: %s\n"
-msgstr "Žanras: %s\n"
-
-#: ../SearchTVDb.py:481
-#, python-format
-msgid "Certification: %s"
-msgstr "Sertifikatai: %s"
-
-#: ../SearchTVDb.py:490
-#, python-format
-msgid "Rating: %s\n"
-msgstr "Reitingas: %s\n"
-
-#: ../SearchTVDb.py:494
-#, python-format
-msgid "Actors: %s\n"
-msgstr "Aktoriai: %s\n"
-
-#: ../SearchTVDb.py:499
 #, python-format
 msgid ""
 "\n"
@@ -197,238 +53,1546 @@ msgstr ""
 "\n"
 "Paskutinis pakeitimas TheTVDB.com: %s"
 
-#: ../SearchTVDb.py:506
 #, python-format
-msgid "Voted: %s"
-msgstr "Balsavo: %s"
+msgid "%s is currently recording!"
+msgstr "%s šiuo metu įrašomas!"
 
-#: ../SearchTVDb.py:506
-msgid "times"
-msgstr "kartai(-ų)"
+msgid "(long)"
+msgstr "(ilgas paspaudimas)"
 
-#: ../SearchTVDb.py:508
-msgid "No user voted!"
-msgstr "Nebalsuota!"
+#, python-format
+msgid "/ %s"
+msgstr "/ %s"
 
-#: ../SearchTVDb.py:592 ../MovieSelection.py:353
-msgid "No internet connection available!"
-msgstr "Nėra interneto ryšio!"
+msgid "0"
+msgstr "0"
 
-#: ../SearchTVDb.py:617 ../SearchTVDb.py:721
+msgid "1"
+msgstr "1"
+
+msgid "2"
+msgstr "2"
+
+msgid "3"
+msgstr "3"
+
+msgid "<Local device>"
+msgstr "<Vietinis įrenginys>"
+
+msgid "ATTENTION: Ask before delete is disabled!"
+msgstr "DĖMESIO: 'Perklausti prieš ištrinant' išjungta!"
+
+msgid "ATTENTION: DHCP in lan configuration is activ, no clientbox services available!"
+msgstr "DĖMESIO: nustatyta tinklo DHCP konfigūracija, kanalai aparatui-klientui neprieinami!"
+
+msgid "Abort"
+msgstr "Nutraukti"
+
+msgid "Abort selected job"
+msgstr "Nutraukti pasirinktą užduotį"
+
+msgid "Aborted"
+msgstr "Nutraukta"
+
+msgid "Aborted by user!!"
+msgstr "Nutraukė vartotojas!"
+
+msgid "About Advanced Movie Selection"
+msgstr "Apie 'išplėstinę filmų atranką'"
+
+#, python-format
+msgid "Actors: %s\n"
+msgstr "Aktoriai: %s\n"
+
+msgid "Add Tag(s) for Recordings/Timer or AutoTimer"
+msgstr "Įkelti žymes įrašymui, laikmačiui, autolaikmačiui"
+
+msgid "Add new tag"
+msgstr "Pridėti naują žymę"
+
+msgid "Advanced Movie Selection"
+msgstr "Išplėstinė filmų atranka"
+
+msgid "Advanced Movie Selection - Clientbox setup"
+msgstr "Išplėstinė filmų atranka - aparato-kliento sąranka"
+
+msgid "Advanced Movie Selection - History"
+msgstr "Išplėstinė filmų atranka - istorija"
+
+msgid "Advanced Movie Selection - Input help"
+msgstr "Išplėstinė filmų atranka - pagalba"
+
+msgid "Advanced Movie Selection - Wastebasket"
+msgstr "Išplėstinė filmų atranka - šiukšliadėžė"
+
+msgid "Advanced Movie Selection Menu"
+msgstr "Išplėstinės filmų atrankos meniu"
+
+msgid "Advanced Movie Selection Seek"
+msgstr "Išplėstinės filmų atrankos paieška"
+
+msgid "Advanced Movie Selection Setup"
+msgstr "Išplėstinės filmų atrankos sąranka"
+
+msgid "Advanced Movie Selection info"
+msgstr "Išplėstinės filmų atrankos informacija"
+
+msgid "Advanced movielist menu"
+msgstr "Išplėstinio filmų sąrašo meniu"
+
+#, python-format
+msgid "Air Day: %s"
+msgstr "Rodymo diena: %s"
+
+#, python-format
+msgid "Air Time: %s"
+msgstr "Rodymo laikas: %s"
+
+msgid "All directorys below '/media'"
+msgstr "Visi katalogai, žemiau /media"
+
+msgid "Alphabetic sort"
+msgstr "pagal abėcėlę"
+
+msgid "Alphabetically"
+msgstr "pagal abėcėlę"
+
+msgid "Alternate Movie Selection"
+msgstr "Alternatyvi filmų atranka"
+
+msgid "Always show selection in the first position in the movie list."
+msgstr "Visada rodyti pasirinkimą pirmoje filmų sąrašo pozicijoje."
+
+#, python-format
+msgid "Another %s are required to copy the data."
+msgstr "Duomenims kopijuoti reikia kito %s."
+
+#, python-format
+msgid "Another %s are required to move the data."
+msgstr "Duomenims perkelti reikia kito %s."
+
+#, python-format
+msgid "Appeared: %s"
+msgstr "Išleistas: %s"
+
+#, python-format
+msgid "Around %d minute"
+msgstr "Maždaug %d min."
+
+#, python-format
+msgid "Around %d minutes"
+msgstr "Maždaug %d min."
+
+msgid "Ascending"
+msgstr "didėjančiai"
+
+msgid "Ask before delete:"
+msgstr "Perklausti, prieš ištrinant:"
+
+msgid "Ask user"
+msgstr "Klausti vartotojo"
+
+msgid "Assign the date format for movielist:"
+msgstr "Pasirinkti filmų sąrašo datos formatą:"
+
+msgid "Auto empty wastebasket is disabled"
+msgstr "Automatinis šiukšliadėžės tuštinimas išjungtas"
+
+msgid "Auto empty wastebasket time:"
+msgstr "Šiukšliadėžės automatinio tuštinimo laikas:"
+
+msgid "Auto empty wastebasket:"
+msgstr "Šiukšliadėžę tuštinti automatiškai:"
+
+msgid "Automatic search and save"
+msgstr "Automatinė paieška ir išsaugojimas"
+
+msgid "Automatic search and save finished."
+msgstr "Automatinė paieška ir išsaugojimas baigti."
+
+msgid "Automatic search and save, please wait..."
+msgstr "Palaukite, vyksta automatinė paieška ir išsaugojimas..."
+
+msgid "Available Server/Clients"
+msgstr "Galimi serveriai/klientai"
+
+msgid "Background"
+msgstr "Fonas"
+
+msgid "Backup directory path:"
+msgstr "Atsarginės kopijos katalogo kelias:"
+
+msgid "Backup settings"
+msgstr "Kopijuoti nustatymus atsargai"
+
+msgid "Backup/Restore"
+msgstr "Kopijavimas atsargai/atkūrimas"
+
+msgid "Backup/Restore Advanced Movie Selection settings"
+msgstr "Išplėstinės filmų atrankos parametrų atsarginis kopijavimas/atkūrimas"
+
+msgid "Behavior when a movie is started:"
+msgstr "Elgsena, kai filmas prasidėjęs:"
+
+msgid "Behavior when a movie is stopped:"
+msgstr "Elgsena, kai filmas sustabdytas:"
+
+msgid "Behavior when a movie reaches the end:"
+msgstr "Elgsena, filmui pasibaigus:"
+
+msgid "Black"
+msgstr "Juoda"
+
+msgid "Blue"
+msgstr "Mėlynas"
+
+msgid "Bookmark 1"
+msgstr "1 žymelė"
+
+msgid "Bookmark 1 button description:"
+msgstr "1 žymelės mygtuko aprašymas:"
+
+msgid "Bookmark 1 button text"
+msgstr "1 žymelės mygtuko tekstas"
+
+msgid "Bookmark 1 path"
+msgstr "1 žymelės kelias"
+
+msgid "Bookmark 2"
+msgstr "2 žymelė"
+
+msgid "Bookmark 2 button description:"
+msgstr "2 žymelės mygtuko aprašymas:"
+
+msgid "Bookmark 2 button text"
+msgstr "2 žymelės mygtuko tekstas"
+
+msgid "Bookmark 2 path"
+msgstr "2 žymelės kelias"
+
+msgid "Bookmark 3"
+msgstr "3 žymelė"
+
+msgid "Bookmark 3 button description:"
+msgstr "3 žymelės mygtuko aprašymas:"
+
+msgid "Bookmark 3 button text"
+msgstr "3 žymelės mygtuko tekstas"
+
+msgid "Bookmark 3 path"
+msgstr "3 žymelės kelias"
+
+msgid "Bookmark 4"
+msgstr "4 žymelė"
+
+msgid "Bookmark 4 button description:"
+msgstr "4 žymelės mygtuko aprašymas:"
+
+msgid "Bookmark 4 button text"
+msgstr "4 žymelės mygtuko tekstas"
+
+msgid "Bookmark 4 path"
+msgstr "4 žymelės kelias"
+
+msgid "Bookmark 5"
+msgstr "5 žymelė"
+
+msgid "Bookmark 5 button description:"
+msgstr "5 žymelės mygtuko aprašymas:"
+
+msgid "Bookmark 5 button text"
+msgstr "5 žymelės mygtuko tekstas"
+
+msgid "Bookmark 5 path"
+msgstr "5 žymelės kelias"
+
+msgid "Bookmark 6"
+msgstr "6 žymelė"
+
+msgid "Bookmark 6 button description:"
+msgstr "6 žymelės mygtuko aprašymas:"
+
+msgid "Bookmark 6 button text"
+msgstr "6 žymelės mygtuko tekstas"
+
+msgid "Bookmark 6 path"
+msgstr "6 žymelės kelias"
+
+msgid "Bookmark 7"
+msgstr "7 žymelė"
+
+msgid "Bookmark 7 button description:"
+msgstr "7 žymelės mygtuko aprašymas:"
+
+msgid "Bookmark 7 button text"
+msgstr "7 žymelės mygtuko tekstas"
+
+msgid "Bookmark 7 path"
+msgstr "7 žymelės kelias"
+
+msgid "Bookmark(s) on/off"
+msgstr "Įjungti/išjungti žymeles"
+
+msgid "Branch:"
+msgstr "Atšaka:"
+
+#, python-format
+msgid "Broadcast TV network: %s"
+msgstr "Transliacijos TV tinklas: %s"
+
+msgid "Button caption"
+msgstr "Mygtuko antraštė"
+
+msgid "Calculating..."
+msgstr "Skaičiuojama..."
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Cancelled"
+msgstr "Atšaukta"
+
+#, python-format
+msgid "Certification: %s"
+msgstr "Sertifikatai: %s"
+
+msgid "Change Bookmarkname"
+msgstr "Pervadinti žymelę"
+
+msgid "Change File/Moviename and/or Description"
+msgstr "Keisti failo/filmo pavadinimą ir/arba aprašymą"
+
+msgid "Change Foldername"
+msgstr "Pervadinti katalogą"
+
+msgid "Change function from left/right buttons:"
+msgstr "Pakeisti '< / >' mygtukų funkciją:"
+
+msgid "Check again in x minutes:"
+msgstr "Tikrinti vėl po x minučių:"
+
+msgid "Clear"
+msgstr "Išvalyti"
+
+msgid "Clientbox setup"
+msgstr "Aparato-kliento sąranka"
+
+msgid "Clock"
+msgstr "Laikrodis"
+
+msgid "Close"
+msgstr "Užverti"
+
+msgid "Close with EXIT key:"
+msgstr "Uždaryti 'EXIT' mygtuku:"
+
+msgid "Color for multiple selection:"
+msgstr "Skirtingų pasirinkimų spalva:"
+
+msgid "Color for not ready seen movies:"
+msgstr "Žiūrėtų filmų šrifto spalva:"
+
+msgid "Color for ready seen movies:"
+msgstr "Peržiūrėtų filmų šrifto spalva:"
+
+msgid "Color for recording movies:"
+msgstr "Įrašomų filmų šrifto spalva:"
+
+msgid "Color key settings"
+msgstr "Spalvotų mygtukų nustatymai"
+
+msgid "Copy"
+msgstr "Kopijuoti"
+
+msgid "Copy of"
+msgstr "Kopija"
+
+msgid "Cover (185x278)"
+msgstr "Viršelis (185x278)"
+
+msgid "Create new Tag"
+msgstr "Sukurti naują žymę..."
+
+#, python-format
+msgid "Current Movie: %s"
+msgstr "Dabartinis filmas: %s"
+
+msgid "Current location and all subdirectories"
+msgstr "Dabartinė vieta ir pakatalogiai"
+
+msgid "DM-500HD"
+msgstr "DM-500HD"
+
+msgid "DM-600PVR"
+msgstr "DM-600PVR"
+
+msgid "DM-7000"
+msgstr "DM-7000"
+
+msgid "DM-7020HD"
+msgstr "DM-7020HD"
+
+msgid "DM-7025"
+msgstr "DM-7025"
+
+msgid "DM-8000HD"
+msgstr "DM-8000HD"
+
+msgid "DM-800HD"
+msgstr "DM-800HD"
+
+msgid "DM-800HDse"
+msgstr "DM-800HDse"
+
+msgid "Daily"
+msgstr "Kasdien"
+
+msgid "Data already exists! Should anything be updated?"
+msgstr "Duomenys jau yra! Reikėtų ką nors atnaujinti?"
+
+msgid "Default paths"
+msgstr "Numatytieji keliai"
+
+msgid "Defines how long files need to dwell in the wastebasket before auto empty will consider to remove them (0 means no retention)."
+msgstr "Čia galite nustatyti, kiek laiko failus saugoti šiuošliadėžėje, prieš ištuštinant juos automatiškai (0 = nesaugoti visai)."
+
+msgid "Delete"
+msgstr "Trinti"
+
+msgid "Delete all tags"
+msgstr "Šalinti visas žymes"
+
+msgid "Delete cover"
+msgstr "Šalinti viršelį"
+
+msgid "Delete failed!"
+msgstr "Ištrinti nepavyko!"
+
+msgid "Delete movie"
+msgstr "Pašalinti filmą"
+
+msgid "Delete movie info"
+msgstr "Šalinti informaciją apie filmą"
+
+msgid "Delete movie info and cover"
+msgstr "Šalinti informaciją apie filmą ir viršelį"
+
+msgid "Delete selected movie"
+msgstr "Pašalinti pasirinktą filmą"
+
+msgid "Delete this tag"
+msgstr "Šalinti šią žymę"
+
+msgid "Delete unused tags from default taglist"
+msgstr "Šalinti nenaudojamas žymes iš numatytojo žymių sąrašo"
+
+msgid "Descending"
+msgstr "mažėjančiai"
+
+msgid "Description"
+msgstr "aprašymą"
+
+msgid "Description:"
+msgstr "Aprašymas:"
+
+msgid "Destination carrier"
+msgstr "Paskirties laikmena"
+
 #, python-format
 msgid "Details for: %s"
 msgstr "Išsamiau apie: %s"
 
-#: ../SearchTVDb.py:632
-#, python-format
-msgid "Search result for: %s"
-msgstr "%s paieškos rezultatai"
-
-#: ../SearchTVDb.py:742
-#, python-format
-msgid "Save Info/Cover for ' %s ', please wait ..."
-msgstr "Palaukite, įkeliama '%s' informacija, viršeliai..."
-
-#: ../SearchTVDb.py:764
-#, python-format
-msgid "Getting show details for ' %s ', please wait ..."
-msgstr "Palaukite, įkeliama '%s' išsami informacija..."
-
-#: ../SearchTVDb.py:766
-#, python-format
-msgid "Search trailer for ' %s ', please wait ..."
-msgstr "Palaukite, ieškomas '%s' anonsas..."
-
-#: ../SearchTVDb.py:768
-#, python-format
-msgid "Getting search result for ' %s ', please wit ..."
-msgstr "Palaukite, įkeliama '%s' paieškos informacija..."
-
-#: ../SearchTVDb.py:778
-#, python-format
-msgid "Getting episodes list for ' %s ', please wait ..."
-msgstr "Palaukite, įkeliamas '%s' serijų sąrašas..."
-
-#: ../SearchTVDb.py:782
-#, python-format
-msgid "Getting episodes details for ' %s ', please wait ..."
-msgstr "Palaukite, įkeliami '%s' serijų aprašymai..."
-
-#: ../RecordPaths.py:34
-msgid "Record Paths Settings"
-msgstr "Įrašymo keliai"
-
-#: ../RecordPaths.py:47
-msgid "Move/copy location:"
-msgstr "Perkėlimo/kopijavimo vieta:"
-
-#: ../RecordPaths.py:57
 msgid ""
-"Please select the default move/copy location which is used for move/copy "
-"movies."
-msgstr "Pasirinkite numatytąją filmų ir įrašų perkėlimo/kopijavimo vietą."
+"Developer:\n"
+"  JackDaniel, cmikula"
+msgstr ""
+"Kūrėjas:\n"
+"  JackDaniel, cmikula"
 
-#: ../RecordPaths.py:67
-msgid "Location for move/copy files"
-msgstr "Failų perkėlimo/kopijavimo vieta"
-
-#: ../AdvancedKeyboard.py:98
-msgid "Advanced Movie Selection - Input help"
-msgstr "Išplėstinė filmų atranka - pagalba"
-
-#: ../Wastebasket.py:85
-msgid "Record date:"
-msgstr "Įrašo data:"
-
-#: ../Wastebasket.py:86
-msgid "Record time:"
-msgstr "Įrašo laikas:"
-
-#: ../Wastebasket.py:193
-msgid "Delete selected movie"
-msgstr "Pašalinti pasirinktą filmą"
-
-#: ../Wastebasket.py:194 ../Wastebasket.py:199
-msgid "Restore movie"
-msgstr "Atkurti filmą"
-
-#: ../Wastebasket.py:195
-msgid "Empty wastbasket"
-msgstr "Ištuštinti šiukšliadėžę"
-
-#: ../Wastebasket.py:196 ../Wastebasket.py:201
-msgid "Restore all movies"
-msgstr "Atkurti visus filmus"
-
-#: ../Wastebasket.py:198
-msgid "Delete movie"
-msgstr "Pašalinti filmą"
-
-#: ../Wastebasket.py:200
-msgid "Empty Trash"
-msgstr "Ištuštinti šiukšliadėžę"
-
-#: ../Wastebasket.py:202
-msgid "Please wait... Loading trash list..."
-msgstr "Palaukite... Įkeliamas šiukšlinės turinys..."
-
-#: ../Wastebasket.py:215
-msgid "Exit wastebasket"
-msgstr "Užverti šiukšliadėžę"
-
-#: ../Wastebasket.py:219 ../MovieSelection.py:286
-msgid "Clientbox setup"
-msgstr "Aparato-kliento sąranka"
-
-#: ../Wastebasket.py:225
-msgid "Advanced Movie Selection - Wastebasket"
-msgstr "Išplėstinė filmų atranka - šiukšliadėžė"
-
-#: ../Wastebasket.py:227 ../MovieSelection.py:730
-msgid "ATTENTION: Ask before delete is disabled!"
-msgstr "DĖMESIO: 'Perklausti prieš ištrinant' išjungta!"
-
-#: ../Wastebasket.py:234
-msgid "Last automated wastebasket empty:"
-msgstr "Paskutinis automatinis šiukšliadėžės tuštinimas:"
-
-#: ../Wastebasket.py:234
-msgid "Never!"
-msgstr "Niekada!"
-
-#: ../Wastebasket.py:237 ../Wastebasket.py:240 ../Wastebasket.py:249
-#: ../Wastebasket.py:253
-msgid "at"
-msgstr " "
-
-#: ../Wastebasket.py:237 ../Wastebasket.py:240 ../Wastebasket.py:249
-#: ../Wastebasket.py:253
-msgid "Clock"
-msgstr "Laikrodis"
-
-#: ../Wastebasket.py:238
 #, python-format
-msgid "Last automated wastebasket empty at %s"
-msgstr "Paskutinis automatinis šiukšliadėžės tuštinimas %s"
+msgid "Director: %s"
+msgstr "Režisierius: %s"
 
-#: ../Wastebasket.py:241
+msgid "Directories"
+msgstr "Katalogai"
+
 #, python-format
-msgid "Next automated wastebasket empty at %s"
-msgstr "Sekantis automatinis šiukšliadėžės tuštinimas %s"
+msgid "Directory %s nonexistent."
+msgstr "Katalogo %s nėra."
 
-#: ../Wastebasket.py:249
-#, python-format
-msgid "Last remote wastebasket empty at %s"
-msgstr "Paskutinis nutolusios šiukšliadėžės tuštinimas %s"
+msgid "Directory Selection"
+msgstr "Katalogo pasirinkimas"
 
-#: ../Wastebasket.py:253
-#, python-format
-msgid "Next remote wastebasket empty at %s"
-msgstr "Sekantis nutolusios šiukšliadėžės tuštinimas %s"
+msgid "Disable Advanced Movie Selection:"
+msgstr "Išjungti išplėstinę filmų atranką:"
 
-#: ../Wastebasket.py:255
-msgid "No last empty status available!"
-msgstr "Paskutinio tuštinimo stovis neprieinamas!"
+msgid "Disabled"
+msgstr "Išjungta"
 
-#: ../Wastebasket.py:256
-msgid "No next empty status available!"
-msgstr "Sekančui tuštinimo stovis neprieinamas!"
+msgid "Display plugin description"
+msgstr "Rodyti įskiepio aprašymą"
 
-#: ../Wastebasket.py:258
-msgid "Auto empty wastebasket is disabled"
-msgstr "Automatinis šiukšliadėžės tuštinimas išjungtas"
+msgid "Display plugin name"
+msgstr "Rodyti įskiepio pavadinimą"
 
-#: ../Wastebasket.py:275 ../Wastebasket.py:277
-#, python-format
-msgid "Wastebasket: %s"
-msgstr "Šiukšliadėžė: %s"
+msgid "Displayed bookmark name:"
+msgstr "Rodomos žymelės pavadinimas:"
 
-#: ../Wastebasket.py:286
-#, python-format
-msgid "Trash count: %d"
-msgstr "Šiukšlių skaičius: %d"
+msgid "Displays Clientbox setup function in the menu at the movie list."
+msgstr "Aparato-kliento sąranka bus rodoma filmų sąrašo meniu."
 
-#: ../Wastebasket.py:286
-#, python-format
-msgid "Trash size: %d MB"
-msgstr "Šiukšlių apimtis: %d MB"
+msgid "Displays E2 movie list extensions in the menu at the movie list."
+msgstr "Filmų sąrašo meniu rodys Enigma2 filmų sąrašo plėtinius."
 
-#: ../Wastebasket.py:288
-msgid "Trash size:"
-msgstr "Šiukšlių apimtis:"
+msgid "Displays TMDb Info & D/L in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma TMDb informacijos parsiuntimo galimybė."
 
-#: ../Wastebasket.py:289
-msgid "Trash count:"
-msgstr "Šiukšlių skaičius:"
+msgid "Displays TheTVDB Info & D/L in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma TVDb informacijos parsiuntimo galimybė."
 
-#: ../Wastebasket.py:291
-msgid "Wastebasket is empty!"
-msgstr "Šiukšliadėžė tuščia!"
+msgid "Displays Update all genre in meta from eit options in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma 'Atnaujinti visus žanrus iš EIT' parinktis."
 
-#: ../Wastebasket.py:309 ../MovieSelection.py:813
+msgid "Displays color key setup option in the menu at the movie list."
+msgstr "Filmų sąrašo meniu matysite spalvotų mygtukų sąranką."
+
+msgid "Displays delete cover function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma viršelių ištrynimo galimybė."
+
+msgid "Displays delete movie info and cover function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma filmo informacijos/viršelių ištrynimo galimybė."
+
+msgid "Displays delete movie info function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma filmo informacijos ištrynimo galimybė."
+
+msgid "Displays download and save movie info/cover for all movies options in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma VISŲ informacijos/viršelių parsiuntimo ir išsaugojimo galimybė."
+
+msgid "Displays filter by tags function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma filtravimo pagal žymes galimybė."
+
+msgid "Displays mark movie as seen/unseen in the menu at the movie list."
+msgstr "Filmų sąrašo meniu rodo filmo žymas peržiūrėtas/nežiūrėtas."
+
+msgid "Displays movie info/cover options in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma informacijos/viršelių parsiuntimo ir išsaugojimo galimybė."
+
+msgid "Displays movie tags function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodomos filmo žymės."
+
+msgid "Displays rename function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma pervadinimo galimybė."
+
+msgid "Displays search trailer on web function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma anonsų paieškos internete galimybė."
+
+msgid "Displays set VSR function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma amžiaus cenzo nustatymo galimybė."
+
+msgid "Displays sorting function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu rodys rūšiavimo galimybę."
+
+msgid "Displays the Filter by description function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma filtravimo pagal aprašymą galimybė."
+
+msgid "Displays the Provider Logo in original size. Otherwise, the provider logo be displayed zoomed up to cover size."
+msgstr "Rodo originalaus dydžio tiekėjo logotipą. Kitais atvejais tiekėjo logotipas bus rodomas įtalpintas pagal viršelio dydį."
+
+msgid "Displays the Provider Logo when no Cover available."
+msgstr "Kai viršelis neprieinamas, bus rodomas tiekėjo logotipas."
+
+msgid "Displays the Settings option in the menu at the movie list."
+msgstr "Plėtinio filmų sąrašo meniu rodo nustatymų parinktį."
+
+msgid "Displays the backup/restore function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma atsarginio kopijavimo/atkūrimo galimybė."
+
+msgid "Displays the cover in the movie list."
+msgstr "Filmų sąraše bus rodomi viršeliai."
+
+msgid "Displays the disk usage in the description. (Leave it disabled if you have performance problems at the start of the movie list)"
+msgstr "Aprašyme rodo disko naudojimą. Išjunkite šią parinktį, jei juntate našumo stygių, atveriant filmų sąrašą."
+
+msgid "Displays the movie delete function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu rodys galimybę trinti failus."
+
+msgid "Displays the movie move/copy function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu rodys galimybę perkelti/kopijuoti failus."
+
+msgid "Displays the movie search function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu rodys filmų paieškos galimybę."
+
+msgid "Displays the moviebar position setup function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma filmų infojuostos padėties nustatymo galimybė."
+
+msgid "Displays the size from directories in movie list."
+msgstr "Filmų sąraše rodo katalogų dydžius."
+
+msgid "Displays the various list view options in the menu at the movie list (Progressbar,View folders...)."
+msgstr "Filmų sąrašo meniu rodo įvairių sąrašo stilių parinktis (eigos juosta, katalogų peržiūra...)."
+
+msgid "Displays various lists typs in the menu at the movie list (Minimal,Compact...)."
+msgstr "Filmų sąrašo meniu rodys įvairius sąrašų pasirinkimus (minimalus, kompaktiškas...)."
+
+msgid "Displays wastebasket function in the menu at the movie list."
+msgstr "Filmų sąrašo meniu bus rodoma šiukšliadėžės parinktis."
+
 #, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Ar tikrai norite pašalinti %s?"
 
-#: ../Wastebasket.py:321
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Now movie delete can damage the recording(s)!\n"
-"Realy delete movie?"
-msgstr ""
-"Vyksta įrašymas, arba jis prasidės po kelių sekundžių!\n"
-"Šis filmo šalinimas gali pažeisti įrašymo procesus!\n"
-"Ar tikrai šalinti filmą?"
-
-#: ../Wastebasket.py:330
 msgid "Do you really want to delete all movies?"
 msgstr "Ar tikrai norite pašalinti visus filmus?"
 
-#: ../Wastebasket.py:342 ../MovieSelection.py:880
-msgid "Delete failed!"
-msgstr "Ištrinti nepavyko!"
+msgid ""
+"Do you really want to delete all tags from movies and default taglist?\n"
+"(Caution can not be undone!)"
+msgstr ""
+"Ar tikrai norite ištrinti visas žymes iš filmų ir numatytojo žymių sąrašo?\n"
+"Atminkite, kad šio veiksmo jau neatšauksite!"
 
-#: ../Wastebasket.py:354
+#, python-format
+msgid ""
+"Do you really want to delete cover from:\n"
+"%s?"
+msgstr ""
+"Ar tikrai norite pašalinti viršelį iš\n"
+"%s?"
+
+#, python-format
+msgid ""
+"Do you really want to delete info/cover from:\n"
+"%s?"
+msgstr ""
+"Ar tikrai norite pašalinti informaciją/viršelį iš\n"
+"%s?"
+
+#, python-format
+msgid ""
+"Do you really want to delete movie info from:\n"
+"%s?"
+msgstr ""
+"Ar tikrai norite pašalinti informaciją apie filmą iš\n"
+"%s?"
+
+msgid "Do you really want to delete selected movies?"
+msgstr "Ar tikrai norite ištrinti pasirinktus filmus?"
+
+#, python-format
+msgid ""
+"Do you really want to delete tag \"%s\" from movies and default taglist?\n"
+"(Caution can not be undone!)"
+msgstr ""
+"Ar tikrai norite ištrinti žymę \"%s\" iš filmų ir numatytojo žymių sąrašo?\n"
+"Atminkite, kad šio veiksmo jau neatšauksite!"
+
+msgid ""
+"Do you really want to delete unused tags from default taglist?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Ar tikrai norite ištrinti nenaudojamas žymes iš numatytojo žymių sąrašo?\n"
+"Atminkite, kad komanda \"Atšaukti\" šio veiksmo neatšauks!"
+
+#, python-format
+msgid "Do you really want to move %s to trashcan?"
+msgstr "Ar tikrai norite perkelti %s į šiukšliadėžę?"
+
+msgid "Do you really want to move selected movies to trashcan?"
+msgstr "Ar tikrai norite perkelti pasirinktus filmus į šiukšliadėžę?"
+
+msgid "Download and save from movie infos and covers complete."
+msgstr "Filmo informacija ir viršeliai parsiųsti ir išsaugoti."
+
+msgid "Download and save movie info/cover"
+msgstr "Atsisiųsti ir išsaugoti filmo informaciją/viršelius"
+
+msgid "Download and save movie info/cover for all movies"
+msgstr "Atsisiųsti ir išsaugoti visų filmų informaciją/viršelius"
+
+msgid "Download cover from TMDB after timer is finished:"
+msgstr "Atsisiųsti viršelius iš TMDb, kai laikmatis baigs darbą:"
+
+msgid "Edit Tag(s)"
+msgstr "Redaguoti žymę(es)"
+
+#, python-format
+msgid "Edit Tag(s) for: %s"
+msgstr "Redaguoti %s žymes"
+
+msgid "Empty Trash"
+msgstr "Ištuštinti šiukšliadėžę"
+
+msgid "Empty wastbasket"
+msgstr "Ištuštinti šiukšliadėžę"
+
+msgid "Enable Enigma2 debug:"
+msgstr "Leisti derinimo išvestį į failą :"
+
+msgid "Enable this option to use USB-Devices."
+msgstr "Įjunkite šią parinktį, jei norite naudoti USB įrenginius."
+
+msgid "End of the movie is reached, the box now go to shut down. Shutdown now?"
+msgstr "Filmas pasiekė pabaigą, aparatas nori išsijungti. Išjungti dabar?"
+
+msgid "End of the movie is reached, the box now go to standby. Do that now?"
+msgstr "Filmas pasiekė pabaigą, aparatas nori įjungti budėjimo būseną. Įjungti dabar?"
+
+msgid "English (with Starttime)"
+msgstr "Anglų (su pradžios laiku)"
+
+msgid "English (with Year)"
+msgstr "Anglų (su metais)"
+
+msgid "English (without Year)"
+msgstr "Anglų (be metų)"
+
+msgid "Enigma 2 default"
+msgstr "Enigma 2 numatytasis"
+
+msgid "Enter Bookmark 1 button descrition:"
+msgstr "Aprašykite 1 žymelės spartųjį mygtuką:"
+
+msgid "Enter Bookmark 2 button descrition:"
+msgstr "Aprašykite 2 žymelės spartųjį mygtuką:"
+
+msgid "Enter Bookmark 3 button descrition:"
+msgstr "Aprašykite 3 žymelės spartųjį mygtuką:"
+
+msgid "Enter Bookmark 4 button descrition:"
+msgstr "Aprašykite 4 žymelės spartųjį mygtuką:"
+
+msgid "Enter Bookmark 5 button descrition:"
+msgstr "Aprašykite 5 žymelės spartųjį mygtuką:"
+
+msgid "Enter Bookmark 6 button descrition:"
+msgstr "Aprašykite 6 žymelės spartųjį mygtuką:"
+
+msgid "Enter Bookmark 7 button descrition:"
+msgstr "Aprašykite 7 žymelės spartųjį mygtuką:"
+
+msgid "Enter Home button descrition:"
+msgstr "Aprašykite pradinio katalogo spartųjį mygtuką:"
+
+msgid "Enter new movie name for search:"
+msgstr "Įrašykite naują ieškomo filmo pavadinimą:"
+
+msgid "Enter new moviename to search for"
+msgstr "Įrašykite naują ieškomo filmo pavadinimą"
+
+msgid "Enter text to search for"
+msgstr "Įrašykite ieškomą tekstą"
+
+#, python-format
+msgid "Episode details for: %s"
+msgstr "Epizodo %s aprašymas"
+
+#, python-format
+msgid "Episode: %s"
+msgstr "Epizodas: %s"
+
+#, python-format
+msgid "Episodes for: %s"
+msgstr "Epizodai: %s"
+
+msgid "Error"
+msgstr "Klaida"
+
+msgid "Error creating settings backup!"
+msgstr "Nustatymų atsarginė kopija nepavyko!"
+
+msgid "Error loading ISO image!"
+msgstr "Klaida, įkeliant ISO atvaizdą!"
+
+msgid "Error occurred during unmounting device!"
+msgstr "Atjungiant įrenginį, įvyko klaida!"
+
+#, python-format
+msgid ""
+"Error!\n"
+"%s"
+msgstr ""
+"Klaida!\n"
+"%s"
+
+msgid "Error:"
+msgstr "Klaida:"
+
+msgid "Every second day"
+msgstr "Kas antrą dieną"
+
+msgid "Every two weeks"
+msgstr "Kas dvi savaites"
+
+msgid "Exit movielist"
+msgstr "Uždaryti filmų sąrašą"
+
+msgid "Exit wastebasket"
+msgstr "Užverti šiukšliadėžę"
+
+msgid "File Browser"
+msgstr "Failų naršyklė"
+
+msgid "Filename:"
+msgstr "Failas:"
+
+#, python-format
+msgid "Filename: %s"
+msgstr "Failo pavadinimas: %s"
+
+msgid "Filter by Tags"
+msgstr "Filtruoti pagal žymas"
+
+msgid "Filter by description"
+msgstr "Filtruoti pagal aprašymą"
+
+msgid "Finished"
+msgstr "Baigta"
+
+#, python-format
+msgid "First Aired: %s"
+msgstr "Pirmąkart: %s"
+
+msgid "Foldername:"
+msgstr "Katalogo pavadinimas:"
+
+msgid "Free space:"
+msgstr "Laisvos vietos:"
+
+msgid "Free:"
+msgstr "Laisva:"
+
+msgid "From:"
+msgstr "Nuo:"
+
+#, python-format
+msgid "Genre: %s\n"
+msgstr "Žanras: %s\n"
+
+msgid "German (with Starttime)"
+msgstr "Vokiečių (su pradžios laiku)"
+
+msgid "German (with Year)"
+msgstr "Vokiečių (su metais)"
+
+msgid "German (without Year)"
+msgstr "Vokiečių (be metų)"
+
+#, python-format
+msgid "Getting episodes details for ' %s ', please wait ..."
+msgstr "Palaukite, įkeliami '%s' serijų aprašymai..."
+
+#, python-format
+msgid "Getting episodes list for ' %s ', please wait ..."
+msgstr "Palaukite, įkeliamas '%s' serijų sąrašas..."
+
+#, python-format
+msgid "Getting search result for ' %s ', please wit ..."
+msgstr "Palaukite, įkeliama '%s' paieškos informacija..."
+
+#, python-format
+msgid "Getting show details for ' %s ', please wait ..."
+msgstr "Palaukite, įkeliama '%s' išsami informacija..."
+
+msgid "Go manual to position (OK for seek):"
+msgstr "Rankiniu būdu nurodyti poziciją ('OK' - paieška):"
+
+msgid "Green"
+msgstr "Žalias"
+
+msgid "Grey"
+msgstr "Pilka"
+
+#, python-format
+msgid "Guest Stars: %s\n"
+msgstr "Vaidina: %s\n"
+
+msgid "Here you can adjust the manually jump length relative to the film length in percent."
+msgstr "Čia galite nustatyti rankinio peršokimo dydį, palyginus su filmo dydžiu (procentais)."
+
+msgid "Here you can choose how many decimal points for the directory size in the movie list will be displayed."
+msgstr "Čia galite pasirinkti, kiek skaitmenų po kablelio bus rodomas katalogų dydis filmų sąraše."
+
+msgid "Here you can choose how many decimal points for the file size in the wastebasket will be displayed."
+msgstr "Čia galite pasirinkti, kiek rodyti dešimtainių skaitmenų po kablelio, atvaizduojant failų dydžius šiukšliadėžėje."
+
+msgid "Here you can define when to empty the wastebasket."
+msgstr "Čia galite nustatyti, kada ištuštinti šiukšliadėžę."
+
+msgid "Here you can determine the coverfile size for the download/save."
+msgstr "Čia galite nustatyti parsisiunčiamų/išsaugomų viršelių failo dydį."
+
+msgid "Here you can give the bookmark 1 button a special name."
+msgstr "Čia galite suteikti 1 žymelės mygtukui savą pavadinimą."
+
+msgid "Here you can give the bookmark 2 button a special name."
+msgstr "Čia galite suteikti 2 žymelės mygtukui savą pavadinimą."
+
+msgid "Here you can give the bookmark 3 button a special name."
+msgstr "Čia galite suteikti 3 žymelės mygtukui savą pavadinimą."
+
+msgid "Here you can give the bookmark 4 button a special name."
+msgstr "Čia galite suteikti 4 žymelės mygtukui savą pavadinimą."
+
+msgid "Here you can give the bookmark 5 button a special name."
+msgstr "Čia galite suteikti 5 žymelės mygtukui savą pavadinimą."
+
+msgid "Here you can give the bookmark 6 button a special name."
+msgstr "Čia galite suteikti 6 žymelės mygtukui savą pavadinimą."
+
+msgid "Here you can give the bookmark 7 button a special name."
+msgstr "Čia galite suteikti 7 žymelės mygtukui savą pavadinimą."
+
+msgid "Here you can give the home button a special name."
+msgstr "Čia galite suteikti pagrindinio katalogo mygtukui savą pavadinimą."
+
+msgid "Here you can select which files to Wastebasket are displayed. ATTENTION: All directorys below '/media' will take very long until the list is displayed!"
+msgstr "Čia galite pasirinkti, kokius failus rodyti šiukšliadėžėje. DĖMESIO: visų katalogų, esančių žemiau /media, sąrašo atidarymas gali užtrukti labai ilgai!"
+
+msgid "Here you can select which folders to include in the movie library creation."
+msgstr "Čia galite pasirinkti, kuriuos katalogus norite įtraukti į filmų bibliotekos kūrimą."
+
+msgid "Here you can set off when a movie to play automatically from the beginning when you start again (On settings=0, functions is disabled)."
+msgstr "Čia galite nustatyti, kada filmą pradėti automatiškai iš pradžių, jeigu filmą atsidarote iš naujo (nustačius = 0, ši funkcija išjungta)."
+
+msgid "Here you can set the jump time for the movie preview (< > buttons or bouquet +/- buttons)."
+msgstr "Čia galite nustatyti šuolio dydį (min.) filmų peržiūroje ('< >', arba 'bouquet +/-' mygtukais)."
+
+msgid "Hide bookmarks"
+msgstr "Slėpti žymeles"
+
+msgid "Hide broadcaster"
+msgstr "Slėpti transliuotoją"
+
+msgid "Hide date entry in movielist"
+msgstr "Filmų sąraše nerodyti datos įrašo"
+
+msgid "Hide extended description"
+msgstr "Nerodyti išsamaus aprašymo"
+
+msgid "Hide folders"
+msgstr "Slėpti katalogus"
+
+msgid "Hide folders in movielist"
+msgstr "Filmų sąraše nerodyti katalogų"
+
+msgid "Hide library"
+msgstr "Slėpti biblioteką"
+
+msgid "Hide marker"
+msgstr "Slėpti žymeklį"
+
+msgid "Hide movie color status in movielist"
+msgstr "Filmų sąraše nerodyti filmo būklės spalvos"
+
+msgid "Hide movie status icon in movielist"
+msgstr "Filmų sąraše nerodyti filmo būklės ženkliuko"
+
+msgid "Hide percent in movielist"
+msgstr "Filmų sąraše nerodyti procentų"
+
+msgid "Hide progressbar in movielist"
+msgstr "Filmų sąraše nerodyti eigos juostos"
+
+msgid "Hide runtime entry in movielist"
+msgstr "Filmų sąraše nerodyti trukmės"
+
+msgid "Hide tags in movielist"
+msgstr "Filmų sąraše nerodyti žymių"
+
+msgid "Home"
+msgstr "Pradžia"
+
+msgid "Home button description:"
+msgstr "Pagrindinio katalogo mygtuko aprašymas:"
+
+msgid "Home button text"
+msgstr "Mygtuko 'Home' tekstas"
+
+msgid "Home path"
+msgstr "Kelias į pradinį katalogą"
+
+msgid "Homebutton"
+msgstr "Mygtukas 'Namo'"
+
+msgid "Hostname:"
+msgstr "Vardas tinkle:"
+
+#, python-format
+msgid "How to proceed '%s'"
+msgstr "Kaip elgtis su '%s'"
+
+#, python-format
+msgid "ID: %s"
+msgstr "ID: %s"
+
+msgid "IMDB search"
+msgstr "IMDb paieška"
+
+msgid "IMDb info"
+msgstr "IMDb informacija"
+
+msgid "IMDb plugin NOT installed. Assign function to info button is NOT possible."
+msgstr "IMDb įskiepis neįdiegtas. Priskirti 'Info' mygtukui finkcijų neįmanoma."
+
+msgid "IMDb plugin installed. Assign function to info button is possible."
+msgstr "IMDb įskiepis įdiegtas. Galima priskirti finkcijas 'Info' mygtukui."
+
+msgid "INFO button function:"
+msgstr "'INFO' mygtuko funkcija:"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "If enabled all movies in movie library will be shown with path marker and will be sorted below them."
+msgstr "Jei čia įjungta, visi bibliotekos filmai bus rodomi su kelio žymekliais ir surūšiuoti pagal juos."
+
+msgid "If enabled only the movie library path selections will be used as marker otherwise each sub directory will be shown as path marker in movie library view."
+msgstr "Jei čia įjungta, kaip žymeklis bus naudojamas tik filmų bibliotekos kelio pasirinkimas, išjungus - filmo bibliotekos rodinyje, kaip kelio žymeklis, bus rodomas kiekvienas subkatalogas."
+
+msgid "If enabled the movie library symbol is shown in movie list."
+msgstr "Jei čia įjungta, filmų sąraše bus rodomas filmų bibliotekos simbolis."
+
+msgid "If recordings are active again after the set time is trying to empty the wastebasket."
+msgstr "Jei daromi įrašai, po nustatyto laiko vėl bus bandoma ištuštinti šiukšliadėžę."
+
+msgid "If this function is enabled the cover is automatically downloaded from TMDB after timer is finished."
+msgstr "Jei ši funkcija įjungta, kai laikmatis bus baigtas, viršeliai bus automatiškai parsiųsti iš TMDb."
+
+msgid "If this option is activated automatically when a movie does not start from the last position, the movie starts at the first marker."
+msgstr "Kai čia įjungta, jeigu filmo nepavyksta paleisti iš paskutinio sustabdymo padėties, filmas automatiškai pradedamas nuo pirmojo žymeklio."
+
+msgid "If this option is activated more jump functions ar available. ATTENTION: Enigma 2 restart is necessary!"
+msgstr "Įjungus šią funkciją, bus prieinama daugiau peršokimo peržiūroje galimybių. DĖMESIO: Enigma2 reikės paleisti iš naujo!"
+
+msgid "If this option is activated the behavior when stop a film also will used when you use the EXIT button."
+msgstr "Įjungus šią funkciją, elgsena, kai filmas sustabdytas, bus tokia pati, kaip paspaudus 'EXIT' mygtuką."
+
+msgid "If this option is activated the date from the file create instead today's date will be displayed on the lcd/oled when no short description is available."
+msgstr "Įjungus šią funkciją, kai nėra trumpo aprašymo, vietoje šiandienos datos, LCD/VFD ekrane bus rodoma failo sukūrimo data."
+
+msgid "If this option is activated the date will be displayed on the lcd/oled when no short description is available."
+msgstr "Įjungus šią funkciją, kai nėra trumpo aprašymo, LCD/VFD ekrane bus rodoma šiandienos data."
+
+msgid "If this option is activated the function of the left/right arrow buttons will changed. Normal you can use the buttons also for winding, if is changed you have quick access to the new jump function. ATTENTION: Enigma 2 restart is necessary!"
+msgstr "Įjungus šią parinktį, bus pakeista '< / >' mygtukų funkcija. Paprastai Jūs juos galite naudoti sklandžiam perjungimui, o pakeitus, įgysite greitą prieigą prie naujų peršokimo funkcijų. DĖMESIO: Enigma2 reikės paleisti iš naujo!"
+
+msgid "If this option is activated the movie will not be deleted but moved into the wastebasket."
+msgstr "Įjungus šią funkciją, filmas nebus ištrintas, bet bus perkeltas į šiukšliadėžę."
+
+msgid "If this option is activated will be displayed different info message. This should help with the operation of the extension."
+msgstr "Įjungus šią funkciją, bus rodomi įvairūs informaciniai pranešimai. Tai turėtų padėti, dirbant su plėtiniu."
+
+msgid "If this option is enabled you can stop play a movie with the EXIT button, and the Advanced Movie Selection plugin will also be closed immediately (if the next option is disabled)."
+msgstr "Įjungus šią funkciją, filmo peržiūrą galėsite išjungti 'EXIT' mygtuku. Ir išplėstinės filmų atrankos įskiepis taip pat bus nedelsiant uždarytas (tik jeigu sekanti parinktis išjungta)."
+
+msgid "If you enable this feature, all remote functions are enabled."
+msgstr "Įjungus čia, veikia visos nuotolinės sąsajos funkcijos."
+
+msgid "If you enable this feature, the movie preview starts automatically after the delay with a change in the movie list."
+msgstr "Įjungus šią funkciją, filmo peržiūra prasideda automatiškai uždelsiant laiką, kurį pakeisite filmų sąraše."
+
+msgid "If you enable this function the wastebasket will be emptied automatically at the set time."
+msgstr "Įjungus šią funkciją, nustatytu laiko šiukšliadėžė bus ištuštinta automatiškai."
+
+msgid "If you enable this function, all standard output from enigma will be stored to /tmp folder."
+msgstr "Įjungus šią funkciją, visa standartinė enigma2 išvestis bus saugoma /tmp aplanke."
+
+msgid "If you enable this function, selected movie in movielist will bring you a preview."
+msgstr "Įjungus šią funkciją, pasirinkus filmą iš sąrašo, bus rodoma šio filmo peržiūra."
+
+msgid "If you enable this function, the display summary from aktiv skin will be used."
+msgstr "Įjungus šią funkciją, LCD/VFD ekranas bus valdomas dabartinės temos nustatymų."
+
+msgid "If you enable this function, the video preview function will display as full screen in skin."
+msgstr "Įjungus šią funkciją, filmo peržiūra atsivers visame ekrane, nustatytame esamos temos."
+
+msgid "If you enable this function, your recorded movies will be marked in epg list."
+msgstr "Įjungus šią funkciją, Jūsų įrašyti įvykiai bus pažymeti EPG sąraše."
+
+msgid "Info/Cover save"
+msgstr "Išsaugoti Info/viršelį"
+
+#, python-format
+msgid "Infos for: %s"
+msgstr "Informacija apie: %s"
+
+msgid "Job already cancelled!"
+msgstr "Užduotis jau atšaukta!"
+
+msgid "Job failed"
+msgstr "Užduotis neatlikta"
+
+msgid "Jump to first mark when starts playing movie:"
+msgstr "Filmo atkūrimo pradžioje pereiti į pirmą žymę:"
+
+msgid "Jump to next marker"
+msgstr "Peršokti į sekančią pažymėtą vietą"
+
+msgid "Jump to previous marker"
+msgstr "Peršokti į ankstesnę pažymėtą vietą"
+
+msgid "Jump x minutes back (OK for seek):"
+msgstr "Peršokti X minučių atgal ('OK' - paieška):"
+
+msgid "Jump x minutes forward (OK for seek):"
+msgstr "Peršokti X minučių pirmyn ('OK' - paieška):"
+
+#, python-format
+msgid "Last automated wastebasket empty at %s"
+msgstr "Paskutinis automatinis šiukšliadėžės tuštinimas %s"
+
+msgid "Last automated wastebasket empty:"
+msgstr "Paskutinis automatinis šiukšliadėžės tuštinimas:"
+
+#, python-format
+msgid "Last remote wastebasket empty at %s"
+msgstr "Paskutinis nutolusios šiukšliadėžės tuštinimas %s"
+
+msgid "Last update:"
+msgstr "Atnaujinta:"
+
+msgid "Leave movie player"
+msgstr "Išjungti filmų grotuvą"
+
+msgid "Library marker on/off"
+msgstr "Įjungti/išjungti bibliotekos žymeklį"
+
+msgid "List style Advanced Movie Selection single line"
+msgstr "Išplėstinės filmų atrankos sąrašas viena eilute"
+
+msgid "List style compact"
+msgstr "kompaktiškas sąrašas"
+
+msgid "List style compact with description"
+msgstr "kompaktiškas sąrašas su aprašymu"
+
+msgid "List style default"
+msgstr "numatytasis sąrašas"
+
+msgid "List style extended"
+msgstr "Išplėstinis sąrašas"
+
+msgid "List style single line"
+msgstr "sąrašas viena eilute"
+
+msgid ""
+"Load Length of Movies in Movielist has been disabled.\n"
+"Close and reopen Movielist is required to apply the setting."
+msgstr ""
+"Filmų trukmės rodymas filmų sąraše išjungtas.\n"
+"Kad įsigaliotų parametrų pakeitimai, reikia užverti ir vėl atverti filmų sąrašą."
+
+msgid "Load Length of Movies in Movielist:"
+msgstr "Įkelti filmų trukmę filmų sąraše:"
+
+msgid "Load Tag(s) from movies"
+msgstr "Įkelti žymę(es) iš filmų"
+
+#, python-format
+msgid "Local IP: %s"
+msgstr "Vietinis IP: %s"
+
+msgid "Location for move/copy files"
+msgstr "Failų perkėlimo/kopijavimo vieta"
+
+msgid "Location:"
+msgstr "Vieta:"
+
+msgid "Manual jump sensibility:"
+msgstr "Rankinio peršokimo jautrumas:"
+
+msgid "Manual jump to:"
+msgstr "Rankiniu būdu peršokti į:"
+
+msgid "Manual search"
+msgstr "Rankinė paieška"
+
+msgid "Manual search finished"
+msgstr "Rankinė paieška baigta"
+
+msgid "Mark as seen"
+msgstr "Žymėti peržiūrėtu"
+
+msgid "Mark as unseen"
+msgstr "Žymėti nežiūrėtu"
+
+msgid "Mark movie as seen"
+msgstr "Žymėti filmą peržiūrėtu"
+
+msgid "Mark movie as seen at position (in percent):"
+msgstr "Žymėti filmą, kaip žiūrėtą, po X% peržiūros:"
+
+msgid "Mark movie as unseen"
+msgstr "Žymėti filmą nežiūrėtu"
+
+msgid "Mid (500x750)"
+msgstr "Vidut. (500x750)"
+
+msgid "Minimum movie count to show path marker in movie library view:"
+msgstr "Minimalus filmų skaičius, rodyti kelio žymekliui filmo bibliotekos rodinyje:"
+
+msgid "Monthly"
+msgstr "Kas mėnesį"
+
+msgid "Move"
+msgstr "Perkelti"
+
+msgid "Move Copy Progress"
+msgstr "Perkėlimo/kopijavimo eiga"
+
+msgid "Move down"
+msgstr "Perkelti žemyn"
+
+msgid "Move of"
+msgstr "Perkėlimas"
+
+msgid "Move up"
+msgstr "Perkelti aukštyn"
+
+msgid "Move-Copy"
+msgstr "Perkelti - kopijuoti"
+
+msgid "Move/Copy"
+msgstr "Perkelti/kopijuoti"
+
+#, python-format
+msgid "Move/Copy %s"
+msgstr "Perkelti/kopijuoti %s"
+
+msgid "Move/Copy from complete directory/symlink not possible, please select a single movie!"
+msgstr "Perkelti/kopijuoti iš viso katalogo/nuorodos neįmanoma, pasirinkite atskirą filmą!"
+
+#, python-format
+msgid "Move/Copy from: %s"
+msgstr "Perkelti/kopijuoti iš: %s"
+
+msgid "Move/Copy not possible here!"
+msgstr "Į čia perkelti/kopijuoti negalima!"
+
+msgid "Move/Copy progress"
+msgstr "Perkėlimo/kopijavimo eiga"
+
+msgid "Move/copy location:"
+msgstr "Perkėlimo/kopijavimo vieta:"
+
+msgid "Movie Quick Button Bookmark 1 path"
+msgstr "Kelias į filmo sparčiojo mygtuko 1 žymelės katalogą"
+
+msgid "Movie Quick Button Bookmark 2 path"
+msgstr "Kelias į filmo sparčiojo mygtuko 2 žymelės katalogą"
+
+msgid "Movie Quick Button Bookmark 3 path"
+msgstr "Kelias į filmo sparčiojo mygtuko 3 žymelės katalogą"
+
+msgid "Movie Quick Button Bookmark 4 path"
+msgstr "Kelias į filmo sparčiojo mygtuko 4 žymelės katalogą"
+
+msgid "Movie Quick Button Bookmark 5 path"
+msgstr "Kelias į filmo sparčiojo mygtuko 5 žymelės katalogą"
+
+msgid "Movie Quick Button Bookmark 6 path"
+msgstr "Kelias į filmo sparčiojo mygtuko 6 žymelės katalogą"
+
+msgid "Movie Quick Button Bookmark 7 path"
+msgstr "Kelias į filmo sparčiojo mygtuko 7 žymelės katalogą"
+
+msgid "Movie Quick Button Home path"
+msgstr "Kelias į filmo sparčiojo mygtuko pradinį katalogą"
+
+msgid "Movie Quick Button Name Setup"
+msgstr "Filmo sparčiųjų mygtukų vardų sąranka"
+
+msgid "Movie Quick Button Setup"
+msgstr "Filmo sparčiųjų mygtuką sąranka"
+
+msgid "Movie library"
+msgstr "Filmų biblioteka"
+
+msgid "Movie location:"
+msgstr "Filmų vieta:"
+
+#, python-format
+msgid "Movie location: %s"
+msgstr "Filmo vieta: %s"
+
+msgid "Movie search"
+msgstr "Filmų paieška"
+
+msgid "Movie tags"
+msgstr "Filmų žymos"
+
+msgid "Movie(s) are already in the destination directory. Operation cancelled!"
+msgstr "Filmas(ai) jau yra paskirties kataloge. Veiksmas atšauktas!"
+
+msgid "Movies"
+msgstr "Filmai"
+
+msgid "Movies began to be copied until they are finished!"
+msgstr "Filmai pradėti kopijuoti iki jie bus baigti!"
+
+msgid "Movies began to be moved until they are finished!"
+msgstr "Filmai pradėti perkelti iki jie bus baigti!"
+
+msgid "Movietitle:"
+msgstr "Filmo pavadinimas:"
+
+msgid "Multiselection"
+msgstr "Multipasirinkimas"
+
+msgid "NAS"
+msgstr "NAS"
+
+msgid "NAS-Movies"
+msgstr "NAS-Filmai"
+
+msgid "Name:"
+msgstr "Pavadinimas:"
+
+msgid "Never!"
+msgstr "Niekada!"
+
+#, python-format
+msgid "Next automated wastebasket empty at %s"
+msgstr "Sekantis automatinis šiukšliadėžės tuštinimas %s"
+
+#, python-format
+msgid "Next remote wastebasket empty at %s"
+msgstr "Sekantis nutolusios šiukšliadėžės tuštinimas %s"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "No BludiscPlayer found!"
+msgstr "Blu-ray grotuvo nerasta!"
+
+msgid "No DVD-PlayerChoice found!"
+msgstr "DVD grotuvo pasirinkimo nerasta!"
+
+msgid "No Helptext available!"
+msgstr "Pagalbos aprašymų nėra!"
+
+#, python-format
+msgid "No data found for ' %s ' at themoviedb.org!"
+msgstr "\"%s\" tarp themoviedb.org duomenų nėra!"
+
+#, python-format
+msgid ""
+"No data found for ' %s ' at themoviedb.org!\n"
+"Do you want to edit the search name?"
+msgstr ""
+"\"%s\" tarp themoviedb.org duomenų nėra!\n"
+"Ar norite redaguoti paieškos frazę?"
+
+#, python-format
+msgid "No description for ' %s ' at themoviedb.org found!"
+msgstr "\"%s\" aprašymo tarp themoviedb.org duomenų nėra!"
+
+msgid "No internet connection available!"
+msgstr "Nėra interneto ryšio!"
+
+msgid "No last empty status available!"
+msgstr "Paskutinio tuštinimo stovis neprieinamas!"
+
+msgid "No next empty status available!"
+msgstr "Sekančui tuštinimo stovis neprieinamas!"
+
+msgid "No override"
+msgstr "Neperrašyti"
+
+msgid "No plugin assigned!"
+msgstr "Nepaskirtas įskiepis!"
+
+msgid "No tags are set on these movies."
+msgstr "Šiuose filmuose žymių nenustatyta."
+
+msgid "No user voted!"
+msgstr "Nebalsuota!"
+
+msgid "No, but restart from begin"
+msgstr "Ne. Bet pradėti filmą iš pradžių"
+
+msgid "No, but start endless loop"
+msgstr "Ne. Bet įjungti kartojimą ratu"
+
+msgid "No, but stop endless loop"
+msgstr "Ne. Bet išjungti kartojimą ratu"
+
+msgid ""
+"Not possible!\n"
+"MerlinEPG and CoolTVGuide or/and MerlinEPGCenter present or neither installed from this three plugins."
+msgstr ""
+"Neįmanoma!\n"
+"MerlinEPG, CoolTVGuide ir/arba MerlinEPGCenter nėra, arba neįdiegti šie trys įskiepiai."
+
+msgid "Nothing"
+msgstr "Nieko"
+
+#, python-format
+msgid "Nothing found for: %s"
+msgstr "Su '%s' nieko nerasta"
+
+msgid "Numerical"
+msgstr "Skaitmeninis"
+
+msgid "OFDb info"
+msgstr "OFDb informacija"
+
+msgid "OFDb plugin NOT installed. Assign function to info button is NOT possible."
+msgstr "OFDb įskiepis neįdiegtas. Priskirti 'Info' mygtukui finkcijų neįmanoma."
+
+msgid "OFDb plugin installed. Assign function to info button is possible."
+msgstr "OFDb įskiepis įdiegtas. Galima priskirti finkcijas 'Info' mygtukui."
+
+msgid "OFDb search"
+msgstr "OFDb paieška"
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "On destination data carrier is not enough space available."
+msgstr "Paskirties duomenų laikmenoje trūksta vietos."
+
+msgid "Only current location"
+msgstr "Tik dabartinė vieta"
+
+msgid "Only last three digits from the IP must be set."
+msgstr "Nustatykite paskutinius tris IP adreso skaičius."
+
+msgid "Only those, which are not available!"
+msgstr "Tik tuos, kurie neprieinami!"
+
+msgid "Open servicelist"
+msgstr "Atidaryti kanalų sąrašą"
+
+msgid "Opens the film list on the last used location."
+msgstr "Atvers filmų sąrašą paskutinio rodyto filmo kataloge."
+
+msgid "Orange"
+msgstr "Oranžinė"
+
+msgid "Original (1400x2100)"
+msgstr "Originalus (1400x2100)"
+
+msgid "Overwrite both (description & cover)"
+msgstr "Perrašyti abu (aprašymą ir viršelį)"
+
+msgid "Overwrite movie cover"
+msgstr "Perrašyti filmo viršelį"
+
+msgid "Overwrite movie description"
+msgstr "Perrašyti filmo aprašymą"
+
+msgid "Own button description"
+msgstr "Kiekvieno mygtuko aprašymas"
+
+msgid "Own text 1"
+msgstr "Savas tekstas 1"
+
+msgid "Own text 2"
+msgstr "Savas tekstas 2"
+
+msgid "Own text 3"
+msgstr "Savas tekstas 3"
+
+msgid "Own text 4"
+msgstr "Savas tekstas 4"
+
+msgid "Own text 5"
+msgstr "Savas tekstas 5"
+
+msgid "Own text 6"
+msgstr "Savas tekstas 6"
+
+msgid "Own text 7"
+msgstr "Savas tekstas 7"
+
+msgid "Pause movie at end"
+msgstr "Pauzė filmo pabaigoje"
+
+msgid "Please enter here the new tag:"
+msgstr "Įrašykite čia naują žymę:"
+
+msgid "Please select backup path here:"
+msgstr "Pasirinkite kelią atsarginei kopijai:"
+
+msgid "Please select tag to filter..."
+msgstr "Pasirinkite žymę atrankai..."
+
+msgid "Please select the VSR here:"
+msgstr "Pasirinkite amžiaus cenzą čia:"
+
+msgid "Please select the default move/copy location which is used for move/copy movies."
+msgstr "Pasirinkite numatytąją filmų ir įrašų perkėlimo/kopijavimo vietą."
+
+msgid "Please select the movie path..."
+msgstr "Pasirinkite kelią į filmus..."
+
+msgid "Please select the search path(s) for movies..."
+msgstr "Pasirinkite filmų paieškos kelią..."
+
+msgid "Please wait until current movie is copied to the end!"
+msgstr "Palaukite, kol šis filmas bus nukopijuotas iki galo!"
+
+msgid "Please wait until current movie is moved to the end!"
+msgstr "Palaukite, kol šis filmas bus perkeltas iki galo!"
+
+msgid "Please wait... Loading list..."
+msgstr "Palaukite... Įkeliamas sąrašas..."
+
+msgid "Please wait... Loading trash list..."
+msgstr "Palaukite... Įkeliamas šiukšlinės turinys..."
+
+msgid "Plugin not found!"
+msgstr "Įskiepio nerasta!"
+
+msgid "Port address:"
+msgstr "Prievadas:"
+
+msgid "Port:"
+msgstr "Prievadas:"
+
+msgid "Preview will start on last stop marker."
+msgstr "Peržiūra prasidės ties vėliausio sustabdymo atžyma."
+
+#, python-format
+msgid "Processing: %s"
+msgstr "Apdorojama: %s"
+
+#, python-format
+msgid "Production: %s\n"
+msgstr "Gamyba: %s\n"
+
+msgid "Provider Logo path:"
+msgstr "Kelias į tiekėjo logotipą:"
+
+msgid "Quickbutton:"
+msgstr "Greitasis mygtukas: "
+
+msgid "REC"
+msgstr "'REC'"
+
+msgid "Radio-button"
+msgstr "'RADIO' mygtukas"
+
+#, python-format
+msgid "Rating: %s\n"
+msgstr "Reitingas: %s\n"
+
+msgid "Really close without saving settings?"
+msgstr "Ar tikrai užverti be nustatymų išsaugojimo ?"
+
+msgid "Record Paths Settings"
+msgstr "Įrašymo keliai"
+
+msgid "Record date:"
+msgstr "Įrašo data:"
+
+msgid "Record time:"
+msgstr "Įrašo laikas:"
+
+msgid "Recording"
+msgstr "Įrašymas"
+
 msgid ""
 "Recording(s) are in progress or coming up in few seconds!\n"
 "Now empty the Wastebasket can damage the recording(s)!\n"
@@ -438,1573 +1602,448 @@ msgstr ""
 "Šis šiukšliadėžės tuštinimas gali pažeisti įrašymo procesus!\n"
 "Ar tikrai tuštinti šiukšliadėžę?"
 
-#: ../Wastebasket.py:378 ../Wastebasket.py:391
-msgid "Restore failed!"
-msgstr "Atkurti nepavyko!"
+msgid ""
+"Recording(s) are in progress or coming up in few seconds!\n"
+"Now movie delete can damage the recording(s)!\n"
+"Realy delete movie?"
+msgstr ""
+"Vyksta įrašymas, arba jis prasidės po kelių sekundžių!\n"
+"Šis filmo šalinimas gali pažeisti įrašymo procesus!\n"
+"Ar tikrai šalinti filmą?"
 
-#: ../plugin.py:79 ../plugin.py:128
-msgid "Setup Advanced Movie Selection"
-msgstr "Išplėstinės filmų atrankos sąranka"
+msgid "Recordings are active, the timer(s) will also be deleted!\n"
+msgstr "Vyksta įrašymas, laikmatis(-čiai) taip pat bus ištrintas!\n"
 
-#: ../plugin.py:125 ../plugin.py:126 ../MovieSelection.py:932
-msgid "Advanced Movie Selection"
-msgstr "Išplėstinė filmų atranka"
+msgid "Records"
+msgstr "Įrašai"
 
-#: ../plugin.py:125 ../plugin.py:126 ../plugin.py:128 ../plugin.py:129
-msgid "Alternate Movie Selection"
-msgstr "Alternatyvi filmų atranka"
+msgid "Red"
+msgstr "Raudonas"
 
-#: ../plugin.py:127
-msgid "Move Copy Progress"
-msgstr "Perkėlimo/kopijavimo eiga"
-
-#: ../plugin.py:127
-msgid "Show progress of move or copy job"
-msgstr "Rodyti perkėlimo/kopijavimo eigą"
-
-#: ../Rename.py:67 ../AdvancedMovieSelectionSetup.py:216
-msgid "Save"
-msgstr "Saugoti"
-
-#: ../Rename.py:68 ../MoveCopy.py:249 ../AdvancedMovieSelectionSetup.py:608
-#: ../DownloadMovies.py:63 ../TagEditor.py:44 ../SelectionListScreen.py:41
-#: ../SelectionListScreen.py:55 ../SelectionListScreen.py:59
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: ../Rename.py:78
-msgid "Location:"
-msgstr "Vieta:"
-
-#: ../Rename.py:85
-msgid "Displayed bookmark name:"
-msgstr "Rodomos žymelės pavadinimas:"
-
-#: ../Rename.py:87
-msgid "Foldername:"
-msgstr "Katalogo pavadinimas:"
-
-#: ../Rename.py:89
-msgid "Filename:"
-msgstr "Failas:"
-
-#: ../Rename.py:90
-msgid "Movietitle:"
-msgstr "Filmo pavadinimas:"
-
-#: ../Rename.py:91
-msgid "Description:"
-msgstr "Aprašymas:"
-
-#: ../Rename.py:105
-msgid "Change Bookmarkname"
-msgstr "Pervadinti žymelę"
-
-#: ../Rename.py:107
-msgid "Change Foldername"
-msgstr "Pervadinti katalogą"
-
-#: ../Rename.py:109
-msgid "Change File/Moviename and/or Description"
-msgstr "Keisti failo/filmo pavadinimą ir/arba aprašymą"
-
-#: ../MoveCopy.py:48
-msgid "Job failed"
-msgstr "Užduotis neatlikta"
-
-#: ../MoveCopy.py:49 ../MoveCopy.py:125 ../MoveCopy.py:280
-#: ../MovieSelection.py:1117
-msgid "Error"
-msgstr "Klaida"
-
-#: ../MoveCopy.py:113 ../MoveCopy.py:282 ../MoveCopy.py:380
-msgid "Move"
-msgstr "Perkelti"
-
-#: ../MoveCopy.py:113 ../MoveCopy.py:282 ../MoveCopy.py:380
-msgid "Copy"
-msgstr "Kopijuoti"
-
-#: ../MoveCopy.py:114
-msgid "Name:"
-msgstr "Pavadinimas:"
-
-#: ../MoveCopy.py:116
-msgid "Cancelled"
-msgstr "Atšaukta"
-
-#: ../MoveCopy.py:118 ../MoveCopy.py:278
-msgid "Finished"
-msgstr "Baigta"
-
-#: ../MoveCopy.py:127
-msgid "Error:"
-msgstr "Klaida:"
-
-#: ../MoveCopy.py:143
-msgid "Calculating..."
-msgstr "Skaičiuojama..."
-
-#: ../MoveCopy.py:147
 #, python-format
-msgid "Around %d minutes"
-msgstr "Maždaug %d min."
+msgid "Regie: %s"
+msgstr "Režisūra: %s"
 
-#: ../MoveCopy.py:149
-#, python-format
-msgid "Around %d minute"
-msgstr "Maždaug %d min."
-
-#: ../MoveCopy.py:151
-msgid "Seconds"
-msgstr " sek."
-
-#: ../MoveCopy.py:152
-msgid "Second"
-msgstr "Skundė"
-
-#: ../MoveCopy.py:157
-msgid "Status:"
-msgstr "Būsena:"
-
-#: ../MoveCopy.py:159 ../MoveCopy.py:269
-msgid "From:"
-msgstr "Nuo:"
-
-#: ../MoveCopy.py:160 ../MoveCopy.py:270
-msgid "To:"
-msgstr "Į:"
-
-#: ../MoveCopy.py:162
-msgid "Remaining time:"
-msgstr "Likęs laikas:"
-
-#: ../MoveCopy.py:163
 msgid "Remaining elements:"
 msgstr "Liko elementų:"
 
-#: ../MoveCopy.py:164
-msgid "Speed:"
-msgstr "Greitis:"
+msgid "Remaining time:"
+msgstr "Likęs laikas:"
 
-#: ../MoveCopy.py:246
-msgid "Abort selected job"
-msgstr "Nutraukti pasirinktą užduotį"
+msgid "Remoteserver disabled!"
+msgstr "Nutolęs serveris išjungtas!"
 
-#: ../MoveCopy.py:247 ../MoveCopy.py:250 ../MoveCopy.py:255 ../MoveCopy.py:352
-#: ../About.py:103 ../About.py:151 ../AdvancedMovieSelectionSetup.py:136
-#: ../AdvancedMovieSelectionSetup.py:215
-msgid "Close"
-msgstr "Užverti"
+msgid "Rename"
+msgstr "Pervardinti"
 
-#: ../MoveCopy.py:256
-msgid "Show detail of selected job"
-msgstr "Rodyti pasirinktą užduotį išsamiai"
-
-#: ../MoveCopy.py:274
-msgid "Aborted"
-msgstr "Nutraukta"
-
-#: ../MoveCopy.py:276
-msgid "Waiting"
-msgstr "Laukiama"
-
-#: ../MoveCopy.py:291
-msgid "Job already cancelled!"
-msgstr "Užduotis jau atšaukta!"
-
-#: ../MoveCopy.py:293
-msgid "Please wait until current movie is moved to the end!"
-msgstr "Palaukite, kol šis filmas bus perkeltas iki galo!"
-
-#: ../MoveCopy.py:295
-msgid "Please wait until current movie is copied to the end!"
-msgstr "Palaukite, kol šis filmas bus nukopijuotas iki galo!"
-
-#: ../MoveCopy.py:298
-msgid "Would you really abort current job?"
-msgstr "Ar tikrai atšaukti užduoties vykdymą?"
-
-#: ../MoveCopy.py:300
-msgid "Movies began to be moved until they are finished!"
-msgstr "Filmai pradėti perkelti iki jie bus baigti!"
-
-#: ../MoveCopy.py:302
-msgid "Movies began to be copied until they are finished!"
-msgstr "Filmai pradėti kopijuoti iki jie bus baigti!"
-
-#: ../MoveCopy.py:318
-msgid "Move of"
-msgstr "Perkėlimas"
-
-#: ../MoveCopy.py:318
-msgid "Copy of"
-msgstr "Kopija"
-
-#: ../MoveCopy.py:320
-msgid "movie"
-msgstr "filmas"
-
-#: ../MoveCopy.py:320
-msgid "movies"
-msgstr "filmai"
-
-#: ../MoveCopy.py:324
-msgid "Move/Copy progress"
-msgstr "Perkėlimo/kopijavimo eiga"
-
-#: ../MoveCopy.py:336
-msgid "Selected movies"
-msgstr "Pasirinkti filmai"
-
-#: ../MoveCopy.py:346
-msgid "To adjusted move/copy location"
-msgstr "Kad koreguoti perkėlimo/kopijavimo vietą"
-
-#: ../MoveCopy.py:348
-msgid "Directory Selection"
-msgstr "Katalogo pasirinkimas"
-
-#: ../MoveCopy.py:350
-msgid "Show active move/copy processes"
-msgstr "Rodyti perkėlimo/kopijavimo eigą"
-
-#: ../MoveCopy.py:359
-#, python-format
-msgid "Move/Copy from: %s"
-msgstr "Perkelti/kopijuoti iš: %s"
-
-#: ../MoveCopy.py:365
-#, python-format
-msgid "Move/Copy %s"
-msgstr "Perkelti/kopijuoti %s"
-
-#: ../MoveCopy.py:365
-msgid "to:"
-msgstr "į:"
-
-#: ../MoveCopy.py:372
-msgid "Source and destination path must be different."
-msgstr "Šaltinio ir paskirties keliai turi būti skirtingi."
-
-#: ../MoveCopy.py:380
-msgid "Abort"
-msgstr "Nutraukti"
-
-#: ../MoveCopy.py:381
-#, python-format
-msgid "How to proceed '%s'"
-msgstr "Kaip elgtis su '%s'"
-
-#: ../MoveCopy.py:381
-#, python-format
-msgid "from %s"
-msgstr "nuo %s"
-
-#: ../MoveCopy.py:381
-#, python-format
-msgid "to %s"
-msgstr "iki %s"
-
-#: ../MoveCopy.py:381
-msgid "be moved/copied?"
-msgstr "reikia perkelti/kopijuoti?"
-
-#: ../MoveCopy.py:395
-msgid "On destination data carrier is not enough space available."
-msgstr "Paskirties duomenų laikmenoje trūksta vietos."
-
-#: ../MoveCopy.py:397
-#, python-format
-msgid "Another %s are required to move the data."
-msgstr "Duomenims perkelti reikia kito %s."
-
-#: ../MoveCopy.py:399
-#, python-format
-msgid "Another %s are required to copy the data."
-msgstr "Duomenims kopijuoti reikia kito %s."
-
-#: ../MoveCopy.py:400
-msgid "Destination carrier"
-msgstr "Paskirties laikmena"
-
-#: ../MoveCopy.py:401
-msgid "Free space:"
-msgstr "Laisvos vietos:"
-
-#: ../MoveCopy.py:402
-msgid "Total size:"
-msgstr "Bendras dydis:"
-
-#: ../MoveCopy.py:411
-msgid "Movie(s) are already in the destination directory. Operation cancelled!"
-msgstr "Filmas(ai) jau yra paskirties kataloge. Veiksmas atšauktas!"
-
-#: ../About.py:95
-msgid "Version:"
-msgstr "Versija:"
-
-#: ../About.py:96
-msgid "Branch:"
-msgstr "Atšaka:"
-
-#: ../About.py:99
-msgid ""
-"Developer:\n"
-"  JackDaniel, cmikula"
-msgstr ""
-"Kūrėjas:\n"
-"  JackDaniel, cmikula"
-
-#: ../About.py:100
-msgid "Thanks for translation to:\n"
-msgstr "Ačiū už vertimą:\n"
-
-#: ../About.py:101
-msgid ""
-"This plugin may only executed on hardware which is licensed by Dream "
-"Multimedia GmbH."
-msgstr ""
-"Šis įskiepis gali būti panaudotas tik Dream Multimedia GmbH licencijuotoje "
-"techninėje įrangoje ."
-
-#: ../About.py:102
-msgid "Thanks to all other for help and so many very good code."
-msgstr ""
-"Ačiū ir visiems kitiems už pagalbą ir didelį kiekį labai naudingo kodo."
-
-#: ../About.py:104
-msgid "Show changes"
-msgstr "Rodyti pakeitimus"
-
-#: ../About.py:110
-msgid "About Advanced Movie Selection"
-msgstr "Apie 'išplėstinę filmų atranką'"
-
-#: ../About.py:142
-msgid "Advanced Movie Selection - History"
-msgstr "Išplėstinė filmų atranka - istorija"
-
-#: ../MovieSearch.py:39
-msgid "Search:"
-msgstr "Paieška:"
-
-#: ../QuickButton.py:57
-#, python-format
-msgid "Show up to VSR-%d"
-msgstr "Rodyti amžiaus cenzą iki -%d"
-
-#: ../QuickButton.py:59 ../QuickButton.py:220 ../QuickButton.py:355
-#: ../AdvancedMovieSelectionSetup.py:671
-msgid "Mark as seen"
-msgstr "Žymėti peržiūrėtu"
-
-#: ../QuickButton.py:62
-msgid "Show folders"
-msgstr "Rodyti katalogus"
-
-#: ../QuickButton.py:64
-msgid "Hide folders"
-msgstr "Slėpti katalogus"
-
-#: ../QuickButton.py:67
-msgid "Show bookmarks"
-msgstr "Rodyti žymeles"
-
-#: ../QuickButton.py:69
-msgid "Hide bookmarks"
-msgstr "Slėpti žymeles"
-
-#: ../QuickButton.py:72
-msgid "Show library"
-msgstr "Rodyti biblioteką"
-
-#: ../QuickButton.py:74
-msgid "Hide library"
-msgstr "Slėpti biblioteką"
-
-#: ../QuickButton.py:77
-msgid "Show marker"
-msgstr "Rodyti žymeklį"
-
-#: ../QuickButton.py:79
-msgid "Hide marker"
-msgstr "Slėpti žymeklį"
-
-#: ../QuickButton.py:82
-msgid "To movielist"
-msgstr "Į filmų sąrašą"
-
-#: ../QuickButton.py:84
-msgid "To library"
-msgstr "Į biblioteką"
-
-#: ../QuickButton.py:93 ../AdvancedMovieSelectionSetup.py:646
-#: ../AdvancedMovieSelectionSetup.py:679
-msgid "Nothing"
-msgstr "Nieko"
-
-#: ../QuickButton.py:166
-msgid "Sort alphabetically"
-msgstr "pagal abėcėlę"
-
-#: ../QuickButton.py:168
-msgid "Sort by Description"
-msgstr "pagal aprašymą"
-
-#: ../QuickButton.py:170
-msgid "Sort by Date (9->1)"
-msgstr "pagal datą (9->1)"
-
-#: ../QuickButton.py:172
-msgid "Sort by Date (1->9)"
-msgstr "pagal datą (1->9)"
-
-#: ../QuickButton.py:173 ../MovieSelection.py:139
-msgid "Unknown"
-msgstr "Nežinoma"
-
-#: ../QuickButton.py:218 ../QuickButton.py:358
-#: ../AdvancedMovieSelectionSetup.py:672
-msgid "Mark as unseen"
-msgstr "Žymėti nežiūrėtu"
-
-#: ../QuickButton.py:309
-msgid "Set tag here not possible, please select a movie for!"
-msgstr "Nustatyti žymę čia neįmanoma, tam pasirinkite filmą!"
-
-#: ../QuickButton.py:315
-msgid "Trailer search here not possible, please select a movie!"
-msgstr "Anonso paieška čia neįmanoma, pasirinkite filmą!"
-
-#: ../QuickButton.py:321
-msgid ""
-"Move/Copy from complete directory/symlink not possible, please select a "
-"single movie!"
-msgstr ""
-"Perkelti/kopijuoti iš viso katalogo/nuorodos neįmanoma, pasirinkite atskirą "
-"filmą!"
-
-#: ../QuickButton.py:327
 msgid "Rename here not possible, please select a movie!"
 msgstr "Pervadinti čia neįmanoma, pasirinkite filmą!"
 
-#: ../QuickButton.py:349
-msgid "TMDb search here not possible, please select a movie!"
-msgstr "TMDb paieška čia neįmanoma, pasirinkite filmą!"
+#, python-format
+msgid ""
+"Rename tag \"%s\" in movies and default taglist?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Pervadinti žymę \"%s\" filmuose ir numatytąjame žymių sąraše?\n"
+"Atminkite, kad komanda \"Atšaukti\" šio veiksmo neatšauks!"
 
-#: ../QuickButton.py:371
-msgid "Show up to"
-msgstr "Rodyti iki"
+msgid "Rename this tag"
+msgstr "Pervadinti šią žymę"
 
-#: ../QuickButton.py:371 ../MovieSelection.py:1186 ../MovieSelection.py:1288
-msgid "VSR"
-msgstr "Amžiaus cenzas"
+msgid "Restore all movies"
+msgstr "Atkurti visus filmus"
 
-#: ../QuickButton.py:377
-msgid "This may not be marked as seen!"
-msgstr "Šio negalima pažymėti peržiūrėtu!"
+msgid "Restore failed!"
+msgstr "Atkurti nepavyko!"
 
-#: ../QuickButton.py:383
-msgid "This may not be marked as unseen!"
-msgstr "Šio negalima pažymėti nežiūrėtu!"
+msgid "Restore movie"
+msgstr "Atkurti filmą"
 
-#: ../QuickButton.py:393
-msgid "Unknown error!"
-msgstr "Nežinoma klaida!"
-
-#: ../QuickButton.py:395
-msgid "Plugin not found!"
-msgstr "Įskiepio nerasta!"
-
-#: ../QuickButton.py:397
-msgid "No plugin assigned!"
-msgstr "Nepaskirtas įskiepis!"
-
-#: ../QuickButton.py:403
-msgid "Clear"
-msgstr "Išvalyti"
-
-#: ../QuickButton.py:404
-msgid "VSR-0 (General Audience)"
-msgstr "Amžiaus cenzas-0 (bendroji auditorija)"
-
-#: ../QuickButton.py:405
-msgid "VSR-6 (Parental Guidance Suggested)"
-msgstr "Amžiaus cenzas-6 (pageidautinas tėvų dalyvavimas)"
-
-#: ../QuickButton.py:406
-msgid "VSR-12 (Parents Strongly Cautioned)"
-msgstr "Amžiaus cenzas-12 (tėvų dalyvavimas būtinas)"
-
-#: ../QuickButton.py:407
-msgid "VSR-16 (Restricted)"
-msgstr "Amžiaus cenzas-16 (uždrausta)"
-
-#: ../QuickButton.py:408
-msgid "VSR-18 (No One 17 And Under Admitted)"
-msgstr "Amžiaus cenzas-18 (tik vyresniems, kaip 17 metų)"
-
-#: ../QuickButton.py:409
-msgid "Please select the VSR here:"
-msgstr "Pasirinkite amžiaus cenzą čia:"
-
-#: ../QuickButton.py:470
-msgid "Select movie by description:"
-msgstr "Pasirinkite filmą pagal aprašymą:"
-
-#: ../AdvancedMovieSelectionSetup.py:134
-msgid "Backup directory path:"
-msgstr "Atsarginės kopijos katalogo kelias:"
-
-#: ../AdvancedMovieSelectionSetup.py:137
 msgid "Restore settings"
 msgstr "Atkurti nustatymus"
 
-#: ../AdvancedMovieSelectionSetup.py:138
-msgid "Backup settings"
-msgstr "Kopijuoti nustatymus atsargai"
+msgid "Resume from last position"
+msgstr "Tęsti nuo paskutinės pozicijos"
 
-#: ../AdvancedMovieSelectionSetup.py:142
-msgid "Backup/Restore Advanced Movie Selection settings"
-msgstr "Išplėstinės filmų atrankos parametrų atsarginis kopijavimas/atkūrimas"
+msgid "Return to movie list"
+msgstr "Grįžti į filmų sąrašą"
 
-#: ../AdvancedMovieSelectionSetup.py:152
+msgid "Return to previous service"
+msgstr "Grįžti į ankstesnį kanalą"
+
+#, python-format
+msgid "Runtime: %s minutes"
+msgstr "Trukmė: %s min."
+
+#, python-format
+msgid "Runtime: %s minutes\n"
+msgstr "Trukmė: %s minučių\n"
+
+msgid "Save"
+msgstr "Saugoti"
+
+#, python-format
+msgid "Save Info/Cover for ' %s ', please wait ..."
+msgstr "Palaukite, įkeliama '%s' informacija, viršeliai..."
+
+msgid "Save info/cover"
+msgstr "Išsaugoti informaciją/viršelį"
+
+msgid "Save infos/cover"
+msgstr "Išsaugoti info/viršelį"
+
+msgid "Save/Close"
+msgstr "Įrašyti/užverti"
+
+msgid "Search Trailer on web"
+msgstr "Ieškoti anonso internete"
+
+#, python-format
+msgid "Search for %s, please wait..."
+msgstr "Palaukite, ieškoma %s..."
+
+#, python-format
+msgid "Search result for: %s"
+msgstr "%s paieškos rezultatai"
+
+#, python-format
+msgid "Search result(s) for %s"
+msgstr "%s paieškos rezultatai"
+
+#, python-format
+msgid "Search trailer for ' %s ', please wait ..."
+msgstr "Palaukite, ieškomas '%s' anonsas..."
+
+msgid "Search:"
+msgstr "Paieška:"
+
+#, python-format
+msgid "Searching for ' %s ' on TMDb, please wait ..."
+msgstr "Palaukite, TVDB iešoma '%s'..."
+
+#, python-format
+msgid "Searching for ' %s ' on TheTVDB.com, please wait ..."
+msgstr "TheTVDB.com iešoma '%s', prašome palaukti ..."
+
+msgid "Searching for clients, please wait ..."
+msgstr "Palaukite. Vyksta klientų paieška..."
+
+#, python-format
+msgid "Searchtitle: %s"
+msgstr "Ieškomas pavadinimas: %s"
+
+#, python-format
+msgid "Season: %s"
+msgstr "Sezonas: %s"
+
+msgid "Second"
+msgstr "Skundė"
+
+msgid "Seconds"
+msgstr " sek."
+
+msgid "Select Start button for the Advanced Movie Selection."
+msgstr "Pasirinkite išplėstinės filmų atrankos paleisties mygtuką."
+
+msgid "Select keyboard:"
+msgstr "Pasirinkite klaviatūrą:"
+
+msgid "Select movie"
+msgstr "Pasirinkite filmą"
+
+msgid "Select movie by description:"
+msgstr "Pasirinkite filmą pagal aprašymą:"
+
+msgid "Select scan locations for movie library"
+msgstr "Pasirinkite, kur ieškoti elementų filmų bibliotekai"
+
+msgid "Select sort functions"
+msgstr "Pasirinkite rūšiavimo būdą"
+
+msgid "Select the movie path"
+msgstr "Pasirinkite filmų kelią"
+
+msgid "Selected ISO image is not playable!"
+msgstr "Pasirinktame ISO atvaizde nėra atkuriamų failų!"
+
+msgid "Selected movies"
+msgstr "Pasirinkti filmai"
+
+msgid "Server enabled:"
+msgstr "Serveris įjungtas:"
+
+msgid "Set VSR"
+msgstr "Nustatyti amžiaus cenzą"
+
+msgid "Set coversize:"
+msgstr "Viršelio dydis:"
+
+msgid "Set tag here not possible, please select a movie for!"
+msgstr "Nustatyti žymę čia neįmanoma, tam pasirinkite filmą!"
+
+msgid "Set the port address for client and server. Port address from connected clients will be automatically updated."
+msgstr "Nustatykite prievadus klientui ir serveriui komunikuoti. Prievadas iš klientų bus atnaujintas automatiškai."
+
 #, python-format
 msgid "Settings backup successfully created in %s."
 msgstr "Atsarginė kopija sukurta į %s."
 
-#: ../AdvancedMovieSelectionSetup.py:155
-msgid "Error creating settings backup!"
-msgstr "Nustatymų atsarginė kopija nepavyko!"
+msgid "Setup"
+msgstr "Sąranka"
 
-#: ../AdvancedMovieSelectionSetup.py:167 ../AdvancedMovieSelectionSetup.py:566
-#: ../MovieSelection.py:945
-msgid ""
-"Some settings changes require close/reopen the movielist to take effect."
-msgstr ""
-"Kad įsigaliotų parametrų pakeitimai, reikia užverti ir vėl atverti filmų "
-"sąrašą."
-
-#: ../AdvancedMovieSelectionSetup.py:175
-msgid "Please select backup path here:"
-msgstr "Pasirinkite kelią atsarginei kopijai:"
-
-#: ../AdvancedMovieSelectionSetup.py:217 ../MovieSelection.py:264
-msgid "Color key settings"
-msgstr "Spalvotų mygtukų nustatymai"
-
-#: ../AdvancedMovieSelectionSetup.py:218
-msgid "Default paths"
-msgstr "Numatytieji keliai"
-
-#: ../AdvancedMovieSelectionSetup.py:260
-msgid "Advanced Movie Selection Setup"
+msgid "Setup Advanced Movie Selection"
 msgstr "Išplėstinės filmų atrankos sąranka"
 
-#: ../AdvancedMovieSelectionSetup.py:361
-msgid "Disable Advanced Movie Selection:"
-msgstr "Išjungti išplėstinę filmų atranką:"
+msgid "Setup Moviebar position"
+msgstr "Filmų infojuostos padėtis"
 
-#: ../AdvancedMovieSelectionSetup.py:361
-msgid "Switch on/off the Advanced Movie Selection."
-msgstr "Įjungti/išjungti išplėstinę filmų atranką."
-
-#: ../AdvancedMovieSelectionSetup.py:362
-msgid "Start Advanced Movie Selection with:"
-msgstr "Išplėstinę filmų atranką pradėti, paspaudus:"
-
-#: ../AdvancedMovieSelectionSetup.py:362
-msgid "Select Start button for the Advanced Movie Selection."
-msgstr "Pasirinkite išplėstinės filmų atrankos paleisties mygtuką."
-
-#: ../AdvancedMovieSelectionSetup.py:363
-msgid "Start on last movie location:"
-msgstr "Atverti ties paskutiniu rodytu filmu:"
-
-#: ../AdvancedMovieSelectionSetup.py:363
-msgid "Opens the film list on the last used location."
-msgstr "Atvers filmų sąrašą paskutinio rodyto filmo kataloge."
-
-#: ../AdvancedMovieSelectionSetup.py:364
-msgid "Start on first position in movielist:"
-msgstr "Atverti pirmoje filmų sąrašo pozicijoje:"
-
-#: ../AdvancedMovieSelectionSetup.py:364
-msgid "Always show selection in the first position in the movie list."
-msgstr "Visada rodyti pasirinkimą pirmoje filmų sąrašo pozicijoje."
-
-#: ../AdvancedMovieSelectionSetup.py:365
-msgid "Show bookmarks in movielist:"
-msgstr "Filmų sąraše rodyti žymeles:"
-
-#: ../AdvancedMovieSelectionSetup.py:365
-msgid "When enabled all created bookmarks appear in the movie list."
-msgstr "Kai čia įjungta, visos sukurtos žymelės bus matomos filmų sąraše."
-
-#: ../AdvancedMovieSelectionSetup.py:366
-msgid "Show hotplug devices:"
-msgstr "Rodyti prijungiamus įrenginius:"
-
-#: ../AdvancedMovieSelectionSetup.py:366
-msgid "Enable this option to use USB-Devices."
-msgstr "Įjunkite šią parinktį, jei norite naudoti USB įrenginius."
-
-#: ../AdvancedMovieSelectionSetup.py:367
-msgid "Show plugin config in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti nustatymus:"
-
-#: ../AdvancedMovieSelectionSetup.py:367
-msgid "Displays the Settings option in the menu at the movie list."
-msgstr "Plėtinio filmų sąrašo meniu rodo nustatymų parinktį."
-
-#: ../AdvancedMovieSelectionSetup.py:368
-msgid "Show path selection for movie library in extensions menu:"
-msgstr "Plėtinio meniu rodyti filmų bibliotekos kelio pasirinkimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:368
-msgid ""
-"Here you can select which folders to include in the movie library creation."
-msgstr ""
-"Čia galite pasirinkti, kuriuos katalogus norite įtraukti į filmų bibliotekos "
-"kūrimą."
-
-#: ../AdvancedMovieSelectionSetup.py:369
-msgid "Show movie library symbol in movielist:"
-msgstr "Filmų sąraše rodyti filmų bibliotekos simbolį:"
-
-#: ../AdvancedMovieSelectionSetup.py:369
-msgid "If enabled the movie library symbol is shown in movie list."
-msgstr "Jei čia įjungta, filmų sąraše bus rodomas filmų bibliotekos simbolis."
-
-#: ../AdvancedMovieSelectionSetup.py:370
-msgid "Show path marker within movie library movies:"
-msgstr "Filmų bibliotekos filmus rodyti su jų kelio žymekliais:"
-
-#: ../AdvancedMovieSelectionSetup.py:370
-msgid ""
-"If enabled all movies in movie library will be shown with path marker and "
-"will be sorted below them."
-msgstr ""
-"Jei čia įjungta, visi bibliotekos filmai bus rodomi su kelio žymekliais ir "
-"surūšiuoti pagal juos."
-
-#: ../AdvancedMovieSelectionSetup.py:371
-msgid "Use movie library path selection as marker within movies in library:"
-msgstr ""
-"Naudoti filmų bibliotekos kelio pasirinkimą, kaip vidinį filmų žymeklį "
-"bibliotekoje:"
-
-#: ../AdvancedMovieSelectionSetup.py:371
-msgid ""
-"If enabled only the movie library path selections will be used as marker "
-"otherwise each sub directory will be shown as path marker in movie library "
-"view."
-msgstr ""
-"Jei čia įjungta, kaip žymeklis bus naudojamas tik filmų bibliotekos kelio "
-"pasirinkimas, išjungus - filmo bibliotekos rodinyje, kaip kelio žymeklis, "
-"bus rodomas kiekvienas subkatalogas."
-
-#: ../AdvancedMovieSelectionSetup.py:372
-msgid "Minimum movie count to show path marker in movie library view:"
-msgstr ""
-"Minimalus filmų skaičius, rodyti kelio žymekliui filmo bibliotekos rodinyje:"
-
-#: ../AdvancedMovieSelectionSetup.py:372
-msgid ""
-"The minimum selected number of movies must be in one directory to show the "
-"path marker in movie library view."
-msgstr ""
-"Minimalus pasirinktas filmų skaičius turi būti skaičius viename kataloge, "
-"kad rodyti kelio žymekliui filmo bibliotekos rodinyje."
-
-#: ../AdvancedMovieSelectionSetup.py:373
-msgid "Show disk usage in description:"
-msgstr "Aprašyme rodyti disko naudojimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:373
-msgid ""
-"Displays the disk usage in the description. (Leave it disabled if you have "
-"performance problems at the start of the movie list)"
-msgstr ""
-"Aprašyme rodo disko naudojimą. Išjunkite šią parinktį, jei juntate našumo "
-"stygių, atveriant filmų sąrašą."
-
-#: ../AdvancedMovieSelectionSetup.py:374
-msgid "Show directory size in movie list:"
-msgstr "Filmų sąraše rodyti katalogų dydžius:"
-
-#: ../AdvancedMovieSelectionSetup.py:374
-msgid "Displays the size from directories in movie list."
-msgstr "Filmų sąraše rodo katalogų dydžius."
-
-#: ../AdvancedMovieSelectionSetup.py:376 ../AdvancedMovieSelectionSetup.py:459
-msgid "Show decimal points:"
-msgstr "Rodyti dešimtainius skyriklius:"
-
-#: ../AdvancedMovieSelectionSetup.py:376
-msgid ""
-"Here you can choose how many decimal points for the directory size in the "
-"movie list will be displayed."
-msgstr ""
-"Čia galite pasirinkti, kiek skaitmenų po kablelio bus rodomas katalogų dydis "
-"filmų sąraše."
-
-#: ../AdvancedMovieSelectionSetup.py:379
-msgid "Load Length of Movies in Movielist:"
-msgstr "Įkelti filmų trukmę filmų sąraše:"
-
-#: ../AdvancedMovieSelectionSetup.py:379
-msgid ""
-"This option is for many of the functions from the Advanced Movie Selection "
-"necessary. If this option is disabled are many functions not available."
-msgstr ""
-"Ši parinktis būtina daugeliui išplėstinės filmų atrankos funkcijų. Jei ši "
-"parinktis išjungta, daug funkcijų neveiks."
-
-#: ../AdvancedMovieSelectionSetup.py:381
-msgid "Show list options in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti sąrašo parinktis:"
-
-#: ../AdvancedMovieSelectionSetup.py:381
-msgid ""
-"Displays the various list view options in the menu at the movie list "
-"(Progressbar,View folders...)."
-msgstr ""
-"Filmų sąrašo meniu rodo įvairių sąrašo stilių parinktis (eigos juosta, "
-"katalogų peržiūra...)."
-
-#: ../AdvancedMovieSelectionSetup.py:382
-msgid "Show mark movie in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti filmų žymėjimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:382
-msgid "Displays mark movie as seen/unseen in the menu at the movie list."
-msgstr "Filmų sąrašo meniu rodo filmo žymas peržiūrėtas/nežiūrėtas."
-
-#: ../AdvancedMovieSelectionSetup.py:383
-msgid "Mark movie as seen at position (in percent):"
-msgstr "Žymėti filmą, kaip žiūrėtą, po X% peržiūros:"
-
-#: ../AdvancedMovieSelectionSetup.py:383
-msgid "With this option you can assign as when a film is marked as seen."
-msgstr ""
-"Naudodami šią parinktį, galite nurodyti, kada filmas bus pažymėtas kaip "
-"žiūrėtas."
-
-#: ../AdvancedMovieSelectionSetup.py:384
-msgid "Show movie plugins in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti filmų įskiepius:"
-
-#: ../AdvancedMovieSelectionSetup.py:384
-msgid "Displays E2 movie list extensions in the menu at the movie list."
-msgstr "Filmų sąrašo meniu rodys Enigma2 filmų sąrašo plėtinius."
-
-#: ../AdvancedMovieSelectionSetup.py:385
-msgid "Show color key setup in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti spalvotų mygtukų sąranką:"
-
-#: ../AdvancedMovieSelectionSetup.py:385
-msgid "Displays color key setup option in the menu at the movie list."
-msgstr "Filmų sąrašo meniu matysite spalvotų mygtukų sąranką."
-
-#: ../AdvancedMovieSelectionSetup.py:386
-msgid "Show sort options in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti rūšiavimo parinktį:"
-
-#: ../AdvancedMovieSelectionSetup.py:386
-msgid "Displays sorting function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu rodys rūšiavimo galimybę."
-
-#: ../AdvancedMovieSelectionSetup.py:387
-msgid "Show list styles in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti sąrašo stiliaus parinktį:"
-
-#: ../AdvancedMovieSelectionSetup.py:387
-msgid ""
-"Displays various lists typs in the menu at the movie list (Minimal,"
-"Compact...)."
-msgstr ""
-"Filmų sąrašo meniu rodys įvairius sąrašų pasirinkimus (minimalus, "
-"kompaktiškas...)."
-
-#: ../AdvancedMovieSelectionSetup.py:388
-msgid "Show delete option in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti trynimo parinktį:"
-
-#: ../AdvancedMovieSelectionSetup.py:388
-msgid "Displays the movie delete function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu rodys galimybę trinti failus."
-
-#: ../AdvancedMovieSelectionSetup.py:389
-msgid "Show move/copy option in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti perkėlimo/kopijavimo parinktį:"
-
-#: ../AdvancedMovieSelectionSetup.py:389
-msgid "Displays the movie move/copy function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu rodys galimybę perkelti/kopijuoti failus."
-
-#: ../AdvancedMovieSelectionSetup.py:390
-msgid "Show move/copy progress on begin/end:"
-msgstr "Rodyti perkėlimo/kopijavimo eigos pradžią ir pabaigą:"
-
-#: ../AdvancedMovieSelectionSetup.py:390
-msgid ""
-"Show the movie move/copy progress on begin and show notification on end of "
-"move/copy action."
-msgstr ""
-"Rodyti perkėlimo/kopijavimo eigos pradžią ir parodyti pranešimą perkėlimo/"
-"kopijavimo pabaigoje."
-
-#: ../AdvancedMovieSelectionSetup.py:391
-msgid "Show movie search in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti filmų paiešką:"
-
-#: ../AdvancedMovieSelectionSetup.py:391
-msgid "Displays the movie search function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu rodys filmų paieškos galimybę."
-
-#: ../AdvancedMovieSelectionSetup.py:392
-msgid "Show covers in movielist:"
-msgstr "Filmų sąraše rodyti viršelius:"
-
-#: ../AdvancedMovieSelectionSetup.py:392
-msgid "Displays the cover in the movie list."
-msgstr "Filmų sąraše bus rodomi viršeliai."
-
-#: ../AdvancedMovieSelectionSetup.py:394
-msgid "Set coversize:"
-msgstr "Viršelio dydis:"
-
-#: ../AdvancedMovieSelectionSetup.py:394
-msgid "Here you can determine the coverfile size for the download/save."
-msgstr "Čia galite nustatyti parsisiunčiamų/išsaugomų viršelių failo dydį."
-
-#: ../AdvancedMovieSelectionSetup.py:395
-msgid "Download cover from TMDB after timer is finished:"
-msgstr "Atsisiųsti viršelius iš TMDb, kai laikmatis baigs darbą:"
-
-#: ../AdvancedMovieSelectionSetup.py:395
-msgid ""
-"If this function is enabled the cover is automatically downloaded from TMDB "
-"after timer is finished."
-msgstr ""
-"Jei ši funkcija įjungta, kai laikmatis bus baigtas, viršeliai bus "
-"automatiškai parsiųsti iš TMDb."
-
-#: ../AdvancedMovieSelectionSetup.py:396
-msgid "Show D/L and store info/cover in movielist extensions menu:"
-msgstr ""
-"Filmų sąrašo meniu rodyti informacijos/viršelių parsiuntimą ir išsaugojimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:396
-msgid "Displays movie info/cover options in the menu at the movie list."
-msgstr ""
-"Filmų sąrašo meniu bus rodoma informacijos/viršelių parsiuntimo ir "
-"išsaugojimo galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:397
-msgid "Show D/L and store ALL info/cover in movielist extensions menu:"
-msgstr ""
-"Filmų sąrašo meniu rodyti VISŲ informacijos/viršelių parsiuntimą ir "
-"išsaugojimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:397
-msgid ""
-"Displays download and save movie info/cover for all movies options in the "
-"menu at the movie list."
-msgstr ""
-"Filmų sąrašo meniu bus rodoma VISŲ informacijos/viršelių parsiuntimo ir "
-"išsaugojimo galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:398
-msgid "Show delete info and cover in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti informacijos/viršelių ištrynimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:398
-msgid ""
-"Displays delete movie info and cover function in the menu at the movie list."
-msgstr ""
-"Filmų sąrašo meniu bus rodoma filmo informacijos/viršelių ištrynimo galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:399
-msgid "Show delete cover in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti viršelių ištrynimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:399
-msgid "Displays delete cover function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodoma viršelių ištrynimo galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:400
-msgid "Show delete movie info in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti filmo informacijos ištrynimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:400
-msgid "Displays delete movie info function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodoma filmo informacijos ištrynimo galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:401
-msgid "Show Provider Logo:"
-msgstr "Rodyti tiekėjo logotipą:"
-
-#: ../AdvancedMovieSelectionSetup.py:401
-msgid "Displays the Provider Logo when no Cover available."
-msgstr "Kai viršelis neprieinamas, bus rodomas tiekėjo logotipas."
-
-#: ../AdvancedMovieSelectionSetup.py:402
-msgid "Show update genre in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti žanro atnaujinimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:402
-msgid ""
-"Displays Update all genre in meta from eit options in the menu at the movie "
-"list."
-msgstr ""
-"Filmų sąrašo meniu bus rodoma 'Atnaujinti visus žanrus iš EIT' parinktis."
-
-#: ../AdvancedMovieSelectionSetup.py:404
-msgid "Show Provider Logo in original size:"
-msgstr "Rodyti originalaus dydžio tiekėjo logotipą:"
-
-#: ../AdvancedMovieSelectionSetup.py:404
-msgid ""
-"Displays the Provider Logo in original size. Otherwise, the provider logo be "
-"displayed zoomed up to cover size."
-msgstr ""
-"Rodo originalaus dydžio tiekėjo logotipą. Kitais atvejais tiekėjo logotipas "
-"bus rodomas įtalpintas pagal viršelio dydį."
-
-#: ../AdvancedMovieSelectionSetup.py:405
-msgid "Provider Logo path:"
-msgstr "Kelias į tiekėjo logotipą:"
-
-#: ../AdvancedMovieSelectionSetup.py:405
-msgid ""
-"Where to look for the provider logos? (Default is /usr/share/enigma2/picon)"
-msgstr ""
-"Kur ieškoti tiekėjo logotipų? (numatytasis katalogas – /usr/share/enigma2/"
-"picon)"
-
-#: ../AdvancedMovieSelectionSetup.py:406
-msgid "Show rename in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti pervadinimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:406
-msgid "Displays rename function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodoma pervadinimo galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:407
-msgid "Show TMDb Info & D/L in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti TMDb informacijos parsiuntimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:407
-msgid "Displays TMDb Info & D/L in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodoma TMDb informacijos parsiuntimo galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:408
-msgid "Show TheTVDB Info & D/L in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti TVDb informacijos parsiuntimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:408
-msgid "Displays TheTVDB Info & D/L in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodoma TVDb informacijos parsiuntimo galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:409
-msgid "Jump to first mark when starts playing movie:"
-msgstr "Filmo atkūrimo pradžioje pereiti į pirmą žymę:"
-
-#: ../AdvancedMovieSelectionSetup.py:409
-msgid ""
-"If this option is activated automatically when a movie does not start from "
-"the last position, the movie starts at the first marker."
-msgstr ""
-"Kai čia įjungta, jeigu filmo nepavyksta paleisti iš paskutinio sustabdymo "
-"padėties, filmas automatiškai pradedamas nuo pirmojo žymeklio."
-
-#: ../AdvancedMovieSelectionSetup.py:410
-msgid "Show movie tags in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti filmo žymes:"
-
-#: ../AdvancedMovieSelectionSetup.py:410
-msgid "Displays movie tags function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodomos filmo žymės."
-
-#: ../AdvancedMovieSelectionSetup.py:411
-msgid "Show filter by tags in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti filtrą pagal žymes:"
-
-#: ../AdvancedMovieSelectionSetup.py:411
-msgid "Displays filter by tags function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodoma filtravimo pagal žymes galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:412
-msgid "Show search trailer on web in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti anonsų paiešką internete:"
-
-#: ../AdvancedMovieSelectionSetup.py:412
-msgid "Displays search trailer on web function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodoma anonsų paieškos internete galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:413
-msgid "Show Set VSR in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti amžiaus cenzo nustatymą:"
-
-#: ../AdvancedMovieSelectionSetup.py:413
-msgid "Displays set VSR function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodoma amžiaus cenzo nustatymo galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:414
-msgid "Show Filter by description in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti filtrą pagal aprašymą:"
-
-#: ../AdvancedMovieSelectionSetup.py:414
-msgid ""
-"Displays the Filter by description function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodoma filtravimo pagal aprašymą galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:415
-msgid "Show backup/restore in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti atsarginį kopijavimą/atkūrimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:415
-msgid "Displays the backup/restore function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodoma atsarginio kopijavimo/atkūrimo galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:416
-msgid "Ask before delete:"
-msgstr "Perklausti, prieš ištrinant:"
-
-#: ../AdvancedMovieSelectionSetup.py:416
-msgid ""
-"With this option you can turn on/off the security question before delete a "
-"movie."
-msgstr "Čia galite įjungti/išjungti saugumo klausimą, prieš ištrinant filmą."
-
-#: ../AdvancedMovieSelectionSetup.py:418 ../AdvancedMovieSelectionSetup.py:420
-#: ../AdvancedMovieSelectionSetup.py:422 ../AdvancedMovieSelectionSetup.py:424
-#: ../AdvancedMovieSelectionSetup.py:426 ../AdvancedMovieSelectionSetup.py:428
-#: ../AdvancedMovieSelectionSetup.py:430
-msgid "INFO button function:"
-msgstr "'INFO' mygtuko funkcija:"
-
-#: ../AdvancedMovieSelectionSetup.py:418 ../AdvancedMovieSelectionSetup.py:420
-#: ../AdvancedMovieSelectionSetup.py:422 ../AdvancedMovieSelectionSetup.py:424
-#: ../AdvancedMovieSelectionSetup.py:426 ../AdvancedMovieSelectionSetup.py:428
-#: ../AdvancedMovieSelectionSetup.py:430
-msgid ""
-"With this option you can assign what function should have the info button. "
-"The selection depends on the installed plugins."
-msgstr ""
-"Čia galite priskirti, kokią funkciją atliks 'INFO' mygtukas. Pasirinkimas "
-"priklauso nuo įdiegtų įskiepių."
-
-#: ../AdvancedMovieSelectionSetup.py:431
-msgid "Behavior when a movie is started:"
-msgstr "Elgsena, kai filmas prasidėjęs:"
-
-#: ../AdvancedMovieSelectionSetup.py:431
-msgid "With this option you can assign what should happen when a movie start."
-msgstr "Čia galite nustatyti, kas įvyks, kai filmas prasideda."
-
-#: ../AdvancedMovieSelectionSetup.py:432
-msgid "Behavior when a movie is stopped:"
-msgstr "Elgsena, kai filmas sustabdytas:"
-
-#: ../AdvancedMovieSelectionSetup.py:432
-msgid "With this option you can assign what should happen when a movie stop."
-msgstr "Čia galite nustatyti, kas įvyks, kai filmas sustabdytas."
-
-#: ../AdvancedMovieSelectionSetup.py:433
-msgid "Behavior when a movie reaches the end:"
-msgstr "Elgsena, filmui pasibaigus:"
-
-#: ../AdvancedMovieSelectionSetup.py:433
-msgid ""
-"With this option you can assign what should happen when the end of the films "
-"was achieved."
-msgstr "Čia galite nustatyti, kas įvyks filmui pasibaigus."
-
-#: ../AdvancedMovieSelectionSetup.py:434
-msgid "Show Moviebar position setup in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti filmų infojuostos padėties nustatymą:"
-
-#: ../AdvancedMovieSelectionSetup.py:434
-msgid ""
-"Displays the moviebar position setup function in the menu at the movie list."
-msgstr ""
-"Filmų sąrašo meniu bus rodoma filmų infojuostos padėties nustatymo galimybė."
-
-#: ../AdvancedMovieSelectionSetup.py:436
-msgid "Color for not ready seen movies:"
-msgstr "Žiūrėtų filmų šrifto spalva:"
-
-#: ../AdvancedMovieSelectionSetup.py:436
-msgid ""
-"With this option you can assign what color should displayed for not ready "
-"seen movies in movie list."
-msgstr ""
-"Čia galite nustatyti, kokia šrifto spalva filmų sąraše bus atvaizduojami "
-"kažkiek žiūrėti filmai."
-
-#: ../AdvancedMovieSelectionSetup.py:437
-msgid "Color for ready seen movies:"
-msgstr "Peržiūrėtų filmų šrifto spalva:"
-
-#: ../AdvancedMovieSelectionSetup.py:437
-msgid ""
-"With this option you can assign what color should displayed for ready seen "
-"movies in movie list."
-msgstr ""
-"Čia galite nustatyti, kokia šrifto spalva filmų sąraše bus atvaizduojami "
-"peržiūrėti filmai."
-
-#: ../AdvancedMovieSelectionSetup.py:438
-msgid "Color for recording movies:"
-msgstr "Įrašomų filmų šrifto spalva:"
-
-#: ../AdvancedMovieSelectionSetup.py:438
-msgid ""
-"With this option you can assign what color should displayed for recording "
-"movies in movie list."
-msgstr ""
-"Čia galite nustatyti, kokia šrifto spalva filmų sąraše bus atvaizduojami "
-"šiuo metu įrašomi filmai."
-
-#: ../AdvancedMovieSelectionSetup.py:439
-msgid "Color for multiple selection:"
-msgstr "Skirtingų pasirinkimų spalva:"
-
-#: ../AdvancedMovieSelectionSetup.py:439
-msgid ""
-"With this option you can assign what color should displayed for multiple "
-"selection in movie list."
-msgstr ""
-"Čia galite nustatyti, kokia šrifto spalva filmų sąraše bus atvaizduojami "
-"skirtingi pasirinkimai."
-
-#: ../AdvancedMovieSelectionSetup.py:440
-msgid "Assign the date format for movielist:"
-msgstr "Pasirinkti filmų sąrašo datos formatą:"
-
-#: ../AdvancedMovieSelectionSetup.py:440
-msgid ""
-"With this option you can assign the date format in movie list (7 different "
-"sizes are available)."
-msgstr ""
-"Čia galite nustatyti filmų sąrašo datos formatą (galimi 7 pasirinkimai)."
-
-#: ../AdvancedMovieSelectionSetup.py:442
-msgid "Show new recordings icon:"
-msgstr "Naujus įrašus pažymėti ženkliuku:"
-
-#: ../AdvancedMovieSelectionSetup.py:442
-msgid "With this option you can display a icon for new recordings."
-msgstr "Čia galite nustatyti naujus įrašus pažymėti ženkliuku."
-
-#: ../AdvancedMovieSelectionSetup.py:443
-msgid "Show Mini TV:"
-msgstr "Įjungti mini TV:"
-
-#: ../AdvancedMovieSelectionSetup.py:443
-msgid "With this option you can switch on/off the Mini TV in the movie list."
-msgstr "Čia galite nustatyti, rodyti, ar ne filmų sąraše mini TV ekranėlį."
-
-#: ../AdvancedMovieSelectionSetup.py:444
-msgid "Use folder name for display covers:"
-msgstr "Viršelių atvaizdavimui naudoti katalogo pavadinimą:"
-
-#: ../AdvancedMovieSelectionSetup.py:444
-msgid ""
-"With this option you can use the foldername instead of folder.jpg to display "
-"covers in folders."
-msgstr ""
-"Čia galite nustatyti viršelių atvaizdavimui kataloguose naudoti katalogo "
-"pavadinimą, o ne katalogo.jpg."
-
-#: ../AdvancedMovieSelectionSetup.py:445
-msgid "Close with EXIT key:"
-msgstr "Uždaryti 'EXIT' mygtuku:"
-
-#: ../AdvancedMovieSelectionSetup.py:445
-msgid ""
-"If this option is enabled you can stop play a movie with the EXIT button, "
-"and the Advanced Movie Selection plugin will also be closed immediately (if "
-"the next option is disabled)."
-msgstr ""
-"Įjungus šią funkciją, filmo peržiūrą galėsite išjungti 'EXIT' mygtuku. Ir "
-"išplėstinės filmų atrankos įskiepis taip pat bus nedelsiant uždarytas (tik "
-"jeigu sekanti parinktis išjungta)."
-
-#: ../AdvancedMovieSelectionSetup.py:447
-msgid "Use behavior when a movie is stopped:"
-msgstr "Naudoti elgseną, kai filmas sustabdytas:"
-
-#: ../AdvancedMovieSelectionSetup.py:447
-msgid ""
-"If this option is activated the behavior when stop a film also will used "
-"when you use the EXIT button."
-msgstr ""
-"Įjungus šią funkciją, elgsena, kai filmas sustabdytas, bus tokia pati, kaip "
-"paspaudus 'EXIT' mygtuką."
-
-#: ../AdvancedMovieSelectionSetup.py:448
-msgid "Show info messages:"
-msgstr "Rodyti informacinius pranešimus:"
-
-#: ../AdvancedMovieSelectionSetup.py:448
-msgid ""
-"If this option is activated will be displayed different info message. This "
-"should help with the operation of the extension."
-msgstr ""
-"Įjungus šią funkciją, bus rodomi įvairūs informaciniai pranešimai. Tai "
-"turėtų padėti, dirbant su plėtiniu."
-
-#: ../AdvancedMovieSelectionSetup.py:449
-msgid "Use alternative jump function:"
-msgstr "Naudoti alternatyvius peršokimus:"
-
-#: ../AdvancedMovieSelectionSetup.py:449
-msgid ""
-"If this option is activated more jump functions ar available. ATTENTION: "
-"Enigma 2 restart is necessary!"
-msgstr ""
-"Įjungus šią funkciją, bus prieinama daugiau peršokimo peržiūroje galimybių. "
-"DĖMESIO: Enigma2 reikės paleisti iš naujo!"
-
-#: ../AdvancedMovieSelectionSetup.py:452
-msgid "Change function from left/right buttons:"
-msgstr "Pakeisti '< / >' mygtukų funkciją:"
-
-#: ../AdvancedMovieSelectionSetup.py:452
-msgid ""
-"If this option is activated the function of the left/right arrow buttons "
-"will changed. Normal you can use the buttons also for winding, if is changed "
-"you have quick access to the new jump function. ATTENTION: Enigma 2 restart "
-"is necessary!"
-msgstr ""
-"Įjungus šią parinktį, bus pakeista '< / >' mygtukų funkcija. Paprastai Jūs "
-"juos galite naudoti sklandžiam perjungimui, o pakeitus, įgysite greitą "
-"prieigą prie naujų peršokimo funkcijų. DĖMESIO: Enigma2 reikės paleisti iš "
-"naujo!"
-
-#: ../AdvancedMovieSelectionSetup.py:453
-msgid "Manual jump sensibility:"
-msgstr "Rankinio peršokimo jautrumas:"
-
-#: ../AdvancedMovieSelectionSetup.py:453
-msgid ""
-"Here you can adjust the manually jump length relative to the film length in "
-"percent."
-msgstr ""
-"Čia galite nustatyti rankinio peršokimo dydį, palyginus su filmo dydžiu "
-"(procentais)."
-
-#: ../AdvancedMovieSelectionSetup.py:454
-msgid "Use wastebasket:"
-msgstr "Naudoti šiukšliadėžę:"
-
-#: ../AdvancedMovieSelectionSetup.py:454
-msgid ""
-"If this option is activated the movie will not be deleted but moved into the "
-"wastebasket."
-msgstr ""
-"Įjungus šią funkciją, filmas nebus ištrintas, bet bus perkeltas į "
-"šiukšliadėžę."
-
-#: ../AdvancedMovieSelectionSetup.py:456
-msgid "Show Wastebasket in extensions menu from movielist:"
-msgstr "Filmų sąrašo meniu rodyti šiukšliadėžę:"
-
-#: ../AdvancedMovieSelectionSetup.py:456
-msgid "Displays wastebasket function in the menu at the movie list."
-msgstr "Filmų sąrašo meniu bus rodoma šiukšliadėžės parinktis."
-
-#: ../AdvancedMovieSelectionSetup.py:457
-msgid "Show Clientbox setup in movielist:"
-msgstr "Aparato-kliento sąranką rodyti filmų sąraše:"
-
-#: ../AdvancedMovieSelectionSetup.py:457
-msgid "Displays Clientbox setup function in the menu at the movie list."
-msgstr "Aparato-kliento sąranka bus rodoma filmų sąrašo meniu."
-
-#: ../AdvancedMovieSelectionSetup.py:458
-msgid "Wastebasket file(s):"
-msgstr "Šiukšliadėžės failai:"
-
-#: ../AdvancedMovieSelectionSetup.py:458
-msgid ""
-"Here you can select which files to Wastebasket are displayed. ATTENTION: All "
-"directorys below '/media' will take very long until the list is displayed!"
-msgstr ""
-"Čia galite pasirinkti, kokius failus rodyti šiukšliadėžėje. DĖMESIO: visų "
-"katalogų, esančių žemiau /media, sąrašo atidarymas gali užtrukti labai ilgai!"
-
-#: ../AdvancedMovieSelectionSetup.py:459
-msgid ""
-"Here you can choose how many decimal points for the file size in the "
-"wastebasket will be displayed."
-msgstr ""
-"Čia galite pasirinkti, kiek rodyti dešimtainių skaitmenų po kablelio, "
-"atvaizduojant failų dydžius šiukšliadėžėje."
-
-#: ../AdvancedMovieSelectionSetup.py:460
-msgid "Server enabled:"
-msgstr "Serveris įjungtas:"
-
-#: ../AdvancedMovieSelectionSetup.py:460
-msgid "If you enable this feature, all remote functions are enabled."
-msgstr "Įjungus čia, veikia visos nuotolinės sąsajos funkcijos."
-
-#: ../AdvancedMovieSelectionSetup.py:461
-msgid "Auto empty wastebasket:"
-msgstr "Šiukšliadėžę tuštinti automatiškai:"
-
-#: ../AdvancedMovieSelectionSetup.py:461
-msgid ""
-"If you enable this function the wastebasket will be emptied automatically at "
-"the set time."
-msgstr ""
-"Įjungus šią funkciją, nustatytu laiko šiukšliadėžė bus ištuštinta "
-"automatiškai."
-
-#: ../AdvancedMovieSelectionSetup.py:463
-msgid "Auto empty wastebasket time:"
-msgstr "Šiukšliadėžės automatinio tuštinimo laikas:"
-
-#: ../AdvancedMovieSelectionSetup.py:463
-msgid "Here you can define when to empty the wastebasket."
-msgstr "Čia galite nustatyti, kada ištuštinti šiukšliadėžę."
-
-#: ../AdvancedMovieSelectionSetup.py:464
-msgid "Check again in x minutes:"
-msgstr "Tikrinti vėl po x minučių:"
-
-#: ../AdvancedMovieSelectionSetup.py:464
-msgid ""
-"If recordings are active again after the set time is trying to empty the "
-"wastebasket."
-msgstr ""
-"Jei daromi įrašai, po nustatyto laiko vėl bus bandoma ištuštinti "
-"šiukšliadėžę."
-
-#: ../AdvancedMovieSelectionSetup.py:465
-msgid "Wastebasket retention period (days):"
-msgstr "Šiukšliadėžės turinį saugoti (dienomis):"
-
-#: ../AdvancedMovieSelectionSetup.py:465
-msgid ""
-"Defines how long files need to dwell in the wastebasket before auto empty "
-"will consider to remove them (0 means no retention)."
-msgstr ""
-"Čia galite nustatyti, kiek laiko failus saugoti šiuošliadėžėje, prieš "
-"ištuštinant juos automatiškai (0 = nesaugoti visai)."
-
-#: ../AdvancedMovieSelectionSetup.py:466
-msgid "Start at the beginning depends on end (in Minutes):"
-msgstr "Paleidimas iš pradžių priklauso nuo peržiūros pabaigos (min.):"
-
-#: ../AdvancedMovieSelectionSetup.py:466
-msgid ""
-"Here you can set off when a movie to play automatically from the beginning "
-"when you start again (On settings=0, functions is disabled)."
-msgstr ""
-"Čia galite nustatyti, kada filmą pradėti automatiškai iš pradžių, jeigu "
-"filmą atsidarote iš naujo (nustačius = 0, ši funkcija išjungta)."
-
-#: ../AdvancedMovieSelectionSetup.py:467
-msgid "Use activ Skin LCD/OLED representation:"
-msgstr "Naudoti dabartinės temos LCD/VFD ekrano nustatymus:"
-
-#: ../AdvancedMovieSelectionSetup.py:467
-msgid ""
-"If you enable this function, the display summary from aktiv skin will be "
-"used."
-msgstr ""
-"Įjungus šią funkciją, LCD/VFD ekranas bus valdomas dabartinės temos "
-"nustatymų."
-
-#: ../AdvancedMovieSelectionSetup.py:469
-msgid "Show date:"
-msgstr "Rodyti datą:"
-
-#: ../AdvancedMovieSelectionSetup.py:469
-msgid ""
-"If this option is activated the date will be displayed on the lcd/oled when "
-"no short description is available."
-msgstr ""
-"Įjungus šią funkciją, kai nėra trumpo aprašymo, LCD/VFD ekrane bus rodoma "
-"šiandienos data."
-
-#: ../AdvancedMovieSelectionSetup.py:471
-msgid "Use date from timestamp:"
-msgstr "Naudoti sukūrimo datą:"
-
-#: ../AdvancedMovieSelectionSetup.py:471
-msgid ""
-"If this option is activated the date from the file create instead today's "
-"date will be displayed on the lcd/oled when no short description is "
-"available."
-msgstr ""
-"Įjungus šią funkciją, kai nėra trumpo aprašymo, vietoje šiandienos datos, "
-"LCD/VFD ekrane bus rodoma failo sukūrimo data."
-
-#: ../AdvancedMovieSelectionSetup.py:473
-msgid "Use video preview:"
-msgstr "Naudoti vaizdo įrašų peržiūrą:"
-
-#: ../AdvancedMovieSelectionSetup.py:473
-msgid ""
-"If you enable this function, selected movie in movielist will bring you a "
-"preview."
-msgstr ""
-"Įjungus šią funkciją, pasirinkus filmą iš sąrašo, bus rodoma šio filmo "
-"peržiūra."
-
-#: ../AdvancedMovieSelectionSetup.py:477
-msgid "Show video preview in fullscreen:"
-msgstr "Vaizdą rodyti per visą ekraną:"
-
-#: ../AdvancedMovieSelectionSetup.py:477
-msgid ""
-"If you enable this function, the video preview function will display as full "
-"screen in skin."
-msgstr ""
-"Įjungus šią funkciją, filmo peržiūra atsivers visame ekrane, nustatytame "
-"esamos temos."
-
-#: ../AdvancedMovieSelectionSetup.py:478
-msgid "Video preview autostart:"
-msgstr "Vaizdo peržiūros autopaleidimas:"
-
-#: ../AdvancedMovieSelectionSetup.py:478
-msgid ""
-"If you enable this feature, the movie preview starts automatically after the "
-"delay with a change in the movie list."
-msgstr ""
-"Įjungus šią funkciją, filmo peržiūra prasideda automatiškai uždelsiant "
-"laiką, kurį pakeisite filmų sąraše."
-
-#: ../AdvancedMovieSelectionSetup.py:480
-msgid "Video preview delay:"
-msgstr "Vaizdo peržiūros delsa:"
-
-#: ../AdvancedMovieSelectionSetup.py:480
 msgid "Setup the delay in seconds to start the video preview."
 msgstr "Nustatykite vaizdo peržiūros įjungimo delsą (sek.)."
 
-#: ../AdvancedMovieSelectionSetup.py:481
-msgid "Use last stop mark:"
-msgstr "Naudoti vėliausio sustabdymo žymę:"
+msgid "Show Clientbox setup in movielist:"
+msgstr "Aparato-kliento sąranką rodyti filmų sąraše:"
 
-#: ../AdvancedMovieSelectionSetup.py:481
-msgid "Preview will start on last stop marker."
-msgstr "Peržiūra prasidės ties vėliausio sustabdymo atžyma."
+msgid "Show D/L and store ALL info/cover in movielist extensions menu:"
+msgstr "Filmų sąrašo meniu rodyti VISŲ informacijos/viršelių parsiuntimą ir išsaugojimą:"
 
-#: ../AdvancedMovieSelectionSetup.py:482
-msgid "Video preview jump time (in minutes):"
-msgstr "Šuolio dydis (min.) filmų peržiūroje:"
+msgid "Show D/L and store info/cover in movielist extensions menu:"
+msgstr "Filmų sąrašo meniu rodyti informacijos/viršelių parsiuntimą ir išsaugojimą:"
 
-#: ../AdvancedMovieSelectionSetup.py:482
-msgid ""
-"Here you can set the jump time for the movie preview (< > buttons or bouquet "
-"+/- buttons)."
-msgstr ""
-"Čia galite nustatyti šuolio dydį (min.) filmų peržiūroje ('< >', arba "
-"'bouquet +/-' mygtukais)."
+msgid "Show Filter by description in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti filtrą pagal aprašymą:"
 
-#: ../AdvancedMovieSelectionSetup.py:483
-msgid "Select keyboard:"
-msgstr "Pasirinkite klaviatūrą:"
+msgid "Show Mini TV:"
+msgstr "Įjungti mini TV:"
 
-#: ../AdvancedMovieSelectionSetup.py:483
-msgid "You can select yout prefered keyboard (Virtual, Numerical or both)."
-msgstr ""
-"Galite pasirinkti pageidaujamą klaviatūrą (virtualią, skaitmeninę, arba abi)."
+msgid "Show Moviebar position setup in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti filmų infojuostos padėties nustatymą:"
 
-#: ../AdvancedMovieSelectionSetup.py:484
+msgid "Show Provider Logo in original size:"
+msgstr "Rodyti originalaus dydžio tiekėjo logotipą:"
+
+msgid "Show Provider Logo:"
+msgstr "Rodyti tiekėjo logotipą:"
+
+msgid "Show Set VSR in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti amžiaus cenzo nustatymą:"
+
+msgid "Show TMDb Info & D/L in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti TMDb informacijos parsiuntimą:"
+
+msgid "Show TheTVDB Info & D/L in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti TVDb informacijos parsiuntimą:"
+
+msgid "Show Timer"
+msgstr "Rodyti laikmatį"
+
+msgid "Show Wastebasket in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti šiukšliadėžę:"
+
+msgid "Show active move/copy processes"
+msgstr "Rodyti perkėlimo/kopijavimo eigą"
+
+msgid "Show all movies"
+msgstr "Visi filmai"
+
+msgid "Show backup/restore in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti atsarginį kopijavimą/atkūrimą:"
+
+msgid "Show bookmarks"
+msgstr "Rodyti žymeles"
+
+msgid "Show bookmarks in movielist:"
+msgstr "Filmų sąraše rodyti žymeles:"
+
+msgid "Show broadcaster"
+msgstr "Rodyti transliuotoją"
+
+msgid "Show changes"
+msgstr "Rodyti pakeitimus"
+
+msgid "Show color key setup in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti spalvotų mygtukų sąranką:"
+
+msgid "Show covers in movielist:"
+msgstr "Filmų sąraše rodyti viršelius:"
+
+msgid "Show date entry in movielist"
+msgstr "Filmų sąraše rodyti datos įrašą"
+
+msgid "Show date:"
+msgstr "Rodyti datą:"
+
+msgid "Show decimal points:"
+msgstr "Rodyti dešimtainius skyriklius:"
+
+msgid "Show delete cover in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti viršelių ištrynimą:"
+
+msgid "Show delete info and cover in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti informacijos/viršelių ištrynimą:"
+
+msgid "Show delete movie info in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti filmo informacijos ištrynimą:"
+
+msgid "Show delete option in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti trynimo parinktį:"
+
+msgid "Show detail of selected job"
+msgstr "Rodyti pasirinktą užduotį išsamiai"
+
+msgid "Show directory size in movie list:"
+msgstr "Filmų sąraše rodyti katalogų dydžius:"
+
+msgid "Show disk usage in description:"
+msgstr "Aprašyme rodyti disko naudojimą:"
+
+msgid "Show episode detail"
+msgstr "Rodyti epizodo aprašymą"
+
+msgid "Show episodes overview"
+msgstr "Rodyti epizodų apžvalgą"
+
+msgid "Show event details"
+msgstr "Išsamiai apie įvykį"
+
+msgid "Show extended description"
+msgstr "Rodyti išplėstinį aprašymą"
+
+msgid "Show filter by tags in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti filtrą pagal žymes:"
+
+msgid "Show folders"
+msgstr "Rodyti katalogus"
+
+msgid "Show folders in movielist"
+msgstr "Filmų sąraše rodyti katalogus"
+
+msgid "Show hotplug devices:"
+msgstr "Rodyti prijungiamus įrenginius:"
+
+msgid "Show info messages:"
+msgstr "Rodyti informacinius pranešimus:"
+
+msgid "Show library"
+msgstr "Rodyti biblioteką"
+
+msgid "Show list options in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti sąrašo parinktis:"
+
+msgid "Show list styles in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti sąrašo stiliaus parinktį:"
+
+msgid "Show mark movie in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti filmų žymėjimą:"
+
+msgid "Show marker"
+msgstr "Rodyti žymeklį"
+
+msgid "Show move/copy option in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti perkėlimo/kopijavimo parinktį:"
+
+msgid "Show move/copy progress on begin/end:"
+msgstr "Rodyti perkėlimo/kopijavimo eigos pradžią ir pabaigą:"
+
+msgid "Show movie color status in movielist"
+msgstr "Filmų sąraše rodyti filmo būklės spalvą"
+
+msgid "Show movie detail"
+msgstr "Rodyti filmo aprašymą"
+
+msgid "Show movie library symbol in movielist:"
+msgstr "Filmų sąraše rodyti filmų bibliotekos simbolį:"
+
+msgid "Show movie plugins in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti filmų įskiepius:"
+
+msgid "Show movie search in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti filmų paiešką:"
+
+msgid "Show movie status icon in movielist"
+msgstr "Filmų sąraše rodyti filmo būklės ženkliuką"
+
+msgid "Show movie tags in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti filmo žymes:"
+
+msgid "Show new recordings icon:"
+msgstr "Naujus įrašus pažymėti ženkliuku:"
+
+msgid "Show next cover"
+msgstr "Rodyti sekantį viršelį"
+
+msgid "Show path marker within movie library movies:"
+msgstr "Filmų bibliotekos filmus rodyti su jų kelio žymekliais:"
+
+msgid "Show path selection for movie library in extensions menu:"
+msgstr "Plėtinio meniu rodyti filmų bibliotekos kelio pasirinkimą:"
+
+msgid "Show percent in movielist"
+msgstr "Filmų sąraše rodyti procentus"
+
+msgid "Show plugin config in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti nustatymus:"
+
+msgid "Show previous cover"
+msgstr "Rodyti ankstesnį viršelį"
+
+msgid "Show progress of move or copy job"
+msgstr "Rodyti perkėlimo/kopijavimo eigą"
+
+msgid "Show progressbar in movielist"
+msgstr "Filmų sąraše rodyti eigos juostą"
+
 msgid "Show recorded movies in epg:"
 msgstr "Įrašytus filmus rodyti EPG:"
 
-#: ../AdvancedMovieSelectionSetup.py:484
-msgid ""
-"If you enable this function, your recorded movies will be marked in epg list."
-msgstr "Įjungus šią funkciją, Jūsų įrašyti įvykiai bus pažymeti EPG sąraše."
+msgid "Show rename in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti pervadinimą:"
 
-#: ../AdvancedMovieSelectionSetup.py:485
-msgid "Enable Enigma2 debug:"
-msgstr "Leisti derinimo išvestį į failą :"
+msgid "Show runtime entry in movielist"
+msgstr "Filmų sąraše rodyti trukmę"
 
-#: ../AdvancedMovieSelectionSetup.py:485
-msgid ""
-"If you enable this function, all standard output from enigma will be stored "
-"to /tmp folder."
-msgstr ""
-"Įjungus šią funkciją, visa standartinė enigma2 išvestis bus saugoma /tmp "
-"aplanke."
+msgid "Show search result"
+msgstr "Rodyti paieškos rezultatus"
 
-#: ../AdvancedMovieSelectionSetup.py:493
-msgid "No Helptext available!"
-msgstr "Pagalbos aprašymų nėra!"
+msgid "Show search trailer on web in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti anonsų paiešką internete:"
 
-#: ../AdvancedMovieSelectionSetup.py:497
-msgid "IMDb plugin installed. Assign function to info button is possible."
-msgstr "IMDb įskiepis įdiegtas. Galima priskirti finkcijas 'Info' mygtukui."
+msgid "Show serie detail"
+msgstr "Rodyti serijos aprašymą"
 
-#: ../AdvancedMovieSelectionSetup.py:499
-msgid ""
-"IMDb plugin NOT installed. Assign function to info button is NOT possible."
-msgstr ""
-"IMDb įskiepis neįdiegtas. Priskirti 'Info' mygtukui finkcijų neįmanoma."
+msgid "Show sort options in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti rūšiavimo parinktį:"
 
-#: ../AdvancedMovieSelectionSetup.py:501
-msgid "OFDb plugin installed. Assign function to info button is possible."
-msgstr "OFDb įskiepis įdiegtas. Galima priskirti finkcijas 'Info' mygtukui."
+msgid "Show tags in movielist"
+msgstr "Filmų sąraše rodyti žymes"
 
-#: ../AdvancedMovieSelectionSetup.py:503
-msgid ""
-"OFDb plugin NOT installed. Assign function to info button is NOT possible."
-msgstr ""
-"OFDb įskiepis neįdiegtas. Priskirti 'Info' mygtukui finkcijų neįmanoma."
+msgid "Show the movie move/copy progress on begin and show notification on end of move/copy action."
+msgstr "Rodyti perkėlimo/kopijavimo eigos pradžią ir parodyti pranešimą perkėlimo/kopijavimo pabaigoje."
 
-#: ../AdvancedMovieSelectionSetup.py:505
-msgid "TMDb plugin installed. Assign function to info button is possible."
-msgstr "TMDb įskiepis įdiegtas. Galima priskirti finkcijas 'Info' mygtukui."
+msgid "Show up to"
+msgstr "Rodyti iki"
 
-#: ../AdvancedMovieSelectionSetup.py:507
-msgid ""
-"TMDb plugin NOT installed. Assign function to info button is NOT possible."
-msgstr ""
-"TMDb įskiepis neįdiegtas. Priskirti 'Info' mygtukui finkcijų neįmanoma."
+#, python-format
+msgid "Show up to VSR-%d"
+msgstr "Rodyti amžiaus cenzą iki -%d"
 
-#: ../AdvancedMovieSelectionSetup.py:509
-msgid "YTTrailer plugin installed. Search for trailers on the Web is possible."
-msgstr "YTTrailer įskiepis įdiegtas. Galima ieškoti anonsų internete."
+msgid "Show up to VSR-X"
+msgstr "Rodyti amžiaus cenzą iki-X"
 
-#: ../AdvancedMovieSelectionSetup.py:511
-msgid ""
-"YTTrailer plugin NOT installed. Search for trailers on the Web is NOT "
-"possible."
-msgstr ""
-"YTTrailer įskiepis neįdiegtas. Be jo ieškoti anonsų internete neįmanoma."
+msgid "Show update genre in extensions menu from movielist:"
+msgstr "Filmų sąrašo meniu rodyti žanro atnaujinimą:"
 
-#: ../AdvancedMovieSelectionSetup.py:522 ../AdvancedMovieSelectionSetup.py:1215
-msgid "Really close without saving settings?"
-msgstr "Ar tikrai užverti be nustatymų išsaugojimo ?"
+msgid "Show video preview in fullscreen:"
+msgstr "Vaizdą rodyti per visą ekraną:"
 
-#: ../AdvancedMovieSelectionSetup.py:561
-msgid ""
-"Some settings changes require a restart to take effect.\n"
-"If you  use a skin without PiG (Picture in Graphic) you have to restart the "
-"box (not only Enigma 2)!\n"
-"With YES only Enigma 2 starts new, with NO the box make a restart."
-msgstr ""
-"Kad įsigaliotų parametrų pakeitimai, reikia sistemą paleisti iš naujo.\n"
-"Jei jūs naudojate temą be PiG (grafinis vaizdas tekste), turite iš naujo "
-"paleisti visą sistemą (ne tik Enigma 2)!\n"
-"Paspaudus 'Taip', bus iš naujo paleista tik Enigma2, 'Ne' - iš naujo "
-"pasileis visa sistema."
+msgid "Show/Hide folders"
+msgstr "Rodyti/slėpti katalogus"
 
-#: ../AdvancedMovieSelectionSetup.py:563
+msgid "Show/Hide library"
+msgstr "Rodyti/slėpti biblioteką"
+
+msgid "Shutdown"
+msgstr "Išjungti"
+
 msgid ""
 "Some settings changes require a Enigma 2 restart to take effect.\n"
 "\n"
@@ -2014,896 +2053,281 @@ msgstr ""
 "\n"
 "Paleisti enigma2 iš naujo dabar?"
 
-#: ../AdvancedMovieSelectionSetup.py:572 ../AdvancedMovieSelectionSetup.py:582
-#: ../TagEditor.py:101 ../TagEditor.py:210 ../TagEditor.py:251
-#: ../TagEditor.py:269
-msgid "Aborted by user!!"
-msgstr "Nutraukė vartotojas!"
+msgid ""
+"Some settings changes require a restart to take effect.\n"
+"If you  use a skin without PiG (Picture in Graphic) you have to restart the box (not only Enigma 2)!\n"
+"With YES only Enigma 2 starts new, with NO the box make a restart."
+msgstr ""
+"Kad įsigaliotų parametrų pakeitimai, reikia sistemą paleisti iš naujo.\n"
+"Jei jūs naudojate temą be PiG (grafinis vaizdas tekste), turite iš naujo paleisti visą sistemą (ne tik Enigma 2)!\n"
+"Paspaudus 'Taip', bus iš naujo paleista tik Enigma2, 'Ne' - iš naujo pasileis visa sistema."
 
-#: ../AdvancedMovieSelectionSetup.py:609 ../AdvancedMovieSelectionSetup.py:1046
-#: ../TagEditor.py:45 ../SelectionListScreen.py:42 ../SelectionListScreen.py:60
-msgid "Save/Close"
-msgstr "Įrašyti/užverti"
+msgid "Some settings changes require close/reopen the movielist to take effect."
+msgstr "Kad įsigaliotų parametrų pakeitimai, reikia užverti ir vėl atverti filmų sąrašą."
 
-#: ../AdvancedMovieSelectionSetup.py:610
-msgid "Own button description"
-msgstr "Kiekvieno mygtuko aprašymas"
+msgid "Sorry, no data found at TheTVDB.com!"
+msgstr "TheTVDB.com nieko nerasta!"
 
-#: ../AdvancedMovieSelectionSetup.py:635
-msgid "Movie Quick Button Setup"
-msgstr "Filmo sparčiųjų mygtuką sąranka"
+#, python-format
+msgid "Sorry, no description for ' %s ' at TheTVDB.com found!"
+msgstr "TheTVDB.com ' %s ' aprašymo nerasta!"
 
-#: ../AdvancedMovieSelectionSetup.py:647 ../MovieSelection.py:185
-msgid "Delete"
-msgstr "Trinti"
+msgid "Sorry, no description for this episode at TheTVDB.com available!"
+msgstr "TheTVDB.com šio epizodo aprašymo nerasta!"
 
-#: ../AdvancedMovieSelectionSetup.py:648
-msgid "Move-Copy"
-msgstr "Perkelti - kopijuoti"
+msgid "Sorry, no description found at www.thetvdb.com!"
+msgstr "www.thetvdb.com aprašymo nerasta!"
 
-#: ../AdvancedMovieSelectionSetup.py:649 ../MovieSelection.py:189
-msgid "Rename"
-msgstr "Pervardinti"
+msgid "Sorry, no episode titel available!"
+msgstr "Epizodo pavadinimas nerastas!"
 
-#: ../AdvancedMovieSelectionSetup.py:650 ../MovieSelection.py:173
-msgid "Wastebasket"
-msgstr "Šiukšliadėžė"
+#, python-format
+msgid "Sorry, no info/cover found for title: %s"
+msgstr "Atleiskite, pavadinimui: %s nerasta nei informacijos, nei viršelių"
 
-#: ../AdvancedMovieSelectionSetup.py:651
 msgid "Sort"
 msgstr "Rūšiuoti"
 
-#: ../AdvancedMovieSelectionSetup.py:652
-msgid "Switch library/movielist"
-msgstr "Perjungti biblioteka/filmų sąrašas"
-
-#: ../AdvancedMovieSelectionSetup.py:653
-msgid "Show/Hide library"
-msgstr "Rodyti/slėpti biblioteką"
-
-#: ../AdvancedMovieSelectionSetup.py:654
-msgid "Show/Hide folders"
-msgstr "Rodyti/slėpti katalogus"
-
-#: ../AdvancedMovieSelectionSetup.py:655
-msgid "Bookmark(s) on/off"
-msgstr "Įjungti/išjungti žymeles"
-
-#: ../AdvancedMovieSelectionSetup.py:656
-msgid "Library marker on/off"
-msgstr "Įjungti/išjungti bibliotekos žymeklį"
-
-#: ../AdvancedMovieSelectionSetup.py:657
-msgid "Update library"
-msgstr "Atnaujinti biblioteką"
-
-#: ../AdvancedMovieSelectionSetup.py:658
-msgid "Home"
-msgstr "Pradžia"
-
-#: ../AdvancedMovieSelectionSetup.py:659
-msgid "Bookmark 1"
-msgstr "1 žymelė"
-
-#: ../AdvancedMovieSelectionSetup.py:660
-msgid "Bookmark 2"
-msgstr "2 žymelė"
-
-#: ../AdvancedMovieSelectionSetup.py:661
-msgid "Bookmark 3"
-msgstr "3 žymelė"
-
-#: ../AdvancedMovieSelectionSetup.py:662
-msgid "Bookmark 4"
-msgstr "4 žymelė"
-
-#: ../AdvancedMovieSelectionSetup.py:663
-msgid "Bookmark 5"
-msgstr "5 žymelė"
-
-#: ../AdvancedMovieSelectionSetup.py:664
-msgid "Bookmark 6"
-msgstr "6 žymelė"
-
-#: ../AdvancedMovieSelectionSetup.py:665
-msgid "Bookmark 7"
-msgstr "7 žymelė"
-
-#: ../AdvancedMovieSelectionSetup.py:666 ../MovieSelection.py:280
-msgid "Filter by Tags"
-msgstr "Filtruoti pagal žymas"
-
-#: ../AdvancedMovieSelectionSetup.py:667
-msgid "Tag Editor"
-msgstr "Žymų redaktorius"
-
-#: ../AdvancedMovieSelectionSetup.py:668 ../MovieSelection.py:181
-msgid "TMDb Info & D/L"
-msgstr "TMDb informacija ir parsiuntimas"
-
-#: ../AdvancedMovieSelectionSetup.py:670
-msgid "Toggle seen"
-msgstr "Žymėti peržiūrėtu"
-
-#: ../AdvancedMovieSelectionSetup.py:673
-msgid "Show Timer"
-msgstr "Rodyti laikmatį"
-
-#: ../AdvancedMovieSelectionSetup.py:674
-msgid "Show up to VSR-X"
-msgstr "Rodyti amžiaus cenzą iki-X"
-
-#: ../AdvancedMovieSelectionSetup.py:675 ../MovieSelection.py:175
-msgid "Filter by description"
-msgstr "Filtruoti pagal aprašymą"
-
-#: ../AdvancedMovieSelectionSetup.py:680
-msgid "DM-600PVR"
-msgstr "DM-600PVR"
-
-#: ../AdvancedMovieSelectionSetup.py:681
-msgid "DM-7000"
-msgstr "DM-7000"
-
-#: ../AdvancedMovieSelectionSetup.py:682
-msgid "DM-7025"
-msgstr "DM-7025"
-
-#: ../AdvancedMovieSelectionSetup.py:683
-msgid "DM-8000HD"
-msgstr "DM-8000HD"
-
-#: ../AdvancedMovieSelectionSetup.py:684
-msgid "DM-500HD"
-msgstr "DM-500HD"
-
-#: ../AdvancedMovieSelectionSetup.py:685
-msgid "DM-800HD"
-msgstr "DM-800HD"
-
-#: ../AdvancedMovieSelectionSetup.py:686
-msgid "DM-800HDse"
-msgstr "DM-800HDse"
-
-#: ../AdvancedMovieSelectionSetup.py:687
-msgid "DM-7020HD"
-msgstr "DM-7020HD"
-
-#: ../AdvancedMovieSelectionSetup.py:688
-msgid "internal HDD"
-msgstr "vidinis HDD"
-
-#: ../AdvancedMovieSelectionSetup.py:689
-msgid "NAS"
-msgstr "NAS"
-
-#: ../AdvancedMovieSelectionSetup.py:690
-msgid "NAS-Movies"
-msgstr "NAS-Filmai"
-
-#: ../AdvancedMovieSelectionSetup.py:692
-msgid "Display plugin name"
-msgstr "Rodyti įskiepio pavadinimą"
-
-#: ../AdvancedMovieSelectionSetup.py:693
-msgid "Display plugin description"
-msgstr "Rodyti įskiepio aprašymą"
-
-#: ../AdvancedMovieSelectionSetup.py:808
-msgid "(long)"
-msgstr "(ilgas paspaudimas)"
-
-#: ../AdvancedMovieSelectionSetup.py:811
-msgid "Quickbutton:"
-msgstr "Greitasis mygtukas: "
-
-#: ../AdvancedMovieSelectionSetup.py:814
-msgid "Button caption"
-msgstr "Mygtuko antraštė"
-
-#: ../AdvancedMovieSelectionSetup.py:816
-msgid "Home button text"
-msgstr "Mygtuko 'Home' tekstas"
-
-#: ../AdvancedMovieSelectionSetup.py:818
-msgid "Bookmark 1 button text"
-msgstr "1 žymelės mygtuko tekstas"
-
-#: ../AdvancedMovieSelectionSetup.py:820
-msgid "Bookmark 2 button text"
-msgstr "2 žymelės mygtuko tekstas"
-
-#: ../AdvancedMovieSelectionSetup.py:822
-msgid "Bookmark 3 button text"
-msgstr "3 žymelės mygtuko tekstas"
-
-#: ../AdvancedMovieSelectionSetup.py:824
-msgid "Bookmark 4 button text"
-msgstr "4 žymelės mygtuko tekstas"
-
-#: ../AdvancedMovieSelectionSetup.py:826
-msgid "Bookmark 5 button text"
-msgstr "5 žymelės mygtuko tekstas"
-
-#: ../AdvancedMovieSelectionSetup.py:828
-msgid "Bookmark 6 button text"
-msgstr "6 žymelės mygtuko tekstas"
-
-#: ../AdvancedMovieSelectionSetup.py:830
-msgid "Bookmark 7 button text"
-msgstr "7 žymelės mygtuko tekstas"
-
-#: ../AdvancedMovieSelectionSetup.py:832
-msgid "Home path"
-msgstr "Kelias į pradinį katalogą"
-
-#: ../AdvancedMovieSelectionSetup.py:834
-msgid "Bookmark 1 path"
-msgstr "1 žymelės kelias"
-
-#: ../AdvancedMovieSelectionSetup.py:836
-msgid "Bookmark 2 path"
-msgstr "2 žymelės kelias"
-
-#: ../AdvancedMovieSelectionSetup.py:838
-msgid "Bookmark 3 path"
-msgstr "3 žymelės kelias"
-
-#: ../AdvancedMovieSelectionSetup.py:840
-msgid "Bookmark 4 path"
-msgstr "4 žymelės kelias"
-
-#: ../AdvancedMovieSelectionSetup.py:842
-msgid "Bookmark 5 path"
-msgstr "5 žymelės kelias"
-
-#: ../AdvancedMovieSelectionSetup.py:844
-msgid "Bookmark 6 path"
-msgstr "6 žymelės kelias"
-
-#: ../AdvancedMovieSelectionSetup.py:846
-msgid "Bookmark 7 path"
-msgstr "7 žymelės kelias"
-
-#: ../AdvancedMovieSelectionSetup.py:887 ../MovieSelection.py:199
-msgid "Alphabetic sort"
+msgid "Sort alphabetically"
 msgstr "pagal abėcėlę"
 
-#: ../AdvancedMovieSelectionSetup.py:888 ../MovieSelection.py:205
+msgid "Sort by Date (1->9)"
+msgstr "pagal datą (1->9)"
+
+msgid "Sort by Date (9->1)"
+msgstr "pagal datą (9->1)"
+
+msgid "Sort by Description"
+msgstr "pagal aprašymą"
+
 msgid "Sort by date (ascending)"
 msgstr "pagal datą didėjančiai"
 
-#: ../AdvancedMovieSelectionSetup.py:889 ../MovieSelection.py:203
 msgid "Sort by date (descending)"
 msgstr "pagal datą mažėjančiai"
 
-#: ../AdvancedMovieSelectionSetup.py:890 ../MovieSelection.py:201
 msgid "Sort by description"
 msgstr "Rūšiuoti pagal aprašymą"
 
-#: ../AdvancedMovieSelectionSetup.py:897
-msgid "Select sort functions"
-msgstr "Pasirinkite rūšiavimo būdą"
-
-#: ../AdvancedMovieSelectionSetup.py:900
-msgid "Movie Quick Button Home path"
-msgstr "Kelias į filmo sparčiojo mygtuko pradinį katalogą"
-
-#: ../AdvancedMovieSelectionSetup.py:903
-msgid "Movie Quick Button Bookmark 1 path"
-msgstr "Kelias į filmo sparčiojo mygtuko 1 žymelės katalogą"
-
-#: ../AdvancedMovieSelectionSetup.py:906
-msgid "Movie Quick Button Bookmark 2 path"
-msgstr "Kelias į filmo sparčiojo mygtuko 2 žymelės katalogą"
-
-#: ../AdvancedMovieSelectionSetup.py:909
-msgid "Movie Quick Button Bookmark 3 path"
-msgstr "Kelias į filmo sparčiojo mygtuko 3 žymelės katalogą"
-
-#: ../AdvancedMovieSelectionSetup.py:912
-msgid "Movie Quick Button Bookmark 4 path"
-msgstr "Kelias į filmo sparčiojo mygtuko 4 žymelės katalogą"
-
-#: ../AdvancedMovieSelectionSetup.py:915
-msgid "Movie Quick Button Bookmark 5 path"
-msgstr "Kelias į filmo sparčiojo mygtuko 5 žymelės katalogą"
-
-#: ../AdvancedMovieSelectionSetup.py:918
-msgid "Movie Quick Button Bookmark 6 path"
-msgstr "Kelias į filmo sparčiojo mygtuko 6 žymelės katalogą"
-
-#: ../AdvancedMovieSelectionSetup.py:921
-msgid "Movie Quick Button Bookmark 7 path"
-msgstr "Kelias į filmo sparčiojo mygtuko 7 žymelės katalogą"
-
-#: ../AdvancedMovieSelectionSetup.py:1055
-msgid "Movie Quick Button Name Setup"
-msgstr "Filmo sparčiųjų mygtukų vardų sąranka"
-
-#: ../AdvancedMovieSelectionSetup.py:1067
-msgid "Enter Home button descrition:"
-msgstr "Aprašykite pradinio katalogo spartųjį mygtuką:"
-
-#: ../AdvancedMovieSelectionSetup.py:1069
-msgid "Enter Bookmark 1 button descrition:"
-msgstr "Aprašykite 1 žymelės spartųjį mygtuką:"
-
-#: ../AdvancedMovieSelectionSetup.py:1071
-msgid "Enter Bookmark 2 button descrition:"
-msgstr "Aprašykite 2 žymelės spartųjį mygtuką:"
-
-#: ../AdvancedMovieSelectionSetup.py:1073
-msgid "Enter Bookmark 3 button descrition:"
-msgstr "Aprašykite 3 žymelės spartųjį mygtuką:"
-
-#: ../AdvancedMovieSelectionSetup.py:1075
-msgid "Enter Bookmark 4 button descrition:"
-msgstr "Aprašykite 4 žymelės spartųjį mygtuką:"
-
-#: ../AdvancedMovieSelectionSetup.py:1077
-msgid "Enter Bookmark 5 button descrition:"
-msgstr "Aprašykite 5 žymelės spartųjį mygtuką:"
-
-#: ../AdvancedMovieSelectionSetup.py:1079
-msgid "Enter Bookmark 6 button descrition:"
-msgstr "Aprašykite 6 žymelės spartųjį mygtuką:"
-
-#: ../AdvancedMovieSelectionSetup.py:1081
-msgid "Enter Bookmark 7 button descrition:"
-msgstr "Aprašykite 7 žymelės spartųjį mygtuką:"
-
-#: ../AdvancedMovieSelectionSetup.py:1125
-msgid "Home button description:"
-msgstr "Pagrindinio katalogo mygtuko aprašymas:"
-
-#: ../AdvancedMovieSelectionSetup.py:1126
-msgid "Bookmark 1 button description:"
-msgstr "1 žymelės mygtuko aprašymas:"
-
-#: ../AdvancedMovieSelectionSetup.py:1127
-msgid "Bookmark 2 button description:"
-msgstr "2 žymelės mygtuko aprašymas:"
-
-#: ../AdvancedMovieSelectionSetup.py:1128
-msgid "Bookmark 3 button description:"
-msgstr "3 žymelės mygtuko aprašymas:"
-
-#: ../AdvancedMovieSelectionSetup.py:1129
-msgid "Bookmark 4 button description:"
-msgstr "4 žymelės mygtuko aprašymas:"
-
-#: ../AdvancedMovieSelectionSetup.py:1130
-msgid "Bookmark 5 button description:"
-msgstr "5 žymelės mygtuko aprašymas:"
-
-#: ../AdvancedMovieSelectionSetup.py:1131
-msgid "Bookmark 6 button description:"
-msgstr "6 žymelės mygtuko aprašymas:"
-
-#: ../AdvancedMovieSelectionSetup.py:1132
-msgid "Bookmark 7 button description:"
-msgstr "7 žymelės mygtuko aprašymas:"
-
-#: ../AdvancedMovieSelectionSetup.py:1149
-msgid "Here you can give the home button a special name."
-msgstr "Čia galite suteikti pagrindinio katalogo mygtukui savą pavadinimą."
-
-#: ../AdvancedMovieSelectionSetup.py:1153
-msgid "Here you can give the bookmark 1 button a special name."
-msgstr "Čia galite suteikti 1 žymelės mygtukui savą pavadinimą."
-
-#: ../AdvancedMovieSelectionSetup.py:1157
-msgid "Here you can give the bookmark 2 button a special name."
-msgstr "Čia galite suteikti 2 žymelės mygtukui savą pavadinimą."
-
-#: ../AdvancedMovieSelectionSetup.py:1161
-msgid "Here you can give the bookmark 3 button a special name."
-msgstr "Čia galite suteikti 3 žymelės mygtukui savą pavadinimą."
-
-#: ../AdvancedMovieSelectionSetup.py:1165
-msgid "Here you can give the bookmark 4 button a special name."
-msgstr "Čia galite suteikti 4 žymelės mygtukui savą pavadinimą."
-
-#: ../AdvancedMovieSelectionSetup.py:1169
-msgid "Here you can give the bookmark 5 button a special name."
-msgstr "Čia galite suteikti 5 žymelės mygtukui savą pavadinimą."
-
-#: ../AdvancedMovieSelectionSetup.py:1173
-msgid "Here you can give the bookmark 6 button a special name."
-msgstr "Čia galite suteikti 6 žymelės mygtukui savą pavadinimą."
-
-#: ../AdvancedMovieSelectionSetup.py:1177
-msgid "Here you can give the bookmark 7 button a special name."
-msgstr "Čia galite suteikti 7 žymelės mygtukui savą pavadinimą."
-
-#: ../DownloadMovies.py:68 ../DownloadMovies.py:175
-msgid "Save infos/cover"
-msgstr "Išsaugoti info/viršelį"
-
-#: ../DownloadMovies.py:70
-msgid "Background"
-msgstr "Fonas"
-
-#: ../DownloadMovies.py:114 ../DownloadMovies.py:225
-#, python-format
-msgid "Search for %s, please wait..."
-msgstr "Palaukite, ieškoma %s..."
-
-#: ../DownloadMovies.py:141
-msgid "Automatic search and save, please wait..."
-msgstr "Palaukite, vyksta automatinė paieška ir išsaugojimas..."
-
-#: ../DownloadMovies.py:143
-#, python-format
-msgid "Processing: %s"
-msgstr "Apdorojama: %s"
-
-#: ../DownloadMovies.py:143
-#, python-format
-msgid "/ %s"
-msgstr "/ %s"
-
-#: ../DownloadMovies.py:145
-#, python-format
-msgid "Current Movie: %s"
-msgstr "Dabartinis filmas: %s"
-
-#: ../DownloadMovies.py:147
-msgid "Automatic search and save"
-msgstr "Automatinė paieška ir išsaugojimas"
-
-#: ../DownloadMovies.py:148
-msgid "Automatic search and save finished."
-msgstr "Automatinė paieška ir išsaugojimas baigti."
-
-#: ../DownloadMovies.py:149 ../DownloadMovies.py:168
-msgid "OK"
-msgstr "Gerai"
-
-#: ../DownloadMovies.py:159
-#, python-format
-msgid "Searchtitle: %s"
-msgstr "Ieškomas pavadinimas: %s"
-
-#: ../DownloadMovies.py:160
-#, python-format
-msgid "Filename: %s"
-msgstr "Failo pavadinimas: %s"
-
-#: ../DownloadMovies.py:161
-#, python-format
-msgid "Search result(s) for %s"
-msgstr "%s paieškos rezultatai"
-
-#: ../DownloadMovies.py:167
-#, python-format
-msgid "Nothing found for: %s"
-msgstr "Su '%s' nieko nerasta"
-
-#: ../DownloadMovies.py:220
-msgid "Enter new moviename to search for"
-msgstr "Įrašykite naują ieškomo filmo pavadinimą"
-
-#: ../DownloadMovies.py:271
-msgid "Download and save from movie infos and covers complete."
-msgstr "Filmo informacija ir viršeliai parsiųsti ir išsaugoti."
-
-#: ../MovieSelection.py:103
-msgid "Show all movies"
-msgstr "Visi filmai"
-
-#: ../MovieSelection.py:130
 msgid "Sorted:"
 msgstr "Surūšiuota:"
 
-#: ../MovieSelection.py:132
-msgid "Alphabetically"
-msgstr "pagal abėcėlę"
+msgid "Source and destination path must be different."
+msgstr "Šaltinio ir paskirties keliai turi būti skirtingi."
 
-#: ../MovieSelection.py:134
-msgid "Description"
-msgstr "aprašymą"
+msgid "Speed:"
+msgstr "Greitis:"
 
-#: ../MovieSelection.py:136
-msgid "Descending"
-msgstr "mažėjančiai"
+msgid "Standby"
+msgstr "Budėjimas"
 
-#: ../MovieSelection.py:138
-msgid "Ascending"
-msgstr "didėjančiai"
+msgid "Start Advanced Movie Selection with:"
+msgstr "Išplėstinę filmų atranką pradėti, paspaudus:"
 
-#: ../MovieSelection.py:177
-msgid "Set VSR"
-msgstr "Nustatyti amžiaus cenzą"
+msgid "Start at the beginning depends on end (in Minutes):"
+msgstr "Paleidimas iš pradžių priklauso nuo peržiūros pabaigos (min.):"
 
-#: ../MovieSelection.py:179
-msgid "Unmount"
-msgstr "Atjungti"
+msgid "Start from the beginning"
+msgstr "Pradėti iš pradžių"
 
-#: ../MovieSelection.py:187
-msgid "Move/Copy"
-msgstr "Perkelti/kopijuoti"
+msgid "Start on first position in movielist:"
+msgstr "Atverti pirmoje filmų sąrašo pozicijoje:"
 
-#: ../MovieSelection.py:191
-msgid "Movie search"
-msgstr "Filmų paieška"
+msgid "Start on last movie location:"
+msgstr "Atverti ties paskutiniu rodytu filmu:"
 
-#: ../MovieSelection.py:193
-msgid "Mark movie as seen"
-msgstr "Žymėti filmą peržiūrėtu"
+msgid "Start search IP:"
+msgstr "IP paieška nuo:"
 
-#: ../MovieSelection.py:194
-msgid "Mark movie as unseen"
-msgstr "Žymėti filmą nežiūrėtu"
+msgid "Start/Stop video preview"
+msgstr "Pradėti/nutraukti vaizdo įrašo peržiūrą"
 
-#: ../MovieSelection.py:208
-msgid "List style default"
-msgstr "numatytasis sąrašas"
+msgid "Status:"
+msgstr "Būsena:"
 
-#: ../MovieSelection.py:209
-msgid "List style extended"
-msgstr "Išplėstinis sąrašas"
+msgid "Stop playing this movie?"
+msgstr "Nutraukti šį filmą ?"
 
-#: ../MovieSelection.py:210
-msgid "List style compact"
-msgstr "kompaktiškas sąrašas"
+msgid "Stop search IP:"
+msgstr "IP paieška iki:"
 
-#: ../MovieSelection.py:211
-msgid "List style compact with description"
-msgstr "kompaktiškas sąrašas su aprašymu"
+#, python-format
+msgid "Studio: %s"
+msgstr "Studija: %s"
 
-#: ../MovieSelection.py:212
-msgid "List style single line"
-msgstr "sąrašas viena eilute"
+msgid "Switch library/movielist"
+msgstr "Perjungti biblioteka/filmų sąrašas"
 
-#: ../MovieSelection.py:213
-msgid "List style Advanced Movie Selection single line"
-msgstr "Išplėstinės filmų atrankos sąrašas viena eilute"
+msgid "Switch on/off the Advanced Movie Selection."
+msgstr "Įjungti/išjungti išplėstinę filmų atranką."
 
-#: ../MovieSelection.py:217
-msgid "Hide broadcaster"
-msgstr "Slėpti transliuotoją"
+msgid "Switched on"
+msgstr "Įjungtas"
 
-#: ../MovieSelection.py:219
-msgid "Show broadcaster"
-msgstr "Rodyti transliuotoją"
+msgid "Symlink:"
+msgstr "Simbolinė nuoroda:"
 
-#: ../MovieSelection.py:222
-msgid "Hide tags in movielist"
-msgstr "Filmų sąraše nerodyti žymių"
+msgid "TMDb Info & D/L"
+msgstr "TMDb informacija ir parsiuntimas"
 
-#: ../MovieSelection.py:224
-msgid "Show tags in movielist"
-msgstr "Filmų sąraše rodyti žymes"
+msgid "TMDb info"
+msgstr "TMDb informacija"
 
-#: ../MovieSelection.py:227
-msgid "Hide extended description"
-msgstr "Nerodyti išsamaus aprašymo"
+msgid "TMDb plugin NOT installed. Assign function to info button is NOT possible."
+msgstr "TMDb įskiepis neįdiegtas. Priskirti 'Info' mygtukui finkcijų neįmanoma."
 
-#: ../MovieSelection.py:229
-msgid "Show extended description"
-msgstr "Rodyti išplėstinį aprašymą"
+msgid "TMDb plugin installed. Assign function to info button is possible."
+msgstr "TMDb įskiepis įdiegtas. Galima priskirti finkcijas 'Info' mygtukui."
 
-#: ../MovieSelection.py:231
-msgid "Hide date entry in movielist"
-msgstr "Filmų sąraše nerodyti datos įrašo"
+msgid "TMDb search"
+msgstr "TMDb paieška"
 
-#: ../MovieSelection.py:233
-msgid "Show date entry in movielist"
-msgstr "Filmų sąraše rodyti datos įrašą"
+msgid "TMDb search here not possible, please select a movie!"
+msgstr "TMDb paieška čia neįmanoma, pasirinkite filmą!"
 
-#: ../MovieSelection.py:235
-msgid "Hide runtime entry in movielist"
-msgstr "Filmų sąraše nerodyti trukmės"
+msgid "TV-button"
+msgstr "'TV' mygtukas"
 
-#: ../MovieSelection.py:237
-msgid "Show runtime entry in movielist"
-msgstr "Filmų sąraše rodyti trukmę"
+msgid "Tag 1"
+msgstr "Žymė 1"
 
-#: ../MovieSelection.py:240
-msgid "Hide folders in movielist"
-msgstr "Filmų sąraše nerodyti katalogų"
+msgid "Tag 2"
+msgstr "Žymė 2"
 
-#: ../MovieSelection.py:242
-msgid "Show folders in movielist"
-msgstr "Filmų sąraše rodyti katalogus"
+msgid "Tag Editor"
+msgstr "Žymų redaktorius"
 
-#: ../MovieSelection.py:247
-msgid "Hide progressbar in movielist"
-msgstr "Filmų sąraše nerodyti eigos juostos"
+msgid "Thanks for translation to:\n"
+msgstr "Ačiū už vertimą:\n"
 
-#: ../MovieSelection.py:249
-msgid "Show progressbar in movielist"
-msgstr "Filmų sąraše rodyti eigos juostą"
+msgid "Thanks to all other for help and so many very good code."
+msgstr "Ačiū ir visiems kitiems už pagalbą ir didelį kiekį labai naudingo kodo."
 
-#: ../MovieSelection.py:252
-msgid "Hide percent in movielist"
-msgstr "Filmų sąraše nerodyti procentų"
+#, python-format
+msgid "The %s is a client box"
+msgstr "%s yra aparatas-klientas"
 
-#: ../MovieSelection.py:254
-msgid "Show percent in movielist"
-msgstr "Filmų sąraše rodyti procentus"
-
-#: ../MovieSelection.py:256
-msgid "Hide movie status icon in movielist"
-msgstr "Filmų sąraše nerodyti filmo būklės ženkliuko"
-
-#: ../MovieSelection.py:258
-msgid "Show movie status icon in movielist"
-msgstr "Filmų sąraše rodyti filmo būklės ženkliuką"
-
-#: ../MovieSelection.py:260
-msgid "Hide movie color status in movielist"
-msgstr "Filmų sąraše nerodyti filmo būklės spalvos"
-
-#: ../MovieSelection.py:262
-msgid "Show movie color status in movielist"
-msgstr "Filmų sąraše rodyti filmo būklės spalvą"
-
-#: ../MovieSelection.py:266
-msgid "Download and save movie info/cover for all movies"
-msgstr "Atsisiųsti ir išsaugoti visų filmų informaciją/viršelius"
-
-#: ../MovieSelection.py:268
-msgid "Download and save movie info/cover"
-msgstr "Atsisiųsti ir išsaugoti filmo informaciją/viršelius"
-
-#: ../MovieSelection.py:270
-msgid "Update all genre in meta from eit"
-msgstr "Atnaujinti visus žanrus iš EIT"
-
-#: ../MovieSelection.py:272
-msgid "Delete cover"
-msgstr "Šalinti viršelį"
-
-#: ../MovieSelection.py:274
-msgid "Delete movie info"
-msgstr "Šalinti informaciją apie filmą"
-
-#: ../MovieSelection.py:276
-msgid "Delete movie info and cover"
-msgstr "Šalinti informaciją apie filmą ir viršelį"
-
-#: ../MovieSelection.py:278
-msgid "Movie tags"
-msgstr "Filmų žymos"
-
-#: ../MovieSelection.py:282
-msgid "Setup Moviebar position"
-msgstr "Filmų infojuostos padėtis"
-
-#: ../MovieSelection.py:284
-msgid "Search Trailer on web"
-msgstr "Ieškoti anonso internete"
-
-#: ../MovieSelection.py:288
-msgid "Backup/Restore"
-msgstr "Kopijavimas atsargai/atkūrimas"
-
-#: ../MovieSelection.py:290
-msgid "Select scan locations for movie library"
-msgstr "Pasirinkite, kur ieškoti elementų filmų bibliotekai"
-
-#: ../MovieSelection.py:292
-msgid "Setup"
-msgstr "Sąranka"
-
-#: ../MovieSelection.py:297
-msgid "Advanced Movie Selection Menu"
-msgstr "Išplėstinės filmų atrankos meniu"
-
-#: ../MovieSelection.py:324
 #, python-format
 msgid "The device '%s' can now removed!"
 msgstr "Įrenginys '%s' gali būti pašalintas!"
 
-#: ../MovieSelection.py:328
-msgid "Error occurred during unmounting device!"
-msgstr "Atjungiant įrenginį, įvyko klaida!"
+msgid "The minimum selected number of movies must be in one directory to show the path marker in movie library view."
+msgstr "Minimalus pasirinktas filmų skaičius turi būti skaičius viename kataloge, kad rodyti kelio žymekliui filmo bibliotekos rodinyje."
 
-#: ../MovieSelection.py:400
-msgid "Move/Copy not possible here!"
-msgstr "Į čia perkelti/kopijuoti negalima!"
+msgid "TheTVDB Info & D/L"
+msgstr "TVDB informacija & D / L"
 
-#: ../MovieSelection.py:412
-msgid "Enter text to search for"
-msgstr "Įrašykite ieškomą tekstą"
+msgid "TheTVDB search"
+msgstr "TVDB paieška"
 
-#: ../MovieSelection.py:550
-#, python-format
-msgid ""
-"Do you really want to delete info/cover from:\n"
-"%s?"
-msgstr ""
-"Ar tikrai norite pašalinti informaciją/viršelį iš\n"
-"%s?"
-
-#: ../MovieSelection.py:554 ../MovieSelection.py:579 ../MovieSelection.py:607
-msgid "You cannot delete this!"
-msgstr "To pašalinti jūs negalite!"
-
-#: ../MovieSelection.py:575
-#, python-format
-msgid ""
-"Do you really want to delete cover from:\n"
-"%s?"
-msgstr ""
-"Ar tikrai norite pašalinti viršelį iš\n"
-"%s?"
-
-#: ../MovieSelection.py:603
-#, python-format
-msgid ""
-"Do you really want to delete movie info from:\n"
-"%s?"
-msgstr ""
-"Ar tikrai norite pašalinti informaciją apie filmą iš\n"
-"%s?"
-
-#: ../MovieSelection.py:725
-msgid "Please wait... Loading list..."
-msgstr "Palaukite... Įkeliamas sąrašas..."
-
-#: ../MovieSelection.py:755
-msgid "Select the movie path"
-msgstr "Pasirinkite filmų kelią"
-
-#: ../MovieSelection.py:756
-msgid "Multiselection"
-msgstr "Multipasirinkimas"
-
-#: ../MovieSelection.py:760
-msgid "Advanced movielist menu"
-msgstr "Išplėstinio filmų sąrašo meniu"
-
-#: ../MovieSelection.py:761
-msgid "Show event details"
-msgstr "Išsamiai apie įvykį"
-
-#: ../MovieSelection.py:765
-msgid "Exit movielist"
-msgstr "Uždaryti filmų sąrašą"
-
-#: ../MovieSelection.py:766
-msgid "Select movie"
-msgstr "Pasirinkite filmą"
-
-#: ../MovieSelection.py:770
-msgid "Video preview jump forward"
-msgstr "Peršokti peržiūra pirmyn"
-
-#: ../MovieSelection.py:771
-msgid "Video preview jump backward"
-msgstr "Peršokti peržiūra atgal"
-
-#: ../MovieSelection.py:776
-msgid "Jump to next marker"
-msgstr "Peršokti į sekančią pažymėtą vietą"
-
-#: ../MovieSelection.py:777
-msgid "Jump to previous marker"
-msgstr "Peršokti į ankstesnę pažymėtą vietą"
-
-#: ../MovieSelection.py:781
-msgid "Start/Stop video preview"
-msgstr "Pradėti/nutraukti vaizdo įrašo peržiūrą"
-
-#: ../MovieSelection.py:806 ../MovieSelection.py:811
-#, python-format
-msgid "%s is currently recording!"
-msgstr "%s šiuo metu įrašomas!"
-
-#: ../MovieSelection.py:806
-#, python-format
-msgid ""
-"\n"
-"\n"
-"The timer for %s will be delete for stop the recording and after this the "
-"movie will be move to trashcan.\n"
-"\n"
-"Do you really want to continue?"
-msgstr ""
-"\n"
-"\n"
-"Kad sustabdyti įrašymą, %s laikmatis bus ištrintas, o po to filmas bus "
-"perkeltas į šiukšliadėžę.\n"
-"\n"
-"Ar tikrai norite tęsti?"
-
-#: ../MovieSelection.py:808
-#, python-format
-msgid "Do you really want to move %s to trashcan?"
-msgstr "Ar tikrai norite perkelti %s į šiukšliadėžę?"
-
-#: ../MovieSelection.py:811
-#, python-format
-msgid ""
-"\n"
-"\n"
-"The timer for %s will be delete for stop the recording and after this the "
-"movie will be deleted.\n"
-"\n"
-"Do you really want to continue?"
-msgstr ""
-"\n"
-"\n"
-"Kad sustabdyti įrašymą, %s laikmatis bus ištrintas, o po to filmas bus "
-"ištrintas.\n"
-"\n"
-"Ar tikrai norite tęsti?"
-
-#: ../MovieSelection.py:815
-msgid "Recordings are active, the timer(s) will also be deleted!\n"
-msgstr "Vyksta įrašymas, laikmatis(-čiai) taip pat bus ištrintas!\n"
-
-#: ../MovieSelection.py:817
-msgid "Do you really want to move selected movies to trashcan?"
-msgstr "Ar tikrai norite perkelti pasirinktus filmus į šiukšliadėžę?"
-
-#: ../MovieSelection.py:819
-msgid "Do you really want to delete selected movies?"
-msgstr "Ar tikrai norite ištrinti pasirinktus filmus?"
-
-#: ../MovieSelection.py:824
 msgid "This cannot deleted, please select a movie for!"
 msgstr "Ištrinti negalima, tam pasirinkite filmą!"
 
-#: ../MovieSelection.py:834
-msgid "this recording"
-msgstr "šis įrašas"
+msgid "This may not be marked as seen!"
+msgstr "Šio negalima pažymėti peržiūrėtu!"
 
-#: ../MovieSelection.py:1144
-msgid ""
-"Load Length of Movies in Movielist has been disabled.\n"
-"Close and reopen Movielist is required to apply the setting."
-msgstr ""
-"Filmų trukmės rodymas filmų sąraše išjungtas.\n"
-"Kad įsigaliotų parametrų pakeitimai, reikia užverti ir vėl atverti filmų "
-"sąrašą."
+msgid "This may not be marked as unseen!"
+msgstr "Šio negalima pažymėti nežiūrėtu!"
 
-#: ../MovieSelection.py:1206
-msgid "Tag 1"
-msgstr "Žymė 1"
+msgid "This option is for many of the functions from the Advanced Movie Selection necessary. If this option is disabled are many functions not available."
+msgstr "Ši parinktis būtina daugeliui išplėstinės filmų atrankos funkcijų. Jei ši parinktis išjungta, daug funkcijų neveiks."
 
-#: ../MovieSelection.py:1211
-msgid "Tag 2"
-msgstr "Žymė 2"
+msgid "This plugin may only executed on hardware which is licensed by Dream Multimedia GmbH."
+msgstr "Šis įskiepis gali būti panaudotas tik Dream Multimedia GmbH licencijuotoje techninėje įrangoje ."
 
-#: ../MovieSelection.py:1291
-msgid "Movie location:"
-msgstr "Filmų vieta:"
+msgid "Thumb (92x138)"
+msgstr "Miniatiūra (92x138)"
 
-#: ../MovieSelection.py:1293
-msgid "Movie library"
-msgstr "Filmų biblioteka"
+msgid "Timeshift-button"
+msgstr "Laiko poslinkio mygtukas"
 
-#: ../MovieSelection.py:1308
-msgid "[Library update in progress]"
-msgstr "[Vvyksta bibliotekos atnaujinimas]"
+msgid "To adjusted move/copy location"
+msgstr "Kad koreguoti perkėlimo/kopijavimo vietą"
 
-#: ../MovieSelection.py:1332
-msgid "Please select the movie path..."
-msgstr "Pasirinkite kelią į filmus..."
+msgid "To library"
+msgstr "Į biblioteką"
 
-#: ../MovieSelection.py:1361
+msgid "To movielist"
+msgstr "Į filmų sąrašą"
+
+msgid "To:"
+msgstr "Į:"
+
+msgid "Toggle detail and list view"
+msgstr "Perjungti išsamų ir sąrašo režimą"
+
+msgid "Toggle seen"
+msgstr "Žymėti peržiūrėtu"
+
+msgid "Toggle selected"
+msgstr "Sukeisti pasirinktus"
+
 #, python-format
-msgid "Directory %s nonexistent."
-msgstr "Katalogo %s nėra."
+msgid "Total %s"
+msgstr "Iš viso %s"
 
-#: ../MovieSelection.py:1410
-msgid "Please select tag to filter..."
-msgstr "Pasirinkite žymę atrankai..."
+msgid "Total size:"
+msgstr "Bendras dydis:"
 
-#: ../MovieSelection.py:1413
-msgid "No tags are set on these movies."
-msgstr "Šiuose filmuose žymių nenustatyta."
+msgid "Total:"
+msgstr "Iš viso:"
 
-#: ../MovieSelection.py:1420
-msgid "Please select the search path(s) for movies..."
-msgstr "Pasirinkite filmų paieškos kelią..."
+msgid "Trailer search"
+msgstr "Trilerių paieška"
 
-#: ../MovieSelection.py:1443
+msgid "Trailer search here not possible, please select a movie!"
+msgstr "Anonso paieška čia neįmanoma, pasirinkite filmą!"
+
+msgid "Trash count:"
+msgstr "Šiukšlių skaičius:"
+
+#, python-format
+msgid "Trash count: %d"
+msgstr "Šiukšlių skaičius: %d"
+
+msgid "Trash size:"
+msgstr "Šiukšlių apimtis:"
+
+#, python-format
+msgid "Trash size: %d MB"
+msgstr "Šiukšlių apimtis: %d MB"
+
+msgid "Unknown"
+msgstr "Nežinoma"
+
+msgid "Unknown error!"
+msgstr "Nežinoma klaida!"
+
+msgid "Unknown error!!"
+msgstr "Nežinoma klaida!"
+
+msgid "Unknown service"
+msgstr "Nežinoma paslauga"
+
+msgid "Unmount"
+msgstr "Atjungti"
+
+msgid "Update all genre in meta from eit"
+msgstr "Atnaujinti visus žanrus iš EIT"
+
+msgid "Update library"
+msgstr "Atnaujinti biblioteką"
+
+msgid "Use activ Skin LCD/OLED representation:"
+msgstr "Naudoti dabartinės temos LCD/VFD ekrano nustatymus:"
+
+msgid "Use alternative jump function:"
+msgstr "Naudoti alternatyvius peršokimus:"
+
+msgid "Use arrow left/right for position"
+msgstr "Pozicijai nustatyti naudokite '<>' rodykles"
+
+msgid "Use behavior when a movie is stopped:"
+msgstr "Naudoti elgseną, kai filmas sustabdytas:"
+
+msgid "Use date from timestamp:"
+msgstr "Naudoti sukūrimo datą:"
+
 msgid ""
 "Use direction keys to move the Moviebar.\n"
 "Press OK button for save or the EXIT button to cancel.\n"
@@ -2913,726 +2337,229 @@ msgstr ""
 "Kad išsaugotumėte, paspauskite 'OK' mygtuką, arba 'EXIT', kad atšauktumėte.\n"
 "Pradinei pozicijai atkurti, spauskite 'RAUDONĄ' mygtuką."
 
-#: ../TagEditor.py:46
-msgid "Create new Tag"
-msgstr "Sukurti naują žymę..."
+msgid "Use folder name for display covers:"
+msgstr "Viršelių atvaizdavimui naudoti katalogo pavadinimą:"
 
-#: ../TagEditor.py:48
-msgid "Load Tag(s) from movies"
-msgstr "Įkelti žymę(es) iš filmų"
+msgid "Use last stop mark:"
+msgstr "Naudoti vėliausio sustabdymo žymę:"
 
-#: ../TagEditor.py:49
+msgid "Use movie library path selection as marker within movies in library:"
+msgstr "Naudoti filmų bibliotekos kelio pasirinkimą, kaip vidinį filmų žymeklį bibliotekoje:"
+
 msgid "Use the OK Button for the selection."
 msgstr "Kad pasirinkumėte, spauskite 'OK' mygtuką."
 
-#: ../TagEditor.py:74
-msgid "Add Tag(s) for Recordings/Timer or AutoTimer"
-msgstr "Įkelti žymes įrašymui, laikmačiui, autolaikmačiui"
+msgid "Use video preview:"
+msgstr "Naudoti vaizdo įrašų peržiūrą:"
 
-#: ../TagEditor.py:78
-#, python-format
-msgid "Edit Tag(s) for: %s"
-msgstr "Redaguoti %s žymes"
+msgid "Use wastebasket:"
+msgstr "Naudoti šiukšliadėžę:"
 
-#: ../TagEditor.py:80
-msgid "Edit Tag(s)"
-msgstr "Redaguoti žymę(es)"
-
-#: ../TagEditor.py:91
-msgid "Please enter here the new tag:"
-msgstr "Įrašykite čia naują žymę:"
-
-#: ../TagEditor.py:206
-msgid ""
-"Do you really want to delete unused tags from default taglist?\n"
-"(Note that 'Cancel' will not undo this!)"
-msgstr ""
-"Ar tikrai norite ištrinti nenaudojamas žymes iš numatytojo žymių sąrašo?\n"
-"Atminkite, kad komanda \"Atšaukti\" šio veiksmo neatšauks!"
-
-#: ../TagEditor.py:231
-#, python-format
-msgid ""
-"Rename tag \"%s\" in movies and default taglist?\n"
-"(Note that 'Cancel' will not undo this!)"
-msgstr ""
-"Pervadinti žymę \"%s\" filmuose ir numatytąjame žymių sąraše?\n"
-"Atminkite, kad komanda \"Atšaukti\" šio veiksmo neatšauks!"
-
-#: ../TagEditor.py:247
-#, python-format
-msgid ""
-"Do you really want to delete tag \"%s\" from movies and default taglist?\n"
-"(Caution can not be undone!)"
-msgstr ""
-"Ar tikrai norite ištrinti žymę \"%s\" iš filmų ir numatytojo žymių sąrašo?\n"
-"Atminkite, kad šio veiksmo jau neatšauksite!"
-
-#: ../TagEditor.py:265
-msgid ""
-"Do you really want to delete all tags from movies and default taglist?\n"
-"(Caution can not be undone!)"
-msgstr ""
-"Ar tikrai norite ištrinti visas žymes iš filmų ir numatytojo žymių sąrašo?\n"
-"Atminkite, kad šio veiksmo jau neatšauksite!"
-
-#: ../TagEditor.py:282
-msgid "Add new tag"
-msgstr "Pridėti naują žymę"
-
-#: ../TagEditor.py:283
-msgid "Rename this tag"
-msgstr "Pervadinti šią žymę"
-
-#: ../TagEditor.py:284
-msgid "Delete this tag"
-msgstr "Šalinti šią žymę"
-
-#: ../TagEditor.py:285
-msgid "Delete unused tags from default taglist"
-msgstr "Šalinti nenaudojamas žymes iš numatytojo žymių sąrašo"
-
-#: ../TagEditor.py:286
-msgid "Delete all tags"
-msgstr "Šalinti visas žymes"
-
-#: ../SelectionListScreen.py:54
-msgid "Toggle selected"
-msgstr "Sukeisti pasirinktus"
-
-#: ../FileBrowser.py:60
-msgid "File Browser"
-msgstr "Failų naršyklė"
-
-#: ../ClientSetup.py:74 ../AdvancedMovieSelectionEventView.py:94
-msgid "Recording"
-msgstr "Įrašymas"
-
-#: ../ClientSetup.py:76
-msgid "Standby"
-msgstr "Budėjimas"
-
-#: ../ClientSetup.py:78
-msgid "Switched on"
-msgstr "Įjungtas"
-
-#: ../ClientSetup.py:82 ../ClientSetup.py:89
-#, python-format
-msgid "The %s is a client box"
-msgstr "%s yra aparatas-klientas"
-
-#: ../ClientSetup.py:93
-msgid "Hostname:"
-msgstr "Vardas tinkle:"
-
-#: ../ClientSetup.py:95
-msgid "IP:"
-msgstr "IP:"
-
-#: ../ClientSetup.py:97
-msgid "<Local device>"
-msgstr "<Vietinis įrenginys>"
-
-#: ../ClientSetup.py:98
-msgid "Port:"
-msgstr "Prievadas:"
-
-#: ../ClientSetup.py:190
-msgid "Advanced Movie Selection - Clientbox setup"
-msgstr "Išplėstinė filmų atranka - aparato-kliento sąranka"
-
-#: ../ClientSetup.py:197
-#, python-format
-msgid "Local IP: %s"
-msgstr "Vietinis IP: %s"
-
-#: ../ClientSetup.py:199
-msgid "Available Server/Clients"
-msgstr "Galimi serveriai/klientai"
-
-#: ../ClientSetup.py:201
-msgid "Remoteserver disabled!"
-msgstr "Nutolęs serveris išjungtas!"
-
-#: ../ClientSetup.py:203
-msgid ""
-"ATTENTION: DHCP in lan configuration is activ, no clientbox services "
-"available!"
-msgstr ""
-"DĖMESIO: nustatyta tinklo DHCP konfigūracija, kanalai aparatui-klientui "
-"neprieinami!"
-
-#: ../ClientSetup.py:207
-msgid "Port address:"
-msgstr "Prievadas:"
-
-#: ../ClientSetup.py:207
-msgid ""
-"Set the port address for client and server. Port address from connected "
-"clients will be automatically updated."
-msgstr ""
-"Nustatykite prievadus klientui ir serveriui komunikuoti. Prievadas iš "
-"klientų bus atnaujintas automatiškai."
-
-#: ../ClientSetup.py:208
-msgid "Start search IP:"
-msgstr "IP paieška nuo:"
-
-#: ../ClientSetup.py:208 ../ClientSetup.py:209
-msgid "Only last three digits from the IP must be set."
-msgstr "Nustatykite paskutinius tris IP adreso skaičius."
-
-#: ../ClientSetup.py:209
-msgid "Stop search IP:"
-msgstr "IP paieška iki:"
-
-#: ../ClientSetup.py:242
-msgid "Searching for clients, please wait ..."
-msgstr "Palaukite. Vyksta klientų paieška..."
-
-#: ../ClientSetup.py:248
-msgid "Manual search finished"
-msgstr "Rankinė paieška baigta"
-
-#: ../MovieList.py:556
-msgid "REC"
-msgstr "'REC'"
-
-#: ../MovieList.py:558
-msgid "Records"
-msgstr "Įrašai"
-
-#: ../MoviePlayer.py:139
-msgid "Open servicelist"
-msgstr "Atidaryti kanalų sąrašą"
-
-#: ../MoviePlayer.py:173 ../MoviePlayer.py:178
-msgid "Leave movie player"
-msgstr "Išjungti filmų grotuvą"
-
-#: ../MoviePlayer.py:283
-msgid ""
-"Not possible!\n"
-"MerlinEPG and CoolTVGuide or/and MerlinEPGCenter present or neither "
-"installed from this three plugins."
-msgstr ""
-"Neįmanoma!\n"
-"MerlinEPG, CoolTVGuide ir/arba MerlinEPGCenter nėra, arba neįdiegti šie trys "
-"įskiepiai."
-
-#: ../MoviePlayer.py:317 ../MoviePlayer.py:323 ../MoviePlayer.py:469
-msgid "Yes"
-msgstr "Taip"
-
-#: ../MoviePlayer.py:318 ../MoviePlayer.py:327 ../MoviePlayer.py:470
-msgid "No"
-msgstr "Ne"
-
-#: ../MoviePlayer.py:321
-msgid "No, but stop endless loop"
-msgstr "Ne. Bet išjungti kartojimą ratu"
-
-#: ../MoviePlayer.py:321
-msgid "No, but start endless loop"
-msgstr "Ne. Bet įjungti kartojimą ratu"
-
-#: ../MoviePlayer.py:324
-msgid "Yes, returning to movie list"
-msgstr "Taip. Ir grįžti į filmų sąrašą"
-
-#: ../MoviePlayer.py:325
-msgid "Yes, and delete this movie"
-msgstr "Taip. Ir ištrinti šį filmą"
-
-#: ../MoviePlayer.py:326
-msgid "Yes, and after deleting return to movie list"
-msgstr "Taip. Ir ištrynus filmą, grįžti į filmų sąrašą"
-
-#: ../MoviePlayer.py:328
-msgid "No, but restart from begin"
-msgstr "Ne. Bet pradėti filmą iš pradžių"
-
-#: ../MoviePlayer.py:333 ../MoviePlayer.py:473
-msgid "Stop playing this movie?"
-msgstr "Nutraukti šį filmą ?"
-
-#: ../MoviePlayer.py:374
-msgid "End of the movie is reached, the box now go to standby. Do that now?"
-msgstr ""
-"Filmas pasiekė pabaigą, aparatas nori įjungti budėjimo būseną. Įjungti dabar?"
-
-#: ../MoviePlayer.py:377
-msgid "End of the movie is reached, the box now go to shut down. Shutdown now?"
-msgstr "Filmas pasiekė pabaigą, aparatas nori išsijungti. Išjungti dabar?"
-
-#: ../MoviePlayer.py:523
-msgid "Error loading ISO image!"
-msgstr "Klaida, įkeliant ISO atvaizdą!"
-
-#: ../MoviePlayer.py:526
-msgid "Selected ISO image is not playable!"
-msgstr "Pasirinktame ISO atvaizde nėra atkuriamų failų!"
-
-#: ../MoviePlayer.py:539
-msgid "No DVD-PlayerChoice found!"
-msgstr "DVD grotuvo pasirinkimo nerasta!"
-
-#: ../MoviePlayer.py:544
-msgid "No BludiscPlayer found!"
-msgstr "Blu-ray grotuvo nerasta!"
-
-#: ../Seekbar.py:60
-msgid "Use arrow left/right for position"
-msgstr "Pozicijai nustatyti naudokite '<>' rodykles"
-
-#: ../Seekbar.py:62
-msgid "Jump x minutes forward (OK for seek):"
-msgstr "Peršokti X minučių pirmyn ('OK' - paieška):"
-
-#: ../Seekbar.py:64
-msgid "Jump x minutes back (OK for seek):"
-msgstr "Peršokti X minučių atgal ('OK' - paieška):"
-
-#: ../Seekbar.py:65
-msgid "Go manual to position (OK for seek):"
-msgstr "Rankiniu būdu nurodyti poziciją ('OK' - paieška):"
-
-#: ../Seekbar.py:86
-msgid "Advanced Movie Selection Seek"
-msgstr "Išplėstinės filmų atrankos paieška"
-
-#: ../Seekbar.py:106
-msgid "Manual jump to:"
-msgstr "Rankiniu būdu peršokti į:"
-
-#: ../SearchTMDb.py:94
-msgid "Only those, which are not available!"
-msgstr "Tik tuos, kurie neprieinami!"
-
-#: ../SearchTMDb.py:96
-msgid "Overwrite both (description & cover)"
-msgstr "Perrašyti abu (aprašymą ir viršelį)"
-
-#: ../SearchTMDb.py:98
-msgid "Overwrite movie description"
-msgstr "Perrašyti filmo aprašymą"
-
-#: ../SearchTMDb.py:100
-msgid "Overwrite movie cover"
-msgstr "Perrašyti filmo viršelį"
-
-#: ../SearchTMDb.py:103
-msgid "Data already exists! Should anything be updated?"
-msgstr "Duomenys jau yra! Reikėtų ką nors atnaujinti?"
-
-#: ../SearchTMDb.py:198
-msgid "Show movie detail"
-msgstr "Rodyti filmo aprašymą"
-
-#: ../SearchTMDb.py:220 ../SearchTMDb.py:227
-msgid "Toggle detail and list view"
-msgstr "Perjungti išsamų ir sąrašo režimą"
-
-#: ../SearchTMDb.py:221
-msgid "Save info/cover"
-msgstr "Išsaugoti informaciją/viršelį"
-
-#: ../SearchTMDb.py:231
-msgid "Move up"
-msgstr "Perkelti aukštyn"
-
-#: ../SearchTMDb.py:232
-msgid "Move down"
-msgstr "Perkelti žemyn"
-
-#: ../SearchTMDb.py:236 ../SearchTMDb.py:242
-msgid "Show previous cover"
-msgstr "Rodyti ankstesnį viršelį"
-
-#: ../SearchTMDb.py:237 ../SearchTMDb.py:241
-msgid "Show next cover"
-msgstr "Rodyti sekantį viršelį"
-
-#: ../SearchTMDb.py:298
-#, python-format
-msgid "Searching for ' %s ' on TMDb, please wait ..."
-msgstr "Palaukite, TVDB iešoma '%s'..."
-
-#: ../SearchTMDb.py:327
-#, python-format
-msgid "No data found for ' %s ' at themoviedb.org!"
-msgstr "\"%s\" tarp themoviedb.org duomenų nėra!"
-
-#: ../SearchTMDb.py:328
-#, python-format
-msgid ""
-"No data found for ' %s ' at themoviedb.org!\n"
-"Do you want to edit the search name?"
-msgstr ""
-"\"%s\" tarp themoviedb.org duomenų nėra!\n"
-"Ar norite redaguoti paieškos frazę?"
-
-#: ../SearchTMDb.py:339 ../SearchTMDb.py:449
-#, python-format
-msgid ""
-"Error!\n"
-"%s"
-msgstr ""
-"Klaida!\n"
-"%s"
-
-#: ../SearchTMDb.py:346
-msgid "movie found"
-msgstr "rastas filmas"
-
-#: ../SearchTMDb.py:353
-msgid "movies found"
-msgstr "rasti filmai"
-
-#: ../SearchTMDb.py:398
-#, python-format
-msgid "No description for ' %s ' at themoviedb.org found!"
-msgstr "\"%s\" aprašymo tarp themoviedb.org duomenų nėra!"
-
-#: ../SearchTMDb.py:401
-#, python-format
-msgid "Appeared: %s"
-msgstr "Išleistas: %s"
-
-#: ../SearchTMDb.py:403
-#, python-format
-msgid "Runtime: %s minutes"
-msgstr "Trukmė: %s min."
-
-#: ../SearchTMDb.py:421
-#, python-format
-msgid "Studio: %s"
-msgstr "Studija: %s"
-
-#: ../SearchTMDb.py:425
-#, python-format
-msgid "Director: %s"
-msgstr "Režisierius: %s"
-
-#: ../SearchTMDb.py:429
-#, python-format
-msgid "Production: %s\n"
-msgstr "Gamyba: %s\n"
-
-#: ../SearchTMDb.py:443
-msgid "Unknown error!!"
-msgstr "Nežinoma klaida!"
-
-#: ../SearchTMDb.py:549
-#, python-format
-msgid "Sorry, no info/cover found for title: %s"
-msgstr "Atleiskite, pavadinimui: %s nerasta nei informacijos, nei viršelių"
-
-#: ../AdvancedMovieSelectionEventView.py:68
-msgid "TheTVDB search"
-msgstr "TVDB paieška"
-
-#: ../AdvancedMovieSelectionEventView.py:69
-msgid "TMDb search"
-msgstr "TMDb paieška"
-
-#: ../AdvancedMovieSelectionEventView.py:71
-msgid "IMDB search"
-msgstr "IMDb paieška"
-
-#: ../AdvancedMovieSelectionEventView.py:76
-msgid "OFDb search"
-msgstr "OFDb paieška"
-
-#: ../AdvancedMovieSelectionEventView.py:100
-msgid "Unknown service"
-msgstr "Nežinoma paslauga"
-
-#: ../AdvancedMovieSelectionEventView.py:110
-#, python-format
-msgid "Infos for: %s"
-msgstr "Informacija apie: %s"
-
-#: ../AdvancedMovieSelectionEventView.py:112
-#, python-format
-msgid "Movie location: %s"
-msgstr "Filmo vieta: %s"
-
-#: ../Source/Config.py:30 ../Source/Config.py:31 ../Source/Config.py:32
-msgid "Ask user"
-msgstr "Klausti vartotojo"
-
-#: ../Source/Config.py:30
-msgid "Resume from last position"
-msgstr "Tęsti nuo paskutinės pozicijos"
-
-#: ../Source/Config.py:30
-msgid "Start from the beginning"
-msgstr "Pradėti iš pradžių"
-
-#: ../Source/Config.py:31 ../Source/Config.py:32
-msgid "Return to movie list"
-msgstr "Grįžti į filmų sąrašą"
-
-#: ../Source/Config.py:31 ../Source/Config.py:32
-msgid "Return to previous service"
-msgstr "Grįžti į ankstesnį kanalą"
-
-#: ../Source/Config.py:32
-msgid "Pause movie at end"
-msgstr "Pauzė filmo pabaigoje"
-
-#: ../Source/Config.py:32
-msgid "Shutdown"
-msgstr "Išjungti"
-
-#: ../Source/Config.py:36
-msgid "Only current location"
-msgstr "Tik dabartinė vieta"
-
-#: ../Source/Config.py:36
-msgid "Current location and all subdirectories"
-msgstr "Dabartinė vieta ir pakatalogiai"
-
-#: ../Source/Config.py:36
-msgid "All directorys below '/media'"
-msgstr "Visi katalogai, žemiau /media"
-
-#: ../Source/Config.py:52
-msgid "German (without Year)"
-msgstr "Vokiečių (be metų)"
-
-#: ../Source/Config.py:52
-msgid "German (with Year)"
-msgstr "Vokiečių (su metais)"
-
-#: ../Source/Config.py:52
-msgid "German (with Starttime)"
-msgstr "Vokiečių (su pradžios laiku)"
-
-#: ../Source/Config.py:52
-msgid "Enigma 2 default"
-msgstr "Enigma 2 numatytasis"
-
-#: ../Source/Config.py:52
-msgid "English (without Year)"
-msgstr "Anglų (be metų)"
-
-#: ../Source/Config.py:52
-msgid "English (with Year)"
-msgstr "Anglų (su metais)"
-
-#: ../Source/Config.py:52
-msgid "English (with Starttime)"
-msgstr "Anglų (su pradžios laiku)"
-
-#: ../Source/Config.py:53 ../Source/Config.py:54 ../Source/Config.py:55
-#: ../Source/Config.py:56
-msgid "Yellow"
-msgstr "Geltonas"
-
-#: ../Source/Config.py:53 ../Source/Config.py:54 ../Source/Config.py:55
-#: ../Source/Config.py:56
-msgid "Blue"
-msgstr "Mėlynas"
-
-#: ../Source/Config.py:53 ../Source/Config.py:54 ../Source/Config.py:55
-#: ../Source/Config.py:56
-msgid "Red"
-msgstr "Raudonas"
-
-#: ../Source/Config.py:53 ../Source/Config.py:54 ../Source/Config.py:55
-#: ../Source/Config.py:56
-msgid "Black"
-msgstr "Juoda"
-
-#: ../Source/Config.py:53 ../Source/Config.py:54 ../Source/Config.py:55
-#: ../Source/Config.py:56
-msgid "Green"
-msgstr "Žalias"
-
-#: ../Source/Config.py:56
-msgid "Grey"
-msgstr "Pilka"
-
-#: ../Source/Config.py:56
-msgid "Orange"
-msgstr "Oranžinė"
-
-#: ../Source/Config.py:87
-msgid "Homebutton"
-msgstr "Mygtukas 'Namo'"
-
-#: ../Source/Config.py:88
-msgid "Own text 1"
-msgstr "Savas tekstas 1"
-
-#: ../Source/Config.py:89
-msgid "Own text 2"
-msgstr "Savas tekstas 2"
-
-#: ../Source/Config.py:90
-msgid "Own text 3"
-msgstr "Savas tekstas 3"
-
-#: ../Source/Config.py:91
-msgid "Own text 4"
-msgstr "Savas tekstas 4"
-
-#: ../Source/Config.py:92
-msgid "Own text 5"
-msgstr "Savas tekstas 5"
-
-#: ../Source/Config.py:93
-msgid "Own text 6"
-msgstr "Savas tekstas 6"
-
-#: ../Source/Config.py:94
-msgid "Own text 7"
-msgstr "Savas tekstas 7"
-
-#: ../Source/Config.py:95
-msgid "No override"
-msgstr "Neperrašyti"
-
-#: ../Source/Config.py:96
-msgid "Video-button"
-msgstr "'VIDEO' mygtukas"
-
-#: ../Source/Config.py:97
-msgid "TV-button"
-msgstr "'TV' mygtukas"
-
-#: ../Source/Config.py:98
-msgid "Radio-button"
-msgstr "'RADIO' mygtukas"
-
-#: ../Source/Config.py:99
-msgid "Timeshift-button"
-msgstr "Laiko poslinkio mygtukas"
-
-#: ../Source/Config.py:104 ../Source/Config.py:105 ../Source/Config.py:106
-#: ../Source/Config.py:107 ../Source/Config.py:108 ../Source/Config.py:109
-#: ../Source/Config.py:110
-msgid "Advanced Movie Selection info"
-msgstr "Išplėstinės filmų atrankos informacija"
-
-#: ../Source/Config.py:104 ../Source/Config.py:107 ../Source/Config.py:108
-#: ../Source/Config.py:109
-msgid "TMDb info"
-msgstr "TMDb informacija"
-
-#: ../Source/Config.py:104 ../Source/Config.py:105 ../Source/Config.py:108
-#: ../Source/Config.py:110
-msgid "IMDb info"
-msgstr "IMDb informacija"
-
-#: ../Source/Config.py:104 ../Source/Config.py:106 ../Source/Config.py:109
-#: ../Source/Config.py:110
-msgid "OFDb info"
-msgstr "OFDb informacija"
-
-#: ../Source/Config.py:129
-msgid "Thumb (92x138)"
-msgstr "Miniatiūra (92x138)"
-
-#: ../Source/Config.py:130
-msgid "Cover (185x278)"
-msgstr "Viršelis (185x278)"
-
-#: ../Source/Config.py:131
-msgid "Mid (500x750)"
-msgstr "Vidut. (500x750)"
-
-#: ../Source/Config.py:132
-msgid "Original (1400x2100)"
-msgstr "Originalus (1400x2100)"
-
-#: ../Source/Config.py:152
-msgid "Disabled"
-msgstr "Išjungta"
-
-#: ../Source/Config.py:152
-msgid "Daily"
-msgstr "Kasdien"
-
-#: ../Source/Config.py:152
-msgid "Every second day"
-msgstr "Kas antrą dieną"
-
-#: ../Source/Config.py:152
-msgid "Weekly"
-msgstr "Kas savaitę"
-
-#: ../Source/Config.py:152
-msgid "Every two weeks"
-msgstr "Kas dvi savaites"
-
-#: ../Source/Config.py:152
-msgid "Monthly"
-msgstr "Kas mėnesį"
-
-#: ../Source/Config.py:170 ../Source/Config.py:172
-msgid "0"
-msgstr "0"
-
-#: ../Source/Config.py:170 ../Source/Config.py:172
-msgid "1"
-msgstr "1"
-
-#: ../Source/Config.py:170 ../Source/Config.py:172
-msgid "2"
-msgstr "2"
-
-#: ../Source/Config.py:170 ../Source/Config.py:172
-msgid "3"
-msgstr "3"
-
-#: ../Source/Config.py:182
-msgid "Virtual and Numerical"
-msgstr "Virtualus ir skaitmenimis"
-
-#: ../Source/Config.py:182
-msgid "Virtual"
-msgstr "Virtualus"
-
-#: ../Source/Config.py:182
-msgid "Numerical"
-msgstr "Skaitmeninis"
-
-#: ../Source/ServiceDescriptor.py:216 ../Source/ServiceDescriptor.py:232
-msgid "Directories"
-msgstr "Katalogai"
-
-#: ../Source/ServiceDescriptor.py:218 ../Source/ServiceDescriptor.py:234
-msgid "Movies"
-msgstr "Filmai"
-
-#: ../Source/ServiceDescriptor.py:222
-msgid "Last update:"
-msgstr "Atnaujinta:"
-
-#: ../Source/ServiceDescriptor.py:245
-msgid "Total:"
-msgstr "Iš viso:"
-
-#: ../Source/ServiceDescriptor.py:246
 msgid "Used:"
 msgstr "Naudojama:"
 
-#: ../Source/ServiceDescriptor.py:247
-msgid "Free:"
-msgstr "Laisva:"
+msgid "VSR"
+msgstr "Amžiaus cenzas"
 
-#: ../Source/ServiceDescriptor.py:250
-msgid "Symlink:"
-msgstr "Simbolinė nuoroda:"
+msgid "VSR-0 (General Audience)"
+msgstr "Amžiaus cenzas-0 (bendroji auditorija)"
 
-#~ msgid "Show seen movies"
-#~ msgstr "Rodyti žiūrėtus filmus"
+msgid "VSR-12 (Parents Strongly Cautioned)"
+msgstr "Amžiaus cenzas-12 (tėvų dalyvavimas būtinas)"
 
-#~ msgid "Hide seen movies"
-#~ msgstr "Nerodyti žiūrėtų filmų"
+msgid "VSR-16 (Restricted)"
+msgstr "Amžiaus cenzas-16 (uždrausta)"
 
-#~ msgid "Show/Hide seen movies"
-#~ msgstr "Rodyti/slėpti žiūrėtus filmus"
+msgid "VSR-18 (No One 17 And Under Admitted)"
+msgstr "Amžiaus cenzas-18 (tik vyresniems, kaip 17 metų)"
+
+msgid "VSR-6 (Parental Guidance Suggested)"
+msgstr "Amžiaus cenzas-6 (pageidautinas tėvų dalyvavimas)"
+
+msgid "Version:"
+msgstr "Versija:"
+
+msgid "Video preview autostart:"
+msgstr "Vaizdo peržiūros autopaleidimas:"
+
+msgid "Video preview delay:"
+msgstr "Vaizdo peržiūros delsa:"
+
+msgid "Video preview jump backward"
+msgstr "Peršokti peržiūra atgal"
+
+msgid "Video preview jump forward"
+msgstr "Peršokti peržiūra pirmyn"
+
+msgid "Video preview jump time (in minutes):"
+msgstr "Šuolio dydis (min.) filmų peržiūroje:"
+
+msgid "Video-button"
+msgstr "'VIDEO' mygtukas"
+
+msgid "Virtual"
+msgstr "Virtualus"
+
+msgid "Virtual and Numerical"
+msgstr "Virtualus ir skaitmenimis"
+
+#, python-format
+msgid "Voted: %s"
+msgstr "Balsavo: %s"
+
+msgid "Waiting"
+msgstr "Laukiama"
+
+msgid "Wastebasket"
+msgstr "Šiukšliadėžė"
+
+msgid "Wastebasket file(s):"
+msgstr "Šiukšliadėžės failai:"
+
+msgid "Wastebasket is empty!"
+msgstr "Šiukšliadėžė tuščia!"
+
+msgid "Wastebasket retention period (days):"
+msgstr "Šiukšliadėžės turinį saugoti (dienomis):"
+
+#, python-format
+msgid "Wastebasket: %s"
+msgstr "Šiukšliadėžė: %s"
+
+msgid "Weekly"
+msgstr "Kas savaitę"
+
+msgid "When enabled all created bookmarks appear in the movie list."
+msgstr "Kai čia įjungta, visos sukurtos žymelės bus matomos filmų sąraše."
+
+msgid "Where to look for the provider logos? (Default is /usr/share/enigma2/picon)"
+msgstr "Kur ieškoti tiekėjo logotipų? (numatytasis katalogas – /usr/share/enigma2/picon)"
+
+msgid "With this option you can assign as when a film is marked as seen."
+msgstr "Naudodami šią parinktį, galite nurodyti, kada filmas bus pažymėtas kaip žiūrėtas."
+
+msgid "With this option you can assign the date format in movie list (7 different sizes are available)."
+msgstr "Čia galite nustatyti filmų sąrašo datos formatą (galimi 7 pasirinkimai)."
+
+msgid "With this option you can assign what color should displayed for multiple selection in movie list."
+msgstr "Čia galite nustatyti, kokia šrifto spalva filmų sąraše bus atvaizduojami skirtingi pasirinkimai."
+
+msgid "With this option you can assign what color should displayed for not ready seen movies in movie list."
+msgstr "Čia galite nustatyti, kokia šrifto spalva filmų sąraše bus atvaizduojami kažkiek žiūrėti filmai."
+
+msgid "With this option you can assign what color should displayed for ready seen movies in movie list."
+msgstr "Čia galite nustatyti, kokia šrifto spalva filmų sąraše bus atvaizduojami peržiūrėti filmai."
+
+msgid "With this option you can assign what color should displayed for recording movies in movie list."
+msgstr "Čia galite nustatyti, kokia šrifto spalva filmų sąraše bus atvaizduojami šiuo metu įrašomi filmai."
+
+msgid "With this option you can assign what function should have the info button. The selection depends on the installed plugins."
+msgstr "Čia galite priskirti, kokią funkciją atliks 'INFO' mygtukas. Pasirinkimas priklauso nuo įdiegtų įskiepių."
+
+msgid "With this option you can assign what should happen when a movie start."
+msgstr "Čia galite nustatyti, kas įvyks, kai filmas prasideda."
+
+msgid "With this option you can assign what should happen when a movie stop."
+msgstr "Čia galite nustatyti, kas įvyks, kai filmas sustabdytas."
+
+msgid "With this option you can assign what should happen when the end of the films was achieved."
+msgstr "Čia galite nustatyti, kas įvyks filmui pasibaigus."
+
+msgid "With this option you can display a icon for new recordings."
+msgstr "Čia galite nustatyti naujus įrašus pažymėti ženkliuku."
+
+msgid "With this option you can switch on/off the Mini TV in the movie list."
+msgstr "Čia galite nustatyti, rodyti, ar ne filmų sąraše mini TV ekranėlį."
+
+msgid "With this option you can turn on/off the security question before delete a movie."
+msgstr "Čia galite įjungti/išjungti saugumo klausimą, prieš ištrinant filmą."
+
+msgid "With this option you can use the foldername instead of folder.jpg to display covers in folders."
+msgstr "Čia galite nustatyti viršelių atvaizdavimui kataloguose naudoti katalogo pavadinimą, o ne katalogo.jpg."
+
+msgid "Would you really abort current job?"
+msgstr "Ar tikrai atšaukti užduoties vykdymą?"
+
+#, python-format
+msgid "Writer: %s\n"
+msgstr "Autorius: %s\n"
+
+msgid "YTTrailer plugin NOT installed. Search for trailers on the Web is NOT possible."
+msgstr "YTTrailer įskiepis neįdiegtas. Be jo ieškoti anonsų internete neįmanoma."
+
+msgid "YTTrailer plugin installed. Search for trailers on the Web is possible."
+msgstr "YTTrailer įskiepis įdiegtas. Galima ieškoti anonsų internete."
+
+msgid "Yellow"
+msgstr "Geltonas"
+
+msgid "Yes"
+msgstr "Taip"
+
+msgid "Yes, and after deleting return to movie list"
+msgstr "Taip. Ir ištrynus filmą, grįžti į filmų sąrašą"
+
+msgid "Yes, and delete this movie"
+msgstr "Taip. Ir ištrinti šį filmą"
+
+msgid "Yes, returning to movie list"
+msgstr "Taip. Ir grįžti į filmų sąrašą"
+
+msgid "You can select yout prefered keyboard (Virtual, Numerical or both)."
+msgstr "Galite pasirinkti pageidaujamą klaviatūrą (virtualią, skaitmeninę, arba abi)."
+
+msgid "You cannot delete this!"
+msgstr "To pašalinti jūs negalite!"
+
+msgid "[Library update in progress]"
+msgstr "[Vvyksta bibliotekos atnaujinimas]"
+
+msgid "at"
+msgstr " "
+
+msgid "be moved/copied?"
+msgstr "reikia perkelti/kopijuoti?"
+
+msgid "episode found"
+msgstr "Rastas epizodas"
+
+msgid "episodes found"
+msgstr "Rasti epizodai"
+
+#, python-format
+msgid "from %s"
+msgstr "nuo %s"
+
+msgid "internal HDD"
+msgstr "vidinis HDD"
+
+msgid "movie"
+msgstr "filmas"
+
+msgid "movie found"
+msgstr "rastas filmas"
+
+msgid "movies"
+msgstr "filmai"
+
+msgid "movies found"
+msgstr "rasti filmai"
+
+msgid "show found"
+msgstr "Rastas šou"
+
+msgid "shows found"
+msgstr "Rasta šou"
+
+msgid "this recording"
+msgstr "šis įrašas"
+
+msgid "times"
+msgstr "kartai(-ų)"
+
+#, python-format
+msgid "to %s"
+msgstr "iki %s"
+
+msgid "to:"
+msgstr "į:"

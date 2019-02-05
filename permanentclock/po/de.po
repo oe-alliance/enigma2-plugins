@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PermanentClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2008-11-26 18:24-0000\n"
 "Last-Translator: AliAbdul <aliabdul1978@hotmail.de>\n"
 "Language-Team: Nabil Hanna <nabil1978@web.de>\n"
@@ -14,8 +14,7 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/permanentclock/"
-"src\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/permanentclock/src\n"
 
 msgid "Activate permanent clock"
 msgstr "Aktiviere permanente Uhr"
@@ -25,18 +24,6 @@ msgstr "Position der permanenten Uhr ändern"
 
 msgid "Deactivate permanent clock"
 msgstr "Deaktiviere permanente Uhr"
-
-msgid "Show digital clock"
-msgstr "Wechsle auf digitale Uhr"
-
-msgid "Color analog clock"
-msgstr "Farbe für Analoguhr"
-
-msgid "Show analog clock"
-msgstr "Wechsle auf analoge Uhr"
-
-msgid "Color digital clock"
-msgstr "Farbe für digitale Uhr"
 
 msgid "Permanent Clock"
 msgstr "Permanente Uhr"

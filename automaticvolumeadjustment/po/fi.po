@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-05 14:40+0000\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2014-12-19 17:13+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Samzan\n"
@@ -88,4 +88,3 @@ msgstr "Näytä äänenvoimakkuuspalkki muutoksessa"
 
 msgid "You must select a valid service!"
 msgstr "Sinun on valittava oikea palvelu"
-

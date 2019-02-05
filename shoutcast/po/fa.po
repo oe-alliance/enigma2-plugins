@@ -226,24 +226,3 @@ msgstr "تغییر نام لیست مورد علاقه انتخاب شده فع�
 #, python-format
 msgid "search-criteria %s"
 msgstr ""
-
-#~ msgid "Description:"
-#~ msgstr "توضیحات"
-
-#~ msgid "Listen to SHOUTcast Internet Radio"
-#~ msgstr "گوش دادن به رادیوی اینترنتی در تلوزیون"
-
-#~ msgid "Name (needs GUI restart):"
-#~ msgstr "نام ( نیاز به یک ریستارت )"
-
-#~ msgid "SHOUTcast"
-#~ msgstr "تلویزیون"
-
-#~ msgid "Setup"
-#~ msgstr "راه اندازی"
-
-#~ msgid "Show in (needs GUI restart):"
-#~ msgstr "نمایش ( نیاز به یک ریستارت )"
-
-#~ msgid "Ver."
-#~ msgstr "ورژن."

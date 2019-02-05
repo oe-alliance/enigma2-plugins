@@ -28,8 +28,7 @@ msgstr "Voeg toe"
 msgid "Adjustment value"
 msgstr "Correctie waarde"
 
-#: ../src/plugin.py:49
-#: ../src/plugin.py:52
+#: ../src/plugin.py:49 ../src/plugin.py:52
 msgid "Automatic Volume Adjustment"
 msgstr "Automatische volume aanpassing"
 
@@ -116,4 +115,3 @@ msgstr "Toon volumeschaal als het volume werd aangepast"
 #: ../src/AutomaticVolumeAdjustmentSetup.py:294
 msgid "You must select a valid service!"
 msgstr "U moet een geldige service selecteren!"
-

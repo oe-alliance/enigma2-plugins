@@ -43,6 +43,3 @@ msgstr ""
 
 msgid "pause"
 msgstr ""
-
-#~ msgid "Watch eUroticTV via HTTP Live Streaming"
-#~ msgstr "Genießen Sie eUroticTV mittels HTTP Live Streaming"

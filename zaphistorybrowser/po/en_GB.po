@@ -45,8 +45,7 @@ msgstr "Maximum zap history entries:"
 msgid "Zap & Close"
 msgstr "Zap & Close"
 
-#: ../src/plugin.py:170
-#: ../src/plugin.py:281
+#: ../src/plugin.py:170 ../src/plugin.py:281
 msgid "Zap-History Browser"
 msgstr "Zap-History Browser"
 
@@ -65,4 +64,3 @@ msgstr "disabled at parental lock"
 #: ../src/plugin.py:43
 msgid "enabled"
 msgstr "enabled"
-

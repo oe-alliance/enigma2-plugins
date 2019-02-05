@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 TagEditor Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2011-07-06 09:59+0100\n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: none\n"
@@ -69,12 +69,8 @@ msgid "Rename this tag..."
 msgstr "Ausgewählten Tag umbenennen..."
 
 #, python-format
-msgid ""
-"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
-"this!)"
-msgstr ""
-"Den Tag \"%s\" überall ersetzen durch:   ('Abbrechen' kann dies nicht "
-"rückgängig machen!)"
+msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
+msgstr "Den Tag \"%s\" überall ersetzen durch:   ('Abbrechen' kann dies nicht rückgängig machen!)"
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
 #, fuzzy

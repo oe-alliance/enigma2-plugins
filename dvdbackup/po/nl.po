@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2010-05-01 09:36+0100\n"
 "PO-Revision-Date: 2013-07-25 16:52+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -34,6 +34,9 @@ msgstr "Maak een backup van uw Video-DVD naar uw harde schijf"
 msgid "Could not find any file to backup!"
 msgstr "Kon geen bestanden vinden om te backuppen!"
 
+msgid "Could not install needed dvdbackup package!"
+msgstr "Kon het benodigde dvdbackup pakket niet installeren!"
+
 msgid "Could not read the DVD informations!"
 msgstr "Kon de DVD informatie niet lezen!"
 
@@ -57,6 +60,9 @@ msgstr "DVD uitwerpen?"
 
 msgid "Error while backup of DVD!"
 msgstr "Fout tijdens backup van DVD!"
+
+msgid "Installing..."
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Toetsenbord"
@@ -82,13 +88,3 @@ msgid ""
 msgstr ""
 "genisoimage klus geklaard.\n"
 "De DVD map verwijderen?"
-
-#~ msgid "Could not install needed dvdbackup package!"
-#~ msgstr "Kon het benodigde dvdbackup pakket niet installeren!"
-
-#~ msgid ""
-#~ "mkisofs job done.\n"
-#~ "Delete DVD directory?"
-#~ msgstr ""
-#~ "mkisofs taak uitgevoerd.\n"
-#~ "Verwijder DVD map?"

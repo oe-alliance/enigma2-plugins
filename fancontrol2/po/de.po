@@ -69,14 +69,11 @@ msgstr "ausgeschaltet"
 msgid "yes, Except for Recording or HDD"
 msgstr "Ja, außer bei Aufnahme oder HDD"
 
-#: FC2.txt:188
-#: FC2.txt:201
-#: FC2.txt:205
+#: FC2.txt:188 FC2.txt:201 FC2.txt:205
 msgid "no"
 msgstr "nein"
 
-#: FC2.txt:188
-#: FC2.txt:205
+#: FC2.txt:188 FC2.txt:205
 msgid "yes"
 msgstr "ja"
 
@@ -148,9 +145,7 @@ msgstr "Max Fan %d rpm bei VLT=255 (%s)"
 msgid "please set fan type (3Pin or 4Pin)"
 msgstr "bitte Lüftertyp setzen (3Pin or 4Pin)"
 
-#: FC2.txt:527
-#: FC2.txt:529
-#: FC2.txt:533
+#: FC2.txt:527 FC2.txt:529 FC2.txt:533
 msgid "%s   %02d C"
 msgstr "%s   %02d C"
 
@@ -158,8 +153,7 @@ msgstr "%s   %02d C"
 msgid "press Info for HDD-Temp"
 msgstr "drücke Info für HDD-Temp"
 
-#: FC2.txt:536
-#: FC2.txt:791
+#: FC2.txt:536 FC2.txt:791
 msgid "Current rpm  %4d"
 msgstr "Aktuell rpm  %4d"
 
@@ -351,45 +345,35 @@ msgstr "Spannung"
 msgid "Sensors"
 msgstr "Sensoren"
 
-#: FC2.txt:1499
-#: FC2.txt:1535
+#: FC2.txt:1499 FC2.txt:1535
 msgid "active"
 msgstr "aktiviert"
 
-#: FC2.txt:1502
-#: FC2.txt:1538
+#: FC2.txt:1502 FC2.txt:1538
 msgid "turn off"
 msgstr "ausschalten"
 
-#: FC2.txt:1505
-#: FC2.txt:1541
+#: FC2.txt:1505 FC2.txt:1541
 msgid "not active"
 msgstr "nicht aktiviert"
 
-#: FC2.txt:1508
-#: FC2.txt:1544
+#: FC2.txt:1508 FC2.txt:1544
 msgid "turn on"
 msgstr "einschalten"
 
-#: FC2.txt:1513
-#: FC2.txt:1515
-#: FC2.txt:1549
-#: FC2.txt:1551
+#: FC2.txt:1513 FC2.txt:1515 FC2.txt:1549 FC2.txt:1551
 msgid "Filesize : %d %sByte"
 msgstr "Dateigr&ouml;&szlig;e : %d %sByte"
 
-#: FC2.txt:1517
-#: FC2.txt:1553
+#: FC2.txt:1517 FC2.txt:1553
 msgid "Disk free : %d MByte"
 msgstr "Datentr&auml;ger frei : %d MByte"
 
-#: FC2.txt:1520
-#: FC2.txt:1556
+#: FC2.txt:1520 FC2.txt:1556
 msgid "Download"
 msgstr "Herunterladen"
 
-#: FC2.txt:1524
-#: FC2.txt:1560
+#: FC2.txt:1524 FC2.txt:1560
 msgid "Delete"
 msgstr "L&ouml;schen"
 
@@ -397,8 +381,7 @@ msgstr "L&ouml;schen"
 msgid "Delete older 48h"
 msgstr "L&ouml;schen &auml;lter 48h"
 
-#: FC2.txt:1531
-#: FC2.txt:1568
+#: FC2.txt:1531 FC2.txt:1568
 msgid "File %s does not exists"
 msgstr "Datei %s ist nicht vorhanden"
 
@@ -409,21 +392,3 @@ msgstr "Logging-Verzeichnis: %s"
 #: FC2.txt:1571
 msgid "Auto-Delete older %s Days"
 msgstr "Auto-L&ouml;schen &auml;lter %s Tage"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "Show Fan Error"
-#~ msgstr "Zeige Lüfter Fehler"
-
-#~ msgid "Switch RPM/2 <> RPM?"
-#~ msgstr "Umschaltung RPM/2 <> RPM?"
-
-#~ msgid "Regulation off"
-#~ msgstr "Steuerung aus"
-
-#~ msgid "off"
-#~ msgstr "aus"
-
-#~ msgid "Fan rpm current: %s target: %s (%sC)"
-#~ msgstr "Fan rpm Aktuell: %s Ziel: %s (%sC)"

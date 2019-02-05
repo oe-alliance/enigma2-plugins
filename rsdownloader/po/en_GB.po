@@ -21,8 +21,7 @@ msgstr ""
 msgid "Abort all downloads"
 msgstr "Abort all downloads"
 
-#: ../src/plugin.py:1272
-#: ../src/plugin.py:1352
+#: ../src/plugin.py:1272 ../src/plugin.py:1352
 msgid "Add"
 msgstr "Add"
 
@@ -67,11 +66,8 @@ msgstr "Allow downloading on tuesday:"
 msgid "Allow downloading on wednesday:"
 msgstr "Allow downloading on wednesday:"
 
-#: ../src/plugin.py:276
-#: ../src/plugin.py:307
-#: ../src/plugin.py:339
-#: ../src/plugin.py:393
-#: ../src/plugin.py:427
+#: ../src/plugin.py:276 ../src/plugin.py:307 ../src/plugin.py:339
+#: ../src/plugin.py:393 ../src/plugin.py:427
 msgid "Checking"
 msgstr "Checking"
 
@@ -91,8 +87,7 @@ msgstr "Close plugin"
 msgid "Config"
 msgstr "Config"
 
-#: ../src/plugin.py:1271
-#: ../src/plugin.py:1350
+#: ../src/plugin.py:1271 ../src/plugin.py:1350
 msgid "Delete"
 msgstr "Delete"
 
@@ -137,11 +132,8 @@ msgstr "Download files from rapidshare"
 msgid "Download in the background:"
 msgstr "Download in the background:"
 
-#: ../src/plugin.py:331
-#: ../src/plugin.py:342
-#: ../src/plugin.py:365
-#: ../src/plugin.py:371
-#: ../src/plugin.py:738
+#: ../src/plugin.py:331 ../src/plugin.py:342 ../src/plugin.py:365
+#: ../src/plugin.py:371 ../src/plugin.py:738
 msgid "Downloading"
 msgstr "Downloading"
 
@@ -184,19 +176,13 @@ msgstr ""
 "\n"
 "Error: Nothing found, sorry."
 
-#: ../src/plugin.py:400
-#: ../src/plugin.py:412
-#: ../src/plugin.py:547
-#: ../src/plugin.py:728
-#: ../src/plugin.py:753
+#: ../src/plugin.py:400 ../src/plugin.py:412 ../src/plugin.py:547
+#: ../src/plugin.py:728 ../src/plugin.py:753
 msgid "Failed"
 msgstr "Failed"
 
-#: ../src/plugin.py:406
-#: ../src/plugin.py:547
-#: ../src/plugin.py:653
-#: ../src/plugin.py:720
-#: ../src/plugin.py:1433
+#: ../src/plugin.py:406 ../src/plugin.py:547 ../src/plugin.py:653
+#: ../src/plugin.py:720 ../src/plugin.py:1433
 msgid "Finished"
 msgstr "Finished"
 
@@ -269,8 +255,7 @@ msgstr "Password:"
 msgid "Please choose a function..."
 msgstr "Please choose a function..."
 
-#: ../src/plugin.py:774
-#: ../src/plugin.py:1530
+#: ../src/plugin.py:774 ../src/plugin.py:1530
 msgid "RS Downloader"
 msgstr "RS Downloader"
 
@@ -330,15 +315,9 @@ msgstr "Username (uploaded.to):"
 msgid "Username:"
 msgstr "Username:"
 
-#: ../src/plugin.py:229
-#: ../src/plugin.py:296
-#: ../src/plugin.py:320
-#: ../src/plugin.py:379
-#: ../src/plugin.py:414
-#: ../src/plugin.py:563
-#: ../src/plugin.py:584
-#: ../src/plugin.py:744
-#: ../src/plugin.py:758
+#: ../src/plugin.py:229 ../src/plugin.py:296 ../src/plugin.py:320
+#: ../src/plugin.py:379 ../src/plugin.py:414 ../src/plugin.py:563
+#: ../src/plugin.py:584 ../src/plugin.py:744 ../src/plugin.py:758
 msgid "Waiting"
 msgstr "Waiting"
 
@@ -349,4 +328,3 @@ msgstr "Write log:"
 #: ../src/plugin.py:59
 msgid "fritz.Box"
 msgstr "fritz.Box"
-

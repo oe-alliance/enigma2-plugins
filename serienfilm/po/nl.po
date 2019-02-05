@@ -138,4 +138,3 @@ msgstr "toon tag menu"
 #: ../src/MovieSelection.py:144
 msgid "this recording"
 msgstr "Deze opname"
-

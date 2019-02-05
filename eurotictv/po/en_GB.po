@@ -44,6 +44,3 @@ msgstr "disconnected"
 
 msgid "pause"
 msgstr "pause"
-
-#~ msgid "Watch eUroticTV via HTTP Live Streaming"
-#~ msgstr "Watch eUroticTV via HTTP Live Streaming"

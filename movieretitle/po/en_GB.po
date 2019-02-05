@@ -80,4 +80,3 @@ msgstr "Title"
 #: ../src/plugin.py:22
 msgid "change name..."
 msgstr "change name..."
-

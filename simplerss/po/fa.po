@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple rss Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2012-07-26 01:21+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -141,9 +141,6 @@ msgstr "راه اندازی خودکار همزمان با انیگما 2"
 
 msgid "Subscribe Newsfeed..."
 msgstr "اشتراک اخبار سایت ..."
-
-msgid "Ticker"
-msgstr ""
 
 msgid "Update Feed"
 msgstr "بروزرسانی اخبار سایت ..."

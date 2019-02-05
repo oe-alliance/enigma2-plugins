@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - dvdbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2010-05-01 09:36+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -32,6 +32,9 @@ msgstr "Eseguire backup di DVD su harddisk"
 msgid "Could not find any file to backup!"
 msgstr "Impossibile trovare file di cui effettuare il backup!"
 
+msgid "Could not install needed dvdbackup package!"
+msgstr ""
+
 msgid "Could not read the DVD informations!"
 msgstr "Impossibile leggere le informazioni sul DVD!"
 
@@ -55,6 +58,9 @@ msgstr "Espellere il DVD?"
 
 msgid "Error while backup of DVD!"
 msgstr "Errone in esecuzione backup DVD!"
+
+msgid "Installing..."
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Tastiera"
@@ -80,6 +86,3 @@ msgid ""
 msgstr ""
 "genisoimage job terminato.\n"
 "Cancellare la cartella DVD?"
-
-#~ msgid "DVD Name"
-#~ msgstr "Nome DVD"

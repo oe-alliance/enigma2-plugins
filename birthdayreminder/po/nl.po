@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2011-09-14 19:42+CEST\n"
 "PO-Revision-Date: 2013-07-25 16:38+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -19,7 +19,6 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: The Netherlands\n"
 
-#, python-format
 msgid "%s will turn %s in %s!"
 msgstr "%s zal worden gewijzigd in %s!"
 
@@ -56,7 +55,6 @@ msgstr "Verjaardagsherinnering"
 msgid "Birthday Reminder Settings"
 msgstr "Verjaardagsherinnering instellingen"
 
-#, python-format
 msgid "Birthday Reminder received %s birthdays from %s."
 msgstr "Verjaardagsherinnering ontvangen %s verjaardagen van %s"
 
@@ -69,15 +67,12 @@ msgstr "Verjaardagen"
 msgid "CSV import successful!"
 msgstr "CSV import geslaagd!"
 
-#, python-format
 msgid "Can't find CSV file %s!"
 msgstr "Kan CSV bestand %s niet vinden!"
 
-#, python-format
 msgid "Can't import CSV data from file %s."
 msgstr "Kan CSV data van bestand %s niet importeren."
 
-#, python-format
 msgid "Can't write CSV file %s."
 msgstr "Kan CSV bestand %s niet schrijven."
 
@@ -99,7 +94,6 @@ msgstr "Uitgeschakeld"
 msgid "Distribute birthdays to other Dreamboxes"
 msgstr "Geef verjaardagen door aan andere ontvangers"
 
-#, python-format
 msgid "Do you really want to delete the entry for %s?"
 msgstr "Wilt u echt het bestand voor %s verwijderen?"
 
@@ -115,7 +109,6 @@ msgstr "Bewerk verjaardagen"
 msgid "Edit the selected entry"
 msgstr "Bewerk de geselecteerde waarde"
 
-#, python-format
 msgid ""
 "Error reading file %s.\n"
 "\n"
@@ -125,7 +118,6 @@ msgstr ""
 "\n"
 "Fout: %s, %s"
 
-#, python-format
 msgid ""
 "Error writing file %s.\n"
 "\n"
@@ -207,7 +199,6 @@ msgstr "Volgende sortering"
 msgid "Sorting previous"
 msgstr "Vorige sortering"
 
-#, python-format
 msgid ""
 "Today is %s's birthday!\n"
 "\n"
@@ -220,10 +211,8 @@ msgstr ""
 msgid "What do you want to do?"
 msgstr "Wat wilt u doen?"
 
-#, python-format
 msgid "Wrote CSV file %s."
 msgstr "CSV bestand %s geschreven"
 
 msgid "Year:"
 msgstr "Jaar:"
-

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EmailClient Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2010-01-03 06:54+0100\n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: de <de@li.org>\n"
@@ -76,8 +76,7 @@ msgstr "Ämne"
 msgid ""
 "[EmailAccount] %(name)s: _cbCapabilities:\n"
 "####################################################################################################\n"
-"# If you have problems to log into your imap-server, please send me the "
-"output of the following line\n"
+"# If you have problems to log into your imap-server, please send me the output of the following line\n"
 "# cbCapabilities: %(capa)s\n"
 "####################################################################################################\n"
 msgstr ""
@@ -230,63 +229,3 @@ msgstr "användarnamn"
 
 msgid "view Emails via IMAP4"
 msgstr "läs epost med hjälp av IMAP4"
-
-#~ msgid "Box '%s' is empty"
-#~ msgstr "Epostlåda %s är tom"
-
-#~ msgid ""
-#~ "In order of missing standart python library files\n"
-#~ "i have copied the nessary files now.\n"
-#~ "But you have to restart your Box\n"
-#~ " to apply this!"
-#~ msgstr ""
-#~ "Då det saknades vissa standard python librarys filer,\n"
-#~ "har dessa nu kopierats.\n"
-#~ "En omstart av din Receiver är nödvändig\n"
-#~ "för att aktivera dessa."
-
-#~ msgid "Mailbox"
-#~ msgstr "Epostlåda"
-
-#~ msgid "cannot access mailbox '%(mboxname)s'"
-#~ msgstr "ingen åtkomst till epostlådan '%(mboxname)s'"
-
-#~ msgid "cannot get capabilities of mailserver"
-#~ msgstr "kan inte erhålla tjänster fråm epostserver"
-
-#~ msgid "connection to %(server)s:%(port)d failed"
-#~ msgstr "anslutning till %(server)s:%(port)d misslyckades"
-
-#~ msgid ""
-#~ "connection to %(server)s:%(port)d failed:\n"
-#~ "%(reason)s"
-#~ msgstr ""
-#~ "anslutning till %(server)s:%(port)d misslyckades:\n"
-#~ "%(reason)s"
-
-#~ msgid "encrypted login failed, trying without encryption"
-#~ msgstr "krypterad inloggning misslyckades, försöker utan kryptering"
-
-#~ msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
-#~ msgstr "laddar brevhuvuden %(from)d-%(to)d från epostlåda '%(name)s'"
-
-#~ msgid "logged in"
-#~ msgstr "inloggad"
-
-#~ msgid "login failed"
-#~ msgstr "Inloggning missluckades"
-
-#~ msgid "max of Headers to load"
-#~ msgstr "Max anntal brevhuvuden att ladda"
-
-#~ msgid "no"
-#~ msgstr "nej"
-
-#~ msgid "notify about new mails"
-#~ msgstr "Meddela om nya epost"
-
-#~ msgid "unread messages in mailbox"
-#~ msgstr "olästa meddelanden i epostlådan"
-
-#~ msgid "yes"
-#~ msgstr "ja"

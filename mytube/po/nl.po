@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: networkwizard_nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 21:49+0200\n"
+"POT-Creation-Date: 2009-05-29 17:38+0200\n"
 "PO-Revision-Date: 2013-10-06 17:53+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -24,9 +24,6 @@ msgstr ""
 
 msgid " Results"
 msgstr "Resultaten"
-
-msgid "Add to favorites"
-msgstr "Voeg toe aan favorieten"
 
 msgid "Added: "
 msgstr "Toegevoegd:"
@@ -51,9 +48,6 @@ msgstr "Australië"
 
 msgid "Author: "
 msgstr "Auteur:"
-
-msgid "Auto paginate on last entry:"
-msgstr "Automatisch pagineren bij laatste invoer:"
 
 msgid "Autos & Vehicles"
 msgstr "Auto's & voertuigen"
@@ -133,9 +127,6 @@ msgstr "Groot Brittannië"
 msgid "HD videos"
 msgstr "HD video's"
 
-msgid "Hello"
-msgstr "Hallo"
-
 msgid "Help"
 msgstr "Help"
 
@@ -169,12 +160,6 @@ msgstr "Japan"
 msgid "Load feed on startup:"
 msgstr "Bij het starten feeds laden:"
 
-msgid "Login OK"
-msgstr "Login OK"
-
-msgid "Login failed"
-msgstr "Login mislukt"
-
 msgid "Mexico"
 msgstr "Mexico"
 
@@ -196,35 +181,14 @@ msgstr "Recentste"
 msgid "Most responded"
 msgstr "Meest beantwoord"
 
-msgid "Most shared"
-msgstr "Meest gedeeld"
-
 msgid "Most viewed"
 msgstr "Meest bekeken"
 
 msgid "Music"
 msgstr "Muziek"
 
-msgid "My Favorites"
-msgstr "Mijn favorieten"
-
-msgid "My History"
-msgstr "Mijn geschiedenis"
-
-msgid "My Recommendations"
-msgstr "Mijn aanbevelingen"
-
-msgid "My Subscriptions"
-msgstr "Mijn inschrijvingen"
-
 msgid "My TubePlayer"
 msgstr "My TubePlayer"
-
-msgid "My Uploads"
-msgstr "Mijn uploads"
-
-msgid "My Watch Later"
-msgstr "Mijn bekijk later"
 
 msgid "MyTube Settings"
 msgstr "MyTube instellingen"
@@ -249,9 +213,6 @@ msgstr "MyTubeVideo helpscherm"
 
 msgid "New Zealand"
 msgstr "Nieuw Zeeland"
-
-msgid "New subscription added"
-msgstr "Nieuwe inschrijvingen toegevoegd"
 
 msgid "News & Politics"
 msgstr "Nieuws & Politiek"
@@ -325,15 +286,8 @@ msgstr "Gerelateerde video's."
 msgid "Relevance"
 msgstr "Relevantie"
 
-msgid "Reset tv-screen after playback:"
-msgstr "Reset tv-scherm na afspelen:"
-
 msgid "Response video entries."
 msgstr ""
-
-#, python-format
-msgid "Results: %s - Page: %s "
-msgstr "Resultaten: %s - Pagina: %s "
 
 msgid "Return to movie list"
 msgstr "Ga terug naar de movielijst"
@@ -389,9 +343,6 @@ msgstr "Standaard feeds"
 msgid "Stop playing this movie?"
 msgstr "Stoppen met afspelen?"
 
-msgid "Subscribe to user"
-msgstr "Abonneer gebruiker"
-
 msgid "Sweden"
 msgstr "Zweden"
 
@@ -425,9 +376,6 @@ msgstr "Top waarderingen"
 msgid "Travel & Events"
 msgstr "Reizen & gebeurtenssen"
 
-msgid "Trending videos"
-msgstr ""
-
 msgid "Trying to download the Youtube feed entries. Please wait..."
 msgstr "Probeer de Youtube feed entries binnen te halen. Even wachten..."
 
@@ -436,15 +384,6 @@ msgstr "Probeer de Youtube zoekresultatenbinnen te halen. Even wachten..."
 
 msgid "United States"
 msgstr "Verenigde Staten"
-
-msgid "Unknown error"
-msgstr "Onbekende fout"
-
-msgid "User video entries."
-msgstr ""
-
-msgid "Video successfully added to favorites"
-msgstr ""
 
 msgid "Videobrowser exit behavior:"
 msgstr "Gedrag browser bij afsluiten:"
@@ -463,9 +402,6 @@ msgstr "Bekijk gerelateerde vedeo's"
 
 msgid "View response videos"
 msgstr ""
-
-msgid "View user videos"
-msgstr "Bekijk gebruikers video's"
 
 msgid "Views: "
 msgstr "Bekeken:"
@@ -520,33 +456,3 @@ msgstr "Ja, maar speel volgende video"
 
 msgid "Yes, but play previous video"
 msgstr "Ja, maar speel vorige video"
-
-msgid "Youtube Password (reopen plugin on change):"
-msgstr "Youtube wachtwoord (heropen de plugin na aanpassen):"
-
-msgid "Youtube Username (reopen plugin on change):"
-msgstr "Youtube gebruikersnaam (heropen de plugin na aanpassen)."
-
-#~ msgid "Ascanding"
-#~ msgstr "Oplopend"
-
-#~ msgid "Category"
-#~ msgstr "Categorie"
-
-#~ msgid "From Region"
-#~ msgstr "Van regio"
-
-#~ msgid "No, but play next video"
-#~ msgstr "Nee, speel de volgende video af"
-
-#~ msgid "No, but play previous video"
-#~ msgstr "Nee, speel de vorige video af"
-
-#~ msgid "Order by"
-#~ msgstr "Sorteer op"
-
-#~ msgid "Restricted Content"
-#~ msgstr "Vertrouwelijke inhoud"
-
-#~ msgid "Search"
-#~ msgstr "Zoek"

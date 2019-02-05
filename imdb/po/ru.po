@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2018-04-24 18:47+0200\n"
 "PO-Revision-Date: 2012-08-25 15:22+0200\n"
 "Last-Translator: WadimArt <WadimArt@GiClub.tv>\n"
 "Language-Team: none\n"
@@ -14,6 +14,9 @@ msgstr ""
 
 msgid " as "
 msgstr " как"
+
+msgid "* = Restart Required"
+msgstr ""
 
 msgid "Ambiguous results"
 msgstr "Результаты поиска"
@@ -27,6 +30,9 @@ msgstr "Состав: "
 msgid "Channel Selection"
 msgstr "Выбор канала"
 
+msgid "Content:"
+msgstr ""
+
 msgid "Could't get event name"
 msgstr "Не удалось получить описание события"
 
@@ -37,8 +43,16 @@ msgstr "Подробнее"
 msgid "Downloading Movie Poster: %s..."
 msgstr "Загрузка постера: %s..."
 
-msgid ""
-"Enable this to be able to access the IMDb from within the plugin browser."
+#, fuzzy
+msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
+msgstr "Включить это, чтобы получить доступ к IMDb из меню плагинов."
+
+#, fuzzy
+msgid "Enable this to be able to access IMDb searches from within the movie list."
+msgstr "Включить это, чтобы получить доступ к IMDb из меню плагинов."
+
+#, fuzzy
+msgid "Enable this to be able to access IMDb searches from within the plugin browser."
 msgstr "Включить это, чтобы получить доступ к IMDb из меню плагинов."
 
 msgid "Enter search"
@@ -50,11 +64,15 @@ msgstr "Введите текст для поиска"
 msgid "Exit"
 msgstr "Выход"
 
+#, fuzzy
+msgid "Exit IMDb search"
+msgstr "Введите условия поиска"
+
 msgid "Extra Info"
 msgstr "Дополнительно"
 
-msgid "IMDb Details"
-msgstr "Данные IMDb"
+msgid "Genre:"
+msgstr ""
 
 msgid "IMDb Details parsed"
 msgstr "Подробное описание из IMDb"
@@ -65,20 +83,49 @@ msgstr "Загрузка данных IMDb выполнена"
 msgid "IMDb Download failed"
 msgstr "Загрузка данных IMDb неудачна"
 
+#, fuzzy
+msgid "IMDb Menu"
+msgstr "Настройка IMDb"
+
 msgid "IMDb Plugin"
 msgstr "Плагин IMDb"
 
 msgid "IMDb Re-Download completed"
 msgstr "Повторная загрузка данных IMDb выполнена"
 
+#, fuzzy
+msgid "IMDb Save - Download completed"
+msgstr "Повторная загрузка данных IMDb выполнена"
+
 msgid "IMDb Setup"
 msgstr "Настройка IMDb"
+
+msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
+msgstr ""
+
+msgid "IMDb can not get Movie Information to write to .txt file!"
+msgstr ""
 
 msgid "IMDb query failed!"
 msgstr "Запрос в IMDb не удался!"
 
+#, fuzzy
+msgid "IMDb search"
+msgstr "Описание не найдено в IMDb!"
+
+#, fuzzy
+msgid "IMDb setup"
+msgstr "Настройка IMDb"
+
 msgid "Lookup"
 msgstr "Искать"
+
+msgid "Menu"
+msgstr ""
+
+#, fuzzy
+msgid "No IMDb match."
+msgstr "Описание не найдено в IMDb!"
 
 msgid "No IMDb match:"
 msgstr "Описание не найдено в IMDb!"
@@ -92,43 +139,113 @@ msgstr "Подробностей не найдено."
 msgid "OK"
 msgstr "OK"
 
+msgid "Page down"
+msgstr ""
+
+msgid "Page up"
+msgstr ""
+
 msgid "Play Trailer"
 msgstr "Воспроизвести трейлер"
 
 msgid "Please select the matching entry"
 msgstr "Пожалуйста, выберите соответствующую запись"
 
-#, python-format
-msgid "Query IMDb: %s..."
-msgstr "Запрос в IMDb: %s..."
+msgid "Plot Outline"
+msgstr ""
 
-msgid "Query details from the Internet Movie Database"
-msgstr "Запрос подробностей в IMDb"
+msgid "Production Countries:"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Query IMDb: %s"
+msgstr "Запрос в IMDb: %s..."
 
 #, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "Повторный запрос в IMDb: %s..."
 
+msgid "Release Date:"
+msgstr ""
+
+msgid "Runtime:"
+msgstr ""
+
+msgid "Save current Details as .html for offline use"
+msgstr ""
+
+msgid "Save current Details as .txt"
+msgstr ""
+
+msgid "Save current Poster and Details as .txt"
+msgstr ""
+
 msgid "Search Trailer"
 msgstr "Поиск трейлера"
+
+#, fuzzy
+msgid "Search for details from the Internet Movie Database"
+msgstr "Запрос подробностей в IMDb"
 
 msgid "Select from EPG"
 msgstr "Выбор из EPG"
 
+#, fuzzy
+msgid "Settings for Internet Movie Database searches"
+msgstr "База данных фильмов в Интернете"
+
 msgid "Setup"
 msgstr "Настройка"
 
-msgid "Show in plugin browser"
+msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
+msgstr ""
+
+msgid "Show episode and year information in cast list"
+msgstr ""
+
+msgid "Show full movie or series name in title menu"
+msgstr ""
+
+msgid "Show in movie list"
+msgstr ""
+
+msgid "Show list of matched movies an series"
+msgstr ""
+
+msgid "Show movie and series basic details"
+msgstr ""
+
+msgid "Show movie and series extra details"
+msgstr ""
+
+#, fuzzy
+msgid "Show search in plugin browser"
 msgstr "Показать в меню плагинов"
+
+#, fuzzy
+msgid "Show setup in plugin browser"
+msgstr "Показать в меню плагинов"
+
+msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgstr ""
 
 msgid "The Internet Movie Database"
 msgstr "База данных фильмов в Интернете"
 
+msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
+msgstr ""
+
 msgid "Title Menu"
 msgstr "Основное меню"
 
+msgid "Unknown category"
+msgstr ""
+
 msgid "User Rating"
 msgstr "Рейтинг пользователей"
+
+msgid "Words / phrases to ignore "
+msgstr ""
 
 msgid "no user rating yet"
 msgstr "рейтинг отсутствует"

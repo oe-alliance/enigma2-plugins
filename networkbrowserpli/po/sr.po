@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 plugin - Networkbrowser serbian\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-28 16:39+0100\n"
+"POT-Creation-Date: 2012-01-28 16:44+0100\n"
 "PO-Revision-Date: 2009-09-10 20:32+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -261,15 +262,3 @@ msgstr "Vaš mrežni maunt je ažuriran."
 
 msgid "use as HDD replacement"
 msgstr ""
-
-#~ msgid "Delete selected mount"
-#~ msgstr "Obriši izabrani maunt"
-
-#~ msgid "Rescan network"
-#~ msgstr "Ponovo skeniraj mrežu"
-
-#~ msgid "Retrieving network information. Please wait..."
-#~ msgstr "Obnavljanje informacija o mreži. Molim sačekajte..."
-
-#~ msgid "Use domain/username for windows domains as username!"
-#~ msgstr "Koristi domen/korisn.ime za windows domene kao korisn.ime!"

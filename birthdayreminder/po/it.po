@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - birthday reminder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2011-09-14 19:42+CEST\n"
 "PO-Revision-Date: 2011-12-13 23:25+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -11,16 +11,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: /media/TREKSTOR/enigma2/BirthdayReminder/"
-"BirthdayReminder\n"
+"X-Poedit-Basepath: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: Italy\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPath-0: /media/TREKSTOR/enigma2/BirthdayReminder/"
-"BirthdayReminder\n"
+"X-Poedit-SearchPath-0: /media/TREKSTOR/enigma2/BirthdayReminder/BirthdayReminder\n"
 
-#, python-format
 msgid "%s will turn %s in %s!"
 msgstr "%s compirà %s anni fra %s."
 
@@ -57,7 +54,6 @@ msgstr "Birthday Reminder"
 msgid "Birthday Reminder Settings"
 msgstr "Configurazione Birthday Reminder"
 
-#, python-format
 msgid "Birthday Reminder received %s birthdays from %s."
 msgstr "Birthday Reminder: ricevuti %s compleanni da %s."
 
@@ -70,15 +66,12 @@ msgstr "Compleanni"
 msgid "CSV import successful!"
 msgstr "Importazione CVS corretta."
 
-#, python-format
 msgid "Can't find CSV file %s!"
 msgstr "Impossibile trovare file CVS %s."
 
-#, python-format
 msgid "Can't import CSV data from file %s."
 msgstr "Impossible importare dati dal file %s."
 
-#, python-format
 msgid "Can't write CSV file %s."
 msgstr "Impossibile scrivere file CVS %s."
 
@@ -100,7 +93,6 @@ msgstr "Disabilitato"
 msgid "Distribute birthdays to other Dreamboxes"
 msgstr "Distribuire compleanni ad altri Dreambox"
 
-#, python-format
 msgid "Do you really want to delete the entry for %s?"
 msgstr "%s: RIMUOVERE la voce?"
 
@@ -116,7 +108,6 @@ msgstr "Mod. compleanni"
 msgid "Edit the selected entry"
 msgstr "Mod. voce selezionata"
 
-#, python-format
 msgid ""
 "Error reading file %s.\n"
 "\n"
@@ -126,7 +117,6 @@ msgstr ""
 "\n"
 "Errore: %s, %s"
 
-#, python-format
 msgid ""
 "Error writing file %s.\n"
 "\n"
@@ -208,7 +198,6 @@ msgstr "Crescente"
 msgid "Sorting previous"
 msgstr "Decrescente"
 
-#, python-format
 msgid ""
 "Today is %s's birthday!\n"
 "\n"
@@ -221,7 +210,6 @@ msgstr ""
 msgid "What do you want to do?"
 msgstr "Cosa si desidera fare?"
 
-#, python-format
 msgid "Wrote CSV file %s."
 msgstr "Scritto file CVS %s."
 

@@ -15,8 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.8\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: EPGSearch.py:326
@@ -46,19 +45,12 @@ msgid "Add timer"
 msgstr "Įtraukti laikmatį"
 
 #: EPGSearchSetup.py:46
-msgid ""
-"Adds \"Search event in EPG\" item into the channel selection context menu "
-"(needs restart GUI)"
-msgstr ""
-"Pridės \"ieškoti įvykio EPG\" į kanalo pasirinkimo kontekstinį meniu "
-"(grafinę aplinką reikės paleisti iš naujo)"
+msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
+msgstr "Pridės \"ieškoti įvykio EPG\" į kanalo pasirinkimo kontekstinį meniu (grafinę aplinką reikės paleisti iš naujo)"
 
 #: EPGSearchSetup.py:45
-msgid ""
-"Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
-msgstr ""
-"Pridės \"ieškoti įvykio EPG\" į įvykio meniu (grafinę aplinką reikės "
-"paleisti iš naujo)"
+msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
+msgstr "Pridės \"ieškoti įvykio EPG\" į įvykio meniu (grafinę aplinką reikės paleisti iš naujo)"
 
 #: EPGSearch.py:1057 EPGSearchSetup.py:69
 msgid "Cancel"
@@ -126,34 +118,20 @@ msgid "History"
 msgstr "Istorija"
 
 #: EPGSearchSetup.py:39
-msgid ""
-"How many entries to keep in the search history at most. 0 disables history "
-"entirely!"
-msgstr ""
-"Kokį didžiausią skaičių įrašų saugoti paieškos istorijoje. '0' - uždrausti "
-"istoriją!"
+msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
+msgstr "Kokį didžiausią skaičių įrašų saugoti paieškos istorijoje. '0' - uždrausti istoriją!"
 
 #: EPGSearchSetup.py:49
-msgid ""
-"If 'Search only bouquets' is enabled, show service name as in bouquets for "
-"renamed services."
-msgstr ""
-"Įjungus 'Ieškoti tik bukietuose', pervadinti kanalai rodomi pavadinimais, "
-"kaip bukietuose."
+msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
+msgstr "Įjungus 'Ieškoti tik bukietuose', pervadinti kanalai rodomi pavadinimais, kaip bukietuose."
 
 #: EPGSearchSetup.py:48
-msgid ""
-"If this setting is enabled, searching EPG in only services in user bouquets."
-msgstr ""
-"Jei šis parametras įjungtas, EPG ieškoma tik kanalams, esantiems bukietuose."
+msgid "If this setting is enabled, searching EPG in only services in user bouquets."
+msgstr "Jei šis parametras įjungtas, EPG ieškoma tik kanalams, esantiems bukietuose."
 
 #: EPGSearchSetup.py:40
-msgid ""
-"If this setting is enabled, the plugin adds a \"Search\" Button to the "
-"regular EPG."
-msgstr ""
-"Jei šis parametras įjungtas, įskiepis prideda 'Paieška' mygtuką į įprastą "
-"EPG."
+msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
+msgstr "Jei šis parametras įjungtas, įskiepis prideda 'Paieška' mygtuką į įprastą EPG."
 
 #: EPGSearchSetup.py:42
 msgid "If this setting is enabled, the plugin adds picons."
@@ -256,19 +234,12 @@ msgid "Select text to search for"
 msgstr "Pasirinkite ieškomą tekstą"
 
 #: EPGSearchSetup.py:50
-msgid ""
-"Select type for filter search. Press button P +/- for show/hide filter in "
-"description after search."
-msgstr ""
-"Pasirinkite paieškos tipo filtrą. Spauskite 'P +/-', kad atverti/užverti "
-"filtrą aprašyme po paieškos."
+msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
+msgstr "Pasirinkite paieškos tipo filtrą. Spauskite 'P +/-', kad atverti/užverti filtrą aprašyme po paieškos."
 
 #: EPGSearchSetup.py:44
-msgid ""
-"Select type for search, \"partial match\" for the most extensive search."
-msgstr ""
-"Pasirinkite paieškos tipą 'dalinis atitikimas', kad labiausiai išplėsti "
-"paiešką."
+msgid "Select type for search, \"partial match\" for the most extensive search."
+msgstr "Pasirinkite paieškos tipą 'dalinis atitikimas', kad labiausiai išplėsti paiešką."
 
 #: EPGSearchSetup.py:41
 msgid "Select type: 'Search and Select channel' or 'Search'."

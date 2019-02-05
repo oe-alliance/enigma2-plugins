@@ -65,14 +65,11 @@ msgstr "vypnuto"
 msgid "yes, Except for Recording or HDD"
 msgstr "ano, kromě záznamu a HDD"
 
-#: FC2.txt:174
-#: FC2.txt:187
-#: FC2.txt:190
+#: FC2.txt:174 FC2.txt:187 FC2.txt:190
 msgid "no"
 msgstr "ne"
 
-#: FC2.txt:174
-#: FC2.txt:190
+#: FC2.txt:174 FC2.txt:190
 msgid "yes"
 msgstr "ano"
 
@@ -140,9 +137,7 @@ msgstr "Do min. otáček %d rpm při VLT=%d (%s)"
 msgid "Max Fan %d rpm at VLT=255 (%s)"
 msgstr "Max. otáčky %d rpm při VLT=255 (%s)"
 
-#: FC2.txt:435
-#: FC2.txt:437
-#: FC2.txt:441
+#: FC2.txt:435 FC2.txt:437 FC2.txt:441
 msgid "%s   %02d C"
 msgstr "%s   %02d C"
 
@@ -150,8 +145,7 @@ msgstr "%s   %02d C"
 msgid "press Info for HDD-Temp"
 msgstr "stiskněte Info pro T° HDD"
 
-#: FC2.txt:444
-#: FC2.txt:686
+#: FC2.txt:444 FC2.txt:686
 msgid "Current rpm  %4d"
 msgstr "Aktuální otáčky  %4d"
 
@@ -327,45 +321,35 @@ msgstr "Napětí"
 msgid "Sensors"
 msgstr "Senzory"
 
-#: FC2.txt:1278
-#: FC2.txt:1314
+#: FC2.txt:1278 FC2.txt:1314
 msgid "active"
 msgstr "aktivní"
 
-#: FC2.txt:1281
-#: FC2.txt:1317
+#: FC2.txt:1281 FC2.txt:1317
 msgid "turn off"
 msgstr "vypnuto"
 
-#: FC2.txt:1284
-#: FC2.txt:1320
+#: FC2.txt:1284 FC2.txt:1320
 msgid "not active"
 msgstr "neaktivní"
 
-#: FC2.txt:1287
-#: FC2.txt:1323
+#: FC2.txt:1287 FC2.txt:1323
 msgid "turn on"
 msgstr "zapnuto"
 
-#: FC2.txt:1292
-#: FC2.txt:1294
-#: FC2.txt:1328
-#: FC2.txt:1330
+#: FC2.txt:1292 FC2.txt:1294 FC2.txt:1328 FC2.txt:1330
 msgid "Filesize : %d %sByte"
 msgstr "Velikost : %d %sbitů"
 
-#: FC2.txt:1296
-#: FC2.txt:1332
+#: FC2.txt:1296 FC2.txt:1332
 msgid "Disk free : %d MByte"
 msgstr "HDD (Volné( : %d Mb"
 
-#: FC2.txt:1299
-#: FC2.txt:1335
+#: FC2.txt:1299 FC2.txt:1335
 msgid "Download"
 msgstr "Stáhnout"
 
-#: FC2.txt:1303
-#: FC2.txt:1339
+#: FC2.txt:1303 FC2.txt:1339
 msgid "Delete"
 msgstr "Smazat"
 
@@ -373,8 +357,7 @@ msgstr "Smazat"
 msgid "Delete older 48h"
 msgstr "Smazat starší, než 48h"
 
-#: FC2.txt:1310
-#: FC2.txt:1347
+#: FC2.txt:1310 FC2.txt:1347
 msgid "File %s does not exists"
 msgstr "Soubor %s neexistuje"
 
@@ -398,34 +381,26 @@ msgstr "Fan Control2- Nastavení"
 msgid "Fan Control"
 msgstr "Ovládání funidla"
 
-#:
 msgid "OK"
 msgstr "OK"
 
-#:
 msgid "Enable read HDD-Temperature"
 msgstr "Povolit načítání teploty HDD"
 
-#:
 msgid "Show Fan Error"
 msgstr "Zobrazit chyby funidla"
 
-#:
 msgid "Show Fan rpm"
 msgstr "Zobrazit OT funidla"
 
-#:
 msgid "Switch RPM/2 <> RPM?"
 msgstr "Přepnout RPM/2 <> RPM?"
 
-#:
 msgid "Regulation off"
 msgstr "Regulace VYP"
 
-#:
 msgid "off"
 msgstr "vyp"
 
-#:
 msgid "Fan rpm current: %s target: %s (%sC)"
 msgstr "Aktuální OT funidla: %s cílové: %s (%sC)"

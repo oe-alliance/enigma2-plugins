@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BirthdayReminder 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2011-09-14 19:42+CEST\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Shaderman <shaderman@dreambox-tools.info>\n"
 "Language-Team:  <shaderman@dreambox-tools.info>\n"
@@ -14,7 +14,6 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#, python-format
 msgid "%s will turn %s in %s!"
 msgstr "%s wird %s in %s!"
 
@@ -51,7 +50,6 @@ msgstr "Birthday Reminder"
 msgid "Birthday Reminder Settings"
 msgstr "Birthday Reminder Einstellungen"
 
-#, python-format
 msgid "Birthday Reminder received %s birthdays from %s."
 msgstr "Birthday Reminder hat %s Geburtstage von %s empfangen."
 
@@ -64,15 +62,12 @@ msgstr "Geburtstage"
 msgid "CSV import successful!"
 msgstr "Die Daten der CSV- Datei wurden erfolgreich importiert."
 
-#, python-format
 msgid "Can't find CSV file %s!"
 msgstr "Die CSV- Datei %s konnte nicht gefunden werden!"
 
-#, python-format
 msgid "Can't import CSV data from file %s."
 msgstr "Die Daten der CSV- Datei %s konnten nicht importiert werden."
 
-#, python-format
 msgid "Can't write CSV file %s."
 msgstr "Die CSV- Datei %s konnte nicht gespeichert werden."
 
@@ -94,7 +89,6 @@ msgstr "Deaktiviert"
 msgid "Distribute birthdays to other Dreamboxes"
 msgstr "Geburtstagsliste an andere Boxen verteilen"
 
-#, python-format
 msgid "Do you really want to delete the entry for %s?"
 msgstr "Wollen Sie den Eintrag für %s wirklich löschen?"
 
@@ -110,7 +104,6 @@ msgstr "Geburtstage bearbeiten"
 msgid "Edit the selected entry"
 msgstr "Gewählten Eintrag bearbeiten"
 
-#, python-format
 msgid ""
 "Error reading file %s.\n"
 "\n"
@@ -120,7 +113,6 @@ msgstr ""
 "\n"
 "Fehler: %s, %s"
 
-#, python-format
 msgid ""
 "Error writing file %s.\n"
 "\n"
@@ -202,7 +194,6 @@ msgstr "Sortierung vor"
 msgid "Sorting previous"
 msgstr "Sortierung zurück"
 
-#, python-format
 msgid ""
 "Today is %s's birthday!\n"
 "\n"
@@ -215,7 +206,6 @@ msgstr ""
 msgid "What do you want to do?"
 msgstr "Was wollen Sie tun?"
 
-#, python-format
 msgid "Wrote CSV file %s."
 msgstr "Die CSV- Datei %s wurde gespeichert."
 

@@ -63,4 +63,3 @@ msgstr "Where to save?"
 #: ../src/plugin.py:58
 msgid "Which file do you want to download?"
 msgstr "Which file do you want to download?"
-

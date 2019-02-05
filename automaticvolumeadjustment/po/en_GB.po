@@ -26,8 +26,7 @@ msgstr "Add"
 msgid "Adjustment value"
 msgstr "Adjustment value"
 
-#: ../src/plugin.py:49
-#: ../src/plugin.py:52
+#: ../src/plugin.py:49 ../src/plugin.py:52
 msgid "Automatic Volume Adjustment"
 msgstr "Automatic Volume Adjustment"
 
@@ -114,4 +113,3 @@ msgstr "Show volume bar when volume-value was changed"
 #: ../src/AutomaticVolumeAdjustmentSetup.py:294
 msgid "You must select a valid service!"
 msgstr "You must select a valid service!"
-

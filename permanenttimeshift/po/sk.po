@@ -113,4 +113,3 @@ msgstr "Vyčistiť buffer časového posunu pri zapnutí?"
 
 msgid "Creating Hardlink to Timeshift file failed!"
 msgstr "Zlyhalo vytvorenie linky na súbor časového posunu!"
-

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MovieCut\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 17:49+0300\n"
+"POT-Creation-Date: 2012-02-15 16:04+0100\n"
 "PO-Revision-Date: 2017-07-10 17:49+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -15,159 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../src/plugin.py:23
-msgid "Execute cuts..."
-msgstr "Karpyti..."
-
-#: ../src/plugin.py:37
-msgid "Don't cut"
-msgstr "Nekirpti"
-
-#: ../src/plugin.py:38
-msgid "Replace the original movie with the cut movie"
-msgstr "Pakeisti originalų filmą iškirptuoju filmu"
-
-#: ../src/plugin.py:39
-msgid "Place the cut movie in a new file ending with \" cut\""
-msgstr "Išsaugoti iškirptą filmą naujame failą, su galūne \"cut\""
-
-#: ../src/plugin.py:40
 msgid "Advanced cut specification..."
 msgstr "Išplėstinis iškirpimo nustatymas..."
 
-#: ../src/plugin.py:42
-#, python-format
-msgid "How would you like to cut \"%s\"?"
-msgstr "Kaip norėtumėte kirpti \"%s\"?"
-
-#: ../src/plugin.py:86
-msgid "OK"
-msgstr "Gerai"
-
-#: ../src/plugin.py:87
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: ../src/plugin.py:95
-msgid "No"
-msgstr "Ne"
-
-#: ../src/plugin.py:95
-msgid "Yes"
-msgstr "Taip"
-
-#: ../src/plugin.py:103
-msgid "Cutlist"
-msgstr "Kirpimų sąrašas"
-
-#: ../src/plugin.py:103
-msgid "Manual specification"
-msgstr "Rankinis nustatymas"
-
-#: ../src/plugin.py:117
-msgid "Replace original:"
-msgstr "Pakeiskite originalą:"
-
-#: ../src/plugin.py:118
-msgid "New filename:"
-msgstr "Naujo failo pavadinimas:"
-
-#: ../src/plugin.py:119
-msgid "New title:"
-msgstr "Nauja antraštė:"
-
-#: ../src/plugin.py:120
-msgid "New description:"
-msgstr "Naujas aprašymas:"
-
-#: ../src/plugin.py:121
-msgid "New location:"
-msgstr "Nauja vieta:"
-
-#: ../src/plugin.py:122
-msgid "Cut source:"
-msgstr "Iškirpimo šaltinis:"
-
-#: ../src/plugin.py:123
-msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
-msgstr "Kirpimai (PRADŽIA ... PABAIGA ... val.:min.:sek. seka)"
-
-#: ../src/plugin.py:130
-msgid "Cut Parameter Input"
-msgstr "Kirpimo pradžios parametras"
-
-#: ../src/plugin.py:178
-msgid "Choose target folder"
-msgstr "Pasirinkite paskirties katalogą"
-
-#: ../src/plugin.py:245
-#, python-format
-msgid "The movie \"%s\" is successfully cut"
-msgstr "Filmas \"%s\" sėkmingai iškirptas"
-
-#: ../src/plugin.py:246 ../src/plugin.py:247 ../src/plugin.py:248
-#: ../src/plugin.py:249 ../src/plugin.py:250 ../src/plugin.py:251
-#: ../src/plugin.py:252 ../src/plugin.py:253 ../src/plugin.py:254
-#: ../src/plugin.py:255
-#, python-format
-msgid "Cutting failed for movie \"%s\""
-msgstr "Filmo \"%s\" iškirpti nepavyko"
-
-#: ../src/plugin.py:246
-msgid "Bad arguments"
-msgstr "Blogi pasirinkimai"
-
-#: ../src/plugin.py:247
-msgid "Couldn't open input .ts file"
-msgstr "Nepavyko atverti įvesties .ts failo"
-
-#: ../src/plugin.py:248
-msgid "Couldn't open input .cuts file"
-msgstr "Nepavyko atverti įvesties .cuts failo"
-
-#: ../src/plugin.py:249
-msgid "Couldn't open input .ap file"
-msgstr "Nepavyko atverti įvesties .ap failo"
-
-#: ../src/plugin.py:250
-msgid "Couldn't open output .ts file"
-msgstr "Nepavyko atverti išvesties .ts failo"
-
-#: ../src/plugin.py:251
-msgid "Couldn't open output .cuts file"
-msgstr "Nepavyko atverti išvesties .cuts failo"
-
-#: ../src/plugin.py:252
-msgid "Couldn't open output .ap file"
-msgstr "Nepavyko atverti išvesties .ap failo"
-
-#: ../src/plugin.py:253
-msgid "Empty .ap file"
-msgstr "Tuščias .ap failas"
-
-#: ../src/plugin.py:254
-msgid "No cuts specified"
-msgstr "Kirpimų nenurodyta"
-
-#: ../src/plugin.py:255
-msgid "Read/write error (disk full?)"
-msgstr "Skaitymo/Rašymo klaida (HDD pilnas?)"
-
-#: ../src/plugin.py:256
-#, python-format
-msgid "Cutting was aborted for movie \"%s\""
-msgstr "Filmo \"%s\" karpymas buvo nutrauktas"
-
-#: ../src/plugin.py:275
-#, python-format
-msgid "The movie \"%s\" is cut in the background."
-msgstr "Filmas \"%s\" karpomas fone."
-
-#: ../src/plugin.py:277
 #, python-format
 msgid ""
 "Another movie is currently cut.\n"
@@ -175,3 +28,110 @@ msgid ""
 msgstr ""
 "Šiuo metu karpomas kitas filmas.\n"
 "Filmas \"%s\" bus sukarpytas fone po to."
+
+msgid "Bad arguments"
+msgstr "Blogi pasirinkimai"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Choose target folder"
+msgstr "Pasirinkite paskirties katalogą"
+
+msgid "Couldn't open input .ap file"
+msgstr "Nepavyko atverti įvesties .ap failo"
+
+msgid "Couldn't open input .cuts file"
+msgstr "Nepavyko atverti įvesties .cuts failo"
+
+msgid "Couldn't open input .ts file"
+msgstr "Nepavyko atverti įvesties .ts failo"
+
+msgid "Couldn't open output .ap file"
+msgstr "Nepavyko atverti išvesties .ap failo"
+
+msgid "Couldn't open output .cuts file"
+msgstr "Nepavyko atverti išvesties .cuts failo"
+
+msgid "Couldn't open output .ts file"
+msgstr "Nepavyko atverti išvesties .ts failo"
+
+msgid "Cut Parameter Input"
+msgstr "Kirpimo pradžios parametras"
+
+msgid "Cut source:"
+msgstr "Iškirpimo šaltinis:"
+
+msgid "Cutlist"
+msgstr "Kirpimų sąrašas"
+
+msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
+msgstr "Kirpimai (PRADŽIA ... PABAIGA ... val.:min.:sek. seka)"
+
+#, python-format
+msgid "Cutting failed for movie \"%s\""
+msgstr "Filmo \"%s\" iškirpti nepavyko"
+
+#, python-format
+msgid "Cutting was aborted for movie \"%s\""
+msgstr "Filmo \"%s\" karpymas buvo nutrauktas"
+
+msgid "Don't cut"
+msgstr "Nekirpti"
+
+msgid "Empty .ap file"
+msgstr "Tuščias .ap failas"
+
+msgid "Execute cuts..."
+msgstr "Karpyti..."
+
+#, python-format
+msgid "How would you like to cut \"%s\"?"
+msgstr "Kaip norėtumėte kirpti \"%s\"?"
+
+msgid "Manual specification"
+msgstr "Rankinis nustatymas"
+
+msgid "New description:"
+msgstr "Naujas aprašymas:"
+
+msgid "New filename:"
+msgstr "Naujo failo pavadinimas:"
+
+msgid "New location:"
+msgstr "Nauja vieta:"
+
+msgid "New title:"
+msgstr "Nauja antraštė:"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "No cuts specified"
+msgstr "Kirpimų nenurodyta"
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "Place the cut movie in a new file ending with \" cut\""
+msgstr "Išsaugoti iškirptą filmą naujame failą, su galūne \"cut\""
+
+msgid "Read/write error (disk full?)"
+msgstr "Skaitymo/Rašymo klaida (HDD pilnas?)"
+
+msgid "Replace original:"
+msgstr "Pakeiskite originalą:"
+
+msgid "Replace the original movie with the cut movie"
+msgstr "Pakeisti originalų filmą iškirptuoju filmu"
+
+#, python-format
+msgid "The movie \"%s\" is cut in the background."
+msgstr "Filmas \"%s\" karpomas fone."
+
+#, python-format
+msgid "The movie \"%s\" is successfully cut"
+msgstr "Filmas \"%s\" sėkmingai iškirptas"
+
+msgid "Yes"
+msgstr "Taip"

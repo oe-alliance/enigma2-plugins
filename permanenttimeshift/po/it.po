@@ -323,4 +323,3 @@ msgstr "Configurazione timeshift"
 #: .../enigma2-plugins/permanenttimeshift/src/plugin.py:1764
 msgid "Permanent Timeshift Settings"
 msgstr "Configurazione Permanent Timeshift"
-

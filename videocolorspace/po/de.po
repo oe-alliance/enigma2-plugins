@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VideoColorSpace\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 14:19+0100\n"
+"POT-Creation-Date: 2012-09-27 14:13+0100\n"
 "PO-Revision-Date: 2012-09-27 14:19+0100\n"
 "Last-Translator: cmikula <christian.mikula@live.at>\n"
 "Language-Team: - <cmikula>\n"
@@ -17,26 +17,20 @@ msgstr ""
 "X-Generator: Poedit 1.5.3\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:37
 msgid "A/V-Color space settings"
 msgstr "A/V-Farbraum Einstellungen"
 
-#: ../src/plugin.py:42 ../src/plugin.py:43 ../src/VideoColorSpace.py:86
-msgid "Color space setup"
-msgstr "Farbraum Einstellungen"
-
-#: ../src/plugin.py:42 ../src/plugin.py:43
-msgid "Setup color space for video"
-msgstr "Farbraum für den Videoausgang einstellen"
-
-#: ../src/VideoColorSpace.py:71
-msgid "Mode:"
-msgstr "Mode:"
-
-#: ../src/VideoColorSpace.py:80
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../src/VideoColorSpace.py:81
+msgid "Color space setup"
+msgstr "Farbraum Einstellungen"
+
+msgid "Mode:"
+msgstr "Mode:"
+
 msgid "OK"
 msgstr "OK"
+
+msgid "Setup color space for video"
+msgstr "Farbraum für den Videoausgang einstellen"

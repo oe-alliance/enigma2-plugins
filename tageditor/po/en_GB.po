@@ -88,4 +88,3 @@ msgstr "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo 
 #: ../src/plugin.py:26
 msgid "edit tags"
 msgstr "edit tags"
-

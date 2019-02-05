@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-03 21:51+0100\n"
+"POT-Creation-Date: 2012-06-15 00:37+0100\n"
 "PO-Revision-Date: 2013-05-05 13:48+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: RU locale by Sowa\n"
@@ -54,4 +54,3 @@ msgstr "после ожидания"
 
 msgid "disabled"
 msgstr "отключен"
-

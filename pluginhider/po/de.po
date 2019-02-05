@@ -86,9 +86,3 @@ msgstr "Kann nicht auf InfoBar zugreifen."
 #: ../src/PluginHiderSetup.py:122
 msgid "PluginHider Setup"
 msgstr "PluginHider Setup"
-
-#~ msgid "Next"
-#~ msgstr "Vor"
-
-#~ msgid "Previous"
-#~ msgstr "Zurück"

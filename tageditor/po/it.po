@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - tageditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2011-10-03 22:39+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -67,12 +67,8 @@ msgid "Rename this tag..."
 msgstr "Rinominare etichetta..."
 
 #, python-format
-msgid ""
-"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
-"this!)"
-msgstr ""
-"Sostituire ovunque l'etichetta \"%s\" con:   (Nota: \"Annull.\" non potrà "
-"annullare!)"
+msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
+msgstr "Sostituire ovunque l'etichetta \"%s\" con:   (Nota: \"Annull.\" non potrà annullare!)"
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
 msgid "edit tags"

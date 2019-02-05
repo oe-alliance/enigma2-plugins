@@ -94,8 +94,7 @@ msgstr "HD Progressive"
 msgid "OK"
 msgstr "OK"
 
-#: ../src/plugin.py:317
-#: ../src/plugin.py:318
+#: ../src/plugin.py:317 ../src/plugin.py:318
 msgid "Refresh Rate"
 msgstr "Värskendussagedus"
 
@@ -127,13 +126,11 @@ msgstr "SD 30/60HZ Progressive"
 msgid "Show info screen"
 msgstr "Näita infoakent"
 
-#: ../src/plugin.py:39
-#: ../src/plugin.py:41
+#: ../src/plugin.py:39 ../src/plugin.py:41
 msgid "auto"
 msgstr ""
 
-#: ../src/plugin.py:39
-#: ../src/plugin.py:41
+#: ../src/plugin.py:39 ../src/plugin.py:41
 msgid "bob"
 msgstr ""
 
@@ -141,13 +138,11 @@ msgstr ""
 msgid "default"
 msgstr "vaikimisi"
 
-#: ../src/plugin.py:39
-#: ../src/plugin.py:41
+#: ../src/plugin.py:39 ../src/plugin.py:41
 msgid "off"
 msgstr "väljas"
 
-#: ../src/plugin.py:39
-#: ../src/plugin.py:41
+#: ../src/plugin.py:39 ../src/plugin.py:41
 msgid "on"
 msgstr "sees"
 
@@ -155,10 +150,7 @@ msgstr "sees"
 msgid "second"
 msgstr "sekund"
 
-#: ../src/plugin.py:43
-#: ../src/plugin.py:44
-#: ../src/plugin.py:45
+#: ../src/plugin.py:43 ../src/plugin.py:44 ../src/plugin.py:45
 #: ../src/plugin.py:46
 msgid "seconds"
 msgstr "sekundit"
-

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - networkbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-22 13:23+0100\n"
+"POT-Creation-Date: 2015-06-25 18:59+0200\n"
 "PO-Revision-Date: 2018-09-27 04:35+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -283,6 +283,9 @@ msgstr "Server share"
 msgid "Setup Mount Again"
 msgstr "\"Opnieuw mounten\" instellen"
 
+msgid "Use as HDD replacement"
+msgstr "Gebruik als harde schijf vervanging"
+
 msgid "User management"
 msgstr "Gebruikersbeheer"
 
@@ -305,14 +308,6 @@ msgstr ""
 "U heeft de naam van de share veranderd!\n"
 "De bestaande naam aanpassen en doorgaan?\n"
 
-#, python-format
-msgid ""
-"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
-"Please configure the interface and try again."
-msgstr ""
-"Uw netwerkinterface %s is niet correct geconfigureerd, waardoor geen netwerkscan kan worden uitgevoerd.\n"
-"Configureer de interface en probeer het opnieuw."
-
 msgid "Your network mount has been activated."
 msgstr "Uw netwerkverbinding is geactiveerd."
 
@@ -321,22 +316,3 @@ msgstr "Uw netwerkverbinding is verwijderd."
 
 msgid "Your network mount has been updated."
 msgstr "Uw netwerkverbinding is bijgewerkt."
-
-msgid "Use as HDD replacement"
-msgstr "Gebruik als harde schijf vervanging"
-
-#~ msgid ""
-#~ "A mount entry with this name already exists!\n"
-#~ "and is not this share folder, please use a different name.\n"
-#~ msgstr ""
-#~ "Een andere mount met deze naam bestaat al!\n"
-#~ "Gebruik een andere naam.\n"
-
-#~ msgid "Enigma2 (mount using enigma2"
-#~ msgstr "Enigma2 (mount gebruikt enigma2"
-
-#~ msgid "FSTAB (mount using linux)"
-#~ msgstr "FSTAB (mount gebruikt linux)"
-
-#~ msgid "Mounts management"
-#~ msgstr "Verbindingsbeheer"

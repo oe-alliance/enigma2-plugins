@@ -159,4 +159,3 @@ msgstr "Configurazione rapporto d'aspetto"
 #: .../enigma2-plugins/aspectratioswitch/src/plugin.py:291
 msgid "Quick switching of aspect ratio setting"
 msgstr "Gestione configurazione rapporto d'aspetto"
-

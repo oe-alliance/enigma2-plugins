@@ -72,14 +72,11 @@ msgstr "غیر فعال گردید"
 msgid "yes, Except for Recording or HDD"
 msgstr "بله به جز برای ضبط کردن یا هارد دیسک "
 
-#: FC2.txt:170
-#: FC2.txt:183
-#: FC2.txt:186
+#: FC2.txt:170 FC2.txt:183 FC2.txt:186
 msgid "no"
 msgstr "نه"
 
-#: FC2.txt:170
-#: FC2.txt:186
+#: FC2.txt:170 FC2.txt:186
 msgid "yes"
 msgstr "بله"
 
@@ -147,9 +144,7 @@ msgstr ""
 msgid "Max Fan %d rpm at VLT=255 (%s)"
 msgstr ""
 
-#: FC2.txt:429
-#: FC2.txt:431
-#: FC2.txt:434
+#: FC2.txt:429 FC2.txt:431 FC2.txt:434
 msgid "%s   %02d C"
 msgstr ""
 
@@ -157,8 +152,7 @@ msgstr ""
 msgid "press Info for HDD-Temp"
 msgstr "دکمه اینفو را به منظور نمایش دمای هارد فشار بده"
 
-#: FC2.txt:437
-#: FC2.txt:678
+#: FC2.txt:437 FC2.txt:678
 msgid "Current rpm  %4d"
 msgstr "%4d   تعداد دور موتور "
 
@@ -324,45 +318,35 @@ msgstr "ولتاژ"
 msgid "Sensors"
 msgstr "سنسورها"
 
-#: FC2.txt:1172
-#: FC2.txt:1209
+#: FC2.txt:1172 FC2.txt:1209
 msgid "active"
 msgstr "فعال"
 
-#: FC2.txt:1175
-#: FC2.txt:1212
+#: FC2.txt:1175 FC2.txt:1212
 msgid "turn off"
 msgstr "خاموش "
 
-#: FC2.txt:1178
-#: FC2.txt:1215
+#: FC2.txt:1178 FC2.txt:1215
 msgid "not active"
 msgstr "فعال نبودن"
 
-#: FC2.txt:1181
-#: FC2.txt:1218
+#: FC2.txt:1181 FC2.txt:1218
 msgid "turn on"
 msgstr "روشن کردن"
 
-#: FC2.txt:1186
-#: FC2.txt:1188
-#: FC2.txt:1223
-#: FC2.txt:1225
+#: FC2.txt:1186 FC2.txt:1188 FC2.txt:1223 FC2.txt:1225
 msgid "Filesize : %d %sByte"
 msgstr ""
 
-#: FC2.txt:1190
-#: FC2.txt:1227
+#: FC2.txt:1190 FC2.txt:1227
 msgid "Disk free : %d MByte"
 msgstr ""
 
-#: FC2.txt:1193
-#: FC2.txt:1230
+#: FC2.txt:1193 FC2.txt:1230
 msgid "Download"
 msgstr "بارگذاری کردن"
 
-#: FC2.txt:1197
-#: FC2.txt:1234
+#: FC2.txt:1197 FC2.txt:1234
 msgid "Delete"
 msgstr "حذف کردن"
 
@@ -370,12 +354,10 @@ msgstr "حذف کردن"
 msgid "Delete older 48h"
 msgstr "حذف کردن 48 ساعت قبلی"
 
-#: FC2.txt:1205
-#: FC2.txt:1242
+#: FC2.txt:1205 FC2.txt:1242
 msgid "File %s does not exists"
 msgstr ""
 
 #: FC2.txt:1244
 msgid "Logging-Path: %s"
 msgstr ""
-

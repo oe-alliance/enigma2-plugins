@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MovieCut Italian language translation - enigma2 plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-19 14:18+0000\n"
+"POT-Creation-Date: 2012-02-15 16:04+0100\n"
 "PO-Revision-Date: 2019-01-05 17:52+0000\n"
 "Last-Translator: William <ghenessior@gmail.com>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -18,6 +18,12 @@ msgstr ""
 
 msgid "Advanced cut specification..."
 msgstr "Specifiche di taglio avanzate..."
+
+#, python-format
+msgid ""
+"Another movie is currently cut.\n"
+"The movie \"%s\" will be cut in the background after it."
+msgstr ""
 
 msgid "Bad arguments"
 msgstr "Argomento errato!"
@@ -58,9 +64,11 @@ msgstr "Elenco tagli"
 msgid "Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"
 msgstr "Tagli (una sequenza di IN OUT IN OUT ... in ore:min:sec)"
 
+#, python-format
 msgid "Cutting failed for movie \"%s\""
 msgstr "Taglio della registrazione \"%s\" fallito!"
 
+#, python-format
 msgid "Cutting was aborted for movie \"%s\""
 msgstr "Taglio della registrazione \"%s\" annullato"
 
@@ -73,6 +81,7 @@ msgstr "File .ap vuoto!"
 msgid "Execute cuts..."
 msgstr "Eseguire tagli"
 
+#, python-format
 msgid "How would you like to cut \"%s\"?"
 msgstr "Come tagliare \"%s\"?"
 
@@ -112,6 +121,11 @@ msgstr "Sostituire l'originale:"
 msgid "Replace the original movie with the cut movie"
 msgstr "Sostituire la registrazione originale con quella tagliata"
 
+#, fuzzy, python-format
+msgid "The movie \"%s\" is cut in the background."
+msgstr "Taglio della registrazione \"%s terminato con successo"
+
+#, python-format
 msgid "The movie \"%s\" is successfully cut"
 msgstr "Taglio della registrazione \"%s terminato con successo"
 

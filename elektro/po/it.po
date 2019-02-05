@@ -77,43 +77,33 @@ msgstr "Nessun nome"
 msgid "Connection Error"
 msgstr "Errore di connessione"
 
-#: ../src/plugin.py:211
-#: ../src/plugin.py:222
-#: ../src/plugin.py:230
+#: ../src/plugin.py:211 ../src/plugin.py:222 ../src/plugin.py:230
 #: ../src/plugin.py:530
 msgid "Ver."
 msgstr "Ver."
 
-#: ../src/plugin.py:263
-#: ../src/plugin.py:268
+#: ../src/plugin.py:263 ../src/plugin.py:268
 msgid "Wakeup"
 msgstr "Accendere"
 
-#: ../src/plugin.py:264
-#: ../src/plugin.py:269
+#: ../src/plugin.py:264 ../src/plugin.py:269
 msgid "Sleep"
 msgstr "Spegnere"
 
-#: ../src/plugin.py:265
-#: ../src/plugin.py:270
+#: ../src/plugin.py:265 ../src/plugin.py:270
 msgid "Next day starts at"
 msgstr "Il prossimo giorno inizia alle"
 
-#: ../src/plugin.py:266
-#: ../src/plugin.py:271
+#: ../src/plugin.py:266 ../src/plugin.py:271
 msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
 msgstr "Se è previsto che il box entri in deep standby ad es. lunedì notte alla 01:00, va considerato che è già martedì. Per ottenere comunque il risulato previsto, forzare qui l'ora di inizio del nuovo giorno."
 
-#: ../src/plugin.py:275
-#: ../src/plugin.py:321
-#: ../src/plugin.py:400
+#: ../src/plugin.py:275 ../src/plugin.py:321 ../src/plugin.py:400
 #: ../src/plugin.py:507
 msgid "Cancel"
 msgstr "Annull."
 
-#: ../src/plugin.py:276
-#: ../src/plugin.py:322
-#: ../src/plugin.py:401
+#: ../src/plugin.py:276 ../src/plugin.py:322 ../src/plugin.py:401
 #: ../src/plugin.py:508
 msgid "Ok"
 msgstr "Ok"
@@ -178,8 +168,7 @@ msgstr "Utilizzare entrambi i profili alternativamente"
 msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
 msgstr "Entrambi i profili saranno usati alernativamente. A ogni spegnimento il profilo sarà cambiato. Ciò consente due cicli al giorno. Non sovrapporre gli orari."
 
-#: ../src/plugin.py:467
-#: ../src/plugin.py:624
+#: ../src/plugin.py:467 ../src/plugin.py:624
 msgid "Standby on boot"
 msgstr "Standby all'avvio"
 
@@ -298,6 +287,3 @@ msgstr "Standby?"
 #: ../src/plugin.py:828
 msgid "Go to sleep now?"
 msgstr "Spegenere?"
-
-#~ msgid "Don't sleep while hdd is active (e.g. ftp)"
-#~ msgstr "Non spegnere se HDD attivo (es.: ftp)"

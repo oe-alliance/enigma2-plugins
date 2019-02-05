@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-13 08:13+0000\n"
+"POT-Creation-Date: 2012-02-15 16:04+0100\n"
 "PO-Revision-Date: 2018-02-15 06:52+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -20,6 +20,14 @@ msgstr ""
 
 msgid "Advanced cut specification..."
 msgstr "Geavanceerde snij specificaties..."
+
+#, python-format
+msgid ""
+"Another movie is currently cut.\n"
+"The movie \"%s\" will be cut in the background after it."
+msgstr ""
+"Een ander bestand wordt momenteel behandeld.\n"
+"De opname \"%s\" zal hierna op de achtergrond behandeld worden."
 
 msgid "Bad arguments"
 msgstr "Verkeerde argumenten"
@@ -74,9 +82,6 @@ msgstr "Niet snijden"
 msgid "Empty .ap file"
 msgstr "Leeg .ap bestand"
 
-msgid "Execute cuts"
-msgstr "Snijpunten uitvoeren"
-
 msgid "Execute cuts..."
 msgstr "Voer snijpunten uit..."
 
@@ -121,18 +126,12 @@ msgid "Replace the original movie with the cut movie"
 msgstr "Vervang het origineel door de gesneden opname"
 
 #, python-format
+msgid "The movie \"%s\" is cut in the background."
+msgstr "De opname \"%s\" is op de achtergrond gesneden."
+
+#, python-format
 msgid "The movie \"%s\" is successfully cut"
 msgstr "De opname \"%s\" is succesvol gesneden"
 
 msgid "Yes"
 msgstr "Ja"
-
-#~ msgid ""
-#~ "Another movie is currently cut.\n"
-#~ "The movie \"%s\" will be cut in the background after it."
-#~ msgstr ""
-#~ "Een ander bestand wordt momenteel behandeld.\n"
-#~ "De opname \"%s\" zal hierna op de achtergrond behandeld worden."
-
-#~ msgid "The movie \"%s\" is cut in the background."
-#~ msgstr "De opname \"%s\" is op de achtergrond gesneden."

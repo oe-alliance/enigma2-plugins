@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - AC3lipsync\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -15,6 +15,9 @@ msgstr ""
 "X-Poedit-Country: Serbia\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ..\\src\n"
+
+msgid " "
+msgstr " "
 
 #, python-format
 msgid "%i ms"
@@ -130,6 +133,9 @@ msgstr ""
 msgid "Reset saved position"
 msgstr ""
 
+msgid "Save"
+msgstr "Sačuvaj"
+
 msgid "Save current delay to key"
 msgstr ""
 
@@ -175,130 +181,3 @@ msgstr "Vreme čekanja u ms pre aktiviranja: "
 
 msgid "sets the Audio Delay (LipSync)"
 msgstr ""
-
-#~ msgid " "
-#~ msgstr " "
-
-#~ msgid "%s delay:"
-#~ msgstr "%s kašnjenje:"
-
-#~ msgid "%s:"
-#~ msgstr "%s:"
-
-#~ msgid "AC3 Delay: "
-#~ msgstr "AC3 Verzögerung: "
-
-#~ msgid "AC3 Lip Sync"
-#~ msgstr "AC3 Lip Sync"
-
-#~ msgid "AC3 Lip Sync Setup"
-#~ msgstr "AC3 Lip Sync podešavanje"
-
-#~ msgid "Backup lamedb"
-#~ msgstr "lamedb sichern"
-
-#~ msgid "Bitstream delay:"
-#~ msgstr "Bitstream Verzögerung:"
-
-#~ msgid "Do you really want to remove the lamedb- backup?"
-#~ msgstr "Wollen Sie die Sicherung der lamedb wirklich löschen?"
-
-#~ msgid "Do you really want to restore the lamedb?"
-#~ msgstr "Wollen Sie die lamedb wirklich wiederherstellen?"
-
-#~ msgid "Key"
-#~ msgstr "Taste"
-
-#~ msgid "Maximum delay"
-#~ msgstr "Maximale Verzögerung"
-
-#~ msgid "Minimum delay"
-#~ msgstr "Minimale Verzögerung"
-
-#~ msgid "PCM Delay: "
-#~ msgstr "PCM Verzögerung: "
-
-#~ msgid "Recalculate..."
-#~ msgstr "Neuberechnen"
-
-#~ msgid "Remove lamedb backup"
-#~ msgstr "lamedb- Sicherung löschen"
-
-#~ msgid "Restore lamedb"
-#~ msgstr "lamedb wiederherstellen"
-
-#~ msgid "Save"
-#~ msgstr "Sačuvaj"
-
-#~ msgid "Save %s delay"
-#~ msgstr "Sačuvaj %s kašnjenje"
-
-#~ msgid "Save Bitstream delay"
-#~ msgstr "Bitstream Delay speichern"
-
-#~ msgid "Save both delays"
-#~ msgstr "Sačuvaj oba kašnjenja"
-
-#~ msgid "Save current %(audio)s delay of %(delay)i ms to key"
-#~ msgstr "Sačuvaj sadašnje %(audio)s kašnjenje (%(delay)i ms na tipku"
-
-#~ msgid "Saved %(audio)s value: %(delay)i ms"
-#~ msgstr "Sačuvana %(audio)s vrednost: %(delay)i ms"
-
-#~ msgid "Saved Bitstream value: "
-#~ msgstr "Gespeicherter Bitstream Wert:"
-
-#~ msgid "Set delay"
-#~ msgstr "Verzögerung setzen"
-
-#~ msgid "Setup for the AC3 Lip Sync Plugin"
-#~ msgstr "Podešavanje AC3 Lip Sync dodatka"
-
-#~ msgid "Switch audio"
-#~ msgstr "Zameni audio"
-
-#~ msgid "Switch to calculated key- delays"
-#~ msgstr "Verwende berechnete Werte für Zahlentasten"
-
-#~ msgid "Switch to user key- delays"
-#~ msgstr "Verwende benutzerdefinierte Werte für Zahlentasten"
-
-#~ msgid ""
-#~ "There is already a backup of the lamedb\n"
-#~ "Do you want to overwrite it?"
-#~ msgstr ""
-#~ "Es gibt bereits eine Sicherung der lamedb\n"
-#~ "Wollen Sie diese überschreiben?"
-
-#~ msgid "There is no backup of the lamedb. Action canceled"
-#~ msgstr "Es gibt keine Sicherung der lamedb. Aktion abgebrochen"
-
-#~ msgid "Use calc. delays"
-#~ msgstr "autom. Verz."
-
-#~ msgid "Use user delays"
-#~ msgstr "Benutzer Verz."
-
-#~ msgid "What you want to do with your lamedb"
-#~ msgstr "Welche Aktion wollen Sie durchführen"
-
-#~ msgid "Which delays do you want to set"
-#~ msgstr "Koja kašnjenja želite podesiti"
-
-#~ msgid "lamedb backup successful"
-#~ msgstr "Sicherung der lamedb erfolgreich"
-
-#~ msgid "lamedb backup successfully removed"
-#~ msgstr "Sicherung der lamedb erfolgreich gelöscht"
-
-#~ msgid "lamedb backup successfully restored"
-#~ msgstr "lamedb wurde erfolgreich wiederhergestellt"
-
-#~ msgid "lamedb..."
-#~ msgstr "lamedb..."
-
-#~ msgid "ms"
-#~ msgstr "ms"
-
-#~ msgid "sets the AC3 audio Delay (LipSync)"
-#~ msgstr "podešava  AC3 audio kašnjenje (LipSync)"

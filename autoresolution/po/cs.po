@@ -118,39 +118,3 @@ msgstr ""
 
 msgid "seconds"
 msgstr ""
-
-#~ msgid "Automatic Timerlist Cleanup Setup"
-#~ msgstr "Automatické nastavení Vyčištění časovače"
-
-#~ msgid "Cleanup timerlist-entries"
-#~ msgstr "Vyčištění položek časovače"
-
-#~ msgid "SD 25/50HZ Progressive mode"
-#~ msgstr "SD 25/50HZ prograsivní režim"
-
-#~ msgid "Timerlist Cleanup Setup"
-#~ msgstr "Nastavení Vyčištění časovače"
-
-#~ msgid "disabled"
-#~ msgstr "vypnuto"
-
-#~ msgid "immediately after recording"
-#~ msgstr "okamžitě po záznamu"
-
-#~ msgid "older than 1 day"
-#~ msgstr "starší jak 1 den"
-
-#~ msgid "older than 1 week"
-#~ msgstr "starší jak 1 týden"
-
-#~ msgid "older than 2 weeks"
-#~ msgstr "starší jak 2 týdny"
-
-#~ msgid "older than 3 days"
-#~ msgstr "starší jak 3 dny"
-
-#~ msgid "older than 4 weeks"
-#~ msgstr "starší jak 4 týdny"
-
-#~ msgid "older than 6 weeks"
-#~ msgstr "starší jak 6 týdnů"

@@ -82,4 +82,3 @@ msgstr "kies vorige tab"
 #: ../src/PluginHiderSetup.py:67
 msgid "toggle selection"
 msgstr "wissel selectie"
-

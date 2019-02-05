@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - Quickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2011-10-12 10:51+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -65,6 +65,9 @@ msgstr "Niets"
 msgid "OK"
 msgstr "OK"
 
+msgid "Overwrite HBBTV-red-button"
+msgstr ""
+
 msgid "Pan&Scan"
 msgstr "Pan&Scan"
 
@@ -106,6 +109,3 @@ msgstr "Sneltoets instellingen"
 
 msgid "switch 4:3 content display"
 msgstr "Ga naar 4:3 layout"
-
-#~ msgid "EPG List"
-#~ msgstr "EPG Lijst"

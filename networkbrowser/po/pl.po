@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 14:59+0100\n"
+"POT-Creation-Date: 2015-06-25 18:59+0200\n"
 "PO-Revision-Date: 2014-04-23 18:25+0100\n"
 "Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
 "Language-Team: none <Mariusz1970@onet.eu>\n"
@@ -10,8 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.6.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -21,6 +20,9 @@ msgid ""
 msgstr ""
 "Wpis montowania o tej nazwie już istnieje!\n"
 "Zaktualizować istniejący wpis i kontynuować?\n"
+
+msgid "AUTOFS (mount as needed)"
+msgstr ""
 
 msgid "Active"
 msgstr "Aktywny"
@@ -120,6 +122,9 @@ msgstr "Wpisz nazwę użytkownika:"
 msgid "Expert"
 msgstr "Ekspert"
 
+msgid "FSTAB (mount at boot)"
+msgstr ""
+
 msgid "Finished restarting your network"
 msgstr "Zakończono restartowanie sieci"
 
@@ -153,6 +158,9 @@ msgstr "Ponów montowanie"
 msgid "Mount informations"
 msgstr "Informacje montowania"
 
+msgid "Mount manager"
+msgstr "Menadżer montowania"
+
 msgid "Mount options"
 msgstr "Opcje montowania"
 
@@ -161,6 +169,11 @@ msgstr "Typ montowania"
 
 msgid "Mount using"
 msgstr "Montowanie za pomocą"
+
+msgid ""
+"Mounted/\n"
+"Unmounted"
+msgstr ""
 
 msgid "Mounting network shares..."
 msgstr "Montowanie udziałów sieciowych ..."
@@ -264,6 +277,9 @@ msgstr "Udział serwera"
 msgid "Setup Mount Again"
 msgstr "Ustawienie Ponownego Montowania"
 
+msgid "Use as HDD replacement"
+msgstr "Użyj jako wymiany HDD"
+
 msgid "User management"
 msgstr "Zarządzaj użytkownikiem"
 
@@ -279,6 +295,14 @@ msgstr "Pokaż, edytuj lub usuń punkty montowania Dreambox`a."
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Pokaż, edytuj lub usuń nazwy użytkowników i hasła twojej sieci."
 
+#, fuzzy
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"Wpis montowania o tej nazwie już istnieje!\n"
+"Zaktualizować istniejący wpis i kontynuować?\n"
+
 msgid "Your network mount has been activated."
 msgstr "Twoje montowanie sieci zostało aktywowane."
 
@@ -287,9 +311,3 @@ msgstr "Twoje montowanie sieci zostało usunięte."
 
 msgid "Your network mount has been updated."
 msgstr "Twoje montowanie sieci zostało zaktualizowane."
-
-msgid "Use as HDD replacement"
-msgstr "Użyj jako wymiany HDD"
-
-msgid "Mount manager"
-msgstr "Menadżer montowania"

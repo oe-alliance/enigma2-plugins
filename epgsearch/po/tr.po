@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 EPGSearch plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-24 16:16+0200\n"
+"POT-Creation-Date: 2017-07-07 12:46+0200\n"
 "PO-Revision-Date: 2012-12-30 12:47+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -14,87 +14,311 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/EPGSearch.py:150
+msgid "%e/%m, %H:%M"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, fuzzy, python-format
+msgid "%ssearch EPG"
+msgstr "EPG'de ara"
+
+#. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, fuzzy, python-format
+msgid "%ssearch EPG from history..."
+msgstr "EPG'de ara..."
+
+#, fuzzy
+msgid "Add AutoTimer"
+msgstr "Zamanlayıcı eke"
+
 msgid "Add Timer"
 msgstr "Zamanlayıcı eke"
 
-#: ../src/EPGSearch.py:349
+msgid "Add a record timer for highlighted event"
+msgstr ""
+
+msgid "Add a zap timer for highlighted event"
+msgstr ""
+
+msgid "Add an AutoTimer for highlighted event"
+msgstr ""
+
+msgid "Add/remove/edit timer for highlighted event"
+msgstr ""
+
+msgid "All bouquets"
+msgstr ""
+
+msgid "All services"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: ../src/EPGSearch.py:387
 msgid "Channel Selection"
 msgstr "Kanal Seçimi"
 
-#: ../src/EPGSearch.py:257
+msgid "Choose the encoding type for searches, helpful for foreign languages."
+msgstr ""
+
+msgid "Close dialog"
+msgstr ""
+
+msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr ""
+
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "AutoTimer zamanlayıcı listesi okunamıyor : %s"
 
-#: ../src/EPGSearch.py:69
-#: ../src/EPGSearch.py:179
+msgid "Current bouquet"
+msgstr ""
+
+msgid "Current service"
+msgstr ""
+
+msgid "DVB-C"
+msgstr ""
+
+msgid "DVB-C Cable services"
+msgstr ""
+
+msgid "DVB-T"
+msgstr ""
+
+msgid "DVB-T Terrestrial services"
+msgstr ""
+
+msgid "Default scope when asked"
+msgstr ""
+
 msgid "EPG Search"
 msgstr "EPG Arama"
 
-#: ../src/EPGSearch.py:203
+#, fuzzy
+msgid "EPG Search setup"
+msgstr "EPG Arama"
+
+#, fuzzy
+msgid "EPGSearch"
+msgstr "EPG Arama"
+
+#, fuzzy
+msgid "EPGSearch Setup"
+msgstr "EPG Arama"
+
+msgid "Enable this to allow access to EPG Search from within the plugin browser."
+msgstr ""
+
+#, fuzzy
+msgid "Enter new search"
+msgstr "Arama metnini girin"
+
 msgid "Enter text to search for"
 msgstr "Arama metnini girin"
 
-#: ../src/EPGSearch.py:216
-msgid "Export selected as AutoTimer"
-msgstr "Seçililenleri AutoTimer olarak dışarı ver"
+msgid "Exclude results from"
+msgstr ""
 
-#: ../src/EPGSearch.py:135
-msgid "History"
-msgstr "Geçmiş"
+#, fuzzy
+msgid "Exit EPG Search"
+msgstr "EPG Arama"
 
-#: ../src/EPGSearch.py:214
+msgid "Filter results by source"
+msgstr ""
+
+msgid "IMDB search for highlighted event"
+msgstr ""
+
+#, fuzzy
+msgid "IMDb Search"
+msgstr "Ara"
+
 msgid "Import from AutoTimer"
 msgstr "Otomatik zamanlayıcıdan içeri al"
 
-#: ../src/EPGSearch.py:209
 msgid "Import from EPG"
 msgstr "EPG'den içeri al"
 
-#: ../src/EPGSearch.py:208
 msgid "Import from Timer"
 msgstr "Zamanlayıcıdan içeri al"
 
-#: ../src/EPGSearch.py:134
+msgid "Include or exclude results depending on their source (e.g. by satellite)"
+msgstr ""
+
+msgid "Include results from"
+msgstr ""
+
+msgid "Include/exclude search results from this type of source"
+msgstr ""
+
+msgid "Include/exclude sources"
+msgstr ""
+
+msgid "Is the search case-sensitive or case-insensitive?"
+msgstr ""
+
+#, fuzzy
+msgid "Length of history"
+msgstr "Geçmiş kaydı yok"
+
+msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
+msgstr ""
+
+msgid "Move down"
+msgstr ""
+
+msgid "Move down a page"
+msgstr ""
+
+msgid "Move up"
+msgstr ""
+
+msgid "Move up a page"
+msgstr ""
+
 msgid "New Search"
 msgstr "Yeni Arama"
 
-#: ../src/EPGSearch.py:298
 msgid "No history"
 msgstr "Geçmiş kaydı yok"
 
-#: ../src/EPGSearch.py:350
+msgid "Number of filters for inclusion/exclusion of results"
+msgstr ""
+
+msgid "Number of inclusions/exclusions"
+msgstr ""
+
 msgid "OK"
 msgstr "Tamam"
 
-#: ../src/EPGSearch.py:215
+msgid "Open selected in IMDb"
+msgstr ""
+
 msgid "Save search as AutoTimer"
 msgstr "Aramayı AutoTimer olarak kaydet"
 
-#: ../src/EPGSearch.py:415
 msgid "Search"
 msgstr "Ara"
 
-#: ../src/plugin.py:58
 msgid "Search EPG"
 msgstr "EPG'de ara"
 
-#: ../src/EPGSearch.py:364
+msgid "Search encoding"
+msgstr ""
+
+#, fuzzy
+msgid "Search in..."
+msgstr "EPG'de ara..."
+
+#, fuzzy
+msgid "Search scope"
+msgstr "Ara"
+
+msgid "Search strictness"
+msgstr ""
+
+#, fuzzy
+msgid "Search type"
+msgstr "Ara"
+
+#, fuzzy
+msgid "Searching..."
+msgstr "Ara"
+
 msgid "Select a timer to search"
 msgstr "Arama zamanını seçin"
 
-#: ../src/EPGSearch.py:268
-#: ../src/EPGSearch.py:292
 msgid "Select text to search for"
 msgstr "Arama metnini seçin"
 
-#: ../src/plugin.py:63
-#: ../src/plugin.py:69
-msgid "search EPG..."
+msgid "Set type of match used to compare program titles with the search string."
+msgstr ""
+
+msgid "Sets the default search scope when the user is asked."
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Setup menu"
+msgstr ""
+
+msgid "Show AutoTimer list"
+msgstr ""
+
+msgid "Show detailed event information"
+msgstr ""
+
+msgid "Show in plugin browser"
+msgstr ""
+
+msgid "Show orbital position"
+msgstr ""
+
+msgid "Show satellite orbital positions in the search results."
+msgstr ""
+
+#, fuzzy
+msgid "Show search history"
+msgstr "Geçmiş kaydı yok"
+
+msgid "Stream"
+msgstr ""
+
+msgid "Use source restrictions below to only include results from the sources, or exclude them."
+msgstr ""
+
+msgid "Zap to channel"
+msgstr ""
+
+msgid "all bouquets"
+msgstr ""
+
+msgid "all services"
+msgstr ""
+
+msgid "ask user"
+msgstr ""
+
+msgid "case-insensitive search"
+msgstr ""
+
+msgid "case-sensitive search"
+msgstr ""
+
+msgid "current bouquet"
+msgstr ""
+
+msgid "current service"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+msgid "exact match"
+msgstr ""
+
+msgid "exclude"
+msgstr ""
+
+msgid "include"
+msgstr ""
+
+msgid "partial match"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+#, fuzzy
+msgid "search EPG"
+msgstr "EPG'de ara"
+
+#. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
+#, fuzzy
+msgid "search EPG from history..."
 msgstr "EPG'de ara..."
 
+msgid "title starts with"
+msgstr ""

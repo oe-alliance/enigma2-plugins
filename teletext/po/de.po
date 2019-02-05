@@ -84,22 +84,14 @@ msgstr "Bearbeiten"
 msgid "Enter text for page %s"
 msgstr "Text für Seite %s eingeben"
 
-msgid ""
-"Enter values (left, top, right, bottom) or press TEXT to move and resize the "
-"teletext graphically."
-msgstr ""
-"Geben Sie Werte ein (links, oben, rechts, unten) oder drücken Sie TEXT, um "
-"den TeleText grafisch zu verschieben und zu vergrößern."
+msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
+msgstr "Geben Sie Werte ein (links, oben, rechts, unten) oder drücken Sie TEXT, um den TeleText grafisch zu verschieben und zu vergrößern."
 
 msgid "Hebrew / Arabic"
 msgstr "Hebräisch / Arabisch"
 
-msgid ""
-"If caching is disabled, each teletext page will searched when you entered "
-"its number."
-msgstr ""
-"Wenn das Puffern abgeschaltet ist, wird jede Seite erst nach Eingabe der "
-"Seitenzahl gesucht."
+msgid "If caching is disabled, each teletext page will searched when you entered its number."
+msgstr "Wenn das Puffern abgeschaltet ist, wird jede Seite erst nach Eingabe der Seitenzahl gesucht."
 
 msgid "No teletext available."
 msgstr "Kein TeleText verfügbar."
@@ -259,52 +251,3 @@ msgstr "gelber Textlink"
 
 msgid "zoom / increase height"
 msgstr "Zoom / Höhe vergrößern"
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "Daemon not running."
-#~ msgstr "Dienst läuft nicht."
-
-#~ msgid "Message"
-#~ msgstr "Nachricht"
-
-#~ msgid "Show message if no teletext available or exit silently."
-#~ msgstr "Nachricht anzeigen, wenn kein TeleText verfügbar ist."
-
-#~ msgid ""
-#~ "Use cursor keys to move teletext. Press MENU to resize teletext. Press OK "
-#~ "to accept new position and size. Press EXIT to return to previous values."
-#~ msgstr ""
-#~ "Benutzern Sie die Pfeiltasten um den TeleText zu bewegen. Drücken Sie "
-#~ "MENU um den TeleText zu vergrößern. Drücken Sie OK, um die neue Position "
-#~ "und Größe anzuwenden. Drücken Sie EXIT, um zur vorherigen Position und "
-#~ "Größe zurückzukehren."
-
-#~ msgid ""
-#~ "Use cursor keys to resize teletext (move bottom-right corner). Press MENU "
-#~ "to move teletext. Press OK to accept new position and size. Press EXIT to "
-#~ "return to previous values."
-#~ msgstr ""
-#~ "Benutzern Sie die Pfeiltasten um den TeleText zu vergrößern (rechte "
-#~ "untere Ecke zu bewegen). Drücken Sie MENU um den TeleText zu verschieben. "
-#~ "Drücken Sie OK, um die neue Position und Größe anzuwenden. Drücken Sie "
-#~ "EXIT, um zur vorherigen Position und Größe zurückzukehren."
-
-#~ msgid "anti flutter"
-#~ msgstr "flimmerfrei"
-
-#~ msgid "anti flutter blurry"
-#~ msgstr "flimmerfrei verschwommen"
-
-#~ msgid "anti flutter sharp"
-#~ msgstr "flimmerfrei scharf"
-
-#~ msgid "blurry"
-#~ msgstr "verschwommen"
-
-#~ msgid "decrease width"
-#~ msgstr "Breite verringern"
-
-#~ msgid "increase width"
-#~ msgstr "Breite vergrößern"

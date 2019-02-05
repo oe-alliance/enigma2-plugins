@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - networkbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2015-06-25 18:59+0200\n"
 "PO-Revision-Date: 2009-10-29 14:01+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: WWW.Linsat.net <spaeleus@croci.org>\n"
@@ -26,9 +26,7 @@ msgstr ""
 "Voce di mount già esistente!\n"
 "Aggiornarla con la configurazione corrente e continuare?\n"
 
-msgid ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
+msgid "AUTOFS (mount as needed)"
 msgstr ""
 
 msgid "Active"
@@ -129,7 +127,7 @@ msgstr "Inserire nome User: "
 msgid "Expert"
 msgstr "Avanzato"
 
-msgid "FSTAB (mount using linux)"
+msgid "FSTAB (mount at boot)"
 msgstr ""
 
 msgid "Finished restarting your network"
@@ -165,6 +163,10 @@ msgstr ""
 msgid "Mount informations"
 msgstr "Informazioni mount"
 
+#, fuzzy
+msgid "Mount manager"
+msgstr "MountManager"
+
 msgid "Mount options"
 msgstr "Opzioni mount"
 
@@ -189,9 +191,6 @@ msgstr "Gestione mount point"
 
 msgid "Mounts editor"
 msgstr "Editor mount"
-
-msgid "Mounts management"
-msgstr "Gestione mount"
 
 msgid "NFS share"
 msgstr "Condivisione NFS"
@@ -286,6 +285,9 @@ msgstr "Condivisione Server"
 msgid "Setup Mount Again"
 msgstr ""
 
+msgid "Use as HDD replacement"
+msgstr "Usare in sostituzione HDD"
+
 msgid "User management"
 msgstr "Gestione User"
 
@@ -301,6 +303,14 @@ msgstr ""
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Vedere, modificare o cancellare nome User e Password per la rete."
 
+#, fuzzy
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"Voce di mount già esistente!\n"
+"Aggiornarla con la configurazione corrente e continuare?\n"
+
 msgid "Your network mount has been activated."
 msgstr "Mount di rete attivato."
 
@@ -309,12 +319,3 @@ msgstr "Mount di rete rimosso."
 
 msgid "Your network mount has been updated."
 msgstr "Mount di rete aggiornato."
-
-msgid "Use as HDD replacement"
-msgstr "Usare in sostituzione HDD"
-
-#~ msgid "MountManager"
-#~ msgstr "MountManager"
-
-#~ msgid "NetworkBrowser"
-#~ msgstr "NetworkBrowser"

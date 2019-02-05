@@ -21,13 +21,11 @@ msgstr ""
 msgid "Add new page"
 msgstr "Add new page"
 
-#: ../src/CurlyTxSettings.py:49
-#: ../src/CurlyTxSettings.py:209
+#: ../src/CurlyTxSettings.py:49 ../src/CurlyTxSettings.py:209
 msgid "Cancel"
 msgstr "Cancel"
 
-#: ../src/CurlyTx.py:103
-#: ../src/CurlyTx.py:106
+#: ../src/CurlyTx.py:103 ../src/CurlyTx.py:106
 msgid "Close window"
 msgstr "Close window"
 
@@ -91,8 +89,7 @@ msgstr "Menu title"
 msgid "New"
 msgstr "New"
 
-#: ../src/CurlyTx.py:53
-#: ../src/CurlyTx.py:124
+#: ../src/CurlyTx.py:53 ../src/CurlyTx.py:124
 msgid "Next"
 msgstr "Next"
 
@@ -100,8 +97,7 @@ msgstr "Next"
 msgid "No page feed URL defined"
 msgstr "No page feed URL defined"
 
-#: ../src/CurlyTxSettings.py:50
-#: ../src/CurlyTxSettings.py:210
+#: ../src/CurlyTxSettings.py:50 ../src/CurlyTxSettings.py:210
 msgid "OK"
 msgstr "OK"
 
@@ -117,8 +113,7 @@ msgstr "Page feed URL"
 msgid "Page:"
 msgstr "Page:"
 
-#: ../src/CurlyTx.py:52
-#: ../src/CurlyTx.py:123
+#: ../src/CurlyTx.py:52 ../src/CurlyTx.py:123
 msgid "Prev"
 msgstr "Prev"
 
@@ -130,9 +125,7 @@ msgstr ""
 "Really delete this page?\n"
 "It cannot be recovered!"
 
-#: ../src/CurlyTx.py:51
-#: ../src/CurlyTx.py:118
-#: ../src/CurlyTx.py:122
+#: ../src/CurlyTx.py:51 ../src/CurlyTx.py:118 ../src/CurlyTx.py:122
 msgid "Reload"
 msgstr "Reload"
 
@@ -152,8 +145,7 @@ msgstr "Scroll page contents down"
 msgid "Scroll page contents up"
 msgstr "Scroll page contents up"
 
-#: ../src/CurlyTx.py:50
-#: ../src/CurlyTxSettings.py:38
+#: ../src/CurlyTx.py:50 ../src/CurlyTxSettings.py:38
 msgid "Settings"
 msgstr "Settings"
 
@@ -189,8 +181,6 @@ msgstr "Switch to previous configured page URL"
 msgid "Title"
 msgstr "Title"
 
-#: ../src/plugin.py:36
-#: ../src/plugin.py:43
+#: ../src/plugin.py:36 ../src/plugin.py:43
 msgid "View remote text files"
 msgstr "View remote text files"
-

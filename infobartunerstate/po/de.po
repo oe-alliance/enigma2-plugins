@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 InfoBarTunerState Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2011-11-22 20:52+0100\n"
 "PO-Revision-Date: 2012-05-08 18:53+0100\n"
 "Last-Translator: Ralf Biedermann <ralf.biedermann@rbsoft.de>\n"
 "Language-Team: none\n"
@@ -15,30 +15,6 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
-
-msgid ""
-"  (C) 2012 by betonme @ IHAD \n"
-"\n"
-msgstr ""
-
-msgid "  If You like this plugin and want to support it,\n"
-msgstr ""
-
-msgid "  SUPPORT: "
-msgstr ""
-
-msgid ""
-"  Thanks a lot ! \n"
-"  PayPal: "
-msgstr ""
-
-msgid ""
-"  feel free to donate via PayPal. \n"
-"\n"
-msgstr ""
-
-msgid "  or if just want to say ''thanks'',\n"
-msgstr ""
 
 #, python-format
 msgid "%d"
@@ -63,13 +39,8 @@ msgstr ""
 msgid "-"
 msgstr ""
 
-msgid "-    HH:MM"
-msgstr ""
-
-msgid "Add Setup to extension menu"
-msgstr "Einstellungen in Erweiterungen aufführen"
-
-msgid "Add Show to extension menu"
+#, fuzzy
+msgid "Add to extension menu"
 msgstr "InfoBarTunerState in Erweiterungen aufführen"
 
 msgid "Background transparency"
@@ -93,9 +64,6 @@ msgstr "Konfiguration"
 msgid "DD.MM HH:MM"
 msgstr ""
 
-msgid "DD.MM. HH:MM"
-msgstr ""
-
 msgid "DD.MM.YYYY HH:MM"
 msgstr ""
 
@@ -114,16 +82,9 @@ msgstr "Aktivieren InfoBarTunerState"
 msgid "End"
 msgstr "Ende"
 
-msgid "End record"
-msgstr ""
-
 #, python-format
 msgid "Field %d content"
 msgstr "Feld %d Inhalt"
-
-#, python-format
-msgid "Field %d width"
-msgstr ""
 
 msgid "File Size"
 msgstr "Dateigröße"
@@ -149,26 +110,18 @@ msgstr ""
 msgid "HH:MM YYYY/MM/DD"
 msgstr ""
 
-msgid "Horizontal offset left in pixel"
-msgstr ""
+msgid "Horizontal offset in pixel"
+msgstr "Horizontaler Offset in Pixel"
 
-msgid "Horizontal offset right in pixel"
-msgstr ""
-
-msgid "InfoBarTunerState"
-msgstr ""
-
-msgid "InfoBarTunerState Setup"
-msgstr "InfoBarTunerState Einstellungen"
+#, fuzzy
+msgid "InfoBar Tuner State"
+msgstr "Zeige InfoBarTunerState"
 
 msgid "InfoBarTunerState is disabled"
 msgstr "InfoBarTunerState ist deaktiviert"
 
 msgid "Infobar timeout"
 msgstr "InfoBar Timeout"
-
-msgid "List goes up"
-msgstr ""
 
 msgid "MM/DD HH:MM"
 msgstr ""
@@ -188,9 +141,6 @@ msgstr "Es läuft nichts"
 msgid "Number of finished records in list"
 msgstr "Anzahl beendeter Aufnahmen in der Liste"
 
-msgid "Number of pending records in list"
-msgstr ""
-
 msgid "Number of seconds for displaying finished records"
 msgstr "Anzahl von Sekunden für die Anzeige beendeter Aufnahmen"
 
@@ -203,25 +153,11 @@ msgstr "Nur eine grafische Fortschrittsanzeige erlaubt:"
 msgid "Only one Icon field allowed:"
 msgstr "Nur ein Icon erlaubt:"
 
-msgid "Only one Name field allowed:"
-msgstr ""
-
-msgid "Placeholder for Progressbar"
-msgstr ""
-
-msgid "Prepare / Start / End record"
-msgstr ""
-
-msgid "Prepare record"
-msgstr ""
-
-msgid "Really close without saving settings?"
-msgstr ""
-
 msgid "Record"
 msgstr "Aufnahme"
 
-msgid "Show InfoBarTunerState"
+#, fuzzy
+msgid "Show InfoBar Tuner State"
 msgstr "Zeige InfoBarTunerState"
 
 msgid "Show Message when Recording starts"
@@ -232,15 +168,6 @@ msgstr "mit InfoBar zeigen/verbergen"
 
 msgid "Show on events"
 msgstr "In Programmen zeigen"
-
-msgid "Show streams"
-msgstr "Zeige Streams"
-
-msgid "Start / End record"
-msgstr ""
-
-msgid "Start record"
-msgstr ""
 
 msgid "Stream"
 msgstr ""
@@ -266,11 +193,8 @@ msgstr "Zeit verbleibend"
 msgid "Time Left / Duration"
 msgstr "Zeit verbleibend / Dauer"
 
-msgid "Time format begin"
-msgstr ""
-
-msgid "Time format end"
-msgstr ""
+msgid "Time format"
+msgstr "Zeitformat"
 
 msgid "Timer Progress (Graphical)"
 msgstr "Timerfortschritt (grafisch)"
@@ -279,9 +203,6 @@ msgid "Timer Progress (Text)"
 msgstr "Timerfortschritt (Text)"
 
 msgid "Tuner"
-msgstr ""
-
-msgid "Tuner State"
 msgstr ""
 
 msgid "Tuner Type"
@@ -296,26 +217,11 @@ msgstr ""
 msgid "Usage"
 msgstr ""
 
-msgid "Variable field width"
-msgstr ""
-
 msgid "Vertical offset in pixel"
 msgstr "Vertikaler Offset in Pixel"
-
-msgid "WD DD.MM. HH:MM"
-msgstr ""
-
-msgid "WD, DD.MM. HH:MM"
-msgstr ""
 
 msgid "YYYY/MM/DD HH:MM"
 msgstr ""
 
 msgid "configuration"
 msgstr "Konfiguration"
-
-#~ msgid "Horizontal offset in pixel"
-#~ msgstr "Horizontaler Offset in Pixel"
-
-#~ msgid "Time format"
-#~ msgstr "Zeitformat"

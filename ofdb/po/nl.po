@@ -33,8 +33,7 @@ msgstr "Kanaal keuze:"
 msgid "Could't get Eventname"
 msgstr "Kon de naam van het event niet lezen"
 
-#: ../src/plugin.py:224
-#: ../src/plugin.py:385
+#: ../src/plugin.py:224 ../src/plugin.py:385
 msgid "Details"
 msgstr "Details"
 
@@ -51,8 +50,7 @@ msgstr "Afsluiten"
 msgid "Lookup"
 msgstr "Zoekt"
 
-#: ../src/plugin.py:369
-#: ../src/plugin.py:370
+#: ../src/plugin.py:369 ../src/plugin.py:370
 msgid "No OFDb match."
 msgstr "Geen OFDb overeenkomst."
 
@@ -64,8 +62,7 @@ msgstr "Geen cast gevonden in de database."
 msgid "No details found."
 msgstr "Geen details gevonden."
 
-#: ../src/plugin.py:386
-#: ../src/plugin.py:455
+#: ../src/plugin.py:386 ../src/plugin.py:455
 msgid "OFDb Details parsed"
 msgstr "OFDb Details verwerkt"
 
@@ -98,9 +95,7 @@ msgstr "Selecteer de overeenkomende entry"
 msgid "Query OFDb: %s..."
 msgstr "Query OFDb: %s..."
 
-#: ../src/plugin.py:496
-#: ../src/plugin.py:501
-#: ../src/plugin.py:508
+#: ../src/plugin.py:496 ../src/plugin.py:501 ../src/plugin.py:508
 msgid "Query details from the Online-Filmdatenbank"
 msgstr "Query details van de Online-Filmdatabank"
 
@@ -120,4 +115,3 @@ msgstr "Titel Menu"
 #: ../src/plugin.py:416
 msgid "no user rating yet"
 msgstr "nog geen gebruikerswaardering"
-

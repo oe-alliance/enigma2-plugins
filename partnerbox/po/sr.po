@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 Plugin - Partnerbox\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-20 14:39+0200\n"
+"POT-Creation-Date: 2015-09-27 15:42+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,83 +14,118 @@ msgstr ""
 "X-Poedit-Country: SERBIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/RemoteTimerEntry.py:135
-#: ../src/RemoteTimerEntry.py:414
+#, python-format
+msgid "%d min"
+msgstr ""
+
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
-#: ../src/plugin.py:1234
-#: ../src/plugin.py:1239
-#: ../src/plugin.py:1291
-#: ../src/plugin.py:1296
+#, python-format
+msgid "%s%d min"
+msgstr ""
+
 msgid "(ZAP)"
 msgstr "(ZAP)"
 
-#: ../src/plugin.py:1255
-#: ../src/plugin.py:1319
-#: ../src/plugin.py:1321
 msgid "<unknown>"
 msgstr "<nepoznato>"
 
-#: ../src/PartnerboxSetup.py:127
+msgid "Abort"
+msgstr ""
+
+msgid "Activate Picture in Picture"
+msgstr ""
+
 msgid "Add"
 msgstr "Dodaj"
 
-#: ../src/plugin.py:944
-#: ../src/plugin.py:1003
+#, fuzzy
+msgid "Add internal timer"
+msgstr "Dodaj tajmer"
+
 msgid "Add timer"
 msgstr "Dodaj tajmer"
 
-#: ../src/RemoteTimerEntry.py:176
-#: ../src/RemoteTimerEntry.py:178
-#: ../src/RemoteTimerEntry.py:463
-#: ../src/RemoteTimerEntry.py:465
 msgid "After event"
 msgstr "Posle događaja"
 
-#: ../src/PartnerboxSetup.py:68
-#: ../src/PartnerboxSetup.py:234
-#: ../src/RemoteTimerEntry.py:73
+msgid "Alternative"
+msgstr ""
+
+msgid "Alternative services are not supported!"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Attention, this is repeated timer!\n"
+msgstr ""
+
+msgid "Bouquet List"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Otkaži"
 
-#: ../src/RemoteTimerEntry.py:170
-#: ../src/RemoteTimerEntry.py:457
+msgid "Change pin code"
+msgstr ""
+
 msgid "Channel"
 msgstr "Kanal"
 
-#: ../src/plugin.py:236
+msgid "Choice list Partnerbox"
+msgstr ""
+
+msgid "Choose action:"
+msgstr ""
+
+msgid "Choose bouquet"
+msgstr ""
+
 msgid "Clean up"
 msgstr "Očisti"
 
-#: ../src/plugin.py:318
 msgid "Cleaning up finished timer entries..."
 msgstr "Čišćenje završenih unosa tajmera..."
 
-#: ../src/RemoteTimerEntry.py:132
-#: ../src/RemoteTimerEntry.py:411
+msgid "DVB-C"
+msgstr ""
+
+msgid "DVB-T"
+msgstr ""
+
 msgid "DVR"
 msgstr "DVR"
 
-#: ../src/RemoteTimerEntry.py:157
-#: ../src/RemoteTimerEntry.py:444
 msgid "Date"
 msgstr "Datum "
 
-#: ../src/PartnerboxSetup.py:129
-#: ../src/PartnerboxSetup.py:236
-#: ../src/plugin.py:233
+#, fuzzy
+msgid "Deep Standby"
+msgstr "idi u duboku pripravnost"
+
 msgid "Delete"
 msgstr "Obriši"
 
-#: ../src/RemoteTimerEntry.py:154
-#: ../src/RemoteTimerEntry.py:441
+#, fuzzy
+msgid "Delete timer"
+msgstr "Ukloni tajmer"
+
 msgid "Description"
 msgstr "Opis"
 
-#: ../src/PartnerboxEPGSelection.py:111
-#: ../src/plugin.py:337
-#: ../src/plugin.py:1152
+msgid "Disable Picture in Picture"
+msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"Do you really want to delete the remote timer \n"
+"%s ?"
+msgstr ""
+"Da li stvarno želite da obrišete tajmer \n"
+"%s ?"
+
 #, python-format
 msgid ""
 "Do you really want to delete the timer \n"
@@ -98,144 +134,152 @@ msgstr ""
 "Da li stvarno želite da obrišete tajmer \n"
 "%s ?"
 
-#: ../src/plugin.py:235
-#: ../src/plugin.py:507
-#: ../src/plugin.py:651
 msgid "EPG Selection"
 msgstr "EPG Izbor"
 
-#: ../src/PartnerboxSetup.py:128
 msgid "Edit"
 msgstr "Uredi"
 
-#: ../src/PartnerboxSetup.py:78
+msgid "Edit internal timer"
+msgstr ""
+
+#, fuzzy
+msgid "Edit remote timer"
+msgstr "daljinski tajmer"
+
+#, fuzzy
+msgid "Enable Partnerbox-Function in Channel Selector"
+msgstr "Omogući funkciju partnerboks u Tajmeru"
+
 msgid "Enable Partnerbox-Function in EPGList"
 msgstr "Omogući funkciju partnerboks u EPG listi"
 
-#: ../src/PartnerboxSetup.py:77
 msgid "Enable Partnerbox-Function in TimerEvent"
 msgstr "Omogući funkciju partnerboks u Tajmeru"
 
-#: ../src/RemoteTimerEntry.py:163
-#: ../src/RemoteTimerEntry.py:168
-#: ../src/RemoteTimerEntry.py:450
-#: ../src/RemoteTimerEntry.py:455
+#, fuzzy
+msgid "Enable Red Button-Function in single/multi EPG"
+msgstr "Omogući funkciju partnerboks u EPG listi"
+
+msgid "Enable VPS"
+msgstr ""
+
+msgid "Enable VPS-Function in TimerEvent"
+msgstr ""
+
+#, fuzzy
+msgid "Enable first Partnerbox-entry in Timeredit as default"
+msgstr "Omogući funkciju partnerboks u Tajmeru"
+
 msgid "EndTime"
 msgstr "Vreme kraja"
 
-#: ../src/PartnerboxSetup.py:40
 msgid "Enigma 1"
 msgstr "Enigma 1"
 
-#: ../src/PartnerboxSetup.py:40
 msgid "Enigma 2"
 msgstr "Enigma 2"
 
-#: ../src/PartnerboxSetup.py:126
-#: ../src/PartnerboxSetup.py:249
 msgid "Enigma Type"
 msgstr "Tip enigme"
 
-#: ../src/plugin.py:1311
+msgid "Enter the service pin"
+msgstr ""
+
+#, fuzzy
+msgid "Error: "
+msgstr "Greška: Zastareo"
+
 msgid "Error: No space left"
 msgstr "Greška: Nema prostora"
 
-#: ../src/plugin.py:1317
 msgid "Error: Outdated"
 msgstr "Greška: Zastareo"
 
-#: ../src/plugin.py:1313
 msgid "Error: User aborted"
 msgstr "Greška: Prekinuto od korisn."
 
-#: ../src/plugin.py:1315
 msgid "Error: Zap failed"
 msgstr "Greška: Prebacivanje neuspelo"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "Eventview"
+msgstr ""
+
 msgid "Fri"
 msgstr "Pet"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Friday"
 msgstr "Petak"
 
-#: ../src/plugin.py:512
 msgid "Getting Channel Information..."
 msgstr "Dobijam informacije o kanalu..."
 
-#: ../src/plugin.py:948
 msgid "Getting EPG Information..."
 msgstr "Dobijam EPG Informacije..."
 
-#: ../src/plugin.py:400
+#, fuzzy
+msgid "Getting EPG data..."
+msgstr "Dobijam EPG Informacije..."
+
 msgid "Getting Partnerbox Bouquet Information..."
 msgstr "Dobijam partnerboks informacije o buketu..."
 
-#: ../src/plugin.py:237
 msgid "Getting Partnerbox Information..."
 msgstr "Dobijam partnerboks infomacije..."
 
-#: ../src/PartnerboxSetup.py:124
-#: ../src/PartnerboxSetup.py:247
+msgid "Getting timerlist data..."
+msgstr ""
+
+msgid "Give Enigma time to fill epg cache..."
+msgstr ""
+
 msgid "IP"
 msgstr "IP"
 
-#: ../src/plugin.py:510
-#: ../src/plugin.py:652
-#: ../src/plugin.py:947
-#: ../src/plugin.py:998
 msgid "Info"
 msgstr "Info"
 
-#: ../src/RemoteTimerEntry.py:173
-#: ../src/RemoteTimerEntry.py:460
+msgid "Internet services are not supported!"
+msgstr ""
+
 msgid "Location"
 msgstr "Lokacija"
 
-#: ../src/plugin.py:127
-#: ../src/plugin.py:135
 msgid "Manage timer for other dreamboxes in network"
 msgstr "Upravljaj tajmer za druge drimboksove u mreži"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "Menu PiP"
+msgstr ""
+
 msgid "Mon"
 msgstr "Pon"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Monday"
 msgstr "Ponedeljak"
 
-#: ../src/RemoteTimerEntry.py:132
-#: ../src/RemoteTimerEntry.py:411
+msgid "Move Picture in Picture"
+msgstr ""
+
 msgid "NGRAB"
 msgstr "NGRAB"
 
-#: ../src/PartnerboxSetup.py:123
-#: ../src/PartnerboxSetup.py:246
-#: ../src/RemoteTimerEntry.py:153
-#: ../src/RemoteTimerEntry.py:440
 msgid "Name"
 msgstr "Ime"
 
-#: ../src/RemoteTimerEntry.py:289
 msgid "No"
 msgstr "Ne"
 
-#: ../src/PartnerboxSetup.py:69
-#: ../src/PartnerboxSetup.py:235
-#: ../src/RemoteTimerEntry.py:72
 msgid "OK"
 msgstr "OK"
 
-#: ../src/RemoteTimerEntry.py:523
-#: ../src/RemoteTimerEntry.py:533
+#, fuzzy
+msgid "Partnerbox"
+msgstr "Partnerboks unos"
+
+#, fuzzy
+msgid "Partnerbox - RemotePlayer"
+msgstr "Partnerboks unos"
+
 #, python-format
 msgid ""
 "Partnerbox Answer: \n"
@@ -244,241 +288,288 @@ msgstr ""
 "Odgovor partnerboksa: \n"
 "%s"
 
-#: ../src/PartnerboxSetup.py:70
 msgid "Partnerbox Entries"
 msgstr "Partnerboks unos"
 
-#: ../src/PartnerboxSetup.py:220
+#, fuzzy
+msgid "Partnerbox RemoteTimer"
+msgstr "Partnerboks unos"
+
+#, fuzzy
+msgid "Partnerbox Setup"
+msgstr "Partnerboks unos"
+
 msgid "Partnerbox: Edit Entry"
 msgstr "Partnerboks: Uredi unos"
 
-#: ../src/PartnerboxSetup.py:118
 msgid "Partnerbox: List of Entries"
 msgstr "Partnerboks: Lista unosa"
 
-#: ../src/PartnerboxSetup.py:250
+#, fuzzy
+msgid "Partnerbox: RemoteTV Player"
+msgstr "Partnerboks: Uredi unos"
+
+#, fuzzy
+msgid "Partnerbox: RemoteTimer"
+msgstr "Partnerboks unos"
+
 msgid "Password"
 msgstr "Lozinka"
 
-#: ../src/PartnerboxSetup.py:125
-#: ../src/PartnerboxSetup.py:248
 msgid "Port"
 msgstr "Port"
 
-#: ../src/PartnerboxSetup.py:168
-#: ../src/PartnerboxSetup.py:274
+msgid "Power"
+msgstr ""
+
+msgid "Press OK to edit timer..."
+msgstr ""
+
 msgid "Really delete this Partnerbox Entry?"
 msgstr "Stvarno obrisati ovaj partnerboks unos?"
 
-#: ../src/RemoteTimerEntry.py:312
+#, fuzzy
+msgid "Remote Player"
+msgstr "daljinski tajmer"
+
 msgid "Remote Timer"
 msgstr "daljinski tajmer"
 
-#: ../src/PartnerboxEPGSelection.py:159
-#: ../src/plugin.py:1007
+#, fuzzy
+msgid "RemoteTimer Timerlist"
+msgstr "daljinski tajmer"
+
 msgid "Remove timer"
 msgstr "Ukloni tajmer"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "Repeated Timer are not supported!"
+msgstr ""
+
+msgid "Restart"
+msgstr ""
+
+msgid "Restart enigma"
+msgstr ""
+
 msgid "Sat"
 msgstr "Sub"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Saturday"
 msgstr "Subota"
 
-#: ../src/PartnerboxSetup.py:251
+#, python-format
+msgid "Select action for remote timer '%s':"
+msgstr ""
+
+#, python-format
+msgid "Select action for timer '%s':"
+msgstr ""
+
+#, fuzzy
+msgid "Select action:"
+msgstr "EPG Izbor"
+
+#, fuzzy
+msgid "Select operation for partnerbox"
+msgstr "Podešavanje partnerboksa"
+
 msgid "Servicelists/EPG"
 msgstr "Liste kanala/EPG"
 
-#: ../src/PartnerboxSetup.py:75
 msgid "Show 'RemoteTV Player' in E-Menu"
 msgstr "Prikaži  'Daljinski TV plejer' u  E meniu"
 
-#: ../src/PartnerboxSetup.py:74
 msgid "Show 'RemoteTimer' in E-Menu"
 msgstr "Prikaži  'Daljinski tajmer' u  E meniu"
 
-#: ../src/PartnerboxSetup.py:76
+#, fuzzy
+msgid "Show 'RemoteTimer' in Event View context menu"
+msgstr "Prikaži  'Daljinski tajmer' u  E meniu"
+
+#, fuzzy
+msgid "Show 'RemoteTimer' in Eventinfo menu"
+msgstr "Prikaži  'Daljinski tajmer' u  E meniu"
+
 msgid "Show 'Stream current Service' in E-Menu"
 msgstr "Prikaži 'strim trenutnog kanala' u E meniu "
 
-#: ../src/RemoteTimerEntry.py:159
-#: ../src/RemoteTimerEntry.py:446
+msgid "Show all icon for event in EPGList"
+msgstr ""
+
+msgid "Show duration time for event"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
+msgid "Standard Zap"
+msgstr ""
+
+#, fuzzy
+msgid "Standby"
+msgstr "idi u pripravnost"
+
 msgid "StartTime"
 msgstr "Početno vreme"
 
-#: ../src/plugin.py:138
+#, python-format
+msgid "Starting Remote Player (IP = %s)"
+msgstr ""
+
+msgid "Stream"
+msgstr ""
+
 msgid "Stream TV from your Partnerbox"
 msgstr "Strimuj TV sa vašeg partnerboksa"
 
-#: ../src/plugin.py:140
+#, fuzzy
+msgid "Stream current Service from Partnerbox"
+msgstr "Aktuelles TV-Bild der Partnerbox anzeigen"
+
 msgid "Stream current service from partnerbox"
 msgstr "Aktuelles TV-Bild der Partnerbox anzeigen"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
 msgid "Sun"
 msgstr "Ned"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Sunday"
 msgstr "Nedelja"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "The pin code you entered is wrong."
+msgstr ""
+
 msgid "Thu"
 msgstr "Čet"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Thursday"
 msgstr "Četvrtak"
 
-#: ../src/RemoteTimerEntry.py:155
-#: ../src/RemoteTimerEntry.py:442
+msgid "Timer Overview"
+msgstr ""
+
 msgid "Timer Type"
 msgstr "Tip tajmera"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "Timer can not be added...no locations on partnerbox available."
+msgstr ""
+
+#, fuzzy
+msgid "Timer entry"
+msgstr "Tip tajmera"
+
+msgid "Timer event deleted successfully."
+msgstr ""
+
+msgid "Timer event was created successfully."
+msgstr ""
+
+#, fuzzy
+msgid "Timer menu"
+msgstr "Tip tajmera"
+
+msgid "Toggle Standby"
+msgstr ""
+
+msgid "Toggle status (on/off)"
+msgstr ""
+
 msgid "Tue"
 msgstr "Uto"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Tuesday"
 msgstr "Utorak"
 
-#: ../src/plugin.py:1222
-#: ../src/plugin.py:1279
-#: ../src/plugin.py:1395
+msgid "Wakeup"
+msgstr ""
+
 msgid "Wed"
 msgstr "Sre"
 
-#: ../src/RemoteTimerEntry.py:143
-#: ../src/RemoteTimerEntry.py:422
 msgid "Wednesday"
 msgstr "Sreda"
 
-#: ../src/plugin.py:111
-msgid "You have to restart Enigma2 to activate your new preferences!"
-msgstr "Morate restartovati enigmu2 da aktivirate vaše nove karakteristike!"
-
-#: ../src/plugin.py:504
-msgid "Zap"
-msgstr "Zap"
-
-#: ../src/plugin.py:1246
-msgid "about to start"
-msgstr "na početku"
-
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:407
-msgid "auto"
-msgstr "autom."
-
-#: ../src/plugin.py:1258
-msgid "disabled"
-msgstr "isključen"
-
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:133
-#: ../src/RemoteTimerEntry.py:407
-#: ../src/RemoteTimerEntry.py:412
-msgid "do nothing"
-msgstr "Ništa ne čini"
-
-#: ../src/plugin.py:1253
-#: ../src/plugin.py:1308
-msgid "done!"
-msgstr "učinjeno!"
-
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:133
-#: ../src/RemoteTimerEntry.py:407
-#: ../src/RemoteTimerEntry.py:412
-msgid "go to deep standby"
-msgstr "idi u duboku pripravnost"
-
-#: ../src/RemoteTimerEntry.py:129
-#: ../src/RemoteTimerEntry.py:133
-#: ../src/RemoteTimerEntry.py:407
-#: ../src/RemoteTimerEntry.py:412
-msgid "go to standby"
-msgstr "idi u pripravnost"
-
-#: ../src/plugin.py:807
-#: ../src/plugin.py:879
-#: ../src/plugin.py:1236
-#: ../src/plugin.py:1241
-#: ../src/plugin.py:1293
-#: ../src/plugin.py:1296
-#: ../src/plugin.py:1298
-#: ../src/plugin.py:1382
-#: ../src/plugin.py:1579
-msgid "mins"
-msgstr "minuti"
-
-#: ../src/RemoteTimerEntry.py:128
-#: ../src/RemoteTimerEntry.py:406
-msgid "record"
-msgstr "snimi "
-
-#: ../src/plugin.py:1251
-#: ../src/plugin.py:1306
-msgid "recording..."
-msgstr "snimanje..."
-
-#: ../src/plugin.py:133
-msgid "setup for partnerbox"
-msgstr "Podešavanje partnerboksa"
-
-#: ../src/plugin.py:1564
-msgid "unknown service"
-msgstr "Nepoznat kanal"
-
-#: ../src/PartnerboxSetup.py:42
-msgid "use external"
-msgstr "Koristi spoljni"
-
-#: ../src/PartnerboxSetup.py:42
-msgid "use internal"
-msgstr "Koristi unutrašnji"
-
-#: ../src/plugin.py:1244
-#: ../src/plugin.py:1301
-msgid "waiting"
-msgstr "Čekanje"
-
-#: ../src/RemoteTimerEntry.py:128
-#: ../src/RemoteTimerEntry.py:132
-#: ../src/RemoteTimerEntry.py:406
-#: ../src/RemoteTimerEntry.py:411
-msgid "zap"
-msgstr "zap"
-
-#: ../src/plugin.py:1249
-#: ../src/plugin.py:1304
-msgid "zapped"
-msgstr "prebačen"
-
-msgid "Enable VPS-Function in TimerEvent"
-msgstr ""
-
-msgid "Enable VPS"
+msgid "Yes"
 msgstr ""
 
 msgid "Yes (safe mode)"
 msgstr ""
 
-msgid "Yes"
+msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
 msgstr ""
 
+msgid "Zap"
+msgstr "Zap"
+
+msgid "Zap focus to Picture in Picture"
+msgstr ""
+
+msgid "Zap focus to main screen"
+msgstr ""
+
+msgid "Zap to service when streaming"
+msgstr ""
+
+msgid "Zap/"
+msgstr ""
+
+msgid "Zapping to "
+msgstr ""
+
+msgid "about to start"
+msgstr "na početku"
+
+#, fuzzy
+msgid "add Partnerbox bouquet"
+msgstr "Partnerboks unos"
+
+#, fuzzy
+msgid "add Partnerbox service"
+msgstr "Partnerboks unos"
+
+msgid "auto"
+msgstr "autom."
+
+msgid "disabled"
+msgstr "isključen"
+
+msgid "do nothing"
+msgstr "Ništa ne čini"
+
+msgid "done!"
+msgstr "učinjeno!"
+
+msgid "go to deep standby"
+msgstr "idi u duboku pripravnost"
+
+msgid "go to standby"
+msgstr "idi u pripravnost"
+
+msgid "mins"
+msgstr "minuti"
+
+msgid "record"
+msgstr "snimi "
+
+msgid "recording..."
+msgstr "snimanje..."
+
+msgid "setup for partnerbox"
+msgstr "Podešavanje partnerboksa"
+
+msgid "unknown service"
+msgstr "Nepoznat kanal"
+
+msgid "use external"
+msgstr "Koristi spoljni"
+
+msgid "use internal"
+msgstr "Koristi unutrašnji"
+
+msgid "waiting"
+msgstr "Čekanje"
+
+msgid "zap"
+msgstr "zap"
+
+msgid "zapped"
+msgstr "prebačen"

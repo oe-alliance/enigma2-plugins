@@ -16,9 +16,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/NamezapSetup.py:33
-#: ../src/NamezapSetup.py:74
-#: ../src/plugin.py:107
+#: ../src/NamezapSetup.py:33 ../src/NamezapSetup.py:74 ../src/plugin.py:107
 msgid "NameZAP Setup"
 msgstr "NameZAP einrichten"
 
@@ -53,4 +51,3 @@ msgstr "Sender-Nr. und -Name"
 #: ../src/plugin.py:91
 msgid "Unknown Service"
 msgstr "Sender unbekannt"
-

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2015-06-25 18:59+0200\n"
 "PO-Revision-Date: 2017-10-10 17:28+0200\n"
 "Last-Translator: JR \n"
 "Language-Team: OpenSPA\n"
@@ -26,12 +26,8 @@ msgstr ""
 "Ya existe un punto de montaje con este nombre.\n"
 "¿Actualizar el existente y continuar?\n"
 
-msgid ""
-"A mount entry with this name already exists!\n"
-"and is not this share folder, please use a different name.\n"
-msgstr ""
-"Ya existe un punto de montaje con ese nombre\n"
-"y no es este carpeta compartida. Por favor, usa un nombre distinto.\n"
+msgid "AUTOFS (mount as needed)"
+msgstr "AUTOFS (montar si es necesario)"
 
 msgid "Active"
 msgstr "Activo"
@@ -131,14 +127,8 @@ msgstr "Introduce usuario:"
 msgid "Expert"
 msgstr "Experto"
 
-msgid "FSTAB (mount using linux)"
-msgstr "FSTAB (montar usando linux)"
-
 msgid "FSTAB (mount at boot)"
 msgstr "FSTAB (montar en el arranque)"
-
-msgid "AUTOFS (mount as needed)"
-msgstr "AUTOFS (montar si es necesario)"
 
 msgid "Finished restarting your network"
 msgstr "Se ha terminado de reiniciar la red"
@@ -164,9 +154,6 @@ msgstr "Montar otra vez"
 msgid "Mount Manager"
 msgstr "Administrador de montajes"
 
-msgid "Mount manager"
-msgstr "Admin. montajes"
-
 msgid "Mount Viewer"
 msgstr "Visor de montajes"
 
@@ -175,6 +162,9 @@ msgstr "Montar otra vez"
 
 msgid "Mount informations"
 msgstr "Información de montajes"
+
+msgid "Mount manager"
+msgstr "Admin. montajes"
 
 msgid "Mount options"
 msgstr "Opciones de montaje"
@@ -200,9 +190,6 @@ msgstr "Administración de puntos de montaje"
 
 msgid "Mounts editor"
 msgstr "Editor de montajes"
-
-msgid "Mounts management"
-msgstr "Administración de montajes"
 
 msgid "NFS share"
 msgstr "NFS"
@@ -297,6 +284,9 @@ msgstr "Nombre del recurso compartido del servidor"
 msgid "Setup Mount Again"
 msgstr "Configurar ‘Montar otra vez’"
 
+msgid "Use as HDD replacement"
+msgstr "Usar como reemplazo de HDD"
+
 msgid "User management"
 msgstr "Administración de usuarios"
 
@@ -312,6 +302,13 @@ msgstr "Ver, editar o eliminar puntos de montaje en tu receptor."
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Ver, editar o eliminar usuarios y contraseñas de tu red."
 
+msgid ""
+"You have changed the share name!\n"
+"Update existing entry and continue?\n"
+msgstr ""
+"¡Has cambiado el nombre del montaje!\n"
+"¿Actualizar el existente y continuar?\n"
+
 msgid "Your network mount has been activated."
 msgstr "Tu punto de montaje de red ha sido activado."
 
@@ -320,15 +317,3 @@ msgstr "Tu punto de montaje de red ha sido eliminado."
 
 msgid "Your network mount has been updated."
 msgstr "Tu punto de montaje de red ha sido actualizado."
-
-msgid "Use as HDD replacement"
-msgstr "Usar como reemplazo de HDD"
-
-msgid "The harddisk"
-msgstr "Disco duro"
-
-msgid "You have changed the share name!\nUpdate existing entry and continue?\n"
-msgstr "¡Has cambiado el nombre del montaje!\n¿Actualizar el existente y continuar?\n"
-
-msgid "Mount shares again"
-msgstr "Montar recursos de red otra vez"
