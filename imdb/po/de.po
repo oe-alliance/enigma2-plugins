@@ -147,7 +147,7 @@ msgid "Search Trailer"
 msgstr "suche Trailer"
 
 msgid "Select from EPG"
-msgstr "Aus  EPG wählen"
+msgstr "Aus EPG wählen"
 
 msgid "Setup"
 msgstr "Einstellungen"
