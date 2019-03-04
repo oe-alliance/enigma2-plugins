@@ -198,7 +198,7 @@ msgstr "Verwalten, bearbeiten oder löschen Sie Benutzernamen und Passwörter"
 
 #: MountManager.py:102
 msgid "Change hostname"
-msgstr "Netzwerkname ändern"
+msgstr "Netzwerknamen ändern"
 
 #: MountManager.py:102
 msgid "Change the hostname of your Receiver."
