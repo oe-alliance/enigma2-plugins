@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Enigma2 translation Autotimer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-23 15:36+0000\n"
-"PO-Revision-Date: 2019-02-02 17:54+0000\n"
+"PO-Revision-Date: 2019-03-04 10:44+0000\n"
 "Last-Translator: William <ghenessior@gmail.com>\n"
 "Language-Team: insanity - alexwilmac <vuplus-community>\n"
 "Language: it_IT\n"
@@ -832,7 +832,7 @@ msgstr ""
 "quell’AutoTimer. Bisognerebbe selezionare ‘UTF-8’ per i canali di lingua tedesca./n/nDom: "
 "Sembra che non riesca a registrare due eventi consecutivi: viene creato solo un timer che "
 "copre (parte) dei due eventi./nRisp.: Dalla Lista AutoTimer premere MENU e entrare nella "
-"Configurazione. Là devi disabilitare “Calcolare i timer basandosi su Inizio/Fine."
+"Configurazione. Là devi disabilitare “Calcolare i timer basandosi su Inizio/Fine"
 
 #: ../src/faq.xml:13
 msgid ""
@@ -905,7 +905,7 @@ msgid ""
 "Use the blue key to edit the service filter."
 msgstr ""
 "Limitare l’autotimer a canali specifici.\n"
-"Usa il tasto BLU per modificare il filtro."
+"Usa il tasto BLU per modificare il filtro"
 
 #: ../src/AutoTimerEditor.py:680
 msgid "Restrict to days"
@@ -1011,7 +1011,7 @@ msgstr "Configurazione"
 
 #: ../src/AutoTimerEditor.py:509 ../src/AutoTimerEditor.py:548
 msgid "Should this AutoTimer be restricted to a timespan?"
-msgstr "Scegliere se l'AutoTimer selezionato debba essere circoscritto a un intervallo?"
+msgstr "Scegliere se l'AutoTimer selezionato debba essere circoscritto a un intervallo."
 
 #: ../src/AutoTimerEditor.py:518 ../src/AutoTimerEditor.py:557
 msgid "Should this AutoTimer only match up to a certain event duration?"
@@ -1022,7 +1022,7 @@ msgstr ""
 msgid "Should timers created by this AutoTimer be recorded to a custom location?"
 msgstr ""
 "Scegliere se il timer creato con AutoTimer debba essere registrato in una destinazione "
-"specifica?"
+"specifica."
 
 #: ../src/AutoTimerSettings.py:42 ../src/AutoTimerSettings.py:69 ../src/AutoTimerSettings.py:52
 msgid "Show in extension menu"
@@ -1126,7 +1126,7 @@ msgid ""
 msgstr ""
 "L'Intervallo di un AutoTimer è il primo parametro avanzato. Se viene specificato un "
 "intervallo verranno considerati validi solo gli eventi previsti all'interno di tale "
-"intervallo temporale."
+"intervallo temporale"
 
 #: ../src/AutoTimer.py:151
 msgid ""
@@ -1754,3 +1754,4 @@ msgstr "minuti"
 
 msgid " (if services are enabled, bouquets are ignored.)."
 msgstr " (se i servizi sono abilitati, i bouquet vengono ignorati)."
+
