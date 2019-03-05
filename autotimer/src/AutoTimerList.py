@@ -138,11 +138,18 @@ class AutoTimerList(MenuList):
 		rowHeight = self.rowHeight
 		rowSplit1 = self.rowSplit1
 		rowSplit2 = self.rowSplit2
-		channel = []
+		channels = []
+		bouquets = []
 		for t in timer.services:
-			channel.append(ServiceReference(t).getServiceName())
-		if len(channel) >0 :
-			channel = ", ".join(channel)
+			channels.append(ServiceReference(t).getServiceName())
+		for t in timer.bouquets:
+			bouquets.append(ServiceReference(t).getServiceName())
+		if len(channels) >0 :
+			channel = _("[S]  ")
+			channel += ", ".join(channels)
+		elif len(bouquets) >0 :
+			channel = _("[B]  ")
+			channel += ", ".join(bouquets)
 		else:
 			channel = _('All channels')
 

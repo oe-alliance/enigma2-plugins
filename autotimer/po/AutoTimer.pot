@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../src/AutoTimerList.py:148
+msgid "[S]  "
+msgstr ""
+
+#: ../src/AutoTimerList.py:151
+msgid "[B]  "
+msgstr ""
+
 #: ../src/AutoTimerList.py:170
 msgid "  Any time"
 msgstr ""
