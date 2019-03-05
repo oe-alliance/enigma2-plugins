@@ -304,12 +304,15 @@ class AutoTimer:
 	def createTask(self):
 		self.timer_count = 0
 		self.completed = []
+		self.searchtimer = []
 		job = Components.Task.Job(_("AutoTimer"))
 		timer = None
 
 		# Iterate Timer
 		for timer in self.getEnabledTimerList():
-			task = Components.Task.PythonTask(job, timer.name)
+			taskname = timer.name + '_%d' %self.timer_count
+			task = Components.Task.PythonTask(job, taskname)
+			self.searchtimer.append((timer, taskname))
 			task.work = self.JobStart
 			task.weighting = 1
 			self.timer_count += 1
@@ -322,14 +325,14 @@ class AutoTimer:
 		return job
 
 	def JobStart(self):
-		for timer in self.getEnabledTimerList():
-			if timer.name not in self.completed:
-				self.parseTimer(timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.skipped, self.existing, self.timerdict, self.moviedict, self.simulateOnly)
+		for timer, taskname in self.searchtimer:
+			if taskname not in self.completed:
+				self.parseTimer(timer, self.epgcache, self.serviceHandler, self.recordHandler, self.checkEvtLimit, self.evtLimit, self.autotimers, self.conflicting, self.similars, self.skipped, self.existing, self.timerdict, self.moviedict, taskname, self.simulateOnly)
 				self.new += self.result[0]
 				self.modified += self.result[1]
 				break
 
-	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, skipped, existing, timerdict, moviedict, simulateOnly=False):
+	def parseTimer(self, timer, epgcache, serviceHandler, recordHandler, checkEvtLimit, evtLimit, timers, conflicting, similars, skipped, existing, timerdict, moviedict, taskname, simulateOnly=False):
 		new = 0
 		modified = 0
 
@@ -728,7 +731,7 @@ class AutoTimer:
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = recordHandler.record(newEntry)
 		self.result=(new, modified)
-		self.completed.append(timer.name)
+		self.completed.append(taskname)
 		sleep(0.5)
 
 	def JobMessage(self):
