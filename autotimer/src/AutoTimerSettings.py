@@ -43,6 +43,7 @@ def getAutoTimerSettingsDefinitions():
 		#TODO integrate this setting or leave commentted out
 		#[_("Timeout (in min)"), config.plugins.autotimer.timeout,"timeout", _("This is the duration in minutes that the AutoTimer is allowed to run.")],
 		[_("Only add timer for next x days"), config.plugins.autotimer.maxdaysinfuture,"maxdaysinfuture", _("You can control for how many days in the future timers are added. Set this to 0 to disable this feature.")],
+		[_("Allow double timer for different services"), config.plugins.autotimer.enable_multiple_timer,"enable_multiple_timer", _("Here you can specify whether simultaneous timers of the same program can be created. This allows simultaneous recording of a program with different resolutions. (e.g. SD service and HD service)")],
 		[_("Show in plugin browser"), config.plugins.autotimer.show_in_plugins,"show_in_plugins", _("Enable this to be able to access the AutoTimer Overview from within the plugin browser.")],
 		[_("Show in extension menu"), config.plugins.autotimer.show_in_extensionsmenu,"show_in_extensionsmenu", _("Enable this to be able to access the AutoTimer Overview from within the extension menu.")],
 		[_("Modify existing timers"), config.plugins.autotimer.refresh,"refresh", _("This setting controls the behavior when a timer matches a found event.")],

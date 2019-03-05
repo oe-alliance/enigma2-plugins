@@ -336,6 +336,9 @@ class AutoTimer:
 		new = 0
 		modified = 0
 
+		# enable multiple timer if services or bouquets specified (eg. recording the same event on sd service and hd service)
+		enable_multiple_timer = ((timer.services and 's' in config.plugins.autotimer.enable_multiple_timer.value or False) or (timer.bouquets and 'b' in config.plugins.autotimer.enable_multiple_timer.value or False))
+
 		# Precompute timer destination dir
 		dest = timer.destination or config.usage.default_path.value
 
@@ -585,7 +588,7 @@ class AutoTimer:
 				# We want to search for possible doubles
 				for rtimer in chain.from_iterable( itervalues(timerdict) ):
 					if not rtimer.disabled:
-						if self.checkDoubleTimers(timer, name, rtimer.name, begin, rtimer.begin, end, rtimer.end ):
+						if self.checkDoubleTimers(timer, name, rtimer.name, begin, rtimer.begin, end, rtimer.end, serviceref, str(rtimer.service_ref), enable_multiple_timer ):
 							oldExists = True
 							print("[AutoTimer] We found a timer with same StartTime, skipping event")
 							break
@@ -855,8 +858,9 @@ class AutoTimer:
 				retValue = True
 		return retValue
 
-	def checkDoubleTimers(self, timer, name1, name2, starttime1, starttime2, endtime1, endtime2):
+	def checkDoubleTimers(self, timer, name1, name2, starttime1, starttime2, endtime1, endtime2, serviceref1, serviceref2, multiple):
 		foundTitle = name1 == name2
 		foundstart = starttime1 == starttime2
 		foundend = endtime1 == endtime2
-		return foundTitle and foundstart and foundend
+		foundref = serviceref1 == serviceref2
+		return foundTitle and foundstart and foundend and (foundref or not multiple)

@@ -70,6 +70,13 @@ config.plugins.autotimer.fastscan = ConfigYesNo(default=False)
 config.plugins.autotimer.notifconflict = ConfigYesNo(default=True)
 config.plugins.autotimer.notifsimilar = ConfigYesNo(default=True)
 config.plugins.autotimer.maxdaysinfuture = ConfigNumber(default=0)
+config.plugins.autotimer.enable_multiple_timer = ConfigSelection(choices=[
+		("0", _("No")),
+		("s", _("If specified services")),
+		("b", _("If specified bouquets")),
+		("sb", _("If specified services or bouquets"))
+	], default = "0"
+)
 config.plugins.autotimer.show_help = ConfigYesNo(default=True)
 config.plugins.autotimer.skip_during_records = ConfigYesNo(default=False)
 config.plugins.autotimer.skip_during_epgrefresh = ConfigYesNo(default=False)
