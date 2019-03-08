@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 07:52+0100\n"
-"PO-Revision-Date: 2018-09-28 15:51+0200\n"
+"POT-Creation-Date: 2019-03-08 05:46+0000\n"
+"PO-Revision-Date: 2019-03-08 14:47+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #, python-format
 msgid "%d more services"
@@ -138,6 +138,9 @@ msgstr "Wat wil je bewerken"
 msgid "Editing the service list"
 msgstr "Bewerk de service lijst"
 
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr "Schakel dit in om alle EPG-data te verwijderen alvorens een nieuwe EPG-refresh cyclus te starten."
+
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Toon EPG-refresh instellingsmenu in het extensiemenu."
 
@@ -149,6 +152,9 @@ msgstr "Breidt de lijst met kanalen uit met die kanalen die AutoTimers gebruikt?
 
 msgid "Fake recording"
 msgstr "Nep opname"
+
+msgid "Flush EPG before refresh"
+msgstr "Verwijder EPG voor refresh"
 
 msgid "Following Services have to be scanned:"
 msgstr "De volgende kanalen moeten worden gescand:"
