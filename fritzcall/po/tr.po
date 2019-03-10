@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-20 10:41+0100\n"
+"POT-Creation-Date: 2019-01-19 17:00+0100\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -210,9 +210,6 @@ msgstr "Düzelt"
 #. TRANSLATORS: this is a window title.
 msgid "Edit selected entry"
 msgstr "Seçili kaydı düzelt"
-
-msgid "Enter Search Terms"
-msgstr "Arama terimlerini düzelt"
 
 msgid "Entry incomplete."
 msgstr "Giriş tamamlanmamış."
@@ -647,6 +644,9 @@ msgstr ""
 msgid "Update available"
 msgstr ""
 
+msgid "Use HTTPS to communicate with FRITZ!Box"
+msgstr ""
+
 msgid "Use internal PhoneBook"
 msgstr "FRITZ!Box rehberini kullan"
 
@@ -896,6 +896,9 @@ msgstr ""
 
 #~ msgid "Edit phonebook entry"
 #~ msgstr "Rehber kaydını düzelt"
+
+#~ msgid "Enter Search Terms"
+#~ msgstr "Arama terimlerini düzelt"
 
 #~ msgid "FRITZ!Box - Could not load phonebook: %s"
 #~ msgstr "Rehber, FRITZ!Box'dan yüklenemiyor: %s"

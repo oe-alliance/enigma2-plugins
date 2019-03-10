@@ -161,7 +161,10 @@ class FritzAction(object):
 # 		self.debug("headers: " + repr(headers))
 		data = self.envelope.strip() % ( self.header_initchallenge_template % config.plugins.FritzCall.username.value,
 										self._body_builder(kwargs))
-		url = 'https://%s:%s%s' % (self.address, self.port, self.control_url)
+		if config.plugins.FritzCall.useHttps.value:
+			url = 'https://%s:%s%s' % (self.address, self.port, self.control_url)
+		else:
+			url = 'http://%s:%s%s' % (self.address, self.port, self.control_url)
 
 		# self.debug("url: " + url + "\n" + data)
 		getPage(url,
@@ -200,7 +203,11 @@ class FritzAction(object):
 		data = self.envelope.strip() % ( header_clientauth,
 										self._body_builder(kwargs))
 
-		url = 'https://%s:%s%s' % (self.address, self.port, self.control_url)
+		if config.plugins.FritzCall.useHttps.value:
+			url = 'https://%s:%s%s' % (self.address, self.port, self.control_url)
+		else:
+			url = 'http://%s:%s%s' % (self.address, self.port, self.control_url)
+
 		# self.debug("url: " + url + "\n" + data)
 		getPage(url,
 			method = "POST",
@@ -311,7 +318,10 @@ class FritzXmlParser(object):
 			self.namespace = namespace(self.root)
 		else:
 			self.root = None
-			source = 'https://{0}:{1}/{2}'.format(address, port, filename)
+			if config.plugins.FritzCall.useHttps.value:
+				source = 'https://{0}:{1}/{2}'.format(address, port, filename)
+			else:
+				source = 'http://{0}:{1}/{2}'.format(address, port, filename)
 			self.debug("source: %s", source)
 			getPage(source,
  				method = "GET",).addCallback(self._okInit).addErrback(self._errorInit)
@@ -327,6 +337,14 @@ class FritzXmlParser(object):
 
 	def _errorInit(self, error):
 		self.exception(error)
+		self.info("Switching to http")
+		config.plugins.FritzCall.useHttps.value = False
+		config.plugins.FritzCall.useHttps.save()
+		source = 'http://{0}:{1}/{2}'.format(address, port, filename)
+		self.debug("source: %s", source)
+		getPage(source,
+				method = "GET",).addCallback(self._okInit).addErrback(self._errorInit)
+		
 
 	def nodename(self, name):
 		#self.debug("name: %s, QName: %s" %(name, ET.QName(self.root, name).text))
@@ -522,10 +540,11 @@ class FritzConnection(object):
 		# self.debug("Service: " + service.name)
 		actions = parser.get_actions(self.action_parameters)
 		# not in Python 2.6
-		try:
-			service.actions = {action.name: action for action in actions}
-		except:
-			dict((action.name, action) for action in actions)
+		# try:
+			# service.actions = {action.name: action for action in actions}
+		# except:
+		service.actions = dict((action.name, action) for action in actions)
+		# self.debug("Service: " + repr(service))
 		self.services[service.name] = service
 
 	# @property
