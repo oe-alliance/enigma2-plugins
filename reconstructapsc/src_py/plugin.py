@@ -1,10 +1,29 @@
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
-from enigma import eServiceCenter
+from Screens.MessageBox import MessageBox
+from enigma import eServiceCenter, eTimer
+from Components import Task
+from Tools import Notifications
 
 def main(session, service, **kwargs):
 	session.open(ReconstructApSc, service, **kwargs)
+
+def rApScFinishedMessage():
+	finished = True
+	for job in Task.job_manager.getPendingJobs():
+		if job.name == _("Reconstruct AP/SC"):
+			finished = False
+			break
+	if finished:
+		tasks = '\n'.join(rApScTasks)
+		Notifications.AddNotification(MessageBox, _("Reconstruct AP/SC is finished !\n\n%s")%tasks, type=MessageBox.TYPE_INFO, timeout=30)
+	else:
+		rApScTimer.startLongTimer(10)
+
+rApScTasks = []
+rApScTimer = eTimer()
+rApScTimer.callback.append(rApScFinishedMessage)
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name="ReconstructApSc", description=_("Reconstruct AP/SC ..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
@@ -35,9 +54,13 @@ class ReconstructApSc(ChoiceBox):
 		self.close()
 
 	def confirmed1(self, arg):
-		from Components import Task
+		global rApScTasks
+		if not rApScTimer.isActive():
+			rApScTimer.startLongTimer(10)
+			rApScTasks = []
+		rApScTasks.append(str(len(rApScTasks)+1) + '. ' + self.name)
 		job = Task.Job(_("Reconstruct AP/SC"))
-		task = Task.PythonTask(job, _("Reconstruct AP/SC"))
+		task = Task.PythonTask(job, self.name)
 		task.work = self.offline.reindex
 		Task.job_manager.AddJob(job)
 		self.close()
