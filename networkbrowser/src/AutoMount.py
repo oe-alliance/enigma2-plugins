@@ -89,7 +89,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,utf8,vers=2.1").encode("UTF-8")
 						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
 						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 						self.automounts[data['sharename']] = data
@@ -128,7 +128,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/media/hdd/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,utf8,vers=2.1").encode("UTF-8")
 						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
 						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 						self.automounts[data['sharename']] = data
@@ -168,7 +168,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,utf8,vers=2.1").encode("UTF-8")
 						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
 						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 						self.automounts[data['sharename']] = data
@@ -206,7 +206,7 @@ class AutoMount():
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 						data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 						data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-						data['options'] = getValue(mount.findall("options"), "rw,utf8").encode("UTF-8")
+						data['options'] = getValue(mount.findall("options"), "rw,utf8,vers=2.1").encode("UTF-8")
 						data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
 						data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 						self.automounts[data['sharename']] = data
